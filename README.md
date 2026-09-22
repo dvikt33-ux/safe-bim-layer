@@ -18,3 +18,13 @@ Known limitations recorded for v0.1:
 - The earlier slab `0.20 -> 0.30` mismatch was caused by a Composite slab, not proven thickness ignoring.
 - `floorPlanPolygons` may be multi-polygon; that alone is not a wall-join failure without geometric/visual evidence.
 - A failed operation stops the room transaction; v0.1 does not auto-delete partial writes.
+
+## Collaboration workflow
+
+The production control path is local: Qwen emits high-level intent, Safe BIM
+Layer validates and verifies each Tapir operation, and Archicad is reached only
+through the local bridge. GitHub is the private review boundary. Arena is used
+for scoped architecture reviews and pull requests in its own branch; it never
+operates a local or real Archicad project. See
+[the operating model](docs/OPERATING_MODEL.md) and the
+[first Arena audit brief](ARENA_TASK_ARCHITECTURE_AUDIT.md).
