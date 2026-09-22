@@ -1,0 +1,56 @@
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# Secrets and machine-specific configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*.json
+secrets*.json
+
+# Local logs, diagnostics and generated reports
+logs/
+*.log
+*.trace
+*diagnostic*.json
+*integration-result*.json
+*e2e-result*.json
+*e2e-summary*.md
+*diagnostic-summary*.md
+
+# Local LLM models and large ML artifacts
+*.gguf
+*.GGUF
+*.safetensors
+*.bin
+*.onnx
+models/
+checkpoints/
+
+# Archicad projects, autosaves, backups and exported binaries
+*.pln
+*.pla
+*.bpn
+*.lcf
+*.lck
+*.bak
+*.tmp
+*.autosave
+*.gsm
+*.mod
+
+# OS/editor temp files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
