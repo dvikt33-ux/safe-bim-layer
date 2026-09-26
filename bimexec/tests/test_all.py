@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Прогон обоих наборов тестов. Возвращает 1, если что-то упало."""
+"""Прогон всех наборов тестов. Возвращает 1, если что-то упало."""
 import os
 import sys
 
@@ -10,9 +10,10 @@ sys.path.insert(0, root)
 
 import tests.test_p0 as t0
 import tests.test_probe as tp
+import tests.test_t2_probe as tt2
 
 failed = 0
-for mod in (t0, tp):
+for mod in (t0, tp, tt2):
     print(f"\n=== {mod.__name__}")
     for name, fn in mod.TESTS:
         try:
