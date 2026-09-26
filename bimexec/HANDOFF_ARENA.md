@@ -33,7 +33,8 @@ Do NOT ask for PAT, SSH keys, or any secret.
 | Branch | `arena/t0-probes` |
 | Base | `main` @ `72e9be1` |
 | Commits on top of base | 2 |
-| Bundle commit (the kit) | recorded in the tip commit of this branch (see `git log -1`) |
+| Bundle commit (the kit) | `607441aaf39998f1f0d5d1c22b8e66a796d3e8de` |
+| Tip commit (records the SHA above) | see `git log -1` |
 | Bundle version | 1.1 |
 | Push state | committed locally, **not pushed**. The bundle is handed to the user; Work/Codex imports and pushes it. No PAT, no SSH, no secrets. |
 
