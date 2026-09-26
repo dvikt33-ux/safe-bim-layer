@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
-"""BIMEXEC T6: read-only preflight for the manual model-drift test.
+"""BIMEXEC T6: durable, read-only manual model-drift probe.
 
-The actual live mutation is intentionally not performed by the default mode.
-The preflight binds to the expected project, resolves one source wall and one
-dependent operation target, and records their read-back snapshots.  An
-operator can then use this receipt to perform the canonical manual move
-between operations; the dependent mutation must not be dispatched after the
-next read-back reports ``PAUSED(MODEL_DRIFT)``.
+Run ``preflight`` before manually moving the source wall.  It writes the
+baseline once.  After the manual move, run ``verify`` against that evidence.
+The second read-back returns ``PAUSED(MODEL_DRIFT)`` before a dependent
+operation can be dispatched.  This probe deliberately has no mutation API.
 """
 from __future__ import annotations
 
@@ -15,80 +13,151 @@ import json
 import os
 import platform
 import sys
-from typing import Any
+from typing import Any, Callable
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from backends import Backend, build_backends, write_json_atomic  # noqa: E402
 
-PROBE_VERSION = "1.0"
+PROBE_VERSION = "1.1"
+PAUSED_MODEL_DRIFT = "PAUSED(MODEL_DRIFT)"
+
+
+class T6Stop(RuntimeError):
+    """Fail-closed preflight or evidence error."""
+
+
+def _project_path(project: dict[str, Any]) -> str:
+    return str(project.get("project_path") or project.get("path") or "")
+
+
+def _geometry(details: dict[str, Any]) -> dict[str, Any]:
+    """Keep only geometry material to the T6 wall comparison."""
+    line = details.get("ref_line") or {}
+    start, end = line.get("from"), line.get("to")
+    if not isinstance(start, list) or not isinstance(end, list):
+        raise T6Stop("baseline/read-back has no wall ref_line geometry")
+    return {"ref_line": {"from": start, "to": end},
+            "height": details.get("height"), "thickness": details.get("thickness")}
 
 
 def _snapshot(backend: Backend, guid: str) -> dict[str, Any]:
     details = backend.details(guid)
     if not details:
-        raise RuntimeError(f"details unavailable for {guid}")
-    return {"guid": guid, "details": details}
+        raise T6Stop(f"details unavailable for {guid}")
+    return {"guid": guid, "details": details, "geometry": _geometry(details)}
+
+
+def _validate_binding(backend: Backend, source_guid: str, dependent_guid: str,
+                      expect_project: str) -> dict[str, Any]:
+    ok, reason = backend.available()
+    if not ok:
+        raise T6Stop(f"backend unavailable: {reason}")
+    project = backend.project_info()
+    actual = _project_path(project)
+    if not actual or os.path.normcase(actual) != os.path.normcase(expect_project):
+        raise T6Stop(f"project mismatch: expected {expect_project!r}, got {actual!r}")
+    missing = [g for g in (source_guid, dependent_guid) if g not in set(backend.all_elements())]
+    if missing:
+        raise T6Stop(f"GUID not found: {', '.join(missing)}")
+    return project
 
 
 def preflight(backend: Backend, source_guid: str, dependent_guid: str,
               expect_project: str) -> dict[str, Any]:
-    """Perform only read-only checks and return a durable T6 receipt."""
-    ok, reason = backend.available()
-    if not ok:
-        raise RuntimeError(f"backend unavailable: {reason}")
-    project = backend.project_info()
-    actual = str(project.get("project_path") or project.get("path") or "")
-    if os.path.normcase(actual) != os.path.normcase(expect_project):
-        raise RuntimeError(f"project mismatch: expected {expect_project!r}, got {actual!r}")
-    guids = set(backend.all_elements())
-    missing = [g for g in (source_guid, dependent_guid) if g not in guids]
-    if missing:
-        raise RuntimeError(f"GUID not found: {', '.join(missing)}")
+    """Create a durable baseline payload; performs no model mutation."""
+    project = _validate_binding(backend, source_guid, dependent_guid, expect_project)
     return {
-        "probe": "T6",
-        "version": PROBE_VERSION,
-        "mode": "preflight-read-only",
-        "host": f"{platform.system()} {platform.release()}",
-        "project": project,
+        "probe": "T6", "version": PROBE_VERSION, "mode": "preflight-read-only",
+        "host": f"{platform.system()} {platform.release()}", "project": project,
         "source": _snapshot(backend, source_guid),
         "dependent": {"guid": dependent_guid},
-        "contract": {
-            "manual_action": "move source geometry between operations",
-            "expected_pause": "PAUSED(MODEL_DRIFT)",
-            "dependent_mutation_allowed_after_drift": False,
-        },
+        "contract": {"manual_action": "move source wall geometry between operations",
+                     "expected_pause": PAUSED_MODEL_DRIFT,
+                     "dependent_mutation_allowed_after_drift": False},
     }
 
 
+def write_baseline_once(path: str, receipt: dict[str, Any]) -> None:
+    if os.path.exists(path):
+        raise T6Stop(f"baseline evidence already exists: {path}")
+    write_json_atomic(path, receipt)
+
+
+def read_baseline(path: str) -> dict[str, Any]:
+    try:
+        with open(path, encoding="utf-8") as fh:
+            receipt = json.load(fh)
+    except (OSError, json.JSONDecodeError) as exc:
+        raise T6Stop(f"baseline evidence unavailable: {exc}") from exc
+    try:
+        if receipt["probe"] != "T6" or not receipt["source"]["guid"] or not receipt["dependent"]["guid"]:
+            raise KeyError("invalid T6 fields")
+        _geometry(receipt["source"]["details"])
+        if not _project_path(receipt["project"]):
+            raise KeyError("project")
+    except (KeyError, TypeError, T6Stop) as exc:
+        raise T6Stop("baseline evidence is invalid") from exc
+    return receipt
+
+
+def verify_after_manual_move(backend: Backend, baseline: dict[str, Any],
+                             dependent_dispatch: Callable[[], None] | None = None) -> dict[str, Any]:
+    """Second read-back; dispatcher exists only for offline ordering tests."""
+    source_guid = baseline["source"]["guid"]
+    dependent_guid = baseline["dependent"]["guid"]
+    _validate_binding(backend, source_guid, dependent_guid, _project_path(baseline["project"]))
+    current = _snapshot(backend, source_guid)
+    expected = baseline["source"]["geometry"]
+    if current["geometry"] != expected:
+        return {"probe": "T6", "status": PAUSED_MODEL_DRIFT,
+                "source_guid": source_guid, "dependent_guid": dependent_guid,
+                "baseline_geometry": expected, "current_geometry": current["geometry"],
+                "dependent_dispatch_count": 0}
+    if dependent_dispatch is not None:
+        dependent_dispatch()
+    return {"probe": "T6", "status": "UNCHANGED_GEOMETRY",
+            "source_guid": source_guid, "dependent_guid": dependent_guid,
+            "dependent_dispatch_count": 1 if dependent_dispatch else 0}
+
+
+def _backend(args: argparse.Namespace) -> Backend:
+    errors = []
+    for backend in build_backends(args.backend_order, args.port, args.mcp_url, args.backend_module):
+        ok, reason = backend.available()
+        if ok:
+            return backend
+        errors.append(f"{backend.name}: {reason}")
+    raise T6Stop("no available backend: " + " | ".join(errors))
+
+
 def main(argv: list[str] | None = None) -> int:
-    ap = argparse.ArgumentParser(description="T6 read-only live preflight")
-    ap.add_argument("--source-guid", required=True)
-    ap.add_argument("--dependent-guid", required=True,
-                    help="GUID reserved for the dependent operation; never written in preflight")
-    ap.add_argument("--expect-project", required=True)
-    ap.add_argument("--out", default="t6_preflight.json")
-    ap.add_argument("--backend-order", default="tapir,mcp")
-    ap.add_argument("--backend-module", default=None)
-    ap.add_argument("--port", type=int, default=None)
-    ap.add_argument("--mcp-url", default="http://127.0.0.1:8001/mcp")
+    ap = argparse.ArgumentParser(description="T6 durable read-only drift probe")
+    sub = ap.add_subparsers(dest="command", required=True)
+    pre = sub.add_parser("preflight", help="write baseline before manual wall move")
+    pre.add_argument("--source-guid", required=True)
+    pre.add_argument("--dependent-guid", required=True)
+    pre.add_argument("--expect-project", required=True)
+    pre.add_argument("--out", default="t6_baseline.json")
+    verify = sub.add_parser("verify", help="compare second read-back with baseline")
+    verify.add_argument("--baseline", required=True)
+    for parser in (pre, verify):
+        parser.add_argument("--backend-order", default="tapir,mcp")
+        parser.add_argument("--backend-module", default=None)
+        parser.add_argument("--port", type=int, default=None)
+        parser.add_argument("--mcp-url", default="http://127.0.0.1:8001/mcp")
     args = ap.parse_args(argv)
-    if os.path.exists(args.out):
-        print(f"STOP: receipt already exists: {args.out}", file=sys.stderr)
-        return 1
-    errors: list[str] = []
-    for backend in build_backends(args.backend_order, args.port, args.mcp_url,
-                                  args.backend_module):
-        try:
-            receipt = preflight(backend, args.source_guid, args.dependent_guid,
-                                args.expect_project)
-            write_json_atomic(args.out, receipt)
-            print(json.dumps(receipt, ensure_ascii=False, indent=2))
-            print("T6 PREFLIGHT OK: read-only; no live mutation was attempted.")
+    try:
+        backend = _backend(args)
+        if args.command == "preflight":
+            write_baseline_once(args.out, preflight(backend, args.source_guid, args.dependent_guid, args.expect_project))
+            print("T6 PREFLIGHT OK: durable baseline written; no mutation attempted.")
             return 0
-        except Exception as exc:
-            errors.append(f"{backend.name}: {type(exc).__name__}: {exc}")
-    print("T6 PREFLIGHT STOP: " + " | ".join(errors), file=sys.stderr)
-    return 2
+        result = verify_after_manual_move(backend, read_baseline(args.baseline))
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 1 if result["status"] == PAUSED_MODEL_DRIFT else 0
+    except T6Stop as exc:
+        print(f"T6 STOP: {exc}", file=sys.stderr)
+        return 2
 
 
 if __name__ == "__main__":

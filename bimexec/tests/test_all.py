@@ -10,7 +10,6 @@ sys.path.insert(0, root)
 
 import tests.test_p0 as t0
 import tests.test_probe as tp
-<<<<<<< HEAD
 import tests.test_t2_probe as tt2
 import tests.test_t2_connections as tt2c
 import tests.test_t3_dependency as tt3
@@ -21,12 +20,6 @@ import tests.test_t6 as t6
 
 failed = 0
 for mod in (t0, tp, tt2, tt2c, tt3, tt3r, tt4, tt5, t6):
-=======
-import tests.test_t6 as t6
-
-failed = 0
-for mod in (t0, tp, t6):
->>>>>>> 19e50f1 (Add T6 model drift preflight)
     print(f"\n=== {mod.__name__}")
     for name, fn in mod.TESTS:
         try:
