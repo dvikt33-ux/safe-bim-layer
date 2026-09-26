@@ -25,15 +25,23 @@ class ProcessLock:
         self._fd: int | None = None
 
     def acquire(self) -> None:
-        try:
-            import fcntl  # POSIX
-        except ImportError:  # pragma: no cover
-            return  # Windows: честно деградируем, но не молчим
         d = os.path.dirname(os.path.abspath(self.path))
         os.makedirs(d, exist_ok=True)
         self._fd = os.open(self.path, os.O_CREAT | os.O_RDWR, 0o644)
         try:
-            fcntl.flock(self._fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            if os.name == "nt":
+                # msvcrt.locking locks a byte starting at the current offset.
+                # Keep the descriptor open for the lifetime of the Router.
+                import msvcrt
+
+                os.lseek(self._fd, 0, os.SEEK_SET)
+                os.write(self._fd, b"0")
+                os.lseek(self._fd, 0, os.SEEK_SET)
+                msvcrt.locking(self._fd, msvcrt.LK_NBLCK, 1)
+            else:
+                import fcntl  # POSIX
+
+                fcntl.flock(self._fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except OSError as e:
             os.close(self._fd)
             self._fd = None
@@ -46,9 +54,15 @@ class ProcessLock:
     def release(self) -> None:
         if self._fd is not None:
             try:
-                import fcntl
+                if os.name == "nt":
+                    import msvcrt
 
-                fcntl.flock(self._fd, fcntl.LOCK_UN)
+                    os.lseek(self._fd, 0, os.SEEK_SET)
+                    msvcrt.locking(self._fd, msvcrt.LK_UNLCK, 1)
+                else:
+                    import fcntl
+
+                    fcntl.flock(self._fd, fcntl.LOCK_UN)
             finally:
                 os.close(self._fd)
                 self._fd = None
