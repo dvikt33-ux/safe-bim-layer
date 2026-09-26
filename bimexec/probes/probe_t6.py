@@ -16,7 +16,9 @@ import sys
 from typing import Any, Callable
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from backends import Backend, build_backends, write_json_atomic  # noqa: E402
+from backends import Backend, write_json_atomic  # noqa: E402
+from backends_v13 import TapirBackendV13, build_backends_v13  # noqa: E402
+import probe_t2_connections_v13 as t2c  # noqa: E402
 
 PROBE_VERSION = "1.1"
 PAUSED_MODEL_DRIFT = "PAUSED(MODEL_DRIFT)"
@@ -40,8 +42,15 @@ def _geometry(details: dict[str, Any]) -> dict[str, Any]:
             "height": details.get("height"), "thickness": details.get("thickness")}
 
 
-def _snapshot(backend: Backend, guid: str) -> dict[str, Any]:
-    details = backend.details(guid)
+def _snapshot(backend: Backend, guid: str, stories: list[dict[str, Any]] | None = None) -> dict[str, Any]:
+    # Tapir must use the proven v1.3 details payload and normalization.  The
+    # legacy backend returns no usable ref_line on AC29/Tapir 1.5.9.
+    if isinstance(backend, TapirBackendV13):
+        if stories is None:
+            stories = backend.stories()
+        details = t2c.observe(backend, guid, stories)
+    else:
+        details = backend.details(guid)
     if not details:
         raise T6Stop(f"details unavailable for {guid}")
     return {"guid": guid, "details": details, "geometry": _geometry(details)}
@@ -66,10 +75,11 @@ def preflight(backend: Backend, source_guid: str, dependent_guid: str,
               expect_project: str) -> dict[str, Any]:
     """Create a durable baseline payload; performs no model mutation."""
     project = _validate_binding(backend, source_guid, dependent_guid, expect_project)
+    stories = backend.stories() if isinstance(backend, TapirBackendV13) else None
     return {
         "probe": "T6", "version": PROBE_VERSION, "mode": "preflight-read-only",
         "host": f"{platform.system()} {platform.release()}", "project": project,
-        "source": _snapshot(backend, source_guid),
+        "source": _snapshot(backend, source_guid, stories),
         "dependent": {"guid": dependent_guid},
         "contract": {"manual_action": "move source wall geometry between operations",
                      "expected_pause": PAUSED_MODEL_DRIFT,
@@ -106,7 +116,8 @@ def verify_after_manual_move(backend: Backend, baseline: dict[str, Any],
     source_guid = baseline["source"]["guid"]
     dependent_guid = baseline["dependent"]["guid"]
     _validate_binding(backend, source_guid, dependent_guid, _project_path(baseline["project"]))
-    current = _snapshot(backend, source_guid)
+    stories = backend.stories() if isinstance(backend, TapirBackendV13) else None
+    current = _snapshot(backend, source_guid, stories)
     expected = baseline["source"]["geometry"]
     if current["geometry"] != expected:
         return {"probe": "T6", "status": PAUSED_MODEL_DRIFT,
@@ -122,7 +133,7 @@ def verify_after_manual_move(backend: Backend, baseline: dict[str, Any],
 
 def _backend(args: argparse.Namespace) -> Backend:
     errors = []
-    for backend in build_backends(args.backend_order, args.port, args.mcp_url, args.backend_module):
+    for backend in build_backends_v13(args.backend_order, args.port, args.mcp_url, args.backend_module):
         ok, reason = backend.available()
         if ok:
             return backend
