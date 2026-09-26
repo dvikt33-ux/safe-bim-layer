@@ -17,9 +17,10 @@ import tests.test_t3_reconcile as tt3r
 import tests.test_t4_timeout as tt4
 import tests.test_t5_kill as tt5
 import tests.test_t6 as t6
+import tests.test_t7 as t7
 
 failed = 0
-for mod in (t0, tp, tt2, tt2c, tt3, tt3r, tt4, tt5, t6):
+for mod in (t0, tp, tt2, tt2c, tt3, tt3r, tt4, tt5, t6, t7):
     print(f"\n=== {mod.__name__}")
     for name, fn in mod.TESTS:
         try:
