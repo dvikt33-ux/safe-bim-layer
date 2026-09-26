@@ -12,9 +12,10 @@ import tests.test_p0 as t0
 import tests.test_probe as tp
 import tests.test_t2_probe as tt2
 import tests.test_t2_connections as tt2c
+import tests.test_t3_dependency as tt3
 
 failed = 0
-for mod in (t0, tp, tt2, tt2c):
+for mod in (t0, tp, tt2, tt2c, tt3):
     print(f"\n=== {mod.__name__}")
     for name, fn in mod.TESTS:
         try:
