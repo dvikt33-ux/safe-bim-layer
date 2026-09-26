@@ -170,14 +170,18 @@ class Executor:
 
     def submit(self, plan: dict[str, Any], run_id: str = "run-1") -> JobRecord:
         self._load()
-        self.job_state = st.job_to(self.job_state, st.JobState.VALIDATING)
-
         ph = plan_hash(plan)
         if self.job is not None:
+            incoming_job_id = plan.get("job")
+            if self.job.job_id != incoming_job_id:
+                raise PlanRejected("job id changed for an existing durable job")
             if self.job.plan_hash != ph:
                 raise PlanRejected("plan changed for an existing job: create a new job/run")
+            # Exact redelivery is read-only: retain the recovered status and
+            # run_id/idempotency keys without rebinding or dispatching.
             return self.job
 
+        self.job_state = st.job_to(self.job_state, st.JobState.VALIDATING)
         self._validate(plan)
         ops: dict[str, OpRecord] = {}
         packages: list[PkgRecord] = []
