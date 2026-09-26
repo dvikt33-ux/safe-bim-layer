@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+"""Прогон обоих наборов тестов. Возвращает 1, если что-то упало."""
+import os
+import sys
+
+here = os.path.dirname(os.path.abspath(__file__))
+root = os.path.dirname(here)
+sys.path.insert(0, os.path.join(root, "reference"))
+sys.path.insert(0, root)
+
+import tests.test_p0 as t0
+import tests.test_probe as tp
+
+failed = 0
+for mod in (t0, tp):
+    print(f"\n=== {mod.__name__}")
+    for name, fn in mod.TESTS:
+        try:
+            fn()
+            print(f"  PASS  {name}")
+        except Exception:
+            failed += 1
+            print(f"  FAIL  {name}")
+            import traceback
+            traceback.print_exc()
+print(f"\n{'FAILED' if failed else 'OK'}: {failed} failure(s)")
+raise SystemExit(1 if failed else 0)
