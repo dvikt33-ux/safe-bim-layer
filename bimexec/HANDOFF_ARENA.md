@@ -1,12 +1,20 @@
 # Handoff to Arena
 
-STATUS: BLOCKING — `bimexec/probes/` is still absent on `main`.
+STATUS: TRANSFER REQUIRED — local Arena commits exist, but are not yet on GitHub.
 
-Arena: read `bimexec/COORDINATION.md` and commit the finalized Windows T0 bundle directly into this repository under `bimexec/probes/`.
+Known Arena state from the latest report:
+- local branch: `arena/t0-probes`
+- 2 local commits
+- bundle commit starts with `97da758`
+- exported bundle: `/home/user/handoff/arena-t0-probes.bundle`
+- Arena environment has no `gh`, PAT, or SSH push path, and must not receive user secrets.
 
-Do not return only a ZIP and do not use the user as a courier. GitHub is the shared source of truth between Arena and ChatGPT/Work for BIMEXEC/T0.
+Shared GitHub target already exists:
+- repository: `dvikt33-ux/safe-bim-layer`
+- branch: `arena/t0-probes`
+- target paths under that branch: `bimexec/probes/`
 
-Required files:
+Required source files:
 - `bimexec/probes/probe_t0a.py`
 - `bimexec/probes/probe_t0b.py`
 - `bimexec/probes/backends.py`
@@ -14,19 +22,22 @@ Required files:
 - `bimexec/probes/README_RUN_WINDOWS.txt`
 - `bimexec/probes/SHA256SUMS.txt`
 
-The v1.1 kit you reported as `dist/bimexec_t0_windows_v1.1.zip` must be represented here as normal source files, not only as an archive.
+## Transfer protocol
+Do NOT ask for PAT, SSH keys, or any secret.
 
-Current coordination state:
-- ChatGPT verified that `bimexec/probes/` currently returns 404 on `main`.
-- Work/Codex has a separate read-only live-baseline task on Windows and will not wait for T0A bundle to collect safe runtime facts.
-- No Archicad write is authorized.
+Preferred path:
+1. Keep the exact local commits and bundle unchanged.
+2. Surface `arena-t0-probes.bundle` as a user-visible file attachment/artifact if the environment supports it. Also surface the `.diff`/patches if already exported.
+3. Do not regenerate source from prose and do not squash the two local commits.
+4. Work/Codex will import the bundle on a machine with repository write access and push the exact commits to GitHub branch `arena/t0-probes`.
+5. After push, ChatGPT will compare the remote branch against `main`, review the files, and create/review a PR before any merge.
 
-After committing, update this handoff or add a result file under `bimexec/results/` with:
-- commit SHA
-- exact changed file list
-- exact Windows command for T0A
-- expected outputs
-- T0B go/no-go criteria
-- all remaining UNKNOWN items
+If file attachment/export is impossible, report that explicitly and provide the exact names and sizes of the exported bundle, diff, and patch files so the transfer blocker is unambiguous. Do not fall back to secrets.
 
-Do not run T0B or any Archicad write. ChatGPT/Work will perform live Windows tests when needed. Work will run T0A first and return live results to the repository.
+## Safety
+- Do not run T0B.
+- Do not perform any Archicad write.
+- Do not write directly to `main`.
+- No production Router integration yet.
+
+Work/Codex separately owns live Windows read-only checks and T0A execution once the probe source is available.
