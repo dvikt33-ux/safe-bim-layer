@@ -1,0 +1,13 @@
+{
+  "probe": "AUDIT_T4_TIMEOUT_HUMAN_DECISION",
+  "version": "1.0",
+  "source_classification": "APPLIED_ADOPTABLE_BY_ANCHOR",
+  "candidate_guid": "014E2C00-C0D6-4F81-AE7E-B7B5F04D17A8",
+  "human_decision": "ABORT",
+  "resulting_job_disposition": "QUARANTINED",
+  "automatic_retry_allowed": false,
+  "automatic_adopt_performed": false,
+  "model_mutation_performed_by_decision": false,
+  "artifact_policy": "leave existing T4 wall untouched; no delete, undo, move, rotate, or retry",
+  "note": "Human explicitly chose ABORT instead of ADOPT after read-only reconcile offered ADOPT. This records the operational decision without mutating Archicad or rewriting the original T4 receipt/reconcile report."
+}
