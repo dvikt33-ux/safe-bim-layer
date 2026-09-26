@@ -98,6 +98,11 @@ class FakeTapirShape(Backend):
             out[g] = store.get(g, {}).get(key)
         return out
 
+    def resolve_property_id(self, ref):
+        # свойство существует и разрешается по адресу, даже если значений нет
+        key = ref.get("id") or ref.get("name") or ref.get("address")
+        return {"guid": f"PROP-{key}"}
+
     def set_property_value(self, g, ref, v):
         # тот же store, из которого читает get_property_values:
         # user-defined property и builtin живут в разных местах

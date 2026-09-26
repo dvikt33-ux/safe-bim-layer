@@ -39,7 +39,7 @@ bimexec/
     SHA256SUMS.txt               integrity sums of the probe kit
   tests/
     test_p0.py  test_probe.py  test_all.py    reference-implementation tests (45)
-    selftest_probes.py                        offline self-test of the probes (42 checks)
+    selftest_probes.py                        offline self-test of the probes (62 checks)
     fakes/                                    in-memory doubles, no Archicad needed
   docs/
     audits/BIMEXEC_audit_v1.md   independent architecture audit
@@ -78,7 +78,7 @@ bimexec/
 ## Running the offline checks
 
 ```
-python bimexec/tests/selftest_probes.py   # 42 checks on the shipped probes
+python bimexec/tests/selftest_probes.py   # 62 checks on the shipped probes
 python bimexec/tests/test_all.py          # 45 tests on the invariants
 ```
 

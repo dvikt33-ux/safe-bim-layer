@@ -1,4 +1,4 @@
-"""
+r"""
 BIMEXEC — pluggable backends для T0A / T0B.
 
 ОБНОВЛЕНО по локальной инвентаризации от 2026-09-26:
@@ -30,6 +30,21 @@ BIMEXEC — pluggable backends для T0A / T0B.
      через layerIndex.
   5. Поиск по маркеру — только клиентский скан + сравнение (server-side
      prefix search в Tapir не найден).
+
+ОБНОВЛЕНО по ЖИВОМУ прогону на Windows (2026-09-26, Archicad 29):
+
+  * официального `commands.GetProjectInfo` НЕ СУЩЕСТВУЕТ (проверено:
+    hasattr(...) == False). Есть `commands.GetProductInfo` и
+    `commands.ExecuteAddOnCommand`.
+  * поэтому доступность и поля проекта берутся из read-only Tapir
+    `GetProjectInfo` (ExecuteAddOnCommand('TapirCommand','GetProjectInfo'));
+    версия/сборка — опционально из official `GetProductInfo`.
+    Отсутствие official GetProjectInfo НЕ делает бэкенд недоступным.
+  * live-значения: порт 19723 отвечает, проект
+    C:\Users\Admin\Downloads\MCP_TEST.pln, Tapir add-on 1.5.9,
+    GetStories отдаёт {index, level, name} (level → elevation).
+  * интерпретатор, в котором установлен archicad==29.3000:
+    C:\Users\Admin\AppData\Roaming\uv\tools\archicad-mcp-server\Scripts\python.exe
 
 НИ ОДИН метод здесь не пишет в модель, кроме set_property_value(),
 который используется ТОЛЬКО в T0B.
@@ -362,37 +377,84 @@ class TapirBackend(Backend):
         )
 
     def available(self) -> tuple[bool, str]:
+        """Доступность = отвечает read-only Tapir `GetProjectInfo`.
+
+        Проверено на Archicad 29 / archicad==29.3000: официального
+        `commands.GetProjectInfo` НЕ существует (есть `GetProductInfo`), поэтому
+        official-вызов здесь использовать нельзя — иначе бэкенд ложно
+        считается недоступным. Отсутствие official-команд версионирования
+        не влияет на доступность.
+        """
         try:
             self._connect()
-            self._official("GetProjectInfo")()
-            return True, f"ACConnection reachable (port={self.port})"
         except Exception as e:
             return False, f"{type(e).__name__}: {e}"
+        try:
+            d = _to_dict(self._tapir("GetProjectInfo")())
+        except Exception as e:
+            return False, f"Tapir GetProjectInfo failed: {type(e).__name__}: {e}"
+        if not d:
+            return False, "Tapir GetProjectInfo вернул пустой ответ"
+        version = self.addon_version()
+        tail = f"; Tapir add-on {version}" if version else ""
+        return True, f"Tapir GetProjectInfo OK (port={self.port}){tail}"
 
     # read
 
     def project_info(self) -> dict[str, Any]:
-        d = _to_dict(self._official("GetProjectInfo")())
+        """Поля проекта — из Tapir `GetProjectInfo` (read-only, подтверждено live).
+
+        Версия и сборка Archicad берутся отдельно, через official
+        `GetProductInfo`; если его нет — поля остаются пустыми, но бэкенд
+        остаётся доступным.
+        """
+        d = _to_dict(self._tapir("GetProjectInfo")())
+        if not d:
+            raise BackendError("Tapir GetProjectInfo вернул пустой ответ")
         return {
             "project_path": d.get("projectPath") or d.get("projectLocation"),
             "project_name": d.get("projectName"),
             "is_untitled": bool(d.get("isUntitled")),
             "is_teamwork": bool(d.get("isTeamwork")),
-            "archicad_version": str(d.get("archicadVersion") or d.get("version") or ""),
-            "archicad_build": str(d.get("archicadBuild") or d.get("buildNumber") or ""),
+            "archicad_version": self._product_info("version", "archicadVersion"),
+            "archicad_build": self._product_info("build", "buildNumber"),
             "port": self.port,
             "instance_hint": f"port={self.port}",
         }
 
+    def _product_info(self, *keys: str) -> str:
+        """Official GetProductInfo — best effort. Его отсутствие НЕ ошибка."""
+        try:
+            d = _to_dict(self._official("GetProductInfo")())
+        except Exception:
+            return ""
+        for k in keys:
+            v = d.get(k)
+            if v not in (None, ""):
+                return str(v)
+        return ""
+
     def stories(self) -> list[dict[str, Any]]:
-        """GetStories. Возвращаем index, чтобы потом сопоставить с floorIndex."""
+        """GetStories. Возвращаем index, чтобы потом сопоставить с floorIndex.
+
+        Live-форма (AC29, Tapir 1.5.9): элементы несут `index`, `name`, `level`;
+        `level` → `elevation`. Список ищем по известным ключам, а если их нет —
+        берём первый подходящий список сверху, чтобы не потерять этажи из-за
+        имени ключа.
+        """
         try:
             res = _to_dict(self._tapir("GetStories")())
         except Exception as e:
             raise BackendError(f"GetStories failed: {e}") from e
-        raw = res.get("stories") or res.get("storyList") or []
+        raw = res.get("stories") or res.get("storyList")
+        if raw is None:
+            for v in res.values():
+                if isinstance(v, list) and v and isinstance(v[0], (dict,)):
+                    if any(k in _to_dict(v[0]) for k in ("index", "level", "name")):
+                        raw = v
+                        break
         out: list[dict[str, Any]] = []
-        for i, s in enumerate(raw):
+        for i, s in enumerate(raw or []):
             sd = _to_dict(s)
             idx = sd.get("index", sd.get("floorIndex", i))
             out.append({

@@ -19,7 +19,7 @@ This file is the shared handoff point between ChatGPT/Work and Arena for BIMEXEC
 | T0 probe kit (standalone) | `bimexec/probes/` | committed, branch `arena/t0-probes` (base `main` @ `72e9be1`) |
 | P0 hardening specification | `bimexec/specs/BIMEXEC_P0.md` | committed |
 | T0A output contract | `bimexec/specs/capability_matrix.schema.json` | committed |
-| Offline tests | `bimexec/tests/` | committed, 45 + 42 checks green |
+| Offline tests | `bimexec/tests/` | committed, 45 + 62 checks green |
 | Architecture audit | `bimexec/docs/audits/BIMEXEC_audit_v1.md` | committed |
 | Live capability matrix | `bimexec/results/` | **PENDING — Windows T0A not run** |
 | T0B authorisation | `bimexec/docs/T0_RESULTS.md` §3 | **NOT GRANTED** |

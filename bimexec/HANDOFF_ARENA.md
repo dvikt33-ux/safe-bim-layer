@@ -32,7 +32,7 @@ Do NOT ask for PAT, SSH keys, or any secret.
 | Repository | `dvikt33-ux/safe-bim-layer` |
 | Branch | `arena/t0-probes` |
 | Base | `main` @ `72e9be1` |
-| Commits on top of base | 2 |
+| Commits on top of base | 3 (2 bundle + 1 AC29 live-fix) |
 | Bundle commit (the kit) | `607441aaf39998f1f0d5d1c22b8e66a796d3e8de` |
 | Tip commit (records the SHA above) | see `git log -1` |
 | Bundle version | 1.1 |
@@ -102,12 +102,14 @@ bimexec/HANDOFF_ARENA.md   this file
 ### Verification performed by Arena (offline, no Archicad)
 
 - `python bimexec/tests/test_all.py` → **45/45 PASS**
-- `python bimexec/tests/selftest_probes.py` → **42/42 PASS**, covering:
+- `python bimexec/tests/selftest_probes.py` → **62/62 PASS**, covering:
   T0A read-only + fail-closed exit 2; T0B default performs no write; T0B rejects
   a single write key; T0B round-trip proves restoration of the original value;
   silent no-op write stops at `READ_BACK` with `UNKNOWN`; leftover `BX:PROBE:`
   stops at `PRECHECK`; `CreateWalls` / `DeleteElements` / `SetSelection` are
-  hard-blocked.
+  hard-blocked; AC29 backend is available without official `GetProjectInfo`;
+  `elements_by_type` with empty GUIDs is not certified; empty property values
+  alone never certify `read_custom_property`.
 - `bimexec/examples/capability_matrix.example.json` validates against
   `bimexec/specs/capability_matrix.schema.json` (draft 2020-12), including two
   negative cases: a capability without `backend` is rejected, and

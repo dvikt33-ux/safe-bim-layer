@@ -22,10 +22,18 @@ BIMEXEC — T0B: controlled marker round-trip. ПЕРВЫЙ НАСТОЯЩИЙ W
     умрёт, в receipt ровно то значение, которое надо удалить руками;
   * exit 0 ТОЛЬКО если все шаги прошли И восстановление доказано.
 
+ЗАПИСЬ ВКЛЮЧАЕТСЯ ТОЛЬКО ДВУМЯ КЛЮЧАМИ ОДНОВРЕМЕННО:
+    --allow-write --i-understand-this-writes-to-archicad
+Один ключ без второго — ошибка запуска (exit 1), запись не выполняется.
+
 Запуск (Windows):
+    :: только PRECHECK, без записи
     python probe_t0b.py --guid <GUID> --expect-project "C:\\...\\MCP_TEST.pln" --dry-run
+
+    :: настоящая запись — ТОЛЬКО так
     python probe_t0b.py --guid <GUID> --expect-project "C:\\...\\MCP_TEST.pln" \
-        --carrier both --i-understand-this-writes-to-archicad
+        --carrier both \
+        --allow-write --i-understand-this-writes-to-archicad
 
     exit 0 — go, 1 — STOP, 2 — ошибка запуска/подключения
 """
@@ -53,7 +61,7 @@ from backends import (  # noqa: E402
     write_json_atomic,
 )
 
-PROBE_VERSION = "1.0"
+PROBE_VERSION = "1.2"
 MARKER_PREFIX = "BX:PROBE:"
 
 

@@ -21,6 +21,11 @@ Checks
   6. T0B against a write that silently does nothing: STOP at READ_BACK, UNKNOWN.
   7. T0B when a BX:PROBE: marker is already in the project: STOP at PRECHECK.
   8. create_wall / CreateWalls and other mutating commands are hard-blocked.
+  9. AC29 reality: no official `GetProjectInfo`, `GetProductInfo` present,
+     Tapir `GetProjectInfo` works — the backend must still be available.
+ 10. `elements_by_type` answers with empty GUIDs — must NOT be certified.
+ 11. Empty property values alone must not certify `read_custom_property`:
+     resolvable property => supported, unresolvable => not supported.
 
 Exit code: 0 if every check passes, 1 otherwise.
 """
@@ -255,10 +260,183 @@ def forbidden_commands() -> None:
               '"CreateWalls"' not in src and "'CreateWalls'" not in src)
 
 
+# --------------------------------------------------------------------------
+# 9. AC29 reality: no official GetProjectInfo, but GetProductInfo + Tapir work
+# --------------------------------------------------------------------------
+class _FakeCommands:
+    """Имитация `conn.commands` Archicad 29 / archicad==29.3000.
+
+    Проверено live: `GetProjectInfo` НЕ существует, `GetProductInfo` — есть,
+    `ExecuteAddOnCommand` — есть.
+    """
+
+    def __init__(self, types_mod: object) -> None:
+        self._types = types_mod
+        self.calls: list[tuple[str, dict]] = []
+
+    def GetProductInfo(self):
+        return {"version": "29", "build": "29.3000"}
+
+    def ExecuteAddOnCommand(self, cmd_id, params=None):
+        ns, name = cmd_id
+        self.calls.append((f"{ns}.{name}", params or {}))
+        if name == "GetProjectInfo":
+            return {
+                "isUntitled": False,
+                "isTeamwork": False,
+                "projectLocation": r"C:\Users\Admin\Downloads\MCP_TEST.pln",
+                "projectPath": r"C:\Users\Admin\Downloads\MCP_TEST.pln",
+                "projectName": "MCP_TEST",
+            }
+        if name == "GetAddOnVersion":
+            return {"version": "1.5.9"}
+        if name == "GetStories":
+            return {
+                "firstStory": 0, "lastStory": 2, "actStory": 0,
+                "stories": [
+                    {"index": 0, "level": 0, "name": "Первый Этаж"},
+                    {"index": 1, "level": 3, "name": ""},
+                    {"index": 2, "level": 6, "name": ""},
+                ],
+            }
+        return {}
+
+
+class _FakeTypes:
+    @staticmethod
+    def AddOnCommandId(ns: str, name: str):
+        return (ns, name)
+
+
+class _FakeConnection:
+    def __init__(self) -> None:
+        self.commands = _FakeCommands(_FakeTypes)
+        self.types = _FakeTypes()
+        self.utilities = None
+
+
+class _FakeACConnection:
+    @staticmethod
+    def connect(port=None):
+        return _FakeConnection()
+
+
+def ac29_official_api_shape() -> None:
+    """Регрессия: отсутствие official GetProjectInfo не роняет бэкенд."""
+    sys.path.insert(0, PROBES)
+    import backends  # noqa: E402
+
+    saved = sys.modules.get("archicad")
+    sys.modules["archicad"] = type(sys)("archicad")     # пустой модуль-заглушка
+    sys.modules["archicad"].ACConnection = _FakeACConnection
+    try:
+        b = backends.TapirBackend(port=19723)
+        ok, why = b.available()
+        check("AC29: backend available without official GetProjectInfo", ok is True, why)
+        check("AC29: availability reason mentions Tapir GetProjectInfo",
+              "Tapir GetProjectInfo" in why, why)
+
+        info = b.project_info()
+        check("AC29: project_path from Tapir GetProjectInfo",
+              info["project_path"] == r"C:\Users\Admin\Downloads\MCP_TEST.pln",
+              str(info.get("project_path")))
+        check("AC29: project_name from Tapir GetProjectInfo",
+              info["project_name"] == "MCP_TEST", str(info.get("project_name")))
+        check("AC29: is_untitled / is_teamwork from Tapir",
+              info["is_untitled"] is False and info["is_teamwork"] is False)
+        check("AC29: version/build from official GetProductInfo",
+              info["archicad_version"] == "29" and info["archicad_build"] == "29.3000",
+              f"{info.get('archicad_version')}/{info.get('archicad_build')}")
+
+        stories = b.stories()
+        check("AC29: stories parsed (index/name/level)", len(stories) == 3, str(stories))
+        check("AC29: level maps to elevation",
+              [s["elevation"] for s in stories] == [0.0, 3.0, 6.0],
+              str([s["elevation"] for s in stories]))
+        check("AC29: no official GetProjectInfo call was made",
+              all(c[0].endswith("GetProjectInfo") is False
+                  for c in b.conn.commands.calls
+                  if not c[0].startswith("TapirCommand")))
+    except Exception as e:  # noqa: BLE001
+        check("AC29: fake-API scenario raised", False, f"{type(e).__name__}: {e}")
+    finally:
+        if saved is None:
+            sys.modules.pop("archicad", None)
+        else:
+            sys.modules["archicad"] = saved
+
+
+# --------------------------------------------------------------------------
+# 10. Empty GUID must not count as a confirmed capability
+# --------------------------------------------------------------------------
+def t0a_rejects_empty_guid() -> None:
+    with tempfile.TemporaryDirectory() as td:
+        cp = run([T0A, "--out", "cm.json", "--backend-module",
+                  fake("fake_backend_bad_guid.py")], td)
+        cm = load_json(os.path.join(td, "cm.json"))
+        cap = cm["capabilities"]["elements_by_type"]
+        check("T0A: empty GUIDs => elements_by_type is not certified",
+              cap["supported"] is not True, str(cap["supported"]))
+        check("T0A: elements_by_type explains the dropped records",
+              any("GUID" in n for n in cap["notes"]) or "GUID" in str(cap.get("evidence")),
+              str(cap.get("notes")))
+        check("T0A: walls do not enter t0b_candidates",
+              all(not (c.get("guid") or "").strip() == "" or c.get("guid")
+                  for c in cm.get("t0b_candidates", [])))
+
+
+# --------------------------------------------------------------------------
+# 11. Empty property values alone must not certify a carrier
+# --------------------------------------------------------------------------
+def t0a_custom_property_verdicts() -> None:
+    # свойство существует, значений нет -> подтверждено через resolve_property_id
+    with tempfile.TemporaryDirectory() as td:
+        run([T0A, "--out", "cm.json", "--backend-module",
+             fake("fake_tapir_shape.py")], td)
+        cap = load_json(os.path.join(td, "cm.json"))["capabilities"]["read_custom_property"]
+        check("T0A: empty values + resolvable property => supported",
+              cap["supported"] is True, str(cap.get("notes")))
+        check("T0A: evidence kind recorded",
+              cap["evidence"].get("evidence_kind") == "property_id_resolved",
+              str(cap["evidence"].get("evidence_kind")))
+
+    # свойства нет -> NO, а не OK
+    with tempfile.TemporaryDirectory() as td:
+        run([T0A, "--out", "cm.json", "--backend-module",
+             fake("fake_no_custom_prop.py")], td)
+        cm = load_json(os.path.join(td, "cm.json"))
+        cap = cm["capabilities"]["read_custom_property"]
+        check("T0A: unresolvable property => not supported",
+              cap["supported"] is False, str(cap.get("notes")))
+        check("T0A: hint to create the property once is present",
+              any("создать" in n.lower() or "создайте" in n.lower()
+                  for n in cap["notes"]),
+              str(cap.get("notes")))
+        check("T0A: property carrier not reported as readable",
+              "property" not in cm.get("marker_carriers_readable", []),
+              str(cm.get("marker_carriers_readable")))
+
+    # ключевая регрессия: вызов НЕ упал и вернул пустые значения
+    with tempfile.TemporaryDirectory() as td:
+        run([T0A, "--out", "cm.json", "--backend-module",
+             fake("fake_no_custom_prop_silent.py")], td)
+        cm = load_json(os.path.join(td, "cm.json"))
+        cap = cm["capabilities"]["read_custom_property"]
+        check("T0A: empty values alone never certify the carrier",
+              cap["supported"] is not True, str(cap.get("notes")))
+        check("T0A: empty values + unresolvable property => not supported",
+              cap["supported"] is False, str(cap.get("notes")))
+        check("T0A: property carrier not reported as readable (silent variant)",
+              "property" not in cm.get("marker_carriers_readable", []),
+              str(cm.get("marker_carriers_readable")))
+
+
 def main() -> int:
     print("=== selftest: T0 probes (offline, no Archicad)")
     for fn in (t0a_shape, t0a_fail_closed, t0b_default_is_readonly, t0b_two_keys,
-               t0b_roundtrip_restores, t0b_silent_noop, t0b_leftover, forbidden_commands):
+               t0b_roundtrip_restores, t0b_silent_noop, t0b_leftover, forbidden_commands,
+               ac29_official_api_shape, t0a_rejects_empty_guid,
+               t0a_custom_property_verdicts):
         print(f"\n-- {fn.__name__}")
         try:
             fn()

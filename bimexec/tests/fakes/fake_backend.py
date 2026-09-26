@@ -68,6 +68,12 @@ class FakeBackend(Backend):
             out[g] = store.get(g, {}).get(key)
         return out
 
+    def resolve_property_id(self, ref):
+        key = ref.get("id") or ref.get("name")
+        if ref.get("kind") == "user" and key not in ("BIMEXEC_MARKER",):
+            raise BackendError("user-defined property does not exist")
+        return {"guid": f"PROP-{key}"}
+
     def set_property_value(self, guid, ref, value):
         store = self._store(ref)
         key = ref.get("id") if ref.get("kind") == "builtin" else ref.get("name")

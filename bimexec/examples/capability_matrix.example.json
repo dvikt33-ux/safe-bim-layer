@@ -36,6 +36,8 @@
     "elements_by_type": {
       "backend": "tapir",
       "evidence": {
+        "dropped_no_guid": 0,
+        "raw_count": 2,
         "sample": [
           "G-0001",
           "G-0002"
@@ -122,8 +124,8 @@
       "backend": "tapir",
       "evidence": {
         "address": "BIMEXEC/BIMEXEC_MARKER",
-        "call_ok": true,
-        "note": "свойство читается; значений нет — ожидаемо до T0B",
+        "evidence_kind": "property_id_resolved",
+        "note": "свойство существует и разрешается по адресу; значения пусты — ожидаемо до T0B",
         "resolved": {}
       },
       "notes": [],
@@ -291,7 +293,7 @@
     }
   ],
   "duplicate_detection": "SCAN_PREFIX",
-  "generated_at": "2026-09-26T17:19:37Z",
+  "generated_at": "2026-09-26T19:37:48Z",
   "marker_carriers_readable": [
     "element_id",
     "property"
@@ -379,5 +381,5 @@
     "next_step": "T0B",
     "t0a_go": true
   },
-  "version": "1.1"
+  "version": "1.2"
 }

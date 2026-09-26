@@ -135,8 +135,40 @@ type-specific `details`? Инвентаризация это **не подтве
 
 ---
 
-**Кому:** выполняется оператором в `C:\Users\Admin\Documents\BibimMcpRouter`.
+**Кому:** выполняется оператором на Windows, из отдельной папки, а не из
+`C:\Users\Admin\Documents\BibimMcpRouter`. Интерпретатор — тот, где установлен
+`archicad` (`...\archicad-mcp-server\Scripts\python.exe`).
 **Ничего из этого не интегрируется в production Router до результатов T0B.**
+
+---
+
+## 0-1. Подтверждено живьём на Windows (2026-09-26, Archicad 29)
+
+Источник: read-only live baseline от ChatGPT/Work (PR #1). Это факты, а не
+документация:
+
+| Факт | Значение |
+|---|---|
+| Интерпретатор с `archicad==29.3000` | `C:\Users\Admin\AppData\Roaming\uv\tools\archicad-mcp-server\Scripts\python.exe` |
+| `ACConnection.connect(19723)` | работает |
+| official `commands.GetProjectInfo` | **отсутствует** (hasattr = False) |
+| official `commands.GetProductInfo` | есть |
+| official `commands.ExecuteAddOnCommand` | есть |
+| Tapir `GetAddOnVersion` | `{'version': '1.5.9'}` |
+| Tapir `GetProjectInfo` | `projectPath`/`projectLocation` = `C:\Users\Admin\Downloads\MCP_TEST.pln`, `projectName` = `MCP_TEST`, `isUntitled`=False, `isTeamwork`=False |
+| Tapir `GetStories` | `firstStory=0 lastStory=2 actStory=0`; элементы несут `index`, `level`, `name` |
+
+Следствия, уже реализованные в `backends.py`:
+
+1. `TapirBackend.available()` проверяет доступность через read-only Tapir
+   `GetProjectInfo` (и попутно `GetAddOnVersion`), а **не** через official
+   `GetProjectInfo`. Раньше из-за этого T0A ложно сообщал
+   `port_project_discovery = NO` и `tapir = down`.
+2. `project_info()` берёт путь/имя/untitled/teamwork из Tapir, а версию и
+   сборку — отдельно из official `GetProductInfo` (best effort; отсутствие
+   не влияет на доступность).
+3. Запускать T0A/T0B нужно тем интерпретатором, где стоит `archicad` —
+   иначе бэкенд честно скажет «package 'archicad' is not installed».
 
 ---
 
@@ -193,11 +225,17 @@ GUID тестовой стены возьмите из вывода T0A (`capabi
 
 ## 3. T0A — read-only capability probe
 
+Запускать ВНЕ каталога production Router (например, из копии `probes`),
+интерпретатором, в котором установлен `archicad`:
+
 ```bat
-cd C:\Users\Admin\Documents\BibimMcpRouter
-python probe_t0a.py --out capability_matrix.json --ports 19723,19724 ^
-    --mcp-url http://127.0.0.1:8001/mcp --expect-project "C:\PLN\MCP_TEST.pln"
+cd /d C:\TEMP\bimexec_t0\probes
+"C:\Users\Admin\AppData\Roaming\uv\tools\archicad-mcp-server\Scripts\python.exe" probe_t0a.py --out capability_matrix.json --ports 19723,19724 ^
+    --mcp-url http://127.0.0.1:8001/mcp --expect-project "C:\Users\Admin\Downloads\MCP_TEST.pln"
 ```
+
+Если `python` уже указывает на окружение с `archicad`, команду можно сократить
+до `python probe_t0a.py ...`.
 
 Свой бэкенд подключается без правки наших файлов:
 

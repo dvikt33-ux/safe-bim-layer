@@ -3,7 +3,7 @@ BIMEXEC — T0 PROBE KIT FOR WINDOWS
 ================================================================================
 repository   : https://github.com/dvikt33-ux/safe-bim-layer
 location     : bimexec/probes/
-version      : 1.1
+version      : 1.2
 date         : 2026-09-26
 purpose      : измерить фактические возможности Archicad 29 (BIBIM / Tapir / MCP)
                и затем доказать round-trip маркера. НИЧЕГО больше.
@@ -11,6 +11,14 @@ python       : 3.10+ (только стандартная библиотека)
 dependencies : НЕТ обязательных. Пакет `archicad` (29.3000) используется
                Tapir-бэкендом, если он установлен; если его нет — бэкенд
                честно сообщает "down" и probe завершается с exit 2.
+
+ВАЖНО ПРО ИНТЕРПРЕТАТОР (подтверждено живьём, 2026-09-26):
+  запускать probe нужно тем python, в котором установлен пакет `archicad`:
+      C:\Users\Admin\AppData\Roaming\uv\tools\archicad-mcp-server\Scripts\python.exe
+  Иначе T0A честно сообщит "package 'archicad' is not installed" и завершится
+  с exit 2. Ниже в командах вместо `python` подставьте этот полный путь
+  (или вызовите его через `py -3`, если `archicad` установлен в другое
+  окружение).
 
 ЧТО ЭТО НЕ ЕСТЬ:
   * это НЕ интеграция с production Router
@@ -50,8 +58,9 @@ dependencies : НЕТ обязательных. Пакет `archicad` (29.3000) 
 1. ПОДГОТОВКА ARCHICAD (вручную, один раз, ДО прогона)
 ================================================================================
  1. Открыть Archicad 29 и загрузить Tapir Add-On (чтобы отвечал JSON API).
- 2. Открыть ОДНОРАЗОВЫЙ проект MCP_TEST.pln
-    (НЕ рабочий проект; пример пути ниже: C:\PLN\MCP_TEST.pln).
+    Живая проверка: порт 19723 отвечает, Tapir add-on 1.5.9.
+ 2. Открыть ОДНОРАЗОВЫЙ проект MCP_TEST.pln (НЕ рабочий проект).
+    Живой путь: C:\Users\Admin\Downloads\MCP_TEST.pln
  3. В этом проекте создать пользовательское свойство:
         группа  : BIMEXEC
         имя     : BIMEXEC_MARKER
@@ -70,8 +79,11 @@ dependencies : НЕТ обязательных. Пакет `archicad` (29.3000) 
 Ни одного mutating вызова. Только чтение. Безопасно на любом проекте,
 но рекомендуется тот же MCP_TEST.pln.
 
-Команда (одной строкой):
-    python probe_t0a.py --out capability_matrix.json --ports 19723,19724 --mcp-url http://127.0.0.1:8001/mcp --expect-project "C:\PLN\MCP_TEST.pln"
+Команда (одной строкой) — интерпретатор с пакетом archicad:
+    "C:\Users\Admin\AppData\Roaming\uv\tools\archicad-mcp-server\Scripts\python.exe" probe_t0a.py --out capability_matrix.json --ports 19723,19724 --mcp-url http://127.0.0.1:8001/mcp --expect-project "C:\Users\Admin\Downloads\MCP_TEST.pln"
+
+То же, если `python` уже указывает на нужное окружение:
+    python probe_t0a.py --out capability_matrix.json --ports 19723,19724 --mcp-url http://127.0.0.1:8001/mcp --expect-project "C:\Users\Admin\Downloads\MCP_TEST.pln"
 
 Пояснения к флагам:
     --out              куда записать capability matrix (JSON)
@@ -212,8 +224,10 @@ dependencies : НЕТ обязательных. Пакет `archicad` (29.3000) 
       Tapir; MCP важен только как резервный источник capabilities.
 
 "package 'archicad' is not installed"
-    — Tapir-бэкенд недоступен. Запускайте probe из окружения, где стоит
-      archicad==29.3000.
+    — Запускайте probe интерпретатором
+      C:\Users\Admin\AppData\Roaming\uv\tools\archicad-mcp-server\Scripts\python.exe
+      Проверка:
+      "C:\Users\Admin\AppData\Roaming\uv\tools\archicad-mcp-server\Scripts\python.exe" -c "import archicad; print(archicad.__file__)"
 
 "project_path != --expect-project"
     — открыт не тот файл. Откройте MCP_TEST.pln и повторите.

@@ -40,6 +40,7 @@ from backends import (  # noqa: E402
     TAPIR_READ_COMMANDS,
     FORBIDDEN_COMMANDS,
     Backend,
+    BackendError,
     build_backends,
     custom_marker_address,
     custom_marker_ref,
@@ -48,7 +49,7 @@ from backends import (  # noqa: E402
     write_json_atomic,
 )
 
-PROBE_VERSION = "1.1"
+PROBE_VERSION = "1.2"
 
 
 class R:
@@ -258,9 +259,22 @@ def main() -> int:
     walls: list[str] = []
     try:
         be, els = first("elements_by_type", "Wall")
-        walls = list(els or [])
-        (r.ok(be, wall_count=len(walls), sample=walls[:5]) if walls
-         else r.no(be, "стен не найдено"))
+        raw_els = list(els or [])
+        # пустой/None GUID не считается элементом: иначе «стены найдены»,
+        # но работать не с чем и верификация geometry невозможна
+        walls = [g for g in raw_els if isinstance(g, str) and g.strip()]
+        dropped = len(raw_els) - len(walls)
+        if dropped:
+            r.notes.append(f"отброшено записей без GUID: {dropped}")
+        if walls:
+            r.ok(be, wall_count=len(walls), sample=walls[:5],
+                 raw_count=len(raw_els), dropped_no_guid=dropped)
+        elif raw_els:
+            r.no(be, f"GetElementsByType вернул {len(raw_els)} записей, но ни одна "
+                     f"не содержит GUID — считать способность подтверждённой нельзя",
+                 raw_count=len(raw_els))
+        else:
+            r.no(be, "стен не найдено")
     except Exception as e:
         r.unknown(None, str(e))
     caps[r.name] = r
@@ -347,10 +361,30 @@ def main() -> int:
             be = caps["elements_by_type"].backend or live[0].name
             b = backend_by_name(be) or live[0]
             vals = b.get_property_values(custom_ref, probe_guids)
-            ok_call = True
             got = {g: v for g, v in (vals or {}).items() if v not in (None, "")}
-            r.ok(be, address=custom_marker_address(), call_ok=ok_call, resolved=got,
-                 note="свойство читается; значений нет — ожидаемо до T0B")
+            if got:
+                r.ok(be, address=custom_marker_address(), resolved=got,
+                     evidence_kind="real_values")
+            else:
+                # Вызов прошёл, но значений нет. Сам по себе пустой ответ —
+                # НЕ доказательство: так выглядит и несуществующее свойство.
+                # Требуем независимого подтверждения, что свойство существует.
+                resolved = _property_exists(b, custom_ref)
+                if resolved is True:
+                    r.ok(be, address=custom_marker_address(), resolved={},
+                         evidence_kind="property_id_resolved",
+                         note="свойство существует и разрешается по адресу; "
+                              "значения пусты — ожидаемо до T0B")
+                elif resolved is None:
+                    r.unknown(be, "значения пусты, и бэкенд не умеет подтвердить "
+                                  "существование свойства по адресу — способность "
+                                  "не подтверждена (fail closed)",
+                              address=custom_marker_address())
+                else:
+                    r.no(be, f"значения пусты и свойство {custom_marker_address()} "
+                             f"не разрешается по адресу: создайте его один раз "
+                             f"(Property Manager или Add-On), затем повторите T0A",
+                         address=custom_marker_address())
         except Exception as e:
             msg = str(e)
             if "no id for address" in msg or "empty id" in msg or "not exist" in msg.lower():
@@ -473,6 +507,33 @@ def main() -> int:
     write_json_atomic(args.out, report)
     print(f"\nwritten: {args.out}")
     return 0
+
+
+def _property_exists(b: Backend, ref: dict) -> bool | None:
+    """Независимое подтверждение, что свойство существует.
+
+    Пустой ответ get_property_values сам по себе ничего не доказывает: так
+    выглядит и существующее, но незаполненное свойство, и вовсе
+    несуществующее. Поэтому спрашиваем разрешение адреса в propertyId.
+
+      True  — свойство найдено;
+      False — свойства нет (нужно создать один раз);
+      None  — бэкенд не умеет отвечать: остаёмся в UNKNOWN (fail closed).
+    """
+    fn = getattr(b, "resolve_property_id", None)
+    if not callable(fn):
+        return None
+    try:
+        pid = fn(ref)
+    except BackendError as e:
+        if "not supported" in str(e).lower():
+            return None
+        return False
+    except Exception:
+        return None
+    if pid is None or pid == "" or pid == {}:
+        return False
+    return True
 
 
 def _minimal_payload(cmd: str) -> dict:

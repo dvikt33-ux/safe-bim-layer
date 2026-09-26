@@ -12,7 +12,7 @@ exist today were produced against the in-memory doubles in
 | Committed kit | `bimexec/probes/` (`probe_t0a.py`, `probe_t0b.py`, `backends.py`, `T0_PLAN.md`, `README_RUN_WINDOWS.txt`, `SHA256SUMS.txt`) |
 | Branch | `arena/t0-probes`, base `main` @ `72e9be1` (Arena never writes to `main`) |
 | Commit SHA | see `bimexec/HANDOFF_ARENA.md` |
-| T0A status | **not run on Windows** |
+| T0A status | **not run as a full probe**; a read-only live baseline from PR #1 confirmed the connection, add-on version, project identity and stories |
 | T0B status | **not run, not authorised.** No write to Archicad from this repository. |
 | `create_wall` | `production_safe = false`, not implemented, hard-blocked by `backends.py` |
 
@@ -123,21 +123,37 @@ or in `COORDINATION.md` before anyone runs it. T0B is then run only:
 
 ---
 
-## 4. Still UNKNOWN until the live run
+## 4. Live facts already confirmed (read-only baseline, PR #1)
 
-1. Live Tapir Add-On version (`GetAddOnVersion` was never observed on the real
-   stack; earlier inventory did not confirm it).
-2. Which Element ID address actually resolves on AC29 (`General_ElementID`,
+| Fact | Value | Source |
+|---|---|---|
+| Interpreter with `archicad==29.3000` | `C:\Users\Admin\AppData\Roaming\uv\tools\archicad-mcp-server\Scripts\python.exe` | live |
+| `ACConnection.connect(19723)` | works | live |
+| official `commands.GetProjectInfo` | **absent** (`hasattr` = False) | live |
+| official `commands.GetProductInfo` | present | live |
+| official `commands.ExecuteAddOnCommand` | present | live |
+| Tapir add-on version | `1.5.9` | live (`GetAddOnVersion`) |
+| Project | `C:\Users\Admin\Downloads\MCP_TEST.pln`, `MCP_TEST`, not untitled, not Teamwork | live (`GetProjectInfo`) |
+| Stories | `firstStory=0 lastStory=2 actStory=0`; entries carry `index`, `level`, `name` | live (`GetStories`) |
+
+These are the reason `probes/backends.py` was corrected: availability and
+project identity now come from read-only Tapir `GetProjectInfo`, never from the
+nonexistent official one.
+
+## 4b. Still UNKNOWN until a full T0A run
+
+1. Which Element ID address actually resolves on AC29 (`General_ElementID`,
    `General/Element ID`, …). T0A records the first one that returns values.
-3. Whether `GetDetailsOfElements` returns wall coordinates inside
+2. Whether `GetDetailsOfElements` returns wall coordinates inside
    `details.wall` for **this** build — T0A dumps the raw response as evidence.
-4. Whether the MCP endpoint on port 8001 answers `initialize` and what
+3. Whether the MCP endpoint on port 8001 answers `initialize` and what
    `tools/list` reports (mode `verdicts` vs `full`). Until this is measured, the
    write path is planned via Tapir, not MCP.
-5. Whether `API.SetPropertyValuesOfElements` can write a user-defined property
+4. Whether `API.SetPropertyValuesOfElements` can write a user-defined property
    that was created by hand — **this is exactly what T0B exists to test**.
-6. Whether `floorIndex` → story name mapping is complete for all stories.
-7. Whether BIBIM offers anything this stack needs (out of scope for v1; no local
+5. Whether `floorIndex` → story name mapping is complete for all stories
+   (live: story names are empty for indices 1 and 2).
+6. Whether BIBIM offers anything this stack needs (out of scope for v1; no local
    package or schemas were found).
 
 ---
