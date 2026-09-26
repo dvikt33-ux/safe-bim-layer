@@ -15,6 +15,6 @@ Canonical sequence from the audit:
 - **T4** — timeout after mutation applied -> `PAUSED(OP_UNKNOWN)`, no retry, reconcile offers ADOPT.
 - **T5** — process kill between dispatch and verify -> same recovery semantics as T4.
 - **T6** — manual geometry drift between operations -> `PAUSED(MODEL_DRIFT)`.
-- **T7** — unavailable read-back -> `PAUSED(VERIFY_UNAVAILABLE)`, never continue.
+- **T7** — unavailable read-back after the marker round-trip -> `PAUSED(VERIFY_UNAVAILABLE)`, never continue. The durable pause taxonomy normalizes `OpState.UNAVAILABLE` to `VERIFY_UNAVAILABLE`; other operation states retain their existing semantics.
 
 The production Router and `main` remain out of scope for these standalone live probes.

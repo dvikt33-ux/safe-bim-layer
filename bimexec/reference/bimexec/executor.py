@@ -442,7 +442,15 @@ class Executor:
 
             # I3: любой halting-исход останавливает job, даже если исключение не брошено
             if rec.state.halts_job():
-                raise Halted(rec.state.value, rec.key)
+                # OpState is deliberately low-level.  Durable job pause reasons
+                # are the audit taxonomy, so a failed read-back must not leak
+                # the generic state name "UNAVAILABLE" into recovery evidence.
+                reason = (
+                    "VERIFY_UNAVAILABLE"
+                    if rec.state is st.OpState.UNAVAILABLE
+                    else rec.state.value
+                )
+                raise Halted(reason, rec.key)
         finally:
             self.flight.release()
 
