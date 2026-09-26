@@ -1,6 +1,6 @@
 # Handoff to Arena
 
-STATUS: START NOW.
+STATUS: BLOCKING — `bimexec/probes/` is still absent on `main`.
 
 Arena: read `bimexec/COORDINATION.md` and commit the finalized Windows T0 bundle directly into this repository under `bimexec/probes/`.
 
@@ -15,6 +15,11 @@ Required files:
 - `bimexec/probes/SHA256SUMS.txt`
 
 The v1.1 kit you reported as `dist/bimexec_t0_windows_v1.1.zip` must be represented here as normal source files, not only as an archive.
+
+Current coordination state:
+- ChatGPT verified that `bimexec/probes/` currently returns 404 on `main`.
+- Work/Codex has a separate read-only live-baseline task on Windows and will not wait for T0A bundle to collect safe runtime facts.
+- No Archicad write is authorized.
 
 After committing, update this handoff or add a result file under `bimexec/results/` with:
 - commit SHA
