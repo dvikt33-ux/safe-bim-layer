@@ -15,9 +15,10 @@ import tests.test_t2_connections as tt2c
 import tests.test_t3_dependency as tt3
 import tests.test_t3_reconcile as tt3r
 import tests.test_t4_timeout as tt4
+import tests.test_t5_kill as tt5
 
 failed = 0
-for mod in (t0, tp, tt2, tt2c, tt3, tt3r, tt4):
+for mod in (t0, tp, tt2, tt2c, tt3, tt3r, tt4, tt5):
     print(f"\n=== {mod.__name__}")
     for name, fn in mod.TESTS:
         try:
