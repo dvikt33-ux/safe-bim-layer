@@ -11,7 +11,7 @@ import json
 import hashlib
 from typing import Any
 from safe_bim_layer import SafeBIMLayer, SafeBIMError, TapirClient
-from safe_bim_verification import response_items, guid_key
+from safe_bim_verification import response_items, guid_key, assess_wall_vertical
 
 OPERATIONS = frozenset({'create_wall_loop', 'create_basic_slab', 'create_plinth_segment',
                         'insert_window', 'insert_door'})
@@ -95,8 +95,13 @@ class SafeBIMOperations:
             digest = hashlib.sha256(json.dumps(hashed, sort_keys=True, ensure_ascii=False, allow_nan=False).encode()).hexdigest()
             if (prepared.get('operation') != operation or prepared.get('params') != clean
                     or prepared.get('contractHash') != digest or receipt.get('contractHash') != digest
-                    or receipt.get('operation') != operation or receipt.get('readbackVerified') is not True):
+                    or receipt.get('operation') != operation):
                 return dict(ambiguous, reason='unverified receipt or fingerprint mismatch')
+            if receipt.get('readbackVerified') is not True:
+                # A geometry MATCH is not ownership. Do not promote UNKNOWN to APPLIED.
+                note = self._unverified_wall_geometry(operation, prepared, receipt)
+                extra = {'geometry': note['geometry'], 'geometryReasons': note['reasons']} if note else {}
+                return dict(ambiguous, reason='unverified receipt; geometry is not ownership', **extra)
             guids = receipt.get('guids')
             if not isinstance(guids, list) or not guids or any(not isinstance(g, str) or not g for g in guids):
                 return dict(ambiguous, reason='missing receipt identities')
@@ -108,3 +113,21 @@ class SafeBIMOperations:
                         readbackVerified=True, retryAllowed=False)
         except Exception as exc:
             return dict(ambiguous, reason=f'reconciliation unavailable: {type(exc).__name__}: {exc}')
+
+    def _unverified_wall_geometry(self, operation, prepared, receipt):
+        """Read receipt GUIDs only. Never searches the model and never proves APPLIED."""
+        if operation not in {'create_wall_loop', 'create_plinth_segment'}:
+            return None
+        guids = receipt.get('guids') if isinstance(receipt, dict) else None
+        if not isinstance(guids, list) or not guids:
+            return None
+        try:
+            _, details = self.layer._read_details(guids)
+        except Exception:
+            return {'geometry': 'UNAVAILABLE', 'reasons': ['read failed']}
+        notes = [assess_wall_vertical(prepared.get('expectedZFingerprint') or {},
+                                      row.get('floorIndex'), row.get('details') or {}) for row in details]
+        if notes and all(note['geometry'] == 'MATCH' for note in notes):
+            return {'geometry': 'MATCH', 'reasons': []}
+        reasons = [reason for note in notes for reason in note.get('reasons', [])] or ['mismatch']
+        return {'geometry': 'MISMATCH', 'reasons': reasons}

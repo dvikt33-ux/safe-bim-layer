@@ -67,8 +67,12 @@ class FakeBIM(TapirClient):
         with self.lock:
             if command == 'CreateWalls':
                 for w in payload['wallsData']:
+                    write_relative = w['zCoordinate']
+                    # Live Tapir: CreateWalls zCoordinate is story-relative when floorIndex
+                    # is set; GetDetails wall zCoordinate is the absolute bottom.
                     detail = dict(begCoordinate=w['begCoordinate'], endCoordinate=w['endCoordinate'],
-                                  zCoordinate=w['zCoordinate'], bottomOffset=w['zCoordinate'], height=w['height'],
+                                  zCoordinate=self.elevations[w['floorIndex']] + write_relative,
+                                  bottomOffset=write_relative, height=w['height'],
                                   relativeTopStory=0, offset=0, begThickness=w['thickness'], endThickness=w['thickness'],
                                   structureType=w['structureType'], referenceLineLocation=w['referenceLineLocation'])
                     guids.append(self.add('Wall', w['floorIndex'], detail))

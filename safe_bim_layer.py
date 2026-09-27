@@ -10,7 +10,7 @@ import hashlib
 import threading
 from contextlib import contextmanager
 from safe_bim_verification import (VerificationError, number, equal, response_items,
-                                   element_guids, verify_details, guid_key)
+                                   element_guids, verify_details, guid_key, wall_z_contract)
 from dataclasses import dataclass, asdict
 from pathlib import Path
 from typing import Any
@@ -414,7 +414,7 @@ class SafeBIMLayer:
                 pts = [a, b]
                 bottom, top = number(p['grade_z']), number(p['project_zero_z'])
                 height = self._positive(top - bottom)
-                relative = bottom - elevation
+                vertical = wall_z_contract(floor, elevation, bottom, height)
             else:
                 pts = [self._point(q) for q in p['contour']]
                 if pts and pts[0] == pts[-1]: pts = pts[:-1]
@@ -422,19 +422,22 @@ class SafeBIMLayer:
                     raise SafeBIMError('nondegenerate contour required')
                 pts.append(copy.deepcopy(pts[0]))
                 height = self._positive(p['height'])
-                relative, bottom, top = 0., elevation, elevation + height
+                bottom, top = elevation, elevation + height
+                vertical = wall_z_contract(floor, elevation, bottom, height)
             walls = []
             for a, b in zip(pts, pts[1:]):
+                # floorIndex is present, so this zCoordinate is the write offset
+                # (absolute bottom - story elevation), never the read-back value.
                 walls.append({'begCoordinate': a, 'endCoordinate': b, 'floorIndex': floor,
-                              'zCoordinate': relative, 'height': height, 'thickness': thickness,
+                              'zCoordinate': vertical['write_relative_z'], 'height': height, 'thickness': thickness,
                               'referenceLineLocation': 'Center', 'structureType': 'Basic'})
-                expected.append({'begCoordinate': a, 'endCoordinate': b, 'zCoordinate': relative,
-                                 'bottomOffset': relative, 'height': height, 'relativeTopStory': 0,
+                expected.append({'begCoordinate': a, 'endCoordinate': b,
+                                 'zCoordinate': vertical['expected_readback_z'],
+                                 'bottomOffset': vertical['write_relative_z'], 'height': height, 'relativeTopStory': 0,
                                  'begThickness': thickness, 'endThickness': thickness,
                                  'offset': 0, 'referenceLineLocation': 'Center', 'structureType': 'Basic'})
             command, payload, kind = 'CreateWalls', {'wallsData': walls}, 'Wall'
-            fp = {'floorIndex': floor, 'story_elevation': elevation, 'relative_offset': relative,
-                  'height': height, 'expected_bottom': bottom, 'expected_top': top, 'structureType': 'Basic'}
+            fp = vertical
         elif operation == 'create_basic_slab':
             pts = [self._point(q) for q in p['contour']]
             if pts and pts[0] == pts[-1]: pts = pts[:-1]
@@ -511,7 +514,8 @@ class SafeBIMLayer:
             if prepared['type'] in {'Wall', 'Slab'}:
                 actual = details[0]['details']
                 if prepared['type'] == 'Wall':
-                    result['actual_bottom'] = prepared['storyElevation'] + number(actual['zCoordinate'])
+                    # Read-back z is already absolute bottom. Do not add story elevation again.
+                    result['actual_bottom'] = number(actual['zCoordinate'])
                     result['actual_top'] = result['actual_bottom'] + number(actual['height'])
                 else:
                     result['actual_top'] = prepared['storyElevation'] + number(actual['level']) + number(actual['offsetFromTop'])
