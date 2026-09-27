@@ -161,9 +161,47 @@ Detailed readback unsupported for:
 - Opening — `Not yet supported element type`
 - Stair — `Not yet supported element type`
 
-The only two field differences were on the Beam; see `R4_FIELD_DIFFS_AND_GEOMETRY.md`.
+The only two field differences were on the Beam:
+- requested height 0.30 m, read back 0.10 m
+- requested width 0.20 m, read back 0.10 m
+
+The W2 focused test below resolved the cause.
 
 For Morph, PolyLine, Spline and Hatch, creation + presence + detailed readback were confirmed, but the generic R4 comparator did not have automatically comparable request/readback fields. Their live readback data is recorded in the companion report.
+
+## W2 — Beam structure/size semantics
+
+Result: `PASS_BASIC_BEAM_EXPLICIT_MATERIAL`.
+
+Three isolated `CreateBeams` variants were created and immediately read back:
+
+### A — width/height only
+- requested width 0.20 m, height 0.30 m
+- observed structure: PROFILE
+- observed profile GUID: `89AF8797-218A-49CC-AFD3-30DB1CF75C03`
+- observed width 0.10 m, height 0.10 m
+- result: requested dimensions did not take effect as intended
+
+### B — width/height + `isWidthAndHeightLinked=false`
+- requested width 0.20 m, height 0.30 m
+- observed structure: PROFILE
+- observed profile GUID: `89AF8797-218A-49CC-AFD3-30DB1CF75C03`
+- observed width 0.10 m, height 0.10 m
+- result: unlinking dimensions alone did not solve the problem
+
+### C — width/height + `isWidthAndHeightLinked=false` + explicit Building Material
+- Building Material GUID: `922C639B-9875-48DF-A3FC-E0A8AC5F2839`
+- observed structure: BASIC
+- observed width 0.20 m
+- observed height 0.30 m
+- no profileId in readback
+- result: exact requested rectangular dimensions were preserved
+
+Evidence-backed Safe BIM rule:
+
+> When Safe BIM intends to create a rectangular Basic Beam, it must explicitly provide a trusted `buildingMaterialId` (and should set `isWidthAndHeightLinked=false` when width and height differ). Passing only `width` / `height` is not deterministic because `CreateBeams` inherits the current Archicad Beam tool defaults; a Profile default can remain Profile and ignore the intended rectangular dimensions.
+
+W2 did not call `Modify*`, `Delete*`, or `SaveProject`.
 
 ## Current evidence-backed capability map
 
@@ -174,7 +212,7 @@ For Morph, PolyLine, Spline and Hatch, creation + presence + detailed readback w
 | Door | yes | yes | yes | W1/R4 passed |
 | Opening | yes | yes | no | `GetDetailsOfElements`: not yet supported |
 | Column | yes | yes | yes | W1/R4 passed |
-| Beam | yes | yes | yes | width/height write/readback mismatch in tested default/profile state |
+| Beam | yes | yes | yes | Basic rectangular dimensions are deterministic when explicit trusted `buildingMaterialId` is supplied; width/height alone can inherit Profile defaults |
 | Slab | yes | yes | yes | hole count and polygon readback passed |
 | Single-plane Roof | yes | yes | yes | 20° specimen passed |
 | Multi-plane Roof | not proven by W1 | yes | yes | manual specimens read successfully; no per-edge Gable classification exposed |
@@ -203,4 +241,4 @@ For Morph, PolyLine, Spline and Hatch, creation + presence + detailed readback w
 - A returned GUID alone is not sufficient; exact-type presence and readback should be checked when supported.
 - Unsupported detail types must be treated explicitly as unsupported rather than silently accepted.
 - MultiPlane roof readback is insufficient for reconstructing per-edge gable semantics in stock Tapir 1.5.9.
-- Beam width/height semantics require a focused follow-up test before Safe BIM treats those inputs as trustworthy in all default/profile states.
+- For a rectangular Basic Beam, Safe BIM must not rely on `width` / `height` alone. It must explicitly select a trusted Building Material to force Basic structure, and should explicitly unlink width/height when asymmetric dimensions are required.
