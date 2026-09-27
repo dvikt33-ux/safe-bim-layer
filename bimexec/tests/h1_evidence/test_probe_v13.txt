@@ -1,0 +1,6 @@
+OK test_details_payload_and_response_key
+OK test_property_resolution_and_read
+OK test_property_write_shape
+OK test_blank_story_name_fails_closed
+OK test_no_fake_api_namespace_commands
+5/5 passed

@@ -1,0 +1,3 @@
+python 3.13.14 (main, Jul 14 2026, 04:45:36) [GCC 14.2.0]
+py_compile.compile(doraise=True), all 55 repository .py sources: PASS
+No source modules executed by compilation. Bytecode written outside repository.

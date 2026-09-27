@@ -8,6 +8,7 @@ sys.path.insert(0, HERE)
 
 import backends as base
 from backends_v13 import TapirBackendV13
+import ac29_contract as contract
 
 VER = "1.0"
 ADDON = "1.5.9"
@@ -74,19 +75,9 @@ def witness_composite(b):
 
 
 def payload(comp_guid):
-    return {"wallsData": [{
-        "begCoordinate": {"x": P0[0], "y": P0[1]},
-        "endCoordinate": {"x": P1[0], "y": P1[1]},
-        "floorIndex": FLOOR,
-        "zCoordinate": 0.0,
-        "height": HEIGHT,
-        "thickness": THICK,
-        "offset": OFFSET,
-        "arcAngle": ARC,
-        "referenceLineLocation": REFLINE,
-        "structureType": "Composite",
-        "compositeId": {"guid": comp_guid},
-    }]}
+    return contract.wall_payload(
+        P0, P1, floor_index=FLOOR, height=HEIGHT, thickness=THICK,
+        reference_line=REFLINE, structure_type="Composite", composite_id=comp_guid)
 
 
 def assert_scratch_free(b, guids):
@@ -128,21 +119,7 @@ def addon_once(b, name, params):
 
 
 def create_once(b, p):
-    res = addon_once(b, "CreateWalls", p)
-    d = base._to_dict(res)
-    items = base._as_list(d.get("elements") or res)
-    guids, errors = [], []
-    for item in items:
-        row = base._to_dict(item)
-        if row.get("error"):
-            errors.append(row["error"])
-        else:
-            g = base._guid(item)
-            if g:
-                guids.append(g)
-    if errors:
-        raise base.BackendError(f"CreateWalls errors: {errors}")
-    return guids
+    return contract.create_wall_once(b, p)
 
 
 def set_layer_once(b, guid):

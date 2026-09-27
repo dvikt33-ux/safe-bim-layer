@@ -1,0 +1,284 @@
+STOP at CREATE_DISPATCH: RuntimeError: simulated timeout after apply
+receipt: /tmp/tmprj4r0crf/receipt.json
+STOP: нужны оба write-флага одновременно
+AUDIT T2 VERIFY_SPEC_NOT_READY
+At least one post-join strict geometry check mismatched.
+This is an F-9 result, not permission to loosen tolerances automatically.
+Walls remain for manual inspection; markers were restored.
+report: /tmp/tmp66epyfs6/report.json
+STOP at CREATE_DISPATCH: RECT_TOP: RuntimeError: simulated timeout after apply
+receipt: /tmp/tmpfk92tptl/receipt.json
+STOP: live T2 requires explicit --origin-x and --origin-y from a prior dry-run
+STOP at WALL_GEOMETRY: checks={'type': True, 'story': True, 'ref_line': True, 'length': True, 'height': False, 'thickness': True, 'referenceLineLocation': True, 'offset': True, 'arcAngle': True}; obs={'type': 'Wall', 'element_id': 'W-T3-ORIGINAL', 'floor_index': 0, 'layer_index': 1, 'ref_line': {'from': [20.0, 20.0], 'to': [26.0, 20.0]}, 'length': 6.0, 'angle': 0.0, 'height': 4.0, 'story': {'name': 'Первый Этаж', 'elevation': 0.0}, 'layer': 'Default Layer', 'thickness': 0.3, '_extra': {'referenceLineLocation': 'CoreOutside', 'offset': 0.0, 'arcAngle': 0.0, 'structureType': 'Composite', 'compositeId': {'guid': 'COMP-T3-FAKE'}}}
+receipt: /tmp/tmptk4cmegd/receipt.json
+STOP at OPENING_VERIFY: checks={'type': True, 'floor': True, 'owner_binding': False, 'base_point': True, 'width': True, 'height': True}; obs={'type': 'Opening', 'floor_index': 0, 'owner_guid': 'FOREIGN-WALL', 'base_point': {'x': 22.5, 'y': 20.0, 'z': 1.0}, 'width': 1.0, 'height': 1.0, 'raw': {'type': 'Opening', 'id': 'O-T3', 'floorIndex': 0, 'layerIndex': 33, 'details': {'ownerElementId': {'guid': 'FOREIGN-WALL'}, 'basePoint': {'x': 22.5, 'y': 20.0, 'z': 1.0}, 'width': 1.0, 'height': 1.0}}}
+receipt: /tmp/tmp86h1oom8/receipt.json
+STOP: live T3 requires explicit --origin-x and --origin-y from prior dry-run
+STOP: source receipt is not the expected T4 PAUSED(OP_UNKNOWN) state
+STOP: live T4 requires explicit --origin-x and --origin-y from prior dry-run
+STOP: source receipt is not the expected T5 INTENT-without-OUTCOME state
+STOP: controller does not prove the intended hard-kill boundary
+STOP: live T5 requires explicit --origin-x and --origin-y from prior dry-run
+
+=== tests.test_p0
+  PASS  validation_rejects_empty_verify
+  PASS  validation_rejects_narrowed_floor
+  PASS  validation_rejects_verify_contradicting_params
+  PASS  validation_rejects_unsupported_check
+  PASS  validation_rejects_forward_dependency
+  PASS  validation_rejects_freeform_fields
+  PASS  validation_rejects_non_production_safe_op
+  PASS  happy_path_single_wall
+  PASS  journal_is_complete_and_monotonic
+  PASS  write_gate_off_refuses_execution
+  PASS  create_applied_but_timeout_then_recovery
+  PASS  marker_write_unknown_is_own_failure_mode
+  PASS  marker_silent_noop_is_detected
+  PASS  readback_broken_after_marker_halts
+  PASS  single_independent_path_downgrades_to_inconclusive
+  PASS  create_returns_wrong_guid_does_not_tag_foreign_element
+  PASS  duplicate_from_previous_run_is_ambiguous
+  PASS  wrong_geometry_fails_verification
+  PASS  repeated_delivery_does_not_redispatch
+  PASS  host_geometry_drift_is_caught_before_dependent_op
+  PASS  halt_inside_package_protects_dependents
+  PASS  binding_mismatch_halts
+  PASS  untitled_project_is_refused
+  PASS  teamproject_is_refused
+  PASS  illegal_transition_raises
+  PASS  unresolved_operation_blocks_further_mutation
+  PASS  single_flight_refuses_second_mutation
+  PASS  process_singleton_refuses_second_instance
+  PASS  journal_survives_torn_record
+  PASS  no_automatic_retry_after_unknown
+  PASS  ensure_path_adopts_without_mutation
+
+=== tests.test_probe
+  PASS  readonly_probe_certifies_nothing
+  PASS  write_probe_certifies_full_binding
+  PASS  negative_control_marker_search_returns_zero
+  PASS  negative_control_verify_discriminates
+  PASS  broken_details_is_reported_as_unknown
+  PASS  no_prefix_search_falls_back_to_empty_scope
+  PASS  no_marker_search_at_all_is_not_certified
+  PASS  first_working_medium_wins_and_is_not_overwritten
+  PASS  falls_back_to_second_medium
+  PASS  untitled_project_is_not_certified
+  PASS  teamproject_is_not_certified
+  PASS  executor_refuses_uncertified_capability
+  PASS  executor_accepts_certified_capability
+  PASS  empty_scope_fallback_blocks_foreign_element
+
+=== tests.test_t2_probe
+T2 MACHINE GO
+created wall GUID : T2-NEW-WALL
+count delta       : {'Wall': 1}
+layer round-trip  : OK
+marker round-trip : OK + restored
+negative control  : wrong height rejected
+FINAL_SWEEP       : 0 T2 markers
+MANUAL VISUAL CHECK REQUIRED
+DO NOT delete/undo the wall yet.
+receipt: /tmp/tmpkf4xl55k/receipt.json
+report : /tmp/tmpkf4xl55k/report.json
+  PASS  t2_happy_path_is_single_attempt_and_machine_go
+  PASS  t2_create_applied_then_exception_is_unknown_and_never_retried
+  PASS  t2_one_write_flag_refuses_before_any_backend_or_receipt
+
+=== tests.test_t2_connections
+AUDIT T2 CONNECTIONS MACHINE GO
+created walls     : 6
+count delta       : {'Wall': 6}
+strict geometry   : 6/6 OK after joins
+negative control  : wrong height rejected
+FINAL_SWEEP       : 0 T2C markers
+MANUAL VISUAL CHECK REQUIRED
+DO NOT delete/undo the walls yet.
+receipt: /tmp/tmps4ldhr2e/receipt.json
+report : /tmp/tmps4ldhr2e/report.json
+  PASS  audit_t2_happy_path_six_single_dispatches
+  PASS  audit_t2_post_join_mismatch_is_f9_not_unknown_and_restores_markers
+  PASS  audit_t2_timeout_on_third_create_is_unknown_and_never_retries
+  PASS  audit_t2_live_write_requires_explicit_origin
+
+=== tests.test_t3_dependency
+AUDIT T3 DEPENDENCY MACHINE GO
+package order      : PKG01_STORIES -> PKG02_WALL -> PKG04_OPENING
+host wall GUID     : T3-HOST-WALL
+opening GUID       : T3-OPENING
+opening owner GUID : T3-HOST-WALL
+wall delta         : 1
+opening delta      : 1
+DEPENDENCY GATE    : OK
+OWNER BINDING      : OK
+MANUAL VISUAL CHECK REQUIRED
+DO NOT delete/undo T3 artifacts yet.
+receipt: /tmp/tmpkm1c1b7h/receipt.json
+report : /tmp/tmpkm1c1b7h/report.json
+  PASS  audit_t3_happy_path_enforces_package_order_and_owner_binding
+  PASS  audit_t3_bad_wall_halts_before_opening_dispatch
+  PASS  audit_t3_wrong_opening_owner_is_verify_failed_not_success
+  PASS  audit_t3_live_requires_explicit_origin_before_backend
+
+=== tests.test_t3_reconcile
+  PASS  audit_t3_reconcile_adopts_existing_binding_readonly
+  PASS  audit_t3_reconcile_rejects_wrong_or_ambiguous_relation
+  PASS  audit_t3_reconcile_only_accepts_specific_fail_closed_receipt
+
+=== tests.test_t4_timeout
+AUDIT T4 INJECTED TIMEOUT AFTER APPLY
+JOB STATE          : PAUSED
+PAUSE REASON       : OP_UNKNOWN
+OP STATE           : UNKNOWN
+DISPATCH ATTEMPTS  : 1
+AUTO RETRY         : FORBIDDEN
+POST-FAULT READBACK: 0
+NEXT               : separate read-only reconcile process
+receipt            : /tmp/tmpsai414hs/receipt.json
+  PASS  audit_t4_timeout_after_apply_pauses_unknown_once_no_retry
+AUDIT T4 READ-ONLY RECONCILE
+SOURCE STATE        : PAUSED(OP_UNKNOWN)
+DISPATCH ATTEMPTS   : 1
+FRESH WALLS         : ['T3-HOST-WALL']
+WALL COUNT DELTA    : 1
+CLASSIFICATION      : APPLIED_ADOPTABLE_BY_ANCHOR
+CANDIDATE GUID      : T3-HOST-WALL
+HUMAN DECISION OFFER: ADOPT
+AUTO RETRY          : FORBIDDEN
+AUTO ADOPT          : NOT PERFORMED
+MUTATIONS           : 0
+report              : /tmp/tmp92sg0dka/report.json
+  PASS  audit_t4_reconcile_offers_adopt_for_one_unique_anchor_readonly
+AUDIT T4 READ-ONLY RECONCILE
+SOURCE STATE        : PAUSED(OP_UNKNOWN)
+DISPATCH ATTEMPTS   : 1
+FRESH WALLS         : ['T3-HOST-WALL', 'T4-SECOND-FRESH-WALL']
+WALL COUNT DELTA    : 2
+CLASSIFICATION      : AMBIGUOUS
+CANDIDATE GUID      : None
+HUMAN DECISION OFFER: QUARANTINE_OR_MANUAL_REVIEW
+AUTO RETRY          : FORBIDDEN
+AUTO ADOPT          : NOT PERFORMED
+MUTATIONS           : 0
+report              : /tmp/tmpqwjynlh5/report.json
+  PASS  audit_t4_reconcile_rejects_ambiguous_two_new_walls
+AUDIT T4 READ-ONLY RECONCILE
+SOURCE STATE        : PAUSED(OP_UNKNOWN)
+DISPATCH ATTEMPTS   : 1
+FRESH WALLS         : []
+WALL COUNT DELTA    : 0
+CLASSIFICATION      : NOT_APPLIED
+CANDIDATE GUID      : None
+HUMAN DECISION OFFER: NOT_APPLIED
+AUTO RETRY          : FORBIDDEN
+AUTO ADOPT          : NOT PERFORMED
+MUTATIONS           : 0
+report              : /tmp/tmpe6bofppy/report.json
+  PASS  audit_t4_reconcile_reports_not_applied_without_candidate
+  PASS  audit_t4_reconcile_refuses_non_unknown_source_before_backend
+  PASS  audit_t4_live_requires_explicit_origin_before_backend
+
+=== tests.test_t5_kill
+  PASS  audit_t5_worker_leaves_durable_intent_without_outcome_at_killpoint
+AUDIT T5 RESTART / READ-ONLY RECONCILE
+DURABLE SOURCE       : RUNNING/DISPATCHED, no outcome
+RECOVERED STATE      : PAUSED(OP_UNKNOWN)
+DISPATCH ATTEMPTS    : 1
+FRESH WALLS          : ['T3-HOST-WALL']
+WALL COUNT DELTA     : 1
+CLASSIFICATION       : APPLIED_ADOPTABLE_BY_ANCHOR
+CANDIDATE GUID       : T3-HOST-WALL
+HUMAN DECISION OFFER : ADOPT
+AUTO RETRY           : FORBIDDEN
+AUTO ADOPT           : NOT PERFORMED
+MUTATIONS            : 0
+report               : /tmp/tmpcwangts0/report.json
+  PASS  audit_t5_restart_infers_unknown_and_offers_adopt_for_unique_anchor
+AUDIT T5 RESTART / READ-ONLY RECONCILE
+DURABLE SOURCE       : RUNNING/DISPATCHED, no outcome
+RECOVERED STATE      : PAUSED(OP_UNKNOWN)
+DISPATCH ATTEMPTS    : 1
+FRESH WALLS          : ['T3-HOST-WALL', 'T5-SECOND-FRESH-WALL']
+WALL COUNT DELTA     : 2
+CLASSIFICATION       : AMBIGUOUS
+CANDIDATE GUID       : None
+HUMAN DECISION OFFER : QUARANTINE_OR_MANUAL_REVIEW
+AUTO RETRY           : FORBIDDEN
+AUTO ADOPT           : NOT PERFORMED
+MUTATIONS            : 0
+report               : /tmp/tmpakmn8ai6/report.json
+  PASS  audit_t5_restart_rejects_ambiguous_two_new_walls
+AUDIT T5 RESTART / READ-ONLY RECONCILE
+DURABLE SOURCE       : RUNNING/DISPATCHED, no outcome
+RECOVERED STATE      : PAUSED(OP_UNKNOWN)
+DISPATCH ATTEMPTS    : 1
+FRESH WALLS          : []
+WALL COUNT DELTA     : 0
+CLASSIFICATION       : NOT_APPLIED
+CANDIDATE GUID       : None
+HUMAN DECISION OFFER : NOT_APPLIED
+AUTO RETRY           : FORBIDDEN
+AUTO ADOPT           : NOT PERFORMED
+MUTATIONS            : 0
+report               : /tmp/tmpoi409gv1/report.json
+  PASS  audit_t5_restart_reports_not_applied_without_candidate
+  PASS  audit_t5_restart_refuses_invalid_crash_evidence_before_backend
+  PASS  audit_t5_restart_refuses_unproven_kill_boundary_before_backend
+  PASS  audit_t5_live_requires_explicit_origin_before_backend
+
+=== tests.test_t6
+  PASS  test_cli_backend_builder_is_v13
+  PASS  unchanged_geometry_does_not_false_positive_model_drift
+  PASS  moved_geometry_pauses_before_dependent_dispatch
+  PASS  project_guid_and_baseline_errors_fail_closed
+  PASS  baseline_evidence_is_never_overwritten
+
+=== tests.test_t7
+  PASS  unavailable_after_known_apply_pauses_and_blocks_dependents
+  PASS  unavailable_does_not_automatically_retry
+  PASS  ordinary_geometry_mismatch_is_verify_failed
+  PASS  pre_dispatch_and_backend_failures_are_not_unavailable
+  PASS  evidence_is_durable_and_not_overwritten
+
+=== tests.test_t8
+  PASS  triple_same_submit_has_one_dispatch_and_current_status
+  PASS  completed_duplicate_returns_completed_without_redispatch
+  PASS  paused_duplicate_returns_paused_and_original_reason
+  PASS  changed_plan_for_same_job_is_rejected_before_mutation
+  PASS  restart_duplicate_submit_never_redispatches
+  PASS  evidence_is_durable_and_not_overwritten
+
+=== tests.test_t9
+  PASS  correct_spec_passes_with_production_evaluate
+  PASS  wrong_height_fails_with_production_evaluate
+  PASS  wrong_ref_line_fails_with_production_evaluate
+  PASS  failed_negative_control_is_not_unavailable_or_inconclusive
+  PASS  evidence_is_durable_and_not_overwritten
+
+=== tests.test_h1_contract
+  PASS  h1_runtime_and_t1_t2_share_frozen_live_wall_schema
+  PASS  h1_all_six_t2_segments_use_same_complete_schema
+  PASS  h1_tapir_read_attribution_and_live_details_normalization
+  PASS  h1_optional_product_info_is_not_project_discovery
+  PASS  h1_only_explicit_empty_count_is_zero
+  PASS  h1_count_transport_failure_raises_not_zero
+  PASS  h1_count_malformed_error_rows_and_empty_guids_raise
+  PASS  h1_failed_list_is_not_empty_or_negative_marker_search
+  PASS  h1_details_transport_failure_is_typed_unavailable
+  PASS  h1_details_empty_error_unsupported_and_partial_are_not_absence
+  PASS  h1_unavailable_properties_do_not_become_negative_scan
+  PASS  h1_story_resolves_real_index_not_array_position_or_default_zero
+  PASS  h1_unresolved_wrong_elevation_or_index_only_story_refuses_dispatch
+  PASS  h1_missing_duplicate_or_ambiguous_story_mapping_refuses_dispatch
+  PASS  h1_story_read_failure_and_contradictory_explicit_index_refuse_dispatch
+  PASS  h1_wrong_project_untitled_teamwork_and_unknown_flags_refuse_all_writes
+  PASS  h1_unconfigured_project_or_wrong_addon_cannot_write
+  PASS  h1_no_defaults_for_composite_reference_line_or_new_wall_semantics
+  PASS  h1_adapter_forwards_only_explicit_fields_no_story_index_default
+  PASS  h1_failed_write_response_is_typed_unknown_and_never_retried
+  PASS  h1_read_inventory_does_not_probe_by_writing
+  PASS  h1_t0_mutation_denylist_not_widened
+  PASS  h1_executor_count_or_details_failed_precheck_never_dispatches
+  PASS  h1_executor_project_drift_precheck_never_dispatches
+
+OK: 0 failure(s)

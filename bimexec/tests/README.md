@@ -43,3 +43,22 @@ python bimexec/probes/probe_t0a.py --out cm.json --backend-module bimexec/tests/
   the live T0A run is for.
 - They do not cover the production Router, which is out of this repository
   until T0A/T0B certification is complete.
+
+## H1 — AC29/Tapir adapter parity (offline only)
+
+`test_h1_contract.py`: 24 contract regressions, socket creation blocked. Golden
+payload is fixed from the c55f404 T1/T2 recipe; the command-spy backend never
+connects to Archicad. This suite is also registered by `test_all.py`: 93 existing
++ 24 H1 = 117 tests. No production capability is promoted.
+
+```bash
+python3 bimexec/tests/test_all.py
+python3 bimexec/tests/test_h1_contract.py
+python3 bimexec/tests/test_probe_v13.py
+```
+
+See [H1 scope and deferred B2–B7](../docs/H1_ADAPTER_PARITY.md). Historical
+`results/` evidence is not rewritten by these regressions.
+
+H1 offline execution logs and exact Python-source hashes: `h1_evidence/`.
+They are new H1 artifacts, not replacements for T0–T9 live evidence.

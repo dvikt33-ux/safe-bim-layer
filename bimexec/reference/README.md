@@ -1,3 +1,8 @@
+> **H1 / runtime-hardening-v1:** adapter parity only; production mutations remain blocked.
+> Старые команды write-probe ниже не являются разрешением на live-run. TapirRaw теперь
+> требует explicit expected_project и узкий Composite/CoreOutside recipe; старый
+> generic runner не подставляет их автоматически и должен отказать до записи.
+
 # BIMEXEC v1 — рабочий скелет P0
 
 > **ГРАНИЦА СРЕД (важно).** Этот каталог — среда Arena (Linux), а НЕ
@@ -144,7 +149,7 @@ python3 tools/test_all.py                           # 45 тестов
 
 **Деградация вместо «ок»:** если адаптер не умеет префиксный поиск, probe сообщает `duplicate_detection = EMPTY_SCOPE_FALLBACK`, и исполнитель переключается на предусловие «чистая область» на входе в пакет (`_assert_scope_clean`): в области (тип, этаж, слой) не должно быть элементов, не привязанных к этому job.
 
-**Мост `ExecutorAdapter`.** Один raw-адаптер реализует протокол `probe.RawArchicad`; `ExecutorAdapter` адаптирует его к протоколу исполнителя. Две разные обёртки над одним Archicad = две разные правды о его возможностях. См. `bimexec/tapir_raw.py` — таблица `COMMAND_NAMES` единственное место, где править имена команд под вашу сборку, схемы `CreateWalls` помечены как TEMPLATE.
+**Мост `ExecutorAdapter`.** Один raw-адаптер реализует протокол `probe.RawArchicad`; `ExecutorAdapter` адаптирует его к протоколу исполнителя. Две разные обёртки над одним Archicad = две разные правды о его возможностях. H1: `bimexec/tapir_raw.py` использует проверенный v1.3 backend из `../probes/`; payload/dispatch/read-back стены общие с live-probes (`../probes/ac29_contract.py`). Отдельной TEMPLATE-схемы больше нет. Требуется полный layout репозитория. Контракт, ограничения и offline-проверки: [H1_ADAPTER_PARITY.md](../docs/H1_ADAPTER_PARITY.md).
 
 ### Известные честные дырки
 

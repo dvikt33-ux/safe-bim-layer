@@ -1,0 +1,99 @@
+=== selftest: T0 probes (offline, no Archicad)
+
+-- t0a_shape
+  PASS  T0A: exit 0
+  PASS  T0A: probe marker
+  PASS  T0A: executed is not a go decision
+  PASS  T0A: create_wall.production_safe == false
+  PASS  T0A: create_wall not implemented here
+  PASS  T0A: every capability has backend attribution
+  PASS  T0A: no capability silently drops 'supported'
+  PASS  T0A: tri-state honoured (null stays null, never coerced to true)
+  PASS  T0A: list_guids certified
+  PASS  T0A: wall_geometry_endpoints certified
+  PASS  T0A: tapir_native_prefix_search reported NOT FOUND
+  PASS  T0A: duplicate_detection == SCAN_PREFIX
+  PASS  T0A: raw GetDetailsOfElements dump preserved
+  PASS  T0A: t0b_candidates offered
+  PASS  T0A: read commands verified by real calls
+
+-- t0a_fail_closed
+  PASS  T0A: no backend => exit 2 (fail closed)
+
+-- t0b_default_is_readonly
+  PASS  T0B: default run exits 0 (PRECHECK only)
+  PASS  T0B: default run status is DRY_RUN_OK
+  PASS  T0B: default run wrote no stage after PRECHECK
+
+-- t0b_two_keys
+  PASS  T0B: single key --allow-write => exit 1, no write
+  PASS  T0B: single key --allow-write never reaches WRITTEN
+  PASS  T0B: single key --i-understand-this-writes-to-archicad => exit 1, no write
+  PASS  T0B: single key --i-understand-this-writes-to-archicad never reaches WRITTEN
+
+-- t0b_roundtrip_restores
+  backend tapir    OK   fake tapir-shape model
+  backend tapir    down BackendError: package 'archicad' is not installed
+  backend mcp      down initialize failed: 2025-06-18: URLError: <urlopen error [Errno 111] Connection refused> | 2025-03-26: URLError: <urlopen error [Errno 111] Connection refused> | 2024-11-05: URLError: <urlopen error [Errno 111] Connection refused>
+  element G-0001: type=Wall story=None layer=None
+  carrier property     readable, current=None
+
+--- carrier property (user:BIMEXEC/BIMEXEC_MARKER)
+  OK: round-trip + restore доказаны
+
+T0B GO. Проверенные носители: ['property']
+Рекомендуемый носитель: property
+report: p.json
+  PASS  T0B: both keys => exit 0
+  PASS  T0B: read-back proved the write
+  PASS  T0B: exact search found exactly one element
+  PASS  T0B: prefix search found exactly one element
+  PASS  T0B: restore verified
+  PASS  T0B: original value restored in the model (no BX:PROBE: left)
+  PASS  T0B: recommended carrier is property
+
+-- t0b_silent_noop
+  PASS  T0B: silent no-op => exit 1
+  PASS  T0B: silent no-op stops at READ_BACK
+  PASS  T0B: silent no-op status is UNKNOWN (not success)
+  PASS  T0B: receipt carries the value to clean up manually
+
+-- t0b_leftover
+  PASS  T0B: leftover BX:PROBE: => exit 1
+  PASS  T0B: leftover stops at PRECHECK
+
+-- forbidden_commands
+  PASS  guard: CreateWalls rejected
+  PASS  guard: DeleteElements rejected
+  PASS  guard: SetSelection rejected
+  PASS  guard: CreateWalls is in FORBIDDEN_COMMANDS
+  PASS  probes: probe_t0a.py never passes CreateWalls as a command
+  PASS  probes: probe_t0b.py never passes CreateWalls as a command
+
+-- ac29_official_api_shape
+  PASS  AC29: backend available without official GetProjectInfo
+  PASS  AC29: availability reason mentions Tapir GetProjectInfo
+  PASS  AC29: project_path from Tapir GetProjectInfo
+  PASS  AC29: project_name from Tapir GetProjectInfo
+  PASS  AC29: is_untitled / is_teamwork from Tapir
+  PASS  AC29: version/build from official GetProductInfo
+  PASS  AC29: stories parsed (index/name/level)
+  PASS  AC29: level maps to elevation
+  PASS  AC29: no official GetProjectInfo call was made
+
+-- t0a_rejects_empty_guid
+  PASS  T0A: empty GUIDs => elements_by_type is not certified
+  PASS  T0A: elements_by_type explains the dropped records
+  PASS  T0A: walls do not enter t0b_candidates
+
+-- t0a_custom_property_verdicts
+  PASS  T0A: empty values + resolvable property => supported
+  PASS  T0A: evidence kind recorded
+  PASS  T0A: unresolvable property => not supported
+  PASS  T0A: hint to create the property once is present
+  PASS  T0A: property carrier not reported as readable
+  PASS  T0A: empty values alone never certify the carrier
+  PASS  T0A: empty values + unresolvable property => not supported
+  PASS  T0A: property carrier not reported as readable (silent variant)
+
+OK: 0 failure(s), 62 check(s) passed

@@ -1,8 +1,10 @@
 """
 BIMEXEC probe compatibility layer v1.3 for Archicad 29 + Tapir 1.5.9.
 
-This module intentionally leaves the v1.2 safety envelope intact and overrides only
-the live API-shape mismatches proven by the 2026-09-26 T0A run:
+Uses the live API shapes proven by the 2026-09-26 T0A run. H1 additionally
+makes malformed/error reads fail closed via the shared ac29_contract helper;
+the historical v1.3 implementation remains at c55f404. T0's write denylist
+is unchanged. API shapes:
 - GetDetailsOfElements requires ElementIdArrayItem -> elementId.guid.
 - Official Archicad utilities resolve built-in/user-defined properties.
 - Property reads use the official GetPropertyValuesDictionary helper.
@@ -15,6 +17,7 @@ import uuid
 from typing import Any
 
 import backends as base
+import ac29_contract as contract
 
 PROBE_VERSION = "1.3"
 
@@ -34,24 +37,56 @@ TAPIR_READ_COMMANDS_V13 = [
 class TapirBackendV13(base.TapirBackend):
     """AC29/Tapir 1.5.9 compatibility fixes without widening write scope."""
 
-    def stories(self) -> list[dict[str, Any]]:
-        out = super().stories()
-        for story in out:
-            name = story.get("name")
-            if not isinstance(name, str) or not name.strip():
-                story["name"] = None
-        return out
+    @contract.backend_boundary
+    def project_info(self) -> dict[str, Any]:
+        # Same live Tapir command, but absent flags must not become false.
+        d = base._to_dict(self._tapir("GetProjectInfo")())
+        if (d.get("error") or not isinstance(d.get("projectName"), str)
+                or not d.get("projectName")
+                or type(d.get("isUntitled")) is not bool
+                or type(d.get("isTeamwork")) is not bool):
+            raise base.BackendError("GetProjectInfo: incomplete identity")
+        path = d.get("projectPath") or d.get("projectLocation")
+        if not d["isUntitled"] and (not isinstance(path, str) or not path):
+            raise base.BackendError("GetProjectInfo: saved project path unavailable")
+        return {
+            "project_path": path, "project_name": d["projectName"],
+            "is_untitled": d["isUntitled"], "is_teamwork": d["isTeamwork"],
+            "archicad_version": self._product_info("version", "archicadVersion"),
+            "archicad_build": self._product_info("build", "buildNumber"),
+            "port": self.port, "instance_hint": f"port={self.port}",
+        }
 
-    def details_raw(self, guid: str) -> dict[str, Any] | None:
+    @contract.backend_boundary
+    def stories(self) -> list[dict[str, Any]]:
+        # No enumeration-position fallback for a missing index.
+        return contract.story_map(self._tapir("GetStories")())
+
+    @contract.backend_boundary
+    def all_elements(self) -> list[str]:
+        return contract.element_guids(self._official("GetAllElements")(), "GetAllElements")
+
+    @contract.backend_boundary
+    def elements_by_type(self, element_type: str) -> list[str]:
+        return contract.element_guids(
+            self._tapir("GetElementsByType")({"elementType": element_type}),
+            "GetElementsByType")
+
+    @contract.backend_boundary
+    def count_by_type(self) -> dict[str, int]:
+        # An explicit empty list is 0. Errors are never 0 (nor partial counts).
+        return {kind: len(self.elements_by_type(kind)) for kind in self.types}
+
+    @contract.backend_boundary
+    def details_raw(self, guid: str) -> dict[str, Any]:
         payload = {"elements": [{"elementId": {"guid": guid}}]}
         res = self._tapir("GetDetailsOfElements")(payload)
-        d = base._to_dict(res)
-        items = base._as_list(d.get("detailsOfElements") or d.get("details") or res)
-        if not items:
-            return None
+        items = contract.rows(res, "detailsOfElements", "GetDetailsOfElements")
+        if len(items) != 1:
+            raise base.BackendError("GetDetailsOfElements: expected exactly one result")
         first = base._to_dict(items[0])
-        if first.get("error"):
-            raise base.BackendError(f"GetDetailsOfElements({guid}): {first['error']}")
+        if first.get("error") or not first.get("type") or not isinstance(first.get("details"), dict):
+            raise base.BackendError(f"GetDetailsOfElements({guid}): unavailable details: {first!r}")
         return first
 
     def resolve_property_id(self, ref: dict[str, Any]) -> Any:
@@ -89,6 +124,7 @@ class TapirBackendV13(base.TapirBackend):
         self._connect()
         return self.conn.types.ElementId(uuid.UUID(str(guid)))
 
+    @contract.backend_boundary
     def get_property_values(
         self, ref: dict[str, Any], guids: list[str]
     ) -> dict[str, Any | None]:
@@ -106,7 +142,8 @@ class TapirBackendV13(base.TapirBackend):
         out: dict[str, Any | None] = {}
         for guid, element_id in zip(guids, element_ids):
             row = values.get(element_id, {}) if isinstance(values, dict) else {}
-            value = None
+            missing = object()
+            value = missing
             if isinstance(row, dict):
                 if pid in row:
                     value = row[pid]
@@ -114,16 +151,19 @@ class TapirBackendV13(base.TapirBackend):
                     # Defensive fallback for fake/test mappings whose PropertyId key
                     # is equivalent but not object-identical.
                     for key, candidate in row.items():
-                        if base._to_dict(key) == base._to_dict(pid):
+                        expected_key = base._to_dict(pid)
+                        if expected_key and base._to_dict(key) == expected_key:
                             value = candidate
                             break
+            if value is missing:
+                raise base.BackendError(f"property read missing row/value for {guid}")
             out[guid] = value
         return out
 
     def set_property_value(
         self, guid: str, ref: dict[str, Any], value: str
     ) -> None:
-        """T0B only: one official property write attempt, no retry."""
+        """One official property write attempt, no retry; caller owns the write gate."""
         self._connect()
         pid = self.resolve_property_id(ref)
         act = self.conn.types

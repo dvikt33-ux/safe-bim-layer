@@ -37,6 +37,7 @@ sys.path.insert(0, HERE)
 
 import backends as base
 from backends_v13 import TapirBackendV13
+import ac29_contract as contract
 
 VER = "1.0"
 ADDON = "1.5.9"
@@ -127,20 +128,10 @@ def abs_segments(origin: tuple[float, float]) -> list[dict[str, Any]]:
 
 
 def wall_payload(seg: dict[str, Any], comp_guid: str) -> dict[str, Any]:
-    a, z = seg["from_abs"], seg["to_abs"]
-    return {"wallsData": [{
-        "begCoordinate": {"x": a[0], "y": a[1]},
-        "endCoordinate": {"x": z[0], "y": z[1]},
-        "floorIndex": FLOOR,
-        "zCoordinate": 0.0,
-        "height": HEIGHT,
-        "thickness": THICK,
-        "offset": OFFSET,
-        "arcAngle": ARC,
-        "referenceLineLocation": REFLINE,
-        "structureType": "Composite",
-        "compositeId": {"guid": comp_guid},
-    }]}
+    return contract.wall_payload(
+        seg["from_abs"], seg["to_abs"], floor_index=FLOOR,
+        height=HEIGHT, thickness=THICK, reference_line=REFLINE,
+        structure_type="Composite", composite_id=comp_guid)
 
 
 def addon_once(b: TapirBackendV13, name: str, params: dict[str, Any]) -> Any:
@@ -151,21 +142,7 @@ def addon_once(b: TapirBackendV13, name: str, params: dict[str, Any]) -> Any:
 
 
 def create_once(b: TapirBackendV13, payload: dict[str, Any]) -> list[str]:
-    res = addon_once(b, "CreateWalls", payload)
-    d = base._to_dict(res)
-    items = base._as_list(d.get("elements") or res)
-    guids, errors = [], []
-    for item in items:
-        row = base._to_dict(item)
-        if row.get("error"):
-            errors.append(row["error"])
-            continue
-        g = base._guid(item)
-        if g:
-            guids.append(g)
-    if errors:
-        raise base.BackendError(f"CreateWalls errors: {errors}")
-    return guids
+    return contract.create_wall_once(b, payload)
 
 
 def set_layer_once(b: TapirBackendV13, guid: str) -> None:
@@ -266,30 +243,7 @@ def project_recheck(b: TapirBackendV13, expect_project: str) -> tuple[dict[str, 
 
 
 def observe(b: TapirBackendV13, guid: str, stories: list[dict[str, Any]]) -> dict[str, Any]:
-    raw = b.details_raw(guid) or {}
-    norm = b.details(guid) or {}
-    det = raw.get("details") if isinstance(raw.get("details"), dict) else {}
-    out = {k: v for k, v in norm.items() if v is not None}
-    out["type"] = norm.get("type") or raw.get("type")
-    out["floor_index"] = raw.get("floorIndex")
-    st = story_at(stories, int(raw["floorIndex"])) if raw.get("floorIndex") is not None else None
-    if st:
-        out["story"] = {"name": st.get("name"), "elevation": st.get("elevation")}
-    out["layer_index"] = raw.get("layerIndex")
-    out["layer"] = read1(b, LAYER_REF, guid)
-    if det.get("height") is not None:
-        out["height"] = float(det["height"])
-    bt, et = det.get("begThickness"), det.get("endThickness")
-    if bt is not None and et is not None and close(bt, et, 1e-9):
-        out["thickness"] = float(bt)
-    out["_extra"] = {
-        "referenceLineLocation": det.get("referenceLineLocation"),
-        "offset": det.get("offset"),
-        "arcAngle": det.get("arcAngle"),
-        "structureType": det.get("structureType"),
-        "compositeId": base._to_dict(det.get("compositeId")),
-    }
-    return out
+    return contract.observe_wall(b, guid, stories)
 
 
 def refline_matches(obs: dict[str, Any], seg: dict[str, Any], tol: float = 0.01) -> bool:

@@ -456,16 +456,12 @@ class ExecutorAdapter:
     # -- mutation
 
     def create_wall(self, op: dict[str, Any]) -> "CreateResult":
-        guid = self.raw.create_wall(
-            {
-                "story": op["story"],
-                "layer": op.get("layer"),
-                "from": list(op["from"]),
-                "to": list(op["to"]),
-                "height": float(op["height"]),
-                "thickness": float(op["thickness"]),
-                "reference_line": op.get("reference_line", "center"),
-                "story_index": op.get("story_index", 0),
-            }
+        # Preserve explicit recipe fields. Story resolution belongs to the raw
+        # AC29 contract; never inject story_index=0 or reference_line="center".
+        fields = (
+            "story", "layer", "from", "to", "height", "thickness",
+            "reference_line", "structure_type", "composite_id", "story_index",
+            "base_level", "top_link", "offset", "arc_angle",
         )
+        guid = self.raw.create_wall({key: op[key] for key in fields if key in op})
         return CreateResult("ok", guid, {"guid": guid})

@@ -1,0 +1,122 @@
+{
+  "phase": "H1 only",
+  "branch": "arena/runtime-hardening-v1",
+  "base_sha": "c55f404829e4e11004ea5c59c8b3aec18b663866",
+  "date": "2026-09-27",
+  "mode": "offline command spies/fakes; no live Archicad or production Router",
+  "python_version": "3.13.14 (main, Jul 14 2026, 04:45:36) [GCC 14.2.0]",
+  "production_permission_granted": false,
+  "run_results": [
+    {
+      "command": "python3 bimexec/tests/test_all.py",
+      "exit_code": 0,
+      "output": "test_all.txt"
+    },
+    {
+      "command": "python3 bimexec/tests/test_h1_contract.py",
+      "exit_code": 0,
+      "output": "test_h1_contract.txt"
+    },
+    {
+      "command": "python3 bimexec/tests/test_probe_v13.py",
+      "exit_code": 0,
+      "output": "test_probe_v13.txt"
+    },
+    {
+      "command": "python3 bimexec/tests/selftest_probes.py",
+      "exit_code": 0,
+      "output": "selftest_probes.txt"
+    },
+    {
+      "command": "py_compile.compile(doraise=True) for every repository .py file",
+      "exit_code": 0,
+      "files": 55,
+      "output": "py_compile.txt"
+    }
+  ],
+  "test_counts": {
+    "test_all": 117,
+    "existing_in_test_all": 93,
+    "H1_in_test_all": 24,
+    "H1_standalone": 24,
+    "probe_v13": 5,
+    "selftest_probes": 62
+  },
+  "protected_paths_unchanged_from_base": [
+    "bimexec/results",
+    "bimexec/specs",
+    "bimexec/examples",
+    "bimexec/reference/bimexec/executor.py",
+    "bimexec/reference/bimexec/verify.py",
+    "bimexec/reference/bimexec/binding.py",
+    "bimexec/reference/bimexec/journal.py",
+    "bimexec/reference/bimexec/states.py",
+    "bimexec/reference/bimexec/lock.py",
+    "safe_bim_layer.py",
+    "qwen_safe_bim_integration.py"
+  ],
+  "source_sha256": {
+    "bimexec/probes/ac29_contract.py": "6f5af08b13a5d063e1678171d2a2d9948d0c593be9288d86adfec45690a47c71",
+    "bimexec/probes/backends.py": "348cea887a074e3e898ca893a1013b0460ad399daa500bf9b04ea55a64889bb6",
+    "bimexec/probes/backends_v13.py": "12e0cc079a5b2a4f28c402fccda348c409d45606076992af805050d41f98d037",
+    "bimexec/probes/probe_t0a.py": "985d9d40166511d75df30a849af74ebd241628910e4753c0afe9596151bb3481",
+    "bimexec/probes/probe_t0a_v13.py": "a933447f911ec92d44583c35881f7543968ed787f25ab6b5fa30bc8657236cdf",
+    "bimexec/probes/probe_t0b.py": "1e4f52981fdb7322b30b2d2dc1228835bf9e37542f62d461e49c351f9c5a638f",
+    "bimexec/probes/probe_t0b_v13.py": "2fd94a61e7be5897dcc7ad55e79e7a49c770d75b1a6bec853fa6e8b339961cf2",
+    "bimexec/probes/probe_t2_connections_v13.py": "eaf6404ffb65090a870a9c61ca21b0f9a0ee3f435917c9c3a38bb6cf030cac30",
+    "bimexec/probes/probe_t2_live_v13.py": "862fc9978320ef396b0b612ef0d2c32f41dd454b08dc3e2fa7f4a1c9dbf6ab6d",
+    "bimexec/probes/probe_t3_dependency_v13.py": "60956e5708e34e8f842418f0f8ba73c225026c34c3f9401eb0c11b2e50beb001",
+    "bimexec/probes/probe_t4_timeout_v13.py": "55fe5f71d129fd36f0bb038c1998932beb0bf10575bc33488d8a30b496ddbe1c",
+    "bimexec/probes/probe_t5_kill_v13.py": "67ca0aed3000761dbda848556a77bee51913db65501af083355ce09afc53865e",
+    "bimexec/probes/probe_t6.py": "e7ba6171031d34e1abbf70a8a25ae345b0d09626725c5ba12133251eb9bb8adf",
+    "bimexec/probes/probe_t7.py": "37082184220e0f21745da0e87272faf8d65bc15fa9238765df52af4d0755eb89",
+    "bimexec/probes/probe_t8.py": "73e3d5e2d0de7dce8475c2e57abd035f5024ab3c99180a4e0901b32a2d69091a",
+    "bimexec/probes/probe_t9.py": "123e00c2a7cc8440f86cec6225d3dae18f49ad8ad9840995dc6a4c26577ef054",
+    "bimexec/probes/reconcile_t3_dependency_v13.py": "b7b11b53b7124095ce43932610675e521b5ef749b20bed4457a37917a9e34e89",
+    "bimexec/probes/reconcile_t4_timeout_v13.py": "142d5c2700c0ffdc52f162aa63fc00b2a48700e60ab77d25613ce1bea22ccb68",
+    "bimexec/probes/reconcile_t5_kill_v13.py": "6f9115d4244301dded96d5f7c9b9df4cd7a7e4bbad4afcab4fcc2405550600c5",
+    "bimexec/reference/bimexec/__init__.py": "ff0109864dadf860a24d9e1e280eec67aa0e715c8bc22d3ed0d2d9bf870f5cda",
+    "bimexec/reference/bimexec/adapters.py": "3124293e6608304fd86b9b07cf2514466418910a8ee3487e2b4e2d51eec10770",
+    "bimexec/reference/bimexec/binding.py": "fc10be303e7f1bdac112e92908e23aad5c35d86598738870822f31be229ea712",
+    "bimexec/reference/bimexec/executor.py": "440abf8cf8e5eb813cb0be3d2d287612adea0c5be0fd9260eff91949857aa4a0",
+    "bimexec/reference/bimexec/journal.py": "4c98d554e7dfd99b2562951a92215aa9898126a49ec29a4ee4b456bb4ce627dd",
+    "bimexec/reference/bimexec/lock.py": "f6222b5961e9f4d87cecc07e9040e4a25e487e6b4ab358c4fd8edb57032297d8",
+    "bimexec/reference/bimexec/probe.py": "477ef16d7154e43004a2bf75ac7d28a7d06338f3278eaa934ae0ed4d9867f5ee",
+    "bimexec/reference/bimexec/states.py": "1d50a7cd879f7f8364575361bf23a489e7a17f472779efd0fcf1c7cbd5faf61f",
+    "bimexec/reference/bimexec/tapir_raw.py": "24c338ade83b030cc5e1bfa6a4d4471fcbc38da40e36f4cc203754524aded73c",
+    "bimexec/reference/bimexec/verify.py": "96d5036d2885935aeb02b7f71068fcd6435e921fd6c0b962f10e61a587dd80ce",
+    "bimexec/reference/tools/run_probe.py": "b8a4ec9237df10aec1e46b0d93702d01ee84abd405ca7849cd5e689104ce6d13",
+    "bimexec/tests/fakes/fake_backend.py": "d949a2b4412d89146332380ffc6992eaa9307bf0f8af4419833505c22906fb2d",
+    "bimexec/tests/fakes/fake_backend_bad_guid.py": "ef116aeb92130d1beda65559f5977a3404c8ea1b3f5fe21fcde90ddd7e918aea",
+    "bimexec/tests/fakes/fake_backend_leftover.py": "2c42467fda48f61a9e2fbba74ceff9187fce0e2af17852c7e01f9970a634bd5e",
+    "bimexec/tests/fakes/fake_backend_silentnoop.py": "997db8ea52182ee6b3567d7b3efe1052be7c7ab48e501c5da68de4a9c59515f3",
+    "bimexec/tests/fakes/fake_no_custom_prop.py": "a1172faa7fe3550e1a18f60897491f9e15359dd111c59fe8edbfe29c73c7d03c",
+    "bimexec/tests/fakes/fake_no_custom_prop_silent.py": "70bbb62bc6981e31bd84d302a0504dc412e0b5bdc4795930ee18d9454f92a977",
+    "bimexec/tests/fakes/fake_tapir_shape.py": "9fa6170daf3847280177a755e1ab0ccfcbb287932b7ad059c4e89549e0ef5565",
+    "bimexec/tests/selftest_probes.py": "a72ba6db389fbf17b09d5de0689033b9821d519ab55f2921187208bd07aed62b",
+    "bimexec/tests/test_all.py": "c80410ff3e76f2a13546edb86d50018745246b19c8cb7aa9784355159f8b42b7",
+    "bimexec/tests/test_h1_contract.py": "0d358f48fc8151f9048ac85c9a142c068e9b15a63000656f050874d2d73ba1fe",
+    "bimexec/tests/test_p0.py": "4fc8caf9e321adccccfa0b45611b408ae2eb910559d66dc1803fbd0b49ed705f",
+    "bimexec/tests/test_probe.py": "92759554a21fd07b08509a94f3e16cc67ba4365b83a5aa165b304cc177fd11f4",
+    "bimexec/tests/test_probe_v13.py": "0a4190df200ac5e1d9e2b465b619faf4bf31b741b24552d4b1fb2aeb3435bb48",
+    "bimexec/tests/test_t2_connections.py": "efa7ee5e6b7f5452169d282b1804f393d0a8feb0addebc7d71945a6bb085239c",
+    "bimexec/tests/test_t2_probe.py": "3b360b6ccdad7248f12ae36fcafa93e42c3c2f87a38f7093a43ff5b80c3cd981",
+    "bimexec/tests/test_t3_dependency.py": "407e76fd1537bdf62845c2826dae688ca2e94bdab98ed8512548e60c29aff599",
+    "bimexec/tests/test_t3_reconcile.py": "60311e0566aa4d73c7c759a04170eb79126f154079a9deb0ad2de959c38de47d",
+    "bimexec/tests/test_t4_timeout.py": "7b7a5e9450e15227cf2d2b5d36d3e021c6dc4d591993457741fbd12a59a9594b",
+    "bimexec/tests/test_t5_kill.py": "d1656458fcfc1abc2027f1440bf8d179cce7920fc85a2297fafd6c6d887c7e9c",
+    "bimexec/tests/test_t6.py": "25f2c0398986bd16f06dd3c714a94d106706384cbdef2564e69afca7fbaafa86",
+    "bimexec/tests/test_t7.py": "8f1bac097615acd6429828ab223ebabf3d688eaf783056704483dd0bd75f9b04",
+    "bimexec/tests/test_t8.py": "73b07f6b66dbe755e46870a27f00aa398d5a46c49bfb817ac5bf3c28949f8e96",
+    "bimexec/tests/test_t9.py": "b31b828ad7f0b6db7aa0ee114d541d2039fabe572b0618749aba0894e86afa8b",
+    "qwen_safe_bim_integration.py": "df546713aca8904f528f1fb0935d5d682df4a6461f0ff58b71753e7a7c7655e9",
+    "safe_bim_layer.py": "01c7750d6a40c4aa3821ab98cef493bb01b72724960ae857f42f3b85ce913eb7"
+  },
+  "output_sha256": {
+    "py_compile.txt": "9d76f46eac80951461e41a32d4b2bc71ae7640383c85fee92b16314707470501",
+    "selftest_probes.txt": "c1469f6a766b79bc472d28b8d28a1d5a85975b1557a058b7d3fb06b32f21027c",
+    "test_all.txt": "b56f4c8497fc6378a27596e7379ab37608c325b61a427ef86b84331ad2ff783c",
+    "test_h1_contract.txt": "2062398b0cbc8773b29126697b1abb2ecaa60ce7dec76a64ddbcd5d2a9265335",
+    "test_probe_v13.txt": "3f1244982cbaa878769302e8042281d32ec4d64ad39510bcdbdafff883edc1c9"
+  }
+}

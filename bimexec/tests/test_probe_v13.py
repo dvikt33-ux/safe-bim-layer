@@ -137,10 +137,10 @@ def test_property_write_shape():
 
 def test_blank_story_name_fails_closed():
     b = backend()
-    base.TapirBackend.stories = lambda self: [
-        {"index": 0, "name": "Ground", "elevation": 0.0},
-        {"index": 1, "name": "", "elevation": 3.0},
-    ]
+    b._tapir = lambda name: lambda: {"stories": [
+        {"index": 0, "name": "Ground", "level": 0.0},
+        {"index": 1, "name": "", "level": 3.0},
+    ]}
     stories = b.stories()
     assert stories[0]["name"] == "Ground"
     assert stories[1]["name"] is None
