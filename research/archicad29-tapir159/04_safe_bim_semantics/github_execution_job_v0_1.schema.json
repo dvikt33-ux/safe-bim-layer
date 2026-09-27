@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-bim.local/schema/github_execution_job_v0_1.schema.json",
+  "title": "Safe BIM Remote GitHub Execution Job v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocol",
+    "jobId",
+    "sequence",
+    "createdAt",
+    "basedOn",
+    "payloadType",
+    "executionPolicy",
+    "recipeHash",
+    "capabilityContract"
+  ],
+  "properties": {
+    "protocol": {"const": "safe-bim-remote-job/0.1"},
+    "jobId": {"type": "string", "minLength": 16},
+    "sequence": {"type": "integer", "minimum": 1},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "basedOn": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["logicalProjectId", "snapshotId", "projectRootHash"],
+      "properties": {
+        "logicalProjectId": {"type": "string", "minLength": 1},
+        "snapshotId": {"type": "string", "minLength": 1},
+        "projectRootHash": {"type": "string", "minLength": 16},
+        "targetStateHashes": {
+          "type": "object",
+          "additionalProperties": {"type": "string", "minLength": 16}
+        }
+      }
+    },
+    "payloadType": {
+      "enum": ["SAFE_RECIPE", "SAFE_SCRIPT", "RAW_CODE"]
+    },
+    "executionPolicy": {
+      "enum": ["READ_ONLY_AUTO", "PREVIEW_AUTO", "WRITE_CONFIRM", "WRITE_TRUSTED_RECIPE", "RAW_CODE_REVIEW"]
+    },
+    "recipeHash": {"type": "string", "minLength": 16},
+    "capabilityContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["safeBimProtocol"],
+      "properties": {
+        "safeBimProtocol": {"type": "string", "minLength": 1},
+        "tapirVersion": {"type": "string"},
+        "requiredCapabilities": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "mutationBudget": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "maxCreates": {"type": "integer", "minimum": 0},
+        "maxModifies": {"type": "integer", "minimum": 0},
+        "maxDeletes": {"type": "integer", "minimum": 0}
+      }
+    },
+    "recipePath": {"type": "string"},
+    "notesPath": {"type": "string"},
+    "signature": {
+      "type": ["object", "null"],
+      "description": "Reserved for future authenticated content signatures; not required by v0.1 prototype."
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"payloadType": {"const": "RAW_CODE"}}},
+      "then": {"properties": {"executionPolicy": {"const": "RAW_CODE_REVIEW"}}}
+    }
+  ]
+}
