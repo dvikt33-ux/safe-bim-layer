@@ -239,6 +239,7 @@ class TapirRaw:
         return sorted(set(out))
 
     def set_marker(self, guid: str, value: str, medium: str) -> None:
+        raise RuntimeError('reference property write is disabled: Tapir mutations must use the Safe BIM gateway')
         act = self.conn.types
         pid = self._property_id(medium)
         el = act.ElementId(guid)
@@ -248,6 +249,7 @@ class TapirRaw:
     # -- write (TEMPLATE) ----------------------------------------------------
 
     def create_wall(self, params: dict[str, Any]) -> str:
+        raise RuntimeError('reference CreateWalls is disabled: Tapir mutations must use the Safe BIM gateway')
         """TEMPLATE: схема CreateWalls зависит от версии Tapir."""
         if "CreateWalls" not in self.available_commands():
             raise NotImplementedError("CreateWalls is not exposed by this adapter build")

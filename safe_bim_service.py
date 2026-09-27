@@ -10,6 +10,8 @@ from safe_bim_layer import TapirClient
 from safe_bim_operations import SafeBIMOperations, normalized_params
 from safe_bim_runtime import ExecutorError, ResumableExecutor, SQLiteCheckpointStore, StepSpec, valid_job_id
 
+DEFAULT_SCHEMA = "tapir-1.5.9.json"
+
 
 def load_plan(path: str | Path):
     data = strict_json(Path(path).read_text(encoding="utf-8"))
@@ -39,7 +41,7 @@ def load_plan(path: str | Path):
 def main():
     parser = argparse.ArgumentParser(description="Safe BIM resumable runtime")
     parser.add_argument("--db", default="safe_bim_runtime.sqlite3")
-    parser.add_argument("--schema", default=str(Path(__file__).with_name("tapir-1.5.8.json")))
+    parser.add_argument("--schema", default=str(Path(__file__).with_name(DEFAULT_SCHEMA)))
     parser.add_argument("--bridge", default="http://127.0.0.1:19723")
     parser.add_argument("--port", type=int, default=19731)
     parser.add_argument("--plan", help="strict JSON plan to create if job_id is new")

@@ -11,11 +11,11 @@ import json
 import hashlib
 from typing import Any
 from safe_bim_layer import SafeBIMLayer, SafeBIMError, TapirClient
-from safe_bim_tapir_compat import assert_tapir_write_allowed
+from safe_bim_mutation_gateway import MutationGateway
 from safe_bim_verification import response_items, guid_key, assess_wall_vertical
 
-OPERATIONS = frozenset({'create_wall_loop', 'create_basic_slab', 'create_plinth_segment',
-                        'insert_window', 'insert_door'})
+OPERATIONS = frozenset({'create_wall_loop', 'create_wall_segment', 'create_basic_slab',
+                        'create_plinth_segment', 'insert_window', 'insert_door'})
 METADATA = frozenset({'verticalContext', 'expectedZFingerprint'})
 
 
@@ -37,7 +37,8 @@ def normalized_params(operation, params):
 class SafeBIMOperations:
     def __init__(self, client: TapirClient):
         self.client = client
-        self.layer = SafeBIMLayer(client)
+        self.gateway = MutationGateway(client)
+        self.layer = SafeBIMLayer(client, gateway=self.gateway)
 
     def current_project(self) -> str:
         path = response_items(self.client.call('GetProjectInfo', {})).get('projectPath')
@@ -56,12 +57,16 @@ class SafeBIMOperations:
 
     def execute(self, operation: str, params: dict[str, Any]):
         clean = normalized_params(operation, params)
-        assert_tapir_write_allowed(self.client)
-        if getattr(self.layer._execution, 'value', None) is None:
-            prepared = self.prepare(operation, params)
-            with self.execution_context(prepared, lambda *_: None, lambda *_: None):
-                return getattr(self.layer, operation)(**clean)
-        return getattr(self.layer, operation)(**clean)
+        command = self.prepare(operation, params)['command']
+        self.gateway.begin_step(command)
+        try:
+            if getattr(self.layer._execution, 'value', None) is None:
+                prepared = self.prepare(operation, params)
+                with self.execution_context(prepared, lambda *_: None, lambda *_: None):
+                    return getattr(self.layer, operation)(**clean)
+            return getattr(self.layer, operation)(**clean)
+        finally:
+            self.gateway.end_step()
 
     def reconcile(self, operation, params, previous=None):
         ambiguous = {'classification': 'AMBIGUOUS', 'status': 'UNKNOWN_OUTCOME',
@@ -80,6 +85,8 @@ class SafeBIMOperations:
                     or payload.get('projectPath') != previous.get('projectPath')
                     or not checkpoint.get('attemptId')):
                 return dict(ambiguous, reason='checkpoint scope mismatch')
+            if checkpoint.get('policyDenied') is True:
+                return dict(ambiguous, reason='policy denied before dispatch')
             if checkpoint.get('dispatchStarted') is False:
                 return {'classification': 'NOT_APPLIED', 'absenceProven': True,
                         'proof': 'durable checkpoint: dispatch never admitted', 'retryAllowed': True}

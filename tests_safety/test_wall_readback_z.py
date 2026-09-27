@@ -136,12 +136,16 @@ class WallReadbackZTests(unittest.TestCase):
                       floor_index=1, height=3.0, thickness=0.25)
         fake, _, store, ex = self.make('create_wall_loop', params, job='loop')
         self.assertEqual(ex.run('loop'), JobStatus.DONE)
-        sent = [wall['zCoordinate'] for wall in fake.dispatches[0][1]['wallsData']]
+        self.assertGreaterEqual(len(fake.dispatches), 1)
+        self.assertTrue(all(len(item[1]['wallsData']) == 1 for item in fake.dispatches))
+        sent = [item[1]['wallsData'][0]['zCoordinate'] for item in fake.dispatches]
         self.assertTrue(all(abs(z) < 1e-9 for z in sent))
         stored = [row['details']['zCoordinate'] for row in fake.elements.values()]
+        self.assertEqual(len(stored), len(fake.dispatches))
         self.assertTrue(all(abs(z - 4.5) < 1e-9 for z in stored))
-        self.assertAlmostEqual(store.job('loop')['steps'][0]['result']['actual_bottom'], 4.5)
-        self.assertAlmostEqual(store.job('loop')['steps'][0]['result']['actual_top'], 7.5)
+        for step in store.job('loop')['steps']:
+            self.assertAlmostEqual(step['result']['actual_bottom'], 4.5)
+            self.assertAlmostEqual(step['result']['actual_top'], 7.5)
 
     def test_specimen_geometry_match_is_not_applied_without_receipt(self):
         fp = contract()

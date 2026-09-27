@@ -118,6 +118,7 @@ def assert_scratch_free(b, guids):
 
 
 def addon_once(b, name, params):
+    raise RuntimeError('probe write path is disabled: Tapir mutations must use the Safe BIM gateway')
     # Dedicated T2 write path. We intentionally do NOT widen the T0 backend
     # denylist; only this standalone probe can dispatch these explicit commands.
     b._connect()

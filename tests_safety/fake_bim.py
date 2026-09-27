@@ -18,7 +18,7 @@ def envelope(**kw):
 
 class FakeBIM(TapirClient):
     def __init__(self):
-        super().__init__(schema_path=str(Path(__file__).resolve().parents[1]/'tapir-1.5.8.json'))
+        super().__init__(schema_path=str(Path(__file__).resolve().parents[1]/'tapir-1.5.9.json'))
         self.project = PROJECT
         self.active = 0
         self.elevations = {0:0., 1:4.5, 2:8.2, 3:11.2}
@@ -33,6 +33,11 @@ class FakeBIM(TapirClient):
         self.entered = threading.Event()
         self.release = threading.Event()
         self.block = False
+
+    def transport(self, command, payload):
+        from safe_bim_mutation_gateway import require_transport_permit
+        require_transport_permit()
+        return self.call(command, payload)
 
     def call(self, command, payload):
         with self.lock:

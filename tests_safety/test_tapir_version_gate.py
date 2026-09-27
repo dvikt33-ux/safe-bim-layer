@@ -4,7 +4,7 @@ from unittest.mock import patch
 
 from safe_bim_layer import SafeBIMError, TapirClient
 from safe_bim_operations import SafeBIMOperations
-from tests_safety.fake_bim import WALL, FakeBIM
+from tests_safety.fake_bim import PLINTH, WALL, FakeBIM
 
 
 class _Response:
@@ -45,10 +45,12 @@ class VersionGateTests(unittest.TestCase):
 
     def test_matching_version_allows_one_existing_dispatch(self):
         fake = FakeBIM()
-        result = SafeBIMOperations(fake).execute('create_wall_loop', WALL)
+        result = SafeBIMOperations(fake).execute('create_plinth_segment', PLINTH)
         self.assertEqual(result['status'], 'PASS')
         self.assertEqual(len(fake.dispatches), 1)
         self.assertEqual(fake.dispatches[0][0], 'CreateWalls')
+        self.assertEqual(len(fake.dispatches[0][1]['wallsData']), 1)
+        self.assertEqual(len([name for name, _, _ in fake.calls if name == 'GetAddOnVersion']), 1)
 
     def test_direct_client_does_not_send_a_write_when_version_is_wrong(self):
         seen = []
@@ -61,8 +63,8 @@ class VersionGateTests(unittest.TestCase):
 
         with patch('urllib.request.urlopen', side_effect=urlopen):
             with self.assertRaises(SafeBIMError):
-                TapirClient().call('CreateWalls', {'wallsData': []})
-        self.assertEqual(seen, ['GetAddOnVersion'])
+                TapirClient().call('CreateWalls', {'wallsData': [{'begCoordinate': {'x': 0, 'y': 0}}]})
+        self.assertEqual(seen, [])
 
 
 if __name__ == '__main__':

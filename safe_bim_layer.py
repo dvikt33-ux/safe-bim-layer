@@ -133,14 +133,20 @@ class TapirClient:
         self.schema = json.loads(Path(schema_path).read_text(encoding='utf-8')) if schema_path else None
 
     def call(self, command: str, params: dict[str, Any]) -> dict[str, Any]:
-        if not getattr(self, '_version_gate_active', False):
-            from safe_bim_tapir_compat import assert_tapir_write_allowed, is_physical_write
-            if is_physical_write(command):
-                self._version_gate_active = True
-                try:
-                    assert_tapir_write_allowed(self)
-                finally:
-                    self._version_gate_active = False
+        """Public entry. Allowlisted reads only. Mutations never leave this method."""
+        from safe_bim_command_policy import CommandClass, classify
+        if classify(command) != CommandClass.READ_ONLY:
+            raise SafeBIMError(
+                f'public TapirClient.call refuses {command!r}; mutations require the gateway')
+        return self._post(command, params)
+
+    def transport(self, command: str, params: dict[str, Any]) -> dict[str, Any]:
+        """Physical send. The mutation gateway is the only permitted caller."""
+        from safe_bim_mutation_gateway import require_transport_permit
+        require_transport_permit()
+        return self._post(command, params)
+
+    def _post(self, command: str, params: dict[str, Any]) -> dict[str, Any]:
         body = {'command':'API.ExecuteAddOnCommand','parameters':{
             'addOnCommandId': {'commandNamespace':'TapirCommand','commandName':command},
             'addOnCommandParameters': params}}
@@ -154,16 +160,10 @@ class TapirClient:
         return response
 
     def change_floor_plan(self, story_index: int) -> dict[str, Any]:
-        """Activate a FloorPlan story using the pinned Tapir schema."""
-        payload = {'windowType': 'FloorPlan', 'storyIndex': int(story_index)}
-        self.validate_payload('ChangeWindow', payload)
-        return self.call('ChangeWindow', payload)
+        raise SafeBIMError('ChangeWindow is refused on the public client')
 
     def change_floor_plan_navigator_item(self, navigator_guid: str) -> dict[str, Any]:
-        """Activate a story navigator item using the pinned Tapir schema."""
-        payload = {'navigatorItemId': {'guid': str(navigator_guid)}}
-        self.validate_payload('ChangeWindow', payload)
-        return self.call('ChangeWindow', payload)
+        raise SafeBIMError('ChangeWindow is refused on the public client')
 
     def active_story(self) -> int:
         response = self.call('GetStories', {})
@@ -252,12 +252,19 @@ def _diff(requested, actual, path=''):
 
 
 class SafeBIMLayer:
-    def __init__(self, client: TapirClient, vertical_context: VerticalContext | None = None):
+    def __init__(self, client: TapirClient, vertical_context: VerticalContext | None = None, gateway=None):
         self.tapir=client
+        self.gateway = gateway
         self._execution = threading.local()
         self.vertical_context = vertical_context
         self.story_resolver = StoryResolver(client, vertical_context.project_zero_z
                                             if vertical_context else None)
+
+    def _gate(self):
+        if self.gateway is None:
+            from safe_bim_mutation_gateway import MutationGateway
+            self.gateway = MutationGateway(self.tapir)
+        return self.gateway
 
     def resolve_vertical_context(self, context: VerticalContext | None = None):
         if context is not None:
@@ -304,7 +311,11 @@ class SafeBIMLayer:
         guid = self._story_navigator_guid(self._response_items(tree).get('navigatorItemTree'), target)
         if not guid:
             raise SafeBIMError(f'No Project Map StoryItem found for floorIndex={target}')
-        change = self.tapir.change_floor_plan_navigator_item(guid)
+        payload = {'navigatorItemId': {'guid': str(guid)}}
+        self.tapir.validate_payload('ChangeWindow', payload)
+        gate = self._gate()
+        with gate.session_if_needed():
+            change = gate.dispatch('ChangeWindow', payload)
         if not self._response_items(change).get('success', True):
             raise SafeBIMError(f'ChangeWindow failed for story {target}: {change!r}')
         after = self.tapir.active_story()
@@ -413,7 +424,25 @@ class SafeBIMLayer:
         story = self.story_resolver.by_index(floor)
         elevation = number(story.elevation)
         expected, fp = [], {}
-        if operation in {'create_wall_loop', 'create_plinth_segment'}:
+        if operation == 'create_wall_segment':
+            thickness = self._positive(p.get('thickness', .25))
+            a, b = self._point(p['start']), self._point(p['end'])
+            if a == b:
+                raise SafeBIMError('zero-length wall segment')
+            height = self._positive(p['height'])
+            bottom = elevation
+            vertical = wall_z_contract(floor, elevation, bottom, height)
+            walls = [{'begCoordinate': a, 'endCoordinate': b, 'floorIndex': floor,
+                      'zCoordinate': vertical['write_relative_z'], 'height': height, 'thickness': thickness,
+                      'referenceLineLocation': 'Center', 'structureType': 'Basic'}]
+            expected = [{'begCoordinate': a, 'endCoordinate': b,
+                         'zCoordinate': vertical['expected_readback_z'],
+                         'bottomOffset': vertical['write_relative_z'], 'height': height, 'relativeTopStory': 0,
+                         'begThickness': thickness, 'endThickness': thickness,
+                         'offset': 0, 'referenceLineLocation': 'Center', 'structureType': 'Basic'}]
+            command, payload, kind = 'CreateWalls', {'wallsData': walls}, 'Wall'
+            fp = vertical
+        elif operation in {'create_wall_loop', 'create_plinth_segment'}:
             thickness = self._positive(p.get('thickness', .25))
             if operation == 'create_plinth_segment':
                 a, b = self._point(p['start']), self._point(p['end'])
@@ -501,11 +530,24 @@ class SafeBIMLayer:
             raise SafeBIMError('execution does not match pinned prepared contract')
         dispatched = False
         try:
-            self.ensure_active_story(prepared['floorIndex'])
-            if context:
-                context[1](prepared['command'], prepared['payload'])
-            dispatched = True
-            response = self.tapir.call(prepared['command'], prepared['payload'])
+            from safe_bim_command_policy import PolicyError, assert_single_create_item
+            try:
+                assert_single_create_item(prepared['command'], prepared['payload'])
+            except PolicyError as exc:
+                raise SafeBIMError(str(exc)) from exc
+            gate = self._gate()
+            owns_admission = not gate.admitted
+            if owns_admission:
+                gate.begin_step(prepared['command'])
+            try:
+                self.ensure_active_story(prepared['floorIndex'])
+                if context:
+                    context[1](prepared['command'], prepared['payload'])
+                dispatched = True
+                response = gate.dispatch(prepared['command'], prepared['payload'])
+            finally:
+                if owns_admission:
+                    gate.end_step()
             guids = element_guids(response, len(prepared['expected']))
             old = {guid_key(g) for g in prepared['preexistingGuids']}
             if any(guid_key(g) in old for g in guids):
@@ -541,6 +583,9 @@ class SafeBIMLayer:
     def create_wall_loop(self, contour, floor_index, height, thickness):
         return self._execute('create_wall_loop', dict(contour=contour, floor_index=floor_index, height=height, thickness=thickness))
 
+    def create_wall_segment(self, start, end, floor_index, height, thickness):
+        return self._execute('create_wall_segment', dict(start=start, end=end, floor_index=floor_index, height=height, thickness=thickness))
+
     def create_plinth_segment(self, start, end, grade_z, project_zero_z, floor_index, thickness=.25):
         return self._execute('create_plinth_segment', dict(start=start, end=end, grade_z=grade_z,
                              project_zero_z=project_zero_z, floor_index=floor_index, thickness=thickness))
@@ -558,18 +603,5 @@ class SafeBIMLayer:
         return self._execute('insert_door', dict(host_wall_guid=host_wall_guid, params=params))
 
     def create_room(self, contour, wall_height, wall_thickness, slab, door=None, windows=None):
-        """Create a room; openings are optional and are skipped when omitted."""
-        windows = windows or []
-        out={'status':'PASS','walls':None,'slab':None,'door':None,'windows':[]}
-        out['walls']=self.create_wall_loop(contour,0,wall_height,wall_thickness)
-        if out['walls']['status']!='PASS': out['status']='FAIL'; return out
-        out['slab']=self.create_basic_slab(contour,0,0,slab['thickness'])
-        if out['slab']['status']!='PASS': out['status']='FAIL'; return out
-        host=out['walls']['guids'][0]
-        if door is not None:
-            out['door']=self.insert_door(host,door)
-            if out['door']['status']!='PASS': out['status']='FAIL'; return out
-        for w in windows:
-            r=self.insert_window(host,w); out['windows'].append(r)
-            if r['status']!='PASS': out['status']='FAIL'; return out
-        return out
+        """Refused. A room is several physical creates and cannot be one resumable step."""
+        raise SafeBIMError('create_room is refused; it is not a single resumable step')

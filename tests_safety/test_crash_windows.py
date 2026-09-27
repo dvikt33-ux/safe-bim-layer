@@ -9,7 +9,7 @@ from pathlib import Path
 from safe_bim_runtime import SQLiteCheckpointStore, ResumableExecutor, StepSpec, JobStatus
 from safe_bim_operations import SafeBIMOperations
 from safe_bim_lock import execution_lock
-from tests_safety.fake_bim import FakeBIM, PROJECT, WALL
+from tests_safety.fake_bim import FakeBIM, PLINTH, PROJECT
 
 
 @unittest.skipUnless(os.name=='posix','SIGKILL/select subprocess driver requires POSIX; native Windows re-audit required')
@@ -22,7 +22,7 @@ class CrashWindowsTests(unittest.TestCase):
                     folder=Path(directory)/phase;folder.mkdir();db=folder/'state.sqlite3';model=folder/'model.json'
                     st=SQLiteCheckpointStore(db)
                     count=2 if phase=='after_done' else 1
-                    st.create_job('job','crash',PROJECT,[StepSpec(str(i),'create_wall_loop',WALL,0) for i in range(count)])
+                    st.create_job('job','crash',PROJECT,[StepSpec(str(i),'create_plinth_segment',PLINTH,1) for i in range(count)])
                     worker=subprocess.Popen([sys.executable,str(Path(__file__).with_name('crash_worker.py')),str(db),str(model),phase],stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
                     try:
                         ready,_,_=select.select([worker.stdout],[],[],12)

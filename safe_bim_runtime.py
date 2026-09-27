@@ -275,7 +275,46 @@ class SQLiteCheckpointStore:
             self._touch(db, job_id)
             self._event(db, job_id, position, "CHECKPOINT_BEFORE_WRITE", checkpoint)
 
-    def update_checkpoint(self, job_id, position, lease, *, prepared=None, command=None):
+    def replace_pending_step(self, job_id, position, specs, lease):
+        """Replace one undispatched step with resumable single-item steps. No BIM call."""
+        specs = list(specs)
+        if not specs:
+            raise ExecutorError("expansion produced no steps")
+        with self._lock, self._connect() as db:
+            self._check(db, job_id, lease)
+            rows = db.execute(
+                "SELECT * FROM steps WHERE job_id=? ORDER BY position", (job_id,)).fetchall()
+            target = next((row for row in rows if row["position"] == position), None)
+            if target is None:
+                raise ExecutorError("unknown step")
+            if target["status"] != JobStatus.PENDING.value or target["checkpoint_json"] or target["attempts"]:
+                raise ExecutorError("refusing to expand a step that may already have been dispatched")
+            rebuilt = []
+            for row in rows:
+                if row["position"] == position:
+                    rebuilt.extend(specs)
+                else:
+                    rebuilt.append(row)
+            db.execute("DELETE FROM steps WHERE job_id=?", (job_id,))
+            now = time.time()
+            for index, item in enumerate(rebuilt):
+                if isinstance(item, StepSpec):
+                    db.execute(
+                        "INSERT INTO steps VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+                        (job_id, index, item.name, item.operation,
+                         json.dumps(item.params, ensure_ascii=False, sort_keys=True),
+                         item.floor_index, JobStatus.PENDING.value, 0, None, None, None, now))
+                else:
+                    db.execute(
+                        "INSERT INTO steps VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+                        (job_id, index, item["name"], item["operation"], item["params_json"],
+                         item["floor_index"], item["status"], item["attempts"], item["checkpoint_json"],
+                         item["result_json"], item["error"], now))
+            db.execute("UPDATE jobs SET total_steps=?,updated_at=? WHERE job_id=?", (len(rebuilt), now, job_id))
+            self._touch(db, job_id)
+            self._event(db, job_id, position, "STEP_EXPANDED", {"count": len(specs)})
+
+    def update_checkpoint(self, job_id, position, lease, *, prepared=None, command=None, policy_denied=False):
         with self._lock, self._connect() as db:
             row = self._check(db, job_id, lease)
             if command and row["pause_requested"]:
@@ -285,6 +324,9 @@ class SQLiteCheckpointStore:
             if prepared is not None:
                 checkpoint["payload"]["prepared"] = prepared
                 checkpoint["payload"]["expectedZFingerprint"] = prepared.get("expectedZFingerprint")
+            if policy_denied:
+                checkpoint["policyDenied"] = True
+                checkpoint["dispatchStarted"] = False
             if command:
                 checkpoint["dispatchStarted"] = True
                 checkpoint["lastCommand"] = command
@@ -414,7 +456,38 @@ class ResumableExecutor:
         self.store.set_job(job_id, status, current_step=position, lease=lease)
         return status
 
+    def _expand_wall_loops(self, job_id, lease):
+        if self.adapter is None:
+            return None
+        while True:
+            self._boundary(job_id, lease)
+            pending = [step for step in self.store.job(job_id)["steps"]
+                       if step["operation"] == "create_wall_loop" and step["status"] == JobStatus.PENDING.value
+                       and not step.get("checkpoint")]
+            if not pending:
+                return None
+            step = pending[0]
+            try:
+                prepared = self.adapter.prepare("create_wall_loop", step["params"])
+                walls = prepared["payload"]["wallsData"]
+                if not isinstance(walls, list) or len(walls) < 1:
+                    raise ExecutorError("wall loop produced no segments")
+                specs = [StepSpec(
+                    f"{step['name']}:{index + 1}", "create_wall_segment",
+                    {"start": wall["begCoordinate"], "end": wall["endCoordinate"],
+                     "floor_index": wall["floorIndex"], "height": wall["height"],
+                     "thickness": wall["thickness"]}, wall["floorIndex"])
+                    for index, wall in enumerate(walls)]
+            except (LeaseLost, WorkerPaused):
+                raise
+            except Exception as exc:
+                return self._wait(job_id, step["position"], lease, exc)
+            self.store.replace_pending_step(job_id, step["position"], specs, lease)
+
     def _drive(self, job_id, lease, recover):
+        stopped = self._expand_wall_loops(job_id, lease)
+        if stopped is not None:
+            return stopped
         for initial in self.store.job(job_id)["steps"]:
             self._boundary(job_id, lease)
             step = self.store.job(job_id)["steps"][initial["position"]]
@@ -468,6 +541,12 @@ class ResumableExecutor:
                     prepared["contractHash"] = hashlib.sha256(json.dumps(prepared, sort_keys=True,
                         ensure_ascii=False, allow_nan=False).encode()).hexdigest()
                     self.store.update_checkpoint(job_id, pos, lease, prepared=prepared)
+                    from safe_bim_command_policy import PolicyError, assert_single_create_item
+                    try:
+                        assert_single_create_item(prepared["command"], prepared["payload"])
+                    except PolicyError as exc:
+                        self.store.update_checkpoint(job_id, pos, lease, policy_denied=True)
+                        return self._wait(job_id, pos, lease, exc)
                     def before_write(command, _payload):
                         self._boundary(job_id, lease)
                         self._assert_project(self.store.job(job_id))

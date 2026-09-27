@@ -65,9 +65,9 @@ class RuntimeSafetyTests(unittest.TestCase):
         self.counter = 0
     def tearDown(self):
         self.temp.cleanup()
-    def make(self, operation='create_wall_loop', params=None, count=1, job='job'):
+    def make(self, operation='create_plinth_segment', params=None, count=1, job='job'):
         self.counter += 1
-        params = copy.deepcopy(params if params is not None else WALL)
+        params = copy.deepcopy(params if params is not None else (WALL if operation == 'create_wall_loop' else PLINTH))
         fake = FakeBIM()
         ops = CountingOps(fake)
         store = SQLiteCheckpointStore(self.folder/f'{self.counter}.sqlite3')
@@ -355,7 +355,7 @@ class RuntimeSafetyTests(unittest.TestCase):
                         result=original(cmd,p)
                         if cmd=='CreateWalls':
                             elements=result['result']['addOnCommandResponse']['elements']
-                            result['result']['addOnCommandResponse']['elements']=elements[:1] if mode=='bad_create_count' else [elements[0]]*4
+                            result['result']['addOnCommandResponse']['elements']=[] if mode=='bad_create_count' else [elements[0]]*4
                         return result
                     f.call=call
                 self.assertNotEqual(ex.run('job'),JobStatus.DONE)

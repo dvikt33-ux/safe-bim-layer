@@ -369,6 +369,8 @@ class TapirBackend(Backend):
         return getattr(self.conn.commands, name)
 
     def _tapir(self, name: str):
+        if name not in TAPIR_READ_COMMANDS:
+            raise BackendError(f'{name} is not an allowlisted read; Tapir mutations are refused')
         _assert_not_forbidden(name)
         self._connect()
         act = self.conn.types

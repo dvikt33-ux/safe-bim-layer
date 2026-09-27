@@ -144,6 +144,7 @@ def wall_payload(seg: dict[str, Any], comp_guid: str) -> dict[str, Any]:
 
 
 def addon_once(b: TapirBackendV13, name: str, params: dict[str, Any]) -> Any:
+    raise RuntimeError('probe write path is disabled: Tapir mutations must use the Safe BIM gateway')
     # Dedicated live-probe path. Do not widen T0's mutation denylist.
     b._connect()
     act = b.conn.types

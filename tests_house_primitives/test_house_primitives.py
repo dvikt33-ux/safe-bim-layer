@@ -383,7 +383,8 @@ class HousePlanTests(unittest.TestCase):
 
     def test_dispatcher_was_not_extended(self):
         self.assertEqual(OPERATIONS, frozenset({
-            'create_wall_loop', 'create_basic_slab', 'create_plinth_segment', 'insert_window', 'insert_door'}))
+            'create_wall_loop', 'create_wall_segment', 'create_basic_slab',
+            'create_plinth_segment', 'insert_window', 'insert_door'}))
         for name in ('create_arc_wall', 'create_mesh', 'create_morph', 'create_roof'):
             self.assertNotIn(name, OPERATIONS)
             with self.assertRaises(SafeBIMError):

@@ -39,9 +39,8 @@ class SafeBIMRegressionTests(unittest.TestCase):
     def test_timeout_is_unknown_and_never_retryable(self):
         fake = FakeTapir(active=1, timeout_on='CreateWalls', create_before_timeout=True)
         layer = SafeBIMLayer(fake)
-        result = layer.create_wall_loop(
-            [{'x': 0, 'y': 0}, {'x': 1, 'y': 0}, {'x': 1, 'y': 1}, {'x': 0, 'y': 1}],
-            1, 3, 0.2)
+        result = layer.create_plinth_segment(
+            {'x': 0, 'y': 0}, {'x': 1, 'y': 0}, grade_z=0.0, project_zero_z=3.0, floor_index=1)
         self.assertEqual(result['status'], 'UNKNOWN_OUTCOME')
         self.assertFalse(result['retryAllowed'])
         self.assertTrue(result['reconciliationRequired'])
@@ -62,9 +61,8 @@ class SafeBIMRegressionTests(unittest.TestCase):
                 if command == 'CreateWalls':
                     raise ModalStateError('Invalid program status: modal dialog')
                 return super().call(command, payload)
-        result = SafeBIMLayer(ModalTapir()).create_wall_loop(
-                [{'x': 0, 'y': 0}, {'x': 1, 'y': 0},
-                 {'x': 1, 'y': 1}, {'x': 0, 'y': 1}], 0, 0.6, 0.25)
+        result = SafeBIMLayer(ModalTapir()).create_plinth_segment(
+            {'x': 0, 'y': 0}, {'x': 1, 'y': 0}, grade_z=-0.6, project_zero_z=0.0, floor_index=0)
         self.assertEqual(result['status'], 'UNKNOWN_OUTCOME')
         self.assertFalse(result['retryAllowed'])
 
