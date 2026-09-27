@@ -13,11 +13,28 @@ button small{display:block;color:#666}.error{color:#a40000;font-size:12px;margin
 <div class="row"><span class="label">Этаж / Floor: </span><span id="floor">—</span></div>
 <div class="row"><span class="label">Read-back: </span><span id="readback">—</span></div>
 <div id="status" class="status">Ожидание<span class="enum">PENDING</span></div>
-<div class="buttons"><button onclick="act('continue')">Продолжить<small>Continue</small></button><button onclick="act('pause')">Пауза<small>Pause</small></button><button onclick="act('stop')">Стоп<small>Stop</small></button></div>
+<div class="buttons"><button disabled onclick="act('continue')">Продолжить<small>Continue</small></button><button disabled onclick="act('pause')">Пауза<small>Pause</small></button><button disabled onclick="act('stop')">Стоп<small>Stop</small></button></div>
 <div id="error" class="error"></div></div><script>
-const base='http://127.0.0.1:19731'; const q=new URLSearchParams(location.search); let job=q.get('job_id')||'active';
+const base=location.protocol==='http:'&&['127.0.0.1','localhost'].includes(location.hostname)?location.origin:'http://127.0.0.1:19731';
+const q=new URLSearchParams(location.search); const selected=q.get('job_id')||'active';
+let displayed=null, serial=0, rendered=0;
 const labels={PENDING:'Ожидание',RUNNING:'Выполняется',DONE:'Готово',FAILED:'Ошибка',WAITING_USER:'Ожидание пользователя',UNKNOWN_OUTCOME:'Результат неизвестен',PAUSED:'Приостановлено',CANCELLED:'Остановлено'};
-async function refresh(){try{let r=await fetch(`${base}/state?job_id=${encodeURIComponent(job)}`,{cache:'no-store'});let s=await r.json();if(!r.ok)throw Error(s.error||r.status);for(let k of ['task','step','progress','floor','readback'])document.getElementById(k).textContent=s[k]??'—';let el=document.getElementById('status');el.className='status'+(s.status==='UNKNOWN_OUTCOME'?' unknown':'');el.innerHTML=`${labels[s.status]||s.status}<span class="enum">${s.enum}</span>`;document.getElementById('error').textContent='';}catch(e){document.getElementById('error').textContent='Python runtime недоступен / Runtime unavailable: '+e.message;}}
-async function act(name){try{await fetch(`${base}/jobs/${encodeURIComponent(job)}/${name}`,{method:'POST'});}finally{await refresh();}}
+const buttons=[...document.querySelectorAll('button')];
+function disable(){buttons.forEach(b=>b.disabled=true);displayed=null;}
+async function refresh(){const ticket=++serial;try{
+ const r=await fetch(`${base}/state?job_id=${encodeURIComponent(selected)}`,{cache:'no-store'}); const s=await r.json();
+ if(ticket<rendered)return;rendered=ticket;
+ if(!r.ok||!s.job_id||!Number.isInteger(s.revision)||!s.capability||!s.controls)throw Error(s.error||'Invalid state');
+ if(selected!=='active'&&s.job_id!==selected)throw Error('Wrong job');
+ disable();for(const k of ['task','step','progress','floor','readback'])document.getElementById(k).textContent=s[k]??'—';
+ document.getElementById('status').textContent=`${labels[s.status]||s.status} / ${s.enum}`;
+ displayed=s;
+ if(!['DONE','FAILED','CANCELLED'].includes(s.status))['continue','pause','stop'].forEach((a,i)=>buttons[i].disabled=s.controls[a]!==true);
+ document.getElementById('error').textContent='';
+ }catch(e){if(ticket<rendered)return;rendered=ticket;disable();document.getElementById('error').textContent='Controls disabled: '+e.message+'. Use the native controller or http://127.0.0.1:19731/palette (same-origin).';}}
+async function act(action){const state=displayed;if(!state||!state.controls[action])return;disable();
+ try{const r=await fetch(`${base}/jobs/${encodeURIComponent(state.job_id)}/${action}`,{method:'POST',headers:{'Content-Type':'application/json','X-Safe-BIM-Token':state.capability},body:JSON.stringify({job_id:state.job_id,action,revision:state.revision})});
+ if(!r.ok)throw Error('Command not confirmed; no automatic retry');
+ }catch(e){document.getElementById('error').textContent=e.message;}finally{await refresh();}}
 refresh();setInterval(refresh,1000);
 </script></body></html>

@@ -5,22 +5,32 @@ import argparse
 import json
 from pathlib import Path
 
-from safe_bim_ipc import serve
+from safe_bim_ipc import serve, strict_json
 from safe_bim_layer import TapirClient
-from safe_bim_operations import SafeBIMOperations
-from safe_bim_runtime import ExecutorError, ResumableExecutor, SQLiteCheckpointStore, StepSpec
+from safe_bim_operations import SafeBIMOperations, normalized_params
+from safe_bim_runtime import ExecutorError, ResumableExecutor, SQLiteCheckpointStore, StepSpec, valid_job_id
 
 
 def load_plan(path: str | Path):
-    data = json.loads(Path(path).read_text(encoding="utf-8"))
+    data = strict_json(Path(path).read_text(encoding="utf-8"))
     allowed = {"job_id", "task_name", "project_path", "steps"}
-    if set(data) != allowed:
+    if not isinstance(data, dict) or set(data) != allowed:
         raise ValueError(f"plan fields must be exactly {sorted(allowed)}")
+    if not valid_job_id(data['job_id']) or not isinstance(data['task_name'], str) or not data['task_name'].strip() or not isinstance(data['project_path'], str) or not data['project_path'].strip():
+        raise ValueError('invalid plan identity/task')
+    if not isinstance(data['steps'], list) or not data['steps']:
+        raise ValueError('nonempty steps array required')
     steps = []
     for raw in data["steps"]:
         step_allowed = {"name", "operation", "params", "floor_index"}
-        if set(raw) - step_allowed or not {"name", "operation", "params"} <= set(raw):
-            raise ValueError(f"invalid step fields: {sorted(raw)}")
+        if not isinstance(raw, dict) or set(raw) - step_allowed or not {"name", "operation", "params"} <= set(raw):
+            raise ValueError("invalid step fields")
+        if not isinstance(raw['name'], str) or not raw['name']:
+            raise ValueError('step name required')
+        clean = normalized_params(raw['operation'], raw['params'])
+        floor = raw.get('floor_index')
+        if floor is not None and (type(floor) is not int or ('floor_index' in clean and clean['floor_index'] != floor)):
+            raise ValueError('step floor_index contradicts operation')
         steps.append(StepSpec(raw["name"], raw["operation"], raw["params"],
                               raw.get("floor_index")))
     return data, steps

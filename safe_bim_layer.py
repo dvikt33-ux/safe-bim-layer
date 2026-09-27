@@ -6,6 +6,11 @@ executes one write at a time, reads elements back, and stops on any mismatch.
 """
 from __future__ import annotations
 import copy, json, math, urllib.request
+import hashlib
+import threading
+from contextlib import contextmanager
+from safe_bim_verification import (VerificationError, number, equal, response_items,
+                                   element_guids, verify_details, guid_key)
 from dataclasses import dataclass, asdict
 from pathlib import Path
 from typing import Any
@@ -93,9 +98,15 @@ class StoryResolver:
         for item in items:
             idx = self._field(item, 'storyIndex', 'index', 'floorIndex')
             elevation = self._field(item, 'elevation', 'level', 'elevationFromProjectZero', 'zCoordinate')
-            if not isinstance(idx, int) or not isinstance(elevation, (int, float)):
+            # Skip records without a usable index/elevation. Duplicate valid indexes
+            # are fail-closed below; names are never used as identity.
+            if isinstance(idx, bool) or not isinstance(idx, int):
+                continue
+            if isinstance(elevation, bool) or not isinstance(elevation, (int, float)) or not math.isfinite(float(elevation)):
                 continue
             rows.append((int(idx), float(elevation), self._field(item, 'name', 'displayName', 'userName')))
+        if len({r[0] for r in rows}) != len(rows):
+            raise SafeBIMError("duplicate factual story index")
         rows.sort(key=lambda x: x[0])
         if not rows:
             raise SafeBIMError('GetStories returned no stories with storyIndex and elevation')
@@ -119,7 +130,7 @@ class StoryResolver:
 class TapirClient:
     def __init__(self, base_url='http://127.0.0.1:19723', schema_path=None):
         self.base_url = base_url
-        self.schema = json.load(open(schema_path, encoding='utf-8')) if schema_path else None
+        self.schema = json.loads(Path(schema_path).read_text(encoding='utf-8')) if schema_path else None
 
     def call(self, command: str, params: dict[str, Any]) -> dict[str, Any]:
         body = {'command':'API.ExecuteAddOnCommand','parameters':{
@@ -235,6 +246,7 @@ def _diff(requested, actual, path=''):
 class SafeBIMLayer:
     def __init__(self, client: TapirClient, vertical_context: VerticalContext | None = None):
         self.tapir=client
+        self._execution = threading.local()
         self.vertical_context = vertical_context
         self.story_resolver = StoryResolver(client, vertical_context.project_zero_z
                                             if vertical_context else None)
@@ -293,204 +305,245 @@ class SafeBIMLayer:
         return {'before': before, 'after': after, 'switched': True, 'navigatorGuid': guid}
 
     def _read_details(self, guids):
-        r=self.tapir.call('GetDetailsOfElements', {'elements':[{'elementId':{'guid':g}} for g in guids]})
-        ds=r.get('result',{}).get('addOnCommandResponse',{}).get('detailsOfElements',[])
-        return r, ds
+        if not guids or len(set(guids)) != len(guids):
+            raise SafeBIMError('nonempty unique GUIDs required')
+        responses, details = [], []
+        # Pinned Tapir details.id is NOT a GUID. Bind each singleton response
+        # to its exact GUID request, not a zip of two potentially truncated lists.
+        for guid in guids:
+            response = self.tapir.call('GetDetailsOfElements', {'elements': [{'elementId': {'guid': guid}}]})
+            rows = response_items(response).get('detailsOfElements')
+            if not isinstance(rows, list) or len(rows) != 1 or not isinstance(rows[0], dict) or 'error' in rows[0]:
+                raise SafeBIMError('incomplete/malformed singleton read-back')
+            detail = copy.deepcopy(rows[0])
+            for echoed in (detail.get('guid'), detail.get('elementId', {}).get('guid')):
+                if echoed is not None and (not isinstance(echoed, str) or guid_key(echoed) != guid_key(guid)):
+                    raise SafeBIMError('echoed GUID mismatch')
+            detail['verifiedGuid'] = guid
+            responses.append(response)
+            details.append(detail)
+        return responses, details
 
-    def _reconcile_type(self, expected_type):
-        """Read-only post-timeout evidence; never dispatches a second write."""
-        listed = self.tapir.call('GetElementsByType', {'elementType': expected_type})
-        ids = [x['elementId']['guid'] for x in self._response_items(listed).get('elements', [])
-               if 'elementId' in x]
-        rr, details = self._read_details(ids) if ids else ({}, [])
-        return {'listedResponse': listed, 'readbackResponse': rr,
-                'readback': details, 'candidateGuids': ids}
-
-    def _write_and_read(self, command, payload, expected_type, requested_fields, floor_index=None,
-                        expected_vertical=None):
-        story = self.ensure_active_story(floor_index) if floor_index is not None else None
-        if expected_vertical is None and floor_index is not None:
-            try: expected_vertical = asdict(self.story_resolver.by_index(floor_index))
-            except SafeBIMError: expected_vertical = None
-        self.tapir.validate_payload(command,payload)
+    @contextmanager
+    def execution_context(self, prepared, before_write, receipt):
+        if getattr(self._execution, 'value', None) is not None:
+            raise SafeBIMError('nested execution context')
+        self._execution.value = (prepared, before_write, receipt)
         try:
-            result=self.tapir.call(command,payload)
-        except TimeoutError as exc:
-            # A Tapir timeout is not a negative result: Archicad may still have
-            # completed the modal-blocked write. Never retry before reconciliation.
-            reconciliation = self._reconcile_type(expected_type)
-            return {'status':'UNKNOWN_OUTCOME', 'error':repr(exc), 'command':command,
-                    'story':story, 'requestedPayload':payload, 'expectedVertical': expected_vertical,
-                    'reconciliationRequired':True, 'retryAllowed':False,
-                    'reconciliation':reconciliation}
-        ids=[x['elementId']['guid'] for x in result.get('result',{}).get('addOnCommandResponse',{}).get('elements',[]) if 'elementId' in x]
-        read_response, details=self._read_details(ids)
-        diffs=[]
-        if len(ids) != len(requested_fields): diffs.append({'path':'count','requested':len(requested_fields),'actual':len(ids)})
-        for i, req in enumerate(requested_fields):
-            if i>=len(details): break
-            d=details[i]
-            if d.get('type') != expected_type: diffs.append({'path':f'[{i}].type','requested':expected_type,'actual':d.get('type')})
-            actual=d.get('details',{})
-            for k,v in req.items():
-                if k not in actual: diffs.append({'path':f'[{i}].details.{k}','requested':v,'actual':'<missing>'})
-                elif isinstance(v,dict): diffs.extend(_diff(v,actual[k],f'[{i}].details.{k}'))
-                elif isinstance(v,(int,float)):
-                    if not _num_equal(v,actual[k]): diffs.append({'path':f'[{i}].details.{k}','requested':v,'actual':actual[k]})
-                elif v != actual[k]: diffs.append({'path':f'[{i}].details.{k}','requested':v,'actual':actual[k]})
-        return {'status':'PASS' if not diffs and len(ids)==len(requested_fields) else 'FAIL','guids':ids,'tapirResponse':result,'readbackResponse':read_response,'readback':details,'diff':diffs,'expectedVertical':expected_vertical}
+            yield
+        finally:
+            self._execution.value = None
+
+    @staticmethod
+    def _point(p):
+        if not isinstance(p, dict) or set(p) != {'x', 'y'}:
+            raise SafeBIMError('point must contain exactly x/y')
+        return {'x': number(p['x']), 'y': number(p['y'])}
+
+    @staticmethod
+    def _positive(value):
+        value = number(value)
+        if value <= 0:
+            raise SafeBIMError('positive dimension required')
+        return value
+
+    @staticmethod
+    def _floor(value):
+        if isinstance(value, bool) or not isinstance(value, int):
+            raise SafeBIMError('integer floor_index required')
+        return value
+
+    def prepare(self, operation, params):
+        """Read-only preflight; full expected contract exists BEFORE checkpoint dispatch."""
+        params = copy.deepcopy(params)
+        metadata = {k: params.pop(k) for k in ('verticalContext', 'expectedZFingerprint') if k in params}
+        try:
+            prepared = self._prepare(operation, params)
+            fp = prepared.get('expectedZFingerprint', {})
+            supplied = metadata.get('expectedZFingerprint')
+            if supplied is not None:
+                if not isinstance(supplied, dict) or not supplied or set(supplied) - set(fp):
+                    raise SafeBIMError('unsupported expectedZFingerprint')
+                if any(not equal(fp[k], v) for k, v in supplied.items()):
+                    raise SafeBIMError('expectedZFingerprint contradicts factual preflight')
+            context = metadata.get('verticalContext')
+            if context is not None:
+                fields = set(VerticalContext.__dataclass_fields__)
+                if not isinstance(context, dict) or set(context) - fields:
+                    raise SafeBIMError('invalid verticalContext')
+                for key, value in context.items():
+                    if key not in {'source', 'justification'} and value is not None:
+                        number(value)
+                if operation == 'create_plinth_segment':
+                    mapping = {'project_zero_z': params['project_zero_z'], 'grade_z': params['grade_z'],
+                               'plinth_bottom_z': params['grade_z'], 'plinth_top_z': params['project_zero_z']}
+                    if any(context.get(k) is not None and not equal(context[k], v) for k, v in mapping.items()):
+                        raise SafeBIMError('verticalContext contradicts plinth')
+            prepared['verticalContext'] = context
+            prepared['params'] = params
+            prepared['operation'] = operation
+            # Inventory is an execution newness check, NEVER an absence proof
+            # after an uncertain dispatch. Foreign matches are never adopted.
+            prepared['preexistingGuids'] = element_guids(self.tapir.call('GetElementsByType', {'elementType': prepared['type']}))
+            raw = json.dumps(prepared, sort_keys=True, ensure_ascii=False, allow_nan=False)
+            prepared['contractHash'] = hashlib.sha256(raw.encode()).hexdigest()
+            return prepared
+        except VerificationError as exc:
+            raise SafeBIMError(str(exc)) from exc
+
+    def _prepare(self, operation, p):
+        if operation in {'insert_window', 'insert_door'}:
+            host = p['host_wall_guid']
+            if not isinstance(host, str) or not host:
+                raise SafeBIMError('host GUID required')
+            _, host_rows = self._read_details([host])
+            if host_rows[0].get('type') != 'Wall':
+                raise SafeBIMError('host must be a wall')
+            floor = self._floor(host_rows[0].get('floorIndex'))
+        else:
+            floor = self._floor(p['floor_index'])
+        story = self.story_resolver.by_index(floor)
+        elevation = number(story.elevation)
+        expected, fp = [], {}
+        if operation in {'create_wall_loop', 'create_plinth_segment'}:
+            thickness = self._positive(p.get('thickness', .25))
+            if operation == 'create_plinth_segment':
+                a, b = self._point(p['start']), self._point(p['end'])
+                if a == b:
+                    raise SafeBIMError('zero-length plinth')
+                pts = [a, b]
+                bottom, top = number(p['grade_z']), number(p['project_zero_z'])
+                height = self._positive(top - bottom)
+                relative = bottom - elevation
+            else:
+                pts = [self._point(q) for q in p['contour']]
+                if pts and pts[0] == pts[-1]: pts = pts[:-1]
+                if len(pts) < 3 or len({(q['x'], q['y']) for q in pts}) != len(pts):
+                    raise SafeBIMError('nondegenerate contour required')
+                pts.append(copy.deepcopy(pts[0]))
+                height = self._positive(p['height'])
+                relative, bottom, top = 0., elevation, elevation + height
+            walls = []
+            for a, b in zip(pts, pts[1:]):
+                walls.append({'begCoordinate': a, 'endCoordinate': b, 'floorIndex': floor,
+                              'zCoordinate': relative, 'height': height, 'thickness': thickness,
+                              'referenceLineLocation': 'Center', 'structureType': 'Basic'})
+                expected.append({'begCoordinate': a, 'endCoordinate': b, 'zCoordinate': relative,
+                                 'bottomOffset': relative, 'height': height, 'relativeTopStory': 0,
+                                 'begThickness': thickness, 'endThickness': thickness,
+                                 'offset': 0, 'referenceLineLocation': 'Center', 'structureType': 'Basic'})
+            command, payload, kind = 'CreateWalls', {'wallsData': walls}, 'Wall'
+            fp = {'floorIndex': floor, 'story_elevation': elevation, 'relative_offset': relative,
+                  'height': height, 'expected_bottom': bottom, 'expected_top': top, 'structureType': 'Basic'}
+        elif operation == 'create_basic_slab':
+            pts = [self._point(q) for q in p['contour']]
+            if pts and pts[0] == pts[-1]: pts = pts[:-1]
+            if len(pts) < 3 or len({(q['x'], q['y']) for q in pts}) != len(pts):
+                raise SafeBIMError('nondegenerate slab contour required')
+            level, thickness = number(p['level']), self._positive(p['thickness'])
+            plane = p.get('reference_plane', 'TOP')
+            if not isinstance(plane, str) or plane.upper() not in {'TOP', 'BOTTOM'}:
+                raise SafeBIMError('basic slab reference plane must be Top or Bottom')
+            plane = plane.title()
+            offset = 0. if plane == 'Top' else thickness
+            reference = elevation + level
+            top, bottom = reference + offset, reference + offset - thickness
+            payload = {'slabsData': [{'level': level, 'floorIndex': floor, 'thickness': thickness,
+                                     'referencePlaneLocation': plane, 'polygonCoordinates': pts}]}
+            expected = [{'level': level, 'zCoordinate': reference, 'referencePlaneLocation': plane,
+                         'thickness': thickness, 'offsetFromTop': offset, 'structureType': 'Basic',
+                         'polygonOutline': pts}]
+            command, kind = 'CreateSlabs', 'Slab'
+            fp = {'floorIndex': floor, 'story_elevation': elevation, 'level': level,
+                  'thickness': thickness, 'reference_plane': plane, 'expected_top': top,
+                  'expected_bottom': bottom, 'structureType': 'Basic'}
+        elif operation in {'insert_window', 'insert_door'}:
+            intended = p['params']
+            if not isinstance(intended, dict) or set(intended) - {'centerOffset', 'sillHeight', 'width', 'height'}:
+                raise SafeBIMError('invalid opening params')
+            item = {'ownerWallId': {'guid': host}, 'centerOffset': number(intended['centerOffset']),
+                    'sillHeight': number(intended.get('sillHeight', 0)),
+                    'width': self._positive(intended['width']), 'height': self._positive(intended['height'])}
+            is_window = operation == 'insert_window'
+            command, kind = ('CreateWindows', 'Window') if is_window else ('CreateDoors', 'Door')
+            payload = {'windowsData' if is_window else 'doorsData': [item]}
+            expected = [{**{k: v for k, v in item.items() if k != 'ownerWallId'}, 'ownerElementId': {'guid': host}}]
+        else:
+            raise SafeBIMError(f'unsupported operation {operation!r}')
+        self.tapir.validate_payload(command, payload)
+        return {'type': kind, 'floorIndex': floor, 'storyElevation': elevation,
+                'command': command, 'payload': payload, 'expected': expected, 'expectedZFingerprint': fp}
+
+    def verify_saved(self, prepared, guids):
+        story = self.story_resolver.by_index(prepared['floorIndex'])
+        if not equal(story.elevation, prepared['storyElevation']):
+            raise SafeBIMError('story elevation changed since preflight')
+        _, details = self._read_details(guids)
+        verify_details(prepared, guids, details)
+        return details
+
+    def _execute(self, operation, params):
+        context = getattr(self._execution, 'value', None)
+        prepared = context[0] if context else self.prepare(operation, params)
+        clean = {k: v for k, v in params.items() if k not in {'verticalContext', 'expectedZFingerprint'}}
+        if operation != prepared['operation'] or clean != prepared['params']:
+            raise SafeBIMError('execution does not match pinned prepared contract')
+        dispatched = False
+        try:
+            self.ensure_active_story(prepared['floorIndex'])
+            if context:
+                context[1](prepared['command'], prepared['payload'])
+            dispatched = True
+            response = self.tapir.call(prepared['command'], prepared['payload'])
+            guids = element_guids(response, len(prepared['expected']))
+            old = {guid_key(g) for g in prepared['preexistingGuids']}
+            if any(guid_key(g) in old for g in guids):
+                raise SafeBIMError('create returned pre-existing/foreign GUID')
+            if context:
+                context[2]({'status': 'UNKNOWN_OUTCOME', 'readbackVerified': False,
+                            'guids': guids, 'operation': operation, 'contractHash': prepared['contractHash'],
+                            'executionIdentity': prepared.get('executionIdentity')})
+            details = self.verify_saved(prepared, guids)
+            result = {'status': 'PASS', 'readbackVerified': True, 'guids': guids, 'readback': details,
+                      'operation': operation, 'contractHash': prepared['contractHash'],
+                      'executionIdentity': prepared.get('executionIdentity'),
+                      'expectedZFingerprint': prepared['expectedZFingerprint'], 'requestedPayload': prepared['payload']}
+            if prepared['type'] in {'Wall', 'Slab'}:
+                actual = details[0]['details']
+                if prepared['type'] == 'Wall':
+                    result['actual_bottom'] = prepared['storyElevation'] + number(actual['zCoordinate'])
+                    result['actual_top'] = result['actual_bottom'] + number(actual['height'])
+                else:
+                    result['actual_top'] = prepared['storyElevation'] + number(actual['level']) + number(actual['offsetFromTop'])
+                    result['actual_bottom'] = result['actual_top'] - number(actual['thickness'])
+            if context:
+                context[2](result)  # durable verified receipt BEFORE step DONE
+            return result
+        except Exception as exc:
+            if getattr(exc, 'execution_control', False):
+                raise
+            # No repair-write or retry follows a bad readback.
+            return {'status': 'UNKNOWN_OUTCOME' if dispatched else 'WAITING_USER', 'error': repr(exc),
+                    'retryAllowed': False, 'reconciliationRequired': True, 'readbackVerified': False}
 
     def create_wall_loop(self, contour, floor_index, height, thickness):
-        pts=[{'x':float(p['x']),'y':float(p['y'])} for p in contour]
-        if len(pts)<4: raise SafeBIMError('contour needs at least 3 vertices plus closure')
-        if pts[0] != pts[-1]: pts.append(copy.deepcopy(pts[0]))
-        if len(pts)<5 or pts[0] != pts[-1]: raise SafeBIMError('contour must be closed')
-        walls=[]; requested=[]
-        for a,b in zip(pts,pts[1:]):
-            w={'begCoordinate':a,'endCoordinate':b,'floorIndex':int(floor_index),'height':float(height),'thickness':float(thickness),'referenceLineLocation':'Center','structureType':'Basic'}
-            walls.append(w); requested.append({'begCoordinate':a,'endCoordinate':b,'height':float(height),'bottomOffset':0,'offset':0,'begThickness':float(thickness),'endThickness':float(thickness),'referenceLineLocation':'Center','structureType':'Basic'})
-        story_record = self.story_resolver.by_index(floor_index) if self._can_resolve_story() else None
-        expected_top = (story_record.elevation + float(height)) if story_record else None
-        out=self._write_and_read('CreateWalls',{'wallsData':walls},'Wall',requested, floor_index,
-                                 {'bottom_z': story_record.elevation if story_record else None,
-                                  'top_z': expected_top, 'height': float(height),
-                                  'story_index': int(floor_index)})
-        out['requestedPayload']={'wallsData':walls}; return out
+        return self._execute('create_wall_loop', dict(contour=contour, floor_index=floor_index, height=height, thickness=thickness))
 
-    def create_plinth_segment(self, start, end, grade_z, project_zero_z,
-                              floor_index, thickness=0.25):
-        """Create one verified wall segment spanning grade to project zero."""
-        grade_z, project_zero_z = float(grade_z), float(project_zero_z)
-        if grade_z >= project_zero_z:
-            raise SafeBIMError('grade_z must be below project_zero_z')
-        story = self.story_resolver.by_index(int(floor_index), project_zero_z)
-        relative_z = grade_z - float(story.elevation)
-        height = project_zero_z - grade_z
-        fingerprint = {
-            'story_elevation': float(story.elevation),
-            'relative_offset': relative_z,
-            'expected_bottom': grade_z,
-            'expected_top': project_zero_z,
-        }
-        wall = {
-            'begCoordinate': {'x': float(start['x']), 'y': float(start['y'])},
-            'endCoordinate': {'x': float(end['x']), 'y': float(end['y'])},
-            'floorIndex': int(floor_index), 'zCoordinate': relative_z,
-            'height': height, 'thickness': float(thickness),
-            'referenceLineLocation': 'Center', 'structureType': 'Basic',
-        }
-        self.tapir.validate_payload('CreateWalls', {'wallsData': [wall]})
-        response = self.tapir.call('CreateWalls', {'wallsData': [wall]})
-        ids = [x['elementId']['guid'] for x in self._response_items(response).get('elements', [])]
-        if len(ids) != 1:
-            raise SafeBIMError('create_plinth_segment returned an unexpected element count')
-        read_response, details = self._read_details(ids)
-        if len(details) != 1:
-            raise SafeBIMError('create_plinth_segment read-back is incomplete')
-        detail, actual = details[0], details[0].get('details', {})
-        actual_z = float(actual.get('zCoordinate'))
-        actual_height = float(actual.get('height'))
-        actual_bottom, actual_top = actual_z, actual_z + actual_height
-        checks = (detail.get('floorIndex') == int(floor_index) and
-                  math.isclose(actual_z, relative_z, abs_tol=1e-6) and
-                  math.isclose(actual_height, height, abs_tol=1e-6) and
-                  actual.get('structureType') == 'Basic' and
-                  math.isclose(actual_bottom, grade_z, abs_tol=1e-6) and
-                  math.isclose(actual_top, project_zero_z, abs_tol=1e-6))
-        if not checks:
-            raise SafeBIMError('create_plinth_segment read-back fingerprint mismatch')
-        return {'status': 'PASS', 'guids': ids, 'readback': details,
-                'expectedZFingerprint': fingerprint,
-                'actual_bottom': actual_bottom, 'actual_top': actual_top}
-
-    def _can_resolve_story(self):
-        return hasattr(self.tapir, 'call') and not (getattr(self.tapir, 'schema', None) == {'commands': {}})
+    def create_plinth_segment(self, start, end, grade_z, project_zero_z, floor_index, thickness=.25):
+        return self._execute('create_plinth_segment', dict(start=start, end=end, grade_z=grade_z,
+                             project_zero_z=project_zero_z, floor_index=floor_index, thickness=thickness))
 
     def create_basic_slab(self, contour, level, floor_index, thickness, reference_plane='TOP'):
-        pts=[{'x':float(p['x']),'y':float(p['y'])} for p in contour]
-        if pts[0] == pts[-1]: pts=pts[:-1]
-        story_record = self.story_resolver.by_index(floor_index) if self._can_resolve_story() else None
-        top_z = (story_record.elevation + float(level)) if story_record else None
-        payload={'slabsData':[{'level':float(level),'floorIndex':int(floor_index),'thickness':float(thickness),'polygonCoordinates':pts}]}
-        story = self.ensure_active_story(floor_index)
-        self.tapir.validate_payload('CreateSlabs',payload)
-        try:
-            result=self.tapir.call('CreateSlabs',payload)
-        except TimeoutError as exc:
-            reconciliation = self._reconcile_type('Slab')
-            return {'status':'UNKNOWN_OUTCOME','error':repr(exc),'command':'CreateSlabs',
-                    'story':story,'requestedPayload':payload,
-                    'expectedVertical': {'top_z': top_z, 'bottom_z': top_z-float(thickness) if top_z is not None else None,
-                                         'reference_plane': reference_plane, 'level': float(level)},
-                    'reconciliationRequired':True,'retryAllowed':False,
-                    'reconciliation':reconciliation}
-        ids=[x['elementId']['guid'] for x in result.get('result',{}).get('addOnCommandResponse',{}).get('elements',[]) if 'elementId' in x]
-        diffs=[]
-        if len(ids)!=1: diffs.append({'path':'count','requested':1,'actual':len(ids)})
+        # Do not ModifySlabs on an unverified GUID. Create must already satisfy the
+        # requested Basic/plane/thickness contract; otherwise stop UNKNOWN for review.
+        return self._execute('create_basic_slab', dict(contour=contour, level=level, floor_index=floor_index,
+                             thickness=thickness, reference_plane=reference_plane))
 
-        modify_payload = {
-            'slabsWithDetails': [{
-                'elementId': {'guid': ids[0]},
-                'thickness': float(thickness),
-                'structureType': 'Basic'
-            }]
-        } if len(ids) == 1 else {'slabsWithDetails': []}
+    def insert_window(self, host_wall_guid, params):
+        return self._execute('insert_window', dict(host_wall_guid=host_wall_guid, params=params))
 
-        # This is intentionally schema-gated: do not claim support for a
-        # stale local schema or invent a ModifySlabs contract.
-        if not self.tapir.schema or 'ModifySlabs' not in self.tapir.schema.get('commands', {}):
-            raise SafeBIMError(
-                'Local Tapir schema does not contain ModifySlabs; refusing to '
-                'send an unverified slab mutation.'
-            )
-        self.tapir.validate_payload('ModifySlabs', modify_payload)
-        try:
-            modify_result = self.tapir.call('ModifySlabs', modify_payload)
-        except TimeoutError as exc:
-            reconciliation = self._reconcile_type('Slab')
-            return {'status':'UNKNOWN_OUTCOME','error':repr(exc),'command':'ModifySlabs',
-                    'story':story,'requestedPayload':payload,'guids':ids,
-                    'reconciliationRequired':True,'retryAllowed':False,
-                    'reconciliation':reconciliation}
-
-        rr,ds=self._read_details(ids)
-        if ds:
-            actual=ds[0].get('details',{}); st=actual.get('structureType'); th=actual.get('thickness')
-            if st!='Basic': diffs.append({'path':'details.structureType','requested':'Basic','actual':st})
-            if not _num_equal(float(thickness),th): diffs.append({'path':'details.thickness','requested':float(thickness),'actual':th})
-        elif len(ids)==1:
-            diffs.append({'path':'readback','requested':'one slab detail','actual':'<missing>'})
-        out={'status':'PASS' if not diffs and len(ids)==1 else 'FAIL','guids':ids,'requestedPayload':payload,'tapirResponse':result,'modifyPayload':modify_payload,'modifyResponse':modify_result,'readbackResponse':rr,'readback':ds,'diff':diffs,
-             'expectedVertical': {'top_z': top_z, 'bottom_z': top_z-float(thickness) if top_z is not None else None,
-                                  'reference_plane': reference_plane, 'level': float(level)}}
-        return out
-
-    def _insert_opening(self, command, collection, expected_type, host_wall_guid, params):
-        _, host_details = self._read_details([host_wall_guid])
-        if len(host_details) != 1 or not isinstance(host_details[0].get('floorIndex'), int):
-            raise SafeBIMError(f'Cannot resolve host wall floorIndex for {host_wall_guid}')
-        story = self.ensure_active_story(host_details[0]['floorIndex'])
-        item={'ownerWallId':{'guid':host_wall_guid},'centerOffset':float(params['centerOffset']),'sillHeight':float(params.get('sillHeight',0.0)),'width':float(params['width']),'height':float(params['height'])}
-        payload={collection:[item]}; self.tapir.validate_payload(command,payload)
-        try:
-            result=self.tapir.call(command,payload)
-        except TimeoutError as exc:
-            reconciliation = self._reconcile_type(expected_type)
-            return {'status':'UNKNOWN_OUTCOME','error':repr(exc),'command':command,
-                    'story':story,'requestedPayload':payload,'reconciliationRequired':True,
-                    'retryAllowed':False,'reconciliation':reconciliation}
-        ids=[x['elementId']['guid'] for x in result.get('result',{}).get('addOnCommandResponse',{}).get('elements',[]) if 'elementId' in x]
-        rr,ds=self._read_details(ids); diffs=[]
-        if len(ids)!=1: diffs.append({'path':'count','requested':1,'actual':len(ids)})
-        if ds:
-            actual=ds[0].get('details',{}); owner=actual.get('ownerElementId',{}).get('guid')
-            if owner != host_wall_guid: diffs.append({'path':'details.ownerElementId.guid','requested':host_wall_guid,'actual':owner})
-            for k in ('centerOffset','width','height','sillHeight'):
-                if k in item and not _num_equal(item[k],actual.get(k)): diffs.append({'path':f'details.{k}','requested':item[k],'actual':actual.get(k)})
-        return {'status':'PASS' if not diffs and len(ids)==1 else 'FAIL','guids':ids,'requestedPayload':payload,'tapirResponse':result,'readbackResponse':rr,'readback':ds,'diff':diffs}
-
-    def insert_window(self, host_wall_guid, params): return self._insert_opening('CreateWindows','windowsData','Window',host_wall_guid,params)
-    def insert_door(self, host_wall_guid, params): return self._insert_opening('CreateDoors','doorsData','Door',host_wall_guid,params)
+    def insert_door(self, host_wall_guid, params):
+        return self._execute('insert_door', dict(host_wall_guid=host_wall_guid, params=params))
 
     def create_room(self, contour, wall_height, wall_thickness, slab, door=None, windows=None):
         """Create a room; openings are optional and are skipped when omitted."""

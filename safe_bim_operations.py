@@ -1,13 +1,36 @@
-"""SafeBIMLayer adapter and deterministic reconciliation for the executor."""
-from __future__ import annotations
+"""Registered deterministic operations; conservative, receipt-based reconciliation.
 
+No geometry search can prove ownership or non-application after a lost response.
+Only a durable no-dispatch checkpoint permits NOT_APPLIED. APPLIED requires a
+previously verified receipt bound to the exact persisted prepared contract AND
+fresh full read-back of those same GUIDs. Unreceipted writes need human review.
+"""
+from contextlib import contextmanager
+import inspect
+import json
+import hashlib
 from typing import Any
+from safe_bim_layer import SafeBIMLayer, SafeBIMError, TapirClient
+from safe_bim_verification import response_items, guid_key
 
-from safe_bim_layer import SafeBIMLayer, SafeBIMError, TapirClient, _num_equal
+OPERATIONS = frozenset({'create_wall_loop', 'create_basic_slab', 'create_plinth_segment',
+                        'insert_window', 'insert_door'})
+METADATA = frozenset({'verticalContext', 'expectedZFingerprint'})
 
 
-def _items(response):
-    return response.get("result", {}).get("addOnCommandResponse", {})
+def normalized_params(operation, params):
+    if operation not in OPERATIONS or not isinstance(params, dict):
+        raise SafeBIMError('registered operation and params object required')
+    clean = {k: v for k, v in params.items() if k not in METADATA}
+    try:
+        binding = inspect.signature(getattr(SafeBIMLayer, operation)).bind(None, **clean)
+        binding.apply_defaults()
+        values = dict(binding.arguments)
+        values.pop('self')
+        json.dumps(values, allow_nan=False)
+    except (TypeError, ValueError) as exc:
+        raise SafeBIMError(f'invalid operation params: {exc}') from exc
+    return values
 
 
 class SafeBIMOperations:
@@ -16,84 +39,72 @@ class SafeBIMOperations:
         self.layer = SafeBIMLayer(client)
 
     def current_project(self) -> str:
-        path = _items(self.client.call("GetProjectInfo", {})).get("projectPath")
-        if not path:
-            raise SafeBIMError("GetProjectInfo returned no projectPath")
+        path = response_items(self.client.call('GetProjectInfo', {})).get('projectPath')
+        if not isinstance(path, str) or not path.strip():
+            raise SafeBIMError('GetProjectInfo returned no projectPath')
         return path
 
+    def prepare(self, operation, params):
+        clean = normalized_params(operation, params)
+        return self.layer.prepare(operation, {**clean, **{k: params[k] for k in METADATA if k in params}})
+
+    @contextmanager
+    def execution_context(self, prepared, before_write, receipt):
+        with self.layer.execution_context(prepared, before_write, receipt):
+            yield
+
     def execute(self, operation: str, params: dict[str, Any]):
-        methods = {
-            "create_wall_loop": self.layer.create_wall_loop,
-            "create_basic_slab": self.layer.create_basic_slab,
-            "insert_window": self.layer.insert_window,
-            "insert_door": self.layer.insert_door,
-        }
-        if operation not in methods:
-            raise SafeBIMError(f"unsupported resumable operation {operation!r}")
-        return methods[operation](**params)
+        clean = normalized_params(operation, params)
+        if getattr(self.layer._execution, 'value', None) is None:
+            prepared = self.prepare(operation, params)
+            with self.execution_context(prepared, lambda *_: None, lambda *_: None):
+                return getattr(self.layer, operation)(**clean)
+        return getattr(self.layer, operation)(**clean)
 
-    def _read_type(self, element_type):
-        listed = self.client.call("GetElementsByType", {"elementType": element_type})
-        guids = [x["elementId"]["guid"] for x in _items(listed).get("elements", [])
-                 if "elementId" in x]
-        if not guids:
-            return []
-        response = self.client.call("GetDetailsOfElements", {
-            "elements": [{"elementId": {"guid": guid}} for guid in guids]})
-        return list(zip(guids, _items(response).get("detailsOfElements", [])))
-
-    @staticmethod
-    def _finish(matches, expected_count):
-        evidence = {"candidateGuids": [guid for guid, _ in matches],
-                    "readback": [detail for _, detail in matches],
-                    "status": "PASS" if len(matches) == expected_count else "UNKNOWN"}
-        if len(matches) == expected_count:
-            evidence["classification"] = "APPLIED"
-            evidence["readbackVerified"] = True
-        elif not matches:
-            evidence["classification"] = "NOT_APPLIED"
-        else:
-            evidence["classification"] = "AMBIGUOUS"
-        return evidence
-
-    def reconcile(self, operation: str, params: dict[str, Any], _previous=None):
-        if operation == "create_wall_loop":
-            points = [{"x": float(p["x"]), "y": float(p["y"])}
-                      for p in params["contour"]]
-            if points[0] != points[-1]:
-                points.append(dict(points[0]))
-            expected = [(a, b) for a, b in zip(points, points[1:])]
-            found = []
-            for guid, detail in self._read_type("Wall"):
-                actual = detail.get("details", {})
-                if detail.get("floorIndex") != int(params["floor_index"]):
-                    continue
-                pair = (actual.get("begCoordinate"), actual.get("endCoordinate"))
-                if any(pair == segment for segment in expected):
-                    found.append((guid, detail))
-            return self._finish(found, len(expected))
-        if operation == "create_basic_slab":
-            matches = []
-            for guid, detail in self._read_type("Slab"):
-                actual = detail.get("details", {})
-                if (detail.get("floorIndex") == int(params["floor_index"])
-                        and _num_equal(actual.get("thickness"), params["thickness"])
-                        and actual.get("structureType") == "Basic"
-                        and (_num_equal(actual.get("zCoordinate"), params["level"])
-                             or _num_equal(actual.get("level"), params["level"]))):
-                    matches.append((guid, detail))
-            return self._finish(matches, 1)
-        if operation in {"insert_window", "insert_door"}:
-            element_type = "Window" if operation == "insert_window" else "Door"
-            host = params["host_wall_guid"]
-            intended = params["params"]
-            matches = []
-            for guid, detail in self._read_type(element_type):
-                actual = detail.get("details", {})
-                if actual.get("ownerElementId", {}).get("guid") != host:
-                    continue
-                if all(_num_equal(actual.get(key), intended.get(key, 0.0))
-                       for key in ("centerOffset", "width", "height", "sillHeight")):
-                    matches.append((guid, detail))
-            return self._finish(matches, 1)
-        raise SafeBIMError(f"unsupported reconciliation operation {operation!r}")
+    def reconcile(self, operation, params, previous=None):
+        ambiguous = {'classification': 'AMBIGUOUS', 'status': 'UNKNOWN_OUTCOME',
+                     'readbackVerified': False, 'retryAllowed': False}
+        try:
+            clean = normalized_params(operation, params)
+            if not isinstance(previous, dict):
+                return dict(ambiguous, reason='no durable attempt evidence')
+            checkpoint = previous.get('checkpoint')
+            if not isinstance(checkpoint, dict) or checkpoint.get('version') != 1:
+                return dict(ambiguous, reason='legacy/missing checkpoint; human reconciliation required')
+            payload = checkpoint.get('payload', {})
+            if payload.get('operation') != operation or normalized_params(operation, payload.get('params')) != clean:
+                return dict(ambiguous, reason='checkpoint operation/params mismatch')
+            if (any(checkpoint.get(k) != previous.get(k) for k in ('job_id', 'position', 'attempt'))
+                    or payload.get('projectPath') != previous.get('projectPath')
+                    or not checkpoint.get('attemptId')):
+                return dict(ambiguous, reason='checkpoint scope mismatch')
+            if checkpoint.get('dispatchStarted') is False:
+                return {'classification': 'NOT_APPLIED', 'absenceProven': True,
+                        'proof': 'durable checkpoint: dispatch never admitted', 'retryAllowed': True}
+            prepared = payload.get('prepared')
+            receipt = previous.get('result')
+            if not isinstance(prepared, dict) or not isinstance(receipt, dict):
+                return dict(ambiguous, reason='missing prepared contract/verified receipt')
+            identity = {'job_id': previous.get('job_id'), 'position': previous.get('position'),
+                        'attempt': previous.get('attempt'), 'attempt_id': checkpoint.get('attemptId'),
+                        'projectPath': payload.get('projectPath')}
+            if (any(v is None for v in identity.values()) or prepared.get('executionIdentity') != identity
+                    or receipt.get('executionIdentity') != identity):
+                return dict(ambiguous, reason='receipt is not bound to this job/step/attempt/project')
+            hashed = {k: v for k, v in prepared.items() if k != 'contractHash'}
+            digest = hashlib.sha256(json.dumps(hashed, sort_keys=True, ensure_ascii=False, allow_nan=False).encode()).hexdigest()
+            if (prepared.get('operation') != operation or prepared.get('params') != clean
+                    or prepared.get('contractHash') != digest or receipt.get('contractHash') != digest
+                    or receipt.get('operation') != operation or receipt.get('readbackVerified') is not True):
+                return dict(ambiguous, reason='unverified receipt or fingerprint mismatch')
+            guids = receipt.get('guids')
+            if not isinstance(guids, list) or not guids or any(not isinstance(g, str) or not g for g in guids):
+                return dict(ambiguous, reason='missing receipt identities')
+            old = {guid_key(g) for g in prepared['preexistingGuids']}
+            if any(guid_key(g) in old for g in guids):
+                return dict(ambiguous, reason='foreign/pre-existing identity')
+            details = self.layer.verify_saved(prepared, guids)
+            return dict(receipt, status='PASS', classification='APPLIED', readback=details,
+                        readbackVerified=True, retryAllowed=False)
+        except Exception as exc:
+            return dict(ambiguous, reason=f'reconciliation unavailable: {type(exc).__name__}: {exc}')

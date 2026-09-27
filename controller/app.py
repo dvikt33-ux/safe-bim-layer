@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import logging
+import json
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 import threading
@@ -40,6 +41,12 @@ class ControllerApp:
         self.log = configure_logging()
         self.job_id = "active"
         self.alive = True
+        self.selection_generation = 0
+        self._request_serial = 0
+        self._rendered_serial = 0
+        self._poll_lock = threading.Lock()
+        self._displayed_state = None
+        self._history_targets = {}
         self.vars = {key: tk.StringVar(value="—") for key in
                      ("status", "enum", "job", "step", "progress", "floor", "readback", "message")}
         self.topmost = tk.BooleanVar(value=False)
@@ -82,58 +89,100 @@ class ControllerApp:
         threading.Thread(target=self._read_state, daemon=True).start()
         self.root.after(POLL_MS, self.poll)
 
+    def _disable_controls(self):
+        for button in (self.continue_button, self.pause_button, self.stop_button):
+            button.configure(state="disabled")
+
     def _read_state(self):
+        with self._poll_lock:
+            self._request_serial += 1
+            serial = self._request_serial
+            requested, generation = self.job_id, self.selection_generation
         try:
-            state = self.client.state(self.job_id)
+            state = self.client.state(requested)
+            if requested != "active" and state.job_id != requested:
+                raise ValueError("state returned a different job")
+            error = None
         except Exception as exc:
             self.log.info("state unavailable: %s", exc)
-            self.root.after(0, self.disconnected)
-            return
-        self.root.after(0, lambda: self.show_state(state))
+            state, error = None, str(exc)
+        def apply():
+            if (not self.alive or requested != self.job_id or generation != self.selection_generation
+                    or serial < self._rendered_serial):
+                return
+            self._rendered_serial = serial
+            if error is not None:
+                self.disconnected()
+            else:
+                try:
+                    old = self._displayed_state
+                    if old and old.job_id == state.job_id and old.capability == state.capability and old.revision > state.revision:
+                        return
+                    self.show_state(state)
+                except Exception as exc:
+                    self.log.warning("invalid state render: %s", exc)
+                    self.disconnected()
+        self.root.after(0, apply)
 
     def disconnected(self):
+        self._disable_controls()
+        self._displayed_state = None
         self.vars["status"].set("Нет связи")
         self.vars["enum"].set("DISCONNECTED")
-        self.vars["message"].set("Runtime недоступен. Ожидаю восстановление связи.")
+        self.vars["message"].set("Runtime недоступен или выбранный job отсутствует. Обновите выбор.")
 
     def show_state(self, state: RuntimeState):
+        self._disable_controls()
+        self._displayed_state = None
+        # Validate even if a caller constructed the dataclass without from_payload.
+        from dataclasses import asdict
+        state = RuntimeState.from_payload(asdict(state))
         self.vars["status"].set(STATUS_RU.get(state.status, state.status))
         self.vars["enum"].set(state.enum)
         for key, value in (("job", f"{state.task} / {state.job_id}"), ("step", state.step),
                            ("progress", state.progress), ("floor", state.floor if state.floor is not None else "—"),
                            ("readback", state.readback)):
             self.vars[key].set(str(value))
+        targets = {"Текущая задача / Current": "active"}
+        targets.update({f"{json.dumps(row['job_id'], ensure_ascii=False)} · {row['status']} · {row['task_name']}": row['job_id'] for row in state.history})
+        self._history_targets = targets
+        self.history["values"] = list(targets)
         if state.status in {"WAITING_USER", "UNKNOWN_OUTCOME"}:
-            msg = "Закройте предупреждение Archicad вручную, затем нажмите «Продолжить»."
-        elif state.status == "DISCONNECTED":
-            msg = "Нет связи с runtime."
+            message = "Нужна проверка результата. Continue сначала выполняет preflight/reconciliation, не blind retry."
         elif not state.job_id:
-            msg = "Runtime подключён. Активная задача отсутствует."
+            message = "Runtime подключён. Активная задача отсутствует."
         else:
-            msg = "Состояние получено от Safe BIM runtime."
-        self.vars["message"].set(msg)
-        history = state.history or ()
-        self.history["values"] = [f"{item['job_id']} · {item['status']} · {item['task_name']}" for item in history]
-        controls = state.controls or {}
-        self.continue_button.configure(state="normal" if controls.get("continue", False) else "disabled")
-        self.pause_button.configure(state="normal" if controls.get("pause", False) else "disabled")
-        self.stop_button.configure(state="normal" if controls.get("stop", False) else "disabled")
-        if state.selection == "history":
-            self.vars["message"].set("История / History: отображается последний завершённый job.")
+            message = "История выбранного job." if state.selection == "history" else "Состояние получено от Safe BIM runtime."
+        self.vars["message"].set(message)
+        self._displayed_state = state
+        if state.job_id and state.capability and state.status not in {"DONE", "FAILED", "CANCELLED"}:
+            for action, button in (("continue", self.continue_button), ("pause", self.pause_button), ("stop", self.stop_button)):
+                button.configure(state="normal" if state.controls.get(action, False) else "disabled")
 
     def select_history(self, _event=None):
-        value = self.history.get().split(" · ", 1)[0]
-        if value:
-            self.job_id = value
-            self._read_state()
+        selected = self._history_targets.get(self.history.get())
+        if selected is not None:
+            self._disable_controls()
+            self._displayed_state = None
+            self.selection_generation += 1
+            self.job_id = selected
+            threading.Thread(target=self._read_state, daemon=True).start()
 
     def command(self, action: str):
-        self.log.info("command requested: %s", action)
-        try:
-            self.client.command(action, self.job_id)
-        except Exception as exc:
-            self.log.warning("command failed: %s", exc)
-            self.vars["message"].set("Команда не выполнена: нет связи с runtime.")
+        state = self._displayed_state
+        if state is None or not state.job_id or not state.capability or not state.controls.get(action, False) or state.status in {"DONE", "FAILED", "CANCELLED"}:
+            return
+        self._disable_controls()
+        self._displayed_state = None
+        self.log.info("command requested: %s job=%s revision=%s", action, state.job_id, state.revision)
+        def send():
+            try:
+                self.client.command(action, state.job_id, revision=state.revision, capability=state.capability)
+            except Exception as exc:
+                self.log.warning("command not confirmed (no automatic retry): %s", exc)
+            # Polling obtains fresh authoritative state. Never infer NOT_APPLIED
+            # or reissue a command from HTTP timeout/disconnect.
+        threading.Thread(target=send, daemon=True).start()
 
     def close(self):
         self.alive = False

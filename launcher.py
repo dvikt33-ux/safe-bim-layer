@@ -5,7 +5,17 @@ import argparse
 import json
 import logging
 from logging.handlers import RotatingFileHandler
-import msvcrt
+try:
+    import msvcrt
+except ImportError:  # Offline Linux runner; real OS locking, not an import-only stub.
+    import fcntl
+    class _PosixLocking:
+        LK_NBLCK = 1
+        LK_UNLCK = 0
+        @staticmethod
+        def locking(fd, mode, _length):
+            fcntl.flock(fd, fcntl.LOCK_UN if mode == 0 else fcntl.LOCK_EX | fcntl.LOCK_NB)
+    msvcrt = _PosixLocking()
 from pathlib import Path
 import socket
 import subprocess
@@ -34,6 +44,7 @@ class SingleInstance:
     def __enter__(self):
         self.path.parent.mkdir(exist_ok=True)
         self.handle = self.path.open("a+")
+        self.handle.seek(0)
         try:
             msvcrt.locking(self.handle.fileno(), msvcrt.LK_NBLCK, 1)
         except OSError as exc:

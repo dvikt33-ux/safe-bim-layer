@@ -19,10 +19,10 @@ class ControllerClientTests(unittest.TestCase):
         response = urlopen.return_value.__enter__.return_value
         response.read.return_value = json.dumps({"job_id": "j1", "status": "PAUSED"}).encode()
         client = SafeBIMClient()
-        client.command("pause")
+        client.command("pause", "j1", revision=0, capability="test-capability")
         request = urlopen.call_args.args[0]
         self.assertEqual(request.method, "POST")
-        self.assertTrue(request.full_url.endswith("/jobs/active/pause"))
+        self.assertTrue(request.full_url.endswith("/jobs/j1/pause"))
 
     @patch("launcher.urllib.request.urlopen")
     def test_runtime_ready_accepts_missing_active_job(self, urlopen):

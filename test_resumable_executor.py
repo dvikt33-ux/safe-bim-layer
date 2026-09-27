@@ -19,7 +19,7 @@ class FakeOperations:
         self.calls = 0
         self.project = PROJECT
         self.mode = "pass"
-        self.reconciliation = {"classification": "APPLIED", "status": "PASS",
+        self.reconciliation = {"classification": "APPLIED", "status": "PASS", "readbackVerified": True,
                                "readback": [{"guid": "wall-1"}]}
 
     def execute(self, operation, params):
@@ -28,7 +28,7 @@ class FakeOperations:
             raise TimeoutError("applied but response blocked")
         if self.mode == "unknown":
             return {"status": "UNKNOWN_OUTCOME"}
-        return {"status": "PASS", "readback": [{"operation": operation}]}
+        return {"status": "PASS", "readbackVerified": True, "readback": [{"operation": operation}]}
 
     def reconcile(self, operation, params, previous):
         return dict(self.reconciliation)
@@ -98,9 +98,9 @@ class ResumableExecutorTests(unittest.TestCase):
         self.ops.execute = lambda *_: (_ for _ in ()).throw(ModalError("modal"))
         executor = ResumableExecutor(
             self.store, self.ops.execute, self.ops.reconcile, lambda: self.ops.project)
-        self.assertEqual(executor.run(job_id), JobStatus.WAITING_USER)
+        self.assertEqual(executor.run(job_id), JobStatus.UNKNOWN_OUTCOME)
         row = self.store.job(job_id)["steps"][0]
-        self.assertEqual(row["status"], "WAITING_USER")
+        self.assertEqual(row["status"], "UNKNOWN_OUTCOME")
         self.assertFalse(row["result"]["retryAllowed"])
 
     def test_resume_reconciles_applied_without_redispatch(self):
@@ -126,7 +126,7 @@ class ResumableExecutorTests(unittest.TestCase):
         self.ops.mode = "timeout"
         self.executor.run(job_id)
         self.ops.mode = "pass"
-        self.ops.reconciliation = {"classification": "NOT_APPLIED"}
+        self.ops.reconciliation = {"classification": "NOT_APPLIED", "absenceProven": True}
         self.assertEqual(self.executor.resume(job_id), JobStatus.DONE)
         self.assertEqual(self.ops.calls, 2)
 
@@ -157,15 +157,14 @@ class ResumableExecutorTests(unittest.TestCase):
     def test_project_identity_checked_before_run_and_resume(self):
         job_id = self.create_job()
         self.ops.project = r"C:\Other\Wrong.pln"
-        with self.assertRaises(ProjectMismatch):
-            self.executor.run(job_id)
+        self.assertEqual(self.executor.run(job_id), JobStatus.WAITING_USER)
         self.assertEqual(self.ops.calls, 0)
         self.ops.project = PROJECT
         self.ops.mode = "timeout"
-        self.executor.run(job_id)
+        self.ops.reconciliation = {"classification": "NOT_APPLIED", "absenceProven": True}
+        self.executor.resume(job_id)
         self.ops.project = r"C:\Other\Wrong.pln"
-        with self.assertRaises(ProjectMismatch):
-            self.executor.resume(job_id)
+        self.assertEqual(self.executor.resume(job_id), JobStatus.WAITING_USER)
         self.assertEqual(self.ops.calls, 1)
 
     def test_done_requires_readback(self):
@@ -173,7 +172,7 @@ class ResumableExecutorTests(unittest.TestCase):
         self.ops.execute = lambda *_: {"status": "PASS", "readback": []}
         executor = ResumableExecutor(
             self.store, self.ops.execute, self.ops.reconcile, lambda: PROJECT)
-        self.assertEqual(executor.run(job_id), JobStatus.FAILED)
+        self.assertEqual(executor.run(job_id), JobStatus.UNKNOWN_OUTCOME)
 
     def test_palette_active_alias_resolves_latest_job(self):
         job_id = self.create_job()
@@ -193,7 +192,9 @@ class ResumableExecutorTests(unittest.TestCase):
                 state = json.loads(response.read().decode("utf-8"))
             self.assertEqual(state["job_id"], job_id)
             request = urllib.request.Request(
-                f"http://127.0.0.1:{port}/jobs/active/pause", data=b"", method="POST")
+                f"http://127.0.0.1:{port}/jobs/{job_id}/pause",
+                data=json.dumps({"job_id": job_id, "action": "pause", "revision": state["revision"]}).encode(),
+                headers={"Content-Type": "application/json", "X-Safe-BIM-Token": state["capability"]}, method="POST")
             with urllib.request.urlopen(request, timeout=3) as response:
                 result = json.loads(response.read().decode("utf-8"))
             self.assertEqual(result["status"], "PAUSED")

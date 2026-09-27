@@ -60,3 +60,16 @@ Thumbs.db
 *.swp
 *.swo
 *~
+
+# Runtime ownership and build outputs (including non-default build directories)
+*.execution.lock
+*.sqlite-wal
+*.sqlite-shm
+*.apx
+*.pdb
+*.obj
+*.lib
+*.exp
+CMakeCache.txt
+CMakeFiles/
+runtime-plans/

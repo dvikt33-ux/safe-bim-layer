@@ -3,52 +3,20 @@ import unittest
 from safe_bim_layer import SafeBIMLayer, SafeBIMError, ModalStateError
 
 
-class FakeTapir:
+from tests_safety.fake_bim import FakeBIM
+
+
+class FakeTapir(FakeBIM):
+    """Updated fixture returns the complete strict read-back, not just three fields."""
     def __init__(self, active=0, timeout_on=None, create_before_timeout=False):
+        super().__init__()
         self.active = active
-        self.timeout_on = timeout_on
-        self.create_before_timeout = create_before_timeout
-        self.calls = []
-        self.schema = {'commands': {}}
         self.created = []
-
-    def validate_payload(self, command, payload):
-        self.calls.append(('validate', command, payload))
-
-    def active_story(self):
-        self.calls.append(('GetStories',))
-        return self.active
-
-    def change_floor_plan_navigator_item(self, guid):
-        return self.call('ChangeWindow', {'navigatorItemId': {'guid': guid}})
-
-    def call(self, command, payload):
-        self.calls.append((command, payload))
-        if command == 'GetNavigatorItemTree':
-            return {'result': {'addOnCommandResponse': {'navigatorItemTree': [
-                {'type': 'StoryItem', 'prefix': '1', 'navigatorItemId': {'guid': 'story-1'}}]}}}
-        if command == 'ChangeWindow':
-            self.active = 1
-            return {'result': {'addOnCommandResponse': {'success': True}}}
-        if command == self.timeout_on:
-            if self.create_before_timeout:
-                self.created.append(payload)
-            raise TimeoutError('simulated modal-blocked timeout')
-        if command == 'CreateWalls':
-            self.created.append(payload)
-            return {'result': {'addOnCommandResponse': {'elements': [
-                {'elementId': {'guid': 'plinth-1'}}]}}}
-        if command == 'GetElementsByType':
-            return {'result': {'addOnCommandResponse': {'elements': []}}}
-        if command == 'GetDetailsOfElements':
-            return {'result': {'addOnCommandResponse': {'detailsOfElements': [{
-                'type': 'Wall', 'floorIndex': 0,
-                'details': {'zCoordinate': -0.6, 'height': 0.6,
-                            'structureType': 'Basic'}}]}}}
-        if command == 'GetStories':
-            return {'result': {'addOnCommandResponse': {'stories': [
-                {'index': 0, 'level': 0.0}]}}}
-        return {'result': {'addOnCommandResponse': {}}}
+        def created(command, guids):
+            self.created.append(self.dispatches[-1][1])
+            if command == timeout_on:
+                raise TimeoutError('simulated lost mutation response')
+        self.on_created = created
 
 
 class SafeBIMRegressionTests(unittest.TestCase):
@@ -94,10 +62,11 @@ class SafeBIMRegressionTests(unittest.TestCase):
                 if command == 'CreateWalls':
                     raise ModalStateError('Invalid program status: modal dialog')
                 return super().call(command, payload)
-        with self.assertRaises(ModalStateError):
-            SafeBIMLayer(ModalTapir()).create_wall_loop(
+        result = SafeBIMLayer(ModalTapir()).create_wall_loop(
                 [{'x': 0, 'y': 0}, {'x': 1, 'y': 0},
                  {'x': 1, 'y': 1}, {'x': 0, 'y': 1}], 0, 0.6, 0.25)
+        self.assertEqual(result['status'], 'UNKNOWN_OUTCOME')
+        self.assertFalse(result['retryAllowed'])
 
 
 if __name__ == '__main__':
