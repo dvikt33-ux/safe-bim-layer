@@ -3,15 +3,28 @@ import unittest
 from unittest.mock import patch
 
 from safe_bim_house_primitives import (
-    GROUND_POLYGON, GROUND_Z, INSUFFICIENT_SCHEMA, PORCH_SIZE, PRODUCTION_ENABLED,
-    READY_FOR_LIVE_PROBE, SCHEMA_ONLY, UNVERIFIED, OfflinePrimitiveError,
-    assess_arc_readback, assess_mesh_readback, assess_morph_echo, assess_roof_readback,
-    build_house_plan, control_action, dispatch_house_plan, experimental_morph_body,
-    prepare_arc_wall, prepare_flat_mesh, prepare_morph_box, prepare_roof_candidates,
-    schema_client,
+    GROUND_POLYGON, GROUND_Z, HOUSE_PLAN_STEPS, INSUFFICIENT_READBACK, INSUFFICIENT_SCHEMA,
+    PORCH_PLACEHOLDER_BASE, PORCH_SIZE, PRODUCTION_ENABLED, READY_FOR_LIVE_PROBE, SCHEMA_ONLY,
+    UNVERIFIED, OfflinePrimitiveError, assess_arc_readback, assess_mesh_readback, assess_morph_echo,
+    assess_roof_readback, build_house_plan, control_action, dispatch_house_plan,
+    evaluate_final_reread, experimental_morph_body, porch_proposal, prepare_arc_wall,
+    prepare_flat_mesh, prepare_morph_box, prepare_roof_candidates, require_live_morph_payload,
+    schema_client, validate_house_plan, validate_pinned_schema,
 )
 from safe_bim_layer import SafeBIMError, TapirClient
 from safe_bim_operations import OPERATIONS, normalized_params
+
+
+def _box_body(size, z):
+    return {
+        'vertices': [
+            {'x': 0.0, 'y': 0.0, 'z': z},
+            {'x': size['x'], 'y': 0.0, 'z': z},
+            {'x': size['x'], 'y': size['y'], 'z': z},
+            {'x': 0.0, 'y': 0.0, 'z': z + size['z']},
+        ],
+        'polygons': [{'vertexIds': [0, 1, 2]}],
+    }
 
 
 class ArcWallTests(unittest.TestCase):
@@ -28,6 +41,7 @@ class ArcWallTests(unittest.TestCase):
         self.assertEqual(prepared['capability_state'], READY_FOR_LIVE_PROBE)
         self.assertEqual(prepared['readback_capability'], UNVERIFIED)
         self.assertFalse(prepared['production_enabled'])
+        self.assertEqual(prepared['arc_angle_sign'], 'UNVERIFIED')
         self.assertIn('arcAngle', prepared['fingerprint'])
 
     def test_nonzero_story_keeps_write_offset_separate_from_readback(self):
@@ -59,6 +73,15 @@ class ArcWallTests(unittest.TestCase):
         self.assertIn('arcAngle missing', assess_arc_readback(prepared, 0, missing)['reasons'])
         wrong = dict(missing, arcAngle=1.2)
         self.assertEqual(assess_arc_readback(prepared, 0, wrong)['geometry'], 'MISMATCH')
+
+    def test_house_arc_keeps_both_signs_unselected(self):
+        plan = build_house_plan()
+        prepared = plan['steps'][2]['prepared']
+        self.assertIsNone(prepared['selected_angle'])
+        signs = [item['payload']['wallsData'][0]['arcAngle'] for item in prepared['candidates']]
+        self.assertEqual(len(signs), 2)
+        self.assertTrue(signs[0] * signs[1] < 0)
+        self.assertTrue(all(item['arc_angle_sign'] == 'UNVERIFIED' for item in prepared['candidates']))
 
 
 class MeshTests(unittest.TestCase):
@@ -95,7 +118,7 @@ class MeshTests(unittest.TestCase):
 
 class MorphTests(unittest.TestCase):
     def test_box_bottom_and_top(self):
-        prepared = prepare_morph_box({'x': 0, 'y': -1.5, 'z': -0.5}, PORCH_SIZE, 0)
+        prepared = prepare_morph_box({'x': 1, 'y': 2, 'z': -0.5}, PORCH_SIZE, 0, position_confirmed=True)
         item = prepared['payload']['morphsData'][0]
         self.assertEqual(item['size'], {'x': 3.0, 'y': 1.5, 'z': 0.5})
         self.assertNotIn('body', item)
@@ -103,16 +126,40 @@ class MorphTests(unittest.TestCase):
         self.assertAlmostEqual(prepared['fingerprint']['absolute_top'], 0.0)
         self.assertEqual(prepared['capability_state'], READY_FOR_LIVE_PROBE)
         self.assertFalse(prepared['production_enabled'])
+        self.assertEqual(prepared['readback_capability'], UNVERIFIED)
 
-    def test_wrong_echo_and_incomplete_details(self):
-        prepared = prepare_morph_box({'x': 1, 'y': 2, 'z': -0.5}, PORCH_SIZE, 0)
+    def test_empty_body_is_not_a_match(self):
+        prepared = prepare_morph_box({'x': 1, 'y': 2, 'z': -0.5}, PORCH_SIZE, 0, position_confirmed=True)
         echo = {'origin': {'x': 1.0, 'y': 2.0, 'z': -0.5}, 'size': PORCH_SIZE, 'floorIndex': 0,
                 'body': {'vertices': []}, 'absolute_bottom': -0.5, 'absolute_top': 0.0}
-        self.assertEqual(assess_morph_echo(prepared, echo)['geometry'], 'MATCH')
-        self.assertIn('basePoint', assess_morph_echo(prepared, dict(echo, origin={'x': 9, 'y': 9, 'z': -0.5}))['reasons'])
-        self.assertIn('size', assess_morph_echo(prepared, dict(echo, size={'x': 1, 'y': 1, 'z': 1}))['reasons'])
-        self.assertIn('absolute_top', assess_morph_echo(prepared, dict(echo, absolute_top=2))['reasons'])
-        self.assertEqual(assess_morph_echo(prepared, {'origin': echo['origin']})['reasons'], ['incomplete body/details'])
+        verdict = assess_morph_echo(prepared, echo)
+        self.assertEqual(verdict['geometry'], INSUFFICIENT_READBACK)
+        self.assertNotEqual(verdict['geometry'], 'MATCH')
+        self.assertFalse(verdict['ownershipProven'])
+        self.assertFalse(verdict['production_enabled'])
+        missing = assess_morph_echo(prepared, {'origin': echo['origin']})
+        self.assertEqual(missing['geometry'], INSUFFICIENT_READBACK)
+        self.assertIn('incomplete body/details', missing['reasons'])
+        malformed = assess_morph_echo(prepared, dict(echo, body={'vertices': [{'x': 0}]}))
+        self.assertEqual(malformed['geometry'], 'MISMATCH')
+        self.assertIn('malformed vertex', malformed['reasons'])
+        faceless = dict(echo, body={'vertices': _box_body(PORCH_SIZE, -0.5)['vertices']})
+        self.assertEqual(assess_morph_echo(prepared, faceless)['geometry'], INSUFFICIENT_READBACK)
+        wrong_point = assess_morph_echo(prepared, dict(echo, origin={'x': 9, 'y': 9, 'z': -0.5}))
+        self.assertEqual(wrong_point['geometry'], 'MISMATCH')
+        self.assertIn('basePoint', wrong_point['reasons'])
+        wrong_size = assess_morph_echo(prepared, dict(echo, size={'x': 1, 'y': 1, 'z': 1}))
+        self.assertEqual(wrong_size['geometry'], 'MISMATCH')
+        self.assertIn('dimensions', wrong_size['reasons'])
+
+    def test_complete_echo_is_not_ownership(self):
+        prepared = prepare_morph_box({'x': 1, 'y': 2, 'z': -0.5}, PORCH_SIZE, 0, position_confirmed=True)
+        echo = {'origin': {'x': 1.0, 'y': 2.0, 'z': -0.5}, 'size': PORCH_SIZE, 'floorIndex': 0,
+                'body': _box_body(PORCH_SIZE, -0.5), 'absolute_bottom': -0.5, 'absolute_top': 0.0}
+        verdict = assess_morph_echo(prepared, echo)
+        self.assertEqual(verdict['geometry'], 'MATCH')
+        self.assertFalse(verdict['ownershipProven'])
+        self.assertNotEqual(verdict['capability_state'], PRODUCTION_ENABLED)
 
     def test_experimental_body_is_not_the_porch_primitive(self):
         experimental = experimental_morph_body([{'x': 0, 'y': 0, 'z': 0}, {'x': 1, 'y': 0, 'z': 0}])
@@ -140,12 +187,35 @@ class RoofTests(unittest.TestCase):
         self.assertEqual(model['safer_live_probe'], 'roof_two_single_planes')
         self.assertIsNone(model['winner'])
 
+    def test_assumptions_are_not_observed_facts(self):
+        model = prepare_roof_candidates()
+        for candidate in model['candidates'].values():
+            fingerprint = candidate['fingerprint']
+            self.assertEqual(fingerprint['observed'], 'NONE')
+            self.assertFalse(fingerprint['verified'])
+            self.assertEqual(candidate['observed'], 'NONE')
+            self.assertFalse(candidate['verified'])
+            requested = fingerprint['requested_geometry']
+            self.assertEqual(set(requested), {
+                'requested_eaves_z', 'requested_ridge_z', 'requested_overhang', 'requested_angle'})
+            self.assertNotIn('eaves_z', fingerprint)
+            self.assertNotIn('ridge_z', fingerprint)
+            self.assertNotIn('ridge_y', fingerprint)
+            self.assertNotIn('angle_radians', fingerprint)
+            self.assertIn('level', fingerprint['assumptions'])
+            self.assertIn('levelHeight', fingerprint['assumptions'])
+            self.assertIn('ridge', fingerprint['assumptions'])
+        self.assertEqual(model['observed'], 'NONE')
+        self.assertFalse(model['verified'])
+
     def test_readback_unavailable_is_fail_closed(self):
         model = prepare_roof_candidates()
         for candidate in model['candidates'].values():
             verdict = assess_roof_readback(candidate, {'ridge_z': 5.0, 'eaves_z': 3.0})
             self.assertEqual(verdict['geometry'], 'UNVERIFIED')
             self.assertEqual(verdict['schema_classification'], INSUFFICIENT_SCHEMA)
+            self.assertEqual(verdict['observed'], 'NONE')
+            self.assertFalse(verdict['verified'])
             self.assertFalse(verdict['production_enabled'])
             self.assertFalse(verdict['ownershipProven'])
 
@@ -153,8 +223,7 @@ class RoofTests(unittest.TestCase):
 class HousePlanTests(unittest.TestCase):
     def test_order_dependencies_and_no_production_enablement(self):
         plan = build_house_plan()
-        self.assertEqual([step['id'] for step in plan['steps']],
-                         ['mesh_ground', 'straight_walls', 'arc_wall', 'morph_porch', 'roof'])
+        self.assertEqual([step['id'] for step in plan['steps']], list(HOUSE_PLAN_STEPS))
         self.assertEqual(plan['steps'][2]['depends_on'], ['straight_walls'])
         self.assertIsNone(plan['steps'][2]['prepared']['selected_angle'])
         self.assertEqual(len(plan['steps'][2]['prepared']['candidates']), 2)
@@ -163,21 +232,84 @@ class HousePlanTests(unittest.TestCase):
         self.assertTrue(all(step['production_enabled'] is False for step in plan['steps']))
         self.assertEqual(control_action('MISMATCH'), 'STOP')
         self.assertEqual(control_action('UNKNOWN_OUTCOME'), 'STOP')
+        self.assertEqual(control_action('MISSING_RECEIPT'), 'STOP')
         with self.assertRaises(OfflinePrimitiveError):
             control_action('CONTINUE')
+
+    def test_final_reread_is_read_only_and_missing_receipt_stops(self):
+        plan = build_house_plan()
+        step = plan['steps'][5]
+        self.assertEqual(step['id'], 'final_reread')
+        self.assertEqual(step['depends_on'], ['mesh_ground', 'straight_walls', 'arc_wall', 'morph_porch', 'roof'])
+        prepared = step['prepared']
+        self.assertTrue(prepared['read_only'])
+        self.assertFalse(prepared['writes_allowed'])
+        self.assertFalse(prepared['adoption_allowed'])
+        self.assertFalse(prepared['model_search_allowed'])
+        self.assertEqual(prepared['on_missing_receipt'], 'STOP')
+        self.assertEqual(prepared['command'], 'GetDetailsOfElements')
+        missing = evaluate_final_reread(None)
+        self.assertEqual(missing['action'], 'STOP')
+        self.assertEqual(missing['decision'], 'STOP')
+        self.assertFalse(missing['retryAllowed'])
+        self.assertFalse(missing['repairWrite'])
+        self.assertEqual(missing['writes'], 0)
+        self.assertEqual(evaluate_final_reread([{'verifiedGuid': ''}])['action'], 'STOP')
+        read = evaluate_final_reread([{'verifiedGuid': 'ABC'}])
+        self.assertEqual(read['action'], 'READ_ONLY')
+        self.assertEqual(read['elements'], [{'elementId': {'guid': 'ABC'}}])
+        self.assertEqual(read['writes'], 0)
+        self.assertFalse(read['adoptionAllowed'])
+        self.assertFalse(read['modelSearchAllowed'])
+        self.assertNotIn('elementType', read)
+
+    def test_unconfirmed_porch_has_no_live_payload(self):
+        proposal = porch_proposal()
+        self.assertIsNone(proposal['xy'])
+        self.assertTrue(proposal['requires_confirmation'])
+        self.assertFalse(proposal['position_confirmed'])
+        self.assertIsNone(proposal['payload'])
+        self.assertFalse(proposal['live_payload_allowed'])
+        with self.assertRaises(OfflinePrimitiveError):
+            require_live_morph_payload(proposal)
+        with self.assertRaises(OfflinePrimitiveError):
+            prepare_morph_box(PORCH_PLACEHOLDER_BASE, PORCH_SIZE, 0)
+        plan = build_house_plan()
+        porch = plan['steps'][3]['prepared']
+        self.assertIsNone(porch['xy'])
+        self.assertIsNone(porch['payload'])
+        self.assertNotIn('basePoint', str(porch))
+        self.assertFalse(porch['live_payload_allowed'])
+        with self.assertRaises(OfflinePrimitiveError):
+            require_live_morph_payload(porch)
+        confirmed = prepare_morph_box({'x': 4, 'y': 1, 'z': -0.5}, PORCH_SIZE, 0, position_confirmed=True)
+        self.assertIn('morphsData', require_live_morph_payload(confirmed))
+
+    def test_capability_mutation_fails_validation(self):
+        plan = build_house_plan()
+        plan['steps'][0]['prepared']['production_enabled'] = True
+        plan['steps'][0]['prepared']['capability_state'] = PRODUCTION_ENABLED
+        with self.assertRaises(OfflinePrimitiveError):
+            validate_house_plan(plan)
+        plan = build_house_plan()
+        plan['steps'][4]['prepared']['candidates']['A_multiplane']['capability_state'] = 'LIVE_VERIFIED'
+        with self.assertRaises(OfflinePrimitiveError):
+            validate_house_plan(plan)
+        plan = build_house_plan()
+        plan['steps'][1]['production_enabled'] = True
+        with self.assertRaises(OfflinePrimitiveError):
+            validate_house_plan(plan)
 
     def test_builders_and_plan_perform_no_physical_write(self):
         calls = []
         with patch('urllib.request.urlopen', side_effect=AssertionError('network write attempted')):
-            client = schema_client()
-            client.call = lambda command, params=None: calls.append(command)
-            prepare_arc_wall({'x': 0, 'y': 0}, {'x': 1, 'y': 0}, 0.2, 0, 3, 0.25, 0, 0, client=client)
-            prepare_flat_mesh(GROUND_POLYGON, -0.5, 0, client=client)
-            prepare_morph_box({'x': 0, 'y': 0, 'z': -0.5}, PORCH_SIZE, 0, client=client)
-            prepare_roof_candidates(client=client)
-            plan = build_house_plan(client)
+            prepare_arc_wall({'x': 0, 'y': 0}, {'x': 1, 'y': 0}, 0.2, 0, 3, 0.25, 0, 0)
+            prepare_flat_mesh(GROUND_POLYGON, -0.5, 0)
+            prepare_morph_box({'x': 0, 'y': 0, 'z': -0.5}, PORCH_SIZE, 0, position_confirmed=True)
+            prepare_roof_candidates()
+            plan = build_house_plan()
             with self.assertRaises(OfflinePrimitiveError):
-                dispatch_house_plan(plan, client)
+                dispatch_house_plan(plan)
         self.assertEqual(calls, [])
 
     def test_live_client_is_refused_before_validation(self):
@@ -192,6 +324,74 @@ class HousePlanTests(unittest.TestCase):
             with self.assertRaises(SafeBIMError):
                 normalized_params(name, {})
         self.assertNotIn(PRODUCTION_ENABLED, {READY_FOR_LIVE_PROBE, SCHEMA_ONLY, UNVERIFIED})
+
+
+class NoWriteBypassTests(unittest.TestCase):
+    def test_stock_subclass_monkeypatch_hostile_and_proxy_write_nothing(self):
+        writes = []
+
+        class Sub(TapirClient):
+            def call(self, command, params=None):
+                writes.append(('subclass', command))
+                return {}
+
+        class Hostile:
+            def validate_payload(self, command, payload):
+                self.call(command, payload)
+
+            def call(self, command, params=None):
+                writes.append(('hostile', command))
+
+        class Exposed:
+            def __init__(self):
+                self.calls = []
+
+            def call(self, command, params=None):
+                self.calls.append(command)
+                writes.append(('exposed', command))
+
+            def validate_payload(self, command, payload):
+                self.call(command, payload)
+
+        class CallableProxy:
+            def __call__(self, command, params=None):
+                writes.append(('proxy', command))
+
+            def call(self, command, params=None):
+                return self(command, params)
+
+            def validate_payload(self, command, payload):
+                return self(command, payload)
+
+        stock = TapirClient(schema_path='tapir-1.5.8.json')
+        subclass = Sub(schema_path='tapir-1.5.8.json')
+        patched = schema_client()
+        patched.call = lambda command, params=None: writes.append(('patched', command))
+        hostile = Hostile()
+        exposed = Exposed()
+        proxy = CallableProxy()
+        for client in (stock, subclass, patched, hostile, exposed, proxy):
+            with self.assertRaises(OfflinePrimitiveError):
+                prepare_flat_mesh(GROUND_POLYGON, -0.5, 0, client=client)
+            with self.assertRaises(OfflinePrimitiveError):
+                prepare_arc_wall({'x': 0, 'y': 0}, {'x': 1, 'y': 0}, 0.2, 0, 3, 0.25, 0, 0, client=client)
+            with self.assertRaises(OfflinePrimitiveError):
+                build_house_plan(client)
+        self.assertEqual(writes, [])
+        self.assertEqual(exposed.calls, [])
+
+    def test_pinned_validator_is_used_and_class_methods_are_not(self):
+        writes = []
+
+        def boom(*args, **kwargs):
+            writes.append(args[:1])
+            raise AssertionError('injected TapirClient method called')
+
+        with patch.object(TapirClient, 'call', boom), patch.object(TapirClient, 'validate_payload', boom):
+            prepare_flat_mesh(GROUND_POLYGON, -0.5, 0)
+            with self.assertRaises(OfflinePrimitiveError):
+                validate_pinned_schema('CreateMeshes', {})
+        self.assertEqual(writes, [])
 
 
 if __name__ == '__main__':

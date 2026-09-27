@@ -1,11 +1,13 @@
 """Offline schema builders for a future house test.
 
-These functions validate Tapir payloads and fingerprints. They do not call
-Tapir, do not belong to SafeBIMOperations.OPERATIONS, and cannot reach DONE.
-Geometry agreement is never ownership and never production enablement.
+Schema checks read the pinned local Tapir document. They do not call an
+injected client, do not belong to SafeBIMOperations.OPERATIONS, and cannot
+reach DONE. Geometry agreement is never ownership and never production
+enablement.
 """
 from __future__ import annotations
 
+import json
 import math
 from pathlib import Path
 from typing import Any
@@ -27,6 +29,11 @@ PRODUCTION_ENABLED = 'PRODUCTION_ENABLED'
 INSUFFICIENT_SCHEMA = 'INSUFFICIENT_SCHEMA'
 READY_FOR_PROBE = 'READY_FOR_PROBE'
 UNVERIFIED = 'UNVERIFIED'
+INSUFFICIENT_READBACK = 'INSUFFICIENT_READBACK'
+FORBIDDEN_CAPABILITIES = frozenset({LIVE_VERIFIED, PRODUCTION_ENABLED})
+HOUSE_PLAN_STEPS = (
+    'mesh_ground', 'straight_walls', 'arc_wall', 'morph_porch', 'roof', 'final_reread',
+)
 
 # None of the new primitives are production operations. Straight walls remain
 # available only through the existing dispatcher, which this module never calls.
@@ -56,8 +63,9 @@ ROOF_EAVES_Z = 3.0
 ROOF_RIDGE_Z = 5.0
 ROOF_OVERHANG = 0.5
 PORCH_SIZE = {'x': 3.0, 'y': 1.5, 'z': 0.5}
-# XY was not specified. This origin is a labeled placeholder, not a measurement.
+# Historical unlabeled draft. Not a design position and not a payload field.
 PORCH_PLACEHOLDER_BASE = {'x': 0.0, 'y': -1.5, 'z': GROUND_Z}
+_SCHEMA_DOCUMENT = None
 
 
 class OfflinePrimitiveError(SafeBIMError):
@@ -65,7 +73,11 @@ class OfflinePrimitiveError(SafeBIMError):
 
 
 def schema_client() -> TapirClient:
-    """Schema validator with live/write calls refused."""
+    """Refused-call helper for callers outside the builders.
+
+    Builders do not use this object. Schema checks go through
+    validate_pinned_schema and never call a client method.
+    """
     client = TapirClient(schema_path=str(SCHEMA_PATH))
 
     def refuse(command, params=None):
@@ -73,6 +85,82 @@ def schema_client() -> TapirClient:
 
     client.call = refuse
     return client
+
+
+def _pinned_schema():
+    global _SCHEMA_DOCUMENT
+    if _SCHEMA_DOCUMENT is None:
+        _SCHEMA_DOCUMENT = json.loads(SCHEMA_PATH.read_text(encoding='utf-8'))
+    return _SCHEMA_DOCUMENT
+
+
+def _resolve_ref(schema, ref):
+    if not ref or not ref.startswith('#/'):
+        return None
+    key = ref[2:]
+    return schema.get(key) or schema.get('common_schemas', {}).get(key)
+
+
+def _validate_node(schema, node, value, path):
+    if '$ref' in node:
+        target = _resolve_ref(schema, node['$ref'])
+        if target is None:
+            raise OfflinePrimitiveError(f'Unresolved Tapir schema ref {node["$ref"]} at {path}')
+        return _validate_node(schema, target, value, path)
+    typ = node.get('type')
+    if typ == 'object':
+        if not isinstance(value, dict):
+            raise OfflinePrimitiveError(f'{path} must be object')
+        allowed = set(node.get('properties', {}))
+        missing = [key for key in node.get('required', []) if key not in value]
+        if missing:
+            raise OfflinePrimitiveError(f'{path} missing required fields {missing}')
+        if node.get('additionalProperties') is False:
+            extra = [key for key in value if key not in allowed]
+            if extra:
+                raise OfflinePrimitiveError(f'{path} has unsupported fields {extra}')
+        for key, item in value.items():
+            if key in node.get('properties', {}):
+                _validate_node(schema, node['properties'][key], item, f'{path}.{key}')
+    elif typ == 'array':
+        if not isinstance(value, list):
+            raise OfflinePrimitiveError(f'{path} must be array')
+        if 'minItems' in node and len(value) < node['minItems']:
+            raise OfflinePrimitiveError(f'{path} has too few items')
+        if 'maxItems' in node and len(value) > node['maxItems']:
+            raise OfflinePrimitiveError(f'{path} has too many items')
+        if 'items' in node:
+            for index, item in enumerate(value):
+                _validate_node(schema, node['items'], item, f'{path}[{index}]')
+    elif typ == 'string':
+        if not isinstance(value, str):
+            raise OfflinePrimitiveError(f'{path} must be string')
+        if 'enum' in node and value not in node['enum']:
+            raise OfflinePrimitiveError(f'{path} unsupported enum {value!r}; allowed={node["enum"]}')
+    elif typ == 'integer':
+        if not isinstance(value, int) or isinstance(value, bool):
+            raise OfflinePrimitiveError(f'{path} must be integer')
+    elif typ == 'number':
+        if not isinstance(value, (int, float)) or isinstance(value, bool):
+            raise OfflinePrimitiveError(f'{path} must be number')
+        exclusive = node.get('exclusiveMinimum')
+        if exclusive is not None and value <= exclusive:
+            raise OfflinePrimitiveError(f'{path} must be > {exclusive}')
+
+
+def validate_pinned_schema(command, payload):
+    """Pure offline check against tapir-1.5.8.json. No client and no transport."""
+    schema = _pinned_schema()
+    spec = schema.get('commands', {}).get(command)
+    if not spec:
+        raise OfflinePrimitiveError(f'No schema for {command}')
+    _validate_node(schema, spec.get('parameters') or {'type': 'object'}, payload, f'{command}.parameters')
+
+
+def _reject_injected(client):
+    """Any caller-supplied object is untrusted. Do not read or call it."""
+    if client is not None:
+        raise OfflinePrimitiveError('offline builders reject injected clients before calling any validator')
 
 
 def _num(value):
@@ -114,18 +202,16 @@ def _base(primitive, command, payload, fingerprint, capability, **extra):
         'schema_valid': True,
     }
     record.update(extra)
-    if record['production_enabled'] or record['capability_state'] == PRODUCTION_ENABLED:
+    if record['production_enabled'] is not False or record['dispatch_allowed'] is not False:
+        raise OfflinePrimitiveError('new house primitive cannot be production-enabled')
+    if record['capability_state'] in FORBIDDEN_CAPABILITIES:
         raise OfflinePrimitiveError('new house primitive cannot be production-enabled')
     return record
 
 
 def _validate(client, command, payload):
-    client = client or schema_client()
-    call = getattr(client, 'call', None)
-    if getattr(call, '__func__', None) is TapirClient.call:
-        raise OfflinePrimitiveError('refusing a client that can perform a live Tapir call')
-    client.validate_payload(command, payload)
-    return client
+    _reject_injected(client)
+    validate_pinned_schema(command, payload)
 
 
 def central_angle_ccw(center, start, end):
@@ -299,8 +385,41 @@ def assess_mesh_readback(prepared, details):
     return _diagnostic('MATCH' if not reasons else 'MISMATCH', reasons, z_semantics='AMBIGUOUS')
 
 
-def prepare_morph_box(base_point, size, floor_index, client=None):
-    """basePoint + size box. size/body mapping and Z/story relation stay unverified."""
+def porch_proposal():
+    """Unconfirmed porch model. XY is absent. This is not a live payload."""
+    return {
+        'primitive': 'morph',
+        'requested_size': dict(PORCH_SIZE),
+        'requested_z': GROUND_Z,
+        'xy': None,
+        'placeholder': {
+            'xy_specified': False,
+            'not_a_design_decision': True,
+            'note': 'Porch XY was not specified and is not a project position.',
+        },
+        'requires_confirmation': True,
+        'position_confirmed': False,
+        'live_payload_allowed': False,
+        'payload': None,
+        'capability_state': READY_FOR_LIVE_PROBE,
+        'production_enabled': False,
+        'dispatch_allowed': False,
+        'ownershipProven': False,
+        'readback_capability': UNVERIFIED,
+        'assumptions': [
+            'Schema does not define how a size box is tessellated into MorphDetails.body or origin.',
+            'Porch XY is unconfirmed. No live payload is available.',
+        ],
+    }
+
+
+def prepare_morph_box(base_point, size, floor_index, client=None, position_confirmed=False):
+    """basePoint + size box. Unconfirmed XY cannot produce a live payload.
+
+    size/body mapping and Z/story relation stay unverified even when XY is confirmed.
+    """
+    if position_confirmed is not True:
+        raise OfflinePrimitiveError('unconfirmed morph XY cannot produce a live-ready payload')
     base = _finite_point(base_point, ('x', 'y', 'z'))
     if not isinstance(size, dict) or set(size) != {'x', 'y', 'z'}:
         raise OfflinePrimitiveError('size must contain exactly x/y/z')
@@ -314,8 +433,23 @@ def prepare_morph_box(base_point, size, floor_index, client=None):
         'base_z_is_absolute': 'UNVERIFIED',
     }
     return _base('morph', 'CreateMorphs', payload, fingerprint, READY_FOR_LIVE_PROBE,
-                 readback_capability=UNVERIFIED,
+                 readback_capability=UNVERIFIED, position_confirmed=True, requires_confirmation=False,
+                 live_payload_allowed=True, xy={'x': base['x'], 'y': base['y']},
+                 requested_size=dict(dims), requested_z=base['z'],
                  assumptions=['Schema does not define how a size box is tessellated into MorphDetails.body or origin.'])
+
+
+def require_live_morph_payload(record):
+    """Return a sendable morph payload only after explicit XY confirmation."""
+    if not isinstance(record, dict) or record.get('position_confirmed') is not True or record.get('requires_confirmation') or record.get('live_payload_allowed') is not True:
+        raise OfflinePrimitiveError('unconfirmed porch XY cannot produce a live-ready payload')
+    payload = record.get('payload')
+    if not isinstance(payload, dict) or 'morphsData' not in payload:
+        raise OfflinePrimitiveError('unconfirmed porch XY cannot produce a live-ready payload')
+    point = payload['morphsData'][0].get('basePoint')
+    if point == PORCH_PLACEHOLDER_BASE and record.get('placeholder', {}).get('not_a_design_decision'):
+        raise OfflinePrimitiveError('placeholder porch XY is not a confirmed position')
+    return payload
 
 
 def experimental_morph_body(vertices, client=None):
@@ -330,16 +464,59 @@ def experimental_morph_body(vertices, client=None):
                  assumptions=['Vertices are local to Morph placement, not world coordinates.'])
 
 
+def _vertex(point):
+    if not isinstance(point, dict) or any(axis not in point for axis in ('x', 'y', 'z')):
+        return None
+    try:
+        return {axis: number(point[axis]) for axis in ('x', 'y', 'z')}
+    except VerificationError:
+        return None
+
+
+def _assess_morph_body(body, size):
+    """A size box is not proven by an empty or faceless body."""
+    if not isinstance(body, dict):
+        return INSUFFICIENT_READBACK, ['incomplete body/details']
+    vertices = body.get('vertices')
+    if not isinstance(vertices, list) or not vertices:
+        return INSUFFICIENT_READBACK, ['empty vertices']
+    parsed = []
+    for point in vertices:
+        vertex = _vertex(point)
+        if vertex is None:
+            return 'MISMATCH', ['malformed vertex']
+        parsed.append(vertex)
+    if len(parsed) < 4:
+        return INSUFFICIENT_READBACK, ['incomplete vertices']
+    polygons = body.get('polygons')
+    if not isinstance(polygons, list) or not polygons:
+        return INSUFFICIENT_READBACK, ['missing faces']
+    for face in polygons:
+        ids = face.get('vertexIds') if isinstance(face, dict) else None
+        if not isinstance(ids, list) or len(ids) < 3 or any(not isinstance(item, int) or isinstance(item, bool) for item in ids):
+            return 'MISMATCH', ['malformed face']
+        if any(item < 0 or item >= len(parsed) for item in ids):
+            return 'MISMATCH', ['malformed face']
+    if isinstance(size, dict):
+        for axis in ('x', 'y', 'z'):
+            span = max(point[axis] for point in parsed) - min(point[axis] for point in parsed)
+            try:
+                if abs(span - number(size[axis])) > 1e-6:
+                    return 'MISMATCH', ['dimensions']
+            except VerificationError:
+                return 'MISMATCH', ['dimensions']
+    return None, []
+
+
 def assess_morph_echo(prepared, echo):
     fingerprint = prepared['fingerprint']
-    if not isinstance(echo, dict) or 'body' not in echo or 'origin' not in echo:
-        return _diagnostic('MISMATCH', ['incomplete body/details'])
+    if not isinstance(echo, dict) or 'origin' not in echo or 'body' not in echo:
+        return _diagnostic(INSUFFICIENT_READBACK, ['incomplete body/details'])
     reasons = []
-    origin = echo.get('origin')
-    if origin != fingerprint['basePoint']:
+    if echo.get('origin') != fingerprint['basePoint']:
         reasons.append('basePoint')
     if echo.get('size') != fingerprint['size']:
-        reasons.append('size')
+        reasons.append('dimensions')
     if echo.get('floorIndex') != fingerprint['floorIndex']:
         reasons.append('floorIndex')
     try:
@@ -349,11 +526,34 @@ def assess_morph_echo(prepared, echo):
             reasons.append('absolute_top')
     except VerificationError:
         reasons.append('z')
-    return _diagnostic('MATCH' if not reasons else 'MISMATCH', reasons)
+    body_state, body_reasons = _assess_morph_body(echo.get('body'), fingerprint.get('size'))
+    if reasons or body_state == 'MISMATCH':
+        return _diagnostic('MISMATCH', reasons + body_reasons, readback_capability=UNVERIFIED)
+    if body_state == INSUFFICIENT_READBACK:
+        return _diagnostic(INSUFFICIENT_READBACK, body_reasons, readback_capability=UNVERIFIED)
+    return _diagnostic('MATCH', [], readback_capability=UNVERIFIED)
 
 
 def _roof_rectangle(x0, y0, x1, y1):
     return [{'x': x0, 'y': y0}, {'x': x1, 'y': y0}, {'x': x1, 'y': y1}, {'x': x0, 'y': y1}]
+
+
+def _roof_fingerprint(eaves, ridge, overhang, angle):
+    return {
+        'requested_geometry': {
+            'requested_eaves_z': eaves,
+            'requested_ridge_z': ridge,
+            'requested_overhang': overhang,
+            'requested_angle': angle,
+        },
+        'assumptions': {
+            'level': 'Schema does not define level. It is not observed eaves Z.',
+            'levelHeight': 'Schema does not map levelHeight to ridge Z.',
+            'ridge': 'Ridge direction was not specified. A mid-span line is an assumption, not an observation.',
+        },
+        'observed': 'NONE',
+        'verified': False,
+    }
 
 
 def prepare_roof_candidates(eaves_z=ROOF_EAVES_Z, ridge_z=ROOF_RIDGE_Z, overhang=ROOF_OVERHANG,
@@ -399,22 +599,23 @@ def prepare_roof_candidates(eaves_z=ROOF_EAVES_Z, ridge_z=ROOF_RIDGE_Z, overhang
     _validate(client, 'CreateRoofs', multi_payload)
     _validate(client, 'CreateRoofs', split_payload)
     missing = ['RoofDetails', 'ridge Z', 'eaves Z', 'slope', 'plane count', 'pivot line read-back']
-    desired = {'eaves_z': eaves, 'ridge_z': ridge, 'overhang': overhang, 'angle_radians': angle,
-               'ridge_y': ridge_y, 'run': run}
-    multi = _base('roof_multiplane', 'CreateRoofs', multi_payload, {**desired, 'polygon': footprint},
+    multi = _base('roof_multiplane', 'CreateRoofs', multi_payload, _roof_fingerprint(eaves, ridge, overhang, angle),
                   SCHEMA_ONLY, schema_classification=INSUFFICIENT_SCHEMA, selected=False,
-                  readback_capability=INSUFFICIENT_SCHEMA, assumptions=assumptions + [
+                  readback_capability=INSUFFICIENT_SCHEMA, observed='NONE', verified=False,
+                  assumptions=assumptions + [
                       'levels[].levelHeight/levelAngle have no documented mapping to ridge_z or eaves_z.',
                   ], missing_readback_fields=missing, expected_geometry='UNSPECIFIED_MULTI_PLANE')
-    split = _base('roof_two_single_planes', 'CreateRoofs', split_payload, {**desired, 'planes': 2},
+    split = _base('roof_two_single_planes', 'CreateRoofs', split_payload, _roof_fingerprint(eaves, ridge, overhang, angle),
                   SCHEMA_ONLY, schema_classification=INSUFFICIENT_SCHEMA, selected=False,
-                  readback_capability=INSUFFICIENT_SCHEMA, assumptions=assumptions + [
+                  readback_capability=INSUFFICIENT_SCHEMA, observed='NONE', verified=False,
+                  assumptions=assumptions + [
                       'Schema says a pivotLine plane rises on the left of beg->end, angle in radians.',
                       'That documents a probe shape; it does not prove the resulting solid is the requested gable.',
                   ], missing_readback_fields=missing,
                   expected_geometry='TWO_PLANES_MEETING_AT_ASSUMED_RIDGE_IF_LEVEL_AND_PIVOT_ASSUMPTIONS_HOLD')
     return {
         'selected': None, 'winner': None, 'capability_state': SCHEMA_ONLY, 'production_enabled': False,
+        'dispatch_allowed': False, 'observed': 'NONE', 'verified': False,
         'safer_live_probe': 'roof_two_single_planes',
         'safer_reason': 'pivotLine and angle have a documented side and radian unit; multi-plane levels do not identify ridge/eaves.',
         'candidates': {'A_multiplane': multi, 'B_two_single_planes': split},
@@ -423,7 +624,8 @@ def prepare_roof_candidates(eaves_z=ROOF_EAVES_Z, ridge_z=ROOF_RIDGE_Z, overhang
 
 def assess_roof_readback(candidate, details):
     return _diagnostic('UNVERIFIED', ['RoofDetails absent from TypeSpecificDetails'],
-                       schema_classification=INSUFFICIENT_SCHEMA, readback_capability=INSUFFICIENT_SCHEMA)
+                       schema_classification=INSUFFICIENT_SCHEMA, readback_capability=INSUFFICIENT_SCHEMA,
+                       observed='NONE', verified=False)
 
 
 def _diagnostic(geometry, reasons, **extra):
@@ -453,28 +655,48 @@ def prepare_straight_segment(start, end, floor_index, height, thickness, story_e
                  assumptions=['Preview payload only. The house plan does not dispatch even existing wall operations.'])
 
 
+def _final_reread_prepared():
+    return {
+        'kind': 'final_reread',
+        'read_only': True,
+        'writes_allowed': False,
+        'adoption_allowed': False,
+        'model_search_allowed': False,
+        'receipt_policy': 'exact_verified_guids_only',
+        'on_missing_receipt': 'STOP',
+        'command': 'GetDetailsOfElements',
+        'production_enabled': False,
+        'dispatch_allowed': False,
+        'capability_state': UNVERIFIED,
+        'ownershipProven': False,
+    }
+
+
 def build_house_plan(client=None):
-    client = client or schema_client()
+    _reject_injected(client)
     points = dict(HOUSE_OUTLINE)
     straight_names = (('A', 'B'), ('B', 'C'), ('C', 'D'), ('E', 'F'), ('F', 'G'), ('G', 'A'))
-    straight = [prepare_straight_segment(points[a], points[b], 0, WALL_HEIGHT, WALL_THICKNESS, 0.0, 0.0, client)
+    straight = [prepare_straight_segment(points[a], points[b], 0, WALL_HEIGHT, WALL_THICKNESS, 0.0, 0.0)
                 for a, b in straight_names]
     ccw = central_angle_ccw(ARC_CENTER, points['D'], points['E'])
     arc_candidates = [
         prepare_arc_wall(points['D'], points['E'], sign * ccw, 0, WALL_HEIGHT, WALL_THICKNESS, 0.0, 0.0,
-                         center=ARC_CENTER, radius=ARC_RADIUS, client=client)
+                         center=ARC_CENTER, radius=ARC_RADIUS)
         for sign in (1, -1)
     ]
-    mesh = prepare_flat_mesh(GROUND_POLYGON, GROUND_Z, 0, vertex_z=GROUND_Z, client=client)
-    porch = prepare_morph_box(PORCH_PLACEHOLDER_BASE, PORCH_SIZE, 0, client=client)
-    roof = prepare_roof_candidates(client=client)
+    mesh = prepare_flat_mesh(GROUND_POLYGON, GROUND_Z, 0, vertex_z=GROUND_Z)
+    porch = porch_proposal()
+    roof = prepare_roof_candidates()
     steps = [
         _step('mesh_ground', [], mesh),
-        _step('straight_walls', ['mesh_ground'], {'segments': straight, 'production_enabled': False}),
+        _step('straight_walls', ['mesh_ground'], {'segments': straight, 'production_enabled': False,
+                                                  'dispatch_allowed': False, 'capability_state': SCHEMA_ONLY}),
         _step('arc_wall', ['straight_walls'], {'selected_angle': None, 'candidates': arc_candidates,
-                                                'production_enabled': False}),
+                                               'production_enabled': False, 'dispatch_allowed': False,
+                                               'capability_state': READY_FOR_LIVE_PROBE}),
         _step('morph_porch', ['arc_wall'], porch),
         _step('roof', ['straight_walls', 'arc_wall'], roof),
+        _step('final_reread', list(HOUSE_PLAN_STEPS[:-1]), _final_reread_prepared()),
     ]
     plan = {
         'name': 'house-offline-plan', 'dispatch_allowed': False, 'production_enabled': False,
@@ -489,31 +711,105 @@ def _step(step_id, depends_on, prepared):
             'production_enabled': False, 'dispatch_allowed': False, 'on_mismatch': 'STOP'}
 
 
+def _reject_capability_mutation(node, path):
+    if isinstance(node, dict):
+        if 'production_enabled' in node and node['production_enabled'] is not False:
+            raise OfflinePrimitiveError(f'{path} cannot be production-enabled')
+        if 'dispatch_allowed' in node and node['dispatch_allowed'] is not False:
+            raise OfflinePrimitiveError(f'{path} cannot be dispatchable')
+        if node.get('capability_state') in FORBIDDEN_CAPABILITIES:
+            raise OfflinePrimitiveError(f'{path} capability {node.get("capability_state")} is not allowed')
+        for key, value in node.items():
+            _reject_capability_mutation(value, f'{path}.{key}')
+    elif isinstance(node, list):
+        for index, value in enumerate(node):
+            _reject_capability_mutation(value, f'{path}[{index}]')
+
+
+def _contains_point(node, point):
+    if isinstance(node, dict):
+        if all(node.get(axis) == point[axis] for axis in point):
+            return True
+        return any(_contains_point(value, point) for value in node.values())
+    if isinstance(node, list):
+        return any(_contains_point(value, point) for value in node)
+    return False
+
+
 def validate_house_plan(plan):
+    if not isinstance(plan, dict) or not isinstance(plan.get('steps'), list):
+        raise OfflinePrimitiveError('house plan must contain steps')
+    _reject_capability_mutation(plan, 'plan')
     if plan.get('dispatch_allowed') or plan.get('production_enabled'):
         raise OfflinePrimitiveError('house plan cannot be dispatchable')
     ids = [step['id'] for step in plan['steps']]
-    expected = ['mesh_ground', 'straight_walls', 'arc_wall', 'morph_porch', 'roof']
-    if ids != expected:
-        raise OfflinePrimitiveError(f'house plan order must be {expected}')
+    if ids != list(HOUSE_PLAN_STEPS):
+        raise OfflinePrimitiveError(f'house plan order must be {list(HOUSE_PLAN_STEPS)}')
     seen = set()
     for step in plan['steps']:
-        if step.get('production_enabled') or step.get('dispatch_allowed'):
+        if step.get('production_enabled') is not False or step.get('dispatch_allowed') is not False:
             raise OfflinePrimitiveError(f'{step["id"]} cannot be production-enabled')
         if any(dep not in seen for dep in step['depends_on']):
             raise OfflinePrimitiveError(f'{step["id"]} dependency is not an earlier step')
         seen.add(step['id'])
-    if plan['steps'][-1]['prepared'].get('selected') is not None:
+    roof = plan['steps'][4]['prepared']
+    if roof.get('selected') is not None or roof.get('winner') is not None:
         raise OfflinePrimitiveError('roof candidate must not be selected')
+    porch = plan['steps'][3]['prepared']
+    if porch.get('position_confirmed') is True or porch.get('live_payload_allowed') or porch.get('payload'):
+        raise OfflinePrimitiveError('unconfirmed porch XY cannot produce a live-ready payload')
+    if porch.get('xy') is not None or porch.get('requires_confirmation') is not True:
+        raise OfflinePrimitiveError('house porch XY requires confirmation')
+    if _contains_point(porch, PORCH_PLACEHOLDER_BASE):
+        raise OfflinePrimitiveError('placeholder porch XY must not be stored as a position')
+    reread = plan['steps'][5]
+    if reread['depends_on'] != list(HOUSE_PLAN_STEPS[:-1]):
+        raise OfflinePrimitiveError('final reread must follow every geometry step')
+    prepared = reread['prepared']
+    if prepared.get('read_only') is not True or prepared.get('writes_allowed') is not False:
+        raise OfflinePrimitiveError('final reread must be read-only')
+    if prepared.get('adoption_allowed') is not False or prepared.get('model_search_allowed') is not False:
+        raise OfflinePrimitiveError('final reread cannot search or adopt elements')
+    if prepared.get('on_missing_receipt') != 'STOP' or prepared.get('command') in WRITE_COMMANDS:
+        raise OfflinePrimitiveError('final reread cannot write and missing receipt is STOP')
+    if prepared.get('command') != 'GetDetailsOfElements':
+        raise OfflinePrimitiveError('final reread can only request exact element details')
     return plan
 
 
 def control_action(event):
-    if event in {'MISMATCH', 'UNKNOWN_OUTCOME', 'INCOMPLETE_READBACK'}:
+    if event in {'MISMATCH', 'UNKNOWN_OUTCOME', 'INCOMPLETE_READBACK', 'MISSING_RECEIPT'}:
         return 'STOP'
     raise OfflinePrimitiveError(f'no automatic continuation for {event}')
 
 
+def evaluate_final_reread(receipts):
+    """Read-only decision for exact receipt GUIDs. Missing receipt is STOP.
+
+    This does not search the model, adopt a similar element, retry, or write.
+    """
+    stopped = {
+        'action': 'STOP', 'decision': 'STOP', 'retryAllowed': False, 'repairWrite': False,
+        'continueAllowed': False, 'adoptionAllowed': False, 'modelSearchAllowed': False,
+        'writes': 0, 'reason': 'missing verified receipt',
+    }
+    if not isinstance(receipts, list) or not receipts:
+        return stopped
+    guids = []
+    for receipt in receipts:
+        guid = receipt.get('verifiedGuid') if isinstance(receipt, dict) else None
+        if not isinstance(guid, str) or not guid:
+            return stopped
+        guids.append(guid)
+    return {
+        'action': 'READ_ONLY', 'decision': 'READ_ONLY', 'command': 'GetDetailsOfElements',
+        'elements': [{'elementId': {'guid': guid}} for guid in guids],
+        'retryAllowed': False, 'repairWrite': False, 'continueAllowed': False,
+        'adoptionAllowed': False, 'modelSearchAllowed': False, 'writes': 0,
+    }
+
+
 def dispatch_house_plan(plan, client=None):
+    _reject_injected(client)
     validate_house_plan(plan)
     raise OfflinePrimitiveError('house plan is offline-only; refusing every Create/Modify call')
