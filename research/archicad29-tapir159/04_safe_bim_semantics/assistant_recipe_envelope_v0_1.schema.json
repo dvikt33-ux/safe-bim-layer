@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-bim.local/schemas/assistant_recipe_envelope_v0_1.schema.json",
+  "title": "Safe BIM assistant recipe envelope v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "recipeId", "basedOn", "preconditions", "payloadType", "payload"],
+  "properties": {
+    "schemaVersion": {"const": "0.1"},
+    "recipeId": {"type": "string", "minLength": 1},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "basedOn": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["logicalProjectId", "snapshotId", "projectRootHash"],
+      "properties": {
+        "logicalProjectId": {"type": "string"},
+        "snapshotId": {"type": "string"},
+        "projectRootHash": {"type": "string", "pattern": "^[0-9a-fA-F]{64}$"}
+      }
+    },
+    "preconditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "id", "expectedHash"],
+        "properties": {
+          "kind": {"enum": ["ELEMENT", "STORY_MAP", "ATTRIBUTE", "RELATION_SET", "SELECTION", "PROJECT_CONTRACT"]},
+          "id": {"type": "string"},
+          "expectedHash": {"type": "string", "pattern": "^[0-9a-fA-F]{64}$"},
+          "required": {"type": "boolean", "default": true}
+        }
+      }
+    },
+    "payloadType": {"enum": ["SAFE_RECIPE", "UNTRUSTED_CODE", "READ_ONLY_QUERY"]},
+    "payload": {},
+    "executionPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "autoExecute": {"const": false},
+        "requirePreview": {"type": "boolean", "default": true},
+        "requireCheckpoint": {"type": "boolean", "default": true},
+        "sandboxPreferred": {"type": "boolean", "default": false}
+      }
+    }
+  }
+}
