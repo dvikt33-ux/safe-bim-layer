@@ -264,7 +264,9 @@ class ResumableExecutor:
                                    current_step=step["position"])
                 return JobStatus.PAUSED
             payload = {"operation": step["operation"], "params": step["params"],
-                       "floorIndex": step["floor_index"]}
+                       "floorIndex": step["floor_index"],
+                       "verticalContext": step["params"].get("verticalContext"),
+                       "expectedZFingerprint": step["params"].get("expectedZFingerprint")}
             self.store.set_job(job_id, JobStatus.RUNNING,
                                current_step=step["position"])
             self.store.checkpoint_before_write(job_id, step["position"], payload)

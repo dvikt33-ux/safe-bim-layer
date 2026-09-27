@@ -6,6 +6,7 @@ executes one write at a time, reads elements back, and stops on any mismatch.
 """
 from __future__ import annotations
 import copy, json, math, urllib.request
+from dataclasses import dataclass, asdict
 from pathlib import Path
 from typing import Any
 
@@ -17,6 +18,80 @@ except Exception:
 
 class SafeBIMError(RuntimeError):
     pass
+
+
+@dataclass(frozen=True)
+class StoryRecord:
+    story_index: int
+    display_name: str | None
+    elevation: float
+    next_story_elevation: float | None
+    height_to_next: float | None
+    previous_index: int | None
+    next_index: int | None
+    project_zero_relative_z: float
+
+
+@dataclass(frozen=True)
+class VerticalContext:
+    project_zero_z: float
+    grade_z: float | None = None
+    plinth_bottom_z: float | None = None
+    plinth_top_z: float | None = None
+    source: str | None = None
+    justification: str | None = None
+
+    def fingerprint(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+class StoryResolver:
+    """Resolve stories from factual Archicad elevations, never their names."""
+    def __init__(self, tapir, project_zero_z: float | None = None):
+        self.tapir = tapir
+        self.project_zero_z = project_zero_z
+
+    @staticmethod
+    def _items(response):
+        value = response.get('result', {}).get('addOnCommandResponse', {})
+        for key in ('stories', 'storyData', 'storyItems'):
+            if isinstance(value.get(key), list): return value[key]
+        return value if isinstance(value, list) else []
+
+    @staticmethod
+    def _field(item, *names):
+        for name in names:
+            if name in item: return item[name]
+        return None
+
+    def resolve(self, project_zero_z: float | None = None) -> list[StoryRecord]:
+        raw = self.tapir.call('GetStories', {})
+        items = self._items(raw)
+        rows = []
+        for item in items:
+            idx = self._field(item, 'storyIndex', 'index', 'floorIndex')
+            elevation = self._field(item, 'elevation', 'level', 'elevationFromProjectZero', 'zCoordinate')
+            if not isinstance(idx, int) or not isinstance(elevation, (int, float)):
+                continue
+            rows.append((int(idx), float(elevation), self._field(item, 'name', 'displayName', 'userName')))
+        rows.sort(key=lambda x: x[0])
+        if not rows:
+            raise SafeBIMError('GetStories returned no stories with storyIndex and elevation')
+        zero = self.project_zero_z if project_zero_z is None else float(project_zero_z)
+        if zero is None: zero = rows[0][1]
+        result = []
+        for pos, (idx, z, name) in enumerate(rows):
+            nxt = rows[pos + 1] if pos + 1 < len(rows) else None
+            result.append(StoryRecord(idx, name, z, nxt[1] if nxt else None,
+                                      nxt[1] - z if nxt else None,
+                                      rows[pos - 1][0] if pos else None,
+                                      nxt[0] if nxt else None, z - zero))
+        return result
+
+    def by_index(self, story_index: int, project_zero_z: float | None = None) -> StoryRecord:
+        for story in self.resolve(project_zero_z):
+            if story.story_index == int(story_index): return story
+        raise SafeBIMError(f'Unknown storyIndex={story_index}')
 
 
 class TapirClient:
@@ -131,7 +206,19 @@ def _diff(requested, actual, path=''):
 
 
 class SafeBIMLayer:
-    def __init__(self, client: TapirClient): self.tapir=client
+    def __init__(self, client: TapirClient, vertical_context: VerticalContext | None = None):
+        self.tapir=client
+        self.vertical_context = vertical_context
+        self.story_resolver = StoryResolver(client, vertical_context.project_zero_z
+                                            if vertical_context else None)
+
+    def resolve_vertical_context(self, context: VerticalContext | None = None):
+        if context is not None:
+            self.vertical_context = context
+            self.story_resolver.project_zero_z = context.project_zero_z
+        stories = self.story_resolver.resolve()
+        return {'stories': [asdict(s) for s in stories],
+                'verticalContext': self.vertical_context.fingerprint() if self.vertical_context else None}
 
     @staticmethod
     def _response_items(response):
@@ -185,8 +272,12 @@ class SafeBIMLayer:
         return {'listedResponse': listed, 'readbackResponse': rr,
                 'readback': details, 'candidateGuids': ids}
 
-    def _write_and_read(self, command, payload, expected_type, requested_fields, floor_index=None):
+    def _write_and_read(self, command, payload, expected_type, requested_fields, floor_index=None,
+                        expected_vertical=None):
         story = self.ensure_active_story(floor_index) if floor_index is not None else None
+        if expected_vertical is None and floor_index is not None:
+            try: expected_vertical = asdict(self.story_resolver.by_index(floor_index))
+            except SafeBIMError: expected_vertical = None
         self.tapir.validate_payload(command,payload)
         try:
             result=self.tapir.call(command,payload)
@@ -195,7 +286,7 @@ class SafeBIMLayer:
             # completed the modal-blocked write. Never retry before reconciliation.
             reconciliation = self._reconcile_type(expected_type)
             return {'status':'UNKNOWN_OUTCOME', 'error':repr(exc), 'command':command,
-                    'story':story, 'requestedPayload':payload,
+                    'story':story, 'requestedPayload':payload, 'expectedVertical': expected_vertical,
                     'reconciliationRequired':True, 'retryAllowed':False,
                     'reconciliation':reconciliation}
         ids=[x['elementId']['guid'] for x in result.get('result',{}).get('addOnCommandResponse',{}).get('elements',[]) if 'elementId' in x]
@@ -213,7 +304,7 @@ class SafeBIMLayer:
                 elif isinstance(v,(int,float)):
                     if not _num_equal(v,actual[k]): diffs.append({'path':f'[{i}].details.{k}','requested':v,'actual':actual[k]})
                 elif v != actual[k]: diffs.append({'path':f'[{i}].details.{k}','requested':v,'actual':actual[k]})
-        return {'status':'PASS' if not diffs and len(ids)==len(requested_fields) else 'FAIL','guids':ids,'tapirResponse':result,'readbackResponse':read_response,'readback':details,'diff':diffs}
+        return {'status':'PASS' if not diffs and len(ids)==len(requested_fields) else 'FAIL','guids':ids,'tapirResponse':result,'readbackResponse':read_response,'readback':details,'diff':diffs,'expectedVertical':expected_vertical}
 
     def create_wall_loop(self, contour, floor_index, height, thickness):
         pts=[{'x':float(p['x']),'y':float(p['y'])} for p in contour]
@@ -224,12 +315,22 @@ class SafeBIMLayer:
         for a,b in zip(pts,pts[1:]):
             w={'begCoordinate':a,'endCoordinate':b,'floorIndex':int(floor_index),'height':float(height),'thickness':float(thickness),'referenceLineLocation':'Center','structureType':'Basic'}
             walls.append(w); requested.append({'begCoordinate':a,'endCoordinate':b,'height':float(height),'bottomOffset':0,'offset':0,'begThickness':float(thickness),'endThickness':float(thickness),'referenceLineLocation':'Center','structureType':'Basic'})
-        out=self._write_and_read('CreateWalls',{'wallsData':walls},'Wall',requested, floor_index)
+        story_record = self.story_resolver.by_index(floor_index) if self._can_resolve_story() else None
+        expected_top = (story_record.elevation + float(height)) if story_record else None
+        out=self._write_and_read('CreateWalls',{'wallsData':walls},'Wall',requested, floor_index,
+                                 {'bottom_z': story_record.elevation if story_record else None,
+                                  'top_z': expected_top, 'height': float(height),
+                                  'story_index': int(floor_index)})
         out['requestedPayload']={'wallsData':walls}; return out
 
-    def create_basic_slab(self, contour, level, floor_index, thickness):
+    def _can_resolve_story(self):
+        return hasattr(self.tapir, 'call') and not (getattr(self.tapir, 'schema', None) == {'commands': {}})
+
+    def create_basic_slab(self, contour, level, floor_index, thickness, reference_plane='TOP'):
         pts=[{'x':float(p['x']),'y':float(p['y'])} for p in contour]
         if pts[0] == pts[-1]: pts=pts[:-1]
+        story_record = self.story_resolver.by_index(floor_index) if self._can_resolve_story() else None
+        top_z = (story_record.elevation + float(level)) if story_record else None
         payload={'slabsData':[{'level':float(level),'floorIndex':int(floor_index),'thickness':float(thickness),'polygonCoordinates':pts}]}
         story = self.ensure_active_story(floor_index)
         self.tapir.validate_payload('CreateSlabs',payload)
@@ -239,6 +340,8 @@ class SafeBIMLayer:
             reconciliation = self._reconcile_type('Slab')
             return {'status':'UNKNOWN_OUTCOME','error':repr(exc),'command':'CreateSlabs',
                     'story':story,'requestedPayload':payload,
+                    'expectedVertical': {'top_z': top_z, 'bottom_z': top_z-float(thickness) if top_z is not None else None,
+                                         'reference_plane': reference_plane, 'level': float(level)},
                     'reconciliationRequired':True,'retryAllowed':False,
                     'reconciliation':reconciliation}
         ids=[x['elementId']['guid'] for x in result.get('result',{}).get('addOnCommandResponse',{}).get('elements',[]) if 'elementId' in x]
@@ -277,7 +380,9 @@ class SafeBIMLayer:
             if not _num_equal(float(thickness),th): diffs.append({'path':'details.thickness','requested':float(thickness),'actual':th})
         elif len(ids)==1:
             diffs.append({'path':'readback','requested':'one slab detail','actual':'<missing>'})
-        out={'status':'PASS' if not diffs and len(ids)==1 else 'FAIL','guids':ids,'requestedPayload':payload,'tapirResponse':result,'modifyPayload':modify_payload,'modifyResponse':modify_result,'readbackResponse':rr,'readback':ds,'diff':diffs}
+        out={'status':'PASS' if not diffs and len(ids)==1 else 'FAIL','guids':ids,'requestedPayload':payload,'tapirResponse':result,'modifyPayload':modify_payload,'modifyResponse':modify_result,'readbackResponse':rr,'readback':ds,'diff':diffs,
+             'expectedVertical': {'top_z': top_z, 'bottom_z': top_z-float(thickness) if top_z is not None else None,
+                                  'reference_plane': reference_plane, 'level': float(level)}}
         return out
 
     def _insert_opening(self, command, collection, expected_type, host_wall_guid, params):
