@@ -1,0 +1,247 @@
+{
+  "adapter": {
+    "commands_seen": 8
+  },
+  "archicad": {
+    "archicad_build": "29.0.0",
+    "archicad_version": "29",
+    "is_teamwork": false,
+    "is_untitled": false,
+    "port": 19723,
+    "project_name": "SANDBOX",
+    "project_path": "/pln/sandbox.pln"
+  },
+  "artifacts": [
+    {
+      "cleanup": "manual (undo or delete in Archicad)",
+      "guid": "GUID-0001",
+      "kind": "wall"
+    },
+    {
+      "cleanup": "manual",
+      "guid": "GUID-0001",
+      "kind": "marker",
+      "medium": "element_id"
+    }
+  ],
+  "capabilities": {
+    "create_wall": {
+      "adapter_version": "",
+      "count_by_type": true,
+      "duplicate_detection": "PREFIX",
+      "exec_backend": "unknown",
+      "marker_medium": "element_id",
+      "marker_search_exact": true,
+      "marker_search_prefix": true,
+      "op": "create_wall",
+      "probe_certified": true,
+      "production_safe": true,
+      "readable_fields": [
+        "angle",
+        "count_delta",
+        "exists",
+        "height",
+        "layer",
+        "length",
+        "marker_exact",
+        "ref_line",
+        "story",
+        "thickness",
+        "type"
+      ],
+      "readback_backends": [
+        "GetDetailsOfElements",
+        "GetElementsByType",
+        "PropertyAPI"
+      ]
+    }
+  },
+  "checks": [
+    {
+      "detail": {
+        "commands": 8
+      },
+      "name": "connection",
+      "verdict": "CERTIFIED"
+    },
+    {
+      "detail": {
+        "info": {
+          "archicad_build": "29.0.0",
+          "archicad_version": "29",
+          "is_teamwork": false,
+          "is_untitled": false,
+          "port": 19723,
+          "project_name": "SANDBOX",
+          "project_path": "/pln/sandbox.pln"
+        },
+        "problems": []
+      },
+      "name": "project_identity",
+      "verdict": "CERTIFIED"
+    },
+    {
+      "detail": {
+        "stories": [
+          {
+            "elevation": 0.0,
+            "name": "Ground Floor"
+          }
+        ]
+      },
+      "name": "stories_read",
+      "verdict": "CERTIFIED"
+    },
+    {
+      "detail": {
+        "counts": {}
+      },
+      "name": "count_by_type",
+      "verdict": "CERTIFIED"
+    },
+    {
+      "detail": {
+        "n": 0
+      },
+      "name": "list_guids",
+      "verdict": "CERTIFIED"
+    },
+    {
+      "detail": {
+        "error": "empty project: nothing to read"
+      },
+      "name": "details_by_guid",
+      "verdict": "NOT_SUPPORTED"
+    },
+    {
+      "detail": {
+        "hits": 0
+      },
+      "name": "find_by_filter",
+      "verdict": "CERTIFIED"
+    },
+    {
+      "detail": {
+        "element_id": null,
+        "element_id_callable": true,
+        "property": null,
+        "property_callable": true
+      },
+      "name": "marker_medium_read",
+      "verdict": "CERTIFIED"
+    },
+    {
+      "detail": {
+        "hits": 0,
+        "sentinel": "BX:PROBE:NOPE:e63b8c67b5064bb59bc1b9c6e541790a"
+      },
+      "name": "marker_search_exact",
+      "verdict": "CERTIFIED"
+    },
+    {
+      "detail": {
+        "hits": 0,
+        "sentinel": "BX:PROBE:NOPE:d1320bfbbf9944f2b6280f22215f292b:"
+      },
+      "name": "marker_search_prefix",
+      "verdict": "CERTIFIED"
+    },
+    {
+      "detail": {
+        "guid": "GUID-0001"
+      },
+      "name": "create_wall",
+      "verdict": "CERTIFIED"
+    },
+    {
+      "detail": {
+        "details": {
+          "angle": 0.0,
+          "height": 3.0,
+          "layer": "A-WALL",
+          "length": 5.0,
+          "ref_line": {
+            "from": [
+              1.5,
+              2.5
+            ],
+            "to": [
+              6.5,
+              2.5
+            ]
+          },
+          "story": {
+            "elevation": 0.0,
+            "name": "Ground Floor"
+          },
+          "thickness": 0.3,
+          "type": "Wall"
+        },
+        "fields": [
+          "angle",
+          "height",
+          "layer",
+          "length",
+          "ref_line",
+          "story",
+          "thickness",
+          "type"
+        ],
+        "missing": []
+      },
+      "name": "details_of_created",
+      "verdict": "CERTIFIED"
+    },
+    {
+      "detail": {
+        "after": {
+          "Wall": 1
+        },
+        "before": {},
+        "delta": {
+          "Wall": 1
+        }
+      },
+      "name": "count_delta",
+      "verdict": "CERTIFIED"
+    },
+    {
+      "detail": {
+        "certified_medium": "element_id",
+        "element_id": {
+          "equal": true,
+          "read_back": "BX:PROBE:b6595ffd08c442e2b94d04e975b318de",
+          "wrote": "BX:PROBE:b6595ffd08c442e2b94d04e975b318de"
+        }
+      },
+      "name": "marker_write_roundtrip",
+      "verdict": "CERTIFIED"
+    },
+    {
+      "detail": {
+        "exact": [
+          "GUID-0001"
+        ],
+        "expected": "GUID-0001",
+        "prefix_hits": 1
+      },
+      "name": "marker_search_hit",
+      "verdict": "CERTIFIED"
+    },
+    {
+      "detail": {
+        "note": "expected OK / FAILED",
+        "on_correct": "OK",
+        "on_wrong": "FAILED"
+      },
+      "name": "verify_discriminates",
+      "verdict": "CERTIFIED"
+    }
+  ],
+  "generated_at": "2026-09-26T15:40:25Z",
+  "probe_version": "1.0",
+  "verdicts": {
+    "certified": true,
+    "write_phase": "RUN"
+  }
+}

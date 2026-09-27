@@ -1,0 +1,38 @@
+{
+  "probe": "AUDIT_T3_DEPENDENCY",
+  "version": "1.0",
+  "visual_check": {
+    "status": "PASS",
+    "confirmed_by": "user",
+    "scope": [
+      "single 6 m host wall",
+      "exactly one opening",
+      "opening approximately 1 m x 1 m",
+      "opening approximately centered along wall",
+      "opening lower level approximately 1 m above floor",
+      "no duplicate opening or unintended cut",
+      "host wall remained visually correct"
+    ],
+    "note": "User confirmed: T3 visually normal in Archicad."
+  },
+  "machine_evidence": {
+    "host_wall_guid": "2E42AEAB-E49C-40EC-9E95-CDCD08B25AF8",
+    "opening_guid": "EFAA5DBD-44A6-40D4-BCFF-574A5BBE4694",
+    "owner_binding_reconciled": true,
+    "dependency_order_preserved": true,
+    "reconcile_mutations": 0
+  },
+  "limitations": {
+    "opening_type_specific_details": "UNAVAILABLE in Tapir 1.5.9 GetDetailsOfElements: Not yet supported element type",
+    "opening_base_point_machine_certified": false,
+    "opening_size_machine_certified": false,
+    "visual_confirmation_used_for_opening_geometry": true
+  },
+  "capability_state_after_t3": {
+    "dependency_chain_tested": true,
+    "owner_binding_tested": true,
+    "create_opening_production_safe": false,
+    "production_integration_ready": false,
+    "blocked_by": ["live_T4_T7_not_run"]
+  }
+}

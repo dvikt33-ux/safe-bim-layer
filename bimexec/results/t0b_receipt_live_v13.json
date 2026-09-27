@@ -1,0 +1,115 @@
+{
+  "backend": "tapir",
+  "carriers": [
+    {
+      "carrier": "element_id",
+      "guid": "A0159B37-5EA0-48BB-A8C4-4DDE446DAF61",
+      "marker": "BX:PROBE:8eb82aee9aa6476bb7ec21751b65f1fe",
+      "original": "ПЕР - 005",
+      "ref": "builtin:General_ElementID",
+      "status": "OK"
+    }
+  ],
+  "cleanup": null,
+  "dry_run": false,
+  "element_id_probe": {
+    "resolved": "builtin:General_ElementID"
+  },
+  "expect_project": "C:\\Users\\Admin\\Downloads\\MCP_TEST.pln",
+  "finished_at": "2026-09-26T20:55:17Z",
+  "guid": "A0159B37-5EA0-48BB-A8C4-4DDE446DAF61",
+  "host": "Windows 11",
+  "probe": "T0B",
+  "stages": [
+    {
+      "at": "2026-09-26T20:55:16Z",
+      "note": "read-only",
+      "project": {
+        "archicad_build": "",
+        "archicad_version": "",
+        "instance_hint": "port=19723",
+        "is_teamwork": false,
+        "is_untitled": false,
+        "port": 19723,
+        "project_name": "MCP_TEST",
+        "project_path": "C:\\Users\\Admin\\Downloads\\MCP_TEST.pln"
+      },
+      "stage": "PRECHECK"
+    },
+    {
+      "at": "2026-09-26T20:55:16Z",
+      "details": {
+        "angle": 0.0,
+        "element_id": "ПЕР - 005",
+        "floor_index": 0,
+        "has_floor_plan_polygons": true,
+        "height": 3.0,
+        "layer": null,
+        "layer_index": 33,
+        "length": 8.930121344,
+        "ref_line": {
+          "from": [
+            -82.103501371,
+            30.243410145
+          ],
+          "to": [
+            -73.173380027,
+            30.243410145
+          ]
+        },
+        "story": null,
+        "type": "Wall"
+      },
+      "stage": "PRECHECK_ELEMENT"
+    },
+    {
+      "at": "2026-09-26T20:55:16Z",
+      "carrier": "element_id",
+      "original": "ПЕР - 005",
+      "stage": "SAVED"
+    },
+    {
+      "at": "2026-09-26T20:55:16Z",
+      "carrier": "element_id",
+      "marker": "BX:PROBE:8eb82aee9aa6476bb7ec21751b65f1fe",
+      "stage": "WRITTEN"
+    },
+    {
+      "at": "2026-09-26T20:55:17Z",
+      "carrier": "element_id",
+      "stage": "READ_BACK",
+      "value": "BX:PROBE:8eb82aee9aa6476bb7ec21751b65f1fe"
+    },
+    {
+      "at": "2026-09-26T20:55:17Z",
+      "carrier": "element_id",
+      "hits": [
+        "A0159B37-5EA0-48BB-A8C4-4DDE446DAF61"
+      ],
+      "stage": "FIND_EXACT"
+    },
+    {
+      "at": "2026-09-26T20:55:17Z",
+      "carrier": "element_id",
+      "hits": [
+        "A0159B37-5EA0-48BB-A8C4-4DDE446DAF61"
+      ],
+      "stage": "FIND_PREFIX"
+    },
+    {
+      "at": "2026-09-26T20:55:17Z",
+      "carrier": "element_id",
+      "restored_to": "ПЕР - 005",
+      "stage": "RESTORED"
+    },
+    {
+      "at": "2026-09-26T20:55:17Z",
+      "carrier": "element_id",
+      "stage": "VERIFY_RESTORE",
+      "value": "ПЕР - 005"
+    }
+  ],
+  "started_at": "2026-09-26T20:55:14Z",
+  "status": "OK",
+  "version": "1.3"
+}
