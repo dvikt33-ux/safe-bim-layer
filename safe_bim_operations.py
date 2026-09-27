@@ -11,6 +11,7 @@ import json
 import hashlib
 from typing import Any
 from safe_bim_layer import SafeBIMLayer, SafeBIMError, TapirClient
+from safe_bim_tapir_compat import assert_tapir_write_allowed
 from safe_bim_verification import response_items, guid_key, assess_wall_vertical
 
 OPERATIONS = frozenset({'create_wall_loop', 'create_basic_slab', 'create_plinth_segment',
@@ -55,6 +56,7 @@ class SafeBIMOperations:
 
     def execute(self, operation: str, params: dict[str, Any]):
         clean = normalized_params(operation, params)
+        assert_tapir_write_allowed(self.client)
         if getattr(self.layer._execution, 'value', None) is None:
             prepared = self.prepare(operation, params)
             with self.execution_context(prepared, lambda *_: None, lambda *_: None):

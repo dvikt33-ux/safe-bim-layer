@@ -40,6 +40,11 @@ class FakeBIM(TapirClient):
         replacement = self.on_call(command, payload)
         if replacement is not None:
             return replacement
+        if command == 'GetAddOnVersion':
+            version = getattr(self, 'addon_version', '1.5.9')
+            if not isinstance(version, str):
+                raise RuntimeError('GetAddOnVersion unavailable')
+            return envelope(version=version)
         if command == 'GetProjectInfo':
             return envelope(projectPath=self.project)
         if command == 'GetStories':

@@ -133,6 +133,14 @@ class TapirClient:
         self.schema = json.loads(Path(schema_path).read_text(encoding='utf-8')) if schema_path else None
 
     def call(self, command: str, params: dict[str, Any]) -> dict[str, Any]:
+        if not getattr(self, '_version_gate_active', False):
+            from safe_bim_tapir_compat import assert_tapir_write_allowed, is_physical_write
+            if is_physical_write(command):
+                self._version_gate_active = True
+                try:
+                    assert_tapir_write_allowed(self)
+                finally:
+                    self._version_gate_active = False
         body = {'command':'API.ExecuteAddOnCommand','parameters':{
             'addOnCommandId': {'commandNamespace':'TapirCommand','commandName':command},
             'addOnCommandParameters': params}}
