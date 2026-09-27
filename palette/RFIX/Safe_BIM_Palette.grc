@@ -1,0 +1,30 @@
+#include "MDIDs_APICD.h"
+#define MDID_APICD_SafeBIMPalette 910
+
+'MDID' 32500 "Safe BIM Palette Identifier" {
+    MDID_APICD
+    MDID_APICD_SafeBIMPalette
+}
+
+'DATA' 100 "Safe BIM Palette Html" {
+    "Safe_BIM_Palette.html"
+}
+
+'STR#' 32000 "Add-on Name and Description" {
+    "Safe BIM Palette"
+    "Resumable Safe BIM control palette"
+}
+
+'STR#' 32610 "Palette Menu" {
+    "Safe BIM"
+    "Safe BIM"
+    "Safe BIM^ES^EE^EI^ED^EW^E3^EL"
+}
+
+'GDLG' 32610 Palette | topCaption | close | grow 0 0 330 260 "Safe BIM" {
+    Browser 0 0 330 260
+}
+
+'DLGH' 32610 DLG_32610_Safe_BIM_Palette {
+    1 "Safe BIM" Browser_0
+}

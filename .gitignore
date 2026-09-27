@@ -35,6 +35,10 @@ logs/
 *.onnx
 models/
 checkpoints/
+*.sqlite
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
 
 # Archicad projects, autosaves, backups and exported binaries
 *.pln
@@ -47,6 +51,7 @@ checkpoints/
 *.autosave
 *.gsm
 *.mod
+palette/build/
 
 # OS/editor temp files
 .DS_Store

@@ -1,0 +1,23 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><style>
+body{font:14px Segoe UI,sans-serif;background:#f5f5f5;color:#202020;margin:0;padding:16px}
+.card{background:white;border:1px solid #d6d6d6;border-radius:8px;padding:14px}
+h1{font-size:18px;margin:0 0 12px}.row{margin:8px 0}.label{color:#666;font-size:12px}
+.value{font-size:15px}.enum{display:block;color:#777;font-size:11px;margin-top:2px}
+.status{padding:8px;border-radius:5px;background:#eef3f8;font-weight:600}
+.unknown{background:#fff0cf;color:#714b00}.buttons{display:flex;gap:7px;margin-top:14px}
+button{flex:1;padding:8px 4px;border:1px solid #aaa;border-radius:5px;background:#fff;cursor:pointer}
+button small{display:block;color:#666}.error{color:#a40000;font-size:12px;margin-top:8px}
+</style></head><body><div class="card"><h1>Safe BIM</h1>
+<div class="row"><div class="label">Задача <span class="enum">Task</span></div><div id="task" class="value">—</div></div>
+<div class="row"><div class="label">Текущий шаг <span class="enum">Current step</span></div><div id="step" class="value">—</div><span id="progress" class="enum">0 из 0</span></div>
+<div class="row"><span class="label">Этаж / Floor: </span><span id="floor">—</span></div>
+<div class="row"><span class="label">Read-back: </span><span id="readback">—</span></div>
+<div id="status" class="status">Ожидание<span class="enum">PENDING</span></div>
+<div class="buttons"><button onclick="act('continue')">Продолжить<small>Continue</small></button><button onclick="act('pause')">Пауза<small>Pause</small></button><button onclick="act('stop')">Стоп<small>Stop</small></button></div>
+<div id="error" class="error"></div></div><script>
+const base='http://127.0.0.1:19731'; const q=new URLSearchParams(location.search); let job=q.get('job_id')||'active';
+const labels={PENDING:'Ожидание',RUNNING:'Выполняется',DONE:'Готово',FAILED:'Ошибка',WAITING_USER:'Ожидание пользователя',UNKNOWN_OUTCOME:'Результат неизвестен',PAUSED:'Приостановлено',CANCELLED:'Остановлено'};
+async function refresh(){try{let r=await fetch(`${base}/state?job_id=${encodeURIComponent(job)}`,{cache:'no-store'});let s=await r.json();if(!r.ok)throw Error(s.error||r.status);for(let k of ['task','step','progress','floor','readback'])document.getElementById(k).textContent=s[k]??'—';let el=document.getElementById('status');el.className='status'+(s.status==='UNKNOWN_OUTCOME'?' unknown':'');el.innerHTML=`${labels[s.status]||s.status}<span class="enum">${s.enum}</span>`;document.getElementById('error').textContent='';}catch(e){document.getElementById('error').textContent='Python runtime недоступен / Runtime unavailable: '+e.message;}}
+async function act(name){try{await fetch(`${base}/jobs/${encodeURIComponent(job)}/${name}`,{method:'POST'});}finally{await refresh();}}
+refresh();setInterval(refresh,1000);
+</script></body></html>

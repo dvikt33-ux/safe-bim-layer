@@ -32,6 +32,25 @@ class TapirClient:
         with urllib.request.urlopen(req, timeout=120) as r:
             return json.loads(r.read().decode())
 
+    def change_floor_plan(self, story_index: int) -> dict[str, Any]:
+        """Activate a FloorPlan story using the pinned Tapir schema."""
+        payload = {'windowType': 'FloorPlan', 'storyIndex': int(story_index)}
+        self.validate_payload('ChangeWindow', payload)
+        return self.call('ChangeWindow', payload)
+
+    def change_floor_plan_navigator_item(self, navigator_guid: str) -> dict[str, Any]:
+        """Activate a story navigator item using the pinned Tapir schema."""
+        payload = {'navigatorItemId': {'guid': str(navigator_guid)}}
+        self.validate_payload('ChangeWindow', payload)
+        return self.call('ChangeWindow', payload)
+
+    def active_story(self) -> int:
+        response = self.call('GetStories', {})
+        value = response.get('result', {}).get('addOnCommandResponse', {}).get('actStory')
+        if not isinstance(value, int):
+            raise SafeBIMError(f'GetStories did not return integer actStory: {value!r}')
+        return value
+
     def validate_payload(self, command: str, params: dict[str, Any]) -> None:
         if not self.schema:
             raise SafeBIMError('Tapir schema is not loaded')
@@ -114,14 +133,71 @@ def _diff(requested, actual, path=''):
 class SafeBIMLayer:
     def __init__(self, client: TapirClient): self.tapir=client
 
+    @staticmethod
+    def _response_items(response):
+        return response.get('result', {}).get('addOnCommandResponse', {})
+
+    def _story_navigator_guid(self, tree, story_index):
+        if isinstance(tree, dict):
+            item = tree.get('navigatorItem', tree)
+            if item.get('type') == 'StoryItem' and item.get('prefix') == str(story_index):
+                return item.get('navigatorItemId', {}).get('guid')
+            for value in tree.values():
+                found = self._story_navigator_guid(value, story_index)
+                if found:
+                    return found
+        elif isinstance(tree, list):
+            for value in tree:
+                found = self._story_navigator_guid(value, story_index)
+                if found:
+                    return found
+        return None
+
+    def ensure_active_story(self, floor_index: int) -> dict[str, Any]:
+        """Switch through schema-supported ChangeWindow and prove actStory."""
+        target = int(floor_index)
+        before = self.tapir.active_story()
+        if before == target:
+            return {'before': before, 'after': before, 'switched': False}
+        tree = self.tapir.call('GetNavigatorItemTree', {'navigatorMapId': 'ProjectMap'})
+        guid = self._story_navigator_guid(self._response_items(tree).get('navigatorItemTree'), target)
+        if not guid:
+            raise SafeBIMError(f'No Project Map StoryItem found for floorIndex={target}')
+        change = self.tapir.change_floor_plan_navigator_item(guid)
+        if not self._response_items(change).get('success', True):
+            raise SafeBIMError(f'ChangeWindow failed for story {target}: {change!r}')
+        after = self.tapir.active_story()
+        if after != target:
+            raise SafeBIMError(f'ChangeWindow read-back mismatch: requested {target}, actStory={after}')
+        return {'before': before, 'after': after, 'switched': True, 'navigatorGuid': guid}
+
     def _read_details(self, guids):
         r=self.tapir.call('GetDetailsOfElements', {'elements':[{'elementId':{'guid':g}} for g in guids]})
         ds=r.get('result',{}).get('addOnCommandResponse',{}).get('detailsOfElements',[])
         return r, ds
 
-    def _write_and_read(self, command, payload, expected_type, requested_fields):
+    def _reconcile_type(self, expected_type):
+        """Read-only post-timeout evidence; never dispatches a second write."""
+        listed = self.tapir.call('GetElementsByType', {'elementType': expected_type})
+        ids = [x['elementId']['guid'] for x in self._response_items(listed).get('elements', [])
+               if 'elementId' in x]
+        rr, details = self._read_details(ids) if ids else ({}, [])
+        return {'listedResponse': listed, 'readbackResponse': rr,
+                'readback': details, 'candidateGuids': ids}
+
+    def _write_and_read(self, command, payload, expected_type, requested_fields, floor_index=None):
+        story = self.ensure_active_story(floor_index) if floor_index is not None else None
         self.tapir.validate_payload(command,payload)
-        result=self.tapir.call(command,payload)
+        try:
+            result=self.tapir.call(command,payload)
+        except TimeoutError as exc:
+            # A Tapir timeout is not a negative result: Archicad may still have
+            # completed the modal-blocked write. Never retry before reconciliation.
+            reconciliation = self._reconcile_type(expected_type)
+            return {'status':'UNKNOWN_OUTCOME', 'error':repr(exc), 'command':command,
+                    'story':story, 'requestedPayload':payload,
+                    'reconciliationRequired':True, 'retryAllowed':False,
+                    'reconciliation':reconciliation}
         ids=[x['elementId']['guid'] for x in result.get('result',{}).get('addOnCommandResponse',{}).get('elements',[]) if 'elementId' in x]
         read_response, details=self._read_details(ids)
         diffs=[]
@@ -148,29 +224,77 @@ class SafeBIMLayer:
         for a,b in zip(pts,pts[1:]):
             w={'begCoordinate':a,'endCoordinate':b,'floorIndex':int(floor_index),'height':float(height),'thickness':float(thickness),'referenceLineLocation':'Center','structureType':'Basic'}
             walls.append(w); requested.append({'begCoordinate':a,'endCoordinate':b,'height':float(height),'bottomOffset':0,'offset':0,'begThickness':float(thickness),'endThickness':float(thickness),'referenceLineLocation':'Center','structureType':'Basic'})
-        out=self._write_and_read('CreateWalls',{'wallsData':walls},'Wall',requested)
+        out=self._write_and_read('CreateWalls',{'wallsData':walls},'Wall',requested, floor_index)
         out['requestedPayload']={'wallsData':walls}; return out
 
     def create_basic_slab(self, contour, level, floor_index, thickness):
         pts=[{'x':float(p['x']),'y':float(p['y'])} for p in contour]
         if pts[0] == pts[-1]: pts=pts[:-1]
         payload={'slabsData':[{'level':float(level),'floorIndex':int(floor_index),'thickness':float(thickness),'polygonCoordinates':pts}]}
+        story = self.ensure_active_story(floor_index)
         self.tapir.validate_payload('CreateSlabs',payload)
-        result=self.tapir.call('CreateSlabs',payload)
+        try:
+            result=self.tapir.call('CreateSlabs',payload)
+        except TimeoutError as exc:
+            reconciliation = self._reconcile_type('Slab')
+            return {'status':'UNKNOWN_OUTCOME','error':repr(exc),'command':'CreateSlabs',
+                    'story':story,'requestedPayload':payload,
+                    'reconciliationRequired':True,'retryAllowed':False,
+                    'reconciliation':reconciliation}
         ids=[x['elementId']['guid'] for x in result.get('result',{}).get('addOnCommandResponse',{}).get('elements',[]) if 'elementId' in x]
-        rr,ds=self._read_details(ids); diffs=[]
+        diffs=[]
         if len(ids)!=1: diffs.append({'path':'count','requested':1,'actual':len(ids)})
+
+        modify_payload = {
+            'slabsWithDetails': [{
+                'elementId': {'guid': ids[0]},
+                'thickness': float(thickness),
+                'structureType': 'Basic'
+            }]
+        } if len(ids) == 1 else {'slabsWithDetails': []}
+
+        # This is intentionally schema-gated: do not claim support for a
+        # stale local schema or invent a ModifySlabs contract.
+        if not self.tapir.schema or 'ModifySlabs' not in self.tapir.schema.get('commands', {}):
+            raise SafeBIMError(
+                'Local Tapir schema does not contain ModifySlabs; refusing to '
+                'send an unverified slab mutation.'
+            )
+        self.tapir.validate_payload('ModifySlabs', modify_payload)
+        try:
+            modify_result = self.tapir.call('ModifySlabs', modify_payload)
+        except TimeoutError as exc:
+            reconciliation = self._reconcile_type('Slab')
+            return {'status':'UNKNOWN_OUTCOME','error':repr(exc),'command':'ModifySlabs',
+                    'story':story,'requestedPayload':payload,'guids':ids,
+                    'reconciliationRequired':True,'retryAllowed':False,
+                    'reconciliation':reconciliation}
+
+        rr,ds=self._read_details(ids)
         if ds:
             actual=ds[0].get('details',{}); st=actual.get('structureType'); th=actual.get('thickness')
             if st!='Basic': diffs.append({'path':'details.structureType','requested':'Basic','actual':st})
             if not _num_equal(float(thickness),th): diffs.append({'path':'details.thickness','requested':float(thickness),'actual':th})
-        out={'status':'PASS' if not diffs and len(ids)==1 else 'FAIL','guids':ids,'requestedPayload':payload,'tapirResponse':result,'readbackResponse':rr,'readback':ds,'diff':diffs}
+        elif len(ids)==1:
+            diffs.append({'path':'readback','requested':'one slab detail','actual':'<missing>'})
+        out={'status':'PASS' if not diffs and len(ids)==1 else 'FAIL','guids':ids,'requestedPayload':payload,'tapirResponse':result,'modifyPayload':modify_payload,'modifyResponse':modify_result,'readbackResponse':rr,'readback':ds,'diff':diffs}
         return out
 
     def _insert_opening(self, command, collection, expected_type, host_wall_guid, params):
+        _, host_details = self._read_details([host_wall_guid])
+        if len(host_details) != 1 or not isinstance(host_details[0].get('floorIndex'), int):
+            raise SafeBIMError(f'Cannot resolve host wall floorIndex for {host_wall_guid}')
+        story = self.ensure_active_story(host_details[0]['floorIndex'])
         item={'ownerWallId':{'guid':host_wall_guid},'centerOffset':float(params['centerOffset']),'sillHeight':float(params.get('sillHeight',0.0)),'width':float(params['width']),'height':float(params['height'])}
         payload={collection:[item]}; self.tapir.validate_payload(command,payload)
-        result=self.tapir.call(command,payload); ids=[x['elementId']['guid'] for x in result.get('result',{}).get('addOnCommandResponse',{}).get('elements',[]) if 'elementId' in x]
+        try:
+            result=self.tapir.call(command,payload)
+        except TimeoutError as exc:
+            reconciliation = self._reconcile_type(expected_type)
+            return {'status':'UNKNOWN_OUTCOME','error':repr(exc),'command':command,
+                    'story':story,'requestedPayload':payload,'reconciliationRequired':True,
+                    'retryAllowed':False,'reconciliation':reconciliation}
+        ids=[x['elementId']['guid'] for x in result.get('result',{}).get('addOnCommandResponse',{}).get('elements',[]) if 'elementId' in x]
         rr,ds=self._read_details(ids); diffs=[]
         if len(ids)!=1: diffs.append({'path':'count','requested':1,'actual':len(ids)})
         if ds:
