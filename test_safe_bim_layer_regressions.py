@@ -1,6 +1,6 @@
 import unittest
 
-from safe_bim_layer import SafeBIMLayer, SafeBIMError
+from safe_bim_layer import SafeBIMLayer, SafeBIMError, ModalStateError
 
 
 class FakeTapir:
@@ -35,11 +35,19 @@ class FakeTapir:
                 self.created.append(payload)
             raise TimeoutError('simulated modal-blocked timeout')
         if command == 'CreateWalls':
-            return {'result': {'addOnCommandResponse': {'elements': []}}}
+            self.created.append(payload)
+            return {'result': {'addOnCommandResponse': {'elements': [
+                {'elementId': {'guid': 'plinth-1'}}]}}}
         if command == 'GetElementsByType':
             return {'result': {'addOnCommandResponse': {'elements': []}}}
         if command == 'GetDetailsOfElements':
-            return {'result': {'addOnCommandResponse': {'detailsOfElements': []}}}
+            return {'result': {'addOnCommandResponse': {'detailsOfElements': [{
+                'type': 'Wall', 'floorIndex': 0,
+                'details': {'zCoordinate': -0.6, 'height': 0.6,
+                            'structureType': 'Basic'}}]}}}
+        if command == 'GetStories':
+            return {'result': {'addOnCommandResponse': {'stories': [
+                {'index': 0, 'level': 0.0}]}}}
         return {'result': {'addOnCommandResponse': {}}}
 
 
@@ -70,6 +78,26 @@ class SafeBIMRegressionTests(unittest.TestCase):
         self.assertFalse(result['retryAllowed'])
         self.assertTrue(result['reconciliationRequired'])
         self.assertEqual(len([c for c in fake.calls if c[0] == 'CreateWalls']), 1)
+
+    def test_plinth_segment_verifies_vertical_fingerprint(self):
+        fake = FakeTapir()
+        result = SafeBIMLayer(fake).create_plinth_segment(
+            {'x': 100, 'y': 100}, {'x': 101, 'y': 100},
+            grade_z=-0.6, project_zero_z=0.0, floor_index=0)
+        self.assertEqual(result['status'], 'PASS')
+        self.assertEqual(result['actual_bottom'], -0.6)
+        self.assertEqual(result['actual_top'], 0.0)
+
+    def test_modal_error_is_non_retryable(self):
+        class ModalTapir(FakeTapir):
+            def call(self, command, payload):
+                if command == 'CreateWalls':
+                    raise ModalStateError('Invalid program status: modal dialog')
+                return super().call(command, payload)
+        with self.assertRaises(ModalStateError):
+            SafeBIMLayer(ModalTapir()).create_wall_loop(
+                [{'x': 0, 'y': 0}, {'x': 1, 'y': 0},
+                 {'x': 1, 'y': 1}, {'x': 0, 'y': 1}], 0, 0.6, 0.25)
 
 
 if __name__ == '__main__':

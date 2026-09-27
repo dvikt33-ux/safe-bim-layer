@@ -53,6 +53,26 @@ class ResumableExecutorTests(unittest.TestCase):
         ])
         return job_id
 
+    def test_active_selection_prefers_running_then_pending_then_history(self):
+        self.create_job("old-done")
+        self.executor.run("old-done")
+        self.create_job("pending")
+        self.create_job("running")
+        self.store.set_job("running", JobStatus.RUNNING)
+        self.assertEqual(self.executor.resolve_job_id("active"), "running")
+        self.store.set_job("running", JobStatus.DONE)
+        self.assertEqual(self.executor.resolve_job_id("active"), "pending")
+
+    def test_palette_terminal_controls_and_history_fallback(self):
+        self.create_job("done-job")
+        self.executor.run("done-job")
+        state = self.executor.palette_state("done-job")
+        self.assertEqual(state["selection"], "history")
+        self.assertFalse(state["controls"]["continue"])
+        self.assertFalse(state["controls"]["pause"])
+        self.assertFalse(state["controls"]["stop"])
+        self.assertTrue(any(row["job_id"] == "done-job" for row in state["history"]))
+
     def test_persistence_survives_store_reopen(self):
         job_id = self.create_job()
         self.assertEqual(self.executor.run(job_id), JobStatus.DONE)
@@ -69,6 +89,18 @@ class ResumableExecutorTests(unittest.TestCase):
         self.assertEqual(self.ops.calls, 1)
         row = self.store.job(job_id)["steps"][0]
         self.assertEqual(row["attempts"], 1)
+        self.assertFalse(row["result"]["retryAllowed"])
+
+    def test_modal_state_waits_for_user_without_retry(self):
+        job_id = self.create_job()
+        class ModalError(RuntimeError):
+            retry_allowed = False
+        self.ops.execute = lambda *_: (_ for _ in ()).throw(ModalError("modal"))
+        executor = ResumableExecutor(
+            self.store, self.ops.execute, self.ops.reconcile, lambda: self.ops.project)
+        self.assertEqual(executor.run(job_id), JobStatus.WAITING_USER)
+        row = self.store.job(job_id)["steps"][0]
+        self.assertEqual(row["status"], "WAITING_USER")
         self.assertFalse(row["result"]["retryAllowed"])
 
     def test_resume_reconciles_applied_without_redispatch(self):

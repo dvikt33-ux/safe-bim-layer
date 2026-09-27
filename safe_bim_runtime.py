@@ -152,6 +152,14 @@ class SQLiteCheckpointStore:
                 raise ExecutorError("no jobs")
             return row["job_id"]
 
+    def jobs(self, limit: int = 8) -> list[dict[str, Any]]:
+        limit = max(1, min(int(limit), 50))
+        with self._connect() as db:
+            rows = db.execute(
+                "SELECT job_id,task_name,status,current_step,total_steps,created_at,updated_at "
+                "FROM jobs ORDER BY updated_at DESC LIMIT ?", (limit,)).fetchall()
+            return [dict(row) for row in rows]
+
     @staticmethod
     def _decode_step(row):
         value = dict(row)
@@ -217,7 +225,16 @@ class ResumableExecutor:
         self.current_project = current_project
 
     def resolve_job_id(self, job_id: str) -> str:
-        return self.store.latest_job_id() if job_id == "active" else job_id
+        if job_id != "active":
+            return job_id
+        jobs = self.store.jobs(50)
+        for status in (JobStatus.RUNNING.value, JobStatus.WAITING_USER.value,
+                       JobStatus.UNKNOWN_OUTCOME.value, JobStatus.PAUSED.value):
+            match = next((job for job in jobs if job["status"] == status), None)
+            if match:
+                return match["job_id"]
+        pending = next((job for job in jobs if job["status"] == JobStatus.PENDING.value), None)
+        return (pending or jobs[0])["job_id"] if jobs else self.store.latest_job_id()
 
     def _assert_project(self, job):
         expected = str(Path(job["project_path"]).resolve())
@@ -276,11 +293,21 @@ class ResumableExecutor:
                 result = {"status": "UNKNOWN_OUTCOME", "error": repr(exc),
                           "retryAllowed": False}
             except Exception as exc:
-                self.store.set_step(job_id, step["position"], JobStatus.FAILED,
-                                    error=f"{type(exc).__name__}: {exc}")
-                self.store.set_job(job_id, JobStatus.FAILED,
+                if getattr(exc, "retry_allowed", True) is False:
+                    result = {"status": "WAITING_USER", "error": repr(exc),
+                              "retryAllowed": False, "requiresContinue": True}
+                else:
+                    self.store.set_step(job_id, step["position"], JobStatus.FAILED,
+                                        error=f"{type(exc).__name__}: {exc}")
+                    self.store.set_job(job_id, JobStatus.FAILED,
+                                       current_step=step["position"])
+                    return JobStatus.FAILED
+            if result.get("status") == "WAITING_USER":
+                self.store.set_step(job_id, step["position"], JobStatus.WAITING_USER,
+                                    result=result)
+                self.store.set_job(job_id, JobStatus.WAITING_USER,
                                    current_step=step["position"])
-                return JobStatus.FAILED
+                return JobStatus.WAITING_USER
             if result.get("status") == "UNKNOWN_OUTCOME":
                 result["retryAllowed"] = False
                 self.store.set_step(job_id, step["position"],
@@ -354,6 +381,7 @@ class ResumableExecutor:
         return JobStatus.RUNNING
 
     def palette_state(self, job_id: str) -> dict[str, Any]:
+        requested_job_id = job_id
         job_id = self.resolve_job_id(job_id)
         job = self.store.job(job_id)
         position = min(job["current_step"], max(0, job["total_steps"] - 1))
@@ -368,4 +396,11 @@ class ResumableExecutor:
             "floor": step["floor_index"],
             "readback": "Подтверждён" if self._has_readback(result) else "Не подтверждён",
             "enum": job["status"],
+            "selection": "current" if requested_job_id == "active" else "history",
+            "history": self.store.jobs(8),
+            "controls": {
+                "continue": job["status"] not in {s.value for s in TERMINAL},
+                "pause": job["status"] in {JobStatus.RUNNING.value, JobStatus.PENDING.value},
+                "stop": job["status"] not in {s.value for s in TERMINAL},
+            },
         }

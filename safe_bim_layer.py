@@ -20,6 +20,12 @@ class SafeBIMError(RuntimeError):
     pass
 
 
+class ModalStateError(SafeBIMError):
+    """Tapir reports that Archicad cannot accept commands while modal/busy."""
+
+    retry_allowed = False
+
+
 @dataclass(frozen=True)
 class StoryRecord:
     story_index: int
@@ -43,6 +49,22 @@ class VerticalContext:
 
     def fingerprint(self) -> dict[str, Any]:
         return asdict(self)
+
+
+def preflight_plinth_geometry(context: VerticalContext) -> dict[str, Any]:
+    """Resolve plinth Z values and fail closed when the Tapir shape is ambiguous."""
+    values = context.fingerprint()
+    if context.plinth_bottom_z is None or context.plinth_top_z is None:
+        raise SafeBIMError('plinth bottom/top Z are required')
+    if context.plinth_bottom_z >= context.plinth_top_z:
+        raise SafeBIMError('plinth bottom Z must be below top Z')
+    if not math.isclose(context.plinth_top_z, context.project_zero_z, abs_tol=1e-6):
+        raise SafeBIMError('plinth top Z must equal project zero for this context')
+    return {'status': 'UNSUPPORTED_LIVE_GEOMETRY', 'verticalContext': values,
+            'expectedZFingerprint': values, 'geometry': None,
+            'reason': ('CreateWalls requires a story-relative floorIndex and the pinned '
+                       'schema exposes no verified absolute bottom-Z/offset for a safe plinth write'),
+            'writeAllowed': False}
 
 
 class StoryResolver:
@@ -105,7 +127,12 @@ class TapirClient:
             'addOnCommandParameters': params}}
         req = urllib.request.Request(self.base_url, data=json.dumps(body).encode(), headers={'Content-Type':'application/json'}, method='POST')
         with urllib.request.urlopen(req, timeout=120) as r:
-            return json.loads(r.read().decode())
+            response = json.loads(r.read().decode())
+        text = json.dumps(response, ensure_ascii=False).lower()
+        if 'invalid program status' in text or 'modal dialog' in text or 'modal state' in text:
+            raise ModalStateError(
+                f'Archicad is modal/busy during {command}; manual Continue required')
+        return response
 
     def change_floor_plan(self, story_index: int) -> dict[str, Any]:
         """Activate a FloorPlan story using the pinned Tapir schema."""
@@ -220,6 +247,13 @@ class SafeBIMLayer:
         return {'stories': [asdict(s) for s in stories],
                 'verticalContext': self.vertical_context.fingerprint() if self.vertical_context else None}
 
+    def preflight_plinth(self, context: VerticalContext | None = None):
+        context = context or self.vertical_context
+        if context is None:
+            raise SafeBIMError('VerticalContext is required for plinth preflight')
+        self.vertical_context = context
+        return preflight_plinth_geometry(context)
+
     @staticmethod
     def _response_items(response):
         return response.get('result', {}).get('addOnCommandResponse', {})
@@ -322,6 +356,52 @@ class SafeBIMLayer:
                                   'top_z': expected_top, 'height': float(height),
                                   'story_index': int(floor_index)})
         out['requestedPayload']={'wallsData':walls}; return out
+
+    def create_plinth_segment(self, start, end, grade_z, project_zero_z,
+                              floor_index, thickness=0.25):
+        """Create one verified wall segment spanning grade to project zero."""
+        grade_z, project_zero_z = float(grade_z), float(project_zero_z)
+        if grade_z >= project_zero_z:
+            raise SafeBIMError('grade_z must be below project_zero_z')
+        story = self.story_resolver.by_index(int(floor_index), project_zero_z)
+        relative_z = grade_z - float(story.elevation)
+        height = project_zero_z - grade_z
+        fingerprint = {
+            'story_elevation': float(story.elevation),
+            'relative_offset': relative_z,
+            'expected_bottom': grade_z,
+            'expected_top': project_zero_z,
+        }
+        wall = {
+            'begCoordinate': {'x': float(start['x']), 'y': float(start['y'])},
+            'endCoordinate': {'x': float(end['x']), 'y': float(end['y'])},
+            'floorIndex': int(floor_index), 'zCoordinate': relative_z,
+            'height': height, 'thickness': float(thickness),
+            'referenceLineLocation': 'Center', 'structureType': 'Basic',
+        }
+        self.tapir.validate_payload('CreateWalls', {'wallsData': [wall]})
+        response = self.tapir.call('CreateWalls', {'wallsData': [wall]})
+        ids = [x['elementId']['guid'] for x in self._response_items(response).get('elements', [])]
+        if len(ids) != 1:
+            raise SafeBIMError('create_plinth_segment returned an unexpected element count')
+        read_response, details = self._read_details(ids)
+        if len(details) != 1:
+            raise SafeBIMError('create_plinth_segment read-back is incomplete')
+        detail, actual = details[0], details[0].get('details', {})
+        actual_z = float(actual.get('zCoordinate'))
+        actual_height = float(actual.get('height'))
+        actual_bottom, actual_top = actual_z, actual_z + actual_height
+        checks = (detail.get('floorIndex') == int(floor_index) and
+                  math.isclose(actual_z, relative_z, abs_tol=1e-6) and
+                  math.isclose(actual_height, height, abs_tol=1e-6) and
+                  actual.get('structureType') == 'Basic' and
+                  math.isclose(actual_bottom, grade_z, abs_tol=1e-6) and
+                  math.isclose(actual_top, project_zero_z, abs_tol=1e-6))
+        if not checks:
+            raise SafeBIMError('create_plinth_segment read-back fingerprint mismatch')
+        return {'status': 'PASS', 'guids': ids, 'readback': details,
+                'expectedZFingerprint': fingerprint,
+                'actual_bottom': actual_bottom, 'actual_top': actual_top}
 
     def _can_resolve_story(self):
         return hasattr(self.tapir, 'call') and not (getattr(self.tapir, 'schema', None) == {'commands': {}})

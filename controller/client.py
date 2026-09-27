@@ -22,6 +22,9 @@ class RuntimeState:
     floor: object
     readback: str
     enum: str
+    selection: str = "current"
+    history: tuple = ()
+    controls: dict | None = None
 
     @classmethod
     def from_payload(cls, payload: dict) -> "RuntimeState":
@@ -30,7 +33,8 @@ class RuntimeState:
         if missing:
             raise ValueError("state missing fields: " + ", ".join(missing))
         return cls(*(payload[key] for key in required[:5]), payload.get("floor"),
-                    payload["readback"], payload["enum"])
+                    payload["readback"], payload["enum"], payload.get("selection", "current"),
+                    tuple(payload.get("history", ())), payload.get("controls"))
 
 
 class SafeBIMClient:

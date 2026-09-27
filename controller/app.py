@@ -67,10 +67,13 @@ class ControllerApp:
             ttk.Label(row, textvariable=self.vars[key]).pack(side="left", fill="x")
         ttk.Separator(frame).pack(fill="x", pady=8)
         ttk.Label(frame, textvariable=self.vars["message"], wraplength=310).pack(fill="x")
+        self.history = ttk.Combobox(frame, state="readonly", width=42)
+        self.history.pack(fill="x", pady=(6, 0))
+        self.history.bind("<<ComboboxSelected>>", self.select_history)
         buttons = ttk.Frame(frame); buttons.pack(fill="x", pady=10)
-        ttk.Button(buttons, text="Продолжить / Continue", command=lambda: self.command("continue")).pack(fill="x")
-        ttk.Button(buttons, text="Пауза / Pause", command=lambda: self.command("pause")).pack(fill="x", pady=3)
-        ttk.Button(buttons, text="Стоп / Stop", command=lambda: self.command("stop")).pack(fill="x")
+        self.continue_button = ttk.Button(buttons, text="Продолжить / Continue", command=lambda: self.command("continue")); self.continue_button.pack(fill="x")
+        self.pause_button = ttk.Button(buttons, text="Пауза / Pause", command=lambda: self.command("pause")); self.pause_button.pack(fill="x", pady=3)
+        self.stop_button = ttk.Button(buttons, text="Стоп / Stop", command=lambda: self.command("stop")); self.stop_button.pack(fill="x")
         ttk.Checkbutton(frame, text="Поверх окон / Always on top", variable=self.topmost,
                         command=lambda: self.root.attributes("-topmost", self.topmost.get())).pack(anchor="w")
 
@@ -109,6 +112,20 @@ class ControllerApp:
         else:
             msg = "Состояние получено от Safe BIM runtime."
         self.vars["message"].set(msg)
+        history = state.history or ()
+        self.history["values"] = [f"{item['job_id']} · {item['status']} · {item['task_name']}" for item in history]
+        controls = state.controls or {}
+        self.continue_button.configure(state="normal" if controls.get("continue", False) else "disabled")
+        self.pause_button.configure(state="normal" if controls.get("pause", False) else "disabled")
+        self.stop_button.configure(state="normal" if controls.get("stop", False) else "disabled")
+        if state.selection == "history":
+            self.vars["message"].set("История / History: отображается последний завершённый job.")
+
+    def select_history(self, _event=None):
+        value = self.history.get().split(" · ", 1)[0]
+        if value:
+            self.job_id = value
+            self._read_state()
 
     def command(self, action: str):
         self.log.info("command requested: %s", action)

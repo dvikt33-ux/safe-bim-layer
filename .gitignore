@@ -52,6 +52,7 @@ checkpoints/
 *.gsm
 *.mod
 palette/build/
+palette/build-v143/
 
 # OS/editor temp files
 .DS_Store

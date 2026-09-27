@@ -1,6 +1,6 @@
 import unittest
 
-from safe_bim_layer import StoryResolver, VerticalContext
+from safe_bim_layer import StoryResolver, VerticalContext, preflight_plinth_geometry
 
 
 class StoriesTapir:
@@ -32,6 +32,14 @@ class StoryVerticalTests(unittest.TestCase):
                               plinth_top_z=0.0, source='confirmed brief')
         self.assertNotEqual(ctx.grade_z, ctx.project_zero_z)
         self.assertEqual(ctx.plinth_top_z, ctx.project_zero_z)
+
+    def test_plinth_preflight_fails_closed_without_geometry_write(self):
+        result = preflight_plinth_geometry(VerticalContext(
+            0.0, grade_z=-0.6, plinth_bottom_z=-0.6, plinth_top_z=0.0,
+            source='live audit'))
+        self.assertEqual(result['status'], 'UNSUPPORTED_LIVE_GEOMETRY')
+        self.assertFalse(result['writeAllowed'])
+        self.assertEqual(result['expectedZFingerprint']['plinth_bottom_z'], -0.6)
 
 
 if __name__ == '__main__':
