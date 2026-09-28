@@ -519,8 +519,8 @@ class RecoveryAndStateTests(unittest.TestCase):
             self.assertNotIn(secret, repr(service.store.pending_outbox()))
             service.stop()
 
-    def test_backend_status_is_implemented_not_live_verified(self):
-        self.assertEqual(GITHUB_BACKEND_STATUS, 'IMPLEMENTED_NOT_LIVE_VERIFIED')
+    def test_backend_status_remains_live_verified(self):
+        self.assertEqual(GITHUB_BACKEND_STATUS, 'GITHUB_LIVE_VERIFIED')
 
 
 if __name__ == '__main__':

@@ -133,7 +133,7 @@ class LiveLeaseTests(unittest.TestCase):
                     other.stop()
 
             self.assertEqual(MUTEX_VERIFICATION, 'OFFLINE_CONTRACT_VERIFIED')
-        self.assertEqual(GITHUB_BACKEND_STATUS, 'IMPLEMENTED_NOT_LIVE_VERIFIED')
+            self.assertEqual(GITHUB_BACKEND_STATUS, 'GITHUB_LIVE_VERIFIED')
 
     def test_crashed_owner_takeover_needs_heartbeat_absence(self):
         clock = MutableClock()

@@ -15,6 +15,27 @@ LEASE_STATES = ('NONE', 'CAPTURING', 'READY', 'VALID', 'STALE', 'CANCELLED')
 UI_CAPTURING = 'ИИ: считываю проект…'
 UI_STALE = 'Контекст устарел'
 UI_REFRESH = 'Обновить контекст'
+CONTEXT_ROUNDTRIP_STATUS = 'IMPLEMENTED_NOT_LIVE_VERIFIED'
+
+
+class SnapshotValidationError(RuntimeError):
+    """The injected provider returned data that cannot be durable evidence."""
+
+
+class SyntheticContextCaptureProvider:
+    """Deterministic, GitHub-independent context source used by the prototype."""
+
+    def capture(self, request: dict) -> dict:
+        return {
+            'source': 'synthetic',
+            'logicalProjectId': request['logicalProjectId'],
+            'instanceId': request.get('instanceId'),
+            'scope': request['requestedScope'],
+            'projectName': None,
+            'story': None,
+            'selection': None,
+            'note': 'synthetic context; no Archicad read was performed',
+        }
 
 
 @dataclass(frozen=True)
@@ -30,7 +51,7 @@ class ContextReady:
 
 
 class ContextService:
-    def __init__(self, store, clock):
+    def __init__(self, store, clock, capture_provider=None):
         self.store = store
         self.clock = clock
         self.lease = 'NONE'
@@ -40,15 +61,18 @@ class ContextService:
         self.active_stream: str | None = None
         self.ui_banner = ''
         self.fault_after_capture_assigned = None
+        self.fault_after_provider_returned = None
+        self.capture_provider = capture_provider or SyntheticContextCaptureProvider()
 
-    def request(self, message: dict) -> dict:
+    def request(self, message: dict, completion=None) -> dict:
         request_id = message['requestId']
         project_id = message['logicalProjectId']
         scope = message['requestedScope']
         instance_id = message.get('instanceId')
+        generation = message.get('generation')
         existing = self.store.context_request(request_id)
         if existing:
-            if not _same_identity(existing, project_id, scope, instance_id):
+            if not _same_identity(existing, project_id, scope, instance_id, generation):
                 return {
                     'kind': 'REQUEST_ID_CONFLICT',
                     'requestId': request_id,
@@ -65,7 +89,7 @@ class ContextService:
                 self._remember(instance_id, None)
                 return existing['response']
             if existing['state'] == 'CAPTURING':
-                return self._resume_capturing(existing)
+                return self._resume_capturing(existing, completion)
             self.lease = existing['state'] if existing['state'] in LEASE_STATES else 'NONE'
             return {
                 'kind': 'CONTEXT_REQUEST',
@@ -75,13 +99,26 @@ class ContextService:
                 'requestedScope': existing['requested_scope'],
                 'instanceId': existing.get('instance_id'),
             }
+        stream = _stream_key({'instance_id': instance_id, 'project_id': project_id})
+        if generation is not None:
+            known = int(self.store.meta(f'context_sequence:{stream}') or 0)
+            if generation < known:
+                return {
+                    'kind': 'IGNORED_STALE', 'requestId': request_id,
+                    'generation': generation, 'knownGeneration': known,
+                }
+            if generation == known and known > 0:
+                return {
+                    'kind': 'CONTEXT_SEQUENCE_CONFLICT', 'requestId': request_id,
+                    'generation': generation, 'knownGeneration': known,
+                }
         self.lease = 'CAPTURING'
         self.ui_banner = UI_CAPTURING
         self.store.put_context_request(
             request_id, project_id, scope, 'CAPTURING', message.get('requestedAt', self.clock()),
-            instance_id=instance_id)
-        ready = self._capture(request_id, project_id, scope, instance_id)
-        return self._publish(ready, instance_id)
+            instance_id=instance_id, generation=generation)
+        ready = self._capture(request_id, project_id, scope, instance_id, generation)
+        return self._publish(ready, instance_id, completion)
 
     def apply_ready(self, ready: ContextReady) -> str:
         invalid = _ready_error(ready)
@@ -262,12 +299,31 @@ class ContextService:
             return generation_hash(self.current)
         return None
 
-    def _resume_capturing(self, existing: dict) -> dict:
+    def _resume_capturing(self, existing: dict, completion=None) -> dict:
         """Continue the one stored operation. A second capture is not started."""
+        request_id = existing['request_id']
+        assigned = self._assigned(request_id)
+        generation = existing.get('generation')
+        if generation is None and assigned is not None:
+            generation = assigned[0]
+        stream = _stream_key(existing)
+        known = int(self.store.meta(f'context_sequence:{stream}') or 0)
+        if generation is not None and known > generation:
+            self.store.set_context_state(request_id, 'STALE')
+            return _stale_reply(self.store.context_request(request_id))
+        if generation is not None and known == generation and known > 0:
+            latest = self.store.context_request(request_id)
+            if _is_completed(latest):
+                return latest['response']
+            return {
+                'kind': 'CONTEXT_SEQUENCE_CONFLICT',
+                'requestId': request_id,
+                'generation': generation,
+                'knownGeneration': known,
+            }
         self.lease = 'CAPTURING'
         self.ui_banner = UI_CAPTURING
-        request_id = existing['request_id']
-        if self._assigned(request_id) is None:
+        if assigned is None:
             return {
                 'kind': 'CONTEXT_REQUEST',
                 'requestId': request_id,
@@ -278,15 +334,33 @@ class ContextService:
                 'resumed': True,
             }
         ready = self._capture(
-            request_id, existing['project_id'], existing['requested_scope'], existing.get('instance_id'))
-        return self._publish(ready, existing.get('instance_id'))
+            request_id, existing['project_id'], existing['requested_scope'], existing.get('instance_id'),
+            generation)
+        return self._publish(ready, existing.get('instance_id'), completion)
 
-    def _publish(self, ready: ContextReady, instance_id) -> dict:
+    def _publish(self, ready: ContextReady, instance_id, completion=None) -> dict:
         response = _ready_response(ready)
         stream = _stream_key({'instance_id': instance_id, 'project_id': ready.logical_project_id})
-        status = self.store.commit_context_ready(
-            ready.request_id, ready.snapshot_id, response, stream, ready.sequence, generation_hash(ready),
-            expected_capture_revision=self._expected_capture_revision(ready.request_id))
+        if completion is None:
+            status = self.store.commit_context_ready(
+                ready.request_id, ready.snapshot_id, response, stream, ready.sequence, generation_hash(ready),
+                expected_capture_revision=self._expected_capture_revision(ready.request_id))
+        else:
+            status = completion(ready, response, stream, generation_hash(ready))
+        if status == 'IDEMPOTENT':
+            stored = self.store.context_request(ready.request_id)
+            if _is_completed(stored):
+                return stored['response']
+        if status == 'IGNORED_STALE':
+            self.store.set_context_state(ready.request_id, 'STALE')
+            return _stale_reply(self.store.context_request(ready.request_id))
+        if status == 'CONTEXT_SEQUENCE_CONFLICT':
+            return {
+                'kind': status,
+                'requestId': ready.request_id,
+                'reason': 'generation identity conflict',
+                'refreshRequired': False,
+            }
         if status != 'CONTEXT_READY':
             self._present(instance_id, ready.logical_project_id, 'STALE', UI_STALE)
             return {
@@ -329,36 +403,51 @@ class ContextService:
         sequence, snapshot_id = str(raw).split(':', 1)
         return int(sequence), snapshot_id
 
-    def _payload(self, project_id: str, scope: str, instance_id) -> dict:
-        return {
-            'source': 'mock',
-            'logicalProjectId': project_id,
-            'instanceId': instance_id,
-            'scope': scope,
-            'projectName': None,
-            'story': None,
-            'selection': None,
-            'note': 'mock context; no Archicad read was performed',
-        }
-
-    def _capture(self, request_id: str, project_id: str, scope: str, instance_id=None) -> ContextReady:
+    def _capture(self, request_id: str, project_id: str, scope: str, instance_id=None,
+                 requested_generation=None) -> ContextReady:
         assigned = self._assigned(request_id)
         if assigned is None:
-            self.sequence += 1
+            if requested_generation is None:
+                self.sequence += 1
+            else:
+                self.sequence = max(self.sequence, requested_generation)
             captures = int(self.store.meta('context_captures') or 0) + 1
-            snapshot_id = f'snap-{self.sequence:04d}'
+            sequence = requested_generation if requested_generation is not None else self.sequence
+            if requested_generation is None:
+                snapshot_id = f'snap-{sequence:04d}'
+            else:
+                snapshot_id = 'snap-' + canonical_hash({
+                    'requestId': request_id,
+                    'instanceId': instance_id,
+                    'logicalProjectId': project_id,
+                    'generation': sequence,
+                })[:24]
             stream = _stream_key({'instance_id': instance_id, 'project_id': project_id})
             self.store.assign_capture(
-                request_id, self.sequence, snapshot_id, self._stream_revision(stream), captures)
-            sequence = self.sequence
+                request_id, sequence, snapshot_id, self._stream_revision(stream), captures)
             if self.fault_after_capture_assigned:
                 self.fault_after_capture_assigned()
         else:
             sequence, snapshot_id = assigned
+        request = {
+            'requestId': request_id,
+            'logicalProjectId': project_id,
+            'requestedScope': scope,
+            'instanceId': instance_id,
+            'generation': sequence,
+        }
+        try:
+            payload = self.capture_provider.capture(request)
+            if not isinstance(payload, dict):
+                raise TypeError('snapshot must be an object')
+            root_hash = canonical_hash(payload)
+        except (TypeError, ValueError, UnicodeError) as exc:
+            raise SnapshotValidationError('provider returned non-canonical snapshot data') from exc
+        if self.fault_after_provider_returned:
+            self.fault_after_provider_returned()
         return ContextReady(
             PROTOCOL_VERSION, request_id, snapshot_id, project_id,
-            f'mock-{project_id}-{sequence}', self.clock(),
-            self._payload(project_id, scope, instance_id), sequence)
+            root_hash, self.clock(), payload, sequence)
 
 
 def generation_identity(ready: ContextReady) -> dict:
@@ -460,7 +549,8 @@ def _stream_key(stored: dict) -> str:
     return 'project:' + stored['project_id']
 
 
-def _same_identity(existing: dict, project_id: str, scope: str, instance_id) -> bool:
+def _same_identity(existing: dict, project_id: str, scope: str, instance_id, generation=None) -> bool:
     return (existing['project_id'] == project_id
             and existing['requested_scope'] == scope
-            and (existing.get('instance_id') or None) == (instance_id or None))
+            and (existing.get('instance_id') or None) == (instance_id or None)
+            and existing.get('generation') == generation)

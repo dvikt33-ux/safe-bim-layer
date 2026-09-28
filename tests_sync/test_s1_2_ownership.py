@@ -241,7 +241,7 @@ class FreshUIAndStatusTests(unittest.TestCase):
         self.assertEqual(started['local'], 'LOCAL_READY')
         self.assertEqual(started['archicad'], 'ARCHICAD_DISCONNECTED')
         self.assertEqual(REMOTE_MAILBOX_PROTOCOL, 'OFFLINE_MOCK_VERIFIED')
-        self.assertEqual(GITHUB_BACKEND_STATUS, 'IMPLEMENTED_NOT_LIVE_VERIFIED')
+        self.assertEqual(GITHUB_BACKEND_STATUS, 'GITHUB_LIVE_VERIFIED')
         self.assertEqual(DURABLE_REMOTE_INBOX_ROLE, 'TEST_STAND_IN_ONLY')
 
 

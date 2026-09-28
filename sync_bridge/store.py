@@ -28,7 +28,8 @@ CREATE TABLE IF NOT EXISTS context_requests (
     snapshot_id TEXT,
     response_json TEXT,
     created_at TEXT NOT NULL,
-    instance_id TEXT
+    instance_id TEXT,
+    generation INTEGER
 );
 CREATE TABLE IF NOT EXISTS archicad_clients (
     instance_id TEXT PRIMARY KEY,
@@ -135,13 +136,14 @@ class BridgeStore:
 
     def put_context_request(self, request_id: str, project_id: str, scope: str, state: str,
                             created_at: str, snapshot_id: str | None = None,
-                            response: dict | None = None, instance_id: str | None = None) -> bool:
+                            response: dict | None = None, instance_id: str | None = None,
+                            generation: int | None = None) -> bool:
         cur = self._db.execute(
-            'INSERT OR IGNORE INTO context_requests(request_id,project_id,requested_scope,state,snapshot_id,response_json,created_at,instance_id) '
-            'VALUES (?,?,?,?,?,?,?,?)',
+            'INSERT OR IGNORE INTO context_requests(request_id,project_id,requested_scope,state,snapshot_id,response_json,created_at,instance_id,generation) '
+            'VALUES (?,?,?,?,?,?,?,?,?)',
             (request_id, project_id, scope, state, snapshot_id,
              json.dumps(response, ensure_ascii=False) if response is not None else None, created_at,
-             instance_id))
+             instance_id, generation))
         return cur.rowcount == 1
 
     def context_request(self, request_id: str):
@@ -332,9 +334,15 @@ class BridgeStore:
         self._db.execute('BEGIN IMMEDIATE')
         try:
             current = self._db.execute(
-                'SELECT request_id, state FROM context_requests WHERE request_id=?', (request_id,)).fetchone()
+                'SELECT request_id, state, response_json FROM context_requests WHERE request_id=?',
+                (request_id,)).fetchone()
             if current is None:
                 raise KeyError(request_id)
+            generation_status = self._context_generation_guard_in_tx(
+                current, stream_key, sequence, identity_hash)
+            if generation_status is not None:
+                self._db.execute('ROLLBACK')
+                return generation_status
             stored_expected = self._meta_in_tx(f'context_op_capture_revision:{request_id}')
             if stored_expected is None:
                 self._db.execute('ROLLBACK')
@@ -354,6 +362,66 @@ class BridgeStore:
             self._set_meta_in_tx(f'context_capture_revision:{request_id}', str(expected))
             self._set_meta_in_tx('context_validity:' + stream_key, 'VALID')
             self._set_meta_in_tx('context_valid_revision:' + stream_key, str(expected))
+            self._db.execute('COMMIT')
+            return 'CONTEXT_READY'
+        except BaseException:
+            self._db.execute('ROLLBACK')
+            raise
+
+    def commit_context_ready_with_outbox(
+            self, request_id: str, snapshot_id: str, response: dict,
+            stream_key: str, sequence: int, identity_hash: str,
+            message_id: str, outbox_payload: dict, created_at: str) -> str:
+        """Atomically commit context evidence and its immutable publish intent."""
+        encoded = json.dumps(response, ensure_ascii=False)
+        outbox_encoded = json.dumps(outbox_payload, ensure_ascii=False, sort_keys=True)
+        outbox_hash = canonical_hash(outbox_payload)
+        self._db.execute('BEGIN IMMEDIATE')
+        try:
+            current = self._db.execute(
+                'SELECT request_id, state, response_json FROM context_requests WHERE request_id=?',
+                (request_id,)).fetchone()
+            if current is None:
+                raise KeyError(request_id)
+            generation_status = self._context_generation_guard_in_tx(
+                current, stream_key, sequence, identity_hash)
+            if generation_status is not None:
+                self._db.execute('ROLLBACK')
+                return generation_status
+            stored_expected = self._meta_in_tx(f'context_op_capture_revision:{request_id}')
+            if stored_expected is None:
+                self._db.execute('ROLLBACK')
+                return 'CAPTURE_REVISION_MISSING'
+            expected = int(stored_expected)
+            current_revision = int(self._meta_in_tx('context_revision:' + stream_key) or 0)
+            if self.fault_before_context_commit:
+                self.fault_before_context_commit()
+            if current_revision != expected:
+                self._db.execute('ROLLBACK')
+                return 'CAPTURE_REVISION_CONFLICT'
+            existing_outbox = self._db.execute(
+                'SELECT payload_hash,payload FROM messages WHERE message_id=?', (message_id,)).fetchone()
+            if existing_outbox is not None:
+                stored_hash = existing_outbox['payload_hash']
+                if not stored_hash:
+                    stored_hash = canonical_hash(json.loads(existing_outbox['payload']))
+                if stored_hash != outbox_hash:
+                    self._db.execute('ROLLBACK')
+                    return 'MESSAGE_ID_CONFLICT'
+            self._db.execute(
+                'UPDATE context_requests SET state=?,snapshot_id=?,response_json=? WHERE request_id=?',
+                ('VALID', snapshot_id, encoded, request_id))
+            self._set_meta_in_tx('context_sequence:' + stream_key, str(sequence))
+            self._set_meta_in_tx(f'context_identity:{stream_key}:{sequence}', identity_hash)
+            self._set_meta_in_tx(f'context_capture_revision:{request_id}', str(expected))
+            self._set_meta_in_tx('context_validity:' + stream_key, 'VALID')
+            self._set_meta_in_tx('context_valid_revision:' + stream_key, str(expected))
+            if existing_outbox is None:
+                self._db.execute(
+                    'INSERT INTO messages(message_id,kind,created_at,payload,state,retry_count,direction,payload_hash) '
+                    'VALUES (?,?,?,?,?,0,?,?)',
+                    (message_id, 'CONTEXT_READY', created_at, outbox_encoded,
+                     'PENDING', 'outbox', outbox_hash))
             self._db.execute('COMMIT')
             return 'CONTEXT_READY'
         except BaseException:
@@ -398,6 +466,20 @@ class BridgeStore:
         row = self._db.execute('SELECT value FROM meta WHERE key=?', (key,)).fetchone()
         return row['value'] if row else None
 
+    def _context_generation_guard_in_tx(
+            self, request, stream_key: str, sequence: int, identity_hash: str) -> str | None:
+        """Reject rollback or equal-generation takeover before context writes."""
+        current_sequence = int(self._meta_in_tx('context_sequence:' + stream_key) or 0)
+        if current_sequence > sequence:
+            return 'IGNORED_STALE'
+        if current_sequence < sequence:
+            return None
+        recorded = self._meta_in_tx(f'context_identity:{stream_key}:{sequence}')
+        if (recorded == identity_hash and request['state'] == 'VALID'
+                and request['response_json'] is not None):
+            return 'IDEMPOTENT'
+        return 'CONTEXT_SEQUENCE_CONFLICT'
+
     def _set_meta_in_tx(self, key: str, value: str) -> None:
         self._db.execute(
             'INSERT INTO meta(key,value) VALUES (?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value',
@@ -407,6 +489,8 @@ class BridgeStore:
         columns = {row['name'] for row in self._db.execute('PRAGMA table_info(context_requests)')}
         if 'instance_id' not in columns:
             self._db.execute('ALTER TABLE context_requests ADD COLUMN instance_id TEXT')
+        if 'generation' not in columns:
+            self._db.execute('ALTER TABLE context_requests ADD COLUMN generation INTEGER')
         message_columns = {row['name'] for row in self._db.execute('PRAGMA table_info(messages)')}
         if 'payload_hash' not in message_columns:
             self._db.execute('ALTER TABLE messages ADD COLUMN payload_hash TEXT')

@@ -57,10 +57,31 @@ def dead_letter_key(payload) -> str:
     return 'deadletter:' + hashlib.sha256(raw.encode('utf-8')).hexdigest()
 
 
+def _validate_remote_context_request(remote: dict) -> dict:
+    if type(remote.get('protocolVersion')) is not int or remote['protocolVersion'] != PROTOCOL_VERSION:
+        raise ProtocolError('unsupported protocolVersion')
+    body = remote.get('body')
+    if not isinstance(body, dict):
+        raise ProtocolError('CONTEXT_REQUEST payload must be an object')
+    for key in ('requestId', 'instanceId', 'logicalProjectId', 'requestedScope'):
+        if not isinstance(body.get(key), str) or not body[key].strip():
+            raise ProtocolError(key + ' required')
+    generation = body.get('generation')
+    if isinstance(generation, bool) or not isinstance(generation, int) or generation <= 0:
+        raise ProtocolError('generation must be a positive integer')
+    for key in ('requestId', 'instanceId', 'logicalProjectId'):
+        if key in remote and remote[key] != body[key]:
+            raise ProtocolError(key + ' conflicts with envelope')
+    requested_at = body.get('requestedAt')
+    if requested_at is not None and (not isinstance(requested_at, str) or not requested_at.strip()):
+        raise ProtocolError('requestedAt must be a non-empty string')
+    return dict(body)
+
+
 class SafeBIMBridge:
     def __init__(self, store: BridgeStore, mailbox, *, owner: PeerIdentity, broker: AIBroker | None = None,
                  instance_id: str = 'bridge-1', clock=None, lease_ttl_seconds: float = 30,
-                 mutex_kernel=None):
+                 mutex_kernel=None, context_provider=None):
         self.store = store
         self.mailbox = mailbox
         self.owner = owner
@@ -73,12 +94,13 @@ class SafeBIMBridge:
         self.instance_lock = SingleInstanceLock(owner.user_sid, mutex_kernel)
         self.lease_state = 'NONE'
         self.poller = PollScheduler(mailbox)
-        self.context = ContextService(store, _now)
+        self.context = ContextService(store, _now, context_provider)
         self.connections = ConnectionBoard()
         self.running = False
         self.logs: list[dict] = []
         self.needs_auth = False
         self.fault_after_persist = None
+        self.fault_after_context_commit = None
         self.pipe_gate = PipeApplicationGate()
 
     def start(self) -> dict:
@@ -205,6 +227,8 @@ class SafeBIMBridge:
             stored_hash = existing_message.get('payload_hash') or _stored_hash(existing_message.get('payload'))
             if stored_hash and stored_hash != incoming_hash:
                 return {'status': 'MESSAGE_ID_CONFLICT', 'jobCreated': False, 'messageId': message_id}
+        if payload.get('kind') == 'CONTEXT_REQUEST':
+            return self._accept_remote_context_request(payload, existing_message)
         existing = self.store.job_for_message(message_id)
         if existing:
             return {'status': 'DUPLICATE', 'jobId': existing['job_id'], 'jobCreated': False}
@@ -220,6 +244,91 @@ class SafeBIMBridge:
         if self.fault_after_persist:
             self.fault_after_persist()
         return {'status': 'QUEUED', 'jobId': job_id, 'jobCreated': True}
+
+    def _accept_remote_context_request(self, payload: dict, existing_message) -> dict:
+        body = _validate_remote_context_request(payload)
+        message_id = payload['messageId']
+        if existing_message is not None and existing_message['state'] == 'PROCESSED':
+            return {
+                'status': 'DUPLICATE', 'messageId': message_id,
+                'requestId': body['requestId'], 'jobCreated': False,
+            }
+        if existing_message is None:
+            self.store.put_message(
+                message_id, 'CONTEXT_REQUEST', payload.get('createdAt', _now()),
+                payload, 'ACCEPTED', 'inbox')
+            if self.fault_after_persist:
+                self.fault_after_persist()
+
+        stored_request = self.store.context_request(body['requestId'])
+        if stored_request is None:
+            client = self.store.client(body['instanceId'])
+            available = (client is not None
+                         and client.get('connection_state') == 'CONNECTED'
+                         and int(client.get('epoch') or -1) == self.epoch)
+            if not available:
+                self.store.set_message_state(message_id, 'PROCESSED')
+                return {
+                    'status': 'INSTANCE_NOT_AVAILABLE', 'messageId': message_id,
+                    'requestId': body['requestId'], 'jobCreated': False,
+                }
+            if client.get('logical_project_id') not in (None, '', body['logicalProjectId']):
+                self.store.set_message_state(message_id, 'PROCESSED')
+                return {
+                    'status': 'CONTEXT_ERROR', 'reason': 'wrong project',
+                    'messageId': message_id, 'requestId': body['requestId'],
+                    'jobCreated': False,
+                }
+
+        response = self.context_request(body, completion=self._commit_remote_context_ready)
+        kind = response.get('kind') if isinstance(response, dict) else 'CONTEXT_ERROR'
+        if kind == 'CONTEXT_REQUEST':
+            return {
+                'status': 'WAITING', 'messageId': message_id,
+                'requestId': body['requestId'], 'jobCreated': False,
+                'incomplete': True,
+            }
+        if kind == 'CONTEXT_READY' and self.fault_after_context_commit:
+            self.fault_after_context_commit()
+        self.store.set_message_state(message_id, 'PROCESSED')
+        return {
+            'status': kind, 'messageId': message_id,
+            'requestId': body['requestId'], 'jobCreated': False,
+            'response': response,
+        }
+
+    def _commit_remote_context_ready(self, ready, response, stream, identity_hash) -> str:
+        capture_revision = self.store.meta(f'context_op_capture_revision:{ready.request_id}')
+        ready_payload = {
+            'requestId': ready.request_id,
+            'instanceId': ready.payload.get('instanceId'),
+            'logicalProjectId': ready.logical_project_id,
+            'generation': ready.sequence,
+            'snapshotId': ready.snapshot_id,
+            'rootHash': ready.root_hash,
+            'captureRevision': int(capture_revision) if capture_revision is not None else None,
+            'capturedAt': ready.captured_at,
+            'snapshot': ready.payload,
+        }
+        message_id = 'context-ready-' + canonical_hash({
+            'requestId': ready.request_id,
+            'instanceId': ready.payload.get('instanceId'),
+            'logicalProjectId': ready.logical_project_id,
+        })[:32]
+        outbox = {
+            'protocolVersion': PROTOCOL_VERSION,
+            'messageId': message_id,
+            'kind': 'CONTEXT_READY',
+            'createdAt': ready.captured_at,
+            'requestId': ready.request_id,
+            'logicalProjectId': ready.logical_project_id,
+            'snapshotId': ready.snapshot_id,
+            'rootHash': ready.root_hash,
+            'payload': ready_payload,
+        }
+        return self.store.commit_context_ready_with_outbox(
+            ready.request_id, ready.snapshot_id, response, stream, ready.sequence,
+            identity_hash, message_id, outbox, ready.captured_at)
 
     def _quarantine(self, payload, reason: str = 'DEAD_LETTER') -> dict:
         key = dead_letter_key({'reason': reason, 'payload': payload})
@@ -238,12 +347,13 @@ class SafeBIMBridge:
             return {'status': 'CORRUPT', 'running': self.running}
         return {'status': stored['state']}
 
-    def context_request(self, request: dict) -> dict:
+    def context_request(self, request: dict, completion=None) -> dict:
         self._require_owner()
         instance_id = request.get('instanceId')
         project_id = request['logicalProjectId']
         client = self.store.client(instance_id) if instance_id else None
-        if client and client.get('logical_project_id') not in (None, '', project_id):
+        existing = self.store.context_request(request['requestId'])
+        if existing is None and client and client.get('logical_project_id') not in (None, '', project_id):
             return {'kind': 'CONTEXT_ERROR', 'requestId': request['requestId'], 'reason': 'wrong project'}
         message = {
             'requestId': request['requestId'],
@@ -251,8 +361,9 @@ class SafeBIMBridge:
             'requestedScope': request['requestedScope'],
             'requestedAt': request.get('requestedAt', _now()),
             'instanceId': instance_id,
+            'generation': request.get('generation'),
         }
-        response = self.context.request(message)
+        response = self.context.request(message, completion=completion)
         if isinstance(response, dict) and response.get('logicalProjectId') not in (None, project_id):
             return {'kind': 'CONTEXT_ERROR', 'requestId': request['requestId'], 'reason': 'cross-project snapshot'}
         return response
@@ -317,7 +428,8 @@ class SafeBIMBridge:
             polled['processed'] = 0
         published = self.flush_outbox()
         polled['published'] = published
-        if polled.get('etag'):
+        completed_tick = all(not item.get('incomplete') for item in polled.get('accepted', []))
+        if polled.get('etag') and completed_tick:
             self.store.set_meta('remote_etag', polled['etag'])
             self.mailbox.commit_etag(polled['etag'])
         return polled
