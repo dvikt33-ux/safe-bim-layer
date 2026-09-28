@@ -89,6 +89,8 @@ class SafeBIMUI:
         ]
         if self.context_banner:
             lines.append(self.context_banner)
+        if self.refresh_label:
+            lines.append(f'[{self.refresh_label}]')
         if self.error:
             lines.append(self.error)
         if self.show_technical:

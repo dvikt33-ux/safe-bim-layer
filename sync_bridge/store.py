@@ -77,6 +77,7 @@ class BridgeStore:
         self._migrate()
         self.fault_before_result_commit = None
         self.fault_before_context_commit = None
+        self.fault_before_invalidation_commit = None
         BridgeStore.open_stores.append(self)
 
     def close(self) -> None:
@@ -318,9 +319,39 @@ class BridgeStore:
                 ('VALID', snapshot_id, encoded, request_id))
             if self.fault_before_context_commit:
                 self.fault_before_context_commit()
+            revision = self._meta_in_tx('context_revision:' + stream_key) or '0'
             self._set_meta_in_tx('context_sequence:' + stream_key, str(sequence))
             self._set_meta_in_tx(f'context_identity:{stream_key}:{sequence}', identity_hash)
+            self._set_meta_in_tx(f'context_capture_revision:{request_id}', revision)
+            self._set_meta_in_tx('context_validity:' + stream_key, 'VALID')
+            self._set_meta_in_tx('context_valid_revision:' + stream_key, revision)
             self._db.execute('COMMIT')
+        except BaseException:
+            self._db.execute('ROLLBACK')
+            raise
+
+    def invalidate_stream(self, stream_key: str) -> int:
+        """Mark the stream stale and bump its revision together, or neither."""
+        if stream_key.startswith('instance:'):
+            clause = 'instance_id=?'
+            param = stream_key.split(':', 1)[1]
+        elif stream_key.startswith('project:'):
+            clause = "IFNULL(instance_id, '')='' AND project_id=?"
+            param = stream_key.split(':', 1)[1]
+        else:
+            raise ValueError(stream_key)
+        self._db.execute('BEGIN IMMEDIATE')
+        try:
+            self._db.execute(
+                f"UPDATE context_requests SET state='STALE' WHERE state='VALID' AND {clause}",
+                (param,))
+            revision = int(self._meta_in_tx('context_revision:' + stream_key) or 0) + 1
+            self._set_meta_in_tx('context_revision:' + stream_key, str(revision))
+            self._set_meta_in_tx('context_validity:' + stream_key, 'STALE')
+            if self.fault_before_invalidation_commit:
+                self.fault_before_invalidation_commit()
+            self._db.execute('COMMIT')
+            return revision
         except BaseException:
             self._db.execute('ROLLBACK')
             raise

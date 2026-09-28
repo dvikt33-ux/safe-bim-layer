@@ -37,6 +37,7 @@ class ContextService:
         self.sequence = int(self.store.meta('context_sequence') or 0)
         self.current: ContextReady | None = None
         self.by_instance: dict[str, ContextReady] = {}
+        self.active_stream: str | None = None
         self.ui_banner = ''
         self.fault_after_capture_assigned = None
 
@@ -56,6 +57,9 @@ class ContextService:
             if existing['state'] == 'CANCELLED':
                 self.lease = 'CANCELLED'
                 return {'kind': 'CONTEXT_ERROR', 'requestId': request_id, 'reason': 'cancelled'}
+            if existing['state'] == 'STALE':
+                self._present(instance_id, project_id, 'STALE', UI_STALE)
+                return _stale_reply(existing)
             if existing.get('response'):
                 self.lease = existing['state'] if existing['state'] in LEASE_STATES else 'VALID'
                 self._remember(instance_id, None)
@@ -89,6 +93,8 @@ class ContextService:
         if stored['state'] == 'CANCELLED':
             self.lease = 'CANCELLED'
             return 'CONTEXT_ERROR'
+        if stored['state'] == 'STALE':
+            return self._apply_stale(ready, stored)
         if _is_completed(stored):
             return self._apply_completed(ready, stored)
         if stored['project_id'] != ready.logical_project_id:
@@ -110,8 +116,7 @@ class ContextService:
         self.store.commit_context_ready(
             ready.request_id, ready.snapshot_id, response, stream, ready.sequence, incoming)
         self._remember(stored.get('instance_id'), ready)
-        self.lease = 'VALID'
-        self.ui_banner = f'Контекст #{ready.sequence}'
+        self._present(stored.get('instance_id'), stored['project_id'], 'VALID', f'Контекст #{ready.sequence}', force=True)
         return 'CONTEXT_READY'
 
     def _apply_completed(self, ready: ContextReady, stored: dict) -> str:
@@ -131,10 +136,77 @@ class ContextService:
             return 'IGNORED_STALE'
         return 'REQUEST_GENERATION_CONFLICT'
 
-    def mark_changed(self) -> str:
-        self.lease = 'STALE'
-        self.ui_banner = UI_STALE
+    def _apply_stale(self, ready: ContextReady, stored: dict) -> str:
+        """A stale generation stays stale. Replay must not publish it as VALID."""
+        if stored['project_id'] != ready.logical_project_id:
+            return 'CONTEXT_ERROR'
+        response = stored.get('response')
+        if isinstance(response, dict) and generation_hash(ready) == canonical_hash(_identity_from_response(response)):
+            return 'IDEMPOTENT_STALE'
+        stored_sequence = _response_sequence(stored)
+        if stored_sequence is not None and ready.sequence == stored_sequence:
+            return 'CONTEXT_SEQUENCE_CONFLICT'
+        if stored_sequence is not None and ready.sequence < stored_sequence:
+            return 'IGNORED_STALE'
+        if ready.sequence < self._known_sequence(stored):
+            return 'IGNORED_STALE'
+        return 'REQUEST_GENERATION_CONFLICT'
+
+    def mark_changed(self, instance_id=None, logical_project_id=None) -> str:
+        """Invalidate one stream. A missing target keeps the legacy global banner."""
+        scoped = bool(instance_id) or bool(logical_project_id)
+        if not scoped:
+            instance_id, logical_project_id = self._active_target()
+        stream = None
+        if instance_id or logical_project_id:
+            stream = _stream_key({'instance_id': instance_id, 'project_id': logical_project_id or ''})
+            self.store.invalidate_stream(stream)
+            if instance_id:
+                self.by_instance.pop(instance_id, None)
+            if self.current is not None and _ready_stream(self.current) == stream:
+                self.current = None
+        if stream and (not scoped or stream == self.active_stream):
+            self._present(instance_id, logical_project_id, 'STALE', UI_STALE, force=True)
+        elif not scoped:
+            self.lease = 'STALE'
+            self.ui_banner = UI_STALE
         return 'CONTEXT_CHANGED'
+
+    def stream_view(self, instance_id=None, logical_project_id=None) -> dict:
+        """Durable presentation for one stream. Another stream is not included."""
+        stream = _stream_key({'instance_id': instance_id, 'project_id': logical_project_id or ''})
+        validity = self.store.meta('context_validity:' + stream)
+        sequence = self.store.meta('context_sequence:' + stream)
+        if validity == 'STALE':
+            return {
+                'stream': stream, 'lease': 'STALE', 'banner': UI_STALE,
+                'refresh_label': UI_REFRESH,
+            }
+        if validity == 'VALID' and sequence:
+            return {
+                'stream': stream, 'lease': 'VALID', 'banner': f'Контекст #{sequence}',
+                'refresh_label': '',
+            }
+        return {'stream': stream, 'lease': 'NONE', 'banner': '', 'refresh_label': ''}
+
+    def apply_stream_ui(self, ui, instance_id=None, logical_project_id=None) -> dict:
+        view = self.stream_view(instance_id, logical_project_id)
+        ui.apply_context_lease(view['lease'], view['banner'])
+        return view
+
+    def context_admission(self, request_id: str) -> str:
+        """Infrastructure only. A later BIM admission can reject STALE_CONTEXT."""
+        stored = self.store.context_request(request_id)
+        if stored is None or stored.get('state') != 'VALID':
+            return 'STALE_CONTEXT'
+        stream = _stream_key(stored)
+        revision = int(self.store.meta('context_revision:' + stream) or 0)
+        bound = self.store.meta(f'context_capture_revision:{request_id}')
+        if bound is None or int(bound) != revision:
+            return 'STALE_CONTEXT'
+        if self.store.meta('context_validity:' + stream) != 'VALID':
+            return 'STALE_CONTEXT'
+        return 'CURRENT'
 
     def cancel(self, request_id: str) -> str:
         if self.store.context_request(request_id) is None:
@@ -193,9 +265,24 @@ class ContextService:
         self.store.commit_context_ready(
             ready.request_id, ready.snapshot_id, response, stream, ready.sequence, generation_hash(ready))
         self._remember(instance_id, ready)
-        self.lease = 'VALID'
-        self.ui_banner = f'Контекст #{ready.sequence}'
+        self._present(instance_id, ready.logical_project_id, 'VALID', f'Контекст #{ready.sequence}', force=True)
         return response
+
+    def _present(self, instance_id, project_id, lease: str, banner: str, force: bool = False) -> None:
+        stream = _stream_key({'instance_id': instance_id, 'project_id': project_id or ''})
+        if force or self.active_stream in (None, stream):
+            self.active_stream = stream
+            self.lease = lease
+            self.ui_banner = banner
+
+    def _active_target(self):
+        ready = self.current
+        if ready is None:
+            return None, None
+        instance_id = None
+        if isinstance(ready.payload, dict):
+            instance_id = ready.payload.get('instanceId') or None
+        return instance_id, ready.logical_project_id
 
     def _remember(self, instance_id, ready: ContextReady | None) -> None:
         # Last-seen only. request() must not route through this global.
@@ -280,6 +367,17 @@ def _identity_from_response(response: dict) -> dict:
     }
 
 
+def _stale_reply(stored: dict) -> dict:
+    return {
+        'kind': 'CONTEXT_STALE',
+        'requestId': stored['request_id'],
+        'reason': 'stale',
+        'state': 'STALE',
+        'snapshotId': stored.get('snapshot_id'),
+        'refreshRequired': True,
+    }
+
+
 def _is_completed(stored: dict) -> bool:
     return stored.get('state') == 'VALID' and isinstance(stored.get('response'), dict)
 
@@ -315,6 +413,13 @@ def _ready_error(ready) -> str | None:
     if isinstance(ready.sequence, bool) or not isinstance(ready.sequence, int) or ready.sequence <= 0:
         return 'CONTEXT_ERROR'
     return None
+
+
+def _ready_stream(ready: ContextReady) -> str:
+    instance_id = None
+    if isinstance(ready.payload, dict):
+        instance_id = ready.payload.get('instanceId') or None
+    return _stream_key({'instance_id': instance_id, 'project_id': ready.logical_project_id})
 
 
 def _stream_key(stored: dict) -> str:
