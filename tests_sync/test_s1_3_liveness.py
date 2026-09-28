@@ -146,11 +146,15 @@ class ContextWatermarkTests(unittest.TestCase):
             old = ContextReady(1, 'req-a', 'snap-old', 'P1', 'hash-old', 't', {'source': 'mock'}, 0)
             self.assertEqual(service.apply_context_ready(old), 'CONTEXT_ERROR')
             self.assertEqual(service.store.context_request('req-a')['snapshot_id'], first['snapshotId'])
-            accepted = ContextReady(1, 'req-a', 'snap-a2', 'P1', 'hash-2', 't', {'source': 'mock'}, 2)
+            blocked = ContextReady(1, 'req-a', 'snap-a2', 'P1', 'hash-2', 't', {'source': 'mock'}, 2)
+            self.assertEqual(service.apply_context_ready(blocked), 'REQUEST_GENERATION_CONFLICT')
+            self.assertEqual(service.store.context_request('req-a')['snapshot_id'], first['snapshotId'])
+            service.store.put_context_request('req-a2', 'P1', 'selection', 'CAPTURING', 't', instance_id='AC-A')
+            accepted = ContextReady(1, 'req-a2', 'snap-a2', 'P1', 'hash-2', 't', {'source': 'mock'}, 2)
             self.assertEqual(service.apply_context_ready(accepted), 'CONTEXT_READY')
-            stale = ContextReady(1, 'req-a', 'snap-a1', 'P1', 'hash-1', 't', {'source': 'mock'}, 1)
+            stale = ContextReady(1, 'req-a2', 'snap-a1', 'P1', 'hash-1', 't', {'source': 'mock'}, 1)
             self.assertEqual(service.apply_context_ready(stale), 'IGNORED_STALE')
-            self.assertEqual(service.store.context_request('req-a')['snapshot_id'], 'snap-a2')
+            self.assertEqual(service.store.context_request('req-a2')['snapshot_id'], 'snap-a2')
             path = service.store.path
             service.stop()
             service.store.close()
@@ -158,7 +162,8 @@ class ContextWatermarkTests(unittest.TestCase):
                 BridgeStore(path), GitHubMailbox(QuietHttp()), owner=OWNER, clock=clock)
             restarted.start()
             self.assertEqual(restarted.apply_context_ready(stale), 'IGNORED_STALE')
-            self.assertEqual(restarted.store.context_request('req-a')['snapshot_id'], 'snap-a2')
+            self.assertEqual(restarted.store.context_request('req-a2')['snapshot_id'], 'snap-a2')
+            self.assertEqual(restarted.store.context_request('req-a')['snapshot_id'], first['snapshotId'])
             self.assertEqual(restarted.store.meta('context_sequence:instance:AC-A'), '2')
 
     def test_watermark_and_ready_state_commit_together(self):

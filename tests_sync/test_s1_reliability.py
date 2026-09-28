@@ -300,22 +300,25 @@ class MalformedAndContextTests(unittest.TestCase):
             wrong = ContextReady(1, 'ctx-9', 'snap-x', 'other', 'hash-ok', 't', {}, 2)
             self.assertEqual(service.apply_context_ready(wrong), 'CONTEXT_ERROR')
             self.assertEqual(service.store.context_request('ctx-9')['project_id'], 'house')
+            self.assertEqual(service.store.context_request('ctx-9')['state'], 'VALID')
+            captured = service.store.context_request('ctx-9')['snapshot_id']
             newer = ContextReady(1, 'ctx-9', 'snap-0004', 'house', 'hash-ok', 't', {'source': 'mock'}, 4)
-            self.assertEqual(service.apply_context_ready(newer), 'CONTEXT_READY')
+            self.assertEqual(service.apply_context_ready(newer), 'REQUEST_GENERATION_CONFLICT')
+            self.assertEqual(service.store.context_request('ctx-9')['snapshot_id'], captured)
             service.context.cancel('ctx-9')
             restarted = reopen(service, ScriptedHttp([]))
             late = ContextReady(1, 'ctx-9', 'snap-0009', 'house', 'hash-ok', 't', {}, 9)
             self.assertEqual(restarted.apply_context_ready(late), 'CONTEXT_ERROR')
             self.assertEqual(restarted.store.context_request('ctx-9')['state'], 'CANCELLED')
             self.assertEqual(restarted.context.lease, 'CANCELLED')
-            self.assertEqual(restarted.store.context_request('ctx-9')['snapshot_id'], 'snap-0004')
+            self.assertEqual(restarted.store.context_request('ctx-9')['snapshot_id'], captured)
 
     def test_older_generation_after_restart_is_ignored(self):
         with ClosingDirectory() as directory:
             store = BridgeStore(Path(directory) / 'bridge.sqlite3')
             service = SafeBIMBridge(store, GitHubMailbox(ScriptedHttp([])), owner=PeerIdentity('S-1-5-21-1', 'session-7'))
             service.start()
-            service.context_request({'requestId': 'ctx-4', 'logicalProjectId': 'house', 'requestedScope': 'selection'})
+            service.store.put_context_request('ctx-4', 'house', 'selection', 'CAPTURING', 't')
             self.assertEqual(service.apply_context_ready(ContextReady(1, 'ctx-4', 'snap-0004', 'house', 'hash-ok', 't', {}, 4)), 'CONTEXT_READY')
             restarted = reopen(service, ScriptedHttp([]))
             self.assertEqual(restarted.apply_context_ready(ContextReady(1, 'ctx-4', 'snap-0001', 'house', 'hash-ok', 't', {}, 1)), 'IGNORED_STALE')

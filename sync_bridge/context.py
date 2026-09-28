@@ -89,6 +89,8 @@ class ContextService:
         if stored['state'] == 'CANCELLED':
             self.lease = 'CANCELLED'
             return 'CONTEXT_ERROR'
+        if _is_completed(stored):
+            return self._apply_completed(ready, stored)
         if stored['project_id'] != ready.logical_project_id:
             self.store.set_context_state(ready.request_id, 'ERROR')
             return 'CONTEXT_ERROR'
@@ -111,6 +113,23 @@ class ContextService:
         self.lease = 'VALID'
         self.ui_banner = f'Контекст #{ready.sequence}'
         return 'CONTEXT_READY'
+
+    def _apply_completed(self, ready: ContextReady, stored: dict) -> str:
+        """A VALID response is immutable. A new snapshot needs a new requestId."""
+        if stored['project_id'] != ready.logical_project_id:
+            return 'CONTEXT_ERROR'
+        incoming = generation_hash(ready)
+        recorded = canonical_hash(_identity_from_response(stored['response']))
+        if incoming == recorded:
+            return 'IDEMPOTENT'
+        stored_sequence = _response_sequence(stored)
+        if stored_sequence is not None and ready.sequence == stored_sequence:
+            return 'CONTEXT_SEQUENCE_CONFLICT'
+        if stored_sequence is not None and ready.sequence < stored_sequence:
+            return 'IGNORED_STALE'
+        if ready.sequence < self._known_sequence(stored):
+            return 'IGNORED_STALE'
+        return 'REQUEST_GENERATION_CONFLICT'
 
     def mark_changed(self) -> str:
         self.lease = 'STALE'
@@ -219,7 +238,7 @@ class ContextService:
         else:
             sequence, snapshot_id = assigned
         return ContextReady(
-            1, request_id, snapshot_id, project_id,
+            PROTOCOL_VERSION, request_id, snapshot_id, project_id,
             f'mock-{project_id}-{sequence}', self.clock(),
             self._payload(project_id, scope, instance_id), sequence)
 
@@ -259,6 +278,10 @@ def _identity_from_response(response: dict) -> dict:
         'sequence': response.get('sequence'),
         'capturedAt': response.get('capturedAt'),
     }
+
+
+def _is_completed(stored: dict) -> bool:
+    return stored.get('state') == 'VALID' and isinstance(stored.get('response'), dict)
 
 
 def _response_sequence(stored: dict):

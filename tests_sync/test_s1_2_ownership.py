@@ -169,11 +169,15 @@ class ContextStreamTests(unittest.TestCase):
             self.assertEqual(service.apply_context_ready(b2), 'CONTEXT_READY')
             service.context.current = ContextReady(1, 'req-b', 'snap-b2', 'P2', 'hash-b', 't', {}, 99)
             self.assertEqual(service.apply_context_ready(a1), 'CONTEXT_READY')
-            a2 = ContextReady(1, 'req-a', 'snap-a2', 'P1', 'hash-a2', 't', {'source': 'mock'}, 2)
+            blocked = ContextReady(1, 'req-a', 'snap-a2', 'P1', 'hash-a2', 't', {'source': 'mock'}, 2)
+            self.assertEqual(service.apply_context_ready(blocked), 'REQUEST_GENERATION_CONFLICT')
+            self.assertEqual(service.store.context_request('req-a')['snapshot_id'], 'snap-a1')
+            service.store.put_context_request('req-a2', 'P1', 'selection', 'CAPTURING', 't', instance_id='AC-A')
+            a2 = ContextReady(1, 'req-a2', 'snap-a2', 'P1', 'hash-a2', 't', {'source': 'mock'}, 2)
             self.assertEqual(service.apply_context_ready(a2), 'CONTEXT_READY')
-            stale = ContextReady(1, 'req-a', 'snap-a1', 'P1', 'hash-a', 't', {'source': 'mock'}, 1)
+            stale = ContextReady(1, 'req-a2', 'snap-a1', 'P1', 'hash-a', 't', {'source': 'mock'}, 1)
             self.assertEqual(service.apply_context_ready(stale), 'IGNORED_STALE')
-            self.assertEqual(service.store.context_request('req-a')['snapshot_id'], 'snap-a2')
+            self.assertEqual(service.store.context_request('req-a2')['snapshot_id'], 'snap-a2')
 
 
 class PassiveAITests(unittest.TestCase):
