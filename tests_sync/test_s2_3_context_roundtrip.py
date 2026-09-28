@@ -566,7 +566,7 @@ class RemoteContextRoundtripTests(unittest.TestCase):
             self.assertFalse(service.health()['archicadWriteApi'])
 
     def test_statuses_keep_backend_and_context_verification_distinct(self):
-        self.assertEqual(CONTEXT_ROUNDTRIP_STATUS, 'IMPLEMENTED_NOT_LIVE_VERIFIED')
+        self.assertEqual(CONTEXT_ROUNDTRIP_STATUS, 'GITHUB_LIVE_VERIFIED')
         self.assertEqual(GITHUB_BACKEND_STATUS, 'GITHUB_LIVE_VERIFIED')
 
 

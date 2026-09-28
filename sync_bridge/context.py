@@ -1,4 +1,4 @@
-"""Mock project-context protocol and lease. No new Archicad reads.
+"""Provider-independent project-context protocol and lease.
 
 A stream generation is immutable. ``capturedAt`` is part of that identity:
 an exact replay must carry the same timestamp, and a different timestamp is
@@ -15,7 +15,7 @@ LEASE_STATES = ('NONE', 'CAPTURING', 'READY', 'VALID', 'STALE', 'CANCELLED')
 UI_CAPTURING = 'ИИ: считываю проект…'
 UI_STALE = 'Контекст устарел'
 UI_REFRESH = 'Обновить контекст'
-CONTEXT_ROUNDTRIP_STATUS = 'IMPLEMENTED_NOT_LIVE_VERIFIED'
+CONTEXT_ROUNDTRIP_STATUS = 'GITHUB_LIVE_VERIFIED'
 
 
 class SnapshotValidationError(RuntimeError):
