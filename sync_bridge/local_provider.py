@@ -37,13 +37,17 @@ class LocalOpenAICompatibleProvider:
         return self.load_state
 
     def health(self) -> dict:
+        """Passive report. UNLOADED stays UNLOADED until an explicit start."""
         if self.load_state == 'STARTING':
             return {'status': 'STARTING', 'modelId': self.model_id, 'loadState': 'STARTING',
                     'fallbackStatus': self.fallback_status}
         if self.load_state == 'UNLOADED':
-            self.lazy_start()
-        status = 'CONNECTED' if self.load_state == 'READY' else 'UNAVAILABLE'
-        return {'status': status, 'modelId': self.model_id, 'loadState': self.load_state,
+            return {'status': 'UNLOADED', 'modelId': self.model_id, 'loadState': 'UNLOADED',
+                    'fallbackStatus': self.fallback_status}
+        if self.load_state == 'READY':
+            return {'status': 'CONNECTED', 'modelId': self.model_id, 'loadState': 'READY',
+                    'fallbackStatus': self.fallback_status}
+        return {'status': 'UNAVAILABLE', 'modelId': self.model_id, 'loadState': self.load_state,
                 'fallbackStatus': self.fallback_status}
 
     def complete(self, prompt: str) -> Proposal:

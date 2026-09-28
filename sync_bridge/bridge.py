@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import uuid
 from datetime import datetime, timezone
 
 from sync_bridge import BRIDGE_VERSION, PROTOCOL_VERSION
@@ -14,6 +15,7 @@ from sync_bridge.ai_broker import AIBroker, ProviderError
 from sync_bridge.connections import ConnectionBoard
 from sync_bridge.context import ContextReady, ContextService
 from sync_bridge.git_fallback import narrow_fetch
+from sync_bridge.identity import canonical_hash
 from sync_bridge.mailbox import AckLost, ETAG_POLICY, NeedsAuth, OfflineError, RateLimited
 from sync_bridge.pipe_win32 import MAX_PIPE_INSTANCES, MULTIPLEX_MODEL, PipeApplicationGate
 from sync_bridge.polling import PollScheduler
@@ -26,6 +28,12 @@ ARCHICAD_MULTIPLEX = MULTIPLEX_MODEL
 
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+
+def _stored_hash(payload) -> str:
+    if not isinstance(payload, dict):
+        return ''
+    return canonical_hash(payload)
 
 
 class InstanceConflict(RuntimeError):
@@ -46,12 +54,16 @@ def dead_letter_key(payload) -> str:
 
 class SafeBIMBridge:
     def __init__(self, store: BridgeStore, mailbox, *, owner: PeerIdentity, broker: AIBroker | None = None,
-                 instance_id: str = 'bridge-1'):
+                 instance_id: str = 'bridge-1', clock=None, lease_ttl_seconds: float = 30):
         self.store = store
         self.mailbox = mailbox
         self.owner = owner
         self.broker = broker
         self.instance_id = instance_id
+        self.clock = clock or _now
+        self.lease_ttl_seconds = lease_ttl_seconds
+        self.process_token = uuid.uuid4().hex
+        self.epoch = 0
         self.poller = PollScheduler(mailbox)
         self.context = ContextService(store, _now)
         self.connections = ConnectionBoard()
@@ -62,10 +74,10 @@ class SafeBIMBridge:
         self.pipe_gate = PipeApplicationGate()
 
     def start(self) -> dict:
-        lock = self.store.meta('instance_lock') or ''
-        if lock and lock != self.instance_id:
-            raise InstanceConflict('bridge already running for this user')
-        self.store.set_meta('instance_lock', self.instance_id)
+        now = self.clock()
+        if not self.store.acquire_lease(self.process_token, now, self.lease_ttl_seconds, self.instance_id):
+            raise InstanceConflict('bridge lease held by another process')
+        self.epoch = int(self.store.meta('bridge_epoch') or '0')
         self.store.set_meta('version', BRIDGE_VERSION)
         stored_etag = self.store.meta('remote_etag')
         if stored_etag:
@@ -78,9 +90,14 @@ class SafeBIMBridge:
 
     def stop(self) -> None:
         self.running = False
-        self.store.set_meta('instance_lock', '')
+        self.store.release_lease(self.process_token)
         self.connections.set('BRIDGE', 'OFFLINE', 'stopped')
         self._log('stop', {})
+
+    def close(self) -> None:
+        if self.running:
+            self.stop()
+        self.store.close()
 
     def health(self) -> dict:
         return {
@@ -103,13 +120,14 @@ class SafeBIMBridge:
         if message.kind != 'HELLO':
             raise ProtocolError('HELLO required')
         existing = self.store.client(message.instance_id)
-        if existing and existing['connection_state'] == 'CONNECTED':
+        if existing and existing['connection_state'] == 'CONNECTED' and int(existing.get('epoch') or -1) == self.epoch:
             raise InstanceConflict('duplicate instance_id')
-        connected = [item for item in self.store.clients() if item['connection_state'] == 'CONNECTED']
+        connected = [item for item in self.store.clients()
+                     if item['connection_state'] == 'CONNECTED' and int(item.get('epoch') or -1) == self.epoch]
         if len(connected) >= MAX_PIPE_INSTANCES:
             raise InstanceConflict('archicad client limit')
         project = message.payload.get('logicalProjectId')
-        self.store.upsert_client(message.instance_id, peer.session_id, project, _now(), 'CONNECTED')
+        self.store.upsert_client(message.instance_id, peer.session_id, project, _now(), 'CONNECTED', self.epoch)
         self.pipe_gate.handshaken.add(message.instance_id)
         self._refresh_archicad_channel()
         return envelope('HELLO_ACK', {'bridgeVersion': BRIDGE_VERSION, 'instanceId': message.instance_id},
@@ -141,14 +159,19 @@ class SafeBIMBridge:
         if not isinstance(payload, dict) or not isinstance(payload.get('messageId'), str) or not payload.get('messageId').strip() or not isinstance(payload.get('body'), dict):
             return self._quarantine(payload)
         message_id = payload['messageId']
+        incoming_hash = canonical_hash(payload)
         existing_message = self.store.message(message_id)
         if existing_message and existing_message['state'] == 'DEAD_LETTER':
             return {'status': 'DEAD_LETTER', 'jobCreated': False, 'messageId': message_id}
-        created = self.store.put_message(message_id, payload.get('kind', 'remote-job'), _now(),
-                                         payload, 'ACCEPTED', 'inbox')
+        if existing_message is not None:
+            stored_hash = existing_message.get('payload_hash') or _stored_hash(existing_message.get('payload'))
+            if stored_hash and stored_hash != incoming_hash:
+                return {'status': 'MESSAGE_ID_CONFLICT', 'jobCreated': False, 'messageId': message_id}
         existing = self.store.job_for_message(message_id)
         if existing:
             return {'status': 'DUPLICATE', 'jobId': existing['job_id'], 'jobCreated': False}
+        created = self.store.put_message(message_id, payload.get('kind', 'remote-job'), _now(),
+                                         payload, 'ACCEPTED', 'inbox')
         if not created and existing is None:
             stored = self.store.message(message_id)
             if stored and stored.get('payload_error'):
@@ -200,10 +223,9 @@ class SafeBIMBridge:
 
     def queue_result(self, job_id: str, result: dict) -> None:
         message_id = 'result-' + job_id
-        self.store.put_result(job_id, result, 'PENDING')
-        self.store.put_message(message_id, 'result', _now(),
-                               {'job_id': job_id, 'result': result, 'messageId': message_id},
-                               'PENDING', 'outbox')
+        self.store.enqueue_result(
+            job_id, result, message_id, _now(),
+            {'job_id': job_id, 'result': result, 'messageId': message_id})
 
     def tick(self) -> dict:
         self._require_running()
@@ -265,11 +287,19 @@ class SafeBIMBridge:
                 self.needs_auth = isinstance(exc, NeedsAuth)
                 results.append({'messageId': item['message_id'], 'status': type(exc).__name__})
                 continue
+            if published['status'] == 'MESSAGE_ID_CONFLICT':
+                results.append(published)
+                continue
             if published['status'] in {'PUBLISHED', 'ALREADY_PUBLISHED'}:
-                self.store.set_message_state(item['message_id'], 'SENT', item['retry_count'])
                 job_id = item['payload'].get('job_id')
-                if job_id and self.store.result(job_id):
-                    self.store.put_result(job_id, self.store.result(job_id)['result'], 'SENT')
+                stored = self.store.result(job_id) if job_id else None
+                sent_result = item['payload'].get('result')
+                if stored is not None and canonical_hash(stored['result']) != canonical_hash(sent_result):
+                    results.append({'messageId': item['message_id'], 'status': 'RESULT_MISMATCH'})
+                    continue
+                self.store.set_message_state(item['message_id'], 'SENT', item['retry_count'])
+                if stored is not None:
+                    self.store.put_result(job_id, stored['result'], 'SENT')
             results.append(published)
         return results
 
@@ -296,7 +326,8 @@ class SafeBIMBridge:
         return {'jobs': len(self.store.jobs()), 'outbox': len(self.store.pending_outbox())}
 
     def _refresh_archicad_channel(self) -> None:
-        connected = [item for item in self.store.clients() if item['connection_state'] == 'CONNECTED']
+        connected = [item for item in self.store.clients()
+                     if item['connection_state'] == 'CONNECTED' and int(item.get('epoch') or -1) == self.epoch]
         if connected:
             self.connections.set('ARCHICAD', 'CONNECTED', ','.join(item['instance_id'] for item in connected))
         else:

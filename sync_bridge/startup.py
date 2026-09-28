@@ -2,10 +2,9 @@
 from __future__ import annotations
 
 REQUIRED_STEPS = (
-    'archicad-started',
     'ui-loaded',
     'bridge-started',
-    'named-pipe-handshake',
+    'named-pipe-listening',
     'sqlite-opened',
     'mailbox-checked',
     'ai-health',
@@ -28,15 +27,15 @@ def simulate_startup(*, auth_ok: bool, pipe_ok: bool = True, sqlite_ok: bool = T
                      cloud_ok: bool = True, local_ok: bool = False, archicad_ok: bool = False) -> dict:
     """Local bridge readiness does not require a connected Archicad client."""
     steps = []
-    steps.append('archicad-started' if archicad_ok else 'archicad-not-required')
     steps.append('ui-loaded')
     steps.append('bridge-started')
     if not pipe_ok:
         board = status_board(local_ready=False, auth_ok=auth_ok, ai='AI_OFFLINE', archicad_connected=False)
         return {'steps': steps, 'local': board['LOCAL'], 'remote': board['REMOTE'], 'ai': board['AI'],
                 'archicad': board['ARCHICAD'], 'board': board, 'ready': False,
-                'error': 'Named Pipe handshake не выполнен'}
-    steps.append('named-pipe-handshake')
+                'error': 'Named Pipe не слушает'}
+    steps.append('named-pipe-listening')
+    steps.append('archicad-handshake' if archicad_ok else 'archicad-not-required')
     if not sqlite_ok:
         board = status_board(local_ready=False, auth_ok=auth_ok, ai='AI_OFFLINE', archicad_connected=archicad_ok)
         return {'steps': steps, 'local': board['LOCAL'], 'remote': board['REMOTE'], 'ai': board['AI'],

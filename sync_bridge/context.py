@@ -83,13 +83,11 @@ class ContextService:
         if stored['project_id'] != ready.logical_project_id:
             self.store.set_context_state(ready.request_id, 'ERROR')
             return 'CONTEXT_ERROR'
-        known = self.sequence
-        if self.current is not None:
-            known = max(known, self.current.sequence)
+        known = self._known_sequence(stored)
         if ready.sequence < known:
             return 'IGNORED_STALE'
-        self.sequence = max(self.sequence, ready.sequence)
-        self.store.set_meta('context_sequence', str(self.sequence))
+        stream = _stream_key(stored)
+        self.store.set_meta(f'context_sequence:{stream}', str(max(known, ready.sequence)))
         self._remember(stored.get('instance_id'), ready)
         self.lease = 'VALID'
         self.ui_banner = f'Контекст #{ready.sequence}'
@@ -114,6 +112,16 @@ class ContextService:
 
     def refresh_label(self) -> str:
         return UI_REFRESH
+
+    def _known_sequence(self, stored: dict) -> int:
+        stream = _stream_key(stored)
+        known = int(self.store.meta(f'context_sequence:{stream}') or 0)
+        if self.current is None:
+            return known
+        current_row = self.store.context_request(self.current.request_id)
+        if current_row is not None and _stream_key(current_row) == stream:
+            return max(known, self.current.sequence)
+        return known
 
     def _resume_capturing(self, existing: dict) -> dict:
         """Continue the one stored operation. A second capture is not started."""
@@ -195,6 +203,13 @@ class ContextService:
             1, request_id, snapshot_id, project_id,
             f'mock-{project_id}-{sequence}', self.clock(),
             self._payload(project_id, scope, instance_id), sequence)
+
+
+def _stream_key(stored: dict) -> str:
+    instance_id = stored.get('instance_id') or ''
+    if instance_id:
+        return 'instance:' + instance_id
+    return 'project:' + stored['project_id']
 
 
 def _same_identity(existing: dict, project_id: str, scope: str, instance_id) -> bool:

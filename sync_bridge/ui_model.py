@@ -21,7 +21,7 @@ class SafeBIMUI:
         self.code_open = False
         self.history_open = False
         self.check_open = False
-        self.ai_route = 'online'
+        self.ai_route = 'connecting'
         self.error = ''
         self.show_technical = False
         self.connections = ConnectionBoard()
@@ -69,7 +69,13 @@ class SafeBIMUI:
         self.show_technical = False
 
     def render(self) -> str:
-        ai = {'online': 'ИИ: ● Онлайн', 'offline': 'ИИ: ○ Офлайн', 'local': 'ИИ: ● Локальная'}[self.ai_route]
+        ai = {
+            'online': 'ИИ: ● Онлайн',
+            'offline': 'ИИ: ○ Офлайн',
+            'local': 'ИИ: ● Локальная',
+            'connecting': 'ИИ: ○ Подключение',
+            'unknown': 'ИИ: ○ Подключение',
+        }[self.ai_route]
         lines = [
             'SAFE BIM                    ● SAFE' if self.safe else 'SAFE BIM                    ● CHECK',
             f'Проект: {_shown(self.project)}',

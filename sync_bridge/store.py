@@ -3,7 +3,10 @@ from __future__ import annotations
 
 import json
 import sqlite3
+from datetime import datetime, timedelta
 from pathlib import Path
+
+from sync_bridge.identity import canonical_hash
 
 
 SCHEMA = """
@@ -14,7 +17,8 @@ CREATE TABLE IF NOT EXISTS messages (
     payload TEXT NOT NULL,
     state TEXT NOT NULL,
     retry_count INTEGER NOT NULL DEFAULT 0,
-    direction TEXT NOT NULL
+    direction TEXT NOT NULL,
+    payload_hash TEXT
 );
 CREATE TABLE IF NOT EXISTS context_requests (
     request_id TEXT PRIMARY KEY,
@@ -31,7 +35,8 @@ CREATE TABLE IF NOT EXISTS archicad_clients (
     session_id TEXT NOT NULL,
     logical_project_id TEXT,
     last_seen TEXT NOT NULL,
-    connection_state TEXT NOT NULL
+    connection_state TEXT NOT NULL,
+    epoch INTEGER
 );
 CREATE TABLE IF NOT EXISTS remote_jobs (
     job_id TEXT PRIMARY KEY,
@@ -60,6 +65,8 @@ CREATE TABLE IF NOT EXISTS meta (
 
 
 class BridgeStore:
+    open_stores: list = []
+
     def __init__(self, path: str | Path):
         self.path = str(path)
         self._db = sqlite3.connect(self.path, isolation_level=None)
@@ -68,9 +75,31 @@ class BridgeStore:
         self._db.execute('PRAGMA foreign_keys=ON')
         self._db.executescript(SCHEMA)
         self._migrate()
+        self.fault_before_result_commit = None
+        BridgeStore.open_stores.append(self)
 
     def close(self) -> None:
-        self._db.close()
+        try:
+            BridgeStore.open_stores.remove(self)
+        except ValueError:
+            pass
+        db = self.__dict__.get('_db')
+        if db is None:
+            return
+        self._db = None
+        db.close()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc) -> None:
+        self.close()
+
+    def __del__(self) -> None:
+        try:
+            self.close()
+        except Exception:
+            return
 
     def reopen(self) -> 'BridgeStore':
         self.close()
@@ -79,10 +108,11 @@ class BridgeStore:
     def put_message(self, message_id: str, kind: str, created_at: str, payload: dict,
                     state: str, direction: str) -> bool:
         encoded = json.dumps(payload, ensure_ascii=False, sort_keys=True)
+        digest = canonical_hash(payload)
         cur = self._db.execute(
-            'INSERT OR IGNORE INTO messages(message_id,kind,created_at,payload,state,retry_count,direction) '
-            'VALUES (?,?,?,?,?,0,?)',
-            (message_id, kind, created_at, encoded, state, direction))
+            'INSERT OR IGNORE INTO messages(message_id,kind,created_at,payload,state,retry_count,direction,payload_hash) '
+            'VALUES (?,?,?,?,?,0,?,?)',
+            (message_id, kind, created_at, encoded, state, direction, digest))
         return cur.rowcount == 1
 
     def message(self, message_id: str):
@@ -150,11 +180,27 @@ class BridgeStore:
         return [_decode_payload(row) for row in self._db.execute('SELECT * FROM remote_jobs ORDER BY created_at')]
 
     def put_result(self, job_id: str, result: dict, upload_state: str) -> None:
+        existing = self.result(job_id)
+        if existing is not None and canonical_hash(existing['result']) != canonical_hash(result):
+            raise ResultConflict('job result is immutable')
         encoded = json.dumps(result, ensure_ascii=False, sort_keys=True)
         self._db.execute(
             'INSERT INTO results(job_id,result,upload_state) VALUES (?,?,?) '
             'ON CONFLICT(job_id) DO UPDATE SET result=excluded.result,upload_state=excluded.upload_state',
             (job_id, encoded, upload_state))
+
+    def enqueue_result(self, job_id: str, result: dict, message_id: str, created_at: str, payload: dict) -> None:
+        """Commit the result row and its outbox message together, or neither."""
+        self._db.execute('BEGIN IMMEDIATE')
+        try:
+            self.put_result(job_id, result, 'PENDING')
+            self.put_message(message_id, 'result', created_at, payload, 'PENDING', 'outbox')
+            if self.fault_before_result_commit:
+                self.fault_before_result_commit()
+            self._db.execute('COMMIT')
+        except BaseException:
+            self._db.execute('ROLLBACK')
+            raise
 
     def result(self, job_id: str):
         row = self._db.execute('SELECT * FROM results WHERE job_id=?', (job_id,)).fetchone()
@@ -188,13 +234,13 @@ class BridgeStore:
         return [_decode_payload(row) for row in rows]
 
     def upsert_client(self, instance_id: str, session_id: str, project_id: str | None,
-                      last_seen: str, state: str) -> None:
+                      last_seen: str, state: str, epoch: int | None = None) -> None:
         self._db.execute(
-            'INSERT INTO archicad_clients(instance_id,session_id,logical_project_id,last_seen,connection_state) '
-            'VALUES (?,?,?,?,?) ON CONFLICT(instance_id) DO UPDATE SET '
+            'INSERT INTO archicad_clients(instance_id,session_id,logical_project_id,last_seen,connection_state,epoch) '
+            'VALUES (?,?,?,?,?,?) ON CONFLICT(instance_id) DO UPDATE SET '
             'session_id=excluded.session_id, logical_project_id=excluded.logical_project_id, '
-            'last_seen=excluded.last_seen, connection_state=excluded.connection_state',
-            (instance_id, session_id, project_id, last_seen, state))
+            'last_seen=excluded.last_seen, connection_state=excluded.connection_state, epoch=excluded.epoch',
+            (instance_id, session_id, project_id, last_seen, state, epoch))
 
     def set_client_state(self, instance_id: str, state: str, last_seen: str) -> None:
         self._db.execute(
@@ -210,10 +256,68 @@ class BridgeStore:
         return [dict(row) for row in self._db.execute(
             'SELECT * FROM archicad_clients ORDER BY instance_id')]
 
+    def acquire_lease(self, token: str, now: str, ttl_seconds: float, public_id: str) -> bool:
+        """Per-user process lease. The public instance id is not the lock."""
+        expires = (datetime.fromisoformat(now) + timedelta(seconds=ttl_seconds)).isoformat()
+        self._db.execute('BEGIN IMMEDIATE')
+        try:
+            current = self._meta_in_tx('lease_token') or ''
+            expiry = self._meta_in_tx('lease_expires') or ''
+            held = bool(current) and current != token and bool(expiry) and expiry > now
+            if held:
+                self._db.execute('ROLLBACK')
+                return False
+            new_owner = current != token
+            self._set_meta_in_tx('lease_token', token)
+            self._set_meta_in_tx('lease_expires', expires)
+            self._set_meta_in_tx('lease_public_id', public_id)
+            if new_owner:
+                epoch = int(self._meta_in_tx('bridge_epoch') or '0') + 1
+                self._set_meta_in_tx('bridge_epoch', str(epoch))
+                self._db.execute(
+                    "UPDATE archicad_clients SET connection_state='DISCONNECTED' "
+                    "WHERE connection_state='CONNECTED' AND IFNULL(epoch, -1) != ?",
+                    (epoch,))
+            self._db.execute('COMMIT')
+            return True
+        except BaseException:
+            self._db.execute('ROLLBACK')
+            raise
+
+    def release_lease(self, token: str) -> None:
+        self._db.execute('BEGIN IMMEDIATE')
+        try:
+            if (self._meta_in_tx('lease_token') or '') == token:
+                self._set_meta_in_tx('lease_token', '')
+                self._set_meta_in_tx('lease_expires', '')
+            self._db.execute('COMMIT')
+        except BaseException:
+            self._db.execute('ROLLBACK')
+            raise
+
+    def _meta_in_tx(self, key: str):
+        row = self._db.execute('SELECT value FROM meta WHERE key=?', (key,)).fetchone()
+        return row['value'] if row else None
+
+    def _set_meta_in_tx(self, key: str, value: str) -> None:
+        self._db.execute(
+            'INSERT INTO meta(key,value) VALUES (?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value',
+            (key, value))
+
     def _migrate(self) -> None:
         columns = {row['name'] for row in self._db.execute('PRAGMA table_info(context_requests)')}
         if 'instance_id' not in columns:
             self._db.execute('ALTER TABLE context_requests ADD COLUMN instance_id TEXT')
+        message_columns = {row['name'] for row in self._db.execute('PRAGMA table_info(messages)')}
+        if 'payload_hash' not in message_columns:
+            self._db.execute('ALTER TABLE messages ADD COLUMN payload_hash TEXT')
+        client_columns = {row['name'] for row in self._db.execute('PRAGMA table_info(archicad_clients)')}
+        if 'epoch' not in client_columns:
+            self._db.execute('ALTER TABLE archicad_clients ADD COLUMN epoch INTEGER')
+
+
+class ResultConflict(RuntimeError):
+    """A job already has a different final result."""
 
 
 def _decode_payload(row, payload_key='payload'):

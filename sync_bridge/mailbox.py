@@ -1,8 +1,13 @@
 """Remote mailbox boundary. GitHub is a mailbox, not the BIM transaction log.
 
-Client ``_published`` is an optimisation for the current process only. The
-remote protocol dedupes on ``Idempotency-Key`` (the durable message_id). A
-new GitHubMailbox after a crash does not remember earlier publishes.
+Client ``_published_hashes`` is an optimisation for the current process only.
+The remote protocol dedupes on ``Idempotency-Key`` plus a canonical payload
+hash. The same message id with a different payload is a conflict, not a
+duplicate.
+
+GitHub backend status: NOT_YET_LIVE_VERIFIED.
+Remote mailbox protocol status: OFFLINE_MOCK_VERIFIED.
+A local SQLite inbox is not proof that GitHub idempotency works.
 
 ETag policy (``ETAG_POLICY``): SafeBIMBridge persists the ETag only after a
 tick completes. The first poll after restart sends If-None-Match when a
@@ -13,9 +18,12 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
+from sync_bridge.identity import canonical_hash
 from sync_bridge.protocol import ProtocolError
 
 ETAG_POLICY = 'durable-after-completed-tick'
+REMOTE_MAILBOX_PROTOCOL = 'OFFLINE_MOCK_VERIFIED'
+GITHUB_BACKEND_STATUS = 'NOT_YET_LIVE_VERIFIED'
 
 
 class OfflineError(ConnectionError):
@@ -101,7 +109,7 @@ class GitHubMailbox(RemoteMailbox):
         self.http = http
         self.head_url = head_url
         self.etag: str | None = None
-        self._published: set[str] = set()
+        self._published_hashes: dict[str, str] = {}
 
     def poll_head(self) -> PollHead:
         headers = {}
@@ -151,8 +159,9 @@ class GitHubMailbox(RemoteMailbox):
         if response.status in (401, 403):
             return {'status': 'NEEDS_AUTH'}
         if response.status in (200, 304):
-            return {'status': 'CONNECTED'}
-        return {'status': 'DEGRADED', 'code': response.status}
+            return {'status': 'CONNECTED', 'backend': GITHUB_BACKEND_STATUS,
+                    'protocol': REMOTE_MAILBOX_PROTOCOL}
+        return {'status': 'DEGRADED', 'code': response.status, 'backend': GITHUB_BACKEND_STATUS}
 
     def _request(self, method, url, headers, body=None):
         try:
@@ -166,11 +175,13 @@ class GitHubMailbox(RemoteMailbox):
         message_id = body.get('messageId') or body.get('idempotencyKey') or body.get('job_id')
         if not isinstance(message_id, str) or not message_id.strip():
             raise ProtocolError('publish requires a durable messageId')
-        if message_id in self._published:
-            return {'status': 'ALREADY_PUBLISHED', 'messageId': message_id, 'authority': 'client-cache'}
         payload = dict(body)
         payload['idempotencyKey'] = message_id
-        headers = {'Idempotency-Key': message_id}
+        digest = canonical_hash(payload)
+        cached = self._published_hashes.get(message_id)
+        if cached == digest:
+            return {'status': 'ALREADY_PUBLISHED', 'messageId': message_id, 'authority': 'client-cache'}
+        headers = {'Idempotency-Key': message_id, 'X-Payload-Sha256': digest}
         try:
             response = self.http.request('PUT', self.head_url, headers, payload)
         except AckLost:
@@ -181,11 +192,15 @@ class GitHubMailbox(RemoteMailbox):
             raise RateLimited(_retry_after(response))
         if response.status in (401, 403):
             raise NeedsAuth('GitHub authorization required')
+        if isinstance(response.json, dict) and response.json.get('conflict'):
+            return {'status': 'MESSAGE_ID_CONFLICT', 'messageId': message_id, 'authority': 'remote'}
+        if response.status == 409:
+            return {'status': 'MESSAGE_ID_CONFLICT', 'messageId': message_id, 'authority': 'remote'}
         if response.status >= 500:
             raise OfflineError('publish failed')
         if response.status >= 400:
             raise OfflineError(f'publish status {response.status}')
-        self._published.add(message_id)
+        self._published_hashes[message_id] = digest
         duplicate = isinstance(response.json, dict) and bool(response.json.get('duplicate'))
         return {
             'status': 'ALREADY_PUBLISHED' if duplicate else 'PUBLISHED',

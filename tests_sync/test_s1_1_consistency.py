@@ -1,6 +1,5 @@
 """S1.1 consistency contracts. Offline only. Mailbox idempotency is not reimplemented here."""
 import json
-import tempfile
 import unittest
 from pathlib import Path
 
@@ -14,6 +13,7 @@ from sync_bridge.security import PeerIdentity
 from sync_bridge.startup import simulate_startup, status_board
 from sync_bridge.store import BridgeStore
 from sync_bridge.ui_model import SafeBIMUI
+from tests_sync.closing import ClosingDirectory
 from tests_sync.test_s1_reliability import reopen
 from tests_sync.test_sync_bridge import ScriptedHttp
 
@@ -27,7 +27,7 @@ def service_in(directory):
 
 class ContextConsistencyTests(unittest.TestCase):
     def test_capturing_restart_does_not_start_second_capture(self):
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             service = service_in(directory)
             request = {'requestId': 'ctx-crash', 'logicalProjectId': 'house', 'requestedScope': 'selection'}
 
@@ -55,7 +55,7 @@ class ContextConsistencyTests(unittest.TestCase):
             self.assertEqual(restarted.store.meta('context_captures'), captures)
 
     def test_open_capturing_operation_is_resumed_without_a_new_capture(self):
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             service = service_in(directory)
             service.store.put_context_request('ctx-open', 'house', 'selection', 'CAPTURING', 't')
             before = service.store.meta('context_captures')
@@ -68,7 +68,7 @@ class ContextConsistencyTests(unittest.TestCase):
             self.assertEqual(service.store.jobs(), [])
 
     def test_request_id_payload_conflict_does_not_capture(self):
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             service = service_in(directory)
             original = {
                 'requestId': 'ctx-1', 'logicalProjectId': 'P1',
@@ -95,7 +95,7 @@ class ContextConsistencyTests(unittest.TestCase):
 
 class InstanceIsolationTests(unittest.TestCase):
     def test_context_request_never_uses_the_other_instance_project(self):
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             service = service_in(directory)
             owner = service.owner
             service.handshake(envelope('HELLO', {'logicalProjectId': 'P1'}, instance_id='AC-A', request_id='h1', message_id='hm1').to_dict(), owner)
@@ -194,7 +194,7 @@ class StartupIndependenceTests(unittest.TestCase):
         self.assertEqual(started['ai'], 'AI_OFFLINE')
         self.assertTrue(started['ready'])
         self.assertNotEqual(started['local'], 'LOCAL_ERROR')
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             service = service_in(directory)
             self.assertTrue(service.health()['running'])
             self.assertEqual(service.connections.get('BRIDGE')['status'], 'CONNECTED')

@@ -62,7 +62,7 @@ class AIBroker:
 
     def health(self) -> dict:
         cloud = self.cloud.health() if self.cloud else {'status': 'OFFLINE'}
-        local = self.local.health() if self.local else {'status': 'UNAVAILABLE'}
+        local = self.local.health() if self.local else {'status': 'UNAVAILABLE', 'loadState': 'UNAVAILABLE'}
         if cloud.get('status') == 'CONNECTED':
             route = 'cloud'
         elif local.get('status') == 'CONNECTED':
@@ -83,6 +83,8 @@ class AIBroker:
                 self.last_route = 'cloud'
                 return proposal
         if self.local is not None:
+            if getattr(self.local, 'load_state', None) == 'UNLOADED':
+                self.local.lazy_start()
             local_status = self.local.health().get('status')
             if local_status == 'STARTING':
                 self.last_route = 'starting'

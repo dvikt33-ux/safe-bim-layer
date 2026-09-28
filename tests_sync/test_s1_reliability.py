@@ -1,5 +1,4 @@
 """S1 reliability contracts. Offline only. No Archicad process and no PLN write."""
-import tempfile
 import unittest
 from pathlib import Path
 
@@ -22,6 +21,7 @@ from sync_bridge.security import SESSION_ISOLATION, PeerIdentity
 from sync_bridge.startup import simulate_startup, status_board
 from sync_bridge.store import BridgeStore
 from sync_bridge.ui_model import SafeBIMUI
+from tests_sync.closing import ClosingDirectory
 from tests_sync.test_sync_bridge import HttpResponse, ScriptedHttp
 
 
@@ -29,6 +29,7 @@ def reopen(service, http):
     path = service.store.path
     owner = service.owner
     instance_id = service.instance_id
+    service.store.set_meta('lease_expires', '2000-01-01T00:00:00+00:00')
     service.store.close()
     store = BridgeStore(path)
     mailbox = GitHubMailbox(http)
@@ -39,7 +40,7 @@ def reopen(service, http):
 
 class DurablePublishTests(unittest.TestCase):
     def test_publish_ack_lost_then_process_restart_is_idempotent(self):
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             remote = DurableRemoteInbox(Path(directory) / 'remote.sqlite3')
             remote.drop_next_ack = True
             store = BridgeStore(Path(directory) / 'bridge.sqlite3')
@@ -71,7 +72,7 @@ class ETagAndCrashTests(unittest.TestCase):
             HttpResponse(200, {'messages': []}, {'ETag': '"abc"'}),
             HttpResponse(304, {}, {}),
         ])
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             store = BridgeStore(Path(directory) / 'bridge.sqlite3')
             service = SafeBIMBridge(store, GitHubMailbox(http), owner=PeerIdentity('S-1-5-21-1', 'session-7'))
             service.start()
@@ -90,7 +91,7 @@ class ETagAndCrashTests(unittest.TestCase):
     def test_duplicate_inbound_after_crash_before_tick_finishes(self):
         message = {'messageId': 'M', 'body': {'recipe': 'mock'}}
         http = ScriptedHttp([HttpResponse(200, {'messages': [message]}, {'ETag': '"new"'})])
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             store = BridgeStore(Path(directory) / 'bridge.sqlite3')
             service = SafeBIMBridge(store, GitHubMailbox(http), owner=PeerIdentity('S-1-5-21-1', 'session-7'))
             service.start()
@@ -145,7 +146,7 @@ class ProtocolAndPipeContractTests(unittest.TestCase):
         self.assertNotIn('Windows integration verified', text)
 
     def test_bridge_requires_handshake_and_denies_foreign_peers(self):
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             store = BridgeStore(Path(directory) / 'bridge.sqlite3')
             service = SafeBIMBridge(store, GitHubMailbox(ScriptedHttp([])), owner=PeerIdentity('S-1-5-21-1', 'session-7'))
             service.start()
@@ -165,7 +166,7 @@ class ProtocolAndPipeContractTests(unittest.TestCase):
 
 class MultiArchicadTests(unittest.TestCase):
     def test_instances_are_isolated_and_duplicate_id_conflicts(self):
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             store = BridgeStore(Path(directory) / 'bridge.sqlite3')
             service = SafeBIMBridge(store, GitHubMailbox(ScriptedHttp([])), owner=PeerIdentity('S-1-5-21-1', 'session-7'))
             service.start()
@@ -253,7 +254,7 @@ class MalformedAndContextTests(unittest.TestCase):
             HttpResponse(200, {'messages': [bad, valid]}, {'ETag': 'a'}),
             HttpResponse(200, {'messages': [bad, valid_next]}, {'ETag': 'b'}),
         ])
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             store = BridgeStore(Path(directory) / 'bridge.sqlite3')
             service = SafeBIMBridge(store, GitHubMailbox(http), owner=PeerIdentity('S-1-5-21-1', 'session-7'))
             service.start()
@@ -269,7 +270,7 @@ class MalformedAndContextTests(unittest.TestCase):
             self.assertEqual(len(service.store.messages_by_state('DEAD_LETTER')), 1)
 
     def test_duplicate_context_request_after_restart_does_not_recapture(self):
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             store = BridgeStore(Path(directory) / 'bridge.sqlite3')
             service = SafeBIMBridge(store, GitHubMailbox(ScriptedHttp([])), owner=PeerIdentity('S-1-5-21-1', 'session-7'))
             service.start()
@@ -283,7 +284,7 @@ class MalformedAndContextTests(unittest.TestCase):
             self.assertEqual(restarted.store.jobs(), [])
 
     def test_context_ready_rejects_wrong_id_project_hash_generation_and_cancel(self):
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             store = BridgeStore(Path(directory) / 'bridge.sqlite3')
             service = SafeBIMBridge(store, GitHubMailbox(ScriptedHttp([])), owner=PeerIdentity('S-1-5-21-1', 'session-7'))
             service.start()
@@ -309,7 +310,7 @@ class MalformedAndContextTests(unittest.TestCase):
             self.assertEqual(restarted.store.context_request('ctx-9')['snapshot_id'], 'snap-0004')
 
     def test_older_generation_after_restart_is_ignored(self):
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             store = BridgeStore(Path(directory) / 'bridge.sqlite3')
             service = SafeBIMBridge(store, GitHubMailbox(ScriptedHttp([])), owner=PeerIdentity('S-1-5-21-1', 'session-7'))
             service.start()
@@ -385,7 +386,7 @@ class AIAndStartupStateTests(unittest.TestCase):
                 calls.append(prompt)
                 return {'kind': 'proposal', 'text': 'should not run'}
 
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             store = BridgeStore(Path(directory) / 'bridge.sqlite3')
             service = SafeBIMBridge(
                 store, GitHubMailbox(ScriptedHttp([])), owner=PeerIdentity('S-1-5-21-1', 'session-7'),

@@ -1,6 +1,5 @@
 """Offline transport, queue, and UI tests. No Archicad process is started."""
 import json
-import tempfile
 import unittest
 from pathlib import Path
 
@@ -17,6 +16,7 @@ from sync_bridge.security import PeerIdentity, admit_peer, sddl_for_user
 from sync_bridge.startup import FORBIDDEN_STEPS, simulate_startup
 from sync_bridge.store import BridgeStore
 from sync_bridge.ui_model import SafeBIMUI
+from tests_sync.closing import ClosingDirectory
 
 
 class HttpResponse:
@@ -113,7 +113,7 @@ class ProtocolAndPipeTests(unittest.TestCase):
 
 class QueueAndRestartTests(unittest.TestCase):
     def test_duplicate_remote_message_creates_one_job(self):
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             service = bridge(directory)
             payload = {'messageId': 'msg-1', 'kind': 'remote-job', 'snapshotId': 'snap-0001',
                        'body': {'recipe': 'mock'}}
@@ -124,7 +124,7 @@ class QueueAndRestartTests(unittest.TestCase):
             self.assertEqual(len(service.store.jobs()), 1)
 
     def test_restart_keeps_queue_and_sqlite_reopen(self):
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             service = bridge(directory)
             service.accept_remote_message({'messageId': 'msg-2', 'body': {'recipe': 'mock'}})
             path = service.store.path
@@ -137,7 +137,7 @@ class QueueAndRestartTests(unittest.TestCase):
             self.assertEqual(len(again.store.jobs()), 1)
 
     def test_corrupt_message_does_not_kill_bridge(self):
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             service = bridge(directory)
             service.store.put_message('bad', 'remote-job', 't', {'body': {}}, 'ACCEPTED', 'inbox')
             service.store.corrupt_message_payload('bad')
@@ -146,7 +146,7 @@ class QueueAndRestartTests(unittest.TestCase):
             self.assertEqual(service.store.jobs(), [])
 
     def test_second_bridge_instance_is_refused(self):
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             service = bridge(directory)
             other = SafeBIMBridge(service.store, service.mailbox, owner=service.owner, instance_id='bridge-2')
             with self.assertRaises(InstanceConflict):
@@ -155,7 +155,7 @@ class QueueAndRestartTests(unittest.TestCase):
 
 class MailboxTests(unittest.TestCase):
     def test_internet_lost_during_fetch_and_publish_then_reconnect(self):
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             http = ScriptedHttp([ConnectionError('down'), HttpResponse(200, {'messages': []}, {'ETag': 'v2'})])
             service = bridge(directory, http)
             service.connections.set('ARCHICAD', 'CONNECTING', 'waiting')
@@ -173,7 +173,7 @@ class MailboxTests(unittest.TestCase):
             self.assertEqual(service.store.message('result-job-1')['state'], 'SENT')
 
     def test_publish_loss_keeps_retry_and_is_idempotent(self):
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             http = ScriptedHttp([ConnectionError('down'), HttpResponse(200, {}, {})])
             service = bridge(directory, http)
             service.queue_result('job-9', {'status': 'mock'})
@@ -194,7 +194,7 @@ class MailboxTests(unittest.TestCase):
             HttpResponse(304, {}, {'ETag': '"1"'}),
             HttpResponse(200, {'messages': [message, message]}, {'ETag': '"1"'}),
         ])
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             service = bridge(directory, http)
             first = service.tick()
             self.assertEqual(first['accepted'][0]['jobCreated'], True)
@@ -217,7 +217,7 @@ class MailboxTests(unittest.TestCase):
 
     def test_auth_expired_keeps_local_ready(self):
         http = ScriptedHttp([HttpResponse(401, {'error': 'bad credentials'}, {})])
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             service = bridge(directory, http)
             result = service.tick()
             self.assertEqual(result['status'], 'NEEDS_AUTH')
@@ -227,7 +227,7 @@ class MailboxTests(unittest.TestCase):
 
     def test_malformed_remote_payload_creates_no_job(self):
         http = ScriptedHttp([HttpResponse(200, {'messages': [{'nope': 1}, 'bad']}, {'ETag': 'v'})])
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             service = bridge(directory, http)
             result = service.tick()
             self.assertTrue(all(item['jobCreated'] is False for item in result['accepted']))
@@ -250,7 +250,7 @@ class MailboxTests(unittest.TestCase):
 
 class ContextTests(unittest.TestCase):
     def test_idempotent_request_wrong_project_cancel_and_order(self):
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             service = bridge(directory)
             request = {'requestId': 'ctx-1', 'logicalProjectId': 'house', 'requestedScope': 'selection'}
             first = service.context_request(request)
@@ -273,7 +273,7 @@ class ContextTests(unittest.TestCase):
             self.assertEqual(service.context.refresh_label(), UI_REFRESH)
 
     def test_duplicate_instance_id_conflicts_and_foreign_session_is_denied(self):
-        with tempfile.TemporaryDirectory() as directory:
+        with ClosingDirectory() as directory:
             service = bridge(directory)
             owner = service.owner
             hello = envelope('HELLO', {'logicalProjectId': 'P1'}, instance_id='ac-a', request_id='h1', message_id='hm1').to_dict()
@@ -375,7 +375,8 @@ class AIAndUITests(unittest.TestCase):
         self.assertEqual(started['remote'], 'REMOTE_NEEDS_AUTH')
         self.assertEqual(started['archicad'], 'ARCHICAD_DISCONNECTED')
         self.assertNotEqual(started['local'], 'LOCAL_ERROR')
-        self.assertIn('named-pipe-handshake', started['steps'])
+        self.assertIn('named-pipe-listening', started['steps'])
+        self.assertNotIn('archicad-handshake', started['steps'])
         self.assertTrue(started['ready'])
         for forbidden in FORBIDDEN_STEPS:
             self.assertNotIn(forbidden, started['steps'])

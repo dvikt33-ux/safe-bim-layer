@@ -1,7 +1,9 @@
-"""Server-side mailbox. Dedupes by idempotency key across client process restarts.
+"""Test stand-in for a remote mailbox. Not a live GitHub backend.
 
-``GitHubMailbox._published`` is not this store. A new client can resend the
-same message_id and must still see one accepted result.
+DURABLE_REMOTE_INBOX_ROLE = TEST_STAND_IN_ONLY.
+Deduping here does not prove GitHub idempotency. GitHub backend status
+remains NOT_YET_LIVE_VERIFIED. Same idempotency key with a different
+canonical payload is a conflict.
 """
 from __future__ import annotations
 
@@ -9,7 +11,10 @@ import json
 import sqlite3
 from datetime import datetime, timezone
 
+from sync_bridge.identity import canonical_hash
 from sync_bridge.mailbox import AckLost
+
+DURABLE_REMOTE_INBOX_ROLE = 'TEST_STAND_IN_ONLY'
 
 
 def _now() -> str:
@@ -24,7 +29,9 @@ class RemoteResponse:
 
 
 class DurableRemoteInbox:
-    """Private GitHub-mailbox stand-in. Persistence is the dedup authority."""
+    """Private mailbox stand-in. Not a live GitHub backend. TEST_STAND_IN_ONLY."""
+
+    open_inboxes: list = []
 
     def __init__(self, path):
         self.path = str(path)
@@ -34,12 +41,27 @@ class DurableRemoteInbox:
             'CREATE TABLE IF NOT EXISTS accepted ('
             'message_id TEXT PRIMARY KEY, body TEXT NOT NULL, accepted_at TEXT NOT NULL)')
         self.drop_next_ack = False
+        DurableRemoteInbox.open_inboxes.append(self)
         self.calls = []
         self.head_messages = []
         self.head_etag = '"head"'
 
     def close(self) -> None:
-        self._db.close()
+        try:
+            DurableRemoteInbox.open_inboxes.remove(self)
+        except ValueError:
+            pass
+        db = self.__dict__.get('_db')
+        if db is None:
+            return
+        self._db = None
+        db.close()
+
+    def __del__(self) -> None:
+        try:
+            self.close()
+        except Exception:
+            return
 
     def request(self, method, url, headers, body=None):
         headers = dict(headers or {})
@@ -63,13 +85,18 @@ class DurableRemoteInbox:
         key = headers.get('Idempotency-Key') or body.get('idempotencyKey') or body.get('messageId')
         if not isinstance(key, str) or not key.strip():
             return RemoteResponse(400, {'error': 'missing idempotency key'})
+        encoded = json.dumps(body, ensure_ascii=False, sort_keys=True)
+        digest = canonical_hash(body)
         existing = self._db.execute(
-            'SELECT message_id FROM accepted WHERE message_id=?', (key,)).fetchone()
+            'SELECT message_id, body FROM accepted WHERE message_id=?', (key,)).fetchone()
         if existing:
+            stored = json.loads(existing['body'])
+            if canonical_hash(stored) != digest:
+                return RemoteResponse(409, {'conflict': True, 'messageId': key, 'status': 'MESSAGE_ID_CONFLICT'})
             return RemoteResponse(200, {'duplicate': True, 'messageId': key, 'status': 'duplicate'})
         self._db.execute(
             'INSERT INTO accepted(message_id, body, accepted_at) VALUES (?,?,?)',
-            (key, json.dumps(body, ensure_ascii=False, sort_keys=True), _now()))
+            (key, encoded, _now()))
         if self.drop_next_ack:
             self.drop_next_ack = False
             raise AckLost('connection reset after accept')
