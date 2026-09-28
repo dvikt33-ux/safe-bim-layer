@@ -304,9 +304,28 @@ class BridgeStore:
             self._db.execute('ROLLBACK')
             raise
 
+    def assign_capture(self, request_id: str, sequence: int, snapshot_id: str,
+                       revision: int, captures: int) -> None:
+        """Persist the capture operation and the stream revision it started against."""
+        self._db.execute('BEGIN IMMEDIATE')
+        try:
+            self._set_meta_in_tx('context_sequence', str(sequence))
+            self._set_meta_in_tx('context_captures', str(captures))
+            self._set_meta_in_tx(f'context_op_capture:{request_id}', f'{sequence}:{snapshot_id}')
+            self._set_meta_in_tx(f'context_op_capture_revision:{request_id}', str(revision))
+            self._db.execute('COMMIT')
+        except BaseException:
+            self._db.execute('ROLLBACK')
+            raise
+
     def commit_context_ready(self, request_id: str, snapshot_id: str, response: dict,
-                             stream_key: str, sequence: int, identity_hash: str) -> None:
-        """VALID snapshot, watermark, and generation identity commit together, or neither."""
+                             stream_key: str, sequence: int, identity_hash: str,
+                             expected_capture_revision: int | None = None) -> str:
+        """VALID snapshot, watermark, and generation identity commit together, or neither.
+
+        A capture may become current only if the stream revision is still the
+        revision recorded when that capture started. A mismatch writes nothing.
+        """
         encoded = json.dumps(response, ensure_ascii=False)
         self._db.execute('BEGIN IMMEDIATE')
         try:
@@ -314,37 +333,45 @@ class BridgeStore:
                 'SELECT request_id FROM context_requests WHERE request_id=?', (request_id,)).fetchone()
             if current is None:
                 raise KeyError(request_id)
+            current_revision = int(self._meta_in_tx('context_revision:' + stream_key) or 0)
+            stored_expected = self._meta_in_tx(f'context_op_capture_revision:{request_id}')
+            if stored_expected is not None:
+                expected = int(stored_expected)
+            elif expected_capture_revision is not None:
+                expected = int(expected_capture_revision)
+            else:
+                expected = current_revision
+            if self.fault_before_context_commit:
+                self.fault_before_context_commit()
+            if current_revision != expected:
+                self._db.execute('ROLLBACK')
+                return 'CAPTURE_REVISION_CONFLICT'
             self._db.execute(
                 'UPDATE context_requests SET state=?,snapshot_id=?,response_json=? WHERE request_id=?',
                 ('VALID', snapshot_id, encoded, request_id))
-            if self.fault_before_context_commit:
-                self.fault_before_context_commit()
-            revision = self._meta_in_tx('context_revision:' + stream_key) or '0'
             self._set_meta_in_tx('context_sequence:' + stream_key, str(sequence))
             self._set_meta_in_tx(f'context_identity:{stream_key}:{sequence}', identity_hash)
-            self._set_meta_in_tx(f'context_capture_revision:{request_id}', revision)
+            self._set_meta_in_tx(f'context_capture_revision:{request_id}', str(expected))
             self._set_meta_in_tx('context_validity:' + stream_key, 'VALID')
-            self._set_meta_in_tx('context_valid_revision:' + stream_key, revision)
+            self._set_meta_in_tx('context_valid_revision:' + stream_key, str(expected))
             self._db.execute('COMMIT')
+            return 'CONTEXT_READY'
         except BaseException:
             self._db.execute('ROLLBACK')
             raise
 
     def invalidate_stream(self, stream_key: str) -> int:
-        """Mark the stream stale and bump its revision together, or neither."""
+        """Bump one stream revision. Completed request rows stay historical evidence."""
         if stream_key.startswith('instance:'):
-            clause = 'instance_id=?'
-            param = stream_key.split(':', 1)[1]
+            if not stream_key.split(':', 1)[1]:
+                raise ValueError(stream_key)
         elif stream_key.startswith('project:'):
-            clause = "IFNULL(instance_id, '')='' AND project_id=?"
-            param = stream_key.split(':', 1)[1]
+            if not stream_key.split(':', 1)[1]:
+                raise ValueError(stream_key)
         else:
             raise ValueError(stream_key)
         self._db.execute('BEGIN IMMEDIATE')
         try:
-            self._db.execute(
-                f"UPDATE context_requests SET state='STALE' WHERE state='VALID' AND {clause}",
-                (param,))
             revision = int(self._meta_in_tx('context_revision:' + stream_key) or 0) + 1
             self._set_meta_in_tx('context_revision:' + stream_key, str(revision))
             self._set_meta_in_tx('context_validity:' + stream_key, 'STALE')

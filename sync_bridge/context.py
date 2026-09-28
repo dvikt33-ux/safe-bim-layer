@@ -57,7 +57,7 @@ class ContextService:
             if existing['state'] == 'CANCELLED':
                 self.lease = 'CANCELLED'
                 return {'kind': 'CONTEXT_ERROR', 'requestId': request_id, 'reason': 'cancelled'}
-            if existing['state'] == 'STALE':
+            if existing['state'] == 'STALE' or self._derived_stale(existing):
                 self._present(instance_id, project_id, 'STALE', UI_STALE)
                 return _stale_reply(existing)
             if existing.get('response'):
@@ -93,7 +93,7 @@ class ContextService:
         if stored['state'] == 'CANCELLED':
             self.lease = 'CANCELLED'
             return 'CONTEXT_ERROR'
-        if stored['state'] == 'STALE':
+        if stored['state'] == 'STALE' or self._derived_stale(stored):
             return self._apply_stale(ready, stored)
         if _is_completed(stored):
             return self._apply_completed(ready, stored)
@@ -113,8 +113,11 @@ class ContextService:
             if recorded is not None or ready.sequence == known:
                 return 'CONTEXT_SEQUENCE_CONFLICT'
         response = _ready_response(ready)
-        self.store.commit_context_ready(
-            ready.request_id, ready.snapshot_id, response, stream, ready.sequence, incoming)
+        status = self.store.commit_context_ready(
+            ready.request_id, ready.snapshot_id, response, stream, ready.sequence, incoming,
+            expected_capture_revision=self._expected_capture_revision(ready.request_id))
+        if status != 'CONTEXT_READY':
+            return status
         self._remember(stored.get('instance_id'), ready)
         self._present(stored.get('instance_id'), stored['project_id'], 'VALID', f'Контекст #{ready.sequence}', force=True)
         return 'CONTEXT_READY'
@@ -195,16 +198,13 @@ class ContextService:
         return view
 
     def context_admission(self, request_id: str) -> str:
-        """Infrastructure only. A later BIM admission can reject STALE_CONTEXT."""
+        """Current only when the stored capture revision still matches the stream.
+
+        ``context_validity`` is a presentation cache. It cannot make a revision
+        mismatch current.
+        """
         stored = self.store.context_request(request_id)
-        if stored is None or stored.get('state') != 'VALID':
-            return 'STALE_CONTEXT'
-        stream = _stream_key(stored)
-        revision = int(self.store.meta('context_revision:' + stream) or 0)
-        bound = self.store.meta(f'context_capture_revision:{request_id}')
-        if bound is None or int(bound) != revision:
-            return 'STALE_CONTEXT'
-        if self.store.meta('context_validity:' + stream) != 'VALID':
+        if stored is None or not self._currently_usable(stored):
             return 'STALE_CONTEXT'
         return 'CURRENT'
 
@@ -217,6 +217,28 @@ class ContextService:
 
     def refresh_label(self) -> str:
         return UI_REFRESH
+
+    def _stream_revision(self, stream: str) -> int:
+        return int(self.store.meta('context_revision:' + stream) or 0)
+
+    def _expected_capture_revision(self, request_id: str) -> int | None:
+        raw = self.store.meta(f'context_op_capture_revision:{request_id}')
+        if raw is None:
+            return None
+        return int(raw)
+
+    def _currently_usable(self, stored: dict) -> bool:
+        """Revision binding decides. A VALID cache cannot override a mismatch."""
+        if stored.get('state') != 'VALID':
+            return False
+        stream = _stream_key(stored)
+        bound = self.store.meta(f'context_capture_revision:{stored["request_id"]}')
+        if bound is None or int(bound) != self._stream_revision(stream):
+            return False
+        return self.store.meta('context_validity:' + stream) != 'STALE'
+
+    def _derived_stale(self, stored: dict) -> bool:
+        return _is_completed(stored) and not self._currently_usable(stored)
 
     def _known_sequence(self, stored: dict) -> int:
         stream = _stream_key(stored)
@@ -262,8 +284,17 @@ class ContextService:
     def _publish(self, ready: ContextReady, instance_id) -> dict:
         response = _ready_response(ready)
         stream = _stream_key({'instance_id': instance_id, 'project_id': ready.logical_project_id})
-        self.store.commit_context_ready(
-            ready.request_id, ready.snapshot_id, response, stream, ready.sequence, generation_hash(ready))
+        status = self.store.commit_context_ready(
+            ready.request_id, ready.snapshot_id, response, stream, ready.sequence, generation_hash(ready),
+            expected_capture_revision=self._expected_capture_revision(ready.request_id))
+        if status != 'CONTEXT_READY':
+            self._present(instance_id, ready.logical_project_id, 'STALE', UI_STALE)
+            return {
+                'kind': status,
+                'requestId': ready.request_id,
+                'reason': 'capture revision',
+                'refreshRequired': True,
+            }
         self._remember(instance_id, ready)
         self._present(instance_id, ready.logical_project_id, 'VALID', f'Контекст #{ready.sequence}', force=True)
         return response
@@ -314,11 +345,11 @@ class ContextService:
         assigned = self._assigned(request_id)
         if assigned is None:
             self.sequence += 1
-            self.store.set_meta('context_sequence', str(self.sequence))
             captures = int(self.store.meta('context_captures') or 0) + 1
-            self.store.set_meta('context_captures', str(captures))
             snapshot_id = f'snap-{self.sequence:04d}'
-            self.store.set_meta(f'context_op_capture:{request_id}', f'{self.sequence}:{snapshot_id}')
+            stream = _stream_key({'instance_id': instance_id, 'project_id': project_id})
+            self.store.assign_capture(
+                request_id, self.sequence, snapshot_id, self._stream_revision(stream), captures)
             sequence = self.sequence
             if self.fault_after_capture_assigned:
                 self.fault_after_capture_assigned()

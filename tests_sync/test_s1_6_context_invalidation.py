@@ -47,7 +47,7 @@ class DurableInvalidationTests(unittest.TestCase):
             captures = service.store.meta('context_captures')
             self.assertEqual(service.context.mark_changed(instance_id='AC-A'), 'CONTEXT_CHANGED')
             stored = service.store.context_request('r1')
-            self.assertEqual(stored['state'], 'STALE')
+            self.assertEqual(stored['state'], 'VALID')
             self.assertEqual(stored['snapshot_id'], before['snapshot_id'])
             self.assertEqual(stored['response'], before['response'])
             self.assertEqual(service.store.meta('context_sequence:instance:AC-A'), before['watermark'])
@@ -60,7 +60,7 @@ class DurableInvalidationTests(unittest.TestCase):
             restarted = SafeBIMBridge(
                 BridgeStore(path), GitHubMailbox(QuietHttp()), owner=OWNER, clock=clock)
             restarted.start()
-            self.assertEqual(restarted.store.context_request('r1')['state'], 'STALE')
+            self.assertEqual(restarted.store.context_request('r1')['state'], 'VALID')
             repeated = restarted.context_request({
                 'requestId': 'r1', 'logicalProjectId': 'P1',
                 'requestedScope': 'selection', 'instanceId': 'AC-A',
@@ -70,23 +70,23 @@ class DurableInvalidationTests(unittest.TestCase):
             self.assertNotEqual(repeated, first)
             self.assertTrue(repeated['refreshRequired'])
             self.assertEqual(restarted.store.meta('context_captures'), captures)
-            self.assertEqual(restarted.store.context_request('r1')['state'], 'STALE')
+            self.assertEqual(restarted.store.context_request('r1')['state'], 'VALID')
             self.assertEqual(restarted.store.context_request('r1')['response']['kind'], 'CONTEXT_READY')
             replay = _replay(first)
             self.assertEqual(restarted.apply_context_ready(replay), 'IDEMPOTENT_STALE')
-            self.assertEqual(restarted.store.context_request('r1')['state'], 'STALE')
+            self.assertEqual(restarted.store.context_request('r1')['state'], 'VALID')
             self.assertEqual(_evidence(restarted, 'r1', 'instance:AC-A')['response'], before['response'])
             higher = ContextReady(
                 first['protocolVersion'], 'r1', 'snap-new', 'P1', 'hash-new', 't',
                 {'source': 'other'}, 2)
             self.assertEqual(restarted.apply_context_ready(higher), 'REQUEST_GENERATION_CONFLICT')
-            self.assertEqual(restarted.store.context_request('r1')['state'], 'STALE')
+            self.assertEqual(restarted.store.context_request('r1')['state'], 'VALID')
             self.assertEqual(restarted.store.context_request('r1')['snapshot_id'], first['snapshotId'])
             wrong = ContextReady(
                 first['protocolVersion'], 'r1', first['snapshotId'], 'P2', first['rootHash'],
                 first['capturedAt'], first['payload'], 1)
             self.assertEqual(restarted.apply_context_ready(wrong), 'CONTEXT_ERROR')
-            self.assertEqual(restarted.store.context_request('r1')['state'], 'STALE')
+            self.assertEqual(restarted.store.context_request('r1')['state'], 'VALID')
             second = restarted.context_request({
                 'requestId': 'r2', 'logicalProjectId': 'P1',
                 'requestedScope': 'selection', 'instanceId': 'AC-A',
@@ -94,7 +94,7 @@ class DurableInvalidationTests(unittest.TestCase):
             self.assertEqual(second['kind'], 'CONTEXT_READY')
             self.assertEqual(second['sequence'], 2)
             self.assertEqual(restarted.store.context_request('r2')['state'], 'VALID')
-            self.assertEqual(restarted.store.context_request('r1')['state'], 'STALE')
+            self.assertEqual(restarted.store.context_request('r1')['state'], 'VALID')
             self.assertEqual(restarted.store.context_request('r1')['snapshot_id'], first['snapshotId'])
             self.assertNotEqual(second['snapshotId'], first['snapshotId'])
             self.assertEqual(restarted.context.context_admission('r1'), 'STALE_CONTEXT')
@@ -115,7 +115,7 @@ class DurableInvalidationTests(unittest.TestCase):
             })
             evidence_b = _evidence(service, 'rB', 'instance:AC-B')
             self.assertEqual(service.context.mark_changed(instance_id='AC-A'), 'CONTEXT_CHANGED')
-            self.assertEqual(service.store.context_request('rA')['state'], 'STALE')
+            self.assertEqual(service.store.context_request('rA')['state'], 'VALID')
             self.assertEqual(service.store.context_request('rB')['state'], 'VALID')
             self.assertEqual(_evidence(service, 'rB', 'instance:AC-B'), evidence_b)
             self.assertEqual(service.context.lease, 'VALID')
@@ -133,7 +133,7 @@ class DurableInvalidationTests(unittest.TestCase):
             self.assertTrue(ui_b.context_banner.startswith('Контекст #'))
             self.assertNotIn(UI_STALE, ui_b.render())
             restarted = reopen(service, QuietHttp())
-            self.assertEqual(restarted.store.context_request('rA')['state'], 'STALE')
+            self.assertEqual(restarted.store.context_request('rA')['state'], 'VALID')
             self.assertEqual(restarted.store.context_request('rB')['state'], 'VALID')
             self.assertEqual(restarted.store.context_request('rB')['response'], ready_b)
             self.assertEqual(restarted.context.stream_view(instance_id='AC-A')['lease'], 'STALE')
@@ -171,7 +171,7 @@ class DurableInvalidationTests(unittest.TestCase):
             self.assertEqual(service.store.meta('context_revision:instance:AC-A'), '2')
             restarted = reopen(service, QuietHttp())
             self.assertEqual(restarted.store.meta('context_revision:instance:AC-A'), '2')
-            self.assertEqual(restarted.store.context_request('r1')['state'], 'STALE')
+            self.assertEqual(restarted.store.context_request('r1')['state'], 'VALID')
             second = restarted.context_request({
                 'requestId': 'r2', 'logicalProjectId': 'P1',
                 'requestedScope': 'selection', 'instanceId': 'AC-A',
@@ -212,13 +212,13 @@ class DurableInvalidationTests(unittest.TestCase):
             self.assertEqual(service.context.lease, 'VALID')
             service.store.fault_before_invalidation_commit = None
             service.context.mark_changed(instance_id='AC-A')
-            self.assertEqual(service.store.context_request('r1')['state'], 'STALE')
+            self.assertEqual(service.store.context_request('r1')['state'], 'VALID')
             self.assertEqual(service.store.meta('context_revision:instance:AC-A'), '1')
             self.assertEqual(service.store.meta('context_validity:instance:AC-A'), 'STALE')
             self.assertEqual(service.store.context_request('r1')['snapshot_id'], first['snapshotId'])
             self.assertEqual(service.store.context_request('r1')['response'], before['response'])
             self.assertEqual(service.store.meta('context_identity:instance:AC-A:1'), before['identity'])
             restarted = reopen(service, QuietHttp())
-            self.assertEqual(restarted.store.context_request('r1')['state'], 'STALE')
+            self.assertEqual(restarted.store.context_request('r1')['state'], 'VALID')
             self.assertEqual(restarted.store.meta('context_revision:instance:AC-A'), '1')
             self.assertEqual(restarted.store.meta('context_validity:instance:AC-A'), 'STALE')
