@@ -161,7 +161,20 @@ class UpgradeFenceTests(unittest.TestCase):
             subprocess.run(['tar', '-x'], input=archive.stdout, cwd=old, check=True)
             db_path = root / 's16.sqlite3'
             script = root / 'make_s16.py'
-            script.write_text(_S16_SCRIPT)
+
+            # The archived S1.6 fixture must not contend with the production
+            # mutex held by another test in this Python process.  Keep the
+            # actual S1.6 code/database behaviour; isolate only its OS mutex
+            # namespace by using a dedicated valid test SID.
+            fixture_sid = 'S-1-5-21-71717171-72727272-73737373-7474'
+            fixture_script = _S16_SCRIPT.replace('S-1-5-21-1', fixture_sid)
+            self.assertNotEqual(
+                fixture_script,
+                _S16_SCRIPT,
+                'S1.6 fixture SID replacement did not match',
+            )
+            script.write_text(fixture_script)
+
             made = subprocess.run(
                 [sys.executable, str(script), str(db_path)],
                 cwd=old,
@@ -184,7 +197,7 @@ class UpgradeFenceTests(unittest.TestCase):
             self.assertIsNone(fence)
             service = SafeBIMBridge(
                 BridgeStore(db_path), GitHubMailbox(QuietHttp()),
-                owner=PeerIdentity('S-1-5-21-1', 'session-7'),
+                owner=PeerIdentity(fixture_sid, 'session-7'),
                 clock=MutableClock(), instance_id='bridge-s17')
             service.start()
             try:

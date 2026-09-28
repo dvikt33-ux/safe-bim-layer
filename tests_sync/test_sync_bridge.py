@@ -1,5 +1,6 @@
 """Offline transport, queue, and UI tests. No Archicad process is started."""
 import json
+import os
 import unittest
 from pathlib import Path
 
@@ -102,8 +103,9 @@ class ProtocolAndPipeTests(unittest.TestCase):
         owner = PeerIdentity('S-1-5-21-9', 'session-7')
         self.assertFalse(admit_peer(owner, PeerIdentity('S-1-5-21-9', 'session-other')))
         self.assertFalse(admit_peer(owner, PeerIdentity('S-1-5-21-other', 'session-7')))
-        with self.assertRaises(NamedPipeUnavailable):
-            production_transport('S-1-5-21-9', 'session-7')
+        if os.name != 'nt':
+            with self.assertRaises(NamedPipeUnavailable):
+                production_transport('S-1-5-21-9', 'session-7')
         pipe.close()
 
     def test_sddl_requires_a_sid(self):

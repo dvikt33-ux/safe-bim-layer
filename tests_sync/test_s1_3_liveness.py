@@ -1,4 +1,7 @@
 """S1.3 lease liveness and context stream watermark. Offline only."""
+import os
+import subprocess
+import sys
 import unittest
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -36,35 +39,99 @@ class QuietHttp:
         return HttpResponse(200, {'messages': []})
 
 
-def opened(directory, name, clock):
+def opened(directory, name, clock, peer=OWNER):
     store = BridgeStore(Path(directory) / name)
     return SafeBIMBridge(
-        store, GitHubMailbox(QuietHttp()), owner=OWNER, instance_id='bridge-1',
+        store, GitHubMailbox(QuietHttp()), owner=peer, instance_id='bridge-1',
         clock=clock, lease_ttl_seconds=TTL)
+
+
+def _windows_competing_mutex_probe(user_sid: str) -> str:
+    """Try the production mutex from another Windows process."""
+    repo = Path(__file__).resolve().parents[1]
+    code = r"""
+import sys
+from sync_bridge.instance_lock import SingleInstanceLock
+
+lock = SingleInstanceLock(sys.argv[1])
+status = lock.try_acquire()
+print(status)
+if status in ('acquired', 'abandoned'):
+    lock.release()
+"""
+    env = dict(os.environ)
+    env['PYTHONPATH'] = str(repo)
+    result = subprocess.run(
+        [sys.executable, '-c', code, user_sid],
+        cwd=repo,
+        env=env,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        raise AssertionError(result.stderr + result.stdout)
+    return result.stdout.strip()
 
 
 class LiveLeaseTests(unittest.TestCase):
     def test_live_owner_survives_many_ttls_and_stop_releases(self):
         clock = MutableClock()
         with ClosingDirectory() as directory:
-            owner = opened(directory, 'a.sqlite3', clock)
+            live_peer = PeerIdentity(
+                'S-1-5-21-31313131-32323232-33333333-3434',
+                'session-7',
+            )
+            owner = opened(directory, 'a.sqlite3', clock, live_peer)
             owner.start()
-            self.assertIn('CreateMutexW', [call[0] for call in owner.instance_lock.kernel.calls])
-            self.assertEqual(owner.health()['ownership'], OWNERSHIP_GATE)
-            self.assertEqual(owner.health()['sqliteLeaseRole'], SQLITE_LEASE_ROLE)
-            clock.advance(TTL * 10 + 5)
-            self.assertLess(owner.store.meta('lease_expires'), clock())
-            other = opened(directory, 'a.sqlite3', clock)
-            with self.assertRaises(InstanceConflict):
+            try:
+                self.assertIn('CreateMutexW', [call[0] for call in owner.instance_lock.kernel.calls])
+                self.assertEqual(owner.health()['ownership'], OWNERSHIP_GATE)
+                self.assertEqual(owner.health()['sqliteLeaseRole'], SQLITE_LEASE_ROLE)
+
+                clock.advance(TTL * 10 + 5)
+                self.assertLess(owner.store.meta('lease_expires'), clock())
+
+                if os.name == 'nt':
+                    # Win32 mutexes are recursive for the owning thread.
+                    # A real competitor must therefore be another process.
+                    self.assertEqual(
+                        _windows_competing_mutex_probe(live_peer.user_sid),
+                        'blocked',
+                    )
+                    other = None
+                else:
+                    other = opened(directory, 'a.sqlite3', clock)
+                    with self.assertRaises(InstanceConflict):
+                        other.start()
+
+                self.assertTrue(owner.heartbeat())
+                self.assertGreater(owner.store.meta('lease_expires'), clock())
+
+                if os.name == 'nt':
+                    self.assertEqual(
+                        _windows_competing_mutex_probe(live_peer.user_sid),
+                        'blocked',
+                    )
+                else:
+                    with self.assertRaises(InstanceConflict):
+                        other.start()
+
+                self.assertTrue(owner.instance_lock.held())
+            finally:
+                owner.stop()
+
+            if os.name == 'nt':
+                self.assertIn(
+                    _windows_competing_mutex_probe(live_peer.user_sid),
+                    ('acquired', 'abandoned'),
+                )
+            else:
                 other.start()
-            self.assertTrue(owner.heartbeat())
-            self.assertGreater(owner.store.meta('lease_expires'), clock())
-            with self.assertRaises(InstanceConflict):
-                other.start()
-            self.assertTrue(owner.instance_lock.held())
-            owner.stop()
-            other.start()
-            self.assertTrue(other.running)
+                try:
+                    self.assertTrue(other.running)
+                finally:
+                    other.stop()
+
             self.assertEqual(MUTEX_VERIFICATION, 'OFFLINE_CONTRACT_VERIFIED')
             self.assertEqual(GITHUB_BACKEND_STATUS, 'NOT_YET_LIVE_VERIFIED')
 
@@ -80,8 +147,11 @@ class LiveLeaseTests(unittest.TestCase):
                 replacement.start()
             clock.advance(TTL * 10 + 5)
             replacement.start()
-            self.assertTrue(replacement.running)
-            self.assertEqual(replacement.lease_state, 'HELD')
+            try:
+                self.assertTrue(replacement.running)
+                self.assertEqual(replacement.lease_state, 'HELD')
+            finally:
+                replacement.close()
 
 
 class LeaseLossTests(unittest.TestCase):
