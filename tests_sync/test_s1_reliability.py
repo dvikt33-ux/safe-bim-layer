@@ -29,6 +29,7 @@ def reopen(service, http):
     path = service.store.path
     owner = service.owner
     instance_id = service.instance_id
+    service.crash()
     service.store.set_meta('lease_expires', '2000-01-01T00:00:00+00:00')
     service.store.close()
     store = BridgeStore(path)

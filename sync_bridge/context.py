@@ -87,15 +87,16 @@ class ContextService:
         if ready.sequence < known:
             return 'IGNORED_STALE'
         stream = _stream_key(stored)
-        self.store.set_meta(f'context_sequence:{stream}', str(max(known, ready.sequence)))
+        response = {
+            'kind': 'CONTEXT_READY', 'requestId': ready.request_id, 'snapshotId': ready.snapshot_id,
+            'logicalProjectId': ready.logical_project_id, 'rootHash': ready.root_hash,
+            'capturedAt': ready.captured_at, 'payload': ready.payload, 'sequence': ready.sequence,
+        }
+        self.store.commit_context_ready(
+            ready.request_id, ready.snapshot_id, response, stream, ready.sequence)
         self._remember(stored.get('instance_id'), ready)
         self.lease = 'VALID'
         self.ui_banner = f'Контекст #{ready.sequence}'
-        self.store.set_context_state(ready.request_id, 'VALID', ready.snapshot_id, {
-            'kind': 'CONTEXT_READY', 'requestId': ready.request_id, 'snapshotId': ready.snapshot_id,
-            'logicalProjectId': ready.logical_project_id, 'rootHash': ready.root_hash,
-            'capturedAt': ready.captured_at, 'payload': ready.payload,
-        })
         return 'CONTEXT_READY'
 
     def mark_changed(self) -> str:
@@ -152,8 +153,11 @@ class ContextService:
             'rootHash': ready.root_hash,
             'capturedAt': ready.captured_at,
             'payload': ready.payload,
+            'sequence': ready.sequence,
         }
-        self.store.set_context_state(ready.request_id, 'VALID', ready.snapshot_id, response)
+        stream = _stream_key({'instance_id': instance_id, 'project_id': ready.logical_project_id})
+        self.store.commit_context_ready(
+            ready.request_id, ready.snapshot_id, response, stream, ready.sequence)
         self._remember(instance_id, ready)
         self.lease = 'VALID'
         self.ui_banner = f'Контекст #{ready.sequence}'

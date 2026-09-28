@@ -72,6 +72,7 @@ class LeaseOwnershipTests(unittest.TestCase):
             replacement = opened(directory, 'a.sqlite3', clock)
             with self.assertRaises(InstanceConflict):
                 replacement.start()
+            crashed.crash()
             clock.advance(31)
             replacement.start()
             replacement.handshake(hello('AC-1', 'h2'), OWNER)

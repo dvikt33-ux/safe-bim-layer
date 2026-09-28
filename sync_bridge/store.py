@@ -76,6 +76,7 @@ class BridgeStore:
         self._db.executescript(SCHEMA)
         self._migrate()
         self.fault_before_result_commit = None
+        self.fault_before_context_commit = None
         BridgeStore.open_stores.append(self)
 
     def close(self) -> None:
@@ -270,7 +271,9 @@ class BridgeStore:
             new_owner = current != token
             self._set_meta_in_tx('lease_token', token)
             self._set_meta_in_tx('lease_expires', expires)
+            self._set_meta_in_tx('lease_heartbeat', now)
             self._set_meta_in_tx('lease_public_id', public_id)
+            self._set_meta_in_tx('lease_role', 'DIAGNOSTIC_ONLY')
             if new_owner:
                 epoch = int(self._meta_in_tx('bridge_epoch') or '0') + 1
                 self._set_meta_in_tx('bridge_epoch', str(epoch))
@@ -280,6 +283,43 @@ class BridgeStore:
                     (epoch,))
             self._db.execute('COMMIT')
             return True
+        except BaseException:
+            self._db.execute('ROLLBACK')
+            raise
+
+    def renew_lease(self, token: str, now: str, ttl_seconds: float) -> bool:
+        """Refresh diagnostic expiry. Does not transfer ownership."""
+        expires = (datetime.fromisoformat(now) + timedelta(seconds=ttl_seconds)).isoformat()
+        self._db.execute('BEGIN IMMEDIATE')
+        try:
+            if (self._meta_in_tx('lease_token') or '') != token:
+                self._db.execute('ROLLBACK')
+                return False
+            self._set_meta_in_tx('lease_expires', expires)
+            self._set_meta_in_tx('lease_heartbeat', now)
+            self._db.execute('COMMIT')
+            return True
+        except BaseException:
+            self._db.execute('ROLLBACK')
+            raise
+
+    def commit_context_ready(self, request_id: str, snapshot_id: str, response: dict,
+                             stream_key: str, sequence: int) -> None:
+        """VALID snapshot and the per-stream watermark commit together, or neither."""
+        encoded = json.dumps(response, ensure_ascii=False)
+        self._db.execute('BEGIN IMMEDIATE')
+        try:
+            current = self._db.execute(
+                'SELECT request_id FROM context_requests WHERE request_id=?', (request_id,)).fetchone()
+            if current is None:
+                raise KeyError(request_id)
+            self._db.execute(
+                'UPDATE context_requests SET state=?,snapshot_id=?,response_json=? WHERE request_id=?',
+                ('VALID', snapshot_id, encoded, request_id))
+            if self.fault_before_context_commit:
+                self.fault_before_context_commit()
+            self._set_meta_in_tx('context_sequence:' + stream_key, str(sequence))
+            self._db.execute('COMMIT')
         except BaseException:
             self._db.execute('ROLLBACK')
             raise

@@ -16,6 +16,7 @@ from sync_bridge.connections import ConnectionBoard
 from sync_bridge.context import ContextReady, ContextService
 from sync_bridge.git_fallback import narrow_fetch
 from sync_bridge.identity import canonical_hash
+from sync_bridge.instance_lock import OWNERSHIP_GATE, SQLITE_LEASE_ROLE, SingleInstanceLock
 from sync_bridge.mailbox import AckLost, ETAG_POLICY, NeedsAuth, OfflineError, RateLimited
 from sync_bridge.pipe_win32 import MAX_PIPE_INSTANCES, MULTIPLEX_MODEL, PipeApplicationGate
 from sync_bridge.polling import PollScheduler
@@ -40,6 +41,10 @@ class InstanceConflict(RuntimeError):
     pass
 
 
+class LeaseLost(RuntimeError):
+    """This process no longer owns the bridge. Work must stop."""
+
+
 class InjectedCrash(BaseException):
     """Fault-injection crash. BaseException so a tick cannot swallow it."""
 
@@ -54,7 +59,8 @@ def dead_letter_key(payload) -> str:
 
 class SafeBIMBridge:
     def __init__(self, store: BridgeStore, mailbox, *, owner: PeerIdentity, broker: AIBroker | None = None,
-                 instance_id: str = 'bridge-1', clock=None, lease_ttl_seconds: float = 30):
+                 instance_id: str = 'bridge-1', clock=None, lease_ttl_seconds: float = 30,
+                 mutex_kernel=None):
         self.store = store
         self.mailbox = mailbox
         self.owner = owner
@@ -64,6 +70,8 @@ class SafeBIMBridge:
         self.lease_ttl_seconds = lease_ttl_seconds
         self.process_token = uuid.uuid4().hex
         self.epoch = 0
+        self.instance_lock = SingleInstanceLock(owner.user_sid, mutex_kernel)
+        self.lease_state = 'NONE'
         self.poller = PollScheduler(mailbox)
         self.context = ContextService(store, _now)
         self.connections = ConnectionBoard()
@@ -74,9 +82,15 @@ class SafeBIMBridge:
         self.pipe_gate = PipeApplicationGate()
 
     def start(self) -> dict:
+        # Named mutex is the ownership gate. A live holder is not expired by TTL.
+        acquired = self.instance_lock.try_acquire()
+        if acquired == 'blocked':
+            raise InstanceConflict('bridge lease held by another process')
         now = self.clock()
         if not self.store.acquire_lease(self.process_token, now, self.lease_ttl_seconds, self.instance_id):
+            self.instance_lock.release()
             raise InstanceConflict('bridge lease held by another process')
+        self.lease_state = 'HELD'
         self.epoch = int(self.store.meta('bridge_epoch') or '0')
         self.store.set_meta('version', BRIDGE_VERSION)
         stored_etag = self.store.meta('remote_etag')
@@ -90,13 +104,32 @@ class SafeBIMBridge:
 
     def stop(self) -> None:
         self.running = False
+        self.lease_state = 'RELEASED'
         self.store.release_lease(self.process_token)
+        self.instance_lock.release()
         self.connections.set('BRIDGE', 'OFFLINE', 'stopped')
         self._log('stop', {})
+
+    def crash(self) -> None:
+        """Process death. The mutex is abandoned and this object stops heartbeating."""
+        self.running = False
+        self.lease_state = 'CRASHED'
+        self.instance_lock.abandon()
+        self._log('crash', {})
+
+    def heartbeat(self) -> bool:
+        """Renew diagnostic expiry. A live owner does not lose the mutex by TTL."""
+        self._require_owner()
+        if not self.store.renew_lease(self.process_token, self.clock(), self.lease_ttl_seconds):
+            self._mark_lease_lost()
+            raise LeaseLost('LEASE_LOST')
+        return True
 
     def close(self) -> None:
         if self.running:
             self.stop()
+        elif self.instance_lock.held():
+            self.instance_lock.release()
         self.store.close()
 
     def health(self) -> dict:
@@ -110,10 +143,13 @@ class SafeBIMBridge:
             'archicadWriteApi': False,
             'archicadMultiplex': ARCHICAD_MULTIPLEX,
             'etagPolicy': ETAG_POLICY,
+            'leaseState': self.lease_state,
+            'ownership': OWNERSHIP_GATE,
+            'sqliteLeaseRole': SQLITE_LEASE_ROLE,
         }
 
     def handshake(self, hello: dict, peer: PeerIdentity) -> dict:
-        self._require_running()
+        self._require_owner()
         if not admit_peer(self.owner, peer):
             raise PermissionError('чужая Windows session или SID отклонены')
         message = parse_envelope(hello)
@@ -134,13 +170,13 @@ class SafeBIMBridge:
                         instance_id=self.instance_id, request_id=message.request_id).to_dict()
 
     def disconnect_archicad(self, instance_id: str) -> None:
-        self._require_running()
+        self._require_owner()
         self.store.set_client_state(instance_id, 'DISCONNECTED', _now())
         self.pipe_gate.handshaken.discard(instance_id)
         self._refresh_archicad_channel()
 
     def accept_client_frame(self, peer: PeerIdentity, frame):
-        self._require_running()
+        self._require_owner()
         if not admit_peer(self.owner, peer):
             raise PermissionError('чужая Windows session или SID отклонены')
         if isinstance(frame, (bytes, bytearray)):
@@ -155,7 +191,7 @@ class SafeBIMBridge:
         return message.to_dict()
 
     def accept_remote_message(self, payload: dict) -> dict:
-        self._require_running()
+        self._require_owner()
         if not isinstance(payload, dict) or not isinstance(payload.get('messageId'), str) or not payload.get('messageId').strip() or not isinstance(payload.get('body'), dict):
             return self._quarantine(payload)
         message_id = payload['messageId']
@@ -200,7 +236,7 @@ class SafeBIMBridge:
         return {'status': stored['state']}
 
     def context_request(self, request: dict) -> dict:
-        self._require_running()
+        self._require_owner()
         instance_id = request.get('instanceId')
         project_id = request['logicalProjectId']
         client = self.store.client(instance_id) if instance_id else None
@@ -219,16 +255,21 @@ class SafeBIMBridge:
         return response
 
     def apply_context_ready(self, ready: ContextReady) -> str:
+        self._require_owner()
         return self.context.apply_ready(ready)
 
     def queue_result(self, job_id: str, result: dict) -> None:
+        self._require_owner()
         message_id = 'result-' + job_id
         self.store.enqueue_result(
             job_id, result, message_id, _now(),
             {'job_id': job_id, 'result': result, 'messageId': message_id})
 
     def tick(self) -> dict:
-        self._require_running()
+        try:
+            self._require_owner()
+        except LeaseLost:
+            return {'status': 'LEASE_LOST', 'processed': 0, 'published': []}
         try:
             polled = self.poller.poll_once()
         except InjectedCrash:
@@ -268,6 +309,7 @@ class SafeBIMBridge:
         return polled
 
     def flush_outbox(self) -> list:
+        self._require_owner()
         results = []
         for item in self.store.pending_outbox():
             try:
@@ -336,6 +378,20 @@ class SafeBIMBridge:
     def _require_running(self) -> None:
         if not self.running:
             raise RuntimeError('bridge is stopped')
+
+    def _require_owner(self) -> None:
+        if self.lease_state == 'LEASE_LOST':
+            raise LeaseLost('LEASE_LOST')
+        self._require_running()
+        if not self.instance_lock.held():
+            self._mark_lease_lost()
+            raise LeaseLost('LEASE_LOST')
+
+    def _mark_lease_lost(self) -> None:
+        self.lease_state = 'LEASE_LOST'
+        self.running = False
+        self.connections.set('BRIDGE', 'ERROR', 'LEASE_LOST')
+        self._log('LEASE_LOST', {})
 
     def _log(self, event: str, fields: dict) -> None:
         safe = {key: value for key, value in fields.items() if 'token' not in key.lower() and 'password' not in key.lower()}
