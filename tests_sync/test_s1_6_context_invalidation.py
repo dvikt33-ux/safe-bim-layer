@@ -183,7 +183,7 @@ class DurableInvalidationTests(unittest.TestCase):
             self.assertEqual(restarted.context.context_admission('r2'), 'CURRENT')
             self.assertEqual(restarted.context.context_admission('r1'), 'STALE_CONTEXT')
             self.assertEqual(MUTEX_VERIFICATION, 'OFFLINE_CONTRACT_VERIFIED')
-            self.assertEqual(GITHUB_BACKEND_STATUS, 'NOT_YET_LIVE_VERIFIED')
+            self.assertEqual(GITHUB_BACKEND_STATUS, 'IMPLEMENTED_NOT_LIVE_VERIFIED')
 
     def test_invalidation_crash_does_not_split_state_and_revision(self):
         clock = MutableClock()

@@ -15,9 +15,9 @@ from sync_bridge.ai_broker import AIBroker, ProviderError
 from sync_bridge.connections import ConnectionBoard
 from sync_bridge.context import ContextReady, ContextService
 from sync_bridge.git_fallback import narrow_fetch
-from sync_bridge.identity import canonical_hash
+from sync_bridge.identity import canonical_hash, canonical_json
 from sync_bridge.instance_lock import OWNERSHIP_GATE, SQLITE_LEASE_ROLE, SingleInstanceLock
-from sync_bridge.mailbox import AckLost, ETAG_POLICY, NeedsAuth, OfflineError, RateLimited
+from sync_bridge.mailbox import AckLost, ETAG_POLICY, NeedsAuth, OfflineError, RateLimited, RemoteError
 from sync_bridge.pipe_win32 import MAX_PIPE_INSTANCES, MULTIPLEX_MODEL, PipeApplicationGate
 from sync_bridge.polling import PollScheduler
 from sync_bridge.protocol import ProtocolError, decode_frame, envelope, parse_envelope
@@ -51,9 +51,9 @@ class InjectedCrash(BaseException):
 
 def dead_letter_key(payload) -> str:
     try:
-        raw = json.dumps(payload, sort_keys=True, ensure_ascii=False, default=str)
-    except TypeError:
-        raw = str(payload)
+        raw = canonical_json(payload)
+    except (TypeError, ValueError, UnicodeError):
+        raw = 'non-json:' + type(payload).__module__ + '.' + type(payload).__qualname__
     return 'deadletter:' + hashlib.sha256(raw.encode('utf-8')).hexdigest()
 
 
@@ -192,6 +192,8 @@ class SafeBIMBridge:
 
     def accept_remote_message(self, payload: dict) -> dict:
         self._require_owner()
+        if isinstance(payload, dict) and payload.get('_remoteError'):
+            return self._quarantine(payload, str(payload['_remoteError']))
         if not isinstance(payload, dict) or not isinstance(payload.get('messageId'), str) or not payload.get('messageId').strip() or not isinstance(payload.get('body'), dict):
             return self._quarantine(payload)
         message_id = payload['messageId']
@@ -219,12 +221,13 @@ class SafeBIMBridge:
             self.fault_after_persist()
         return {'status': 'QUEUED', 'jobId': job_id, 'jobCreated': True}
 
-    def _quarantine(self, payload) -> dict:
-        key = dead_letter_key(payload)
+    def _quarantine(self, payload, reason: str = 'DEAD_LETTER') -> dict:
+        key = dead_letter_key({'reason': reason, 'payload': payload})
         body = {'raw': payload} if isinstance(payload, dict) else {'value': str(payload)}
-        self.store.put_message(key, 'dead-letter', _now(), body, 'DEAD_LETTER', 'inbox')
-        self._log('quarantine', {'messageId': key})
-        return {'status': 'DEAD_LETTER', 'jobCreated': False, 'messageId': key}
+        state = 'DEAD_LETTER' if reason == 'DEAD_LETTER' else 'QUARANTINED'
+        self.store.put_message(key, 'dead-letter', _now(), body, state, 'inbox')
+        self._log('quarantine', {'messageId': key, 'reason': reason})
+        return {'status': reason, 'jobCreated': False, 'messageId': key}
 
     def recover_corrupt(self, message_id: str) -> dict:
         stored = self.store.message(message_id)
@@ -288,6 +291,16 @@ class SafeBIMBridge:
             self.connections.set('BRIDGE', 'CONNECTED', 'local')
             polled['processed'] = 0
             return polled
+        if polled['status'] == 'RATE_LIMITED':
+            self.connections.set('REMOTE', 'DEGRADED', 'RATE_LIMITED')
+            self.connections.set('BRIDGE', 'CONNECTED', 'local')
+            polled['processed'] = 0
+            return polled
+        if polled['status'] == 'ERROR':
+            self.connections.set('REMOTE', 'ERROR', polled.get('code', 'ERROR'))
+            self.connections.set('BRIDGE', 'CONNECTED', 'local')
+            polled['processed'] = 0
+            return polled
         if polled['status'] == 'CHANGED':
             accepted = []
             for item in polled['messages']:
@@ -303,9 +316,10 @@ class SafeBIMBridge:
         else:
             polled['processed'] = 0
         published = self.flush_outbox()
+        polled['published'] = published
         if polled.get('etag'):
             self.store.set_meta('remote_etag', polled['etag'])
-        polled['published'] = published
+            self.mailbox.commit_etag(polled['etag'])
         return polled
 
     def flush_outbox(self) -> list:
@@ -329,10 +343,14 @@ class SafeBIMBridge:
                 self.needs_auth = isinstance(exc, NeedsAuth)
                 results.append({'messageId': item['message_id'], 'status': type(exc).__name__})
                 continue
+            except RemoteError as exc:
+                self.connections.set('REMOTE', 'ERROR', exc.code)
+                results.append({'messageId': item['message_id'], 'status': exc.code})
+                continue
             if published['status'] == 'MESSAGE_ID_CONFLICT':
                 results.append(published)
                 continue
-            if published['status'] in {'PUBLISHED', 'ALREADY_PUBLISHED'}:
+            if published['status'] in {'CREATED', 'PUBLISHED', 'ALREADY_PUBLISHED'}:
                 job_id = item['payload'].get('job_id')
                 stored = self.store.result(job_id) if job_id else None
                 sent_result = item['payload'].get('result')
@@ -394,5 +412,7 @@ class SafeBIMBridge:
         self._log('LEASE_LOST', {})
 
     def _log(self, event: str, fields: dict) -> None:
-        safe = {key: value for key, value in fields.items() if 'token' not in key.lower() and 'password' not in key.lower()}
+        blocked = ('token', 'password', 'authorization', 'cookie', 'secret')
+        safe = {key: value for key, value in fields.items()
+                if not any(word in key.lower() for word in blocked)}
         self.logs.append({'event': event, 'at': _now(), **safe})

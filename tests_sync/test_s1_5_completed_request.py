@@ -71,4 +71,4 @@ class CompletedRequestTests(unittest.TestCase):
             self.assertEqual(restarted.store.context_request('r1')['response']['sequence'], 1)
             self.assertEqual(restarted.apply_context_ready(higher), 'REQUEST_GENERATION_CONFLICT')
             self.assertEqual(MUTEX_VERIFICATION, 'OFFLINE_CONTRACT_VERIFIED')
-            self.assertEqual(GITHUB_BACKEND_STATUS, 'NOT_YET_LIVE_VERIFIED')
+            self.assertEqual(GITHUB_BACKEND_STATUS, 'IMPLEMENTED_NOT_LIVE_VERIFIED')

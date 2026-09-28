@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from sync_bridge.mailbox import NeedsAuth, OfflineError, RateLimited
+from sync_bridge.mailbox import NeedsAuth, OfflineError, RateLimited, RemoteError
 
 
 @dataclass
@@ -49,6 +49,11 @@ class PollScheduler:
         except NeedsAuth:
             self.last_error = 'needs-auth'
             return {'status': 'NEEDS_AUTH'}
+        except RemoteError as exc:
+            self.mode = 'IDLE'
+            self.last_error = exc.code
+            self._backoff(self.delay * 2)
+            return {'status': 'ERROR', 'code': exc.code, 'delay': self.delay}
         except OfflineError as exc:
             self.mode = 'OFFLINE'
             self.last_error = str(exc)

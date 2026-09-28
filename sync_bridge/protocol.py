@@ -67,7 +67,7 @@ def parse_envelope(data: dict) -> Envelope:
     if missing:
         raise ProtocolError('missing envelope fields: ' + ','.join(missing))
     version = data['protocolVersion']
-    if isinstance(version, bool) or not isinstance(version, int) or version != PROTOCOL_VERSION:
+    if type(version) is not int or version != PROTOCOL_VERSION:
         raise ProtocolError(f'protocol version {version!r} is not {PROTOCOL_VERSION}')
     for key in ('messageId', 'requestId', 'instanceId', 'kind'):
         if not isinstance(data[key], str) or not data[key].strip():
@@ -77,7 +77,7 @@ def parse_envelope(data: dict) -> Envelope:
     payload = data.get('payload', {})
     if not isinstance(payload, dict):
         raise ProtocolError('payload must be an object')
-    return Envelope(int(version), data['messageId'], data['requestId'],
+    return Envelope(version, data['messageId'], data['requestId'],
                     data['instanceId'], data['kind'], payload)
 
 

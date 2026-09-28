@@ -89,4 +89,4 @@ class ContextIdentityTests(unittest.TestCase):
             self.assertEqual(_row(restarted)['snapshot_id'], first['snapshotId'])
             self.assertEqual(_mark(restarted), '1')
             self.assertEqual(MUTEX_VERIFICATION, 'OFFLINE_CONTRACT_VERIFIED')
-            self.assertEqual(GITHUB_BACKEND_STATUS, 'NOT_YET_LIVE_VERIFIED')
+            self.assertEqual(GITHUB_BACKEND_STATUS, 'IMPLEMENTED_NOT_LIVE_VERIFIED')

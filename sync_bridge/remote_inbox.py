@@ -2,7 +2,7 @@
 
 DURABLE_REMOTE_INBOX_ROLE = TEST_STAND_IN_ONLY.
 Deduping here does not prove GitHub idempotency. GitHub backend status
-remains NOT_YET_LIVE_VERIFIED. Same idempotency key with a different
+remains a test-only component. Same idempotency key with a different
 canonical payload is a conflict.
 """
 from __future__ import annotations

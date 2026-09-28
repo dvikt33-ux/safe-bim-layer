@@ -116,7 +116,7 @@ class CaptureRevisionFenceTests(unittest.TestCase):
             self.assertEqual(service.store.context_request('r1')['state'], 'VALID')
             self.assertEqual(service.store.context_request('r1')['response'], before['response'])
             self.assertEqual(MUTEX_VERIFICATION, 'OFFLINE_CONTRACT_VERIFIED')
-            self.assertEqual(GITHUB_BACKEND_STATUS, 'NOT_YET_LIVE_VERIFIED')
+            self.assertEqual(GITHUB_BACKEND_STATUS, 'IMPLEMENTED_NOT_LIVE_VERIFIED')
 
     def test_revision_check_fault_does_not_publish_a_partial_snapshot(self):
         clock = MutableClock()
