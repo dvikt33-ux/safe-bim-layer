@@ -319,6 +319,7 @@ class MalformedAndContextTests(unittest.TestCase):
             service = SafeBIMBridge(store, GitHubMailbox(ScriptedHttp([])), owner=PeerIdentity('S-1-5-21-1', 'session-7'))
             service.start()
             service.store.put_context_request('ctx-4', 'house', 'selection', 'CAPTURING', 't')
+            service.store.set_meta('context_op_capture_revision:ctx-4', '0')
             self.assertEqual(service.apply_context_ready(ContextReady(1, 'ctx-4', 'snap-0004', 'house', 'hash-ok', 't', {}, 4)), 'CONTEXT_READY')
             restarted = reopen(service, ScriptedHttp([]))
             self.assertEqual(restarted.apply_context_ready(ContextReady(1, 'ctx-4', 'snap-0001', 'house', 'hash-ok', 't', {}, 1)), 'IGNORED_STALE')

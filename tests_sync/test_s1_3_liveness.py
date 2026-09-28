@@ -150,6 +150,7 @@ class ContextWatermarkTests(unittest.TestCase):
             self.assertEqual(service.apply_context_ready(blocked), 'REQUEST_GENERATION_CONFLICT')
             self.assertEqual(service.store.context_request('req-a')['snapshot_id'], first['snapshotId'])
             service.store.put_context_request('req-a2', 'P1', 'selection', 'CAPTURING', 't', instance_id='AC-A')
+            service.store.set_meta('context_op_capture_revision:req-a2', '0')
             accepted = ContextReady(1, 'req-a2', 'snap-a2', 'P1', 'hash-2', 't', {'source': 'mock'}, 2)
             self.assertEqual(service.apply_context_ready(accepted), 'CONTEXT_READY')
             stale = ContextReady(1, 'req-a2', 'snap-a1', 'P1', 'hash-1', 't', {'source': 'mock'}, 1)

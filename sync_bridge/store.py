@@ -323,24 +323,24 @@ class BridgeStore:
                              expected_capture_revision: int | None = None) -> str:
         """VALID snapshot, watermark, and generation identity commit together, or neither.
 
-        A capture may become current only if the stream revision is still the
-        revision recorded when that capture started. A mismatch writes nothing.
+        A capture may become current only if the stored capture-start revision
+        still matches the stream. A missing fence is not filled from the live
+        stream revision, and a mismatch writes nothing.
         """
+        del expected_capture_revision  # a caller cannot fill in a missing start fence
         encoded = json.dumps(response, ensure_ascii=False)
         self._db.execute('BEGIN IMMEDIATE')
         try:
             current = self._db.execute(
-                'SELECT request_id FROM context_requests WHERE request_id=?', (request_id,)).fetchone()
+                'SELECT request_id, state FROM context_requests WHERE request_id=?', (request_id,)).fetchone()
             if current is None:
                 raise KeyError(request_id)
-            current_revision = int(self._meta_in_tx('context_revision:' + stream_key) or 0)
             stored_expected = self._meta_in_tx(f'context_op_capture_revision:{request_id}')
-            if stored_expected is not None:
-                expected = int(stored_expected)
-            elif expected_capture_revision is not None:
-                expected = int(expected_capture_revision)
-            else:
-                expected = current_revision
+            if stored_expected is None:
+                self._db.execute('ROLLBACK')
+                return 'CAPTURE_REVISION_MISSING'
+            expected = int(stored_expected)
+            current_revision = int(self._meta_in_tx('context_revision:' + stream_key) or 0)
             if self.fault_before_context_commit:
                 self.fault_before_context_commit()
             if current_revision != expected:

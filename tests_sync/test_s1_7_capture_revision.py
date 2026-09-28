@@ -1,8 +1,17 @@
 """S1.7 capture revision fence. Offline only. No Archicad."""
+import os
+import sqlite3
+import subprocess
+import sys
+import tempfile
 import unittest
+from pathlib import Path
 
-from sync_bridge.bridge import InjectedCrash
+from sync_bridge.bridge import InjectedCrash, SafeBIMBridge
 from sync_bridge.context import ContextReady
+from sync_bridge.mailbox import GitHubMailbox
+from sync_bridge.security import PeerIdentity
+from sync_bridge.store import BridgeStore
 from sync_bridge.instance_lock import MUTEX_VERIFICATION
 from sync_bridge.mailbox import GITHUB_BACKEND_STATUS
 from tests_sync.test_s1_3_liveness import MutableClock, QuietHttp, opened
@@ -137,6 +146,125 @@ class CaptureRevisionFenceTests(unittest.TestCase):
             service.store.fault_before_context_commit = None
             self.assertEqual(service.apply_context_ready(_assigned_ready(service, 'r1')), 'CAPTURE_REVISION_CONFLICT')
             self.assertIsNone(service.store.context_request('r1')['snapshot_id'])
+
+
+class UpgradeFenceTests(unittest.TestCase):
+    def test_s1_6_capture_without_fence_cannot_become_current(self):
+        repo = Path(__file__).resolve().parents[1]
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            old = root / 's16'
+            old.mkdir()
+            archive = subprocess.run(
+                ['git', 'archive', 'b4f6bfe798e28f0dbebf44bfabb6a84ad28a9f05', 'sync_bridge'],
+                cwd=repo, check=True, capture_output=True)
+            subprocess.run(['tar', '-x'], input=archive.stdout, cwd=old, check=True)
+            db_path = root / 's16.sqlite3'
+            script = root / 'make_s16.py'
+            script.write_text(_S16_SCRIPT)
+            made = subprocess.run(
+                [sys.executable, str(script), str(db_path)],
+                cwd=old,
+                env={**os.environ, 'PYTHONPATH': str(old)},
+                capture_output=True, text=True)
+            self.assertEqual(made.returncode, 0, made.stderr + made.stdout)
+            raw = sqlite3.connect(db_path)
+            try:
+                state = raw.execute(
+                    "SELECT state, snapshot_id FROM context_requests WHERE request_id='r1'").fetchone()
+                op = raw.execute(
+                    "SELECT value FROM meta WHERE key='context_op_capture:r1'").fetchone()
+                fence = raw.execute(
+                    "SELECT value FROM meta WHERE key='context_op_capture_revision:r1'").fetchone()
+            finally:
+                raw.close()
+            self.assertEqual(state[0], 'CAPTURING')
+            self.assertIsNone(state[1])
+            self.assertTrue(op and op[0])
+            self.assertIsNone(fence)
+            service = SafeBIMBridge(
+                BridgeStore(db_path), GitHubMailbox(QuietHttp()),
+                owner=PeerIdentity('S-1-5-21-1', 'session-7'),
+                clock=MutableClock(), instance_id='bridge-s17')
+            service.start()
+            try:
+                self.assertEqual(service.context.mark_changed(instance_id='AC-A'), 'CONTEXT_CHANGED')
+                self.assertEqual(service.store.meta('context_revision:instance:AC-A'), '1')
+                resumed = service.context_request(_request('r1'))
+                self.assertEqual(resumed['kind'], 'CAPTURE_REVISION_MISSING')
+                self.assertNotEqual(resumed['kind'], 'CONTEXT_READY')
+                self.assertNotEqual(service.context.context_admission('r1'), 'CURRENT')
+                self.assertEqual(service.store.context_request('r1')['state'], 'CAPTURING')
+                self.assertIsNone(service.store.context_request('r1')['snapshot_id'])
+                self.assertIsNone(service.store.meta('context_sequence:instance:AC-A'))
+                self.assertIsNone(service.store.meta('context_identity:instance:AC-A:1'))
+                self.assertIsNone(service.store.meta('context_capture_revision:r1'))
+                self.assertIsNone(service.store.meta('context_op_capture_revision:r1'))
+                sequence, snapshot_id = service.store.meta('context_op_capture:r1').split(':', 1)
+                rejected = service.apply_context_ready(ContextReady(
+                    1, 'r1', snapshot_id, 'P1', 'mock-P1-1', 't', {'source': 'mock'}, int(sequence)))
+                self.assertEqual(rejected, 'CAPTURE_REVISION_MISSING')
+                self.assertIsNone(service.store.context_request('r1')['snapshot_id'])
+                again = service.context_request(_request('r1'))
+                self.assertEqual(again['kind'], 'CAPTURE_REVISION_MISSING')
+                second = service.context_request(_request('r2'))
+                self.assertEqual(second['kind'], 'CONTEXT_READY')
+                self.assertEqual(service.context.context_admission('r2'), 'CURRENT')
+                self.assertEqual(service.store.meta('context_capture_revision:r2'), '1')
+                self.assertEqual(service.store.meta('context_revision:instance:AC-A'), '1')
+                self.assertNotEqual(service.context.context_admission('r1'), 'CURRENT')
+                self.assertEqual(service.store.context_request('r1')['state'], 'CAPTURING')
+            finally:
+                service.stop()
+                service.store.close()
+
+
+_S16_SCRIPT = r'''
+import sys
+from sync_bridge.bridge import InjectedCrash, SafeBIMBridge
+from sync_bridge.mailbox import GitHubMailbox
+from sync_bridge.security import PeerIdentity
+from sync_bridge.store import BridgeStore
+
+class Http:
+    def request(self, *args, **kwargs):
+        raise AssertionError('s1.6 fixture must not call http')
+
+class Clock:
+    def __call__(self):
+        return '2026-09-28T00:00:00+00:00'
+
+service = SafeBIMBridge(
+    BridgeStore(sys.argv[1]), GitHubMailbox(Http()),
+    owner=PeerIdentity('S-1-5-21-1', 'session-7'),
+    clock=Clock(), instance_id='bridge-s16')
+service.start()
+
+def boom():
+    raise InjectedCrash('assigned')
+
+service.context.fault_after_capture_assigned = boom
+try:
+    service.context_request({
+        'requestId': 'r1',
+        'logicalProjectId': 'P1',
+        'requestedScope': 'selection',
+        'instanceId': 'AC-A',
+    })
+except InjectedCrash:
+    pass
+else:
+    raise SystemExit('s1.6 capture did not stop after assignment')
+row = service.store.context_request('r1')
+if row['state'] != 'CAPTURING' or row['snapshot_id'] is not None:
+    raise SystemExit('s1.6 row is not an unfinished capture')
+if not service.store.meta('context_op_capture:r1'):
+    raise SystemExit('s1.6 did not assign a capture operation')
+if service.store.meta('context_op_capture_revision:r1') is not None:
+    raise SystemExit('s1.6 wrote a capture-start revision')
+service.stop()
+service.store.close()
+'''
 
 
 class _Opened:
