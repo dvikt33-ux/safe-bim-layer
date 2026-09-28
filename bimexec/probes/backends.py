@@ -290,6 +290,7 @@ TAPIR_READ_COMMANDS = [
     "GetProjectInfo",
     "GetStories",
     "GetAllElements",
+    "GetSelectedElements",
     "GetElementsByType",
     "GetDetailsOfElements",
     "GetPropertyValuesOfElements",
