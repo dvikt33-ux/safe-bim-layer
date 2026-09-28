@@ -215,7 +215,7 @@ Commands present at 1.5.9 but absent at b1dc828: (none)
 | `TeamworkSend` | 0.1.0 | Performs a send operation on the currently opened Teamwork project. |
 | `TeamworkReceive` | 0.1.0 | Performs a receive operation on the currently opened Teamwork project. |
 | `ReserveElements` | 1.1.4 | Reserves elements in Teamwork mode. |
-| `ReleaseElements` | 1.1.4 | Releases the given elements in Teamwork mode. |
+| `ReleaseElements` | 1.1.4 | Releases elements in Teamwork mode. |
 
 ## Navigator Commands (28)
 | Command | Schema version | Description (truncated) |
@@ -259,9 +259,9 @@ Commands present at 1.5.9 but absent at b1dc828: (none)
 | `GetCommentsFromIssue` | 1.0.6 | Retrieves comments information from the specified issue. |
 | `AttachElementsToIssue` | 1.0.6 | Attaches elements to the specified issue. |
 | `DetachElementsFromIssue` | 1.0.6 | Detaches elements from the specified issue. |
-| `GetElementsAttachedToIssue` | 1.0.6 | Retrieves attached elements to the specified issue, filtered by attachment type. |
+| `GetElementsAttachedToIssue` | 1.0.6 | Retrieves attached elements of the specified issue, filtered by attachment type. |
 | `ExportIssuesToBCF` | 1.0.6 | Exports specified issues to a BCF file. |
-| `ImportIssuesFromBCF` | 1.0.6 | Imports issues from a BCF file. |
+| `ImportIssuesFromBCF` | 1.0.6 | Imports issues from the specified BCF file. |
 
 ## Revision Management Commands (5)
 | Command | Schema version | Description (truncated) |
@@ -296,8 +296,8 @@ Commands present at 1.5.9 but absent at b1dc828: (none)
 | `CreateKeynoteItems` | 1.5.6 | Creates keynote items in the given parent folders (or in the root folder). Available from Archicad 28. |
 | `ModifyKeynoteFolders` | 1.5.6 | Modifies the key, title or reference of the given keynote folders. Available from Archicad 28. |
 | `ModifyKeynoteItems` | 1.5.6 | Modifies the key, title, description or reference of the given keynote items. Available from Archicad 28. |
-| `DeleteKeynoteFolders` | 1.5.6 | Deletes keynote folders including their content. Available from Archicad 28. |
-| `DeleteKeynoteItems` | 1.5.6 | Deletes keynote items. Available from Archicad 28. |
+| `DeleteKeynoteFolders` | 1.5.6 | Deletes the given keynote folders including their content. Available from Archicad 28. |
+| `DeleteKeynoteItems` | 1.5.6 | Deletes the given keynote items. Available from Archicad 28. |
 | `CreateKeynoteLabels` | 1.5.6 | Creates Label elements that reference the given keynote items via autotext. Available from Archicad 28. |
 
 ## MEP Commands (9)
