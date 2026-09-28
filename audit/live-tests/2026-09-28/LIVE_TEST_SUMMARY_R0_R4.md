@@ -203,11 +203,48 @@ Evidence-backed Safe BIM rule:
 
 W2 did not call `Modify*`, `Delete*`, or `SaveProject`.
 
+## W3 — Composite Wall thickness semantics
+
+Result: `PASS_COMPOSITE_DEFINES_PHYSICAL_THICKNESS`.
+
+Tested Composite GUID:
+`35A9ED6F-2F29-4400-B7DE-9C0DEA93A499`
+
+Known skin-sum thickness from R2: `0.287 m`.
+
+Three isolated `CreateWalls` variants used the same `structureType=Composite` and the same exact `compositeId`, while intentionally varying the input `thickness`:
+
+### A — `thickness=0.287`
+- observed `structureType`: `Composite`
+- observed `compositeId`: exact match
+- observed `begThickness`: 0.287 m
+- observed `endThickness`: 0.287 m
+
+### B — `thickness=0.500`
+- observed `structureType`: `Composite`
+- observed `compositeId`: exact match
+- observed `begThickness`: 0.287 m
+- observed `endThickness`: 0.287 m
+
+### C — `thickness=0.100`
+- observed `structureType`: `Composite`
+- observed `compositeId`: exact match
+- observed `begThickness`: 0.287 m
+- observed `endThickness`: 0.287 m
+
+Therefore, in this live Archicad 29 + Tapir 1.5.9 test, the selected Composite determined the physical wall thickness. Conflicting `thickness` inputs did not alter the physical 0.287 m readback thickness.
+
+Evidence-backed Safe BIM rule:
+
+> For `structureType=Composite`, Safe BIM must treat `compositeId` as the source of truth for physical wall thickness. Any user/requested `thickness` must be interpreted only as a validation constraint against the Composite skin-sum; a mismatch should fail closed rather than attempting to force a different physical thickness.
+
+W3 did not call `Modify*`, `Delete*`, or `SaveProject`.
+
 ## Current evidence-backed capability map
 
 | Element / capability | Create | Exact-type presence | Detailed readback | Notes |
 |---|---:|---:|---:|---|
-| Wall | yes | yes | yes | Basic/Composite/polygonal/slanted specimens observed |
+| Wall | yes | yes | yes | Basic/Composite/polygonal/slanted specimens observed; Composite physical thickness follows `compositeId`, not conflicting input `thickness` |
 | Window | yes | yes | yes | W1/R4 passed |
 | Door | yes | yes | yes | W1/R4 passed |
 | Opening | yes | yes | no | `GetDetailsOfElements`: not yet supported |
@@ -242,3 +279,4 @@ W2 did not call `Modify*`, `Delete*`, or `SaveProject`.
 - Unsupported detail types must be treated explicitly as unsupported rather than silently accepted.
 - MultiPlane roof readback is insufficient for reconstructing per-edge gable semantics in stock Tapir 1.5.9.
 - For a rectangular Basic Beam, Safe BIM must not rely on `width` / `height` alone. It must explicitly select a trusted Building Material to force Basic structure, and should explicitly unlink width/height when asymmetric dimensions are required.
+- For a Composite Wall, Safe BIM must use the exact trusted `compositeId` as the physical-thickness source of truth. Any requested `thickness` should be validated against the Composite skin sum and a mismatch should stop the operation.
