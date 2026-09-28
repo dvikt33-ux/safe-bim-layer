@@ -63,8 +63,17 @@ class LocalOpenAICompatibleProvider:
         self.cancelled = True
         self.fallback_status = 'CANCELLED'
 
+    def reset(self) -> str:
+        """Clear a cancel so this same instance can start again."""
+        self.cancelled = False
+        self.started = False
+        self.load_state = 'UNLOADED'
+        self.fallback_status = 'IDLE'
+        return self.fallback_status
+
     def unload(self) -> str:
         self.load_state = 'UNLOADED'
         self.started = False
+        self.cancelled = False
         self.fallback_status = 'UNLOADED'
         return self.load_state

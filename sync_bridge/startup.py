@@ -25,11 +25,10 @@ def status_board(*, local_ready: bool, auth_ok: bool, ai: str, archicad_connecte
 
 
 def simulate_startup(*, auth_ok: bool, pipe_ok: bool = True, sqlite_ok: bool = True,
-                     cloud_ok: bool = True, local_ok: bool = False, archicad_ok: bool | None = None) -> dict:
-    if archicad_ok is None:
-        archicad_ok = pipe_ok
+                     cloud_ok: bool = True, local_ok: bool = False, archicad_ok: bool = False) -> dict:
+    """Local bridge readiness does not require a connected Archicad client."""
     steps = []
-    steps.append('archicad-started')
+    steps.append('archicad-started' if archicad_ok else 'archicad-not-required')
     steps.append('ui-loaded')
     steps.append('bridge-started')
     if not pipe_ok:

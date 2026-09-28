@@ -1,15 +1,20 @@
-"""Safe BIM shell state. No Tapir details in the normal view."""
+"""Safe BIM shell state. No Tapir details in the normal view.
+
+The lease field is the source of truth. The banner is presentation only.
+"""
 from __future__ import annotations
 
 from sync_bridge.connections import ConnectionBoard
 from sync_bridge.context import UI_REFRESH, UI_STALE
 
+UI_LEASE_STATES = ('NONE', 'CAPTURING', 'READY', 'VALID', 'STALE', 'CANCELLED')
+
 
 class SafeBIMUI:
     def __init__(self):
-        self.project = 'Test_House'
-        self.story = 1
-        self.selection = '6 стен'
+        self.project = None
+        self.story = None
+        self.selection = None
         self.safe = True
         self.command_open = False
         self.ai_open = False
@@ -21,6 +26,9 @@ class SafeBIMUI:
         self.show_technical = False
         self.connections = ConnectionBoard()
         self.context_banner = ''
+        self.context_lease_state = 'NONE'
+        self.last_proposal = None
+        self.refresh_label = ''
         self.board = None
 
     def click(self, panel: str) -> None:
@@ -45,10 +53,11 @@ class SafeBIMUI:
 
     def set_offline_ai(self) -> None:
         self.ai_route = 'offline'
-        self.connections.mark_internet_offline()
+        self.connections.set('AI', 'OFFLINE', 'нет доступного ИИ')
 
     def set_local_ai(self) -> None:
         self.ai_route = 'local'
+        self.connections.set('AI', 'CONNECTED', 'локальная')
 
     def set_online(self) -> None:
         self.ai_route = 'online'
@@ -60,15 +69,17 @@ class SafeBIMUI:
         self.show_technical = False
 
     def render(self) -> str:
-        ai = {'online': 'ИИ: ● Онлайн', 'offline': 'ИИ: ● Офлайн', 'local': 'ИИ: ● Локальная'}[self.ai_route]
+        ai = {'online': 'ИИ: ● Онлайн', 'offline': 'ИИ: ○ Офлайн', 'local': 'ИИ: ● Локальная'}[self.ai_route]
         lines = [
             'SAFE BIM                    ● SAFE' if self.safe else 'SAFE BIM                    ● CHECK',
-            f'Проект: {self.project}',
-            f'Этаж: {self.story}',
-            f'Выбрано: {self.selection}',
-            ai,
+            f'Проект: {_shown(self.project)}',
+            f'Этаж: {_shown(self.story)}',
+            f'Выбрано: {_shown(self.selection)}',
+            f"Archicad: {_dot(self.connections.get('ARCHICAD')['status'])}",
             f"Bridge: {_dot(self.connections.get('BRIDGE')['status'])}",
             f"GitHub: {_dot(self.connections.get('REMOTE')['status'])}",
+            f"AI: {_dot(self.connections.get('AI')['status'])}",
+            ai,
         ]
         if self.context_banner:
             lines.append(self.context_banner)
@@ -88,11 +99,20 @@ class SafeBIMUI:
         self.local_ready = board.get('LOCAL') == 'LOCAL_READY'
         self.needs_auth = board.get('REMOTE') == 'REMOTE_NEEDS_AUTH'
 
-    def apply_context_lease(self, lease: str, banner: str) -> None:
+    def apply_context_lease(self, lease: str, banner: str = '') -> None:
+        if lease not in UI_LEASE_STATES:
+            raise ValueError(lease)
+        self.context_lease_state = lease
         self.context_banner = banner
-        if lease == 'STALE':
+        self.refresh_label = UI_REFRESH if lease == 'STALE' else ''
+        if lease == 'STALE' and not banner:
             self.context_banner = UI_STALE
-        self.refresh_label = UI_REFRESH
+
+
+def _shown(value) -> str:
+    if value is None or value == '':
+        return '—'
+    return str(value)
 
 
 def _dot(status: str) -> str:
