@@ -1,4 +1,4 @@
-# Live Safe BIM test summary — R0 to W7
+# Live Safe BIM test summary — R0 to W8
 
 Live validation target:
 - Archicad 29
@@ -58,9 +58,18 @@ The wedge was then modified by replacing its complete body. Its GUID stayed unch
 
 Safe BIM rule: arbitrary Morph geometry can be round-tripped through the stock Tapir `body` representation (`vertices` + `polygons`) for Create / Read / Modify. This is suitable for controlled custom geometry and later solid-element operators.
 
+### W8 — roof trim + Morph solid subtraction
+PARTIAL PASS.
+
+Solid-element subtraction passed. A wall was targeted by a wedge Morph operator using `Subtraction`; `GetSolidElementLinks` returned the exact target/operator link. After replacing the Morph body via `ModifyMorphs`, the Morph geometry changed as requested and the same `Subtraction` link remained present. This proves the link is associative to the operator element rather than a one-shot destructive edit.
+
+Roof trim was not confirmed in the first variant. `TrimElements` was called with one wall and one single-plane Roof in the shared `elements` list, but `GetElementTrims` on the wall did not report the Roof GUID. This does not yet prove Roof trim is unsupported: in this invocation mode Archicad uses the Roof/Shell element's own trim settings. Stock Tapir also supports an explicit `trimmingElement` plus `trimType`; W8B will test that mode against the already-created wall and Roof and inspect the raw execution result.
+
+Safe BIM rule so far: Morph-based SEO `Subtraction` can be treated as a persistent associative relation when target/operator GUIDs are preserved. Roof/Shell trim semantics remain unresolved until W8B.
+
 ## Next live tests
 
-- W8: wall trimming by Roof/Shell and arbitrary Morph subtraction against a wall; verify trim/SEO links and operator edits.
+- W8B: explicit Roof trimming element + `KeepInside`; inspect raw execution result and `GetElementTrims`.
 - W9: solid element operations across target/operator types, including link persistence and removal.
 - W10: element reference/anchor changes (wall reference line, slab reference plane, beam/column anchors).
 - W11: associative dimensions attached to walls; modify wall geometry and verify dimension association and measured value update.
