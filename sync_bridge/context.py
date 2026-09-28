@@ -1,7 +1,15 @@
-"""Mock project-context protocol and lease. No new Archicad reads."""
+"""Mock project-context protocol and lease. No new Archicad reads.
+
+A stream generation is immutable. ``capturedAt`` is part of that identity:
+an exact replay must carry the same timestamp, and a different timestamp is
+a conflict rather than a silent rewrite.
+"""
 from __future__ import annotations
 
 from dataclasses import dataclass
+
+from sync_bridge import PROTOCOL_VERSION
+from sync_bridge.identity import canonical_hash
 
 LEASE_STATES = ('NONE', 'CAPTURING', 'READY', 'VALID', 'STALE', 'CANCELLED')
 UI_CAPTURING = 'ИИ: считываю проект…'
@@ -72,8 +80,9 @@ class ContextService:
         return self._publish(ready, instance_id)
 
     def apply_ready(self, ready: ContextReady) -> str:
-        if not isinstance(ready.root_hash, str) or not ready.root_hash.strip():
-            return 'CONTEXT_ERROR'
+        invalid = _ready_error(ready)
+        if invalid:
+            return invalid
         stored = self.store.context_request(ready.request_id)
         if stored is None:
             return 'CONTEXT_ERROR'
@@ -87,13 +96,17 @@ class ContextService:
         if ready.sequence < known:
             return 'IGNORED_STALE'
         stream = _stream_key(stored)
-        response = {
-            'kind': 'CONTEXT_READY', 'requestId': ready.request_id, 'snapshotId': ready.snapshot_id,
-            'logicalProjectId': ready.logical_project_id, 'rootHash': ready.root_hash,
-            'capturedAt': ready.captured_at, 'payload': ready.payload, 'sequence': ready.sequence,
-        }
+        incoming = generation_hash(ready)
+        recorded = self._recorded_hash(stream, ready.sequence, stored)
+        same_request_generation = _response_sequence(stored) == ready.sequence
+        if ready.sequence == known or same_request_generation:
+            if recorded == incoming:
+                return 'IDEMPOTENT'
+            if recorded is not None or ready.sequence == known:
+                return 'CONTEXT_SEQUENCE_CONFLICT'
+        response = _ready_response(ready)
         self.store.commit_context_ready(
-            ready.request_id, ready.snapshot_id, response, stream, ready.sequence)
+            ready.request_id, ready.snapshot_id, response, stream, ready.sequence, incoming)
         self._remember(stored.get('instance_id'), ready)
         self.lease = 'VALID'
         self.ui_banner = f'Контекст #{ready.sequence}'
@@ -124,6 +137,18 @@ class ContextService:
             return max(known, self.current.sequence)
         return known
 
+    def _recorded_hash(self, stream: str, sequence: int, stored: dict) -> str | None:
+        saved = self.store.meta(f'context_identity:{stream}:{sequence}')
+        if saved:
+            return saved
+        response = stored.get('response') if stored else None
+        if isinstance(response, dict) and response.get('sequence') == sequence:
+            return canonical_hash(_identity_from_response(response))
+        if (self.current is not None and self.current.sequence == sequence
+                and _stream_key({'instance_id': stored.get('instance_id'), 'project_id': stored['project_id']}) == stream):
+            return generation_hash(self.current)
+        return None
+
     def _resume_capturing(self, existing: dict) -> dict:
         """Continue the one stored operation. A second capture is not started."""
         self.lease = 'CAPTURING'
@@ -144,20 +169,10 @@ class ContextService:
         return self._publish(ready, existing.get('instance_id'))
 
     def _publish(self, ready: ContextReady, instance_id) -> dict:
-        response = {
-            'protocolVersion': 1,
-            'kind': 'CONTEXT_READY',
-            'requestId': ready.request_id,
-            'snapshotId': ready.snapshot_id,
-            'logicalProjectId': ready.logical_project_id,
-            'rootHash': ready.root_hash,
-            'capturedAt': ready.captured_at,
-            'payload': ready.payload,
-            'sequence': ready.sequence,
-        }
+        response = _ready_response(ready)
         stream = _stream_key({'instance_id': instance_id, 'project_id': ready.logical_project_id})
         self.store.commit_context_ready(
-            ready.request_id, ready.snapshot_id, response, stream, ready.sequence)
+            ready.request_id, ready.snapshot_id, response, stream, ready.sequence, generation_hash(ready))
         self._remember(instance_id, ready)
         self.lease = 'VALID'
         self.ui_banner = f'Контекст #{ready.sequence}'
@@ -207,6 +222,76 @@ class ContextService:
             1, request_id, snapshot_id, project_id,
             f'mock-{project_id}-{sequence}', self.clock(),
             self._payload(project_id, scope, instance_id), sequence)
+
+
+def generation_identity(ready: ContextReady) -> dict:
+    """Canonical generation. ``capturedAt`` is included and must not drift."""
+    return {
+        'protocolVersion': ready.protocol_version,
+        'requestId': ready.request_id,
+        'snapshotId': ready.snapshot_id,
+        'logicalProjectId': ready.logical_project_id,
+        'rootHash': ready.root_hash,
+        'payload': ready.payload,
+        'sequence': ready.sequence,
+        'capturedAt': ready.captured_at,
+    }
+
+
+def generation_hash(ready: ContextReady) -> str:
+    return canonical_hash(generation_identity(ready))
+
+
+def _ready_response(ready: ContextReady) -> dict:
+    body = generation_identity(ready)
+    body['kind'] = 'CONTEXT_READY'
+    return body
+
+
+def _identity_from_response(response: dict) -> dict:
+    return {
+        'protocolVersion': response.get('protocolVersion', PROTOCOL_VERSION),
+        'requestId': response.get('requestId'),
+        'snapshotId': response.get('snapshotId'),
+        'logicalProjectId': response.get('logicalProjectId'),
+        'rootHash': response.get('rootHash'),
+        'payload': response.get('payload'),
+        'sequence': response.get('sequence'),
+        'capturedAt': response.get('capturedAt'),
+    }
+
+
+def _response_sequence(stored: dict):
+    response = stored.get('response') if stored else None
+    if not isinstance(response, dict):
+        return None
+    sequence = response.get('sequence')
+    if isinstance(sequence, bool) or not isinstance(sequence, int):
+        return None
+    return sequence
+
+
+def _ready_error(ready) -> str | None:
+    if not isinstance(ready, ContextReady):
+        return 'CONTEXT_ERROR'
+    version = ready.protocol_version
+    if isinstance(version, bool) or not isinstance(version, int) or version != PROTOCOL_VERSION:
+        return 'PROTOCOL_ERROR'
+    if not isinstance(ready.request_id, str) or not ready.request_id.strip():
+        return 'CONTEXT_ERROR'
+    if not isinstance(ready.snapshot_id, str) or not ready.snapshot_id.strip():
+        return 'CONTEXT_ERROR'
+    if not isinstance(ready.logical_project_id, str) or not ready.logical_project_id.strip():
+        return 'CONTEXT_ERROR'
+    if not isinstance(ready.root_hash, str) or not ready.root_hash.strip():
+        return 'CONTEXT_ERROR'
+    if not isinstance(ready.captured_at, str) or not ready.captured_at.strip():
+        return 'CONTEXT_ERROR'
+    if not isinstance(ready.payload, dict):
+        return 'CONTEXT_ERROR'
+    if isinstance(ready.sequence, bool) or not isinstance(ready.sequence, int) or ready.sequence <= 0:
+        return 'CONTEXT_ERROR'
+    return None
 
 
 def _stream_key(stored: dict) -> str:

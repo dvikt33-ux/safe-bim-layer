@@ -304,8 +304,8 @@ class BridgeStore:
             raise
 
     def commit_context_ready(self, request_id: str, snapshot_id: str, response: dict,
-                             stream_key: str, sequence: int) -> None:
-        """VALID snapshot and the per-stream watermark commit together, or neither."""
+                             stream_key: str, sequence: int, identity_hash: str) -> None:
+        """VALID snapshot, watermark, and generation identity commit together, or neither."""
         encoded = json.dumps(response, ensure_ascii=False)
         self._db.execute('BEGIN IMMEDIATE')
         try:
@@ -319,6 +319,7 @@ class BridgeStore:
             if self.fault_before_context_commit:
                 self.fault_before_context_commit()
             self._set_meta_in_tx('context_sequence:' + stream_key, str(sequence))
+            self._set_meta_in_tx(f'context_identity:{stream_key}:{sequence}', identity_hash)
             self._db.execute('COMMIT')
         except BaseException:
             self._db.execute('ROLLBACK')
