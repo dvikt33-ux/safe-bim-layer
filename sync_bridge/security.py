@@ -1,4 +1,8 @@
-"""Per-user pipe admission. A foreign Windows session is not a peer."""
+"""Per-user pipe admission. A foreign Windows session is not a peer.
+
+Session isolation remains the policy. Several Archicad instances may share
+this user session; a different SID or session is still denied.
+"""
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -15,6 +19,9 @@ def sddl_for_user(user_sid: str) -> str:
     if not isinstance(user_sid, str) or not user_sid.startswith('S-1-'):
         raise ValueError('user SID required')
     return f'D:P(A;;GA;;;{user_sid})'
+
+
+SESSION_ISOLATION = True
 
 
 def admit_peer(owner: PeerIdentity, peer: PeerIdentity) -> bool:

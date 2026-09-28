@@ -14,6 +14,16 @@ class LocalOpenAICompatibleProvider:
         self.started = False
         self.cancelled = False
 
+    def begin_start(self) -> str:
+        if self.endpoint is None:
+            self.load_state = 'UNAVAILABLE'
+            self.fallback_status = 'UNAVAILABLE'
+            return self.load_state
+        self.load_state = 'STARTING'
+        self.fallback_status = 'STARTING'
+        self.started = False
+        return self.load_state
+
     def lazy_start(self) -> str:
         if self.endpoint is None:
             self.load_state = 'UNAVAILABLE'
@@ -27,6 +37,9 @@ class LocalOpenAICompatibleProvider:
         return self.load_state
 
     def health(self) -> dict:
+        if self.load_state == 'STARTING':
+            return {'status': 'STARTING', 'modelId': self.model_id, 'loadState': 'STARTING',
+                    'fallbackStatus': self.fallback_status}
         if self.load_state == 'UNLOADED':
             self.lazy_start()
         status = 'CONNECTED' if self.load_state == 'READY' else 'UNAVAILABLE'

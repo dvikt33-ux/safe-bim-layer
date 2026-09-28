@@ -21,6 +21,7 @@ class SafeBIMUI:
         self.show_technical = False
         self.connections = ConnectionBoard()
         self.context_banner = ''
+        self.board = None
 
     def click(self, panel: str) -> None:
         if panel == 'command':
@@ -75,7 +76,17 @@ class SafeBIMUI:
             lines.append(self.error)
         if self.show_technical:
             lines.append('TECHNICAL')
+        if self.board:
+            lines.append(f"LOCAL {self.board['LOCAL']}")
+            lines.append(f"REMOTE {self.board['REMOTE']}")
+            lines.append(f"AI {self.board['AI']}")
+            lines.append(f"ARCHICAD {self.board['ARCHICAD']}")
         return '\n'.join(lines)
+
+    def apply_board(self, board: dict) -> None:
+        self.board = dict(board)
+        self.local_ready = board.get('LOCAL') == 'LOCAL_READY'
+        self.needs_auth = board.get('REMOTE') == 'REMOTE_NEEDS_AUTH'
 
     def apply_context_lease(self, lease: str, banner: str) -> None:
         self.context_banner = banner

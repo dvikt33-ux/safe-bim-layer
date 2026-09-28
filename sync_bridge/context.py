@@ -26,7 +26,7 @@ class ContextService:
         self.store = store
         self.clock = clock
         self.lease = 'READY'
-        self.sequence = 0
+        self.sequence = int(self.store.meta('context_sequence') or 0)
         self.current: ContextReady | None = None
         self.ui_banner = ''
 
@@ -35,12 +35,18 @@ class ContextService:
         project_id = message['logicalProjectId']
         scope = message['requestedScope']
         existing = self.store.context_request(request_id)
-        if existing and existing.get('response'):
-            self.lease = existing['state'] if existing['state'] in LEASE_STATES else 'VALID'
-            return existing['response']
+        if existing:
+            if existing['state'] == 'CANCELLED':
+                self.lease = 'CANCELLED'
+                return {'kind': 'CONTEXT_ERROR', 'requestId': request_id, 'reason': 'cancelled'}
+            if existing.get('response'):
+                self.lease = existing['state'] if existing['state'] in LEASE_STATES else 'VALID'
+                return existing['response']
         self.lease = 'CAPTURING'
         self.ui_banner = UI_CAPTURING
-        self.store.put_context_request(request_id, project_id, scope, 'CAPTURING', message.get('requestedAt', self.clock()))
+        self.store.put_context_request(
+            request_id, project_id, scope, 'CAPTURING', message.get('requestedAt', self.clock()),
+            instance_id=message.get('instanceId'))
         ready = self._capture(request_id, project_id, scope)
         response = {
             'protocolVersion': 1,
@@ -59,16 +65,24 @@ class ContextService:
         return response
 
     def apply_ready(self, ready: ContextReady) -> str:
+        if not isinstance(ready.root_hash, str) or not ready.root_hash.strip():
+            return 'CONTEXT_ERROR'
         stored = self.store.context_request(ready.request_id)
         if stored is None:
             return 'CONTEXT_ERROR'
         if stored['state'] == 'CANCELLED':
+            self.lease = 'CANCELLED'
             return 'CONTEXT_ERROR'
         if stored['project_id'] != ready.logical_project_id:
             self.store.set_context_state(ready.request_id, 'ERROR')
             return 'CONTEXT_ERROR'
-        if self.current is not None and ready.sequence < self.current.sequence:
+        known = self.sequence
+        if self.current is not None:
+            known = max(known, self.current.sequence)
+        if ready.sequence < known:
             return 'IGNORED_STALE'
+        self.sequence = max(self.sequence, ready.sequence)
+        self.store.set_meta('context_sequence', str(self.sequence))
         self.current = ready
         self.lease = 'VALID'
         self.ui_banner = f'Контекст #{ready.sequence}'
@@ -96,6 +110,9 @@ class ContextService:
 
     def _capture(self, request_id: str, project_id: str, scope: str) -> ContextReady:
         self.sequence += 1
+        self.store.set_meta('context_sequence', str(self.sequence))
+        captures = int(self.store.meta('context_captures') or 0) + 1
+        self.store.set_meta('context_captures', str(captures))
         payload = {
             'source': 'mock',
             'logicalProjectId': project_id,

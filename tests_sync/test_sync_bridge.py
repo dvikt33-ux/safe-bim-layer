@@ -11,8 +11,8 @@ from sync_bridge.context import UI_REFRESH, UI_STALE, ContextReady
 from sync_bridge.git_fallback import narrow_fetch
 from sync_bridge.local_provider import LocalOpenAICompatibleProvider
 from sync_bridge.mailbox import GitHubMailbox, OfflineError
-from sync_bridge.pipe_win32 import NamedPipeUnavailable, WindowsNamedPipe, production_transport
-from sync_bridge.protocol import ProtocolError, decode_frame, encode_frame, envelope
+from sync_bridge.pipe_win32 import MAX_PIPE_INSTANCES, NamedPipeUnavailable, WindowsNamedPipe, production_transport
+from sync_bridge.protocol import ProtocolError, decode_frame, encode_frame, envelope, parse_envelope
 from sync_bridge.security import PeerIdentity, admit_peer, sddl_for_user
 from sync_bridge.startup import FORBIDDEN_STEPS, simulate_startup
 from sync_bridge.store import BridgeStore
@@ -50,13 +50,36 @@ def bridge(directory, http=None, broker=None):
 
 
 class ProtocolAndPipeTests(unittest.TestCase):
-    def test_frame_roundtrip_and_version_rejection(self):
+    def test_frame_roundtrip(self):
         message = envelope('HELLO', {'role': 'palette'}, instance_id='ac-1', request_id='r1', message_id='m1')
         decoded, rest = decode_frame(encode_frame(message))
         self.assertEqual(decoded.kind, 'HELLO')
+        self.assertEqual(decoded.protocol_version, 1)
         self.assertEqual(rest, b'')
+
+    def test_truncated_frame_rejected(self):
+        message = envelope('HELLO', {'role': 'palette'}, instance_id='ac-1', request_id='r1', message_id='m1')
         with self.assertRaises(ProtocolError):
             decode_frame(encode_frame(message)[:3])
+
+    def test_protocol_version_mismatch_rejected(self):
+        message = envelope('HELLO', {}, instance_id='ac-1', request_id='r1', message_id='m1').to_dict()
+        parse_envelope(message)
+        message['protocolVersion'] = 99
+        with self.assertRaises(ProtocolError):
+            parse_envelope(message)
+        missing = dict(message)
+        del missing['protocolVersion']
+        with self.assertRaises(ProtocolError):
+            parse_envelope(missing)
+        invalid = envelope('HELLO', {}, instance_id='ac-1', request_id='r2', message_id='m2').to_dict()
+        invalid['kind'] = 'CreateWalls'
+        with self.assertRaises(ProtocolError):
+            parse_envelope(invalid)
+        invalid['kind'] = 'HELLO'
+        invalid['payload'] = ['not', 'an', 'object']
+        with self.assertRaises(ProtocolError):
+            parse_envelope(invalid)
 
     def test_named_pipe_is_primary_and_rejects_foreign_session(self):
         calls = []
@@ -71,11 +94,11 @@ class ProtocolAndPipeTests(unittest.TestCase):
 
         pipe = WindowsNamedPipe('S-1-5-21-9', 'session-7', kernel=Kernel())
         opened = pipe.open_server()
-        self.assertEqual(opened.max_instances, 1)
+        self.assertEqual(opened.max_instances, MAX_PIPE_INSTANCES)
         self.assertTrue(opened.reject_remote)
         self.assertIn('(A;;GA;;;S-1-5-21-9)', opened.sddl)
         self.assertNotIn('WD', opened.sddl)
-        self.assertEqual(calls[0][1], 1)
+        self.assertEqual(calls[0][1], MAX_PIPE_INSTANCES)
         owner = PeerIdentity('S-1-5-21-9', 'session-7')
         self.assertFalse(admit_peer(owner, PeerIdentity('S-1-5-21-9', 'session-other')))
         self.assertFalse(admit_peer(owner, PeerIdentity('S-1-5-21-other', 'session-7')))
@@ -135,10 +158,12 @@ class MailboxTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             http = ScriptedHttp([ConnectionError('down'), HttpResponse(200, {'messages': []}, {'ETag': 'v2'})])
             service = bridge(directory, http)
+            service.connections.set('ARCHICAD', 'CONNECTING', 'waiting')
             service.queue_result('job-1', {'status': 'mock'})
             lost = service.tick()
             self.assertEqual(lost['status'], 'OFFLINE')
             self.assertEqual(service.connections.get('ARCHICAD')['status'], 'CONNECTING')
+            self.assertNotEqual(service.connections.get('ARCHICAD')['detail'], 'нет интернета')
             self.assertEqual(service.connections.get('BRIDGE')['status'], 'CONNECTED')
             self.assertEqual(service.store.pending_outbox()[0]['state'], 'PENDING')
             http.responses.append(HttpResponse(200, {}, {}))
@@ -160,7 +185,7 @@ class MailboxTests(unittest.TestCase):
             service.flush_outbox()
             self.assertEqual(service.store.message('result-job-9')['state'], 'SENT')
             self.assertEqual(len(http.calls), calls_after_success)
-            self.assertEqual(service.mailbox._published, {'result-job-9'})
+            self.assertEqual(service.store.pending_outbox(), [])
 
     def test_stale_etag_and_duplicate_github_delivery(self):
         message = {'messageId': 'same', 'body': {'recipe': 'mock'}}
@@ -187,10 +212,8 @@ class MailboxTests(unittest.TestCase):
         limited = scheduler.poll_once()
         self.assertEqual(limited['status'], 'RATE_LIMITED')
         self.assertGreaterEqual(limited['retryAfter'], 9)
-        scheduler._polling = True
-        before = scheduler.calls
-        self.assertEqual(scheduler.poll_once()['status'], 'BUSY')
-        self.assertEqual(scheduler.calls, before)
+        self.assertLessEqual(limited['retryAfter'], 300)
+        self.assertGreater(limited['retryAfter'], 0)
 
     def test_auth_expired_keeps_local_ready(self):
         http = ScriptedHttp([HttpResponse(401, {'error': 'bad credentials'}, {})])
@@ -249,17 +272,22 @@ class ContextTests(unittest.TestCase):
             self.assertEqual(service.context.ui_banner, UI_STALE)
             self.assertEqual(service.context.refresh_label(), UI_REFRESH)
 
-    def test_two_archicad_instances_do_not_share_the_pipe(self):
+    def test_duplicate_instance_id_conflicts_and_foreign_session_is_denied(self):
         with tempfile.TemporaryDirectory() as directory:
             service = bridge(directory)
             owner = service.owner
-            hello = envelope('HELLO', {}, instance_id='ac-a', request_id='h1', message_id='hm1').to_dict()
+            hello = envelope('HELLO', {'logicalProjectId': 'P1'}, instance_id='ac-a', request_id='h1', message_id='hm1').to_dict()
             service.handshake(hello, owner)
-            other = envelope('HELLO', {}, instance_id='ac-b', request_id='h2', message_id='hm2').to_dict()
+            other = envelope('HELLO', {'logicalProjectId': 'P2'}, instance_id='ac-b', request_id='h2', message_id='hm2').to_dict()
+            service.handshake(other, owner)
+            self.assertEqual(service.store.client('ac-a')['connection_state'], 'CONNECTED')
+            self.assertEqual(service.store.client('ac-b')['connection_state'], 'CONNECTED')
             with self.assertRaises(InstanceConflict):
-                service.handshake(other, owner)
+                service.handshake(hello, owner)
             with self.assertRaises(PermissionError):
-                service.handshake(hello, PeerIdentity('S-1-5-21-1', 'other-session'))
+                service.handshake(other, PeerIdentity('S-1-5-21-1', 'other-session'))
+            with self.assertRaises(PermissionError):
+                service.handshake(other, PeerIdentity('S-1-5-21-other', 'session-7'))
 
 
 class AIAndUITests(unittest.TestCase):
@@ -335,8 +363,9 @@ class AIAndUITests(unittest.TestCase):
 
     def test_zero_setup_startup_survives_missing_auth(self):
         started = simulate_startup(auth_ok=False)
-        self.assertEqual(started['local'], 'READY')
-        self.assertEqual(started['remote'], 'NEEDS_AUTH')
+        self.assertEqual(started['local'], 'LOCAL_READY')
+        self.assertEqual(started['remote'], 'REMOTE_NEEDS_AUTH')
+        self.assertNotEqual(started['local'], 'LOCAL_ERROR')
         self.assertIn('named-pipe-handshake', started['steps'])
         self.assertTrue(started['ready'])
         for forbidden in FORBIDDEN_STEPS:

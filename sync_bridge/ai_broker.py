@@ -1,4 +1,9 @@
-"""Route a prompt to cloud or local AI. Never executes a BIM action."""
+"""Route a prompt to cloud or local AI. Never executes a BIM action.
+
+Cloud is preferred on every request. A timeout falls back to local for that
+request only; the next request tries cloud again when it is healthy. STARTING
+is not reported as OFFLINE.
+"""
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -62,12 +67,14 @@ class AIBroker:
             route = 'cloud'
         elif local.get('status') == 'CONNECTED':
             route = 'local'
+        elif local.get('status') == 'STARTING':
+            route = 'starting'
         else:
             route = 'unavailable'
         return {'route': route, 'cloud': cloud, 'local': local}
 
     def complete(self, prompt: str) -> Proposal:
-        if self.cloud is not None:
+        if self.cloud is not None and self.cloud.health().get('status') == 'CONNECTED':
             try:
                 proposal = self.cloud.complete(prompt)
             except (ProviderTimeout, ConnectionError, ProviderError):
@@ -75,12 +82,22 @@ class AIBroker:
             else:
                 self.last_route = 'cloud'
                 return proposal
-        if self.local is not None and self.local.health().get('status') == 'CONNECTED':
-            proposal = self.local.complete(prompt)
-            self.last_route = 'local'
-            return proposal
+        if self.local is not None:
+            local_status = self.local.health().get('status')
+            if local_status == 'STARTING':
+                self.last_route = 'starting'
+                raise ProviderError('локальный ИИ запускается')
+            if local_status == 'CONNECTED':
+                proposal = self.local.complete(prompt)
+                self.last_route = 'local'
+                return proposal
         self.last_route = 'unavailable'
         raise ProviderError('облачный и локальный ИИ недоступны')
+
+    def cancel(self) -> None:
+        if self.local is not None and hasattr(self.local, 'cancel'):
+            self.local.cancel()
+        self.last_route = 'cancelled'
 
 
 def _proposal_from_raw(raw: dict, provider: str) -> Proposal:

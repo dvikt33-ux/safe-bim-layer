@@ -1,4 +1,8 @@
-"""One conditional poll at a time, with backoff. Not a webhook client."""
+"""One conditional poll at a time, with bounded backoff. Not a webhook client.
+
+Delays are returned to the caller. This scheduler never sleeps, so tests can
+inject ``rng`` for jitter without waiting.
+"""
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -16,14 +20,19 @@ class PollConfig:
 
 
 class PollScheduler:
-    def __init__(self, mailbox, config: PollConfig | None = None):
+    def __init__(self, mailbox, config: PollConfig | None = None, rng=None):
         self.mailbox = mailbox
         self.config = config or PollConfig()
+        self.rng = rng
         self.mode = 'NORMAL'
         self.delay = self.config.normal_seconds
         self._polling = False
         self.calls = 0
         self.last_error = None
+
+    @property
+    def in_flight(self) -> bool:
+        return self._polling
 
     def poll_once(self):
         if self._polling:
@@ -34,26 +43,36 @@ class PollScheduler:
             head = self.mailbox.poll_head()
         except RateLimited as exc:
             self.mode = 'IDLE'
-            self.delay = min(self.config.backoff_max_seconds, max(self.delay, exc.retry_after))
             self.last_error = 'rate-limit'
+            self._backoff(max(self.delay, exc.retry_after))
             return {'status': 'RATE_LIMITED', 'retryAfter': self.delay}
         except NeedsAuth:
             self.last_error = 'needs-auth'
             return {'status': 'NEEDS_AUTH'}
         except OfflineError as exc:
             self.mode = 'OFFLINE'
-            self.delay = min(self.config.backoff_max_seconds, max(self.config.offline_seconds, self.delay * 2))
             self.last_error = str(exc)
+            self._backoff(self.delay * 2)
             return {'status': 'OFFLINE', 'delay': self.delay}
         finally:
             self._polling = False
         if head.not_modified:
             self._relax()
-            return {'status': 'NOT_MODIFIED', 'etag': head.etag, 'messages': []}
+            return {'status': 'NOT_MODIFIED', 'etag': head.etag, 'messages': [], 'processed': 0}
         self.mode = 'ACTIVE'
         self.delay = self.config.active_seconds
         self.last_error = None
-        return {'status': 'CHANGED', 'etag': head.etag, 'messages': list(head.messages)}
+        return {'status': 'CHANGED', 'etag': head.etag, 'messages': list(head.messages),
+                'processed': len(head.messages)}
+
+    def _backoff(self, proposed: float) -> None:
+        delay = min(self.config.backoff_max_seconds, max(self.config.offline_seconds, proposed))
+        if self.rng is not None:
+            factor = 0.8 + 0.2 * float(self.rng())
+            delay = min(self.config.backoff_max_seconds, max(self.config.offline_seconds, delay * factor))
+        if delay <= 0:
+            delay = self.config.offline_seconds
+        self.delay = delay
 
     def _relax(self):
         if self.mode == 'OFFLINE':
