@@ -1,0 +1,313 @@
+PS C:\Users\Admin> $p = "C:\Users\Admin\AppData\Local\Temp\safe-bim-r4-readback-audit\r4_readback_audit_result.json"
+PS C:\Users\Admin>
+PS C:\Users\Admin> $r = Get-Content $p -Raw -Encoding UTF8 | ConvertFrom-Json
+PS C:\Users\Admin>
+PS C:\Users\Admin>
+PS C:\Users\Admin> Write-Host "`n========================================"
+
+========================================
+PS C:\Users\Admin> Write-Host "ВСЕ РАСХОЖДЕНИЯ R4"
+ВСЕ РАСХОЖДЕНИЯ R4
+PS C:\Users\Admin> Write-Host "========================================"
+========================================
+PS C:\Users\Admin>
+PS C:\Users\Admin> foreach ($e in $r.elements) {
+>>
+>>     $diffs = @(
+>>         $e.comparisons |
+>>         Where-Object { $_.status -eq "DIFF" }
+>>     )
+>>
+>>     if ($diffs.Count -gt 0) {
+>>
+>>         Write-Host "`nЭлемент:" $e.label
+>>         Write-Host "Тип:"     $e.type
+>>         Write-Host "GUID:"    $e.guid
+>>
+>>         foreach ($d in $diffs) {
+>>
+>>             Write-Host "`nПоле:" $d.field
+>>
+>>             Write-Host "Запросили:"
+>>             Write-Host (
+>>                 $d.expected |
+>>                 ConvertTo-Json -Depth 10 -Compress
+>>             )
+>>
+>>             Write-Host "Получили:"
+>>             Write-Host (
+>>                 $d.actual |
+>>                 ConvertTo-Json -Depth 10 -Compress
+>>             )
+>>         }
+>>     }
+>> }
+
+Элемент: Балка
+Тип: Beam
+GUID: 76BE5E50-167A-4F08-9A2E-CD621346A032
+
+Поле: height
+Запросили:
+0.3
+Получили:
+0.1
+
+Поле: width
+Запросили:
+0.2
+Получили:
+0.1
+PS C:\Users\Admin>
+PS C:\Users\Admin>
+PS C:\Users\Admin> Write-Host "`n========================================"
+
+========================================
+PS C:\Users\Admin> Write-Host "ПОЛНЫЕ ДАННЫЕ БАЛКИ"
+ПОЛНЫЕ ДАННЫЕ БАЛКИ
+PS C:\Users\Admin> Write-Host "========================================"
+========================================
+PS C:\Users\Admin>
+PS C:\Users\Admin> $beam = $r.elements |
+>>     Where-Object { $_.type -eq "Beam" }
+PS C:\Users\Admin>
+PS C:\Users\Admin> $beam |
+>>     ConvertTo-Json -Depth 20
+{
+    "label":  "Балка",
+    "type":  "Beam",
+    "guid":  "76BE5E50-167A-4F08-9A2E-CD621346A032",
+    "present_by_type":  true,
+    "details_supported":  true,
+    "details_raw":  {
+                        "detailsOfElements":  [
+                                                 {
+                                                      "type":  "Beam",
+                                                      "floorIndex":  0,
+                                                      "layerIndex":  33,
+                                                      "drawIndex":  9,
+                                                      "id":  "БЛК - 018",
+                                                      "details":  {
+                                                                      "zCoordinate":  3,
+                                                                      "begCoordinate":  {
+                                                                                            "x":  218,
+                                                                                            "y":  200
+                                                                                       },
+                                                                      "endCoordinate":  {
+                                                                                            "x":  224,
+                                                                                            "y":  200
+                                                                                       },
+                                                                      "level":  3,
+                                                                      "offset":  0,
+                                                                      "slantAngle":  0,
+                                                                      "arcAngle":  0,
+                                                                      "verticalCurveHeight":  0,
+                                                                      "beamShape":  "Straight",
+                                                                      "isSlanted":  false,
+                                                                      "isFlipped":  false,
+                                                                      "profileAngle":  0,
+                                                                      "anchorPoint":  "Center",
+                                                                      "cutFillPen":  {
+                                                                                         "overridden":  false
+                                                                                    },
+                                                                      "cutFillBackgroundPen":  {
+                                                                                                   "overridden":  false
+                                                                                              },
+                                                                      "coverFill":  {
+                                                                                        "use":  true,
+                                                                                        "useFromSurface":  false,
+                                                                                        "orientationComesFrom3D":  false,
+                                                                                        "fillId":  {
+                                                                                                       "guid":  "1D87AE9A-3C74-4A1A-BE7C-56B7651F0F3C"
+                                                                                                  },
+                                                                                        "foregroundPen":  90,
+                                                                                        "backgroundPen":  -1,
+                                                                                        "transformationType":  "Global",
+                                                                                        "transformation":  {
+                                                                                                               "origin":  {
+                                                                                                                              "x":  0,
+                                                                                                                              "y":  0
+                                                                                                                         },
+                                                                                                               "xAxis":  {
+                                                                                                                             "x":  1,
+                                                                                                                             "y":  0
+                                                                                                                        },
+                                                                                                               "yAxis":  {
+                                                                                                                             "x":  0,
+                                                                                                                             "y":  1
+                                                                                                                        }
+                                                                                                          }
+                                                                                   },
+                                                                      "holes":  [
+
+                                                                               ],
+                                                                      "width":  0.1,
+                                                                      "height":  0.1,
+                                                                      "isWidthAndHeightLinked":  false,
+                                                                      "profileId":  {
+                                                                                        "guid":  "89AF8797-218A-49CC-AFD3-30DB1CF75C03"
+                                                                                   }
+                                                                 }
+                                                 }
+                                             ]
+                   },
+    "details":  {
+                    "zCoordinate":  3,
+                    "begCoordinate":  {
+                                          "x":  218,
+                                          "y":  200
+                                     },
+                    "endCoordinate":  {
+                                          "x":  224,
+                                          "y":  200
+                                     },
+                    "level":  3,
+                    "offset":  0,
+                    "slantAngle":  0,
+                    "arcAngle":  0,
+                    "verticalCurveHeight":  0,
+                    "beamShape":  "Straight",
+                    "isSlanted":  false,
+                    "isFlipped":  false,
+                    "profileAngle":  0,
+                    "anchorPoint":  "Center",
+                    "cutFillPen":  {
+                                       "overridden":  false
+                                  },
+                    "cutFillBackgroundPen":  {
+                                                 "overridden":  false
+                                            },
+                    "coverFill":  {
+                                      "use":  true,
+                                      "useFromSurface":  false,
+                                      "orientationComesFrom3D":  false,
+                                      "fillId":  {
+                                                     "guid":  "1D87AE9A-3C74-4A1A-BE7C-56B7651F0F3C"
+                                                },
+                                      "foregroundPen":  90,
+                                      "backgroundPen":  -1,
+                                      "transformationType":  "Global",
+                                      "transformation":  {
+                                                             "origin":  {
+                                                                            "x":  0,
+                                                                            "y":  0
+                                                                       },
+                                                             "xAxis":  {
+                                                                           "x":  1,
+                                                                           "y":  0
+                                                                      },
+                                                             "yAxis":  {
+                                                                           "x":  0,
+                                                                           "y":  1
+                                                                      }
+                                                        }
+                                 },
+                    "holes":  [
+
+                             ],
+                    "width":  0.1,
+                    "height":  0.1,
+                    "isWidthAndHeightLinked":  false,
+                    "profileId":  {
+                                      "guid":  "89AF8797-218A-49CC-AFD3-30DB1CF75C03"
+                                 }
+               },
+    "comparisons":  [
+                       {
+                            "field":  "begCoordinate",
+                            "expected":  {
+                                             "x":  218.0,
+                                             "y":  200.0
+                                        },
+                            "actual":  {
+                                           "x":  218,
+                                           "y":  200
+                                      },
+                            "status":  "PASS"
+                       },
+                       {
+                            "field":  "endCoordinate",
+                            "expected":  {
+                                             "x":  224.0,
+                                             "y":  200.0
+                                        },
+                            "actual":  {
+                                           "x":  224,
+                                           "y":  200
+                                      },
+                            "status":  "PASS"
+                       },
+                       {
+                            "field":  "zCoordinate",
+                            "expected":  3.0,
+                            "actual":  3,
+                            "status":  "PASS"
+                       },
+                       {
+                            "field":  "height",
+                            "expected":  0.3,
+                            "actual":  0.1,
+                            "status":  "DIFF"
+                       },
+                       {
+                            "field":  "width",
+                            "expected":  0.2,
+                            "actual":  0.1,
+                            "status":  "DIFF"
+                       }
+                   ]
+}
+PS C:\Users\Admin>
+PS C:\Users\Admin>
+PS C:\Users\Admin> Write-Host "`n========================================"
+
+========================================
+PS C:\Users\Admin> Write-Host "ЭЛЕМЕНТЫ БЕЗ АВТОСРАВНЕНИЯ"
+ЭЛЕМЕНТЫ БЕЗ АВТОСРАВНЕНИЯ
+PS C:\Users\Admin> Write-Host "========================================"
+========================================
+PS C:\Users\Admin>
+PS C:\Users\Admin> foreach ($type in @(
+>>     "Morph",
+>>     "PolyLine",
+>>     "Spline",
+>>     "Hatch"
+>> )) {
+>>
+>>     $e = $r.elements |
+>>         Where-Object { $_.type -eq $type }
+>>
+>>     if ($null -ne $e) {
+>>
+>>         Write-Host "`n---------- $type ----------"
+>>
+>>         Write-Host "GUID:" $e.guid
+>>
+>>         Write-Host "Данные чтения:"
+>>         Write-Host (
+>>             $e.details |
+>>             ConvertTo-Json -Depth 20 -Compress
+>>         )
+>>     }
+>> }
+
+---------- Morph ----------
+GUID: B23F010E-037C-4DE8-9C13-CB23B0032F00
+Данные чтения:
+{"origin":{"x":270,"y":200,"z":0},"xAxis":{"x":1,"y":0,"z":0},"yAxis":{"x":0,"y":1,"z":0},"zAxis":{"x":0,"y":0,"z":1},"buildingMaterialId":{"guid":"BC9F3B91-141E-454A-ADDF-4FF9813B3416"},"surfaceId":{"guid":"4C0CFF25-5F58-4B10-8C3D-E1C1B693017D"},"castShadow":true,"receiveShadow":true,"isAutoOnStoryVisibility":false,"showContour":{"showOnHome":true,"showAllAbove":false,"showAllBelow":false,"showRelAbove":0,"showRelBelow":0},"showFill":{"showOnHome":true,"showAllAbove":false,"showAllBelow":false,"showRelAbove":0,"showRelBelow":0},"linkToSettings":{"homeStoryDifference":0,"newCreationMode":false},"displayOption":"OutLinesOnly","viewDepthLimitation":"EntireElement","cutLineType":{"guid":"28A7C677-9234-418F-9E4D-D10C22581DF6"},"cutLinePen":53,"uncutLineType":{"guid":"28A7C677-9234-418F-9E4D-D10C22581DF6"},"uncutLinePen":93,"overheadLineType":{"guid":"21F1AC0F-A2B5-4D43-863E-7EECE3A2A119"},"overheadLinePen":93,"useCoverFillType":true,"outlineContourDisplay":true,"coverFillType":{"guid":"3C9214D0-F26B-423A-BC3F-C01A7D06A186"},"coverFillPen":93,"coverFillBGPen":-1,"use3DHatching":false,"coverFillOrientation":{"type":"Rotated","origo":{"x":0,"y":0},"matrix00":1,"matrix10":0,"matrix01":0,"matrix11":1,"innerRadius":0},"useDistortedCoverFill":true,"textureProjectionType":"Box","textureProjectionCoords":[{"x":0,"y":0,"z":0},{"x":1,"y":0,"z":0},{"x":0,"y":1,"z":0},{"x":0,"y":0,"z":1}],"level":0,"body":{"bodyType":"Surface","edgeDefault":"HardVisible","isClosed":false,"vertices":[{"x":0,"y":0,"z":0},{"x":0,"y":0,"z":2},{"x":0,"y":2,"z":0},{"x":0,"y":2,"z":2},{"x":2,"y":0,"z":0},{"x":2,"y":0,"z":2},{"x":2,"y":2,"z":0},{"x":2,"y":2,"z":2}],"polygons":[{"vertexIds":[3,1,5,7],"surfaceId":{"guid":"4C0CFF25-5F58-4B10-8C3D-E1C1B693017D"}},{"vertexIds":[0,4,5,1],"surfaceId":{"guid":"4C0CFF25-5F58-4B10-8C3D-E1C1B693017D"}},{"vertexIds":[6,2,3,7],"surfaceId":{"guid":"4C0CFF25-5F58-4B10-8C3D-E1C1B693017D"}},{"vertexIds":[2,0,1,3],"surfaceId":{"guid":"4C0CFF25-5F58-4B10-8C3D-E1C1B693017D"}},{"vertexIds":[4,6,7,5],"surfaceId":{"guid":"4C0CFF25-5F58-4B10-8C3D-E1C1B693017D"}]}}
+
+---------- PolyLine ----------
+GUID: B655B27B-8651-4FDF-B9A0-A69AE6B4733B
+Данные чтения:
+{"coordinates":[{"x":210,"y":215},{"x":213,"y":218},{"x":216,"y":215}],"roomSeparator":false,"linePenIndex":62,"lineTypeId":{"guid":"28A7C677-9234-418F-9E4D-D10C22581DF6"},"zCoordinate":0}
+
+---------- Spline ----------
+GUID: 1E06605B-A17A-4D4B-B269-F6A1FED5B38B
+Данные чтения:
+{"coordinates":[{"x":240,"y":215},{"x":242,"y":218},{"x":244,"y":215}],"closed":false,"roomSeparator":false,"linePenIndex":62,"lineTypeId":{"guid":"28A7C677-9234-418F-9E4D-D10C22581DF6"},"zCoordinate":0}
+
+---------- Hatch ----------
+GUID: 9CE18694-615E-43A1-9462-7B254BE4C8CB
+Данные чтения:
+{"coordinates":[{"x":250,"y":215},{"x":254,"y":215},{"x":254,"y":219},{"x":250,"y":219},{"x":250,"y":215}],"holes":[],"contourPenIndex":2,"fillPenIndex":26,"fillBackgroundPenIndex":-1,"fillId":{"guid":"3C9214D0-F26B-423A-BC3F-C01A7D06A186"},"buildingMaterialId":{"guid":"00000000-0000-0000-0000-000000000000"},"roomSpecial":0,"showArea":true,"zCoordinate":0}
+PS C:\Users\Admin>
