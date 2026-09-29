@@ -191,6 +191,7 @@ class TapirReadTransport:
         return {
             'instanceId': instance,
             'logicalProjectId': 'live-local-' + hashlib.sha256(packed).hexdigest()[:20],
+            'projectName': _optional_text(info.get('projectName')),
             'applicationVersion': _optional_text(
                 product.get('version') or info.get('archicadVersion') or info.get('version')),
             'applicationBuild': _optional_text(
