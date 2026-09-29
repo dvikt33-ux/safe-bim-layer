@@ -43,13 +43,26 @@ class FakeTransport:
 
 
 class FakeTapirBackend:
-    def __init__(self, project):
+    def __init__(self, project, product=(29, 3000, 'RUS'), product_error=None):
         self.project = project
+        self.product = product
+        self.product_error = product_error
         self.calls = []
+        self.official_calls = []
 
     def _tapir(self, name):
         self.calls.append(name)
         return lambda params=None: dict(self.project)
+
+    def _official(self, name):
+        self.official_calls.append(name)
+
+        def invoke():
+            if self.product_error is not None:
+                raise self.product_error
+            return self.product
+
+        return invoke
 
 
 class RuntimeBootstrapTests(unittest.TestCase):
@@ -98,7 +111,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
         self.assertIsNone(provider())
         self.assertEqual(provider.source, 'none')
 
-    def test_tapir_binding_hashes_local_project_identity(self):
+    def test_tapir_binding_hashes_local_project_identity_and_reads_product_tuple(self):
         backend = FakeTapirBackend({
             'projectPath': r'C:\Users\Secret\Project.pln',
             'projectName': 'Project',
@@ -111,7 +124,28 @@ class RuntimeBootstrapTests(unittest.TestCase):
         self.assertTrue(binding['logicalProjectId'].startswith('live-local-'))
         self.assertNotIn('Secret', binding['logicalProjectId'])
         self.assertNotIn('Project.pln', binding['logicalProjectId'])
+        self.assertEqual(binding['applicationVersion'], '29')
+        self.assertEqual(binding['applicationBuild'], '3000')
+        self.assertEqual(binding['applicationLanguage'], 'RUS')
         self.assertEqual(backend.calls, ['GetProjectInfo'])
+        self.assertEqual(backend.official_calls, ['GetProductInfo'])
+
+    def test_tapir_binding_product_info_failure_is_nonfatal(self):
+        backend = FakeTapirBackend(
+            {
+                'projectPath': r'C:\Users\Secret\Project.pln',
+                'projectName': 'Project',
+                'isUntitled': False,
+                'isTeamwork': False,
+            },
+            product_error=RuntimeError('official command unavailable'),
+        )
+        binding = TapirReadTransport(backend=backend).binding()
+        self.assertIsNone(binding['applicationVersion'])
+        self.assertIsNone(binding['applicationBuild'])
+        self.assertIsNone(binding['applicationLanguage'])
+        self.assertEqual(backend.calls, ['GetProjectInfo'])
+        self.assertEqual(backend.official_calls, ['GetProductInfo'])
 
     def test_tapir_transport_refuses_non_s24_command_before_backend(self):
         backend = FakeTapirBackend({})
@@ -119,6 +153,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             transport.call('CreateWalls', {})
         self.assertEqual(backend.calls, [])
+        self.assertEqual(backend.official_calls, [])
 
     def test_host_starts_with_pipe_store_bridge_and_live_binding(self):
         with tempfile.TemporaryDirectory() as tmp:

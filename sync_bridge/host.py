@@ -158,6 +158,19 @@ class TapirReadTransport:
         response = self.backend._tapir(command)(params or {})
         return _to_dict(response)
 
+    def product_info(self) -> dict:
+        """Best-effort official Archicad product metadata.
+
+        Graphisoft's Python wrapper returns GetProductInfo as
+        (version, buildNumber, languageCode). Product metadata is diagnostic:
+        its absence must not make an otherwise healthy Archicad binding fail.
+        """
+        try:
+            response = self.backend._official('GetProductInfo')()
+        except Exception:
+            return {}
+        return _product_info_payload(response)
+
     def binding(self) -> dict:
         raw = self.call('GetProjectInfo', {})
         info = _addon_payload(raw)
@@ -173,12 +186,17 @@ class TapirReadTransport:
         packed = json.dumps(
             identity, ensure_ascii=False, sort_keys=True, separators=(',', ':'), allow_nan=False
         ).encode('utf-8')
+        product = self.product_info()
         instance = 'archicad-default' if self.port is None else f'archicad-{self.port}'
         return {
             'instanceId': instance,
             'logicalProjectId': 'live-local-' + hashlib.sha256(packed).hexdigest()[:20],
             'applicationVersion': _optional_text(
-                info.get('archicadVersion') or info.get('version')),
+                product.get('version') or info.get('archicadVersion') or info.get('version')),
+            'applicationBuild': _optional_text(
+                product.get('buildNumber') or info.get('archicadBuild') or info.get('buildNumber')),
+            'applicationLanguage': _optional_text(
+                product.get('languageCode') or info.get('languageCode')),
         }
 
 
@@ -485,6 +503,29 @@ def _addon_payload(response: dict) -> dict:
     if isinstance(result, dict) and isinstance(result.get('addOnCommandResponse'), dict):
         return result['addOnCommandResponse']
     return response if isinstance(response, dict) else {}
+
+
+def _product_info_payload(response) -> dict:
+    if isinstance(response, (tuple, list)) and len(response) >= 3:
+        return {
+            'version': response[0],
+            'buildNumber': response[1],
+            'languageCode': response[2],
+        }
+
+    data = _to_dict(response)
+    if isinstance(data, dict) and data:
+        return {
+            'version': data.get('version') or data.get('archicadVersion'),
+            'buildNumber': data.get('buildNumber') or data.get('build'),
+            'languageCode': data.get('languageCode') or data.get('language'),
+        }
+
+    return {
+        'version': getattr(response, 'version', None),
+        'buildNumber': getattr(response, 'buildNumber', None),
+        'languageCode': getattr(response, 'languageCode', None),
+    }
 
 
 def _required_text(value, label: str) -> str:
