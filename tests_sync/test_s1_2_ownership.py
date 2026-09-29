@@ -69,17 +69,33 @@ class LeaseOwnershipTests(unittest.TestCase):
             crashed = opened(directory, 'a.sqlite3', clock)
             crashed.start()
             crashed.handshake(hello('AC-1', 'h1'), OWNER)
+            crashed_epoch = crashed.epoch
             replacement = opened(directory, 'a.sqlite3', clock)
             with self.assertRaises(InstanceConflict):
                 replacement.start()
             crashed.crash()
-            clock.advance(31)
+            self.assertTrue(bool(crashed.store.meta('lease_token')))
             replacement.start()
-            replacement.handshake(hello('AC-1', 'h2'), OWNER)
-            self.assertEqual(replacement.store.client('AC-1')['connection_state'], 'CONNECTED')
-            self.assertEqual(replacement.store.client('AC-1')['epoch'], replacement.epoch)
-            with self.assertRaises(InstanceConflict):
-                replacement.handshake(hello('AC-1', 'h3'), OWNER)
+            try:
+                self.assertEqual(replacement.epoch, crashed_epoch + 1)
+                self.assertEqual(
+                    replacement.store.meta('lease_role'),
+                    'DIAGNOSTIC_ONLY',
+                )
+                replacement.handshake(hello('AC-1', 'h2'), OWNER)
+                self.assertEqual(
+                    replacement.store.client('AC-1')['connection_state'],
+                    'CONNECTED',
+                )
+                self.assertEqual(
+                    replacement.store.client('AC-1')['epoch'],
+                    replacement.epoch,
+                )
+                with self.assertRaises(InstanceConflict):
+                    replacement.handshake(hello('AC-1', 'h3'), OWNER)
+            finally:
+                replacement.close()
+                crashed.close()
 
 
 class MessageIdentityTests(unittest.TestCase):

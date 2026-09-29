@@ -1,18 +1,20 @@
 """Per-user single-instance ownership.
 
 The Windows production gate is a named mutex (`CreateMutexW` /
-`WaitForSingleObject` / `ReleaseMutex`). A live owner is not displaced by a
-clock. SQLite lease rows are diagnostic session metadata only: they record
+`WaitForSingleObject` / `ReleaseMutex`).
+
+A Win32 mutex is recursive for the owning thread. Therefore a second
+SafeBIMBridge created inside the same Python process/thread could otherwise
+re-acquire the same named mutex. A process-local registry closes that gap.
+
+SQLite lease rows are diagnostic session metadata only: they record
 the token, expiry, and heartbeat. They are not proof that this process owns
 the bridge.
-
-On Windows, `select_kernel()` uses kernel32. Elsewhere, and in offline tests,
-the default kernel is an in-process stand-in with the same call shape. That
-stand-in does not open a real Windows mutex. Status: OFFLINE_CONTRACT_VERIFIED.
 """
 from __future__ import annotations
 
 import os
+import threading
 
 ERROR_ALREADY_EXISTS = 183
 WAIT_OBJECT_0 = 0x00000000
@@ -24,9 +26,26 @@ MUTEX_VERIFICATION = 'OFFLINE_CONTRACT_VERIFIED'
 SQLITE_LEASE_ROLE = 'DIAGNOSTIC_ONLY'
 OWNERSHIP_GATE = 'NAMED_MUTEX'
 
+_PROCESS_LOCK = threading.RLock()
+_PROCESS_OWNED_NAMES: set[str] = set()
+
 
 def mutex_name(user_sid: str) -> str:
     return 'Local\\SafeBIMBridge-' + user_sid
+
+
+def _process_try_claim(name: str) -> bool:
+    """Prevent recursive duplicate ownership inside this Python process."""
+    with _PROCESS_LOCK:
+        if name in _PROCESS_OWNED_NAMES:
+            return False
+        _PROCESS_OWNED_NAMES.add(name)
+        return True
+
+
+def _process_release(name: str) -> None:
+    with _PROCESS_LOCK:
+        _PROCESS_OWNED_NAMES.discard(name)
 
 
 class InProcessMutexKernel:
@@ -115,7 +134,7 @@ def default_kernel() -> InProcessMutexKernel:
 
 
 class Kernel32MutexKernel:
-    """Real kernel32 mutex. Used only when os.name == 'nt'. Not exercised here."""
+    """Real kernel32 mutex. Used when os.name == 'nt'."""
 
     def __init__(self):
         import ctypes
@@ -180,64 +199,108 @@ def ctypes_last_error_is_fresh_owner() -> bool:
 
 
 def select_kernel():
-    """Windows uses kernel32. This host uses the offline stand-in."""
+    """Windows uses kernel32. Other hosts use the offline stand-in."""
     if os.name == 'nt':
         return Kernel32MutexKernel()
     return default_kernel()
 
 
 class SingleInstanceLock:
-    """Hold the per-user named mutex for the life of this process."""
+    """Hold the per-user named mutex for the lifetime of one bridge."""
 
     def __init__(self, user_sid: str, kernel=None):
         self.name = mutex_name(user_sid)
         self.kernel = kernel if kernel is not None else select_kernel()
         self.handle = None
         self.last_acquire = ''
+        self._process_claimed = False
+
+    def __del__(self) -> None:
+        try:
+            self.release()
+        except Exception:
+            return
 
     def try_acquire(self) -> str:
         if self.held():
             self.last_acquire = 'acquired'
             return 'acquired'
-        handle = self.kernel.CreateMutexW(None, True, self.name)
-        if handle in (None, INVALID_HANDLE_VALUE):
+
+        # Win32 mutexes are recursive for the owning thread. Reject a second
+        # bridge object in this Python process before touching the kernel mutex.
+        if not _process_try_claim(self.name):
             self.last_acquire = 'blocked'
             return 'blocked'
-        if self.kernel.GetLastError() == ERROR_ALREADY_EXISTS:
-            waited = self.kernel.WaitForSingleObject(handle, 0)
-            if waited == WAIT_TIMEOUT:
-                self.kernel.CloseHandle(handle)
+        self._process_claimed = True
+
+        handle = None
+        try:
+            handle = self.kernel.CreateMutexW(None, True, self.name)
+            if handle in (None, INVALID_HANDLE_VALUE):
+                self._drop_process_claim()
                 self.last_acquire = 'blocked'
                 return 'blocked'
-            if waited == WAIT_ABANDONED:
-                self.handle = handle
-                self.last_acquire = 'abandoned'
-                return 'abandoned'
-            if waited == WAIT_OBJECT_0:
-                self.handle = handle
-                self.last_acquire = 'acquired'
-                return 'acquired'
-            self.kernel.CloseHandle(handle)
-            self.last_acquire = 'blocked'
-            return 'blocked'
-        self.handle = handle
-        self.last_acquire = 'acquired'
-        return 'acquired'
+
+            if self.kernel.GetLastError() == ERROR_ALREADY_EXISTS:
+                waited = self.kernel.WaitForSingleObject(handle, 0)
+                if waited == WAIT_TIMEOUT:
+                    self.kernel.CloseHandle(handle)
+                    self._drop_process_claim()
+                    self.last_acquire = 'blocked'
+                    return 'blocked'
+                if waited == WAIT_ABANDONED:
+                    self.handle = handle
+                    self.last_acquire = 'abandoned'
+                    return 'abandoned'
+                if waited == WAIT_OBJECT_0:
+                    self.handle = handle
+                    self.last_acquire = 'acquired'
+                    return 'acquired'
+                self.kernel.CloseHandle(handle)
+                self._drop_process_claim()
+                self.last_acquire = 'blocked'
+                return 'blocked'
+
+            self.handle = handle
+            self.last_acquire = 'acquired'
+            return 'acquired'
+        except BaseException:
+            if handle is not None and handle != INVALID_HANDLE_VALUE:
+                try:
+                    self.kernel.CloseHandle(handle)
+                except Exception:
+                    pass
+            self._drop_process_claim()
+            raise
 
     def held(self) -> bool:
         return self.handle is not None and bool(self.kernel.owns(self.handle))
 
     def release(self) -> None:
         if self.handle is None:
+            self._drop_process_claim()
             return
-        if self.held():
-            self.kernel.ReleaseMutex(self.handle)
-        self.kernel.CloseHandle(self.handle)
-        self.handle = None
+        try:
+            if self.held():
+                self.kernel.ReleaseMutex(self.handle)
+            self.kernel.CloseHandle(self.handle)
+        finally:
+            self.handle = None
+            self._drop_process_claim()
 
     def abandon(self) -> None:
-        """Process death: close the owner handle without ReleaseMutex."""
+        """Simulate owner death without ReleaseMutex."""
         if self.handle is None:
+            self._drop_process_claim()
             return
-        self.kernel.CloseHandle(self.handle)
-        self.handle = None
+        try:
+            self.kernel.CloseHandle(self.handle)
+        finally:
+            self.handle = None
+            self._drop_process_claim()
+
+    def _drop_process_claim(self) -> None:
+        if not self._process_claimed:
+            return
+        _process_release(self.name)
+        self._process_claimed = False

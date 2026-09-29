@@ -379,12 +379,16 @@ class RemoteContextRoundtripTests(unittest.TestCase):
         provider = CountingProvider()
         with ClosingDirectory() as directory:
             service = started(directory, http, provider)
-            connect(service)
-            provider.hook = lambda _request: service.context.mark_changed(instance_id='AC-A')
-            service.tick()
-            self.assertEqual(service.store.pending_outbox(), [])
-            self.assertEqual(result_objects(http), {})
-            self.assertNotEqual(service.context.context_admission('R1'), 'CURRENT')
+            try:
+                connect(service)
+                provider.hook = lambda _request: service.context.mark_changed(instance_id='AC-A')
+                service.tick()
+                self.assertEqual(service.store.pending_outbox(), [])
+                self.assertEqual(result_objects(http), {})
+                self.assertNotEqual(service.context.context_admission('R1'), 'CURRENT')
+            finally:
+                provider.hook = None
+                service.close()
 
     def test_crash_after_accept_before_capture_resumes(self):
         http = FakeContentsHttp()

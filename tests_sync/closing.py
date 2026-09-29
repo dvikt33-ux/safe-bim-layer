@@ -1,4 +1,5 @@
-"""Close SQLite handles before the temporary directory is removed."""
+"""Close test resources and isolate bridge ownership between tests."""
+import gc
 import tempfile
 
 from sync_bridge.instance_lock import default_kernel
@@ -8,6 +9,7 @@ from sync_bridge.store import BridgeStore
 
 class ClosingDirectory:
     def __enter__(self):
+        gc.collect()
         default_kernel().release_all()
         self._tmp = tempfile.TemporaryDirectory()
         self._seen = {id(item) for item in BridgeStore.open_stores}

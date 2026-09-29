@@ -135,24 +135,26 @@ class LiveLeaseTests(unittest.TestCase):
             self.assertEqual(MUTEX_VERIFICATION, 'OFFLINE_CONTRACT_VERIFIED')
             self.assertEqual(GITHUB_BACKEND_STATUS, 'GITHUB_LIVE_VERIFIED')
 
-    def test_crashed_owner_takeover_needs_heartbeat_absence(self):
+    def test_crashed_owner_allows_immediate_takeover(self):
+        """Abandoned mutex allows takeover without waiting for SQLite TTL."""
         clock = MutableClock()
         with ClosingDirectory() as directory:
             crashed = opened(directory, 'a.sqlite3', clock)
             crashed.start()
+            crashed_epoch = crashed.epoch
             replacement = opened(directory, 'a.sqlite3', clock)
-            crashed.crash()
-            self.assertFalse(crashed.instance_lock.held())
-            with self.assertRaises(InstanceConflict):
-                replacement.start()
-            clock.advance(TTL * 10 + 5)
-            replacement.start()
             try:
+                crashed.crash()
+                self.assertFalse(crashed.instance_lock.held())
+                self.assertTrue(bool(crashed.store.meta('lease_token')))
+                replacement.start()
                 self.assertTrue(replacement.running)
                 self.assertEqual(replacement.lease_state, 'HELD')
+                self.assertEqual(replacement.epoch, crashed_epoch + 1)
+                self.assertEqual(replacement.store.meta('lease_role'), 'DIAGNOSTIC_ONLY')
             finally:
                 replacement.close()
-
+                crashed.close()
 
 class LeaseLossTests(unittest.TestCase):
     def test_detected_loss_stops_work_until_a_new_process(self):
@@ -184,15 +186,20 @@ class LeaseLossTests(unittest.TestCase):
             with self.assertRaises(LeaseLost):
                 owner.flush_outbox()
             self.assertEqual(owner.store.message('result-job-1')['state'], 'PENDING')
-            clock.advance(TTL + 1)
             restored = opened(directory, 'a.sqlite3', clock)
             restored.mailbox = GitHubMailbox(ScriptedHttp([HttpResponse(200, {'ok': True})]))
-            restored.start()
-            accepted = restored.accept_remote_message({'messageId': 'N', 'body': {'recipe': 'y'}})
-            self.assertTrue(accepted['jobCreated'])
-            with self.assertRaises(LeaseLost):
-                owner.accept_remote_message({'messageId': 'N2', 'body': {'recipe': 'z'}})
-
+            try:
+                restored.start()
+                self.assertTrue(restored.running)
+                accepted = restored.accept_remote_message(
+                    {'messageId': 'N', 'body': {'recipe': 'y'}})
+                self.assertTrue(accepted['jobCreated'])
+                with self.assertRaises(LeaseLost):
+                    owner.accept_remote_message(
+                        {'messageId': 'N2', 'body': {'recipe': 'z'}})
+            finally:
+                restored.close()
+                owner.close()
 
 class ContextWatermarkTests(unittest.TestCase):
     def test_request_path_watermark_rejects_stale_and_survives_restart(self):
@@ -219,11 +226,14 @@ class ContextWatermarkTests(unittest.TestCase):
             blocked = ContextReady(1, 'req-a', 'snap-a2', 'P1', 'hash-2', 't', {'source': 'mock'}, 2)
             self.assertEqual(service.apply_context_ready(blocked), 'REQUEST_GENERATION_CONFLICT')
             self.assertEqual(service.store.context_request('req-a')['snapshot_id'], first['snapshotId'])
-            service.store.put_context_request('req-a2', 'P1', 'selection', 'CAPTURING', 't', instance_id='AC-A')
+            service.store.put_context_request(
+                'req-a2', 'P1', 'selection', 'CAPTURING', 't', instance_id='AC-A')
             service.store.set_meta('context_op_capture_revision:req-a2', '0')
-            accepted = ContextReady(1, 'req-a2', 'snap-a2', 'P1', 'hash-2', 't', {'source': 'mock'}, 2)
+            accepted = ContextReady(
+                1, 'req-a2', 'snap-a2', 'P1', 'hash-2', 't', {'source': 'mock'}, 2)
             self.assertEqual(service.apply_context_ready(accepted), 'CONTEXT_READY')
-            stale = ContextReady(1, 'req-a2', 'snap-a1', 'P1', 'hash-1', 't', {'source': 'mock'}, 1)
+            stale = ContextReady(
+                1, 'req-a2', 'snap-a1', 'P1', 'hash-1', 't', {'source': 'mock'}, 1)
             self.assertEqual(service.apply_context_ready(stale), 'IGNORED_STALE')
             self.assertEqual(service.store.context_request('req-a2')['snapshot_id'], 'snap-a2')
             path = service.store.path
@@ -231,37 +241,47 @@ class ContextWatermarkTests(unittest.TestCase):
             service.store.close()
             restarted = SafeBIMBridge(
                 BridgeStore(path), GitHubMailbox(QuietHttp()), owner=OWNER, clock=clock)
-            restarted.start()
-            self.assertEqual(restarted.apply_context_ready(stale), 'IGNORED_STALE')
-            self.assertEqual(restarted.store.context_request('req-a2')['snapshot_id'], 'snap-a2')
-            self.assertEqual(restarted.store.context_request('req-a')['snapshot_id'], first['snapshotId'])
-            self.assertEqual(restarted.store.meta('context_sequence:instance:AC-A'), '2')
+            try:
+                restarted.start()
+                self.assertEqual(restarted.apply_context_ready(stale), 'IGNORED_STALE')
+                self.assertEqual(
+                    restarted.store.context_request('req-a2')['snapshot_id'], 'snap-a2')
+                self.assertEqual(
+                    restarted.store.context_request('req-a')['snapshot_id'], first['snapshotId'])
+                self.assertEqual(
+                    restarted.store.meta('context_sequence:instance:AC-A'), '2')
+            finally:
+                restarted.close()
 
     def test_watermark_and_ready_state_commit_together(self):
         clock = MutableClock()
         with ClosingDirectory() as directory:
             service = opened(directory, 'a.sqlite3', clock)
             service.start()
+            try:
+                def boom():
+                    raise InjectedCrash('between context writes')
 
-            def boom():
-                raise InjectedCrash('between context writes')
-
-            service.store.fault_before_context_commit = boom
-            with self.assertRaises(InjectedCrash):
-                service.context_request({
-                    'requestId': 'req-fail', 'logicalProjectId': 'P1',
+                service.store.fault_before_context_commit = boom
+                with self.assertRaises(InjectedCrash):
+                    service.context_request({
+                        'requestId': 'req-fail', 'logicalProjectId': 'P1',
+                        'requestedScope': 'selection', 'instanceId': 'AC-A',
+                    })
+                failed = service.store.context_request('req-fail')
+                self.assertEqual(failed['state'], 'CAPTURING')
+                self.assertIsNone(failed['snapshot_id'])
+                self.assertIsNone(service.store.meta('context_sequence:instance:AC-A'))
+                service.store.fault_before_context_commit = None
+                ready = service.context_request({
+                    'requestId': 'req-ok', 'logicalProjectId': 'P1',
                     'requestedScope': 'selection', 'instanceId': 'AC-A',
                 })
-            failed = service.store.context_request('req-fail')
-            self.assertEqual(failed['state'], 'CAPTURING')
-            self.assertIsNone(failed['snapshot_id'])
-            self.assertIsNone(service.store.meta('context_sequence:instance:AC-A'))
-            service.store.fault_before_context_commit = None
-            ready = service.context_request({
-                'requestId': 'req-ok', 'logicalProjectId': 'P1',
-                'requestedScope': 'selection', 'instanceId': 'AC-A',
-            })
-            stored = service.store.context_request('req-ok')
-            self.assertEqual(stored['state'], 'VALID')
-            self.assertEqual(stored['snapshot_id'], ready['snapshotId'])
-            self.assertEqual(service.store.meta('context_sequence:instance:AC-A'), str(ready['sequence']))
+                stored = service.store.context_request('req-ok')
+                self.assertEqual(stored['state'], 'VALID')
+                self.assertEqual(stored['snapshot_id'], ready['snapshotId'])
+                self.assertEqual(
+                    service.store.meta('context_sequence:instance:AC-A'),
+                    str(ready['sequence']))
+            finally:
+                service.close()

@@ -261,16 +261,16 @@ class BridgeStore:
             'SELECT * FROM archicad_clients ORDER BY instance_id')]
 
     def acquire_lease(self, token: str, now: str, ttl_seconds: float, public_id: str) -> bool:
-        """Per-user process lease. The public instance id is not the lock."""
+        """Record diagnostic lease metadata after mutex ownership is established.
+
+        The per-user Windows named mutex is the ownership gate.
+        SQLite lease metadata is diagnostic only and must not delay takeover
+        after the previous mutex owner has terminated.
+        """
         expires = (datetime.fromisoformat(now) + timedelta(seconds=ttl_seconds)).isoformat()
         self._db.execute('BEGIN IMMEDIATE')
         try:
             current = self._meta_in_tx('lease_token') or ''
-            expiry = self._meta_in_tx('lease_expires') or ''
-            held = bool(current) and current != token and bool(expiry) and expiry > now
-            if held:
-                self._db.execute('ROLLBACK')
-                return False
             new_owner = current != token
             self._set_meta_in_tx('lease_token', token)
             self._set_meta_in_tx('lease_expires', expires)
