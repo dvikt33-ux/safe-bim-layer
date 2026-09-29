@@ -24,6 +24,10 @@ from sync_bridge.archicad_context_provider import (
     READ_COMMAND_ALLOWLIST,
 )
 from sync_bridge.bridge import InstanceConflict, LeaseLost, SafeBIMBridge
+from sync_bridge.control_status_file import (
+    ControlStatusFilePublisher,
+    default_control_status_path,
+)
 from sync_bridge.mailbox import GitHubContentsBackend, GitHubMailbox
 from sync_bridge.pipe_win32 import NamedPipeUnavailable, production_transport
 from sync_bridge.protocol import envelope
@@ -206,7 +210,8 @@ class BridgeHost:
 
     def __init__(self, config: HostConfig, *, identity: PeerIdentity | None = None,
                  token_provider=None, pipe_factory=production_transport,
-                 transport=None, store_factory=BridgeStore, logger=None,
+                 transport=None, store_factory=BridgeStore,
+                 status_publisher_factory=ControlStatusFilePublisher, logger=None,
                  monotonic=time.monotonic, sleeper=time.sleep):
         self.config = config
         self.identity = identity
@@ -214,6 +219,7 @@ class BridgeHost:
         self.pipe_factory = pipe_factory
         self.transport = transport or TapirReadTransport(config.archicad_port)
         self.store_factory = store_factory
+        self.status_publisher_factory = status_publisher_factory
         self.log = logger or logging.getLogger('safe_bim_bridge_host')
         self.monotonic = monotonic
         self.sleeper = sleeper
@@ -224,6 +230,7 @@ class BridgeHost:
         self.bridge = None
         self.context_provider = None
         self.current_binding: dict | None = None
+        self.status_publisher = None
         self.running = False
         self.stop_requested = False
         self._next_archicad_refresh = 0.0
@@ -275,15 +282,19 @@ class BridgeHost:
         self.bridge = bridge
         self.running = True
         self.stop_requested = False
+        self.status_publisher = self.status_publisher_factory(
+            default_control_status_path(self.config.data_dir)
+        )
         now = self.monotonic()
         self._next_archicad_refresh = now
         self._next_heartbeat = now + self.config.heartbeat_seconds
-        self.refresh_archicad()
+        self.refresh_archicad(publish_status=False)
+        self._publish_status()
         self.log.info('bridge host started; credential_source=%s',
                       getattr(self.token_provider, 'source', 'injected'))
         return self.status()
 
-    def refresh_archicad(self) -> dict:
+    def refresh_archicad(self, *, publish_status: bool = True) -> dict:
         self._require_running()
         assert self.bridge is not None and self.store is not None and self.identity is not None
         try:
@@ -297,7 +308,10 @@ class BridgeHost:
                     self.bridge.disconnect_archicad(instance_id)
             self.current_binding = None
             self.log.info('Archicad unavailable; error_type=%s', type(exc).__name__)
-            return {'status': 'ARCHICAD_DISCONNECTED'}
+            result = {'status': 'ARCHICAD_DISCONNECTED'}
+            if publish_status:
+                self._publish_status()
+            return result
 
         instance_id = _required_text(binding.get('instanceId'), 'Archicad instanceId')
         project_id = _required_text(binding.get('logicalProjectId'), 'Archicad logicalProjectId')
@@ -327,11 +341,14 @@ class BridgeHost:
             self.bridge.handshake(hello.to_dict(), self.identity)
 
         self.current_binding = dict(binding)
-        return {
+        result = {
             'status': 'ARCHICAD_CONNECTED',
             'instanceId': instance_id,
             'logicalProjectId': project_id,
         }
+        if publish_status:
+            self._publish_status()
+        return result
 
     def step(self) -> dict:
         self._require_running()
@@ -339,7 +356,7 @@ class BridgeHost:
         now = self.monotonic()
         archicad = None
         if now >= self._next_archicad_refresh:
-            archicad = self.refresh_archicad()
+            archicad = self.refresh_archicad(publish_status=False)
             self._next_archicad_refresh = now + self.config.archicad_refresh_seconds
         if now >= self._next_heartbeat:
             self.bridge.heartbeat()
@@ -347,6 +364,7 @@ class BridgeHost:
         remote = self.bridge.tick()
         if remote.get('status') == 'LEASE_LOST':
             raise LeaseLost('LEASE_LOST')
+        self._publish_status()
         return {'archicad': archicad, 'remote': remote, 'status': self.status()}
 
     def run_forever(self) -> None:
@@ -391,6 +409,21 @@ class BridgeHost:
         self.bridge = None
         self.context_provider = None
         self.current_binding = None
+        self._publish_status()
+        self.status_publisher = None
+
+    def _publish_status(self):
+        publisher = self.status_publisher
+        if publisher is None:
+            return None
+        try:
+            return publisher.publish(self.status())
+        except Exception as exc:
+            self.log.warning(
+                'control status publish failed; error_type=%s',
+                type(exc).__name__,
+            )
+            return None
 
     def _require_running(self) -> None:
         if not self.running or self.bridge is None:
