@@ -426,11 +426,28 @@ class TapirBackend(Backend):
         }
 
     def _product_info(self, *keys: str) -> str:
-        """Official GetProductInfo — best effort. Его отсутствие НЕ ошибка."""
+        """Official GetProductInfo — best effort. Его отсутствие НЕ ошибка.
+
+        Archicad's Python wrapper returns ``(version, buildNumber,
+        languageCode)`` on the live AC29 API, so tuples are normalized before
+        the legacy dict/object fallback is consulted.
+        """
         try:
-            d = _to_dict(self._official("GetProductInfo")())
+            raw = self._official("GetProductInfo")()
         except Exception:
             return ""
+
+        if isinstance(raw, (tuple, list)):
+            d = {}
+            if len(raw) > 0:
+                d["version"] = raw[0]
+            if len(raw) > 1:
+                d["buildNumber"] = raw[1]
+            if len(raw) > 2:
+                d["languageCode"] = raw[2]
+        else:
+            d = _to_dict(raw)
+
         for k in keys:
             v = d.get(k)
             if v not in (None, ""):

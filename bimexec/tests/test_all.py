@@ -10,6 +10,7 @@ sys.path.insert(0, root)
 
 import tests.test_p0 as t0
 import tests.test_probe as tp
+import tests.test_tapir_product_info as tpi
 import tests.test_t2_probe as tt2
 import tests.test_t2_connections as tt2c
 import tests.test_t3_dependency as tt3
@@ -22,7 +23,7 @@ import tests.test_t8 as t8
 import tests.test_t9 as t9
 
 failed = 0
-for mod in (t0, tp, tt2, tt2c, tt3, tt3r, tt4, tt5, t6, t7, t8, t9):
+for mod in (t0, tp, tpi, tt2, tt2c, tt3, tt3r, tt4, tt5, t6, t7, t8, t9):
     print(f"\n=== {mod.__name__}")
     for name, fn in mod.TESTS:
         try:
