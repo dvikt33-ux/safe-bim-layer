@@ -35,7 +35,7 @@ from sync_bridge.security import PeerIdentity
 from sync_bridge.store import BridgeStore
 
 
-HOST_STATUS = 'S2_5_RUNTIME_BOOTSTRAP_IMPLEMENTED_NOT_LIVE_VERIFIED'
+HOST_STATUS = 'READY'
 DEFAULT_GITHUB_OWNER = 'dvikt33-ux'
 DEFAULT_GITHUB_REPO = 'safe-bim-bridge'
 DEFAULT_GITHUB_BRANCH = 'main'
