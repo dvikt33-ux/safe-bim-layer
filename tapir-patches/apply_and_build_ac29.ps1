@@ -8,7 +8,8 @@ Set-StrictMode -Version Latest
 
 $TapirRepo = "https://github.com/ENZYME-APD/tapir-archicad-automation.git"
 $TapirCommit = "d2dfeec7936dd1dbed4e2412f406b30291959c26"
-$PatcherUrl = "https://raw.githubusercontent.com/dvikt33-ux/safe-bim-layer/research/library-system-v3/tapir-patches/apply_hosted_libpart_patch.py"
+$HostedPatcherUrl = "https://raw.githubusercontent.com/dvikt33-ux/safe-bim-layer/research/library-system-v3/tapir-patches/apply_hosted_libpart_patch.py"
+$CompilerPatcherUrl = "https://raw.githubusercontent.com/dvikt33-ux/safe-bim-layer/research/library-system-v3/tapir-patches/apply_librarypart_compiler_patch.py"
 
 function Find-DevKitSupport {
     param([string]$Explicit)
@@ -77,7 +78,7 @@ $Generator = Find-VSGenerator
 
 Write-Host ""
 Write-Host "========================================"
-Write-Host "SAFE BIM / TAPIR HOSTED LIBPART BUILD"
+Write-Host "SAFE BIM / TAPIR LIBRARY SYSTEM BUILD"
 Write-Host "========================================"
 Write-Host "Tapir base : $TapirCommit"
 Write-Host "DevKit     : $DevKitSupport"
@@ -86,8 +87,11 @@ Write-Host "Work root  : $WorkRoot"
 Write-Host ""
 
 $src = Join-Path $WorkRoot "tapir"
-$patcher = Join-Path $WorkRoot "apply_hosted_libpart_patch.py"
-$sourceFile = Join-Path $src "archicad-addon\Sources\ExtendedElementCommands.cpp"
+$sources = Join-Path $src "archicad-addon\Sources"
+$hostedPatcher = Join-Path $WorkRoot "apply_hosted_libpart_patch.py"
+$compilerPatcher = Join-Path $WorkRoot "apply_librarypart_compiler_patch.py"
+$hostedSourceFile = Join-Path $sources "ExtendedElementCommands.cpp"
+$compilerHeader = Join-Path $sources "LibraryCommands.hpp"
 $build = Join-Path $src "archicad-addon\Build\AC29-SafeBIM"
 
 New-Item -ItemType Directory -Force -Path $WorkRoot | Out-Null
@@ -103,15 +107,22 @@ try {
     git reset --hard $TapirCommit
     git clean -fd
 
-    Invoke-WebRequest -Uri $PatcherUrl -OutFile $patcher
+    Invoke-WebRequest -Uri $HostedPatcherUrl -OutFile $hostedPatcher
+    Invoke-WebRequest -Uri $CompilerPatcherUrl -OutFile $compilerPatcher
 
-    python $patcher $sourceFile
-    if ($LASTEXITCODE -ne 0) { throw "Source patch failed." }
+    python $hostedPatcher $hostedSourceFile
+    if ($LASTEXITCODE -ne 0) { throw "Hosted libraryPartName source patch failed." }
 
-    $patched = Select-String -Path $sourceFile -SimpleMatch "SAFE_BIM_HOSTED_LIBRARY_PART_NAME_V1"
-    if (-not $patched) { throw "Patch marker not found after patching." }
+    $hostedPatched = Select-String -Path $hostedSourceFile -SimpleMatch "SAFE_BIM_HOSTED_LIBRARY_PART_NAME_V1"
+    if (-not $hostedPatched) { throw "Hosted libraryPartName patch marker not found." }
+    Write-Host "[PASS] CreateWindows/CreateDoors libraryPartName patch applied"
 
-    Write-Host "[PASS] Source patch applied"
+    python $compilerPatcher $sources
+    if ($LASTEXITCODE -ne 0) { throw "Library Part compiler source patch failed." }
+
+    $compilerPatched = Select-String -Path $compilerHeader -SimpleMatch "SAFE_BIM_LIBRARY_PART_COMPILER_V1"
+    if (-not $compilerPatched) { throw "Library Part compiler patch marker not found." }
+    Write-Host "[PASS] CreateLibraryPartFromScripts patch applied"
 
     cmake `
         -S (Join-Path $src "archicad-addon") `
@@ -142,7 +153,11 @@ try {
     Write-Host "Patched Tapir APX:"
     Write-Host $apx.FullName
     Write-Host ""
-    Write-Host "Next: install this APX in Archicad 29, restart Archicad, then run the hosted-window smoke test."
+    Write-Host "Capabilities in this build:"
+    Write-Host "  - CreateWindows/CreateDoors.libraryPartName"
+    Write-Host "  - CreateLibraryPartFromScripts (Window/Door/Object)"
+    Write-Host ""
+    Write-Host "Install this APX in Archicad 29, restart Archicad, then run the Gothic Window pilot."
 }
 finally {
     Pop-Location
