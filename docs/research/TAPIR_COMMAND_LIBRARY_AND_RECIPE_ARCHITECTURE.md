@@ -8,6 +8,36 @@ Tapir is not limited to a fixed set of JSON operations. Its Archicad add-on regi
 
 The upstream repository explicitly documents the extension path: add a command class in `Sources/*Commands.{cpp,hpp}` (or a new command group), implement schemas, and register it in `AddOnMain.cpp` with the version in which it was introduced.
 
+## Important additional finding: Tapir already has a script palette
+Tapir's own palette already stores/runs scripts. It can list local scripts, add/remove scripts, load scripts from configured GitHub repositories, assign scripts to shortcut slots, and execute `.py` scripts through `uv`. When a Python script is launched from the palette, Tapir passes the active Archicad command port to the script (`--port ...`) and, for repository-backed scripts, can also pass a token.
+
+This means Safe BIM should use two complementary reuse layers:
+
+1. **Compiled high-level commands** for reliable atomic architectural operations implemented close to ACAPI.
+2. **Versioned Tapir scripts/recipes** for orchestration, stored in GitHub and launched from the Tapir palette or shortcuts.
+
+A recipe therefore does not have to be expanded into ad-hoc PowerShell every time. Once stabilized it can live in the Safe BIM repository and be called from Tapir as a named reusable script.
+
+Recommended repository layout:
+
+```text
+scripts/
+  architecture/
+    windows/
+      ensure_gothic_lancet_family.py
+      replace_gothic_windows.py
+    facade/
+      gothic_cornice_run.py
+    towers/
+      gothic_tower_top_v1.py
+  qa/
+    audit_gaps.py
+    audit_collisions.py
+    audit_library_instances.py
+```
+
+Stable scripts may be bound to Tapir shortcut slots. Scripts remain reviewable/versioned in GitHub while compiled C++ commands provide the deterministic primitives they call.
+
 ## What this enables
 Instead of Python calling:
 
@@ -60,8 +90,8 @@ Add compact domain commands implemented in the add-on, for example:
 
 Each command should be deterministic, versioned, resumable and independently verifiable.
 
-### Layer C — recipes
-A recipe registry composes Layer-B commands into larger tasks without hard-coding an entire building into one C++ method.
+### Layer C — recipes / Tapir scripts
+A recipe registry composes Layer-B commands into larger tasks without hard-coding an entire building into one C++ method. Stable recipes should also be exposed as Tapir Palette scripts so they can be launched directly from Archicad or assigned to shortcut slots.
 
 Example:
 
@@ -92,6 +122,8 @@ A large Python program currently pays per-operation costs repeatedly:
 7. Python reconciliation
 
 A higher-level add-on command can execute many related ACAPI operations within one command call while still returning detailed per-substep results. This reduces transport overhead and produces shorter, clearer generated code.
+
+The Tapir script palette also removes repeated copy/paste and PowerShell setup overhead: a reviewed script can be stored once in GitHub, surfaced in the palette and run repeatedly against the active Archicad session.
 
 ## Safety rule
 Do not add one unrestricted generic command such as `ExecuteArbitraryScript`. Prefer a registry of typed, versioned recipes and high-level commands with JSON schemas. This preserves Safe BIM's fail-closed behavior and allows validation before physical writes.
@@ -181,6 +213,6 @@ This is geometrically superior to the existing V3 workaround, but remains an int
 2. Add command-level tests for library-part resolution, missing names, wrong type, and read-back.
 3. Implement `SB_EnsureLibraryPart`.
 4. Implement component registry with version/fingerprint/dependencies/status.
-5. Implement typed recipe registry.
+5. Implement typed recipe registry and expose stable recipes as Tapir Palette scripts.
 6. Move repeated architecture generation from Python loops to versioned Safe BIM commands/recipes.
 7. Keep Python primarily as orchestration, design intent, parameter generation and QA control.
