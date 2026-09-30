@@ -14,7 +14,6 @@ changing only libInd is not sufficient for a reliable Window/Door create.
  1 file changed, 78 insertions(+)
 
 diff --git a/archicad-addon/Sources/ExtendedElementCommands.cpp b/archicad-addon/Sources/ExtendedElementCommands.cpp
-index c94511d..SAFE001 100644
 --- a/archicad-addon/Sources/ExtendedElementCommands.cpp
 +++ b/archicad-addon/Sources/ExtendedElementCommands.cpp
 @@
