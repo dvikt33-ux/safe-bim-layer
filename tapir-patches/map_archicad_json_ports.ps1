@@ -1,4 +1,5 @@
 $ErrorActionPreference = 'Stop'
+Add-Type -AssemblyName System.Net.Http
 
 Write-Host 'SAFE BIM / ARCHICAD JSON PORT MAP'
 Write-Host ''
@@ -23,19 +24,24 @@ if (-not $listeners) {
     $listeners | Select-Object OwningProcess, LocalAddress, LocalPort | Format-Table -AutoSize
 }
 
-# Also show every listener in the traditional Archicad JSON range and its owner.
 Write-Host ''
 Write-Host 'PORTS 19723..19743 AND THEIR OWNERS'
 $range = Get-NetTCPConnection -State Listen -ErrorAction SilentlyContinue | Where-Object { $_.LocalPort -ge 19723 -and $_.LocalPort -le 19743 } | Sort-Object LocalPort
+$rangeRows = @()
 foreach ($conn in $range) {
     $proc = Get-Process -Id $conn.OwningProcess -ErrorAction SilentlyContinue
-    [pscustomobject]@{
+    $rangeRows += [pscustomobject]@{
         Port = $conn.LocalPort
         PID = $conn.OwningProcess
         Process = if ($proc) { $proc.ProcessName } else { '<unknown>' }
         Path = if ($proc) { $proc.Path } else { '' }
     }
-} | Format-Table -AutoSize
+}
+if ($rangeRows.Count -gt 0) {
+    $rangeRows | Format-Table -AutoSize
+} else {
+    Write-Host 'None.'
+}
 
 function Invoke-JsonPost {
     param(
@@ -44,12 +50,12 @@ function Invoke-JsonPost {
         [int]$TimeoutMs = 1500
     )
 
-    $handler = New-Object System.Net.Http.HttpClientHandler
-    $client = New-Object System.Net.Http.HttpClient($handler)
+    $handler = [System.Net.Http.HttpClientHandler]::new()
+    $client = [System.Net.Http.HttpClient]::new($handler)
     $client.Timeout = [TimeSpan]::FromMilliseconds($TimeoutMs)
     try {
         $json = $Payload | ConvertTo-Json -Depth 12 -Compress
-        $content = New-Object System.Net.Http.StringContent($json, [Text.Encoding]::UTF8, 'application/json')
+        $content = [System.Net.Http.StringContent]::new($json, [Text.Encoding]::UTF8, 'application/json')
         $response = $client.PostAsync("http://127.0.0.1:$Port", $content).GetAwaiter().GetResult()
         $text = $response.Content.ReadAsStringAsync().GetAwaiter().GetResult()
         return [pscustomobject]@{ Ok = $true; Status = [int]$response.StatusCode; Body = $text }
