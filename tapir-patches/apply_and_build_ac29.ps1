@@ -8,7 +8,7 @@ Set-StrictMode -Version Latest
 
 $TapirRepo = "https://github.com/ENZYME-APD/tapir-archicad-automation.git"
 $TapirCommit = "d2dfeec7936dd1dbed4e2412f406b30291959c26"
-$PatchUrl = "https://raw.githubusercontent.com/dvikt33-ux/safe-bim-layer/research/library-system-v3/tapir-patches/0001-window-door-libraryPartName.patch"
+$PatcherUrl = "https://raw.githubusercontent.com/dvikt33-ux/safe-bim-layer/research/library-system-v3/tapir-patches/apply_hosted_libpart_patch.py"
 
 function Find-DevKitSupport {
     param([string]$Explicit)
@@ -34,7 +34,6 @@ function Find-DevKitSupport {
         }
     }
 
-    # Bounded fallback search: user Documents/Downloads only, never all of C:\.
     foreach ($root in @("$env:USERPROFILE\Documents", "$env:USERPROFILE\Downloads")) {
         if (-not (Test-Path $root)) { continue }
         $hit = Get-ChildItem -Path $root -Filter ACAPinc.h -File -Recurse -ErrorAction SilentlyContinue |
@@ -64,12 +63,10 @@ function Find-VSGenerator {
             if ($major -eq 16) { return "Visual Studio 16 2019" }
         }
     }
-
-    # Let CMake confirm the exact failure instead of guessing silently.
     return "Visual Studio 17 2022"
 }
 
-foreach ($exe in @("git", "cmake")) {
+foreach ($exe in @("git", "cmake", "python")) {
     if (-not (Get-Command $exe -ErrorAction SilentlyContinue)) {
         throw "Required executable not found in PATH: $exe"
     }
@@ -89,7 +86,8 @@ Write-Host "Work root  : $WorkRoot"
 Write-Host ""
 
 $src = Join-Path $WorkRoot "tapir"
-$patch = Join-Path $WorkRoot "0001-window-door-libraryPartName.patch"
+$patcher = Join-Path $WorkRoot "apply_hosted_libpart_patch.py"
+$sourceFile = Join-Path $src "archicad-addon\Sources\ExtendedElementCommands.cpp"
 $build = Join-Path $src "archicad-addon\Build\AC29-SafeBIM"
 
 New-Item -ItemType Directory -Force -Path $WorkRoot | Out-Null
@@ -102,18 +100,18 @@ Push-Location $src
 try {
     git fetch origin
     git checkout --detach $TapirCommit
+    git reset --hard $TapirCommit
+    git clean -fd
 
-    $dirty = git status --porcelain
-    if ($dirty) {
-        throw "Dedicated Tapir clone is dirty; refusing to overwrite local changes:`n$dirty"
-    }
+    Invoke-WebRequest -Uri $PatcherUrl -OutFile $patcher
 
-    Invoke-WebRequest -Uri $PatchUrl -OutFile $patch
+    python $patcher $sourceFile
+    if ($LASTEXITCODE -ne 0) { throw "Source patch failed." }
 
-    git apply --check $patch
-    git apply $patch
+    $patched = Select-String -Path $sourceFile -SimpleMatch "SAFE_BIM_HOSTED_LIBRARY_PART_NAME_V1"
+    if (-not $patched) { throw "Patch marker not found after patching." }
 
-    Write-Host "[PASS] Patch applied"
+    Write-Host "[PASS] Source patch applied"
 
     cmake `
         -S (Join-Path $src "archicad-addon") `
