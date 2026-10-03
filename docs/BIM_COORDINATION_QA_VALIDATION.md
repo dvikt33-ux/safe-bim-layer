@@ -43,3 +43,8 @@ traceable normative document/edition/clause or approved project/reference basis.
 The checker is not yet wired into live Archicad collection or the runtime
 progression gate. Machine-rule entries therefore remain progression-unverified
 until that wiring and live capture are completed.
+
+The 21-test result above was executed against the checker/test sources before
+publication to this branch. It validates the checker logic only; it is not a
+live Archicad acceptance test and does not supersede the separate previously
+reported 61-test main QA suite or 21-test roof-geometry suite.
