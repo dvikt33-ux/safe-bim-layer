@@ -32,9 +32,24 @@ element count / operations before fragmentation**: e.g. one Wall + roof trim is
 preferred over a stepped gable made of many Walls, and one/minimal Slab set +
 native cut/SEO operations is preferred over a pile of porch fragments.
 
+Roof/wall/rafter geometric blocker logic for 004–007 is documented in
+[`docs/BIM_GEOMETRY_QA.md`](docs/BIM_GEOMETRY_QA.md) and implemented as a
+separate fail-closed offline checker because Tapir 1.5.8 does not expose enough
+Roof type-specific read-back to prove a live roof system by itself.
+
+The coordination/dimensional supplement
+[`docs/BIM_COORDINATION_AND_DIMENSIONAL_STANDARD.md`](docs/BIM_COORDINATION_AND_DIMENSIONAL_STANDARD.md)
+adds rules 012–017 for roof-to-wall coverage, wall junction continuity,
+vertical load-bearing continuity, wall/opening conflicts, opening-edge
+clearances and masonry modular coordination. `bim_coordination_qa.py` contains
+the offline calculation logic. It has **no hard-coded regulatory distances**:
+every production threshold/module must resolve to a VERIFIED Rule Registry entry
+with normative or approved project provenance. Missing rule data is
+`NOT_VERIFIED / DATA_MISSING`, never an assumed PASS.
+
 Run `python -m unittest discover -v`. Missing evidence blocks PASS; unimplemented
-rules remain NOT_VERIFIED. The auditor is opt-in and does not change existing
-runtime operations or access a live PLN.
+or not-yet-wired live checks remain NOT_VERIFIED. The offline auditors do not
+change existing runtime operations or access a live PLN.
 
 ## Collaboration workflow
 
