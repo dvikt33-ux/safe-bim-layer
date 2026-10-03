@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "contractId": "SAFE_BIM_STAGE0_PROJECT_INTAKE_V1",
+  "stage": "PROJECT_INTAKE_DATA_GAP",
+  "status": "DRAFT",
+  "purpose": "Inspect all available project information before normative/design work, classify the project, determine applicable rule branches, derive safe values, detect conflicts and ask only for unresolved required data.",
+  "allowedStageStates": [
+    "NOT_STARTED",
+    "RESEARCHING",
+    "CLASSIFYING",
+    "BUILDING_INPUT_MATRIX",
+    "DERIVING",
+    "AUDITING_GAPS",
+    "WAITING_FOR_USER_DATA",
+    "RECHECKING",
+    "VERIFIED",
+    "INVALIDATED"
+  ],
+  "allowedInputStatuses": [
+    "CONFIRMED",
+    "DERIVED",
+    "UNKNOWN_BUT_DERIVABLE",
+    "CONFLICT",
+    "MISSING_REQUIRED",
+    "MISSING_OPTIONAL",
+    "NOT_APPLICABLE"
+  ],
+  "requiredSequence": [
+    "COLLECT_AVAILABLE_PROJECT_INFORMATION",
+    "NORMALIZE_AND_INDEX_SOURCES",
+    "CLASSIFY_PROJECT",
+    "BUILD_APPLICABILITY_MATRIX",
+    "BUILD_REQUIRED_INPUT_MATRIX",
+    "MAP_EXISTING_DATA_TO_REQUIREMENTS",
+    "DERIVE_SAFE_DERIVABLE_VALUES",
+    "DETECT_CONFLICTS",
+    "IDENTIFY_GAPS",
+    "PRIORITIZE_USER_QUESTIONS",
+    "REAUDIT_AFTER_USER_ANSWERS"
+  ],
+  "sourceClasses": [
+    "USER_BRIEF",
+    "PROJECT_FILE",
+    "DRAWING",
+    "GITHUB_PROJECT_DATA",
+    "SAFE_BIM_STATE",
+    "ARCHICAD_READBACK",
+    "APPROVED_PROJECT_DECISION",
+    "RULE_REGISTRY",
+    "USER_CORRECTION"
+  ],
+  "applicabilityStatuses": [
+    "APPLICABLE",
+    "NOT_APPLICABLE",
+    "CONDITIONAL",
+    "UNKNOWN"
+  ],
+  "questionPriority": [
+    "CLASSIFICATION_BLOCKER",
+    "REGULATORY_APPLICABILITY_BLOCKER",
+    "SITE_GEOMETRY_BLOCKER",
+    "STRUCTURAL_ENGINEERING_BLOCKER",
+    "FUNCTIONAL_PLANNING_BLOCKER",
+    "DOCUMENTATION_BLOCKER",
+    "OPTIONAL_PREFERENCE"
+  ],
+  "progressionGate": {
+    "requiredStageStatus": "VERIFIED",
+    "conditions": {
+      "projectClassification": "VERIFIED",
+      "applicabilityMatrixComplete": true,
+      "requiredInputMatrixComplete": true,
+      "missingRequiredCount": 0,
+      "unresolvedConflictCount": 0,
+      "blockingUnknownDerivableCount": 0,
+      "unapprovedAssumptionCount": 0,
+      "provenanceCompleteForBlockingInputs": true
+    },
+    "blockingInputStatuses": [
+      "MISSING_REQUIRED",
+      "CONFLICT",
+      "UNKNOWN_BUT_DERIVABLE"
+    ],
+    "forbidSilentFallbacks": [
+      "PLACEHOLDER",
+      "GUESSED_VALUE",
+      "TYPICAL_VALUE",
+      "UNAPPROVED_DEFAULT",
+      "STATISTICALLY_LIKELY_VALUE"
+    ]
+  },
+  "questionPolicy": {
+    "inspectAllAvailableContextFirst": true,
+    "askKnownDataAgain": false,
+    "askMinimumUnblockingSet": true,
+    "reauditAfterAnswers": true,
+    "questionMustExplain": [
+      "WHAT_IS_NEEDED",
+      "WHY_IT_IS_NEEDED",
+      "DEPENDENT_RULE_OR_STAGE",
+      "ACCEPTED_FORMAT_OR_UNITS"
+    ]
+  },
+  "derivationPolicy": {
+    "deriveBeforeAskingWhenDeterministic": true,
+    "requiresConfirmedInputs": true,
+    "requiresTraceableMethod": true,
+    "requiresUnits": true,
+    "requiresProvenance": true,
+    "forbidSubjectiveInferenceAsDerived": true
+  },
+  "invalidationPolicy": {
+    "reopenOnMaterialClassificationChange": true,
+    "reopenOnApplicableRuleChange": true,
+    "reopenOnBlockingInputChange": true,
+    "scopeInvalidationToDependenciesWhenSafe": true
+  },
+  "inputRecordTemplate": {
+    "id": "INPUT_ID",
+    "name": "Human readable input name",
+    "status": "MISSING_REQUIRED",
+    "blocking": true,
+    "value": null,
+    "unit": null,
+    "acceptedFormats": [],
+    "requiredBy": [],
+    "reason": "Why this input is required",
+    "derivable": false,
+    "derivationMethod": null,
+    "provenance": []
+  },
+  "applicabilityRecordTemplate": {
+    "branchId": "RULE_BRANCH_ID",
+    "status": "UNKNOWN",
+    "basis": null,
+    "evidence": [],
+    "unresolvedConditions": []
+  },
+  "questionRecordTemplate": {
+    "inputId": "INPUT_ID",
+    "priority": "CLASSIFICATION_BLOCKER",
+    "question": "Exact user-facing question",
+    "why": "Why the value is needed",
+    "requiredBy": [],
+    "acceptedFormats": []
+  },
+  "outputTemplate": {
+    "stage": "PROJECT_INTAKE_DATA_GAP",
+    "status": "WAITING_FOR_USER_DATA",
+    "projectClassification": {},
+    "applicabilityMatrix": [],
+    "inputs": [],
+    "missingRequired": [],
+    "missingOptional": [],
+    "conflicts": [],
+    "derived": [],
+    "questions": [],
+    "provenanceComplete": false
+  },
+  "nextStage": "NORMATIVE_BASE",
+  "coreInvariant": "RESEARCH_FIRST_ASK_SECOND_DESIGN_ONLY_AFTER_REQUIRED_DATA_VERIFIED"
+}
