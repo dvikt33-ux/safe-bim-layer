@@ -48,7 +48,7 @@ class QATests(unittest.TestCase):
         report = audit_snapshot(self.s, 'PASS_3_WINDOWS_DOORS')
         for rule in ('BIM-QA-001', 'BIM-QA-002', 'BIM-QA-003', 'BIM-QA-009'):
             self.assertEqual(report['rules'][rule]['status'], 'PASS')
-        self.assertEqual(report['status'], 'NOT_VERIFIED')  # story checker remains unimplemented
+        self.assertEqual(report['status'], 'NOT_VERIFIED')  # later roof/wall-top/rafter blockers remain unimplemented
 
     def test_empty_or_malformed_snapshot_never_passes(self):
         for s in ({}, None, [], {'elements': []}, {'elements': 'bad'}):
@@ -221,7 +221,7 @@ class QATests(unittest.TestCase):
     def test_json_only_updates_implemented_rules(self):
         rules = json.loads(RULES_PATH.read_text())['rules']
         for rule in rules:
-            if rule['id'] in ('BIM-QA-001', 'BIM-QA-002', 'BIM-QA-003', 'BIM-QA-009', 'BIM-QA-010'):
+            if rule['id'] in ('BIM-QA-001', 'BIM-QA-002', 'BIM-QA-003', 'BIM-QA-008', 'BIM-QA-009', 'BIM-QA-010', 'BIM-QA-011'):
                 self.assertEqual(rule['implementationState'], 'IMPLEMENTED_OFFLINE')
                 self.assertEqual(rule['liveValidationState'], 'NOT_VERIFIED')
             else:
