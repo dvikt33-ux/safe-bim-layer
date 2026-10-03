@@ -25,26 +25,38 @@ Live verification evidence (2026-10-03):
 - Morph count `0`;
 - wall fragmentation `0`.
 
-## 2. Slabs
+## 2. Slabs — VERIFIED
 
-Goal: reliable basic slab creation using only supported `CreateSlabs` fields.
+Goal: reliable basic slab creation using only supported `CreateSlabs` fields and a live-verified Basic Favorite.
 
-Acceptance:
-- outline correct;
-- level/thickness/reference plane read back correctly;
-- no unsupported `buildingMaterialId` in create payload;
-- separate tested path for material/structure change if required;
-- isolated smoke leaves exactly one expected Slab and no unrelated writes.
+Acceptance passed on 2026-10-03:
+- outline `6.00 x 4.00 m`;
+- Favorite `Перекрытие - Общее Железобетонное`;
+- read-back `structureType = Basic`;
+- thickness `0.22 m`;
+- reference plane `Top`;
+- target absolute elevation `+3.00 m`;
+- Archicad assigned home story index `1` at `+3.00 m`;
+- read-back Slab `level = 0`, so canonical elevation audit uses `story level + slab level`;
+- unsupported `buildingMaterialId` is not used in `CreateSlabs`;
+- probe slabs are deleted and exactly one final slab remains.
+
+Canonical smoke: `tests/smoke/basic_slab_favorite.py`.
 
 ## 3. Simple gable roof
 
 Goal: one clean two-plane roof over a rectangular test building.
 
 Acceptance:
+- exactly two native Roof elements;
+- both roof planes use the same pitch magnitude;
+- eave lines and ridge coordinates are derived from one explicit geometric model;
 - two roof planes meet at one ridge;
-- no gap/overlap at ridge;
-- eaves and overhang correct;
-- pitch and elevations read back correctly.
+- no visible gap at ridge;
+- no volume overlap across the ridge beyond the intended edge contact;
+- eaves/overhang correct;
+- pitch and elevations read back correctly;
+- visual check required before promotion because read-back alone cannot prove ridge cleanup quality.
 
 ## 4. Wall-to-roof trim
 
@@ -103,4 +115,4 @@ Acceptance:
 
 ## Current next step
 
-Proceed to **2. Slabs**. Build one isolated basic Slab using only fields proven by the current `CreateSlabs` schema, then read back outline, level, thickness and reference plane. Do not add roof or other systems until the slab gate is VERIFIED.
+Proceed to **3. Simple gable roof**. Build exactly two isolated single-plane Roof elements from one explicit ridge/eave geometry model. Do not create walls, trims, rafters or cross-gables until the two-plane roof itself has passed both read-back and visual ridge inspection.
