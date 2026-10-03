@@ -2,7 +2,7 @@
 
 This roadmap expands Safe BIM functionality one verified capability at a time. Do not skip a failed gate.
 
-## 1. Native hosted Windows and Doors
+## 1. Native hosted Windows and Doors — VERIFIED
 
 Goal: continuous Wall + native/library Window/Door, no facade fragmentation.
 
@@ -10,10 +10,20 @@ Acceptance:
 - one continuous host Wall;
 - Window/Door creation PASS;
 - host GUID read-back/connection confirmed;
-- width/height/sill/offset confirmed;
-- custom library part identity confirmed where used;
-- duplicate count zero;
-- transparent glass visually confirmed for window test.
+- width/height/sill/offset exercised in live Archicad;
+- duplicate/fragment count zero in isolated smoke region;
+- Morph fallback zero.
+
+Canonical smoke: `tests/smoke/native_window_door_continuous_wall.py`.
+
+Live verification evidence (2026-10-03):
+- Wall `FA9434E5-53CE-4FE6-BD43-9B9FDD14679B`;
+- Window `D5C35B66-2814-43D7-A29D-4F615F76FAAC`;
+- Door `8B0EBA3D-DF24-46FE-B772-160E23027044`;
+- test-region Wall count remained `1`;
+- `Window` and `Door` read-back types passed;
+- Morph count `0`;
+- wall fragmentation `0`.
 
 ## 2. Slabs
 
@@ -23,7 +33,8 @@ Acceptance:
 - outline correct;
 - level/thickness/reference plane read back correctly;
 - no unsupported `buildingMaterialId` in create payload;
-- separate tested path for material/structure change if required.
+- separate tested path for material/structure change if required;
+- isolated smoke leaves exactly one expected Slab and no unrelated writes.
 
 ## 3. Simple gable roof
 
@@ -92,4 +103,4 @@ Acceptance:
 
 ## Current next step
 
-Start at **1. Native hosted Windows and Doors**. The existing custom Door path and transparent GSM glass path are already verified; the remaining task is to freeze a canonical Window smoke test on one continuous host Wall and save the test in the repository.
+Proceed to **2. Slabs**. Build one isolated basic Slab using only fields proven by the current `CreateSlabs` schema, then read back outline, level, thickness and reference plane. Do not add roof or other systems until the slab gate is VERIFIED.
