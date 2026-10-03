@@ -19,6 +19,12 @@ Known limitations recorded for v0.1:
 - `floorPlanPolygons` may be multi-polygon; that alone is not a wall-join failure without geometric/visual evidence.
 - A failed operation stops the room transaction; v0.1 does not auto-delete partial writes.
 
+## BIM modeling constitution
+
+Generated geometry is governed by [the Archicad modeling standard](docs/SAFE_BIM_ARCHICAD_MODELING_STANDARD.md). The standard forbids visual approximations that violate BIM semantics, requires staged generation with audits, and blocks `PASS` when mandatory QA is unresolved.
+
+Reference-pattern capture is defined by [the Archicad reference-model protocol](docs/ARCHICAD_REFERENCE_MODEL_PROTOCOL.md). Machine-readable blocker rules and pass dependencies are in [`docs/archicad_modeling_qa_rules.v1.json`](docs/archicad_modeling_qa_rules.v1.json).
+
 ## Collaboration workflow
 
 The production control path is local: Qwen emits high-level intent, Safe BIM
