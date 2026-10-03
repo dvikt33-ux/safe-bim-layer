@@ -31,6 +31,30 @@ Canonical rule: openings in normal building walls are hosted native/library `Win
 
 Canonical reproduction script: `tests/smoke/native_window_door_continuous_wall.py`.
 
+### Basic Slab via verified Favorite
+Status: `VERIFIED`
+
+Live canonical smoke passed on 2026-10-03.
+
+Evidence from the successful run:
+
+- Slab GUID: `57865B70-76DD-4A4F-B367-98F95CBCD43A`;
+- Favorite: `Перекрытие - Общее Железобетонное`;
+- read-back type: `Slab`;
+- read-back `structureType`: `Basic`;
+- requested/actual thickness: `0.22 m`;
+- reference plane: `Top`;
+- outline: `6.00 x 4.00 m`;
+- target absolute elevation: `+3.00 m`;
+- Archicad assigned home story index `1`, story level `+3.00 m`;
+- Slab read-back `level = 0`, proving the field is story-relative after placement;
+- no `buildingMaterialId` was passed to `CreateSlabs`;
+- discovery probe slabs were deleted; one final canonical Slab remained.
+
+Canonical rule: use a live-verified Basic Slab Favorite to establish structure, omit unsupported `buildingMaterialId`, provide explicit geometry/thickness/reference plane, and verify absolute elevation as `story level + slab level` after read-back.
+
+Canonical reproduction script: `tests/smoke/basic_slab_favorite.py`.
+
 ### Native Door library part creation and placement
 Status: `VERIFIED`
 
@@ -130,6 +154,8 @@ Rafter geometry must be derived from the final accepted roof planes and their re
 Status: `KNOWN_LIMITATION`
 
 `CreateSlabs` does not accept `buildingMaterialId` in the current Safe BIM/Tapir schema. The supported create fields are limited to the actual command schema (including level, thickness, reference plane, polygon, holes and floor). Material/structure changes require a supported later operation or a favorite-based workflow.
+
+A second live result is also important: if a Composite Slab tool/default is active, `CreateSlabs` may read back as `Composite` and ignore a requested basic thickness value. The canonical Basic workflow therefore uses a verified Basic Favorite instead of relying on current tool defaults.
 
 ## Promotion rule
 
