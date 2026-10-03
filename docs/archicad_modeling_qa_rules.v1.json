@@ -13,7 +13,10 @@
       "intent": "Prevent construction of one continuous wall system as many short fragments without a real BIM reason.",
       "passCondition": "No unexplained excessive short-wall fragmentation is detected.",
       "evidence": ["wall element inventory", "segment lengths", "continuity", "opening inventory"],
-      "implementationStatus": "TO_IMPLEMENT"
+      "implementationStatus": "IMPLEMENTED_OFFLINE",
+      "implementationState": "IMPLEMENTED_OFFLINE",
+      "implementationModule": "bim_qa.py",
+      "liveValidationState": "NOT_VERIFIED"
     },
     {
       "id": "BIM-QA-002",
@@ -23,7 +26,10 @@
       "intent": "Windows must be real Window elements hosted by walls.",
       "passCondition": "All intended windows are Window elements and Morph windows == 0.",
       "evidence": ["element type inventory", "host relationship read-back"],
-      "implementationStatus": "TO_IMPLEMENT"
+      "implementationStatus": "IMPLEMENTED_OFFLINE",
+      "implementationState": "IMPLEMENTED_OFFLINE",
+      "implementationModule": "bim_qa.py",
+      "liveValidationState": "NOT_VERIFIED"
     },
     {
       "id": "BIM-QA-003",
@@ -33,7 +39,10 @@
       "intent": "Doors must be real Door elements hosted by walls.",
       "passCondition": "All intended doors are Door elements and Morph doors == 0.",
       "evidence": ["element type inventory", "host relationship read-back"],
-      "implementationStatus": "TO_IMPLEMENT"
+      "implementationStatus": "IMPLEMENTED_OFFLINE",
+      "implementationState": "IMPLEMENTED_OFFLINE",
+      "implementationModule": "bim_qa.py",
+      "liveValidationState": "NOT_VERIFIED"
     },
     {
       "id": "BIM-QA-004",
@@ -93,7 +102,10 @@
       "intent": "Retries and reconciliation must not create duplicate generated BIM elements.",
       "passCondition": "Duplicate generated semantic roles / identities == 0.",
       "evidence": ["Safe BIM identity registry", "element inventory", "operation journal"],
-      "implementationStatus": "TO_IMPLEMENT"
+      "implementationStatus": "IMPLEMENTED_OFFLINE",
+      "implementationState": "IMPLEMENTED_OFFLINE",
+      "implementationModule": "bim_qa.py",
+      "liveValidationState": "NOT_VERIFIED"
     },
     {
       "id": "BIM-QA-010",
@@ -103,7 +115,10 @@
       "intent": "Prevent false PASS and progression through an unresolved dependency.",
       "passCondition": "Every blocker required by the pass is PASS; FAIL, NOT_VERIFIED and BLOCKED_BY_TRANSPORT block dependent progression.",
       "evidence": ["pass audit result set"],
-      "implementationStatus": "TO_IMPLEMENT"
+      "implementationStatus": "IMPLEMENTED_OFFLINE",
+      "implementationState": "IMPLEMENTED_OFFLINE",
+      "implementationModule": "bim_qa.py",
+      "liveValidationState": "NOT_VERIFIED"
     }
   ],
   "pipeline": [
