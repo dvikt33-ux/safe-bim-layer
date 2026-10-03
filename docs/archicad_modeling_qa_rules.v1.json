@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "SAFE-BIM-ARCHICAD-QA-1.1",
+  "schemaVersion": "SAFE-BIM-ARCHICAD-QA-1.2",
   "status": "DRAFT",
   "defaultSeverity": "BLOCKER",
   "allowedResults": [
@@ -14,18 +14,10 @@
       "id": "BIM-QA-001",
       "name": "WALL_FRAGMENTATION",
       "severity": "BLOCKER",
-      "scope": [
-        "PASS_2_WALLS",
-        "FINAL_BIM_AUDIT"
-      ],
+      "scope": ["PASS_2_WALLS", "FINAL_BIM_AUDIT"],
       "intent": "Prevent construction of one continuous wall system as many short fragments without a real BIM reason.",
       "passCondition": "No unexplained excessive short-wall fragmentation is detected.",
-      "evidence": [
-        "wall element inventory",
-        "segment lengths",
-        "continuity",
-        "opening inventory"
-      ],
+      "evidence": ["wall element inventory", "segment lengths", "continuity", "opening inventory"],
       "implementationStatus": "IMPLEMENTED_OFFLINE",
       "implementationState": "IMPLEMENTED_OFFLINE",
       "implementationModule": "bim_qa.py",
@@ -35,16 +27,10 @@
       "id": "BIM-QA-002",
       "name": "WINDOW_NATIVE_TYPE",
       "severity": "BLOCKER",
-      "scope": [
-        "PASS_3_WINDOWS_DOORS",
-        "FINAL_BIM_AUDIT"
-      ],
+      "scope": ["PASS_3_WINDOWS_DOORS", "FINAL_BIM_AUDIT"],
       "intent": "Windows must be real Window elements hosted by walls.",
       "passCondition": "All intended windows are Window elements and Morph windows == 0.",
-      "evidence": [
-        "element type inventory",
-        "host relationship read-back"
-      ],
+      "evidence": ["element type inventory", "host relationship read-back"],
       "implementationStatus": "IMPLEMENTED_OFFLINE",
       "implementationState": "IMPLEMENTED_OFFLINE",
       "implementationModule": "bim_qa.py",
@@ -54,16 +40,10 @@
       "id": "BIM-QA-003",
       "name": "DOOR_NATIVE_TYPE",
       "severity": "BLOCKER",
-      "scope": [
-        "PASS_3_WINDOWS_DOORS",
-        "FINAL_BIM_AUDIT"
-      ],
+      "scope": ["PASS_3_WINDOWS_DOORS", "FINAL_BIM_AUDIT"],
       "intent": "Doors must be real Door elements hosted by walls.",
       "passCondition": "All intended doors are Door elements and Morph doors == 0.",
-      "evidence": [
-        "element type inventory",
-        "host relationship read-back"
-      ],
+      "evidence": ["element type inventory", "host relationship read-back"],
       "implementationStatus": "IMPLEMENTED_OFFLINE",
       "implementationState": "IMPLEMENTED_OFFLINE",
       "implementationModule": "bim_qa.py",
@@ -73,88 +53,62 @@
       "id": "BIM-QA-004",
       "name": "ROOF_COLLISIONS",
       "severity": "BLOCKER",
-      "scope": [
-        "PASS_5_ROOFS",
-        "FINAL_BIM_AUDIT"
-      ],
+      "scope": ["PASS_5_ROOFS", "FINAL_BIM_AUDIT"],
       "intent": "Prevent unresolved volumetric penetrations between intended roof planes.",
       "passCondition": "Unintended roof penetrations / overlapping unresolved roof solids == 0.",
-      "evidence": [
-        "roof details",
-        "3D bounds",
-        "geometric intersection test"
-      ],
-      "implementationStatus": "TO_IMPLEMENT"
+      "evidence": ["roof details", "3D bounds", "geometric intersection test"],
+      "implementationStatus": "TO_IMPLEMENT",
+      "offlineCheckerState": "CHECKER_READY",
+      "checkerModule": "bim_geometry_qa.py",
+      "liveValidationState": "NOT_VERIFIED"
     },
     {
       "id": "BIM-QA-005",
       "name": "ROOF_GAPS",
       "severity": "BLOCKER",
-      "scope": [
-        "PASS_5_ROOFS",
-        "FINAL_BIM_AUDIT"
-      ],
+      "scope": ["PASS_5_ROOFS", "FINAL_BIM_AUDIT"],
       "intent": "The intended roof envelope must not contain unintended open gaps.",
       "passCondition": "Unintended roof-envelope gaps == 0.",
-      "evidence": [
-        "roof adjacency",
-        "3D geometry",
-        "visual audit where transport is insufficient"
-      ],
-      "implementationStatus": "TO_IMPLEMENT"
+      "evidence": ["roof adjacency", "3D geometry", "visual audit where transport is insufficient"],
+      "implementationStatus": "TO_IMPLEMENT",
+      "offlineCheckerState": "CHECKER_READY",
+      "checkerModule": "bim_geometry_qa.py",
+      "liveValidationState": "NOT_VERIFIED"
     },
     {
       "id": "BIM-QA-006",
       "name": "WALL_TOPS",
       "severity": "BLOCKER",
-      "scope": [
-        "PASS_6_WALL_ROOF_RELATIONSHIP",
-        "FINAL_BIM_AUDIT"
-      ],
+      "scope": ["PASS_6_WALL_ROOF_RELATIONSHIP", "FINAL_BIM_AUDIT"],
       "intent": "Gable and roof-adjacent walls must derive their top geometry from a proper roof relationship, not stepped fragments.",
       "passCondition": "No exterior wall protrudes unintentionally through the accepted roof and no stepped-fragment gable construction exists.",
-      "evidence": [
-        "wall details",
-        "roof details",
-        "3D bounds",
-        "fragmentation inventory"
-      ],
-      "implementationStatus": "TO_IMPLEMENT"
+      "evidence": ["wall details", "roof details", "3D bounds", "fragmentation inventory"],
+      "implementationStatus": "TO_IMPLEMENT",
+      "offlineCheckerState": "CHECKER_READY",
+      "checkerModule": "bim_geometry_qa.py",
+      "liveValidationState": "NOT_VERIFIED"
     },
     {
       "id": "BIM-QA-007",
       "name": "RAFTER_ALIGNMENT",
       "severity": "BLOCKER",
-      "scope": [
-        "PASS_7_RAFTERS",
-        "FINAL_BIM_AUDIT"
-      ],
+      "scope": ["PASS_7_RAFTERS", "FINAL_BIM_AUDIT"],
       "intent": "Rafters must derive from and agree with accepted roof geometry.",
       "passCondition": "Each generated rafter aligns with the intended roof plane and correct bearing / ridge / valley geometry.",
-      "evidence": [
-        "Beam details",
-        "roof plane details",
-        "rafter endpoints",
-        "3D bounds"
-      ],
-      "implementationStatus": "TO_IMPLEMENT"
+      "evidence": ["Beam details", "roof plane details", "rafter endpoints", "3D bounds"],
+      "implementationStatus": "TO_IMPLEMENT",
+      "offlineCheckerState": "CHECKER_READY",
+      "checkerModule": "bim_geometry_qa.py",
+      "liveValidationState": "NOT_VERIFIED"
     },
     {
       "id": "BIM-QA-008",
       "name": "STORY_ASSIGNMENT",
       "severity": "BLOCKER",
-      "scope": [
-        "ALL_PASSES",
-        "FINAL_BIM_AUDIT"
-      ],
+      "scope": ["ALL_PASSES", "FINAL_BIM_AUDIT"],
       "intent": "Generated elements must belong to the intended story/elevation system.",
       "passCondition": "All controlled elements have the intended story / floor assignment and declared elevation relationship.",
-      "evidence": [
-        "story index",
-        "base elevation when required by intent",
-        "element details",
-        "controlled element inventory"
-      ],
+      "evidence": ["story index", "base elevation when required by intent", "element details", "controlled element inventory"],
       "implementationStatus": "IMPLEMENTED_OFFLINE",
       "implementationState": "IMPLEMENTED_OFFLINE",
       "implementationModule": "bim_qa.py",
@@ -164,17 +118,10 @@
       "id": "BIM-QA-009",
       "name": "DUPLICATES",
       "severity": "BLOCKER",
-      "scope": [
-        "ALL_PASSES",
-        "FINAL_BIM_AUDIT"
-      ],
+      "scope": ["ALL_PASSES", "FINAL_BIM_AUDIT"],
       "intent": "Retries and reconciliation must not create duplicate generated BIM elements.",
       "passCondition": "Duplicate generated semantic roles / identities == 0.",
-      "evidence": [
-        "Safe BIM identity registry",
-        "element inventory",
-        "operation journal"
-      ],
+      "evidence": ["Safe BIM identity registry", "element inventory", "operation journal"],
       "implementationStatus": "IMPLEMENTED_OFFLINE",
       "implementationState": "IMPLEMENTED_OFFLINE",
       "implementationModule": "bim_qa.py",
@@ -184,14 +131,10 @@
       "id": "BIM-QA-010",
       "name": "PASS_DEPENDENCY",
       "severity": "BLOCKER",
-      "scope": [
-        "ALL_PASSES"
-      ],
+      "scope": ["ALL_PASSES"],
       "intent": "Prevent false PASS and progression through an unresolved dependency.",
       "passCondition": "Every blocker required by the pass is PASS; FAIL, NOT_VERIFIED and BLOCKED_BY_TRANSPORT block dependent progression.",
-      "evidence": [
-        "pass audit result set"
-      ],
+      "evidence": ["pass audit result set"],
       "implementationStatus": "IMPLEMENTED_OFFLINE",
       "implementationState": "IMPLEMENTED_OFFLINE",
       "implementationModule": "bim_qa.py",
@@ -201,78 +144,103 @@
       "id": "BIM-QA-011",
       "name": "MINIMUM_ELEMENT_COUNT",
       "severity": "BLOCKER",
-      "scope": [
-        "ALL_PASSES",
-        "FINAL_BIM_AUDIT"
-      ],
+      "scope": ["ALL_PASSES", "FINAL_BIM_AUDIT"],
       "intent": "Prefer the smallest semantically correct set of native BIM elements and Archicad operations over equivalent fragmentation.",
       "passCondition": "Every controlled semantic role uses no more than its trusted maxElementCount unless a reviewed construction exception is present; operations are preferred over fragmentation where available.",
-      "evidence": [
-        "controlled element inventory",
-        "trusted semantic role intent",
-        "maxElementCount",
-        "strategyKind",
-        "operationName when applicable",
-        "reviewed fragmentation exception"
-      ],
+      "evidence": ["controlled element inventory", "trusted semantic role intent", "maxElementCount", "strategyKind", "operationName when applicable", "reviewed fragmentation exception"],
       "implementationStatus": "IMPLEMENTED_OFFLINE",
       "implementationState": "IMPLEMENTED_OFFLINE",
       "implementationModule": "bim_qa.py",
       "liveValidationState": "NOT_VERIFIED"
+    },
+    {
+      "id": "BIM-QA-012",
+      "name": "ROOF_TO_WALL_COVERAGE",
+      "severity": "BLOCKER",
+      "scope": ["PASS_5_ROOFS", "FINAL_BIM_AUDIT"],
+      "intent": "Every exterior wall line that is intended to be roof-covered must be reached by the roof and satisfy its verified design overhang/reach requirement.",
+      "passCondition": "Actual roof reach/overhang is not less than the verified rule value for every scoped wall/roof relation.",
+      "evidence": ["complete exterior wall/roof coverage intent", "trusted geometry collector measurement", "verified Rule Registry threshold"],
+      "implementationStatus": "TO_IMPLEMENT",
+      "offlineCheckerState": "CHECKER_READY",
+      "checkerModule": "bim_coordination_qa.py",
+      "liveValidationState": "NOT_VERIFIED"
+    },
+    {
+      "id": "BIM-QA-013",
+      "name": "WALL_CONNECTIVITY",
+      "severity": "BLOCKER",
+      "scope": ["PASS_2_WALLS", "FINAL_BIM_AUDIT"],
+      "intent": "Walls intended to meet must form actual T/L/X/end/collinear junctions without unexplained gaps.",
+      "passCondition": "Every intended wall junction is connected and its measured gap is within the verified rule value.",
+      "evidence": ["complete wall-junction intent", "wall identities", "trusted geometry collector gap measurement", "verified Rule Registry threshold"],
+      "implementationStatus": "TO_IMPLEMENT",
+      "offlineCheckerState": "CHECKER_READY",
+      "checkerModule": "bim_coordination_qa.py",
+      "liveValidationState": "NOT_VERIFIED"
+    },
+    {
+      "id": "BIM-QA-014",
+      "name": "VERTICAL_LOADBEARING_CONTINUITY",
+      "severity": "BLOCKER",
+      "scope": ["PASS_2_WALLS", "FINAL_BIM_AUDIT"],
+      "intent": "Upper-storey load-bearing walls must have an explicit continuous support path to intended structural elements below.",
+      "passCondition": "Every scoped load-bearing wall satisfies verified support-ratio and horizontal-offset rules or an explicitly reviewed transfer-structure intent.",
+      "evidence": ["load-bearing wall intent", "support element identity/type", "trusted overlap/offset measurement", "verified Rule Registry thresholds"],
+      "implementationStatus": "TO_IMPLEMENT",
+      "offlineCheckerState": "CHECKER_READY",
+      "checkerModule": "bim_coordination_qa.py",
+      "liveValidationState": "NOT_VERIFIED"
+    },
+    {
+      "id": "BIM-QA-015",
+      "name": "WALL_OPENING_CONFLICT",
+      "severity": "BLOCKER",
+      "scope": ["PASS_3_WINDOWS_DOORS", "FINAL_BIM_AUDIT"],
+      "intent": "No wall or partition may enter, split or terminate inside an intended Window/Door opening zone.",
+      "passCondition": "No checked wall intersects an opening and every wall/opening pair satisfies its verified minimum clearance.",
+      "evidence": ["complete wall/opening conflict pairs", "native opening identities", "trusted geometry intersection/clearance measurement", "verified Rule Registry threshold"],
+      "implementationStatus": "TO_IMPLEMENT",
+      "offlineCheckerState": "CHECKER_READY",
+      "checkerModule": "bim_coordination_qa.py",
+      "liveValidationState": "NOT_VERIFIED"
+    },
+    {
+      "id": "BIM-QA-016",
+      "name": "OPENING_EDGE_CLEARANCE",
+      "severity": "BLOCKER",
+      "scope": ["PASS_3_WINDOWS_DOORS", "FINAL_BIM_AUDIT"],
+      "intent": "Window/Door positions, corner offsets, wall offsets and pier widths must be dimensioned against verified rule values rather than visually distributed.",
+      "passCondition": "Every required opening-to-corner, opening-to-wall, between-opening, pier and jamb measurement meets its verified minimum.",
+      "evidence": ["complete opening-clearance measurement intent", "measured distances", "Rule Registry ruleId and parameter", "normative/project provenance"],
+      "implementationStatus": "TO_IMPLEMENT",
+      "offlineCheckerState": "CHECKER_READY",
+      "checkerModule": "bim_coordination_qa.py",
+      "liveValidationState": "NOT_VERIFIED"
+    },
+    {
+      "id": "BIM-QA-017",
+      "name": "MASONRY_MODULE_FIT",
+      "severity": "BLOCKER",
+      "scope": ["PASS_2_WALLS", "PASS_3_WINDOWS_DOORS", "FINAL_BIM_AUDIT"],
+      "intent": "Masonry wall runs, piers, jambs and opening offsets must follow the explicitly selected verified masonry coordination module.",
+      "passCondition": "Every scoped masonry dimension fits the verified moduleStep/allowedResidues within the verified moduleTolerance.",
+      "evidence": ["masonry system intent", "measured wall/opening dimensions", "verified moduleStep", "verified allowedResidues", "verified moduleTolerance", "Rule Registry provenance"],
+      "implementationStatus": "TO_IMPLEMENT",
+      "offlineCheckerState": "CHECKER_READY",
+      "checkerModule": "bim_coordination_qa.py",
+      "liveValidationState": "NOT_VERIFIED"
     }
   ],
   "pipeline": [
-    {
-      "id": "PASS_1_STORIES",
-      "requires": []
-    },
-    {
-      "id": "PASS_2_WALLS",
-      "requires": [
-        "PASS_1_STORIES"
-      ]
-    },
-    {
-      "id": "PASS_3_WINDOWS_DOORS",
-      "requires": [
-        "PASS_2_WALLS"
-      ]
-    },
-    {
-      "id": "PASS_4_SLABS",
-      "requires": [
-        "PASS_3_WINDOWS_DOORS"
-      ]
-    },
-    {
-      "id": "PASS_5_ROOFS",
-      "requires": [
-        "PASS_4_SLABS"
-      ]
-    },
-    {
-      "id": "PASS_6_WALL_ROOF_RELATIONSHIP",
-      "requires": [
-        "PASS_5_ROOFS"
-      ]
-    },
-    {
-      "id": "PASS_7_RAFTERS",
-      "requires": [
-        "PASS_6_WALL_ROOF_RELATIONSHIP"
-      ]
-    },
-    {
-      "id": "PASS_8_PORCH_SECONDARY",
-      "requires": [
-        "PASS_7_RAFTERS"
-      ]
-    },
-    {
-      "id": "FINAL_BIM_AUDIT",
-      "requires": [
-        "PASS_8_PORCH_SECONDARY"
-      ]
-    }
+    {"id": "PASS_1_STORIES", "requires": []},
+    {"id": "PASS_2_WALLS", "requires": ["PASS_1_STORIES"]},
+    {"id": "PASS_3_WINDOWS_DOORS", "requires": ["PASS_2_WALLS"]},
+    {"id": "PASS_4_SLABS", "requires": ["PASS_3_WINDOWS_DOORS"]},
+    {"id": "PASS_5_ROOFS", "requires": ["PASS_4_SLABS"]},
+    {"id": "PASS_6_WALL_ROOF_RELATIONSHIP", "requires": ["PASS_5_ROOFS"]},
+    {"id": "PASS_7_RAFTERS", "requires": ["PASS_6_WALL_ROOF_RELATIONSHIP"]},
+    {"id": "PASS_8_PORCH_SECONDARY", "requires": ["PASS_7_RAFTERS"]},
+    {"id": "FINAL_BIM_AUDIT", "requires": ["PASS_8_PORCH_SECONDARY"]}
   ]
 }
