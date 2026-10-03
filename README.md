@@ -47,6 +47,9 @@ every production threshold/module must resolve to a VERIFIED Rule Registry entry
 with normative or approved project provenance. Missing rule data is
 `NOT_VERIFIED / DATA_MISSING`, never an assumed PASS.
 
+Offline validation for these coordination rules is recorded in
+[`docs/BIM_COORDINATION_QA_VALIDATION.md`](docs/BIM_COORDINATION_QA_VALIDATION.md).
+
 Run `python -m unittest discover -v`. Missing evidence blocks PASS; unimplemented
 or not-yet-wired live checks remain NOT_VERIFIED. The offline auditors do not
 change existing runtime operations or access a live PLN.
