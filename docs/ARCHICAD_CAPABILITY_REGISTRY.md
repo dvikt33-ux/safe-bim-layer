@@ -11,6 +11,26 @@ This registry records only capabilities that were actually exercised against Arc
 
 ## Verified capabilities
 
+### Native hosted Window + Door in one continuous Wall
+Status: `VERIFIED`
+
+Live canonical smoke passed on 2026-10-03.
+
+Evidence from the successful run:
+
+- host Wall GUID: `FA9434E5-53CE-4FE6-BD43-9B9FDD14679B`;
+- native Window GUID: `D5C35B66-2814-43D7-A29D-4F615F76FAAC`;
+- native Door GUID: `8B0EBA3D-DF24-46FE-B772-160E23027044`;
+- isolated test-region Wall count after insertion: `1`;
+- Window read-back type: `Window`;
+- Door read-back type: `Door`;
+- Morph fallback count: `0`;
+- wall fragmentation: `0`.
+
+Canonical rule: openings in normal building walls are hosted native/library `Window` and `Door` elements. Do not split a Wall into sill/head/jamb wall fragments to fake an opening, and do not substitute Morph geometry.
+
+Canonical reproduction script: `tests/smoke/native_window_door_continuous_wall.py`.
+
 ### Native Door library part creation and placement
 Status: `VERIFIED`
 
