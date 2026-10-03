@@ -11,9 +11,35 @@ import math
 from pathlib import Path
 
 RULES_PATH = Path(__file__).parent / 'docs' / 'archicad_modeling_qa_rules.v1.json'
-IMPLEMENTED = {'BIM-QA-001', 'BIM-QA-002', 'BIM-QA-003', 'BIM-QA-009', 'BIM-QA-010'}
+IMPLEMENTED = {
+    'BIM-QA-001',
+    'BIM-QA-002',
+    'BIM-QA-003',
+    'BIM-QA-008',
+    'BIM-QA-009',
+    'BIM-QA-010',
+    'BIM-QA-011',
+}
 RESULTS = {'PASS', 'FAIL', 'NOT_VERIFIED', 'BLOCKED_BY_TRANSPORT'}
 EPS = 1e-6  # metres; fixed, not caller-controlled
+
+FRAGMENTATION_EXCEPTION_CATEGORIES = {
+    'construction',
+    'geometry',
+    'renovation',
+    'material',
+    'story',
+    'ownership',
+    'api_limitation',
+}
+ECONOMY_STRATEGIES = {
+    'NATIVE_ELEMENT',
+    'HOSTED_NATIVE',
+    'NATIVE_OPERATION',
+    'COMPLEX_PROFILE',
+    'GDL',
+    'MINIMAL_MULTI_ELEMENT',
+}
 
 
 def result(status, reason, guids=()):
@@ -26,6 +52,24 @@ def text(value):
 
 def number(value):
     return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+
+
+def integer(value):
+    return isinstance(value, int) and not isinstance(value, bool)
+
+
+def _approved_fragmentation_exception(value):
+    if not isinstance(value, dict):
+        return False
+    if value.get('category') not in FRAGMENTATION_EXCEPTION_CATEGORIES:
+        return False
+    if not text(value.get('reason')) or not text(value.get('reviewedBy')) or value.get('approved') is not True:
+        return False
+    # An API/transport limitation is never an automatic licence to degrade BIM
+    # semantics. A human-reviewed fallback decision is required explicitly.
+    if value.get('category') == 'api_limitation' and value.get('fallbackReviewed') is not True:
+        return False
+    return True
 
 
 def snapshot_from_readback(response, requested_guids, metadata):
@@ -201,17 +245,12 @@ def _walls(s, index):
                 cursor = 0.0
                 for lo, hi in intervals:
                     if abs(lo-cursor) > EPS:
-                        failed.extend(guids)  # gaps/overlaps cannot prove one continuous side
+                        failed.extend(guids)
                     cursor = hi
                 if abs(cursor-length) > EPS:
                     failed.extend(guids)
-            if len(guids) > 1:
-                exception = system.get('fragmentationException', {})
-                allowed = {'construction', 'geometry', 'renovation', 'material', 'story', 'ownership', 'api_limitation'}
-                if (not isinstance(exception, dict) or exception.get('category') not in allowed
-                        or not text(exception.get('reason')) or not text(exception.get('reviewedBy'))
-                        or exception.get('approved') is not True):
-                    failed.extend(g for g in guids if g in index)
+            if len(guids) > 1 and not _approved_fragmentation_exception(system.get('fragmentationException')):
+                failed.extend(g for g in guids if g in index)
         if covered != {g for g, row in index.items() if row['type'] == 'Wall'}:
             uncertain = True
     except (KeyError, TypeError, ValueError):
@@ -221,6 +260,67 @@ def _walls(s, index):
     if uncertain:
         return result('NOT_VERIFIED', 'Incomplete wall coverage/geometry evidence')
     return result('PASS', 'Continuous walls verified; all splits have reviewed BIM reasons')
+
+
+def _story_assignment(s, index):
+    intents = s.get('storyIntents')
+    controlled = s.get('controlledGuids')
+    if not isinstance(intents, list) or s.get('storyIntentsComplete') is not True:
+        return result('NOT_VERIFIED', 'Missing complete story assignment intent')
+    if (not isinstance(controlled, list) or s.get('controlledInventoryComplete') is not True
+            or any(not text(g) for g in controlled) or len(set(controlled)) != len(controlled)):
+        return result('NOT_VERIFIED', 'Missing complete controlled inventory for story audit')
+
+    expected_by_guid = {}
+    failed = []
+    uncertain = False
+
+    for intent in intents:
+        if (not isinstance(intent, dict) or not text(intent.get('guid'))
+                or not integer(intent.get('floorIndex'))
+                or intent.get('elevationMode') not in ('STORY_ONLY', 'ABSOLUTE_BASE')):
+            uncertain = True
+            continue
+        guid = intent['guid']
+        if guid in expected_by_guid:
+            uncertain = True
+            continue
+        expected_by_guid[guid] = intent
+
+    if set(expected_by_guid) != set(controlled):
+        uncertain = True
+
+    for guid in controlled:
+        row = index.get(guid)
+        intent = expected_by_guid.get(guid)
+        if row is None or intent is None:
+            uncertain = True
+            continue
+        actual_floor = row.get('floorIndex')
+        if not integer(actual_floor):
+            uncertain = True
+            continue
+        if actual_floor != intent['floorIndex']:
+            failed.append(guid)
+
+        if intent['elevationMode'] == 'ABSOLUTE_BASE':
+            expected_base = intent.get('baseElevation')
+            if not number(expected_base):
+                uncertain = True
+                continue
+            actual_base = row.get('baseElevation')
+            if not number(actual_base) and row.get('type') == 'Wall':
+                actual_base = row.get('details', {}).get('zCoordinate')
+            if not number(actual_base):
+                uncertain = True
+            elif abs(actual_base - expected_base) > EPS:
+                failed.append(guid)
+
+    if failed:
+        return result('FAIL', 'Element is assigned to the wrong story or base elevation', failed)
+    if uncertain:
+        return result('NOT_VERIFIED', 'Incomplete story/elevation assignment evidence')
+    return result('PASS', 'All controlled elements match their intended story/elevation contract')
 
 
 def _duplicates(s, index):
@@ -268,6 +368,79 @@ def _duplicates(s, index):
     return result('PASS', 'No duplicate generated identities or roles in complete scoped evidence')
 
 
+def _element_economy(s, index):
+    """Enforce operation-over-fragmentation from trusted semantic intent.
+
+    maxElementCount is not inferred from generated geometry. It must come from a
+    trusted planner/reference contract describing the smallest known semantically
+    correct representation for that role.
+    """
+    intents = s.get('elementEconomyIntents')
+    controlled = s.get('controlledGuids')
+    if not isinstance(intents, list) or s.get('elementEconomyComplete') is not True:
+        return result('NOT_VERIFIED', 'Missing complete minimum-element-count intent')
+    if (not isinstance(controlled, list) or s.get('controlledInventoryComplete') is not True
+            or any(not text(g) for g in controlled) or len(set(controlled)) != len(controlled)):
+        return result('NOT_VERIFIED', 'Missing complete controlled inventory for element-economy audit')
+
+    failed = []
+    uncertain = False
+    covered = set()
+    intent_ids = set()
+
+    for intent in intents:
+        if not isinstance(intent, dict) or not text(intent.get('id')) or intent['id'] in intent_ids:
+            uncertain = True
+            continue
+        intent_ids.add(intent['id'])
+        guids = intent.get('guids')
+        max_count = intent.get('maxElementCount')
+        strategy = intent.get('strategyKind')
+        if (not text(intent.get('semanticRole'))
+                or not isinstance(guids, list) or not guids
+                or any(not text(g) for g in guids) or len(set(guids)) != len(guids)
+                or not integer(max_count) or max_count < 1
+                or strategy not in ECONOMY_STRATEGIES):
+            uncertain = True
+            continue
+
+        if strategy == 'NATIVE_OPERATION' and not text(intent.get('operationName')):
+            uncertain = True
+        if strategy == 'MINIMAL_MULTI_ELEMENT' and max_count < 2:
+            uncertain = True
+
+        if covered.intersection(guids):
+            uncertain = True
+        covered.update(guids)
+
+        for guid in guids:
+            if guid not in index or guid not in controlled:
+                uncertain = True
+
+        if len(guids) > max_count:
+            if not _approved_fragmentation_exception(intent.get('fragmentationException')):
+                failed.extend(g for g in guids if g in index)
+
+    if covered != set(controlled):
+        uncertain = True
+
+    if failed:
+        return result(
+            'FAIL',
+            'A semantic role uses more BIM elements than its approved minimal representation',
+            failed,
+        )
+    if uncertain:
+        return result(
+            'NOT_VERIFIED',
+            'Incomplete or ambiguous minimum-element-count / operation-strategy evidence',
+        )
+    return result(
+        'PASS',
+        'Controlled elements use the approved minimal semantic representation or reviewed exception',
+    )
+
+
 def _dependency(s, stage, audits, current, rules):
     pipeline = {p['id']: p for p in rules['pipeline']}
     if not text(stage) or stage not in pipeline:
@@ -301,7 +474,7 @@ def _dependency(s, stage, audits, current, rules):
             outcomes = {}
         for rule in rules['rules']:
             if rule['id'] == 'BIM-QA-010':
-                continue  # avoid self-reference; independently recompute the full chain
+                continue
             if 'ALL_PASSES' in rule['scope'] or pass_id in rule['scope']:
                 value = outcomes.get(rule['id'], {})
                 status = value.get('status') if isinstance(value, dict) else None
@@ -329,7 +502,9 @@ def audit_snapshot(snapshot, stage, previous_audits=None):
         outcomes['BIM-QA-001'] = _walls(snapshot, index)
         outcomes['BIM-QA-002'] = _native(snapshot, index, 'Window')
         outcomes['BIM-QA-003'] = _native(snapshot, index, 'Door')
+        outcomes['BIM-QA-008'] = _story_assignment(snapshot, index)
         outcomes['BIM-QA-009'] = _duplicates(snapshot, index)
+        outcomes['BIM-QA-011'] = _element_economy(snapshot, index)
     outcomes['BIM-QA-010'] = _dependency(snapshot, stage, previous_audits or {}, outcomes, rules)
     return {**{k: snapshot.get(k) for k in ('projectId', 'snapshotId', 'auditScope')},
             'stage': stage, 'status': outcomes['BIM-QA-010']['status'], 'rules': outcomes}
