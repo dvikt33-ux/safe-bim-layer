@@ -25,11 +25,16 @@ Generated geometry is governed by [the Archicad modeling standard](docs/SAFE_BIM
 
 Reference-pattern capture is defined by [the Archicad reference-model protocol](docs/ARCHICAD_REFERENCE_MODEL_PROTOCOL.md). Machine-readable blocker rules and pass dependencies are in [`docs/archicad_modeling_qa_rules.v1.json`](docs/archicad_modeling_qa_rules.v1.json).
 
-The first [offline blocker auditor](docs/BIM_QA.md) implements rules 001, 002,
-003, 009 and 010 using captured read-back plus explicit scoped intent/identity
-evidence. Run `python -m unittest discover -v`. Missing evidence blocks PASS;
-unimplemented rules remain NOT_VERIFIED. The auditor is opt-in and does not
-change existing runtime operations or access a live PLN.
+The offline [blocker auditor](docs/BIM_QA.md) implements rules 001, 002, 003,
+008, 009, 010 and 011 using captured read-back plus explicit scoped
+intent/identity evidence. Rule 011 enforces **minimum semantically correct
+element count / operations before fragmentation**: e.g. one Wall + roof trim is
+preferred over a stepped gable made of many Walls, and one/minimal Slab set +
+native cut/SEO operations is preferred over a pile of porch fragments.
+
+Run `python -m unittest discover -v`. Missing evidence blocks PASS; unimplemented
+rules remain NOT_VERIFIED. The auditor is opt-in and does not change existing
+runtime operations or access a live PLN.
 
 ## Collaboration workflow
 
