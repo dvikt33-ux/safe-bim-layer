@@ -1,0 +1,85 @@
+{
+  "provenance": {
+    "kind": "SANITIZED_HISTORICAL_READBACK",
+    "source": "Paired GetDetailsOfElements request/response captures from 2026-10-02 local library diagnostic",
+    "sourceRequestSha256": "b59867234a2087eed9893dd37a59c819910a2b23c5e87180a547cc73bc4c161c",
+    "sourceResponseSha256": "69813a49b31707d7ff3bdda2b4a63f572f8446b4237b91119b4ea636964a7c9a",
+    "sanitization": "GUID aliases; removed labels, material/library identifiers and unused fields; geometry/types/host relationship retained",
+    "limitation": "Partial historical capture; no project identity, completeness, generated identity registry or journal proof. Not live validation."
+  },
+  "captures": [
+    {
+      "requestedGuids": [
+        "capture-wall"
+      ],
+      "response": {
+        "detailsOfElements": [
+          {
+            "type": "Wall",
+            "floorIndex": 0,
+            "details": {
+              "geometryType": "Straight",
+              "arcAngle": 0,
+              "zCoordinate": 0,
+              "begCoordinate": {
+                "x": 30,
+                "y": 0
+              },
+              "endCoordinate": {
+                "x": 37,
+                "y": 0
+              },
+              "height": 3.2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "requestedGuids": [
+        "capture-window-1"
+      ],
+      "response": {
+        "detailsOfElements": [
+          {
+            "type": "Window",
+            "floorIndex": 0,
+            "details": {
+              "ownerElementId": {
+                "guid": "capture-wall"
+              },
+              "ownerElementType": "Wall",
+              "width": 1.35,
+              "height": 1.75,
+              "sillHeight": 0.75,
+              "centerOffset": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "requestedGuids": [
+        "capture-window-2"
+      ],
+      "response": {
+        "detailsOfElements": [
+          {
+            "type": "Window",
+            "floorIndex": 0,
+            "details": {
+              "ownerElementId": {
+                "guid": "capture-wall"
+              },
+              "ownerElementType": "Wall",
+              "width": 1.05,
+              "height": 1.55,
+              "sillHeight": 0.75,
+              "centerOffset": 5
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
