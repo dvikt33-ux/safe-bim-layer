@@ -3,8 +3,12 @@
 
 """Read-only inventory of the currently opened Archicad document.
 
+Scopes:
+- current: elements of the current Archicad database.
+- whole-model: model elements across all StoryItem databases in the Project Map,
+  deduplicated by GUID.
+
 Output: GUID + native element type + story index + counts by type.
-Uses Archicad's built-in JSON API plus Tapir GetDetailsOfElements.
 No BIM mutations are performed.
 """
 
@@ -15,15 +19,16 @@ import json
 import os
 import sys
 from collections import Counter
-from urllib.error import URLError, HTTPError
+from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 PORT_MIN = 19723
 PORT_MAX = 19743
 DEFAULT_CHUNK = 500
+DB_CHUNK = 100
 
 
-def _post(port: int, payload: dict, timeout: float = 8.0) -> dict:
+def _post(port: int, payload: dict, timeout: float = 20.0) -> dict:
     req = Request(
         f"http://127.0.0.1:{port}",
         data=json.dumps(payload).encode("utf-8"),
@@ -106,14 +111,130 @@ def _get_project_info(port: int) -> dict:
         return {}
 
 
-def collect_inventory(port: int, chunk_size: int = DEFAULT_CHUNK) -> dict:
-    all_result = _post(port, {"command": "API.GetAllElements"})
-    elements = all_result.get("elements")
-    if not isinstance(elements, list):
-        raise RuntimeError("API.GetAllElements returned no 'elements' list")
+def _iter_tree_items(items):
+    if not isinstance(items, list):
+        return
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        yield item
+        children = item.get("children")
+        if isinstance(children, list):
+            yield from _iter_tree_items(children)
 
+
+def _story_databases(port: int) -> tuple[list[dict], int]:
+    tree_result = _post(
+        port,
+        {
+            "command": "API.GetNavigatorItemTree",
+            "parameters": {"navigatorTreeId": {"type": "ProjectMap"}},
+        },
+    )
+    navigator_tree = tree_result.get("navigatorTree")
+    if not isinstance(navigator_tree, dict):
+        raise RuntimeError("API.GetNavigatorItemTree returned no navigatorTree")
+    root = navigator_tree.get("rootItem")
+    if not isinstance(root, dict):
+        raise RuntimeError("Project Map navigator tree has no rootItem")
+
+    nav_ids = []
+    for item in _iter_tree_items(root.get("children", [])):
+        if item.get("itemType") != "StoryItem":
+            continue
+        nav_id = item.get("navigatorItemId")
+        if isinstance(nav_id, dict):
+            nav_ids.append(nav_id)
+
+    if not nav_ids:
+        raise RuntimeError("No StoryItem databases found in Project Map")
+
+    databases = []
+    seen_db_guids = set()
+    for start in range(0, len(nav_ids), DB_CHUNK):
+        response = _run_tapir(
+            port,
+            "GetDatabaseIdFromNavigatorItemId",
+            {"navigatorItemIds": nav_ids[start:start + DB_CHUNK]},
+        )
+        batch = response.get("databases")
+        if not isinstance(batch, list):
+            raise RuntimeError(
+                "GetDatabaseIdFromNavigatorItemId returned no databases list"
+            )
+        for item in batch:
+            if not isinstance(item, dict):
+                continue
+            db_id = item.get("databaseId")
+            if not isinstance(db_id, dict):
+                continue
+            guid = db_id.get("guid")
+            if not isinstance(guid, str) or guid in seen_db_guids:
+                continue
+            seen_db_guids.add(guid)
+            databases.append({"databaseId": {"guid": guid}})
+
+    if not databases:
+        raise RuntimeError("StoryItem navigator entries resolved to no usable databases")
+
+    return databases, len(nav_ids)
+
+
+def _get_elements(port: int, scope: str) -> tuple[list[dict], dict]:
+    if scope == "current":
+        result = _post(port, {"command": "API.GetAllElements"})
+        elements = result.get("elements")
+        if not isinstance(elements, list):
+            raise RuntimeError("API.GetAllElements returned no 'elements' list")
+        return elements, {
+            "scope": "current",
+            "rawElementOccurrences": len(elements),
+            "databaseCount": 1,
+        }
+
+    databases, story_item_count = _story_databases(port)
+    all_elements = []
+    execution_results = []
+
+    for start in range(0, len(databases), DB_CHUNK):
+        db_chunk = databases[start:start + DB_CHUNK]
+        result = _run_tapir(port, "GetAllElements", {"databases": db_chunk})
+        elements = result.get("elements")
+        if not isinstance(elements, list):
+            raise RuntimeError(
+                f"Tapir GetAllElements returned no elements for database chunk {start}"
+            )
+        all_elements.extend(elements)
+        per_db = result.get("executionResultForDatabases")
+        if isinstance(per_db, list):
+            execution_results.extend(per_db)
+
+    # Same model element can be visible/listed from more than one StoryItem database.
+    # Whole-model inventory is an element inventory, not a view-occurrence inventory.
+    unique_by_guid = {}
+    guidless = []
+    for element in all_elements:
+        guid = _extract_guid(element)
+        if guid is None:
+            guidless.append(element)
+        else:
+            unique_by_guid.setdefault(guid, element)
+
+    elements = list(unique_by_guid.values()) + guidless
+    return elements, {
+        "scope": "whole-model",
+        "storyNavigatorItemCount": story_item_count,
+        "databaseCount": len(databases),
+        "rawElementOccurrences": len(all_elements),
+        "duplicateOccurrencesRemoved": len(all_elements) - len(elements),
+        "databaseExecutionResults": execution_results,
+    }
+
+
+def _get_details(port: int, elements: list[dict], chunk_size: int):
     inventory = []
     counts = Counter()
+    missing_details = 0
 
     for start in range(0, len(elements), chunk_size):
         chunk = elements[start:start + chunk_size]
@@ -141,27 +262,37 @@ def collect_inventory(port: int, chunk_size: int = DEFAULT_CHUNK) -> dict:
             if raw_detail is None:
                 element_type = "UNKNOWN"
                 story = None
+                missing_details += 1
             elif isinstance(raw_detail, dict):
                 element_type = raw_detail.get("type") or "UNKNOWN"
                 story = raw_detail.get("floorIndex")
+                if element_type == "UNKNOWN":
+                    missing_details += 1
             else:
                 element_type = "UNKNOWN"
                 story = None
+                missing_details += 1
 
             counts[element_type] += 1
-            inventory.append(
-                {
-                    "guid": guid,
-                    "type": element_type,
-                    "story": story,
-                }
-            )
+            inventory.append({"guid": guid, "type": element_type, "story": story})
 
-    project_info = _get_project_info(port)
+    return inventory, counts, missing_details
+
+
+def collect_inventory(
+    port: int,
+    chunk_size: int = DEFAULT_CHUNK,
+    scope: str = "current",
+) -> dict:
+    elements, scope_meta = _get_elements(port, scope)
+    inventory, counts, missing_details = _get_details(port, elements, chunk_size)
+
     return {
         "port": port,
-        "project": project_info,
+        "scope": scope_meta,
+        "project": _get_project_info(port),
         "total": len(inventory),
+        "missingDetails": missing_details,
         "countsByType": dict(sorted(counts.items(), key=lambda item: item[0].lower())),
         "elements": inventory,
     }
@@ -169,10 +300,19 @@ def collect_inventory(port: int, chunk_size: int = DEFAULT_CHUNK) -> dict:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Read current Archicad model inventory (GUID + type + story), read-only."
+        description="Read Archicad inventory (GUID + type + story), read-only."
     )
     parser.add_argument("--port", type=int, help="Archicad JSON API port, e.g. 19723")
     parser.add_argument("--chunk-size", type=int, default=DEFAULT_CHUNK)
+    parser.add_argument(
+        "--scope",
+        choices=["current", "whole-model"],
+        default="current",
+        help=(
+            "current = active Archicad database; "
+            "whole-model = all Project Map StoryItem databases, deduplicated by GUID"
+        ),
+    )
     parser.add_argument(
         "--output",
         default="archicad_inventory.json",
@@ -185,7 +325,7 @@ def main() -> int:
 
     try:
         port = _detect_port(args.port)
-        result = collect_inventory(port, args.chunk_size)
+        result = collect_inventory(port, args.chunk_size, args.scope)
     except (RuntimeError, URLError, HTTPError, TimeoutError, OSError, ValueError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
@@ -197,8 +337,15 @@ def main() -> int:
         f.write("\n")
     os.replace(temp_path, output_path)
 
+    scope = result["scope"]
     print(f"Archicad port: {result['port']}")
-    print(f"Total elements: {result['total']}")
+    print(f"Scope: {scope['scope']}")
+    if scope["scope"] == "whole-model":
+        print(f"Story databases: {scope['databaseCount']}")
+        print(f"Raw occurrences: {scope['rawElementOccurrences']}")
+        print(f"Duplicate occurrences removed: {scope['duplicateOccurrencesRemoved']}")
+    print(f"Total unique elements: {result['total']}")
+    print(f"Missing details: {result['missingDetails']}")
     for element_type, count in result["countsByType"].items():
         print(f"  {element_type}: {count}")
     print(f"Saved: {output_path}")
