@@ -111,19 +111,37 @@ def _get_project_info(port: int) -> dict:
         return {}
 
 
-def _iter_tree_items(items):
-    if not isinstance(items, list):
-        return
-    for item in items:
+def _find_story_navigator_ids(root_item: dict) -> tuple[list[dict], Counter]:
+    """Traverse Archicad's NavigatorItemTree response.
+
+    Tree children are wrapper objects: {"navigatorItem": {...}}.
+    The navigator item's discriminator is `type`, not `itemType`.
+    """
+    found = []
+    type_counts = Counter()
+
+    def walk(item: dict):
         if not isinstance(item, dict):
-            continue
-        yield item
-        children = item.get("children")
-        if isinstance(children, list):
-            yield from _iter_tree_items(children)
+            return
+        item_type = item.get("type")
+        if isinstance(item_type, str):
+            type_counts[item_type] += 1
+        if item_type == "StoryItem":
+            nav_id = item.get("navigatorItemId")
+            if isinstance(nav_id, dict):
+                found.append({"navigatorItemId": nav_id})
+        for child in item.get("children", []):
+            if not isinstance(child, dict):
+                continue
+            navigator_item = child.get("navigatorItem")
+            if isinstance(navigator_item, dict):
+                walk(navigator_item)
+
+    walk(root_item)
+    return found, type_counts
 
 
-def _story_databases(port: int) -> tuple[list[dict], int]:
+def _story_databases(port: int) -> tuple[list[dict], int, dict]:
     tree_result = _post(
         port,
         {
@@ -138,16 +156,13 @@ def _story_databases(port: int) -> tuple[list[dict], int]:
     if not isinstance(root, dict):
         raise RuntimeError("Project Map navigator tree has no rootItem")
 
-    nav_ids = []
-    for item in _iter_tree_items(root.get("children", [])):
-        if item.get("itemType") != "StoryItem":
-            continue
-        nav_id = item.get("navigatorItemId")
-        if isinstance(nav_id, dict):
-            nav_ids.append(nav_id)
-
+    nav_ids, type_counts = _find_story_navigator_ids(root)
     if not nav_ids:
-        raise RuntimeError("No StoryItem databases found in Project Map")
+        sample = ", ".join(f"{k}={v}" for k, v in type_counts.most_common(12)) or "none"
+        raise RuntimeError(
+            "No StoryItem databases found in Project Map; "
+            f"navigator item types seen: {sample}"
+        )
 
     databases = []
     seen_db_guids = set()
@@ -177,7 +192,7 @@ def _story_databases(port: int) -> tuple[list[dict], int]:
     if not databases:
         raise RuntimeError("StoryItem navigator entries resolved to no usable databases")
 
-    return databases, len(nav_ids)
+    return databases, len(nav_ids), dict(type_counts)
 
 
 def _get_elements(port: int, scope: str) -> tuple[list[dict], dict]:
@@ -192,7 +207,7 @@ def _get_elements(port: int, scope: str) -> tuple[list[dict], dict]:
             "databaseCount": 1,
         }
 
-    databases, story_item_count = _story_databases(port)
+    databases, story_item_count, navigator_type_counts = _story_databases(port)
     all_elements = []
     execution_results = []
 
@@ -209,8 +224,6 @@ def _get_elements(port: int, scope: str) -> tuple[list[dict], dict]:
         if isinstance(per_db, list):
             execution_results.extend(per_db)
 
-    # Same model element can be visible/listed from more than one StoryItem database.
-    # Whole-model inventory is an element inventory, not a view-occurrence inventory.
     unique_by_guid = {}
     guidless = []
     for element in all_elements:
@@ -224,6 +237,7 @@ def _get_elements(port: int, scope: str) -> tuple[list[dict], dict]:
     return elements, {
         "scope": "whole-model",
         "storyNavigatorItemCount": story_item_count,
+        "navigatorTypeCounts": navigator_type_counts,
         "databaseCount": len(databases),
         "rawElementOccurrences": len(all_elements),
         "duplicateOccurrencesRemoved": len(all_elements) - len(elements),
@@ -341,6 +355,7 @@ def main() -> int:
     print(f"Archicad port: {result['port']}")
     print(f"Scope: {scope['scope']}")
     if scope["scope"] == "whole-model":
+        print(f"Story navigator items: {scope['storyNavigatorItemCount']}")
         print(f"Story databases: {scope['databaseCount']}")
         print(f"Raw occurrences: {scope['rawElementOccurrences']}")
         print(f"Duplicate occurrences removed: {scope['duplicateOccurrencesRemoved']}")
