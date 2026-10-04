@@ -42,7 +42,9 @@ Snapshot fields:
 | `elements`, `inventoryComplete` | Complete scoped read-back inventory; rows have `guid`, native `type`, `details`, and story/floor data where used by the rule |
 | `openingIntents`, `openingIntentsComplete` | Complete intended windows/doors, including substitutes: `{kind: Window/Door, guid, hostGuid}` |
 | `wallSystems`, `wallSystemsComplete` | Independently specified continuous sides; `{id, guids, begCoordinate, endCoordinate, floorIndex, zCoordinate, height}` |
-| `storyIntents`, `storyIntentsComplete` | One record for every controlled GUID: `{guid, floorIndex, elevationMode}` and `baseElevation` when `elevationMode == ABSOLUTE_BASE` |
+| `stories`, `storiesComplete` | Complete Tapir `GetStories` response with contiguous `firstStory..lastStory` indices and distinct elevations |
+| `storyIntents`, `storyIntentsComplete` | One record for every controlled GUID: `{guid, floorIndex, storyLevel, elevationMode}` and `baseElevation` when `elevationMode == ABSOLUTE_BASE` |
+| `boundingBox3D` per element, `boundingBoxesComplete` | Actual Tapir `Get3DBoundingBoxes` result joined by the corresponding request GUID order; required for `ABSOLUTE_BASE` |
 | `controlledGuids`, `controlledInventoryComplete` | Complete generated element scope; manual elements are excluded only by an evidenced ownership decision |
 | `identityRegistry`, `identityRegistryComplete` | Read-back identity traces for every controlled GUID: `{guid, entityId, role, identityScope}` |
 | `operationJournal`, `operationJournalComplete` | Complete journal: `{operationId, status: DONE/RECONCILED, guids}`; every controlled GUID is covered |
@@ -116,6 +118,12 @@ also prevent PASS.
 ### BIM-QA-008 — STORY_ASSIGNMENT
 
 Every controlled GUID must have exactly one trusted `storyIntents` record.
+The intent's `floorIndex` must exist in the complete `GetStories` read-back,
+and the read-back story level must match its intended `storyLevel`. For
+`ABSOLUTE_BASE`, the absolute lower bound from `Get3DBoundingBoxes` (`zMin`)
+must match the intended `baseElevation`. Missing story or bounding-box
+transport evidence blocks verification; the checker never calculates these
+values from planner assumptions.
 
 `elevationMode` is explicit:
 

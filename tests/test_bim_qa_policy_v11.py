@@ -5,6 +5,7 @@ from bim_qa import (
     RULES_PATH,
     _element_economy,
     _story_assignment,
+    attach_story_inventory,
     audit_snapshot,
 )
 
@@ -31,13 +32,18 @@ def base_snapshot():
         'snapshotId': 'synthetic-revision-2',
         'auditScope': 'pilot',
         'inventoryComplete': True,
-        'elements': [wall()],
+        'elements': [dict(wall(), boundingBox3D={
+            'xMin': 0.0, 'xMax': 7.0, 'yMin': 0.0, 'yMax': 0.38, 'zMin': 0.0, 'zMax': 3.2})],
+        'storiesComplete': True,
+        'stories': [{'index': 0, 'level': 0.0, 'name': 'Ground'}],
+        'boundingBoxesComplete': True,
         'controlledInventoryComplete': True,
         'controlledGuids': ['wall'],
         'storyIntentsComplete': True,
         'storyIntents': [{
             'guid': 'wall',
             'floorIndex': 0,
+            'storyLevel': 0.0,
             'elevationMode': 'ABSOLUTE_BASE',
             'baseElevation': 0.0,
         }],
@@ -67,7 +73,8 @@ class StoryAssignmentTests(unittest.TestCase):
 
     def test_wrong_absolute_base_fails(self):
         s = base_snapshot()
-        s['elements'][0]['details']['zCoordinate'] = 0.25
+        s['elements'][0]['boundingBox3D'] = {
+            'xMin': 0, 'xMax': 7, 'yMin': 0, 'yMax': .38, 'zMin': .25, 'zMax': 3.45}
         index = {row['guid']: row for row in s['elements']}
         self.assertEqual(_story_assignment(s, index)['status'], 'FAIL')
 
@@ -76,6 +83,7 @@ class StoryAssignmentTests(unittest.TestCase):
         s['storyIntents'][0] = {
             'guid': 'wall',
             'floorIndex': 0,
+            'storyLevel': 0.0,
             'elevationMode': 'STORY_ONLY',
         }
         del s['elements'][0]['details']['zCoordinate']
@@ -253,6 +261,12 @@ class IntegrationMetadataTests(unittest.TestCase):
                 'guids': ['wall'],
             }],
         })
+        s = attach_story_inventory(s, {
+            'succeeded': True, 'result': {'addOnCommandResponse': {
+                'firstStory': 0, 'lastStory': 0,
+                'stories': [{'index': 0, 'level': 0.0, 'name': 'Ground'}]}}})
+        s['boundingBoxesComplete'] = True
+        s['storyIntents'][0]['storyLevel'] = 0.0
         report = audit_snapshot(s, 'PASS_2_WALLS')
         self.assertEqual(report['rules']['BIM-QA-008']['status'], 'PASS')
         self.assertEqual(report['rules']['BIM-QA-011']['status'], 'PASS')

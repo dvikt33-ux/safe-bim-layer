@@ -6,6 +6,7 @@ response or from a successful create operation. See docs/BIM_QA.md.
 from __future__ import annotations
 
 import argparse
+import copy
 import json
 import math
 from pathlib import Path
@@ -111,6 +112,76 @@ def snapshot_from_readback(response, requested_guids, metadata):
         snapshot['elements'] = []
         snapshot['transportError'] = str(exc)
     return snapshot
+
+
+def attach_story_inventory(snapshot, response):
+    """Attach and validate the retained full Tapir GetStories response."""
+    out = copy.deepcopy(snapshot) if isinstance(snapshot, dict) else {}
+    out['storiesComplete'] = False
+    try:
+        if not isinstance(response, dict) or response.get('success') is False or response.get('succeeded') is False or 'error' in response:
+            raise ValueError('Story transport error')
+        envelope = response.get('result', {'addOnCommandResponse': response})
+        if not isinstance(envelope, dict) or envelope.get('success') is False or envelope.get('succeeded') is False or 'error' in envelope:
+            raise ValueError('Story result error')
+        payload = envelope['addOnCommandResponse']
+        if not isinstance(payload, dict) or payload.get('success') is False or payload.get('succeeded') is False or 'error' in payload:
+            raise ValueError('Story command error')
+        stories = payload['stories']
+        first, last = payload['firstStory'], payload['lastStory']
+        if (not isinstance(stories, list) or not integer(first) or not integer(last) or first > last):
+            raise ValueError('Malformed story inventory')
+        indices, levels = [], []
+        for story in stories:
+            if (not isinstance(story, dict) or not integer(story.get('index'))
+                    or not number(story.get('level')) or not text(story.get('name'))):
+                raise ValueError('Malformed story row')
+            indices.append(story['index'])
+            levels.append(story['level'])
+        if sorted(indices) != list(range(first, last + 1)) or len(set(levels)) != len(levels):
+            raise ValueError('Incomplete, duplicate or inconsistent story range')
+        out['stories'] = stories
+        out['storiesComplete'] = True
+    except (KeyError, TypeError, ValueError, AttributeError) as exc:
+        out['storyTransportError'] = str(exc)
+    return out
+
+
+def attach_bounding_boxes(snapshot, response, requested_guids):
+    """Attach Tapir Get3DBoundingBoxes rows by exact retained request order."""
+    out = copy.deepcopy(snapshot) if isinstance(snapshot, dict) else {}
+    out['boundingBoxesComplete'] = False
+    try:
+        if not isinstance(response, dict) or response.get('success') is False or response.get('succeeded') is False or 'error' in response:
+            raise ValueError('Bounding-box transport error')
+        envelope = response.get('result', {'addOnCommandResponse': response})
+        if not isinstance(envelope, dict) or envelope.get('success') is False or envelope.get('succeeded') is False or 'error' in envelope:
+            raise ValueError('Bounding-box result error')
+        payload = envelope['addOnCommandResponse']
+        if not isinstance(payload, dict) or payload.get('success') is False or payload.get('succeeded') is False or 'error' in payload:
+            raise ValueError('Bounding-box command error')
+        boxes, guids = payload['boundingBoxes3D'], list(requested_guids)
+        rows = out.get('elements')
+        if (not isinstance(boxes, list) or len(boxes) != len(guids) or not isinstance(rows, list)
+                or any(not text(g) for g in guids) or len(set(guids)) != len(guids)):
+            raise ValueError('Bounding-box request/response cardinality or GUID mismatch')
+        index = {r.get('guid'): r for r in rows if isinstance(r, dict)}
+        if len(index) != len(rows) or not set(guids).issubset(index):
+            raise ValueError('Bounding-box GUID is absent from element read-back')
+        for guid, item in zip(guids, boxes):
+            if not isinstance(item, dict) or 'error' in item or not isinstance(item.get('boundingBox3D'), dict):
+                raise ValueError('Bounding-box row is missing or contains an error')
+            box = item['boundingBox3D']
+            keys = ('xMin', 'yMin', 'zMin', 'xMax', 'yMax', 'zMax')
+            if not all(number(box.get(k)) for k in keys):
+                raise ValueError('Malformed bounding box')
+            if any(box[a] > box[b] for a, b in (('xMin','xMax'), ('yMin','yMax'), ('zMin','zMax'))):
+                raise ValueError('Inverted bounding box')
+            index[guid]['boundingBox3D'] = dict(box)
+        out['boundingBoxesComplete'] = True
+    except (KeyError, TypeError, ValueError, AttributeError) as exc:
+        out['boundingBoxTransportError'] = str(exc)
+    return out
 
 
 def _inventory(s):
@@ -263,6 +334,14 @@ def _walls(s, index):
 
 
 def _story_assignment(s, index):
+    if s.get('storyTransportError') or s.get('boundingBoxTransportError'):
+        return result('BLOCKED_BY_TRANSPORT', 'Story or 3D bounding-box read-back failed or was malformed')
+    if s.get('storiesComplete') is not True or not isinstance(s.get('stories'), list):
+        return result('NOT_VERIFIED', 'Complete GetStories read-back is required')
+    stories = {row['index']: row for row in s['stories']
+               if isinstance(row, dict) and integer(row.get('index')) and number(row.get('level'))}
+    if len(stories) != len(s['stories']):
+        return result('NOT_VERIFIED', 'Malformed or duplicate story read-back')
     intents = s.get('storyIntents')
     controlled = s.get('controlledGuids')
     if not isinstance(intents, list) or s.get('storyIntentsComplete') is not True:
@@ -278,6 +357,7 @@ def _story_assignment(s, index):
     for intent in intents:
         if (not isinstance(intent, dict) or not text(intent.get('guid'))
                 or not integer(intent.get('floorIndex'))
+                or not number(intent.get('storyLevel'))
                 or intent.get('elevationMode') not in ('STORY_ONLY', 'ABSOLUTE_BASE')):
             uncertain = True
             continue
@@ -302,15 +382,22 @@ def _story_assignment(s, index):
             continue
         if actual_floor != intent['floorIndex']:
             failed.append(guid)
+        story = stories.get(intent['floorIndex'])
+        if story is None:
+            uncertain = True
+        elif abs(story['level'] - intent['storyLevel']) > EPS:
+            failed.append(guid)
 
         if intent['elevationMode'] == 'ABSOLUTE_BASE':
             expected_base = intent.get('baseElevation')
             if not number(expected_base):
                 uncertain = True
                 continue
-            actual_base = row.get('baseElevation')
-            if not number(actual_base) and row.get('type') == 'Wall':
-                actual_base = row.get('details', {}).get('zCoordinate')
+            if s.get('boundingBoxesComplete') is not True:
+                uncertain = True
+                continue
+            box = row.get('boundingBox3D')
+            actual_base = box.get('zMin') if isinstance(box, dict) else None
             if not number(actual_base):
                 uncertain = True
             elif abs(actual_base - expected_base) > EPS:

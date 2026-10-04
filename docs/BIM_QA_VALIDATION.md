@@ -1,6 +1,6 @@
 # Offline BIM-QA validation
 
-Date: 2026-10-03. Branch: `chatgpt/archicad-modeling-standard-v1`, PR #5.
+Date: 2026-10-04. Branch: `chatgpt/archicad-modeling-standard-v1`, PR #5.
 
 This report covers the offline auditor update adding:
 
@@ -10,13 +10,14 @@ This report covers the offline auditor update adding:
 
 | Verification | Result |
 | --- | --- |
-| Reconstructed regression suite + new policy tests | **PASS: 61 tests, 0 failures, 0 errors** |
+| Full reconstructed suite + new policy/adapter tests | **PASS: 110 tests, 0 failures, 0 errors** |
 | Previous 43 regression tests | **PASS in the reconstructed suite** |
 | BIM-QA-008 positive / negative cases | **PASS** |
 | BIM-QA-011 one-Wall+trim / fragmented gable cases | **PASS** |
 | BIM-QA-011 porch one/minimal Slab + operation / many-slab cases | **PASS** |
 | API limitation without reviewed fallback | **PASS: blocked as intended** |
 | Missing/incomplete new evidence | **PASS: NOT_VERIFIED as intended** |
+| GetStories/Get3DBoundingBoxes adapters | **PASS: complete ranges and exact request-order mapping; malformed/partial transport blocks** |
 | PASS_DEPENDENCY exposure of 008/011 | **PASS** |
 | Syntax/import smoke | **PASS** |
 | Live Archicad / production PLN validation | **NOT_VERIFIED** |
@@ -60,8 +61,11 @@ fragmentation remains a blocker.
 ## Story assignment boundary
 
 BIM-QA-008 requires a trusted intent for every controlled GUID. Floor/story index
-must match read-back. When `elevationMode == ABSOLUTE_BASE`, base elevation must
-also match. Missing actual story/elevation evidence is `NOT_VERIFIED`, never PASS.
+must match read-back and the intended elevation must match Tapir `GetStories`.
+When `elevationMode == ABSOLUTE_BASE`, the intended base elevation must match
+actual `Get3DBoundingBoxes.zMin`. Missing story/elevation evidence is
+`NOT_VERIFIED`, never PASS; malformed or failed transport is
+`BLOCKED_BY_TRANSPORT`.
 
 ## Remaining boundary
 
