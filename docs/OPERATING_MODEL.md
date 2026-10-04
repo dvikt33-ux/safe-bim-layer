@@ -31,6 +31,36 @@ GitHub private repository
 | GitHub | Hold the sanitized source of record and PR review trail | Store GGUFs, credentials, Archicad project files or sensitive logs |
 | Arena | Audit code, research documented patterns, propose small patches in a branch/PR | Access local Archicad, operate real projects, merge to `main`, or handle secrets |
 
+## Working-first development rule (mandatory)
+
+This rule applies to every development task, not only Archicad integration.
+
+1. **Make the smallest useful end-to-end path work first.** The first milestone may be crude, slow, narrow, or inconvenient, but it must perform the core user-visible function against a real test scenario.
+2. **One area at a time.** A scope is opened, implemented, validated, and explicitly marked DONE before unrelated areas are started.
+3. **No breadth without a closed vertical slice.** Do not spread effort across safety hardening, UI, performance, advanced geometry, broader reading, audits, orchestration, or future infrastructure while the core path of the current area is still non-working.
+4. **Optimisation follows functionality.** Performance, elegance, abstractions, refactoring, caching, richer algorithms, and wider coverage are layered on only after the basic path works reliably.
+5. **Safety and quality are layered deliberately, not ignored.** After the working skeleton exists, improve reliability, safety, validation, read/write completeness, algorithms, performance, UX, and deeper audits in controlled stages.
+6. **The final quality target remains high.** The staged approach does not lower the end goal: the finished product should be robust, maintainable, precise, and where applicable compliant with relevant GOST/SP/SNiP and project requirements.
+7. **DONE must be testable.** Every area needs an explicit acceptance criterion and a reproducible real-world check. "Partly implemented", "infrastructure prepared", or "tests exist" is not DONE if the user-visible function still does not work.
+8. **Do not let future infrastructure displace the current minimum function.** If a foundational feature is still unfinished, speculative architecture, auxiliary audits, and unrelated improvements must wait unless the user explicitly reprioritizes them.
+9. **Prefer a working vertical slice over many partial horizontal layers.** Complete one chain from input to useful output, then expand it.
+10. **Preserve the working baseline.** Once a slice works, keep it reproducible and avoid destabilizing it while adding the next layer; use focused branches/tests and keep a rollback path.
+
+Default development order:
+
+```text
+working skeleton
+-> reliability
+-> safety/validation
+-> completeness of reading/writing
+-> algorithms/domain logic
+-> performance
+-> interface/UX
+-> deeper audits and advanced capabilities
+```
+
+If a task proposes a different order, that deviation must be explicit and justified by the user or by a hard dependency.
+
 ## Branch and review policy
 
 1. Keep `main` deployable and protected by local review.
