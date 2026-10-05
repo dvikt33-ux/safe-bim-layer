@@ -378,7 +378,7 @@ class SafeBIMBridge:
         message_id = 'result-' + job_id
         self.store.enqueue_result(
             job_id, result, message_id, _now(),
-            {'job_id': job_id, 'result': result, 'messageId': message_id})
+            {'job_id': job_id, 'result': result, 'messageId': message_id, 'kind': 'RESULT'})
 
     def tick(self) -> dict:
         try:
