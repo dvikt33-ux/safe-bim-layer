@@ -1,0 +1,43 @@
+{
+  "iteration": 2,
+  "instruction": "Продолжи последнюю созданную стену ещё на 0,5 метра.",
+  "status": "PASS",
+  "startedAtUtc": "2026-10-05T09:24:54.789124+00:00",
+  "completedAtUtc": "2026-10-05T09:25:45.324507+00:00",
+  "sourceGuid": "B18F8EA4-8D47-4FAE-9373-E830DBEA3CF4",
+  "createdGuid": "CE093166-FF7B-420E-B991-1D0CE0D5CCAE",
+  "typedRequest": {
+    "action": "create_wall",
+    "mode": "execute",
+    "sourceGuid": "B18F8EA4-8D47-4FAE-9373-E830DBEA3CF4",
+    "length": 0.5
+  },
+  "plannerStatus": "PLANNED",
+  "executorStatus": "PASS",
+  "readbackStatus": "PASS",
+  "length": 0.5,
+  "expectedLength": 0.5,
+  "jointDistance": 0.0,
+  "toleranceMeters": 1e-07,
+  "homeStory": 0,
+  "sourceBegin": {
+    "x": 1700.718814915,
+    "y": 600.706201417
+  },
+  "sourceEnd": {
+    "x": 1701.718814915,
+    "y": 600.706201417
+  },
+  "begin": {
+    "x": 1701.718814915,
+    "y": 600.706201417
+  },
+  "end": {
+    "x": 1702.218814915,
+    "y": 600.706201417
+  },
+  "elementCountBefore": 5301,
+  "elementCountAfter": 5302,
+  "plannerElementCount": 5301,
+  "dependencyMatchesFirstCreatedGuid": true
+}

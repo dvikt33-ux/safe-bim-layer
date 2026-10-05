@@ -1,0 +1,360 @@
+{
+  "algorithm": "SHA-256",
+  "localRoot": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression",
+  "files": [
+    {
+      "path": "outputs/closed-loop-stage1/API.GetProductInfo.request.json",
+      "bytes": 39,
+      "sha256": "f3cca8e9193df511f4c058894b557bbb5164c47758b1150b29754221a8ddb984",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/API.GetProductInfo.response.json",
+      "bytes": 82,
+      "sha256": "b6bd702b8e915a7b8d8c5067a160b96b4566a2dc6f64c9f550348673ffe795bc",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/GetAddOnVersion.request.json",
+      "bytes": 219,
+      "sha256": "dcb460308f64574cfeeadcaa9627584ffe6e87c96ceb61b25c79a4588bdf0ee2",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/GetAddOnVersion.response.json",
+      "bytes": 73,
+      "sha256": "b15e7d9757f688cbe64b736ccd85468a37c584f1b8e44f2a2a97580c8b1e7198",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/initial-model-dump.json",
+      "bytes": 104940501,
+      "sha256": "d84ad042d04fd63be3cf2b059a1a12e1982f86edace6c0bb38525b784c12ac26",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/initial-model-dump.metrics.json",
+      "bytes": 2838,
+      "sha256": "7f890d9565862789b0c993fbfaa38cbd84c1ae29bbdb9e6a3f24332a6d4e0342",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/initial-model-dump.native-response.json",
+      "bytes": 99233211,
+      "sha256": "db338c7cf161dfe37b5d931993a3aaff66f1facfe75c848a80cf42f6085d3473",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/initial-model-dump.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/initial-plan.json",
+      "bytes": 680,
+      "sha256": "b29fb45efe9fb72c6e8b28259e4c00b389363647a3d9ef4f4d6bb07e419983da",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/adapter-result.json",
+      "bytes": 4519,
+      "sha256": "cc2445b47e1b9498e7a2a7efa608c724ccb4b1e99e6df8665546568179a8532f",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/chat-executor/executor-request.json",
+      "bytes": 128,
+      "sha256": "cfbf3eaff41209620f0d11472d886eb583ea89c09877c82762d27b9a9f546df4",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/chat-executor/planner-model-dump.json",
+      "bytes": 104940500,
+      "sha256": "ab56aa789d032e1e3d82f59e5d3f7d07fc1673d875c038e89b10a8dc8b3cbcf8",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/chat-executor/planner-model-dump.metrics.json",
+      "bytes": 2865,
+      "sha256": "5eba3b94f715db59436b0d7a18efe94039a7e53ac89c47252649d8f41dc4ad49",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/chat-executor/planner-model-dump.native-response.json",
+      "bytes": 99233210,
+      "sha256": "45d233ad7cfbc1cc45a066dcec9a96fbd9881533b0de3411cee770d96bfef5b7",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/chat-executor/planner-model-dump.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/executor/after-create.json",
+      "bytes": 104944111,
+      "sha256": "0a307ff65c9b19a76570ea85ef0812ced41162b87ea24fb23321bdd653642277",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/executor/after-create.metrics.json",
+      "bytes": 2856,
+      "sha256": "58e1089887dbca327f6cc4005ad1f4ed30fb18e6adc15f69169ce7d65e9f9719",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/executor/after-create.native-response.json",
+      "bytes": 99236666,
+      "sha256": "91b273a0393167b9f62ed60e5299321813dd93a45ad71387d7fd8f19b11b9844",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/executor/after-create.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/executor/before.json",
+      "bytes": 104940501,
+      "sha256": "58c5d529a9c4e8ab057bb7ce2ef15134bdc5841920a6df6b22015dfe3d738f52",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/executor/before.metrics.json",
+      "bytes": 2849,
+      "sha256": "0724c2c3bf9bef619cff1ecde9dfd5c95de37f334d845867ecdf4f883776fd7f",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/executor/before.native-response.json",
+      "bytes": 99233211,
+      "sha256": "1770709f2c7bd0852abbc3ea89ac5c5261901140f3757b09fabdc6c4f963f2aa",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/executor/before.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/identity-after.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/identity-after.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/identity-before.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/identity-before.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/pre-execution-plan.json",
+      "bytes": 680,
+      "sha256": "b29fb45efe9fb72c6e8b28259e4c00b389363647a3d9ef4f4d6bb07e419983da",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/readback-witness.json",
+      "bytes": 32713,
+      "sha256": "4e58c9402cdefcde826b0f5b59371c346215dc1e329578c277a11240f458e4b7",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/summary.json",
+      "bytes": 1173,
+      "sha256": "dda6643d9ec5aaa1f585b9c73a79116c42c17bac816600662670871ede22f852",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/wall-joint-cycle/executor-create_wall.request.json",
+      "bytes": 532,
+      "sha256": "ae3a5a31f3df79dd59b7408fc7265a072bff94c761d2486afbb09d7155669e2b",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/wall-joint-cycle/executor-create_wall.response.json",
+      "bytes": 129,
+      "sha256": "5a3af795af4ff34c6fdee6bde388e2c2b15e23f5aa9efc4d35a6fa5e458b936b",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/adapter-result.json",
+      "bytes": 4523,
+      "sha256": "8085aa30409f73fbe6ca514e156c68904e265e647d9283c8db82655987dc1839",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/chat-executor/executor-request.json",
+      "bytes": 128,
+      "sha256": "5fffb8ac196d171b33c836f97461ca1bc918496eae3d30c4df56235ad63eadb2",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/chat-executor/planner-model-dump.json",
+      "bytes": 104944111,
+      "sha256": "25ee8d765407601bfb2169cc90a15409b72df60d005f3947abea36189033b516",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/chat-executor/planner-model-dump.metrics.json",
+      "bytes": 2867,
+      "sha256": "a2522a7e76d9a1cde12baa53bacf9c144540ae8f406aa863fb2a24336a8ca0c0",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/chat-executor/planner-model-dump.native-response.json",
+      "bytes": 99236666,
+      "sha256": "ca1bc2404f48125e5107ed231e261c4665d8871b2ba5fef2e69fe4bac801301d",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/chat-executor/planner-model-dump.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/executor/after-create.json",
+      "bytes": 104947721,
+      "sha256": "c18971cff24d81afc2d221f7fa85f5f05936cd696b36bffe36de94f1ce9305bc",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/executor/after-create.metrics.json",
+      "bytes": 2856,
+      "sha256": "ed8c65cfb3c64ae205879f4bbec33089bb2bc80e1198d2adea2fe5a47b3d7429",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/executor/after-create.native-response.json",
+      "bytes": 99240121,
+      "sha256": "6c2176ac76f1b82c6a5597c2a688b9981aeca3d99894545344e28a4883165f7c",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/executor/after-create.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/executor/before.json",
+      "bytes": 104944111,
+      "sha256": "3ff48dc68ceaf9286f2a7a59441b0bd6ed30fce8c4596b602887c6f415a144b3",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/executor/before.metrics.json",
+      "bytes": 2850,
+      "sha256": "26d55a502217a065ae59f309e05008cd1605802e4fc03666d6904c8fa9700861",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/executor/before.native-response.json",
+      "bytes": 99236666,
+      "sha256": "f98639e0dcb011868bb52449b01bdb05923c1a188af406962a73ceea20cdf548",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/executor/before.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/identity-after.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/identity-after.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/identity-before.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/identity-before.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/pre-execution-plan.json",
+      "bytes": 680,
+      "sha256": "6ea011e09f28888ddf3b18a9f4b1712fae076ae583debfbd2a3af71cd7e39c28",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/readback-witness.json",
+      "bytes": 32713,
+      "sha256": "01aad62bf6b54890758411f592883d3fe15b8b23d0db73c51f9bd5b8b59ff212",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/summary.json",
+      "bytes": 1177,
+      "sha256": "ebf5b6d53098585a68b0dd48904c64d6c390de36071fb6fc4f893baceea21232",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/wall-joint-cycle/executor-create_wall.request.json",
+      "bytes": 532,
+      "sha256": "612fb7b02966e360abf9a6edce6714ea021774d050f8705fd61737dec9d5cde4",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/wall-joint-cycle/executor-create_wall.response.json",
+      "bytes": 129,
+      "sha256": "f6591f4881a031f90911719c54dcdfcad64dbf479c50cd73bf5d4e2ad8cb66db",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/preflight.json",
+      "bytes": 727,
+      "sha256": "4f79c7ccd4bff4abdecd990a224046bd0e28d6525c04eb7add3fb9225bf73bb5",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage1/git-verification.json",
+      "bytes": 537,
+      "sha256": "b769487aaccec4f6441b79320179454eb3a644edb906a3dae92837fea7439dba",
+      "storage": "COMMITTED"
+    }
+  ]
+}

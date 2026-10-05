@@ -1,0 +1,25 @@
+{
+  "status": "PLANNED",
+  "request": {
+    "action": "create_wall",
+    "mode": "execute",
+    "sourceGuid": "F69C0FEC-34FF-4982-8CE8-127D7DAED89D",
+    "length": 1.0
+  },
+  "selectedGuid": "F69C0FEC-34FF-4982-8CE8-127D7DAED89D",
+  "selection": {
+    "guid": "F69C0FEC-34FF-4982-8CE8-127D7DAED89D",
+    "homeStory": 0,
+    "begin": {
+      "x": 1700.218814915,
+      "y": 600.706201417
+    },
+    "end": {
+      "x": 1700.718814915,
+      "y": 600.706201417
+    },
+    "length": 0.5,
+    "predecessorGuid": "03B9B808-BED3-401E-89BF-A3B93F94E63E",
+    "selectionRule": "short straight Wall with one collinear Wall joined at begin and an unjoined end"
+  }
+}

@@ -1,0 +1,1 @@
+{"command": "API.ExecuteAddOnCommand", "parameters": {"addOnCommandId": {"commandNamespace": "TapirCommand", "commandName": "GetModelDumpV1"}, "addOnCommandParameters": {}}}

@@ -1,0 +1,19 @@
+{
+  "observedAtUtc": "2026-10-05T09:21:16.159919+00:00",
+  "port": 19723,
+  "identity": {
+    "isUntitled": false,
+    "isTeamwork": false,
+    "projectLocation": "C:\\Users\\Admin\\Documents\\Codex\\2026-10-04\\files-pasted-by-the-user-read\\outputs\\native-current-version\\test-project\\NativeGeometry_Full_Test_20261004.pln",
+    "projectPath": "C:\\Users\\Admin\\Documents\\Codex\\2026-10-04\\files-pasted-by-the-user-read\\outputs\\native-current-version\\test-project\\NativeGeometry_Full_Test_20261004.pln",
+    "projectName": "NativeGeometry_Full_Test_20261004"
+  },
+  "archicad": {
+    "version": 29,
+    "buildNumber": 3000,
+    "languageCode": "RUS"
+  },
+  "tapir": {
+    "version": "1.5.10"
+  }
+}

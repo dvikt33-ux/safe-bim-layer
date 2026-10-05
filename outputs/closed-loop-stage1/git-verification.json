@@ -1,0 +1,11 @@
+{
+  "checkedAtUtc": "2026-10-05T09:29:08.404623+00:00",
+  "executionCommit": "f8b82ed3008c4669faf1424958b30f43aa4b5d92",
+  "baselineCommit": "565ea2e0414a14bedbca09999690d7b97f877fa3",
+  "branch": "work/stage1-v0-regression",
+  "mainBefore": "72e9be15ac3b943d7b6f0c46eaa45aa5798d56bc",
+  "mainAfterLiveRegression": "72e9be15ac3b943d7b6f0c46eaa45aa5798d56bc",
+  "baselineDiffCommand": "git diff 565ea2e0414a14bedbca09999690d7b97f877fa3 -- scripts archicad-addon",
+  "baselineDiff": "",
+  "originalDirtyCheckoutPreserved": true
+}

@@ -1,0 +1,417 @@
+{
+  "stage": "STAGE_1_V0_BASELINE_REGRESSION",
+  "baselineCommit": "565ea2e0414a14bedbca09999690d7b97f877fa3",
+  "executionCommit": "f8b82ed3008c4669faf1424958b30f43aa4b5d92",
+  "branch": "work/stage1-v0-regression",
+  "status": "PASS",
+  "completedAtUtc": "2026-10-05T09:29:11.271327+00:00",
+  "projectIdentity": {
+    "isUntitled": false,
+    "isTeamwork": false,
+    "projectLocation": "C:\\Users\\Admin\\Documents\\Codex\\2026-10-04\\files-pasted-by-the-user-read\\outputs\\native-current-version\\test-project\\NativeGeometry_Full_Test_20261004.pln",
+    "projectPath": "C:\\Users\\Admin\\Documents\\Codex\\2026-10-04\\files-pasted-by-the-user-read\\outputs\\native-current-version\\test-project\\NativeGeometry_Full_Test_20261004.pln",
+    "projectName": "NativeGeometry_Full_Test_20261004"
+  },
+  "archicad": {
+    "version": 29,
+    "buildNumber": 3000,
+    "languageCode": "RUS"
+  },
+  "tapir": {
+    "version": "1.5.10"
+  },
+  "instance": {
+    "host": "127.0.0.1",
+    "port": 19723,
+    "processIdObserved": 73072
+  },
+  "iterations": [
+    {
+      "iteration": 1,
+      "instruction": "Продолжи последнюю созданную стену ещё на 1 метр.",
+      "status": "PASS",
+      "startedAtUtc": "2026-10-05T09:23:27.392903+00:00",
+      "completedAtUtc": "2026-10-05T09:24:18.556011+00:00",
+      "sourceGuid": "F69C0FEC-34FF-4982-8CE8-127D7DAED89D",
+      "createdGuid": "B18F8EA4-8D47-4FAE-9373-E830DBEA3CF4",
+      "typedRequest": {
+        "action": "create_wall",
+        "mode": "execute",
+        "sourceGuid": "F69C0FEC-34FF-4982-8CE8-127D7DAED89D",
+        "length": 1.0
+      },
+      "plannerStatus": "PLANNED",
+      "executorStatus": "PASS",
+      "readbackStatus": "PASS",
+      "length": 1.0,
+      "expectedLength": 1.0,
+      "jointDistance": 0.0,
+      "toleranceMeters": 1e-07,
+      "homeStory": 0,
+      "sourceBegin": {
+        "x": 1700.218814915,
+        "y": 600.706201417
+      },
+      "sourceEnd": {
+        "x": 1700.718814915,
+        "y": 600.706201417
+      },
+      "begin": {
+        "x": 1700.718814915,
+        "y": 600.706201417
+      },
+      "end": {
+        "x": 1701.718814915,
+        "y": 600.706201417
+      },
+      "elementCountBefore": 5300,
+      "elementCountAfter": 5301,
+      "plannerElementCount": 5300,
+      "dependencyMatchesFirstCreatedGuid": null
+    },
+    {
+      "iteration": 2,
+      "instruction": "Продолжи последнюю созданную стену ещё на 0,5 метра.",
+      "status": "PASS",
+      "startedAtUtc": "2026-10-05T09:24:54.789124+00:00",
+      "completedAtUtc": "2026-10-05T09:25:45.324507+00:00",
+      "sourceGuid": "B18F8EA4-8D47-4FAE-9373-E830DBEA3CF4",
+      "createdGuid": "CE093166-FF7B-420E-B991-1D0CE0D5CCAE",
+      "typedRequest": {
+        "action": "create_wall",
+        "mode": "execute",
+        "sourceGuid": "B18F8EA4-8D47-4FAE-9373-E830DBEA3CF4",
+        "length": 0.5
+      },
+      "plannerStatus": "PLANNED",
+      "executorStatus": "PASS",
+      "readbackStatus": "PASS",
+      "length": 0.5,
+      "expectedLength": 0.5,
+      "jointDistance": 0.0,
+      "toleranceMeters": 1e-07,
+      "homeStory": 0,
+      "sourceBegin": {
+        "x": 1700.718814915,
+        "y": 600.706201417
+      },
+      "sourceEnd": {
+        "x": 1701.718814915,
+        "y": 600.706201417
+      },
+      "begin": {
+        "x": 1701.718814915,
+        "y": 600.706201417
+      },
+      "end": {
+        "x": 1702.218814915,
+        "y": 600.706201417
+      },
+      "elementCountBefore": 5301,
+      "elementCountAfter": 5302,
+      "plannerElementCount": 5301,
+      "dependencyMatchesFirstCreatedGuid": true
+    }
+  ],
+  "dependency": {
+    "expression": "iteration2.sourceGuid == iteration1.createdGuid",
+    "actual": true,
+    "verdict": "PASS"
+  },
+  "elementCounts": [
+    5300,
+    5301,
+    5302
+  ],
+  "elementCountScope": "Model Dump known BIM element headers; one unresolved model-only owner is separately retained",
+  "criteria": [
+    {
+      "id": "C01",
+      "required": true,
+      "expected": "Fresh native Archicad model dump received",
+      "actual": {
+        "elementCount": 5300,
+        "nativeResponseRetained": true
+      },
+      "verdict": "PASS",
+      "evidence": [
+        "initial-model-dump.request.json",
+        "initial-model-dump.native-response.json",
+        "initial-model-dump.metrics.json"
+      ]
+    },
+    {
+      "id": "C02",
+      "required": true,
+      "expected": "Iteration 1 automatically selects the unique source Wall",
+      "actual": "F69C0FEC-34FF-4982-8CE8-127D7DAED89D",
+      "verdict": "PASS",
+      "evidence": [
+        "iteration-1/pre-execution-plan.json",
+        "iteration-1/adapter-result.json"
+      ]
+    },
+    {
+      "id": "C03",
+      "required": true,
+      "expected": "Iteration 1 physically creates Wall",
+      "actual": "B18F8EA4-8D47-4FAE-9373-E830DBEA3CF4",
+      "verdict": "PASS",
+      "evidence": [
+        "iteration-1/wall-joint-cycle/executor-create_wall.request.json",
+        "iteration-1/wall-joint-cycle/executor-create_wall.response.json"
+      ]
+    },
+    {
+      "id": "C04",
+      "required": true,
+      "expected": "Iteration 1 created GUID appears in factual read-back",
+      "actual": "PASS",
+      "verdict": "PASS",
+      "evidence": [
+        "iteration-1/readback-witness.json",
+        "iteration-1/executor/after-create.native-response.json"
+      ]
+    },
+    {
+      "id": "C05",
+      "required": true,
+      "expected": "Iteration 1 read-back proves continuation geometry",
+      "actual": {
+        "homeStory": 0,
+        "begin": {
+          "x": 1700.718814915,
+          "y": 600.706201417
+        },
+        "end": {
+          "x": 1701.718814915,
+          "y": 600.706201417
+        },
+        "length": 1.0
+      },
+      "verdict": "PASS",
+      "evidence": [
+        "iteration-1/readback-witness.json",
+        "iteration-1/summary.json"
+      ]
+    },
+    {
+      "id": "C06",
+      "required": true,
+      "expected": {
+        "jointDistance": 0.0,
+        "toleranceMeters": 1e-07
+      },
+      "actual": 0.0,
+      "verdict": "PASS",
+      "evidence": [
+        "iteration-1/readback-witness.json"
+      ]
+    },
+    {
+      "id": "C07",
+      "required": true,
+      "expected": "New fresh model read after mutation 1, before planning 2",
+      "actual": {
+        "plannerElementCount": 5301,
+        "createdGuidObserved": "B18F8EA4-8D47-4FAE-9373-E830DBEA3CF4"
+      },
+      "verdict": "PASS",
+      "evidence": [
+        "iteration-2/chat-executor/planner-model-dump.request.json",
+        "iteration-2/chat-executor/planner-model-dump.native-response.json",
+        "iteration-2/chat-executor/planner-model-dump.metrics.json"
+      ]
+    },
+    {
+      "id": "C08",
+      "required": true,
+      "expected": "Iteration 2 automatically selects iteration 1 created Wall",
+      "actual": "B18F8EA4-8D47-4FAE-9373-E830DBEA3CF4",
+      "verdict": "PASS",
+      "evidence": [
+        "iteration-2/pre-execution-plan.json",
+        "iteration-2/adapter-result.json"
+      ]
+    },
+    {
+      "id": "C09",
+      "required": true,
+      "expected": "iteration2.sourceGuid == iteration1.createdGuid",
+      "actual": true,
+      "verdict": "PASS",
+      "evidence": [
+        "iteration-1/summary.json",
+        "iteration-2/summary.json"
+      ]
+    },
+    {
+      "id": "C10",
+      "required": true,
+      "expected": "Iteration 2 physically creates Wall",
+      "actual": "CE093166-FF7B-420E-B991-1D0CE0D5CCAE",
+      "verdict": "PASS",
+      "evidence": [
+        "iteration-2/wall-joint-cycle/executor-create_wall.request.json",
+        "iteration-2/wall-joint-cycle/executor-create_wall.response.json"
+      ]
+    },
+    {
+      "id": "C11",
+      "required": true,
+      "expected": "Iteration 2 created GUID appears in factual read-back",
+      "actual": "PASS",
+      "verdict": "PASS",
+      "evidence": [
+        "iteration-2/readback-witness.json",
+        "iteration-2/executor/after-create.native-response.json"
+      ]
+    },
+    {
+      "id": "C12",
+      "required": true,
+      "expected": "Iteration 2 read-back proves continuation geometry",
+      "actual": {
+        "homeStory": 0,
+        "begin": {
+          "x": 1701.718814915,
+          "y": 600.706201417
+        },
+        "end": {
+          "x": 1702.218814915,
+          "y": 600.706201417
+        },
+        "length": 0.5
+      },
+      "verdict": "PASS",
+      "evidence": [
+        "iteration-2/readback-witness.json",
+        "iteration-2/summary.json"
+      ]
+    },
+    {
+      "id": "C13",
+      "required": true,
+      "expected": {
+        "jointDistance": 0.0,
+        "toleranceMeters": 1e-07
+      },
+      "actual": 0.0,
+      "verdict": "PASS",
+      "evidence": [
+        "iteration-2/readback-witness.json"
+      ]
+    },
+    {
+      "id": "C14",
+      "required": true,
+      "expected": {
+        "requiredNotVerified": 0,
+        "allRequestedMetadataPresent": true
+      },
+      "actual": {
+        "requiredNotVerified": 0,
+        "allRequestedMetadataPresent": true
+      },
+      "verdict": "PASS",
+      "evidence": [
+        "preflight.json",
+        "iteration-1/summary.json",
+        "iteration-2/summary.json"
+      ]
+    },
+    {
+      "id": "C15",
+      "required": true,
+      "expected": {
+        "requiredFail": 0
+      },
+      "actual": {
+        "requiredFail": 0
+      },
+      "verdict": "PASS",
+      "evidence": [
+        "v0-regression-report.json"
+      ]
+    },
+    {
+      "id": "C16",
+      "required": true,
+      "expected": "No hidden manual corrections between iterations",
+      "actual": {
+        "manualCorrections": 0,
+        "onlyCreateWallsCalled": true,
+        "createdGuidSetDeltaEachIteration": 1,
+        "sourceReferenceGeometryUnchanged": true
+      },
+      "verdict": "PASS",
+      "evidence": [
+        "iteration-1/wall-joint-cycle/executor-create_wall.request.json",
+        "iteration-2/wall-joint-cycle/executor-create_wall.request.json",
+        "iteration-1/readback-witness.json",
+        "iteration-2/readback-witness.json"
+      ]
+    },
+    {
+      "id": "C17",
+      "required": true,
+      "expected": "main unchanged",
+      "actual": {
+        "before": "72e9be15ac3b943d7b6f0c46eaa45aa5798d56bc",
+        "afterLiveRegression": "72e9be15ac3b943d7b6f0c46eaa45aa5798d56bc"
+      },
+      "verdict": "PASS",
+      "evidence": [
+        "git-verification.json"
+      ]
+    },
+    {
+      "id": "C18",
+      "required": true,
+      "expected": "Baseline execution path not rewritten",
+      "actual": {
+        "changedFilesUnderScriptsOrAddon": [],
+        "baselineCommit": "565ea2e0414a14bedbca09999690d7b97f877fa3"
+      },
+      "verdict": "PASS",
+      "evidence": [
+        "git-verification.json"
+      ]
+    }
+  ],
+  "requiredSummary": {
+    "PASS": 18,
+    "FAIL": 0,
+    "NOT_VERIFIED": 0
+  },
+  "blockingIssues": [],
+  "runtimeCodeChanges": [],
+  "manualCorrections": [],
+  "retainedCreatedWalls": true,
+  "plnSaveExecuted": false,
+  "plnSaveNote": "Acceptance concerns current live model; no save command was requested or issued.",
+  "backlog": [
+    "Stage 2 and all later stages remain deferred pending independent audit and a separate user instruction."
+  ],
+  "evidence": {
+    "root": "outputs/closed-loop-stage1",
+    "manifest": "evidence-manifest.json",
+    "fullDumps": "Retained locally only at localRoot from manifest; compact evidence is committed.",
+    "localOnlyFiles": [
+      "outputs/closed-loop-stage1/initial-model-dump.json",
+      "outputs/closed-loop-stage1/initial-model-dump.native-response.json",
+      "outputs/closed-loop-stage1/iteration-1/chat-executor/planner-model-dump.json",
+      "outputs/closed-loop-stage1/iteration-1/chat-executor/planner-model-dump.native-response.json",
+      "outputs/closed-loop-stage1/iteration-1/executor/after-create.json",
+      "outputs/closed-loop-stage1/iteration-1/executor/after-create.native-response.json",
+      "outputs/closed-loop-stage1/iteration-1/executor/before.json",
+      "outputs/closed-loop-stage1/iteration-1/executor/before.native-response.json",
+      "outputs/closed-loop-stage1/iteration-2/chat-executor/planner-model-dump.json",
+      "outputs/closed-loop-stage1/iteration-2/chat-executor/planner-model-dump.native-response.json",
+      "outputs/closed-loop-stage1/iteration-2/executor/after-create.json",
+      "outputs/closed-loop-stage1/iteration-2/executor/after-create.native-response.json",
+      "outputs/closed-loop-stage1/iteration-2/executor/before.json",
+      "outputs/closed-loop-stage1/iteration-2/executor/before.native-response.json"
+    ]
+  }
+}
