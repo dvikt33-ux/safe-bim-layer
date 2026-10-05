@@ -157,8 +157,11 @@ def plan_action(action, data, request):
                   "textureProjectionCoords", "level"):
             if k in d:
                 create_data[k] = d[k]
+        source_vertices = morph.points_from_dump(source)
+        expected_vertices = [tuple(p[i] + (dx if i == 0 else 0.0) for i in range(3)) for p in source_vertices]
         return "CreateMorphs", {"morphsData": [create_data]}, {"sourceGuid": source["guid"], "homeStory": source["homeStory"],
             "sourceBounds": source_bounds, "translation": {"dx": dx, "dy": 0.0, "dz": 0.0}, "createData": create_data,
+            "sourceVertices": source_vertices, "expectedVertices": expected_vertices,
             "sourceMaterials": morph.face_material_guids(source, data)}
     raise ValueError(f"Unsupported create action: {action}")
 
@@ -266,28 +269,87 @@ def run(request):
             "create_roof": "Roof", "create_morph": "Morph"}.get(action) and bool(new.get("bodies"))
         if action == "create_window":
             host = new.get("relationships", {}).get("hostGuid")
+            host_before = before_map[plan["wallGuid"].lower()]
+            host_after = emap(after).get(plan["wallGuid"].lower())
+            host_body = (host_after or {}).get("bodies", [{}])[0]
+            host_geom_changed = bool(host_after and window.geometry_signature(host_before) != window.geometry_signature(host_after))
+            body_materials_before = [f.get("materialId") for b in host_before.get("bodies", []) for f in b.get("faces", [])]
+            body_materials_after = [f.get("materialId") for b in (host_after or {}).get("bodies", []) for f in b.get("faces", [])]
+            window_ref = new.get("placement", {}).get("referenceGeometry", {})
             verification.update({"hostGuid": host, "hostMatches": bool(host and host.lower() == plan["wallGuid"].lower()),
                 "hostHomeStory": before_map[plan["wallGuid"].lower()].get("homeStory"),
-                "positionReference": new.get("placement", {}).get("referenceGeometry")})
+                "positionReference": window_ref, "requestedCenterOffset": plan["centerOffsetAlongHost"],
+                "centerOffsetMatches": abs(float(window_ref.get("centerOffsetAlongHost", math.inf))-
+                                            float(plan["centerOffsetAlongHost"])) <= TOL,
+                "hostBodyChangedForAperture": host_geom_changed, "hostBodyClosed": host_body.get("closed"),
+                "hostFaceMaterialIdsBefore": body_materials_before, "hostFaceMaterialIdsAfter": body_materials_after,
+                "hostMaterialSetUnchanged": set(body_materials_before) == set(body_materials_after)})
             verification["pass"] = (verification["pass"] and verification["hostMatches"]
-                                     and new.get("homeStory") == verification["hostHomeStory"])
+                and new.get("homeStory") == verification["hostHomeStory"] and verification["centerOffsetMatches"]
+                and verification["hostBodyChangedForAperture"] and verification["hostBodyClosed"] is True
+                and verification["hostMaterialSetUnchanged"])
         elif action == "create_slab":
             source = before_map[plan["sourceGuid"].lower()]
             actual_ref = new.get("placement", {}).get("referenceGeometry", {})
-            expected_ref = source.get("placement", {}).get("referenceGeometry", {})
+            actual_poly = slab.convex_hull([p for b in new.get("bodies", []) for p in b.get("vertices", [])])
+            expected_poly = [(float(p["x"]), float(p["y"])) for p in plan["polygonXY"]]
+            actual_faces = slab.face_material_guids(new, after)
+            expected_faces = plan["sourceFaceMaterialGuids"]
+            actual_story_z = float(next(s["elevation"] for s in after["stories"] if s["index"] == new["homeStory"])) + float(actual_ref.get("levelFromHomeStory", math.inf))
             verification.update({"thickness": actual_ref.get("thickness"),
                 "expectedThickness": plan["sourceThickness"], "materialBindings": new.get("materialBindings"),
-                "sourceMaterialBindings": plan["sourceBindings"], "geometrySignature": slab.geometry_signature(new)})
+                "sourceMaterialBindings": plan["sourceBindings"], "geometrySignature": slab.geometry_signature(new),
+                "polygonVertexCloudMatches": slab.vertex_cloud_error(expected_poly, actual_poly)[0] if hasattr(slab, "vertex_cloud_error") else
+                    len(expected_poly) == len(actual_poly) and all(any(math.dist(p, q) <= TOL for q in actual_poly) for p in expected_poly),
+                "absoluteReferenceZ": actual_story_z, "expectedAbsoluteReferenceZ": plan["referenceLevelAbsoluteZ"],
+                "faceMaterialGuids": actual_faces, "expectedFaceMaterialGuids": expected_faces,
+                "faceMaterialsMatch": sorted(actual_faces) == sorted(expected_faces)})
             verification["pass"] = (verification["pass"] and new.get("homeStory") == plan["sourceHomeStory"]
                 and abs(float(actual_ref.get("thickness", -1))-float(plan["sourceThickness"])) <= TOL
+                and abs(actual_story_z-float(plan["referenceLevelAbsoluteZ"])) <= TOL
+                and verification["polygonVertexCloudMatches"] and verification["faceMaterialsMatch"]
                 and new.get("materialBindings", {}).get("buildingMaterial", {}).get("guid") ==
                     plan["sourceBindings"].get("buildingMaterial", {}).get("guid"))
         elif action == "create_roof":
+            source = before_map[plan["sourceGuid"].lower()]
+            expected_vertices = roof.vec_points(source["bodies"][0], plan["translation"]["dx"], plan["translation"]["dy"])
+            actual_vertices = [p for b in new.get("bodies", []) for p in b.get("vertices", [])]
+            vertices_match, max_delta = roof.vertex_cloud_error(expected_vertices, actual_vertices)
+            actual_face_materials = roof.face_material_guids(new, after)
+            details_result = api("GetDetailsOfElements", {"elements": [{"elementId": {"guid": created_guid}}]}, "roof-readback-details")
+            detail_item = next((x for x in details_result.get("detailsOfElements", []) if x.get("type") == "Roof"), None)
+            native = detail_item.get("details", {}) if detail_item else {}
+            outline = native.get("polygonOutline", [])
+            if len(outline) > 1 and math.hypot(float(outline[0]["x"])-float(outline[-1]["x"]),
+                                              float(outline[0]["y"])-float(outline[-1]["y"])) <= TOL:
+                outline = outline[:-1]
+            expected_outline = plan.get("translatedPolygon", [])
+            outline_match, _ = roof.vertex_cloud_error(
+                [(float(p["x"]), float(p["y"]), 0.0) for p in expected_outline],
+                [(float(p["x"]), float(p["y"]), 0.0) for p in outline])
             verification.update({"materialBindings": new.get("materialBindings"),
-                "sourcePlan": {k: plan.get(k) for k in ("homeStory", "absoluteZ", "pitchRadians", "thickness", "translatedPolygon")}})
+                "sourcePlan": {k: plan.get(k) for k in ("homeStory", "absoluteZ", "pitchRadians", "thickness", "translatedPolygon")},
+                "worldVerticesMatch": vertices_match, "maximumVertexDeltaMeters": max_delta,
+                "nativePitchRadians": native.get("angle"), "expectedPitchRadians": plan.get("pitchRadians"),
+                "nativeOutlineMatches": outline_match, "nativeAbsoluteZ": native.get("zCoordinate"),
+                "nativeHomeStory": detail_item.get("floorIndex") if detail_item else None,
+                "faceMaterialGuids": actual_face_materials, "expectedFaceMaterialGuids": plan.get("sourceFaceMaterialGuids")})
             verification["pass"] = (verification["pass"] and new.get("homeStory") == plan.get("homeStory")
                 and abs(float(new.get("placement", {}).get("referenceGeometry", {}).get("thickness", -1))
-                        - float(plan.get("thickness", -2))) <= TOL)
+                        - float(plan.get("thickness", -2))) <= TOL and vertices_match
+                and detail_item is not None and detail_item.get("floorIndex") == plan.get("homeStory")
+                and abs(float(native.get("angle", math.inf))-float(plan.get("pitchRadians", -math.inf))) <= TOL
+                and abs(float(native.get("zCoordinate", math.inf))-float(plan.get("absoluteZ", -math.inf))) <= TOL
+                and outline_match
+                and sorted(actual_face_materials) == sorted(plan.get("sourceFaceMaterialGuids", [])))
+        elif action == "create_morph":
+            actual_vertices = morph.points_from_dump(new)
+            vertices_match, max_delta = morph.cloud_compare(plan["expectedVertices"], actual_vertices)
+            actual_materials = morph.face_material_guids(new, after)
+            verification.update({"worldVerticesMatch": vertices_match, "maximumVertexDeltaMeters": max_delta,
+                "faceMaterials": actual_materials, "expectedFaceMaterials": plan["sourceMaterials"]})
+            verification["pass"] = (verification["pass"] and new.get("homeStory") == plan["homeStory"]
+                and vertices_match and sorted(actual_materials) == sorted(plan["sourceMaterials"]))
     return {"status": "PASS" if verification["pass"] else "BLOCKED", "action": action,
             "createdGuid": created_guid, "sourceGuids": [source_guid] if source_guid else [],
             "geometry": {k: plan[k] for k in ("start", "end", "polygonXY", "translation", "homeStory", "z", "sourceEndpoint") if k in plan},
