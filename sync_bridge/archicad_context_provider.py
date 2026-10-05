@@ -149,6 +149,9 @@ class ArchicadContextProvider:
         row = rows[0]
         element_type = _required_string(row, 'type', 'GetDetailsOfElements')
         result = {'guid': guid, 'type': element_type}
+        floor_index = row.get('floorIndex')
+        if isinstance(floor_index, int) and not isinstance(floor_index, bool):
+            result['floorIndex'] = floor_index
 
         if element_type in _UNSUPPORTED_DETAIL_TYPES:
             result.update({
