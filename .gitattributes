@@ -41,7 +41,7 @@ closed_loop/live_wall_hardening.py -text
 closed_loop/stage4_preflight.py -text
 closed_loop/stage4_live_scenario.py -text
 scripts/stage4_audit_pack.py -text
-scripts/archicad_executor.py -text
-scripts/archicad_chat_executor.py -text
-scripts/archicad_write_cycles/wall_joint_cycle.py -text
-archicad-addon/Examples/model_dump_v1.py -text
+scripts/archicad_executor.py text eol=crlf
+scripts/archicad_chat_executor.py text eol=crlf
+scripts/archicad_write_cycles/wall_joint_cycle.py text eol=crlf
+archicad-addon/Examples/model_dump_v1.py text eol=crlf
