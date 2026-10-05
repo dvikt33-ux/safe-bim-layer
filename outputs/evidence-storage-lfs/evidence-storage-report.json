@@ -1,0 +1,533 @@
+{
+  "status": "PREPARED",
+  "baseCommit": "2674e1ebd7656fbdb306bcff294d8d17174be78a",
+  "branch": "work/evidence-storage-lfs",
+  "gitLfsVersion": "git-lfs/3.7.1 (GitHub; windows amd64; go 1.25.1; git b84b3384)",
+  "files": [
+    {
+      "path": "outputs/closed-loop-stage1/initial-model-dump.json",
+      "expectedSha256": "d84ad042d04fd63be3cf2b059a1a12e1982f86edace6c0bb38525b784c12ac26",
+      "actualSha256": "d84ad042d04fd63be3cf2b059a1a12e1982f86edace6c0bb38525b784c12ac26",
+      "bytes": 104940501,
+      "expectedBytes": 104940501,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage1/initial-model-dump.native-response.json",
+      "expectedSha256": "db338c7cf161dfe37b5d931993a3aaff66f1facfe75c848a80cf42f6085d3473",
+      "actualSha256": "db338c7cf161dfe37b5d931993a3aaff66f1facfe75c848a80cf42f6085d3473",
+      "bytes": 99233211,
+      "expectedBytes": 99233211,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/chat-executor/planner-model-dump.json",
+      "expectedSha256": "ab56aa789d032e1e3d82f59e5d3f7d07fc1673d875c038e89b10a8dc8b3cbcf8",
+      "actualSha256": "ab56aa789d032e1e3d82f59e5d3f7d07fc1673d875c038e89b10a8dc8b3cbcf8",
+      "bytes": 104940500,
+      "expectedBytes": 104940500,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/chat-executor/planner-model-dump.native-response.json",
+      "expectedSha256": "45d233ad7cfbc1cc45a066dcec9a96fbd9881533b0de3411cee770d96bfef5b7",
+      "actualSha256": "45d233ad7cfbc1cc45a066dcec9a96fbd9881533b0de3411cee770d96bfef5b7",
+      "bytes": 99233210,
+      "expectedBytes": 99233210,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/executor/after-create.json",
+      "expectedSha256": "0a307ff65c9b19a76570ea85ef0812ced41162b87ea24fb23321bdd653642277",
+      "actualSha256": "0a307ff65c9b19a76570ea85ef0812ced41162b87ea24fb23321bdd653642277",
+      "bytes": 104944111,
+      "expectedBytes": 104944111,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/executor/after-create.native-response.json",
+      "expectedSha256": "91b273a0393167b9f62ed60e5299321813dd93a45ad71387d7fd8f19b11b9844",
+      "actualSha256": "91b273a0393167b9f62ed60e5299321813dd93a45ad71387d7fd8f19b11b9844",
+      "bytes": 99236666,
+      "expectedBytes": 99236666,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/executor/before.json",
+      "expectedSha256": "58c5d529a9c4e8ab057bb7ce2ef15134bdc5841920a6df6b22015dfe3d738f52",
+      "actualSha256": "58c5d529a9c4e8ab057bb7ce2ef15134bdc5841920a6df6b22015dfe3d738f52",
+      "bytes": 104940501,
+      "expectedBytes": 104940501,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-1/executor/before.native-response.json",
+      "expectedSha256": "1770709f2c7bd0852abbc3ea89ac5c5261901140f3757b09fabdc6c4f963f2aa",
+      "actualSha256": "1770709f2c7bd0852abbc3ea89ac5c5261901140f3757b09fabdc6c4f963f2aa",
+      "bytes": 99233211,
+      "expectedBytes": 99233211,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/chat-executor/planner-model-dump.json",
+      "expectedSha256": "25ee8d765407601bfb2169cc90a15409b72df60d005f3947abea36189033b516",
+      "actualSha256": "25ee8d765407601bfb2169cc90a15409b72df60d005f3947abea36189033b516",
+      "bytes": 104944111,
+      "expectedBytes": 104944111,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/chat-executor/planner-model-dump.native-response.json",
+      "expectedSha256": "ca1bc2404f48125e5107ed231e261c4665d8871b2ba5fef2e69fe4bac801301d",
+      "actualSha256": "ca1bc2404f48125e5107ed231e261c4665d8871b2ba5fef2e69fe4bac801301d",
+      "bytes": 99236666,
+      "expectedBytes": 99236666,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/executor/after-create.json",
+      "expectedSha256": "c18971cff24d81afc2d221f7fa85f5f05936cd696b36bffe36de94f1ce9305bc",
+      "actualSha256": "c18971cff24d81afc2d221f7fa85f5f05936cd696b36bffe36de94f1ce9305bc",
+      "bytes": 104947721,
+      "expectedBytes": 104947721,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/executor/after-create.native-response.json",
+      "expectedSha256": "6c2176ac76f1b82c6a5597c2a688b9981aeca3d99894545344e28a4883165f7c",
+      "actualSha256": "6c2176ac76f1b82c6a5597c2a688b9981aeca3d99894545344e28a4883165f7c",
+      "bytes": 99240121,
+      "expectedBytes": 99240121,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/executor/before.json",
+      "expectedSha256": "3ff48dc68ceaf9286f2a7a59441b0bd6ed30fce8c4596b602887c6f415a144b3",
+      "actualSha256": "3ff48dc68ceaf9286f2a7a59441b0bd6ed30fce8c4596b602887c6f415a144b3",
+      "bytes": 104944111,
+      "expectedBytes": 104944111,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage1/iteration-2/executor/before.native-response.json",
+      "expectedSha256": "f98639e0dcb011868bb52449b01bdb05923c1a188af406962a73ceea20cdf548",
+      "actualSha256": "f98639e0dcb011868bb52449b01bdb05923c1a188af406962a73ceea20cdf548",
+      "bytes": 99236666,
+      "expectedBytes": 99236666,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-1/executor/after-create.json",
+      "expectedSha256": "c783869c8daa4f2f8e0778a4608a9d48f4044a7758e947a2b18404ed612e38fd",
+      "actualSha256": "c783869c8daa4f2f8e0778a4608a9d48f4044a7758e947a2b18404ed612e38fd",
+      "bytes": 104958551,
+      "expectedBytes": 104958551,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-1/executor/after-create.native-response.json",
+      "expectedSha256": "f770442c3dade2caaeebae648afd9d2e210ca4f93a75182aae34c6fba1e14569",
+      "actualSha256": "f770442c3dade2caaeebae648afd9d2e210ca4f93a75182aae34c6fba1e14569",
+      "bytes": 99250486,
+      "expectedBytes": 99250486,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-1/executor/before.json",
+      "expectedSha256": "6958cf5892d22d0e2c0b0c95c11ebb9f19a98ef9660e86cd41c1235e443f5a98",
+      "actualSha256": "6958cf5892d22d0e2c0b0c95c11ebb9f19a98ef9660e86cd41c1235e443f5a98",
+      "bytes": 104954941,
+      "expectedBytes": 104954941,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-1/executor/before.native-response.json",
+      "expectedSha256": "e222f3074c805e05f2d229e8cc876ed7283031ec92e7a6c067be654b20b3e1dc",
+      "actualSha256": "e222f3074c805e05f2d229e8cc876ed7283031ec92e7a6c067be654b20b3e1dc",
+      "bytes": 99247031,
+      "expectedBytes": 99247031,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-2/executor/after-create.json",
+      "expectedSha256": "fb652fd2064f7140a42b2a7bff82b836941fff2cce9e575c6e4a4c4afa628fa9",
+      "actualSha256": "fb652fd2064f7140a42b2a7bff82b836941fff2cce9e575c6e4a4c4afa628fa9",
+      "bytes": 104962161,
+      "expectedBytes": 104962161,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-2/executor/after-create.native-response.json",
+      "expectedSha256": "cbc962bf46bfdbd0cd4dd65120ecd9e939eb7041f080ca3b719bee3071d6fac8",
+      "actualSha256": "cbc962bf46bfdbd0cd4dd65120ecd9e939eb7041f080ca3b719bee3071d6fac8",
+      "bytes": 99253941,
+      "expectedBytes": 99253941,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-2/executor/before.json",
+      "expectedSha256": "304155bb1ba3124c531a134905914cfadd56a375c6b5224b4e2e2a61f0901968",
+      "actualSha256": "304155bb1ba3124c531a134905914cfadd56a375c6b5224b4e2e2a61f0901968",
+      "bytes": 104958551,
+      "expectedBytes": 104958551,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-2/executor/before.native-response.json",
+      "expectedSha256": "99554ac480b4e0b18b14cde782f70d314d9ef976f338b39f3a5591ca002e5c81",
+      "actualSha256": "99554ac480b4e0b18b14cde782f70d314d9ef976f338b39f3a5591ca002e5c81",
+      "bytes": 99250486,
+      "expectedBytes": 99250486,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/001-observe.json",
+      "expectedSha256": "70b9ab8a2fba021b0c109ec50317bddb06857df5be3eb587c8006ab8bea4c382",
+      "actualSha256": "70b9ab8a2fba021b0c109ec50317bddb06857df5be3eb587c8006ab8bea4c382",
+      "bytes": 104954941,
+      "expectedBytes": 104954941,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/001-observe.native-response.json",
+      "expectedSha256": "abaf6f8548d152ba0db75bbbfdf3344de703a2f5a69f7fece4d60360737da59d",
+      "actualSha256": "abaf6f8548d152ba0db75bbbfdf3344de703a2f5a69f7fece4d60360737da59d",
+      "bytes": 99247031,
+      "expectedBytes": 99247031,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/002-stale-check.json",
+      "expectedSha256": "2060ad6eb38a11f3d3b7032fd692108643e1a3f2ffc177aaa291087be3dbefdc",
+      "actualSha256": "2060ad6eb38a11f3d3b7032fd692108643e1a3f2ffc177aaa291087be3dbefdc",
+      "bytes": 104954941,
+      "expectedBytes": 104954941,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/002-stale-check.native-response.json",
+      "expectedSha256": "c4b17734556bb12ba3530ebf3b30fe42fdabafaa4a334ebe44f3cf5ac0e22069",
+      "actualSha256": "c4b17734556bb12ba3530ebf3b30fe42fdabafaa4a334ebe44f3cf5ac0e22069",
+      "bytes": 99247031,
+      "expectedBytes": 99247031,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/003-read-back.json",
+      "expectedSha256": "77742cfc8230909db8844bdacaaf61ee428bbe2539570474d9c9d59235e56477",
+      "actualSha256": "77742cfc8230909db8844bdacaaf61ee428bbe2539570474d9c9d59235e56477",
+      "bytes": 104958551,
+      "expectedBytes": 104958551,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/003-read-back.native-response.json",
+      "expectedSha256": "1826ba8ed1ee1d7c4378598334685f488796164f017068c49f4cf51356695bc9",
+      "actualSha256": "1826ba8ed1ee1d7c4378598334685f488796164f017068c49f4cf51356695bc9",
+      "bytes": 99250486,
+      "expectedBytes": 99250486,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/004-observe.json",
+      "expectedSha256": "f0850dccf6e1c725817c7064020af5cebe2d8fcc592e8920c52f2494deb5c5e6",
+      "actualSha256": "f0850dccf6e1c725817c7064020af5cebe2d8fcc592e8920c52f2494deb5c5e6",
+      "bytes": 104958551,
+      "expectedBytes": 104958551,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/004-observe.native-response.json",
+      "expectedSha256": "98b061d7765b0af4be8d870b25e7540f6673fd75c15660f09baa277d9e2a47ef",
+      "actualSha256": "98b061d7765b0af4be8d870b25e7540f6673fd75c15660f09baa277d9e2a47ef",
+      "bytes": 99250486,
+      "expectedBytes": 99250486,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/005-stale-check.json",
+      "expectedSha256": "e43f584f6eb55981520e0f64dc1a87d96abb4db84d215a9b5124e1b44c6d17e9",
+      "actualSha256": "e43f584f6eb55981520e0f64dc1a87d96abb4db84d215a9b5124e1b44c6d17e9",
+      "bytes": 104958550,
+      "expectedBytes": 104958550,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/005-stale-check.native-response.json",
+      "expectedSha256": "cfdbdda8b33c61b918661fdbd9123fd5479d148639c0dd43be112c2cbdfece30",
+      "actualSha256": "cfdbdda8b33c61b918661fdbd9123fd5479d148639c0dd43be112c2cbdfece30",
+      "bytes": 99250485,
+      "expectedBytes": 99250485,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/006-read-back.json",
+      "expectedSha256": "3132c92a0f1e34867d2bda70823b751f852ba6d6efb2711e80787ceb9d81e34e",
+      "actualSha256": "3132c92a0f1e34867d2bda70823b751f852ba6d6efb2711e80787ceb9d81e34e",
+      "bytes": 104962161,
+      "expectedBytes": 104962161,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/006-read-back.native-response.json",
+      "expectedSha256": "09f36db9751a79e0d373dbba3f18e841f84f1aecc6455225bd2b48b2e40ca199",
+      "actualSha256": "09f36db9751a79e0d373dbba3f18e841f84f1aecc6455225bd2b48b2e40ca199",
+      "bytes": 99253941,
+      "expectedBytes": 99253941,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "GIT_LFS",
+      "verified": true
+    }
+  ],
+  "totalFiles": 34,
+  "totalBytes": 3471334610,
+  "totalGiB": 3.232932286337018,
+  "lfsObjectCount": 34,
+  "skippedFiles": [
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/chat-executor/planner-model-dump.json",
+      "expectedSha256": "ee781b383382832eee22939e28b8342501ed16c74505fda2750130ec9b810f86",
+      "actualSha256": "ee781b383382832eee22939e28b8342501ed16c74505fda2750130ec9b810f86",
+      "bytes": 104947721,
+      "expectedBytes": 104947721,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "LOCAL_ONLY",
+      "verified": true,
+      "reason": "Optional priority C deferred: 1.521 GiB additional; mandatory A+B archive bounded at 3.233 GiB"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/chat-executor/planner-model-dump.native-response.json",
+      "expectedSha256": "294879691b89e99866c741665b176c5d9efc0eef4d23a8f049d43c58d931dc87",
+      "actualSha256": "294879691b89e99866c741665b176c5d9efc0eef4d23a8f049d43c58d931dc87",
+      "bytes": 99240121,
+      "expectedBytes": 99240121,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "LOCAL_ONLY",
+      "verified": true,
+      "reason": "Optional priority C deferred: 1.521 GiB additional; mandatory A+B archive bounded at 3.233 GiB"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/executor/after-create.json",
+      "expectedSha256": "de00a532eff0ee140ec496fb4e0af060877c0a689f9796e9572873a72c9d60a3",
+      "actualSha256": "de00a532eff0ee140ec496fb4e0af060877c0a689f9796e9572873a72c9d60a3",
+      "bytes": 104951331,
+      "expectedBytes": 104951331,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "LOCAL_ONLY",
+      "verified": true,
+      "reason": "Optional priority C deferred: 1.521 GiB additional; mandatory A+B archive bounded at 3.233 GiB"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/executor/after-create.native-response.json",
+      "expectedSha256": "db646b5dccbb546c75def6432fd8a32aa742bd62b356f7a7363f3d16be15a798",
+      "actualSha256": "db646b5dccbb546c75def6432fd8a32aa742bd62b356f7a7363f3d16be15a798",
+      "bytes": 99243576,
+      "expectedBytes": 99243576,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "LOCAL_ONLY",
+      "verified": true,
+      "reason": "Optional priority C deferred: 1.521 GiB additional; mandatory A+B archive bounded at 3.233 GiB"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/executor/before.json",
+      "expectedSha256": "4625ba1df259d13c7a9caace0324a5ab689aeec653c7366b9f9393008a9010b8",
+      "actualSha256": "4625ba1df259d13c7a9caace0324a5ab689aeec653c7366b9f9393008a9010b8",
+      "bytes": 104947721,
+      "expectedBytes": 104947721,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "LOCAL_ONLY",
+      "verified": true,
+      "reason": "Optional priority C deferred: 1.521 GiB additional; mandatory A+B archive bounded at 3.233 GiB"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/executor/before.native-response.json",
+      "expectedSha256": "e4623127c14ec4c64327716a69d2c371628c723bae92258a4218beef1c239951",
+      "actualSha256": "e4623127c14ec4c64327716a69d2c371628c723bae92258a4218beef1c239951",
+      "bytes": 99240121,
+      "expectedBytes": 99240121,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "LOCAL_ONLY",
+      "verified": true,
+      "reason": "Optional priority C deferred: 1.521 GiB additional; mandatory A+B archive bounded at 3.233 GiB"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/chat-executor/planner-model-dump.json",
+      "expectedSha256": "5c15428c27ef571edd5f4cb8ce3d18d48f6ba8e34e66e272bebe3c4497a4a5d2",
+      "actualSha256": "5c15428c27ef571edd5f4cb8ce3d18d48f6ba8e34e66e272bebe3c4497a4a5d2",
+      "bytes": 104951331,
+      "expectedBytes": 104951331,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "LOCAL_ONLY",
+      "verified": true,
+      "reason": "Optional priority C deferred: 1.521 GiB additional; mandatory A+B archive bounded at 3.233 GiB"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/chat-executor/planner-model-dump.native-response.json",
+      "expectedSha256": "7f1ebedc2ce553d7e70781587f887798f494d5f523a1d86bb17d753a4c4d18f9",
+      "actualSha256": "7f1ebedc2ce553d7e70781587f887798f494d5f523a1d86bb17d753a4c4d18f9",
+      "bytes": 99243576,
+      "expectedBytes": 99243576,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "LOCAL_ONLY",
+      "verified": true,
+      "reason": "Optional priority C deferred: 1.521 GiB additional; mandatory A+B archive bounded at 3.233 GiB"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/executor/after-create.json",
+      "expectedSha256": "d1c0567fdf4298b87b6e8ea5f4df86edd1811aea308552ad361023ed61119bff",
+      "actualSha256": "d1c0567fdf4298b87b6e8ea5f4df86edd1811aea308552ad361023ed61119bff",
+      "bytes": 104954941,
+      "expectedBytes": 104954941,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "LOCAL_ONLY",
+      "verified": true,
+      "reason": "Optional priority C deferred: 1.521 GiB additional; mandatory A+B archive bounded at 3.233 GiB"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/executor/after-create.native-response.json",
+      "expectedSha256": "6eb8acb616e236bccdd0ba80ca9cde4daabee841a6eae143d00929e704a6210b",
+      "actualSha256": "6eb8acb616e236bccdd0ba80ca9cde4daabee841a6eae143d00929e704a6210b",
+      "bytes": 99247031,
+      "expectedBytes": 99247031,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "LOCAL_ONLY",
+      "verified": true,
+      "reason": "Optional priority C deferred: 1.521 GiB additional; mandatory A+B archive bounded at 3.233 GiB"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/executor/before.json",
+      "expectedSha256": "323385b59cb4e3cfa779ee97a8230857a67f5e377af8765ddbc8a0491ea1d4e5",
+      "actualSha256": "323385b59cb4e3cfa779ee97a8230857a67f5e377af8765ddbc8a0491ea1d4e5",
+      "bytes": 104951331,
+      "expectedBytes": 104951331,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "LOCAL_ONLY",
+      "verified": true,
+      "reason": "Optional priority C deferred: 1.521 GiB additional; mandatory A+B archive bounded at 3.233 GiB"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/executor/before.native-response.json",
+      "expectedSha256": "13771bbb4cf016a61d83ffe298d8c09248ac1d02450441acddac47d91413d2a9",
+      "actualSha256": "13771bbb4cf016a61d83ffe298d8c09248ac1d02450441acddac47d91413d2a9",
+      "bytes": 99243576,
+      "expectedBytes": 99243576,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "LOCAL_ONLY",
+      "verified": true,
+      "reason": "Optional priority C deferred: 1.521 GiB additional; mandatory A+B archive bounded at 3.233 GiB"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/observations/001-regression-readback.json",
+      "expectedSha256": "a5adead0b620d66e4d6173560d54290808c5744fd2ba0550a39bbcb8ef074d02",
+      "actualSha256": "a5adead0b620d66e4d6173560d54290808c5744fd2ba0550a39bbcb8ef074d02",
+      "bytes": 104951331,
+      "expectedBytes": 104951331,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "LOCAL_ONLY",
+      "verified": true,
+      "reason": "Optional priority C deferred: 1.521 GiB additional; mandatory A+B archive bounded at 3.233 GiB"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/observations/001-regression-readback.native-response.json",
+      "expectedSha256": "b2575955e5edcc90418c99ea037aef013c40a8a1104b6e379c1e7d583719c794",
+      "actualSha256": "b2575955e5edcc90418c99ea037aef013c40a8a1104b6e379c1e7d583719c794",
+      "bytes": 99243576,
+      "expectedBytes": 99243576,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "LOCAL_ONLY",
+      "verified": true,
+      "reason": "Optional priority C deferred: 1.521 GiB additional; mandatory A+B archive bounded at 3.233 GiB"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/observations/002-regression-readback.json",
+      "expectedSha256": "3a33f24889761d1ff9c225ee19d8032f7d5455365066271957fdc7a31ad52b7c",
+      "actualSha256": "3a33f24889761d1ff9c225ee19d8032f7d5455365066271957fdc7a31ad52b7c",
+      "bytes": 104954940,
+      "expectedBytes": 104954940,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "LOCAL_ONLY",
+      "verified": true,
+      "reason": "Optional priority C deferred: 1.521 GiB additional; mandatory A+B archive bounded at 3.233 GiB"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/observations/002-regression-readback.native-response.json",
+      "expectedSha256": "d70ab6f7f69c26bc5d04ccda1487955283ca713015798e05d6ac996bdcabf005",
+      "actualSha256": "d70ab6f7f69c26bc5d04ccda1487955283ca713015798e05d6ac996bdcabf005",
+      "bytes": 99247030,
+      "expectedBytes": 99247030,
+      "previousStorage": "LOCAL_ONLY",
+      "newStorage": "LOCAL_ONLY",
+      "verified": true,
+      "reason": "Optional priority C deferred: 1.521 GiB additional; mandatory A+B archive bounded at 3.233 GiB"
+    }
+  ],
+  "hashMismatches": [],
+  "uploadVerified": false,
+  "freshCloneVerified": false
+}
