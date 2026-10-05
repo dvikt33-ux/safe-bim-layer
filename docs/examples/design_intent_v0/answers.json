@@ -1,0 +1,25 @@
+[
+  {
+    "approved": true,
+    "id": "answer",
+    "inspected": true,
+    "kind": "USER_CORRECTION",
+    "revision": "v1",
+    "statements": [
+      {
+        "goalFingerprints": {
+          "compact": "f12b1d7cfe6fb8a32ba9ff723ceb0c248e725daad545a7485627ec1afe8ef84c",
+          "spacious": "8f72026703406eda4060dbfb11f7ba713925dbcf60c9e0f2e918b50da79a8157"
+        },
+        "goals": [
+          "compact",
+          "spacious"
+        ],
+        "id": "tradeoff-answer",
+        "kind": "TRADEOFF_DECISION",
+        "policy": "PREFER_GOAL",
+        "preferredGoal": "compact"
+      }
+    ]
+  }
+]

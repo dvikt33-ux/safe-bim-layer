@@ -1,0 +1,33 @@
+[
+  {
+    "approved": true,
+    "id": "intent",
+    "inspected": true,
+    "kind": "USER_BRIEF",
+    "revision": "v1",
+    "statements": [
+      {
+        "goalId": "compact",
+        "id": "compact",
+        "kind": "GOAL",
+        "priority": 1,
+        "scope": [
+          "PROJECT"
+        ],
+        "source": "USER_PREFERENCE",
+        "type": "COMPACTNESS"
+      },
+      {
+        "goalId": "spacious",
+        "id": "spacious",
+        "kind": "GOAL",
+        "priority": 1,
+        "scope": [
+          "PROJECT"
+        ],
+        "source": "USER_PREFERENCE",
+        "type": "SPACIOUSNESS"
+      }
+    ]
+  }
+]
