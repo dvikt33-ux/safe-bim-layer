@@ -1,0 +1,183 @@
+{
+  "goalId": "stage2-unknown-outcome",
+  "specification": "Stage 2 offline acceptance fixture: unknown-outcome",
+  "acceptanceCriteria": [
+    {
+      "id": "C01",
+      "required": true,
+      "check": "length",
+      "expected": 1.0,
+      "tolerance": 1e-06,
+      "correctable": true
+    }
+  ],
+  "maxIterations": 2,
+  "createdAt": "2026-10-05T00:00:00+00:00",
+  "updatedAt": "2026-10-05T00:00:00+00:00",
+  "state": "UNKNOWN_OUTCOME",
+  "iteration": 1,
+  "observedModelIdentity": "fixture-model",
+  "observedModelHash": "before",
+  "actions": [
+    {
+      "type": "create_wall",
+      "parameters": {
+        "length": 1.0
+      }
+    }
+  ],
+  "auditHistory": [],
+  "iterations": [
+    {
+      "iteration": 1,
+      "stateBefore": "PLANNING",
+      "observation": {
+        "modelIdentity": "fixture-model",
+        "modelHash": "before",
+        "facts": {},
+        "evidence": {},
+        "provenance": "FIXTURE"
+      },
+      "plannerDecision": {
+        "status": "PLANNED",
+        "action": {
+          "type": "create_wall",
+          "parameters": {
+            "length": 1.0
+          }
+        },
+        "reason": ""
+      },
+      "executorRequest": {
+        "type": "create_wall",
+        "parameters": {
+          "length": 1.0
+        }
+      },
+      "executorResult": {
+        "status": "PASS",
+        "mutationAttempted": true,
+        "readbackRequired": true,
+        "details": {
+          "simulation": true
+        },
+        "executionMode": "OFFLINE"
+      },
+      "readback": null,
+      "auditResult": null
+    }
+  ],
+  "evidenceTrail": [
+    {
+      "sequence": 1,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 0,
+      "state": "RECEIVED",
+      "kind": "received",
+      "payload": {
+        "contract": {
+          "goalId": "stage2-unknown-outcome",
+          "criteria": [
+            {
+              "id": "C01",
+              "required": true,
+              "check": "length",
+              "expected": 1.0,
+              "tolerance": 1e-06,
+              "correctable": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 0,
+      "state": "OBSERVING",
+      "kind": "transition",
+      "payload": {
+        "before": "RECEIVED",
+        "after": "OBSERVING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 3,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 0,
+      "state": "OBSERVING",
+      "kind": "observation",
+      "payload": {
+        "modelIdentity": "fixture-model",
+        "modelHash": "before",
+        "facts": {},
+        "evidence": {},
+        "provenance": "FIXTURE"
+      }
+    },
+    {
+      "sequence": 4,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 0,
+      "state": "PLANNING",
+      "kind": "transition",
+      "payload": {
+        "before": "OBSERVING",
+        "after": "PLANNING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 5,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 1,
+      "state": "PLANNING",
+      "kind": "iteration-start",
+      "payload": {
+        "modelIdentity": "fixture-model",
+        "modelHash": "before"
+      }
+    },
+    {
+      "sequence": 6,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 1,
+      "state": "EXECUTING",
+      "kind": "transition",
+      "payload": {
+        "before": "PLANNING",
+        "after": "EXECUTING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 7,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 1,
+      "state": "READING_BACK",
+      "kind": "transition",
+      "payload": {
+        "before": "EXECUTING",
+        "after": "READING_BACK",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 8,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 1,
+      "state": "UNKNOWN_OUTCOME",
+      "kind": "transition",
+      "payload": {
+        "before": "READING_BACK",
+        "after": "UNKNOWN_OUTCOME",
+        "reason": "read-back unavailable: RuntimeError: No read-back fixture available; outcome must not be retried"
+      }
+    }
+  ],
+  "finalStatus": "UNKNOWN_OUTCOME",
+  "terminalReason": "read-back unavailable: RuntimeError: No read-back fixture available; outcome must not be retried",
+  "executionMode": "OFFLINE",
+  "liveMutationAttempted": false
+}

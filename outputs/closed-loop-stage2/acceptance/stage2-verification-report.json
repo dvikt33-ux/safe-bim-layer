@@ -1,0 +1,256 @@
+{
+  "stage": "STAGE_2_ORCHESTRATOR_SKELETON",
+  "status": "PASS",
+  "executionMode": "OFFLINE",
+  "stage1Commit": "27fc10267e71d1cd4f8322fe1d3c334e2cef1b4c",
+  "v0Baseline": "565ea2e0414a14bedbca09999690d7b97f877fa3",
+  "liveMutationAttempted": false,
+  "liveRegressionRerun": false,
+  "testsRun": 33,
+  "testsPassed": [
+    "test_orchestrator.Stage2Tests.test_all_declared_legal_edges_are_exercised",
+    "test_orchestrator.Stage2Tests.test_all_illegal_state_edges_are_rejected",
+    "test_orchestrator.Stage2Tests.test_all_terminal_states_cannot_transition_or_run",
+    "test_orchestrator.Stage2Tests.test_auditor_numeric_tolerance_and_bool_distinction",
+    "test_orchestrator.Stage2Tests.test_correctable_fail_replans_from_readback",
+    "test_orchestrator.Stage2Tests.test_empty_retained_evidence_cannot_verify",
+    "test_orchestrator.Stage2Tests.test_end_to_end_verified_and_durable_complete_trail",
+    "test_orchestrator.Stage2Tests.test_evidence_status_never_promoted_to_pass",
+    "test_orchestrator.Stage2Tests.test_execution_request_is_saved_before_interface_call",
+    "test_orchestrator.Stage2Tests.test_executor_pass_without_readback_cannot_verify",
+    "test_orchestrator.Stage2Tests.test_executor_results_route_fail_closed",
+    "test_orchestrator.Stage2Tests.test_executor_timeout_is_unknown_and_never_retried",
+    "test_orchestrator.Stage2Tests.test_existing_job_file_is_preserved_and_cannot_be_restarted",
+    "test_orchestrator.Stage2Tests.test_fact_pass_cannot_be_supplied_as_observed_evidence",
+    "test_orchestrator.Stage2Tests.test_invalid_contracts_and_parameters_are_rejected",
+    "test_orchestrator.Stage2Tests.test_iteration_limit_blocks_unresolved_correctable_fail",
+    "test_orchestrator.Stage2Tests.test_live_component_and_live_payload_are_rejected",
+    "test_orchestrator.Stage2Tests.test_malformed_executor_result_is_unknown",
+    "test_orchestrator.Stage2Tests.test_malformed_planner_result_blocks_before_execution",
+    "test_orchestrator.Stage2Tests.test_missing_check_waits_for_data",
+    "test_orchestrator.Stage2Tests.test_missing_or_dangling_evidence_references_block",
+    "test_orchestrator.Stage2Tests.test_nested_boolean_is_not_numeric_evidence",
+    "test_orchestrator.Stage2Tests.test_observer_failure_blocks_without_actions",
+    "test_orchestrator.Stage2Tests.test_optional_nonpass_does_not_close_required_gate",
+    "test_orchestrator.Stage2Tests.test_planner_waiting_or_blocked_does_not_call_executor",
+    "test_orchestrator.Stage2Tests.test_readback_identity_mismatch_blocks",
+    "test_orchestrator.Stage2Tests.test_readback_unavailable_after_attempt_is_unknown_and_never_retried",
+    "test_orchestrator.Stage2Tests.test_required_missing_data_takes_precedence_over_replan",
+    "test_orchestrator.Stage2Tests.test_snapshots_are_detached_from_interface_mutation",
+    "test_orchestrator.Stage2Tests.test_uncorrectable_fail_blocks",
+    "test_orchestrator.Stage2Tests.test_verified_recomputes_audit_from_retained_readback",
+    "test_orchestrator.Stage2Tests.test_verified_with_nonpass_audit_is_rejected",
+    "test_orchestrator.Stage2Tests.test_verified_without_readback_and_audit_is_rejected"
+  ],
+  "failures": [],
+  "errors": [],
+  "criteria": [
+    {
+      "id": "S2-C01",
+      "required": true,
+      "expected": "Single goal, typed acceptance contract and serialized job",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_end_to_end_verified_and_durable_complete_trail"
+      ]
+    },
+    {
+      "id": "S2-C02",
+      "required": true,
+      "expected": "Required legal transitions exercised",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_all_declared_legal_edges_are_exercised"
+      ]
+    },
+    {
+      "id": "S2-C03",
+      "required": true,
+      "expected": "All illegal transitions rejected",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_all_illegal_state_edges_are_rejected"
+      ]
+    },
+    {
+      "id": "S2-C04",
+      "required": true,
+      "expected": "NOT_VERIFIED and DATA_MISSING never promoted",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_evidence_status_never_promoted_to_pass"
+      ]
+    },
+    {
+      "id": "S2-C05",
+      "required": true,
+      "expected": "UNKNOWN_OUTCOME cannot automatically retry",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_executor_timeout_is_unknown_and_never_retried"
+      ]
+    },
+    {
+      "id": "S2-C06",
+      "required": true,
+      "expected": "Terminal BLOCKED cannot become VERIFIED",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_all_terminal_states_cannot_transition_or_run"
+      ]
+    },
+    {
+      "id": "S2-C07",
+      "required": true,
+      "expected": "Full evidence persisted before execution and at completion",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_execution_request_is_saved_before_interface_call"
+      ]
+    },
+    {
+      "id": "S2-C08",
+      "required": true,
+      "expected": "Explicit iteration limit blocks unresolved acceptance",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_iteration_limit_blocks_unresolved_correctable_fail"
+      ]
+    },
+    {
+      "id": "S2-C09",
+      "required": true,
+      "expected": "Stage 2 rejects live interfaces and provenance",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_live_component_and_live_payload_are_rejected"
+      ]
+    },
+    {
+      "id": "S2-C10",
+      "required": true,
+      "expected": "Stage 1 v0 path unchanged",
+      "actual": {
+        "diff": ""
+      },
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "git diff 27fc10267e71d1cd4f8322fe1d3c334e2cef1b4c -- scripts archicad-addon safe_bim_layer.py qwen_safe_bim_integration.py"
+      ]
+    }
+  ],
+  "requiredSummary": {
+    "PASS": 10,
+    "FAIL": 0,
+    "NOT_VERIFIED": 0
+  },
+  "scenarios": [
+    {
+      "id": "verified",
+      "expected": "VERIFIED",
+      "actual": "VERIFIED",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "verified.job.json"
+      ],
+      "mockExecuteCalls": 1,
+      "liveMutationAttempted": false
+    },
+    {
+      "id": "replan",
+      "expected": "VERIFIED",
+      "actual": "VERIFIED",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "replan.job.json"
+      ],
+      "mockExecuteCalls": 2,
+      "liveMutationAttempted": false
+    },
+    {
+      "id": "not-verified",
+      "expected": "BLOCKED",
+      "actual": "BLOCKED",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "not-verified.job.json"
+      ],
+      "mockExecuteCalls": 1,
+      "liveMutationAttempted": false
+    },
+    {
+      "id": "data-missing",
+      "expected": "WAITING_FOR_DATA",
+      "actual": "WAITING_FOR_DATA",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "data-missing.job.json"
+      ],
+      "mockExecuteCalls": 1,
+      "liveMutationAttempted": false
+    },
+    {
+      "id": "conflict",
+      "expected": "BLOCKED",
+      "actual": "BLOCKED",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "conflict.job.json"
+      ],
+      "mockExecuteCalls": 1,
+      "liveMutationAttempted": false
+    },
+    {
+      "id": "transport",
+      "expected": "BLOCKED",
+      "actual": "BLOCKED",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "transport.job.json"
+      ],
+      "mockExecuteCalls": 1,
+      "liveMutationAttempted": false
+    },
+    {
+      "id": "unknown-outcome",
+      "expected": "UNKNOWN_OUTCOME",
+      "actual": "UNKNOWN_OUTCOME",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unknown-outcome.job.json"
+      ],
+      "mockExecuteCalls": 1,
+      "liveMutationAttempted": false
+    },
+    {
+      "id": "iteration-limit",
+      "expected": "BLOCKED",
+      "actual": "BLOCKED",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "iteration-limit.job.json"
+      ],
+      "mockExecuteCalls": 2,
+      "liveMutationAttempted": false
+    }
+  ],
+  "blockingIssues": []
+}
