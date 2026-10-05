@@ -1,0 +1,16 @@
+[
+  {
+    "id": "user-answer",
+    "kind": "USER_CORRECTION",
+    "revision": "v1",
+    "inspected": true,
+    "facts": {
+      "municipality": {
+        "value": "fixture-city",
+        "unit": null,
+        "method": "explicit supplied record",
+        "verification": "VERIFIED"
+      }
+    }
+  }
+]

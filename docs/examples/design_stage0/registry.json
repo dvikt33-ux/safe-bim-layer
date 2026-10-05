@@ -1,0 +1,210 @@
+{
+  "id": "fixture-intake",
+  "revision": "v1",
+  "approved": true,
+  "classificationInputs": [
+    "purpose"
+  ],
+  "branches": [
+    {
+      "id": "IZHS",
+      "when": {
+        "input": "purpose",
+        "equals": "IZHS"
+      },
+      "blocking": true,
+      "requiredBy": [
+        "STAGE_0/route"
+      ],
+      "reason": "Select the supplied project branch"
+    },
+    {
+      "id": "MKD",
+      "when": {
+        "input": "purpose",
+        "equals": "MKD"
+      },
+      "blocking": true,
+      "requiredBy": [
+        "STAGE_0/route"
+      ],
+      "reason": "Select the supplied project branch"
+    },
+    {
+      "id": "INDUSTRIAL",
+      "when": {
+        "input": "purpose",
+        "equals": "INDUSTRIAL"
+      },
+      "blocking": true,
+      "requiredBy": [
+        "STAGE_0/route"
+      ],
+      "reason": "Select the supplied project branch"
+    },
+    {
+      "id": "RETAIL",
+      "when": {
+        "input": "purpose",
+        "equals": "RETAIL"
+      },
+      "blocking": true,
+      "requiredBy": [
+        "STAGE_0/route"
+      ],
+      "reason": "Select the supplied project branch"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "purpose",
+      "name": "Project purpose",
+      "type": "string",
+      "unit": null,
+      "branches": [],
+      "blocking": true,
+      "priority": "CLASSIFICATION_BLOCKER",
+      "acceptedFormats": [
+        "string"
+      ],
+      "requiredBy": [
+        "STAGE_0/CLASSIFY",
+        "STAGE_0/APPLICABILITY"
+      ],
+      "reason": "Select the project branch and exclude unrelated building classes",
+      "sourceKinds": [
+        "USER_BRIEF",
+        "PROJECT_FILE",
+        "USER_CORRECTION"
+      ],
+      "owner": "USER_CLIENT_SURVEYOR_MUST_PROVIDE",
+      "enum": [
+        "IZHS",
+        "MKD",
+        "INDUSTRIAL",
+        "RETAIL"
+      ]
+    },
+    {
+      "id": "municipality",
+      "name": "Municipality and jurisdiction",
+      "type": "string",
+      "unit": null,
+      "branches": [
+        "IZHS"
+      ],
+      "blocking": true,
+      "priority": "SITE_GEOMETRY_BLOCKER",
+      "acceptedFormats": [
+        "municipality, region and country or approved site document"
+      ],
+      "requiredBy": [
+        "STAGE_0/APPLICABILITY/jurisdiction"
+      ],
+      "reason": "Route the project to its jurisdiction; building geometry cannot establish municipality",
+      "sourceKinds": [
+        "USER_BRIEF",
+        "PROJECT_FILE",
+        "USER_CORRECTION"
+      ],
+      "owner": "USER_CLIENT_SURVEYOR_MUST_PROVIDE"
+    },
+    {
+      "id": "floor_count",
+      "name": "Verified storey count",
+      "type": "integer",
+      "unit": "count",
+      "branches": [
+        "IZHS"
+      ],
+      "blocking": true,
+      "priority": "SITE_GEOMETRY_BLOCKER",
+      "acceptedFormats": [
+        "positive integer or verified storey inventory"
+      ],
+      "requiredBy": [
+        "STAGE_0/CLASSIFY/storeys"
+      ],
+      "reason": "Establish the storey classification from a verified inventory or explicit project brief",
+      "sourceKinds": [
+        "USER_BRIEF",
+        "PROJECT_FILE",
+        "USER_CORRECTION"
+      ],
+      "owner": "USER_CLIENT_SURVEYOR_MUST_PROVIDE",
+      "minimum": 1
+    },
+    {
+      "id": "apartments",
+      "name": "Apartment schedule",
+      "type": "array",
+      "unit": null,
+      "branches": [
+        "MKD"
+      ],
+      "blocking": true,
+      "priority": "SITE_GEOMETRY_BLOCKER",
+      "acceptedFormats": [
+        "array"
+      ],
+      "requiredBy": [
+        "STAGE_0/apartments"
+      ],
+      "reason": "Verified Apartment schedule is needed to resolve this dependency",
+      "sourceKinds": [
+        "USER_BRIEF",
+        "PROJECT_FILE",
+        "USER_CORRECTION"
+      ],
+      "owner": "USER_CLIENT_SURVEYOR_MUST_PROVIDE"
+    },
+    {
+      "id": "process",
+      "name": "Industrial process",
+      "type": "string",
+      "unit": null,
+      "branches": [
+        "INDUSTRIAL"
+      ],
+      "blocking": true,
+      "priority": "SITE_GEOMETRY_BLOCKER",
+      "acceptedFormats": [
+        "string"
+      ],
+      "requiredBy": [
+        "STAGE_0/process"
+      ],
+      "reason": "Verified Industrial process is needed to resolve this dependency",
+      "sourceKinds": [
+        "USER_BRIEF",
+        "PROJECT_FILE",
+        "USER_CORRECTION"
+      ],
+      "owner": "USER_CLIENT_SURVEYOR_MUST_PROVIDE"
+    },
+    {
+      "id": "customers",
+      "name": "Retail occupancy",
+      "type": "integer",
+      "unit": "persons",
+      "branches": [
+        "RETAIL"
+      ],
+      "blocking": true,
+      "priority": "SITE_GEOMETRY_BLOCKER",
+      "acceptedFormats": [
+        "integer"
+      ],
+      "requiredBy": [
+        "STAGE_0/customers"
+      ],
+      "reason": "Verified Retail occupancy is needed to resolve this dependency",
+      "sourceKinds": [
+        "USER_BRIEF",
+        "PROJECT_FILE",
+        "USER_CORRECTION"
+      ],
+      "owner": "USER_CLIENT_SURVEYOR_MUST_PROVIDE"
+    }
+  ]
+}

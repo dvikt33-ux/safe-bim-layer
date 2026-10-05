@@ -1,0 +1,22 @@
+[
+  {
+    "id": "brief",
+    "kind": "USER_BRIEF",
+    "revision": "v1",
+    "inspected": true,
+    "facts": {
+      "purpose": {
+        "value": "IZHS",
+        "unit": null,
+        "method": "explicit supplied record",
+        "verification": "VERIFIED"
+      },
+      "floor_count": {
+        "value": 2,
+        "unit": "count",
+        "method": "explicit supplied record",
+        "verification": "VERIFIED"
+      }
+    }
+  }
+]
