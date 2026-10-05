@@ -1,0 +1,9 @@
+{
+  "goalId": "stage3-live-wall-001",
+  "request": {
+    "action": "create_wall",
+    "mode": "execute",
+    "sourceGuid": "B492859E-E508-46B3-87ED-0B07C6C580CC",
+    "length": 0.5
+  }
+}

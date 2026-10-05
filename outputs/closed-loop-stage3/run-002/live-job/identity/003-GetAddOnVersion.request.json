@@ -1,0 +1,10 @@
+{
+  "command": "API.ExecuteAddOnCommand",
+  "parameters": {
+    "addOnCommandId": {
+      "commandNamespace": "TapirCommand",
+      "commandName": "GetAddOnVersion"
+    },
+    "addOnCommandParameters": {}
+  }
+}

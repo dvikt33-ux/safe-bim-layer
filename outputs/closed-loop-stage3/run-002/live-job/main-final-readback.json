@@ -1,0 +1,5 @@
+{
+  "command": "git ls-remote origin refs/heads/main",
+  "actual": "72e9be15ac3b943d7b6f0c46eaa45aa5798d56bc\trefs/heads/main\n",
+  "expected": "72e9be15ac3b943d7b6f0c46eaa45aa5798d56bc"
+}

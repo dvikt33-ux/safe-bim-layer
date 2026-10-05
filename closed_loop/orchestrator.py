@@ -42,15 +42,22 @@ TRANSITIONS = {
     State.RECEIVED: {State.OBSERVING},
     State.OBSERVING: {State.PLANNING, State.BLOCKED, State.WAITING_FOR_DATA},
     State.PLANNING: {State.OBSERVING, State.EXECUTING, State.BLOCKED, State.WAITING_FOR_DATA},
-    State.EXECUTING: {State.READING_BACK, State.BLOCKED, State.UNKNOWN_OUTCOME},
+    State.EXECUTING: {State.OBSERVING, State.READING_BACK, State.BLOCKED, State.UNKNOWN_OUTCOME},
     State.READING_BACK: {State.AUDITING, State.BLOCKED, State.UNKNOWN_OUTCOME},
     State.AUDITING: {State.VERIFIED, State.REPLANNING, State.WAITING_FOR_DATA, State.BLOCKED, State.UNKNOWN_OUTCOME},
-    State.REPLANNING: {State.PLANNING, State.BLOCKED},
+    State.REPLANNING: {State.OBSERVING, State.PLANNING, State.BLOCKED},
 }
 
 
 class IllegalTransition(ValueError):
     pass
+
+
+class StaleBeforeWrite(RuntimeError):
+    """Raised only by a guarded adapter before dispatching any mutation."""
+    def __init__(self, current: ModelFingerprint):
+        super().__init__('model changed in executor pre-write observation')
+        self.current = current
 
 
 def fingerprint(value):
@@ -77,7 +84,7 @@ class Orchestrator:
     def __init__(self, contract: AcceptanceContract, specification: str,
                  observer: Observer, planner: Planner, executor: Executor, readback: ReadBack,
                  output: Path, max_iterations: int = 3, clock=None, model_check: ModelCheck | None = None,
-                 no_progress_limit: int = 2):
+                 no_progress_limit: int = 2, execution_mode: str = 'OFFLINE'):
         nonempty(specification, 'specification')
         if type(max_iterations) is not int or max_iterations < 1:
             raise ValueError('max_iterations must be a positive integer')
@@ -85,11 +92,14 @@ class Orchestrator:
             raise ValueError('no_progress_limit must be an integer >= 2')
         if not isinstance(contract, AcceptanceContract):
             raise ValueError('typed AcceptanceContract required')
+        if execution_mode not in ('OFFLINE', 'LIVE'):
+            raise ValueError('execution_mode must be OFFLINE or LIVE')
         model_check = model_check if model_check is not None else observer
         if not callable(getattr(model_check, 'check', None)):
             raise ValueError('typed offline model checker is required')
-        if not all(getattr(component, 'offline', False) is True for component in (observer, planner, executor, readback, model_check)):
-            raise ValueError('Stage 2 requires explicitly offline components')
+        if not all(getattr(component, 'offline', None) is (execution_mode == 'OFFLINE') for component in (observer, planner, executor, readback, model_check)):
+            raise ValueError('All components must explicitly match the selected execution mode')
+        self.execution_mode = execution_mode
         self.contract = deepcopy(contract)
         self.observer, self.planner, self.executor, self.readback = observer, planner, executor, readback
         self.model_check = model_check
@@ -100,6 +110,7 @@ class Orchestrator:
         now = self.clock()
         self.job = Job(contract.goalId, specification, deepcopy(contract.criteria), max_iterations, now, now)
         self.job.noProgressLimit = no_progress_limit
+        self.job.executionMode = execution_mode
         self._record('received', {'contract': {'goalId': contract.goalId, 'criteria': self.job.to_dict()['acceptanceCriteria']}})
 
     def _save(self):
@@ -134,6 +145,8 @@ class Orchestrator:
     def _observe(self, value):
         if not isinstance(value, Observation):
             raise ValueError('typed Observation required')
+        if value.provenance != ('FIXTURE' if self.execution_mode == 'OFFLINE' else 'LIVE'):
+            raise ValueError('Observation provenance differs from execution mode')
         self.job.observedModelIdentity = value.modelIdentity
         self.job.observedModelHash = value.modelHash
         return deepcopy(value)
@@ -174,6 +187,8 @@ class Orchestrator:
                 current = self.model_check.check(deepcopy(observed))
                 if not isinstance(current, ModelFingerprint):
                     raise ValueError('typed ModelFingerprint required')
+                if current.provenance != ('FIXTURE' if self.execution_mode == 'OFFLINE' else 'LIVE'):
+                    raise ValueError('Model check provenance differs from execution mode')
                 step.preExecutionFingerprint = deepcopy(current)
             except Exception as exc:
                 self.transition(State.BLOCKED, f'pre-execution model check failed: {type(exc).__name__}: {exc}')
@@ -210,8 +225,30 @@ class Orchestrator:
                 result = self.executor.execute(deepcopy(decision.action))
                 if not isinstance(result, ExecutionResult):
                     raise ValueError('typed ExecutionResult required')
+                if result.executionMode != self.execution_mode:
+                    raise ValueError('Executor result mode differs from job mode')
                 step.executorResult = deepcopy(result)
+                if self.execution_mode == 'LIVE' and result.mutationAttempted:
+                    self.job.liveMutationAttempted = True
+            except StaleBeforeWrite as exc:
+                step.decisionInvalidated, step.staleVerdict = True, 'STALE'
+                self._record('stale-before-write', {'plannedHash': decision.plannedAgainstModelHash,
+                    'current': asdict(exc.current), 'mutationDispatched': False})
+                if self.job.iteration >= self.job.maxIterations:
+                    self.transition(State.BLOCKED, 'iteration limit reached during stale executor preflight')
+                    break
+                self.transition(State.OBSERVING, 'executor rejected stale state before native write')
+                try:
+                    observed = self._observe(self.observer.observe())
+                except Exception as error:
+                    self.transition(State.BLOCKED, f're-observation failed: {error}')
+                    break
+                self._record('observation', asdict(observed))
+                self.transition(State.PLANNING)
+                continue
             except Exception as exc:
+                if self.execution_mode == 'LIVE':
+                    self.job.liveMutationAttempted = True
                 self.transition(State.UNKNOWN_OUTCOME, f'executor outcome unavailable: {type(exc).__name__}: {exc}')
                 break
             if result.status != 'PASS':
@@ -226,6 +263,8 @@ class Orchestrator:
                 updated = self.readback.read_back(deepcopy(decision.action), deepcopy(result))
                 if not isinstance(updated, Observation):
                     raise ValueError('typed read-back Observation required')
+                if updated.provenance != ('FIXTURE' if self.execution_mode == 'OFFLINE' else 'LIVE'):
+                    raise ValueError('Read-back provenance differs from execution mode')
             except Exception as exc:
                 self.transition(State.UNKNOWN_OUTCOME if result.mutationAttempted else State.BLOCKED,
                                 f'read-back unavailable: {type(exc).__name__}: {exc}')
@@ -259,5 +298,13 @@ class Orchestrator:
             if self.job.iteration >= self.job.maxIterations:
                 self.transition(State.BLOCKED, 'iteration limit reached with required criteria unresolved')
                 break
+            if self.execution_mode == 'LIVE':
+                self.transition(State.OBSERVING, 'fresh live observation before dependent replanning')
+                try:
+                    observed = self._observe(self.observer.observe())
+                except Exception as exc:
+                    self.transition(State.BLOCKED, f'live re-observation failed: {exc}')
+                    break
+                self._record('observation', asdict(observed))
             self.transition(State.PLANNING)
         return deepcopy(self.job)

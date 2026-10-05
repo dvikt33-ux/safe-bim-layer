@@ -1,0 +1,459 @@
+{
+  "stage": "STAGE_3_LIVE_WALL_CLOSED_LOOP",
+  "status": "PASS",
+  "goalId": "stage3-live-wall-001",
+  "command": "Продолжи последнюю созданную стену сначала на 1 метр, затем ещё на 0,5 метра и проверь результат.",
+  "userCommandCount": 1,
+  "branch": "work/stage3-live-wall-closed-loop",
+  "preflight": {
+    "identity": {
+      "isUntitled": false,
+      "isTeamwork": false,
+      "projectLocation": "C:\\Users\\Admin\\Documents\\Codex\\2026-10-04\\files-pasted-by-the-user-read\\outputs\\native-current-version\\test-project\\NativeGeometry_Full_Test_20261004.pln",
+      "projectPath": "C:\\Users\\Admin\\Documents\\Codex\\2026-10-04\\files-pasted-by-the-user-read\\outputs\\native-current-version\\test-project\\NativeGeometry_Full_Test_20261004.pln",
+      "projectName": "NativeGeometry_Full_Test_20261004"
+    },
+    "archicad": {
+      "version": 29,
+      "buildNumber": 3000,
+      "languageCode": "RUS"
+    },
+    "tapir": {
+      "version": "1.5.10"
+    },
+    "port": 19723,
+    "observedAtUtc": "2026-10-05T10:40:36.328926+00:00"
+  },
+  "iterations": [
+    {
+      "sourceGuid": "C621D5B7-6215-4925-8651-DD5FBB71EA14",
+      "createdGuid": "B492859E-E508-46B3-87ED-0B07C6C580CC",
+      "length": 1.0,
+      "jointDistance": 0.0,
+      "homeStory": 0,
+      "begin": {
+        "x": 1703.718814915,
+        "y": 600.706201417
+      },
+      "end": {
+        "x": 1704.718814915,
+        "y": 600.706201417
+      },
+      "elementCountBefore": 5304,
+      "elementCountAfter": 5305,
+      "goalId": "stage3-live-wall-001",
+      "iteration": 1,
+      "witnessPath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-1\\readback-witness.json",
+      "automaticSelection": true,
+      "plannedHash": "c6d081be0ee59bc5c2c9447c12d3c51d23072198aa1cca900f4aa0e697ddd1df",
+      "preExecutionHash": "c6d081be0ee59bc5c2c9447c12d3c51d23072198aa1cca900f4aa0e697ddd1df",
+      "executorBeforeHash": "c6d081be0ee59bc5c2c9447c12d3c51d23072198aa1cca900f4aa0e697ddd1df",
+      "readbackHash": "af196a3f551c450880de9a7fe9f5def6e6d3c30764be4da658e998dfdef05469",
+      "staleVerdict": "CURRENT",
+      "readbackPath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\003-read-back.json",
+      "executorStatus": "PASS"
+    },
+    {
+      "sourceGuid": "B492859E-E508-46B3-87ED-0B07C6C580CC",
+      "createdGuid": "40F79CDC-61BC-43E1-A65C-32E962568F3F",
+      "length": 0.5,
+      "jointDistance": 0.0,
+      "homeStory": 0,
+      "begin": {
+        "x": 1704.718814915,
+        "y": 600.706201417
+      },
+      "end": {
+        "x": 1705.218814915,
+        "y": 600.706201417
+      },
+      "elementCountBefore": 5305,
+      "elementCountAfter": 5306,
+      "goalId": "stage3-live-wall-001",
+      "iteration": 2,
+      "witnessPath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-2\\readback-witness.json",
+      "automaticSelection": true,
+      "plannedHash": "af196a3f551c450880de9a7fe9f5def6e6d3c30764be4da658e998dfdef05469",
+      "preExecutionHash": "af196a3f551c450880de9a7fe9f5def6e6d3c30764be4da658e998dfdef05469",
+      "executorBeforeHash": "af196a3f551c450880de9a7fe9f5def6e6d3c30764be4da658e998dfdef05469",
+      "readbackHash": "036fe6238af2f6a5ec2b4ecfacdc02c8d7242cab3ce4fcc4329c8c2af2858296",
+      "staleVerdict": "CURRENT",
+      "readbackPath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\006-read-back.json",
+      "executorStatus": "PASS"
+    }
+  ],
+  "criteria": [
+    {
+      "id": "C01",
+      "required": true,
+      "expected": true,
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "live.progress",
+        "live.snapshot"
+      ],
+      "correctable": true,
+      "description": "Same project identity throughout job"
+    },
+    {
+      "id": "C02",
+      "required": true,
+      "expected": true,
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "live.progress",
+        "live.snapshot"
+      ],
+      "correctable": true,
+      "description": "Iteration 1 automatically selects source Wall"
+    },
+    {
+      "id": "C03",
+      "required": true,
+      "expected": true,
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "live.progress",
+        "live.snapshot"
+      ],
+      "correctable": true,
+      "description": "Iteration 1 physically creates Wall"
+    },
+    {
+      "id": "C04",
+      "required": true,
+      "expected": true,
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "live.progress",
+        "live.snapshot"
+      ],
+      "correctable": true,
+      "description": "Iteration 1 GUID confirmed in read-back"
+    },
+    {
+      "id": "C05",
+      "required": true,
+      "expected": true,
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "live.progress",
+        "live.snapshot"
+      ],
+      "correctable": true,
+      "description": "Iteration 1 length is 1.0 m"
+    },
+    {
+      "id": "C06",
+      "required": true,
+      "expected": true,
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "live.progress",
+        "live.snapshot"
+      ],
+      "correctable": true,
+      "description": "Iteration 1 jointDistance is zero"
+    },
+    {
+      "id": "C07",
+      "required": true,
+      "expected": true,
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "live.progress",
+        "live.snapshot"
+      ],
+      "correctable": true,
+      "description": "New live observation after iteration 1"
+    },
+    {
+      "id": "C08",
+      "required": true,
+      "expected": true,
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "live.progress",
+        "live.snapshot"
+      ],
+      "correctable": true,
+      "description": "Iteration 2 source derived from factual result 1"
+    },
+    {
+      "id": "C09",
+      "required": true,
+      "expected": true,
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "live.progress",
+        "live.snapshot"
+      ],
+      "correctable": true,
+      "description": "iteration2.sourceGuid == iteration1.createdGuid"
+    },
+    {
+      "id": "C10",
+      "required": true,
+      "expected": true,
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "live.progress",
+        "live.snapshot"
+      ],
+      "correctable": true,
+      "description": "Iteration 2 physically creates Wall"
+    },
+    {
+      "id": "C11",
+      "required": true,
+      "expected": true,
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "live.progress",
+        "live.snapshot"
+      ],
+      "correctable": true,
+      "description": "Iteration 2 GUID confirmed in read-back"
+    },
+    {
+      "id": "C12",
+      "required": true,
+      "expected": true,
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "live.progress",
+        "live.snapshot"
+      ],
+      "correctable": true,
+      "description": "Iteration 2 length is 0.5 m"
+    },
+    {
+      "id": "C13",
+      "required": true,
+      "expected": true,
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "live.progress",
+        "live.snapshot"
+      ],
+      "correctable": true,
+      "description": "Iteration 2 jointDistance is zero"
+    },
+    {
+      "id": "C14",
+      "required": true,
+      "expected": true,
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "live.progress",
+        "live.snapshot"
+      ],
+      "correctable": true,
+      "description": "Stale checks before each mutation"
+    },
+    {
+      "id": "C15",
+      "required": true,
+      "expected": true,
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "live.progress",
+        "live.snapshot"
+      ],
+      "correctable": true,
+      "description": "No stale action executed"
+    },
+    {
+      "id": "C16",
+      "required": true,
+      "expected": true,
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "live.progress",
+        "live.snapshot"
+      ],
+      "correctable": true,
+      "description": "Factual read-back after each mutation"
+    },
+    {
+      "id": "C17",
+      "required": true,
+      "expected": true,
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "live.progress",
+        "live.snapshot"
+      ],
+      "correctable": true,
+      "description": "Both operations belong to one goalId"
+    },
+    {
+      "id": "C18",
+      "required": true,
+      "expected": true,
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "live.progress",
+        "live.snapshot"
+      ],
+      "correctable": true,
+      "description": "One initial user goal command"
+    },
+    {
+      "id": "C19",
+      "required": true,
+      "expected": true,
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "live.progress",
+        "live.snapshot"
+      ],
+      "correctable": true,
+      "description": "Required FAIL = 0"
+    },
+    {
+      "id": "C20",
+      "required": true,
+      "expected": true,
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "live.progress",
+        "live.snapshot"
+      ],
+      "correctable": true,
+      "description": "Required NOT_VERIFIED = 0"
+    },
+    {
+      "id": "C21",
+      "required": true,
+      "expected": true,
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "live.progress",
+        "live.snapshot"
+      ],
+      "correctable": true,
+      "description": "No UNKNOWN_OUTCOME"
+    },
+    {
+      "id": "C22",
+      "required": true,
+      "expected": true,
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "live.progress",
+        "live.snapshot"
+      ],
+      "correctable": true,
+      "description": "Stage 1 v0 regression path still PASS"
+    },
+    {
+      "id": "C23",
+      "required": true,
+      "expected": true,
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "live.progress",
+        "live.snapshot"
+      ],
+      "correctable": true,
+      "description": "All Stage 2 tests PASS"
+    },
+    {
+      "id": "C24",
+      "required": true,
+      "expected": true,
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "live.progress",
+        "live.snapshot"
+      ],
+      "correctable": true,
+      "description": "main unchanged"
+    }
+  ],
+  "requiredSummary": {
+    "PASS": 24,
+    "FAIL": 0,
+    "NOT_VERIFIED": 0
+  },
+  "dependencyMatches": true,
+  "offline": {
+    "status": "PASS",
+    "testsRun": 48,
+    "failures": 0,
+    "errors": 0,
+    "provenance": "OFFLINE_UNIT_TESTS"
+  },
+  "v0Regression": {
+    "status": "PASS",
+    "iterations": [
+      {
+        "sourceGuid": "CE093166-FF7B-420E-B991-1D0CE0D5CCAE",
+        "createdGuid": "787EA5F8-6A5E-4EEA-B3C0-1359469E1690",
+        "length": 1.0,
+        "jointDistance": 0.0,
+        "homeStory": 0,
+        "begin": {
+          "x": 1702.218814915,
+          "y": 600.706201417
+        },
+        "end": {
+          "x": 1703.218814915,
+          "y": 600.706201417
+        },
+        "elementCountBefore": 5302,
+        "elementCountAfter": 5303
+      },
+      {
+        "sourceGuid": "787EA5F8-6A5E-4EEA-B3C0-1359469E1690",
+        "createdGuid": "C621D5B7-6215-4925-8651-DD5FBB71EA14",
+        "length": 0.5,
+        "jointDistance": 0.0,
+        "homeStory": 0,
+        "begin": {
+          "x": 1703.218814915,
+          "y": 600.706201417
+        },
+        "end": {
+          "x": 1703.718814915,
+          "y": 600.706201417
+        },
+        "elementCountBefore": 5303,
+        "elementCountAfter": 5304
+      }
+    ],
+    "dependencyMatches": true,
+    "executionPath": "unchanged scripts/archicad_chat_executor.py run -> scripts/archicad_executor.py"
+  },
+  "terminalReason": "decision from required acceptance criteria",
+  "blockingIssues": [],
+  "backlog": [
+    "Stage 4, recovery and all other BIM capabilities remain deferred."
+  ],
+  "plnSaveExecuted": false
+}

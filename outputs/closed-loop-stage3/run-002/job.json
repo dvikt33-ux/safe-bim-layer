@@ -1,0 +1,3454 @@
+{
+  "goalId": "stage3-live-wall-001",
+  "specification": "Продолжи последнюю созданную стену сначала на 1 метр, затем ещё на 0,5 метра и проверь результат.",
+  "acceptanceCriteria": [
+    {
+      "id": "C01",
+      "required": true,
+      "check": "C01",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C02",
+      "required": true,
+      "check": "C02",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C03",
+      "required": true,
+      "check": "C03",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C04",
+      "required": true,
+      "check": "C04",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C05",
+      "required": true,
+      "check": "C05",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C06",
+      "required": true,
+      "check": "C06",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C07",
+      "required": true,
+      "check": "C07",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C08",
+      "required": true,
+      "check": "C08",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C09",
+      "required": true,
+      "check": "C09",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C10",
+      "required": true,
+      "check": "C10",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C11",
+      "required": true,
+      "check": "C11",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C12",
+      "required": true,
+      "check": "C12",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C13",
+      "required": true,
+      "check": "C13",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C14",
+      "required": true,
+      "check": "C14",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C15",
+      "required": true,
+      "check": "C15",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C16",
+      "required": true,
+      "check": "C16",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C17",
+      "required": true,
+      "check": "C17",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C18",
+      "required": true,
+      "check": "C18",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C19",
+      "required": true,
+      "check": "C19",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C20",
+      "required": true,
+      "check": "C20",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C21",
+      "required": true,
+      "check": "C21",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C22",
+      "required": true,
+      "check": "C22",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C23",
+      "required": true,
+      "check": "C23",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C24",
+      "required": true,
+      "check": "C24",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    }
+  ],
+  "maxIterations": 5,
+  "createdAt": "2026-10-05T10:40:36.331108+00:00",
+  "updatedAt": "2026-10-05T10:43:34.959333+00:00",
+  "state": "VERIFIED",
+  "iteration": 2,
+  "observedModelIdentity": "C:\\Users\\Admin\\Documents\\Codex\\2026-10-04\\files-pasted-by-the-user-read\\outputs\\native-current-version\\test-project\\NativeGeometry_Full_Test_20261004.pln",
+  "observedModelHash": "036fe6238af2f6a5ec2b4ecfacdc02c8d7242cab3ce4fcc4329c8c2af2858296",
+  "actions": [
+    {
+      "type": "create_wall",
+      "parameters": {
+        "sourceGuid": "C621D5B7-6215-4925-8651-DD5FBB71EA14",
+        "length": 1.0
+      }
+    },
+    {
+      "type": "create_wall",
+      "parameters": {
+        "sourceGuid": "B492859E-E508-46B3-87ED-0B07C6C580CC",
+        "length": 0.5
+      }
+    }
+  ],
+  "auditHistory": [
+    [
+      {
+        "id": "C01",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C02",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C03",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C04",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C05",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C06",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C07",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C08",
+        "required": true,
+        "expected": true,
+        "actual": false,
+        "verdict": "FAIL",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C09",
+        "required": true,
+        "expected": true,
+        "actual": false,
+        "verdict": "FAIL",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C10",
+        "required": true,
+        "expected": true,
+        "actual": false,
+        "verdict": "FAIL",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C11",
+        "required": true,
+        "expected": true,
+        "actual": false,
+        "verdict": "FAIL",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C12",
+        "required": true,
+        "expected": true,
+        "actual": false,
+        "verdict": "FAIL",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C13",
+        "required": true,
+        "expected": true,
+        "actual": false,
+        "verdict": "FAIL",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C14",
+        "required": true,
+        "expected": true,
+        "actual": false,
+        "verdict": "FAIL",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C15",
+        "required": true,
+        "expected": true,
+        "actual": false,
+        "verdict": "FAIL",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C16",
+        "required": true,
+        "expected": true,
+        "actual": false,
+        "verdict": "FAIL",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C17",
+        "required": true,
+        "expected": true,
+        "actual": false,
+        "verdict": "FAIL",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C18",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C19",
+        "required": true,
+        "expected": true,
+        "actual": false,
+        "verdict": "FAIL",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C20",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C21",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C22",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C23",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C24",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      }
+    ],
+    [
+      {
+        "id": "C01",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C02",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C03",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C04",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C05",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C06",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C07",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C08",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C09",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C10",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C11",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C12",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C13",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C14",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C15",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C16",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C17",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C18",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C19",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C20",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C21",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C22",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C23",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      },
+      {
+        "id": "C24",
+        "required": true,
+        "expected": true,
+        "actual": true,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "live.progress",
+          "live.snapshot"
+        ],
+        "correctable": true
+      }
+    ]
+  ],
+  "iterations": [
+    {
+      "iteration": 1,
+      "stateBefore": "PLANNING",
+      "observation": {
+        "modelIdentity": "C:\\Users\\Admin\\Documents\\Codex\\2026-10-04\\files-pasted-by-the-user-read\\outputs\\native-current-version\\test-project\\NativeGeometry_Full_Test_20261004.pln",
+        "modelHash": "c6d081be0ee59bc5c2c9447c12d3c51d23072198aa1cca900f4aa0e697ddd1df",
+        "facts": {
+          "C01": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C02": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C03": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C04": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C05": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C06": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C07": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C08": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C09": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C10": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C11": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C12": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C13": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C14": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C15": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C16": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C17": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C18": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C19": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C20": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C21": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C22": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C23": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C24": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          }
+        },
+        "evidence": {
+          "live.snapshot": {
+            "path": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\001-observe.json",
+            "modelHash": "c6d081be0ee59bc5c2c9447c12d3c51d23072198aa1cca900f4aa0e697ddd1df",
+            "elementCount": 5304
+          },
+          "live.progress": {
+            "completedMutations": 0,
+            "witnessPaths": [],
+            "checks": {
+              "C01": true,
+              "C02": false,
+              "C03": false,
+              "C04": false,
+              "C05": false,
+              "C06": false,
+              "C07": false,
+              "C08": false,
+              "C09": false,
+              "C10": false,
+              "C11": false,
+              "C12": false,
+              "C13": false,
+              "C14": false,
+              "C15": false,
+              "C16": false,
+              "C17": false,
+              "C18": true,
+              "C19": false,
+              "C20": true,
+              "C21": true,
+              "C22": true,
+              "C23": true,
+              "C24": true
+            },
+            "goalId": "stage3-live-wall-001"
+          }
+        },
+        "provenance": "LIVE"
+      },
+      "plannerDecision": {
+        "status": "PLANNED",
+        "action": {
+          "type": "create_wall",
+          "parameters": {
+            "sourceGuid": "C621D5B7-6215-4925-8651-DD5FBB71EA14",
+            "length": 1.0
+          }
+        },
+        "reason": "",
+        "plannedAgainstModelIdentity": "C:\\Users\\Admin\\Documents\\Codex\\2026-10-04\\files-pasted-by-the-user-read\\outputs\\native-current-version\\test-project\\NativeGeometry_Full_Test_20261004.pln",
+        "plannedAgainstModelHash": "c6d081be0ee59bc5c2c9447c12d3c51d23072198aa1cca900f4aa0e697ddd1df"
+      },
+      "executorRequest": {
+        "type": "create_wall",
+        "parameters": {
+          "sourceGuid": "C621D5B7-6215-4925-8651-DD5FBB71EA14",
+          "length": 1.0
+        }
+      },
+      "executorResult": {
+        "status": "PASS",
+        "mutationAttempted": true,
+        "readbackRequired": true,
+        "details": {
+          "status": "PASS",
+          "action": "create_wall",
+          "createdGuid": "B492859E-E508-46B3-87ED-0B07C6C580CC",
+          "sourceGuids": [
+            "C621D5B7-6215-4925-8651-DD5FBB71EA14"
+          ],
+          "geometry": {
+            "start": {
+              "x": 1703.718814915,
+              "y": 600.706201417
+            },
+            "end": {
+              "x": 1704.718814915,
+              "y": 600.706201417
+            },
+            "homeStory": 0,
+            "z": 0.0
+          },
+          "verification": {
+            "guidPresent": true,
+            "type": "Wall",
+            "homeStory": 0,
+            "bodyCount": 1,
+            "faceMaterialIds": [
+              4,
+              4,
+              4,
+              4,
+              4,
+              4
+            ],
+            "jointDistance": 0.0,
+            "z": 0,
+            "homeStoryMatches": true,
+            "sourceGuidSeenBeforeCreate": true,
+            "elementCountBefore": 5304,
+            "elementCountAfter": 5305,
+            "direction": {
+              "x": 1.0,
+              "y": 0.0
+            },
+            "pass": true
+          },
+          "retained": true
+        },
+        "executionMode": "LIVE"
+      },
+      "readback": {
+        "modelIdentity": "C:\\Users\\Admin\\Documents\\Codex\\2026-10-04\\files-pasted-by-the-user-read\\outputs\\native-current-version\\test-project\\NativeGeometry_Full_Test_20261004.pln",
+        "modelHash": "af196a3f551c450880de9a7fe9f5def6e6d3c30764be4da658e998dfdef05469",
+        "facts": {
+          "C01": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C02": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C03": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C04": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C05": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C06": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C07": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C08": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C09": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C10": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C11": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C12": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C13": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C14": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C15": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C16": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C17": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C18": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C19": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C20": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C21": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C22": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C23": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C24": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          }
+        },
+        "evidence": {
+          "live.snapshot": {
+            "path": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\003-read-back.json",
+            "modelHash": "af196a3f551c450880de9a7fe9f5def6e6d3c30764be4da658e998dfdef05469",
+            "elementCount": 5305
+          },
+          "live.progress": {
+            "checks": {
+              "C01": true,
+              "C02": true,
+              "C03": true,
+              "C04": true,
+              "C05": true,
+              "C06": true,
+              "C07": true,
+              "C08": false,
+              "C09": false,
+              "C10": false,
+              "C11": false,
+              "C12": false,
+              "C13": false,
+              "C14": false,
+              "C15": false,
+              "C16": false,
+              "C17": false,
+              "C18": true,
+              "C19": false,
+              "C20": true,
+              "C21": true,
+              "C22": true,
+              "C23": true,
+              "C24": true
+            },
+            "witnessPaths": [
+              "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-1\\readback-witness.json"
+            ],
+            "goalId": "stage3-live-wall-001"
+          }
+        },
+        "provenance": "LIVE"
+      },
+      "auditResult": [
+        {
+          "id": "C01",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C02",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C03",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C04",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C05",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C06",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C07",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C08",
+          "required": true,
+          "expected": true,
+          "actual": false,
+          "verdict": "FAIL",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C09",
+          "required": true,
+          "expected": true,
+          "actual": false,
+          "verdict": "FAIL",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C10",
+          "required": true,
+          "expected": true,
+          "actual": false,
+          "verdict": "FAIL",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C11",
+          "required": true,
+          "expected": true,
+          "actual": false,
+          "verdict": "FAIL",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C12",
+          "required": true,
+          "expected": true,
+          "actual": false,
+          "verdict": "FAIL",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C13",
+          "required": true,
+          "expected": true,
+          "actual": false,
+          "verdict": "FAIL",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C14",
+          "required": true,
+          "expected": true,
+          "actual": false,
+          "verdict": "FAIL",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C15",
+          "required": true,
+          "expected": true,
+          "actual": false,
+          "verdict": "FAIL",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C16",
+          "required": true,
+          "expected": true,
+          "actual": false,
+          "verdict": "FAIL",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C17",
+          "required": true,
+          "expected": true,
+          "actual": false,
+          "verdict": "FAIL",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C18",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C19",
+          "required": true,
+          "expected": true,
+          "actual": false,
+          "verdict": "FAIL",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C20",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C21",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C22",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C23",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C24",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        }
+      ],
+      "observedModelHash": "c6d081be0ee59bc5c2c9447c12d3c51d23072198aa1cca900f4aa0e697ddd1df",
+      "planningModelHash": "c6d081be0ee59bc5c2c9447c12d3c51d23072198aa1cca900f4aa0e697ddd1df",
+      "preExecutionFingerprint": {
+        "modelIdentity": "C:\\Users\\Admin\\Documents\\Codex\\2026-10-04\\files-pasted-by-the-user-read\\outputs\\native-current-version\\test-project\\NativeGeometry_Full_Test_20261004.pln",
+        "modelHash": "c6d081be0ee59bc5c2c9447c12d3c51d23072198aa1cca900f4aa0e697ddd1df",
+        "provenance": "LIVE"
+      },
+      "staleVerdict": "CURRENT",
+      "decisionInvalidated": false,
+      "actionFingerprint": "e8b79ec38d332b94580be6f663b8e460ed88c9c97b0252d33faa4aa2e39f13cf",
+      "auditFingerprint": "0339d4e1dacb8953d49ef020610e684efe4ac974c7224c23264647e051bae676",
+      "progressSignature": "79ee46ad2ddfef577edecdb89d9abd6a1e4b60a7d5a20469ea1df159bb386f35",
+      "noProgressCount": 1
+    },
+    {
+      "iteration": 2,
+      "stateBefore": "PLANNING",
+      "observation": {
+        "modelIdentity": "C:\\Users\\Admin\\Documents\\Codex\\2026-10-04\\files-pasted-by-the-user-read\\outputs\\native-current-version\\test-project\\NativeGeometry_Full_Test_20261004.pln",
+        "modelHash": "af196a3f551c450880de9a7fe9f5def6e6d3c30764be4da658e998dfdef05469",
+        "facts": {
+          "C01": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C02": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C03": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C04": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C05": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C06": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C07": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C08": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C09": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C10": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C11": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C12": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C13": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C14": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C15": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C16": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C17": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C18": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C19": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C20": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C21": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C22": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C23": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C24": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          }
+        },
+        "evidence": {
+          "live.snapshot": {
+            "path": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\004-observe.json",
+            "modelHash": "af196a3f551c450880de9a7fe9f5def6e6d3c30764be4da658e998dfdef05469",
+            "elementCount": 5305
+          },
+          "live.progress": {
+            "completedMutations": 1,
+            "witnessPaths": [
+              "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-1\\readback-witness.json"
+            ],
+            "checks": {
+              "C01": true,
+              "C02": true,
+              "C03": true,
+              "C04": true,
+              "C05": true,
+              "C06": true,
+              "C07": true,
+              "C08": false,
+              "C09": false,
+              "C10": false,
+              "C11": false,
+              "C12": false,
+              "C13": false,
+              "C14": false,
+              "C15": false,
+              "C16": false,
+              "C17": false,
+              "C18": true,
+              "C19": false,
+              "C20": true,
+              "C21": true,
+              "C22": true,
+              "C23": true,
+              "C24": true
+            },
+            "goalId": "stage3-live-wall-001"
+          }
+        },
+        "provenance": "LIVE"
+      },
+      "plannerDecision": {
+        "status": "PLANNED",
+        "action": {
+          "type": "create_wall",
+          "parameters": {
+            "sourceGuid": "B492859E-E508-46B3-87ED-0B07C6C580CC",
+            "length": 0.5
+          }
+        },
+        "reason": "",
+        "plannedAgainstModelIdentity": "C:\\Users\\Admin\\Documents\\Codex\\2026-10-04\\files-pasted-by-the-user-read\\outputs\\native-current-version\\test-project\\NativeGeometry_Full_Test_20261004.pln",
+        "plannedAgainstModelHash": "af196a3f551c450880de9a7fe9f5def6e6d3c30764be4da658e998dfdef05469"
+      },
+      "executorRequest": {
+        "type": "create_wall",
+        "parameters": {
+          "sourceGuid": "B492859E-E508-46B3-87ED-0B07C6C580CC",
+          "length": 0.5
+        }
+      },
+      "executorResult": {
+        "status": "PASS",
+        "mutationAttempted": true,
+        "readbackRequired": true,
+        "details": {
+          "status": "PASS",
+          "action": "create_wall",
+          "createdGuid": "40F79CDC-61BC-43E1-A65C-32E962568F3F",
+          "sourceGuids": [
+            "B492859E-E508-46B3-87ED-0B07C6C580CC"
+          ],
+          "geometry": {
+            "start": {
+              "x": 1704.718814915,
+              "y": 600.706201417
+            },
+            "end": {
+              "x": 1705.218814915,
+              "y": 600.706201417
+            },
+            "homeStory": 0,
+            "z": 0.0
+          },
+          "verification": {
+            "guidPresent": true,
+            "type": "Wall",
+            "homeStory": 0,
+            "bodyCount": 1,
+            "faceMaterialIds": [
+              4,
+              4,
+              4,
+              4,
+              4,
+              4
+            ],
+            "jointDistance": 0.0,
+            "z": 0,
+            "homeStoryMatches": true,
+            "sourceGuidSeenBeforeCreate": true,
+            "elementCountBefore": 5305,
+            "elementCountAfter": 5306,
+            "direction": {
+              "x": 0.5,
+              "y": 0.0
+            },
+            "pass": true
+          },
+          "retained": true
+        },
+        "executionMode": "LIVE"
+      },
+      "readback": {
+        "modelIdentity": "C:\\Users\\Admin\\Documents\\Codex\\2026-10-04\\files-pasted-by-the-user-read\\outputs\\native-current-version\\test-project\\NativeGeometry_Full_Test_20261004.pln",
+        "modelHash": "036fe6238af2f6a5ec2b4ecfacdc02c8d7242cab3ce4fcc4329c8c2af2858296",
+        "facts": {
+          "C01": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C02": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C03": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C04": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C05": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C06": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C07": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C08": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C09": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C10": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C11": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C12": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C13": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C14": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C15": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C16": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C17": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C18": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C19": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C20": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C21": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C22": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C23": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C24": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          }
+        },
+        "evidence": {
+          "live.snapshot": {
+            "path": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\006-read-back.json",
+            "modelHash": "036fe6238af2f6a5ec2b4ecfacdc02c8d7242cab3ce4fcc4329c8c2af2858296",
+            "elementCount": 5306
+          },
+          "live.progress": {
+            "checks": {
+              "C01": true,
+              "C02": true,
+              "C03": true,
+              "C04": true,
+              "C05": true,
+              "C06": true,
+              "C07": true,
+              "C08": true,
+              "C09": true,
+              "C10": true,
+              "C11": true,
+              "C12": true,
+              "C13": true,
+              "C14": true,
+              "C15": true,
+              "C16": true,
+              "C17": true,
+              "C18": true,
+              "C19": true,
+              "C20": true,
+              "C21": true,
+              "C22": true,
+              "C23": true,
+              "C24": true
+            },
+            "witnessPaths": [
+              "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-1\\readback-witness.json",
+              "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-2\\readback-witness.json"
+            ],
+            "goalId": "stage3-live-wall-001"
+          }
+        },
+        "provenance": "LIVE"
+      },
+      "auditResult": [
+        {
+          "id": "C01",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C02",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C03",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C04",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C05",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C06",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C07",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C08",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C09",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C10",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C11",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C12",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C13",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C14",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C15",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C16",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C17",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C18",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C19",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C20",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C21",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C22",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C23",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        },
+        {
+          "id": "C24",
+          "required": true,
+          "expected": true,
+          "actual": true,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "live.progress",
+            "live.snapshot"
+          ],
+          "correctable": true
+        }
+      ],
+      "observedModelHash": "af196a3f551c450880de9a7fe9f5def6e6d3c30764be4da658e998dfdef05469",
+      "planningModelHash": "af196a3f551c450880de9a7fe9f5def6e6d3c30764be4da658e998dfdef05469",
+      "preExecutionFingerprint": {
+        "modelIdentity": "C:\\Users\\Admin\\Documents\\Codex\\2026-10-04\\files-pasted-by-the-user-read\\outputs\\native-current-version\\test-project\\NativeGeometry_Full_Test_20261004.pln",
+        "modelHash": "af196a3f551c450880de9a7fe9f5def6e6d3c30764be4da658e998dfdef05469",
+        "provenance": "LIVE"
+      },
+      "staleVerdict": "CURRENT",
+      "decisionInvalidated": false,
+      "actionFingerprint": "651771c91e0e6dbabb990c76da74fdcb9b24c8ecc02c21a9c92173164b9df9e5",
+      "auditFingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "progressSignature": "61009a942ed4a90dbd31893f50cf4a1723d89056fbf7be7fad8e0398bd905a10",
+      "noProgressCount": 1
+    }
+  ],
+  "evidenceTrail": [
+    {
+      "sequence": 1,
+      "at": "2026-10-05T10:40:36.331108+00:00",
+      "iteration": 0,
+      "state": "RECEIVED",
+      "kind": "received",
+      "payload": {
+        "contract": {
+          "goalId": "stage3-live-wall-001",
+          "criteria": [
+            {
+              "id": "C01",
+              "required": true,
+              "check": "C01",
+              "expected": true,
+              "tolerance": 0.0,
+              "correctable": true
+            },
+            {
+              "id": "C02",
+              "required": true,
+              "check": "C02",
+              "expected": true,
+              "tolerance": 0.0,
+              "correctable": true
+            },
+            {
+              "id": "C03",
+              "required": true,
+              "check": "C03",
+              "expected": true,
+              "tolerance": 0.0,
+              "correctable": true
+            },
+            {
+              "id": "C04",
+              "required": true,
+              "check": "C04",
+              "expected": true,
+              "tolerance": 0.0,
+              "correctable": true
+            },
+            {
+              "id": "C05",
+              "required": true,
+              "check": "C05",
+              "expected": true,
+              "tolerance": 0.0,
+              "correctable": true
+            },
+            {
+              "id": "C06",
+              "required": true,
+              "check": "C06",
+              "expected": true,
+              "tolerance": 0.0,
+              "correctable": true
+            },
+            {
+              "id": "C07",
+              "required": true,
+              "check": "C07",
+              "expected": true,
+              "tolerance": 0.0,
+              "correctable": true
+            },
+            {
+              "id": "C08",
+              "required": true,
+              "check": "C08",
+              "expected": true,
+              "tolerance": 0.0,
+              "correctable": true
+            },
+            {
+              "id": "C09",
+              "required": true,
+              "check": "C09",
+              "expected": true,
+              "tolerance": 0.0,
+              "correctable": true
+            },
+            {
+              "id": "C10",
+              "required": true,
+              "check": "C10",
+              "expected": true,
+              "tolerance": 0.0,
+              "correctable": true
+            },
+            {
+              "id": "C11",
+              "required": true,
+              "check": "C11",
+              "expected": true,
+              "tolerance": 0.0,
+              "correctable": true
+            },
+            {
+              "id": "C12",
+              "required": true,
+              "check": "C12",
+              "expected": true,
+              "tolerance": 0.0,
+              "correctable": true
+            },
+            {
+              "id": "C13",
+              "required": true,
+              "check": "C13",
+              "expected": true,
+              "tolerance": 0.0,
+              "correctable": true
+            },
+            {
+              "id": "C14",
+              "required": true,
+              "check": "C14",
+              "expected": true,
+              "tolerance": 0.0,
+              "correctable": true
+            },
+            {
+              "id": "C15",
+              "required": true,
+              "check": "C15",
+              "expected": true,
+              "tolerance": 0.0,
+              "correctable": true
+            },
+            {
+              "id": "C16",
+              "required": true,
+              "check": "C16",
+              "expected": true,
+              "tolerance": 0.0,
+              "correctable": true
+            },
+            {
+              "id": "C17",
+              "required": true,
+              "check": "C17",
+              "expected": true,
+              "tolerance": 0.0,
+              "correctable": true
+            },
+            {
+              "id": "C18",
+              "required": true,
+              "check": "C18",
+              "expected": true,
+              "tolerance": 0.0,
+              "correctable": true
+            },
+            {
+              "id": "C19",
+              "required": true,
+              "check": "C19",
+              "expected": true,
+              "tolerance": 0.0,
+              "correctable": true
+            },
+            {
+              "id": "C20",
+              "required": true,
+              "check": "C20",
+              "expected": true,
+              "tolerance": 0.0,
+              "correctable": true
+            },
+            {
+              "id": "C21",
+              "required": true,
+              "check": "C21",
+              "expected": true,
+              "tolerance": 0.0,
+              "correctable": true
+            },
+            {
+              "id": "C22",
+              "required": true,
+              "check": "C22",
+              "expected": true,
+              "tolerance": 0.0,
+              "correctable": true
+            },
+            {
+              "id": "C23",
+              "required": true,
+              "check": "C23",
+              "expected": true,
+              "tolerance": 0.0,
+              "correctable": true
+            },
+            {
+              "id": "C24",
+              "required": true,
+              "check": "C24",
+              "expected": true,
+              "tolerance": 0.0,
+              "correctable": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "at": "2026-10-05T10:40:36.333423+00:00",
+      "iteration": 0,
+      "state": "OBSERVING",
+      "kind": "transition",
+      "payload": {
+        "before": "RECEIVED",
+        "after": "OBSERVING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 3,
+      "at": "2026-10-05T10:40:52.264573+00:00",
+      "iteration": 0,
+      "state": "OBSERVING",
+      "kind": "observation",
+      "payload": {
+        "modelIdentity": "C:\\Users\\Admin\\Documents\\Codex\\2026-10-04\\files-pasted-by-the-user-read\\outputs\\native-current-version\\test-project\\NativeGeometry_Full_Test_20261004.pln",
+        "modelHash": "c6d081be0ee59bc5c2c9447c12d3c51d23072198aa1cca900f4aa0e697ddd1df",
+        "facts": {
+          "C01": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C02": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C03": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C04": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C05": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C06": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C07": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C08": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C09": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C10": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C11": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C12": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C13": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C14": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C15": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C16": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C17": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C18": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C19": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C20": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C21": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C22": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C23": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C24": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          }
+        },
+        "evidence": {
+          "live.snapshot": {
+            "path": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\001-observe.json",
+            "modelHash": "c6d081be0ee59bc5c2c9447c12d3c51d23072198aa1cca900f4aa0e697ddd1df",
+            "elementCount": 5304
+          },
+          "live.progress": {
+            "completedMutations": 0,
+            "witnessPaths": [],
+            "checks": {
+              "C01": true,
+              "C02": false,
+              "C03": false,
+              "C04": false,
+              "C05": false,
+              "C06": false,
+              "C07": false,
+              "C08": false,
+              "C09": false,
+              "C10": false,
+              "C11": false,
+              "C12": false,
+              "C13": false,
+              "C14": false,
+              "C15": false,
+              "C16": false,
+              "C17": false,
+              "C18": true,
+              "C19": false,
+              "C20": true,
+              "C21": true,
+              "C22": true,
+              "C23": true,
+              "C24": true
+            },
+            "goalId": "stage3-live-wall-001"
+          }
+        },
+        "provenance": "LIVE"
+      }
+    },
+    {
+      "sequence": 4,
+      "at": "2026-10-05T10:40:52.267574+00:00",
+      "iteration": 0,
+      "state": "PLANNING",
+      "kind": "transition",
+      "payload": {
+        "before": "OBSERVING",
+        "after": "PLANNING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 5,
+      "at": "2026-10-05T10:40:52.270797+00:00",
+      "iteration": 1,
+      "state": "PLANNING",
+      "kind": "iteration-start",
+      "payload": {
+        "modelIdentity": "C:\\Users\\Admin\\Documents\\Codex\\2026-10-04\\files-pasted-by-the-user-read\\outputs\\native-current-version\\test-project\\NativeGeometry_Full_Test_20261004.pln",
+        "modelHash": "c6d081be0ee59bc5c2c9447c12d3c51d23072198aa1cca900f4aa0e697ddd1df"
+      }
+    },
+    {
+      "sequence": 6,
+      "at": "2026-10-05T10:41:11.447824+00:00",
+      "iteration": 1,
+      "state": "PLANNING",
+      "kind": "model-check",
+      "payload": {
+        "plannedAgainst": {
+          "modelIdentity": "C:\\Users\\Admin\\Documents\\Codex\\2026-10-04\\files-pasted-by-the-user-read\\outputs\\native-current-version\\test-project\\NativeGeometry_Full_Test_20261004.pln",
+          "modelHash": "c6d081be0ee59bc5c2c9447c12d3c51d23072198aa1cca900f4aa0e697ddd1df"
+        },
+        "current": {
+          "modelIdentity": "C:\\Users\\Admin\\Documents\\Codex\\2026-10-04\\files-pasted-by-the-user-read\\outputs\\native-current-version\\test-project\\NativeGeometry_Full_Test_20261004.pln",
+          "modelHash": "c6d081be0ee59bc5c2c9447c12d3c51d23072198aa1cca900f4aa0e697ddd1df",
+          "provenance": "LIVE"
+        },
+        "staleVerdict": "CURRENT"
+      }
+    },
+    {
+      "sequence": 7,
+      "at": "2026-10-05T10:41:11.450857+00:00",
+      "iteration": 1,
+      "state": "EXECUTING",
+      "kind": "transition",
+      "payload": {
+        "before": "PLANNING",
+        "after": "EXECUTING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 8,
+      "at": "2026-10-05T10:41:44.592622+00:00",
+      "iteration": 1,
+      "state": "READING_BACK",
+      "kind": "transition",
+      "payload": {
+        "before": "EXECUTING",
+        "after": "READING_BACK",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 9,
+      "at": "2026-10-05T10:42:04.429419+00:00",
+      "iteration": 1,
+      "state": "AUDITING",
+      "kind": "transition",
+      "payload": {
+        "before": "READING_BACK",
+        "after": "AUDITING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 10,
+      "at": "2026-10-05T10:42:04.433601+00:00",
+      "iteration": 1,
+      "state": "AUDITING",
+      "kind": "progress-check",
+      "payload": {
+        "modelHash": "af196a3f551c450880de9a7fe9f5def6e6d3c30764be4da658e998dfdef05469",
+        "actionFingerprint": "e8b79ec38d332b94580be6f663b8e460ed88c9c97b0252d33faa4aa2e39f13cf",
+        "auditFingerprint": "0339d4e1dacb8953d49ef020610e684efe4ac974c7224c23264647e051bae676",
+        "progressSignature": "79ee46ad2ddfef577edecdb89d9abd6a1e4b60a7d5a20469ea1df159bb386f35",
+        "noProgressCount": 1,
+        "noProgressLimit": 2
+      }
+    },
+    {
+      "sequence": 11,
+      "at": "2026-10-05T10:42:04.437134+00:00",
+      "iteration": 1,
+      "state": "REPLANNING",
+      "kind": "transition",
+      "payload": {
+        "before": "AUDITING",
+        "after": "REPLANNING",
+        "reason": "decision from required acceptance criteria"
+      }
+    },
+    {
+      "sequence": 12,
+      "at": "2026-10-05T10:42:04.442675+00:00",
+      "iteration": 1,
+      "state": "OBSERVING",
+      "kind": "transition",
+      "payload": {
+        "before": "REPLANNING",
+        "after": "OBSERVING",
+        "reason": "fresh live observation before dependent replanning"
+      }
+    },
+    {
+      "sequence": 13,
+      "at": "2026-10-05T10:42:20.880753+00:00",
+      "iteration": 1,
+      "state": "OBSERVING",
+      "kind": "observation",
+      "payload": {
+        "modelIdentity": "C:\\Users\\Admin\\Documents\\Codex\\2026-10-04\\files-pasted-by-the-user-read\\outputs\\native-current-version\\test-project\\NativeGeometry_Full_Test_20261004.pln",
+        "modelHash": "af196a3f551c450880de9a7fe9f5def6e6d3c30764be4da658e998dfdef05469",
+        "facts": {
+          "C01": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C02": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C03": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C04": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C05": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C06": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C07": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C08": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C09": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C10": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C11": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C12": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C13": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C14": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C15": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C16": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C17": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C18": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C19": {
+            "actual": false,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C20": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C21": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C22": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C23": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          },
+          "C24": {
+            "actual": true,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "live.progress",
+              "live.snapshot"
+            ]
+          }
+        },
+        "evidence": {
+          "live.snapshot": {
+            "path": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\004-observe.json",
+            "modelHash": "af196a3f551c450880de9a7fe9f5def6e6d3c30764be4da658e998dfdef05469",
+            "elementCount": 5305
+          },
+          "live.progress": {
+            "completedMutations": 1,
+            "witnessPaths": [
+              "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-1\\readback-witness.json"
+            ],
+            "checks": {
+              "C01": true,
+              "C02": true,
+              "C03": true,
+              "C04": true,
+              "C05": true,
+              "C06": true,
+              "C07": true,
+              "C08": false,
+              "C09": false,
+              "C10": false,
+              "C11": false,
+              "C12": false,
+              "C13": false,
+              "C14": false,
+              "C15": false,
+              "C16": false,
+              "C17": false,
+              "C18": true,
+              "C19": false,
+              "C20": true,
+              "C21": true,
+              "C22": true,
+              "C23": true,
+              "C24": true
+            },
+            "goalId": "stage3-live-wall-001"
+          }
+        },
+        "provenance": "LIVE"
+      }
+    },
+    {
+      "sequence": 14,
+      "at": "2026-10-05T10:42:20.884755+00:00",
+      "iteration": 1,
+      "state": "PLANNING",
+      "kind": "transition",
+      "payload": {
+        "before": "OBSERVING",
+        "after": "PLANNING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 15,
+      "at": "2026-10-05T10:42:20.889756+00:00",
+      "iteration": 2,
+      "state": "PLANNING",
+      "kind": "iteration-start",
+      "payload": {
+        "modelIdentity": "C:\\Users\\Admin\\Documents\\Codex\\2026-10-04\\files-pasted-by-the-user-read\\outputs\\native-current-version\\test-project\\NativeGeometry_Full_Test_20261004.pln",
+        "modelHash": "af196a3f551c450880de9a7fe9f5def6e6d3c30764be4da658e998dfdef05469"
+      }
+    },
+    {
+      "sequence": 16,
+      "at": "2026-10-05T10:42:40.415681+00:00",
+      "iteration": 2,
+      "state": "PLANNING",
+      "kind": "model-check",
+      "payload": {
+        "plannedAgainst": {
+          "modelIdentity": "C:\\Users\\Admin\\Documents\\Codex\\2026-10-04\\files-pasted-by-the-user-read\\outputs\\native-current-version\\test-project\\NativeGeometry_Full_Test_20261004.pln",
+          "modelHash": "af196a3f551c450880de9a7fe9f5def6e6d3c30764be4da658e998dfdef05469"
+        },
+        "current": {
+          "modelIdentity": "C:\\Users\\Admin\\Documents\\Codex\\2026-10-04\\files-pasted-by-the-user-read\\outputs\\native-current-version\\test-project\\NativeGeometry_Full_Test_20261004.pln",
+          "modelHash": "af196a3f551c450880de9a7fe9f5def6e6d3c30764be4da658e998dfdef05469",
+          "provenance": "LIVE"
+        },
+        "staleVerdict": "CURRENT"
+      }
+    },
+    {
+      "sequence": 17,
+      "at": "2026-10-05T10:42:40.423360+00:00",
+      "iteration": 2,
+      "state": "EXECUTING",
+      "kind": "transition",
+      "payload": {
+        "before": "PLANNING",
+        "after": "EXECUTING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 18,
+      "at": "2026-10-05T10:43:12.934233+00:00",
+      "iteration": 2,
+      "state": "READING_BACK",
+      "kind": "transition",
+      "payload": {
+        "before": "EXECUTING",
+        "after": "READING_BACK",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 19,
+      "at": "2026-10-05T10:43:34.942889+00:00",
+      "iteration": 2,
+      "state": "AUDITING",
+      "kind": "transition",
+      "payload": {
+        "before": "READING_BACK",
+        "after": "AUDITING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 20,
+      "at": "2026-10-05T10:43:34.951334+00:00",
+      "iteration": 2,
+      "state": "AUDITING",
+      "kind": "progress-check",
+      "payload": {
+        "modelHash": "036fe6238af2f6a5ec2b4ecfacdc02c8d7242cab3ce4fcc4329c8c2af2858296",
+        "actionFingerprint": "651771c91e0e6dbabb990c76da74fdcb9b24c8ecc02c21a9c92173164b9df9e5",
+        "auditFingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "progressSignature": "61009a942ed4a90dbd31893f50cf4a1723d89056fbf7be7fad8e0398bd905a10",
+        "noProgressCount": 1,
+        "noProgressLimit": 2
+      }
+    },
+    {
+      "sequence": 21,
+      "at": "2026-10-05T10:43:34.959333+00:00",
+      "iteration": 2,
+      "state": "VERIFIED",
+      "kind": "transition",
+      "payload": {
+        "before": "AUDITING",
+        "after": "VERIFIED",
+        "reason": "decision from required acceptance criteria"
+      }
+    }
+  ],
+  "finalStatus": "VERIFIED",
+  "terminalReason": "decision from required acceptance criteria",
+  "executionMode": "LIVE",
+  "liveMutationAttempted": true,
+  "noProgressLimit": 2,
+  "noProgressCount": 1
+}

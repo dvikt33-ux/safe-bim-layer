@@ -1,0 +1,17 @@
+{
+  "sourceGuid": "CE093166-FF7B-420E-B991-1D0CE0D5CCAE",
+  "createdGuid": "787EA5F8-6A5E-4EEA-B3C0-1359469E1690",
+  "length": 1.0,
+  "jointDistance": 0.0,
+  "homeStory": 0,
+  "begin": {
+    "x": 1702.218814915,
+    "y": 600.706201417
+  },
+  "end": {
+    "x": 1703.218814915,
+    "y": 600.706201417
+  },
+  "elementCountBefore": 5302,
+  "elementCountAfter": 5303
+}

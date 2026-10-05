@@ -1,0 +1,197 @@
+{
+  "goalId": "stage3-live-wall-001",
+  "criteria": [
+    {
+      "id": "C01",
+      "required": true,
+      "check": "C01",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C02",
+      "required": true,
+      "check": "C02",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C03",
+      "required": true,
+      "check": "C03",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C04",
+      "required": true,
+      "check": "C04",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C05",
+      "required": true,
+      "check": "C05",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C06",
+      "required": true,
+      "check": "C06",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C07",
+      "required": true,
+      "check": "C07",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C08",
+      "required": true,
+      "check": "C08",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C09",
+      "required": true,
+      "check": "C09",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C10",
+      "required": true,
+      "check": "C10",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C11",
+      "required": true,
+      "check": "C11",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C12",
+      "required": true,
+      "check": "C12",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C13",
+      "required": true,
+      "check": "C13",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C14",
+      "required": true,
+      "check": "C14",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C15",
+      "required": true,
+      "check": "C15",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C16",
+      "required": true,
+      "check": "C16",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C17",
+      "required": true,
+      "check": "C17",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C18",
+      "required": true,
+      "check": "C18",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C19",
+      "required": true,
+      "check": "C19",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C20",
+      "required": true,
+      "check": "C20",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C21",
+      "required": true,
+      "check": "C21",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C22",
+      "required": true,
+      "check": "C22",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C23",
+      "required": true,
+      "check": "C23",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    },
+    {
+      "id": "C24",
+      "required": true,
+      "check": "C24",
+      "expected": true,
+      "tolerance": 0.0,
+      "correctable": true
+    }
+  ]
+}

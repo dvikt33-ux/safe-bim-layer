@@ -104,13 +104,18 @@ class Observation:
     def __post_init__(self):
         nonempty(self.modelIdentity, 'modelIdentity')
         nonempty(self.modelHash, 'modelHash')
-        if self.provenance != 'FIXTURE':
+        if self.provenance != ('LIVE' if isinstance(self, LiveObservation) else 'FIXTURE'):
             raise ValueError('Stage 2 accepts fixture evidence only')
         if not isinstance(self.facts, dict) or not all(isinstance(k, str) and isinstance(v, Fact) for k, v in self.facts.items()):
             raise ValueError('facts must map check names to typed Fact records')
         if not isinstance(self.evidence, dict):
             raise ValueError('evidence must map references to retained payloads')
         json_value(self.evidence)
+
+
+@dataclass(frozen=True)
+class LiveObservation(Observation):
+    provenance: str = 'LIVE'
 
 
 @dataclass(frozen=True)
@@ -153,8 +158,13 @@ class ModelFingerprint:
     def __post_init__(self):
         nonempty(self.modelIdentity, 'modelIdentity')
         nonempty(self.modelHash, 'modelHash')
-        if self.provenance != 'FIXTURE':
+        if self.provenance != ('LIVE' if isinstance(self, LiveModelFingerprint) else 'FIXTURE'):
             raise ValueError('Stage 2 accepts fixture fingerprints only')
+
+
+@dataclass(frozen=True)
+class LiveModelFingerprint(ModelFingerprint):
+    provenance: str = 'LIVE'
 
 
 @dataclass(frozen=True)
@@ -170,11 +180,16 @@ class ExecutionResult:
             raise ValueError('invalid executor status')
         if type(self.mutationAttempted) is not bool or type(self.readbackRequired) is not bool:
             raise ValueError('execution flags must be booleans')
-        if self.executionMode != 'OFFLINE':
+        if self.executionMode != ('LIVE' if isinstance(self, LiveExecutionResult) else 'OFFLINE'):
             raise ValueError('live execution is unavailable in Stage 2')
         if not isinstance(self.details, dict):
             raise ValueError('details must be an object')
         json_value(self.details)
+
+
+@dataclass(frozen=True)
+class LiveExecutionResult(ExecutionResult):
+    executionMode: str = 'LIVE'
 
 
 @dataclass(frozen=True)

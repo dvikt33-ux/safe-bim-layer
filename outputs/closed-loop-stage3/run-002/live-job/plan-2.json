@@ -1,0 +1,31 @@
+{
+  "goalId": "stage3-live-wall-001",
+  "derivedSubgoal": "Продолжи последнюю созданную стену ещё на 0.5 метра.",
+  "modelIdentity": "C:\\Users\\Admin\\Documents\\Codex\\2026-10-04\\files-pasted-by-the-user-read\\outputs\\native-current-version\\test-project\\NativeGeometry_Full_Test_20261004.pln",
+  "modelHash": "af196a3f551c450880de9a7fe9f5def6e6d3c30764be4da658e998dfdef05469",
+  "baselinePlanner": {
+    "status": "PLANNED",
+    "request": {
+      "action": "create_wall",
+      "mode": "execute",
+      "sourceGuid": "B492859E-E508-46B3-87ED-0B07C6C580CC",
+      "length": 0.5
+    },
+    "selectedGuid": "B492859E-E508-46B3-87ED-0B07C6C580CC",
+    "selection": {
+      "guid": "B492859E-E508-46B3-87ED-0B07C6C580CC",
+      "homeStory": 0,
+      "begin": {
+        "x": 1703.718814915,
+        "y": 600.706201417
+      },
+      "end": {
+        "x": 1704.718814915,
+        "y": 600.706201417
+      },
+      "length": 1.0,
+      "predecessorGuid": "C621D5B7-6215-4925-8651-DD5FBB71EA14",
+      "selectionRule": "short straight Wall with one collinear Wall joined at begin and an unjoined end"
+    }
+  }
+}

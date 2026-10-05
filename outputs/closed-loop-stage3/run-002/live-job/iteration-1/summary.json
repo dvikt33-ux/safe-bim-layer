@@ -1,0 +1,28 @@
+{
+  "sourceGuid": "C621D5B7-6215-4925-8651-DD5FBB71EA14",
+  "createdGuid": "B492859E-E508-46B3-87ED-0B07C6C580CC",
+  "length": 1.0,
+  "jointDistance": 0.0,
+  "homeStory": 0,
+  "begin": {
+    "x": 1703.718814915,
+    "y": 600.706201417
+  },
+  "end": {
+    "x": 1704.718814915,
+    "y": 600.706201417
+  },
+  "elementCountBefore": 5304,
+  "elementCountAfter": 5305,
+  "goalId": "stage3-live-wall-001",
+  "iteration": 1,
+  "witnessPath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-1\\readback-witness.json",
+  "automaticSelection": true,
+  "plannedHash": "c6d081be0ee59bc5c2c9447c12d3c51d23072198aa1cca900f4aa0e697ddd1df",
+  "preExecutionHash": "c6d081be0ee59bc5c2c9447c12d3c51d23072198aa1cca900f4aa0e697ddd1df",
+  "executorBeforeHash": "c6d081be0ee59bc5c2c9447c12d3c51d23072198aa1cca900f4aa0e697ddd1df",
+  "readbackHash": "af196a3f551c450880de9a7fe9f5def6e6d3c30764be4da658e998dfdef05469",
+  "staleVerdict": "CURRENT",
+  "readbackPath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\003-read-back.json",
+  "executorStatus": "PASS"
+}

@@ -1,0 +1,1223 @@
+{
+  "algorithm": "SHA-256",
+  "files": [
+    {
+      "path": "outputs/closed-loop-stage3/run-002/acceptance-contract.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\acceptance-contract.json",
+      "bytes": 3902,
+      "sha256": "e7c750788a34c83c67b76026293308dbe4b05938c2429b97ab5a26c4c3d7a9a8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/goal.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\goal.json",
+      "bytes": 257,
+      "sha256": "6ac5df50ad64cb2146282c6c0045cb07b0cc4e069a3f3e454553368bb9c5521d",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/job.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\job.json",
+      "bytes": 93144,
+      "sha256": "dd9c7977575fb12c54c632538a0f4f7ac8311f9ffeafa6559097dee3be117d2e",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/001-GetProjectInfo.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\001-GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/001-GetProjectInfo.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\001-GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/002-API.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\002-API.request.json",
+      "bytes": 39,
+      "sha256": "f3cca8e9193df511f4c058894b557bbb5164c47758b1150b29754221a8ddb984",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/002-API.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\002-API.response.json",
+      "bytes": 82,
+      "sha256": "b6bd702b8e915a7b8d8c5067a160b96b4566a2dc6f64c9f550348673ffe795bc",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/003-GetAddOnVersion.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\003-GetAddOnVersion.request.json",
+      "bytes": 219,
+      "sha256": "dcb460308f64574cfeeadcaa9627584ffe6e87c96ceb61b25c79a4588bdf0ee2",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/003-GetAddOnVersion.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\003-GetAddOnVersion.response.json",
+      "bytes": 73,
+      "sha256": "b15e7d9757f688cbe64b736ccd85468a37c584f1b8e44f2a2a97580c8b1e7198",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/004-GetProjectInfo.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\004-GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/004-GetProjectInfo.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\004-GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/005-GetProjectInfo.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\005-GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/005-GetProjectInfo.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\005-GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/006-GetProjectInfo.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\006-GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/006-GetProjectInfo.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\006-GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/007-GetProjectInfo.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\007-GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/007-GetProjectInfo.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\007-GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/008-GetProjectInfo.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\008-GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/008-GetProjectInfo.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\008-GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/009-GetProjectInfo.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\009-GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/009-GetProjectInfo.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\009-GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/010-GetProjectInfo.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\010-GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/010-GetProjectInfo.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\010-GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/011-GetProjectInfo.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\011-GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/011-GetProjectInfo.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\011-GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/012-GetProjectInfo.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\012-GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/012-GetProjectInfo.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\012-GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/013-GetProjectInfo.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\013-GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/013-GetProjectInfo.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\013-GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/014-GetProjectInfo.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\014-GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/014-GetProjectInfo.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\014-GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/015-GetProjectInfo.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\015-GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/015-GetProjectInfo.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\015-GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/016-GetProjectInfo.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\016-GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/016-GetProjectInfo.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\016-GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/017-GetProjectInfo.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\017-GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/017-GetProjectInfo.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\017-GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/018-GetProjectInfo.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\018-GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/018-GetProjectInfo.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\018-GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/019-GetProjectInfo.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\019-GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/identity/019-GetProjectInfo.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\identity\\019-GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-1/executor/after-create.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-1\\executor\\after-create.json",
+      "bytes": 104958551,
+      "sha256": "c783869c8daa4f2f8e0778a4608a9d48f4044a7758e947a2b18404ed612e38fd",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-1/executor/after-create.metrics.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-1\\executor\\after-create.metrics.json",
+      "bytes": 2874,
+      "sha256": "9b3a48e6de5f7a2902807a71747adf26f2584ea5d32e480e093d5498f9c7de49",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-1/executor/after-create.native-response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-1\\executor\\after-create.native-response.json",
+      "bytes": 99250486,
+      "sha256": "f770442c3dade2caaeebae648afd9d2e210ca4f93a75182aae34c6fba1e14569",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-1/executor/after-create.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-1\\executor\\after-create.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-1/executor/before.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-1\\executor\\before.json",
+      "bytes": 104954941,
+      "sha256": "6958cf5892d22d0e2c0b0c95c11ebb9f19a98ef9660e86cd41c1235e443f5a98",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-1/executor/before.metrics.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-1\\executor\\before.metrics.json",
+      "bytes": 2869,
+      "sha256": "a6f6416df2d4af5032015eb8291ff4aac5882f35fc240e8c9aaf8fba7fb88c3a",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-1/executor/before.native-response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-1\\executor\\before.native-response.json",
+      "bytes": 99247031,
+      "sha256": "e222f3074c805e05f2d229e8cc876ed7283031ec92e7a6c067be654b20b3e1dc",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-1/executor/before.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-1\\executor\\before.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-1/executor-request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-1\\executor-request.json",
+      "bytes": 194,
+      "sha256": "60492a951e1342cad129c5d4874cf67019fa7c89c99cca3495ee5c7d9ea8f8aa",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-1/executor-result.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-1\\executor-result.json",
+      "bytes": 878,
+      "sha256": "17dc1d6122d04479cdb176064f8789b22094b5c0506f87039d219e35d6bbf247",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-1/native-dispatch.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-1\\native-dispatch.json",
+      "bytes": 296,
+      "sha256": "908a8f78dc5535b8323ba3697a5eceb7ac9f36790f6988b56ff2c4f347895300",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-1/readback-witness.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-1\\readback-witness.json",
+      "bytes": 27650,
+      "sha256": "705e9faccca3122d40c0151f1eb68351a0907cec33cb8606338dde53b7216b2d",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-1/summary.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-1\\summary.json",
+      "bytes": 1235,
+      "sha256": "1d4405e3ac0b0694f4df221572cead7ce970abcd1c1daa1c81ad1cb260d2ee54",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-1/wall-joint-cycle/executor-create_wall.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-1\\wall-joint-cycle\\executor-create_wall.request.json",
+      "bytes": 532,
+      "sha256": "9dc84d4ce0128ebf8d481505bb362c02334cf7b0a3ab1328e195e43e64173e35",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-1/wall-joint-cycle/executor-create_wall.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-1\\wall-joint-cycle\\executor-create_wall.response.json",
+      "bytes": 129,
+      "sha256": "11ca3449f296f1860ef723d3214834ef4ce2b6a5b574a2cd418921ec256dd188",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-2/executor/after-create.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-2\\executor\\after-create.json",
+      "bytes": 104962161,
+      "sha256": "fb652fd2064f7140a42b2a7bff82b836941fff2cce9e575c6e4a4c4afa628fa9",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-2/executor/after-create.metrics.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-2\\executor\\after-create.metrics.json",
+      "bytes": 2875,
+      "sha256": "c62096e60f9eb143708593982bb963557ddb2c7192eee25a43f4134ebbaa71b0",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-2/executor/after-create.native-response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-2\\executor\\after-create.native-response.json",
+      "bytes": 99253941,
+      "sha256": "cbc962bf46bfdbd0cd4dd65120ecd9e939eb7041f080ca3b719bee3071d6fac8",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-2/executor/after-create.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-2\\executor\\after-create.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-2/executor/before.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-2\\executor\\before.json",
+      "bytes": 104958551,
+      "sha256": "304155bb1ba3124c531a134905914cfadd56a375c6b5224b4e2e2a61f0901968",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-2/executor/before.metrics.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-2\\executor\\before.metrics.json",
+      "bytes": 2867,
+      "sha256": "344007027517cfc14242c10b3de5f57f99733383b3306fb9fd2e642270bc9066",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-2/executor/before.native-response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-2\\executor\\before.native-response.json",
+      "bytes": 99250486,
+      "sha256": "99554ac480b4e0b18b14cde782f70d314d9ef976f338b39f3a5591ca002e5c81",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-2/executor/before.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-2\\executor\\before.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-2/executor-request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-2\\executor-request.json",
+      "bytes": 194,
+      "sha256": "861ebb6024dc02df3eafa9abf0e9e6a78498f5d86a1cfd9c1b29def0fd20b1be",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-2/executor-result.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-2\\executor-result.json",
+      "bytes": 878,
+      "sha256": "10c9ab47097a70f59ecb218d9278db92413ef78020eb9100e8f740ef48337d03",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-2/native-dispatch.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-2\\native-dispatch.json",
+      "bytes": 296,
+      "sha256": "babc3e7bb04bb509f1005c76f9eb5ca3071d416fe3cce98cbe090ca6db556807",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-2/readback-witness.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-2\\readback-witness.json",
+      "bytes": 27650,
+      "sha256": "2c514c665b37e9388300b6775ff79ffcbf5f3a1aaf28bf2aa5d9150464b2dc95",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-2/summary.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-2\\summary.json",
+      "bytes": 1235,
+      "sha256": "b5fc801b6d4d6e275b78d26590bace24552f009cfec03cfcbbd98333092454ab",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-2/wall-joint-cycle/executor-create_wall.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-2\\wall-joint-cycle\\executor-create_wall.request.json",
+      "bytes": 532,
+      "sha256": "73c7c36c7f80ae4d6ba75146ef89a404632fb074a43c8f3dd93e56d58dd40023",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-2/wall-joint-cycle/executor-create_wall.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\iteration-2\\wall-joint-cycle\\executor-create_wall.response.json",
+      "bytes": 129,
+      "sha256": "adec79a7d5bd94a10f3b5d9643e657b15f045c2b2dee17ee74190021ed3c3578",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/main-final-readback.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\main-final-readback.json",
+      "bytes": 192,
+      "sha256": "8adf1f681fb660e9d821b8e5429521165ff1bbcafafa4be65a7b86125b856749",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/001-observe.fingerprint.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\001-observe.fingerprint.json",
+      "bytes": 321,
+      "sha256": "4dd2ae4d2790afaee11a5075cbd45698b926e13f7a49fdfb011b737df5af6a41",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/001-observe.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\001-observe.json",
+      "bytes": 104954941,
+      "sha256": "70b9ab8a2fba021b0c109ec50317bddb06857df5be3eb587c8006ab8bea4c382",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/001-observe.metrics.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\001-observe.metrics.json",
+      "bytes": 2864,
+      "sha256": "b28d2d55f6973ce5e70846468479b2ded58b08a9bff2018fc06f4b9113bb9a55",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/001-observe.native-response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\001-observe.native-response.json",
+      "bytes": 99247031,
+      "sha256": "abaf6f8548d152ba0db75bbbfdf3344de703a2f5a69f7fece4d60360737da59d",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/001-observe.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\001-observe.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/002-stale-check.fingerprint.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\002-stale-check.fingerprint.json",
+      "bytes": 325,
+      "sha256": "4a4885ccbaa414c3821d8bffc6f9e04feecfe236fe0fbf597d8e95142a6fff25",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/002-stale-check.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\002-stale-check.json",
+      "bytes": 104954941,
+      "sha256": "2060ad6eb38a11f3d3b7032fd692108643e1a3f2ffc177aaa291087be3dbefdc",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/002-stale-check.metrics.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\002-stale-check.metrics.json",
+      "bytes": 2868,
+      "sha256": "fba3c8d5bb31577c4bab1e2239e9558d4a4acaf748e3a8c9184aa9176f7b9ddf",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/002-stale-check.native-response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\002-stale-check.native-response.json",
+      "bytes": 99247031,
+      "sha256": "c4b17734556bb12ba3530ebf3b30fe42fdabafaa4a334ebe44f3cf5ac0e22069",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/002-stale-check.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\002-stale-check.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/003-read-back.fingerprint.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\003-read-back.fingerprint.json",
+      "bytes": 323,
+      "sha256": "c4eac7014039e1b51811fd996c9dd3900256c189d803b9156064bb45b29ab634",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/003-read-back.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\003-read-back.json",
+      "bytes": 104958551,
+      "sha256": "77742cfc8230909db8844bdacaaf61ee428bbe2539570474d9c9d59235e56477",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/003-read-back.metrics.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\003-read-back.metrics.json",
+      "bytes": 2866,
+      "sha256": "de8cac49f5a52fe1118042f7e75ea18cf047687bd0aecfb4334834124807cb68",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/003-read-back.native-response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\003-read-back.native-response.json",
+      "bytes": 99250486,
+      "sha256": "1826ba8ed1ee1d7c4378598334685f488796164f017068c49f4cf51356695bc9",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/003-read-back.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\003-read-back.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/004-observe.fingerprint.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\004-observe.fingerprint.json",
+      "bytes": 321,
+      "sha256": "e3be2838b422a435c6d0a27cd22e7b022e9e8d9127f7ba7a4382b8707277e229",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/004-observe.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\004-observe.json",
+      "bytes": 104958551,
+      "sha256": "f0850dccf6e1c725817c7064020af5cebe2d8fcc592e8920c52f2494deb5c5e6",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/004-observe.metrics.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\004-observe.metrics.json",
+      "bytes": 2863,
+      "sha256": "18f3ba05d5347d2e5b0bcc61788defd6779ada9a63e28e5638fad60b58e272d5",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/004-observe.native-response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\004-observe.native-response.json",
+      "bytes": 99250486,
+      "sha256": "98b061d7765b0af4be8d870b25e7540f6673fd75c15660f09baa277d9e2a47ef",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/004-observe.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\004-observe.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/005-stale-check.fingerprint.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\005-stale-check.fingerprint.json",
+      "bytes": 325,
+      "sha256": "09f5fefec4db12c71155e72f189e7163940b1bc208a4fedd7af32c5cf49eb5ff",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/005-stale-check.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\005-stale-check.json",
+      "bytes": 104958550,
+      "sha256": "e43f584f6eb55981520e0f64dc1a87d96abb4db84d215a9b5124e1b44c6d17e9",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/005-stale-check.metrics.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\005-stale-check.metrics.json",
+      "bytes": 2868,
+      "sha256": "92a8e207bde436a51dd59814c7fa8628b97590138496b559494e0b0ce1f95862",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/005-stale-check.native-response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\005-stale-check.native-response.json",
+      "bytes": 99250485,
+      "sha256": "cfdbdda8b33c61b918661fdbd9123fd5479d148639c0dd43be112c2cbdfece30",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/005-stale-check.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\005-stale-check.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/006-read-back.fingerprint.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\006-read-back.fingerprint.json",
+      "bytes": 323,
+      "sha256": "5ca2aedc32dbf0431d428f2888512dd4e1bda75304b34fbdce49177f62776782",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/006-read-back.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\006-read-back.json",
+      "bytes": 104962161,
+      "sha256": "3132c92a0f1e34867d2bda70823b751f852ba6d6efb2711e80787ceb9d81e34e",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/006-read-back.metrics.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\006-read-back.metrics.json",
+      "bytes": 2867,
+      "sha256": "0c106b6908824038c4c1810d953e453a9eb0ebd4dd7de47a42c9ba9be87562ab",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/006-read-back.native-response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\006-read-back.native-response.json",
+      "bytes": 99253941,
+      "sha256": "09f36db9751a79e0d373dbba3f18e841f84f1aecc6455225bd2b48b2e40ca199",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/observations/006-read-back.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\observations\\006-read-back.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/plan-1.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\plan-1.json",
+      "bytes": 1181,
+      "sha256": "e900305fe6839e2d8f50e151dfa7c947fc51bf26fc1d6bc4e5b2d1413859ee9a",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/plan-2.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\plan-2.json",
+      "bytes": 1181,
+      "sha256": "ceb52624af028addab59ba0d5373de3ee58b7085bcb9fd61dd9cdd18777cc870",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/live-job/preflight.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\live-job\\preflight.json",
+      "bytes": 727,
+      "sha256": "95d977eb4f01dd1fdc3ed45c4fe97e7780f196c5d491434d6eef49ab998bcfb0",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/offline-report.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\offline-report.json",
+      "bytes": 116,
+      "sha256": "80a5179a402be521f9cbd26bdd10c2e230b8e28854608479293c4f40b457fa9e",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/offline-tests.txt",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\offline-tests.txt",
+      "bytes": 6712,
+      "sha256": "67351e36ba871980021f2ffa78b92006d68d91104232b3b31352799e9694f757",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/stage3-verification-report.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\stage3-verification-report.json",
+      "bytes": 12884,
+      "sha256": "c0cbdb83ffcea562c4aac2655f06a8818583d8d17af7ea92d4dae47fd3d01a44",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/identity/001-GetProjectInfo.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\identity\\001-GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/identity/001-GetProjectInfo.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\identity\\001-GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/identity/002-API.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\identity\\002-API.request.json",
+      "bytes": 39,
+      "sha256": "f3cca8e9193df511f4c058894b557bbb5164c47758b1150b29754221a8ddb984",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/identity/002-API.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\identity\\002-API.response.json",
+      "bytes": 82,
+      "sha256": "b6bd702b8e915a7b8d8c5067a160b96b4566a2dc6f64c9f550348673ffe795bc",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/identity/003-GetAddOnVersion.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\identity\\003-GetAddOnVersion.request.json",
+      "bytes": 219,
+      "sha256": "dcb460308f64574cfeeadcaa9627584ffe6e87c96ceb61b25c79a4588bdf0ee2",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/identity/003-GetAddOnVersion.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\identity\\003-GetAddOnVersion.response.json",
+      "bytes": 73,
+      "sha256": "b15e7d9757f688cbe64b736ccd85468a37c584f1b8e44f2a2a97580c8b1e7198",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/identity/004-GetProjectInfo.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\identity\\004-GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/identity/004-GetProjectInfo.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\identity\\004-GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/identity/005-GetProjectInfo.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\identity\\005-GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/identity/005-GetProjectInfo.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\identity\\005-GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/identity/006-GetProjectInfo.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\identity\\006-GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/identity/006-GetProjectInfo.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\identity\\006-GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/identity/007-GetProjectInfo.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\identity\\007-GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/identity/007-GetProjectInfo.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\identity\\007-GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/identity/008-GetProjectInfo.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\identity\\008-GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/identity/008-GetProjectInfo.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\identity\\008-GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/identity/009-GetProjectInfo.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\identity\\009-GetProjectInfo.request.json",
+      "bytes": 218,
+      "sha256": "b95effbc55af8f2d915e7534f320dfb90273ee5ec5944fe60f0a5a7aca04d314",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/identity/009-GetProjectInfo.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\identity\\009-GetProjectInfo.response.json",
+      "bytes": 506,
+      "sha256": "e7de01a45e20ffb57f3df1c273d0a9f62e733705a8652927b23641eb378db403",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/adapter-result.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-1\\adapter-result.json",
+      "bytes": 4523,
+      "sha256": "69105ce59abd222c91f9013dcffde6abc0f5ab0dc8423d527dede2d242482ca1",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/chat-executor/executor-request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-1\\chat-executor\\executor-request.json",
+      "bytes": 128,
+      "sha256": "a1b2fb133b5bcf9c3b771881d38c6e6d8ce4c1bce0aa48bb8fb3c157ddb667b8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/chat-executor/planner-model-dump.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-1\\chat-executor\\planner-model-dump.json",
+      "bytes": 104947721,
+      "sha256": "ee781b383382832eee22939e28b8342501ed16c74505fda2750130ec9b810f86",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/chat-executor/planner-model-dump.metrics.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-1\\chat-executor\\planner-model-dump.metrics.json",
+      "bytes": 2889,
+      "sha256": "464d45e434ee5015e378d83abf5344a9f29dbad8eda716e05e118fa92c270fdc",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/chat-executor/planner-model-dump.native-response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-1\\chat-executor\\planner-model-dump.native-response.json",
+      "bytes": 99240121,
+      "sha256": "294879691b89e99866c741665b176c5d9efc0eef4d23a8f049d43c58d931dc87",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/chat-executor/planner-model-dump.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-1\\chat-executor\\planner-model-dump.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/executor/after-create.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-1\\executor\\after-create.json",
+      "bytes": 104951331,
+      "sha256": "de00a532eff0ee140ec496fb4e0af060877c0a689f9796e9572873a72c9d60a3",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/executor/after-create.metrics.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-1\\executor\\after-create.metrics.json",
+      "bytes": 2880,
+      "sha256": "0c272f4fbcca1e7edbee77fbbadb2bdce6872c88c06eb83fccc9cd4fab210d12",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/executor/after-create.native-response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-1\\executor\\after-create.native-response.json",
+      "bytes": 99243576,
+      "sha256": "db646b5dccbb546c75def6432fd8a32aa742bd62b356f7a7363f3d16be15a798",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/executor/after-create.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-1\\executor\\after-create.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/executor/before.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-1\\executor\\before.json",
+      "bytes": 104947721,
+      "sha256": "4625ba1df259d13c7a9caace0324a5ab689aeec653c7366b9f9393008a9010b8",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/executor/before.metrics.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-1\\executor\\before.metrics.json",
+      "bytes": 2874,
+      "sha256": "b41e92100ca5458c8a1d62e02996a1ff8b8f6a8b327153240f1cebf6a2d1ef77",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/executor/before.native-response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-1\\executor\\before.native-response.json",
+      "bytes": 99240121,
+      "sha256": "e4623127c14ec4c64327716a69d2c371628c723bae92258a4218beef1c239951",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/executor/before.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-1\\executor\\before.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/readback-witness.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-1\\readback-witness.json",
+      "bytes": 27650,
+      "sha256": "2cbb7d9db86394b9e4b857a795a5fedc3039a4faf78ba14250a98d2fbad25892",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/summary.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-1\\summary.json",
+      "bytes": 379,
+      "sha256": "86795e6106ec50c15c4f4a43ea13ed6edc7365739624102364a684730f4eb9f5",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/wall-joint-cycle/executor-create_wall.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-1\\wall-joint-cycle\\executor-create_wall.request.json",
+      "bytes": 532,
+      "sha256": "edb6355f30591eb1ef92b0edcbbb2f7312803fb666afa48ff0fd4d184b1ba1fa",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/wall-joint-cycle/executor-create_wall.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-1\\wall-joint-cycle\\executor-create_wall.response.json",
+      "bytes": 129,
+      "sha256": "4822e55d9d24f8146badf780157dc3a8390328033f182c447f082d1ee3f3e55f",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/adapter-result.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-2\\adapter-result.json",
+      "bytes": 4523,
+      "sha256": "cb26d54bfa203f6f3ec00e367933d4e9f26c556b6f24e6c95ab8073dd70be02f",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/chat-executor/executor-request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-2\\chat-executor\\executor-request.json",
+      "bytes": 128,
+      "sha256": "acc121bb179c375246b8db3853cb9c4dcaca971b3af5d1ab1182beb978657f63",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/chat-executor/planner-model-dump.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-2\\chat-executor\\planner-model-dump.json",
+      "bytes": 104951331,
+      "sha256": "5c15428c27ef571edd5f4cb8ce3d18d48f6ba8e34e66e272bebe3c4497a4a5d2",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/chat-executor/planner-model-dump.metrics.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-2\\chat-executor\\planner-model-dump.metrics.json",
+      "bytes": 2890,
+      "sha256": "5d919bf62b35842d0ab1e9736138731f159a1353e78b4a080b514f5296dbb190",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/chat-executor/planner-model-dump.native-response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-2\\chat-executor\\planner-model-dump.native-response.json",
+      "bytes": 99243576,
+      "sha256": "7f1ebedc2ce553d7e70781587f887798f494d5f523a1d86bb17d753a4c4d18f9",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/chat-executor/planner-model-dump.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-2\\chat-executor\\planner-model-dump.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/executor/after-create.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-2\\executor\\after-create.json",
+      "bytes": 104954941,
+      "sha256": "d1c0567fdf4298b87b6e8ea5f4df86edd1811aea308552ad361023ed61119bff",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/executor/after-create.metrics.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-2\\executor\\after-create.metrics.json",
+      "bytes": 2880,
+      "sha256": "8ac9c3cdf82ab15778bdaf61755bb0e6e142d6f305f239af2063bcbe16c38ff5",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/executor/after-create.native-response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-2\\executor\\after-create.native-response.json",
+      "bytes": 99247031,
+      "sha256": "6eb8acb616e236bccdd0ba80ca9cde4daabee841a6eae143d00929e704a6210b",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/executor/after-create.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-2\\executor\\after-create.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/executor/before.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-2\\executor\\before.json",
+      "bytes": 104951331,
+      "sha256": "323385b59cb4e3cfa779ee97a8230857a67f5e377af8765ddbc8a0491ea1d4e5",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/executor/before.metrics.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-2\\executor\\before.metrics.json",
+      "bytes": 2874,
+      "sha256": "d79dba0db68c5eb75fe42a4e620b5fbc97ae84c186e396cf1f2ca07f5fecaf4b",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/executor/before.native-response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-2\\executor\\before.native-response.json",
+      "bytes": 99243576,
+      "sha256": "13771bbb4cf016a61d83ffe298d8c09248ac1d02450441acddac47d91413d2a9",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/executor/before.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-2\\executor\\before.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/readback-witness.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-2\\readback-witness.json",
+      "bytes": 27650,
+      "sha256": "ebe3d4c9f281d2b4095beb1110e21dbe159c300ad973f62a5803173b9862e446",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/summary.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-2\\summary.json",
+      "bytes": 379,
+      "sha256": "9cf261ed5415d03e0eda089a37a9ff5f25fd8d0678bd9cb110adb83a61302373",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/wall-joint-cycle/executor-create_wall.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-2\\wall-joint-cycle\\executor-create_wall.request.json",
+      "bytes": 532,
+      "sha256": "c683bc19b54e1b7d9a19beaccbabe70345d72deb53dd0555beadd66059575bbe",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/wall-joint-cycle/executor-create_wall.response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\iteration-2\\wall-joint-cycle\\executor-create_wall.response.json",
+      "bytes": 129,
+      "sha256": "7e537ee8e2dadbbee2169a4f19ca8c3bc0c2f6c87987b38bd07981bcb553e89e",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/observations/001-regression-readback.fingerprint.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\observations\\001-regression-readback.fingerprint.json",
+      "bytes": 333,
+      "sha256": "4e51ac55fec4665695daed99ed580de2796592bc3a05c66ce73172b2b3546542",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/observations/001-regression-readback.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\observations\\001-regression-readback.json",
+      "bytes": 104951331,
+      "sha256": "a5adead0b620d66e4d6173560d54290808c5744fd2ba0550a39bbcb8ef074d02",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/observations/001-regression-readback.metrics.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\observations\\001-regression-readback.metrics.json",
+      "bytes": 2881,
+      "sha256": "6eedacd5ab4373e67477ca1a658117a1ac9c9b0a34b90f1e332f83310465d757",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/observations/001-regression-readback.native-response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\observations\\001-regression-readback.native-response.json",
+      "bytes": 99243576,
+      "sha256": "b2575955e5edcc90418c99ea037aef013c40a8a1104b6e379c1e7d583719c794",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/observations/001-regression-readback.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\observations\\001-regression-readback.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/observations/002-regression-readback.fingerprint.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\observations\\002-regression-readback.fingerprint.json",
+      "bytes": 333,
+      "sha256": "88ab605a0658c44e43a0e01084feebccd0bc916ab0d5e65bc911187ca0297e3a",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/observations/002-regression-readback.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\observations\\002-regression-readback.json",
+      "bytes": 104954940,
+      "sha256": "3a33f24889761d1ff9c225ee19d8032f7d5455365066271957fdc7a31ad52b7c",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/observations/002-regression-readback.metrics.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\observations\\002-regression-readback.metrics.json",
+      "bytes": 2880,
+      "sha256": "28872bb98e935355e31434558178e0da3895e42ad21773a41aeded254d6fa84d",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/observations/002-regression-readback.native-response.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\observations\\002-regression-readback.native-response.json",
+      "bytes": 99247030,
+      "sha256": "d70ab6f7f69c26bc5d04ccda1487955283ca713015798e05d6ac996bdcabf005",
+      "storage": "LOCAL_ONLY"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/observations/002-regression-readback.request.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\observations\\002-regression-readback.request.json",
+      "bytes": 173,
+      "sha256": "d678b8b7eb8239f92f1b370a7ef9f6f284a5610d0fa814a0e2c5e892bc109ae8",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/preflight.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\preflight.json",
+      "bytes": 727,
+      "sha256": "eb4289be8a335d2b36d012f8ad50ee2c7caf96721d5b92247e4ae8cb454d919b",
+      "storage": "COMMITTED"
+    },
+    {
+      "path": "outputs/closed-loop-stage3/run-002/v0-regression/v0-regression-report.json",
+      "absolutePath": "C:\\Users\\Admin\\Documents\\Codex\\safe-bim-layer-stage1-v0-regression\\outputs\\closed-loop-stage3\\run-002\\v0-regression\\v0-regression-report.json",
+      "bytes": 1081,
+      "sha256": "6e9fc31df909f0f66a1c39e57d61e8b168c410cc20e15aeaed86c06fff7f6128",
+      "storage": "COMMITTED"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "action": "create_wall",
+  "createdGuid": "40F79CDC-61BC-43E1-A65C-32E962568F3F",
+  "sourceGuids": [
+    "B492859E-E508-46B3-87ED-0B07C6C580CC"
+  ],
+  "geometry": {
+    "start": {
+      "x": 1704.718814915,
+      "y": 600.706201417
+    },
+    "end": {
+      "x": 1705.218814915,
+      "y": 600.706201417
+    },
+    "homeStory": 0,
+    "z": 0.0
+  },
+  "verification": {
+    "guidPresent": true,
+    "type": "Wall",
+    "homeStory": 0,
+    "bodyCount": 1,
+    "faceMaterialIds": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "jointDistance": 0.0,
+    "z": 0,
+    "homeStoryMatches": true,
+    "sourceGuidSeenBeforeCreate": true,
+    "elementCountBefore": 5305,
+    "elementCountAfter": 5306,
+    "direction": {
+      "x": 0.5,
+      "y": 0.0
+    },
+    "pass": true
+  },
+  "retained": true
+}
