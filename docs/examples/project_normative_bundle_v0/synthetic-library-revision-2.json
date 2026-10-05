@@ -1,0 +1,279 @@
+{
+  "applicabilityRegistry": {
+    "definitions": {
+      "IZHS": {
+        "eq": "IZHS",
+        "input": "project.classification"
+      },
+      "MKD": {
+        "eq": "MKD",
+        "input": "project.classification"
+      }
+    },
+    "id": "synthetic-applicability",
+    "inputBindings": {
+      "building.floorCount": {
+        "acceptedFormat": "integer count",
+        "artifact": "STAGE0",
+        "datumId": "floor_count"
+      },
+      "client.budget": {
+        "acceptedFormat": "confirmed budget number RUB",
+        "artifact": "PROJECT_CONSTRAINT_INPUT",
+        "path": [
+          "constraints",
+          "budget",
+          "value"
+        ]
+      },
+      "intent.cost": {
+        "acceptedFormat": "explicit design goal code",
+        "artifact": "DESIGN_INTENT",
+        "path": [
+          "goals",
+          "cost",
+          "type"
+        ]
+      },
+      "project.classification": {
+        "acceptedFormat": "verified project class code",
+        "artifact": "STAGE0",
+        "datumId": "purpose"
+      },
+      "site.terrainRange": {
+        "acceptedFormat": "confirmed elevation range in explicit survey unit",
+        "artifact": "SITE_CONTEXT",
+        "path": [
+          "terrain",
+          "elevationRange"
+        ]
+      }
+    },
+    "revision": "1",
+    "status": "VERIFIED"
+  },
+  "branches": [
+    {
+      "applicabilityId": "IZHS",
+      "branchId": "IZHS/GENERAL",
+      "domain": "GENERAL",
+      "projectClasses": [
+        "IZHS"
+      ],
+      "requiredRuleIds": [
+        "TEST_RULE_A"
+      ],
+      "status": "VERIFIED"
+    },
+    {
+      "applicabilityId": "MKD",
+      "branchId": "MKD/GENERAL",
+      "domain": "GENERAL",
+      "projectClasses": [
+        "MKD"
+      ],
+      "requiredRuleIds": [
+        "TEST_RULE_A"
+      ],
+      "status": "VERIFIED"
+    }
+  ],
+  "domainRegistry": {
+    "id": "synthetic-coverage",
+    "revision": "1",
+    "scopes": [
+      {
+        "downstreamStage": "SYNTHETIC_PLANNING",
+        "optionalNormativeDomains": [
+          "ROOF"
+        ],
+        "projectClasses": [
+          "IZHS",
+          "MKD"
+        ],
+        "requiredNormativeDomains": [
+          "GENERAL"
+        ]
+      }
+    ],
+    "status": "VERIFIED"
+  },
+  "libraryId": "SYNTHETIC_LIBRARY",
+  "revision": "2",
+  "rules": {
+    "IZHS/GENERAL": [
+      {
+        "applicability": {
+          "eq": "IZHS",
+          "input": "project.classification"
+        },
+        "audit": {
+          "auditId": "synthetic-rule-audit",
+          "ruleFingerprint": "cade8b46c0e5946f263425742b071393c71da5ccfbe2a4d5c5bd0787fc81affd",
+          "status": "VERIFIED"
+        },
+        "branchId": "IZHS/GENERAL",
+        "dependencies": [],
+        "requirement": {
+          "domain": "SYNTHETIC_TEST_DOMAIN",
+          "downstreamDomains": [
+            "SYNTHETIC_PLANNING"
+          ],
+          "operator": "gte",
+          "scope": [
+            "BUILDING"
+          ],
+          "subject": "SYNTHETIC_PROPERTY",
+          "unit": "synthetic-unit",
+          "value": 17
+        },
+        "revision": "1",
+        "revisionMetadata": {
+          "decisionId": "synthetic-revision-decision",
+          "state": "SUPERSEDED_REVISION"
+        },
+        "ruleId": "TEST_RULE_A",
+        "source": {
+          "documentId": "SYNTHETIC_DOCUMENT",
+          "documentRevision": "test-r1",
+          "location": {
+            "appendix": null,
+            "paragraph": "TEST-PARA-1",
+            "section": "synthetic section",
+            "table": null
+          },
+          "sourceHash": "cd42f17b2d8f3e3d3afd31a0d352b9a4a0e7c950cca8d6cf5328fc835e60873a",
+          "verificationStatus": "VERIFIED"
+        },
+        "status": "SUPERSEDED",
+        "supersedes": []
+      },
+      {
+        "applicability": {
+          "eq": "IZHS",
+          "input": "project.classification"
+        },
+        "audit": {
+          "auditId": "synthetic-rule-audit",
+          "ruleFingerprint": "f9a823a24aa7a971f5d25438327721165b3e0cfeefd940f0362a0ecc1961680f",
+          "status": "VERIFIED"
+        },
+        "branchId": "IZHS/GENERAL",
+        "dependencies": [],
+        "requirement": {
+          "domain": "SYNTHETIC_TEST_DOMAIN",
+          "downstreamDomains": [
+            "SYNTHETIC_PLANNING"
+          ],
+          "operator": "gte",
+          "scope": [
+            "BUILDING"
+          ],
+          "subject": "SYNTHETIC_PROPERTY",
+          "unit": "synthetic-unit",
+          "value": 17
+        },
+        "revision": "2",
+        "revisionMetadata": {
+          "decisionId": "synthetic-revision-decision",
+          "state": "ACTIVE_REVISION"
+        },
+        "ruleId": "TEST_RULE_A",
+        "source": {
+          "documentId": "SYNTHETIC_DOCUMENT",
+          "documentRevision": "test-r1",
+          "location": {
+            "appendix": null,
+            "paragraph": "TEST-PARA-1",
+            "section": "synthetic section",
+            "table": null
+          },
+          "sourceHash": "cd42f17b2d8f3e3d3afd31a0d352b9a4a0e7c950cca8d6cf5328fc835e60873a",
+          "verificationStatus": "VERIFIED"
+        },
+        "status": "VERIFIED",
+        "supersedes": [
+          {
+            "branchId": "IZHS/GENERAL",
+            "revision": "1",
+            "ruleId": "TEST_RULE_A"
+          }
+        ]
+      }
+    ],
+    "MKD/GENERAL": [
+      {
+        "applicability": {
+          "eq": "MKD",
+          "input": "project.classification"
+        },
+        "audit": {
+          "auditId": "synthetic-rule-audit",
+          "ruleFingerprint": "8a087d9fcf3a2844d3c5316261a01f5f23d10d36ec637cdf337221634727c71c",
+          "status": "VERIFIED"
+        },
+        "branchId": "MKD/GENERAL",
+        "dependencies": [],
+        "requirement": {
+          "domain": "SYNTHETIC_TEST_DOMAIN",
+          "downstreamDomains": [
+            "SYNTHETIC_PLANNING"
+          ],
+          "operator": "gte",
+          "scope": [
+            "BUILDING"
+          ],
+          "subject": "SYNTHETIC_PROPERTY",
+          "unit": "synthetic-unit",
+          "value": 17
+        },
+        "revision": "1",
+        "revisionMetadata": {
+          "decisionId": "synthetic-revision-decision",
+          "state": "ACTIVE_REVISION"
+        },
+        "ruleId": "TEST_MKD",
+        "source": {
+          "documentId": "SYNTHETIC_DOCUMENT",
+          "documentRevision": "test-r1",
+          "location": {
+            "appendix": null,
+            "paragraph": "TEST-PARA-1",
+            "section": "synthetic section",
+            "table": null
+          },
+          "sourceHash": "cd42f17b2d8f3e3d3afd31a0d352b9a4a0e7c950cca8d6cf5328fc835e60873a",
+          "verificationStatus": "VERIFIED"
+        },
+        "status": "VERIFIED",
+        "supersedes": []
+      }
+    ]
+  },
+  "sources": {
+    "SYNTHETIC_DOCUMENT@test-r1": {
+      "content": "SYNTHETIC normative fixture, not a real SP/GOST. TEST_RULE_A requires synthetic property at least 17 synthetic units.",
+      "documentId": "SYNTHETIC_DOCUMENT",
+      "documentRevision": "test-r1",
+      "sourceHash": "cd42f17b2d8f3e3d3afd31a0d352b9a4a0e7c950cca8d6cf5328fc835e60873a",
+      "synthetic": true,
+      "verificationStatus": "VERIFIED",
+      "verifiedLocations": [
+        {
+          "evidenceKind": "VERIFIED_SOURCE_TEXT",
+          "location": {
+            "appendix": null,
+            "paragraph": "TEST-PARA-1",
+            "section": "synthetic section",
+            "table": null
+          },
+          "sourceHash": "cd42f17b2d8f3e3d3afd31a0d352b9a4a0e7c950cca8d6cf5328fc835e60873a",
+          "text": "SYNTHETIC normative fixture, not a real SP/GOST. TEST_RULE_A requires synthetic property at least 17 synthetic units.",
+          "textHash": "cd42f17b2d8f3e3d3afd31a0d352b9a4a0e7c950cca8d6cf5328fc835e60873a",
+          "verificationId": "synthetic-verification-receipt",
+          "verificationStatus": "VERIFIED"
+        }
+      ]
+    }
+  }
+}

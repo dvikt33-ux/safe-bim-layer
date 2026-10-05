@@ -1,0 +1,7 @@
+{
+  "downstreamStage": "SYNTHETIC_PLANNING",
+  "optionalNormativeDomains": [],
+  "requiredNormativeDomains": [
+    "GENERAL"
+  ]
+}
