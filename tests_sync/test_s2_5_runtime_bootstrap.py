@@ -155,6 +155,15 @@ class RuntimeBootstrapTests(unittest.TestCase):
         self.assertEqual(backend.calls, [])
         self.assertEqual(backend.official_calls, [])
 
+    def test_tapir_write_fence_allows_only_createwalls(self):
+        backend = FakeTapirBackend({})
+        transport = TapirReadTransport(backend=backend)
+        with self.assertRaises(RuntimeError):
+            transport.write_call('DeleteElements', {'elements': []})
+        self.assertEqual(backend.calls, [])
+        transport.write_call('CreateWalls', {'wallsData': []})
+        self.assertEqual(backend.calls, ['CreateWalls'])
+
     def test_host_starts_with_pipe_store_bridge_and_live_binding(self):
         with tempfile.TemporaryDirectory() as tmp:
             data = Path(tmp)
