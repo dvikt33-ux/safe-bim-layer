@@ -1,8 +1,6 @@
-BUILD stage 3
-BUILD PASS 3 {'status': 'PASS', 'files': 36, 'bytes': 8408546}
-VERIFY + exact run A/B deterministic PASS 3 {'status': 'PASS', 'files': 36, 'bytes': 8408546}
-Published local derived pack outputs/closed-loop-stage3/run-002/audit-pack
-BUILD stage 1
-BUILD PASS 1 {'status': 'PASS', 'files': 31, 'bytes': 8552136}
-VERIFY + exact run A/B deterministic PASS 1 {'status': 'PASS', 'files': 31, 'bytes': 8552136}
-Published local derived pack outputs/closed-loop-stage1/audit-pack
+VERIFY stage 3
+VERIFY + exact run A/B deterministic PASS 3 {'status': 'PASS', 'files': 37, 'bytes': 8409508}
+Integrity mirror saved 3
+VERIFY stage 1
+VERIFY + exact run A/B deterministic PASS 1 {'status': 'PASS', 'files': 32, 'bytes': 8552615}
+Integrity mirror saved 1

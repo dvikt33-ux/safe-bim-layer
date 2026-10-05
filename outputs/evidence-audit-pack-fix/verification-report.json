@@ -6,23 +6,6 @@
   "extractorVersion": "1",
   "extractor": "scripts/build_audit_pack.py",
   "verifier": "scripts/verify_audit_pack.py",
-  "toolFiles": [
-    {
-      "path": "scripts/audit_pack.py",
-      "sha256": "c5b78f5fff00e81a66bd6a45072a952fec57dac21f14bb33fc6bc015499041e7",
-      "bytes": 26117
-    },
-    {
-      "path": "scripts/build_audit_pack.py",
-      "sha256": "6477324441b8955504abef7eb8aeabbef83b31ea9534a327754a4d6997128794",
-      "bytes": 1223
-    },
-    {
-      "path": "scripts/verify_audit_pack.py",
-      "sha256": "7f7a4d20481cf856d0922c87c1ffef3575805d47b0ad090b0b458268a24bd027",
-      "bytes": 741
-    }
-  ],
   "tests": {
     "tests_audit_pack": {
       "run": 32,
@@ -54,13 +37,13 @@
     "3": {
       "status": "PASS",
       "path": "outputs/closed-loop-stage3/run-002/audit-pack",
-      "files": 36,
-      "bytes": 8408546,
-      "MiB": 8.019014358520508,
+      "files": 37,
+      "bytes": 8409508,
+      "MiB": 8.01993179321289,
       "manifest": {
         "path": "outputs/closed-loop-stage3/run-002/audit-pack/audit-pack-manifest.json",
-        "sha256": "2d7f79e854cb4f836a0db6a453211baec46d0d776e6a40c816851c8f5f248a5c",
-        "bytes": 13557
+        "sha256": "3c76d02b0785e98247fb0d69e36567ac8c4e32833b8086fc6e94fe99d0aa2f41",
+        "bytes": 14485
       },
       "sourceFullDumps": [
         {
@@ -222,13 +205,13 @@
     "1": {
       "status": "PASS",
       "path": "outputs/closed-loop-stage1/audit-pack",
-      "files": 31,
-      "bytes": 8552136,
-      "MiB": 8.155952453613281,
+      "files": 32,
+      "bytes": 8552615,
+      "MiB": 8.15640926361084,
       "manifest": {
         "path": "outputs/closed-loop-stage1/audit-pack/audit-pack-manifest.json",
-        "sha256": "8b9e60ba0204de5f439aaa9a901ef2ac40b7f29aa93afac7baf82b9c6059341e",
-        "bytes": 9117
+        "sha256": "6ea9801895e2650b8c3d591d7d13fce25e48db48f29f57e89b6175aff9c450bc",
+        "bytes": 9562
       },
       "sourceFullDumps": [
         {
@@ -354,8 +337,8 @@
       "verifier": "PASS"
     }
   },
-  "totalAuditPackBytes": 16960682,
-  "totalAuditPackMiB": 16.17496681213379,
+  "totalAuditPackBytes": 16962123,
+  "totalAuditPackMiB": 16.17634105682373,
   "tamperTests": {
     "modifiedSourceValue": "DETECTED_FAIL",
     "modifiedCreatedWall": "DETECTED_FAIL",
@@ -370,7 +353,8 @@
     "historicalEvidenceChanged": false,
     "mainChanged": false,
     "liveArchicadCalls": 0,
-    "mainBefore": "72e9be15ac3b943d7b6f0c46eaa45aa5798d56bc"
+    "mainBefore": "72e9be15ac3b943d7b6f0c46eaa45aa5798d56bc",
+    "mainAfter": "72e9be15ac3b943d7b6f0c46eaa45aa5798d56bc"
   },
   "blockers": []
 }

@@ -32,6 +32,6 @@ test_whole_model_index_hashes_existing_groups_only (test_audit_pack.AuditPackTes
 test_wrong_created_guid (test_audit_pack.AuditPackTests.test_wrong_created_guid) ... ok
 
 ----------------------------------------------------------------------
-Ran 32 tests in 1.966s
+Ran 32 tests in 1.428s
 
 OK

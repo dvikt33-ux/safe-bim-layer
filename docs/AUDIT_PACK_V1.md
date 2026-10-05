@@ -84,6 +84,8 @@ identity record; it is not claimed to be embedded in the model JSON itself.
   before and two executor after dumps. Archived fingerprints, pre-write hashes,
   factual read-back hashes and source/created records must agree with full dumps.
 - `compact-evidence-check.json` records comparisons; disagreements return CONFLICT.
+- Pack-local `.gitattributes` preserves JSON and its own bytes with `-text`, even
+  under Windows `autocrlf`. It is generated and hashed in the manifest.
 - `audit-pack-manifest.json` hashes every other file and gives its exact originating
   full-dump paths. The manifest does not hash itself (no circular checksum); the
   verifier re-extracts and compares the manifest bytes as well.

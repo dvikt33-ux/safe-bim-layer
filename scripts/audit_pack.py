@@ -435,6 +435,9 @@ def build_pack(root, contract, output):
             blobs[name] = b'[\n'+b',\n'.join(canonical(row) for row in value)+b'\n]\n'
         else:
             blobs[name] = canonical(value)+b'\n'
+    # Directory-local rules preserve exact evidence bytes on Windows checkouts.
+    blobs['.gitattributes'] = b'.gitattributes -text\n*.json -text\n'
+    origins['.gitattributes'] = sorted(s['path'] for s in specs)
     manifest = {'schemaVersion': 1, 'extractorVersion': EXTRACTOR_VERSION,
                 'sourceFullDumps': [{k:s[k] for k in ('id','path','sha256','bytes')} for s in specs],
                 'files': [{'path': name, 'sha256': hashlib.sha256(blob).hexdigest(), 'bytes': len(blob),
