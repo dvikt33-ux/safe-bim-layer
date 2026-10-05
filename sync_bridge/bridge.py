@@ -81,7 +81,7 @@ def _validate_remote_context_request(remote: dict) -> dict:
 class SafeBIMBridge:
     def __init__(self, store: BridgeStore, mailbox, *, owner: PeerIdentity, broker: AIBroker | None = None,
                  instance_id: str = 'bridge-1', clock=None, lease_ttl_seconds: float = 30,
-                 mutex_kernel=None, context_provider=None):
+                 mutex_kernel=None, context_provider=None, archicad_write_api: bool = False):
         self.store = store
         self.mailbox = mailbox
         self.owner = owner
@@ -95,6 +95,7 @@ class SafeBIMBridge:
         self.lease_state = 'NONE'
         self.poller = PollScheduler(mailbox)
         self.context = ContextService(store, _now, context_provider)
+        self.archicad_write_api = bool(archicad_write_api)
         self.connections = ConnectionBoard()
         self.running = False
         self.logs: list[dict] = []
@@ -162,7 +163,7 @@ class SafeBIMBridge:
             'instanceId': self.instance_id,
             'needsAuth': self.needs_auth,
             'connections': self.connections.snapshot(),
-            'archicadWriteApi': False,
+            'archicadWriteApi': self.archicad_write_api,
             'archicadMultiplex': ARCHICAD_MULTIPLEX,
             'etagPolicy': ETAG_POLICY,
             'leaseState': self.lease_state,
