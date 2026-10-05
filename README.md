@@ -78,3 +78,60 @@ python .\scripts\archicad_write_cycles\hosted_morph_cycle.py
 
 The Roof surface-material blocker is recorded separately and is not modified
 by this MVP.
+
+## Request-driven executor
+
+`scripts/archicad_executor.py` runs one structured request per invocation. It
+always reads a fresh Model Dump first. `dry-run` returns the calculated native
+command and parameters without changing the model. `execute` creates the
+element and leaves it in the open model. `delete` removes only the GUID named
+in that request.
+
+Supported actions are `create_wall`, `change_wall_material`, `create_window`,
+`create_slab`, `create_roof`, `create_morph`, and `delete`. For chained Walls,
+pass the prior created GUID as `sourceGuid`; the next invocation derives its
+start point and direction from that Wall's fresh reference line.
+
+Example request (`request.json`):
+
+```json
+{
+  "action": "create_wall",
+  "mode": "execute",
+  "instruction": "Continue the selected wall",
+  "sourceGuid": "GUID-FROM-A-PRIOR-RESPONSE",
+  "length": 1.0
+}
+```
+
+Run it from the repository root:
+
+```powershell
+python .\scripts\archicad_executor.py .\request.json
+```
+
+Use `"mode": "dry-run"` to calculate without creating. A create response
+contains `createdGuid`, `sourceGuids`, derived geometry, and read-back
+verification. Example response:
+
+```json
+{
+  "status": "PASS",
+  "action": "create_wall",
+  "createdGuid": "NEW-GUID",
+  "sourceGuids": ["SOURCE-GUID"],
+  "geometry": {"start": {"x": 10.0, "y": 4.0}, "end": {"x": 11.0, "y": 4.0}},
+  "verification": {"jointDistance": 0.0, "homeStoryMatches": true, "pass": true},
+  "retained": true
+}
+```
+
+To remove a retained element, submit a separate request:
+
+```json
+{"action":"delete","mode":"execute","guid":"GUID-FROM-RESPONSE"}
+```
+
+Each invocation writes its fresh dump and native API evidence under
+`%TEMP%\safe-bim-mvp-evidence\executor` by default. No dump or evidence is
+written into the repository.
