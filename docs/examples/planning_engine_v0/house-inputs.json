@@ -1,0 +1,1184 @@
+{
+  "compilationDomains": {
+    "domains": {
+      "ACCESS": "SINGLE_VALUE",
+      "ADJACENCY": "SINGLE_VALUE",
+      "AREA": "SINGLE_VALUE",
+      "COUNT": "SINGLE_VALUE",
+      "CUSTOM": "SINGLE_VALUE",
+      "DAYLIGHT": "SINGLE_VALUE",
+      "DIMENSION": "SINGLE_VALUE",
+      "EQUIPMENT": "MEMBERSHIP",
+      "FIRE": "SINGLE_VALUE",
+      "GEOMETRY": "SINGLE_VALUE",
+      "LOCATION": "SINGLE_VALUE",
+      "MATERIAL": "SINGLE_VALUE",
+      "ORIENTATION": "SINGLE_VALUE",
+      "PARKING": "SINGLE_VALUE",
+      "SITE": "SINGLE_VALUE",
+      "STRUCTURE": "SINGLE_VALUE",
+      "THERMAL": "SINGLE_VALUE"
+    },
+    "functionalFields": {
+      "EXISTENCE": {
+        "domain": "LOCATION",
+        "subjectTemplate": "SPACE_EXISTS:{scopeId}",
+        "unit": "none"
+      },
+      "RELATIONSHIP": {
+        "domain": "ADJACENCY",
+        "subjectTemplate": "RELATIONSHIP",
+        "unit": "none"
+      },
+      "USER_label": {
+        "domain": "CUSTOM",
+        "subjectTemplate": "USER_LABEL:{subject}",
+        "unit": "none"
+      },
+      "USER_quantity": {
+        "domain": "COUNT",
+        "subjectTemplate": "USER_COUNT:{subject}",
+        "unit": "count"
+      },
+      "accessLevel": {
+        "domain": "CUSTOM",
+        "subjectTemplate": "ACCESSLEVEL:{scopeId}",
+        "unit": "none"
+      },
+      "daylightPreference": {
+        "domain": "CUSTOM",
+        "subjectTemplate": "DAYLIGHTPREFERENCE:{scopeId}",
+        "unit": "none"
+      },
+      "function": {
+        "domain": "CUSTOM",
+        "subjectTemplate": "SPACE_FUNCTION:{scopeId}",
+        "unit": "none"
+      },
+      "functionalZone": {
+        "domain": "CUSTOM",
+        "subjectTemplate": "FUNCTIONALZONE:{scopeId}",
+        "unit": "none"
+      },
+      "noiseGeneration": {
+        "domain": "CUSTOM",
+        "subjectTemplate": "NOISEGENERATION:{scopeId}",
+        "unit": "none"
+      },
+      "noiseSensitivity": {
+        "domain": "CUSTOM",
+        "subjectTemplate": "NOISESENSITIVITY:{scopeId}",
+        "unit": "none"
+      },
+      "preferredFloor": {
+        "domain": "LOCATION",
+        "subjectTemplate": "SPACE_LOCATION:{scopeId}",
+        "unit": "none"
+      },
+      "privacyLevel": {
+        "domain": "CUSTOM",
+        "subjectTemplate": "PRIVACYLEVEL:{scopeId}",
+        "unit": "none"
+      },
+      "quantity": {
+        "domain": "COUNT",
+        "subjectTemplate": "SPACE_QUANTITY:{scopeId}",
+        "unit": "count"
+      },
+      "requestedArea": {
+        "domain": "AREA",
+        "subjectTemplate": "SPACE_AREA:{scopeId}",
+        "unit": "m2"
+      },
+      "specialEquipment": {
+        "domain": "EQUIPMENT",
+        "subjectTemplate": "EQUIPMENT",
+        "unit": "none"
+      }
+    },
+    "id": "synthetic-compilation-domains",
+    "normativeDomainAliases": {
+      "SYNTHETIC_TEST_DOMAIN": "GEOMETRY"
+    },
+    "projectTypes": {
+      "ACCESS_REQUIRED": {
+        "domain": "ACCESS",
+        "subjectTemplate": "ACCESS",
+        "unit": "PRESERVE_SOURCE"
+      },
+      "AREA_LIMIT": {
+        "domain": "AREA",
+        "subjectTemplate": "{subject}",
+        "unit": "PRESERVE_SOURCE"
+      },
+      "BUDGET_LIMIT": {
+        "domain": "CUSTOM",
+        "subjectTemplate": "CLIENT_BUDGET",
+        "unit": "PRESERVE_SOURCE"
+      },
+      "CAPACITY_FIXED": {
+        "domain": "COUNT",
+        "subjectTemplate": "{subject}",
+        "unit": "PRESERVE_SOURCE"
+      },
+      "CONSTRUCTION_SYSTEM_PROHIBITED": {
+        "domain": "STRUCTURE",
+        "subjectTemplate": "CONSTRUCTION_SYSTEM",
+        "unit": "PRESERVE_SOURCE"
+      },
+      "CONSTRUCTION_SYSTEM_REQUIRED": {
+        "domain": "STRUCTURE",
+        "subjectTemplate": "CONSTRUCTION_SYSTEM",
+        "unit": "PRESERVE_SOURCE"
+      },
+      "CUSTOM": {
+        "domain": "CUSTOM",
+        "subjectTemplate": "{subject}",
+        "unit": "PRESERVE_SOURCE"
+      },
+      "DEMOLITION_LIMIT": {
+        "domain": "SITE",
+        "subjectTemplate": "{subject}",
+        "unit": "PRESERVE_SOURCE"
+      },
+      "DIMENSION_LIMIT": {
+        "domain": "DIMENSION",
+        "subjectTemplate": "{subject}",
+        "unit": "PRESERVE_SOURCE"
+      },
+      "EQUIPMENT_PROHIBITED": {
+        "domain": "EQUIPMENT",
+        "subjectTemplate": "EQUIPMENT",
+        "unit": "PRESERVE_SOURCE"
+      },
+      "EQUIPMENT_REQUIRED": {
+        "domain": "EQUIPMENT",
+        "subjectTemplate": "EQUIPMENT",
+        "unit": "PRESERVE_SOURCE"
+      },
+      "EXISTING_OBJECT_PRESERVE": {
+        "domain": "SITE",
+        "subjectTemplate": "OBJECT:{scopeId}",
+        "unit": "PRESERVE_SOURCE"
+      },
+      "EXISTING_OBJECT_REMOVE_REQUIRED": {
+        "domain": "SITE",
+        "subjectTemplate": "OBJECT:{scopeId}",
+        "unit": "PRESERVE_SOURCE"
+      },
+      "FLOOR_COUNT_FIXED": {
+        "domain": "COUNT",
+        "subjectTemplate": "FLOOR_COUNT",
+        "unit": "PRESERVE_SOURCE"
+      },
+      "HEIGHT_LIMIT_PROJECT": {
+        "domain": "DIMENSION",
+        "subjectTemplate": "BUILDING_HEIGHT",
+        "unit": "PRESERVE_SOURCE"
+      },
+      "MATERIAL_PROHIBITED": {
+        "domain": "MATERIAL",
+        "subjectTemplate": "MATERIAL",
+        "unit": "PRESERVE_SOURCE"
+      },
+      "MATERIAL_REQUIRED": {
+        "domain": "MATERIAL",
+        "subjectTemplate": "MATERIAL",
+        "unit": "PRESERVE_SOURCE"
+      },
+      "ORIENTATION_REQUIRED": {
+        "domain": "ORIENTATION",
+        "subjectTemplate": "BUILDING_ORIENTATION",
+        "unit": "PRESERVE_SOURCE"
+      },
+      "PARKING_COUNT_FIXED": {
+        "domain": "PARKING",
+        "subjectTemplate": "PARKING_COUNT",
+        "unit": "PRESERVE_SOURCE"
+      },
+      "PHASING_REQUIRED": {
+        "domain": "CUSTOM",
+        "subjectTemplate": "PHASING",
+        "unit": "PRESERVE_SOURCE"
+      },
+      "SITE_ZONE_PROHIBITED": {
+        "domain": "SITE",
+        "subjectTemplate": "ZONE:{scopeId}",
+        "unit": "PRESERVE_SOURCE"
+      },
+      "SITE_ZONE_REQUIRED": {
+        "domain": "SITE",
+        "subjectTemplate": "ZONE:{scopeId}",
+        "unit": "PRESERVE_SOURCE"
+      },
+      "SPACE_LOCATION_PROHIBITED": {
+        "domain": "LOCATION",
+        "subjectTemplate": "SPACE_LOCATION:{scopeId}",
+        "unit": "PRESERVE_SOURCE"
+      },
+      "SPACE_LOCATION_REQUIRED": {
+        "domain": "LOCATION",
+        "subjectTemplate": "SPACE_LOCATION:{scopeId}",
+        "unit": "PRESERVE_SOURCE"
+      },
+      "UTILITY_CONNECTION_FIXED": {
+        "domain": "EQUIPMENT",
+        "subjectTemplate": "UTILITY:{scopeId}",
+        "unit": "PRESERVE_SOURCE"
+      }
+    },
+    "revision": "1",
+    "status": "VERIFIED",
+    "subjectAliases": {
+      "AREA": {
+        "REQUESTED_AREA": "SPACE_AREA:{scopeId}"
+      },
+      "COUNT": {
+        "SPACE_QUANTITY": "SPACE_QUANTITY:{scopeId}"
+      },
+      "DIMENSION": {
+        "DEPTH": "BUILDING_DEPTH",
+        "WIDTH": "BUILDING_WIDTH"
+      }
+    },
+    "subjectReferences": {
+      "OBJECT:": "OBJECT",
+      "SPACE_AREA:": "SPACE",
+      "SPACE_EXISTS:": "SPACE",
+      "SPACE_LOCATION:": "SPACE",
+      "SPACE_QUANTITY:": "SPACE"
+    }
+  },
+  "compilationReferences": {
+    "id": "synthetic-scope-overlap",
+    "overlaps": {
+      "BUILDING": [
+        "FLOOR",
+        "SPACE"
+      ],
+      "PROJECT": [
+        "BUILDING",
+        "FLOOR",
+        "SPACE",
+        "SITE",
+        "OBJECT",
+        "ZONE",
+        "SYSTEM"
+      ],
+      "SITE": [
+        "OBJECT",
+        "ZONE"
+      ]
+    },
+    "revision": "1",
+    "status": "VERIFIED"
+  },
+  "designIntentSources": [
+    {
+      "approved": true,
+      "id": "intent",
+      "inspected": true,
+      "kind": "USER_BRIEF",
+      "revision": "v1",
+      "statements": [
+        {
+          "goalId": "compact",
+          "id": "compact",
+          "kind": "GOAL",
+          "priority": 1,
+          "scope": [
+            "PROJECT"
+          ],
+          "source": "USER_PREFERENCE",
+          "type": "COMPACTNESS"
+        }
+      ]
+    }
+  ],
+  "functionalProgramSources": [
+    {
+      "approved": true,
+      "id": "program",
+      "inspected": true,
+      "kind": "USER_BRIEF",
+      "revision": "v1",
+      "statements": [
+        {
+          "function": "ENTRANCE",
+          "id": "entry-intent",
+          "kind": "SPACE",
+          "quantity": 1,
+          "requestedArea": {
+            "unit": "m2",
+            "value": 6
+          },
+          "spaceId": "entry"
+        },
+        {
+          "function": "KITCHEN",
+          "id": "kitchen-intent",
+          "kind": "SPACE",
+          "quantity": 1,
+          "requestedArea": {
+            "unit": "m2",
+            "value": 16
+          },
+          "spaceId": "kitchen"
+        },
+        {
+          "function": "LIVING_ROOM",
+          "id": "living-intent",
+          "kind": "SPACE",
+          "quantity": 1,
+          "requestedArea": {
+            "unit": "m2",
+            "value": 25
+          },
+          "spaceId": "living"
+        },
+        {
+          "function": "BATHROOM",
+          "id": "bathroom-intent",
+          "kind": "SPACE",
+          "quantity": 1,
+          "requestedArea": {
+            "unit": "m2",
+            "value": 5
+          },
+          "spaceId": "bathroom"
+        },
+        {
+          "function": "BEDROOM",
+          "id": "bedroom-intent",
+          "kind": "SPACE",
+          "quantity": 2,
+          "requestedArea": {
+            "unit": "m2",
+            "value": 14
+          },
+          "spaceId": "bedroom"
+        },
+        {
+          "function": "BATHROOM",
+          "id": "bathroom_upper-intent",
+          "kind": "SPACE",
+          "quantity": 1,
+          "requestedArea": {
+            "unit": "m2",
+            "value": 5
+          },
+          "spaceId": "bathroom_upper"
+        },
+        {
+          "category": "USER_REQUIREMENT",
+          "from": "entry",
+          "id": "entry-living-REQUIRED_ACCESS",
+          "kind": "RELATIONSHIP",
+          "to": "living",
+          "type": "REQUIRED_ACCESS"
+        },
+        {
+          "category": "USER_REQUIREMENT",
+          "from": "kitchen",
+          "id": "kitchen-living-REQUIRED_ADJACENCY",
+          "kind": "RELATIONSHIP",
+          "to": "living",
+          "type": "REQUIRED_ADJACENCY"
+        }
+      ]
+    }
+  ],
+  "normativeScope": {
+    "downstreamStage": "SYNTHETIC_PLANNING",
+    "optionalNormativeDomains": [],
+    "requiredNormativeDomains": [
+      "GENERAL"
+    ]
+  },
+  "plannerPolicy": {
+    "adjacencyEpsilon": 0.01,
+    "basisType": "PLANNER_HEURISTIC",
+    "circulationWidth": 1.2,
+    "defaultAspectRatios": [
+      1.0,
+      1.25,
+      1.5,
+      2.0
+    ],
+    "defaultRoomArea": 12.0,
+    "floorAliases": {
+      "ground": "floor-1",
+      "upper": "floor-2"
+    },
+    "maxCandidates": 24,
+    "maxFloors": 16,
+    "maxGenerationAttempts": 72,
+    "maxImprovementPasses": 4,
+    "maxPlacementAttempts": 64,
+    "maxSpaces": 128,
+    "numericTolerance": 1e-07,
+    "policyId": "rectangular-planner-v0",
+    "revision": "1",
+    "scoringRegistry": {
+      "revision": "1",
+      "weights": {
+        "AVOID_ADJACENCY": 2.0,
+        "COMPACTNESS": 1.0,
+        "PREFERRED_ADJACENCY": 2.0,
+        "REQUESTED_AREA": 1.0,
+        "SPACE_LOCATION": 1.0,
+        "SPACIOUSNESS": 1.0,
+        "STRUCTURAL_REGULARITY": 1.0
+      }
+    }
+  },
+  "projectConstraintSources": [
+    {
+      "approved": true,
+      "basis": "NON_NORMATIVE",
+      "category": "CLIENT_REQUIREMENT",
+      "id": "client",
+      "inspected": true,
+      "revision": "v1",
+      "statements": [
+        {
+          "entityId": "floor-1",
+          "entityType": "FLOOR",
+          "id": "floor-1",
+          "kind": "SCOPE_ENTITY"
+        },
+        {
+          "entityId": "floor-2",
+          "entityType": "FLOOR",
+          "id": "floor-2",
+          "kind": "SCOPE_ENTITY"
+        },
+        {
+          "binding": true,
+          "constraintId": "width",
+          "id": "width",
+          "kind": "CONSTRAINT",
+          "operator": "<=",
+          "scope": [
+            "BUILDING"
+          ],
+          "subject": "WIDTH",
+          "type": "DIMENSION_LIMIT",
+          "unit": "m",
+          "value": 20
+        },
+        {
+          "binding": true,
+          "constraintId": "depth",
+          "id": "depth",
+          "kind": "CONSTRAINT",
+          "operator": "<=",
+          "scope": [
+            "BUILDING"
+          ],
+          "subject": "DEPTH",
+          "type": "DIMENSION_LIMIT",
+          "unit": "m",
+          "value": 15
+        },
+        {
+          "binding": true,
+          "constraintId": "location-entry",
+          "id": "location-entry",
+          "kind": "CONSTRAINT",
+          "operator": "REQUIRE",
+          "scope": [
+            "SPACE:entry"
+          ],
+          "type": "SPACE_LOCATION_REQUIRED",
+          "unit": "none",
+          "value": "FLOOR:floor-1"
+        },
+        {
+          "binding": true,
+          "constraintId": "location-kitchen",
+          "id": "location-kitchen",
+          "kind": "CONSTRAINT",
+          "operator": "REQUIRE",
+          "scope": [
+            "SPACE:kitchen"
+          ],
+          "type": "SPACE_LOCATION_REQUIRED",
+          "unit": "none",
+          "value": "FLOOR:floor-1"
+        },
+        {
+          "binding": true,
+          "constraintId": "location-living",
+          "id": "location-living",
+          "kind": "CONSTRAINT",
+          "operator": "REQUIRE",
+          "scope": [
+            "SPACE:living"
+          ],
+          "type": "SPACE_LOCATION_REQUIRED",
+          "unit": "none",
+          "value": "FLOOR:floor-1"
+        },
+        {
+          "binding": true,
+          "constraintId": "location-bathroom",
+          "id": "location-bathroom",
+          "kind": "CONSTRAINT",
+          "operator": "REQUIRE",
+          "scope": [
+            "SPACE:bathroom"
+          ],
+          "type": "SPACE_LOCATION_REQUIRED",
+          "unit": "none",
+          "value": "FLOOR:floor-1"
+        },
+        {
+          "binding": true,
+          "constraintId": "location-bedroom",
+          "id": "location-bedroom",
+          "kind": "CONSTRAINT",
+          "operator": "REQUIRE",
+          "scope": [
+            "SPACE:bedroom"
+          ],
+          "type": "SPACE_LOCATION_REQUIRED",
+          "unit": "none",
+          "value": "FLOOR:floor-2"
+        },
+        {
+          "binding": true,
+          "constraintId": "location-bathroom_upper",
+          "id": "location-bathroom_upper",
+          "kind": "CONSTRAINT",
+          "operator": "REQUIRE",
+          "scope": [
+            "SPACE:bathroom_upper"
+          ],
+          "type": "SPACE_LOCATION_REQUIRED",
+          "unit": "none",
+          "value": "FLOOR:floor-2"
+        }
+      ],
+      "verification": "CONFIRMED"
+    }
+  ],
+  "siteRequirements": {
+    "approved": true,
+    "downstreamStage": "CURRENT_SITE_INTAKE",
+    "id": "site-inputs",
+    "requiredInputs": [
+      "siteId",
+      "coordinateSystem",
+      "boundary",
+      "orientation",
+      "access:VEHICLE_ACCESS"
+    ],
+    "revision": "v1"
+  },
+  "siteSources": [
+    {
+      "id": "survey",
+      "inspected": true,
+      "kind": "COORDINATES",
+      "revision": "v1",
+      "statements": [
+        {
+          "id": "identity",
+          "kind": "SITE",
+          "label": "synthetic acceptance site",
+          "siteId": "test-site"
+        },
+        {
+          "id": "crs",
+          "kind": "COORDINATE_SYSTEM",
+          "metadata": {
+            "axisOrder": "XY",
+            "datum": "survey-frame",
+            "id": "site-grid",
+            "kind": "LOCAL_CARTESIAN",
+            "orientation": "survey-grid",
+            "unit": "m"
+          }
+        },
+        {
+          "geometry": {
+            "coordinateSystemId": "site-grid",
+            "coordinates": [
+              [
+                [
+                  0,
+                  0
+                ],
+                [
+                  30,
+                  0
+                ],
+                [
+                  30,
+                  20
+                ],
+                [
+                  0,
+                  20
+                ],
+                [
+                  0,
+                  0
+                ]
+              ]
+            ],
+            "type": "Polygon",
+            "unit": "m"
+          },
+          "id": "boundary",
+          "kind": "BOUNDARY"
+        },
+        {
+          "coordinateOrientation": "survey-grid",
+          "coordinateSystemId": "site-grid",
+          "id": "north",
+          "kind": "ORIENTATION",
+          "northVector": [
+            0,
+            1
+          ]
+        },
+        {
+          "accessId": "driveway",
+          "description": "confirmed entry",
+          "geometry": {
+            "coordinateSystemId": "site-grid",
+            "coordinates": [
+              0,
+              5
+            ],
+            "type": "Point",
+            "unit": "m"
+          },
+          "id": "vehicle",
+          "kind": "ACCESS",
+          "type": "VEHICLE_ACCESS"
+        },
+        {
+          "geometry": {
+            "coordinateSystemId": "site-grid",
+            "coordinates": [
+              [
+                [
+                  5,
+                  5
+                ],
+                [
+                  10,
+                  5
+                ],
+                [
+                  10,
+                  10
+                ],
+                [
+                  5,
+                  10
+                ],
+                [
+                  5,
+                  5
+                ]
+              ]
+            ],
+            "type": "Polygon",
+            "unit": "m"
+          },
+          "id": "building",
+          "kind": "OBJECT",
+          "objectId": "existing-building",
+          "type": "BUILDING"
+        },
+        {
+          "description": "confirmed road along western boundary",
+          "featureId": "road-noise",
+          "id": "noise",
+          "kind": "CONTEXT",
+          "type": "NOISE_SOURCE"
+        },
+        {
+          "id": "view",
+          "kind": "PREFERENCE",
+          "preferenceId": "view",
+          "scope": [
+            "SITE"
+          ],
+          "text": "user prefers a view towards the garden",
+          "topic": "VIEW"
+        }
+      ],
+      "verification": "CONFIRMED"
+    }
+  ],
+  "stage0Registry": {
+    "approved": true,
+    "branches": [
+      {
+        "blocking": true,
+        "id": "IZHS",
+        "reason": "Select the supplied project branch",
+        "requiredBy": [
+          "STAGE_0/route"
+        ],
+        "when": {
+          "equals": "IZHS",
+          "input": "purpose"
+        }
+      },
+      {
+        "blocking": true,
+        "id": "MKD",
+        "reason": "Select the supplied project branch",
+        "requiredBy": [
+          "STAGE_0/route"
+        ],
+        "when": {
+          "equals": "MKD",
+          "input": "purpose"
+        }
+      },
+      {
+        "blocking": true,
+        "id": "INDUSTRIAL",
+        "reason": "Select the supplied project branch",
+        "requiredBy": [
+          "STAGE_0/route"
+        ],
+        "when": {
+          "equals": "INDUSTRIAL",
+          "input": "purpose"
+        }
+      },
+      {
+        "blocking": true,
+        "id": "RETAIL",
+        "reason": "Select the supplied project branch",
+        "requiredBy": [
+          "STAGE_0/route"
+        ],
+        "when": {
+          "equals": "RETAIL",
+          "input": "purpose"
+        }
+      }
+    ],
+    "classificationInputs": [
+      "purpose"
+    ],
+    "id": "fixture-intake",
+    "inputs": [
+      {
+        "acceptedFormats": [
+          "string"
+        ],
+        "blocking": true,
+        "branches": [],
+        "enum": [
+          "IZHS",
+          "MKD",
+          "INDUSTRIAL",
+          "RETAIL"
+        ],
+        "id": "purpose",
+        "name": "Project purpose",
+        "owner": "USER_CLIENT_SURVEYOR_MUST_PROVIDE",
+        "priority": "CLASSIFICATION_BLOCKER",
+        "reason": "Select the project branch and exclude unrelated building classes",
+        "requiredBy": [
+          "STAGE_0/CLASSIFY",
+          "STAGE_0/APPLICABILITY"
+        ],
+        "sourceKinds": [
+          "USER_BRIEF",
+          "PROJECT_FILE",
+          "USER_CORRECTION"
+        ],
+        "type": "string",
+        "unit": null
+      },
+      {
+        "acceptedFormats": [
+          "municipality, region and country or approved site document"
+        ],
+        "blocking": true,
+        "branches": [
+          "IZHS"
+        ],
+        "id": "municipality",
+        "name": "Municipality and jurisdiction",
+        "owner": "USER_CLIENT_SURVEYOR_MUST_PROVIDE",
+        "priority": "SITE_GEOMETRY_BLOCKER",
+        "reason": "Route the project to its jurisdiction; building geometry cannot establish municipality",
+        "requiredBy": [
+          "STAGE_0/APPLICABILITY/jurisdiction"
+        ],
+        "sourceKinds": [
+          "USER_BRIEF",
+          "PROJECT_FILE",
+          "USER_CORRECTION"
+        ],
+        "type": "string",
+        "unit": null
+      },
+      {
+        "acceptedFormats": [
+          "positive integer or verified storey inventory"
+        ],
+        "blocking": true,
+        "branches": [
+          "IZHS"
+        ],
+        "id": "floor_count",
+        "minimum": 1,
+        "name": "Verified storey count",
+        "owner": "USER_CLIENT_SURVEYOR_MUST_PROVIDE",
+        "priority": "SITE_GEOMETRY_BLOCKER",
+        "reason": "Establish the storey classification from a verified inventory or explicit project brief",
+        "requiredBy": [
+          "STAGE_0/CLASSIFY/storeys"
+        ],
+        "sourceKinds": [
+          "USER_BRIEF",
+          "PROJECT_FILE",
+          "USER_CORRECTION"
+        ],
+        "type": "integer",
+        "unit": "count"
+      },
+      {
+        "acceptedFormats": [
+          "array"
+        ],
+        "blocking": true,
+        "branches": [
+          "MKD"
+        ],
+        "id": "apartments",
+        "name": "Apartment schedule",
+        "owner": "USER_CLIENT_SURVEYOR_MUST_PROVIDE",
+        "priority": "SITE_GEOMETRY_BLOCKER",
+        "reason": "Verified Apartment schedule is needed to resolve this dependency",
+        "requiredBy": [
+          "STAGE_0/apartments"
+        ],
+        "sourceKinds": [
+          "USER_BRIEF",
+          "PROJECT_FILE",
+          "USER_CORRECTION"
+        ],
+        "type": "array",
+        "unit": null
+      },
+      {
+        "acceptedFormats": [
+          "string"
+        ],
+        "blocking": true,
+        "branches": [
+          "INDUSTRIAL"
+        ],
+        "id": "process",
+        "name": "Industrial process",
+        "owner": "USER_CLIENT_SURVEYOR_MUST_PROVIDE",
+        "priority": "SITE_GEOMETRY_BLOCKER",
+        "reason": "Verified Industrial process is needed to resolve this dependency",
+        "requiredBy": [
+          "STAGE_0/process"
+        ],
+        "sourceKinds": [
+          "USER_BRIEF",
+          "PROJECT_FILE",
+          "USER_CORRECTION"
+        ],
+        "type": "string",
+        "unit": null
+      },
+      {
+        "acceptedFormats": [
+          "integer"
+        ],
+        "blocking": true,
+        "branches": [
+          "RETAIL"
+        ],
+        "id": "customers",
+        "name": "Retail occupancy",
+        "owner": "USER_CLIENT_SURVEYOR_MUST_PROVIDE",
+        "priority": "SITE_GEOMETRY_BLOCKER",
+        "reason": "Verified Retail occupancy is needed to resolve this dependency",
+        "requiredBy": [
+          "STAGE_0/customers"
+        ],
+        "sourceKinds": [
+          "USER_BRIEF",
+          "PROJECT_FILE",
+          "USER_CORRECTION"
+        ],
+        "type": "integer",
+        "unit": "persons"
+      }
+    ],
+    "revision": "v1"
+  },
+  "stage0Sources": [
+    {
+      "facts": {
+        "floor_count": {
+          "method": "explicit supplied record",
+          "unit": "count",
+          "value": 2,
+          "verification": "VERIFIED"
+        },
+        "municipality": {
+          "method": "explicit supplied record",
+          "unit": null,
+          "value": "fixture-city",
+          "verification": "VERIFIED"
+        },
+        "purpose": {
+          "method": "explicit supplied record",
+          "unit": null,
+          "value": "IZHS",
+          "verification": "VERIFIED"
+        }
+      },
+      "id": "brief",
+      "inspected": true,
+      "kind": "USER_BRIEF",
+      "revision": "v1"
+    }
+  ],
+  "syntheticNormativeFixture": {
+    "applicabilityRegistry": {
+      "definitions": {
+        "IZHS": {
+          "eq": "IZHS",
+          "input": "project.classification"
+        },
+        "MKD": {
+          "eq": "MKD",
+          "input": "project.classification"
+        }
+      },
+      "id": "synthetic-applicability",
+      "inputBindings": {
+        "building.floorCount": {
+          "acceptedFormat": "integer count",
+          "artifact": "STAGE0",
+          "datumId": "floor_count"
+        },
+        "client.budget": {
+          "acceptedFormat": "confirmed budget number RUB",
+          "artifact": "PROJECT_CONSTRAINT_INPUT",
+          "path": [
+            "constraints",
+            "budget",
+            "value"
+          ]
+        },
+        "intent.cost": {
+          "acceptedFormat": "explicit design goal code",
+          "artifact": "DESIGN_INTENT",
+          "path": [
+            "goals",
+            "cost",
+            "type"
+          ]
+        },
+        "project.classification": {
+          "acceptedFormat": "verified project class code",
+          "artifact": "STAGE0",
+          "datumId": "purpose"
+        },
+        "site.terrainRange": {
+          "acceptedFormat": "confirmed elevation range in explicit survey unit",
+          "artifact": "SITE_CONTEXT",
+          "path": [
+            "terrain",
+            "elevationRange"
+          ]
+        }
+      },
+      "revision": "1",
+      "status": "VERIFIED"
+    },
+    "branches": [
+      {
+        "applicabilityId": "IZHS",
+        "branchId": "IZHS/GENERAL",
+        "domain": "GENERAL",
+        "projectClasses": [
+          "IZHS"
+        ],
+        "requiredRuleIds": [
+          "TEST_RULE_A"
+        ],
+        "status": "VERIFIED"
+      },
+      {
+        "applicabilityId": "MKD",
+        "branchId": "MKD/GENERAL",
+        "domain": "GENERAL",
+        "projectClasses": [
+          "MKD"
+        ],
+        "requiredRuleIds": [
+          "TEST_RULE_A"
+        ],
+        "status": "VERIFIED"
+      }
+    ],
+    "domainRegistry": {
+      "id": "synthetic-coverage",
+      "revision": "1",
+      "scopes": [
+        {
+          "downstreamStage": "SYNTHETIC_PLANNING",
+          "optionalNormativeDomains": [
+            "ROOF"
+          ],
+          "projectClasses": [
+            "IZHS",
+            "MKD"
+          ],
+          "requiredNormativeDomains": [
+            "GENERAL"
+          ]
+        }
+      ],
+      "status": "VERIFIED"
+    },
+    "libraryId": "SYNTHETIC_LIBRARY",
+    "revision": "1",
+    "rules": {
+      "IZHS/GENERAL": [
+        {
+          "applicability": {
+            "eq": "IZHS",
+            "input": "project.classification"
+          },
+          "audit": {
+            "auditId": "synthetic-rule-audit",
+            "ruleFingerprint": "37286bf83886a3cb502c43a10f2b5ea01d129cd83e3f3eedaf9acca983af2255",
+            "status": "VERIFIED"
+          },
+          "branchId": "IZHS/GENERAL",
+          "dependencies": [],
+          "requirement": {
+            "domain": "ADJACENCY",
+            "downstreamDomains": [
+              "SYNTHETIC_PLANNING"
+            ],
+            "operator": "eq",
+            "scope": [
+              "SPACE:living"
+            ],
+            "subject": "RELATIONSHIP:EXTERNAL_ACCESS:living:EXTERIOR",
+            "unit": "none",
+            "value": "EXTERNAL_ACCESS"
+          },
+          "revision": "1",
+          "revisionMetadata": {
+            "decisionId": "synthetic-revision-decision",
+            "state": "ACTIVE_REVISION"
+          },
+          "ruleId": "TEST_RULE_A",
+          "source": {
+            "documentId": "SYNTHETIC_DOCUMENT",
+            "documentRevision": "test-r1",
+            "location": {
+              "appendix": null,
+              "paragraph": "TEST-PARA-1",
+              "section": "synthetic section",
+              "table": null
+            },
+            "sourceHash": "97d7f91ccdfad0e3c3a571a90c8b6ac978b33714dec4abb4ba34cb94d99100c0",
+            "verificationStatus": "VERIFIED"
+          },
+          "status": "VERIFIED",
+          "supersedes": []
+        }
+      ],
+      "MKD/GENERAL": [
+        {
+          "applicability": {
+            "eq": "MKD",
+            "input": "project.classification"
+          },
+          "audit": {
+            "auditId": "synthetic-rule-audit",
+            "ruleFingerprint": "8a087d9fcf3a2844d3c5316261a01f5f23d10d36ec637cdf337221634727c71c",
+            "status": "VERIFIED"
+          },
+          "branchId": "MKD/GENERAL",
+          "dependencies": [],
+          "requirement": {
+            "domain": "SYNTHETIC_TEST_DOMAIN",
+            "downstreamDomains": [
+              "SYNTHETIC_PLANNING"
+            ],
+            "operator": "gte",
+            "scope": [
+              "BUILDING"
+            ],
+            "subject": "SYNTHETIC_PROPERTY",
+            "unit": "synthetic-unit",
+            "value": 17
+          },
+          "revision": "1",
+          "revisionMetadata": {
+            "decisionId": "synthetic-revision-decision",
+            "state": "ACTIVE_REVISION"
+          },
+          "ruleId": "TEST_MKD",
+          "source": {
+            "documentId": "SYNTHETIC_DOCUMENT",
+            "documentRevision": "test-r1",
+            "location": {
+              "appendix": null,
+              "paragraph": "TEST-PARA-1",
+              "section": "synthetic section",
+              "table": null
+            },
+            "sourceHash": "cd42f17b2d8f3e3d3afd31a0d352b9a4a0e7c950cca8d6cf5328fc835e60873a",
+            "verificationStatus": "VERIFIED"
+          },
+          "status": "VERIFIED",
+          "supersedes": []
+        }
+      ]
+    },
+    "sources": {
+      "SYNTHETIC_DOCUMENT@test-r1": {
+        "content": "SYNTHETIC planning test requirement: {'domain': 'ADJACENCY', 'subject': 'RELATIONSHIP:EXTERNAL_ACCESS:living:EXTERIOR', 'operator': 'eq', 'value': 'EXTERNAL_ACCESS', 'unit': 'none', 'scope': ['SPACE:living'], 'downstreamDomains': ['SYNTHETIC_PLANNING']}",
+        "documentId": "SYNTHETIC_DOCUMENT",
+        "documentRevision": "test-r1",
+        "sourceHash": "97d7f91ccdfad0e3c3a571a90c8b6ac978b33714dec4abb4ba34cb94d99100c0",
+        "synthetic": true,
+        "verificationStatus": "VERIFIED",
+        "verifiedLocations": [
+          {
+            "evidenceKind": "VERIFIED_SOURCE_TEXT",
+            "location": {
+              "appendix": null,
+              "paragraph": "TEST-PARA-1",
+              "section": "synthetic section",
+              "table": null
+            },
+            "sourceHash": "97d7f91ccdfad0e3c3a571a90c8b6ac978b33714dec4abb4ba34cb94d99100c0",
+            "text": "SYNTHETIC planning test requirement: {'domain': 'ADJACENCY', 'subject': 'RELATIONSHIP:EXTERNAL_ACCESS:living:EXTERIOR', 'operator': 'eq', 'value': 'EXTERNAL_ACCESS', 'unit': 'none', 'scope': ['SPACE:living'], 'downstreamDomains': ['SYNTHETIC_PLANNING']}",
+            "textHash": "97d7f91ccdfad0e3c3a571a90c8b6ac978b33714dec4abb4ba34cb94d99100c0",
+            "verificationId": "synthetic-verification-receipt",
+            "verificationStatus": "VERIFIED"
+          }
+        ]
+      }
+    }
+  }
+}
