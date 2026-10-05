@@ -135,3 +135,22 @@ To remove a retained element, submit a separate request:
 Each invocation writes its fresh dump and native API evidence under
 `%TEMP%\safe-bim-mvp-evidence\executor` by default. No dump or evidence is
 written into the repository.
+
+## Plain language adapter
+
+The thin `scripts/archicad_chat_executor.py` adapter reads a fresh dump,
+translates a small set of Russian instructions into an `archicad_executor.py`
+request, then returns its read-back result. It currently translates Wall
+continuations and Slab creation. Window placement returns `NEEDS_SELECTION`
+with Wall GUID candidates because this instruction alone does not identify a
+host in a large model.
+
+```powershell
+python .\scripts\archicad_chat_executor.py "Продолжи последнюю созданную стену ещё на 1 метр."
+python .\scripts\archicad_chat_executor.py '{"instruction":"Продолжи последнюю созданную стену ещё на 1 метр","mode":"dry-run"}'
+```
+
+For “last created Wall”, the adapter uses the unique short straight Wall whose
+begin point joins one collinear predecessor and whose end remains open. It
+returns `NEEDS_SELECTION` when the current geometry does not yield one unique
+candidate. It does not use the element array order as creation time.
