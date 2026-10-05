@@ -32,6 +32,18 @@ The Job stores goalId, original specification, acceptance criteria, state, itera
 
 The JSON snapshot is saved before the mock execution call, after each transition, and on terminal decisions. It retains the full ordered evidence trail. Stage 2 does not implement restart/resume or reconciliation.
 
+### Completion: stale observations and no progress
+
+The initial `fab04cf88d3cd621faf3a9f5a6f417290417e620` submission was NOT YET VERIFIED after independent audit: it omitted stale-model and no-progress detection. Its original 10-criterion report below is historical and does not cover the full Stage 2 gate. The completion report explicitly contains all 20 criteria from the completion contract.
+
+Every PLANNED decision now records `plannedAgainstModelIdentity` and `plannedAgainstModelHash`. A separate offline `ModelCheck.check(reference) -> ModelFingerprint` interface probes the current fixture immediately before EXECUTING. Missing bindings or a failed/malformed check block execution. A binding that disagrees with the planning observation or the current fingerprint invalidates the decision, retains a stale event and both fingerprints, and follows `PLANNING → OBSERVING → PLANNING`. The executor request remains null for the rejected decision. Repeated stale planning attempts consume the existing iteration budget, so invalidation cannot form an unbounded loop.
+
+The default FixtureObserver checker models a fixture with no external edits: it returns the supplied reference fingerprint. Changed-model scenarios inject an independent checker and sequential observations. This is offline fixture proof only; no live model freshness claim is made.
+
+After audit, the orchestrator hashes canonical JSON of the post-read-back model identity/hash, sorted unresolved required IDs/verdicts/actual values, and action fingerprint. Action hashing sorts parameter keys. `noProgressLimit` is an integer >= 2 (default 2) stored in Job. Consecutive matching progress signatures increment the count; a changed model hash, unresolved audit result or action resets it to 1. An invalidated planning attempt also interrupts the sequence of executed cycles. At the threshold, an otherwise correctable FAIL terminates BLOCKED with `terminalReason = BLOCKED_NO_PROGRESS`, before the general iteration limit. Required PASS still finishes VERIFIED; missing/ambiguous evidence keeps its existing fail-closed terminal decision.
+
+Iteration snapshots now include observed/planning model hash, typed pre-execution fingerprint, stale verdict/invalidation flag, action fingerprint, audit fingerprint, progress signature and no-progress count. The evidence trail records every model check, stale invalidation and progress check.
+
 ## State machine and decisions
 
 `RECEIVED → OBSERVING → PLANNING → EXECUTING → READING_BACK → AUDITING`
@@ -51,11 +63,28 @@ All terminal states reject outgoing transitions and repeated run calls. UNKNOWN_
 
 ## Verification and evidence
 
-**STAGE 2: PASS — offline only.**
+**STAGE 2 completion: PASS — offline only.**
 
 The deterministic test suite covers the working scenario, all declared legal graph edges, all illegal edges, all terminal states, every auditor verdict, replanning on new fixture state, iteration exhaustion, missing evidence, missing read-back, executor timeout, malformed interface results, identity mismatch, numeric tolerance, contract validation, preserved snapshots and persistence before execution. Network access is forbidden in the end-to-end fixture tests.
 
-The saved acceptance run contains 33 passing tests and 8 scenarios:
+The completion run contains 33 unchanged existing tests plus 11 new tests, all PASS; 13 saved scenarios; all 20 required criteria PASS.
+
+- [Full 20-criterion completion report](../outputs/closed-loop-stage2/completion/stage2-verification-report.json)
+- [Completion unit test output](../outputs/closed-loop-stage2/completion/unit-tests.txt)
+- [Stale action rejected](../outputs/closed-loop-stage2/completion/stale-rejected.job.json)
+- [Fresh replan succeeds](../outputs/closed-loop-stage2/completion/stale-replan.job.json)
+- [No-progress termination](../outputs/closed-loop-stage2/completion/no-progress.job.json)
+- The completion folder also retains changed-model and changed-audit reset scenarios, all original acceptance scenarios, and captured remote refs.
+
+Reproduce the completion run with a fresh directory and a captured Git remote-ref receipt:
+
+```powershell
+python -m tests_stage2.verify --output work/stage2-completion-new-run --git-ref-evidence outputs/closed-loop-stage2/completion/git-refs.json
+```
+
+The supplied receipt verifies main at its recorded time; refresh remote refs for a new publication audit. Without a receipt, criterion 20 is NOT_VERIFIED and the full gate cannot PASS.
+
+Historical initial submission (incomplete full gate):
 
 - [Verification report](../outputs/closed-loop-stage2/acceptance/stage2-verification-report.json)
 - [Unit test output](../outputs/closed-loop-stage2/acceptance/unit-tests.txt)
@@ -66,4 +95,4 @@ Stage 1 evidence is retained unchanged. No new live Archicad call or mutation wa
 
 ## BACKLOG / NOT PART OF STAGE 2
 
-Stage 3 live integration requires a separate task. Live adapters, reconciliation/resume, deeper stale-model/no-progress handling, new BIM intents/types, UI, normative rules and performance work remain outside this implementation. There are no open Stage 2 blockers.
+Stage 3 live integration requires a separate task. Live adapters, reconciliation/resume, deeper live freshness/transaction-boundary handling, new BIM intents/types, UI, normative rules and performance work remain outside this implementation. There are no open Stage 2 completion blockers.

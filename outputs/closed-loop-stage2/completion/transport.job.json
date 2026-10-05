@@ -1,0 +1,291 @@
+{
+  "goalId": "stage2-transport",
+  "specification": "Stage 2 offline acceptance fixture: transport",
+  "acceptanceCriteria": [
+    {
+      "id": "C01",
+      "required": true,
+      "check": "length",
+      "expected": 1.0,
+      "tolerance": 1e-06,
+      "correctable": true
+    }
+  ],
+  "maxIterations": 2,
+  "createdAt": "2026-10-05T00:00:00+00:00",
+  "updatedAt": "2026-10-05T00:00:00+00:00",
+  "state": "BLOCKED",
+  "iteration": 1,
+  "observedModelIdentity": "fixture-model",
+  "observedModelHash": "after-1",
+  "actions": [
+    {
+      "type": "create_wall",
+      "parameters": {
+        "length": 1.0
+      }
+    }
+  ],
+  "auditHistory": [
+    [
+      {
+        "id": "C01",
+        "required": true,
+        "expected": 1.0,
+        "actual": 1.0,
+        "verdict": "BLOCKED_BY_TRANSPORT",
+        "evidenceRefs": [
+          "fixture.1"
+        ],
+        "correctable": true
+      }
+    ]
+  ],
+  "iterations": [
+    {
+      "iteration": 1,
+      "stateBefore": "PLANNING",
+      "observation": {
+        "modelIdentity": "fixture-model",
+        "modelHash": "before",
+        "facts": {},
+        "evidence": {},
+        "provenance": "FIXTURE"
+      },
+      "plannerDecision": {
+        "status": "PLANNED",
+        "action": {
+          "type": "create_wall",
+          "parameters": {
+            "length": 1.0
+          }
+        },
+        "reason": "",
+        "plannedAgainstModelIdentity": "fixture-model",
+        "plannedAgainstModelHash": "before"
+      },
+      "executorRequest": {
+        "type": "create_wall",
+        "parameters": {
+          "length": 1.0
+        }
+      },
+      "executorResult": {
+        "status": "PASS",
+        "mutationAttempted": true,
+        "readbackRequired": true,
+        "details": {
+          "simulation": true
+        },
+        "executionMode": "OFFLINE"
+      },
+      "readback": {
+        "modelIdentity": "fixture-model",
+        "modelHash": "after-1",
+        "facts": {
+          "length": {
+            "actual": 1.0,
+            "status": "BLOCKED_BY_TRANSPORT",
+            "evidenceRefs": [
+              "fixture.1"
+            ]
+          }
+        },
+        "evidence": {
+          "fixture.1": {
+            "actual": 1.0,
+            "status": "BLOCKED_BY_TRANSPORT"
+          }
+        },
+        "provenance": "FIXTURE"
+      },
+      "auditResult": [
+        {
+          "id": "C01",
+          "required": true,
+          "expected": 1.0,
+          "actual": 1.0,
+          "verdict": "BLOCKED_BY_TRANSPORT",
+          "evidenceRefs": [
+            "fixture.1"
+          ],
+          "correctable": true
+        }
+      ],
+      "observedModelHash": "before",
+      "planningModelHash": "before",
+      "preExecutionFingerprint": {
+        "modelIdentity": "fixture-model",
+        "modelHash": "before",
+        "provenance": "FIXTURE"
+      },
+      "staleVerdict": "CURRENT",
+      "decisionInvalidated": false,
+      "actionFingerprint": "607c52e8380a6d7ae9c91fb67860f46ca0d21689e857afb1e745bf3ed6fa251a",
+      "auditFingerprint": "9a231a9674967d35a767b2825284d97615b9dbbb1d3fb30ea1f7f560d85890c8",
+      "progressSignature": "bc5728eb1767c388fb38954d1f72f71f7e6e67b48f8cca005d5b6d5be7dea44c",
+      "noProgressCount": 1
+    }
+  ],
+  "evidenceTrail": [
+    {
+      "sequence": 1,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 0,
+      "state": "RECEIVED",
+      "kind": "received",
+      "payload": {
+        "contract": {
+          "goalId": "stage2-transport",
+          "criteria": [
+            {
+              "id": "C01",
+              "required": true,
+              "check": "length",
+              "expected": 1.0,
+              "tolerance": 1e-06,
+              "correctable": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 0,
+      "state": "OBSERVING",
+      "kind": "transition",
+      "payload": {
+        "before": "RECEIVED",
+        "after": "OBSERVING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 3,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 0,
+      "state": "OBSERVING",
+      "kind": "observation",
+      "payload": {
+        "modelIdentity": "fixture-model",
+        "modelHash": "before",
+        "facts": {},
+        "evidence": {},
+        "provenance": "FIXTURE"
+      }
+    },
+    {
+      "sequence": 4,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 0,
+      "state": "PLANNING",
+      "kind": "transition",
+      "payload": {
+        "before": "OBSERVING",
+        "after": "PLANNING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 5,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 1,
+      "state": "PLANNING",
+      "kind": "iteration-start",
+      "payload": {
+        "modelIdentity": "fixture-model",
+        "modelHash": "before"
+      }
+    },
+    {
+      "sequence": 6,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 1,
+      "state": "PLANNING",
+      "kind": "model-check",
+      "payload": {
+        "plannedAgainst": {
+          "modelIdentity": "fixture-model",
+          "modelHash": "before"
+        },
+        "current": {
+          "modelIdentity": "fixture-model",
+          "modelHash": "before",
+          "provenance": "FIXTURE"
+        },
+        "staleVerdict": "CURRENT"
+      }
+    },
+    {
+      "sequence": 7,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 1,
+      "state": "EXECUTING",
+      "kind": "transition",
+      "payload": {
+        "before": "PLANNING",
+        "after": "EXECUTING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 8,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 1,
+      "state": "READING_BACK",
+      "kind": "transition",
+      "payload": {
+        "before": "EXECUTING",
+        "after": "READING_BACK",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 9,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 1,
+      "state": "AUDITING",
+      "kind": "transition",
+      "payload": {
+        "before": "READING_BACK",
+        "after": "AUDITING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 10,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 1,
+      "state": "AUDITING",
+      "kind": "progress-check",
+      "payload": {
+        "modelHash": "after-1",
+        "actionFingerprint": "607c52e8380a6d7ae9c91fb67860f46ca0d21689e857afb1e745bf3ed6fa251a",
+        "auditFingerprint": "9a231a9674967d35a767b2825284d97615b9dbbb1d3fb30ea1f7f560d85890c8",
+        "progressSignature": "bc5728eb1767c388fb38954d1f72f71f7e6e67b48f8cca005d5b6d5be7dea44c",
+        "noProgressCount": 1,
+        "noProgressLimit": 2
+      }
+    },
+    {
+      "sequence": 11,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 1,
+      "state": "BLOCKED",
+      "kind": "transition",
+      "payload": {
+        "before": "AUDITING",
+        "after": "BLOCKED",
+        "reason": "decision from required acceptance criteria"
+      }
+    }
+  ],
+  "finalStatus": "BLOCKED",
+  "terminalReason": "decision from required acceptance criteria",
+  "executionMode": "OFFLINE",
+  "liveMutationAttempted": false,
+  "noProgressLimit": 2,
+  "noProgressCount": 1
+}

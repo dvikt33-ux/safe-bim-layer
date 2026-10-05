@@ -131,12 +131,30 @@ class PlannerDecision:
     status: str
     action: Action | None = None
     reason: str = ''
+    plannedAgainstModelIdentity: str | None = None
+    plannedAgainstModelHash: str | None = None
 
     def __post_init__(self):
         if self.status not in {'PLANNED', 'WAITING_FOR_DATA', 'BLOCKED'}:
             raise ValueError('invalid planner status')
         if (self.status == 'PLANNED') != isinstance(self.action, Action):
             raise ValueError('only PLANNED decisions must carry a typed Action')
+        for value in (self.plannedAgainstModelIdentity, self.plannedAgainstModelHash):
+            if value is not None:
+                nonempty(value, 'planning fingerprint')
+
+
+@dataclass(frozen=True)
+class ModelFingerprint:
+    modelIdentity: str
+    modelHash: str
+    provenance: str = 'FIXTURE'
+
+    def __post_init__(self):
+        nonempty(self.modelIdentity, 'modelIdentity')
+        nonempty(self.modelHash, 'modelHash')
+        if self.provenance != 'FIXTURE':
+            raise ValueError('Stage 2 accepts fixture fingerprints only')
 
 
 @dataclass(frozen=True)
@@ -180,6 +198,15 @@ class Iteration:
     executorResult: ExecutionResult | None = None
     readback: Observation | None = None
     auditResult: list[AuditCriterion] | None = None
+    observedModelHash: str | None = None
+    planningModelHash: str | None = None
+    preExecutionFingerprint: ModelFingerprint | None = None
+    staleVerdict: str | None = None
+    decisionInvalidated: bool = False
+    actionFingerprint: str | None = None
+    auditFingerprint: str | None = None
+    progressSignature: str | None = None
+    noProgressCount: int = 0
 
 
 @dataclass
@@ -202,6 +229,8 @@ class Job:
     terminalReason: str | None = None
     executionMode: str = 'OFFLINE'
     liveMutationAttempted: bool = False
+    noProgressLimit: int = 2
+    noProgressCount: int = 0
 
     def to_dict(self):
         return asdict(self)

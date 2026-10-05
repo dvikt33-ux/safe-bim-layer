@@ -1,6 +1,7 @@
 """Deterministic fixture-only interfaces. No transport or model writes."""
 from copy import deepcopy
-from .models import Action, ExecutionResult, Observation, PlannerDecision
+from dataclasses import replace
+from .models import Action, ExecutionResult, ModelFingerprint, Observation, PlannerDecision
 
 
 class FixtureObserver:
@@ -14,6 +15,11 @@ class FixtureObserver:
         self.calls += 1
         return deepcopy(self.observation)
 
+    def check(self, reference):
+        # Default fixture has no external edits. Changed-model scenarios inject
+        # a separate fixture checker with an independent fingerprint sequence.
+        return ModelFingerprint(reference.modelIdentity, reference.modelHash)
+
 
 class FixedPlanner:
     offline = True
@@ -24,7 +30,8 @@ class FixedPlanner:
 
     def plan(self, job, observation):
         self.observedHashes.append(observation.modelHash)
-        return deepcopy(self.decision)
+        return replace(deepcopy(self.decision), plannedAgainstModelIdentity=observation.modelIdentity,
+                       plannedAgainstModelHash=observation.modelHash)
 
 
 class MockExecutor:

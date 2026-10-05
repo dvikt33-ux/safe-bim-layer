@@ -1,0 +1,496 @@
+{
+  "stage": "STAGE_2_ORCHESTRATOR_SKELETON",
+  "status": "PASS",
+  "executionMode": "OFFLINE",
+  "stage1Commit": "27fc10267e71d1cd4f8322fe1d3c334e2cef1b4c",
+  "v0Baseline": "565ea2e0414a14bedbca09999690d7b97f877fa3",
+  "liveMutationAttempted": false,
+  "liveRegressionRerun": false,
+  "testsRun": 44,
+  "testsPassed": [
+    "test_completion.CompletionTests.test_A_stale_action_rejected_and_reobserved",
+    "test_completion.CompletionTests.test_B_stale_replan_succeeds",
+    "test_completion.CompletionTests.test_C_repeated_identical_failure_blocks_before_iteration_limit",
+    "test_completion.CompletionTests.test_D_changed_model_resets_counter",
+    "test_completion.CompletionTests.test_E_changed_audit_resets_counter",
+    "test_completion.CompletionTests.test_changed_action_resets_counter",
+    "test_completion.CompletionTests.test_model_check_transport_failure_blocks_before_executor",
+    "test_completion.CompletionTests.test_model_identity_change_invalidates_action",
+    "test_completion.CompletionTests.test_no_progress_limit_is_validated",
+    "test_completion.CompletionTests.test_parameter_order_is_normalized_for_progress_signature",
+    "test_completion.CompletionTests.test_unbound_planner_decision_blocks_before_executor",
+    "test_orchestrator.Stage2Tests.test_all_declared_legal_edges_are_exercised",
+    "test_orchestrator.Stage2Tests.test_all_illegal_state_edges_are_rejected",
+    "test_orchestrator.Stage2Tests.test_all_terminal_states_cannot_transition_or_run",
+    "test_orchestrator.Stage2Tests.test_auditor_numeric_tolerance_and_bool_distinction",
+    "test_orchestrator.Stage2Tests.test_correctable_fail_replans_from_readback",
+    "test_orchestrator.Stage2Tests.test_empty_retained_evidence_cannot_verify",
+    "test_orchestrator.Stage2Tests.test_end_to_end_verified_and_durable_complete_trail",
+    "test_orchestrator.Stage2Tests.test_evidence_status_never_promoted_to_pass",
+    "test_orchestrator.Stage2Tests.test_execution_request_is_saved_before_interface_call",
+    "test_orchestrator.Stage2Tests.test_executor_pass_without_readback_cannot_verify",
+    "test_orchestrator.Stage2Tests.test_executor_results_route_fail_closed",
+    "test_orchestrator.Stage2Tests.test_executor_timeout_is_unknown_and_never_retried",
+    "test_orchestrator.Stage2Tests.test_existing_job_file_is_preserved_and_cannot_be_restarted",
+    "test_orchestrator.Stage2Tests.test_fact_pass_cannot_be_supplied_as_observed_evidence",
+    "test_orchestrator.Stage2Tests.test_invalid_contracts_and_parameters_are_rejected",
+    "test_orchestrator.Stage2Tests.test_iteration_limit_blocks_unresolved_correctable_fail",
+    "test_orchestrator.Stage2Tests.test_live_component_and_live_payload_are_rejected",
+    "test_orchestrator.Stage2Tests.test_malformed_executor_result_is_unknown",
+    "test_orchestrator.Stage2Tests.test_malformed_planner_result_blocks_before_execution",
+    "test_orchestrator.Stage2Tests.test_missing_check_waits_for_data",
+    "test_orchestrator.Stage2Tests.test_missing_or_dangling_evidence_references_block",
+    "test_orchestrator.Stage2Tests.test_nested_boolean_is_not_numeric_evidence",
+    "test_orchestrator.Stage2Tests.test_observer_failure_blocks_without_actions",
+    "test_orchestrator.Stage2Tests.test_optional_nonpass_does_not_close_required_gate",
+    "test_orchestrator.Stage2Tests.test_planner_waiting_or_blocked_does_not_call_executor",
+    "test_orchestrator.Stage2Tests.test_readback_identity_mismatch_blocks",
+    "test_orchestrator.Stage2Tests.test_readback_unavailable_after_attempt_is_unknown_and_never_retried",
+    "test_orchestrator.Stage2Tests.test_required_missing_data_takes_precedence_over_replan",
+    "test_orchestrator.Stage2Tests.test_snapshots_are_detached_from_interface_mutation",
+    "test_orchestrator.Stage2Tests.test_uncorrectable_fail_blocks",
+    "test_orchestrator.Stage2Tests.test_verified_recomputes_audit_from_retained_readback",
+    "test_orchestrator.Stage2Tests.test_verified_with_nonpass_audit_is_rejected",
+    "test_orchestrator.Stage2Tests.test_verified_without_readback_and_audit_is_rejected"
+  ],
+  "existingTestsPassed": 33,
+  "newTestsPassed": 11,
+  "existingTestsUnchanged": true,
+  "failures": [],
+  "errors": [],
+  "criteria": [
+    {
+      "id": "S2-C01",
+      "required": true,
+      "expected": "Separate Orchestrator implementation exists",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_end_to_end_verified_and_durable_complete_trail"
+      ]
+    },
+    {
+      "id": "S2-C02",
+      "required": true,
+      "expected": "Explicit state machine; permitted and forbidden transitions tested",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_all_declared_legal_edges_are_exercised",
+        "test_all_illegal_state_edges_are_rejected"
+      ]
+    },
+    {
+      "id": "S2-C03",
+      "required": true,
+      "expected": "Goal stored machine-readably",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_end_to_end_verified_and_durable_complete_trail"
+      ]
+    },
+    {
+      "id": "S2-C04",
+      "required": true,
+      "expected": "Acceptance criteria machine-readable",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_invalid_contracts_and_parameters_are_rejected"
+      ]
+    },
+    {
+      "id": "S2-C05",
+      "required": true,
+      "expected": "Auditor produces per-criterion verdicts",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_evidence_status_never_promoted_to_pass"
+      ]
+    },
+    {
+      "id": "S2-C06",
+      "required": true,
+      "expected": "Required NOT_VERIFIED blocks VERIFIED",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_verified_with_nonpass_audit_is_rejected"
+      ]
+    },
+    {
+      "id": "S2-C07",
+      "required": true,
+      "expected": "Correctable FAIL can lead to REPLAN",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_correctable_fail_replans_from_readback"
+      ]
+    },
+    {
+      "id": "S2-C08",
+      "required": true,
+      "expected": "DATA_MISSING leads to WAITING_FOR_DATA",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_missing_check_waits_for_data"
+      ]
+    },
+    {
+      "id": "S2-C09",
+      "required": true,
+      "expected": "Transport failure leads to BLOCKED",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_model_check_transport_failure_blocks_before_executor"
+      ]
+    },
+    {
+      "id": "S2-C10",
+      "required": true,
+      "expected": "Ambiguous mutation leads to UNKNOWN_OUTCOME",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_executor_results_route_fail_closed"
+      ]
+    },
+    {
+      "id": "S2-C11",
+      "required": true,
+      "expected": "UNKNOWN_OUTCOME cannot automatically retry",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_executor_timeout_is_unknown_and_never_retried"
+      ]
+    },
+    {
+      "id": "S2-C12",
+      "required": true,
+      "expected": "Iteration limit works",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_iteration_limit_blocks_unresolved_correctable_fail"
+      ]
+    },
+    {
+      "id": "S2-C13",
+      "required": true,
+      "expected": "No-progress detection works",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_C_repeated_identical_failure_blocks_before_iteration_limit",
+        "no-progress.job.json",
+        "changed-model.job.json",
+        "changed-audit.job.json"
+      ]
+    },
+    {
+      "id": "S2-C14",
+      "required": true,
+      "expected": "Stale observation detection works",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_B_stale_replan_succeeds",
+        "stale-rejected.job.json",
+        "stale-replan.job.json"
+      ]
+    },
+    {
+      "id": "S2-C15",
+      "required": true,
+      "expected": "Full evidence trail persisted",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_end_to_end_verified_and_durable_complete_trail"
+      ]
+    },
+    {
+      "id": "S2-C16",
+      "required": true,
+      "expected": "Typed action allowlist works",
+      "actual": true,
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt",
+        "test_invalid_contracts_and_parameters_are_rejected"
+      ]
+    },
+    {
+      "id": "S2-C17",
+      "required": true,
+      "expected": "All Stage 2 tests PASS; 33 existing tests unchanged",
+      "actual": {
+        "existingPassed": 33,
+        "newPassed": 11,
+        "existingTestsDiff": ""
+      },
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unit-tests.txt"
+      ]
+    },
+    {
+      "id": "S2-C18",
+      "required": true,
+      "expected": "V0 runtime path unchanged",
+      "actual": {
+        "diff": ""
+      },
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "git diff 27fc10267e71d1cd4f8322fe1d3c334e2cef1b4c -- scripts archicad-addon safe_bim_layer.py qwen_safe_bim_integration.py"
+      ]
+    },
+    {
+      "id": "S2-C19",
+      "required": true,
+      "expected": "Stage 1 evidence unchanged",
+      "actual": {
+        "diff": ""
+      },
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "git diff 27fc10267e71d1cd4f8322fe1d3c334e2cef1b4c -- outputs/closed-loop-stage1"
+      ]
+    },
+    {
+      "id": "S2-C20",
+      "required": true,
+      "expected": "main unchanged",
+      "actual": {
+        "before": "72e9be15ac3b943d7b6f0c46eaa45aa5798d56bc",
+        "current": "72e9be15ac3b943d7b6f0c46eaa45aa5798d56bc"
+      },
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "git-refs.json"
+      ]
+    }
+  ],
+  "requiredSummary": {
+    "PASS": 20,
+    "FAIL": 0,
+    "NOT_VERIFIED": 0
+  },
+  "scenarios": [
+    {
+      "id": "verified",
+      "expected": "VERIFIED",
+      "actual": "VERIFIED",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "verified.job.json"
+      ],
+      "mockExecuteCalls": 1,
+      "liveMutationAttempted": false
+    },
+    {
+      "id": "replan",
+      "expected": "VERIFIED",
+      "actual": "VERIFIED",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "replan.job.json"
+      ],
+      "mockExecuteCalls": 2,
+      "liveMutationAttempted": false
+    },
+    {
+      "id": "not-verified",
+      "expected": "BLOCKED",
+      "actual": "BLOCKED",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "not-verified.job.json"
+      ],
+      "mockExecuteCalls": 1,
+      "liveMutationAttempted": false
+    },
+    {
+      "id": "data-missing",
+      "expected": "WAITING_FOR_DATA",
+      "actual": "WAITING_FOR_DATA",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "data-missing.job.json"
+      ],
+      "mockExecuteCalls": 1,
+      "liveMutationAttempted": false
+    },
+    {
+      "id": "conflict",
+      "expected": "BLOCKED",
+      "actual": "BLOCKED",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "conflict.job.json"
+      ],
+      "mockExecuteCalls": 1,
+      "liveMutationAttempted": false
+    },
+    {
+      "id": "transport",
+      "expected": "BLOCKED",
+      "actual": "BLOCKED",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "transport.job.json"
+      ],
+      "mockExecuteCalls": 1,
+      "liveMutationAttempted": false
+    },
+    {
+      "id": "unknown-outcome",
+      "expected": "UNKNOWN_OUTCOME",
+      "actual": "UNKNOWN_OUTCOME",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "unknown-outcome.job.json"
+      ],
+      "mockExecuteCalls": 1,
+      "liveMutationAttempted": false
+    },
+    {
+      "id": "iteration-limit",
+      "expected": "BLOCKED",
+      "actual": "BLOCKED",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "iteration-limit.job.json"
+      ],
+      "mockExecuteCalls": 2,
+      "liveMutationAttempted": false
+    },
+    {
+      "id": "stale-rejected",
+      "expected": "BLOCKED",
+      "actual": "BLOCKED",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "stale-rejected.job.json"
+      ],
+      "mockExecuteCalls": 0,
+      "liveMutationAttempted": false,
+      "plannerObservedHashes": [
+        "hash-A",
+        "hash-B"
+      ],
+      "terminalReason": "fixture intentionally stops after re-observation",
+      "noProgressCounts": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "stale-replan",
+      "expected": "VERIFIED",
+      "actual": "VERIFIED",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "stale-replan.job.json"
+      ],
+      "mockExecuteCalls": 1,
+      "liveMutationAttempted": false,
+      "plannerObservedHashes": [
+        "hash-A",
+        "hash-B"
+      ],
+      "terminalReason": "decision from required acceptance criteria",
+      "noProgressCounts": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "no-progress",
+      "expected": "BLOCKED",
+      "actual": "BLOCKED",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "no-progress.job.json"
+      ],
+      "mockExecuteCalls": 2,
+      "liveMutationAttempted": false,
+      "plannerObservedHashes": [
+        "same-hash",
+        "same-hash"
+      ],
+      "terminalReason": "BLOCKED_NO_PROGRESS",
+      "noProgressCounts": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "changed-model",
+      "expected": "VERIFIED",
+      "actual": "VERIFIED",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "changed-model.job.json"
+      ],
+      "mockExecuteCalls": 3,
+      "liveMutationAttempted": false,
+      "plannerObservedHashes": [
+        "same-hash",
+        "hash-1",
+        "hash-2"
+      ],
+      "terminalReason": "decision from required acceptance criteria",
+      "noProgressCounts": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "changed-audit",
+      "expected": "VERIFIED",
+      "actual": "VERIFIED",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "changed-audit.job.json"
+      ],
+      "mockExecuteCalls": 3,
+      "liveMutationAttempted": false,
+      "plannerObservedHashes": [
+        "same-hash",
+        "same-hash",
+        "same-hash"
+      ],
+      "terminalReason": "decision from required acceptance criteria",
+      "noProgressCounts": [
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "blockingIssues": []
+}

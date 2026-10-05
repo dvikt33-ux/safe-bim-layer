@@ -1,0 +1,10 @@
+{
+  "remoteRefs": [
+    "72e9be15ac3b943d7b6f0c46eaa45aa5798d56bc\trefs/heads/main",
+    "27fc10267e71d1cd4f8322fe1d3c334e2cef1b4c\trefs/heads/work/stage1-v0-regression",
+    "fab04cf88d3cd621faf3a9f5a6f417290417e620\trefs/heads/work/stage2-orchestrator-skeleton"
+  ],
+  "observedAtUtc": "2026-10-05T10:10:50.8159168Z",
+  "command": "git ls-remote origin refs/heads/main refs/heads/work/stage1-v0-regression refs/heads/work/stage2-orchestrator-skeleton",
+  "mainBefore": "72e9be15ac3b943d7b6f0c46eaa45aa5798d56bc"
+}

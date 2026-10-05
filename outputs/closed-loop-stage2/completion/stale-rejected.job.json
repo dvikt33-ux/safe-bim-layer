@@ -1,0 +1,316 @@
+{
+  "goalId": "stage2-completion-stale-rejected",
+  "specification": "Offline Stage 2 completion: stale-rejected",
+  "acceptanceCriteria": [
+    {
+      "id": "C01",
+      "required": true,
+      "check": "length",
+      "expected": 1.0,
+      "tolerance": 1e-06,
+      "correctable": true
+    }
+  ],
+  "maxIterations": 5,
+  "createdAt": "2026-10-05T00:00:00+00:00",
+  "updatedAt": "2026-10-05T00:00:00+00:00",
+  "state": "BLOCKED",
+  "iteration": 2,
+  "observedModelIdentity": "fixture-model",
+  "observedModelHash": "hash-B",
+  "actions": [],
+  "auditHistory": [],
+  "iterations": [
+    {
+      "iteration": 1,
+      "stateBefore": "PLANNING",
+      "observation": {
+        "modelIdentity": "fixture-model",
+        "modelHash": "hash-A",
+        "facts": {
+          "length": {
+            "actual": 0.5,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "fixture.measurement"
+            ]
+          }
+        },
+        "evidence": {
+          "fixture.measurement": {
+            "actual": 0.5
+          }
+        },
+        "provenance": "FIXTURE"
+      },
+      "plannerDecision": {
+        "status": "PLANNED",
+        "action": {
+          "type": "create_wall",
+          "parameters": {
+            "plannedHash": "hash-A"
+          }
+        },
+        "reason": "",
+        "plannedAgainstModelIdentity": "fixture-model",
+        "plannedAgainstModelHash": "hash-A"
+      },
+      "executorRequest": null,
+      "executorResult": null,
+      "readback": null,
+      "auditResult": null,
+      "observedModelHash": "hash-A",
+      "planningModelHash": "hash-A",
+      "preExecutionFingerprint": {
+        "modelIdentity": "fixture-model",
+        "modelHash": "hash-B",
+        "provenance": "FIXTURE"
+      },
+      "staleVerdict": "STALE",
+      "decisionInvalidated": true,
+      "actionFingerprint": "e4e518b287db682e1e966159f58c9e6c45acfff2b01750be544e619aa076ceaa",
+      "auditFingerprint": null,
+      "progressSignature": null,
+      "noProgressCount": 0
+    },
+    {
+      "iteration": 2,
+      "stateBefore": "PLANNING",
+      "observation": {
+        "modelIdentity": "fixture-model",
+        "modelHash": "hash-B",
+        "facts": {
+          "length": {
+            "actual": 0.5,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "fixture.measurement"
+            ]
+          }
+        },
+        "evidence": {
+          "fixture.measurement": {
+            "actual": 0.5
+          }
+        },
+        "provenance": "FIXTURE"
+      },
+      "plannerDecision": {
+        "status": "BLOCKED",
+        "action": null,
+        "reason": "fixture intentionally stops after re-observation",
+        "plannedAgainstModelIdentity": "fixture-model",
+        "plannedAgainstModelHash": "hash-B"
+      },
+      "executorRequest": null,
+      "executorResult": null,
+      "readback": null,
+      "auditResult": null,
+      "observedModelHash": "hash-B",
+      "planningModelHash": null,
+      "preExecutionFingerprint": null,
+      "staleVerdict": null,
+      "decisionInvalidated": false,
+      "actionFingerprint": null,
+      "auditFingerprint": null,
+      "progressSignature": null,
+      "noProgressCount": 0
+    }
+  ],
+  "evidenceTrail": [
+    {
+      "sequence": 1,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 0,
+      "state": "RECEIVED",
+      "kind": "received",
+      "payload": {
+        "contract": {
+          "goalId": "stage2-completion-stale-rejected",
+          "criteria": [
+            {
+              "id": "C01",
+              "required": true,
+              "check": "length",
+              "expected": 1.0,
+              "tolerance": 1e-06,
+              "correctable": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 0,
+      "state": "OBSERVING",
+      "kind": "transition",
+      "payload": {
+        "before": "RECEIVED",
+        "after": "OBSERVING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 3,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 0,
+      "state": "OBSERVING",
+      "kind": "observation",
+      "payload": {
+        "modelIdentity": "fixture-model",
+        "modelHash": "hash-A",
+        "facts": {
+          "length": {
+            "actual": 0.5,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "fixture.measurement"
+            ]
+          }
+        },
+        "evidence": {
+          "fixture.measurement": {
+            "actual": 0.5
+          }
+        },
+        "provenance": "FIXTURE"
+      }
+    },
+    {
+      "sequence": 4,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 0,
+      "state": "PLANNING",
+      "kind": "transition",
+      "payload": {
+        "before": "OBSERVING",
+        "after": "PLANNING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 5,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 1,
+      "state": "PLANNING",
+      "kind": "iteration-start",
+      "payload": {
+        "modelIdentity": "fixture-model",
+        "modelHash": "hash-A"
+      }
+    },
+    {
+      "sequence": 6,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 1,
+      "state": "PLANNING",
+      "kind": "model-check",
+      "payload": {
+        "plannedAgainst": {
+          "modelIdentity": "fixture-model",
+          "modelHash": "hash-A"
+        },
+        "current": {
+          "modelIdentity": "fixture-model",
+          "modelHash": "hash-B",
+          "provenance": "FIXTURE"
+        },
+        "staleVerdict": "STALE"
+      }
+    },
+    {
+      "sequence": 7,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 1,
+      "state": "PLANNING",
+      "kind": "stale-decision-invalidated",
+      "payload": {
+        "actionFingerprint": "e4e518b287db682e1e966159f58c9e6c45acfff2b01750be544e619aa076ceaa",
+        "plannedHash": "hash-A",
+        "currentHash": "hash-B",
+        "executorCalled": false
+      }
+    },
+    {
+      "sequence": 8,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 1,
+      "state": "OBSERVING",
+      "kind": "transition",
+      "payload": {
+        "before": "PLANNING",
+        "after": "OBSERVING",
+        "reason": "stale decision invalidated; fresh observation required"
+      }
+    },
+    {
+      "sequence": 9,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 1,
+      "state": "OBSERVING",
+      "kind": "observation",
+      "payload": {
+        "modelIdentity": "fixture-model",
+        "modelHash": "hash-B",
+        "facts": {
+          "length": {
+            "actual": 0.5,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "fixture.measurement"
+            ]
+          }
+        },
+        "evidence": {
+          "fixture.measurement": {
+            "actual": 0.5
+          }
+        },
+        "provenance": "FIXTURE"
+      }
+    },
+    {
+      "sequence": 10,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 1,
+      "state": "PLANNING",
+      "kind": "transition",
+      "payload": {
+        "before": "OBSERVING",
+        "after": "PLANNING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 11,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 2,
+      "state": "PLANNING",
+      "kind": "iteration-start",
+      "payload": {
+        "modelIdentity": "fixture-model",
+        "modelHash": "hash-B"
+      }
+    },
+    {
+      "sequence": 12,
+      "at": "2026-10-05T00:00:00+00:00",
+      "iteration": 2,
+      "state": "BLOCKED",
+      "kind": "transition",
+      "payload": {
+        "before": "PLANNING",
+        "after": "BLOCKED",
+        "reason": "fixture intentionally stops after re-observation"
+      }
+    }
+  ],
+  "finalStatus": "BLOCKED",
+  "terminalReason": "fixture intentionally stops after re-observation",
+  "executionMode": "OFFLINE",
+  "liveMutationAttempted": false,
+  "noProgressLimit": 2,
+  "noProgressCount": 0
+}
