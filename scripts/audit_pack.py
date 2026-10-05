@@ -2,12 +2,13 @@
 import hashlib
 import json
 import math
+import re
 from collections import Counter
 from pathlib import Path
 import tempfile
 
 SCHEMA_VERSION = 1
-EXTRACTOR_VERSION = '1'
+EXTRACTOR_VERSION = '2'
 TOLERANCE = 1e-7
 
 
@@ -26,6 +27,65 @@ def canonical(value):
 
 def digest(value):
     return hashlib.sha256(canonical(value)).hexdigest()
+
+
+# Scan parsed JSON strings, so escaped separators cannot conceal local paths.
+LOCAL_PATH = re.compile(
+    r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\|(?:^|[\s\"'=:(])/(?!/)[^\s]*|"
+    r"(?:^|[\s\"'=(])//[^\s]+|(?:^|[\s/\\])(?:Users|home)[/\\][^/\\\s]+|"
+    r"(?:^|[\s\"'=:(])\\[^\s]+|~[/\\]|%(?:USERPROFILE|HOMEPATH)%|\$HOME(?:[/\\]|$)", re.IGNORECASE)
+
+
+def unsafe_path(value):
+    return isinstance(value, str) and LOCAL_PATH.search(value) is not None
+
+
+def public_value(value):
+    """Opaque logical ID; original source bytes/hashes remain the provenance anchor."""
+    if isinstance(value, str) and unsafe_path(value):
+        return 'local-path-sha256:' + hashlib.sha256(value.encode('utf-8')).hexdigest()
+    if isinstance(value, dict):
+        return {k: public_value(v) for k, v in value.items()}
+    if isinstance(value, list):
+        return [public_value(v) for v in value]
+    return value
+
+
+def assert_public(value):
+    if isinstance(value, str) and unsafe_path(value):
+        raise AuditError('Absolute/local user path in published pack')
+    if isinstance(value, dict):
+        for k, v in value.items():
+            assert_public(k)
+            assert_public(v)
+    elif isinstance(value, list):
+        for v in value:
+            assert_public(v)
+
+
+def scan_public_pack(output):
+    if not Path(output).is_dir():
+        raise AuditError('Published pack directory missing')
+    files = 0
+    for p in Path(output).rglob('*'):
+        if p.is_file():
+            assert_public(p.relative_to(output).as_posix())
+            assert_public(read_json(p) if p.suffix == '.json' else p.read_text(encoding='utf-8'))
+            files += 1
+    if not files:
+        raise AuditError('Published pack is empty')
+    return {'status': 'PASS', 'files': files}
+
+
+def semantic_delta(change, differences):
+    """Only the direct per-body index field is technical noise; all else is semantic."""
+    noise = sorted(e['guid'] for e in differences if e['changedPaths'] and all(
+        re.fullmatch(r'bodies\[\d+\]\.nativeBodyIndex', p) for p in e['changedPaths']))
+    change['rawChanged'] = list(change['changed'])
+    change['semanticChanged'] = sorted(set(change['rawChanged']) - set(noise))
+    change['technicalNoiseChanged'] = noise
+    change['semanticUnchangedCount'] = change['unchangedCount'] + len(noise)
+    return change
 
 
 def read_json(path):
@@ -283,7 +343,7 @@ def build_pack(root, contract, output):
         records.append(contract['historicalManifest'])
     if 'identityEvidence' in contract:
         identity = pinned_json(root, contract['identityEvidence'])['result']['addOnCommandResponse']['projectPath']
-        if identity != contract['modelIdentity']:
+        if public_value(identity) != public_value(contract['modelIdentity']):
             raise Conflict('Identity record mismatch')
         records.append(contract['identityEvidence'])
     wanted = {i[k].upper() for i in contract['iterations'] for k in ('sourceGuid', 'createdGuid')}
@@ -310,7 +370,8 @@ def build_pack(root, contract, output):
         states[spec['id']] = {'summary': summary, 'index': index, 'selected': selected, 'spec': spec}
         if spec.get('fingerprint'):
             fp = pinned_json(root, spec['fingerprint'])
-            if any(fp[k] != summary[k] for k in ('modelIdentity', 'modelHash', 'elementCount')):
+            if any((public_value(fp[k]) != public_value(summary[k]) if k == 'modelIdentity'
+                    else fp[k] != summary[k]) for k in ('modelIdentity', 'modelHash', 'elementCount')):
                 raise Conflict('Full dump/fingerprint mismatch: '+spec['path'])
             records.append(spec['fingerprint'])
         del data
@@ -360,9 +421,11 @@ def build_pack(root, contract, output):
         put(prefix+'changed-elements.json', neighbours, refs)
         differences = [{'guid': e['guid'], 'changedPaths': changed_paths(e['before'], e['after'])}
                        for e in neighbours]
+        semantic_delta(change, differences)
         put(prefix+'changed-fields.json', {'computedFromDump': True, 'elements': differences,
             'onlyNativeBodyIndexChanges': bool(differences) and all(
-                path.endswith('.nativeBodyIndex') for e in differences for path in e['changedPaths'])}, refs)
+                re.fullmatch(r'bodies\[\d+\]\.nativeBodyIndex', path)
+                for e in differences for path in e['changedPaths'])}, refs)
         checked = []
         for record in step.get('compactEvidence', []):
             value = pinned_json(root, record)
@@ -431,6 +494,8 @@ def build_pack(root, contract, output):
     # One index/changed-element record per line supports Connector line-range reads.
     blobs = {}
     for name, value in payloads.items():
+        value = public_value(value)
+        assert_public(value)
         if isinstance(value, list) and name.endswith(('element-index.json', 'changed-elements.json')):
             blobs[name] = b'[\n'+b',\n'.join(canonical(row) for row in value)+b'\n]\n'
         else:
@@ -442,6 +507,7 @@ def build_pack(root, contract, output):
                 'sourceFullDumps': [{k:s[k] for k in ('id','path','sha256','bytes')} for s in specs],
                 'files': [{'path': name, 'sha256': hashlib.sha256(blob).hexdigest(), 'bytes': len(blob),
                            'sourceDumpRefs': origins[name]} for name, blob in sorted(blobs.items())]}
+    assert_public(manifest)
     blobs['audit-pack-manifest.json'] = canonical(manifest)+b'\n'
     if sum(map(len, blobs.values())) > 9*1024*1024:
         raise AuditError('Audit pack exceeds 9 MiB bound; no full model duplication allowed')
@@ -454,6 +520,7 @@ def build_pack(root, contract, output):
 
 def verify_pack(root, output):
     output = Path(output)
+    scan_public_pack(output)
     source = read_json(output/'source.json')
     manifest = read_json(output/'audit-pack-manifest.json')
     if manifest.get('schemaVersion') != 1 or source.get('extractorVersion') != EXTRACTOR_VERSION:

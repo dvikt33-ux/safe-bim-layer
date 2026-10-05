@@ -1,0 +1,49 @@
+test_A_stale_action_rejected_and_reobserved (test_completion.CompletionTests.test_A_stale_action_rejected_and_reobserved) ... ok
+test_B_stale_replan_succeeds (test_completion.CompletionTests.test_B_stale_replan_succeeds) ... ok
+test_C_repeated_identical_failure_blocks_before_iteration_limit (test_completion.CompletionTests.test_C_repeated_identical_failure_blocks_before_iteration_limit) ... ok
+test_D_changed_model_resets_counter (test_completion.CompletionTests.test_D_changed_model_resets_counter) ... ok
+test_E_changed_audit_resets_counter (test_completion.CompletionTests.test_E_changed_audit_resets_counter) ... ok
+test_changed_action_resets_counter (test_completion.CompletionTests.test_changed_action_resets_counter) ... ok
+test_model_check_transport_failure_blocks_before_executor (test_completion.CompletionTests.test_model_check_transport_failure_blocks_before_executor) ... ok
+test_model_identity_change_invalidates_action (test_completion.CompletionTests.test_model_identity_change_invalidates_action) ... ok
+test_no_progress_limit_is_validated (test_completion.CompletionTests.test_no_progress_limit_is_validated) ... ok
+test_parameter_order_is_normalized_for_progress_signature (test_completion.CompletionTests.test_parameter_order_is_normalized_for_progress_signature) ... ok
+test_unbound_planner_decision_blocks_before_executor (test_completion.CompletionTests.test_unbound_planner_decision_blocks_before_executor) ... ok
+test_all_declared_legal_edges_are_exercised (test_orchestrator.Stage2Tests.test_all_declared_legal_edges_are_exercised) ... ok
+test_all_illegal_state_edges_are_rejected (test_orchestrator.Stage2Tests.test_all_illegal_state_edges_are_rejected) ... ok
+test_all_terminal_states_cannot_transition_or_run (test_orchestrator.Stage2Tests.test_all_terminal_states_cannot_transition_or_run) ... ok
+test_auditor_numeric_tolerance_and_bool_distinction (test_orchestrator.Stage2Tests.test_auditor_numeric_tolerance_and_bool_distinction) ... ok
+test_correctable_fail_replans_from_readback (test_orchestrator.Stage2Tests.test_correctable_fail_replans_from_readback) ... ok
+test_empty_retained_evidence_cannot_verify (test_orchestrator.Stage2Tests.test_empty_retained_evidence_cannot_verify) ... ok
+test_end_to_end_verified_and_durable_complete_trail (test_orchestrator.Stage2Tests.test_end_to_end_verified_and_durable_complete_trail) ... ok
+test_evidence_status_never_promoted_to_pass (test_orchestrator.Stage2Tests.test_evidence_status_never_promoted_to_pass) ... ok
+test_execution_request_is_saved_before_interface_call (test_orchestrator.Stage2Tests.test_execution_request_is_saved_before_interface_call) ... ok
+test_executor_pass_without_readback_cannot_verify (test_orchestrator.Stage2Tests.test_executor_pass_without_readback_cannot_verify) ... ok
+test_executor_results_route_fail_closed (test_orchestrator.Stage2Tests.test_executor_results_route_fail_closed) ... ok
+test_executor_timeout_is_unknown_and_never_retried (test_orchestrator.Stage2Tests.test_executor_timeout_is_unknown_and_never_retried) ... ok
+test_existing_job_file_is_preserved_and_cannot_be_restarted (test_orchestrator.Stage2Tests.test_existing_job_file_is_preserved_and_cannot_be_restarted) ... ok
+test_fact_pass_cannot_be_supplied_as_observed_evidence (test_orchestrator.Stage2Tests.test_fact_pass_cannot_be_supplied_as_observed_evidence) ... ok
+test_invalid_contracts_and_parameters_are_rejected (test_orchestrator.Stage2Tests.test_invalid_contracts_and_parameters_are_rejected) ... ok
+test_iteration_limit_blocks_unresolved_correctable_fail (test_orchestrator.Stage2Tests.test_iteration_limit_blocks_unresolved_correctable_fail) ... ok
+test_live_component_and_live_payload_are_rejected (test_orchestrator.Stage2Tests.test_live_component_and_live_payload_are_rejected) ... ok
+test_malformed_executor_result_is_unknown (test_orchestrator.Stage2Tests.test_malformed_executor_result_is_unknown) ... ok
+test_malformed_planner_result_blocks_before_execution (test_orchestrator.Stage2Tests.test_malformed_planner_result_blocks_before_execution) ... ok
+test_missing_check_waits_for_data (test_orchestrator.Stage2Tests.test_missing_check_waits_for_data) ... ok
+test_missing_or_dangling_evidence_references_block (test_orchestrator.Stage2Tests.test_missing_or_dangling_evidence_references_block) ... ok
+test_nested_boolean_is_not_numeric_evidence (test_orchestrator.Stage2Tests.test_nested_boolean_is_not_numeric_evidence) ... ok
+test_observer_failure_blocks_without_actions (test_orchestrator.Stage2Tests.test_observer_failure_blocks_without_actions) ... ok
+test_optional_nonpass_does_not_close_required_gate (test_orchestrator.Stage2Tests.test_optional_nonpass_does_not_close_required_gate) ... ok
+test_planner_waiting_or_blocked_does_not_call_executor (test_orchestrator.Stage2Tests.test_planner_waiting_or_blocked_does_not_call_executor) ... ok
+test_readback_identity_mismatch_blocks (test_orchestrator.Stage2Tests.test_readback_identity_mismatch_blocks) ... ok
+test_readback_unavailable_after_attempt_is_unknown_and_never_retried (test_orchestrator.Stage2Tests.test_readback_unavailable_after_attempt_is_unknown_and_never_retried) ... ok
+test_required_missing_data_takes_precedence_over_replan (test_orchestrator.Stage2Tests.test_required_missing_data_takes_precedence_over_replan) ... ok
+test_snapshots_are_detached_from_interface_mutation (test_orchestrator.Stage2Tests.test_snapshots_are_detached_from_interface_mutation) ... ok
+test_uncorrectable_fail_blocks (test_orchestrator.Stage2Tests.test_uncorrectable_fail_blocks) ... ok
+test_verified_recomputes_audit_from_retained_readback (test_orchestrator.Stage2Tests.test_verified_recomputes_audit_from_retained_readback) ... ok
+test_verified_with_nonpass_audit_is_rejected (test_orchestrator.Stage2Tests.test_verified_with_nonpass_audit_is_rejected) ... ok
+test_verified_without_readback_and_audit_is_rejected (test_orchestrator.Stage2Tests.test_verified_without_readback_and_audit_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 44 tests in 1.081s
+
+OK

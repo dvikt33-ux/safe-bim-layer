@@ -67,10 +67,15 @@ identity record; it is not claimed to be embedded in the model JSON itself.
   are omitted. `fullElementHash` covers **every** field, including material bindings
   and relationships. Index entries are sorted by GUID; duplicate GUIDs fail.
 - `before-after-delta.json` compares full canonical element hashes by GUID. It
-  reports added, removed, changed and unchanged counts without filtering native
-  body indices. Exactly one expected added GUID and no removal are required.
+  reports added, removed, `changed` (compatibility alias of `rawChanged`) and raw
+  unchanged counts. `semanticChanged` excludes only changes confined to direct
+  `bodies[n].nativeBodyIndex` fields; `technicalNoiseChanged` records those GUIDs
+  and `semanticUnchangedCount` includes them. Mixed changes, body array changes,
+  geometry/properties and identically named fields outside that exact location
+  remain semantic. Added/removed GUIDs remain separate in both views. Exactly one expected added GUID and no removal are required.
 - Source/created walls and changed elements contain the complete JSON objects
-  extracted from the full dump. `changed-fields.json` describes the exact differing
+  extracted from the full dump, with local path strings replaced by logical IDs
+  as described below. `changed-fields.json` describes the exact differing
   paths; classification does not remove entries from `changed` or alter hashes.
 - `geometry-check.json` recomputes straight Wall reference-line length, endpoint
   joint distance and direction cosine. Story/height/thickness/bottom offset and
@@ -113,3 +118,27 @@ were all replaced is not a digital signature.
 GitHub Connector can inspect these ordinary Git JSON files without resolving LFS.
 Recomputing the pack requires the primary full dumps through Git LFS. No new live
 run is necessary and this task does not start Stage 4.
+
+## Completion pass (extractor 2)
+
+All published JSON values are recursively sanitized: absolute Windows/Unix paths,
+UNC paths, local user paths and home shortcuts become `local-path-sha256:<digest>`.
+This opaque logical identifier is the SHA-256 of the original UTF-8 string; it does
+not disclose a basename or username. Safe repository-relative source references
+remain readable. Source byte SHA-256/size, raw element/group hashes and Stage 3
+model fingerprints are still computed from unmodified primary evidence.
+
+The pinned identity record is checked against the logical identity, and archived
+fingerprint identities use the same transformation. Thus a pack's sanitized recipe
+can be independently rebuilt; editing a logical ID still fails verification.
+The original primary evidence and earlier Git history remain unchanged; this pass
+sanitizes current Audit Pack artifacts and does not remove paths from history.
+
+Before any output is written, parsed payloads and manifest are scanned for unsafe
+paths, including nested metadata/properties and keys. The verifier independently
+scans every pack file before checking hashes and rebuilding. Automated regression
+tests scan both committed historical packs and exercise Windows, Unix, UNC, home
+paths, nested values, tampering, noise-only and mixed semantic changes.
+
+This is an offline Audit Pack completion only: runtime, historical evidence,
+Stage 1/2/3 execution semantics and main are unchanged; no live calls or Stage 4.

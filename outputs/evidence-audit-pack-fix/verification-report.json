@@ -1,15 +1,15 @@
 {
   "status": "PASS",
-  "baseCommit": "06c503a424498a74e19507ae11a4cc48f6dc7c3f",
+  "baseCommit": "754335b1b2c5cd2a12b16d850b01ac6c82861d8a",
   "branch": "work/audit-pack-fix",
   "schemaVersion": 1,
-  "extractorVersion": "1",
+  "extractorVersion": "2",
   "extractor": "scripts/build_audit_pack.py",
   "verifier": "scripts/verify_audit_pack.py",
   "tests": {
     "tests_audit_pack": {
-      "run": 32,
-      "passed": 32,
+      "run": 47,
+      "passed": 47,
       "failures": 0,
       "errors": 0,
       "skipped": 0,
@@ -32,18 +32,18 @@
       "status": "PASS"
     }
   },
-  "totalTestsPassed": 80,
+  "totalTestsPassed": 95,
   "packs": {
     "3": {
       "status": "PASS",
       "path": "outputs/closed-loop-stage3/run-002/audit-pack",
       "files": 37,
-      "bytes": 8409508,
-      "MiB": 8.01993179321289,
+      "bytes": 8426497,
+      "MiB": 8.036133766174316,
       "manifest": {
         "path": "outputs/closed-loop-stage3/run-002/audit-pack/audit-pack-manifest.json",
-        "sha256": "3c76d02b0785e98247fb0d69e36567ac8c4e32833b8086fc6e94fe99d0aa2f41",
-        "bytes": 14485
+        "sha256": "c884aefba656d72c433db20835f996fc45bcac064419a01d55724f3c1a9e5279",
+        "bytes": 14487
       },
       "sourceFullDumps": [
         {
@@ -122,7 +122,11 @@
           "createdGuid": "B492859E-E508-46B3-87ED-0B07C6C580CC",
           "length": 1.0,
           "jointDistance": 0.0,
-          "directionCosine": 1.0
+          "directionCosine": 1.0,
+          "rawChangedCount": 123,
+          "semanticChangedCount": 0,
+          "technicalNoiseChangedCount": 123,
+          "semanticUnchangedCount": 5304
         },
         {
           "iteration": 2,
@@ -138,7 +142,11 @@
           "createdGuid": "40F79CDC-61BC-43E1-A65C-32E962568F3F",
           "length": 0.5,
           "jointDistance": 0.0,
-          "directionCosine": 1.0
+          "directionCosine": 1.0,
+          "rawChangedCount": 108,
+          "semanticChangedCount": 0,
+          "technicalNoiseChangedCount": 108,
+          "semanticUnchangedCount": 5305
         }
       ],
       "dependency": {
@@ -200,18 +208,22 @@
         "status": "PASS"
       },
       "deterministicFullRebuild": "ALL_BYTES_IDENTICAL",
-      "verifier": "PASS"
+      "verifier": "PASS",
+      "absolutePathScan": {
+        "status": "PASS",
+        "files": 37
+      }
     },
     "1": {
       "status": "PASS",
       "path": "outputs/closed-loop-stage1/audit-pack",
       "files": 32,
-      "bytes": 8552615,
-      "MiB": 8.15640926361084,
+      "bytes": 8571179,
+      "MiB": 8.174113273620605,
       "manifest": {
         "path": "outputs/closed-loop-stage1/audit-pack/audit-pack-manifest.json",
-        "sha256": "6ea9801895e2650b8c3d591d7d13fce25e48db48f29f57e89b6175aff9c450bc",
-        "bytes": 9562
+        "sha256": "88495ad06112f75a53c6cf930aee9af7a6bd29266852858815f4ded55a985b7a",
+        "bytes": 9564
       },
       "sourceFullDumps": [
         {
@@ -260,7 +272,11 @@
           "createdGuid": "B18F8EA4-8D47-4FAE-9373-E830DBEA3CF4",
           "length": 1.0,
           "jointDistance": 0.0,
-          "directionCosine": 1.0
+          "directionCosine": 1.0,
+          "rawChangedCount": 123,
+          "semanticChangedCount": 0,
+          "technicalNoiseChangedCount": 123,
+          "semanticUnchangedCount": 5300
         },
         {
           "iteration": 2,
@@ -276,7 +292,11 @@
           "createdGuid": "CE093166-FF7B-420E-B991-1D0CE0D5CCAE",
           "length": 0.5,
           "jointDistance": 0.0,
-          "directionCosine": 1.0
+          "directionCosine": 1.0,
+          "rawChangedCount": 123,
+          "semanticChangedCount": 0,
+          "technicalNoiseChangedCount": 123,
+          "semanticUnchangedCount": 5301
         }
       ],
       "dependency": {
@@ -334,11 +354,15 @@
         "status": "PASS"
       },
       "deterministicFullRebuild": "ALL_BYTES_IDENTICAL",
-      "verifier": "PASS"
+      "verifier": "PASS",
+      "absolutePathScan": {
+        "status": "PASS",
+        "files": 32
+      }
     }
   },
-  "totalAuditPackBytes": 16962123,
-  "totalAuditPackMiB": 16.17634105682373,
+  "totalAuditPackBytes": 16997676,
+  "totalAuditPackMiB": 16.210247039794922,
   "tamperTests": {
     "modifiedSourceValue": "DETECTED_FAIL",
     "modifiedCreatedWall": "DETECTED_FAIL",
@@ -356,5 +380,18 @@
     "mainBefore": "72e9be15ac3b943d7b6f0c46eaa45aa5798d56bc",
     "mainAfter": "72e9be15ac3b943d7b6f0c46eaa45aa5798d56bc"
   },
-  "blockers": []
+  "blockers": [],
+  "completion": {
+    "absolutePathScan": {
+      "status": "PASS",
+      "files": 69
+    },
+    "identityPolicy": "local-path-sha256:<SHA256 of original UTF-8 string>; pinned source bytes and hashes retained",
+    "rawChanged": "exact full-element hash comparison; changed remains compatibility alias",
+    "semanticChanged": "rawChanged minus changes confined to bodies[n].nativeBodyIndex",
+    "testsAdded": 15,
+    "stage4Started": false,
+    "historicalGitHistorySanitized": false,
+    "testEnvironment": "workspace-local temporary directory for Stage 2/3 atomic file replacement"
+  }
 }

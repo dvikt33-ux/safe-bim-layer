@@ -1,0 +1,52 @@
+test_changed_detection_includes_property_change (test_audit_pack.AuditPackTests.test_changed_detection_includes_property_change) ... ok
+test_changed_neighbour_full_records (test_audit_pack.AuditPackTests.test_changed_neighbour_full_records) ... ok
+test_compact_full_conflict (test_audit_pack.AuditPackTests.test_compact_full_conflict) ... ok
+test_dependency_equality (test_audit_pack.AuditPackTests.test_dependency_equality) ... ok
+test_dependency_mismatch_fails (test_audit_pack.AuditPackTests.test_dependency_mismatch_fails) ... ok
+test_deterministic_extraction_all_bytes (test_audit_pack.AuditPackTests.test_deterministic_extraction_all_bytes) ... ok
+test_duplicate_guids_fail_closed (test_audit_pack.AuditPackTests.test_duplicate_guids_fail_closed) ... ok
+test_duplicate_json_keys_fail_closed (test_audit_pack.AuditPackTests.test_duplicate_json_keys_fail_closed) ... ok
+test_exact_added_guid (test_audit_pack.AuditPackTests.test_exact_added_guid) ... ok
+test_exact_full_objects_extracted (test_audit_pack.AuditPackTests.test_exact_full_objects_extracted) ... ok
+test_fingerprint_conflict (test_audit_pack.AuditPackTests.test_fingerprint_conflict) ... ok
+test_index_deduplicated_between_identical_snapshots (test_audit_pack.AuditPackTests.test_index_deduplicated_between_identical_snapshots) ... ok
+test_invalid_contract_lengths (test_audit_pack.AuditPackTests.test_invalid_contract_lengths) ... ok
+test_joint_distance_computation (test_audit_pack.AuditPackTests.test_joint_distance_computation) ... ok
+test_manifest_tampering_recomputed (test_audit_pack.AuditPackTests.test_manifest_tampering_recomputed) ... ok
+test_manifest_verification_all_files (test_audit_pack.AuditPackTests.test_manifest_verification_all_files) ... ok
+test_model_hash_compatible_order_timing_rule (test_audit_pack.AuditPackTests.test_model_hash_compatible_order_timing_rule) ... ok
+test_nested_source_metadata_and_properties_sanitized (test_audit_pack.AuditPackTests.test_nested_source_metadata_and_properties_sanitized) ... ok
+test_nonempty_output_not_overwritten (test_audit_pack.AuditPackTests.test_nonempty_output_not_overwritten) ... ok
+test_path_traversal_rejected (test_audit_pack.AuditPackTests.test_path_traversal_rejected) ... ok
+test_public_identity_mismatch_still_fails (test_audit_pack.AuditPackTests.test_public_identity_mismatch_still_fails) ... ok
+test_public_identity_provenance_round_trip (test_audit_pack.AuditPackTests.test_public_identity_provenance_round_trip) ... ok
+test_public_safe_relative_paths_and_url (test_audit_pack.AuditPackTests.test_public_safe_relative_paths_and_url) ... ok
+test_public_scan_keys_fail_closed (test_audit_pack.AuditPackTests.test_public_scan_keys_fail_closed) ... ok
+test_public_scan_missing_or_empty_pack_fails (test_audit_pack.AuditPackTests.test_public_scan_missing_or_empty_pack_fails) ... ok
+test_public_scan_relative_user_and_home_paths (test_audit_pack.AuditPackTests.test_public_scan_relative_user_and_home_paths) ... ok
+test_public_scan_unc_and_rooted_windows (test_audit_pack.AuditPackTests.test_public_scan_unc_and_rooted_windows) ... ok
+test_public_scan_unix_paths (test_audit_pack.AuditPackTests.test_public_scan_unix_paths) ... ok
+test_public_scan_windows_paths (test_audit_pack.AuditPackTests.test_public_scan_windows_paths) ... ok
+test_published_historical_packs_have_no_local_paths (test_audit_pack.AuditPackTests.test_published_historical_packs_have_no_local_paths) ... ok
+test_readback_conflict (test_audit_pack.AuditPackTests.test_readback_conflict) ... ok
+test_removed_detection (test_audit_pack.AuditPackTests.test_removed_detection) ... ok
+test_reported_count_conflict (test_audit_pack.AuditPackTests.test_reported_count_conflict) ... ok
+test_self_consistent_tampered_file_recomputed (test_audit_pack.AuditPackTests.test_self_consistent_tampered_file_recomputed) ... ok
+test_semantic_delta_published_end_to_end (test_audit_pack.AuditPackTests.test_semantic_delta_published_end_to_end) ... ok
+test_semantic_mixed_and_nonbody_index_remain_changes (test_audit_pack.AuditPackTests.test_semantic_mixed_and_nonbody_index_remain_changes) ... ok
+test_semantic_native_body_index_only_is_noise (test_audit_pack.AuditPackTests.test_semantic_native_body_index_only_is_noise) ... ok
+test_source_sha_mismatch_modified_value (test_audit_pack.AuditPackTests.test_source_sha_mismatch_modified_value) ... ok
+test_summary_counts_and_totals (test_audit_pack.AuditPackTests.test_summary_counts_and_totals) ... ok
+test_tampered_audit_file (test_audit_pack.AuditPackTests.test_tampered_audit_file) ... ok
+test_two_unexpected_additions (test_audit_pack.AuditPackTests.test_two_unexpected_additions) ... ok
+test_typed_action_conflict (test_audit_pack.AuditPackTests.test_typed_action_conflict) ... ok
+test_unlisted_extra_file_fails (test_audit_pack.AuditPackTests.test_unlisted_extra_file_fails) ... ok
+test_verifier_rejects_escaped_json_local_path (test_audit_pack.AuditPackTests.test_verifier_rejects_escaped_json_local_path) ... ok
+test_wall_geometry_recomputed (test_audit_pack.AuditPackTests.test_wall_geometry_recomputed) ... ok
+test_whole_model_index_hashes_existing_groups_only (test_audit_pack.AuditPackTests.test_whole_model_index_hashes_existing_groups_only) ... ok
+test_wrong_created_guid (test_audit_pack.AuditPackTests.test_wrong_created_guid) ... ok
+
+----------------------------------------------------------------------
+Ran 47 tests in 14.481s
+
+OK

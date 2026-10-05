@@ -7,7 +7,8 @@ import unittest
 
 from scripts.audit_pack import (AuditError, Conflict, build_pack, canonical, delta,
                                element_index, file_info, model_hash, model_summary,
-                               read_json, verify_pack, wall_geometry)
+                               read_json, verify_pack, wall_geometry, assert_public,
+                               public_value, scan_public_pack, semantic_delta)
 
 
 def wall(guid, begin, end):
@@ -271,6 +272,119 @@ class AuditPackTests(unittest.TestCase):
         self.contract['iterations'][0]['compactEvidence'] = [file_info(self.root, 'compact.json')]
         with self.assertRaises(Conflict):
             self.build()
+
+
+    def test_public_scan_missing_or_empty_pack_fails(self):
+        for p in (self.root/'missing', self.root/'empty'):
+            if p.name == 'empty':
+                p.mkdir()
+            with self.assertRaises(AuditError):
+                scan_public_pack(p)
+
+    def test_public_scan_keys_fail_closed(self):
+        with self.assertRaises(AuditError):
+            assert_public({'/tmp/private': 'value'})
+
+    def test_public_scan_windows_paths(self):
+        for value in (r'C:\Users\Alice\model.pln', 'D:/archive/model.pln', 'see C:/tmp/x'):
+            with self.subTest(value=value), self.assertRaises(AuditError):
+                assert_public({'source': value})
+
+    def test_public_scan_unix_paths(self):
+        for value in ('/home/alice/model.pln', '/tmp/model.pln', 'archive: /var/data/x'):
+            with self.subTest(value=value), self.assertRaises(AuditError):
+                assert_public(value)
+
+    def test_public_scan_unc_and_rooted_windows(self):
+        for value in (r'\\host\share\model.pln', '//host/share/model.pln', r'\Users\Alice\x', r'\archive\x'):
+            with self.subTest(value=value), self.assertRaises(AuditError):
+                assert_public(value)
+
+    def test_public_scan_relative_user_and_home_paths(self):
+        for value in ('Users/Alice/model.pln', 'home/alice/model.pln', '~/x', '%USERPROFILE%/x', '$HOME/x'):
+            with self.subTest(value=value), self.assertRaises(AuditError):
+                assert_public(value)
+
+    def test_public_safe_relative_paths_and_url(self):
+        assert_public({'source': 'outputs/stage/model.json', 'url': 'https://github.com/owner/repo'})
+
+    def test_public_identity_provenance_round_trip(self):
+        identity = 'C:/Users/Alice/model.pln'
+        self.contract['modelIdentity'] = identity
+        self.write('identity.json', {'result': {'addOnCommandResponse': {'projectPath': identity}}})
+        self.contract['identityEvidence'] = file_info(self.root, 'identity.json')
+        p = self.build()
+        c = read_json(p/'source.json')['contract']
+        self.assertEqual(c['modelIdentity'], public_value(identity))
+        self.assertEqual(c['identityEvidence'], self.contract['identityEvidence'])
+        self.assertEqual(verify_pack(self.root, p)['status'], 'PASS')
+        self.assertEqual(scan_public_pack(p)['status'], 'PASS')
+
+    def test_public_identity_mismatch_still_fails(self):
+        self.contract['modelIdentity'] = 'C:/Users/Alice/model.pln'
+        self.write('identity.json', {'result': {'addOnCommandResponse': {'projectPath': 'D:/other.pln'}}})
+        self.contract['identityEvidence'] = file_info(self.root, 'identity.json')
+        with self.assertRaises(Conflict):
+            self.build()
+
+    def test_nested_source_metadata_and_properties_sanitized(self):
+        self.contract['metadata'] = {'source': ['/home/alice/archive']}
+        self.first['properties']['sourcePath'] = 'C:/Users/Alice/x'
+        self.update_after(self.after)
+        p = self.build()
+        self.assertEqual(scan_public_pack(p)['status'], 'PASS')
+        self.assertEqual(read_json(p/'iteration-1/created-wall.json')['properties']['sourcePath'],
+                         public_value('C:/Users/Alice/x'))
+        self.assertEqual(verify_pack(self.root, p)['status'], 'PASS')
+
+    def test_verifier_rejects_escaped_json_local_path(self):
+        p = self.build()
+        (p/'iteration-1/created-wall.json').write_text(json.dumps({'source': '/tmp/x'}))
+        with self.assertRaisesRegex(AuditError, 'local user path'):
+            verify_pack(self.root, p)
+
+    def test_semantic_native_body_index_only_is_noise(self):
+        c = {'changed': ['N'], 'unchangedCount': 2}
+        semantic_delta(c, [{'guid': 'N', 'changedPaths': ['bodies[0].nativeBodyIndex', 'bodies[12].nativeBodyIndex']}])
+        self.assertEqual(c['rawChanged'], ['N'])
+        self.assertEqual(c['semanticChanged'], [])
+        self.assertEqual(c['technicalNoiseChanged'], ['N'])
+        self.assertEqual(c['semanticUnchangedCount'], 3)
+
+    def test_semantic_mixed_and_nonbody_index_remain_changes(self):
+        for paths in (['bodies[0].nativeBodyIndex', 'properties.value'],
+                      ['properties.nativeBodyIndex'], ['bodies[0].nested.nativeBodyIndex'],
+                      ['bodies'], ['bodies[0].vertices[0].x']):
+            with self.subTest(paths=paths):
+                c = {'changed': ['N'], 'unchangedCount': 0}
+                semantic_delta(c, [{'guid': 'N', 'changedPaths': paths}])
+                self.assertEqual(c['semanticChanged'], ['N'])
+                self.assertEqual(c['rawChanged'], ['N'])
+
+    def test_semantic_delta_published_end_to_end(self):
+        neighbour = {'guid': 'N', 'type': 'Object', 'bodies': [{'nativeBodyIndex': 1, 'vertices': [1, 2]}]}
+        self.before['elements'].append(neighbour)
+        self.before['counts']['elements'] = 2
+        changed = copy.deepcopy(neighbour)
+        changed['bodies'][0]['nativeBodyIndex'] = 7
+        self.after['elements'].append(changed)
+        self.after['counts']['elements'] = 3
+        for spec, data in zip(self.specs, [self.before, self.before, self.after]):
+            self.write(spec['path'], data)
+            spec.update(file_info(self.root, spec['path']))
+        self.contract['iterations'][0]['compactEvidence'] = []
+        p = self.build()
+        d = read_json(p/'iteration-1/before-after-delta.json')
+        self.assertEqual(d['changed'], ['N'])
+        self.assertEqual(d['rawChanged'], ['N'])
+        self.assertEqual(d['semanticChanged'], [])
+        self.assertEqual(read_json(p/'iteration-1/changed-elements.json')[0]['before'], neighbour)
+        self.assertEqual(verify_pack(self.root, p)['status'], 'PASS')
+
+    def test_published_historical_packs_have_no_local_paths(self):
+        root = Path(__file__).resolve().parents[1]
+        for pack in ('outputs/closed-loop-stage1/audit-pack', 'outputs/closed-loop-stage3/run-002/audit-pack'):
+            self.assertEqual(scan_public_pack(root/pack)['status'], 'PASS')
 
 
 if __name__ == '__main__':
