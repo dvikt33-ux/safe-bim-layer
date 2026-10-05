@@ -183,6 +183,24 @@ class BridgeStore:
     def jobs(self):
         return [_decode_payload(row) for row in self._db.execute('SELECT * FROM remote_jobs ORDER BY created_at')]
 
+    def jobs_by_state(self, state: str, limit: int | None = None):
+        sql = 'SELECT * FROM remote_jobs WHERE state=? ORDER BY created_at'
+        params = [state]
+        if limit is not None:
+            sql += ' LIMIT ?'
+            params.append(int(limit))
+        rows = self._db.execute(sql, tuple(params)).fetchall()
+        return [_decode_payload(row) for row in rows]
+
+    def claim_job(self, job_id: str) -> bool:
+        cur = self._db.execute(
+            "UPDATE remote_jobs SET state='RUNNING' WHERE job_id=? AND state='QUEUED'",
+            (job_id,))
+        return cur.rowcount == 1
+
+    def set_job_state(self, job_id: str, state: str) -> None:
+        self._db.execute('UPDATE remote_jobs SET state=? WHERE job_id=?', (state, job_id))
+
     def put_result(self, job_id: str, result: dict, upload_state: str) -> None:
         existing = self.result(job_id)
         if existing is not None and canonical_hash(existing['result']) != canonical_hash(result):
