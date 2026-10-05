@@ -1,0 +1,28 @@
+[
+  {
+    "facts": {
+      "floor_count": {
+        "method": "explicit supplied record",
+        "unit": "count",
+        "value": 2,
+        "verification": "VERIFIED"
+      },
+      "municipality": {
+        "method": "explicit supplied record",
+        "unit": null,
+        "value": "fixture-city",
+        "verification": "VERIFIED"
+      },
+      "purpose": {
+        "method": "explicit supplied record",
+        "unit": null,
+        "value": "IZHS",
+        "verification": "VERIFIED"
+      }
+    },
+    "id": "brief",
+    "inspected": true,
+    "kind": "USER_BRIEF",
+    "revision": "v1"
+  }
+]

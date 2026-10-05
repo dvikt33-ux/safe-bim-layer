@@ -1,0 +1,90 @@
+[
+  {
+    "approved": true,
+    "id": "program",
+    "inspected": true,
+    "kind": "USER_BRIEF",
+    "revision": "v1",
+    "statements": [
+      {
+        "accessLevel": "FAMILY",
+        "daylightPreference": "morning daylight",
+        "function": "спальня",
+        "functionalZone": "private",
+        "id": "bedroom_master-intent",
+        "kind": "SPACE",
+        "noiseGeneration": "LOW",
+        "noiseSensitivity": "HIGH",
+        "preferredFloor": "upper",
+        "privacyLevel": "PRIVATE",
+        "requestedArea": {
+          "unit": "m2",
+          "value": 18
+        },
+        "spaceId": "bedroom_master",
+        "specialEquipment": [
+          "user specified desk"
+        ]
+      },
+      {
+        "function": "KITCHEN",
+        "functionalZone": "service",
+        "id": "kitchen-intent",
+        "kind": "SPACE",
+        "quantity": 1,
+        "requestedArea": {
+          "max": 16,
+          "min": 12,
+          "unit": "m2"
+        },
+        "spaceId": "kitchen"
+      },
+      {
+        "function": "LIVING_ROOM",
+        "functionalZone": "public",
+        "id": "living-intent",
+        "kind": "SPACE",
+        "quantity": 1,
+        "spaceId": "living"
+      },
+      {
+        "function": "HALL",
+        "functionalZone": "circulation",
+        "id": "hall-intent",
+        "kind": "SPACE",
+        "quantity": 1,
+        "spaceId": "hall"
+      },
+      {
+        "id": "family",
+        "kind": "USER_GROUP",
+        "label": "family",
+        "quantity": 4,
+        "userId": "family"
+      },
+      {
+        "from": "kitchen",
+        "id": "adjacency",
+        "kind": "RELATIONSHIP",
+        "to": "living",
+        "type": "REQUIRED_ADJACENCY"
+      },
+      {
+        "id": "shared-access",
+        "kind": "ACCESS_GROUP",
+        "members": [
+          "bedroom_master",
+          "kitchen"
+        ],
+        "via": "hall"
+      },
+      {
+        "category": "NOT_APPLICABLE",
+        "function": "GARAGE",
+        "id": "no-garage",
+        "kind": "EXCLUDE_FUNCTION",
+        "reason": "client excludes a garage"
+      }
+    ]
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "approved": true,
+    "id": "user-answer",
+    "inspected": true,
+    "kind": "USER_CORRECTION",
+    "revision": "v1",
+    "statements": [
+      {
+        "field": "quantity",
+        "id": "bedroom-count",
+        "kind": "SPACE_ATTRIBUTE",
+        "spaceId": "bedroom_master",
+        "value": 1
+      }
+    ]
+  }
+]
