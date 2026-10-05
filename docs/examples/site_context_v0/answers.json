@@ -1,0 +1,21 @@
+[
+  {
+    "id": "answer",
+    "inspected": true,
+    "kind": "USER_CORRECTION",
+    "revision": "v1",
+    "statements": [
+      {
+        "coordinateOrientation": "survey-grid",
+        "coordinateSystemId": "site-grid",
+        "id": "north",
+        "kind": "ORIENTATION",
+        "northVector": [
+          0,
+          1
+        ]
+      }
+    ],
+    "verification": "CONFIRMED"
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "approved": true,
+  "downstreamStage": "CURRENT_SITE_INTAKE",
+  "id": "site-inputs",
+  "requiredInputs": [
+    "siteId",
+    "coordinateSystem",
+    "boundary",
+    "orientation",
+    "access:VEHICLE_ACCESS"
+  ],
+  "revision": "v1"
+}

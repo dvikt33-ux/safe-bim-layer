@@ -1,0 +1,191 @@
+[
+  {
+    "id": "survey",
+    "inspected": true,
+    "kind": "COORDINATES",
+    "revision": "v1",
+    "statements": [
+      {
+        "id": "identity",
+        "kind": "SITE",
+        "label": "synthetic acceptance site",
+        "siteId": "test-site"
+      },
+      {
+        "id": "crs",
+        "kind": "COORDINATE_SYSTEM",
+        "metadata": {
+          "axisOrder": "XY",
+          "datum": "survey-frame",
+          "id": "site-grid",
+          "kind": "LOCAL_CARTESIAN",
+          "orientation": "survey-grid",
+          "unit": "m"
+        }
+      },
+      {
+        "geometry": {
+          "coordinateSystemId": "site-grid",
+          "coordinates": [
+            [
+              [
+                0,
+                0
+              ],
+              [
+                30,
+                0
+              ],
+              [
+                30,
+                20
+              ],
+              [
+                0,
+                20
+              ],
+              [
+                0,
+                0
+              ]
+            ]
+          ],
+          "type": "Polygon",
+          "unit": "m"
+        },
+        "id": "boundary",
+        "kind": "BOUNDARY"
+      },
+      {
+        "coordinateOrientation": "survey-grid",
+        "coordinateSystemId": "site-grid",
+        "id": "north",
+        "kind": "ORIENTATION",
+        "northVector": [
+          0,
+          1
+        ]
+      },
+      {
+        "accessId": "driveway",
+        "description": "confirmed entry",
+        "geometry": {
+          "coordinateSystemId": "site-grid",
+          "coordinates": [
+            0,
+            5
+          ],
+          "type": "Point",
+          "unit": "m"
+        },
+        "id": "vehicle",
+        "kind": "ACCESS",
+        "type": "VEHICLE_ACCESS"
+      },
+      {
+        "geometry": {
+          "coordinateSystemId": "site-grid",
+          "coordinates": [
+            [
+              [
+                5,
+                5
+              ],
+              [
+                10,
+                5
+              ],
+              [
+                10,
+                10
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                5
+              ]
+            ]
+          ],
+          "type": "Polygon",
+          "unit": "m"
+        },
+        "id": "building",
+        "kind": "OBJECT",
+        "objectId": "existing-building",
+        "type": "BUILDING"
+      },
+      {
+        "description": "confirmed road along western boundary",
+        "featureId": "road-noise",
+        "id": "noise",
+        "kind": "CONTEXT",
+        "type": "NOISE_SOURCE"
+      },
+      {
+        "id": "view",
+        "kind": "PREFERENCE",
+        "preferenceId": "view",
+        "scope": [
+          "SITE"
+        ],
+        "text": "user prefers a view towards the garden",
+        "topic": "VIEW"
+      },
+      {
+        "elevation": 100,
+        "elevationUnit": "m",
+        "geometry": {
+          "coordinateSystemId": "site-grid",
+          "coordinates": [
+            0,
+            0
+          ],
+          "type": "Point",
+          "unit": "m"
+        },
+        "id": "e1",
+        "kind": "ELEVATION_POINT",
+        "pointId": "e1",
+        "verticalDatum": "survey-benchmark"
+      },
+      {
+        "elevation": 102,
+        "elevationUnit": "m",
+        "geometry": {
+          "coordinateSystemId": "site-grid",
+          "coordinates": [
+            30,
+            0
+          ],
+          "type": "Point",
+          "unit": "m"
+        },
+        "id": "e2",
+        "kind": "ELEVATION_POINT",
+        "pointId": "e2",
+        "verticalDatum": "survey-benchmark"
+      },
+      {
+        "elevation": 101,
+        "elevationUnit": "m",
+        "geometry": {
+          "coordinateSystemId": "site-grid",
+          "coordinates": [
+            0,
+            20
+          ],
+          "type": "Point",
+          "unit": "m"
+        },
+        "id": "e3",
+        "kind": "ELEVATION_POINT",
+        "pointId": "e3",
+        "verticalDatum": "survey-benchmark"
+      }
+    ],
+    "verification": "CONFIRMED"
+  }
+]
