@@ -1,0 +1,26 @@
+[
+  {
+    "approved": true,
+    "basis": "NON_NORMATIVE",
+    "category": "CLIENT_REQUIREMENT",
+    "id": "client",
+    "inspected": true,
+    "revision": "v1",
+    "statements": [
+      {
+        "binding": true,
+        "constraintId": "budget",
+        "id": "budget",
+        "kind": "CONSTRAINT",
+        "operator": "<=",
+        "scope": [
+          "PROJECT"
+        ],
+        "type": "BUDGET_LIMIT",
+        "unit": "RUB",
+        "value": 15000000
+      }
+    ],
+    "verification": "CONFIRMED"
+  }
+]

@@ -1,0 +1,39 @@
+[
+  {
+    "approved": true,
+    "basis": "NON_NORMATIVE",
+    "category": "CLIENT_REQUIREMENT",
+    "id": "client",
+    "inspected": true,
+    "revision": "v1",
+    "statements": [
+      {
+        "binding": true,
+        "constraintId": "material",
+        "id": "material",
+        "kind": "CONSTRAINT",
+        "operator": "REQUIRE",
+        "scope": [
+          "PROJECT"
+        ],
+        "type": "MATERIAL_REQUIRED",
+        "unit": "none",
+        "value": "CERAMIC_BLOCK"
+      },
+      {
+        "binding": true,
+        "constraintId": "ban",
+        "id": "ban",
+        "kind": "CONSTRAINT",
+        "operator": "PROHIBIT",
+        "scope": [
+          "PROJECT"
+        ],
+        "type": "MATERIAL_PROHIBITED",
+        "unit": "none",
+        "value": "CERAMIC_BLOCK"
+      }
+    ],
+    "verification": "CONFIRMED"
+  }
+]

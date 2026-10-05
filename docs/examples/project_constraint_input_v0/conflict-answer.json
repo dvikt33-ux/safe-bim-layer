@@ -1,0 +1,36 @@
+[
+  {
+    "approved": true,
+    "basis": "NON_NORMATIVE",
+    "category": "APPROVED_PROJECT_DECISION",
+    "id": "answer",
+    "inspected": true,
+    "revision": "v1",
+    "statements": [
+      {
+        "binding": true,
+        "constraintId": "corrected-material",
+        "id": "corrected-material",
+        "kind": "CONSTRAINT",
+        "operator": "PROHIBIT",
+        "scope": [
+          "PROJECT"
+        ],
+        "supersedes": [
+          {
+            "claimId": "client:material",
+            "evidenceFingerprint": "02d3723d51b78d8646c92ede8a3293c7fa089831fd3b42ab69d1eb0d8d817f82"
+          },
+          {
+            "claimId": "client:ban",
+            "evidenceFingerprint": "2c9d6f4ed96cbc867b9c94b9b45674b91d92b1df8b9b54360cede7882024535d"
+          }
+        ],
+        "type": "MATERIAL_PROHIBITED",
+        "unit": "none",
+        "value": "CERAMIC_BLOCK"
+      }
+    ],
+    "verification": "CONFIRMED"
+  }
+]

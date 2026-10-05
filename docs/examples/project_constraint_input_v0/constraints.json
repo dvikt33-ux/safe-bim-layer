@@ -1,0 +1,40 @@
+[
+  {
+    "approved": true,
+    "basis": "NON_NORMATIVE",
+    "category": "CLIENT_REQUIREMENT",
+    "id": "client",
+    "inspected": true,
+    "revision": "v1",
+    "statements": [
+      {
+        "binding": true,
+        "constraintId": "budget",
+        "id": "budget",
+        "kind": "CONSTRAINT",
+        "operator": "<=",
+        "scope": [
+          "PROJECT"
+        ],
+        "type": "BUDGET_LIMIT",
+        "unit": "RUB",
+        "value": 15000000
+      },
+      {
+        "binding": true,
+        "constraintId": "envelope",
+        "depth": 10,
+        "derivationRule": "EXPLICIT_DIMENSION_ENVELOPE_V0",
+        "exactInputStatement": "Дом максимум 12 × 10 m",
+        "id": "envelope",
+        "kind": "DIMENSION_ENVELOPE",
+        "scope": [
+          "BUILDING"
+        ],
+        "unit": "m",
+        "width": 12
+      }
+    ],
+    "verification": "CONFIRMED"
+  }
+]
