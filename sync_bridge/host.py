@@ -33,6 +33,7 @@ from sync_bridge.pipe_win32 import NamedPipeUnavailable, production_transport
 from sync_bridge.protocol import envelope
 from sync_bridge.security import PeerIdentity
 from sync_bridge.store import BridgeStore
+from sync_bridge.wall_write import ContinueWallExecutor, WRITE_COMMAND_ALLOWLIST
 
 
 HOST_STATUS = 'READY'
@@ -150,7 +151,7 @@ class DefaultGitHubTokenProvider:
 
 
 class TapirReadTransport:
-    """Production adapter for the already verified S2.4 read-only provider."""
+    """Production Tapir adapter with a read fence and one explicit write fence."""
 
     def __init__(self, port: int | None = None, backend=None):
         self.backend = backend or TapirBackend(port=port)
@@ -159,6 +160,12 @@ class TapirReadTransport:
     def call(self, command: str, params: dict) -> dict:
         if command not in READ_COMMAND_ALLOWLIST:
             raise RuntimeError(f'Archicad read fence refused {command!r}')
+        response = self.backend._tapir(command)(params or {})
+        return _to_dict(response)
+
+    def write_call(self, command: str, params: dict) -> dict:
+        if command not in WRITE_COMMAND_ALLOWLIST:
+            raise RuntimeError(f'Archicad write fence refused {command!r}')
         response = self.backend._tapir(command)(params or {})
         return _to_dict(response)
 
@@ -229,6 +236,7 @@ class BridgeHost:
         self.mailbox = None
         self.bridge = None
         self.context_provider = None
+        self.write_executor = None
         self.current_binding: dict | None = None
         self.status_publisher = None
         self.running = False
@@ -257,12 +265,14 @@ class BridgeHost:
             self.transport,
             binding_reader=self.transport.binding,
         )
+        write_capable = callable(getattr(self.transport, 'write_call', None))
         bridge = SafeBIMBridge(
             store,
             mailbox,
             owner=identity,
             instance_id=self.config.bridge_instance_id,
             context_provider=provider,
+            archicad_write_api=write_capable,
         )
 
         pipe = None
@@ -279,6 +289,10 @@ class BridgeHost:
         self.store = store
         self.mailbox = mailbox
         self.context_provider = provider
+        self.write_executor = (
+            ContinueWallExecutor(self.transport, binding_reader=self.transport.binding)
+            if write_capable else None
+        )
         self.bridge = bridge
         self.running = True
         self.stop_requested = False
@@ -289,6 +303,7 @@ class BridgeHost:
         self._next_archicad_refresh = now
         self._next_heartbeat = now + self.config.heartbeat_seconds
         self.refresh_archicad(publish_status=False)
+        self._recover_interrupted_write_jobs()
         self._publish_status()
         self.log.info('bridge host started; credential_source=%s',
                       getattr(self.token_provider, 'source', 'injected'))
@@ -364,8 +379,85 @@ class BridgeHost:
         remote = self.bridge.tick()
         if remote.get('status') == 'LEASE_LOST':
             raise LeaseLost('LEASE_LOST')
+        writes = self._execute_one_write_job()
+        published_after_write = self.bridge.flush_outbox() if writes else []
         self._publish_status()
-        return {'archicad': archicad, 'remote': remote, 'status': self.status()}
+        return {
+            'archicad': archicad,
+            'remote': remote,
+            'writes': writes,
+            'publishedAfterWrite': published_after_write,
+            'status': self.status(),
+        }
+
+    def _recover_interrupted_write_jobs(self) -> list:
+        self._require_running()
+        assert self.store is not None and self.bridge is not None
+        recovered = []
+        for job in self.store.jobs_by_state('RUNNING'):
+            stored = self.store.result(job['job_id'])
+            if stored is None:
+                result = {
+                    'status': 'UNKNOWN_OUTCOME',
+                    'stage': 'RECOVERY',
+                    'reason': 'bridge restarted while write job was RUNNING',
+                    'mutationApplied': None,
+                    'automaticRetry': False,
+                }
+                self.bridge.queue_result(job['job_id'], result)
+            else:
+                result = stored['result']
+            self.store.set_job_state(job['job_id'], 'COMPLETE')
+            recovered.append({'jobId': job['job_id'], 'result': result})
+        return recovered
+
+    def _execute_one_write_job(self) -> list:
+        self._require_running()
+        assert self.store is not None and self.bridge is not None
+        jobs = self.store.jobs_by_state('QUEUED', limit=1)
+        if not jobs:
+            return []
+        job = jobs[0]
+        if not self.store.claim_job(job['job_id']):
+            return []
+
+        source_message = self.store.message(job['source_message_id'])
+        source_kind = (
+            source_message.get('payload', {}).get('kind')
+            if isinstance(source_message, dict) and isinstance(source_message.get('payload'), dict)
+            else None
+        )
+        if source_kind != 'JOB':
+            result = {
+                'status': 'BLOCKED',
+                'stage': 'REMOTE_KIND',
+                'reason': 'only remote kind=JOB can enter the write executor',
+                'mutationApplied': False,
+                'automaticRetry': False,
+            }
+        elif self.write_executor is None:
+            result = {
+                'status': 'BLOCKED',
+                'stage': 'WRITE_CAPABILITY',
+                'reason': 'Archicad write adapter is unavailable',
+                'mutationApplied': False,
+                'automaticRetry': False,
+            }
+        else:
+            try:
+                result = self.write_executor.execute(job['payload'])
+            except Exception as exc:
+                result = {
+                    'status': 'UNKNOWN_OUTCOME',
+                    'stage': 'HOST_EXECUTOR',
+                    'reason': type(exc).__name__,
+                    'mutationApplied': None,
+                    'automaticRetry': False,
+                }
+
+        self.bridge.queue_result(job['job_id'], result)
+        self.store.set_job_state(job['job_id'], 'COMPLETE')
+        return [{'jobId': job['job_id'], 'result': result}]
 
     def run_forever(self) -> None:
         self.start()
@@ -408,6 +500,7 @@ class BridgeHost:
         self.mailbox = None
         self.bridge = None
         self.context_provider = None
+        self.write_executor = None
         self.current_binding = None
         self._publish_status()
         self.status_publisher = None
