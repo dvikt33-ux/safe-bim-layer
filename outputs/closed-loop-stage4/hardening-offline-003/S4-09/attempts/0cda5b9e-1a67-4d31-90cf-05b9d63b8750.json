@@ -1,0 +1,9 @@
+{
+  "mutationAttemptId": "0cda5b9e-1a67-4d31-90cf-05b9d63b8750",
+  "signatureHash": "8adf8d9cae1772e4b59f282dd21fd05d79680baec7f781c6deb8ef8023c03eb2",
+  "phase": "NOT_DISPATCHED",
+  "dispatchStarted": false,
+  "nativeCalls": 0,
+  "nativeResponse": null,
+  "reason": "controlled pre-native fault"
+}

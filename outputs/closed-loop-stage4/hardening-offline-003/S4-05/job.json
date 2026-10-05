@@ -1,0 +1,537 @@
+{
+  "goalId": "goal",
+  "specification": "Two proven Wall segments",
+  "acceptanceCriteria": [
+    {
+      "id": "C",
+      "required": true,
+      "check": "segments",
+      "expected": 2,
+      "tolerance": 0.0,
+      "correctable": true
+    }
+  ],
+  "maxIterations": 5,
+  "createdAt": "2026-10-05T22:46:21.698087+00:00",
+  "updatedAt": "2026-10-05T22:46:21.830321+00:00",
+  "state": "BLOCKED",
+  "iteration": 1,
+  "observedModelIdentity": "fixture.pln",
+  "observedModelHash": "8f5c0e37be4474e83809a0dc024c36b23157b99be7819efd3257f53dbb9657fd",
+  "actions": [
+    {
+      "type": "create_wall",
+      "parameters": {
+        "sourceGuid": "source",
+        "length": 1.0
+      }
+    }
+  ],
+  "auditHistory": [],
+  "iterations": [
+    {
+      "iteration": 1,
+      "stateBefore": "PLANNING",
+      "observation": {
+        "modelIdentity": "fixture.pln",
+        "modelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+        "facts": {
+          "segments": {
+            "actual": 0,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "readback"
+            ]
+          }
+        },
+        "evidence": {
+          "readback": {
+            "model": {
+              "stories": [
+                {
+                  "index": 0,
+                  "elevation": 0
+                }
+              ],
+              "elements": [
+                {
+                  "guid": "source",
+                  "type": "Wall",
+                  "homeStory": 0,
+                  "materialBindings": {
+                    "structureType": 0,
+                    "buildingMaterial": {
+                      "guid": "material"
+                    }
+                  },
+                  "placement": {
+                    "referenceGeometry": {
+                      "kind": "WallReferenceLine",
+                      "arcAngle": 0,
+                      "begin": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "end": {
+                        "x": 1,
+                        "y": 0
+                      },
+                      "height": 3,
+                      "thickness": 0.3,
+                      "bottomOffsetFromHomeStory": 0,
+                      "offset": 0
+                    }
+                  },
+                  "bodies": []
+                }
+              ]
+            },
+            "segments": 0
+          }
+        },
+        "provenance": "FIXTURE"
+      },
+      "plannerDecision": {
+        "status": "PLANNED",
+        "action": {
+          "type": "create_wall",
+          "parameters": {
+            "sourceGuid": "source",
+            "length": 1.0
+          }
+        },
+        "reason": "",
+        "plannedAgainstModelIdentity": "fixture.pln",
+        "plannedAgainstModelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1"
+      },
+      "executorRequest": {
+        "type": "create_wall",
+        "parameters": {
+          "sourceGuid": "source",
+          "length": 1.0
+        }
+      },
+      "executorResult": {
+        "status": "UNKNOWN_OUTCOME",
+        "mutationAttempted": true,
+        "readbackRequired": true,
+        "details": {
+          "mutationAttemptId": "18c5815a-dd37-4063-b699-dea448d47aad",
+          "uncertaintyReason": "TimeoutError: response lost after simulated create"
+        },
+        "executionMode": "OFFLINE"
+      },
+      "readback": null,
+      "auditResult": null,
+      "observedModelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+      "planningModelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+      "preExecutionFingerprint": {
+        "modelIdentity": "fixture.pln",
+        "modelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+        "provenance": "FIXTURE"
+      },
+      "staleVerdict": "CURRENT",
+      "decisionInvalidated": false,
+      "actionFingerprint": "5b0f72baa29226f0ba9c7ae85f928fda88b2bf01d739caf76bc4bd6a9aa281f9",
+      "auditFingerprint": null,
+      "progressSignature": null,
+      "noProgressCount": 0,
+      "mutationAttemptId": "18c5815a-dd37-4063-b699-dea448d47aad",
+      "mutationAttemptState": "RECONCILIATION_AMBIGUOUS",
+      "reconciliationStatus": "RECONCILIATION_AMBIGUOUS",
+      "reconciliationEvidence": {
+        "status": "RECONCILIATION_AMBIGUOUS",
+        "mutationAttemptId": "18c5815a-dd37-4063-b699-dea448d47aad",
+        "terminalReason": "BLOCKED_RECONCILIATION_AMBIGUOUS",
+        "retryAllowed": false,
+        "reason": "Reconciliation verdict does not bind fresh observation/attempt"
+      }
+    }
+  ],
+  "evidenceTrail": [
+    {
+      "sequence": 1,
+      "at": "2026-10-05T22:46:21.698087+00:00",
+      "iteration": 0,
+      "state": "RECEIVED",
+      "kind": "received",
+      "payload": {
+        "contract": {
+          "goalId": "goal",
+          "criteria": [
+            {
+              "id": "C",
+              "required": true,
+              "check": "segments",
+              "expected": 2,
+              "tolerance": 0.0,
+              "correctable": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "at": "2026-10-05T22:46:21.705293+00:00",
+      "iteration": 0,
+      "state": "OBSERVING",
+      "kind": "transition",
+      "payload": {
+        "before": "RECEIVED",
+        "after": "OBSERVING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 3,
+      "at": "2026-10-05T22:46:21.709256+00:00",
+      "iteration": 0,
+      "state": "OBSERVING",
+      "kind": "observation",
+      "payload": {
+        "modelIdentity": "fixture.pln",
+        "modelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+        "facts": {
+          "segments": {
+            "actual": 0,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "readback"
+            ]
+          }
+        },
+        "evidence": {
+          "readback": {
+            "model": {
+              "stories": [
+                {
+                  "index": 0,
+                  "elevation": 0
+                }
+              ],
+              "elements": [
+                {
+                  "guid": "source",
+                  "type": "Wall",
+                  "homeStory": 0,
+                  "materialBindings": {
+                    "structureType": 0,
+                    "buildingMaterial": {
+                      "guid": "material"
+                    }
+                  },
+                  "placement": {
+                    "referenceGeometry": {
+                      "kind": "WallReferenceLine",
+                      "arcAngle": 0,
+                      "begin": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "end": {
+                        "x": 1,
+                        "y": 0
+                      },
+                      "height": 3,
+                      "thickness": 0.3,
+                      "bottomOffsetFromHomeStory": 0,
+                      "offset": 0
+                    }
+                  },
+                  "bodies": []
+                }
+              ]
+            },
+            "segments": 0
+          }
+        },
+        "provenance": "FIXTURE"
+      }
+    },
+    {
+      "sequence": 4,
+      "at": "2026-10-05T22:46:21.713074+00:00",
+      "iteration": 0,
+      "state": "PLANNING",
+      "kind": "transition",
+      "payload": {
+        "before": "OBSERVING",
+        "after": "PLANNING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 5,
+      "at": "2026-10-05T22:46:21.717232+00:00",
+      "iteration": 1,
+      "state": "PLANNING",
+      "kind": "iteration-start",
+      "payload": {
+        "modelIdentity": "fixture.pln",
+        "modelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1"
+      }
+    },
+    {
+      "sequence": 6,
+      "at": "2026-10-05T22:46:21.717753+00:00",
+      "iteration": 1,
+      "state": "PLANNING",
+      "kind": "model-check",
+      "payload": {
+        "plannedAgainst": {
+          "modelIdentity": "fixture.pln",
+          "modelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1"
+        },
+        "current": {
+          "modelIdentity": "fixture.pln",
+          "modelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+          "provenance": "FIXTURE"
+        },
+        "staleVerdict": "CURRENT"
+      }
+    },
+    {
+      "sequence": 7,
+      "at": "2026-10-05T22:46:21.742777+00:00",
+      "iteration": 1,
+      "state": "PLANNING",
+      "kind": "mutation-attempt-prepared",
+      "payload": {
+        "mutationAttemptId": "18c5815a-dd37-4063-b699-dea448d47aad",
+        "mutationAttemptState": "PREPARED",
+        "goalId": "goal",
+        "iteration": 1,
+        "action": {
+          "type": "create_wall",
+          "parameters": {
+            "sourceGuid": "source",
+            "length": 1.0
+          }
+        },
+        "signature": {
+          "sourceGuid": "source",
+          "sourceEndpoint": {
+            "x": 1,
+            "y": 0
+          },
+          "expectedBegin": {
+            "x": 1,
+            "y": 0
+          },
+          "expectedEnd": {
+            "x": 2.0,
+            "y": 0.0
+          },
+          "expectedLength": 1.0,
+          "homeStory": 0,
+          "height": 3,
+          "expectedAbsoluteBottom": 0.0,
+          "homeStoryElevation": 0.0,
+          "thickness": 0.3,
+          "bottomOffsetFromHomeStory": 0,
+          "offset": 0,
+          "structureType": "Basic",
+          "materialIdentity": "material",
+          "tolerance": 1e-07,
+          "preModelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+          "modelIdentity": "fixture.pln",
+          "sourceSemanticHash": "d8a0859e40489230e9b8d7743afe670e2208367fe8b92df3e80cd776775c5a8d",
+          "nativeParameters": {
+            "wallsData": [
+              {
+                "begCoordinate": {
+                  "x": 1,
+                  "y": 0
+                },
+                "endCoordinate": {
+                  "x": 2.0,
+                  "y": 0.0
+                },
+                "floorIndex": 0,
+                "zCoordinate": 0,
+                "height": 3,
+                "thickness": 0.3,
+                "offset": 0,
+                "arcAngle": 0,
+                "referenceLineLocation": "Center",
+                "structureType": "Basic",
+                "buildingMaterialId": {
+                  "guid": "material"
+                }
+              }
+            ]
+          }
+        },
+        "signatureHash": "8adf8d9cae1772e4b59f282dd21fd05d79680baec7f781c6deb8ef8023c03eb2",
+        "reconciliationStatus": null,
+        "reconciliationEvidence": {},
+        "retryAllowed": false,
+        "retryReason": null
+      }
+    },
+    {
+      "sequence": 8,
+      "at": "2026-10-05T22:46:21.742777+00:00",
+      "iteration": 1,
+      "state": "EXECUTING",
+      "kind": "transition",
+      "payload": {
+        "before": "PLANNING",
+        "after": "EXECUTING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 9,
+      "at": "2026-10-05T22:46:21.776103+00:00",
+      "iteration": 1,
+      "state": "UNKNOWN_OUTCOME",
+      "kind": "transition",
+      "payload": {
+        "before": "EXECUTING",
+        "after": "UNKNOWN_OUTCOME",
+        "reason": "executor outcome unavailable: TimeoutError: response lost after simulated create"
+      }
+    },
+    {
+      "sequence": 10,
+      "at": "2026-10-05T22:46:21.795460+00:00",
+      "iteration": 1,
+      "state": "UNKNOWN_OUTCOME",
+      "kind": "recovery-checkpoint-loaded",
+      "payload": {
+        "state": "UNKNOWN_OUTCOME",
+        "iteration": 1,
+        "mutationAttemptId": "18c5815a-dd37-4063-b699-dea448d47aad",
+        "checkpointHash": "5dca07189d02ea61ec55fc2b2ca99fa685ca5cc4fc2b2fa627535e65d99654e0",
+        "evidenceRef": "checkpoints/recovery-1-18c5815a-dd37-4063-b699-dea448d47aad-5dca07189d02.json"
+      }
+    },
+    {
+      "sequence": 11,
+      "at": "2026-10-05T22:46:21.825060+00:00",
+      "iteration": 1,
+      "state": "UNKNOWN_OUTCOME",
+      "kind": "reconciliation",
+      "payload": {
+        "status": "RECONCILIATION_AMBIGUOUS",
+        "mutationAttemptId": "18c5815a-dd37-4063-b699-dea448d47aad",
+        "terminalReason": "BLOCKED_RECONCILIATION_AMBIGUOUS",
+        "retryAllowed": false,
+        "reason": "Reconciliation verdict does not bind fresh observation/attempt"
+      }
+    },
+    {
+      "sequence": 12,
+      "at": "2026-10-05T22:46:21.830321+00:00",
+      "iteration": 1,
+      "state": "BLOCKED",
+      "kind": "recovery-blocked",
+      "payload": {
+        "status": "RECONCILIATION_AMBIGUOUS",
+        "mutationAttemptId": "18c5815a-dd37-4063-b699-dea448d47aad",
+        "terminalReason": "BLOCKED_RECONCILIATION_AMBIGUOUS",
+        "retryAllowed": false,
+        "reason": "Reconciliation verdict does not bind fresh observation/attempt"
+      }
+    }
+  ],
+  "finalStatus": "BLOCKED",
+  "terminalReason": "BLOCKED_RECONCILIATION_AMBIGUOUS",
+  "executionMode": "OFFLINE",
+  "liveMutationAttempted": false,
+  "noProgressLimit": 2,
+  "noProgressCount": 0,
+  "mutationAttempts": [
+    {
+      "mutationAttemptId": "18c5815a-dd37-4063-b699-dea448d47aad",
+      "mutationAttemptState": "RECONCILIATION_AMBIGUOUS",
+      "goalId": "goal",
+      "iteration": 1,
+      "action": {
+        "type": "create_wall",
+        "parameters": {
+          "sourceGuid": "source",
+          "length": 1.0
+        }
+      },
+      "signature": {
+        "sourceGuid": "source",
+        "sourceEndpoint": {
+          "x": 1,
+          "y": 0
+        },
+        "expectedBegin": {
+          "x": 1,
+          "y": 0
+        },
+        "expectedEnd": {
+          "x": 2.0,
+          "y": 0.0
+        },
+        "expectedLength": 1.0,
+        "homeStory": 0,
+        "height": 3,
+        "expectedAbsoluteBottom": 0.0,
+        "homeStoryElevation": 0.0,
+        "thickness": 0.3,
+        "bottomOffsetFromHomeStory": 0,
+        "offset": 0,
+        "structureType": "Basic",
+        "materialIdentity": "material",
+        "tolerance": 1e-07,
+        "preModelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+        "modelIdentity": "fixture.pln",
+        "sourceSemanticHash": "d8a0859e40489230e9b8d7743afe670e2208367fe8b92df3e80cd776775c5a8d",
+        "nativeParameters": {
+          "wallsData": [
+            {
+              "begCoordinate": {
+                "x": 1,
+                "y": 0
+              },
+              "endCoordinate": {
+                "x": 2.0,
+                "y": 0.0
+              },
+              "floorIndex": 0,
+              "zCoordinate": 0,
+              "height": 3,
+              "thickness": 0.3,
+              "offset": 0,
+              "arcAngle": 0,
+              "referenceLineLocation": "Center",
+              "structureType": "Basic",
+              "buildingMaterialId": {
+                "guid": "material"
+              }
+            }
+          ]
+        }
+      },
+      "signatureHash": "8adf8d9cae1772e4b59f282dd21fd05d79680baec7f781c6deb8ef8023c03eb2",
+      "reconciliationStatus": "RECONCILIATION_AMBIGUOUS",
+      "reconciliationEvidence": {
+        "status": "RECONCILIATION_AMBIGUOUS",
+        "mutationAttemptId": "18c5815a-dd37-4063-b699-dea448d47aad",
+        "terminalReason": "BLOCKED_RECONCILIATION_AMBIGUOUS",
+        "retryAllowed": false,
+        "reason": "Reconciliation verdict does not bind fresh observation/attempt"
+      },
+      "retryAllowed": false,
+      "retryReason": null,
+      "uncertaintyReason": "TimeoutError: response lost after simulated create"
+    }
+  ],
+  "retryAllowed": false,
+  "retryReason": null,
+  "recoveredFromCrash": false,
+  "recoveryCheckpoint": {
+    "state": "UNKNOWN_OUTCOME",
+    "iteration": 1,
+    "mutationAttemptId": "18c5815a-dd37-4063-b699-dea448d47aad",
+    "checkpointHash": "5dca07189d02ea61ec55fc2b2ca99fa685ca5cc4fc2b2fa627535e65d99654e0",
+    "evidenceRef": "checkpoints/recovery-1-18c5815a-dd37-4063-b699-dea448d47aad-5dca07189d02.json"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "scenarioId": "S4-07",
+  "status": "PASS",
+  "provenance": "OFFLINE_FIXTURE",
+  "liveVerdict": "NOT_RUN",
+  "test": "tests_stage4_live.test_guards.LivePathGuardTests.test_no_progress_is_independent_and_blocks_in_live_adapter_path",
+  "expectedFailureIsSuccessfulProof": true,
+  "jobFinalStatus": "BLOCKED",
+  "terminalReason": "BLOCKED_NO_PROGRESS",
+  "physicalMutationCalls": 0,
+  "simulatedNativeCalls": 0,
+  "mutationAttemptIds": [],
+  "duplicateMutationCount": 0,
+  "reconciliationOutcomes": [],
+  "recoveredFromCrash": false,
+  "auditPackStatus": "PENDING"
+}

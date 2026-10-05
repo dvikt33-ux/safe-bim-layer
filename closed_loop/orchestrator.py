@@ -4,11 +4,13 @@ from dataclasses import asdict
 from datetime import datetime, timezone
 import json
 import hashlib
+import os
+from uuid import UUID
 from pathlib import Path
 from typing import Protocol
 
 from .auditor import audit
-from .models import (AcceptanceContract, Action, ExecutionResult, Iteration, Job,
+from .models import (AcceptanceContract, Action, ExecutionResult, LiveExecutionResult, Iteration, Job,
                      ModelFingerprint, Observation, PlannerDecision, State, Verdict, nonempty)
 
 
@@ -60,6 +62,10 @@ class StaleBeforeWrite(RuntimeError):
         self.current = current
 
 
+class BeforeMutationTransportError(RuntimeError):
+    """Guarded adapter proves the native mutation was never dispatched."""
+
+
 def fingerprint(value):
     return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(',', ':'),
                                     ensure_ascii=False, allow_nan=False).encode('utf-8')).hexdigest()
@@ -100,6 +106,7 @@ class Orchestrator:
         if not all(getattr(component, 'offline', None) is (execution_mode == 'OFFLINE') for component in (observer, planner, executor, readback, model_check)):
             raise ValueError('All components must explicitly match the selected execution mode')
         self.execution_mode = execution_mode
+        self._model_identity = None
         self.contract = deepcopy(contract)
         self.observer, self.planner, self.executor, self.readback = observer, planner, executor, readback
         self.model_check = model_check
@@ -116,7 +123,10 @@ class Orchestrator:
     def _save(self):
         self.output.parent.mkdir(parents=True, exist_ok=True)
         pending = self.output.with_name(self.output.name + '.pending')
-        pending.write_text(json.dumps(self.job.to_dict(), ensure_ascii=False, indent=2, allow_nan=False), encoding='utf-8')
+        with pending.open('w', encoding='utf-8') as stream:
+            stream.write(json.dumps(self.job.to_dict(), ensure_ascii=False, indent=2, allow_nan=False))
+            stream.flush()
+            os.fsync(stream.fileno())
         pending.replace(self.output)
 
     def _record(self, kind, payload):
@@ -147,6 +157,9 @@ class Orchestrator:
             raise ValueError('typed Observation required')
         if value.provenance != ('FIXTURE' if self.execution_mode == 'OFFLINE' else 'LIVE'):
             raise ValueError('Observation provenance differs from execution mode')
+        if self._model_identity is not None and value.modelIdentity != self._model_identity:
+            raise ValueError('Job model identity changed; cannot rebind another project')
+        self._model_identity = value.modelIdentity
         self.job.observedModelIdentity = value.modelIdentity
         self.job.observedModelHash = value.modelHash
         return deepcopy(value)
@@ -162,6 +175,9 @@ class Orchestrator:
             return deepcopy(self.job)
         self._record('observation', asdict(observed))
         self.transition(State.PLANNING)
+        return self._iterate(observed)
+
+    def _iterate(self, observed):
         while self.job.iteration < self.job.maxIterations:
             self.job.iteration += 1
             step = Iteration(self.job.iteration, self.job.state, observation=deepcopy(observed), observedModelHash=observed.modelHash)
@@ -207,7 +223,7 @@ class Orchestrator:
                     'plannedHash': decision.plannedAgainstModelHash, 'currentHash': current.modelHash,
                     'executorCalled': False})
                 if self.job.iteration >= self.job.maxIterations:
-                    self.transition(State.BLOCKED, 'iteration limit reached while invalidating stale plans')
+                    self.transition(State.BLOCKED, 'BLOCKED_ITERATION_LIMIT: iteration limit reached while invalidating stale plans')
                     break
                 self.transition(State.OBSERVING, 'stale decision invalidated; fresh observation required')
                 try:
@@ -220,6 +236,29 @@ class Orchestrator:
                 continue
             step.executorRequest = deepcopy(decision.action)
             self.job.actions.append(deepcopy(decision.action))
+            attempt = None
+            prepare = getattr(self.executor, 'prepare', None)
+            if callable(prepare):
+                try:
+                    attempt = prepare(deepcopy(self.job), deepcopy(decision.action), deepcopy(observed))
+                    if (not isinstance(attempt, dict) or str(UUID(attempt['mutationAttemptId'])) != attempt['mutationAttemptId'] or
+                            any(a['mutationAttemptId'] == attempt['mutationAttemptId'] for a in self.job.mutationAttempts) or
+                            attempt['signature']['preModelHash'] != observed.modelHash or
+                            attempt['signature']['modelIdentity'] != observed.modelIdentity or
+                            attempt['signature']['sourceGuid'] != decision.action.parameters['sourceGuid']):
+                        raise ValueError('Invalid, duplicate, stale or unbound mutation attempt')
+                    attempt = deepcopy(attempt)
+                    attempt['mutationAttemptState'] = 'PREPARED'
+                    self.job.mutationAttempts.append(attempt)
+                    self.job.retryAllowed, self.job.retryReason = False, None
+                    step.mutationAttemptId = attempt['mutationAttemptId']
+                    step.mutationAttemptState = 'PREPARED'
+                    self._record('mutation-attempt-prepared', attempt)
+                except Exception as exc:
+                    self.transition(State.BLOCKED, f'mutation preparation failed: {exc}')
+                    break
+            if attempt is not None:
+                attempt['mutationAttemptState'] = step.mutationAttemptState = 'DISPATCHING'
             self.transition(State.EXECUTING)
             try:
                 result = self.executor.execute(deepcopy(decision.action))
@@ -227,15 +266,21 @@ class Orchestrator:
                     raise ValueError('typed ExecutionResult required')
                 if result.executionMode != self.execution_mode:
                     raise ValueError('Executor result mode differs from job mode')
+                if attempt is not None:
+                    if result.details.get('mutationAttemptId') != step.mutationAttemptId:
+                        raise ValueError('Executor result lacks matching mutationAttemptId')
+                    attempt['mutationAttemptState'] = step.mutationAttemptState = 'CONFIRMED' if result.status == 'PASS' else 'UNKNOWN'
                 step.executorResult = deepcopy(result)
                 if self.execution_mode == 'LIVE' and result.mutationAttempted:
                     self.job.liveMutationAttempted = True
             except StaleBeforeWrite as exc:
+                if attempt is not None:
+                    attempt['mutationAttemptState'] = step.mutationAttemptState = 'NOT_DISPATCHED'
                 step.decisionInvalidated, step.staleVerdict = True, 'STALE'
                 self._record('stale-before-write', {'plannedHash': decision.plannedAgainstModelHash,
                     'current': asdict(exc.current), 'mutationDispatched': False})
                 if self.job.iteration >= self.job.maxIterations:
-                    self.transition(State.BLOCKED, 'iteration limit reached during stale executor preflight')
+                    self.transition(State.BLOCKED, 'BLOCKED_ITERATION_LIMIT: iteration limit reached during stale executor preflight')
                     break
                 self.transition(State.OBSERVING, 'executor rejected stale state before native write')
                 try:
@@ -246,7 +291,18 @@ class Orchestrator:
                 self._record('observation', asdict(observed))
                 self.transition(State.PLANNING)
                 continue
+            except BeforeMutationTransportError as exc:
+                if attempt is not None:
+                    attempt['mutationAttemptState'] = step.mutationAttemptState = 'NOT_DISPATCHED'
+                self.transition(State.BLOCKED, f'BLOCKED_BY_TRANSPORT: mutation not dispatched: {exc}')
+                break
             except Exception as exc:
+                if attempt is not None:
+                    attempt['mutationAttemptState'] = step.mutationAttemptState = 'UNKNOWN'
+                    attempt['uncertaintyReason'] = f'{type(exc).__name__}: {exc}'
+                    cls = LiveExecutionResult if self.execution_mode == 'LIVE' else ExecutionResult
+                    step.executorResult = cls('UNKNOWN_OUTCOME',True,True,{
+                        'mutationAttemptId':attempt['mutationAttemptId'], 'uncertaintyReason':attempt['uncertaintyReason']})
                 if self.execution_mode == 'LIVE':
                     self.job.liveMutationAttempted = True
                 self.transition(State.UNKNOWN_OUTCOME, f'executor outcome unavailable: {type(exc).__name__}: {exc}')
@@ -266,8 +322,9 @@ class Orchestrator:
                 if updated.provenance != ('FIXTURE' if self.execution_mode == 'OFFLINE' else 'LIVE'):
                     raise ValueError('Read-back provenance differs from execution mode')
             except Exception as exc:
-                self.transition(State.UNKNOWN_OUTCOME if result.mutationAttempted else State.BLOCKED,
-                                f'read-back unavailable: {type(exc).__name__}: {exc}')
+                confirmed = result.details.get('nativeResponseConfirmed') is True
+                self.transition(State.BLOCKED if confirmed or not result.mutationAttempted else State.UNKNOWN_OUTCOME,
+                                f'{"BLOCKED_BY_TRANSPORT: " if confirmed else ""}read-back unavailable: {type(exc).__name__}: {exc}')
                 break
             step.readback = deepcopy(updated)
             if updated.modelIdentity != observed.modelIdentity:
@@ -296,7 +353,7 @@ class Orchestrator:
             if target in TERMINAL:
                 break
             if self.job.iteration >= self.job.maxIterations:
-                self.transition(State.BLOCKED, 'iteration limit reached with required criteria unresolved')
+                self.transition(State.BLOCKED, 'BLOCKED_ITERATION_LIMIT: iteration limit reached with required criteria unresolved')
                 break
             if self.execution_mode == 'LIVE':
                 self.transition(State.OBSERVING, 'fresh live observation before dependent replanning')

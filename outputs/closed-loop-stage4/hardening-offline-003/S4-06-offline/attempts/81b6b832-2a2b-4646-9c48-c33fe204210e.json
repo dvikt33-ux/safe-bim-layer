@@ -1,0 +1,37 @@
+{
+  "mutationAttemptId": "81b6b832-2a2b-4646-9c48-c33fe204210e",
+  "signatureHash": "8adf8d9cae1772e4b59f282dd21fd05d79680baec7f781c6deb8ef8023c03eb2",
+  "phase": "DISPATCHED",
+  "dispatchStarted": true,
+  "nativeCalls": 1,
+  "nativeResponse": null,
+  "nativeRequest": {
+    "command": "CreateWalls",
+    "parameters": {
+      "wallsData": [
+        {
+          "begCoordinate": {
+            "x": 1,
+            "y": 0
+          },
+          "endCoordinate": {
+            "x": 2.0,
+            "y": 0.0
+          },
+          "floorIndex": 0,
+          "zCoordinate": 0,
+          "height": 3,
+          "thickness": 0.3,
+          "offset": 0,
+          "arcAngle": 0,
+          "referenceLineLocation": "Center",
+          "structureType": "Basic",
+          "buildingMaterialId": {
+            "guid": "material"
+          }
+        }
+      ]
+    }
+  },
+  "nativeRequestHash": "dc35d7ec32408a22c2fc3e26ea2e7879ec8671168eb4efd1efe603bb833680bf"
+}

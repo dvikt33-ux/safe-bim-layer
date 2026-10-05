@@ -1,0 +1,23 @@
+{
+  "scenarioId": "S4-04",
+  "status": "PASS",
+  "provenance": "OFFLINE_FIXTURE",
+  "liveVerdict": "NOT_RUN",
+  "test": "tests_stage4_live.test_attempts.RecoveryTests.test_not_applied_requires_new_observation_plan_and_new_attempt_id",
+  "expectedFailureIsSuccessfulProof": false,
+  "jobFinalStatus": "VERIFIED",
+  "terminalReason": "decision from required acceptance criteria",
+  "physicalMutationCalls": 0,
+  "simulatedNativeCalls": 2,
+  "mutationAttemptIds": [
+    "14629ce9-0af0-4c61-a499-4caf2ec2394a",
+    "e0665dd9-64c0-4481-8f91-cae043275275",
+    "a7970563-82e0-49d1-b6b8-d03a8d9cdf7b"
+  ],
+  "duplicateMutationCount": 0,
+  "reconciliationOutcomes": [
+    "RECONCILED_NOT_APPLIED"
+  ],
+  "recoveredFromCrash": false,
+  "auditPackStatus": "PENDING"
+}

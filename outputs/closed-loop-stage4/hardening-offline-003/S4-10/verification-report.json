@@ -1,0 +1,19 @@
+{
+  "scenarioId": "S4-10",
+  "status": "PASS",
+  "provenance": "OFFLINE_FIXTURE",
+  "liveVerdict": "NOT_RUN",
+  "test": "tests_stage4_live.test_attempts.RecoveryTests.test_confirmed_response_with_missing_readback_never_verifies",
+  "expectedFailureIsSuccessfulProof": true,
+  "jobFinalStatus": "BLOCKED",
+  "terminalReason": "BLOCKED_BY_TRANSPORT: read-back unavailable: ConnectionError: Fixture factual read-back failure",
+  "physicalMutationCalls": 0,
+  "simulatedNativeCalls": 1,
+  "mutationAttemptIds": [
+    "a15ff912-01f8-491f-ba82-f35f81df7744"
+  ],
+  "duplicateMutationCount": 0,
+  "reconciliationOutcomes": [],
+  "recoveredFromCrash": false,
+  "auditPackStatus": "PENDING"
+}

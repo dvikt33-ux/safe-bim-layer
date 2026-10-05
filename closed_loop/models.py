@@ -222,6 +222,10 @@ class Iteration:
     auditFingerprint: str | None = None
     progressSignature: str | None = None
     noProgressCount: int = 0
+    mutationAttemptId: str | None = None
+    mutationAttemptState: str | None = None
+    reconciliationStatus: str | None = None
+    reconciliationEvidence: dict = field(default_factory=dict)
 
 
 @dataclass
@@ -246,6 +250,11 @@ class Job:
     liveMutationAttempted: bool = False
     noProgressLimit: int = 2
     noProgressCount: int = 0
+    mutationAttempts: list[dict] = field(default_factory=list)
+    retryAllowed: bool = False
+    retryReason: str | None = None
+    recoveredFromCrash: bool = False
+    recoveryCheckpoint: dict = field(default_factory=dict)
 
     def to_dict(self):
         return asdict(self)

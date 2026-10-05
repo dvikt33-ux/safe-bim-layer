@@ -1,0 +1,335 @@
+{
+  "goalId": "stage4-live-hardening",
+  "criteria": [
+    {
+      "id": "C01",
+      "required": true,
+      "check": "Stage 3 happy path regression PASS.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C02",
+      "required": true,
+      "check": "Одна user goal запускает весь loop.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C03",
+      "required": true,
+      "check": "Stale action physically not executed.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C04",
+      "required": true,
+      "check": "Fresh replan after stale works.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C05",
+      "required": true,
+      "check": "MutationAttemptId существует до physical execution.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C06",
+      "required": true,
+      "check": "MutationAttemptId сохраняется durable.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C07",
+      "required": true,
+      "check": "UNKNOWN_OUTCOME не приводит к blind retry.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C08",
+      "required": true,
+      "check": "Reconciliation uses factual read-back.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C09",
+      "required": true,
+      "check": "Reconciled-applied scenario распознаётся.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C10",
+      "required": true,
+      "check": "Reconciled-applied mutation не повторяется.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C11",
+      "required": true,
+      "check": "Reconciled-not-applied распознаётся.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C12",
+      "required": true,
+      "check": "Retry после not-applied требует fresh observation.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C13",
+      "required": true,
+      "check": "Ambiguous reconciliation blocks.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C14",
+      "required": true,
+      "check": "Crash restart does not duplicate mutation.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C15",
+      "required": true,
+      "check": "Durable checkpoint survives restart.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C16",
+      "required": true,
+      "check": "No-progress guard works.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C17",
+      "required": true,
+      "check": "Iteration-limit guard works independently.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C18",
+      "required": true,
+      "check": "Transport failure before execution distinguished from UNKNOWN_OUTCOME.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C19",
+      "required": true,
+      "check": "Read-back failure never produces VERIFIED.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C20",
+      "required": true,
+      "check": "External model change invalidates stale assumptions.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C21",
+      "required": true,
+      "check": "Every physical mutation has post-state evidence or unresolved status.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C22",
+      "required": true,
+      "check": "Audit Pack generated for live scenarios.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C23",
+      "required": true,
+      "check": "Audit Pack absolute-path scan PASS.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C24",
+      "required": true,
+      "check": "Semantic delta works.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C25",
+      "required": true,
+      "check": "Stage 2 tests PASS.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C26",
+      "required": true,
+      "check": "Stage 3 tests PASS.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C27",
+      "required": true,
+      "check": "Audit Pack tests PASS.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C28",
+      "required": true,
+      "check": "No new BIM operation types added.",
+      "expected": "PASS",
+      "actual": "Only existing create_wall; frozen v0 files unchanged",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C29",
+      "required": true,
+      "check": "main unchanged.",
+      "expected": "PASS",
+      "actual": "Remote main remains 72e9be15ac3b943d7b6f0c46eaa45aa5798d56bc",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    },
+    {
+      "id": "C30",
+      "required": true,
+      "check": "All required criteria PASS before Stage 4 VERIFIED.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ]
+    }
+  ]
+}

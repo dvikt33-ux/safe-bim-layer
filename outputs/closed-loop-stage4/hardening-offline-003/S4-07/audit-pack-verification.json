@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "files": 9,
+  "bytes": 13306,
+  "absolutePathScan": "PASS",
+  "sourceShaVerification": "PASS",
+  "semanticDelta": "PASS"
+}

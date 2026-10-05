@@ -1,0 +1,9 @@
+[
+  {
+    "status": "RECONCILIATION_AMBIGUOUS",
+    "mutationAttemptId": "18c5815a-dd37-4063-b699-dea448d47aad",
+    "terminalReason": "BLOCKED_RECONCILIATION_AMBIGUOUS",
+    "retryAllowed": false,
+    "reason": "Reconciliation verdict does not bind fresh observation/attempt"
+  }
+]

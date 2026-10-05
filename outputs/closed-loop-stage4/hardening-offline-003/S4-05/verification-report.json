@@ -1,0 +1,21 @@
+{
+  "scenarioId": "S4-05",
+  "status": "PASS",
+  "provenance": "OFFLINE_FIXTURE",
+  "liveVerdict": "NOT_RUN",
+  "test": "tests_stage4_live.test_attempts.RecoveryTests.test_ambiguous_recovery_blocks_without_execute",
+  "expectedFailureIsSuccessfulProof": true,
+  "jobFinalStatus": "BLOCKED",
+  "terminalReason": "BLOCKED_RECONCILIATION_AMBIGUOUS",
+  "physicalMutationCalls": 0,
+  "simulatedNativeCalls": 1,
+  "mutationAttemptIds": [
+    "18c5815a-dd37-4063-b699-dea448d47aad"
+  ],
+  "duplicateMutationCount": 0,
+  "reconciliationOutcomes": [
+    "RECONCILIATION_AMBIGUOUS"
+  ],
+  "recoveredFromCrash": false,
+  "auditPackStatus": "PENDING"
+}

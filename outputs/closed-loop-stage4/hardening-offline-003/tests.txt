@@ -1,0 +1,148 @@
+test_A_stale_action_rejected_and_reobserved (test_completion.CompletionTests.test_A_stale_action_rejected_and_reobserved) ... ok
+test_B_stale_replan_succeeds (test_completion.CompletionTests.test_B_stale_replan_succeeds) ... ok
+test_C_repeated_identical_failure_blocks_before_iteration_limit (test_completion.CompletionTests.test_C_repeated_identical_failure_blocks_before_iteration_limit) ... ok
+test_D_changed_model_resets_counter (test_completion.CompletionTests.test_D_changed_model_resets_counter) ... ok
+test_E_changed_audit_resets_counter (test_completion.CompletionTests.test_E_changed_audit_resets_counter) ... ok
+test_changed_action_resets_counter (test_completion.CompletionTests.test_changed_action_resets_counter) ... ok
+test_model_check_transport_failure_blocks_before_executor (test_completion.CompletionTests.test_model_check_transport_failure_blocks_before_executor) ... ok
+test_model_identity_change_invalidates_action (test_completion.CompletionTests.test_model_identity_change_invalidates_action) ... ok
+test_no_progress_limit_is_validated (test_completion.CompletionTests.test_no_progress_limit_is_validated) ... ok
+test_parameter_order_is_normalized_for_progress_signature (test_completion.CompletionTests.test_parameter_order_is_normalized_for_progress_signature) ... ok
+test_unbound_planner_decision_blocks_before_executor (test_completion.CompletionTests.test_unbound_planner_decision_blocks_before_executor) ... ok
+test_all_declared_legal_edges_are_exercised (test_orchestrator.Stage2Tests.test_all_declared_legal_edges_are_exercised) ... ok
+test_all_illegal_state_edges_are_rejected (test_orchestrator.Stage2Tests.test_all_illegal_state_edges_are_rejected) ... ok
+test_all_terminal_states_cannot_transition_or_run (test_orchestrator.Stage2Tests.test_all_terminal_states_cannot_transition_or_run) ... ok
+test_auditor_numeric_tolerance_and_bool_distinction (test_orchestrator.Stage2Tests.test_auditor_numeric_tolerance_and_bool_distinction) ... ok
+test_correctable_fail_replans_from_readback (test_orchestrator.Stage2Tests.test_correctable_fail_replans_from_readback) ... ok
+test_empty_retained_evidence_cannot_verify (test_orchestrator.Stage2Tests.test_empty_retained_evidence_cannot_verify) ... ok
+test_end_to_end_verified_and_durable_complete_trail (test_orchestrator.Stage2Tests.test_end_to_end_verified_and_durable_complete_trail) ... ok
+test_evidence_status_never_promoted_to_pass (test_orchestrator.Stage2Tests.test_evidence_status_never_promoted_to_pass) ... ok
+test_execution_request_is_saved_before_interface_call (test_orchestrator.Stage2Tests.test_execution_request_is_saved_before_interface_call) ... ok
+test_executor_pass_without_readback_cannot_verify (test_orchestrator.Stage2Tests.test_executor_pass_without_readback_cannot_verify) ... ok
+test_executor_results_route_fail_closed (test_orchestrator.Stage2Tests.test_executor_results_route_fail_closed) ... ok
+test_executor_timeout_is_unknown_and_never_retried (test_orchestrator.Stage2Tests.test_executor_timeout_is_unknown_and_never_retried) ... ok
+test_existing_job_file_is_preserved_and_cannot_be_restarted (test_orchestrator.Stage2Tests.test_existing_job_file_is_preserved_and_cannot_be_restarted) ... ok
+test_fact_pass_cannot_be_supplied_as_observed_evidence (test_orchestrator.Stage2Tests.test_fact_pass_cannot_be_supplied_as_observed_evidence) ... ok
+test_invalid_contracts_and_parameters_are_rejected (test_orchestrator.Stage2Tests.test_invalid_contracts_and_parameters_are_rejected) ... ok
+test_iteration_limit_blocks_unresolved_correctable_fail (test_orchestrator.Stage2Tests.test_iteration_limit_blocks_unresolved_correctable_fail) ... ok
+test_live_component_and_live_payload_are_rejected (test_orchestrator.Stage2Tests.test_live_component_and_live_payload_are_rejected) ... ok
+test_malformed_executor_result_is_unknown (test_orchestrator.Stage2Tests.test_malformed_executor_result_is_unknown) ... ok
+test_malformed_planner_result_blocks_before_execution (test_orchestrator.Stage2Tests.test_malformed_planner_result_blocks_before_execution) ... ok
+test_missing_check_waits_for_data (test_orchestrator.Stage2Tests.test_missing_check_waits_for_data) ... ok
+test_missing_or_dangling_evidence_references_block (test_orchestrator.Stage2Tests.test_missing_or_dangling_evidence_references_block) ... ok
+test_nested_boolean_is_not_numeric_evidence (test_orchestrator.Stage2Tests.test_nested_boolean_is_not_numeric_evidence) ... ok
+test_observer_failure_blocks_without_actions (test_orchestrator.Stage2Tests.test_observer_failure_blocks_without_actions) ... ok
+test_optional_nonpass_does_not_close_required_gate (test_orchestrator.Stage2Tests.test_optional_nonpass_does_not_close_required_gate) ... ok
+test_planner_waiting_or_blocked_does_not_call_executor (test_orchestrator.Stage2Tests.test_planner_waiting_or_blocked_does_not_call_executor) ... ok
+test_readback_identity_mismatch_blocks (test_orchestrator.Stage2Tests.test_readback_identity_mismatch_blocks) ... ok
+test_readback_unavailable_after_attempt_is_unknown_and_never_retried (test_orchestrator.Stage2Tests.test_readback_unavailable_after_attempt_is_unknown_and_never_retried) ... ok
+test_required_missing_data_takes_precedence_over_replan (test_orchestrator.Stage2Tests.test_required_missing_data_takes_precedence_over_replan) ... ok
+test_snapshots_are_detached_from_interface_mutation (test_orchestrator.Stage2Tests.test_snapshots_are_detached_from_interface_mutation) ... ok
+test_uncorrectable_fail_blocks (test_orchestrator.Stage2Tests.test_uncorrectable_fail_blocks) ... ok
+test_verified_recomputes_audit_from_retained_readback (test_orchestrator.Stage2Tests.test_verified_recomputes_audit_from_retained_readback) ... ok
+test_verified_with_nonpass_audit_is_rejected (test_orchestrator.Stage2Tests.test_verified_with_nonpass_audit_is_rejected) ... ok
+test_verified_without_readback_and_audit_is_rejected (test_orchestrator.Stage2Tests.test_verified_without_readback_and_audit_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 44 tests in 2.441s
+
+OK
+test_executor_prewrite_stale_reobserves_without_repeating_mutation (test_live_adapters.AdapterTests.test_executor_prewrite_stale_reobserves_without_repeating_mutation) ... ok
+test_fingerprint_ignores_timing_and_element_order_but_tracks_geometry (test_live_adapters.AdapterTests.test_fingerprint_ignores_timing_and_element_order_but_tracks_geometry) ... ok
+test_live_mode_gate_waits_for_second_readback (test_live_adapters.AdapterTests.test_live_mode_gate_waits_for_second_readback) ... ok
+test_live_timeout_stops_without_retry (test_live_adapters.AdapterTests.test_live_timeout_stops_without_retry) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.255s
+
+OK
+test_changed_detection_includes_property_change (test_audit_pack.AuditPackTests.test_changed_detection_includes_property_change) ... ok
+test_changed_neighbour_full_records (test_audit_pack.AuditPackTests.test_changed_neighbour_full_records) ... ok
+test_compact_full_conflict (test_audit_pack.AuditPackTests.test_compact_full_conflict) ... ok
+test_dependency_equality (test_audit_pack.AuditPackTests.test_dependency_equality) ... ok
+test_dependency_mismatch_fails (test_audit_pack.AuditPackTests.test_dependency_mismatch_fails) ... ok
+test_deterministic_extraction_all_bytes (test_audit_pack.AuditPackTests.test_deterministic_extraction_all_bytes) ... ok
+test_duplicate_guids_fail_closed (test_audit_pack.AuditPackTests.test_duplicate_guids_fail_closed) ... ok
+test_duplicate_json_keys_fail_closed (test_audit_pack.AuditPackTests.test_duplicate_json_keys_fail_closed) ... ok
+test_exact_added_guid (test_audit_pack.AuditPackTests.test_exact_added_guid) ... ok
+test_exact_full_objects_extracted (test_audit_pack.AuditPackTests.test_exact_full_objects_extracted) ... ok
+test_fingerprint_conflict (test_audit_pack.AuditPackTests.test_fingerprint_conflict) ... ok
+test_index_deduplicated_between_identical_snapshots (test_audit_pack.AuditPackTests.test_index_deduplicated_between_identical_snapshots) ... ok
+test_invalid_contract_lengths (test_audit_pack.AuditPackTests.test_invalid_contract_lengths) ... ok
+test_joint_distance_computation (test_audit_pack.AuditPackTests.test_joint_distance_computation) ... ok
+test_manifest_tampering_recomputed (test_audit_pack.AuditPackTests.test_manifest_tampering_recomputed) ... ok
+test_manifest_verification_all_files (test_audit_pack.AuditPackTests.test_manifest_verification_all_files) ... ok
+test_model_hash_compatible_order_timing_rule (test_audit_pack.AuditPackTests.test_model_hash_compatible_order_timing_rule) ... ok
+test_nested_source_metadata_and_properties_sanitized (test_audit_pack.AuditPackTests.test_nested_source_metadata_and_properties_sanitized) ... ok
+test_nonempty_output_not_overwritten (test_audit_pack.AuditPackTests.test_nonempty_output_not_overwritten) ... ok
+test_path_traversal_rejected (test_audit_pack.AuditPackTests.test_path_traversal_rejected) ... ok
+test_public_identity_mismatch_still_fails (test_audit_pack.AuditPackTests.test_public_identity_mismatch_still_fails) ... ok
+test_public_identity_provenance_round_trip (test_audit_pack.AuditPackTests.test_public_identity_provenance_round_trip) ... ok
+test_public_safe_relative_paths_and_url (test_audit_pack.AuditPackTests.test_public_safe_relative_paths_and_url) ... ok
+test_public_scan_keys_fail_closed (test_audit_pack.AuditPackTests.test_public_scan_keys_fail_closed) ... ok
+test_public_scan_missing_or_empty_pack_fails (test_audit_pack.AuditPackTests.test_public_scan_missing_or_empty_pack_fails) ... ok
+test_public_scan_relative_user_and_home_paths (test_audit_pack.AuditPackTests.test_public_scan_relative_user_and_home_paths) ... ok
+test_public_scan_unc_and_rooted_windows (test_audit_pack.AuditPackTests.test_public_scan_unc_and_rooted_windows) ... ok
+test_public_scan_unix_paths (test_audit_pack.AuditPackTests.test_public_scan_unix_paths) ... ok
+test_public_scan_windows_paths (test_audit_pack.AuditPackTests.test_public_scan_windows_paths) ... ok
+test_published_historical_packs_have_no_local_paths (test_audit_pack.AuditPackTests.test_published_historical_packs_have_no_local_paths) ... ok
+test_readback_conflict (test_audit_pack.AuditPackTests.test_readback_conflict) ... ok
+test_removed_detection (test_audit_pack.AuditPackTests.test_removed_detection) ... ok
+test_reported_count_conflict (test_audit_pack.AuditPackTests.test_reported_count_conflict) ... ok
+test_self_consistent_tampered_file_recomputed (test_audit_pack.AuditPackTests.test_self_consistent_tampered_file_recomputed) ... ok
+test_semantic_delta_published_end_to_end (test_audit_pack.AuditPackTests.test_semantic_delta_published_end_to_end) ... ok
+test_semantic_mixed_and_nonbody_index_remain_changes (test_audit_pack.AuditPackTests.test_semantic_mixed_and_nonbody_index_remain_changes) ... ok
+test_semantic_native_body_index_only_is_noise (test_audit_pack.AuditPackTests.test_semantic_native_body_index_only_is_noise) ... ok
+test_source_sha_mismatch_modified_value (test_audit_pack.AuditPackTests.test_source_sha_mismatch_modified_value) ... ok
+test_summary_counts_and_totals (test_audit_pack.AuditPackTests.test_summary_counts_and_totals) ... ok
+test_tampered_audit_file (test_audit_pack.AuditPackTests.test_tampered_audit_file) ... ok
+test_two_unexpected_additions (test_audit_pack.AuditPackTests.test_two_unexpected_additions) ... ok
+test_typed_action_conflict (test_audit_pack.AuditPackTests.test_typed_action_conflict) ... ok
+test_unlisted_extra_file_fails (test_audit_pack.AuditPackTests.test_unlisted_extra_file_fails) ... ok
+test_verifier_rejects_escaped_json_local_path (test_audit_pack.AuditPackTests.test_verifier_rejects_escaped_json_local_path) ... ok
+test_wall_geometry_recomputed (test_audit_pack.AuditPackTests.test_wall_geometry_recomputed) ... ok
+test_whole_model_index_hashes_existing_groups_only (test_audit_pack.AuditPackTests.test_whole_model_index_hashes_existing_groups_only) ... ok
+test_wrong_created_guid (test_audit_pack.AuditPackTests.test_wrong_created_guid) ... ok
+
+----------------------------------------------------------------------
+Ran 47 tests in 14.111s
+
+OK
+test_confirmed_non_dispatch_plus_fresh_unchanged_model_not_applied (test_attempts.AttemptTests.test_confirmed_non_dispatch_plus_fresh_unchanged_model_not_applied) ... ok
+test_id_cannot_be_claimed_or_dispatched_twice (test_attempts.AttemptTests.test_id_cannot_be_claimed_or_dispatched_twice) ... ok
+test_lost_response_exact_signature_applied_without_native_guid_receipt (test_attempts.AttemptTests.test_lost_response_exact_signature_applied_without_native_guid_receipt) ... ok
+test_two_candidates_block_even_if_native_receipt_names_one (test_attempts.AttemptTests.test_two_candidates_block_even_if_native_receipt_names_one) ... ok
+test_unchanged_model_after_actual_dispatch_is_ambiguous_not_absence_proof (test_attempts.AttemptTests.test_unchanged_model_after_actual_dispatch_is_ambiguous_not_absence_proof) ... ok
+test_uuid_signature_and_journal_exist_before_native_dispatch (test_attempts.AttemptTests.test_uuid_signature_and_journal_exist_before_native_dispatch) ... ok
+test_wrong_geometry_source_identity_receipt_and_signature_block (test_attempts.AttemptTests.test_wrong_geometry_source_identity_receipt_and_signature_block) ... ok
+test_additive_old_job_schema_loads_without_stage4_fields (test_attempts.RecoveryTests.test_additive_old_job_schema_loads_without_stage4_fields) ... ok
+test_ambiguous_recovery_blocks_without_execute (test_attempts.RecoveryTests.test_ambiguous_recovery_blocks_without_execute) ... ok
+test_applied_resume_audits_and_continues_second_segment_without_duplicate (test_attempts.RecoveryTests.test_applied_resume_audits_and_continues_second_segment_without_duplicate) ... ok
+test_confirmed_response_with_missing_readback_never_verifies (test_attempts.RecoveryTests.test_confirmed_response_with_missing_readback_never_verifies) ... ok
+test_crash_checkpoint_restores_without_repeating_first_mutation (test_attempts.RecoveryTests.test_crash_checkpoint_restores_without_repeating_first_mutation) ... ok
+test_not_applied_requires_new_observation_plan_and_new_attempt_id (test_attempts.RecoveryTests.test_not_applied_requires_new_observation_plan_and_new_attempt_id) ... ok
+test_pre_native_transport_failure_is_blocked_not_unknown (test_attempts.RecoveryTests.test_pre_native_transport_failure_is_blocked_not_unknown) ... ok
+test_unknown_cannot_run_or_transition_to_retry (test_attempts.RecoveryTests.test_unknown_cannot_run_or_transition_to_retry) ... ok
+test_changed_source_rejects_existing_pack (test_audit_integration.ScenarioPackTests.test_changed_source_rejects_existing_pack) ... ok
+test_failed_scenario_pack_is_public_source_pinned_and_semantic (test_audit_integration.ScenarioPackTests.test_failed_scenario_pack_is_public_source_pinned_and_semantic) ... ok
+test_forged_compact_delta_or_extra_file_rejects (test_audit_integration.ScenarioPackTests.test_forged_compact_delta_or_extra_file_rejects) ... ok
+test_zero_mutation_scenario_still_has_verified_evidence_pack (test_audit_integration.ScenarioPackTests.test_zero_mutation_scenario_still_has_verified_evidence_pack) ... ok
+test_confirmed_native_response_without_readback_blocks_transport_not_verified (test_guards.LivePathGuardTests.test_confirmed_native_response_without_readback_blocks_transport_not_verified) ... ok
+test_external_between_iteration_change_is_seen_by_next_planning (test_guards.LivePathGuardTests.test_external_between_iteration_change_is_seen_by_next_planning) ... ok
+test_iteration_limit_with_changing_live_adapter_fingerprint (test_guards.LivePathGuardTests.test_iteration_limit_with_changing_live_adapter_fingerprint) ... ok
+test_no_progress_is_independent_and_blocks_in_live_adapter_path (test_guards.LivePathGuardTests.test_no_progress_is_independent_and_blocks_in_live_adapter_path) ... ok
+test_environment_mismatch_cannot_pass (test_identity_gate.IdentityGateTests.test_environment_mismatch_cannot_pass) ... ok
+test_exact_identity_and_environment_pass_read_only (test_identity_gate.IdentityGateTests.test_exact_identity_and_environment_pass_read_only) ... ok
+test_live_scenario_does_not_construct_executor_after_wrong_project (test_identity_gate.IdentityGateTests.test_live_scenario_does_not_construct_executor_after_wrong_project) ... ok
+test_wrong_project_stops_before_product_tapir_or_dump (test_identity_gate.IdentityGateTests.test_wrong_project_stops_before_product_tapir_or_dump) ... ok
+test_confirmed_native_response_with_failed_dump_is_not_factual_acceptance (test_live_adapter_faults.AdapterFaultTests.test_confirmed_native_response_with_failed_dump_is_not_factual_acceptance) ... ok
+test_crash_occurs_after_native_create_before_audit (test_live_adapter_faults.AdapterFaultTests.test_crash_occurs_after_native_create_before_audit) ... ok
+test_known_pre_dispatch_transport_failure_makes_zero_native_calls (test_live_adapter_faults.AdapterFaultTests.test_known_pre_dispatch_transport_failure_makes_zero_native_calls) ... ok
+test_lost_response_is_injected_after_exactly_one_native_create (test_live_adapter_faults.AdapterFaultTests.test_lost_response_is_injected_after_exactly_one_native_create) ... ok
+test_success_result_and_request_retain_attempt_id (test_live_adapter_faults.AdapterFaultTests.test_success_result_and_request_retain_attempt_id) ... ok
+test_uncertain_non_application_has_durable_zero_dispatch_evidence (test_live_adapter_faults.AdapterFaultTests.test_uncertain_non_application_has_durable_zero_dispatch_evidence) ... ok
+
+----------------------------------------------------------------------
+Ran 33 tests in 4.107s
+
+OK

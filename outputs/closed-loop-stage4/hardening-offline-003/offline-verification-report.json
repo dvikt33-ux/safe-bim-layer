@@ -1,0 +1,234 @@
+{
+  "status": "PASS",
+  "provenance": "OFFLINE_FIXTURE",
+  "tests": {
+    "tests_stage2": {
+      "testsRun": 44,
+      "status": "PASS",
+      "failures": 0,
+      "errors": 0
+    },
+    "tests_stage3": {
+      "testsRun": 4,
+      "status": "PASS",
+      "failures": 0,
+      "errors": 0
+    },
+    "tests_audit_pack": {
+      "testsRun": 47,
+      "status": "PASS",
+      "failures": 0,
+      "errors": 0
+    },
+    "tests_stage4_live": {
+      "testsRun": 33,
+      "status": "PASS",
+      "failures": 0,
+      "errors": 0
+    }
+  },
+  "oldTests": 95,
+  "newTests": 33,
+  "scenarios": [
+    {
+      "scenarioId": "S4-04",
+      "status": "PASS",
+      "provenance": "OFFLINE_FIXTURE",
+      "liveVerdict": "NOT_RUN",
+      "test": "tests_stage4_live.test_attempts.RecoveryTests.test_not_applied_requires_new_observation_plan_and_new_attempt_id",
+      "expectedFailureIsSuccessfulProof": false,
+      "jobFinalStatus": "VERIFIED",
+      "terminalReason": "decision from required acceptance criteria",
+      "physicalMutationCalls": 0,
+      "simulatedNativeCalls": 2,
+      "mutationAttemptIds": [
+        "14629ce9-0af0-4c61-a499-4caf2ec2394a",
+        "e0665dd9-64c0-4481-8f91-cae043275275",
+        "a7970563-82e0-49d1-b6b8-d03a8d9cdf7b"
+      ],
+      "duplicateMutationCount": 0,
+      "reconciliationOutcomes": [
+        "RECONCILED_NOT_APPLIED"
+      ],
+      "recoveredFromCrash": false,
+      "auditPackStatus": "PASS"
+    },
+    {
+      "scenarioId": "S4-05",
+      "status": "PASS",
+      "provenance": "OFFLINE_FIXTURE",
+      "liveVerdict": "NOT_RUN",
+      "test": "tests_stage4_live.test_attempts.RecoveryTests.test_ambiguous_recovery_blocks_without_execute",
+      "expectedFailureIsSuccessfulProof": true,
+      "jobFinalStatus": "BLOCKED",
+      "terminalReason": "BLOCKED_RECONCILIATION_AMBIGUOUS",
+      "physicalMutationCalls": 0,
+      "simulatedNativeCalls": 1,
+      "mutationAttemptIds": [
+        "18c5815a-dd37-4063-b699-dea448d47aad"
+      ],
+      "duplicateMutationCount": 0,
+      "reconciliationOutcomes": [
+        "RECONCILIATION_AMBIGUOUS"
+      ],
+      "recoveredFromCrash": false,
+      "auditPackStatus": "PASS"
+    },
+    {
+      "scenarioId": "S4-06-offline",
+      "status": "PASS",
+      "provenance": "OFFLINE_FIXTURE",
+      "liveVerdict": "NOT_RUN",
+      "test": "tests_stage4_live.test_attempts.RecoveryTests.test_crash_checkpoint_restores_without_repeating_first_mutation",
+      "expectedFailureIsSuccessfulProof": false,
+      "jobFinalStatus": "VERIFIED",
+      "terminalReason": "decision from required acceptance criteria",
+      "physicalMutationCalls": 0,
+      "simulatedNativeCalls": 2,
+      "mutationAttemptIds": [
+        "81b6b832-2a2b-4646-9c48-c33fe204210e",
+        "42bcd4c3-8d55-49e7-911c-792b48054b99"
+      ],
+      "duplicateMutationCount": 0,
+      "reconciliationOutcomes": [
+        "RECONCILED_APPLIED"
+      ],
+      "recoveredFromCrash": true,
+      "auditPackStatus": "PASS"
+    },
+    {
+      "scenarioId": "S4-07",
+      "status": "PASS",
+      "provenance": "OFFLINE_FIXTURE",
+      "liveVerdict": "NOT_RUN",
+      "test": "tests_stage4_live.test_guards.LivePathGuardTests.test_no_progress_is_independent_and_blocks_in_live_adapter_path",
+      "expectedFailureIsSuccessfulProof": true,
+      "jobFinalStatus": "BLOCKED",
+      "terminalReason": "BLOCKED_NO_PROGRESS",
+      "physicalMutationCalls": 0,
+      "simulatedNativeCalls": 0,
+      "mutationAttemptIds": [],
+      "duplicateMutationCount": 0,
+      "reconciliationOutcomes": [],
+      "recoveredFromCrash": false,
+      "auditPackStatus": "PASS"
+    },
+    {
+      "scenarioId": "S4-08",
+      "status": "PASS",
+      "provenance": "OFFLINE_FIXTURE",
+      "liveVerdict": "NOT_RUN",
+      "test": "tests_stage4_live.test_guards.LivePathGuardTests.test_iteration_limit_with_changing_live_adapter_fingerprint",
+      "expectedFailureIsSuccessfulProof": true,
+      "jobFinalStatus": "BLOCKED",
+      "terminalReason": "BLOCKED_ITERATION_LIMIT: iteration limit reached with required criteria unresolved",
+      "physicalMutationCalls": 0,
+      "simulatedNativeCalls": 0,
+      "mutationAttemptIds": [],
+      "duplicateMutationCount": 0,
+      "reconciliationOutcomes": [],
+      "recoveredFromCrash": false,
+      "auditPackStatus": "PASS"
+    },
+    {
+      "scenarioId": "S4-09",
+      "status": "PASS",
+      "provenance": "OFFLINE_FIXTURE",
+      "liveVerdict": "NOT_RUN",
+      "test": "tests_stage4_live.test_attempts.RecoveryTests.test_pre_native_transport_failure_is_blocked_not_unknown",
+      "expectedFailureIsSuccessfulProof": true,
+      "jobFinalStatus": "BLOCKED",
+      "terminalReason": "BLOCKED_BY_TRANSPORT: mutation not dispatched: transport unavailable before native call",
+      "physicalMutationCalls": 0,
+      "simulatedNativeCalls": 0,
+      "mutationAttemptIds": [
+        "0cda5b9e-1a67-4d31-90cf-05b9d63b8750"
+      ],
+      "duplicateMutationCount": 0,
+      "reconciliationOutcomes": [],
+      "recoveredFromCrash": false,
+      "auditPackStatus": "PASS"
+    },
+    {
+      "scenarioId": "S4-10",
+      "status": "PASS",
+      "provenance": "OFFLINE_FIXTURE",
+      "liveVerdict": "NOT_RUN",
+      "test": "tests_stage4_live.test_attempts.RecoveryTests.test_confirmed_response_with_missing_readback_never_verifies",
+      "expectedFailureIsSuccessfulProof": true,
+      "jobFinalStatus": "BLOCKED",
+      "terminalReason": "BLOCKED_BY_TRANSPORT: read-back unavailable: ConnectionError: Fixture factual read-back failure",
+      "physicalMutationCalls": 0,
+      "simulatedNativeCalls": 1,
+      "mutationAttemptIds": [
+        "a15ff912-01f8-491f-ba82-f35f81df7744"
+      ],
+      "duplicateMutationCount": 0,
+      "reconciliationOutcomes": [],
+      "recoveredFromCrash": false,
+      "auditPackStatus": "PASS"
+    }
+  ],
+  "physicalMutationCalls": 0,
+  "archivedRegressions": {
+    "stage1": {
+      "status": "PASS",
+      "files": 32,
+      "bytes": 8571179
+    },
+    "stage3": {
+      "status": "PASS",
+      "files": 37,
+      "bytes": 8426497
+    }
+  },
+  "mandatoryLiveScenarios": "NOT_VERIFIED",
+  "stage4Status": "BLOCKED",
+  "stage5Started": false,
+  "implementationFiles": [
+    {
+      "path": "closed_loop/models.py",
+      "sha256": "490df8c68a4df626568079722afdb1e145f0a10cf3f1f0a8a95bc4c9387ead4d"
+    },
+    {
+      "path": "closed_loop/orchestrator.py",
+      "sha256": "55fac3e5f2e28afd31011ac78e6d0072e607db9decbff4de530d753408807d33"
+    },
+    {
+      "path": "closed_loop/wall_attempts.py",
+      "sha256": "edc6f6f4c472cc9aeaa41604c973c677e64099d11e6a6dd995cf36685ffb3b27"
+    },
+    {
+      "path": "closed_loop/live_wall_hardening.py",
+      "sha256": "1c4dd43088d172c07d3e8b16439d0ef3b75982ddf600eb1849229da76d0c1c6d"
+    },
+    {
+      "path": "closed_loop/stage4_preflight.py",
+      "sha256": "38c5598aa12b3809f28ca03a534a86b7582ce809525d6bdbbcf810c3fb3787c5"
+    },
+    {
+      "path": "closed_loop/stage4_live_scenario.py",
+      "sha256": "61b4e49cad61c4c4987c9b36f2c5e9c363e65e2f73285a4d433790ebaf57a4f4"
+    },
+    {
+      "path": "scripts/stage4_audit_pack.py",
+      "sha256": "9313e43fced0ce9032051ec71d1be017ce191acc223886c5d2b8eacb2fe71045"
+    },
+    {
+      "path": "scripts/archicad_executor.py",
+      "sha256": "a687eb396fc2000620c22280a2108b1021e5e8a032e2080bdd810dcd73c0369c"
+    },
+    {
+      "path": "scripts/archicad_chat_executor.py",
+      "sha256": "53d69ecbe6e993d46c37f2db8a515f13eaeefd4f3a7d261efabf88afdda0e223"
+    },
+    {
+      "path": "scripts/archicad_write_cycles/wall_joint_cycle.py",
+      "sha256": "32ee85d6f2e67401fb49e87ca74cc0938e8995e8984ca2906a150945600cbb71"
+    },
+    {
+      "path": "archicad-addon/Examples/model_dump_v1.py",
+      "sha256": "ee99d922ee49c1759bc8cce9449a379444b38f66058c6ab49f938e8ab948db76"
+    }
+  ]
+}

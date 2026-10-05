@@ -32,3 +32,16 @@ outputs/closed-loop-stage3/run-002/live-job/observations/005-stale-check.json fi
 outputs/closed-loop-stage3/run-002/live-job/observations/005-stale-check.native-response.json filter=lfs diff=lfs merge=lfs -text
 outputs/closed-loop-stage3/run-002/live-job/observations/006-read-back.json filter=lfs diff=lfs merge=lfs -text
 outputs/closed-loop-stage3/run-002/live-job/observations/006-read-back.native-response.json filter=lfs diff=lfs merge=lfs -text
+
+# Preserve exact source bytes pinned by Stage 4 evidence.
+closed_loop/models.py -text
+closed_loop/orchestrator.py -text
+closed_loop/wall_attempts.py -text
+closed_loop/live_wall_hardening.py -text
+closed_loop/stage4_preflight.py -text
+closed_loop/stage4_live_scenario.py -text
+scripts/stage4_audit_pack.py -text
+scripts/archicad_executor.py -text
+scripts/archicad_chat_executor.py -text
+scripts/archicad_write_cycles/wall_joint_cycle.py -text
+archicad-addon/Examples/model_dump_v1.py -text

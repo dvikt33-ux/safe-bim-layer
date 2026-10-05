@@ -1,0 +1,17 @@
+{
+  "scenarioId": "S4-08",
+  "status": "PASS",
+  "provenance": "OFFLINE_FIXTURE",
+  "liveVerdict": "NOT_RUN",
+  "test": "tests_stage4_live.test_guards.LivePathGuardTests.test_iteration_limit_with_changing_live_adapter_fingerprint",
+  "expectedFailureIsSuccessfulProof": true,
+  "jobFinalStatus": "BLOCKED",
+  "terminalReason": "BLOCKED_ITERATION_LIMIT: iteration limit reached with required criteria unresolved",
+  "physicalMutationCalls": 0,
+  "simulatedNativeCalls": 0,
+  "mutationAttemptIds": [],
+  "duplicateMutationCount": 0,
+  "reconciliationOutcomes": [],
+  "recoveredFromCrash": false,
+  "auditPackStatus": "PENDING"
+}

@@ -1,0 +1,7 @@
+{
+  "scenarioId": "S4-04",
+  "provenance": "OFFLINE_FIXTURE",
+  "command": "Продолжи последнюю созданную стену сначала на 1 метр, затем ещё на 0,5 метра и проверь результат.",
+  "fixtureTest": "tests_stage4_live.test_attempts.RecoveryTests.test_not_applied_requires_new_observation_plan_and_new_attempt_id",
+  "physicalMutationCalls": 0
+}

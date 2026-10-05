@@ -1,0 +1,156 @@
+[
+  {
+    "mutationAttemptId": "81b6b832-2a2b-4646-9c48-c33fe204210e",
+    "mutationAttemptState": "RECONCILED_APPLIED",
+    "goalId": "goal",
+    "iteration": 1,
+    "action": {
+      "type": "create_wall",
+      "parameters": {
+        "sourceGuid": "source",
+        "length": 1.0
+      }
+    },
+    "signature": {
+      "sourceGuid": "source",
+      "sourceEndpoint": {
+        "x": 1,
+        "y": 0
+      },
+      "expectedBegin": {
+        "x": 1,
+        "y": 0
+      },
+      "expectedEnd": {
+        "x": 2.0,
+        "y": 0.0
+      },
+      "expectedLength": 1.0,
+      "homeStory": 0,
+      "height": 3,
+      "expectedAbsoluteBottom": 0.0,
+      "homeStoryElevation": 0.0,
+      "thickness": 0.3,
+      "bottomOffsetFromHomeStory": 0,
+      "offset": 0,
+      "structureType": "Basic",
+      "materialIdentity": "material",
+      "tolerance": 1e-07,
+      "preModelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+      "modelIdentity": "fixture.pln",
+      "sourceSemanticHash": "d8a0859e40489230e9b8d7743afe670e2208367fe8b92df3e80cd776775c5a8d",
+      "nativeParameters": {
+        "wallsData": [
+          {
+            "begCoordinate": {
+              "x": 1,
+              "y": 0
+            },
+            "endCoordinate": {
+              "x": 2.0,
+              "y": 0.0
+            },
+            "floorIndex": 0,
+            "zCoordinate": 0,
+            "height": 3,
+            "thickness": 0.3,
+            "offset": 0,
+            "arcAngle": 0,
+            "referenceLineLocation": "Center",
+            "structureType": "Basic",
+            "buildingMaterialId": {
+              "guid": "material"
+            }
+          }
+        ]
+      }
+    },
+    "signatureHash": "8adf8d9cae1772e4b59f282dd21fd05d79680baec7f781c6deb8ef8023c03eb2",
+    "reconciliationStatus": "RECONCILED_APPLIED",
+    "reconciliationEvidence": {
+      "mutationAttemptId": "81b6b832-2a2b-4646-9c48-c33fe204210e",
+      "status": "RECONCILED_APPLIED",
+      "terminalReason": null,
+      "retryAllowed": false,
+      "candidateGuids": [
+        "created"
+      ],
+      "freshModelHash": "8f5c0e37be4474e83809a0dc024c36b23157b99be7819efd3257f53dbb9657fd",
+      "createdGuid": "created"
+    },
+    "retryAllowed": false,
+    "retryReason": null
+  },
+  {
+    "mutationAttemptId": "42bcd4c3-8d55-49e7-911c-792b48054b99",
+    "mutationAttemptState": "CONFIRMED",
+    "goalId": "goal",
+    "iteration": 2,
+    "action": {
+      "type": "create_wall",
+      "parameters": {
+        "sourceGuid": "created",
+        "length": 0.5
+      }
+    },
+    "signature": {
+      "sourceGuid": "created",
+      "sourceEndpoint": {
+        "x": 2,
+        "y": 0
+      },
+      "expectedBegin": {
+        "x": 2,
+        "y": 0
+      },
+      "expectedEnd": {
+        "x": 2.5,
+        "y": 0.0
+      },
+      "expectedLength": 0.5,
+      "homeStory": 0,
+      "height": 3,
+      "expectedAbsoluteBottom": 0.0,
+      "homeStoryElevation": 0.0,
+      "thickness": 0.3,
+      "bottomOffsetFromHomeStory": 0,
+      "offset": 0,
+      "structureType": "Basic",
+      "materialIdentity": "material",
+      "tolerance": 1e-07,
+      "preModelHash": "8f5c0e37be4474e83809a0dc024c36b23157b99be7819efd3257f53dbb9657fd",
+      "modelIdentity": "fixture.pln",
+      "sourceSemanticHash": "0c2f1146e538593c17a4a1ee98760af3b93878a98bdad9a8ca6ca948105da410",
+      "nativeParameters": {
+        "wallsData": [
+          {
+            "begCoordinate": {
+              "x": 2,
+              "y": 0
+            },
+            "endCoordinate": {
+              "x": 2.5,
+              "y": 0.0
+            },
+            "floorIndex": 0,
+            "zCoordinate": 0,
+            "height": 3,
+            "thickness": 0.3,
+            "offset": 0,
+            "arcAngle": 0,
+            "referenceLineLocation": "Center",
+            "structureType": "Basic",
+            "buildingMaterialId": {
+              "guid": "material"
+            }
+          }
+        ]
+      }
+    },
+    "signatureHash": "042d5132e4beb57c709768eb678b13dbbe5b8847da46a3b2a5d6c7332ba92fc3",
+    "reconciliationStatus": null,
+    "reconciliationEvidence": {},
+    "retryAllowed": false,
+    "retryReason": null
+  }
+]

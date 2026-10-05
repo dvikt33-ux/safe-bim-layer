@@ -1,0 +1,848 @@
+{
+  "goalId": "unit-job",
+  "specification": "Synthetic live-interface unit test; no Archicad transport",
+  "acceptanceCriteria": [
+    {
+      "id": "C",
+      "required": true,
+      "check": "segments",
+      "expected": 2,
+      "tolerance": 0.0,
+      "correctable": true
+    }
+  ],
+  "maxIterations": 3,
+  "createdAt": "2026-10-05T22:46:24.159117+00:00",
+  "updatedAt": "2026-10-05T22:46:24.298320+00:00",
+  "state": "BLOCKED",
+  "iteration": 3,
+  "observedModelIdentity": "test-model",
+  "observedModelHash": "changing-3",
+  "actions": [
+    {
+      "type": "create_wall",
+      "parameters": {}
+    },
+    {
+      "type": "create_wall",
+      "parameters": {}
+    },
+    {
+      "type": "create_wall",
+      "parameters": {}
+    }
+  ],
+  "auditHistory": [
+    [
+      {
+        "id": "C",
+        "required": true,
+        "expected": 2,
+        "actual": 0,
+        "verdict": "FAIL",
+        "evidenceRefs": [
+          "test"
+        ],
+        "correctable": true
+      }
+    ],
+    [
+      {
+        "id": "C",
+        "required": true,
+        "expected": 2,
+        "actual": 0,
+        "verdict": "FAIL",
+        "evidenceRefs": [
+          "test"
+        ],
+        "correctable": true
+      }
+    ],
+    [
+      {
+        "id": "C",
+        "required": true,
+        "expected": 2,
+        "actual": 0,
+        "verdict": "FAIL",
+        "evidenceRefs": [
+          "test"
+        ],
+        "correctable": true
+      }
+    ]
+  ],
+  "iterations": [
+    {
+      "iteration": 1,
+      "stateBefore": "PLANNING",
+      "observation": {
+        "modelIdentity": "test-model",
+        "modelHash": "hash-0",
+        "facts": {
+          "segments": {
+            "actual": 0,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "test"
+            ]
+          }
+        },
+        "evidence": {
+          "test": {
+            "simulated": true,
+            "segments": 0
+          }
+        },
+        "provenance": "LIVE"
+      },
+      "plannerDecision": {
+        "status": "PLANNED",
+        "action": {
+          "type": "create_wall",
+          "parameters": {}
+        },
+        "reason": "",
+        "plannedAgainstModelIdentity": "test-model",
+        "plannedAgainstModelHash": "hash-0"
+      },
+      "executorRequest": {
+        "type": "create_wall",
+        "parameters": {}
+      },
+      "executorResult": {
+        "status": "PASS",
+        "mutationAttempted": true,
+        "readbackRequired": true,
+        "details": {
+          "simulated": true
+        },
+        "executionMode": "LIVE"
+      },
+      "readback": {
+        "modelIdentity": "test-model",
+        "modelHash": "changing-1",
+        "facts": {
+          "segments": {
+            "actual": 0,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "test"
+            ]
+          }
+        },
+        "evidence": {
+          "test": {
+            "simulated": true,
+            "segments": 0
+          }
+        },
+        "provenance": "LIVE"
+      },
+      "auditResult": [
+        {
+          "id": "C",
+          "required": true,
+          "expected": 2,
+          "actual": 0,
+          "verdict": "FAIL",
+          "evidenceRefs": [
+            "test"
+          ],
+          "correctable": true
+        }
+      ],
+      "observedModelHash": "hash-0",
+      "planningModelHash": "hash-0",
+      "preExecutionFingerprint": {
+        "modelIdentity": "test-model",
+        "modelHash": "hash-0",
+        "provenance": "LIVE"
+      },
+      "staleVerdict": "CURRENT",
+      "decisionInvalidated": false,
+      "actionFingerprint": "a436ab65b249259e14ac1a44ca96ac25a572277a236dc9d3dba067a4bc02c7f2",
+      "auditFingerprint": "b034dac62c604d3e32a3e3eb48c08ca3cd95feaaf68d6021eb019797f584bae5",
+      "progressSignature": "a600b13a3497dc43d49ae6067ce7442d9561ba1a233eb13f01b43752e6481062",
+      "noProgressCount": 1,
+      "mutationAttemptId": null,
+      "mutationAttemptState": null,
+      "reconciliationStatus": null,
+      "reconciliationEvidence": {}
+    },
+    {
+      "iteration": 2,
+      "stateBefore": "PLANNING",
+      "observation": {
+        "modelIdentity": "test-model",
+        "modelHash": "hash-0",
+        "facts": {
+          "segments": {
+            "actual": 0,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "test"
+            ]
+          }
+        },
+        "evidence": {
+          "test": {
+            "simulated": true,
+            "segments": 0
+          }
+        },
+        "provenance": "LIVE"
+      },
+      "plannerDecision": {
+        "status": "PLANNED",
+        "action": {
+          "type": "create_wall",
+          "parameters": {}
+        },
+        "reason": "",
+        "plannedAgainstModelIdentity": "test-model",
+        "plannedAgainstModelHash": "hash-0"
+      },
+      "executorRequest": {
+        "type": "create_wall",
+        "parameters": {}
+      },
+      "executorResult": {
+        "status": "PASS",
+        "mutationAttempted": true,
+        "readbackRequired": true,
+        "details": {
+          "simulated": true
+        },
+        "executionMode": "LIVE"
+      },
+      "readback": {
+        "modelIdentity": "test-model",
+        "modelHash": "changing-2",
+        "facts": {
+          "segments": {
+            "actual": 0,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "test"
+            ]
+          }
+        },
+        "evidence": {
+          "test": {
+            "simulated": true,
+            "segments": 0
+          }
+        },
+        "provenance": "LIVE"
+      },
+      "auditResult": [
+        {
+          "id": "C",
+          "required": true,
+          "expected": 2,
+          "actual": 0,
+          "verdict": "FAIL",
+          "evidenceRefs": [
+            "test"
+          ],
+          "correctable": true
+        }
+      ],
+      "observedModelHash": "hash-0",
+      "planningModelHash": "hash-0",
+      "preExecutionFingerprint": {
+        "modelIdentity": "test-model",
+        "modelHash": "hash-0",
+        "provenance": "LIVE"
+      },
+      "staleVerdict": "CURRENT",
+      "decisionInvalidated": false,
+      "actionFingerprint": "a436ab65b249259e14ac1a44ca96ac25a572277a236dc9d3dba067a4bc02c7f2",
+      "auditFingerprint": "b034dac62c604d3e32a3e3eb48c08ca3cd95feaaf68d6021eb019797f584bae5",
+      "progressSignature": "4b7c991eb70c4ae8f73b8bbb5a6f031b53184987104cdc41ef236cbf05f8a5a3",
+      "noProgressCount": 1,
+      "mutationAttemptId": null,
+      "mutationAttemptState": null,
+      "reconciliationStatus": null,
+      "reconciliationEvidence": {}
+    },
+    {
+      "iteration": 3,
+      "stateBefore": "PLANNING",
+      "observation": {
+        "modelIdentity": "test-model",
+        "modelHash": "hash-0",
+        "facts": {
+          "segments": {
+            "actual": 0,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "test"
+            ]
+          }
+        },
+        "evidence": {
+          "test": {
+            "simulated": true,
+            "segments": 0
+          }
+        },
+        "provenance": "LIVE"
+      },
+      "plannerDecision": {
+        "status": "PLANNED",
+        "action": {
+          "type": "create_wall",
+          "parameters": {}
+        },
+        "reason": "",
+        "plannedAgainstModelIdentity": "test-model",
+        "plannedAgainstModelHash": "hash-0"
+      },
+      "executorRequest": {
+        "type": "create_wall",
+        "parameters": {}
+      },
+      "executorResult": {
+        "status": "PASS",
+        "mutationAttempted": true,
+        "readbackRequired": true,
+        "details": {
+          "simulated": true
+        },
+        "executionMode": "LIVE"
+      },
+      "readback": {
+        "modelIdentity": "test-model",
+        "modelHash": "changing-3",
+        "facts": {
+          "segments": {
+            "actual": 0,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "test"
+            ]
+          }
+        },
+        "evidence": {
+          "test": {
+            "simulated": true,
+            "segments": 0
+          }
+        },
+        "provenance": "LIVE"
+      },
+      "auditResult": [
+        {
+          "id": "C",
+          "required": true,
+          "expected": 2,
+          "actual": 0,
+          "verdict": "FAIL",
+          "evidenceRefs": [
+            "test"
+          ],
+          "correctable": true
+        }
+      ],
+      "observedModelHash": "hash-0",
+      "planningModelHash": "hash-0",
+      "preExecutionFingerprint": {
+        "modelIdentity": "test-model",
+        "modelHash": "hash-0",
+        "provenance": "LIVE"
+      },
+      "staleVerdict": "CURRENT",
+      "decisionInvalidated": false,
+      "actionFingerprint": "a436ab65b249259e14ac1a44ca96ac25a572277a236dc9d3dba067a4bc02c7f2",
+      "auditFingerprint": "b034dac62c604d3e32a3e3eb48c08ca3cd95feaaf68d6021eb019797f584bae5",
+      "progressSignature": "c3f4055349b8d452baf68c8ec88c06002a2620c60dc8eef2f505a6edf70d6059",
+      "noProgressCount": 1,
+      "mutationAttemptId": null,
+      "mutationAttemptState": null,
+      "reconciliationStatus": null,
+      "reconciliationEvidence": {}
+    }
+  ],
+  "evidenceTrail": [
+    {
+      "sequence": 1,
+      "at": "2026-10-05T22:46:24.159117+00:00",
+      "iteration": 0,
+      "state": "RECEIVED",
+      "kind": "received",
+      "payload": {
+        "contract": {
+          "goalId": "unit-job",
+          "criteria": [
+            {
+              "id": "C",
+              "required": true,
+              "check": "segments",
+              "expected": 2,
+              "tolerance": 0.0,
+              "correctable": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "at": "2026-10-05T22:46:24.159117+00:00",
+      "iteration": 0,
+      "state": "OBSERVING",
+      "kind": "transition",
+      "payload": {
+        "before": "RECEIVED",
+        "after": "OBSERVING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 3,
+      "at": "2026-10-05T22:46:24.170955+00:00",
+      "iteration": 0,
+      "state": "OBSERVING",
+      "kind": "observation",
+      "payload": {
+        "modelIdentity": "test-model",
+        "modelHash": "hash-0",
+        "facts": {
+          "segments": {
+            "actual": 0,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "test"
+            ]
+          }
+        },
+        "evidence": {
+          "test": {
+            "simulated": true,
+            "segments": 0
+          }
+        },
+        "provenance": "LIVE"
+      }
+    },
+    {
+      "sequence": 4,
+      "at": "2026-10-05T22:46:24.174256+00:00",
+      "iteration": 0,
+      "state": "PLANNING",
+      "kind": "transition",
+      "payload": {
+        "before": "OBSERVING",
+        "after": "PLANNING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 5,
+      "at": "2026-10-05T22:46:24.177176+00:00",
+      "iteration": 1,
+      "state": "PLANNING",
+      "kind": "iteration-start",
+      "payload": {
+        "modelIdentity": "test-model",
+        "modelHash": "hash-0"
+      }
+    },
+    {
+      "sequence": 6,
+      "at": "2026-10-05T22:46:24.182183+00:00",
+      "iteration": 1,
+      "state": "PLANNING",
+      "kind": "model-check",
+      "payload": {
+        "plannedAgainst": {
+          "modelIdentity": "test-model",
+          "modelHash": "hash-0"
+        },
+        "current": {
+          "modelIdentity": "test-model",
+          "modelHash": "hash-0",
+          "provenance": "LIVE"
+        },
+        "staleVerdict": "CURRENT"
+      }
+    },
+    {
+      "sequence": 7,
+      "at": "2026-10-05T22:46:24.182183+00:00",
+      "iteration": 1,
+      "state": "EXECUTING",
+      "kind": "transition",
+      "payload": {
+        "before": "PLANNING",
+        "after": "EXECUTING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 8,
+      "at": "2026-10-05T22:46:24.192224+00:00",
+      "iteration": 1,
+      "state": "READING_BACK",
+      "kind": "transition",
+      "payload": {
+        "before": "EXECUTING",
+        "after": "READING_BACK",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 9,
+      "at": "2026-10-05T22:46:24.194830+00:00",
+      "iteration": 1,
+      "state": "AUDITING",
+      "kind": "transition",
+      "payload": {
+        "before": "READING_BACK",
+        "after": "AUDITING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 10,
+      "at": "2026-10-05T22:46:24.194830+00:00",
+      "iteration": 1,
+      "state": "AUDITING",
+      "kind": "progress-check",
+      "payload": {
+        "modelHash": "changing-1",
+        "actionFingerprint": "a436ab65b249259e14ac1a44ca96ac25a572277a236dc9d3dba067a4bc02c7f2",
+        "auditFingerprint": "b034dac62c604d3e32a3e3eb48c08ca3cd95feaaf68d6021eb019797f584bae5",
+        "progressSignature": "a600b13a3497dc43d49ae6067ce7442d9561ba1a233eb13f01b43752e6481062",
+        "noProgressCount": 1,
+        "noProgressLimit": 2
+      }
+    },
+    {
+      "sequence": 11,
+      "at": "2026-10-05T22:46:24.204366+00:00",
+      "iteration": 1,
+      "state": "REPLANNING",
+      "kind": "transition",
+      "payload": {
+        "before": "AUDITING",
+        "after": "REPLANNING",
+        "reason": "decision from required acceptance criteria"
+      }
+    },
+    {
+      "sequence": 12,
+      "at": "2026-10-05T22:46:24.207656+00:00",
+      "iteration": 1,
+      "state": "OBSERVING",
+      "kind": "transition",
+      "payload": {
+        "before": "REPLANNING",
+        "after": "OBSERVING",
+        "reason": "fresh live observation before dependent replanning"
+      }
+    },
+    {
+      "sequence": 13,
+      "at": "2026-10-05T22:46:24.211494+00:00",
+      "iteration": 1,
+      "state": "OBSERVING",
+      "kind": "observation",
+      "payload": {
+        "modelIdentity": "test-model",
+        "modelHash": "hash-0",
+        "facts": {
+          "segments": {
+            "actual": 0,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "test"
+            ]
+          }
+        },
+        "evidence": {
+          "test": {
+            "simulated": true,
+            "segments": 0
+          }
+        },
+        "provenance": "LIVE"
+      }
+    },
+    {
+      "sequence": 14,
+      "at": "2026-10-05T22:46:24.211494+00:00",
+      "iteration": 1,
+      "state": "PLANNING",
+      "kind": "transition",
+      "payload": {
+        "before": "OBSERVING",
+        "after": "PLANNING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 15,
+      "at": "2026-10-05T22:46:24.211494+00:00",
+      "iteration": 2,
+      "state": "PLANNING",
+      "kind": "iteration-start",
+      "payload": {
+        "modelIdentity": "test-model",
+        "modelHash": "hash-0"
+      }
+    },
+    {
+      "sequence": 16,
+      "at": "2026-10-05T22:46:24.227338+00:00",
+      "iteration": 2,
+      "state": "PLANNING",
+      "kind": "model-check",
+      "payload": {
+        "plannedAgainst": {
+          "modelIdentity": "test-model",
+          "modelHash": "hash-0"
+        },
+        "current": {
+          "modelIdentity": "test-model",
+          "modelHash": "hash-0",
+          "provenance": "LIVE"
+        },
+        "staleVerdict": "CURRENT"
+      }
+    },
+    {
+      "sequence": 17,
+      "at": "2026-10-05T22:46:24.231034+00:00",
+      "iteration": 2,
+      "state": "EXECUTING",
+      "kind": "transition",
+      "payload": {
+        "before": "PLANNING",
+        "after": "EXECUTING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 18,
+      "at": "2026-10-05T22:46:24.235315+00:00",
+      "iteration": 2,
+      "state": "READING_BACK",
+      "kind": "transition",
+      "payload": {
+        "before": "EXECUTING",
+        "after": "READING_BACK",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 19,
+      "at": "2026-10-05T22:46:24.240345+00:00",
+      "iteration": 2,
+      "state": "AUDITING",
+      "kind": "transition",
+      "payload": {
+        "before": "READING_BACK",
+        "after": "AUDITING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 20,
+      "at": "2026-10-05T22:46:24.243292+00:00",
+      "iteration": 2,
+      "state": "AUDITING",
+      "kind": "progress-check",
+      "payload": {
+        "modelHash": "changing-2",
+        "actionFingerprint": "a436ab65b249259e14ac1a44ca96ac25a572277a236dc9d3dba067a4bc02c7f2",
+        "auditFingerprint": "b034dac62c604d3e32a3e3eb48c08ca3cd95feaaf68d6021eb019797f584bae5",
+        "progressSignature": "4b7c991eb70c4ae8f73b8bbb5a6f031b53184987104cdc41ef236cbf05f8a5a3",
+        "noProgressCount": 1,
+        "noProgressLimit": 2
+      }
+    },
+    {
+      "sequence": 21,
+      "at": "2026-10-05T22:46:24.247353+00:00",
+      "iteration": 2,
+      "state": "REPLANNING",
+      "kind": "transition",
+      "payload": {
+        "before": "AUDITING",
+        "after": "REPLANNING",
+        "reason": "decision from required acceptance criteria"
+      }
+    },
+    {
+      "sequence": 22,
+      "at": "2026-10-05T22:46:24.251154+00:00",
+      "iteration": 2,
+      "state": "OBSERVING",
+      "kind": "transition",
+      "payload": {
+        "before": "REPLANNING",
+        "after": "OBSERVING",
+        "reason": "fresh live observation before dependent replanning"
+      }
+    },
+    {
+      "sequence": 23,
+      "at": "2026-10-05T22:46:24.255696+00:00",
+      "iteration": 2,
+      "state": "OBSERVING",
+      "kind": "observation",
+      "payload": {
+        "modelIdentity": "test-model",
+        "modelHash": "hash-0",
+        "facts": {
+          "segments": {
+            "actual": 0,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "test"
+            ]
+          }
+        },
+        "evidence": {
+          "test": {
+            "simulated": true,
+            "segments": 0
+          }
+        },
+        "provenance": "LIVE"
+      }
+    },
+    {
+      "sequence": 24,
+      "at": "2026-10-05T22:46:24.259859+00:00",
+      "iteration": 2,
+      "state": "PLANNING",
+      "kind": "transition",
+      "payload": {
+        "before": "OBSERVING",
+        "after": "PLANNING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 25,
+      "at": "2026-10-05T22:46:24.264736+00:00",
+      "iteration": 3,
+      "state": "PLANNING",
+      "kind": "iteration-start",
+      "payload": {
+        "modelIdentity": "test-model",
+        "modelHash": "hash-0"
+      }
+    },
+    {
+      "sequence": 26,
+      "at": "2026-10-05T22:46:24.269368+00:00",
+      "iteration": 3,
+      "state": "PLANNING",
+      "kind": "model-check",
+      "payload": {
+        "plannedAgainst": {
+          "modelIdentity": "test-model",
+          "modelHash": "hash-0"
+        },
+        "current": {
+          "modelIdentity": "test-model",
+          "modelHash": "hash-0",
+          "provenance": "LIVE"
+        },
+        "staleVerdict": "CURRENT"
+      }
+    },
+    {
+      "sequence": 27,
+      "at": "2026-10-05T22:46:24.273862+00:00",
+      "iteration": 3,
+      "state": "EXECUTING",
+      "kind": "transition",
+      "payload": {
+        "before": "PLANNING",
+        "after": "EXECUTING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 28,
+      "at": "2026-10-05T22:46:24.278273+00:00",
+      "iteration": 3,
+      "state": "READING_BACK",
+      "kind": "transition",
+      "payload": {
+        "before": "EXECUTING",
+        "after": "READING_BACK",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 29,
+      "at": "2026-10-05T22:46:24.283440+00:00",
+      "iteration": 3,
+      "state": "AUDITING",
+      "kind": "transition",
+      "payload": {
+        "before": "READING_BACK",
+        "after": "AUDITING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 30,
+      "at": "2026-10-05T22:46:24.287587+00:00",
+      "iteration": 3,
+      "state": "AUDITING",
+      "kind": "progress-check",
+      "payload": {
+        "modelHash": "changing-3",
+        "actionFingerprint": "a436ab65b249259e14ac1a44ca96ac25a572277a236dc9d3dba067a4bc02c7f2",
+        "auditFingerprint": "b034dac62c604d3e32a3e3eb48c08ca3cd95feaaf68d6021eb019797f584bae5",
+        "progressSignature": "c3f4055349b8d452baf68c8ec88c06002a2620c60dc8eef2f505a6edf70d6059",
+        "noProgressCount": 1,
+        "noProgressLimit": 2
+      }
+    },
+    {
+      "sequence": 31,
+      "at": "2026-10-05T22:46:24.291100+00:00",
+      "iteration": 3,
+      "state": "REPLANNING",
+      "kind": "transition",
+      "payload": {
+        "before": "AUDITING",
+        "after": "REPLANNING",
+        "reason": "decision from required acceptance criteria"
+      }
+    },
+    {
+      "sequence": 32,
+      "at": "2026-10-05T22:46:24.298320+00:00",
+      "iteration": 3,
+      "state": "BLOCKED",
+      "kind": "transition",
+      "payload": {
+        "before": "REPLANNING",
+        "after": "BLOCKED",
+        "reason": "BLOCKED_ITERATION_LIMIT: iteration limit reached with required criteria unresolved"
+      }
+    }
+  ],
+  "finalStatus": "BLOCKED",
+  "terminalReason": "BLOCKED_ITERATION_LIMIT: iteration limit reached with required criteria unresolved",
+  "executionMode": "LIVE",
+  "liveMutationAttempted": true,
+  "noProgressLimit": 2,
+  "noProgressCount": 1,
+  "mutationAttempts": [],
+  "retryAllowed": false,
+  "retryReason": null,
+  "recoveredFromCrash": false,
+  "recoveryCheckpoint": {}
+}

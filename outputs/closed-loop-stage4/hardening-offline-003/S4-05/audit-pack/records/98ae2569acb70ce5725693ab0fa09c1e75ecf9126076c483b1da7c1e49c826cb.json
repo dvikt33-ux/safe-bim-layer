@@ -1,0 +1,1 @@
+{"sourceRef":"outputs/closed-loop-stage4/hardening-offline-003/S4-05/reconciliation.json","value":[{"mutationAttemptId":"18c5815a-dd37-4063-b699-dea448d47aad","reason":"Reconciliation verdict does not bind fresh observation/attempt","retryAllowed":false,"status":"RECONCILIATION_AMBIGUOUS","terminalReason":"BLOCKED_RECONCILIATION_AMBIGUOUS"}]}

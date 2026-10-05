@@ -1,0 +1,1 @@
+{"sourceRef":"outputs/closed-loop-stage4/hardening-offline-003/S4-06-offline/reconciliation.json","value":[{"candidateGuids":["created"],"createdGuid":"created","freshModelHash":"8f5c0e37be4474e83809a0dc024c36b23157b99be7819efd3257f53dbb9657fd","mutationAttemptId":"81b6b832-2a2b-4646-9c48-c33fe204210e","retryAllowed":false,"status":"RECONCILED_APPLIED","terminalReason":null}]}

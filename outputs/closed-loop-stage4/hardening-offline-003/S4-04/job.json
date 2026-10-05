@@ -1,0 +1,1643 @@
+{
+  "goalId": "goal",
+  "specification": "Two proven Wall segments",
+  "acceptanceCriteria": [
+    {
+      "id": "C",
+      "required": true,
+      "check": "segments",
+      "expected": 2,
+      "tolerance": 0.0,
+      "correctable": true
+    }
+  ],
+  "maxIterations": 5,
+  "createdAt": "2026-10-05T22:46:20.142778+00:00",
+  "updatedAt": "2026-10-05T22:46:20.463179+00:00",
+  "state": "VERIFIED",
+  "iteration": 3,
+  "observedModelIdentity": "fixture.pln",
+  "observedModelHash": "ce9c1a24cfd6004da98aa926683aa9ca381ad215e40fdd92ddeddd0b6996af6d",
+  "actions": [
+    {
+      "type": "create_wall",
+      "parameters": {
+        "sourceGuid": "source",
+        "length": 1.0
+      }
+    },
+    {
+      "type": "create_wall",
+      "parameters": {
+        "sourceGuid": "source",
+        "length": 1.0
+      }
+    },
+    {
+      "type": "create_wall",
+      "parameters": {
+        "sourceGuid": "created",
+        "length": 0.5
+      }
+    }
+  ],
+  "auditHistory": [
+    [
+      {
+        "id": "C",
+        "required": true,
+        "expected": 2,
+        "actual": 1,
+        "verdict": "FAIL",
+        "evidenceRefs": [
+          "readback"
+        ],
+        "correctable": true
+      }
+    ],
+    [
+      {
+        "id": "C",
+        "required": true,
+        "expected": 2,
+        "actual": 2,
+        "verdict": "PASS",
+        "evidenceRefs": [
+          "readback"
+        ],
+        "correctable": true
+      }
+    ]
+  ],
+  "iterations": [
+    {
+      "iteration": 1,
+      "stateBefore": "PLANNING",
+      "observation": {
+        "modelIdentity": "fixture.pln",
+        "modelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+        "facts": {
+          "segments": {
+            "actual": 0,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "readback"
+            ]
+          }
+        },
+        "evidence": {
+          "readback": {
+            "model": {
+              "stories": [
+                {
+                  "index": 0,
+                  "elevation": 0
+                }
+              ],
+              "elements": [
+                {
+                  "guid": "source",
+                  "type": "Wall",
+                  "homeStory": 0,
+                  "materialBindings": {
+                    "structureType": 0,
+                    "buildingMaterial": {
+                      "guid": "material"
+                    }
+                  },
+                  "placement": {
+                    "referenceGeometry": {
+                      "kind": "WallReferenceLine",
+                      "arcAngle": 0,
+                      "begin": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "end": {
+                        "x": 1,
+                        "y": 0
+                      },
+                      "height": 3,
+                      "thickness": 0.3,
+                      "bottomOffsetFromHomeStory": 0,
+                      "offset": 0
+                    }
+                  },
+                  "bodies": []
+                }
+              ]
+            },
+            "segments": 0
+          }
+        },
+        "provenance": "FIXTURE"
+      },
+      "plannerDecision": {
+        "status": "PLANNED",
+        "action": {
+          "type": "create_wall",
+          "parameters": {
+            "sourceGuid": "source",
+            "length": 1.0
+          }
+        },
+        "reason": "",
+        "plannedAgainstModelIdentity": "fixture.pln",
+        "plannedAgainstModelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1"
+      },
+      "executorRequest": {
+        "type": "create_wall",
+        "parameters": {
+          "sourceGuid": "source",
+          "length": 1.0
+        }
+      },
+      "executorResult": {
+        "status": "UNKNOWN_OUTCOME",
+        "mutationAttempted": true,
+        "readbackRequired": true,
+        "details": {
+          "mutationAttemptId": "14629ce9-0af0-4c61-a499-4caf2ec2394a",
+          "uncertaintyReason": "TimeoutError: injected uncertain state, known non-dispatch receipt"
+        },
+        "executionMode": "OFFLINE"
+      },
+      "readback": null,
+      "auditResult": null,
+      "observedModelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+      "planningModelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+      "preExecutionFingerprint": {
+        "modelIdentity": "fixture.pln",
+        "modelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+        "provenance": "FIXTURE"
+      },
+      "staleVerdict": "CURRENT",
+      "decisionInvalidated": false,
+      "actionFingerprint": "5b0f72baa29226f0ba9c7ae85f928fda88b2bf01d739caf76bc4bd6a9aa281f9",
+      "auditFingerprint": null,
+      "progressSignature": null,
+      "noProgressCount": 0,
+      "mutationAttemptId": "14629ce9-0af0-4c61-a499-4caf2ec2394a",
+      "mutationAttemptState": "RECONCILED_NOT_APPLIED",
+      "reconciliationStatus": "RECONCILED_NOT_APPLIED",
+      "reconciliationEvidence": {
+        "mutationAttemptId": "14629ce9-0af0-4c61-a499-4caf2ec2394a",
+        "status": "RECONCILED_NOT_APPLIED",
+        "terminalReason": null,
+        "retryAllowed": true,
+        "candidateGuids": [],
+        "freshModelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+        "retryReason": "Confirmed non-dispatch plus unchanged fresh model; fresh observe/plan required"
+      }
+    },
+    {
+      "iteration": 2,
+      "stateBefore": "PLANNING",
+      "observation": {
+        "modelIdentity": "fixture.pln",
+        "modelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+        "facts": {
+          "segments": {
+            "actual": 0,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "readback"
+            ]
+          }
+        },
+        "evidence": {
+          "readback": {
+            "model": {
+              "stories": [
+                {
+                  "index": 0,
+                  "elevation": 0
+                }
+              ],
+              "elements": [
+                {
+                  "guid": "source",
+                  "type": "Wall",
+                  "homeStory": 0,
+                  "materialBindings": {
+                    "structureType": 0,
+                    "buildingMaterial": {
+                      "guid": "material"
+                    }
+                  },
+                  "placement": {
+                    "referenceGeometry": {
+                      "kind": "WallReferenceLine",
+                      "arcAngle": 0,
+                      "begin": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "end": {
+                        "x": 1,
+                        "y": 0
+                      },
+                      "height": 3,
+                      "thickness": 0.3,
+                      "bottomOffsetFromHomeStory": 0,
+                      "offset": 0
+                    }
+                  },
+                  "bodies": []
+                }
+              ]
+            },
+            "segments": 0
+          }
+        },
+        "provenance": "FIXTURE"
+      },
+      "plannerDecision": {
+        "status": "PLANNED",
+        "action": {
+          "type": "create_wall",
+          "parameters": {
+            "sourceGuid": "source",
+            "length": 1.0
+          }
+        },
+        "reason": "",
+        "plannedAgainstModelIdentity": "fixture.pln",
+        "plannedAgainstModelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1"
+      },
+      "executorRequest": {
+        "type": "create_wall",
+        "parameters": {
+          "sourceGuid": "source",
+          "length": 1.0
+        }
+      },
+      "executorResult": {
+        "status": "PASS",
+        "mutationAttempted": true,
+        "readbackRequired": true,
+        "details": {
+          "mutationAttemptId": "e0665dd9-64c0-4481-8f91-cae043275275"
+        },
+        "executionMode": "OFFLINE"
+      },
+      "readback": {
+        "modelIdentity": "fixture.pln",
+        "modelHash": "8f5c0e37be4474e83809a0dc024c36b23157b99be7819efd3257f53dbb9657fd",
+        "facts": {
+          "segments": {
+            "actual": 1,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "readback"
+            ]
+          }
+        },
+        "evidence": {
+          "readback": {
+            "model": {
+              "stories": [
+                {
+                  "index": 0,
+                  "elevation": 0
+                }
+              ],
+              "elements": [
+                {
+                  "guid": "source",
+                  "type": "Wall",
+                  "homeStory": 0,
+                  "materialBindings": {
+                    "structureType": 0,
+                    "buildingMaterial": {
+                      "guid": "material"
+                    }
+                  },
+                  "placement": {
+                    "referenceGeometry": {
+                      "kind": "WallReferenceLine",
+                      "arcAngle": 0,
+                      "begin": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "end": {
+                        "x": 1,
+                        "y": 0
+                      },
+                      "height": 3,
+                      "thickness": 0.3,
+                      "bottomOffsetFromHomeStory": 0,
+                      "offset": 0
+                    }
+                  },
+                  "bodies": []
+                },
+                {
+                  "guid": "created",
+                  "type": "Wall",
+                  "homeStory": 0,
+                  "materialBindings": {
+                    "structureType": 0,
+                    "buildingMaterial": {
+                      "guid": "material"
+                    }
+                  },
+                  "placement": {
+                    "referenceGeometry": {
+                      "kind": "WallReferenceLine",
+                      "arcAngle": 0,
+                      "begin": {
+                        "x": 1,
+                        "y": 0
+                      },
+                      "end": {
+                        "x": 2,
+                        "y": 0
+                      },
+                      "height": 3,
+                      "thickness": 0.3,
+                      "bottomOffsetFromHomeStory": 0,
+                      "offset": 0
+                    }
+                  },
+                  "bodies": []
+                }
+              ]
+            },
+            "segments": 1
+          }
+        },
+        "provenance": "FIXTURE"
+      },
+      "auditResult": [
+        {
+          "id": "C",
+          "required": true,
+          "expected": 2,
+          "actual": 1,
+          "verdict": "FAIL",
+          "evidenceRefs": [
+            "readback"
+          ],
+          "correctable": true
+        }
+      ],
+      "observedModelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+      "planningModelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+      "preExecutionFingerprint": {
+        "modelIdentity": "fixture.pln",
+        "modelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+        "provenance": "FIXTURE"
+      },
+      "staleVerdict": "CURRENT",
+      "decisionInvalidated": false,
+      "actionFingerprint": "5b0f72baa29226f0ba9c7ae85f928fda88b2bf01d739caf76bc4bd6a9aa281f9",
+      "auditFingerprint": "9576cc8724f7ffb182ea24ac89ab4c82bead1e64a122a567018193fdf7bbfb9d",
+      "progressSignature": "daebf54fe6e04e83b6600c12e11131c5bea15836895f2fabe283db64d4e9e689",
+      "noProgressCount": 1,
+      "mutationAttemptId": "e0665dd9-64c0-4481-8f91-cae043275275",
+      "mutationAttemptState": "CONFIRMED",
+      "reconciliationStatus": null,
+      "reconciliationEvidence": {}
+    },
+    {
+      "iteration": 3,
+      "stateBefore": "PLANNING",
+      "observation": {
+        "modelIdentity": "fixture.pln",
+        "modelHash": "8f5c0e37be4474e83809a0dc024c36b23157b99be7819efd3257f53dbb9657fd",
+        "facts": {
+          "segments": {
+            "actual": 1,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "readback"
+            ]
+          }
+        },
+        "evidence": {
+          "readback": {
+            "model": {
+              "stories": [
+                {
+                  "index": 0,
+                  "elevation": 0
+                }
+              ],
+              "elements": [
+                {
+                  "guid": "source",
+                  "type": "Wall",
+                  "homeStory": 0,
+                  "materialBindings": {
+                    "structureType": 0,
+                    "buildingMaterial": {
+                      "guid": "material"
+                    }
+                  },
+                  "placement": {
+                    "referenceGeometry": {
+                      "kind": "WallReferenceLine",
+                      "arcAngle": 0,
+                      "begin": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "end": {
+                        "x": 1,
+                        "y": 0
+                      },
+                      "height": 3,
+                      "thickness": 0.3,
+                      "bottomOffsetFromHomeStory": 0,
+                      "offset": 0
+                    }
+                  },
+                  "bodies": []
+                },
+                {
+                  "guid": "created",
+                  "type": "Wall",
+                  "homeStory": 0,
+                  "materialBindings": {
+                    "structureType": 0,
+                    "buildingMaterial": {
+                      "guid": "material"
+                    }
+                  },
+                  "placement": {
+                    "referenceGeometry": {
+                      "kind": "WallReferenceLine",
+                      "arcAngle": 0,
+                      "begin": {
+                        "x": 1,
+                        "y": 0
+                      },
+                      "end": {
+                        "x": 2,
+                        "y": 0
+                      },
+                      "height": 3,
+                      "thickness": 0.3,
+                      "bottomOffsetFromHomeStory": 0,
+                      "offset": 0
+                    }
+                  },
+                  "bodies": []
+                }
+              ]
+            },
+            "segments": 1
+          }
+        },
+        "provenance": "FIXTURE"
+      },
+      "plannerDecision": {
+        "status": "PLANNED",
+        "action": {
+          "type": "create_wall",
+          "parameters": {
+            "sourceGuid": "created",
+            "length": 0.5
+          }
+        },
+        "reason": "",
+        "plannedAgainstModelIdentity": "fixture.pln",
+        "plannedAgainstModelHash": "8f5c0e37be4474e83809a0dc024c36b23157b99be7819efd3257f53dbb9657fd"
+      },
+      "executorRequest": {
+        "type": "create_wall",
+        "parameters": {
+          "sourceGuid": "created",
+          "length": 0.5
+        }
+      },
+      "executorResult": {
+        "status": "PASS",
+        "mutationAttempted": true,
+        "readbackRequired": true,
+        "details": {
+          "mutationAttemptId": "a7970563-82e0-49d1-b6b8-d03a8d9cdf7b"
+        },
+        "executionMode": "OFFLINE"
+      },
+      "readback": {
+        "modelIdentity": "fixture.pln",
+        "modelHash": "ce9c1a24cfd6004da98aa926683aa9ca381ad215e40fdd92ddeddd0b6996af6d",
+        "facts": {
+          "segments": {
+            "actual": 2,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "readback"
+            ]
+          }
+        },
+        "evidence": {
+          "readback": {
+            "model": {
+              "stories": [
+                {
+                  "index": 0,
+                  "elevation": 0
+                }
+              ],
+              "elements": [
+                {
+                  "guid": "source",
+                  "type": "Wall",
+                  "homeStory": 0,
+                  "materialBindings": {
+                    "structureType": 0,
+                    "buildingMaterial": {
+                      "guid": "material"
+                    }
+                  },
+                  "placement": {
+                    "referenceGeometry": {
+                      "kind": "WallReferenceLine",
+                      "arcAngle": 0,
+                      "begin": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "end": {
+                        "x": 1,
+                        "y": 0
+                      },
+                      "height": 3,
+                      "thickness": 0.3,
+                      "bottomOffsetFromHomeStory": 0,
+                      "offset": 0
+                    }
+                  },
+                  "bodies": []
+                },
+                {
+                  "guid": "created",
+                  "type": "Wall",
+                  "homeStory": 0,
+                  "materialBindings": {
+                    "structureType": 0,
+                    "buildingMaterial": {
+                      "guid": "material"
+                    }
+                  },
+                  "placement": {
+                    "referenceGeometry": {
+                      "kind": "WallReferenceLine",
+                      "arcAngle": 0,
+                      "begin": {
+                        "x": 1,
+                        "y": 0
+                      },
+                      "end": {
+                        "x": 2,
+                        "y": 0
+                      },
+                      "height": 3,
+                      "thickness": 0.3,
+                      "bottomOffsetFromHomeStory": 0,
+                      "offset": 0
+                    }
+                  },
+                  "bodies": []
+                },
+                {
+                  "guid": "next",
+                  "type": "Wall",
+                  "homeStory": 0,
+                  "materialBindings": {
+                    "structureType": 0,
+                    "buildingMaterial": {
+                      "guid": "material"
+                    }
+                  },
+                  "placement": {
+                    "referenceGeometry": {
+                      "kind": "WallReferenceLine",
+                      "arcAngle": 0,
+                      "begin": {
+                        "x": 2,
+                        "y": 0
+                      },
+                      "end": {
+                        "x": 2.5,
+                        "y": 0
+                      },
+                      "height": 3,
+                      "thickness": 0.3,
+                      "bottomOffsetFromHomeStory": 0,
+                      "offset": 0
+                    }
+                  },
+                  "bodies": []
+                }
+              ]
+            },
+            "segments": 2
+          }
+        },
+        "provenance": "FIXTURE"
+      },
+      "auditResult": [
+        {
+          "id": "C",
+          "required": true,
+          "expected": 2,
+          "actual": 2,
+          "verdict": "PASS",
+          "evidenceRefs": [
+            "readback"
+          ],
+          "correctable": true
+        }
+      ],
+      "observedModelHash": "8f5c0e37be4474e83809a0dc024c36b23157b99be7819efd3257f53dbb9657fd",
+      "planningModelHash": "8f5c0e37be4474e83809a0dc024c36b23157b99be7819efd3257f53dbb9657fd",
+      "preExecutionFingerprint": {
+        "modelIdentity": "fixture.pln",
+        "modelHash": "8f5c0e37be4474e83809a0dc024c36b23157b99be7819efd3257f53dbb9657fd",
+        "provenance": "FIXTURE"
+      },
+      "staleVerdict": "CURRENT",
+      "decisionInvalidated": false,
+      "actionFingerprint": "5f1180a9b3df7cdee395187e839904b2db8aabc225886e6f5d3330dbdf6d2afc",
+      "auditFingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "progressSignature": "fd6c324fad1734c72963ee47d942053a720379103b7971e7fea7e434d4ab0257",
+      "noProgressCount": 1,
+      "mutationAttemptId": "a7970563-82e0-49d1-b6b8-d03a8d9cdf7b",
+      "mutationAttemptState": "CONFIRMED",
+      "reconciliationStatus": null,
+      "reconciliationEvidence": {}
+    }
+  ],
+  "evidenceTrail": [
+    {
+      "sequence": 1,
+      "at": "2026-10-05T22:46:20.142778+00:00",
+      "iteration": 0,
+      "state": "RECEIVED",
+      "kind": "received",
+      "payload": {
+        "contract": {
+          "goalId": "goal",
+          "criteria": [
+            {
+              "id": "C",
+              "required": true,
+              "check": "segments",
+              "expected": 2,
+              "tolerance": 0.0,
+              "correctable": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "at": "2026-10-05T22:46:20.144783+00:00",
+      "iteration": 0,
+      "state": "OBSERVING",
+      "kind": "transition",
+      "payload": {
+        "before": "RECEIVED",
+        "after": "OBSERVING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 3,
+      "at": "2026-10-05T22:46:20.144783+00:00",
+      "iteration": 0,
+      "state": "OBSERVING",
+      "kind": "observation",
+      "payload": {
+        "modelIdentity": "fixture.pln",
+        "modelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+        "facts": {
+          "segments": {
+            "actual": 0,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "readback"
+            ]
+          }
+        },
+        "evidence": {
+          "readback": {
+            "model": {
+              "stories": [
+                {
+                  "index": 0,
+                  "elevation": 0
+                }
+              ],
+              "elements": [
+                {
+                  "guid": "source",
+                  "type": "Wall",
+                  "homeStory": 0,
+                  "materialBindings": {
+                    "structureType": 0,
+                    "buildingMaterial": {
+                      "guid": "material"
+                    }
+                  },
+                  "placement": {
+                    "referenceGeometry": {
+                      "kind": "WallReferenceLine",
+                      "arcAngle": 0,
+                      "begin": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "end": {
+                        "x": 1,
+                        "y": 0
+                      },
+                      "height": 3,
+                      "thickness": 0.3,
+                      "bottomOffsetFromHomeStory": 0,
+                      "offset": 0
+                    }
+                  },
+                  "bodies": []
+                }
+              ]
+            },
+            "segments": 0
+          }
+        },
+        "provenance": "FIXTURE"
+      }
+    },
+    {
+      "sequence": 4,
+      "at": "2026-10-05T22:46:20.144783+00:00",
+      "iteration": 0,
+      "state": "PLANNING",
+      "kind": "transition",
+      "payload": {
+        "before": "OBSERVING",
+        "after": "PLANNING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 5,
+      "at": "2026-10-05T22:46:20.158293+00:00",
+      "iteration": 1,
+      "state": "PLANNING",
+      "kind": "iteration-start",
+      "payload": {
+        "modelIdentity": "fixture.pln",
+        "modelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1"
+      }
+    },
+    {
+      "sequence": 6,
+      "at": "2026-10-05T22:46:20.158293+00:00",
+      "iteration": 1,
+      "state": "PLANNING",
+      "kind": "model-check",
+      "payload": {
+        "plannedAgainst": {
+          "modelIdentity": "fixture.pln",
+          "modelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1"
+        },
+        "current": {
+          "modelIdentity": "fixture.pln",
+          "modelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+          "provenance": "FIXTURE"
+        },
+        "staleVerdict": "CURRENT"
+      }
+    },
+    {
+      "sequence": 7,
+      "at": "2026-10-05T22:46:20.177193+00:00",
+      "iteration": 1,
+      "state": "PLANNING",
+      "kind": "mutation-attempt-prepared",
+      "payload": {
+        "mutationAttemptId": "14629ce9-0af0-4c61-a499-4caf2ec2394a",
+        "mutationAttemptState": "PREPARED",
+        "goalId": "goal",
+        "iteration": 1,
+        "action": {
+          "type": "create_wall",
+          "parameters": {
+            "sourceGuid": "source",
+            "length": 1.0
+          }
+        },
+        "signature": {
+          "sourceGuid": "source",
+          "sourceEndpoint": {
+            "x": 1,
+            "y": 0
+          },
+          "expectedBegin": {
+            "x": 1,
+            "y": 0
+          },
+          "expectedEnd": {
+            "x": 2.0,
+            "y": 0.0
+          },
+          "expectedLength": 1.0,
+          "homeStory": 0,
+          "height": 3,
+          "expectedAbsoluteBottom": 0.0,
+          "homeStoryElevation": 0.0,
+          "thickness": 0.3,
+          "bottomOffsetFromHomeStory": 0,
+          "offset": 0,
+          "structureType": "Basic",
+          "materialIdentity": "material",
+          "tolerance": 1e-07,
+          "preModelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+          "modelIdentity": "fixture.pln",
+          "sourceSemanticHash": "d8a0859e40489230e9b8d7743afe670e2208367fe8b92df3e80cd776775c5a8d",
+          "nativeParameters": {
+            "wallsData": [
+              {
+                "begCoordinate": {
+                  "x": 1,
+                  "y": 0
+                },
+                "endCoordinate": {
+                  "x": 2.0,
+                  "y": 0.0
+                },
+                "floorIndex": 0,
+                "zCoordinate": 0,
+                "height": 3,
+                "thickness": 0.3,
+                "offset": 0,
+                "arcAngle": 0,
+                "referenceLineLocation": "Center",
+                "structureType": "Basic",
+                "buildingMaterialId": {
+                  "guid": "material"
+                }
+              }
+            ]
+          }
+        },
+        "signatureHash": "8adf8d9cae1772e4b59f282dd21fd05d79680baec7f781c6deb8ef8023c03eb2",
+        "reconciliationStatus": null,
+        "reconciliationEvidence": {},
+        "retryAllowed": false,
+        "retryReason": null
+      }
+    },
+    {
+      "sequence": 8,
+      "at": "2026-10-05T22:46:20.191329+00:00",
+      "iteration": 1,
+      "state": "EXECUTING",
+      "kind": "transition",
+      "payload": {
+        "before": "PLANNING",
+        "after": "EXECUTING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 9,
+      "at": "2026-10-05T22:46:20.219842+00:00",
+      "iteration": 1,
+      "state": "UNKNOWN_OUTCOME",
+      "kind": "transition",
+      "payload": {
+        "before": "EXECUTING",
+        "after": "UNKNOWN_OUTCOME",
+        "reason": "executor outcome unavailable: TimeoutError: injected uncertain state, known non-dispatch receipt"
+      }
+    },
+    {
+      "sequence": 10,
+      "at": "2026-10-05T22:46:20.237064+00:00",
+      "iteration": 1,
+      "state": "UNKNOWN_OUTCOME",
+      "kind": "recovery-checkpoint-loaded",
+      "payload": {
+        "state": "UNKNOWN_OUTCOME",
+        "iteration": 1,
+        "mutationAttemptId": "14629ce9-0af0-4c61-a499-4caf2ec2394a",
+        "checkpointHash": "4e990bb6b7612f5aef673c057c2fb63d8c3aab82e7677cc44d860f5590f5805f",
+        "evidenceRef": "checkpoints/recovery-1-14629ce9-0af0-4c61-a499-4caf2ec2394a-4e990bb6b761.json"
+      }
+    },
+    {
+      "sequence": 11,
+      "at": "2026-10-05T22:46:20.267792+00:00",
+      "iteration": 1,
+      "state": "UNKNOWN_OUTCOME",
+      "kind": "reconciliation",
+      "payload": {
+        "mutationAttemptId": "14629ce9-0af0-4c61-a499-4caf2ec2394a",
+        "status": "RECONCILED_NOT_APPLIED",
+        "terminalReason": null,
+        "retryAllowed": true,
+        "candidateGuids": [],
+        "freshModelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+        "retryReason": "Confirmed non-dispatch plus unchanged fresh model; fresh observe/plan required"
+      }
+    },
+    {
+      "sequence": 12,
+      "at": "2026-10-05T22:46:20.273312+00:00",
+      "iteration": 1,
+      "state": "OBSERVING",
+      "kind": "recovery-transition",
+      "payload": {
+        "before": "UNKNOWN_OUTCOME",
+        "after": "OBSERVING",
+        "reconciliationStatus": "RECONCILED_NOT_APPLIED",
+        "oldAttemptRepeated": false
+      }
+    },
+    {
+      "sequence": 13,
+      "at": "2026-10-05T22:46:20.276119+00:00",
+      "iteration": 1,
+      "state": "OBSERVING",
+      "kind": "observation",
+      "payload": {
+        "modelIdentity": "fixture.pln",
+        "modelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+        "facts": {
+          "segments": {
+            "actual": 0,
+            "status": "OBSERVED",
+            "evidenceRefs": [
+              "readback"
+            ]
+          }
+        },
+        "evidence": {
+          "readback": {
+            "model": {
+              "stories": [
+                {
+                  "index": 0,
+                  "elevation": 0
+                }
+              ],
+              "elements": [
+                {
+                  "guid": "source",
+                  "type": "Wall",
+                  "homeStory": 0,
+                  "materialBindings": {
+                    "structureType": 0,
+                    "buildingMaterial": {
+                      "guid": "material"
+                    }
+                  },
+                  "placement": {
+                    "referenceGeometry": {
+                      "kind": "WallReferenceLine",
+                      "arcAngle": 0,
+                      "begin": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "end": {
+                        "x": 1,
+                        "y": 0
+                      },
+                      "height": 3,
+                      "thickness": 0.3,
+                      "bottomOffsetFromHomeStory": 0,
+                      "offset": 0
+                    }
+                  },
+                  "bodies": []
+                }
+              ]
+            },
+            "segments": 0
+          }
+        },
+        "provenance": "FIXTURE"
+      }
+    },
+    {
+      "sequence": 14,
+      "at": "2026-10-05T22:46:20.282474+00:00",
+      "iteration": 1,
+      "state": "PLANNING",
+      "kind": "transition",
+      "payload": {
+        "before": "OBSERVING",
+        "after": "PLANNING",
+        "reason": "Fresh observation and planning after explicit reconciliation"
+      }
+    },
+    {
+      "sequence": 15,
+      "at": "2026-10-05T22:46:20.282474+00:00",
+      "iteration": 2,
+      "state": "PLANNING",
+      "kind": "iteration-start",
+      "payload": {
+        "modelIdentity": "fixture.pln",
+        "modelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1"
+      }
+    },
+    {
+      "sequence": 16,
+      "at": "2026-10-05T22:46:20.292957+00:00",
+      "iteration": 2,
+      "state": "PLANNING",
+      "kind": "model-check",
+      "payload": {
+        "plannedAgainst": {
+          "modelIdentity": "fixture.pln",
+          "modelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1"
+        },
+        "current": {
+          "modelIdentity": "fixture.pln",
+          "modelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+          "provenance": "FIXTURE"
+        },
+        "staleVerdict": "CURRENT"
+      }
+    },
+    {
+      "sequence": 17,
+      "at": "2026-10-05T22:46:20.314666+00:00",
+      "iteration": 2,
+      "state": "PLANNING",
+      "kind": "mutation-attempt-prepared",
+      "payload": {
+        "mutationAttemptId": "e0665dd9-64c0-4481-8f91-cae043275275",
+        "mutationAttemptState": "PREPARED",
+        "goalId": "goal",
+        "iteration": 2,
+        "action": {
+          "type": "create_wall",
+          "parameters": {
+            "sourceGuid": "source",
+            "length": 1.0
+          }
+        },
+        "signature": {
+          "sourceGuid": "source",
+          "sourceEndpoint": {
+            "x": 1,
+            "y": 0
+          },
+          "expectedBegin": {
+            "x": 1,
+            "y": 0
+          },
+          "expectedEnd": {
+            "x": 2.0,
+            "y": 0.0
+          },
+          "expectedLength": 1.0,
+          "homeStory": 0,
+          "height": 3,
+          "expectedAbsoluteBottom": 0.0,
+          "homeStoryElevation": 0.0,
+          "thickness": 0.3,
+          "bottomOffsetFromHomeStory": 0,
+          "offset": 0,
+          "structureType": "Basic",
+          "materialIdentity": "material",
+          "tolerance": 1e-07,
+          "preModelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+          "modelIdentity": "fixture.pln",
+          "sourceSemanticHash": "d8a0859e40489230e9b8d7743afe670e2208367fe8b92df3e80cd776775c5a8d",
+          "nativeParameters": {
+            "wallsData": [
+              {
+                "begCoordinate": {
+                  "x": 1,
+                  "y": 0
+                },
+                "endCoordinate": {
+                  "x": 2.0,
+                  "y": 0.0
+                },
+                "floorIndex": 0,
+                "zCoordinate": 0,
+                "height": 3,
+                "thickness": 0.3,
+                "offset": 0,
+                "arcAngle": 0,
+                "referenceLineLocation": "Center",
+                "structureType": "Basic",
+                "buildingMaterialId": {
+                  "guid": "material"
+                }
+              }
+            ]
+          }
+        },
+        "signatureHash": "8adf8d9cae1772e4b59f282dd21fd05d79680baec7f781c6deb8ef8023c03eb2",
+        "reconciliationStatus": null,
+        "reconciliationEvidence": {},
+        "retryAllowed": false,
+        "retryReason": null
+      }
+    },
+    {
+      "sequence": 18,
+      "at": "2026-10-05T22:46:20.314666+00:00",
+      "iteration": 2,
+      "state": "EXECUTING",
+      "kind": "transition",
+      "payload": {
+        "before": "PLANNING",
+        "after": "EXECUTING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 19,
+      "at": "2026-10-05T22:46:20.347990+00:00",
+      "iteration": 2,
+      "state": "READING_BACK",
+      "kind": "transition",
+      "payload": {
+        "before": "EXECUTING",
+        "after": "READING_BACK",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 20,
+      "at": "2026-10-05T22:46:20.352242+00:00",
+      "iteration": 2,
+      "state": "AUDITING",
+      "kind": "transition",
+      "payload": {
+        "before": "READING_BACK",
+        "after": "AUDITING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 21,
+      "at": "2026-10-05T22:46:20.359479+00:00",
+      "iteration": 2,
+      "state": "AUDITING",
+      "kind": "progress-check",
+      "payload": {
+        "modelHash": "8f5c0e37be4474e83809a0dc024c36b23157b99be7819efd3257f53dbb9657fd",
+        "actionFingerprint": "5b0f72baa29226f0ba9c7ae85f928fda88b2bf01d739caf76bc4bd6a9aa281f9",
+        "auditFingerprint": "9576cc8724f7ffb182ea24ac89ab4c82bead1e64a122a567018193fdf7bbfb9d",
+        "progressSignature": "daebf54fe6e04e83b6600c12e11131c5bea15836895f2fabe283db64d4e9e689",
+        "noProgressCount": 1,
+        "noProgressLimit": 2
+      }
+    },
+    {
+      "sequence": 22,
+      "at": "2026-10-05T22:46:20.364066+00:00",
+      "iteration": 2,
+      "state": "REPLANNING",
+      "kind": "transition",
+      "payload": {
+        "before": "AUDITING",
+        "after": "REPLANNING",
+        "reason": "decision from required acceptance criteria"
+      }
+    },
+    {
+      "sequence": 23,
+      "at": "2026-10-05T22:46:20.370987+00:00",
+      "iteration": 2,
+      "state": "PLANNING",
+      "kind": "transition",
+      "payload": {
+        "before": "REPLANNING",
+        "after": "PLANNING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 24,
+      "at": "2026-10-05T22:46:20.376125+00:00",
+      "iteration": 3,
+      "state": "PLANNING",
+      "kind": "iteration-start",
+      "payload": {
+        "modelIdentity": "fixture.pln",
+        "modelHash": "8f5c0e37be4474e83809a0dc024c36b23157b99be7819efd3257f53dbb9657fd"
+      }
+    },
+    {
+      "sequence": 25,
+      "at": "2026-10-05T22:46:20.382705+00:00",
+      "iteration": 3,
+      "state": "PLANNING",
+      "kind": "model-check",
+      "payload": {
+        "plannedAgainst": {
+          "modelIdentity": "fixture.pln",
+          "modelHash": "8f5c0e37be4474e83809a0dc024c36b23157b99be7819efd3257f53dbb9657fd"
+        },
+        "current": {
+          "modelIdentity": "fixture.pln",
+          "modelHash": "8f5c0e37be4474e83809a0dc024c36b23157b99be7819efd3257f53dbb9657fd",
+          "provenance": "FIXTURE"
+        },
+        "staleVerdict": "CURRENT"
+      }
+    },
+    {
+      "sequence": 26,
+      "at": "2026-10-05T22:46:20.409444+00:00",
+      "iteration": 3,
+      "state": "PLANNING",
+      "kind": "mutation-attempt-prepared",
+      "payload": {
+        "mutationAttemptId": "a7970563-82e0-49d1-b6b8-d03a8d9cdf7b",
+        "mutationAttemptState": "PREPARED",
+        "goalId": "goal",
+        "iteration": 3,
+        "action": {
+          "type": "create_wall",
+          "parameters": {
+            "sourceGuid": "created",
+            "length": 0.5
+          }
+        },
+        "signature": {
+          "sourceGuid": "created",
+          "sourceEndpoint": {
+            "x": 2,
+            "y": 0
+          },
+          "expectedBegin": {
+            "x": 2,
+            "y": 0
+          },
+          "expectedEnd": {
+            "x": 2.5,
+            "y": 0.0
+          },
+          "expectedLength": 0.5,
+          "homeStory": 0,
+          "height": 3,
+          "expectedAbsoluteBottom": 0.0,
+          "homeStoryElevation": 0.0,
+          "thickness": 0.3,
+          "bottomOffsetFromHomeStory": 0,
+          "offset": 0,
+          "structureType": "Basic",
+          "materialIdentity": "material",
+          "tolerance": 1e-07,
+          "preModelHash": "8f5c0e37be4474e83809a0dc024c36b23157b99be7819efd3257f53dbb9657fd",
+          "modelIdentity": "fixture.pln",
+          "sourceSemanticHash": "0c2f1146e538593c17a4a1ee98760af3b93878a98bdad9a8ca6ca948105da410",
+          "nativeParameters": {
+            "wallsData": [
+              {
+                "begCoordinate": {
+                  "x": 2,
+                  "y": 0
+                },
+                "endCoordinate": {
+                  "x": 2.5,
+                  "y": 0.0
+                },
+                "floorIndex": 0,
+                "zCoordinate": 0,
+                "height": 3,
+                "thickness": 0.3,
+                "offset": 0,
+                "arcAngle": 0,
+                "referenceLineLocation": "Center",
+                "structureType": "Basic",
+                "buildingMaterialId": {
+                  "guid": "material"
+                }
+              }
+            ]
+          }
+        },
+        "signatureHash": "042d5132e4beb57c709768eb678b13dbbe5b8847da46a3b2a5d6c7332ba92fc3",
+        "reconciliationStatus": null,
+        "reconciliationEvidence": {},
+        "retryAllowed": false,
+        "retryReason": null
+      }
+    },
+    {
+      "sequence": 27,
+      "at": "2026-10-05T22:46:20.414850+00:00",
+      "iteration": 3,
+      "state": "EXECUTING",
+      "kind": "transition",
+      "payload": {
+        "before": "PLANNING",
+        "after": "EXECUTING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 28,
+      "at": "2026-10-05T22:46:20.442764+00:00",
+      "iteration": 3,
+      "state": "READING_BACK",
+      "kind": "transition",
+      "payload": {
+        "before": "EXECUTING",
+        "after": "READING_BACK",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 29,
+      "at": "2026-10-05T22:46:20.444769+00:00",
+      "iteration": 3,
+      "state": "AUDITING",
+      "kind": "transition",
+      "payload": {
+        "before": "READING_BACK",
+        "after": "AUDITING",
+        "reason": ""
+      }
+    },
+    {
+      "sequence": 30,
+      "at": "2026-10-05T22:46:20.456618+00:00",
+      "iteration": 3,
+      "state": "AUDITING",
+      "kind": "progress-check",
+      "payload": {
+        "modelHash": "ce9c1a24cfd6004da98aa926683aa9ca381ad215e40fdd92ddeddd0b6996af6d",
+        "actionFingerprint": "5f1180a9b3df7cdee395187e839904b2db8aabc225886e6f5d3330dbdf6d2afc",
+        "auditFingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "progressSignature": "fd6c324fad1734c72963ee47d942053a720379103b7971e7fea7e434d4ab0257",
+        "noProgressCount": 1,
+        "noProgressLimit": 2
+      }
+    },
+    {
+      "sequence": 31,
+      "at": "2026-10-05T22:46:20.463179+00:00",
+      "iteration": 3,
+      "state": "VERIFIED",
+      "kind": "transition",
+      "payload": {
+        "before": "AUDITING",
+        "after": "VERIFIED",
+        "reason": "decision from required acceptance criteria"
+      }
+    }
+  ],
+  "finalStatus": "VERIFIED",
+  "terminalReason": "decision from required acceptance criteria",
+  "executionMode": "OFFLINE",
+  "liveMutationAttempted": false,
+  "noProgressLimit": 2,
+  "noProgressCount": 1,
+  "mutationAttempts": [
+    {
+      "mutationAttemptId": "14629ce9-0af0-4c61-a499-4caf2ec2394a",
+      "mutationAttemptState": "RECONCILED_NOT_APPLIED",
+      "goalId": "goal",
+      "iteration": 1,
+      "action": {
+        "type": "create_wall",
+        "parameters": {
+          "sourceGuid": "source",
+          "length": 1.0
+        }
+      },
+      "signature": {
+        "sourceGuid": "source",
+        "sourceEndpoint": {
+          "x": 1,
+          "y": 0
+        },
+        "expectedBegin": {
+          "x": 1,
+          "y": 0
+        },
+        "expectedEnd": {
+          "x": 2.0,
+          "y": 0.0
+        },
+        "expectedLength": 1.0,
+        "homeStory": 0,
+        "height": 3,
+        "expectedAbsoluteBottom": 0.0,
+        "homeStoryElevation": 0.0,
+        "thickness": 0.3,
+        "bottomOffsetFromHomeStory": 0,
+        "offset": 0,
+        "structureType": "Basic",
+        "materialIdentity": "material",
+        "tolerance": 1e-07,
+        "preModelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+        "modelIdentity": "fixture.pln",
+        "sourceSemanticHash": "d8a0859e40489230e9b8d7743afe670e2208367fe8b92df3e80cd776775c5a8d",
+        "nativeParameters": {
+          "wallsData": [
+            {
+              "begCoordinate": {
+                "x": 1,
+                "y": 0
+              },
+              "endCoordinate": {
+                "x": 2.0,
+                "y": 0.0
+              },
+              "floorIndex": 0,
+              "zCoordinate": 0,
+              "height": 3,
+              "thickness": 0.3,
+              "offset": 0,
+              "arcAngle": 0,
+              "referenceLineLocation": "Center",
+              "structureType": "Basic",
+              "buildingMaterialId": {
+                "guid": "material"
+              }
+            }
+          ]
+        }
+      },
+      "signatureHash": "8adf8d9cae1772e4b59f282dd21fd05d79680baec7f781c6deb8ef8023c03eb2",
+      "reconciliationStatus": "RECONCILED_NOT_APPLIED",
+      "reconciliationEvidence": {
+        "mutationAttemptId": "14629ce9-0af0-4c61-a499-4caf2ec2394a",
+        "status": "RECONCILED_NOT_APPLIED",
+        "terminalReason": null,
+        "retryAllowed": true,
+        "candidateGuids": [],
+        "freshModelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+        "retryReason": "Confirmed non-dispatch plus unchanged fresh model; fresh observe/plan required"
+      },
+      "retryAllowed": true,
+      "retryReason": "Confirmed non-dispatch plus unchanged fresh model; fresh observe/plan required",
+      "uncertaintyReason": "TimeoutError: injected uncertain state, known non-dispatch receipt"
+    },
+    {
+      "mutationAttemptId": "e0665dd9-64c0-4481-8f91-cae043275275",
+      "mutationAttemptState": "CONFIRMED",
+      "goalId": "goal",
+      "iteration": 2,
+      "action": {
+        "type": "create_wall",
+        "parameters": {
+          "sourceGuid": "source",
+          "length": 1.0
+        }
+      },
+      "signature": {
+        "sourceGuid": "source",
+        "sourceEndpoint": {
+          "x": 1,
+          "y": 0
+        },
+        "expectedBegin": {
+          "x": 1,
+          "y": 0
+        },
+        "expectedEnd": {
+          "x": 2.0,
+          "y": 0.0
+        },
+        "expectedLength": 1.0,
+        "homeStory": 0,
+        "height": 3,
+        "expectedAbsoluteBottom": 0.0,
+        "homeStoryElevation": 0.0,
+        "thickness": 0.3,
+        "bottomOffsetFromHomeStory": 0,
+        "offset": 0,
+        "structureType": "Basic",
+        "materialIdentity": "material",
+        "tolerance": 1e-07,
+        "preModelHash": "a63124f9b5d4e6b18e0e834df9e4715c292b750773afc039d4dbfc34956943d1",
+        "modelIdentity": "fixture.pln",
+        "sourceSemanticHash": "d8a0859e40489230e9b8d7743afe670e2208367fe8b92df3e80cd776775c5a8d",
+        "nativeParameters": {
+          "wallsData": [
+            {
+              "begCoordinate": {
+                "x": 1,
+                "y": 0
+              },
+              "endCoordinate": {
+                "x": 2.0,
+                "y": 0.0
+              },
+              "floorIndex": 0,
+              "zCoordinate": 0,
+              "height": 3,
+              "thickness": 0.3,
+              "offset": 0,
+              "arcAngle": 0,
+              "referenceLineLocation": "Center",
+              "structureType": "Basic",
+              "buildingMaterialId": {
+                "guid": "material"
+              }
+            }
+          ]
+        }
+      },
+      "signatureHash": "8adf8d9cae1772e4b59f282dd21fd05d79680baec7f781c6deb8ef8023c03eb2",
+      "reconciliationStatus": null,
+      "reconciliationEvidence": {},
+      "retryAllowed": false,
+      "retryReason": null
+    },
+    {
+      "mutationAttemptId": "a7970563-82e0-49d1-b6b8-d03a8d9cdf7b",
+      "mutationAttemptState": "CONFIRMED",
+      "goalId": "goal",
+      "iteration": 3,
+      "action": {
+        "type": "create_wall",
+        "parameters": {
+          "sourceGuid": "created",
+          "length": 0.5
+        }
+      },
+      "signature": {
+        "sourceGuid": "created",
+        "sourceEndpoint": {
+          "x": 2,
+          "y": 0
+        },
+        "expectedBegin": {
+          "x": 2,
+          "y": 0
+        },
+        "expectedEnd": {
+          "x": 2.5,
+          "y": 0.0
+        },
+        "expectedLength": 0.5,
+        "homeStory": 0,
+        "height": 3,
+        "expectedAbsoluteBottom": 0.0,
+        "homeStoryElevation": 0.0,
+        "thickness": 0.3,
+        "bottomOffsetFromHomeStory": 0,
+        "offset": 0,
+        "structureType": "Basic",
+        "materialIdentity": "material",
+        "tolerance": 1e-07,
+        "preModelHash": "8f5c0e37be4474e83809a0dc024c36b23157b99be7819efd3257f53dbb9657fd",
+        "modelIdentity": "fixture.pln",
+        "sourceSemanticHash": "0c2f1146e538593c17a4a1ee98760af3b93878a98bdad9a8ca6ca948105da410",
+        "nativeParameters": {
+          "wallsData": [
+            {
+              "begCoordinate": {
+                "x": 2,
+                "y": 0
+              },
+              "endCoordinate": {
+                "x": 2.5,
+                "y": 0.0
+              },
+              "floorIndex": 0,
+              "zCoordinate": 0,
+              "height": 3,
+              "thickness": 0.3,
+              "offset": 0,
+              "arcAngle": 0,
+              "referenceLineLocation": "Center",
+              "structureType": "Basic",
+              "buildingMaterialId": {
+                "guid": "material"
+              }
+            }
+          ]
+        }
+      },
+      "signatureHash": "042d5132e4beb57c709768eb678b13dbbe5b8847da46a3b2a5d6c7332ba92fc3",
+      "reconciliationStatus": null,
+      "reconciliationEvidence": {},
+      "retryAllowed": false,
+      "retryReason": null
+    }
+  ],
+  "retryAllowed": false,
+  "retryReason": null,
+  "recoveredFromCrash": false,
+  "recoveryCheckpoint": {
+    "state": "UNKNOWN_OUTCOME",
+    "iteration": 1,
+    "mutationAttemptId": "14629ce9-0af0-4c61-a499-4caf2ec2394a",
+    "checkpointHash": "4e990bb6b7612f5aef673c057c2fb63d8c3aab82e7677cc44d860f5590f5805f",
+    "evidenceRef": "checkpoints/recovery-1-14629ce9-0af0-4c61-a499-4caf2ec2394a-4e990bb6b761.json"
+  }
+}

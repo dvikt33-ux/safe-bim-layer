@@ -1,0 +1,614 @@
+{
+  "stage4Status": "BLOCKED",
+  "branch": "work/stage4-live-hardening",
+  "baseCommit": "03c64733bb2b4f59970f5247a3ed89e1236f3090",
+  "tests": {
+    "baseline": 95,
+    "new": 33,
+    "total": 128,
+    "status": "PASS"
+  },
+  "criteria": [
+    {
+      "id": "C01",
+      "required": true,
+      "check": "Stage 3 happy path regression PASS.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C02",
+      "required": true,
+      "check": "Одна user goal запускает весь loop.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C03",
+      "required": true,
+      "check": "Stale action physically not executed.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C04",
+      "required": true,
+      "check": "Fresh replan after stale works.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C05",
+      "required": true,
+      "check": "MutationAttemptId существует до physical execution.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C06",
+      "required": true,
+      "check": "MutationAttemptId сохраняется durable.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C07",
+      "required": true,
+      "check": "UNKNOWN_OUTCOME не приводит к blind retry.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C08",
+      "required": true,
+      "check": "Reconciliation uses factual read-back.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C09",
+      "required": true,
+      "check": "Reconciled-applied scenario распознаётся.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C10",
+      "required": true,
+      "check": "Reconciled-applied mutation не повторяется.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C11",
+      "required": true,
+      "check": "Reconciled-not-applied распознаётся.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C12",
+      "required": true,
+      "check": "Retry после not-applied требует fresh observation.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C13",
+      "required": true,
+      "check": "Ambiguous reconciliation blocks.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C14",
+      "required": true,
+      "check": "Crash restart does not duplicate mutation.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C15",
+      "required": true,
+      "check": "Durable checkpoint survives restart.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C16",
+      "required": true,
+      "check": "No-progress guard works.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C17",
+      "required": true,
+      "check": "Iteration-limit guard works independently.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C18",
+      "required": true,
+      "check": "Transport failure before execution distinguished from UNKNOWN_OUTCOME.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C19",
+      "required": true,
+      "check": "Read-back failure never produces VERIFIED.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C20",
+      "required": true,
+      "check": "External model change invalidates stale assumptions.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C21",
+      "required": true,
+      "check": "Every physical mutation has post-state evidence or unresolved status.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C22",
+      "required": true,
+      "check": "Audit Pack generated for live scenarios.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C23",
+      "required": true,
+      "check": "Audit Pack absolute-path scan PASS.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C24",
+      "required": true,
+      "check": "Semantic delta works.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C25",
+      "required": true,
+      "check": "Stage 2 tests PASS.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C26",
+      "required": true,
+      "check": "Stage 3 tests PASS.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C27",
+      "required": true,
+      "check": "Audit Pack tests PASS.",
+      "expected": "PASS",
+      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    },
+    {
+      "id": "C28",
+      "required": true,
+      "check": "No new BIM operation types added.",
+      "expected": "PASS",
+      "actual": "Only existing create_wall; frozen v0 files unchanged",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "SOURCE_OR_REF_CHECK"
+    },
+    {
+      "id": "C29",
+      "required": true,
+      "check": "main unchanged.",
+      "expected": "PASS",
+      "actual": "Remote main remains 72e9be15ac3b943d7b6f0c46eaa45aa5798d56bc",
+      "verdict": "PASS",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "SOURCE_OR_REF_CHECK"
+    },
+    {
+      "id": "C30",
+      "required": true,
+      "check": "All required criteria PASS before Stage 4 VERIFIED.",
+      "expected": "PASS",
+      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
+      "verdict": "NOT_VERIFIED",
+      "evidenceRefs": [
+        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
+    }
+  ],
+  "scenarios": [
+    {
+      "scenarioId": "S4-01",
+      "status": "BLOCKED",
+      "liveStatus": "BLOCKED_WRONG_PROJECT",
+      "offlineStatus": "NOT_VERIFIED",
+      "offlineEvidence": null
+    },
+    {
+      "scenarioId": "S4-02",
+      "status": "BLOCKED",
+      "liveStatus": "BLOCKED_WRONG_PROJECT",
+      "offlineStatus": "NOT_VERIFIED",
+      "offlineEvidence": null
+    },
+    {
+      "scenarioId": "S4-03",
+      "status": "BLOCKED",
+      "liveStatus": "BLOCKED_WRONG_PROJECT",
+      "offlineStatus": "NOT_VERIFIED",
+      "offlineEvidence": null
+    },
+    {
+      "scenarioId": "S4-04",
+      "status": "PASS",
+      "liveStatus": "NOT_RUN",
+      "offlineStatus": "PASS",
+      "offlineEvidence": {
+        "scenarioId": "S4-04",
+        "status": "PASS",
+        "provenance": "OFFLINE_FIXTURE",
+        "liveVerdict": "NOT_RUN",
+        "test": "tests_stage4_live.test_attempts.RecoveryTests.test_not_applied_requires_new_observation_plan_and_new_attempt_id",
+        "expectedFailureIsSuccessfulProof": false,
+        "jobFinalStatus": "VERIFIED",
+        "terminalReason": "decision from required acceptance criteria",
+        "physicalMutationCalls": 0,
+        "simulatedNativeCalls": 2,
+        "mutationAttemptIds": [
+          "14629ce9-0af0-4c61-a499-4caf2ec2394a",
+          "e0665dd9-64c0-4481-8f91-cae043275275",
+          "a7970563-82e0-49d1-b6b8-d03a8d9cdf7b"
+        ],
+        "duplicateMutationCount": 0,
+        "reconciliationOutcomes": [
+          "RECONCILED_NOT_APPLIED"
+        ],
+        "recoveredFromCrash": false,
+        "auditPackStatus": "PASS"
+      }
+    },
+    {
+      "scenarioId": "S4-05",
+      "status": "PASS",
+      "liveStatus": "NOT_RUN",
+      "offlineStatus": "PASS",
+      "offlineEvidence": {
+        "scenarioId": "S4-05",
+        "status": "PASS",
+        "provenance": "OFFLINE_FIXTURE",
+        "liveVerdict": "NOT_RUN",
+        "test": "tests_stage4_live.test_attempts.RecoveryTests.test_ambiguous_recovery_blocks_without_execute",
+        "expectedFailureIsSuccessfulProof": true,
+        "jobFinalStatus": "BLOCKED",
+        "terminalReason": "BLOCKED_RECONCILIATION_AMBIGUOUS",
+        "physicalMutationCalls": 0,
+        "simulatedNativeCalls": 1,
+        "mutationAttemptIds": [
+          "18c5815a-dd37-4063-b699-dea448d47aad"
+        ],
+        "duplicateMutationCount": 0,
+        "reconciliationOutcomes": [
+          "RECONCILIATION_AMBIGUOUS"
+        ],
+        "recoveredFromCrash": false,
+        "auditPackStatus": "PASS"
+      }
+    },
+    {
+      "scenarioId": "S4-06",
+      "status": "BLOCKED",
+      "liveStatus": "BLOCKED_WRONG_PROJECT",
+      "offlineStatus": "PASS",
+      "offlineEvidence": {
+        "scenarioId": "S4-06-offline",
+        "status": "PASS",
+        "provenance": "OFFLINE_FIXTURE",
+        "liveVerdict": "NOT_RUN",
+        "test": "tests_stage4_live.test_attempts.RecoveryTests.test_crash_checkpoint_restores_without_repeating_first_mutation",
+        "expectedFailureIsSuccessfulProof": false,
+        "jobFinalStatus": "VERIFIED",
+        "terminalReason": "decision from required acceptance criteria",
+        "physicalMutationCalls": 0,
+        "simulatedNativeCalls": 2,
+        "mutationAttemptIds": [
+          "81b6b832-2a2b-4646-9c48-c33fe204210e",
+          "42bcd4c3-8d55-49e7-911c-792b48054b99"
+        ],
+        "duplicateMutationCount": 0,
+        "reconciliationOutcomes": [
+          "RECONCILED_APPLIED"
+        ],
+        "recoveredFromCrash": true,
+        "auditPackStatus": "PASS"
+      }
+    },
+    {
+      "scenarioId": "S4-07",
+      "status": "PASS",
+      "liveStatus": "NOT_RUN",
+      "offlineStatus": "PASS",
+      "offlineEvidence": {
+        "scenarioId": "S4-07",
+        "status": "PASS",
+        "provenance": "OFFLINE_FIXTURE",
+        "liveVerdict": "NOT_RUN",
+        "test": "tests_stage4_live.test_guards.LivePathGuardTests.test_no_progress_is_independent_and_blocks_in_live_adapter_path",
+        "expectedFailureIsSuccessfulProof": true,
+        "jobFinalStatus": "BLOCKED",
+        "terminalReason": "BLOCKED_NO_PROGRESS",
+        "physicalMutationCalls": 0,
+        "simulatedNativeCalls": 0,
+        "mutationAttemptIds": [],
+        "duplicateMutationCount": 0,
+        "reconciliationOutcomes": [],
+        "recoveredFromCrash": false,
+        "auditPackStatus": "PASS"
+      }
+    },
+    {
+      "scenarioId": "S4-08",
+      "status": "PASS",
+      "liveStatus": "NOT_RUN",
+      "offlineStatus": "PASS",
+      "offlineEvidence": {
+        "scenarioId": "S4-08",
+        "status": "PASS",
+        "provenance": "OFFLINE_FIXTURE",
+        "liveVerdict": "NOT_RUN",
+        "test": "tests_stage4_live.test_guards.LivePathGuardTests.test_iteration_limit_with_changing_live_adapter_fingerprint",
+        "expectedFailureIsSuccessfulProof": true,
+        "jobFinalStatus": "BLOCKED",
+        "terminalReason": "BLOCKED_ITERATION_LIMIT: iteration limit reached with required criteria unresolved",
+        "physicalMutationCalls": 0,
+        "simulatedNativeCalls": 0,
+        "mutationAttemptIds": [],
+        "duplicateMutationCount": 0,
+        "reconciliationOutcomes": [],
+        "recoveredFromCrash": false,
+        "auditPackStatus": "PASS"
+      }
+    },
+    {
+      "scenarioId": "S4-09",
+      "status": "PASS",
+      "liveStatus": "NOT_RUN",
+      "offlineStatus": "PASS",
+      "offlineEvidence": {
+        "scenarioId": "S4-09",
+        "status": "PASS",
+        "provenance": "OFFLINE_FIXTURE",
+        "liveVerdict": "NOT_RUN",
+        "test": "tests_stage4_live.test_attempts.RecoveryTests.test_pre_native_transport_failure_is_blocked_not_unknown",
+        "expectedFailureIsSuccessfulProof": true,
+        "jobFinalStatus": "BLOCKED",
+        "terminalReason": "BLOCKED_BY_TRANSPORT: mutation not dispatched: transport unavailable before native call",
+        "physicalMutationCalls": 0,
+        "simulatedNativeCalls": 0,
+        "mutationAttemptIds": [
+          "0cda5b9e-1a67-4d31-90cf-05b9d63b8750"
+        ],
+        "duplicateMutationCount": 0,
+        "reconciliationOutcomes": [],
+        "recoveredFromCrash": false,
+        "auditPackStatus": "PASS"
+      }
+    },
+    {
+      "scenarioId": "S4-10",
+      "status": "PASS",
+      "liveStatus": "NOT_RUN",
+      "offlineStatus": "PASS",
+      "offlineEvidence": {
+        "scenarioId": "S4-10",
+        "status": "PASS",
+        "provenance": "OFFLINE_FIXTURE",
+        "liveVerdict": "NOT_RUN",
+        "test": "tests_stage4_live.test_attempts.RecoveryTests.test_confirmed_response_with_missing_readback_never_verifies",
+        "expectedFailureIsSuccessfulProof": true,
+        "jobFinalStatus": "BLOCKED",
+        "terminalReason": "BLOCKED_BY_TRANSPORT: read-back unavailable: ConnectionError: Fixture factual read-back failure",
+        "physicalMutationCalls": 0,
+        "simulatedNativeCalls": 1,
+        "mutationAttemptIds": [
+          "a15ff912-01f8-491f-ba82-f35f81df7744"
+        ],
+        "duplicateMutationCount": 0,
+        "reconciliationOutcomes": [],
+        "recoveredFromCrash": false,
+        "auditPackStatus": "PASS"
+      }
+    }
+  ],
+  "physicalMutationCalls": 0,
+  "liveMutationAttemptIds": [],
+  "actualTestedPLN": null,
+  "requiredPLN": "NativeGeometry_Full_Test_20261004.pln",
+  "identityGate": {
+    "status": "BLOCKED",
+    "actualProjectName": "тест дом ",
+    "endpoint": "127.0.0.1:19723",
+    "responseSha256": "ad8d73ad44b11170ac29b3eded0f3925c9eaf4fc362814f71b516a5f88a6ff84",
+    "rawReceipt": "LOCAL_ONLY"
+  },
+  "requiredEnvironment": {
+    "archicadVersion": 29,
+    "build": 3000,
+    "language": "RUS",
+    "tapir": "1.5.10"
+  },
+  "actualEnvironment": "NOT_VERIFIED: identity gate stopped before follow-on commands",
+  "auditPacks": {
+    "offlineVerified": 7,
+    "mandatoryLive": "NOT_VERIFIED"
+  },
+  "crash": {
+    "offline": "PASS",
+    "actualLiveChild": "NOT_VERIFIED"
+  },
+  "mainUnchanged": true,
+  "mainCommit": "72e9be15ac3b943d7b6f0c46eaa45aa5798d56bc",
+  "newBimOperationTypes": false,
+  "stage5Started": false,
+  "publication": "DEFERRED: Stage 4 acceptance incomplete",
+  "backlog": [
+    "general transactions and concurrent job ownership",
+    "other BIM operations",
+    "UI",
+    "normative engines",
+    "performance"
+  ]
+}
