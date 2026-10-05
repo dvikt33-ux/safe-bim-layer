@@ -54,3 +54,7 @@ Thumbs.db
 *.swp
 *.swo
 *~
+
+# Local native add-on build products
+.build/
+

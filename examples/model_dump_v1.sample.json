@@ -1,0 +1,471 @@
+{
+  "schemaVersion": 1,
+  "units": "m",
+  "coordinateSystem": "ABSOLUTE_PROJECT_XYZ",
+  "vertexIndexBase": 0,
+  "representation": "ARCHICAD_RESULTANT_POLYGON_MODEL",
+  "regenerated3D": true,
+  "geometryScope": "ALL_AVAILABLE_BODIES_IN_REGENERATED_3D_VIEW; existing layer/design-option/3D filters remain in force",
+  "sampleOnly": true,
+  "sampleScope": "One closed Morph and the materials referenced by its faces, selected from a live Model Dump v1 response.",
+  "stories": [
+    {
+      "index": 0,
+      "nativeStoryName": "",
+      "elevation": 0,
+      "name": "Этаж",
+      "displayName": "1. Этаж"
+    }
+  ],
+  "elements": [
+    {
+      "guid": "06FBA980-8B82-47EA-AE3B-A5C21CCF387C",
+      "type": "Morph",
+      "nativeTypeId": 45,
+      "homeStory": 0,
+      "materialBindings": {
+        "api": "ACAPI_Element_Get",
+        "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+        "buildingMaterial": {
+          "nativeField": "morph.buildingMaterial",
+          "attributeType": 12,
+          "attributeIndex": 54,
+          "guid": "BC9F3B91-141E-454A-ADDF-4FF9813B3416",
+          "name": "ОБЩИЙ - СБОРНАЯ КОНСТРУКЦИЯ",
+          "defaultSurface": {
+            "nativeField": "buildingMaterial.cutMaterial",
+            "attributeType": 5,
+            "attributeIndex": 99,
+            "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+            "name": "Краска - Светло-Серая"
+          }
+        },
+        "material": {
+          "nativeField": "morph.material (non-customized faces)",
+          "attributeType": 5,
+          "attributeIndex": 0,
+          "overridden": false,
+          "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+        },
+        "customFaceAssignments": "effective surfaces are in resultant mesh; custom Morph face source is not expanded"
+      },
+      "placement": {
+        "coordinateNote": "Native reference fields retain their API meaning; physical vertices are absolute project XYZ.",
+        "referenceGeometry": {
+          "levelFromHomeStory": 4.75,
+          "placementTransform": [
+            1,
+            0,
+            0,
+            2336.616754563,
+            0,
+            1,
+            0,
+            364.581553843,
+            0,
+            0,
+            1,
+            4.75
+          ]
+        }
+      },
+      "relationships": {},
+      "bodies": [
+        {
+          "nativeBodyIndex": 3595,
+          "parentGuid": "06FBA980-8B82-47EA-AE3B-A5C21CCF387C",
+          "status": 1283,
+          "closed": true,
+          "curved": true,
+          "transform": [
+            1,
+            0,
+            0,
+            2336.616754563,
+            0,
+            1,
+            0,
+            364.581553843,
+            0,
+            0,
+            1,
+            4.75
+          ],
+          "vertices": [
+            [
+              2336.616754563,
+              364.581553843,
+              4.75
+            ],
+            [
+              2336.616754563,
+              364.581553843,
+              6.75
+            ],
+            [
+              2336.616754563,
+              366.581553843,
+              4.75
+            ],
+            [
+              2336.616754563,
+              366.581553843,
+              6.75
+            ],
+            [
+              2338.616754563,
+              364.581553843,
+              4.75
+            ],
+            [
+              2338.616754563,
+              364.581553843,
+              6.75
+            ],
+            [
+              2338.616754563,
+              366.581553843,
+              4.75
+            ],
+            [
+              2338.616754563,
+              366.581553843,
+              6.75
+            ]
+          ],
+          "edges": [
+            {
+              "vertices": [
+                0,
+                2
+              ],
+              "nativeStatus": 0
+            },
+            {
+              "vertices": [
+                6,
+                2
+              ],
+              "nativeStatus": 0
+            },
+            {
+              "vertices": [
+                1,
+                3
+              ],
+              "nativeStatus": 0
+            },
+            {
+              "vertices": [
+                0,
+                4
+              ],
+              "nativeStatus": 0
+            },
+            {
+              "vertices": [
+                1,
+                5
+              ],
+              "nativeStatus": 0
+            },
+            {
+              "vertices": [
+                7,
+                3
+              ],
+              "nativeStatus": 0
+            },
+            {
+              "vertices": [
+                0,
+                1
+              ],
+              "nativeStatus": 0
+            },
+            {
+              "vertices": [
+                4,
+                6
+              ],
+              "nativeStatus": 0
+            },
+            {
+              "vertices": [
+                2,
+                3
+              ],
+              "nativeStatus": 0
+            },
+            {
+              "vertices": [
+                5,
+                7
+              ],
+              "nativeStatus": 0
+            },
+            {
+              "vertices": [
+                4,
+                5
+              ],
+              "nativeStatus": 0
+            },
+            {
+              "vertices": [
+                6,
+                7
+              ],
+              "nativeStatus": 0
+            }
+          ],
+          "localNormals": [
+            {
+              "x": 0,
+              "y": 0,
+              "z": -1
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "z": 1
+            },
+            {
+              "x": 0,
+              "y": -1,
+              "z": 0
+            },
+            {
+              "x": 1,
+              "y": 0,
+              "z": 0
+            },
+            {
+              "x": -1,
+              "y": 0,
+              "z": 0
+            },
+            {
+              "x": 0,
+              "y": 1,
+              "z": 0
+            }
+          ],
+          "faces": [
+            {
+              "nativeFaceIndex": 1,
+              "materialId": 4,
+              "signedLocalNormalIndex": 1,
+              "nativeStatus": 2,
+              "contours": [
+                [
+                  0,
+                  2,
+                  6,
+                  4
+                ]
+              ],
+              "signedNativeEdgeReferences": [
+                1,
+                -2,
+                -8,
+                -4
+              ],
+              "vertices": [
+                0,
+                2,
+                6,
+                4
+              ],
+              "holes": []
+            },
+            {
+              "nativeFaceIndex": 2,
+              "materialId": 4,
+              "signedLocalNormalIndex": 2,
+              "nativeStatus": 2,
+              "contours": [
+                [
+                  3,
+                  1,
+                  5,
+                  7
+                ]
+              ],
+              "signedNativeEdgeReferences": [
+                -3,
+                5,
+                10,
+                6
+              ],
+              "vertices": [
+                3,
+                1,
+                5,
+                7
+              ],
+              "holes": []
+            },
+            {
+              "nativeFaceIndex": 3,
+              "materialId": 4,
+              "signedLocalNormalIndex": 3,
+              "nativeStatus": 2,
+              "contours": [
+                [
+                  0,
+                  4,
+                  5,
+                  1
+                ]
+              ],
+              "signedNativeEdgeReferences": [
+                4,
+                11,
+                -5,
+                -7
+              ],
+              "vertices": [
+                0,
+                4,
+                5,
+                1
+              ],
+              "holes": []
+            },
+            {
+              "nativeFaceIndex": 4,
+              "materialId": 4,
+              "signedLocalNormalIndex": 4,
+              "nativeStatus": 2,
+              "contours": [
+                [
+                  4,
+                  6,
+                  7,
+                  5
+                ]
+              ],
+              "signedNativeEdgeReferences": [
+                8,
+                12,
+                -10,
+                -11
+              ],
+              "vertices": [
+                4,
+                6,
+                7,
+                5
+              ],
+              "holes": []
+            },
+            {
+              "nativeFaceIndex": 5,
+              "materialId": 4,
+              "signedLocalNormalIndex": 5,
+              "nativeStatus": 2,
+              "contours": [
+                [
+                  2,
+                  0,
+                  1,
+                  3
+                ]
+              ],
+              "signedNativeEdgeReferences": [
+                -1,
+                7,
+                3,
+                -9
+              ],
+              "vertices": [
+                2,
+                0,
+                1,
+                3
+              ],
+              "holes": []
+            },
+            {
+              "nativeFaceIndex": 6,
+              "materialId": 4,
+              "signedLocalNormalIndex": 6,
+              "nativeStatus": 2,
+              "contours": [
+                [
+                  6,
+                  2,
+                  3,
+                  7
+                ]
+              ],
+              "signedNativeEdgeReferences": [
+                2,
+                9,
+                -6,
+                -12
+              ],
+              "vertices": [
+                6,
+                2,
+                3,
+                7
+              ],
+              "holes": []
+            }
+          ],
+          "vertexCoordinates": "ABSOLUTE_PROJECT_XYZ_METERS"
+        }
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "id": 4,
+      "modelMaterialIndex": 4,
+      "attributeIndex": 99,
+      "name": "Краска - Светло-Серая",
+      "source": "attribute",
+      "color": {
+        "r": 0.658823529,
+        "g": 0.658823529,
+        "b": 0.658823529
+      },
+      "transparencyPercent": 0,
+      "nativeMaterialType": 0,
+      "attribute": {
+        "nativeField": "API_UmatType.mater.head.index",
+        "attributeType": 5,
+        "attributeIndex": 99,
+        "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+        "name": "Краска - Светло-Серая"
+      },
+      "texture": {
+        "name": "",
+        "missing": false,
+        "xSize": 0,
+        "ySize": 0,
+        "rotation": 0
+      },
+      "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333"
+    }
+  ],
+  "unresolvedBodyOwners": [],
+  "counts": {
+    "elements": 1,
+    "elementsWithBodies": 1,
+    "unresolvedBodyOwners": 0,
+    "bodies": 1,
+    "vertices": 8,
+    "faces": 6,
+    "materials": 1,
+    "holeContours": 0,
+    "elementTypes": {
+      "Morph": 1
+    },
+    "bodyTypes": {
+      "Morph": 1
+    }
+  }
+}
