@@ -1,0 +1,9 @@
+test_executor_prewrite_stale_reobserves_without_repeating_mutation (test_live_adapters.AdapterTests.test_executor_prewrite_stale_reobserves_without_repeating_mutation) ... ok
+test_fingerprint_ignores_timing_and_element_order_but_tracks_geometry (test_live_adapters.AdapterTests.test_fingerprint_ignores_timing_and_element_order_but_tracks_geometry) ... ok
+test_live_mode_gate_waits_for_second_readback (test_live_adapters.AdapterTests.test_live_mode_gate_waits_for_second_readback) ... ok
+test_live_timeout_stops_without_retry (test_live_adapters.AdapterTests.test_live_timeout_stops_without_retry) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.080s
+
+OK

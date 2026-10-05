@@ -1,0 +1,376 @@
+{
+  "status": "PASS",
+  "baseCommit": "06c503a424498a74e19507ae11a4cc48f6dc7c3f",
+  "branch": "work/audit-pack-fix",
+  "schemaVersion": 1,
+  "extractorVersion": "1",
+  "extractor": "scripts/build_audit_pack.py",
+  "verifier": "scripts/verify_audit_pack.py",
+  "toolFiles": [
+    {
+      "path": "scripts/audit_pack.py",
+      "sha256": "c5b78f5fff00e81a66bd6a45072a952fec57dac21f14bb33fc6bc015499041e7",
+      "bytes": 26117
+    },
+    {
+      "path": "scripts/build_audit_pack.py",
+      "sha256": "6477324441b8955504abef7eb8aeabbef83b31ea9534a327754a4d6997128794",
+      "bytes": 1223
+    },
+    {
+      "path": "scripts/verify_audit_pack.py",
+      "sha256": "7f7a4d20481cf856d0922c87c1ffef3575805d47b0ad090b0b458268a24bd027",
+      "bytes": 741
+    }
+  ],
+  "tests": {
+    "tests_audit_pack": {
+      "run": 32,
+      "passed": 32,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "status": "PASS"
+    },
+    "tests_stage2": {
+      "run": 44,
+      "passed": 44,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "status": "PASS"
+    },
+    "tests_stage3": {
+      "run": 4,
+      "passed": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "status": "PASS"
+    }
+  },
+  "totalTestsPassed": 80,
+  "packs": {
+    "3": {
+      "status": "PASS",
+      "path": "outputs/closed-loop-stage3/run-002/audit-pack",
+      "files": 36,
+      "bytes": 8408546,
+      "MiB": 8.019014358520508,
+      "manifest": {
+        "path": "outputs/closed-loop-stage3/run-002/audit-pack/audit-pack-manifest.json",
+        "sha256": "2d7f79e854cb4f836a0db6a453211baec46d0d776e6a40c816851c8f5f248a5c",
+        "bytes": 13557
+      },
+      "sourceFullDumps": [
+        {
+          "path": "outputs/closed-loop-stage3/run-002/live-job/observations/001-observe.json",
+          "sha256": "70b9ab8a2fba021b0c109ec50317bddb06857df5be3eb587c8006ab8bea4c382",
+          "bytes": 104954941,
+          "verified": true
+        },
+        {
+          "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-1/executor/before.json",
+          "sha256": "6958cf5892d22d0e2c0b0c95c11ebb9f19a98ef9660e86cd41c1235e443f5a98",
+          "bytes": 104954941,
+          "verified": true
+        },
+        {
+          "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-1/executor/after-create.json",
+          "sha256": "c783869c8daa4f2f8e0778a4608a9d48f4044a7758e947a2b18404ed612e38fd",
+          "bytes": 104958551,
+          "verified": true
+        },
+        {
+          "path": "outputs/closed-loop-stage3/run-002/live-job/observations/002-stale-check.json",
+          "sha256": "2060ad6eb38a11f3d3b7032fd692108643e1a3f2ffc177aaa291087be3dbefdc",
+          "bytes": 104954941,
+          "verified": true
+        },
+        {
+          "path": "outputs/closed-loop-stage3/run-002/live-job/observations/003-read-back.json",
+          "sha256": "77742cfc8230909db8844bdacaaf61ee428bbe2539570474d9c9d59235e56477",
+          "bytes": 104958551,
+          "verified": true
+        },
+        {
+          "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-2/executor/before.json",
+          "sha256": "304155bb1ba3124c531a134905914cfadd56a375c6b5224b4e2e2a61f0901968",
+          "bytes": 104958551,
+          "verified": true
+        },
+        {
+          "path": "outputs/closed-loop-stage3/run-002/live-job/iteration-2/executor/after-create.json",
+          "sha256": "fb652fd2064f7140a42b2a7bff82b836941fff2cce9e575c6e4a4c4afa628fa9",
+          "bytes": 104962161,
+          "verified": true
+        },
+        {
+          "path": "outputs/closed-loop-stage3/run-002/live-job/observations/004-observe.json",
+          "sha256": "f0850dccf6e1c725817c7064020af5cebe2d8fcc592e8920c52f2494deb5c5e6",
+          "bytes": 104958551,
+          "verified": true
+        },
+        {
+          "path": "outputs/closed-loop-stage3/run-002/live-job/observations/005-stale-check.json",
+          "sha256": "e43f584f6eb55981520e0f64dc1a87d96abb4db84d215a9b5124e1b44c6d17e9",
+          "bytes": 104958550,
+          "verified": true
+        },
+        {
+          "path": "outputs/closed-loop-stage3/run-002/live-job/observations/006-read-back.json",
+          "sha256": "3132c92a0f1e34867d2bda70823b751f852ba6d6efb2711e80787ceb9d81e34e",
+          "bytes": 104962161,
+          "verified": true
+        }
+      ],
+      "iterations": [
+        {
+          "iteration": 1,
+          "beforeCount": 5304,
+          "afterCount": 5305,
+          "added": [
+            "B492859E-E508-46B3-87ED-0B07C6C580CC"
+          ],
+          "removed": [],
+          "changedCount": 123,
+          "onlyNativeBodyIndexChanges": true,
+          "sourceGuid": "C621D5B7-6215-4925-8651-DD5FBB71EA14",
+          "createdGuid": "B492859E-E508-46B3-87ED-0B07C6C580CC",
+          "length": 1.0,
+          "jointDistance": 0.0,
+          "directionCosine": 1.0
+        },
+        {
+          "iteration": 2,
+          "beforeCount": 5305,
+          "afterCount": 5306,
+          "added": [
+            "40F79CDC-61BC-43E1-A65C-32E962568F3F"
+          ],
+          "removed": [],
+          "changedCount": 108,
+          "onlyNativeBodyIndexChanges": true,
+          "sourceGuid": "B492859E-E508-46B3-87ED-0B07C6C580CC",
+          "createdGuid": "40F79CDC-61BC-43E1-A65C-32E962568F3F",
+          "length": 0.5,
+          "jointDistance": 0.0,
+          "directionCosine": 1.0
+        }
+      ],
+      "dependency": {
+        "computedFromDump": true,
+        "dependencies": [
+          {
+            "equal": true,
+            "iteration1CreatedGuid": "B492859E-E508-46B3-87ED-0B07C6C580CC",
+            "iteration2SourceGuid": "B492859E-E508-46B3-87ED-0B07C6C580CC",
+            "nextIteration": 2,
+            "previousIteration": 1
+          }
+        ],
+        "equal": true
+      },
+      "compactEvidence": {
+        "iterations": [
+          {
+            "checkedFields": [
+              "action",
+              "begin",
+              "createdGuid",
+              "elementCountAfter",
+              "elementCountBefore",
+              "end",
+              "executorBeforeHash",
+              "homeStory",
+              "jointDistance",
+              "length",
+              "plannedHash",
+              "preExecutionHash",
+              "readbackHash",
+              "sourceGuid"
+            ],
+            "iteration": 1,
+            "status": "PASS"
+          },
+          {
+            "checkedFields": [
+              "action",
+              "begin",
+              "createdGuid",
+              "elementCountAfter",
+              "elementCountBefore",
+              "end",
+              "executorBeforeHash",
+              "homeStory",
+              "jointDistance",
+              "length",
+              "plannedHash",
+              "preExecutionHash",
+              "readbackHash",
+              "sourceGuid"
+            ],
+            "iteration": 2,
+            "status": "PASS"
+          }
+        ],
+        "status": "PASS"
+      },
+      "deterministicFullRebuild": "ALL_BYTES_IDENTICAL",
+      "verifier": "PASS"
+    },
+    "1": {
+      "status": "PASS",
+      "path": "outputs/closed-loop-stage1/audit-pack",
+      "files": 31,
+      "bytes": 8552136,
+      "MiB": 8.155952453613281,
+      "manifest": {
+        "path": "outputs/closed-loop-stage1/audit-pack/audit-pack-manifest.json",
+        "sha256": "8b9e60ba0204de5f439aaa9a901ef2ac40b7f29aa93afac7baf82b9c6059341e",
+        "bytes": 9117
+      },
+      "sourceFullDumps": [
+        {
+          "path": "outputs/closed-loop-stage1/initial-model-dump.json",
+          "sha256": "d84ad042d04fd63be3cf2b059a1a12e1982f86edace6c0bb38525b784c12ac26",
+          "bytes": 104940501,
+          "verified": true
+        },
+        {
+          "path": "outputs/closed-loop-stage1/iteration-1/executor/before.json",
+          "sha256": "58c5d529a9c4e8ab057bb7ce2ef15134bdc5841920a6df6b22015dfe3d738f52",
+          "bytes": 104940501,
+          "verified": true
+        },
+        {
+          "path": "outputs/closed-loop-stage1/iteration-1/executor/after-create.json",
+          "sha256": "0a307ff65c9b19a76570ea85ef0812ced41162b87ea24fb23321bdd653642277",
+          "bytes": 104944111,
+          "verified": true
+        },
+        {
+          "path": "outputs/closed-loop-stage1/iteration-2/executor/before.json",
+          "sha256": "3ff48dc68ceaf9286f2a7a59441b0bd6ed30fce8c4596b602887c6f415a144b3",
+          "bytes": 104944111,
+          "verified": true
+        },
+        {
+          "path": "outputs/closed-loop-stage1/iteration-2/executor/after-create.json",
+          "sha256": "c18971cff24d81afc2d221f7fa85f5f05936cd696b36bffe36de94f1ce9305bc",
+          "bytes": 104947721,
+          "verified": true
+        }
+      ],
+      "iterations": [
+        {
+          "iteration": 1,
+          "beforeCount": 5300,
+          "afterCount": 5301,
+          "added": [
+            "B18F8EA4-8D47-4FAE-9373-E830DBEA3CF4"
+          ],
+          "removed": [],
+          "changedCount": 123,
+          "onlyNativeBodyIndexChanges": true,
+          "sourceGuid": "F69C0FEC-34FF-4982-8CE8-127D7DAED89D",
+          "createdGuid": "B18F8EA4-8D47-4FAE-9373-E830DBEA3CF4",
+          "length": 1.0,
+          "jointDistance": 0.0,
+          "directionCosine": 1.0
+        },
+        {
+          "iteration": 2,
+          "beforeCount": 5301,
+          "afterCount": 5302,
+          "added": [
+            "CE093166-FF7B-420E-B991-1D0CE0D5CCAE"
+          ],
+          "removed": [],
+          "changedCount": 123,
+          "onlyNativeBodyIndexChanges": true,
+          "sourceGuid": "B18F8EA4-8D47-4FAE-9373-E830DBEA3CF4",
+          "createdGuid": "CE093166-FF7B-420E-B991-1D0CE0D5CCAE",
+          "length": 0.5,
+          "jointDistance": 0.0,
+          "directionCosine": 1.0
+        }
+      ],
+      "dependency": {
+        "computedFromDump": true,
+        "dependencies": [
+          {
+            "equal": true,
+            "iteration1CreatedGuid": "B18F8EA4-8D47-4FAE-9373-E830DBEA3CF4",
+            "iteration2SourceGuid": "B18F8EA4-8D47-4FAE-9373-E830DBEA3CF4",
+            "nextIteration": 2,
+            "previousIteration": 1
+          }
+        ],
+        "equal": true
+      },
+      "compactEvidence": {
+        "iterations": [
+          {
+            "checkedFields": [
+              "begin",
+              "createdGuid",
+              "elementCountAfter",
+              "elementCountBefore",
+              "end",
+              "homeStory",
+              "jointDistance",
+              "length",
+              "sourceBegin",
+              "sourceEnd",
+              "sourceGuid",
+              "typedRequest"
+            ],
+            "iteration": 1,
+            "status": "PASS"
+          },
+          {
+            "checkedFields": [
+              "begin",
+              "createdGuid",
+              "elementCountAfter",
+              "elementCountBefore",
+              "end",
+              "homeStory",
+              "jointDistance",
+              "length",
+              "sourceBegin",
+              "sourceEnd",
+              "sourceGuid",
+              "typedRequest"
+            ],
+            "iteration": 2,
+            "status": "PASS"
+          }
+        ],
+        "status": "PASS"
+      },
+      "deterministicFullRebuild": "ALL_BYTES_IDENTICAL",
+      "verifier": "PASS"
+    }
+  },
+  "totalAuditPackBytes": 16960682,
+  "totalAuditPackMiB": 16.17496681213379,
+  "tamperTests": {
+    "modifiedSourceValue": "DETECTED_FAIL",
+    "modifiedCreatedWall": "DETECTED_FAIL",
+    "wrongCreatedGuid": "DETECTED_FAIL",
+    "twoAddedGuids": "DETECTED_CONFLICT",
+    "selfConsistentAuditManifestForgery": "DETECTED_CONFLICT"
+  },
+  "compactFullConflicts": "NONE_IN_HISTORICAL_RUNS; CONFLICT_FIXTURES_DETECTED",
+  "discipline": {
+    "runtimeChanged": false,
+    "closedLoopChanged": false,
+    "historicalEvidenceChanged": false,
+    "mainChanged": false,
+    "liveArchicadCalls": 0,
+    "mainBefore": "72e9be15ac3b943d7b6f0c46eaa45aa5798d56bc"
+  },
+  "blockers": []
+}
