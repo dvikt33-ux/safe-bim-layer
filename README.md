@@ -1,30 +1,80 @@
-# Safe BIM Layer v0.1
+# Working Archicad MVP
 
-Qwen emits only the high-level `create_room` contract. `safe_bim_layer.py` owns Tapir payload construction, pinned-schema preflight, one-write-at-a-time execution, ordered read-back, requested-vs-actual diffs, host relationship checks, and fail-closed orchestration.
+This branch contains the working Archicad Model Dump v1 reader and six small,
+geometry-derived create/read-back/delete cycles. The Python tools use only the
+standard library. They talk to the Tapir JSON API on `127.0.0.1:19723`.
 
-High-level operations:
+## Start Archicad and open the project
 
-- `create_wall_loop(contour, floor_index, height, thickness)`
-- `create_basic_slab(contour, level, floor_index, thickness)`
-- `insert_window(host_wall_guid, params)`
-- `insert_door(host_wall_guid, params)`
-- `create_room(contour, wall_height, wall_thickness, slab, door, windows)`
+1. Start Archicad 29.
+2. Manually open the one intended test PLN in Archicad. The MVP never opens,
+   switches, or saves a project for you.
+3. Ensure the Tapir add-on with Model Dump v1 is loaded. It exposes the local
+   JSON bridge at port `19723` while Archicad is running.
 
-`CreateSlabs` schema v1.5.8 does not expose `structureType` or `buildingMaterialId`; it exposes `favoriteName`, `level`, `thickness`, `referencePlaneLocation`, polygon, and floor. The Safe BIM Layer therefore does not invent low-level values: it creates with the supported schema and fails unless read-back reports `structureType: Basic` and the requested numeric thickness.
+## Build and load the Model Dump add-on
 
-Known limitations recorded for v0.1:
+The native command is an overlay on the stock Tapir add-on. It copies a Git
+snapshot into the build directory, adds `GetModelDumpV1` registration there,
+and leaves the supplied Tapir checkout unchanged. The verified source ref is
+Tapir commit `d2dfeec`.
 
-- `Tapir_ModifyWalls` may change `showOnHome false -> true`.
-- The earlier slab `0.20 -> 0.30` mismatch was caused by a Composite slab, not proven thickness ignoring.
-- `floorPlanPolygons` may be multi-polygon; that alone is not a wall-join failure without geometric/visual evidence.
-- A failed operation stops the room transaction; v0.1 does not auto-delete partial writes.
+```powershell
+git clone https://github.com/ENZYME-APD/tapir-archicad-automation.git C:\src\tapir
+$tapir = 'C:\src\tapir'
+$devkit = 'C:\Graphisoft\Archicad 29 DevKit\Support'
+python .\archicad-addon\Examples\build_model_dump.py `
+  --tapir-repo $tapir --ref d2dfeec --devkit $devkit `
+  --build "$env:TEMP\safe-bim-mvp-build"
+```
 
-## Collaboration workflow
+In Archicad Add-On Manager, load
+`%TEMP%\safe-bim-mvp-build\build\TapirAddOn_AC29_Win.apx`. Restart Archicad
+if replacing an already loaded Tapir add-on. Do not load two Tapir builds in
+the same Archicad instance.
 
-The production control path is local: Qwen emits high-level intent, Safe BIM
-Layer validates and verifies each Tapir operation, and Archicad is reached only
-through the local bridge. GitHub is the private review boundary. Arena is used
-for scoped architecture reviews and pull requests in its own branch; it never
-operates a local or real Archicad project. See
-[the operating model](docs/OPERATING_MODEL.md) and the
-[first Arena audit brief](ARENA_TASK_ARCHITECTURE_AUDIT.md).
+## Read the current model
+
+With the intended PLN open and the add-on loaded, run:
+
+```powershell
+python .\archicad-addon\Examples\model_dump_v1.py `
+  --port 19723 --out "$env:TEMP\safe-bim-mvp\model-dump.json"
+```
+
+The client writes normalized JSON, the raw native response, the request, and
+metrics beside the output file. A compact one-Morph excerpt is checked in at
+[examples/model_dump_v1.sample.json](examples/model_dump_v1.sample.json); it is
+a subset of a live dump, not a full project dump.
+
+## Run a temporary write cycle
+
+Write cycles create an element from the current model geometry, read it back,
+and delete the returned GUID. Keep the intended test PLN open. Cycle evidence
+goes to `%TEMP%\safe-bim-mvp-evidence` by default; set
+`$env:SAFE_BIM_MVP_EVIDENCE` to choose another local directory.
+
+```powershell
+python .\scripts\archicad_write_cycles\wall_joint_cycle.py
+python .\scripts\archicad_write_cycles\wall_material_cycle.py
+python .\scripts\archicad_write_cycles\hosted_window_cycle.py
+python .\scripts\archicad_write_cycles\hosted_slab_cycle.py
+python .\scripts\archicad_write_cycles\hosted_roof_cycle.py
+python .\scripts\archicad_write_cycles\hosted_morph_cycle.py
+```
+
+## Verified operations
+
+| Operation | Result |
+| --- | --- |
+| Model Dump v1 | PASS |
+| Geometry-aware Wall create and joint | PASS |
+| Wall material inheritance and write | PASS |
+| Hosted Window placement | PASS |
+| Slab geometry and material | PASS |
+| Roof geometry create/read-back/delete | PASS |
+| Roof surface-material write | Known blocker: current native command surface does not write a single-plane Roof surface override |
+| Morph geometry create/read-back/delete | PASS |
+
+The Roof surface-material blocker is recorded separately and is not modified
+by this MVP.
