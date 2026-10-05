@@ -1,0 +1,648 @@
+{
+  "applicabilityFingerprint": "0f5f1b1e177dc43680b79259eb9fd3ae6fb64cb834ae62a1b30ec57797ea6d00",
+  "applicableBranches": [
+    {
+      "applicabilityBasis": {
+        "definition": {
+          "eq": "IZHS",
+          "input": "project.classification"
+        },
+        "projectInputsUsed": [
+          {
+            "acceptedFormat": "verified project class code",
+            "artifact": "STAGE0",
+            "artifactFingerprint": "0830465590b91d9761bf61d6c2ee34553511b1af887f5aa668c309831e68b201",
+            "input": "project.classification",
+            "inputEvidence": {
+              "acceptedFormats": [
+                "string"
+              ],
+              "blocking": true,
+              "branches": [],
+              "conflictingValues": [],
+              "derivable": false,
+              "enum": [
+                "IZHS",
+                "MKD",
+                "INDUSTRIAL",
+                "RETAIL"
+              ],
+              "id": "purpose",
+              "name": "Project purpose",
+              "owner": "USER_CLIENT_SURVEYOR_MUST_PROVIDE",
+              "priority": "CLASSIFICATION_BLOCKER",
+              "provenance": [
+                {
+                  "evidenceId": "brief:purpose",
+                  "method": "explicit supplied record",
+                  "revision": "v1",
+                  "sourceId": "brief",
+                  "sourceKind": "USER_BRIEF",
+                  "supersedes": [],
+                  "verification": "VERIFIED"
+                }
+              ],
+              "reason": "Select the project branch and exclude unrelated building classes; Select the supplied project branch",
+              "requiredBy": [
+                "STAGE_0/APPLICABILITY",
+                "STAGE_0/CLASSIFY",
+                "STAGE_0/route"
+              ],
+              "sourceKinds": [
+                "USER_BRIEF",
+                "PROJECT_FILE",
+                "USER_CORRECTION"
+              ],
+              "status": "CONFIRMED",
+              "type": "string",
+              "unit": null,
+              "value": "IZHS"
+            },
+            "known": true,
+            "value": "IZHS"
+          }
+        ],
+        "status": "APPLICABLE"
+      },
+      "blocking": true,
+      "branchId": "IZHS/GENERAL",
+      "domain": "GENERAL",
+      "requiredRuleIds": [
+        "TEST_RULE_A"
+      ],
+      "status": "APPLICABLE"
+    }
+  ],
+  "bundleFingerprint": "894adf7108c0790d6f0f8a26deb80d31d9a84873582f0547d0ac1dbb2341a442",
+  "bundleId": "bundle-25b3ccc782e87f9c53910947553edde1351a981cb6d31ddbd5067f438900e61c",
+  "canProgress": true,
+  "compiledRules": [
+    {
+      "applicabilityBasis": [
+        {
+          "definition": {
+            "eq": "IZHS",
+            "input": "project.classification"
+          },
+          "projectInputsUsed": [
+            {
+              "acceptedFormat": "verified project class code",
+              "artifact": "STAGE0",
+              "artifactFingerprint": "0830465590b91d9761bf61d6c2ee34553511b1af887f5aa668c309831e68b201",
+              "input": "project.classification",
+              "inputEvidence": {
+                "acceptedFormats": [
+                  "string"
+                ],
+                "blocking": true,
+                "branches": [],
+                "conflictingValues": [],
+                "derivable": false,
+                "enum": [
+                  "IZHS",
+                  "MKD",
+                  "INDUSTRIAL",
+                  "RETAIL"
+                ],
+                "id": "purpose",
+                "name": "Project purpose",
+                "owner": "USER_CLIENT_SURVEYOR_MUST_PROVIDE",
+                "priority": "CLASSIFICATION_BLOCKER",
+                "provenance": [
+                  {
+                    "evidenceId": "brief:purpose",
+                    "method": "explicit supplied record",
+                    "revision": "v1",
+                    "sourceId": "brief",
+                    "sourceKind": "USER_BRIEF",
+                    "supersedes": [],
+                    "verification": "VERIFIED"
+                  }
+                ],
+                "reason": "Select the project branch and exclude unrelated building classes; Select the supplied project branch",
+                "requiredBy": [
+                  "STAGE_0/APPLICABILITY",
+                  "STAGE_0/CLASSIFY",
+                  "STAGE_0/route"
+                ],
+                "sourceKinds": [
+                  "USER_BRIEF",
+                  "PROJECT_FILE",
+                  "USER_CORRECTION"
+                ],
+                "status": "CONFIRMED",
+                "type": "string",
+                "unit": null,
+                "value": "IZHS"
+              },
+              "known": true,
+              "value": "IZHS"
+            }
+          ],
+          "status": "APPLICABLE"
+        },
+        {
+          "definition": {
+            "eq": "IZHS",
+            "input": "project.classification"
+          },
+          "projectInputsUsed": [
+            {
+              "acceptedFormat": "verified project class code",
+              "artifact": "STAGE0",
+              "artifactFingerprint": "0830465590b91d9761bf61d6c2ee34553511b1af887f5aa668c309831e68b201",
+              "input": "project.classification",
+              "inputEvidence": {
+                "acceptedFormats": [
+                  "string"
+                ],
+                "blocking": true,
+                "branches": [],
+                "conflictingValues": [],
+                "derivable": false,
+                "enum": [
+                  "IZHS",
+                  "MKD",
+                  "INDUSTRIAL",
+                  "RETAIL"
+                ],
+                "id": "purpose",
+                "name": "Project purpose",
+                "owner": "USER_CLIENT_SURVEYOR_MUST_PROVIDE",
+                "priority": "CLASSIFICATION_BLOCKER",
+                "provenance": [
+                  {
+                    "evidenceId": "brief:purpose",
+                    "method": "explicit supplied record",
+                    "revision": "v1",
+                    "sourceId": "brief",
+                    "sourceKind": "USER_BRIEF",
+                    "supersedes": [],
+                    "verification": "VERIFIED"
+                  }
+                ],
+                "reason": "Select the project branch and exclude unrelated building classes; Select the supplied project branch",
+                "requiredBy": [
+                  "STAGE_0/APPLICABILITY",
+                  "STAGE_0/CLASSIFY",
+                  "STAGE_0/route"
+                ],
+                "sourceKinds": [
+                  "USER_BRIEF",
+                  "PROJECT_FILE",
+                  "USER_CORRECTION"
+                ],
+                "status": "CONFIRMED",
+                "type": "string",
+                "unit": null,
+                "value": "IZHS"
+              },
+              "known": true,
+              "value": "IZHS"
+            }
+          ],
+          "status": "APPLICABLE"
+        }
+      ],
+      "branchId": "IZHS/GENERAL",
+      "dependencies": [],
+      "projectInputsUsed": [
+        {
+          "acceptedFormat": "verified project class code",
+          "artifact": "STAGE0",
+          "artifactFingerprint": "0830465590b91d9761bf61d6c2ee34553511b1af887f5aa668c309831e68b201",
+          "input": "project.classification",
+          "inputEvidence": {
+            "acceptedFormats": [
+              "string"
+            ],
+            "blocking": true,
+            "branches": [],
+            "conflictingValues": [],
+            "derivable": false,
+            "enum": [
+              "IZHS",
+              "MKD",
+              "INDUSTRIAL",
+              "RETAIL"
+            ],
+            "id": "purpose",
+            "name": "Project purpose",
+            "owner": "USER_CLIENT_SURVEYOR_MUST_PROVIDE",
+            "priority": "CLASSIFICATION_BLOCKER",
+            "provenance": [
+              {
+                "evidenceId": "brief:purpose",
+                "method": "explicit supplied record",
+                "revision": "v1",
+                "sourceId": "brief",
+                "sourceKind": "USER_BRIEF",
+                "supersedes": [],
+                "verification": "VERIFIED"
+              }
+            ],
+            "reason": "Select the project branch and exclude unrelated building classes; Select the supplied project branch",
+            "requiredBy": [
+              "STAGE_0/APPLICABILITY",
+              "STAGE_0/CLASSIFY",
+              "STAGE_0/route"
+            ],
+            "sourceKinds": [
+              "USER_BRIEF",
+              "PROJECT_FILE",
+              "USER_CORRECTION"
+            ],
+            "status": "CONFIRMED",
+            "type": "string",
+            "unit": null,
+            "value": "IZHS"
+          },
+          "known": true,
+          "value": "IZHS"
+        }
+      ],
+      "provenance": [
+        {
+          "revisionMetadata": {
+            "decisionId": "synthetic-revision-decision",
+            "state": "ACTIVE_REVISION"
+          },
+          "ruleAudit": {
+            "auditId": "synthetic-rule-audit",
+            "ruleFingerprint": "72bda71e875e0c18a89be1ec38a4c39d5cd50371eb5a4c3ddce3ca0566f59f3c",
+            "status": "VERIFIED"
+          },
+          "ruleReference": {
+            "branchId": "IZHS/GENERAL",
+            "revision": "1",
+            "ruleId": "TEST_RULE_A"
+          },
+          "sourceEvidence": {
+            "evidenceKind": "VERIFIED_SOURCE_TEXT",
+            "location": {
+              "appendix": null,
+              "paragraph": "TEST-PARA-1",
+              "section": "synthetic section",
+              "table": null
+            },
+            "sourceHash": "cdc66764835aa5d3de099899cd4568e1794b882ac9e1e31183efb9ca0dad4b05",
+            "text": "SYNTHETIC fixture, not a Russian normative requirement: {\"domain\": \"DIMENSION\", \"downstreamDomains\": [\"SYNTHETIC_PLANNING\"], \"operator\": \"gte\", \"scope\": [\"BUILDING\"], \"subject\": \"BUILDING_WIDTH\", \"unit\": \"mm\", \"value\": 10}",
+            "textHash": "cdc66764835aa5d3de099899cd4568e1794b882ac9e1e31183efb9ca0dad4b05",
+            "verificationId": "synthetic-verification-receipt",
+            "verificationStatus": "VERIFIED"
+          }
+        }
+      ],
+      "requirement": {
+        "domain": "DIMENSION",
+        "downstreamDomains": [
+          "SYNTHETIC_PLANNING"
+        ],
+        "operator": "gte",
+        "scope": [
+          "BUILDING"
+        ],
+        "subject": "BUILDING_WIDTH",
+        "unit": "mm",
+        "value": 10
+      },
+      "ruleId": "TEST_RULE_A",
+      "ruleRevision": "1",
+      "sourceDocument": "SYNTHETIC_DOCUMENT",
+      "sourceHash": "cdc66764835aa5d3de099899cd4568e1794b882ac9e1e31183efb9ca0dad4b05",
+      "sourceLocation": {
+        "appendix": null,
+        "paragraph": "TEST-PARA-1",
+        "section": "synthetic section",
+        "table": null
+      },
+      "sourceRevision": "test-r1",
+      "sourceVerification": "VERIFIED"
+    }
+  ],
+  "conditionalBranches": [],
+  "conflicts": [],
+  "constraintInputFingerprint": "9c7083396977f424be2780e0cca2935f96f6219709f7b13bb8d67a5c1e6afa7c",
+  "createdFromLibraryFingerprint": "937704c0d11a87fdc4d3af50a412fea77128a6ca8026c553efe9d0e6d4df2f31",
+  "dependencyIndex": [],
+  "dependencyVerified": true,
+  "designIntentFingerprint": "04d7db067ad3828d367e0c210982d157bcd4c16b6f7de14f7d564ef7f6f1d1ae",
+  "domainRegistryEvidence": {
+    "id": "synthetic-coverage",
+    "revision": "1",
+    "scopeSpecification": {
+      "downstreamStage": "SYNTHETIC_PLANNING",
+      "optionalNormativeDomains": [
+        "ROOF"
+      ],
+      "projectClasses": [
+        "IZHS",
+        "MKD"
+      ],
+      "requiredNormativeDomains": [
+        "GENERAL"
+      ]
+    }
+  },
+  "downstreamScope": {
+    "downstreamStage": "SYNTHETIC_PLANNING",
+    "optionalNormativeDomains": [],
+    "requiredNormativeDomains": [
+      "GENERAL"
+    ]
+  },
+  "excludedBranches": [
+    {
+      "branchId": "MKD/GENERAL",
+      "projectInputsUsed": [
+        {
+          "acceptedFormat": "verified project class code",
+          "artifact": "STAGE0",
+          "artifactFingerprint": "0830465590b91d9761bf61d6c2ee34553511b1af887f5aa668c309831e68b201",
+          "input": "project.classification",
+          "inputEvidence": {
+            "acceptedFormats": [
+              "string"
+            ],
+            "blocking": true,
+            "branches": [],
+            "conflictingValues": [],
+            "derivable": false,
+            "enum": [
+              "IZHS",
+              "MKD",
+              "INDUSTRIAL",
+              "RETAIL"
+            ],
+            "id": "purpose",
+            "name": "Project purpose",
+            "owner": "USER_CLIENT_SURVEYOR_MUST_PROVIDE",
+            "priority": "CLASSIFICATION_BLOCKER",
+            "provenance": [
+              {
+                "evidenceId": "brief:purpose",
+                "method": "explicit supplied record",
+                "revision": "v1",
+                "sourceId": "brief",
+                "sourceKind": "USER_BRIEF",
+                "supersedes": [],
+                "verification": "VERIFIED"
+              }
+            ],
+            "reason": "Select the project branch and exclude unrelated building classes; Select the supplied project branch",
+            "requiredBy": [
+              "STAGE_0/APPLICABILITY",
+              "STAGE_0/CLASSIFY",
+              "STAGE_0/route"
+            ],
+            "sourceKinds": [
+              "USER_BRIEF",
+              "PROJECT_FILE",
+              "USER_CORRECTION"
+            ],
+            "status": "CONFIRMED",
+            "type": "string",
+            "unit": null,
+            "value": "IZHS"
+          },
+          "known": true,
+          "value": "IZHS"
+        }
+      ],
+      "reason": "UNRELATED_PROJECT_CLASS",
+      "status": "NOT_APPLICABLE"
+    }
+  ],
+  "flow": [
+    "REQUIRE VERIFIED UPSTREAM",
+    "READ PROJECT CLASSIFICATION",
+    "DISCOVER NORMATIVE BRANCHES",
+    "FILTER BY APPLICABILITY",
+    "RESOLVE CONDITIONAL APPLICABILITY",
+    "SELECT VERIFIED RULE REVISIONS",
+    "VERIFY SOURCE TRACEABILITY",
+    "VERIFY SUPERSESSION STATE",
+    "DETECT NORMATIVE GAPS",
+    "DETECT RULE CONFLICTS",
+    "FREEZE PROJECT SNAPSHOT",
+    "BUILD IMPACT INDEX",
+    "RE-AUDIT",
+    "PROJECT_NORMATIVE_BUNDLE VERIFIED"
+  ],
+  "functionalProgramFingerprint": "cf8492383423c102bf7c036e4c06fd16175c16ad18a9bd5ea4030e952323c44a",
+  "gateProof": {
+    "allActiveRevisionsResolved": true,
+    "allProductionRulesVerified": true,
+    "allRequiredUpstreamVerified": true,
+    "allSourceChainsComplete": true,
+    "blockingConditionalCount": 0,
+    "blockingNormativeGapCount": 0,
+    "conflictCount": 0,
+    "deterministicSnapshot": true,
+    "hiddenAssumptionsCount": 0,
+    "inventedNormativeDataCount": 0,
+    "projectClassificationResolved": true,
+    "provenanceComplete": true,
+    "provenanceCoverage": 1.0,
+    "requiredNormativeBranchesResolved": true
+  },
+  "impactIndex": [
+    {
+      "branchId": "IZHS/GENERAL",
+      "dependentRuleIds": [],
+      "downstreamDomains": [
+        "SYNTHETIC_PLANNING"
+      ],
+      "projectInputs": [
+        "project.classification"
+      ],
+      "ruleId": "TEST_RULE_A",
+      "ruleRevision": "1",
+      "sourceDocument": "SYNTHETIC_DOCUMENT",
+      "sourceRevision": "test-r1"
+    }
+  ],
+  "libraryFingerprint": "937704c0d11a87fdc4d3af50a412fea77128a6ca8026c553efe9d0e6d4df2f31",
+  "missingProjectInputs": [],
+  "normativeBundleFingerprint": "894adf7108c0790d6f0f8a26deb80d31d9a84873582f0547d0ac1dbb2341a442",
+  "normativeGaps": [],
+  "notVerified": [],
+  "projectClassification": {
+    "acceptedFormat": "verified project class code",
+    "artifact": "STAGE0",
+    "artifactFingerprint": "0830465590b91d9761bf61d6c2ee34553511b1af887f5aa668c309831e68b201",
+    "input": "project.classification",
+    "inputEvidence": {
+      "acceptedFormats": [
+        "string"
+      ],
+      "blocking": true,
+      "branches": [],
+      "conflictingValues": [],
+      "derivable": false,
+      "enum": [
+        "IZHS",
+        "MKD",
+        "INDUSTRIAL",
+        "RETAIL"
+      ],
+      "id": "purpose",
+      "name": "Project purpose",
+      "owner": "USER_CLIENT_SURVEYOR_MUST_PROVIDE",
+      "priority": "CLASSIFICATION_BLOCKER",
+      "provenance": [
+        {
+          "evidenceId": "brief:purpose",
+          "method": "explicit supplied record",
+          "revision": "v1",
+          "sourceId": "brief",
+          "sourceKind": "USER_BRIEF",
+          "supersedes": [],
+          "verification": "VERIFIED"
+        }
+      ],
+      "reason": "Select the project branch and exclude unrelated building classes; Select the supplied project branch",
+      "requiredBy": [
+        "STAGE_0/APPLICABILITY",
+        "STAGE_0/CLASSIFY",
+        "STAGE_0/route"
+      ],
+      "sourceKinds": [
+        "USER_BRIEF",
+        "PROJECT_FILE",
+        "USER_CORRECTION"
+      ],
+      "status": "CONFIRMED",
+      "type": "string",
+      "unit": null,
+      "value": "IZHS"
+    },
+    "known": true,
+    "value": "IZHS"
+  },
+  "projectFingerprint": "607f8a60dad112518d97ee0f03c18122748280adee4244818cae7fbe9cb41668",
+  "provenanceComplete": true,
+  "ruleApplicability": [
+    {
+      "applicabilityBasis": {
+        "definition": {
+          "eq": "IZHS",
+          "input": "project.classification"
+        },
+        "projectInputsUsed": [
+          {
+            "acceptedFormat": "verified project class code",
+            "artifact": "STAGE0",
+            "artifactFingerprint": "0830465590b91d9761bf61d6c2ee34553511b1af887f5aa668c309831e68b201",
+            "input": "project.classification",
+            "inputEvidence": {
+              "acceptedFormats": [
+                "string"
+              ],
+              "blocking": true,
+              "branches": [],
+              "conflictingValues": [],
+              "derivable": false,
+              "enum": [
+                "IZHS",
+                "MKD",
+                "INDUSTRIAL",
+                "RETAIL"
+              ],
+              "id": "purpose",
+              "name": "Project purpose",
+              "owner": "USER_CLIENT_SURVEYOR_MUST_PROVIDE",
+              "priority": "CLASSIFICATION_BLOCKER",
+              "provenance": [
+                {
+                  "evidenceId": "brief:purpose",
+                  "method": "explicit supplied record",
+                  "revision": "v1",
+                  "sourceId": "brief",
+                  "sourceKind": "USER_BRIEF",
+                  "supersedes": [],
+                  "verification": "VERIFIED"
+                }
+              ],
+              "reason": "Select the project branch and exclude unrelated building classes; Select the supplied project branch",
+              "requiredBy": [
+                "STAGE_0/APPLICABILITY",
+                "STAGE_0/CLASSIFY",
+                "STAGE_0/route"
+              ],
+              "sourceKinds": [
+                "USER_BRIEF",
+                "PROJECT_FILE",
+                "USER_CORRECTION"
+              ],
+              "status": "CONFIRMED",
+              "type": "string",
+              "unit": null,
+              "value": "IZHS"
+            },
+            "known": true,
+            "value": "IZHS"
+          }
+        ],
+        "status": "APPLICABLE"
+      },
+      "ruleReference": {
+        "branchId": "IZHS/GENERAL",
+        "revision": "1",
+        "ruleId": "TEST_RULE_A"
+      },
+      "status": "APPLICABLE"
+    }
+  ],
+  "schemaVersion": 0,
+  "selectedRuleRevisions": [
+    {
+      "branchId": "IZHS/GENERAL",
+      "revision": "1",
+      "ruleId": "TEST_RULE_A"
+    }
+  ],
+  "siteContextFingerprint": "3c696500eec22c39ad8f5c51b64ffdc75e5316023f371f92cfeef1ed42985b7f",
+  "snapshotId": "snapshot-c46b53a49d3a711152ffb42c3cab55c75f1faae629edf43e38fa2ba36cae7348",
+  "sourceDocuments": [
+    {
+      "content": "SYNTHETIC fixture, not a Russian normative requirement: {\"domain\": \"DIMENSION\", \"downstreamDomains\": [\"SYNTHETIC_PLANNING\"], \"operator\": \"gte\", \"scope\": [\"BUILDING\"], \"subject\": \"BUILDING_WIDTH\", \"unit\": \"mm\", \"value\": 10}",
+      "documentId": "SYNTHETIC_DOCUMENT",
+      "documentRevision": "test-r1",
+      "sourceHash": "cdc66764835aa5d3de099899cd4568e1794b882ac9e1e31183efb9ca0dad4b05",
+      "synthetic": true,
+      "verificationStatus": "VERIFIED",
+      "verifiedLocations": [
+        {
+          "evidenceKind": "VERIFIED_SOURCE_TEXT",
+          "location": {
+            "appendix": null,
+            "paragraph": "TEST-PARA-1",
+            "section": "synthetic section",
+            "table": null
+          },
+          "sourceHash": "cdc66764835aa5d3de099899cd4568e1794b882ac9e1e31183efb9ca0dad4b05",
+          "text": "SYNTHETIC fixture, not a Russian normative requirement: {\"domain\": \"DIMENSION\", \"downstreamDomains\": [\"SYNTHETIC_PLANNING\"], \"operator\": \"gte\", \"scope\": [\"BUILDING\"], \"subject\": \"BUILDING_WIDTH\", \"unit\": \"mm\", \"value\": 10}",
+          "textHash": "cdc66764835aa5d3de099899cd4568e1794b882ac9e1e31183efb9ca0dad4b05",
+          "verificationId": "synthetic-verification-receipt",
+          "verificationStatus": "VERIFIED"
+        }
+      ]
+    }
+  ],
+  "sourceHashes": [
+    "cdc66764835aa5d3de099899cd4568e1794b882ac9e1e31183efb9ca0dad4b05"
+  ],
+  "stage": "PROJECT_NORMATIVE_BUNDLE",
+  "stage0Fingerprint": "0830465590b91d9761bf61d6c2ee34553511b1af887f5aa668c309831e68b201",
+  "status": "VERIFIED",
+  "supersessionIndex": [],
+  "upstreamFingerprints": [
+    "0830465590b91d9761bf61d6c2ee34553511b1af887f5aa668c309831e68b201",
+    "cf8492383423c102bf7c036e4c06fd16175c16ad18a9bd5ea4030e952323c44a",
+    "04d7db067ad3828d367e0c210982d157bcd4c16b6f7de14f7d564ef7f6f1d1ae",
+    "3c696500eec22c39ad8f5c51b64ffdc75e5316023f371f92cfeef1ed42985b7f",
+    "9c7083396977f424be2780e0cca2935f96f6219709f7b13bb8d67a5c1e6afa7c"
+  ],
+  "validationErrors": []
+}

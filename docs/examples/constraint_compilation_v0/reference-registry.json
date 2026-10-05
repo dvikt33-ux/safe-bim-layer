@@ -1,0 +1,24 @@
+{
+  "id": "synthetic-scope-overlap",
+  "overlaps": {
+    "BUILDING": [
+      "FLOOR",
+      "SPACE"
+    ],
+    "PROJECT": [
+      "BUILDING",
+      "FLOOR",
+      "SPACE",
+      "SITE",
+      "OBJECT",
+      "ZONE",
+      "SYSTEM"
+    ],
+    "SITE": [
+      "OBJECT",
+      "ZONE"
+    ]
+  },
+  "revision": "1",
+  "status": "VERIFIED"
+}

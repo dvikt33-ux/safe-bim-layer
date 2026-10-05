@@ -1,0 +1,250 @@
+{
+  "domains": {
+    "ACCESS": "SINGLE_VALUE",
+    "ADJACENCY": "SINGLE_VALUE",
+    "AREA": "SINGLE_VALUE",
+    "COUNT": "SINGLE_VALUE",
+    "CUSTOM": "SINGLE_VALUE",
+    "DAYLIGHT": "SINGLE_VALUE",
+    "DIMENSION": "SINGLE_VALUE",
+    "EQUIPMENT": "MEMBERSHIP",
+    "FIRE": "SINGLE_VALUE",
+    "GEOMETRY": "SINGLE_VALUE",
+    "LOCATION": "SINGLE_VALUE",
+    "MATERIAL": "SINGLE_VALUE",
+    "ORIENTATION": "SINGLE_VALUE",
+    "PARKING": "SINGLE_VALUE",
+    "SITE": "SINGLE_VALUE",
+    "STRUCTURE": "SINGLE_VALUE",
+    "THERMAL": "SINGLE_VALUE"
+  },
+  "functionalFields": {
+    "EXISTENCE": {
+      "domain": "LOCATION",
+      "subjectTemplate": "SPACE_EXISTS:{scopeId}",
+      "unit": "none"
+    },
+    "RELATIONSHIP": {
+      "domain": "ADJACENCY",
+      "subjectTemplate": "RELATIONSHIP",
+      "unit": "none"
+    },
+    "USER_label": {
+      "domain": "CUSTOM",
+      "subjectTemplate": "USER_LABEL:{subject}",
+      "unit": "none"
+    },
+    "USER_quantity": {
+      "domain": "COUNT",
+      "subjectTemplate": "USER_COUNT:{subject}",
+      "unit": "count"
+    },
+    "accessLevel": {
+      "domain": "CUSTOM",
+      "subjectTemplate": "ACCESSLEVEL:{scopeId}",
+      "unit": "none"
+    },
+    "daylightPreference": {
+      "domain": "CUSTOM",
+      "subjectTemplate": "DAYLIGHTPREFERENCE:{scopeId}",
+      "unit": "none"
+    },
+    "function": {
+      "domain": "CUSTOM",
+      "subjectTemplate": "SPACE_FUNCTION:{scopeId}",
+      "unit": "none"
+    },
+    "functionalZone": {
+      "domain": "CUSTOM",
+      "subjectTemplate": "FUNCTIONALZONE:{scopeId}",
+      "unit": "none"
+    },
+    "noiseGeneration": {
+      "domain": "CUSTOM",
+      "subjectTemplate": "NOISEGENERATION:{scopeId}",
+      "unit": "none"
+    },
+    "noiseSensitivity": {
+      "domain": "CUSTOM",
+      "subjectTemplate": "NOISESENSITIVITY:{scopeId}",
+      "unit": "none"
+    },
+    "preferredFloor": {
+      "domain": "LOCATION",
+      "subjectTemplate": "SPACE_LOCATION:{scopeId}",
+      "unit": "none"
+    },
+    "privacyLevel": {
+      "domain": "CUSTOM",
+      "subjectTemplate": "PRIVACYLEVEL:{scopeId}",
+      "unit": "none"
+    },
+    "quantity": {
+      "domain": "COUNT",
+      "subjectTemplate": "SPACE_QUANTITY:{scopeId}",
+      "unit": "count"
+    },
+    "requestedArea": {
+      "domain": "AREA",
+      "subjectTemplate": "SPACE_AREA:{scopeId}",
+      "unit": "m2"
+    },
+    "specialEquipment": {
+      "domain": "EQUIPMENT",
+      "subjectTemplate": "EQUIPMENT",
+      "unit": "none"
+    }
+  },
+  "id": "synthetic-compilation-domains",
+  "normativeDomainAliases": {
+    "SYNTHETIC_TEST_DOMAIN": "GEOMETRY"
+  },
+  "projectTypes": {
+    "ACCESS_REQUIRED": {
+      "domain": "ACCESS",
+      "subjectTemplate": "ACCESS",
+      "unit": "PRESERVE_SOURCE"
+    },
+    "AREA_LIMIT": {
+      "domain": "AREA",
+      "subjectTemplate": "{subject}",
+      "unit": "PRESERVE_SOURCE"
+    },
+    "BUDGET_LIMIT": {
+      "domain": "CUSTOM",
+      "subjectTemplate": "CLIENT_BUDGET",
+      "unit": "PRESERVE_SOURCE"
+    },
+    "CAPACITY_FIXED": {
+      "domain": "COUNT",
+      "subjectTemplate": "{subject}",
+      "unit": "PRESERVE_SOURCE"
+    },
+    "CONSTRUCTION_SYSTEM_PROHIBITED": {
+      "domain": "STRUCTURE",
+      "subjectTemplate": "CONSTRUCTION_SYSTEM",
+      "unit": "PRESERVE_SOURCE"
+    },
+    "CONSTRUCTION_SYSTEM_REQUIRED": {
+      "domain": "STRUCTURE",
+      "subjectTemplate": "CONSTRUCTION_SYSTEM",
+      "unit": "PRESERVE_SOURCE"
+    },
+    "CUSTOM": {
+      "domain": "CUSTOM",
+      "subjectTemplate": "{subject}",
+      "unit": "PRESERVE_SOURCE"
+    },
+    "DEMOLITION_LIMIT": {
+      "domain": "SITE",
+      "subjectTemplate": "{subject}",
+      "unit": "PRESERVE_SOURCE"
+    },
+    "DIMENSION_LIMIT": {
+      "domain": "DIMENSION",
+      "subjectTemplate": "{subject}",
+      "unit": "PRESERVE_SOURCE"
+    },
+    "EQUIPMENT_PROHIBITED": {
+      "domain": "EQUIPMENT",
+      "subjectTemplate": "EQUIPMENT",
+      "unit": "PRESERVE_SOURCE"
+    },
+    "EQUIPMENT_REQUIRED": {
+      "domain": "EQUIPMENT",
+      "subjectTemplate": "EQUIPMENT",
+      "unit": "PRESERVE_SOURCE"
+    },
+    "EXISTING_OBJECT_PRESERVE": {
+      "domain": "SITE",
+      "subjectTemplate": "OBJECT:{scopeId}",
+      "unit": "PRESERVE_SOURCE"
+    },
+    "EXISTING_OBJECT_REMOVE_REQUIRED": {
+      "domain": "SITE",
+      "subjectTemplate": "OBJECT:{scopeId}",
+      "unit": "PRESERVE_SOURCE"
+    },
+    "FLOOR_COUNT_FIXED": {
+      "domain": "COUNT",
+      "subjectTemplate": "FLOOR_COUNT",
+      "unit": "PRESERVE_SOURCE"
+    },
+    "HEIGHT_LIMIT_PROJECT": {
+      "domain": "DIMENSION",
+      "subjectTemplate": "BUILDING_HEIGHT",
+      "unit": "PRESERVE_SOURCE"
+    },
+    "MATERIAL_PROHIBITED": {
+      "domain": "MATERIAL",
+      "subjectTemplate": "MATERIAL",
+      "unit": "PRESERVE_SOURCE"
+    },
+    "MATERIAL_REQUIRED": {
+      "domain": "MATERIAL",
+      "subjectTemplate": "MATERIAL",
+      "unit": "PRESERVE_SOURCE"
+    },
+    "ORIENTATION_REQUIRED": {
+      "domain": "ORIENTATION",
+      "subjectTemplate": "BUILDING_ORIENTATION",
+      "unit": "PRESERVE_SOURCE"
+    },
+    "PARKING_COUNT_FIXED": {
+      "domain": "PARKING",
+      "subjectTemplate": "PARKING_COUNT",
+      "unit": "PRESERVE_SOURCE"
+    },
+    "PHASING_REQUIRED": {
+      "domain": "CUSTOM",
+      "subjectTemplate": "PHASING",
+      "unit": "PRESERVE_SOURCE"
+    },
+    "SITE_ZONE_PROHIBITED": {
+      "domain": "SITE",
+      "subjectTemplate": "ZONE:{scopeId}",
+      "unit": "PRESERVE_SOURCE"
+    },
+    "SITE_ZONE_REQUIRED": {
+      "domain": "SITE",
+      "subjectTemplate": "ZONE:{scopeId}",
+      "unit": "PRESERVE_SOURCE"
+    },
+    "SPACE_LOCATION_PROHIBITED": {
+      "domain": "LOCATION",
+      "subjectTemplate": "SPACE_LOCATION:{scopeId}",
+      "unit": "PRESERVE_SOURCE"
+    },
+    "SPACE_LOCATION_REQUIRED": {
+      "domain": "LOCATION",
+      "subjectTemplate": "SPACE_LOCATION:{scopeId}",
+      "unit": "PRESERVE_SOURCE"
+    },
+    "UTILITY_CONNECTION_FIXED": {
+      "domain": "EQUIPMENT",
+      "subjectTemplate": "UTILITY:{scopeId}",
+      "unit": "PRESERVE_SOURCE"
+    }
+  },
+  "revision": "1",
+  "status": "VERIFIED",
+  "subjectAliases": {
+    "AREA": {
+      "REQUESTED_AREA": "SPACE_AREA:{scopeId}"
+    },
+    "COUNT": {
+      "SPACE_QUANTITY": "SPACE_QUANTITY:{scopeId}"
+    },
+    "DIMENSION": {
+      "DEPTH": "BUILDING_DEPTH",
+      "WIDTH": "BUILDING_WIDTH"
+    }
+  },
+  "subjectReferences": {
+    "OBJECT:": "OBJECT",
+    "SPACE_AREA:": "SPACE",
+    "SPACE_EXISTS:": "SPACE",
+    "SPACE_LOCATION:": "SPACE",
+    "SPACE_QUANTITY:": "SPACE"
+  }
+}

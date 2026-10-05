@@ -1,0 +1,40 @@
+[
+  {
+    "approved": true,
+    "basis": "NON_NORMATIVE",
+    "category": "CLIENT_REQUIREMENT",
+    "id": "client",
+    "inspected": true,
+    "revision": "v1",
+    "statements": [
+      {
+        "binding": true,
+        "constraintId": "budget",
+        "id": "budget",
+        "kind": "CONSTRAINT",
+        "operator": "<=",
+        "scope": [
+          "PROJECT"
+        ],
+        "type": "BUDGET_LIMIT",
+        "unit": "RUB",
+        "value": 15000000
+      },
+      {
+        "binding": true,
+        "constraintId": "width",
+        "id": "width",
+        "kind": "CONSTRAINT",
+        "operator": ">=",
+        "scope": [
+          "BUILDING"
+        ],
+        "subject": "WIDTH",
+        "type": "DIMENSION_LIMIT",
+        "unit": "mm",
+        "value": 11
+      }
+    ],
+    "verification": "CONFIRMED"
+  }
+]
