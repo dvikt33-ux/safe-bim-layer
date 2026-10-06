@@ -1,0 +1,38 @@
+pin_version: 0.1
+status: hold_current_until_regression
+checked_date: 2026-10-06
+
+current_project_pin:
+  tapir_schema: 1.5.8
+  reason:
+    - "Current safe-bim-layer executor and template builder are validated against tapir-1.5.8.json."
+    - "Existing wall/window/slab/roof/morph write cycles were proved on this command contract."
+
+upstream_observed:
+  latest_release: 1.7.0
+  published: 2026-10-04
+  relevant_changes:
+    - "IFC map conversion X axis and scale exposed in Get/SetGeoLocation."
+    - "Survey point position in project coordinates exposed."
+    - "Additional IFC property and MEP capabilities."
+  still_missing_for_template:
+    - create_or_edit_model_view_option_presets
+    - create_or_edit_graphic_override_rules_and_combinations
+    - save_as_tpl_to_new_path
+
+decision:
+  auto_upgrade_now: false
+  reason: "Template work must not invalidate already-proven geometry/write cycles."
+  upgrade_gate:
+    - archive_current_1_5_8_addon_and_schema
+    - install_1_7_0_on_test_archicad_29
+    - rerun_model_dump_v1
+    - rerun_wall_joint_cycle
+    - rerun_wall_material_cycle
+    - rerun_hosted_window_cycle
+    - rerun_slab_cycle
+    - rerun_roof_cycle
+    - rerun_morph_cycle
+    - rerun_template_builder_validate_inspect_plan
+    - compare_GetSetGeoLocation_payload
+    - only_then_update_repo_schema_and_pin
