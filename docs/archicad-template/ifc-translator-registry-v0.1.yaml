@@ -1,0 +1,127 @@
+registry_version: 0.1
+status: translator_contract_seed_required
+target: Archicad_29
+
+principles:
+  schema_and_mvd_follow_delivery_requirement: true
+  no_universal_ifc_schema_assertion: true
+  survey_point_is_georeferencing_bridge: true
+  native_archicad_classification_remains_primary_type_mapping_basis: true
+  sbim_semantic_classification_is_secondary: true
+  property_export_is_explicit: true
+  reference_import_does_not_mutate_native_semantics_by_default: true
+
+translators:
+  - name: IFC_COORD
+    direction: export
+    purpose: multidisciplinary_coordination
+    schema:
+      default_candidate: IFC4
+      mvd_default_candidate: Reference View
+      project_eir_override_allowed: true
+      supported_archicad29_candidates: [IFC2x3, IFC4, IFC4.3]
+    filtering:
+      export_scope: saved_view_or_explicit_model_filter
+      hidden_or_irrelevant_content: exclude_by_project_coordination_policy
+    type_mapping:
+      method: classification_or_element_type
+      preferred_basis: native_archicad_classification
+      sbim_semantic_as_primary_type_mapping: false
+    property_mapping:
+      strategy: controlled_mapping_preset
+      include_core_sbim_properties: true
+      include_active_ids_properties: true
+      export_every_property_without_review: false
+    geometry:
+      purpose: reference_coordination
+      base_quantities: project_requirement
+    georeferencing:
+      default_candidate: survey_point_plus_project_origin
+      project_eir_override_allowed: true
+      native_model_far_from_project_origin_required: false
+    release_status: candidate_manual_seed_and_ifc_roundtrip_test
+
+  - name: IFC_ISSUE
+    direction: export
+    purpose: contractual_ifc_delivery
+    schema:
+      value: contract_or_eir_required
+      missing_requirement_behavior: BLOCKED_IFC_REQUIREMENT
+    mvd:
+      value: contract_or_eir_required
+      missing_requirement_behavior: BLOCKED_IFC_REQUIREMENT
+    type_mapping:
+      basis: delivery_mapping_preset
+    property_mapping:
+      basis: delivery_mapping_preset
+      uncontrolled_extra_properties: false
+    geometry:
+      base_quantities: contract_requirement
+    georeferencing:
+      value: delivery_requirement
+      survey_point_data_verified: true
+    release_status: blocked_until_delivery_requirement
+
+  - name: IFC_REFERENCE_IMPORT
+    direction: import
+    purpose: external_model_coordination
+    target_workflow:
+      layer: REF_IFC
+      automation_state: REFERENCE
+      data_status: IMPORTED
+      native_intersection_group: 0
+    type_mapping:
+      preserve_external_ifc_type_information: true
+      do_not_reclassify_native_model_from_reference: true
+    property_mapping:
+      map_only_to_existing_archicad_properties_when_explicitly_configured: true
+      use_case:
+        - graphic_overrides
+        - expressions
+        - collision_detection
+        - labels_and_autotext
+    geometry:
+      native_edit_authority: false
+    release_status: candidate_manual_seed_and_import_test
+
+supported_schema_notes:
+  IFC2x3:
+    use_when:
+      - contract_requires
+      - legacy_coordination_workflow
+    coordination_view_certification_note: true
+  IFC4:
+    use_when:
+      - modern_reference_coordination
+      - contract_allows
+    default_candidate_for_IFC_COORD: true
+  IFC4.3:
+    use_when:
+      - infrastructure_or_contract_specific_requirement
+    default_for_building_projects: false
+
+roundtrip_gate:
+  - schema_and_mvd
+  - project_and_site_structure
+  - element_type_mapping
+  - classification_mapping
+  - property_mapping
+  - stable_external_ids
+  - geometry_count
+  - openings
+  - composites_material_information
+  - base_quantities_if_required
+  - units
+  - survey_point_coordinates
+  - map_conversion
+  - true_north_or_project_north
+  - imported_reference_layer_isolation
+  - collision_behavior
+  - property_reimport
+  - external_viewer_validation
+
+failure_policy:
+  missing_eir_or_contract_schema: BLOCKED_IFC_REQUIREMENT
+  coordinate_mismatch: BLOCKED_GEOREFERENCE
+  unexpected_property_loss: BLOCKED_IFC_MAPPING
+  native_reference_intersection: BLOCKED_REFERENCE_ISOLATION
