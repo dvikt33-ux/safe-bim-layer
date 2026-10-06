@@ -1,0 +1,31 @@
+name: Build details v2.8 FAVORIT section 5 binding
+on:
+  push:
+    branches: [feature/working-archicad-mvp]
+    paths:
+      - details/tools/build_v28_favorit_s5.py
+      - .github/workflows/build-details-v28-favorit-s5.yml
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/working-archicad-mvp
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build audited v2.8
+        run: python details/tools/build_v28_favorit_s5.py
+      - name: Commit generated v2.8
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add details .github/workflows
+          git diff --cached --stat
+          git diff --cached --quiet && exit 0
+          git commit -m "Resolve FAVORIT section 5 source-binding queue in v2.8 [details-v2.8]"
+          git push origin HEAD:feature/working-archicad-mvp
