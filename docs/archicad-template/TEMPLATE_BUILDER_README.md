@@ -22,6 +22,14 @@ Read-only live plan:
 python scripts/archicad_template_builder.py plan --out template-plan.json
 ```
 
+Resolve Building Material dependencies against the actual open project (read-only):
+
+```powershell
+python scripts/archicad_template_builder.py plan-materials --out template-material-plan.json
+```
+
+This reports which canonical Fills/Surfaces are missing before any Building Material creation is allowed.
+
 Apply safe core to a CLEAN candidate project:
 
 ```powershell
