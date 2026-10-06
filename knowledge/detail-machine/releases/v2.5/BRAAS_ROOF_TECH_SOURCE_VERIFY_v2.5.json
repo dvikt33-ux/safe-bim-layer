@@ -1,0 +1,9 @@
+{
+  "release": "2.5",
+  "source_id": "BRAAS_ROOF_TECH",
+  "representation": "braas_albom_tehnicheskih_reshenii.pdf",
+  "expected_sha256": "d8451a8e1d094c8549938ae8fcd9f4fcab027ebe269177542f908195f20832e4",
+  "actual_sha256": "d8451a8e1d094c8549938ae8fcd9f4fcab027ebe269177542f908195f20832e4",
+  "match": true,
+  "physical_pages": 222
+}

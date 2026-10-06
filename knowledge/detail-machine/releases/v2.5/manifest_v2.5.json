@@ -1,0 +1,151 @@
+{
+  "release": "2.5",
+  "format": "systematized_active_machine_state",
+  "detail_units": 1211,
+  "active_ir": 1211,
+  "parameter_facts": 1245,
+  "component_variants": 575,
+  "dimension_queue": 610,
+  "files": [
+    {
+      "file": "README_v2.5.md",
+      "size": 2172,
+      "sha256": "0b466fee790feecd332a449ccafe672553094442c64e358047d03bf71b80ce55"
+    },
+    {
+      "file": "AUDIT_v2.5.json",
+      "size": 2022,
+      "sha256": "11ab75f2dfd97d36696d9c771ad6175f16a0441ab755ebeb8cb81f024854e773"
+    },
+    {
+      "file": "SUMMARY_v2.5.json",
+      "size": 606,
+      "sha256": "b343f74acc64ed67bd73d2bdd9b72153194bda1190e3ebf59e23707a96d54e06"
+    },
+    {
+      "file": "BRAAS_ROOF_TECH_SOURCE_VERIFY_v2.5.json",
+      "size": 336,
+      "sha256": "dd5770c8b475a56c9c0c567c18ca2912575d28f52a6be550dadbff771451afca"
+    },
+    {
+      "file": "detail_units_v2.5.jsonl",
+      "size": 1051208,
+      "sha256": "dd1a0eb7d3f9eedda23ba6ec2d8c36c8315492a00eb250b83cf0ce3cf20274e1"
+    },
+    {
+      "file": "details_active_v2.5.jsonl",
+      "size": 5494391,
+      "sha256": "1807bf7a7b449aca19012b70136c4e33cc5fc54a84e438d15af7d1d832ea4cfb"
+    },
+    {
+      "file": "parameter_facts_v2.5.jsonl",
+      "size": 820491,
+      "sha256": "d8bf3f2edde2be78ae87154aa9779102eaaf871daa895f9bc2b71b4d60c77dfd"
+    },
+    {
+      "file": "component_variants_v2.5.jsonl",
+      "size": 365483,
+      "sha256": "1f4ef90ec93ad76a3411be2bafb5e98ecae91e6406ce5f7c1970df33ac7d799c"
+    },
+    {
+      "file": "source_registry_v2.5.json",
+      "size": 34546,
+      "sha256": "56e2fd3660cdd32b4ff841a13c1f86a5b407067caae6936fcfa55bb0697e511c"
+    },
+    {
+      "file": "braas_roof_tech_semantics_v2.5.jsonl",
+      "size": 249676,
+      "sha256": "0ed68c554fc476ed5f56dd74ecbb279ca8fdb66c7b54eb3147774f5fa03f7db3"
+    },
+    {
+      "file": "braas_roof_tech_parameter_facts_v2.5.jsonl",
+      "size": 60536,
+      "sha256": "0a531ae2082ae1dd3b5c1a6e405b76fa6077007599d326947e6a8c494aaf0af9"
+    },
+    {
+      "file": "braas_roof_tech_assembly_grammar_v2.5.json",
+      "size": 1640,
+      "sha256": "0f015151d99f17393736d30f2fe5013684c7d89110f56396901fc82388fd1446"
+    },
+    {
+      "file": "braas_roof_tech_source_anomalies_v2.5.jsonl",
+      "size": 1946,
+      "sha256": "d2d05e3c3dbfea8739beec806b623dda64a470b2571ebe0893afdc42b62c9903"
+    },
+    {
+      "file": "braas_roof_tech_section_aliases_v2.5.jsonl",
+      "size": 1657,
+      "sha256": "9b5a7cb4680fb312df68f45ad23ab00af1c85772ae3a61eb4a0db040f036a81d"
+    },
+    {
+      "file": "braas_roof_tech_product_aliases_v2.5.jsonl",
+      "size": 2157,
+      "sha256": "06acd96202409f29e66a0e8be53615c48cf0f45fb7da8810e88db022f62ae96b"
+    },
+    {
+      "file": "braas_roof_tech_normative_claims_v2.5.json",
+      "size": 433,
+      "sha256": "0f342c05ce90b7665fa13ef41b70d163ec02757187686c929c05a615118de39e"
+    },
+    {
+      "file": "archicad_build_contract_v0.5.json",
+      "size": 1032,
+      "sha256": "e74e6ca9c5def505075819b9ea92db17e7ea9e18f600b7a035b8029ff3c7b90d"
+    },
+    {
+      "file": "archicad_system_grammars_v0.7.json",
+      "size": 5592,
+      "sha256": "822cca151db347067d0a8df0727b61a0f912d33571a61c7d0fc58a6eddb46662"
+    },
+    {
+      "file": "archicad_tool_mapping_v0.9.json",
+      "size": 2406,
+      "sha256": "cdb8c7782b49134b90169dd57a207cf750f5149853015bad7db3ed502e645e30"
+    },
+    {
+      "file": "braas_roof_details_semantics_v2.4.jsonl",
+      "size": 392384,
+      "sha256": "1a2304bf5f17ffe71f0097373e23d5123ac81bdcec4c56c267dec6cffa63ba64"
+    },
+    {
+      "file": "braas_roof_details_assembly_grammar_v2.4.json",
+      "size": 1518,
+      "sha256": "3dc75f17cc52111441b343b7963797fe1729e54549f4f9cf5aabd475af28e0bc"
+    },
+    {
+      "file": "armo_assembly_grammar_v2.0.json",
+      "size": 1602,
+      "sha256": "ab3e8aca9e2d58de338704d54fd47d6b42b783f24554309d381a63df088bf2a7"
+    },
+    {
+      "file": "armo_profile_geometry_v2.0.jsonl",
+      "size": 19705,
+      "sha256": "ef9ee51ec99f86692725180e20c35d6a82ca10534cf631fecd873d6f971faff7"
+    },
+    {
+      "file": "favorit_facade_assembly_grammar_v1.2.json",
+      "size": 4340,
+      "sha256": "b809f62da750a92f132c19c35c8b85ba1b4c5fb73558190f4d4613a893663a01"
+    },
+    {
+      "file": "kleyko_panel_fix_assembly_grammar_v2.1.json",
+      "size": 1827,
+      "sha256": "d1e2da0cc825d1e37724847387da1d53f1217524217a37f4b0351f74fabc1122"
+    },
+    {
+      "file": "kaiman_kerakam_assembly_grammar_v2.2.json",
+      "size": 2383,
+      "sha256": "f2154bda806fd99a80140626afb9b331498974bd6ffce5190c6e0247c2545227"
+    },
+    {
+      "file": "rockfacade_assembly_grammar_v2.3.json",
+      "size": 2305,
+      "sha256": "bca028624da93be82ed08412093b3a9b0f743ce006873484fdd745a34de63400"
+    },
+    {
+      "file": "source_normative_claims_v2.5.json",
+      "size": 34478,
+      "sha256": "e210ada4c0f3312bde18bd3ab8c0ded5e3d3464c502f1314b057361dcfffddef"
+    }
+  ]
+}

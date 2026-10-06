@@ -1,0 +1,33 @@
+{
+  "release": "2.5",
+  "timestamp_utc": "2026-10-06T17:21:22.906387+00:00",
+  "source_scope": "BRAAS technical manual, 222 pages; 87 existing machine records rebuilt as source-bound rules/references; omitted critical table/product pages captured as global facts/catalog data",
+  "checks": {
+    "physical_pdf_pages_verified": 222,
+    "existing_source_cards_rebuilt": 87,
+    "active_braas_tech_ir": 87,
+    "active_braas_tech_parameter_facts": 93,
+    "legacy_braas_tech_facts_replaced": 74,
+    "legacy_braas_tech_ir_replaced": 87,
+    "named_product_variants_added": 16,
+    "detail_units_total": 1211,
+    "parameter_facts_total": 1245,
+    "archicad_ir_total": 1515,
+    "component_variants_total": 575,
+    "active_ir_total": 1211,
+    "sqlite_integrity": "ok",
+    "missing_active_ir_refs": 0,
+    "braas_tech_commit_allowed_true": 0,
+    "raster_measurement_used_for_dimensions": 0,
+    "source_hash_matches": 40,
+    "source_hash_total": 40
+  },
+  "critical_findings": [
+    "Legacy titles/classification were heavily text-fragment based; v2.5 replaces all 87 active BRAAS_ROOF_TECH titles and routing classes with source-verified section meanings.",
+    "Five legacy records are actually section-heading pages in section 22, not geometry details. They are retained for traceability as reference_section_header and route to the separately processed BRAAS_ROOF_DETAILS junction families.",
+    "Critical omitted source pages (slope tables, PUT/LAT, LA averages, AFE, wind clips, ventilation tile tables, product appendices and wind-region table header) are captured as global facts/catalog evidence without fabricating new geometry records.",
+    "Page 66 contains a Range 1/Range 2 wording conflict; page 87 contains an Opal wind-clip code conflict; page 199 prints a descending Difodamm installation-temperature range. All remain explicit blockers.",
+    "Wind/snow and manufacturer-cited SP/GOST statements are source claims only; no current-code validity is inferred."
+  ],
+  "commit_policy": "fail_closed"
+}
