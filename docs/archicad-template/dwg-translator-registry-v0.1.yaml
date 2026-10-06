@@ -1,0 +1,115 @@
+registry_version: 0.1
+status: translator_contract_seed_required
+target: Archicad_29
+
+principles:
+  drawing_units_must_be_explicit: true
+  unknown_input_unit_blocks_authoritative_import: true
+  symbol_line_roundtrip_not_assumed: true
+  font_mapping_is_translator_specific: true
+  external_dwg_is_reference_by_default: true
+  no_default_translator_for_release: true
+
+translators:
+  - name: DWG_IN_REFERENCE
+    direction: import
+    purpose: linked_or_reference_dwg_coordination
+    unit_policy:
+      prefer_dwg_drawing_unit_definition: true
+      silent_fallback_for_unknown_unit: false
+      required_action_if_unknown: BLOCKED_UNIT_CONFIRMATION
+    layers:
+      preserve_source_layer_names: true
+      archicad_container_layer: REF_DWG
+      native_model_intersection_group: 0
+    lines:
+      preserve_source_line_types_where_supported: true
+      symbol_line_visual_equivalence_assumed: false
+    fonts:
+      missing_font_behavior: explicit_substitution_review
+    geometry:
+      native_conversion_authority: reference_only
+      merge_into_production_model_by_default: false
+    release_status: candidate_manual_seed_and_roundtrip_test
+
+  - name: DWG_OUT_SPDS
+    direction: export
+    purpose: native_spds_dwg_issue
+    source:
+      preferred: saved_view_or_layout
+      ad_hoc_view_forbidden: true
+    units:
+      value: project_issue_requirement
+      default_candidate: millimeter
+      default_is_universal: false
+    layers:
+      create_from_archicad_layers: true
+      preserve_semantic_layer_names: true
+      visibility_policy: source_view
+      note: "Layout export behavior must be separately validated because drawing contents may carry source layers."
+    pens_colors:
+      mapping: explicit_translator_table
+      nearest_rgb_as_authoritative_mapping: false
+    line_types:
+      dictionary_required: true
+      symbol_line_dependency_for_core_output: false
+      ltscale_roundtrip_test_required: true
+    fonts:
+      primary: PT Astra Sans
+      recipient_font_manifest_required: true
+      substitution: none_if_recipient_installs_manifest
+    model_paper_space:
+      policy: deliverable_requirement
+    release_status: candidate_manual_seed_and_roundtrip_test
+
+  - name: DWG_OUT_COMPAT
+    direction: export
+    purpose: broad_autocad_compatibility
+    source:
+      preferred: saved_view_or_layout
+    units:
+      value: project_issue_requirement
+      default_candidate: millimeter
+      default_is_universal: false
+    layers:
+      create_from_archicad_layers: true
+      preserve_semantic_layer_names: true
+    pens_colors:
+      mapping: explicit_translator_table
+    line_types:
+      prefer_simple_solid_and_dashed: true
+      symbol_line_dependency_for_core_output: false
+    fonts:
+      mappings:
+        - {from: PT Astra Sans, to: Arial, width_factor: 1.0, status: candidate_requires_visual_test}
+        - {from: OpenGost Type B, to: Arial, width_factor: 1.0, status: candidate_requires_visual_test}
+      noto_fallback: recipient_specific
+    model_paper_space:
+      policy: deliverable_requirement
+    release_status: candidate_manual_seed_and_roundtrip_test
+
+roundtrip_gate:
+  - source_view_scale
+  - drawing_units
+  - insertion_scale
+  - layer_names
+  - visible_layer_scope
+  - pen_color_mapping
+  - lineweight_mapping
+  - line_type_patterns
+  - text_font
+  - text_width_factor
+  - text_height
+  - dimensions
+  - fills_hatches
+  - blocks_objects
+  - model_space_paper_space
+  - survey_point_or_coordinate_transform
+  - reimport_geometry_delta
+  - external_recipient_open_test
+
+failure_policy:
+  unknown_unit: BLOCKED_UNIT_CONFIRMATION
+  missing_font_mapping: BLOCKED_FONT_MAPPING
+  untested_symbol_line: BLOCKED_DWG_ROUNDTRIP
+  duplicate_translator_name: BLOCKED_TRANSLATOR_CONFLICT
