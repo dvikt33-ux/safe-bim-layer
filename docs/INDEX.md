@@ -41,8 +41,9 @@ subsystem of the closed loop.
 
 ## Historical / migration material
 
-See [PROJECT_MAP.md](PROJECT_MAP.md) before touching root-level v0.1, Qwen, Tapir 1.5.8,
-Arena, Work or `bimexec/` material. These files are retained for provenance until a
+See [PROJECT_MAP.md](PROJECT_MAP.md) and
+[REFERENCE_AUDIT_2026-10-06.md](REFERENCE_AUDIT_2026-10-06.md) before touching root-level
+v0.1, Qwen, Tapir 1.5.8, Arena, Work or `bimexec/` material. These files are retained for provenance until a
 reference audit proves they can be moved safely.
 
 ## Status vocabulary
