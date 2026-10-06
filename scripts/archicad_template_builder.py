@@ -185,6 +185,7 @@ def validate_specs():
     documentation = load_yaml(DOCUMENTATION_SPEC)
     seed_presets = load_yaml(SEED_PRESETS)
     form3 = load_yaml(MASTER_LAYOUT_FORM3)
+    form3_geometry = load_yaml(FORM3_GEOMETRY)
     autotext_registry = load_yaml(AUTOTEXT_REGISTRY)
     dwg_registry = load_yaml(DWG_TRANSLATOR_REGISTRY)
     ifc_registry = load_yaml(IFC_TRANSLATOR_REGISTRY)
@@ -410,6 +411,115 @@ def validate_specs():
     if [float(form3.get("form3", {}).get("width_mm", 0)),
         float(form3.get("form3", {}).get("height_mm", 0))] != [185.0, 55.0]:
         errors.append("Form 3 canonical titleblock size must remain 185x55 mm.")
+
+    core_geo = form3_geometry.get("core") or {}
+    if [float(core_geo.get("width_mm", 0)),
+        float(core_geo.get("height_mm", 0))] != [185.0, 55.0]:
+        errors.append(
+            "Form 3 geometry contract must use the canonical 185x55 mm core."
+        )
+
+    x_breaks = [float(x) for x in core_geo.get("x_breaks_mm", [])]
+    y_breaks = [float(y) for y in core_geo.get("y_breaks_mm", [])]
+    if (
+        x_breaks != sorted(set(x_breaks))
+        or x_breaks[:1] != [0.0]
+        or x_breaks[-1:] != [185.0]
+    ):
+        errors.append(
+            f"Form 3 x_breaks_mm must be unique/sorted from 0 to 185: {x_breaks}"
+        )
+    if (
+        y_breaks != sorted(set(y_breaks))
+        or y_breaks[:1] != [0.0]
+        or y_breaks[-1:] != [55.0]
+    ):
+        errors.append(
+            f"Form 3 y_breaks_mm must be unique/sorted from 0 to 55: {y_breaks}"
+        )
+
+    seen_segments = set()
+    for i, seg in enumerate(form3_geometry.get("line_segments_mm", [])):
+        if not isinstance(seg, list) or len(seg) != 4:
+            errors.append(
+                f"Form 3 line segment {i} must contain four coordinates: {seg}"
+            )
+            continue
+        x0, y0, x1, y1 = [float(v) for v in seg]
+        if not (
+            0 <= x0 <= 185 and 0 <= x1 <= 185
+            and 0 <= y0 <= 55 and 0 <= y1 <= 55
+        ):
+            errors.append(
+                f"Form 3 line segment {i} escapes 185x55 core: {seg}"
+            )
+        if not (math.isclose(x0, x1) or math.isclose(y0, y1)):
+            errors.append(
+                f"Form 3 line segment {i} must be orthogonal: {seg}"
+            )
+        if math.isclose(x0, x1) and math.isclose(y0, y1):
+            errors.append(
+                f"Form 3 line segment {i} has zero length: {seg}"
+            )
+        canonical = (
+            min(x0, x1), min(y0, y1),
+            max(x0, x1), max(y0, y1),
+        )
+        if canonical in seen_segments:
+            errors.append(f"Duplicate Form 3 line segment: {seg}")
+        seen_segments.add(canonical)
+
+    for cell_name, cell in (form3_geometry.get("cells") or {}).items():
+        x0, y0, x1, y1 = [
+            float(cell[k]) for k in ("x0", "y0", "x1", "y1")
+        ]
+        if not (x0 < x1 and y0 < y1):
+            errors.append(
+                f"{cell_name}: invalid Form 3 cell bounds {cell}"
+            )
+        if x0 not in x_breaks or x1 not in x_breaks:
+            errors.append(
+                f"{cell_name}: x bounds do not align with Form 3 break lines"
+            )
+        if y0 not in y_breaks or y1 not in y_breaks:
+            errors.append(
+                f"{cell_name}: y bounds do not align with Form 3 break lines"
+            )
+
+    left_columns = [
+        float(x)
+        for x in form3.get("form3", {}).get("left_columns_mm", [])
+    ]
+    if not math.isclose(
+        sum(left_columns),
+        float(core_geo.get("left_block_width_mm", -1)),
+        abs_tol=1e-9,
+    ):
+        errors.append(
+            "Form 3 left block width must equal 10+10+10+10+15+10=65 mm."
+        )
+
+    right_widths = form3.get("form3", {}).get("right_major_widths_mm") or {}
+    right_sum = (
+        float(right_widths.get("main_text", 0))
+        + float(right_widths.get("auxiliary", 0))
+    )
+    if not math.isclose(
+        right_sum,
+        float(core_geo.get("right_block_width_mm", -1)),
+        abs_tol=1e-9,
+    ):
+        errors.append(
+            "Form 3 right block width must equal 70+50=120 mm."
+        )
+
+    if bool(
+        (form3_geometry.get("optional_graph_27") or {})
+        .get("draw_by_default")
+    ):
+        errors.append(
+            "Graph 27 is conditional and must not be drawn by default."
+        )
 
     nav_subsets = [x["name"] for x in navigator.get("layout_subsets", [])]
     doc_subsets = documentation.get("layout_subsets", [])
