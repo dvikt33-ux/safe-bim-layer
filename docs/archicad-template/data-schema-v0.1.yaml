@@ -1,0 +1,110 @@
+schema_version: 0.1
+status: draft
+
+project_info:
+  SBIM.TemplateVersion: {type: string, required: true}
+  SBIM.SchemaVersion: {type: string, required: true}
+  SBIM.Project.ObjectClass: {type: string, required: true, source: normative_object_taxonomy}
+  SBIM.Project.ActiveModules: {type: string_list_serialized, required: true, source: normative_module_taxonomy}
+  SBIM.Project.ModuleDepths: {type: string_map_serialized, required: true}
+  SBIM.Project.NormativePackVersion: {type: string, required: true}
+  SBIM.Project.RouteVersion: {type: string, required: true}
+  SBIM.Project.CoordinationStatus: {type: enum, values: [DRAFT, COORDINATION, REVIEW, ISSUE], required: true}
+  SBIM.Project.CoordinatePolicy: {type: enum, values: [PROJECT_ORIGIN_WITH_SURVEY_POINT, EXPLICIT_EXCEPTION], required: true}
+
+property_groups:
+  SBIM.Core:
+    StableTypeID: {type: string, default: undefined}
+    ElementRole: {type: enum, values: [STRUCTURAL, ENVELOPE, PARTITION, FINISH, OPENING, CIRCULATION, EQUIPMENT, MEP, SITE, ANNOTATION, OTHER], default: undefined}
+    Discipline: {type: string, default: undefined}
+    SourcePack: {type: string, default: undefined}
+    AutomationState: {type: enum, values: [MANAGED, USER_MANAGED, REFERENCE, LOCKED, QUARANTINE], default: USER_MANAGED}
+    AutomationLock: {type: boolean, default: false}
+    DataStatus: {type: enum, values: [VERIFIED, PROJECT_DEFINED, UNVERIFIED, PLACEHOLDER, IMPORTED, QUARANTINE], default: UNVERIFIED}
+
+  SBIM.Space:
+    FunctionCode: {type: string, default: undefined}
+    FunctionName: {type: string, default: undefined}
+    OccupancyType: {type: string, default: undefined}
+    OccupantCount: {type: integer, default: undefined}
+    WetZone: {type: boolean, default: false}
+    AccessibleRequired: {type: boolean, default: false}
+    FireCompartmentID: {type: string, default: undefined}
+    SmokeZoneID: {type: string, default: undefined}
+
+  SBIM.Fire:
+    FireResistanceRequired: {type: string, default: undefined}
+    FireResistanceProvided: {type: string, default: undefined}
+    FireHazardClass: {type: string, default: undefined}
+    IsFireCompartmentBoundary: {type: boolean, default: false}
+    IsEvacuationRouteElement: {type: boolean, default: false}
+    EvacuationRouteID: {type: string, default: undefined}
+    IsSmokeBarrier: {type: boolean, default: false}
+
+  SBIM.Accessibility:
+    Required: {type: boolean, default: false}
+    RouteID: {type: string, default: undefined}
+    ClearWidthRequired: {type: length, default: undefined}
+    ClearWidthProvided: {type: length, default: undefined}
+    ThresholdHeight: {type: length, default: undefined}
+    Slope: {type: number, default: undefined}
+
+  SBIM.MEP:
+    SystemCode: {type: string, default: undefined}
+    SystemName: {type: string, default: undefined}
+    Discipline: {type: string, default: undefined}
+    ServiceZoneID: {type: string, default: undefined}
+    FireRelated: {type: boolean, default: false}
+    RequiresAccess: {type: boolean, default: false}
+    AccessZoneID: {type: string, default: undefined}
+
+  SBIM.Norm:
+    Status: {type: enum, values: [NOT_CHECKED, PASS, WARNING, ERROR, NOT_APPLICABLE, BLOCKED_SOURCE], default: NOT_CHECKED}
+    RulePackVersion: {type: string, default: undefined}
+    RuleIDs: {type: string, default: undefined}
+    ViolationIDs: {type: string, default: undefined}
+    WarningIDs: {type: string, default: undefined}
+    LastCheckedAt: {type: string, default: undefined}
+    CheckScope: {type: string, default: undefined}
+
+  SBIM.Exchange:
+    ExternalID: {type: string, default: undefined}
+    SourceSystem: {type: string, default: undefined}
+    SourceModel: {type: string, default: undefined}
+    SourceDiscipline: {type: string, default: undefined}
+    ReadOnlyReference: {type: boolean, default: false}
+    IFCExportClassOverride: {type: string, default: undefined}
+
+  SBIM.QA:
+    Status: {type: enum, values: [PASS, WARNING, ERROR, REVIEW, IGNORE_WITH_REASON], default: REVIEW}
+    IssueCode: {type: string, default: undefined}
+    IssueMessage: {type: string, default: undefined}
+    Reviewed: {type: boolean, default: false}
+    Reviewer: {type: string, default: undefined}
+    LastReviewAt: {type: string, default: undefined}
+
+ids_policy:
+  role: object_and_module_specific_additive_requirements
+  mutates_existing_core_properties: false
+  generate_from:
+    - object_route
+    - active_modules
+    - module_depths
+    - confirmed_normative_rules
+  inactive_modules_included: false
+  import_to_dedicated_ifc_property_mapping_preset: true
+
+favorite_contract:
+  primary_creation_primitive_for_agent: true
+  required_fields:
+    - canonical_name
+    - stable_type_id
+    - tool
+    - structure_attribute
+    - layer
+    - classification
+    - core_properties
+    - object_scope
+    - module_scope
+    - source_pack
+    - release_status
