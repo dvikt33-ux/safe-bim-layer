@@ -50,6 +50,7 @@ DOCUMENTATION_SPEC = SPEC / "documentation-standard-v0.1.yaml"
 FONT_MANIFEST = SPEC / "fonts-manifest.yaml"
 SEED_PRESETS = SPEC / "seed-presets-registry-v0.1.yaml"
 MASTER_LAYOUT_FORM3 = SPEC / "master-layout-form3-registry-v0.1.yaml"
+AUTOTEXT_REGISTRY = SPEC / "autotext-titleblock-registry-v0.1.yaml"
 
 SAFE_CORE_COMMANDS = {
     "GetProjectInfo", "GetProjectInfoFields", "CreateProjectInfoFields",
@@ -181,6 +182,7 @@ def validate_specs():
     documentation = load_yaml(DOCUMENTATION_SPEC)
     seed_presets = load_yaml(SEED_PRESETS)
     form3 = load_yaml(MASTER_LAYOUT_FORM3)
+    autotext_registry = load_yaml(AUTOTEXT_REGISTRY)
 
     errors = []
     warnings = []
@@ -443,6 +445,35 @@ def validate_specs():
             f"seed={sorted(seed_dims)}, navigator={sorted(registered_dims)}"
         )
 
+    # AutoText registry must use unique verified builtin keys and valid <KEY> tokens.
+    builtin_keys = autotext_registry.get("verified_builtin_keys") or {}
+    runtime_auto = (
+        autotext_registry.get("runtime_validation") or {}
+    ).get("required_builtin_keys_for_first_titleblock_test", [])
+    missing_runtime_keys = sorted(set(runtime_auto) - set(builtin_keys))
+    if missing_runtime_keys:
+        errors.append(
+            f"AutoText runtime validation references unknown builtin keys: {missing_runtime_keys}"
+        )
+    for graph_no, mapping in (autotext_registry.get("form3_mapping") or {}).items():
+        key = mapping.get("key")
+        token = mapping.get("token")
+        if key and key not in builtin_keys:
+            errors.append(f"Form 3 graph {graph_no}: unknown AutoText key {key}")
+        if key and token != f"<{key}>":
+            errors.append(
+                f"Form 3 graph {graph_no}: token {token!r} must equal <{key}>"
+            )
+    expected_format_values = (
+        (autotext_registry.get("form3_mapping") or {})
+        .get(26, {})
+        .get("values_by_master", {})
+    )
+    if set(expected_format_values) != set(form3_sizes):
+        errors.append(
+            "Form 3 graph 26 master-format mapping must cover exactly all registered masters."
+        )
+
     supported_property_types = {"string", "boolean", "integer", "length", "number", "enum"}
     property_count = 0
     for group_name, props in schema_groups.items():
@@ -479,6 +510,8 @@ def validate_specs():
             "seedGraphicOverrideCombinations": len(seed_go),
             "seedDimensionStyles": len(seed_dims),
             "form3SheetFormats": len(form3_sizes),
+            "verifiedAutoTextKeys": len(builtin_keys),
+            "runtimeRequiredAutoTextKeys": len(runtime_auto),
         },
     }
 
@@ -1563,6 +1596,52 @@ def _layout_settings_from_nav(api: Tapir, nav_item):
     return db_id, rows[0]
 
 
+
+def plan_autotext(api: Tapir):
+    """Read-only validation of the custom AutoText reader and Form 3 keys."""
+    registry = load_yaml(AUTOTEXT_REGISTRY)
+    required = (
+        registry.get("runtime_validation") or {}
+    ).get("required_builtin_keys_for_first_titleblock_test", [])
+
+    try:
+        response = api.call("GetAutoTextsV1")
+    except Exception as exc:
+        return {
+            "status": "BLOCKED_ADDON_REBUILD",
+            "writePerformed": False,
+            "reason": (
+                "GetAutoTextsV1 is provided by the safe-bim overlay and is not "
+                "available until the overlay add-on is rebuilt and loaded."
+            ),
+            "error": str(exc),
+            "requiredKeys": required,
+        }
+
+    rows = response.get("autoTexts", [])
+    by_key = {
+        str(x.get("key", "")).strip("<>"): x
+        for x in rows if x.get("key")
+    }
+    missing = [key for key in required if key not in by_key]
+    return {
+        "status": "PASS" if not missing else "BLOCKED_AUTOTEXT_KEYS",
+        "writePerformed": False,
+        "count": len(rows),
+        "requiredKeys": required,
+        "missingRequiredKeys": missing,
+        "resolvedRequired": {
+            key: by_key.get(key) for key in required if key in by_key
+        },
+        "allAutoTexts": rows,
+        "embeddingSyntax": "<KEY>",
+        "nextGate": (
+            "master_layout_autotext_embedding_test"
+            if not missing else "inspect_archicad_autotext_environment"
+        ),
+    }
+
+
 def plan_master_layouts(api: Tapir):
     """Read-only plan for exact A4-A0 Master Layout shells."""
     registry = load_yaml(MASTER_LAYOUT_FORM3)
@@ -2002,7 +2081,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "action",
-        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell"),
+        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "plan-autotext", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell"),
     )
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
     parser.add_argument(
@@ -2038,6 +2117,8 @@ def main():
             result = plan_navigator(api)
         elif args.action == "plan-master-layouts":
             result = plan_master_layouts(api)
+        elif args.action == "plan-autotext":
+            result = plan_autotext(api)
         elif args.action == "apply-core":
             result = apply_safe_core(api, allow_nonempty=args.allow_nonempty)
         elif args.action == "apply-surfaces":
