@@ -1,7 +1,10 @@
+from collections import Counter
 from copy import deepcopy
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
+import scripts.stage4_audit_pack as stage4_pack
 from scripts.stage4_audit_pack import source_contract, build_pack, verify_pack
 from scripts.audit_pack import AuditError, read_json, scan_public_pack
 from closed_loop.wall_attempts import durable_json
@@ -50,6 +53,22 @@ class ScenarioPackTests(unittest.TestCase):
         self.contract['pairs']=[]
         build_pack(self.root,self.contract,self.pack)
         self.assertEqual(verify_pack(self.root,self.pack)['status'],'PASS')
+
+
+    def test_each_snapshot_is_parsed_once_per_extraction(self):
+        calls = []
+        snapshot_names = set(self.contract['snapshots'])
+        original = stage4_pack._pinned_json_once
+
+        def counted(root, spec):
+            if spec['path'] in snapshot_names:
+                calls.append(spec['path'])
+            return original(root, spec)
+
+        with patch.object(stage4_pack, '_pinned_json_once', side_effect=counted):
+            stage4_pack.extract(self.root, self.contract)
+
+        self.assertEqual(Counter(calls), Counter(self.contract['snapshots']))
 
 
 if __name__ == '__main__': unittest.main()
