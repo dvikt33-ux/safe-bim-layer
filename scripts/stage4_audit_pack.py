@@ -1,11 +1,39 @@
 """Source-pinned Stage 4 scenario packs, including failed/uncertain attempts."""
 import argparse
+from collections import Counter
 import hashlib
+import json
 from pathlib import Path
 import tempfile
 
 from scripts.audit_pack import (AuditError, canonical, changed_paths, delta, digest, file_info,
-    model_summary, pinned_json, public_value, read_json, relative, scan_public_pack, semantic_delta)
+    model_summary, public_value, read_json, relative, scan_public_pack, semantic_delta)
+
+
+def _pinned_json_once(root, spec):
+    """Parse the exact pinned bytes, then independently confirm the source still matches."""
+    path = relative(root, spec['path'])
+    raw = path.read_bytes()
+    actual = {'path': spec['path'], 'sha256': hashlib.sha256(raw).hexdigest(), 'bytes': len(raw)}
+    expected = {k: spec[k] for k in ('path', 'sha256', 'bytes')}
+    if actual != expected:
+        raise AuditError('Source SHA/size mismatch: '+spec['path'])
+
+    def unique(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                raise AuditError('Duplicate JSON key: ' + key)
+            result[key] = value
+        return result
+
+    data = json.loads(raw.decode('utf-8-sig'), object_pairs_hook=unique,
+        parse_constant=lambda value: (_ for _ in ()).throw(AuditError('Nonfinite JSON: '+value)))
+    # Preserve the old fail-closed concurrency check, but avoid the separate
+    # pre-parse hash pass: the parsed bytes themselves were already hashed above.
+    if file_info(root, spec['path']) != actual:
+        raise AuditError('Source changed during read: '+spec['path'])
+    return data
 
 
 def source_contract(root, scenario, snapshots, pairs, records, identity, provenance):
@@ -32,39 +60,67 @@ def extract(root, contract):
     snapshots = set(contract['snapshots'])
     if not snapshots.issubset(records):
         raise AuditError('Unpinned snapshot')
-    payloads, states = {}, {}
+
+    payloads, states, snapshot_cache = {}, {}, {}
+
+    def load_snapshot(name):
+        if name not in snapshots or name not in records:
+            raise AuditError('Delta requires two pinned factual snapshots')
+        if name not in snapshot_cache:
+            data = _pinned_json_once(root, records[name])
+            if name not in states:
+                summary, index = model_summary(data, contract['modelIdentity'])
+                key = summary['modelHash']
+                states[name] = (summary, index)
+                payloads[f'models/{key}/summary.json'] = summary
+                lean_index = [
+                    {k: row[k] for k in ('guid', 'type', 'homeStory', 'fullElementHash') if k in row}
+                    for row in index]
+                payloads[f'models/{key}/element-index.json'] = (
+                    lean_index if contract.get('indexStyle') == 'GUID_FULL_HASH' else index)
+            snapshot_cache[name] = data
+        return snapshot_cache[name]
+
+    # Non-snapshot records remain independently source-pinned. Large records
+    # stay as LFS refs; ordinary records are embedded after sanitization.
     for name, spec in sorted(records.items()):
-        if name not in snapshots and spec['bytes'] > 1_000_000:
+        if name in snapshots:
+            continue
+        if spec['bytes'] > 1_000_000:
             if file_info(root, name) != spec:
                 raise AuditError('Raw LFS source SHA/size mismatch: '+name)
             payloads['raw-refs/'+digest(name)+'.json'] = {'sourceRef': spec, 'storage': 'GIT_LFS'}
             continue
-        data = pinned_json(root, spec)
-        if name in snapshots:
-            summary, index = model_summary(data, contract['modelIdentity'])
-            key = summary['modelHash']
-            states[name] = (summary, index)
-            payloads[f'models/{key}/summary.json'] = summary
-            lean_index = [
-                {k: row[k] for k in ('guid', 'type', 'homeStory', 'fullElementHash') if k in row}
-                for row in index]
-            payloads[f'models/{key}/element-index.json'] = lean_index if contract.get('indexStyle') == 'GUID_FULL_HASH' else index
-        else:
-            # Ordinary-sized raw records remain independently inspectable in
-            # the public pack, after recursive path sanitization.
-            payloads['records/'+digest(name)+'.json'] = {'sourceRef': name, 'value': data}
+        data = _pinned_json_once(root, spec)
+        payloads['records/'+digest(name)+'.json'] = {'sourceRef': name, 'value': data}
+
+    # Keep only snapshots still needed by later deltas. A chain therefore holds
+    # roughly the current pair in memory instead of reparsing every pair source.
+    pair_uses = Counter(name for pair in contract['pairs'] for name in (pair['before'], pair['after']))
     for number, pair in enumerate(contract['pairs'], 1):
-        if pair['before'] not in states or pair['after'] not in states:
-            raise AuditError('Delta requires two pinned factual snapshots')
-        before = pinned_json(root, records[pair['before']])
-        after = pinned_json(root, records[pair['after']])
+        before_name, after_name = pair['before'], pair['after']
+        before = load_snapshot(before_name)
+        after = load_snapshot(after_name)
         bm = {e['guid'].upper(): e for e in before['elements']}
         am = {e['guid'].upper(): e for e in after['elements']}
-        change = delta(states[pair['before']][1], states[pair['after']][1])
-        differences = [{'guid': guid, 'changedPaths': changed_paths(bm[guid], am[guid])} for guid in change['changed']]
-        payloads[f'deltas/{number:03}.json'] = {'before': pair['before'], 'after': pair['after'],
+        change = delta(states[before_name][1], states[after_name][1])
+        differences = [{'guid': guid, 'changedPaths': changed_paths(bm[guid], am[guid])}
+                       for guid in change['changed']]
+        payloads[f'deltas/{number:03}.json'] = {'before': before_name, 'after': after_name,
             **semantic_delta(change, differences), 'changedFields': differences,
-            'addedElements': [am[g] for g in change['added']], 'removedElements': [bm[g] for g in change['removed']]}
+            'addedElements': [am[g] for g in change['added']],
+            'removedElements': [bm[g] for g in change['removed']]}
+        for name in (before_name, after_name):
+            pair_uses[name] -= 1
+            if pair_uses[name] == 0:
+                snapshot_cache.pop(name, None)
+
+    # Snapshots not participating in a delta still require summary/index proof.
+    for name in sorted(snapshots):
+        if name not in states:
+            load_snapshot(name)
+        snapshot_cache.pop(name, None)
+
     payloads['source.json'] = contract
     blobs = {}
     for name, value in payloads.items():
@@ -81,7 +137,6 @@ def extract(root, contract):
     if sum(map(len, blobs.values())) > 9*1024*1024:
         raise AuditError('Stage 4 pack exceeds 9 MiB; full evidence must remain separate')
     return blobs
-
 
 def build_pack(root, contract, output):
     output = Path(output)
