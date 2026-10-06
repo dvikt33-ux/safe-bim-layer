@@ -1,0 +1,105 @@
+{
+  "release": "2.3",
+  "format": "systematized_active_machine_state",
+  "detail_units": 1211,
+  "active_ir": 1211,
+  "parameter_facts": 1351,
+  "dimension_bindings_v2_3": 196,
+  "files": [
+    {
+      "file": "AUDIT_v2.3.json",
+      "size": 2097,
+      "sha256": "f38b275aae906b59fc2b85afed521160fb767a7799b7f3c4060f16dde6a272d0"
+    },
+    {
+      "file": "README_v2.3.md",
+      "size": 1598,
+      "sha256": "94a592e6b6124afd1d5f190bd27090426bae5a3b5e502848fc237889109264e3"
+    },
+    {
+      "file": "SOURCE_VERIFY_FULL_v2.3.json",
+      "size": 15494,
+      "sha256": "81752340e865edd8cacd1ab6e03dede51c7aeb5739e7ba21dc6722c32f5f6444"
+    },
+    {
+      "file": "SUMMARY_v2.3.json",
+      "size": 446,
+      "sha256": "f75ea59399127e680bf83bbb40dfd5192c7d3a8310e4d002ab0f528bd72cc65a"
+    },
+    {
+      "file": "archicad_build_contract_v0.5.json",
+      "size": 1032,
+      "sha256": "e74e6ca9c5def505075819b9ea92db17e7ea9e18f600b7a035b8029ff3c7b90d"
+    },
+    {
+      "file": "archicad_ir_v2.3.jsonl",
+      "size": 7556905,
+      "sha256": "6e27abe799058ac483bc766365abc355eabefc7cd0818e4034493ea9c976daac"
+    },
+    {
+      "file": "archicad_system_grammars_v0.7.json",
+      "size": 5592,
+      "sha256": "822cca151db347067d0a8df0727b61a0f912d33571a61c7d0fc58a6eddb46662"
+    },
+    {
+      "file": "archicad_tool_mapping_v0.9.json",
+      "size": 2406,
+      "sha256": "cdb8c7782b49134b90169dd57a207cf750f5149853015bad7db3ed502e645e30"
+    },
+    {
+      "file": "detail_units_v2.3.jsonl",
+      "size": 1014250,
+      "sha256": "6f6f69ea5e3df5b091058f3c8960cbb95c5c80c680d81f4d12410e7670b8699e"
+    },
+    {
+      "file": "details_active_v2.3.jsonl",
+      "size": 6406576,
+      "sha256": "033d19c605d999fbadd2fc263d6e0f01e59546acc644e51c5bd2ecec781c62e0"
+    },
+    {
+      "file": "dimension_binding_queue_v2.3.jsonl",
+      "size": 208192,
+      "sha256": "9ca32026ccedb553e06cbfaf16acbe1dda997715a557f94f121ec6cb644e2adc"
+    },
+    {
+      "file": "kaiman_kerakam_assembly_grammar_v2.2.json",
+      "size": 2383,
+      "sha256": "f2154bda806fd99a80140626afb9b331498974bd6ffce5190c6e0247c2545227"
+    },
+    {
+      "file": "kaiman_kerakam_component_variants_v2.2.jsonl",
+      "size": 19769,
+      "sha256": "a6edfe99813d942692d20d3fbac4d405d0626ebf8c0c79ac8db082390cb6d1e1"
+    },
+    {
+      "file": "kaiman_kerakam_dimension_templates_v2.3.json",
+      "size": 5666,
+      "sha256": "7fb9f5ebae73528770dbf9a7bfb9bed0d39541b2003fff70b938fcd7eb118894"
+    },
+    {
+      "file": "kaiman_kerakam_wall_types_v2.2.json",
+      "size": 7247,
+      "sha256": "e24d343c8536270f7689744cf1fac1130462b5849f93ffca267fd28e035016bf"
+    },
+    {
+      "file": "kaiman_kerakam_wt11_dimension_bindings_v2.3.jsonl",
+      "size": 109594,
+      "sha256": "b864c75497b2dcb70c618bc88990cff0232210ee950d4ba9915190a608f00390"
+    },
+    {
+      "file": "manifest_v2.3.json",
+      "size": 649,
+      "sha256": "715a0679b7c3d55a7ec324ac331a7335ec8efae6eb85b05912935a4907f883e7"
+    },
+    {
+      "file": "parameter_facts_v2.3.jsonl",
+      "size": 879507,
+      "sha256": "7e270c36f141e769afa4253afdfb66872510690effe55f9959706fdeea28059f"
+    },
+    {
+      "file": "source_registry_v2.2.json",
+      "size": 33373,
+      "sha256": "b794824c1d68dbcdf850db2dda998e5689abeac96e929280fdc1adb66886568d"
+    }
+  ]
+}

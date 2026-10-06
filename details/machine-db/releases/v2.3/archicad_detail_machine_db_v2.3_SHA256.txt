@@ -1,0 +1,2 @@
+ffc0ef972d921f5e665382f4b5bde90accb42452d14ad472e3617f46837b7d1b  archicad_detail_machine_db_v2.3_CORE_2026-10-06.zip
+65f9c83be4398a13d4f6192d4c11bfa60d3c6a6f94aa96b606520cf4321d1d36  detail-machine-v2.3-systematized.tar.gz

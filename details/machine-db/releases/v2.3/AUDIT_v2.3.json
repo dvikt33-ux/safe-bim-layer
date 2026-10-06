@@ -1,0 +1,44 @@
+{
+  "release": "2.3",
+  "timestamp_utc": "2026-10-06T14:52:13.663150+00:00",
+  "focus": "KAIMAN/KERAKAM WT1.1 sheets 1-21, physical PDF pages 41-61",
+  "checks": {
+    "wt11_sheets_processed": 21,
+    "new_dimension_bindings": 196,
+    "new_dimension_parameter_facts": 196,
+    "detail_units_total": 1211,
+    "parameter_facts_total": 1351,
+    "archicad_ir_total": 1515,
+    "component_variants_total": 536,
+    "dimension_queue_total": 610,
+    "sqlite_integrity_check": "ok",
+    "missing_active_detail_ir_refs": 0,
+    "kaiman_commit_allowed_true": 0,
+    "raster_measurement_used_for_dimensions": 0,
+    "source_hash_matches_v2_2": 40,
+    "source_hash_total_v2_2": 40
+  },
+  "coverage": {
+    "sheets_1_21": "key printed dimensions + semantic endpoints bound; nonexhaustive",
+    "remaining_kaiman_sheets": 206,
+    "queue_status_counts": [
+      [
+        "key_dimensions_bound_v2.3_nonexhaustive",
+        21
+      ],
+      [
+        "pending",
+        206
+      ]
+    ]
+  },
+  "critical_findings": [
+    "WT1.1 standard wall geometry is now explicitly machine-bound as 120 mm facing brick + 10 mm gap + 380 mm ceramic core + 15 mm interior plaster = 525 mm total where printed on the source sheets.",
+    "Prefabricated slab-edge, monolithic slab-edge, window-head, internal-wall intersection, plinth and wood-beam families now have source-printed dimensions bound to semantic endpoints.",
+    "Opening sheets bind the printed 3000 mm storey height, 1630 mm window height and 910 mm sill height only as geometry of this manufacturer detail family, not universal project defaults.",
+    "Wood-beam detail binds the printed 120x200 mm beam section, 250 mm bearing length, 40 mm side clearances and 20 mm vertical clearances; structural adequacy remains project-calculation input.",
+    "Corner sheets 6-7 now preserve the source row/course bond schedule instead of treating the corner as generic masonry.",
+    "No value was obtained from pixel/raster measurement. Ambiguous printed dimensions are marked semantics_partial and do not unlock commit."
+  ],
+  "commit_policy": "fail_closed"
+}

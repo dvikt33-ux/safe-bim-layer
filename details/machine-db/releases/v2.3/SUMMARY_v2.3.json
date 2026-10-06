@@ -1,0 +1,19 @@
+{
+  "release": "2.3",
+  "focus_source": "KAIMAN_KERAKAM_WALL",
+  "focus_wall_type": "WT1.1",
+  "sheets_processed": 21,
+  "source_pages": [
+    41,
+    61
+  ],
+  "new_dimension_bindings": 196,
+  "detail_units_total": 1211,
+  "parameter_facts_total": 1351,
+  "archicad_ir_total": 1515,
+  "component_variants_total": 536,
+  "dimension_queue_total": 610,
+  "sqlite_integrity": "ok",
+  "missing_active_ir_refs": 0,
+  "kaiman_commit_allowed_true": 0
+}
