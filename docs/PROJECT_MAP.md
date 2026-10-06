@@ -35,15 +35,14 @@ migration. Never edit historical evidence in place to reflect a newer run.
 
 | Path | Why it is legacy |
 | --- | --- |
-| `safe_bim_layer.py` | Earlier Safe BIM v0.1 deterministic wrapper over Tapir 1.5.8 |
-| `SAFE_BIM_V01_REPORT.md` | Historical report for the v0.1 generation |
-| `qwen_safe_bim_integration.py` | Earlier local-Qwen high-level planner experiment |
-| `safe-bim-v01-schema-test.json` | v0.1-era schema test artifact |
-| `tapir-1.5.8.json` | Old pinned schema snapshot; active live baseline uses newer Tapir |
-| `ARENA_TASK_ARCHITECTURE_AUDIT.md` | Historical review prompt, not runtime behavior |
+| `safe_bim_layer.py` | Baseline-pinned legacy; Stage-2 verifier checks this exact path remains unchanged |
+| `qwen_safe_bim_integration.py` | Baseline-pinned legacy; Stage-2 verifier checks this exact path remains unchanged |
+| `tapir-1.5.8.json` | Legacy schema snapshot still referenced by the pinned Qwen v0.1 script |
+| `archive/legacy-v0.1/` | Historical v0.1 report/schema proof moved out of the active root |
+| `archive/coordination/` | Historical review/coordination material moved out of the active root |
 
-These files should eventually move under an archive/history namespace after references are
-checked. They should not be deleted in the first cleanup pass.
+The remaining root-level legacy runtime files are intentionally not moved yet because the
+Stage-2 regression contract pins their paths. See `REFERENCE_AUDIT_2026-10-06.md`.
 
 ## REVIEW / MIGRATION — do not classify as dead yet
 
