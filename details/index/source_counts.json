@@ -91,7 +91,7 @@
     "year": null,
     "details": 200,
     "active_ir": 200,
-    "parameter_facts": 148,
+    "parameter_facts": 154,
     "component_variants": 377,
     "normative_trust": "technical_solution_only_unless_separately_verified",
     "system": [
@@ -118,7 +118,10 @@
     "section6_dimension_binding_high_remaining": 3,
     "section7_dimension_binding_status": "reviewed_v2.10",
     "section7_dimension_binding_tasks_resolved": 31,
-    "section7_dimension_binding_high_remaining": 2
+    "section7_dimension_binding_high_remaining": 2,
+    "section8_9_source_enrichment_status": "reviewed_v2.11",
+    "section8_9_source_records_enriched": 6,
+    "section8_9_preexisting_queue_tasks": 0
   },
   {
     "source_id": "KAIMAN_KERAKAM_WALL",
