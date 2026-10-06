@@ -37,13 +37,16 @@ This is still referenced by the historical Qwen integration script above, so it 
 stay with the baseline-pinned v0.1 generation until that generation is archived as one
 controlled migration.
 
-### Historical coordination — retain, do not treat as current runtime
+### Historical coordination — archived
 
-- `bimexec/`
+The root `bimexec/` directory contained only coordination/handoff documents and no current
+runtime or probe source. Active source/tests had no dependency on those paths, so it was
+moved intact to:
 
-Its files describe an older T0/Arena/Work coordination architecture. They are now clearly
-marked historical/review. They should be migrated only after deciding whether any T0 probe
-capabilities still deserve promotion into the current closed-loop architecture.
+- `archive/coordination/bimexec/`
+
+Any future T0 capability must be migrated explicitly from history into the current
+closed-loop architecture; the archived handoff state is not production state.
 
 ## Important distinction
 
@@ -56,5 +59,5 @@ The current audit found exactly that pattern for the old v0.1 Python files.
 1. Decide whether Stage-2's frozen-path criterion should remain path-based forever or be
    replaced by a content/hash manifest that permits archival without losing provenance.
 2. If that contract is deliberately migrated, move the v0.1 Python/schema set together.
-3. Audit `bimexec/` for unique capabilities vs duplicated historical coordination.
+3. Review archived BIMEXEC/T0 ideas only if a concrete current capability needs them.
 4. Keep Stage 4 implementation untouched until its mandatory live gate is complete.
