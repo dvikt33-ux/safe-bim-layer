@@ -87,7 +87,8 @@ def finish_pack(output, identity):
     for path in sorted(output.rglob('*.json')):
         if 'audit-pack' in path.parts or path.name == 'audit-pack-verification.json': continue
         records.append(path)
-        if ((path.parent.name == 'observations' and not path.name.endswith(('.native-response.json','.fingerprint.json'))) or
+        observation_sidecar = path.name.endswith(('.request.json','.native-response.json','.metrics.json','.fingerprint.json'))
+        if ((path.parent.name == 'observations' and not observation_sidecar) or
                 (path.parent.name == 'executor' and path.name in ('before.json','after-create.json')) or
                 path.name == 'planner-model-dump.json'):
             snapshots.append(path)
