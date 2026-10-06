@@ -1,0 +1,31 @@
+{
+  "release": "2.4",
+  "checks": {
+    "release": "2.4",
+    "base_release": "v2.3",
+    "focus_source": "POROTHERM_LOWRISE",
+    "detail_units_total": 1215,
+    "active_ir_total": 1215,
+    "parameter_facts_total": 1211,
+    "component_variants_total": 567,
+    "dimension_queue_total": 671,
+    "porotherm_detail_units": 73,
+    "porotherm_parameter_facts": 37,
+    "porotherm_component_variants": 21,
+    "porotherm_dimension_queue": 73,
+    "source_hash_matches": 40,
+    "source_hash_total": 40,
+    "raster_measurement_used_for_dimensions": 0,
+    "normative_claims_promoted_to_current": 0,
+    "commit_policy": "fail_closed"
+  },
+  "critical_findings": [
+    "POROTHERM correction rebased onto active v2.3; FAVORIT section-1 work preserved.",
+    "POROTHERM has 73 canonical technical-detail sheets; 12 divider/navigation pages remain excluded.",
+    "Old 69-row generic extraction and 25M-as-25m misparse are not carried forward.",
+    "No raster-derived construction dimensions; unresolved dimensions remain queued.",
+    "Manufacturer and source-quoted normative references remain unverified claims.",
+    "Unresolved POROTHERM construction operations remain fail-closed."
+  ],
+  "commit_policy": "fail_closed"
+}
