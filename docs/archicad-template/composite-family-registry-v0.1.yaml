@@ -1,0 +1,248 @@
+registry_version: 0.1
+status: source_driven_blueprints
+target: Archicad_29
+
+principles:
+  core_template_contains_universal_attributes_not_arbitrary_project_thicknesses: true
+  final_composite_requires_exact_skin_thicknesses: true
+  final_name_total_equals_skin_sum: true
+  thermal_thickness_requires_calculation_or_verified_system_source: true
+  structural_thickness_requires_project_structural_basis: true
+  manufacturer_product_dimensions_must_be_verified: true
+  ventilated_or_independently_managed_facade_prefer_multi_element: true
+  cross_discipline_slab_prefer_separate_structural_and_finish_elements: true
+
+source_facts:
+  GOST_530_2012:
+    status: verified_current_source_read
+    source_url: https://base.garant.ru/70437962/
+    facts:
+      - "1NF ceramic brick example: 250x120x65 mm."
+      - "Standard ceramic stone table contains multiple nominal formats; NF alone is not a universal wall-thickness key."
+    note: "Product-specific commercial names such as 'Porotherm 12' must not be inferred from NF notation."
+
+families:
+  - id: SBIM.FAMILY.IZHS.WALL.EXT.CERAMIC_SINGLE_LEAF
+    object_scope: [residential.izhs]
+    discipline: architecture
+    element_strategy: basic_wall_or_simple_composite
+    status: candidate_requires_product_and_thermal_check
+    required_materials:
+      core: BM_MASONRY_CERAMIC_BLOCK
+    project_inputs:
+      - selected_ceramic_product
+      - verified_product_working_dimension
+      - structural_basis
+      - thermal_calculation
+      - exterior_finish_system
+      - interior_finish_system
+    forbidden_assumptions:
+      - "12NF == fixed exterior wall thickness"
+      - "NF designation alone defines lambda"
+      - "single-leaf ceramic wall automatically meets regional thermal requirement"
+    release_gates:
+      - product_dimension_verified
+      - thermal_check_pass
+      - structural_check_pass
+      - moisture_check_if_required
+      - junction_tests_pass
+
+  - id: SBIM.FAMILY.IZHS.WALL.EXT.CERAMIC_FACEBRICK
+    object_scope: [residential.izhs]
+    discipline: architecture
+    element_strategy: multi_element_preferred
+    status: candidate_requires_system_design
+    elements:
+      - role: structural_or_primary_wall
+        material: BM_MASONRY_CERAMIC_BLOCK
+        thickness: project_product_dimension
+      - role: insulation
+        material: BM_INSULATION_MINERAL_WOOL
+        thickness: thermal_calculation_or_system_source
+        optional: true
+      - role: cavity
+        material: BM_CAVITY_AIR
+        thickness: facade_system_source
+        optional: true
+      - role: face_masonry
+        material: BM_MASONRY_BRICK
+        thickness: selected_face_brick_orientation_and_product
+    why_multi_element:
+      - independent_facade_visibility
+      - opening_and_base_detail_control
+      - cavity_and_tie_coordination
+      - quantity_separation
+      - safer_junction_behavior
+    release_gates:
+      - face_brick_product_verified
+      - cavity_and_tie_system_verified
+      - thermal_check_pass
+      - fire_and_base_detail_check
+      - opening_detail_check
+
+  - id: SBIM.FAMILY.IZHS.WALL.INT.CERAMIC_PARTITION
+    object_scope: [residential.izhs]
+    discipline: architecture
+    element_strategy: basic_wall
+    status: candidate_requires_product
+    material: BM_MASONRY_CERAMIC_BLOCK
+    thickness: selected_partition_product_dimension
+    note: "Commercial names such as Porotherm 12 are product-family labels; verify exact dimensions before Favorite generation."
+
+  - id: SBIM.FAMILY.IZHS.WALL.INT.GYPSUM_BLOCK
+    object_scope: [residential.izhs]
+    discipline: architecture
+    element_strategy: basic_wall_or_composite_with_finishes
+    status: candidate_requires_system_source
+    core_material: BM_MASONRY_GYPSUM_BLOCK
+    thickness: verified_product_dimension
+    finish_layers: project_finish_spec
+
+  - id: SBIM.FAMILY.MKD.WALL.EXT.RC_THERMAL
+    object_scope: [residential.mkd]
+    discipline: architecture
+    element_strategy: multi_element_preferred
+    status: candidate_requires_structural_and_thermal_design
+    elements:
+      - {role: structural_core, material: BM_STR_CONCRETE_RC, thickness: structural_project}
+      - {role: insulation, material: BM_INSULATION_MINERAL_WOOL, thickness: thermal_calculation}
+      - {role: facade_system, material: project_system, thickness: system_source}
+    release_gates:
+      - structural_design_verified
+      - thermal_check_pass
+      - fire_facade_system_verified
+      - acoustic_check_if_required
+      - opening_and_slab_edge_details_verified
+
+  - id: SBIM.FAMILY.MKD.WALL.EXT.MASONRY_FILL_FACADE
+    object_scope: [residential.mkd]
+    discipline: architecture
+    element_strategy: multi_element
+    status: candidate_requires_frame_and_facade_system
+    elements:
+      - {role: frame, material: project_structural_system, thickness: structural_project}
+      - {role: infill, material: project_masonry_product, thickness: project_product_dimension}
+      - {role: insulation, material: BM_INSULATION_MINERAL_WOOL, thickness: thermal_calculation}
+      - {role: facade, material: project_facade_system, thickness: system_source}
+
+  - id: SBIM.FAMILY.MKD.WALL.INT.MASONRY
+    object_scope: [residential.mkd]
+    discipline: architecture
+    element_strategy: basic_wall_or_composite_with_finishes
+    status: candidate_requires_fire_acoustic_system
+    materials_allowed:
+      - BM_MASONRY_AAC
+      - BM_MASONRY_CERAMIC_BLOCK
+      - BM_MASONRY_SILICATE
+      - BM_MASONRY_GYPSUM_BLOCK
+    thickness: project_fire_acoustic_structural_choice
+    release_gates:
+      - fire_requirement_checked
+      - acoustic_requirement_checked
+      - loadbearing_role_checked
+
+  - id: SBIM.FAMILY.TRC.WALL.EXT.FRAME_FACADE
+    object_scope: [public.trade_entertainment_complex]
+    discipline: architecture
+    element_strategy: multi_element
+    status: candidate_requires_facade_system
+    elements:
+      - {role: structural_frame, material: project_structural_system, thickness: structural_project}
+      - {role: infill_or_backup_wall, material: project_wall_system, thickness: system_source}
+      - {role: insulation, material: BM_INSULATION_MINERAL_WOOL, thickness: thermal_calculation}
+      - {role: facade_subsystem_and_cladding, material: project_facade_system, thickness: system_source}
+    release_gates:
+      - facade_fire_requirements_verified
+      - thermal_check_pass
+      - movement_joint_strategy
+      - opening_and_loading_area_details
+      - maintenance_access_considered
+
+  - id: SBIM.FAMILY.TRC.WALL.INT.DRY_PARTITION
+    object_scope: [public.trade_entertainment_complex]
+    discipline: architecture
+    element_strategy: composite_or_profile_system
+    status: candidate_requires_certified_system
+    materials:
+      board: [BM_BOARD_GYPSUM, BM_BOARD_CEMENT]
+      insulation: BM_INSULATION_MINERAL_WOOL
+      frame: project_metal_frame_component
+    thickness: certified_partition_system
+    release_gates:
+      - fire_rating_source
+      - acoustic_rating_source
+      - wet_zone_compatibility
+      - height_and_stability_limit
+
+  - id: SBIM.FAMILY.ALL.SLAB.STRUCTURAL_RC
+    object_scope: [residential.izhs, residential.mkd, public.trade_entertainment_complex]
+    discipline: structures
+    element_strategy: basic_slab
+    status: candidate_requires_structural_design
+    material: BM_STR_CONCRETE_RC
+    thickness: structural_project
+    layer: KR_MODEL_PRIMARY
+
+  - id: SBIM.FAMILY.ALL.FLOOR.BUILDUP
+    object_scope: [residential.izhs, residential.mkd, public.trade_entertainment_complex]
+    discipline: architecture
+    element_strategy: composite_slab_separate_from_structural_slab
+    status: candidate_requires_room_or_zone_finish_spec
+    possible_skins:
+      - BM_SCREED_CEMENT
+      - BM_INSULATION_MINERAL_WOOL
+      - BM_INSULATION_XPS
+      - BM_FINISH_CERAMIC_TILE
+      - project_finish
+    reference_policy: finish_buildup_must_not_shift_structural_level
+
+  - id: SBIM.FAMILY.ALL.ROOF.FLAT
+    object_scope: [residential.mkd, public.trade_entertainment_complex]
+    discipline: architecture
+    element_strategy: multi_element_or_composite_by_coordination_model
+    status: candidate_requires_roof_system_and_thermal_design
+    materials:
+      - BM_STR_CONCRETE_RC
+      - BM_INSULATION_MINERAL_WOOL
+      - BM_INSULATION_XPS
+      - BM_MEMBRANE.VAPOR_CONTROL
+      - BM_MEMBRANE.WATERPROOF
+    release_gates:
+      - slope_strategy
+      - drainage_strategy
+      - thermal_check
+      - vapor_moisture_check
+      - fire_roof_check
+      - parapet_and_drain_details
+
+  - id: SBIM.FAMILY.IZHS.ROOF.PITCHED
+    object_scope: [residential.izhs]
+    discipline: architecture
+    element_strategy: multi_element_roof_assembly
+    status: candidate_requires_roof_covering_system
+    release_gates:
+      - structural_rafter_design
+      - insulation_and_vapor_control
+      - ventilation_gap
+      - covering_system_source
+      - eaves_ridge_valley_penetration_details
+
+favorite_generation:
+  core_tpl_contains:
+    - tool_prototypes
+    - universal_data_properties
+    - universal_material_attributes
+  object_pack_generates:
+    - verified_project_favorites
+    - project_specific_composites
+    - project_specific_profiles
+  generation_requires:
+    - exact_dimensions
+    - exact_structure_attribute
+    - layer
+    - classification
+    - stable_type_id
+    - source_status
+    - object_scope
+    - module_scope
+  unresolved_input_behavior: BLOCKED_SETUP
