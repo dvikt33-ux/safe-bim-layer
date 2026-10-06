@@ -1,0 +1,654 @@
+{
+  "schemaVersion": "1.0",
+  "revisionDate": "2026-10-06",
+  "purpose": "Cross-branch capability inventory and migration plan. Prevent duplicate implementation and identify the canonical Closed Loop integration path.",
+  "statusVocabulary": {
+    "LIVE_VERIFIED": "Executed against real Archicad/Tapir with factual read-back and/or required visual confirmation.",
+    "OFFLINE_VERIFIED": "Code/contracts passed offline tests but are not promoted as a live Archicad capability.",
+    "IMPLEMENTED_NOT_LIVE": "Implementation exists, but no sufficient published live acceptance was found for this exact integrated capability.",
+    "PARTIAL": "Some required behavior is proven, but canonical production acceptance is incomplete.",
+    "RESEARCH_ONLY": "Documented or source-audited capability with no implementation/live acceptance suitable for promotion.",
+    "OBSOLETE": "Superseded implementation retained only for evidence/regression.",
+    "REJECTED": "Known technically possible pattern that must not be used as the canonical solution."
+  },
+  "canonicalArchitecture": [
+    "STAGE0_INTAKE",
+    "FUNCTIONAL_PROGRAM",
+    "DESIGN_INTENT",
+    "SITE_CONTEXT",
+    "PROJECT_NORMATIVE_BUNDLE",
+    "CONSTRAINT_COMPILATION",
+    "PLANNING_ENGINE",
+    "BIM_TRANSLATOR",
+    "CLOSED_LOOP_ORCHESTRATOR",
+    "SAFE_MUTATION_RUNTIME",
+    "ARCHICAD_TAPIR",
+    "FACTUAL_READBACK",
+    "BIM_GEOMETRY_COORDINATION_QA"
+  ],
+  "primaryGap": {
+    "id": "PLANNING_TO_BIM_TRANSLATOR",
+    "status": "IMPLEMENTED_NOT_LIVE",
+    "statement": "No canonical modern layer currently translates a VERIFIED Planning Engine candidate into typed Closed Loop BIM operations with provenance and acceptance criteria.",
+    "nextAction": "Implement BIM Translator v0 after Stage 4 live acceptance and migration of existing Window/Door/Slab/Zone recipes."
+  },
+  "capabilities": [
+    {
+      "id": "WALL_CREATE_CONTINUE",
+      "domain": "BIM_MUTATION",
+      "status": "LIVE_VERIFIED",
+      "canonicalTarget": "current Closed Loop",
+      "existingImplementations": [
+        "feature/working-archicad-mvp:scripts/archicad_executor.py",
+        "feature/working-archicad-mvp:scripts/archicad_write_cycles/wall_joint_cycle.py",
+        "work/stage3-live-wall-closed-loop"
+      ],
+      "evidence": [
+        "Stage 1 v0 regression commit 27fc10267e71d1cd4f8322fe1d3c334e2cef1b4c",
+        "Stage 3 live closed-loop commit 2674e1ebd7656fb306bcff294d8d17174be78a"
+      ],
+      "migrationAction": "KEEP_CURRENT",
+      "notes": "Current reference capability for modern Closed Loop."
+    },
+    {
+      "id": "WALL_JUNCTIONS",
+      "domain": "BIM_MUTATION",
+      "status": "LIVE_VERIFIED",
+      "canonicalTarget": "current Closed Loop wall verifier",
+      "existingImplementations": [
+        "arena/t0-probes:bimexec/results/audit_t2_connections_visual_v13.json",
+        "feature/working-archicad-mvp:scripts/archicad_write_cycles/wall_joint_cycle.py"
+      ],
+      "migrationAction": "IMPORT_REGRESSION_EVIDENCE"
+    },
+    {
+      "id": "WINDOW_NATIVE_HOSTED",
+      "domain": "BIM_MUTATION",
+      "status": "LIVE_VERIFIED",
+      "canonicalTarget": "migrate into Closed Loop typed operation",
+      "existingImplementations": [
+        "archicad-capability-registry:tests/smoke/native_window_door_continuous_wall.py",
+        "feature/working-archicad-mvp:scripts/archicad_write_cycles/hosted_window_cycle.py",
+        "feature/working-archicad-mvp:scripts/archicad_executor.py"
+      ],
+      "evidence": [
+        "archicad-capability-registry docs: host Wall FA9434E5-53CE-4FE6-BD43-9B9FDD14679B; Window D5C35B66-2814-43D7-A29D-4F615F76FAAC"
+      ],
+      "migrationAction": "MIGRATE_RECIPE_NOT_RESEARCH",
+      "notes": "Preserve host GUID checks, center offset, sill, body/aperture evidence, no Morph fallback."
+    },
+    {
+      "id": "DOOR_NATIVE_HOSTED",
+      "domain": "BIM_MUTATION",
+      "status": "LIVE_VERIFIED",
+      "canonicalTarget": "migrate into Closed Loop typed operation",
+      "existingImplementations": [
+        "archicad-capability-registry:tests/smoke/native_window_door_continuous_wall.py",
+        "arena/fix-house-offline-audit-f7d38af:safe_bim_layer.py insert_door"
+      ],
+      "evidence": [
+        "archicad-capability-registry docs: Door 8B0EBA3D-DF24-46FE-B772-160E23027044"
+      ],
+      "migrationAction": "MIGRATE_RECIPE_NOT_RESEARCH"
+    },
+    {
+      "id": "DOOR_LIBRARY_PART_CUSTOM",
+      "domain": "LIBRARY",
+      "status": "LIVE_VERIFIED",
+      "canonicalTarget": "future component/library subsystem",
+      "existingImplementations": [
+        "archicad-capability-registry:Native Door library part creation and placement",
+        "research/library-system-v3"
+      ],
+      "migrationAction": "LOCATE_AND_ATTACH_RAW_EVIDENCE_BEFORE_MODERN_PROMOTION",
+      "notes": "Registry records SB_English_Panel_Door_v1 as created, hosted and read back as Door."
+    },
+    {
+      "id": "SLAB_BASIC",
+      "domain": "BIM_MUTATION",
+      "status": "LIVE_VERIFIED",
+      "canonicalTarget": "migrate into Closed Loop typed operation",
+      "existingImplementations": [
+        "archicad-capability-registry:tests/smoke/basic_slab_favorite.py",
+        "feature/working-archicad-mvp:scripts/archicad_write_cycles/hosted_slab_cycle.py",
+        "feature/working-archicad-mvp:scripts/archicad_executor.py"
+      ],
+      "evidence": [
+        "archicad-capability-registry docs: Slab 57865B70-76DD-4A4F-B367-98F95CBCD43A, 0.22 m, Top reference, 6x4 m"
+      ],
+      "migrationAction": "MIGRATE_RECIPE_NOT_RESEARCH"
+    },
+    {
+      "id": "ROOF_NATIVE_CREATE",
+      "domain": "BIM_MUTATION",
+      "status": "LIVE_VERIFIED",
+      "canonicalTarget": "Closed Loop Roof operation",
+      "existingImplementations": [
+        "feature/working-archicad-mvp:scripts/archicad_write_cycles/hosted_roof_cycle.py",
+        "feature/working-archicad-mvp:scripts/archicad_executor.py",
+        "research/archicad-full-capability-audit-20260928:audit/live-tests/2026-09-28/W4_ROOF_SEMANTICS.md"
+      ],
+      "migrationAction": "MIGRATE_CREATE_READBACK_ONLY",
+      "notes": "Creation/read-back is proven. Do not treat this as proof of canonical two-plane gable topology."
+    },
+    {
+      "id": "ROOF_SIMPLE_GABLE_CANONICAL",
+      "domain": "BIM_GEOMETRY",
+      "status": "PARTIAL",
+      "canonicalTarget": "new modern acceptance stage",
+      "existingImplementations": [
+        "archicad-capability-registry:docs/ARCHICAD_CAPABILITY_ROADMAP.md",
+        "chatgpt/archicad-modeling-standard-v1:bim_geometry_qa.py"
+      ],
+      "migrationAction": "COMPLETE",
+      "notes": "Need exactly two accepted planes, one ridge, no gaps/overlaps, read-back/topology evidence."
+    },
+    {
+      "id": "WALL_TO_ROOF_TRIM",
+      "domain": "BIM_GEOMETRY",
+      "status": "PARTIAL",
+      "canonicalTarget": "post-gable stage",
+      "existingImplementations": [
+        "archicad-capability-registry:roadmap",
+        "chatgpt/archicad-modeling-standard-v1 geometry QA contracts"
+      ],
+      "migrationAction": "COMPLETE_AFTER_GABLE"
+    },
+    {
+      "id": "RAFTER_FROM_VERIFIED_ROOF",
+      "domain": "BIM_GEOMETRY",
+      "status": "PARTIAL",
+      "canonicalTarget": "post-gable stage",
+      "existingImplementations": [
+        "chatgpt/archicad-modeling-standard-v1:bim_geometry_qa.py"
+      ],
+      "migrationAction": "COMPLETE_AFTER_ROOF_ACCEPTANCE"
+    },
+    {
+      "id": "MORPH_CREATE_READBACK",
+      "domain": "BIM_MUTATION",
+      "status": "LIVE_VERIFIED",
+      "canonicalTarget": "optional modern typed capability",
+      "existingImplementations": [
+        "feature/working-archicad-mvp:scripts/archicad_write_cycles/hosted_morph_cycle.py",
+        "feature/working-archicad-mvp:scripts/archicad_executor.py",
+        "research/archicad-full-capability-audit-20260928 broad W7 work"
+      ],
+      "migrationAction": "MIGRATE_ONLY_WHEN_NEEDED"
+    },
+    {
+      "id": "ZONE_CREATE_READBACK",
+      "domain": "BIM_MUTATION",
+      "status": "LIVE_VERIFIED",
+      "canonicalTarget": "Closed Loop Zone operation",
+      "existingImplementations": [
+        "research/archicad-full-capability-audit-20260928 W1/R4 live runs"
+      ],
+      "migrationAction": "EXTRACT_RECIPE_AND_MIGRATE"
+    },
+    {
+      "id": "BEAM_CREATE",
+      "domain": "BIM_MUTATION",
+      "status": "LIVE_VERIFIED",
+      "canonicalTarget": "future structural/detail capability",
+      "existingImplementations": [
+        "research/archicad-full-capability-audit-20260928 W1/R4"
+      ],
+      "migrationAction": "DEFER_UNTIL_PRODUCT_NEED"
+    },
+    {
+      "id": "BEAM_PROFILE",
+      "domain": "BIM_MUTATION",
+      "status": "LIVE_VERIFIED",
+      "canonicalTarget": "future profile/structure capability",
+      "existingImplementations": [
+        "archicad-capability-registry:Complex Profile creation and Beam use"
+      ],
+      "migrationAction": "LOCATE_RAW_EVIDENCE_THEN_MIGRATE"
+    },
+    {
+      "id": "BEAM_CURVED",
+      "domain": "BIM_MUTATION",
+      "status": "LIVE_VERIFIED",
+      "canonicalTarget": "future profile/structure capability",
+      "existingImplementations": [
+        "archicad-capability-registry:Horizontally curved profile Beam"
+      ],
+      "migrationAction": "LOCATE_RAW_EVIDENCE_THEN_MIGRATE",
+      "notes": "Working combination requires ModifyBeams with beamShape=HorizontallyCurved and non-zero arcAngle."
+    },
+    {
+      "id": "COLUMN_CREATE",
+      "domain": "BIM_MUTATION",
+      "status": "LIVE_VERIFIED",
+      "canonicalTarget": "future structural capability",
+      "existingImplementations": [
+        "research/archicad-full-capability-audit-20260928 W1/R4"
+      ],
+      "migrationAction": "DEFER_UNTIL_PRODUCT_NEED"
+    },
+    {
+      "id": "MESH_CREATE",
+      "domain": "BIM_MUTATION",
+      "status": "LIVE_VERIFIED",
+      "canonicalTarget": "future site capability",
+      "existingImplementations": [
+        "research/archicad-full-capability-audit-20260928 W1/R4"
+      ],
+      "migrationAction": "DEFER_UNTIL_SITE_BIM_STAGE"
+    },
+    {
+      "id": "OPENING_RECTANGULAR",
+      "domain": "BIM_MUTATION",
+      "status": "PARTIAL",
+      "canonicalTarget": "future typed Opening capability",
+      "existingImplementations": [
+        "arena/t0-probes T3",
+        "research/archicad-full-capability-audit-20260928 W1/R4"
+      ],
+      "migrationAction": "MIGRATE_OWNER_DEPENDENCY; KEEP_GEOMETRY_FAIL_CLOSED",
+      "notes": "Creation/owner binding proven; Tapir detailed read-back is insufficient for full geometry acceptance."
+    },
+    {
+      "id": "SEO_SUBTRACTION",
+      "domain": "BIM_MUTATION",
+      "status": "LIVE_VERIFIED",
+      "canonicalTarget": "controlled boolean subsystem",
+      "existingImplementations": [
+        "archicad-capability-registry:Solid Element Operations for slab target/cutters",
+        "research/archicad-full-capability-audit-20260928 W8"
+      ],
+      "migrationAction": "MIGRATE_WITH_EVALUATED_EFFECT_GATE"
+    },
+    {
+      "id": "WALL_SURFACE_MATERIAL_CHANGE",
+      "domain": "BIM_MODIFY",
+      "status": "LIVE_VERIFIED",
+      "canonicalTarget": "modern typed modify capability",
+      "existingImplementations": [
+        "feature/working-archicad-mvp:scripts/archicad_write_cycles/wall_material_cycle.py",
+        "feature/working-archicad-mvp:scripts/archicad_executor.py"
+      ],
+      "migrationAction": "MIGRATE_RECIPE_NOT_RESEARCH"
+    },
+    {
+      "id": "DELETE_EXACT_GUID",
+      "domain": "BIM_MUTATION",
+      "status": "LIVE_VERIFIED",
+      "canonicalTarget": "modern controlled delete capability",
+      "existingImplementations": [
+        "feature/working-archicad-mvp:scripts/archicad_executor.py",
+        "feature/working-archicad-mvp write-cycle restoration checks"
+      ],
+      "migrationAction": "MIGRATE_WITH_OWNERSHIP_AND_READBACK_POLICY",
+      "notes": "Do not generalize into arbitrary mass delete without separate safety contract."
+    },
+    {
+      "id": "PROFILE_CREATE",
+      "domain": "ATTRIBUTE",
+      "status": "LIVE_VERIFIED",
+      "canonicalTarget": "attribute builder",
+      "existingImplementations": [
+        "archicad-capability-registry",
+        "research/archicad-full-capability-audit-20260928"
+      ],
+      "migrationAction": "LOCATE_EVIDENCE_AND_WRAP_BUILDER"
+    },
+    {
+      "id": "COMPOSITE_CREATE_USE",
+      "domain": "ATTRIBUTE",
+      "status": "PARTIAL",
+      "canonicalTarget": "attribute builder",
+      "existingImplementations": [
+        "research/archicad-full-capability-audit-20260928 capability matrix"
+      ],
+      "migrationAction": "BUILD_FROM_RESEARCH_AND_LIVE_SEMANTICS",
+      "notes": "Composite thickness semantics are known; modern overwrite/use safety still needs canonicalization."
+    },
+    {
+      "id": "LIBRARY_PART_COMPILER_ROUTER",
+      "domain": "LIBRARY",
+      "status": "PARTIAL",
+      "canonicalTarget": "universal component library subsystem",
+      "existingImplementations": [
+        "research/library-system-v3",
+        "research/architectural-model-quality-v2"
+      ],
+      "migrationAction": "CONSOLIDATE_NOT_REWRITE",
+      "notes": "Hosted libraryPartName/compiler/router work exists, but current production evidence is fragmented."
+    },
+    {
+      "id": "WHOLE_MODEL_INVENTORY",
+      "domain": "READ",
+      "status": "IMPLEMENTED_NOT_LIVE",
+      "canonicalTarget": "modern model observation layer",
+      "existingImplementations": [
+        "chatgpt/minimal-archicad-inventory:archicad_inventory.py"
+      ],
+      "migrationAction": "REUSE_OR_MERGE_WITH_MODEL_DUMP",
+      "notes": "Traverses StoryItem databases, de-duplicates by GUID, returns type/story counts."
+    },
+    {
+      "id": "MODEL_DUMP_V1",
+      "domain": "READ",
+      "status": "LIVE_VERIFIED",
+      "canonicalTarget": "current factual observation source where appropriate",
+      "existingImplementations": [
+        "feature/working-archicad-mvp Model Dump v1"
+      ],
+      "migrationAction": "KEEP_AS_EVIDENCE_SOURCE"
+    },
+    {
+      "id": "SELECTION_CONTEXT_GITHUB_BRIDGE",
+      "domain": "TRANSPORT",
+      "status": "LIVE_VERIFIED",
+      "canonicalTarget": "transport/context subsystem",
+      "existingImplementations": [
+        "prototype/s2.4-archicad-context-provider-20260929",
+        "docs/S2_4_ARCHICAD_CONTEXT_LIVE_EVIDENCE.md"
+      ],
+      "migrationAction": "REUSE_OR_FORMALLY_SUPERSEDE",
+      "notes": "GITHUB_ARCHICAD_E2E_LIVE_VERIFIED including restart/dedup/privacy checks."
+    },
+    {
+      "id": "CHAT_TYPED_WALL_WRITE_BRIDGE",
+      "domain": "TRANSPORT",
+      "status": "OFFLINE_VERIFIED",
+      "canonicalTarget": "transport into Closed Loop",
+      "existingImplementations": [
+        "feature/chat-bridge-wall-write-mvp:sync_bridge/wall_write.py",
+        "feature/chat-bridge-wall-write-mvp:sync_bridge/host.py"
+      ],
+      "migrationAction": "MERGE_SEMANTICS_WITH_CURRENT_CLOSED_LOOP"
+    },
+    {
+      "id": "RUNTIME_UNKNOWN_OUTCOME_RECONCILIATION",
+      "domain": "SAFETY",
+      "status": "LIVE_VERIFIED",
+      "canonicalTarget": "Stage 4 / safe runtime",
+      "existingImplementations": [
+        "arena/t0-probes T4/T5",
+        "arena/runtime-safety-fix-ac01:safe_bim_runtime.py"
+      ],
+      "migrationAction": "IMPORT_AS_REGRESSION_REFERENCE"
+    },
+    {
+      "id": "RUNTIME_MODEL_DRIFT_BLOCK",
+      "domain": "SAFETY",
+      "status": "LIVE_VERIFIED",
+      "canonicalTarget": "Stage 4 / Closed Loop",
+      "existingImplementations": [
+        "arena/t0-probes:bimexec/results/audit_t6_model_drift_live_v13.json",
+        "work/stage2-orchestrator-skeleton"
+      ],
+      "migrationAction": "PRESERVE_BOTH_PREWRITE_AND_ORCHESTRATOR_GATES"
+    },
+    {
+      "id": "RUNTIME_DUPLICATE_DELIVERY",
+      "domain": "SAFETY",
+      "status": "OFFLINE_VERIFIED",
+      "canonicalTarget": "Stage 4 / bridge/runtime",
+      "existingImplementations": [
+        "arena/t0-probes T8",
+        "bridge store/job claiming tests"
+      ],
+      "migrationAction": "REGRESSION_TEST_IN_STAGE4"
+    },
+    {
+      "id": "STAGE0_INTAKE",
+      "domain": "DESIGN_ENGINE",
+      "status": "OFFLINE_VERIFIED",
+      "canonicalTarget": "canonical upstream design pipeline",
+      "existingImplementations": [
+        "work/design-engine-stage0",
+        "chatgpt/project-intake-stage0-v1"
+      ],
+      "migrationAction": "KEEP"
+    },
+    {
+      "id": "FUNCTIONAL_PROGRAM",
+      "domain": "DESIGN_ENGINE",
+      "status": "OFFLINE_VERIFIED",
+      "canonicalTarget": "canonical upstream design pipeline",
+      "existingImplementations": [
+        "work/design-functional-program-v0"
+      ],
+      "migrationAction": "KEEP"
+    },
+    {
+      "id": "DESIGN_INTENT",
+      "domain": "DESIGN_ENGINE",
+      "status": "OFFLINE_VERIFIED",
+      "canonicalTarget": "canonical upstream design pipeline",
+      "existingImplementations": [
+        "work/design-intent-v0"
+      ],
+      "migrationAction": "KEEP"
+    },
+    {
+      "id": "SITE_CONTEXT",
+      "domain": "DESIGN_ENGINE",
+      "status": "OFFLINE_VERIFIED",
+      "canonicalTarget": "canonical upstream design pipeline",
+      "existingImplementations": [
+        "work/site-context-model-v0"
+      ],
+      "migrationAction": "KEEP"
+    },
+    {
+      "id": "PROJECT_CONSTRAINT_INPUT",
+      "domain": "DESIGN_ENGINE",
+      "status": "OFFLINE_VERIFIED",
+      "canonicalTarget": "canonical upstream design pipeline",
+      "existingImplementations": [
+        "work/project-constraint-input-v0"
+      ],
+      "migrationAction": "KEEP"
+    },
+    {
+      "id": "PROJECT_NORMATIVE_BUNDLE",
+      "domain": "NORMATIVE",
+      "status": "OFFLINE_VERIFIED",
+      "canonicalTarget": "canonical normative selector/snapshot mechanism",
+      "existingImplementations": [
+        "work/project-normative-bundle-v0"
+      ],
+      "migrationAction": "WIRE_REAL_VERIFIED_RULE_LIBRARY",
+      "notes": "Mechanism is implemented; existing planning demo uses synthetic normative fixtures."
+    },
+    {
+      "id": "CONSTRAINT_COMPILATION",
+      "domain": "DESIGN_ENGINE",
+      "status": "OFFLINE_VERIFIED",
+      "canonicalTarget": "canonical planning input compiler",
+      "existingImplementations": [
+        "work/constraint-compilation-v0"
+      ],
+      "migrationAction": "KEEP_AND_FEED_REAL_BUNDLE"
+    },
+    {
+      "id": "PLANNING_ENGINE_RECTANGULAR_V0",
+      "domain": "DESIGN_ENGINE",
+      "status": "OFFLINE_VERIFIED",
+      "canonicalTarget": "canonical first planning engine",
+      "existingImplementations": [
+        "work/planning-engine-v0:planning_engine.py",
+        "work/planning-engine-v0:examples/planning_house_v0.py"
+      ],
+      "evidence": [
+        "docs/PLANNING_ENGINE_V0.md documents 70 requested scenarios plus additional regression coverage"
+      ],
+      "migrationAction": "KEEP; ADD_BIM_TRANSLATOR_DOWNSTREAM"
+    },
+    {
+      "id": "HOUSE_PRIMITIVES_OLD",
+      "domain": "ASSEMBLY",
+      "status": "IMPLEMENTED_NOT_LIVE",
+      "canonicalTarget": "source recipes for modern migration",
+      "existingImplementations": [
+        "arena/fix-house-offline-audit-f7d38af:safe_bim_layer.py",
+        "arena/fix-house-offline-audit-f7d38af:test_house.py",
+        "arena/fix-house-offline-audit-f7d38af:continue_test_house.py"
+      ],
+      "migrationAction": "MINE_RECIPES; DO_NOT_PROMOTE_WHOLE_HOUSE_WITHOUT_NEW_E2E"
+    },
+    {
+      "id": "BIM_QA_NATIVE_STORY_FRAGMENTATION",
+      "domain": "QA",
+      "status": "OFFLINE_VERIFIED",
+      "canonicalTarget": "modern post-readback QA",
+      "existingImplementations": [
+        "chatgpt/archicad-modeling-standard-v1:bim_qa.py"
+      ],
+      "evidence": [
+        "docs/BIM_QA_VALIDATION.md reports 110 tests PASS"
+      ],
+      "migrationAction": "WIRE_TO_FACTUAL_MODEL_EVIDENCE"
+    },
+    {
+      "id": "BIM_GEOMETRY_QA_ROOF_WALL_RAFTER",
+      "domain": "QA",
+      "status": "OFFLINE_VERIFIED",
+      "canonicalTarget": "modern post-readback QA",
+      "existingImplementations": [
+        "chatgpt/archicad-modeling-standard-v1:bim_geometry_qa.py"
+      ],
+      "evidence": [
+        "docs/BIM_GEOMETRY_QA_VALIDATION.md reports 21 tests PASS"
+      ],
+      "migrationAction": "ADD_LIVE_GEOMETRY_COLLECTOR"
+    },
+    {
+      "id": "BIM_COORDINATION_QA",
+      "domain": "QA",
+      "status": "OFFLINE_VERIFIED",
+      "canonicalTarget": "modern post-readback QA",
+      "existingImplementations": [
+        "chatgpt/archicad-modeling-standard-v1:bim_coordination_qa.py"
+      ],
+      "evidence": [
+        "docs/BIM_COORDINATION_QA_VALIDATION.md reports 21 tests PASS"
+      ],
+      "migrationAction": "WIRE_VERIFIED_RULE_REGISTRY_AND_LIVE_MEASUREMENTS"
+    },
+    {
+      "id": "CLOSED_LOOP_STAGE2",
+      "domain": "ORCHESTRATION",
+      "status": "OFFLINE_VERIFIED",
+      "canonicalTarget": "canonical orchestration shell",
+      "existingImplementations": [
+        "work/stage2-orchestrator-skeleton"
+      ],
+      "evidence": [
+        "completion commit d6ed3b071c1e7d17b8d819377e1984c80dd9ed33"
+      ],
+      "migrationAction": "KEEP"
+    },
+    {
+      "id": "CLOSED_LOOP_STAGE3_WALL",
+      "domain": "ORCHESTRATION",
+      "status": "LIVE_VERIFIED",
+      "canonicalTarget": "canonical orchestration shell",
+      "existingImplementations": [
+        "work/stage3-live-wall-closed-loop"
+      ],
+      "evidence": [
+        "commit 2674e1ebd7656fb306bcff294d8d17174be78a"
+      ],
+      "migrationAction": "KEEP_AS_REFERENCE_PATTERN"
+    },
+    {
+      "id": "AUDIT_PACK",
+      "domain": "EVIDENCE",
+      "status": "OFFLINE_VERIFIED",
+      "canonicalTarget": "canonical reviewable evidence format",
+      "existingImplementations": [
+        "work/audit-pack-fix"
+      ],
+      "evidence": [
+        "completion commit 03c64733bb2b4f59970f5247a3ed89e1236f3090"
+      ],
+      "migrationAction": "KEEP"
+    },
+    {
+      "id": "CLOSED_LOOP_STAGE4_HARDENING",
+      "domain": "ORCHESTRATION",
+      "status": "IMPLEMENTED_NOT_LIVE",
+      "canonicalTarget": "complete before Stage 5",
+      "existingImplementations": [
+        "local reported branch work/stage4-live-hardening commit f297572 (not published to GitHub at revision time)"
+      ],
+      "evidence": [
+        "reported 128/128 offline tests PASS",
+        "reported seven offline Audit Packs PASS",
+        "current Archicad target preflight subsequently reported PASS for NativeGeometry_Full_Test_20261004.pln"
+      ],
+      "migrationAction": "RUN_ONLY_MANDATORY_LIVE_ACCEPTANCE_AND_COMPARE_TO_T4_T9",
+      "notes": "Do not call VERIFIED until live scenarios and evidence are published."
+    },
+    {
+      "id": "BIM_TRANSLATOR_V0",
+      "domain": "INTEGRATION",
+      "status": "IMPLEMENTED_NOT_LIVE",
+      "canonicalTarget": "next genuinely missing integration capability",
+      "existingImplementations": [],
+      "migrationAction": "IMPLEMENT_AFTER_STAGE4",
+      "notes": "Translate Planning Engine geometry/intent into typed closed-loop execution plan; never claim predicted geometry as factual state."
+    },
+    {
+      "id": "END_TO_END_SIMPLE_HOUSE",
+      "domain": "INTEGRATION",
+      "status": "IMPLEMENTED_NOT_LIVE",
+      "canonicalTarget": "first product-level acceptance",
+      "existingImplementations": [
+        "old house primitives",
+        "offline Planning Engine",
+        "isolated live BIM recipes",
+        "modern Closed Loop wall path"
+      ],
+      "migrationAction": "ASSEMBLE_AFTER_TRANSLATOR",
+      "notes": "No single modern evidence chain yet proves brief -> planner -> translator -> Archicad -> QA -> correction -> VERIFIED."
+    },
+    {
+      "id": "REJECTED_MORPH_WINDOWS",
+      "domain": "POLICY",
+      "status": "REJECTED",
+      "canonicalTarget": "none",
+      "existingImplementations": [],
+      "migrationAction": "FORBID"
+    },
+    {
+      "id": "REJECTED_FRAGMENTED_WALL_OPENINGS",
+      "domain": "POLICY",
+      "status": "REJECTED",
+      "canonicalTarget": "none",
+      "existingImplementations": [],
+      "migrationAction": "FORBID"
+    },
+    {
+      "id": "REJECTED_STEPPED_GABLE_WALLS",
+      "domain": "POLICY",
+      "status": "REJECTED",
+      "canonicalTarget": "none",
+      "existingImplementations": [],
+      "migrationAction": "FORBID"
+    },
+    {
+      "id": "REJECTED_BLIND_RETRY",
+      "domain": "POLICY",
+      "status": "REJECTED",
+      "canonicalTarget": "none",
+      "existingImplementations": [],
+      "migrationAction": "FORBID"
+    }
+  ],
+  "nextExecutionOrder": [
+    "Complete Stage 4 live acceptance using old T4/T5/T6/T8/T9 as regression references.",
+    "Migrate Window + Door + Slab + Zone into the modern Closed Loop; no Tapir rediscovery unless an old recipe fails.",
+    "Migrate exact-GUID Delete and Wall material modify only as required by the house flow.",
+    "Implement BIM Translator v0 from Planning Engine candidate to typed operations.",
+    "Run first simple-house end-to-end acceptance without claiming an unverified Roof as complete.",
+    "Complete canonical simple gable Roof + wall trim + geometry QA.",
+    "Wire the real VERIFIED normative library into Project Normative Bundle / Constraint Compilation."
+  ]
+}
