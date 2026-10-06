@@ -18,3 +18,8 @@ with tempfile.TemporaryDirectory() as td:
         a=[r for r in rows(root/name) if has(r)]
         print('FILE',name,'COUNT',len(a))
         for r in a[:3]: print(json.dumps(r,ensure_ascii=False,indent=2))
+
+print('GENERIC VARIANT SAMPLE')
+for r in rows(root/'component_variants_v2.4.jsonl')[:2]: print(json.dumps(r,ensure_ascii=False,indent=2))
+print('GENERIC QUEUE SAMPLE')
+for r in rows(root/'dimension_binding_queue_v2.4.jsonl')[:2]: print(json.dumps(r,ensure_ascii=False,indent=2))
