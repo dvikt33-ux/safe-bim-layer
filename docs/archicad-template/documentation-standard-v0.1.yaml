@@ -1,0 +1,74 @@
+documentation_standard_version: 0.1
+status: draft
+
+mvo:
+  - MVO_01_WORK_FULL
+  - MVO_10_AR_DOCUMENT
+  - MVO_20_COORD
+  - MVO_30_SITE
+  - MVO_40_PRESENTATION
+
+graphic_overrides:
+  GO_10_QA_DATA:
+    priority: [QA_ERROR, QA_WARNING, DATA_PLACEHOLDER, DATA_UNVERIFIED, REFERENCE_SUBDUE]
+  GO_11_QA_NORM:
+    priority: [NORM_ERROR, NORM_WARNING, NORM_BLOCKED_SOURCE, NORM_NOT_CHECKED, NORM_PASS_SUBTLE]
+  GO_20_PB_FIRE_COMPARTMENTS: {}
+  GO_21_PB_EVACUATION: {}
+  GO_30_MEP_SYSTEMS: {}
+  GO_40_AUTOMATION_STATE: {}
+  GO_90_PRESENTATION: {}
+
+core_schedules:
+  - QA_01_ELEMENTS_NO_STABLE_TYPE
+  - QA_02_DATA_STATUS
+  - QA_03_NORM_ERRORS
+  - QA_04_AUTOMATION_STATE
+  - QA_05_MATERIALS
+  - AR_01_ZONE_REGISTER
+  - AR_02_DOOR_REGISTER
+  - AR_03_WINDOW_REGISTER
+  - AR_04_WALL_TYPES
+  - MAT_01_BUILDING_MATERIALS
+  - MAT_02_COMPOSITES
+
+masters:
+  - A4_P
+  - A3_L
+  - A3_P
+  - A2_L
+  - A2_P
+  - A1_L
+  - A1_P
+  - A0_L
+
+layout_subsets:
+  - 00_GENERAL
+  - 01_AR
+  - 02_KR
+  - 03_PB
+  - 04_VK
+  - 05_OV
+  - 06_EOM
+  - 07_SS
+  - 08_GP
+  - 09_TX
+  - 90_QA_INTERNAL
+
+publisher_sets:
+  PUB_01_PDF_ISSUE: {source: layouts, format: PDF}
+  PUB_02_PDF_INTERNAL: {source: qa_internal, format: PDF}
+  PUB_10_DWG_ISSUE: {translator: DWG_OUT_SPDS, format: DWG}
+  PUB_11_DWG_COMPAT: {translator: DWG_OUT_COMPAT, format: DWG}
+  PUB_20_IFC_COORD: {translator: IFC_COORD, format: IFC}
+  PUB_21_IFC_ISSUE: {translator: IFC_ISSUE, format: IFC}
+  PUB_30_BIMX: {optional: true, format: BIMx}
+
+issue_gate:
+  qa_error_allowed_without_waiver: false
+  blocked_source_must_be_reported: true
+  drawing_update_required: true
+  font_check_required: true
+  missing_library_part_check_required: true
+  coordinate_check_for_ifc_dwg: true
+  publisher_log_required: true
