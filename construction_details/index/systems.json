@@ -1,0 +1,55 @@
+{
+  "release": "v2.2",
+  "groups": {
+    "attic_floor": [
+      "ROCKWOOL_ATTIC_SLAB"
+    ],
+    "ceiling": [
+      "ROCKWOOL_SUSPENDED_CEILING"
+    ],
+    "facade": [
+      "ROCKFACADE_2022"
+    ],
+    "floor": [
+      "ROCKWOOL_FLOORS_PIPES"
+    ],
+    "mansard": [
+      "ROCKWOOL_MANSARD"
+    ],
+    "partition": [
+      "ROCKWOOL_PARTITION_METAL_FRAME"
+    ],
+    "pitched_roof": [
+      "ARMO_SELFLOCK_ROOF",
+      "BRAAS_ROOF_DETAILS",
+      "BRAAS_ROOF_TECH",
+      "ROCKWOOL_ROOF_PROFILED_STEEL",
+      "ROCKWOOL_ROOF_PVC"
+    ],
+    "screen_wall": [
+      "MESTERRA_BREEZE_BLOCK"
+    ],
+    "siteworks": [
+      "BRAER_PAVING_2020"
+    ],
+    "terrace": [
+      "POLIVAN_WPC_2017"
+    ],
+    "ventilated_facade": [
+      "FAVORIT_COMPOSITE_PANEL",
+      "FAVORIT_SHEET_MATERIALS",
+      "KLEYKO_PANEL_FIX",
+      "RONSON_500_TILE"
+    ],
+    "wall": [
+      "KAIMAN_KERAKAM_WALL",
+      "LSR_WALL_GUIDE_2022",
+      "POROTHERM_LOWRISE",
+      "ROCKWOOL_PROFILED_WALL",
+      "RSM_FLEXIBLE_TIES_2024"
+    ],
+    "wall_lining": [
+      "ROCKWOOL_WALL_LINING"
+    ]
+  }
+}
