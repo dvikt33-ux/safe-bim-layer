@@ -19,7 +19,31 @@ from .orchestrator import fingerprint, StaleBeforeWrite
 ROOT = Path(__file__).resolve().parents[1]
 COMMAND = 'Продолжи последнюю созданную стену сначала на 1 метр, затем ещё на 0,5 метра и проверь результат.'
 TOL = 1e-7
-MAIN = '72e9be15ac3b943d7b6f0c46eaa45aa5798d56bc'
+MAIN_BASELINE = '72e9be15ac3b943d7b6f0c46eaa45aa5798d56bc'
+PROTECTED_MAIN_PATHS = (
+    'archicad-addon', 'scripts', 'closed_loop',
+    'tests_stage2', 'tests_stage3', 'tests_stage4_live', 'tests_audit_pack',
+    'outputs/closed-loop-stage1', 'outputs/closed-loop-stage2',
+    'outputs/closed-loop-stage3', 'outputs/closed-loop-stage4',
+    'safe_bim_layer.py', 'qwen_safe_bim_integration.py',
+)
+
+def main_runtime_guard():
+    """Allow unrelated main commits, but fail if protected BIM runtime/evidence paths changed."""
+    subprocess.run(['git', 'fetch', '--quiet', 'origin', 'main'], cwd=ROOT,
+                   check=True, timeout=60)
+    current = subprocess.check_output(['git', 'rev-parse', 'FETCH_HEAD'],
+                                      cwd=ROOT, text=True, timeout=30).strip()
+    changed = subprocess.check_output(
+        ['git', 'diff', '--name-only', MAIN_BASELINE, current, '--', *PROTECTED_MAIN_PATHS],
+        cwd=ROOT, text=True, timeout=30).splitlines()
+    return {
+        'status': 'PASS' if not changed else 'FAIL',
+        'baselineMain': MAIN_BASELINE,
+        'currentMain': current,
+        'protectedPaths': list(PROTECTED_MAIN_PATHS),
+        'changedProtectedPaths': changed,
+    }
 DESCRIPTIONS = [
     'Same project identity throughout job', 'Iteration 1 automatically selects source Wall',
     'Iteration 1 physically creates Wall', 'Iteration 1 GUID confirmed in read-back',
@@ -31,7 +55,7 @@ DESCRIPTIONS = [
     'No stale action executed', 'Factual read-back after each mutation',
     'Both operations belong to one goalId', 'One initial user goal command',
     'Required FAIL = 0', 'Required NOT_VERIFIED = 0', 'No UNKNOWN_OUTCOME',
-    'Stage 1 v0 regression path still PASS', 'All Stage 2 tests PASS', 'main unchanged']
+    'Stage 1 v0 regression path still PASS', 'All Stage 2 tests PASS', 'protected main runtime/evidence baseline unchanged']
 
 
 def save(path, value):
@@ -250,7 +274,7 @@ class LiveSession:
         values = {f'C{i:02}': False for i in range(1, 25)}
         values.update(C01=True, C18=True, C20=True, C21=True,
             C22=self.regression_report.get('status') == 'PASS', C23=self.offline_report.get('status') == 'PASS',
-            C24=getattr(self, 'main_current', MAIN) == MAIN)
+            C24=getattr(self, 'main_guard_pass', True))
         if first:
             values.update(C02=first['automaticSelection'], C03=True, C04=True,
                 C05=abs(first['length']-1.0) <= TOL, C06=first['jointDistance'] <= TOL, C07=True)
@@ -374,9 +398,10 @@ class LiveReadBack:
             staleVerdict='CURRENT', readbackPath=str(path), executorStatus=result.status)
         session.rows.append(row)
         if number == 2:
-            remote = subprocess.check_output(['git', 'ls-remote', 'origin', 'refs/heads/main'], cwd=ROOT, text=True, timeout=30)
-            session.main_current = remote.split()[0]
-            save(session.output / 'main-final-readback.json', {'command': 'git ls-remote origin refs/heads/main', 'actual': remote, 'expected': MAIN})
+            main_guard = main_runtime_guard()
+            session.main_current = main_guard['currentMain']
+            session.main_guard_pass = main_guard['status'] == 'PASS'
+            save(session.output / 'main-final-readback.json', main_guard)
         save(session.step / 'summary.json', row)
         # This is the fresh actual post-write observation, not the v0 PASS flag.
         values = session.values()
