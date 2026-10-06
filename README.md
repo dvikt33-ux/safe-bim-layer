@@ -1,156 +1,122 @@
-# Working Archicad MVP
+# Safe BIM Layer — Archicad Closed Loop
 
-This branch contains the working Archicad Model Dump v1 reader and six small,
-geometry-derived create/read-back/delete cycles. The Python tools use only the
-standard library. They talk to the Tapir JSON API on `127.0.0.1:19723`.
+Safe BIM Layer is an evidence-first control layer for Archicad 29 over the Tapir JSON API.
+The active development path is no longer the original "working MVP" alone: the current
+system wraps the proven v0 executor in a closed loop that observes the live model, plans
+one typed mutation, executes it, reads the result back, audits the evidence, and only
+returns `VERIFIED` when every required criterion passes.
 
-## Start Archicad and open the project
+## Current architecture
 
-1. Start Archicad 29.
-2. Manually open the one intended test PLN in Archicad. The MVP never opens,
-   switches, or saves a project for you.
-3. Ensure the Tapir add-on with Model Dump v1 is loaded. It exposes the local
-   JSON bridge at port `19723` while Archicad is running.
-
-## Build and load the Model Dump add-on
-
-The native command is an overlay on the stock Tapir add-on. It copies a Git
-snapshot into the build directory, adds `GetModelDumpV1` registration there,
-and leaves the supplied Tapir checkout unchanged. The verified source ref is
-Tapir commit `d2dfeec`.
-
-```powershell
-git clone https://github.com/ENZYME-APD/tapir-archicad-automation.git C:\src\tapir
-$tapir = 'C:\src\tapir'
-$devkit = 'C:\Graphisoft\Archicad 29 DevKit\Support'
-python .\archicad-addon\Examples\build_model_dump.py `
-  --tapir-repo $tapir --ref d2dfeec --devkit $devkit `
-  --build "$env:TEMP\safe-bim-mvp-build"
+```text
+USER GOAL
+   |
+   v
+PROJECT / CLOSED-LOOP ORCHESTRATOR
+   |
+   +--> OBSERVE ---- fresh factual Model Dump v1
+   |
+   +--> PLAN ------- typed, model-bound action
+   |
+   +--> EXECUTE ---- guarded Tapir mutation
+   |
+   +--> READ_BACK -- fresh factual model state
+   |
+   +--> AUDIT ------ acceptance criteria + evidence
+   |
+   +--> REPLAN / BLOCK / UNKNOWN_OUTCOME / VERIFIED
 ```
 
-In Archicad Add-On Manager, load
-`%TEMP%\safe-bim-mvp-build\build\TapirAddOn_AC29_Win.apx`. Restart Archicad
-if replacing an already loaded Tapir add-on. Do not load two Tapir builds in
-the same Archicad instance.
+The normative/audit layer is intentionally separate from physical BIM mutation. The
+executor does not get to declare success by itself; factual read-back is mandatory.
 
-## Read the current model
+## Development rule
 
-With the intended PLN open and the add-on loaded, run:
+One stage must be formally complete before the next capability is added.
 
-```powershell
-python .\archicad-addon\Examples\model_dump_v1.py `
-  --port 19723 --out "$env:TEMP\safe-bim-mvp\model-dump.json"
-```
+- Stage 1 — frozen v0 Wall regression: **PASS**
+- Stage 2 — closed-loop orchestrator skeleton: **PASS**
+- Stage 3 — first live two-step Wall loop: **PASS**
+- Stage 4 — reliability hardening of that same Wall loop: **NOT YET VERIFIED**
+- Stage 5 — prohibited until Stage 4 passes
 
-The client writes normalized JSON, the raw native response, the request, and
-metrics beside the output file. A compact one-Morph excerpt is checked in at
-[examples/model_dump_v1.sample.json](examples/model_dump_v1.sample.json); it is
-a subset of a live dump, not a full project dump.
+See [docs/CLOSED_LOOP_IMPLEMENTATION_STAGES.md](docs/CLOSED_LOOP_IMPLEMENTATION_STAGES.md)
+for the full gate policy.
 
-## Run a temporary write cycle
+## Active Stage 4
 
-Write cycles create an element from the current model geometry, read it back,
-and delete the returned GUID. Keep the intended test PLN open. Cycle evidence
-goes to `%TEMP%\safe-bim-mvp-evidence` by default; set
-`$env:SAFE_BIM_MVP_EVIDENCE` to choose another local directory.
+Stage 4 keeps the exact same Wall capability and hardens it against stale plans,
+transport ambiguity, crashes, duplicate mutation, missing read-back, no-progress and
+iteration-limit failures.
 
-```powershell
-python .\scripts\archicad_write_cycles\wall_joint_cycle.py
-python .\scripts\archicad_write_cycles\wall_material_cycle.py
-python .\scripts\archicad_write_cycles\hosted_window_cycle.py
-python .\scripts\archicad_write_cycles\hosted_slab_cycle.py
-python .\scripts\archicad_write_cycles\hosted_roof_cycle.py
-python .\scripts\archicad_write_cycles\hosted_morph_cycle.py
-```
+The active implementation is under:
 
-## Verified operations
+- `closed_loop/orchestrator.py`
+- `closed_loop/wall_attempts.py`
+- `closed_loop/live_wall.py`
+- `closed_loop/live_wall_hardening.py`
+- `closed_loop/stage4_preflight.py`
+- `closed_loop/stage4_fixture.py`
+- `closed_loop/stage4_live_scenario.py`
 
-| Operation | Result |
-| --- | --- |
-| Model Dump v1 | PASS |
-| Geometry-aware Wall create and joint | PASS |
-| Wall material inheritance and write | PASS |
-| Hosted Window placement | PASS |
-| Slab geometry and material | PASS |
-| Roof geometry create/read-back/delete | PASS |
-| Roof surface-material write | Known blocker: current native command surface does not write a single-plane Roof surface override |
-| Morph geometry create/read-back/delete | PASS |
+The rebound test-project flow uses an explicitly pinned disposable PLN plus an isolated
+synthetic Wall fixture. It must never fall back to arbitrary building Walls.
 
-The Roof surface-material blocker is recorded separately and is not modified
-by this MVP.
+Detailed procedure: [docs/STAGE4_LIVE_HARDENING.md](docs/STAGE4_LIVE_HARDENING.md).
 
-## Request-driven executor
+## Proven lower-level BIM capabilities
 
-`scripts/archicad_executor.py` runs one structured request per invocation. It
-always reads a fresh Model Dump first. `dry-run` returns the calculated native
-command and parameters without changing the model. `execute` creates the
-element and leaves it in the open model. `delete` removes only the GUID named
-in that request.
+The older executor/recipe layer remains useful and is being migrated upward rather than
+rewritten. It contains proven or partially proven recipes for Wall, Window, Door, Slab,
+Roof, Morph and related read-back operations. These capabilities are **not automatically
+closed-loop VERIFIED** merely because their lower-level recipes work.
 
-Supported actions are `create_wall`, `change_wall_material`, `create_window`,
-`create_slab`, `create_roof`, `create_morph`, and `delete`. For chained Walls,
-pass the prior created GUID as `sourceGuid`; the next invocation derives its
-start point and direction from that Wall's fresh reference line.
+Main entry points:
 
-Example request (`request.json`):
+- `archicad-addon/Examples/model_dump_v1.py` — factual Model Dump v1
+- `scripts/archicad_executor.py` — typed request executor
+- `scripts/archicad_chat_executor.py` — narrow Russian-language adapter
+- `scripts/archicad_write_cycles/` — geometry-derived native write/read-back recipes
 
-```json
-{
-  "action": "create_wall",
-  "mode": "execute",
-  "instruction": "Continue the selected wall",
-  "sourceGuid": "GUID-FROM-A-PRIOR-RESPONSE",
-  "length": 1.0
-}
-```
+## Evidence and fail-closed rules
 
-Run it from the repository root:
+The project treats the following as hard invariants:
 
-```powershell
-python .\scripts\archicad_executor.py .\request.json
-```
+1. A write is never considered complete without factual read-back.
+2. `UNKNOWN_OUTCOME` never causes a blind retry.
+3. A stale model invalidates the planned action before physical execution.
+4. Project identity is pinned before writes.
+5. Mutation attempt identity is durable before dispatch.
+6. Historical evidence is not rewritten to make a newer run pass.
+7. Offline fixtures are never promoted to live proof.
+8. Stage status is `PASS` only when every required criterion is `PASS`.
 
-Use `"mode": "dry-run"` to calculate without creating. A create response
-contains `createdGuid`, `sourceGuids`, derived geometry, and read-back
-verification. Example response:
+## Repository map
 
-```json
-{
-  "status": "PASS",
-  "action": "create_wall",
-  "createdGuid": "NEW-GUID",
-  "sourceGuids": ["SOURCE-GUID"],
-  "geometry": {"start": {"x": 10.0, "y": 4.0}, "end": {"x": 11.0, "y": 4.0}},
-  "verification": {"jointDistance": 0.0, "homeStoryMatches": true, "pass": true},
-  "retained": true
-}
-```
+The repository contains several generations of the project. Do not assume every root
+file is part of the current runtime.
 
-To remove a retained element, submit a separate request:
+- **Current closed-loop core:** `closed_loop/`, `tests_stage2/`,
+  `tests_stage3/`, `tests_stage4_live/`, `tests_audit_pack/`
+- **Current Archicad bridge/executor:** `archicad-addon/`, `scripts/`
+- **Evidence:** `outputs/closed-loop-stage1/`, `outputs/closed-loop-stage3/`,
+  `outputs/closed-loop-stage4/`
+- **Legacy/research generation:** old v0.1 Safe BIM/Qwen/Tapir-1.5.8 files in the
+  repository root
+- **Coordination/history:** `bimexec/`, Arena/Work handoff documents
 
-```json
-{"action":"delete","mode":"execute","guid":"GUID-FROM-RESPONSE"}
-```
+The canonical classification and cleanup policy is in
+[docs/PROJECT_MAP.md](docs/PROJECT_MAP.md).
 
-Each invocation writes its fresh dump and native API evidence under
-`%TEMP%\safe-bim-mvp-evidence\executor` by default. No dump or evidence is
-written into the repository.
+## Current status
 
-## Plain language adapter
+For the latest verified vs unverified boundary, use
+[docs/CURRENT_STATUS.md](docs/CURRENT_STATUS.md). That file is the canonical human-readable
+status page; historical reports remain immutable evidence, not the current project summary.
 
-The thin `scripts/archicad_chat_executor.py` adapter reads a fresh dump,
-translates a small set of Russian instructions into an `archicad_executor.py`
-request, then returns its read-back result. It currently translates Wall
-continuations and Slab creation. Window placement returns `NEEDS_SELECTION`
-with Wall GUID candidates because this instruction alone does not identify a
-host in a large model.
+## Safety note
 
-```powershell
-python .\scripts\archicad_chat_executor.py "Продолжи последнюю созданную стену ещё на 1 метр."
-python .\scripts\archicad_chat_executor.py '{"instruction":"Продолжи последнюю созданную стену ещё на 1 метр","mode":"dry-run"}'
-```
-
-For “last created Wall”, the adapter uses the unique short straight Wall whose
-begin point joins one collinear predecessor and whose end remains open. It
-returns `NEEDS_SELECTION` when the current geometry does not yield one unique
-candidate. It does not use the element array order as creation time.
+The live tools operate on the Archicad instance listening on `127.0.0.1:19723`.
+Use only a disposable/test PLN for fault-injection runs. The code intentionally does not
+silently switch projects, reinterpret a mismatched project as equivalent, or weaken a
+failed acceptance gate.
