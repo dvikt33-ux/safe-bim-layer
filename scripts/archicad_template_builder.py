@@ -41,6 +41,8 @@ LAYER_SPEC = SPEC / "layer-registry-v0.1.yaml"
 GRAPHICS_SPEC = SPEC / "graphics-registry-v0.1.yaml"
 BASELINE_SPEC = SPEC / "project-baseline-v0.1.yaml"
 ATTRIBUTE_REGISTRY = SPEC / "attribute-registry-v0.1.yaml"
+SURFACE_REGISTRY = SPEC / "surface-registry-v0.1.yaml"
+FILL_REGISTRY = SPEC / "fill-registry-v0.1.yaml"
 
 SAFE_CORE_COMMANDS = {
     "GetProjectInfo", "GetProjectInfoFields", "CreateProjectInfoFields",
@@ -541,14 +543,70 @@ def apply_safe_core(api: Tapir, allow_nonempty=False):
 
 
 
+def get_fill_runtime_index(api: Tapir):
+    """Map canonical fill roles/names to actual Fill headers without duplicating singleton fills."""
+    registry = load_yaml(FILL_REGISTRY)
+    headers = attribute_headers(api, "Fill")
+    by_name = index_headers(headers)
+    ids = [{"attributeId": h["attributeId"]} for h in headers]
+    details_result = api.call(
+        "GetFills",
+        {"attributeIds": ids, "fields": ["subType", "useForWalls"]},
+    )
+    detail_by_name = {
+        row["name"]: row for row in details_result.get("fills", [])
+        if isinstance(row, dict) and "name" in row
+    }
+
+    resolved = {}
+    diagnostics = []
+    for item in registry.get("fills", []):
+        canonical = item.get("canonical_role") or item.get("name")
+        if item.get("creation") == "resolve_existing_singleton":
+            subtype = item["required_subtype"]
+            matches = [
+                h for h in headers
+                if detail_by_name.get(h["name"], {}).get("subType") == subtype
+            ]
+            if len(matches) == 1:
+                resolved[canonical] = matches[0]
+                diagnostics.append({
+                    "canonical": canonical,
+                    "state": "RESOLVED_SINGLETON",
+                    "actualName": matches[0]["name"],
+                    "index": matches[0]["index"],
+                })
+            else:
+                diagnostics.append({
+                    "canonical": canonical,
+                    "state": "BLOCKED_SINGLETON_RESOLUTION",
+                    "requiredSubtype": subtype,
+                    "matches": [x["name"] for x in matches],
+                })
+        elif item.get("name") in by_name:
+            resolved[canonical] = by_name[item["name"]]
+            diagnostics.append({
+                "canonical": canonical,
+                "state": "RESOLVED_BY_NAME",
+                "actualName": item["name"],
+                "index": by_name[item["name"]]["index"],
+            })
+        else:
+            diagnostics.append({
+                "canonical": canonical,
+                "state": "MISSING",
+                "registryStatus": item.get("status"),
+            })
+    return resolved, diagnostics
+
+
 def material_dependency_plan(api: Tapir):
-    """Read-only resolution of Building Material dependencies by canonical name."""
+    """Read-only resolution of Building Material dependencies by canonical role/name."""
     registry = load_yaml(ATTRIBUTE_REGISTRY)
-    fill_headers = attribute_headers(api, "Fill")
+    fill_map, fill_diagnostics = get_fill_runtime_index(api)
     surface_headers = attribute_headers(api, "Surface")
     bm_headers = attribute_headers(api, "BuildingMaterial")
 
-    fills = index_headers(fill_headers)
     surfaces = index_headers(surface_headers)
     existing_bm = index_headers(bm_headers)
 
@@ -558,8 +616,8 @@ def material_dependency_plan(api: Tapir):
         fill_name = item.get("cut_fill")
         surface_name = item.get("surface")
         blockers = []
-        if fill_name and fill_name not in fills:
-            blockers.append({"type": "missing_fill", "name": fill_name})
+        if fill_name and fill_name not in fill_map:
+            blockers.append({"type": "missing_or_unverified_fill", "name": fill_name})
         if surface_name and surface_name not in surfaces:
             blockers.append({"type": "missing_surface", "name": surface_name})
 
@@ -576,8 +634,9 @@ def material_dependency_plan(api: Tapir):
             "draftPriority": item.get("draft_priority"),
             "collision": item.get("collision"),
             "cutFill": {
-                "name": fill_name,
-                "index": fills.get(fill_name, {}).get("index") if fill_name else None,
+                "canonical": fill_name,
+                "actualName": fill_map.get(fill_name, {}).get("name") if fill_name else None,
+                "index": fill_map.get(fill_name, {}).get("index") if fill_name else None,
             },
             "surface": {
                 "name": surface_name,
@@ -586,14 +645,6 @@ def material_dependency_plan(api: Tapir):
             "blockers": blockers,
         })
 
-    required_fills = sorted({
-        x.get("cut_fill") for x in registry.get("building_materials", [])
-        if x.get("cut_fill")
-    })
-    required_surfaces = sorted({
-        x.get("surface") for x in registry.get("building_materials", [])
-        if x.get("surface")
-    })
     return {
         "status": "PASS",
         "writePerformed": False,
@@ -604,20 +655,201 @@ def material_dependency_plan(api: Tapir):
             "blockedDependency": sum(
                 x["state"] == "BLOCKED_DEPENDENCY" for x in materials
             ),
-            "requiredFills": len(required_fills),
-            "requiredSurfaces": len(required_surfaces),
+            "surfaceAttributesPresent": len(surface_headers),
         },
-        "missingFills": [x for x in required_fills if x not in fills],
-        "missingSurfaces": [x for x in required_surfaces if x not in surfaces],
+        "fillResolution": fill_diagnostics,
+        "missingSurfaces": sorted({
+            x["surface"]["name"] for x in materials
+            if x["surface"]["name"] and x["surface"]["index"] is None
+        }),
         "materials": materials,
     }
+
+
+def _require_clean_or_explicit(api: Tapir, allow_nonempty: bool, stage: str):
+    elements = api.call("GetAllElements").get("elements", [])
+    if elements and not allow_nonempty:
+        raise RuntimeError(
+            f"Refusing {stage}: current project contains {len(elements)} elements. "
+            "Use a clean candidate project or pass --allow-nonempty explicitly."
+        )
+    return len(elements)
+
+
+def apply_surfaces(api: Tapir, allow_nonempty=False):
+    """Create/overwrite the deterministic texture-free visual Surface registry."""
+    before_count = _require_clean_or_explicit(api, allow_nonempty, "surface write")
+    registry = load_yaml(SURFACE_REGISTRY)
+    defaults = registry.get("render_defaults", {})
+    payload = []
+    for item in registry.get("surfaces", []):
+        material_type = item["material_type"]
+        preset = defaults.get(material_type, {})
+        r, g, b = [float(x) for x in item["color"]]
+        payload.append({
+            "name": item["name"],
+            "materialType": material_type,
+            "ambientReflection": float(preset.get("ambient_reflection", 50)),
+            "diffuseReflection": float(preset.get("diffuse_reflection", 70)),
+            "specularReflection": float(preset.get("specular_reflection", 10)),
+            "transparency": float(item.get("transparency", 0)),
+            "shine": float(preset.get("shine", 0)),
+            "surfaceColor": {"red": r, "green": g, "blue": b},
+        })
+
+    native = api.call("CreateSurfaces", {
+        "surfaceDataArray": payload,
+        "overwriteExisting": True,
+    })
+    headers = index_headers(attribute_headers(api, "Surface"))
+    missing = sorted(set(x["name"] for x in payload) - set(headers))
+    if missing:
+        raise RuntimeError(f"Surfaces absent after CreateSurfaces: {missing}")
+
+    ids = [{"attributeId": headers[x["name"]]["attributeId"]} for x in payload]
+    details = api.call("GetSurfaces", {
+        "attributeIds": ids,
+        "fields": ["materialType", "transparency", "surfaceColor", "texture"],
+    }).get("surfaces", [])
+    by_name = {x["name"]: x for x in details if isinstance(x, dict) and "name" in x}
+    mismatches = []
+    for expected in payload:
+        actual = by_name.get(expected["name"])
+        if not actual:
+            mismatches.append({"name": expected["name"], "reason": "no_readback"})
+            continue
+        color = actual.get("surfaceColor", {})
+        for key, exp in expected["surfaceColor"].items():
+            if not math.isclose(float(color.get(key, -1)), exp, abs_tol=1e-6):
+                mismatches.append({
+                    "name": expected["name"],
+                    "reason": f"surfaceColor.{key}",
+                    "expected": exp,
+                    "actual": color.get(key),
+                })
+        if not math.isclose(
+            float(actual.get("transparency", -1)),
+            float(expected["transparency"]),
+            abs_tol=1e-6,
+        ):
+            mismatches.append({
+                "name": expected["name"],
+                "reason": "transparency",
+                "expected": expected["transparency"],
+                "actual": actual.get("transparency"),
+            })
+
+    after_count = len(api.call("GetAllElements").get("elements", []))
+    if after_count != before_count:
+        raise RuntimeError("Unexpected model element count change during surface stage.")
+    if mismatches:
+        raise RuntimeError(f"Surface read-back mismatch: {mismatches[:10]}")
+    return {
+        "status": "PASS",
+        "createdOrOverwritten": len(payload),
+        "elementCountUnchanged": True,
+        "nativeResult": native,
+    }
+
+
+def apply_ready_building_materials(api: Tapir, allow_nonempty=False):
+    """Create only materials whose Fill and Surface dependencies resolve in the live project."""
+    before_count = _require_clean_or_explicit(api, allow_nonempty, "Building Material write")
+    registry = load_yaml(ATTRIBUTE_REGISTRY)
+    plan = material_dependency_plan(api)
+    plan_by_name = {x["name"]: x for x in plan["materials"]}
+    source_by_name = {x["name"]: x for x in registry.get("building_materials", [])}
+
+    payload = []
+    for name, resolved in plan_by_name.items():
+        if resolved["state"] != "READY_FOR_CREATE":
+            continue
+        source = source_by_name[name]
+        payload.append({
+            "name": name,
+            "id": source.get("id", ""),
+            "description": (
+                "SBIM candidate material. Physical properties intentionally undefined "
+                "until a verified source is attached."
+            ),
+            "connPriority": int(source["draft_priority"]),
+            "cutFillIndex": int(resolved["cutFill"]["index"]),
+            "cutFillPen": 17,
+            "cutFillBackgroundPen": 0,
+            "cutSurfaceIndex": int(resolved["surface"]["index"]),
+            "showUncutLines": True,
+            "collisionDetection": bool(source.get("collision", True)),
+            "cutFillOrientation": "ProjectOrigin",
+        })
+
+    if not payload:
+        return {
+            "status": "PASS",
+            "createdOrOverwritten": 0,
+            "reason": "No READY_FOR_CREATE materials; dependencies remain blocked.",
+            "plan": plan,
+        }
+
+    native = api.call("CreateBuildingMaterials", {
+        "buildingMaterialDataArray": payload,
+        "overwriteExisting": True,
+    })
+    headers = index_headers(attribute_headers(api, "BuildingMaterial"))
+    missing = sorted(set(x["name"] for x in payload) - set(headers))
+    if missing:
+        raise RuntimeError(f"Building Materials absent after create: {missing}")
+
+    ids = [{"attributeId": headers[x["name"]]["attributeId"]} for x in payload]
+    details = api.call("GetBuildingMaterials", {
+        "attributeIds": ids,
+        "fields": [
+            "id", "description", "connPriority", "cutFillIndex",
+            "cutFillPen", "cutFillBackgroundPen", "cutSurfaceIndex",
+            "cutFillOrientation", "collisionDetection",
+        ],
+    }).get("buildingMaterials", [])
+    by_name = {x["name"]: x for x in details if isinstance(x, dict) and "name" in x}
+    mismatches = []
+    for expected in payload:
+        actual = by_name.get(expected["name"])
+        if not actual:
+            mismatches.append({"name": expected["name"], "reason": "no_readback"})
+            continue
+        for field in (
+            "id", "connPriority", "cutFillIndex", "cutFillPen",
+            "cutFillBackgroundPen", "cutSurfaceIndex",
+            "cutFillOrientation", "collisionDetection",
+        ):
+            if actual.get(field) != expected.get(field):
+                mismatches.append({
+                    "name": expected["name"], "reason": field,
+                    "expected": expected.get(field), "actual": actual.get(field),
+                })
+
+    after_count = len(api.call("GetAllElements").get("elements", []))
+    if after_count != before_count:
+        raise RuntimeError(
+            "Unexpected model element count change during Building Material stage."
+        )
+    if mismatches:
+        raise RuntimeError(f"Building Material read-back mismatch: {mismatches[:10]}")
+    return {
+        "status": "PASS",
+        "createdOrOverwritten": len(payload),
+        "elementCountUnchanged": True,
+        "nativeResult": native,
+        "stillBlocked": [
+            x for x in plan["materials"] if x["state"] == "BLOCKED_DEPENDENCY"
+        ],
+    }
+
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "action",
-        choices=("validate", "inspect", "plan", "plan-materials", "apply-core"),
+        choices=("validate", "inspect", "plan", "plan-materials", "apply-core", "apply-surfaces", "apply-ready-materials"),
     )
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
     parser.add_argument(
@@ -647,6 +879,10 @@ def main():
             result = material_dependency_plan(api)
         elif args.action == "apply-core":
             result = apply_safe_core(api, allow_nonempty=args.allow_nonempty)
+        elif args.action == "apply-surfaces":
+            result = apply_surfaces(api, allow_nonempty=args.allow_nonempty)
+        elif args.action == "apply-ready-materials":
+            result = apply_ready_building_materials(api, allow_nonempty=args.allow_nonempty)
         else:
             raise AssertionError(args.action)
 
