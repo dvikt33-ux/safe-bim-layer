@@ -75,7 +75,7 @@ phases:
 
   - id: P10
     name: archicad_build
-    status: pending
+    status: safe_core_builder_ready_live_execution_pending
     tasks:
       - create_clean_AC29_project
       - install_fonts
@@ -128,8 +128,15 @@ phases:
       - migration_manifest
 
 immediate_next_actions:
-  - create_actual_AC29_layer_registry_and_attribute_set
-  - create_first_clean_archicad_candidate_project
+  - open_clean_archicad_29_candidate_project
+  - run: python scripts/archicad_template_builder.py validate
+  - run: python scripts/archicad_template_builder.py inspect
+  - run: python scripts/archicad_template_builder.py plan
+  - run: python scripts/archicad_template_builder.py apply-core
+  - run: python scripts/archicad_template_builder.py plan-materials
+  - resolve_GOST_fill_geometry_and_surface_registry
+  - create_building_material_stage_only_after_dependency_plan_passes
+  - resolve_property_availability_against_classification_strategy
+  - materialize_first_verified_favorites
   - run_junction_tests_before_finalizing_priorities
-  - choose_first_real_object_pack_for_materialized_composites
-  - recommend_first_pack: residential.izhs_test_house
+  - first_real_object_pack: residential.izhs_test_house
