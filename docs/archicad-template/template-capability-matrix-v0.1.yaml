@@ -74,7 +74,7 @@ manual_or_addon_gap:
   - create_Publisher_Sets
   - create_or_edit_DWG_translator_presets
   - create_or_edit_IFC_translator_presets
-  - implement_Master_Layout_frame_and_titleblock_graphics
+  - general_AutoText_enumeration_and_insertion_through_current_Tapir
   - Save_As_TPL_to_new_path
   - exact_Work_Environment_profile_creation
 
@@ -100,3 +100,22 @@ second_stage_after_attribute_resolution:
   - View_Map
   - Layout_Subsets_and_Layouts
   - Publish_existing_Publisher_Set_only
+
+resolved_after_research:
+  master_layout_geometry:
+    status: api_path_verified_live_test_pending
+    units:
+      sizeX_sizeY: millimeters
+      margins: millimeters
+    commands:
+      - CreateLayout
+      - GetNavigatorItemTree
+      - GetDatabaseIdFromNavigatorItemId
+      - ChangeWindow
+      - CreateLineElements
+      - CreateTexts
+    source: Graphisoft_Archicad_29_CPP_API_API_LayoutInfo
+  autotext:
+    cplusplus_api: available
+    current_tapir_1_5_8_json_command: absent
+    recommended_gap_closure: expose_minimal_autotext_command_in_safe_bim_addon
