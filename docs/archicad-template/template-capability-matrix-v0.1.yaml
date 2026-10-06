@@ -61,9 +61,10 @@ automatable_now:
 
 read_only_or_assignment_only:
   model_view_options:
-    - GetModelViewOptions
+    commands: [GetModelViewOptions]
     note: "Existing MVO preset names can be assigned to Views, but this Tapir schema has no command to create/edit MVO presets."
   graphic_overrides:
+    commands: []
     note: "ViewSettings can reference an existing graphicOverrideCombination by name, but this Tapir schema has no command to create/edit Graphic Override rules/combinations."
 
 manual_or_addon_gap:
