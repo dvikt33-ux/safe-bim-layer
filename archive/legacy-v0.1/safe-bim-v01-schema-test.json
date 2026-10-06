@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "validatedCommands": ["CreateWalls", "CreateSlabs", "CreateWindows", "CreateDoors"],
+  "writes": 0,
+  "schema": "tapir-1.5.8.json",
+  "notes": "High-level schema validation succeeds for all four low-level payload builders; no Archicad mutation was performed by this check."
+}
