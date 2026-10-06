@@ -48,6 +48,7 @@ DATA_SCHEMA = SPEC / "data-schema-v0.1.yaml"
 NAVIGATOR_REGISTRY = SPEC / "navigator-registry-v0.1.yaml"
 DOCUMENTATION_SPEC = SPEC / "documentation-standard-v0.1.yaml"
 FONT_MANIFEST = SPEC / "fonts-manifest.yaml"
+SEED_PRESETS = SPEC / "seed-presets-registry-v0.1.yaml"
 
 SAFE_CORE_COMMANDS = {
     "GetProjectInfo", "GetProjectInfoFields", "CreateProjectInfoFields",
@@ -177,6 +178,7 @@ def validate_specs():
     data_schema = load_yaml(DATA_SCHEMA)
     navigator = load_yaml(NAVIGATOR_REGISTRY)
     documentation = load_yaml(DOCUMENTATION_SPEC)
+    seed_presets = load_yaml(SEED_PRESETS)
 
     errors = []
     warnings = []
@@ -397,6 +399,26 @@ def validate_specs():
             f"{sorted(nav_pub - doc_pub)}"
         )
 
+    # Manual seed registry must exactly satisfy Navigator external preset dependencies.
+    seed_mvo = {x["name"] for x in seed_presets.get("model_view_options", [])}
+    seed_go = {x["name"] for x in seed_presets.get("graphic_override_combinations", [])}
+    seed_dims = {x["name"] for x in seed_presets.get("dimension_styles", [])}
+    if seed_mvo != registered_mvo:
+        errors.append(
+            "Seed MVO names differ from Navigator dependencies: "
+            f"seed={sorted(seed_mvo)}, navigator={sorted(registered_mvo)}"
+        )
+    if seed_go != registered_go:
+        errors.append(
+            "Seed Graphic Override Combination names differ from Navigator dependencies: "
+            f"seed={sorted(seed_go)}, navigator={sorted(registered_go)}"
+        )
+    if seed_dims != registered_dims:
+        errors.append(
+            "Seed Dimension Style names differ from Navigator dependencies: "
+            f"seed={sorted(seed_dims)}, navigator={sorted(registered_dims)}"
+        )
+
     supported_property_types = {"string", "boolean", "integer", "length", "number", "enum"}
     property_count = 0
     for group_name, props in schema_groups.items():
@@ -429,6 +451,9 @@ def validate_specs():
             "masterLayoutBlueprints": len(masters),
             "layoutSubsets": len(nav_subsets),
             "publisherBlueprints": len(nav_pub),
+            "seedMVO": len(seed_mvo),
+            "seedGraphicOverrideCombinations": len(seed_go),
+            "seedDimensionStyles": len(seed_dims),
         },
     }
 
