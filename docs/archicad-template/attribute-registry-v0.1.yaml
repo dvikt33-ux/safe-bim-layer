@@ -1,0 +1,360 @@
+registry_version: 0.1
+status: draft_for_junction_tests
+target: Archicad_29
+
+identity_policy:
+  cross_project_key: canonical_name_and_stable_id
+  archicad_index_is_cross_project_key: false
+  managed_import_match: name
+  rename_after_release: migration_required
+
+priority_bands:
+  primary_structural: [900, 949]
+  structural_masonry_dense: [850, 899]
+  secondary_structural: [800, 849]
+  nonloadbearing_solid: [700, 799]
+  cementitious: [600, 699]
+  insulation: [500, 599]
+  board_substrate: [400, 499]
+  membrane_cavity: [300, 399]
+  finish: [200, 299]
+  adhesive_coating: [100, 199]
+  placeholder: [0, 99]
+
+surfaces:
+  - {name: SURF_GENERAL_LIGHT, role: generic}
+  - {name: SURF_CONCRETE_GREY, role: mineral}
+  - {name: SURF_CONCRETE_DARK, role: mineral}
+  - {name: SURF_BRICK_RED, role: masonry}
+  - {name: SURF_CERAMIC_NEUTRAL, role: masonry}
+  - {name: SURF_PLASTER_WHITE, role: finish}
+  - {name: SURF_PAINT_WHITE, role: finish}
+  - {name: SURF_PAINT_GREY, role: finish}
+  - {name: SURF_STEEL_GALV, role: metal}
+  - {name: SURF_STEEL_PAINTED, role: metal}
+  - {name: SURF_ALUMINIUM, role: metal}
+  - {name: SURF_WOOD_NATURAL, role: wood}
+  - {name: SURF_GLASS_CLEAR, role: glass}
+  - {name: SURF_INSULATION_GENERIC, role: insulation}
+  - {name: SURF_WATERPROOF_BLACK, role: membrane}
+  - {name: SURF_SOIL, role: site}
+  - {name: SURF_GRAVEL, role: site}
+  - {name: SURF_ASPHALT, role: site}
+
+building_materials:
+  - id: SBIM.BM.STR.CONCRETE.RC
+    name: BM_STR_CONCRETE_RC
+    family: structural
+    draft_priority: 930
+    cut_fill: FILL_16_GOST_CONCRETE
+    surface: SURF_CONCRETE_GREY
+    collision: true
+    default_skin_role: core
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.STR.CONCRETE.PLAIN
+    name: BM_STR_CONCRETE_PLAIN
+    family: structural
+    draft_priority: 910
+    cut_fill: FILL_16_GOST_CONCRETE
+    surface: SURF_CONCRETE_GREY
+    collision: true
+    default_skin_role: core
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.STR.STEEL
+    name: BM_STR_STEEL
+    family: structural
+    draft_priority: 940
+    cut_fill: FILL_11_GOST_METAL
+    surface: SURF_STEEL_PAINTED
+    collision: true
+    default_skin_role: core
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.STR.TIMBER
+    name: BM_STR_TIMBER
+    family: structural
+    draft_priority: 820
+    cut_fill: FILL_13_GOST_WOOD
+    surface: SURF_WOOD_NATURAL
+    collision: true
+    default_skin_role: core
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.MASONRY.CERAMIC_BLOCK
+    name: BM_MASONRY_CERAMIC_BLOCK
+    family: masonry
+    draft_priority: 880
+    cut_fill: FILL_15_GOST_MASONRY_CERAMIC
+    surface: SURF_CERAMIC_NEUTRAL
+    collision: true
+    default_skin_role: core
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.MASONRY.BRICK
+    name: BM_MASONRY_BRICK
+    family: masonry
+    draft_priority: 860
+    cut_fill: FILL_15_GOST_MASONRY_CERAMIC
+    surface: SURF_BRICK_RED
+    collision: true
+    default_skin_role: core
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.MASONRY.AAC
+    name: BM_MASONRY_AAC
+    family: masonry
+    draft_priority: 850
+    cut_fill: FILL_12_GOST_NONMETAL
+    surface: SURF_GENERAL_LIGHT
+    collision: true
+    default_skin_role: core
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.MASONRY.SILICATE
+    name: BM_MASONRY_SILICATE
+    family: masonry
+    draft_priority: 855
+    cut_fill: FILL_12_GOST_NONMETAL
+    surface: SURF_GENERAL_LIGHT
+    collision: true
+    default_skin_role: core
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.MASONRY.GYPSUM_BLOCK
+    name: BM_MASONRY_GYPSUM_BLOCK
+    family: nonloadbearing_solid
+    draft_priority: 740
+    cut_fill: FILL_12_GOST_NONMETAL
+    surface: SURF_PLASTER_WHITE
+    collision: true
+    default_skin_role: core
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.MORTAR.CEMENT_SAND
+    name: BM_MORTAR_CEMENT_SAND
+    family: cementitious
+    draft_priority: 640
+    cut_fill: FILL_12_GOST_NONMETAL
+    surface: SURF_GENERAL_LIGHT
+    collision: true
+    default_skin_role: other
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.SCREED.CEMENT
+    name: BM_SCREED_CEMENT
+    family: cementitious
+    draft_priority: 650
+    cut_fill: FILL_12_GOST_NONMETAL
+    surface: SURF_CONCRETE_GREY
+    collision: true
+    default_skin_role: other
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.BOARD.GYPSUM
+    name: BM_BOARD_GYPSUM
+    family: board_substrate
+    draft_priority: 450
+    cut_fill: FILL_12_GOST_NONMETAL
+    surface: SURF_PLASTER_WHITE
+    collision: true
+    default_skin_role: other
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.BOARD.CEMENT
+    name: BM_BOARD_CEMENT
+    family: board_substrate
+    draft_priority: 470
+    cut_fill: FILL_12_GOST_NONMETAL
+    surface: SURF_GENERAL_LIGHT
+    collision: true
+    default_skin_role: other
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.INSULATION.MINERAL_WOOL
+    name: BM_INSULATION_MINERAL_WOOL
+    family: insulation
+    draft_priority: 560
+    cut_fill: FILL_20_INSULATION_CONVENTIONAL
+    surface: SURF_INSULATION_GENERIC
+    collision: true
+    default_skin_role: other
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.INSULATION.EPS
+    name: BM_INSULATION_EPS
+    family: insulation
+    draft_priority: 530
+    cut_fill: FILL_20_INSULATION_CONVENTIONAL
+    surface: SURF_INSULATION_GENERIC
+    collision: true
+    default_skin_role: other
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.INSULATION.XPS
+    name: BM_INSULATION_XPS
+    family: insulation
+    draft_priority: 550
+    cut_fill: FILL_20_INSULATION_CONVENTIONAL
+    surface: SURF_INSULATION_GENERIC
+    collision: true
+    default_skin_role: other
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.INSULATION.PIR
+    name: BM_INSULATION_PIR
+    family: insulation
+    draft_priority: 540
+    cut_fill: FILL_20_INSULATION_CONVENTIONAL
+    surface: SURF_INSULATION_GENERIC
+    collision: true
+    default_skin_role: other
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.MEMBRANE.WATERPROOF
+    name: BM_MEMBRANE_WATERPROOF
+    family: membrane_cavity
+    draft_priority: 340
+    cut_fill: FILL_12_GOST_NONMETAL
+    surface: SURF_WATERPROOF_BLACK
+    collision: false
+    default_skin_role: other
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.MEMBRANE.VAPOR_CONTROL
+    name: BM_MEMBRANE_VAPOR_CONTROL
+    family: membrane_cavity
+    draft_priority: 330
+    cut_fill: FILL_12_GOST_NONMETAL
+    surface: SURF_GENERAL_LIGHT
+    collision: false
+    default_skin_role: other
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.CAVITY.AIR
+    name: BM_CAVITY_AIR
+    family: membrane_cavity
+    draft_priority: 300
+    cut_fill: FILL_00_EMPTY
+    surface: SURF_GENERAL_LIGHT
+    collision: false
+    default_skin_role: other
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.FINISH.GYPSUM_PLASTER
+    name: BM_FINISH_GYPSUM_PLASTER
+    family: finish
+    draft_priority: 260
+    cut_fill: FILL_12_GOST_NONMETAL
+    surface: SURF_PLASTER_WHITE
+    collision: true
+    default_skin_role: finish
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.FINISH.CERAMIC_TILE
+    name: BM_FINISH_CERAMIC_TILE
+    family: finish
+    draft_priority: 280
+    cut_fill: FILL_15_GOST_MASONRY_CERAMIC
+    surface: SURF_CERAMIC_NEUTRAL
+    collision: true
+    default_skin_role: finish
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.FINISH.STONE
+    name: BM_FINISH_STONE
+    family: finish
+    draft_priority: 290
+    cut_fill: FILL_14_GOST_STONE
+    surface: SURF_GENERAL_LIGHT
+    collision: true
+    default_skin_role: finish
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.FINISH.METAL_CLADDING
+    name: BM_FINISH_METAL_CLADDING
+    family: finish
+    draft_priority: 275
+    cut_fill: FILL_11_GOST_METAL
+    surface: SURF_STEEL_PAINTED
+    collision: true
+    default_skin_role: finish
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.SITE.SOIL
+    name: BM_SITE_SOIL
+    family: site
+    draft_priority: 420
+    cut_fill: FILL_19_GOST_SOIL
+    surface: SURF_SOIL
+    collision: true
+    default_skin_role: other
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.SITE.GRAVEL
+    name: BM_SITE_GRAVEL
+    family: site
+    draft_priority: 430
+    cut_fill: FILL_21_BACKFILL
+    surface: SURF_GRAVEL
+    collision: true
+    default_skin_role: other
+    physical_properties: sourced_only
+
+  - id: SBIM.BM.SITE.ASPHALT
+    name: BM_SITE_ASPHALT
+    family: site
+    draft_priority: 610
+    cut_fill: FILL_12_GOST_NONMETAL
+    surface: SURF_ASPHALT
+    collision: true
+    default_skin_role: finish
+    physical_properties: sourced_only
+
+composite_policy:
+  naming: CMP_<ELEMENT>_<FUNCTION>_<ASSEMBLY_TOKEN>_<TOTAL_MM>
+  total_must_equal_skin_sum: true
+  thickness_in_building_material_name: false
+  release_requires_junction_tests: true
+  core_template_keep_small: true
+  project_object_packs_add_specific_assemblies: true
+
+attribute_folders:
+  building_materials:
+    - 01_STRUCTURAL
+    - 02_MASONRY
+    - 03_BOARDS
+    - 04_INSULATION
+    - 05_MORTAR_SCREED
+    - 06_MEMBRANES_CAVITIES
+    - 07_FINISH
+    - 08_SITE
+    - 90_PROJECT_PACK
+    - 99_TEST_QUARANTINE
+  surfaces:
+    - 01_GENERIC
+    - 02_MINERAL
+    - 03_MASONRY
+    - 04_METAL
+    - 05_WOOD
+    - 06_GLASS
+    - 07_FINISH
+    - 08_SITE
+    - 90_PROJECT_PACK
+  composites:
+    - 01_WALL
+    - 02_PARTITION
+    - 03_SLAB
+    - 04_ROOF
+    - 05_FOUNDATION
+    - 90_PROJECT_PACK
+    - 99_TEST_QUARANTINE
+
+release_gates:
+  physical_properties_must_be_sourced_or_undefined: true
+  priority_junction_matrix_pass: true
+  canonical_name_unique: true
+  stable_id_unique: true
+  collision_flag_reviewed: true
+  classification_property_dependencies_present: true
