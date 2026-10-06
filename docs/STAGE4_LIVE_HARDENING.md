@@ -70,8 +70,23 @@ follow-ons, model dump or writes. Archicad 29 build 3000 RUS, Tapir 1.5.10 and
 endpoint `127.0.0.1:19723` remain mandatory. The code never opens, switches,
 saves or undoes a project.
 
+A rebound PLN is not assumed to contain the synthetic Stage 1 wall chain.
+Before a rebound live scenario, `stage4_fixture` prepares (or reuses) an isolated
+two-Wall chain at the archived Stage 1 sandbox coordinates. It first proves that
+the corridor is empty and the archived building material is available. Setup is
+a separate, explicitly labelled LIVE_FIXTURE_SETUP action, not an S4 scenario
+mutation. One CreateWalls dispatch creates the predecessor and 0.5 m seed;
+factual read-back must prove exactly those two new Wall GUIDs. A dispatched
+uncertain setup is UNKNOWN_OUTCOME and is never blindly repeated. The fixture
+report pins the project path and seed GUID. Rebound Stage 4 planners then follow
+only that unique fixture chain; they never fall back to unrelated building Walls.
+
 ```powershell
 $env:SAFE_BIM_STAGE4_PROJECT_PATH = 'C:\Users\Admin\Downloads\дбликат.pln'
+
+python -m closed_loop.stage4_fixture --output outputs/closed-loop-stage4/fixture-rebound-001 --live
+$env:SAFE_BIM_STAGE4_FIXTURE_REPORT = 'outputs/closed-loop-stage4/fixture-rebound-001/fixture-report.json'
+
 python -m closed_loop.stage4_live_scenario --scenario S4-01 --output outputs/closed-loop-stage4/S4-01 --offline-proof <offline-verification-report.json> --live
 python -m closed_loop.stage4_live_scenario --scenario S4-02 --output outputs/closed-loop-stage4/S4-02 --offline-proof <offline-verification-report.json> --happy-report outputs/closed-loop-stage4/S4-01/completion-report.json --live
 python -m closed_loop.stage4_live_scenario --scenario S4-03 --output outputs/closed-loop-stage4/S4-03 --offline-proof <offline-verification-report.json> --happy-report outputs/closed-loop-stage4/S4-01/completion-report.json --live
@@ -114,16 +129,18 @@ hashes. Pack/source corruption, extra files and unsupported contracts fail close
 
 ## Current gate
 
-The latest actual identity gates returned another PLN and stopped before any
-mutation. Therefore mandatory S4-01/02/03/06 are BLOCKED, regardless of UI/user
-confirmation. No offline fixture is promoted to live evidence. Full Stage 4 is
-BLOCKED until the endpoint reports the exact named test project and all live
-scenarios plus C01–C30 pass.
+The rebound identity gate now supports an explicitly named disposable PLN, but
+the first rebound S4-01 correctly stopped before mutation because that older copy
+did not contain the synthetic Stage 1 wall chain and the generic planner selected
+a real-model Wall whose continuation corridor collided with existing geometry.
+The rebound path therefore requires the isolated fixture setup above. No failed
+planner attempt is promoted to live evidence. Full Stage 4 remains BLOCKED until
+the pinned fixture is PASS and all mandatory live scenarios plus C01–C30 pass.
 
 Backlog only: general transactions/concurrent job ownership, additional BIM
 operations, undo, UI, normative engines and performance work. None is implemented
 as part of this stage.
 
-Final offline proof: `outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json` (95 baseline + 33 new tests, PASS).
+Previous offline proof: `outputs/closed-loop-stage4/hardening-offline-005/offline-verification-report.json` passed before rebound-fixture changes. A new source-pinned offline proof is required after the fixture implementation and tests.
 
 The 30-criterion contract and ten-scenario status matrix are retained in `outputs/closed-loop-stage4/stage4-acceptance-contract.json` and `stage4-acceptance-report.json`. Mandatory live proof remains BLOCKED. Publication is deferred until acceptance is complete.
