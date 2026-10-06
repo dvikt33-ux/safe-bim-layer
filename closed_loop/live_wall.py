@@ -4,6 +4,7 @@ import importlib.util
 import io
 import json
 import math
+import ntpath
 import os
 from pathlib import Path
 import subprocess
@@ -100,9 +101,21 @@ class LiveSession:
         self.identity = self.api('GetProjectInfo')
         if not self.identity.get('projectPath') or self.identity.get('isUntitled'):
             raise ValueError('Named test PLN required')
-        if self.identity != read(ROOT / 'outputs/closed-loop-stage1/preflight.json')['identity']:
-            raise ValueError('Active PLN differs from the previously verified test project')
-        save(self.output / 'preflight.json', {'identity': self.identity,
+        explicit_target = os.environ.get('SAFE_BIM_STAGE4_PROJECT_PATH') if str(goal_id).startswith('stage4-') else None
+        if explicit_target:
+            if not ntpath.isabs(explicit_target):
+                raise ValueError('SAFE_BIM_STAGE4_PROJECT_PATH must be an absolute Windows path')
+            actual = ntpath.normcase(ntpath.normpath(self.identity['projectPath']))
+            expected = ntpath.normcase(ntpath.normpath(explicit_target))
+            if actual != expected:
+                raise ValueError('Active PLN differs from explicit Stage 4 target project')
+            project_binding = {'mode':'EXPLICIT_STAGE4_PATH','expectedProjectPath':explicit_target}
+        else:
+            baseline_identity = read(ROOT / 'outputs/closed-loop-stage1/preflight.json')['identity']
+            if self.identity != baseline_identity:
+                raise ValueError('Active PLN differs from the previously verified test project')
+            project_binding = {'mode':'STAGE1_BASELINE_IDENTITY','expectedProjectPath':baseline_identity.get('projectPath')}
+        save(self.output / 'preflight.json', {'identity': self.identity, 'projectBinding': project_binding,
             'archicad': self.api('API.GetProductInfo', addon=False), 'tapir': self.api('GetAddOnVersion'),
             'port': 19723, 'observedAtUtc': datetime.now(timezone.utc).isoformat()})
 
