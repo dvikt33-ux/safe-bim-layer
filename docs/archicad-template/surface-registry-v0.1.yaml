@@ -1,0 +1,144 @@
+registry_version: 0.1
+status: visual_core_candidate
+target: Archicad_29
+
+policy:
+  normative_meaning: false
+  colors_are_internal_visual_standard: true
+  textures_required: false
+  create_before_building_materials: true
+  overwrite_only_in_clean_candidate_project: true
+  note: "RGB/transparency values are visual template choices, not normative material properties."
+
+surfaces:
+  - name: SURF_GENERAL_LIGHT
+    material_type: Matte
+    color: [0.82, 0.82, 0.82]
+    transparency: 0
+    role: generic
+
+  - name: SURF_CONCRETE_GREY
+    material_type: Matte
+    color: [0.56, 0.57, 0.58]
+    transparency: 0
+    role: mineral
+
+  - name: SURF_CONCRETE_DARK
+    material_type: Matte
+    color: [0.36, 0.37, 0.38]
+    transparency: 0
+    role: mineral
+
+  - name: SURF_BRICK_RED
+    material_type: Matte
+    color: [0.55, 0.22, 0.14]
+    transparency: 0
+    role: masonry
+
+  - name: SURF_CERAMIC_NEUTRAL
+    material_type: Matte
+    color: [0.68, 0.45, 0.27]
+    transparency: 0
+    role: masonry
+
+  - name: SURF_PLASTER_WHITE
+    material_type: Matte
+    color: [0.92, 0.92, 0.90]
+    transparency: 0
+    role: finish
+
+  - name: SURF_PAINT_WHITE
+    material_type: Matte
+    color: [0.97, 0.97, 0.97]
+    transparency: 0
+    role: finish
+
+  - name: SURF_PAINT_GREY
+    material_type: Matte
+    color: [0.68, 0.69, 0.70]
+    transparency: 0
+    role: finish
+
+  - name: SURF_STEEL_GALV
+    material_type: Metal
+    color: [0.66, 0.69, 0.71]
+    transparency: 0
+    role: metal
+
+  - name: SURF_STEEL_PAINTED
+    material_type: Matte
+    color: [0.33, 0.35, 0.37]
+    transparency: 0
+    role: metal
+
+  - name: SURF_ALUMINIUM
+    material_type: Metal
+    color: [0.76, 0.77, 0.79]
+    transparency: 0
+    role: metal
+
+  - name: SURF_WOOD_NATURAL
+    material_type: Matte
+    color: [0.56, 0.36, 0.20]
+    transparency: 0
+    role: wood
+
+  - name: SURF_GLASS_CLEAR
+    material_type: Glass
+    color: [0.72, 0.86, 0.92]
+    transparency: 75
+    role: glass
+
+  - name: SURF_INSULATION_GENERIC
+    material_type: Matte
+    color: [0.88, 0.80, 0.43]
+    transparency: 0
+    role: insulation
+
+  - name: SURF_WATERPROOF_BLACK
+    material_type: Matte
+    color: [0.10, 0.10, 0.10]
+    transparency: 0
+    role: membrane
+
+  - name: SURF_SOIL
+    material_type: Matte
+    color: [0.42, 0.30, 0.18]
+    transparency: 0
+    role: site
+
+  - name: SURF_GRAVEL
+    material_type: Matte
+    color: [0.55, 0.53, 0.49]
+    transparency: 0
+    role: site
+
+  - name: SURF_ASPHALT
+    material_type: Matte
+    color: [0.18, 0.18, 0.18]
+    transparency: 0
+    role: site
+
+render_defaults:
+  Matte:
+    ambient_reflection: 50
+    diffuse_reflection: 75
+    specular_reflection: 5
+    shine: 0
+  Metal:
+    ambient_reflection: 45
+    diffuse_reflection: 55
+    specular_reflection: 65
+    shine: 6000
+  Glass:
+    ambient_reflection: 35
+    diffuse_reflection: 25
+    specular_reflection: 70
+    shine: 8000
+
+release_gates:
+  - readback_color_matches
+  - readback_transparency_matches
+  - no_texture_dependency
+  - pdf_vector_views_not_dependent_on_render_color
+  - dwg_export_not_dependent_on_surface_rgb
