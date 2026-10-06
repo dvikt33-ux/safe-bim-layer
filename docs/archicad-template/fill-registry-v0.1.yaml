@@ -1,0 +1,92 @@
+registry_version: 0.1
+status: gated
+target: Archicad_29
+
+policy:
+  cut_fill_only_for_building_materials: true
+  image_fill_as_cut_fill_forbidden: true
+  singleton_empty_and_solid_are_runtime_aliases: true
+  specialized_gost_patterns_require_visual_source_check: true
+
+fills:
+  - canonical_role: FILL_00_EMPTY
+    creation: resolve_existing_singleton
+    required_subtype: Empty
+    status: runtime_resolve
+    use_for_walls: true
+
+  - canonical_role: FILL_01_SOLID
+    creation: resolve_existing_singleton
+    required_subtype: Solid
+    status: runtime_resolve
+    use_for_walls: true
+
+  - name: FILL_10_GOST_GENERIC_45
+    sub_type: Vector
+    scale_with_plan: false
+    use_for_walls: true
+    use_for_draft: true
+    use_for_cover: false
+    angle_rad: 0.7853981633974483
+    nominal_spacing_mm: 4.0
+    status: live_calibration_required
+    source_basis:
+      document: GOST_2_306_68
+      clause: "1a, 5 and general hatching rules"
+      note: "45 degree direction is normative; 4 mm is a template choice inside the permitted spacing range and must be confirmed by print/read-back test."
+
+  - name: FILL_11_GOST_METAL
+    status: blocked_visual_source
+    source_basis: {document: GOST_2_306_68, table: 1, row: 1}
+
+  - name: FILL_12_GOST_NONMETAL
+    status: blocked_visual_source
+    source_basis: {document: GOST_2_306_68, table: 1, row: 2}
+
+  - name: FILL_13_GOST_WOOD
+    status: blocked_visual_source
+    source_basis: {document: GOST_2_306_68, table: 1, row: 3}
+
+  - name: FILL_14_GOST_STONE
+    status: blocked_visual_source
+    source_basis: {document: GOST_2_306_68, table: 1, row: 4}
+
+  - name: FILL_15_GOST_MASONRY_CERAMIC
+    status: blocked_visual_source
+    source_basis: {document: GOST_2_306_68, table: 1, row: 5}
+
+  - name: FILL_16_GOST_CONCRETE
+    status: blocked_visual_source
+    source_basis: {document: GOST_2_306_68, table: 1, row: 6}
+
+  - name: FILL_17_GOST_GLASS
+    status: blocked_visual_source
+    source_basis: {document: GOST_2_306_68, table: 1, row: 7}
+
+  - name: FILL_18_GOST_LIQUID
+    status: blocked_visual_source
+    source_basis: {document: GOST_2_306_68, table: 1, row: 8}
+
+  - name: FILL_19_GOST_SOIL
+    status: blocked_visual_source
+    source_basis: {document: GOST_2_306_68, table: 1, row: 9}
+
+  - name: FILL_20_INSULATION_CONVENTIONAL
+    status: blocked_visual_source
+    source_basis:
+      document: project_detail_standard
+      note: "Do not infer insulation symbol from memory; verify project/SPDS convention."
+
+  - name: FILL_21_BACKFILL
+    status: blocked_visual_source
+    source_basis:
+      document: GOST_2_306_68
+      figure: 1b
+      note: "Backfill symbol must be visually reconstructed from authoritative figure."
+
+release_gates:
+  - exact_geometry_verified
+  - tapir_readback_matches
+  - scale_behavior_verified_at_1_100_1_50_1_20
+  - pdf_print_verified
+  - dwg_roundtrip_verified
