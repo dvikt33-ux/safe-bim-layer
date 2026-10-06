@@ -1,0 +1,96 @@
+matrix_version: 0.1
+status: pending_archicad_execution
+target: Archicad_29
+
+evidence_required:
+  - plan
+  - section
+  - 3d
+  - attribute_dump
+  - before_after_if_adjusted
+
+tests:
+  - id: J01
+    title: RC_wall_vs_ceramic_block_wall
+    materials: [BM_STR_CONCRETE_RC, BM_MASONRY_CERAMIC_BLOCK]
+    expected: "RC dominates at true geometric/reference-line junction unless assembly logic intentionally isolates them."
+    status: pending
+
+  - id: J02
+    title: RC_slab_vs_masonry_wall
+    materials: [BM_STR_CONCRETE_RC, BM_MASONRY_CERAMIC_BLOCK]
+    expected: "Structural slab/core cleanup is continuous without insulation/finish incorrectly cutting RC."
+    status: pending
+
+  - id: J03
+    title: RC_column_vs_composite_wall
+    materials: [BM_STR_CONCRETE_RC, BM_MASONRY_CERAMIC_BLOCK, BM_INSULATION_MINERAL_WOOL, BM_FINISH_GYPSUM_PLASTER]
+    expected: "Column/core interaction is stable; insulation/finish do not consume structural concrete."
+    status: pending
+
+  - id: J04
+    title: Ceramic_block_vs_mineral_wool
+    materials: [BM_MASONRY_CERAMIC_BLOCK, BM_INSULATION_MINERAL_WOOL]
+    expected: "Masonry dominates insulation at accidental overlap."
+    status: pending
+
+  - id: J05
+    title: Masonry_vs_plaster
+    materials: [BM_MASONRY_CERAMIC_BLOCK, BM_FINISH_GYPSUM_PLASTER]
+    expected: "Core remains continuous; finish terminates without cutting core."
+    status: pending
+
+  - id: J06
+    title: Screed_vs_insulation
+    materials: [BM_SCREED_CEMENT, BM_INSULATION_XPS]
+    expected: "Floor buildup remains visually and geometrically stable at edges."
+    status: pending
+
+  - id: J07
+    title: Equal_priority_wall_junction_order
+    materials: [BM_MASONRY_BRICK]
+    expected: "Equal material behavior controlled by Junction Order; no duplicate special material created just for order."
+    status: pending
+
+  - id: J08
+    title: Roof_wall_merge
+    materials: [BM_STR_TIMBER, BM_MASONRY_CERAMIC_BLOCK, BM_INSULATION_MINERAL_WOOL]
+    expected: "Priority behavior tested after required Trim/Merge connection."
+    status: pending
+
+  - id: J09
+    title: Air_cavity_collision
+    materials: [BM_CAVITY_AIR]
+    expected: "Air cavity does not report discipline collision and does not block IFC collision workflow."
+    status: pending
+
+  - id: J10
+    title: Membrane_collision
+    materials: [BM_MEMBRANE_WATERPROOF, BM_MEMBRANE_VAPOR_CONTROL]
+    expected: "Documentation membranes do not produce false collision noise."
+    status: pending
+
+  - id: J11
+    title: Native_vs_IFC_reference
+    expected: "Reference model on group 0 does not create native Archicad priority junctions."
+    status: pending
+
+  - id: J12
+    title: Hidden_layer_intersection
+    expected: "Hidden reference/test layers cannot remove visible native lines through shared intersection group."
+    status: pending
+
+  - id: J13
+    title: Composite_partial_structure_display
+    expected: "Entire Model / Without Finishes / Core Only views expose exactly intended Core/Other/Finish skins."
+    status: pending
+
+  - id: J14
+    title: Attribute_import_by_name
+    expected: "Re-import updates canonical attributes without creating '(1)' duplicates when Overwrite/Match by Name is used."
+    status: pending
+
+  - id: J15
+    title: Property_dependency_import_order
+    expected: "Building Material classifications/properties survive import because Classification/Property definitions are installed first."
+    status: pending
