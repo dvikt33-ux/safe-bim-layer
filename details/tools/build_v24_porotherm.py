@@ -68,8 +68,12 @@ def choose(inv,kind,n):
 def merge(base,patch,kind):
     print('MERGE',kind,'old',sum(isp(r) for r in base),'new',len(patch))
     out=[r for r in base if not isp(r)]+patch
-    ids=[ident(r) for r in out]
-    if len(ids)!=len(set(ids)): raise RuntimeError('duplicate ids in '+kind)
+    if kind=='details':
+        keys=[r.get('detail_id') or ident(r) for r in out]
+        if len(keys)!=len(set(keys)): raise RuntimeError('duplicate detail_id after merge')
+    else:
+        keys=[json.dumps(r,ensure_ascii=False,sort_keys=True,separators=(',',':')) for r in out]
+        if len(keys)!=len(set(keys)): raise RuntimeError('exact duplicate rows in '+kind)
     return out
 def release(x):
     if isinstance(x,dict): return {k:(NEW if k in ('release','active_release') and isinstance(v,str) else release(v)) for k,v in x.items()}
