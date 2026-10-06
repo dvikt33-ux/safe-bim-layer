@@ -49,6 +49,7 @@ NAVIGATOR_REGISTRY = SPEC / "navigator-registry-v0.1.yaml"
 DOCUMENTATION_SPEC = SPEC / "documentation-standard-v0.1.yaml"
 FONT_MANIFEST = SPEC / "fonts-manifest.yaml"
 SEED_PRESETS = SPEC / "seed-presets-registry-v0.1.yaml"
+MASTER_LAYOUT_FORM3 = SPEC / "master-layout-form3-registry-v0.1.yaml"
 
 SAFE_CORE_COMMANDS = {
     "GetProjectInfo", "GetProjectInfoFields", "CreateProjectInfoFields",
@@ -179,6 +180,7 @@ def validate_specs():
     navigator = load_yaml(NAVIGATOR_REGISTRY)
     documentation = load_yaml(DOCUMENTATION_SPEC)
     seed_presets = load_yaml(SEED_PRESETS)
+    form3 = load_yaml(MASTER_LAYOUT_FORM3)
 
     errors = []
     warnings = []
@@ -380,6 +382,28 @@ def validate_specs():
         if float(master.get("width_mm", 0)) <= 0 or float(master.get("height_mm", 0)) <= 0:
             errors.append(f"{master.get('name')}: invalid sheet size")
 
+    # Master Layout sheet sizes must match the verified Form 3 / format registry.
+    form3_sizes = form3.get("sheet_formats_mm") or {}
+    for master in masters:
+        expected = form3_sizes.get(master["name"])
+        actual = [master.get("width_mm"), master.get("height_mm")]
+        if expected is None:
+            errors.append(
+                f"{master['name']}: missing from master-layout Form 3 sheet registry"
+            )
+        elif [float(x) for x in expected] != [float(x) for x in actual]:
+            errors.append(
+                f"{master['name']}: Navigator size {actual} differs from Form 3 registry {expected}"
+            )
+    extra_form3_sizes = sorted(set(form3_sizes) - set(master_names))
+    if extra_form3_sizes:
+        warnings.append(
+            f"Form 3 registry contains unused sheet formats: {extra_form3_sizes}"
+        )
+    if [float(form3.get("form3", {}).get("width_mm", 0)),
+        float(form3.get("form3", {}).get("height_mm", 0))] != [185.0, 55.0]:
+        errors.append("Form 3 canonical titleblock size must remain 185x55 mm.")
+
     nav_subsets = [x["name"] for x in navigator.get("layout_subsets", [])]
     doc_subsets = documentation.get("layout_subsets", [])
     if nav_subsets != doc_subsets:
@@ -454,6 +478,7 @@ def validate_specs():
             "seedMVO": len(seed_mvo),
             "seedGraphicOverrideCombinations": len(seed_go),
             "seedDimensionStyles": len(seed_dims),
+            "form3SheetFormats": len(form3_sizes),
         },
     }
 
