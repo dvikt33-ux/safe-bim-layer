@@ -30,12 +30,13 @@
       "id": "S4-01",
       "name": "happy_path_wall_regression",
       "expected": "PASS",
-      "maxPhysicalDispatches": 1,
       "requiresReadback": true,
       "oracle": [
         "Stage1",
         "Stage3"
-      ]
+      ],
+      "expectedPhysicalDispatches": 2,
+      "notes": "One user goal: +1.0 m then factual replan from first created Wall, then +0.5 m. Each attempt dispatches once."
     },
     {
       "id": "S4-02",
@@ -52,11 +53,11 @@
       "id": "S4-03",
       "name": "unknown_applied",
       "expected": "RECONCILE_APPLIED_NO_DUPLICATE",
-      "maxPhysicalDispatches": 1,
       "requiresReadback": true,
       "oracle": [
         "BIMEXEC T4"
-      ]
+      ],
+      "notes": "The uncertain first attempt dispatches once and is never replayed; later intended goal mutation may use a new attempt ID."
     },
     {
       "id": "S4-04",
@@ -81,11 +82,11 @@
       "id": "S4-06",
       "name": "crash_after_dispatch_restart",
       "expected": "RESTART_RECONCILE_NO_DUPLICATE",
-      "maxPhysicalDispatchesForAppliedVariant": 1,
       "requiresReadback": true,
       "oracle": [
         "BIMEXEC T5"
-      ]
+      ],
+      "notes": "The crashed attempt dispatches once across restart and is never replayed; later intended goal mutation may use a new attempt ID."
     },
     {
       "id": "S4-07",
