@@ -1,0 +1,72 @@
+transfer_policy_version: 0.1
+status: draft_for_archicad_implementation
+target: Archicad_29
+
+principle:
+  favorite_is_type_semantics_not_full_placement_geometry: true
+  executor_controls_placement_geometry: true
+
+transfer_sets:
+  SBIM_TYPE_APPLY:
+    purpose: "Apply verified type identity/configuration while preserving placement-specific geometry when supported."
+    include:
+      - structure_type
+      - building_material_or_composite_or_profile
+      - layer
+      - classification
+      - properties
+      - pens_lines_fills
+      - model_view_related_element_settings
+      - surface_defaults
+    preserve_or_executor_override:
+      - element_length
+      - element_position
+      - reference_line_geometry
+      - home_story
+      - top_link
+      - top_offset
+      - story_relative_offsets
+      - rotation
+      - element_specific_placement_anchor
+    rule: "If Archicad Transfer Set cannot exclude a required geometric field for a tool, the executor reapplies verified geometry immediately after Favorite application and validates the result."
+
+  SBIM_FULL_REPLACE:
+    purpose: "Intentional full type+geometry-style replacement for selected elements during controlled migration."
+    include: ALL_SUPPORTED
+    use_by_agent_without_explicit_migration_action: false
+
+  SBIM_DATA_ONLY:
+    purpose: "Transfer classification/properties/data without changing construction geometry."
+    include:
+      - classification
+      - properties
+    use_case:
+      - imported_elements
+      - semantic_repair
+      - qa_normalization
+
+favorite_default_user_preference_note:
+  project_stores_transfer_sets: true
+  default_favorite_transfer_set_is_local_user_preference: true
+  consequence: "Template installation instructions must set SBIM_TYPE_APPLY as local default, but agent execution must not trust the local default; it must select/verify the intended transfer behavior explicitly."
+
+favorite_identity:
+  lookup_order:
+    - stable_type_id
+    - canonical_favorite_name
+  archicad_favorite_name_is_immutable_after_release: true
+  duplicate_suffix_names_allowed_in_release: false
+
+folders:
+  - 00_CORE
+  - 01_AR_WALL
+  - 02_AR_SLAB
+  - 03_AR_ROOF
+  - 04_AR_OPENINGS
+  - 05_AR_STAIRS_RAILINGS
+  - 06_AR_OBJECTS
+  - 07_KR
+  - 08_MEP
+  - 09_GP
+  - 90_PROJECT_PACK
+  - 99_QUARANTINE
