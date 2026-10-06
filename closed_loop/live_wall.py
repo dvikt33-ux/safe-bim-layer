@@ -152,6 +152,70 @@ class LiveSession:
             'modelHash': signature, 'elementCount': len(data['elements']), 'role': role})
         return data, path, signature
 
+    def fixture_chain_source(self, data):
+        report_value = os.environ.get('SAFE_BIM_STAGE4_FIXTURE_REPORT')
+        if not report_value:
+            return None
+        report_path = Path(report_value)
+        if not report_path.is_absolute():
+            report_path = ROOT / report_path
+        report = read(report_path)
+        if report.get('status') != 'PASS' or not report.get('seedGuid'):
+            raise ValueError('Stage 4 fixture report is not PASS or has no seedGuid')
+        actual_identity = ntpath.normcase(ntpath.normpath(self.identity['projectPath']))
+        fixture_identity = ntpath.normcase(ntpath.normpath(report.get('projectPath','')))
+        if actual_identity != fixture_identity:
+            raise ValueError('Stage 4 fixture belongs to another PLN')
+        elements = {e['guid'].lower(): e for e in data.get('elements', [])}
+        current = elements.get(report['seedGuid'].lower())
+        if not current or current.get('type') != 'Wall':
+            raise ValueError('Stage 4 fixture seed Wall is absent from current model')
+        stories = {int(s['index']): float(s['elevation']) for s in data.get('stories', [])}
+        visited = set()
+        while True:
+            if current['guid'].lower() in visited:
+                raise ValueError('Stage 4 fixture chain contains a cycle')
+            visited.add(current['guid'].lower())
+            cref = self.chat.refline(current)
+            if not cref:
+                raise ValueError('Stage 4 fixture chain contains a non-straight Wall')
+            ref, begin, end, _ = cref
+            ux, uy = self.chat.direction(ref)
+            successors = []
+            for other in elements.values():
+                if other['guid'].lower() in visited:
+                    continue
+                oref_tuple = self.chat.refline(other)
+                if not oref_tuple or not self.chat.same_wall_level(current, other, stories):
+                    continue
+                oref, obegin, _, _ = oref_tuple
+                ox, oy = self.chat.direction(oref)
+                if self.chat.endpoint_distance(end, obegin) <= TOL and ux*ox + uy*oy >= 1.0 - 1e-6:
+                    successors.append(other)
+            if not successors:
+                return current
+            if len(successors) != 1:
+                raise ValueError('Stage 4 fixture chain endpoint is ambiguous')
+            current = successors[0]
+
+    def bound_fixture_plan(self, data, length):
+        source = self.fixture_chain_source(data)
+        if source is None:
+            return None
+        ref, begin, end, source_length = self.chat.refline(source)
+        selection = {'guid': source['guid'], 'homeStory': source['homeStory'],
+            'begin': begin, 'end': end, 'length': source_length,
+            'selectionRule': 'pinned Stage 4 fixture chain endpoint'}
+        colliders = self.chat.proposed_wall_colliders(data, selection, length)
+        if colliders:
+            return {'status':'BLOCKED',
+                'reason':'Pinned Stage 4 fixture continuation corridor intersects model geometry.',
+                'selectedGuid':source['guid'], 'colliderGuids':colliders[:20],
+                'selection':selection}
+        return {'status':'PLANNED',
+            'request':{'action':'create_wall','mode':'execute','sourceGuid':source['guid'],'length':length},
+            'selectedGuid':source['guid'], 'selection':selection}
+
     def values(self):
         n = len(self.rows)
         first, second = (self.rows[0] if n else None), (self.rows[1] if n > 1 else None)
@@ -198,7 +262,9 @@ class LivePlanner:
         data = read(observation.evidence['live.snapshot']['path'])
         length = (1.0, 0.5)[number-1]
         subgoal = f'Продолжи последнюю созданную стену ещё на {length} метра.'
-        plan = session.chat.instruction_to_request(subgoal, 'execute', data)
+        plan = session.bound_fixture_plan(data, length)
+        if plan is None:
+            plan = session.chat.instruction_to_request(subgoal, 'execute', data)
         save(session.output / f'plan-{job.iteration}.json', {'goalId': job.goalId, 'derivedSubgoal': subgoal,
             'modelIdentity': observation.modelIdentity, 'modelHash': observation.modelHash, 'baselinePlanner': plan})
         if plan['status'] != 'PLANNED':
