@@ -1,0 +1,14 @@
+{
+  "release": "KAIMAN exact-dimension layer 2.4",
+  "parent_git_commit": "3cbfc4e379b54d4249badd508fb64c21886ac186",
+  "scope": "WT1.2 sheets 22-39 / PDF pages 62-79",
+  "previous_bound_sheets": 21,
+  "new_bound_sheets": 18,
+  "total_bound_sheets": 39,
+  "remaining_kaiman_sheets": 188,
+  "previous_bindings": 196,
+  "new_bindings": 201,
+  "total_bindings": 397,
+  "raster_measurement_used": 0,
+  "commit_allowed_true": 0
+}

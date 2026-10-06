@@ -1,0 +1,36 @@
+{
+  "release": "KAIMAN exact-dimension layer 2.4",
+  "timestamp_utc": "2026-10-06T16:49:34.825289+00:00",
+  "source_scope": "KAIMAN/KERAKAM WT1.2 sheets 22-39, physical PDF pages 62-79",
+  "checks": {
+    "release": "KAIMAN exact-dimension layer 2.4",
+    "parent_git_commit": "3cbfc4e379b54d4249badd508fb64c21886ac186",
+    "scope": "WT1.2 sheets 22-39 / PDF pages 62-79",
+    "previous_bound_sheets": 21,
+    "new_bound_sheets": 18,
+    "total_bound_sheets": 39,
+    "remaining_kaiman_sheets": 188,
+    "previous_bindings": 196,
+    "new_bindings": 201,
+    "total_bindings": 397,
+    "raster_measurement_used": 0,
+    "commit_allowed_true": 0
+  },
+  "key_findings": [
+    "WT1.2 standard plastered wall stack is 20 + 380 + 15 = 415 mm on the repeated standard sheets.",
+    "Window sections 24 and 36 print storey 3000 mm, sill 920 mm and clear opening 1680 mm.",
+    "Sheet 27 prints external wall 415 mm and internal KERAKAM 25XL wall 15 + 250 + 15 = 280 mm.",
+    "Sheet 28 prints 250-260 mm normal block course lengths and 129 mm KERAKAM 38+ closure units at the opening.",
+    "Mansard/cold-attic sheets preserve source anchor M12, L=225 mm and recommended 80 mm embedment as source technical guidance only.",
+    "Monolithic slab-edge sheets print 160 mm main slab + 60 mm downstand and 120 + 100 + 160 mm horizontal edge segmentation.",
+    "Plinth sheet 33 is a local exception: the upper wall is printed 15 + 380 + 15 = 410 mm; this does not overwrite the 415 mm WT1.2 standard stack.",
+    "Wood-beam sheet 38 prints 200 mm beam depth, 250 mm bearing, 20 mm top/bottom clearance, and 120 + 10 + 250 = 380 mm wall-pocket segmentation."
+  ],
+  "safety": [
+    "No pixel/raster-scale dimensions used.",
+    "Only printed values with visible semantic endpoints were bound.",
+    "Values remain source technical solutions, not current normative requirements.",
+    "Project structural sizing and any unbound secondary details remain fail-closed."
+  ],
+  "commit_policy": "fail_closed"
+}

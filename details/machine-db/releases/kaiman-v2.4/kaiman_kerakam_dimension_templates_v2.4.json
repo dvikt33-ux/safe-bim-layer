@@ -1,0 +1,592 @@
+{
+  "KK_WT11_WALL_STACK": {
+    "title": "WT1.1 standard exterior wall stack, outside -> inside",
+    "source_pages": [
+      41,
+      42,
+      44,
+      46,
+      47,
+      48,
+      49,
+      51,
+      55,
+      56,
+      59,
+      60
+    ],
+    "dimensions_mm": [
+      {
+        "key": "facing_brick",
+        "value": 120,
+        "a": "exterior_face",
+        "b": "back_of_facing_brick"
+      },
+      {
+        "key": "facing_to_core_gap",
+        "value": 10,
+        "a": "back_of_facing_brick",
+        "b": "front_of_ceramic_core"
+      },
+      {
+        "key": "ceramic_core",
+        "value": 380,
+        "a": "front_of_ceramic_core",
+        "b": "inside_face_of_ceramic_core"
+      },
+      {
+        "key": "interior_plaster",
+        "value": 15,
+        "a": "inside_face_of_ceramic_core",
+        "b": "interior_finish_face"
+      },
+      {
+        "key": "total_wall",
+        "value": 525,
+        "a": "exterior_face",
+        "b": "interior_finish_face"
+      }
+    ],
+    "course_dimensions_mm": [
+      {
+        "key": "ceramic_unit_height",
+        "value": 219,
+        "a": "bottom_of_unit",
+        "b": "top_of_unit"
+      },
+      {
+        "key": "drawn_bed_joint",
+        "value": 12,
+        "a": "top_of_unit",
+        "b": "bottom_of_next_unit",
+        "note": "source-wide text allows 10–15 mm; 12 mm is the drawn value in this detail family"
+      },
+      {
+        "key": "facing_brick_height",
+        "value": 65,
+        "a": "brick_bottom",
+        "b": "brick_top"
+      },
+      {
+        "key": "drawn_facing_bed_joint",
+        "value": 12,
+        "a": "brick_course_joint_faces",
+        "b": "brick_course_joint_faces"
+      }
+    ],
+    "machine_use": "create Wall/composite reference stack; optional detailed masonry mode"
+  },
+  "KK_WT11_PREFAB_SLAB_EDGE": {
+    "title": "WT1.1 prefabricated hollow-core slab edge stack",
+    "source_pages": [
+      41,
+      42
+    ],
+    "dimensions_mm": [
+      {
+        "key": "facing_brick",
+        "value": 120
+      },
+      {
+        "key": "gap",
+        "value": 10
+      },
+      {
+        "key": "kerakam12",
+        "value": 120
+      },
+      {
+        "key": "soft_mineral_wool",
+        "value": 100
+      },
+      {
+        "key": "slab_bearing_or_edge_zone",
+        "value": 160
+      },
+      {
+        "key": "interior_finish",
+        "value": 15
+      },
+      {
+        "key": "slab_depth",
+        "value": 220
+      }
+    ],
+    "machine_use": "build floor-edge junction; 160 is a source printed horizontal edge-zone dimension, not a structural capacity assumption"
+  },
+  "KK_WT11_WINDOW_HEAD_STACK": {
+    "title": "WT1.1 window-head wall segmentation",
+    "source_pages": [
+      43,
+      45,
+      57,
+      58,
+      61
+    ],
+    "dimensions_mm": [
+      {
+        "key": "facing_brick",
+        "value": 120
+      },
+      {
+        "key": "gap",
+        "value": 10
+      },
+      {
+        "key": "kerakam12_or_head_ceramic",
+        "value": 120
+      },
+      {
+        "key": "soft_mineral_wool",
+        "value": 140
+      },
+      {
+        "key": "reinforced_concrete_lintel_zone",
+        "value": 120
+      },
+      {
+        "key": "interior_finish",
+        "value": 15
+      }
+    ],
+    "machine_use": "construct head band in local section frame; exact component choice remains sheet-bound"
+  },
+  "KK_WT11_WINDOW_VERTICAL": {
+    "title": "WT1.1 repeated opening vertical geometry",
+    "source_pages": [
+      43,
+      57
+    ],
+    "dimensions_mm": [
+      {
+        "key": "storey_height",
+        "value": 3000,
+        "a": "floor_reference",
+        "b": "next_floor_reference"
+      },
+      {
+        "key": "window_clear_height",
+        "value": 1630,
+        "a": "window_sill_reference",
+        "b": "window_head_reference"
+      },
+      {
+        "key": "window_sill_height",
+        "value": 910,
+        "a": "floor_reference",
+        "b": "window_sill_reference"
+      }
+    ],
+    "machine_use": "opening placement constraints; sill/opening dimensions are source examples, not project defaults outside this detail family"
+  },
+  "KK_WT11_MONOLITHIC_SLAB_EDGE": {
+    "title": "WT1.1 monolithic slab edge",
+    "source_pages": [
+      55,
+      56,
+      57,
+      58
+    ],
+    "dimensions_mm": [
+      {
+        "key": "facing_brick",
+        "value": 120
+      },
+      {
+        "key": "gap",
+        "value": 10
+      },
+      {
+        "key": "kerakam12",
+        "value": 120
+      },
+      {
+        "key": "soft_mineral_wool",
+        "value": 100
+      },
+      {
+        "key": "concrete_edge_zone",
+        "value": 160
+      },
+      {
+        "key": "main_slab_depth",
+        "value": 160,
+        "axis": "vertical"
+      },
+      {
+        "key": "downstand_depth",
+        "value": 60,
+        "axis": "vertical"
+      }
+    ],
+    "machine_use": "build stepped monolithic slab-edge geometry; values are source geometry only"
+  },
+  "KK_WT11_WOOD_BEAM": {
+    "title": "WT1.1 wooden floor beam bearing detail",
+    "source_pages": [
+      59,
+      60,
+      61
+    ],
+    "dimensions_mm": [
+      {
+        "key": "beam_width",
+        "value": 120
+      },
+      {
+        "key": "beam_depth",
+        "value": 200
+      },
+      {
+        "key": "bearing_length",
+        "value": 250
+      },
+      {
+        "key": "side_clearance_each",
+        "value": 40
+      },
+      {
+        "key": "vertical_clearance_each",
+        "value": 20
+      },
+      {
+        "key": "ceramic_unit_length_range",
+        "min": 250,
+        "max": 260
+      }
+    ],
+    "machine_use": "Beam element + wall pocket; bearing/capacity still requires project structural verification"
+  },
+  "KK_WT12_WALL_STACK": {
+    "title": "WT1.2 plastered exterior wall stack, outside -> inside",
+    "source_pages": [
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79
+    ],
+    "dimensions_mm": [
+      {
+        "key": "exterior_plaster",
+        "value": 20,
+        "a": "exterior_finish_face",
+        "b": "front_of_ceramic_core"
+      },
+      {
+        "key": "ceramic_core",
+        "value": 380,
+        "a": "front_of_ceramic_core",
+        "b": "inside_face_of_ceramic_core"
+      },
+      {
+        "key": "interior_plaster",
+        "value": 15,
+        "a": "inside_face_of_ceramic_core",
+        "b": "interior_finish_face"
+      },
+      {
+        "key": "total_wall",
+        "value": 415,
+        "a": "exterior_finish_face",
+        "b": "interior_finish_face"
+      }
+    ],
+    "machine_use": "native Wall/composite stack for this source branch; project use remains gated"
+  },
+  "KK_WT12_PREFAB_SLAB_EDGE": {
+    "title": "WT1.2 prefabricated hollow-core slab edge",
+    "source_pages": [
+      62,
+      63,
+      64,
+      65,
+      69,
+      70
+    ],
+    "dimensions_mm": [
+      {
+        "key": "kerakam12",
+        "value": 120
+      },
+      {
+        "key": "soft_mineral_wool",
+        "value": 100
+      },
+      {
+        "key": "slab_edge_zone",
+        "value": 160
+      },
+      {
+        "key": "slab_depth",
+        "value": 220
+      },
+      {
+        "key": "upper_layer",
+        "value": 10
+      },
+      {
+        "key": "lower_layer",
+        "value": 10
+      }
+    ],
+    "machine_use": "floor-edge junction geometry only"
+  },
+  "KK_WT12_WINDOW_VERTICAL": {
+    "title": "WT1.2 repeated opening vertical geometry",
+    "source_pages": [
+      64,
+      76
+    ],
+    "dimensions_mm": [
+      {
+        "key": "storey_height",
+        "value": 3000
+      },
+      {
+        "key": "window_sill_height",
+        "value": 920
+      },
+      {
+        "key": "window_clear_height",
+        "value": 1680
+      }
+    ],
+    "machine_use": "opening placement constraints for this source family only"
+  },
+  "KK_WT12_WINDOW_HEAD_STACK": {
+    "title": "WT1.2 window-head wall segmentation",
+    "source_pages": [
+      64,
+      65,
+      76,
+      77,
+      79
+    ],
+    "dimensions_mm": [
+      {
+        "key": "kerakam12",
+        "value": 120
+      },
+      {
+        "key": "soft_mineral_wool",
+        "value": 140
+      },
+      {
+        "key": "reinforced_concrete_lintel_zone",
+        "value": 120
+      }
+    ],
+    "machine_use": "local head-band geometry"
+  },
+  "KK_WT12_EXT_INT_INTERSECTION": {
+    "title": "WT1.2 external/internal wall intersection",
+    "source_pages": [
+      67
+    ],
+    "dimensions_mm": [
+      {
+        "key": "external_wall_total",
+        "value": 415
+      },
+      {
+        "key": "internal_wall_total",
+        "value": 280
+      },
+      {
+        "key": "internal_core_kerakam25xl",
+        "value": 250
+      },
+      {
+        "key": "internal_plaster_each_side",
+        "value": 15
+      }
+    ],
+    "machine_use": "intersection topology + thickness constraints"
+  },
+  "KK_WT12_WINDOW_HORIZONTAL": {
+    "title": "WT1.2 horizontal opening coursing",
+    "source_pages": [
+      68
+    ],
+    "dimensions_mm": [
+      {
+        "key": "full_block_length_range",
+        "min": 250,
+        "max": 260
+      },
+      {
+        "key": "closure_half_block",
+        "value": 129
+      },
+      {
+        "key": "wall_total",
+        "value": 415
+      }
+    ],
+    "machine_use": "detailed masonry coursing around opening"
+  },
+  "KK_WT12_MANSARD_ANCHOR": {
+    "title": "WT1.2 roof/mauerlat anchor source geometry",
+    "source_pages": [
+      69,
+      70,
+      71
+    ],
+    "dimensions_mm": [
+      {
+        "key": "anchor_diameter",
+        "value": 12
+      },
+      {
+        "key": "anchor_length",
+        "value": 225
+      },
+      {
+        "key": "recommended_embedment",
+        "value": 80
+      }
+    ],
+    "machine_use": "anchor source example; structural design verification required"
+  },
+  "KK_WT12_COMBINED_ROOF": {
+    "title": "WT1.2 combined roof/parapet detail",
+    "source_pages": [
+      72
+    ],
+    "dimensions_mm": [
+      {
+        "key": "wall_total",
+        "value": 415
+      },
+      {
+        "key": "parapet_masonry",
+        "value": 380
+      },
+      {
+        "key": "slab_depth",
+        "value": 220
+      },
+      {
+        "key": "coping_recess",
+        "value": 66
+      }
+    ],
+    "machine_use": "roof/parapet local detail frame"
+  },
+  "KK_WT12_PLINTH": {
+    "title": "WT1.2 plinth sheet local geometry exception",
+    "source_pages": [
+      73
+    ],
+    "dimensions_mm": [
+      {
+        "key": "upper_wall_total",
+        "value": 410
+      },
+      {
+        "key": "upper_external_finish",
+        "value": 15
+      },
+      {
+        "key": "upper_core",
+        "value": 380
+      },
+      {
+        "key": "upper_internal_finish",
+        "value": 15
+      },
+      {
+        "key": "foundation_block_width",
+        "value": 400
+      },
+      {
+        "key": "slab_depth",
+        "value": 220
+      }
+    ],
+    "machine_use": "plinth local detail; do not replace 415-mm standard wall stack globally"
+  },
+  "KK_WT12_MONOLITHIC_SLAB_EDGE": {
+    "title": "WT1.2 monolithic slab edge",
+    "source_pages": [
+      74,
+      75,
+      76,
+      77
+    ],
+    "dimensions_mm": [
+      {
+        "key": "kerakam12",
+        "value": 120
+      },
+      {
+        "key": "soft_mineral_wool",
+        "value": 100
+      },
+      {
+        "key": "concrete_edge_zone",
+        "value": 160
+      },
+      {
+        "key": "main_slab_depth",
+        "value": 160
+      },
+      {
+        "key": "downstand_depth",
+        "value": 60
+      },
+      {
+        "key": "upper_layer",
+        "value": 10
+      },
+      {
+        "key": "lower_layer",
+        "value": 10
+      }
+    ],
+    "machine_use": "stepped monolithic slab-edge geometry"
+  },
+  "KK_WT12_WOOD_BEAM": {
+    "title": "WT1.2 wood floor beam pocket",
+    "source_pages": [
+      78,
+      79
+    ],
+    "dimensions_mm": [
+      {
+        "key": "beam_depth",
+        "value": 200
+      },
+      {
+        "key": "bearing_length",
+        "value": 250
+      },
+      {
+        "key": "vertical_clearance_each",
+        "value": 20
+      },
+      {
+        "key": "front_kerakam12",
+        "value": 120
+      },
+      {
+        "key": "pocket_gap",
+        "value": 10
+      }
+    ],
+    "machine_use": "Beam + wall pocket; capacity verification required"
+  }
+}

@@ -1,0 +1,275 @@
+[
+  {
+    "sheet": "1",
+    "pdf_page": 41,
+    "wall_type_id": "WT1.1",
+    "dimension_binding_status": "bound_in_v2.3",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "2",
+    "pdf_page": 42,
+    "wall_type_id": "WT1.1",
+    "dimension_binding_status": "bound_in_v2.3",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "3",
+    "pdf_page": 43,
+    "wall_type_id": "WT1.1",
+    "dimension_binding_status": "bound_in_v2.3",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "4",
+    "pdf_page": 44,
+    "wall_type_id": "WT1.1",
+    "dimension_binding_status": "bound_in_v2.3",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "5",
+    "pdf_page": 45,
+    "wall_type_id": "WT1.1",
+    "dimension_binding_status": "bound_in_v2.3",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "6",
+    "pdf_page": 46,
+    "wall_type_id": "WT1.1",
+    "dimension_binding_status": "bound_in_v2.3",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "7",
+    "pdf_page": 47,
+    "wall_type_id": "WT1.1",
+    "dimension_binding_status": "bound_in_v2.3",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "8",
+    "pdf_page": 48,
+    "wall_type_id": "WT1.1",
+    "dimension_binding_status": "bound_in_v2.3",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "9",
+    "pdf_page": 49,
+    "wall_type_id": "WT1.1",
+    "dimension_binding_status": "bound_in_v2.3",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "10",
+    "pdf_page": 50,
+    "wall_type_id": "WT1.1",
+    "dimension_binding_status": "bound_in_v2.3",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "11",
+    "pdf_page": 51,
+    "wall_type_id": "WT1.1",
+    "dimension_binding_status": "bound_in_v2.3",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "12",
+    "pdf_page": 52,
+    "wall_type_id": "WT1.1",
+    "dimension_binding_status": "bound_in_v2.3",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "13",
+    "pdf_page": 53,
+    "wall_type_id": "WT1.1",
+    "dimension_binding_status": "bound_in_v2.3",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "14",
+    "pdf_page": 54,
+    "wall_type_id": "WT1.1",
+    "dimension_binding_status": "bound_in_v2.3",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "15",
+    "pdf_page": 55,
+    "wall_type_id": "WT1.1",
+    "dimension_binding_status": "bound_in_v2.3",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "16",
+    "pdf_page": 56,
+    "wall_type_id": "WT1.1",
+    "dimension_binding_status": "bound_in_v2.3",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "17",
+    "pdf_page": 57,
+    "wall_type_id": "WT1.1",
+    "dimension_binding_status": "bound_in_v2.3",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "18",
+    "pdf_page": 58,
+    "wall_type_id": "WT1.1",
+    "dimension_binding_status": "bound_in_v2.3",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "19",
+    "pdf_page": 59,
+    "wall_type_id": "WT1.1",
+    "dimension_binding_status": "bound_in_v2.3",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "20",
+    "pdf_page": 60,
+    "wall_type_id": "WT1.1",
+    "dimension_binding_status": "bound_in_v2.3",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "21",
+    "pdf_page": 61,
+    "wall_type_id": "WT1.1",
+    "dimension_binding_status": "bound_in_v2.3",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "22",
+    "pdf_page": 62,
+    "wall_type_id": "WT1.2",
+    "dimension_binding_status": "bound_in_v2.4",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "23",
+    "pdf_page": 63,
+    "wall_type_id": "WT1.2",
+    "dimension_binding_status": "bound_in_v2.4",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "24",
+    "pdf_page": 64,
+    "wall_type_id": "WT1.2",
+    "dimension_binding_status": "bound_in_v2.4",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "25",
+    "pdf_page": 65,
+    "wall_type_id": "WT1.2",
+    "dimension_binding_status": "bound_in_v2.4",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "26",
+    "pdf_page": 66,
+    "wall_type_id": "WT1.2",
+    "dimension_binding_status": "bound_in_v2.4",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "27",
+    "pdf_page": 67,
+    "wall_type_id": "WT1.2",
+    "dimension_binding_status": "bound_in_v2.4",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "28",
+    "pdf_page": 68,
+    "wall_type_id": "WT1.2",
+    "dimension_binding_status": "bound_in_v2.4",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "29",
+    "pdf_page": 69,
+    "wall_type_id": "WT1.2",
+    "dimension_binding_status": "bound_in_v2.4",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "30",
+    "pdf_page": 70,
+    "wall_type_id": "WT1.2",
+    "dimension_binding_status": "bound_in_v2.4",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "31",
+    "pdf_page": 71,
+    "wall_type_id": "WT1.2",
+    "dimension_binding_status": "bound_in_v2.4",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "32",
+    "pdf_page": 72,
+    "wall_type_id": "WT1.2",
+    "dimension_binding_status": "bound_in_v2.4",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "33",
+    "pdf_page": 73,
+    "wall_type_id": "WT1.2",
+    "dimension_binding_status": "bound_in_v2.4",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "34",
+    "pdf_page": 74,
+    "wall_type_id": "WT1.2",
+    "dimension_binding_status": "bound_in_v2.4",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "35",
+    "pdf_page": 75,
+    "wall_type_id": "WT1.2",
+    "dimension_binding_status": "bound_in_v2.4",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "36",
+    "pdf_page": 76,
+    "wall_type_id": "WT1.2",
+    "dimension_binding_status": "bound_in_v2.4",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "37",
+    "pdf_page": 77,
+    "wall_type_id": "WT1.2",
+    "dimension_binding_status": "bound_in_v2.4",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "38",
+    "pdf_page": 78,
+    "wall_type_id": "WT1.2",
+    "dimension_binding_status": "bound_in_v2.4",
+    "commit_allowed": false
+  },
+  {
+    "sheet": "39",
+    "pdf_page": 79,
+    "wall_type_id": "WT1.2",
+    "dimension_binding_status": "bound_in_v2.4",
+    "commit_allowed": false
+  }
+]
