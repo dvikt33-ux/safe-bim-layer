@@ -46,6 +46,12 @@ Plan the SBIM classification/property schema using native Archicad classificatio
 python scripts/archicad_template_builder.py plan-data-schema --out template-data-plan.json
 ```
 
+Inspect live View Map / Layout Book / Publisher prerequisites and report missing MVO or unverified GO/Dimension presets (read-only):
+
+```powershell
+python scripts/archicad_template_builder.py plan-navigator --out template-navigator-plan.json
+```
+
 Create the secondary `SBIM Semantic` Classification System and scoped SBIM Property Groups/Definitions:
 
 ```powershell
