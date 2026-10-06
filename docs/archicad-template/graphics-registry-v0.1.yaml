@@ -1,0 +1,92 @@
+registry_version: 0.1
+status: deterministic_core_subset
+target: Archicad_29
+
+semantic_pens:
+  1:  {name: LINE_MAIN_050, width_mm: 0.50}
+  2:  {name: LINE_MAIN_070, width_mm: 0.70}
+  3:  {name: LINE_HEAVY_100, width_mm: 1.00}
+  4:  {name: LINE_XHEAVY_140, width_mm: 1.40}
+  5:  {name: LINE_THIN_020, width_mm: 0.20}
+  6:  {name: LINE_THIN_025, width_mm: 0.25}
+  7:  {name: LINE_MEDIUM_035, width_mm: 0.35}
+  8:  {name: LINE_HIDDEN_025, width_mm: 0.25}
+  9:  {name: LINE_AXIS_025, width_mm: 0.25}
+  10: {name: LINE_SECTION_MARK_070, width_mm: 0.70}
+  11: {name: TEXT_MAIN_020, width_mm: 0.20}
+  12: {name: TEXT_SECONDARY_020, width_mm: 0.20}
+  13: {name: DIMENSION_020, width_mm: 0.20}
+  14: {name: GRID_TEXT_020, width_mm: 0.20}
+  15: {name: MARKER_TEXT_020, width_mm: 0.20}
+  16: {name: LEADER_020, width_mm: 0.20}
+  17: {name: HATCH_020, width_mm: 0.20}
+  18: {name: DETAIL_OUTLINE_035, width_mm: 0.35}
+  19: {name: OVERHEAD_020, width_mm: 0.20}
+  20: {name: BELOW_020, width_mm: 0.20}
+  21: {name: OPENING_SYMBOL_020, width_mm: 0.20}
+  22: {name: STAIR_SYMBOL_020, width_mm: 0.20}
+  23: {name: RAILING_SYMBOL_020, width_mm: 0.20}
+  24: {name: ZONE_BOUNDARY_020, width_mm: 0.20}
+  25: {name: ROOM_STAMP_020, width_mm: 0.20}
+  26: {name: FURNITURE_020, width_mm: 0.20}
+  27: {name: EQUIPMENT_020, width_mm: 0.20}
+  28: {name: SITE_THIN_020, width_mm: 0.20}
+  29: {name: SITE_MAIN_035, width_mm: 0.35}
+  30: {name: PROPERTY_BOUNDARY_050, width_mm: 0.50}
+
+pen_tables:
+  - name: 01_WORK_COLOR
+    color_policy: inherit_source_until_color_audit
+    active_for_model: true
+    active_for_layout: false
+  - name: 10_SPDS_PRINT_SMALL
+    color_policy: registered_pens_black
+    active_for_model: false
+    active_for_layout: true
+  - name: 11_SPDS_PRINT_LARGE
+    color_policy: registered_pens_black
+    active_for_model: false
+    active_for_layout: false
+    width_overrides:
+      1: 0.70
+      2: 0.70
+      10: 0.70
+  - name: 20_QA_COLOR
+    color_policy: inherit_source_until_QA_color_audit
+    active_for_model: false
+    active_for_layout: false
+
+line_types:
+  - name: LT_01_CONTINUOUS
+    line_type: Solid
+    scale_with_plan: false
+    release_status: candidate
+  - name: LT_02_HIDDEN
+    line_type: Dashed
+    scale_with_plan: false
+    period_mm: 5.5
+    dash_items:
+      - {dash_mm: 4.0, gap_mm: 1.5}
+    release_status: candidate
+  - name: LT_03_AXIS
+    line_type: Dashed
+    scale_with_plan: false
+    period_mm: 18.5
+    dash_items:
+      - {dash_mm: 12.0, gap_mm: 3.0}
+      - {dash_mm: 0.5, gap_mm: 3.0}
+    release_status: candidate_needs_print_test
+  - name: LT_08_OVERHEAD
+    line_type: Dashed
+    scale_with_plan: false
+    period_mm: 5.5
+    dash_items:
+      - {dash_mm: 4.0, gap_mm: 1.5}
+    release_status: candidate
+
+deferred_line_types:
+  - LT_04_SECTION_OPEN
+  - LT_05_BREAK_SHORT
+  - LT_06_BREAK_LONG
+  - LT_07_FOLD
+reason: "Symbol/special patterns require visual and DWG round-trip tests before automatic creation."
