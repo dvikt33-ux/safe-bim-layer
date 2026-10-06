@@ -1,0 +1,188 @@
+registry_version: 0.1
+status: verified_graphisoft_keys_plus_gost_mapping_draft
+target: Archicad_29
+
+sources:
+  graphisoft:
+    document: Archicad_29_Autotext_Keywords
+    url: https://help.graphisoft.com/AC/29/INT/_AC29_Help/070_Documentation/070_Documentation-69.htm
+  titleblock:
+    document: GOST_R_21.101-2026
+    form: 3
+
+verified_builtin_keys:
+  PROJECTNAME: Project Name
+  BUILDING_NAME: Building Name
+  CONTACTCOMPANY: Contact Company
+  CLIENTCOMPANY: Client Company
+  LAYOUTID: Layout ID
+  LAYOUTNAME: Layout Name
+  LAYOUTNUMBER: Layout Number
+  LAYOUTNUMBERINCURRENTSUBSET: Layout Number in Current Subset
+  NUMBEROFLAYOUTSINCURRENTSUBSET: Number of Layouts in Current Subset
+  MASTERLAYOUTNAME: Master Layout Name
+  MASTERLAYOUTWIDTH: Master Layout Width
+  MASTERLAYOUTHEIGHT: Master Layout Height
+  CURRENTREVISIONID: Current Revision ID
+  CURRENTTRANSMITTEDBY: Current Revision Transmitted By
+  CURRENTTRANSMITTALSETDATE: Current Revision Transmittal Set Date
+  CURRENTTRANSMITTALSETID: Current Revision Transmittal Set ID
+  CURRENTTRANSMITTALSETDESCRIPTION: Current Revision Transmittal Set Name
+  DRAWINGID: Drawing ID
+  DRAWINGNAME: Drawing Name
+  DRAWINGSCALE: Drawing Scale
+  ORIGINALSCALE: Original Scale
+  SHORTDATE: Short Date
+  LASTSAVEDAT: Last Saved At
+  LASTSAVEDBY: Last Saved By
+
+form3_mapping:
+  1:
+    semantic: document_designation
+    source: custom_layout_or_subset_data
+    status: layout_custom_field_seed_required
+    note: "Project-wide Project Info is too coarse when sections have different designations."
+  2:
+    semantic: enterprise_complex_microdistrict_or_stage
+    source: project_info_custom
+    suggested_field: SBIM.Project.StageOrComplex
+    status: project_field_candidate
+  3:
+    semantic: building_or_structure_name
+    source: autotext
+    key: BUILDING_NAME
+    token: <BUILDING_NAME>
+    status: ready
+  4:
+    semantic: images_or_general_data_name
+    source: autotext
+    key: LAYOUTNAME
+    token: <LAYOUTNAME>
+    status: ready_if_layout_naming_policy_passes
+  5:
+    semantic: product_or_document_name
+    source: custom_layout_or_subset_data
+    status: layout_custom_field_seed_required
+  6:
+    semantic: documentation_type
+    source: project_info_custom
+    suggested_field: SBIM.Document.Type
+    allowed_values: [OI, P, R, I]
+    status: project_field_candidate
+  7:
+    semantic: sheet_number
+    source: autotext
+    key: LAYOUTNUMBERINCURRENTSUBSET
+    token: <LAYOUTNUMBERINCURRENTSUBSET>
+    status: ready
+  8:
+    semantic: total_sheets
+    source: autotext
+    key: NUMBEROFLAYOUTSINCURRENTSUBSET
+    token: <NUMBEROFLAYOUTSINCURRENTSUBSET>
+    status: ready
+  9:
+    semantic: authoring_organization
+    source: autotext
+    key: CONTACTCOMPANY
+    token: <CONTACTCOMPANY>
+    status: ready_if_project_info_policy_passes
+  10:
+    semantic: work_role
+    source: titleblock_role_rows
+    status: project_standard_required
+  11:
+    semantic: signer_surname
+    source: project_contact_or_manual_signature_data
+    status: signature_workflow_required
+  12:
+    semantic: signature
+    source: signature_workflow
+    status: never_fake
+  13:
+    semantic: signing_date
+    source: issue_or_signature_workflow
+    status: workflow_required
+  14:
+    semantic: change_number
+    source: revision_management
+    status: revision_workflow_required
+  15:
+    semantic: changed_area_count
+    source: revision_management
+    status: revision_workflow_required
+  16:
+    semantic: sheet_change_status
+    source: revision_management
+    status: revision_workflow_required
+  17:
+    semantic: change_document_designation
+    source: revision_management
+    status: revision_workflow_required
+  18:
+    semantic: change_signature
+    source: revision_management
+    status: revision_workflow_required
+  19:
+    semantic: change_date
+    source: revision_management
+    status: revision_workflow_required
+  20:
+    semantic: original_inventory_number
+    source: document_control
+    status: optional_document_control
+  21:
+    semantic: archive_acceptance_signature_and_date
+    source: document_control
+    status: optional_document_control
+  22:
+    semantic: replaced_original_inventory_number
+    source: document_control
+    status: optional_document_control
+  23:
+    semantic: detail_material_designation
+    source: drawing_or_element_data
+    status: detail_only
+  24:
+    semantic: product_mass
+    source: drawing_or_element_data
+    status: product_drawing_only
+  25:
+    semantic: scale
+    source: autotext
+    key: DRAWINGSCALE
+    token: <DRAWINGSCALE>
+    status: ready_with_reference_drawing_policy
+  26:
+    semantic: sheet_format
+    source: master_layout_static_constant
+    status: ready
+    values_by_master:
+      A4_P: A4
+      A3_L: A3
+      A3_P: A3
+      A2_L: A2
+      A2_P: A2
+      A1_L: A1
+      A1_P: A1
+      A0_L: A0
+  27:
+    semantic: short_customer_name
+    source: project_info_custom_or_client_company
+    builtin_candidate:
+      key: CLIENTCOMPANY
+      token: <CLIENTCOMPANY>
+    status: project_policy_required
+
+runtime_validation:
+  command: GetAutoTextsV1
+  required_builtin_keys_for_first_titleblock_test:
+    - BUILDING_NAME
+    - LAYOUTNAME
+    - LAYOUTNUMBERINCURRENTSUBSET
+    - NUMBEROFLAYOUTSINCURRENTSUBSET
+    - CONTACTCOMPANY
+    - DRAWINGSCALE
+    - CURRENTREVISIONID
+  text_embedding_format: "<KEY>"
+  create_text_command: CreateTexts
