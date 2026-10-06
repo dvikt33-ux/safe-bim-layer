@@ -1,0 +1,174 @@
+registry_version: 0.1
+status: draft_for_archicad_implementation
+target: Archicad_29
+
+principles:
+  one_element_one_layer: true
+  layer_is_visibility_and_intersection_control_not_classification: true
+  floor_number_in_layer_name: false
+  renovation_state_in_layer_name: false
+  material_in_layer_name: false
+  color_in_layer_name: false
+  windows_doors_openings_follow_host_wall_layer: true
+  archicad_layer_for_production_use: false
+
+intersection_groups:
+  native_connecting: 1
+  native_isolated_test: 2
+  no_intersection: 0
+
+layers:
+  - {name: AR_MODEL_ENVELOPE, discipline: architecture, purpose: "Primary architectural envelope geometry", group: 1, production: true}
+  - {name: AR_MODEL_PARTITION, discipline: architecture, purpose: "Non-load-bearing internal partitions", group: 1, production: true}
+  - {name: AR_MODEL_CIRCULATION, discipline: architecture, purpose: "Stairs, ramps and circulation geometry", group: 1, production: true}
+  - {name: AR_MODEL_RAILING, discipline: architecture, purpose: "Railings and guards", group: 1, production: true}
+  - {name: AR_MODEL_CEILING, discipline: architecture, purpose: "Suspended ceilings and ceiling model geometry", group: 1, production: true}
+  - {name: AR_MODEL_FINISH, discipline: architecture, purpose: "Modeled finish elements that need independent visibility", group: 1, production: true}
+  - {name: AR_MODEL_FURNITURE, discipline: architecture, purpose: "Furniture objects", group: 1, production: true}
+  - {name: AR_MODEL_EQUIPMENT, discipline: architecture, purpose: "Architectural equipment and fixtures", group: 1, production: true}
+  - {name: AR_ZONE, discipline: architecture, purpose: "Zones/spaces", group: 1, production: true}
+  - {name: AR_MODEL_SPECIAL, discipline: architecture, purpose: "Reviewed special native architecture geometry", group: 1, production: true}
+
+  - {name: KR_MODEL_PRIMARY, discipline: structures, purpose: "Primary load-bearing structural geometry", group: 1, production: true}
+  - {name: KR_MODEL_SECONDARY, discipline: structures, purpose: "Secondary structural geometry", group: 1, production: true}
+  - {name: KR_FOUNDATION, discipline: foundations, purpose: "Foundations and below-grade structural bodies", group: 1, production: true}
+
+  - {name: VK_MODEL, discipline: water_sewer, purpose: "Native/modelled water and sewer systems", group: 1, production: true}
+  - {name: VK_EQUIPMENT, discipline: water_sewer, purpose: "Water/sewer equipment requiring separate visibility", group: 1, production: true}
+  - {name: OV_MODEL, discipline: hvac, purpose: "HVAC distribution systems", group: 1, production: true}
+  - {name: OV_EQUIPMENT, discipline: hvac, purpose: "HVAC equipment", group: 1, production: true}
+  - {name: EOM_MODEL, discipline: electrical, purpose: "Electrical power/lighting model", group: 1, production: true}
+  - {name: EOM_EQUIPMENT, discipline: electrical, purpose: "Electrical equipment", group: 1, production: true}
+  - {name: SS_MODEL, discipline: low_current, purpose: "Low-current and communications model", group: 1, production: true}
+  - {name: SS_EQUIPMENT, discipline: low_current, purpose: "Low-current equipment/racks/devices", group: 1, production: true}
+  - {name: PB_MODEL, discipline: fire_safety, purpose: "Fire-safety model elements", group: 1, production: true}
+  - {name: PB_EQUIPMENT, discipline: fire_safety, purpose: "Fire-safety equipment", group: 1, production: true}
+  - {name: TX_MODEL, discipline: technology, purpose: "Technology model geometry", group: 1, production: true}
+  - {name: TX_EQUIPMENT, discipline: technology, purpose: "Technology equipment", group: 1, production: true}
+
+  - {name: GP_SITE, discipline: general_plan, purpose: "Site terrain/hardscape/site objects", group: 1, production: true}
+  - {name: GP_LANDSCAPE, discipline: landscaping, purpose: "Landscape/planting model", group: 1, production: true}
+  - {name: GP_BOUNDARY, discipline: general_plan, purpose: "Site/property/legal boundary geometry", group: 0, production: true}
+
+  - {name: REF_IFC, discipline: reference, purpose: "External IFC reference model", group: 0, production: false, default_locked: true}
+  - {name: REF_DWG, discipline: reference, purpose: "Imported/linked DWG reference", group: 0, production: false, default_locked: true}
+  - {name: REF_HOTLINK, discipline: reference, purpose: "External hotlink/reference modules when isolation is required", group: 0, production: false, default_locked: true}
+  - {name: REF_SURVEY, discipline: reference, purpose: "Survey/base reference geometry", group: 0, production: false, default_locked: true}
+  - {name: REF_SCAN, discipline: reference, purpose: "Point-cloud/scan reference context", group: 0, production: false, default_locked: true}
+
+  - {name: DOC_2D, discipline: documentation, purpose: "General 2D documentation", group: 0, production: false}
+  - {name: DOC_DETAIL, discipline: documentation, purpose: "2D detail embellishment in detail/worksheet contexts", group: 0, production: false}
+  - {name: DOC_GUIDE, discipline: documentation, purpose: "Temporary/documentation guides not intended for issue", group: 0, production: false}
+
+  - {name: QA_TEMP, discipline: qa, purpose: "Temporary test/check geometry", group: 2, production: false}
+  - {name: QA_ISSUE, discipline: qa, purpose: "QA markup/model issue helpers", group: 0, production: false}
+  - {name: SEO_HELPER, discipline: automation, purpose: "Solid Element Operation helper/operator geometry", group: 0, production: false}
+  - {name: QUARANTINE_MODEL, discipline: qa, purpose: "Imported/uncertain geometry pending review", group: 0, production: false, default_locked: true}
+
+layer_combinations:
+  00_ALL_NATIVE:
+    show:
+      - AR_MODEL_ENVELOPE
+      - AR_MODEL_PARTITION
+      - AR_MODEL_CIRCULATION
+      - AR_MODEL_RAILING
+      - AR_MODEL_CEILING
+      - AR_MODEL_FINISH
+      - AR_MODEL_FURNITURE
+      - AR_MODEL_EQUIPMENT
+      - AR_ZONE
+      - AR_MODEL_SPECIAL
+      - KR_MODEL_PRIMARY
+      - KR_MODEL_SECONDARY
+      - KR_FOUNDATION
+      - VK_MODEL
+      - VK_EQUIPMENT
+      - OV_MODEL
+      - OV_EQUIPMENT
+      - EOM_MODEL
+      - EOM_EQUIPMENT
+      - SS_MODEL
+      - SS_EQUIPMENT
+      - PB_MODEL
+      - PB_EQUIPMENT
+      - TX_MODEL
+      - TX_EQUIPMENT
+      - GP_SITE
+      - GP_LANDSCAPE
+      - GP_BOUNDARY
+    hide_prefixes: [REF_, DOC_, QA_]
+    hide: [SEO_HELPER, QUARANTINE_MODEL]
+
+  AR_WORK:
+    show_prefixes: [AR_]
+    show: [KR_MODEL_PRIMARY, KR_MODEL_SECONDARY, REF_IFC, REF_DWG]
+    hide: [SEO_HELPER, QUARANTINE_MODEL]
+
+  AR_PRINT:
+    show_prefixes: [AR_]
+    show: [KR_MODEL_PRIMARY]
+    hide_prefixes: [REF_, QA_]
+    hide: [SEO_HELPER, QUARANTINE_MODEL, DOC_GUIDE]
+
+  KR_COORD:
+    show_prefixes: [KR_]
+    show: [AR_MODEL_ENVELOPE, AR_MODEL_PARTITION, REF_IFC]
+    hide: [SEO_HELPER, QUARANTINE_MODEL]
+
+  VK_COORD:
+    show_prefixes: [VK_]
+    show: [AR_MODEL_ENVELOPE, AR_MODEL_PARTITION, KR_MODEL_PRIMARY, REF_IFC]
+    hide: [SEO_HELPER, QUARANTINE_MODEL]
+
+  OV_COORD:
+    show_prefixes: [OV_]
+    show: [AR_MODEL_ENVELOPE, AR_MODEL_PARTITION, KR_MODEL_PRIMARY, REF_IFC]
+    hide: [SEO_HELPER, QUARANTINE_MODEL]
+
+  EOM_COORD:
+    show_prefixes: [EOM_]
+    show: [AR_MODEL_ENVELOPE, AR_MODEL_PARTITION, KR_MODEL_PRIMARY, REF_IFC]
+    hide: [SEO_HELPER, QUARANTINE_MODEL]
+
+  SS_COORD:
+    show_prefixes: [SS_]
+    show: [AR_MODEL_ENVELOPE, AR_MODEL_PARTITION, KR_MODEL_PRIMARY, REF_IFC]
+    hide: [SEO_HELPER, QUARANTINE_MODEL]
+
+  MEP_COORD:
+    show_prefixes: [VK_, OV_, EOM_, SS_, PB_]
+    show: [AR_MODEL_ENVELOPE, AR_MODEL_PARTITION, KR_MODEL_PRIMARY, REF_IFC]
+    hide: [SEO_HELPER, QUARANTINE_MODEL]
+
+  PB_CHECK:
+    show_prefixes: [PB_, AR_]
+    show: [KR_MODEL_PRIMARY]
+    hide_prefixes: [REF_]
+    hide: [SEO_HELPER, QUARANTINE_MODEL]
+
+  GP_WORK:
+    show_prefixes: [GP_]
+    show: [AR_MODEL_ENVELOPE, REF_SURVEY, REF_DWG]
+    hide: [SEO_HELPER, QUARANTINE_MODEL]
+
+  REF_COORD:
+    show_prefixes: [REF_]
+    show: [AR_MODEL_ENVELOPE, KR_MODEL_PRIMARY]
+    hide: [SEO_HELPER]
+
+  QA_MODEL:
+    show_prefixes: [AR_, KR_, VK_, OV_, EOM_, SS_, PB_, TX_, GP_, REF_, QA_]
+    show: [QUARANTINE_MODEL]
+    hide: [SEO_HELPER]
+
+  DOC_DETAIL:
+    show_prefixes: [DOC_]
+    hide: [DOC_GUIDE]
+
+validation:
+  duplicate_layer_names_forbidden: true
+  unknown_prefix_forbidden: true
+  production_elements_on_ARCHICAD_LAYER_forbidden: true
+  reference_layers_group_zero_required: true
+  quarantine_layer_group_zero_required: true
+  output_views_must_reference_named_layer_combination: true
