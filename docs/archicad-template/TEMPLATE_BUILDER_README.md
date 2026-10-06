@@ -10,6 +10,14 @@ Offline validation:
 python scripts/archicad_template_builder.py validate
 ```
 
+Windows font preflight before opening/issuing the candidate template:
+
+```powershell
+python scripts/archicad_template_builder.py font-preflight --out template-fonts.json
+```
+
+This checks required font families from `fonts-manifest.yaml` in the Windows font registry. Style detection is advisory because Windows registry display names vary.
+
 Read-only inventory of the currently open Archicad project:
 
 ```powershell
