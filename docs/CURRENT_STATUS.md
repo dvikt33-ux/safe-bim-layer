@@ -13,14 +13,14 @@ may describe an older point in the project.
 | Stage 2 — orchestrator skeleton | PASS | Offline deterministic state-machine and guard tests |
 | Stage 3 — first autonomous Wall loop | PASS | Live one-goal, two-dependent-mutation closed loop |
 | Audit Pack | PASS | Deterministic source-pinned evidence pack and verifier |
-| Stage 4 — live hardening | NOT YET VERIFIED | Mandatory live scenarios are not all complete |
-| Stage 5 | NOT STARTED | Forbidden until Stage 4 PASS |
+| Stage 4 — live hardening | **PASS / VERIFIED** | All C01–C30 criteria PASS; required live/offline scenario matrix complete |
+| Stage 5 | NOT STARTED | Now permitted; no Stage 5 capability has been started |
 
 ## Latest Stage 4 work
 
 Confirmed in the operator run:
 
-- `hardening-offline-006` completed with `Offline proof PASS`.
+- Fresh source-pinned `hardening-offline-007` completed with `Offline proof PASS`.
 - Explicit project binding to `C:\Users\Admin\Downloads\дбликат.pln` passed.
 - The rebound fixture setup passed with one physical `CreateWalls` dispatch.
 - Factual element count changed exactly `5297 -> 5299`.
@@ -70,6 +70,21 @@ The real `S4-03` run also completed successfully:
 - the second segment used the reconciled first segment GUID as its source;
 - both factual joins had `jointDistance = 0.0`.
 
+The real `S4-06` run completed successfully:
+
+- scenario status: `PASS`;
+- job final status: `VERIFIED`;
+- crash worker exit code: `86`;
+- recovered from crash: `true`;
+- reconciliation outcome: `RECONCILED_APPLIED`;
+- physical mutation calls: `2`;
+- duplicate mutation count: `0`;
+- confirmed native responses: `2`;
+- Audit Pack: `PASS`;
+- the crashed first mutation was not replayed;
+- the second segment continued from the reconciled created GUID;
+- both factual joins had `jointDistance = 0.0`.
+
 ## Stage 4 required live scenarios
 
 | Scenario | Purpose | Current status |
@@ -79,7 +94,7 @@ The real `S4-03` run also completed successfully:
 | S4-03 | Lost response after physical mutation; reconcile applied without duplicate | **LIVE PASS / VERIFIED** |
 | S4-04 | Reconciled not-applied -> fresh observation/replan | OFFLINE PASS only |
 | S4-05 | Ambiguous reconciliation -> block | OFFLINE PASS only |
-| S4-06 | Crash after mutation -> restart/reconcile without duplicate | OFFLINE PASS; LIVE NOT VERIFIED |
+| S4-06 | Crash after mutation -> restart/reconcile without duplicate | **LIVE PASS / VERIFIED** + offline PASS |
 | S4-07 | No-progress guard | OFFLINE PASS |
 | S4-08 | Iteration-limit guard | OFFLINE PASS |
 | S4-09 | Pre-dispatch transport failure | OFFLINE PASS |
@@ -87,8 +102,7 @@ The real `S4-03` run also completed successfully:
 
 ## Current blocker
 
-The project is **not blocked by project identity anymore** and is **not blocked by the
-missing synthetic Wall fixture anymore**. Those two issues were resolved.
+Stage 4 has no remaining acceptance blocker. Project identity binding, fixture setup, stale-plan rejection, unknown-outcome reconciliation and crash recovery all passed in their required proof modes.
 
 A separate repository-maintenance issue was discovered on 2026-10-06: `main` legitimately
 advanced from the historical merge-base `72e9be15...` to `d5695f43...` by adding only the
@@ -100,15 +114,13 @@ unrelated main changes, but fails if `main` changed protected BIM runtime/eviden
 such as `closed_loop/`, `scripts/`, `archicad-addon/`, Stage 1-4 tests/evidence, or the
 baseline-pinned v0.1 runtime files.
 
-Because `closed_loop/live_wall.py` changed to implement this correction, the previously
-observed `hardening-offline-006` proof is now historical for the prior source state. A new
-source-pinned offline proof is required before the next accepted live S4 run.
+`hardening-offline-006` is historical for the pre-main-guard source state. The replacement source-pinned proof `hardening-offline-007` passed before the accepted live runs.
 
-The remaining live gate is now: S4-06 only, with all required criteria and its Audit Pack passing.
+The final Stage 4 acceptance report is `VERIFIED`; C01–C30 all PASS and there is no remaining live gate.
 
 ## What is frozen
 
-Do not casually rewrite these while Stage 4 is open:
+Stage 4 is closed. Preserve these as the verified baseline:
 
 - Stage 1 historical evidence;
 - Stage 3 historical evidence;
@@ -120,6 +132,4 @@ Do not casually rewrite these while Stage 4 is open:
 
 ## Next after Stage 4
 
-Only after Stage 4 PASS, migrate one already-proven BIM capability at a time into the
-closed loop. The preferred migration pool is existing proven recipes rather than new
-implementations from scratch.
+Before adding the next BIM capability, perform the planned performance/evidence-I/O cleanup without weakening the verified safety semantics. After that, migrate one already-proven BIM capability at a time into the closed loop; prefer existing proven recipes over new implementations from scratch.
