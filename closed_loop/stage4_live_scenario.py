@@ -7,6 +7,7 @@ import hashlib
 from pathlib import Path
 import subprocess
 import sys
+import time
 from uuid import uuid4
 
 from .live_wall import (ROOT, COMMAND, LiveSession, LiveObserver, LivePlanner, LiveModelCheck,
@@ -16,7 +17,6 @@ from .stage4_preflight import preflight, IMPLEMENTATION_FILES
 from .wall_attempts import RecoverableWallOrchestrator, durable_json
 from .live_wall_hardening import ControlledWallExecutor, ControlledWallReadBack, WallReconciler
 from scripts.stage4_audit_pack import source_contract, build_pack, verify_pack
-from scripts.audit_pack import file_info
 
 
 def restore_session(output, goal_id, offline, regression):
@@ -85,9 +85,19 @@ def recover(output, goal_id, offline, regression):
 
 
 def finish_pack(output, identity):
+    started = time.perf_counter()
+    marks = {}
+
+    def mark(name, phase_started):
+        marks[name] = round(time.perf_counter() - phase_started, 3)
+        print(f'[evidence] {name}: {marks[name]:.3f}s', flush=True)
+
+    print('[evidence] collecting source files', flush=True)
+    phase = time.perf_counter()
     snapshots, records, pairs = [], [], []
     for path in sorted(output.rglob('*.json')):
-        if 'audit-pack' in path.parts or path.name == 'audit-pack-verification.json': continue
+        if 'audit-pack' in path.parts or path.name == 'audit-pack-verification.json':
+            continue
         records.append(path)
         observation_sidecar = path.name.endswith(('.request.json','.native-response.json','.metrics.json','.fingerprint.json'))
         if ((path.parent.name == 'observations' and not observation_sidecar) or
@@ -98,7 +108,8 @@ def finish_pack(output, identity):
     for before in snapshots:
         if before.name == 'before.json':
             after = before.with_name('after-create.json')
-            if after.resolve() in snapshot_set: pairs.append((before,after))
+            if after.resolve() in snapshot_set:
+                pairs.append((before,after))
     for path in output.rglob('job.json'):
         job = read(path)
         for step in job.get('iterations',[]):
@@ -107,11 +118,25 @@ def finish_pack(output, identity):
                 before = path.parent/'live-job'/f'iteration-{step["iteration"]}'/'executor/before.json'
                 if after_name and before.resolve() in snapshot_set and Path(after_name).resolve() in snapshot_set:
                     pairs.append((before,Path(after_name)))
+    mark('collect', phase)
+
+    print(f'[evidence] pinning {len(records)} records / {len(snapshots)} snapshots / {len(pairs)} deltas', flush=True)
+    phase = time.perf_counter()
     contract = source_contract(ROOT,output,snapshots,pairs,records,identity,'LIVE')
+    mark('source-contract', phase)
+
+    print('[evidence] building audit pack', flush=True)
+    phase = time.perf_counter()
     build_pack(ROOT,contract,output/'audit-pack')
+    mark('build-pack', phase)
+
+    print('[evidence] independently verifying audit pack', flush=True)
+    phase = time.perf_counter()
     result = verify_pack(ROOT,output/'audit-pack')
-    durable_json(output/'audit-pack-verification.json',result)
+    mark('verify-pack', phase)
+
     # Exact-path LFS attributes, not a blanket filter for source/pack JSON.
+    phase = time.perf_counter()
     large = [p for p in records if p.stat().st_size > 1_000_000]
     if large:
         attributes = ROOT/'.gitattributes'
@@ -119,11 +144,22 @@ def finish_pack(output, identity):
         additions = [p.resolve().relative_to(ROOT).as_posix()+' filter=lfs diff=lfs merge=lfs -text' for p in large]
         with attributes.open('a',encoding='utf-8',newline='\n') as stream:
             for line in additions:
-                if line not in current: stream.write(line+'\n')
-    durable_json(output/'full-evidence-manifest.json', {'files':[file_info(ROOT,p.resolve().relative_to(ROOT).as_posix()) for p in records],
-        'largeFileStorage':'GIT_LFS','auditPackStorage':'ORDINARY_GIT'})
-    return result
+                if line not in current:
+                    stream.write(line+'\n')
 
+    # source_contract already computed and pinned these exact SHA/size values.
+    # Reuse them instead of hashing every full evidence file for a second manifest pass.
+    durable_json(output/'full-evidence-manifest.json', {
+        'files': contract['records'],
+        'largeFileStorage':'GIT_LFS',
+        'auditPackStorage':'ORDINARY_GIT'})
+    mark('manifest-and-lfs', phase)
+
+    marks['total'] = round(time.perf_counter() - started, 3)
+    result = dict(result, timingsSeconds=marks)
+    durable_json(output/'audit-pack-verification.json', result)
+    print(f'[evidence] complete: {marks["total"]:.3f}s', flush=True)
+    return result
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
