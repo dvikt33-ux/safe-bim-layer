@@ -57,13 +57,26 @@ The real `S4-02` run also completed successfully:
 - Audit Pack: `PASS`;
 - both accepted goal-segment joins had factual `jointDistance = 0.0`.
 
+The real `S4-03` run also completed successfully:
+
+- scenario status: `PASS`;
+- job final status: `VERIFIED`;
+- physical mutation calls: `2`;
+- duplicate mutation count: `0`;
+- reconciliation outcome: `RECONCILED_APPLIED`;
+- confirmed native responses: `2`;
+- Audit Pack: `PASS`;
+- the first lost-response mutation was not replayed;
+- the second segment used the reconciled first segment GUID as its source;
+- both factual joins had `jointDistance = 0.0`.
+
 ## Stage 4 required live scenarios
 
 | Scenario | Purpose | Current status |
 | --- | --- | --- |
 | S4-01 | Happy two-segment regression | **LIVE PASS / VERIFIED** |
 | S4-02 | Stale plan rejected before execution, then replan | **LIVE PASS / VERIFIED** |
-| S4-03 | Lost response after physical mutation; reconcile applied without duplicate | NOT VERIFIED |
+| S4-03 | Lost response after physical mutation; reconcile applied without duplicate | **LIVE PASS / VERIFIED** |
 | S4-04 | Reconciled not-applied -> fresh observation/replan | OFFLINE PASS only |
 | S4-05 | Ambiguous reconciliation -> block | OFFLINE PASS only |
 | S4-06 | Crash after mutation -> restart/reconcile without duplicate | OFFLINE PASS; LIVE NOT VERIFIED |
@@ -91,7 +104,7 @@ Because `closed_loop/live_wall.py` changed to implement this correction, the pre
 observed `hardening-offline-006` proof is now historical for the prior source state. A new
 source-pinned offline proof is required before the next accepted live S4 run.
 
-The remaining live gate is now: S4-03 -> S4-06, with all required criteria and Audit Packs passing.
+The remaining live gate is now: S4-06 only, with all required criteria and its Audit Pack passing.
 
 ## What is frozen
 
