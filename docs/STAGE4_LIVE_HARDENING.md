@@ -3,7 +3,7 @@
 Base: `03c64733bb2b4f59970f5247a3ed89e1236f3090`.
 Branch: `work/stage4-live-hardening`.
 Scope: the existing `create_wall`, one goal, +1.0 m then +0.5 m.
-Stage 5 is prohibited until every required Stage 4 criterion passes.
+Stage 4 is VERIFIED; Stage 5 is permitted but has not started.
 
 ## Runtime
 
@@ -159,17 +159,14 @@ S4-02 has also completed as LIVE PASS / VERIFIED. It proved one stale-plan inval
 
 S4-03 has also completed as LIVE PASS / VERIFIED. The injected lost response after the first native write was recovered as `RECONCILED_APPLIED`; the old mutation was not replayed, the second segment continued from the reconciled created GUID, duplicate mutation count remained zero, and Audit Pack passed.
 
-Stage 4 itself remains **NOT VERIFIED** because S4-06 is the only remaining mandatory live scenario.
+S4-06 has completed as LIVE PASS / VERIFIED. The dedicated child exited with code 86 after the first native write and flushed receipt; the parent recovered the durable checkpoint, reconciled the mutation as `RECONCILED_APPLIED`, did not replay it, completed the second segment, and produced Audit Pack PASS.
+
+**Stage 4 is VERIFIED.** All C01–C30 criteria pass. Mandatory live scenarios S4-01/S4-02/S4-03/S4-06 pass; S4-04/S4-05/S4-07/S4-08/S4-09/S4-10 pass in their required source-pinned offline-fixture mode.
 
 Backlog only: general transactions/concurrent job ownership, additional BIM
 operations, undo, UI, normative engines and performance work. None is implemented
 as part of this stage.
 
-The operator observed `hardening-offline-006` PASS before the protected-main guard change.
-That proof is now source-stale because `closed_loop/live_wall.py` changed. A fresh
-source-pinned offline proof is required before any new accepted Stage-4 live run.
+`hardening-offline-006` is historical for the pre-main-guard source state. The replacement source-pinned `hardening-offline-007` proof passed and was the proof bound to the accepted Stage-4 live runs.
 
-The 30-criterion contract and ten-scenario status matrix are retained in
-`outputs/closed-loop-stage4/stage4-acceptance-contract.json` and
-`stage4-acceptance-report.json`. Publication is deferred until acceptance is
-complete.
+The 30-criterion contract and ten-scenario status matrix are published in `outputs/closed-loop-stage4/stage4-acceptance-contract.json` and `stage4-acceptance-report.json`; the final report status is `VERIFIED`.
