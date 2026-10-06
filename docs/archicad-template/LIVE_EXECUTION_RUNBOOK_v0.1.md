@@ -143,3 +143,34 @@ The test verifies that the created GUIDs are present in the `A4_P` Master Layout
 A PASS now proves database targeting, exact Line/Text coordinates, 2.5 mm text height, raw text content, interpreted project-level AutoText value, GUID read-back and cleanup via the native `GetCurrent2DDocumentV1` overlay command.
 
 The remaining AutoText gate is **layout-scoped context** such as `<LAYOUTNAME>`. That must be tested on a sacrificial real Layout using `A4_P`, because a Master Layout itself is not a concrete sheet and therefore is not a valid final proof of layout-specific values.
+
+
+## 8. Layout-scoped AutoText smoke gate
+
+After `master-smoke` passes:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/run_archicad_template_live.ps1 -Stage layout-autotext-smoke
+```
+
+This creates a disposable subset `__SBIM_AUTOTEXT_SMOKE_SUBSET__` and a disposable Layout `__SBIM_AUTOTEXT_SMOKE_LAYOUT__` based on `A4_P`.
+
+On that real Layout it verifies:
+
+- `<LAYOUTNAME>`;
+- `<LAYOUTNUMBERINCURRENTSUBSET>`;
+- `<NUMBEROFLAYOUTSINCURRENTSUBSET>`.
+
+The gate reads both raw and interpreted Text content through `GetCurrent2DDocumentV1`. It requires the layout name to resolve exactly to the temporary Layout name, the number-in-subset to be non-empty, and the number-of-layouts-in-current-subset to resolve to exactly `1`.
+
+Cleanup is mandatory and ordered:
+
+1. delete sacrificial Text elements;
+2. delete sacrificial Layout;
+3. delete sacrificial subset;
+4. verify neither navigator item remains;
+5. verify model-element count is unchanged.
+
+A pre-existing navigator item with either smoke name causes `BLOCKED_RESIDUAL_SMOKE_ITEMS`; the builder will not silently delete it.
+
+After this gate passes, the titleblock AutoText contract for Form 3 fields 4, 7 and 8 is considered live-verified. The next implementation stage is full Form 3 titleblock geometry generation.
