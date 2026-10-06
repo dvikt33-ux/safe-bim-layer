@@ -1,0 +1,287 @@
+{
+  "release": "v2.9",
+  "representation_checks": [
+    {
+      "source_id": "POLIVAN_WPC_2017",
+      "name": "albom_tehnicheskih_reshenii_polivan_group_compressed.pdf",
+      "expected_sha256": "d2d495c9b2d06f44e8c8234a50dee3f8095181a3af1a36fea9b25cb218158e0e",
+      "actual_sha256": "d2d495c9b2d06f44e8c8234a50dee3f8095181a3af1a36fea9b25cb218158e0e",
+      "match": true
+    },
+    {
+      "source_id": "BRAAS_ROOF_TECH",
+      "name": "braas_albom_tehnicheskih_reshenii.pdf",
+      "expected_sha256": "d8451a8e1d094c8549938ae8fcd9f4fcab027ebe269177542f908195f20832e4",
+      "actual_sha256": "d8451a8e1d094c8549938ae8fcd9f4fcab027ebe269177542f908195f20832e4",
+      "match": true
+    },
+    {
+      "source_id": "LSR_WALL_GUIDE_2022",
+      "name": "rukovodstvo-polzovatelya-2022_compressed.pdf",
+      "expected_sha256": "57b9e771028d6e606fc4922174c3c7292d352e23d347475e69150bc566c05c65",
+      "actual_sha256": "57b9e771028d6e606fc4922174c3c7292d352e23d347475e69150bc566c05c65",
+      "match": true
+    },
+    {
+      "source_id": "POROTHERM_LOWRISE",
+      "name": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+      "expected_sha256": "9afc42e77f5d02ff2432386b8a04e88c4756f476b43cb345ea2021c8c0589c95",
+      "actual_sha256": "9afc42e77f5d02ff2432386b8a04e88c4756f476b43cb345ea2021c8c0589c95",
+      "match": true
+    },
+    {
+      "source_id": "ROCKWOOL_SUSPENDED_CEILING",
+      "name": "albom_tehnicheskih_reshenii_rokvul_-_zvukoizolyaciya_podvesnih_potolkov.pdf",
+      "expected_sha256": "4befcd0d44bcdbca6be43f6232a239491efca41f56a8345597c6c5345f40ca8b",
+      "actual_sha256": "4befcd0d44bcdbca6be43f6232a239491efca41f56a8345597c6c5345f40ca8b",
+      "match": true
+    },
+    {
+      "source_id": "ROCKWOOL_SUSPENDED_CEILING",
+      "name": "Альбом технических решений РОКВУЛ - Звукоизоляция подвесных потолков.dxf",
+      "expected_sha256": "b5eee61380eda6c149b716881ba0bfdc1a4d5bf23b7433744e20c1c292933707",
+      "actual_sha256": "b5eee61380eda6c149b716881ba0bfdc1a4d5bf23b7433744e20c1c292933707",
+      "match": true
+    },
+    {
+      "source_id": "ROCKWOOL_SUSPENDED_CEILING",
+      "name": "Альбом технических решений РОКВУЛ - Звукоизоляция подвесных потолков.dwg",
+      "expected_sha256": "7cef04a05865bfc4db6a8e67ae0f2b5d54963a16061dbfd9154fee0995f1b3c7",
+      "actual_sha256": "7cef04a05865bfc4db6a8e67ae0f2b5d54963a16061dbfd9154fee0995f1b3c7",
+      "match": true
+    },
+    {
+      "source_id": "ROCKWOOL_PROFILED_WALL",
+      "name": "albom_tehnicheskih_reshenii_rokvul_-_karkasnie_konstrukcii_sten_s_obshivkami_iz_proflista.pdf",
+      "expected_sha256": "b53492141d7327a3e81fbdf8ce72449b85738231e92bc73d4f91a00deec94d93",
+      "actual_sha256": "b53492141d7327a3e81fbdf8ce72449b85738231e92bc73d4f91a00deec94d93",
+      "match": true
+    },
+    {
+      "source_id": "ROCKWOOL_MANSARD",
+      "name": "albom_tehnicheskih_reshenii_rokvul_-_ograzhdayuschie_konstrukcii_mansard.pdf",
+      "expected_sha256": "2608ece5d7cac9c5e99bcea604c965bb846356c9819e2b7b2c4d0fcc44205495",
+      "actual_sha256": "2608ece5d7cac9c5e99bcea604c965bb846356c9819e2b7b2c4d0fcc44205495",
+      "match": true
+    },
+    {
+      "source_id": "ROCKWOOL_MANSARD",
+      "name": "Альбом технических решений РОКВУЛ - Ограждающие конструкции мансард.dxf",
+      "expected_sha256": "497c78755df8936f7046555684f7b319969c6385954f8d042ccea28aa971fe6c",
+      "actual_sha256": "497c78755df8936f7046555684f7b319969c6385954f8d042ccea28aa971fe6c",
+      "match": true
+    },
+    {
+      "source_id": "ROCKWOOL_MANSARD",
+      "name": "Альбом технических решений РОКВУЛ - Ограждающие конструкции мансард.dwg",
+      "expected_sha256": "e00f544f2f98c00c93c33cc4d55e269331495b18981ed5356247874959eef184",
+      "actual_sha256": "e00f544f2f98c00c93c33cc4d55e269331495b18981ed5356247874959eef184",
+      "match": true
+    },
+    {
+      "source_id": "ROCKWOOL_FLOORS_PIPES",
+      "name": "albom_tehnicheskih_reshenii_rokvul_-_poli_s_pokritiem_i_zvukoizolyaciya_truboprovodov.pdf",
+      "expected_sha256": "aa60600272a180a7821a0f4b4c8b8dfafad12b24670844fd7e209cc6c0d9871f",
+      "actual_sha256": "aa60600272a180a7821a0f4b4c8b8dfafad12b24670844fd7e209cc6c0d9871f",
+      "match": true
+    },
+    {
+      "source_id": "ROCKWOOL_FLOORS_PIPES",
+      "name": "Альбом технических решений - Полы с покрытием и звукоизоляция трубопроводов.dxf",
+      "expected_sha256": "dbee396e6b61e539ba643edb21c064ac54cac05cf519a54be106f6dce5e289ba",
+      "actual_sha256": "dbee396e6b61e539ba643edb21c064ac54cac05cf519a54be106f6dce5e289ba",
+      "match": true
+    },
+    {
+      "source_id": "ROCKWOOL_FLOORS_PIPES",
+      "name": "Альбом технических решений - Полы с покрытием и звукоизоляция трубопроводов.dwg",
+      "expected_sha256": "e68d3808931bf11e5ae8907696e6f0ec50e9c520b4cc9e9c055cee409e92bc68",
+      "actual_sha256": "e68d3808931bf11e5ae8907696e6f0ec50e9c520b4cc9e9c055cee409e92bc68",
+      "match": true
+    },
+    {
+      "source_id": "ROCKFACADE_2022",
+      "name": "albom_tehnicheskih_reshenii_rokvul_-_sistema_fasadnaya_teploizolyacionnaya_kompozitnaya_rockfacade_.pdf",
+      "expected_sha256": "48ee532a930783ee389d8125a7980214de6a0837f3960497a27e4f90d2e491c9",
+      "actual_sha256": "48ee532a930783ee389d8125a7980214de6a0837f3960497a27e4f90d2e491c9",
+      "match": true
+    },
+    {
+      "source_id": "ROCKFACADE_2022",
+      "name": "Альбом технических решений РОКВУЛ - Система фасадная теплоизоляционная композитная ROCFACADE с наружными штукатурными слоями .dxf",
+      "expected_sha256": "1196764584bf2b6600d46f8b7fd9bdc61b6ce2d457ea5e34aaa73a3d3b549b2a",
+      "actual_sha256": "1196764584bf2b6600d46f8b7fd9bdc61b6ce2d457ea5e34aaa73a3d3b549b2a",
+      "match": true
+    },
+    {
+      "source_id": "ROCKFACADE_2022",
+      "name": "Альбом технических решений РОКВУЛ - Система фасадная теплоизоляционная композитная ROCFACADE с наружными штукатурными слоями .dwg",
+      "expected_sha256": "e1255510b85f79d43088682424c311dd10ea0e5f8c7174ca6f797aad804cd00c",
+      "actual_sha256": "e1255510b85f79d43088682424c311dd10ea0e5f8c7174ca6f797aad804cd00c",
+      "match": true
+    },
+    {
+      "source_id": "ROCKWOOL_ROOF_PVC",
+      "name": "albom_tehnicheskih_reshenii_rokvul_-_skatnaya_krovlya_iz_pvh_membrani_na_pokritii_po_stropam.pdf",
+      "expected_sha256": "d6bce87cc4d4dc80686e5669d5e4c2cafbe8d33350a03070b37972abed32de2a",
+      "actual_sha256": "d6bce87cc4d4dc80686e5669d5e4c2cafbe8d33350a03070b37972abed32de2a",
+      "match": true
+    },
+    {
+      "source_id": "ROCKWOOL_ROOF_PVC",
+      "name": "Альбом технических решений РОКВУЛ - Скатная кровля из ПВХ мембраны на покрытии по стропам.dxf",
+      "expected_sha256": "d1261f50bd3317fa6288989e26a529dfa11aa5982a32c14176a9d1d848b39580",
+      "actual_sha256": "d1261f50bd3317fa6288989e26a529dfa11aa5982a32c14176a9d1d848b39580",
+      "match": true
+    },
+    {
+      "source_id": "ROCKWOOL_ROOF_PVC",
+      "name": "Альбом технических решений РОКВУЛ - Скатная кровля из ПВХ мембраны на покрытии по стропам.dwg",
+      "expected_sha256": "714dfa446eecbd14a69d22ebf849332b44ece2b1fa1263b38ea75a187f0ca115",
+      "actual_sha256": "714dfa446eecbd14a69d22ebf849332b44ece2b1fa1263b38ea75a187f0ca115",
+      "match": true
+    },
+    {
+      "source_id": "ROCKWOOL_ROOF_PROFILED_STEEL",
+      "name": "albom_tehnicheskih_reshenii_rokvul_-_skatnaya_krovlya_iz_stalnih_proflistov_na_pokritii_po_proflistu.pdf",
+      "expected_sha256": "9c15b6df1bc2749b6942882bb5b28521f436280f29fa9b2dc408eacc928a6714",
+      "actual_sha256": "9c15b6df1bc2749b6942882bb5b28521f436280f29fa9b2dc408eacc928a6714",
+      "match": true
+    },
+    {
+      "source_id": "ROCKWOOL_ROOF_PROFILED_STEEL",
+      "name": "Альбом технических решений РОКВУЛ - Скатная кровля из Пстальных профлистов на покрытии по профлисту.dxf",
+      "expected_sha256": "139e7d4bf49295a2a84ef9c4072dbcb88739683e3de5f436705cbe0c82bbd0b7",
+      "actual_sha256": "139e7d4bf49295a2a84ef9c4072dbcb88739683e3de5f436705cbe0c82bbd0b7",
+      "match": true
+    },
+    {
+      "source_id": "ROCKWOOL_ROOF_PROFILED_STEEL",
+      "name": "Альбом технических решений РОКВУЛ - Скатная кровля из Пстальных профлистов на покрытии по профлисту.dwg",
+      "expected_sha256": "feb495579b4725afbdbe61cfa14728f1878c10a64016b7655c3cf442aeb5eb2a",
+      "actual_sha256": "feb495579b4725afbdbe61cfa14728f1878c10a64016b7655c3cf442aeb5eb2a",
+      "match": true
+    },
+    {
+      "source_id": "KLEYKO_PANEL_FIX",
+      "name": "albom_tehnicheskih_reshenii_dlya_sistemi_kleyko_panel_fix.pdf",
+      "expected_sha256": "1507c53095b943f1d03ed2b2cf37140f58e2fad8c080cdfbaf73f8f3674fdc7d",
+      "actual_sha256": "1507c53095b943f1d03ed2b2cf37140f58e2fad8c080cdfbaf73f8f3674fdc7d",
+      "match": true
+    },
+    {
+      "source_id": "ROCKWOOL_ATTIC_SLAB",
+      "name": "albom_tehnicheskih_reshenii_rokvul_-_cherdachnie_perekritiya_s_zhelezobetonnimi_plitami.pdf",
+      "expected_sha256": "ce818f0a32491d8dd178c455333e7dd0e4e4b72c5d5d186639e751933a58d686",
+      "actual_sha256": "ce818f0a32491d8dd178c455333e7dd0e4e4b72c5d5d186639e751933a58d686",
+      "match": true
+    },
+    {
+      "source_id": "ROCKWOOL_ATTIC_SLAB",
+      "name": "Альбом технических решений - Чердачные перекрытия с железобетонными плитами.dxf",
+      "expected_sha256": "bfbb710f6303bd4e791009fd8774bda06b9fd458d223b7d34205ca7b1f94e109",
+      "actual_sha256": "bfbb710f6303bd4e791009fd8774bda06b9fd458d223b7d34205ca7b1f94e109",
+      "match": true
+    },
+    {
+      "source_id": "ROCKWOOL_ATTIC_SLAB",
+      "name": "Альбом технических решений - Чердачные перекрытия с железобетонными плитами.dwg",
+      "expected_sha256": "86223a4917decc2abe2f56cf756dc18c95b44909d9b10c078ff2d67b83599db8",
+      "actual_sha256": "86223a4917decc2abe2f56cf756dc18c95b44909d9b10c078ff2d67b83599db8",
+      "match": true
+    },
+    {
+      "source_id": "FAVORIT_COMPOSITE_PANEL",
+      "name": "atr_favorit_kompozitnaya_panel.pdf",
+      "expected_sha256": "dc61d50fca3382d55d501bbc4874ae163167e9a20d945e154861f1ce57d83fa8",
+      "actual_sha256": "dc61d50fca3382d55d501bbc4874ae163167e9a20d945e154861f1ce57d83fa8",
+      "match": true
+    },
+    {
+      "source_id": "FAVORIT_SHEET_MATERIALS",
+      "name": "atr_favorit_listovie_materiali.pdf",
+      "expected_sha256": "bf04ffd245df13e59fce5c8142c9c3f3614b8882e286604eb99b2778d4008d97",
+      "actual_sha256": "bf04ffd245df13e59fce5c8142c9c3f3614b8882e286604eb99b2778d4008d97",
+      "match": true
+    },
+    {
+      "source_id": "RSM_FLEXIBLE_TIES_2024",
+      "name": "atr_gibkie_svyazi_rsm.pdf",
+      "expected_sha256": "4cc52ee38fffd6ada55ee64968d72ad06e5acec86208011273a5a7f4d35aa52e",
+      "actual_sha256": "4cc52ee38fffd6ada55ee64968d72ad06e5acec86208011273a5a7f4d35aa52e",
+      "match": true
+    },
+    {
+      "source_id": "KAIMAN_KERAKAM_WALL",
+      "name": "albom_tehnicheskih_reshenii_kaiman,_kerakam.pdf",
+      "expected_sha256": "81a3cd5c4177ce368590b71ce685b1b5c6db640afd58ff91ba589758e43a1da3",
+      "actual_sha256": "81a3cd5c4177ce368590b71ce685b1b5c6db640afd58ff91ba589758e43a1da3",
+      "match": true
+    },
+    {
+      "source_id": "ARMO_SELFLOCK_ROOF",
+      "name": "albom_tehnicheskih_reshenii_samozaschelkivayuscheisya_krovli_armo.pdf",
+      "expected_sha256": "a3020a3fb6f8c5709a01f42cfd995229763041aa83c536a258f6698519e90ec5",
+      "actual_sha256": "a3020a3fb6f8c5709a01f42cfd995229763041aa83c536a258f6698519e90ec5",
+      "match": true
+    },
+    {
+      "source_id": "RONSON_500_TILE",
+      "name": "atr_ronson_-_500_(plitka_na_zatirke).pdf",
+      "expected_sha256": "4d4c38883ddccb53c5191c9f503fc5c02de5f3eb2da89530c37707bb90dc9920",
+      "actual_sha256": "4d4c38883ddccb53c5191c9f503fc5c02de5f3eb2da89530c37707bb90dc9920",
+      "match": true
+    },
+    {
+      "source_id": "BRAER_PAVING_2020",
+      "name": "albom_tehnicheskih_reshenii._pliti_betonnie_trotuarnie_braer.pdf",
+      "expected_sha256": "95dd784d6a0d53217b5b9c1b0aefa68ac4373fcb7d3eadfd92c638589723eb21",
+      "actual_sha256": "95dd784d6a0d53217b5b9c1b0aefa68ac4373fcb7d3eadfd92c638589723eb21",
+      "match": true
+    },
+    {
+      "source_id": "MESTERRA_BREEZE_BLOCK",
+      "name": "albom_uzlov_i_tehnicheskih_reshenii.pdf",
+      "expected_sha256": "7345ea69f74a45acb44ab7a4b5d8457e6a9f8cd364c61a8321b5e767bffe96a1",
+      "actual_sha256": "7345ea69f74a45acb44ab7a4b5d8457e6a9f8cd364c61a8321b5e767bffe96a1",
+      "match": true
+    },
+    {
+      "source_id": "ROCKWOOL_PARTITION_METAL_FRAME",
+      "name": "Альбом технических решений РОКВУЛ - Звукоизоляционные перегородки на металлическом  каркасе.dxf",
+      "expected_sha256": "bfacf219f8d3c5f780a3a9e54f307bcc8a079ecaafac006cfa4f94a935b8e469",
+      "actual_sha256": "bfacf219f8d3c5f780a3a9e54f307bcc8a079ecaafac006cfa4f94a935b8e469",
+      "match": true
+    },
+    {
+      "source_id": "ROCKWOOL_PARTITION_METAL_FRAME",
+      "name": "Альбом технических решений РОКВУЛ - Звукоизоляционные перегородки на металлическом  каркасе.dwg",
+      "expected_sha256": "cc2b078676eb7b89c321c8de14d003ab3783d115cb83b3ab21089130c8799556",
+      "actual_sha256": "cc2b078676eb7b89c321c8de14d003ab3783d115cb83b3ab21089130c8799556",
+      "match": true
+    },
+    {
+      "source_id": "ROCKWOOL_WALL_LINING",
+      "name": "Альбом технических решений РОКВУЛ - Звукоизоляционные облицовки стен.dxf",
+      "expected_sha256": "e220ff6c56589f94d594a2824578d6ec5433eaeb027b6b3a345d00dd0aaf7679",
+      "actual_sha256": "e220ff6c56589f94d594a2824578d6ec5433eaeb027b6b3a345d00dd0aaf7679",
+      "match": true
+    },
+    {
+      "source_id": "ROCKWOOL_WALL_LINING",
+      "name": "Альбом технических решений РОКВУЛ - Звукоизоляционные облицовки стен.dwg",
+      "expected_sha256": "96641d75bfb1e07b1e51f64f7d0fae79cff6a2cd5ae974f5948c4a0293f06ac0",
+      "actual_sha256": "96641d75bfb1e07b1e51f64f7d0fae79cff6a2cd5ae974f5948c4a0293f06ac0",
+      "match": true
+    },
+    {
+      "source_id": "BRAAS_ROOF_DETAILS",
+      "name": "braas_albom_tehnicheskih_reshenii_uzli_skatnih_krish.pdf",
+      "expected_sha256": "e3fda68e46468a4cf7be9e008192e82453892633266dc8379e483833cf8a3364",
+      "actual_sha256": "e3fda68e46468a4cf7be9e008192e82453892633266dc8379e483833cf8a3364",
+      "match": true
+    }
+  ],
+  "match_count": 40,
+  "total": 40
+}
