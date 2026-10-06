@@ -129,18 +129,33 @@ hashes. Pack/source corruption, extra files and unsupported contracts fail close
 
 ## Current gate
 
-The rebound identity gate now supports an explicitly named disposable PLN, but
-the first rebound S4-01 correctly stopped before mutation because that older copy
-did not contain the synthetic Stage 1 wall chain and the generic planner selected
-a real-model Wall whose continuation corridor collided with existing geometry.
-The rebound path therefore requires the isolated fixture setup above. No failed
-planner attempt is promoted to live evidence. Full Stage 4 remains BLOCKED until
-the pinned fixture is PASS and all mandatory live scenarios plus C01–C30 pass.
+The two earlier rebound blockers are resolved:
+
+1. the explicit disposable-PLN identity gate passes for the rebound project;
+2. the isolated synthetic Wall fixture has been created and factual read-back
+   proved exactly two added Wall GUIDs.
+
+The latest operator run also completed the new source-pinned
+`hardening-offline-006` proof with PASS. The fixture setup used one physical
+`CreateWalls` dispatch and changed the factual element count from 5297 to 5299.
+The retained fixture predecessor/seed GUIDs are recorded in
+`docs/CURRENT_STATUS.md`.
+
+The real S4-01 live command was then launched, but its final completion JSON is
+not yet captured in the canonical repository status. Therefore S4-01 is **not
+claimed PASS** and Stage 4 remains **NOT VERIFIED**. The remaining gate is the
+final S4-01 verdict followed by the other mandatory live scenarios and all
+required C01–C30 criteria.
 
 Backlog only: general transactions/concurrent job ownership, additional BIM
 operations, undo, UI, normative engines and performance work. None is implemented
 as part of this stage.
 
-Previous offline proof: `outputs/closed-loop-stage4/hardening-offline-005/offline-verification-report.json` passed before rebound-fixture changes. A new source-pinned offline proof is required after the fixture implementation and tests.
+Latest observed offline proof: `hardening-offline-006` PASS in the operator
+workspace. It has not been promoted to historical committed evidence merely by
+being observed in chat.
 
-The 30-criterion contract and ten-scenario status matrix are retained in `outputs/closed-loop-stage4/stage4-acceptance-contract.json` and `stage4-acceptance-report.json`. Mandatory live proof remains BLOCKED. Publication is deferred until acceptance is complete.
+The 30-criterion contract and ten-scenario status matrix are retained in
+`outputs/closed-loop-stage4/stage4-acceptance-contract.json` and
+`stage4-acceptance-report.json`. Publication is deferred until acceptance is
+complete.
