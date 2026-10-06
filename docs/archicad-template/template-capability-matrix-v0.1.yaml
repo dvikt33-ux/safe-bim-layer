@@ -70,6 +70,11 @@ read_only_or_assignment_only:
 manual_or_addon_gap:
   - create_or_edit_MVO_presets
   - create_or_edit_Graphic_Override_rules_and_combinations
+  - create_or_edit_Dimension_Style_presets
+  - create_Publisher_Sets
+  - create_or_edit_DWG_translator_presets
+  - create_or_edit_IFC_translator_presets
+  - implement_Master_Layout_frame_and_titleblock_graphics
   - Save_As_TPL_to_new_path
   - exact_Work_Environment_profile_creation
 
@@ -92,4 +97,6 @@ second_stage_after_attribute_resolution:
   - Favorites
   - View_Map
   - Layouts
-  - Publisher
+  - View_Map
+  - Layout_Subsets_and_Layouts
+  - Publish_existing_Publisher_Set_only
