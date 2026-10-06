@@ -1912,6 +1912,207 @@ def apply_master_layout_shell(api: Tapir, allow_nonempty=False):
     }
 
 
+
+def apply_master_layout_smoke(api: Tapir, allow_nonempty=False):
+    """Create/read-back/delete a sacrificial Line + Text + AutoText-token Text.
+
+    This gate proves Master Layout targeting, element creation, GUID read-back
+    and cleanup. It does not claim rendered AutoText expansion is proven.
+    """
+    validation = validate_specs()
+    if validation["status"] != "PASS":
+        raise RuntimeError(f"Spec validation failed: {validation['errors']}")
+
+    autotext = plan_autotext(api)
+    if autotext.get("status") != "PASS":
+        return {
+            "status": autotext.get("status", "BLOCKED_AUTOTEXT"),
+            "writePerformed": False,
+            "reason": "Master Layout smoke requires a passing AutoText registry gate.",
+            "autotextGate": autotext,
+        }
+
+    master_plan = plan_master_layouts(api)
+    row = next((x for x in master_plan["masters"] if x["name"] == "A4_P"), None)
+    if row is None or row.get("state") != "EXISTS_OK":
+        return {
+            "status": "BLOCKED_MASTER_LAYOUT",
+            "writePerformed": False,
+            "reason": "A4_P must exist with the exact registered size first.",
+            "master": row,
+        }
+
+    items = _layoutbook_items(api)
+    master = next(
+        (
+            x for x in items
+            if x.get("type") == "MasterLayoutItem" and x.get("name") == "A4_P"
+        ),
+        None,
+    )
+    if master is None:
+        raise RuntimeError("A4_P navigator item disappeared after preflight.")
+
+    master_db = _layout_db_id_from_nav(api, master)
+    change = api.call("ChangeWindow", {"navigatorItemId": master["navigatorItemId"]})
+    if not change.get("success", False):
+        raise RuntimeError(f"Could not activate A4_P Master Layout: {change}")
+
+    current = api.call("GetCurrentWindowType").get("currentWindowType")
+    if current != "MasterLayout":
+        raise RuntimeError(
+            f"A4_P activation did not produce MasterLayout window: {current}"
+        )
+
+    created_ids = []
+    cleanup_result = None
+    return_result = None
+    try:
+        line_result = api.call(
+            "CreateLineElements",
+            {
+                "linesData": [{
+                    "begCoordinate": {"x": 0.020, "y": 0.020},
+                    "endCoordinate": {"x": 0.060, "y": 0.020},
+                    "roomSeparator": False,
+                }]
+            },
+        )
+        line_rows = line_result.get("elements", [])
+        if len(line_rows) != 1 or "elementId" not in line_rows[0]:
+            raise RuntimeError(f"Line smoke creation failed: {line_result}")
+        line_id = line_rows[0]["elementId"]
+        created_ids.append(line_id)
+
+        text_result = api.call(
+            "CreateTexts",
+            {
+                "textsData": [{
+                    "coordinate": {"x": 0.020, "y": 0.030, "z": 0.0},
+                    "text": "__SBIM_MASTER_TEXT_SMOKE__",
+                    "height": 2.5,
+                    "justification": "Left",
+                }]
+            },
+        )
+        text_rows = text_result.get("elements", [])
+        if len(text_rows) != 1 or "elementId" not in text_rows[0]:
+            raise RuntimeError(f"Text smoke creation failed: {text_result}")
+        text_id = text_rows[0]["elementId"]
+        created_ids.append(text_id)
+
+        auto_result = api.call(
+            "CreateTexts",
+            {
+                "textsData": [{
+                    "coordinate": {"x": 0.020, "y": 0.040, "z": 0.0},
+                    "text": "<LAYOUTNAME>",
+                    "height": 2.5,
+                    "justification": "Left",
+                }]
+            },
+        )
+        auto_rows = auto_result.get("elements", [])
+        if len(auto_rows) != 1 or "elementId" not in auto_rows[0]:
+            raise RuntimeError(f"AutoText-token smoke creation failed: {auto_result}")
+        auto_id = auto_rows[0]["elementId"]
+        created_ids.append(auto_id)
+
+        line_query = api.call(
+            "GetElementsByType",
+            {"elementType": "Line", "databases": [{"databaseId": master_db}]},
+        )
+        text_query = api.call(
+            "GetElementsByType",
+            {"elementType": "Text", "databases": [{"databaseId": master_db}]},
+        )
+
+        def collect_guids(result):
+            found = set()
+            for result_row in result.get("elements", []):
+                for element in result_row.get("elements", []):
+                    guid = (element.get("elementId") or {}).get("guid")
+                    if guid:
+                        found.add(guid)
+            return found
+
+        line_guids = collect_guids(line_query)
+        text_guids = collect_guids(text_query)
+        expected_line_guid = line_id.get("guid")
+        expected_text_guids = {text_id.get("guid"), auto_id.get("guid")}
+
+        if expected_line_guid not in line_guids:
+            raise RuntimeError(
+                f"Created smoke Line not found in A4_P read-back: {line_query}"
+            )
+        if not expected_text_guids.issubset(text_guids):
+            raise RuntimeError(
+                f"Created smoke Texts not found in A4_P read-back: {text_query}"
+            )
+
+        details = api.call(
+            "GetDetailsOfElements",
+            {
+                "elements": [
+                    {"elementId": line_id},
+                    {"elementId": text_id},
+                    {"elementId": auto_id},
+                ]
+            },
+        )
+
+        return_result = {
+            "status": "PASS",
+            "writePerformed": True,
+            "masterLayout": "A4_P",
+            "masterDatabaseId": master_db,
+            "windowType": current,
+            "coordinateUnit": "m",
+            "textHeightUnit": "mm",
+            "created": {
+                "line": line_id,
+                "text": text_id,
+                "autoTextTokenText": auto_id,
+            },
+            "readBack": {
+                "lineGuidPresent": True,
+                "textGuidsPresent": True,
+                "details": details.get("detailsOfElements", []),
+            },
+            "geometryIntent": {
+                "lineMm": [[20.0, 20.0], [60.0, 20.0]],
+                "staticTextAnchorMm": [20.0, 30.0],
+                "autoTextAnchorMm": [20.0, 40.0],
+                "textHeightMm": 2.5,
+            },
+            "autoTextToken": "<LAYOUTNAME>",
+            "renderedAutoTextExpansionVerified": False,
+            "nextGate": "verify_rendered_autotext_and_exact_2d_geometry",
+        }
+    finally:
+        if created_ids:
+            cleanup_result = api.call(
+                "DeleteElements",
+                {
+                    "elements": [
+                        {"elementId": element_id}
+                        for element_id in created_ids
+                    ]
+                },
+            )
+            if not cleanup_result.get("success", False):
+                raise RuntimeError(
+                    "Sacrificial Master Layout elements were created but cleanup "
+                    f"failed: {cleanup_result}"
+                )
+
+    return_result["cleanup"] = {
+        "success": True,
+        "deletedCount": len(created_ids),
+        "result": cleanup_result,
+    }
+    return return_result
+
 def apply_navigator_shell(api: Tapir, allow_nonempty=False):
     """Create only safe Navigator containers: View folders and Layout subsets.
 
@@ -2117,7 +2318,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "action",
-        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "plan-autotext", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell"),
+        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "plan-autotext", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell", "apply-master-layout-smoke"),
     )
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
     parser.add_argument(
@@ -2167,6 +2368,8 @@ def main():
             result = apply_navigator_shell(api, allow_nonempty=args.allow_nonempty)
         elif args.action == "apply-master-layout-shell":
             result = apply_master_layout_shell(api, allow_nonempty=args.allow_nonempty)
+        elif args.action == "apply-master-layout-smoke":
+            result = apply_master_layout_smoke(api, allow_nonempty=args.allow_nonempty)
         else:
             raise AssertionError(args.action)
 
