@@ -1,0 +1,23 @@
+{
+  "release": "2.6",
+  "source_id": "POROTHERM_LOWRISE",
+  "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+  "physical_pages": 105,
+  "expected_sha256": "9afc42e77f5d02ff2432386b8a04e88c4756f476b43cb345ea2021c8c0589c95",
+  "actual_sha256": "9afc42e77f5d02ff2432386b8a04e88c4756f476b43cb345ea2021c8c0589c95",
+  "match": true,
+  "technical_sheets": 73,
+  "recovered_missing_sheets": [
+    71,
+    72,
+    73,
+    75,
+    76,
+    77,
+    78,
+    79,
+    81,
+    101,
+    102
+  ]
+}

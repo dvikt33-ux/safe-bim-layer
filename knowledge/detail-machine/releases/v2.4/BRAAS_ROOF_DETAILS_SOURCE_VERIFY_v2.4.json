@@ -1,0 +1,9 @@
+{
+  "release": "2.4",
+  "source_id": "BRAAS_ROOF_DETAILS",
+  "representation": "braas_albom_tehnicheskih_reshenii_uzli_skatnih_krish.pdf",
+  "expected_sha256": "e3fda68e46468a4cf7be9e008192e82453892633266dc8379e483833cf8a3364",
+  "actual_sha256": "e3fda68e46468a4cf7be9e008192e82453892633266dc8379e483833cf8a3364",
+  "match": true,
+  "physical_pages": 55
+}

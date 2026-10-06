@@ -1,0 +1,21 @@
+{
+  "release": "2.5",
+  "focus_source": "BRAAS_ROOF_TECH",
+  "detail_units_total": 1211,
+  "parameter_facts_total": 1245,
+  "archicad_ir_total": 1515,
+  "active_ir_total": 1211,
+  "component_variants_total": 575,
+  "dimension_queue_total": 610,
+  "braas_tech_cards": 87,
+  "braas_tech_active_facts": 93,
+  "braas_tech_active_ir": 87,
+  "braas_tech_products_added": 16,
+  "legacy_facts_replaced": 74,
+  "legacy_ir_replaced": 87,
+  "sqlite_integrity": "ok",
+  "missing_active_ir_refs": 0,
+  "commit_allowed_true": 0,
+  "source_representation_hashes_matched": 40,
+  "source_representation_hashes_total": 40
+}

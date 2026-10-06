@@ -1,0 +1,27 @@
+{
+  "release": "2.3",
+  "source_id": "ROCKFACADE_2022",
+  "checks": [
+    {
+      "format": "pdf",
+      "file": "albom_tehnicheskih_reshenii_rokvul_-_sistema_fasadnaya_teploizolyacionnaya_kompozitnaya_rockfacade_.pdf",
+      "expected_sha256": "48ee532a930783ee389d8125a7980214de6a0837f3960497a27e4f90d2e491c9",
+      "actual_sha256": "48ee532a930783ee389d8125a7980214de6a0837f3960497a27e4f90d2e491c9",
+      "match": true
+    },
+    {
+      "format": "dxf",
+      "file": "Альбом технических решений РОКВУЛ - Система фасадная теплоизоляционная композитная ROCFACADE с наружными штукатурными слоями .dxf",
+      "expected_sha256": "1196764584bf2b6600d46f8b7fd9bdc61b6ce2d457ea5e34aaa73a3d3b549b2a",
+      "actual_sha256": "1196764584bf2b6600d46f8b7fd9bdc61b6ce2d457ea5e34aaa73a3d3b549b2a",
+      "match": true
+    },
+    {
+      "format": "dwg",
+      "file": "Альбом технических решений РОКВУЛ - Система фасадная теплоизоляционная композитная ROCFACADE с наружными штукатурными слоями .dwg",
+      "expected_sha256": "e1255510b85f79d43088682424c311dd10ea0e5f8c7174ca6f797aad804cd00c",
+      "actual_sha256": "e1255510b85f79d43088682424c311dd10ea0e5f8c7174ca6f797aad804cd00c",
+      "match": true
+    }
+  ]
+}

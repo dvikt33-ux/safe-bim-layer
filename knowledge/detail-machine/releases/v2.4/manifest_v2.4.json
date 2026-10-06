@@ -1,0 +1,231 @@
+{
+  "release": "2.4",
+  "format": "systematized_active_machine_state",
+  "detail_units": 1211,
+  "active_ir": 1211,
+  "parameter_facts": 1226,
+  "component_variants": 559,
+  "dimension_queue": 610,
+  "files": [
+    {
+      "file": "README_v2.4.md",
+      "size": 1651,
+      "sha256": "fe554ecf1a4b25378a62b723a93c40aace74deaa3a660d67c1c59a5ffec3a0dd"
+    },
+    {
+      "file": "AUDIT_v2.4.json",
+      "size": 1635,
+      "sha256": "5189dad150ea2bdd1c83ddb5773e60140d5287c3e86314bd9edf3c19a2dd90b4"
+    },
+    {
+      "file": "SUMMARY_v2.4.json",
+      "size": 590,
+      "sha256": "3ab99767805d6d8d87f3a41c5a93ddf2b9c74378f754e4f220dbd73bf6b94200"
+    },
+    {
+      "file": "BRAAS_ROOF_DETAILS_SOURCE_VERIFY_v2.4.json",
+      "size": 357,
+      "sha256": "77912ed0b268dcbdffe926fd7320cef2390d5d135c230a014bfa2cdb4c701528"
+    },
+    {
+      "file": "detail_units_v2.4.jsonl",
+      "size": 1011961,
+      "sha256": "e527a3765e6869cd04c8f7504ec10022821f7963273a36e2d43ee1d1d091db9c"
+    },
+    {
+      "file": "details_active_v2.4.jsonl",
+      "size": 6424088,
+      "sha256": "e70eecd72146ee63520cef9da9b08ef8b520b560018b1d900438a57337d7b189"
+    },
+    {
+      "file": "parameter_facts_v2.4.jsonl",
+      "size": 812616,
+      "sha256": "96ff678819e3296cbb530d7984a4b4654b709d556f5391b6744a9e85705c60af"
+    },
+    {
+      "file": "component_variants_v2.4.jsonl",
+      "size": 367226,
+      "sha256": "b77a4f6a63c440fe8e6af062fbd8a24e932979c53923f9bd0ce1fad8b54211aa"
+    },
+    {
+      "file": "source_registry_v2.4.json",
+      "size": 34224,
+      "sha256": "901177dba460ac56613ee19fc4d39673c9dc1bdd80c2d74edc98d8a9aa76addb"
+    },
+    {
+      "file": "braas_roof_details_semantics_v2.4.jsonl",
+      "size": 392384,
+      "sha256": "1a2304bf5f17ffe71f0097373e23d5123ac81bdcec4c56c267dec6cffa63ba64"
+    },
+    {
+      "file": "braas_roof_details_parameter_facts_v2.4.jsonl",
+      "size": 11600,
+      "sha256": "0d4d3df1a6134f3a48422f2265576e351812b900fd2fffc5ffd1e3686da3b382"
+    },
+    {
+      "file": "braas_roof_details_assembly_grammar_v2.4.json",
+      "size": 1518,
+      "sha256": "3dc75f17cc52111441b343b7963797fe1729e54549f4f9cf5aabd475af28e0bc"
+    },
+    {
+      "file": "braas_roof_details_source_anomalies_v2.4.jsonl",
+      "size": 1107,
+      "sha256": "7f8d8e5cb57b0ca408368e7e78a2313f025b3eccbc12960f906443e57d2a4fc0"
+    },
+    {
+      "file": "archicad_build_contract_v0.5.json",
+      "size": 1032,
+      "sha256": "e74e6ca9c5def505075819b9ea92db17e7ea9e18f600b7a035b8029ff3c7b90d"
+    },
+    {
+      "file": "archicad_system_grammars_v0.7.json",
+      "size": 5592,
+      "sha256": "822cca151db347067d0a8df0727b61a0f912d33571a61c7d0fc58a6eddb46662"
+    },
+    {
+      "file": "archicad_tool_mapping_v0.9.json",
+      "size": 2406,
+      "sha256": "cdb8c7782b49134b90169dd57a207cf750f5149853015bad7db3ed502e645e30"
+    },
+    {
+      "file": "armo_assembly_grammar_v2.0.json",
+      "size": 1602,
+      "sha256": "ab3e8aca9e2d58de338704d54fd47d6b42b783f24554309d381a63df088bf2a7"
+    },
+    {
+      "file": "armo_profile_geometry_v2.0.jsonl",
+      "size": 19705,
+      "sha256": "ef9ee51ec99f86692725180e20c35d6a82ca10534cf631fecd873d6f971faff7"
+    },
+    {
+      "file": "armo_source_semantics_v2.0.jsonl",
+      "size": 70798,
+      "sha256": "8e1a6e36e44e9d4362b46050f0ead26fda013a7b58f45221dda34d2f6642dddd"
+    },
+    {
+      "file": "favorit_facade_assembly_grammar_v1.2.json",
+      "size": 4340,
+      "sha256": "b809f62da750a92f132c19c35c8b85ba1b4c5fb73558190f4d4613a893663a01"
+    },
+    {
+      "file": "favorit_section2_semantics_v1.3.jsonl",
+      "size": 134046,
+      "sha256": "c4fd09b254a52be15222c525dc1fe6347a3855a64fab3ff1291d0c6e8c9f5772"
+    },
+    {
+      "file": "favorit_section3_semantics_v1.4.jsonl",
+      "size": 132612,
+      "sha256": "fab66076ba9e02d714cf597420e4f79492a75ad806d1712c0b16831b310b14e8"
+    },
+    {
+      "file": "favorit_section4_semantics_v1.5.jsonl",
+      "size": 178861,
+      "sha256": "a46ef1dc2a735ed355d5e8e18802c3e1ef34baed2e59bcc2f53cbe7278ba8afa"
+    },
+    {
+      "file": "favorit_section5_semantics_v1.6.jsonl",
+      "size": 135401,
+      "sha256": "7640220134bee866869e0b2b8825a225ddc9b1f39b44e33b21f448ad94e41cca"
+    },
+    {
+      "file": "favorit_section6_semantics_v1.6.jsonl",
+      "size": 106017,
+      "sha256": "dc11db6ca65f98e72188be2076a11c2ba7fd690cf015496cad51daff1cb8ab75"
+    },
+    {
+      "file": "favorit_sections5_6_assembly_grammar_v1.6.json",
+      "size": 2666,
+      "sha256": "dab554fd8d9fc06233edbb246a592dd574a91e7f169dcfaa18d91aeea14a090a"
+    },
+    {
+      "file": "favorit_composite_section3_semantics_v1.8.jsonl",
+      "size": 170567,
+      "sha256": "c6e925f21d8be7a424ed04fb6b07aad3b96a06e03b4a0ac9804986944d56b101"
+    },
+    {
+      "file": "favorit_composite_section4_semantics_v1.9.jsonl",
+      "size": 135919,
+      "sha256": "2c910180ed430704ce316d9c0c3d3af719a2490b153db1f77fd70be1ad0efbd1"
+    },
+    {
+      "file": "kleyko_panel_fix_assembly_grammar_v2.1.json",
+      "size": 1827,
+      "sha256": "d1e2da0cc825d1e37724847387da1d53f1217524217a37f4b0351f74fabc1122"
+    },
+    {
+      "file": "kleyko_panel_fix_semantics_v2.1.jsonl",
+      "size": 173803,
+      "sha256": "870fba9b0f94c1e47ed9165c84bfff1beab1522959d78721e19be991f12fe4eb"
+    },
+    {
+      "file": "kleyko_source_anomalies_v2.1.jsonl",
+      "size": 951,
+      "sha256": "9ec466d129fde594f4ed74e1afd2ed5695a9c9f0c1d824e8846560f56605516d"
+    },
+    {
+      "file": "kaiman_kerakam_assembly_grammar_v2.2.json",
+      "size": 2383,
+      "sha256": "f2154bda806fd99a80140626afb9b331498974bd6ffce5190c6e0247c2545227"
+    },
+    {
+      "file": "kaiman_kerakam_semantics_v2.2.jsonl",
+      "size": 1384375,
+      "sha256": "7b9bba0500583a6f7c7e41af5bb83bd5eabeec85e660f07d9150b4de37bc09d2"
+    },
+    {
+      "file": "kaiman_kerakam_wall_types_v2.2.json",
+      "size": 7247,
+      "sha256": "e24d343c8536270f7689744cf1fac1130462b5849f93ffca267fd28e035016bf"
+    },
+    {
+      "file": "kaiman_kerakam_normative_claims_v2.2.json",
+      "size": 652,
+      "sha256": "90c0149bbab142e47cd8fcb78884eea8ac40276e56a45777df8d36d0f28cb9b1"
+    },
+    {
+      "file": "rockfacade_semantics_v2.3.jsonl",
+      "size": 604811,
+      "sha256": "2127960d5e7d100d59e01e50735cad48f64830a674211f94fa9cf664b5b3550b"
+    },
+    {
+      "file": "rockfacade_parameter_facts_v2.3.jsonl",
+      "size": 116984,
+      "sha256": "05508f8039ec77a92ebc90cd881a0a4f6d907dc4b4dcb54836adf455df71198d"
+    },
+    {
+      "file": "rockfacade_assembly_grammar_v2.3.json",
+      "size": 2305,
+      "sha256": "bca028624da93be82ed08412093b3a9b0f743ce006873484fdd745a34de63400"
+    },
+    {
+      "file": "rockfacade_source_anomalies_v2.3.jsonl",
+      "size": 1853,
+      "sha256": "7ff0eda4d4e760c686f95ec156d98bcdc55c8b2ba90c832c870811ad7266b680"
+    },
+    {
+      "file": "cross_source_geometry_aliases_v1.7.jsonl",
+      "size": 9756,
+      "sha256": "e5397569fabdf0fd12030058d3b145c4c5b5340c9578dd01b37817eca02ff8c7"
+    },
+    {
+      "file": "cross_section_geometry_aliases_v1.9.jsonl",
+      "size": 11652,
+      "sha256": "3d3adc2220dab21df542df73c1e5e6413ec58408b0212a95acf8626fb40dc9da"
+    },
+    {
+      "file": "page_aliases_v1.3.jsonl",
+      "size": 1368,
+      "sha256": "42ba2a82f09f47bc01aeec60c486d85a69a76014abf1fe0fca9f74389b3beda2"
+    },
+    {
+      "file": "quarantined_detail_records_v1.9.jsonl",
+      "size": 36294,
+      "sha256": "26830b1cd13e7d37103ef65a5d358fc7654af383ead9fb2727154c45941b38a8"
+    },
+    {
+      "file": "source_normative_claims_v2.1.json",
+      "size": 39102,
+      "sha256": "8c9164d01362302805a5da75b49b32c60df980764f28de4661299f64bb668010"
+    }
+  ]
+}

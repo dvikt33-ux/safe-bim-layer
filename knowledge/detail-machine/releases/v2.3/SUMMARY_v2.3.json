@@ -1,0 +1,23 @@
+{
+  "release": "2.3",
+  "focus_source": "ROCKFACADE_2022",
+  "detail_units_total": 1211,
+  "parameter_facts_total": 1209,
+  "archicad_ir_total": 1515,
+  "component_variants_total": 546,
+  "dimension_queue_total": 610,
+  "rockfacade_detail_sheets": 101,
+  "rockfacade_active_facts": 144,
+  "rockfacade_active_ir": 101,
+  "rockfacade_named_material_variants": 10,
+  "legacy_rockfacade_facts_replaced": 90,
+  "legacy_rockfacade_ir_replaced": 101,
+  "dxf_dimension_entities": 126,
+  "actual_sheet_footer_codes_unique": 101,
+  "duplicate_sheet_codes": [],
+  "sqlite_integrity": "ok",
+  "missing_active_ir_refs": 0,
+  "commit_allowed_true": 0,
+  "source_representation_hashes_matched": 3,
+  "source_representation_hashes_total": 3
+}

@@ -1,0 +1,37 @@
+{
+  "release": "2.6",
+  "timestamp_utc": "2026-10-06T22:03:29.672635+00:00",
+  "source_scope": "POROTHERM/Wienerberger low-rise technical album, 105 physical pages; source rules pages 5-19; 73 physical technical sheets in sections 1-12",
+  "checks": {
+    "physical_pdf_pages_verified": 105,
+    "physical_technical_sheets": 73,
+    "legacy_porotherm_detail_units": 69,
+    "recovered_missing_physical_sheets": 11,
+    "active_porotherm_detail_units_after_recovery": 80,
+    "constructible_porotherm_detail_units": 73,
+    "reference_section_headers_in_detail_units": 7,
+    "new_global_and_local_porotherm_facts": 54,
+    "active_porotherm_parameter_facts": 54,
+    "active_porotherm_ir_bindings": 80,
+    "new_porotherm_catalog_variants": 23,
+    "detail_units_total": 1222,
+    "parameter_facts_total": 1294,
+    "archicad_ir_total": 1595,
+    "active_ir_total": 1222,
+    "component_variants_total": 598,
+    "sqlite_integrity_check": "ok",
+    "missing_active_ir_refs": 0,
+    "porotherm_commit_allowed_true": 0,
+    "raster_measurement_used_for_dimensions": 0,
+    "source_hash_matches": 40,
+    "source_hash_total": 40
+  },
+  "critical_findings": [
+    "Legacy POROTHERM extraction missed 11 real technical sheets: physical pages 71-73, 75-79, 81, 101-102. v2.6 adds them as source-supported machine records.",
+    "Seven legacy records are red section-divider pages, not constructible details. They remain only as reference_section_header records for compatibility and cannot compile geometry.",
+    "The source TOC says section 1 is sheets 1.1-1.4, but the physical album contains sheet 1.5 on page 25. Physical sheet footer wins; the inconsistency is preserved.",
+    "Product envelope dimensions for 12 POROTHERM block variants and 3 TERCA brick variants are captured from source tables; internal ceramic void geometry is not invented.",
+    "Masonry rules such as 125 mm planning module, 87 mm minimum bond for h=219 mm, slab bearing >=120 mm, parapet/plinth protection and sheet 12.1 mesh/anchors are source-bound but manufacturer/code claims are not treated as current verified norms."
+  ],
+  "commit_policy": "fail_closed"
+}
