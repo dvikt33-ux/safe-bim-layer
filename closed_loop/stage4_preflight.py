@@ -9,7 +9,7 @@ from .live_wall import ROOT, read
 from .wall_attempts import durable_json
 
 IMPLEMENTATION_FILES = ('closed_loop/models.py','closed_loop/orchestrator.py','closed_loop/wall_attempts.py',
-    'closed_loop/live_wall.py','closed_loop/live_wall_hardening.py','closed_loop/stage4_preflight.py','closed_loop/stage4_live_scenario.py',
+    'closed_loop/live_wall.py','closed_loop/live_wall_hardening.py','closed_loop/stage4_fixture.py','closed_loop/stage4_preflight.py','closed_loop/stage4_live_scenario.py',
     'scripts/stage4_audit_pack.py','scripts/archicad_executor.py','scripts/archicad_chat_executor.py',
     'scripts/archicad_write_cycles/wall_joint_cycle.py','archicad-addon/Examples/model_dump_v1.py')
 
