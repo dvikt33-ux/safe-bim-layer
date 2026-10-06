@@ -122,3 +122,22 @@ This launcher does not:
 - create or edit MVO, GO, Dimension Style, Publisher, DWG or IFC presets unsupported by the current API path;
 - save a final `.tpl`;
 - bypass any builder gate.
+
+
+## 7. Master Layout smoke gate
+
+After `autotext` passes:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/run_archicad_template_live.ps1 -Stage master-smoke
+```
+
+This activates `A4_P` and creates three sacrificial document elements:
+
+- one 40 mm Line from 20/20 mm to 60/20 mm;
+- one static Text at 20/30 mm;
+- one Text containing `<LAYOUTNAME>` at 20/40 mm.
+
+The test verifies that the created GUIDs are present in the `A4_P` Master Layout database and then deletes all three elements in a `finally` cleanup path.
+
+A PASS proves database targeting, creation, GUID read-back and cleanup. It deliberately does **not** yet claim that rendered AutoText expansion or exact 2D geometry has been read back from Archicad. Those remain the final gate before full Form 3 drawing.
