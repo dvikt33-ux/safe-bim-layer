@@ -2191,6 +2191,375 @@ def apply_master_layout_smoke(api: Tapir, allow_nonempty=False):
     }
     return return_result
 
+
+def apply_layout_autotext_smoke(api: Tapir, allow_nonempty=False):
+    """Verify layout-scoped AutoText on a disposable Layout and subset.
+
+    Creates one temporary subset and one temporary Layout based on A4_P,
+    activates that Layout, creates three AutoText Text elements, validates
+    their raw/interpreted content through GetCurrent2DDocumentV1, then removes
+    the Text elements, Layout and subset. Residual same-name smoke items block
+    instead of being deleted silently.
+    """
+    validation = validate_specs()
+    if validation["status"] != "PASS":
+        raise RuntimeError(f"Spec validation failed: {validation['errors']}")
+
+    before_count = len(api.call("GetAllElements").get("elements", []))
+    if before_count and not allow_nonempty:
+        raise RuntimeError(
+            f"Refusing Layout AutoText smoke: current project contains "
+            f"{before_count} model elements. Use a clean candidate project or "
+            f"pass --allow-nonempty explicitly."
+        )
+
+    try:
+        api.call("GetCurrent2DDocumentV1")
+    except Exception as exc:
+        return {
+            "status": "BLOCKED_ADDON_REBUILD",
+            "writePerformed": False,
+            "reason": (
+                "GetCurrent2DDocumentV1 is required for interpreted layout-scoped "
+                "AutoText read-back."
+            ),
+            "error": str(exc),
+        }
+
+    master_plan = plan_master_layouts(api)
+    master_row = next(
+        (x for x in master_plan["masters"] if x["name"] == "A4_P"),
+        None,
+    )
+    if master_row is None or master_row.get("state") != "EXISTS_OK":
+        return {
+            "status": "BLOCKED_MASTER_LAYOUT",
+            "writePerformed": False,
+            "reason": "A4_P must exist with the exact registered size first.",
+            "master": master_row,
+        }
+
+    subset_name = "__SBIM_AUTOTEXT_SMOKE_SUBSET__"
+    layout_name = "__SBIM_AUTOTEXT_SMOKE_LAYOUT__"
+
+    initial_items = _layoutbook_items(api)
+    residual = [
+        x for x in initial_items
+        if x.get("name") in {subset_name, layout_name}
+    ]
+    if residual:
+        return {
+            "status": "BLOCKED_RESIDUAL_SMOKE_ITEMS",
+            "writePerformed": False,
+            "reason": (
+                "Residual sacrificial Layout/subset found. They are not deleted "
+                "automatically because their origin cannot be proven."
+            ),
+            "items": residual,
+        }
+
+    master = next(
+        (
+            x for x in initial_items
+            if x.get("type") == "MasterLayoutItem" and x.get("name") == "A4_P"
+        ),
+        None,
+    )
+    if master is None:
+        raise RuntimeError("A4_P navigator item disappeared after preflight.")
+
+    created_text_ids = []
+    created_layout_nav = None
+    created_subset_nav = None
+    cleanup_errors = []
+    return_result = None
+
+    try:
+        subset_result = api.call(
+            "CreateLayoutSubset",
+            {
+                "subsetsData": [{
+                    "name": subset_name,
+                    "ownPrefix": "AT-",
+                    "numberingStyle": "01",
+                    "startAt": 1,
+                    "continueNumbering": False,
+                    "useUpperPrefix": False,
+                    "includeToIDSequence": True,
+                    "customNumbering": False,
+                    "addOwnPrefix": True,
+                }]
+            },
+        )
+        subset_rows = subset_result.get("navigatorItems", [])
+        if len(subset_rows) != 1 or "navigatorItemId" not in subset_rows[0]:
+            raise RuntimeError(
+                f"Could not create sacrificial Layout subset: {subset_result}"
+            )
+        created_subset_nav = subset_rows[0]["navigatorItemId"]
+
+        create_layout = api.call(
+            "CreateLayout",
+            {
+                "layoutsData": [{
+                    "masterNavigatorItemId": master["navigatorItemId"],
+                    "layoutName": layout_name,
+                    "parentNavigatorItemId": created_subset_nav,
+                    "layoutParameters": {
+                        "doNotIncludeInNumbering": False,
+                        "displayMasterLayoutBelow": True,
+                    },
+                }]
+            },
+        )
+        if not create_layout.get("databases"):
+            raise RuntimeError(
+                f"Could not create sacrificial Layout: {create_layout}"
+            )
+
+        items = _layoutbook_items(api)
+        layout = next(
+            (
+                x for x in items
+                if x.get("type") == "LayoutItem" and x.get("name") == layout_name
+            ),
+            None,
+        )
+        if layout is None:
+            raise RuntimeError("Sacrificial Layout missing after CreateLayout.")
+        created_layout_nav = layout["navigatorItemId"]
+        layout_db = _layout_db_id_from_nav(api, layout)
+
+        change = api.call("ChangeWindow", {"navigatorItemId": created_layout_nav})
+        if not change.get("success", False):
+            raise RuntimeError(
+                f"Could not activate sacrificial Layout: {change}"
+            )
+        current = api.call("GetCurrentWindowType").get("currentWindowType")
+        if current != "Layout":
+            raise RuntimeError(
+                f"Sacrificial Layout activation did not produce Layout window: {current}"
+            )
+
+        auto_context = api.call("GetAutoTextsV1")
+        context_rows = {
+            str(x.get("key", "")).strip("<>"): x
+            for x in auto_context.get("autoTexts", [])
+            if x.get("key")
+        }
+        required = [
+            "LAYOUTNAME",
+            "LAYOUTNUMBERINCURRENTSUBSET",
+            "NUMBEROFLAYOUTSINCURRENTSUBSET",
+        ]
+        missing = [key for key in required if key not in context_rows]
+        if missing:
+            raise RuntimeError(
+                f"Layout context is missing required AutoText keys: {missing}"
+            )
+
+        expected_name = context_rows["LAYOUTNAME"].get("value")
+        expected_number = context_rows["LAYOUTNUMBERINCURRENTSUBSET"].get("value")
+        expected_count = context_rows["NUMBEROFLAYOUTSINCURRENTSUBSET"].get("value")
+
+        if expected_name != layout_name:
+            raise RuntimeError(
+                "LAYOUTNAME context mismatch: "
+                f"expected={layout_name!r}, actual={expected_name!r}"
+            )
+        if not str(expected_number or "").strip():
+            raise RuntimeError(
+                "LAYOUTNUMBERINCURRENTSUBSET resolved to an empty value."
+            )
+        try:
+            parsed_count = int(str(expected_count).strip())
+        except (TypeError, ValueError):
+            raise RuntimeError(
+                "NUMBEROFLAYOUTSINCURRENTSUBSET is not an integer: "
+                f"{expected_count!r}"
+            )
+        if parsed_count != 1:
+            raise RuntimeError(
+                "Sacrificial subset should contain exactly one Layout, but "
+                f"AutoText reports {expected_count!r}."
+            )
+
+        token_specs = [
+            ("LAYOUTNAME", 0.020),
+            ("LAYOUTNUMBERINCURRENTSUBSET", 0.030),
+            ("NUMBEROFLAYOUTSINCURRENTSUBSET", 0.040),
+        ]
+        created_by_key = {}
+        for key, y in token_specs:
+            result = api.call(
+                "CreateTexts",
+                {
+                    "textsData": [{
+                        "coordinate": {"x": 0.020, "y": y, "z": 0.0},
+                        "text": f"<{key}>",
+                        "height": 2.5,
+                        "justification": "Left",
+                    }]
+                },
+            )
+            rows = result.get("elements", [])
+            if len(rows) != 1 or "elementId" not in rows[0]:
+                raise RuntimeError(
+                    f"Could not create {key} AutoText smoke Text: {result}"
+                )
+            element_id = rows[0]["elementId"]
+            created_text_ids.append(element_id)
+            created_by_key[key] = element_id
+
+        native_2d = api.call("GetCurrent2DDocumentV1")
+        texts = {
+            x.get("guid"): x for x in native_2d.get("texts", []) if x.get("guid")
+        }
+        verified = {}
+        for key, y in token_specs:
+            element_id = created_by_key[key]
+            row = texts.get(element_id.get("guid"))
+            if row is None:
+                raise RuntimeError(
+                    f"Native 2D reader did not return {key} smoke Text."
+                )
+            position = row.get("position") or {}
+            if not (
+                math.isclose(float(position.get("x", 999)), 0.020, abs_tol=1e-6)
+                and math.isclose(float(position.get("y", 999)), y, abs_tol=1e-6)
+            ):
+                raise RuntimeError(
+                    f"{key} smoke Text coordinate mismatch: {row}"
+                )
+            if not math.isclose(
+                float(row.get("heightMm", -1)), 2.5, abs_tol=0.01
+            ):
+                raise RuntimeError(
+                    f"{key} smoke Text height mismatch: {row}"
+                )
+            expected_raw = f"<{key}>"
+            if row.get("rawText") != expected_raw:
+                raise RuntimeError(
+                    f"{key} raw token mismatch: {row}"
+                )
+            expected_value = context_rows[key].get("value")
+            if row.get("interpretedText") != expected_value:
+                raise RuntimeError(
+                    f"{key} interpreted value mismatch: "
+                    f"expected={expected_value!r}, "
+                    f"actual={row.get('interpretedText')!r}"
+                )
+            verified[key] = {
+                "raw": row.get("rawText"),
+                "interpreted": row.get("interpretedText"),
+                "position": row.get("position"),
+                "heightMm": row.get("heightMm"),
+            }
+
+        return_result = {
+            "status": "PASS",
+            "writePerformed": True,
+            "layoutScopedAutoTextVerified": True,
+            "subset": {
+                "name": subset_name,
+                "expectedLayoutCount": 1,
+                "reportedLayoutCount": parsed_count,
+            },
+            "layout": {
+                "name": layout_name,
+                "databaseId": layout_db,
+                "masterLayout": "A4_P",
+                "reportedNumberInSubset": expected_number,
+            },
+            "verified": verified,
+            "nextGate": "generate_form3_titleblock_geometry",
+        }
+    finally:
+        if created_text_ids:
+            try:
+                delete_texts = api.call(
+                    "DeleteElements",
+                    {
+                        "elements": [
+                            {"elementId": element_id}
+                            for element_id in created_text_ids
+                        ]
+                    },
+                )
+                if not delete_texts.get("success", False):
+                    cleanup_errors.append(
+                        f"DeleteElements failed: {delete_texts}"
+                    )
+            except Exception as exc:
+                cleanup_errors.append(f"DeleteElements exception: {exc}")
+
+        if created_layout_nav is not None:
+            try:
+                delete_layout = api.call(
+                    "DeleteNavigatorItems",
+                    {"navigatorItemIds": [{
+                        "navigatorItemId": created_layout_nav
+                    }]},
+                )
+                rows = delete_layout.get("executionResults", [])
+                if len(rows) != 1 or not rows[0].get("success"):
+                    cleanup_errors.append(
+                        f"Delete sacrificial Layout failed: {delete_layout}"
+                    )
+            except Exception as exc:
+                cleanup_errors.append(
+                    f"Delete sacrificial Layout exception: {exc}"
+                )
+
+        if created_subset_nav is not None:
+            try:
+                delete_subset = api.call(
+                    "DeleteNavigatorItems",
+                    {"navigatorItemIds": [{
+                        "navigatorItemId": created_subset_nav
+                    }]},
+                )
+                rows = delete_subset.get("executionResults", [])
+                if len(rows) != 1 or not rows[0].get("success"):
+                    cleanup_errors.append(
+                        f"Delete sacrificial subset failed: {delete_subset}"
+                    )
+            except Exception as exc:
+                cleanup_errors.append(
+                    f"Delete sacrificial subset exception: {exc}"
+                )
+
+    if cleanup_errors:
+        raise RuntimeError(
+            "Layout AutoText smoke completed but cleanup was not clean: "
+            + " | ".join(cleanup_errors)
+        )
+
+    after_items = _layoutbook_items(api)
+    residual_after = [
+        x for x in after_items
+        if x.get("name") in {subset_name, layout_name}
+    ]
+    if residual_after:
+        raise RuntimeError(
+            f"Residual smoke navigator items after cleanup: {residual_after}"
+        )
+
+    after_count = len(api.call("GetAllElements").get("elements", []))
+    if after_count != before_count:
+        raise RuntimeError(
+            "Unexpected model element count change during Layout AutoText smoke."
+        )
+
+    return_result["cleanup"] = {
+        "success": True,
+        "textElementsDeleted": len(created_text_ids),
+        "layoutDeleted": True,
+        "subsetDeleted": True,
+        "modelElementCountUnchanged": True,
+    }
+    return return_result
+
 def apply_navigator_shell(api: Tapir, allow_nonempty=False):
     """Create only safe Navigator containers: View folders and Layout subsets.
 
@@ -2396,7 +2765,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "action",
-        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "plan-autotext", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell", "apply-master-layout-smoke"),
+        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "plan-autotext", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell", "apply-master-layout-smoke", "apply-layout-autotext-smoke"),
     )
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
     parser.add_argument(
@@ -2448,6 +2817,8 @@ def main():
             result = apply_master_layout_shell(api, allow_nonempty=args.allow_nonempty)
         elif args.action == "apply-master-layout-smoke":
             result = apply_master_layout_smoke(api, allow_nonempty=args.allow_nonempty)
+        elif args.action == "apply-layout-autotext-smoke":
+            result = apply_layout_autotext_smoke(api, allow_nonempty=args.allow_nonempty)
         else:
             raise AssertionError(args.action)
 
