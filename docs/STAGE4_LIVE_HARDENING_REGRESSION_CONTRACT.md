@@ -39,22 +39,27 @@ Global invariant:
 ### S4-01 — happy-path wall regression
 
 Goal:
-Prove Stage 4 did not break the already VERIFIED Stage 3 create/read-back/audit path.
+Prove Stage 4 did not break the already VERIFIED Stage 3 two-segment closed-loop regression: one user goal creates a +1.0 m continuation, performs factual read-back/audit, then replans from the factual first result and creates a further +0.5 m continuation.
 
 Required behavior:
 1. Observe current model.
-2. Plan exactly one safe Wall mutation using the existing supported create_wall path.
+2. Plan the first supported create_wall mutation (+1.0 m).
 3. Immediate pre-write state check is CURRENT.
-4. Persist checkpoint and mutationAttemptId before dispatch.
-5. Dispatch exactly once.
-6. Read back exact created GUID and source Wall.
-7. Geometry/length/joint/story invariants PASS.
-8. Final result VERIFIED/PASS.
+4. Persist checkpoint and mutationAttemptId before each dispatch.
+5. Dispatch the first mutation exactly once.
+6. Read back/audit the exact first created GUID.
+7. Re-observe/replan from factual state; the second action must depend on the first factual result.
+8. Dispatch the second mutation (+0.5 m) exactly once.
+9. Read back/audit the exact second created GUID.
+10. Geometry/length/joint/story invariants PASS for both segments.
+11. Final result VERIFIED/PASS.
 
 Acceptance:
-- physical dispatch count = 1;
-- created GUID is absent before and present after;
-- factual read-back exists;
+- exactly two intended physical CreateWalls dispatches for the two-segment goal;
+- each mutationAttemptId is unique and dispatched at most once;
+- both created GUIDs are absent before their own create and present after;
+- second planning uses the factual first created Wall as its source;
+- factual read-back exists for both;
 - no manual model correction;
 - no stale fingerprint accepted.
 
@@ -104,9 +109,11 @@ Required behavior:
 9. No second create occurs.
 
 Acceptance:
-- total physical create dispatches = 1;
-- one and only one matching created element;
+- the uncertain first mutation is physically dispatched exactly once;
+- reconciliation does not repeat that first mutation;
+- one and only one matching element is adopted for the uncertain attempt;
 - reconciliation = APPLIED;
+- subsequent intended goal mutations may execute under new unique attempt IDs after factual read-back/replanning;
 - final progression may continue only after read-back.
 
 Regression oracle:
@@ -174,9 +181,11 @@ Required behavior:
 7. If ambiguous, follow S4-05.
 
 Acceptance for the applied variant:
-- total physical create dispatches across pre-crash + post-restart processes = 1;
+- the pre-crash mutation is physically dispatched exactly once across pre-crash + post-restart processes;
+- restart never redispatches that crashed attempt;
 - original candidate is adopted;
-- no duplicate GUID is created.
+- later intended goal mutations may execute with new unique attempt IDs after reconciliation/read-back;
+- no duplicate GUID is created for the crashed attempt.
 
 Regression oracle:
 BIMEXEC T5 live: process kill after dispatch, human/reconcile evidence, automatic retry false.
