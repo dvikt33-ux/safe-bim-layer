@@ -2,6 +2,7 @@
 import argparse
 import io
 import hashlib
+import os
 from pathlib import Path
 import shutil
 import tempfile
@@ -81,13 +82,20 @@ def main():
     Path(tempfile.tempdir).mkdir(parents=True, exist_ok=True)
     stream = io.StringIO()
     counts = {}
-    for folder in ('tests_stage2','tests_stage3','tests_audit_pack','tests_stage4_live'):
-        result = unittest.TextTestRunner(stream=stream, verbosity=2).run(unittest.TestLoader().discover(str(ROOT/folder)))
-        counts[folder] = {'testsRun':result.testsRun,'status':'PASS' if result.wasSuccessful() else 'FAIL',
-                          'failures':len(result.failures),'errors':len(result.errors)}
-        if not result.wasSuccessful():
-            (output/'tests.txt').write_text(stream.getvalue(),encoding='utf-8')
-            raise RuntimeError('Test failure; no scenario or live execution allowed')
+    # Offline proof must be hermetic: never inherit the operator's live PLN
+    # binding from the shell. Tests that exercise rebinding opt in explicitly.
+    live_binding = os.environ.pop('SAFE_BIM_STAGE4_PROJECT_PATH', None)
+    try:
+        for folder in ('tests_stage2','tests_stage3','tests_audit_pack','tests_stage4_live'):
+            result = unittest.TextTestRunner(stream=stream, verbosity=2).run(unittest.TestLoader().discover(str(ROOT/folder)))
+            counts[folder] = {'testsRun':result.testsRun,'status':'PASS' if result.wasSuccessful() else 'FAIL',
+                              'failures':len(result.failures),'errors':len(result.errors)}
+            if not result.wasSuccessful():
+                (output/'tests.txt').write_text(stream.getvalue(),encoding='utf-8')
+                raise RuntimeError('Test failure; no scenario or live execution allowed')
+    finally:
+        if live_binding is not None:
+            os.environ['SAFE_BIM_STAGE4_PROJECT_PATH'] = live_binding
     (output/'tests.txt').write_text(stream.getvalue(),encoding='utf-8')
     from scripts.audit_pack import verify_pack as verify_historical
     archived = {}
