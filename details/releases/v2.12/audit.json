@@ -1,0 +1,32 @@
+{
+  "release": "2.12",
+  "checks": {
+    "release": "2.12",
+    "base_release": "v2.11",
+    "focus_source": "KAIMAN_KERAKAM_WALL",
+    "focus_scope": "integrate existing KAIMAN exact-dimension layer for sheets 1-47 / PDF pages 41-87",
+    "detail_units_total": 1215,
+    "active_ir_total": 1215,
+    "parameter_facts_total": 1835,
+    "component_variants_total": 601,
+    "dimension_queue_total": 532,
+    "kaiman_exact_sheets_integrated": 47,
+    "kaiman_exact_bindings_integrated": 536,
+    "kaiman_cross_sheet_mismatches_preserved": 5,
+    "kaiman_remaining_queue_tasks": 180,
+    "source_hash_matches": 40,
+    "source_hash_total": 40,
+    "raster_measurement_used_for_dimensions": 0,
+    "normative_claims_promoted_to_current": 0,
+    "commit_policy": "fail_closed"
+  },
+  "critical_findings": [
+    "Integrated 536 previously audited KAIMAN/KERAKAM exact printed endpoint-bound dimensions for sheets 1-47; no re-measurement from raster was performed.",
+    "47 sheet-specific dimension-transcription queue records are removed because their exact sheet-local bindings now exist in active parameter facts.",
+    "Five cross-sheet mismatches from KAIMAN exact v2.5 remain explicit blockers; no averaging or silent normalization is permitted.",
+    "WT1.3 overview sheets 40/42/44/46 print 80 mm upper insulation while paired enlarged nodes 41/43/45/47 print 150 mm; values remain sheet-local.",
+    "Node-class inner structural zone 230 mm versus 290 mm remains node-specific and may not be propagated across node classes.",
+    "Queue closure is not construction permission; all active IR remains fail-closed and project structural sizing remains unresolved."
+  ],
+  "commit_allowed_true_introduced": 0
+}

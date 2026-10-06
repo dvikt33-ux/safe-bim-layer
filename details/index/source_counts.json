@@ -131,13 +131,18 @@
     "year": 2014,
     "details": 227,
     "active_ir": 227,
-    "parameter_facts": 24,
+    "parameter_facts": 560,
     "component_variants": 23,
     "normative_trust": "technical_solution_only_unless_separately_verified",
     "system": [
       "wall",
       "ceramic_block_masonry"
-    ]
+    ],
+    "exact_dimension_status": "integrated_v2.12",
+    "exact_dimension_sheets_integrated": 47,
+    "exact_dimension_bindings_integrated": 536,
+    "dimension_queue_remaining": 180,
+    "cross_sheet_mismatches_preserved": 5
   },
   {
     "source_id": "KLEYKO_PANEL_FIX",
