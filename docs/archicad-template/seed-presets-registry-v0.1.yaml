@@ -1,0 +1,228 @@
+registry_version: 0.1
+status: manual_seed_required_for_tapir_1_5_8
+target: Archicad_29
+
+principles:
+  names_are_api_contract: true
+  manual_seed_only_for_current_api_gaps: true
+  export_seed_xml_when_archicad_supports_export: true
+  verify_by_view_assignment_after_creation: true
+
+dimension_styles:
+  - name: DIM_01_SPDS_MM
+    purpose: architectural_linear_dimensions
+    required:
+      linear_unit: millimeter
+      decimals: 0
+      associative_values_preferred: true
+      text_height_mm: 2.5
+      semantic_pen: DIMENSION_020
+    status: manual_seed
+
+  - name: DIM_02_LEVEL_M
+    purpose: levels_and_elevations
+    required:
+      length_unit: meter
+      decimals: 3
+      signed_levels: true
+      text_height_mm: 2.5
+      semantic_pen: DIMENSION_020
+    status: manual_seed
+
+model_view_options:
+  - name: MVO_01_WORK_FULL
+    purpose: architecture_model_editing
+    intent:
+      preserve_working_detail: true
+      doors_windows: detailed
+      stairs_railings: detailed
+      library_objects: working_detail
+    status: manual_seed_and_visual_test
+
+  - name: MVO_10_AR_DOCUMENT
+    purpose: architectural_documentation
+    intent:
+      stable_print_symbols: true
+      suppress_decorative_3d_detail: true
+      doors_windows: documentation
+      stairs_railings: documentation
+    status: manual_seed_and_print_test
+
+  - name: MVO_20_COORD
+    purpose: multidisciplinary_coordination
+    intent:
+      suppress_decorative_detail: true
+      preserve_openings: true
+      preserve_stairs_and_coordination_geometry: true
+      favor_schematic_library_representation: true
+    status: manual_seed_and_coordination_test
+
+  - name: MVO_30_SITE
+    purpose: general_plan_and_site
+    intent:
+      simplify_building_symbols: true
+      suppress_internal_detail: true
+    status: manual_seed_and_visual_test
+
+  - name: MVO_40_PRESENTATION
+    purpose: presentation_only
+    intent:
+      presentation_representation: true
+      normative_or_qa_use_forbidden: true
+    status: manual_seed_and_visual_test
+
+graphic_override_rules:
+  - name: QA_ERROR
+    criterion:
+      property: SBIM.QA.Status
+      equals: ERROR
+    override_intent: strong_error
+    priority: 1
+
+  - name: QA_WARNING
+    criterion:
+      property: SBIM.QA.Status
+      equals: WARNING
+    override_intent: warning
+    priority: 2
+
+  - name: DATA_PLACEHOLDER
+    criterion:
+      property: SBIM.Core.DataStatus
+      equals: PLACEHOLDER
+    override_intent: placeholder
+    priority: 3
+
+  - name: DATA_UNVERIFIED
+    criterion:
+      property: SBIM.Core.DataStatus
+      equals: UNVERIFIED
+    override_intent: unverified
+    priority: 4
+
+  - name: REFERENCE_SUBDUE
+    criterion:
+      property: SBIM.Core.AutomationState
+      equals: REFERENCE
+    override_intent: subdued_reference
+    priority: 5
+
+  - name: NORM_ERROR
+    criterion:
+      property: SBIM.Norm.Status
+      equals: ERROR
+    override_intent: strong_error
+    priority: 1
+
+  - name: NORM_WARNING
+    criterion:
+      property: SBIM.Norm.Status
+      equals: WARNING
+    override_intent: warning
+    priority: 2
+
+  - name: NORM_BLOCKED_SOURCE
+    criterion:
+      property: SBIM.Norm.Status
+      equals: BLOCKED_SOURCE
+    override_intent: blocked_source
+    priority: 3
+
+  - name: NORM_NOT_CHECKED
+    criterion:
+      property: SBIM.Norm.Status
+      equals: NOT_CHECKED
+    override_intent: not_checked
+    priority: 4
+
+  - name: NORM_PASS_SUBTLE
+    criterion:
+      property: SBIM.Norm.Status
+      equals: PASS
+    override_intent: subtle_pass
+    priority: 5
+
+  - name: FIRE_COMPARTMENT_BOUNDARY
+    criterion:
+      property: SBIM.Fire.IsFireCompartmentBoundary
+      equals: true
+    override_intent: fire_boundary
+
+  - name: EVACUATION_ROUTE
+    criterion:
+      property: SBIM.Fire.IsEvacuationRouteElement
+      equals: true
+    override_intent: evacuation
+
+  - name: MEP_SYSTEM
+    criterion:
+      property: SBIM.MEP.SystemCode
+      is_not_empty: true
+    override_intent: system_by_discipline_or_code
+
+  - name: AUTOMATION_MANAGED
+    criterion:
+      property: SBIM.Core.AutomationState
+      equals: MANAGED
+    override_intent: managed
+
+  - name: AUTOMATION_REFERENCE
+    criterion:
+      property: SBIM.Core.AutomationState
+      equals: REFERENCE
+    override_intent: subdued_reference
+
+  - name: AUTOMATION_LOCKED
+    criterion:
+      property: SBIM.Core.AutomationState
+      equals: LOCKED
+    override_intent: locked
+
+  - name: AUTOMATION_QUARANTINE
+    criterion:
+      property: SBIM.Core.AutomationState
+      equals: QUARANTINE
+    override_intent: quarantine
+
+graphic_override_combinations:
+  - name: GO_00_NONE
+    rules: []
+
+  - name: GO_10_QA_DATA
+    rules: [QA_ERROR, QA_WARNING, DATA_PLACEHOLDER, DATA_UNVERIFIED, REFERENCE_SUBDUE]
+
+  - name: GO_11_QA_NORM
+    rules: [NORM_ERROR, NORM_WARNING, NORM_BLOCKED_SOURCE, NORM_NOT_CHECKED, NORM_PASS_SUBTLE]
+
+  - name: GO_20_PB_FIRE_COMPARTMENTS
+    rules: [FIRE_COMPARTMENT_BOUNDARY]
+
+  - name: GO_21_PB_EVACUATION
+    rules: [EVACUATION_ROUTE]
+
+  - name: GO_30_MEP_SYSTEMS
+    rules: [MEP_SYSTEM]
+
+  - name: GO_40_AUTOMATION_STATE
+    rules: [AUTOMATION_QUARANTINE, AUTOMATION_LOCKED, AUTOMATION_REFERENCE, AUTOMATION_MANAGED]
+
+  - name: GO_90_PRESENTATION
+    rules: []
+    note: presentation_only
+
+override_style_policy:
+  exact_rgb_and_fill:
+    status: visual_seed_pending
+    reason: "Keep semantic rules independent from RGB. Final style palette is an internal template decision and must pass screen/PDF/print tests."
+  rule_order_is_contract: true
+  imported_same_name_different_content_may_suffix: true
+  duplicate_suffix_detection_required: true
+
+manual_seed_gate:
+  - create_dimension_styles
+  - create_mvo_combinations
+  - create_graphic_override_rules
+  - create_graphic_override_combinations
+  - verify_names_exactly
+  - export_or_archive_seed_settings_where_supported
+  - run_plan_navigator
