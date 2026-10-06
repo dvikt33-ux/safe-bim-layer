@@ -1,6 +1,7 @@
 import io
 import json
 import hashlib
+import os
 import sys
 from pathlib import Path
 import tempfile
@@ -10,6 +11,17 @@ from closed_loop.stage4_preflight import preflight
 
 
 class IdentityGateTests(unittest.TestCase):
+    def setUp(self):
+        # Unit tests must not inherit a live Stage 4 project binding from the
+        # operator shell. Individual rebinding tests opt in explicitly.
+        self._stage4_env = os.environ.pop('SAFE_BIM_STAGE4_PROJECT_PATH', None)
+
+    def tearDown(self):
+        if self._stage4_env is not None:
+            os.environ['SAFE_BIM_STAGE4_PROJECT_PATH'] = self._stage4_env
+        else:
+            os.environ.pop('SAFE_BIM_STAGE4_PROJECT_PATH', None)
+
     def envelope(self,value):
         return io.BytesIO(json.dumps({'succeeded':True,'result':{'addOnCommandResponse':value}}).encode())
 
