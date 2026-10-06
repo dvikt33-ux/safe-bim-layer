@@ -28,7 +28,19 @@ Resolve Building Material dependencies against the actual open project (read-onl
 python scripts/archicad_template_builder.py plan-materials --out template-material-plan.json
 ```
 
-This reports which canonical Fills/Surfaces are missing before any Building Material creation is allowed.
+Create the deterministic texture-free Surface registry in a CLEAN candidate project:
+
+```powershell
+python scripts/archicad_template_builder.py apply-surfaces --out template-surfaces.json
+```
+
+Create only Building Materials whose live Fill + Surface dependencies are already resolved:
+
+```powershell
+python scripts/archicad_template_builder.py apply-ready-materials --out template-materials.json
+```
+
+The Building Material command never forces blocked dependencies. Specialized GOST cut fills remain blocked until their geometry is visually verified and calibrated in Archicad.
 
 Apply safe core to a CLEAN candidate project:
 
@@ -46,10 +58,9 @@ The builder refuses a project that already contains model elements unless `--all
 - semantic Pen Tables
 - simple deterministic Line Types
 
-It does NOT yet create:
-- Fills
-- Surfaces
-- Building Materials
+It does NOT yet auto-create:
+- specialized GOST Fills (visual-source/calibration gate)
+- unresolved Building Materials
 - Composites
 - Properties/Classifications
 - Favorites
