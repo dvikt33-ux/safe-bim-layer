@@ -76,7 +76,12 @@
         "archicad-capability-registry docs: host Wall FA9434E5-53CE-4FE6-BD43-9B9FDD14679B; Window D5C35B66-2814-43D7-A29D-4F615F76FAAC"
       ],
       "migrationAction": "MIGRATE_RECIPE_NOT_RESEARCH",
-      "notes": "Preserve host GUID checks, center offset, sill, body/aperture evidence, no Morph fallback."
+      "notes": "Preserve host GUID checks, center offset, sill, body/aperture evidence, no Morph fallback.",
+      "migrationBundle": "CLOSED_LOOP_MIGRATION_BUNDLE_1",
+      "contracts": [
+        "docs/CLOSED_LOOP_MIGRATION_BUNDLE_1.md",
+        "docs/closed_loop_migration_bundle_1.v1.json"
+      ]
     },
     {
       "id": "DOOR_NATIVE_HOSTED",
@@ -90,7 +95,12 @@
       "evidence": [
         "archicad-capability-registry docs: Door 8B0EBA3D-DF24-46FE-B772-160E23027044"
       ],
-      "migrationAction": "MIGRATE_RECIPE_NOT_RESEARCH"
+      "migrationAction": "MIGRATE_RECIPE_NOT_RESEARCH",
+      "migrationBundle": "CLOSED_LOOP_MIGRATION_BUNDLE_1",
+      "contracts": [
+        "docs/CLOSED_LOOP_MIGRATION_BUNDLE_1.md",
+        "docs/closed_loop_migration_bundle_1.v1.json"
+      ]
     },
     {
       "id": "DOOR_LIBRARY_PART_CUSTOM",
@@ -117,7 +127,12 @@
       "evidence": [
         "archicad-capability-registry docs: Slab 57865B70-76DD-4A4F-B367-98F95CBCD43A, 0.22 m, Top reference, 6x4 m"
       ],
-      "migrationAction": "MIGRATE_RECIPE_NOT_RESEARCH"
+      "migrationAction": "MIGRATE_RECIPE_NOT_RESEARCH",
+      "migrationBundle": "CLOSED_LOOP_MIGRATION_BUNDLE_1",
+      "contracts": [
+        "docs/CLOSED_LOOP_MIGRATION_BUNDLE_1.md",
+        "docs/closed_loop_migration_bundle_1.v1.json"
+      ]
     },
     {
       "id": "ROOF_NATIVE_CREATE",
@@ -185,7 +200,12 @@
       "existingImplementations": [
         "research/archicad-full-capability-audit-20260928 W1/R4 live runs"
       ],
-      "migrationAction": "EXTRACT_RECIPE_AND_MIGRATE"
+      "migrationAction": "EXTRACT_RECIPE_AND_MIGRATE",
+      "migrationBundle": "CLOSED_LOOP_MIGRATION_BUNDLE_1",
+      "contracts": [
+        "docs/CLOSED_LOOP_MIGRATION_BUNDLE_1.md",
+        "docs/closed_loop_migration_bundle_1.v1.json"
+      ]
     },
     {
       "id": "BEAM_CREATE",
@@ -585,7 +605,11 @@
         "current Archicad target preflight subsequently reported PASS for NativeGeometry_Full_Test_20261004.pln"
       ],
       "migrationAction": "RUN_ONLY_MANDATORY_LIVE_ACCEPTANCE_AND_COMPARE_TO_T4_T9",
-      "notes": "Do not call VERIFIED until live scenarios and evidence are published."
+      "notes": "Do not call VERIFIED until live scenarios and evidence are published.",
+      "contracts": [
+        "docs/STAGE4_LIVE_HARDENING_REGRESSION_CONTRACT.md",
+        "docs/stage4_live_hardening_acceptance.v1.json"
+      ]
     },
     {
       "id": "BIM_TRANSLATOR_V0",
@@ -651,5 +675,11 @@
     "Run first simple-house end-to-end acceptance without claiming an unverified Roof as complete.",
     "Complete canonical simple gable Roof + wall trim + geometry QA.",
     "Wire the real VERIFIED normative library into Project Normative Bundle / Constraint Compilation."
+  ],
+  "supportingContracts": [
+    "docs/STAGE4_LIVE_HARDENING_REGRESSION_CONTRACT.md",
+    "docs/stage4_live_hardening_acceptance.v1.json",
+    "docs/CLOSED_LOOP_MIGRATION_BUNDLE_1.md",
+    "docs/closed_loop_migration_bundle_1.v1.json"
   ]
 }
