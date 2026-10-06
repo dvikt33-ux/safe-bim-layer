@@ -84,7 +84,8 @@ def main():
     counts = {}
     # Offline proof must be hermetic: never inherit the operator's live PLN
     # binding from the shell. Tests that exercise rebinding opt in explicitly.
-    live_binding = os.environ.pop('SAFE_BIM_STAGE4_PROJECT_PATH', None)
+    live_env = {name: os.environ.pop(name, None) for name in
+        ('SAFE_BIM_STAGE4_PROJECT_PATH','SAFE_BIM_STAGE4_FIXTURE_REPORT')}
     try:
         for folder in ('tests_stage2','tests_stage3','tests_audit_pack','tests_stage4_live'):
             result = unittest.TextTestRunner(stream=stream, verbosity=2).run(unittest.TestLoader().discover(str(ROOT/folder)))
@@ -94,8 +95,11 @@ def main():
                 (output/'tests.txt').write_text(stream.getvalue(),encoding='utf-8')
                 raise RuntimeError('Test failure; no scenario or live execution allowed')
     finally:
-        if live_binding is not None:
-            os.environ['SAFE_BIM_STAGE4_PROJECT_PATH'] = live_binding
+        for name, value in live_env.items():
+            if value is not None:
+                os.environ[name] = value
+            else:
+                os.environ.pop(name, None)
     (output/'tests.txt').write_text(stream.getvalue(),encoding='utf-8')
     from scripts.audit_pack import verify_pack as verify_historical
     archived = {}
