@@ -1,0 +1,146 @@
+registry_version: 0.1
+status: blueprint_only
+target: Archicad_29
+
+rules:
+  released_favorite_must_have_stable_type_id: true
+  unresolved_thickness_or_system_blocks_release: true
+  favorite_name_collision_forbidden: true
+  project_pack_may_override_core_prototype_only_through_versioned_migration: true
+
+blueprints:
+  - id: SBIM.TYPE.AR.WALL.EXT_CERAMIC
+    favorite_name: AR_WALL_EXT_CERAMIC
+    tool: Wall
+    source_family: SBIM.FAMILY.IZHS.WALL.EXT.CERAMIC_SINGLE_LEAF
+    layer: AR_MODEL_ENVELOPE
+    classification_role: envelope
+    status: requires_project_resolution
+    structure_attribute: project_generated
+    geometry_inputs:
+      thickness: from_verified_product_or_composite
+      height: from_story_or_project_command
+      length: executor
+      reference_line: project_family_policy
+    properties:
+      SBIM.Core.ElementRole: ENVELOPE
+      SBIM.Core.Discipline: architecture
+      SBIM.Core.AutomationState: MANAGED
+
+  - id: SBIM.TYPE.AR.WALL.EXT_CERAMIC_FACEBRICK.CORE
+    favorite_name: AR_WALL_EXT_CERAMIC_FACEBRICK_CORE
+    tool: Wall
+    source_family: SBIM.FAMILY.IZHS.WALL.EXT.CERAMIC_FACEBRICK
+    layer: AR_MODEL_ENVELOPE
+    status: requires_project_resolution
+    role: primary_wall
+
+  - id: SBIM.TYPE.AR.WALL.EXT_CERAMIC_FACEBRICK.CLADDING
+    favorite_name: AR_WALL_EXT_CERAMIC_FACEBRICK_CLADDING
+    tool: Wall
+    source_family: SBIM.FAMILY.IZHS.WALL.EXT.CERAMIC_FACEBRICK
+    layer: AR_MODEL_FINISH
+    status: requires_project_resolution
+    role: face_masonry
+
+  - id: SBIM.TYPE.AR.WALL.INT.PARTITION
+    favorite_name: AR_WALL_INT_PARTITION
+    tool: Wall
+    layer: AR_MODEL_PARTITION
+    status: requires_project_resolution
+    structure_attribute: project_generated
+    properties:
+      SBIM.Core.ElementRole: PARTITION
+      SBIM.Core.Discipline: architecture
+
+  - id: SBIM.TYPE.KR.WALL.RC
+    favorite_name: KR_WALL_RC
+    tool: Wall
+    layer: KR_MODEL_PRIMARY
+    status: requires_structural_resolution
+    building_material: BM_STR_CONCRETE_RC
+    geometry_inputs:
+      thickness: structural_project
+      height: story_or_structural_project
+      length: executor
+    properties:
+      SBIM.Core.ElementRole: STRUCTURAL
+      SBIM.Core.Discipline: structures
+
+  - id: SBIM.TYPE.KR.SLAB.RC
+    favorite_name: KR_SLAB_RC
+    tool: Slab
+    layer: KR_MODEL_PRIMARY
+    source_family: SBIM.FAMILY.ALL.SLAB.STRUCTURAL_RC
+    status: requires_structural_resolution
+    building_material: BM_STR_CONCRETE_RC
+    geometry_inputs:
+      thickness: structural_project
+      polygon: executor
+      level: structural_project
+
+  - id: SBIM.TYPE.AR.SLAB.FLOOR_BUILDUP
+    favorite_name: AR_SLAB_FLOOR_BUILDUP
+    tool: Slab
+    layer: AR_MODEL_FINISH
+    source_family: SBIM.FAMILY.ALL.FLOOR.BUILDUP
+    status: requires_room_finish_resolution
+    composite: project_generated
+    geometry_inputs:
+      polygon: executor_or_zone_based
+      top_level: project_floor_finish_level
+
+  - id: SBIM.TYPE.AR.ROOF.PITCHED
+    favorite_name: AR_ROOF_PITCHED
+    tool: Roof
+    layer: AR_MODEL_ENVELOPE
+    source_family: SBIM.FAMILY.IZHS.ROOF.PITCHED
+    status: requires_roof_system_resolution
+    geometry_inputs:
+      slope: project_roof_design
+      pivot_line: executor
+      polygon: executor
+
+  - id: SBIM.TYPE.AR.ROOF.FLAT
+    favorite_name: AR_ROOF_FLAT
+    tool: Roof
+    layer: AR_MODEL_ENVELOPE
+    source_family: SBIM.FAMILY.ALL.ROOF.FLAT
+    status: requires_roof_system_resolution
+
+  - id: SBIM.TYPE.AR.ZONE.STANDARD
+    favorite_name: AR_ZONE_STANDARD
+    tool: Zone
+    layer: AR_ZONE
+    status: core_candidate
+    geometry_inputs:
+      polygon_or_auto_boundary: executor
+      home_story: executor
+    properties:
+      SBIM.Core.ElementRole: OTHER
+      SBIM.Core.Discipline: architecture
+      SBIM.Space.FunctionCode: project_or_route
+      SBIM.Norm.Status: NOT_CHECKED
+
+  - id: SBIM.TYPE.QA.REFERENCE
+    favorite_name: QA_REFERENCE_OBJECT
+    tool: object_or_native_tool
+    layer: QUARANTINE_MODEL
+    status: core_candidate
+    properties:
+      SBIM.Core.AutomationState: QUARANTINE
+      SBIM.Core.DataStatus: QUARANTINE
+      SBIM.Exchange.ReadOnlyReference: true
+
+release_workflow:
+  - resolve_blueprint_inputs
+  - generate_structure_attributes
+  - create_or_update_favorite
+  - assign_stable_type_id
+  - verify_transfer_set_behavior
+  - create_test_elements
+  - run_model_dump
+  - run_junction_tests
+  - run_schedule_and_property_checks
+  - export_favorite_xml_or_prf
+  - mark_verified
