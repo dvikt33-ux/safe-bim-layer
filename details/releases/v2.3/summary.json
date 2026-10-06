@@ -1,0 +1,20 @@
+{
+  "release": "2.3",
+  "focus_source": "FAVORIT_SHEET_MATERIALS",
+  "focus_scope": "section 1, sheets 1.1-1.12 / PDF pages 4-15",
+  "detail_units_total": 1211,
+  "active_ir_total": 1211,
+  "parameter_facts_total": 1179,
+  "component_variants_total": 546,
+  "dimension_queue_total": 598,
+  "section1_catalog_entries": 36,
+  "system_variants": 6,
+  "new_parameter_facts": 24,
+  "new_component_variants": 10,
+  "resolved_queue_tasks": 12,
+  "source_claims_recorded_not_verified": 14,
+  "source_anomalies_added": 3,
+  "source_hash_matches": 40,
+  "source_hash_total": 40,
+  "commit_policy": "fail_closed"
+}

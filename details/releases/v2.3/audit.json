@@ -1,0 +1,33 @@
+{
+  "release": "2.3",
+  "timestamp_utc": "2026-10-06T14:33:35.612190+00:00",
+  "source_scope": "FAVORIT Листовые материалы, section 1 sheets 1.1-1.12, physical PDF pages 4-15",
+  "checks": {
+    "detail_units": 1211,
+    "active_ir": 1211,
+    "parameter_facts": 1179,
+    "component_variants": 546,
+    "dimension_queue": 598,
+    "section1_catalog_entries": 36,
+    "system_variants": 6,
+    "new_parameter_facts": 24,
+    "new_component_variants": 10,
+    "source_claims_favorit_sheet_materials": 14,
+    "source_anomalies_added": 3,
+    "source_hash_matches": 40,
+    "source_hash_total": 40,
+    "raster_measurement_used_for_dimensions": 0,
+    "source_typo_auto_corrections": 0,
+    "new_commit_allowed_true": 0
+  },
+  "critical_findings": [
+    "The 12 high-priority section-1 catalog transcription queue records were manually re-read from the supplied rendered pages and resolved; no pixel-derived dimensions were introduced.",
+    "Six source-defined facade-subframe system variants from sheet 1.2 are now explicit machine topology records instead of an implicit prose dependency.",
+    "Sheets 1.5-1.12 now provide a 36-entry component catalog; source numbering skips 24-27 and the machine does not synthesize those entries.",
+    "Sheet 1.8 prints four paronite gasket sizes but only three designations. The size tuples are stored, automatic designation mapping is blocked, and the mismatch is an explicit source anomaly.",
+    "Twenty-four source-wide technical facts were typed from sheets 1.2-1.4, including bracket/extension/profile/flashing thickness ranges, insulation densities/thickness, cladding thickness/joint width, fire-cutoff interval claims and six installation tolerances.",
+    "Fourteen SP/GOST/TU references printed by the manufacturer were recorded only as claimed_by_source_not_independently_verified. None is promoted to a production normative rule.",
+    "Ten explicit dimensioned component variants were added (four paronite size tuples, two rivets, one press-washer screw, three angle-plate nomenclature tuples); every new record remains commit_allowed=false."
+  ],
+  "commit_policy": "fail_closed"
+}

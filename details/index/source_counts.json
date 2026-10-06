@@ -90,8 +90,8 @@
     "year": null,
     "details": 200,
     "active_ir": 200,
-    "parameter_facts": 63,
-    "component_variants": 367,
+    "parameter_facts": 87,
+    "component_variants": 377,
     "normative_trust": "technical_solution_only_unless_separately_verified",
     "system": [
       "ventilated_facade",
@@ -100,7 +100,9 @@
       "steel_cassette",
       "siding",
       "linear_panel"
-    ]
+    ],
+    "section1_catalog_entries": 36,
+    "section1_catalog_status": "transcribed_v2.3"
   },
   {
     "source_id": "KAIMAN_KERAKAM_WALL",
