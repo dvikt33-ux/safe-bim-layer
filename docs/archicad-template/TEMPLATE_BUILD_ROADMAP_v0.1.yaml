@@ -75,15 +75,17 @@ phases:
 
   - id: P10
     name: archicad_build
-    status: safe_core_builder_ready_live_execution_pending
+    status: core_surface_data_builders_ready_live_execution_pending
     tasks:
       - create_clean_AC29_project
       - install_fonts
       - create_attribute_folders
-      - create_pens_lines_fills_surfaces
-      - create_building_materials
+      - create_pens_lines_and_surfaces
+      - calibrate_and_release_specialized_gost_fills
+      - create_ready_building_materials
       - create_layers_and_layer_combinations
-      - create_properties_and_project_info
+      - create_sbim_semantic_classification
+      - create_scoped_properties_and_project_info
       - create_mvo_and_graphic_overrides
       - create_view_map_and_schedules
       - create_masters_and_layout_structure
@@ -134,9 +136,14 @@ immediate_next_actions:
   - run: python scripts/archicad_template_builder.py plan
   - run: python scripts/archicad_template_builder.py apply-core
   - run: python scripts/archicad_template_builder.py plan-materials
-  - resolve_GOST_fill_geometry_and_surface_registry
-  - create_building_material_stage_only_after_dependency_plan_passes
-  - resolve_property_availability_against_classification_strategy
+  - run: python scripts/archicad_template_builder.py apply-surfaces
+  - run: python scripts/archicad_template_builder.py plan-materials
+  - run: python scripts/archicad_template_builder.py apply-ready-materials
+  - run: python scripts/archicad_template_builder.py plan-data-schema
+  - run: python scripts/archicad_template_builder.py apply-data-schema
+  - visually_verify_GOST_2_306_fill_geometry
+  - calibrate_fill_units_and_scale_behavior_in_archicad
+  - materialize_remaining_building_materials_after_fill_gate
   - materialize_first_verified_favorites
   - run_junction_tests_before_finalizing_priorities
   - first_real_object_pack: residential.izhs_test_house
