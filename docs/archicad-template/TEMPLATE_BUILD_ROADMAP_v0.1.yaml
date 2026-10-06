@@ -147,3 +147,17 @@ immediate_next_actions:
   - materialize_first_verified_favorites
   - run_junction_tests_before_finalizing_priorities
   - first_real_object_pack: residential.izhs_test_house
+
+exchange_and_documentation_next:
+  - run: python scripts/archicad_template_builder.py plan-master-layouts
+  - run: python scripts/archicad_template_builder.py apply-master-layout-shell
+  - rebuild_safe_bim_overlay_with_GetAutoTextsV1
+  - run: python scripts/archicad_template_builder.py plan-autotext
+  - live_sacrificial_masterlayout_line_text_test
+  - only_after_live_pass_generate_form3_geometry
+  - seed_DWG_IN_REFERENCE
+  - seed_DWG_OUT_SPDS
+  - seed_DWG_OUT_COMPAT
+  - seed_IFC_COORD
+  - seed_IFC_REFERENCE_IMPORT
+  - keep_IFC_ISSUE_blocked_until_delivery_requirement
