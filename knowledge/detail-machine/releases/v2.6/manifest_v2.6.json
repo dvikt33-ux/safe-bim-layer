@@ -1,0 +1,17 @@
+{
+  "release": "2.6",
+  "created_utc": "2026-10-06T22:03:29.672635+00:00",
+  "core_root": "archicad_detail_machine_db_v2.6_2026-10-07",
+  "primary_sqlite": "detail_machine_v2.6.sqlite",
+  "primary_detail_units": "detail_units_v2.6.jsonl",
+  "primary_archicad_ir": "archicad_ir_v2.6.jsonl",
+  "source_semantics": "porotherm_lowrise_semantics_v2.6.jsonl",
+  "source_parameter_facts": "porotherm_lowrise_parameter_facts_v2.6.jsonl",
+  "component_variants": "porotherm_lowrise_component_variants_v2.6.jsonl",
+  "assembly_grammar": "porotherm_lowrise_assembly_grammar_v2.6.json",
+  "source_anomalies": "porotherm_lowrise_source_anomalies_v2.6.jsonl",
+  "audit": "AUDIT_v2.6.json",
+  "readme": "README_v2.6.md",
+  "source_registry": "source_registry_v2.6.json",
+  "source_verify": "SOURCE_VERIFY_FULL_v2.6.json"
+}

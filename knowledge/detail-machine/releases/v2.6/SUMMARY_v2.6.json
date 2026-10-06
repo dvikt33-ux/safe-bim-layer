@@ -1,0 +1,20 @@
+{
+  "release": "2.6",
+  "focus_source": "POROTHERM_LOWRISE",
+  "detail_units_total": 1222,
+  "parameter_facts_total": 1294,
+  "archicad_ir_total": 1595,
+  "active_ir_total": 1222,
+  "component_variants_total": 598,
+  "porotherm_detail_units": 80,
+  "porotherm_constructible_details": 73,
+  "porotherm_reference_headers": 7,
+  "porotherm_active_facts": 54,
+  "porotherm_active_ir": 80,
+  "recovered_missing_sheets": 11,
+  "product_variants_added": 23,
+  "sqlite_integrity": "ok",
+  "missing_active_ir_refs": 0,
+  "source_representation_hashes_matched": 40,
+  "source_representation_hashes_total": 40
+}
