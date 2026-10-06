@@ -1476,6 +1476,126 @@ def plan_navigator(api: Tapir):
 
 
 
+
+def apply_navigator_shell(api: Tapir, allow_nonempty=False):
+    """Create only safe Navigator containers: View folders and Layout subsets.
+
+    This stage intentionally does not create Views, Master Layout graphics,
+    Layouts, Drawings or Publisher Sets. Those depend on seed presets and
+    titleblock/output configuration that Tapir 1.5.8 cannot fully author.
+    """
+    validation = validate_specs()
+    if validation["status"] != "PASS":
+        raise RuntimeError(f"Spec validation failed: {validation['errors']}")
+
+    before_count = len(api.call("GetAllElements").get("elements", []))
+    if before_count and not allow_nonempty:
+        raise RuntimeError(
+            f"Refusing Navigator-shell write: current project contains "
+            f"{before_count} model elements. Use a clean candidate project or "
+            f"pass --allow-nonempty explicitly."
+        )
+
+    registry = load_yaml(NAVIGATOR_REGISTRY)
+
+    view_tree = api.call(
+        "GetNavigatorItemTree", {"navigatorMapId": "PublicViewMap"}
+    ).get("navigatorItemTree", {})
+    existing_view_items = _collect_navigator_items(view_tree)
+    existing_folder_names = {
+        x.get("name") for x in existing_view_items
+        if x.get("type") == "FolderItem" and x.get("name")
+    }
+
+    created_view_folders = []
+    for folder_name in registry.get("view_folders", []):
+        if folder_name in existing_folder_names:
+            continue
+        api.call("CreateViewMapFolder", {"folderName": folder_name})
+        created_view_folders.append(folder_name)
+
+    layout_tree = api.call(
+        "GetNavigatorItemTree", {"navigatorMapId": "LayoutBook"}
+    ).get("navigatorItemTree", {})
+    existing_layout_items = _collect_navigator_items(layout_tree)
+    existing_subset_names = {
+        x.get("name") for x in existing_layout_items
+        if x.get("type") == "SubsetItem" and x.get("name")
+    }
+
+    subset_payload = []
+    for subset in registry.get("layout_subsets", []):
+        if subset["name"] in existing_subset_names:
+            continue
+        subset_payload.append({
+            "name": subset["name"],
+            "ownPrefix": subset.get("prefix", ""),
+            "numberingStyle": "01",
+            "startAt": 1,
+            "continueNumbering": False,
+            "useUpperPrefix": False,
+            "includeToIDSequence": True,
+            "customNumbering": False,
+            "addOwnPrefix": True,
+        })
+    subset_result = None
+    if subset_payload:
+        subset_result = api.call(
+            "CreateLayoutSubset", {"subsetsData": subset_payload}
+        )
+
+    # Read-back is authoritative.
+    after_view_tree = api.call(
+        "GetNavigatorItemTree", {"navigatorMapId": "PublicViewMap"}
+    ).get("navigatorItemTree", {})
+    after_view_items = _collect_navigator_items(after_view_tree)
+    after_folder_names = {
+        x.get("name") for x in after_view_items
+        if x.get("type") == "FolderItem" and x.get("name")
+    }
+
+    after_layout_tree = api.call(
+        "GetNavigatorItemTree", {"navigatorMapId": "LayoutBook"}
+    ).get("navigatorItemTree", {})
+    after_layout_items = _collect_navigator_items(after_layout_tree)
+    after_subset_names = {
+        x.get("name") for x in after_layout_items
+        if x.get("type") == "SubsetItem" and x.get("name")
+    }
+
+    expected_folders = set(registry.get("view_folders", []))
+    expected_subsets = {x["name"] for x in registry.get("layout_subsets", [])}
+    missing_folders = sorted(expected_folders - after_folder_names)
+    missing_subsets = sorted(expected_subsets - after_subset_names)
+    if missing_folders or missing_subsets:
+        raise RuntimeError(
+            "Navigator shell read-back failed: "
+            f"missingFolders={missing_folders}, missingSubsets={missing_subsets}"
+        )
+
+    after_count = len(api.call("GetAllElements").get("elements", []))
+    if after_count != before_count:
+        raise RuntimeError(
+            "Unexpected model element count change during Navigator-shell stage."
+        )
+
+    return {
+        "status": "PASS",
+        "writePerformed": bool(created_view_folders or subset_payload),
+        "createdViewFolders": created_view_folders,
+        "createdLayoutSubsets": [x["name"] for x in subset_payload],
+        "existingOrPresentViewFolders": sorted(expected_folders),
+        "existingOrPresentLayoutSubsets": sorted(expected_subsets),
+        "modelElementCountUnchanged": True,
+        "nativeSubsetResult": subset_result,
+        "deferred": [
+            "Views require verified MVO/Graphic Override/Dimension Style seeds.",
+            "Master Layout frame/titleblock graphics remain source/seed gated.",
+            "Publisher Set creation is not exposed by Tapir 1.5.8.",
+        ],
+    }
+
+
 def check_windows_fonts():
     """Check required font families against Windows font registry without touching Archicad."""
     manifest = load_yaml(FONT_MANIFEST)
@@ -1562,7 +1682,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "action",
-        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema"),
+        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell"),
     )
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
     parser.add_argument(
@@ -1604,6 +1724,8 @@ def main():
             result = apply_ready_building_materials(api, allow_nonempty=args.allow_nonempty)
         elif args.action == "apply-data-schema":
             result = apply_data_schema(api, allow_nonempty=args.allow_nonempty)
+        elif args.action == "apply-navigator-shell":
+            result = apply_navigator_shell(api, allow_nonempty=args.allow_nonempty)
         else:
             raise AssertionError(args.action)
 
