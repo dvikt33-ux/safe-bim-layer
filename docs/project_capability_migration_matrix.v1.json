@@ -9,7 +9,8 @@
     "PARTIAL": "Some required behavior is proven, but canonical production acceptance is incomplete.",
     "RESEARCH_ONLY": "Documented or source-audited capability with no implementation/live acceptance suitable for promotion.",
     "OBSOLETE": "Superseded implementation retained only for evidence/regression.",
-    "REJECTED": "Known technically possible pattern that must not be used as the canonical solution."
+    "REJECTED": "Known technically possible pattern that must not be used as the canonical solution.",
+    "MISSING": "No implementation suitable for reuse was found; this is a genuinely missing capability."
   },
   "canonicalArchitecture": [
     "STAGE0_INTAKE",
@@ -589,7 +590,7 @@
     {
       "id": "BIM_TRANSLATOR_V0",
       "domain": "INTEGRATION",
-      "status": "IMPLEMENTED_NOT_LIVE",
+      "status": "MISSING",
       "canonicalTarget": "next genuinely missing integration capability",
       "existingImplementations": [],
       "migrationAction": "IMPLEMENT_AFTER_STAGE4",
@@ -598,7 +599,7 @@
     {
       "id": "END_TO_END_SIMPLE_HOUSE",
       "domain": "INTEGRATION",
-      "status": "IMPLEMENTED_NOT_LIVE",
+      "status": "PARTIAL",
       "canonicalTarget": "first product-level acceptance",
       "existingImplementations": [
         "old house primitives",
