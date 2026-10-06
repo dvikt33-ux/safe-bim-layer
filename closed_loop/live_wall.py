@@ -115,7 +115,26 @@ class LiveSession:
             if self.identity != baseline_identity:
                 raise ValueError('Active PLN differs from the previously verified test project')
             project_binding = {'mode':'STAGE1_BASELINE_IDENTITY','expectedProjectPath':baseline_identity.get('projectPath')}
+        fixture_report_value = os.environ.get('SAFE_BIM_STAGE4_FIXTURE_REPORT')
+        if fixture_report_value:
+            fixture_path = Path(fixture_report_value)
+            if not fixture_path.is_absolute():
+                fixture_path = ROOT / fixture_path
+            fixture = read(fixture_path)
+            if fixture.get('status') != 'PASS':
+                raise ValueError('Configured Stage 4 fixture report is not PASS')
+            actual_fixture_project = ntpath.normcase(ntpath.normpath(fixture.get('projectPath','')))
+            actual_project = ntpath.normcase(ntpath.normpath(self.identity['projectPath']))
+            if actual_fixture_project != actual_project:
+                raise ValueError('Configured Stage 4 fixture belongs to another PLN')
+            save(self.output / 'fixture-binding.json', {
+                'status':'PASS','projectPath':fixture['projectPath'],
+                'predecessorGuid':fixture.get('predecessorGuid'),'seedGuid':fixture.get('seedGuid'),
+                'fixtureGeometry':fixture.get('fixtureGeometry'),
+                'setupPhysicalMutationCalls':fixture.get('physicalMutationCalls'),
+                'reusedExistingFixture':fixture.get('reusedExistingFixture',False)})
         save(self.output / 'preflight.json', {'identity': self.identity, 'projectBinding': project_binding,
+            'fixtureBound': bool(fixture_report_value),
             'archicad': self.api('API.GetProductInfo', addon=False), 'tapir': self.api('GetAddOnVersion'),
             'port': 19723, 'observedAtUtc': datetime.now(timezone.utc).isoformat()})
 
