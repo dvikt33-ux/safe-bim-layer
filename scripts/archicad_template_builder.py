@@ -47,6 +47,7 @@ CLASSIFICATION_REGISTRY = SPEC / "classification-registry-v0.1.yaml"
 DATA_SCHEMA = SPEC / "data-schema-v0.1.yaml"
 NAVIGATOR_REGISTRY = SPEC / "navigator-registry-v0.1.yaml"
 DOCUMENTATION_SPEC = SPEC / "documentation-standard-v0.1.yaml"
+FONT_MANIFEST = SPEC / "fonts-manifest.yaml"
 
 SAFE_CORE_COMMANDS = {
     "GetProjectInfo", "GetProjectInfoFields", "CreateProjectInfoFields",
@@ -1475,11 +1476,93 @@ def plan_navigator(api: Tapir):
 
 
 
+def check_windows_fonts():
+    """Check required font families against Windows font registry without touching Archicad."""
+    manifest = load_yaml(FONT_MANIFEST)
+    if os.name != "nt":
+        return {
+            "status": "BLOCKED_PLATFORM",
+            "platform": os.name,
+            "reason": "Font preflight is intentionally Windows-specific for the Archicad 29 target.",
+            "requiredFamilies": [
+                x["family"] for x in manifest.get("fonts", []) if x.get("required")
+            ],
+        }
+
+    import winreg
+
+    registry_paths = [
+        (winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"),
+        (winreg.HKEY_CURRENT_USER, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"),
+    ]
+    entries = []
+    for hive, key_path in registry_paths:
+        try:
+            with winreg.OpenKey(hive, key_path) as key:
+                i = 0
+                while True:
+                    try:
+                        name, value, _ = winreg.EnumValue(key, i)
+                    except OSError:
+                        break
+                    entries.append({
+                        "registryName": str(name),
+                        "file": str(value),
+                    })
+                    i += 1
+        except FileNotFoundError:
+            continue
+
+    result_fonts = []
+    missing_required = []
+    style_warnings = []
+    for font in manifest.get("fonts", []):
+        family = font["family"]
+        matches = [
+            e for e in entries
+            if family.casefold() in e["registryName"].casefold()
+        ]
+        found = bool(matches)
+        if font.get("required") and not found:
+            missing_required.append(family)
+
+        requested_styles = font.get("styles", [])
+        style_presence = {}
+        names_joined = " | ".join(x["registryName"] for x in matches).casefold()
+        for style in requested_styles:
+            token = style.casefold()
+            # "Regular" is frequently omitted from the registry display name;
+            # family presence is therefore sufficient for an advisory Regular check.
+            style_found = found if token == "regular" else token in names_joined
+            style_presence[style] = style_found
+            if font.get("required") and found and not style_found:
+                style_warnings.append(f"{family}: style not explicit in registry: {style}")
+
+        result_fonts.append({
+            "family": family,
+            "required": bool(font.get("required")),
+            "found": found,
+            "requestedStyles": requested_styles,
+            "stylePresenceAdvisory": style_presence,
+            "registryMatches": matches,
+            "role": font.get("role"),
+        })
+
+    return {
+        "status": "PASS" if not missing_required else "FAIL",
+        "platform": "Windows",
+        "requiredMissing": missing_required,
+        "warnings": style_warnings,
+        "fonts": result_fonts,
+    }
+
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "action",
-        choices=("validate", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema"),
+        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema"),
     )
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
     parser.add_argument(
@@ -1499,6 +1582,8 @@ def main():
 
     if args.action == "validate":
         result = validate_specs()
+    elif args.action == "font-preflight":
+        result = check_windows_fonts()
     else:
         api = Tapir(args.port, evidence)
         if args.action == "inspect":
@@ -1529,7 +1614,7 @@ def main():
     print(json.dumps(result, ensure_ascii=False, indent=2))
 
     status = result.get("status") if isinstance(result, dict) else None
-    if status == "FAIL":
+    if status in ("FAIL", "BLOCKED_PLATFORM"):
         raise SystemExit(2)
 
 
