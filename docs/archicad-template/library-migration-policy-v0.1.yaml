@@ -1,0 +1,61 @@
+policy_version: 0.1
+status: draft
+
+new_project:
+  graphisoft_library: Global_Library
+  old_monolith_library_preloaded: false
+  migration_library_preloaded: false
+
+sbim_library:
+  reusable_content_is_linked_or_bimcloud: true
+  folders:
+    - 00_MACROS
+    - 01_ANNOTATION
+    - 02_DOORS_WINDOWS
+    - 03_FURNITURE_EQUIPMENT
+    - 04_MEP_OBJECTS
+    - 05_SITE
+    - 06_DETAILS
+    - 90_PROJECT_PACKS
+    - 99_TEST
+
+embedded_library:
+  project_specific_only: true
+  manufacturer_catalogs_forbidden_by_default: true
+  reusable_sbim_objects_forbidden: true
+  random_unknown_objects_forbidden: true
+
+missing_library_part:
+  automation_status: BLOCKED_LIBRARY
+  silent_substitution: false
+
+manufacturer_intake:
+  default_status: QUARANTINE
+  fields:
+    - manufacturer
+    - product_system
+    - source
+    - download_date
+    - license
+    - archicad_compatibility
+    - performance_note
+    - dependencies
+    - classification_properties
+    - dimensions_verified
+    - release_status
+
+versions:
+  project_info_required:
+    - SBIM.TemplateVersion
+    - SBIM.SchemaVersion
+    - SBIM.LibraryVersion
+
+release_gate:
+  clean_machine_test: true
+  no_missing_library_parts: true
+  no_missing_textures: true
+  no_duplicate_library_warning: true
+  no_absolute_dev_paths: true
+  favorite_validation: true
+  model_dump_validation: true
+  pdf_dwg_ifc_tests: true
