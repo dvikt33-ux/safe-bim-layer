@@ -1,0 +1,81 @@
+baseline_version: 0.1
+status: draft
+
+units:
+  archicad_ui:
+    model_length: mm
+    layout_length: mm
+    working_length_precision_mm: 0.1
+    angle: decimal_degrees
+    angle_precision_deg: 0.01
+  published:
+    linear_dimension: {unit: mm, decimals: 0}
+    area: {unit: m2, decimals: 2}
+    volume: {unit: m3, decimals: 3}
+  sbim_api:
+    geometry_unit: m
+    coordinates: ABSOLUTE_PROJECT_XYZ
+    bare_number_without_unit_allowed: false
+
+coordinates:
+  policy: PROJECT_ORIGIN_WITH_SURVEY_POINT
+  native_model_near_project_origin: true
+  survey_point_for_external_coordination: true
+  lock_survey_point_after_approval: true
+  move_whole_model_for_grid_coordinates: false
+
+stories:
+  core_template_minimal: true
+  assumed_storey_heights_in_core: false
+  create_from_project_brief: true
+  validate_top_links_after_change: true
+
+layer_prefixes:
+  AR: architecture
+  KR: structures
+  VK: water_sewer
+  OV: hvac
+  EOM: electrical
+  SS: low_current
+  PB: fire_safety
+  TX: technology
+  GP: general_plan
+  REF: reference
+  DOC: documentation
+  QA: validation
+
+layer_intersection:
+  native_connection_group: 1
+  external_reference_group: 0
+  seo_helper_group: 0
+  quarantine_group: 0
+
+view_contract:
+  must_be_saved_for_publish: true
+  stored_settings:
+    - layer_combination
+    - scale
+    - partial_structure_display
+    - pen_set
+    - model_view_options
+    - graphic_override
+    - renovation_filter
+    - design_option_combination
+    - floor_plan_cut_plane
+    - dimensions
+  naming: <DISCIPLINE>_<SCALE>_<PURPOSE>[_<VARIANT>]
+
+scales: [500, 200, 100, 50, 20, 10, 5]
+
+automation_setup_gate:
+  required:
+    - template_version
+    - schema_version
+    - project_object_class
+    - active_modules
+    - verified_working_units
+    - verified_story_levels
+    - verified_coordinate_policy
+    - attribute_packs_loaded
+    - favorites_loaded
+  failure_status: BLOCKED_SETUP
