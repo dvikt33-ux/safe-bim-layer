@@ -18,7 +18,7 @@ destroyed merely because a newer orchestration layer exists.
 | `tests_stage4_live/` | Stage 4 reliability tests | Keep active |
 | `tests_audit_pack/` | Evidence-pack verification | Keep active |
 | `docs/CLOSED_LOOP_IMPLEMENTATION_STAGES.md` | Stage gate policy | Canonical |
-| `docs/STAGE4_LIVE_HARDENING.md` | Current Stage 4 procedure and semantics | Canonical for Stage 4 |
+| `docs/STAGE4_LIVE_HARDENING.md` | Verified Stage 4 procedure and semantics | Frozen milestone reference |
 
 ## EVIDENCE — immutable proof, not source code
 
@@ -57,12 +57,13 @@ depend on it. The BIMEXEC coordination-only directory passed this check and has 
 
 ## Cleanup order
 
-1. Keep the active Stage 4 source and evidence frozen enough to finish verification.
-2. Make README, this map and CURRENT_STATUS the canonical navigation layer.
-3. Audit references from current source/tests/docs into LEGACY/REVIEW files.
-4. Move truly historical files into an archive namespace in one dedicated commit.
-5. Run all offline regressions.
-6. Only then consider deletion of redundant copies or obsolete generated artifacts.
+1. Preserve the now-VERIFIED Stage 4 source/evidence as a milestone baseline.
+2. Run the performance/evidence-I/O cleanup without weakening Stage 4 semantics.
+3. Make README, this map and CURRENT_STATUS the canonical navigation layer.
+4. Audit references from current source/tests/docs into LEGACY/REVIEW files.
+5. Move truly historical files into an archive namespace in one dedicated commit.
+6. Run all offline regressions after structural cleanup.
+7. Only then consider deletion of redundant copies or obsolete generated artifacts.
 
 ## Non-goals of cleanup
 
