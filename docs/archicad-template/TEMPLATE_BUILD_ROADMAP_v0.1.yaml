@@ -1,0 +1,135 @@
+roadmap_version: 0.1
+status: active
+target_release: AC29_RU_SBIM_1.0
+
+phases:
+  - id: P01
+    name: graphics_and_fonts
+    status: specified
+    artifacts:
+      - GRAPHICS_STANDARD_v0.1.md
+      - fonts-manifest.yaml
+
+  - id: P02
+    name: materials_attributes
+    status: specified_needs_archicad_junction_tests
+    artifacts:
+      - MATERIALS_STANDARD_v0.1.md
+      - attribute-registry-v0.1.yaml
+      - junction-test-matrix-v0.1.yaml
+      - layer-intersection-policy-v0.1.yaml
+
+  - id: P03
+    name: semantic_data
+    status: specified
+    artifacts:
+      - DATA_SCHEMA_v0.1.md
+      - data-schema-v0.1.yaml
+
+  - id: P04
+    name: project_baseline
+    status: specified
+    artifacts:
+      - PROJECT_BASELINE_v0.1.md
+      - project-baseline-v0.1.yaml
+
+  - id: P05
+    name: documentation_and_publishing
+    status: specified_needs_archicad_implementation
+    artifacts:
+      - DOCUMENTATION_STANDARD_v0.1.md
+      - documentation-standard-v0.1.yaml
+
+  - id: P06
+    name: layers_and_combinations
+    status: specified_needs_archicad_implementation
+    artifacts:
+      - LAYER_STANDARD_v0.1.md
+      - layer-registry-v0.1.yaml
+
+  - id: P07
+    name: composite_families
+    status: source_driven_blueprints
+    artifacts:
+      - COMPOSITE_FAMILY_STRATEGY_v0.1.md
+      - composite-family-registry-v0.1.yaml
+    blocked_until:
+      - exact_product_or_system_dimensions
+      - structural_basis
+      - thermal_fire_acoustic_checks_as_applicable
+
+  - id: P08
+    name: favorites_and_transfer
+    status: specified_blueprints
+    artifacts:
+      - FAVORITE_CONTRACT_v0.1.md
+      - favorite-transfer-policy-v0.1.yaml
+      - favorite-blueprints-v0.1.yaml
+
+  - id: P09
+    name: libraries_and_migration
+    status: specified
+    artifacts:
+      - LIBRARY_MIGRATION_POLICY_v0.1.md
+      - library-migration-policy-v0.1.yaml
+
+  - id: P10
+    name: archicad_build
+    status: pending
+    tasks:
+      - create_clean_AC29_project
+      - install_fonts
+      - create_attribute_folders
+      - create_pens_lines_fills_surfaces
+      - create_building_materials
+      - create_layers_and_layer_combinations
+      - create_properties_and_project_info
+      - create_mvo_and_graphic_overrides
+      - create_view_map_and_schedules
+      - create_masters_and_layout_structure
+      - create_publishers
+      - configure_dwg_ifc_translators
+      - configure_transfer_sets
+      - load_global_and_sbim_libraries
+      - create_verified_project_pack_favorites
+      - save_candidate_tpl
+
+  - id: P11
+    name: verification
+    status: pending
+    tasks:
+      - junction_matrix
+      - partial_structure_display
+      - layer_intersection_regression
+      - favorite_transfer_regression
+      - clean_machine_library_test
+      - model_dump_semantic_test
+      - api_create_read_round_trip
+      - PDF_A3_A1_print_test
+      - DWG_round_trip
+      - IFC_round_trip
+      - Survey_Point_coordinate_test
+      - missing_font_test
+      - missing_library_test
+
+  - id: P12
+    name: release
+    status: pending
+    outputs:
+      - AC29_RU_SBIM_1.0.tpl
+      - Work_Environment_profile
+      - fonts_manifest
+      - SBIM_library
+      - DWG_translators
+      - IFC_translators
+      - property_classification_xml
+      - transfer_sets_xml
+      - issue_test_evidence
+      - migration_manifest
+
+immediate_next_actions:
+  - create_actual_AC29_layer_registry_and_attribute_set
+  - create_first_clean_archicad_candidate_project
+  - run_junction_tests_before_finalizing_priorities
+  - choose_first_real_object_pack_for_materialized_composites
+  - recommend_first_pack: residential.izhs_test_house
