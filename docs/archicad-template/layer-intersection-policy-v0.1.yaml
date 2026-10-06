@@ -1,0 +1,46 @@
+policy_version: 0.1
+status: draft_for_template_build
+target: Archicad_29
+
+principles:
+  - "Layer Intersection Group controls whether eligible elements are allowed to auto-connect."
+  - "Intersection Group does not replace Building Material priority."
+  - "Two elements in group 0 do not intersect."
+  - "Hidden elements can still affect visible elements if they share an active intersection group."
+  - "Wall-wall cleanup additionally requires reference-line intersection."
+
+default_groups:
+  native_building_model:
+    group: 1
+    purpose: "AR/KR native construction elements intended to clean up by normal Archicad junction rules."
+  isolated_native_test:
+    group: 2
+    purpose: "Temporary/test construction where automatic connection to production model must be prevented."
+  external_reference:
+    group: 0
+    purpose: "IFC/DWG/XREF/hotlink reference geometry that must not alter native junctions."
+  seo_operators:
+    group: 0
+    purpose: "Hidden/wireframe Solid Element Operation helpers; no accidental priority cleanup."
+  documentation_2d:
+    group: 0
+    purpose: "2D/documentation/reference-only elements; no model intersection."
+  quarantine_geometry:
+    group: 0
+    purpose: "Imported or uncertain geometry until reviewed."
+
+rules:
+  core_ar_kr_same_group_when_connection_intended: true
+  external_references_group_zero: true
+  imported_ifc_default_isolated: true
+  never_use_layer_group_to_fake_material_priority: true
+  hidden_layer_intersection_review_required: true
+  layer_combination_must_store_intended_intersection_state: true
+  group_zero_is_explicit_no_intersection: true
+
+release_checks:
+  - "Hide reference layers: no native linework disappears."
+  - "Switch AR/KR layer combinations: intended wall/slab/beam/column junctions remain stable."
+  - "Imported IFC/DWG does not cut native walls/slabs."
+  - "Temporary SEO operators do not create unrelated priority junctions."
+  - "Wall corners have intersecting reference lines where cleanup is expected."
