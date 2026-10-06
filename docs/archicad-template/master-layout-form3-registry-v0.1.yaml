@@ -1,0 +1,192 @@
+registry_version: 0.1
+status: geometry_verified_autotext_binding_pending
+target: Archicad_29
+
+normative_sources:
+  titleblock:
+    document: GOST_R_21.101-2026
+    appendix: E
+    form: 3
+    source_url: https://meganorm.ru/mega_doc/norm_update_01052026/vedomost_forma/0/gost_r_21_101-2026_natsionalnyy_standart_rossiyskoy.html
+    visual_ref: meganorm_956343.png
+  frame:
+    document: GOST_R_21.101-2026
+    appendix: Zh
+    figure: Zh.1
+  formats:
+    document: GOST_2.301-68
+    table: 1
+
+sheet_formats_mm:
+  A4_P: [210, 297]
+  A3_L: [420, 297]
+  A3_P: [297, 420]
+  A2_L: [594, 420]
+  A2_P: [420, 594]
+  A1_L: [841, 594]
+  A1_P: [594, 841]
+  A0_L: [1189, 841]
+
+frame_mm:
+  inner_from_left: 20
+  inner_from_top: 5
+  inner_from_right: 5
+  inner_from_bottom:
+    primary: 5
+    allowed_alternative: 10
+  titleblock_location: bottom_right
+
+form3:
+  width_mm: 185
+  height_mm: 55
+  main_split_x_mm:
+    left_signature_change_block: 65
+    right_document_block: 120
+  left_columns_mm: [10, 10, 10, 10, 15, 10]
+  right_major_widths_mm:
+    main_text: 70
+    auxiliary: 50
+  right_aux_columns_mm: [15, 15, 20]
+  right_rows_from_bottom_mm:
+    - 15
+    - 10
+    - 5
+    - 15
+    - 10
+  note: "5+10 segment in the auxiliary area forms header/value subdivision while the adjacent main cell spans 15 mm."
+
+additional_left_fields:
+  total_width_mm: 12
+  columns_mm: [5, 7]
+  vertical_segments_mm:
+    - {height: 25, graph: 20}
+    - {height: 35, graph: 21}
+    - {height: 25, graph: 22}
+    - {height: 20, graph: 10}
+    - {height: 20, graph: 11}
+    - {height: 15, graph: 12}
+    - {height: 10, graph: 13}
+  status: "placement verified from visual source; exact continuation use remains project/document dependent"
+
+graphs:
+  1:
+    meaning: document_designation
+    source: project_info_or_document_context
+  2:
+    meaning: enterprise_complex_microdistrict_stage
+    source: project_info
+  3:
+    meaning: building_or_structure_name_and_construction_type
+    source: project_info
+  4:
+    meaning: images_on_sheet_or_general_data
+    source: layout_info_or_manual_sheet_name
+  5:
+    meaning: product_or_document_name
+    source: layout_or_document_context
+  6:
+    meaning: documentation_type
+    allowed_values: [OI, P, R, I]
+    source: project_info
+  7:
+    meaning: sheet_number
+    source: layout_autotext
+  8:
+    meaning: sheet_count
+    source: layout_autotext
+  9:
+    meaning: authoring_organization_name_or_OK007_code
+    source: project_info
+  10:
+    meaning: work_role
+    source: manual_or_project_standard
+  11:
+    meaning: signer_surname
+    source: project_info_or_manual
+  12:
+    meaning: signature
+    source: electronic_signature_or_manual
+  13:
+    meaning: signing_date
+    source: issue_data
+  14:
+    meaning: change_number
+    source: revision_management
+  15:
+    meaning: changed_area_count
+    source: revision_management
+  16:
+    meaning: sheet_change_status
+    source: revision_management
+  17:
+    meaning: change_document_designation
+    source: revision_management
+  18:
+    meaning: change_signature
+    source: revision_management
+  19:
+    meaning: change_date
+    source: revision_management
+  20:
+    meaning: original_inventory_number
+    source: document_control
+  21:
+    meaning: archive_acceptance_signature_and_date
+    source: document_control
+  22:
+    meaning: replaced_original_inventory_number
+    source: document_control
+  23:
+    meaning: detail_material_designation
+    source: element_or_document_data
+    applicability: detail_drawings_only
+  24:
+    meaning: product_mass
+    source: element_or_document_data
+    applicability: product_drawings
+  25:
+    meaning: scale
+    source: drawing_or_view_autotext
+  26:
+    meaning: sheet_format
+    source: master_layout_or_layout_data
+  27:
+    meaning: short_customer_name
+    source: project_info
+
+archicad_mapping_policy:
+  use_autotext_where_stable: true
+  project_info_for_project_wide_fields: true
+  layout_info_for_sheet_specific_fields: true
+  revision_management_for_graphs_14_19: true
+  signatures_never_faked: true
+  missing_required_field_behavior: BLOCKED_ISSUE
+  literal_manual_text_for_dynamic_fields_forbidden_by_default: true
+
+automation:
+  geometry:
+    candidate_commands:
+      - ChangeWindow
+      - CreateLineElements
+      - CreateTexts
+    status: api_path_available_needs_live_masterlayout_test
+  autotext:
+    status: unresolved_api_behavior
+    blocker: "CreateTexts exposes plain text content but Tapir 1.5.8 has no general AutoText token enumeration/insertion command."
+  master_layout_creation:
+    status: api_path_available_needs_live_test
+    candidate_commands:
+      - CreateLayout
+      - GetNavigatorItemTree
+      - GetDatabaseIdFromNavigatorItemId
+      - ChangeWindow
+
+release_gates:
+  - form3_geometry_drawn_in_master_layout
+  - A4_orientation_checked
+  - A3_to_A0_orientation_checked
+  - frame_offsets_checked
+  - project_info_autotext_bindings_checked
+  - sheet_number_and_count_autotext_checked
+  - revision_fields_checked
+  - PDF_print_100_percent_checked
