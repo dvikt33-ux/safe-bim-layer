@@ -49,6 +49,7 @@ reference audit proves they can be moved safely.
 ## Package structure
 
 - [CLOSED_LOOP_PACKAGE_MAP.md](CLOSED_LOOP_PACKAGE_MAP.md) — logical core/live/recovery/harness boundaries and the post-Stage-4 refactor gate.
+- [BRANCH_INVENTORY_2026-10-06.md](BRANCH_INVENTORY_2026-10-06.md) — active, milestone, diverged and cleanup-candidate branch classification.
 
 ## Status vocabulary
 
