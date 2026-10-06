@@ -14,7 +14,7 @@ active closed-loop runtime but are retained for provenance.
 ## Layout
 
 - `legacy-v0.1/` — early Safe BIM v0.1 reports and offline schema proof.
-- `coordination/` — superseded Arena/Work coordination prompts and handoffs.
+- `coordination/` — superseded Arena/Work/BIMEXEC coordination prompts and handoffs.
 
 Current project navigation lives in `../README.md`, `../docs/INDEX.md`, and
 `../docs/CURRENT_STATUS.md`.
