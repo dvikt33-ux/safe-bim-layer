@@ -51,6 +51,8 @@ FONT_MANIFEST = SPEC / "fonts-manifest.yaml"
 SEED_PRESETS = SPEC / "seed-presets-registry-v0.1.yaml"
 MASTER_LAYOUT_FORM3 = SPEC / "master-layout-form3-registry-v0.1.yaml"
 AUTOTEXT_REGISTRY = SPEC / "autotext-titleblock-registry-v0.1.yaml"
+DWG_TRANSLATOR_REGISTRY = SPEC / "dwg-translator-registry-v0.1.yaml"
+IFC_TRANSLATOR_REGISTRY = SPEC / "ifc-translator-registry-v0.1.yaml"
 
 SAFE_CORE_COMMANDS = {
     "GetProjectInfo", "GetProjectInfoFields", "CreateProjectInfoFields",
@@ -183,6 +185,8 @@ def validate_specs():
     seed_presets = load_yaml(SEED_PRESETS)
     form3 = load_yaml(MASTER_LAYOUT_FORM3)
     autotext_registry = load_yaml(AUTOTEXT_REGISTRY)
+    dwg_registry = load_yaml(DWG_TRANSLATOR_REGISTRY)
+    ifc_registry = load_yaml(IFC_TRANSLATOR_REGISTRY)
 
     errors = []
     warnings = []
@@ -474,6 +478,36 @@ def validate_specs():
             "Form 3 graph 26 master-format mapping must cover exactly all registered masters."
         )
 
+    # Publisher DWG/IFC translators must resolve to exchange-registry contracts.
+    dwg_translators = {
+        x["name"] for x in dwg_registry.get("translators", [])
+    }
+    ifc_translators = {
+        x["name"] for x in ifc_registry.get("translators", [])
+    }
+    for pub in navigator.get("publisher_blueprints", []):
+        translator = pub.get("translator")
+        fmt = str(pub.get("format", "")).upper()
+        if not translator:
+            continue
+        if fmt == "DWG" and translator not in dwg_translators:
+            errors.append(
+                f"{pub['name']}: DWG translator {translator!r} absent from DWG registry"
+            )
+        elif fmt == "IFC" and translator not in ifc_translators:
+            errors.append(
+                f"{pub['name']}: IFC translator {translator!r} absent from IFC registry"
+            )
+        elif fmt not in {"DWG", "IFC"}:
+            warnings.append(
+                f"{pub['name']}: translator {translator!r} declared for unexpected format {fmt!r}"
+            )
+
+    if "DWG_IN_REFERENCE" not in dwg_translators:
+        errors.append("DWG translator registry must contain DWG_IN_REFERENCE.")
+    if "IFC_REFERENCE_IMPORT" not in ifc_translators:
+        errors.append("IFC translator registry must contain IFC_REFERENCE_IMPORT.")
+
     supported_property_types = {"string", "boolean", "integer", "length", "number", "enum"}
     property_count = 0
     for group_name, props in schema_groups.items():
@@ -512,6 +546,8 @@ def validate_specs():
             "form3SheetFormats": len(form3_sizes),
             "verifiedAutoTextKeys": len(builtin_keys),
             "runtimeRequiredAutoTextKeys": len(runtime_auto),
+            "dwgTranslatorContracts": len(dwg_translators),
+            "ifcTranslatorContracts": len(ifc_translators),
         },
     }
 
