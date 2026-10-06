@@ -40,7 +40,9 @@ def helper_change(directory, offline, regression):
     class HelperPlanner(LivePlanner):
         def plan(self, job, observation):
             data = read(observation.evidence['live.snapshot']['path'])
-            plan = session.chat.instruction_to_request('Продолжи последнюю созданную стену ещё на 0,5 метра.', 'execute', data)
+            plan = session.bound_fixture_plan(data, .5)
+            if plan is None:
+                plan = session.chat.instruction_to_request('Продолжи последнюю созданную стену ещё на 0,5 метра.', 'execute', data)
             if plan['status'] != 'PLANNED':
                 return PlannerDecision('BLOCKED', reason=str(plan))
             session.active_plan = {'number':1,'jobIteration':job.iteration,'modelHash':observation.modelHash,
