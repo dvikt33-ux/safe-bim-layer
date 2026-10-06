@@ -1,0 +1,94 @@
+matrix_version: 0.1
+status: verified_against_repo_tapir_1_5_8_schema
+source: tapir-1.5.8.json
+
+automatable_now:
+  project:
+    - GetProjectInfo
+    - GetProjectInfoFields
+    - CreateProjectInfoFields
+    - SetProjectInfoField
+    - GetStories
+    - SetStories
+    - GetCalculationUnits
+    - GetGeoLocation
+    - SetGeoLocation
+    - SaveProject
+  attributes:
+    - GetAttributesByType
+    - CreateLayers
+    - CreateLayerCombinations
+    - CreateLines
+    - CreateFills
+    - CreateZoneCategories
+    - CreateMEPSystems
+    - CreatePenTables
+    - CreateProfiles
+    - CreateBuildingMaterials
+    - CreateComposites
+    - CreateSurfaces
+  properties:
+    - GetAllProperties
+    - CreatePropertyGroups
+    - CreatePropertyDefinitions
+    - SetPropertyValuesOfElements
+    - SetPropertyValuesOfAttributes
+  classifications:
+    - CreateClassificationSystems
+    - CreateClassificationItems
+    - SetClassificationsOfElements
+  favorites:
+    - GetFavoritesByType
+    - ApplyFavoritesToElementDefaults
+    - CreateFavoritesFromElements
+    - ImportFavorites
+    - ExportFavorites
+    - ApplyFavoritesToElements
+    - UpdateFavoritesFromElements
+    - RenameFavorites
+    - DeleteFavorites
+  navigator_documentation:
+    - GetNavigatorItemTree
+    - CreateViewMapFolder
+    - CloneProjectMapItemToViewMap
+    - CreateViewsInViewMap
+    - GetViewSettings
+    - SetViewSettings
+    - CreateLayoutSubset
+    - CreateLayout
+    - CreateDrawings
+    - PublishPublisherSet
+
+read_only_or_assignment_only:
+  model_view_options:
+    - GetModelViewOptions
+    note: "Existing MVO preset names can be assigned to Views, but this Tapir schema has no command to create/edit MVO presets."
+  graphic_overrides:
+    note: "ViewSettings can reference an existing graphicOverrideCombination by name, but this Tapir schema has no command to create/edit Graphic Override rules/combinations."
+
+manual_or_addon_gap:
+  - create_or_edit_MVO_presets
+  - create_or_edit_Graphic_Override_rules_and_combinations
+  - Save_As_TPL_to_new_path
+  - exact_Work_Environment_profile_creation
+
+safe_first_automation_scope:
+  - Project_Info_fields
+  - Layers
+  - Layer_Combinations
+  - Pen_Tables
+  - simple_Line_Types
+  - read_only_inventory
+  - preflight_and_validation
+
+second_stage_after_attribute_resolution:
+  - Fills
+  - Surfaces
+  - Building_Materials
+  - Composites
+  - Profiles
+  - Properties_and_Classifications
+  - Favorites
+  - View_Map
+  - Layouts
+  - Publisher
