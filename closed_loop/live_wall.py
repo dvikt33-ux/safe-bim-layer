@@ -9,6 +9,7 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+import time
 import urllib.request
 from datetime import datetime, timezone
 
@@ -187,10 +188,15 @@ class LiveSession:
         self.check_identity()
         self.snapshots += 1
         path = self.output / 'observations' / f'{self.snapshots:03}-{role}.json'
+        started = time.perf_counter()
+        print(f'[model] snapshot {self.snapshots:03} {role}: start', flush=True)
         with contextlib.redirect_stdout(io.StringIO()):
             data, metrics = self.dump_module.dump(path, 19723)
         self.check_identity()
         signature = model_hash(data)
+        elapsed = time.perf_counter() - started
+        size_mib = path.stat().st_size / (1024 * 1024)
+        print(f'[model] snapshot {self.snapshots:03} {role}: {elapsed:.3f}s, {size_mib:.1f} MiB, {len(data["elements"])} elements', flush=True)
         save(path.with_suffix('.fingerprint.json'), {'modelIdentity': self.identity['projectPath'],
             'modelHash': signature, 'elementCount': len(data['elements']), 'role': role})
         return data, path, signature
