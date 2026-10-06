@@ -167,6 +167,11 @@ def validate_specs():
     layers = load_yaml(LAYER_SPEC)
     graphics = load_yaml(GRAPHICS_SPEC)
     baseline = load_yaml(BASELINE_SPEC)
+    attributes = load_yaml(ATTRIBUTE_REGISTRY)
+    surfaces_registry = load_yaml(SURFACE_REGISTRY)
+    fills_registry = load_yaml(FILL_REGISTRY)
+    classifications = load_yaml(CLASSIFICATION_REGISTRY)
+    data_schema = load_yaml(DATA_SCHEMA)
 
     errors = []
     warnings = []
@@ -228,6 +233,107 @@ def validate_specs():
     if api_unit != "m":
         errors.append(f"SBIM API geometry unit must remain m, got {api_unit!r}")
 
+    # Cross-registry integrity: Surface names must match the attribute registry exactly.
+    attr_surface_names = [x["name"] for x in attributes.get("surfaces", [])]
+    surface_defs = surfaces_registry.get("surfaces", [])
+    surface_names = [x["name"] for x in surface_defs]
+    if len(surface_names) != len(set(surface_names)):
+        errors.append("Duplicate Surface names in surface-registry-v0.1.yaml.")
+    missing_surface_defs = sorted(set(attr_surface_names) - set(surface_names))
+    extra_surface_defs = sorted(set(surface_names) - set(attr_surface_names))
+    if missing_surface_defs:
+        errors.append(
+            f"Surface registry missing Attribute Registry names: {missing_surface_defs}"
+        )
+    if extra_surface_defs:
+        warnings.append(
+            f"Surface registry contains extra visual surfaces: {extra_surface_defs}"
+        )
+    for item in surface_defs:
+        color = item.get("color", [])
+        if len(color) != 3 or any(float(v) < 0 or float(v) > 1 for v in color):
+            errors.append(f"{item.get('name')}: RGB values must be three numbers in 0..1")
+        transparency = float(item.get("transparency", 0))
+        if transparency < 0 or transparency > 100:
+            errors.append(
+                f"{item.get('name')}: transparency outside 0..100: {transparency}"
+            )
+
+    # Fill canonical roles/names are the only allowed Building Material cut-fill refs.
+    fill_entries = fills_registry.get("fills", [])
+    fill_keys = [
+        x.get("canonical_role") or x.get("name")
+        for x in fill_entries
+    ]
+    if len(fill_keys) != len(set(fill_keys)):
+        errors.append("Duplicate canonical Fill role/name in fill registry.")
+    allowed_fill_status = {
+        "runtime_resolve", "live_calibration_required",
+        "blocked_visual_source", "candidate", "verified",
+    }
+    for item in fill_entries:
+        if item.get("status") not in allowed_fill_status:
+            errors.append(
+                f"{item.get('canonical_role') or item.get('name')}: "
+                f"unknown Fill status {item.get('status')!r}"
+            )
+
+    bm_items = attributes.get("building_materials", [])
+    bm_names = [x["name"] for x in bm_items]
+    bm_ids = [x.get("id") for x in bm_items]
+    if len(bm_names) != len(set(bm_names)):
+        errors.append("Duplicate Building Material names.")
+    if len(bm_ids) != len(set(bm_ids)):
+        errors.append("Duplicate Building Material stable IDs.")
+    for item in bm_items:
+        if item.get("cut_fill") not in fill_keys:
+            errors.append(
+                f"{item['name']}: unknown cut_fill {item.get('cut_fill')}"
+            )
+        if item.get("surface") not in surface_names:
+            errors.append(
+                f"{item['name']}: unknown Surface {item.get('surface')}"
+            )
+        priority = int(item.get("draft_priority", -1))
+        if priority < 0 or priority > 999:
+            errors.append(
+                f"{item['name']}: intersection priority outside 0..999: {priority}"
+            )
+
+    # Classification and Property-group availability must remain one coherent schema.
+    class_items = classifications.get("items", [])
+    class_ids = [x["id"] for x in class_items]
+    if len(class_ids) != len(set(class_ids)):
+        errors.append("Duplicate SBIM Semantic classification item IDs.")
+    availability = classifications.get("property_group_availability") or {}
+    schema_groups = data_schema.get("property_groups") or {}
+    if set(availability) != set(schema_groups):
+        errors.append(
+            "Classification property-group availability and data-schema groups differ: "
+            f"availability={sorted(availability)}, schema={sorted(schema_groups)}"
+        )
+    for group_name, rule in availability.items():
+        selected = rule.get("items")
+        if selected != "ALL":
+            unknown = sorted(set(selected or []) - set(class_ids))
+            if unknown:
+                errors.append(
+                    f"{group_name}: availability references unknown classification IDs {unknown}"
+                )
+
+    supported_property_types = {"string", "boolean", "integer", "length", "number", "enum"}
+    property_count = 0
+    for group_name, props in schema_groups.items():
+        for prop_name, spec in props.items():
+            property_count += 1
+            if spec.get("type") not in supported_property_types:
+                errors.append(
+                    f"{group_name}.{prop_name}: unsupported schema property type "
+                    f"{spec.get('type')!r}"
+                )
+            if spec.get("type") == "enum" and not spec.get("values"):
+                errors.append(f"{group_name}.{prop_name}: enum has no values")
+
     validate_command_capability()
     return {
         "status": "PASS" if not errors else "FAIL",
@@ -238,6 +344,11 @@ def validate_specs():
             "layerCombinations": len(layers.get("layer_combinations") or {}),
             "semanticPens": len(pens),
             "lineTypesCandidate": len(graphics.get("line_types", [])),
+            "surfaces": len(surface_defs),
+            "fillRoles": len(fill_entries),
+            "buildingMaterials": len(bm_items),
+            "classificationItems": len(class_items),
+            "schemaProperties": property_count,
         },
     }
 
