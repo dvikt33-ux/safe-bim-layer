@@ -47,6 +47,14 @@ No-progress and maximum iterations have distinct terminal reasons:
 `BLOCKED_NO_PROGRESS` and `BLOCKED_ITERATION_LIMIT`. The initial project identity
 is pinned; re-observation cannot silently bind another PLN.
 
+Repository drift is guarded semantically rather than by freezing the entire `main` SHA.
+The historical Stage-4 merge-base remains `72e9be15...`, but unrelated main commits are
+allowed. At the final read-back, the runner fetches current `origin/main` and requires zero
+diff from that baseline across protected BIM runtime/evidence paths. Changes under unrelated
+domains such as `knowledge/detail-machine/` do not fail the live loop; changes to
+`closed_loop/`, `scripts/`, `archicad-addon/`, Stage tests/evidence, or the pinned v0.1
+runtime do fail closed.
+
 ## Reproducible offline proof
 
 ```powershell
@@ -151,9 +159,9 @@ Backlog only: general transactions/concurrent job ownership, additional BIM
 operations, undo, UI, normative engines and performance work. None is implemented
 as part of this stage.
 
-Latest observed offline proof: `hardening-offline-006` PASS in the operator
-workspace. It has not been promoted to historical committed evidence merely by
-being observed in chat.
+The operator observed `hardening-offline-006` PASS before the protected-main guard change.
+That proof is now source-stale because `closed_loop/live_wall.py` changed. A fresh
+source-pinned offline proof is required before any new accepted Stage-4 live run.
 
 The 30-criterion contract and ten-scenario status matrix are retained in
 `outputs/closed-loop-stage4/stage4-acceptance-contract.json` and
