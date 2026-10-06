@@ -45,6 +45,8 @@ SURFACE_REGISTRY = SPEC / "surface-registry-v0.1.yaml"
 FILL_REGISTRY = SPEC / "fill-registry-v0.1.yaml"
 CLASSIFICATION_REGISTRY = SPEC / "classification-registry-v0.1.yaml"
 DATA_SCHEMA = SPEC / "data-schema-v0.1.yaml"
+NAVIGATOR_REGISTRY = SPEC / "navigator-registry-v0.1.yaml"
+DOCUMENTATION_SPEC = SPEC / "documentation-standard-v0.1.yaml"
 
 SAFE_CORE_COMMANDS = {
     "GetProjectInfo", "GetProjectInfoFields", "CreateProjectInfoFields",
@@ -172,6 +174,8 @@ def validate_specs():
     fills_registry = load_yaml(FILL_REGISTRY)
     classifications = load_yaml(CLASSIFICATION_REGISTRY)
     data_schema = load_yaml(DATA_SCHEMA)
+    navigator = load_yaml(NAVIGATOR_REGISTRY)
+    documentation = load_yaml(DOCUMENTATION_SPEC)
 
     errors = []
     warnings = []
@@ -321,6 +325,77 @@ def validate_specs():
                     f"{group_name}: availability references unknown classification IDs {unknown}"
                 )
 
+    # Navigator blueprint references must resolve to registered template names.
+    view_folders = navigator.get("view_folders", [])
+    if len(view_folders) != len(set(view_folders)):
+        errors.append("Duplicate View Map folder names.")
+    nav_views = navigator.get("views", [])
+    view_names = [x["name"] for x in nav_views]
+    if len(view_names) != len(set(view_names)):
+        errors.append("Duplicate navigator View names.")
+    registered_layer_combos = set((layers.get("layer_combinations") or {}).keys())
+    registered_pen_tables = {x["name"] for x in graphics.get("pen_tables", [])}
+    external = navigator.get("external_seed_dependencies") or {}
+    registered_mvo = set(external.get("model_view_options", []))
+    registered_go = set(external.get("graphic_override_combinations", []))
+    registered_dims = set(external.get("dimension_styles", []))
+    allowed_structure = {"EntireStructure", "CoreOnly", "WithoutFinishes", "StructureOnly"}
+    allowed_scales = set(baseline.get("scales", []))
+    for view in nav_views:
+        if view.get("folder") not in view_folders:
+            errors.append(f"{view['name']}: unknown View Map folder {view.get('folder')}")
+        if view.get("layer_combination") not in registered_layer_combos:
+            errors.append(
+                f"{view['name']}: unknown Layer Combination {view.get('layer_combination')}"
+            )
+        if view.get("pen_table") not in registered_pen_tables:
+            errors.append(f"{view['name']}: unknown Pen Table {view.get('pen_table')}")
+        if view.get("mvo") not in registered_mvo:
+            errors.append(f"{view['name']}: undeclared MVO dependency {view.get('mvo')}")
+        if view.get("graphic_override") not in registered_go:
+            errors.append(
+                f"{view['name']}: undeclared Graphic Override dependency "
+                f"{view.get('graphic_override')}"
+            )
+        if view.get("dimension_style") not in registered_dims:
+            errors.append(
+                f"{view['name']}: undeclared Dimension Style dependency "
+                f"{view.get('dimension_style')}"
+            )
+        if view.get("structure_display") not in allowed_structure:
+            errors.append(
+                f"{view['name']}: invalid structure display {view.get('structure_display')}"
+            )
+        if int(view.get("scale", -1)) not in allowed_scales:
+            errors.append(f"{view['name']}: scale {view.get('scale')} absent from baseline")
+
+    masters = navigator.get("master_layout_blueprints", [])
+    master_names = [x["name"] for x in masters]
+    if len(master_names) != len(set(master_names)):
+        errors.append("Duplicate Master Layout blueprint names.")
+    for master in masters:
+        if float(master.get("width_mm", 0)) <= 0 or float(master.get("height_mm", 0)) <= 0:
+            errors.append(f"{master.get('name')}: invalid sheet size")
+
+    nav_subsets = [x["name"] for x in navigator.get("layout_subsets", [])]
+    doc_subsets = documentation.get("layout_subsets", [])
+    if nav_subsets != doc_subsets:
+        errors.append(
+            "Navigator Layout subsets differ from documentation-standard ordering/names."
+        )
+    doc_masters = documentation.get("masters", [])
+    if master_names != doc_masters:
+        errors.append(
+            "Navigator Master Layout blueprints differ from documentation-standard."
+        )
+    nav_pub = {x["name"] for x in navigator.get("publisher_blueprints", [])}
+    doc_pub = set((documentation.get("publisher_sets") or {}).keys())
+    if not nav_pub.issubset(doc_pub):
+        errors.append(
+            f"Navigator Publisher blueprints not declared in documentation-standard: "
+            f"{sorted(nav_pub - doc_pub)}"
+        )
+
     supported_property_types = {"string", "boolean", "integer", "length", "number", "enum"}
     property_count = 0
     for group_name, props in schema_groups.items():
@@ -349,6 +424,10 @@ def validate_specs():
             "buildingMaterials": len(bm_items),
             "classificationItems": len(class_items),
             "schemaProperties": property_count,
+            "viewBlueprints": len(nav_views),
+            "masterLayoutBlueprints": len(masters),
+            "layoutSubsets": len(nav_subsets),
+            "publisherBlueprints": len(nav_pub),
         },
     }
 
