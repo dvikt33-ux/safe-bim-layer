@@ -1,0 +1,39 @@
+{
+  "release": "2.8",
+  "checks": {
+    "release": "2.8",
+    "base_release": "v2.7",
+    "focus_source": "FAVORIT_SHEET_MATERIALS",
+    "focus_scope": "section 5, sheets 5.1-5.28 / PDF pages 154-181",
+    "detail_units_total": 1215,
+    "active_ir_total": 1215,
+    "parameter_facts_total": 1253,
+    "component_variants_total": 601,
+    "dimension_queue_total": 641,
+    "section5_pages_reviewed": 28,
+    "section5_queue_tasks_resolved": 26,
+    "section5_high_remaining": 2,
+    "remaining_section5_records": [
+      "FAVORIT_SHEET_MATERIALS__S5_23",
+      "FAVORIT_SHEET_MATERIALS__S5_24"
+    ],
+    "new_parameter_facts": 18,
+    "ir_operation_role_corrections": 137,
+    "source_hash_matches": 40,
+    "source_hash_total": 40,
+    "raster_measurement_used_for_dimensions": 0,
+    "normative_claims_promoted_to_current": 0,
+    "commit_policy": "fail_closed"
+  },
+  "critical_findings": [
+    "26 of 28 FAVORIT section-5 source-transcription tasks are closed after manual visual review.",
+    "S5.23/S5.24 remain high: two printed 35 mm dimensions on each window-reveal detail are transcribed but exact semantic endpoints / Archicad parameter roles are not uniquely resolved.",
+    "S5.2 source-bound grid: vertical 600–1200 mm, horizontal max 600 mm; source explicitly requires bracket type/spacing strength-calculation confirmation.",
+    "S5.8/S5.10/S5.12/S5.14 layout dimensions are project-defined; no numeric module was invented.",
+    "S5.9/S5.11/S5.13/S5.14 source-literal fastener option is preserved as ВС 4.2×32 + washer РЕРДМ or A2/A2 4×8 rivet; РЕРДМ is not silently normalized.",
+    "S5.17 min 10 is bound to thermal-joint opening; S5.28 20–30 mm is bound to bottom clearance to horizontal plane.",
+    "137 IR operation-role inconsistencies were corrected only where explicit semantic roles identified hardware/fasteners previously emitted as generic/cladding placement.",
+    "Queue closure is not construction permission; all active IR remains fail-closed."
+  ],
+  "commit_allowed_true_introduced": 0
+}
