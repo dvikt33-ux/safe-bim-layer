@@ -106,3 +106,35 @@ The safe-core phase does not create/delete model geometry. Element count is chec
 ```powershell
 python -m pip install -r scripts/requirements-template.txt
 ```
+
+
+## Navigator shell
+
+After the manual seed presets (MVO / Graphic Override / Dimension Styles) are created and `plan-navigator` is reviewed:
+
+```powershell
+python scripts/archicad_template_builder.py apply-navigator-shell --out template-navigator-shell.json
+```
+
+This creates only:
+- View Map folders
+- Layout Book subsets
+
+It intentionally does not create formal Views, Master Layout titleblock graphics, Layout drawings or Publisher Sets.
+
+Current live sequence for a clean candidate project:
+
+1. `font-preflight`
+2. `validate`
+3. `inspect`
+4. `plan`
+5. `apply-core`
+6. `apply-surfaces`
+7. `plan-materials`
+8. `apply-ready-materials`
+9. `plan-data-schema`
+10. `apply-data-schema`
+11. create/verify manual seed presets from `seed-presets-registry-v0.1.yaml`
+12. `plan-navigator`
+13. `apply-navigator-shell`
+14. read-back / Model Dump verification
