@@ -1,0 +1,410 @@
+[
+  {
+    "source_id": "ARMO_SELFLOCK_ROOF",
+    "title": "ARMO. Самозащелкивающаяся кровля и доборные элементы",
+    "manufacturer": "ARMO",
+    "source_type": "manufacturer_technical_album",
+    "year": null,
+    "details": 19,
+    "active_ir": 19,
+    "parameter_facts": 88,
+    "component_variants": 19,
+    "normative_trust": "technical_solution_only_unless_separately_verified",
+    "system": [
+      "pitched_roof",
+      "self_locking_metal_roof",
+      "facade_cladding"
+    ]
+  },
+  {
+    "source_id": "BRAAS_ROOF_DETAILS",
+    "title": "BRAAS. Альбом технических решений. Узлы скатных крыш",
+    "manufacturer": "BMI BRAAS",
+    "source_type": "manufacturer_detail_album_scan",
+    "year": null,
+    "details": 55,
+    "active_ir": 55,
+    "parameter_facts": 5,
+    "component_variants": 0,
+    "normative_trust": "technical_solution_only_unless_separately_verified",
+    "system": [
+      "pitched_roof",
+      "roof_tile",
+      "roof_details"
+    ]
+  },
+  {
+    "source_id": "BRAAS_ROOF_TECH",
+    "title": "BRAAS. Альбом технических решений: конструкции, укладка и обустройство черепичной кровли",
+    "manufacturer": "BMI BRAAS",
+    "source_type": "manufacturer_technical_album",
+    "year": null,
+    "details": 87,
+    "active_ir": 87,
+    "parameter_facts": 74,
+    "component_variants": 0,
+    "normative_trust": "technical_solution_only_unless_separately_verified",
+    "system": [
+      "pitched_roof",
+      "roof_tile"
+    ]
+  },
+  {
+    "source_id": "BRAER_PAVING_2020",
+    "title": "BRAER. Альбом технических решений. Плиты бетонные тротуарные",
+    "manufacturer": "BRAER",
+    "source_type": "manufacturer_technical_album",
+    "year": 2020,
+    "details": 41,
+    "active_ir": 41,
+    "parameter_facts": 59,
+    "component_variants": 0,
+    "normative_trust": "technical_solution_only_unless_separately_verified",
+    "system": [
+      "siteworks",
+      "paving",
+      "drainage"
+    ]
+  },
+  {
+    "source_id": "FAVORIT_COMPOSITE_PANEL",
+    "title": "ФАВОРИТ. Альбом технических решений НФС «ФАВОРИТ Композитная панель»",
+    "manufacturer": "ФАВОРИТ Фасадные системы",
+    "source_type": "manufacturer_technical_album_scan",
+    "year": null,
+    "details": 167,
+    "active_ir": 167,
+    "parameter_facts": 71,
+    "component_variants": 123,
+    "normative_trust": "technical_solution_only_unless_separately_verified",
+    "system": [
+      "ventilated_facade",
+      "composite_panel"
+    ]
+  },
+  {
+    "source_id": "FAVORIT_SHEET_MATERIALS",
+    "title": "ФАВОРИТ. Альбом технических решений НФС «ФАВОРИТ Листовые материалы»",
+    "manufacturer": "ФАВОРИТ Фасадные системы",
+    "source_type": "manufacturer_technical_album_scan",
+    "year": null,
+    "details": 200,
+    "active_ir": 200,
+    "parameter_facts": 63,
+    "component_variants": 367,
+    "normative_trust": "technical_solution_only_unless_separately_verified",
+    "system": [
+      "ventilated_facade",
+      "sheet_cladding",
+      "profiled_sheet",
+      "steel_cassette",
+      "siding",
+      "linear_panel"
+    ]
+  },
+  {
+    "source_id": "KAIMAN_KERAKAM_WALL",
+    "title": "КЕРАКАМ / КАЙМАН. Альбом технических решений стен из керамических крупноформатных поризованных камней",
+    "manufacturer": "Самарский Комбинат Керамических Материалов",
+    "source_type": "manufacturer_technical_album_scan",
+    "year": 2014,
+    "details": 227,
+    "active_ir": 227,
+    "parameter_facts": 24,
+    "component_variants": 23,
+    "normative_trust": "technical_solution_only_unless_separately_verified",
+    "system": [
+      "wall",
+      "ceramic_block_masonry"
+    ]
+  },
+  {
+    "source_id": "KLEYKO_PANEL_FIX",
+    "title": "KLEYKO PANEL FIX. Альбом типовых технических решений для облицовки НФС широкоформатным керамогранитом",
+    "manufacturer": "КЛЕЙКО",
+    "source_type": "manufacturer_technical_album",
+    "year": null,
+    "details": 20,
+    "active_ir": 20,
+    "parameter_facts": 31,
+    "component_variants": 4,
+    "normative_trust": "technical_solution_only_unless_separately_verified",
+    "system": [
+      "ventilated_facade",
+      "porcelain_stoneware",
+      "adhesive_fixing"
+    ]
+  },
+  {
+    "source_id": "LSR_WALL_GUIDE_2022",
+    "title": "ЛСР. Стеновые. Руководство пользователя, 4-е издание",
+    "manufacturer": "ЛСР. Стеновые",
+    "source_type": "manufacturer_user_guide",
+    "year": 2022,
+    "details": 30,
+    "active_ir": 30,
+    "parameter_facts": 42,
+    "component_variants": 0,
+    "normative_trust": "technical_solution_only_unless_separately_verified",
+    "system": [
+      "wall",
+      "aac_masonry"
+    ]
+  },
+  {
+    "source_id": "MESTERRA_BREEZE_BLOCK",
+    "title": "Mesterra. Альбом узлов и технических решений декоративных бриз-блоков Кобого / Cobogo",
+    "manufacturer": "Mesterra",
+    "source_type": "manufacturer_technical_album_scan",
+    "year": 2024,
+    "details": 8,
+    "active_ir": 8,
+    "parameter_facts": 37,
+    "component_variants": 0,
+    "normative_trust": "technical_solution_only_unless_separately_verified",
+    "system": [
+      "screen_wall",
+      "decorative_block",
+      "railing"
+    ]
+  },
+  {
+    "source_id": "POLIVAN_WPC_2017",
+    "title": "Альбом технических решений террасных систем, систем ограждения и заборных систем из ДПК POLIVAN GROUP",
+    "manufacturer": "POLIVAN GROUP",
+    "source_type": "manufacturer_technical_album",
+    "year": 2017,
+    "details": 38,
+    "active_ir": 38,
+    "parameter_facts": 161,
+    "component_variants": 0,
+    "normative_trust": "technical_solution_only_unless_separately_verified",
+    "system": [
+      "terrace",
+      "railing",
+      "fence",
+      "WPC"
+    ]
+  },
+  {
+    "source_id": "POROTHERM_LOWRISE",
+    "title": "Альбом технических решений для малоэтажного домостроения POROTHERM / Wienerberger",
+    "manufacturer": "Wienerberger / Славдом",
+    "source_type": "manufacturer_technical_album",
+    "year": null,
+    "details": 69,
+    "active_ir": 69,
+    "parameter_facts": 5,
+    "component_variants": 0,
+    "normative_trust": "technical_solution_only_unless_separately_verified",
+    "system": [
+      "wall",
+      "ceramic_block_masonry",
+      "foundation",
+      "roof_junction"
+    ]
+  },
+  {
+    "source_id": "ROCKFACADE_2022",
+    "title": "РОКВУЛ ROCKFACADE. СФТК с наружными штукатурными слоями",
+    "manufacturer": "РОКВУЛ",
+    "source_type": "manufacturer_technical_album",
+    "year": 2022,
+    "details": 101,
+    "active_ir": 101,
+    "parameter_facts": 90,
+    "component_variants": 0,
+    "normative_trust": "technical_solution_only_unless_separately_verified",
+    "system": [
+      "facade",
+      "ETICS",
+      "insulation"
+    ]
+  },
+  {
+    "source_id": "ROCKWOOL_ATTIC_SLAB",
+    "title": "РОКВУЛ. Чердачные перекрытия с железобетонными плитами",
+    "manufacturer": "РОКВУЛ",
+    "source_type": "manufacturer_technical_album",
+    "year": 2008,
+    "details": 2,
+    "active_ir": 2,
+    "parameter_facts": 0,
+    "component_variants": 0,
+    "normative_trust": "technical_solution_only_unless_separately_verified",
+    "system": [
+      "attic_floor",
+      "reinforced_concrete",
+      "insulation"
+    ]
+  },
+  {
+    "source_id": "ROCKWOOL_FLOORS_PIPES",
+    "title": "РОКВУЛ. Полы с покрытием и звукоизоляция трубопроводов",
+    "manufacturer": "РОКВУЛ",
+    "source_type": "manufacturer_technical_album",
+    "year": 2008,
+    "details": 5,
+    "active_ir": 5,
+    "parameter_facts": 0,
+    "component_variants": 0,
+    "normative_trust": "technical_solution_only_unless_separately_verified",
+    "system": [
+      "floor",
+      "acoustics",
+      "pipe_insulation"
+    ]
+  },
+  {
+    "source_id": "ROCKWOOL_MANSARD",
+    "title": "РОКВУЛ. Ограждающие конструкции мансард",
+    "manufacturer": "РОКВУЛ",
+    "source_type": "manufacturer_technical_album",
+    "year": 2008,
+    "details": 4,
+    "active_ir": 4,
+    "parameter_facts": 0,
+    "component_variants": 0,
+    "normative_trust": "technical_solution_only_unless_separately_verified",
+    "system": [
+      "mansard",
+      "pitched_roof",
+      "insulation"
+    ]
+  },
+  {
+    "source_id": "ROCKWOOL_PARTITION_METAL_FRAME",
+    "title": "РОКВУЛ. Звукоизоляционные перегородки на металлическом каркасе",
+    "manufacturer": "РОКВУЛ",
+    "source_type": "manufacturer_cad_album",
+    "year": null,
+    "details": 36,
+    "active_ir": 36,
+    "parameter_facts": 179,
+    "component_variants": 0,
+    "normative_trust": "technical_solution_only_unless_separately_verified",
+    "system": [
+      "partition",
+      "metal_frame",
+      "acoustics"
+    ]
+  },
+  {
+    "source_id": "ROCKWOOL_PROFILED_WALL",
+    "title": "РОКВУЛ. Каркасные конструкции стен с обшивками из профлиста",
+    "manufacturer": "РОКВУЛ",
+    "source_type": "manufacturer_technical_album",
+    "year": 2008,
+    "details": 10,
+    "active_ir": 10,
+    "parameter_facts": 0,
+    "component_variants": 0,
+    "normative_trust": "technical_solution_only_unless_separately_verified",
+    "system": [
+      "wall",
+      "framed_wall",
+      "profiled_sheet"
+    ]
+  },
+  {
+    "source_id": "ROCKWOOL_ROOF_PROFILED_STEEL",
+    "title": "РОКВУЛ. Скатная кровля из стальных профилированных листов на покрытии по профлисту",
+    "manufacturer": "РОКВУЛ",
+    "source_type": "manufacturer_technical_album",
+    "year": 2008,
+    "details": 5,
+    "active_ir": 5,
+    "parameter_facts": 0,
+    "component_variants": 0,
+    "normative_trust": "technical_solution_only_unless_separately_verified",
+    "system": [
+      "pitched_roof",
+      "profiled_steel",
+      "insulation"
+    ]
+  },
+  {
+    "source_id": "ROCKWOOL_ROOF_PVC",
+    "title": "РОКВУЛ. Скатная кровля из ПВХ-мембраны на покрытии по стропам",
+    "manufacturer": "РОКВУЛ",
+    "source_type": "manufacturer_technical_album",
+    "year": 2008,
+    "details": 14,
+    "active_ir": 14,
+    "parameter_facts": 0,
+    "component_variants": 0,
+    "normative_trust": "technical_solution_only_unless_separately_verified",
+    "system": [
+      "pitched_roof",
+      "PVC_membrane",
+      "insulation"
+    ]
+  },
+  {
+    "source_id": "ROCKWOOL_SUSPENDED_CEILING",
+    "title": "РОКВУЛ. Звукоизоляция подвесных потолков",
+    "manufacturer": "РОКВУЛ",
+    "source_type": "manufacturer_technical_album",
+    "year": null,
+    "details": 17,
+    "active_ir": 17,
+    "parameter_facts": 103,
+    "component_variants": 0,
+    "normative_trust": "technical_solution_only_unless_separately_verified",
+    "system": [
+      "ceiling",
+      "acoustics"
+    ]
+  },
+  {
+    "source_id": "ROCKWOOL_WALL_LINING",
+    "title": "РОКВУЛ. Звукоизоляционные облицовки стен",
+    "manufacturer": "РОКВУЛ",
+    "source_type": "manufacturer_cad_album",
+    "year": null,
+    "details": 20,
+    "active_ir": 20,
+    "parameter_facts": 103,
+    "component_variants": 0,
+    "normative_trust": "technical_solution_only_unless_separately_verified",
+    "system": [
+      "wall_lining",
+      "metal_frame",
+      "acoustics"
+    ]
+  },
+  {
+    "source_id": "RONSON_500_TILE",
+    "title": "РОНСОН-500. НФС с клинкерной плиткой и плиткой из литьевого бетона с затиркой швов. Р-500-2-17-АТР",
+    "manufacturer": "РОНСОН-ГРУПП",
+    "source_type": "manufacturer_technical_album",
+    "year": 2017,
+    "details": 28,
+    "active_ir": 28,
+    "parameter_facts": 12,
+    "component_variants": 0,
+    "normative_trust": "technical_solution_only_unless_separately_verified",
+    "system": [
+      "ventilated_facade",
+      "clinker_tile",
+      "cast_concrete_tile"
+    ]
+  },
+  {
+    "source_id": "RSM_FLEXIBLE_TIES_2024",
+    "title": "РСМ. Гибкие связи наружных многослойных стен. АТР ГС-11/24",
+    "manufacturer": "ООО РСМ",
+    "source_type": "manufacturer_technical_album",
+    "year": 2024,
+    "details": 8,
+    "active_ir": 8,
+    "parameter_facts": 8,
+    "component_variants": 0,
+    "normative_trust": "technical_solution_only_unless_separately_verified",
+    "system": [
+      "wall",
+      "multilayer_masonry",
+      "flexible_ties"
+    ]
+  }
+]
