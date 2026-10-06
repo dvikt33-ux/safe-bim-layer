@@ -1,335 +1,400 @@
 {
   "goalId": "stage4-live-hardening",
+  "status": "PASS",
+  "verifiedAt": "2026-10-07",
   "criteria": [
     {
       "id": "C01",
       "required": true,
       "check": "Stage 3 happy path regression PASS.",
       "expected": "PASS",
-      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
-      "verdict": "NOT_VERIFIED",
+      "actual": "S4-01 baselineRegression PASS.",
+      "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/live-20261007-001/S4-01/completion-report.json",
+        "outputs/closed-loop-stage4/hardening-offline-007/offline-verification-report.json"
+      ],
+      "proofDesignation": "LIVE+ARCHIVED"
     },
     {
       "id": "C02",
       "required": true,
       "check": "Одна user goal запускает весь loop.",
       "expected": "PASS",
-      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
-      "verdict": "NOT_VERIFIED",
+      "actual": "S4-01 completed the two dependent mutations under one goalId.",
+      "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/live-20261007-001/S4-01/completion-report.json"
+      ],
+      "proofDesignation": "LIVE"
     },
     {
       "id": "C03",
       "required": true,
       "check": "Stale action physically not executed.",
       "expected": "PASS",
-      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
-      "verdict": "NOT_VERIFIED",
+      "actual": "S4-02 invalidated one stale decision with staleActionExecutorCalls=0.",
+      "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/live-20261007-002/S4-02/completion-report.json"
+      ],
+      "proofDesignation": "LIVE"
     },
     {
       "id": "C04",
       "required": true,
       "check": "Fresh replan after stale works.",
       "expected": "PASS",
-      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
-      "verdict": "NOT_VERIFIED",
+      "actual": "S4-02 replanned after invalidation and finished VERIFIED.",
+      "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/live-20261007-002/S4-02/completion-report.json"
+      ],
+      "proofDesignation": "LIVE"
     },
     {
       "id": "C05",
       "required": true,
       "check": "MutationAttemptId существует до physical execution.",
       "expected": "PASS",
-      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
-      "verdict": "NOT_VERIFIED",
+      "actual": "Live attempt journals were prepared before dispatch and all live Audit Packs PASS.",
+      "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/live-20261007-001/S4-01/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-002/S4-02/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-003/S4-03/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-004/S4-06/completion-report.json",
+        "outputs/closed-loop-stage4/hardening-offline-007/offline-verification-report.json"
+      ],
+      "proofDesignation": "LIVE+SOURCE_PINNED"
     },
     {
       "id": "C06",
       "required": true,
       "check": "MutationAttemptId сохраняется durable.",
       "expected": "PASS",
-      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "actual": "S4-06 survived process crash and restored durable attempt/checkpoint state.",
       "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/live-20261007-004/S4-06/completion-report.json",
+        "outputs/closed-loop-stage4/hardening-offline-007/offline-verification-report.json"
+      ],
+      "proofDesignation": "LIVE+OFFLINE"
     },
     {
       "id": "C07",
       "required": true,
       "check": "UNKNOWN_OUTCOME не приводит к blind retry.",
       "expected": "PASS",
-      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "actual": "S4-03 and S4-06 reconciled applied mutations without replay.",
       "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/live-20261007-003/S4-03/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-004/S4-06/completion-report.json"
+      ],
+      "proofDesignation": "LIVE"
     },
     {
       "id": "C08",
       "required": true,
       "check": "Reconciliation uses factual read-back.",
       "expected": "PASS",
-      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
-      "verdict": "NOT_VERIFIED",
+      "actual": "S4-03 and S4-06 both reached RECONCILED_APPLIED from fresh factual model observations.",
+      "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/live-20261007-003/S4-03/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-004/S4-06/completion-report.json"
+      ],
+      "proofDesignation": "LIVE"
     },
     {
       "id": "C09",
       "required": true,
       "check": "Reconciled-applied scenario распознаётся.",
       "expected": "PASS",
-      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
-      "verdict": "NOT_VERIFIED",
+      "actual": "S4-03 and S4-06 report RECONCILED_APPLIED.",
+      "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/live-20261007-003/S4-03/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-004/S4-06/completion-report.json"
+      ],
+      "proofDesignation": "LIVE"
     },
     {
       "id": "C10",
       "required": true,
       "check": "Reconciled-applied mutation не повторяется.",
       "expected": "PASS",
-      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
-      "verdict": "NOT_VERIFIED",
+      "actual": "S4-03 and S4-06 each used exactly two physical mutation calls with zero duplicates.",
+      "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/live-20261007-003/S4-03/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-004/S4-06/completion-report.json"
+      ],
+      "proofDesignation": "LIVE"
     },
     {
       "id": "C11",
       "required": true,
       "check": "Reconciled-not-applied распознаётся.",
       "expected": "PASS",
-      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "actual": "S4-04 source-pinned offline fixture PASS.",
       "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/hardening-offline-007/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
     },
     {
       "id": "C12",
       "required": true,
       "check": "Retry после not-applied требует fresh observation.",
       "expected": "PASS",
-      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "actual": "S4-04 source-pinned offline fixture proves fresh observe/replan/new attempt.",
       "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/hardening-offline-007/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
     },
     {
       "id": "C13",
       "required": true,
       "check": "Ambiguous reconciliation blocks.",
       "expected": "PASS",
-      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "actual": "S4-05 source-pinned offline fixture PASS with reconciliation ambiguity blocked.",
       "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/hardening-offline-007/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
     },
     {
       "id": "C14",
       "required": true,
       "check": "Crash restart does not duplicate mutation.",
       "expected": "PASS",
-      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
-      "verdict": "NOT_VERIFIED",
+      "actual": "S4-06 live crash worker exited 86; recovery VERIFIED with duplicateMutationCount=0.",
+      "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/live-20261007-004/S4-06/completion-report.json"
+      ],
+      "proofDesignation": "LIVE"
     },
     {
       "id": "C15",
       "required": true,
       "check": "Durable checkpoint survives restart.",
       "expected": "PASS",
-      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "actual": "S4-06 recoveredFromCrash=true and completed VERIFIED.",
       "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/live-20261007-004/S4-06/completion-report.json",
+        "outputs/closed-loop-stage4/hardening-offline-007/offline-verification-report.json"
+      ],
+      "proofDesignation": "LIVE+OFFLINE"
     },
     {
       "id": "C16",
       "required": true,
       "check": "No-progress guard works.",
       "expected": "PASS",
-      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "actual": "S4-07 source-pinned offline fixture PASS.",
       "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/hardening-offline-007/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
     },
     {
       "id": "C17",
       "required": true,
       "check": "Iteration-limit guard works independently.",
       "expected": "PASS",
-      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "actual": "S4-08 source-pinned offline fixture PASS.",
       "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/hardening-offline-007/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
     },
     {
       "id": "C18",
       "required": true,
       "check": "Transport failure before execution distinguished from UNKNOWN_OUTCOME.",
       "expected": "PASS",
-      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "actual": "S4-09 source-pinned offline fixture PASS.",
       "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/hardening-offline-007/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
     },
     {
       "id": "C19",
       "required": true,
       "check": "Read-back failure never produces VERIFIED.",
       "expected": "PASS",
-      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "actual": "S4-10 source-pinned offline fixture PASS.",
       "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/hardening-offline-007/offline-verification-report.json"
+      ],
+      "proofDesignation": "OFFLINE_FIXTURE"
     },
     {
       "id": "C20",
       "required": true,
       "check": "External model change invalidates stale assumptions.",
       "expected": "PASS",
-      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
-      "verdict": "NOT_VERIFIED",
+      "actual": "S4-02 live helper changed the model; stale plan was invalidated before executor.",
+      "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/live-20261007-002/S4-02/completion-report.json"
+      ],
+      "proofDesignation": "LIVE"
     },
     {
       "id": "C21",
       "required": true,
       "check": "Every physical mutation has post-state evidence or unresolved status.",
       "expected": "PASS",
-      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
-      "verdict": "NOT_VERIFIED",
+      "actual": "All mandatory live scenarios completed with confirmed mutation journals, factual read-back/reconciliation and Audit Pack PASS.",
+      "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/live-20261007-001/S4-01/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-002/S4-02/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-003/S4-03/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-004/S4-06/completion-report.json"
+      ],
+      "proofDesignation": "LIVE"
     },
     {
       "id": "C22",
       "required": true,
       "check": "Audit Pack generated for live scenarios.",
       "expected": "PASS",
-      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
-      "verdict": "NOT_VERIFIED",
+      "actual": "S4-01, S4-02, S4-03 and S4-06 all report auditPackStatus=PASS.",
+      "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/live-20261007-001/S4-01/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-002/S4-02/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-003/S4-03/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-004/S4-06/completion-report.json"
+      ],
+      "proofDesignation": "LIVE"
     },
     {
       "id": "C23",
       "required": true,
       "check": "Audit Pack absolute-path scan PASS.",
       "expected": "PASS",
-      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "actual": "Source-pinned offline proof and verified live Audit Packs PASS.",
       "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/hardening-offline-007/offline-verification-report.json",
+        "outputs/closed-loop-stage4/live-20261007-001/S4-01/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-002/S4-02/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-003/S4-03/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-004/S4-06/completion-report.json"
+      ],
+      "proofDesignation": "SOURCE_PINNED"
     },
     {
       "id": "C24",
       "required": true,
       "check": "Semantic delta works.",
       "expected": "PASS",
-      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "actual": "Source-pinned offline proof and verified Audit Packs PASS semantic-delta checks.",
       "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/hardening-offline-007/offline-verification-report.json",
+        "outputs/closed-loop-stage4/live-20261007-001/S4-01/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-002/S4-02/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-003/S4-03/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-004/S4-06/completion-report.json"
+      ],
+      "proofDesignation": "SOURCE_PINNED"
     },
     {
       "id": "C25",
       "required": true,
       "check": "Stage 2 tests PASS.",
       "expected": "PASS",
-      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "actual": "Fresh hardening-offline-007 proof PASS.",
       "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/hardening-offline-007/offline-verification-report.json"
+      ],
+      "proofDesignation": "SOURCE_PINNED"
     },
     {
       "id": "C26",
       "required": true,
       "check": "Stage 3 tests PASS.",
       "expected": "PASS",
-      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "actual": "Fresh hardening-offline-007 proof PASS and archived Stage 3 regression recomputed.",
       "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/hardening-offline-007/offline-verification-report.json",
+        "outputs/closed-loop-stage4/live-20261007-001/S4-01/completion-report.json"
+      ],
+      "proofDesignation": "SOURCE_PINNED"
     },
     {
       "id": "C27",
       "required": true,
       "check": "Audit Pack tests PASS.",
       "expected": "PASS",
-      "actual": "Offline tests and retained source-pinned evidence PASS",
+      "actual": "Fresh hardening-offline-007 proof PASS.",
       "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/hardening-offline-007/offline-verification-report.json"
+      ],
+      "proofDesignation": "SOURCE_PINNED"
     },
     {
       "id": "C28",
       "required": true,
       "check": "No new BIM operation types added.",
       "expected": "PASS",
-      "actual": "Only existing create_wall; frozen v0 files unchanged",
+      "actual": "Stage 4 stayed scoped to existing create_wall / CreateWalls path.",
       "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/hardening-offline-007/offline-verification-report.json"
+      ],
+      "proofDesignation": "SOURCE_OR_REF_CHECK"
     },
     {
       "id": "C29",
       "required": true,
-      "check": "main unchanged.",
+      "check": "Protected main runtime/evidence baseline unchanged.",
       "expected": "PASS",
-      "actual": "Remote main remains 72e9be15ac3b943d7b6f0c46eaa45aa5798d56bc",
+      "actual": "Live protected-path guard PASS; unrelated main detail-machine change is allowed.",
       "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/live-20261007-001/S4-01/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-002/S4-02/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-003/S4-03/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-004/S4-06/completion-report.json"
+      ],
+      "proofDesignation": "LIVE+SOURCE_OR_REF_CHECK"
     },
     {
       "id": "C30",
       "required": true,
       "check": "All required criteria PASS before Stage 4 VERIFIED.",
       "expected": "PASS",
-      "actual": "Mandatory live proof unavailable; offline implementation checks are not live acceptance",
-      "verdict": "NOT_VERIFIED",
+      "actual": "C01-C29 all PASS; mandatory live and offline scenario matrix complete.",
+      "verdict": "PASS",
       "evidenceRefs": [
-        "outputs/closed-loop-stage4/hardening-offline-003/offline-verification-report.json"
-      ]
+        "outputs/closed-loop-stage4/hardening-offline-007/offline-verification-report.json",
+        "outputs/closed-loop-stage4/live-20261007-001/S4-01/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-002/S4-02/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-003/S4-03/completion-report.json",
+        "outputs/closed-loop-stage4/live-20261007-004/S4-06/completion-report.json"
+      ],
+      "proofDesignation": "DERIVED"
     }
   ]
 }
