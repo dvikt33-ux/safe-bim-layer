@@ -50,6 +50,7 @@ DOCUMENTATION_SPEC = SPEC / "documentation-standard-v0.1.yaml"
 FONT_MANIFEST = SPEC / "fonts-manifest.yaml"
 SEED_PRESETS = SPEC / "seed-presets-registry-v0.1.yaml"
 MASTER_LAYOUT_FORM3 = SPEC / "master-layout-form3-registry-v0.1.yaml"
+FORM3_GEOMETRY = SPEC / "form3-geometry-v0.1.yaml"
 AUTOTEXT_REGISTRY = SPEC / "autotext-titleblock-registry-v0.1.yaml"
 DWG_TRANSLATOR_REGISTRY = SPEC / "dwg-translator-registry-v0.1.yaml"
 IFC_TRANSLATOR_REGISTRY = SPEC / "ifc-translator-registry-v0.1.yaml"
@@ -1633,6 +1634,27 @@ def _layout_settings_from_nav(api: Tapir, nav_item):
 
 
 
+
+def plan_form3_geometry():
+    """Offline deterministic plan for the verified Form 3 core grid."""
+    spec = load_yaml(FORM3_GEOMETRY)
+    segments = spec.get("line_segments_mm", [])
+    labels = spec.get("static_labels", [])
+    return {
+        "status": "PASS",
+        "writePerformed": False,
+        "coordinateSystem": spec.get("coordinate_system"),
+        "core": spec.get("core"),
+        "segmentCount": len(segments),
+        "segmentsMm": segments,
+        "staticLabelCount": len(labels),
+        "staticLabels": labels,
+        "optionalGraph27": spec.get("optional_graph_27"),
+        "additionalLeftBlock": spec.get("additional_left_block"),
+        "graph26": spec.get("graph_26"),
+        "releaseGate": spec.get("release_gate"),
+    }
+
 def plan_autotext(api: Tapir):
     """Read-only validation of the custom AutoText reader and Form 3 keys."""
     registry = load_yaml(AUTOTEXT_REGISTRY)
@@ -2765,7 +2787,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "action",
-        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "plan-autotext", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell", "apply-master-layout-smoke", "apply-layout-autotext-smoke"),
+        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "plan-form3-geometry", "plan-autotext", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell", "apply-master-layout-smoke", "apply-layout-autotext-smoke"),
     )
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
     parser.add_argument(
@@ -2801,6 +2823,8 @@ def main():
             result = plan_navigator(api)
         elif args.action == "plan-master-layouts":
             result = plan_master_layouts(api)
+        elif args.action == "plan-form3-geometry":
+            result = plan_form3_geometry()
         elif args.action == "plan-autotext":
             result = plan_autotext(api)
         elif args.action == "apply-core":
