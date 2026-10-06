@@ -1,0 +1,31 @@
+name: Build details v2.9 FAVORIT section 6 binding
+on:
+  push:
+    branches: [feature/working-archicad-mvp]
+    paths:
+      - details/tools/build_v29_favorit_s6.py
+      - .github/workflows/build-details-v29-favorit-s6.yml
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/working-archicad-mvp
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build audited v2.9
+        run: python details/tools/build_v29_favorit_s6.py
+      - name: Commit generated v2.9
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add details .github/workflows
+          git diff --cached --stat
+          git diff --cached --quiet && exit 0
+          git commit -m "Resolve FAVORIT section 6 source-binding queue in v2.9 [details-v2.9]"
+          git push origin HEAD:feature/working-archicad-mvp
