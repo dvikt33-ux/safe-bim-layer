@@ -1,0 +1,34 @@
+{
+  "release": "2.2",
+  "timestamp_utc": "2026-10-06T01:26:01.022809+00:00",
+  "source_scope": "KAIMAN/KERAKAM manufacturer technical album: explanatory pages 1–35, index pages 36–40, detail sheets physical pages 41–267",
+  "checks": {
+    "physical_pdf_pages": 267,
+    "indexed_detail_units": 227,
+    "kaiman_ir_rebuilt": 227,
+    "kaiman_global_parameter_facts": 24,
+    "kaiman_component_variants": 23,
+    "detail_units_total": 1211,
+    "parameter_facts_total": 1155,
+    "archicad_ir_total": 1515,
+    "component_variants_total": 536,
+    "dimension_queue_total": 610,
+    "detail_page_min": 41,
+    "detail_page_max": 267,
+    "sqlite_integrity_check": "ok",
+    "missing_active_detail_ir_refs": 0,
+    "raster_measurement_used_for_dimensions": 0,
+    "kaiman_commit_allowed_true": 0,
+    "source_hash_matches": 40,
+    "source_hash_total": 40
+  },
+  "critical_findings": [
+    "The PDF physically contains 267 pages; the machine source has 227 indexed detail sheets on physical pages 41–267. v2.2 maps all 227 detail units to the source wall taxonomy instead of treating them as generic ceramic-wall records.",
+    "Table 3.1 on physical pages 7–9 was converted into a source-traceable component catalogue: 19 ceramic-unit variants and 4 PKB lintel variants. Only source-explicit envelope dimensions are considered BIM-usable; internal void geometry is not reconstructed from raster images.",
+    "Section 10 wall taxonomy was encoded into 19 wall-type branches covering KAIMAN 38/KERAKAM 38 Thermo, KERAKAM 38, 44, 51, KERAKAM 25/25XL and KAIMAN 30 with facing-brick, render or external-insulation branches and source-declared loadbearing/nonbearing classes.",
+    "24 source-wide technical facts were typed once and inherited by applicable details (mortar joint 10–15 mm, half-block bond, tie requirements, slab/lintel bearing, plaster thickness, movement-joint guidance, etc.). They remain technical-album claims and are not silently promoted to current norms.",
+    "All 227 KAIMAN/KERAKAM Archicad IR graphs now know the wall type, allowed source product variant(s), finish branch and structural junction class. Exact detail commit remains locked until sheet-specific printed dimensions and project structural parameters are bound.",
+    "A 227-record dimension-binding queue was created so remaining sheet-by-sheet extraction is explicit and finite rather than hidden behind generic blockers."
+  ],
+  "commit_policy": "fail_closed"
+}
