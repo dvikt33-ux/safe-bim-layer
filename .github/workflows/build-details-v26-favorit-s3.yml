@@ -1,0 +1,34 @@
+name: Build details v2.6 FAVORIT section 3 binding
+
+on:
+  push:
+    branches: [feature/working-archicad-mvp]
+    paths:
+      - details/tools/build_v26_favorit_s3.py
+      - .github/workflows/build-details-v26-favorit-s3.yml
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/working-archicad-mvp
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build audited v2.6
+        run: python details/tools/build_v26_favorit_s3.py
+      - name: Commit generated v2.6
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add details .github/workflows
+          git diff --cached --stat
+          git diff --cached --quiet && exit 0
+          git commit -m "Resolve FAVORIT section 3 source-binding queue in v2.6 [details-v2.6]"
+          git push origin HEAD:feature/working-archicad-mvp
