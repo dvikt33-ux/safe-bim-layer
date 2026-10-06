@@ -103,7 +103,7 @@ file is part of the current runtime.
   `outputs/closed-loop-stage4/`
 - **Legacy/research generation:** old v0.1 Safe BIM/Qwen/Tapir-1.5.8 files in the
   repository root
-- **Coordination/history:** `bimexec/`, Arena/Work handoff documents
+- **Coordination/history:** `archive/coordination/` (including historical BIMEXEC/Arena/Work handoffs)
 
 The canonical classification and cleanup policy is in
 [docs/PROJECT_MAP.md](docs/PROJECT_MAP.md).
