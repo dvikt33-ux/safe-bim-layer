@@ -1,6 +1,6 @@
 param(
     [int]$Port = 19723,
-    [ValidateSet("preflight","core","materials-data","navigator-master","autotext","master-smoke","all-safe")]
+    [ValidateSet("preflight","core","materials-data","navigator-master","autotext","master-smoke","layout-autotext-smoke","all-safe")]
     [string]$Stage = "all-safe",
     [string]$OutDir = "outputs/archicad-template-live"
 )
@@ -70,6 +70,7 @@ $navigatorMaster = @(
 )
 $autotext = @("plan-autotext")
 $masterSmoke = @("apply-master-layout-smoke")
+$layoutAutoTextSmoke = @("apply-layout-autotext-smoke")
 
 switch ($Stage) {
     "preflight" {
@@ -90,6 +91,9 @@ switch ($Stage) {
     "master-smoke" {
         $steps = $masterSmoke
     }
+    "layout-autotext-smoke" {
+        $steps = $layoutAutoTextSmoke
+    }
     "all-safe" {
         $steps = $preflight + $core + $materialsData + $navigatorMaster
     }
@@ -106,7 +110,7 @@ $summary = [ordered]@{
     evidenceDirectory = $RunDir
     steps = @()
     productionGeometryCreated = $false
-    autotextGateExecuted = ($Stage -eq "autotext" -or $Stage -eq "master-smoke")
+    autotextGateExecuted = ($Stage -eq "autotext" -or $Stage -eq "master-smoke" -or $Stage -eq "layout-autotext-smoke")
 }
 
 foreach ($step in $steps) {
