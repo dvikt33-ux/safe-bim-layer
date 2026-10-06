@@ -209,7 +209,16 @@ class LiveSession:
                     continue
                 oref, obegin, _, _ = oref_tuple
                 ox, oy = self.chat.direction(oref)
-                if self.chat.endpoint_distance(end, obegin) <= TOL and ux*ox + uy*oy >= 1.0 - 1e-6:
+                current_bind = current.get('materialBindings', {})
+                other_bind = other.get('materialBindings', {})
+                same_material = (current_bind.get('structureType') == other_bind.get('structureType')
+                    and current_bind.get('buildingMaterial', {}).get('guid') ==
+                        other_bind.get('buildingMaterial', {}).get('guid'))
+                same_reference = (abs(float(ref.get('offset',0.0))-float(oref.get('offset',0.0))) <= TOL
+                    and ref.get('referenceLineLocation') == oref.get('referenceLineLocation'))
+                if (same_material and same_reference
+                        and self.chat.endpoint_distance(end, obegin) <= TOL
+                        and ux*ox + uy*oy >= 1.0 - 1e-6):
                     successors.append(other)
             if not successors:
                 return current
