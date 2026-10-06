@@ -103,7 +103,10 @@
       "linear_panel"
     ],
     "section1_catalog_entries": 36,
-    "section1_catalog_status": "transcribed_v2.3"
+    "section1_catalog_status": "transcribed_v2.3",
+    "section3_dimension_binding_status": "reviewed_v2.6",
+    "section3_dimension_binding_tasks_resolved": 27,
+    "section3_dimension_binding_high_remaining": 2
   },
   {
     "source_id": "KAIMAN_KERAKAM_WALL",

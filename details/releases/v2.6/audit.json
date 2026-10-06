@@ -1,0 +1,37 @@
+{
+  "release": "2.6",
+  "checks": {
+    "release": "2.6",
+    "base_release": "v2.5",
+    "focus_source": "FAVORIT_SHEET_MATERIALS",
+    "focus_scope": "section 3, sheets 3.1-3.29 / PDF pages 88-116",
+    "detail_units_total": 1215,
+    "active_ir_total": 1215,
+    "parameter_facts_total": 1232,
+    "component_variants_total": 601,
+    "dimension_queue_total": 699,
+    "section3_pages_reviewed": 29,
+    "section3_queue_tasks_resolved": 27,
+    "section3_high_remaining": 2,
+    "remaining_section3_records": [
+      "FAVORIT_SHEET_MATERIALS__S3_12",
+      "FAVORIT_SHEET_MATERIALS__S3_9"
+    ],
+    "source_hash_matches": 40,
+    "source_hash_total": 40,
+    "raster_measurement_used_for_dimensions": 0,
+    "normative_claims_promoted_to_current": 0,
+    "commit_policy": "fail_closed"
+  },
+  "critical_findings": [
+    "27 of 29 FAVORIT sheet-material section-3 source-transcription tasks are closed after manual visual review of the supplied pages.",
+    "S3.9 remains high: min 50 is printed but exact constraint endpoints/Archicad parameter binding are not unique; title/legend UKR conflict remains preserved.",
+    "S3.12 remains high: min 15 is printed but exact constraint endpoints/Archicad parameter binding are not unique.",
+    "S3.18 min 10 and S3.29 clearance 20–30 are already source-bound facts; their transcription queue items are closed.",
+    "S3.20/S3.21 porcelain-stoneware context anomaly remains a compile blocker, but it is not an untranscribed dimension/fastener task.",
+    "Queue closure means source transcription is exhausted/bound; it does not grant automatic construction permission.",
+    "No raster-derived construction dimensions and no manufacturer normative claims promoted."
+  ],
+  "fail_closed": true,
+  "commit_allowed_true_introduced": 0
+}

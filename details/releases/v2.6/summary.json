@@ -1,0 +1,23 @@
+{
+  "release": "2.6",
+  "base_release": "v2.5",
+  "focus_source": "FAVORIT_SHEET_MATERIALS",
+  "focus_scope": "section 3, sheets 3.1-3.29 / PDF pages 88-116",
+  "detail_units_total": 1215,
+  "active_ir_total": 1215,
+  "parameter_facts_total": 1232,
+  "component_variants_total": 601,
+  "dimension_queue_total": 699,
+  "section3_pages_reviewed": 29,
+  "section3_queue_tasks_resolved": 27,
+  "section3_high_remaining": 2,
+  "remaining_section3_records": [
+    "FAVORIT_SHEET_MATERIALS__S3_12",
+    "FAVORIT_SHEET_MATERIALS__S3_9"
+  ],
+  "source_hash_matches": 40,
+  "source_hash_total": 40,
+  "raster_measurement_used_for_dimensions": 0,
+  "normative_claims_promoted_to_current": 0,
+  "commit_policy": "fail_closed"
+}
