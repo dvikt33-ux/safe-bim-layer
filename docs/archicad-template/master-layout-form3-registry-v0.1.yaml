@@ -171,10 +171,12 @@ automation:
       - CreateTexts
     status: api_path_available_needs_live_masterlayout_test
   autotext:
-    status: unresolved_api_behavior
-    blocker: "CreateTexts exposes plain text content but Tapir 1.5.8 has no general AutoText token enumeration/insertion command."
+    status: cplusplus_api_available_tapir_gap
+    blocker: "Archicad C++ API exposes AutoText enumeration/set/create, but Tapir 1.5.8 has no general AutoText command."
+    recommended_resolution: "Expose minimal AutoText command through safe-bim add-on; do not fake dynamic fields as static text."
   master_layout_creation:
-    status: api_path_available_needs_live_test
+    status: api_path_verified_units_mm_live_test_pending
+    size_and_margin_units: millimeters
     candidate_commands:
       - CreateLayout
       - GetNavigatorItemTree
