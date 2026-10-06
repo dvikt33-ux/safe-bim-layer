@@ -6,7 +6,7 @@ import unittest
 from unittest.mock import patch
 import scripts.stage4_audit_pack as stage4_pack
 from scripts.stage4_audit_pack import source_contract, build_pack, verify_pack
-from scripts.audit_pack import AuditError, read_json, scan_public_pack
+from scripts.audit_pack import AuditError, model_summary, read_json, scan_public_pack
 from closed_loop.wall_attempts import durable_json
 from tests_stage4_live.test_attempts import fixture
 
@@ -69,6 +69,13 @@ class ScenarioPackTests(unittest.TestCase):
             stage4_pack.extract(self.root, self.contract)
 
         self.assertEqual(Counter(calls), Counter(self.contract['snapshots']))
+
+
+    def test_optimized_model_summary_is_byte_equivalent(self):
+        old_summary, old_index = model_summary(self.after, 'fixture')
+        new_summary, new_index = stage4_pack._model_summary_once(self.after, 'fixture')
+        self.assertEqual(new_summary, old_summary)
+        self.assertEqual(new_index, old_index)
 
 
 if __name__ == '__main__': unittest.main()
