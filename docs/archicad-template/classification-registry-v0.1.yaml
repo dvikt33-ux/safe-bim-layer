@@ -1,0 +1,49 @@
+registry_version: 0.1
+status: candidate
+target: Archicad_29
+
+system:
+  name: SBIM Semantic
+  description: "Secondary machine-semantic classification for SBIM/GPT/QA. Does not replace the native Archicad classification used for IFC/type mapping."
+  source: "dvikt33-ux/safe-bim-layer"
+  version: "0.1"
+  date: "2026-10-06"
+
+items:
+  - {id: SBIM-STRUCTURAL, name: STRUCTURAL, description: "Primary structural construction element."}
+  - {id: SBIM-ENVELOPE, name: ENVELOPE, description: "Building envelope element."}
+  - {id: SBIM-PARTITION, name: PARTITION, description: "Internal partition or separator."}
+  - {id: SBIM-FINISH, name: FINISH, description: "Modeled finish element."}
+  - {id: SBIM-OPENING, name: OPENING, description: "Door/window/opening or opening-related element."}
+  - {id: SBIM-CIRCULATION, name: CIRCULATION, description: "Stair/ramp/railing/circulation-related element."}
+  - {id: SBIM-SPACE, name: SPACE, description: "Zone/space semantic object."}
+  - {id: SBIM-MEP, name: MEP, description: "Engineering-system element or equipment."}
+  - {id: SBIM-SITE, name: SITE, description: "General-plan/site/landscape element."}
+  - {id: SBIM-REFERENCE, name: REFERENCE, description: "External/read-only/reference model element."}
+  - {id: SBIM-ANNOTATION, name: ANNOTATION, description: "Documentation/annotation semantic item."}
+  - {id: SBIM-OTHER, name: OTHER, description: "Managed element not covered by a more specific SBIM semantic item."}
+
+property_group_availability:
+  SBIM.Core:
+    items: ALL
+  SBIM.Space:
+    items: [SBIM-SPACE]
+  SBIM.Fire:
+    items: [SBIM-STRUCTURAL, SBIM-ENVELOPE, SBIM-PARTITION, SBIM-OPENING, SBIM-CIRCULATION, SBIM-SPACE, SBIM-MEP]
+  SBIM.Accessibility:
+    items: [SBIM-ENVELOPE, SBIM-PARTITION, SBIM-OPENING, SBIM-CIRCULATION, SBIM-SPACE]
+  SBIM.MEP:
+    items: [SBIM-MEP]
+  SBIM.Norm:
+    items: ALL
+  SBIM.Exchange:
+    items: ALL
+  SBIM.QA:
+    items: ALL
+
+rules:
+  native_archicad_classification_remains_primary_for_ifc: true
+  sbim_system_is_secondary: true
+  one_item_per_element_in_sbim_system: true
+  favorite_assigns_sbim_semantic_item: true
+  classification_id_is_stable_contract: true
