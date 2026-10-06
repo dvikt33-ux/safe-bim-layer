@@ -1,0 +1,36 @@
+{
+  "release": "2.3",
+  "timestamp_utc": "2026-10-06T14:32:01.791964+00:00",
+  "source_scope": "POROTHERM/Wienerberger low-rise technical album, physical pages 1-105; canonical technical-detail sheets pages 21-25,27-34,36-38,40-42,44-58,60-67,69-73,75-79,81-89,91-99,101-102,104",
+  "checks": {
+    "release": "2.3",
+    "focus_source": "POROTHERM_LOWRISE",
+    "physical_pdf_pages": 105,
+    "porotherm_detail_units": 73,
+    "porotherm_section_divider_pages_excluded": 12,
+    "porotherm_global_facts": 37,
+    "porotherm_component_variants": 21,
+    "porotherm_dimension_queue": 73,
+    "detail_units_total": 1215,
+    "active_ir_total": 1215,
+    "parameter_facts_total": 1187,
+    "component_variants_total": 557,
+    "dimension_queue_total": 683,
+    "source_hash": "9afc42e77f5d02ff2432386b8a04e88c4756f476b43cb345ea2021c8c0589c95",
+    "source_hash_expected": "9afc42e77f5d02ff2432386b8a04e88c4756f476b43cb345ea2021c8c0589c95",
+    "source_hash_match": true,
+    "commit_allowed_true_porotherm": 0,
+    "raster_measurement_used_for_dimensions": 0,
+    "normative_claims_promoted_to_current": 0
+  },
+  "critical_findings": [
+    "The v2.2 generic extraction counted 69 POROTHERM records and included section-divider pages while omitting multiple actual detail sheets. v2.3 establishes 73 canonical technical-detail sheets and excludes 12 divider pages from buildable detail cards.",
+    "The source table of contents says section 1 is sheets 1.1-1.4, but physical page 25 has an actual title block for sheet 1.5. v2.3 preserves the discrepancy and treats the physical title block as the canonical sheet identity.",
+    "The old POROTHERM facts misparsed product text 25M as a 25 m dimension. Those five POROTHERM v2.2 facts are removed and replaced by source-bound catalogue/global facts.",
+    "Tables 2, 3 and 5 plus page 104 are represented as parametric catalog entries for POROTHERM blocks, TERCA facing bricks, masonry mortars, reinforcement meshes and anchor A-1.",
+    "All sheet-specific drawing dimensions remain an explicit 73-item binding queue. No dimension was derived from raster pixel scale.",
+    "Source title typos such as PHOROTERM/СТЕПЫ/ПРЕМЫКАНИЕ are preserved as source literals while normalized semantic roles remain separate.",
+    "Old SP/GOST/SNiP citations are stored only as claimed_by_source and are not asserted to be current."
+  ],
+  "commit_policy": "fail_closed"
+}

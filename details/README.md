@@ -45,3 +45,9 @@ FAVORIT «Листовые материалы», section 1 (sheets 1.1–1.12 / 
 ## Source preservation
 
 The raw 40 source files are intentionally not duplicated in Git. Their verified hashes and representation metadata are stored in the release registry/verification files; the separate FULL offline archive remains the evidence-preservation package.
+
+## Pending source patch v2.3 — POROTHERM
+
+A source-specific POROTHERM/Wienerberger correction is preserved under `patches/v2.3-porotherm/`. It re-indexes the source from 69 generic records to 73 canonical technical-detail sheets, excludes 12 navigation/divider pages, and adds 37 source-bound facts, 21 component variants and 73 explicit dimension-binding tasks.
+
+This patch **does not advance `ACTIVE_RELEASE`**. Release v2.2 remains the active packaged machine state until the POROTHERM delta is merged into the next consolidated release. All POROTHERM Archicad operations remain fail-closed (`commit_allowed=false`) until sheet-specific dimensions and project structural parameters are resolved.

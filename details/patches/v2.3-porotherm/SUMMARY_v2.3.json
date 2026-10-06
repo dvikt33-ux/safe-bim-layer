@@ -1,0 +1,21 @@
+{
+  "release": "2.3",
+  "focus_source": "POROTHERM_LOWRISE",
+  "physical_pdf_pages": 105,
+  "porotherm_detail_units": 73,
+  "porotherm_section_divider_pages_excluded": 12,
+  "porotherm_global_facts": 37,
+  "porotherm_component_variants": 21,
+  "porotherm_dimension_queue": 73,
+  "detail_units_total": 1215,
+  "active_ir_total": 1215,
+  "parameter_facts_total": 1187,
+  "component_variants_total": 557,
+  "dimension_queue_total": 683,
+  "source_hash": "9afc42e77f5d02ff2432386b8a04e88c4756f476b43cb345ea2021c8c0589c95",
+  "source_hash_expected": "9afc42e77f5d02ff2432386b8a04e88c4756f476b43cb345ea2021c8c0589c95",
+  "source_hash_match": true,
+  "commit_allowed_true_porotherm": 0,
+  "raster_measurement_used_for_dimensions": 0,
+  "normative_claims_promoted_to_current": 0
+}
