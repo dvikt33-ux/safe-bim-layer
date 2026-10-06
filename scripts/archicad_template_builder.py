@@ -43,6 +43,8 @@ BASELINE_SPEC = SPEC / "project-baseline-v0.1.yaml"
 ATTRIBUTE_REGISTRY = SPEC / "attribute-registry-v0.1.yaml"
 SURFACE_REGISTRY = SPEC / "surface-registry-v0.1.yaml"
 FILL_REGISTRY = SPEC / "fill-registry-v0.1.yaml"
+CLASSIFICATION_REGISTRY = SPEC / "classification-registry-v0.1.yaml"
+DATA_SCHEMA = SPEC / "data-schema-v0.1.yaml"
 
 SAFE_CORE_COMMANDS = {
     "GetProjectInfo", "GetProjectInfoFields", "CreateProjectInfoFields",
@@ -108,6 +110,34 @@ class Tapir:
         result = envelope.get("result", {}).get("addOnCommandResponse", {})
         if isinstance(result, dict) and "error" in result:
             raise RuntimeError(f"{command} returned error: {result}")
+        write_json(self.evidence_dir / f"{stem}.meta.json", {
+            "command": command, "seconds": elapsed
+        })
+        return result
+
+    def native(self, command: str, parameters=None, timeout=120):
+        """Call a built-in Graphisoft JSON command (not an Add-On command)."""
+        self.seq += 1
+        safe = command.replace(".", "-")
+        stem = f"{self.seq:03d}-{safe}"
+        request = {"command": command, "parameters": parameters or {}}
+        payload = json.dumps(request, ensure_ascii=False).encode("utf-8")
+        self.evidence_dir.mkdir(parents=True, exist_ok=True)
+        (self.evidence_dir / f"{stem}.request.json").write_bytes(payload)
+        req = urllib.request.Request(
+            f"http://127.0.0.1:{self.port}",
+            payload,
+            {"Content-Type": "application/json"},
+        )
+        started = time.perf_counter()
+        with urllib.request.urlopen(req, timeout=timeout) as response:
+            raw = response.read()
+        elapsed = time.perf_counter() - started
+        (self.evidence_dir / f"{stem}.response.json").write_bytes(raw)
+        envelope = json.loads(raw)
+        if not envelope.get("succeeded"):
+            raise RuntimeError(f"{command} failed: {envelope}")
+        result = envelope.get("result", {})
         write_json(self.evidence_dir / f"{stem}.meta.json", {
             "command": command, "seconds": elapsed
         })
@@ -845,11 +875,277 @@ def apply_ready_building_materials(api: Tapir, allow_nonempty=False):
 
 
 
+def _flatten_classification_items(items, out):
+    for wrapper in items or []:
+        item = wrapper.get("classificationItem", wrapper)
+        if not isinstance(item, dict):
+            continue
+        item_id = item.get("id")
+        guid = item.get("classificationItemId", {}).get("guid")
+        if item_id and guid:
+            out[item_id] = {
+                "guid": guid,
+                "name": item.get("name"),
+                "description": item.get("description", ""),
+            }
+        _flatten_classification_items(item.get("children", []), out)
+
+
+def get_sbim_classification_state(api: Tapir):
+    registry = load_yaml(CLASSIFICATION_REGISTRY)
+    target = registry["system"]
+    systems = api.native("API.GetAllClassificationSystems", {}).get(
+        "classificationSystems", []
+    )
+    matches = [x for x in systems if x.get("name") == target["name"]]
+    if len(matches) > 1:
+        raise RuntimeError(
+            f"Multiple Classification Systems named {target['name']!r}; manual repair required."
+        )
+    if not matches:
+        return {
+            "exists": False,
+            "system": None,
+            "items": {},
+            "missingItemIds": [x["id"] for x in registry.get("items", [])],
+        }
+    system = matches[0]
+    result = api.native(
+        "API.GetAllClassificationsInSystem",
+        {"classificationSystemId": system["classificationSystemId"]},
+    )
+    items = {}
+    _flatten_classification_items(result.get("classificationItems", []), items)
+    expected = [x["id"] for x in registry.get("items", [])]
+    return {
+        "exists": True,
+        "system": system,
+        "items": items,
+        "missingItemIds": [x for x in expected if x not in items],
+    }
+
+
+def ensure_sbim_classification(api: Tapir):
+    registry = load_yaml(CLASSIFICATION_REGISTRY)
+    state = get_sbim_classification_state(api)
+    if not state["exists"]:
+        system = registry["system"]
+        api.call("CreateClassificationSystems", {
+            "classificationSystemsWithItems": [{
+                "classificationSystem": {
+                    "name": system["name"],
+                    "description": system["description"],
+                    "source": system["source"],
+                    "version": system["version"],
+                    "date": system["date"],
+                },
+                "classificationItems": [
+                    {
+                        "id": item["id"],
+                        "name": item["name"],
+                        "description": item["description"],
+                    }
+                    for item in registry.get("items", [])
+                ],
+            }]
+        })
+        state = get_sbim_classification_state(api)
+
+    if state["missingItemIds"]:
+        raise RuntimeError(
+            "Existing SBIM Semantic classification is incomplete; "
+            f"missing IDs: {state['missingItemIds']}. "
+            "Failing closed instead of mutating a partially used classification tree."
+        )
+    return state
+
+
+def property_availability_map(class_state):
+    registry = load_yaml(CLASSIFICATION_REGISTRY)
+    all_items = class_state["items"]
+    mapping = {}
+    for group_name, spec in (
+        registry.get("property_group_availability") or {}
+    ).items():
+        ids = spec.get("items")
+        selected = list(all_items) if ids == "ALL" else list(ids or [])
+        missing = [x for x in selected if x not in all_items]
+        if missing:
+            raise RuntimeError(
+                f"{group_name} availability references missing classifications: {missing}"
+            )
+        mapping[group_name] = [
+            {"classificationItemId": {"guid": all_items[x]["guid"]}}
+            for x in selected
+        ]
+    return mapping
+
+
+def plan_data_schema(api: Tapir):
+    class_state = get_sbim_classification_state(api)
+    schema = load_yaml(DATA_SCHEMA)
+    existing = api.call("GetAllProperties").get("properties", [])
+    existing_key = {
+        (p.get("propertyGroupName"), p.get("propertyName")): p
+        for p in existing
+    }
+    groups = schema.get("property_groups", {})
+    return {
+        "status": "PASS",
+        "writePerformed": False,
+        "classification": {
+            "exists": class_state["exists"],
+            "missingItemIds": class_state["missingItemIds"],
+            "resolvedItems": len(class_state["items"]),
+        },
+        "propertyGroups": {
+            name: {
+                "properties": len(props),
+                "existingProperties": sum(
+                    (name, prop_name) in existing_key for prop_name in props
+                ),
+            }
+            for name, props in groups.items()
+        },
+        "totalSchemaProperties": sum(len(x) for x in groups.values()),
+        "existingSchemaProperties": sum(
+            (group_name, prop_name) in existing_key
+            for group_name, props in groups.items()
+            for prop_name in props
+        ),
+    }
+
+
+def _property_definition_payload(group_name, prop_name, spec, availability):
+    ptype = spec["type"]
+    type_map = {
+        "string": "string",
+        "boolean": "boolean",
+        "integer": "integer",
+        "length": "length",
+        "number": "number",
+        "enum": "singleEnum",
+    }
+    if ptype not in type_map:
+        raise RuntimeError(
+            f"Unsupported property type in v0.1 builder: {group_name}.{prop_name} -> {ptype}"
+        )
+    out = {
+        "name": prop_name,
+        "description": f"SBIM schema property {group_name}.{prop_name}",
+        "type": type_map[ptype],
+        "isEditable": True,
+        "availability": availability,
+        "group": {"name": group_name},
+    }
+    if ptype == "enum":
+        out["possibleEnumValues"] = [
+            {
+                "enumValue": {
+                    "displayValue": str(value),
+                    "nonLocalizedValue": str(value),
+                }
+            }
+            for value in spec.get("values", [])
+        ]
+    # Deliberately omit defaultValue in schema v0.1.
+    # Defaults such as NOT_CHECKED are applied by Favorites/agent, not asserted globally.
+    return {"propertyDefinition": out}
+
+
+def apply_data_schema(api: Tapir, allow_nonempty=False):
+    """Create SBIM Semantic classification plus scoped Property Groups/Definitions."""
+    before_count = _require_clean_or_explicit(api, allow_nonempty, "data schema write")
+    class_state = ensure_sbim_classification(api)
+    availability = property_availability_map(class_state)
+    schema = load_yaml(DATA_SCHEMA)
+    groups = schema.get("property_groups", {})
+
+    existing_props = api.call("GetAllProperties").get("properties", [])
+    existing_key = {
+        (p.get("propertyGroupName"), p.get("propertyName")): p
+        for p in existing_props
+    }
+    existing_group_names = {
+        p.get("propertyGroupName") for p in existing_props
+        if p.get("propertyGroupName")
+    }
+
+    group_payload = [
+        {"propertyGroup": {
+            "name": group_name,
+            "description": f"SBIM managed property group {group_name}",
+        }}
+        for group_name in groups
+        if group_name not in existing_group_names
+    ]
+    group_result = None
+    if group_payload:
+        group_result = api.call(
+            "CreatePropertyGroups", {"propertyGroups": group_payload}
+        )
+
+    create_defs = []
+    for group_name, props in groups.items():
+        if group_name not in availability:
+            raise RuntimeError(
+                f"No classification availability declared for property group {group_name}"
+            )
+        for prop_name, spec in props.items():
+            if (group_name, prop_name) in existing_key:
+                continue
+            create_defs.append(
+                _property_definition_payload(
+                    group_name, prop_name, spec, availability[group_name]
+                )
+            )
+
+    property_result = None
+    if create_defs:
+        property_result = api.call(
+            "CreatePropertyDefinitions",
+            {"propertyDefinitions": create_defs},
+        )
+
+    after_props = api.call("GetAllProperties").get("properties", [])
+    after_key = {
+        (p.get("propertyGroupName"), p.get("propertyName")): p
+        for p in after_props
+    }
+    missing = [
+        f"{group_name}.{prop_name}"
+        for group_name, props in groups.items()
+        for prop_name in props
+        if (group_name, prop_name) not in after_key
+    ]
+    if missing:
+        raise RuntimeError(
+            f"SBIM property definitions missing after create: {missing}"
+        )
+
+    after_count = len(api.call("GetAllElements").get("elements", []))
+    if after_count != before_count:
+        raise RuntimeError("Unexpected model element count change during data-schema stage.")
+
+    return {
+        "status": "PASS",
+        "classificationSystem": class_state["system"].get("name"),
+        "classificationItems": len(class_state["items"]),
+        "propertyGroupsRequested": len(groups),
+        "propertyDefinitionsCreated": len(create_defs),
+        "totalSchemaPropertiesPresent": sum(len(x) for x in groups.values()),
+        "elementCountUnchanged": True,
+        "nativeGroupResult": group_result,
+        "nativePropertyResult": property_result,
+    }
+
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "action",
-        choices=("validate", "inspect", "plan", "plan-materials", "apply-core", "apply-surfaces", "apply-ready-materials"),
+        choices=("validate", "inspect", "plan", "plan-materials", "plan-data-schema", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema"),
     )
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
     parser.add_argument(
@@ -877,12 +1173,16 @@ def main():
             result = plan_summary(live_inventory(api))
         elif args.action == "plan-materials":
             result = material_dependency_plan(api)
+        elif args.action == "plan-data-schema":
+            result = plan_data_schema(api)
         elif args.action == "apply-core":
             result = apply_safe_core(api, allow_nonempty=args.allow_nonempty)
         elif args.action == "apply-surfaces":
             result = apply_surfaces(api, allow_nonempty=args.allow_nonempty)
         elif args.action == "apply-ready-materials":
             result = apply_ready_building_materials(api, allow_nonempty=args.allow_nonempty)
+        elif args.action == "apply-data-schema":
+            result = apply_data_schema(api, allow_nonempty=args.allow_nonempty)
         else:
             raise AssertionError(args.action)
 
