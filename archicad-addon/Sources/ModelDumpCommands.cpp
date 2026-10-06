@@ -388,3 +388,60 @@ GS::ObjectState GetModelDumpV1Command::Execute (const GS::ObjectState&, GS::Proc
     out.Add ("nativeSeconds", std::chrono::duration<double> (std::chrono::steady_clock::now () - start).count ());
     return out;
 }
+
+
+GetAutoTextsV1Command::GetAutoTextsV1Command () : CommandBase (CommonSchema::NotUsed) {}
+
+GS::String GetAutoTextsV1Command::GetName () const
+{
+    return "GetAutoTextsV1";
+}
+
+GS::Optional<GS::UniString> GetAutoTextsV1Command::GetInputParametersSchema () const
+{
+    return R"({"type":"object","additionalProperties":false})";
+}
+
+GS::Optional<GS::UniString> GetAutoTextsV1Command::GetRawResponseSchema () const
+{
+    return R"({
+        "type":"object",
+        "properties":{
+            "autoTexts":{
+                "type":"array",
+                "items":{
+                    "type":"object",
+                    "properties":{
+                        "description":{"type":"string"},
+                        "key":{"type":"string"},
+                        "value":{"type":"string"}
+                    },
+                    "additionalProperties":false,
+                    "required":["description","key","value"]
+                }
+            }
+        },
+        "additionalProperties":false,
+        "required":["autoTexts"]
+    })";
+}
+
+GS::ObjectState GetAutoTextsV1Command::Execute (const GS::ObjectState&, GS::ProcessControl&) const
+{
+    GS::Array<GS::ArrayFB<GS::UniString, 3>> autoTexts;
+    const GSErrCode err = ACAPI_AutoText_GetAutoTexts (&autoTexts, APIAutoText_All);
+    if (err != NoError)
+        return CreateErrorResponse (err, "GetAutoTexts");
+
+    GS::ObjectState out;
+    const auto& list = out.AddList<GS::ObjectState> ("autoTexts");
+    for (const auto& item : autoTexts) {
+        if (item.GetSize () < 3)
+            continue;
+        list (GS::ObjectState (
+            "description", item[0],
+            "key", item[1],
+            "value", item[2]));
+    }
+    return out;
+}
