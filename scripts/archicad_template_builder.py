@@ -40,6 +40,7 @@ EVIDENCE_ROOT = Path(os.environ.get(
 LAYER_SPEC = SPEC / "layer-registry-v0.1.yaml"
 GRAPHICS_SPEC = SPEC / "graphics-registry-v0.1.yaml"
 BASELINE_SPEC = SPEC / "project-baseline-v0.1.yaml"
+ATTRIBUTE_REGISTRY = SPEC / "attribute-registry-v0.1.yaml"
 
 SAFE_CORE_COMMANDS = {
     "GetProjectInfo", "GetProjectInfoFields", "CreateProjectInfoFields",
@@ -539,11 +540,84 @@ def apply_safe_core(api: Tapir, allow_nonempty=False):
     return outcome
 
 
+
+def material_dependency_plan(api: Tapir):
+    """Read-only resolution of Building Material dependencies by canonical name."""
+    registry = load_yaml(ATTRIBUTE_REGISTRY)
+    fill_headers = attribute_headers(api, "Fill")
+    surface_headers = attribute_headers(api, "Surface")
+    bm_headers = attribute_headers(api, "BuildingMaterial")
+
+    fills = index_headers(fill_headers)
+    surfaces = index_headers(surface_headers)
+    existing_bm = index_headers(bm_headers)
+
+    materials = []
+    ready = 0
+    for item in registry.get("building_materials", []):
+        fill_name = item.get("cut_fill")
+        surface_name = item.get("surface")
+        blockers = []
+        if fill_name and fill_name not in fills:
+            blockers.append({"type": "missing_fill", "name": fill_name})
+        if surface_name and surface_name not in surfaces:
+            blockers.append({"type": "missing_surface", "name": surface_name})
+
+        state = "EXISTS" if item["name"] in existing_bm else (
+            "READY_FOR_CREATE" if not blockers else "BLOCKED_DEPENDENCY"
+        )
+        if state == "READY_FOR_CREATE":
+            ready += 1
+
+        materials.append({
+            "id": item.get("id"),
+            "name": item["name"],
+            "state": state,
+            "draftPriority": item.get("draft_priority"),
+            "collision": item.get("collision"),
+            "cutFill": {
+                "name": fill_name,
+                "index": fills.get(fill_name, {}).get("index") if fill_name else None,
+            },
+            "surface": {
+                "name": surface_name,
+                "index": surfaces.get(surface_name, {}).get("index") if surface_name else None,
+            },
+            "blockers": blockers,
+        })
+
+    required_fills = sorted({
+        x.get("cut_fill") for x in registry.get("building_materials", [])
+        if x.get("cut_fill")
+    })
+    required_surfaces = sorted({
+        x.get("surface") for x in registry.get("building_materials", [])
+        if x.get("surface")
+    })
+    return {
+        "status": "PASS",
+        "writePerformed": False,
+        "counts": {
+            "materials": len(materials),
+            "alreadyExisting": sum(x["state"] == "EXISTS" for x in materials),
+            "readyForCreate": ready,
+            "blockedDependency": sum(
+                x["state"] == "BLOCKED_DEPENDENCY" for x in materials
+            ),
+            "requiredFills": len(required_fills),
+            "requiredSurfaces": len(required_surfaces),
+        },
+        "missingFills": [x for x in required_fills if x not in fills],
+        "missingSurfaces": [x for x in required_surfaces if x not in surfaces],
+        "materials": materials,
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "action",
-        choices=("validate", "inspect", "plan", "apply-core"),
+        choices=("validate", "inspect", "plan", "plan-materials", "apply-core"),
     )
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
     parser.add_argument(
@@ -569,6 +643,8 @@ def main():
             result = live_inventory(api)
         elif args.action == "plan":
             result = plan_summary(live_inventory(api))
+        elif args.action == "plan-materials":
+            result = material_dependency_plan(api)
         elif args.action == "apply-core":
             result = apply_safe_core(api, allow_nonempty=args.allow_nonempty)
         else:
