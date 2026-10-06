@@ -30,14 +30,26 @@ Confirmed in the operator run:
   `CDD32EF6-18F1-4413-BBAE-E46CB9569582`.
 - The fixture report proved two added Wall GUIDs and no automatic retry.
 
-The subsequent real `S4-01` command was started, but its final completion JSON has not
-yet been captured in this repository status. Therefore **S4-01 is not claimed PASS here**.
+The real `S4-01` run `live-20261007-001/S4-01` completed successfully:
+
+- scenario status: `PASS`;
+- job final status: `VERIFIED`;
+- physical mutation calls: `2`;
+- duplicate mutation count: `0`;
+- confirmed native responses: `2`;
+- Audit Pack: `PASS`;
+- iteration 1 created `3534BB8A-898C-4F39-B739-03F2C74DEB96` from source
+  `C6A1776C-BEC4-4758-9827-D23CAFCEF7B2` at +1.0 m;
+- iteration 2 used that exact created GUID as its source and created
+  `BBEE36AC-5A89-4797-AFAC-F03CF75A5321` at +0.5 m;
+- both joins were factual `jointDistance = 0.0`;
+- protected-main runtime guard: PASS.
 
 ## Stage 4 required live scenarios
 
 | Scenario | Purpose | Current status |
 | --- | --- | --- |
-| S4-01 | Happy two-segment regression | FINAL VERDICT NOT CAPTURED |
+| S4-01 | Happy two-segment regression | **LIVE PASS / VERIFIED** |
 | S4-02 | Stale plan rejected before execution, then replan | NOT VERIFIED |
 | S4-03 | Lost response after physical mutation; reconcile applied without duplicate | NOT VERIFIED |
 | S4-04 | Reconciled not-applied -> fresh observation/replan | OFFLINE PASS only |
@@ -67,8 +79,7 @@ Because `closed_loop/live_wall.py` changed to implement this correction, the pre
 observed `hardening-offline-006` proof is now historical for the prior source state. A new
 source-pinned offline proof is required before the next accepted live S4 run.
 
-The remaining live gate is then: fresh offline proof -> S4-01 -> S4-02/S4-03/S4-06, with
-all required criteria and Audit Packs passing.
+The remaining live gate is now: S4-02 -> S4-03 -> S4-06, with all required criteria and Audit Packs passing.
 
 ## What is frozen
 
