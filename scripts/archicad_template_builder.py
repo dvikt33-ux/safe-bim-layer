@@ -1527,6 +1527,276 @@ def plan_navigator(api: Tapir):
 
 
 
+
+def _layoutbook_items(api: Tapir):
+    tree = api.call(
+        "GetNavigatorItemTree", {"navigatorMapId": "LayoutBook"}
+    ).get("navigatorItemTree", {})
+    return _collect_navigator_items(tree)
+
+
+def _layout_db_id_from_nav(api: Tapir, nav_item):
+    result = api.call(
+        "GetDatabaseIdFromNavigatorItemId",
+        {"navigatorItemIds": [{"navigatorItemId": nav_item["navigatorItemId"]}]},
+    )
+    rows = result.get("databases", [])
+    if len(rows) != 1 or "databaseId" not in rows[0]:
+        raise RuntimeError(
+            f"Could not resolve database for navigator item "
+            f"{nav_item.get('name')}: {result}"
+        )
+    return rows[0]["databaseId"]
+
+
+def _layout_settings_from_nav(api: Tapir, nav_item):
+    db_id = _layout_db_id_from_nav(api, nav_item)
+    result = api.call(
+        "GetLayoutSettings",
+        {"layoutDatabaseIds": [{"databaseId": db_id}]},
+    )
+    rows = result.get("layoutSettings", [])
+    if len(rows) != 1:
+        raise RuntimeError(
+            f"Could not read layout settings for {nav_item.get('name')}: {result}"
+        )
+    return db_id, rows[0]
+
+
+def plan_master_layouts(api: Tapir):
+    """Read-only plan for exact A4-A0 Master Layout shells."""
+    registry = load_yaml(MASTER_LAYOUT_FORM3)
+    expected = registry.get("sheet_formats_mm") or {}
+    items = _layoutbook_items(api)
+    masters = {
+        x.get("name"): x
+        for x in items
+        if x.get("type") == "MasterLayoutItem" and x.get("name")
+    }
+    layouts = {
+        x.get("name"): x
+        for x in items
+        if x.get("type") == "LayoutItem" and x.get("name")
+    }
+
+    plan = []
+    for name, dims in expected.items():
+        width, height = [float(x) for x in dims]
+        temp_name = f"__SBIM_MASTER_SEED_{name}"
+        row = {
+            "name": name,
+            "expectedSizeMm": [width, height],
+            "tempSeedLayoutName": temp_name,
+            "tempSeedLayoutAlreadyExists": temp_name in layouts,
+        }
+        existing = masters.get(name)
+        if existing is None:
+            row["state"] = (
+                "BLOCKED_RESIDUAL_TEMP_LAYOUT"
+                if temp_name in layouts else "READY_FOR_CREATE"
+            )
+        else:
+            db_id, settings = _layout_settings_from_nav(api, existing)
+            actual = [
+                float(settings.get("horizontalSize", -1)),
+                float(settings.get("verticalSize", -1)),
+            ]
+            row["databaseId"] = db_id
+            row["actualSizeMm"] = actual
+            row["sizeMatches"] = all(
+                math.isclose(a, b, abs_tol=0.1)
+                for a, b in zip(actual, [width, height])
+            )
+            row["state"] = "EXISTS_OK" if row["sizeMatches"] else "BLOCKED_SIZE_MISMATCH"
+        plan.append(row)
+
+    return {
+        "status": "PASS",
+        "writePerformed": False,
+        "units": "mm",
+        "source": "Graphisoft API_LayoutInfo",
+        "counts": {
+            "expectedMasters": len(expected),
+            "existingOk": sum(x["state"] == "EXISTS_OK" for x in plan),
+            "readyForCreate": sum(x["state"] == "READY_FOR_CREATE" for x in plan),
+            "blocked": sum(x["state"].startswith("BLOCKED_") for x in plan),
+        },
+        "masters": plan,
+        "geometryDeferred": True,
+        "autotextDeferred": True,
+    }
+
+
+def apply_master_layout_shell(api: Tapir, allow_nonempty=False):
+    """Create exact-size empty Master Layout shells, without titleblock geometry.
+
+    Missing masters are created through a temporary seed Layout because the
+    current Tapir command creates a Master Layout as part of CreateLayout.
+    The Master size is then set/read back in millimeters and the temporary
+    Layout is deleted. Existing same-name masters are never resized silently.
+    """
+    validation = validate_specs()
+    if validation["status"] != "PASS":
+        raise RuntimeError(f"Spec validation failed: {validation['errors']}")
+
+    before_count = len(api.call("GetAllElements").get("elements", []))
+    if before_count and not allow_nonempty:
+        raise RuntimeError(
+            f"Refusing Master Layout shell write: current project contains "
+            f"{before_count} model elements. Use a clean candidate project or "
+            f"pass --allow-nonempty explicitly."
+        )
+
+    initial_plan = plan_master_layouts(api)
+    blocked = [
+        x for x in initial_plan["masters"]
+        if x["state"].startswith("BLOCKED_")
+    ]
+    if blocked:
+        raise RuntimeError(
+            "Master Layout shell preflight blocked. Existing same-name masters "
+            "are not modified automatically and residual seed layouts are not "
+            f"deleted automatically: {blocked}"
+        )
+
+    created = []
+    registry = load_yaml(MASTER_LAYOUT_FORM3)
+    expected = registry.get("sheet_formats_mm") or {}
+
+    for name, dims in expected.items():
+        current_plan = plan_master_layouts(api)
+        row = next(x for x in current_plan["masters"] if x["name"] == name)
+        if row["state"] == "EXISTS_OK":
+            continue
+        if row["state"] != "READY_FOR_CREATE":
+            raise RuntimeError(f"{name}: unexpected state before create: {row}")
+
+        width, height = [float(x) for x in dims]
+        temp_name = f"__SBIM_MASTER_SEED_{name}"
+
+        create_result = api.call(
+            "CreateLayout",
+            {
+                "layoutsData": [{
+                    "masterLayoutName": name,
+                    "layoutName": temp_name,
+                    "layoutParameters": {
+                        "horizontalSize": width,
+                        "verticalSize": height,
+                        "doNotIncludeInNumbering": True,
+                    },
+                }]
+            },
+        )
+        if not create_result.get("databases"):
+            raise RuntimeError(f"{name}: CreateLayout returned no database: {create_result}")
+
+        items = _layoutbook_items(api)
+        master = next(
+            (x for x in items if x.get("type") == "MasterLayoutItem"
+             and x.get("name") == name),
+            None,
+        )
+        temp_layout = next(
+            (x for x in items if x.get("type") == "LayoutItem"
+             and x.get("name") == temp_name),
+            None,
+        )
+        if master is None or temp_layout is None:
+            raise RuntimeError(
+                f"{name}: Master or temporary Layout missing after CreateLayout."
+            )
+
+        master_db, before_settings = _layout_settings_from_nav(api, master)
+        set_result = api.call(
+            "SetLayoutSettings",
+            {
+                "layoutsData": [{
+                    "layoutDatabaseId": master_db,
+                    "horizontalSize": width,
+                    "verticalSize": height,
+                }]
+            },
+        )
+        exec_rows = set_result.get("executionResults", [])
+        if len(exec_rows) != 1 or not exec_rows[0].get("success"):
+            raise RuntimeError(
+                f"{name}: failed to set Master Layout size: {set_result}"
+            )
+
+        _, after_settings = _layout_settings_from_nav(api, master)
+        actual = [
+            float(after_settings.get("horizontalSize", -1)),
+            float(after_settings.get("verticalSize", -1)),
+        ]
+        if not all(
+            math.isclose(a, b, abs_tol=0.1)
+            for a, b in zip(actual, [width, height])
+        ):
+            raise RuntimeError(
+                f"{name}: Master Layout size read-back mismatch: "
+                f"expected={[width, height]}, actual={actual}"
+            )
+
+        delete_result = api.call(
+            "DeleteNavigatorItems",
+            {"navigatorItemIds": [{
+                "navigatorItemId": temp_layout["navigatorItemId"]
+            }]},
+        )
+        delete_rows = delete_result.get("executionResults", [])
+        if len(delete_rows) != 1 or not delete_rows[0].get("success"):
+            raise RuntimeError(
+                f"{name}: Master created, but temporary Layout cleanup failed: "
+                f"{delete_result}"
+            )
+
+        created.append({
+            "name": name,
+            "sizeMm": actual,
+            "masterSettingsBeforeSizeCorrection": {
+                "horizontalSize": before_settings.get("horizontalSize"),
+                "verticalSize": before_settings.get("verticalSize"),
+            },
+        })
+
+    final_plan = plan_master_layouts(api)
+    final_bad = [
+        x for x in final_plan["masters"]
+        if x["state"] != "EXISTS_OK"
+    ]
+    if final_bad:
+        raise RuntimeError(f"Master Layout final read-back failed: {final_bad}")
+
+    after_count = len(api.call("GetAllElements").get("elements", []))
+    if after_count != before_count:
+        raise RuntimeError(
+            "Unexpected model element count change during Master Layout shell stage."
+        )
+
+    residual_items = _layoutbook_items(api)
+    residual_seed = [
+        x.get("name") for x in residual_items
+        if x.get("type") == "LayoutItem"
+        and str(x.get("name", "")).startswith("__SBIM_MASTER_SEED_")
+    ]
+    if residual_seed:
+        raise RuntimeError(
+            f"Residual temporary Master seed Layouts remain: {residual_seed}"
+        )
+
+    return {
+        "status": "PASS",
+        "writePerformed": bool(created),
+        "createdMasters": created,
+        "allMasters": final_plan["masters"],
+        "modelElementCountUnchanged": True,
+        "titleblockGeometryCreated": False,
+        "autotextCreated": False,
+        "nextGate": "live_masterlayout_window_line_text_test",
+    }
+
+
 def apply_navigator_shell(api: Tapir, allow_nonempty=False):
     """Create only safe Navigator containers: View folders and Layout subsets.
 
@@ -1732,7 +2002,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "action",
-        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell"),
+        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell"),
     )
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
     parser.add_argument(
@@ -1766,6 +2036,8 @@ def main():
             result = plan_data_schema(api)
         elif args.action == "plan-navigator":
             result = plan_navigator(api)
+        elif args.action == "plan-master-layouts":
+            result = plan_master_layouts(api)
         elif args.action == "apply-core":
             result = apply_safe_core(api, allow_nonempty=args.allow_nonempty)
         elif args.action == "apply-surfaces":
@@ -1776,6 +2048,8 @@ def main():
             result = apply_data_schema(api, allow_nonempty=args.allow_nonempty)
         elif args.action == "apply-navigator-shell":
             result = apply_navigator_shell(api, allow_nonempty=args.allow_nonempty)
+        elif args.action == "apply-master-layout-shell":
+            result = apply_master_layout_shell(api, allow_nonempty=args.allow_nonempty)
         else:
             raise AssertionError(args.action)
 
