@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "1.0",
+  "bundleId": "CLOSED_LOOP_MIGRATION_BUNDLE_1",
+  "status": "SPEC_READY",
+  "prerequisite": "CLOSED_LOOP_STAGE4_VERIFIED",
+  "globalRules": [
+    "TYPED_REQUEST_ONLY",
+    "FRESH_OBSERVE_BEFORE_PLAN",
+    "PREWRITE_FINGERPRINT_CHECK",
+    "CHECKPOINT_BEFORE_DISPATCH",
+    "ONE_DISPATCH_PER_ATTEMPT",
+    "FACTUAL_READBACK_REQUIRED",
+    "NO_BLIND_RETRY",
+    "AUDIT_PACK_REQUIRED",
+    "PREDICTION_IS_NOT_STATE"
+  ],
+  "capabilities": [
+    {
+      "id": "WINDOW_NATIVE_HOSTED",
+      "migrationStatus": "READY",
+      "nativeCommand": "CreateWindows",
+      "sources": [
+        "archicad-capability-registry/tests/smoke/native_window_door_continuous_wall.py",
+        "feature/working-archicad-mvp/scripts/archicad_write_cycles/hosted_window_cycle.py",
+        "feature/working-archicad-mvp/scripts/archicad_executor.py"
+      ],
+      "typedFields": [
+        "hostWallGuid",
+        "centerOffset",
+        "sillHeight",
+        "width",
+        "height",
+        "favoriteName?"
+      ],
+      "requiredReadback": [
+        "type",
+        "hostGuid",
+        "homeStory",
+        "positionReference",
+        "body",
+        "hostWallAfter"
+      ],
+      "passInvariants": [
+        "type=Window",
+        "hostMatches",
+        "centerOffsetMatches",
+        "hostClosed",
+        "hostOuterEnvelopeUnchanged",
+        "apertureTopologyEvidence",
+        "noUnexpectedMaterialChange"
+      ]
+    },
+    {
+      "id": "DOOR_NATIVE_HOSTED",
+      "migrationStatus": "READY",
+      "nativeCommand": "CreateDoors",
+      "sources": [
+        "archicad-capability-registry/tests/smoke/native_window_door_continuous_wall.py",
+        "arena/fix-house-offline-audit-f7d38af:safe_bim_layer.py::insert_door"
+      ],
+      "typedFields": [
+        "hostWallGuid",
+        "centerOffset",
+        "sillHeight",
+        "width",
+        "height",
+        "favoriteName?"
+      ],
+      "requiredReadback": [
+        "type",
+        "owner/host",
+        "floor/story",
+        "supported position/dimension fields"
+      ],
+      "passInvariants": [
+        "type=Door",
+        "hostMatches",
+        "hostWallRemainsSingle",
+        "noMorphFallback",
+        "noUnexpectedHostMutation"
+      ]
+    },
+    {
+      "id": "SLAB_BASIC",
+      "migrationStatus": "READY",
+      "nativeCommand": "CreateSlabs",
+      "sources": [
+        "archicad-capability-registry/tests/smoke/basic_slab_favorite.py",
+        "feature/working-archicad-mvp/scripts/archicad_write_cycles/hosted_slab_cycle.py",
+        "arena/fix-house-offline-audit-f7d38af:safe_bim_layer.py::create_basic_slab"
+      ],
+      "typedFields": [
+        "floorIndex",
+        "referenceLevelAbsoluteZ",
+        "thickness",
+        "referencePlaneLocation",
+        "polygonXY",
+        "favoriteName"
+      ],
+      "forbiddenCreateFields": [
+        "buildingMaterialId"
+      ],
+      "requiredReadback": [
+        "type",
+        "floorIndex",
+        "details.level",
+        "details.thickness",
+        "details.structureType",
+        "details.polygonOutline"
+      ],
+      "passInvariants": [
+        "type=Slab",
+        "structureType=Basic",
+        "thicknessMatches",
+        "polygonMatches",
+        "absoluteReferenceZMatches"
+      ]
+    },
+    {
+      "id": "ZONE_NATIVE",
+      "migrationStatus": "RECIPE_EXTRACTION_REQUIRED",
+      "nativeCommand": "CreateZones",
+      "sources": [
+        "research/archicad-full-capability-audit-20260928 W1/R4 live evidence"
+      ],
+      "evidence": [
+        "create=yes",
+        "exactTypePresence=yes",
+        "detailedReadback=yes"
+      ],
+      "blocker": "Dedicated original W1 CreateZones request payload was not located in the published branch during revision.",
+      "nextAction": "Locate raw W1 request first; only if unavailable reconstruct one isolated pinned-schema smoke.",
+      "passInvariants": [
+        "type=Zone",
+        "floorStoryMatches",
+        "geometryMatchesWhenSupported",
+        "factualAreaOnly",
+        "planningSpaceProvenanceRetained"
+      ]
+    }
+  ],
+  "completionGate": [
+    "all four capabilities have modern typed operations",
+    "all four have current live regression evidence",
+    "all four use Stage4 runtime semantics",
+    "all four produce Audit Packs",
+    "no migrated acceptance contract is weaker than its proven predecessor"
+  ]
+}
