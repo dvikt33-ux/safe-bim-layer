@@ -40,6 +40,18 @@ Create only Building Materials whose live Fill + Surface dependencies are alread
 python scripts/archicad_template_builder.py apply-ready-materials --out template-materials.json
 ```
 
+Plan the SBIM classification/property schema using native Archicad classification discovery (read-only):
+
+```powershell
+python scripts/archicad_template_builder.py plan-data-schema --out template-data-plan.json
+```
+
+Create the secondary `SBIM Semantic` Classification System and scoped SBIM Property Groups/Definitions:
+
+```powershell
+python scripts/archicad_template_builder.py apply-data-schema --out template-data-schema.json
+```
+
 The Building Material command never forces blocked dependencies. Specialized GOST cut fills remain blocked until their geometry is visually verified and calibrated in Archicad.
 
 Apply safe core to a CLEAN candidate project:
