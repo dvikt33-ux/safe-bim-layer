@@ -1964,6 +1964,19 @@ def apply_master_layout_smoke(api: Tapir, allow_nonempty=False):
             f"A4_P activation did not produce MasterLayout window: {current}"
         )
 
+    try:
+        api.call("GetCurrent2DDocumentV1")
+    except Exception as exc:
+        return {
+            "status": "BLOCKED_ADDON_REBUILD",
+            "writePerformed": False,
+            "reason": (
+                "GetCurrent2DDocumentV1 is required for exact Line/Text/AutoText "
+                "read-back and is available after rebuilding/loading the overlay."
+            ),
+            "error": str(exc),
+        }
+
     created_ids = []
     cleanup_result = None
     return_result = None
@@ -2006,7 +2019,7 @@ def apply_master_layout_smoke(api: Tapir, allow_nonempty=False):
             {
                 "textsData": [{
                     "coordinate": {"x": 0.020, "y": 0.040, "z": 0.0},
-                    "text": "<LAYOUTNAME>",
+                    "text": "<BUILDING_NAME>",
                     "height": 2.5,
                     "justification": "Left",
                 }]
@@ -2061,6 +2074,64 @@ def apply_master_layout_smoke(api: Tapir, allow_nonempty=False):
             },
         )
 
+        native_2d = api.call("GetCurrent2DDocumentV1")
+        native_lines = {
+            x.get("guid"): x for x in native_2d.get("lines", []) if x.get("guid")
+        }
+        native_texts = {
+            x.get("guid"): x for x in native_2d.get("texts", []) if x.get("guid")
+        }
+        line_read = native_lines.get(line_id.get("guid"))
+        text_read = native_texts.get(text_id.get("guid"))
+        auto_read = native_texts.get(auto_id.get("guid"))
+        if line_read is None or text_read is None or auto_read is None:
+            raise RuntimeError(
+                "Native 2D reader could not find all sacrificial elements: "
+                f"line={line_read is not None}, text={text_read is not None}, "
+                f"auto={auto_read is not None}"
+            )
+
+        def coord_matches(actual, expected):
+            return (
+                actual is not None
+                and math.isclose(float(actual.get("x", 999)), expected[0], abs_tol=1e-6)
+                and math.isclose(float(actual.get("y", 999)), expected[1], abs_tol=1e-6)
+            )
+
+        if not coord_matches(line_read.get("begCoordinate"), (0.020, 0.020)):
+            raise RuntimeError(f"Line begin coordinate mismatch: {line_read}")
+        if not coord_matches(line_read.get("endCoordinate"), (0.060, 0.020)):
+            raise RuntimeError(f"Line end coordinate mismatch: {line_read}")
+        if not coord_matches(text_read.get("position"), (0.020, 0.030)):
+            raise RuntimeError(f"Static Text coordinate mismatch: {text_read}")
+        if not coord_matches(auto_read.get("position"), (0.020, 0.040)):
+            raise RuntimeError(f"AutoText coordinate mismatch: {auto_read}")
+        if not math.isclose(float(text_read.get("heightMm", -1)), 2.5, abs_tol=0.01):
+            raise RuntimeError(f"Static Text height mismatch: {text_read}")
+        if not math.isclose(float(auto_read.get("heightMm", -1)), 2.5, abs_tol=0.01):
+            raise RuntimeError(f"AutoText height mismatch: {auto_read}")
+        if text_read.get("rawText") != "__SBIM_MASTER_TEXT_SMOKE__":
+            raise RuntimeError(f"Static Text raw content mismatch: {text_read}")
+        if text_read.get("interpretedText") != "__SBIM_MASTER_TEXT_SMOKE__":
+            raise RuntimeError(f"Static Text interpreted content mismatch: {text_read}")
+        if auto_read.get("rawText") != "<BUILDING_NAME>":
+            raise RuntimeError(f"AutoText raw token mismatch: {auto_read}")
+
+        expected_building_name = (
+            autotext.get("resolvedRequired", {})
+            .get("BUILDING_NAME", {})
+            .get("value")
+        )
+        if expected_building_name is None:
+            raise RuntimeError(
+                "BUILDING_NAME passed registry presence but returned no value."
+            )
+        if auto_read.get("interpretedText") != expected_building_name:
+            raise RuntimeError(
+                "AutoText interpreted value mismatch: "
+                f"expected={expected_building_name!r}, actual={auto_read.get('interpretedText')!r}"
+            )
+
         return_result = {
             "status": "PASS",
             "writePerformed": True,
@@ -2085,9 +2156,16 @@ def apply_master_layout_smoke(api: Tapir, allow_nonempty=False):
                 "autoTextAnchorMm": [20.0, 40.0],
                 "textHeightMm": 2.5,
             },
-            "autoTextToken": "<LAYOUTNAME>",
-            "renderedAutoTextExpansionVerified": False,
-            "nextGate": "verify_rendered_autotext_and_exact_2d_geometry",
+            "autoTextToken": "<BUILDING_NAME>",
+            "renderedAutoTextExpansionVerified": True,
+            "exact2DReadBackVerified": True,
+            "layoutScopedAutoTextVerified": False,
+            "native2DReadBack": {
+                "line": line_read,
+                "staticText": text_read,
+                "autoText": auto_read,
+            },
+            "nextGate": "layout_scoped_autotext_context_test",
         }
     finally:
         if created_ids:

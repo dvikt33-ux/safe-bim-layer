@@ -136,8 +136,10 @@ This activates `A4_P` and creates three sacrificial document elements:
 
 - one 40 mm Line from 20/20 mm to 60/20 mm;
 - one static Text at 20/30 mm;
-- one Text containing `<LAYOUTNAME>` at 20/40 mm.
+- one Text containing `<BUILDING_NAME>` at 20/40 mm.
 
 The test verifies that the created GUIDs are present in the `A4_P` Master Layout database and then deletes all three elements in a `finally` cleanup path.
 
-A PASS proves database targeting, creation, GUID read-back and cleanup. It deliberately does **not** yet claim that rendered AutoText expansion or exact 2D geometry has been read back from Archicad. Those remain the final gate before full Form 3 drawing.
+A PASS now proves database targeting, exact Line/Text coordinates, 2.5 mm text height, raw text content, interpreted project-level AutoText value, GUID read-back and cleanup via the native `GetCurrent2DDocumentV1` overlay command.
+
+The remaining AutoText gate is **layout-scoped context** such as `<LAYOUTNAME>`. That must be tested on a sacrificial real Layout using `A4_P`, because a Master Layout itself is not a concrete sheet and therefore is not a valid final proof of layout-specific values.

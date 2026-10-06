@@ -445,3 +445,116 @@ GS::ObjectState GetAutoTextsV1Command::Execute (const GS::ObjectState&, GS::Proc
     }
     return out;
 }
+
+
+namespace {
+GSErrCode ReadTextContentWithAutoTextMode (const API_Guid& guid, bool interpreted, GS::UniString& content)
+{
+    bool originalFlag = false;
+    GSErrCode err = ACAPI_AutoText_GetAutoTextFlag (&originalFlag);
+    if (err != NoError)
+        return err;
+
+    bool requestedFlag = interpreted;
+    err = ACAPI_AutoText_ChangeAutoTextFlag (&requestedFlag);
+    if (err != NoError)
+        return err;
+
+    const GS::OnExit restoreFlag ([&] () {
+        bool restore = originalFlag;
+        ACAPI_AutoText_ChangeAutoTextFlag (&restore);
+    });
+
+    API_ElementMemo memo = {};
+    const GS::OnExit disposeMemo ([&] () { ACAPI_DisposeElemMemoHdls (&memo); });
+    err = ACAPI_Element_GetMemo (
+        guid,
+        &memo,
+        APIMemoMask_TextContent | APIMemoMask_Paragraph);
+    if (err != NoError)
+        return err;
+
+    content = memo.textContent != nullptr ? *memo.textContent : GS::EmptyUniString;
+    return NoError;
+}
+}
+
+GetCurrent2DDocumentV1Command::GetCurrent2DDocumentV1Command () : CommandBase (CommonSchema::NotUsed) {}
+
+GS::String GetCurrent2DDocumentV1Command::GetName () const
+{
+    return "GetCurrent2DDocumentV1";
+}
+
+GS::Optional<GS::UniString> GetCurrent2DDocumentV1Command::GetInputParametersSchema () const
+{
+    return R"({"type":"object","additionalProperties":false})";
+}
+
+GS::Optional<GS::UniString> GetCurrent2DDocumentV1Command::GetRawResponseSchema () const
+{
+    return R"({"type":"object"})";
+}
+
+GS::ObjectState GetCurrent2DDocumentV1Command::Execute (const GS::ObjectState&, GS::ProcessControl&) const
+{
+    GS::ObjectState out;
+    out.Add ("scope", "current_database");
+    out.Add ("coordinateUnit", "m");
+    out.Add ("textHeightUnit", "mm");
+
+    const auto& linesOut = out.AddList<GS::ObjectState> ("lines");
+    GS::Array<API_Guid> lineIds;
+    GSErrCode err = ACAPI_Element_GetElemList (API_LineID, &lineIds);
+    if (err != NoError)
+        return CreateErrorResponse (err, "GetElemList(Line)");
+
+    for (const API_Guid& guid : lineIds) {
+        API_Element element = {};
+        element.header.guid = guid;
+        err = ACAPI_Element_Get (&element);
+        if (err != NoError)
+            return CreateErrorResponse (err, "GetElement(Line)");
+        linesOut (GS::ObjectState (
+            "guid", APIGuidToString (guid),
+            "begCoordinate", XY (element.line.begC),
+            "endCoordinate", XY (element.line.endC),
+            "penIndex", static_cast<Int32> (element.line.linePen),
+            "roomSeparator", element.line.roomSeparator));
+    }
+
+    const auto& textsOut = out.AddList<GS::ObjectState> ("texts");
+    GS::Array<API_Guid> textIds;
+    err = ACAPI_Element_GetElemList (API_TextID, &textIds);
+    if (err != NoError)
+        return CreateErrorResponse (err, "GetElemList(Text)");
+
+    for (const API_Guid& guid : textIds) {
+        API_Element element = {};
+        element.header.guid = guid;
+        err = ACAPI_Element_Get (&element);
+        if (err != NoError)
+            return CreateErrorResponse (err, "GetElement(Text)");
+
+        GS::UniString rawText;
+        err = ReadTextContentWithAutoTextMode (guid, false, rawText);
+        if (err != NoError)
+            return CreateErrorResponse (err, "GetTextMemo(raw)");
+
+        GS::UniString interpretedText;
+        err = ReadTextContentWithAutoTextMode (guid, true, interpretedText);
+        if (err != NoError)
+            return CreateErrorResponse (err, "GetTextMemo(interpreted)");
+
+        textsOut (GS::ObjectState (
+            "guid", APIGuidToString (guid),
+            "position", XY (element.text.loc),
+            "heightMm", element.text.size,
+            "angleRad", element.text.angle,
+            "penIndex", static_cast<Int32> (element.text.pen),
+            "rawText", rawText,
+            "interpretedText", interpretedText));
+    }
+
+    return out;
+}

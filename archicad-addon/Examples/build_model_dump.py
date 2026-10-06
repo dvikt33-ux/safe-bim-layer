@@ -58,7 +58,8 @@ def overlay_registration(addon_source):
     model_register = ('        err |= RegisterCommand<GetModelDumpV1Command> (elementCommands, "model-dump-v1", '
                       '"Dump all available regenerated resultant 3D bodies, stories, native bindings and effective face materials.");')
     if model_register not in text:
-        group_anchor = "        AddCommandGroup (elementCommands);"
+        group_anchor = "        err |= RegisterCommand<GetCurrent2DDocumentV1Command> (elementCommands, "document-2d-v1", "Read current-database Line and Text geometry/content, including raw and interpreted AutoText, without modifying project elements.");
+        AddCommandGroup (elementCommands);"
         if text.count(group_anchor) != 1:
             raise RuntimeError("Could not locate the unique elementCommands registration group")
         text = text.replace(group_anchor, model_register + "\n" + group_anchor, 1)
