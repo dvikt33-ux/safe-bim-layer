@@ -1,0 +1,35 @@
+name: Build details v2.4 POROTHERM rebase
+
+on:
+  push:
+    branches:
+      - feature/working-archicad-mvp
+    paths:
+      - details/tools/build_v24_porotherm.py
+      - .github/workflows/build-details-v24-porotherm.yml
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/working-archicad-mvp
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build and audit v2.4
+        run: python details/tools/build_v24_porotherm.py
+      - name: Commit generated v2.4
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add details
+          git diff --cached --stat
+          git diff --cached --quiet && exit 0
+          git commit -m "Publish construction detail machine library v2.4 [details-v2.4]"
+          git push origin HEAD:feature/working-archicad-mvp
