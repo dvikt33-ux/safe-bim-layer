@@ -47,23 +47,30 @@ def overlay_registration(addon_source):
     addon_source = Path(addon_source)
     main_cpp = addon_source / "Sources" / "AddOnMain.cpp"
     text = main_cpp.read_text(encoding="utf-8")
+
     include_line = '#include "ModelDumpCommands.hpp"'
-    register_line = ('        err |= RegisterCommand<GetModelDumpV1Command> (elementCommands, "model-dump-v1", '
-                    '"Dump all available regenerated resultant 3D bodies, stories, native bindings and effective face materials.");')
-    has_include = include_line in text
-    has_register = register_line in text
-    if has_include != has_register:
-        raise RuntimeError("Tapir AddOnMain.cpp contains a partial Model Dump registration; inspect the overlay source")
-    if has_include:
-        return
     include_anchor = '#include "ElementCommands.hpp"\n'
-    if text.count(include_anchor) != 1:
-        raise RuntimeError("Could not locate the unique ElementCommands include in AddOnMain.cpp")
-    text = text.replace(include_anchor, include_anchor + include_line + "\n", 1)
-    group_anchor = "        AddCommandGroup (elementCommands);"
-    if text.count(group_anchor) != 1:
-        raise RuntimeError("Could not locate the unique elementCommands registration group")
-    text = text.replace(group_anchor, register_line + "\n" + group_anchor, 1)
+    if include_line not in text:
+        if text.count(include_anchor) != 1:
+            raise RuntimeError("Could not locate the unique ElementCommands include in AddOnMain.cpp")
+        text = text.replace(include_anchor, include_anchor + include_line + "\n", 1)
+
+    model_register = ('        err |= RegisterCommand<GetModelDumpV1Command> (elementCommands, "model-dump-v1", '
+                      '"Dump all available regenerated resultant 3D bodies, stories, native bindings and effective face materials.");')
+    if model_register not in text:
+        group_anchor = "        AddCommandGroup (elementCommands);"
+        if text.count(group_anchor) != 1:
+            raise RuntimeError("Could not locate the unique elementCommands registration group")
+        text = text.replace(group_anchor, model_register + "\n" + group_anchor, 1)
+
+    autotext_register = ('        err |= RegisterCommand<GetAutoTextsV1Command> (projectCommands, "autotext-v1", '
+                         '"Enumerate current Archicad AutoText description/key/value triplets without modifying the project.");')
+    if autotext_register not in text:
+        project_anchor = "        AddCommandGroup (projectCommands);"
+        if text.count(project_anchor) != 1:
+            raise RuntimeError("Could not locate the unique projectCommands registration group")
+        text = text.replace(project_anchor, autotext_register + "\n" + project_anchor, 1)
+
     main_cpp.write_text(text, encoding="utf-8")
 
 
