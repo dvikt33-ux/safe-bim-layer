@@ -1,0 +1,301 @@
+registry_version: 0.1
+status: blueprint_requires_mvo_go_dimension_seed
+target: Archicad_29
+
+principles:
+  publish_only_saved_views: true
+  formal_views_require_named_layer_combination: true
+  formal_views_require_named_pen_table: true
+  formal_views_require_named_mvo: true
+  formal_views_require_named_dimension_style: true
+  qa_views_require_named_graphic_override: true
+  no_ad_hoc_view_for_issue: true
+
+external_seed_dependencies:
+  model_view_options:
+    - MVO_01_WORK_FULL
+    - MVO_10_AR_DOCUMENT
+    - MVO_20_COORD
+    - MVO_30_SITE
+    - MVO_40_PRESENTATION
+  graphic_override_combinations:
+    - GO_00_NONE
+    - GO_10_QA_DATA
+    - GO_11_QA_NORM
+    - GO_20_PB_FIRE_COMPARTMENTS
+    - GO_21_PB_EVACUATION
+    - GO_30_MEP_SYSTEMS
+    - GO_40_AUTOMATION_STATE
+    - GO_90_PRESENTATION
+  dimension_styles:
+    - DIM_01_SPDS_MM
+    - DIM_02_LEVEL_M
+  note: "Tapir 1.5.8 can assign these preset names to Views but cannot create/edit MVO, Graphic Override or Dimension Style definitions."
+
+view_folders:
+  - 00_QA
+  - 01_AR
+  - 02_KR
+  - 03_PB
+  - 04_MEP
+  - 05_GP
+  - 06_PRESENTATION
+
+views:
+  - name: QA_MODEL
+    folder: 00_QA
+    source: floor_plan_story
+    scale: 100
+    layer_combination: QA_MODEL
+    pen_table: 20_QA_COLOR
+    mvo: MVO_20_COORD
+    graphic_override: GO_00_NONE
+    dimension_style: DIM_01_SPDS_MM
+    structure_display: EntireStructure
+    status: blocked_until_seed_presets_exist
+
+  - name: QA_DATA
+    folder: 00_QA
+    source: floor_plan_story
+    scale: 100
+    layer_combination: QA_MODEL
+    pen_table: 20_QA_COLOR
+    mvo: MVO_20_COORD
+    graphic_override: GO_10_QA_DATA
+    dimension_style: DIM_01_SPDS_MM
+    structure_display: EntireStructure
+    status: blocked_until_seed_presets_exist
+
+  - name: QA_NORM
+    folder: 00_QA
+    source: floor_plan_story
+    scale: 100
+    layer_combination: QA_MODEL
+    pen_table: 20_QA_COLOR
+    mvo: MVO_20_COORD
+    graphic_override: GO_11_QA_NORM
+    dimension_style: DIM_01_SPDS_MM
+    structure_display: EntireStructure
+    status: blocked_until_seed_presets_exist
+
+  - name: QA_AUTOMATION
+    folder: 00_QA
+    source: floor_plan_story
+    scale: 100
+    layer_combination: QA_MODEL
+    pen_table: 20_QA_COLOR
+    mvo: MVO_20_COORD
+    graphic_override: GO_40_AUTOMATION_STATE
+    dimension_style: DIM_01_SPDS_MM
+    structure_display: EntireStructure
+    status: blocked_until_seed_presets_exist
+
+  - name: AR_200_PLAN_GENERAL
+    folder: 01_AR
+    source: floor_plan_story
+    scale: 200
+    layer_combination: AR_PRINT
+    pen_table: 10_SPDS_PRINT_SMALL
+    mvo: MVO_10_AR_DOCUMENT
+    graphic_override: GO_00_NONE
+    dimension_style: DIM_01_SPDS_MM
+    structure_display: EntireStructure
+    status: blocked_until_seed_presets_exist
+
+  - name: AR_100_PLAN_WORK
+    folder: 01_AR
+    source: floor_plan_story
+    scale: 100
+    layer_combination: AR_WORK
+    pen_table: 01_WORK_COLOR
+    mvo: MVO_01_WORK_FULL
+    graphic_override: GO_00_NONE
+    dimension_style: DIM_01_SPDS_MM
+    structure_display: EntireStructure
+    status: blocked_until_seed_presets_exist
+
+  - name: AR_100_PLAN_PRINT
+    folder: 01_AR
+    source: floor_plan_story
+    scale: 100
+    layer_combination: AR_PRINT
+    pen_table: 10_SPDS_PRINT_SMALL
+    mvo: MVO_10_AR_DOCUMENT
+    graphic_override: GO_00_NONE
+    dimension_style: DIM_01_SPDS_MM
+    structure_display: EntireStructure
+    status: blocked_until_seed_presets_exist
+
+  - name: AR_050_PLAN_WORKING
+    folder: 01_AR
+    source: floor_plan_story
+    scale: 50
+    layer_combination: AR_PRINT
+    pen_table: 10_SPDS_PRINT_SMALL
+    mvo: MVO_10_AR_DOCUMENT
+    graphic_override: GO_00_NONE
+    dimension_style: DIM_01_SPDS_MM
+    structure_display: EntireStructure
+    status: blocked_until_seed_presets_exist
+
+  - name: KR_100_COORD
+    folder: 02_KR
+    source: floor_plan_story
+    scale: 100
+    layer_combination: KR_COORD
+    pen_table: 01_WORK_COLOR
+    mvo: MVO_20_COORD
+    graphic_override: GO_00_NONE
+    dimension_style: DIM_01_SPDS_MM
+    structure_display: CoreOnly
+    status: blocked_until_seed_presets_exist
+
+  - name: PB_100_FIRE
+    folder: 03_PB
+    source: floor_plan_story
+    scale: 100
+    layer_combination: PB_CHECK
+    pen_table: 20_QA_COLOR
+    mvo: MVO_10_AR_DOCUMENT
+    graphic_override: GO_20_PB_FIRE_COMPARTMENTS
+    dimension_style: DIM_01_SPDS_MM
+    structure_display: EntireStructure
+    status: blocked_until_seed_presets_exist
+
+  - name: PB_100_EVAC
+    folder: 03_PB
+    source: floor_plan_story
+    scale: 100
+    layer_combination: PB_CHECK
+    pen_table: 20_QA_COLOR
+    mvo: MVO_10_AR_DOCUMENT
+    graphic_override: GO_21_PB_EVACUATION
+    dimension_style: DIM_01_SPDS_MM
+    structure_display: EntireStructure
+    status: blocked_until_seed_presets_exist
+
+  - name: VK_100_COORD
+    folder: 04_MEP
+    source: floor_plan_story
+    scale: 100
+    layer_combination: VK_COORD
+    pen_table: 01_WORK_COLOR
+    mvo: MVO_20_COORD
+    graphic_override: GO_30_MEP_SYSTEMS
+    dimension_style: DIM_01_SPDS_MM
+    structure_display: WithoutFinishes
+    status: blocked_until_seed_presets_exist
+
+  - name: OV_100_COORD
+    folder: 04_MEP
+    source: floor_plan_story
+    scale: 100
+    layer_combination: OV_COORD
+    pen_table: 01_WORK_COLOR
+    mvo: MVO_20_COORD
+    graphic_override: GO_30_MEP_SYSTEMS
+    dimension_style: DIM_01_SPDS_MM
+    structure_display: WithoutFinishes
+    status: blocked_until_seed_presets_exist
+
+  - name: EOM_100_COORD
+    folder: 04_MEP
+    source: floor_plan_story
+    scale: 100
+    layer_combination: EOM_COORD
+    pen_table: 01_WORK_COLOR
+    mvo: MVO_20_COORD
+    graphic_override: GO_30_MEP_SYSTEMS
+    dimension_style: DIM_01_SPDS_MM
+    structure_display: WithoutFinishes
+    status: blocked_until_seed_presets_exist
+
+  - name: SS_100_COORD
+    folder: 04_MEP
+    source: floor_plan_story
+    scale: 100
+    layer_combination: SS_COORD
+    pen_table: 01_WORK_COLOR
+    mvo: MVO_20_COORD
+    graphic_override: GO_30_MEP_SYSTEMS
+    dimension_style: DIM_01_SPDS_MM
+    structure_display: WithoutFinishes
+    status: blocked_until_seed_presets_exist
+
+  - name: MEP_100_ALL_COORD
+    folder: 04_MEP
+    source: floor_plan_story
+    scale: 100
+    layer_combination: MEP_COORD
+    pen_table: 01_WORK_COLOR
+    mvo: MVO_20_COORD
+    graphic_override: GO_30_MEP_SYSTEMS
+    dimension_style: DIM_01_SPDS_MM
+    structure_display: WithoutFinishes
+    status: blocked_until_seed_presets_exist
+
+  - name: GP_500_PLAN
+    folder: 05_GP
+    source: floor_plan_story
+    scale: 500
+    layer_combination: GP_WORK
+    pen_table: 10_SPDS_PRINT_SMALL
+    mvo: MVO_30_SITE
+    graphic_override: GO_00_NONE
+    dimension_style: DIM_01_SPDS_MM
+    structure_display: EntireStructure
+    status: blocked_until_seed_presets_exist
+
+  - name: GP_200_PLAN
+    folder: 05_GP
+    source: floor_plan_story
+    scale: 200
+    layer_combination: GP_WORK
+    pen_table: 10_SPDS_PRINT_SMALL
+    mvo: MVO_30_SITE
+    graphic_override: GO_00_NONE
+    dimension_style: DIM_01_SPDS_MM
+    structure_display: EntireStructure
+    status: blocked_until_seed_presets_exist
+
+master_layout_blueprints:
+  - {name: A4_P, width_mm: 210, height_mm: 297, titleblock_form: 3, status: frame_geometry_visual_source_required}
+  - {name: A3_L, width_mm: 420, height_mm: 297, titleblock_form: 3, status: frame_geometry_visual_source_required}
+  - {name: A3_P, width_mm: 297, height_mm: 420, titleblock_form: 3, status: frame_geometry_visual_source_required}
+  - {name: A2_L, width_mm: 594, height_mm: 420, titleblock_form: 3, status: frame_geometry_visual_source_required}
+  - {name: A2_P, width_mm: 420, height_mm: 594, titleblock_form: 3, status: frame_geometry_visual_source_required}
+  - {name: A1_L, width_mm: 841, height_mm: 594, titleblock_form: 3, status: frame_geometry_visual_source_required}
+  - {name: A1_P, width_mm: 594, height_mm: 841, titleblock_form: 3, status: frame_geometry_visual_source_required}
+  - {name: A0_L, width_mm: 1189, height_mm: 841, titleblock_form: 3, status: frame_geometry_visual_source_required}
+
+layout_subsets:
+  - {name: 00_GENERAL, prefix: GEN-}
+  - {name: 01_AR, prefix: AR-}
+  - {name: 02_KR, prefix: KR-}
+  - {name: 03_PB, prefix: PB-}
+  - {name: 04_VK, prefix: VK-}
+  - {name: 05_OV, prefix: OV-}
+  - {name: 06_EOM, prefix: EOM-}
+  - {name: 07_SS, prefix: SS-}
+  - {name: 08_GP, prefix: GP-}
+  - {name: 09_TX, prefix: TX-}
+  - {name: 90_QA_INTERNAL, prefix: QA-}
+
+publisher_blueprints:
+  - {name: PUB_01_PDF_ISSUE, format: PDF, status: seed_required_api_cannot_create}
+  - {name: PUB_02_PDF_INTERNAL, format: PDF, status: seed_required_api_cannot_create}
+  - {name: PUB_10_DWG_ISSUE, format: DWG, translator: DWG_OUT_SPDS, status: translator_and_publisher_seed_required}
+  - {name: PUB_11_DWG_COMPAT, format: DWG, translator: DWG_OUT_COMPAT, status: translator_and_publisher_seed_required}
+  - {name: PUB_20_IFC_COORD, format: IFC, translator: IFC_COORD, status: translator_and_publisher_seed_required}
+  - {name: PUB_21_IFC_ISSUE, format: IFC, translator: IFC_ISSUE, status: translator_and_publisher_seed_required}
+
+normative_sources:
+  sheet_sizes:
+    document: GOST_2_301_68
+    table: 1
+  titleblock:
+    document: GOST_R_21_101_2026
+    clause: 5.2.1-5.2.7
+    form: 3
+    location: bottom_right
+    visual_frame_source: Appendix_Zh
