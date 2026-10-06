@@ -1,0 +1,24 @@
+{
+  "release": "2.10",
+  "base_release": "v2.9",
+  "focus_source": "FAVORIT_SHEET_MATERIALS",
+  "focus_scope": "section 7, sheets 7.1-7.33 / PDF pages 218-250",
+  "detail_units_total": 1215,
+  "active_ir_total": 1215,
+  "parameter_facts_total": 1293,
+  "component_variants_total": 601,
+  "dimension_queue_total": 579,
+  "section7_pages_reviewed": 33,
+  "section7_queue_tasks_resolved": 31,
+  "section7_high_remaining": 2,
+  "remaining_section7_records": [
+    "FAVORIT_SHEET_MATERIALS__S7_28",
+    "FAVORIT_SHEET_MATERIALS__S7_29"
+  ],
+  "new_parameter_facts": 17,
+  "source_hash_matches": 40,
+  "source_hash_total": 40,
+  "raster_measurement_used_for_dimensions": 0,
+  "normative_claims_promoted_to_current": 0,
+  "commit_policy": "fail_closed"
+}
