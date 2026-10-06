@@ -53,9 +53,22 @@ yet been captured in this repository status. Therefore **S4-01 is not claimed PA
 The project is **not blocked by project identity anymore** and is **not blocked by the
 missing synthetic Wall fixture anymore**. Those two issues were resolved.
 
-The remaining gate is straightforward: capture the final S4-01 result, then complete the
-remaining mandatory live scenarios without weakening their contracts. Stage 4 becomes PASS
-only when every required live criterion and Audit Pack check passes.
+A separate repository-maintenance issue was discovered on 2026-10-06: `main` legitimately
+advanced from the historical merge-base `72e9be15...` to `d5695f43...` by adding only the
+construction-detail machine database under `knowledge/detail-machine/`. The old Stage-4
+check incorrectly required the entire `main` branch SHA to remain frozen forever.
+
+That brittle check has now been replaced with a protected-path guard. Stage 4 permits
+unrelated main changes, but fails if `main` changed protected BIM runtime/evidence paths
+such as `closed_loop/`, `scripts/`, `archicad-addon/`, Stage 1-4 tests/evidence, or the
+baseline-pinned v0.1 runtime files.
+
+Because `closed_loop/live_wall.py` changed to implement this correction, the previously
+observed `hardening-offline-006` proof is now historical for the prior source state. A new
+source-pinned offline proof is required before the next accepted live S4 run.
+
+The remaining live gate is then: fresh offline proof -> S4-01 -> S4-02/S4-03/S4-06, with
+all required criteria and Audit Packs passing.
 
 ## What is frozen
 
