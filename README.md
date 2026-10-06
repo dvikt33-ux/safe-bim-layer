@@ -37,19 +37,19 @@ One stage must be formally complete before the next capability is added.
 - Stage 1 — frozen v0 Wall regression: **PASS**
 - Stage 2 — closed-loop orchestrator skeleton: **PASS**
 - Stage 3 — first live two-step Wall loop: **PASS**
-- Stage 4 — reliability hardening of that same Wall loop: **NOT YET VERIFIED**
-- Stage 5 — prohibited until Stage 4 passes
+- Stage 4 — reliability hardening of that same Wall loop: **PASS / VERIFIED**
+- Stage 5 — **NOT STARTED**; now permitted after Stage 4 PASS
 
 See [docs/CLOSED_LOOP_IMPLEMENTATION_STAGES.md](docs/CLOSED_LOOP_IMPLEMENTATION_STAGES.md)
 for the full gate policy.
 
-## Active Stage 4
+## Verified Stage 4 baseline
 
-Stage 4 keeps the exact same Wall capability and hardens it against stale plans,
+Stage 4 kept the exact same Wall capability and hardened it against stale plans,
 transport ambiguity, crashes, duplicate mutation, missing read-back, no-progress and
 iteration-limit failures.
 
-The active implementation is under:
+The verified implementation is under:
 
 - `closed_loop/orchestrator.py`
 - `closed_loop/wall_attempts.py`
