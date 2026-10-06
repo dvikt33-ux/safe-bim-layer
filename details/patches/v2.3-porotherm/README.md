@@ -1,4 +1,4 @@
-# POROTHERM v2.3 source patch
+# POROTHERM source delta generated on v2.2
 
 This directory preserves the POROTHERM/Wienerberger low-rise source-processing delta built on packaged active release `v2.2`.
 
@@ -17,3 +17,7 @@ It does **not** advance `details/ACTIVE_RELEASE` by itself. Merge the delta into
 The previous generic extraction counted 69 POROTHERM records. Direct source re-indexing establishes 73 canonical technical-detail sheets. Twelve section-divider pages are navigation pages and must not be treated as buildable detail cards. The source contents says section 1 is `1.1–1.4`, but physical page 25 contains real sheet `1.5`; the title block is preserved as the canonical sheet identity.
 
 All generated Archicad operations remain `commit_allowed=false` until sheet-specific printed dimensions and project structural parameters are bound.
+
+## Release-number collision note
+
+The internal files in this preserved delta were generated with the working label `2.3` **before** the Git branch independently published active release v2.3 for FAVORIT section 1. Treat that label as historical build metadata only. This delta is based on v2.2 and must be rebased onto active v2.3 before publication as v2.4 or later. Do not change `details/ACTIVE_RELEASE` from this patch alone.

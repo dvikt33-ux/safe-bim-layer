@@ -19,6 +19,9 @@
   ],
   "source_sha256": "9afc42e77f5d02ff2432386b8a04e88c4756f476b43cb345ea2021c8c0589c95",
   "source_hash_match": true,
-  "active_packaged_release_before_patch": "v2.2",
-  "patch_policy": "source-specific delta; merge into next full active release before advancing ACTIVE_RELEASE"
+  "patch_policy": "source-specific delta generated from v2.2; preserve as evidence, rebase onto active v2.3 before publishing; never overwrite active v2.3",
+  "generated_working_label": "2.3",
+  "delta_base_release": "v2.2",
+  "active_release_at_git_preservation": "v2.3",
+  "publish_target": "v2.4_or_later_after_rebase"
 }

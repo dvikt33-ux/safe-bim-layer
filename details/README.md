@@ -46,8 +46,10 @@ FAVORIT «Листовые материалы», section 1 (sheets 1.1–1.12 / 
 
 The raw 40 source files are intentionally not duplicated in Git. Their verified hashes and representation metadata are stored in the release registry/verification files; the separate FULL offline archive remains the evidence-preservation package.
 
-## Pending source patch v2.3 — POROTHERM
+## Pending POROTHERM source delta — rebase required
 
-A source-specific POROTHERM/Wienerberger correction is preserved under `patches/v2.3-porotherm/`. It re-indexes the source from 69 generic records to 73 canonical technical-detail sheets, excludes 12 navigation/divider pages, and adds 37 source-bound facts, 21 component variants and 73 explicit dimension-binding tasks.
+The POROTHERM/Wienerberger correction preserved under `patches/v2.3-porotherm/` was generated against packaged base **v2.2**. While it was being preserved, the branch independently advanced the active consolidated release to **v2.3** for FAVORIT section 1.
 
-This patch **does not advance `ACTIVE_RELEASE`**. Release v2.2 remains the active packaged machine state until the POROTHERM delta is merged into the next consolidated release. All POROTHERM Archicad operations remain fail-closed (`commit_allowed=false`) until sheet-specific dimensions and project structural parameters are resolved.
+Therefore this POROTHERM delta is **not release v2.3** and must not replace or overwrite the current v2.3 machine state. It must be rebased/merged on top of active v2.3 and published as **v2.4 or later**. The delta corrects POROTHERM from 69 generic records to 73 canonical technical-detail sheets, excludes 12 navigation/divider pages, and carries 37 source-bound facts, 21 component variants and 73 explicit dimension-binding tasks.
+
+All POROTHERM Archicad operations remain fail-closed (`commit_allowed=false`) until sheet-specific dimensions and project structural parameters are resolved.
