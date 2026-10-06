@@ -58,3 +58,5 @@ reference audit proves they can be moved safely.
 - **BLOCKED** — a gate intentionally stopped progression.
 - **UNKNOWN_OUTCOME** — physical mutation may or may not have occurred; never blind retry.
 - **OFFLINE PASS** — useful proof, but not a substitute for mandatory live evidence.
+
+- `STAGE4_PERFORMANCE_PASS.md` — post-VERIFIED performance/evidence-I/O optimization plan and validation gate.
