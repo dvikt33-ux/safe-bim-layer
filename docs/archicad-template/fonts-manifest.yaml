@@ -1,0 +1,33 @@
+manifest_version: 1
+status: draft
+target: Archicad 29 Windows
+fonts:
+  - family: PT Astra Sans
+    role: primary
+    styles: [Regular, Italic, Bold, Bold Italic]
+    source: official_Paratype
+    license: verify_and_archive_with_installer
+    required: true
+  - family: Noto Sans
+    role: unicode_fallback
+    styles: [Regular, Italic, Bold, Bold Italic]
+    source: official_Noto_project
+    license: SIL_OFL_1.1
+    required: true
+  - family: OpenGost Type B
+    role: optional_gost_drawing_style
+    styles: [Regular]
+    source: open_gost_project
+    license: SIL_OFL_1.1
+    required: false
+  - family: Arial
+    role: dwg_compatibility_fallback
+    source: Windows
+    required: false
+
+rules:
+  no_unregistered_fonts: true
+  no_random_gost_fonts: true
+  dwg_font_mapping_required: true
+  font_version_manifest_required: true
+  template_must_remain_readable_without_optional_fonts: true
