@@ -115,7 +115,7 @@ class LiveSession:
             if self.identity != baseline_identity:
                 raise ValueError('Active PLN differs from the previously verified test project')
             project_binding = {'mode':'STAGE1_BASELINE_IDENTITY','expectedProjectPath':baseline_identity.get('projectPath')}
-        fixture_report_value = os.environ.get('SAFE_BIM_STAGE4_FIXTURE_REPORT')
+        fixture_report_value = os.environ.get('SAFE_BIM_STAGE4_FIXTURE_REPORT') if str(goal_id).startswith('stage4-') else None
         if fixture_report_value:
             fixture_path = Path(fixture_report_value)
             if not fixture_path.is_absolute():
