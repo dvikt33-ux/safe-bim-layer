@@ -174,7 +174,9 @@ def prepare(output):
             elementCountBefore=len(before.get('elements',[])),
             elementCountAfter=len(after.get('elements',[])), addedGuids=added)
     except Exception as exc:
-        report.update(status='UNKNOWN_OUTCOME' if report.get('physicalMutationCalls') else 'BLOCKED',
+        dispatched = (output/'mutation-dispatch.json').exists()
+        report['physicalMutationCalls'] = 1 if dispatched else 0
+        report.update(status='UNKNOWN_OUTCOME' if dispatched else 'BLOCKED',
             reason=f'{type(exc).__name__}: {exc}', automaticRetry=False)
     durable_json(output/'fixture-report.json', report)
     return report
