@@ -259,14 +259,14 @@ views:
     status: blocked_until_seed_presets_exist
 
 master_layout_blueprints:
-  - {name: A4_P, width_mm: 210, height_mm: 297, titleblock_form: 3, status: frame_geometry_visual_source_required}
-  - {name: A3_L, width_mm: 420, height_mm: 297, titleblock_form: 3, status: frame_geometry_visual_source_required}
-  - {name: A3_P, width_mm: 297, height_mm: 420, titleblock_form: 3, status: frame_geometry_visual_source_required}
-  - {name: A2_L, width_mm: 594, height_mm: 420, titleblock_form: 3, status: frame_geometry_visual_source_required}
-  - {name: A2_P, width_mm: 420, height_mm: 594, titleblock_form: 3, status: frame_geometry_visual_source_required}
-  - {name: A1_L, width_mm: 841, height_mm: 594, titleblock_form: 3, status: frame_geometry_visual_source_required}
-  - {name: A1_P, width_mm: 594, height_mm: 841, titleblock_form: 3, status: frame_geometry_visual_source_required}
-  - {name: A0_L, width_mm: 1189, height_mm: 841, titleblock_form: 3, status: frame_geometry_visual_source_required}
+  - {name: A4_P, width_mm: 210, height_mm: 297, titleblock_form: 3, status: geometry_verified_form3_autotext_pending}
+  - {name: A3_L, width_mm: 420, height_mm: 297, titleblock_form: 3, status: geometry_verified_form3_autotext_pending}
+  - {name: A3_P, width_mm: 297, height_mm: 420, titleblock_form: 3, status: geometry_verified_form3_autotext_pending}
+  - {name: A2_L, width_mm: 594, height_mm: 420, titleblock_form: 3, status: geometry_verified_form3_autotext_pending}
+  - {name: A2_P, width_mm: 420, height_mm: 594, titleblock_form: 3, status: geometry_verified_form3_autotext_pending}
+  - {name: A1_L, width_mm: 841, height_mm: 594, titleblock_form: 3, status: geometry_verified_form3_autotext_pending}
+  - {name: A1_P, width_mm: 594, height_mm: 841, titleblock_form: 3, status: geometry_verified_form3_autotext_pending}
+  - {name: A0_L, width_mm: 1189, height_mm: 841, titleblock_form: 3, status: geometry_verified_form3_autotext_pending}
 
 layout_subsets:
   - {name: 00_GENERAL, prefix: GEN-}
