@@ -1331,11 +1331,155 @@ def apply_data_schema(api: Tapir, allow_nonempty=False):
 
 
 
+def _collect_navigator_items(item, out=None):
+    if out is None:
+        out = []
+    for child in (item or {}).get("children", []):
+        nav = child.get("navigatorItem", {})
+        if nav:
+            out.append(nav)
+            _collect_navigator_items(nav, out)
+    return out
+
+
+def plan_navigator(api: Tapir):
+    """Read-only check of View/Layout prerequisites against the live Archicad project."""
+    registry = load_yaml(NAVIGATOR_REGISTRY)
+    existing_mvo = {
+        x.get("name")
+        for x in api.call("GetModelViewOptions").get("modelViewOptions", [])
+        if x.get("name")
+    }
+    layer_combos = {
+        x["name"] for x in attribute_headers(api, "LayerCombination")
+    }
+    pen_tables = {
+        x["name"] for x in attribute_headers(api, "PenTable")
+    }
+
+    view_tree = api.call(
+        "GetNavigatorItemTree", {"navigatorMapId": "PublicViewMap"}
+    ).get("navigatorItemTree", {})
+    layout_tree = api.call(
+        "GetNavigatorItemTree", {"navigatorMapId": "LayoutBook"}
+    ).get("navigatorItemTree", {})
+    publisher_tree = api.call(
+        "GetNavigatorItemTree", {"navigatorMapId": "PublisherSets"}
+    ).get("navigatorItemTree", {})
+
+    view_items = _collect_navigator_items(view_tree)
+    layout_items = _collect_navigator_items(layout_tree)
+    publisher_items = _collect_navigator_items(publisher_tree)
+
+    existing_view_names = {x.get("name") for x in view_items if x.get("name")}
+    existing_folder_names = {
+        x.get("name") for x in view_items
+        if x.get("type") == "FolderItem" and x.get("name")
+    }
+    existing_master_names = {
+        x.get("name") for x in layout_items
+        if x.get("type") == "MasterLayoutItem" and x.get("name")
+    }
+    existing_subset_names = {
+        x.get("name") for x in layout_items
+        if x.get("type") == "SubsetItem" and x.get("name")
+    }
+    existing_publisher_names = {
+        x.get("name") for x in publisher_items if x.get("name")
+    }
+
+    deps = registry.get("external_seed_dependencies") or {}
+    required_mvo = set(deps.get("model_view_options", []))
+    required_go = set(deps.get("graphic_override_combinations", []))
+    required_dims = set(deps.get("dimension_styles", []))
+
+    view_plan = []
+    for view in registry.get("views", []):
+        blockers = []
+        for kind, value, existing in (
+            ("layer_combination", view["layer_combination"], layer_combos),
+            ("pen_table", view["pen_table"], pen_tables),
+            ("mvo", view["mvo"], existing_mvo),
+        ):
+            if value not in existing:
+                blockers.append({"type": f"missing_{kind}", "name": value})
+
+        # Tapir 1.5.8 exposes assignment of these names in ViewSettings but not
+        # an enumeration/creation command for the preset registries themselves.
+        blockers.append({
+            "type": "unverified_graphic_override_seed",
+            "name": view["graphic_override"],
+            "declared": view["graphic_override"] in required_go,
+        })
+        blockers.append({
+            "type": "unverified_dimension_style_seed",
+            "name": view["dimension_style"],
+            "declared": view["dimension_style"] in required_dims,
+        })
+
+        view_plan.append({
+            "name": view["name"],
+            "exists": view["name"] in existing_view_names,
+            "folderExists": view["folder"] in existing_folder_names,
+            "blockers": blockers,
+            "state": "EXISTS" if view["name"] in existing_view_names else (
+                "BLOCKED_SEED_PRESETS" if blockers else "READY_FOR_CREATE"
+            ),
+        })
+
+    return {
+        "status": "PASS",
+        "writePerformed": False,
+        "counts": {
+            "existingMVO": len(existing_mvo),
+            "requiredMVO": len(required_mvo),
+            "missingMVO": len(required_mvo - existing_mvo),
+            "existingViewItems": len(view_items),
+            "plannedViews": len(view_plan),
+            "existingMasterLayouts": len(existing_master_names),
+            "plannedMasterLayouts": len(registry.get("master_layout_blueprints", [])),
+            "existingLayoutSubsets": len(existing_subset_names),
+            "plannedLayoutSubsets": len(registry.get("layout_subsets", [])),
+            "existingPublisherItems": len(existing_publisher_names),
+        },
+        "missingMVO": sorted(required_mvo - existing_mvo),
+        "unverifiableByTapir15": {
+            "graphicOverrideCombinations": sorted(required_go),
+            "dimensionStyles": sorted(required_dims),
+        },
+        "masterLayouts": [
+            {
+                "name": x["name"],
+                "exists": x["name"] in existing_master_names,
+                "status": x["status"],
+            }
+            for x in registry.get("master_layout_blueprints", [])
+        ],
+        "layoutSubsets": [
+            {
+                "name": x["name"],
+                "exists": x["name"] in existing_subset_names,
+            }
+            for x in registry.get("layout_subsets", [])
+        ],
+        "publisherBlueprints": [
+            {
+                "name": x["name"],
+                "exists": x["name"] in existing_publisher_names,
+                "status": x["status"],
+            }
+            for x in registry.get("publisher_blueprints", [])
+        ],
+        "views": view_plan,
+    }
+
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "action",
-        choices=("validate", "inspect", "plan", "plan-materials", "plan-data-schema", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema"),
+        choices=("validate", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema"),
     )
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
     parser.add_argument(
@@ -1365,6 +1509,8 @@ def main():
             result = material_dependency_plan(api)
         elif args.action == "plan-data-schema":
             result = plan_data_schema(api)
+        elif args.action == "plan-navigator":
+            result = plan_navigator(api)
         elif args.action == "apply-core":
             result = apply_safe_core(api, allow_nonempty=args.allow_nonempty)
         elif args.action == "apply-surfaces":
