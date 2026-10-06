@@ -1,0 +1,174 @@
+{
+  "release": "v2.11",
+  "total": 579,
+  "sources": [
+    {
+      "source_id": "KAIMAN_KERAKAM_WALL",
+      "total": 227,
+      "priority": {
+        "high": 158,
+        "medium": 69
+      },
+      "queue_kinds": {
+        "sheet_specific_dimension_transcription": 227
+      },
+      "sample_record_ids": [
+        "KAIMAN_KERAKAM_WALL__1__V22Q",
+        "KAIMAN_KERAKAM_WALL__2__V22Q",
+        "KAIMAN_KERAKAM_WALL__3__V22Q",
+        "KAIMAN_KERAKAM_WALL__4__V22Q",
+        "KAIMAN_KERAKAM_WALL__5__V22Q",
+        "KAIMAN_KERAKAM_WALL__6__V22Q",
+        "KAIMAN_KERAKAM_WALL__7__V22Q",
+        "KAIMAN_KERAKAM_WALL__8__V22Q",
+        "KAIMAN_KERAKAM_WALL__9__V22Q",
+        "KAIMAN_KERAKAM_WALL__10__V22Q",
+        "KAIMAN_KERAKAM_WALL__11__V22Q",
+        "KAIMAN_KERAKAM_WALL__12__V22Q",
+        "KAIMAN_KERAKAM_WALL__13__V22Q",
+        "KAIMAN_KERAKAM_WALL__14__V22Q",
+        "KAIMAN_KERAKAM_WALL__15__V22Q",
+        "KAIMAN_KERAKAM_WALL__16__V22Q",
+        "KAIMAN_KERAKAM_WALL__17__V22Q",
+        "KAIMAN_KERAKAM_WALL__18__V22Q",
+        "KAIMAN_KERAKAM_WALL__19__V22Q",
+        "KAIMAN_KERAKAM_WALL__20__V22Q"
+      ]
+    },
+    {
+      "source_id": "FAVORIT_COMPOSITE_PANEL",
+      "total": 177,
+      "priority": {
+        "high": 177
+      },
+      "queue_kinds": {
+        "node_printed_dimension_and_fastener_binding": 125,
+        "component_catalog_value_transcription": 52
+      },
+      "sample_record_ids": [
+        "FAVORIT_COMPOSITE_PANEL__S1_1",
+        "FAVORIT_COMPOSITE_PANEL__S1_2",
+        "FAVORIT_COMPOSITE_PANEL__S1_3",
+        "FAVORIT_COMPOSITE_PANEL__S1_4",
+        "FAVORIT_COMPOSITE_PANEL__S1_5",
+        "FAVORIT_COMPOSITE_PANEL__S1_6",
+        "FAVORIT_COMPOSITE_PANEL__S1_7",
+        "FAVORIT_COMPOSITE_PANEL__S1_8",
+        "FAVORIT_COMPOSITE_PANEL__S1_9",
+        "FAVORIT_COMPOSITE_PANEL__S1_10",
+        "FAVORIT_COMPOSITE_PANEL__S1_11",
+        "FAVORIT_COMPOSITE_PANEL__S1_12",
+        "FAVORIT_COMPOSITE_PANEL__S1_13",
+        "FAVORIT_COMPOSITE_PANEL__S1_14",
+        "FAVORIT_COMPOSITE_PANEL__S1_15",
+        "FAVORIT_COMPOSITE_PANEL__S1_16",
+        "FAVORIT_COMPOSITE_PANEL__S1_17",
+        "FAVORIT_COMPOSITE_PANEL__S1_18",
+        "FAVORIT_COMPOSITE_PANEL__S1_19",
+        "FAVORIT_COMPOSITE_PANEL__S1_20"
+      ]
+    },
+    {
+      "source_id": "POROTHERM_LOWRISE",
+      "total": 73,
+      "priority": {
+        "high": 53,
+        "normal": 20
+      },
+      "queue_kinds": {
+        "unknown": 73
+      },
+      "sample_record_ids": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "source_id": "BRAAS_ROOF_DETAILS",
+      "total": 55,
+      "priority": {
+        "high": 8,
+        "medium": 47
+      },
+      "queue_kinds": {
+        "raster_geometry_to_parametric_binding": 55
+      },
+      "sample_record_ids": [
+        "BRAAS_ROOF_DETAILS__P0001",
+        "BRAAS_ROOF_DETAILS__P0002",
+        "BRAAS_ROOF_DETAILS__P0003",
+        "BRAAS_ROOF_DETAILS__P0004",
+        "BRAAS_ROOF_DETAILS__P0005",
+        "BRAAS_ROOF_DETAILS__P0006",
+        "BRAAS_ROOF_DETAILS__P0007",
+        "BRAAS_ROOF_DETAILS__P0008",
+        "BRAAS_ROOF_DETAILS__P0009",
+        "BRAAS_ROOF_DETAILS__P0010",
+        "BRAAS_ROOF_DETAILS__P0011",
+        "BRAAS_ROOF_DETAILS__P0012",
+        "BRAAS_ROOF_DETAILS__P0013",
+        "BRAAS_ROOF_DETAILS__P0014",
+        "BRAAS_ROOF_DETAILS__P0015",
+        "BRAAS_ROOF_DETAILS__P0016",
+        "BRAAS_ROOF_DETAILS__P0017",
+        "BRAAS_ROOF_DETAILS__P0018",
+        "BRAAS_ROOF_DETAILS__P0019",
+        "BRAAS_ROOF_DETAILS__P0020"
+      ]
+    },
+    {
+      "source_id": "FAVORIT_SHEET_MATERIALS",
+      "total": 47,
+      "priority": {
+        "high": 21,
+        "medium": 26
+      },
+      "queue_kinds": {
+        "project_binding_after_printed_transcription": 14,
+        "component_geometry_completion": 12,
+        "semantic_dimension_endpoint_resolution": 12,
+        "project_binding_or_source_conflict_resolution": 9
+      },
+      "sample_record_ids": [
+        "FAVORIT_SHEET_MATERIALS__S1_13",
+        "FAVORIT_SHEET_MATERIALS__S1_14",
+        "FAVORIT_SHEET_MATERIALS__S1_15",
+        "FAVORIT_SHEET_MATERIALS__S1_16",
+        "FAVORIT_SHEET_MATERIALS__S1_17",
+        "FAVORIT_SHEET_MATERIALS__S1_18",
+        "FAVORIT_SHEET_MATERIALS__S1_19",
+        "FAVORIT_SHEET_MATERIALS__S1_20",
+        "FAVORIT_SHEET_MATERIALS__S1_21",
+        "FAVORIT_SHEET_MATERIALS__S1_22",
+        "FAVORIT_SHEET_MATERIALS__S1_23",
+        "FAVORIT_SHEET_MATERIALS__S1_24",
+        "FAVORIT_SHEET_MATERIALS__S1_25",
+        "FAVORIT_SHEET_MATERIALS__S1_26",
+        "FAVORIT_SHEET_MATERIALS__S1_27",
+        "FAVORIT_SHEET_MATERIALS__S1_28",
+        "FAVORIT_SHEET_MATERIALS__S1_29",
+        "FAVORIT_SHEET_MATERIALS__S1_30",
+        "FAVORIT_SHEET_MATERIALS__S1_31",
+        "FAVORIT_SHEET_MATERIALS__S1_32"
+      ]
+    }
+  ]
+}
