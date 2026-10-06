@@ -6,8 +6,8 @@ import json
 from pathlib import Path
 import tempfile
 
-from scripts.audit_pack import (AuditError, canonical, changed_paths, delta, digest, file_info,
-    model_summary, public_value, read_json, relative, scan_public_pack, semantic_delta)
+from scripts.audit_pack import (AuditError, Conflict, canonical, changed_paths, delta, digest, element_index, file_info,
+    public_value, read_json, relative, scan_public_pack, semantic_delta)
 
 
 def _pinned_json_once(root, spec):
@@ -34,6 +34,33 @@ def _pinned_json_once(root, spec):
     if file_info(root, spec['path']) != actual:
         raise AuditError('Source changed during read: '+spec['path'])
     return data
+
+
+def _model_summary_once(data, identity):
+    """Equivalent model summary without hashing every element twice."""
+    rows = element_index(data)
+    value = {k: v for k, v in data.items()
+             if k not in ('elements', 'materials', 'unresolvedBodyOwners', 'nativeSeconds')}
+    value['elements'] = sorted(row['fullElementHash'] for row in rows)
+    for key in ('materials', 'unresolvedBodyOwners'):
+        value[key] = sorted(digest(item) for item in data.get(key, []))
+    result = {
+        'modelIdentity': identity,
+        'modelHash': digest(value),
+        'elementCount': len(rows),
+        'typeCounts': dict(sorted(Counter(str(e.get('type')) for e in data['elements']).items())),
+    }
+    if 'materials' in data:
+        result['materialsCount'] = len(data['materials'])
+    if 'stories' in data:
+        result['stories'] = data['stories']
+    if 'unresolvedBodyOwners' in data:
+        result['unresolvedBodyOwners'] = len(data['unresolvedBodyOwners'])
+    if 'counts' in data:
+        result['reportedCounts'] = data['counts']
+        if data['counts'].get('elements', len(rows)) != len(rows):
+            raise Conflict('Dump reported element count differs from element array')
+    return result, rows
 
 
 def source_contract(root, scenario, snapshots, pairs, records, identity, provenance):
@@ -69,7 +96,7 @@ def extract(root, contract):
         if name not in snapshot_cache:
             data = _pinned_json_once(root, records[name])
             if name not in states:
-                summary, index = model_summary(data, contract['modelIdentity'])
+                summary, index = _model_summary_once(data, contract['modelIdentity'])
                 key = summary['modelHash']
                 states[name] = (summary, index)
                 payloads[f'models/{key}/summary.json'] = summary
