@@ -138,3 +138,30 @@ Current live sequence for a clean candidate project:
 12. `plan-navigator`
 13. `apply-navigator-shell`
 14. read-back / Model Dump verification
+
+
+## Master Layout shells
+
+Read-only preflight:
+
+```powershell
+python scripts/archicad_template_builder.py plan-master-layouts --out template-master-plan.json
+```
+
+Create exact-size empty A4-A0 Master Layout shells in a clean candidate project:
+
+```powershell
+python scripts/archicad_template_builder.py apply-master-layout-shell --out template-master-apply.json
+```
+
+The sizes are passed in millimeters, matching Graphisoft `API_LayoutInfo`.
+
+Safety behavior:
+- same-name Master with wrong size -> BLOCKED; no silent resize;
+- missing Master -> temporary internal Layout creates it;
+- Master size is set and read back;
+- temporary Layout is deleted;
+- no titleblock/frame/text is created by this stage;
+- model element count must remain unchanged.
+
+The next gate is a sacrificial Master Layout drawing test before automatic Form 3 frame/titleblock geometry is enabled.
