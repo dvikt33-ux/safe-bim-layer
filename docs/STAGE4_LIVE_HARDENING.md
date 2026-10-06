@@ -155,8 +155,9 @@ calls, no duplicate mutationAttemptIds, two factual zero-distance joints, the
 second action sourced from the first created Wall GUID, protected-main guard
 PASS and Audit Pack PASS.
 
-Stage 4 itself remains **NOT VERIFIED** because S4-02, S4-03 and S4-06 still
-require live completion.
+S4-02 has also completed as LIVE PASS / VERIFIED. It proved one stale-plan invalidation, zero executor calls for the stale action, three confirmed physical writes total (helper plus two goal segments), zero duplicate mutation attempts and Audit Pack PASS.
+
+Stage 4 itself remains **NOT VERIFIED** because S4-03 and S4-06 still require live completion.
 
 Backlog only: general transactions/concurrent job ownership, additional BIM
 operations, undo, UI, normative engines and performance work. None is implemented
