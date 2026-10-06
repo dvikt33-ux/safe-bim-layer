@@ -36,6 +36,8 @@ The optimized Stage 4 extractor now:
 
 The live finalizer also reuses the already source-pinned `contract.records` SHA/size values for the full-evidence manifest instead of hashing every evidence file again.
 
+The Stage 4 model summary also reuses the already-computed per-element `fullElementHash` values from the element index when constructing the whole-model hash. This removes a second full serialization/hash of every BIM element while preserving the exact historical `modelHash` contract.
+
 ## Observability
 
 Live finalization now prints timed phases:
