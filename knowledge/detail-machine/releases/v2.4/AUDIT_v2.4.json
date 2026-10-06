@@ -1,0 +1,32 @@
+{
+  "release": "2.4",
+  "timestamp_utc": "2026-10-06T16:41:56.687724+00:00",
+  "source_scope": "BRAAS roof detail album, complete physical pages 1-55",
+  "checks": {
+    "physical_pdf_pages_verified": 55,
+    "source_detail_cards_rebuilt": 55,
+    "braas_parameter_facts_active": 22,
+    "braas_active_ir": 55,
+    "named_product_variants_added": 13,
+    "legacy_braas_facts_replaced": 5,
+    "legacy_braas_ir_replaced": 55,
+    "detail_units_total": 1211,
+    "parameter_facts_total": 1226,
+    "archicad_ir_total": 1515,
+    "component_variants_total": 559,
+    "sqlite_integrity": "ok",
+    "missing_active_ir_refs": 0,
+    "braas_commit_allowed_true": 0,
+    "raster_measurement_used_for_dimensions": 0,
+    "source_hash_matches": 40,
+    "source_hash_total": 40
+  },
+  "critical_findings": [
+    "All 55 physical pages are construction/detail sheets and are now routed by eleven junction families.",
+    "Legacy page titles contained several inferred/incorrect variants; v2.4 replaces them with visually verified headings, including one-slope ridge variants on pages 21-23 and minimum-slope/solid-deck range wording on pages 10-11, 19, 33-34 and 39.",
+    "Only printed numeric/symbolic values were retained. No distance was measured from the scanned drawings.",
+    "Cross-sheet references such as “по узлу 1/12/24/29/32/42” are explicit machine relations, so repeated macro geometry is not silently reinterpreted.",
+    "BRAAS product names are catalog nodes only; exact product geometry and manufacturer technical statements are not promoted to normative or structural rules."
+  ],
+  "commit_policy": "fail_closed"
+}
