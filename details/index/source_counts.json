@@ -24,14 +24,15 @@
     "year": null,
     "details": 55,
     "active_ir": 55,
-    "parameter_facts": 5,
-    "component_variants": 0,
+    "parameter_facts": 26,
+    "component_variants": 34,
     "normative_trust": "technical_solution_only_unless_separately_verified",
     "system": [
       "pitched_roof",
       "roof_tile",
       "roof_details"
-    ]
+    ],
+    "semantic_status": "visually_verified_v2.5"
   },
   {
     "source_id": "BRAAS_ROOF_TECH",

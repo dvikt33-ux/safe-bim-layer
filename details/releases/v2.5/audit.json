@@ -1,0 +1,36 @@
+{
+  "release": "2.5",
+  "checks": {
+    "release": "2.5",
+    "base_release": "v2.4",
+    "focus_source": "BRAAS_ROOF_DETAILS",
+    "source_pages_visually_reviewed": 55,
+    "braas_details": 55,
+    "braas_source_facts": 26,
+    "braas_component_variants": 34,
+    "braas_dimension_queue": 55,
+    "detail_units_total": 1215,
+    "parameter_facts_total": 1232,
+    "component_variants_total": 601,
+    "dimension_queue_total": 726,
+    "replaced_previous_braas_rows": {
+      "details_active_v2.4.jsonl": 55,
+      "parameter_facts_v2.4.jsonl": 5,
+      "component_variants_v2.4.jsonl": 0,
+      "dimension_binding_queue_v2.4.jsonl": 0
+    },
+    "source_hash_matches": 40,
+    "source_hash_total": 40,
+    "raster_measurement_used_for_dimensions": 0,
+    "normative_claims_promoted_to_current": 0,
+    "commit_policy": "fail_closed"
+  },
+  "critical_findings": [
+    "All 55 BRAAS detail pages were visually inspected.",
+    "Generic five-component roof-detail approximations are replaced by family- and page-condition-specific semantics.",
+    "Printed dimensions/symbols are stored only from visible source annotations; pixel scaling is prohibited.",
+    "D and LAF remain symbolic/project-bound.",
+    "Snow-retention and safety-hook details remain structurally fail-closed.",
+    "Manufacturer detail album is technical evidence, not current normative permission."
+  ]
+}
