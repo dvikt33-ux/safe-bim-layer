@@ -34,6 +34,32 @@ class IdentityGateTests(unittest.TestCase):
             self.assertFalse(result['mutationAttempted'])
             self.assertEqual(transport.call_count,3)
 
+
+    def test_explicit_stage4_project_path_rebinds_without_rewriting_stage1_identity(self):
+        identity={'projectPath':r'C:\Users\Admin\Downloads\дбликат.pln','isUntitled':False}
+        product={'version':29,'buildNumber':3000,'languageCode':'RUS'}
+        tapir={'version':'1.5.10'}
+        baseline={'identity':{'projectPath':r'C:\old\baseline.pln'},'tapir':tapir}
+        with tempfile.TemporaryDirectory() as temp, \
+                patch.dict('os.environ',{'SAFE_BIM_STAGE4_PROJECT_PATH':identity['projectPath']}), \
+                patch('closed_loop.stage4_preflight.read',return_value=baseline), \
+                patch('closed_loop.stage4_preflight.urllib.request.urlopen',side_effect=[self.envelope(identity),self.envelope(product),self.envelope(tapir)]) as transport:
+            result=preflight(Path(temp)/'gate')
+            self.assertEqual(result['status'],'PASS')
+            self.assertEqual(result['projectBinding']['mode'],'EXPLICIT_STAGE4_PATH')
+            self.assertEqual(result['identity']['projectPath'],identity['projectPath'])
+            self.assertEqual(transport.call_count,3)
+
+    def test_explicit_stage4_project_mismatch_stops_after_identity(self):
+        active={'projectPath':r'C:\Users\Admin\Downloads\other.pln'}
+        with tempfile.TemporaryDirectory() as temp, \
+                patch.dict('os.environ',{'SAFE_BIM_STAGE4_PROJECT_PATH':r'C:\Users\Admin\Downloads\дбликат.pln'}), \
+                patch('closed_loop.stage4_preflight.urllib.request.urlopen',return_value=self.envelope(active)) as transport:
+            result=preflight(Path(temp)/'gate')
+            self.assertEqual(result['status'],'BLOCKED')
+            self.assertIn('WRONG_PROJECT',result['reason'])
+            self.assertEqual(transport.call_count,1)
+
     def test_environment_mismatch_cannot_pass(self):
         identity={'projectPath':'expected.pln'}
         with tempfile.TemporaryDirectory() as temp, \
