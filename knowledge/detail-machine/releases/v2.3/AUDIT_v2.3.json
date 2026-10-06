@@ -1,0 +1,37 @@
+{
+  "release": "2.3",
+  "timestamp_utc": "2026-10-06T14:43:05.230855+00:00",
+  "source_scope": "ROCKFACADE 2022 PDF + DXF + DWG representations; physical pages 8-108 / actual sheets 0.1-12.4",
+  "checks": {
+    "release": "2.3",
+    "focus_source": "ROCKFACADE_2022",
+    "detail_units_total": 1211,
+    "parameter_facts_total": 1209,
+    "archicad_ir_total": 1515,
+    "component_variants_total": 546,
+    "dimension_queue_total": 610,
+    "rockfacade_detail_sheets": 101,
+    "rockfacade_active_facts": 144,
+    "rockfacade_active_ir": 101,
+    "rockfacade_named_material_variants": 10,
+    "legacy_rockfacade_facts_replaced": 90,
+    "legacy_rockfacade_ir_replaced": 101,
+    "dxf_dimension_entities": 126,
+    "actual_sheet_footer_codes_unique": 101,
+    "duplicate_sheet_codes": [],
+    "sqlite_integrity": "ok",
+    "missing_active_ir_refs": 0,
+    "commit_allowed_true": 0,
+    "source_representation_hashes_matched": 3,
+    "source_representation_hashes_total": 3
+  },
+  "critical_findings": [
+    "All 101 machine pages were re-indexed from the actual sheet footer, replacing OCR/text-fragment titles with exact source sheet numbers and titles.",
+    "The source TOC is internally inconsistent with the physical sheets: section 1 advertises three Lamella sheets that are absent from the physical detail set, while section 7 contains three physical balcony sheets not listed in the TOC.",
+    "DXF contains 101 sheet cells and 126 DIMENSION entities. Raw geometry measurements frequently differ from printed dimension labels, proving that raw DXF vector lengths must not be used as construction sizes without scale resolution.",
+    "90 legacy generic/unbound ROCKFACADE facts were replaced by 144 source-bound/global or explicitly unbound printed-dimension facts.",
+    "The machine now routes ROCKFACADE by 12 detail sections: field installation, corners, plinths, roofs, windows, glazing, balconies, soffits, attachments, decorative elements, movement joints and interfaces with ventilated facades.",
+    "SP 50.13330.2012 and SP 20.13330.2011 remain source-cited references only; v2.3 does not assert current normative validity."
+  ],
+  "commit_policy": "fail_closed"
+}
