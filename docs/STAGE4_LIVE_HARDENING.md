@@ -149,11 +149,14 @@ The latest operator run also completed the new source-pinned
 The retained fixture predecessor/seed GUIDs are recorded in
 `docs/CURRENT_STATUS.md`.
 
-The real S4-01 live command was then launched, but its final completion JSON is
-not yet captured in the canonical repository status. Therefore S4-01 is **not
-claimed PASS** and Stage 4 remains **NOT VERIFIED**. The remaining gate is the
-final S4-01 verdict followed by the other mandatory live scenarios and all
-required C01–C30 criteria.
+S4-01 has now completed as LIVE PASS / VERIFIED in
+`live-20261007-001/S4-01`. It produced exactly two confirmed physical mutation
+calls, no duplicate mutationAttemptIds, two factual zero-distance joints, the
+second action sourced from the first created Wall GUID, protected-main guard
+PASS and Audit Pack PASS.
+
+Stage 4 itself remains **NOT VERIFIED** because S4-02, S4-03 and S4-06 still
+require live completion.
 
 Backlog only: general transactions/concurrent job ownership, additional BIM
 operations, undo, UI, normative engines and performance work. None is implemented
