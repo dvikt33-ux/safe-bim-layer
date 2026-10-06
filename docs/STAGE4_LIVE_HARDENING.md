@@ -61,12 +61,17 @@ Tests and archived raw evidence are retained; previous checks are not weakened.
 
 ## Mandatory live proof
 
-Only `NativeGeometry_Full_Test_20261004.pln`, Archicad 29 build 3000 RUS, Tapir
-1.5.10, endpoint `127.0.0.1:19723`. Preflight reads GetProjectInfo first. A wrong
-project stops before product/add-on follow-ons, model dump or writes. The code
-never opens, switches, saves or undoes a project.
+Default binding remains the original Stage 1 PLN identity. Stage 4 may instead
+be explicitly rebound to another named disposable PLN by setting the absolute
+Windows path in `SAFE_BIM_STAGE4_PROJECT_PATH`. This does not rewrite or weaken
+the archived Stage 1 identity/evidence. Preflight reads GetProjectInfo first and
+compares the active PLN to the explicit Stage 4 path before product/add-on
+follow-ons, model dump or writes. Archicad 29 build 3000 RUS, Tapir 1.5.10 and
+endpoint `127.0.0.1:19723` remain mandatory. The code never opens, switches,
+saves or undoes a project.
 
 ```powershell
+$env:SAFE_BIM_STAGE4_PROJECT_PATH = 'C:\Users\Admin\Downloads\дбликат.pln'
 python -m closed_loop.stage4_live_scenario --scenario S4-01 --output outputs/closed-loop-stage4/S4-01 --offline-proof <offline-verification-report.json> --live
 python -m closed_loop.stage4_live_scenario --scenario S4-02 --output outputs/closed-loop-stage4/S4-02 --offline-proof <offline-verification-report.json> --happy-report outputs/closed-loop-stage4/S4-01/completion-report.json --live
 python -m closed_loop.stage4_live_scenario --scenario S4-03 --output outputs/closed-loop-stage4/S4-03 --offline-proof <offline-verification-report.json> --happy-report outputs/closed-loop-stage4/S4-01/completion-report.json --live
