@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "1.0",
+  "stage": "CLOSED_LOOP_STAGE4_LIVE_HARDENING",
+  "status": "READY_FOR_LOCAL_LIVE_RUN",
+  "implementation": {
+    "reportedLocalBranch": "work/stage4-live-hardening",
+    "reportedLocalCommit": "f297572",
+    "publishedInGitHub": false,
+    "reportedOfflineTests": "128/128 PASS",
+    "reportedOfflineAuditPacks": 7
+  },
+  "target": {
+    "endpoint": "127.0.0.1:19723",
+    "project": "NativeGeometry_Full_Test_20261004.pln",
+    "preflight": "PASS_REPORTED"
+  },
+  "globalInvariants": [
+    "NO_BLIND_RETRY_AFTER_UNKNOWN_OUTCOME",
+    "CHECKPOINT_BEFORE_PHYSICAL_WRITE",
+    "EXACT_DISPATCH_COUNT_RECORDED",
+    "STALE_DECISION_NEVER_REACHES_MUTATION",
+    "APPLIED_RECONCILIATION_NEVER_DUPLICATES",
+    "NOT_APPLIED_RETRY_REQUIRES_FRESH_OBSERVE_AND_REPLAN",
+    "AMBIGUOUS_RECONCILIATION_BLOCKS",
+    "VERIFIED_REQUIRES_FACTUAL_READBACK",
+    "NO_PROGRESS_AND_ITERATION_LIMIT_FAIL_CLOSED"
+  ],
+  "scenarios": [
+    {
+      "id": "S4-01",
+      "name": "happy_path_wall_regression",
+      "expected": "PASS",
+      "maxPhysicalDispatches": 1,
+      "requiresReadback": true,
+      "oracle": [
+        "Stage1",
+        "Stage3"
+      ]
+    },
+    {
+      "id": "S4-02",
+      "name": "stale_before_execution",
+      "expected": "BLOCK_REOBSERVE_REPLAN",
+      "maxPhysicalDispatches": 0,
+      "requiresReadback": false,
+      "oracle": [
+        "Stage2 stale fixture",
+        "T6 principle"
+      ]
+    },
+    {
+      "id": "S4-03",
+      "name": "unknown_applied",
+      "expected": "RECONCILE_APPLIED_NO_DUPLICATE",
+      "maxPhysicalDispatches": 1,
+      "requiresReadback": true,
+      "oracle": [
+        "BIMEXEC T4"
+      ]
+    },
+    {
+      "id": "S4-04",
+      "name": "unknown_not_applied",
+      "expected": "PROVE_ABSENCE_FRESH_REPLAN_THEN_OPTIONAL_NEW_ATTEMPT",
+      "sameAttemptReplayAllowed": false,
+      "requiresReadback": true,
+      "oracle": [
+        "old safe_bim_runtime NOT_APPLIED gate"
+      ]
+    },
+    {
+      "id": "S4-05",
+      "name": "ambiguous_reconciliation",
+      "expected": "BLOCK_NO_RETRY",
+      "additionalPhysicalDispatchesAfterAmbiguity": 0,
+      "oracle": [
+        "old safe_bim_runtime ambiguous gate"
+      ]
+    },
+    {
+      "id": "S4-06",
+      "name": "crash_after_dispatch_restart",
+      "expected": "RESTART_RECONCILE_NO_DUPLICATE",
+      "maxPhysicalDispatchesForAppliedVariant": 1,
+      "requiresReadback": true,
+      "oracle": [
+        "BIMEXEC T5"
+      ]
+    },
+    {
+      "id": "S4-07",
+      "name": "no_progress",
+      "expected": "BLOCKED_NO_PROGRESS",
+      "oracle": [
+        "Stage2 completion d6ed3b07"
+      ]
+    },
+    {
+      "id": "S4-08",
+      "name": "iteration_limit",
+      "expected": "BLOCKED_ITERATION_LIMIT"
+    },
+    {
+      "id": "S4-09",
+      "name": "transport_failure_before_attempt",
+      "expected": "BLOCKED_PRE_DISPATCH",
+      "maxPhysicalDispatches": 0
+    },
+    {
+      "id": "S4-10",
+      "name": "readback_unavailable",
+      "expected": "NEVER_VERIFIED",
+      "maxPhysicalDispatches": 1,
+      "requiresReadback": true,
+      "oracle": [
+        "T7/T9 principles",
+        "old runtime DONE readback gate"
+      ]
+    }
+  ],
+  "completionGate": {
+    "allScenariosCurrentEvidence": true,
+    "allRequiredVerdictsPass": true,
+    "blindRetryCount": 0,
+    "verifiedWithoutReadbackCount": 0,
+    "auditPacksVerify": true,
+    "implementationPublished": true,
+    "acceptanceReportPublished": true,
+    "independentAuditPossible": true
+  }
+}
