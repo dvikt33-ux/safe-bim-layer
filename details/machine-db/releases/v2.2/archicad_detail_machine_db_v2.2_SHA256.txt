@@ -1,0 +1,2 @@
+058b66624ae97e3fd95db7769ca447e1ddcd9b1202bc04b2fefde21d415ae4af  archicad_detail_machine_db_v2.2_CORE_2026-10-06.zip
+d905c3122668bc4f7b5b26ad7e6bcab1739af22b28acdce816b43b35283098f2  archicad_detail_machine_db_v2.2_FULL_2026-10-06.zip

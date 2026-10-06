@@ -1,0 +1,201 @@
+{
+  "release": "2.2",
+  "format": "systematized_active_machine_state",
+  "detail_units": 1211,
+  "active_ir": 1211,
+  "parameter_facts": 1155,
+  "component_variants": 536,
+  "dimension_queue": 610,
+  "files": [
+    {
+      "file": "AUDIT_v2.2.json",
+      "size": 2462,
+      "sha256": "a92770c35f01975e7e87fda41a8a69357f939b6611874687827bceb540b06bf5"
+    },
+    {
+      "file": "README_v2.2.md",
+      "size": 2497,
+      "sha256": "046ba8d597dd4f59f8e6396ffbec1bca891ae0652b25d73fa8d1ece049969e56"
+    },
+    {
+      "file": "SOURCE_VERIFY_FULL_v2.2.json",
+      "size": 15494,
+      "sha256": "81752340e865edd8cacd1ab6e03dede51c7aeb5739e7ba21dc6722c32f5f6444"
+    },
+    {
+      "file": "SUMMARY_v2.2.json",
+      "size": 509,
+      "sha256": "6970834d3f57f49cf425b8ffc4d2de3b82c6194d117b8e4a50867121bbba32c9"
+    },
+    {
+      "file": "archicad_build_contract_v0.5.json",
+      "size": 1032,
+      "sha256": "e74e6ca9c5def505075819b9ea92db17e7ea9e18f600b7a035b8029ff3c7b90d"
+    },
+    {
+      "file": "archicad_system_grammars_v0.7.json",
+      "size": 5592,
+      "sha256": "822cca151db347067d0a8df0727b61a0f912d33571a61c7d0fc58a6eddb46662"
+    },
+    {
+      "file": "archicad_tool_mapping_v0.9.json",
+      "size": 2406,
+      "sha256": "cdb8c7782b49134b90169dd57a207cf750f5149853015bad7db3ed502e645e30"
+    },
+    {
+      "file": "armo_assembly_grammar_v2.0.json",
+      "size": 1602,
+      "sha256": "ab3e8aca9e2d58de338704d54fd47d6b42b783f24554309d381a63df088bf2a7"
+    },
+    {
+      "file": "armo_profile_geometry_v2.0.jsonl",
+      "size": 19705,
+      "sha256": "ef9ee51ec99f86692725180e20c35d6a82ca10534cf631fecd873d6f971faff7"
+    },
+    {
+      "file": "armo_source_semantics_v2.0.jsonl",
+      "size": 70798,
+      "sha256": "8e1a6e36e44e9d4362b46050f0ead26fda013a7b58f45221dda34d2f6642dddd"
+    },
+    {
+      "file": "component_variants_v2.2.jsonl",
+      "size": 378715,
+      "sha256": "fd0cf2685da762d8552ffbe1900dd427106d7b60f47b202529801d887ccd08ba"
+    },
+    {
+      "file": "cross_section_geometry_aliases_v1.9.jsonl",
+      "size": 11652,
+      "sha256": "3d3adc2220dab21df542df73c1e5e6413ec58408b0212a95acf8626fb40dc9da"
+    },
+    {
+      "file": "cross_source_geometry_aliases_v1.7.jsonl",
+      "size": 9756,
+      "sha256": "e5397569fabdf0fd12030058d3b145c4c5b5340c9578dd01b37817eca02ff8c7"
+    },
+    {
+      "file": "details_active_v2.2.jsonl",
+      "size": 7167100,
+      "sha256": "c56414d65030cf9eeab4693aaa6f1d003f6d9dc98acfca9a62bcce9239d4cf8e"
+    },
+    {
+      "file": "dimension_binding_queue_v2.2.jsonl",
+      "size": 205735,
+      "sha256": "38ecfcc5b3b5255099578024b2ca6bfd0a937aa8887507250c0162853dd1f84e"
+    },
+    {
+      "file": "favorit_composite_section3_semantics_v1.8.jsonl",
+      "size": 170567,
+      "sha256": "c6e925f21d8be7a424ed04fb6b07aad3b96a06e03b4a0ac9804986944d56b101"
+    },
+    {
+      "file": "favorit_composite_section4_semantics_v1.9.jsonl",
+      "size": 135919,
+      "sha256": "2c910180ed430704ce316d9c0c3d3af719a2490b153db1f77fd70be1ad0efbd1"
+    },
+    {
+      "file": "favorit_facade_assembly_grammar_v1.2.json",
+      "size": 4340,
+      "sha256": "b809f62da750a92f132c19c35c8b85ba1b4c5fb73558190f4d4613a893663a01"
+    },
+    {
+      "file": "favorit_section2_semantics_v1.3.jsonl",
+      "size": 134046,
+      "sha256": "c4fd09b254a52be15222c525dc1fe6347a3855a64fab3ff1291d0c6e8c9f5772"
+    },
+    {
+      "file": "favorit_section3_semantics_v1.4.jsonl",
+      "size": 132612,
+      "sha256": "fab66076ba9e02d714cf597420e4f79492a75ad806d1712c0b16831b310b14e8"
+    },
+    {
+      "file": "favorit_section4_semantics_v1.5.jsonl",
+      "size": 178861,
+      "sha256": "a46ef1dc2a735ed355d5e8e18802c3e1ef34baed2e59bcc2f53cbe7278ba8afa"
+    },
+    {
+      "file": "favorit_section5_semantics_v1.6.jsonl",
+      "size": 135401,
+      "sha256": "7640220134bee866869e0b2b8825a225ddc9b1f39b44e33b21f448ad94e41cca"
+    },
+    {
+      "file": "favorit_section6_semantics_v1.6.jsonl",
+      "size": 106017,
+      "sha256": "dc11db6ca65f98e72188be2076a11c2ba7fd690cf015496cad51daff1cb8ab75"
+    },
+    {
+      "file": "favorit_sections5_6_assembly_grammar_v1.6.json",
+      "size": 2666,
+      "sha256": "dab554fd8d9fc06233edbb246a592dd574a91e7f169dcfaa18d91aeea14a090a"
+    },
+    {
+      "file": "kaiman_kerakam_assembly_grammar_v2.2.json",
+      "size": 2383,
+      "sha256": "f2154bda806fd99a80140626afb9b331498974bd6ffce5190c6e0247c2545227"
+    },
+    {
+      "file": "kaiman_kerakam_normative_claims_v2.2.json",
+      "size": 652,
+      "sha256": "90c0149bbab142e47cd8fcb78884eea8ac40276e56a45777df8d36d0f28cb9b1"
+    },
+    {
+      "file": "kaiman_kerakam_semantics_v2.2.jsonl",
+      "size": 1384375,
+      "sha256": "7b9bba0500583a6f7c7e41af5bb83bd5eabeec85e660f07d9150b4de37bc09d2"
+    },
+    {
+      "file": "kaiman_kerakam_wall_types_v2.2.json",
+      "size": 7247,
+      "sha256": "e24d343c8536270f7689744cf1fac1130462b5849f93ffca267fd28e035016bf"
+    },
+    {
+      "file": "kleyko_panel_fix_assembly_grammar_v2.1.json",
+      "size": 1827,
+      "sha256": "d1e2da0cc825d1e37724847387da1d53f1217524217a37f4b0351f74fabc1122"
+    },
+    {
+      "file": "kleyko_panel_fix_semantics_v2.1.jsonl",
+      "size": 173803,
+      "sha256": "870fba9b0f94c1e47ed9165c84bfff1beab1522959d78721e19be991f12fe4eb"
+    },
+    {
+      "file": "kleyko_source_anomalies_v2.1.jsonl",
+      "size": 951,
+      "sha256": "9ec466d129fde594f4ed74e1afd2ed5695a9c9f0c1d824e8846560f56605516d"
+    },
+    {
+      "file": "manifest_v2.2.json",
+      "size": 935,
+      "sha256": "a5c9c565c924c43b21ddd276087f6ada95cb40002ae8e5401b0b69e1e0bbd286"
+    },
+    {
+      "file": "page_aliases_v1.3.jsonl",
+      "size": 1368,
+      "sha256": "42ba2a82f09f47bc01aeec60c486d85a69a76014abf1fe0fca9f74389b3beda2"
+    },
+    {
+      "file": "parameter_facts_v2.2.jsonl",
+      "size": 781440,
+      "sha256": "b3012aeab4c68e9a27cbb40097e2a95afd916595d02dfabfe37f75b0fe0d171b"
+    },
+    {
+      "file": "quarantined_detail_records_v1.9.jsonl",
+      "size": 36294,
+      "sha256": "26830b1cd13e7d37103ef65a5d358fc7654af383ead9fb2727154c45941b38a8"
+    },
+    {
+      "file": "source_normative_claims_v2.1.json",
+      "size": 39102,
+      "sha256": "8c9164d01362302805a5da75b49b32c60df980764f28de4661299f64bb668010"
+    },
+    {
+      "file": "source_registry_v2.2.json",
+      "size": 33373,
+      "sha256": "b794824c1d68dbcdf850db2dda998e5689abeac96e929280fdc1adb66886568d"
+    },
+    {
+      "file": "sources_v2.2.json",
+      "size": 25612,
+      "sha256": "9c3d7bc3b6410658912547b333a46b1350636d751b40bf1f1dedee56a1210720"
+    }
+  ]
+}
