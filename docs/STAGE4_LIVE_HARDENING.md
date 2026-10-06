@@ -157,7 +157,9 @@ PASS and Audit Pack PASS.
 
 S4-02 has also completed as LIVE PASS / VERIFIED. It proved one stale-plan invalidation, zero executor calls for the stale action, three confirmed physical writes total (helper plus two goal segments), zero duplicate mutation attempts and Audit Pack PASS.
 
-Stage 4 itself remains **NOT VERIFIED** because S4-03 and S4-06 still require live completion.
+S4-03 has also completed as LIVE PASS / VERIFIED. The injected lost response after the first native write was recovered as `RECONCILED_APPLIED`; the old mutation was not replayed, the second segment continued from the reconciled created GUID, duplicate mutation count remained zero, and Audit Pack passed.
+
+Stage 4 itself remains **NOT VERIFIED** because S4-06 is the only remaining mandatory live scenario.
 
 Backlog only: general transactions/concurrent job ownership, additional BIM
 operations, undo, UI, normative engines and performance work. None is implemented
