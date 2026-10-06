@@ -48,12 +48,12 @@ Stage-2 regression contract pins their paths. See `REFERENCE_AUDIT_2026-10-06.md
 
 | Path | Reason |
 | --- | --- |
-| `bimexec/` | Coordination and handoff documentation from earlier execution architecture |
+| `archive/coordination/bimexec/` | Archived coordination and handoff documentation from the earlier BIMEXEC/T0 architecture |
 | `examples/` | May contain useful small reproducible samples |
 | root-level reports not referenced by the active closed loop | Need reference audit before archival |
 
 A file moves from REVIEW to LEGACY only after confirming that active code/tests/docs do not
-depend on it.
+depend on it. The BIMEXEC coordination-only directory passed this check and has been archived.
 
 ## Cleanup order
 
