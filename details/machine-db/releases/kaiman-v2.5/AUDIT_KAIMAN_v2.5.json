@@ -1,0 +1,37 @@
+{
+  "release": "KAIMAN exact-dimension layer 2.5",
+  "timestamp_utc": "2026-10-06T17:16:02.242075+00:00",
+  "source_scope": "KAIMAN/KERAKAM WT1.3 sheets 40-47, physical PDF pages 80-87",
+  "checks": {
+    "release": "KAIMAN exact-dimension layer 2.5",
+    "parent_git_commit": "a5eb3eee68817925ecfebb0fb22ab6b8fbe59f03",
+    "scope": "WT1.3 sheets 40-47 / PDF pages 80-87",
+    "previous_bound_sheets": 39,
+    "new_bound_sheets": 8,
+    "total_bound_sheets": 47,
+    "remaining_kaiman_sheets": 180,
+    "previous_bindings": 397,
+    "new_bindings": 139,
+    "total_bindings": 536,
+    "source_cross_sheet_mismatches": 5,
+    "raster_measurement_used": 0,
+    "commit_allowed_true": 0
+  },
+  "key_findings": [
+    "WT1.3 repeated brick-faced wall stack remains 120 + 10 + 380 + 15 = 525 mm.",
+    "WT1.3 window sections print storey 3000 mm, sill 940 mm and clear opening 1630 mm.",
+    "Flat-slab window-head assembly prints 120 + 10 + 120 + 140 + 120 + 15 mm horizontally; KERAKAM x2 height 138 mm, 10 mm interlayer and PKB lintel height 65 mm are retained as separate endpoint-bound dimensions.",
+    "Overall section sheets 40/42/44/46 print an upper insulation segment of 80 mm while paired enlarged-node sheets 41/43/45/47 print 150 mm. v2.5 does not normalize this mismatch.",
+    "Enlarged node 1 uses a 230 mm inner structural zone, while enlarged node 3 prints 290 mm. These remain separate node-class geometries.",
+    "Balcony sections retain printed projecting slab depth 160 mm, wall-side support/slab depth 250 mm and 30 mm lower mounting-foam layer.",
+    "Flat-slab sections retain 180 mm slab depth and 30 mm lower layer."
+  ],
+  "safety": [
+    "No pixel/raster-scale dimensions used.",
+    "Only visually printed values with explicit semantic endpoints were bound.",
+    "Cross-sheet mismatches are preserved as blockers, not averaged or silently corrected.",
+    "Values remain source technical solutions, not current normative requirements.",
+    "Project structural sizing and any unbound secondary details remain fail-closed."
+  ],
+  "commit_policy": "fail_closed"
+}
