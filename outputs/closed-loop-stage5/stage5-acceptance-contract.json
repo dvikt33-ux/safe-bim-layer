@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "stage": "Stage 5",
+  "capability": "Hosted Window",
+  "status": "NOT_VERIFIED",
+  "basePerformanceCommit": "ad0c0ed127c068d2a7446f3bf03a31f7584decad",
+  "criteria": [
+    {
+      "id": "W01",
+      "required": true,
+      "check": "Typed create_window action is accepted without changing create_wall behavior",
+      "status": "PENDING_TEST"
+    },
+    {
+      "id": "W02",
+      "required": true,
+      "check": "Host Wall and opening dimensions are bound before dispatch",
+      "status": "PENDING_TEST"
+    },
+    {
+      "id": "W03",
+      "required": true,
+      "check": "Stale model blocks physical execution",
+      "status": "PENDING_TEST"
+    },
+    {
+      "id": "W04",
+      "required": true,
+      "check": "MutationAttemptId is durable before CreateWindows dispatch",
+      "status": "PENDING_TEST"
+    },
+    {
+      "id": "W05",
+      "required": true,
+      "check": "UNKNOWN_OUTCOME never blind-retries CreateWindows",
+      "status": "PENDING_TEST"
+    },
+    {
+      "id": "W06",
+      "required": true,
+      "check": "Applied reconciliation requires exactly one factual hosted Window plus host aperture change",
+      "status": "PENDING_TEST"
+    },
+    {
+      "id": "W07",
+      "required": true,
+      "check": "Ambiguous reconciliation blocks",
+      "status": "PENDING_TEST"
+    },
+    {
+      "id": "W08",
+      "required": true,
+      "check": "Factual read-back proves GUID, host, station, story, physical body and host aperture topology",
+      "status": "PENDING"
+    },
+    {
+      "id": "W09",
+      "required": true,
+      "check": "Independent Audit Pack PASS",
+      "status": "PENDING"
+    },
+    {
+      "id": "W10",
+      "required": true,
+      "check": "One retained LIVE CreateWindows run PASS on explicitly bound disposable/test PLN",
+      "status": "PENDING"
+    }
+  ],
+  "allowedClosedLoopOperationTypes": [
+    "create_wall",
+    "create_window"
+  ],
+  "prohibitedStage5Scope": [
+    "create_door",
+    "create_slab",
+    "create_roof",
+    "create_morph",
+    "change_wall_material"
+  ],
+  "stage5VerifiedOnlyWhen": "W01-W10 all PASS"
+}
