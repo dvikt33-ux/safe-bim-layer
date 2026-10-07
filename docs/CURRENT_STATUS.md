@@ -14,7 +14,8 @@ may describe an older point in the project.
 | Stage 3 — first autonomous Wall loop | PASS | Live one-goal, two-dependent-mutation closed loop |
 | Audit Pack | PASS | Deterministic source-pinned evidence pack and verifier |
 | Stage 4 — live hardening | **PASS / VERIFIED** | All C01–C30 criteria PASS; required live/offline scenario matrix complete |
-| Stage 5 | NOT STARTED | Now permitted; no Stage 5 capability has been started |
+| Stage 4 performance/evidence-I/O cleanup | **PASS / VERIFIED** | Post-Stage-4 optimization only; safety semantics unchanged |
+| Stage 5 | NOT STARTED | Permitted; no Stage 5 capability has been started |
 
 ## Latest Stage 4 work
 
@@ -100,7 +101,27 @@ The real `S4-06` run completed successfully:
 | S4-09 | Pre-dispatch transport failure | OFFLINE PASS |
 | S4-10 | Missing factual read-back never verifies | OFFLINE PASS |
 
-## Current blocker
+## Performance pass
+
+The post-Stage-4 performance/evidence-I/O cleanup is complete and **PASS / VERIFIED**.
+
+Measured operator results:
+
+- retained LIVE S4-06 Audit Pack verification: about 117.6 s historical -> 23.732 s optimized;
+- 10 factual S4-06 snapshots collapse to 3 timing-normalized semantic states (5 / 3 / 2);
+- fresh `hardening-offline-010`: PASS in 22.367 s;
+- prior full-recompute control `hardening-offline-009`: PASS in 195.744 s;
+- Stage 1 fast historical revalidation: 5.786 s;
+- Stage 3 fast historical revalidation: 5.936 s;
+- focused performance/Audit Pack regressions: 58/58 PASS.
+
+The fast historical path is fail-closed: it reuses accepted semantic PASS only
+when the historical verifier Git blob, accepted pack contracts/manifests and all
+pinned source bytes remain unchanged. Any mismatch falls back to the full historical verifier.
+
+Acceptance receipt:
+`outputs/closed-loop-stage4/stage4-performance-acceptance.json`.
+
 
 Stage 4 has no remaining acceptance blocker. Project identity binding, fixture setup, stale-plan rejection, unknown-outcome reconciliation and crash recovery all passed in their required proof modes.
 
@@ -132,4 +153,4 @@ Stage 4 is closed. Preserve these as the verified baseline:
 
 ## Next after Stage 4
 
-Before adding the next BIM capability, perform the planned performance/evidence-I/O cleanup without weakening the verified safety semantics. After that, migrate one already-proven BIM capability at a time into the closed loop; prefer existing proven recipes over new implementations from scratch.
+The planned performance/evidence-I/O cleanup is complete and VERIFIED. The next step may migrate one already-proven BIM capability at a time into the closed loop; prefer existing proven recipes over new implementations from scratch.
