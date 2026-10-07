@@ -1,6 +1,7 @@
 registry_version: 0.1
 status: live_visual_calibration_required
 target: Archicad_29
+confirmed_convention: null
 purpose: >
   Prove the Master Layout paper-space coordinate convention before any
   bottom-right titleblock placement is automated.
