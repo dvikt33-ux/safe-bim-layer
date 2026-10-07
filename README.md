@@ -247,3 +247,20 @@ reconstruction values. The script records the returned GUID immediately under
 back through Tapir, and never saves the PLN. Keep
 `archicad_change_watch.py` running in another terminal so the addition is
 independently visible in the live event stream.
+
+## Archicad native-element minimality rule
+
+This rule applies to all Archicad generation tasks in this repository.
+
+- Use the **minimum number of native BIM elements** needed to represent the intended building geometry.
+- One continuous physical wall run is modeled as **one Archicad Wall** whenever the geometry and construction actually remain continuous.
+- A door or window never justifies splitting a wall into multiple wall fragments. Create a native hosted **Door** or **Window** in the continuous Wall.
+- Split a Wall only where the real construction changes: wall ends, corners, a true gap, a change of geometry, thickness, structure/material, story behavior, or another property that cannot be represented by one Wall.
+- Prefer native Archicad tools for the object being modeled: Wall, Door, Window, Slab, Roof, Stair, Column, Beam, Opening, Railing, Zone, Dimension, etc.
+- Do **not** imitate BIM geometry with Lines, Polylines, Arcs, Hatches, Morphs, or extra Wall fragments when a dedicated native tool can represent it.
+- Do not create helper BIM elements solely to obtain dimension witness points. Dimensions should reference the real model elements whenever the bridge supports it.
+- Reuse a host element for all of its hosted openings instead of creating duplicate or overlapping hosts.
+- Before execution, simplify the planned element graph: merge collinear/continuous runs that have identical properties and confirm that every remaining split has a construction reason.
+- Acceptance criterion: if two adjacent elements could be replaced by one native Archicad element without losing real geometry, semantics, hosted relationships, or required properties, the two-element solution is rejected as unnecessarily fragmented.
+
+In short: **minimum BIM element count, maximum native Archicad semantics**. Openings belong inside hosts; they are not modeled as gaps assembled from host fragments.
