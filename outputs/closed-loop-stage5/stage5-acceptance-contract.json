@@ -87,5 +87,22 @@
     "stage3HistoricalSeconds": 6.047,
     "physicalMutationCalls": 0,
     "liveHostedWindow": "NOT_VERIFIED"
+  },
+  "currentSourceGate": {
+    "status": "REVALIDATION_REQUIRED",
+    "reason": "Approved-plan binding, Stage 5 Audit Pack finisher, journal-count reporting and WindowAction recovery were added after offline-001.",
+    "requiredRun": "outputs/closed-loop-stage5/offline-002"
+  },
+  "planOnlyPreflight": {
+    "status": "PASS",
+    "run": "outputs/closed-loop-stage5/plan-001",
+    "physicalMutationCalls": 0,
+    "modelIdentity": "C:\\Users\\Admin\\Downloads\\дбликат.pln",
+    "modelHash": "89ff21189bed58d9d782088ca1eb7d717bf583144c3b0eb408eca3745d0be870",
+    "sourceGuid": "7CD2B97A-F97B-4FAA-A697-E597C83C37DA",
+    "centerOffset": 20,
+    "sillHeight": 0.8999999999999999,
+    "width": 1.2,
+    "height": 1.5
   }
 }
