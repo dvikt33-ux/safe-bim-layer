@@ -44,7 +44,14 @@ def window(guid='window', host='host', center=5.0):
         'type': 'Window',
         'homeStory': 0,
         'relationships': {'hostGuid': host},
-        'placement': {'referenceGeometry': {'centerOffsetAlongHost': center}},
+        'placement': {'referenceGeometry': {
+            'centerOffsetAlongHost': center,
+            'sillHeight': 0.9,
+            'width': 1.2,
+            'height': 1.5,
+            'refSide': False,
+            'reflected': False,
+        }},
         'bodies': [{'closed': True, 'vertices': [[4.4,0,0.9],[5.6,0,2.4]], 'faces': [{'materialId': 1}]}],
     }
 
@@ -131,6 +138,13 @@ class WindowAttemptTests(unittest.TestCase):
         result = self.reconcile()
         self.assertEqual(result['status'], 'RECONCILIATION_AMBIGUOUS')
         self.assertIn('receipt conflicts', result['reason'])
+
+    def test_wrong_window_dimensions_do_not_reconcile(self):
+        self.dispatch()
+        self.after['elements'][-1]['placement']['referenceGeometry']['width'] = 2.0
+        result = self.reconcile()
+        self.assertEqual(result['status'], 'RECONCILIATION_AMBIGUOUS')
+        self.assertEqual(result['candidateGuids'], [])
 
     def test_two_matching_new_windows_are_ambiguous(self):
         self.dispatch()
