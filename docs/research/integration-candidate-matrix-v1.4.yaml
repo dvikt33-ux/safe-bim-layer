@@ -1,0 +1,208 @@
+version: 1.4
+date: 2026-10-08
+status: research_draft
+current_target: Archicad_29
+
+normative_documentation:
+  gost_r_21_101_2026:
+    official_status: ACTIVE
+    effective_date: "2026-04-01"
+    replaces: GOST_R_21_101_2020
+    official_source: protect.gost.ru
+    correction:
+      - IUS_11_2026
+    template_authority: true
+    key_automation_bindings:
+      - title_blocks_forms_3_6
+      - sheet_image_order
+      - floor_plan_order
+      - vector_dimension_units
+      - scale_display_rules
+      - revision_change_rules
+      - specifications_forms_7_8
+
+  gost_21_501_2018:
+    official_status: ACTIVE
+    discipline: AR_KR_working_documentation
+    current_source: Rosstandart
+    document_graph_input: true
+
+  spds_graphics:
+    public_site_master_standard: GOST_21_101_2020
+    current_2026_authority: STALE_UNTIL_UPDATED
+    archicad29_native: false
+    decision: UX_REFERENCE_ONLY
+
+archicad29_native_docs:
+  keynotes:
+    structured_db: PASS
+    autotext_refresh: PASS
+    legends: PASS
+    import_export: PASS
+    teamwork_hotlinks: PASS
+    decision: REUSE
+
+  autotext:
+    project_layout_drawing_revision_fields: PASS
+    decision: REUSE
+
+  interactive_schedules:
+    model_associative: PASS
+    model_edit_from_schedule: PASS
+    save_as_view: PASS
+    place_on_layout: PASS
+    decision: REUSE
+
+  revision_management:
+    changes_linked_to_elements: PASS
+    affected_layout_revision_propagation: PASS
+    transmittal_sets: PASS
+    publisher_integration: PASS
+    decision: REUSE_NATIVE
+
+tapir:
+  observed_release: 1.7.0
+  observed_release_date: "2026-10-04"
+  license: MIT
+  archicad29: PASS
+  view_map:
+    create_folder: PASS
+    create_views: PASS
+    set_view_settings: PASS
+  viewpoints:
+    create_sections: PASS
+    create_interior_elevations: PASS
+    create_details: PASS
+  layouts:
+    create_subsets: PASS
+    create_layouts: PASS
+    set_layout_settings: PASS
+    custom_layout_data: PASS
+  drawings:
+    create_from_navigator: PASS
+  dimensions:
+    associative_plan_dimensions: PASS
+    get_dimension_data: PASS
+    associative_section_dimensions: PASS
+    wall_thickness_dimensions: PASS
+    section_presets:
+      - WallCompositeFaces
+      - WallSkinBorders
+      - SlabCompositeFaces
+      - SlabSkinBorders
+      - BeamOrColumnRefLineEndPoints
+      - BeamOrColumnBoundingBoxCorners
+      - DoorWindowWallHoleCorners
+      - DoorWindowModelHotspots
+  annotation:
+    labels: PASS
+    texts: PASS
+    autotext: PASS
+    keynotes_crud: PASS
+    keynote_labels: PASS
+  publisher:
+    publisher_sets: PASS
+    publish_set: PASS
+    selected_items: PASS
+  revisions:
+    read_issues_changes_document_revisions: PASS
+    affected_layout_change_reads: PASS
+    create_change_or_transmittal: NOT_VERIFIED
+  schedule_scheme_authoring:
+    native_json_tapir: GAP
+    existing_archicad_mcp_xml_adapter: PASS_REFERENCE
+  decision: PRIMARY_AC29_DOCUMENTATION_EXECUTOR
+
+external_documentation:
+  qonic:
+    ifc_floorplans_sections: PASS
+    auto_dimensions: PASS
+    auto_annotations: PASS
+    room_tags: PASS
+    dwg_export: PASS
+    drawing_presets_oct_2026: PASS
+    russian_spds: NOT_VERIFIED
+    archicad_associativity: FAIL_DIRECT
+    role: SECONDARY_DRAWING_ACCELERATOR_QA
+
+  ares_commander:
+    ifc_rvt_input: PASS
+    auto_floorplans_sections_elevations: PASS
+    auto_dimensions: PASS
+    auto_labels: PASS
+    auto_material_mapping: PASS
+    auto_sheets: PASS
+    linked_model_updates: PASS
+    russian_spds_preset: NOT_VERIFIED
+    role: SECONDARY_DWG_DOCUMENT_ENGINE
+
+  swapp:
+    native_archicad_documentation: PASS_PUBLIC_CLAIM
+    auto_dimensions: PASS_PUBLIC_CLAIM
+    tags_callouts_interior_elevations: PASS_PUBLIC_CLAIM
+    views_sheets: PASS_PUBLIC_CLAIM
+    annotation_declutter: PASS_PUBLIC_CLAIM
+    office_guideline_audit: PASS_PUBLIC_CLAIM
+    change_reapplication: PASS_PUBLIC_CLAIM
+    russian_spds: UNKNOWN
+    api: UNKNOWN
+    role: P0_ENTERPRISE_DEMO_AUDIT
+
+documentation_contract:
+  custom: true
+  fields:
+    - standard_version
+    - correction_set
+    - source_model_revision
+    - view_role_settings
+    - required_content
+    - dimension_recipe
+    - annotation_recipe
+    - layout_master
+    - placement_policy
+    - schedules
+    - publisher_output
+    - coverage_requirements
+
+document_coverage_signature:
+  custom: true
+  fields:
+    - source_project_revision
+    - source_entity_fingerprint
+    - view_settings_hash
+    - annotation_recipe_hash
+    - schedule_recipe_hash
+    - normative_standard_version
+    - layout_recipe_hash
+    - publisher_recipe_hash
+    - published_file_hash
+    - validation_status
+
+custom_blocked_pending_reuse:
+  - generic_view_map_engine
+  - generic_section_elevation_engine
+  - generic_layout_book_engine
+  - generic_drawing_placement_engine
+  - generic_associative_dimension_engine
+  - generic_label_autotext_system
+  - generic_keynote_database
+  - generic_schedule_engine
+  - generic_publisher
+  - generic_revision_database
+  - generic_ifc_to_dwg_drawing_generator
+  - generic_sheet_generation_ai
+
+custom_retain:
+  - current_russian_spds_compiler
+  - sheet_recipes
+  - required_document_graph
+  - view_and_detail_selection_logic
+  - witness_selection_and_dimension_coverage
+  - sheet_legibility_policy_if_gap_proven
+  - document_coverage_signature
+  - completeness_gate
+  - orchestration_readback_qa
+
+next_tests:
+  - DOC_AC29_01
+  - SPDS_2026_01
