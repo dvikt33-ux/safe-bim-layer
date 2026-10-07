@@ -58,8 +58,14 @@ class FastHistoricalRevalidationTests(unittest.TestCase):
     def baseline_bytes(self, path):
         return self.baseline[path]
 
-    def run_fast(self):
-        with patch.object(offline, 'ROOT', self.root),              patch.object(offline, '_baseline_bytes', side_effect=self.baseline_bytes):
+    def run_fast(self, baseline_blob='same-blob', head_blob='same-blob', tracked_clean=True):
+        def git_blob(ref, path):
+            return baseline_blob if ref == offline.VERIFIED_STAGE4_BASELINE else head_blob
+
+        with patch.object(offline, 'ROOT', self.root), \
+             patch.object(offline, '_baseline_bytes', side_effect=self.baseline_bytes), \
+             patch.object(offline, '_git_blob_sha', side_effect=git_blob), \
+             patch.object(offline, '_tracked_file_clean', return_value=tracked_clean):
             return offline.fast_historical_verify('stageX', 'outputs/history/audit-pack')
 
     def test_fast_revalidation_passes_for_identical_verified_bytes(self):
@@ -74,9 +80,12 @@ class FastHistoricalRevalidationTests(unittest.TestCase):
             self.run_fast()
 
     def test_fast_revalidation_rejects_changed_historical_verifier(self):
-        (self.root/'scripts/audit_pack.py').write_text('VERIFIER = 2\n', encoding='utf-8')
         with self.assertRaisesRegex(RuntimeError, 'verifier changed'):
-            self.run_fast()
+            self.run_fast(baseline_blob='baseline', head_blob='changed')
+
+    def test_fast_revalidation_rejects_local_verifier_edits(self):
+        with self.assertRaisesRegex(RuntimeError, 'local working-tree/index changes'):
+            self.run_fast(tracked_clean=False)
 
 
 if __name__ == '__main__':
