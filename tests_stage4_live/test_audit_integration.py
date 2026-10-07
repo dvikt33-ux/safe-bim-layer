@@ -115,8 +115,8 @@ class ScenarioPackTests(unittest.TestCase):
     def test_nested_native_seconds_never_collapses_semantic_change(self):
         a = deepcopy(self.before_data)
         b = deepcopy(self.before_data)
-        a['elements'][0]['properties']['nativeSeconds'] = 10
-        b['elements'][0]['properties']['nativeSeconds'] = 11
+        a['elements'][0].setdefault('properties', {})['nativeSeconds'] = 10
+        b['elements'][0].setdefault('properties', {})['nativeSeconds'] = 11
         first = self.scenario/'nested-a.json'
         second = self.scenario/'nested-b.json'
         durable_json(first, a)
