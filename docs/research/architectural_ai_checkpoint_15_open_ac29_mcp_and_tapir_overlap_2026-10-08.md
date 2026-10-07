@@ -317,6 +317,75 @@ Practical split after this finding:
 - **generic evaluated 3D topology/material provenance** -> keep our Model Dump until an
   equivalent upstream command is proven.
 
+### 4D. Documentation primitives are already broad in the same Tapir build
+
+Inspection of `AddOnMain.cpp` at `d2dfeec` also changes the future documentation
+roadmap.
+
+The exact project Tapir revision already registers commands for:
+
+**Views / Navigator**
+- `CloneProjectMapItemToViewMap`;
+- `CreateViewsInViewMap`;
+- `CreateViewMapFolder`;
+- `GetViewSettings` / `SetViewSettings`;
+- 2D view rotation/transform handling;
+- navigator move/rename/delete/tree operations.
+
+**Viewpoints / documentation databases**
+- `CreateSections`;
+- `CreateInteriorElevations`;
+- `CreateDetails`;
+- `CreateWorksheets`.
+
+No `CreateElevationsCommand` was found in this pass, so exterior Elevation creation
+must stay a proven gap until another upstream command is identified.
+
+**Dimensions / annotations**
+- `CreateAssociativeDimensions`;
+- `CreateAssociativeDimensionsOnSection` with wall/slab/beam/column/opening presets;
+- `CreateWallThicknessDimensions`;
+- `GetDimensionData`;
+- `CreateLabels`;
+- `CreateTexts`;
+- Text/Label modification;
+- AutoText lookup.
+
+**Layouts / drawings / publishing**
+- `CreateLayout` including backing master layout;
+- `CreateLayoutSubset`;
+- `CreateDrawings`;
+- `UpdateDrawings`;
+- `ChangeDrawingLink`;
+- Layout settings/custom fields;
+- `PublishPublisherSet`.
+
+**Revision read**
+- `GetDocumentRevisions`;
+- `GetCurrentRevisionChangesOfLayouts`.
+
+Source:
+https://github.com/ENZYME-APD/tapir-archicad-automation/blob/d2dfeec7936dd1dbed4e2412f406b30291959c26/archicad-addon/Sources/AddOnMain.cpp
+
+### Roadmap implication
+
+Do **not** write a generic documentation CRUD layer.
+
+The remaining custom problem is higher-level production intelligence:
+
+- what views are required;
+- which elements should be dimensioned;
+- how to choose stable witness points;
+- how to compose a sheet;
+- how to place drawings to avoid overlap and respect office standards;
+- how to name/number views and sheets;
+- how to decide whether a section/elevation/detail is actually needed;
+- how to verify a full documentation set after regeneration.
+
+This also repositions SWAPP Frank more precisely: its benchmark value is the
+end-to-end production policy/orchestration and learned office workflow, not the mere
+existence of low-level Archicad documentation commands.
+
 ---
 
 ## 5. New candidate — alesdev88/Archicad-MCP
@@ -540,7 +609,8 @@ Unless live tests disprove upstream behavior:
 - arbitrary Morph body create/replace;
 - generic native element-change observer, if Tapir notification reliability is confirmed live;
 - generic per-command single-undo wrapper;
-- generic MCP schema/tool registry.
+- generic MCP schema/tool registry;
+- generic documentation CRUD for views/layouts/drawings/dimensions/text/labels/publishing.
 
 ### Keep custom only where evidence still supports it
 
@@ -698,6 +768,7 @@ native CRUD layer.
 | Broad AC29 execution | Tapir | only proven gaps |
 | MCP command exposure | SzamosiMate/tapir-archicad-MCP candidate | likely no generic registry |
 | Safety / QA / dry-run UX | alesdev88/Archicad-MCP candidate | project-specific policy only |
+| Documentation primitives | Tapir | production policy/orchestration only |
 | Alternative broad closed executor | HuskyBIM | adapter only if it wins benchmark |
 | Resolved floor-plan cut geometry | Tapir floorPlanPolygons | likely no custom layer for Walls/Columns/Beams |
 | Deep evaluated 3D topology | native Model Dump only where Tapir has no equivalent | residual but currently justified |
@@ -724,7 +795,8 @@ Add to STOP / DO NOT IMPLEMENT GENERICALLY:
 - native generic element observer if EVENT-01 passes;
 - custom per-command single-undo wrappers;
 - custom MCP registry over Tapir;
-- custom Tapir schema-discovery layer.
+- custom Tapir schema-discovery layer;
+- custom generic Layout/Drawing/View/Dimension/Label/Text writer layer.
 
 PAUSE until benchmark:
 
