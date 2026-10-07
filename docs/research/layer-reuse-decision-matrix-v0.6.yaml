@@ -1,0 +1,328 @@
+version: 0.6
+date: 2026-10-08
+target: Archicad_29
+status: active_research
+supersedes: docs/research/layer-reuse-decision-matrix-v0.5.yaml
+
+objective:
+  primary: minimize_total_human_time_to_valid_deliverable_project
+  kpis:
+    - time_to_valid_model
+    - time_to_valid_documentation
+    - time_to_release
+    - human_rechecks
+    - late_corrections
+    - first_pass_rule_coverage
+
+execution_levels:
+  light:
+    llm: false
+    scope: single_or_simple_deterministic_operations
+    components:
+      - fast_modeling_gestures
+      - semantic_bim_edits
+      - snapping
+      - approved_primitives
+      - class_A_rule_enforcement
+      - cached_rule_applicability
+      - immediate_readback
+  medium:
+    scope: short_context_sensitive_or_repetitive_workflows
+    router_order:
+      - deterministic_command_alias
+      - semantic_top_k_tool_retrieval
+      - tiny_local_function_router_if_needed
+    target_tool_count_exposed: 3_to_5
+    components:
+      - bounded_plan
+      - provider_selection
+      - execution
+      - readback
+      - incremental_validation
+  heavy:
+    scope:
+      - cross_discipline
+      - high_blast_radius
+      - ambiguous_rules
+      - full_documentation
+      - full_project_audit
+      - design_healing
+    components:
+      - frontier_planner
+      - canonical_project_graph
+      - verified_rule_ir
+      - design_healing
+      - ifc_agent_batch_strategy
+      - external_checkers
+
+compliance_evidence:
+  A_ENFORCED_AT_CREATION:
+    meaning: invalid_state_blocked_or_snapped_before_commit
+  B_VERIFIED_IMMEDIATELY:
+    meaning: post_commit_readback_and_deterministic_postcondition
+  C_VERIFIED_BY_HEAVY_CHECKER:
+    meaning: cross_element_cross_discipline_or_document_check
+  D_HUMAN_INTERPRETATION_REQUIRED:
+    meaning: cannot_be_claimed_compliant_automatically
+  release_gate:
+    states:
+      - pass
+      - fail
+      - not_applicable
+      - not_verified
+      - interpretation_required
+
+fast_modeling:
+  benchmark_primary: qonic
+  native_archicad_precedent: ci_structure
+  archicad_api_feasibility:
+    - 3d_point_line_arc_polygon_input
+    - custom_input_plane
+    - smart_cursor_neig_filters
+    - input_constraints
+    - dynamic_feedback
+    - element_highlighting
+    - modeless_palette
+    - custom_toolbox
+  target_commands:
+    - bim_push_pull
+    - sketch_on_face
+    - extrude_boundary
+    - slice_by_sketch
+    - smart_offset
+    - align_distribute
+    - manipulator_anywhere
+    - select_same
+    - repeat_last_operation
+    - mirror
+    - array_along_path
+    - fill_area_with_objects
+    - place_on_surface
+    - smart_component_replace
+    - context_menu_at_cursor
+    - smart_opening_edit
+    - semantic_wall_slab_roof_edge_edit
+  semantic_rule: preserve_native_bim_semantics_before_falling_back_to_morph_or_brep
+
+approved_construction_primitives:
+  acronym: ACP
+  archicad_native_foundations:
+    - favorites
+    - element_transfer_sets
+    - classifications_and_properties
+    - composites
+    - complex_profiles_with_modifiers
+    - gdl_objects_with_editable_hotspots
+    - addon_objects_or_element_user_data_for_custom_provenance
+  stores:
+    - semantic_parameters
+    - applicable_rule_ids
+    - permitted_parameter_intervals
+    - layer_material_requirements
+    - host_requirements
+    - dependent_details
+    - documentation_recipe
+    - verification_tests
+    - version
+    - provenance
+  candidate_first_cases:
+    - window_reveal_quarter_sill_head_jamb
+    - wall_assembly
+    - slab_build_up_and_edge
+    - accessible_door
+    - bathroom_clearance_module
+
+provider_strategy:
+  primary_ac29_execution: huskybim
+  open_reference_and_fallback: tapir
+  cross_host_openbim_governance: archi_automate
+  specialist_external_checks:
+    - solibri
+    - cypeurban
+    - cype_construction_systems
+    - zdanie_ai
+    - speckle_automate
+    - tangl
+    - usbim
+  provider_selection_metrics:
+    - semantic_fidelity
+    - latency
+    - transaction_safety
+    - readback_quality
+    - known_version_bugs
+    - required_context
+
+new_candidates:
+  qonic:
+    roles:
+      - fast_modeling_ux_benchmark
+      - direct_plus_object_modeling_reference
+      - agentic_execute_fix_reference
+    confirmed_public_patterns:
+      - push_pull
+      - chalk
+      - extrude
+      - loft
+      - sweep
+      - slice
+      - booleans
+      - snapping
+      - manipulator_anywhere
+      - components
+      - ids_validation
+      - large_scale_property_repair
+
+  ci_tools:
+    roles:
+      - ac29_productivity_pattern_library
+    components:
+      structure:
+        - rotate
+        - split
+        - bend
+        - offset
+        - align
+      fitout:
+        - room_sets
+        - clearance_objects
+        - door_circulation_clearance
+        - window_treatment_clearance
+      doors_windows:
+        - trims_sills_headers_jambs
+        - composite_wall_returns
+        - snap_sizes
+        - graphical_schedules
+      cabinets:
+        - direct_3d_edit_palette
+        - select_similar_modules
+        - automatic_benchtop
+        - contiguous_edge_edit
+      coverings:
+        - associative_host_coverings
+      sites:
+        - building_envelope
+        - objects_along_path
+        - objects_in_fill
+        - place_on_mesh
+      labeller:
+        - click_surface_to_label
+
+  zdanie_ai:
+    roles:
+      - independent_russian_document_audit
+      - coverage_gate_reference
+      - specialist_critic_routing_reference
+    integration_current:
+      - rest_api
+      - webhooks
+    integration_planned_publicly:
+      - mcp
+      - bcf
+    trust_rule: benchmark_against_authoritative_norm_corpus
+
+  cypeurban:
+    roles:
+      - deterministic_urban_rule_engine_reference
+      - external_site_checker
+    checks:
+      - plot
+      - floors_heights
+      - setbacks
+      - overhangs
+      - occupancy_buildability
+      - patios
+      - parking
+      - adjacent_buildings
+
+  cype_construction_systems:
+    roles:
+      - assembly_knowledge_reference
+      - thickness_coherence_checker
+    data:
+      - layers
+      - thickness
+      - materials
+      - density
+      - thermal_properties
+      - linked_architectural_element
+
+  motif:
+    roles:
+      - modern_associative_bim_ux_benchmark
+      - agent_in_live_model_reference
+    limitation: archicad_integration_not_confirmed
+
+  speckle:
+    roles:
+      - event_driven_external_automation_bus
+      - open_data_and_analytics
+    archicad_versions:
+      - 27
+      - 28
+      - 29
+    triggers:
+      - model_change
+      - schedule
+      - manual
+
+  tangl:
+    roles:
+      - russian_bim_qa_benchmark
+      - model_data_api_reference
+    public_checks:
+      - clash
+      - minimum_distance
+      - parameter_presence
+      - parameter_filling
+      - eir
+      - apartment_product_regulatory
+
+  usbim:
+    roles:
+      - openbim_federation_alternative
+      - ifc_editor_checker
+      - bcf_clash_validation
+      - cde_4d_gis_benchmark
+
+validation_strategy:
+  default: incremental
+  pipeline:
+    - element_event
+    - changed_guid_set
+    - graph_impact_cone
+    - applicable_active_rules
+    - affected_checks_only
+  full_model_check: milestone_only
+  precedent: graphisoft_solibri_connection_changed_element_sync
+
+local_router:
+  deployment: separate_local_sidecar_not_inside_archicad_process
+  priorities:
+    - deterministic_alias_first
+    - embedding_retrieval_second
+    - small_function_model_third
+  never_owns:
+    - legal_interpretation
+    - canonical_state
+    - high_risk_unbounded_mutation
+
+research_queue:
+  - FASTMODE_01
+  - QONIC_UX_01
+  - CI_TOOLS_01
+  - COMPLIANCE_BY_CONSTRUCTION_01
+  - ACP_01
+  - ROUTER_01
+  - DELTA_CHECK_01
+  - HUSKY_DEEP_01
+  - HUSKY_GEOM_01
+  - HUSKY_TXN_01
+  - HUSKY_DOC_01
+  - HUSKY_COMPLEX_01
+  - OPENSTACK_DEEP_01
+  - CYPE_01
+  - RUS_AUDIT_01
+  - SPECKLE_01
+  - TANGL_USBIM_01
+
+governing_rule: use_the_least_expensive_intelligence_that_can_produce_a_correct_verified_result
