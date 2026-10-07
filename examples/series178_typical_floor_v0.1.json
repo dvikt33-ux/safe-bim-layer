@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "0.1",
+  "name": "Series 178-07sm.86 typical floor MVP",
+  "source": {
+    "project": "178-07см.86",
+    "drawing": "План типового этажа, неизменяемая часть",
+    "status": "PROVISIONAL_RECONSTRUCTION_FROM_PASSPORT_PHOTO",
+    "notes": [
+      "Grid and overall dimensions are read from the supplied project passport.",
+      "Panel catalog marks are not yet verified.",
+      "Internal layout is intentionally limited to the structural skeleton for the first live Archicad pass."
+    ]
+  },
+  "units": "m",
+  "defaultStoryIndex": 1,
+  "grid": {
+    "x": [
+      {"axis": "1с", "x": 0.0},
+      {"axis": "2с", "x": 3.0},
+      {"axis": "3с", "x": 6.6},
+      {"axis": "4с", "x": 9.6},
+      {"axis": "6с", "x": 13.2},
+      {"axis": "7с", "x": 16.8},
+      {"axis": "8с", "x": 20.4},
+      {"axis": "9с", "x": 23.4}
+    ],
+    "y": [
+      {"axis": "А", "y": 0.0},
+      {"axis": "Б", "y": 5.4},
+      {"axis": "В", "y": 7.8},
+      {"axis": "Г", "y": 13.2}
+    ],
+    "overall": {"x": 23.4, "y": 13.2}
+  },
+  "provisionalConstruction": {
+    "storyHeight": 3.0,
+    "wallClearHeight": 2.84,
+    "externalPanelThickness": 0.35,
+    "internalBearingPanelThickness": 0.16,
+    "partitionThickness": 0.08,
+    "slabThickness": 0.16
+  },
+  "slabs": [
+    {
+      "id": "FLOOR_MAIN",
+      "polygon": [[0.0,0.0],[23.4,0.0],[23.4,13.2],[0.0,13.2]],
+      "thickness": 0.16,
+      "referencePlaneLocation": "Top"
+    }
+  ],
+  "walls": [
+    {"id":"EXT_S_01","role":"external","a":[0.0,0.0],"b":[3.0,0.0]},
+    {"id":"EXT_S_02","role":"external","a":[3.0,0.0],"b":[6.6,0.0]},
+    {"id":"EXT_S_03","role":"external","a":[6.6,0.0],"b":[9.6,0.0]},
+    {"id":"EXT_S_04","role":"external","a":[9.6,0.0],"b":[13.2,0.0]},
+    {"id":"EXT_S_05","role":"external","a":[13.2,0.0],"b":[16.8,0.0]},
+    {"id":"EXT_S_06","role":"external","a":[16.8,0.0],"b":[20.4,0.0]},
+    {"id":"EXT_S_07","role":"external","a":[20.4,0.0],"b":[23.4,0.0]},
+
+    {"id":"EXT_N_01","role":"external","a":[0.0,13.2],"b":[3.0,13.2]},
+    {"id":"EXT_N_02","role":"external","a":[3.0,13.2],"b":[6.6,13.2]},
+    {"id":"EXT_N_03","role":"external","a":[6.6,13.2],"b":[9.6,13.2]},
+    {"id":"EXT_N_04","role":"external","a":[9.6,13.2],"b":[13.2,13.2]},
+    {"id":"EXT_N_05","role":"external","a":[13.2,13.2],"b":[16.8,13.2]},
+    {"id":"EXT_N_06","role":"external","a":[16.8,13.2],"b":[20.4,13.2]},
+    {"id":"EXT_N_07","role":"external","a":[20.4,13.2],"b":[23.4,13.2]},
+
+    {"id":"EXT_W_01","role":"external","a":[0.0,0.0],"b":[0.0,5.4]},
+    {"id":"EXT_W_02","role":"external","a":[0.0,5.4],"b":[0.0,7.8]},
+    {"id":"EXT_W_03","role":"external","a":[0.0,7.8],"b":[0.0,13.2]},
+
+    {"id":"EXT_E_01","role":"external","a":[23.4,0.0],"b":[23.4,5.4]},
+    {"id":"EXT_E_02","role":"external","a":[23.4,5.4],"b":[23.4,7.8]},
+    {"id":"EXT_E_03","role":"external","a":[23.4,7.8],"b":[23.4,13.2]},
+
+    {"id":"INT_X_2","role":"bearing","a":[3.0,0.0],"b":[3.0,13.2]},
+    {"id":"INT_X_3","role":"bearing","a":[6.6,0.0],"b":[6.6,13.2]},
+    {"id":"INT_X_4","role":"bearing","a":[9.6,0.0],"b":[9.6,13.2]},
+    {"id":"INT_X_6","role":"bearing","a":[13.2,0.0],"b":[13.2,13.2]},
+    {"id":"INT_X_7","role":"bearing","a":[16.8,0.0],"b":[16.8,13.2]},
+    {"id":"INT_X_8","role":"bearing","a":[20.4,0.0],"b":[20.4,13.2]},
+
+    {"id":"CORE_S","role":"bearing","a":[6.6,5.4],"b":[16.8,5.4]},
+    {"id":"CORE_N","role":"bearing","a":[6.6,7.8],"b":[16.8,7.8]}
+  ],
+  "acceptance": {
+    "overallX": 23.4,
+    "overallY": 13.2,
+    "storyHeight": 3.0,
+    "expectedSlabCount": 1,
+    "expectedWallCount": 28,
+    "toleranceMeters": 0.002
+  }
+}
