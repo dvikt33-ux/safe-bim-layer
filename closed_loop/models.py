@@ -124,8 +124,8 @@ class Action:
     parameters: dict[str, Any]
 
     def __post_init__(self):
-        if self.type != 'create_wall':
-            raise ValueError('Stage 2 mock action allowlist contains create_wall only')
+        if self.type not in {'create_wall', 'create_window'}:
+            raise ValueError('Typed action allowlist contains create_wall and create_window only')
         if not isinstance(self.parameters, dict):
             raise ValueError('parameters must be an object')
         json_value(self.parameters)
