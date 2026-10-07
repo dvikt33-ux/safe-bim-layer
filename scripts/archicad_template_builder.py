@@ -2062,6 +2062,188 @@ def apply_master_layout_shell(api: Tapir, allow_nonempty=False):
 
 
 
+
+def apply_form3_core_geometry(api: Tapir, allow_nonempty=False):
+    """Create the verified 185x55 Form 3 line grid on all registered masters.
+
+    This is production geometry and is hard-gated by a persisted, live-confirmed
+    Master Layout coordinate convention. Existing complete grids are accepted
+    idempotently; partial matches block instead of being overwritten.
+    """
+    validation = validate_specs()
+    if validation["status"] != "PASS":
+        raise RuntimeError(f"Spec validation failed: {validation['errors']}")
+
+    calibration = load_yaml(MASTER_COORD_CALIBRATION)
+    convention = calibration.get("confirmed_convention")
+    if convention not in {"H1", "H2"}:
+        return {
+            "status": "BLOCKED_COORDINATE_CALIBRATION",
+            "writePerformed": False,
+            "reason": (
+                "No persisted live-confirmed Master Layout paper-space convention. "
+                "Run coordinate-calibration and persist H1 or H2 first."
+            ),
+            "confirmedConvention": convention,
+        }
+
+    before_count = len(api.call("GetAllElements").get("elements", []))
+    if before_count and not allow_nonempty:
+        raise RuntimeError(
+            f"Refusing Form 3 production write: current project contains "
+            f"{before_count} model elements. Use a clean candidate project or "
+            f"pass --allow-nonempty explicitly."
+        )
+
+    form3 = load_yaml(FORM3_GEOMETRY)
+    master_registry = load_yaml(MASTER_LAYOUT_FORM3)
+    frame = master_registry.get("frame_mm") or {}
+    right_inset = float(frame.get("inner_from_right", 5))
+    bottom_raw = frame.get("inner_from_bottom", 5)
+    bottom_inset = float(
+        bottom_raw.get("primary", 5)
+        if isinstance(bottom_raw, dict) else bottom_raw
+    )
+    segments_mm = form3.get("line_segments_mm", [])
+
+    plan = plan_master_layouts(api)
+    bad = [x for x in plan["masters"] if x.get("state") != "EXISTS_OK"]
+    if bad:
+        return {
+            "status": "BLOCKED_MASTER_LAYOUT",
+            "writePerformed": False,
+            "reason": "All registered Master Layout shells must exist exactly first.",
+            "masters": bad,
+        }
+
+    def norm_segment(x0, y0, x1, y1):
+        a=(round(float(x0), 6), round(float(y0), 6))
+        b=(round(float(x1), 6), round(float(y1), 6))
+        return tuple(sorted((a,b)))
+
+    results=[]
+    items=_layoutbook_items(api)
+    by_name={
+        x.get("name"):x for x in items
+        if x.get("type")=="MasterLayoutItem" and x.get("name")
+    }
+
+    for row in plan["masters"]:
+        name=row["name"]
+        master=by_name.get(name)
+        if master is None:
+            raise RuntimeError(f"{name}: Master Layout navigator item missing.")
+        _, settings=_layout_settings_from_nav(api, master)
+        width=float(settings.get("horizontalSize"))
+        height=float(settings.get("verticalSize"))
+
+        x0_mm=width-right_inset-185.0
+        if convention=="H1":
+            y0_mm=bottom_inset
+        else:
+            y0_mm=-(height-bottom_inset)
+
+        expected=[]
+        for sx0,sy0,sx1,sy1 in segments_mm:
+            expected.append(norm_segment(
+                (x0_mm+float(sx0))/1000.0,
+                (y0_mm+float(sy0))/1000.0,
+                (x0_mm+float(sx1))/1000.0,
+                (y0_mm+float(sy1))/1000.0,
+            ))
+        expected_set=set(expected)
+
+        change=api.call("ChangeWindow", {"navigatorItemId": master["navigatorItemId"]})
+        if not change.get("success",False):
+            raise RuntimeError(f"{name}: could not activate Master Layout: {change}")
+        current=api.call("GetCurrentWindowType").get("currentWindowType")
+        if current!="MasterLayout":
+            raise RuntimeError(f"{name}: expected MasterLayout window, got {current}")
+
+        native=api.call("GetCurrent2DDocumentV1")
+        actual_set=set()
+        for line in native.get("lines",[]):
+            b=line.get("begCoordinate") or {}
+            e=line.get("endCoordinate") or {}
+            if "x" in b and "y" in b and "x" in e and "y" in e:
+                actual_set.add(norm_segment(b["x"],b["y"],e["x"],e["y"]))
+
+        matched=expected_set & actual_set
+        if matched and matched != expected_set:
+            return {
+                "status": "BLOCKED_PARTIAL_FORM3_GEOMETRY",
+                "writePerformed": False,
+                "masterLayout": name,
+                "matchedSegments": len(matched),
+                "expectedSegments": len(expected_set),
+                "reason": (
+                    "A partial Form 3-like grid already exists. It is not safe "
+                    "to merge or overwrite it automatically."
+                ),
+            }
+
+        if matched == expected_set:
+            results.append({
+                "name": name,
+                "state": "EXISTS_OK",
+                "createdSegments": 0,
+                "originMm": [x0_mm,y0_mm],
+            })
+            continue
+
+        lines_data=[]
+        for sx0,sy0,sx1,sy1 in segments_mm:
+            lines_data.append({
+                "begCoordinate":{
+                    "x":(x0_mm+float(sx0))/1000.0,
+                    "y":(y0_mm+float(sy0))/1000.0,
+                },
+                "endCoordinate":{
+                    "x":(x0_mm+float(sx1))/1000.0,
+                    "y":(y0_mm+float(sy1))/1000.0,
+                },
+                "roomSeparator":False,
+            })
+        created=api.call("CreateLineElements", {"linesData":lines_data})
+        rows=created.get("elements",[])
+        if len(rows)!=len(lines_data) or any("elementId" not in x for x in rows):
+            raise RuntimeError(f"{name}: Form 3 line creation failed: {created}")
+
+        verify=api.call("GetCurrent2DDocumentV1")
+        verify_set=set()
+        for line in verify.get("lines",[]):
+            b=line.get("begCoordinate") or {}
+            e=line.get("endCoordinate") or {}
+            if "x" in b and "y" in b and "x" in e and "y" in e:
+                verify_set.add(norm_segment(b["x"],b["y"],e["x"],e["y"]))
+        if not expected_set.issubset(verify_set):
+            raise RuntimeError(
+                f"{name}: Form 3 line read-back mismatch after creation."
+            )
+        results.append({
+            "name":name,
+            "state":"CREATED_AND_VERIFIED",
+            "createdSegments":len(lines_data),
+            "originMm":[x0_mm,y0_mm],
+        })
+
+    after_count=len(api.call("GetAllElements").get("elements",[]))
+    if after_count!=before_count:
+        raise RuntimeError(
+            "Unexpected model element count change during Form 3 Master Layout write."
+        )
+
+    return {
+        "status":"PASS",
+        "writePerformed":any(x["createdSegments"]>0 for x in results),
+        "confirmedConvention":convention,
+        "masters":results,
+        "modelElementCountUnchanged":True,
+        "staticTextCreated":False,
+        "autoTextCreated":False,
+        "nextGate":"apply_form3_static_labels_then_autotext",
+    }
+
 def apply_master_coordinate_calibration(api: Tapir, allow_nonempty=False):
     """Interactively prove the A4_P Master Layout paper-space convention.
 
@@ -3100,7 +3282,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "action",
-        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "plan-master-coordinate-calibration", "plan-form3-geometry", "plan-autotext", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell", "apply-master-layout-smoke", "apply-layout-autotext-smoke", "apply-master-coordinate-calibration"),
+        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "plan-master-coordinate-calibration", "plan-form3-geometry", "plan-autotext", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell", "apply-master-layout-smoke", "apply-layout-autotext-smoke", "apply-master-coordinate-calibration", "apply-form3-core-geometry"),
     )
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
     parser.add_argument(
@@ -3160,6 +3342,10 @@ def main():
             result = apply_layout_autotext_smoke(api, allow_nonempty=args.allow_nonempty)
         elif args.action == "apply-master-coordinate-calibration":
             result = apply_master_coordinate_calibration(
+                api, allow_nonempty=args.allow_nonempty
+            )
+        elif args.action == "apply-form3-core-geometry":
+            result = apply_form3_core_geometry(
                 api, allow_nonempty=args.allow_nonempty
             )
         else:
