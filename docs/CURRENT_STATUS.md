@@ -15,7 +15,7 @@ may describe an older point in the project.
 | Audit Pack | PASS | Deterministic source-pinned evidence pack and verifier |
 | Stage 4 — live hardening | **PASS / VERIFIED** | All C01–C30 criteria PASS; required live/offline scenario matrix complete |
 | Stage 4 performance/evidence-I/O cleanup | **PASS / VERIFIED** | Post-Stage-4 optimization only; safety semantics unchanged |
-| Stage 5 | NOT STARTED | Permitted; no Stage 5 capability has been started |
+| Stage 5 — Hosted Window | **IN PROGRESS / NOT VERIFIED** | Offline implementation/tests prepared; no Stage 5 live mutation accepted yet |
 
 ## Latest Stage 4 work
 
@@ -154,3 +154,26 @@ Stage 4 is closed. Preserve these as the verified baseline:
 ## Next after Stage 4
 
 The planned performance/evidence-I/O cleanup is complete and VERIFIED. The next step may migrate one already-proven BIM capability at a time into the closed loop; prefer existing proven recipes over new implementations from scratch.
+
+
+## Stage 5 Hosted Window
+
+Stage 5 has started on branch `work/stage5-hosted-window` and is **NOT VERIFIED**.
+
+Scope is exactly one new closed-loop capability: one model-bound hosted Window
+created in one factual Wall. Current implementation includes:
+
+- additive `WindowAction` while the historical Stage-2 `Action` allowlist remains frozen to `create_wall`;
+- factual host/dimension signature before dispatch;
+- durable mutation attempt + existing AttemptJournal;
+- explicit bound `CreateWindows` executor request (no host reselection);
+- stale-before-write rejection;
+- Window-specific applied/not-applied/ambiguous reconciliation;
+- independent factual read-back of host GUID, station, sill, width, height,
+  home story, physical body, host aperture topology, envelope and material set;
+- plan-only runner by default; native mutation requires explicit `--execute`;
+- Stage 5 offline regression gate.
+
+No Door, Slab, Roof, Morph or material-edit closed-loop capability is included
+in this stage. A retained live Hosted Window run and independent Audit Pack are
+still required before Stage 5 can become VERIFIED.
