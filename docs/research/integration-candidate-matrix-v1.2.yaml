@@ -1,0 +1,162 @@
+version: 1.2
+date: 2026-10-08
+status: research_draft
+current_target: Archicad_29
+
+ac29_control_plane:
+  archicad_mcp_alesdev88:
+    license: MIT
+    target: Archicad_29
+    current_documented_release: 0.7.1
+    curated_qa: PASS
+    yaml_rules: PASS
+    official_json_gateway: PASS
+    tapir_gateway: PASS
+    reachable_commands_documented: 309
+    reads_documented: 138
+    writes_documented: 171
+    dry_run_writes: PASS
+    confirm_gate: PASS
+    changeset_planning: PASS
+    readback: PASS
+    issues_bcf: PASS
+    publish: PASS
+    teamwork_reserve_release: PASS
+    property_definition_edit: PASS
+    classification_edit: PASS
+    schedule_xml_tools: PASS_PARTIAL
+    gdl_mesh_pipeline: PASS
+    local_stdio: PASS
+    http_transport: PASS
+    property_read_crash_warning_ac29: CRITICAL
+    priority: P0_CONTROL_PLANE_BENCHMARK
+
+  preferred_read_write_split_hypothesis:
+    read:
+      - native_model_dump
+      - safe_targeted_api
+    write:
+      - archicad_mcp
+      - tapir
+      - huskybim
+      - focused_plugins
+      - native_gap
+    reason: avoid_fragile_json_property_reads_and_preserve_full_geometry_provenance
+
+focused_ac29_plugins:
+  simpleaddon:
+    archicad_versions: "25-29"
+    free_trial_days: 7
+    set_window_door_position:
+      exact_corner_offset: PASS
+      wall_segment_centering: PASS
+      priority: P1_FASTMODE_CANDIDATE
+    travel_distance:
+      auto_recalculate: PASS
+      multifloor: PASS
+      priority: P1
+    section_elevation_dimensions:
+      associative: PASS
+      priority: P1
+    zone_label:
+      source_zone_auto_update: PASS
+      priority: P2
+    gutter_downspout:
+      roof_dependent: PASS
+      priority: P2
+    ridge_tile:
+      roof_dependent: PASS
+      priority: P2
+
+facade_window_logic:
+  viewopt_2026:
+    coordinated_facade_window_optimization: PASS_RESEARCH
+    urban_3d_context: PASS
+    computer_vision_view_metric: PASS
+    bayesian: PASS
+    drl: PASS
+    role: METHOD_REFERENCE
+
+  modular_facade_surrogate_2026:
+    daylight: PASS
+    glare: PASS
+    thermal: PASS
+    nsga2: PASS
+    simulation_time_reduction_reported: "~90%"
+    role: SURROGATE_PERFORMANCE_REFERENCE
+
+  window_pv_multiobjective_2026:
+    daylight: PASS
+    energy: PASS
+    thermal_comfort: PASS
+    ml_surrogate: PASS
+    role: METHOD_REFERENCE
+
+  sbim_facade_grammar:
+    custom_project_semantics: true
+    constraints:
+      - datum_bands
+      - vertical_axes
+      - bay_module
+      - opening_family
+      - allowed_dimension_families
+      - sill_head_alignment
+      - solid_void_ratio
+      - corner_rules
+      - cross_storey_alignment
+      - historic_context
+    decision: CUSTOM_THIN_INTENT_LAYER
+
+dependent_elements:
+  pattern: reactive_derived_objects
+  source_examples:
+    - BIMix_lintels_Revit
+    - SimpleAddon_roof_accessories_AC29
+    - Graphisoft_accessories
+  custom_fields:
+    - source_guid
+    - derivation_recipe
+    - parameter_envelope
+    - invalidation_trigger
+    - replace_not_duplicate
+
+equipment_logic:
+  drofus:
+    room_templates: PASS
+    equipment_requirements: PASS
+    equipment_planning: PASS
+    archicad_integration: PASS
+    decision: REQUIREMENT_SOURCE
+  repair_priority:
+    - move_or_reorient_equipment
+    - substitute_equivalent_equipment
+    - adjust_opening_if_valid
+    - move_low_impact_partition
+    - high_impact_wall_change_after_impact_analysis
+
+mep_constructability:
+  graph_llm_2026:
+    scene_graph: PASS_RESEARCH
+    rule_knowledge_graph: PASS_RESEARCH
+    graph_matching: PASS_RESEARCH
+    reported_accuracy: "92%"
+    decision: METHOD_REFERENCE_NOT_CUSTOM_FROM_ZERO
+
+custom_blocked_pending_reuse:
+  - generic_archicad_mcp_server
+  - generic_archicad_api_gateway
+  - generic_schedule_scheme_editor
+  - generic_gdl_mesh_pipeline
+  - generic_window_door_position_ui
+  - generic_travel_distance_tool
+  - generic_section_elevation_dimension_tool
+  - generic_roof_accessory_placement
+  - custom_daylight_window_optimizer
+  - generic_mep_constructability_graph_engine
+
+next_tests:
+  - ARCHICAD_MCP_01
+  - AC29_PROVIDER_BENCH_01
+  - OPENING_MODULE_01
+  - FACADE_GRAMMAR_01
+  - DEPENDENT_ELEMENT_01
