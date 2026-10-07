@@ -390,3 +390,49 @@ Do not expand the full graph families until:
 - local/cloud model routing is benchmarked;
 - repeated-floor strategy is explicit;
 - external products have been evaluated against our requirements rather than duplicated by assumption.
+
+
+## Additional audit finding — HuskyBIM is closer to our Archicad execution problem than expected
+
+Current HuskyBIM documentation (October 2026) states that its Archicad 29 connector exposes about 733 tools and covers element read/create/modify/delete, attributes, classifications, layouts/drawings, BCF issues, stories and properties.
+
+This means our research program should include a formal capability-diff:
+
+`OUR BRIDGE CAPABILITY MATRIX vs HUSKYBIM CAPABILITY MATRIX`.
+
+Questions to test:
+- geometry fidelity for Walls/Doors/Windows/Slabs/Roofs/Stairs/Curtain Walls;
+- batch semantics;
+- read-back evidence;
+- transaction/undo grouping;
+- observer/change-event support;
+- access to element memos, material bindings, host links and result geometry;
+- ability to expose tools to a model/router other than its default Claude workflow;
+- latency and payload sizes;
+- reliability on a large real PLN.
+
+Until those tests exist, HuskyBIM is neither rejected nor made authoritative.
+
+## Additional audit finding — use a model gateway rather than hard-wiring model vendors
+
+LiteLLM is a current open-source OpenAI-compatible model gateway/router with a unified interface, retries, fallbacks, load balancing and caching.
+
+Potential role:
+`Design Engine -> internal Model Gateway -> local/cloud model endpoints`.
+
+This allows the architecture to keep stable logical model roles such as:
+- `architect-deep`;
+- `architect-fast`;
+- `norm-extractor`;
+- `critic`;
+- `embedding`;
+- `reranker`;
+
+while the actual backing model can be replaced after benchmarks.
+
+Important:
+- deterministic task routing policy remains ours;
+- do not use semantic response caching for agentic/normative decisions without strict safeguards;
+- exact project/rule cache keys should include project revision, rule-pack hash and relevant dependency fingerprints.
+
+LiteLLM is an optional infrastructure candidate, not a required MVP dependency. A small custom gateway may remain simpler until more than two or three model endpoints are actually in use.
