@@ -15,7 +15,7 @@ may describe an older point in the project.
 | Audit Pack | PASS | Deterministic source-pinned evidence pack and verifier |
 | Stage 4 — live hardening | **PASS / VERIFIED** | All C01–C30 criteria PASS; required live/offline scenario matrix complete |
 | Stage 4 performance/evidence-I/O cleanup | **PASS / VERIFIED** | Post-Stage-4 optimization only; safety semantics unchanged |
-| Stage 5 — Hosted Window | **IN PROGRESS / NOT VERIFIED** | Offline implementation/tests prepared; no Stage 5 live mutation accepted yet |
+| Stage 5 — Hosted Window | **IN PROGRESS / NOT VERIFIED** | Offline gate PASS; W01–W07 PASS; W08–W10 pending live/read-back/Audit Pack |
 
 ## Latest Stage 4 work
 
@@ -177,3 +177,15 @@ created in one factual Wall. Current implementation includes:
 No Door, Slab, Roof, Morph or material-edit closed-loop capability is included
 in this stage. A retained live Hosted Window run and independent Audit Pack are
 still required before Stage 5 can become VERIFIED.
+
+The first complete Stage 5 offline gate `offline-001` is **PASS**:
+
+- focused command/regression tests: 51/51 PASS;
+- complete Stage 2–5 regression proof: PASS;
+- Stage 1 historical revalidation: 6.086 s;
+- Stage 3 historical revalidation: 6.047 s;
+- total offline proof: 21.036 s;
+- physical mutation calls: 0.
+
+Acceptance criteria W01–W07 are now PASS. W08 factual LIVE read-back, W09
+independent Audit Pack and W10 retained LIVE CreateWindows remain pending.
