@@ -77,15 +77,18 @@ def main():
         execution_mode='LIVE',
     )
     job = orch.run()
+    journals = [read(p) for p in output.rglob('attempts/*.json')]
+    journal_ids = [j['mutationAttemptId'] for j in journals]
     report = {
         'status':'PASS' if job.finalStatus == 'VERIFIED' else job.finalStatus,
         'executionMode':'LIVE',
         'goalId':goal_id,
         'jobFinalStatus':job.finalStatus,
         'terminalReason':job.terminalReason,
-        'physicalMutationCalls':1 if job.liveMutationAttempted else 0,
-        'duplicateMutationCount':0,
-        'mutationAttemptIds':[a['mutationAttemptId'] for a in job.mutationAttempts],
+        'physicalMutationCalls':sum(j.get('nativeCalls',0) for j in journals),
+        'duplicateMutationCount':len(journal_ids)-len(set(journal_ids)),
+        'mutationAttemptIds':journal_ids,
+        'confirmedNativeResponses':sum(j.get('phase') == 'CONFIRMED' for j in journals),
         'createdGuid':session.window_row.get('createdGuid') if session.window_row else None,
         'sourceGuid':session.window_row.get('sourceGuid') if session.window_row else None,
         'readbackPass':bool(session.window_row and session.window_row.get('pass')),
