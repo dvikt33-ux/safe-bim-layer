@@ -21,13 +21,17 @@ New-Item -ItemType Directory -Force -Path $RunDir | Out-Null
 function Invoke-BuilderStep {
     param(
         [Parameter(Mandatory=$true)][string]$Action,
-        [switch]$AllowNonempty
+        [switch]$AllowNonempty,
+        [string]$ExpectedProjectPath = ""
     )
 
     $OutFile = Join-Path $RunDir ("{0}.json" -f $Action)
     $args = @($Builder, $Action, "--port", "$Port", "--out", $OutFile)
     if ($AllowNonempty) {
         $args += "--allow-nonempty"
+    }
+    if ($ExpectedProjectPath) {
+        $args += @("--expected-project-path", $ExpectedProjectPath)
     }
 
     Write-Host "==> $Action"
@@ -122,11 +126,35 @@ switch ($Stage) {
     }
 }
 
+$writeStages = @(
+    "core",
+    "materials-data",
+    "navigator-master",
+    "master-smoke",
+    "layout-autotext-smoke",
+    "master-context-autotext-smoke",
+    "coordinate-calibration",
+    "form3-core",
+    "form3-static",
+    "form3-autotext",
+    "all-safe"
+)
+
+$ConfirmedProjectPath = ""
+if ($writeStages -contains $Stage) {
+    $projectConfirmation = Invoke-BuilderStep -Action "confirm-project"
+    $ConfirmedProjectPath = [string]$projectConfirmation.projectPath
+    if (-not $ConfirmedProjectPath) {
+        throw "confirm-project returned no stable projectPath."
+    }
+}
+
 $summary = [ordered]@{
     status = "PASS"
     runId = $RunId
     stage = $Stage
     port = $Port
+    confirmedProjectPath = $ConfirmedProjectPath
     evidenceDirectory = $RunDir
     steps = @()
     productionGeometryCreated = $false
@@ -138,7 +166,7 @@ $summary = [ordered]@{
 }
 
 foreach ($step in $steps) {
-    $result = Invoke-BuilderStep -Action $step
+    $result = Invoke-BuilderStep -Action $step -ExpectedProjectPath $ConfirmedProjectPath
     $summary.steps += [ordered]@{
         action = $step
         status = [string]$result.status
