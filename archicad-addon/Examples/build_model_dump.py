@@ -67,7 +67,8 @@ def overlay_registration(addon_source):
     autotext_register = ('        err |= RegisterCommand<GetAutoTextsV1Command> (projectCommands, "autotext-v1", '
                          '"Enumerate current Archicad AutoText description/key/value triplets without modifying the project.");')
     if autotext_register not in text:
-        project_anchor = "        AddCommandGroup (projectCommands);"
+        project_anchor = "        err |= RegisterCommand<SetMasterLayoutContextV1Command> (projectCommands, "master-layout-context-v1", "Set or clear the current Master Layout context to a concrete Layout database for AutoText evaluation.");
+        AddCommandGroup (projectCommands);"
         if text.count(project_anchor) != 1:
             raise RuntimeError("Could not locate the unique projectCommands registration group")
         text = text.replace(project_anchor, autotext_register + "\n" + project_anchor, 1)

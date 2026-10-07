@@ -558,3 +558,62 @@ GS::ObjectState GetCurrent2DDocumentV1Command::Execute (const GS::ObjectState&, 
 
     return out;
 }
+
+
+SetMasterLayoutContextV1Command::SetMasterLayoutContextV1Command () : CommandBase (CommonSchema::NotUsed) {}
+
+GS::String SetMasterLayoutContextV1Command::GetName () const
+{
+    return "SetMasterLayoutContextV1";
+}
+
+GS::Optional<GS::UniString> SetMasterLayoutContextV1Command::GetInputParametersSchema () const
+{
+    return R"({
+        "type":"object",
+        "properties":{
+            "layoutDatabaseGuid":{"type":["string","null"]}
+        },
+        "additionalProperties":false
+    })";
+}
+
+GS::Optional<GS::UniString> SetMasterLayoutContextV1Command::GetRawResponseSchema () const
+{
+    return R"({
+        "type":"object",
+        "properties":{
+            "contextSet":{"type":"boolean"},
+            "layoutDatabaseGuid":{"type":["string","null"]}
+        },
+        "additionalProperties":false,
+        "required":["contextSet","layoutDatabaseGuid"]
+    })";
+}
+
+GS::ObjectState SetMasterLayoutContextV1Command::Execute (const GS::ObjectState& parameters, GS::ProcessControl&) const
+{
+    GS::UniString guidString;
+    if (!parameters.Get ("layoutDatabaseGuid", guidString) || guidString.IsEmpty ()) {
+        const GSErrCode clearErr = ACAPI_Navigator_SetMasterLayoutOnLayout (nullptr);
+        if (clearErr != NoError)
+            return CreateErrorResponse (clearErr, "ClearMasterLayoutContext");
+        GS::ObjectState out ("contextSet", false);
+        out.Add ("layoutDatabaseGuid", GS::EmptyUniString);
+        return out;
+    }
+
+    API_DatabaseUnId databaseUnId = {};
+    databaseUnId.elemSetId = APIGuidFromString (guidString.ToCStr ());
+    if (databaseUnId.elemSetId == APINULLGuid)
+        return CreateErrorResponse (APIERR_BADPARS, "Invalid layout database GUID");
+
+    const GSErrCode err = ACAPI_Navigator_SetMasterLayoutOnLayout (&databaseUnId);
+    if (err != NoError)
+        return CreateErrorResponse (err, "SetMasterLayoutContext");
+
+    return GS::ObjectState (
+        "contextSet", true,
+        "layoutDatabaseGuid", guidString
+    );
+}

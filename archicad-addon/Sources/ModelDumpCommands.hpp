@@ -29,3 +29,13 @@ public:
     GS::Optional<GS::UniString> GetRawResponseSchema () const override;
     GS::ObjectState Execute (const GS::ObjectState&, GS::ProcessControl&) const override;
 };
+
+
+class SetMasterLayoutContextV1Command : public CommandBase {
+public:
+    SetMasterLayoutContextV1Command ();
+    GS::String GetName () const override;
+    GS::Optional<GS::UniString> GetInputParametersSchema () const override;
+    GS::Optional<GS::UniString> GetRawResponseSchema () const override;
+    GS::ObjectState Execute (const GS::ObjectState&, GS::ProcessControl&) const override;
+};
