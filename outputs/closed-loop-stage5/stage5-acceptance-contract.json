@@ -9,43 +9,43 @@
       "id": "W01",
       "required": true,
       "check": "Typed create_window action is accepted without changing create_wall behavior",
-      "status": "PENDING_TEST"
+      "status": "PASS"
     },
     {
       "id": "W02",
       "required": true,
       "check": "Host Wall and opening dimensions are bound before dispatch",
-      "status": "PENDING_TEST"
+      "status": "PASS"
     },
     {
       "id": "W03",
       "required": true,
       "check": "Stale model blocks physical execution",
-      "status": "PENDING_TEST"
+      "status": "PASS"
     },
     {
       "id": "W04",
       "required": true,
       "check": "MutationAttemptId is durable before CreateWindows dispatch",
-      "status": "PENDING_TEST"
+      "status": "PASS"
     },
     {
       "id": "W05",
       "required": true,
       "check": "UNKNOWN_OUTCOME never blind-retries CreateWindows",
-      "status": "PENDING_TEST"
+      "status": "PASS"
     },
     {
       "id": "W06",
       "required": true,
       "check": "Applied reconciliation requires exactly one factual hosted Window plus host aperture change",
-      "status": "PENDING_TEST"
+      "status": "PASS"
     },
     {
       "id": "W07",
       "required": true,
       "check": "Ambiguous reconciliation blocks",
-      "status": "PENDING_TEST"
+      "status": "PASS"
     },
     {
       "id": "W08",
@@ -77,5 +77,15 @@
     "create_morph",
     "change_wall_material"
   ],
-  "stage5VerifiedOnlyWhen": "W01-W10 all PASS"
+  "stage5VerifiedOnlyWhen": "W01-W10 all PASS",
+  "offlineGate": {
+    "status": "PASS",
+    "run": "outputs/closed-loop-stage5/offline-001",
+    "operatorReportedTests": 51,
+    "totalSeconds": 21.036,
+    "stage1HistoricalSeconds": 6.086,
+    "stage3HistoricalSeconds": 6.047,
+    "physicalMutationCalls": 0,
+    "liveHostedWindow": "NOT_VERIFIED"
+  }
 }
