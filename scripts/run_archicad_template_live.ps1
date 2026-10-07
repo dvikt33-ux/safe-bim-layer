@@ -1,6 +1,6 @@
 param(
     [int]$Port = 19723,
-    [ValidateSet("preflight","core","materials-data","navigator-master","autotext","master-smoke","layout-autotext-smoke","coordinate-calibration","all-safe")]
+    [ValidateSet("preflight","core","materials-data","navigator-master","autotext","master-smoke","layout-autotext-smoke","coordinate-calibration","form3-core","all-safe")]
     [string]$Stage = "all-safe",
     [string]$OutDir = "outputs/archicad-template-live"
 )
@@ -72,6 +72,7 @@ $autotext = @("plan-autotext")
 $masterSmoke = @("apply-master-layout-smoke")
 $layoutAutoTextSmoke = @("apply-layout-autotext-smoke")
 $coordinateCalibration = @("apply-master-coordinate-calibration")
+$form3Core = @("apply-form3-core-geometry")
 
 switch ($Stage) {
     "preflight" {
@@ -98,6 +99,9 @@ switch ($Stage) {
     "coordinate-calibration" {
         $steps = $coordinateCalibration
     }
+    "form3-core" {
+        $steps = $form3Core
+    }
     "all-safe" {
         $steps = $preflight + $core + $materialsData + $navigatorMaster
     }
@@ -116,6 +120,7 @@ $summary = [ordered]@{
     productionGeometryCreated = $false
     autotextGateExecuted = ($Stage -eq "autotext" -or $Stage -eq "master-smoke" -or $Stage -eq "layout-autotext-smoke")
     coordinateCalibrationExecuted = ($Stage -eq "coordinate-calibration")
+    form3CoreExecuted = ($Stage -eq "form3-core")
 }
 
 foreach ($step in $steps) {
