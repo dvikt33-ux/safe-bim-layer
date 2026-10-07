@@ -1,0 +1,144 @@
+version: 1.0
+date: 2026-10-08
+status: research_draft
+current_target: Archicad_29
+
+semantic_model_stack:
+  ifctolbd:
+    version_observed: 2.54.1
+    license: Apache_2_0
+    ifc_step: PASS
+    ifc_xml: PASS
+    ifc_json: PASS
+    rdf: PASS
+    json_ld: PASS
+    icdd_export: PASS
+    cli: PASS
+    java_library: PASS
+    python_examples: PASS
+    mcp: PASS
+    priority: P0_SEMGRAPH_PROTOTYPE
+
+  ifctolbd_mcp:
+    local_stdio_windows: PASS
+    capability_discovery: PASS
+    model_session_reuse: PASS
+    sparql: PASS
+    guarded_read_only_queries: PASS
+    property_evidence: PASS
+    shacl_validation: PASS
+    explain_validation: PASS
+    revision_compare: PASS
+    geometry_envelope: PASS
+    geometry_full: PASS
+    bim_gis: PASS
+    supply_chain: PASS
+    sustainability: PASS
+    stable_error_states: PASS
+    path_sandboxing: PASS
+    decision: REUSE_NOT_REBUILD
+
+  ifc_identity:
+    ifc_globalid_persistent_by_standard: PASS
+    step_line_number_stable: FAIL
+    external_reference_uris: PASS
+    bsdd_uri_mapping: PASS
+    archicad_export_persistence_real_test: REQUIRED
+
+  sml_en17632:
+    category: semantic_modelling_and_linking
+    skos: PASS
+    rdfs_owl: PASS
+    shacl: PASS
+    sparql_endpoint: PASS
+    public_linked_data: PASS
+    decision: REUSE_GENERIC_RELATIONS
+
+  icdd_iso21597:
+    category: linked_document_container
+    heterogeneous_payloads: PASS
+    element_level_links: PASS
+    rdf_linksets: PASS
+    shacl_validation: PASS
+    project_evidence_bundle_fit: HIGH
+    decision: REUSE_PORTABLE_LINK_CONTAINER
+
+  iib_icdd:
+    license: MIT
+    create: PASS
+    open: PASS
+    validate: PASS
+    edit: PASS
+    export: PASS
+    sparql: PASS
+    shacl: PASS
+    decision: REUSE_IMPLEMENTATION
+
+  rub_icdd_platform:
+    license: MIT
+    web_ui: PASS
+    rest_api: PASS
+    validate: PASS
+    edit: PASS
+    export: PASS
+    production_service: NO_RESEARCH_DEV
+    decision: REFERENCE_OR_SELF_HOST_TEST
+
+project_graph_architecture:
+  hot_graph:
+    custom: true
+    purpose:
+      - live_archicad_dirty_cone
+      - milliseconds_latency
+      - validity_envelopes
+      - critical_dependency_propagation
+    semantic_stack_overhead: avoid_in_hot_path
+
+  semantic_graph:
+    custom_storage_required: false_prefer_existing
+    components:
+      - IFCtoLBD
+      - BOT
+      - OPM
+      - SML
+      - bSDD
+      - AEC3PO
+      - DIO
+      - PROV_O
+      - SHACL
+      - SPARQL
+      - ICDD
+    purpose:
+      - deep_reasoning
+      - cross_tool_links
+      - evidence
+      - normative_traceability
+      - revisions
+      - release_audit
+
+canonical_identity:
+  strategy: federated_persistent_ids
+  do_not_replace_source_ids: true
+  source_ids:
+    - archicad_guid
+    - ifc_global_id
+    - normative_requirement_uri
+    - bsdd_uri
+    - product_id
+    - provider_ids
+  sbim_project_uri_role: cross_system_link_anchor
+
+custom_blocked_pending_reuse:
+  - generic_ifc_to_rdf_converter
+  - generic_semantic_ifc_mcp
+  - generic_sparql_model_service
+  - generic_shacl_runtime
+  - generic_ifc_semantic_diff
+  - generic_property_evidence_service
+  - custom_linked_document_container
+  - custom_cross_document_link_format
+  - universal_generic_building_relation_ontology
+  - replacement_ifc_identity_scheme
+
+next_tests:
+  - SEMGRAPH_01_AC29_IFCTOLBD_ICDD
