@@ -14,6 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 EXECUTOR = ROOT / "scripts" / "archicad_executor.py"
+SERIES178_BUILDER = ROOT / "scripts" / "archicad_series178_typical_floor.py"
 DUMP_CLIENT = ROOT / "archicad-addon" / "Examples" / "model_dump_v1.py"
 PORT = 19723
 TOL = 1e-7
@@ -178,12 +179,47 @@ def instruction_to_request(instruction, mode, dump):
 
     return {"status": "UNSUPPORTED_INSTRUCTION", "instruction": instruction,
             "supportedIntents": ["продолжить стену на N метров", "поставить окно (с выбором стены)",
-                                 "создать перекрытие по существующему Slab контуру"]}
+                                 "создать перекрытие по существующему Slab контуру",
+                                 "построить типовой этаж серии 178"]}
 
 
 def run(instruction, mode="execute"):
     if mode not in ("dry-run", "execute"):
         raise ValueError("mode must be dry-run or execute")
+
+    normalized = instruction.strip().lower().replace("ё", "е")
+    series178_intent = (
+        "178" in normalized
+        and "этаж" in normalized
+        and any(token in normalized for token in ("построй", "создай", "сделай"))
+    )
+    if series178_intent:
+        args = [sys.executable, str(SERIES178_BUILDER)]
+        if mode == "execute":
+            args.append("--execute")
+        proc = subprocess.run(
+            args, cwd=ROOT, text=True, encoding="utf-8", errors="replace",
+            capture_output=True, timeout=900
+        )
+        try:
+            result = json.loads(proc.stdout)
+        except json.JSONDecodeError:
+            return {
+                "status": "BLOCKED",
+                "instruction": instruction,
+                "reason": "Series 178 builder did not return a single JSON response.",
+                "returnCode": proc.returncode,
+                "stdoutTail": proc.stdout[-2000:],
+                "stderrTail": proc.stderr[-2000:],
+            }
+        return {
+            "status": result.get("status", "BLOCKED"),
+            "instruction": instruction,
+            "executor": "archicad_series178_typical_floor.py",
+            "executorResult": result,
+            "returnCode": proc.returncode,
+        }
+
     dump, metrics = current_dump()
     planned = instruction_to_request(instruction, mode, dump)
     if planned["status"] != "PLANNED":
