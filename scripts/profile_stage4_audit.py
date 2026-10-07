@@ -86,6 +86,17 @@ def main():
     print(f'record bytes: {record_bytes / (1024**2):.1f} MiB', flush=True)
     print(f'snapshot bytes: {snapshot_bytes / (1024**2):.1f} MiB', flush=True)
 
+    group_started = time.perf_counter()
+    semantic_groups = {}
+    for name in sorted(snapshots):
+        key = pack._semantic_source_key(root, specs[name])
+        semantic_groups.setdefault(key, []).append(name)
+    group_seconds = time.perf_counter() - group_started
+    print(f'semantic snapshot groups: {len(semantic_groups)} / {len(snapshots)}', flush=True)
+    print(f'semantic-key prepass: {group_seconds:.3f}s', flush=True)
+    for n, names in enumerate(sorted(semantic_groups.values(), key=lambda x: (-len(x), x[0])), 1):
+        print(f'  group {n}: {len(names)} snapshots', flush=True)
+
     started = time.perf_counter()
     result = pack.verify_pack(root, output)
     total = time.perf_counter() - started
