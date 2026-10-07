@@ -138,3 +138,29 @@ the old behavior with `--full-historical`.
 
 The offline-proof now prints and persists timings for regression tests, each
 historical Stage 1/3 check, every offline fixture, and total wall-clock time.
+
+
+## Final performance-pass acceptance
+
+Status: **PASS / VERIFIED**.
+
+Final operator validation:
+
+- focused performance/Audit Pack regressions: **58/58 PASS**;
+- fresh `hardening-offline-010`: **PASS**;
+- offline regression tests: **8.343 s**;
+- Stage 1 fast historical revalidation: **5.786 s**;
+- Stage 3 fast historical revalidation: **5.936 s**;
+- all seven Stage 4 offline fixtures: **PASS**, each under 0.6 s;
+- total offline proof: **22.367 s**;
+- previous full-recompute control run: **195.744 s**.
+
+This is approximately an **8.75x** improvement for the complete Stage 4 offline
+proof. The retained LIVE S4-06 Audit Pack verifier remains PASS at **23.732 s**
+versus the historical ~115-118 s path, approximately **4.9x faster**.
+
+No new BIM operation type was introduced. The frozen Stage 4 mutation/recovery
+semantics remain the rollback and acceptance reference at `faf2fd8`.
+
+Acceptance receipt:
+`outputs/closed-loop-stage4/stage4-performance-acceptance.json`.
