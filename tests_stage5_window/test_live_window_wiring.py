@@ -31,6 +31,7 @@ class FakeSession:
         self.goal_id = 'stage5-window-fixture'
         self.window_row = None
         self.window_recipe = FakeRecipe()
+        self.approved_plan = None
         self.active_plan = None
         self.before_path = self.output/'before.json'
         import json
@@ -63,6 +64,51 @@ class LiveWindowWiringTests(unittest.TestCase):
             'width':1.2, 'height':1.5,
         })
         self.assertEqual(decision.plannedAgainstModelHash, 'hash')
+
+    def test_approved_plan_is_exactly_reused_and_stale_hash_blocks(self):
+        session = FakeSession(self.root/'approved-session', self.before)
+        session.approved_plan = {
+            'status':'PLANNED',
+            'executionMode':'PLAN_ONLY',
+            'physicalMutationCalls':0,
+            'modelIdentity':'fixture.pln',
+            'modelHash':'approved-hash',
+            'plannerDecision':{
+                'status':'PLANNED',
+                'action':{
+                    'type':'create_window',
+                    'parameters':{
+                        'sourceGuid':'host','centerOffset':4.0,'sillHeight':1.0,
+                        'width':1.0,'height':1.2,
+                    },
+                },
+            },
+        }
+        planner = WindowPlanner(session)
+        class Job:
+            iteration = 1
+            goalId = session.goal_id
+        good = LiveObservation(
+            'fixture.pln','approved-hash',
+            {'x':Fact(True,evidenceRefs=('live.snapshot',))},
+            {'live.snapshot':{'path':str(session.before_path),'modelHash':'approved-hash','elementCount':1}},
+        )
+        decision = planner.plan(Job(), good)
+        self.assertEqual(decision.status, 'PLANNED')
+        self.assertEqual(decision.action.parameters['centerOffset'], 4.0)
+        self.assertEqual(session.active_plan['selection']['selectionRule'],
+                         'explicit operator-approved Stage 5 plan-only action')
+
+        session.active_plan = None
+        stale = LiveObservation(
+            'fixture.pln','different-hash',
+            {'x':Fact(True,evidenceRefs=('live.snapshot',))},
+            {'live.snapshot':{'path':str(session.before_path),'modelHash':'different-hash','elementCount':1}},
+        )
+        blocked = planner.plan(Job(), stale)
+        self.assertEqual(blocked.status, 'BLOCKED')
+        self.assertIn('stale', blocked.reason.lower())
+        self.assertIsNone(session.active_plan)
 
     def test_live_acceptance_is_window_only_and_all_required(self):
         contract = acceptance('stage5-window-test')
