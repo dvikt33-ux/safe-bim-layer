@@ -291,3 +291,33 @@ PASS requires:
 Cleanup always clears the Master Layout context first, then deletes sacrificial Texts, Layout and subset. Model-element count must remain unchanged.
 
 This gate is the production-equivalent proof required before layout-scoped AutoText is added to the real Form 3 Master Layout.
+
+
+## 13. Active-project write safeguard
+
+Write stages now pin themselves to one explicitly confirmed Archicad project.
+
+At the start of any stage that can create/change Archicad data, the runner calls:
+
+```text
+confirm-project
+```
+
+It displays the active project name and exact `projectPath`, then requires the literal answer:
+
+```text
+YES
+```
+
+The returned `projectPath` is stored only for that live run. Every subsequent `apply-*` action independently calls `GetProjectInfo` again and compares the currently active project path with the confirmed path.
+
+Fail-closed states:
+
+- unsaved/untitled project -> `BLOCKED_UNTITLED_PROJECT`;
+- Archicad returned no stable path -> `BLOCKED_PROJECT_IDENTITY`;
+- user did not type `YES` -> `BLOCKED_PROJECT_CONFIRMATION`;
+- active project changed after confirmation -> `BLOCKED_ACTIVE_PROJECT_CHANGED`.
+
+This allows other PLN projects to remain open in parallel while preventing a write stage from silently continuing after the user switches to another project.
+
+Direct `apply-*` calls outside the runner must supply the exact path using `--expected-project-path`; otherwise they fail closed.
