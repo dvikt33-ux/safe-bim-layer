@@ -2061,6 +2061,193 @@ def apply_master_layout_shell(api: Tapir, allow_nonempty=False):
 
 
 
+
+def apply_master_coordinate_calibration(api: Tapir, allow_nonempty=False):
+    """Interactively prove the A4_P Master Layout paper-space convention.
+
+    Both candidate coordinate hypotheses are drawn at once. The command waits
+    for an explicit H1/H2/ABORT answer while the marks are visible in Archicad,
+    then deletes every sacrificial Line/Text in a finally cleanup path.
+    """
+    validation = validate_specs()
+    if validation["status"] != "PASS":
+        raise RuntimeError(f"Spec validation failed: {validation['errors']}")
+
+    before_count = len(api.call("GetAllElements").get("elements", []))
+    if before_count and not allow_nonempty:
+        raise RuntimeError(
+            f"Refusing Master coordinate calibration: current project contains "
+            f"{before_count} model elements. Use a clean candidate project or "
+            f"pass --allow-nonempty explicitly."
+        )
+
+    master_plan = plan_master_layouts(api)
+    row = next((x for x in master_plan["masters"] if x["name"] == "A4_P"), None)
+    if row is None or row.get("state") != "EXISTS_OK":
+        return {
+            "status": "BLOCKED_MASTER_LAYOUT",
+            "writePerformed": False,
+            "reason": "A4_P must exist with the exact registered size first.",
+            "master": row,
+        }
+
+    items = _layoutbook_items(api)
+    master = next(
+        (
+            x for x in items
+            if x.get("type") == "MasterLayoutItem" and x.get("name") == "A4_P"
+        ),
+        None,
+    )
+    if master is None:
+        raise RuntimeError("A4_P navigator item disappeared after preflight.")
+
+    change = api.call("ChangeWindow", {"navigatorItemId": master["navigatorItemId"]})
+    if not change.get("success", False):
+        raise RuntimeError(f"Could not activate A4_P Master Layout: {change}")
+
+    current = api.call("GetCurrentWindowType").get("currentWindowType")
+    if current != "MasterLayout":
+        raise RuntimeError(
+            f"A4_P activation did not produce MasterLayout window: {current}"
+        )
+
+    created_ids = []
+    answer = None
+    cleanup_result = None
+
+    def add_cross_and_label(x, y, label):
+        arm = 0.004
+        line_result = api.call(
+            "CreateLineElements",
+            {
+                "linesData": [
+                    {
+                        "begCoordinate": {"x": x - arm, "y": y},
+                        "endCoordinate": {"x": x + arm, "y": y},
+                        "roomSeparator": False,
+                    },
+                    {
+                        "begCoordinate": {"x": x, "y": y - arm},
+                        "endCoordinate": {"x": x, "y": y + arm},
+                        "roomSeparator": False,
+                    },
+                ]
+            },
+        )
+        rows = line_result.get("elements", [])
+        if len(rows) != 2 or any("elementId" not in r for r in rows):
+            raise RuntimeError(
+                f"Calibration cross creation failed for {label}: {line_result}"
+            )
+        created_ids.extend(r["elementId"] for r in rows)
+
+        text_result = api.call(
+            "CreateTexts",
+            {
+                "textsData": [{
+                    "coordinate": {"x": x + 0.005, "y": y + 0.005, "z": 0.0},
+                    "text": label,
+                    "height": 2.5,
+                    "justification": "Left",
+                }]
+            },
+        )
+        text_rows = text_result.get("elements", [])
+        if len(text_rows) != 1 or "elementId" not in text_rows[0]:
+            raise RuntimeError(
+                f"Calibration label creation failed for {label}: {text_result}"
+            )
+        created_ids.append(text_rows[0]["elementId"])
+
+    hypotheses = {
+        "H1": {
+            "description": "bottom-left origin; +X right; +Y up",
+            "marks": [
+                (0.010, 0.010, "H1 BL"),
+                (0.200, 0.010, "H1 BR"),
+                (0.010, 0.287, "H1 TL"),
+                (0.200, 0.287, "H1 TR"),
+            ],
+        },
+        "H2": {
+            "description": "top-left origin; +X right; -Y down",
+            "marks": [
+                (0.010, -0.010, "H2 TL"),
+                (0.200, -0.010, "H2 TR"),
+                (0.010, -0.287, "H2 BL"),
+                (0.200, -0.287, "H2 BR"),
+            ],
+        },
+    }
+
+    try:
+        for hypothesis in hypotheses.values():
+            for x, y, label in hypothesis["marks"]:
+                add_cross_and_label(x, y, label)
+
+        print("")
+        print("MASTER LAYOUT COORDINATE CALIBRATION")
+        print("Inspect A4_P in Archicad now.")
+        print("H1 = bottom-left origin, +X right, +Y up")
+        print("H2 = top-left origin, +X right, -Y down")
+        print("ABORT = no convention is confirmed")
+        while True:
+            answer = input("Visible convention [H1/H2/ABORT]: ").strip().upper()
+            if answer in {"H1", "H2", "ABORT"}:
+                break
+            print("Enter exactly H1, H2, or ABORT.")
+    finally:
+        if created_ids:
+            cleanup_result = api.call(
+                "DeleteElements",
+                {
+                    "elements": [
+                        {"elementId": element_id}
+                        for element_id in created_ids
+                    ]
+                },
+            )
+            if not cleanup_result.get("success", False):
+                raise RuntimeError(
+                    "Coordinate calibration marks were created but cleanup failed: "
+                    f"{cleanup_result}"
+                )
+
+    after_count = len(api.call("GetAllElements").get("elements", []))
+    if after_count != before_count:
+        raise RuntimeError(
+            "Unexpected model element count change during coordinate calibration."
+        )
+
+    if answer == "ABORT":
+        return {
+            "status": "BLOCKED_LIVE_VISUAL_CALIBRATION",
+            "writePerformed": True,
+            "confirmedConvention": None,
+            "cleanup": {
+                "success": True,
+                "deletedCount": len(created_ids),
+                "modelElementCountUnchanged": True,
+            },
+        }
+
+    selected = hypotheses[answer]
+    return {
+        "status": "PASS",
+        "writePerformed": True,
+        "confirmedConvention": answer,
+        "description": selected["description"],
+        "masterLayout": "A4_P",
+        "cleanup": {
+            "success": True,
+            "deletedCount": len(created_ids),
+            "result": cleanup_result,
+            "modelElementCountUnchanged": True,
+        },
+        "nextGate": "persist_coordinate_convention_then_apply_form3_core_geometry",
+    }
+
 def apply_master_layout_smoke(api: Tapir, allow_nonempty=False):
     """Create/read-back/delete a sacrificial Line + Text + AutoText-token Text.
 
@@ -2913,7 +3100,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "action",
-        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "plan-master-coordinate-calibration", "plan-form3-geometry", "plan-autotext", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell", "apply-master-layout-smoke", "apply-layout-autotext-smoke"),
+        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "plan-master-coordinate-calibration", "plan-form3-geometry", "plan-autotext", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell", "apply-master-layout-smoke", "apply-layout-autotext-smoke", "apply-master-coordinate-calibration"),
     )
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
     parser.add_argument(
@@ -2971,6 +3158,10 @@ def main():
             result = apply_master_layout_smoke(api, allow_nonempty=args.allow_nonempty)
         elif args.action == "apply-layout-autotext-smoke":
             result = apply_layout_autotext_smoke(api, allow_nonempty=args.allow_nonempty)
+        elif args.action == "apply-master-coordinate-calibration":
+            result = apply_master_coordinate_calibration(
+                api, allow_nonempty=args.allow_nonempty
+            )
         else:
             raise AssertionError(args.action)
 
