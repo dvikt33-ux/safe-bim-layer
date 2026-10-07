@@ -126,15 +126,17 @@ class LiveSession:
         self.identity = self.api('GetProjectInfo')
         if not self.identity.get('projectPath') or self.identity.get('isUntitled'):
             raise ValueError('Named test PLN required')
-        explicit_target = os.environ.get('SAFE_BIM_STAGE4_PROJECT_PATH') if str(goal_id).startswith('stage4-') else None
+        stage_prefix = str(goal_id).split('-', 1)[0]
+        explicit_env = {'stage4':'SAFE_BIM_STAGE4_PROJECT_PATH', 'stage5':'SAFE_BIM_STAGE5_PROJECT_PATH'}.get(stage_prefix)
+        explicit_target = os.environ.get(explicit_env) if explicit_env else None
         if explicit_target:
             if not ntpath.isabs(explicit_target):
-                raise ValueError('SAFE_BIM_STAGE4_PROJECT_PATH must be an absolute Windows path')
+                raise ValueError(explicit_env+' must be an absolute Windows path')
             actual = ntpath.normcase(ntpath.normpath(self.identity['projectPath']))
             expected = ntpath.normcase(ntpath.normpath(explicit_target))
             if actual != expected:
-                raise ValueError('Active PLN differs from explicit Stage 4 target project')
-            project_binding = {'mode':'EXPLICIT_STAGE4_PATH','expectedProjectPath':explicit_target}
+                raise ValueError('Active PLN differs from explicit '+stage_prefix.upper()+' target project')
+            project_binding = {'mode':'EXPLICIT_'+stage_prefix.upper()+'_PATH','expectedProjectPath':explicit_target}
         else:
             baseline_identity = read(ROOT / 'outputs/closed-loop-stage1/preflight.json')['identity']
             if self.identity != baseline_identity:
