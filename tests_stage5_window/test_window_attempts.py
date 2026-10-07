@@ -4,7 +4,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from closed_loop.models import Action
+from closed_loop.models import Action, WindowAction
 from closed_loop.orchestrator import fingerprint
 from closed_loop.wall_attempts import AttemptJournal
 from closed_loop.window_attempts import (
@@ -63,7 +63,7 @@ def fixture():
     after['elements'][0]['bodies'][0]['vertices'].extend([[4.4,0,0.9],[5.6,0,2.4]])
     after['elements'][0]['bodies'][0]['faces'].append({'nativeFaceIndex': 1, 'materialId': 1, 'holes': [[8,9]]})
     after['elements'].append(window())
-    action = Action('create_window', {
+    action = WindowAction('create_window', {
         'sourceGuid': 'host',
         'centerOffset': 5.0,
         'sillHeight': 0.9,
@@ -95,9 +95,12 @@ class WindowAttemptTests(unittest.TestCase):
 
     def test_typed_action_allowlist_is_additive(self):
         self.assertEqual(Action('create_wall', {'sourceGuid':'x','length':1.0}).type, 'create_wall')
+        with self.assertRaises(ValueError):
+            Action('create_window', {})
+        self.assertEqual(WindowAction('create_window', {}).type, 'create_window')
         self.assertEqual(self.action.type, 'create_window')
         with self.assertRaises(ValueError):
-            Action('create_door', {})
+            WindowAction('create_door', {})
 
     def test_signature_binds_host_geometry_and_native_request_before_dispatch(self):
         signature = window_signature(self.before, self.action, 'fixture.pln')
@@ -125,7 +128,7 @@ class WindowAttemptTests(unittest.TestCase):
         self.assertEqual(params['windowsData'][0]['centerOffset'], 5.0)
 
     def test_invalid_opening_outside_host_is_rejected_before_attempt(self):
-        bad = Action('create_window', {
+        bad = WindowAction('create_window', {
             'sourceGuid':'host','centerOffset':0.2,'sillHeight':0.9,'width':1.2,'height':1.5})
         with self.assertRaisesRegex(ValueError, 'inside host Wall ends'):
             prepare_window_attempt(self.before, bad, 'fixture.pln', 1, 'goal')
