@@ -1,0 +1,206 @@
+version: 1.1
+date: 2026-10-08
+status: research_draft
+current_target: Archicad_29
+incorporates_parallel_checkpoint:
+  file: docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md
+  commit: 846c6eeafe7430227a63f441046bfe57965c86bb
+
+floorplan_generation:
+  floorplan6:
+    repository: poolpet/floorplan6
+    license: AGPL_3_0
+    archicad_29: PASS_via_Tapir
+    python_solver: PASS
+    ortools_cpsat: PASS
+    shapely: PASS
+    networkx: PASS
+    apartment_layout: PASS
+    floor_layout: PASS
+    walls_doors_zones_export: PASS_documented
+    code_rules: Polish_WT
+    tests_reported: "80/80_stage4"
+    priority: P0_SOURCE_METHOD_AUDIT
+    copy_code_without_license_review: BLOCKED
+
+  floorplan4:
+    repository: poolpet/floorplan4
+    license: GPL_3_0
+    native_archicad_29_addon: PASS
+    cxx: PASS
+    ortools_cpsat: PASS
+    wall_door_zone_write: PASS
+    plot_analyzer: PASS
+    priority: P0_NATIVE_REFERENCE
+
+  finch:
+    category: commercial_generative_architecture
+    archicad_beta_plugin: PASS_CURRENT_DOCS
+    plugin_version_observed: 1.0.8
+    archicad_versions:
+      - 28
+      - 29
+    archicad_zone_to_plan: PASS_DOCUMENTED
+    walls_doors_zones_return: PASS_DOCUMENTED
+    adaptive_plan_library: PASS
+    linked_repeated_units: PASS
+    daylight: PASS
+    adjacency: PASS
+    grid_alignment: PASS
+    egress_distance: PASS
+    stairwell_core_corridor_generation: PASS
+    graph_rules: PASS
+    basic_price_eur_month: 79
+    basic_trial_days: 14
+    enterprise_from_eur_year_3_seats: 14500
+    enterprise_ai_floorplan_generation: PASS
+    docs_inconsistency:
+      faq_says_archicad_via_grasshopper: true
+      dedicated_beta_plugin_docs_say_native_plugin: true
+    priority: P0_TRIAL_PLUGIN_AUDIT
+
+  architechtures:
+    category: residential_generative_bim
+    realtime_bim: PASS
+    ifc_export: PASS
+    dxf_xlsx: PASS
+    parking: PASS
+    cost: PASS
+    local_rule_customization: PASS_ENTERPRISE
+    lod: "200+"
+    pro_usd_month_effective: 49
+    annual_only_pro: true
+    trial_days: 7
+    direct_archicad_plugin: NOT_FOUND
+    priority: P1_BENCHMARK
+
+  testfit_mcp:
+    category: deterministic_site_generator_mcp
+    mcp: PASS
+    chatgpt_codex: PASS
+    deterministic_engine: PASS
+    editable_live_model: PASS
+    site_solver_usd_year_from: 15000
+    priority: REFERENCE_OR_LATER
+
+  qbiq:
+    category: commercial_space_planning
+    multi_floor: PASS
+    program_generator: PASS
+    daylight_efficiency_privacy_metrics: PASS
+    revit_cad_output: PASS
+    custom_planning_engine: PASS
+    agentic_design_intent_2026: PASS_PUBLIC_CLAIM
+    priority: REFERENCE
+
+  higharc:
+    category: bim_native_generative_model
+    structured_building_tokens: PASS_PUBLIC_RESEARCH
+    geometry_relationship_preservation: PASS_PUBLIC_RESEARCH
+    rules_settings_1000_plus: PASS_PUBLIC_CLAIM
+    downstream_live_updates: PASS_PUBLIC_CLAIM
+    priority: GENERATIVE_ARCHITECTURE_REFERENCE
+
+spatial_intelligence:
+  topologicpy:
+    repository: wassimj/topologicpy
+    open_source: PASS
+    adjacency_graph: PASS
+    circulation_graph: PASS
+    visibility_graph: PASS
+    connectivity_graph: PASS
+    knowledge_graph: PASS
+    graphrag: PASS
+    pyg: PASS
+    subgraph_matching: PASS
+    ontology: PASS
+    bot_ifc_alignment: PASS
+    priority: P0_SPATIAL_GRAPH_PROTOTYPE
+    likely_replaces:
+      - generic_adjacency_graph_algorithms
+      - generic_circulation_graph_algorithms
+      - generic_visibility_graph_algorithms
+      - generic_spatial_graph_ml_plumbing
+
+legacy_plan_ingestion:
+  plans2bim:
+    graphisoft_partner_solution: PASS
+    archicad_versions: "26-29"
+    pdf_png_jpeg_input: PASS
+    ai_detect_walls_windows_doors_spaces_slabs: PASS
+    ifc_dxf_output: PASS
+    quantity_output: PASS
+    priority: P0_P1_TEST_IF_SOURCE_PLAN_AVAILABLE
+
+precedent_memory:
+  nomic:
+    category: aec_project_and_precedent_research
+    free_plan: PASS
+    individual_usd_month: 20
+    work_email_required_for_individual: true
+    drawings_specs_rfis: PASS
+    cited_answers: PASS
+    precedent_search: PASS
+    detail_assembly_search: PASS
+    cross_discipline_search: PASS
+    ifc_queries: PASS
+    drawing_review: PASS
+    agent_api_individual: FAIL
+    priority: P1_LOW_COST_TRIAL
+
+research_methods:
+  multiagent_drl_layout_2026:
+    adjacency: PASS
+    orientation: PASS
+    energy_efficiency: PASS
+    generation_seconds_reported: 74
+    role: METHOD_REFERENCE
+
+  graph_rule_floorplans_2026:
+    adjacency: PASS
+    non_adjacency: PASS
+    interior_exterior_constraints: PASS
+    circulation: PASS
+    dimensioned_variants: PASS
+    role: METHOD_REFERENCE
+
+  multimodal_precedent_kg:
+    early_stage_design_logic: PASS_RESEARCH
+    role: PRECEDENT_REASONING_REFERENCE
+
+  pattern_language_llm_2026:
+    cases: 56
+    patterns_reported: 101
+    captures:
+      - context
+      - spatial_relationships
+      - intent
+      - strategy
+    role: ARCHITECTURAL_LOGIC_REPRESENTATION_REFERENCE
+
+  mcp_knowledge_continuity_2026:
+    rag: PASS
+    subagents: PASS
+    mcp: PASS
+    cde: PASS
+    bim_automation: PASS
+    role: OFFICE_KNOWLEDGE_REFERENCE
+
+custom_blocked_pending_reuse:
+  - generic_apartment_floorplan_solver
+  - generic_room_adjacency_solver
+  - generic_circulation_graph_engine
+  - generic_visibility_graph_engine
+  - generic_firm_plan_library_matcher
+  - generic_architectural_precedent_rag
+  - generic_2d_plan_to_bim_converter
+  - first_pass_custom_floorplan_neural_model
+  - first_pass_custom_pattern_extraction_pipeline
+
+next_tests:
+  - FLOORPLAN6_01
+  - FINCH_AC29_01
+  - TOPOLOGIC_SPATIAL_01
+  - PLANS2BIM_01
+  - NOMIC_PRECEDENT_01
+  - LAYOUT_ACCEPTANCE_BENCH_01
