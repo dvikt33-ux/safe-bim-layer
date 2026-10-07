@@ -1,0 +1,193 @@
+version: 0.9
+date: 2026-10-08
+status: research_draft
+current_target: Archicad_29
+
+open_compliance_stack:
+  accord:
+    category: open_semantic_compliance_architecture
+    rule_formalisation: PASS
+    semantic_rule_repository: PASS
+    compliance_microservices: PASS
+    orchestration: PASS
+    core_apis: PASS
+    ids_repository: PASS
+    public_source: PASS
+    production_maturity: RESEARCH_DEMONSTRATION
+    decision: ARCHITECTURE_BASELINE
+
+  aec3po:
+    category: compliance_permitting_ontology
+    documents: PASS
+    document_subdivisions: PASS
+    cross_references: PASS
+    statements: PASS
+    definitions: PASS
+    numerical_checks: PASS
+    human_checks: PASS
+    data_requirements_ids: PASS
+    evidence: PASS
+    check_methods: PASS
+    shacl_method: PASS
+    function_method: PASS
+    feature_of_interest: PASS
+    checking_act: PASS
+    verification_report: PASS
+    design_model: PASS
+    legal_verifier: PASS
+    ifcowl_alignment: PASS
+    qudt: PASS
+    function_ontology: PASS
+    repo_license_explicit: UNKNOWN
+    decision: ADAPT_BASE_ONTOLOGY
+
+  bcrl_rase:
+    category: machine_readable_rule_language
+    application: PASS
+    requirement: PASS
+    selection: PASS
+    exception: PASS
+    boolean_logic: PASS
+    comparisons: PASS
+    units: PASS
+    existence: PASS
+    universal_quantification: PASS
+    adjacency_containment: PASS
+    formulas: PASS
+    bsdd_mapping: PASS
+    yaml_ld: PASS
+    json_ld: PASS
+    decision: USE_AS_RULE_IR_CANDIDATE
+
+  accord_results_api:
+    category: checker_microservice_protocol
+    openapi: PASS
+    capability_metadata: PASS
+    model_formats: PASS
+    supported_terms: PASS
+    async_jobs: PASS
+    entity_scope: PASS
+    webhooks: PASS
+    json_results: PASS
+    bcf_results: PASS
+    evidence_payload: PASS
+    true_false_unknown: PASS
+    tolerance_miss: PASS
+    repo_license_explicit: UNKNOWN
+    decision: ADAPT_PROTOCOL
+
+  accord_building_codes_api:
+    category: versioned_ruleset_distribution
+    openapi: PASS
+    immutable_versions: PASS
+    latest_version: PASS
+    exact_version: PASS
+    jurisdiction: PASS
+    language: PASS
+    graphql: PASS
+    ids_export: PASS
+    upload_new_version: PASS
+    repo_license_explicit: UNKNOWN
+    decision: ADAPT_VERSION_MODEL
+
+  accord_nlp:
+    category: regulation_nlp
+    apache_2: PASS
+    pip_package: PASS
+    entity_extraction: PASS
+    relation_extraction: PASS
+    information_extraction: PASS
+    sentence_to_graph: PASS
+    pretrained_models: PASS
+    synthetic_augmentation: PASS
+    russian_models: FAIL
+    decision: ADAPT_METHOD_AND_PIPELINE
+
+  code_accord:
+    category: annotated_regulation_corpus
+    entities: PASS
+    relations: PASS
+    train_test: PASS
+    huggingface: PASS
+    english_finnish: PASS
+    russian: FAIL
+    decision: USE_ANNOTATION_PATTERN
+
+  regulation_transformation_tool:
+    apache_2: PASS
+    yaml_ld: PASS
+    json_ld: PASS
+    html: PASS
+    json: PASS
+    decision: REUSE_OR_REFERENCE
+
+validation_languages:
+  ids:
+    best_for: information_requirements
+    decision: REUSE
+  shacl:
+    standard: W3C
+    property_constraints: PASS
+    relational_constraints: PASS
+    standardized_validation_output: PASS
+    comparative_research_rating: STRONG
+    external_solver_integration_demonstrated: PASS_RESEARCH
+    decision: PRIMARY_GRAPH_VALIDATION_CANDIDATE
+  sparql:
+    graph_queries: PASS
+    derived_values: PASS
+    decision: REUSE
+  owl_swrl:
+    reasoning: PASS
+    validation_fit_relative_to_shacl: LOWER_FOR_PRIMARY_VALIDATION
+    decision: OPTIONAL
+
+digichecks:
+  category: permit_ontology_and_shacl_examples
+  license: CC_BY
+  projects_permits_requirements: PASS
+  decisions_documents_locations: PASS
+  prov: PASS
+  geosparql: PASS
+  shacl: PASS
+  zoning_pilot: PASS
+  building_height_pilot: PASS
+  document_requirements_pilot: PASS
+  valid_invalid_examples: PASS
+  decision: REUSE_PERMIT_AND_ZONING_PATTERNS
+
+chek:
+  category: digital_building_permit_toolkit
+  bim_gis: PASS
+  machine_readable_regulations: PASS
+  open_standards: PASS
+  openapi_logic: PASS
+  ifc_ids_cityjson_loin_contributions: PASS
+  decision: STANDARDS_REFERENCE
+
+custom_scope_after_checkpoint:
+  retain:
+    - russian_source_adapters
+    - russian_legal_applicability_temporal_semantics
+    - russian_rule_compiler_to_open_formats
+    - russian_bsdd_dictionary_mappings
+    - russian_gold_rule_dataset
+    - project_causal_change_graph
+    - architectural_design_intent_specialization
+    - healing_candidate_ranking
+    - cross_tool_transaction_orchestration
+    - proven_archicad29_deep_event_gaps
+  blocked_pending_open_stack_test:
+    - proprietary_rule_ir
+    - proprietary_compliance_ontology
+    - generic_rule_repository
+    - generic_checker_protocol
+    - generic_compliance_capability_registry
+    - generic_compliance_orchestrator
+    - generic_results_format
+    - generic_permit_ontology
+    - generic_regulation_nlp_framework
+
+next_tests:
+  - RULE_OPEN_01_SP464
+  - RUS_NLP_01
