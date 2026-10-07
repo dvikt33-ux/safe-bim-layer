@@ -1,6 +1,7 @@
 registry_version: 0.1
 status: verified_graphisoft_keys_plus_gost_mapping_draft
 target: Archicad_29
+production_master_context_verified: false
 
 sources:
   graphisoft:
@@ -186,3 +187,60 @@ runtime_validation:
     - CURRENTREVISIONID
   text_embedding_format: "<KEY>"
   create_text_command: CreateTexts
+
+
+production_ready_placements:
+  3:
+    token: <BUILDING_NAME>
+    cell: graph_3
+    x_offset_mm: 2
+    y_offset_mm: 2
+    height_mm: 2.5
+  4:
+    token: <LAYOUTNAME>
+    cell: graph_4
+    x_offset_mm: 2
+    y_offset_mm: 2
+    height_mm: 2.5
+  7:
+    token: <LAYOUTNUMBERINCURRENTSUBSET>
+    cell: graph_7
+    x_offset_mm: 2
+    y_offset_mm: 2
+    height_mm: 2.5
+  8:
+    token: <NUMBEROFLAYOUTSINCURRENTSUBSET>
+    cell: graph_8
+    x_offset_mm: 2
+    y_offset_mm: 2
+    height_mm: 2.5
+  9:
+    token: <CONTACTCOMPANY>
+    cell: graph_9
+    x_offset_mm: 2
+    y_offset_mm: 2
+    height_mm: 2.5
+
+production_deferred_graphs:
+  - 1
+  - 2
+  - 5
+  - 6
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  - 16
+  - 17
+  - 18
+  - 19
+  - 20
+  - 21
+  - 22
+  - 23
+  - 24
+  - 25
+  - 26
+  - 27
