@@ -65,24 +65,33 @@ WALLS = [
 ]
 
 DOORS = [
-    # All door openings are native hosted Door elements in continuous walls.
-    ("D_3B_L_ENTRY","V_X66_N",1.55,0.90),
+    # Door positions re-read from the photographed plan.
+    # centerOffset is measured along the continuous host wall from its start point.
+
+    # Upper left 3B
+    ("D_3B_L_ENTRY","H_B_MAIN",9.05,0.90),
     ("D_3B_L_ROOM11","H_N_L_ROOM",2.35,0.80),
-    ("D_3B_L_KITCH","H_N_L_KITCH",2.70,0.80),
-    ("D_3B_L_SVC","H_B_MAIN",4.05,0.70),
+    ("D_3B_L_KITCH","H_N_L_KITCH",2.82,0.80),
 
-    ("D_3B_R_ENTRY","V_X168",8.30,0.90),
+    # Upper right 3B
+    ("D_3B_R_ENTRY","H_B_MAIN",14.15,0.90),
     ("D_3B_R_ROOM11","H_N_R_ROOM",0.65,0.80),
-    ("D_3B_R_KITCH","H_N_R_KITCH",0.90,0.80),
-    ("D_3B_R_SVC","H_B_MAIN",19.35,0.70),
+    ("D_3B_R_KITCH","H_N_R_KITCH",0.82,0.80),
 
-    ("D_2B_ENTRY","H_A_MID",5.10,0.90),
-    ("D_1B_ENTRY","H_A_MID",8.65,0.90),
+    # Lower apartment entrances from the common corridor
+    ("D_2B_ENTRY","H_A_MID",4.95,0.90),
+    ("D_1B_ENTRY","H_A_MID",8.60,0.90),
 
-    ("D_2B_ROOM10","H_2B_TOP",1.95,0.80),
-    ("D_L_SOUTH","H_L_SOUTH",2.25,0.80),
-    ("D_R_SOUTH","H_R_SOUTH",1.00,0.80),
-    ("D_R_MID","H_R_MID",0.85,0.80),
+    # Left/right side rooms adjoining the service blocks
+    ("D_L_12_38","H_A_L",0.95,0.80),
+    ("D_R_12_38","H_A_R",2.05,0.80),
+    ("D_L_8_76","V_X3_S",4.75,0.80),
+    ("D_R_8_76","V_X204",4.75,0.80),
+
+    # Lower internal rooms
+    ("D_2B_ROOM10","H_2B_TOP",1.78,0.80),
+    ("D_L_SOUTH","H_L_SOUTH",2.15,0.80),
+    ("D_R_SOUTH","H_R_SOUTH",1.45,0.80),
 ]
 
 def call(port, cmd, params=None, timeout=90):
@@ -325,7 +334,7 @@ def main():
     m["phase"]="NEW_WALLS_CREATED_OLD_PLAN_STILL_PRESENT"
     save(m)
 
-    print(f"PASS: {created_wall_count} walls created. STAGE 2/5: doors...", flush=True)
+    print(f"PASS: {created_wall_count} walls created. STAGE 2/5: source-read native doors...", flush=True)
     for name,host_name,off,w in DOORS:
         if host_name not in hosts: raise RuntimeError(f"missing door host {host_name}")
         g=create_door(hosts[host_name],off,w)
