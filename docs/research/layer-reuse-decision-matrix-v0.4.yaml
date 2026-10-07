@@ -73,6 +73,35 @@ decisions:
           - building_material
           - default_surface
           - per_face_surface
+      notifications:
+        command: AddElementNotificationClient
+        registered_since: 1.2.8
+        observed_at_project_known_commit: true
+        event_classes:
+          - new
+          - changed
+          - deleted
+          - reserved
+          - released
+        includes:
+          - element_guid
+          - element_type
+          - undo_redo_events
+          - property_value_change
+          - classification_change
+          - copied_or_old_parent_guid_where_available
+        transport: http_callback
+      undo_scope:
+        observed_at_project_known_commit: true
+        implementation: ACAPI_CallUndoableCommand
+        applies_to:
+          - generic_extended_create_batch
+          - generic_extended_modify_batch
+        semantics:
+          - one_archicad_undo_scope_per_command_call
+          - item_level_partial_success_can_still_commit
+          - not_cross_command_atomic
+          - not_retry_idempotent
     roadmap_effect:
       - search_tapir_before_every_new_native_command
       - stop_generic_writer_work_when_overlap_exists
@@ -260,11 +289,11 @@ decisions:
 
 native_gap_after_overlap_audit:
   keep_until_disproven:
-    - native_element_change_observer
+    - tapir_event_consumer_and_revision_accumulator
     - project_revision_and_stale_operation_guard
     - evaluated_deep_geometry_not_equivalent_to_tapir_output
     - face_material_or_surface_provenance_if_not_available_upstream
-    - atomic_or_single_undo_transaction_semantics_if_not_available_upstream
+    - cross_command_atomicity_idempotency_or_compensation_if_required
     - exact_readback_only_for_uncovered_data
     - performance_instrumentation
   remove_from_presumed_ownership:
@@ -280,13 +309,15 @@ native_gap_after_overlap_audit:
     - generic_morph_material_write
     - generic_morph_default_surface_write
     - generic_morph_arbitrary_body_create_replace
+    - generic_native_element_change_observer_if_EVENT_01_passes
+    - generic_per_command_single_undo_wrapper
     - generic_mcp_tool_registry
     - generic_tapir_schema_discovery
 
 custom_scope_after_audit:
   keep:
     - residual_execution_capability_map
-    - native_event_revision_deep_geometry_gap_bridge
+    - tapir_event_consumer_plus_revision_deep_geometry_gap_bridge
     - canonical_project_kernel
     - russian_normative_source_federation
     - russian_legal_applicability_semantics
@@ -366,16 +397,28 @@ tests:
       - long_running_jobs
       - failure_reporting
 
-  TRANSACTION_01:
+  EVENT_01:
     priority: 4
-    goal: prove_failure_undo_retry_stale_and_active_window_semantics
+    goal: prove_tapir_notification_reliability_before_custom_observer
+    verify:
+      - new_changed_deleted
+      - property_and_classification_changes
+      - undo_redo
+      - copy_parent_identity
+      - reservation_changes
+      - event_ordering_and_batch_grouping
+      - callback_restart_and_missed_event_behavior
+
+  TRANSACTION_01:
+    priority: 5
+    goal: prove_partial_failure_single_undo_retry_stale_and_active_window_semantics
 
   BIM_EXEC_01:
-    priority: 5
+    priority: 6
     goal: compare_husky_against_verified_open_stack_and_residual_native_gap
 
   READBACK_01:
-    priority: 6
+    priority: 7
     goal: determine_which_native_model_dump_outputs_are_not_equivalent_to_tapir
 
   HEAL_01:
