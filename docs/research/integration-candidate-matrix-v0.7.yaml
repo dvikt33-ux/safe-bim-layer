@@ -1,0 +1,149 @@
+version: 0.7
+date: 2026-10-08
+status: research_draft
+current_target: Archicad_29
+
+russian_compliance:
+  proektologiya_zdanie_ai:
+    category: russian_project_document_compliance_ai
+    deployed_audit_module: PASS_PUBLIC_CLAIM
+    paid_real_project_pilot: PASS_PUBLIC_CLAIM
+    inputs:
+      pdf: PASS
+      dwg: PASS
+      dxf: PASS_OFFER
+      ifc: PASS
+      archives: PASS_OFFER
+    regulatory_scope:
+      pp87: PASS_PUBLIC_CLAIM
+      sp: PASS_PUBLIC_CLAIM
+      gost: PASS_PUBLIC_CLAIM
+      sanpin: PASS_PUBLIC_CLAIM
+    agent_orchestrator: 18_specialists
+    coverage_gate: PASS_PUBLIC_CLAIM
+    versioned_normative_database: PASS_PUBLIC_CLAIM
+    rest_api: PASS_PUBLIC_CLAIM
+    webhooks: PASS_PUBLIC_CLAIM
+    mcp: PLANNED
+    bcf: PLANNED
+    government_xml: PLANNED
+    archicad_native_plugin: NOT_LISTED
+    normative_currentness_guaranteed: false
+    legal_offer_requires_user_verify_revision: true
+    pricing_rub_month:
+      simple: 3900
+      pro: 9900
+      team: 19900
+    priority: P0_API_AUDIT
+    likely_replaces_if_api_good:
+      - generic_russian_document_parser
+      - generic_multiagent_norm_audit
+      - generic_compliance_report
+      - much_of_compliance_coverage_runtime
+
+  bim_grade:
+    category: international_ifc_compliance_ci
+    russian_docs_current_claim: PASS_PUBLIC_CLAIM
+    ifc_pdf: PASS_PUBLIC_CLAIM
+    coverage_gate: PASS_PUBLIC_CLAIM
+    proof_carrying_findings: PASS_PUBLIC_CLAIM
+    bitemporal_source_closure: PASS_PUBLIC_CLAIM
+    typed_cross_domain_joins: PASS_PUBLIC_CLAIM
+    public_api: UNKNOWN
+    priority: P0_SAME_PRODUCT_FAMILY_AUDIT
+
+cype:
+  cypeurban:
+    free: PASS
+    custom_municipal_regulations: PASS
+    setbacks: PASS
+    height_rules: PASS
+    plot_checks: PASS
+    buildability: PASS
+    occupancy: PASS
+    parking: PASS
+    dwelling_room_minimums: PASS
+    adjacent_building_checks: PASS
+    priority: P0_FREE_TEST
+    likely_replaces:
+      - generic_urban_rule_executor
+      - much_of_pzz_gpzu_geometry_checker
+
+  construction_systems:
+    free: PASS
+    layers: PASS
+    material_properties: PASS
+    thermal_properties: PASS
+    reusable_assemblies: PASS
+    bim_element_binding: PASS
+    host_assembly_thickness_warning: PASS
+    reports: PASS
+    priority: P0_FREE_TEST
+    likely_replaces:
+      - construction_system_registry
+      - layer_stack_database
+      - assembly_thickness_compatibility_checker
+
+  engineering_suite:
+    fire: PASS
+    fire_fds: PASS
+    daylight_lighting: PASS
+    hvac: PASS
+    plumbing: PASS
+    electrical: PASS
+    structures: PASS
+    quantities: PASS
+    site: PASS
+    layout: PASS
+    free_and_trial_mix: true
+    campus_education_path: PASS
+
+usbim:
+  category: modular_openbim_suite
+  viewer_federation: PASS
+  bcf: PASS
+  gis: PASS
+  bsdd: PASS
+  ids: PASS
+  checker: PASS
+  clash: PASS
+  compare: PASS
+  ifc_editor: PASS
+  four_d: PASS
+  priority: P1_COMPARE
+
+motif:
+  category: agent_native_bim
+  launched_2026_09: PASS
+  ai_agents_on_model: PASS_PUBLIC_CLAIM
+  parametric_associative_bim: PASS_PUBLIC_CLAIM
+  open_queryable_model: PASS_PUBLIC_CLAIM
+  custom_types_properties: PASS_PUBLIC_CLAIM
+  revit_rhino_live: PASS_PUBLIC_CLAIM
+  ifc: PASS_PUBLIC_CLAIM
+  archicad_live: NOT_VERIFIED
+  current_ac29_dependency: false
+  priority: WATCH
+
+custom_blocked_pending_tests:
+  - generic_russian_document_compliance_engine
+  - generic_multiagent_norm_control
+  - compliance_coverage_gate
+  - generic_pzz_gpzu_checker
+  - generic_construction_system_registry
+  - assembly_thickness_checker
+  - agent_native_bim_platform
+  - generic_ifc_property_checker_editor
+
+p0_after_template:
+  - HuskyBIM
+  - Archi_Automate
+  - Proektologiya_zdanie_ai_API
+  - Tangl_Space_Control_SDK
+  - CYPEURBAN
+  - CYPE_Construction_Systems
+  - BIMQ
+  - Qonic_Free
+  - usBIM
+  - dRofus
+  - Solibri_IfcOpenShell
