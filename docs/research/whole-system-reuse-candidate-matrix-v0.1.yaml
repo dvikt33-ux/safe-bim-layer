@@ -1,0 +1,107 @@
+version: 0.1
+date: 2026-10-08
+status: research_draft
+
+candidates:
+  delta_flow:
+    category: near_end_to_end_platform
+    site_intelligence: PASS_PUBLIC_CLAIM
+    generative_design: PASS_PUBLIC_CLAIM
+    code_compliance: PASS_PUBLIC_CLAIM
+    project_knowledge_graph: PASS_PUBLIC_CLAIM
+    design_intent: PASS_PUBLIC_CLAIM
+    bim_operations: PASS_PUBLIC_CLAIM
+    project_intelligence: PASS_PUBLIC_CLAIM
+    archicad: UNKNOWN
+    russian_codes: UNKNOWN
+    public_api: UNKNOWN
+    technical_depth_verified: false
+    priority: P0_DEMO
+
+  swapp:
+    category: production_architecture_automation
+    revit_live_write: PASS_PUBLIC_CLAIM
+    archicad_live_write: PASS_PUBLIC_CLAIM
+    modeling: PASS_PUBLIC_CLAIM
+    documentation: PASS_PUBLIC_CLAIM
+    qa: PASS_PUBLIC_CLAIM
+    workflow_memory: PASS_PUBLIC_CLAIM
+    compliance: PARTIAL_ADA_PUBLIC_CLAIM
+    russian_codes: UNKNOWN
+    open_api: UNKNOWN
+    priority: P0_DEMO
+
+  archi_automate:
+    category: aec_mcp_control_plane
+    archicad: PASS
+    multi_host: PASS
+    mcp: PASS
+    gpt_codex: PASS
+    read_only_policy: PASS
+    preview_policy: PASS
+    write_policy: PASS
+    action_history: PASS
+    ifc_ids_bcf: PASS
+    project_reasoning_graph: FAIL
+    normative_graph: FAIL
+    priority: P0_TEST
+
+  text2bim:
+    category: open_agentic_bim_generation
+    open_source: PASS
+    natural_language_to_bim: PASS
+    multi_agent: PASS
+    editable_native_bim: PASS
+    rule_checker: PASS
+    iterative_correction: PASS
+    vectorworks: PASS
+    archicad: FAIL
+    priority: P0_CODE_AUDIT
+
+  design_healing:
+    category: research_algorithm
+    graph_impact_propagation: PASS
+    compliance_violation_input: PASS
+    candidate_generation: PASS
+    code_compliant_alternatives: PASS
+    minimize_design_change: PASS
+    implementation_public: UNKNOWN
+    priority: P0_METHOD_AUDIT
+
+  ifc_agent:
+    category: research_agentic_ifc
+    schema_guided: PASS
+    multi_agent: PASS
+    tool_augmented: PASS
+    dual_memory: PASS
+    adaptive_execution: PASS
+    modification: PASS
+    public_implementation: UNKNOWN
+    priority: P1_ARCHITECTURE_AUDIT
+
+  code_companion_research:
+    category: research_compliance
+    regulation_to_structured_rules: PASS
+    deterministic_bim_checks: PASS
+    cross_platform: PASS
+    real_time: PASS
+    public_code: UNKNOWN
+    priority: P1_RULE_IR_AUDIT
+
+  building_information_graphs:
+    category: research_graph_model
+    graph_native_building_state: PASS
+    explicit_relationships: PASS
+    change_propagation: PASS
+    object_version_control: PASS
+    implementation_public: UNKNOWN
+    priority: P1_SCHEMA_AUDIT
+
+decision:
+  freeze_major_custom_architecture: true
+  reason: complete_three_pass_reuse_audit_first
+  custom_build_label_requires:
+    - commercial_product_search
+    - open_source_code_search
+    - academic_literature_search
+    - capability_gap_evidence
