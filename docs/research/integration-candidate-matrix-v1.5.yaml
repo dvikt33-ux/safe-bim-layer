@@ -1,0 +1,215 @@
+version: 1.5
+date: 2026-10-08
+status: research_draft
+current_target: Archicad_29
+
+normative_view_logic:
+  gost_21_501_2018:
+    current_status: ACTIVE
+    section_seed_guidance:
+      - window_openings
+      - exterior_gates_and_doors
+      - stairwells
+      - elevator_shafts
+      - balconies
+      - loggias
+    section_required_information:
+      - grids_axes
+      - axis_distances
+      - characteristic_levels
+      - opening_vertical_geometry
+      - wall_thickness_when_needed
+      - multilayer_composition
+      - detail_fragment_references
+    decision: COMPILE_TO_INFORMATION_OBLIGATIONS
+
+  gost_r_21_101_2026:
+    clause_5_5_3_policy:
+      additional_detail_only_when_parent_view_insufficient: true
+      no_callout_when_main_view_can_show_all_information: true
+    decision: HARD_ANTI_REDUNDANCY_RULE
+
+section_line_research:
+  autosection_2026:
+    title: A_deep_learning_based_framework_for_automated_section_line_generation_in_BIM_models
+    publication: Computer_Aided_Civil_and_Infrastructure_Engineering
+    open_access: true
+    source_drawings: 199
+    augmented_images: 3184
+    autolabel_ssim_pct: 92.7
+    autolabel_runtime_sec: 1.87
+    autosection_ssim_pct: 95.39
+    bim_materialization: Dynamo
+    role: LEARNED_CANDIDATE_GENERATOR
+    final_authority: false
+    decision: REUSE_METHOD_NOT_REINVENT
+
+commercial_whole_layer:
+  swapp:
+    archicad: PASS_PUBLIC_CLAIM
+    callouts: PASS_PUBLIC_CLAIM
+    enlarged_plans: PASS_PUBLIC_CLAIM
+    interior_elevations: PASS_PUBLIC_CLAIM
+    view_generation: PASS_PUBLIC_CLAIM
+    sheet_generation: PASS_PUBLIC_CLAIM
+    firm_history_learning: PASS_PUBLIC_CLAIM
+    change_reapplication: PASS_PUBLIC_CLAIM
+    priority: P0_ENTERPRISE_BENCHMARK
+
+open_method_reference:
+  draftwright:
+    repository: pzfreo/draftwright
+    license: AGPL_3_0
+    domain: mechanical_technical_drawings
+    drawing_compiler: PASS
+    semantic_feature_recognition: PASS
+    requirement_driven_view_planning: PASS_ACTIVE_ARCHITECTURE
+    automatic_section_trigger: PASS
+    coverage_lint: PASS
+    fidelity_legibility_completeness: PASS
+    annotation_placement_solver: PASS
+    sheet_scale_layout_solver: PASS
+    detail_view_future_gap: true
+    role: ARCHITECTURE_AND_TEST_REFERENCE
+    copy_code_without_license_review: BLOCKED
+
+llm_view_planning:
+  dfki_freecad_mcp_2026:
+    direct_mcp_to_cad: PASS_RESEARCH
+    iterative_visual_refinement: PASS_RESEARCH
+    view_selection_evaluated: PASS
+    layout_quality_evaluated: PASS
+    human_match_limitation: CONFIRMED
+    decision: DO_NOT_USE_LLM_AS_PRIMARY_VIEW_SELECTOR
+
+detail_reuse:
+  piaxis:
+    domain: Revit
+    active_callout_context: PASS_PUBLIC_CLAIM
+    firm_library_search: PASS
+    closest_detail_matching: PASS
+    adapt_wall_layers_materials: PASS
+    resize_components: PASS
+    auto_annotation: PASS
+    verified_detail_library: PASS
+    archicad: FAIL_DIRECT
+    role: DETAIL_REUSE_PATTERN_AND_OPTIONAL_EXTERNAL_REFERENCE
+
+view_materialization:
+  bimlogiq_wall_section:
+    domain: Revit
+    wall_section_generation: PASS
+    filters_length_thickness_type: PASS
+    auto_crop_offsets: PASS
+    role: COMMODITY_VIEW_GENERATION_REFERENCE
+
+ac29_tapir_current:
+  create_sections:
+    straight_two_point: PASS
+    depth: PASS
+    name: PASS
+    floor_index: PASS
+    jogged_complex: GAP_CURRENT_SCHEMA
+  create_interior_elevations:
+    chain_segments: PASS
+  create_independent_details:
+    pass: true
+  linked_detail_callout_marker:
+    verified: false
+    status: GAP_NOT_YET_PROVEN
+  create_general_exterior_elevation:
+    verified: false
+    status: GAP_NOT_YET_PROVEN
+
+information_obligation:
+  custom: true
+  types:
+    - vertical_relationship
+    - opening_vertical_geometry
+    - stair_core
+    - elevator_shaft
+    - floor_level_change
+    - roof_ridge_valley_parapet
+    - atrium_double_height
+    - structural_transfer
+    - facade_stepback
+    - balcony_loggia
+    - deformation_joint
+    - accessible_ramp
+    - wet_core_stack
+    - plant_equipment_room
+    - fire_compartment
+    - envelope_interface
+    - cse_junction
+    - penetration
+    - design_intent_condition
+
+candidate_sources:
+  - normative_seeds
+  - geometry_topology
+  - cse_interfaces
+  - precedent_office
+  - learned_autosection_prior
+  - user_locked_views
+
+selection_solver:
+  engine: OR_Tools_CP_SAT
+  problem: weighted_set_cover_maximum_coverage
+  hard_constraint: every_hard_IO_covered
+  objectives:
+    minimize:
+      - view_count
+      - redundancy
+      - sheet_area
+      - clutter
+      - unusual_cut_penalty
+    maximize:
+      - soft_IO_coverage
+      - architectural_clarity
+      - construction_information_value
+      - precedent_similarity
+
+view_hierarchy:
+  - plan_or_elevation
+  - building_section
+  - wall_or_local_section
+  - detail_or_callout
+  - component_section_or_shop_reference
+  escalation_only_if_unresolved_information: true
+
+detail_need_detector:
+  source: CSE_interface_graph
+  normalized_signature: true
+  deduplicate_identical_conditions: true
+  source_priority:
+    - verified_project_detail
+    - russian_manufacturer_or_TPD
+    - donor_project
+    - office_verified_library
+    - new_detail
+
+custom_blocked_pending_reuse:
+  - section_line_ml_from_zero
+  - generic_view_set_optimizer
+  - generic_room_interior_elevation_creator
+  - generic_wall_section_creator
+  - generic_firm_detail_search_engine
+  - generic_detail_adaptation_ai
+  - generic_technical_drawing_llm_agent
+
+custom_retain:
+  - russian_spds_information_obligation_compiler
+  - cse_and_design_intent_obligation_extraction
+  - candidate_section_seed_generation
+  - coverage_scoring_semantics
+  - detail_condition_signature
+  - view_detail_coverage_signatures
+  - proven_ac29_provider_gaps
+  - optional_firm_training_adapter
+  - architect_gold_set_regression_benchmark
+
+next_tests:
+  - SECTION_NEED_01
+  - AUTOSECTION_REFERENCE_01
+  - DETAIL_NEED_01
+  - VIEW_IMPACT_01
