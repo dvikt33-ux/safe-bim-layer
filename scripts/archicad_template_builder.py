@@ -154,6 +154,81 @@ class Tapir:
         return result
 
 
+
+def confirm_active_project(api: Tapir):
+    """Interactively confirm the exact currently loaded Archicad project."""
+    info = api.call("GetProjectInfo")
+    name = info.get("projectName") or "<untitled>"
+    path = info.get("projectPath") or info.get("projectLocation") or ""
+    print("")
+    print("ACTIVE ARCHICAD PROJECT")
+    print(f"Name: {name}")
+    print(f"Path: {path or '<unavailable>'}")
+    if info.get("isUntitled"):
+        return {
+            "status": "BLOCKED_UNTITLED_PROJECT",
+            "writePerformed": False,
+            "projectName": name,
+            "projectPath": path,
+            "reason": "Write stages require a saved project with a stable path.",
+        }
+    if not path:
+        return {
+            "status": "BLOCKED_PROJECT_IDENTITY",
+            "writePerformed": False,
+            "projectName": name,
+            "projectPath": path,
+            "reason": "Archicad did not return a stable project path.",
+        }
+    answer = input("Type YES to use this exact project for writes: ").strip()
+    if answer != "YES":
+        return {
+            "status": "BLOCKED_PROJECT_CONFIRMATION",
+            "writePerformed": False,
+            "projectName": name,
+            "projectPath": path,
+        }
+    return {
+        "status": "PASS",
+        "writePerformed": False,
+        "projectName": name,
+        "projectPath": path,
+        "confirmed": True,
+    }
+
+
+def assert_active_project(api: Tapir, expected_project_path):
+    """Fail closed if the active Archicad project changed after confirmation."""
+    if not expected_project_path:
+        return {
+            "status": "BLOCKED_PROJECT_CONFIRMATION",
+            "writePerformed": False,
+            "reason": (
+                "Write action requires --expected-project-path from a successful "
+                "confirm-project step."
+            ),
+        }
+    info = api.call("GetProjectInfo")
+    actual = info.get("projectPath") or info.get("projectLocation") or ""
+    if actual != expected_project_path:
+        return {
+            "status": "BLOCKED_ACTIVE_PROJECT_CHANGED",
+            "writePerformed": False,
+            "expectedProjectPath": expected_project_path,
+            "actualProjectPath": actual,
+            "actualProjectName": info.get("projectName"),
+            "reason": (
+                "The active Archicad project is not the project that was confirmed "
+                "for this write run."
+            ),
+        }
+    return {
+        "status": "PASS",
+        "writePerformed": False,
+        "projectName": info.get("projectName"),
+        "projectPath": actual,
+    }
+
 def schema_commands():
     schema = load_json(TAPIR_SCHEMA)
     return schema.get("commands", {})
@@ -4063,7 +4138,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "action",
-        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "plan-master-coordinate-calibration", "plan-form3-geometry", "plan-autotext", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell", "apply-master-layout-smoke", "apply-layout-autotext-smoke", "apply-master-context-autotext-smoke", "apply-master-coordinate-calibration", "apply-form3-core-geometry", "apply-form3-static-labels", "apply-form3-autotext"),
+        choices=("confirm-project", "validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "plan-master-coordinate-calibration", "plan-form3-geometry", "plan-autotext", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell", "apply-master-layout-smoke", "apply-layout-autotext-smoke", "apply-master-context-autotext-smoke", "apply-master-coordinate-calibration", "apply-form3-core-geometry", "apply-form3-static-labels", "apply-form3-autotext"),
     )
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
     parser.add_argument(
@@ -4087,6 +4162,27 @@ def main():
         result = check_windows_fonts()
     else:
         api = Tapir(args.port, evidence)
+        if args.action == "confirm-project":
+            result = confirm_active_project(api)
+            if args.out:
+                write_json(Path(args.out), result)
+            write_json(evidence / "result.json", result)
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            if result.get("status") != "PASS":
+                raise SystemExit(2)
+            return
+
+        if args.action.startswith("apply-"):
+            project_gate = assert_active_project(
+                api, args.expected_project_path
+            )
+            if project_gate.get("status") != "PASS":
+                result = project_gate
+                if args.out:
+                    write_json(Path(args.out), result)
+                write_json(evidence / "result.json", result)
+                print(json.dumps(result, ensure_ascii=False, indent=2))
+                raise SystemExit(2)
         if args.action == "inspect":
             result = live_inventory(api)
         elif args.action == "plan":
