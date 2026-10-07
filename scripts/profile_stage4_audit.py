@@ -31,11 +31,19 @@ def main():
     counts = defaultdict(int)
     per_source = []
 
+    original_semantic_key = pack._semantic_source_key
     original_pinned = pack._pinned_json_once
     original_summary = pack._model_summary_once
     original_changed = pack.changed_paths
     original_scan = pack.scan_public_pack
     original_extract = pack.extract
+
+    def timed_semantic_key(root_arg, spec):
+        started = time.perf_counter()
+        result = original_semantic_key(root_arg, spec)
+        totals['semantic-key'] += time.perf_counter() - started
+        counts['semantic-key'] += 1
+        return result
 
     def timed_pinned(root_arg, spec):
         started = time.perf_counter()
@@ -74,6 +82,7 @@ def main():
         counts['extract-total'] += 1
         return result
 
+    pack._semantic_source_key = timed_semantic_key
     pack._pinned_json_once = timed_pinned
     pack._model_summary_once = timed_summary
     pack.changed_paths = timed_changed
@@ -104,7 +113,7 @@ def main():
     print('\n===== RESULT =====', flush=True)
     print(result, flush=True)
     print('\n===== TIMINGS =====', flush=True)
-    for key in ('extract-total', 'pinned-json', 'model-summary', 'changed-paths', 'public-scan'):
+    for key in ('extract-total', 'semantic-key', 'pinned-json', 'model-summary', 'changed-paths', 'public-scan'):
         print(f'{key}: {totals[key]:.3f}s ({counts[key]} calls)', flush=True)
     residual = max(0.0, total - totals['extract-total'] - totals['public-scan'])
     print(f'pack-compare/other-after-extract: {residual:.3f}s', flush=True)
