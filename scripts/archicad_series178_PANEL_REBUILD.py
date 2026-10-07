@@ -92,7 +92,7 @@ DOORS = [
     ("D_3B_L_KITCH","H_N_L_KITCH",2.70,0.80),
     ("D_3B_L_SVC","H_B_LC",1.05,0.70),
 
-    ("D_3B_R_ENTRY","V_X168",5.45,0.90),
+    ("D_3B_R_ENTRY","V_X168",8.30,0.90),
     ("D_3B_R_ROOM11","H_N_R_ROOM",0.65,0.80),
     ("D_3B_R_KITCH","H_N_R_KITCH",0.90,0.80),
     ("D_3B_R_SVC","H_B_RC",2.55,0.70),
