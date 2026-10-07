@@ -435,3 +435,78 @@ Use a single real project requirement chain around SP 464.
 8. Benchmark latency and source-call count.
 
 This will tell us whether the free stack is good enough before purchasing any normative platform.
+
+
+---
+
+## Finding H — university/student TechExpert access may solve more than a short demo
+
+TechExpert/Kodeks has an explicit **information-support program for universities**.
+
+Current official student/teacher pages state:
+- students can obtain access to current normative-technical and legal information through participating educational institutions;
+- access is typically provided from university/library/computer-class workstations;
+- if the institution is not participating, it can contact the university-support team;
+- the student portal advertises full access to standards, legal documents and expert materials in the supported environment.
+
+Independent 2026 university-library pages confirm that some universities maintain annual institutional TechExpert/Kodeks subscriptions.
+
+This means a student should check the university library / computer labs / architecture department **before purchasing an individual subscription**.
+
+Important:
+institutional UI access does not automatically grant Kodeks API rights. API entitlement/caching/export rights must still be checked separately.
+
+There is also a current public short trial for basic TechExpert normative documents, but temporary demos must not become runtime dependencies.
+
+---
+
+## Finding I — TechExpert may also replace part of our manually collected detail/typical-project library
+
+The current construction promotion bundle includes:
+
+`Техэксперт: ТПД. Здания, сооружения, конструкции и узлы`
+
+with:
+- more than 5,000 series of typical building structures/products/details;
+- classification/rubricator search;
+- part of the material in CAD format.
+
+This overlaps strongly with our separate DETAILS / TECHNICAL_SOLUTIONS research.
+
+TechExpert also advertises `кАссист`, an integration module that:
+- checks references to normative documents for actuality;
+- inserts links;
+- works with office/document tools and several CAD/modeling products;
+- supports document-maintenance workflows.
+
+Decision:
+before manually expanding our technical-detail corpus by thousands of albums, audit TPD coverage, export rights and integration options.
+
+Our own detail library still remains useful for:
+- curated/verified details actually selected for the project;
+- exact applicability metadata;
+- Archicad-native parametric implementation;
+- design-intent and project-causal bindings.
+
+---
+
+## Practical zero-cost acquisition order
+
+Before paying for a normative platform:
+
+1. Check university/institute participation in the Kodeks/TechExpert education-support program.
+2. If available, test:
+   - SMART: Проектирование;
+   - Реестр требований: Строительство;
+   - ТПД details/typical-series corpus;
+   - requirement revision/history;
+   - exports;
+   - any API entitlement.
+3. In parallel keep the fully free baseline:
+   - pravo public adapter;
+   - RusLawOD;
+   - Стройкомплекс.РФ;
+   - protect.gost.ru;
+   - Minstroy;
+   - FPPD/EGRKN.
+4. Only then decide whether a paid GARANT/TechExpert/NormaCS plan adds enough value.
