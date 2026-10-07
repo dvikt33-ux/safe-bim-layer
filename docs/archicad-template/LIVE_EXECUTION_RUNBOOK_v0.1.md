@@ -174,3 +174,27 @@ Cleanup is mandatory and ordered:
 A pre-existing navigator item with either smoke name causes `BLOCKED_RESIDUAL_SMOKE_ITEMS`; the builder will not silently delete it.
 
 After this gate passes, the titleblock AutoText contract for Form 3 fields 4, 7 and 8 is considered live-verified. The next implementation stage is full Form 3 titleblock geometry generation.
+
+
+## 9. Master Layout coordinate calibration
+
+After both smoke gates pass:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/run_archicad_template_live.ps1 -Stage coordinate-calibration
+```
+
+The command activates `A4_P` and draws both paper-space hypotheses at once:
+
+- `H1`: origin at bottom-left, +X right, +Y up;
+- `H2`: origin at top-left, +X right, -Y down.
+
+Each hypothesis places four labeled cross marks 10 mm inside the candidate paper corners. While the marks are visible, the command waits for an explicit terminal answer:
+
+- `H1`
+- `H2`
+- `ABORT`
+
+No convention is selected automatically. All calibration Line/Text elements are deleted in a `finally` cleanup path after the answer, and model-element count must remain unchanged.
+
+A PASS from this stage proves only the convention selected by visual inspection. The returned JSON contains `confirmedConvention`; that convention must then be persisted in the coordinate-calibration registry before `apply-form3-core-geometry` is enabled.
