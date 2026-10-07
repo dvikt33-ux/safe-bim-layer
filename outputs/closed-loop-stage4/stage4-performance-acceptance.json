@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS",
+  "designation": "POST_STAGE4_PERFORMANCE_VERIFIED",
+  "branch": "work/stage4-performance-pass",
+  "verifiedStage4Baseline": "faf2fd8adcfd3329ae77a137b37f739a9a462225",
+  "validation": {
+    "focusedTests": {
+      "status": "PASS",
+      "testsRun": 58,
+      "seconds": 4.244
+    },
+    "offlineProof": {
+      "status": "PASS",
+      "run": "outputs/closed-loop-stage4/hardening-offline-010",
+      "totalSeconds": 22.367,
+      "mandatoryLiveScenarios": "NOT_RERUN; historical Stage 4 live acceptance remains authoritative"
+    },
+    "historicalStage1": {
+      "status": "PASS",
+      "mode": "FAST_REVALIDATION_OF_VERIFIED_STAGE4_BASELINE",
+      "seconds": 5.786
+    },
+    "historicalStage3": {
+      "status": "PASS",
+      "mode": "FAST_REVALIDATION_OF_VERIFIED_STAGE4_BASELINE",
+      "seconds": 5.936
+    },
+    "retainedLiveS406AuditPack": {
+      "status": "PASS",
+      "originalApproxSeconds": 117.632,
+      "optimizedSeconds": 23.732,
+      "semanticSnapshotGroups": 3,
+      "factualSnapshots": 10
+    }
+  },
+  "performance": {
+    "offlineProofPreviousSeconds": 195.744,
+    "offlineProofOptimizedSeconds": 22.367,
+    "offlineProofSpeedup": 8.75,
+    "retainedS406VerifierSpeedup": 4.96
+  },
+  "safetyInvariants": {
+    "newBimOperationTypes": false,
+    "createWallsMutationPathChanged": false,
+    "recoverySemanticsChanged": false,
+    "noBlindRetryChanged": false,
+    "factualReadbackRemoved": false,
+    "projectIdentityBindingWeakened": false,
+    "independentAuditVerificationRemoved": false
+  },
+  "conclusion": "Performance/evidence-I/O cleanup PASS. Stage 5 capability work may proceed without changing the frozen Stage 4 milestone."
+}
