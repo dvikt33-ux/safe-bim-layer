@@ -184,3 +184,30 @@ exchange_and_documentation_next:
   - seed_IFC_COORD
   - seed_IFC_REFERENCE_IMPORT
   - keep_IFC_ISSUE_blocked_until_delivery_requirement
+
+
+archicad_version_strategy:
+  current_target: Archicad_29
+  policy: finish_AC29_before_AC30
+  ac30_work_status: deferred_until_user_installs_AC30
+  rules:
+    - do_not_split_active_implementation_between_AC29_and_AC30
+    - AC29_release_must_be_stable_and_complete_before_AC30_migration_work
+    - preserve_version_agnostic_project_logic_where_practical
+    - after_AC30_install_run_migration_audit_before_adaptation
+    - treat_AC30_official_MCP_as_future_candidate_not_current_dependency
+  AC29_done_gate:
+    - workstation_bundle_released
+    - template_release_complete
+    - required_addons_selected_and_validated
+    - live_execution_path_stable
+    - readback_and_regression_pass
+    - normative_runtime_path_operational
+  AC30_migration_sequence:
+    - install_and_open_AC30
+    - audit_API_MCP_and_addon_compatibility
+    - compare_AC29_execution_stack_against_official_AC30_MCP
+    - migrate_template_and_work_environment
+    - run_model_semantic_regression
+    - replace_only_components_that_AC30_improves
+    - keep_project_core_and_rule_graph_shared
