@@ -1,0 +1,195 @@
+version: 0.2
+date: 2026-10-07
+status: research_draft
+
+ratings:
+  PASS: confirmed in current source/repository
+  PARTIAL: works with known coverage/stability limits
+  UNKNOWN: not verified
+  FAIL: verified unsuitable for stated capability
+
+trust_tiers:
+  AUTHORITY:
+    - official_publication
+    - state_registry
+    - official_standard_status
+  CURRENT_STRUCTURED_SOURCE:
+    - current_structured_provider
+  CURATED_SECONDARY:
+    - editorial_commercial_provider
+  OPEN_CORPUS:
+    - downloadable_open_dataset
+  COMMUNITY_ADAPTER:
+    - unofficial_adapter_over_public_source
+
+free_sources:
+  pravo_public_json:
+    cost: free
+    api_key_required: false
+    source_authority: official_portal
+    developer_api_documented: false
+    search: PASS
+    document_retrieval: PASS
+    version_at_date: PARTIAL
+    construction_sp_gost_fulltext: FAIL
+    stability: PARTIAL
+    recommended_role:
+      - federal_legal_discovery
+      - official_publication_metadata
+      - source_for_community_adapter
+    implementation_note: wrap_with_contract_tests
+
+  pravo_mcp_ru_legal:
+    cost: free
+    license: Apache-2.0
+    api_key_required: false
+    trust_tier: COMMUNITY_ADAPTER
+    mcp: PASS
+    source: pravo.gov.ru
+    search_npa: PASS
+    get_npa: PASS
+    version_at_date: PARTIAL
+    health_note: upstream_TLS_and_IPS_details_were_brittle_in_2026_05_audit
+    recommended_role:
+      - adapter_reference
+      - local_mcp
+    authority: false
+
+  russian_law_mcp:
+    cost: free
+    license: Apache-2.0
+    trust_tier: COMMUNITY_ADAPTER
+    mcp: PASS
+    local_sqlite_fts: PASS
+    federal_statutes_reported: 12369
+    provisions_reported: 77647
+    bundled_last_ingested: "2026-02-25"
+    freshness_as_of_2026_10: PARTIAL
+    recommended_role:
+      - offline_search_accelerator
+      - citation_candidate_finder
+      - benchmark
+    authority: false
+
+  ruslawod:
+    cost: free
+    trust_tier: OPEN_CORPUS
+    license: CC-BY-family_project_terms
+    texts_reported: 308056
+    source_refresh: "2026-08-02"
+    updated_repo_2026_09: PASS
+    structured_xml: PASS
+    official_publication_status: false
+    recommended_role:
+      - offline_index
+      - local_retrieval
+      - analytics
+      - L0_compiler_corpus
+
+  stroykompleks_requirements:
+    cost: free
+    trust_tier: AUTHORITY
+    atomic_requirement_ids: PASS
+    statuses: PASS
+    version_history: PASS
+    safety_aspects: PASS
+    new_interface_xml_export:
+      status: PARTIAL
+      evidence: recent_secondary_source
+      primary_ui_verified: false
+    new_interface_xlsx_export:
+      status: PARTIAL
+      evidence: recent_secondary_source
+      primary_ui_verified: false
+    programmatically_checkable_flag_reported: PARTIAL
+    public_documented_api: UNKNOWN
+    recommended_role:
+      - canonical_requirement_identity
+      - legal_registry_status
+      - requirement_versions
+
+  protect_gost:
+    cost: free
+    trust_tier: AUTHORITY
+    gost_sp_catalog: PASS
+    status_change_cards: PASS
+    document_count_gost_page_2026_10: 54886
+    public_documented_api: UNKNOWN
+    fulltext_free_for_all: UNKNOWN
+    recommended_role:
+      - official_standard_identity
+      - status
+      - amendments
+
+  minstroi_official:
+    cost: free
+    trust_tier: AUTHORITY
+    sp_and_change_documents: PASS
+    legal_orders: PASS
+    xml_machine_rule_policy: PASS
+    recommended_role:
+      - primary_provenance
+      - amendments
+      - policy
+
+  fppd:
+    cost: free_or_public_catalog
+    trust_tier: AUTHORITY
+    heritage_resource_group: PASS
+    external_access_links: PASS
+    json_views: PASS
+    standard_map_services: PASS
+    full_coverage: UNKNOWN
+    recommended_role:
+      - spatial_context
+      - heritage_geometry_candidate
+      - site_applicability
+
+  russian_construction_standards_github:
+    cost: free
+    trust_tier: OPEN_CORPUS
+    license_code: MIT
+    license_metadata: CC-BY-4.0
+    metadata_json_count_2026_10: 364
+    last_data_push: "2025-05"
+    diagrams_formula_fidelity: FAIL
+    currentness: PARTIAL
+    recommended_role:
+      - parser_fixture
+      - search_prototype
+      - extraction_benchmark
+    authority: false
+
+commercial_optional:
+  garant_connect:
+    runtime_required: false
+    recommended_role:
+      - verifier
+      - source_text
+      - change_watch
+      - reference_seed
+  techexpert:
+    runtime_required: false
+    recommended_role:
+      - curated_atomic_requirements
+      - requirement_management
+      - revisions
+  normacs:
+    runtime_required: false
+    recommended_role:
+      - technical_corpus
+      - succession
+      - amendments
+      - crosscheck
+
+architecture:
+  policy: provider_independent
+  commercial_service_required_for_L2: false
+  active_project_rule_pack_cached_locally: true
+  every_active_rule_requires:
+    - canonical_id
+    - authoritative_source_ref
+    - source_version_or_effective_interval
+    - provenance
+    - verification_status
+    - dependency_fingerprint
