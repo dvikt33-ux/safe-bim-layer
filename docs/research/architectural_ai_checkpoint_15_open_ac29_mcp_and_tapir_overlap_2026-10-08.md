@@ -266,6 +266,57 @@ So the remaining transaction gap is narrower:
 
 —not "invent batch undo for every writer".
 
+### 4B. Deep-geometry boundary — Model Dump still has a real reason to exist
+
+I then searched Tapir's command/source surface for a general command equivalent to our
+Model Dump:
+
+`element -> evaluated 3D bodies -> vertices -> polygons/faces -> material/surface`
+
+No general command exposing that full evaluated 3D topology was found in the inspected
+Tapir revision/current source surface.
+
+Tapir does call `ACAPI_ModelAccess_Get3DInfo` and
+`ACAPI_ModelAccess_GetComponent` internally, but in the generic element path this is
+used to calculate robust 3D bounding boxes; the body topology itself is not returned to
+the caller.
+
+That preserves a concrete native gap for our Model Dump:
+
+- evaluated 3D bodies for arbitrary model elements;
+- global/world vertices;
+- faces/polygons;
+- face -> material/surface provenance;
+- GUID -> body association;
+- cross-type geometry in one normalized payload.
+
+This is narrower than "native geometry bridge" in general, because Tapir already
+returns rich editable/type-specific geometry for many types and a complete Morph body.
+
+### 4C. Tapir already exposes evaluated floor-plan cut polygons
+
+At the same exact `d2dfeec` revision, `GetDetailsOfElements` can return
+`floorPlanPolygons`.
+
+The implementation regenerates Archicad drawing primitives and captures cut-fill
+polygons. Its schema explicitly describes them as:
+
+- polygons **as drawn on the floor plan**;
+- wall joins already resolved by Archicad;
+- available at that revision for cut-fill elements such as Walls, Columns and Beams.
+
+This is important for the older Q4 geometry work. We should test these polygons before
+using 3D body decomposition for wall connectivity/fragmentation.
+
+Source:
+https://github.com/ENZYME-APD/tapir-archicad-automation/blob/d2dfeec7936dd1dbed4e2412f406b30291959c26/archicad-addon/Sources/ElementCommands.cpp
+
+Practical split after this finding:
+
+- **2D resolved wall plan geometry** -> try Tapir `floorPlanPolygons` first;
+- **generic evaluated 3D topology/material provenance** -> keep our Model Dump until an
+  equivalent upstream command is proven.
+
 ---
 
 ## 5. New candidate — alesdev88/Archicad-MCP
@@ -584,6 +635,25 @@ Dimensions:
 - long-running operations;
 - failure reporting.
 
+### Q4-TAPIR-01
+
+Use `GetDetailsOfElements(fields=["type","floorIndex","floorPlanPolygons"])` on the
+existing wall audit sample and compare against our Q4 wall-connectivity inputs.
+
+Verify:
+
+- joined-wall cut polygons;
+- T/L/X junctions;
+- curved walls where present;
+- walls outside the active story/window;
+- hidden-layer behavior;
+- batch runtime;
+- whether the polygons are sufficient for `WALL_FRAGMENTATION` and
+  `WALL_CONNECTIVITY`.
+
+Do not route Q4 through the 104 MB Model Dump if this smaller evaluated 2D representation
+is sufficient.
+
 ### EVENT-01
 
 Register Tapir's `AddElementNotificationClient` against a local callback and verify on
@@ -629,7 +699,8 @@ native CRUD layer.
 | MCP command exposure | SzamosiMate/tapir-archicad-MCP candidate | likely no generic registry |
 | Safety / QA / dry-run UX | alesdev88/Archicad-MCP candidate | project-specific policy only |
 | Alternative broad closed executor | HuskyBIM | adapter only if it wins benchmark |
-| Deep evaluated geometry | native Add-On only where Tapir output is insufficient | residual only |
+| Resolved floor-plan cut geometry | Tapir floorPlanPolygons | likely no custom layer for Walls/Columns/Beams |
+| Deep evaluated 3D topology | native Model Dump only where Tapir has no equivalent | residual but currently justified |
 | Element events | Tapir notification client | custom consumer/revision logic only |
 | Project revision/invalidation | canonical kernel over event stream | yes |
 | Transaction policy | Tapir single-undo command + wrapper safety | cross-command semantics only if required |
