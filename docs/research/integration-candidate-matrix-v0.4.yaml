@@ -1,0 +1,89 @@
+version: 0.4
+date: 2026-10-08
+status: research_draft
+current_target: Archicad_29
+
+new_candidates:
+  openproject_bim:
+    category: free_open_bim_project_coordination
+    open_source: PASS
+    free_self_hosted: PASS
+    unlimited_users_projects_community: PASS
+    ifc_viewer: PASS
+    multiple_ifc_models: PASS
+    bcf_management: PASS
+    bcf_api_2_1: PASS
+    rest_api: PASS
+    live_archicad_execution: FAIL
+    priority: P1_FREE_PROTOTYPE
+    likely_replaces:
+      - generic_issue_task_server
+      - basic_bcf_server
+      - basic_ifc_project_viewer
+      - solo_project_coordination_backend
+
+  speckle_archicad:
+    category: aec_data_hub_and_model_cicd
+    archicad_29: PASS
+    connector: PASS
+    model_versions: PASS
+    properties_classifications_quantities: PASS
+    automate_version_trigger: PASS
+    automate_qa_compliance: PASS
+    webhooks: PASS
+    strict_workflow_dag: PARTIAL
+    priority: P0_P1_TEST
+    likely_replaces:
+      - generic_model_version_event_bus
+      - publication_level_check_runner
+      - much_of_cross_tool_model_data_transfer
+
+  depthmapx:
+    category: spatial_network_and_space_syntax
+    open_source: PASS
+    building_scale: PASS
+    visibility_graph: PASS
+    isovists: PASS
+    agent_analysis: PASS
+    network_metrics: PASS
+    russian_code_compliance: FAIL
+    decision: REUSE_METRICS
+
+  one_click_lca:
+    category: lifecycle_carbon
+    archicad_29_plugin: PASS
+    bom_export: PASS
+    lca_database_engine: PASS
+    free_full_use: FAIL
+    decision: REUSE_IF_LICENSE_FITS
+
+  etim_mc_bsdd:
+    category: product_semantics
+    product_classes: PASS
+    modeling_classes: PASS
+    ifc_4_3_links: PASS
+    bsdd_publication: PASS
+    json_exchange: PASS_ETIM_XCHANGE
+    decision: ADAPT_STANDARD_SEMANTICS
+
+roadmap_removals:
+  custom_blocked:
+    - generic_bcf_server
+    - generic_ifc_viewer
+    - generic_project_issue_server
+    - generic_model_cicd_platform
+    - generic_version_trigger_framework
+    - visibility_graph_engine
+    - space_syntax_engine
+    - custom_lca_engine
+    - manufacturer_product_ontology
+
+next_reuse_search_domains:
+  - design_rationale_and_decision_management
+  - construction_detail_selection
+  - cost_5d_qto_procurement
+  - zoning_permitting
+  - facade_daylight_window_optimization
+  - engineering_ai_assistants
+  - product_substitution_equivalence
+  - archicad_documentation_automation
