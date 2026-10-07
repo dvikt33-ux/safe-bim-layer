@@ -174,7 +174,15 @@ def reconcile_attempt(attempt, before, current, identity, journal):
 def job_from_dict(value):
     """Additive Stage 2/3 deserialization; missing Stage 4 fields keep defaults."""
     value = deepcopy(value)
-    def action(row): return Action(**row) if row else None
+    def action(row):
+        if not row:
+            return None
+        if row.get('type') == 'create_wall':
+            return Action(**row)
+        if row.get('type') == 'create_window':
+            from .models import WindowAction
+            return WindowAction(**row)
+        raise ValueError('Unsupported persisted action type: '+str(row.get('type')))
     def observation(row):
         if row is None: return None
         row = deepcopy(row)
