@@ -1,0 +1,196 @@
+version: 0.6
+date: 2026-10-08
+status: research_draft
+current_target: Archicad_29
+
+new_major_candidates:
+  bim_grade:
+    category: ifc_native_code_compliance_ci
+    production_claim: PASS_PUBLIC_CLAIM
+    russian_design_docs_in_production: PASS_PUBLIC_CLAIM
+    ifc_native: PASS_PUBLIC_CLAIM
+    pdf_input: PASS_PUBLIC_CLAIM
+    coverage_gate: PASS_PUBLIC_CLAIM
+    evidence_provenance: PASS_PUBLIC_CLAIM
+    bitemporal_rule_history: PASS_PUBLIC_CLAIM
+    cross_domain_join: PASS_PUBLIC_CLAIM
+    public_api: UNKNOWN
+    pricing: UNKNOWN
+    external_rule_import: UNKNOWN
+    priority: P0_REQUEST_ACCESS
+    overlaps:
+      - compliance_ci
+      - audit_debt_coverage
+      - rule_history_replay
+      - provenance
+      - cross_domain_ifc_audit
+
+  motif_design:
+    category: agent_native_bim
+    launch: 2026_09
+    parametric_associative_bim: PASS_PUBLIC_CLAIM
+    agent_native: PASS_PUBLIC_CLAIM
+    real_time_multiuser: PASS_PUBLIC_CLAIM
+    open_queryable_data_model: PASS_PUBLIC_CLAIM
+    custom_types_properties_behaviors: PASS_PUBLIC_CLAIM
+    revit_live: PASS_PUBLIC_CLAIM
+    rhino_live: PASS_PUBLIC_CLAIM
+    ifc: PASS_PUBLIC_CLAIM
+    archicad_live: NOT_VERIFIED
+    price_usd_month_active_user_from: 150
+    design_trial: FAIL_CURRENT
+    current_ac29_fit: LOW
+    priority: WATCH_DEMO
+
+cype:
+  cype_architecture:
+    free: PASS
+    openbim: PASS
+    decision: REUSE_OPTION
+  ifc_builder:
+    free: PASS
+    ifc_authoring: PASS
+    decision: REUSE_OPTION
+  open_bim_site:
+    free: PASS
+    site_maps_topography_parcels: PASS
+    decision: REUSE
+  open_bim_layout:
+    free: PASS
+    plans_sections_elevations_dimensions_layout: PASS
+    decision: REUSE_OPTION
+  construction_systems:
+    free: PASS
+    layer_assemblies: PASS
+    thickness_material_density: PASS
+    thermal_properties: PASS
+    host_assignment: PASS
+    thickness_mismatch_warning: PASS
+    reports: PASS
+    reusable_systems: PASS
+    priority: P0_FREE_TEST
+    likely_replaces:
+      - generic_construction_system_registry
+      - generic_layer_stack_database
+      - assembly_host_thickness_check
+  cypeurban:
+    free: PASS
+    custom_municipal_rules: PASS
+    setbacks: PASS
+    height: PASS
+    plot_area: PASS
+    buildability_occupancy: PASS
+    parking_habitability: PASS
+    ifc_report_export: PASS
+    priority: P0_FREE_TEST
+    likely_replaces:
+      - generic_urban_rule_executor
+      - much_of_pzz_geometry_checker
+  cypefire:
+    fire_compartmentation: PASS
+    evacuation: PASS
+    active_fire_elements: PASS
+    openbim_import: PASS
+    priority: P1_EVAL
+  cypefire_fds:
+    nist_fds: PASS
+    smoke_fire_simulation: PASS
+    decision: REUSE
+  cypelux:
+    daylight: PASS
+    glare_ugr: PASS
+    emergency_lighting: PASS
+    custom_parameters: PASS
+    ifc_archicad_import: PASS_WITH_LIMITS
+    priority: P1_EVAL
+  engineering_family:
+    hvac: PASS
+    plumbing: PASS
+    electrical: PASS
+    structures: PASS
+    quantities: PASS
+    campus_license_path: PASS
+    evaluation_days: 30
+
+usbim:
+  category: modular_openbim_management
+  free_base:
+    viewer: PASS
+    federation: PASS
+    bcf: PASS
+    gis: PASS
+    bsdd_editor: PASS
+    ids_editor: PASS
+    object_library: PASS
+  checker:
+    ifc_property_validation: PASS
+    checklist: PASS
+    edit_properties: PASS
+    excel_import: PASS
+    classification: PASS
+    ifc_export: PASS
+    trial_month: PASS
+  extra:
+    clash: PASS
+    compare: PASS
+    editor: PASS
+    refactor: PASS
+    gantt_4d: PASS
+  priority: P1_COMPARE_OPENBIM_STACK
+
+details:
+  bimsmith_detail_shelf:
+    ai_search_2026: PASS
+    manufacturer_details: PASS
+    thousands_details: PASS
+    detail_product_many_to_many: PASS
+    russian_normative_authority: FAIL
+    decision: REUSE_AS_CANDIDATE_SOURCE
+
+mep_ai:
+  augmenta_acp:
+    production_2026: PASS
+    electrical_ai_design: PASS
+    routing: PASS
+    real_time_clash: PASS
+    iterative_coordination: PASS
+    mechanical_plumbing: COMING_SOON_PUBLIC_CLAIM
+    archicad_fit: UNKNOWN_LOW
+    decision: BENCHMARK_FUTURE_EXTERNAL_SOLVER
+
+cost_open_source:
+  openconstructionerp:
+    open_source: PASS
+    license: AGPL_3_0
+    self_hosted: PASS
+    boqs: PASS_PUBLIC_CLAIM
+    bim_takeoff: PASS_PUBLIC_CLAIM
+    four_d: PASS_PUBLIC_CLAIM
+    five_d: PASS_PUBLIC_CLAIM
+    rest_api: PASS_PUBLIC_CLAIM
+    reliability_independently_verified: UNKNOWN
+    priority: P1_SANDBOX_ONLY
+
+custom_blocked_pending_reuse:
+  - generic_urban_checker
+  - generic_construction_system_registry
+  - generic_assembly_layer_database
+  - fire_cfd_engine
+  - daylight_lighting_engine
+  - generic_openbim_checker_editor
+  - global_detail_search_archive
+  - ai_electrical_routing_engine
+  - generic_4d_5d_platform
+  - compliance_ci_framework
+  - agent_native_bim_platform
+
+p0_after_template:
+  - HuskyBIM
+  - Archi_Automate
+  - Tangl_Space
+  - CYPEURBAN
+  - CYPE_Construction_Systems
+  - BIMQ
+  - Qonic_Free
+  - BIM_Grade_request_access
+  - usBIM_free_trial
