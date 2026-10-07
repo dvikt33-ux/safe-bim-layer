@@ -1,0 +1,73 @@
+registry_version: 0.1
+status: live_visual_calibration_required
+target: Archicad_29
+purpose: >
+  Prove the Master Layout paper-space coordinate convention before any
+  bottom-right titleblock placement is automated.
+
+confirmed_api_facts:
+  layout_size:
+    source: API_LayoutInfo
+    units: mm
+    fields: [sizeX, sizeY, leftMargin, topMargin, rightMargin, bottomMargin]
+  element_coordinates:
+    source: API_Coord
+    units: m
+  local_origin_query:
+    command: ACAPI_Database_GetLocOrigo
+    usable_on_layout_or_master_layout: false
+    note: >
+      Graphisoft documents GetLocOrigo as valid only for plan, section,
+      detail and 3D databases; therefore it cannot establish Master Layout
+      paper origin.
+
+candidate_convention_to_test:
+  paper_bounds_m:
+    A4_P:
+      width: 0.210
+      height: 0.297
+  hypotheses:
+    - id: H1_bottom_left_positive_xy
+      corners:
+        bottom_left: [0.0, 0.0]
+        bottom_right: [0.210, 0.0]
+        top_left: [0.0, 0.297]
+        top_right: [0.210, 0.297]
+    - id: H2_top_left_positive_x_negative_y
+      corners:
+        top_left: [0.0, 0.0]
+        top_right: [0.210, 0.0]
+        bottom_left: [0.0, -0.297]
+        bottom_right: [0.210, -0.297]
+
+calibration_artifacts:
+  master: A4_P
+  temporary_marks:
+    arm_length_mm: 8
+    inset_mm: 10
+    labels:
+      - BL
+      - BR
+      - TL
+      - TR
+  rule: >
+    Calibration marks must be sacrificial and must be removed after visual
+    confirmation. No production Form 3 geometry may be written before a
+    coordinate convention is explicitly confirmed.
+
+release_gate:
+  requires:
+    - master_smoke_PASS
+    - layout_autotext_smoke_PASS
+    - paper_coordinate_convention_CONFIRMED
+  unlocks:
+    - apply_form3_core_geometry
+
+placement_after_confirmation:
+  x_origin_mm_formula: sheet_width_mm - right_margin_mm - 185
+  y_origin_mm_formula_if_bottom_left_positive_xy: bottom_margin_mm
+  y_origin_mm_formula_if_top_left_positive_x_negative_y: >
+    -(sheet_height_mm - bottom_margin_mm)
+  note: >
+    Exact formula is selected only after live calibration. The builder must
+    never guess between hypotheses.
