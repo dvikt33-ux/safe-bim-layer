@@ -51,6 +51,7 @@ FONT_MANIFEST = SPEC / "fonts-manifest.yaml"
 SEED_PRESETS = SPEC / "seed-presets-registry-v0.1.yaml"
 MASTER_LAYOUT_FORM3 = SPEC / "master-layout-form3-registry-v0.1.yaml"
 FORM3_GEOMETRY = SPEC / "form3-geometry-v0.1.yaml"
+MASTER_COORD_CALIBRATION = SPEC / "master-layout-coordinate-calibration-v0.1.yaml"
 AUTOTEXT_REGISTRY = SPEC / "autotext-titleblock-registry-v0.1.yaml"
 DWG_TRANSLATOR_REGISTRY = SPEC / "dwg-translator-registry-v0.1.yaml"
 IFC_TRANSLATOR_REGISTRY = SPEC / "ifc-translator-registry-v0.1.yaml"
@@ -1745,6 +1746,21 @@ def _layout_settings_from_nav(api: Tapir, nav_item):
 
 
 
+
+def plan_master_coordinate_calibration():
+    """Offline plan for proving Master Layout paper-space orientation."""
+    spec = load_yaml(MASTER_COORD_CALIBRATION)
+    return {
+        "status": "BLOCKED_LIVE_VISUAL_CALIBRATION",
+        "writePerformed": False,
+        "purpose": spec.get("purpose"),
+        "confirmedApiFacts": spec.get("confirmed_api_facts"),
+        "candidateConventionToTest": spec.get("candidate_convention_to_test"),
+        "calibrationArtifacts": spec.get("calibration_artifacts"),
+        "releaseGate": spec.get("release_gate"),
+        "placementAfterConfirmation": spec.get("placement_after_confirmation"),
+    }
+
 def plan_form3_geometry():
     """Offline deterministic plan for the verified Form 3 core grid."""
     spec = load_yaml(FORM3_GEOMETRY)
@@ -2897,7 +2913,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "action",
-        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "plan-form3-geometry", "plan-autotext", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell", "apply-master-layout-smoke", "apply-layout-autotext-smoke"),
+        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "plan-master-coordinate-calibration", "plan-form3-geometry", "plan-autotext", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell", "apply-master-layout-smoke", "apply-layout-autotext-smoke"),
     )
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
     parser.add_argument(
@@ -2933,6 +2949,8 @@ def main():
             result = plan_navigator(api)
         elif args.action == "plan-master-layouts":
             result = plan_master_layouts(api)
+        elif args.action == "plan-master-coordinate-calibration":
+            result = plan_master_coordinate_calibration()
         elif args.action == "plan-form3-geometry":
             result = plan_form3_geometry()
         elif args.action == "plan-autotext":
