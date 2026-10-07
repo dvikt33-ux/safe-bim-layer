@@ -48,3 +48,51 @@ additional_tests:
       - capture_edit_notification
       - semantic_readback
       - rule_guard
+
+event_recovery:
+  archicad_difference_generator:
+    status: FIRST_PARTY_RECOVERY_BACKSTOP
+    modes:
+      modification_stamp_based:
+        persistent_state: file_only
+        best_role: cheap_restart_and_missed_event_reconciliation
+      model_3d_based:
+        best_role: geometry_change_recovery_when_needed
+      context_based:
+        best_role: connected_element_and_view_context_reconciliation
+        view_guid_filters_view_setting_noise: true
+    states:
+      - in_file
+      - in_memory
+      - current_project
+    result:
+      - new_elements
+      - modified_elements
+      - deleted_elements
+      - environment_changed
+    environment_changed_covers:
+      - view_or_view_settings
+      - project_information_or_preferences
+      - property_definitions
+      - geolocation
+    architecture:
+      - live_notifications_for_latency
+      - difference_generator_for_recovery
+      - facet_reread_for_precision
+      - event_journal_for_causal_history_not_change_detection_single_point_of_failure
+    tapir_wrapper_found: false
+    custom_if_needed: thin_native_recovery_command_only
+
+additional_tests:
+  EVENT_RECOVERY_01:
+    goal: recover_events_missed_during_sidecar_or_callback_outage_without_full_dump
+    verify:
+      - create
+      - modify
+      - delete
+      - environment_change
+      - restart_gap
+      - modification_stamp_runtime
+      - model_3d_runtime
+      - context_based_view_semantics
+      - project_binding
