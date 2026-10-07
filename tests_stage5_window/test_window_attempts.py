@@ -176,6 +176,15 @@ class WindowAttemptTests(unittest.TestCase):
         self.assertEqual(result['status'], 'RECONCILIATION_AMBIGUOUS')
         self.assertIn('aperture/topology', result['reason'])
 
+    def test_native_body_index_only_is_not_aperture_evidence(self):
+        self.dispatch()
+        current = deepcopy(self.before)
+        current['elements'][0]['bodies'][0]['nativeBodyIndex'] = 99
+        current['elements'].append(window())
+        result = self.reconcile(current)
+        self.assertEqual(result['status'], 'RECONCILIATION_AMBIGUOUS')
+        self.assertIn('aperture/topology', result['reason'])
+
     def test_dispatch_without_host_aperture_change_is_ambiguous(self):
         self.dispatch()
         current = deepcopy(self.before)
