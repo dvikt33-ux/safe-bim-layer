@@ -106,6 +106,13 @@ def main():
     for n, names in enumerate(sorted(semantic_groups.values(), key=lambda x: (-len(x), x[0])), 1):
         print(f'  group {n}: {len(names)} snapshots', flush=True)
 
+    # The prepass above is reported separately and intentionally excluded from
+    # verifier TOTAL. Reset instrumentation so the timing table below describes
+    # verify_pack() only.
+    totals.clear()
+    counts.clear()
+    per_source.clear()
+
     started = time.perf_counter()
     result = pack.verify_pack(root, output)
     total = time.perf_counter() - started
