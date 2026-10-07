@@ -2064,6 +2064,197 @@ def apply_master_layout_shell(api: Tapir, allow_nonempty=False):
 
 
 
+
+def apply_form3_autotext(api: Tapir, allow_nonempty=False):
+    """Create only production-ready Form 3 AutoText tokens on Master Layouts."""
+    validation = validate_specs()
+    if validation["status"] != "PASS":
+        raise RuntimeError(f"Spec validation failed: {validation['errors']}")
+
+    calibration = load_yaml(MASTER_COORD_CALIBRATION)
+    convention = calibration.get("confirmed_convention")
+    registry = load_yaml(AUTOTEXT_REGISTRY)
+    if convention not in {"H1", "H2"}:
+        return {
+            "status": "BLOCKED_COORDINATE_CALIBRATION",
+            "writePerformed": False,
+            "confirmedConvention": convention,
+        }
+    if not bool(registry.get("production_master_context_verified")):
+        return {
+            "status": "BLOCKED_MASTER_CONTEXT_AUTOTEXT_VERIFICATION",
+            "writePerformed": False,
+            "reason": (
+                "Master-context AutoText smoke must pass live and its result "
+                "must be persisted before production tokens are written."
+            ),
+        }
+
+    before_count = len(api.call("GetAllElements").get("elements", []))
+    if before_count and not allow_nonempty:
+        raise RuntimeError(
+            f"Refusing Form 3 AutoText write: current project contains "
+            f"{before_count} model elements. Use a clean candidate project or "
+            f"pass --allow-nonempty explicitly."
+        )
+
+    form3 = load_yaml(FORM3_GEOMETRY)
+    cells = form3.get("cells") or {}
+    placements = registry.get("production_ready_placements") or {}
+    master_registry = load_yaml(MASTER_LAYOUT_FORM3)
+    frame = master_registry.get("frame_mm") or {}
+    right_inset = float(frame.get("inner_from_right", 5))
+    bottom_raw = frame.get("inner_from_bottom", 5)
+    bottom_inset = float(
+        bottom_raw.get("primary", 5)
+        if isinstance(bottom_raw, dict) else bottom_raw
+    )
+
+    plan = plan_master_layouts(api)
+    bad = [x for x in plan["masters"] if x.get("state") != "EXISTS_OK"]
+    if bad:
+        return {
+            "status": "BLOCKED_MASTER_LAYOUT",
+            "writePerformed": False,
+            "masters": bad,
+        }
+
+    items = _layoutbook_items(api)
+    by_name = {
+        x.get("name"): x for x in items
+        if x.get("type") == "MasterLayoutItem" and x.get("name")
+    }
+    results = []
+
+    def norm_text(raw, x, y, h):
+        return (
+            str(raw),
+            round(float(x), 6),
+            round(float(y), 6),
+            round(float(h), 3),
+        )
+
+    for row in plan["masters"]:
+        name = row["name"]
+        master = by_name[name]
+        _, settings = _layout_settings_from_nav(api, master)
+        width = float(settings["horizontalSize"])
+        height = float(settings["verticalSize"])
+        x0_mm = width - right_inset - 185.0
+        y0_mm = bottom_inset if convention == "H1" else -(height - bottom_inset)
+
+        change = api.call("ChangeWindow", {"navigatorItemId": master["navigatorItemId"]})
+        if not change.get("success", False):
+            raise RuntimeError(f"{name}: could not activate Master Layout.")
+        native = api.call("GetCurrent2DDocumentV1")
+
+        expected = set()
+        create_specs = []
+        expected_anchors = set()
+        for graph_no, placement in placements.items():
+            cell = cells.get(placement.get("cell"))
+            if cell is None:
+                raise RuntimeError(
+                    f"Graph {graph_no}: unknown geometry cell {placement.get('cell')}"
+                )
+            px = (
+                x0_mm + float(cell["x0"]) + float(placement.get("x_offset_mm", 0))
+            ) / 1000.0
+            py = (
+                y0_mm + float(cell["y0"]) + float(placement.get("y_offset_mm", 0))
+            ) / 1000.0
+            token = str(placement["token"])
+            h = float(placement.get("height_mm", 2.5))
+            expected.add(norm_text(token, px, py, h))
+            expected_anchors.add((round(px, 6), round(py, 6)))
+            create_specs.append({
+                "coordinate": {"x": px, "y": py, "z": 0.0},
+                "text": token,
+                "height": h,
+                "justification": "Left",
+            })
+
+        actual = set()
+        conflicts = []
+        for text_row in native.get("texts", []):
+            pos = text_row.get("position") or {}
+            if "x" not in pos or "y" not in pos:
+                continue
+            anchor = (round(float(pos["x"]), 6), round(float(pos["y"]), 6))
+            item = norm_text(
+                text_row.get("rawText", ""),
+                pos["x"], pos["y"],
+                text_row.get("heightMm", -1),
+            )
+            actual.add(item)
+            if anchor in expected_anchors and item not in expected:
+                conflicts.append(text_row)
+
+        if conflicts:
+            return {
+                "status": "BLOCKED_FORM3_AUTOTEXT_CONFLICT",
+                "writePerformed": False,
+                "masterLayout": name,
+                "conflicts": conflicts,
+            }
+
+        matched = expected & actual
+        if matched and matched != expected:
+            return {
+                "status": "BLOCKED_PARTIAL_FORM3_AUTOTEXT",
+                "writePerformed": False,
+                "masterLayout": name,
+                "matchedTokens": len(matched),
+                "expectedTokens": len(expected),
+            }
+        if matched == expected:
+            results.append({
+                "name": name,
+                "state": "EXISTS_OK",
+                "createdTokens": 0,
+            })
+            continue
+
+        created = api.call("CreateTexts", {"textsData": create_specs})
+        rows = created.get("elements", [])
+        if len(rows) != len(create_specs) or any("elementId" not in x for x in rows):
+            raise RuntimeError(f"{name}: AutoText creation failed: {created}")
+
+        verify = api.call("GetCurrent2DDocumentV1")
+        verify_set = set()
+        for text_row in verify.get("texts", []):
+            pos = text_row.get("position") or {}
+            if "x" in pos and "y" in pos:
+                verify_set.add(norm_text(
+                    text_row.get("rawText", ""),
+                    pos["x"], pos["y"],
+                    text_row.get("heightMm", -1),
+                ))
+        if not expected.issubset(verify_set):
+            raise RuntimeError(f"{name}: AutoText raw-token read-back mismatch.")
+
+        results.append({
+            "name": name,
+            "state": "CREATED_AND_VERIFIED",
+            "createdTokens": len(create_specs),
+        })
+
+    after_count = len(api.call("GetAllElements").get("elements", []))
+    if after_count != before_count:
+        raise RuntimeError(
+            "Unexpected model element count change during Form 3 AutoText write."
+        )
+
+    return {
+        "status": "PASS",
+        "writePerformed": any(x["createdTokens"] > 0 for x in results),
+        "productionGraphs": sorted(int(x) for x in placements.keys()),
+        "deferredGraphs": registry.get("production_deferred_graphs", []),
+        "masters": results,
+        "modelElementCountUnchanged": True,
+        "nextGate": "project_info_and_document_specific_fields",
+    }
+
 def apply_form3_static_labels(api: Tapir, allow_nonempty=False):
     """Create only verified static Form 3 labels on registered masters.
 
@@ -3872,7 +4063,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "action",
-        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "plan-master-coordinate-calibration", "plan-form3-geometry", "plan-autotext", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell", "apply-master-layout-smoke", "apply-layout-autotext-smoke", "apply-master-context-autotext-smoke", "apply-master-coordinate-calibration", "apply-form3-core-geometry", "apply-form3-static-labels"),
+        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "plan-master-coordinate-calibration", "plan-form3-geometry", "plan-autotext", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell", "apply-master-layout-smoke", "apply-layout-autotext-smoke", "apply-master-context-autotext-smoke", "apply-master-coordinate-calibration", "apply-form3-core-geometry", "apply-form3-static-labels", "apply-form3-autotext"),
     )
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
     parser.add_argument(
@@ -3944,6 +4135,10 @@ def main():
             )
         elif args.action == "apply-form3-static-labels":
             result = apply_form3_static_labels(
+                api, allow_nonempty=args.allow_nonempty
+            )
+        elif args.action == "apply-form3-autotext":
+            result = apply_form3_autotext(
                 api, allow_nonempty=args.allow_nonempty
             )
         else:
