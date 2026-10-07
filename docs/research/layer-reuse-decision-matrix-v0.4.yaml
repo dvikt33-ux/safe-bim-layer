@@ -102,6 +102,30 @@ decisions:
           - item_level_partial_success_can_still_commit
           - not_cross_command_atomic
           - not_retry_idempotent
+      evaluated_2d:
+        command: GetDetailsOfElements
+        field: floorPlanPolygons
+        observed_at_project_known_commit: true
+        semantics:
+          - cut_fill_polygons_as_drawn_on_floor_plan
+          - wall_joins_resolved_by_archicad
+          - available_for_walls_columns_beams_at_inspected_revision
+        candidate_reuse:
+          - Q4_WALL_FRAGMENTATION
+          - Q4_WALL_CONNECTIVITY
+      evaluated_3d:
+        general_body_topology_command_found: false
+        tapir_internal_use:
+          - ACAPI_ModelAccess_Get3DInfo
+          - ACAPI_ModelAccess_GetComponent
+        exposed_generic_result:
+          - 3d_bounding_box
+        keep_custom_gap:
+          - arbitrary_element_body_topology
+          - world_vertices
+          - faces_polygons
+          - face_material_surface_provenance
+          - guid_body_mapping
     roadmap_effect:
       - search_tapir_before_every_new_native_command
       - stop_generic_writer_work_when_overlap_exists
@@ -291,7 +315,7 @@ native_gap_after_overlap_audit:
   keep_until_disproven:
     - tapir_event_consumer_and_revision_accumulator
     - project_revision_and_stale_operation_guard
-    - evaluated_deep_geometry_not_equivalent_to_tapir_output
+    - evaluated_3d_body_topology_not_exposed_by_tapir
     - face_material_or_surface_provenance_if_not_available_upstream
     - cross_command_atomicity_idempotency_or_compensation_if_required
     - exact_readback_only_for_uncovered_data
@@ -397,8 +421,21 @@ tests:
       - long_running_jobs
       - failure_reporting
 
-  EVENT_01:
+  Q4_TAPIR_01:
     priority: 4
+    goal: determine_if_floorPlanPolygons_replace_heavy_geometry_for_wall_q4
+    verify:
+      - joined_wall_cut_polygons
+      - t_l_x_junctions
+      - curved_walls
+      - inactive_story_or_window_behavior
+      - hidden_layer_behavior
+      - batch_runtime
+      - wall_fragmentation_sufficiency
+      - wall_connectivity_sufficiency
+
+  EVENT_01:
+    priority: 5
     goal: prove_tapir_notification_reliability_before_custom_observer
     verify:
       - new_changed_deleted
@@ -410,15 +447,15 @@ tests:
       - callback_restart_and_missed_event_behavior
 
   TRANSACTION_01:
-    priority: 5
+    priority: 6
     goal: prove_partial_failure_single_undo_retry_stale_and_active_window_semantics
 
   BIM_EXEC_01:
-    priority: 6
+    priority: 7
     goal: compare_husky_against_verified_open_stack_and_residual_native_gap
 
   READBACK_01:
-    priority: 7
+    priority: 8
     goal: determine_which_native_model_dump_outputs_are_not_equivalent_to_tapir
 
   HEAL_01:
