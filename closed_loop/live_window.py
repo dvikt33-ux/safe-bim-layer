@@ -125,10 +125,11 @@ def verify_window(before, after, result, action):
 
 
 class WindowSession(LiveSession):
-    def __init__(self, output, goal_id):
+    def __init__(self, output, goal_id, approved_plan=None):
         super().__init__(output, goal_id, {}, {})
         self.window_recipe = load('stage5_hosted_window_recipe',
                                   'scripts/archicad_write_cycles/hosted_window_cycle.py')
+        self.approved_plan = deepcopy(approved_plan)
         self.window_row = None
         self.executor_before_hash = None
         self.active_attempt = None
@@ -186,17 +187,33 @@ class WindowPlanner:
         if self.session.window_row is not None:
             return PlannerDecision('BLOCKED', reason='Stage 5 allows exactly one Hosted Window mutation')
         data = read(observation.evidence['live.snapshot']['path'])
-        try:
-            plan = self.session.window_recipe.select_wall(data)
-        except Exception as exc:
-            return PlannerDecision('BLOCKED', reason='No safe Hosted Window host: '+str(exc))
-        action = WindowAction('create_window', {
-            'sourceGuid': plan['wallGuid'],
-            'centerOffset': plan['centerOffsetAlongHost'],
-            'sillHeight': plan['sillHeightFromWallBase'],
-            'width': plan['width'],
-            'height': plan['height'],
-        })
+        approved = self.session.approved_plan
+        if approved is not None:
+            if observation.modelIdentity != approved['modelIdentity']:
+                return PlannerDecision('BLOCKED', reason='Approved Stage 5 plan belongs to another project')
+            if observation.modelHash != approved['modelHash']:
+                return PlannerDecision('BLOCKED', reason='Approved Stage 5 plan is stale; fresh plan-only approval required')
+            action = WindowAction(**approved['plannerDecision']['action'])
+            plan = {
+                'wallGuid':action.parameters['sourceGuid'],
+                'centerOffsetAlongHost':action.parameters['centerOffset'],
+                'sillHeightFromWallBase':action.parameters['sillHeight'],
+                'width':action.parameters['width'],
+                'height':action.parameters['height'],
+                'selectionRule':'explicit operator-approved Stage 5 plan-only action',
+            }
+        else:
+            try:
+                plan = self.session.window_recipe.select_wall(data)
+            except Exception as exc:
+                return PlannerDecision('BLOCKED', reason='No safe Hosted Window host: '+str(exc))
+            action = WindowAction('create_window', {
+                'sourceGuid': plan['wallGuid'],
+                'centerOffset': plan['centerOffsetAlongHost'],
+                'sillHeight': plan['sillHeightFromWallBase'],
+                'width': plan['width'],
+                'height': plan['height'],
+            })
         self.session.active_plan = {
             'jobIteration': job.iteration,
             'modelHash': observation.modelHash,
