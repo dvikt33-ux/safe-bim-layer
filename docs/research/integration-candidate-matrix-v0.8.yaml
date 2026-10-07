@@ -1,0 +1,199 @@
+version: 0.8
+date: 2026-10-08
+status: research_draft
+current_target: Archicad_29
+
+change_propagation:
+  cambridge_advanced_modeller_2:
+    category: dependency_and_change_modelling
+    free_research_teaching_evaluation: PASS
+    windows: PASS
+    dependency_dsm: PASS
+    change_prediction_method: PASS
+    likelihood_impact_edges: PASS
+    stochastic_multistep_propagation: PASS
+    change_propagation_tree: PASS
+    risk_portfolios: PASS
+    csv_import_export: PASS
+    plugins: PASS
+    distributed_simulation: PASS
+    large_per_element_hot_graph_fit: LOW
+    recommended_role:
+      - deep_change_risk_analysis
+      - algorithm_reference
+      - benchmark
+    priority: P0_METHOD_TOOL_TEST
+
+  lattix:
+    category: industrial_dependency_architecture
+    dsm: PASS
+    impact_analysis: PASS
+    architecture_rules: PASS
+    clustering_partitioning: PASS
+    custom_data_import: PASS
+    large_systems: PASS
+    commercial: true
+    priority: REFERENCE_OPTIONAL_BENCHMARK
+
+design_intent:
+  dio:
+    category: design_intent_ontology
+    requirements: PASS
+    issues_goals: PASS
+    constraints: PASS
+    assumptions: PASS
+    alternatives: PASS
+    mandated_solution: PASS
+    evidence: PASS
+    justification: PASS
+    decisions: PASS
+    artifacts: PASS
+    prov_o_link: PASS
+    decision: ADAPT_NOT_REINVENT
+
+  decision_interaction_ontology:
+    hierarchical_decisions: PASS_RESEARCH
+    horizontal_vertical_interactions: PASS_RESEARCH
+    executable_workflows: PASS_RESEARCH
+    decision: REUSE_METHOD
+
+optimization:
+  openmdao:
+    category: multidisciplinary_design_analysis_optimization
+    open_source: PASS
+    coupled_models: PASS
+    constraints: PASS
+    feasibility_search: PASS
+    sparse_derivatives: PASS
+    external_analysis_components: PASS
+    recommended_role: deep_project_compiler_mdo
+    priority: P0_P1_PROTOTYPE
+
+  pymoo:
+    category: multiobjective_optimization
+    open_source: PASS
+    nsga2: PASS
+    nsga3: PASS
+    moead: PASS
+    cmaes: PASS
+    pso: PASS
+    pareto_decision_support: PASS
+    decision: REUSE
+
+  optuna:
+    multiobjective: PASS
+    constrained_multiobjective: PASS
+    bayesian_sampling: PASS
+    decision: REUSE
+
+  wallacei:
+    grasshopper: PASS
+    evolutionary_multiobjective: PASS
+    pareto_analysis: PASS
+    clustering: PASS
+    archicad_via_grasshopper_possible: PASS_INDIRECT
+    decision: REUSE_OPTION
+
+detail_intelligence:
+  nadia:
+    natural_language_detailing: PASS_RESEARCH
+    separate_specification_and_creation: PASS
+    llm_bim_chaining: PASS
+    rule_guided: PASS
+    reported_logical_accuracy_pct: 83.33
+    reported_thermal_accuracy_pct: 98.54
+    public_code: NOT_FOUND
+    decision: REIMPLEMENT_KNOWN_METHOD_IF_NEEDED
+
+  generalized_llm_bim_framework:
+    pipeline:
+      - interpret
+      - fill
+      - match
+      - structure
+      - execute
+      - check
+    decision: REUSE_AGENT_PATTERN
+
+  bim_library_transplant:
+    donor_model_extraction: PASS_RESEARCH
+    low_high_lod_matching: PASS_RESEARCH
+    transplant: PASS_RESEARCH
+    reported_time_reduction_pct: "60-70"
+    reported_accuracy_pct: "65-80"
+    archicad_implementation: NOT_AVAILABLE
+    decision: HIGH_VALUE_METHOD_FOR_OFFICE_MEMORY
+
+  arki:
+    past_project_ai_search: PASS_PUBLIC_CLAIM
+    revit_autocad_pdf: PASS_PUBLIC_CLAIM
+    archicad: NOT_VERIFIED
+    decision: PRODUCT_REFERENCE
+
+  bimsmith_detail_shelf:
+    ai_detail_search: PASS
+    manufacturer_details: PASS
+    decision: REUSE_SOURCE
+
+  arqyn:
+    issue_to_detail_matching: PASS_PUBLIC_CLAIM
+    dwg_pdf_details: PASS_PUBLIC_CLAIM
+    russian_rules: FAIL_OR_UNKNOWN
+    decision: REFERENCE_PATTERN
+
+product_substitution:
+  nbs_source:
+    free_product_data: PASS
+    structured_properties: PASS
+    filter: PASS
+    compare: PASS
+    certifications: PASS
+    sustainability: PASS
+    generic_to_manufacturer_workflow: PASS
+    archicad_plugin: PASS
+    russian_product_focus: LOW
+    decision: REUSE_REFERENCE_AND_OPTIONAL_SOURCE
+
+  bimsmith_forge:
+    free: PASS
+    materials_count_current_claim: "500000+"
+    wall_floor_ceiling_roof_assemblies: PASS
+    generic_and_manufacturer_layers: PASS
+    fire_stc_filters: PASS
+    product_update_discontinuation: PASS
+    archicad: FAIL_DIRECT
+    decision: REUSE_ARCHITECTURE_REFERENCE
+
+aec_interop:
+  bhom:
+    category: transdisciplinary_aec_object_adapter_framework
+    open_source: PASS
+    object_model: PASS
+    engine: PASS
+    adapter_framework: PASS
+    diffing_engine: PASS
+    verification_engine: PASS
+    versioning: PASS
+    push_priority: PASS
+    engineering_toolkits: MANY
+    archicad_adapter: NOT_VERIFIED
+    priority: P0_P1_ARCHITECTURE_AUDIT
+
+custom_blocked_pending_reuse:
+  - generic_change_propagation_algorithm
+  - generic_dsm_engine
+  - base_design_intent_ontology
+  - base_design_decision_ontology
+  - multidisciplinary_optimizer
+  - multiobjective_optimizer
+  - generic_detail_search
+  - universal_detail_archive
+  - product_compare_search_engine
+  - generic_assembly_configurator
+  - generic_engineering_adapter_framework
+
+next_tests:
+  - CHANGE_01_CAM
+  - INTENT_01_DIO
+  - MDO_01_OPENMDAO
+  - DETAIL_01_DONOR_TRANSPLANT
