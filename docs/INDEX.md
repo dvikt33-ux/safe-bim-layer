@@ -60,3 +60,5 @@ reference audit proves they can be moved safely.
 - **OFFLINE PASS** — useful proof, but not a substitute for mandatory live evidence.
 
 - `STAGE4_PERFORMANCE_PASS.md` — post-VERIFIED performance/evidence-I/O optimization plan and validation gate.
+
+- `STAGE5_HOSTED_WINDOW.md` — Stage 5 single-capability Hosted Window closed-loop contract (IN PROGRESS / NOT VERIFIED).
