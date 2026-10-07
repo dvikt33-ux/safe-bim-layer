@@ -2984,6 +2984,321 @@ def apply_master_layout_smoke(api: Tapir, allow_nonempty=False):
     return return_result
 
 
+
+def apply_master_context_autotext_smoke(api: Tapir, allow_nonempty=False):
+    """Prove layout-scoped AutoText while the Texts live on A4_P Master Layout."""
+    validation = validate_specs()
+    if validation["status"] != "PASS":
+        raise RuntimeError(f"Spec validation failed: {validation['errors']}")
+
+    before_count = len(api.call("GetAllElements").get("elements", []))
+    if before_count and not allow_nonempty:
+        raise RuntimeError(
+            f"Refusing Master-context AutoText smoke: current project contains "
+            f"{before_count} model elements. Use a clean candidate project or "
+            f"pass --allow-nonempty explicitly."
+        )
+
+    try:
+        api.call("SetMasterLayoutContextV1", {})
+    except Exception as exc:
+        return {
+            "status": "BLOCKED_ADDON_REBUILD",
+            "writePerformed": False,
+            "reason": (
+                "SetMasterLayoutContextV1 is required to evaluate layout-scoped "
+                "AutoText stored on a Master Layout."
+            ),
+            "error": str(exc),
+        }
+
+    master_plan = plan_master_layouts(api)
+    master_row = next(
+        (x for x in master_plan["masters"] if x["name"] == "A4_P"),
+        None,
+    )
+    if master_row is None or master_row.get("state") != "EXISTS_OK":
+        return {
+            "status": "BLOCKED_MASTER_LAYOUT",
+            "writePerformed": False,
+            "reason": "A4_P must exist with the exact registered size first.",
+            "master": master_row,
+        }
+
+    subset_name = "__SBIM_MASTER_CONTEXT_SMOKE_SUBSET__"
+    layout_name = "__SBIM_MASTER_CONTEXT_SMOKE_LAYOUT__"
+    items = _layoutbook_items(api)
+    residual = [
+        x for x in items if x.get("name") in {subset_name, layout_name}
+    ]
+    if residual:
+        return {
+            "status": "BLOCKED_RESIDUAL_SMOKE_ITEMS",
+            "writePerformed": False,
+            "reason": "Residual Master-context smoke navigator items already exist.",
+            "items": residual,
+        }
+
+    master = next(
+        (
+            x for x in items
+            if x.get("type") == "MasterLayoutItem" and x.get("name") == "A4_P"
+        ),
+        None,
+    )
+    if master is None:
+        raise RuntimeError("A4_P navigator item disappeared after preflight.")
+
+    created_text_ids = []
+    created_layout_nav = None
+    created_subset_nav = None
+    context_set = False
+    cleanup_errors = []
+    return_result = None
+
+    try:
+        subset_result = api.call(
+            "CreateLayoutSubset",
+            {
+                "subsetsData": [{
+                    "name": subset_name,
+                    "ownPrefix": "MC-",
+                    "numberingStyle": "01",
+                    "startAt": 1,
+                    "continueNumbering": False,
+                    "useUpperPrefix": False,
+                    "includeToIDSequence": True,
+                    "customNumbering": False,
+                    "addOwnPrefix": True,
+                }]
+            },
+        )
+        subset_rows = subset_result.get("navigatorItems", [])
+        if len(subset_rows) != 1 or "navigatorItemId" not in subset_rows[0]:
+            raise RuntimeError(
+                f"Could not create Master-context smoke subset: {subset_result}"
+            )
+        created_subset_nav = subset_rows[0]["navigatorItemId"]
+
+        layout_result = api.call(
+            "CreateLayout",
+            {
+                "layoutsData": [{
+                    "masterNavigatorItemId": master["navigatorItemId"],
+                    "layoutName": layout_name,
+                    "parentNavigatorItemId": created_subset_nav,
+                    "layoutParameters": {
+                        "doNotIncludeInNumbering": False,
+                        "displayMasterLayoutBelow": True,
+                    },
+                }]
+            },
+        )
+        if not layout_result.get("databases"):
+            raise RuntimeError(
+                f"Could not create Master-context smoke Layout: {layout_result}"
+            )
+
+        items = _layoutbook_items(api)
+        layout = next(
+            (
+                x for x in items
+                if x.get("type") == "LayoutItem" and x.get("name") == layout_name
+            ),
+            None,
+        )
+        if layout is None:
+            raise RuntimeError("Master-context smoke Layout missing after create.")
+        created_layout_nav = layout["navigatorItemId"]
+        layout_db = _layout_db_id_from_nav(api, layout)
+        layout_guid = layout_db.get("guid")
+        if not layout_guid:
+            raise RuntimeError(f"Layout database has no GUID: {layout_db}")
+
+        change = api.call(
+            "ChangeWindow",
+            {"navigatorItemId": master["navigatorItemId"]},
+        )
+        if not change.get("success", False):
+            raise RuntimeError(f"Could not activate A4_P Master Layout: {change}")
+        if api.call("GetCurrentWindowType").get("currentWindowType") != "MasterLayout":
+            raise RuntimeError("A4_P did not become current MasterLayout.")
+
+        context_result = api.call(
+            "SetMasterLayoutContextV1",
+            {"layoutDatabaseGuid": layout_guid},
+        )
+        if not context_result.get("contextSet", False):
+            raise RuntimeError(
+                f"Master Layout context was not set: {context_result}"
+            )
+        context_set = True
+
+        token_specs = [
+            ("LAYOUTNAME", 0.020),
+            ("LAYOUTNUMBERINCURRENTSUBSET", 0.030),
+            ("NUMBEROFLAYOUTSINCURRENTSUBSET", 0.040),
+        ]
+        created_by_key = {}
+        for key, y in token_specs:
+            result = api.call(
+                "CreateTexts",
+                {
+                    "textsData": [{
+                        "coordinate": {"x": 0.090, "y": y, "z": 0.0},
+                        "text": f"<{key}>",
+                        "height": 2.5,
+                        "justification": "Left",
+                    }]
+                },
+            )
+            rows = result.get("elements", [])
+            if len(rows) != 1 or "elementId" not in rows[0]:
+                raise RuntimeError(
+                    f"Could not create Master-context {key} Text: {result}"
+                )
+            element_id = rows[0]["elementId"]
+            created_text_ids.append(element_id)
+            created_by_key[key] = element_id
+
+        native = api.call("GetCurrent2DDocumentV1")
+        texts = {
+            x.get("guid"): x for x in native.get("texts", []) if x.get("guid")
+        }
+        verified = {}
+        for key, y in token_specs:
+            row = texts.get(created_by_key[key].get("guid"))
+            if row is None:
+                raise RuntimeError(
+                    f"Native 2D reader did not return Master-context {key} Text."
+                )
+            expected_raw = f"<{key}>"
+            if row.get("rawText") != expected_raw:
+                raise RuntimeError(f"{key} raw token mismatch: {row}")
+            value = row.get("interpretedText")
+            if key == "LAYOUTNAME" and value != layout_name:
+                raise RuntimeError(
+                    f"LAYOUTNAME expected {layout_name!r}, got {value!r}"
+                )
+            if key == "NUMBEROFLAYOUTSINCURRENTSUBSET":
+                try:
+                    count = int(str(value).strip())
+                except (TypeError, ValueError):
+                    raise RuntimeError(
+                        f"{key} is not an integer under Master context: {value!r}"
+                    )
+                if count != 1:
+                    raise RuntimeError(
+                        f"{key} expected 1 under Master context, got {value!r}"
+                    )
+            if key == "LAYOUTNUMBERINCURRENTSUBSET" and not str(value or "").strip():
+                raise RuntimeError(
+                    "LAYOUTNUMBERINCURRENTSUBSET resolved empty on Master context."
+                )
+            verified[key] = {
+                "raw": row.get("rawText"),
+                "interpreted": value,
+                "position": row.get("position"),
+                "heightMm": row.get("heightMm"),
+            }
+
+        return_result = {
+            "status": "PASS",
+            "writePerformed": True,
+            "masterContextAutoTextVerified": True,
+            "masterLayout": "A4_P",
+            "contextLayout": layout_name,
+            "contextLayoutDatabaseGuid": layout_guid,
+            "verified": verified,
+            "nextGate": "apply_form3_autotext",
+        }
+    finally:
+        if context_set:
+            try:
+                api.call("SetMasterLayoutContextV1", {})
+            except Exception as exc:
+                cleanup_errors.append(
+                    f"Clear Master Layout context exception: {exc}"
+                )
+
+        if created_text_ids:
+            try:
+                result = api.call(
+                    "DeleteElements",
+                    {
+                        "elements": [
+                            {"elementId": element_id}
+                            for element_id in created_text_ids
+                        ]
+                    },
+                )
+                if not result.get("success", False):
+                    cleanup_errors.append(
+                        f"Delete Master-context Texts failed: {result}"
+                    )
+            except Exception as exc:
+                cleanup_errors.append(
+                    f"Delete Master-context Texts exception: {exc}"
+                )
+
+        if created_layout_nav is not None:
+            try:
+                result = api.call(
+                    "DeleteNavigatorItems",
+                    {"navigatorItemIds": [{
+                        "navigatorItemId": created_layout_nav
+                    }]},
+                )
+                rows = result.get("executionResults", [])
+                if len(rows) != 1 or not rows[0].get("success"):
+                    cleanup_errors.append(
+                        f"Delete Master-context Layout failed: {result}"
+                    )
+            except Exception as exc:
+                cleanup_errors.append(
+                    f"Delete Master-context Layout exception: {exc}"
+                )
+
+        if created_subset_nav is not None:
+            try:
+                result = api.call(
+                    "DeleteNavigatorItems",
+                    {"navigatorItemIds": [{
+                        "navigatorItemId": created_subset_nav
+                    }]},
+                )
+                rows = result.get("executionResults", [])
+                if len(rows) != 1 or not rows[0].get("success"):
+                    cleanup_errors.append(
+                        f"Delete Master-context subset failed: {result}"
+                    )
+            except Exception as exc:
+                cleanup_errors.append(
+                    f"Delete Master-context subset exception: {exc}"
+                )
+
+    if cleanup_errors:
+        raise RuntimeError(
+            "Master-context AutoText smoke cleanup failed: "
+            + " | ".join(cleanup_errors)
+        )
+
+    after_count = len(api.call("GetAllElements").get("elements", []))
+    if after_count != before_count:
+        raise RuntimeError(
+            "Unexpected model element count change during Master-context AutoText smoke."
+        )
+
+    return_result["cleanup"] = {
+        "success": True,
+        "textElementsDeleted": len(created_text_ids),
+        "layoutDeleted": True,
+        "subsetDeleted": True,
+        "contextCleared": True,
+        "modelElementCountUnchanged": True,
+    }
+    return return_result
+
 def apply_layout_autotext_smoke(api: Tapir, allow_nonempty=False):
     """Verify layout-scoped AutoText on a disposable Layout and subset.
 
@@ -3557,7 +3872,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "action",
-        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "plan-master-coordinate-calibration", "plan-form3-geometry", "plan-autotext", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell", "apply-master-layout-smoke", "apply-layout-autotext-smoke", "apply-master-coordinate-calibration", "apply-form3-core-geometry", "apply-form3-static-labels"),
+        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "plan-master-coordinate-calibration", "plan-form3-geometry", "plan-autotext", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell", "apply-master-layout-smoke", "apply-layout-autotext-smoke", "apply-master-context-autotext-smoke", "apply-master-coordinate-calibration", "apply-form3-core-geometry", "apply-form3-static-labels"),
     )
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
     parser.add_argument(
@@ -3615,6 +3930,10 @@ def main():
             result = apply_master_layout_smoke(api, allow_nonempty=args.allow_nonempty)
         elif args.action == "apply-layout-autotext-smoke":
             result = apply_layout_autotext_smoke(api, allow_nonempty=args.allow_nonempty)
+        elif args.action == "apply-master-context-autotext-smoke":
+            result = apply_master_context_autotext_smoke(
+                api, allow_nonempty=args.allow_nonempty
+            )
         elif args.action == "apply-master-coordinate-calibration":
             result = apply_master_coordinate_calibration(
                 api, allow_nonempty=args.allow_nonempty
