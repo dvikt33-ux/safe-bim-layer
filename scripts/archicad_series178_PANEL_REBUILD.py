@@ -418,7 +418,8 @@ def main():
     ],1):
         add(m,f"TXT_APT_{idx}","Text",create_text(ox+x,oy+y,level,story,val,1.9))
 
-    print(f"MINIMAL MODEL: {len(WALLS)} main walls, {len(DOORS)} internal doors, 4 facade walls total.", flush=True)\n    print("STAGE 4/5: dimensions/text complete. Cleaning OLD GUIDs only...", flush=True)
+    print(f"MINIMAL MODEL: {len(WALLS)} main walls, {len(DOORS)} internal doors, 4 facade walls total.", flush=True)
+    print("STAGE 4/5: dimensions/text complete. Cleaning OLD GUIDs only...", flush=True)
     # Only now remove elements from previous Series-178 attempts.
     # Exclude every GUID created by this run even if it happened to enter a manifest scan.
     new_guids={r["guid"].lower() for r in m["created"] if r.get("guid")}
