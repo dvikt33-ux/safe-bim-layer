@@ -34,7 +34,10 @@ def _semantic_source_key(root, spec):
     key_at = raw.find(_NATIVE_SECONDS_KEY)
     value_at = key_at + len(_NATIVE_SECONDS_KEY)
     match = _NATIVE_SECONDS_NUMBER.match(raw, value_at)
-    if match is None:
+    # normalize() appends unresolvedBodyOwners immediately after the native
+    # top-level timing field. Requiring that structural suffix prevents a lone
+    # nested "nativeSeconds" from ever being normalized by mistake.
+    if match is None or not raw.startswith(b',"unresolvedBodyOwners":', match.end()):
         return 'raw:'+raw_sha
     h = hashlib.sha256()
     h.update(raw[:value_at])
