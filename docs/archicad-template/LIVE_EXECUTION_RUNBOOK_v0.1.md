@@ -231,3 +231,34 @@ Before writing each master it reads current 2D Lines through `GetCurrent2DDocume
 The titleblock origin is calculated from the verified sheet size plus the normative 5 mm right/bottom frame insets. The Y formula depends exclusively on the persisted H1/H2 convention; no coordinate convention is guessed at runtime.
 
 The stage also requires model-element count to remain unchanged.
+
+
+## 11. Form 3 static labels
+
+After `form3-core` passes:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/run_archicad_template_live.ps1 -Stage form3-static
+```
+
+This stage writes only non-dynamic Form 3 labels:
+
+- `Разраб.`
+- `Н. контр.`
+- `Стадия`
+- `Лист`
+- `Листов`
+- change-table headers `Изм.`, `Кол.уч`, `Лист`, `№ док.`, `Подп.`, `Дата`
+
+The change-table labels are derived directly from the registered `change_header.columns` geometry, not duplicated in another source of truth.
+
+Before writing, each Master Layout must already contain the complete verified Form 3 line grid. Text read-back uses `GetCurrent2DDocumentV1` and compares raw text, anchor coordinates and text height.
+
+Safety behavior:
+
+- complete expected static-label set -> PASS, no duplicates;
+- only part of the set -> `BLOCKED_PARTIAL_FORM3_STATIC_LABELS`;
+- different Text at an expected anchor -> `BLOCKED_FORM3_TEXT_CONFLICT`;
+- incomplete line grid -> `BLOCKED_FORM3_CORE_GEOMETRY`.
+
+No dynamic project/layout data is written in this stage. AutoText remains a separate gate.
