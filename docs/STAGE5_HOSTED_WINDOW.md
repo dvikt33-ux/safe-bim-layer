@@ -58,3 +58,22 @@ After uncertain dispatch:
 6. only then Stage 5 may become VERIFIED.
 
 Until all six complete, Stage 5 remains **NOT VERIFIED**.
+
+
+## Offline gate result
+
+The first complete Stage 5 offline gate is **PASS**:
+
+- focused Stage 2 + Stage 5 command tests: **51/51 PASS**;
+- Stage 2–5 regression proof: **PASS**;
+- Stage 1 historical evidence revalidation: **PASS in 6.086 s**;
+- Stage 3 historical evidence revalidation: **PASS in 6.047 s**;
+- total `offline-001`: **21.036 s**;
+- physical mutation calls: **0**.
+
+Acceptance criteria **W01–W07 are PASS**. Criteria **W08–W10 remain pending**
+because no Stage 5 live Hosted Window has yet been accepted. Stage 5 therefore
+remains **IN PROGRESS / NOT VERIFIED**.
+
+Offline receipt:
+`outputs/closed-loop-stage5/stage5-offline-acceptance.json`.
