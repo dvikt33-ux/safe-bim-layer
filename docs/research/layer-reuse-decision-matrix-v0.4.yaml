@@ -126,6 +126,39 @@ decisions:
           - faces_polygons
           - face_material_surface_provenance
           - guid_body_mapping
+      documentation_surface_at_project_known_commit:
+        views_navigator:
+          - clone_project_map_item_to_view_map
+          - create_views_in_view_map
+          - create_view_map_folder
+          - get_set_view_settings
+          - move_rename_delete_navigator_items
+        viewpoints:
+          - create_sections
+          - create_interior_elevations
+          - create_details
+          - create_worksheets
+        confirmed_absent_in_search:
+          - create_exterior_elevations
+        annotations:
+          - create_associative_dimensions
+          - create_associative_dimensions_on_section
+          - create_wall_thickness_dimensions
+          - get_dimension_data
+          - create_modify_labels
+          - create_modify_texts
+          - autotext_lookup
+        sheets:
+          - create_layout
+          - create_layout_subset
+          - create_drawings
+          - update_drawings
+          - change_drawing_link
+          - get_set_layout_settings
+          - publish_publisher_set
+        revisions_read:
+          - get_document_revisions
+          - get_current_revision_changes_of_layouts
     roadmap_effect:
       - search_tapir_before_every_new_native_command
       - stop_generic_writer_work_when_overlap_exists
@@ -337,6 +370,7 @@ native_gap_after_overlap_audit:
     - generic_per_command_single_undo_wrapper
     - generic_mcp_tool_registry
     - generic_tapir_schema_discovery
+    - generic_documentation_crud_views_layouts_drawings_dimensions_labels_texts_publishing
 
 custom_scope_after_audit:
   keep:
@@ -352,6 +386,7 @@ custom_scope_after_audit:
     - large_custom_execution_adapter
     - custom_preflight_changeset_ui
     - broad_custom_readback_layer
+    - generic_documentation_writer_layer
   stop_or_defer:
     - overlapping_native_generic_writers
     - generic_archicad_crud_platform
