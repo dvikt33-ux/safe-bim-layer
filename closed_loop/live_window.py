@@ -7,8 +7,8 @@ from pathlib import Path
 
 from .live_wall import LiveSession, load, model_hash, read, save, TOL
 from .models import (
-    AcceptanceContract, Action, Criterion, Fact, LiveExecutionResult,
-    LiveModelFingerprint, LiveObservation, PlannerDecision,
+    AcceptanceContract, Criterion, Fact, LiveExecutionResult,
+    LiveModelFingerprint, LiveObservation, PlannerDecision, WindowAction,
 )
 from .orchestrator import BeforeMutationTransportError, StaleBeforeWrite
 from .wall_attempts import AttemptJournal
@@ -190,7 +190,7 @@ class WindowPlanner:
             plan = self.session.window_recipe.select_wall(data)
         except Exception as exc:
             return PlannerDecision('BLOCKED', reason='No safe Hosted Window host: '+str(exc))
-        action = Action('create_window', {
+        action = WindowAction('create_window', {
             'sourceGuid': plan['wallGuid'],
             'centerOffset': plan['centerOffsetAlongHost'],
             'sillHeight': plan['sillHeightFromWallBase'],
