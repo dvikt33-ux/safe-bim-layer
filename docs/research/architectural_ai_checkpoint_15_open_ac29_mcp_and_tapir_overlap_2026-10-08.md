@@ -224,6 +224,48 @@ This is stronger than checkpoint 14.
 Tapir is not merely a helper below our Add-On. It is now the first thing to test for
 every generic Archicad operation before adding another native command.
 
+### 4A. Second critical finding — Tapir already has element events and single-undo batches
+
+Inspection of the exact project Tapir revision `d2dfeec` found another overlap that
+was previously assigned to the native gap.
+
+`AddElementNotificationClient` is already registered (since Tapir 1.2.8) and accepts
+a callback host/port plus switches for new-element, modification/deletion and Teamwork
+reservation-change notifications.
+
+Its native implementation uses Archicad observer APIs including
+`ACAPI_Element_CatchNewElement`, `ACAPI_Element_AttachObserver`,
+`ACAPI_Element_InstallElementObserver` and reservation-change callbacks.
+
+The callback payload distinguishes new, changed, deleted, reserved and released
+elements and carries element GUID + type, with old/copied parent GUID where Archicad
+supplies one. Undo/redo create/modify/delete notifications are also mapped into those
+event classes.
+
+Source at the project revision:
+https://github.com/ENZYME-APD/tapir-archicad-automation/blob/d2dfeec7936dd1dbed4e2412f406b30291959c26/archicad-addon/Sources/NotificationCommands.cpp
+
+This means the **native observer itself is not currently a justified custom gap**.
+What may still be custom is our higher-level revision accumulator, causal invalidation,
+event persistence and stale-plan rejection.
+
+The same audit found that Tapir's generic extended create/modify helpers already wrap a
+whole command call in `ACAPI_CallUndoableCommand`. A multi-element command therefore
+already has a single Archicad undo scope.
+
+Important distinction:
+
+- this gives one undoable command for the successful mutations inside that call;
+- it does **not** prove all-or-none atomic rollback, because item-level failures are
+  collected while successful sibling mutations can remain committed;
+- it does not make a multi-command AI plan atomic or idempotent.
+
+So the remaining transaction gap is narrower:
+
+`cross-command plan identity + stale guard + idempotency + optional all-or-none policy`
+
+—not "invent batch undo for every writer".
+
 ---
 
 ## 5. New candidate — alesdev88/Archicad-MCP
@@ -445,17 +487,20 @@ Unless live tests disprove upstream behavior:
 - generic Morph translation;
 - generic Morph material/default-surface writes;
 - arbitrary Morph body create/replace;
+- generic native element-change observer, if Tapir notification reliability is confirmed live;
+- generic per-command single-undo wrapper;
 - generic MCP schema/tool registry.
 
-### Keep native only where evidence still supports it
+### Keep custom only where evidence still supports it
 
-1. **Element/change event stream**
-   - live native notifications;
-   - invalidation triggers.
+1. **Revision accumulator / causal invalidation over upstream events**
+   - consume Tapir element notifications rather than reimplementing the native observer;
+   - turn event batches into our canonical project revision;
+   - persist enough event identity to invalidate stale plans.
 
 2. **Project revision / stale-operation guard**
-   - causal project revision;
-   - reject operations planned against obsolete state.
+   - reject operations planned against obsolete state;
+   - bind planned changes to the canonical project state.
 
 3. **Evaluated/deep result geometry gaps**
    - body/face/vertex data where Tapir does not expose equivalent evaluated result;
@@ -465,8 +510,10 @@ Unless live tests disprove upstream behavior:
    - exact face -> material/surface provenance where generic APIs do not supply enough
      information.
 
-5. **Transaction/undo semantics**
-   - only if no adopted wrapper provides the required atomic or single-undo behavior.
+5. **Cross-command transaction policy**
+   - idempotency and operation identity across retries;
+   - optional all-or-none compensation/rollback if required;
+   - do not reimplement per-command single-undo scopes that Tapir already supplies.
 
 6. **Exact read-back verifier**
    - only for data not already robustly returned by Tapir/wrapper.
@@ -537,6 +584,21 @@ Dimensions:
 - long-running operations;
 - failure reporting.
 
+### EVENT-01
+
+Register Tapir's `AddElementNotificationClient` against a local callback and verify on
+AC29:
+
+- new / changed / deleted;
+- property/classification change;
+- undo/redo;
+- copy parent/old GUID semantics;
+- Teamwork reserve/release where available;
+- event ordering and grouping around a Tapir batch;
+- missed-event behavior across callback restart.
+
+If this passes, remove the native event-observer command from active custom scope.
+
 ### TRANSACTION-01
 
 Deliberately force failure mid-batch and verify:
@@ -567,9 +629,10 @@ native CRUD layer.
 | MCP command exposure | SzamosiMate/tapir-archicad-MCP candidate | likely no generic registry |
 | Safety / QA / dry-run UX | alesdev88/Archicad-MCP candidate | project-specific policy only |
 | Alternative broad closed executor | HuskyBIM | adapter only if it wins benchmark |
-| Deep evaluated geometry/events | native Add-On | yes, residual only |
-| Project revision/invalidation | canonical kernel + native observer | yes |
-| Transaction policy | evaluate wrappers first | custom only if required |
+| Deep evaluated geometry | native Add-On only where Tapir output is insufficient | residual only |
+| Element events | Tapir notification client | custom consumer/revision logic only |
+| Project revision/invalidation | canonical kernel over event stream | yes |
+| Transaction policy | Tapir single-undo command + wrapper safety | cross-command semantics only if required |
 | Russian Rule IR | SBIM | yes |
 | Healing objective/extensions | SBIM over Design Healing method | yes |
 | Cross-host AEC orchestration | Archi Automate optional | no generic gateway |
@@ -587,6 +650,8 @@ Add to STOP / DO NOT IMPLEMENT GENERICALLY:
 - native Morph movement writer;
 - native generic Window/Door writer;
 - native generic Opening writer;
+- native generic element observer if EVENT-01 passes;
+- custom per-command single-undo wrappers;
 - custom MCP registry over Tapir;
 - custom Tapir schema-discovery layer.
 
