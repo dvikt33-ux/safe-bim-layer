@@ -182,3 +182,26 @@ placed on another story or away from existing geometry. The builder never
 opens, switches, saves or closes a PLN. It refuses a matching pre-existing
 skeleton, creates the slab first, verifies it, then creates the wall batch and
 performs a fresh Model Dump read-back before returning `PASS`.
+
+
+## Live change watcher over Tapir
+
+`scripts/archicad_change_watch.py` provides a read-only polling watcher for the
+currently open Archicad project. It does not open, switch, save, close, select,
+create, modify or delete model elements. The watcher polls standard Tapir
+commands and reports element additions, removals and changes detected from
+type/details/floor/bounding-box fingerprints.
+
+For the current Series 178 test project on port `19725`:
+
+```powershell
+python .\scripts\archicad_change_watch.py --port 19725 --interval 1.0 --expect-project-substring "SafeBIM_Global_Library_Test_Projects"
+```
+
+Stop it with `Ctrl+C`. A current snapshot and append-only change log are kept
+under `%TEMP%\safe-bim-mvp-evidence\archicad-watch`.
+
+This is polling, not an Archicad event subscription. It detects structural and
+geometric changes visible through standard Tapir `GetDetailsOfElements` and
+`Get3DBoundingBoxes`; changes outside that response surface may require the
+native Model Dump bridge for deeper detection.
