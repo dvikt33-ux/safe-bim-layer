@@ -3,11 +3,44 @@ import argparse
 from collections import Counter
 import hashlib
 import json
+import re
 from pathlib import Path
 import tempfile
 
 from scripts.audit_pack import (AuditError, Conflict, canonical, changed_paths, delta, digest, element_index, file_info,
     public_value, read_json, relative, scan_public_pack, semantic_delta)
+
+_NATIVE_SECONDS_KEY = b'"nativeSeconds":'
+_NATIVE_SECONDS_NUMBER = re.compile(rb'-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?')
+
+
+def _semantic_source_key(root, spec):
+    """Hash exact source bytes while normalizing only top-level dump timing.
+
+    ModelDumpCommands adds nativeSeconds exactly once at the top level and
+    model_hash deliberately excludes that timing field. If the key is absent
+    or appears more than once, fall back to the full raw SHA so deduplication
+    can never broaden the semantic contract.
+    """
+    path = relative(root, spec['path'])
+    raw = path.read_bytes()
+    raw_sha = hashlib.sha256(raw).hexdigest()
+    actual = {'path': spec['path'], 'sha256': raw_sha, 'bytes': len(raw)}
+    expected = {k: spec[k] for k in ('path', 'sha256', 'bytes')}
+    if actual != expected:
+        raise AuditError('Source SHA/size mismatch: '+spec['path'])
+    if raw.count(_NATIVE_SECONDS_KEY) != 1:
+        return 'raw:'+raw_sha
+    key_at = raw.find(_NATIVE_SECONDS_KEY)
+    value_at = key_at + len(_NATIVE_SECONDS_KEY)
+    match = _NATIVE_SECONDS_NUMBER.match(raw, value_at)
+    if match is None:
+        return 'raw:'+raw_sha
+    h = hashlib.sha256()
+    h.update(raw[:value_at])
+    h.update(b'0')
+    h.update(raw[match.end():])
+    return 'timing-normalized:'+h.hexdigest()
 
 
 def _pinned_json_once(root, spec):
@@ -27,7 +60,7 @@ def _pinned_json_once(root, spec):
             result[key] = value
         return result
 
-    data = json.loads(raw.decode('utf-8-sig'), object_pairs_hook=unique,
+    data = json.loads(raw, object_pairs_hook=unique,
         parse_constant=lambda value: (_ for _ in ()).throw(AuditError('Nonfinite JSON: '+value)))
     # Preserve the old fail-closed concurrency check, but avoid the separate
     # pre-parse hash pass: the parsed bytes themselves were already hashed above.
@@ -88,25 +121,39 @@ def extract(root, contract):
     if not snapshots.issubset(records):
         raise AuditError('Unpinned snapshot')
 
-    payloads, states, snapshot_cache = {}, {}, {}
+    # Verify every factual snapshot against its pinned raw SHA first. The
+    # timing-normalized key is stricter than model_hash equality: two snapshots
+    # share a key only when their source bytes are identical except for the
+    # single top-level nativeSeconds scalar that model_hash already excludes.
+    semantic_keys = {name: _semantic_source_key(root, records[name])
+                     for name in sorted(snapshots)}
+
+    payloads, states = {}, {}
+    group_states, group_data = {}, {}
 
     def load_snapshot(name):
         if name not in snapshots or name not in records:
             raise AuditError('Delta requires two pinned factual snapshots')
-        if name not in snapshot_cache:
+        group = semantic_keys[name]
+        if group not in group_states:
             data = _pinned_json_once(root, records[name])
-            if name not in states:
-                summary, index = _model_summary_once(data, contract['modelIdentity'])
-                key = summary['modelHash']
-                states[name] = (summary, index)
-                payloads[f'models/{key}/summary.json'] = summary
-                lean_index = [
-                    {k: row[k] for k in ('guid', 'type', 'homeStory', 'fullElementHash') if k in row}
-                    for row in index]
-                payloads[f'models/{key}/element-index.json'] = (
-                    lean_index if contract.get('indexStyle') == 'GUID_FULL_HASH' else index)
-            snapshot_cache[name] = data
-        return snapshot_cache[name]
+            summary, index = _model_summary_once(data, contract['modelIdentity'])
+            group_states[group] = (summary, index)
+            group_data[group] = data
+            key = summary['modelHash']
+            payloads[f'models/{key}/summary.json'] = summary
+            lean_index = [
+                {k: row[k] for k in ('guid', 'type', 'homeStory', 'fullElementHash') if k in row}
+                for row in index]
+            payloads[f'models/{key}/element-index.json'] = (
+                lean_index if contract.get('indexStyle') == 'GUID_FULL_HASH' else index)
+        elif group not in group_data:
+            # The semantic state was summarized earlier but its full object tree
+            # was released after the last previous delta use. Reparse only if a
+            # later delta unexpectedly needs that state again.
+            group_data[group] = _pinned_json_once(root, records[name])
+        states[name] = group_states[group]
+        return group_data[group]
 
     # Non-snapshot records remain independently source-pinned. Large records
     # stay as LFS refs; ordinary records are embedded after sanitization.
@@ -121,9 +168,11 @@ def extract(root, contract):
         data = _pinned_json_once(root, spec)
         payloads['records/'+digest(name)+'.json'] = {'sourceRef': name, 'value': data}
 
-    # Keep only snapshots still needed by later deltas. A chain therefore holds
-    # roughly the current pair in memory instead of reparsing every pair source.
-    pair_uses = Counter(name for pair in contract['pairs'] for name in (pair['before'], pair['after']))
+    # Retain a semantic state only until its last delta occurrence. Multiple
+    # 100-MiB snapshots of the same model state therefore share one JSON parse,
+    # one element-index pass and one full in-memory object tree.
+    pair_uses = Counter(semantic_keys[name] for pair in contract['pairs']
+                        for name in (pair['before'], pair['after']))
     for number, pair in enumerate(contract['pairs'], 1):
         before_name, after_name = pair['before'], pair['after']
         before = load_snapshot(before_name)
@@ -138,15 +187,22 @@ def extract(root, contract):
             'addedElements': [am[g] for g in change['added']],
             'removedElements': [bm[g] for g in change['removed']]}
         for name in (before_name, after_name):
-            pair_uses[name] -= 1
-            if pair_uses[name] == 0:
-                snapshot_cache.pop(name, None)
+            group = semantic_keys[name]
+            pair_uses[group] -= 1
+            if pair_uses[group] == 0:
+                group_data.pop(group, None)
 
     # Snapshots not participating in a delta still require summary/index proof.
+    # If an equivalent state was already processed, alias its verified state
+    # without parsing the duplicate 100-MiB JSON again.
     for name in sorted(snapshots):
+        group = semantic_keys[name]
         if name not in states:
-            load_snapshot(name)
-        snapshot_cache.pop(name, None)
+            if group in group_states:
+                states[name] = group_states[group]
+            else:
+                load_snapshot(name)
+        group_data.pop(group, None)
 
     payloads['source.json'] = contract
     blobs = {}
@@ -164,6 +220,7 @@ def extract(root, contract):
     if sum(map(len, blobs.values())) > 9*1024*1024:
         raise AuditError('Stage 4 pack exceeds 9 MiB; full evidence must remain separate')
     return blobs
+
 
 def build_pack(root, contract, output):
     output = Path(output)
