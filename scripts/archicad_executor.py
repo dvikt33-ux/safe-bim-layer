@@ -100,7 +100,32 @@ def plan_action(action, data, request):
             plan = wall.choose_plan(data)
         return "CreateWalls", plan["createParameters"], plan
     if action == "create_window":
-        plan = window.select_wall(data)
+        if request.get("sourceGuid"):
+            host = emap(data).get(str(request["sourceGuid"]).lower())
+            if not host or host.get("type") != "Wall":
+                raise ValueError("create_window sourceGuid is not a Wall in the fresh Model Dump")
+            ref = host.get("placement", {}).get("referenceGeometry", {})
+            if ref.get("kind") != "WallReferenceLine" or ref.get("arcAngle") != 0:
+                raise ValueError("create_window requires a straight factual host Wall")
+            required = ("centerOffset", "sillHeight", "width", "height")
+            if any(k not in request for k in required):
+                raise ValueError("bound create_window requires centerOffset/sillHeight/width/height")
+            center, sill, width, height = (float(request[k]) for k in required)
+            if not all(math.isfinite(v) for v in (center, sill, width, height)) or width <= 0 or height <= 0:
+                raise ValueError("bound create_window dimensions must be finite and positive")
+            a, b = ref["begin"], ref["end"]
+            length = math.hypot(float(b["x"])-float(a["x"]), float(b["y"])-float(a["y"]))
+            wall_height = float(ref.get("height", 0))
+            if center-width/2 <= TOL or center+width/2 >= length-TOL:
+                raise ValueError("bound create_window opening exceeds host Wall ends")
+            if sill < -TOL or sill+height > wall_height+TOL:
+                raise ValueError("bound create_window opening exceeds host Wall height")
+            plan = {"wallGuid": host["guid"], "homeStory": host.get("homeStory"),
+                "centerOffsetAlongHost": center, "sillHeightFromWallBase": sill,
+                "width": width, "height": height, "length": length,
+                "selectionRule": "explicit model-bound Hosted Window action"}
+        else:
+            plan = window.select_wall(data)
         params = {"windowsData": [{"ownerWallId": {"guid": plan["wallGuid"]},
             "centerOffset": plan["centerOffsetAlongHost"], "sillHeight": plan["sillHeightFromWallBase"],
             "width": plan["width"], "height": plan["height"],
