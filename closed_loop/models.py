@@ -124,8 +124,19 @@ class Action:
     parameters: dict[str, Any]
 
     def __post_init__(self):
-        if self.type not in {'create_wall', 'create_window'}:
-            raise ValueError('Typed action allowlist contains create_wall and create_window only')
+        if self.type != 'create_wall':
+            raise ValueError('Stage 2 mock action allowlist contains create_wall only')
+        if not isinstance(self.parameters, dict):
+            raise ValueError('parameters must be an object')
+        json_value(self.parameters)
+
+
+@dataclass(frozen=True)
+class WindowAction(Action):
+    """Stage 5 additive typed action; keeps the frozen Stage 2 Action allowlist intact."""
+    def __post_init__(self):
+        if self.type != 'create_window':
+            raise ValueError('WindowAction contains create_window only')
         if not isinstance(self.parameters, dict):
             raise ValueError('parameters must be an object')
         json_value(self.parameters)
