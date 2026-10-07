@@ -206,6 +206,7 @@ def main():
     if not output.is_relative_to(ROOT/'outputs/closed-loop-stage4'):
         raise ValueError('Dedicated repository Stage 4 output required')
     output.mkdir(parents=True, exist_ok=False)
+    total_started = time.perf_counter()
     tempfile.tempdir = str(ROOT/'work/stage4-live-temp')
     Path(tempfile.tempdir).mkdir(parents=True, exist_ok=True)
     stream = io.StringIO()
@@ -214,6 +215,7 @@ def main():
     # binding from the shell. Tests that exercise rebinding opt in explicitly.
     live_env = {name: os.environ.pop(name, None) for name in
         ('SAFE_BIM_STAGE4_PROJECT_PATH','SAFE_BIM_STAGE4_FIXTURE_REPORT')}
+    tests_started = time.perf_counter()
     try:
         for folder in ('tests_stage2','tests_stage3','tests_audit_pack','tests_stage4_live'):
             with contextlib.redirect_stdout(stream), contextlib.redirect_stderr(stream):
@@ -231,6 +233,8 @@ def main():
             else:
                 os.environ.pop(name, None)
     (output/'tests.txt').write_text(stream.getvalue(),encoding='utf-8')
+    tests_seconds = round(time.perf_counter()-tests_started, 3)
+    print('Offline regression tests PASS in '+str(tests_seconds)+'s', flush=True)
     from scripts.audit_pack import verify_pack as verify_historical
     archived = {}
     historical_timings = {}
@@ -250,6 +254,7 @@ def main():
                 archived[key]['provenance'] = 'FULL_RECOMPUTE_FALLBACK'
                 archived[key]['fastRevalidationError'] = str(exc)
         historical_timings[key] = round(time.perf_counter()-phase, 3)
+        print(key+' historical evidence PASS in '+str(historical_timings[key])+'s', flush=True)
         if archived[key]['status'] != 'PASS':
             raise RuntimeError('Historical live baseline failed')
         durable_json(output/(key+'-archived-regression.json'),archived[key])
@@ -261,16 +266,24 @@ def main():
              ('S4-09',RecoveryTests,'test_pre_native_transport_failure_is_blocked_not_unknown'),
              ('S4-10',RecoveryTests,'test_confirmed_response_with_missing_readback_never_verifies')]
     rows = []
+    fixture_timings = {}
     for scenario_id, case_class, method in cases:
         print('Saving '+scenario_id+' OFFLINE_FIXTURE evidence',flush=True)
+        phase = time.perf_counter()
         rows.append(run_fixture(output,scenario_id,case_class,method))
+        fixture_timings[scenario_id] = round(time.perf_counter()-phase, 3)
+        print(scenario_id+' OFFLINE_FIXTURE PASS in '+str(fixture_timings[scenario_id])+'s', flush=True)
     durable_json(output/'offline-verification-report.json', {'status':'PASS','provenance':'OFFLINE_FIXTURE',
         'tests':counts,'oldTests':sum(counts[k]['testsRun'] for k in ('tests_stage2','tests_stage3','tests_audit_pack')),
         'newTests':counts['tests_stage4_live']['testsRun'],'scenarios':rows,'physicalMutationCalls':0,
         'archivedRegressions':archived,'historicalTimingsSeconds':historical_timings,
+        'timingsSeconds':{'tests':tests_seconds,'historical':historical_timings,
+                          'fixtures':fixture_timings,
+                          'total':round(time.perf_counter()-total_started, 3)},
         'mandatoryLiveScenarios':'NOT_VERIFIED','stage4Status':'BLOCKED','stage5Started':False,
         'implementationFiles':[{'path':p,'sha256':hashlib.sha256((ROOT/p).read_bytes()).hexdigest()} for p in IMPLEMENTATION_FILES]})
-    print('Offline proof PASS; mandatory live remains NOT_VERIFIED',flush=True)
+    print('Offline proof PASS in '+str(round(time.perf_counter()-total_started, 3))+
+          's; mandatory live remains NOT_VERIFIED',flush=True)
 
 
 if __name__ == '__main__': main()
