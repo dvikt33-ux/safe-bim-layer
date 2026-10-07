@@ -253,3 +253,34 @@ documentation_compiler_strategy:
   validation_tasks:
     - DOC_AC29_01
     - SPDS_2026_01
+
+
+section_detail_planner_strategy:
+  checkpoint: docs/research/architectural_ai_checkpoint_26_section_callout_detail_need_planning_2026-10-08.md
+  principle: minimum_sufficient_views_with_explicit_coverage
+  normative_rules:
+    - compile_GOST_21_501_2018_section_seeds
+    - enforce_GOST_R_21_101_2026_no_redundant_callout_rule
+  pipeline:
+    - build_information_obligations
+    - generate_candidate_views
+    - compute_coverage_matrix
+    - solve_minimum_sufficient_view_set_with_OR_Tools
+    - materialize_with_Archicad29_Tapir
+    - create_details_only_for_unresolved_interfaces
+  primary_candidate_sources:
+    - normative
+    - geometry_topology
+    - CSE_interfaces
+    - precedent
+    - learned_AutoSection_prior
+    - user_locked_views
+  ac29_known_current_gaps_to_verify:
+    - jogged_complex_section_creation
+    - linked_detail_callout_marker_creation
+    - generic_exterior_elevation_creation
+  tests:
+    - SECTION_NEED_01
+    - AUTOSECTION_REFERENCE_01
+    - DETAIL_NEED_01
+    - VIEW_IMPACT_01
