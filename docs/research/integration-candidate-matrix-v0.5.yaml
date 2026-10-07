@@ -1,0 +1,117 @@
+version: 0.5
+date: 2026-10-08
+status: research_draft
+current_target: Archicad_29
+
+russian_platforms:
+  tangl_sdk:
+    category: russian_bim_data_developer_platform
+    rest_api: PASS
+    swagger: PASS
+    auth_api: PASS
+    platform_api: PASS
+    cache_api: PASS
+    value_api: PASS
+    control_api: PASS
+    viewer_api: PASS
+    demo_app: PASS
+    cloud: PASS
+    on_prem: PASS
+    ifc: PASS
+    priority: P0_TECHNICAL_AUDIT
+    possible_replacement:
+      - generic_bim_backend
+      - generic_ifc_viewer
+      - model_data_api
+
+  tangl_control:
+    category: russian_bim_validation
+    collision: PASS
+    minimum_distance: PASS
+    parameter_presence: PASS
+    parameter_value_rules: PASS
+    eir_checks: PASS
+    project_product_normative_checks: PASS
+    configurable_rule_schemes: PASS
+    ifc_import: PASS
+    revit_import: PASS
+    full_legal_semantics: FAIL_OR_UNKNOWN
+    priority: P0_COMPARE_WITH_SOLIBRI_NATIVE
+
+  tangl_space:
+    category: free_bim_viewer_and_collision
+    free: PASS
+    ifc: PASS
+    rvt: PASS
+    viewer: PASS
+    sharing: PASS
+    collision: PASS
+    priority: P0_FREE_TEST
+
+  tangl_value:
+    category: russian_5d_cost_quantity
+    qto: PASS
+    cost: PASS
+    alternative_comparison: PASS
+    excel_export: PASS
+    estimating_integration: PASS
+    erp_integration: PASS
+    odata_results: PASS
+    priority: P1_COST_TEST
+
+  five_d_smeta:
+    category: russian_5d_cost
+    ifc: PASS
+    per_element_quantity_cost: PASS
+    arps: PASS
+    trial_days: 30
+    priority: P1_COMPARE_TANGL_VALUE
+
+decision_memory:
+  established_research: PASS
+  design_episodes: PASS
+  explanation_tags: PASS
+  constraints: PASS
+  rejected_alternative_memory: PASS
+  recommended_pattern: immutable_decision_records_with_supersession
+  custom_requirement: THIN_DOMAIN_ADAPTATION
+
+space_quality:
+  depthmapx:
+    visibility_graphs: PASS
+    isovists: PASS
+    spatial_network: PASS
+    agent_based: PASS
+    decision: REUSE_METRICS
+
+sustainability:
+  one_click_lca:
+    archicad_29_plugin: PASS
+    bom_export: PASS
+    lifecycle_carbon: PASS
+    decision: REUSE_IF_LICENSE
+
+product_semantics:
+  etim_mc_bsdd:
+    standardized_modeling_attributes: PASS
+    ifc_4_3_link: PASS
+    bsdd: PASS
+    json_exchange: PASS
+    decision: USE_STANDARD
+
+custom_blocked_pending_reuse_test:
+  - generic_russian_bim_backend
+  - generic_model_viewer
+  - generic_bim_checker
+  - eir_check_engine
+  - quantity_takeoff_engine
+  - generic_5d_engine
+  - agr_precheck_engine
+  - product_property_ontology
+  - visibility_graph_engine
+
+next_tests:
+  - TANGL_SPACE_01
+  - TANGL_CONTROL_01
+  - TANGL_SDK_01
+  - COST_01
