@@ -88,3 +88,28 @@ longer material bottlenecks. The next optimization therefore deduplicates
 factual snapshots whose source bytes are identical except for the single
 top-level nativeSeconds value already excluded by the historical model-hash
 contract. Every source file still has to match its individually pinned raw SHA.
+
+
+## Timing-only snapshot deduplication result
+
+Retained LIVE S4-06 verification remained PASS after timing-only snapshot
+deduplication. All focused regression tests passed: 55/55.
+
+Measured profiler result:
+
+- factual snapshots: 10;
+- semantic snapshot groups: 3;
+- group sizes: 5 / 3 / 2;
+- snapshot bytes: 1001.1 MiB;
+- extract total: 23.451 s;
+- pinned JSON read/parse: 11.555 s;
+- model summary/index: 8.815 s;
+- changed-path analysis: 0.077 s;
+- public scan: 0.258 s;
+- pack compare/other: 0.023 s;
+- total verifier wall-clock: 23.732 s.
+
+Compared with the historical Stage-4 verifier baseline (~115-118 s), this is
+approximately a 4.9x speedup while reproducing the existing S4-06 Audit Pack
+byte-for-byte and retaining source SHA verification, semantic-delta verification,
+absolute-path scanning and independent verifier extraction.
