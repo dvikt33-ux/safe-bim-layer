@@ -77,3 +77,30 @@ remains **IN PROGRESS / NOT VERIFIED**.
 
 Offline receipt:
 `outputs/closed-loop-stage5/stage5-offline-acceptance.json`.
+
+
+## Plan-only preflight
+
+The first real-model plan-only run is **PASS** with zero physical mutation calls.
+
+Bound project:
+`C:\\Users\\Admin\\Downloads\\дбликат.pln`
+
+Observed model hash:
+`89ff21189bed58d9d782088ca1eb7d717bf583144c3b0eb408eca3745d0be870`
+
+Approved Hosted Window candidate:
+
+- host Wall GUID: `7CD2B97A-F97B-4FAA-A697-E597C83C37DA`;
+- center offset: `20.0 m`;
+- sill: `0.9 m`;
+- width: `1.2 m`;
+- height: `1.5 m`.
+
+The live runner now requires this plan explicitly through `--approved-plan` and
+rejects execution if the fresh factual model hash differs.
+
+Because approved-plan binding, same-run Audit Pack generation, durable journal
+count reporting and persisted WindowAction recovery were added after
+`offline-001`, that proof is historical for the previous source state.
+A fresh `offline-002` is mandatory before the first Stage 5 live mutation.
