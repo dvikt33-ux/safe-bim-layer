@@ -205,3 +205,17 @@ This is polling, not an Archicad event subscription. It detects structural and
 geometric changes visible through standard Tapir `GetDetailsOfElements` and
 `Get3DBoundingBoxes`; changes outside that response surface may require the
 native Model Dump bridge for deeper detection.
+
+
+To turn the watch log into compact dispatcher/chat context, use:
+
+```powershell
+python .\scripts\archicad_watch_context.py --port 19725 --tail 20
+```
+
+The output contains the current project identity, active story, live element
+count, story table, and the latest add/remove/change events. This is the bridge
+between the continuously running local watcher and the next command-planning
+step: a local dispatcher can call this helper before every requested Archicad
+operation and include the returned JSON as current model context without
+regenerating the 100 MB native Model Dump.
