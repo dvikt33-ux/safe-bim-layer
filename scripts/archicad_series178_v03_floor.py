@@ -79,8 +79,9 @@ def slab(poly,story,level,t=.16):
     return g
 
 def main():
+    global PORT
     ap=argparse.ArgumentParser(); ap.add_argument("--port",type=int,default=PORT); ap.add_argument("--execute",action="store_true"); args=ap.parse_args()
-    global PORT; PORT=args.port
+    PORT=args.port
     if not SK.is_file(): raise RuntimeError(f"missing {SK}")
     sk=json.loads(SK.read_text(encoding="utf-8-sig"))
     if len(sk.get("wallGuids",[]))!=28: raise RuntimeError("need original 28-wall manifest")
