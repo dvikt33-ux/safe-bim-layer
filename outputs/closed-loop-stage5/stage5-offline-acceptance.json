@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "stage": "Stage 5",
+  "capability": "Hosted Window",
+  "status": "PASS",
+  "proofMode": "OFFLINE",
+  "run": "outputs/closed-loop-stage5/offline-001",
+  "implementationCommit": "26b2c4e41ed07a538bf031d57bd7fcf3c3a104e7",
+  "results": {
+    "focusedCommandTests": {
+      "testsRun": 51,
+      "status": "PASS",
+      "seconds": 1.774
+    },
+    "fullRegression": {
+      "status": "PASS",
+      "totalSeconds": 21.036
+    },
+    "stage1Historical": {
+      "status": "PASS",
+      "seconds": 6.086
+    },
+    "stage3Historical": {
+      "status": "PASS",
+      "seconds": 6.047
+    }
+  },
+  "physicalMutationCalls": 0,
+  "acceptedCriteria": [
+    "W01",
+    "W02",
+    "W03",
+    "W04",
+    "W05",
+    "W06",
+    "W07"
+  ],
+  "pendingCriteria": [
+    "W08",
+    "W09",
+    "W10"
+  ],
+  "stage5Status": "NOT_VERIFIED",
+  "note": "Offline gate proves typed action, binding, stale rejection, attempt durability, no blind retry semantics and reconciliation guards. Live factual read-back and Audit Pack remain mandatory."
+}
