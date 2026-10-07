@@ -1,6 +1,6 @@
 param(
     [int]$Port = 19723,
-    [ValidateSet("preflight","core","materials-data","navigator-master","autotext","master-smoke","layout-autotext-smoke","coordinate-calibration","form3-core","form3-static","all-safe")]
+    [ValidateSet("preflight","core","materials-data","navigator-master","autotext","master-smoke","layout-autotext-smoke","master-context-autotext-smoke","coordinate-calibration","form3-core","form3-static","all-safe")]
     [string]$Stage = "all-safe",
     [string]$OutDir = "outputs/archicad-template-live"
 )
@@ -71,6 +71,7 @@ $navigatorMaster = @(
 $autotext = @("plan-autotext")
 $masterSmoke = @("apply-master-layout-smoke")
 $layoutAutoTextSmoke = @("apply-layout-autotext-smoke")
+$masterContextAutoTextSmoke = @("apply-master-context-autotext-smoke")
 $coordinateCalibration = @("apply-master-coordinate-calibration")
 $form3Core = @("apply-form3-core-geometry")
 $form3Static = @("apply-form3-static-labels")
@@ -97,6 +98,9 @@ switch ($Stage) {
     "layout-autotext-smoke" {
         $steps = $layoutAutoTextSmoke
     }
+    "master-context-autotext-smoke" {
+        $steps = $masterContextAutoTextSmoke
+    }
     "coordinate-calibration" {
         $steps = $coordinateCalibration
     }
@@ -122,7 +126,7 @@ $summary = [ordered]@{
     evidenceDirectory = $RunDir
     steps = @()
     productionGeometryCreated = $false
-    autotextGateExecuted = ($Stage -eq "autotext" -or $Stage -eq "master-smoke" -or $Stage -eq "layout-autotext-smoke")
+    autotextGateExecuted = ($Stage -eq "autotext" -or $Stage -eq "master-smoke" -or $Stage -eq "layout-autotext-smoke" -or $Stage -eq "master-context-autotext-smoke")
     coordinateCalibrationExecuted = ($Stage -eq "coordinate-calibration")
     form3CoreExecuted = ($Stage -eq "form3-core")
     form3StaticExecuted = ($Stage -eq "form3-static")
