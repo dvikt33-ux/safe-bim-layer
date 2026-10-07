@@ -80,6 +80,8 @@ def main():
         'closed_loop/window_attempts.py',
         'closed_loop/live_window.py',
         'closed_loop/stage5_window_scenario.py',
+        'closed_loop/stage5_audit_pack.py',
+        'closed_loop/wall_attempts.py',
         'scripts/archicad_executor.py',
     )
     report = {
