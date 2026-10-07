@@ -154,3 +154,31 @@ For “last created Wall”, the adapter uses the unique short straight Wall who
 begin point joins one collinear predecessor and whose end remains open. It
 returns `NEEDS_SELECTION` when the current geometry does not yield one unique
 candidate. It does not use the element array order as creation time.
+
+
+## Series 178-07sm.86 typical-floor MVP
+
+The first pass for the photographed Series 178 typical floor is deliberately a
+structural skeleton, not a claim of exact factory-panel reconstruction. The
+checked-in spec preserves the verified grid `23.4 x 13.2 m`, the
+`3.0/3.6 m` X modules and `5.4/2.4/5.4 m` Y modules. Panel marks, exact
+openings, partitions, stair and balcony geometry remain provisional until the
+next visual/read-back pass.
+
+Dry-run first:
+
+```powershell
+python .\scripts\archicad_series178_typical_floor.py
+```
+
+Create the skeleton in the one currently open Archicad project:
+
+```powershell
+python .\scripts\archicad_series178_typical_floor.py --execute
+```
+
+Use `--story-index`, `--origin-x` and `--origin-y` if the test floor must be
+placed on another story or away from existing geometry. The builder never
+opens, switches, saves or closes a PLN. It refuses a matching pre-existing
+skeleton, creates the slab first, verifies it, then creates the wall batch and
+performs a fresh Model Dump read-back before returning `PASS`.
