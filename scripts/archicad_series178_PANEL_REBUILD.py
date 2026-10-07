@@ -331,6 +331,7 @@ def main():
 
     A=lambda p:(ox+p[0],oy+p[1])
 
+    print("STAGE 1/5: creating native Archicad Walls...", flush=True)
     hosts={}
     for name,a,b,t,role in WALLS:
         g=create_wall(A(a),A(b),story,t)
@@ -345,11 +346,13 @@ def main():
     m["phase"]="NEW_WALLS_CREATED_OLD_PLAN_STILL_PRESENT"
     save(m)
 
+    print(f"PASS: {created_wall_count} walls created. STAGE 2/5: doors...", flush=True)
     for name,host_name,off,w in DOORS:
         if host_name not in hosts: raise RuntimeError(f"missing door host {host_name}")
         g=create_door(hosts[host_name],off,w)
         add(m,name,"Door",g,host=host_name,width=w)
 
+    print("STAGE 3/5: windows, stair, slabs and balconies...", flush=True)
     for i in range(1,8):
         s=hosts[f"EXT_S_{i:02d}"]; n=hosts[f"EXT_N_{i:02d}"]
         L=X[i]-X[i-1]
@@ -409,12 +412,14 @@ def main():
     ],1):
         add(m,f"TXT_APT_{idx}","Text",create_text(ox+x,oy+y,level,story,val,1.9))
 
+    print("STAGE 4/5: dimensions/text complete. Cleaning OLD GUIDs only...", flush=True)
     # Only now remove elements from previous Series-178 attempts.
     # Exclude every GUID created by this run even if it happened to enter a manifest scan.
     new_guids={r["guid"].lower() for r in m["created"] if r.get("guid")}
     frozen_old={g for g in old_targets if g.lower() not in new_guids}
     cleanup(m, frozen_old)
 
+    print("STAGE 5/5: replacement complete.", flush=True)
     m["phase"]="REPLACEMENT_COMPLETE"
     m["status"]="PASS"
     m["elementCountAfter"]=len(all_rows())
