@@ -1,0 +1,446 @@
+version: 0.5
+date: 2026-10-08
+target: Archicad_29
+status: active_research
+supersedes: docs/research/layer-reuse-decision-matrix-v0.4.yaml
+
+governing_policy:
+  strategy: best_of_breed_component_harvesting
+  rules:
+    - never_discard_whole_candidate_before_deep_audit
+    - evaluate_runtime_architecture_algorithm_schema_safety_memory_and_policy_separately
+    - closed_runtime_can_be_rejected_while_its_methods_are_retained
+    - keep_execution_providers_replaceable
+    - canonical_state_rules_and_operation_history_remain_provider_independent
+
+priority:
+  ac29_execution_research:
+    first: huskybim
+    second: tapir_open_stack
+    third: residual_native_gap
+  note: husky_first_does_not_mean_husky_only
+
+component_statuses:
+  - PRIMARY_PROVIDER_CANDIDATE
+  - SECONDARY_PROVIDER_CANDIDATE
+  - FALLBACK_PROVIDER
+  - HARVEST_RUNTIME
+  - HARVEST_ARCHITECTURE
+  - HARVEST_ALGORITHM
+  - HARVEST_SCHEMA
+  - HARVEST_SAFETY_PATTERN
+  - HARVEST_MEMORY_PATTERN
+  - BENCHMARK_PRODUCTION_POLICY
+  - FUTURE_VERSION_CANDIDATE
+  - REJECT_ONLY_SPECIFIC_RUNTIME_MECHANISM
+
+candidates:
+  huskybim:
+    statuses:
+      - PRIMARY_PROVIDER_CANDIDATE
+    harvest:
+      - broad_archicad_execution
+      - geometry_if_schema_proves_sufficient
+      - attributes_layers_classifications_properties
+      - stories
+      - layouts_drawings
+      - bcf_issues
+      - mep_if_verified
+      - ifc_if_verified
+      - compound_architect_workflows
+      - native_json_escape_hatch_if_verified
+    must_not_own:
+      - canonical_project_state
+      - russian_rule_ir
+      - design_intent_graph
+      - operation_ledger
+    deep_tests:
+      - HUSKY_DEEP_01
+      - HUSKY_GEOM_01
+      - HUSKY_TXN_01
+      - HUSKY_DOC_01
+      - HUSKY_COMPLEX_01
+
+  tapir:
+    statuses:
+      - SECONDARY_PROVIDER_CANDIDATE
+      - FALLBACK_PROVIDER
+      - HARVEST_RUNTIME
+    harvest:
+      - inspectable_cpp_reference
+      - schemas
+      - open_execution
+      - element_notifications
+      - archicad_undo_scopes
+      - floor_plan_cut_polygons
+      - rich_element_details
+      - morph_body_roundtrip
+      - documentation_primitives
+      - husky_verification_oracle
+
+  szamosi_tapir_mcp:
+    statuses:
+      - HARVEST_ARCHITECTURE
+      - HARVEST_RUNTIME
+    harvest:
+      - schema_to_mcp_generation
+      - pydantic_validation
+      - progressive_discovery
+      - exact_schema_lookup
+      - multi_instance
+      - stdio_sse_streamable_http
+      - bearer_auth
+      - job_handles
+
+  boti_archicad_mcp:
+    statuses:
+      - HARVEST_ARCHITECTURE
+      - REJECT_ONLY_SPECIFIC_RUNTIME_MECHANISM
+    harvest:
+      - tiny_stable_mcp_surface
+      - progressive_discovery
+      - exact_schema_on_demand
+    reject:
+      - unsandboxed_freeform_python_for_trusted_mutation
+
+  alesdev_archicad_mcp:
+    statuses:
+      - HARVEST_SAFETY_PATTERN
+      - HARVEST_RUNTIME
+    harvest:
+      - dry_run_default
+      - destructive_confirmation
+      - planned_changeset
+      - one_shot_expiring_changeset
+      - project_identity_binding
+      - post_write_readback_mismatch
+      - yaml_qa
+    limitations:
+      - non_atomic_changesets
+      - partial_success_persists
+      - unsandboxed_optional_scripts
+      - documented_ac29_property_read_crash_risk
+
+  archi_automate:
+    statuses:
+      - HARVEST_RUNTIME
+      - HARVEST_ARCHITECTURE
+      - HARVEST_SAFETY_PATTERN
+    archicad_role:
+      primary_executor: false
+      curated_surface:
+        reads:
+          - wall
+          - slab
+          - column
+          - object
+        creates:
+          - wall
+          - slab
+          - column
+        mutations:
+          - move
+          - copy
+          - delete
+      limitation:
+        - archicad_writes_no_preview_or_dry_run
+    best_components:
+      cross_host_control_plane:
+        - archicad
+        - revit
+        - rhino
+        - grasshopper
+        - autocad
+        - tekla
+        - vectorworks
+        - sketchup
+        - blender
+        - qgis
+        - ifc
+        - forma
+        - autodesk_construction_cloud
+      governance:
+        - central_guardrails
+        - policy_gated_writes
+        - audit
+        - separate_script_authoring_capability
+        - stale_code_hash_precondition_pattern
+      openbim:
+        - ifc_2x3_4_4x1_4x3
+        - federation
+        - ifc_read_write_save
+        - ids_validation
+        - ids_authoring
+        - express_health_check
+        - bsdd_search
+        - bcf_read_write
+        - clash_to_bcf
+        - ids_failure_to_bcf
+        - clash_detection
+        - qto
+        - classification_authoring
+        - embodied_carbon
+      portability:
+        - scene_contract
+      provenance_reference:
+        - sha256_source_binding
+        - prompt_provider_model_metadata
+        - cost_ledger
+        - elapsed_time
+        - watermark_metadata
+
+  swapp_frank:
+    statuses:
+      - HARVEST_MEMORY_PATTERN
+      - BENCHMARK_PRODUCTION_POLICY
+      - HARVEST_ARCHITECTURE
+    memory_model:
+      - firm_memory
+      - project_memory
+      - user_memory
+      - workflow_memory
+      - lifecycle_memory
+    production_policy:
+      - whole_floor_modeling
+      - 2d_to_3d
+      - dimensions_tags_callouts
+      - views_sheets
+      - annotation_collision_resolution
+      - qa_validation
+      - accessibility_check_and_fix
+      - document_reflow_after_design_change
+      - firm_guideline_audit
+      - dimension_coverage_qa
+      - approval_and_audit
+    note: low_level_api_is_not_the_primary_value
+
+  text2bim:
+    statuses:
+      - HARVEST_ARCHITECTURE
+      - HARVEST_MEMORY_PATTERN
+      - REJECT_ONLY_SPECIFIC_RUNTIME_MECHANISM
+    harvest:
+      agent_roles:
+        - product_owner
+        - architect_or_floorplan_designer
+        - coder
+        - reviewer
+      loop:
+        - model
+        - export_ifc
+        - independent_checker
+        - bcf_issue_guids
+        - reviewer
+        - patch_not_rewrite
+        - recheck
+      persistence:
+        - structured_state_json
+        - experiment_logging
+      reject:
+        - broad_generated_python_runtime_for_trusted_ac29_mutation
+
+  ifc_agent:
+    statuses:
+      - HARVEST_ARCHITECTURE
+      - HARVEST_MEMORY_PATTERN
+    execution:
+      heterogeneous_small:
+        - async_parallel_agents
+      homogeneous_large:
+        - sample_entities
+        - infer_toolchain
+        - observer_generalization
+        - deterministic_batch
+    memory:
+      - procedural_memory
+      - globalid_entity_cache
+      - stepid_entity_cache
+
+  design_healing:
+    statuses:
+      - HARVEST_ALGORITHM
+      - HARVEST_ARCHITECTURE
+    graph_scope:
+      - failure_location
+      - belonging_elements
+      - propagation_to_spaces
+      - associated_parameters
+      - restriction_by_properties
+      - restriction_by_length
+      - restriction_by_connectivity
+      - active_passive_constraint_parameters
+    search:
+      - morris_sensitivity
+      - conditioned_or_lhs_sampling
+      - compliance_black_box
+      - weighted_euclidean_distance
+    sbim_extension:
+      weighted_disruption_priority:
+        - mandatory_safety
+        - function
+        - design_intent
+        - structure_mep_document_dependencies
+        - graph_radius
+        - cost_time
+        - geometric_deviation
+
+  code_companion:
+    statuses:
+      - HARVEST_SCHEMA
+      - HARVEST_ARCHITECTURE
+    rule_ir:
+      - rule_identifier
+      - source_version_clause
+      - measurable_variable
+      - comparison_operator
+      - threshold_or_condition
+      - unit
+      - applicability
+      - exceptions_dependencies
+      - model_evidence
+      - explanatory_output
+      - computability_class
+      - validation_status
+      - executable_reference
+    computability_classes:
+      - deterministic
+      - conditionally_deterministic
+      - interpretation_dependent
+    activation_rule: llm_draft_cannot_be_active_without_human_verified_formalization
+
+  building_information_graphs:
+    statuses:
+      - HARVEST_SCHEMA
+      - HARVEST_ARCHITECTURE
+    canonical_graph:
+      - discipline_subgraphs
+      - interdisciplinary_meta_graph
+      - objectified_relationship_nodes
+      - relationship_condition_operator_status
+      - explicit_design_intent
+      - change_propagation
+    versioning:
+      - object_level_diff
+      - relation_level_diff
+      - incremental_update
+      - branch
+      - merge
+      - variants
+      - history
+    kernel_target:
+      - monotonic_revision_for_fast_stale_guard
+      - object_relation_delta_history_for_canonical_revision
+
+  delta_flow:
+    statuses:
+      - HARVEST_ARCHITECTURE
+      - BENCHMARK_PRODUCTION_POLICY
+    benchmark:
+      - canonical_building_model
+      - project_knowledge_graph
+      - design_intent
+      - site_intelligence
+      - code_and_standards
+      - coordination_clash
+      - quantities_cost
+      - documentation
+      - neuro_symbolic_reasoning
+    limitation:
+      - insufficient_public_runtime_schema_api_evidence
+
+  graphisoft_official_mcp_creator:
+    statuses:
+      - FUTURE_VERSION_CANDIDATE
+    target: Archicad_30
+    action_now:
+      - research_only
+      - no_active_ac29_scope_expansion
+
+composite_stack_hypothesis:
+  planner:
+    sources:
+      - text2bim_role_separation
+      - ifc_agent_adaptive_execution
+      - progressive_schema_discovery
+
+  memory:
+    organizational:
+      source: swapp
+      stores:
+        - firm
+        - project
+        - user
+        - workflow
+        - lifecycle
+    computational:
+      source: ifc_agent
+      stores:
+        - procedural_cache
+        - entity_cache
+
+  canonical_kernel:
+    source: building_information_graphs
+    structures:
+      - discipline_subgraphs
+      - meta_graph
+      - objectified_constraints
+      - object_delta_history
+
+  rules:
+    source: code_companion
+    model:
+      - verified_rule_ir
+      - deterministic_execution
+      - explicit_human_review_for_ambiguous_rules
+
+  healing:
+    source: design_healing
+    model:
+      - graph_impact_scope
+      - sensitivity_screening
+      - constrained_search
+      - compliance_check
+      - minimum_disruption_ranking
+
+  ac29_execution:
+    providers:
+      primary_candidate: huskybim
+      open_reference_fallback: tapir
+      residual_gap: native_addon
+
+  mcp_surface:
+    sources:
+      - szamosi_schema_generated_tools
+      - boti_progressive_discovery
+
+  safety:
+    sources:
+      - archi_automate_system_guardrails
+      - alesdev_changesets_and_project_binding
+      - tapir_single_undo_scope
+      - sbim_stale_guard_idempotency_operation_ledger
+      - independent_readback
+
+  cross_host_openbim:
+    primary_candidate: archi_automate
+
+  documentation:
+    primitive_execution:
+      - husky
+      - tapir
+    production_policy_benchmark:
+      - swapp
+    custom_scope:
+      - office_and_project_specific_policy_not_available_elsewhere
+
+deep_research_queue:
+  - HUSKY_DEEP_01
+  - HUSKY_GEOM_01
+  - HUSKY_TXN_01
+  - HUSKY_DOC_01
+  - HUSKY_COMPLEX_01
+  - OPENSTACK_DEEP_01
+  - ARCHI_AUTOMATE_DEEP_01
+  - SWAPP_DEEP_01
+  - GRAPH_KERNEL_01
+  - MEMORY_01
