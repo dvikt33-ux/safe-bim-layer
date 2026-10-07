@@ -110,10 +110,21 @@ def matching_window(element, signature):
     if not isinstance(host, str) or host.lower() != signature['sourceGuid'].lower():
         return False
     ref = element.get('placement', {}).get('referenceGeometry', {})
-    center = ref.get('centerOffsetAlongHost')
-    return (type(center) in (int, float) and math.isfinite(center)
-            and abs(float(center)-signature['centerOffset']) <= signature['tolerance']
-            and bool(element.get('bodies')))
+    numeric = {
+        'centerOffsetAlongHost': signature['centerOffset'],
+        'sillHeight': signature['sillHeight'],
+        'width': signature['width'],
+        'height': signature['height'],
+    }
+    for key, expected in numeric.items():
+        actual = ref.get(key)
+        if type(actual) not in (int, float) or not math.isfinite(actual):
+            return False
+        if abs(float(actual)-expected) > signature['tolerance']:
+            return False
+    if ref.get('refSide') not in (False, 0) or ref.get('reflected') not in (False, 0):
+        return False
+    return bool(element.get('bodies'))
 
 
 def _host_aperture_changed(before_host, current_host):
