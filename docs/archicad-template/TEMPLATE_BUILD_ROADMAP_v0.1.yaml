@@ -128,8 +128,31 @@ phases:
       - transfer_sets_xml
       - issue_test_evidence
       - migration_manifest
+      - addon_manifest
+      - workstation_bundle_manifest
+      - runtime_profile_manifest
+
+workstation_bundle:
+  status: specified_needs_live_validation
+  architecture_doc: WORKSTATION_BUNDLE_ARCHITECTURE_v0.1.md
+  rule: add_ons_are_workstation_level_not_tpl_embedded
+  paired_release:
+    - AC29_RU_SBIM_1.0.tpl
+    - TDK_AC29_WE
+    - addon_manifest
+    - libraries_and_fonts
+    - exchange_presets
+    - runtime_profile_manifest
+  priorities:
+    - finish_tpl_candidate
+    - export_and_version_ac29_native_work_environment
+    - evaluate_huskybim_before_more_generic_writers
+    - evaluate_drofus_before_custom_room_equipment_database
+    - add_workstation_preflight
+    - prototype_process_compose_runtime
 
 immediate_next_actions:
+  - finish_current_template_materialization_before_expanding_plugin_stack
   - open_clean_archicad_29_candidate_project
   - run: python scripts/archicad_template_builder.py validate
   - run: python scripts/archicad_template_builder.py inspect
