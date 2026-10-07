@@ -6,6 +6,8 @@ on:
       - feature/working-archicad-mvp
     paths:
       - 'scripts/archicad_template_builder.py'
+      - 'scripts/promote_archicad_template_gate.py'
+      - 'scripts/promote_archicad_template_gate.py'
       - 'scripts/requirements-template.txt'
       - 'docs/archicad-template/**'
       - '.github/workflows/archicad-template-validate.yml'
@@ -32,6 +34,9 @@ jobs:
 
       - name: Compile template builder
         run: python -m py_compile scripts/archicad_template_builder.py
+
+      - name: Compile live gate promotion helper
+        run: python -m py_compile scripts/promote_archicad_template_gate.py
 
       - name: Parse all template YAML files
         run: |
