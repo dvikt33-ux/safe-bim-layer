@@ -113,3 +113,28 @@ Compared with the historical Stage-4 verifier baseline (~115-118 s), this is
 approximately a 4.9x speedup while reproducing the existing S4-06 Audit Pack
 byte-for-byte and retaining source SHA verification, semantic-delta verification,
 absolute-path scanning and independent verifier extraction.
+
+
+## Fast historical revalidation
+
+The Stage 4 offline-proof no longer has to semantically re-extract Stage 1 and
+Stage 3 on every performance iteration when all accepted anchors are unchanged.
+
+The default path now:
+
+1. requires `scripts/audit_pack.py` to be byte-identical to the VERIFIED
+   `faf2fd8` milestone;
+2. requires the historical Audit Pack `source.json` and
+   `audit-pack-manifest.json` to be byte-identical to that milestone;
+3. requires the milestone Stage 4 acceptance report to remain VERIFIED with all
+   required criteria PASS;
+4. re-hashes every raw source/evidence record referenced by the accepted source
+   contract and compares SHA-256 + byte size;
+5. re-hashes every compact derived Audit Pack file and checks the exact file set.
+
+Only then is the already-accepted semantic PASS reused. Any mismatch automatically
+falls back to the original full historical verifier. Operators can also force
+the old behavior with `--full-historical`.
+
+The offline-proof now prints and persists timings for regression tests, each
+historical Stage 1/3 check, every offline fixture, and total wall-clock time.
