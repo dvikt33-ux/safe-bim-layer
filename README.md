@@ -38,7 +38,8 @@ One stage must be formally complete before the next capability is added.
 - Stage 2 — closed-loop orchestrator skeleton: **PASS**
 - Stage 3 — first live two-step Wall loop: **PASS**
 - Stage 4 — reliability hardening of that same Wall loop: **PASS / VERIFIED**
-- Stage 5 — **NOT STARTED**; now permitted after Stage 4 PASS
+- Stage 4 performance/evidence-I/O cleanup — **PASS / VERIFIED**
+- Stage 5 — **NOT STARTED**; permitted
 
 See [docs/CLOSED_LOOP_IMPLEMENTATION_STAGES.md](docs/CLOSED_LOOP_IMPLEMENTATION_STAGES.md)
 for the full gate policy.
@@ -64,7 +65,22 @@ synthetic Wall fixture. It must never fall back to arbitrary building Walls.
 
 Detailed procedure: [docs/STAGE4_LIVE_HARDENING.md](docs/STAGE4_LIVE_HARDENING.md).
 
-## Proven lower-level BIM capabilities
+## Verified performance baseline
+
+The post-Stage-4 performance pass preserves the frozen `faf2fd8` safety
+semantics while reducing evidence-processing overhead.
+
+Accepted measurements:
+
+- retained S4-06 Audit Pack verify: ~117.6 s -> 23.732 s;
+- complete Stage 4 offline proof: 195.744 s -> 22.367 s;
+- focused regressions: 58/58 PASS;
+- historical Stage 1/3 evidence: fast SHA-anchored revalidation with fail-closed
+  fallback to the original full verifier.
+
+See `docs/STAGE4_PERFORMANCE_PASS.md` and
+`outputs/closed-loop-stage4/stage4-performance-acceptance.json`.
+
 
 The older executor/recipe layer remains useful and is being migrated upward rather than
 rewritten. It contains proven or partially proven recipes for Wall, Window, Door, Slab,
