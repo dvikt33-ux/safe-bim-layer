@@ -1,0 +1,385 @@
+{
+  "archicad": {
+    "archicad_build": "29.3000",
+    "archicad_version": "29",
+    "instance_hint": "port=19723",
+    "is_teamwork": false,
+    "is_untitled": false,
+    "port": 19723,
+    "project_name": "MCP_TEST",
+    "project_path": "C:\\PLN\\MCP_TEST.pln"
+  },
+  "backends": {
+    "mcp": {
+      "available": false,
+      "detail": "initialize failed: 2025-06-18: URLError: <urlopen error [Errno 111] Connection refused> | 2025-03-26: URLError: <urlopen error [Errno 111] Connection refused> | 2024-11-05: URLError: <urlopen error [Errno 111] Connection refused>"
+    },
+    "tapir": {
+      "available": false,
+      "detail": "BackendError: package 'archicad' is not installed"
+    }
+  },
+  "capabilities": {
+    "count_by_type": {
+      "backend": "tapir",
+      "evidence": {
+        "counts": {
+          "Door": 0,
+          "Slab": 1,
+          "Wall": 2,
+          "Window": 0
+        }
+      },
+      "notes": [],
+      "supported": true
+    },
+    "elements_by_type": {
+      "backend": "tapir",
+      "evidence": {
+        "dropped_no_guid": 0,
+        "raw_count": 2,
+        "sample": [
+          "G-0001",
+          "G-0002"
+        ],
+        "wall_count": 2
+      },
+      "notes": [],
+      "supported": true
+    },
+    "layer_name_via_property": {
+      "backend": "tapir",
+      "evidence": {
+        "address": "ModelView_LayerName",
+        "resolved": {
+          "G-0001": "A-WALL",
+          "G-0002": "A-WALL"
+        }
+      },
+      "notes": [],
+      "supported": true
+    },
+    "list_guids": {
+      "backend": "tapir",
+      "evidence": {
+        "n": 3,
+        "sample": [
+          "G-0001",
+          "G-0002",
+          "G-0003"
+        ]
+      },
+      "notes": [],
+      "supported": true
+    },
+    "mcp_tools_list": {
+      "backend": "mcp",
+      "evidence": {},
+      "notes": [
+        "MCP-бэкенд не отвечает; runtime tools/list не получен"
+      ],
+      "supported": false
+    },
+    "port_project_discovery": {
+      "backend": "tapir",
+      "evidence": {
+        "detail": [
+          {
+            "_error": "BackendError: package 'archicad' is not installed",
+            "note": "порт не ответил; причина ниже",
+            "port": 19723
+          },
+          {
+            "_error": "BackendError: package 'archicad' is not installed",
+            "note": "порт не ответил; причина ниже",
+            "port": 19724
+          }
+        ],
+        "ports": [
+          19723,
+          19724
+        ]
+      },
+      "notes": [
+        "ни один из портов [19723, 19724] не ответил"
+      ],
+      "supported": false
+    },
+    "project_identity": {
+      "backend": "tapir",
+      "evidence": {
+        "archicad_build": "29.3000",
+        "archicad_version": "29",
+        "instance_hint": "port=19723",
+        "is_teamwork": false,
+        "is_untitled": false,
+        "port": 19723,
+        "project_name": "MCP_TEST",
+        "project_path": "C:\\PLN\\MCP_TEST.pln"
+      },
+      "notes": [],
+      "supported": true
+    },
+    "read_custom_property": {
+      "backend": "tapir",
+      "evidence": {
+        "address": "BIMEXEC/BIMEXEC_MARKER",
+        "evidence_kind": "property_id_resolved",
+        "note": "свойство существует и разрешается по адресу; значения пусты — ожидаемо до T0B",
+        "resolved": {}
+      },
+      "notes": [],
+      "supported": true
+    },
+    "read_element_id": {
+      "backend": "tapir",
+      "evidence": {
+        "address": "builtin:General_ElementID",
+        "resolved": {
+          "G-0001": "W-TEST-001",
+          "G-0002": "W-TEST-002"
+        }
+      },
+      "notes": [],
+      "supported": true
+    },
+    "search_scan": {
+      "backend": "tapir",
+      "evidence": {
+        "address": "builtin:General_ElementID",
+        "method": "client-side scan of property values + startswith",
+        "negative_exact_hits": 0,
+        "negative_prefix_hits": 0,
+        "positive_exact_hits": 1,
+        "positive_prefix_hits": 2,
+        "probe_guid": "G-0001",
+        "probe_value": "W-TEST-001",
+        "scanned_elements": 3
+      },
+      "notes": [],
+      "supported": true
+    },
+    "stories_index_map": {
+      "backend": "tapir",
+      "evidence": {
+        "stories": [
+          {
+            "elevation": 0.0,
+            "index": 0,
+            "name": "Ground Floor"
+          },
+          {
+            "elevation": 3.0,
+            "index": 1,
+            "name": "Floor 1"
+          }
+        ]
+      },
+      "notes": [],
+      "supported": true
+    },
+    "tapir_addon_version": {
+      "backend": "tapir",
+      "evidence": {
+        "version": "1.5.9"
+      },
+      "notes": [],
+      "supported": true
+    },
+    "tapir_native_prefix_search": {
+      "backend": null,
+      "evidence": {},
+      "notes": [
+        "NOT FOUND: отдельной Tapir-команды поиска по префиксу user-defined property локально нет; поиск реализуется клиентским сканом"
+      ],
+      "supported": false
+    },
+    "tapir_read_commands": {
+      "backend": "tapir",
+      "evidence": {
+        "broken": [],
+        "commands": {
+          "tapir.API.GetAttributesByType": {
+            "error": null,
+            "ok": true
+          },
+          "tapir.API.GetLayerAttributes": {
+            "error": null,
+            "ok": true
+          },
+          "tapir.API.GetPropertyIds": {
+            "error": null,
+            "ok": true
+          },
+          "tapir.API.GetPropertyValuesOfElements": {
+            "error": null,
+            "ok": true
+          },
+          "tapir.GetAddOnVersion": {
+            "error": null,
+            "ok": true
+          },
+          "tapir.GetAllElements": {
+            "error": null,
+            "ok": true
+          },
+          "tapir.GetDetailsOfElements": {
+            "error": null,
+            "ok": true
+          },
+          "tapir.GetElementsByType": {
+            "error": null,
+            "ok": true
+          },
+          "tapir.GetProjectInfo": {
+            "error": null,
+            "ok": true
+          },
+          "tapir.GetPropertyValuesOfElements": {
+            "error": null,
+            "ok": true
+          },
+          "tapir.GetStories": {
+            "error": null,
+            "ok": true
+          }
+        }
+      },
+      "notes": [],
+      "supported": true
+    },
+    "wall_geometry_endpoints": {
+      "backend": "tapir",
+      "evidence": {
+        "guid": "G-0001",
+        "missing": [],
+        "normalized": {
+          "angle": 0.0,
+          "element_id": "W-TEST-001",
+          "floor_index": 0,
+          "height": 3.0,
+          "layer": null,
+          "layer_index": 3,
+          "length": 5.0,
+          "ref_line": {
+            "from": [
+              1.5,
+              2.5
+            ],
+            "to": [
+              6.5,
+              2.5
+            ]
+          },
+          "story": null,
+          "thickness": 0.3,
+          "type": "Wall"
+        }
+      },
+      "notes": [],
+      "supported": true
+    }
+  },
+  "discovery": [
+    {
+      "_error": "BackendError: package 'archicad' is not installed",
+      "note": "порт не ответил; причина ниже",
+      "port": 19723
+    },
+    {
+      "_error": "BackendError: package 'archicad' is not installed",
+      "note": "порт не ответил; причина ниже",
+      "port": 19724
+    }
+  ],
+  "duplicate_detection": "SCAN_PREFIX",
+  "generated_at": "2026-09-26T19:37:48Z",
+  "marker_carriers_readable": [
+    "element_id",
+    "property"
+  ],
+  "operations": {
+    "create_wall": {
+      "blocked_by": [
+        "T0B_marker_roundtrip_not_run"
+      ],
+      "guard": "backends.py: _assert_not_forbidden() отклоняет любую команду из hard_blocked_commands до отправки в Archicad",
+      "hard_blocked_commands": [
+        "ChangeSelection",
+        "CreateColumns",
+        "CreateObjects",
+        "CreateSlabs",
+        "CreateWalls",
+        "CreateZones",
+        "DeleteElements",
+        "MoveElements",
+        "RotateElements",
+        "SetSelection"
+      ],
+      "implemented_here": false,
+      "note": "create_wall НЕ разрешён до T0B",
+      "production_safe": false
+    }
+  },
+  "probe": "T0A",
+  "raw_dumps": {
+    "GetDetailsOfElements_sample": {
+      "details": {
+        "wall": {
+          "begCoordinate": {
+            "x": 1.5,
+            "y": 2.5
+          },
+          "endCoordinate": {
+            "x": 6.5,
+            "y": 2.5
+          },
+          "height": 3.0,
+          "referenceLineLocation": "Center",
+          "structureType": "Basic",
+          "thickness": 0.3
+        }
+      },
+      "drawIndex": 7,
+      "floorIndex": 0,
+      "hotlinkId": null,
+      "id": "W-TEST-001",
+      "layerIndex": 3,
+      "type": "Wall"
+    },
+    "GetStories": [
+      {
+        "elevation": 0.0,
+        "index": 0,
+        "name": "Ground Floor"
+      },
+      {
+        "elevation": 3.0,
+        "index": 1,
+        "name": "Floor 1"
+      }
+    ]
+  },
+  "t0b_candidates": [
+    {
+      "element_id": "W-TEST-001",
+      "guid": "G-0001",
+      "layer": null,
+      "story_index": 0,
+      "type": "Wall"
+    },
+    {
+      "element_id": "W-TEST-002",
+      "guid": "G-0002",
+      "layer": null,
+      "story_index": 0,
+      "type": "Wall"
+    }
+  ],
+  "verdicts": {
+    "executed": true,
+    "next_step": "T0B",
+    "t0a_go": true
+  },
+  "version": "1.2"
+}

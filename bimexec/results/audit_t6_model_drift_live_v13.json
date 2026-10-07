@@ -1,0 +1,34 @@
+{
+  "audit": "T6_MODEL_DRIFT",
+  "version": "1.0",
+  "branch": "arena/t0-probes",
+  "tested_code_sha": "f9120b20032e4c8a63f8f1be246274e2a8c48611",
+  "project": "C:\\Users\\Admin\\Downloads\\MCP_TEST.pln",
+  "source_guid": "2E42AEAB-E49C-40EC-9E95-CDCD08B25AF8",
+  "dependent_guid": "EFAA5DBD-44A6-40D4-BCFF-574A5BBE4694",
+  "baseline_geometry": {
+    "ref_line": {
+      "from": [20.0, 0.0],
+      "to": [26.0, 0.0]
+    },
+    "height": 3.0,
+    "thickness": 0.3
+  },
+  "current_geometry": {
+    "ref_line": {
+      "from": [20.0, 1.0],
+      "to": [26.0, 1.0]
+    },
+    "height": 3.0,
+    "thickness": 0.3
+  },
+  "manual_action": "source wall moved manually in Archicad between durable baseline and verify read-back",
+  "verify_status": "PAUSED(MODEL_DRIFT)",
+  "verify_exit_code": 1,
+  "dependent_dispatch_count": 0,
+  "dependent_mutation_dispatched": false,
+  "verify_read_only": true,
+  "automatic_retry": false,
+  "automatic_mutation_after_drift": false,
+  "audit_result": "PASS"
+}

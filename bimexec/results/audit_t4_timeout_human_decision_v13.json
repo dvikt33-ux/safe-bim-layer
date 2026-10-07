@@ -1,0 +1,19 @@
+{
+  "probe": "AUDIT_T4_TIMEOUT_HUMAN_DECISION",
+  "version": "1.1",
+  "source_classification": "APPLIED_ADOPTABLE_BY_ANCHOR",
+  "candidate_guid": "014E2C00-C0D6-4F81-AE7E-B7B5F04D17A8",
+  "human_decision": "ADOPT",
+  "audit_disposition": "ADOPT_ACCEPTED",
+  "runtime_resume_performed": false,
+  "automatic_retry_allowed": false,
+  "automatic_adopt_performed": false,
+  "model_mutation_performed_by_decision": false,
+  "artifact_policy": "keep existing T4 wall as the result of the single timed-out operation; no retry, duplicate create, delete, undo, move, or rotate",
+  "supersedes_previous_decision": {
+    "decision": "ABORT",
+    "commit": "0797988d691302178f7a3df1847adc97ec600aa0",
+    "reason": "User immediately clarified that ABORT was a joke and explicitly selected ADOPT."
+  },
+  "note": "Human explicitly selected ADOPT for the unique wall offered by the read-only T4 reconcile. This records the corrected audit decision only; no Archicad mutation or automatic runtime resume was performed. Git history preserves the superseded ABORT record for traceability."
+}
