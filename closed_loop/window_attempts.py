@@ -127,6 +127,13 @@ def matching_window(element, signature):
     return bool(element.get('bodies'))
 
 
+def _body_semantic_hash(element):
+    bodies = deepcopy(element.get('bodies', []))
+    for body in bodies:
+        body.pop('nativeBodyIndex', None)
+    return fingerprint(bodies)
+
+
 def _host_aperture_changed(before_host, current_host):
     # A hosted Window changes host topology but must not replace/move the Wall.
     br = before_host.get('placement', {}).get('referenceGeometry', {})
@@ -137,7 +144,7 @@ def _host_aperture_changed(before_host, current_host):
     before_bodies, current_bodies = before_host.get('bodies', []), current_host.get('bodies', [])
     if not before_bodies or not current_bodies:
         return False
-    return fingerprint(before_bodies) != fingerprint(current_bodies)
+    return _body_semantic_hash(before_host) != _body_semantic_hash(current_host)
 
 
 def reconcile_window_attempt(attempt, before, current, identity, journal):
