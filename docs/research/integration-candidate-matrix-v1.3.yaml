@@ -1,0 +1,248 @@
+version: 1.3
+date: 2026-10-08
+status: research_draft
+current_target: Archicad_29
+
+construction_system_envelope:
+  concept: expanded_approved_construction_primitive
+  selection_before_final_geometry: true
+  geometry_derived_from_system: true
+  fields:
+    - system_family
+    - provider_source_version
+    - host_types
+    - structural_role
+    - thickness_envelope
+    - module_course_grid
+    - span_height_envelope
+    - opening_pier_lintel_grammar
+    - fire_acoustic_thermal_moisture
+    - appearance_family
+    - assembly_connection_grammar
+    - cost_schedule
+    - carbon_lca
+    - service_life
+    - maintenance_replacement
+    - circularity_disassembly
+    - archicad_recipe
+    - detail_families
+    - verification_recipe
+    - invalidation_triggers
+
+native_archicad29:
+  building_materials:
+    physical_properties: PASS
+    classifications_properties: PASS
+    decision: REUSE_NATIVE
+  composites:
+    layered_wall_slab_roof_shell: PASS
+    decision: REUSE_NATIVE
+  energy_evaluation:
+    structures: PASS
+    openings: PASS
+    u_r_values: PASS
+    glazing_frame: PASS
+    perimeter_psi: PASS
+    infiltration_shading: PASS
+    decision: REUSE_FIRST
+  ecodesigner_star:
+    detailed_thermal_bridge: PASS_PUBLIC_DOC
+    license_required: true
+    education_features_documented: PASS
+    priority: P0_LICENSE_AND_WORKFLOW_AUDIT
+
+russian_system_sources:
+  technonikol_navigator:
+    category: construction_system_and_detail_provider
+    system_selector: PASS
+    technical_albums: PASS
+    calculations_support: PASS
+    certificates_approvals: PASS
+    archicad_pla_catalog: PASS_PUBLIC_RESOURCE
+    archicad_building_materials_system_catalog: PASS_PUBLIC_RESOURCE
+    archicad_detail_element_catalog: PASS_PUBLIC_RESOURCE
+    archicad_node_album: PASS_PUBLIC_RESOURCE
+    priority: P0_AC29_SYSTEM_PACK_AUDIT
+
+  knauf_russia:
+    category: partition_ceiling_system_performance
+    thickness: PASS
+    acoustic_rw: PASS
+    fire_ei: PASS
+    height_limits: PASS
+    system_components: PASS
+    technical_documents: PASS
+    direct_archicad_library_verified: false
+    priority: P0_DATA_ADAPTER_REFERENCE
+
+  porotherm_russia:
+    category: masonry_system_grammar
+    product_dimensions: PASS
+    typical_nodes: PASS
+    structural_guidance: PASS
+    opening_pier_rules: PASS_CONDITION_DEPENDENT
+    lintel_and_wall_system_logic: PASS
+    direct_archicad_assets: PARTIAL_OR_UNVERIFIED
+    priority: P0_MASONRY_MODULE_GRAMMAR
+
+structural_concept:
+  branch_concept_lite:
+    shipping: true
+    free: true
+    browser: true
+    realtime_structural_analysis: PASS
+    steel_timber_concrete_hybrid: PASS_CURRENT_SITE
+    multibay: PASS
+    fire_rating_protection: PASS_CURRENT_SITE
+    quantities: PASS
+    carbon: PASS
+    direct_archicad_integration: NOT_VERIFIED
+    priority: P0_FREE_STRUCTURAL_ENVELOPE_TEST
+
+  branch_concept_full:
+    shipping_status: beta_waitlist_or_coming
+    complex_geometry: PLANNED_OR_BETA
+    codes_regions: PLANNED_OR_BETA
+    priority: WATCH
+
+  tenzor_design_studio:
+    status: RESEARCH_PREVIEW
+    production_dependency: false
+    multimodal_input: PUBLIC_ROADMAP
+    structural_scheme_generation: PUBLIC_ROADMAP
+    t0_t1_t2_analysis_ladder: PUBLIC_ROADMAP
+    pareto_cost_carbon_depth_schedule: PUBLIC_ROADMAP
+    decision: ARCHITECTURE_REFERENCE_ONLY
+
+  idea_statica:
+    category: structural_connection_and_detail_verification
+    local_rest_api: PASS
+    python_sdk: PASS
+    csharp_sdk: PASS
+    connection_library: PASS
+    propose_suitable_design_items: PASS
+    parametric_templates: PASS
+    cbfem_check: PASS
+    cost: PASS
+    ifc_export: PASS
+    iom: PASS
+    priority: P1_STRUCTURAL_NODE_ENGINE
+
+building_physics:
+  flixo:
+    thermal_bridge: PASS
+    psi: PASS
+    surface_temperature: PASS
+    condensation_mould_risk: PASS
+    dxf_import: PASS
+    parametric_variants: PASS
+    decision: REUSE_SPECIALIST_T2
+
+  schoeck_psi:
+    manufacturer_specific_junction_calculator: PASS
+    heat_flow: PASS
+    surface_temperature: PASS
+    psi: PASS
+    decision: REUSE_WHEN_SYSTEM_APPLICABLE
+
+  wufi:
+    hygrothermal: PASS
+    moisture_condensation: PASS
+    dynamic_heat_moisture: PASS
+    limited_free_options: PASS
+    decision: REUSE_SPECIALIST_T2
+
+  insul:
+    acoustic_prediction: PASS
+    walls_floors_ceiling_windows: PASS
+    trial: PASS
+    certified_test_data_still_preferred: true
+    decision: REUSE_SPECIALIST
+
+carbon_cost_circularity:
+  one_click_lca:
+    early_structural_system_compare: PASS
+    assembly_compare: PASS
+    embodied_carbon: PASS
+    operational_carbon_context: PASS
+    lifecycle_cost: PASS_2026
+    circularity: PASS_2026
+    service_life_replacement: PASS
+    archicad29_plugin_previously_verified: true
+    decision: REUSE_IF_LICENSE
+
+  madaster:
+    material_passports: PASS
+    circularity: PASS
+    maintenance_warranty_data: PASS
+    residual_value: PASS
+    disassembly_reuse: PASS
+    decision: OPTIONAL_FM_CIRCULARITY_REFERENCE
+
+detail_and_assembly:
+  bimsmith_forge:
+    free: true
+    revit_centric: true
+    materials_claim: 500000_plus
+    wall_floor_ceiling_roof: PASS
+    fire_stc_filtering: PASS
+    manufacturer_products: PASS
+    decision: REFERENCE_NOT_DIRECT_AC29_CORE
+
+  dfma_research:
+    connection_graph: PASS_RESEARCH
+    assembly_operations: PASS_RESEARCH
+    prefabricated_subsystems: PASS_RESEARCH
+    logistics_cost_carbon: PASS_RESEARCH
+    decision: METHOD_REFERENCE
+
+ranking:
+  hard_filter_first: true
+  known_methods:
+    - set_based_design
+    - AHP
+    - PROMETHEE
+    - NSGA_II
+    - pareto
+    - surrogate_models
+  llm_role:
+    - interpret_intent
+    - explain_tradeoffs
+    - propose_weights
+  llm_not_optimizer: true
+
+repair_hierarchy:
+  - move_or_reorient_equipment
+  - substitute_equipment
+  - substitute_system_within_same_geometry_envelope
+  - change_layer_or_product_preserving_geometry
+  - adjust_opening_within_module_and_facade_envelope
+  - move_low_impact_nonbearing_partition
+  - change_local_detail_family
+  - alter_member_within_structural_system_envelope
+  - move_high_impact_wall_or_grid
+  - change_structural_system_family
+  - change_massing_or_architectural_concept
+
+custom_blocked_pending_reuse:
+  - generic_material_property_database
+  - generic_u_value_engine
+  - generic_thermal_bridge_solver
+  - generic_hygrothermal_solver
+  - generic_acoustic_solver
+  - generic_lca_epd_engine
+  - generic_circularity_engine
+  - generic_lifecycle_cost_engine
+  - generic_construction_system_catalogue
+  - generic_manufacturer_detail_archive
+  - generic_steel_connection_solver
+  - generic_structural_connection_library
+  - generic_early_structural_sizing_engine
+  - generic_multicriteria_optimizer
+
+next_tests:
+  - CSE_01_TECHNONIKOL_AC29
+  - CSE_02_POROTHERM_MODULE
+  - CSE_03_KNAUF_PERFORMANCE
+  - STRUCT_01_BRANCH_LITE
+  - DETAIL_01B_THERMAL_BRIDGE_LADDER
