@@ -1,0 +1,176 @@
+version: 0.7
+date: 2026-10-08
+target: Archicad_29
+status: active_research
+supersedes: docs/research/layer-reuse-decision-matrix-v0.6.yaml
+
+primary_kpi: minimum_human_time_to_verified_deliverable_project
+
+runtime_model:
+  ui: one_coherent_archicad_interface
+  data_depth:
+    hot:
+      - selection
+      - active_story_view
+      - nearby_host_dependency_guids
+      - semantic_edit_target
+      - applicable_light_rules
+      - active_acp
+      - provider_shortlist
+    warm:
+      - guid_type_story_bbox
+      - key_properties_classifications
+      - host_links
+      - evaluated_plan_polygons
+      - graph_adjacency
+      - design_intent_constraints
+      - coverage_signatures
+    cold:
+      - full_evaluated_3d_topology
+      - face_material_provenance
+      - ifc_federation
+      - document_audit_payloads
+      - analysis_datasets
+      - donor_models
+
+coverage_signature:
+  purpose: eliminate_manual_rechecking_via_automatic_invalidation_and_incremental_reverification
+  fields:
+    - project_revision
+    - active_rule_pack_version
+    - source_norm_versions
+    - rule_ids
+    - evidence_class
+    - dependent_guids
+    - relevant_hashes
+    - checker_provider
+    - verified_at
+    - invalidation_triggers
+
+semantic_direct_modeling:
+  feasibility: confirmed_by_ac29_api_surface
+  hit_data:
+    - element_guid
+    - body_index
+    - polygon_index
+    - clicked_coordinate
+    - polygon_normal
+  principle: evaluated_face_to_owner_bim_element_to_native_semantic_parameter
+  morph_conversion: fallback_only
+
+provider_arbitration:
+  semantic_capability_ids: true
+  examples:
+    - wall.move_endpoint
+    - wall.set_height
+    - opening.resize
+    - opening.set_reveal
+    - slab.move_edge
+    - roof.set_eave
+    - detail.apply
+  ranking:
+    - semantic_fidelity
+    - safety_and_readback
+    - latency
+    - availability
+    - cost_and_context
+  ac29:
+    primary_broad_provider: huskybim
+    open_reference_fallback: tapir
+    native_role: fast_interaction_and_proven_gaps
+
+execution_levels:
+  light:
+    neural_model_required: false
+    path: gesture_to_semantic_command_to_rule_guard_to_execute_to_readback
+  medium:
+    path: intent_to_semantic_retrieval_to_top3_5_capabilities_to_bounded_macro_to_incremental_verify
+    routing_order:
+      - deterministic_aliases
+      - semantic_vector_retrieval
+      - tiny_function_model_if_ambiguous
+  heavy:
+    path: problem_to_impact_graph_to_intent_to_constraints_to_analysis_to_search_to_ranked_repair_to_coverage_gate
+    reuse:
+      - BIGs
+      - DIO
+      - PROV
+      - CAM_DSM
+      - Design_Healing
+      - OpenMDAO
+      - pymoo_Optuna_OR_Tools_Z3
+      - IFC_Agent
+      - specialist_checkers
+
+local_router:
+  deployment: sidecar_process
+  role:
+    - intent_classification
+    - capability_retrieval
+    - argument_extraction
+    - short_macro_selection
+    - escalation
+  forbidden_roles:
+    - normative_authority
+    - canonical_project_truth
+    - unrestricted_code_execution
+
+approved_construction_primitives:
+  native_foundations:
+    - Archicad_Favorites
+    - Transfer_Sets
+    - classifications_properties
+    - Complex_Profiles
+    - GDL_editable_hotspots
+    - PARAM_O
+  sbim_added_semantics:
+    - rule_ir_ids
+    - allowed_parameter_envelope
+    - verification_recipe
+    - invalidation_definition
+    - provenance
+    - approved_version
+    - documentation_detail_recipe
+
+donor_detail_priority:
+  - current_project_verified_acp
+  - firm_verified_acp
+  - matched_donor_project_detail
+  - manufacturer_or_tpd_detail
+  - generated_candidate
+
+specialized_paths:
+  parametric_geometry_heavy: grasshopper_archicad_29_live_connection
+  future_ac30_productivity: graphisoft_prokit
+  ac29_productivity_reference: ci_tools
+  qonic:
+    role: public_market_context_only
+    legal_boundary: no_software_use_for_competitive_benchmarking_or_reverse_engineering
+
+interoperability_reference:
+  BHoM:
+    status: architecture_reference
+    no_archicad_toolkit_found: true
+    possible_future: thin_adapter_only_if_measurable_integration_savings
+
+research_queue:
+  - HUSKY_DEEP_01
+  - HUSKY_GEOM_01
+  - HUSKY_TXN_01
+  - HUSKY_DOC_01
+  - HUSKY_COMPLEX_01
+  - CI_PROKIT_01
+  - FASTMODE_API_01
+  - ACP_01
+  - DONOR_DETAIL_01
+  - ROUTER_01
+  - COVERAGE_SIGNATURE_01
+  - DELTA_CHECK_01
+  - CYPE_01
+  - PROEKTOLOGIYA_01
+  - TANGL_01
+  - SPECKLE_01
+  - INTENT_GRAPH_01
+  - HEAVY_COMPILER_01
+
+governing_rule: broad_research_hidden_runtime_complexity_least_expensive_correct_path
