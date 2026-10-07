@@ -60,3 +60,17 @@ Archicad project files, raw local logs, or machine-specific integration results.
 5. If approved, a human merges the PR; then local Codex may perform a controlled
    validation against an explicitly selected copy of an Archicad project.
 
+
+## Native BIM minimality rule
+
+The Safe BIM Layer must optimize for **semantic fidelity with the fewest native Archicad elements**, not for convenience of script generation.
+
+1. A continuous physical wall with unchanged relevant properties is one Wall.
+2. Doors and windows are hosted Door / Window elements in that Wall; they are not produced by splitting the Wall around the opening.
+3. A Wall may be split only for a real construction/geometry reason: end, corner, true open gap, change of thickness, structure/material, elevation/story behavior, or another property that cannot be represented by a single Wall.
+4. Use the dedicated Archicad element type for the modeled object whenever available. Do not substitute Lines, Polylines, Arcs, Hatches, Morphs, or helper Wall fragments for native BIM elements.
+5. Do not create duplicate/overlapping hosts or helper BIM elements only for dimensions, selection, or scripting convenience when the real elements can serve as references.
+6. Before every write, simplify the element graph by merging compatible collinear/continuous runs. Every remaining split must have an explicit semantic or construction reason.
+7. Read-back validation must check not only geometry but also **unnecessary fragmentation**. If adjacent elements can be merged without changing geometry, semantics, hosted relationships, or required properties, the write is not accepted.
+
+Canonical rule: **minimum BIM element count, maximum native Archicad semantics**.
