@@ -1,3 +1,4 @@
+import json
 from collections import Counter
 from copy import deepcopy
 from pathlib import Path
@@ -85,10 +86,12 @@ class ScenarioPackTests(unittest.TestCase):
         b = deepcopy(self.before_data)
         a['nativeSeconds'] = 0.125
         b['nativeSeconds'] = 9.875
+        a['unresolvedBodyOwners'] = []
+        b['unresolvedBodyOwners'] = []
         first = self.scenario/'same-a.json'
         second = self.scenario/'same-b.json'
-        durable_json(first, a)
-        durable_json(second, b)
+        first.write_text(json.dumps(a, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
+        second.write_text(json.dumps(b, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
         contract = source_contract(self.root, self.scenario, [first, second], [(first, second)],
             [first, second], 'fixture', 'OFFLINE_FIXTURE')
         calls = []
@@ -104,7 +107,7 @@ class ScenarioPackTests(unittest.TestCase):
         snapshot_paths = set(contract['snapshots'])
         parsed_snapshots = [path for path in calls if path in snapshot_paths]
         self.assertEqual(len(parsed_snapshots), 1)
-        delta = __import__('json').loads(blobs['deltas/001.json'])
+        delta = json.loads(blobs['deltas/001.json'])
         self.assertEqual(delta['added'], [])
         self.assertEqual(delta['removed'], [])
         self.assertEqual(delta['changed'], [])
@@ -112,8 +115,6 @@ class ScenarioPackTests(unittest.TestCase):
     def test_nested_native_seconds_never_collapses_semantic_change(self):
         a = deepcopy(self.before_data)
         b = deepcopy(self.before_data)
-        a['nativeSeconds'] = 1.0
-        b['nativeSeconds'] = 2.0
         a['elements'][0]['properties']['nativeSeconds'] = 10
         b['elements'][0]['properties']['nativeSeconds'] = 11
         first = self.scenario/'nested-a.json'
