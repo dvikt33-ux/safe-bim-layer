@@ -219,3 +219,31 @@ between the continuously running local watcher and the next command-planning
 step: a local dispatcher can call this helper before every requested Archicad
 operation and include the returned JSON as current model context without
 regenerating the 100 MB native Model Dump.
+
+
+## Series 178 v0.2 — central stair visual pass
+
+After the direct 29-element skeleton has been created and its manifest exists at
+`%TEMP%\series178-direct-19725-created.json`, the next guarded pass creates
+exactly one provisional Stair in the verified central `3.6 m` bay. It uses
+standard Tapir commands only and refuses to run if the project, active story,
+skeleton GUID set, or prior v0.2 stair state do not match.
+
+Dry-run:
+
+```powershell
+python .\scripts\archicad_series178_v02_stair.py --port 19725
+```
+
+Execute after inspecting the plan:
+
+```powershell
+python .\scripts\archicad_series178_v02_stair.py --port 19725 --execute
+```
+
+The Stair dimensions in this pass are explicitly provisional visual
+reconstruction values. The script records the returned GUID immediately under
+`%TEMP%\safe-bim-mvp-evidence\series178-v02\stair.json`, reads the Stair
+back through Tapir, and never saves the PLN. Keep
+`archicad_change_watch.py` running in another terminal so the addition is
+independently visible in the live event stream.
