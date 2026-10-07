@@ -262,3 +262,32 @@ Safety behavior:
 - incomplete line grid -> `BLOCKED_FORM3_CORE_GEOMETRY`.
 
 No dynamic project/layout data is written in this stage. AutoText remains a separate gate.
+
+
+## 12. Master-context AutoText smoke
+
+Before production AutoText is written onto Master Layouts:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/run_archicad_template_live.ps1 -Stage master-context-autotext-smoke
+```
+
+This gate creates a disposable subset and Layout based on `A4_P`, switches to the `A4_P` Master Layout, and sets that Layout as the Master Layout rendering context through the native `SetMasterLayoutContextV1` command.
+
+Three layout-scoped AutoText tokens are then created **on the Master Layout itself**:
+
+- `<LAYOUTNAME>`
+- `<LAYOUTNUMBERINCURRENTSUBSET>`
+- `<NUMBEROFLAYOUTSINCURRENTSUBSET>`
+
+Their raw and interpreted values are read back through `GetCurrent2DDocumentV1`.
+
+PASS requires:
+
+- `LAYOUTNAME` resolves exactly to the disposable Layout name;
+- layout number in subset is non-empty;
+- number of layouts in current subset resolves to exactly `1`.
+
+Cleanup always clears the Master Layout context first, then deletes sacrificial Texts, Layout and subset. Model-element count must remain unchanged.
+
+This gate is the production-equivalent proof required before layout-scoped AutoText is added to the real Form 3 Master Layout.
