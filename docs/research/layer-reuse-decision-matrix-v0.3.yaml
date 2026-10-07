@@ -1,0 +1,191 @@
+version: 0.3
+date: 2026-10-08
+target: Archicad_29
+status: active_research
+
+decisions:
+  graphisoft_public_mcp:
+    action: DEFER_AC30
+    reason:
+      - current target AC29
+      - official MCP is AC30-era
+    keep_from_our_side:
+      - clean execution adapter boundary
+
+  nemetschek_creator:
+    action: DEFER_AC30
+    reason:
+      - current target AC29
+      - future early-design replacement candidate
+    keep_from_our_side:
+      - requirements
+      - russian rules
+      - scoring
+      - design_intent
+
+  archi_automate:
+    action: WRAP_OPTIONAL
+    best_for:
+      - cross_host_mcp
+      - qgis
+      - ifc
+      - ids
+      - bcf
+      - client_hub
+      - guardrails
+    archicad_write_scope_public:
+      - create_wall
+      - create_column
+      - create_slab
+      - move
+      - copy
+      - delete_by_guid
+    limitation: published_AC29_writer_is_narrow
+    primary_archicad_executor: false
+
+  huskybim_archicad29:
+    action: TAKE_AS_IS_PENDING_BENCHMARK
+    cost: free
+    broad_domains:
+      - elements
+      - geometry
+      - attributes
+      - layers
+      - classifications
+      - properties
+      - stories
+      - layouts
+      - drawings
+      - bcf
+      - issues
+    public_tool_count_conflict:
+      values:
+        - 687
+        - 733
+      required_action: enumerate_installed_tools
+    primary_archicad_executor_candidate: true
+
+  swapp_frank:
+    action: BENCHMARK_ONLY
+    strengths:
+      - archicad_live_write
+      - whole_floor_modeling
+      - documentation
+      - qa
+      - workflow_memory
+      - audit_trail
+    blocker:
+      - no_public_general_api_verified
+      - custom_credit_pricing
+      - russian_rules_unknown
+
+  delta_flow:
+    action: BENCHMARK_ONLY
+    strengths:
+      - canonical_building_model
+      - project_knowledge_graph
+      - design_intent
+      - site_intelligence
+      - generative_design
+      - compliance
+      - bim_operations
+      - project_intelligence
+    blocker:
+      - archicad_integration_unknown
+      - public_api_unknown
+      - russian_codes_unknown
+      - transaction_semantics_unknown
+
+  text2bim:
+    action: USE_METHOD
+    reuse:
+      - planner_designer_executor_separation
+      - bounded_tool_set
+      - independent_solibri_check
+      - bcf_issue_feedback
+      - reviewer_patch_loop
+      - experiment_logging
+    do_not_port:
+      - vectorworks_runtime
+      - freeform_generated_python_execution
+      - simple_session_state
+
+  design_healing:
+    action: USE_METHOD_BASELINE
+    pipeline:
+      - graph_topological_propagation
+      - progressive_scope_expansion
+      - morris_sensitivity_screening
+      - conditioned_latin_hypercube
+      - compliance_black_box
+      - weighted_distance_ranking
+    sbim_extension:
+      - lexicographic_project_disruption_objective
+      - architectural_intent
+      - structure_mep_detail_impact
+
+  ifc_agent:
+    action: USE_METHOD
+    reuse:
+      - adaptive_dual_mode_execution
+      - async_fine_grained_small_tasks
+      - sample_infer_bulk_large_homogeneous_tasks
+      - procedural_memory
+      - entity_semantic_cache
+      - dynamic_schema_guided_tool_composition
+
+  code_companion:
+    action: USE_METHOD
+    rule_ir_fields:
+      - identifier
+      - variable
+      - threshold_or_condition
+      - unit
+      - operator
+      - applicability
+      - model_binding
+      - executable_logic
+    safety_rule: LLM_draft_cannot_become_ACTIVE_without_verification
+
+  building_information_graphs:
+    action: USE_SCHEMA_REFERENCE
+    reuse:
+      - explicit_relationships
+      - change_propagation_concepts
+      - object_level_versioning_concepts
+
+custom_scope_after_audit:
+  keep:
+    - execution_capability_adapter
+    - native_AC29_event_revision_deep_geometry_gap_bridge
+    - canonical_project_kernel
+    - russian_normative_source_federation
+    - russian_legal_applicability_semantics
+    - rule_ir_project_bindings
+    - design_healing_project_disruption_extensions
+    - thin_router
+  stop_or_defer:
+    - generic_archicad_crud_writers
+    - generic_multi_host_mcp_gateway
+    - generic_ifc_parser
+    - generic_ids_validator
+    - generic_clash_engine
+    - generic_solver
+    - generic_agent_framework
+    - generic_rule_checker_engine
+    - custom_healing_search_from_scratch
+    - llm_reasoning_per_every_element
+    - giant_early_design_generator
+    - universal_bim_ontology
+
+tests:
+  TEST_AC29_01:
+    goal: enumerate_huskybim_actual_tool_surface
+  BIM_EXEC_01:
+    goal: compare_huskybim_vs_native_tapir_on_same_project
+  HEAL_01:
+    goal: reproduce_design_healing_baseline
+  RULE_IR_01:
+    goal: encode_one_verified_SP_rule_deterministically
+  AGENT_01:
+    goal: test_planner_executor_checker_repair_with_dual_memory
