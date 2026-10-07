@@ -1,0 +1,200 @@
+version: 0.3
+date: 2026-10-08
+status: research_draft
+current_target: Archicad_29
+
+new_candidates:
+  bimq:
+    category: information_requirements_and_validation_generation
+    archicad_templates: PASS
+    ifc_mapping: PASS
+    ids_authoring_export: PASS
+    solibri_rules: PASS
+    bimcollab_rules: PASS
+    desite_rules: PASS
+    mvdxml: PASS
+    ifc_reference_import: PASS
+    public_api: PASS_READ
+    write_api: UNKNOWN
+    free_trial_days: 30
+    priority: P0_TEST
+    likely_replaces:
+      - much_of_information_requirement_schema
+      - much_of_ifc_mapping_management
+      - checker_rule_generation
+      - part_of_archicad_template_information_setup
+
+  qonic:
+    category: openbim_model_state_version_and_agentic_bim
+    ifc_native: PASS
+    free_plan: PASS
+    free_plan_area_m2: 5000
+    free_active_projects: 1
+    free_models_per_project: 5
+    free_version_history: 1_week
+    public_api: PASS
+    oauth_pkce: PASS
+    model_read: PASS
+    property_write: PASS
+    external_edit_sessions: PASS
+    ifc_import_export: PASS
+    geometry_write_api: UNKNOWN
+    native_archicad_plugin: NOT_VERIFIED
+    priority: P0_FREE_PROTOTYPE
+    likely_replaces:
+      - part_of_openbim_shadow_state
+      - part_of_version_compare
+      - generic_property_query_api
+      - external_model_edit_session_layer
+
+  catenda:
+    category: cde_openbim_project_data_mcp
+    federated_ifc: PASS
+    bcf_3_api: PASS
+    open_cde: PASS
+    rest_api: PASS
+    webhooks: PASS
+    mcp: PASS_PUBLIC_CLAIM
+    audit_trail: PASS
+    iso_19650: PASS_PUBLIC_CLAIM
+    solo_student_cost_fit: POOR
+    priority: FUTURE_OFFICE_REFERENCE
+    likely_replaces:
+      - general_cde
+      - issue_store
+      - document_audit_layer
+      - office_scale_project_mcp
+
+  nbs_chorus:
+    category: structured_specification_and_model_linking
+    archicad_plugin: PASS
+    model_clause_link: PASS
+    decision_notes: PASS
+    reusable_masters: PASS
+    early_stage_specification: PASS
+    russian_content: FAIL
+    public_api: UNKNOWN
+    priority: ARCHITECTURE_REFERENCE
+    likely_replaces:
+      - generic_specification_linking_concept
+      - generic_decision_rationale_pattern
+
+semantic_standards:
+  ifc:
+    object_identity_and_openbim: PASS
+  ids:
+    information_requirements: PASS
+  bcf:
+    issue_and_viewpoint_exchange: PASS
+  open_cde:
+    foundation_api: PASS
+    documents_api: PASS
+  bsdd:
+    class_property_semantics: PASS
+    production_api: PASS
+  bot:
+    building_topology_ontology: PASS
+  opm:
+    temporal_property_management: PASS
+  recommendation: HYBRID_REUSE_NOT_NEW_UNIVERSAL_ONTOLOGY
+
+engineering:
+  ladybug_honeybee:
+    category: environmental_simulation
+    radiance: PASS
+    energyplus_openstudio: PASS
+    daylight: PASS
+    energy: PASS
+    thermal_comfort: PASS
+    sdk: PASS
+    open_source: PASS
+    decision: REUSE
+
+  archicad_collision:
+    builtin_ui: PASS
+    cxx_api_get_collisions: PASS
+    tolerances: PASS
+    criteria_sets: PASS
+    decision: REUSE_FIRST
+
+  archicad_mep_designer:
+    ventilation_calculations: PASS
+    duct_optimizer: PASS
+    hydronic_calculations: PASS
+    hydronics_optimizer: PASS
+    model_check: PASS
+    some_cloud_license_required: true
+    decision: REUSE_FIRST
+
+  archicad_saf:
+    structural_analytical_model: PASS
+    bidirectional_exchange: PASS
+    translators: PASS
+    model_compare: PASS
+    decision: REUSE
+
+  dlubal_api:
+    grpc_api: PASS
+    model_create_modify: PASS
+    loads: PASS
+    calculate: PASS
+    results: PASS
+    batch: PASS
+    decision: EVALUATE_EXTERNAL_FEA
+
+product_data:
+  bimobject:
+    oauth_api: PASS
+    search_api: PASS
+    download_api: PASS
+    international_content: PASS
+    decision: REUSE_ADAPTER
+
+  bimlib:
+    russian_catalog_models_reported: 50000_plus
+    archicad_files_in_catalog: PASS
+    archicad_live_plugin: NOT_VERIFIED
+    decision: REUSE_AS_RUSSIAN_PRODUCT_SOURCE
+
+research_code:
+  text2bim:
+    product_owner_agent: PASS
+    architect_agent: PASS
+    coder_executor: PASS
+    reviewer_checker: PASS
+    solibri_feedback_loop: PASS
+    explicit_tool_registry: PASS
+    production_runtime: FAIL
+    decision: BORROW_ARCHITECTURE_NOT_RUNTIME
+
+custom_code_after_audit:
+  retain:
+    - russian_normative_source_federation
+    - legal_applicability_semantics
+    - canonical_cross_system_ids
+    - architecture_specific_causal_edges
+    - design_intent_constraints
+    - validity_envelopes
+    - invalidation_policy
+    - cross_tool_transaction_orchestration
+    - healing_ranking_policy
+    - only_proven_AC29_event_or_deep_geometry_gaps
+  blocked_pending_reuse_test:
+    - generic_cde
+    - generic_model_version_store
+    - generic_bim_requirements_manager
+    - generic_ifc_mapping_manager
+    - generic_specification_manager
+    - daylight_energy_solver
+    - structural_fea_solver
+    - generic_mep_sizing
+    - generic_collision_engine
+    - manufacturer_catalog
+    - universal_bim_ontology
+    - generic_multi_agent_engine
+
+next_tests:
+  - BIMQ_AC29_TEMPLATE_01
+  - QONIC_FREE_SHADOW_01
+  - AC29_NATIVE_ENGINEERING_BASELINE_01
+  - HYBRID_SEMANTIC_GRAPH_01
