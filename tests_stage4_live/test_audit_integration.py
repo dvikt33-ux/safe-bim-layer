@@ -21,6 +21,7 @@ class ScenarioPackTests(unittest.TestCase):
         before, after, attempt = fixture()
         before['elements'][0]['bodies'] = [{'nativeBodyIndex': 1}]
         after['elements'][0]['bodies'] = [{'nativeBodyIndex': 9}]
+        self.before_data, self.after_data = deepcopy(before), deepcopy(after)
         self.before, self.after = self.scenario/'before.json', self.scenario/'after.json'
         self.record = self.scenario/'job.json'
         durable_json(self.before, before)
@@ -77,6 +78,52 @@ class ScenarioPackTests(unittest.TestCase):
         new_summary, new_index = stage4_pack._model_summary_once(after_data, 'fixture')
         self.assertEqual(new_summary, old_summary)
         self.assertEqual(new_index, old_index)
+
+
+    def test_timing_only_snapshots_share_one_semantic_parse(self):
+        a = deepcopy(self.before_data)
+        b = deepcopy(self.before_data)
+        a['nativeSeconds'] = 0.125
+        b['nativeSeconds'] = 9.875
+        first = self.scenario/'same-a.json'
+        second = self.scenario/'same-b.json'
+        durable_json(first, a)
+        durable_json(second, b)
+        contract = source_contract(self.root, self.scenario, [first, second], [(first, second)],
+            [first, second], 'fixture', 'OFFLINE_FIXTURE')
+        calls = []
+        original = stage4_pack._pinned_json_once
+
+        def counted(root, spec):
+            calls.append(spec['path'])
+            return original(root, spec)
+
+        with patch.object(stage4_pack, '_pinned_json_once', side_effect=counted):
+            blobs = stage4_pack.extract(self.root, contract)
+
+        snapshot_paths = set(contract['snapshots'])
+        parsed_snapshots = [path for path in calls if path in snapshot_paths]
+        self.assertEqual(len(parsed_snapshots), 1)
+        delta = __import__('json').loads(blobs['deltas/001.json'])
+        self.assertEqual(delta['added'], [])
+        self.assertEqual(delta['removed'], [])
+        self.assertEqual(delta['changed'], [])
+
+    def test_nested_native_seconds_never_collapses_semantic_change(self):
+        a = deepcopy(self.before_data)
+        b = deepcopy(self.before_data)
+        a['nativeSeconds'] = 1.0
+        b['nativeSeconds'] = 2.0
+        a['elements'][0]['properties']['nativeSeconds'] = 10
+        b['elements'][0]['properties']['nativeSeconds'] = 11
+        first = self.scenario/'nested-a.json'
+        second = self.scenario/'nested-b.json'
+        durable_json(first, a)
+        durable_json(second, b)
+        sa = stage4_pack.file_info(self.root, first.relative_to(self.root).as_posix())
+        sb = stage4_pack.file_info(self.root, second.relative_to(self.root).as_posix())
+        self.assertNotEqual(stage4_pack._semantic_source_key(self.root, sa),
+                            stage4_pack._semantic_source_key(self.root, sb))
 
 
 if __name__ == '__main__': unittest.main()
