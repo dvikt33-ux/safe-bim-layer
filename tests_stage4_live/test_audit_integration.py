@@ -72,8 +72,9 @@ class ScenarioPackTests(unittest.TestCase):
 
 
     def test_optimized_model_summary_is_byte_equivalent(self):
-        old_summary, old_index = model_summary(self.after, 'fixture')
-        new_summary, new_index = stage4_pack._model_summary_once(self.after, 'fixture')
+        after_data = read_json(self.after)
+        old_summary, old_index = model_summary(after_data, 'fixture')
+        new_summary, new_index = stage4_pack._model_summary_once(after_data, 'fixture')
         self.assertEqual(new_summary, old_summary)
         self.assertEqual(new_index, old_index)
 
