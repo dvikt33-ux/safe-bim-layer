@@ -175,7 +175,7 @@ class WindowOrchestratorTests(unittest.TestCase):
 
         self.reader.read_back = incomplete
         job = orch.run()
-        self.assertEqual(job.finalStatus, 'BLOCKED')
+        self.assertEqual(job.finalStatus, 'WAITING_FOR_DATA')
         self.assertEqual(self.executor.calls, 1)
 
 
