@@ -62,3 +62,29 @@ Before this branch can replace the Stage 4 milestone runtime:
 5. performance evidence must show the finalizer is faster on a representative retained Stage 4 evidence set.
 
 The verified `faf2fd8` milestone remains the rollback/reference baseline until all five checks pass.
+
+
+## Measured baseline on retained S4-06 evidence
+
+The first profiled performance-branch verification of the retained LIVE S4-06
+Audit Pack remained PASS and reduced wall-clock verification from the historical
+~115-118 s baseline to 71.497 s.
+
+Profiler breakdown before timing-only snapshot deduplication:
+
+- records: 128;
+- factual snapshots: 10;
+- total record bytes: 1948.1 MiB;
+- snapshot bytes: 1001.1 MiB;
+- extract total: 71.218 s;
+- pinned JSON read/parse: 39.250 s;
+- model summary/index: 29.483 s;
+- changed-path analysis: 0.078 s;
+- public scan: 0.259 s;
+- pack compare/other: 0.019 s.
+
+This measurement showed that manifest scanning and delta comparison were no
+longer material bottlenecks. The next optimization therefore deduplicates
+factual snapshots whose source bytes are identical except for the single
+top-level nativeSeconds value already excluded by the historical model-hash
+contract. Every source file still has to match its individually pinned raw SHA.
