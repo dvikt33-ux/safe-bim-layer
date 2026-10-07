@@ -111,6 +111,19 @@ class WindowAttemptTests(unittest.TestCase):
         self.assertFalse(native['reflected'])
         self.assertEqual(self.journal.value['nativeCalls'], 0)
 
+    def test_archicad_executor_uses_explicit_bound_window_plan(self):
+        from scripts.archicad_executor import plan_action
+        command, params, plan = plan_action('create_window', self.before, {
+            'action':'create_window', 'mode':'execute',
+            'sourceGuid':'host', 'centerOffset':5.0, 'sillHeight':0.9,
+            'width':1.2, 'height':1.5,
+        })
+        self.assertEqual(command, 'CreateWindows')
+        self.assertEqual(plan['wallGuid'], 'host')
+        self.assertEqual(plan['selectionRule'], 'explicit model-bound Hosted Window action')
+        self.assertEqual(params['windowsData'][0]['ownerWallId']['guid'], 'host')
+        self.assertEqual(params['windowsData'][0]['centerOffset'], 5.0)
+
     def test_invalid_opening_outside_host_is_rejected_before_attempt(self):
         bad = Action('create_window', {
             'sourceGuid':'host','centerOffset':0.2,'sillHeight':0.9,'width':1.2,'height':1.5})
