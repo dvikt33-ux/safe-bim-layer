@@ -1,0 +1,187 @@
+version: 0.2
+date: 2026-10-08
+status: research_draft
+
+execution_layers:
+  graphisoft_archicad_mcp:
+    maturity: beta_delivered_2026_10_07
+    archicad_version: 30
+    plan_requirement:
+      - Collaborate
+      - Max
+    first_party: true
+    structured_model_access: PASS
+    batch_edit: PASS
+    review_before_apply: PASS
+    one_step_undo: PASS
+    unsupported_elements_or_properties: PARTIAL
+    russian_normative_graph: FAIL
+    recommended_role: future_native_execution_layer
+
+  huskybim_archicad:
+    maturity: production_current
+    archicad_version: 29
+    price: free
+    first_party: false
+    broad_tool_surface: PASS
+    live_read_write: PASS
+    deep_geometry: UNKNOWN
+    event_stream: UNKNOWN
+    transaction_semantics: UNKNOWN
+    recommended_role: immediate_AC29_execution_candidate
+
+  archi_automate:
+    maturity: production_current
+    archicad_version: 29
+    price_monthly_usd_public: 17.40
+    trial_days: 14
+    multi_host: PASS
+    mcp: PASS
+    gpt_codex: PASS
+    governance_modes: PASS
+    action_history: PASS
+    qgis: PASS
+    ifc_ids_bcf: PASS
+    recommended_role: immediate_control_plane_and_execution_candidate
+
+  swapp_frank:
+    maturity: production_enterprise
+    archicad: PASS_PUBLIC_CLAIM
+    live_write: PASS_PUBLIC_CLAIM
+    whole_floor_modeling: PASS_PUBLIC_CLAIM
+    documentation: PASS_PUBLIC_CLAIM
+    qa: PASS_PUBLIC_CLAIM
+    workflow_memory: PASS_PUBLIC_CLAIM
+    russian_codes: UNKNOWN
+    public_api: UNKNOWN
+    recommended_role: benchmark_or_dependency_if_open_enough
+
+early_design:
+  nemetschek_creator:
+    maturity: early_access_2026_10
+    archicad_bidirectional: PASS_PUBLIC_CLAIM
+    site_context: PASS_PUBLIC_CLAIM
+    intent_based_iterative_design: PASS_PUBLIC_CLAIM
+    performance_analysis: PASS_PUBLIC_CLAIM
+    compliance: PASS_PUBLIC_CLAIM
+    recommended_role: highest_fit_early_design_candidate_for_archicad
+
+  snaptrude:
+    maturity: production
+    modular_ai_agents: PASS
+    site_analysis: PASS
+    code_research_with_citations: PASS
+    program_generation: PASS
+    storey_assignment: PASS
+    downstream_context_propagation: PASS
+    archicad_native: FAIL
+    recommended_role: reference_or_external_early_design_tool
+
+  hypar:
+    maturity: production
+    program_space_layout: PASS
+    dRofus_import: PASS
+    revit_rhino: PASS
+    archicad_native: FAIL
+    recommended_role: candidate_generator_reference
+
+  testfit:
+    maturity: production
+    feasibility: PASS
+    mcp: PASS
+    revit: PASS
+    archicad_native: FAIL
+    recommended_role: site_feasibility_candidate_generator
+
+compliance:
+  uptocode:
+    maturity: production
+    pdf: PASS
+    ifc: PASS
+    arbitrary_user_supplied_codes: PASS
+    cited_findings: PASS
+    russian_native_corpus: UNKNOWN
+    model_healing: FAIL
+    recommended_role: independent_multimodal_compliance_auditor
+
+  solibri:
+    maturity: mature_production
+    rule_engine: PASS
+    custom_rules: PASS
+    ids: PASS
+    cloud_checking_api: PASS
+    bcf_output: PASS
+    ai_assistant_beta: PASS
+    recommended_role: independent_deterministic_bim_qa
+
+research_methods:
+  text2bim:
+    natural_language_to_editable_bim: PASS
+    multi_agent: PASS
+    rule_checker: PASS
+    iterative_repair: PASS
+    action: source_architecture_audit
+
+  design_healing:
+    graph_impact_propagation: PASS
+    candidate_generation: PASS
+    compliance_repair: PASS
+    minimum_change_ranking: PASS
+    action: method_reproduction
+
+  ifc_agent:
+    schema_guided: PASS
+    adaptive_dual_mode: PASS
+    dual_memory: PASS
+    dynamic_tool_composition: PASS
+    action: memory_and_execution_architecture_audit
+
+  code_companion:
+    natural_language_regulations_to_rules: PASS
+    deterministic_bim_checking: PASS
+    cross_platform: PASS
+    action: rule_ir_audit
+
+  building_information_graphs:
+    graph_native_model: PASS
+    change_propagation: PASS
+    object_version_control: PASS
+    action: graph_schema_audit
+
+near_whole_system:
+  delta_flow:
+    project_knowledge_graph: PASS_PUBLIC_CLAIM
+    design_intent: PASS_PUBLIC_CLAIM
+    generative_design: PASS_PUBLIC_CLAIM
+    code_compliance: PASS_PUBLIC_CLAIM
+    bim: PASS_PUBLIC_CLAIM
+    project_intelligence: PASS_PUBLIC_CLAIM
+    archicad: UNKNOWN
+    russian_codes: UNKNOWN
+    public_api: UNKNOWN
+    action: P0_demo_and_technical_audit
+
+custom_scope_hypothesis:
+  likely_keep:
+    - russian_normative_source_federation
+    - legal_applicability_semantics
+    - canonical_project_requirement_identity
+    - rule_ir_bindings_to_project
+    - cross_tool_project_causal_state
+    - architectural_intent_policy
+    - design_healing_ranking_policy
+    - proven_archicad_deep_event_gaps
+  likely_reuse:
+    - generic_bim_crud
+    - generic_mcp_gateway
+    - generic_ifc_parser
+    - generic_clash_checking
+    - generic_ids_checking
+    - generic_solver_engines
+    - generic_graph_algorithms
+    - generic_process_supervisor
+    - much_of_early_design_generation
+    - much_of_documentation_automation
+
+coding_gate:
+  major_custom_sprint_frozen_until_P0_reuse_audit: true
