@@ -198,3 +198,36 @@ Each hypothesis places four labeled cross marks 10 mm inside the candidate paper
 No convention is selected automatically. All calibration Line/Text elements are deleted in a `finally` cleanup path after the answer, and model-element count must remain unchanged.
 
 A PASS from this stage proves only the convention selected by visual inspection. The returned JSON contains `confirmedConvention`; that convention must then be persisted in the coordinate-calibration registry before `apply-form3-core-geometry` is enabled.
+
+
+## 10. Form 3 core geometry
+
+This stage remains fail-closed until the coordinate calibration result is persisted:
+
+```yaml
+confirmed_convention: H1
+```
+
+or
+
+```yaml
+confirmed_convention: H2
+```
+
+Then run:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/run_archicad_template_live.ps1 -Stage form3-core
+```
+
+The writer targets every registered A4-A0 Master Layout and places only the verified 185×55 mm Form 3 **line grid**. Static labels and AutoText are deliberately excluded from this stage.
+
+Before writing each master it reads current 2D Lines through `GetCurrent2DDocumentV1`:
+
+- complete expected grid already present -> PASS, no duplicate creation;
+- only some expected segments present -> `BLOCKED_PARTIAL_FORM3_GEOMETRY`;
+- none present -> create all registered segments and read them back.
+
+The titleblock origin is calculated from the verified sheet size plus the normative 5 mm right/bottom frame insets. The Y formula depends exclusively on the persisted H1/H2 convention; no coordinate convention is guessed at runtime.
+
+The stage also requires model-element count to remain unchanged.
