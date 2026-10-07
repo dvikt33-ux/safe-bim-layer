@@ -22,32 +22,19 @@ X = [0.0, 3.0, 6.6, 9.6, 13.2, 16.8, 20.4, 23.4]
 Y = [0.0, 5.4, 7.8, 13.2]
 
 WALLS = [
-    ("EXT_S_01",(0,0),(3,0),0.30,"external"),
-    ("EXT_S_02",(3,0),(6.6,0),0.30,"external"),
-    ("EXT_S_03",(6.6,0),(9.6,0),0.30,"external"),
-    ("EXT_S_04",(9.6,0),(13.2,0),0.30,"external"),
-    ("EXT_S_05",(13.2,0),(16.8,0),0.30,"external"),
-    ("EXT_S_06",(16.8,0),(20.4,0),0.30,"external"),
-    ("EXT_S_07",(20.4,0),(23.4,0),0.30,"external"),
-    ("EXT_N_01",(0,13.2),(3,13.2),0.30,"external"),
-    ("EXT_N_02",(3,13.2),(6.6,13.2),0.30,"external"),
-    ("EXT_N_03",(6.6,13.2),(9.6,13.2),0.30,"external"),
-    ("EXT_N_04",(9.6,13.2),(13.2,13.2),0.30,"external"),
-    ("EXT_N_05",(13.2,13.2),(16.8,13.2),0.30,"external"),
-    ("EXT_N_06",(16.8,13.2),(20.4,13.2),0.30,"external"),
-    ("EXT_N_07",(20.4,13.2),(23.4,13.2),0.30,"external"),
-    ("EXT_W_01",(0,0),(0,5.4),0.30,"external"),
-    ("EXT_W_02",(0,5.4),(0,7.8),0.30,"external"),
-    ("EXT_W_03",(0,7.8),(0,13.2),0.30,"external"),
-    ("EXT_E_01",(23.4,0),(23.4,5.4),0.30,"external"),
-    ("EXT_E_02",(23.4,5.4),(23.4,7.8),0.30,"external"),
-    ("EXT_E_03",(23.4,7.8),(23.4,13.2),0.30,"external"),
+    # Four continuous exterior walls. Openings are hosted Door/Window elements,
+    # never wall breaks.
+    ("EXT_S",(0,0),(23.4,0),0.30,"external"),
+    ("EXT_N",(0,13.2),(23.4,13.2),0.30,"external"),
+    ("EXT_W",(0,0),(0,13.2),0.30,"external"),
+    ("EXT_E",(23.4,0),(23.4,13.2),0.30,"external"),
 
+    # Continuous internal wall runs from the user's red markup.
+    # A run is split only where the drawing actually has no wall, not at doors.
     ("V_X3_N",(3.0,8.93),(3.0,13.2),0.16,"panel"),
     ("V_X3_S",(3.0,0.0),(3.0,7.8),0.16,"panel"),
     ("V_X66_N",(6.6,6.75),(6.6,13.2),0.16,"panel"),
-    ("V_X66_S1",(6.6,0.0),(6.6,2.10),0.16,"panel"),
-    ("V_X66_S2",(6.6,2.30),(6.6,3.95),0.16,"panel"),
+    ("V_X66_S",(6.6,0.0),(6.6,3.95),0.16,"panel"),
     ("V_X96_N",(9.6,6.75),(9.6,13.2),0.16,"panel"),
     ("V_X924_S",(9.24,0.0),(9.24,3.95),0.16,"panel"),
     ("V_X132",(13.2,0.0),(13.2,13.2),0.16,"panel"),
@@ -64,20 +51,11 @@ WALLS = [
     ("H_N_L_ROOM",(0.0,8.93),(3.0,8.93),0.16,"panel"),
     ("H_N_R_ROOM",(20.4,8.93),(23.4,8.93),0.16,"panel"),
 
-    ("H_B_L",(0.0,7.8),(3.0,7.8),0.16,"panel"),
-    ("H_B_LC",(3.0,7.8),(6.6,7.8),0.16,"panel"),
-    ("H_B_C1",(6.6,7.8),(9.6,7.8),0.16,"panel"),
-    ("H_B_STAIR",(9.6,7.8),(13.2,7.8),0.16,"panel"),
-    ("H_B_C2",(13.2,7.8),(16.8,7.8),0.16,"panel"),
-    ("H_B_RC",(16.8,7.8),(20.4,7.8),0.16,"panel"),
+    # Corridor boundaries: one wall per genuinely continuous run.
+    ("H_B_MAIN",(0.0,7.8),(20.4,7.8),0.16,"panel"),
     ("H_B_R",(22.0,7.8),(23.4,7.8),0.16,"panel"),
-
     ("H_A_L",(0.0,5.4),(3.0,5.4),0.16,"panel"),
-    ("H_A_LSVC",(5.25,5.4),(6.6,5.4),0.16,"panel"),
-    ("H_A_C1",(6.6,5.4),(9.6,5.4),0.16,"panel"),
-    ("H_A_C2",(9.6,5.4),(13.2,5.4),0.16,"panel"),
-    ("H_A_C3",(13.2,5.4),(16.8,5.4),0.16,"panel"),
-    ("H_A_RSVC",(16.8,5.4),(18.0,5.4),0.16,"panel"),
+    ("H_A_MID",(5.25,5.4),(18.0,5.4),0.16,"panel"),
     ("H_A_R",(20.4,5.4),(23.4,5.4),0.16,"panel"),
 
     ("H_R_MID",(20.4,4.24),(23.4,4.24),0.08,"partition"),
@@ -87,18 +65,19 @@ WALLS = [
 ]
 
 DOORS = [
+    # All door openings are native hosted Door elements in continuous walls.
     ("D_3B_L_ENTRY","V_X66_N",1.55,0.90),
     ("D_3B_L_ROOM11","H_N_L_ROOM",2.35,0.80),
     ("D_3B_L_KITCH","H_N_L_KITCH",2.70,0.80),
-    ("D_3B_L_SVC","H_B_LC",1.05,0.70),
+    ("D_3B_L_SVC","H_B_MAIN",4.05,0.70),
 
     ("D_3B_R_ENTRY","V_X168",8.30,0.90),
     ("D_3B_R_ROOM11","H_N_R_ROOM",0.65,0.80),
     ("D_3B_R_KITCH","H_N_R_KITCH",0.90,0.80),
-    ("D_3B_R_SVC","H_B_RC",2.55,0.70),
+    ("D_3B_R_SVC","H_B_MAIN",19.35,0.70),
 
-    ("D_2B_ENTRY","H_A_C2",0.75,0.90),
-    ("D_1B_ENTRY","H_A_C3",0.70,0.90),
+    ("D_2B_ENTRY","H_A_MID",5.10,0.90),
+    ("D_1B_ENTRY","H_A_MID",8.65,0.90),
 
     ("D_2B_ROOM10","H_2B_TOP",1.95,0.80),
     ("D_L_SOUTH","H_L_SOUTH",2.25,0.80),
@@ -309,10 +288,10 @@ def main():
         "status":"DRY_RUN" if not args.execute else "IN_PROGRESS",
         "port":PORT,"projectPath":path,"storyIndex":story,
         "origin":{"x":ox,"y":oy},
-        "mode":"USER_RED_MARKUP_PANEL_BIM_ONLY",
+        "mode":"USER_RED_MARKUP_MINIMAL_NATIVE_BIM",
         "rules":{
             "no2DLines":True,
-            "walls":"native Archicad Wall, segmented by panel run",
+            "walls":"native Archicad Wall; one element per continuous wall run; doors/windows are hosted openings",
             "doors":"native hosted Archicad Door",
             "windows":"native hosted Archicad Window",
             "balconies":"native Slab + low Wall parapet",
@@ -353,20 +332,42 @@ def main():
         add(m,name,"Door",g,host=host_name,width=w)
 
     print("STAGE 3/5: windows, stair, slabs and balconies...", flush=True)
-    for i in range(1,8):
-        s=hosts[f"EXT_S_{i:02d}"]; n=hosts[f"EXT_N_{i:02d}"]
-        L=X[i]-X[i-1]
-        if i in (2,6):
-            add(m,f"BAL_DOOR_S_{i}","Door",create_door(s,0.65,.90),host=f"EXT_S_{i:02d}")
-            add(m,f"BAL_WIN_S_{i}","Window",create_window(s,2.30,1.35),host=f"EXT_S_{i:02d}")
-            add(m,f"BAL_DOOR_N_{i}","Door",create_door(n,0.65,.90),host=f"EXT_N_{i:02d}")
-            add(m,f"BAL_WIN_N_{i}","Window",create_window(n,2.30,1.35),host=f"EXT_N_{i:02d}")
-        else:
-            add(m,f"WIN_S_{i}","Window",create_window(s,L/2.0),host=f"EXT_S_{i:02d}")
-            add(m,f"WIN_N_{i}","Window",create_window(n,L/2.0),host=f"EXT_N_{i:02d}")
 
-    for host_name in ("EXT_W_01","EXT_W_03","EXT_E_01","EXT_E_03"):
-        add(m,"WIN_"+host_name,"Window",create_window(hosts[host_name],2.70),host=host_name)
+    # Facades are four continuous Wall elements. Every opening is hosted.
+    facade_openings = [
+        # south
+        ("WIN_S_1","Window","EXT_S",1.50,1.45),
+        ("BAL_DOOR_S_L","Door","EXT_S",3.65,0.90),
+        ("BAL_WIN_S_L","Window","EXT_S",5.30,1.35),
+        ("WIN_S_3","Window","EXT_S",8.10,1.45),
+        ("WIN_S_4","Window","EXT_S",11.40,1.45),
+        ("WIN_S_5","Window","EXT_S",15.00,1.45),
+        ("BAL_DOOR_S_R","Door","EXT_S",17.45,0.90),
+        ("BAL_WIN_S_R","Window","EXT_S",19.10,1.35),
+        ("WIN_S_7","Window","EXT_S",21.90,1.45),
+        # north
+        ("WIN_N_1","Window","EXT_N",1.50,1.45),
+        ("BAL_DOOR_N_L","Door","EXT_N",3.65,0.90),
+        ("BAL_WIN_N_L","Window","EXT_N",5.30,1.35),
+        ("WIN_N_3","Window","EXT_N",8.10,1.45),
+        ("WIN_N_4","Window","EXT_N",11.40,1.45),
+        ("WIN_N_5","Window","EXT_N",15.00,1.45),
+        ("BAL_DOOR_N_R","Door","EXT_N",17.45,0.90),
+        ("BAL_WIN_N_R","Window","EXT_N",19.10,1.35),
+        ("WIN_N_7","Window","EXT_N",21.90,1.45),
+        # side facades
+        ("WIN_W_S","Window","EXT_W",2.70,1.45),
+        ("WIN_W_N","Window","EXT_W",10.50,1.45),
+        ("WIN_E_S","Window","EXT_E",2.70,1.45),
+        ("WIN_E_N","Window","EXT_E",10.50,1.45),
+    ]
+    for name, typ, host_name, off, width in facade_openings:
+        host=hosts[host_name]
+        if typ=="Door":
+            g=create_door(host,off,width)
+        else:
+            g=create_window(host,off,width)
+        add(m,name,typ,g,host=host_name)
 
     add(m,"STAIR","Stair",create_stair(ox,oy,level,story))
 
@@ -382,19 +383,15 @@ def main():
     ]
     for name,poly in balconies:
         add(m,name,"Slab",create_slab([A(p) for p in poly],story,level,.16))
-        p0,p1,p2,p3=poly
-        for k,(a,b) in enumerate(((p0,p1),(p1,p2),(p2,p3)),1):
-            add(m,f"{name}_PAR_{k}","Wall",create_wall(A(a),A(b),story,.10,1.05),
-                role="balcony parapet")
+        # No fake low-wall outline here: keep the balcony as one native Slab.
+        # Add a native railing later only if the bridge exposes a Railing create command.
 
-    S=[hosts[f"EXT_S_{i:02d}"] for i in range(1,8)]
-    W=[hosts[f"EXT_W_{i:02d}"] for i in range(1,4)]
-    xwit=[(S[0],1)]+[(S[i],2) for i in range(7)]
-    ywit=[(W[0],1),(W[0],2),(W[1],2),(W[2],2)]
-    add(m,"DIM_X_CHAIN","Dimension",create_dim(A((0,-2.20)),(1,0),story,xwit))
-    add(m,"DIM_X_TOTAL","Dimension",create_dim(A((0,-3.00)),(1,0),story,[xwit[0],xwit[-1]]))
-    add(m,"DIM_Y_CHAIN","Dimension",create_dim(A((-2.20,0)),(0,1),story,ywit))
-    add(m,"DIM_Y_TOTAL","Dimension",create_dim(A((-3.00,0)),(0,1),story,[ywit[0],ywit[-1]]))
+    # Minimal element strategy: dimension the overall native facade walls.
+    # Intermediate 3.0/3.6 chain is intentionally not faked by extra wall fragments.
+    add(m,"DIM_X_TOTAL","Dimension",
+        create_dim(A((0,-3.00)),(1,0),story,[(hosts["EXT_S"],1),(hosts["EXT_S"],2)]))
+    add(m,"DIM_Y_TOTAL","Dimension",
+        create_dim(A((-3.00,0)),(0,1),story,[(hosts["EXT_W"],1),(hosts["EXT_W"],2)]))
 
     for idx,(val,x,y) in enumerate([
         ("11,25",1.5,11.7),("8,76",4.8,11.7),("17,96",8.1,11.7),
@@ -412,7 +409,7 @@ def main():
     ],1):
         add(m,f"TXT_APT_{idx}","Text",create_text(ox+x,oy+y,level,story,val,1.9))
 
-    print("STAGE 4/5: dimensions/text complete. Cleaning OLD GUIDs only...", flush=True)
+    print(f"MINIMAL MODEL: {len(WALLS)} main walls, {len(DOORS)} internal doors, 4 facade walls total.", flush=True)\n    print("STAGE 4/5: dimensions/text complete. Cleaning OLD GUIDs only...", flush=True)
     # Only now remove elements from previous Series-178 attempts.
     # Exclude every GUID created by this run even if it happened to enter a manifest scan.
     new_guids={r["guid"].lower() for r in m["created"] if r.get("guid")}
