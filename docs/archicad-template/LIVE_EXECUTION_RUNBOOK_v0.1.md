@@ -321,3 +321,51 @@ Fail-closed states:
 This allows other PLN projects to remain open in parallel while preventing a write stage from silently continuing after the user switches to another project.
 
 Direct `apply-*` calls outside the runner must supply the exact path using `--expected-project-path`; otherwise they fail closed.
+
+
+## 14. Promote live evidence into release gates
+
+Do not edit `confirmed_convention` or `production_master_context_verified` by hand after a live test. Use the evidence-promotion helper.
+
+After a successful coordinate calibration:
+
+```powershell
+python .\scripts\promote_archicad_template_gate.py coordinate --evidence <path-to-apply-master-coordinate-calibration.json>
+```
+
+The helper requires:
+
+- `status == PASS`;
+- `confirmedConvention` is exactly `H1` or `H2`;
+- cleanup succeeded;
+- model-element count remained unchanged.
+
+It then changes only:
+
+```yaml
+confirmed_convention: H1
+```
+
+or `H2`. If the registry already contains the opposite convention, promotion stops instead of replacing it.
+
+After a successful Master-context AutoText smoke:
+
+```powershell
+python .\scripts\promote_archicad_template_gate.py master-context-autotext --evidence <path-to-apply-master-context-autotext-smoke.json>
+```
+
+The helper requires:
+
+- `status == PASS`;
+- `masterContextAutoTextVerified == true`;
+- Master Layout context was cleared;
+- temporary Layout and subset were deleted;
+- model-element count remained unchanged.
+
+Only then does it change:
+
+```yaml
+production_master_context_verified: true
+```
+
+The helper does not connect to Archicad and does not modify PLN data. Its sole purpose is to promote already-proven live evidence into the repository release gates.
