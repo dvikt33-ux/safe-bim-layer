@@ -66,3 +66,81 @@ FASTMODE-NATIVE-01 should benchmark the following before any custom Push/Pull ge
 
 Success criterion:
 the custom Add-On should mainly provide the better hit/context/manipulator experience, constraint visualization and semantic routing while Archicad itself performs as much of the physical edit as possible.
+
+## 19. Element Difference Generator should be the recovery backstop
+
+Archicad 29 already provides a first-party project/model/context difference mechanism.
+
+`API_ElemDifferenceGeneratorTypeID` has three modes:
+- `APIDiff_ModificationStampBased`: modification-stamp-based project difference; the AC29 header explicitly says this mode operates only with file state.
+- `APIDiff_3DModelBased`: 3D-model-based difference.
+- `APIDiff_ContextBased`: project-context difference that takes element connections into account.
+
+`API_ElemDifferenceGeneratorStateType` supports:
+- `APIDiffState_InFile`;
+- `APIDiffState_InMemory`;
+- `APIDiffState_CurrentProject`.
+
+For ContextBased state, `viewGuid` exists specifically so the comparison reflects used-element changes rather than merely view-setting changes.
+
+`API_ElemDifference` returns:
+- `newElements`;
+- `modifiedElements`;
+- `deletedElements`;
+- `isEnvironmentChanged`.
+
+`isEnvironmentChanged` covers changes to view/view settings, project information/preferences, property definitions and geolocation.
+
+Official AC29 Plan_Dump example demonstrates the intended lifecycle:
+- persist ModificationStampBased baseline to disk;
+- compare stored baseline to current project;
+- persist 3DModelBased baseline and compare it to `APIDiffState_CurrentProject`;
+- persist ContextBased baseline with viewGuid and compare to CurrentProject.
+
+### Revised recovery architecture
+
+Do not rely on one event stream as the only truth.
+
+Use:
+1. `EditNotificationInterface` for immediate user transformation semantics;
+2. Tapir/native element notifications for broad live create/change/delete/property/classification events;
+3. facet fingerprints for precise semantic invalidation;
+4. persisted `APIDiff_ModificationStampBased` checkpoint as restart/missed-event recovery;
+5. `APIDiff_3DModelBased` only when geometric recovery is required;
+6. `APIDiff_ContextBased` for view/context-sensitive reconciliation and dependency-sensitive comparisons;
+7. milestone full semantic/IFC comparison only when needed.
+
+This means our custom event journal remains valuable for causal order, operation identity and project history, but it no longer needs to guarantee complete change detection by itself.
+
+### Current upstream gap
+
+Search of current public Tapir repository found no wrapper for DifferenceGenerator / ModificationStampBased / GenerateDifference during this pass.
+
+Therefore expose only a **thin native recovery command** if live tests confirm no Husky/open wrapper already provides equivalent semantics.
+
+Primary references:
+https://graphisoft.github.io/archicad-api-devkit/struct_a_p_i___elem_difference_generator_state.html
+https://graphisoft.github.io/archicad-api-devkit/struct_a_p_i___elem_difference.html
+https://github.com/GRAPHISOFT/archicad-api-devkit/blob/7a94688e30ecd1157bbb78b94e3ce8bdf1fb1e55/docs/group___difference_generator.html
+
+## 20. EVENT-RECOVERY-01
+
+Live AC29 test sequence:
+1. store ModificationStampBased baseline to file;
+2. create one wall;
+3. modify one existing wall;
+4. delete one object;
+5. change one Property Definition or project/view preference to trigger environment delta;
+6. compare stored state to CurrentProject;
+7. verify exact new/modified/deleted sets and environment flag;
+8. restart the sidecar/add-on callback consumer without updating baseline;
+9. repeat one edit while live event consumer is unavailable;
+10. restart consumer and verify Difference Generator discovers the missed change;
+11. repeat with 3DModelBased;
+12. repeat ContextBased in a fixed view and separately change only a view setting to validate intended filtering semantics.
+
+Acceptance:
+- missed live events are recoverable without a full Model Dump;
+- false-positive scope and runtime are measured;
+- persisted state is project-bound and stale-project misuse is rejected by our envelope;
+- recovery result becomes input to normal facet reread/invalidation rather than directly marking all modified GUID facets dirty.
