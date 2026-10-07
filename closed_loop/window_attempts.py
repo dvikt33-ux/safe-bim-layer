@@ -3,7 +3,7 @@ from copy import deepcopy
 import math
 
 from .live_wall import model_hash, load, TOL
-from .models import Action
+from .models import WindowAction
 from .orchestrator import fingerprint
 from .wall_attempts import AttemptJournal, indexed, durable_json
 from uuid import uuid4
@@ -150,7 +150,7 @@ def reconcile_window_attempt(attempt, before, current, identity, journal):
         'freshModelHash': model_hash(current),
     }
     try:
-        action = Action(**attempt['action'])
+        action = WindowAction(**attempt['action'])
         expected = window_signature(before, action, identity)
         signature = attempt['signature']
         if (signature != expected or fingerprint(signature) != attempt['signatureHash']
