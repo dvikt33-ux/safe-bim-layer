@@ -30,8 +30,21 @@ def _baseline_bytes(path):
         raise RuntimeError('Verified baseline path unavailable: '+path) from exc
 
 
-def _baseline_sha256(path):
-    return hashlib.sha256(_baseline_bytes(path)).hexdigest()
+def _git_blob_sha(ref, path):
+    try:
+        return subprocess.check_output(
+            ['git', 'rev-parse', ref + ':' + path],
+            cwd=ROOT, text=True, stderr=subprocess.DEVNULL).strip()
+    except subprocess.CalledProcessError as exc:
+        raise RuntimeError('Git blob unavailable: '+ref+':'+path) from exc
+
+
+def _tracked_file_clean(path):
+    unstaged = subprocess.run(
+        ['git', 'diff', '--quiet', '--', path], cwd=ROOT).returncode == 0
+    staged = subprocess.run(
+        ['git', 'diff', '--cached', '--quiet', '--', path], cwd=ROOT).returncode == 0
+    return unstaged and staged
 
 
 def _check_spec(spec):
@@ -61,10 +74,12 @@ def fast_historical_verify(stage, pack_path):
     # Semantic reuse is only authorized when the historical verifier itself is
     # byte-identical to the VERIFIED Stage-4 milestone.
     verifier_path = 'scripts/audit_pack.py'
-    current_verifier = hashlib.sha256((ROOT/verifier_path).read_bytes()).hexdigest()
-    baseline_verifier = _baseline_sha256(verifier_path)
-    if current_verifier != baseline_verifier:
+    baseline_verifier_blob = _git_blob_sha(VERIFIED_STAGE4_BASELINE, verifier_path)
+    current_verifier_blob = _git_blob_sha('HEAD', verifier_path)
+    if current_verifier_blob != baseline_verifier_blob:
         raise RuntimeError('Historical verifier changed since VERIFIED baseline')
+    if not _tracked_file_clean(verifier_path):
+        raise RuntimeError('Historical verifier has local working-tree/index changes')
 
     # The compact pack contract/manifests must be exactly the ones accepted at
     # the VERIFIED milestone; this prevents a self-consistent local rewrite.
@@ -131,7 +146,7 @@ def fast_historical_verify(stage, pack_path):
         'provenance':'FAST_REVALIDATION_OF_VERIFIED_STAGE4_BASELINE',
         'historicalStage':stage,
         'baselineCommit':VERIFIED_STAGE4_BASELINE,
-        'verifierSha256':current_verifier,
+        'verifierGitBlob':current_verifier_blob,
         'sourceFilesChecked':len(specs),
         'sourceBytesHashed':source_bytes,
         'packFilesChecked':len(listed),
