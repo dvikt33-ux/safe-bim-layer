@@ -211,3 +211,45 @@ archicad_version_strategy:
     - run_model_semantic_regression
     - replace_only_components_that_AC30_improves
     - keep_project_core_and_rule_graph_shared
+
+
+documentation_normative_baseline_2026:
+  primary_standard:
+    id: GOST_R_21_101_2026
+    status: active
+    effective_date: 2026-04-01
+    replaces: GOST_R_21_101_2020
+    corrections:
+      - IUS_11_2026
+  architecture_working_drawings:
+    id: GOST_21_501_2018
+    status: active
+  rules:
+    - do_not_release_template_as_current_spds_until_SPDS_2026_01_passes
+    - do_not_use_GOST_R_21_101_2020_as_current_template_authority
+    - map_titleblocks_to_current_forms_3_6
+    - bind_repeated_sheet_metadata_to_ProjectInfo_or_Autotext
+    - use_native_revision_management_where_possible
+    - documentation_must_be_derived_from_verified_project_state
+
+documentation_compiler_strategy:
+  checkpoint: docs/research/architectural_ai_checkpoint_25_verified_documentation_compiler_spds_ac29_2026-10-08.md
+  primary_executor:
+    - Archicad_29_native_documentation
+    - Tapir_1_7_0
+    - Archicad_MCP_schedule_XML_adapter
+  secondary_engines:
+    - Qonic
+    - ARES_Commander
+  enterprise_candidate:
+    - SWAPP_Frank
+  custom_scope:
+    - current_Russian_SPDS_mapping
+    - Sheet_Recipes
+    - required_document_graph
+    - witness_selection_and_dimension_coverage
+    - document_coverage_signature
+    - completeness_and_publish_gate
+  validation_tasks:
+    - DOC_AC29_01
+    - SPDS_2026_01
