@@ -1,0 +1,159 @@
+version: 0.1
+date: 2026-10-07
+status: research_draft
+
+legal_correction:
+  former_transition_date: "2026-03-01"
+  current_transition_date: "2027-03-01"
+  note: >
+    Earlier materials may still state 2026-03-01. Current legal sources and
+    2026 amendments postpone registry-based expertise transition to 2027-03-01.
+
+ratings:
+  PASS: confirmed in current official/public documentation
+  PARTIAL: capability exists but granularity/coverage is incomplete or unclear
+  UNKNOWN: not verified
+  FAIL: verified absent/not supported
+
+providers:
+  stroykompleks_rf:
+    role:
+      - authoritative_registry
+      - requirement_identity
+      - applicability_status
+    requirement_level_identity: PASS
+    version_history: PASS
+    exact_requirement_monitoring_api: UNKNOWN
+    project_requirement_sets: FAIL
+    machine_api_public: UNKNOWN
+    xml_export: PARTIAL
+    reference_graph: UNKNOWN
+    atomic_requirement_curation: PASS
+    legal_authority: highest
+    bulk_ingestion: UNKNOWN
+    next_action: technical_adapter_probe
+
+  techexpert_requirements:
+    role:
+      - curated_requirement_corpus
+      - project_requirement_management
+      - requirement_revision_tracking
+      - smart_data
+    requirement_level_identity: PASS
+    version_history: PASS
+    exact_requirement_monitoring_product: PASS
+    project_requirement_sets: PASS
+    checklists: PASS
+    export_files: PASS
+    kodeks_api: PASS
+    requirement_level_api: UNKNOWN
+    official_registry_mapping: PASS
+    reference_graph_api: UNKNOWN
+    atomic_requirement_curation: PASS
+    corpus_scale_claim_2026:
+      requirements_min: 400000
+      normative_acts_min: 3200
+    legal_authority: commercial_curator_crosscheck_primary
+    next_action: request_targeted_demo_and_api_docs
+
+  garant_connect:
+    role:
+      - legal_document_source
+      - block_level_source
+      - redaction_source
+      - change_monitor
+      - reference_discovery_seed
+    rest_api_version: "2.3.0"
+    mcp: PASS
+    search: PASS
+    snippets: PASS
+    hyperlink_detection: PASS
+    document_export: PASS
+    block_export: PASS
+    document_change_monitoring: PASS
+    fragment_change_monitoring: PASS
+    redactions: PASS
+    correspondents_respondents_queries: PASS
+    api_token_required: true
+    browser_subscription_implies_api: false
+    bulk_ingestion: PARTIAL
+    semantic_reference_edge_classification: FAIL
+    next_action: request_api_mcp_entitlement_and_test_sp464
+
+  normacs:
+    role:
+      - broad_technical_corpus
+      - document_status
+      - succession
+      - amendments
+      - legacy_documents
+      - independent_crosscheck
+    document_status: PASS
+    succession: PASS
+    amendments: PASS
+    daily_updates: PASS
+    change_notifications: PASS
+    document_comparison: PASS
+    open_api_advertised: PASS
+    open_api_schema_verified: UNKNOWN
+    cad_integrations: PASS
+    atomic_requirement_objects: UNKNOWN
+    requirement_revision_api: UNKNOWN
+    next_action: request_api_docs_and_demo
+
+  official_sources:
+    role:
+      - primary_provenance
+      - final_status_verification
+      - orders_amendments
+      - xml_schemas
+    legal_authority: highest
+    ergonomic_requirement_api: PARTIAL
+    next_action: retain_as_final_verification_layer
+
+  spatial_regulation_sources:
+    role:
+      - site_applicability
+      - heritage_constraints
+      - territorial_constraints
+    egrokn_public_map: PASS
+    protected_subject_text: PASS
+    boundary_descriptions: PASS
+    stable_programmatic_geometry_api: UNKNOWN
+    next_action: separate_spatial_adapter_research
+
+architecture:
+  provider_policy: federated
+  single_source_of_truth_vendor: false
+  canonical_requirement_fields:
+    - canonical_requirement_id
+    - provider_refs
+    - source_document
+    - source_clause_or_block
+    - text_hash
+    - edition
+    - effective_from
+    - effective_to
+    - status
+    - authority
+    - applicability
+    - constraint_semantics
+    - variables
+    - units
+    - exceptions
+    - references
+    - spatial_scope
+    - provenance
+    - last_verified
+
+manual_normalization_gate:
+  status: PAUSE_BULK
+  keep_existing_rules_as:
+    - regression_fixtures
+    - seed_rule_ir
+    - provider_accuracy_benchmarks
+    - audit_evidence
+  resume_bulk_custom_normalization_only_if:
+    - provider_api_or_export_gap_is_proven
+    - license_or_caching_rights_block_reuse
+    - required_semantics_are_not_exposed
