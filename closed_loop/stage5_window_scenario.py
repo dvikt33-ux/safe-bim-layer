@@ -5,12 +5,13 @@ import os
 from pathlib import Path
 from types import SimpleNamespace
 
-from .live_wall import ROOT, save
+from .live_wall import ROOT, read, save
 from .live_window import (
     WindowExecutor, WindowModelCheck, WindowObserver, WindowPlanner,
     WindowReadBack, WindowSession, acceptance,
 )
 from .orchestrator import Orchestrator
+from .stage5_audit_pack import finish_pack
 
 
 def main():
@@ -18,6 +19,8 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--execute', action='store_true',
                         help='Perform the single CreateWindows mutation. Without this flag the command is read-only.')
+    parser.add_argument('--approved-plan', type=Path,
+                        help='Required with --execute: exact prior plan-only report to bind host/dimensions/model hash.')
     args = parser.parse_args()
 
     output = args.output.resolve()
@@ -29,7 +32,18 @@ def main():
         raise ValueError('SAFE_BIM_STAGE5_PROJECT_PATH must explicitly bind the disposable/test PLN')
 
     goal_id = 'stage5-hosted-window-001'
-    session = WindowSession(output/'session', goal_id)
+    approved = None
+    if args.execute:
+        if args.approved_plan is None:
+            raise ValueError('--execute requires --approved-plan from a prior plan-only run')
+        approved_path = args.approved_plan.resolve()
+        if not approved_path.is_relative_to(ROOT/'outputs/closed-loop-stage5'):
+            raise ValueError('Approved plan must be retained under outputs/closed-loop-stage5')
+        approved = read(approved_path)
+        if (approved.get('status') != 'PLANNED' or approved.get('executionMode') != 'PLAN_ONLY'
+                or approved.get('physicalMutationCalls') != 0):
+            raise ValueError('Approved plan-only report is not a valid zero-mutation Stage 5 plan')
+    session = WindowSession(output/'session', goal_id, approved_plan=approved)
     observer = WindowObserver(session)
     planner = WindowPlanner(session)
 
@@ -79,6 +93,17 @@ def main():
         'auditPackStatus':'PENDING',
     }
     save(output/'verification-report.json', report)
+    if job.finalStatus == 'VERIFIED':
+        try:
+            pack = finish_pack(output, session.identity['projectPath'])
+            report['auditPackStatus'] = pack['status']
+            if pack['status'] != 'PASS':
+                report['status'] = 'BLOCKED'
+        except Exception as exc:
+            report['status'] = 'BLOCKED'
+            report['auditPackStatus'] = 'BLOCKED'
+            report['auditPackError'] = f'{type(exc).__name__}: {exc}'
+    save(output/'completion-report.json', report)
     print(report)
 
 
