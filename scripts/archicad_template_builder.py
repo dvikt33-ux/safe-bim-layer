@@ -2063,6 +2063,281 @@ def apply_master_layout_shell(api: Tapir, allow_nonempty=False):
 
 
 
+
+def apply_form3_static_labels(api: Tapir, allow_nonempty=False):
+    """Create only verified static Form 3 labels on registered masters.
+
+    Requires persisted H1/H2 calibration and a complete existing Form 3 core
+    line grid on every master. Existing complete label sets are accepted
+    idempotently; partial/mismatched text at expected anchors blocks.
+    """
+    validation = validate_specs()
+    if validation["status"] != "PASS":
+        raise RuntimeError(f"Spec validation failed: {validation['errors']}")
+
+    calibration = load_yaml(MASTER_COORD_CALIBRATION)
+    convention = calibration.get("confirmed_convention")
+    if convention not in {"H1", "H2"}:
+        return {
+            "status": "BLOCKED_COORDINATE_CALIBRATION",
+            "writePerformed": False,
+            "reason": (
+                "No persisted live-confirmed Master Layout paper-space convention."
+            ),
+            "confirmedConvention": convention,
+        }
+
+    before_count = len(api.call("GetAllElements").get("elements", []))
+    if before_count and not allow_nonempty:
+        raise RuntimeError(
+            f"Refusing Form 3 static-label write: current project contains "
+            f"{before_count} model elements. Use a clean candidate project or "
+            f"pass --allow-nonempty explicitly."
+        )
+
+    form3 = load_yaml(FORM3_GEOMETRY)
+    master_registry = load_yaml(MASTER_LAYOUT_FORM3)
+    frame = master_registry.get("frame_mm") or {}
+    right_inset = float(frame.get("inner_from_right", 5))
+    bottom_raw = frame.get("inner_from_bottom", 5)
+    bottom_inset = float(
+        bottom_raw.get("primary", 5)
+        if isinstance(bottom_raw, dict) else bottom_raw
+    )
+    segments_mm = form3.get("line_segments_mm", [])
+
+    label_specs = list(form3.get("static_labels", []))
+    change_header = form3.get("change_header") or {}
+    header_y0 = float(change_header.get("y0", 35))
+    for col in change_header.get("columns", []):
+        label_specs.append({
+            "text": col["label"],
+            "x_mm": float(col["x0"]) + 1.0,
+            "y_mm": header_y0 + 1.0,
+            "height_mm": 2.5,
+        })
+
+    plan = plan_master_layouts(api)
+    bad = [x for x in plan["masters"] if x.get("state") != "EXISTS_OK"]
+    if bad:
+        return {
+            "status": "BLOCKED_MASTER_LAYOUT",
+            "writePerformed": False,
+            "reason": "All registered Master Layout shells must exist exactly first.",
+            "masters": bad,
+        }
+
+    def norm_segment(x0, y0, x1, y1):
+        a = (round(float(x0), 6), round(float(y0), 6))
+        b = (round(float(x1), 6), round(float(y1), 6))
+        return tuple(sorted((a, b)))
+
+    def norm_text(raw, x, y, height):
+        return (
+            str(raw),
+            round(float(x), 6),
+            round(float(y), 6),
+            round(float(height), 3),
+        )
+
+    results = []
+    items = _layoutbook_items(api)
+    by_name = {
+        x.get("name"): x for x in items
+        if x.get("type") == "MasterLayoutItem" and x.get("name")
+    }
+
+    for row in plan["masters"]:
+        name = row["name"]
+        master = by_name.get(name)
+        if master is None:
+            raise RuntimeError(f"{name}: Master Layout navigator item missing.")
+
+        _, settings = _layout_settings_from_nav(api, master)
+        width = float(settings.get("horizontalSize"))
+        height = float(settings.get("verticalSize"))
+        x0_mm = width - right_inset - 185.0
+        y0_mm = (
+            bottom_inset
+            if convention == "H1"
+            else -(height - bottom_inset)
+        )
+
+        change = api.call(
+            "ChangeWindow",
+            {"navigatorItemId": master["navigatorItemId"]},
+        )
+        if not change.get("success", False):
+            raise RuntimeError(f"{name}: could not activate Master Layout: {change}")
+        current = api.call("GetCurrentWindowType").get("currentWindowType")
+        if current != "MasterLayout":
+            raise RuntimeError(
+                f"{name}: expected MasterLayout window, got {current}"
+            )
+
+        native = api.call("GetCurrent2DDocumentV1")
+
+        expected_lines = {
+            norm_segment(
+                (x0_mm + float(sx0)) / 1000.0,
+                (y0_mm + float(sy0)) / 1000.0,
+                (x0_mm + float(sx1)) / 1000.0,
+                (y0_mm + float(sy1)) / 1000.0,
+            )
+            for sx0, sy0, sx1, sy1 in segments_mm
+        }
+        actual_lines = set()
+        for line in native.get("lines", []):
+            b = line.get("begCoordinate") or {}
+            e = line.get("endCoordinate") or {}
+            if "x" in b and "y" in b and "x" in e and "y" in e:
+                actual_lines.add(
+                    norm_segment(b["x"], b["y"], e["x"], e["y"])
+                )
+        if not expected_lines.issubset(actual_lines):
+            return {
+                "status": "BLOCKED_FORM3_CORE_GEOMETRY",
+                "writePerformed": False,
+                "masterLayout": name,
+                "reason": (
+                    "Static labels require a complete verified Form 3 core grid first."
+                ),
+                "presentSegments": len(expected_lines & actual_lines),
+                "expectedSegments": len(expected_lines),
+            }
+
+        expected_texts = set()
+        create_specs = []
+        expected_anchors = set()
+        for label in label_specs:
+            px = (x0_mm + float(label["x_mm"])) / 1000.0
+            py = (y0_mm + float(label["y_mm"])) / 1000.0
+            h = float(label.get("height_mm", 2.5))
+            expected_texts.add(norm_text(label["text"], px, py, h))
+            expected_anchors.add((round(px, 6), round(py, 6)))
+            create_specs.append({
+                "coordinate": {"x": px, "y": py, "z": 0.0},
+                "text": str(label["text"]),
+                "height": h,
+                "justification": "Left",
+            })
+
+        actual_texts = set()
+        anchor_rows = {}
+        for text_row in native.get("texts", []):
+            pos = text_row.get("position") or {}
+            if "x" not in pos or "y" not in pos:
+                continue
+            anchor = (
+                round(float(pos["x"]), 6),
+                round(float(pos["y"]), 6),
+            )
+            actual = norm_text(
+                text_row.get("rawText", ""),
+                pos["x"],
+                pos["y"],
+                text_row.get("heightMm", -1),
+            )
+            actual_texts.add(actual)
+            if anchor in expected_anchors:
+                anchor_rows.setdefault(anchor, []).append(text_row)
+
+        matched = expected_texts & actual_texts
+        wrong_anchor_rows = []
+        for anchor, rows_at_anchor in anchor_rows.items():
+            if not any(
+                norm_text(
+                    row_at_anchor.get("rawText", ""),
+                    (row_at_anchor.get("position") or {}).get("x", 999),
+                    (row_at_anchor.get("position") or {}).get("y", 999),
+                    row_at_anchor.get("heightMm", -1),
+                ) in expected_texts
+                for row_at_anchor in rows_at_anchor
+            ):
+                wrong_anchor_rows.extend(rows_at_anchor)
+
+        if wrong_anchor_rows:
+            return {
+                "status": "BLOCKED_FORM3_TEXT_CONFLICT",
+                "writePerformed": False,
+                "masterLayout": name,
+                "reason": (
+                    "Text already occupies one or more expected Form 3 label anchors "
+                    "with different content or height."
+                ),
+                "conflicts": wrong_anchor_rows,
+            }
+
+        if matched and matched != expected_texts:
+            return {
+                "status": "BLOCKED_PARTIAL_FORM3_STATIC_LABELS",
+                "writePerformed": False,
+                "masterLayout": name,
+                "matchedLabels": len(matched),
+                "expectedLabels": len(expected_texts),
+                "reason": (
+                    "Only part of the expected static label set already exists."
+                ),
+            }
+
+        if matched == expected_texts:
+            results.append({
+                "name": name,
+                "state": "EXISTS_OK",
+                "createdLabels": 0,
+                "originMm": [x0_mm, y0_mm],
+            })
+            continue
+
+        created = api.call("CreateTexts", {"textsData": create_specs})
+        rows = created.get("elements", [])
+        if len(rows) != len(create_specs) or any(
+            "elementId" not in x for x in rows
+        ):
+            raise RuntimeError(
+                f"{name}: Form 3 static Text creation failed: {created}"
+            )
+
+        verify = api.call("GetCurrent2DDocumentV1")
+        verify_texts = set()
+        for text_row in verify.get("texts", []):
+            pos = text_row.get("position") or {}
+            if "x" in pos and "y" in pos:
+                verify_texts.add(norm_text(
+                    text_row.get("rawText", ""),
+                    pos["x"],
+                    pos["y"],
+                    text_row.get("heightMm", -1),
+                ))
+        if not expected_texts.issubset(verify_texts):
+            raise RuntimeError(
+                f"{name}: Form 3 static Text read-back mismatch after creation."
+            )
+
+        results.append({
+            "name": name,
+            "state": "CREATED_AND_VERIFIED",
+            "createdLabels": len(create_specs),
+            "originMm": [x0_mm, y0_mm],
+        })
+
+    after_count = len(api.call("GetAllElements").get("elements", []))
+    if after_count != before_count:
+        raise RuntimeError(
+            "Unexpected model element count change during Form 3 static-label write."
+        )
+
+    return {
+        "status": "PASS",
+        "writePerformed": any(x["createdLabels"] > 0 for x in results),
+        "confirmedConvention": convention,
+        "staticLabelCountPerMaster": len(label_specs),
+        "masters": results,
+        "modelElementCountUnchanged": True,
+        "autoTextCreated": False,
+        "nextGate": "apply_form3_autotext",
+    }
+
 def apply_form3_core_geometry(api: Tapir, allow_nonempty=False):
     """Create the verified 185x55 Form 3 line grid on all registered masters.
 
@@ -3282,7 +3557,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "action",
-        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "plan-master-coordinate-calibration", "plan-form3-geometry", "plan-autotext", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell", "apply-master-layout-smoke", "apply-layout-autotext-smoke", "apply-master-coordinate-calibration", "apply-form3-core-geometry"),
+        choices=("validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "plan-master-coordinate-calibration", "plan-form3-geometry", "plan-autotext", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell", "apply-master-layout-smoke", "apply-layout-autotext-smoke", "apply-master-coordinate-calibration", "apply-form3-core-geometry", "apply-form3-static-labels"),
     )
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
     parser.add_argument(
@@ -3346,6 +3621,10 @@ def main():
             )
         elif args.action == "apply-form3-core-geometry":
             result = apply_form3_core_geometry(
+                api, allow_nonempty=args.allow_nonempty
+            )
+        elif args.action == "apply-form3-static-labels":
+            result = apply_form3_static_labels(
                 api, allow_nonempty=args.allow_nonempty
             )
         else:
