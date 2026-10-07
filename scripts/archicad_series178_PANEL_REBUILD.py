@@ -198,9 +198,10 @@ def collect_old():
                 except Exception: pass
     return out
 
-def cleanup(m):
+def cleanup(m, frozen_targets=None):
     L=live()
-    targets=[g for g in collect_old() if g.lower() in L]
+    source = frozen_targets if frozen_targets is not None else collect_old()
+    targets=[g for g in source if g.lower() in L]
     priority={"Zone":0,"Text":1,"Dimension":1,"Polyline":1,"Line":1,"Arc":1,
               "Window":2,"Door":2,"Stair":3,"Slab":4,"Wall":5}
     typed=[]
@@ -323,19 +324,26 @@ def main():
     }
     if not args.execute:
         print(json.dumps(m,ensure_ascii=False,indent=2)); return
+    # Freeze the OLD GUID set before we write this run's manifest.
+    # Critical safety rule: never delete the old plan before the new walls exist.
+    old_targets=set(collect_old())
     save(m)
-    cleanup(m)
 
     A=lambda p:(ox+p[0],oy+p[1])
-
-    add(m,"SLAB_MAIN","Slab",
-        create_slab([A((0,0)),A((23.4,0)),A((23.4,13.2)),A((0,13.2))],story,level))
 
     hosts={}
     for name,a,b,t,role in WALLS:
         g=create_wall(A(a),A(b),story,t)
         hosts[name]=g
         add(m,name,"Wall",g,role=role,thickness=t)
+
+    # Gate: all new native Wall elements must exist before touching the old plan.
+    expected_wall_count=len(WALLS)
+    created_wall_count=sum(1 for r in m["created"] if r.get("type")=="Wall")
+    if created_wall_count != expected_wall_count:
+        raise RuntimeError(f"wall gate failed: {created_wall_count}/{expected_wall_count}")
+    m["phase"]="NEW_WALLS_CREATED_OLD_PLAN_STILL_PRESENT"
+    save(m)
 
     for name,host_name,off,w in DOORS:
         if host_name not in hosts: raise RuntimeError(f"missing door host {host_name}")
@@ -358,6 +366,10 @@ def main():
         add(m,"WIN_"+host_name,"Window",create_window(hosts[host_name],2.70),host=host_name)
 
     add(m,"STAIR","Stair",create_stair(ox,oy,level,story))
+
+    # Main slab comes only after the wall/door/window core has succeeded.
+    add(m,"SLAB_MAIN","Slab",
+        create_slab([A((0,0)),A((23.4,0)),A((23.4,13.2)),A((0,13.2))],story,level))
 
     balconies=[
         ("BAL_N_L",[(3.0,13.2),(3.0,14.70),(6.6,14.70),(6.6,13.2)]),
@@ -397,6 +409,13 @@ def main():
     ],1):
         add(m,f"TXT_APT_{idx}","Text",create_text(ox+x,oy+y,level,story,val,1.9))
 
+    # Only now remove elements from previous Series-178 attempts.
+    # Exclude every GUID created by this run even if it happened to enter a manifest scan.
+    new_guids={r["guid"].lower() for r in m["created"] if r.get("guid")}
+    frozen_old={g for g in old_targets if g.lower() not in new_guids}
+    cleanup(m, frozen_old)
+
+    m["phase"]="REPLACEMENT_COMPLETE"
     m["status"]="PASS"
     m["elementCountAfter"]=len(all_rows())
     m["nextPhase"]="visual compare to user red markup; adjust only wall/door offsets"
