@@ -1,3 +1,4 @@
+import json
 from copy import deepcopy
 from pathlib import Path
 import tempfile
@@ -7,10 +8,11 @@ from closed_loop.auditor import audit
 from closed_loop.live_wall import model_hash
 from closed_loop.models import (
     AcceptanceContract, Action, Criterion, ExecutionResult, Fact,
-    ModelFingerprint, Observation, PlannerDecision,
+    ModelFingerprint, Observation, PlannerDecision, WindowAction,
 )
 from closed_loop.orchestrator import Orchestrator
 from closed_loop.window_attempts import prepare_window_attempt
+from closed_loop.wall_attempts import job_from_dict
 from tests_stage5_window.test_window_attempts import fixture
 
 
@@ -153,6 +155,13 @@ class WindowOrchestratorTests(unittest.TestCase):
         self.assertEqual(job.actions[0].type, 'create_window')
         self.assertEqual(job.actions[0].parameters['sourceGuid'], 'host')
         self.assertTrue(all(row.verdict.value == 'PASS' for row in job.auditHistory[-1]))
+
+    def test_persisted_window_action_restores_as_window_action(self):
+        job = self.build().run()
+        restored = job_from_dict(json.loads(json.dumps(job.to_dict())))
+        self.assertIsInstance(restored.actions[0], WindowAction)
+        self.assertIsInstance(restored.iterations[0].plannerDecision.action, WindowAction)
+        self.assertIsInstance(restored.iterations[0].executorRequest, WindowAction)
 
     def test_stale_host_model_invalidates_plan_without_executor_call(self):
         orch = self.build()
