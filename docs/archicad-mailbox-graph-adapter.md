@@ -1,5 +1,8 @@
 # ChatGPT -> BIM graph -> existing Mailbox (offline adapter)
 
+> **Current installed runtime (2026-10-09): Archicad 29.2.1 (5101) RUS FULL (x86-64).** The loaded add-on/API version must be independently confirmed after the application update. Canonical record: [ARCHICAD_RUNTIME_CURRENT.md](ARCHICAD_RUNTIME_CURRENT.md).
+
+
 Status: adapter source and offline tests are published. This is a protocol
 adapter; it **does not publish** jobs, execute model changes, or extend
 the installed local worker by itself.
