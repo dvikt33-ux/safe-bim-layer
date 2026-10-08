@@ -106,3 +106,36 @@ planner does not send either example command anywhere.
 This planning layer is intentionally separate from execution. The current
 successfully tested write path stays unchanged until a guarded adapter is
 ready and verified.
+
+
+## Dependent architectural fragments (offline)
+
+`scripts/archicad_bim_graph.py` adds dependency ordering and typed references
+to created BIM elements. This is intentionally **not a Mailbox executor**.
+
+The included example is synthetic and MUST NOT be published as a live job:
+
+```powershell
+python scripts/archicad_bim_graph.py examples/archicad_bim_graph.offline.sample.json --runtime-version 1.5.8
+```
+
+Its three operations are deliberately not ordered by creation sequence:
+`window-alpha` depends on `wall-alpha` by its
+`{"$createdGuid":"wall-alpha"}` reference in `ownerWallId.guid`, and on
+`slab-alpha` via `after`. The compiler orders the prerequisites first and
+validates those parameters against the pinned catalog. It does not resolve
+an actual GUID: placeholders are represented by a sentinel **inside schema
+validation only**, and are never emitted as executable parameters.
+
+A GUID reference may point only to a supported `Create*` operation with
+**exactly one element** in its create-data array. Wrong host kind, unknown
+dependencies, dependency loops, and using a generated GUID outside a `.guid`
+field are blocked. Arbitrary commands validated against a schema are NOT
+authorized for execution. The plan checksum is a reproducibility aid, not
+a replay-protection key or a user authorization.
+
+Both the sample's coordinates and native `floorIndex` are synthetic. Resolve
+a real architectural `1 этаж` from `GetStories`, never from the sample.
+The current local writer understands its own verified `create_wall_v1` JOB
+protocol; it does **not** consume this graph file. A reviewed translation
+layer and a runtime safety gate must be completed before any live use.
