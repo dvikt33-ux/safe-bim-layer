@@ -30,6 +30,14 @@ ALLOWED_WRITES = frozenset(("CreateWalls", "CreateSlabs", "CreateColumns",
                            "CreateWindows", "CreateDoors"))
 _GUID = re.compile(r"^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$")
 _SCENE_ID = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_-]{3,79}$")
+_NONSPATIAL_TYPES = frozenset({
+    "Dimension", "RadialDimension", "LevelDimension", "AngleDimension",
+    "Text", "Label", "Hatch", "Line", "PolyLine", "Arc", "Circle",
+    "Spline", "Hotspot", "CutPlane", "Camera", "CamSet", "Group",
+    "SectElem", "Drawing", "Picture", "Detail", "Elevation",
+    "InteriorElevation", "Worksheet", "ChangeMarker",
+})
+
 
 
 def canonical(value):
@@ -91,18 +99,36 @@ def scan_for_existing_geometry(api, anchor_x, anchor_y):
         rows = boxes.get("boundingBoxes3D") if isinstance(boxes, dict) else None
         if not isinstance(rows, list) or len(rows) != len(batch):
             raise ValueError("SPATIAL_SCAN_UNAVAILABLE: incomplete 3D boxes")
-        for item in rows:
+        # Some plan annotations have no 3D body. Their explicit native
+        # geometry errors can be ignored ONLY after typed native classification;
+        # unsupported 3D objects or unknown failures still stop all writes.
+        unavailable = []
+        keys = ("xMin", "xMax", "yMin", "yMax", "zMin", "zMax")
+        for index, item in enumerate(rows):
             b = item.get("boundingBox3D") if isinstance(item, dict) else None
-            keys = ("xMin", "xMax", "yMin", "yMax", "zMin", "zMax")
+            if b is None and isinstance(item, dict) and "error" in item:
+                unavailable.append(batch[index])
+                continue
             if (not isinstance(b, dict) or not all(
                     type(b.get(k)) in (int, float) and math.isfinite(b[k])
                     for k in keys)):
-                raise ValueError("SPATIAL_SCAN_UNAVAILABLE: any unavailable bbox blocks all writes")
+                raise ValueError("SPATIAL_SCAN_UNAVAILABLE: invalid 3D bbox")
+            if (b["xMin"] > b["xMax"] or b["yMin"] > b["yMax"]
+                    or b["zMin"] > b["zMax"]):
+                raise ValueError("SPATIAL_SCAN_UNAVAILABLE: inverted 3D bbox")
             if (b["xMin"] <= highx and b["xMax"] >= lowx
                     and b["yMin"] <= highy and b["yMax"] >= lowy
                     and b["zMin"] <= highz and b["zMax"] >= lowz):
                 raise ValueError("SPATIAL_COLLISION: existing element inside scene envelope")
             checked += 1
+        if unavailable:
+            classified = api("GetDetailsOfElements", {"elements": unavailable})
+            types = classified.get("detailsOfElements") if isinstance(classified, dict) else None
+            if (not isinstance(types, list) or len(types) != len(unavailable)
+                    or any(not isinstance(t, dict)
+                           or t.get("type") not in _NONSPATIAL_TYPES for t in types)):
+                raise ValueError("SPATIAL_SCAN_UNAVAILABLE: unbounded 3D/unknown element")
+            checked += len(unavailable)
     return checked
 
 
