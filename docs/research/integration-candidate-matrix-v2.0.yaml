@@ -1,0 +1,201 @@
+version: 2.0
+date: 2026-10-08
+status: research_draft
+current_target: Archicad_29
+
+programming_backbone:
+  drofus:
+    category: requirements_space_room_equipment_ssot
+    priority: P0
+    room_hierarchy: PASS
+    room_templates: PASS
+    programmed_area: PASS
+    designed_area: PASS
+    room_data_sheets: PASS
+    equipment_items: PASS
+    finishes: PASS
+    groups_classifications_status: PASS
+    function_data: PASS
+    room_item_checks: PASS
+    change_history: PASS
+    archicad_addon: PASS
+    bidirectional_archicad: PASS
+    archicad_zone_room_link: PASS
+    archicad_object_item_link: PASS
+    planned_vs_modeled_equipment_compare: PASS
+    ifc: PASS
+    rest_api: PASS
+    openapi_swagger: PASS
+    oauth2_bearer: PASS
+    read_only_api_key: PASS
+    machine_to_machine_via_api_key: NOT_RECOMMENDED
+    adjacency_definition_public_claim: PASS
+    graphical_function_planner_current: FAIL_REMOVED_FROM_2_14
+    geometric_layout_solver: NOT_CORE_ROLE
+    decision: PRIMARY_PROGRAM_REQUIREMENT_CANDIDATE
+
+  briefbuilder:
+    category: generic_requirements_management
+    structured_requirements: PASS
+    value_unit_source: PASS
+    must_vs_nice_to_have: PASS
+    ifc_verification: PASS
+    api_publicly_described: PASS
+    reusable_templates: PASS
+    bubble_diagrams: PASS
+    adjacency_visualization: PASS
+    logistics_walking_relationships: PASS
+    direct_archicad_addon: NOT_VERIFIED
+    priority: P1_SEMANTIC_BENCHMARK
+
+  hypar:
+    category: early_space_planning
+    current_docs_verified_2026_10: true
+    program_import: PASS
+    drofus_import: PASS
+    drofus_sync_direction: ONE_WAY_TO_HYPAR
+    live_area_count_metrics: PASS
+    spaces_doors_windows_equipment: PASS
+    room_layout_suggestions: PASS
+    design_options: PASS_PAID
+    custom_room_libraries: PASS
+    direct_archicad_path: NOT_VERIFIED
+    current_downstream_documented: REVIT
+    priority: P1_UX_FIT_BENCHMARK
+
+  seps2bim:
+    category: healthcare_domain_program_data_reference
+    equipment_objects_approx: 2100
+    space_templates_approx: 1100
+    department_programs: PASS
+    APIs_web_services: PASS
+    program_from_mission_workload_staffing: PASS
+    russian_authority: false
+    priority: METHOD_AND_DOMAIN_PACK_REFERENCE
+
+requirements_model:
+  PRE:
+    name: Program_Requirement_Envelope
+    custom_normalized_schema: true
+    scope:
+      - function_hierarchy
+      - population
+      - area_budget
+      - room_counts
+      - relationship_graph
+      - operational_flows
+      - security_privacy
+      - shared_resources
+      - normative_refs
+
+  RRE:
+    name: Room_Requirement_Envelope
+    custom_normalized_schema: true
+    not_geometry: true
+    fields:
+      - min_target_max_area
+      - min_dimensions
+      - proportion
+      - ceiling
+      - facade_daylight
+      - occupancy_activities
+      - equipment
+      - operational_clearance
+      - access_accessibility
+      - environment
+      - MEP_services
+      - loads
+      - finishes
+      - fire_security
+      - relationships
+      - source_evidence
+
+  FRG:
+    name: Functional_Relationship_Graph
+    desired_graph: true
+    edge_types:
+      - adjacency
+      - near
+      - far
+      - anti_adjacency
+      - visibility
+      - acoustic_separation
+      - security_transition
+      - public_flow
+      - staff_flow
+      - goods_flow
+      - waste_dirty_flow
+      - emergency_flow
+      - maintenance_flow
+      - vertical_stack
+
+realized_spatial_graph:
+  source:
+    - archicad_native_semantics
+    - TopologicPy
+    - geometry_fallback
+  compare_to_FRG: true
+  outputs:
+    - PASS
+    - MARGIN
+    - FAIL
+
+area_semantics:
+  programmed_area: REQUIREMENT
+  designed_area: MEASURED_FROM_ACTUAL_GEOMETRY
+  direct_set_actual_area_operation: FORBIDDEN
+  area_change_requires_geometry_change: true
+
+fit_gate:
+  area_only_sufficient: false
+  required:
+    - polygon_proportion
+    - equipment_fit
+    - operating_clearance
+    - door_access
+    - internal_circulation
+    - accessibility
+    - environment_services
+    - facade_window
+    - structural_mep_clearance
+
+flow_analysis:
+  light:
+    - graph_adjacency
+    - route_length
+    - crossing_count
+  warm:
+    - TopologicPy
+    - NetworkX
+  heavy:
+    - DepthmapX
+    - PeopleFlow
+  custom_graph_algorithms_from_zero: BLOCKED
+
+custom_blocked_pending_provider_test:
+  - generic_room_requirements_database
+  - generic_room_template_system
+  - generic_equipment_requirements_database
+  - generic_room_data_sheet_system
+  - generic_programmed_vs_designed_tracker
+  - generic_archicad_zone_room_sync
+  - generic_requirement_reporting
+  - generic_requirement_rest_backend
+  - generic_bubble_diagram_tool
+
+custom_retain:
+  - PRE_RRE_normalization
+  - FRG_operational_flow_schema
+  - russian_typology_domain_packs
+  - norm_provenance_links
+  - hard_strong_weak_semantics
+  - provider_to_solver_constraint_compiler
+  - desired_vs_realized_graph_check
+  - impact_invalidation_integration
+
+next_tests:
+  - PROGRAM_01
+  - RDS_AC29_01
+  - ITEM_ROOM_01
+  - ADJACENCY_PROGRAM_01
+  - PROGRAM_CHANGE_01
