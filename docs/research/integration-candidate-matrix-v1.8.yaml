@@ -1,0 +1,165 @@
+version: 1.8
+date: 2026-10-08
+status: research_draft
+current_target: Archicad_29
+
+training_strategy:
+  principle: train_system_skills_not_one_general_architect_model
+  stages:
+    - no_training_reuse_existing
+    - collect_structured_feedback
+    - improve_retrieval_prompts_grammar
+    - small_sft_if_needed
+    - preference_model_if_data_sufficient
+    - rl_rlvr_only_after_reward_validation
+
+floora:
+  repository: AutodeskAILab/floora
+  license: Apache_2_0
+  paper: arXiv_2609_36064
+  base_models:
+    - Qwen3_0_6B
+    - Qwen3_1_7B
+  effective_0_6b_after_vocab_resize: approximately_440M
+  released_models: PASS
+  released_dataset: PASS
+  released_inference_code: PASS
+  released_dsl_tokenizer: PASS
+  task:
+    - multifamily_massing_conditioned_layout
+    - core
+    - corridor
+    - living_unit_polygons
+  dsl:
+    deterministic_parse: PASS
+    canonicalization: PASS
+    geometry_roundtrip: PASS
+    token_efficient: PASS
+    reported_ifc_compaction: up_to_15x_for_task_representation
+  training:
+    synthetic_pretraining: PASS
+    architect_edited_sft: PASS
+    architect_pairwise_preferences: PASS
+    reward_model: PASS
+    verifiable_rewards: PASS
+    GRPO: PASS
+    reported_sft_examples: "10000"
+    reported_pairwise_preferences: "90000"
+  data:
+    synthetic_before_rotation: approximately_4_1M
+    synthetic_after_rotation: approximately_82M
+    osm_real_ood: approximately_14k_massings_paper
+  reported_results:
+    OOD_vlm_judge_win_up_to_pct: 92.0
+    synthetic_vlm_judge_win_up_to_pct: 96.0
+    human_best_selection_pct: 89.3
+  limitations:
+    - conceptual_only
+    - multifamily_only
+    - north_american_preference_bias
+    - no_code_guarantee
+    - no_structure_mep_fire_docs
+  priority: P0_LOCAL_SPECIALIST_TEST
+  decision: REUSE_MODEL_AND_RECIPE
+
+rlvr_floorplan_2026:
+  paper: Generative_Floor_Plan_Design_with_LLMs_via_RLVR
+  accepted_findings_acl_2026: true
+  connectivity_rewards: PASS
+  numerical_constraints: PASS
+  invalid_overlap_penalties: PASS
+  reported_compatibility_error_relative_reduction: at_least_94_pct
+  role: TRAINING_METHOD_REFERENCE
+
+evaluation:
+  floorplanqa:
+    venue: ICML_2026
+    structured_layouts: PASS
+    distance: PASS
+    visibility: PASS
+    pathfinding: PASS
+    object_placement: PASS
+    role: SPATIAL_REASONING_BENCHMARK
+
+  aec_bench:
+    repository: nomic-ai/aec-bench
+    license: Apache_2_0
+    tasks: 196
+    task_families: 9
+    real_documents: PASS
+    cross_sheet: PASS
+    cross_project: PASS
+    automatic_verifiers: PASS
+    codex_agent: PASS
+    claude_agent: PASS
+    role: AEC_AGENT_BENCHMARK
+
+  arch_b:
+    paper: arXiv_2609_34047
+    questions: 354
+    archetypes: 11
+    photos_plans_elevations_sections_renderings: PASS
+    role: CROSS_REPRESENTATION_BENCHMARK
+
+  planfinder_professional_study_2026:
+    human_completed_projects: PASS
+    generated_binary_criteria_range_pct: "55.56-74.07"
+    serious_regulatory_errors_reported: true
+    structural_wall_handling_failures_reported: true
+    ergonomic_gaps_reported: true
+    lesson: BIM_READY_IS_NOT_ARCHITECT_READY
+
+architect_competence_benchmark:
+  custom: true
+  families:
+    - spatial_reasoning
+    - bim_semantics
+    - hard_architecture_constraints
+    - change_propagation
+    - architectural_preference
+    - documentation
+    - cross_representation
+    - live_archicad_execution
+  primary_kpi: human_minutes_to_verified_accepted_AC29_outcome
+
+feedback_record:
+  custom: true
+  store:
+    - task_context
+    - candidate_ids
+    - verifier_results
+    - selected_candidate
+    - rejected_candidates
+    - architect_edits
+    - pairwise_preferences
+    - reason_codes
+    - decision_record
+    - final_verified_revision
+    - model_provider_versions
+
+reward_hierarchy:
+  tier0_hard_invalid: reject
+  tier1_validity_margin: deterministic
+  tier2_architectural_preference: learned_or_ADG
+  tier3_tradeoffs: cost_carbon_time_maintenance
+  learned_reward_may_override_hard_gate: false
+
+future_local_specialists:
+  - LayoutStudent
+  - RepairStudent
+  - DetailRetriever
+  - FacadeGrammarStudent
+  - DocumentStudent
+
+custom_blocked_pending_evidence:
+  - giant_local_general_architect_llm
+  - new_floorplan_model_architecture
+  - new_architectural_rl_algorithm
+  - general_preference_training_framework
+  - benchmark_framework_from_zero
+  - raw_ifc_as_llm_primary_representation
+
+next_tests:
+  - FLOORA_01
+  - FEEDBACK_01
+  - ACB_BASELINE_01
