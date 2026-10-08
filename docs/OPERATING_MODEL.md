@@ -21,6 +21,14 @@ GitHub private repository
   -> local Codex review, tests and optional real-copy validation
 ```
 
+## CHAT-FIRST / WORK-MINIMAL
+
+- Do the main coding, research, algorithm design and debugging in ordinary ChatGPT chat (target: 90–95% of the work).
+- Use the GitHub connector directly from chat whenever possible, including reading and updating repository files.
+- Use Work only for small, bounded actions requiring access to PC files or local execution, builds and tests (target: 5–10%).
+- Prepare the main work in chat before the task loop below; do not delegate large tasks to Work or spend Work credits on work that can be done in chat.
+- Return Work results to the originating chat: exact changed paths, commit, commands run, results and blockers.
+
 ## Responsibilities
 
 | Component | May do | Must not do |
