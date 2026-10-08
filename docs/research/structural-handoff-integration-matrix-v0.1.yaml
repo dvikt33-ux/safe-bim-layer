@@ -1,0 +1,172 @@
+version: "0.1"
+date: "2026-10-08"
+status: RESEARCH_NO_LOCAL_TEST
+target: Archicad_29
+reference: docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md
+ultimate_metric: human_minutes_brief_to_engineer_accepted_architectural_model
+milestones:
+  H0_PRELIMINARY:
+    purpose: discuss_structural_scheme_and_feasibility
+    require:
+      - single_physical_BIM_source
+      - architectural_grid_levels_and_core
+      - tentative_loadbearing_classification
+      - spans_and_major_openings
+      - structural_design_questions
+      - named_assumptions_and_unknowns
+    not_required:
+      - numerical_FEM_solution
+      - calculated_reinforcement
+      - full_AR_KR_documentation
+  H1_CALCULATION_INTAKE:
+    purpose: start_structural_engineer_calculation
+    require:
+      - agreed_target_receiver_format_and_version
+      - structural_analytical_coverage
+      - model_physical_core_connection_checks
+      - SAM_connectivity_review
+      - accepted_IFC_identity_stability
+      - SAF_material_and_profile_mapping_complete
+      - layer_and_renovation_variation_digest
+      - explicit_units_coordinate_origin_story_table
+      - load_inputs_approved_or_marked_missing
+      - structural_intake_issues_and_open_decisions
+  H2_ENGINEER_FEEDBACK:
+    require:
+      - engineer_report_and_revision_identity
+      - incoming_model_compare
+      - changed_element_source_mapping
+      - architectural_impact_analysis
+      - human_approval_for_structural_change
+  H3_DOCUMENTATION_RELEASE:
+    require:
+      - accepted_structural_feedback
+      - normative_documentation_coverage
+      - synchronized_plans_sections_schedules_views
+      - release_witness_pdf_ifc_saf
+first_party:
+  AC29_SAM:
+    decision: REUSE_P0
+    source: https://graphisoft.github.io/archicad-api-devkit/group___analytical.html
+    functions:
+      - ACAPI_Analytical_GetAnalyticalModel
+      - ACAPI_Analytical_GetCurveElements
+      - ACAPI_Analytical_GetCurveMember
+      - ACAPI_Analytical_GetSurfaceElements
+      - ACAPI_Analytical_GetSurfaceMember
+      - ACAPI_Analytical_UpdateAnalyticalModel
+    caveat: derived_view_dependent_model
+  AC29_PhysicalModelCheck:
+    decision: REUSE_P0
+    detects:
+      - missing_core_connection
+      - nearby_unconnected_loadbearing_elements
+      - suspicious_core_ratios
+    caveat: checks_visible_elements_only
+  AC29_ZoneLiveLoads:
+    decision: REUSE_WHEN_APPROVED
+    condition: zone_classification_and_load_mapping_approved_by_engineer
+  AC29_SAF:
+    decision: REUSE_P0
+    exchange: XLSX
+    mapping_gate: forbid_unapproved_other_building_materials_catchall
+    identity_gate: stable_model_ids
+  AC29_ModelCompare:
+    decision: REUSE
+    purpose: structural_feedback_merge
+receiver_candidates:
+  LIRA_FEM_2026_R1:
+    rank: P0
+    support: [IFC_import_partial, selective_IFC_update, SAF_import]
+    exact_install_and_API_access: NOT_VERIFIED
+    src: https://www.liraland.com/lira/release-notes/2026/components-of-bim-technology
+  SCAD_Office:
+    rank: P1
+    support: [IFC, R2S_historic]
+    AC29_plugin_binary: NOT_VERIFIED
+    src: https://scadsoft.com/help/SCAD/ru/SCAD1049/import_loading_diagram.htm
+  SCIA_AutoConverter:
+    rank: P1_OPTIONAL
+    support: [IFC_to_analysis_SAF, SCIA_engineer_roundtrip]
+    subscription: LICENSE_REQUIRED
+    src: https://www.scia.net/en/support/faq/scia-autoconverter/general/workflow-scia-autoconverter-scia-engineer
+  Dlubal_RFEM6_API:
+    rank: P1_OPTIONAL
+    runtime: gRPC_dlubal.api
+    old_soap_client: MAINTENANCE_DO_NOT_ADOPT
+    subscription: LICENSE_API_REQUIRED
+    src: https://apidocs.dlubal.com/quick_start.html
+  Ifc2CA_Code_Aster:
+    rank: RESEARCH_ONLY
+    src: https://github.com/Jesusbill/ifc2ca
+non_structural_misclassification:
+  CYPE_OpenBIM_Analytical_Model:
+    actual_domain: thermal_and_acoustic
+    NOT_structural_SAM: true
+    src: https://info.cype.com/en/software/open-bim-analytical-model/
+existing_project_assets:
+  detail_library:
+    release: v2.12
+    total_units_from_manifest: 1215
+    unresolved_dimension_tasks: 532
+    construction_approval: NOT_GRANTED
+    semantic_match_only_with_validity_evidence: true
+  current_executor:
+    file: scripts/archicad_executor.py
+    needs:
+      - scoped_model_reads
+      - minimal_event_delta
+      - unified_dispatcher
+  safe_layer:
+    file: safe_bim_layer.py
+    current_create_room_hazards:
+      - hardcoded_story_zero
+      - first_wall_opening_host
+      - no_whole_action_rollback
+    decision: PATCH_AND_UNIFY_NO_REWRITE
+  polling_watch:
+    file: scripts/archicad_change_watch.py
+    role: RECOVERY_FALLBACK
+    future_primary: native_event_bridge
+pipeline:
+  - brief_to_program_and_criteria
+  - grid_core_structure_option_and_room_fit
+  - native_batch_write_and_scoped_readback
+  - physical_model_quality
+  - SAM_member_connection_quality
+  - SAF_IFC_material_profile_identity_gate
+  - H0_or_H1_package
+  - engineer_feedback_via_model_compare_bcf
+  - selective_dirty_recompile
+  - release_documents_only_when_needed
+rules:
+  - no_invented_spans_sections_loads
+  - engineer_owns_final_structural_calculation
+  - H0_must_not_claim_H1
+  - H1_must_not_claim_H3
+  - no_default_license_dependent_components
+  - one_project_one_authoritative_BIM
+  - no_install_or_mutation_during_research
+  - each_provider_must_have_measured_AC29_contract
+  - avoid_full_ModelDump_in_hot_path
+experiment_queue:
+  - STRUCT_HANDOFF_BASELINE_01
+  - AC29_SAM_READ_01
+  - STRUCT_CORE_ADJUST_01
+  - SAF_MAP_01
+  - SAF_RECEIVER_LIRA_01
+  - LOADS_ZONE_01
+  - DISPATCH_HOT_01
+  - ROOM_ATOMICITY_01
+  - DETAIL_INDEX_MATCH_01
+  - ENGINEER_FEEDBACK_01
+primary_kpis:
+  - T_first_H0_minutes
+  - T_first_H1_minutes
+  - T_edit_seconds
+  - T_delta_seconds
+  - T_struct_iteration_minutes
+  - full_dump_count_per_edit
+  - unnecessary_checker_calls
+  - unmatched_SAF_materials
+  - engineer_return_for_missing_information_count
