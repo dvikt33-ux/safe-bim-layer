@@ -22,6 +22,9 @@ SPEC = importlib.util.spec_from_file_location(
 CONTRACTS = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(CONTRACTS)
 
+# Offline graph bound only; native batch cap remains unchanged (100).
+MAX_GRAPH_OPERATIONS = 500
+
 _REF_KEY = "$createdGuid"
 _DUMMY_GUID = "00000000-0000-4000-8000-000000000000"
 _ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$")
@@ -195,8 +198,8 @@ def compile_graph(catalog: dict, value: dict, runtime_version: str | None = None
     if not isinstance(value, dict) or set(value) != {"operations"}:
         raise ValueError("plan must contain only the 'operations' array")
     operations = value["operations"]
-    if not isinstance(operations, list) or not (1 <= len(operations) <= CONTRACTS.MAX_REQUESTS):
-        raise ValueError(f"operations must contain 1..{CONTRACTS.MAX_REQUESTS} steps")
+    if not isinstance(operations, list) or not (1 <= len(operations) <= MAX_GRAPH_OPERATIONS):
+        raise ValueError(f"operations must contain 1..{MAX_GRAPH_OPERATIONS} steps")
     by_id = {}
     for index, item in enumerate(operations):
         if not isinstance(item, dict) or not (
