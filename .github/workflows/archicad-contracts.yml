@@ -5,6 +5,7 @@ on:
     branches:
       - 'chatgpt/schema-driven-*'
       - 'chatgpt/mailbox-graph-host-integration-*'
+      - 'chatgpt/tapir-1510-offline-preflight-*'
     paths:
       - 'scripts/archicad_batch_contracts.py'
       - 'scripts/archicad_bim_graph.py'
