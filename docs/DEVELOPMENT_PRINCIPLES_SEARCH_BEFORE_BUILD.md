@@ -97,3 +97,14 @@ This rule must be applied again whenever we are about to:
 - build a BIM validation layer.
 
 Search first. Compare. Then code only the justified gap.
+
+
+## Full-cycle and project-library policy (2026-10-08)
+
+The binding product goal is **full-cycle autonomous architectural project creation or completion through final documentation and engineer coordination**, not structural handoff as the terminal product. See [canonical goal and story convention](FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md).
+
+Before each project, deliberate **extensive, source-verified prebuild research** should compile an applicable project-specific library pack from a large, indexed global catalogue. Expand *coverage of construction conditions*, not just numbers of similar details; reuse `details/v2.12` as a source and preserve its unresolved blockers. Full research is allowed to take much longer than a single live design edit when it materially reduces subsequent rework. Freeze sources, rules, versions, compatibility and unresolved obligations; incremental refresh when changed.
+
+The architect uses `1 этаж` at `±0,000` for the first above-ground storey. Never infer that the AC29 internal `floorIndex` equals the architectural label; resolve from actual native story table and `skipNullFloor`.
+
+LIRA-FEM (formerly LIRA-SAPR) is a candidate COM-controlled engineering subsystem. No solver result is a professional sign-off and no unsupported national norm edition may be assumed. Keep dependencies optional until a licensed end-to-end test proves them.
