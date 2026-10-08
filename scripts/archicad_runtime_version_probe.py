@@ -38,6 +38,11 @@ def tapir_read(connection, command):
     result = connection.commands.ExecuteAddOnCommand(
         connection.types.AddOnCommandId("TapirCommand", command), {})
     data = as_dict(result)
+    # Graphisoft wrappers can return the raw Tapir dictionary or envelope it
+    # under result.addOnCommandResponse; support both confirmed shapes.
+    nested = data.get("result")
+    if isinstance(nested, dict) and isinstance(nested.get("addOnCommandResponse"), dict):
+        data = nested["addOnCommandResponse"]
     if not data:
         raise ValueError(f"{command}: empty or unexpected response")
     return data
