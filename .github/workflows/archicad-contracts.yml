@@ -15,6 +15,7 @@ on:
       - 'scripts/archicad_mailbox_wall_host.py'
       - 'scripts/archicad_scene_v1.py'
       - 'scripts/archicad_typical_floor_graph.py'
+      - 'scripts/archicad_accelerator_offline_benchmark.py'
       - 'scripts/archicad_scene_run.py'
       - 'scripts/test_archicad_mailbox_wall_host.py'
       - 'scripts/archicad_guarded_wall_probe.py'
@@ -41,6 +42,7 @@ on:
       - 'scripts/archicad_mailbox_wall_host.py'
       - 'scripts/archicad_scene_v1.py'
       - 'scripts/archicad_typical_floor_graph.py'
+      - 'scripts/archicad_accelerator_offline_benchmark.py'
       - 'scripts/archicad_scene_run.py'
       - 'scripts/test_archicad_mailbox_wall_host.py'
       - 'scripts/archicad_guarded_wall_probe.py'
@@ -73,6 +75,12 @@ jobs:
           python-version: '3.11'
       - run: python -m pip install 'jsonschema>=4,<5'
       - run: python -m unittest discover -s tests -p 'test_archicad_*.py' -v
+      - name: Single-run offline accelerator E2E + instrumentation
+        run: python scripts/archicad_accelerator_offline_benchmark.py --output accelerator-offline-metrics.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: accelerator-offline-metrics
+          path: accelerator-offline-metrics.json
       - run: python scripts/archicad_batch_contracts.py --runtime-version 1.5.8
       - run: python scripts/archicad_bim_graph.py examples/archicad_bim_graph.offline.sample.json --runtime-version 1.5.8
       - name: Static check Windows launcher syntax
