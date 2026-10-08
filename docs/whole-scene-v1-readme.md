@@ -48,7 +48,8 @@ native writer prototype, not connected to GitHub Mailbox.
    outside corner. Spatial exclusion envelope includes 0.35m outside every
    scene edge and Z from -0.3m to +3.1m.
 5. Preflight prints \`READY_FOR_EXPLICIT_TEST_RUN\`, sourcePlanHash,
-   exact targets and checked-existing-element count. It creates **no journal
+   exact targets, checked 3D-body count, and classified nonspatial count.
+   It creates **no journal
    and makes no writes**.
 
 For the Windows runtime, use the isolated folder \`work\scene-v1\`. Do NOT
