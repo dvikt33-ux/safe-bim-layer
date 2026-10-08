@@ -89,6 +89,7 @@ def scan_for_existing_geometry(api, anchor_x, anchor_y):
     lowy, highy = anchor_y-.35, anchor_y+SCENE.DEPTH+.35
     lowz, highz = -SCENE.SLAB_THICKNESS-.1, SCENE.HEIGHT+.1
     checked = 0
+    nonspatial = 0
     # Batch modestly; do not hold a massive JSON response in memory.
     for i in range(0, len(elements), 100):
         batch = elements[i:i+100]
@@ -128,8 +129,10 @@ def scan_for_existing_geometry(api, anchor_x, anchor_y):
                     or any(not isinstance(t, dict)
                            or t.get("type") not in _NONSPATIAL_TYPES for t in types)):
                 raise ValueError("SPATIAL_SCAN_UNAVAILABLE: unbounded 3D/unknown element")
-            checked += len(unavailable)
-    return checked
+            nonspatial += len(unavailable)
+    return {"nativeElementsInspected": checked+nonspatial,
+            "volumetricBodiesChecked": checked,
+            "nonSpatialElementsVerified": nonspatial}
 
 
 def requested_details(api, guid):
@@ -267,11 +270,11 @@ class SceneWriter:
     def preflight(self, x, y):
         binding = guarded_project(self.api)
         preview = SCENE.prepare(x, y)
-        scan_count = scan_for_existing_geometry(self.api, x, y)
+        scan_report = scan_for_existing_geometry(self.api, x, y)
         if guarded_project(self.api) != binding:
             raise ValueError("project binding changed during read-only preflight")
         return {**preview, "status": "READY_FOR_EXPLICIT_TEST_RUN",
-                "binding": binding, "existingElementsSpatiallyChecked": scan_count,
+                "binding": binding, **scan_report,
                 "liveWriteAuthorized": False, "plnChanged": False}
 
     def execute(self, x, y, scene_id, expected_hash):
