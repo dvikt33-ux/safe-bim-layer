@@ -93,14 +93,17 @@ class SceneV1SystemTests(unittest.TestCase):
         proposal = SCENE.prepare(200, 200)
         self.assertEqual(proposal["status"], "SCENE_PREVIEW_OFFLINE")
         self.assertEqual(len(proposal["graph"]["operations"]), 12)
-        self.assertEqual(proposal["metrics"]["floorAreaSquareMeters"], 12)
+        self.assertEqual(proposal["metrics"]["grossFootprintSquareMeters"], 12)
         self.assertEqual(proposal["metrics"]["grossVolumeCubicMeters"], 36)
+        self.assertEqual(proposal["metrics"]["interiorClearAreaSquareMeters"], 9.36)
+        self.assertEqual(proposal["metrics"]["wallReferenceLineLengthsMeters"],
+                         {"long": 3.8, "short": 2.8})
         self.assertEqual(proposal["metrics"]["perimeterMeters"], 14)
         self.assertEqual(proposal["metrics"]["elementKinds"],
                          {"Wall": 4, "Slab": 1, "Column": 4, "Window": 2, "Door": 1})
         self.assertEqual(proposal["sourcePlanHash"], SCENE.prepare(200, 200)["sourcePlanHash"])
         self.assertEqual(proposal["graph"]["operations"][2]["params"]["wallsData"][0]
-                         ["begCoordinate"], {"x": 204.0, "y": 203.0})
+                         ["begCoordinate"], {"x": 203.9, "y": 202.9})
         self.assertFalse(proposal["plnChanged"])
 
     def test_read_only_preflight_makes_no_changes(self):
