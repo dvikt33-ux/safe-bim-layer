@@ -1,0 +1,149 @@
+version: 1.6
+date: 2026-10-08
+status: research_draft
+current_target: Archicad_29
+
+whole_system_open_source:
+  harnessbim:
+    repository: ReverseZoom2151/harnessbim
+    license: Apache_2_0
+    project_version: 0.0.1
+    status: early_stage_research
+    deterministic_pipeline_claimed_proven: true
+    frontier_llm_quality_claimed_proven: false
+    canonical_ifc4: PASS
+    bim_backend_abstraction: PASS
+    ifcopenshell_backend: PASS
+    bonsai_backend: PASS
+    archicad_backend:
+      exists: true
+      type: IFC_round_trip_only
+      conformance: RELAXED
+      live_archicad: false
+      replaces_native_ac29_bridge: false
+    verifier:
+      schema: PASS
+      ids: PASS
+      clash: PASS
+      code: PASS
+      structural: PASS
+      mep: PASS
+      egress: PASS
+      proofs: PASS
+      relations: PASS
+      bcf: PASS
+    mcp: PASS
+    project_store: PASS
+    version_diff: PASS
+    plugin_registry: PASS
+    tests: SUBSTANTIAL
+    priority: P0_CODE_AND_VERIFIER_AUDIT
+    likely_reuse:
+      - checker_interfaces
+      - verification_suite_parts
+      - BCF_patterns
+      - project_store_patterns
+      - backend_abstraction_patterns
+      - MCP_patterns
+      - benchmark_patterns
+
+  massing:
+    repository: ibuilder/massing
+    license: MIT
+    created: 2026_06
+    active_2026_10: true
+    observed_stars: 122
+    observed_forks: 51
+    ifc_native: PASS
+    authoring: PASS
+    viewer: PASS
+    versioning_undo: PASS
+    bcf: PASS
+    ids: PASS
+    clash: PASS
+    qto: PASS
+    four_d: PASS
+    five_d: PASS
+    drawings: PASS
+    schedules: PASS
+    code_prechecks: PASS
+    mep_connectivity: PASS
+    structural_analysis_export: PASS
+    generative_zoning_to_ifc: PASS
+    unit_layout: PASS
+    parking: PASS
+    service_core: PASS_COARSE
+    mcp_ai: PASS_PUBLIC_REPO
+    root_license_reuse: PERMISSIVE_WITH_THIRD_PARTY_REVIEW
+    service_core_architect_grade: false
+    priority: P0_CODE_MINING_REFERENCE
+    likely_reuse:
+      - IFC_authoring_recipes
+      - GUID_stable_edit_patterns
+      - version_diff_patterns
+      - drawing_QTO_4D_5D_patterns
+      - openCDE_BCF_patterns
+      - authoring_guardrails
+      - model_health_patterns
+
+  agentic_bim_team:
+    repository: louistrue/agentic-bim-team
+    license: MIT
+    country: Switzerland
+    zoning_adapter: PASS
+    site_ifc: PASS
+    architect_agent: PASS
+    parallel_specialists:
+      - structural
+      - MEP
+      - facade_energy
+      - fire
+    BCF_feedback_loop: PASS
+    iterative_convergence: PASS
+    role: JURISDICTION_SPECIFIC_ARCHITECTURE_REFERENCE
+
+  openbimrs:
+    repository: openbimrs/openbim
+    license: AGPL_3_or_later
+    rust: true
+    standards_scope:
+      - STEP
+      - IFC
+      - IDS
+      - BCF
+      - ICDD
+      - CDE
+      - LOIN
+      - MVD
+      - ISO_23387
+      - EPD
+      - GAEB
+    many_modules_scaffold_or_partial: true
+    priority: WATCH_NOT_MIGRATE
+
+audit_rule:
+  feature_exists_is_not_architect_grade: true
+  classifications:
+    - REUSE_CODE
+    - REUSE_PROTOCOL
+    - REUSE_ALGORITHM
+    - REUSE_TEST
+    - REFERENCE_ONLY
+    - CUSTOM_GAP_PROVEN
+
+custom_blocked_pending_whole_system_audit:
+  - generic_agent_harness
+  - generic_ifc_backend
+  - generic_verifier_suite
+  - generic_project_store
+  - generic_checker_registry
+  - generic_mcp_bim_harness
+  - generic_bcf_layer
+  - generic_browser_bim_viewer
+  - generic_qto_4d_5d_scaffolding
+  - generic_text_to_bim_architecture
+
+next_tests:
+  - HARNESSBIM_01
+  - MASSING_01
+  - WHOLE_STACK_01
