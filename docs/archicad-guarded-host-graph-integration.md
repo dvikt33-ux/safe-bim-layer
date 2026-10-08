@@ -38,7 +38,15 @@ PLN, running watcher, mailbox JOB/RESULT or local SQLite journal was modified.
 4. CI discovers and runs the 10 unmodified original `WallExecutor` synthetic
    tests through an integration suite, then asserts the generated dry-run
    envelope is directly accepted by the copied live host `validate()`.
-5. Schema-correct wall → hosted window/door and slab/column graphs remain
+5. Offline hosted window/door analysis also rejects a known straight-wall
+   reference: if `centerOffset` lies beyond a newly created parent Wall, or
+   `centerOffset ± width/2` exceeds the wall segment, compilation fails.
+   Width may be omitted when supplied later by a Favorite; in that case only
+   the available offset can be checked. Curved/previously existing walls,
+   actual holes, wall joins, library opening dimensions and normative
+   clearances still need live verified geometry; this is **not** a
+   code-compliance or collision-clearance certificate.
+6. Schema-correct wall → hosted window/door and slab/column graphs remain
    **offline graph structures only**, and fail safe with
    `UNSUPPORTED_GRAPH` if requested for execute mode.
 
