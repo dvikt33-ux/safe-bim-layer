@@ -14,6 +14,8 @@ on:
   pull_request:
     paths:
       - 'scripts/archicad_batch_contracts.py'
+      - 'scripts/archicad_bim_graph.py'
+      - 'tests/test_archicad_bim_graph.py'
       - 'tests/test_archicad_batch_contracts.py'
       - 'tapir-1.5.8.json'
   workflow_dispatch:
