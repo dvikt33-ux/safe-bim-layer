@@ -1,0 +1,73 @@
+version: "0.1"
+date: "2026-10-08"
+target: Archicad_29
+checkpoint: docs/research/architectural_ai_checkpoint_30_live_delta_verifier_reuse_2026-10-08.md
+status: RESEARCH_ONLY
+parallel_work_preserved:
+  - Native_Observer
+  - ZoneBoundaryQuery
+  - MEP_DistributionSystemsGraph
+  - requirement_Update_Zones_before_trusting_zone_areas
+provider_matrix:
+  graphisoft_solibri_connection_ac29:
+    priority: P0_IF_LICENSED
+    native_ac29: VERIFIED_DOCUMENTATION
+    detects_changed_elements: VERIFIED_DOCUMENTATION
+    exports_changed_elements_only: VERIFIED_DOCUMENTATION
+    IFC_semantic_links: VERIFIED_DOCUMENTATION
+    BCF_roundtrip: VERIFIED_DOCUMENTATION
+    requires_solibri: true
+    local_integration_test: NOT_RUN
+    action: REUSE_NOT_REBUILD
+  solibri_rest:
+    priority: P1_IF_OFFICIAL_CONNECTOR_INSUFFICIENT
+    partialUpdate: VERIFIED_DOCUMENTATION
+    deleteComponents: VERIFIED_DOCUMENTATION
+    selectionBasket: VERIFIED_DOCUMENTATION
+    bcfxml: VERIFIED_DOCUMENTATION
+    run_selected_check_via_REST: NOT_VERIFIED
+    action: AUDIT_GAP_ONLY
+  solibri_autorun:
+    priority: COLD_OPTIONAL_IF_LICENSED
+    opens_models_and_rulesets: VERIFIED_DOCUMENTATION
+    checks_and_exports_BCF: VERIFIED_DOCUMENTATION
+    local_test: NOT_RUN
+  ifctester:
+    priority: OSS_BASELINE
+    IDS_1_0: SUPPORTED
+    attributes_quantities_classifications_materials: SUPPORTED
+    arbitrary_3D_geometry: NOT_SUPPORTED_BY_IDS
+    reports: [HTML, ODS, BCF]
+  ifcclash:
+    priority: OSS_GEOMETRY
+    clashes: SUPPORTED
+    clearance: GEOMETRY_TREE_SUPPORTED
+    normative_approval: NOT_PROVIDED
+  ifcdiff:
+    priority: COLD_DELTA_BACKUP
+    stable_ifc_globalids: REQUIRED
+    attribute_geometry_relationship_changes: SUPPORTED
+    warning: representation_change_may_not_mean_shape_change
+  harnessbim:
+    priority: P0_CODE_TEST_AUDIT
+    license: Apache_2_0
+    checkpoint: PARALLEL_ALREADY_AUDITED
+    live_AC29: NOT_VERIFIED
+    russian_norms: NOT_VERIFIED
+    code_areas: [checker_registry, verifier_integrity, proof_evidence, BCF_worklist, tests]
+hard_constraints:
+  ac_native_GUID_is_not_IFC_GlobalId: true
+  keep_ARCHICAD_IFC_ID_across_exports: true
+  do_not_use_generate_new_ifc_ids_for_diff: true
+  exported_view_and_translator_coverage_must_be_audited: true
+  solibri_update_does_not_mean_checks_have_rerun: true
+  no_final_pass_from_partial_check: true
+  do_not_claim_ids_checks_geometry: true
+  do_not_mutate_PLN_before_authorization: true
+test_queue:
+  - IFC_ID_STABILITY_01
+  - IMPACT_CONE_01
+  - SOLIBRI_PARTIAL_01
+  - IDS_VS_GEOMETRY_01
+  - IFC_DIFFERENCE_01
+  - SECTION_QA_01
