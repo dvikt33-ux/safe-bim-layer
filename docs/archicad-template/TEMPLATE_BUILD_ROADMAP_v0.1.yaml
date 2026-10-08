@@ -284,3 +284,42 @@ section_detail_planner_strategy:
     - AUTOSECTION_REFERENCE_01
     - DETAIL_NEED_01
     - VIEW_IMPACT_01
+
+
+vertical_core_and_design_grammar_strategy:
+  checkpoint: docs/research/architectural_ai_checkpoint_28_vertical_core_design_grammar_2026-10-08.md
+  principles:
+    - service_core_is_upstream_not_late_room_cluster
+    - lift_traffic_precedes_lift_layout
+    - use_native_AC29_stair_solver_for_local_geometry
+    - core_changes_are_high_impact
+    - preserve_architectural_identity_by_grammar_before_optimization
+  vertical_core_envelope:
+    components:
+      - elevator_banks
+      - stairs
+      - lobbies
+      - wet_service_spaces
+      - MEP_risers
+      - electrical_telecom_risers
+      - structural_lateral_core
+      - fire_smoke_interfaces
+      - vertical_continuity
+  architectural_design_grammar:
+    priority_classes:
+      - invariant
+      - strong_preference
+      - weak_preference
+    layers:
+      - massing
+      - spatial_topology
+      - facade
+      - materials
+      - characteristic_details
+      - allowed_transformations
+      - forbidden_transformations
+  tests:
+    - CORE_01
+    - STAIR_AC29_01
+    - ADG_01
+    - GRAMMAR_ENGINE_01
