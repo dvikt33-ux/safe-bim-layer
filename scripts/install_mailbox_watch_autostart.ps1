@@ -47,7 +47,8 @@ if ($LASTEXITCODE -ne 0 -or -not $encoded) { throw "Could not fetch launcher" }
 $bytes = [Convert]::FromBase64String(($encoded -join ""))
 if ($bytes.Length -lt 200) { throw "Downloaded launcher is unexpectedly short" }
 $temporary = "$launcher.new"
-[System.IO.File]::WriteAllBytes($temporary, $bytes)
+# Windows PowerShell 5.1 requires a UTF-8 BOM for the Russian exact PLN path.
+[System.IO.File]::WriteAllBytes($temporary, ([byte[]]@(239,187,191) + $bytes))
 Move-Item -LiteralPath $temporary -Destination $launcher -Force
 
 $identity = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
