@@ -1,5 +1,8 @@
 # Archicad 29 Template — Live Execution Runbook v0.1
 
+> Current installed Archicad version (confirmed 2026-10-09): **Archicad 29.2.1 (5101) RUS FULL (x86-64)**. `Archicad 29` elsewhere in this runbook refers to the AC29 compatibility generation. See [current runtime record](../ARCHICAD_RUNTIME_CURRENT.md). Historical checks are not retroactively reclassified as build 5101.
+
+
 This runbook converts the existing fail-closed builder actions into a reproducible live sequence for a clean Archicad 29 candidate project.
 
 It does **not** claim that Archicad has already been executed from GitHub or from ChatGPT. The launcher must run on the Windows machine where Archicad 29 and the Tapir/native overlay are available.
