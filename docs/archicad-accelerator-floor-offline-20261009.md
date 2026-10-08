@@ -189,3 +189,22 @@ This never runs `git reset`, `git stash`, `git clean`, `git pull`,
 `git commit`, or a forced push. If the working tree is not clean, **do not
 discard the changes**; save and review them before attempting publication.
 The known local SHA `308264c` is not conflated with any SHA in this branch.
+
+### Offline-only catalog caching comparison
+
+Follow-up CI run:
+https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/37860710097
+
+- **94/94 tests PASS**, synthetic system benchmark PASS.
+- Cold single floor preparation/compile: **31.4973 ms**.
+- Separate pinned catalog read: **6.3300 ms**.
+- Five repeated `prepare(..., catalog=cached_catalog)` calls:
+  **21.8936 ms median** per compile.
+- Source plan hash and execution order stayed identical in every warm trial.
+- FakeNative floor execution: **9.1005 ms** in this later CI run.
+
+These are non-isolated CI microbenchmarks affected by caching,
+process warmup and runner scheduling, not a statistically controlled native
+speed study. Schema-object reuse is suitable for further offline assessment,
+**not** a reason to skip schema-version guards or live readback checks.
+No real batch write path or cache shortcut was activated.
