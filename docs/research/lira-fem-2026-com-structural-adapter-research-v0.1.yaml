@@ -1,0 +1,116 @@
+schema_version: "0.1"
+date: "2026-10-08"
+target:
+  authoring: Archicad_29
+  analysis: LIRA_FEM_2026_R1
+  legacy_product_name: LIRA_SAPR
+  former_preprocessor_name: SAPFIR_3D
+  current_preprocessor_name: LIRA_CAD
+status: RESEARCH_NOT_RUN
+source:
+  version: https://lira.land/lira/release-notes/2025/
+  api: https://www.liraland.com/lira/release-notes/2026/api-and-input-tables
+  help: https://help.lirasapr.com/en-gb/extensions/
+  python_example: https://lira.land/forum/forum9/topic2666/messages/
+  batch: https://lira.land/lira/release-notes/2026/calculation-and-performance
+  server: https://lira.land/lira/systems/analysis_server.php
+  codes_example: https://lira.land/lira/release-notes/2026/loads
+  IFC_SAF: https://lira.land/lira/release-notes/2026/components-of-bim-technology
+roles:
+  archicad:
+    - architectural_BIM_authority
+    - physical_loadbearing_candidates
+    - native_SAM
+    - source_SAF_and_IFC
+  LIRA_FEM:
+    - professional_FEM_calculation_solver_if_licensed
+    - input_data_management_via_COM
+    - analysis_result_reader_via_RES_API
+    - batch_and_LAN_queue_if_available
+    - user_extensions
+  architect_orchestrator:
+    - orchestration_and_dependency_tracking
+    - data_mappings
+    - candidate_design_revisions
+    - specialist_review_requests
+  structural_engineer:
+    - verify_code_and_load_case
+    - validate_boundary_conditions_and_meshing
+    - validate_calculations_and_member_design
+    - approve_schemes_and_changes
+capabilities:
+  input_table_COM:
+    documentation: VERIFIED_VENDOR
+    live_test: NOT_RUN
+  Python_COM:
+    documentation: VERIFIED_VENDOR
+    live_test: NOT_RUN
+  RES_API_results:
+    documentation: VERIFIED_VENDOR_AND_FORUM_EXAMPLE
+    live_test: NOT_RUN
+  custom_extensions_and_reporting:
+    documentation: VERIFIED_VENDOR
+    live_test: NOT_RUN
+  batch_GUI:
+    documentation: VERIFIED_VENDOR
+    live_test: NOT_RUN
+  LAN_job_queue:
+    documentation: VERIFIED_VENDOR
+    live_test: NOT_RUN
+  fully_headless_API_run_start_cancel_status:
+    documentation: NOT_CONFIRMED
+    live_test: NOT_RUN
+  selective_IFC_update:
+    documentation: VERIFIED_VENDOR
+    live_test: NOT_RUN
+  SAF_import:
+    documentation: VERIFIED_VENDOR
+    live_test: NOT_RUN
+  strict_active_Russian_SP_versions:
+    documentation: NOT_VERIFIED_FOR_INSTALL
+    live_test: NOT_RUN
+  available_user_license:
+    status: UNKNOWN
+execution_pipeline:
+  - native_AC29_SAM_impact_and_material_profile_check
+  - export_SAF_and_IFC_with_model_identity
+  - verify_units_story_levels_axes_origin_and_loads
+  - LIRA_import_or_COM_input_table_update
+  - structural_engineer_verified_boundary_conditions
+  - batch_job_or_documented_COM_calculation_path
+  - RES_API_result_read
+  - match_result_member_ID_to_archicad_native_and_SAF
+  - results_evidence_with_source_revision_and_code
+  - propose_architectural_changes
+  - engineer_approval_before_mutation
+  - incremental_recheck_and_documentation_refresh
+result_fields:
+  - solver_and_version
+  - solver_build
+  - execution_job_id
+  - model_revision_digest
+  - numerical_mesh_parameters
+  - imposed_boundary_conditions
+  - load_case_and_combinations
+  - governing_code_country_edition
+  - member_guid_mappings
+  - displacements
+  - internal_forces
+  - reactions
+  - section_utilizations_if_calculated
+  - unresolved_warnings
+  - specialist_acceptance_status
+hard_gates:
+  no_unlicensed_runtime_assumption: true
+  no_automatic_assumption_of_current_Russian_SP: true
+  no_unproven_headless_COM_job_start_claim: true
+  no_invented_structural_bearing_or_reinforcement: true
+  result_without_engineer_review_not_FINAL_APPROVED: true
+tests:
+  - LIRA_DISCOVERY_01
+  - LIRA_RES_01
+  - LIRA_MODEL_01
+  - LIRA_CALC_01
+  - LIRA_EXCHANGE_01
+  - LIRA_BACKFLOW_01
+  - LIRA_RU_CODES_01
