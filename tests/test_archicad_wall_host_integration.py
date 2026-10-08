@@ -46,7 +46,7 @@ TARGET = {
 def wall():
     return {
         "begCoordinate": {"x": 26.0, "y": 20.0},
-        "endCoordinate": {"x": 27.0, "y": 20.0},
+        "endCoordinate": {"x": 30.0, "y": 20.0},
         "floorIndex": 0, "zCoordinate": 0.0, "height": 3.0,
         "thickness": 0.2, "offset": 0.0, "arcAngle": 0.0,
         "referenceLineLocation": "Center", "structureType": "Basic",
@@ -130,7 +130,7 @@ class HostPlannerContractTests(unittest.TestCase):
             }},
             {"id": "door", "command": "CreateDoors", "params": {
                 "doorsData": [{"ownerWallId": {"guid": {"$createdGuid": "wall"}},
-                               "centerOffset": 0.5, "width": 0.9, "height": 2.1}]
+                               "centerOffset": 2.7, "width": 0.9, "height": 2.1}]
             }},
             {"id": "slab", "command": "CreateSlabs", "params": {
                 "slabsData": [{"level": 0.0, "floorIndex": 0,

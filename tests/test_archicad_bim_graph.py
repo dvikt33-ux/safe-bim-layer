@@ -213,6 +213,73 @@ class BIMGraphTests(unittest.TestCase):
         )
         self.assertEqual(result["status"], "INVALID")
 
+    def test_two_windows_on_same_generated_wall_overlap(self):
+        result = self.compile(
+            step("wall", "CreateWalls", {"wallsData": [wall()]}),
+            step("window-a", "CreateWindows", {"windowsData": [{
+                "ownerWallId": {"guid": {"$createdGuid": "wall"}},
+                "centerOffset": 1.3, "width": 1.2,
+                "height": 1.4, "sillHeight": 0.9}]}),
+            step("window-b", "CreateWindows", {"windowsData": [{
+                "ownerWallId": {"guid": {"$createdGuid": "wall"}},
+                "centerOffset": 2.1, "width": 1.0,
+                "height": 1.4, "sillHeight": 0.9}]}),
+        )
+        self.assertEqual(result["status"], "INVALID")
+        self.assertIn("opening overlaps", str(result["operations"][2]["errors"]))
+
+    def test_window_door_overlap_same_host_is_rejected(self):
+        result = self.compile(
+            step("wall", "CreateWalls", {"wallsData": [wall()]}),
+            step("window", "CreateWindows", {"windowsData": [{
+                "ownerWallId": {"guid": {"$createdGuid": "wall"}},
+                "centerOffset": 2.0, "width": 1.0}]}),
+            step("door", "CreateDoors", {"doorsData": [{
+                "ownerWallId": {"guid": {"$createdGuid": "wall"}},
+                "centerOffset": 2.4, "width": 0.9}]}),
+        )
+        self.assertEqual(result["status"], "INVALID")
+        self.assertIn("opening overlaps", str(result["operations"][2]["errors"]))
+
+    def test_nonoverlapping_openings_are_valid_offline(self):
+        result = self.compile(
+            step("wall", "CreateWalls", {"wallsData": [wall()]}),
+            step("window", "CreateWindows", {"windowsData": [{
+                "ownerWallId": {"guid": {"$createdGuid": "wall"}},
+                "centerOffset": 1.0, "width": 1.0,
+                "sillHeight": 1.0, "height": 1.2}]}),
+            step("door", "CreateDoors", {"doorsData": [{
+                "ownerWallId": {"guid": {"$createdGuid": "wall"}},
+                "centerOffset": 3.0, "width": 0.9,
+                "sillHeight": 0.0, "height": 2.2}]}),
+        )
+        self.assertEqual(result["status"], "PLAN_VALIDATED_OFFLINE")
+        self.assertFalse(result["executionSupported"])
+
+    def test_vertical_extent_exceeds_parent_wall(self):
+        result = self.compile(
+            step("wall", "CreateWalls", {"wallsData": [wall()]}),
+            step("window", "CreateWindows", {"windowsData": [{
+                "ownerWallId": {"guid": {"$createdGuid": "wall"}},
+                "centerOffset": 1.2, "width": 1.0,
+                "sillHeight": 1.8, "height": 1.5}]}),
+        )
+        self.assertEqual(result["status"], "INVALID")
+        self.assertIn("vertical extent", str(result["operations"][1]["errors"]))
+
+    def test_unknown_favorite_width_not_guessed_for_overlap(self):
+        result = self.compile(
+            step("wall", "CreateWalls", {"wallsData": [wall()]}),
+            step("window", "CreateWindows", {"windowsData": [{
+                "ownerWallId": {"guid": {"$createdGuid": "wall"}},
+                "centerOffset": 1.0, "favoriteName": "sample-favorite"}]}),
+            step("door", "CreateDoors", {"doorsData": [{
+                "ownerWallId": {"guid": {"$createdGuid": "wall"}},
+                "centerOffset": 1.1, "width": 0.9}]}),
+        )
+        self.assertEqual(result["status"], "PLAN_VALIDATED_OFFLINE")
+        self.assertFalse(result["executionSupported"])
+
     def test_runtime_schema_mismatch_not_live_ready(self):
         result = self.compile(
             step("a", "CreateWalls", {"wallsData": [wall()]}),
