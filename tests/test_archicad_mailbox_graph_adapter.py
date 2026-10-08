@@ -173,8 +173,10 @@ class GraphToMailboxTests(unittest.TestCase):
             self.prepare(plan)
 
     def test_execute_blocks_mixed_wall_window_door_and_slab_graph(self):
+        source_wall = step("wall", 23)
+        source_wall["params"]["wallsData"][0]["endCoordinate"]["x"] = 27
         plan = {"operations": [
-            step("wall", 23),
+            source_wall,
             {"id": "window", "command": "CreateWindows", "params": {
                 "windowsData": [{"ownerWallId": {"guid": {"$createdGuid": "wall"}},
                                  "centerOffset": 0.5, "width": 0.6, "height": 1.2}]}},
