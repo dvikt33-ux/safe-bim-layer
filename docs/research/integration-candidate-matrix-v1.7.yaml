@@ -1,0 +1,197 @@
+version: 1.7
+date: 2026-10-08
+status: research_draft
+current_target: Archicad_29
+
+vertical_core:
+  service_core_generator_2016:
+    category: computational_service_core_reference
+    decomposition:
+      - EBU_elevator_bank_unit
+      - TRU_technical_room_unit
+      - SRU_stair_restroom_unit
+    placement_strategies:
+      - central
+      - split
+      - end
+      - atrium
+    shell_core_dependency: PASS_RESEARCH
+    vertical_zoning: PASS_RESEARCH
+    lift_bank_drop: PASS_RESEARCH
+    net_gross_analysis: PASS_RESEARCH
+    direct_current_product: false
+    decision: REUSE_METHOD
+
+  adsimulo:
+    category: lift_traffic_expert_system
+    current_version_observed: 6.6.0
+    traffic_simulation: PASS
+    expert_configuration_search: PASS
+    waiting_time: PASS
+    handling_capacity: PASS
+    time_to_destination: PASS
+    highrise_zoning: PASS
+    sky_lobbies: PASS
+    bim_ifc_handoff: PASS
+    russian_language: PASS_PUBLIC_SITE
+    free_trial: PASS_PUBLIC_SITE
+    api: NOT_VERIFIED
+    priority: P0_VERTICAL_TRANSPORT_TEST
+
+  elevate:
+    category: lift_traffic_analysis
+    established_specialist: true
+    CIBSE_Guide_D: PASS
+    ISO_8100_32_template: PASS
+    api: NOT_VERIFIED
+    decision: SPECIALIST_REFERENCE
+
+  digipara:
+    category: lift_layout_and_bim
+    elevatorarchitect_lod: "100-200"
+    liftdesigner_lod: "100-500"
+    pdf: PASS
+    dwg: PASS
+    ifc: PASS
+    revit: PASS
+    archicad_native: NOT_VERIFIED
+    decision: REUSE_IF_WORKFLOW_FITS
+
+  archicad29_stair:
+    rules_and_standards: PASS
+    local_regulation_ranges: PASS
+    native_solver_alternatives: PASS
+    tread_riser_ranges: PASS
+    minimum_landing: PASS
+    headroom: PASS
+    collision_check: PASS
+    rules_saved_in_template: PASS
+    decision: PRIMARY_LOCAL_STAIR_SOLVER
+
+  peopleflow:
+    category: evacuation_performance_research
+    floorplan_ingestion: PASS
+    multiagent_simulation: PASS
+    congestion_routing: PASS
+    clearance_density_bottleneck_metrics: PASS
+    published_runs: 660
+    certification_engine: false
+    decision: HEAVY_EVALUATOR_REFERENCE
+
+vertical_core_envelope:
+  custom: true
+  role: specialist_results_plus_project_semantics
+  major_components:
+    - lift_banks
+    - stairs
+    - lobbies
+    - wet_service_spaces
+    - mep_risers
+    - electrical_telecom_risers
+    - structural_lateral_core
+    - fire_smoke_interfaces
+    - vertical_continuity
+    - floor_specific_profile
+    - archicad_recipe
+
+architectural_design_grammar:
+  shape_machine:
+    category: generic_shape_grammar_engine
+    version_observed: 1.2.0
+    explicit_rules: PASS
+    rule_sequences: PASS
+    conditional_rules: PASS
+    drawscript: PASS
+    python_integration: PASS
+    design_history: PASS
+    archicad_native: false
+    decision: REUSE_METHOD_OPTIONAL_EXECUTOR
+
+  cityengine_cga:
+    category: production_procedural_architecture
+    massing: PASS
+    floors: PASS
+    facade_subdivision: PASS
+    windows: PASS
+    materials: PASS
+    repeated_bays: PASS
+    styles: PASS
+    proprietary: true
+    archicad_native: false
+    decision: REFERENCE_OPTIONAL_EXECUTOR
+
+  space_syntax_plus_shape_grammar:
+    spatial_configuration: PASS_RESEARCH
+    formal_style: PASS_RESEARCH
+    combined_generation_evaluation: PASS_RESEARCH
+    decision: REUSE_METHOD
+
+  performance_shape_grammar_2026:
+    three_d_rules: PASS_RESEARCH
+    design_intent_constraints: PASS_RESEARCH
+    performance_optimization: PASS_RESEARCH
+    decision: METHOD_REFERENCE
+
+  ADG:
+    custom: true
+    base_theory_custom: false
+    layers:
+      - massing
+      - plan_topology
+      - facade
+      - materials
+      - detail_character
+      - allowed_transformations
+      - forbidden_transformations
+      - tolerance_bands
+    priority_classes:
+      - invariant
+      - strong_preference
+      - weak_preference
+
+learned_generation:
+  multi_stage_diffusion_2026:
+    outer_boundary_condition: PASS
+    structural_wall_condition: PASS
+    room_masks: PASS
+    spatial_anchors: PASS
+    room_type_list: PASS
+    opening_generation: PASS
+    IFC_export: PASS
+    role: BOUNDED_CANDIDATE_GENERATOR
+
+spatial_reasoning:
+  floorplanqa:
+    ICML_2026: PASS
+    structured_json_xml: PASS
+    distance: PASS
+    visibility: PASS
+    pathfinding: PASS
+    constrained_object_placement: PASS
+    frontier_model_physical_constraint_failures: OBSERVED
+    decision: BENCHMARK_AND_JUSTIFICATION_FOR_DETERMINISTIC_GEOMETRY
+
+custom_blocked_pending_reuse:
+  - elevator_traffic_simulator
+  - elevator_dispatch_optimizer
+  - generic_lift_concept_layout_engine
+  - generic_stair_local_geometry_solver
+  - pedestrian_evacuation_physics_engine
+  - generic_shape_grammar_engine
+  - generic_procedural_facade_engine
+  - unconstrained_custom_floorplan_diffusion_model
+
+custom_retain:
+  - russian_vertical_core_applicability
+  - VCE_specialist_result_integration
+  - ADG_project_schema
+  - design_intent_to_grammar_compiler
+  - AC29_materialization_readback
+  - cross_system_invalidation
+  - architectural_candidate_ranking
+
+next_tests:
+  - CORE_01
+  - STAIR_AC29_01
+  - ADG_01
+  - GRAMMAR_ENGINE_01
