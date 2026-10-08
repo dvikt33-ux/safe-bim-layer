@@ -251,3 +251,105 @@ new_tests:
     - teamwork
 
 governing_rule: use_archicad_native_semantics_before_derived_or_geometric_inference
+
+documentation_and_schedule_update:
+  exterior_elevation:
+    status: OPEN_IMPLEMENTATION_EXISTS
+    source: davidharutyunyan/archicad-mcp-connector
+    create: true
+    modify: true
+    decision: HARVEST_OR_PROVIDER
+    custom_subsystem: STOP
+  curtain_wall:
+    tapir_current:
+      deep_read: true
+      create_modify_found: false
+    mit_open_connector:
+      create: true
+      modify_main: true
+      grid_patterns: true
+      panel_frame_classes: true
+      individual_panel_frame_write: true
+    decision: PORT_OR_PROVIDER
+    test: CW_PORT_01
+  hotlinks:
+    tapir_current:
+      create_nodes: true
+      create_instances: true
+      change_instances: true
+      delete_found: false
+    mit_open_connector:
+      get: true
+      place: true
+      update: true
+      relink: true
+      delete_or_break: true
+      merge_file: true
+    decision: REUSE_OPEN_STACK
+    custom_generic_crud: STOP
+  publisher:
+    publish_publisher_set: REUSE
+    layouts_drawings: REUSE
+    exports: REUSE_OR_PORT
+    custom_scope: production_policy_dirty_dependency_release_gate_only
+
+interactive_schedule:
+  structured_public_scheme_api_found: false
+  navigator_visibility: true
+  place_as_drawing: true
+  teamwork_permissions_exist: true
+  transport: SCHEME_SETTINGS_XML_EXPORT_IMPORT
+  reuse_candidate:
+    repository: alesdev88/Archicad-MCP
+    release: v0.7.1
+    commit: bc147fe107a24fc59f5b2ba9537bf6a5e711614f
+    license: MIT
+    tools:
+      - read_schedule_scheme
+      - edit_schedule_scheme
+      - validate_schedule_scheme
+    implemented:
+      - byte_exact_xml_roundtrip_guard
+      - preserve_unknown_xml
+      - column_add_remove_reorder_rename
+      - retarget_column_bindings
+      - property_guid_binding
+      - property_name_to_guid_resolution
+      - gdl_parameter_binding
+      - builtin_field_binding
+      - dry_run_default
+      - never_overwrite_input
+      - atomic_destination_write
+      - binding_validation
+  residual_gaps:
+    - criteria_code_table_and_editor
+    - import_export_transport_automation
+    - import_update_vs_duplicate_lifecycle
+    - generated_schedule_rows_if_required
+  criteria_known:
+    classification:
+      param_type: 88
+      relation_index: 1
+    property_string_style:
+      param_type: 232
+      relation_index: 12
+      exact_relation_semantics_complete: false
+  decision: REUSE_MIT_ENGINE_CUSTOMIZE_RESIDUAL_ONLY
+
+additional_stop_building:
+  - generic_exterior_elevation_writer
+  - generic_curtain_wall_framework
+  - generic_hotlink_crud
+  - generic_publisher_executor
+  - schedule_xml_parser_serializer
+  - schedule_column_editor
+  - schedule_binding_validator
+
+additional_tests:
+  CW_PORT_01: deep_curtain_wall_create_modify_parts_on_ac29
+  HOTLINK_01: compare_tapir_mit_native_hotlink_semantics
+  SCHEDULE_XML_01: adopt_and_verify_mit_xml_engine_on_ac29_exports
+  SCHEDULE_CRITERIA_01: empirical_single_variable_criteria_code_table
+  SCHEDULE_IMPORT_01: same_id_import_update_vs_duplicate
+  SCHEDULE_OUTPUT_01: cheapest_reliable_generated_rows_path
+  HUSKY_SCHEDULE_01: enumerate_schedule_scheme_tools_before_any_assumption
