@@ -48,6 +48,7 @@ def generated_result(preview, *, status="PASS", target=None):
         "automaticRetry": False, "command": "CreateWalls",
         "createdGuid": GUID, "mutationApplied": True,
         "operationId": payload["operationId"],
+        "operationHash": bridge.digest({k: v for k, v in payload.items() if k != "mode"}),
         "parameters": {"wallsData": [w]}, "plnSaved": False,
         "readback": {
             "type": "Wall", "floorIndex": w["floorIndex"],
@@ -168,6 +169,51 @@ class GraphToMailboxTests(unittest.TestCase):
         plan["operations"][0]["params"]["wallsData"][0]["structureType"] = "Composite"
         with self.assertRaisesRegex(ValueError, "only Basic walls proven"):
             self.prepare(plan)
+
+    def test_execute_blocks_mixed_wall_window_door_and_slab_graph(self):
+        plan = {"operations": [
+            step("wall", 23),
+            {"id": "window", "command": "CreateWindows", "params": {
+                "windowsData": [{"ownerWallId": {"guid": {"$createdGuid": "wall"}},
+                                 "centerOffset": 0.5, "width": 0.6, "height": 1.2}]}},
+            {"id": "door", "command": "CreateDoors", "params": {
+                "doorsData": [{"ownerWallId": {"guid": {"$createdGuid": "wall"}},
+                               "centerOffset": 0.5, "width": 0.8, "height": 2.0}]}},
+            {"id": "slab", "command": "CreateSlabs", "params": {
+                "slabsData": [{"level": 0, "floorIndex": 0,
+                               "polygonCoordinates": [
+                                   {"x": 0, "y": 0}, {"x": 2, "y": 0},
+                                   {"x": 2, "y": 3}, {"x": 0, "y": 3}]}]}}
+        ]}
+        draft = self.prepare(plan, mode="execute")
+        self.assertEqual(draft["status"], "UNSUPPORTED_GRAPH")
+        self.assertEqual(set(draft["unsupportedSteps"]), {"window", "door", "slab"})
+        self.assertFalse(draft["jobPublished"])
+
+    def test_proven_host_bounds_restrict_graph_preview(self):
+        for key, value in (("height", 5.01), ("thickness", 0.501),
+                           ("zCoordinate", 0.01), ("offset", 0.01),
+                           ("floorIndex", 1)):
+            plan = {"operations": [step("wall", 23)]}
+            plan["operations"][0]["params"]["wallsData"][0][key] = value
+            with self.subTest(parameter=key), self.assertRaisesRegex(
+                ValueError, "verified host|verified recipe"
+            ):
+                self.prepare(plan)
+
+    def test_untrusted_result_cannot_claim_pln_saved_or_missing_operation_hash(self):
+        plan = {"operations": [step("wall", 23)]}
+        preview = self.prepare(plan, mode="execute")
+        result = generated_result(preview)
+        result["payload"]["result"]["plnSaved"] = True
+        result["payloadHash"] = bridge.digest(result["payload"])
+        with self.assertRaisesRegex(ValueError, "PASS lacks validated"):
+            self.prepare(plan, [result], mode="execute")
+        result = generated_result(preview)
+        result["payload"]["result"].pop("operationHash")
+        result["payloadHash"] = bridge.digest(result["payload"])
+        with self.assertRaisesRegex(ValueError, "PASS lacks validated"):
+            self.prepare(plan, [result], mode="execute")
 
     def test_stable_identity_across_preview_and_execute_modes(self):
         plan = {"operations": [step("wall", 23)]}

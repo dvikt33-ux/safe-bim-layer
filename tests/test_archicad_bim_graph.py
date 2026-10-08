@@ -170,6 +170,49 @@ class BIMGraphTests(unittest.TestCase):
         self.assertEqual(result["status"], "INVALID")
         self.assertIn("params must be an object", str(result["operations"][0]["errors"]))
 
+    def test_window_exceeding_straight_parent_segment_is_rejected(self):
+        result = self.compile(
+            step("wall", "CreateWalls", {"wallsData": [wall()]}),
+            step("window", "CreateWindows", {"windowsData": [{
+                "ownerWallId": {"guid": {"$createdGuid": "wall"}},
+                "centerOffset": 3.9, "width": 1.0, "height": 1.4,
+            }]}),
+        )
+        self.assertEqual(result["status"], "INVALID")
+        self.assertIn("opening width exceeds straight host", str(result["operations"][1]["errors"]))
+
+    def test_door_offset_beyond_parent_wall_is_rejected(self):
+        result = self.compile(
+            step("wall", "CreateWalls", {"wallsData": [wall()]}),
+            step("door", "CreateDoors", {"doorsData": [{
+                "ownerWallId": {"guid": {"$createdGuid": "wall"}},
+                "centerOffset": 4.5, "width": 0.9, "height": 2.1,
+            }]}),
+        )
+        self.assertEqual(result["status"], "INVALID")
+        self.assertIn("centerOffset exceeds straight host", str(result["operations"][1]["errors"]))
+
+    def test_missing_width_uses_favorite_so_only_offset_is_checked(self):
+        result = self.compile(
+            step("wall", "CreateWalls", {"wallsData": [wall()]}),
+            step("window", "CreateWindows", {"windowsData": [{
+                "ownerWallId": {"guid": {"$createdGuid": "wall"}},
+                "centerOffset": 1.5,
+            }]}),
+        )
+        self.assertEqual(result["status"], "PLAN_VALIDATED_OFFLINE")
+        self.assertFalse(result["executionSupported"])
+
+    def test_malformed_reference_does_not_crash_host_fit(self):
+        result = self.compile(
+            step("wall", "CreateWalls", {"wallsData": [wall()]}),
+            step("door", "CreateDoors", {"doorsData": [{
+                "ownerWallId": {"guid": {"$createdGuid": ["wall"]}},
+                "centerOffset": 1.5,
+            }]}),
+        )
+        self.assertEqual(result["status"], "INVALID")
+
     def test_runtime_schema_mismatch_not_live_ready(self):
         result = self.compile(
             step("a", "CreateWalls", {"wallsData": [wall()]}),
