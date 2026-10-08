@@ -113,8 +113,62 @@ def _hosted_fit_errors(step, steps):
             if type(width) in (int, float) and math.isfinite(width):
                 if offset - width / 2 < -1e-9 or offset + width / 2 > length + 1e-9:
                     errors.append(f"{field}[{i}]: opening width exceeds straight host wall segment")
+            # Never assume defaults inherited from Archicad Favorites.
+            sill, opening_height, wall_height = (entry.get("sillHeight"),
+                                                  entry.get("height"), wall.get("height"))
+            if all(type(v) in (int, float) and math.isfinite(v)
+                   for v in (sill, opening_height, wall_height)):
+                if sill < -1e-9 or sill + opening_height > wall_height + 1e-9:
+                    errors.append(f"{field}[{i}]: opening height exceeds straight host wall vertical extent")
         except (KeyError, TypeError):
             continue
+    return errors
+
+
+def _hosted_overlap_errors(operations):
+    """Reject overlapping openings on the SAME planned, generated straight Wall.
+
+    Uses only explicit widths and offsets. Never guesses Favorite dimensions.
+    Existing host GUIDs and curved walls need native readback before clearance.
+    """
+    walls = {step["id"]: step for step in operations
+             if step.get("command") == "CreateWalls"}
+    spans, errors = {}, {}
+    for step in operations:
+        field = {"CreateWindows": "windowsData",
+                 "CreateDoors": "doorsData"}.get(step.get("command"))
+        if not field or not isinstance(step.get("params"), dict):
+            continue
+        rows = step["params"].get(field)
+        if not isinstance(rows, list):
+            continue
+        for i, row in enumerate(rows):
+            if not isinstance(row, dict):
+                continue
+            owner = row.get("ownerWallId")
+            guid = owner.get("guid") if isinstance(owner, dict) else None
+            if not isinstance(guid, dict) or set(guid) != {_REF_KEY}:
+                continue
+            parent = guid[_REF_KEY]
+            if not isinstance(parent, str) or parent not in walls:
+                continue
+            parent_data = walls[parent].get("params")
+            wall_rows = parent_data.get("wallsData") if isinstance(parent_data, dict) else None
+            if (not isinstance(wall_rows, list) or len(wall_rows) != 1
+                    or not isinstance(wall_rows[0], dict)
+                    or wall_rows[0].get("arcAngle", 0) != 0):
+                continue
+            center, width = row.get("centerOffset"), row.get("width")
+            if (not all(type(v) in (float, int) and math.isfinite(v)
+                        for v in (center, width)) or width <= 0):
+                continue
+            start, end = center - width / 2, center + width / 2
+            for prior_start, prior_end, prev_id, prev_row in spans.get(parent, []):
+                if min(end, prior_end) - max(start, prior_start) > 1e-9:
+                    errors.setdefault(step["id"], []).append(
+                        f"{field}[{i}]: opening overlaps with "
+                        f"{prev_id}[{prev_row}] on generated Wall {parent}")
+            spans.setdefault(parent, []).append((start, end, step["id"], i))
     return errors
 
 
@@ -226,6 +280,13 @@ def compile_graph(catalog: dict, value: dict, runtime_version: str | None = None
             "errors": errors[:20],
         })
 
+    # Cross-step overlaps can involve references to later-listed openings.
+    overlaps = _hosted_overlap_errors(operations)
+    for report in reports:
+        if report["id"] in overlaps:
+            report["errors"].extend(overlaps[report["id"]])
+            report["status"] = "INVALID"
+
     order = _topo(list(by_id), dependencies)
     if order is None:
         for report in reports:
@@ -248,7 +309,7 @@ def compile_graph(catalog: dict, value: dict, runtime_version: str | None = None
         "operations": reports,
         "liveCommandsVerified": 0, "executionSupported": False,
         "jobPublished": False, "plnChanged": False,
-        "note": "No host binding, collision, geometry or actual runtime GUID verified.",
+        "note": "Only offline straight-wall opening fit/overlap was checked; no native collision, host binding, favorites, clearance or actual GUID verified.",
     }
 
 
