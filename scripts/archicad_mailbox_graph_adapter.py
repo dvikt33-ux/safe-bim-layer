@@ -226,6 +226,8 @@ def prepare(catalog, plan, results, target, run_id, *, mode="dry-run", created_a
                     "automaticRetry": False}
     completed = {sid: row["guid"] for sid, row in reported.items()
                  if row["status"] == "PASS"}
+    if len({x.lower() for x in completed.values()}) != len(completed):
+        raise ValueError("same GUID seen for more than one completed step")
     if len(completed) == len(steps):
         return {"status": "GRAPH_COMPLETE", "createdGuids": completed,
                 "executionSupported": False, "jobPublished": False}
