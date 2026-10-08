@@ -1,0 +1,47 @@
+version: 0.1
+date: 2026-10-08
+type: additive_skills_audit
+branch: feature/working-archicad-mvp
+source: architectural_ai_checkpoint_28_skills_knowledge_spatial_fit_2026-10-08.md
+reason: integration-candidate-matrix-v1.7.yaml already exists from parallel vertical-core research; do not overwrite
+
+candidates:
+  ddc_skills:
+    repo: datadrivenconstruction/DDC_Skills_for_AI_Agents_in_Construction
+    skill_md_count: 238
+    code_standalone_py_ts_js: 3
+    authoritative_exact_clash: FAIL_BBOX_ONLY
+    normative_authority: NO
+    verdict: SELECTIVE_PROCEDURE_REFERENCE
+    required_test: SKILL_01
+
+  archsight_aios:
+    repo: ArchSightLabs/archsight-aios
+    skill_md_count: 33
+    knowledge_pack: SOURCE_CONFIRMED
+    local_norm_lookup_mcp: SOURCE_CONFIRMED
+    status_applicability_evidence_gate: SOURCE_CONFIRMED
+    production_ru_norms: NO
+    verdict: KNOWLEDGE_GOVERNANCE_PILOT
+    required_test: KNOWLEDGE_01
+
+  pascal_editor:
+    repo: pascalorg/editor
+    read_only_fit: SOURCE_CONFIRMED
+    nominal_vs_measured: SOURCE_CONFIRMED
+    ac29_native_round_trip: NOT_VERIFIED
+    verdict: SPATIAL_FIT_REFERENCE
+    required_test: FIT_01
+
+  govtech_bimstack:
+    repo: govtech-bb/bimstack
+    domain: govt_digital_service_UX
+    is_BIM_product: false
+    verdict: REJECT_NAME_FALSE_POSITIVE
+
+adoption_gate:
+  statuses: [DISCOVERED, SOURCE_AUDITED, SANDBOX_TESTED, AC29_VERIFIED, PRODUCTION_ACCEPTED]
+  never_equate_skill_to_executable: true
+  require_negative_tests: true
+  require_authoritative_source_version: true
+  require_AC29_readback_before_success: true
