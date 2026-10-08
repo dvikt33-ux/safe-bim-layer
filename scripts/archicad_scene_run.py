@@ -381,6 +381,8 @@ def main(argv=None):
     p.add_argument("--anchor-y", type=float, required=True)
     p.add_argument("--data-dir", type=Path, required=True,
                    help="existing local state directory; separate scene journal is added")
+    p.add_argument("--summary", action="store_true",
+                   help="short read-only preflight report without entire 12-step graph")
     p.add_argument("--execute", action="store_true",
                    help="actually create scene once inside exact pinned test PLN")
     p.add_argument("--scene-id", help="durable unique name, NEVER reuse")
@@ -396,6 +398,12 @@ def main(argv=None):
                                  args.scene_id, args.confirm_plan_hash)
         else:
             out = runner.preflight(args.anchor_x, args.anchor_y)
+        if args.summary and not args.execute:
+            keys = ("status", "sourcePlanHash", "binding", "metrics",
+                    "nativeElementsInspected", "volumetricBodiesChecked",
+                    "nonSpatialElementsVerified", "liveWriteAuthorized",
+                    "plnChanged")
+            out = {key: out[key] for key in keys if key in out}
         print(json.dumps(out, ensure_ascii=False, indent=2))
         return 0 if out["status"] in ("READY_FOR_EXPLICIT_TEST_RUN", "COMPLETE_UNSAVED") else 2
     except Exception as exc:
