@@ -1,0 +1,62 @@
+schema_version: "0.1"
+date: "2026-10-08"
+target: Archicad_29
+research_checkpoint: docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md
+status: RESEARCH_ONLY
+standards:
+  thermal: SP_50_13330_2024
+  thermal_junction_table: SP_230_1325800_2015_amendments_1_2
+  window_joint: GOST_30971_2012
+  roof: SP_17_13330_2017_amendments_1_to_5
+  fire: SP_2_13130_2020_amendments_1_2
+  rc: SP_63_13330_2018_amendments_1_2
+  foundation: SP_22_13330_2016_amendments_1_to_5
+rules:
+  - id: ROOF_SP17_5_1_20
+    family: rolled_or_mastic_waterproofing
+    predicate: roof_falls_under_SP17_section_5_1
+    required_vertical_membrane_rise_min_mm: 300
+    source: SP_17_13330_2017_clause_5_1_20
+  - id: ROOF_SP17_5_1_22
+    family: rolled_or_mastic_waterproofing
+    predicate: upstand_is_parapet_firewall_or_deformation_wall_and_height_le_600mm
+    requirement: waterproofing_over_top_and_protected_coping
+    source: SP_17_13330_2017_clause_5_1_22_with_amendment_5
+  - id: ROOF_SP17_5_1_17
+    family: bituminous_rolled_or_mastic
+    requirement: inclined_fillet_each_side_50_to_100mm_subject_to_material_tests
+    source: SP_17_13330_2017_clause_5_1_17_with_amendment_5
+  - id: ROOF_SP17_5_1_23
+    family: rolled_or_mastic_waterproofing
+    required_coping_overhang_each_side_min_mm: 60
+    required_coping_slope_min_percent: 3
+    source: SP_17_13330_2017_clause_5_1_23
+  - id: WINDOW_GOST30971_FUNCTIONAL_LAYERS
+    predicate: window_to_wall_installation_joint
+    expected: outer_weather_vapour_open_center_insulation_inner_vapour_control_optional_extra
+    source: GOST_30971_2012_clause_5_1_3
+  - id: WALL_SLAB_THERMAL_INTERFACE
+    required: matching_SP230_tabulated_assembly_or_specialist_temperature_field
+    source: SP_50_13330_2024_and_SP_230_1325800_2015
+  - id: DEFORMATION_JOINT_MOVEMENT
+    required: movement_width_from_engineering_model_and_validated_seal_movement_capacity
+    source: SP_22_13330_2016_and_SP_63_13330_2018
+verdicts:
+  - NOT_APPLICABLE
+  - PASS_GEOMETRY
+  - PASS_DOCUMENTED
+  - PASS_ENGINEERING
+  - FAIL
+  - NOT_VERIFIED
+  - NEEDS_SPECIALIST
+policies:
+  no_pass_from_product_name: true
+  no_pass_for_missing_unmodelled_layer: true
+  no_universal_joint_width: true
+  verify_edition_and_clause_applicability: true
+  no_PLN_changes: true
+test_ids:
+  - WINDOW_JUNCTION_01
+  - ROOF_PARAPET_01
+  - WALL_SLAB_01
+  - MOVEMENT_JOINT_01
