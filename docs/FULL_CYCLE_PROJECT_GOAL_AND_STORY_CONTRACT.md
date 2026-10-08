@@ -1,7 +1,7 @@
 # Canonical project goal and story convention (2026-10-08)
 
 Status: ACTIVE, applies to every subsequent research and development chat for Safe BIM Layer.
-Target runtime: Archicad 29. Archicad 30 adaptation only after the AC29 working solution is complete.
+Target runtime: installed **Archicad 29.2.1 (5101) RUS FULL (x86-64)** (Archicad 29 generation, confirmed 2026-10-09; see `docs/ARCHICAD_RUNTIME_CURRENT.md`). Archicad 30 adaptation only after the AC29 working solution is complete.
 
 ## Non-negotiable end goal
 
