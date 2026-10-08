@@ -1,5 +1,8 @@
 # Safe BIM Mailbox watcher — opt-in dry-run service
 
+> **Current installed runtime (2026-10-09): Archicad 29.2.1 (5101) RUS FULL (x86-64).** The loaded add-on/API version must be independently confirmed after the application update. Canonical record: [ARCHICAD_RUNTIME_CURRENT.md](ARCHICAD_RUNTIME_CURRENT.md).
+
+
 Status: offline-tested, Windows live watcher not yet verified. Does not extend
 the deployed local writer. The existing guarded \`archicad_mailbox_wall_host.py\`
 remains the only component allowed to handle one Mailbox JOB.
