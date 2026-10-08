@@ -1,0 +1,79 @@
+schema_version: "0.1"
+date: "2026-10-08"
+scope: "Archicad 29 first; research only; no PLN changes"
+source_checkpoint: "docs/research/architectural_ai_checkpoint_35_native_quantities_solid_operation_dependencies_2026-10-08.md"
+cross_chat_integrated:
+  - "checkpoint_29_native_collision_difference_generator_reconciliation"
+  - "checkpoint_33_native_global_semantic_events_precise_invalidation"
+  - "checkpoint_34_cross_representation_release_truth"
+principle: "Prefer Archicad's own calculation kernel; never synthesize normative or project measurements from LLM guesses."
+candidates:
+  - id: QTO_SINGLE_01
+    provider: "Graphisoft AC29 C++ native API"
+    entrypoint: "ACAPI_Element_GetQuantities"
+    functions: ["ACAPI_Element_GetQuantities"]
+    reuse: "use_as_primary_scalar_quantity_kernel"
+    current_status: "DOCUMENTED_NOT_LIVE_TESTED"
+    priority: P0
+    returns: "typed requested element quantities"
+    constraints: ["explicit mask", "precise quantity family", "units", "opening threshold", "source GUID"]
+    test: QTO-01
+  - id: QTO_BATCH_01
+    provider: "Graphisoft AC29 C++ native API"
+    entrypoint: "ACAPI_Element_GetMoreQuantities"
+    reuse: "use_grouped_by_type"
+    current_status: "DOCUMENTED_NOT_LIVE_TESTED"
+    priority: P0
+    constraints: ["homogeneous element types per call", "output array size", "valid masked pointers", "error handling"]
+    test: QTO-02
+  - id: QTO_SURFACE_01
+    provider: "Graphisoft AC29 C++ native API"
+    entrypoint: "ACAPI_Element_GetSurfaceQuantities"
+    reuse: "use_when_visible_exposed_surface_needed"
+    current_status: "DOCUMENTED_NOT_LIVE_TESTED"
+    priority: P1
+    constraints: ["cover element GUID set part of semantics", "cover set revision", "not universal finish estimator"]
+    test: QTO-04
+  - id: QTO_SKIN_01
+    provider: "Graphisoft AC29 C++ component and quantity API"
+    entrypoint: "ACAPI_Element_GetComponents + API_Quantities"
+    reuse: "use_native_skin_component_identity"
+    current_status: "DOCUMENTED_NOT_LIVE_TESTED"
+    priority: P1
+    constraints: ["composite/complex-profile detail", "material GUID", "component property applicability"]
+    test: QTO-05
+  - id: SEO_READ_01
+    provider: "Graphisoft AC29 C++ native API"
+    entrypoint: "ACAPI_Element_SolidLink_GetOperators/GetTargets/GetOperation/GetFlags"
+    reuse: "native_construction_dependency_edges"
+    current_status: "DOCUMENTED_NOT_LIVE_TESTED"
+    priority: P0
+    constraints: ["directional operator->target", "native SEO not generic collision", "hotlinked restrictions"]
+    test: QTO-07
+  - id: QTO_RECON_01
+    provider: "Project Compiler thin adapter"
+    entrypoint: "native quantity->semantic fact->schedule/IFC/report witness"
+    reuse: "build_thin_provenance_and_reconciliation_not_solver"
+    current_status: "ARCHITECTURE_PROPOSAL"
+    priority: P0
+    constraints: ["minOpeningSize in key", "computation scope", "project stamps", "environment invalidation", "numeric unit/rounding normalization", "not-assessable gate"]
+    test: QTO-10
+rejected_duplicative_builds:
+  - "general architectural QTO from arbitrary triangle meshing"
+  - "second standalone SEO graph database"
+  - "arbitrarily inferred wall area from facade imagery"
+  - "independent untraced room-area values in drawing notes"
+experiment:
+  baseline: "historical model dump: 5296 BIM elements / 9261 bodies / 104.93 MB / 12.85 s"
+  environment: "one currently open AC29 test PLN"
+  start_mode: "READ_ONLY"
+  measure: ["elapsed_ms", "payload_bytes", "element_count", "missing_guids", "type_errors", "quantity_semantics_mismatch", "schedule_delta", "invalidation_false_negatives"]
+  mutation_mode: "DEFER_UNTIL_EXPLICIT_PERMISSION"
+sources:
+  - "https://archicadapi.graphisoft.com/documentation/acapi_element_getquantities"
+  - "https://archicadapi.graphisoft.com/documentation/acapi_element_getmorequantities"
+  - "https://archicadapi.graphisoft.com/documentation/acapi_element_getsurfacequantities"
+  - "https://archicadapi.graphisoft.com/documentation/api_quantitypar"
+  - "https://archicadapi.graphisoft.com/documentation/api_wallquantity"
+  - "https://archicadapi.graphisoft.com/documentation/acapi_element_solidlink_getoperators"
+  - "https://archicadapi.graphisoft.com/documentation/acapi_element_solidlink_gettargets"
