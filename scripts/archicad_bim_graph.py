@@ -11,6 +11,7 @@ from collections import deque
 import hashlib
 import importlib.util
 import json
+import math
 from pathlib import Path
 import re
 import sys
@@ -60,6 +61,60 @@ def _collect_refs(node, path="$", found=None):
         return [_collect_refs(value, f"{path}[{i}]", found)
                 for i, value in enumerate(node)]
     return node
+
+
+def _hosted_fit_errors(step, steps):
+    """Offline-only linear fit. Does not check libraries, materials or openings.
+
+    The Tapir centerOffset is treated as a location along the parent wall
+    reference segment. For a curved wall, static host fit is not inferred.
+    A live parent GUID also needs a fresh native read before actual creation.
+    """
+    command = step.get("command")
+    if command not in ("CreateWindows", "CreateDoors"):
+        return []
+    params = step.get("params")
+    field = "windowsData" if command == "CreateWindows" else "doorsData"
+    entries = params.get(field) if isinstance(params, dict) else None
+    if not isinstance(entries, list):
+        return []
+    errors = []
+    for i, entry in enumerate(entries):
+        if not isinstance(entry, dict):
+            continue
+        owner = entry.get("ownerWallId")
+        guid = owner.get("guid") if isinstance(owner, dict) else None
+        if not isinstance(guid, dict) or set(guid) != {_REF_KEY}:
+            continue  # Non-generated owner is checked at the live readback gate.
+        source = steps.get(guid[_REF_KEY])
+        if not isinstance(source, dict) or source.get("command") != "CreateWalls":
+            continue  # The typed-reference validator reports the error.
+        source_params = source.get("params")
+        walls = source_params.get("wallsData") if isinstance(source_params, dict) else None
+        if not isinstance(walls, list) or len(walls) != 1 or not isinstance(walls[0], dict):
+            continue
+        wall = walls[0]
+        if wall.get("arcAngle", 0) != 0:
+            continue  # Curved geometry requires native host interpretation.
+        a, b = wall.get("begCoordinate"), wall.get("endCoordinate")
+        if not isinstance(a, dict) or not isinstance(b, dict):
+            continue
+        try:
+            xy = (a["x"], a["y"], b["x"], b["y"])
+            if any(type(v) not in (int, float) or not math.isfinite(v) for v in xy):
+                continue
+            length = math.hypot(b["x"]-a["x"], b["y"]-a["y"])
+            offset, width = entry.get("centerOffset"), entry.get("width")
+            if type(offset) not in (int, float) or not math.isfinite(offset):
+                continue  # JSON Schema validator separately checks numeric type.
+            if offset > length + 1e-9:
+                errors.append(f"{field}[{i}]: centerOffset exceeds straight host wall length")
+            if type(width) in (int, float) and math.isfinite(width):
+                if offset - width / 2 < -1e-9 or offset + width / 2 > length + 1e-9:
+                    errors.append(f"{field}[{i}]: opening width exceeds straight host wall segment")
+        except (KeyError, TypeError):
+            continue
+    return errors
 
 
 def _topo(node_ids, edges):
@@ -159,6 +214,7 @@ def compile_graph(catalog: dict, value: dict, runtime_version: str | None = None
                         break
             except Exception as exc:
                 errors.append("schema validation unavailable: " + str(exc))
+        errors.extend(_hosted_fit_errors(item, by_id))
         dependencies[name] = [dep for dep in all_deps if dep in by_id and dep != name]
         reports.append({
             "id": name, "index": index, "command": command,
