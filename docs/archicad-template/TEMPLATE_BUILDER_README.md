@@ -1,5 +1,8 @@
 # Archicad Template Builder
 
+> Current installed Archicad version (confirmed 2026-10-09): **Archicad 29.2.1 (5101) RUS FULL (x86-64)**. `Archicad 29` elsewhere in this runbook refers to the AC29 compatibility generation. See [current runtime record](../ARCHICAD_RUNTIME_CURRENT.md). Historical checks are not retroactively reclassified as build 5101.
+
+
 This builder materializes the proven safe subset of the AC29 RU/SBIM template specification through the existing Tapir 1.5.8 JSON API.
 
 ## Commands
