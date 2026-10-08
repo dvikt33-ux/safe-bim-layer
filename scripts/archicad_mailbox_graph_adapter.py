@@ -95,20 +95,22 @@ def _wall_params(params):
     a = _xy(w["begCoordinate"], "begCoordinate")
     b = _xy(w["endCoordinate"], "endCoordinate")
     floor = w["floorIndex"]
-    if type(floor) is not int:
-        raise ValueError("native floorIndex must be an integer")
-    z = _num(w.get("zCoordinate", 0), "zCoordinate", -50, 300)
-    height = _num(w["height"], "height", 0.2, 20)
-    thick = _num(w["thickness"], "thickness", 0.05, 2)
-    offset = _num(w.get("offset", 0), "offset", -2, 2)
+    # Keep the planner inside the *deployed guarded host* limits.
+    # Schema validity alone is not authorization for an unverified recipe.
+    if type(floor) is not int or floor != 0:
+        raise ValueError("verified host only permits floorIndex=0")
+    z = _num(w.get("zCoordinate", 0), "zCoordinate", 0, 0)
+    height = _num(w["height"], "height", 0.5, 5)
+    thick = _num(w["thickness"], "thickness", 0.05, 0.5)
+    offset = _num(w.get("offset", 0), "offset", 0, 0)
     arc = _num(w.get("arcAngle", 0), "arcAngle", 0, 0)
     if w.get("referenceLineLocation", "Center") != "Center":
         raise ValueError("only centered reference lines proven")
     if w.get("structureType", "Basic") != "Basic":
         raise ValueError("only Basic walls proven")
     length = math.hypot(b["x"] - a["x"], b["y"] - a["y"])
-    if not 0.2 <= length <= 20:
-        raise ValueError("wall length must be 0.2..20 meters")
+    if not 0.2 <= length <= 5:
+        raise ValueError("verified host wall length must be 0.2..5 meters")
     return {
         "begCoordinate": a, "endCoordinate": b, "floorIndex": floor,
         "zCoordinate": z, "height": height, "thickness": thick,
@@ -175,6 +177,9 @@ def _verify_result(envelope, expected_message_id, expected_operation_id, expecte
     checks = result.get("verification")
     if (result.get("command") != "CreateWalls"
         or result.get("mutationApplied") is not True
+        or result.get("plnSaved") is not False
+        or not isinstance(result.get("operationHash"), str)
+        or not re.fullmatch(r"[0-9a-f]{64}", result["operationHash"])
         or result.get("automaticRetry") is not False
         or not isinstance(checks, dict) or not checks or not all(v is True for v in checks.values())
         or not _GUID.fullmatch(str(result.get("createdGuid", "")))
@@ -234,9 +239,9 @@ def prepare(catalog, plan, results, target, run_id, *, mode="dry-run", created_a
 
     unsupported = [sid for sid in graph["executionOrder"]
                    if steps[sid]["command"] != "CreateWalls"]
-    if mode == "execute" and unsupported and not completed:
+    if mode == "execute" and unsupported:
         return {"status": "UNSUPPORTED_GRAPH", "unsupportedSteps": unsupported,
-                "reason": "Cannot complete the graph with currently verified worker recipes",
+                "reason": "Cannot execute any part of graph requiring unverified recipes; dry-run preview only",
                 "jobPublished": False, "automaticRetry": False}
     next_id = next(sid for sid in graph["executionOrder"] if sid not in completed)
     operation = steps[next_id]
