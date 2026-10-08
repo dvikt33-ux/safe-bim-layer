@@ -74,13 +74,19 @@ def graph(anchor_x: float, anchor_y: float):
     horizontal window positions are therefore measured FROM the east corner.
     """
     x, y = _finite_anchor(anchor_x, anchor_y)
+    # The 4 x 3 m dimensions are the EXTERIOR bounding footprint.
+    # Wall reference lines are centered one half-thickness in from its edge.
+    # Slab remains the actual 4 x 3 m exterior footprint.
     sw, se = xy(x, y), xy(x+WIDTH, y)
     ne, nw = xy(x+WIDTH, y+DEPTH), xy(x, y+DEPTH)
+    t = WALL_THICKNESS / 2
+    axis_sw, axis_se = xy(x+t, y+t), xy(x+WIDTH-t, y+t)
+    axis_ne, axis_nw = xy(x+WIDTH-t, y+DEPTH-t), xy(x+t, y+DEPTH-t)
     data = [
-        step("wall-south", "CreateWalls", "wallsData", wall(sw, se)),
-        step("wall-east", "CreateWalls", "wallsData", wall(se, ne)),
-        step("wall-north", "CreateWalls", "wallsData", wall(ne, nw)),
-        step("wall-west", "CreateWalls", "wallsData", wall(nw, sw)),
+        step("wall-south", "CreateWalls", "wallsData", wall(axis_sw, axis_se)),
+        step("wall-east", "CreateWalls", "wallsData", wall(axis_se, axis_ne)),
+        step("wall-north", "CreateWalls", "wallsData", wall(axis_ne, axis_nw)),
+        step("wall-west", "CreateWalls", "wallsData", wall(axis_nw, axis_sw)),
         step("slab", "CreateSlabs", "slabsData", {
             "level": 0.0, "floorIndex": 0, "thickness": SLAB_THICKNESS,
             "referencePlaneLocation": "Top",
@@ -114,14 +120,18 @@ def graph(anchor_x: float, anchor_y: float):
 
 
 def metrics():
-    gross_floor_area = WIDTH*DEPTH
+    gross_floor_area = WIDTH*DEPTH  # exact exterior wall-face footprint
+    clear_floor_area = (WIDTH-2*WALL_THICKNESS)*(DEPTH-2*WALL_THICKNESS)
     gross_wall_area = 2*(WIDTH+DEPTH)*HEIGHT
     opening_area = DOOR_WIDTH*DOOR_HEIGHT + 2*WINDOW_WIDTH*WINDOW_HEIGHT
     return {
         "dimensionsMeters": {"width": WIDTH, "depth": DEPTH, "height": HEIGHT},
         "slabTopElevationMeters": 0.0,
         "firstStoryIndexInAPI": 0,
-        "floorAreaSquareMeters": round(gross_floor_area, 6),
+        "grossFootprintSquareMeters": round(gross_floor_area, 6),
+        "interiorClearAreaSquareMeters": round(clear_floor_area, 6),
+        "wallReferenceLineLengthsMeters": {"long": WIDTH-WALL_THICKNESS,
+                                           "short": DEPTH-WALL_THICKNESS},
         "perimeterMeters": 2*(WIDTH+DEPTH),
         "grossVolumeCubicMeters": round(gross_floor_area*HEIGHT, 6),
         "wallSurfaceGrossSquareMeters": round(gross_wall_area, 6),
@@ -130,7 +140,7 @@ def metrics():
         "elementCount": SCENE_ELEMENT_COUNT,
         "elementKinds": {"Wall": 4, "Slab": 1, "Column": 4,
                          "Window": 2, "Door": 1},
-        "note": "Concept geometry only; area/volume do not subtract wall thickness or column footprint.",
+        "note": "Footprint and prism volume measured at exterior wall faces; interior clear area excludes wall thickness, but not columns. Structural design not verified.",
     }
 
 
