@@ -37,8 +37,7 @@ if (Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue) {
     throw "TASK_EXISTS: refusing to overwrite; inspect with -ShowTaskOnly"
 }
 $gh = (Get-Command gh -ErrorAction Stop).Source
-& $gh auth status 2>$null
-if ($LASTEXITCODE -ne 0) { throw "GitHub CLI is not authenticated" }
+# The following read-only gh api fetch validates CLI authentication.
 
 # Fetch only the reviewed launcher, not a new worker or live mutation extension.
 $endpoint = "repos/dvikt33-ux/safe-bim-layer/contents/scripts/start_archicad_mailbox_watch.ps1?ref=chatgpt/schema-driven-batch-20261008"
