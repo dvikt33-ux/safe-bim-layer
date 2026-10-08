@@ -1,5 +1,8 @@
 # Schema-driven batch planning for Archicad 29
 
+> **Current installed runtime (2026-10-09): Archicad 29.2.1 (5101) RUS FULL (x86-64).** The loaded add-on/API version must be independently confirmed after the application update. Canonical record: [ARCHICAD_RUNTIME_CURRENT.md](ARCHICAD_RUNTIME_CURRENT.md).
+
+
 Status: **offline contract compiler**, NOT a live Archicad writer.
 
 The existing GPT -> GitHub Mailbox -> local Archicad -> GitHub roundtrip and
