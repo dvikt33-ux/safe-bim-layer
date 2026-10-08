@@ -1,0 +1,81 @@
+{
+  "operations": [
+    {
+      "id": "window-alpha",
+      "command": "CreateWindows",
+      "params": {
+        "windowsData": [
+          {
+            "ownerWallId": {
+              "guid": {
+                "$createdGuid": "wall-alpha"
+              }
+            },
+            "centerOffset": 2,
+            "sillHeight": 0.9,
+            "width": 1.2,
+            "height": 1.5
+          }
+        ]
+      },
+      "after": [
+        "slab-alpha"
+      ]
+    },
+    {
+      "id": "wall-alpha",
+      "command": "CreateWalls",
+      "params": {
+        "wallsData": [
+          {
+            "begCoordinate": {
+              "x": 100,
+              "y": 100
+            },
+            "endCoordinate": {
+              "x": 106,
+              "y": 100
+            },
+            "height": 3,
+            "thickness": 0.2,
+            "floorIndex": 0,
+            "zCoordinate": 0,
+            "referenceLineLocation": "Center",
+            "structureType": "Basic"
+          }
+        ]
+      }
+    },
+    {
+      "id": "slab-alpha",
+      "command": "CreateSlabs",
+      "params": {
+        "slabsData": [
+          {
+            "level": 0,
+            "floorIndex": 0,
+            "thickness": 0.2,
+            "polygonCoordinates": [
+              {
+                "x": 100,
+                "y": 100
+              },
+              {
+                "x": 106,
+                "y": 100
+              },
+              {
+                "x": 106,
+                "y": 104
+              },
+              {
+                "x": 100,
+                "y": 104
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
