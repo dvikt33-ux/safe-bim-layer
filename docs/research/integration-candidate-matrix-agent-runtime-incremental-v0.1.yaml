@@ -1,0 +1,114 @@
+version: 0.1
+name: agent-runtime-incremental-reuse-audit
+date: 2026-10-08
+status: source_inspected_not_AC29_benchmarked
+target: Archicad_29
+parallel_branch_context:
+  - docs/research/integration-candidate-matrix-v1.7.yaml
+  - docs/research/integration-candidate-matrix-v1.8.yaml
+  - docs/research/architectural_ai_checkpoint_28_skill_runtime_incremental_graph_reality_audit_2026-10-08.md
+  - docs/research/architectural_ai_checkpoint_28_vertical_core_design_grammar_2026-10-08.md
+  - docs/research/architectural_ai_checkpoint_28_native_visual_qa_graphic_overrides_highlight_drilldown_2026-10-08.md
+
+reuse_candidates:
+  DDC_Skills:
+    repository: https://github.com/datadrivenconstruction/DDC_Skills_for_AI_Agents_in_Construction
+    license: MIT
+    evidence: SOURCE_INSPECTED
+    declared_skill_count_readme: 238
+    declared_skill_count_description: 221
+    fit: curated_workflow_and_data_ETL_examples
+    red_flags:
+      - AABB_example_not_exact_solid_clash
+      - Python_dict_check_not_buildingSMART_IDS_conformance
+      - skills_are_often_instructions_not_ready_production_tools
+    action: selective_method_reuse_not_full_install
+
+  ArchSight_AIOS:
+    repository: https://github.com/ArchSightLabs/archsight-aios
+    license: Apache_2_0
+    evidence: SOURCE_INSPECTED
+    fit:
+      - typed_capability_registry
+      - evidence_contract
+      - owner_agent_and_skill_permissions
+      - applicability_and_source_version
+      - claim_evidence_toolresult_decision
+      - local_knowledge_pack_reference
+    limitations:
+      - no_live_AC29_modeling
+      - no_authoritative_Russian_normative_database
+      - demo_engineering_checks_not_full_structural_design
+    action: benchmark_capability_and_governance_contract
+
+  incr:
+    repository: https://github.com/Anyesh/incr
+    license: Apache_2_0
+    evidence: SOURCE_INSPECTED
+    fit:
+      - lazy_incremental_compute
+      - dynamic_dependencies
+      - early_cutoff
+      - incremental_collections
+      - Python_Rust
+    benchmark_on_AC29: NOT_DONE
+    action: compare_hot_graph_runtime
+
+  Salsa:
+    repository: https://github.com/salsa-rs/salsa
+    evidence: SOURCE_INSPECTED
+    fit: memoized_incremental_queries
+    python_binding: NOT_CONFIRMED
+    benchmark_on_AC29: NOT_DONE
+    action: compare_with_incr_and_baseline
+
+  Differential_Dataflow:
+    repository: https://github.com/TimelyDataflow/differential-dataflow
+    evidence: DOCUMENTED
+    fit: high_scale_incremental_relational_processing
+    action: defer_if_simple_graph_sufficient
+
+  Hatchet:
+    repository: https://github.com/hatchet-dev/hatchet
+    license: MIT
+    evidence: SOURCE_INSPECTED
+    fit: durable_async_heavy_jobs
+    infrastructure_overhead: consider_for_solo_workstation
+    action: defer_until_real_failure_case
+
+maturity_levels:
+  - DISCOVERED
+  - DOCUMENTED
+  - SOURCE_INSPECTED
+  - SANDBOX_TESTED
+  - AC29_TESTED
+  - WORKFLOW_ACCEPTED
+
+acceptance_experiments:
+  INC_01:
+    cases:
+      - wall_change_adjacent_area
+      - equipment_move_no_area_change
+      - window_resize_facade
+      - normative_revision_change
+      - multistorey_bearing_wall
+    metrics:
+      - missed_dependencies
+      - stale_values
+      - recomputation_count
+      - latency_p95
+      - memory
+      - rollback
+  CAP_01:
+    task: MOVE_WALL_MODULE_SAFE
+    gate: rights_units_norm_revision_dry_run_readback
+  SKILL_01:
+    comparison: raw_GPT_vs_skill_vs_skill_plus_verified_tools
+    kpi: human_minutes_to_correct_architecturally_accepted_AC29_result
+
+hard_rules:
+  - preserve_AC29_as_only_active_target
+  - no_custom_graph_engine_before_INC_01
+  - no_readme_feature_as_accepted_without_actual_test
+  - do_not_install_entire_skill_pack_by_default
+  - no_automatic_code_compliance_claim_without_current_source_and_checker
