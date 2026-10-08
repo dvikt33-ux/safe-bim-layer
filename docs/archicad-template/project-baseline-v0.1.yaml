@@ -30,6 +30,16 @@ stories:
   create_from_project_brief: true
   validate_top_links_after_change: true
 
+  architectural_first_above_ground:
+    display_name: "1 этаж"
+    level_from_project_zero_m: 0.0
+    never_label_as: "0 этаж"
+    native_floor_index_policy: RESOLVE_FROM_CURRENT_PROJECT_STORY_TABLE
+    native_inputs: [API_StoryInfo_firstStory, API_StoryInfo_lastStory, API_StoryInfo_skipNullFloor, API_StoryType_index, API_StoryType_floorId, API_StoryType_level, API_StoryType_uName]
+    forbid_hardcoded_floor_index: true
+    failure_if_ambiguous: NEEDS_STORY_RESOLUTION
+    preserve_existing_project_story_numbering: true
+
 layer_prefixes:
   AR: architecture
   KR: structures
