@@ -1,0 +1,71 @@
+version: 0.1
+date: 2026-10-08
+target: Archicad_29
+status: RESEARCH_ONLY_NOT_LIVE_VERIFIED
+scope: cross_representation_release_truth
+providers:
+  archicad_native:
+    model_compare_3d: OFFICIAL_PASS
+    model_compare_2d: UNSUPPORTED
+    revision_change_layouts: OFFICIAL_PASS_IF_DRAWINGS_CURRENT
+    role: PRIMARY
+  ifctester:
+    ids_ifc_check: OFFICIAL_PASS
+    json_sqlite_bcf_reports: OFFICIAL_PASS
+    pdf_annotations: UNSUPPORTED
+    role: OPEN_DATA_VALIDATOR
+  revizto:
+    archicad29_windows_plugin: OFFICIAL_PASS
+    pdf_2d_3d_overlay: OFFICIAL_PASS
+    api_mcp: OFFICIAL_PASS
+    mcp_images: UNSUPPORTED
+    mcp_model_import_export: UNSUPPORTED
+    mcp_webhooks: UNSUPPORTED
+    api_entitlement: REQUIRED
+    role: P0_OPTIONAL_COORDINATION_BENCHMARK
+  structured_ai:
+    ifc_pdf_revit_review: PUBLIC_VENDOR_AND_PRESS
+    api: NOT_VERIFIED
+    native_ac29: NOT_VERIFIED
+    exact_guid_findings: NOT_VERIFIED
+    role: P0_P1_INDEPENDENT_QA_DEMO
+  bluebeam_max:
+    smart_review_pdf: OFFICIAL_PREVIEW
+    missing_sheets_door_grid_checks: OFFICIAL_PASS
+    mcp: OFFICIAL_PASS
+    metric_smart_review: UNSUPPORTED
+    russian_spds: NOT_VERIFIED
+    role: PROCESS_REFERENCE_NOT_RUSSIAN_AUTHORITY
+  bluebeam_revu_overlay:
+    pdf_revisions: OFFICIAL_PASS
+    semantics: UNSUPPORTED
+    role: OPTIONAL_VISUAL_DIFF
+  cross_view_hungarian:
+    status: PEER_REVIEWED_METHOD
+    role: EXTERNAL_LEGACY_2D_ONLY
+release_gate:
+  require_current_model: true
+  require_current_drawings: true
+  require_actual_deliverables: true
+  require_all_hard_obligations_covered: true
+  require_stable_references: true
+  mandatory_status_not_assessable_is_pass: false
+  mandatory_status_stale_is_pass: false
+  mandatory_status_blocked_is_pass: false
+custom_retain:
+  - representation_witness_index
+  - cross_representation_coverage
+  - publisher_release_manifest_gate
+  - russian_spds_source_bindings
+  - architectural_intent_cross_view_checks
+custom_blocked:
+  - generic_pdf_compare_engine
+  - generic_2d_3d_viewer
+  - generic_ids_checker
+  - generic_revisions_database
+  - generic_qaqc_llm_platform
+tests_not_run:
+  - CROSSREP_01_12
+  - RELEASE_MANIFEST_01
+  - REVIZTO_AC29_01
+  - STRUCTURED_IFC_PDF_01
