@@ -178,7 +178,7 @@ class GraphToMailboxTests(unittest.TestCase):
                                  "centerOffset": 0.5, "width": 0.6, "height": 1.2}]}},
             {"id": "door", "command": "CreateDoors", "params": {
                 "doorsData": [{"ownerWallId": {"guid": {"$createdGuid": "wall"}},
-                               "centerOffset": 0.8, "width": 0.8, "height": 2.0}]}},
+                               "centerOffset": 0.5, "width": 0.8, "height": 2.0}]}},
             {"id": "slab", "command": "CreateSlabs", "params": {
                 "slabsData": [{"level": 0, "floorIndex": 0,
                                "polygonCoordinates": [
