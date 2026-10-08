@@ -1,0 +1,159 @@
+version: 0.1
+date: 2026-10-08
+checkpoint: 29
+status: documented_not_ac29_tested
+branch: feature/working-archicad-mvp
+target: Archicad_29
+purpose: native_change_capture_and_zone_adjacency_before_incremental_engine_choice
+
+native_candidates:
+  element_observer:
+    api:
+      - ACAPI_Element_AttachObserver
+      - ACAPI_Element_InstallElementObserver
+      - ACAPI_Element_CatchNewElement
+    sources:
+      - https://graphisoft.github.io/archicad-api-devkit/struct_a_p_i___notify_element_type.html
+      - https://archicadapi.graphisoft.com/documentation/notification-manager
+    evidence: DOCUMENTED
+    ac29_test: NOT_DONE
+    scope: changes_to_explicitly_observed_elements_plus_new_element_events_per_type
+    limitation: depends_on_notification_undo_mechanism_and_observer_registration
+    decision: TEST_BEFORE_CUSTOM_EVENT_POLLING
+
+  project_observer:
+    api:
+      - ACAPI_ProjectOperation_CatchProjectEvent
+    source: https://graphisoft.github.io/archicad-api-devkit/group___project_operation.html
+    evidence: DOCUMENTED
+    ac29_test: NOT_DONE
+    priority: P0
+
+  element_modification_stamp:
+    field: API_Elem_Head.modiStamp
+    source: https://graphisoft.github.io/archicad-api-devkit/struct_a_p_i___elem___head.html
+    evidence: DOCUMENTED
+    ac29_test: NOT_DONE
+    limitation: not_a_substitute_for_attribute_or_indirect_geometry_invalidations
+    priority: P0
+
+  project_modification_stamp:
+    field: API_ProjectInfo.modiStamp
+    source: https://graphisoft.github.io/archicad-api-devkit/struct_a_p_i___project_info.html
+    evidence: DOCUMENTED
+    ac29_test: NOT_DONE
+    limitation: do_not_assume_global_monotonic_revision_across_sessions
+    priority: P0
+
+  zone_boundary_query:
+    api:
+      - ACAPI::ZoneBoundaryQuery
+      - ACAPI::ZoneBoundaryQuery::Modifier::Update
+      - ACAPI::ZoneBoundaryQuery::GetZoneBoundaries
+      - ACAPI::ZoneBoundary::GetElemId
+      - ACAPI::ZoneBoundary::GetNeighbouringZoneId
+      - ACAPI::ZoneBoundary::IsExternal
+      - ACAPI::ZoneBoundary::GetPolygon
+      - ACAPI::ZoneBoundary::GetArea
+    sources:
+      - https://graphisoft.github.io/archicad-api-devkit/class_a_c_a_p_i_1_1_zone_boundary_query.html
+      - https://graphisoft.github.io/archicad-api-devkit/class_a_c_a_p_i_1_1_zone_boundary_query_1_1_modifier.html
+      - https://graphisoft.github.io/archicad-api-devkit/class_a_c_a_p_i_1_1_zone_boundary.html
+    evidence: DOCUMENTED
+    ac29_test: NOT_DONE
+    view_restriction: Floor_Plan_or_3D_Model_only
+    caution:
+      - Update_refreshes_boundary_query_not_confirmed_zone_area_recalculation
+      - GetArea_is_boundary_surface_area_not_floor_zone_area
+      - adjacent_is_not_passable
+      - need_previous_and_current_edges_for_invalidation
+    decision: REUSE_NATIVE_RELATIONS_FIRST
+
+  attribute_property_classification_events:
+    api:
+      - API_IACEventNotifier
+      - ACAPI_Notification_RegisterEventHandler
+    source: https://graphisoft.github.io/archicad-api-devkit/class_a_p_i___i_a_c_event_notifier.html
+    evidence: DOCUMENTED
+    ac29_test: NOT_DONE
+    decision: TEST_BROAD_INVALIDATION
+
+  zone_area_recalculation:
+    public_ui: Design_Update_Zones
+    source: https://help.graphisoft.com/AC/29/INT/_AC29_Help/150_UserInterfaceToolSettings/150_UserInterfaceToolSettings-8.htm
+    reliable_programmatic_ac29_command: NOT_VERIFIED
+    caveat: never_treat_boundary_query_update_as_automatic_area_update
+    status_if_stale: NOT_VERIFIED
+    priority: P0_GAP_CHECK
+
+stages:
+  - native_event
+  - invalidate_old_edges
+  - post_command_readback
+  - change_stamps_and_old_new_extent
+  - native_zone_boundary_query
+  - domain_solver_and_rule_applicability
+  - incremental_graph_evaluation
+  - verified_visual_projection
+
+fault_tolerance:
+  - explicit_project_epoch
+  - callback_batch_deduplication
+  - blocked_stale_writer_revision
+  - no_model_mutation_in_undo_redo_notification
+  - no_auto_file_switch
+  - no_forced_view_switch_for_zone_query
+  - mismatch_reconciliation
+  - full_resync_when_event_coverage_unknown
+  - no_stale_pass
+  - evidence_revision_coherence
+
+experiment_gates:
+  EVENT_01:
+    required:
+      - existing_wall_edit
+      - new_window
+      - door_delete
+      - slab_duplicate
+      - undo_redo
+      - story_height_edit
+      - hotlink_change
+      - library_change
+      - reopening
+      - callback_dropped
+    acceptance: all_relevant_deltas_captured_or_detected_by_reconciliation
+  ZONE_GRAPH_01:
+    required:
+      - adjacent_zones_shared_wall_guid
+      - neighbor_zone_guid
+      - external_boundary
+      - old_and_new_adjacency_diff
+      - invalid_and_manual_zones
+      - section_view_restriction
+      - distinguish_boundary_area_from_zone_floor_area
+    acceptance: native_relations_correct_or_not_verified
+  FRESH_01:
+    required:
+      - single_wall_modification
+      - unchanged_element_with_changed_shared_material
+      - rule_version_change
+      - undo_history_reset
+      - agent_vs_human_edit_race
+    acceptance: zero_stale_pass_and_zero_missed_required_dependencies
+  INC_01:
+    predecessor: EVENT_01_plus_ZONE_GRAPH_01_plus_FRESH_01
+    measure:
+      - event_to_enqueue_ms
+      - selective_readback_ms
+      - zone_query_ms
+      - solver_ms
+      - graph_ms
+      - ui_projection_ms
+    engine_choice: after_end_to_end_latency_and_correctness
+
+cross_refs:
+  - docs/research/architectural_ai_checkpoint_29_ac29_native_events_zone_adjacency_and_freshness_2026-10-08.md
+  - docs/research/architectural_ai_checkpoint_28_skill_runtime_incremental_graph_reality_audit_2026-10-08.md
+  - docs/research/integration-candidate-matrix-agent-runtime-incremental-v0.1.yaml
+  - docs/research/integration-candidate-matrix-v1.7.yaml
+  - docs/research/integration-candidate-matrix-v1.8.yaml
