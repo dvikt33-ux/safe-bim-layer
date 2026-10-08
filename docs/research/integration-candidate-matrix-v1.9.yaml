@@ -1,0 +1,214 @@
+version: 1.9
+date: 2026-10-08
+status: research_draft
+current_target: Archicad_29
+
+instruction_runtime:
+  mega_prompt:
+    decision: REJECT
+    reason:
+      - context_bloat
+      - stale_rules
+      - tool_noise
+      - poor_testability
+      - weak_permission_boundaries
+
+  layered_context:
+    - constitution
+    - project_state
+    - task_skill
+    - semantic_capabilities
+    - evidence
+    - output_schema
+
+external_references:
+  archsight_aios:
+    repository: ArchSightLabs/archsight-aios
+    license: Apache_2_0
+    observed_package_version: 1.7.0
+    capability_registry: PASS
+    evidence_arbitration: PASS
+    knowledge_pack: PASS
+    local_reference_runtime: PASS
+    multi_host_skills: PASS
+    bim_profile: PASS
+    rag_graphrag_profile: PASS
+    decision: P0_METHOD_AND_SCHEMA_REUSE
+
+  ddc_skills:
+    repository: datadrivenconstruction/DDC_Skills_for_AI_Agents_in_Construction
+    license: MIT
+    advertised_skill_count: 238
+    bim_validation: PASS
+    generative_design_skill: PASS
+    agent_orchestration_skill: PASS
+    qto_cost_4d5d: PASS
+    decision: P1_SKILL_PATTERN_MINE
+    load_all_into_context: FORBIDDEN
+
+  harnessbim:
+    repository: ReverseZoom2151/harnessbim
+    license: Apache_2_0
+    working_memory: PASS
+    episodic_memory: PASS
+    semantic_memory: PASS
+    procedural_skill_memory: PASS
+    skill_promotion: PASS
+    capability_model_routing: PASS
+    trajectory_training_data: PASS
+    decision: P0_RUNTIME_PATTERN_REUSE
+
+  agentic_bim_team:
+    repository: louistrue/agentic-bim-team
+    license: MIT
+    one_design_owner: PASS
+    read_only_specialist_reviewers: PASS
+    bcf_feedback: PASS
+    affected_globalids: PASS
+    current_prompt_hardcoded_assumptions: RISK
+    decision: REVIEWER_PATTERN_ONLY
+
+evidence_hierarchy:
+  L0: human_locked_constraints_and_approval
+  L1: deterministic_tools_solvers_and_readback
+  L2: current_project_facts
+  L3: structured_normative_and_provider_evidence
+  L4: specialist_agent_judgement
+  L5: raw_llm_reasoning
+  lower_level_may_override_higher: false
+
+capability_contract:
+  custom_mapping_required: true
+  fields:
+    - id
+    - semantic_class
+    - allowed_skills
+    - providers
+    - input_schema
+    - preconditions
+    - evidence_required
+    - blocking_rules
+    - human_escalation
+    - readback_contract
+
+skill_contract:
+  fields:
+    - skill_id
+    - version
+    - purpose
+    - applicability
+    - non_goals
+    - required_context
+    - allowed_capabilities
+    - forbidden_capabilities
+    - preconditions
+    - hard_invariants
+    - strong_preferences
+    - weak_preferences
+    - procedure
+    - repair_order
+    - stop_conditions
+    - human_escalation
+    - output_schema
+    - postconditions
+    - promotion_requirements
+
+minimal_agent_ownership:
+  architect_orchestrator:
+    writes_design: true
+  normative_specialist:
+    writes_design: false
+  structural_reviewer:
+    writes_design: false
+  mep_reviewer:
+    writes_design: false
+  fire_egress_reviewer:
+    writes_design: false
+  documentation_compiler:
+    independent_redesign: false
+
+memory:
+  working:
+    - active_request
+    - dirty_cone
+    - local_context
+  semantic:
+    - DDR
+    - ADG
+    - CSE
+    - VCE
+    - rule_applicability
+  episodic:
+    - candidates
+    - accepted_rejected_changes
+    - failures
+    - readbacks
+  procedural:
+    - verified_recipes
+    - provider_actions
+    - repair_patterns
+    - document_recipes
+  raw_chat_as_authoritative_state: false
+
+model_routing:
+  frontier_cloud:
+    - ambiguity
+    - global_tradeoff
+    - novel_failure
+    - cross_domain_synthesis
+    - research
+  small_local_specialist:
+    - task_classification
+    - retrieval_rewrite
+    - candidate_generation
+    - repair_class
+    - IO_classification
+    - detail_ranking
+  deterministic:
+    - geometry
+    - optimization
+    - compliance
+    - structure
+    - energy
+    - MEP
+    - quantities
+    - publishing
+  manual_model_selection_normal_workflow: false
+
+initial_skills:
+  - architect-project-bootstrap
+  - architect-impact-analysis
+  - architect-layout-space
+  - architect-change-wall
+  - architect-place-opening
+  - architect-select-construction-system
+  - architect-core-option
+  - architect-repair-conflict
+  - architect-preserve-design-grammar
+  - architect-detail-need
+  - architect-view-need
+  - architect-document-publish
+
+custom_blocked_pending_reuse:
+  - generic_skill_file_format
+  - generic_evidence_arbitration_framework
+  - generic_capability_registry_concept
+  - generic_multiagent_reviewer_pattern
+  - generic_memory_taxonomy
+  - generic_model_router
+  - generic_prompt_regression_framework
+
+custom_retain:
+  - sbim_architectural_skill_taxonomy
+  - ac29_capability_mapping
+  - russian_evidence_applicability
+  - ADG_CSE_VCE_integration
+  - impact_cone
+  - disruption_hierarchy
+  - project_skill_regression_tests
+  - context_capsule_compiler
+
+next_tests:
+  - SKILL_OS_01
+  - EVIDENCE_01
+  - MEMORY_01
