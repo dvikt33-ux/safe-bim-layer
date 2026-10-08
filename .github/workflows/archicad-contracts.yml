@@ -9,10 +9,14 @@ on:
       - 'scripts/archicad_bim_graph.py'
       - 'scripts/archicad_mailbox_graph_adapter.py'
       - 'scripts/archicad_mailbox_watch.py'
+      - 'scripts/archicad_runtime_version_probe.py'
+      - 'scripts/start_archicad_mailbox_watch.ps1'
+      - 'scripts/install_mailbox_watch_autostart.ps1'
       - 'tests/test_archicad_batch_contracts.py'
       - 'tests/test_archicad_bim_graph.py'
       - 'tests/test_archicad_mailbox_graph_adapter.py'
       - 'tests/test_archicad_mailbox_watch.py'
+      - 'tests/test_archicad_runtime_version_probe.py'
       - 'tapir-1.5.8.json'
       - 'examples/archicad_bim_graph.offline.sample.json'
       - '.github/workflows/archicad-contracts.yml'
@@ -22,9 +26,13 @@ on:
       - 'scripts/archicad_bim_graph.py'
       - 'scripts/archicad_mailbox_graph_adapter.py'
       - 'scripts/archicad_mailbox_watch.py'
+      - 'scripts/archicad_runtime_version_probe.py'
+      - 'scripts/start_archicad_mailbox_watch.ps1'
+      - 'scripts/install_mailbox_watch_autostart.ps1'
       - 'tests/test_archicad_bim_graph.py'
       - 'tests/test_archicad_mailbox_graph_adapter.py'
       - 'tests/test_archicad_mailbox_watch.py'
+      - 'tests/test_archicad_runtime_version_probe.py'
       - 'tests/test_archicad_batch_contracts.py'
       - 'tapir-1.5.8.json'
       - 'examples/archicad_bim_graph.offline.sample.json'
@@ -45,3 +53,17 @@ jobs:
       - run: python -m unittest discover -s tests -p 'test_archicad_*.py' -v
       - run: python scripts/archicad_batch_contracts.py --runtime-version 1.5.8
       - run: python scripts/archicad_bim_graph.py examples/archicad_bim_graph.offline.sample.json --runtime-version 1.5.8
+      - name: Static check Windows launcher syntax
+        shell: pwsh
+        run: |
+          $paths = @("scripts/start_archicad_mailbox_watch.ps1", "scripts/install_mailbox_watch_autostart.ps1")
+          foreach ($path in $paths) {
+            $tokens = $null
+            $parseErrors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile((Resolve-Path $path), [ref]$tokens, [ref]$parseErrors) | Out-Null
+            if ($parseErrors.Count -gt 0) {
+              $parseErrors | ForEach-Object { Write-Error $_.Message }
+              throw "PowerShell syntax error: $path"
+            }
+            Write-Host "PARSE_OK: $path"
+          }
