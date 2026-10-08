@@ -163,8 +163,8 @@ def compile_batch(catalog: dict, batch: dict, runtime_version: str | None = None
     version = source_version(catalog)
     mismatch = runtime_version is not None and version != runtime_version
     return {
-        "status": "REQUIRES_UPDATED_SCHEMA" if mismatch else (
-            "INVALID" if any(r["errors"] for r in results) else "SCHEMA_VALID"
+        "status": "INVALID" if any(r["errors"] for r in results) else (
+            "REQUIRES_UPDATED_SCHEMA" if mismatch else "SCHEMA_VALID"
         ),
         "schemaVersion": version,
         "runtimeVersion": runtime_version,
