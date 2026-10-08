@@ -135,13 +135,14 @@ def compile_graph(catalog: dict, value: dict, runtime_version: str | None = None
                 errors.append(f"{path}: generated GUID references are allowed only in .guid fields")
             if producer:
                 producer_command = producer.get("command")
-                if producer_command not in CREATES:
+                if not isinstance(producer_command, str) or producer_command not in CREATES:
                     errors.append(f"{path}: {dep} is not a known single-element create recipe")
                 else:
                     # The batch may contain many create steps, but a referenced
                     # producer must return exactly one GUID, not a GUID array.
                     payload_key = producer_command[len("Create"):].lower() + "Data"
-                    rows = producer.get("params", {}).get(payload_key)
+                    producer_params = producer.get("params")
+                    rows = producer_params.get(payload_key) if isinstance(producer_params, dict) else None
                     if not isinstance(rows, list) or len(rows) != 1:
                         errors.append(f"{path}: {dep} must create exactly one element")
             expected = next((kind for field, kind in HOST_REFERENCE_KEYS.items()
