@@ -1,0 +1,86 @@
+schema_version: "0.1"
+date: "2026-10-08"
+status: RESEARCH_DRAFT
+applies_to: full_cycle_archicad_29
+checkpoint: docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md
+source_layer:
+  kind: GlobalSourceRegistry
+  policy: metadata_first_links_and_hashes_no_unlicensed_raw_copies
+  existing:
+    - details/releases/v2.12
+  ingestion:
+    - source_uri
+    - publisher
+    - title
+    - version_date
+    - source_sha256
+    - document_page_or_sheet
+    - format
+    - locale_and_jurisdiction
+    - copyright_and_local_storage_rights
+    - system_family
+    - interface_condition_signature
+    - technical_parameters_with_units
+    - applicability_envelope
+    - norm_version_and_amendments
+    - product_or_test_evidence
+    - AC29_library_part_compatibility
+    - unresolved_anomalies
+    - source_truth_level
+  status_values:
+    - UNREVIEWED
+    - TRANSCRIBED
+    - TECHNICAL_REFERENCE
+    - DESIGN_CANDIDATE
+    - VERIFIED_APPLICABILITY
+    - ENGINEER_APPROVED
+    - BLOCKED
+project_layer:
+  kind: ProjectLibraryPack
+  project_identity: REQUIRED
+  project_revision: REQUIRED
+  target_software: Archicad_29
+  authority_jurisdiction: REQUIRED
+  source_registry_revision: REQUIRED
+  normative_pack_digest: REQUIRED
+  included_asset_ids: []
+  excluded_asset_with_reasons: []
+  source_links_and_hashes: []
+  selected_CSE_system_families: []
+  structural_scheme_options: []
+  envelope_and_thermal_options: []
+  room_kits_and_equipment: []
+  compatible_GDL_LCF_PLA_packages: []
+  project_native_Favorites_Composites_Profiles: []
+  required_junction_conditions: []
+  condition_to_approved_or_candidate_detail_ids: []
+  missing_critical_condition_ids: []
+  mechanical_plumbing_electrical_fire_interface_obligations: []
+  engineering_assumptions_for_LIRA_or_other_solver: []
+  selected_version_and_fingerprint: REQUIRED
+  initial_compile_status: NOT_COMPILED
+coverage_score:
+  unit: distinct_applicable_interface_conditions_not_record_count
+  target: all_hard_conditions_have_valid_candidate_or_explicit_blocker
+  no_false_approval: true
+  no_inference_from_picture_only: true
+  scope_by_project_and_CSE: true
+sources_shortlist:
+  - details_v2_12
+  - technonikol_archicad_systems_and_components
+  - knauf_ru_working_drawings_and_CAD
+  - hilti_CAD_IFC_firestop
+  - region_approved_manufacturers
+  - specialist_engineer_donors_if_permitted
+  - NBS_and_international_only_after_local_applicability
+tests:
+  - LIBRARY_COVERAGE_01
+  - PROJECT_LIBRARY_PACK_01
+  - AC29_LIBRARY_IMPORT_01
+  - DETAIL_INDEX_MATCH_01
+  - LICENSE_EVIDENCE_01
+constraints:
+  never_auto_import_entire_library_to_live_PLN: true
+  never_approve_detail_without_expert_or_equivalent_evidence: true
+  versions_source_and_local_rights_required: true
+  no_live_tests_without_permission: true
