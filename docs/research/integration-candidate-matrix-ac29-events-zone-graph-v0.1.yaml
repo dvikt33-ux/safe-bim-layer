@@ -45,6 +45,25 @@ native_candidates:
     limitation: do_not_assume_global_monotonic_revision_across_sessions
     priority: P0
 
+  native_mep_distribution_graph:
+    api:
+      - ACAPI::MEP::CreateDistributionSystemsGraph
+      - ACAPI::MEP::DistributionSystemsGraph
+      - ACAPI::MEP::DistributionSystem
+      - ACAPI::MEP::DistributionSystemsGraphTreeNode
+      - ACAPI::MEP::PhysicalSystem
+    sources:
+      - https://graphisoft.github.io/archicad-api-devkit/class_a_c_a_p_i_1_1_m_e_p_1_1_distribution_systems_graph.html
+      - https://graphisoft.github.io/archicad-api-devkit/class_a_c_a_p_i_1_1_m_e_p_1_1_physical_system.html
+    evidence: DOCUMENTED
+    ac29_test: NOT_DONE
+    limitations:
+      - requires_native_MEP_ports_and_connections
+      - native_network_graph_is_not_hydraulic_or_electrical_calculation
+      - DistributionSystem_is_transient_and_PhysicalSystem_is_PLN_persisted
+    decision: REUSE_NATIVE_NETWORK_CONNECTIVITY_BEFORE_CUSTOM_GRAPH
+    priority: P1
+
   zone_boundary_query:
     api:
       - ACAPI::ZoneBoundaryQuery
@@ -132,6 +151,15 @@ experiment_gates:
       - section_view_restriction
       - distinguish_boundary_area_from_zone_floor_area
     acceptance: native_relations_correct_or_not_verified
+  MEP_GRAPH_01:
+    required:
+      - connected_pipe_network
+      - disconnected_same_category_element
+      - native_port_mapping
+      - split_and_reconnect
+      - generic_GDL_false_connection
+      - persistent_PhysicalSystem
+    acceptance: no_false_port_connections_and_no_stale_status
   FRESH_01:
     required:
       - single_wall_modification
@@ -152,6 +180,7 @@ experiment_gates:
     engine_choice: after_end_to_end_latency_and_correctness
 
 cross_refs:
+  - docs/research/architectural_ai_checkpoint_29_native_mep_system_graph_2026-10-08.md
   - docs/research/architectural_ai_checkpoint_29_ac29_native_events_zone_adjacency_and_freshness_2026-10-08.md
   - docs/research/architectural_ai_checkpoint_28_skill_runtime_incremental_graph_reality_audit_2026-10-08.md
   - docs/research/integration-candidate-matrix-agent-runtime-incremental-v0.1.yaml
