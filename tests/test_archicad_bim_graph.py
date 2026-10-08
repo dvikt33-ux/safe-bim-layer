@@ -134,6 +134,42 @@ class BIMGraphTests(unittest.TestCase):
             self.compile(step("w", "GetStories", {}),
                          step("w", "GetStories", {}))
 
+    def test_multi_create_guid_producer_is_ambiguous(self):
+        result = self.compile(
+            step("walls", "CreateWalls", {"wallsData": [wall(), wall()]}),
+            step("window", "CreateWindows", {
+                "windowsData": [{"ownerWallId": {"guid": {"$createdGuid": "walls"}},
+                                 "centerOffset": 1}]
+            }),
+        )
+        self.assertEqual(result["status"], "INVALID")
+        self.assertIn("exactly one element", str(result["operations"][1]["errors"]))
+
+    def test_guid_placeholder_in_non_guid_parameter_rejected(self):
+        result = self.compile(
+            step("wall", "CreateWalls", {"wallsData": [wall()]}),
+            step("window", "CreateWindows", {
+                "windowsData": [{
+                    "ownerWallId": {"guid": {"$createdGuid": "wall"}},
+                    "centerOffset": 1,
+                    "favoriteName": {"$createdGuid": "wall"},
+                }]
+            }),
+        )
+        self.assertEqual(result["status"], "INVALID")
+        self.assertIn("only in .guid fields", str(result["operations"][1]["errors"]))
+
+    def test_invalid_producer_fields_do_not_crash_planner(self):
+        result = self.compile(
+            step("wall", "CreateWalls", "not-an-object"),
+            step("window", "CreateWindows", {
+                "windowsData": [{"ownerWallId": {"guid": {"$createdGuid": "wall"}},
+                                 "centerOffset": 1}]
+            }),
+        )
+        self.assertEqual(result["status"], "INVALID")
+        self.assertIn("params must be an object", str(result["operations"][0]["errors"]))
+
     def test_runtime_schema_mismatch_not_live_ready(self):
         result = self.compile(
             step("a", "CreateWalls", {"wallsData": [wall()]}),
