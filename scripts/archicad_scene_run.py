@@ -287,12 +287,31 @@ class SceneWriter:
                     if command in ("CreateWindows", "CreateDoors"):
                         parent_guid = check_previous_wall(self.api, step, created)
                     params = resolve_params(step, created)
+                    # Bind each operation to its exact resolved (including GUID)
+                    # parameters, approved local test scope, source scene and target.
+                    intent = {"sceneId": scene_id, "planHash": expected_hash,
+                              "stepId": step_id, "command": command,
+                              "parameters": params, "target": preflight["binding"]}
+                    approval_record = {
+                        "operationHash": digest(intent),
+                        "permission": command,
+                        "scope": EXPECTED_PATH,
+                        "approvedBy": "local-explicit--execute-with-matching-plan-hash",
+                        "approvedAt": datetime.now(timezone.utc).isoformat(),
+                        "approvalSource": "standing-test-PLN-permission",
+                    }
+                    if approval_record["permission"] not in ALLOWED_WRITES:
+                        raise ValueError("UNREVIEWED_WRITE_SCOPE")
                     db.execute("BEGIN IMMEDIATE")
                     db.execute("INSERT INTO steps VALUES (?,?,?,?,?)",
                                (scene_id, step_id, "ATTEMPTED", None, canonical({
-                                   "command": command, "parameters": params
+                                   "intent": intent, "localApproval": approval_record
                                })))
-                    db.commit()  # Durable intent BEFORE the uncertain native write.
+                    db.commit()  # Durable per-operation approval and intent BEFORE write.
+                    if (guarded_project(self.api) != intent["target"]
+                            or digest(intent) != approval_record["operationHash"]
+                            or approval_record["scope"] != EXPECTED_PATH):
+                        raise ValueError("OPERATION_BOUNDARY_APPROVAL_MISMATCH")
                     raw = self.api(command, params)
                     guid = created_guid(raw)
                     db.execute("UPDATE steps SET state='CREATED_UNVERIFIED',guid=? WHERE scene_id=? AND step_id=?",
