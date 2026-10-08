@@ -323,3 +323,38 @@ vertical_core_and_design_grammar_strategy:
     - STAIR_AC29_01
     - ADG_01
     - GRAMMAR_ENGINE_01
+
+
+architect_training_and_benchmark_strategy:
+  checkpoint: docs/research/architectural_ai_checkpoint_29_floora_training_alignment_benchmarks_2026-10-08.md
+  principles:
+    - do_not_train_one_general_architect_model
+    - use_small_domain_specialists_for_structured_subtasks
+    - deterministic_hard_gates_before_preference_ranking
+    - collect_structured_architect_feedback_before_finetuning
+    - benchmark_before_and_after_every_model_or_provider_change
+  first_local_specialist_candidate:
+    model_family: FLOORA
+    released_models:
+      - ADSKAILab/floora-0.6b
+      - ADSKAILab/floora-1.7b
+    initial_mode: inference_only
+    no_finetuning_until:
+      - FLOORA_01_complete
+      - FEEDBACK_01_data_exists
+      - ACB_BASELINE_01_complete
+  architect_competence_benchmark:
+    families:
+      - spatial_reasoning
+      - BIM_semantics
+      - architecture_hard_constraints
+      - change_propagation
+      - architectural_preference
+      - documentation
+      - cross_representation
+      - live_AC29_execution
+    primary_kpi: human_minutes_to_verified_accepted_AC29_outcome
+  tests:
+    - FLOORA_01
+    - FEEDBACK_01
+    - ACB_BASELINE_01
