@@ -1,0 +1,107 @@
+schema_version: 0.1
+date: 2026-10-08
+target_project: SBIM
+target_bim: Archicad_29
+audit_scope: static_source_review_only
+experiment_executed_on_user_pln: false
+
+candidate:
+  name: Pascal Editor
+  repository: https://github.com/pascalorg/editor
+  root_license: MIT
+  integration_role: sandbox_reference_not_source_of_truth
+  native_archicad_29_plugin: not_verified
+  russian_regulation_engine: not_verified
+  archicad_composite_and_layout_preservation: not_verified
+
+source_confirmed_capabilities:
+  mcp_scene_mutation:
+    source: packages/mcp/src/tools/apply-patch.ts
+    batch_create_update_delete: implemented
+    validates_patch: implemented
+    id_type_change_block: implemented
+    single_undo_step: documented_in_tool
+    crash_atomicity_end_to_end: not_tested
+  local_runtime:
+    source: packages/mcp/README.md
+    sqlite: documented
+    scene_version_checks: documented
+    browser_sse_scene_events: documented
+    live_sync_conflicts: documented
+  wall_topology:
+    source: packages/core/src/systems/wall/wall-operations.ts
+    reuse_covered_segments: implemented
+    split_retains_original_id: implemented
+    hosted_reference_migration: implemented
+    zone_boundary_ids_migration: implemented
+  reactive_openings:
+    sources:
+      - packages/core/src/systems/owned-floor-openings.ts
+      - packages/core/src/systems/stair/stair-opening-sync.ts
+      - packages/core/src/systems/elevator/elevator-opening-sync.ts
+    source_owner_provenance: implemented
+    derived_opening_reconciliation: implemented
+    cross_system_ac29_semantic_equivalence: not_tested
+  wall_assemblies:
+    source: packages/core/src/systems/wall/wall-assembly.ts
+    layered_thickness_and_orientation: implemented
+    base_code_region: US_IRC_2021_ASTMC90
+    author_marks_some_presets_unverified: true
+    russian_use_without_verified_adapter: forbidden
+  ifc:
+    source: packages/ifc-converter/README.md
+    import_to_editable_walls_windows_doors_levels_spaces: documented_conditional
+    export_roundtrip_tests_present: true
+    roof_full_parametric_roundtrip: unsupported
+    miscellaneous_classes_mesh_fallback: documented
+    source_globalid_and_meta: preserved_conditionally
+    native_archicad_semantic_roundtrip: not_tested
+
+clearance_capability:
+  source: packages/mcp/src/tools/check-collisions.ts
+  tested_domain: furniture_plan_footprint
+  method: rotation_aware_plan_AABB
+  candidate_read_only: implemented
+  explicit_evidence_states:
+    - checked
+    - partial
+    - insufficient_evidence
+  unsupported:
+    - vertical_clearance
+    - room_boundary_containment
+    - door_swing
+    - delivery_route
+    - exact_3d_item_mesh
+    - non_level_hosted_transform
+  russian_accessibility_compliance: NOT_CLAIMABLE
+
+possible_reuse:
+  - reactive_owner_dependent_geometry_method
+  - no_duplicate_wall_insertion_planner
+  - patch_guard_and_undo_contract
+  - local_scene_event_stream_method
+  - ifc_to_room_first_import_heuristics
+  - evidence_aware_furniture_fit_precheck
+
+decision:
+  production_dependency: BLOCKED_UNTIL_REAL_AC29_BENCH
+  direct_second_editor_for_MVP: REJECT_UNLESS_CLEAR_SPEED_GAIN
+  code_copy: REVIEW_FILE_DEPENDENCY_LICENSES_FIRST
+  trial_priority: P1_SANDBOX_ONLY
+
+comparisons:
+  execution: Archicad_MCP_Tapir_HuskyBIM
+  IFC_and_semantic_state: IFCtoLBD_IfcOpenShell
+  program_equipment: dRofus
+  physics_engineering: CYPE_and_other_specialist_engines
+
+acceptance_tests:
+  - PASCAL_IFC_01
+  - PASCAL_DEPENDENCY_01
+  - PASCAL_LOCAL_EVENT_LATENCY_01
+  - FURNITURE_FIT_FALSE_PASS_01
+
+related_research:
+  - docs/research/architectural_ai_checkpoint_29_pascal_archsight_skills_2026-10-08.md
+  - docs/research/integration-candidate-matrix-v1.9.yaml
+  - docs/research/integration-candidate-matrix-v2.0.yaml
