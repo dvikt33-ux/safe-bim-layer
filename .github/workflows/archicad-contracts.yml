@@ -7,8 +7,10 @@ on:
     paths:
       - 'scripts/archicad_batch_contracts.py'
       - 'scripts/archicad_bim_graph.py'
+      - 'scripts/archicad_mailbox_graph_adapter.py'
       - 'tests/test_archicad_batch_contracts.py'
       - 'tests/test_archicad_bim_graph.py'
+      - 'tests/test_archicad_mailbox_graph_adapter.py'
       - 'tapir-1.5.8.json'
       - 'examples/archicad_bim_graph.offline.sample.json'
       - '.github/workflows/archicad-contracts.yml'
@@ -16,7 +18,9 @@ on:
     paths:
       - 'scripts/archicad_batch_contracts.py'
       - 'scripts/archicad_bim_graph.py'
+      - 'scripts/archicad_mailbox_graph_adapter.py'
       - 'tests/test_archicad_bim_graph.py'
+      - 'tests/test_archicad_mailbox_graph_adapter.py'
       - 'tests/test_archicad_batch_contracts.py'
       - 'tapir-1.5.8.json'
       - 'examples/archicad_bim_graph.offline.sample.json'
