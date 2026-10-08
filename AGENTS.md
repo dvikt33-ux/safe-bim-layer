@@ -18,7 +18,7 @@ Applies to the entire `safe-bim-layer` repository, all subdirectories, and subse
 - Keep `Archicad 29 DevKit`, `AC29` and Tapir-specific versions as their own API compatibility identifiers; update only the installed application version, not past tests or historical research.
 
 
-- Writes to production/other PLN require explicit separate approval. The user granted continuing authorization for **only** the exact test PLN `C:\\LocalAI\\SafeBIM_Global_Library_Test_Projects\\Тест MER .pln` (including trailing space in the project name). The local executor must still enforce scoped operation approval records, live project identity, replay protection, and readback; no new permission question is needed within that scope.
+- Writes to production/other PLN require explicit separate approval. The user granted continuing authorization for **only** the exact test PLN `C:\LocalAI\SafeBIM_Global_Library_Test_Projects\Тест MER .pln` (including trailing space in the project name). The local executor must still enforce scoped operation approval records, live project identity, replay protection, and readback; no new permission question is needed within that scope.
 - Before any live write, verify the exact currently open project/instance, not a stale port. Read back what actually changed; do not claim success from an unverified command.
 - A read-only bridge is not a write-capable bridge. Preserve project identity checks, replay protection, and audit evidence when enabling write execution.
 
