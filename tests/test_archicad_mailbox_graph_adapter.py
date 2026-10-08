@@ -154,9 +154,11 @@ class GraphToMailboxTests(unittest.TestCase):
                 "windowsData": [{"ownerWallId": {"guid": {"$createdGuid": "wall"}},
                                  "centerOffset": 0.5, "width": 0.6, "height": 1.2}]}}
         ]}
-        first = self.prepare(plan, mode="execute")
-        out = self.prepare(plan, [generated_result(first)], mode="execute")
-        self.assertEqual(out["status"], "NEEDS_WORKER_RECIPE")
+        preview = self.prepare(plan)
+        self.assertEqual(preview["status"], "NEXT_JOB_PREVIEW")
+        out = self.prepare(plan, mode="execute")
+        self.assertEqual(out["status"], "UNSUPPORTED_GRAPH")
+        self.assertIn("window", out["unsupportedSteps"])
         self.assertFalse(out.get("jobPublished", False))
 
     def test_rejects_unknown_input_and_improper_wall(self):
