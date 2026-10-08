@@ -84,8 +84,9 @@ def _hosted_fit_errors(step, steps):
             continue
         owner = entry.get("ownerWallId")
         guid = owner.get("guid") if isinstance(owner, dict) else None
-        if not isinstance(guid, dict) or set(guid) != {_REF_KEY}:
-            continue  # Non-generated owner is checked at the live readback gate.
+        if (not isinstance(guid, dict) or set(guid) != {_REF_KEY}
+                or not isinstance(guid[_REF_KEY], str)):
+            continue  # Malformed refs are diagnosed by the reference validator.
         source = steps.get(guid[_REF_KEY])
         if not isinstance(source, dict) or source.get("command") != "CreateWalls":
             continue  # The typed-reference validator reports the error.
