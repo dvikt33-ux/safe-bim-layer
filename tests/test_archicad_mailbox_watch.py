@@ -103,8 +103,31 @@ class WatcherTests(unittest.TestCase):
             out = watch.pump_one(state, {"new": "sha"}, lambda mid: job(mid),
                     lambda: dict(TARGET, projectPath="C:\\Wrong.pln"),
                     lambda mid: invoked.append(mid), TARGET, now=NOW)
-            self.assertEqual(out["results"][0]["decision"], "LIVE_PROJECT_NOT_ALLOWED")
+            self.assertEqual(out["status"], "PAUSED_WRONG_PROJECT")
             self.assertFalse(invoked)
+            restored = watch.pump_one(
+                state, {"new": "sha"}, lambda mid: job(mid),
+                lambda: TARGET, lambda mid: invoked.append(mid), TARGET, now=NOW)
+            self.assertEqual(restored["results"][0]["decision"], "ACCEPT")
+            self.assertEqual(invoked, ["new"])
+
+    def test_offline_archicad_preserves_pending_job(self):
+        with tempfile.TemporaryDirectory() as folder:
+            state = Path(folder) / "watch.json"
+            watch.pump_one(state, {}, lambda mid: job(mid),
+                           lambda: TARGET, lambda mid: None, TARGET, now=NOW)
+            def offline():
+                raise ConnectionError("Archicad is closed")
+            waiting = watch.pump_one(
+                state, {"later": "sha"}, lambda mid: job(mid), offline,
+                lambda mid: self.fail("worker must not run"), TARGET, now=NOW)
+            self.assertEqual(waiting["status"], "PAUSED_NO_ARCHICAD")
+            self.assertNotIn("later", __import__("json").loads(state.read_text())["seen"])
+            resumed = []
+            watch.pump_one(state, {"later": "sha"}, lambda mid: job(mid),
+                           lambda: TARGET, lambda mid: resumed.append(mid),
+                           TARGET, now=NOW)
+            self.assertEqual(resumed, ["later"])
 
     def test_worker_failure_is_not_retried(self):
         with tempfile.TemporaryDirectory() as folder:
