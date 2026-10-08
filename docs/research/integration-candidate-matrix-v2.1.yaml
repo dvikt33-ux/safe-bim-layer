@@ -1,0 +1,141 @@
+version: 2.1
+date: 2026-10-08
+status: research_draft
+current_target: Archicad_29
+
+room_fit_layer:
+  AEE:
+    name: Activity_Equipment_Envelope
+    custom_normalized_schema: true
+    geometry_types:
+      - physical
+      - installation_clearance
+      - operating_clearance
+      - maintenance_clearance
+      - accessibility_clearance
+      - swing_clearance
+      - service_clearance
+      - emergency_clearance
+    host_dependent: true
+    invalidates_on_host_move: true
+
+  room_fit_state:
+    separate_from_area_compliance: true
+    outputs:
+      - PASS
+      - FAIL
+      - NEED_REPAIR
+      - NEED_VERIFY
+    checks:
+      - required_items
+      - capacity
+      - clearance_conflicts
+      - door_conflicts
+      - internal_route
+      - utilities
+      - substitutions
+
+providers:
+  hypar:
+    current_docs_version_observed: 0.2.044
+    clearances: PASS
+    clearance_attached_to_host: PASS
+    live_clearance_conflicts: PASS
+    door_swing_conflicts: PASS
+    conflict_reinvalidates_after_change: PASS
+    furnished_suggestions: PASS
+    fit_to_space: PASS
+    expand_space: PASS
+    user_group_libraries: PASS
+    learns_from_project_library: PASS_PUBLIC_DOC
+    direct_archicad_runtime: NOT_VERIFIED
+    decision: P0_UX_AND_ROOM_FIT_REFERENCE
+
+  finch:
+    adaptive_plan_library: PASS
+    locked_walls: PASS
+    extendable_not_shrinkable: PASS
+    adaptivity_score: PASS
+    decision: REUSE_ROOM_KIT_ADAPTATION_PATTERN
+
+  drofus:
+    item_requirements: PASS
+    item_occurrences: PASS
+    room_item_checks: PASS
+    archicad_object_link: PASS
+    role: EQUIPMENT_REQUIREMENT_SSOT
+
+  qbiq:
+    custom_furniture: PASS_PUBLIC_CLAIM
+    existing_furniture: PASS_PUBLIC_CLAIM
+    adjacency_guidelines: PASS_PUBLIC_CLAIM
+    spatial_circulation_constraints: PASS_PUBLIC_CLAIM
+    current_archicad_direct: NOT_VERIFIED
+    role: COMMERCIAL_QUALITY_BENCHMARK
+
+solver:
+  preferred:
+    - OR_Tools_CP_SAT
+    - Shapely
+  constraints:
+    - no_overlap
+    - allowed_orientations
+    - anchors
+    - clearances
+    - door_swing
+    - access_routes
+    - utilities
+    - room_boundary
+  GPT_coordinates_authority: false
+
+repair_hierarchy_room_fit:
+  - move_equipment
+  - rotate_equipment
+  - switch_approved_room_kit_variant
+  - substitute_equivalent_equipment
+  - alter_furniture_configuration
+  - change_local_grouping
+  - move_or_flip_door_within_valid_envelope
+  - change_door_swing_if_valid
+  - adjust_low_impact_partition
+  - move_major_wall
+  - alter_room_cluster
+  - structural_CSE_VCE_change
+  require_lower_level_infeasibility_before_escalation: true
+
+room_kit:
+  custom_schema: true
+  contents:
+    - source
+    - geometry_envelope
+    - fixed_items
+    - flexible_items
+    - AEE_set
+    - door_envelope
+    - window_envelope
+    - stretch_axes
+    - locked_dimensions
+    - applicability
+    - provenance
+    - regression_test
+
+custom_blocked_pending_reuse:
+  - generic_ai_furniture_generator
+  - custom_generic_geometry_solver
+  - generic_equipment_database
+  - generic_room_layout_neural_model
+  - generic_room_library_search_ai
+
+custom_retain:
+  - AEE_normalization
+  - AC29_dRofus_item_mapping
+  - room_kit_schema
+  - repair_level_hierarchy
+  - solver_constraint_compiler
+  - room_fit_coverage_signature
+
+next_tests:
+  - ROOM_FIT_01
+  - ROOM_REPAIR_01
+  - CLEARANCE_INVALIDATION_01
+  - ROOM_KIT_01
