@@ -75,6 +75,18 @@ class VersionProbeTests(unittest.TestCase):
             "GetProjectInfo", "GetProductInfo", "GetAddOnVersion", "GetStories"
         ])
 
+    def test_nested_graphisoft_addon_response(self):
+        conn = Connection()
+        original = conn.commands.ExecuteAddOnCommand
+        def wrapped(command, params):
+            return {"result": {"addOnCommandResponse": original(command, params)}}
+        conn.commands.ExecuteAddOnCommand = wrapped
+        report = probe.inventory(
+            conn, port=19723, expected_name=EXPECTED_NAME,
+            expected_path=EXPECTED_PATH)
+        self.assertEqual(report["status"], "READ_ONLY_VERSION_CHECK")
+        self.assertEqual(report["tapirAddonVersion"], "1.5.10")
+
     def test_wrong_pln_is_rejected_before_addon_query(self):
         conn = Connection(correct=False)
         report = probe.inventory(conn, port=19723, expected_name=EXPECTED_NAME,
