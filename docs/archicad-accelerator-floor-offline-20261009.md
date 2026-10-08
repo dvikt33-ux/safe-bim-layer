@@ -129,3 +129,63 @@ substitute a larger graph into the pavilion's fixed 4×3 m collision scanner.
 Verify host GUIDs and all created elements by native readback. A new floor
 run must have its own durable operation journal and stricter dimension,
 attribute and project identity gates.
+
+## CI execution protocol — confirmed on 2026-10-09
+
+GitHub Actions:
+https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/37860534805
+
+- Unit/system tests: **94/94 PASS** (Python 3.11; 0.507 seconds).
+- CLI integrated offline benchmark: **PASS**.
+- Downloadable workflow artifact: `accelerator-offline-metrics`
+  (GitHub Actions artifact ID `11585742902`; stored by GitHub Actions,
+  not committed to the repository).
+- This is **CI on FakeNative only**. The figures below exclude real
+  Archicad latency, PLN reads/writes and local `--schema` modifications.
+
+| Measurement | Mock pavilion 12 | Partial mock failure | Mock floor 101 |
+| --- | ---: | ---: | ---: |
+| API-like calls, all types | 156 | 72 | 238 |
+| Verified created elements | 12 | 4 prior to unknown operation | 101 |
+| Readback calls | 15 | 4 | 137 |
+| Request bytes | 10,379 | 4,634 | 43,052 |
+| Response bytes | 17,717 | 7,804 | 50,651 |
+| Sum of fake API call durations, ms | 1.6376 | 0.9401 | 4.2801 |
+| Integrated mock execution wall time, ms | 42.8075 | not benchmarked | 8.9250 |
+| Offline graph compilation wall time, ms | included in preflight | included in preflight | 25.1459 |
+
+Failed operation: `slab`. Previous wall operations remained in the
+journal as `PASS`, while the failed native call remained `ATTEMPTED`;
+replay was rejected. Zero automatic retries.
+
+The mock floor source hash for this CI run was
+`5fc3b2cf18b54a3a05e13bf4b2c091a57a60b1651108b648578b50803d2a3a4f`.
+**Do not use this hash to approve the pavilion's real `--execute`:**
+it identifies a different plan and derives from synthetic schema/graph work.
+
+### Local-only checkpoint push (manual, not executed in this chat)
+
+From the **correct existing Windows checkout**, inspect and push the exact
+original local commit without touching or replacing any files. Stop if the
+current branch, HEAD, remote or working tree is not as expected:
+
+```powershell
+$ErrorActionPreference = "Stop"
+$wanted = "feature/archicad-project-accelerator-mvp-20261009"
+$branch = (git branch --show-current).Trim()
+$head = (git rev-parse HEAD).Trim()
+$state = @(git status --porcelain)
+$origin = (git remote get-url origin).Trim()
+if ($LASTEXITCODE -ne 0 -or $branch -ne $wanted -or
+    -not $head.StartsWith("308264c") -or $state.Count -gt 0 -or
+    $origin -notmatch "dvikt33-ux/safe-bim-layer") {
+    throw "BLOCKED: inspect branch, HEAD, origin and uncommitted files; no push"
+}
+git push --set-upstream origin HEAD:refs/heads/feature/archicad-project-accelerator-mvp-20261009
+if ($LASTEXITCODE -ne 0) { throw "Push failed; no destructive recovery" }
+```
+
+This never runs `git reset`, `git stash`, `git clean`, `git pull`,
+`git commit`, or a forced push. If the working tree is not clean, **do not
+discard the changes**; save and review them before attempting publication.
+The known local SHA `308264c` is not conflated with any SHA in this branch.
