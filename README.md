@@ -1,12 +1,16 @@
 # Working Archicad MVP
 
+> **Current installed application (2026-10-09): Archicad 29.2.1 (5101) RUS FULL (x86-64).**
+> See [current runtime and post-update verification](docs/ARCHICAD_RUNTIME_CURRENT.md).
+> References to `Archicad 29 DevKit` / `AC29` below denote major-version compatibility, not an older installation.
+
 This branch contains the working Archicad Model Dump v1 reader and six small,
 geometry-derived create/read-back/delete cycles. The Python tools use only the
 standard library. They talk to the Tapir JSON API on `127.0.0.1:19723`.
 
 ## Start Archicad and open the project
 
-1. Start Archicad 29.
+1. Start the installed Archicad 29.2.1 (5101) RUS FULL (x86-64).
 2. Manually open the one intended test PLN in Archicad. The MVP never opens,
    switches, or saves a project for you.
 3. Ensure the Tapir add-on with Model Dump v1 is loaded. It exposes the local
