@@ -232,6 +232,12 @@ def prepare(catalog, plan, results, target, run_id, *, mode="dry-run", created_a
         return {"status": "GRAPH_COMPLETE", "createdGuids": completed,
                 "executionSupported": False, "jobPublished": False}
 
+    unsupported = [sid for sid in graph["executionOrder"]
+                   if steps[sid]["command"] != "CreateWalls"]
+    if mode == "execute" and unsupported and not completed:
+        return {"status": "UNSUPPORTED_GRAPH", "unsupportedSteps": unsupported,
+                "reason": "Cannot complete the graph with currently verified worker recipes",
+                "jobPublished": False, "automaticRetry": False}
     next_id = next(sid for sid in graph["executionOrder"] if sid not in completed)
     operation = steps[next_id]
     deps = next(x["dependsOn"] for x in graph["operations"] if x["id"] == next_id)
