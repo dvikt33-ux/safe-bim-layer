@@ -1,5 +1,10 @@
 # Checkpoint 36 — Structural-handoff-first redesign of the Archicad 29 accelerator
 
+## Clarification after user review (2026-10-08)
+
+**This checkpoint's "end at structural handoff" framing is superseded** by `docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md` and checkpoint 37. Structural handoff is a *valuable intermediate milestone* H1, not the end state. The system must start projects independently, complete them after engineering feedback, and release a final validated architectural/documentation package. Research before the model may be long and comprehensive; a global source registry and a compact project library pack are required. No architectural floor called "0 этаж": "1 этаж" at 0.000m, native index resolved from current StorySettings.
+
+
 Date: 2026-10-08
 Scope: architecture + reuse research, not implementation; one existing open AC29 PLN is authoritative; no live Archicad interaction or PLN modification.
 Project: dvikt33-ux/safe-bim-layer, feature/working-archicad-mvp
