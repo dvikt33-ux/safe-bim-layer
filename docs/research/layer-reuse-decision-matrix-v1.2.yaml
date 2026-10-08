@@ -1,0 +1,737 @@
+version: 1.2
+date: 2026-10-08
+target: Archicad_29
+status: active_research
+supersedes: docs/research/layer-reuse-decision-matrix-v1.1.yaml
+
+graph_source_priority:
+  1_archicad_native_authoritative:
+    - host_owner
+    - wall_beam_connections
+    - zone_boundaries_relations
+    - opening_parent_cut
+    - solid_element_operations
+    - roof_shell_trims
+    - hierarchical_ownership
+    - hotlink_source_proxy
+    - mep_connectivity_systems
+    - story_view_drawing_relations
+  2_sbim_explicit_intent_legal:
+    - design_intent
+    - normative_applicability
+    - design_decisions
+    - acp_governance
+    - approved_substitutions
+    - coordination_policy
+  3_derived_semantic:
+    - repeated_module
+    - same_type_favorite
+    - repeated_room_pattern
+    - likely_detail_family
+    - documentation_dependency
+    - validity_envelope
+  4_spatial_inference_cold_fallback:
+    - collision
+    - nearest_neighbor
+    - geometric_adjacency
+    - reconstructed_topology
+
+archicad_native_graph:
+  element_relations:
+    wall_beam:
+      - begin_end_connections
+      - reference_line_connections
+      - crossing_intersection
+      - connection_polygon
+    zone:
+      - related_elements_by_type
+      - wall_boundary_parts
+      - beam_boundary_parts
+      - curtain_wall_boundary_parts
+      - windows_doors
+      - slabs_roofs_shells
+      - stairs_railings_and_parts
+    opening:
+      - parent
+      - cut_elements
+      - connected_openings
+    geometry_relations:
+      - seo_operator_target
+      - roof_shell_trim
+      - merge
+    hierarchy:
+      - curtain_wall
+      - stair
+      - railing
+      - beam
+      - column
+    hotlink:
+      - source_proxy_guid_mapping
+
+mep_native:
+  distribution_systems_graph:
+    since: Archicad_28
+    authoritative_semantics:
+      - connected_set
+      - common_system_category
+      - common_domain
+    provides:
+      - systems
+      - elements
+      - ports
+      - tree_traversal
+      - previous_next
+      - direct_connected_element_ids
+  physical_system:
+    since: Archicad_29
+    persisted_in_pln: true
+    stores:
+      - name
+      - root_element
+      - calculation_point
+      - system_category
+      - group
+    role: persistent_mep_design_intent_anchor
+  custom_generic_mep_topology: blocked
+
+stair_native_solver:
+  api: ACAPI_HierarchicalEditing_SolveStair
+  outcomes:
+    - Correct
+    - Solved
+    - NotSolved
+  rules_data:
+    - riser_height_min_max
+    - tread_depth_min_max
+    - two_risers_plus_going
+    - landing_length
+    - walking_line_and_winder
+    - riser_going_relations
+    - pitch
+  headroom_separate: true
+  architecture:
+    - verified_russian_rule_ir
+    - compile_supported_numeric_subset_to_native_rules
+    - native_solve
+    - readback
+    - independent_full_rule_verification
+  custom_stair_geometry_solver: blocked_pending_native_test
+
+open_connector_davidharutyunyan:
+  repository: davidharutyunyan/archicad-mcp-connector
+  observed_commit: b2a9a825d57ae9f4d0b50f66a7e413c1c0f2fff0
+  observed_date: 2026-10-01
+  license: MIT
+  current_host: Archicad_26
+  runtime_status: SOURCE_HARVEST_NOT_AC29_BINARY_DEPENDENCY
+  advertised:
+    mcp_tools_approx: 260
+    tool_families: 21
+    extra_addon_json_commands_approx: 170
+    unit_tests: 574
+    live_checks: 413
+  harvest:
+    - deep_geometry_contract
+    - native_relation_extractor
+    - stair_railing_schema
+    - strict_zod_schemas
+    - toolset_presets
+    - capture_view_verification
+    - tests
+    - undo_wrapper_patterns
+  safety:
+    unknown_fields_rejected: true
+    delta_transforms_non_idempotent_annotation: true
+    undo_wrapper_rolls_back_on_escaping_error: true
+    generic_create_modify_batch_all_or_none: false
+    reason: per_item_Try_swallows_item_errors_inside_single_undo_scope
+
+deep_geometry:
+  current_ac29_baseline: model_dump_v1
+  algorithmic_uniqueness: false
+  open_source_contract_found: true
+  open_contract_fields:
+    summary:
+      - body_count
+      - vertex_count
+      - edge_count
+      - polygon_count
+      - world_bbox
+      - material_summary
+    mesh:
+      - source_guid
+      - body_index
+      - world_vertices
+      - polygon_topology
+      - holes
+      - body_material
+      - polygon_material_override
+      - world_normal
+      - closed_curved
+  target_architecture:
+    milestone_debug: full_model_dump
+    routine_cold: on_demand_per_element_summary_or_mesh
+  retire_model_dump: false
+
+element_link:
+  api_family: ACAPI_ElementLink
+  purpose: addon_specific_element_association
+  guid_change_tracking_by_archicad: true
+  recommended_use:
+    - acp_instance_to_host_anchor
+    - decision_anchor_to_bim_element
+    - verification_anchor_to_bim_element
+  not_for:
+    - entire_canonical_graph
+    - rich_provenance
+    - legal_rule_graph
+    - many_to_many_semantics
+  adoption_gate: ELEMENTLINK_01
+
+tool_context_strategy:
+  layer_1: coarse_tool_family_preset
+  layer_2: semantic_retrieval
+  layer_3: expose_top_3_to_5_capabilities
+
+custom_core_after_native_harvest:
+  keep:
+    - russian_legal_currentness_applicability
+    - design_intent
+    - design_decision_records
+    - rule_compilation_and_provenance
+    - coverage_signatures
+    - semantic_facet_fingerprints
+    - incremental_dependency_compiler
+    - change_pruning
+    - provider_capability_contract
+    - action_cache
+    - cross_provider_scheduling
+    - project_specific_disruption_ranking
+    - proven_ac29_native_gaps
+  remove_or_block_generic_ownership:
+    - generic_bim_relation_discovery
+    - generic_mep_topology
+    - generic_stair_geometry_solver
+    - generic_per_element_3d_extraction_algorithm
+    - generic_element_transforms
+    - event_recovery_single_source_of_truth
+    - generic_tool_family_discovery
+
+new_tests:
+  NATIVE_GRAPH_01:
+    - native_vs_geometric_relation_precision
+    - native_vs_geometric_relation_completeness
+    - runtime
+  MEP_GRAPH_01:
+    - systems
+    - ports
+    - traversal
+    - direct_connections
+    - physical_system_persistence
+  STAIR_SOLVER_01:
+    - correct
+    - solved
+    - not_solved
+    - readback
+    - headroom
+    - independent_rule_check
+  GEOM_HARVEST_01:
+    - model_dump_vs_ported_open_contract
+  OPEN_CONNECTOR_29_PORT_01:
+    - relations
+    - geometry_summary_mesh
+    - stair_railing_schema
+    - test_fixtures
+  ELEMENTLINK_01:
+    - save_reopen
+    - guid_tracking
+    - delete
+    - undo_redo
+    - copy_hotlink
+    - teamwork
+
+governing_rule: use_archicad_native_semantics_before_derived_or_geometric_inference
+
+documentation_and_schedule_update:
+  exterior_elevation:
+    status: OPEN_IMPLEMENTATION_EXISTS
+    source: davidharutyunyan/archicad-mcp-connector
+    create: true
+    modify: true
+    decision: HARVEST_OR_PROVIDER
+    custom_subsystem: STOP
+  curtain_wall:
+    tapir_current:
+      deep_read: true
+      create_modify_found: false
+    mit_open_connector:
+      create: true
+      modify_main: true
+      grid_patterns: true
+      panel_frame_classes: true
+      individual_panel_frame_write: true
+    decision: PORT_OR_PROVIDER
+    test: CW_PORT_01
+  hotlinks:
+    tapir_current:
+      create_nodes: true
+      create_instances: true
+      change_instances: true
+      delete_found: false
+    mit_open_connector:
+      get: true
+      place: true
+      update: true
+      relink: true
+      delete_or_break: true
+      merge_file: true
+    decision: REUSE_OPEN_STACK
+    custom_generic_crud: STOP
+  publisher:
+    publish_publisher_set: REUSE
+    layouts_drawings: REUSE
+    exports: REUSE_OR_PORT
+    custom_scope: production_policy_dirty_dependency_release_gate_only
+
+interactive_schedule:
+  structured_public_scheme_api_found: false
+  navigator_visibility: true
+  place_as_drawing: true
+  teamwork_permissions_exist: true
+  transport: SCHEME_SETTINGS_XML_EXPORT_IMPORT
+  reuse_candidate:
+    repository: alesdev88/Archicad-MCP
+    release: v0.7.1
+    commit: bc147fe107a24fc59f5b2ba9537bf6a5e711614f
+    license: MIT
+    tools:
+      - read_schedule_scheme
+      - edit_schedule_scheme
+      - validate_schedule_scheme
+    implemented:
+      - byte_exact_xml_roundtrip_guard
+      - preserve_unknown_xml
+      - column_add_remove_reorder_rename
+      - retarget_column_bindings
+      - property_guid_binding
+      - property_name_to_guid_resolution
+      - gdl_parameter_binding
+      - builtin_field_binding
+      - dry_run_default
+      - never_overwrite_input
+      - atomic_destination_write
+      - binding_validation
+  residual_gaps:
+    - criteria_code_table_and_editor
+    - import_export_transport_automation
+    - import_update_vs_duplicate_lifecycle
+    - generated_schedule_rows_if_required
+  criteria_known:
+    classification:
+      param_type: 88
+      relation_index: 1
+    property_string_style:
+      param_type: 232
+      relation_index: 12
+      exact_relation_semantics_complete: false
+  decision: REUSE_MIT_ENGINE_CUSTOMIZE_RESIDUAL_ONLY
+
+additional_stop_building:
+  - generic_exterior_elevation_writer
+  - generic_curtain_wall_framework
+  - generic_hotlink_crud
+  - generic_publisher_executor
+  - schedule_xml_parser_serializer
+  - schedule_column_editor
+  - schedule_binding_validator
+
+additional_tests:
+  CW_PORT_01: deep_curtain_wall_create_modify_parts_on_ac29
+  HOTLINK_01: compare_tapir_mit_native_hotlink_semantics
+  SCHEDULE_XML_01: adopt_and_verify_mit_xml_engine_on_ac29_exports
+  SCHEDULE_CRITERIA_01: empirical_single_variable_criteria_code_table
+  SCHEDULE_IMPORT_01: same_id_import_update_vs_duplicate
+  SCHEDULE_OUTPUT_01: cheapest_reliable_generated_rows_path
+  HUSKY_SCHEDULE_01: enumerate_schedule_scheme_tools_before_any_assumption
+
+native_mep_routing:
+  status: REUSE_ARCHICAD_EXECUTOR
+  capabilities:
+    - place_route_from_3d_nodes
+    - circular_and_rectangular_cross_sections
+    - move_routing_node
+    - change_mep_system
+    - logical_connectivity
+    - place_and_connect_terminal
+    - place_fitting_accessory_takeoff
+  custom_scope:
+    - route_path_optimization
+    - sizing
+    - clearance_and_slope_rules
+    - fire_and_maintenance_rules
+    - coordination
+    - candidate_ranking
+  generic_mep_geometry_engine: STOP
+  test: MEP_ROUTE_01
+
+design_options:
+  native_archicad: REUSE
+  tapir_current: REUSE
+  mcp_surface: SzamosiMate_tapir_archicad_MCP
+  capabilities:
+    - create_sets
+    - create_options
+    - create_combinations
+    - move_elements_to_options
+    - query_elements_of_option
+    - set_active_options_in_combination
+    - move_options_between_sets
+    - view_combination_semantics
+    - hotlink_design_options
+  design_healing_role: native_candidate_geometry_store
+  external_graph_role:
+    - candidate_lineage
+    - hypothesis
+    - score_vector
+    - evidence
+    - decision_rationale
+  separate_alternative_geometry_store: STOP
+  test: DESIGN_OPTIONS_01
+
+favorites_as_recipes:
+  archicad_favorite_manager: REUSE
+  tapir_current:
+    - create_favorites_from_elements
+    - apply_favorites_to_defaults
+    - apply_favorites_to_elements
+  mit_connector:
+    - get_favorites
+    - create_favorite
+    - apply_favorite
+    - delete_favorite
+    - rename_favorite
+    - export_favorites
+    - import_favorites
+  native_payload_can_include:
+    - element
+    - subelements
+    - memo
+    - marker
+    - properties
+    - classifications
+    - category_values
+  sbim_recipe_record_keeps:
+    - recipe_id
+    - favorite_identity
+    - version_hash
+    - validity_envelope
+    - rule_ids
+    - normative_provenance
+    - verification_status
+    - expected_readback_fingerprint
+  generic_recipe_bim_serializer: STOP_WHERE_FAVORITE_SUFFICIENT
+  test: FAVORITE_ACP_01
+
+data_cost_ladder:
+  1: header_direct_field
+  2: property_classification_attribute_favorite
+  3: native_quantity
+  4: native_relation
+  5: native_2d_drawing_primitive
+  6: evaluated_3d_summary
+  7: evaluated_3d_mesh_topology
+  8: external_specialist_computation
+  governing_rule: always_request_cheapest_authoritative_semantics_first
+
+native_quantities:
+  api: ACAPI_Element_GetQuantities
+  open_wrapper: davidharutyunyan/archicad-mcp-connector/GetElementQuantities
+  status: HIGH_VALUE_AC29_PORT_CANDIDATE
+  covers:
+    - walls
+    - beams_columns_and_segments
+    - windows_doors_skylights
+    - slabs_meshes
+    - roofs_shells
+    - zones
+    - curtain_walls_and_parts
+    - stairs_and_parts
+    - railings_and_many_parts
+    - morphs_objects_hatches
+  composites:
+    - building_material
+    - volume
+    - projected_area
+    - core_finish_flags
+    - subelement_guid
+  parts: true
+  exposed_surfaces:
+    api: ACAPI_Element_GetSurfaceQuantities
+    returns:
+      - element
+      - surface
+      - building_material
+      - exposed_area
+  quantity_parameters_are_semantic_inputs: true
+  wall_min_opening_size_must_enter_action_digest: true
+  generic_opening_wrapper_case_found: false
+  use_before_mesh_for:
+    - qto
+    - cost
+    - lca
+    - room_area_volume
+    - wall_opening_totals
+    - finish_surface_area
+    - roof_slab_area
+    - composite_material_volume
+  tests:
+    - QUANTITY_01
+    - QUANTITY_COST_01
+    - OPENING_QUANTITY_01
+
+property_expressions:
+  archicad_native: REUSE_AS_LIGHT_DERIVED_FACT_ENGINE
+  tapir_current:
+    read: true
+    create: true
+    update: true
+    stable_guid_update: true
+    availability: true
+    enum_options: true
+  proven_reference_targets:
+    - dynamic_builtin_real_property
+    - dynamic_builtin_string_property
+    - custom_numeric_property
+  recommended_use:
+    - simple_ratio
+    - local_margin
+    - normalized_value
+    - schedule_display_field
+    - simple_native_property_indicator
+  not_authoritative_for:
+    - legal_applicability
+    - normative_provenance
+    - cross_element_graph_rules
+    - complex_spatial_rules
+  rule_ir_remains_source_of_truth: true
+  test: PROPERTY_EXPR_01
+
+additional_stop_building_v1:
+  - generic_mep_route_geometry_engine
+  - external_alternative_geometry_store_for_normal_design_options
+  - custom_recipe_serializer_where_favorite_is_sufficient
+  - geometry_derived_routine_qto_engine
+  - custom_formula_engine_for_simple_local_bim_facts
+
+additional_tests_v1:
+  MEP_ROUTE_01: native_route_place_connect_modify_readback
+  DESIGN_OPTIONS_01: native_candidate_geometry_and_view_combinations
+  FAVORITE_ACP_01: governed_favorite_recipe_roundtrip
+  QUANTITY_01: native_vs_independent_geometry_semantics
+  QUANTITY_COST_01: performance_on_5296_element_project
+  OPENING_QUANTITY_01: generic_opening_native_quantity_gap
+  PROPERTY_EXPR_01: expression_recalc_error_and_invalidation_semantics
+
+project_communication_native:
+  issues_bcf:
+    role: WORKING_FINDING_AND_REVIEW_LOOP
+    provider: tapir_or_open_connector
+    writable: true
+    capabilities:
+      - create_delete_get_issue
+      - add_get_comments
+      - attach_detach_elements
+      - attachment_types_creation_highlight_deletion_modification
+      - modification_pairs_in_mit_wrapper
+      - bcf_export_import
+    custom_visual_backlog_ui: STOP
+    external_sbim_keeps:
+      - rule_result_identity
+      - legal_provenance
+      - action_digest
+      - causal_history
+    test: ISSUE_RULE_01
+
+  keynotes:
+    role: DOCUMENT_FACING_RULE_AND_DECISION_PROJECTION
+    archicad_since: 28
+    tapir_since: 1.5.6
+    capabilities:
+      - tree_read
+      - folder_crud
+      - item_crud
+      - autotext_tokens_key_title_description_reference
+      - create_keynote_labels
+    tapir_created_label_association: free_text_parent_null
+    authoritative_legal_source: false
+    custom_keynote_subsystem: STOP
+    test: KEYNOTE_RULE_01
+
+  revision_manager:
+    role: RELEASE_STATE_READBACK
+    public_create_rvm_change_found: false
+    public_create_rvm_issue_found: false
+    existing_issue_modify_api: ACAPI_Revision_ChangeRVMIssue
+    open_connector_declares_read_only: true
+    use_as_finding_store: false
+    test: RVM_READBACK_01
+
+structural_analytical_model:
+  status: REUSE_ARCHICAD_AUTHORITATIVE_GRAPH
+  read:
+    - current_model_and_variations
+    - curve_members
+    - surface_members
+    - segmented_surface_members
+    - member_connections
+    - local_coordinate_systems
+    - supports
+    - analytical_links
+    - point_edge_surface_loads
+    - releases
+  write:
+    - supports
+    - links
+    - point_edge_surface_loads
+    - releases
+    - custom_curve_stretch_cutback
+    - load_cases
+    - load_groups
+    - load_combinations
+    - update_analytical_model
+  reverse_bridge:
+    - create_bim_from_curve_member
+    - create_bim_from_surface_member
+    - create_bim_from_segmented_surface_member
+    - optional_favorite
+  archicad_is_fem_solver: false
+  custom_generic_structural_topology_engine: STOP
+  custom_scope:
+    - russian_structural_rule_assumptions
+    - specialist_solver_orchestration
+    - evidence_mapping
+    - revision_comparison
+    - correction_ranking
+  test: STRUCT_ANALYTICAL_01
+
+renovation:
+  role: NATIVE_STANDARD_LIFECYCLE_FACET
+  element_fields:
+    - renovationStatus
+    - renovationFilterGuid
+  statuses:
+    - Existing
+    - New
+    - Demolished
+  api:
+    - get_actual_filter
+    - set_actual_filter
+    - list_filters
+    - get_filter_name
+    - get_status_name
+  view_filter_semantics: native
+  duplicate_custom_existing_new_demolished_flags: STOP
+  semantic_facet: renovation_status
+  custom_richer_project_lifecycle: KEEP
+  test: RENOVATION_01
+
+communication_mapping:
+  rule_fail: issue_or_bcf
+  verified_document_reference: keynote
+  issued_document_state: revision_manager_readback
+  structural_semantics: analytical_model
+  existing_new_demolished: renovation
+
+additional_tests_v1_1:
+  ISSUE_RULE_01: finding_to_issue_bcf_roundtrip
+  KEYNOTE_RULE_01: rule_projection_autotext_update
+  RVM_READBACK_01: element_change_revision_chain
+  STRUCT_ANALYTICAL_01: native_structural_graph_load_support_roundtrip
+  RENOVATION_01: native_status_filter_visibility_invalidation
+
+model_quality_check_ac29:
+  status: REUSE_AS_THIN_NATIVE_UI_FOR_SUPPORTED_DISCIPLINES
+  since: Archicad_29
+  parent_type_ids_publicly_found:
+    - MEP
+    - Structural_Analytical
+  general_architectural_parent_found: false
+  method_contract:
+    localized_name: true
+    localized_result_name: true
+    info_text: true
+    icon: true
+    group: true
+    settings:
+      - OnlySelection
+      - Angle
+      - Length
+      - Area
+      - Real
+      - Interval
+    result:
+      - single_element_guid
+      - pair_element_guids
+    per_result_message: false
+    per_result_severity: false
+    per_result_evidence: false
+  authority: PROJECT_COMPILER_RULE_IR
+  native_ui_role: RESULT_NAVIGATION_PROJECTION
+  use_for:
+    - mep_checks
+    - structural_analytical_checks
+  do_not_force_architectural_rules_into_wrong_parent: true
+  test: MODEL_CHECK_01
+
+saf_exchange:
+  public_export_api: ACAPI_ProjectOperation_Save_with_API_SavePars_Saf
+  scope_options:
+    - whole_project
+    - visible_elements
+    - selected_elements
+  translator_selection_by_name: true
+  public_translator_config_crud_found: false
+  teamwork_permissions:
+    - APISAFTranslatorsManage
+    - APISaveAsSAF
+  decision: REUSE_NATIVE_EXPORT_CONTROL_TRANSLATOR_IN_TEMPLATE
+  custom_saf_serializer: STOP
+  action_digest_inputs:
+    - translator_name
+    - externally_versioned_translator_fingerprint
+    - export_scope
+    - analytical_model_context
+    - provider_version
+  test: SAF_EXPORT_01
+
+structural_context_invalidation:
+  analytical_model_generated_from:
+    - load_bearing_element_cores
+    - core_3d_connectivity
+    - analytical_generation_rules
+    - renovation_filter
+    - layer_connection_classes
+  model_variation_api: ACAPI_Analytical_GetAnalyticalModelVariation
+  lazy_generation: true
+  force_update_api: ACAPI_Analytical_UpdateAnalyticalModel
+  cache_must_include:
+    - affected_structural_facets
+    - analytical_model_variation_guid
+    - renovation_filter_context
+    - layer_connection_class_state
+    - generation_rule_identity_or_conservative_project_state
+    - loads_supports_releases
+    - solver_version
+    - saf_translator_identity_when_used
+  physical_geometry_only_cache_key: FORBIDDEN
+
+additional_stop_building_v1_2:
+  - generic_mep_model_check_palette
+  - generic_structural_model_check_palette
+  - saf_serializer
+  - structural_topology_reconstruction_from_mesh
+  - saf_translator_editor_without_public_seam
+
+additional_tests_v1_2:
+  MODEL_CHECK_01: native_mep_structural_result_projection
+  SAF_EXPORT_01: deterministic_scope_and_translator_export
