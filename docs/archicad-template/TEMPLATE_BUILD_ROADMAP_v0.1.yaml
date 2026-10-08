@@ -358,3 +358,46 @@ architect_training_and_benchmark_strategy:
     - FLOORA_01
     - FEEDBACK_01
     - ACB_BASELINE_01
+
+
+cross_representation_release_gate:
+  checkpoint: docs/research/architectural_ai_checkpoint_34_cross_representation_release_truth_2026-10-08.md
+  source_of_truth: Archicad_29_live_BIM
+  compare_layers:
+    - model_internal
+    - model_to_saved_views_and_schedules
+    - views_to_issued_pdf_dwg
+    - external_multidiscipline
+  hard_requirements:
+    - current_layout_drawings
+    - matching_opening_door_zone_schedule_values
+    - valid_section_detail_sheet_references
+    - consistent_axes_and_levels
+    - matching_CSE_specs_and_details
+    - expected_publisher_files_and_revisions
+    - source_to_representation_coverage
+    - current_normative_documentation_version
+  invalid_status_blocks_release:
+    - FAIL
+    - STALE
+    - BLOCKED
+    - NOT_ASSESSABLE_for_mandatory
+  native_reuse:
+    - Model_Compare_3D_only
+    - Revision_Manager_element_linked_changes
+    - Interactive_Schedules
+    - Views_Drawings_Publisher
+    - IfcTester_IDS_BCF
+  optional_external_review:
+    - Revizto_AC29_2D3D_API_MCP
+    - Structured_AI_IFC_PDF
+    - Bluebeam_Overlay
+  warning:
+    - Bluebeam_Smart_Review_preview_US_imperial_only
+    - Revizto_MCP_lacks_model_IO_images_and_event_subscriptions
+    - model_pass_does_not_prove_published_pdf_pass
+  tests:
+    - CROSSREP_01_12
+    - RELEASE_MANIFEST_01
+    - REVIZTO_AC29_01
+    - STRUCTURED_IFC_PDF_01
