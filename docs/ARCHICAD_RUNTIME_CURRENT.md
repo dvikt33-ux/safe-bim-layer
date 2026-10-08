@@ -15,6 +15,14 @@
 | Project development target | **Archicad 29.2.1 (5101)** |
 | Planned later migration | Archicad 30, only after the Archicad 29 MVP is operational |
 
+## Post-update ChatGPT-to-Mailbox heartbeat (2026-10-09)
+
+After the Archicad update, the dry-run-only watcher was launched on Windows. Initial output was `BASELINE_CREATED`, `oldJobsSkipped: 40`, followed by `IDLE`. From ordinary ChatGPT, a new GitHub JOB `gpt-update-ver-5101-dry-20261009` was published and then an independent GitHub fetch confirmed the corresponding RESULT `result-job-gpt-update-ver-5101-dry-20261009`, status `DRY_RUN`, `mutationApplied: false`, `plnSaved: false` with the exact allowed `Тест MER ` project binding. The plan described a wall (31,20)–(32,20), 3 m high, 0.2 m thick; it was **not created**.
+
+Evidence: https://github.com/dvikt33-ux/safe-bim-bridge/blob/main/safe-bim-mailbox/gpt-live/results/result-job-gpt-update-ver-5101-dry-20261009.json
+
+This validates unattended queue pickup while the foreground PowerShell watcher remains running. It does **not** prove persistence across Windows restart, actual native element creation after update, or the loaded Tapir add-on version.
+
 ## Evidence and migration safeguards
 
 - This supersedes earlier generic descriptions of the **currently installed application** as only `Archicad 29` or as an earlier 29.x update. The original historical evidence and timestamps remain intact.
