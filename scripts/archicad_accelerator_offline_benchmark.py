@@ -10,6 +10,7 @@ from collections import Counter
 import json
 from pathlib import Path
 import sqlite3
+from statistics import median
 import sys
 import tempfile
 from time import perf_counter
@@ -131,6 +132,18 @@ def timed_floor():
     start = perf_counter()
     preview = FLOOR.prepare()
     compilation_ms = round((perf_counter()-start)*1000, 4)
+    catalog_start = perf_counter()
+    cached_catalog = FLOOR.GRAPH.CONTRACTS.load_catalog(
+        FLOOR.GRAPH.CONTRACTS.DEFAULT_SCHEMA)
+    catalog_load_ms = round((perf_counter()-catalog_start)*1000, 4)
+    cached_trials = []
+    for _ in range(5):
+        trial_start = perf_counter()
+        replay = FLOOR.prepare(catalog=cached_catalog)
+        cached_trials.append((perf_counter()-trial_start)*1000)
+        if (replay["sourcePlanHash"] != preview["sourcePlanHash"] or
+                replay["executionOrder"] != preview["executionOrder"]):
+            raise AssertionError("cached schema changed the graph/plan hash")
     fake = MeteredFake()
     created = {"__plan__": preview["graph"]}
     by_id = {s["id"]: s for s in preview["graph"]["operations"]}
@@ -153,6 +166,9 @@ def timed_floor():
     return {"status": "OFFLINE_MOCK_FLOOR_PASS",
             "elementsVerified": len(created)-1,
             "mockGraphCompileDurationMs": compilation_ms,
+            "cachedCatalogLoadDurationMs": catalog_load_ms,
+            "cachedCatalogGraphCompileMedianMs": round(median(cached_trials), 4),
+            "cachedCatalogReusesPreservePlanHash": True,
             "mockExecutionDurationMs": duration_ms,
             "sourcePlanHash": preview["sourcePlanHash"],
             **fake.metrics()}
