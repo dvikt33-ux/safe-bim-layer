@@ -24,6 +24,7 @@ class FakeNative:
         self.fail_at = None
         self.wrong_project = False
         self.wrong_version = False
+        self.unbounded_type = None
 
     def __call__(self, command, params):
         self.calls.append(command)
@@ -39,6 +40,9 @@ class FakeNative:
             return {"version": "1.5.9" if self.wrong_version else "1.5.10"}
         if command == "GetAllElements":
             return {"elements": [{"elementId": {"guid": key}} for key in self.existing]}
+        if command == "Get3DBoundingBoxes" and self.unbounded_type:
+            return {"boundingBoxes3D": [{"error": {"message": "no 3D geometry"}}
+                                        for _ in params["elements"]]}
         if command == "Get3DBoundingBoxes":
             return {"boundingBoxes3D": [
                 {"boundingBox3D": {"xMin": 200.1 if self.collision else -10,
@@ -54,6 +58,10 @@ class FakeNative:
             guid = str(uuid.uuid5(uuid.NAMESPACE_DNS, "scene-"+str(len(self.writes))))
             self.created[guid] = (command, json.loads(json.dumps(params)))
             return {"elements": [{"elementId": {"guid": guid}}]}
+        if command == "GetDetailsOfElements" and self.unbounded_type:
+            guids = [e["elementId"]["guid"] for e in params["elements"]]
+            if all(g in self.existing for g in guids):
+                return {"detailsOfElements": [{"type": self.unbounded_type} for _ in guids]}
         if command == "GetDetailsOfElements":
             guid = params["elements"][0]["elementId"]["guid"]
             cmd, arguments = self.created[guid]
@@ -158,7 +166,24 @@ class SceneV1SystemTests(unittest.TestCase):
     def test_existing_geometry_elsewhere_is_allowed(self):
         self.native.existing = ["F0E8C2B3-1248-4D92-8890-EA1379E18152"]
         p = self.runner.preflight(200, 200)
-        self.assertEqual(p["existingElementsSpatiallyChecked"], 1)
+        self.assertEqual(p["nativeElementsInspected"], 1)
+        self.assertEqual(p["volumetricBodiesChecked"], 1)
+        self.assertFalse(self.native.writes)
+
+    def test_unbounded_2d_annotation_is_classified_without_collision(self):
+        self.native.existing = ["F0E8C2B3-1248-4D92-8890-EA1379E18152"]
+        self.native.unbounded_type = "Text"
+        p = self.runner.preflight(200, 200)
+        self.assertEqual(p["nonSpatialElementsVerified"], 1)
+        self.assertEqual(p["volumetricBodiesChecked"], 0)
+        self.assertEqual(p["nativeElementsInspected"], 1)
+        self.assertFalse(self.native.writes)
+
+    def test_unbounded_3d_object_blocks_any_scene_write(self):
+        self.native.existing = ["F0E8C2B3-1248-4D92-8890-EA1379E18152"]
+        self.native.unbounded_type = "Morph"
+        with self.assertRaisesRegex(ValueError, "SPATIAL_SCAN_UNAVAILABLE"):
+            self.runner.preflight(200, 200)
         self.assertFalse(self.native.writes)
 
     def test_unknown_outcome_is_partial_and_not_replayed(self):
