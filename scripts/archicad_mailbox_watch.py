@@ -12,7 +12,7 @@ from __future__ import annotations
 
 import argparse
 import base64
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 import hashlib
 import json
 import os
@@ -105,7 +105,7 @@ def validate_job(msg, mid, binding, now=None):
         created = utc_time(msg.get("createdAt"))
         expiration = utc_time(payload.get("expiresAt"))
         now = datetime.now(timezone.utc) if now is None else now
-        if expiration <= now or created > now or expiration - created > __import__("datetime").timedelta(minutes=15):
+        if expiration <= now or created > now or expiration - created > timedelta(minutes=15):
             return "EXPIRED_OR_INVALID_WINDOW"
         if payload.get("mode", "dry-run") != "dry-run":
             return "EXECUTE_NOT_ENABLED"
@@ -169,17 +169,23 @@ def pump_one(state_path, inbox, read_remote, inspect, execute, expected, *, now=
     results = []
     for mid in new:
         # Fetch and validate the remote message BEFORE binding or triggering worker.
+        # If Archicad is closed or the wrong project is open, PAUSE without
+        # consuming the new request. Only authenticated input errors are
+        # durably quarantined; the worker has not run at this point.
+        try:
+            binding = inspect()
+        except Exception as exc:
+            return {"status": "PAUSED_NO_ARCHICAD", "error": type(exc).__name__,
+                    "pendingJobs": len(new), "jobPublished": False}
+        if not isinstance(binding, dict) or any(binding.get(k) != expected.get(k)
+               for k in ("instanceId", "logicalProjectId", "projectName",
+                         "projectPath", "port")):
+            return {"status": "PAUSED_WRONG_PROJECT", "pendingJobs": len(new),
+                    "jobPublished": False}
         try:
             remote = read_remote(mid)
-            binding = inspect()
-            if not isinstance(binding, dict) or any(binding.get(k) != expected.get(k)
-                    for k in ("instanceId", "logicalProjectId", "projectName",
-                              "projectPath", "port")):
-                decision = "LIVE_PROJECT_NOT_ALLOWED"
-            else:
-                decision = validate_job(remote, mid, binding, now)
+            decision = validate_job(remote, mid, binding, now)
         except Exception as exc:
-            # Cannot tell if the remote object changed or disappeared; fail closed.
             decision = "INPUT_ERROR_" + type(exc).__name__
         # Persist decision BEFORE any possible worker invocation.
         state["seen"][mid] = {"decision": decision, "recordedAt": now.isoformat()}
@@ -217,16 +223,22 @@ def main():
     for item in (args.python, args.host_file, args.bridge_source, args.data_dir):
         if not item.exists():
             ap.error(f"missing existing file or directory: {item}")
-    actual = inspect_binding(args.python, args.host_file, args.bridge_source, args.data_dir)
-    if (actual.get("projectPath") != args.expected_project_path
-        or actual.get("projectName") != args.expected_project_name
-        or actual.get("port") != args.expected_port):
-        ap.error("live project is not the explicitly pinned test PLN")
     state_path = args.data_dir / _STATE_NAME
-    expected = {k: actual[k] for k in (
-        "instanceId", "logicalProjectId", "projectName", "projectPath", "port")}
+    expected = None
     while True:
         try:
+            actual = inspect_binding(args.python, args.host_file,
+                                     args.bridge_source, args.data_dir)
+            if (actual.get("projectPath") != args.expected_project_path
+                or actual.get("projectName") != args.expected_project_name
+                or actual.get("port") != args.expected_port):
+                raise RuntimeError("current Archicad project is not the pinned test PLN")
+            if expected is None:
+                expected = {k: actual[k] for k in (
+                    "instanceId", "logicalProjectId", "projectName", "projectPath", "port")}
+            elif any(actual.get(k) != expected.get(k) for k in expected):
+                # Reopening can change binding identity: never silently adopt it.
+                raise RuntimeError("Archicad project binding changed since watcher activation")
             out = pump_one(state_path, list_inbox(args.gh),
                            lambda mid: load_remote_job(mid, args.gh),
                            lambda: inspect_binding(args.python, args.host_file,
