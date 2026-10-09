@@ -29,13 +29,24 @@ def before_step(channel: str, *, oldest: str | None = None, limit: int = 100) ->
     Cursor is a Slack message timestamp, not an APA ledger sequence.
     """
     client = _client()
-    options = {"channel": channel, "limit": min(200, max(1, limit))}
+    limit = min(1000, max(1, int(limit)))
+    options = {"channel": channel}
     if oldest:
         options["oldest"] = oldest
         options["inclusive"] = False
-    response = client.conversations_history(**options)
+    messages = []
+    cursor = None
+    while len(messages) < limit:
+        options["limit"] = min(200, limit - len(messages))
+        if cursor:
+            options["cursor"] = cursor
+        response = client.conversations_history(**options)
+        messages.extend(response.get("messages", []))
+        cursor = response.get("response_metadata", {}).get("next_cursor")
+        if not cursor:
+            break
     events = []
-    for message in response.get("messages", []):
+    for message in messages:
         text = message.get("text", "")
         try:
             event = parse_event(text)
@@ -48,10 +59,10 @@ def before_step(channel: str, *, oldest: str | None = None, limit: int = 100) ->
     events.reverse()  # chronological order
     return {
         "events": events,
-        "truncated": bool(response.get("has_more")),
+        "truncated": bool(cursor),
         "oldest": oldest,
-        "newest_ts": events[-1]["slack_ts"] if events else oldest,
-        "rule": "Refresh again if truncated; reconcile new events before doing work.",
+        "newest_ts": messages[0].get("ts") if messages else oldest,
+        "rule": "If truncated, rerun with a higher --limit (max 1000) or review missing history.",
     }
 
 
