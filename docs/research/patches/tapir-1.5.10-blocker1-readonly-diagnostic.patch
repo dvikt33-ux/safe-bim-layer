@@ -1,0 +1,158 @@
+--- a/archicad-addon/Sources/LibraryCommands.hpp
++++ b/archicad-addon/Sources/LibraryCommands.hpp
+@@ -71,0 +72,9 @@
++class ResolveLibraryPartNameDiagnosticCommand : public CommandBase
++{
++public:
++    ResolveLibraryPartNameDiagnosticCommand ();
++    virtual GS::String GetName () const override;
++    virtual GS::Optional<GS::UniString> GetInputParametersSchema () const override;
++    virtual GS::Optional<GS::UniString> GetRawResponseSchema () const override;
++    virtual GS::ObjectState Execute (const GS::ObjectState& parameters, GS::ProcessControl& processControl) const override;
++};
+--- a/archicad-addon/Sources/LibraryCommands.cpp
++++ b/archicad-addon/Sources/LibraryCommands.cpp
+@@ -793,0 +794,136 @@
++// Read-only native resolver probe for TN-GDL-CREATE-01 / Blocker 1.
++ResolveLibraryPartNameDiagnosticCommand::ResolveLibraryPartNameDiagnosticCommand () :
++    CommandBase (CommonSchema::Used)
++{}
++
++GS::String ResolveLibraryPartNameDiagnosticCommand::GetName () const
++{
++    return "ResolveLibraryPartNameDiagnostic";
++}
++
++GS::Optional<GS::UniString> ResolveLibraryPartNameDiagnosticCommand::GetInputParametersSchema () const
++{
++    return R"({
++        "type": "object",
++        "properties": {
++            "libraryPartName": { "type": "string", "minLength": 1 }
++        },
++        "required": ["libraryPartName"],
++        "additionalProperties": false
++    })";
++}
++
++GS::Optional<GS::UniString> ResolveLibraryPartNameDiagnosticCommand::GetRawResponseSchema () const
++{
++    return R"({
++        "type": "object",
++        "properties": {
++            "libraryPart": {
++                "type": "object",
++                "properties": {
++                    "err": { "type": "integer" },
++                    "index": { "type": "integer" },
++                    "ownUnID": { "type": "string" },
++                    "parentUnID": { "type": "string" },
++                    "docu_UName": { "type": "string" },
++                    "file_UName": { "type": "string" },
++                    "isPlaceable": { "type": "boolean" },
++                    "missingDef": { "type": "boolean" },
++                    "typeID": { "type": "integer" }
++                },
++                "required": ["err", "index", "ownUnID", "parentUnID", "docu_UName", "file_UName", "isPlaceable", "missingDef", "typeID"],
++                "additionalProperties": false
++            },
++            "inventory": {
++                "type": "object",
++                "properties": {
++                    "getNumError": { "type": "integer" },
++                    "partCount": { "type": "integer" },
++                    "readableCount": { "type": "integer" },
++                    "skippedCount": { "type": "integer" },
++                    "skippedIndices": {
++                        "type": "array",
++                        "description": "Complete index and error list for every failed ACAPI_LibraryPart_Get call; never truncated.",
++                        "items": {
++                            "type": "object",
++                            "properties": {
++                                "index": { "type": "integer" },
++                                "error": { "type": "integer" }
++                            },
++                            "required": ["index", "error"],
++                            "additionalProperties": false
++                        }
++                    }
++                },
++                "required": ["getNumError", "partCount", "readableCount", "skippedCount", "skippedIndices"],
++                "additionalProperties": false
++            }
++        },
++        "required": ["libraryPart", "inventory"],
++        "additionalProperties": false
++    })";
++}
++
++GS::ObjectState ResolveLibraryPartNameDiagnosticCommand::Execute (const GS::ObjectState& parameters, GS::ProcessControl& /*processControl*/) const
++{
++    GS::UniString libraryPartName;
++    if (!parameters.Get ("libraryPartName", libraryPartName) || libraryPartName.IsEmpty ()) {
++        return CreateErrorResponse (APIERR_BADNAME, "libraryPartName is required.");
++    }
++    if (libraryPartName.GetLength () >= API_UniLongNameLen) {
++        return CreateErrorResponse (APIERR_BADNAME, "libraryPartName exceeds the API document-name buffer.");
++    }
++
++    // Match CreateObjects exactly: document-name only, no mutation, placeable-only.
++    API_LibPart probe = {};
++    GS::ucscpy (probe.docu_UName, libraryPartName.ToUStr ());
++    const GSErrCode searchErr = ACAPI_LibraryPart_Search (&probe, false, true);
++
++    GS::ObjectState resolved;
++    resolved.Add ("err", static_cast<Int32> (searchErr));
++    resolved.Add ("index", static_cast<Int32> (probe.index));
++    resolved.Add ("ownUnID", GS::UniString (probe.ownUnID));
++    resolved.Add ("parentUnID", GS::UniString (probe.parentUnID));
++    resolved.Add ("docu_UName", GS::UniString (probe.docu_UName));
++    resolved.Add ("file_UName", GS::UniString (probe.file_UName));
++    resolved.Add ("isPlaceable", probe.isPlaceable);
++    resolved.Add ("missingDef", probe.missingDef);
++    resolved.Add ("typeID", static_cast<Int32> (probe.typeID));
++    delete probe.location;
++    probe.location = nullptr;
++
++    GS::ObjectState inventory;
++    Int32 partCount = 0;
++    const GSErrCode getNumErr = ACAPI_LibraryPart_GetNum (&partCount);
++    inventory.Add ("getNumError", static_cast<Int32> (getNumErr));
++    inventory.Add ("partCount", getNumErr == NoError ? partCount : 0);
++    const auto& skippedAdder = inventory.AddList<GS::ObjectState> ("skippedIndices");
++    Int32 readableCount = 0;
++    Int32 skippedCount = 0;
++
++    if (getNumErr == NoError) {
++        for (Int32 i = 1; i <= partCount; ++i) {
++            API_LibPart item = {};
++            item.index = i;
++            const GSErrCode getErr = ACAPI_LibraryPart_Get (&item);
++            if (getErr != NoError) {
++                GS::ObjectState skipped;
++                skipped.Add ("index", i);
++                skipped.Add ("error", static_cast<Int32> (getErr));
++                skippedAdder (skipped);
++                ++skippedCount;
++            } else {
++                ++readableCount;
++            }
++            delete item.location;
++            item.location = nullptr;
++        }
++    }
++
++    inventory.Add ("readableCount", readableCount);
++    inventory.Add ("skippedCount", skippedCount);
++    GS::ObjectState response;
++    response.Add ("libraryPart", resolved);
++    response.Add ("inventory", inventory);
++    return response;
++}
+--- a/archicad-addon/Sources/AddOnMain.cpp
++++ b/archicad-addon/Sources/AddOnMain.cpp
+@@ -919,0 +920,4 @@
++        err |= RegisterCommand<ResolveLibraryPartNameDiagnosticCommand> (
++            libraryCommands, "1.5.10-safe-bim.blocker1.1",
++            "Read-only: resolves an exact libraryPartName with CreateObjects search rules and returns the complete GetNum/Get error inventory."
++        );

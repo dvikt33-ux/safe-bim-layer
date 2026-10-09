@@ -86,23 +86,24 @@ single-object end-to-end creation/readback establish completion of this block.
 
 ## Offline publication verification
 
-- All 47 files covered by the saved SHA256 manifest matched locally. Raw files,
-  model dumps, logs, binaries, project identities and personal paths are not
-  included in this checkpoint commit.
-- Local rechecks confirmed 96 baseline parameter matches, identical 22-GUID
-  inventories, 92 library errors, 2 bodies, the retained filter scope and
-  CreateObjects input/output plus all 11 referenced schemas against PR #16.
-  Zero writes/saves is a saved-session observation, not a new live assertion.
-- Existing suite: `python -m unittest discover -s tests -p 'test_archicad_*.py'`.
-  **101/101 passed** through a temporary external runner refusing socket
-  connect/connect_ex/create_connection and urllib urlopen. No live endpoint was
-  contacted. Initial sandbox-temp run: 96 successful tests, 5 Windows file-access
-  errors in watcher fixtures. Rerun with workspace-local temporary files:
-  101 successful tests, zero failures/errors; repository code unchanged.
-- These are offline/synthetic regression results, not live creation, installed
-  binary identity, collision coverage or normative compliance evidence.
-
-Publication scope: one Markdown checkpoint in a new research branch. No product
-code, schemas or tests change; existing branches and main are not publication
-targets. Close this publication step, retain the blocked research status, then
-address only the single priority above.
+- The saved-evidence inventory remains historical: 7,490 readable parts, 92
+  `ACAPI_LibraryPart_Get` errors, one readable candidate at index 7224, and no
+  saved `partCount` or complete skipped-index list. The candidate does not clear
+  name resolution.
+- This branch adds one sanitized Tapir source patch and focused tests. The
+  patch applies to the local Tapir 1.5.10 source; its four focused contract tests
+  pass. The full repository suite passes **105/105** with workspace-local
+  temporary files.
+- MSVC 19.35.32217.1 compiled the modified library-command and registration
+  translation units against AC29 DevKit 29.3000. The full APX target did not
+  finish because resource compilation stopped at `AddOnFix.grc`; no new APX was
+  produced. A read-only scan of the installed Tapir APX did not find the new
+  command identifier. No installation, loading, or Archicad calls occurred.
+- Blocker 1 remains **BLOCKED / NOT_VERIFIED**: the installed binary does not
+  contain this diagnostic, so there is no fresh native search read-back or full
+  current skipped-index/error list. The exact expected identity and current
+  library registry still need identity-first native read evidence.
+- This checkpoint contains no raw model dump, private request/response files,
+  project identity, or personal filesystem path. The branch is stacked directly
+  on PR #19 commit `39231a1e63ab91ff05cabe484bf737c176434a44`; main and PRs
+  #15–#19 are unchanged.
