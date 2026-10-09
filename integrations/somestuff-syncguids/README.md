@@ -26,6 +26,40 @@ have been made to its trunk, and no deployed APX or user PLN was modified here.
 - `smoke_syncguids.py`: future fail-closed LIVE test on **10 existing walls**,
   only after compiling and installing the experimental APX.
 
+## One-command Windows source preparation / build
+
+For the user's Windows 11 desktop, `prepare_build_ac29.ps1` performs an isolated
+checkout of the pinned SomeStuff tag, downloads this overlay at a **pinned
+SafeBIM commit**, checks and applies the registrar patch, verifies exactly
+three expected source files, and (optionally) invokes the project's canonical
+Archicad 29 build. It never installs APX, starts Archicad, saves PLN, or
+modifies any existing checkout. It **refuses an existing destination**.
+
+Run from PowerShell after downloading the script to a local file:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\prepare_build_ac29.ps1 -AllowDevKitDownload
+```
+
+The `-AllowDevKitDownload` switch explicitly authorizes the upstream build
+script to download the public Graphisoft Archicad 29 DevKit if none is provided.
+If the DevKit is already installed and accessible, prefer:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\prepare_build_ac29.ps1 -DevKitPath 'D:\SomeStuff_addon\Build\DevKit\APIDevKit-29'
+```
+
+The DevKit path above is **illustrative, not a verified path**. The script
+checks `Support\Inc\ACAPinc.h` and stops without building if it is absent.
+To prepare source without invoking CMake or downloading a DevKit, use
+`-SourceOnly` instead.
+
+Default destination is `%USERPROFILE%\Documents\APA_SyncGuids_Build_20261009`.
+Artifacts: `source-report.json`, `build-report.json` or `stop.json`, and
+`build.log`. If the script stops after creating the checkout, do **not**
+rerun into the same destination; inspect evidence first. A local build is still
+required before any new API command can be called.
+
 ## Applying into a *separate upstream working copy*
 
 Do not edit the installed SomeStuff.apx. Do not copy this overlay into the
