@@ -14,7 +14,7 @@ from urllib.parse import parse_qs, urlsplit
 
 EVENT_PREFIX = "APA_EVENT_V1"
 EVENT_PATTERN = re.compile(
-    r"\AAPA_EVENT_V1\s*\n[\s\S]*?```(?:json|JSON)?\s*\n(?P<payload>\{[\s\S]*?\})\s*\n```\s*\Z"
+    r"\AAPA_EVENT_V1\s*\n[\s\S]*?```(?:json|JSON)?\s*(?P<payload>\{[\s\S]*?\})\s*```\s*\Z"
 )
 IDENT = re.compile(r"\A[A-Za-z0-9][A-Za-z0-9_.:-]{2,95}\Z")
 STATUSES = frozenset({"INFO", "PASS", "BLOCKED", "NOT_VERIFIED"})
