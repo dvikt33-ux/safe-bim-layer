@@ -38,6 +38,12 @@ class EventFormatTests(unittest.TestCase):
         value = event(summary="Нативный APX пока не собран")
         self.assertEqual(parse_event(format_event(value))["summary"], value["summary"])
 
+    def test_slack_compacted_json_fence(self):
+        value = event(summary="Slack may collapse fenced JSON lines")
+        original = format_event(value)
+        compacted = original.replace("```json\\n", "```").replace("\\n```", "```")
+        self.assertEqual(parse_event(compacted)["event_id"], value["event_id"])
+
     def test_ignore_freeform_messages(self):
         self.assertIsNone(parse_event("APA report: anything"))
         self.assertIsNone(parse_event("Random message"))
