@@ -1,0 +1,26 @@
+--- a/Sources/AddOn/json_commands/JsonCommandRegistrar.cpp
++++ b/Sources/AddOn/json_commands/JsonCommandRegistrar.cpp
+@@ -9,6 +9,7 @@
+     #include "json_commands/RoomBookCommand.hpp"
+     #include "json_commands/SpecCommand.hpp"
+     #include "json_commands/SyncAllCommand.hpp"
++    #include "json_commands/SyncGuidsCommand.hpp"
+ 
+ // -----------------------------------------------------------------------------
+ // Регистрирует доступные JSON-команды аддона в Archicad.
+@@ -40,6 +41,17 @@
+     #endif
+     if (syncAllErr != NoError)
+         DBprnt ("Failed to register SyncAllCommand, error: " + GS::ValueToUniString (syncAllErr));
++
++    GS::Owner<SyncGuidsCommand> syncGuidsCommand = GS::NewOwned<SyncGuidsCommand> ();
++    #ifdef ServerMainVers_2700
++    const GSErrCode syncGuidsErr = ACAPI_AddOnAddOnCommunication_InstallAddOnCommandHandler (syncGuidsCommand.Pass ());
++    #else
++    const GSErrCode syncGuidsErr = ACAPI_Install_AddOnCommandHandler (syncGuidsCommand.Pass ());
++    #endif
++    if (syncGuidsErr != NoError)
++        DBprnt ("Failed to register SyncGuidsCommand, error: " + GS::ValueToUniString (syncGuidsErr));
+ }
+ 
+ #else
