@@ -14,6 +14,39 @@ from scripts.apa_sync.coordinator import EventStore, InvalidEvent, make_server
 LOG = logging.getLogger("apa.sync")
 
 
+def bootstrap_channel(store, client, channel_id: str, max_messages: int = 100) -> dict:
+    """Best-effort historical replay, oldest first, with idempotent SQLite writes."""
+    max_messages = min(500, max(1, int(max_messages)))
+    pages = []
+    cursor = None
+    while len(pages) < max_messages:
+        options = {"channel": channel_id, "limit": min(200, max_messages - len(pages))}
+        if cursor:
+            options["cursor"] = cursor
+        response = client.conversations_history(**options)
+        pages.extend(response.get("messages", []))
+        cursor = response.get("response_metadata", {}).get("next_cursor")
+        if not cursor:
+            break
+    accepted = 0
+    conflicts = 0
+    for message in reversed(pages):
+        if message.get("subtype"):
+            continue
+        try:
+            result = store.ingest(
+                message.get("text", ""),
+                slack_channel=channel_id,
+                slack_ts=str(message.get("ts", "")),
+            )
+        except InvalidEvent:
+            continue
+        if result.get("accepted"):
+            accepted += 1
+            conflicts += int(result["conflict"])
+    return {"scanned": len(pages), "accepted": accepted, "conflicts": conflicts}
+
+
 def run():
     # Import only here; offline ledger/tests do not require third-party packages.
     from slack_bolt import App
@@ -32,6 +65,17 @@ def run():
     port = int(os.environ.get("APA_SYNC_PORT", "8765"))
     store = EventStore(db_path)
     app = App(token=bot_token, process_before_response=True)
+
+    # Events API normally delivers only new messages. Recover recent history
+    # on restart so a temporarily stopped process does not lose all updates.
+    try:
+        stats = bootstrap_channel(
+            store, app.client, channel_id,
+            max_messages=int(os.environ.get("APA_SYNC_BOOTSTRAP_LIMIT", "100")),
+        )
+        LOG.info("APA Slack bootstrap %s", stats)
+    except Exception as exc:
+        LOG.warning("BOOTSTRAP NOT VERIFIED: %s; future events can still arrive", type(exc).__name__)
 
     @app.event("message")
     def capture_event(event, logger):
