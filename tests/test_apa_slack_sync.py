@@ -91,6 +91,26 @@ class EventStoreTests(unittest.TestCase):
         state = self.store.latest_states()["state"]["TN-GDL-CREATE-01:BUILD"]
         self.assertEqual(state["effective_status"], "CONFLICT")
 
+    def test_conflict_sticks_until_explicit_supersession(self):
+        initial = event()
+        disputed = event(status="PASS", summary="Unreviewed reversal")
+        repeated = event(status="PASS", summary="Another unreviewed claim")
+        self._ingest(initial, "100.1")
+        self._ingest(disputed, "101.1")
+        status = self._ingest(repeated, "102.1")
+        self.assertTrue(status["conflict"])
+        self.assertEqual(
+            self.store.latest_states()["state"]["TN-GDL-CREATE-01:BUILD"]["effective_status"],
+            "CONFLICT",
+        )
+
+    def test_same_id_different_payload_is_rejected(self):
+        first = event()
+        self._ingest(first, "100.1")
+        tampered = dict(first, summary="Conflicting reused identity")
+        with self.assertRaises(InvalidEvent):
+            self._ingest(tampered, "102.1")
+
     def test_supersession_resolves_prior_status(self):
         initial = event()
         second = event(
