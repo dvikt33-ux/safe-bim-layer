@@ -10,12 +10,13 @@ import time
 import unittest
 import uuid
 from pathlib import Path
+from unittest.mock import patch
 from urllib.request import urlopen
 
 from scripts.apa_sync.coordinator import (
     EventStore, InvalidEvent, format_event, make_server, parse_event,
 )
-from scripts.apa_sync.step_sync import after_step
+from scripts.apa_sync.step_sync import after_step, before_step
 from scripts.apa_sync.socket_mode import bootstrap_channel
 
 
@@ -59,6 +60,31 @@ class EventFormatTests(unittest.TestCase):
             parse_event(format_event(event(evidence_urls=["http://example.com"])))
         with self.assertRaises(InvalidEvent):
             parse_event(format_event(event(extra_key="surprise")))
+
+    def test_before_step_pages_history_and_tracks_non_event_ts(self):
+        older = event(summary="Historical report")
+        newer = event(summary="More recent report")
+
+        class Client:
+            def conversations_history(self, **kwargs):
+                if not kwargs.get("cursor"):
+                    return {
+                        "messages": [
+                            {"ts": "102.1", "text": "ordinary human conversation"},
+                            {"ts": "101.1", "text": format_event(newer)},
+                        ],
+                        "response_metadata": {"next_cursor": "page-2"},
+                    }
+                return {
+                    "messages": [{"ts": "100.1", "text": format_event(older)}],
+                    "response_metadata": {"next_cursor": ""},
+                }
+
+        with patch("scripts.apa_sync.step_sync._client", return_value=Client()):
+            output = before_step("C0C886E1PGR", limit=3)
+        self.assertEqual(len(output["events"]), 2)
+        self.assertEqual(output["newest_ts"], "102.1")
+        self.assertFalse(output["truncated"])
 
     def test_preview_only_by_default(self):
         output = after_step("C0C886E1PGR", event(), publish=False)
