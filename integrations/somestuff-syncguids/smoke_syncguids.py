@@ -19,7 +19,8 @@ BATCH = ROOT / "SS-BATCH-02-20261009-172802-9465e8"
 SCENE = ROOT / "SS-LIVE-04-20261009-171312-a66f03"
 FIRST = ROOT / "SS-LIVE-02-20261009-165014"
 LAST = ROOT / "SS-AB-02-20261009-175447-808203"
-URL = "http://127.0.0.1:19726/json"
+URL = None  # Resolved read-only by the exact disposable PLN path.
+API_PORT = None
 EXPECTED_PROJECT = (
     r"C:\LocalAI\SafeBIM_Global_Library_Test_Projects"
     r"\APA_SyncGuids_Test_2213.pln"
@@ -50,7 +51,41 @@ def check(condition, reason):
         raise RuntimeError(reason)
 
 
+def discover_target_port():
+    """Read-only probe. Never select by 'first responding API instance'."""
+    body = json.dumps({
+        "command": "API.ExecuteAddOnCommand",
+        "parameters": {
+            "addOnCommandId": {
+                "commandNamespace": "TapirCommand",
+                "commandName": "GetProjectInfo",
+            },
+            "addOnCommandParameters": {},
+        },
+    }).encode("utf-8")
+    matches = []
+    for port in range(19723, 19743):
+        request = Request(
+            f"http://127.0.0.1:{port}/json", method="POST", data=body,
+            headers={"Content-Type": "application/json"},
+        )
+        try:
+            with urlopen(request, timeout=2) as response:
+                payload = json.load(response)
+        except (OSError, TimeoutError, ValueError):
+            continue
+        if payload.get("succeeded") is not True:
+            continue
+        info = payload.get("result", {}).get("addOnCommandResponse", {})
+        if str(info.get("projectPath", "")).casefold() == EXPECTED_PROJECT.casefold():
+            matches.append(port)
+    check(len(matches) == 1,
+          f"EXPECTED EXACTLY ONE TEST PLN INSTANCE; found ports={matches}")
+    return matches[0]
+
+
 def api(command, parameters=None):
+    check(URL is not None, "ARCHICAD PORT NOT RESOLVED")
     body = json.dumps(
         {"command": command, "parameters": parameters or {}}
     ).encode("utf-8")
@@ -115,6 +150,9 @@ try:
     check(len(all_new) == 2000 and len(set(all_new)) == 2000, "INVALID GUID EVIDENCE")
     check(len(props) == 3, "PROPERTY IDS MISSING")
 
+    API_PORT = discover_target_port()
+    URL = f"http://127.0.0.1:{API_PORT}/json"
+    print(f"RESOLVED EXACT TEST PLN: port {API_PORT}", flush=True)
     available = api("API.IsAddOnCommandAvailable", {
         "addOnCommandId": {
             "commandNamespace": "SomeStuffCommand",
@@ -225,7 +263,7 @@ try:
         "syncClientSeconds": sync_seconds,
         "syncResponse": result,
         "classificationState": "NOT_VERIFIED (not part of property smoke)",
-        "apiPort": 19726,
+        "apiPort": API_PORT,
         "expectedProject": EXPECTED_PROJECT,
         "evidenceDirectory": str(RUN),
     }
