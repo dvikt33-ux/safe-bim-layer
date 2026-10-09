@@ -158,6 +158,47 @@ writesAndSaves: reported zero; no live revalidation
 This confirms the saved evidence and PR contract relationship. It does not
 confirm the installed binary, clear the resolver gate, or authorize a write.
 
+## Offline diagnostic implementation prepared
+
+A minimal native Tapir command patch is available at
+`docs/research/patches/tapir-1.5.10-blocker1-readonly-diagnostic.patch`.
+It adds `ResolveLibraryPartNameDiagnostic`, using the same exact name input and
+`ACAPI_LibraryPart_Search(&probe, false, true)` flags as `CreateObjects`, then
+returns `err`, `index`, `ownUnID`, `parentUnID`, `docu_UName`, `file_UName`,
+`isPlaceable`, `missingDef`, and numeric `typeID`. The same invocation calls
+`ACAPI_LibraryPart_GetNum` and records every failed `ACAPI_LibraryPart_Get`
+index/error without the existing five-entry sample limit. It rejects an empty
+name and any value too long for `API_UniLongNameLen`. The command contains no
+write, create, delete, save, or library-setting calls.
+
+The current Graphisoft `API_LibPart` reference documents these fields and types:
+`typeID` is an API library-part type ID; `index` is `Int32`; `docu_UName` and
+`file_UName` are `GS::uchar_t` arrays; `missingDef` and `isPlaceable` are
+`bool`; and `ownUnID` and `parentUnID` are character arrays. Graphisoft's
+`ACAPI_LibPart_Search` page says document names are not unique and that
+`onlyPlaceable=true` restricts the search; the `API_LibPart` page separately
+says the registered document name is unique and the newest duplicate is
+registered. Since these statements differ, this audit treats a name as
+insufficient identity and requires the returned native identity fields.
+
+Patch applicability passed against the local Tapir 1.5.10 source snapshot. The
+four focused contract tests passed, and the full offline suite passed **105/105**
+when Windows temporary files were directed into the workspace. MSVC
+19.35.32217.1 compiled the patched `LibraryCommands.cpp` and `AddOnMain.cpp`
+against the AC29 DevKit 29.3000 headers. Their object SHA256 values are
+`94B6A7A7D7BB67664D007AC7D701A404E318E66E0D5633BE246CC5CBB393085D` and
+`EF835DE0B6C39B666C7A663BDE8077CE7EA8C61D5770A943A47ECA3B4711CCD3`,
+respectively. The full AddOn target did not finish: its resource compilation
+stopped at `Sources/RFIX/AddOnFix.grc`, so this pass produced no APX.
+
+A read-only byte scan of the installed Tapir APX recorded SHA256
+`DC99AF071D3DBCFF9626653CCC37001613CB3FA4A8EFF50C6000C1CC70E8D7C7` and did
+not find the new command identifier in ASCII or UTF-16. This is binary identity
+evidence only; no APX was installed or loaded. No Archicad endpoint was called.
+The command is therefore compiled at translation-unit level but is not present
+in the installed binary, and no native name-search result or fresh 92-error
+inventory exists. Blocker 1 remains **BLOCKED / NOT_VERIFIED**.
+
 ## Minimal bounded future probe
 
 Only after separate authorization and identity-first verification of the exact
@@ -173,10 +214,11 @@ read back: err, probe.index, probe.ownUnID, probe.parentUnID,
            probe.missingDef, probe.typeID;
 ```
 
-The probe must fail closed unless `err == NoError`, `index == 7224` (or the
-current preflight candidate), main ownUnID equals the expected identity,
-`isPlaceable` is true, `missingDef` is false, and the returned document name
-matches exactly. It must also preserve the complete before/after inventory and
+The probe must fail closed unless `err == NoError`, the returned index matches
+a fresh identity-first preflight, the main ownUnID matches the independently
+verified expected identity, `isPlaceable` is true, `missingDef` is false, and the
+returned document name matches exactly. Historical index 7224 is not a current
+expectation. It must also preserve the complete before/after inventory and
 record the full `GetNum` count plus every skipped index/code in the same read-
 only pass. A mismatch, unexplained skipped entry, modal state or timeout is
 `NOT_VERIFIED`/`UNKNOWN_OUTCOME`; no create retry follows.
@@ -191,6 +233,7 @@ installed.
 * [Graphisoft API error codes](https://archicadapi.graphisoft.com/documentation/error-codes)
 * [Graphisoft `ACAPI_LibPart_Get`](https://archicadapi.graphisoft.com/documentation/acapi_libpart_get)
 * [Graphisoft `ACAPI_LibPart_Search`](https://archicadapi.graphisoft.com/documentation/acapi_libpart_search)
+* [Graphisoft `API_LibPart`](https://archicadapi.graphisoft.com/documentation/api_libpart)
 
 Conclusion: **Blocker 1 remains BLOCKED / NOT_VERIFIED.** The next practical
 step is the bounded read-only native name-search probe above; Blocker 2 remains
