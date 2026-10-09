@@ -8,7 +8,7 @@
  
  // -----------------------------------------------------------------------------
  // Регистрирует доступные JSON-команды аддона в Archicad.
-@@ -40,6 +41,17 @@
+@@ -40,6 +41,15 @@
      #endif
      if (syncAllErr != NoError)
          DBprnt ("Failed to register SyncAllCommand, error: " + GS::ValueToUniString (syncAllErr));
