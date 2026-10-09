@@ -23,7 +23,7 @@ URL = None  # Resolved read-only by the exact disposable PLN path.
 API_PORT = None
 EXPECTED_PROJECT = (
     r"C:\LocalAI\SafeBIM_Global_Library_Test_Projects"
-    r"\APA_SyncGuids_Test_2213.pln"
+    r"\APA_SyncGuids_2213_REOPEN_CHECK.pln"
 )
 COUNT = 10
 
