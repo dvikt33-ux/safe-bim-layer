@@ -164,7 +164,7 @@ class EventStoreTests(unittest.TestCase):
             def conversations_history(self, **kwargs):
                 return {
                     "messages": [
-                        {"ts": "101.1", "text": format_event(second)},
+                        {"ts": "101.1", "text": format_event(second), "subtype": "bot_message"},
                         {"ts": "100.1", "text": format_event(first)},
                     ],
                     "response_metadata": {"next_cursor": ""},
