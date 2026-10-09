@@ -93,6 +93,10 @@ The currently connected ChatGPT Slack connector **does not** expose
 A separate Slack App must be configured by the workspace owner:
 
 1. Visit https://api.slack.com/apps and create an app in `Проект архикад`.
+   Choose **From an app manifest**, using the reviewed
+   `scripts/apa_sync/slack_app_manifest.yml` from this PR. The manifest
+   configures Socket Mode, `message.channels`, `channels:history` and
+   `chat:write`. Do not put any token in the manifest.
 2. Enable **Socket Mode**; create an app-level token (`xapp-`) with
    `connections:write`. Do not share tokens in ChatGPT or GitHub.
 3. Under OAuth scopes, grant the bot `channels:history` (receive/read
