@@ -81,9 +81,10 @@ validation, NOT independent proof of PASS.
   `"supersedes":"<latest_event_id>"`, with newly verified evidence.
 - Reusing an `event_id` or Slack message timestamp with different contents
   is rejected. Retries of an identical event are idempotent.
-- The coordinator only sees new Slack events **after** its listener starts.
-  For historic events, bootstrap via `step_sync before` (manual review) or
-  a separately verified backfill procedure; no live backfill is claimed.
+- The coordinator processes new Slack events and tries to bootstrap the
+  latest 100 Slack messages (configurable up to 500) at startup. This
+  replay requires `channels:history`, is bounded, and has NOT been live
+  tested. Older events still require deliberate backfill/reconciliation.
 
 ## C. Optional local event coordinator on Windows
 
@@ -136,6 +137,9 @@ until scopes and channel membership are configured.
 - `GET /v1/state` — latest state per `task_id:phase`; conflicts explicit.
 - `GET /v1/changes?after=123&limit=100` — chronological event changes,
   `next_cursor` for subsequent polling (cursor is SQLite sequence).
+- `GET /v1/wait?after=123&timeout=25` — localhost-only long polling.
+  Waiting local agents wake when a new committed event arrives (up to
+  30 seconds per request); this is NOT a ChatGPT UI push mechanism.
 - `before --oldest=<Slack-message-ts>` — step CLI cursor is **different**:
   a Slack message timestamp, not a SQLite sequence.
 
@@ -156,7 +160,10 @@ Requires a separate live acceptance to claim event delivery:
 - A new Slack App connects and receives a genuine channel event.
 - A repeated Slack delivery produces exactly one database record.
 - Two contradictory task/phase reports expose `CONFLICT`.
-- Local read API exposes updated sequence and payload.
+- Local read API exposes updated sequence and payload, and waiting
+  local agents receive the committed event without a full hourly poll.
+- Coordinator restarts can bootstrap recent valid channel events
+  without duplicate rows (verified with a fake Slack client offline).
 - An independent agent reads that sequence before doing more work.
 - Previously open ChatGPT conversations still need an explicit Slack
   read at their next execution step.
