@@ -123,7 +123,7 @@ GS::ObjectState SyncGuidsCommand::Execute (const GS::ObjectState& parameters,
 
     const auto engineStart = std::chrono::steady_clock::now ();
     GS::Array<API_Guid> secondPass = SyncArray (settings, guids);
-    const GS::UInt32 secondPassCandidates = static_cast<GS::UInt32> (secondPass.GetSize ());
+    const UInt32 secondPassCandidates = static_cast<UInt32> (secondPass.GetSize ());
 
     // Mirrors SyncSelected: one extra pass for recursively affected elements.
     if (!secondPass.IsEmpty ())
