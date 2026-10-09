@@ -1,0 +1,2 @@
+# Optional: needed only for Socket Mode receiver and work-step Slack CLI
+slack-bolt>=1.20,<2.0

@@ -1,0 +1,26 @@
+name: APA Slack synchronization offline tests
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/apa_sync/**'
+      - 'tests/test_apa_slack_sync.py'
+      - 'docs/APA_SLACK_COORDINATOR.md'
+      - '.github/workflows/apa-sync-offline.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  coordinator-unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile Python sources
+        run: python -m compileall -q scripts/apa_sync tests/test_apa_slack_sync.py
+      - name: Offline unit tests (no Slack tokens)
+        run: python -m unittest discover -s tests -p 'test_apa_slack_sync.py' -v
