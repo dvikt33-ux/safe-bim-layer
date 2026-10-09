@@ -138,13 +138,17 @@ class EventStore:
                     raise InvalidEvent("Event ID or Slack timestamp reused with different content")
                 return {"accepted": False, "reason": "duplicate", "seq": dup["seq"]}
             prev = conn.execute(
-                "SELECT event_id,status,seq FROM events WHERE task_id=? AND phase=? ORDER BY seq DESC LIMIT 1",
+                "SELECT event_id,status,conflict,seq FROM events WHERE task_id=? AND phase=? ORDER BY seq DESC LIMIT 1",
                 (event["task_id"], event["phase"]),
             ).fetchone()
             supersedes = event["supersedes"]
             if supersedes and (prev is None or prev["event_id"] != supersedes):
                 raise InvalidEvent("supersedes must reference the latest event of the same task and phase")
-            conflict = bool(prev and prev["status"] != event["status"] and supersedes is None)
+            # Once a conflict exists, ordinary repeat messages cannot clear it.
+            # Only explicit supersession of the latest event resolves the dispute.
+            conflict = bool(prev and supersedes is None and (
+                prev["status"] != event["status"] or prev["conflict"]
+            ))
             now = datetime.now(timezone.utc).isoformat(timespec="seconds")
             cur = conn.execute("""
                 INSERT INTO events(
