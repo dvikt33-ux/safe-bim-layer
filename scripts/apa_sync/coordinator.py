@@ -9,6 +9,7 @@ import sqlite3
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from threading import Condition
 from urllib.parse import parse_qs, urlsplit
 
 EVENT_PREFIX = "APA_EVENT_V1"
@@ -86,6 +87,7 @@ class EventStore:
     def __init__(self, path: str | Path):
         self.path = Path(path).expanduser()
         self.path.parent.mkdir(parents=True, exist_ok=True)
+        self._changed = Condition()
         with self._connect() as conn:
             conn.execute("PRAGMA journal_mode=WAL")
             conn.execute("""
@@ -161,7 +163,24 @@ class EventStore:
                 json.dumps(event, ensure_ascii=False, sort_keys=True),
                 supersedes, int(conflict), slack_channel, slack_ts, now,
             ))
-            return {"accepted": True, "seq": cur.lastrowid, "conflict": conflict}
+            accepted = {"accepted": True, "seq": cur.lastrowid, "conflict": conflict}
+        # All readers are signalled only AFTER the SQLite transaction commits.
+        with self._changed:
+            self._changed.notify_all()
+        return accepted
+
+    def wait_changes(self, after: int = 0, timeout: float = 25.0) -> dict:
+        """Long-poll up to 30 s. Local controllable agents can react quickly."""
+        if not isinstance(after, int) or after < 0:
+            raise ValueError("after must be a nonnegative integer")
+        timeout = min(30.0, max(0.0, float(timeout)))
+        with self._changed:
+            # Hold the same condition across recheck and wait to avoid lost wakes.
+            result = self.changes(after=after)
+            if result["changes"]:
+                return result
+            self._changed.wait(timeout)
+            return self.changes(after=after)
 
     def changes(self, after: int = 0, limit: int = 100) -> dict:
         if not isinstance(after, int) or after < 0:
@@ -213,6 +232,12 @@ def make_handler(store: EventStore):
                     )
                 elif path.path == "/v1/state":
                     result = store.latest_states()
+                elif path.path == "/v1/wait":
+                    query = parse_qs(path.query)
+                    result = store.wait_changes(
+                        after=int(query.get("after", ["0"])[0]),
+                        timeout=float(query.get("timeout", ["25"])[0]),
+                    )
                 else:
                     return self._send(404, {"error": "not_found"})
             except (ValueError, TypeError, OverflowError):
