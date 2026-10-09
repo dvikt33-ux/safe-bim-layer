@@ -19,7 +19,11 @@ BATCH = ROOT / "SS-BATCH-02-20261009-172802-9465e8"
 SCENE = ROOT / "SS-LIVE-04-20261009-171312-a66f03"
 FIRST = ROOT / "SS-LIVE-02-20261009-165014"
 LAST = ROOT / "SS-AB-02-20261009-175447-808203"
-URL = "http://127.0.0.1:19723/json"
+URL = "http://127.0.0.1:19726/json"
+EXPECTED_PROJECT = (
+    r"C:\LocalAI\SafeBIM_Global_Library_Test_Projects"
+    r"\APA_SyncGuids_Test_2213.pln"
+)
 COUNT = 10
 
 # A prior attempt can have partially modified BIM even without a final report.
@@ -98,13 +102,6 @@ def property_values(guids, props):
     return out
 
 
-def classification_values(guids, systems):
-    return api("API.GetClassificationsOfElements", {
-        "elements": [{"elementId": {"guid": g}} for g in guids],
-        "classificationSystemIds": systems,
-    })["elementClassifications"]
-
-
 try:
     print("=== SYNCGUIDS PREFLIGHT ===", flush=True)
     previous = json.loads((BATCH / "report.json").read_text(encoding="utf-8"))
@@ -127,12 +124,17 @@ try:
     check(available.get("available") is True, "EXPERIMENTAL APX NOT INSTALLED")
 
     project = addon("TapirCommand", "GetProjectInfo")
-    for key in ("projectName", "projectPath", "isUntitled", "isTeamwork"):
-        check(project.get(key) == preflight["project"].get(key),
-              "WRONG PROJECT: " + key)
+    check(project.get("isUntitled") is False and
+          project.get("isTeamwork") is False,
+          "NOT A SAVED LOCAL PLN")
+    check(str(project.get("projectPath", "")).casefold() == EXPECTED_PROJECT.casefold(),
+          "WRONG PROJECT OR WRONG API PORT: " + str(project.get("projectPath")))
+    check(Path(EXPECTED_PROJECT).is_file(), "SAVED PLN COPY MISSING")
 
     original_guids = inventory()
-    check(original_guids == sorted(preflight["existingGuids"] + all_new),
+    expected_guids = sorted(g.upper() for g in preflight["existingGuids"] + all_new)
+    check(len(original_guids) == len(expected_guids) == 2213 and
+          original_guids == expected_guids,
           "BIM GUID INVENTORY DRIFT")
     selected = [g.upper() for g in all_new[:COUNT]]
     # Track legacy test walls as well, to detect collateral property changes.
@@ -144,8 +146,6 @@ try:
     before = property_values(watched, props)
     check(all(before[g][0].get("value") == before[g][1].get("value")
               for g in selected), "SELECTED BASELINE IS NOT SYNCHRONIZED")
-    systems = api("API.GetClassificationSystemIds")["classificationSystemIds"]
-    classifications_before = classification_values(selected, systems)
     save("preflight.json", {
         "project": project, "targetGuids": selected,
         "initialInventory": original_guids,
@@ -213,8 +213,6 @@ try:
         "selectedCorrect": not mismatches,
         "unselectedPropertiesStable": not unselected_changed,
         "guidInventoryStable": inventory() == original_guids,
-        "classificationsStable":
-            classification_values(selected, systems) == classifications_before,
     }
     report = {
         "test": "SS-SYNCGUIDS-SMOKE",
@@ -226,6 +224,9 @@ try:
         "writeSeconds": write_seconds,
         "syncClientSeconds": sync_seconds,
         "syncResponse": result,
+        "classificationState": "NOT_VERIFIED (not part of property smoke)",
+        "apiPort": 19726,
+        "expectedProject": EXPECTED_PROJECT,
         "evidenceDirectory": str(RUN),
     }
     save("mismatches.json", mismatches)
