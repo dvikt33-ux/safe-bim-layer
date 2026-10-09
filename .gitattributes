@@ -1,0 +1,5 @@
+# Export provenance and source manifests bind actual bytes, including newlines.
+* whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Generated JS has native trailing spaces; preserve its provenance bytes.
+schemas/tapir-live-1.5.10/*.js -text whitespace=cr-at-eol
+docs/research/** -text

@@ -1,0 +1,567 @@
+[
+  {
+    "path": "docs/research/agent_skills_candidate_matrix_v0.1.yaml",
+    "sha256": "7b3ed6a506f693512723c103d84b02015b3ee6c46285f6bd8ff293ea4b2c5f94",
+    "bytes": 1564
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_03_context_and_model_capacity_2026-10-07.md",
+    "sha256": "c68372b685387806d52606b09146938ca56367a8c02fe51febe91091bce56d06",
+    "bytes": 3722
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_04_performance_first_kernel_2026-10-07.md",
+    "sha256": "c4e894733a7ea1ededd697eb95d296794325b216b29ac80529aaac2117e4c34c",
+    "bytes": 15467
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_05_compiled_project_kernel_and_model_fabric_2026-10-07.md",
+    "sha256": "c4f110e6c224797ffdaebe9605d72868770368b5b6c39356db6681365b5e6b92",
+    "bytes": 16515
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_07_prebuild_landscape_audit_2026-10-07.md",
+    "sha256": "4ba6da19f7fd94bbd26c7bc1f02d11551470a3d194d9cc9b245e62185daf7bdd",
+    "bytes": 12715
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_08_control_plane_and_normative_sources_2026-10-07.md",
+    "sha256": "2d79971c65af0afa8a6d8eadfb1367e4e1571fc7a1c87d14683fa1c007588a93",
+    "bytes": 10367
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_09_normative_platforms_deep_audit_2026-10-07.md",
+    "sha256": "32e465c830d909d3b2cb452ef06c26ffeb51e0eb97f51682c54d2eaf8061ee56",
+    "bytes": 20114
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_10_zero_cost_normative_fallback_2026-10-07.md",
+    "sha256": "c5fee42e1b1fd20dd237642367d7bd1dfa0f2ed6eb33d92a321805630946d798",
+    "bytes": 5553
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_11_free_open_normative_stack_2026-10-07.md",
+    "sha256": "b2bd8ff96d816ba7d890d760d9d184346ce7d0b7331a89fdba8604b847cf0744",
+    "bytes": 16697
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_12_has_someone_already_built_sbim_2026-10-08.md",
+    "sha256": "77ea444bc3d6632af1a4c6d8de99ada9faa3bc5c6c9b20307f0c1478de51bade",
+    "bytes": 12111
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_13_integration_map_after_reuse_audit_2026-10-08.md",
+    "sha256": "8c9bd8b4bcb1daf0b175ebc3064fdced8a7520782e62da4b5e1c268525940c8e",
+    "bytes": 13268
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_14_layer_by_layer_product_dissection_2026-10-08.md",
+    "sha256": "7fc02c863635655965a86d49c47c39ff3dd8e59ed2ca0c0c39aedb3109278461",
+    "bytes": 20355
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_14_requirements_openbim_engineering_reuse_2026-10-08.md",
+    "sha256": "0fedbbc5723b662b12160bb0e8d9326ebcfe642c1ad28223c4722a59a4e21134",
+    "bytes": 21448
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_15_free_project_backbone_spatial_lca_cicd_2026-10-08.md",
+    "sha256": "50e115365613a5790283ebb7a71f4d27f7115bea25550c94f5991560df9a3d6a",
+    "bytes": 10657
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_15_open_ac29_mcp_and_tapir_overlap_2026-10-08.md",
+    "sha256": "cbeb57724fd327114312f5b84ec1c61856fb0ee5892499a67c6221179a337642",
+    "bytes": 27669
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_16_best_of_breed_component_harvesting_2026-10-08.md",
+    "sha256": "c9d5522c228472b332d5115defdfc1736b8258ea1905e2b8808b31cea4761fb6",
+    "bytes": 22655
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_16_tangl_decision_memory_5d_2026-10-08.md",
+    "sha256": "ff6f45b64cae4392c6ac45484a90ccfd87508024e188113cdfaed8b0c916dbad",
+    "bytes": 13300
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_17_bimgrade_cype_motif_details_2026-10-08.md",
+    "sha256": "fdb1f8a389207969991402bdbc9bf43bbdb31c56614caf6b69e7f341380d2201",
+    "bytes": 18727
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_17_time_to_project_fast_modeling_compliance_by_construction_2026-10-08.md",
+    "sha256": "c09cbc736d48c604ec9984d1ba602e643dac0a1899a76c8a987f07930030a772",
+    "bytes": 12175
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_18_proektologiya_cype_agent_native_compliance_2026-10-08.md",
+    "sha256": "e4260fa658af3baddc2ef616325aa8fa161218e220c92539cd0417d444101209",
+    "bytes": 13607
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_19_change_intent_optimization_detail_reuse_2026-10-08.md",
+    "sha256": "0635bd8b42e3cf22abeb79cf8f9dac20e3d6f055b38b1c0b547b3345fca31412",
+    "bytes": 19779
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_20_accord_shacl_open_compliance_stack_2026-10-08.md",
+    "sha256": "0aefdb5eaeb846d8c165c3db1d768dee127758e3ab0901b048e341de375c41e5",
+    "bytes": 21398
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md",
+    "sha256": "065f13927d3f9cbd7e4b6555d581cdfd98968d345c8647676699ee9009a912a0",
+    "bytes": 10414
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_21_ifctolbd_icdd_sml_semantic_graph_2026-10-08.md",
+    "sha256": "eba3935ca51b7d754a5dfc0e6484ff945e6d27024f855d1e93ea69599f992c5b",
+    "bytes": 14195
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_22_floorplan_spatial_logic_precedent_memory_2026-10-08.md",
+    "sha256": "75ec8cca7f23d4d084e23b23c3bea3d672bb706720bc0f2baa94435e31c9a738",
+    "bytes": 18821
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_22_incremental_project_compiler_action_cache_2026-10-08.md",
+    "sha256": "9b176185af18abee98d789fc3c9b1e945427b18c523895a08d97109f914d6d65",
+    "bytes": 19832
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_23_ac29_control_facade_openings_dependents_2026-10-08.md",
+    "sha256": "b1d247b50226fda47c3192387cac2df370f6f8352e8543969c771694df9123ab",
+    "bytes": 14977
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_23_native_archicad_graph_solvers_open_connector_harvest_2026-10-08.md",
+    "sha256": "91e30849ac7c824aca7cf86eb9d0a1d1052b4abf391f550be676a858064d5b99",
+    "bytes": 9300
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md",
+    "sha256": "6c9458f6eab2c2c05d3f8931047c2bc23b77129939cedb16cbfa977520842c81",
+    "bytes": 25562
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_24_schedule_elevation_curtainwall_hotlink_documentation_gaps_2026-10-08.md",
+    "sha256": "2a80805e1d31c7740cee46d87b5268b28c4548629e31d76dbd47c624fa69dff8",
+    "bytes": 10730
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_25_native_mep_routes_design_options_favorites_quantities_2026-10-08.md",
+    "sha256": "4b3e6c5d6d2ecde751484ffa01c67f59a5d7bb7a4414fb84128aba9b7c7660d9",
+    "bytes": 15973
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_25_verified_documentation_compiler_spds_ac29_2026-10-08.md",
+    "sha256": "ddfda7364ea243abd3d2b5ad3ca6c7f154135ffa45a063990ca7a4f79f4d9d12",
+    "bytes": 21059
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_26_native_issues_keynotes_revisions_structural_renovation_2026-10-08.md",
+    "sha256": "44cbefb9385d0577712cfac49cba602d6e0eac369a77851eeb7b868fc75e95d6",
+    "bytes": 13009
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_26_section_callout_detail_need_planning_2026-10-08.md",
+    "sha256": "f5f5fdb7c2515063d956ed7c18024f0ebf2f99d53c9ba15cd6c8b44ca2d7c5e8",
+    "bytes": 21931
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_27_native_model_quality_check_saf_structural_context_2026-10-08.md",
+    "sha256": "347991e11da4073170d71f3825b476ce45fce526f0b43b4cb21b5f6e1c470ed4",
+    "bytes": 10897
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_27_whole_system_open_source_harnessbim_massing_2026-10-08.md",
+    "sha256": "44a38273be038ebbec26dd0853efbee5a6b3189c390196135044bd705b2b6eb5",
+    "bytes": 12455
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_28_native_visual_qa_graphic_overrides_highlight_drilldown_2026-10-08.md",
+    "sha256": "19029c3545b2a5d2353b77899328eff15de59436e5bb5ea85d0cf6c78a54b268",
+    "bytes": 9778
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_28_skill_runtime_incremental_graph_reality_audit_2026-10-08.md",
+    "sha256": "c3eb2a136de25846574fe4f53edc565e1345e2d22df948aaaafacb3b18f84217",
+    "bytes": 12518
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_28_skills_knowledge_spatial_fit_2026-10-08.md",
+    "sha256": "9998d16cfce168dbab34cc68a867fe68f793f21645dfffc73725911d28f663fc",
+    "bytes": 6253
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_28_vertical_core_design_grammar_2026-10-08.md",
+    "sha256": "32d5cd23243846c1d7422cbc734152c55699c8f453b24dc91be03a262962dac7",
+    "bytes": 19962
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_29_ac29_native_events_zone_adjacency_and_freshness_2026-10-08.md",
+    "sha256": "2254f55eece7ca3683ac08fd736fc0a1dd3d5de168e30cdaa076307a9c2593c5",
+    "bytes": 13968
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_29_floora_training_alignment_benchmarks_2026-10-08.md",
+    "sha256": "c93892d4512b8b47025f2c83bf7656ed1f1284e0ebee0b897027560f9324aa9d",
+    "bytes": 20721
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_29_native_collision_difference_generator_reconciliation_2026-10-08.md",
+    "sha256": "01ce9f701c302626de69126dce5b53bda3578d16244708c02c665b7f86aa06bb",
+    "bytes": 12351
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_29_native_mep_system_graph_2026-10-08.md",
+    "sha256": "e52dc91cfc3f841820f0f64218bdef356032b9f9ccf307169ca85dd7c59ddc51",
+    "bytes": 5112
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_29_pascal_archsight_skills_2026-10-08.md",
+    "sha256": "33dc0fc0fe9f63d05b32c7d8502e61a94442fbb13dac15aee1dd2dd80cb5e028",
+    "bytes": 9948
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md",
+    "sha256": "bcd0e1a4a00590f05da6a4c1856c70f61142e7d6849b41e491592c8a45accf3b",
+    "bytes": 4033
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_30_architect_skill_os_evidence_memory_routing_2026-10-08.md",
+    "sha256": "e88623842e3fabe8977ef4eda5c27700a0eb9899a82c0d074c106e42aa6dc1f5",
+    "bytes": 20171
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_30_live_delta_verifier_reuse_2026-10-08.md",
+    "sha256": "b99d29edf32fafd83554666672008f9dc26c9b9bea77739cffb66e20463eecd1",
+    "bytes": 10819
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_30_native_mep_system_browser_calculation_projection_2026-10-08.md",
+    "sha256": "a6e826f8ee9d23ef502e6856e12792e8445f8ece5e9948a093ce64767ff8e976",
+    "bytes": 8094
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_31_native_ifc_hooks_dynamic_export_projection_2026-10-08.md",
+    "sha256": "a9363a56ccd301ff04ba1824aa8da4970de5d6f0cd329152da56152da66c1d7f",
+    "bytes": 12397
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_31_program_room_requirements_functional_graph_2026-10-08.md",
+    "sha256": "fd177004359fc788f2634e1e1faedbddc8e4d5928166e31f6ca965eb38583cbb",
+    "bytes": 21791
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_32_activity_equipment_room_fit_2026-10-08.md",
+    "sha256": "7311d54b299aed06236d55defdfb6af6f5cf135169bf4e09fee27a819259e9eb",
+    "bytes": 12707
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_32_native_navigator_addon_viewpoints_reports_drawings_2026-10-08.md",
+    "sha256": "ce0d9a8c31258be2cf0816b1636530e0431b3c3710c7f8a6cea2eb3b03de3254",
+    "bytes": 10513
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_33_native_global_semantic_events_precise_invalidation_2026-10-08.md",
+    "sha256": "f077177639166b32a6215dbfe0433292dec904535137d496568c38dcaa9258f6",
+    "bytes": 12907
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_34_cross_representation_release_truth_2026-10-08.md",
+    "sha256": "3ff03bf4eb7fa2ebe5cb72eec655658072f71b3e2922c97428f23dfaba067bc7",
+    "bytes": 8826
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_35_native_quantities_solid_operation_dependencies_2026-10-08.md",
+    "sha256": "ea35504644fa3c6190d3aaaf19997004379c633289759ad391fbee7701d52b32",
+    "bytes": 10960
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md",
+    "sha256": "9522adb4e89d20d9a71faeabe84eb21faa840ce338f0d2b47b12e07f8c514203",
+    "bytes": 22856
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md",
+    "sha256": "f6a953e3172e45b9798c0deeda5ef765895a5acd0374b4e56777dd7c8d08c41d",
+    "bytes": 20101
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_38_openbim_semantic_and_parametric_orchestration_2026-10-08.md",
+    "sha256": "4f909d5e6238105d9321f8942ac89b00692a43d6a660fc99adcbc508066beee7",
+    "bytes": 6057
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_39_mep_deep_research_cycles_and_audit_2026-10-08.md",
+    "sha256": "e60cab91361c08dde42b6c13f53be82da99a233dfcb67412ebb55822d10d54cb",
+    "bytes": 17687
+  },
+  {
+    "path": "docs/research/architectural_ai_checkpoint_40_offline_license_free_engineering_2026-10-08.md",
+    "sha256": "2acbff50f75ee778e914b193b7f1ac74ace7f0bec8b2c080e5a80e2a05641b4c",
+    "bytes": 5796
+  },
+  {
+    "path": "docs/research/architectural_ai_priority_checkpoint_06_huskybim_first_2026-10-07.md",
+    "sha256": "679657e8046fd4206ad3f07528ed7683e88f3b4ff2f16db44bbc8732f6fe970b",
+    "bytes": 7902
+  },
+  {
+    "path": "docs/research/cross_representation_reuse_matrix_v0.1.yaml",
+    "sha256": "4415dc84ef8699326d98252fa113a64b498fdbdef1923c9411eed677d976eed4",
+    "bytes": 2183
+  },
+  {
+    "path": "docs/research/free-normative-source-matrix-v0.2.yaml",
+    "sha256": "d15eeaddaf8f490b02e93bab302cc25bb5fc1b5aaea911c9a4b3ae3a2cd30cec",
+    "bytes": 4910
+  },
+  {
+    "path": "docs/research/integration-candidate-matrix-ac29-events-zone-graph-v0.1.yaml",
+    "sha256": "18389495e2291269efd1ec5a05bffbb6faa18c0b2ac94f435a6e6231e8e6d8aa",
+    "bytes": 6957
+  },
+  {
+    "path": "docs/research/integration-candidate-matrix-agent-runtime-incremental-v0.1.yaml",
+    "sha256": "8a0e0c77b98dac78efc16df9f3b0f72625a419fb2437999b7b11474ce117c2fc",
+    "bytes": 3755
+  },
+  {
+    "path": "docs/research/integration-candidate-matrix-native-qto-seo-v0.1.yaml",
+    "sha256": "9be7438bddcfd0476cc44e8fb271893080217a96827150848e7a621c35b35ade",
+    "bytes": 4263
+  },
+  {
+    "path": "docs/research/integration-candidate-matrix-v0.2.yaml",
+    "sha256": "14608ae7e62f957f30eb0458ae2a5717b179093e06455bf89bc441792f6c38a9",
+    "bytes": 5020
+  },
+  {
+    "path": "docs/research/integration-candidate-matrix-v0.3.yaml",
+    "sha256": "333048bad0494a2f0498c10cab488e060dbf5aba8c0328f45e8b7a4ad76941e0",
+    "bytes": 5059
+  },
+  {
+    "path": "docs/research/integration-candidate-matrix-v0.4.yaml",
+    "sha256": "51607899971bb1cf5b810f955ee93d897240e4fd5c3b88d55381c5214f3da61e",
+    "bytes": 2367
+  },
+  {
+    "path": "docs/research/integration-candidate-matrix-v0.5.yaml",
+    "sha256": "5a2f50db2fc5e3e0745a3fa1a13f395e5f0e21da1637d838355e8d3048f92847",
+    "bytes": 2606
+  },
+  {
+    "path": "docs/research/integration-candidate-matrix-v0.6.yaml",
+    "sha256": "73cf38b6452984c002aa9d5070f80e609e44a3b37bbecfe04f359ea821c3ff43",
+    "bytes": 4915
+  },
+  {
+    "path": "docs/research/integration-candidate-matrix-v0.7.yaml",
+    "sha256": "20a190999083ad62cee6eb8ac56ea5aaccbc6da36589011a0229c144902baa28",
+    "bytes": 3802
+  },
+  {
+    "path": "docs/research/integration-candidate-matrix-v0.8.yaml",
+    "sha256": "1da2fffd7ed07284b076260ff1b8ac4f4325ca7bd86a1e7b30defb5165c7c439",
+    "bytes": 5113
+  },
+  {
+    "path": "docs/research/integration-candidate-matrix-v0.9.yaml",
+    "sha256": "d961c130544f922e556916d960dd700cfd4dd0d52b8aa0e6e858d0f741469d86",
+    "bytes": 4933
+  },
+  {
+    "path": "docs/research/integration-candidate-matrix-v1.0.yaml",
+    "sha256": "b5edb4a4e343764a2889b14257eec5c1fcfa7905c107837d58ec8c7d465e3de3",
+    "bytes": 3266
+  },
+  {
+    "path": "docs/research/integration-candidate-matrix-v1.1.yaml",
+    "sha256": "4d711441d7d635dd78db7f2abce6061800b50c0dcbd86f7e01c48a2ca7d4223d",
+    "bytes": 5627
+  },
+  {
+    "path": "docs/research/integration-candidate-matrix-v1.2.yaml",
+    "sha256": "8ea7fae9a34df7f31de1d463370ad6586bbcc295d2a2fa99ebde37592bcb6154",
+    "bytes": 4090
+  },
+  {
+    "path": "docs/research/integration-candidate-matrix-v1.3.yaml",
+    "sha256": "066a191718d2ca96112f55ab8b48d19b76faeba1d8e678c3cda13ccfef3daa45",
+    "bytes": 6787
+  },
+  {
+    "path": "docs/research/integration-candidate-matrix-v1.4.yaml",
+    "sha256": "369dcd0ffd9fdd38693a8ce642038df39411a60d58f7e9d849eb308cebfd94f7",
+    "bytes": 5340
+  },
+  {
+    "path": "docs/research/integration-candidate-matrix-v1.5.yaml",
+    "sha256": "d6eddb2bf98f7adc09e8dc19895a2035d470ea6b2380dfb597dab72b3e647abd",
+    "bytes": 5856
+  },
+  {
+    "path": "docs/research/integration-candidate-matrix-v1.6.yaml",
+    "sha256": "6fd7500475f6585286cbf4751dcede60cead99b04fa9e0aeed3f3f083defbd6b",
+    "bytes": 3464
+  },
+  {
+    "path": "docs/research/integration-candidate-matrix-v1.7.yaml",
+    "sha256": "d40b126a37ac1631b4ed35c1defe73d11b0f6767dad410f5befde76650698081",
+    "bytes": 5049
+  },
+  {
+    "path": "docs/research/integration-candidate-matrix-v1.8.yaml",
+    "sha256": "45eba9c37c0778b250915513bcf66f655097f5bc82953214f25e54bfe00c6cd8",
+    "bytes": 4373
+  },
+  {
+    "path": "docs/research/integration-candidate-matrix-v1.9.yaml",
+    "sha256": "1f886e844d08bbba20d423aa1d06e166c221e3c140f99aa1868eda349d58fe90",
+    "bytes": 4888
+  },
+  {
+    "path": "docs/research/integration-candidate-matrix-v2.0.yaml",
+    "sha256": "e71962420295f45e14687ecc88a8859e56a47e4bc8787932f1168f18902e8d0f",
+    "bytes": 5001
+  },
+  {
+    "path": "docs/research/integration-candidate-matrix-v2.1.yaml",
+    "sha256": "2b32d4feeca0cc2387b7001ee3047dd0cdc2635f09033db2ae54ccf4cb92a6ab",
+    "bytes": 3314
+  },
+  {
+    "path": "docs/research/layer-reuse-decision-matrix-v0.3.yaml",
+    "sha256": "e26d112aa703343a35decb87976688ae0ef91024e3012ef893cc710fbb57d5c8",
+    "bytes": 4693
+  },
+  {
+    "path": "docs/research/layer-reuse-decision-matrix-v0.4.yaml",
+    "sha256": "e96fa3fcdfc4ed11af9f04002d18913e97130b818c0d5e69c5bdf50d6d337b2a",
+    "bytes": 14852
+  },
+  {
+    "path": "docs/research/layer-reuse-decision-matrix-v0.5.yaml",
+    "sha256": "cfaef43518f1661c24e21e574fc2bd4f81c3ba8214c78b7a1d10d10025f49ea7",
+    "bytes": 10952
+  },
+  {
+    "path": "docs/research/layer-reuse-decision-matrix-v0.6.yaml",
+    "sha256": "deb0c2e965293da7d692573f3bd0c698e5bd72a224814cffd9e366c4d6d8f437",
+    "bytes": 7831
+  },
+  {
+    "path": "docs/research/layer-reuse-decision-matrix-v0.7.yaml",
+    "sha256": "c2c8c75e796e535f424cd17621a9b46d1fd3d0991a104405322f5fb92ab1e76f",
+    "bytes": 4438
+  },
+  {
+    "path": "docs/research/layer-reuse-decision-matrix-v0.8.yaml",
+    "sha256": "e5402b0e2d3255c9d4e0f8e39291964d58d6db644924e52013c72406a4d3e56a",
+    "bytes": 8167
+  },
+  {
+    "path": "docs/research/layer-reuse-decision-matrix-v0.9.yaml",
+    "sha256": "f18128208b7abf120bca6edae1b28ccf511de50eabc4efc46a9110ab1a7b311f",
+    "bytes": 9508
+  },
+  {
+    "path": "docs/research/layer-reuse-decision-matrix-v1.0.yaml",
+    "sha256": "7dd2356faafca1e08eef9b8cec204fda66e3a748d493ade49e798e230dd83a13",
+    "bytes": 14342
+  },
+  {
+    "path": "docs/research/layer-reuse-decision-matrix-v1.1.yaml",
+    "sha256": "0691bf086e3ed5008a9fd9899bd4871580ed5fa388bc0d672268a8612aabf997",
+    "bytes": 17623
+  },
+  {
+    "path": "docs/research/layer-reuse-decision-matrix-v1.2.yaml",
+    "sha256": "dc6cbf540d83e2c8a5bc1482d9203e73e62dfb9105ef132ad6e11363b5ebe3b7",
+    "bytes": 20173
+  },
+  {
+    "path": "docs/research/layer-reuse-decision-matrix-v1.3.yaml",
+    "sha256": "6aab1c12c3bc534bfcedfb84b5dd01534ce1d9b1372d6cecffb441b9cb60c794",
+    "bytes": 21605
+  },
+  {
+    "path": "docs/research/layer-reuse-decision-matrix-v1.4.yaml",
+    "sha256": "e4c42dbc2779b307d53e133761068b2d667ca12c81e742c193180acb22731004",
+    "bytes": 23929
+  },
+  {
+    "path": "docs/research/layer-reuse-decision-matrix-v1.5.yaml",
+    "sha256": "428b4df6e655438186d571fb59166d8cb13636aac7aeddb2f7f8b87658045029",
+    "bytes": 25312
+  },
+  {
+    "path": "docs/research/layer-reuse-decision-matrix-v1.6.yaml",
+    "sha256": "5255121d927c43f7410f5a0c736fd1399a674a7569091a4efd6c67fa5fb288f8",
+    "bytes": 27166
+  },
+  {
+    "path": "docs/research/layer-reuse-decision-matrix-v1.7.yaml",
+    "sha256": "3446ea98c523ba8a8d1ab8a396da0597eed4dfa38666acb50aaa7b8f59bf012a",
+    "bytes": 30856
+  },
+  {
+    "path": "docs/research/lira-fem-2026-com-structural-adapter-research-v0.1.yaml",
+    "sha256": "29947b53ec338922535c3a9775bd2d295c86b9a82eeda78279d2722780013265",
+    "bytes": 3742
+  },
+  {
+    "path": "docs/research/live-verifier-adapter-matrix-2026-10-08.yaml",
+    "sha256": "c2c71582b608b4b07f455757c068afd8853d390eea019b43702e8c5338309b05",
+    "bytes": 2582
+  },
+  {
+    "path": "docs/research/normative-provider-capability-matrix-v0.1.yaml",
+    "sha256": "7545f89966da26046a0a2a5ffc80f223867942947d54a08920771213d72b9fc8",
+    "bytes": 4369
+  },
+  {
+    "path": "docs/research/NORMATIVE_SOURCE_ADAPTER_CONTRACT_v0.1.md",
+    "sha256": "4fb1d8ec9e8c97106f5bec6970a64bc3d004d093ff6312c54497360bd91385a5",
+    "bytes": 2111
+  },
+  {
+    "path": "docs/research/pascal-editor-source-capability-audit-v0.1.yaml",
+    "sha256": "5bd98b6ccbf070c4ee0a94c17887c3bd3e054f85e3af4fe424a22025c67d191f",
+    "bytes": 3718
+  },
+  {
+    "path": "docs/research/project-library-pack-contract-v0.1.yaml",
+    "sha256": "438d266e1b3f59e0cc604d921862d69ceecd3ef187ce689340282ad8b06d5d46",
+    "bytes": 2791
+  },
+  {
+    "path": "docs/research/russian-junction-rule-matrix-2026-10-08.yaml",
+    "sha256": "77c45c96a0b5958a5a901b89fcf4b1cd47887139ac858292f39cc3b63ebbc3dd",
+    "bytes": 2372
+  },
+  {
+    "path": "docs/research/SEARCH_BEFORE_BUILD_REUSE_STRATEGY_v0.1.md",
+    "sha256": "b8c238764b066632092b755d04397a0fbb88fe47a8fbd8929c6a93854a598756",
+    "bytes": 4614
+  },
+  {
+    "path": "docs/research/structural-handoff-integration-matrix-v0.1.yaml",
+    "sha256": "cec3f1443be090c91dfd556fc92cebe8a4a0fa75048f849a6cc2ab6e5f4ffcac",
+    "bytes": 5884
+  },
+  {
+    "path": "docs/research/third_party_skill_adoption_gate_v0.1.md",
+    "sha256": "49d7d52b7c9f3752f7d02b91b5fbf792ab7bbdcfe6ddd34d9fe02ec69181a2a7",
+    "bytes": 1179
+  },
+  {
+    "path": "docs/research/whole-system-reuse-candidate-matrix-v0.1.yaml",
+    "sha256": "169678c81973551e563bf3435db57af9e4a45a1f526b68a98774f8e0408b8583",
+    "bytes": 2860
+  }
+]

@@ -1,0 +1,84 @@
+{
+  "date": "2026-10-09",
+  "offlineTests": {
+    "passed": 101,
+    "failed": 0,
+    "scope": "selected Archicad contract/graph/host/scene/integration tests, not whole repository"
+  },
+  "scenario": {
+    "status": "SYNTHETIC_WHOLE_SCENE_VERIFIED",
+    "syntheticElements": 12,
+    "wholeAssemblyReadback": true,
+    "liveCreation": "NOT_RUN"
+  },
+  "liveReadonly": {
+    "status": "READ_ONLY_PREFLIGHT_READY",
+    "inventoryCount": 22,
+    "inventoryUnchanged": true,
+    "product": {
+      "version": 29,
+      "buildNumber": 5101,
+      "languageCode": "RUS"
+    },
+    "tapirVersion": "1.5.10",
+    "modelWrites": 0,
+    "saves": 0,
+    "nativeCalls": 25,
+    "dumpRegistered": false
+  },
+  "comparison": {
+    "direct": {
+      "n": 3,
+      "medianSeconds": 0.49841120000201045,
+      "minSeconds": 0.48709380000218516,
+      "maxSeconds": 0.7457291000027908
+    },
+    "alesdev88": {
+      "n": 3,
+      "medianSeconds": 0.8143112000034307,
+      "minSeconds": 0.7395535000032396,
+      "maxSeconds": 0.9183309000000008
+    }
+  },
+  "creationSpeed": "NOT_MEASURED",
+  "longRunReliability": "NOT_MEASURED",
+  "savedDump": {
+    "status": "SAVED_DUMP_STRUCTURE_VERIFIED",
+    "evidenceKind": "SAVED_FILE",
+    "sampleOnly": false,
+    "geometryScope": "ALL_AVAILABLE_BODIES_IN_REGENERATED_3D_VIEW; existing layer/design-option/3D filters remain in force",
+    "sha256": "2f8080f6d26576ec23431ba5031ed6780dcb13685ce7537d0cdba9b30bb88479",
+    "counts": {
+      "elements": 5297,
+      "bodies": 9261,
+      "vertices": 340188,
+      "faces": 242264,
+      "holeContours": 570
+    },
+    "currentProjectVerified": false,
+    "pavilionGeometryVerified": false,
+    "materialSemantics": "materialId references material pool; not attributeIndex",
+    "solidIntersectionVerified": false,
+    "elapsedSeconds": 2.5254719000004116
+  },
+  "researchFiles": 113,
+  "providers": 16,
+  "apxFilesInScope": 61,
+  "ambiguousComponent": "USER_DISAVOWED_GPT_GENERATED_TASK_TERM; no replacement",
+  "registryDigest": "21ce37b7bc2601b0ead0cd14478c11a1421b9f6e74ee365c2bfe225930a54444",
+  "base": "f02a167eb73cb149713cf5e613911b144fce5be2",
+  "basePR": 15,
+  "preserved": [
+    "main",
+    "watcher source/runtime",
+    "original dirty checkout",
+    "production PLN"
+  ],
+  "limitations": [
+    "frame only; roof/docs/MEP unsupported",
+    "norms and detail applicability not evaluated",
+    "historical dump is not current geometry",
+    "MCP-session transport not tested",
+    "no binary downloads or installations"
+  ]
+}

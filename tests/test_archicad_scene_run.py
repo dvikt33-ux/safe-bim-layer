@@ -1,5 +1,6 @@
 """Offline system tests for a complete 12-element Archicad scene, never live."""
 import importlib.util
+from contextlib import closing
 import json
 import sqlite3
 import tempfile
@@ -141,7 +142,7 @@ class SceneV1SystemTests(unittest.TestCase):
                 self.assertEqual(params["windowsData"][0]["ownerWallId"]["guid"], north)
             if command == "CreateDoors":
                 self.assertEqual(params["doorsData"][0]["ownerWallId"]["guid"], south)
-        with sqlite3.connect(self.db) as db:
+        with closing(sqlite3.connect(self.db)) as db:
             self.assertEqual(db.execute("SELECT COUNT(*) FROM steps").fetchone()[0], 12)
             self.assertEqual(db.execute("SELECT COUNT(*) FROM steps WHERE state='PASS'").fetchone()[0], 12)
 
@@ -195,7 +196,7 @@ class SceneV1SystemTests(unittest.TestCase):
         self.assertEqual(self.native.writes.count("CreateWalls"), 4)
         self.assertEqual(self.native.writes.count("CreateSlabs"), 1)
         self.assertEqual(self.native.writes.count("CreateWindows"), 0)
-        with sqlite3.connect(self.db) as db:
+        with closing(sqlite3.connect(self.db)) as db:
             state = db.execute("SELECT state FROM steps WHERE step_id='slab'").fetchone()[0]
             self.assertEqual(state, "ATTEMPTED")
         with self.assertRaisesRegex(ValueError, "SCENE_ALREADY_RESERVED"):

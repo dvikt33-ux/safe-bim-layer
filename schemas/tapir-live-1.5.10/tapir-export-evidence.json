@@ -1,0 +1,21 @@
+{
+  "before": {
+    "path": "C:\\LocalAI\\SafeBIM_Global_Library_Test_Projects\\Тест MER .pln",
+    "name": "Тест MER ",
+    "port": 19723,
+    "tapirVersion": "1.5.10",
+    "storyIndex": 0
+  },
+  "exportResponse": {
+    "success": true
+  },
+  "after": {
+    "path": "C:\\LocalAI\\SafeBIM_Global_Library_Test_Projects\\Тест MER .pln",
+    "name": "Тест MER ",
+    "port": 19723,
+    "tapirVersion": "1.5.10",
+    "storyIndex": 0
+  },
+  "plnSaved": false,
+  "modelWriteCommands": 0
+}

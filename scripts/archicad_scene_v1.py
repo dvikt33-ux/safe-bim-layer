@@ -8,6 +8,7 @@ The graph can be consumed later by an explicitly guarded native executor.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import importlib.util
 import json
 import math
@@ -144,9 +145,13 @@ def metrics():
     }
 
 
-def prepare(x, y):
+def prepare(x, y, schema_path=None):
     data = graph(x, y)
-    catalog = GRAPH.CONTRACTS.load_catalog(GRAPH.CONTRACTS.DEFAULT_SCHEMA)
+    selected_schema = Path(schema_path) if schema_path is not None else Path(__file__).resolve().parents[1] / "schemas/tapir-live-1.5.10/tapir-scene-live.json"
+    selected_schema = selected_schema.resolve()
+    if not selected_schema.is_file():
+        raise ValueError(f"SCHEMA_NOT_FOUND: {selected_schema}; select the actual Tapir snapshot with --schema")
+    catalog = GRAPH.CONTRACTS.load_catalog(selected_schema)
     verification = GRAPH.compile_graph(catalog, data)
     if verification["status"] != "PLAN_VALIDATED_OFFLINE":
         raise ValueError("scene did not pass pinned Tapir graph contract: "
@@ -158,6 +163,8 @@ def prepare(x, y):
         "metrics": metrics(),
         "executionOrder": verification["executionOrder"],
         "schemaVersion": verification["schemaVersion"],
+        "schemaPath": str(selected_schema),
+        "schemaSha256": hashlib.sha256(selected_schema.read_bytes()).hexdigest(),
         "liveWriteAuthorized": False,
         "plnChanged": False,
     }
@@ -169,8 +176,9 @@ def main(argv=None):
                     help="Coordinate in meters: no automatic empty-site guess")
     ap.add_argument("--anchor-y", type=float, required=True)
     ap.add_argument("--output", type=Path)
+    ap.add_argument("--schema", type=Path, default=Path(__file__).resolve().parents[1] / "schemas/tapir-live-1.5.10/tapir-scene-live.json")
     args = ap.parse_args(argv)
-    report = prepare(args.anchor_x, args.anchor_y)
+    report = prepare(args.anchor_x, args.anchor_y, args.schema)
     output = json.dumps(report, ensure_ascii=False, indent=2) + "\n"
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
