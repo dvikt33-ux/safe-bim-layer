@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+from contextlib import contextmanager
 import json
 import re
 import sqlite3
@@ -107,10 +108,17 @@ class EventStore:
             """)
             conn.execute("CREATE INDEX IF NOT EXISTS events_task_phase ON events(task_id, phase, seq)")
 
-    def _connect(self) -> sqlite3.Connection:
+    @contextmanager
+    def _connect(self):
         conn = sqlite3.connect(str(self.path), timeout=15)
         conn.row_factory = sqlite3.Row
-        return conn
+        try:
+            with conn:
+                yield conn
+        finally:
+            # sqlite3's context manager commits but does NOT close the file.
+            # Explicit close is required for Windows temporary directories.
+            conn.close()
 
     def ingest(self, text: str, *, slack_channel: str, slack_ts: str) -> dict:
         event = parse_event(text)
@@ -121,10 +129,13 @@ class EventStore:
         with self._connect() as conn:
             conn.execute("BEGIN IMMEDIATE")
             dup = conn.execute(
-                "SELECT seq FROM events WHERE event_id=? OR (slack_channel=? AND slack_ts=?)",
+                "SELECT seq,event_id,payload,slack_channel,slack_ts FROM events WHERE event_id=? OR (slack_channel=? AND slack_ts=?)",
                 (event["event_id"], slack_channel, slack_ts),
             ).fetchone()
             if dup:
+                current_payload = json.loads(dup["payload"])
+                if dup["event_id"] != event["event_id"] or current_payload != event:
+                    raise InvalidEvent("Event ID or Slack timestamp reused with different content")
                 return {"accepted": False, "reason": "duplicate", "seq": dup["seq"]}
             prev = conn.execute(
                 "SELECT event_id,status,seq FROM events WHERE task_id=? AND phase=? ORDER BY seq DESC LIMIT 1",
