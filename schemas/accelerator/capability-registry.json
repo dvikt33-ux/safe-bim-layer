@@ -1,0 +1,708 @@
+{
+  "schemaVersion": 1,
+  "snapshotDate": "2026-10-09",
+  "providers": [
+    {
+      "id": "tapir-modified",
+      "version": "1.5.10",
+      "installation": "CURRENT_LIVE_READ_ONLY_VERIFIED; APX_PRESENT",
+      "license": "MIT upstream; modified source retained",
+      "interface": "localhost JSON TapirCommand",
+      "readCoverage": [
+        "Get3DBoundingBoxes",
+        "GetAddOnVersion",
+        "GetAllElements",
+        "GetAllProperties",
+        "GetArchicadLocation",
+        "GetAttributesByType",
+        "GetAutoTextKeys",
+        "GetAutoTextName",
+        "GetAvailableLibraryParts",
+        "GetBuildingMaterialPhysicalProperties",
+        "GetBuildingMaterials",
+        "GetCalculationUnits",
+        "GetClassificationsOfElements",
+        "GetCollisions",
+        "GetCommentsFromIssue",
+        "GetComposites",
+        "GetConnectedElements",
+        "GetCurrentRevisionChangesOfLayouts",
+        "GetCurrentWindowType",
+        "GetDatabaseIdFromNavigatorItemId",
+        "GetDesignOptionCombinations",
+        "GetDesignOptionForElements",
+        "GetDesignOptionSets",
+        "GetDesignOptions",
+        "GetDetailsOfElements",
+        "GetDimensionData",
+        "GetDocumentRevisions",
+        "GetElementPreviewImage",
+        "GetElementTrims",
+        "GetElementsAttachedToIssue",
+        "GetElementsByIFCIds",
+        "GetElementsByType",
+        "GetElementsOfDesignOptions",
+        "GetElementsOfGroups",
+        "GetFavoritePreviewImage",
+        "GetFavoritesByType",
+        "GetFills",
+        "GetGDLParametersOfElements",
+        "GetGeoLocation",
+        "GetGroupsOfElements",
+        "GetHotlinks",
+        "GetIFCExportTranslators",
+        "GetIFCIdsOfElements",
+        "GetIFCPropertiesOfElements",
+        "GetIFCTypeOfElements",
+        "GetIssues",
+        "GetKeynoteAutoTexts",
+        "GetKeynoteTree",
+        "GetLayerCombinations",
+        "GetLayers",
+        "GetLayoutCustomScheme",
+        "GetLayoutSettings",
+        "GetLibraries",
+        "GetLines",
+        "GetMEPDistributionSystems",
+        "GetMEPElements",
+        "GetMEPPorts",
+        "GetMEPPreferenceTables",
+        "GetMEPRoutingElements",
+        "GetMEPSystems",
+        "GetModelViewOptions",
+        "GetNavigatorItemTree",
+        "GetPenTables",
+        "GetPointFromUser",
+        "GetProfiles",
+        "GetProjectInfo",
+        "GetProjectInfoFields",
+        "GetPropertyValuesOfAttributes",
+        "GetPropertyValuesOfElements",
+        "GetRelationsOfElements",
+        "GetRevisionChanges",
+        "GetRevisionChangesOfElements",
+        "GetRevisionIssues",
+        "GetRoomImage",
+        "GetScriptUIResult",
+        "GetSectionElements",
+        "GetSelectedElements",
+        "GetSolidElementLinks",
+        "GetSpecialFolders",
+        "GetStories",
+        "GetSubelementsOfHierarchicalElements",
+        "GetSurfaces",
+        "GetSuspendGroupsMode",
+        "GetUserGSID",
+        "GetView2DTransformations",
+        "GetViewSettings",
+        "GetZoneBoundaries",
+        "GetZoneCategories"
+      ],
+      "writeCoverage": [
+        "ApplyFavoritesToElementDefaults",
+        "ApplyFavoritesToElements",
+        "CreateArcs",
+        "CreateAssociativeDimensions",
+        "CreateAssociativeDimensionsOnSection",
+        "CreateBeams",
+        "CreateBuildingMaterials",
+        "CreateCircles",
+        "CreateClassificationItems",
+        "CreateClassificationSystems",
+        "CreateColumns",
+        "CreateComposites",
+        "CreateDesignOptionCombinations",
+        "CreateDesignOptionSets",
+        "CreateDesignOptions",
+        "CreateDetails",
+        "CreateDoors",
+        "CreateDrawings",
+        "CreateFavoritesFromElements",
+        "CreateFills",
+        "CreateGroups",
+        "CreateHatches",
+        "CreateHotlinkInstances",
+        "CreateHotlinkNodes",
+        "CreateHotspots",
+        "CreateInteriorElevations",
+        "CreateIssue",
+        "CreateKeynoteFolders",
+        "CreateKeynoteItems",
+        "CreateKeynoteLabels",
+        "CreateLabels",
+        "CreateLamps",
+        "CreateLayerCombinations",
+        "CreateLayers",
+        "CreateLayout",
+        "CreateLayoutSubset",
+        "CreateLibraryPartFromScripts",
+        "CreateLineElements",
+        "CreateLines",
+        "CreateMEPElements",
+        "CreateMEPRoutingElements",
+        "CreateMEPSystems",
+        "CreateMeshes",
+        "CreateMorphs",
+        "CreateObjects",
+        "CreateOpenings",
+        "CreatePenTables",
+        "CreatePolylines",
+        "CreateProfiles",
+        "CreateProjectInfoFields",
+        "CreatePropertyDefinitions",
+        "CreatePropertyGroups",
+        "CreateRoofs",
+        "CreateSections",
+        "CreateSlabs",
+        "CreateSolidElementLinks",
+        "CreateSplines",
+        "CreateStairs",
+        "CreateSurfaces",
+        "CreateTexts",
+        "CreateViewMapFolder",
+        "CreateViewsInViewMap",
+        "CreateWallThicknessDimensions",
+        "CreateWalls",
+        "CreateWindows",
+        "CreateWorksheets",
+        "CreateZoneCategories",
+        "CreateZones",
+        "DeleteAttributes",
+        "DeleteClassificationItems",
+        "DeleteClassificationSystems",
+        "DeleteElements",
+        "DeleteEmbeddedLibraryItems",
+        "DeleteFavorites",
+        "DeleteIssue",
+        "DeleteKeynoteFolders",
+        "DeleteKeynoteItems",
+        "DeleteNavigatorItems",
+        "DeleteProjectInfoFields",
+        "DeletePropertyDefinitions",
+        "DeletePropertyGroups",
+        "ImportClassificationsXml",
+        "ImportFavorites",
+        "ImportIssuesFromBCF",
+        "ImportPropertiesXml",
+        "ModifyBeams",
+        "ModifyColumns",
+        "ModifyDoors",
+        "ModifyKeynoteFolders",
+        "ModifyKeynoteItems",
+        "ModifyLabels",
+        "ModifyLamps",
+        "ModifyMEPRoutingElements",
+        "ModifyMeshes",
+        "ModifyMorphs",
+        "ModifyObjects",
+        "ModifyRoofs",
+        "ModifySlabs",
+        "ModifyTexts",
+        "ModifyWalls",
+        "ModifyWindows",
+        "Set3DCutPlanes",
+        "SetActiveDesignOptionsInCombinations",
+        "SetClassificationsOfElements",
+        "SetDetailsOfElements",
+        "SetElementNotificationClient",
+        "SetGDLParametersOfElements",
+        "SetGeoLocation",
+        "SetLayoutSettings",
+        "SetLibraries",
+        "SetProjectInfoField",
+        "SetPropertyValuesOfAttributes",
+        "SetPropertyValuesOfElements",
+        "SetStories",
+        "SetSuspendGroupsMode",
+        "SetViewRotation",
+        "SetViewSettings"
+      ],
+      "dependencies": [
+        "Archicad29",
+        "exact PLN identity",
+        "GenerateDocumentation hash-bound export"
+      ],
+      "stability": "6 comparison preflights + final read-only ready; writes not run; long-run reliability not measured",
+      "replaceability": "transport replaceable only with same contracts/readback",
+      "evidence": [
+        "schemas/tapir-live-1.5.10/tapir-export-evidence.json",
+        "docs/ARCHICAD_PROJECT_ACCELERATOR_MVP.md"
+      ]
+    },
+    {
+      "id": "native-model-dump",
+      "version": "v1 / source 24d22cca",
+      "installation": "SOURCE_AND_HISTORICAL_LIVE; current API registration=false",
+      "license": "Tapir MIT; Graphisoft SDK terms apply",
+      "interface": "TapirCommand.GetModelDumpV1 / saved JSON",
+      "readCoverage": [
+        "resultant body vertices/faces/holes/material pool/placement/owner"
+      ],
+      "writeCoverage": [],
+      "dependencies": [
+        "matching loaded custom APX",
+        "AC29 SDK for rebuild",
+        "current 3D visibility"
+      ],
+      "stability": "historical live MVP; not current pavilion proof",
+      "replaceability": "oracle separate from transport; retain native coordinates",
+      "evidence": [
+        "archicad-addon/Examples/model_dump_v1.py",
+        "examples/model_dump_v1.sample.json"
+      ]
+    },
+    {
+      "id": "scene-writer",
+      "version": "308264c",
+      "installation": "LOCAL_CODE",
+      "license": "repository license unspecified; no external source vendored",
+      "interface": "Python SceneWriter",
+      "readCoverage": [
+        "GUID/type/story/geometry/host/final inventory"
+      ],
+      "writeCoverage": [
+        "Wall",
+        "Slab",
+        "Column",
+        "Window",
+        "Door"
+      ],
+      "dependencies": [
+        "tapir-modified",
+        "jsonschema"
+      ],
+      "stability": "synthetic whole scene tested; native writes not accepted",
+      "replaceability": "reuse current writer; no second writer",
+      "evidence": [
+        "scripts/archicad_scene_run.py",
+        "scripts/archicad_project_accelerator.py"
+      ]
+    },
+    {
+      "id": "alesdev88",
+      "version": "0.6.0 installed / v0.7.1 upstream release verified 2026-10-09",
+      "installation": "INSTALLED_UV_RUNTIME",
+      "license": "MIT",
+      "interface": "ArchicadConnection, stdio/HTTP MCP",
+      "readCoverage": [
+        "official JSON + Tapir; YAML QA; schedule XML advertised"
+      ],
+      "writeCoverage": [
+        "curated tools + Tapir gateway; partial apply possible"
+      ],
+      "dependencies": [
+        "Python>=3.12",
+        "multiconn-archicad0.8.4",
+        "httpx",
+        "fastmcp",
+        "jsonschema",
+        "Archicad29"
+      ],
+      "stability": "documented AC29 property-value crash risk; those reads excluded",
+      "replaceability": "connection shim usable without MCP daemon",
+      "evidence": [
+        "docs/research/layer-reuse-decision-matrix-v0.4.yaml",
+        "https://github.com/alesdev88/Archicad-MCP",
+        "https://github.com/alesdev88/Archicad-MCP/releases/tag/v0.7.1"
+      ]
+    },
+    {
+      "id": "lgradisar",
+      "version": "0.2.0 upstream pyproject observed; not installed in inspected runtime",
+      "installation": "NOT_FOUND_IN_INSPECTED_RUNTIME_AND_CONFIG",
+      "license": "MIT",
+      "interface": "generated Tapir MCP tools / stdio",
+      "readCoverage": [
+        "Tapir reads (upstream schema1.5.9)"
+      ],
+      "writeCoverage": [
+        "Tapir writes advertised"
+      ],
+      "dependencies": [
+        "Python>=3.10",
+        "fastmcp>=4.0.10,<5",
+        "jsonschema>=4.18",
+        "Tapir",
+        "Archicad25-29"
+      ],
+      "stability": "not measured on this machine",
+      "replaceability": "optional MCP surface; no automatic installation",
+      "evidence": [
+        "https://github.com/lgradisar/archicad-mcp",
+        "https://raw.githubusercontent.com/lgradisar/archicad-mcp/main/pyproject.toml"
+      ]
+    },
+    {
+      "id": "huskybim",
+      "version": "v1.5.54 vendor requirements observed",
+      "installation": "NOT_FOUND_IN_AC29_APX_SCOPE",
+      "license": "vendor free account terms; not open-source MIT",
+      "interface": "local MCP/native addon",
+      "readCoverage": [
+        "advertised broad element/geometry/documentation"
+      ],
+      "writeCoverage": [
+        "advertised native/MEP/documentation; not validated"
+      ],
+      "dependencies": [
+        "vendor account",
+        "Windows installer",
+        "Archicad29",
+        "separate installation approval"
+      ],
+      "stability": "not measured; no assumed atomicity/dry-run",
+      "replaceability": "candidate only pending measured advantage",
+      "evidence": [
+        "https://mcp.huskybim.com/docs/requirements",
+        "https://huskybim.com/pricing",
+        "docs/research/layer-reuse-decision-matrix-v0.8.yaml"
+      ]
+    },
+    {
+      "id": "mep-designer",
+      "version": "Archicad29 build5101 / schema Tapir1.5.10",
+      "installation": "HOST_COMPONENT_OR_SCHEMA_PRESENT; live workflow unverified",
+      "license": "Graphisoft host/license entitlement unverified; Tapir MIT interface",
+      "interface": "native API / Tapir",
+      "readCoverage": [
+        "GetMEPDistributionSystems",
+        "GetMEPElements",
+        "GetMEPPorts",
+        "GetMEPPreferenceTables",
+        "GetMEPRoutingElements",
+        "GetMEPSystems"
+      ],
+      "writeCoverage": [
+        "ConnectMEPElements",
+        "CreateMEPElements",
+        "CreateMEPRoutingElements",
+        "CreateMEPSystems",
+        "ModifyMEPRoutingElements"
+      ],
+      "dependencies": [
+        "tapir-modified",
+        "licensed native MEP runtime"
+      ],
+      "stability": "schema only; mandatory execution blocked",
+      "replaceability": "native semantics retained; generic Morph not substitute",
+      "evidence": [
+        "schemas/tapir-live-1.5.10/command_definitions.js",
+        "docs/research/layer-reuse-decision-matrix-v1.7.yaml"
+      ]
+    },
+    {
+      "id": "hotlink",
+      "version": "Archicad29 build5101 / schema Tapir1.5.10",
+      "installation": "HOST_COMPONENT_OR_SCHEMA_PRESENT; live workflow unverified",
+      "license": "Graphisoft host/license entitlement unverified; Tapir MIT interface",
+      "interface": "native API / Tapir",
+      "readCoverage": [
+        "GetHotlinks"
+      ],
+      "writeCoverage": [
+        "ChangeHotlinkInstances",
+        "CreateHotlinkInstances",
+        "CreateHotlinkNodes"
+      ],
+      "dependencies": [
+        "tapir-modified",
+        "existing module/source files"
+      ],
+      "stability": "schema only; mandatory execution blocked",
+      "replaceability": "native semantics retained; generic Morph not substitute",
+      "evidence": [
+        "schemas/tapir-live-1.5.10/command_definitions.js",
+        "docs/research/layer-reuse-decision-matrix-v1.7.yaml"
+      ]
+    },
+    {
+      "id": "favorites",
+      "version": "Archicad29 build5101 / schema Tapir1.5.10",
+      "installation": "HOST_COMPONENT_OR_SCHEMA_PRESENT; live workflow unverified",
+      "license": "Graphisoft host/license entitlement unverified; Tapir MIT interface",
+      "interface": "native API / Tapir",
+      "readCoverage": [
+        "GetFavoritePreviewImage",
+        "GetFavoritesByType"
+      ],
+      "writeCoverage": [
+        "ApplyFavoritesToElementDefaults",
+        "ApplyFavoritesToElements",
+        "CreateFavoritesFromElements",
+        "DeleteFavorites",
+        "ExportFavorites",
+        "ImportFavorites",
+        "RenameFavorites",
+        "UpdateFavoritesFromElements"
+      ],
+      "dependencies": [
+        "tapir-modified",
+        "project favorites/attributes"
+      ],
+      "stability": "schema only; mandatory execution blocked",
+      "replaceability": "native semantics retained; generic Morph not substitute",
+      "evidence": [
+        "schemas/tapir-live-1.5.10/command_definitions.js",
+        "docs/research/layer-reuse-decision-matrix-v1.7.yaml"
+      ]
+    },
+    {
+      "id": "gdl",
+      "version": "Archicad29 build5101 / schema Tapir1.5.10",
+      "installation": "HOST_COMPONENT_OR_SCHEMA_PRESENT; live workflow unverified",
+      "license": "Graphisoft host/license entitlement unverified; Tapir MIT interface",
+      "interface": "native API / Tapir",
+      "readCoverage": [
+        "GetAvailableLibraryParts"
+      ],
+      "writeCoverage": [
+        "AddFilesToEmbeddedLibrary",
+        "CreateLibraryPartFromScripts",
+        "DeleteEmbeddedLibraryItems",
+        "SafeBIMGlobalLibraryPart"
+      ],
+      "dependencies": [
+        "tapir-modified",
+        "compatible GSM/libpart and project attributes"
+      ],
+      "stability": "schema only; mandatory execution blocked",
+      "replaceability": "native semantics retained; generic Morph not substitute",
+      "evidence": [
+        "schemas/tapir-live-1.5.10/command_definitions.js",
+        "docs/research/layer-reuse-decision-matrix-v1.7.yaml"
+      ]
+    },
+    {
+      "id": "ifc-native",
+      "version": "Archicad29 build5101 / schema Tapir1.5.10",
+      "installation": "HOST_COMPONENT_OR_SCHEMA_PRESENT; live workflow unverified",
+      "license": "Graphisoft host/license entitlement unverified; Tapir MIT interface",
+      "interface": "native API / Tapir",
+      "readCoverage": [
+        "GetElementsByIFCIds",
+        "GetIFCExportTranslators",
+        "GetIFCIdsOfElements",
+        "GetIFCPropertiesOfElements",
+        "GetIFCTypeOfElements"
+      ],
+      "writeCoverage": [
+        "IFCFileOperation"
+      ],
+      "dependencies": [
+        "tapir-modified",
+        "project translator and IFC export/import settings"
+      ],
+      "stability": "schema only; mandatory execution blocked",
+      "replaceability": "native semantics retained; generic Morph not substitute",
+      "evidence": [
+        "schemas/tapir-live-1.5.10/command_definitions.js",
+        "docs/research/layer-reuse-decision-matrix-v1.7.yaml"
+      ]
+    },
+    {
+      "id": "ifcopenshell",
+      "version": "not installed in inspected uv runtime",
+      "installation": "NOT_INSTALLED_IN_INSPECTED_RUNTIME",
+      "license": "LGPL-3.0 library; dependent tools need own license check",
+      "interface": "Python IFC file/geometry API",
+      "readCoverage": [
+        "IFC semantic and geometry file reads"
+      ],
+      "writeCoverage": [
+        "IFC file authoring; native PLN roundtrip unverified"
+      ],
+      "dependencies": [
+        "IfcOpenShell binary/python runtime",
+        "IFC source file",
+        "separate install approval"
+      ],
+      "stability": "not measured here",
+      "replaceability": "optional file adapter; cannot replace native edit readback",
+      "evidence": [
+        "https://github.com/ifcopenshell/ifcopenshell",
+        "docs/research/architectural_ai_checkpoint_38_openbim_semantic_and_parametric_orchestration_2026-10-08.md"
+      ]
+    },
+    {
+      "id": "normative-sources",
+      "version": "repo checkpoint40 / retained matrices",
+      "installation": "LOCAL_RESEARCH_AND_RULE_ARTIFACTS",
+      "license": "per-source applicability/access/licensing unresolved",
+      "interface": "file index + SHA256",
+      "readCoverage": [
+        "source/rule/provider metadata"
+      ],
+      "writeCoverage": [],
+      "dependencies": [
+        "applicable clauses",
+        "project context",
+        "versioned source evidence"
+      ],
+      "stability": "indexed, not normative compliance PASS",
+      "replaceability": "source pack replaceable by approved version",
+      "evidence": [
+        "docs/research/normative-provider-capability-matrix-v0.1.yaml",
+        "docs/research/free-normative-source-matrix-v0.2.yaml"
+      ]
+    },
+    {
+      "id": "detail-library",
+      "version": "details/ACTIVE_RELEASE",
+      "installation": "LOCAL_RELEASE_ARTIFACTS",
+      "license": "per-detail rights/applicability unresolved",
+      "interface": "file index + SHA256",
+      "readCoverage": [
+        "retained detail IR/catalog provenance"
+      ],
+      "writeCoverage": [],
+      "dependencies": [
+        "approved detail variant",
+        "materials",
+        "node parameters"
+      ],
+      "stability": "artifact index only; not accepted construction detail",
+      "replaceability": "reference recipes pending native acceptance",
+      "evidence": [
+        "details/ACTIVE_RELEASE",
+        "details/README.md"
+      ]
+    },
+    {
+      "id": "bibimai",
+      "version": "APX version UNKNOWN",
+      "installation": "APX_PRESENT",
+      "license": "vendor terms unverified",
+      "interface": "native addon + Bibim router",
+      "readCoverage": [
+        "native/MCP reads from historical logs"
+      ],
+      "writeCoverage": [
+        "native tools; not enabled by integration"
+      ],
+      "dependencies": [
+        "BibimAI",
+        "local router/model"
+      ],
+      "stability": "historical log; not current session proof",
+      "replaceability": "not changed in this task",
+      "evidence": [
+        "docs/research/SEARCH_BEFORE_BUILD_REUSE_STRATEGY_v0.1.md"
+      ]
+    },
+    {
+      "id": "other-researched",
+      "version": "113 research files retained",
+      "installation": "MIXED_CODE_RESEARCH_CANDIDATES",
+      "license": "per-provider terms",
+      "interface": "source manifest",
+      "readCoverage": [
+        "Szamosi/Boti/chronista, OpenMEP, EPANET, SWMM, Modelica, Radiance, OR-Tools, CYPE, CALHYDRA, ACCORD, IFC/IDS/BCF, documentation/template"
+      ],
+      "writeCoverage": [],
+      "dependencies": [
+        "provider-specific installation/license/runtime"
+      ],
+      "stability": "not promoted beyond original evidence",
+      "replaceability": "retain inventory; measure one integration at a time",
+      "evidence": [
+        "docs/research"
+      ]
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "pavilion-frame-v1",
+      "provider": "scene-writer",
+      "status": "SYNTHETIC_READY_LIVE_WRITE_NOT_RUN",
+      "available": true,
+      "requires": [
+        "tapir-modified"
+      ],
+      "geometryLevel": "typed dimensions+host; not resultant solids"
+    },
+    {
+      "id": "native-model-dump",
+      "provider": "native-model-dump",
+      "status": "NOT_ACCEPTED_FOR_MANDATORY_SCENARIO",
+      "available": false,
+      "requires": [
+        "native-model-dump"
+      ]
+    },
+    {
+      "id": "mep-designer",
+      "provider": "mep-designer",
+      "status": "NOT_ACCEPTED_FOR_MANDATORY_SCENARIO",
+      "available": false,
+      "requires": [
+        "mep-designer"
+      ]
+    },
+    {
+      "id": "hotlink",
+      "provider": "hotlink",
+      "status": "NOT_ACCEPTED_FOR_MANDATORY_SCENARIO",
+      "available": false,
+      "requires": [
+        "hotlink"
+      ]
+    },
+    {
+      "id": "favorites",
+      "provider": "favorites",
+      "status": "NOT_ACCEPTED_FOR_MANDATORY_SCENARIO",
+      "available": false,
+      "requires": [
+        "favorites"
+      ]
+    },
+    {
+      "id": "gdl",
+      "provider": "gdl",
+      "status": "NOT_ACCEPTED_FOR_MANDATORY_SCENARIO",
+      "available": false,
+      "requires": [
+        "gdl"
+      ]
+    },
+    {
+      "id": "ifc-native",
+      "provider": "ifc-native",
+      "status": "NOT_ACCEPTED_FOR_MANDATORY_SCENARIO",
+      "available": false,
+      "requires": [
+        "ifc-native"
+      ]
+    },
+    {
+      "id": "ifcopenshell",
+      "provider": "ifcopenshell",
+      "status": "NOT_ACCEPTED_FOR_MANDATORY_SCENARIO",
+      "available": false,
+      "requires": [
+        "ifcopenshell"
+      ]
+    },
+    {
+      "id": "normative-sources",
+      "provider": "normative-sources",
+      "status": "ARTIFACT_INDEX_ONLY",
+      "available": true,
+      "requires": []
+    },
+    {
+      "id": "detail-library",
+      "provider": "detail-library",
+      "status": "ARTIFACT_INDEX_ONLY",
+      "available": true,
+      "requires": []
+    }
+  ],
+  "policy": {
+    "unknownMandatory": "BLOCK",
+    "liveWrites": "new explicit --execute authorization required",
+    "schemaIsNotLiveProof": true,
+    "automaticInstall": false,
+    "automaticRetry": false
+  }
+}

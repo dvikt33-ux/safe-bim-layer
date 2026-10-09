@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "archicad-project-intent/1",
+  "projectId": "test-pavilion",
+  "units": "meters",
+  "components": [
+    {"id": "pavilion", "primitive": "pavilion-frame-v1", "anchor": {"x": 300, "y": 300}}
+  ]
+}

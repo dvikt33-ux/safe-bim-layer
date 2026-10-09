@@ -26,6 +26,7 @@ PORT = 19723
 EXPECTED_NAME = "Тест MER "
 EXPECTED_PATH = r"C:\LocalAI\SafeBIM_Global_Library_Test_Projects\Тест MER .pln"
 EXPECTED_TAPIR = "1.5.10"
+DEFAULT_SCENE_SCHEMA = Path(__file__).resolve().parents[1] / "schemas/tapir-live-1.5.10/tapir-scene-live.json"
 ALLOWED_WRITES = frozenset(("CreateWalls", "CreateSlabs", "CreateColumns",
                            "CreateWindows", "CreateDoors"))
 _GUID = re.compile(r"^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$")
@@ -263,13 +264,21 @@ def check_previous_wall(api, graph_step, created):
 
 
 class SceneWriter:
-    def __init__(self, api, journal_path):
+    def __init__(self, api, journal_path, schema_path=None):
         self.api = api
         self.journal_path = Path(journal_path)
+        self.schema_path = Path(schema_path) if schema_path is not None else DEFAULT_SCENE_SCHEMA
 
     def preflight(self, x, y):
         binding = guarded_project(self.api)
-        preview = SCENE.prepare(x, y)
+        preview = SCENE.prepare(x, y, self.schema_path)
+        if preview["schemaVersion"] != binding["tapirVersion"]:
+            raise ValueError(f"TAPIR_SCHEMA_VERSION_MISMATCH: schema {preview['schemaVersion']!r} != runtime {binding['tapirVersion']!r}")
+        # Confirmation binds the geometry to the exact contract bytes as well.
+        preview["sourcePlanHash"] = digest({
+            "graphHash": preview["sourcePlanHash"],
+            "schemaSha256": preview["schemaSha256"],
+        })
         scan_report = scan_for_existing_geometry(self.api, x, y)
         if guarded_project(self.api) != binding:
             raise ValueError("project binding changed during read-only preflight")
@@ -383,6 +392,8 @@ def main(argv=None):
                    help="existing local state directory; separate scene journal is added")
     p.add_argument("--summary", action="store_true",
                    help="short read-only preflight report without entire 12-step graph")
+    p.add_argument("--schema", type=Path, default=DEFAULT_SCENE_SCHEMA,
+                   help="actual Tapir snapshot; defaults to tapir-scene-live.json beside this script")
     p.add_argument("--execute", action="store_true",
                    help="actually create scene once inside exact pinned test PLN")
     p.add_argument("--scene-id", help="durable unique name, NEVER reuse")
@@ -390,7 +401,7 @@ def main(argv=None):
     args = p.parse_args(argv)
     try:
         api = lambda command, params: tapir(PORT, command, params)
-        runner = SceneWriter(api, args.data_dir / "scene-v1-attempts.sqlite3")
+        runner = SceneWriter(api, args.data_dir / "scene-v1-attempts.sqlite3", args.schema)
         if args.execute:
             if not args.scene_id or not args.confirm_plan_hash:
                 raise ValueError("--execute requires --scene-id and --confirm-plan-hash")
@@ -400,6 +411,7 @@ def main(argv=None):
             out = runner.preflight(args.anchor_x, args.anchor_y)
         if args.summary and not args.execute:
             keys = ("status", "sourcePlanHash", "binding", "metrics",
+                    "schemaPath", "schemaVersion", "schemaSha256",
                     "nativeElementsInspected", "volumetricBodiesChecked",
                     "nonSpatialElementsVerified", "liveWriteAuthorized",
                     "plnChanged")

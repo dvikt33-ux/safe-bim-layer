@@ -7,7 +7,14 @@ on:
       - 'chatgpt/mailbox-graph-host-integration-*'
       - 'chatgpt/tapir-1510-offline-preflight-*'
       - 'chatgpt/whole-scene-v1-*'
+      - 'feature/project-accelerator-integration-*'
     paths:
+      - 'scripts/archicad_accelerator_integration.py'
+      - 'scripts/archicad_project_accelerator.py'
+      - 'schemas/accelerator/**'
+      - 'schemas/tapir-live-1.5.10/**'
+      - 'tests/test_archicad_accelerator_integration.py'
+      - 'tests/test_archicad_project_accelerator.py'
       - 'scripts/archicad_batch_contracts.py'
       - 'scripts/archicad_bim_graph.py'
       - 'scripts/archicad_mailbox_graph_adapter.py'
@@ -32,6 +39,12 @@ on:
       - '.github/workflows/archicad-contracts.yml'
   pull_request:
     paths:
+      - 'scripts/archicad_accelerator_integration.py'
+      - 'scripts/archicad_project_accelerator.py'
+      - 'schemas/accelerator/**'
+      - 'schemas/tapir-live-1.5.10/**'
+      - 'tests/test_archicad_accelerator_integration.py'
+      - 'tests/test_archicad_project_accelerator.py'
       - 'scripts/archicad_batch_contracts.py'
       - 'scripts/archicad_bim_graph.py'
       - 'scripts/archicad_mailbox_graph_adapter.py'
