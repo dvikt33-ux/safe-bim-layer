@@ -31,7 +31,7 @@ def bootstrap_channel(store, client, channel_id: str, max_messages: int = 100) -
     accepted = 0
     conflicts = 0
     for message in reversed(pages):
-        if message.get("subtype"):
+        if message.get("subtype") not in (None, "bot_message"):
             continue
         try:
             result = store.ingest(
@@ -81,7 +81,8 @@ def run():
     def capture_event(event, logger):
         # Only explicit root messages from the configured project channel.
         # Slack may redeliver messages; the ledger uses event_id and message ts for dedup.
-        if event.get("channel") != channel_id or event.get("subtype"):
+        if (event.get("channel") != channel_id
+                or event.get("subtype") not in (None, "bot_message")):
             return
         text = event.get("text", "")
         try:
