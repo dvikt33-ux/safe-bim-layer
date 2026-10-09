@@ -114,10 +114,15 @@ try {
     return
   }
   Push-Location $source
+  $originalErrorPreference = $ErrorActionPreference
   try {
-    & python @arguments *>&1 | Tee-Object -FilePath (Join-Path $Destination 'build.log')
+    # Windows PowerShell 5.1 converts redirected native stderr into error
+    # records; Continue keeps warnings visible without aborting the build.
+    $ErrorActionPreference = 'Continue'
+    & python @arguments 2>&1 | Tee-Object -FilePath (Join-Path $Destination 'build.log')
     $exitCode = $LASTEXITCODE
   } finally {
+    $ErrorActionPreference = $originalErrorPreference
     Pop-Location
   }
   Assert-Ok ($exitCode -eq 0) "Build failed, exit $exitCode; see build.log"
