@@ -6,6 +6,7 @@ No network, tokens, live Slack, Archicad or PLN required.
 import json
 import tempfile
 import threading
+import time
 import unittest
 import uuid
 from pathlib import Path
@@ -15,6 +16,7 @@ from scripts.apa_sync.coordinator import (
     EventStore, InvalidEvent, format_event, make_server, parse_event,
 )
 from scripts.apa_sync.step_sync import after_step
+from scripts.apa_sync.socket_mode import bootstrap_channel
 
 
 def event(**changes):
@@ -135,6 +137,37 @@ class EventStoreTests(unittest.TestCase):
         self.assertEqual(len(first["changes"]), 1)
         self.assertEqual(len(second["changes"]), 1)
         self.assertLess(first["next_cursor"], second["next_cursor"])
+
+    def test_wait_wakes_after_insert(self):
+        output = []
+        thread = threading.Thread(
+            target=lambda: output.append(self.store.wait_changes(after=0, timeout=2)),
+            daemon=True,
+        )
+        thread.start()
+        time.sleep(0.03)
+        self._ingest(event(), "104.1")
+        thread.join(timeout=3)
+        self.assertFalse(thread.is_alive())
+        self.assertEqual(len(output[0]["changes"]), 1)
+
+    def test_bootstrap_recent_history_and_dedupe(self):
+        first = event()
+        second = event(summary="Other chat reached another checkpoint")
+        class Client:
+            def conversations_history(self, **kwargs):
+                return {
+                    "messages": [
+                        {"ts": "101.1", "text": format_event(second)},
+                        {"ts": "100.1", "text": format_event(first)},
+                    ],
+                    "response_metadata": {"next_cursor": ""},
+                }
+        client = Client()
+        info = bootstrap_channel(self.store, client, "C0C886E1PGR")
+        self.assertEqual(info["accepted"], 2)
+        self.assertEqual(bootstrap_channel(self.store, client, "C0C886E1PGR")["accepted"], 0)
+        self.assertEqual(len(self.store.changes()["changes"]), 2)
 
     def test_http_read_only_loopback(self):
         server = make_server(self.store, port=0)
