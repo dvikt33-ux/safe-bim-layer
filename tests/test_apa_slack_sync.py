@@ -559,10 +559,10 @@ class RawSlackProbeTests(unittest.TestCase):
             phase="OFFLINE",
             evidence_urls=["<https://github.com/example/project/pull/23>"],
         )
-        body = ("APA_EVENT_V1\n```" + json.dumps(source) +
+        body = ("APA_EVENT_V1```" + json.dumps(source) +
                 "```\n*Sent using* <@U0C90JE4WAC>")
         result = summarize([{"text": body, "ts": "hidden"}])
-        key = "has_linebreak;object_open;schema_rejected:evidence_url_not_https:slack_angle_link"
+        key = "no_linebreak;object_open;schema_rejected:evidence_url_not_https:slack_angle_link"
         self.assertEqual(result["rejected_stage_shapes"], {key: 1})
         self.assertEqual(result["counts"]["fence_envelope_rejected"], 1)
         out = json.dumps(result)
@@ -572,12 +572,12 @@ class RawSlackProbeTests(unittest.TestCase):
     def test_stage_validation_separates_unknown_fields(self):
         source = event()
         source["private_internal_field"] = "highly confidential"
-        body = ("APA_EVENT_V1\n```" + json.dumps(source) +
+        body = ("APA_EVENT_V1```" + json.dumps(source) +
                 "```\n*Sent using* <@U0C90JE4WAC>")
         result = summarize([{"text": body}])
         self.assertEqual(
             result["rejected_stage_shapes"],
-            {"has_linebreak;object_open;schema_rejected:unexpected_keys": 1},
+            {"no_linebreak;object_open;schema_rejected:unexpected_keys": 1},
         )
         self.assertNotIn("private_internal_field", json.dumps(result))
         self.assertNotIn("highly confidential", json.dumps(result))
