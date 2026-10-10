@@ -1,0 +1,142 @@
+"""Read-only, privacy-safe diagnostic of Slack raw APA message envelopes.
+
+Run from the checkout with the already installed isolated Python:
+  python -m scripts.apa_sync.inspect_raw_envelopes
+
+Prompts for the bot OAuth token locally. Outputs finite categories and counters
+only. Never persists or echoes tokens, message text, IDs, authors, URLs or JSON.
+Does not import, mutate or access the SQLite event ledger.
+"""
+from __future__ import annotations
+
+from collections import Counter
+from getpass import getpass
+import json
+from typing import Iterable
+
+from scripts.apa_sync.coordinator import EVENT_PREFIX, InvalidEvent, parse_event
+
+CHANNEL_ID = "C0C886E1PGR"
+KNOWN_FOOTER = "*Sent using* <@U0C90JE4WAC|ChatGPT>"
+SECRETLESS_REASONS = {
+    "Event exceeds 5000 characters": "length_rejected",
+    "Expected APA_EVENT_V1 and one JSON code fence": "fence_envelope_rejected",
+    "Invalid event JSON": "json_rejected",
+    "Unexpected event keys": "unexpected_keys",
+    "Unsupported schema discriminator": "wrong_schema",
+    "Unknown status or phase": "invalid_phase_or_status",
+    "Invalid evidence_urls": "invalid_evidence",
+    "PASS requires a verifiable evidence URL": "pass_evidence_missing",
+}
+
+
+def _len_bucket(n: int) -> str:
+    if n == 0:
+        return "zero"
+    if n <= 64:
+        return "1-64"
+    if n <= 160:
+        return "65-160"
+    return "over-160"
+
+
+def _suffix_type(tail: str) -> str:
+    cleaned = tail.strip()
+    if not cleaned:
+        return "empty"
+    if cleaned == KNOWN_FOOTER:
+        return "exact_known_footer"
+    if KNOWN_FOOTER in cleaned:
+        return "contains_known_footer_plus_other"
+    if "Sent using" in cleaned and "ChatGPT" in cleaned:
+        return "other_chatgpt_attribution"
+    if "Sent using" in cleaned:
+        return "other_attribution"
+    if "ChatGPT" in cleaned:
+        return "other_chatgpt_text"
+    return "other_suffix"
+
+
+def characterize(text: str) -> str:
+    """Return only finite, non-reversible structural features."""
+    markers = text.count("```")
+    fences = "none" if markers == 0 else "one" if markers == 1 else "two" if markers == 2 else "many"
+    if markers >= 1:
+        suffix = text.rsplit("```", 1)[-1]
+        suffix_type = _suffix_type(suffix)
+        suffix_length = _len_bucket(len(suffix))
+        suffix_has_cr = "yes" if "\r" in suffix else "no"
+        suffix_has_unicode_format = "yes" if any(
+            c in "\u200b\u200c\u200d\ufeff" for c in suffix
+        ) else "no"
+    else:
+        suffix_type = "not_applicable"
+        suffix_length = "not_applicable"
+        suffix_has_cr = "not_applicable"
+        suffix_has_unicode_format = "not_applicable"
+    return (
+        f"fences={fences};tail={suffix_type};tail_len={suffix_length};"
+        f"cr={suffix_has_cr};invisible={suffix_has_unicode_format}"
+    )
+
+
+def summarize(messages: Iterable[dict]) -> dict:
+    """Summarize messages without returning any original message attributes."""
+    counters: Counter = Counter()
+    shapes: Counter = Counter()
+    for message in messages:
+        counters["scanned"] += 1
+        if message.get("subtype") not in (None, "bot_message"):
+            counters["ignored_subtype"] += 1
+            continue
+        body = message.get("text", "")
+        if not isinstance(body, str) or not body.startswith(EVENT_PREFIX):
+            counters["non_event"] += 1
+            continue
+        counters["apa_prefix"] += 1
+        shapes[characterize(body)] += 1
+        try:
+            event = parse_event(body)
+        except InvalidEvent as exc:
+            counters[SECRETLESS_REASONS.get(str(exc), "other_static_validation_error")] += 1
+        else:
+            if event:
+                counters["parse_valid"] += 1
+    return {
+        "read_only": True,
+        "scope": "APA channel, capped at 100 recent messages",
+        "counts": dict(sorted(counters.items())),
+        "structural_shapes": dict(sorted(shapes.items())),
+    }
+
+
+def run() -> None:
+    from slack_sdk import WebClient
+    from slack_sdk.errors import SlackApiError
+
+    token = getpass("Enter SLACK_BOT_TOKEN (xoxb-, hidden; not saved): ")
+    if not token.startswith("xoxb-"):
+        raise SystemExit("Invalid bot token prefix; no requests made")
+    client = WebClient(token=token, timeout=15)
+    del token
+    try:
+        messages = []
+        cursor = None
+        while len(messages) < 100:
+            kwargs = {"channel": CHANNEL_ID, "limit": min(100, 100 - len(messages))}
+            if cursor:
+                kwargs["cursor"] = cursor
+            response = client.conversations_history(**kwargs)
+            messages.extend(response.get("messages", []))
+            cursor = response.get("response_metadata", {}).get("next_cursor")
+            if not cursor:
+                break
+    except SlackApiError:
+        raise SystemExit("Slack API request failed (details withheld)") from None
+    except Exception:
+        raise SystemExit("Slack read-only probe failed (details withheld)") from None
+    print(json.dumps(summarize(messages), ensure_ascii=False, sort_keys=True, indent=2))
+
+
+if __name__ == "__main__":
+    run()

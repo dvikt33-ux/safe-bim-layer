@@ -18,6 +18,7 @@ from scripts.apa_sync.coordinator import (
 )
 from scripts.apa_sync.step_sync import after_step, before_step
 from scripts.apa_sync.socket_mode import bootstrap_channel, rejected_message_shape
+from scripts.apa_sync.inspect_raw_envelopes import summarize, characterize
 
 
 def event(**changes):
@@ -385,6 +386,39 @@ class EventStoreTests(unittest.TestCase):
     def test_server_wont_bind_public_interface(self):
         with self.assertRaises(ValueError):
             make_server(self.store, host="0.0.0.0", port=0)
+
+
+class RawSlackProbeTests(unittest.TestCase):
+    def test_safe_footer_and_unknown_suffix_categories(self):
+        self.assertEqual(
+            characterize("APA_EVENT_V1\n```json\n{}\n```\n*Sent using* <@U0C90JE4WAC|ChatGPT>"),
+            "fences=two;tail=exact_known_footer;tail_len=1-64;cr=no;invisible=no",
+        )
+        unknown = characterize("APA_EVENT_V1\n```json\n{}\n```\nconfidential private-data")
+        self.assertIn("tail=other_suffix", unknown)
+        self.assertNotIn("confidential", unknown)
+        self.assertNotIn("private-data", unknown)
+
+    def test_probe_does_not_emit_any_slack_message_contents(self):
+        valid = format_event(event(event_id="probe-valid-event")) + (
+            "\n*Sent using* <@U0C90JE4WAC|ChatGPT>"
+        )
+        bad = "APA_EVENT_V1\n```json\n{}" + "must-remain-secret"
+        results = summarize([
+            {"text": valid, "ts": "900.1", "user": "sensitive-user"},
+            {"text": bad, "ts": "901.1", "user": "another-user"},
+            {"text": "irrelevant private text", "ts": "902.1"},
+            {"subtype": "channel_join", "text": "hello", "ts": "903.1"},
+        ])
+        self.assertEqual(results["counts"]["scanned"], 4)
+        self.assertEqual(results["counts"]["parse_valid"], 1)
+        self.assertEqual(results["counts"]["fence_envelope_rejected"], 1)
+        self.assertEqual(results["counts"]["non_event"], 1)
+        self.assertEqual(results["counts"]["ignored_subtype"], 1)
+        out = json.dumps(results)
+        for secret in ("must-remain-secret", "probe-valid-event", "900.1",
+                       "901.1", "sensitive-user", "another-user", "irrelevant private text"):
+            self.assertNotIn(secret, out)
 
 
 if __name__ == "__main__":
