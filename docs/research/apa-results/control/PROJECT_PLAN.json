@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 7,
+  "revision": 8,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -515,7 +515,7 @@
       "action_id": "APA-P00.A03",
       "title": "Проверить write/readback для всех классов исполнителей",
       "kind": "VALIDATION",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 0,
       "work_key": "executor-capability-matrix",
       "depends_on": [
@@ -529,11 +529,14 @@
         "Capability matrix по каждому исполнителю"
       ],
       "acceptance": "Capability matrix по каждому исполнителю",
-      "owner": "chatgpt:apa-registry-alignment",
-      "lease_until": "2026-10-10T16:30:00Z",
-      "claim_ref": "chatgpt-apa-registry-activation-20261010-1348",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/control/SCHEDULED_TASKS_REGISTRY_ACTIVATION_20261010.md",
+        "https://github.com/dvikt33-ux/safe-bim-layer/commit/d5fae489368294bd2a592cf6e441c2dc133d6ca9"
+      ],
       "blocked_reason": null
     },
     "APA-P00.A03.S02": {
