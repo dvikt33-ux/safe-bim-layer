@@ -134,3 +134,12 @@ Direct source: pinned Graphisoft DevKit 29.3100 Command/Memo Doxygen and Tapir 1
 | `ART-APA-REUSE-NATIVE-20261011` | `APA-P50.A02.S01` / PARTIAL | [Proof of existing intent→BIM graph→SceneWriter, older CreateSlabs→ModifySlabs Basic material route, material dependency resolver and series178 floor emitter](runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [commit 01ec66d](https://github.com/dvikt33-ux/safe-bim-layer/commit/01ec66d7cfbe3e1490c6add1556533731518a0d8) | `SOURCE_VERIFIED / GITHUB_READBACK_VERIFIED`; no fresh native live test; not exhaustive 72-branch dedup; **do not build duplicate adapter** |
 | `ART-APA-REUSE-RESCOPE-20261011` | Candidate review warning; not admitted task | [Existing typed slab proposal with rescope warning](control/proposals/APA-CAND-20261011-typed-slab-creation-adapter.md), [commit 2289345](https://github.com/dvikt33-ux/safe-bim-layer/commit/2289345e73dae9b150bbf62f1da856dede301d23) | Needs independent auditor to approve/rescope/reject; `PROJECT_PLAN` task not created |
 
+
+
+## APA-P00.A02.S03 / S04 — Slack historical SQLite recovery and HTTP readback (2026-10-11)
+
+| Artifact ID | Task linkage | GitHub report | Verified gate / still pending |
+|---|---|---|---|
+| `ART-APA-SYNC-HISTORY-20261011` | Existing `APA-P00.A02.S03` evidence reconciliation; `APA-P00.A02.S04` publication completeness; **no controller claim or status mutation** | [LIVE Socket Mode historical backfill + independent local API readback](runs/2026-10-11/apa-sync-live-sqlite-history-recovery-20261011.md), [strict parser PR #33](https://github.com/dvikt33-ux/safe-bim-layer/pull/33), [CI 44/44 PASS](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38091580453) | **USER_LOCAL_LIVE_READBACK_PASS**: Slack history 28 scanned, 20 new SQLite accepts, 1 duplicate, 3 malformed rejects; API `EVENTS_TOTAL=21`, `ORIGINAL_SMOKE_PRESERVED=True`, 16 state keys, `EFFECTIVE_CONFLICTS=0`, cursor 21. **Reboot idempotence NOT_VERIFIED**; manual source audit of three malformed Slack messages pending; `LIVE BLOCKED` claim remains a distinct recorded status, no Archicad LIVE upgrade. |
+
+This row indexes user-supplied logs verified for internal consistency by independent read-only HTTP calls on the owner's local machine. GitHub publication/readback of the report **does not** imply each historical technical result was independently re-audited, nor does it change the canonical `PROJECT_PLAN.json` dispatch state.
