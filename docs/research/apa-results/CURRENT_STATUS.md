@@ -15,6 +15,12 @@
 - Постоянный планировщик / runner: **NOT_RUNNING**.
 - Следующий подшаг после S01: APA-P00.A03.S02 — выбрать разрешённый always-on исполнитель без платных API и без изменений main.
 
+## Режим, подтверждённый владельцем
+
+**Исследования — в обычных чатах ChatGPT с GitHub connector и публикацией в canonical hub; Deep Research без отдельного запроса НЕ ЗАПУСКАТЬ.** Это выбранный способ исполнения, а не утверждение, что 24/7 runner работает. Проверка расписания и двух последовательных публикаций остаётся открытой; статус 24/7 **NOT_RUNNING**.
+
+**Частичная техническая дельта APA-P10.A01.S01:** [AC29 Get3DInfo/contacts/Opening](runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md) сохранена, commit [d65c5bd](https://github.com/dvikt33-ux/safe-bim-layer/commit/d65c5bd327d077d7873ff720cda6dac3bf8a22cb), readback подтверждён. В официальной документации встречаются оба имени `ACAPI_Element_Get3DInfo` и `ACAPI_ModelAccess_Get3DInfo`; нельзя переименовывать код без SDK header/compile gate. Полный прежний Deep Research отчёт **не восстановлен**.
+
 ## Что завершено и где доказательства
 
 - **APA-P00.A01.S01:** прочитаны 5 существовавших файлов research hub; [реестр](ARTIFACT_REGISTER.md).
