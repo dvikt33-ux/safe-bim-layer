@@ -8,7 +8,7 @@
   "executor_run_id": "APA-RUN-20261010-163950Z-tapir-compat-6f29",
   "phase": "SOURCE",
   "started_at": "2026-10-10T16:39:50Z",
-  "finished_at": "2026-10-10T16:42:28.265Z",
+  "finished_at": "2026-10-10T16:42:28Z",
   "scope": {
     "repository": "dvikt33-ux/safe-bim-layer",
     "archicad": "Archicad 29 (target; not invoked)",
