@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 2,
+  "revision": 3,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -1250,7 +1250,7 @@
       "action_id": "APA-P50.A01",
       "title": "Карта связей: исследования ↔ S-ID ↔ артефакты ↔ PR",
       "kind": "CONSOLIDATION",
-      "status": "READY",
+      "status": "CLAIMED",
       "priority": 0,
       "work_key": "cross-research-traceability",
       "depends_on": [
@@ -1267,9 +1267,9 @@
         "Traceability matrix, orphan report list"
       ],
       "acceptance": "Traceability matrix, orphan report list",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "chatgpt-apa-controller-traceability-20261010",
+      "lease_until": "2026-10-11T12:00:00Z",
+      "claim_ref": "https://github.com/dvikt33-ux/safe-bim-layer/issues/23",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
