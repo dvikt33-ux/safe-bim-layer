@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 16,
+  "revision": 17,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -1756,7 +1756,7 @@
       "action_id": "APA-P60.A02",
       "title": "Ввести сбор предложений задач исследователями и принятие аудитором в PROJECT_PLAN",
       "kind": "VALIDATION",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "research-proposals-audit-approval",
       "depends_on": [
@@ -1776,9 +1776,9 @@
         "Проверенный controller DAG и readback"
       ],
       "acceptance": "Процесс discovery proposal -> independent audit decision -> TASK registry admission задокументирован; CAS claim/readback и уникальность work_key/dependency DAG соблюдены; Scheduled instructions согласованы. End-to-end независимая публикация proposal, аудит, регистрация и валидатор контроллера подтверждены фактами. Не объявлять DONE по одним инструкциям.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "chatgpt:apa-audit",
+      "lease_until": "2026-10-10T16:25:55.686Z",
+      "claim_ref": "apa-audit-20261010T145555-keaf3r",
       "requires_approval": false,
       "evidence": [
         "ART-PROPOSAL-PROTOCOL",
