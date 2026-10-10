@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 4,
+  "revision": 5,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -8,12 +8,13 @@
   "authority": "This file is the sole dispatch source. MASTER_PLAN.md is human-readable background; generated views are derived. A new task must be added here before execution.",
   "policies": {
     "dispatch": "Only READY/PARTIAL tasks with all depends_on DONE_PUBLISHED and no lease are candidates; BLOCKED never dispatched.",
-    "claim": "Optimistic GitHub SHA compare-and-swap: set status CLAIMED, owner, lease_until, claim_ref; check work_key uniqueness before work; stale leases are flagged, not silently stolen.",
-    "completion": "Research: immutable report + GitHub API readback + DONE_PUBLISHED receipt + explicit acceptance. Build/control: code/docs commit + GitHub readback + passing CI and evidence in plan + explicit acceptance. No auto-DONE from chat text.",
+    "claim": "At the BEGINNING of each Scheduled execution, read fresh PROJECT_PLAN.json; select exactly one READY/PARTIAL task whose dependencies are DONE_PUBLISHED; CAS-write status IN_PROGRESS + unique owner + UTC lease_until + claim_ref=executor_run_id; re-read commit. Do not perform work until IN_PROGRESS readback. Concurrent/expired/duplicate runs cannot publish.",
+    "completion": "On actual completion, verify artifacts, CI/receipt and acceptance; CAS-write DONE_PUBLISHED with evidence and clear owner/lease/claim_ref. For incomplete results write PARTIAL with evidence; for failed work BLOCKED with blocked_reason. Never claim DONE from chat text or a publisher receipt alone.",
     "deduplication": "One semantic work_key per task, explicit topic_id through topics[].task_ids; duplicate work keys rejected; related tasks share sources but different scopes. Historical 72-branch semantic dedup remains open.",
     "mutation": "Only canonical research branch. Never modify main/master, PLN, APX, tested code branches or merge without approval.",
     "research": "Normal ChatGPT with GitHub connector; Deep Research and paid tools require explicit authorization.",
-    "evidence": "REPORTED != SOURCE_VERIFIED != BUILD_PASS != LIVE_PASS. Synthetic publisher success proves no Archicad runtime behavior."
+    "evidence": "REPORTED != SOURCE_VERIFIED != BUILD_PASS != LIVE_PASS. Synthetic publisher success proves no Archicad runtime behavior.",
+    "trigger": "Only user-configured ChatGPT Scheduled Tasks initiate work; GitHub Actions is a publisher/validator on commits, not an autonomous research initiator. No controller-created research runs."
   },
   "plans": {
     "APA-P00": {
@@ -1152,7 +1153,7 @@
       "id": "APA-P40.A01.S01",
       "plan_id": "APA-P40",
       "action_id": "APA-P40.A01",
-      "title": "Утвердить 24/7 executor и GitHub auth",
+      "title": "Настроить запуск через ChatGPT Scheduled Tasks и разрешённый GitHub доступ",
       "kind": "CONTROL",
       "status": "BLOCKED",
       "priority": 2,
@@ -1165,21 +1166,21 @@
         "ART-OS-AUDIT"
       ],
       "outputs": [
-        "Внешний runner, бюджет и доступ"
+        "ChatGPT Scheduled task ID, расписание, часовой пояс, подтверждённый GitHub write/readback"
       ],
-      "acceptance": "Внешний runner, бюджет и доступ",
+      "acceptance": "Пользователь создал Scheduled Task; сохранены task ID, расписание/часовой пояс; реальный GitHub write/readback PASS; без Deep Research/платных API",
       "owner": null,
       "lease_until": null,
       "claim_ref": null,
-      "requires_approval": false,
+      "requires_approval": true,
       "evidence": [],
-      "blocked_reason": "Dependency, external access or explicit owner approval required"
+      "blocked_reason": "Требуется создание Scheduled Task в интерфейсе ChatGPT и подтверждение прав GitHub; через текущие инструменты расписание не создаётся"
     },
     "APA-P40.A01.S02": {
       "id": "APA-P40.A01.S02",
       "plan_id": "APA-P40",
       "action_id": "APA-P40.A01",
-      "title": "Периодический research→publish→readback цикл",
+      "title": "Проверить Scheduled → IN_PROGRESS → результат → DONE_PUBLISHED/PARTIAL",
       "kind": "BUILD",
       "status": "BLOCKED",
       "priority": 2,
@@ -1192,21 +1193,21 @@
         "ART-PUBLISHER"
       ],
       "outputs": [
-        "Наблюдаемые unattended циклы"
+        "Два реальных расписанных запуска с уникальным executor_run_id, status/readback и receipt"
       ],
-      "acceptance": "Наблюдаемые unattended циклы",
+      "acceptance": "Scheduled trigger реально сработал, в GitHub IN_PROGRESS записан до работы, затем verified receipt/evidence и DONE/PARTIAL, повторный чат не берёт тот же S-ID",
       "owner": null,
       "lease_until": null,
       "claim_ref": null,
       "requires_approval": true,
       "evidence": [],
-      "blocked_reason": "Dependency, external access or explicit owner approval required"
+      "blocked_reason": "Ожидается APA-P40.A01.S01: настройка и авторизация ChatGPT Scheduled Tasks"
     },
     "APA-P40.A01.S03": {
       "id": "APA-P40.A01.S03",
       "plan_id": "APA-P40",
       "action_id": "APA-P40.A01",
-      "title": "Watchdog пропусков и журнал ошибок",
+      "title": "Watchdog пропусков Scheduled Task, зависших IN_PROGRESS и журнал ошибок",
       "kind": "BUILD",
       "status": "BLOCKED",
       "priority": 2,
@@ -1233,7 +1234,7 @@
       "id": "APA-P40.A01.S04",
       "plan_id": "APA-P40",
       "action_id": "APA-P40.A01",
-      "title": "24-часовое доказательство непрерывности",
+      "title": "Проверить 24 часа реальных запусков ChatGPT Scheduled Tasks без повторов",
       "kind": "VALIDATION",
       "status": "BLOCKED",
       "priority": 2,
@@ -1949,5 +1950,16 @@
       "synthesis_state": "OPEN",
       "owner": null
     }
+  },
+  "scheduler": {
+    "provider": "ChatGPT Scheduled Tasks",
+    "state": "NOT_CONFIGURED",
+    "schedule": null,
+    "timezone": null,
+    "chatgpt_task_id": null,
+    "last_triggered_at": null,
+    "last_verified_run_id": null,
+    "mode": "Schedule triggers one execution; GitHub plan is authoritative state. GitHub Actions validates/publishes only. ChatGPT Tasks require user configuration and GitHub connector permissions.",
+    "activation_gate": "Owner must create Scheduled task, select schedule/timezone, verify GitHub read/write permissions and one real IN_PROGRESS -> evidence -> DONE/PARTIAL cycle. No scheduled task has been created by this assistant."
   }
 }
