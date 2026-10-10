@@ -88,6 +88,38 @@ class ControllerTests(unittest.TestCase):
         t["requires_approval"] = False
         self.assertTrue(c.eligible(t, plan))
 
+    def test_research_routes_link_every_product_task(self):
+        self.assertEqual(len(self.plan["research_routes"]), 23)
+        self.assertEqual(set(self.plan["research_routes"]),
+                         {sid for sid, t in self.plan["tasks"].items()
+                          if t["plan_id"] == "APA-P70"})
+        state = c.build(self.plan)
+        self.assertEqual(state["research_lookahead"]["linked_product_substeps"], 23)
+        self.assertIsNotNone(state["research_lookahead"]["next_target"])
+        self.assertTrue(state["research_lookahead"]["next_eligible_research"])
+        board = (c.GENERATED / "RESEARCH_LOOKAHEAD.md").read_text(encoding="utf-8")
+        self.assertIn("APA-P70.A08.S03", board)
+        self.assertIn("ART-APA-FULL-CYCLE", board)
+        dev_board = (c.GENERATED / "DEVELOPMENT_BOARD.md").read_text(encoding="utf-8")
+        self.assertIn("Источники/ветки:", dev_board)
+
+    def test_research_routes_reject_orphans_and_false_sufficient(self):
+        plan = copy.deepcopy(self.plan)
+        del plan["research_routes"]["APA-P70.A01.S01"]
+        with self.assertRaisesRegex(c.ControllerError, "UNMAPPED_PRODUCT_RESEARCH"):
+            c.validate(plan)
+        plan = copy.deepcopy(self.plan)
+        route = plan["research_routes"]["APA-P70.A01.S01"]
+        route["readiness"] = "SUFFICIENT"
+        with self.assertRaisesRegex(c.ControllerError, "UNPROVEN_RESEARCH_SUFFICIENT"):
+            c.validate(plan)
+        route["readiness_evidence_ids"] = ["ART-APA-FULL-CYCLE"]
+        c.validate(plan)
+        plan = copy.deepcopy(self.plan)
+        plan["research_routes"]["APA-P70.A01.S01"]["research_task_ids"] = ["APA-P99.A99.S99"]
+        with self.assertRaisesRegex(c.ControllerError, "UNKNOWN_RESEARCH_TASK"):
+            c.validate(plan)
+
     def test_cycle_rejected(self):
         plan = copy.deepcopy(self.plan)
         plan["tasks"]["APA-P00.A02.S02"]["depends_on"] = ["APA-P60.A01.S01"]
