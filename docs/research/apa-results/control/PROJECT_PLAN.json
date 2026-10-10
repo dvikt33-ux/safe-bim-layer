@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 25,
+  "revision": 26,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -682,7 +682,7 @@
       "action_id": "APA-P10.A01",
       "title": "AC29 SDK headers и native create/change/get сигнатуры",
       "kind": "RESEARCH",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "sdk-native-signatures",
       "depends_on": [
@@ -697,9 +697,9 @@
         "Версии SDK, первоисточники, проверенные сигнатуры"
       ],
       "acceptance": "Версии SDK, первоисточники, проверенные сигнатуры",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "chatgpt:apa-discovery",
+      "lease_until": "2026-10-10T21:24:57Z",
+      "claim_ref": "APA-RUN-20261010-201457Z-sdk-native-signatures",
       "requires_approval": false,
       "evidence": [
         "ART-SDK-RECOVERY-20261010-6B42"
