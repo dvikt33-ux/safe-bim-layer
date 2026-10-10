@@ -466,6 +466,10 @@ class RawSlackProbeTests(unittest.TestCase):
             characterize("APA_EVENT_V1\n```json\n{}\n```\n*Sent using* <@U0C90JE4WAC|ChatGPT>"),
             "fences=two;tail=exact_known_footer;tail_len=1-64;cr=no;invisible=no",
         )
+        self.assertEqual(
+            characterize("APA_EVENT_V1\n```json\n{}\n```\n*Sent using* <@U0C90JE4WAC>"),
+            "fences=two;tail=exact_known_bare_mention_footer;tail_len=1-64;cr=no;invisible=no",
+        )
         unknown = characterize("APA_EVENT_V1\n```json\n{}\n```\nconfidential private-data")
         self.assertIn("tail=other_suffix", unknown)
         self.assertNotIn("confidential", unknown)
