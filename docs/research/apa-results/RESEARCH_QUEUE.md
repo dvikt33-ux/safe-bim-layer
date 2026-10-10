@@ -25,3 +25,8 @@
 - Повторный отчёт без новой проверяемой информации не публиковать; обновлять старый только с provenance и без потери истории.
 - Если source недоступен, записать NOT_VERIFIED — DOCUMENT_NOT_READ, не закрывать задачу.
 - Если публикация сорвалась, задача остаётся IN_PROGRESS / GITHUB_PUBLISH_BLOCKED до подтверждённого readback.
+
+
+## Восстановление ранее заблокированных публикаций (2026-10-10)
+
+**APA-P00.A02.S03 / evidence consolidation:** три отчёта, выдававшиеся ранее с `GITHUB_PUBLISH_BLOCKED`, перенесены из видимых сообщений ChatGPT в канонический журнал, каждый с `create_file` commit SHA и `fetch_file` readback. [Полный список и SHA](ARTIFACT_REGISTER.md#восстановленные-из-чата-результаты-2026-10-10). Статус **PERSISTENCE_RECOVERED / CONTENT_REPORTED**, не `SOURCE_VERIFIED` и не `DONE_PUBLISHED` по техническим задачам. Следующий независимый шаг — проверить исходные версии и sections по ссылкам в recovered runs; затем устранить дубли и назначить live/offline испытания. Ранее заблокированные публикации не являются потерянными, но есть другие архивные материалы с `NOT_VERIFIED` completeness.
