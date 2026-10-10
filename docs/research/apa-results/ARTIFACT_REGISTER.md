@@ -90,3 +90,12 @@
 | `ART-SDK-RECOVERY-20261010-6B42` | `APA-P10.A01.S01` — PARTIAL | [Native Create/Change/Get recovered report](runs/2026-10-10/apa-recovery-20261010-142600-sdk-native-6b42.md) | **REPORTED_FROM_PRIOR_CHAT**; SOURCE re-audit pending; OFFLINE/BUILD/LIVE NOT_VERIFIED | [1489a2de](https://github.com/dvikt33-ux/safe-bim-layer/commit/1489a2debc8b547632be6ff9604ee9f49d206ff9) | PASS, blob `ebfa50e7b72bc27dff84276a4baf2b834a991b33` |
 
 Controller: task switched from `IN_PROGRESS` to `PARTIAL`, owner/claim/lease cleared and artifact registered via [commit 3789812](https://github.com/dvikt33-ux/safe-bim-layer/commit/378981212a11f9a2b9a024c0afaa1c347a490826). The earlier V1 inbox request was retired after the direct report was saved: no V2 receipt or DONE_PUBLISHED asserted. This preserves research content rather than misclassifying unverified API findings as completed.
+
+
+## APA-P10.A02.S04 — MEP route/port/source matrix (2026-10-10)
+
+| Artifact | S-ID | Immutable source report and receipt | Evidence / acceptance | Publication |
+|---|---|---|---|---|
+| `ART-MEP-SOURCE-20261010-PORTGRAPH` | `APA-P10.A02.S04` (`PARTIAL`) | [SOURCE matrix](runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md), [V2 receipt](receipts/APA-RUN-20261010-200823Z-mep-route-port-gate.json) | **SOURCE_VERIFIED** from pinned Tapir 1.5.9 `MEPCommands.cpp` and Graphisoft DevKit 29.3100; OFFLINE/BUILD/LIVE NOT_VERIFIED, installed Tapir 1.5.10 parity NOT_VERIFIED | [V2 report/index commit 4e4fe2f](https://github.com/dvikt33-ux/safe-bim-layer/commit/4e4fe2f9320f949058f56981ac77e0f5d2d4d4b0); GitHub receipt `readback_verified=true`, `indexed=true`; [controller revision 25 update f9e9a58](https://github.com/dvikt33-ux/safe-bim-layer/commit/f9e9a58f6d14194abb06072575e39c5afde5a294), GitHub readback PASS |
+
+Verified novel source details: distribution system membership != physical port connectivity; `GetMEPPorts` can silently skip unreadable ports; `ConnectLogically` can report deleted/split/branch route GUIDs. Existing related MEP capabilities are not reinvented. Controller task claim was released with `PARTIAL`; publication receipt status `DONE_PUBLISHED` concerns the report, **not** full technical task completion. Slack: https://w1791579305-0gy426514.slack.com/archives/C0C886E1PGR/p1791663171104129
