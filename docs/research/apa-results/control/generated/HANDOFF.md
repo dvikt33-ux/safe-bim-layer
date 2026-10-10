@@ -1,6 +1,6 @@
 # APA — START HERE for any new chat or agent
 
-Authority: [PROJECT_PLAN.json](../../../../../docs/research/apa-results/control/PROJECT_PLAN.json). Read [CONTROL_BOARD](CONTROL_BOARD.md), [TASK_CARDS](TASK_CARDS.md) and [RELATIONSHIPS](RELATIONSHIPS.md) before proposing work.
+Authority: [PROJECT_PLAN.json](../../../../../docs/research/apa-results/control/PROJECT_PLAN.json). Read [CONTROL_BOARD](CONTROL_BOARD.md), [TASK_CARDS](TASK_CARDS.md) and [RELATIONSHIPS](RELATIONSHIPS.md) and [THEMES](THEMES.md) before proposing work.
 
 ## Mandatory procedure
 
@@ -16,9 +16,9 @@ Authority: [PROJECT_PLAN.json](../../../../../docs/research/apa-results/control/
 - CONTROL: none
 - CONSOLIDATION: APA-P00.A01.S03, APA-P00.A02.S03, APA-P50.A01.S01
 - RESEARCH: APA-P10.A01.S01, APA-P10.A01.S02, APA-P10.A01.S03, APA-P10.A02.S01
-- BUILD: APA-P00.A03.S03, APA-P60.A01.S02
+- BUILD: APA-P00.A03.S03
 - INTEGRATION: none
-- VALIDATION: APA-P00.A03.S01, APA-P00.A02.S04
+- VALIDATION: APA-P00.A03.S01, APA-P00.A02.S04, APA-P60.A02.S03
 
 ## Safety
 

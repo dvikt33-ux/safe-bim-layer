@@ -10,13 +10,13 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | --- | ---: |
 | BLOCKED | 8 |
 | CLAIMED | 0 |
-| DONE_PUBLISHED | 5 |
+| DONE_PUBLISHED | 10 |
 | IN_PROGRESS | 0 |
-| PARTIAL | 6 |
-| READY | 31 |
+| PARTIAL | 7 |
+| READY | 25 |
 | SUPERSEDED | 0 |
 | DISPATCHABLE_NOW | 15 |
-| HELD_BY_DEPENDENCIES | 22 |
+| HELD_BY_DEPENDENCIES | 17 |
 | EXPIRED_LEASES | 0 |
 
 ## Claimed tasks
@@ -52,12 +52,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | P1 | APA-P50.A02.S01 — Единый каталог AC29 SDK/Tapir/Python/GDL/IFC/MEP инструментов | Capability matrix, версии, пересечения |
 | P2 | APA-P10.A02.S03 — MCP/IFC/openBIM и альтернативы | Матрица альтернатив с границами |
 
-## BUILD — 2 ready
+## BUILD — 1 ready
 
 | Priority | Task | Acceptance |
 | --- | --- | --- |
 | P0 | APA-P00.A03.S03 — Publisher, дедупликация, retry, heartbeat и ошибки | Publisher E2E + оставшиеся recovery/heartbeat gates |
-| P0 | APA-P60.A01.S02 — Валидатор DAG, статусов, duplicate work и gates | Offline tests + fail-closed validation |
 
 ## INTEGRATION — 0 ready
 
@@ -65,12 +64,13 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | --- | --- | --- |
 | — | — | — |
 
-## VALIDATION — 2 ready
+## VALIDATION — 3 ready
 
 | Priority | Task | Acceptance |
 | --- | --- | --- |
 | P0 | APA-P00.A03.S01 — Проверить write/readback для всех классов исполнителей | Capability matrix по каждому исполнителю |
 | P1 | APA-P00.A02.S04 — Контролировать receipt/commit/readback всех завершённых отчётов | Нет ложных DONE без квитанции |
+| P1 | APA-P60.A02.S03 — Протестировать CAS-claim, lease, duplicate prevention | Offline tests PASS; concurrent two-writer CAS and lease-expiry recovery NOT_VERIFIED |
 
 ## Waiting for dependencies
 
@@ -93,11 +93,6 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | APA-P50.A02.S03 | APA-P50.A02.S02, APA-P30.A01.S01 |
 | APA-P50.A03.S01 | APA-P50.A01.S03, APA-P50.A02.S02 |
 | APA-P50.A03.S02 | APA-P50.A03.S01 |
-| APA-P60.A01.S03 | APA-P60.A01.S02 |
-| APA-P60.A01.S04 | APA-P60.A01.S03 |
-| APA-P60.A02.S01 | APA-P60.A01.S03 |
-| APA-P60.A02.S02 | APA-P60.A01.S02 |
-| APA-P60.A02.S03 | APA-P60.A02.S01, APA-P60.A02.S02 |
 
 ## Warnings
 
