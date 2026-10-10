@@ -108,3 +108,11 @@ Verified novel source details: distribution system membership != physical port c
 | ART-SDK-SIGNATURE-AUDIT-20261010-201457 | APA-P10.A01.S01 / PARTIAL | [AC29 Create/GetMemo/Change/Undo source matrix](runs/2026-10-10/apa-discovery-20261010-201457-sdk-native-signatures-fallback.md) | [commit 3197659](https://github.com/dvikt33-ux/safe-bim-layer/commit/3197659f0548dee4d5c6b3e053e2715d53a16557) | Report GitHub readback PASS, blob b295ef7a0b1e963d7d9c8503d024ebc24482ab09 |
 
 Direct source: pinned Graphisoft DevKit 29.3100 Command/Memo Doxygen and Tapir 1.5.9 call sites. Findings: batch per-item failure treatment; unchecked GetMemo error before ModifyObjects/ModifyLamps application; unchecked selected Favorites/AutoText snapshot/restore codes. **No crash or live write claimed.** Actual SDK29 header declarations and installed Tapir1.5.10 parity remain NOT_VERIFIED. Auto V2 publisher did not supply a receipt before fallback; inbox was retired only *after* this complete report had GitHub readback. Controller status written by [commit 46abf6d](https://github.com/dvikt33-ux/safe-bim-layer/commit/46abf6d6ff77f45bfb8155b7188009fc1cebec2d), revision 27, IN_PROGRESS → PARTIAL and claim cleared. If a V2 representation appears later, deduplicate by original run_id APA-RUN-20261010-201457Z-sdk-native-signatures.
+
+
+## APA-P20 — сохранённый павильон, независимый API-readback 2026-10-11
+
+| Artifact ID | Задача | Доказательство | Статус |
+|---|---|---|---|
+| `ART-APA-PAVILION-SAVED-READBACK-20261011` | `APA-P20.A02.S03` (controller task still BLOCKED) | [12/12 readback report](runs/2026-10-11/apa-p20-a02-s03-saved-pln-live-readback-20261010-222136.md), [commit 1e21c3a](https://github.com/dvikt33-ux/safe-bim-layer/commit/1e21c3aaa9541f03918372ad479621b0457a3018), uploaded JSON SHA-256 `593e637bfe738e5baac979d5cc897f49e1b0d23a4ae431b7f06468c0e829ecd5` | `GITHUB_READBACK_VERIFIED` for Markdown report; user-supplied `SAVED_COPY_LIVE_READBACK_PASS`, 12/12 native GUID/geometry/host checks, 0 write; independent operator close/reopen **NOT_ATTESTED**. Source JSON attachment not itself a GitHub blob. |
+
