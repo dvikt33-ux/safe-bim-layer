@@ -95,7 +95,7 @@
     "manifest.json",
     "evidence.json"
   ],
-  "finished_at": "2026-10-10T16:42:28.265Z",
+  "finished_at": "2026-10-10T16:42:28Z",
   "idempotency_key": "sha256:e857db78a3a4d9a0bb63bcf168187956d804b8f688356b7d8307cce51881f8f2",
   "inputs": [
     "ART-REGISTER"
