@@ -17,7 +17,7 @@ from scripts.apa_sync.coordinator import (
     EventStore, InvalidEvent, format_event, make_server, parse_event,
 )
 from scripts.apa_sync.step_sync import after_step, before_step
-from scripts.apa_sync.socket_mode import bootstrap_channel
+from scripts.apa_sync.socket_mode import bootstrap_channel, rejected_message_shape
 
 
 def event(**changes):
@@ -254,6 +254,41 @@ class EventStoreTests(unittest.TestCase):
         self.assertEqual(second["duplicates"], 1)
         self.assertEqual(self.store.changes()["next_cursor"], 1)
         self.assertNotIn("secret", str(second))
+
+    def test_rejected_event_envelope_shape_has_fixed_safe_labels(self):
+        sample = "APA_EVENT_V1\n" + "Some header\n" + '{"event_id":"secret-value","url":"https://secret.example/path"}'
+        shape = rejected_message_shape(sample)
+        self.assertEqual(shape, "fences=none;begins=header;ends=object;object=yes")
+        self.assertNotIn("secret", shape)
+        self.assertNotIn("https", shape)
+        self.assertEqual(
+            rejected_message_shape("APA_EVENT_V1\n```json\n{}"),
+            "fences=one;begins=fence;ends=object;object=yes",
+        )
+        self.assertEqual(
+            rejected_message_shape("APA_EVENT_V1\n```json\n{}\n``` suffix"),
+            "fences=two;begins=fence;ends=other;object=yes",
+        )
+
+    def test_bootstrap_reports_rejected_shape_counts(self):
+        class Client:
+            def conversations_history(self, **kwargs):
+                return {
+                    "messages": [
+                        {"ts": "211.1", "text": "APA_EVENT_V1\n" + '{"event_id":"private-marker"}'},
+                        {"ts": "210.1", "text": "APA_EVENT_V1\n```json\n{}"},
+                    ],
+                    "response_metadata": {"next_cursor": ""},
+                }
+        stats = bootstrap_channel(self.store, Client(), "C0C886E1PGR")
+        self.assertEqual(stats["scanned"], 2)
+        self.assertEqual(stats["accepted"], 0)
+        self.assertEqual(sum(stats["rejection_shapes"].values()), 2)
+        self.assertIn("fences=none;begins=object;ends=object;object=yes",
+                      stats["rejection_shapes"])
+        self.assertIn("fences=one;begins=fence;ends=object;object=yes",
+                      stats["rejection_shapes"])
+        self.assertNotIn("private-marker", str(stats))
 
     def test_http_read_only_loopback(self):
         server = make_server(self.store, port=0)

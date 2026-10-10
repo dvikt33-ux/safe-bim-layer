@@ -14,6 +14,24 @@ from scripts.apa_sync.coordinator import EventStore, InvalidEvent, make_server
 LOG = logging.getLogger("apa.sync")
 
 
+def rejected_message_shape(text: str) -> str:
+    """Finite, content-free signature for rejected APA event envelopes.
+
+    Do not include Slack payload substrings, event IDs, URLs or arbitrary
+    symbols: the signature is a fixed set of structural labels only.
+    """
+    body = text[len("APA_EVENT_V1"):].strip() if isinstance(text, str) else ""
+    fence_count = body.count("```")
+    fences = ("none" if fence_count == 0 else "one" if fence_count == 1
+              else "two" if fence_count == 2 else "many")
+    begins = ("fence" if body.startswith("```") else "object" if body.startswith("{")
+              else "header" if "{" in body else "other")
+    ends = ("fence" if body.endswith("```") else "object" if body.endswith("}")
+            else "other")
+    has_object = "yes" if "{" in body and "}" in body else "no"
+    return f"fences={fences};begins={begins};ends={ends};object={has_object}"
+
+
 def bootstrap_channel(store, client, channel_id: str, max_messages: int = 100) -> dict:
     """Best-effort historical replay, oldest first, with idempotent SQLite writes."""
     max_messages = min(500, max(1, int(max_messages)))
@@ -36,6 +54,7 @@ def bootstrap_channel(store, client, channel_id: str, max_messages: int = 100) -
         "not_apa_events": 0,
         "ignored_subtype": 0,
         "rejected": {},
+        "rejection_shapes": {},
     }
     for message in reversed(pages):
         if message.get("subtype") not in (None, "bot_message"):
@@ -51,6 +70,9 @@ def bootstrap_channel(store, client, channel_id: str, max_messages: int = 100) -
             # Counts only: no raw Slack text, event payloads, identifiers or tokens.
             reason = str(exc)
             stats["rejected"][reason] = stats["rejected"].get(reason, 0) + 1
+            if reason == "Expected APA_EVENT_V1 and one JSON code fence":
+                shape = rejected_message_shape(message.get("text", ""))
+                stats["rejection_shapes"][shape] = stats["rejection_shapes"].get(shape, 0) + 1
             continue
         if result.get("accepted"):
             stats["accepted"] += 1
