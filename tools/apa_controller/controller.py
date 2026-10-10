@@ -192,7 +192,10 @@ def validate(plan):
               all(x in plan["artifacts"] for x in evid),
               "UNKNOWN_READINESS_EVIDENCE " + sid)
         if route["readiness"] == "SUFFICIENT":
-            check(bool(evid), "UNPROVEN_RESEARCH_SUFFICIENT " + sid)
+            check(bool(evid) and all(
+                plan["artifacts"][aid].get("kind") == "REVIEW" and
+                plan["artifacts"][aid].get("verification") == "AUDIT_READBACK_VERIFIED"
+                for aid in evid), "UNPROVEN_RESEARCH_SUFFICIENT " + sid)
         check(bool(plan["tasks"][sid]["inputs"]), "RESEARCH_HAS_NO_SOURCE " + sid)
     return plan
 
