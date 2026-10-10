@@ -1,0 +1,159 @@
+{
+  "action_id": "APA-P50.A01",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-LEGACY-FIVE-20261010",
+      "evidence_ids": [
+        "EV-EVENT-AUDIT",
+        "EV-NATIVE-JOINTS",
+        "EV-OS-AUDIT",
+        "EV-GET3D",
+        "EV-TAPIR-LAYOUT"
+      ],
+      "statement": "Five flat Markdown reports exist in canonical runs/2026-10-10 and were read through GitHub.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-FOUR-EXPLICIT-SID",
+      "evidence_ids": [
+        "EV-EVENT-AUDIT",
+        "EV-NATIVE-JOINTS",
+        "EV-OS-AUDIT",
+        "EV-GET3D"
+      ],
+      "statement": "Four of those five reports contain explicit APA-Pxx.Ayy.Szz identifiers.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-TAPIR-CANDIDATE",
+      "evidence_ids": [
+        "EV-TAPIR-LAYOUT"
+      ],
+      "statement": "Tapir Publisher/Layout report has no explicit S-ID; APA-P10.A02.S01 is a candidate mapping, not independently verified.",
+      "status": "REPORTED"
+    },
+    {
+      "claim_id": "APA-CLAIM-V2-SYNTHETIC-RECEIPT",
+      "evidence_ids": [
+        "EV-V2-RECEIPT"
+      ],
+      "statement": "The prior publisher smoke report has a DONE_PUBLISHED receipt but is SYNTHETIC, not an Archicad live test.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-EVENT-AUDIT",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "2d048a508746dc3da1b0c1827f273ff2eb2b6cce",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-10/apa-audit-100141Z-event-contract-7c4e.md",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-NATIVE-JOINTS",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "2d048a508746dc3da1b0c1827f273ff2eb2b6cce",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-10/apa-discovery-20261010-102440-slinktrim-9f2b7.md",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-OS-AUDIT",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "2d048a508746dc3da1b0c1827f273ff2eb2b6cce",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-10/apa-research-os-audit-user-supplied-20261010.md",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-GET3D",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "2d048a508746dc3da1b0c1827f273ff2eb2b6cce",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-TAPIR-LAYOUT",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "2d048a508746dc3da1b0c1827f273ff2eb2b6cce",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-10/apa-technical-20261010-094254-publisher-layout-01.md",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-V2-RECEIPT",
+      "kind": "GITHUB_COMMIT",
+      "sha256": null,
+      "source_revision": "2d048a508746dc3da1b0c1827f273ff2eb2b6cce",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "chatgpt-apa-controller-traceability-20261010",
+  "executor_run_id": "traceability-claim-20261010-110048Z",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-10T11:00:48Z",
+  "idempotency_key": "sha256:9b2acdb7c7d67274b20e8d3e9ea4362614c16530f78b7dc929598aad22996609",
+  "inputs": [
+    "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-10/apa-audit-100141Z-event-contract-7c4e.md",
+    "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-10/apa-discovery-20261010-102440-slinktrim-9f2b7.md",
+    "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-10/apa-research-os-audit-user-supplied-20261010.md",
+    "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md",
+    "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-10/apa-technical-20261010-094254-publisher-layout-01.md"
+  ],
+  "next_substep": "APA-P50.A01.S01",
+  "phase": "SOURCE",
+  "plan_id": "APA-P50",
+  "run_id": "APA-RUN-20261010-110048Z-legacy-traceability",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "29 (target only; not launched)",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "sdk": null,
+    "source_branch": "research/apa-verified-results-hub-20261010",
+    "tapir": null
+  },
+  "source_revisions": [
+    {
+      "revision": "2d048a508746dc3da1b0c1827f273ff2eb2b6cce",
+      "source_sha": "a47ef947c91ddc760b4d77e87c186c277893417f",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-10/apa-audit-100141Z-event-contract-7c4e.md"
+    },
+    {
+      "revision": "2d048a508746dc3da1b0c1827f273ff2eb2b6cce",
+      "source_sha": "e32d13ffbc5370290bfd42023a5e808fc0947f38",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-10/apa-discovery-20261010-102440-slinktrim-9f2b7.md"
+    },
+    {
+      "revision": "2d048a508746dc3da1b0c1827f273ff2eb2b6cce",
+      "source_sha": "94cf8986c22839ce51e3983e7e4aa757a66f7c4a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-10/apa-research-os-audit-user-supplied-20261010.md"
+    },
+    {
+      "revision": "2d048a508746dc3da1b0c1827f273ff2eb2b6cce",
+      "source_sha": "aa3b419f72f2ae130ab5aa01acfb155b58a3053d",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md"
+    },
+    {
+      "revision": "2d048a508746dc3da1b0c1827f273ff2eb2b6cce",
+      "source_sha": "19e1e1ad52b968bc27ef8b2293829df57b512cb4",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-10/apa-technical-20261010-094254-publisher-layout-01.md"
+    }
+  ],
+  "started_at": "2026-10-10T11:00:48Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P50.A01.S01"
+}

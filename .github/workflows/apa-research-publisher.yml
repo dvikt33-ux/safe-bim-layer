@@ -1,0 +1,111 @@
+name: APA Research OS automatic publisher
+
+on:
+  push:
+    branches:
+      - research/apa-verified-results-hub-20261010
+    paths:
+      - 'docs/research/apa-results/inbox/*.json'
+      - 'tools/apa_publisher/**'
+      - 'tools/apa_controller/**'
+      - 'docs/research/apa-results/control/PROJECT_PLAN.json'
+      - '.github/workflows/apa-research-publisher.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apa-research-os-publisher-canonical-hub
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.repository == 'dvikt33-ux/safe-bim-layer' && github.ref == 'refs/heads/research/apa-verified-results-hub-20261010'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out only the canonical research branch
+        uses: actions/checkout@v4
+        with:
+          ref: research/apa-verified-results-hub-20261010
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Offline safety and idempotency tests
+        run: python -m unittest discover -s tools/apa_publisher/tests -v
+
+      - name: Project Controller DAG, claim and dispatch tests
+        run: python -m unittest discover -s tools/apa_controller/tests -v
+
+      - name: Validate canonical project plan and reject orphan/unclaimed inbox
+        run: |
+          python tools/apa_controller/controller.py validate
+          python tools/apa_controller/controller.py verify-inbox
+
+      - name: Prepare immutable run files and generated projections
+        run: python tools/apa_publisher/publisher.py prepare
+
+      - name: Commit report and index projection
+        id: report
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "apa-research-publisher[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- docs/research/apa-results/runs docs/research/apa-results/generated
+          if ! git diff --cached --quiet; then
+            git commit -m "ops(APA): publish immutable V2 runs and generated projections"
+            git push origin HEAD:refs/heads/research/apa-verified-results-hub-20261010
+          fi
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Verify remote GitHub report and index bytes
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python tools/apa_publisher/publisher.py verify --commit "${{ steps.report.outputs.sha }}"
+
+      - name: Generate idempotent publication receipts
+        run: python tools/apa_publisher/publisher.py receipt --commit "${{ steps.report.outputs.sha }}"
+
+      - name: Commit receipts
+        id: receipts
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -- docs/research/apa-results/receipts
+          if ! git diff --cached --quiet; then
+            git commit -m "ops(APA): record GitHub-verified V2 publication receipts"
+            git push origin HEAD:refs/heads/research/apa-verified-results-hub-20261010
+          fi
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Verify remote GitHub receipts
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python tools/apa_publisher/publisher.py verify-receipts --commit "${{ steps.receipts.outputs.sha }}"
+
+      - name: Generate canonical project control board and handoff views
+        run: python tools/apa_controller/controller.py build
+
+      - name: Commit controller projections
+        id: controller
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -- docs/research/apa-results/control/generated
+          if ! git diff --cached --quiet; then
+            git commit -m "ops(APA): rebuild authoritative task board and cross-chat context"
+            git push origin HEAD:refs/heads/research/apa-verified-results-hub-20261010
+          fi
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Verify controller projections via GitHub REST
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python tools/apa_controller/controller.py verify-remote --commit "${{ steps.controller.outputs.sha }}"

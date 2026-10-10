@@ -1,0 +1,326 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/protocol/RUN_EVENT_V2.schema.json",
+  "title": "APA Research OS immutable run event V2",
+  "description": "Pre-publication evidence event. Never claim DONE_PUBLISHED from this event alone. The publisher writes a separate receipt after commit/readback/index.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "run_id",
+    "plan_id",
+    "action_id",
+    "substep_id",
+    "executor",
+    "phase",
+    "status",
+    "started_at",
+    "finished_at",
+    "scope",
+    "source_revisions",
+    "inputs",
+    "claims",
+    "evidence",
+    "files_to_publish",
+    "next_substep",
+    "safety",
+    "idempotency_key"
+  ],
+  "properties": {
+    "schema": {
+      "const": "APA_RUN_EVENT_V2"
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^APA-RUN-[0-9]{8}-[0-9]{6}Z?-[a-z0-9][a-z0-9-]{2,63}$"
+    },
+    "plan_id": {
+      "type": "string",
+      "pattern": "^APA-P[0-9]{2}$"
+    },
+    "action_id": {
+      "type": "string",
+      "pattern": "^APA-P[0-9]{2}\\.A[0-9]{2}$"
+    },
+    "substep_id": {
+      "type": "string",
+      "pattern": "^APA-P[0-9]{2}\\.A[0-9]{2}\\.S[0-9]{2}$"
+    },
+    "executor": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "phase": {
+      "enum": [
+        "SOURCE",
+        "OFFLINE",
+        "SYNTHETIC",
+        "BUILD",
+        "LIVE"
+      ]
+    },
+    "status": {
+      "enum": [
+        "EVIDENCE_READY",
+        "NOT_VERIFIED",
+        "SOURCE_UNAVAILABLE",
+        "BLOCKED_EXTERNAL",
+        "CONFLICT"
+      ]
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "finished_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository"
+      ],
+      "properties": {
+        "repository": {
+          "const": "dvikt33-ux/safe-bim-layer"
+        },
+        "archicad": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sdk": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "tapir": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_branch": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "source_revisions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 4096
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/claim"
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/evidence"
+      }
+    },
+    "files_to_publish": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "REPORT.md",
+          "manifest.json",
+          "evidence.json"
+        ]
+      }
+    },
+    "next_substep": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^APA-P[0-9]{2}\\.A[0-9]{2}\\.S[0-9]{2}$"
+    },
+    "safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "main_modified",
+        "pln_modified",
+        "apx_modified",
+        "tested_branches_modified",
+        "paid_runtime_used"
+      ],
+      "properties": {
+        "main_modified": {
+          "const": false
+        },
+        "pln_modified": {
+          "const": false
+        },
+        "apx_modified": {
+          "const": false
+        },
+        "tested_branches_modified": {
+          "const": false
+        },
+        "paid_runtime_used": {
+          "const": false
+        }
+      }
+    },
+    "idempotency_key": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "description": "SHA256 of canonical JSON tuple: substep_id, sorted source revision IDs/SHAs, sorted evidence fingerprints, executor_run_id. Calculated by publisher, not fabricated by chat."
+    },
+    "executor_run_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 20000
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "uri",
+        "revision"
+      ],
+      "properties": {
+        "uri": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "source_sha": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{40,64}$"
+        }
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_id",
+        "statement",
+        "status",
+        "evidence_ids"
+      ],
+      "properties": {
+        "claim_id": {
+          "type": "string",
+          "pattern": "^APA-CLAIM-[A-Z0-9-]+$"
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "SOURCE_VERIFIED",
+            "REPORTED",
+            "NOT_VERIFIED",
+            "TEST_REQUIRED",
+            "OFFLINE_PASS",
+            "BUILD_PASS",
+            "LIVE_PASS",
+            "CONFLICT"
+          ]
+        },
+        "evidence_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id",
+        "uri",
+        "kind",
+        "verification"
+      ],
+      "properties": {
+        "evidence_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "uri": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "kind": {
+          "enum": [
+            "OFFICIAL_DOC",
+            "SOURCE_CODE",
+            "GITHUB_PR",
+            "GITHUB_COMMIT",
+            "LOCAL_LOG",
+            "TEST_RESULT",
+            "USER_SUPPLIED",
+            "OTHER"
+          ]
+        },
+        "verification": {
+          "enum": [
+            "READBACK_VERIFIED",
+            "SOURCE_READ",
+            "REPORTED",
+            "NOT_VERIFIED"
+          ]
+        },
+        "sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "source_revision": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

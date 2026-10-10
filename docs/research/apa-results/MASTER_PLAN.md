@@ -1,0 +1,102 @@
+# APA / Archicad 29 — единый план исследований и внедрения
+
+**Единый источник новых задач и актуальных статусов:** [PROJECT_PLAN.json](control/PROJECT_PLAN.json); [CONTROL_BOARD](control/generated/CONTROL_BOARD.md) и [HANDOFF](control/generated/HANDOFF.md) формируются автоматически. Этот Markdown — историческая карта целей, не диспетчер. **Дата начала системы:** 2026-10-10. **Статус плана:** ACTIVE, но автономное исполнение 24/7 не запущено.
+
+## Как читать и исполнять план
+
+Обязательная иерархия: **ПЛАН (P) → ДЕЙСТВИЕ (A) → ПОДШАГ (S)**. Каждый шаг имеет неизменный ID вида APA-P10.A02.S03. Любой отчёт, issue, тест, гипотеза и коммит обязан ссылаться на такой ID. Один исследовательский запуск исполняет ровно один подшаг; при появлении нового направления сначала добавляется подшаг в этот план, а не новая ветка.
+
+Статусы: **DONE_PUBLISHED** (коммит + readback + индекс), **IN_PROGRESS**, **QUEUED**, **BLOCKED_EXTERNAL**, **NOT_VERIFIED**, **SUPERSEDED**. Сводное состояние и главный текущий шаг — в [CURRENT_STATUS.md](CURRENT_STATUS.md). Не подменять факт публикации фактом исследования.
+
+## APA-P00 — Восстановление и централизация накопленных материалов
+
+### APA-P00.A01 — Инвентаризация фактически опубликованного
+- [x] **APA-P00.A01.S01** Найти существующий research hub и прочитать его 5 файлов. **DONE_PUBLISHED** — см. [ARTIFACT_REGISTER](ARTIFACT_REGISTER.md).
+- [x] **APA-P00.A01.S02** Найти документы старых аудитов и индекс от 28 сентября. **DONE_PUBLISHED** — указатели в реестре; содержимое не переверифицировано.
+- [ ] **APA-P00.A01.S03** Полностью инвентаризировать все ветки/коммиты/документы, обнаружить дубли и осиротевшие результаты. **IN_PROGRESS / PARTIAL:** [все 72 branch/head SHA и 22 PR mapping](inventories/FULL_BRANCH_INVENTORY.md) опубликованы и прочитаны обратно; ancestry, unique artifacts, superseded_by, локальные SHA остаются NOT_VERIFIED.
+- [ ] **APA-P00.A01.S04** Отдельно сопоставить старые локальные и GitHub SHA, проверить непушенные артефакты, когда будет доступ к их источнику. **BLOCKED_EXTERNAL** — удалённый GitHub не доказывает существование локальных файлов.
+
+### APA-P00.A02 — Единый навигационный центр
+- [x] **APA-P00.A02.S01** Зафиксировать единственную каноническую ветку и запретить новые research-ветки без отдельного основания. **DONE_PUBLISHED**.
+- [x] **APA-P00.A02.S02** Создать master plan, карту веток, реестр артефактов, статус, шаблон отчёта, правила handoff и дизайн автоматики. **DONE_PUBLISHED** после readback всех файлов.
+- [ ] **APA-P00.A02.S03** Дедуплицировать старые результаты по ID и доказательствам, добавить ссылки, не переписывая оригиналы. **QUEUED**.
+- [ ] **APA-P00.A02.S04** Установить регулярный контроль, что каждый завершённый отчёт имеет GitHub commit и readback. **QUEUED**.
+
+### APA-P00.A03 — Режим работы и публикации
+- [ ] **APA-P00.A03.S01** Проверить доступность GitHub write/read для каждого типа исполнителя (обычный чат, Deep Research, расписание). **IN_PROGRESS**: обычный чат подтверждён, Deep Research и планировщик — нет.
+- [ ] **APA-P00.A03.S02** Утвердить безопасный способ периодического запуска без платных API и изменений main. **BLOCKED_EXTERNAL** — непрерывный агент пока не развёрнут.
+- [ ] **APA-P00.A03.S03** Реализовать очередь, дедупликацию, heartbeat, retry и сигнал о непубликации. **PUBLISHER_DEPLOYED / PARTIAL:** [push-triggered workflow](../../../.github/workflows/apa-research-publisher.yml), [publisher](../../../tools/apa_publisher/publisher.py), [RUN_EVENT_V2](protocol/RUN_EVENT_V2.schema.json), [PUBLISH_REQUEST_V1](protocol/PUBLISH_REQUEST_V1.schema.json), [generated index](generated/INDEX.md), [synthetic E2E success 38045964668](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38045964668), [receipt](receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json). Idempotent rerun success 38046020069; **heartbeat/scheduler/retry across outages, migration legacy indices NOT_DONE**.
+- [ ] **APA-P00.A03.S04** Пройти тест: два последовательных независимых исследовательских цикла с публикацией и проверкой readback. **PARTIAL:** один полный SYNTHETIC E2E цикл success [38045964668](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38045964668); повторная идемпотентная проверка success [38046020069](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38046020069). Два отдельных SOURCE research runs ещё NOT_VERIFIED.
+
+### Решение по APA Research OS (2026-10-10)
+
+[Предоставленный аудит](runs/2026-10-10/apa-research-os-audit-user-supplied-20261010.md) сохранён. Принят **Split-Plane Research / Publish / Control**: immutable runs и отдельные receipts, индексы как будущие восстанавливаемые проекции; **не объявлять их generated до готовности и тестов index builder**. Основной исполнитель — обычный ChatGPT с GitHub; Deep Research без отдельного разрешения не запускать. Ни main, ни runtime не менялись.
+
+## APA-P10 — Независимый технический аудит AC29
+
+### APA-P10.A01 — SDK и нативная модель
+- [ ] **APA-P10.A01.S01** Проверить официальные AC29 SDK headers/документацию, версии и сигнатуры native create/change/get; источник и точный фрагмент обязательны.
+- [ ] **APA-P10.A01.S02** Проверить этажи, building materials, surfaces, composites, profiles и связи host/dependent.
+- [ ] **APA-P10.A01.S03** Проверить Morph, Roof, Shell, Openings, SEO, 3D Model Dump, coverage и side effects.
+
+### APA-P10.A02 — Инструменты и интеграции
+- [ ] **APA-P10.A02.S01** Сверить Archicad Python/JSON API и Tapir 1.5.8/1.5.9/1.6.0 с локально заявленной 1.5.10; отсутствие исходников пометить NOT_VERIFIED.
+- [ ] **APA-P10.A02.S02** Проверить GDL/Library Parts/ТЕХНОНИКОЛЬ, идентичность, Unicode, 92 ошибки и воспроизводимость.
+- [ ] **APA-P10.A02.S03** Проверить MCP, IFC/openBIM, сторонние библиотеки и альтернативы без дублирования уже готовых возможностей.
+- [ ] **APA-P10.A02.S04** Проверить native MEP API и Tapir MEP: чтение, создание, трассы, порты, соединения, версии.
+
+### APA-P10.A03 — Конкурирующие архитектуры
+- [ ] **APA-P10.A03.S01** Сравнить native C++ Add-On, Tapir/Python orchestration, IFC staging и гибридную схему.
+- [ ] **APA-P10.A03.S02** Для каждой указать ограничения, обратимость, производительность, контроль качества, тестируемость и стоимость внедрения (не выдумывать измерения).
+
+## APA-P20 — Воспроизводимые проверки (без записи в PLN по умолчанию)
+
+### APA-P20.A01 — Read-only preflight
+- [ ] **APA-P20.A01.S01** Установить provenance версии AC29, SDK, установленного APX и исходного commit.
+- [ ] **APA-P20.A01.S02** Подтвердить доступные команды, этажи, каталоги, GDL, MEP и model dump на отдельном тестовом контексте.
+- [ ] **APA-P20.A01.S03** Сохранить PASS/FAIL с raw evidence без чувствительных данных.
+
+### APA-P20.A02 — Разрешённые изолированные live-тесты
+- [ ] **APA-P20.A02.S01** Подготовить список тестов, критерии приёмки и rollback.
+- [ ] **APA-P20.A02.S02** Получить отдельное разрешение перед любым созданием/изменением BIM-модели или Add-On.
+- [ ] **APA-P20.A02.S03** Протоколировать результаты; не повышать OFFLINE_PASS до LIVE_PASS.
+
+## APA-P30 — Архитектура и минимальный MVP
+
+### APA-P30.A01 — Решение
+- [ ] **APA-P30.A01.S01** Составить decision matrix и выявить shortest credible path к нативной BIM-геометрии.
+- [ ] **APA-P30.A01.S02** Зафиксировать блокировки и альтернативные маршруты.
+
+### APA-P30.A02 — План внедрения
+- [ ] **APA-P30.A02.S01** Описать этапы MVP: этажи → атрибуты → стены/перекрытия/крыша → зависимые элементы → библиотека → MEP.
+- [ ] **APA-P30.A02.S02** Для каждого этапа определить readback, критерии PASS/FAIL, откат, запрет на автоматический merge.
+
+## APA-P40 — Автоматизация 24/7 (отдельный gate)
+
+### APA-P40.A01 — Операционный контур
+- [ ] **APA-P40.A01.S01** Выбрать постоянно доступный исполнитель, расписание, GitHub auth и бюджетный режим. **BLOCKED_EXTERNAL**.
+- [ ] **APA-P40.A01.S02** Включить периодический цикл исследование → проверка → commit → readback → индекс. **NOT_RUNNING**.
+- [ ] **APA-P40.A01.S03** Включить watchdog пропущенных циклов и журнал ошибок. **NOT_RUNNING**.
+- [ ] **APA-P40.A01.S04** Доказать 24-часовую работу по реальным коммитам и heartbeat, а не по обещаниям. **NOT_VERIFIED**.
+
+## APA-P50 — объединение исследований, тем и инструментов
+
+- **APA-P50.A01.S01–S03:** traceability результатов, дедупликация evidence, синтез исследований одной темы.
+- **APA-P50.A02.S01–S03:** каталог SDK/Tapir/Python/GDL/IFC/MEP, пересечения инструментов, безопасный roadmap объединения.
+- **APA-P50.A03.S01–S02:** синтез research → MVP, проверка готовности интеграции.
+
+## APA-P60 — единый управляющий проектом
+
+- **APA-P60.A01.S01–S04:** машиночитаемый DAG, validator, generated queue/task cards/темы/handoff, GitHub Actions readback.
+- **APA-P60.A02.S01–S03:** единый межчатовый handoff, claim-gated publisher, отдельный concurrency/CAS gate.
+
+Актуальные статусы P50/P60 — [PROJECT_PLAN.json](control/PROJECT_PLAN.json), [THEMES](control/generated/THEMES.md) и [CONTROL_BOARD](control/generated/CONTROL_BOARD.md), а не этот статический перечень.
+
+## Правила изменения плана
+
+1. Сначала открыть [CURRENT_STATUS](CURRENT_STATUS.md), затем выбрать конкретный S-ID.
+2. Изменять только исследовательские Markdown в канонической ветке. Не создавать новую ветку под очередной отчёт.
+3. Каждый вывод маркировать SOURCE_VERIFIED / REPORTED / NOT_VERIFIED / OFFLINE_PASS / BUILD_PASS / LIVE_PASS с версией, средой и точным доказательством.
+4. Сначала commit + readback отчёта, затем обновить [ARTIFACT_REGISTER](ARTIFACT_REGISTER.md) и [CURRENT_STATUS](CURRENT_STATUS.md).
+5. Если GitHub недоступен — статус GITHUB_PUBLISH_BLOCKED, полный текст готового файла в ответе; не утверждать, что он опубликован.
+6. Ни одна исследовательская публикация не означает разрешения менять main, PLN, APX или проверенные ветки.

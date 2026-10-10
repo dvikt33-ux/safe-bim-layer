@@ -1,0 +1,233 @@
+{
+  "active": [],
+  "artifact_count": 36,
+  "counts": {
+    "BLOCKED": 8,
+    "CLAIMED": 0,
+    "DISPATCHABLE_NOW": 16,
+    "DONE_PUBLISHED": 10,
+    "EXPIRED_LEASES": 0,
+    "HELD_BY_DEPENDENCIES": 17,
+    "IN_PROGRESS": 0,
+    "PARTIAL": 13,
+    "READY": 20,
+    "SUPERSEDED": 0
+  },
+  "dispatchable": {
+    "BUILD": [
+      "APA-P00.A03.S03"
+    ],
+    "CONSOLIDATION": [
+      "APA-P00.A01.S03",
+      "APA-P00.A02.S03",
+      "APA-P50.A01.S01"
+    ],
+    "CONTROL": [],
+    "INTEGRATION": [],
+    "RESEARCH": [
+      "APA-P10.A01.S01",
+      "APA-P10.A01.S02",
+      "APA-P10.A01.S03",
+      "APA-P10.A02.S01",
+      "APA-P10.A02.S02",
+      "APA-P10.A02.S04",
+      "APA-P50.A02.S01",
+      "APA-P10.A02.S03"
+    ],
+    "VALIDATION": [
+      "APA-P00.A03.S01",
+      "APA-P00.A02.S04",
+      "APA-P60.A02.S03",
+      "APA-P60.A02.S04"
+    ]
+  },
+  "expired_leases": [],
+  "held": [
+    "APA-P00.A03.S04",
+    "APA-P10.A03.S01",
+    "APA-P10.A03.S02",
+    "APA-P20.A01.S01",
+    "APA-P20.A01.S02",
+    "APA-P20.A01.S03",
+    "APA-P20.A02.S01",
+    "APA-P30.A01.S01",
+    "APA-P30.A01.S02",
+    "APA-P30.A02.S01",
+    "APA-P30.A02.S02",
+    "APA-P50.A01.S02",
+    "APA-P50.A01.S03",
+    "APA-P50.A02.S02",
+    "APA-P50.A02.S03",
+    "APA-P50.A03.S01",
+    "APA-P50.A03.S02"
+  ],
+  "known_published_v2_runs": 5,
+  "legacy_reports": "NOT_FULLY_INDEXED",
+  "orphan_v2_manifests": [],
+  "plan_revision": 27,
+  "publisher": "DEPLOYED_SYNTHETIC_E2E_PASS",
+  "research_runner_24h": "NOT_RUNNING",
+  "scheduler": {
+    "activation_gate": "Schedules configured and task IDs independently read via automation listing on 2026-10-10. REAL scheduled GitHub status claim -> report/receipt -> completion NOT VERIFIED. Do not mark RUNNING_VERIFIED until observed.",
+    "chatgpt_task_id": "6ac9752aae8081919d9feeada08ad91e",
+    "chatgpt_task_ids": {
+      "audit": "6ac7664c66f88191a51d8c0a414b0eac",
+      "discovery": "6ac83b171cf08191b74e06caaa8ae1c7",
+      "technical": "6ac9752aae8081919d9feeada08ad91e"
+    },
+    "last_triggered_at": null,
+    "last_verified_run_id": null,
+    "mode": "Three enabled hourly ChatGPT scheduled tasks; each must choose an eligible task from this plan and CAS-record IN_PROGRESS before research, then DONE_PUBLISHED/PARTIAL/BLOCKED with evidence and release lease.",
+    "provider": "ChatGPT Scheduled Tasks",
+    "schedule": "Hourly staggered: audit at :00, discovery at :20, technical at :40",
+    "state": "CONFIGURED_UNVERIFIED",
+    "timezone": "Europe/Moscow"
+  },
+  "schema": "APA_PROJECT_CONTROLLER_STATE_V1",
+  "source_plan": "docs/research/apa-results/control/PROJECT_PLAN.json",
+  "task_count": 51,
+  "topic_count": 15,
+  "topics": {
+    "ARCHITECTURE": {
+      "done": 0,
+      "ready": 0,
+      "task_ids": [
+        "APA-P10.A03.S01",
+        "APA-P10.A03.S02",
+        "APA-P30.A01.S01",
+        "APA-P30.A01.S02"
+      ]
+    },
+    "AUTOMATION": {
+      "done": 0,
+      "ready": 0,
+      "task_ids": [
+        "APA-P40.A01.S01",
+        "APA-P40.A01.S02",
+        "APA-P40.A01.S03",
+        "APA-P40.A01.S04"
+      ]
+    },
+    "CONTROLLER": {
+      "done": 6,
+      "ready": 2,
+      "task_ids": [
+        "APA-P60.A01.S01",
+        "APA-P60.A01.S02",
+        "APA-P60.A01.S03",
+        "APA-P60.A01.S04",
+        "APA-P60.A02.S01",
+        "APA-P60.A02.S02",
+        "APA-P60.A02.S03",
+        "APA-P60.A02.S04"
+      ]
+    },
+    "GDL_TN": {
+      "done": 0,
+      "ready": 1,
+      "task_ids": [
+        "APA-P10.A02.S02"
+      ]
+    },
+    "HUB_GOVERNANCE": {
+      "done": 4,
+      "ready": 3,
+      "task_ids": [
+        "APA-P00.A01.S01",
+        "APA-P00.A01.S02",
+        "APA-P00.A01.S03",
+        "APA-P00.A01.S04",
+        "APA-P00.A02.S01",
+        "APA-P00.A02.S02",
+        "APA-P00.A02.S03",
+        "APA-P00.A02.S04"
+      ]
+    },
+    "IFC_MCP": {
+      "done": 0,
+      "ready": 1,
+      "task_ids": [
+        "APA-P10.A02.S03"
+      ]
+    },
+    "KNOWLEDGE_GRAPH": {
+      "done": 0,
+      "ready": 1,
+      "task_ids": [
+        "APA-P50.A01.S01",
+        "APA-P50.A01.S02",
+        "APA-P50.A01.S03"
+      ]
+    },
+    "MEP": {
+      "done": 0,
+      "ready": 1,
+      "task_ids": [
+        "APA-P10.A02.S04"
+      ]
+    },
+    "MVP": {
+      "done": 0,
+      "ready": 0,
+      "task_ids": [
+        "APA-P30.A02.S01",
+        "APA-P30.A02.S02"
+      ]
+    },
+    "PUBLISHER": {
+      "done": 0,
+      "ready": 2,
+      "task_ids": [
+        "APA-P00.A03.S01",
+        "APA-P00.A03.S02",
+        "APA-P00.A03.S03",
+        "APA-P00.A03.S04"
+      ]
+    },
+    "SDK_NATIVE": {
+      "done": 0,
+      "ready": 3,
+      "task_ids": [
+        "APA-P10.A01.S01",
+        "APA-P10.A01.S02",
+        "APA-P10.A01.S03"
+      ]
+    },
+    "SYNTHESIS": {
+      "done": 0,
+      "ready": 0,
+      "task_ids": [
+        "APA-P50.A03.S01",
+        "APA-P50.A03.S02"
+      ]
+    },
+    "TAPIR_PYTHON": {
+      "done": 0,
+      "ready": 1,
+      "task_ids": [
+        "APA-P10.A02.S01"
+      ]
+    },
+    "TESTS": {
+      "done": 0,
+      "ready": 0,
+      "task_ids": [
+        "APA-P20.A01.S01",
+        "APA-P20.A01.S02",
+        "APA-P20.A01.S03",
+        "APA-P20.A02.S01",
+        "APA-P20.A02.S02",
+        "APA-P20.A02.S03"
+      ]
+    },
+    "TOOL_INTEGRATION": {
+      "done": 0,
+      "ready": 1,
+      "task_ids": [
+        "APA-P50.A02.S01",
+        "APA-P50.A02.S02",
+        "APA-P50.A02.S03"
+      ]
+    }
+  }
+}

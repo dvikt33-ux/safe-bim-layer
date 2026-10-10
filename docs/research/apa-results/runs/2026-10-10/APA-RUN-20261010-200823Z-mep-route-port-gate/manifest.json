@@ -1,0 +1,120 @@
+{
+  "action_id": "APA-P10.A02",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-MEP-GROUP-VS-PORT",
+      "evidence_ids": [
+        "APA-EVID-MEP-TAPIR159-CPP",
+        "APA-EVID-MEP-AC29-GRAPH",
+        "APA-EVID-MEP-AC29-PORT"
+      ],
+      "statement": "Tapir 1.5.9 exposes native distribution system membership but not per-port network edges from distribution graph; physical link must be checked at port level.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-MEP-PORT-SILENT-SKIP",
+      "evidence_ids": [
+        "APA-EVID-MEP-TAPIR159-CPP"
+      ],
+      "statement": "Tapir 1.5.9 GetMEPPorts skips Port::Get errors and does not include parent elementId in successful per-element ports object.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-MEP-LOGICAL-GUID-DELTA",
+      "evidence_ids": [
+        "APA-EVID-MEP-TAPIR159-CPP",
+        "APA-EVID-MEP-AC29-ROUTE"
+      ],
+      "statement": "Tapir ConnectMEPElements invokes ConnectLogically and conditionally outputs deletedRoutingElementId, splitRoutingElementId and createdBranchId; writer readback must reconcile identity changes.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "APA-EVID-MEP-TAPIR159-CPP",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "1.5.9",
+      "uri": "https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.5.9/archicad-addon/Sources/MEPCommands.cpp#L429-L485",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "APA-EVID-MEP-TAPIR159-REG",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "1.5.9",
+      "uri": "https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.5.9/archicad-addon/Sources/AddOnMain.cpp#L1192-L1226",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "APA-EVID-MEP-AC29-GRAPH",
+      "kind": "OFFICIAL_DOC",
+      "sha256": null,
+      "source_revision": "29.3100",
+      "uri": "https://github.com/GRAPHISOFT/archicad-api-devkit/blob/29.3100/docs/class_a_c_a_p_i_1_1_m_e_p_1_1_distribution_systems_graph.html",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "APA-EVID-MEP-AC29-PORT",
+      "kind": "OFFICIAL_DOC",
+      "sha256": null,
+      "source_revision": "29.3100",
+      "uri": "https://github.com/GRAPHISOFT/archicad-api-devkit/blob/29.3100/docs/class_a_c_a_p_i_1_1_m_e_p_1_1_port.html",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "APA-EVID-MEP-AC29-ROUTE",
+      "kind": "OFFICIAL_DOC",
+      "sha256": null,
+      "source_revision": "29.3100",
+      "uri": "https://github.com/GRAPHISOFT/archicad-api-devkit/blob/29.3100/docs/class_a_c_a_p_i_1_1_m_e_p_1_1_routing_element.html",
+      "verification": "SOURCE_READ"
+    }
+  ],
+  "executor": "chatgpt:apa-discovery",
+  "executor_run_id": "APA-RUN-20261010-200823Z-mep-route-port-gate",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-10T20:10:45Z",
+  "idempotency_key": "sha256:2a488f5eafe6881bedaae103c9c97340e9ce30ca8f310d8fbf2186370e1836ab",
+  "inputs": [
+    "ART-REGISTER"
+  ],
+  "next_substep": "APA-P10.A02.S02",
+  "phase": "SOURCE",
+  "plan_id": "APA-P10",
+  "run_id": "APA-RUN-20261010-200823Z-mep-route-port-gate",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "Archicad 29 (target, no live access)",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "sdk": "Graphisoft DevKit 29.3100",
+    "source_branch": "research/apa-verified-results-hub-20261010",
+    "tapir": "Open-source tag 1.5.9 (installed 1.5.10 provenance NOT_VERIFIED)"
+  },
+  "source_revisions": [
+    {
+      "revision": "tag 1.5.9 / Git blob",
+      "source_sha": "041b711fae03160eb0fda8b06a82da981f9fe0e3",
+      "uri": "https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.5.9/archicad-addon/Sources/MEPCommands.cpp"
+    },
+    {
+      "revision": "tag 29.3100 / Git blob",
+      "source_sha": "91c4efd3193f4ac0b9ceac4a2a07a87b49bd0795",
+      "uri": "https://github.com/GRAPHISOFT/archicad-api-devkit/blob/29.3100/docs/class_a_c_a_p_i_1_1_m_e_p_1_1_distribution_systems_graph.html"
+    }
+  ],
+  "started_at": "2026-10-10T20:08:23Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P10.A02.S04"
+}

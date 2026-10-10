@@ -1,0 +1,75 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-MEP-GROUP-VS-PORT",
+      "evidence_ids": [
+        "APA-EVID-MEP-TAPIR159-CPP",
+        "APA-EVID-MEP-AC29-GRAPH",
+        "APA-EVID-MEP-AC29-PORT"
+      ],
+      "statement": "Tapir 1.5.9 exposes native distribution system membership but not per-port network edges from distribution graph; physical link must be checked at port level.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-MEP-PORT-SILENT-SKIP",
+      "evidence_ids": [
+        "APA-EVID-MEP-TAPIR159-CPP"
+      ],
+      "statement": "Tapir 1.5.9 GetMEPPorts skips Port::Get errors and does not include parent elementId in successful per-element ports object.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-MEP-LOGICAL-GUID-DELTA",
+      "evidence_ids": [
+        "APA-EVID-MEP-TAPIR159-CPP",
+        "APA-EVID-MEP-AC29-ROUTE"
+      ],
+      "statement": "Tapir ConnectMEPElements invokes ConnectLogically and conditionally outputs deletedRoutingElementId, splitRoutingElementId and createdBranchId; writer readback must reconcile identity changes.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "APA-EVID-MEP-TAPIR159-CPP",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "1.5.9",
+      "uri": "https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.5.9/archicad-addon/Sources/MEPCommands.cpp#L429-L485",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "APA-EVID-MEP-TAPIR159-REG",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "1.5.9",
+      "uri": "https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.5.9/archicad-addon/Sources/AddOnMain.cpp#L1192-L1226",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "APA-EVID-MEP-AC29-GRAPH",
+      "kind": "OFFICIAL_DOC",
+      "sha256": null,
+      "source_revision": "29.3100",
+      "uri": "https://github.com/GRAPHISOFT/archicad-api-devkit/blob/29.3100/docs/class_a_c_a_p_i_1_1_m_e_p_1_1_distribution_systems_graph.html",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "APA-EVID-MEP-AC29-PORT",
+      "kind": "OFFICIAL_DOC",
+      "sha256": null,
+      "source_revision": "29.3100",
+      "uri": "https://github.com/GRAPHISOFT/archicad-api-devkit/blob/29.3100/docs/class_a_c_a_p_i_1_1_m_e_p_1_1_port.html",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "APA-EVID-MEP-AC29-ROUTE",
+      "kind": "OFFICIAL_DOC",
+      "sha256": null,
+      "source_revision": "29.3100",
+      "uri": "https://github.com/GRAPHISOFT/archicad-api-devkit/blob/29.3100/docs/class_a_c_a_p_i_1_1_m_e_p_1_1_routing_element.html",
+      "verification": "SOURCE_READ"
+    }
+  ],
+  "run_id": "APA-RUN-20261010-200823Z-mep-route-port-gate",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

@@ -1,0 +1,1047 @@
+{
+  "schema": "APA_BRANCH_HEADS_SNAPSHOT_V1",
+  "captured_at": "2026-10-10T10:30:11.098Z",
+  "repository": "dvikt33-ux/safe-bim-layer",
+  "source": "GitHub REST branches and open/closed pulls page=1 per_page=100",
+  "branch_count": 72,
+  "pr_count": 22,
+  "counts_by_prefix": {
+    "no-prefix": 3,
+    "arena/*": 8,
+    "audit/*": 4,
+    "chatgpt/*": 19,
+    "docs/*": 1,
+    "feature/*": 7,
+    "prototype/*": 3,
+    "research/*": 11,
+    "work/*": 16
+  },
+  "coverage": {
+    "branch_page_2": "NOT_CHECKED; page1 has 72 <100",
+    "pr_page_2": "NOT_CHECKED; page1 open 20, closed 2 <100",
+    "ancestry": "NOT_VERIFIED",
+    "unique_artifacts": "NOT_INVENTORIED",
+    "last_commit_timestamps": "NOT_VERIFIED",
+    "merged_pr_base": "FROM_GITHUB_PR"
+  },
+  "entries": [
+    {
+      "branch": "archicad-capability-registry",
+      "head_sha": "bdd38ef457ac1c56990f026aefecf14f623de4f8",
+      "protected_flag_reported": false,
+      "category_provisional": "UNCLASSIFIED_PENDING_REVIEW",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "arena/fix-house-offline-audit-f7d38af",
+      "head_sha": "c6ab4749e8784cc65170167d166daa6cc219a931",
+      "protected_flag_reported": false,
+      "category_provisional": "UNCLASSIFIED_PENDING_REVIEW",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "arena/fix-wall-readback-z-14bc0d2",
+      "head_sha": "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+      "protected_flag_reported": false,
+      "category_provisional": "UNCLASSIFIED_PENDING_REVIEW",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "arena/house-primitives-offline-ebbe779",
+      "head_sha": "f7d38af825de57fc57660eeddf1186cc5b21ac71",
+      "protected_flag_reported": false,
+      "category_provisional": "UNCLASSIFIED_PENDING_REVIEW",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "arena/plinth-grade-runtime-audit-20260927",
+      "head_sha": "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+      "protected_flag_reported": false,
+      "category_provisional": "UNCLASSIFIED_PENDING_REVIEW",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "arena/runtime-hardening-v1",
+      "head_sha": "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+      "protected_flag_reported": false,
+      "category_provisional": "UNCLASSIFIED_PENDING_REVIEW",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "arena/runtime-safety-fix-ac01",
+      "head_sha": "14bc0d2a37a751029381e506809025eb434aa721",
+      "protected_flag_reported": false,
+      "category_provisional": "UNCLASSIFIED_PENDING_REVIEW",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "arena/t0-probes",
+      "head_sha": "c55f404829e4e11004ea5c59c8b3aec18b663866",
+      "protected_flag_reported": false,
+      "category_provisional": "UNCLASSIFIED_PENDING_REVIEW",
+      "pull_requests": [
+        {
+          "number": 1,
+          "state": "open",
+          "merged": false,
+          "base": "main"
+        }
+      ],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "arena/tapir159-compat-geometry-c6ab474",
+      "head_sha": "c6ab4749e8784cc65170167d166daa6cc219a931",
+      "protected_flag_reported": false,
+      "category_provisional": "UNCLASSIFIED_PENDING_REVIEW",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "audit/arena-full-system-audit-20260928",
+      "head_sha": "181ca75229d9fd949797dbfa607c5245b121aaec",
+      "protected_flag_reported": false,
+      "category_provisional": "UNCLASSIFIED_PENDING_REVIEW",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "audit/arena-reconciliation-gpt-counter-audit-20260928",
+      "head_sha": "53d6b638b4e638c669ce169196088c3b3a5cdc30",
+      "protected_flag_reported": false,
+      "category_provisional": "UNCLASSIFIED_PENDING_REVIEW",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "audit/gpt-counter-audit-arena-20260928",
+      "head_sha": "59239ceac83529c1fb6ad5d97fdf3d74edacc848",
+      "protected_flag_reported": false,
+      "category_provisional": "UNCLASSIFIED_PENDING_REVIEW",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "audit/live-r0-r4-20260928",
+      "head_sha": "b7fa4d304263f6dccc9edc11f607c26942ba695c",
+      "protected_flag_reported": false,
+      "category_provisional": "UNCLASSIFIED_PENDING_REVIEW",
+      "pull_requests": [
+        {
+          "number": 2,
+          "state": "open",
+          "merged": false,
+          "base": "main"
+        }
+      ],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "chatgpt/accelerator-floor-offline-20261009",
+      "head_sha": "751fdfbc1be929f3da601e1094f74fed2f02b322",
+      "protected_flag_reported": false,
+      "category_provisional": "CHATGPT_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "chatgpt/archicad-modeling-standard-v1",
+      "head_sha": "81344925f06523bb60ee300f48af458ab0288938",
+      "protected_flag_reported": false,
+      "category_provisional": "CHATGPT_ARCHIVE_CANDIDATE",
+      "pull_requests": [
+        {
+          "number": 5,
+          "state": "open",
+          "merged": false,
+          "base": "main"
+        }
+      ],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "chatgpt/closed-loop-orchestrator-v1",
+      "head_sha": "f8b82ed3008c4669faf1424958b30f43aa4b5d92",
+      "protected_flag_reported": false,
+      "category_provisional": "CHATGPT_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "chatgpt/construction-detail-library-v2.2-20261006",
+      "head_sha": "2ec5c001544a0eede73daa99c618ba53448f226c",
+      "protected_flag_reported": false,
+      "category_provisional": "CHATGPT_ARCHIVE_CANDIDATE",
+      "pull_requests": [
+        {
+          "number": 9,
+          "state": "closed",
+          "merged": false,
+          "base": "main"
+        }
+      ],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "chatgpt/detail-machine-db-v2.2-20261006",
+      "head_sha": "ebe46536c85111248234235c8e7ac8cbd2bffac5",
+      "protected_flag_reported": false,
+      "category_provisional": "CHATGPT_ARCHIVE_CANDIDATE",
+      "pull_requests": [
+        {
+          "number": 8,
+          "state": "closed",
+          "merged": true,
+          "base": "main"
+        }
+      ],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "chatgpt/detail-machine-db-v2.3-20261006",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "protected_flag_reported": false,
+      "category_provisional": "CHATGPT_ARCHIVE_CANDIDATE",
+      "pull_requests": [
+        {
+          "number": 10,
+          "state": "open",
+          "merged": false,
+          "base": "main"
+        }
+      ],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "chatgpt/detail-machine-v2.2",
+      "head_sha": "4559bf13a2b17dd525cf91ed00521cabbdaf5a0c",
+      "protected_flag_reported": false,
+      "category_provisional": "CHATGPT_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "chatgpt/detail-machine-v2.3",
+      "head_sha": "3cbfc4e379b54d4249badd508fb64c21886ac186",
+      "protected_flag_reported": false,
+      "category_provisional": "CHATGPT_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "chatgpt/kaiman-exact-v2.4",
+      "head_sha": "a5eb3eee68817925ecfebb0fb22ab6b8fbe59f03",
+      "protected_flag_reported": false,
+      "category_provisional": "CHATGPT_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "chatgpt/kaiman-exact-v2.5",
+      "head_sha": "0e7a312d7a7c491d877b6746b275acd0364c97ab",
+      "protected_flag_reported": false,
+      "category_provisional": "CHATGPT_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "chatgpt/mailbox-graph-host-integration-20261009",
+      "head_sha": "d3c0dd51ba12eb6112822376b3aa05d3077b7afc",
+      "protected_flag_reported": false,
+      "category_provisional": "CHATGPT_ARCHIVE_CANDIDATE",
+      "pull_requests": [
+        {
+          "number": 13,
+          "state": "open",
+          "merged": false,
+          "base": "chatgpt/schema-driven-batch-20261008"
+        }
+      ],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "chatgpt/mailbox-wall-local-transfer-20261009",
+      "head_sha": "c0223e18370e5e3d5205ca401a68d7603b4be120",
+      "protected_flag_reported": false,
+      "category_provisional": "CHATGPT_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "chatgpt/minimal-archicad-inventory",
+      "head_sha": "7bd2f7076933e31cdf6d24855ca703c0c6e67545",
+      "protected_flag_reported": false,
+      "category_provisional": "CHATGPT_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "chatgpt/project-intake-stage0-v1",
+      "head_sha": "99326ff531dfa9cb19c906ee349304fdca92fc52",
+      "protected_flag_reported": false,
+      "category_provisional": "CHATGPT_ARCHIVE_CANDIDATE",
+      "pull_requests": [
+        {
+          "number": 6,
+          "state": "open",
+          "merged": false,
+          "base": "chatgpt/archicad-modeling-standard-v1"
+        }
+      ],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "chatgpt/project-revision-consolidation-20261006",
+      "head_sha": "743b791504eb92805a18edf78d20b958a6220710",
+      "protected_flag_reported": false,
+      "category_provisional": "CHATGPT_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "chatgpt/schema-driven-batch-20261008",
+      "head_sha": "1167e6bb1bc025e10855c12be14811e44d7ad42a",
+      "protected_flag_reported": false,
+      "category_provisional": "CHATGPT_ARCHIVE_CANDIDATE",
+      "pull_requests": [
+        {
+          "number": 12,
+          "state": "open",
+          "merged": false,
+          "base": "feature/working-archicad-mvp"
+        }
+      ],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "chatgpt/tapir-1510-offline-preflight-20261009",
+      "head_sha": "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1",
+      "protected_flag_reported": false,
+      "category_provisional": "CHATGPT_ARCHIVE_CANDIDATE",
+      "pull_requests": [
+        {
+          "number": 14,
+          "state": "open",
+          "merged": false,
+          "base": "chatgpt/mailbox-graph-host-integration-20261009"
+        }
+      ],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "chatgpt/whole-scene-v1-20261009",
+      "head_sha": "f02a167eb73cb149713cf5e613911b144fce5be2",
+      "protected_flag_reported": false,
+      "category_provisional": "CHATGPT_ARCHIVE_CANDIDATE",
+      "pull_requests": [
+        {
+          "number": 15,
+          "state": "open",
+          "merged": false,
+          "base": "chatgpt/tapir-1510-offline-preflight-20261009"
+        }
+      ],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "chatgpt/working-first-development-rule",
+      "head_sha": "88cf532c70362b3f404aa5bae2c640527fca5616",
+      "protected_flag_reported": false,
+      "category_provisional": "CHATGPT_ARCHIVE_CANDIDATE",
+      "pull_requests": [
+        {
+          "number": 7,
+          "state": "open",
+          "merged": false,
+          "base": "main"
+        }
+      ],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "chatgpt-write-test",
+      "head_sha": "02ed7a8a5a6e199bdfcb7cc7c7836dd7038deacb",
+      "protected_flag_reported": false,
+      "category_provisional": "UNCLASSIFIED_PENDING_REVIEW",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "docs/chat-first-work-minimal",
+      "head_sha": "bf860e1557b9d54318c022191cdc1cef4a84e2d7",
+      "protected_flag_reported": false,
+      "category_provisional": "UNCLASSIFIED_PENDING_REVIEW",
+      "pull_requests": [
+        {
+          "number": 11,
+          "state": "open",
+          "merged": false,
+          "base": "main"
+        }
+      ],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "feature/apa-slack-event-coordinator-20261010",
+      "head_sha": "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+      "protected_flag_reported": false,
+      "category_provisional": "CODE_CANDIDATE",
+      "pull_requests": [
+        {
+          "number": 21,
+          "state": "open",
+          "merged": false,
+          "base": "feature/project-accelerator-integration-pr-20261009"
+        }
+      ],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "feature/chat-bridge-wall-write-mvp",
+      "head_sha": "27906e2a1370146a8d740f02384ab02a584ce918",
+      "protected_flag_reported": false,
+      "category_provisional": "CODE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "feature/gpt-direct-bridge-20261002",
+      "head_sha": "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+      "protected_flag_reported": false,
+      "category_provisional": "CODE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "feature/gpt-mailbox-write-path-20261005",
+      "head_sha": "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+      "protected_flag_reported": false,
+      "category_provisional": "CODE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "feature/project-accelerator-integration-pr-20261009",
+      "head_sha": "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+      "protected_flag_reported": false,
+      "category_provisional": "CODE_CANDIDATE",
+      "pull_requests": [
+        {
+          "number": 16,
+          "state": "open",
+          "merged": false,
+          "base": "chatgpt/whole-scene-v1-20261009"
+        }
+      ],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "feature/somestuff-syncguids-source-20261009",
+      "head_sha": "1b3a43479343d65ce1a63d181c5b83f683530050",
+      "protected_flag_reported": false,
+      "category_provisional": "CODE_CANDIDATE",
+      "pull_requests": [
+        {
+          "number": 17,
+          "state": "open",
+          "merged": false,
+          "base": "main"
+        }
+      ],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "feature/working-archicad-mvp",
+      "head_sha": "38cfe7feaa756717a9cdb8915f7c701e3d9c4d5f",
+      "protected_flag_reported": false,
+      "category_provisional": "CODE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "main",
+      "head_sha": "d5695f435a5841d39f0fe69a6424cccc1c8d0a4c",
+      "protected_flag_reported": false,
+      "category_provisional": "MAIN",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "prototype/s2.4-archicad-context-provider-20260929",
+      "head_sha": "1e87381693ef6467dfacd97374b8a990687881f7",
+      "protected_flag_reported": false,
+      "category_provisional": "UNCLASSIFIED_PENDING_REVIEW",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "prototype/s2.5-runtime-bootstrap-20260929",
+      "head_sha": "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+      "protected_flag_reported": false,
+      "category_provisional": "UNCLASSIFIED_PENDING_REVIEW",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "prototype/s2.6-control-surface-20260929",
+      "head_sha": "7469b775f2552e41846c86512e87c13cdb864b6b",
+      "protected_flag_reported": false,
+      "category_provisional": "UNCLASSIFIED_PENDING_REVIEW",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "research/apa-20261009-api-mep-batching-audit",
+      "head_sha": "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+      "protected_flag_reported": false,
+      "category_provisional": "ARCHIVE_RESEARCH_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "research/apa-20261009-resource-mep-bridges-audit-v1",
+      "head_sha": "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+      "protected_flag_reported": false,
+      "category_provisional": "ARCHIVE_RESEARCH_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "research/apa-archicad29-independent-audit-20261010",
+      "head_sha": "ee3d1a8e7d7d2bd7bd8ee3bc27cdac98c7f8decd",
+      "protected_flag_reported": false,
+      "category_provisional": "ARCHIVE_RESEARCH_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "research/apa-tn-gdl-create-01-blocker1-audit-20261009",
+      "head_sha": "39231a1e63ab91ff05cabe484bf737c176434a44",
+      "protected_flag_reported": false,
+      "category_provisional": "ARCHIVE_RESEARCH_CANDIDATE",
+      "pull_requests": [
+        {
+          "number": 19,
+          "state": "open",
+          "merged": false,
+          "base": "research/apa-tn-gdl-create-01-checkpoint-20261009"
+        }
+      ],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "research/apa-tn-gdl-create-01-checkpoint-20261009",
+      "head_sha": "246f6768de552acac4110b86a2d8b62672ee3eae",
+      "protected_flag_reported": false,
+      "category_provisional": "ARCHIVE_RESEARCH_CANDIDATE",
+      "pull_requests": [
+        {
+          "number": 18,
+          "state": "open",
+          "merged": false,
+          "base": "feature/project-accelerator-integration-pr-20261009"
+        }
+      ],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "research/apa-tn-gdl-create-01-native-probe-20261009",
+      "head_sha": "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+      "protected_flag_reported": false,
+      "category_provisional": "ARCHIVE_RESEARCH_CANDIDATE",
+      "pull_requests": [
+        {
+          "number": 20,
+          "state": "open",
+          "merged": false,
+          "base": "research/apa-tn-gdl-create-01-blocker1-audit-20261009"
+        }
+      ],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "research/apa-verified-results-hub-20261010",
+      "head_sha": "9b076792124d99d67dcc0f01554b4834fc3ed8cb",
+      "protected_flag_reported": false,
+      "category_provisional": "CANONICAL_RESEARCH",
+      "pull_requests": [
+        {
+          "number": 22,
+          "state": "open",
+          "merged": false,
+          "base": "main"
+        }
+      ],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "research/archicad29-tapir159-expansion",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "protected_flag_reported": false,
+      "category_provisional": "ARCHIVE_RESEARCH_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "research/archicad-full-capability-audit-20260928",
+      "head_sha": "4fedb7cb815f9109755a9174bbae709fa18fdab7",
+      "protected_flag_reported": false,
+      "category_provisional": "ARCHIVE_RESEARCH_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "research/architectural-model-quality-v2",
+      "head_sha": "e6962b612938cc399913246bc7e296f59704772e",
+      "protected_flag_reported": false,
+      "category_provisional": "ARCHIVE_RESEARCH_CANDIDATE",
+      "pull_requests": [
+        {
+          "number": 3,
+          "state": "open",
+          "merged": false,
+          "base": "main"
+        }
+      ],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "research/library-system-v3",
+      "head_sha": "7281bab2ec012933cf056d81d26822c017951ad6",
+      "protected_flag_reported": false,
+      "category_provisional": "ARCHIVE_RESEARCH_CANDIDATE",
+      "pull_requests": [
+        {
+          "number": 4,
+          "state": "open",
+          "merged": false,
+          "base": "main"
+        }
+      ],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "work/audit-pack-fix",
+      "head_sha": "03c64733bb2b4f59970f5247a3ed89e1236f3090",
+      "protected_flag_reported": false,
+      "category_provisional": "WORK_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "work/constraint-compilation-v0",
+      "head_sha": "cc838c0fd0e40be7426ea991af54234a35f22544",
+      "protected_flag_reported": false,
+      "category_provisional": "WORK_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "work/design-engine-stage0",
+      "head_sha": "1d4b66ae36d955588dcf2276a3e7b0ccaf6f74ef",
+      "protected_flag_reported": false,
+      "category_provisional": "WORK_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "work/design-functional-program-v0",
+      "head_sha": "e273edbeb5bfd6337856fccf5e8c9834c0273a5a",
+      "protected_flag_reported": false,
+      "category_provisional": "WORK_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "work/design-intent-v0",
+      "head_sha": "3eb33b3c248a19088eb6868ddd997a69fab8d4a7",
+      "protected_flag_reported": false,
+      "category_provisional": "WORK_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "work/evidence-storage-lfs",
+      "head_sha": "06c503a424498a74e19507ae11a4cc48f6dc7c3f",
+      "protected_flag_reported": false,
+      "category_provisional": "WORK_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "work/planning-engine-v0",
+      "head_sha": "8881c46c222a7adaf6372941c185db4ac67598e1",
+      "protected_flag_reported": false,
+      "category_provisional": "WORK_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "work/project-constraint-input-v0",
+      "head_sha": "c75665feb8029116245dd1ec76733e599ebdc24a",
+      "protected_flag_reported": false,
+      "category_provisional": "WORK_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "work/project-normative-bundle-v0",
+      "head_sha": "6901fe69d834f8d571c53d3bbda57f46d2106943",
+      "protected_flag_reported": false,
+      "category_provisional": "WORK_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "work/site-context-model-v0",
+      "head_sha": "8cbbab827ee8a1bdde5e7d44ac3d1b06f5b4cc8b",
+      "protected_flag_reported": false,
+      "category_provisional": "WORK_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "work/stage1-v0-regression",
+      "head_sha": "27fc10267e71d1cd4f8322fe1d3c334e2cef1b4c",
+      "protected_flag_reported": false,
+      "category_provisional": "WORK_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "work/stage2-orchestrator-skeleton",
+      "head_sha": "d6ed3b071c1e7d17b8d819377e1984c80dd9ed33",
+      "protected_flag_reported": false,
+      "category_provisional": "WORK_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "work/stage3-live-wall-closed-loop",
+      "head_sha": "2674e1ebd7656fbdb306bcff294d8d17174be78a",
+      "protected_flag_reported": false,
+      "category_provisional": "WORK_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "work/stage4-live-hardening",
+      "head_sha": "faf2fd8adcfd3329ae77a137b37f739a9a462225",
+      "protected_flag_reported": false,
+      "category_provisional": "WORK_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "work/stage4-performance-pass",
+      "head_sha": "ad0c0ed127c068d2a7446f3bf03a31f7584decad",
+      "protected_flag_reported": false,
+      "category_provisional": "WORK_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    },
+    {
+      "branch": "work/stage5-hosted-window",
+      "head_sha": "06f6e04974bbea23c12cff63f93004048579ff3e",
+      "protected_flag_reported": false,
+      "category_provisional": "WORK_ARCHIVE_CANDIDATE",
+      "pull_requests": [],
+      "base_ancestry": "NOT_VERIFIED",
+      "unique_artifacts": "NOT_INVENTORIED",
+      "evidence_migrated": "NOT_VERIFIED",
+      "recommendation": "KEEP_PENDING_FORENSIC_REVIEW",
+      "deletion_authorized": false
+    }
+  ]
+}
