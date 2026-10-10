@@ -1,5 +1,7 @@
 # APA — обязательный протокол для каждого чата, исследователя и агента
 
+**ПЕРВЫМ ДЕЛОМ:** [controller HANDOFF](control/generated/HANDOFF.md) → [CONTROL_BOARD](control/generated/CONTROL_BOARD.md) → [TASK_CARDS](control/generated/TASK_CARDS.md) → [PROJECT_PLAN](control/PROJECT_PLAN.json). Не начинать незарегистрированный S-ID. Перед новой работой CLAIMED/owner/lease через GitHub blob-SHA CAS; publisher отклоняет новый inbox без claim. Статусы ручных документов не являются управляющими. [Полный протокол](control/README.md).
+
 Это не системная инструкция ChatGPT и не гарантия, что другой чат автоматически её увидит. Это **контракт проекта**, который исполнитель должен прочитать через GitHub в начале каждого прохода.
 
 ## Приоритетный режим исполнения — инструкция владельца от 2026-10-10
