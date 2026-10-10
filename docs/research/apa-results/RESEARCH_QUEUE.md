@@ -7,7 +7,7 @@
 | Q-001 | APA-P00.A03.S01 | P0 | GitHub connector, Deep Research, scheduler | IN_PROGRESS; матрица реальных прав доступа |
 | Q-002 | APA-P00.A01.S03 | P0 | [BRANCH_REGISTRY](BRANCH_REGISTRY.md), старые refs | QUEUED; полная карта refs/commits |
 | Q-003 | APA-P00.A02.S03 | P0 | [ARTIFACT_REGISTER](ARTIFACT_REGISTER.md), 12 findings | QUEUED; дедуплицированная evidence map |
-| Q-004 | APA-P10.A01.S01 | P1 | SDK AC29 29.3100, primary headers/docs | IN_PROGRESS; [SEO/Trim/Morph source audit](runs/2026-10-10/apa-discovery-20261010-102440-slinktrim-9f2b7.md) SOURCE_VERIFIED; SDK header/build/live NOT_VERIFIED |
+| Q-004 | APA-P10.A01.S01 | P1 | SDK AC29 29.3100, primary headers/docs | IN_PROGRESS; [SEO/Trim/Morph source audit](runs/2026-10-10/apa-discovery-20261010-102440-slinktrim-9f2b7.md) SOURCE_VERIFIED; SDK header/build/live NOT_VERIFIED; [Get3DInfo/contacts source audit](runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md) SOURCE_VERIFIED (docs), SDK header/build/live NOT_VERIFIED |
 | Q-005 | APA-P10.A02.S01 | P1 | Tapir public tags, local 1.5.10 provenance | QUEUED; compatibility matrix |
 | Q-006 | APA-P10.A02.S02 | P1 | PR #20, GDL audit, catalog errors | QUEUED; blocker-specific proof |
 | Q-007 | APA-P10.A02.S04 | P1 | MEP API and Tapir commands | QUEUED; command/route/port matrix |
