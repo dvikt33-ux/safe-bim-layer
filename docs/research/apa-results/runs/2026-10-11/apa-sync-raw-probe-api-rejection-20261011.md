@@ -23,3 +23,7 @@ Owner should run PR #29 in their already isolated probe checkout, **without stop
 **Evidence gates:** source and tests created in new feature branch and GitHub readback verified. GitHub Actions CI initially pending; mark OFFLINE_PASS only once independently checked. A successful request and historical backfill remain LIVE NOT_VERIFIED until observed on owner's machine.
 
 **Change control:** No main, canonical control plan, original feature branches, PLN or APX changed. This report is in canonical `docs/research/apa-results/` and should be linked in continuation.
+
+## Offline CI verification (subsequent audit)
+
+[GitHub Actions workflow run 38088808651](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38088808651) completed **SUCCESS**. The coordinator unit-test job ran **31/31 tests PASS** (including the two new safe error-code/redaction tests); the Windows launcher static check also completed SUCCESS. The job logs were independently retrieved. Code/documentation and this canonical report were read back via GitHub API. **This is an OFFLINE_PASS only**; no claim of successful raw Slack Web API read or historical import until the owner provides the actual output.
