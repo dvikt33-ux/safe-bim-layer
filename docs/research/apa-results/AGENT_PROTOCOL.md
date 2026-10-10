@@ -10,6 +10,16 @@
 - 24/7 — требование к процессу, **не** характеристика обычного чата. Не заявлять, что он запущен, пока не подтверждены расписание, исполнитель и два реальных цикла с SHA/readback. Не использовать платные API/Work/Codex для обхода ограничения.
 - Любое «применить исследование» сначала означает сверить первоисточник, версии, код и безопасные gates. Не изменять PLN/APX/main и проверенные ветки без отдельного разрешения.
 
+## Новый контракт V2 и восстановление
+
+Перед работой прочитать [сохранённый аудит APA Research OS](runs/2026-10-10/apa-research-os-audit-user-supplied-20261010.md), [RUN_EVENT_V2](protocol/RUN_EVENT_V2.schema.json), [PUBLISHER_CONTRACT](protocol/PUBLISHER_CONTRACT.md) и [EVIDENCE_POLICY](protocol/EVIDENCE_POLICY.md). **Выполнение схемы — проект, а не включённый publisher.**
+
+1. Использовать существующий canonical hub; не создавать новую ветку для очередного research run.
+2. Если есть подтверждённый immutable report, но отсутствует запись в реестре, **достроить индекс**, не запускать повторное исследование.
+3. Сверять run_id/evidence fingerprint до публикации дубликата; источник из другого чата/Deep Research помечать USER_SUPPLIED/REPORTED, не SOURCE_VERIFIED.
+4. В конце выдавать receipt: branch, path, commit, readback, content hash (только если реально вычислен), evidence status, следующий S-ID. При сбое GITHUB_PUBLISH_BLOCKED.
+5. Обычный чат + GitHub connector — основной исполнитель; Deep Research не запускать без прямого разрешения владельца. 24/7 без реального runner не обещать.
+
 ## Старт без ручной сортировки владельцем
 
 1. Открыть [README](README.md), [MASTER_PLAN](MASTER_PLAN.md), [CURRENT_STATUS](CURRENT_STATUS.md), [RESEARCH_QUEUE](RESEARCH_QUEUE.md), [ARTIFACT_REGISTER](ARTIFACT_REGISTER.md), [BRANCH_REGISTRY](BRANCH_REGISTRY.md).
