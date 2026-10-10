@@ -91,6 +91,7 @@ def validate(plan):
               and bool(artifact["uri"]) and isinstance(artifact.get("verification"), str),
               "Bad artifact " + aid)
     keys = {}
+    active_claims = {}
     for sid, task in plan["tasks"].items():
         check(STEP.fullmatch(sid) and isinstance(task, dict) and
               set(task) == FIELDS and task["id"] == sid, "Bad task fields " + sid)
@@ -123,6 +124,9 @@ def validate(plan):
                       for x in ("owner", "lease_until", "claim_ref")), "UNCLAIMED_ACTIVE " + sid)
             check(re.fullmatch(r"20[0-9]{2}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z",
                                task["lease_until"]), "Bad lease " + sid)
+            check(task["claim_ref"] not in active_claims,
+                  "DUPLICATE_ACTIVE_RUN " + sid)
+            active_claims[task["claim_ref"]] = sid
         else:
             check(task["owner"] is None and task["lease_until"] is None and
                   task["claim_ref"] is None, "STALE_CLAIM_FIELDS " + sid)
@@ -188,9 +192,16 @@ def verify_inbox(plan):
               "BAD_INBOX_NAME " + str(path))
         published = list(RUNS.glob("*/" + run_id + "/manifest.json"))
         if not published:
-            check(task["status"] in ACTIVE,
-                  "UNCLAIMED_NEW_RUN " + sid + " — claim in PROJECT_PLAN before inbox")
+            check(task["status"] == "IN_PROGRESS",
+                  "NOT_IN_PROGRESS " + sid + " — scheduled execution must commit status before work")
             check(task["owner"] == req.get("executor"), "CLAIM_OWNER_MISMATCH " + sid)
+            check(task["claim_ref"] == req.get("executor_run_id"),
+                  "RUN_ID_MISMATCH " + sid)
+            lease = datetime.strptime(task["lease_until"], "%Y-%m-%dT%H:%M:%SZ").replace(
+                tzinfo=timezone.utc)
+            check(lease > datetime.now(timezone.utc), "CLAIM_LEASE_EXPIRED " + sid)
+            check(all(plan["tasks"][dep]["status"] == "DONE_PUBLISHED"
+                      for dep in task["depends_on"]), "CLAIM_DEPENDENCY_NOT_DONE " + sid)
             check(not task["requires_approval"] or req.get("phase") not in {"BUILD", "LIVE"},
                   "OWNER_APPROVAL_REQUIRED " + sid)
         count += 1
@@ -255,7 +266,9 @@ def build(plan):
         "# APA — единственный Project Controller / Control Board", "",
         "**Source of truth:** " + link(str(PLAN), "PROJECT_PLAN.json") + ".",
         "This file is generated. Never dispatch from chat memory or edit this board.",
-        "**Publisher:** DEPLOYED; **24/7 research runner:** NOT_RUNNING.",
+        "**Execution trigger:** ChatGPT Scheduled Tasks (user-configured, not a controller cron).",
+        "**Scheduler state:** " + safe(plan.get("scheduler", {}).get("state", "NOT_CONFIGURED")) +
+        "; **Publisher:** DEPLOYED; **verified 24/7:** NOT_RUNNING.",
         "", "## Task status", "", "| Status | Count |", "| --- | ---: |"]
     board.extend("| " + key + " | " + str(value) + " |" for key, value in counts.items())
     board += ["", "## Claimed tasks", "",
@@ -346,11 +359,12 @@ def build(plan):
         "[RELATIONSHIPS](RELATIONSHIPS.md) and [THEMES](THEMES.md) before proposing work.",
         "", "## Mandatory procedure", "",
         "1. Select one eligible S-ID from the generated control board; inspect dependencies, related work and evidence.",
-        "2. Claim the task in PROJECT_PLAN.json via GitHub blob-SHA compare-and-swap: status CLAIMED, owner, lease_until, claim_ref. Never overwrite a competing claim.",
-        "3. Work only within the task scope and acceptance criteria. Check prior artifacts; do not repeat a work_key.",
-        "4. Commit PUBLISH_REQUEST_V1 inbox JSON with matching S-ID and executor. Unclaimed new runs are rejected.",
-        "5. Verify GitHub Actions success and DONE_PUBLISHED receipt; only then review acceptance, mark DONE_PUBLISHED, and clear claim.",
-        "6. If blocked, preserve findings, document blocked_reason, and return to the controller. Do not create a parallel plan.",
+        "2. On a scheduled ChatGPT trigger, atomically set status IN_PROGRESS, owner, lease_until and claim_ref=unique executor_run_id via GitHub blob-SHA CAS. Re-read the committed file before starting work.",
+        "3. If the CAS fails or task is already IN_PROGRESS/DONE_PUBLISHED, do not work. Select another eligible S-ID only after fresh readback.",
+        "4. Work only within task scope. Commit PUBLISH_REQUEST_V1 with matching substep_id, executor and executor_run_id; publisher rejects an unstarted or expired run.",
+        "5. Verify report, CI, receipt and acceptance. Then atomically set DONE_PUBLISHED and attach evidence; for partial results use PARTIAL, for failure BLOCKED with reason. Clear owner/lease/claim_ref.",
+        "6. Record status to GitHub and re-read it. If write/readback fails, report failure and do not claim completion.",
+        "7. Scheduler is created and managed by the user in ChatGPT Scheduled. Controller never starts research and cannot guarantee a scheduled task will run.",
         "", "## Parallel eligible work lanes", ""]
     for kind in ("CONTROL", "CONSOLIDATION", "RESEARCH", "BUILD", "INTEGRATION", "VALIDATION"):
         selected = [t["id"] for t in ready if t["kind"] == kind]
@@ -373,6 +387,7 @@ def build(plan):
              "held": [t["id"] for t in held], "active": [t["id"] for t in active],
              "expired_leases": expired, "orphan_v2_manifests": orphans,
              "known_published_v2_runs": sum(r["verified"] for rs in runs.values() for r in rs),
+             "scheduler": plan.get("scheduler", {"provider": "ChatGPT Scheduled Tasks", "state": "NOT_CONFIGURED"}),
              "research_runner_24h": "NOT_RUNNING",
              "publisher": "DEPLOYED_SYNTHETIC_E2E_PASS",
              "legacy_reports": "NOT_FULLY_INDEXED"}
