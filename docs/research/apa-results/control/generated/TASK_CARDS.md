@@ -100,7 +100,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P00.A02.S03
 
-**Связать старые находки с S-ID и удалить логические дубли без удаления оригиналов** — CONSOLIDATION / IN_PROGRESS / P0
+**Связать старые находки с S-ID и удалить логические дубли без удаления оригиналов** — CONSOLIDATION / PARTIAL / P0
 
 - Parent: APA-P00 → APA-P00.A02
 - Topic: HUB_GOVERNANCE
@@ -108,7 +108,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P00.A02.S02
 - Related, check before duplicating: APA-P50.A01.S02
 - Acceptance: Evidence map и superseded_by для дублей
-- Owner/lease: chatgpt-gpt6-manual-branch-dedup-20261011 / 2026-10-11T00:24:36Z
+- Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md), [ART-BRANCHES](../../../../../docs/research/apa-results/inventories/FULL_BRANCH_INVENTORY.md)
 - Existing V2 runs: [APA-RUN-20261010-234200Z-slack-legacy-three-audit](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-234200Z-slack-legacy-three-audit/REPORT.md) (receipt verified), [APA-RUN-20261010-235301Z-branch-evidence-dedup](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-235301Z-branch-evidence-dedup/REPORT.md) (receipt verified)
