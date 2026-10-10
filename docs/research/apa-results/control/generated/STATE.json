@@ -13,6 +13,72 @@
     "READY": 42,
     "SUPERSEDED": 0
   },
+  "development": {
+    "actions": [
+      {
+        "done": 0,
+        "id": "APA-P70.A01",
+        "status": "READY",
+        "title": "Единая база существующих возможностей и доказательств",
+        "total": 3
+      },
+      {
+        "done": 0,
+        "id": "APA-P70.A02",
+        "status": "WAITING",
+        "title": "Требования, нормативы и библиотека конкретного проекта",
+        "total": 3
+      },
+      {
+        "done": 0,
+        "id": "APA-P70.A03",
+        "status": "WAITING",
+        "title": "Планировка и редактируемая нативная BIM-модель",
+        "total": 3
+      },
+      {
+        "done": 0,
+        "id": "APA-P70.A04",
+        "status": "WAITING",
+        "title": "Конструктивные узлы, кладка, фасады и сопряжения",
+        "total": 3
+      },
+      {
+        "done": 0,
+        "id": "APA-P70.A05",
+        "status": "WAITING",
+        "title": "Расчёт несущих систем и инженерная обратная связь",
+        "total": 3
+      },
+      {
+        "done": 0,
+        "id": "APA-P70.A06",
+        "status": "WAITING",
+        "title": "MEP и междисциплинарная координация",
+        "total": 2
+      },
+      {
+        "done": 0,
+        "id": "APA-P70.A07",
+        "status": "WAITING",
+        "title": "Ведомости, чертежи, нормативная проверка и выпуск",
+        "total": 3
+      },
+      {
+        "done": 0,
+        "id": "APA-P70.A08",
+        "status": "WAITING",
+        "title": "Сквозная приёмка и расширение без переписывания ядра",
+        "total": 3
+      }
+    ],
+    "active": [],
+    "done": 0,
+    "next_eligible": "APA-P70.A01.S01",
+    "plan_id": "APA-P70",
+    "status": "READY",
+    "total": 23
+  },
   "dispatchable": {
     "BUILD": [
       "APA-P00.A03.S03"

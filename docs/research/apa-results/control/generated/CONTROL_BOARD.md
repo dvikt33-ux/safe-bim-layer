@@ -20,6 +20,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | HELD_BY_DEPENDENCIES | 39 |
 | EXPIRED_LEASES | 0 |
 
+## Полный цикл разработки APA
+
+[DEVELOPMENT_BOARD.md](DEVELOPMENT_BOARD.md) — стадии P → A → S, фактические статусы и следующий шаг.
+Родительские стадии DONE только если все дочерние S-ID DONE_PUBLISHED.
+
 ## Claimed tasks
 
 | Task | Owner | Lease until | Work key |
