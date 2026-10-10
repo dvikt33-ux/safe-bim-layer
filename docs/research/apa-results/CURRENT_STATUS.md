@@ -6,9 +6,9 @@
 
 **ПЛАН:** [APA-P00 — Восстановление и централизация](MASTER_PLAN.md#apa-p00--восстановление-и-централизация-накопленных-материалов)
 
-↳ **ДЕЙСТВИЕ:** APA-P00.A03 — Режим работы и публикации
+↳ **ДЕЙСТВИЕ:** APA-P00.A01 — Инвентаризация фактически опубликованного
 
-↳ ↳ **ТЕКУЩИЙ ПОДШАГ:** **APA-P00.A03.S01 — Проверить реальный GitHub write/read у каждого исполнителя**
+↳ ↳ **ТЕКУЩИЙ ПОДШАГ:** **APA-P00.A01.S03 — Продолжить forensic inventory 72 веток (ancestry/unique artifacts/PR mapping)**
 
 - Обычный чат с GitHub connector: **PASS** — несколько Markdown записаны и прочитаны обратно.
 - Deep Research → GitHub: **NOT_VERIFIED / НЕ НАСТРОЕНО** — вывод в отдельном виджете не является GitHub commit.
@@ -20,6 +20,16 @@
 **Исследования — в обычных чатах ChatGPT с GitHub connector и публикацией в canonical hub; Deep Research без отдельного запроса НЕ ЗАПУСКАТЬ.** Это выбранный способ исполнения, а не утверждение, что 24/7 runner работает. Проверка расписания и двух последовательных публикаций остаётся открытой; статус 24/7 **NOT_RUNNING**.
 
 **Частичная техническая дельта APA-P10.A01.S01:** [AC29 Get3DInfo/contacts/Opening](runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md) сохранена, commit [d65c5bd](https://github.com/dvikt33-ux/safe-bim-layer/commit/d65c5bd327d077d7873ff720cda6dac3bf8a22cb), readback подтверждён. В официальной документации встречаются оба имени `ACAPI_Element_Get3DInfo` и `ACAPI_ModelAccess_Get3DInfo`; нельзя переименовывать код без SDK header/compile gate. Полный прежний Deep Research отчёт **не восстановлен**.
+
+## APA Research OS — результат публикации переданного аудита
+
+**Опубликовано и прочитано обратно:** [содержательно полная версия аудита](runs/2026-10-10/apa-research-os-audit-user-supplied-20261010.md), commit [9b07679](https://github.com/dvikt33-ux/safe-bim-layer/commit/9b076792124d99d67dcc0f01554b4834fc3ed8cb); [readback receipt](receipts/APA-RUN-20261010-102800Z-research-os-audit-readback.json). Это **другой** документ, не прежний пропавший полный AC29 Deep Research отчёт.
+
+**APA-P00.A01.S03 частично выполнен:** [снимок всех 72 веток с SHA и PR](inventories/FULL_BRANCH_INVENTORY.md) + [JSON](inventories/BRANCH_HEADS_20261010.json) опубликованы; ancestry, уникальные артефакты, superseded_by и локальные SHA остаются NOT_VERIFIED. Ни одна ветка не удалена.
+
+**APA-P00.A03.S03 — частичный дизайн внедрён:** [RUN_EVENT_V2.schema.json](protocol/RUN_EVENT_V2.schema.json), [PUBLISHER_CONTRACT.md](protocol/PUBLISHER_CONTRACT.md), [EVIDENCE_POLICY.md](protocol/EVIDENCE_POLICY.md) опубликованы и проверены readback. **Сам publisher/index builder не развёрнут, 24/7 NOT_RUNNING.** Индексы пока обновляются вручную с commit/readback; это не generated projections.
+
+**Исполнитель:** обычный ChatGPT + GitHub write/readback подтверждён в этой сессии. Deep Research не запускался и без отдельного разрешения запускаться не должен. Права Scheduled Tasks на unattended GitHub write — NOT_VERIFIED.
 
 ## Что завершено и где доказательства
 
@@ -37,7 +47,7 @@
 
 ## Нельзя считать выполненным
 
-- Полный независимый Deep Research отчёт и шесть обещанных файлов: **НЕ ОПУБЛИКОВАНЫ**.
+- Прежний полный технический AC29 Deep Research отчёт и шесть обещанных файлов: **НЕ ОПУБЛИКОВАНЫ**. Отдельный предоставленный владельцем аудит APA Research OS **ОПУБЛИКОВАН**.
 - Непрерывное исследование и автоматическая публикация: **НЕ ЗАПУЩЕНЫ**.
 - Автоматическая синхронизация всех чатов: **НЕ ПОДТВЕРЖДЕНА**.
 - Изменения main/PLN/APX и merge: **НЕ ПРОВОДИЛИСЬ**.
