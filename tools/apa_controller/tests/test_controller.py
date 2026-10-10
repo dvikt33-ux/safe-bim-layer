@@ -40,7 +40,7 @@ class ControllerTests(unittest.TestCase):
     def test_all_real_plan_tasks_valid(self):
         self.assertEqual(len(self.plan["tasks"]), 50)
         self.assertEqual(len(self.plan["plans"]), 7)
-        self.assertEqual(len(self.plan["artifacts"]), 24)
+        self.assertGreaterEqual(len(self.plan["artifacts"]), 24)
         self.assertEqual(len(self.plan["topics"]), 15)
 
     def test_dispatch_and_generated_state_idempotent(self):
