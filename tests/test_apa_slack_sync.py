@@ -256,17 +256,17 @@ class EventStoreTests(unittest.TestCase):
         self.assertNotIn("secret", str(second))
 
     def test_rejected_event_envelope_shape_has_fixed_safe_labels(self):
-        sample = "APA_EVENT_V1\\n" + "Some header\\n" + '{"event_id":"secret-value","url":"https://secret.example/path"}'
+        sample = "APA_EVENT_V1\n" + "Some header\n" + '{"event_id":"secret-value","url":"https://secret.example/path"}'
         shape = rejected_message_shape(sample)
         self.assertEqual(shape, "fences=none;begins=header;ends=object;object=yes")
         self.assertNotIn("secret", shape)
         self.assertNotIn("https", shape)
         self.assertEqual(
-            rejected_message_shape("APA_EVENT_V1\\n```json\\n{}"),
+            rejected_message_shape("APA_EVENT_V1\n```json\n{}"),
             "fences=one;begins=fence;ends=object;object=yes",
         )
         self.assertEqual(
-            rejected_message_shape("APA_EVENT_V1\\n```json\\n{}\\n``` suffix"),
+            rejected_message_shape("APA_EVENT_V1\n```json\n{}\n``` suffix"),
             "fences=two;begins=fence;ends=other;object=yes",
         )
 
@@ -275,8 +275,8 @@ class EventStoreTests(unittest.TestCase):
             def conversations_history(self, **kwargs):
                 return {
                     "messages": [
-                        {"ts": "211.1", "text": "APA_EVENT_V1\\n" + '{"event_id":"private-marker"}'},
-                        {"ts": "210.1", "text": "APA_EVENT_V1\\n```json\\n{}"},
+                        {"ts": "211.1", "text": "APA_EVENT_V1\n" + '{"event_id":"private-marker"}'},
+                        {"ts": "210.1", "text": "APA_EVENT_V1\n```json\n{}"},
                     ],
                     "response_metadata": {"next_cursor": ""},
                 }
