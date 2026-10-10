@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 22,
+  "revision": 23,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -319,8 +319,14 @@
     },
     "ART-TAPIR-COMPAT-20261010-6F29": {
       "id": "ART-TAPIR-COMPAT-20261010-6F29",
-      "uri": "docs/research/apa-results/runs/2026-10-10/apa-technical-20261010-163950-tapir-compat-source-6f29.md",
+      "uri": "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md",
       "kind": "REPORT",
+      "verification": "GITHUB_READBACK_VERIFIED"
+    },
+    "ART-TAPIR-RECEIPT-20261010-6F29": {
+      "id": "ART-TAPIR-RECEIPT-20261010-6F29",
+      "uri": "docs/research/apa-results/receipts/APA-RUN-20261010-163950Z-tapir-compat-6f29.json",
+      "kind": "RECEIPT",
       "verification": "GITHUB_READBACK_VERIFIED"
     }
   },
@@ -779,7 +785,8 @@
       "claim_ref": null,
       "requires_approval": false,
       "evidence": [
-        "ART-TAPIR-COMPAT-20261010-6F29"
+        "ART-TAPIR-COMPAT-20261010-6F29",
+        "ART-TAPIR-RECEIPT-20261010-6F29"
       ],
       "blocked_reason": null
     },
