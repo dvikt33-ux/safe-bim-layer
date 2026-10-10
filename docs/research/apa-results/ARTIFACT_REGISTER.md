@@ -125,3 +125,12 @@ Direct source: pinned Graphisoft DevKit 29.3100 Command/Memo Doxygen and Tapir 1
 | `ART-APA-ATTR-STORY-SLAB-20261011` | `APA-P10.A01.S02` / **PARTIAL** | [Typed AC29 story/material/composite/profile matrix](runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md), [commit 6b82b52](https://github.com/dvikt33-ux/safe-bim-layer/commit/6b82b52cbc65a661f49cbf1f01fe3bea8846d559) and [source-audit crosslink 569c9fd](https://github.com/dvikt33-ux/safe-bim-layer/commit/569c9fd7ab37373a017819e0dbd6ce5376b45387) | `GITHUB_READBACK_VERIFIED`, installed v1.5.10 per user reports, Basic/Composite failure+repair `USER_LIVE_API_REPORT_CHECKED`; upstream [Tapir PR #785](https://github.com/ENZYME-APD/tapir-archicad-automation/pull/785) source-diff verified but OPEN/unmerged, APX parity NOT_VERIFIED |
 | `ART-APA-TYPED-SLAB-PROPOSAL-20261011` | Candidate only, independent audit pending | [Proposal Basic/Composite slab capability adapter](control/proposals/APA-CAND-20261011-typed-slab-creation-adapter.md), [commit 4cd117a](https://github.com/dvikt33-ux/safe-bim-layer/commit/4cd117a91cfec38cc12eaf03d2f1bd195c67a821) | `GITHUB_READBACK_VERIFIED`, **not yet included** in `control/PROJECT_PLAN.json`, no implementation/build/live claimed |
 
+
+
+## APA-P50.A02.S01 — Antidup source audit of existing APA infrastructure (2026-10-11)
+
+| Artifact | Task | GitHub source + provenance | Acceptance limit |
+|---|---|---|---|
+| `ART-APA-REUSE-NATIVE-20261011` | `APA-P50.A02.S01` / PARTIAL | [Proof of existing intent→BIM graph→SceneWriter, older CreateSlabs→ModifySlabs Basic material route, material dependency resolver and series178 floor emitter](runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [commit 01ec66d](https://github.com/dvikt33-ux/safe-bim-layer/commit/01ec66d7cfbe3e1490c6add1556533731518a0d8) | `SOURCE_VERIFIED / GITHUB_READBACK_VERIFIED`; no fresh native live test; not exhaustive 72-branch dedup; **do not build duplicate adapter** |
+| `ART-APA-REUSE-RESCOPE-20261011` | Candidate review warning; not admitted task | [Existing typed slab proposal with rescope warning](control/proposals/APA-CAND-20261011-typed-slab-creation-adapter.md), [commit 2289345](https://github.com/dvikt33-ux/safe-bim-layer/commit/2289345e73dae9b150bbf62f1da856dede301d23) | Needs independent auditor to approve/rescope/reject; `PROJECT_PLAN` task not created |
+
