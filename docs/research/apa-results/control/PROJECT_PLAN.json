@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 20,
+  "revision": 21,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -752,7 +752,7 @@
       "action_id": "APA-P10.A02",
       "title": "Tapir публичные версии и Python/JSON vs локальная 1.5.10",
       "kind": "RESEARCH",
-      "status": "READY",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "tapir-python-compatibility",
       "depends_on": [
@@ -768,9 +768,9 @@
         "Compatibility matrix с source SHA"
       ],
       "acceptance": "Compatibility matrix с source SHA",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "chatgpt:apa-technical",
+      "lease_until": "2026-10-10T18:30:00Z",
+      "claim_ref": "APA-RUN-20261010-163950Z-tapir-compat-6f29",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
