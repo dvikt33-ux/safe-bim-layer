@@ -111,7 +111,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: chatgpt-gpt6-manual-20261011-audit / 2026-10-11T02:00:00Z
 - Requires owner approval: False
 - Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md), [ART-BRANCHES](../../../../../docs/research/apa-results/inventories/FULL_BRANCH_INVENTORY.md)
-- Existing V2 runs: none
+- Existing V2 runs: [APA-RUN-20261010-234200Z-slack-legacy-three-audit](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-234200Z-slack-legacy-three-audit/REPORT.md) (receipt verified)
 - Expected output: Evidence map и superseded_by для дублей
 
 ## APA-P00.A02.S04
