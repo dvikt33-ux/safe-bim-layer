@@ -100,9 +100,9 @@ class EventFormatTests(unittest.TestCase):
         for envelope in (
             format_event(sample),
             "APA_EVENT_V1\n```" + json.dumps(sample, ensure_ascii=False) + "```",
-            "APA_EVENT_V1\n```{\n" + json.dumps(
+            "APA_EVENT_V1\n```" + json.dumps(
                 sample, ensure_ascii=False, indent=2,
-            ) + "\n}```",
+            ) + "```",
         ):
             with self.subTest(envelope=envelope[:32]):
                 parsed = parse_event(envelope + trailer)
