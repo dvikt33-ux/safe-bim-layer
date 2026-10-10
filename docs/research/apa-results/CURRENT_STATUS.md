@@ -59,3 +59,8 @@
 - Изменения main/PLN/APX и merge: **НЕ ПРОВОДИЛИСЬ**.
 
 **Правило:** если исполнитель не может прочитать и записать этот файл в GitHub, он обязан явно сообщить GITHUB_PUBLISH_BLOCKED и дать готовый Markdown, а не просить владельца искать результаты по чатам.
+
+
+## Проверенное восстановление трёх неопубликованных отчётов (2026-10-10)
+
+**APA-P00 / APA-P00.A02 / APA-P00.A02.S03 — частичный результат:** в канонической ветке сохранены и прочитаны обратно три `RECOVERED_FROM_CHAT` Markdown-файла (Tapir docs; Native Hotlink/MEP Transition; IfcMCP/IfcPatch). Зафиксированы три отдельных commit SHA и readback, [реестр](ARTIFACT_REGISTER.md#восстановленные-из-чата-результаты-2026-10-10) обновлён, commit [69c327f](https://github.com/dvikt33-ux/safe-bim-layer/commit/69c327f0f2897bc85ce4a3dce44605e1abe21757), readback PASS. [Slack APA_EVENT_V1](https://w1791579305-0gy426514.slack.com/archives/C0C886E1PGR/p1791639564779389) отправлен. **Ограничение:** это восстановление ранее изложенных выводов (`REPORTED_FROM_PRIOR_CHAT`), а не новый независимый source audit или LIVE PASS. Полный системный P00.A02.S03 пока PARTIAL: дедупликация всех исторических веток и источников не закончена. `main`, PLN, APX не изменялись.
