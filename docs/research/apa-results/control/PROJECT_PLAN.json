@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 29,
+  "revision": 30,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -340,6 +340,12 @@
       "uri": "docs/research/apa-results/runs/2026-10-10/apa-discovery-20261010-201457-sdk-native-signatures-fallback.md",
       "kind": "REPORT",
       "verification": "SOURCE_VERIFIED_GITHUB_READBACK_PARTIAL"
+    },
+    "ART-APA-ATTR-STORY-SLAB-20261011": {
+      "id": "ART-APA-ATTR-STORY-SLAB-20261011",
+      "uri": "docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md",
+      "kind": "REPORT",
+      "verification": "GITHUB_READBACK_VERIFIED"
     }
   },
   "tasks": {
@@ -738,7 +744,8 @@
       "claim_ref": null,
       "requires_approval": false,
       "evidence": [
-        "ART-PROFILE-SOURCE-20261010-8C21"
+        "ART-PROFILE-SOURCE-20261010-8C21",
+        "ART-APA-ATTR-STORY-SLAB-20261011"
       ],
       "blocked_reason": null
     },
@@ -1879,7 +1886,8 @@
       "artifact_ids": [
         "ART-REGISTER",
         "ART-SDK-GET3D",
-        "ART-SDK-SEO"
+        "ART-SDK-SEO",
+        "ART-APA-ATTR-STORY-SLAB-20261011"
       ],
       "synthesis_state": "OPEN",
       "owner": null
