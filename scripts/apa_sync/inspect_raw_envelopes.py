@@ -83,10 +83,68 @@ def characterize(text: str) -> str:
     )
 
 
+
+def _staged_fence_diagnosis(text: str) -> str:
+    """Content-free reason category after decoding between exactly two fences.
+
+    This function is diagnostic only. It never returns copied source text,
+    does not relax parse_event, and does not accept events into SQLite.
+    """
+    if not isinstance(text, str) or text.count("```") != 2:
+        return "not_two_fences"
+    head, middle, tail = text.split("```")
+    lead = head[len(EVENT_PREFIX):] if head.startswith(EVENT_PREFIX) else head
+    if "\\n" in lead:
+        preamble = "has_linebreak"
+    elif "\\r" in lead:
+        preamble = "has_cr"
+    else:
+        preamble = "no_linebreak"
+
+    candidate = middle.lstrip()
+    if candidate.startswith("json") and len(candidate) > 4 and candidate[4].isspace():
+        kind = "json_language"
+        candidate = candidate[4:].lstrip()
+    elif candidate.startswith("JSON") and len(candidate) > 4 and candidate[4].isspace():
+        kind = "json_language"
+        candidate = candidate[4:].lstrip()
+    elif candidate.startswith("{"):
+        kind = "object_open"
+    else:
+        kind = "other_open"
+
+    footer = _suffix_type(tail)
+    if footer not in ("exact_known_footer", "exact_known_bare_mention_footer"):
+        return "other_footer_or_no_footer"
+
+    if not candidate.startswith("{"):
+        return f"{preamble};{kind};no_object_start"
+    try:
+        value = json.loads(candidate)
+    except (ValueError, TypeError):
+        return f"{preamble};{kind};json_decoding_failed"
+    if not isinstance(value, dict):
+        return f"{preamble};{kind};json_not_object"
+
+    # Re-package only in memory for a strictly validated control comparison.
+    # JSON validation errors are grouped, not emitted with untrusted details.
+    controlled = EVENT_PREFIX + "\\n```json\\n" + json.dumps(
+        value, ensure_ascii=False, sort_keys=True,
+    ) + "\\n```"
+    try:
+        normalized = parse_event(controlled)
+    except InvalidEvent:
+        return f"{preamble};{kind};schema_rejected"
+    if normalized is None:
+        return f"{preamble};{kind};prefix_rejected"
+    return f"{preamble};{kind};valid_json_and_schema_envelope_mismatch"
+
+
 def summarize(messages: Iterable[dict]) -> dict:
     """Summarize messages without returning any original message attributes."""
     counters: Counter = Counter()
     shapes: Counter = Counter()
+    rejected_stage_shapes: Counter = Counter()
     for message in messages:
         counters["scanned"] += 1
         if message.get("subtype") not in (None, "bot_message"):
@@ -101,7 +159,10 @@ def summarize(messages: Iterable[dict]) -> dict:
         try:
             event = parse_event(body)
         except InvalidEvent as exc:
-            counters[SECRETLESS_REASONS.get(str(exc), "other_static_validation_error")] += 1
+            code = SECRETLESS_REASONS.get(str(exc), "other_static_validation_error")
+            counters[code] += 1
+            if code == "fence_envelope_rejected" and body.count("```") == 2:
+                rejected_stage_shapes[_staged_fence_diagnosis(body)] += 1
         else:
             if event:
                 counters["parse_valid"] += 1
@@ -110,6 +171,7 @@ def summarize(messages: Iterable[dict]) -> dict:
         "scope": "APA channel, capped at 100 recent messages",
         "counts": dict(sorted(counters.items())),
         "structural_shapes": dict(sorted(shapes.items())),
+        "rejected_stage_shapes": dict(sorted(rejected_stage_shapes.items())),
     }
 
 
