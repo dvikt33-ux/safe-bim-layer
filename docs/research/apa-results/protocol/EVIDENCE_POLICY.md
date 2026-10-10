@@ -1,6 +1,6 @@
 # APA Research OS — политика доказательств и воспроизводимости
 
-**ПЛАН:** APA-P00 → **ДЕЙСТВИЕ:** APA-P00.A03 → **ПОДШАГ:** APA-P00.A03.S03. **Статус:** POLICY_PUBLISHED; runtime validation NOT_DEPLOYED.
+**ПЛАН:** APA-P00 → **ДЕЙСТВИЕ:** APA-P00.A03 → **ПОДШАГ:** APA-P00.A03.S03. **Статус:** POLICY_PUBLISHED; [push-triggered publisher](../../../tools/apa_publisher/publisher.py) deployed, [synthetic E2E](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38045964668) PASS; external source/live evidence validation remains the responsibility of the research executor, not automatically verified by publisher.
 
 ## Независимые оси состояния
 
