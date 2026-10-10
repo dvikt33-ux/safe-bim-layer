@@ -97,3 +97,18 @@ User explicitly authorized changes **only to the existing test PLN**. New standa
 - **Not independently established by the screenshots:** both north-wall windows (not visible from this viewpoint), whether all 12 elements persisted in an on-disk PLN and survived a close-and-reopen cycle, actual slab thickness (0.2 m), material correctness, element/story GUID linkage, or absence of duplicate geometry. User says model saved, but exact file path and disk reopen readback were not independently verified.
 - **Next acceptance gate:** use strictly read-only independent inspection of opened saved `APA_Pavilion_MVP_SUCCESS.pln` at the **actual current port and verified project name/path**, avoiding original v1.3/v1.4 write utilities (which guard only `Тест MER .pln`). Check 12 known GUIDs against stored source ledger, read back `type`, story, 3D bbox, slab thickness, opening host GUIDs and level, plus capture second viewpoint showing north wall's two windows. No new writes.
 - **Status:** live creation API and screenshot evidence `PASS_REPORTED`; saved/reopened independent audit `NOT_VERIFIED`; main/master/APX/PLN untouched by this GitHub-only documentation update.
+
+## 2026-10-11 — Second visual audit from additional Archicad 29 screenshots
+
+**Provenance:** Two additional PNG screenshots provided by the user, showing `APA_Pavilion_MVP_SUCCESS - Archicad 29` in the title bar and the `Общая Перспектива` 3D window. These are visual screenshots, not exported model data or re-opened PLN readback. Images were provided in chat; this Markdown records visual observations, not image files stored in GitHub.
+
+**Observable facts:**
+- Interior bird's-eye perspective clearly shows **two window openings with window frames** in the far wall and **one door with visible frame** in the near wall.
+- Rectangular four-sided enclosure with no roof, visible base slab/finished floor, and vertical column-like elements at corners; nominal pavilion envelope previously specified as 4 × 3 × 3 m remains consistent with visible geometry. Screenshot perspective is not a dimensional survey.
+- First screenshot selected slab-like base element; Archicad top toolbar `Низ и Верх` displays **200** and **0** (UI units correspond to millimeters for element dimensions). This **supports** a 200 mm slab thickness, but the screenshot alone cannot prove the selected element's GUID.
+- Second screenshot selected a corner column-like element; toolbar displays section dimensions **250 × 250** and height **3000**; matches the intended 0.25 × 0.25 × 3.0 m column in the prior source graph, subject to selection identity verification.
+- Both screenshots show the named saved-copy project root in Navigator `APA_Pavilion_MVP_SUCCESS`.
+
+**Acceptance decision:** VISUAL_MODEL_PASS_REPORTED (wall enclosure, two windows, door, base slab, columns and visible UI dimensions). Combined with user-supplied APA v1.4 `COMPLETE_UNSAVED` / `12/12` native readback output this supports the fixed-scene MVP. **Persistent PLN reopen with independent GUID/type/story/bbox/material/host verification remains NOT_VERIFIED.** Do not claim that screenshots independently establish storage durability or all 12 element GUIDs.
+
+**Next task / audit proposal:** register or link a test-only follow-up for **saved PLN independent read-only persistence audit**: verify exact copied PLN path/name; retrieve 12 recorded GUIDs; independently query GetDetailsOfElements and Get3DBoundingBoxes, slab 0.2 m, four columns 0.25×0.25×3.0 m, openings hosted in north/south wall and story API index 0; no mutate, no original scene replay. When accepted by controller, update related P20.A02.S03 evidence with its assigned work ID. No modification of existing task states without CAS.
