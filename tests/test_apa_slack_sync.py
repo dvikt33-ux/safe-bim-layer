@@ -56,7 +56,7 @@ class EventFormatTests(unittest.TestCase):
             source="chatgpt:apa-controller-setup",
             summary="PROJECT_PLAN task proposal checked; pending independent audit",
         )
-        message = "APA_EVENT_V1\\n```" + json.dumps(
+        message = "APA_EVENT_V1\n```" + json.dumps(
             sample, ensure_ascii=False, indent=2
         ) + "```"
         parsed = parse_event(message)
