@@ -153,7 +153,7 @@
   "known_published_v2_runs": 5,
   "legacy_reports": "NOT_FULLY_INDEXED",
   "orphan_v2_manifests": [],
-  "plan_revision": 34,
+  "plan_revision": 35,
   "publisher": "DEPLOYED_SYNTHETIC_E2E_PASS",
   "research_runner_24h": "NOT_RUNNING",
   "scheduler": {
