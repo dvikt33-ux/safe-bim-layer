@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 1,
+  "revision": 2,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -9,8 +9,8 @@
   "policies": {
     "dispatch": "Only READY/PARTIAL tasks with all depends_on DONE_PUBLISHED and no lease are candidates; BLOCKED never dispatched.",
     "claim": "Optimistic GitHub SHA compare-and-swap: set status CLAIMED, owner, lease_until, claim_ref; check work_key uniqueness before work; stale leases are flagged, not silently stolen.",
-    "completion": "Only after GitHub report commit + API readback + receipt, explicit acceptance review, and plan status transition to DONE_PUBLISHED.",
-    "deduplication": "One work_key per task; related is not duplicate. Cross-branch historical artifacts are indexed before creating new research.",
+    "completion": "Research: immutable report + GitHub API readback + DONE_PUBLISHED receipt + explicit acceptance. Build/control: code/docs commit + GitHub readback + passing CI and evidence in plan + explicit acceptance. No auto-DONE from chat text.",
+    "deduplication": "One semantic work_key per task, explicit topic_id through topics[].task_ids; duplicate work keys rejected; related tasks share sources but different scopes. Historical 72-branch semantic dedup remains open.",
     "mutation": "Only canonical research branch. Never modify main/master, PLN, APX, tested code branches or merge without approval.",
     "research": "Normal ChatGPT with GitHub connector; Deep Research and paid tools require explicit authorization.",
     "evidence": "REPORTED != SOURCE_VERIFIED != BUILD_PASS != LIVE_PASS. Synthetic publisher success proves no Archicad runtime behavior."
@@ -231,6 +231,42 @@
       "uri": "docs/research/apa-results/control/PROJECT_PLAN.json",
       "kind": "STRUCTURE",
       "verification": "CONTROL_SOURCE"
+    },
+    "ART-CONTROLLER-CODE": {
+      "id": "ART-CONTROLLER-CODE",
+      "uri": "tools/apa_controller/controller.py",
+      "kind": "CODE",
+      "verification": "GITHUB_REST_READBACK_VERIFIED"
+    },
+    "ART-CONTROLLER-TESTS": {
+      "id": "ART-CONTROLLER-TESTS",
+      "uri": "tools/apa_controller/tests/test_controller.py",
+      "kind": "CODE",
+      "verification": "CI_10_TESTS_PASS"
+    },
+    "ART-CONTROLLER-CI": {
+      "id": "ART-CONTROLLER-CI",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38046610758",
+      "kind": "WORKFLOW_RUN",
+      "verification": "CI_SUCCESS_AND_REST_READBACK"
+    },
+    "ART-CONTROLLER-VIEWS": {
+      "id": "ART-CONTROLLER-VIEWS",
+      "uri": "docs/research/apa-results/control/generated/CONTROL_BOARD.md",
+      "kind": "GENERATED",
+      "verification": "GITHUB_REST_READBACK_VERIFIED"
+    },
+    "ART-CONTROLLER-HANDOFF": {
+      "id": "ART-CONTROLLER-HANDOFF",
+      "uri": "docs/research/apa-results/control/generated/HANDOFF.md",
+      "kind": "GENERATED",
+      "verification": "GITHUB_REST_READBACK_VERIFIED"
+    },
+    "ART-CONTROLLER-README": {
+      "id": "ART-CONTROLLER-README",
+      "uri": "docs/research/apa-results/control/README.md",
+      "kind": "DOCUMENT",
+      "verification": "GITHUB_READBACK_VERIFIED"
     }
   },
   "tasks": {
@@ -242,7 +278,7 @@
       "kind": "CONTROL",
       "status": "DONE_PUBLISHED",
       "priority": 0,
-      "work_key": "apa-p00-a01-s01",
+      "work_key": "hub-discovery",
       "depends_on": [],
       "related": [],
       "inputs": [
@@ -269,7 +305,7 @@
       "kind": "CONTROL",
       "status": "DONE_PUBLISHED",
       "priority": 0,
-      "work_key": "apa-p00-a01-s02",
+      "work_key": "archive-research-inventory",
       "depends_on": [],
       "related": [],
       "inputs": [
@@ -296,7 +332,7 @@
       "kind": "CONSOLIDATION",
       "status": "PARTIAL",
       "priority": 0,
-      "work_key": "apa-p00-a01-s03",
+      "work_key": "branch-ancestry-forensics",
       "depends_on": [
         "APA-P00.A01.S02"
       ],
@@ -326,7 +362,7 @@
       "kind": "VALIDATION",
       "status": "BLOCKED",
       "priority": 1,
-      "work_key": "apa-p00-a01-s04",
+      "work_key": "local-git-sha-parity",
       "depends_on": [
         "APA-P00.A01.S03"
       ],
@@ -353,7 +389,7 @@
       "kind": "CONTROL",
       "status": "DONE_PUBLISHED",
       "priority": 0,
-      "work_key": "apa-p00-a02-s01",
+      "work_key": "canonical-branch-policy",
       "depends_on": [],
       "related": [],
       "inputs": [
@@ -380,7 +416,7 @@
       "kind": "CONTROL",
       "status": "DONE_PUBLISHED",
       "priority": 0,
-      "work_key": "apa-p00-a02-s02",
+      "work_key": "hub-operating-documents",
       "depends_on": [],
       "related": [],
       "inputs": [
@@ -411,7 +447,7 @@
       "kind": "CONSOLIDATION",
       "status": "READY",
       "priority": 0,
-      "work_key": "apa-p00-a02-s03",
+      "work_key": "legacy-evidence-dedup",
       "depends_on": [
         "APA-P00.A02.S02"
       ],
@@ -441,7 +477,7 @@
       "kind": "VALIDATION",
       "status": "PARTIAL",
       "priority": 1,
-      "work_key": "apa-p00-a02-s04",
+      "work_key": "publication-completeness-audit",
       "depends_on": [
         "APA-P00.A02.S02"
       ],
@@ -468,7 +504,7 @@
       "kind": "VALIDATION",
       "status": "PARTIAL",
       "priority": 0,
-      "work_key": "apa-p00-a03-s01",
+      "work_key": "executor-capability-matrix",
       "depends_on": [
         "APA-P00.A02.S02"
       ],
@@ -495,7 +531,7 @@
       "kind": "CONTROL",
       "status": "BLOCKED",
       "priority": 1,
-      "work_key": "apa-p00-a03-s02",
+      "work_key": "unattended-runner-selection",
       "depends_on": [
         "APA-P00.A03.S01"
       ],
@@ -522,7 +558,7 @@
       "kind": "BUILD",
       "status": "PARTIAL",
       "priority": 0,
-      "work_key": "apa-p00-a03-s03",
+      "work_key": "publisher-and-recovery",
       "depends_on": [
         "APA-P00.A02.S02"
       ],
@@ -552,7 +588,7 @@
       "kind": "VALIDATION",
       "status": "PARTIAL",
       "priority": 1,
-      "work_key": "apa-p00-a03-s04",
+      "work_key": "two-independent-source-publishes",
       "depends_on": [
         "APA-P00.A03.S03"
       ],
@@ -579,7 +615,7 @@
       "kind": "RESEARCH",
       "status": "PARTIAL",
       "priority": 1,
-      "work_key": "apa-p10-a01-s01",
+      "work_key": "sdk-native-signatures",
       "depends_on": [
         "APA-P00.A02.S02"
       ],
@@ -607,7 +643,7 @@
       "kind": "RESEARCH",
       "status": "READY",
       "priority": 1,
-      "work_key": "apa-p10-a01-s02",
+      "work_key": "sdk-attributes-stories",
       "depends_on": [
         "APA-P00.A02.S02"
       ],
@@ -634,7 +670,7 @@
       "kind": "RESEARCH",
       "status": "READY",
       "priority": 1,
-      "work_key": "apa-p10-a01-s03",
+      "work_key": "sdk-geometry-modeldump",
       "depends_on": [
         "APA-P00.A02.S02"
       ],
@@ -661,7 +697,7 @@
       "kind": "RESEARCH",
       "status": "READY",
       "priority": 1,
-      "work_key": "apa-p10-a02-s01",
+      "work_key": "tapir-python-compatibility",
       "depends_on": [
         "APA-P00.A02.S02"
       ],
@@ -690,7 +726,7 @@
       "kind": "RESEARCH",
       "status": "READY",
       "priority": 1,
-      "work_key": "apa-p10-a02-s02",
+      "work_key": "gdl-tn-identity-and-92-errors",
       "depends_on": [
         "APA-P00.A02.S02"
       ],
@@ -719,7 +755,7 @@
       "kind": "RESEARCH",
       "status": "READY",
       "priority": 2,
-      "work_key": "apa-p10-a02-s03",
+      "work_key": "ifc-mcp-openbim",
       "depends_on": [
         "APA-P00.A02.S02"
       ],
@@ -748,7 +784,7 @@
       "kind": "RESEARCH",
       "status": "READY",
       "priority": 1,
-      "work_key": "apa-p10-a02-s04",
+      "work_key": "native-and-tapir-mep",
       "depends_on": [
         "APA-P00.A02.S02"
       ],
@@ -777,7 +813,7 @@
       "kind": "INTEGRATION",
       "status": "READY",
       "priority": 2,
-      "work_key": "apa-p10-a03-s01",
+      "work_key": "architecture-option-matrix",
       "depends_on": [
         "APA-P10.A01.S01",
         "APA-P10.A02.S01",
@@ -808,7 +844,7 @@
       "kind": "INTEGRATION",
       "status": "READY",
       "priority": 2,
-      "work_key": "apa-p10-a03-s02",
+      "work_key": "architecture-constraints-cost",
       "depends_on": [
         "APA-P10.A03.S01"
       ],
@@ -835,7 +871,7 @@
       "kind": "VALIDATION",
       "status": "READY",
       "priority": 1,
-      "work_key": "apa-p20-a01-s01",
+      "work_key": "ac29-sdk-apx-provenance",
       "depends_on": [
         "APA-P10.A01.S01"
       ],
@@ -862,7 +898,7 @@
       "kind": "VALIDATION",
       "status": "READY",
       "priority": 1,
-      "work_key": "apa-p20-a01-s02",
+      "work_key": "read-only-command-capabilities",
       "depends_on": [
         "APA-P20.A01.S01"
       ],
@@ -889,7 +925,7 @@
       "kind": "VALIDATION",
       "status": "READY",
       "priority": 1,
-      "work_key": "apa-p20-a01-s03",
+      "work_key": "raw-test-evidence-register",
       "depends_on": [
         "APA-P20.A01.S02"
       ],
@@ -916,7 +952,7 @@
       "kind": "CONTROL",
       "status": "READY",
       "priority": 2,
-      "work_key": "apa-p20-a02-s01",
+      "work_key": "isolated-live-test-plan",
       "depends_on": [
         "APA-P20.A01.S03"
       ],
@@ -943,7 +979,7 @@
       "kind": "CONTROL",
       "status": "BLOCKED",
       "priority": 2,
-      "work_key": "apa-p20-a02-s02",
+      "work_key": "owner-live-write-permission",
       "depends_on": [
         "APA-P20.A02.S01"
       ],
@@ -970,7 +1006,7 @@
       "kind": "VALIDATION",
       "status": "BLOCKED",
       "priority": 2,
-      "work_key": "apa-p20-a02-s03",
+      "work_key": "isolated-live-test-results",
       "depends_on": [
         "APA-P20.A02.S02"
       ],
@@ -997,7 +1033,7 @@
       "kind": "INTEGRATION",
       "status": "READY",
       "priority": 2,
-      "work_key": "apa-p30-a01-s01",
+      "work_key": "native-bim-shortest-path",
       "depends_on": [
         "APA-P10.A03.S02",
         "APA-P20.A01.S03"
@@ -1025,7 +1061,7 @@
       "kind": "INTEGRATION",
       "status": "READY",
       "priority": 2,
-      "work_key": "apa-p30-a01-s02",
+      "work_key": "architecture-blockers-fallbacks",
       "depends_on": [
         "APA-P30.A01.S01"
       ],
@@ -1052,7 +1088,7 @@
       "kind": "BUILD",
       "status": "READY",
       "priority": 2,
-      "work_key": "apa-p30-a02-s01",
+      "work_key": "mvp-implementation-milestones",
       "depends_on": [
         "APA-P30.A01.S01"
       ],
@@ -1081,7 +1117,7 @@
       "kind": "VALIDATION",
       "status": "READY",
       "priority": 2,
-      "work_key": "apa-p30-a02-s02",
+      "work_key": "mvp-acceptance-rollback",
       "depends_on": [
         "APA-P30.A02.S01"
       ],
@@ -1108,7 +1144,7 @@
       "kind": "CONTROL",
       "status": "BLOCKED",
       "priority": 2,
-      "work_key": "apa-p40-a01-s01",
+      "work_key": "always-on-executor-auth",
       "depends_on": [
         "APA-P00.A03.S02"
       ],
@@ -1135,7 +1171,7 @@
       "kind": "BUILD",
       "status": "BLOCKED",
       "priority": 2,
-      "work_key": "apa-p40-a01-s02",
+      "work_key": "unattended-research-cycle",
       "depends_on": [
         "APA-P40.A01.S01"
       ],
@@ -1162,7 +1198,7 @@
       "kind": "BUILD",
       "status": "BLOCKED",
       "priority": 2,
-      "work_key": "apa-p40-a01-s03",
+      "work_key": "watchdog-and-error-journal",
       "depends_on": [
         "APA-P40.A01.S02"
       ],
@@ -1189,7 +1225,7 @@
       "kind": "VALIDATION",
       "status": "BLOCKED",
       "priority": 2,
-      "work_key": "apa-p40-a01-s04",
+      "work_key": "24h-continuity-proof",
       "depends_on": [
         "APA-P40.A01.S03"
       ],
@@ -1216,7 +1252,7 @@
       "kind": "CONSOLIDATION",
       "status": "READY",
       "priority": 0,
-      "work_key": "apa-p50-a01-s01",
+      "work_key": "cross-research-traceability",
       "depends_on": [
         "APA-P00.A02.S02"
       ],
@@ -1246,7 +1282,7 @@
       "kind": "CONSOLIDATION",
       "status": "READY",
       "priority": 0,
-      "work_key": "apa-p50-a01-s02",
+      "work_key": "claim-and-evidence-dedup",
       "depends_on": [
         "APA-P50.A01.S01"
       ],
@@ -1275,7 +1311,7 @@
       "kind": "INTEGRATION",
       "status": "READY",
       "priority": 1,
-      "work_key": "apa-p50-a01-s03",
+      "work_key": "theme-research-synthesis",
       "depends_on": [
         "APA-P50.A01.S01"
       ],
@@ -1302,7 +1338,7 @@
       "kind": "RESEARCH",
       "status": "READY",
       "priority": 1,
-      "work_key": "apa-p50-a02-s01",
+      "work_key": "tool-capability-catalog",
       "depends_on": [
         "APA-P00.A02.S02"
       ],
@@ -1334,7 +1370,7 @@
       "kind": "INTEGRATION",
       "status": "READY",
       "priority": 1,
-      "work_key": "apa-p50-a02-s02",
+      "work_key": "tool-adapter-overlap-map",
       "depends_on": [
         "APA-P50.A02.S01"
       ],
@@ -1363,7 +1399,7 @@
       "kind": "BUILD",
       "status": "READY",
       "priority": 2,
-      "work_key": "apa-p50-a02-s03",
+      "work_key": "tool-consolidation-roadmap",
       "depends_on": [
         "APA-P50.A02.S02",
         "APA-P30.A01.S01"
@@ -1391,7 +1427,7 @@
       "kind": "INTEGRATION",
       "status": "READY",
       "priority": 2,
-      "work_key": "apa-p50-a03-s01",
+      "work_key": "research-to-mvp-synthesis",
       "depends_on": [
         "APA-P50.A01.S03",
         "APA-P50.A02.S02"
@@ -1421,7 +1457,7 @@
       "kind": "VALIDATION",
       "status": "READY",
       "priority": 2,
-      "work_key": "apa-p50-a03-s02",
+      "work_key": "integration-go-no-go",
       "depends_on": [
         "APA-P50.A03.S01"
       ],
@@ -1448,7 +1484,7 @@
       "kind": "CONTROL",
       "status": "DONE_PUBLISHED",
       "priority": 0,
-      "work_key": "apa-p60-a01-s01",
+      "work_key": "canonical-project-dag",
       "depends_on": [
         "APA-P00.A02.S02"
       ],
@@ -1475,9 +1511,9 @@
       "action_id": "APA-P60.A01",
       "title": "Валидатор DAG, статусов, duplicate work и gates",
       "kind": "BUILD",
-      "status": "READY",
+      "status": "DONE_PUBLISHED",
       "priority": 0,
-      "work_key": "apa-p60-a01-s02",
+      "work_key": "controller-dag-validator",
       "depends_on": [
         "APA-P60.A01.S01"
       ],
@@ -1493,7 +1529,12 @@
       "lease_until": null,
       "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-CONTROLLER-CODE",
+        "ART-CONTROLLER-TESTS",
+        "ART-CONTROLLER-CI",
+        "ART-CONTROLLER-VIEWS"
+      ],
       "blocked_reason": null
     },
     "APA-P60.A01.S03": {
@@ -1502,9 +1543,9 @@
       "action_id": "APA-P60.A01",
       "title": "Генератор единого control board, next work, context pack",
       "kind": "BUILD",
-      "status": "READY",
+      "status": "DONE_PUBLISHED",
       "priority": 0,
-      "work_key": "apa-p60-a01-s03",
+      "work_key": "controller-generated-views",
       "depends_on": [
         "APA-P60.A01.S02"
       ],
@@ -1520,7 +1561,12 @@
       "lease_until": null,
       "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-CONTROLLER-CODE",
+        "ART-CONTROLLER-TESTS",
+        "ART-CONTROLLER-CI",
+        "ART-CONTROLLER-VIEWS"
+      ],
       "blocked_reason": null
     },
     "APA-P60.A01.S04": {
@@ -1529,9 +1575,9 @@
       "action_id": "APA-P60.A01",
       "title": "End-to-end controller workflow и readback",
       "kind": "VALIDATION",
-      "status": "READY",
+      "status": "DONE_PUBLISHED",
       "priority": 0,
-      "work_key": "apa-p60-a01-s04",
+      "work_key": "controller-github-e2e",
       "depends_on": [
         "APA-P60.A01.S03"
       ],
@@ -1547,7 +1593,12 @@
       "lease_until": null,
       "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-CONTROLLER-CODE",
+        "ART-CONTROLLER-TESTS",
+        "ART-CONTROLLER-CI",
+        "ART-CONTROLLER-VIEWS"
+      ],
       "blocked_reason": null
     },
     "APA-P60.A02.S01": {
@@ -1556,9 +1607,9 @@
       "action_id": "APA-P60.A02",
       "title": "Handoff protocol: каждый чат читает control plan, берёт S-ID",
       "kind": "CONTROL",
-      "status": "READY",
+      "status": "DONE_PUBLISHED",
       "priority": 0,
-      "work_key": "apa-p60-a02-s01",
+      "work_key": "cross-chat-handoff",
       "depends_on": [
         "APA-P60.A01.S03"
       ],
@@ -1574,7 +1625,12 @@
       "lease_until": null,
       "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-CONTROLLER-CODE",
+        "ART-CONTROLLER-TESTS",
+        "ART-CONTROLLER-CI",
+        "ART-CONTROLLER-HANDOFF"
+      ],
       "blocked_reason": null
     },
     "APA-P60.A02.S02": {
@@ -1583,9 +1639,9 @@
       "action_id": "APA-P60.A02",
       "title": "Связать publisher inbox с controller plan, запретить orphan runs",
       "kind": "INTEGRATION",
-      "status": "READY",
+      "status": "DONE_PUBLISHED",
       "priority": 1,
-      "work_key": "apa-p60-a02-s02",
+      "work_key": "publisher-plan-claim-gate",
       "depends_on": [
         "APA-P60.A01.S02"
       ],
@@ -1603,7 +1659,12 @@
       "lease_until": null,
       "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-CONTROLLER-CODE",
+        "ART-CONTROLLER-TESTS",
+        "ART-CONTROLLER-CI",
+        "ART-CONTROLLER-VIEWS"
+      ],
       "blocked_reason": null
     },
     "APA-P60.A02.S03": {
@@ -1612,9 +1673,9 @@
       "action_id": "APA-P60.A02",
       "title": "Протестировать CAS-claim, lease, duplicate prevention",
       "kind": "VALIDATION",
-      "status": "READY",
+      "status": "PARTIAL",
       "priority": 1,
-      "work_key": "apa-p60-a02-s03",
+      "work_key": "claim-concurrency-test",
       "depends_on": [
         "APA-P60.A02.S01",
         "APA-P60.A02.S02"
@@ -1626,13 +1687,249 @@
       "outputs": [
         "Два исполнителя не получают один work_key"
       ],
-      "acceptance": "Два исполнителя не получают один work_key",
+      "acceptance": "Offline tests PASS; concurrent two-writer CAS and lease-expiry recovery NOT_VERIFIED",
       "owner": null,
       "lease_until": null,
       "claim_ref": null,
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
+    }
+  },
+  "topics": {
+    "HUB_GOVERNANCE": {
+      "id": "HUB_GOVERNANCE",
+      "title": "Канонический hub и реестр",
+      "task_ids": [
+        "APA-P00.A01.S01",
+        "APA-P00.A01.S02",
+        "APA-P00.A01.S03",
+        "APA-P00.A01.S04",
+        "APA-P00.A02.S01",
+        "APA-P00.A02.S02",
+        "APA-P00.A02.S03",
+        "APA-P00.A02.S04"
+      ],
+      "artifact_ids": [
+        "ART-BRANCH-JSON",
+        "ART-BRANCHES",
+        "ART-PLAN",
+        "ART-PUB-RECEIPT",
+        "ART-QUEUE",
+        "ART-REGISTER",
+        "ART-STATUS"
+      ],
+      "synthesis_state": "OPEN",
+      "owner": null
+    },
+    "PUBLISHER": {
+      "id": "PUBLISHER",
+      "title": "Публикация, квитанции и capability",
+      "task_ids": [
+        "APA-P00.A03.S01",
+        "APA-P00.A03.S02",
+        "APA-P00.A03.S03",
+        "APA-P00.A03.S04"
+      ],
+      "artifact_ids": [
+        "ART-OS-AUDIT",
+        "ART-PUB-RECEIPT",
+        "ART-PUBLISHER"
+      ],
+      "synthesis_state": "OPEN",
+      "owner": null
+    },
+    "SDK_NATIVE": {
+      "id": "SDK_NATIVE",
+      "title": "Archicad 29 native SDK",
+      "task_ids": [
+        "APA-P10.A01.S01",
+        "APA-P10.A01.S02",
+        "APA-P10.A01.S03"
+      ],
+      "artifact_ids": [
+        "ART-REGISTER",
+        "ART-SDK-GET3D",
+        "ART-SDK-SEO"
+      ],
+      "synthesis_state": "OPEN",
+      "owner": null
+    },
+    "TAPIR_PYTHON": {
+      "id": "TAPIR_PYTHON",
+      "title": "Tapir и Python/JSON",
+      "task_ids": [
+        "APA-P10.A02.S01"
+      ],
+      "artifact_ids": [
+        "ART-REGISTER"
+      ],
+      "synthesis_state": "OPEN",
+      "owner": null
+    },
+    "GDL_TN": {
+      "id": "GDL_TN",
+      "title": "GDL и ТЕХНОНИКОЛЬ",
+      "task_ids": [
+        "APA-P10.A02.S02"
+      ],
+      "artifact_ids": [
+        "ART-PR20"
+      ],
+      "synthesis_state": "OPEN",
+      "owner": null
+    },
+    "IFC_MCP": {
+      "id": "IFC_MCP",
+      "title": "IFC/openBIM и MCP",
+      "task_ids": [
+        "APA-P10.A02.S03"
+      ],
+      "artifact_ids": [
+        "ART-REGISTER"
+      ],
+      "synthesis_state": "OPEN",
+      "owner": null
+    },
+    "MEP": {
+      "id": "MEP",
+      "title": "MEP native и Tapir",
+      "task_ids": [
+        "APA-P10.A02.S04"
+      ],
+      "artifact_ids": [
+        "ART-REGISTER"
+      ],
+      "synthesis_state": "OPEN",
+      "owner": null
+    },
+    "ARCHITECTURE": {
+      "id": "ARCHITECTURE",
+      "title": "Варианты архитектуры",
+      "task_ids": [
+        "APA-P10.A03.S01",
+        "APA-P10.A03.S02",
+        "APA-P30.A01.S01",
+        "APA-P30.A01.S02"
+      ],
+      "artifact_ids": [
+        "ART-REGISTER"
+      ],
+      "synthesis_state": "OPEN",
+      "owner": null
+    },
+    "TESTS": {
+      "id": "TESTS",
+      "title": "Read-only и разрешённые live-тесты",
+      "task_ids": [
+        "APA-P20.A01.S01",
+        "APA-P20.A01.S02",
+        "APA-P20.A01.S03",
+        "APA-P20.A02.S01",
+        "APA-P20.A02.S02",
+        "APA-P20.A02.S03"
+      ],
+      "artifact_ids": [
+        "ART-PLAN",
+        "ART-PR20",
+        "ART-REGISTER"
+      ],
+      "synthesis_state": "OPEN",
+      "owner": null
+    },
+    "MVP": {
+      "id": "MVP",
+      "title": "MVP и внедрение",
+      "task_ids": [
+        "APA-P30.A02.S01",
+        "APA-P30.A02.S02"
+      ],
+      "artifact_ids": [
+        "ART-PLAN"
+      ],
+      "synthesis_state": "OPEN",
+      "owner": null
+    },
+    "AUTOMATION": {
+      "id": "AUTOMATION",
+      "title": "Автономизация и 24h gate",
+      "task_ids": [
+        "APA-P40.A01.S01",
+        "APA-P40.A01.S02",
+        "APA-P40.A01.S03",
+        "APA-P40.A01.S04"
+      ],
+      "artifact_ids": [
+        "ART-OS-AUDIT",
+        "ART-PUBLISHER"
+      ],
+      "synthesis_state": "OPEN",
+      "owner": null
+    },
+    "KNOWLEDGE_GRAPH": {
+      "id": "KNOWLEDGE_GRAPH",
+      "title": "Сведение исследований и доказательств",
+      "task_ids": [
+        "APA-P50.A01.S01",
+        "APA-P50.A01.S02",
+        "APA-P50.A01.S03"
+      ],
+      "artifact_ids": [
+        "ART-BRANCHES",
+        "ART-REGISTER"
+      ],
+      "synthesis_state": "OPEN",
+      "owner": null
+    },
+    "TOOL_INTEGRATION": {
+      "id": "TOOL_INTEGRATION",
+      "title": "Каталог и интеграция инструментов",
+      "task_ids": [
+        "APA-P50.A02.S01",
+        "APA-P50.A02.S02",
+        "APA-P50.A02.S03"
+      ],
+      "artifact_ids": [
+        "ART-PLAN",
+        "ART-REGISTER"
+      ],
+      "synthesis_state": "OPEN",
+      "owner": null
+    },
+    "SYNTHESIS": {
+      "id": "SYNTHESIS",
+      "title": "Синтез research → implementation",
+      "task_ids": [
+        "APA-P50.A03.S01",
+        "APA-P50.A03.S02"
+      ],
+      "artifact_ids": [
+        "ART-PLAN",
+        "ART-REGISTER"
+      ],
+      "synthesis_state": "OPEN",
+      "owner": null
+    },
+    "CONTROLLER": {
+      "id": "CONTROLLER",
+      "title": "Единый управляющий и межчатовый контекст",
+      "task_ids": [
+        "APA-P60.A01.S01",
+        "APA-P60.A01.S02",
+        "APA-P60.A01.S03",
+        "APA-P60.A01.S04",
+        "APA-P60.A02.S01",
+        "APA-P60.A02.S02",
+        "APA-P60.A02.S03"
+      ],
+      "artifact_ids": [
+        "ART-CONTROLLER",
+        "ART-PLAN",
+        "ART-PUB-WORKFLOW",
+        "ART-PUBLISHER"
+      ],
+      "synthesis_state": "OPEN",
+      "owner": null
     }
   }
 }
