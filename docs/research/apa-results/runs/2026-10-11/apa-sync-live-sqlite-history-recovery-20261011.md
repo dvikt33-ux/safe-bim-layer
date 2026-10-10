@@ -135,3 +135,32 @@ All 21 event rows were displayed; every row's `conflict=False`. The original `ap
 The canonical controller at revision 35 includes existing `APA-P00.A02.S03` (`work_key=legacy-evidence-dedup`, READY) and `APA-P00.A02.S04` (`work_key=publication-completeness-audit`, PARTIAL). These already cover reconciliation of the three rejected events with immutable GitHub reports and validating source claims before admitting them to the research corpus. No duplicate S-ID, unauthorized claim, premature `DONE_PUBLISHED` or changes to controller `PROJECT_PLAN.json` were made by this documentation-only evidence update.
 
 **Next priority:** audited, source-backed disposition for each of the three malformed messages under the existing evidence-reconciliation S-ID. A completed Slack transport test is not approval to weaken the import protocol.
+
+## Final owner-confirmed HTTP readback *after* second restart (2026-10-11)
+
+The owner ran fresh, independent read-only PowerShell HTTP requests after the 02:33:01 clean second restart, against the reconnected coordinator's loopback API:
+
+```powershell
+$base = "http://127.0.0.1:8765"
+$result = Invoke-RestMethod "$base/v1/changes?after=0&limit=200"
+$state = Invoke-RestMethod "$base/v1/state"
+```
+
+The output of the four requested checks was:
+
+```text
+EVENTS_TOTAL: 21
+NEXT_CURSOR: 21
+STATES_TOTAL: 16
+SMOKE_PRESERVED: True
+```
+
+**FINAL ACCEPTANCE — LIVE PASS:** after historical backfill and a clean restart, the coordinator's live SQLite-backed loopback API still returns all 21 records, cursor 21, 16 distinct task/phase states and the unchanged original smoke event `apa-live-smoke-20261011-002` at `seq=1`. The second bootstrap already recorded `accepted=0, duplicates=21, conflicts=0, rejected=3`; therefore both the idempotent replay and persisted API availability across restart have independently observed PASS results.
+
+**Precision:** the user's final command did *not* request `EFFECTIVE_CONFLICTS` again. The previously measured zero effective conflicts was verified in the first readback; the second bootstrap separately counted `conflicts=0` during replay. Do not misrepresent this as an independent post-second-restart effective-state conflict count. Neither `OFFLINE PASS` nor `SOURCE INFO` is a native Archicad LIVE PASS.
+
+### Closed vs open items
+
+- **CLOSED for tested scope:** raw Slack event parser compatibility, first 20-event recovery, original event retention, exact history deduplication, second restart and persistence readback over loopback API.
+- **OPEN:** audit the three malformed Slack messages against original GitHub immutable reports and receipts; verify that every imported claim has source evidence; ensure canonical `PROJECT_PLAN.json` controller task status changes only via claim/audit gates. `APA-P00.A02.S03` and `APA-P00.A02.S04` remain existing dispatch IDs for these activities.
+- **NOT CLAIMED:** 24/7 research agent, automatic collection of ChatGPT conversations into GitHub, native Archicad model functionality or technical validity of all 21 stored event claims.
