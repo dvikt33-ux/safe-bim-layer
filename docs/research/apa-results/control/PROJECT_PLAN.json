@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 14,
+  "revision": 15,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -709,7 +709,7 @@
       "action_id": "APA-P10.A01",
       "title": "Morph/Roof/Shell/Openings/SEO/3D dump",
       "kind": "RESEARCH",
-      "status": "READY",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "sdk-geometry-modeldump",
       "depends_on": [
@@ -723,9 +723,9 @@
         "Матрица покрытия и побочных эффектов"
       ],
       "acceptance": "Матрица покрытия и побочных эффектов",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "chatgpt:apa-technical",
+      "lease_until": "2026-10-10T16:00:00Z",
+      "claim_ref": "apa-technical-20261010T1438Z-7f3b6d",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
