@@ -53,3 +53,45 @@ Starting to receive messages from a new connection
 ## Change control
 
 No `main`, existing development branches, Archicad 29, PLN, APX or master PROJECT_PLAN changed by this bootstrapped recovery. Canonical report stored in `docs/research/apa-results/runs/2026-10-11/`; GitHub readback must confirm publication. Transport and persistence recovery success does **not** establish autonomous ChatGPT research, auto-push from chats or a complete Archicad project interface.
+
+## Owner-verified independent LOCAL HTTP API readback (2026-10-11)
+
+**Gate result: LIVE HTTP API READBACK PASS.** After the successful 02:24 Socket Mode bootstrap, the owner independently ran the following read-only requests from another PowerShell while the coordinator remained running:
+
+- `GET http://127.0.0.1:8765/v1/changes?after=0&limit=200`
+- `GET http://127.0.0.1:8765/v1/state`
+
+Only counts and a safe table of `seq, task_id, phase, status, conflict` were shared. The actual output:
+
+```text
+EVENTS_TOTAL: 21
+ORIGINAL_SMOKE_PRESERVED: True
+STATES_TOTAL: 16
+EFFECTIVE_CONFLICTS: 0
+NEXT_CURSOR: 21
+
+LIVE, INFO        1
+OFFLINE, PASS     4
+SOURCE, INFO     13
+OFFLINE, INFO     2
+LIVE, BLOCKED     1
+```
+
+All 21 event rows were displayed; every row's `conflict=False`. The original `apa-live-smoke-20261011-002` remains at `seq=1`. The final persisted row `seq=21` is present. Among the 16 effective task/phase states, the API reports `EFFECTIVE_CONFLICTS=0`. Important: 16 is the number of distinct task/phase state keys (21 events include successive informational updates), **not** an independent count of all historical research tasks or proof of semantic deduplication. `APA-SYNC-LIVE-01:LIVE` remains **BLOCKED**; `APA-SYNC-LIVE-READINESS-01:OFFLINE` is PASS only in OFFLINE, with no promotion to Archicad BUILD/LIVE.
+
+### State transitions and remaining gates
+
+| Scope | Result | Evidence |
+| --- | --- | --- |
+| Slack Socket Mode connection | LIVE_PASS | owner-local 02:24 daemon log |
+| Strict historical parser on raw Slack | LIVE_READ_ONLY_PASS | `21/24` parse valid, earlier raw probe |
+| SQLite history bootstrap | LIVE_PASS | `accepted=20, duplicates=1, conflicts=0` |
+| SQLite post-backfill readback | **LIVE_PASS** | `EVENTS_TOTAL=21`, cursor 21, seq1 preserved |
+| Derived state query | **LIVE_PASS** | 16 task-phase state keys, zero effective conflicts |
+| New history events verified after another daemon restart | **NOT_VERIFIED** | requires clean stop/restart: expected accepted=0, duplicates=21, rejected=3 if unchanged history |
+| Three malformed legacy messages | **BLOCKED / pending provenance audit** | two missing fences, one incomplete closing fence |
+| Automatic ChatGPT research and publication to GitHub | **NOT_VERIFIED / not delivered by Slack ledger** | no claim of autonomous chat exporter or 24/7 research agent |
+
+**Audit linkages (existing controller S-IDs; no unauthorized dispatch):** `APA-P00.A02.S03` (legacy evidence reconciliation) covers source-linked review of remaining malformed messages; `APA-P00.A02.S04` (publication completeness) covers verifying each claim against GitHub immutable report + receipt before marking anything DONE. Controller `PROJECT_PLAN.json` revision/status/claims were NOT changed: this run did not obtain a formal controller claim and LIVE message transport is not task completion.
+
+**Next operator action:** cleanly stop the running coordinator with Ctrl+C, restart the same tested checkout (not another daemon in parallel) and capture the fresh `APA Slack bootstrap` counts. Then re-read the local read-only API to ensure 21 rows and preserved seq1, and publish the final receipt. **No new Slack messages should be sent just to test dedupe.**
