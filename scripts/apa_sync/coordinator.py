@@ -21,7 +21,7 @@ STATUSES = frozenset({"INFO", "PASS", "BLOCKED", "NOT_VERIFIED"})
 PHASES = frozenset({"SOURCE", "OFFLINE", "SYNTHETIC", "BUILD", "LIVE"})
 FIELDS = frozenset({
     "event_id", "task_id", "status", "phase", "source",
-    "summary", "evidence_urls", "supersedes",
+    "summary", "evidence_urls", "supersedes", "schema",
 })
 
 
@@ -44,6 +44,10 @@ def parse_event(text: str) -> dict | None:
         raise InvalidEvent("Invalid event JSON") from exc
     if not isinstance(event, dict) or set(event) - FIELDS:
         raise InvalidEvent("Unexpected event keys")
+    # Real multi-chat messages may carry an explicit schema discriminator.
+    # Keep validating its value rather than silently accepting another protocol.
+    if "schema" in event and event["schema"] != EVENT_PREFIX:
+        raise InvalidEvent("Unsupported schema discriminator")
     for key in ("event_id", "task_id", "status", "phase", "source", "summary"):
         if not isinstance(event.get(key), str):
             raise InvalidEvent(f"Missing or invalid {key}")
