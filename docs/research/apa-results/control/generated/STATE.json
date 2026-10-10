@@ -1,6 +1,6 @@
 {
   "active": [],
-  "artifact_count": 31,
+  "artifact_count": 32,
   "counts": {
     "BLOCKED": 8,
     "CLAIMED": 0,
@@ -9,8 +9,8 @@
     "EXPIRED_LEASES": 0,
     "HELD_BY_DEPENDENCIES": 17,
     "IN_PROGRESS": 0,
-    "PARTIAL": 10,
-    "READY": 23,
+    "PARTIAL": 11,
+    "READY": 22,
     "SUPERSEDED": 0
   },
   "dispatchable": {
@@ -64,7 +64,7 @@
   "known_published_v2_runs": 3,
   "legacy_reports": "NOT_FULLY_INDEXED",
   "orphan_v2_manifests": [],
-  "plan_revision": 16,
+  "plan_revision": 20,
   "publisher": "DEPLOYED_SYNTHETIC_E2E_PASS",
   "research_runner_24h": "NOT_RUNNING",
   "scheduler": {

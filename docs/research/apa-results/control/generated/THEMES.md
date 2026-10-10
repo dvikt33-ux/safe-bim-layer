@@ -92,7 +92,7 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 ### SDK_NATIVE — Archicad 29 native SDK
 
 - APA-P10.A01.S01 [RESEARCH/PARTIAL]: AC29 SDK headers и native create/change/get сигнатуры; work_key=sdk-native-signatures; related=none
-- APA-P10.A01.S02 [RESEARCH/READY]: Этажи, building materials, surfaces, composites, profiles, связи; work_key=sdk-attributes-stories; related=none
+- APA-P10.A01.S02 [RESEARCH/PARTIAL]: Этажи, building materials, surfaces, composites, profiles, связи; work_key=sdk-attributes-stories; related=none
 - APA-P10.A01.S03 [RESEARCH/PARTIAL]: Morph/Roof/Shell/Openings/SEO/3D dump; work_key=sdk-geometry-modeldump; related=none
 
 ### SYNTHESIS — Синтез research → implementation

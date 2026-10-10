@@ -212,7 +212,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P10.A01.S02
 
-**Этажи, building materials, surfaces, composites, profiles, связи** — RESEARCH / READY / P1
+**Этажи, building materials, surfaces, composites, profiles, связи** — RESEARCH / PARTIAL / P1
 
 - Parent: APA-P10 → APA-P10.A01
 - Topic: SDK_NATIVE
