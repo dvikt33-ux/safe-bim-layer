@@ -102,7 +102,7 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 
 ### TAPIR_PYTHON — Tapir и Python/JSON
 
-- APA-P10.A02.S01 [RESEARCH/READY]: Tapir публичные версии и Python/JSON vs локальная 1.5.10; work_key=tapir-python-compatibility; related=APA-P50.A02.S01
+- APA-P10.A02.S01 [RESEARCH/PARTIAL]: Tapir публичные версии и Python/JSON vs локальная 1.5.10; work_key=tapir-python-compatibility; related=APA-P50.A02.S01
 
 ### TESTS — Read-only и разрешённые live-тесты
 

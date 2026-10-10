@@ -244,7 +244,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P10.A02.S01
 
-**Tapir публичные версии и Python/JSON vs локальная 1.5.10** — RESEARCH / READY / P1
+**Tapir публичные версии и Python/JSON vs локальная 1.5.10** — RESEARCH / PARTIAL / P1
 
 - Parent: APA-P10 → APA-P10.A02
 - Topic: TAPIR_PYTHON
@@ -255,7 +255,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md)
-- Existing V2 runs: none
+- Existing V2 runs: [APA-RUN-20261010-163950Z-tapir-compat-6f29](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md) (receipt verified)
 - Expected output: Compatibility matrix с source SHA
 
 ## APA-P10.A02.S02
