@@ -38,3 +38,11 @@ A **standalone read-only verifier** `APA_Pavilion_Saved_PLN_ReadOnly_Audit_v1.zi
 **Controller:** canonical `control/PROJECT_PLAN.json` revision 27 currently marks `APA-P20.A02.S03` BLOCKED with unmet P20 dependencies. This documentation does **not** override its status, claim an executor lease, or dispatch a blocked task. Integrate this artifact through the project controller's evidence/task proposal process before any state promotion.
 
 **No main/master, existing tested PR branches, live PLN, or installed APX were modified by this GitHub documentation commit.**
+
+## Follow-up: live read-only audit executed — 12/12 PASS
+
+The operator subsequently ran the verifier and uploaded `saved-pavilion-audit-20261010T222136Z.json`. The JSON was independently parsed and its 12 records were checked for unique GUIDs, all PASS and zero problems. **Result:** `SAVED_COPY_LIVE_READBACK_PASS`; all 12 verified, 57 total elements in full native inventory, `writesExecuted=false`, and local saved-copy path `diskFile.exists=true` (15,992,896 bytes). **Evidence SHA-256:** `593e637bfe738e5baac979d5cc897f49e1b0d23a4ae431b7f06468c0e829ecd5`.
+
+Full table of all GUIDs, readback geometry, materials and host relationships: [saved copy 12/12 audit report](apa-p20-a02-s03-saved-pln-live-readback-20261010-222136.md), published [commit 1e21c3a](https://github.com/dvikt33-ux/safe-bim-layer/commit/1e21c3aaa9541f03918372ad479621b0457a3018). GitHub publication was read back and verified.
+
+**Updated evidence classification:** `USER_SUPPLIED_LIVE_API_REPORT_CHECKED`. Earlier `USER_LIVE_NOT_RUN` above is retained as historical state at tool creation. File persistence across close/reopen remains separately unverified without operator attestation. Do not elevate controller task `APA-P20.A02.S03` from BLOCKED without its dependency/claim gates.
