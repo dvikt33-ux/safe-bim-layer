@@ -8,6 +8,12 @@
 
 Запрос на круглосуточный режим означает последовательные обычные исследовательские проходы и публикации. **Он не доказывает наличие работающего 24/7 runner**: расписание, права GitHub и фактические циклы должны быть проверены отдельно. Пока это не подтверждено, статус NOT_RUNNING.
 
+## ⚙️ Единый управляющий APA Project Controller (2026-10-10)
+
+**Единственный источник новых поручений и актуальных статусов:** [PROJECT_PLAN.json](control/PROJECT_PLAN.json). **Старт любому чату:** [HANDOFF](control/generated/HANDOFF.md) → [CONTROL_BOARD](control/generated/CONTROL_BOARD.md) → [TASK_CARDS](control/generated/TASK_CARDS.md). [THEMES](control/generated/THEMES.md) связывает 15 тематических направлений, [RELATIONSHIPS](control/generated/RELATIONSHIPS.md) — зависимости и связанные работы. [Инструкция управляющего](control/README.md).
+
+[GitHub Actions 38046747207](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38046747207) **SUCCESS**: 6 publisher + 12 controller offline tests, проверки claim/inbox, автоматическое построение 6 views и GitHub REST readback. План содержит **50 S-ID, 15 тем, 24 реестровых артефакта**; 10 DONE_PUBLISHED, 15 dispatchable, 8 BLOCKED на снимке revision 2. Publisher и контроллер работают по push, **автономный ChatGPT 24/7 NOT_RUNNING**. Старые flat отчёты пока не полностью сопоставлены; статусы в старых ручных документах не заменяют PROJECT_PLAN.
+
 ## ОТКРЫВАТЬ СНАЧАЛА: единый центр управления
 
 **Постоянная ссылка из GitHub Issues:** [Issue #23 — APA Research Control Center](https://github.com/dvikt33-ux/safe-bim-layer/issues/23). Она доступна без переключения на исследовательскую ветку; актуальные данные находятся в этой папке.
