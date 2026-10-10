@@ -12,11 +12,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | BLOCKED | 8 |
 | CLAIMED | 0 |
 | DONE_PUBLISHED | 10 |
-| IN_PROGRESS | 0 |
-| PARTIAL | 15 |
+| IN_PROGRESS | 1 |
+| PARTIAL | 14 |
 | READY | 41 |
 | SUPERSEDED | 0 |
-| DISPATCHABLE_NOW | 17 |
+| DISPATCHABLE_NOW | 16 |
 | HELD_BY_DEPENDENCIES | 39 |
 | EXPIRED_LEASES | 0 |
 
@@ -30,7 +30,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| — | — | — | — |
+| APA-P00.A02.S03 | chatgpt-gpt6-manual-branch-dedup-20261011 | 2026-10-11T00:24:36Z | legacy-evidence-dedup |
 
 ## CONTROL — 0 ready
 
@@ -38,12 +38,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | --- | --- | --- |
 | — | — | — |
 
-## CONSOLIDATION — 4 ready
+## CONSOLIDATION — 3 ready
 
 | Priority | Task | Acceptance |
 | --- | --- | --- |
 | P0 | APA-P00.A01.S03 — Инвентаризировать 72 ветки и PR, проверить уникальные результаты и ancestry | Список уникальных артефактов, SHA, дубликатов и неизвестного |
-| P0 | APA-P00.A02.S03 — Связать старые находки с S-ID и удалить логические дубли без удаления оригиналов | Evidence map и superseded_by для дублей |
 | P0 | APA-P50.A01.S01 — Карта связей: исследования ↔ S-ID ↔ артефакты ↔ PR | Traceability matrix, orphan report list |
 | P1 | APA-P70.A01.S01 — Сопоставить полный продуктовый контракт с существующим кодом и исследованиями | Таблица требований полного цикла → исходные файлы/SHA → подтверждённые функции и ограничения; без новой реализации |
 

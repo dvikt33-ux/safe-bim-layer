@@ -100,7 +100,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P00.A02.S03
 
-**Связать старые находки с S-ID и удалить логические дубли без удаления оригиналов** — CONSOLIDATION / PARTIAL / P0
+**Связать старые находки с S-ID и удалить логические дубли без удаления оригиналов** — CONSOLIDATION / IN_PROGRESS / P0
 
 - Parent: APA-P00 → APA-P00.A02
 - Topic: HUB_GOVERNANCE
@@ -108,7 +108,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P00.A02.S02
 - Related, check before duplicating: APA-P50.A01.S02
 - Acceptance: Evidence map и superseded_by для дублей
-- Owner/lease: unclaimed
+- Owner/lease: chatgpt-gpt6-manual-branch-dedup-20261011 / 2026-10-11T00:24:36Z
 - Requires owner approval: False
 - Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md), [ART-BRANCHES](../../../../../docs/research/apa-results/inventories/FULL_BRANCH_INVENTORY.md)
 - Existing V2 runs: [APA-RUN-20261010-234200Z-slack-legacy-three-audit](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-234200Z-slack-legacy-three-audit/REPORT.md) (receipt verified)
@@ -830,7 +830,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Acceptance: Таблица требований полного цикла → исходные файлы/SHA → подтверждённые функции и ограничения; без новой реализации
 - Owner/lease: unclaimed
 - Requires owner approval: False
-- Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-PR16](https://github.com/dvikt33-ux/safe-bim-layer/pull/16), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md)
+- Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-PR16](https://github.com/dvikt33-ux/safe-bim-layer/pull/16), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34)
 - Existing V2 runs: none
 - Expected output: Таблица требований полного цикла → исходные файлы/SHA → подтверждённые функции и ограничения; без новой реализации
 
@@ -942,7 +942,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Acceptance: Создание полноценной BIM-геометрии из схемы через имеющиеся writer/graph; связные стены не дробятся без необходимости; тестовый PLN только после разрешения
 - Owner/lease: unclaimed
 - Requires owner approval: True
-- Source inputs: [ART-APA-PR16](https://github.com/dvikt33-ux/safe-bim-layer/pull/16), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md)
+- Source inputs: [ART-APA-PR16](https://github.com/dvikt33-ux/safe-bim-layer/pull/16), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34)
 - Existing V2 runs: none
 - Expected output: Создание полноценной BIM-геометрии из схемы через имеющиеся writer/graph; связные стены не дробятся без необходимости; тестовый PLN только после разрешения
 
@@ -958,7 +958,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Acceptance: Тесты обновления проекта без лишних элементов/потери GUID, readback этажей, материалов, хостов и откат изменений
 - Owner/lease: unclaimed
 - Requires owner approval: False
-- Source inputs: [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md)
+- Source inputs: [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34)
 - Existing V2 runs: none
 - Expected output: Тесты обновления проекта без лишних элементов/потери GUID, readback этажей, материалов, хостов и откат изменений
 
