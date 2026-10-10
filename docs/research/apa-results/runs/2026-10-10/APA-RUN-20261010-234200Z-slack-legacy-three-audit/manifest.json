@@ -1,0 +1,182 @@
+{
+  "action_id": "APA-P00.A02",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-SLACK-SMOKE-REPLACED",
+      "evidence_ids": [
+        "EV-SLACK-CHANNEL-20261011",
+        "EV-RECOVERY-LIVE-20261011"
+      ],
+      "statement": "The incomplete original Slack smoke is a malformed test semantically replaced by a verified persisted seq=1 event; no lost research result established.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-SLACK-PUBLISHER-DUP",
+      "evidence_ids": [
+        "EV-SLACK-CHANNEL-20261011",
+        "EV-PUBLISHER-WORKFLOW",
+        "EV-PUBLISHER-DEPLOY",
+        "EV-PUBLISHER-RECEIPT",
+        "EV-PUBLISHER-CI"
+      ],
+      "statement": "The unfenced publisher announcement repeats verified GitHub deployment workflow and synthetic success receipt, and is not a distinct machine event.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-SLACK-AUDIT-PARTIAL",
+      "evidence_ids": [
+        "EV-SLACK-CHANNEL-20261011",
+        "EV-GH-PR16",
+        "EV-GH-PR20",
+        "EV-GH-PR21",
+        "EV-COORDINATOR-CI",
+        "EV-RECOVERY-LIVE-20261011"
+      ],
+      "statement": "The malformed historical audit reports existing open draft PRs and 18 offline tests, but its former Socket Mode NOT_DEPLOYED claim is now superseded; unsupported phase AUDIT blocks protocol import.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-SIX-FILES-NOT-GLOBAL",
+      "evidence_ids": [
+        "EV-SLACK-CHANNEL-20261011"
+      ],
+      "statement": "The statement that six unnamed research summary files are absent globally cannot be proven by three historical tree scans; whole-branch inventory and semantic audit remain open.",
+      "status": "NOT_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-SLACK-CHANNEL-20261011",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "owner Slack read-only connector 2026-10-11",
+      "uri": "https://app.slack.com/client/T0C847UM0A2/C0C886E1PGR",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-RECOVERY-LIVE-20261011",
+      "kind": "USER_SUPPLIED",
+      "sha256": null,
+      "source_revision": "d2a1b8f034b806eb0d5a04eed9d0a6ebf766b2b9",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-11/apa-sync-live-sqlite-history-recovery-20261011.md",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-PUBLISHER-WORKFLOW",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "c22b38cd018e5c028e08c87fe5f59cb042627e77",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/.github/workflows/apa-research-publisher.yml",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-PUBLISHER-DEPLOY",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "cb22f3e84e750661eeda893c5b8e549d624c1ce9",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/deployments/APA_PUBLISHER_DEPLOYMENT_20261010.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-PUBLISHER-RECEIPT",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "d1be59eb8d38e85f154cd70bdc2048fa01ca05f4",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-PUBLISHER-CI",
+      "kind": "TEST_RESULT",
+      "sha256": null,
+      "source_revision": "github actions publish job SUCCESS",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38045964668",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-COORDINATOR-CI",
+      "kind": "TEST_RESULT",
+      "sha256": null,
+      "source_revision": "github actions unit job 18 tests PASS",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/37995245127",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-GH-PR16",
+      "kind": "GITHUB_PR",
+      "sha256": null,
+      "source_revision": "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/16",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-GH-PR20",
+      "kind": "GITHUB_PR",
+      "sha256": null,
+      "source_revision": "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/20",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-GH-PR21",
+      "kind": "GITHUB_PR",
+      "sha256": null,
+      "source_revision": "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/21",
+      "verification": "SOURCE_READ"
+    }
+  ],
+  "executor": "chatgpt-gpt6-manual-20261011-audit",
+  "executor_run_id": "APA-RUN-20261010-2342Z-slack-legacy-three-audit-01",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-10T23:45:38Z",
+  "idempotency_key": "sha256:d99d47cbb6abd783d60316dd756453fb815ca8fcdf79be5f1792ed8f89832a8b",
+  "inputs": [
+    "ART-REGISTER",
+    "ART-BRANCHES",
+    "owner Slack #apa-research three malformed messages, sanitized categories"
+  ],
+  "next_substep": "APA-P00.A02.S03",
+  "phase": "SOURCE",
+  "plan_id": "APA-P00",
+  "run_id": "APA-RUN-20261010-234200Z-slack-legacy-three-audit",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "Archicad 29 — no runtime access",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "sdk": null,
+    "source_branch": "research/apa-verified-results-hub-20261010",
+    "tapir": null
+  },
+  "source_revisions": [
+    {
+      "revision": "live-recovery-20261011",
+      "source_sha": "d2a1b8f034b806eb0d5a04eed9d0a6ebf766b2b9",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-11/apa-sync-live-sqlite-history-recovery-20261011.md"
+    },
+    {
+      "revision": "2026-10-11 readback",
+      "source_sha": "c22b38cd018e5c028e08c87fe5f59cb042627e77",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/.github/workflows/apa-research-publisher.yml"
+    },
+    {
+      "revision": "2026-10-10 synthetic deployment record",
+      "source_sha": "cb22f3e84e750661eeda893c5b8e549d624c1ce9",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/deployments/APA_PUBLISHER_DEPLOYMENT_20261010.json"
+    }
+  ],
+  "started_at": "2026-10-10T23:42:00Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P00.A02.S03"
+}
