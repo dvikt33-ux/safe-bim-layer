@@ -112,17 +112,69 @@ class ControllerTests(unittest.TestCase):
                    "plan_id": "APA-P10", "action_id": "APA-P10.A02",
                    "executor": "chatgpt-worker-1", "phase": "SOURCE"}
         path.write_text(json.dumps(payload))
-        with self.assertRaisesRegex(c.ControllerError, "UNCLAIMED_NEW_RUN"):
+        with self.assertRaisesRegex(c.ControllerError, "NOT_IN_PROGRESS"):
             c.verify_inbox(self.plan)
         plan = copy.deepcopy(self.plan)
         plan["tasks"]["APA-P10.A02.S01"].update(
             status="CLAIMED", owner="chatgpt-worker-1",
-            lease_until="2099-01-01T00:00:00Z", claim_ref="claim-1")
+            lease_until="2099-01-01T00:00:00Z", claim_ref="scheduled-run-1")
+        c.validate(plan)
+        with self.assertRaisesRegex(c.ControllerError, "NOT_IN_PROGRESS"):
+            c.verify_inbox(plan)
+        plan["tasks"]["APA-P10.A02.S01"]["status"] = "IN_PROGRESS"
+        payload["executor_run_id"] = "scheduled-run-1"
+        path.write_text(json.dumps(payload))
         c.validate(plan)
         c.verify_inbox(plan)
         payload["executor"] = "wrong-worker"
         path.write_text(json.dumps(payload))
         with self.assertRaisesRegex(c.ControllerError, "CLAIM_OWNER_MISMATCH"):
+            c.verify_inbox(plan)
+        payload["executor"] = "chatgpt-worker-1"
+        payload["executor_run_id"] = "wrong-run"
+        path.write_text(json.dumps(payload))
+        with self.assertRaisesRegex(c.ControllerError, "RUN_ID_MISMATCH"):
+            c.verify_inbox(plan)
+
+    def test_expired_run_cannot_publish(self):
+        c.INBOX.mkdir(parents=True)
+        rid = "APA-RUN-20261010-104437Z-expired"
+        sid = "APA-P10.A02.S01"
+        (c.INBOX / (rid + ".json")).write_text(json.dumps(
+            {"run_id": rid, "substep_id": sid, "plan_id": "APA-P10",
+             "action_id": "APA-P10.A02", "executor": "worker-1",
+             "executor_run_id": "scheduled-expired", "phase": "SOURCE"}))
+        plan = copy.deepcopy(self.plan)
+        plan["tasks"][sid].update(
+            status="IN_PROGRESS", owner="worker-1",
+            lease_until="2020-01-01T00:00:00Z", claim_ref="scheduled-expired")
+        c.validate(plan)
+        with self.assertRaisesRegex(c.ControllerError, "CLAIM_LEASE_EXPIRED"):
+            c.verify_inbox(plan)
+
+    def test_duplicate_active_execution_id_rejected(self):
+        plan = copy.deepcopy(self.plan)
+        for sid in ("APA-P10.A01.S01", "APA-P10.A02.S01"):
+            plan["tasks"][sid].update(
+                status="IN_PROGRESS", owner="worker-1",
+                lease_until="2099-01-01T00:00:00Z", claim_ref="same-scheduled-run")
+        with self.assertRaisesRegex(c.ControllerError, "DUPLICATE_ACTIVE_RUN"):
+            c.validate(plan)
+
+    def test_unfinished_dependency_blocks_new_run(self):
+        c.INBOX.mkdir(parents=True)
+        rid = "APA-RUN-20261010-104437Z-dependency"
+        sid = "APA-P10.A03.S01"
+        (c.INBOX / (rid + ".json")).write_text(json.dumps(
+            {"run_id": rid, "substep_id": sid, "plan_id": "APA-P10",
+             "action_id": "APA-P10.A03", "executor": "worker-1",
+             "executor_run_id": "scheduled-dependency", "phase": "SOURCE"}))
+        plan = copy.deepcopy(self.plan)
+        plan["tasks"][sid].update(
+            status="IN_PROGRESS", owner="worker-1",
+            lease_until="2099-01-01T00:00:00Z", claim_ref="scheduled-dependency")
+        c.validate(plan)
+        with self.assertRaisesRegex(c.ControllerError, "CLAIM_DEPENDENCY_NOT_DONE"):
             c.verify_inbox(plan)
 
     def test_existing_published_inbox_is_allowed_after_completion(self):
