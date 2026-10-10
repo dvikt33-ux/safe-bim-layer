@@ -1,0 +1,18 @@
+{
+  "delivery_status": "PENDING_SLACK_SEND",
+  "delivery_error": "GitHub result published and verified; Slack connector send blocked by safety checks (four attempts)",
+  "event": {
+    "schema": "APA_EVENT_V1",
+    "event_id": "apa-tapir-compat-v2-20261010-6f29",
+    "task_id": "APA-P10.A02.S01",
+    "phase": "SOURCE",
+    "status": "PARTIAL",
+    "source": "automation:apa-technical",
+    "summary": "Upstream 1.5.9/1.6.0/1.7.0 source compatibility matrix saved with V2 receipt; local modified 1.5.10 NOT_VERIFIED; task released PARTIAL, CI SUCCESS.",
+    "evidence_urls": [
+      "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md",
+      "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261010-163950Z-tapir-compat-6f29.json",
+      "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38069014591"
+    ]
+  }
+}
