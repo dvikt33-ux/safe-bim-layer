@@ -81,3 +81,12 @@
 | IMPORT-FULL-002 | [APA Scheduled Task без Work/Codex — оригинал, 715 строк](runs/2026-10-10/apa-source-snapshot-scheduled-task-work-limits-full-20261010.md) | Вложение владельца `Вставленный текст.txt`, 2026-10-10; 31 539 символов | [c3d6945](https://github.com/dvikt33-ux/safe-bim-layer/commit/c3d6945c7972818bb380ccae0ae057488caa1ff8); EXACT_GITHUB_READBACK_PASS; blob `9b96f1f1023ca03d4c1bd7100e8a110f64987a2f` | USER_SUPPLIED_FULL_SOURCE / технические claims REPORTED; практический вывод о write-access обычной Scheduled Task требует отдельного теста именно scheduled execution |
 
 **Что эти записи НЕ закрывают:** все исследования из других чатов, не представленные вложениями или GitHub; полный forensic-аудит уникальных артефактов 72 веток; восстановление утраченных ответов, которых нет ни в источниках, ни в GitHub. Эти пробелы не считать DONE. Исторические отчёты не перезаписывались, `main` не менялся.
+
+
+## APA-P10.A01.S01 — recovery after blocked publication (2026-10-10)
+
+| Artifact | Task | File | Evidence | Commit | Readback |
+|---|---|---|---|---|---|
+| `ART-SDK-RECOVERY-20261010-6B42` | `APA-P10.A01.S01` — PARTIAL | [Native Create/Change/Get recovered report](runs/2026-10-10/apa-recovery-20261010-142600-sdk-native-6b42.md) | **REPORTED_FROM_PRIOR_CHAT**; SOURCE re-audit pending; OFFLINE/BUILD/LIVE NOT_VERIFIED | [1489a2de](https://github.com/dvikt33-ux/safe-bim-layer/commit/1489a2debc8b547632be6ff9604ee9f49d206ff9) | PASS, blob `ebfa50e7b72bc27dff84276a4baf2b834a991b33` |
+
+Controller: task switched from `IN_PROGRESS` to `PARTIAL`, owner/claim/lease cleared and artifact registered via [commit 3789812](https://github.com/dvikt33-ux/safe-bim-layer/commit/378981212a11f9a2b9a024c0afaa1c347a490826). The earlier V1 inbox request was retired after the direct report was saved: no V2 receipt or DONE_PUBLISHED asserted. This preserves research content rather than misclassifying unverified API findings as completed.
