@@ -100,7 +100,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P00.A02.S03
 
-**Связать старые находки с S-ID и удалить логические дубли без удаления оригиналов** — CONSOLIDATION / READY / P0
+**Связать старые находки с S-ID и удалить логические дубли без удаления оригиналов** — CONSOLIDATION / IN_PROGRESS / P0
 
 - Parent: APA-P00 → APA-P00.A02
 - Topic: HUB_GOVERNANCE
@@ -108,7 +108,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P00.A02.S02
 - Related, check before duplicating: APA-P50.A01.S02
 - Acceptance: Evidence map и superseded_by для дублей
-- Owner/lease: unclaimed
+- Owner/lease: chatgpt-gpt6-manual-20261011-audit / 2026-10-11T02:00:00Z
 - Requires owner approval: False
 - Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md), [ART-BRANCHES](../../../../../docs/research/apa-results/inventories/FULL_BRANCH_INVENTORY.md)
 - Existing V2 runs: none
