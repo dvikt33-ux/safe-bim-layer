@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 6,
+  "revision": 7,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -1953,13 +1953,18 @@
   },
   "scheduler": {
     "provider": "ChatGPT Scheduled Tasks",
-    "state": "NOT_CONFIGURED",
-    "schedule": null,
-    "timezone": null,
-    "chatgpt_task_id": null,
+    "state": "CONFIGURED_UNVERIFIED",
+    "schedule": "Hourly staggered: audit at :00, discovery at :20, technical at :40",
+    "timezone": "Europe/Moscow",
+    "chatgpt_task_id": "6ac9752aae8081919d9feeada08ad91e",
     "last_triggered_at": null,
     "last_verified_run_id": null,
-    "mode": "Schedule triggers one execution; GitHub plan is authoritative state. GitHub Actions validates/publishes only. ChatGPT Tasks require user configuration and GitHub connector permissions.",
-    "activation_gate": "Owner must create Scheduled task, select schedule/timezone, verify GitHub read/write permissions and one real IN_PROGRESS -> evidence -> DONE/PARTIAL cycle. No scheduled task has been created by this assistant."
+    "mode": "Three enabled hourly ChatGPT scheduled tasks; each must choose an eligible task from this plan and CAS-record IN_PROGRESS before research, then DONE_PUBLISHED/PARTIAL/BLOCKED with evidence and release lease.",
+    "activation_gate": "Schedules configured and task IDs independently read via automation listing on 2026-10-10. REAL scheduled GitHub status claim -> report/receipt -> completion NOT VERIFIED. Do not mark RUNNING_VERIFIED until observed.",
+    "chatgpt_task_ids": {
+      "discovery": "6ac83b171cf08191b74e06caaa8ae1c7",
+      "technical": "6ac9752aae8081919d9feeada08ad91e",
+      "audit": "6ac7664c66f88191a51d8c0a414b0eac"
+    }
   }
 }
