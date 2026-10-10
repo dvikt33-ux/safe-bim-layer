@@ -1,0 +1,92 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-OPENING29-SEMANTICS",
+      "evidence_ids": [
+        "EV-OPENING-CLASS",
+        "EV-OPENING-GEOMETRY",
+        "EV-OPENING-EXTRUSION"
+      ],
+      "statement": "AC29 typed Opening exposes geometry, extrusion and parent vs all cut elements; read-only runtime parity not tested.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-SHELL29-CONTOURS",
+      "evidence_ids": [
+        "EV-SHELL-MEMO",
+        "EV-SHELL-CONTOUR"
+      ],
+      "statement": "Shell memo contour coordinates are in plane-local 2D; hole depth and contour ordering must be preserved.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-LIVE-NOTVERIFIED",
+      "evidence_ids": [
+        "EV-BODY",
+        "EV-PGON"
+      ],
+      "statement": "Installed AC29 SDK, APX and PLN geometry parity were not tested.",
+      "status": "NOT_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-OPENING-CLASS",
+      "kind": "OFFICIAL_DOC",
+      "sha256": null,
+      "source_revision": "29.3100",
+      "uri": "https://github.com/GRAPHISOFT/archicad-api-devkit/blob/29.3100/docs/class_a_c_a_p_i_1_1_element_1_1_opening.html",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-OPENING-GEOMETRY",
+      "kind": "OFFICIAL_DOC",
+      "sha256": null,
+      "source_revision": "29.3100",
+      "uri": "https://github.com/GRAPHISOFT/archicad-api-devkit/blob/29.3100/docs/class_a_c_a_p_i_1_1_element_1_1_opening_geometry.html",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-OPENING-EXTRUSION",
+      "kind": "OFFICIAL_DOC",
+      "sha256": null,
+      "source_revision": "29.3100",
+      "uri": "https://github.com/GRAPHISOFT/archicad-api-devkit/blob/29.3100/docs/class_a_c_a_p_i_1_1_element_1_1_opening_extrusion_parameters.html",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-SHELL-MEMO",
+      "kind": "OFFICIAL_DOC",
+      "sha256": null,
+      "source_revision": "29.3100",
+      "uri": "https://github.com/GRAPHISOFT/archicad-api-devkit/blob/29.3100/docs/struct_a_p_i___element_memo.html",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-SHELL-CONTOUR",
+      "kind": "OFFICIAL_DOC",
+      "sha256": null,
+      "source_revision": "29.3100",
+      "uri": "https://github.com/GRAPHISOFT/archicad-api-devkit/blob/29.3100/docs/struct_a_p_i___shell_contour_data.html",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-BODY",
+      "kind": "OFFICIAL_DOC",
+      "sha256": null,
+      "source_revision": "29.3100",
+      "uri": "https://github.com/GRAPHISOFT/archicad-api-devkit/blob/29.3100/docs/struct_a_p_i___body_type.html",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-PGON",
+      "kind": "OFFICIAL_DOC",
+      "sha256": null,
+      "source_revision": "29.3100",
+      "uri": "https://github.com/GRAPHISOFT/archicad-api-devkit/blob/29.3100/docs/struct_a_p_i___pgon_type.html",
+      "verification": "SOURCE_READ"
+    }
+  ],
+  "run_id": "APA-RUN-20261010-143940Z-opening-shell-geom",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

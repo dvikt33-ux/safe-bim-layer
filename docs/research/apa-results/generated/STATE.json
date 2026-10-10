@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 2,
+  "run_count": 3,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -15,6 +15,13 @@
       "report": "runs/2026-10-10/APA-RUN-20261010-110048Z-legacy-traceability/REPORT.md",
       "run_id": "APA-RUN-20261010-110048Z-legacy-traceability",
       "substep_id": "APA-P50.A01.S01"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md",
+      "run_id": "APA-RUN-20261010-143940Z-opening-shell-geom",
+      "substep_id": "APA-P10.A01.S03"
     }
   ],
   "schema": "APA_GENERATED_INDEX_V1",
