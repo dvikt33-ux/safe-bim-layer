@@ -575,7 +575,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: chatgpt-apa-controller-traceability-20261010 / 2026-10-11T12:00:00Z
 - Requires owner approval: False
 - Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md), [ART-BRANCHES](../../../../../docs/research/apa-results/inventories/FULL_BRANCH_INVENTORY.md)
-- Existing V2 runs: none
+- Existing V2 runs: [APA-RUN-20261010-110048Z-legacy-traceability](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-110048Z-legacy-traceability/REPORT.md) (receipt verified)
 - Expected output: Traceability matrix, orphan report list
 
 ## APA-P50.A01.S02
