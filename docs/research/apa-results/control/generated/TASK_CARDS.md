@@ -239,7 +239,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: chatgpt:apa-technical / 2026-10-10T16:00:00Z
 - Requires owner approval: False
 - Source inputs: [ART-SDK-SEO](../../../../../docs/research/apa-results/runs/2026-10-10/apa-discovery-20261010-102440-slinktrim-9f2b7.md)
-- Existing V2 runs: none
+- Existing V2 runs: [APA-RUN-20261010-143940Z-opening-shell-geom](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md) (receipt verified)
 - Expected output: Матрица покрытия и побочных эффектов
 
 ## APA-P10.A02.S01
