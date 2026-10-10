@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 17,
+  "revision": 18,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -688,7 +688,7 @@
       "action_id": "APA-P10.A01",
       "title": "Этажи, building materials, surfaces, composites, profiles, связи",
       "kind": "RESEARCH",
-      "status": "READY",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "sdk-attributes-stories",
       "depends_on": [
@@ -702,9 +702,9 @@
         "Матрица native elements/attributes и readback"
       ],
       "acceptance": "Матрица native elements/attributes и readback",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "chatgpt:apa-technical",
+      "lease_until": "2026-10-10T17:30:00Z",
+      "claim_ref": "apa-tech-20261010T153651Z-stories-attributes-8c21",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
