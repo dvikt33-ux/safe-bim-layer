@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 15,
+  "revision": 16,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -304,6 +304,12 @@
       "uri": "docs/research/apa-results/runs/2026-10-10/apa-recovery-20261010-142600-sdk-native-6b42.md",
       "kind": "REPORT",
       "verification": "GITHUB_READBACK_VERIFIED_REPORTED"
+    },
+    "ART-SDK-OPENING-SHELL-20261010-8E41": {
+      "id": "ART-SDK-OPENING-SHELL-20261010-8E41",
+      "uri": "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md",
+      "kind": "REPORT",
+      "verification": "READBACK_VERIFIED"
     }
   },
   "tasks": {
@@ -709,7 +715,7 @@
       "action_id": "APA-P10.A01",
       "title": "Morph/Roof/Shell/Openings/SEO/3D dump",
       "kind": "RESEARCH",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "sdk-geometry-modeldump",
       "depends_on": [
@@ -723,11 +729,13 @@
         "Матрица покрытия и побочных эффектов"
       ],
       "acceptance": "Матрица покрытия и побочных эффектов",
-      "owner": "chatgpt:apa-technical",
-      "lease_until": "2026-10-10T16:00:00Z",
-      "claim_ref": "apa-technical-20261010T1438Z-7f3b6d",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-SDK-OPENING-SHELL-20261010-8E41"
+      ],
       "blocked_reason": null
     },
     "APA-P10.A02.S01": {
