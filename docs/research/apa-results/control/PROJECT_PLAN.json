@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 37,
+  "revision": 38,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -451,6 +451,12 @@
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-234200Z-slack-legacy-three-audit/REPORT.md",
       "kind": "REPORT",
       "verification": "GITHUB_READBACK_VERIFIED_V2_RECEIPT"
+    },
+    "ART-APA-HIGHLEVEL-PR34": {
+      "id": "ART-APA-HIGHLEVEL-PR34",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/34",
+      "kind": "PR",
+      "verification": "GITHUB_CI_106_OFFLINE_SYNTHETIC_PASS_NO_LIVE"
     }
   },
   "tasks": {
@@ -1956,7 +1962,8 @@
       "inputs": [
         "ART-APA-FULL-CYCLE",
         "ART-APA-PR16",
-        "ART-APA-REUSE-NATIVE-20261011"
+        "ART-APA-REUSE-NATIVE-20261011",
+        "ART-APA-HIGHLEVEL-PR34"
       ],
       "outputs": [
         "Таблица требований полного цикла → исходные файлы/SHA → подтверждённые функции и ограничения; без новой реализации"
@@ -2156,7 +2163,8 @@
       "related": [],
       "inputs": [
         "ART-APA-PR16",
-        "ART-APA-REUSE-NATIVE-20261011"
+        "ART-APA-REUSE-NATIVE-20261011",
+        "ART-APA-HIGHLEVEL-PR34"
       ],
       "outputs": [
         "Создание полноценной BIM-геометрии из схемы через имеющиеся writer/graph; связные стены не дробятся без необходимости; тестовый PLN только после разрешения"
@@ -2184,7 +2192,8 @@
       "related": [],
       "inputs": [
         "ART-APA-REUSE-NATIVE-20261011",
-        "ART-APA-FAST-COMPILER"
+        "ART-APA-FAST-COMPILER",
+        "ART-APA-HIGHLEVEL-PR34"
       ],
       "outputs": [
         "Тесты обновления проекта без лишних элементов/потери GUID, readback этажей, материалов, хостов и откат изменений"
@@ -2870,7 +2879,8 @@
         "ART-APA-FULL-CYCLE",
         "ART-APA-PLP-CONTRACT",
         "ART-APA-REUSE-NATIVE-20261011",
-        "ART-APA-PR16"
+        "ART-APA-PR16",
+        "ART-APA-HIGHLEVEL-PR34"
       ],
       "synthesis_state": "OPEN",
       "owner": null
