@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 5,
+  "revision": 6,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -515,7 +515,7 @@
       "action_id": "APA-P00.A03",
       "title": "Проверить write/readback для всех классов исполнителей",
       "kind": "VALIDATION",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 0,
       "work_key": "executor-capability-matrix",
       "depends_on": [
@@ -529,9 +529,9 @@
         "Capability matrix по каждому исполнителю"
       ],
       "acceptance": "Capability matrix по каждому исполнителю",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "chatgpt:apa-registry-alignment",
+      "lease_until": "2026-10-10T16:30:00Z",
+      "claim_ref": "chatgpt-apa-registry-activation-20261010-1348",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
