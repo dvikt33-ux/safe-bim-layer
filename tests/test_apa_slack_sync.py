@@ -63,6 +63,50 @@ class EventFormatTests(unittest.TestCase):
         self.assertEqual(parsed["task_id"], "APA-P60.A02.S04")
         self.assertEqual(parsed["schema"], "APA_EVENT_V1")
 
+    def test_exact_chatgpt_slack_footer_after_json_fence(self):
+        sample = event(
+            schema="APA_EVENT_V1",
+            event_id="apa-source-attribution-20261011-001",
+            phase="SOURCE", status="INFO",
+            summary="Source-only research, BUILD and LIVE not verified",
+        )
+        footer = "\n*Sent using* <@U0C90JE4WAC|ChatGPT>"
+        variants = [
+            format_event(sample) + footer,
+            "APA_EVENT_V1\n```" + json.dumps(sample) + "```" + footer,
+            "APA_EVENT_V1\nResearch summary\n```json\n" + json.dumps(
+                sample, ensure_ascii=False, indent=2,
+            ) + "\n```" + footer,
+        ]
+        for message in variants:
+            with self.subTest(message_prefix=message[:35]):
+                parsed = parse_event(message)
+                self.assertEqual(parsed["event_id"], sample["event_id"])
+                self.assertEqual(parsed["phase"], "SOURCE")
+                self.assertEqual(parsed["status"], "INFO")
+
+    def test_chatgpt_footer_rejects_noncanonical_or_extra_text(self):
+        clean = format_event(event())
+        invalid = [
+            clean + "\nSent using ChatGPT",
+            clean + "\n*Sent using* <@U0C90JE4WAC|Other>",
+            clean + "\n*Sent using* <@U0123456789|ChatGPT>",
+            clean + "\n*Sent using* <@U0C90JE4WAC|ChatGPT>\nUNVERIFIED EXTRA",
+            clean + "\nthis event is now LIVE PASS",
+            clean.replace("\n```", "") + "\n*Sent using* <@U0C90JE4WAC|ChatGPT>",
+        ]
+        for message in invalid:
+            with self.subTest(last_chars=message[-50:]):
+                with self.assertRaises(InvalidEvent):
+                    parse_event(message)
+
+    def test_attribution_does_not_bypass_strict_status_and_evidence(self):
+        footer = "\n*Sent using* <@U0C90JE4WAC|ChatGPT>"
+        with self.assertRaises(InvalidEvent):
+            parse_event(format_event(event(status="PASS", evidence_urls=[])) + footer)
+        with self.assertRaises(InvalidEvent):
+            parse_event(format_event(event(phase="UNSAFE", status="PASS")) + footer)
+
     def test_invalid_schema_discriminator_rejected(self):
         with self.assertRaises(InvalidEvent):
             parse_event(format_event(event(schema="SOME_OTHER_PROTOCOL")))
@@ -289,6 +333,39 @@ class EventStoreTests(unittest.TestCase):
         self.assertIn("fences=one;begins=fence;ends=object;object=yes",
                       stats["rejection_shapes"])
         self.assertNotIn("private-marker", str(stats))
+
+    def test_bootstrap_chatgpt_footer_and_duplicate(self):
+        first = event(event_id="apa-legacy-source-20261010-001",
+                      task_id="APA-P10.A01.S01", status="INFO", phase="SOURCE")
+        second = event(event_id="apa-legacy-offline-20261010-002",
+                       task_id="APA-SYNC-01", status="PASS", phase="OFFLINE")
+        footer = "\n*Sent using* <@U0C90JE4WAC|ChatGPT>"
+        class Client:
+            def conversations_history(self, **kwargs):
+                return {
+                    "messages": [
+                        {"ts": "201.1", "text": format_event(second) + footer},
+                        {"ts": "200.1", "text": format_event(first) + footer},
+                        {"ts": "199.1", "text": "APA_EVENT_V1\n```json\n{}\n"},  # invalid fence
+                    ],
+                    "response_metadata": {"next_cursor": ""},
+                }
+        client = Client()
+        result = bootstrap_channel(self.store, client, "C0C886E1PGR")
+        self.assertEqual(result["scanned"], 3)
+        self.assertEqual(result["accepted"], 2)
+        self.assertEqual(result["rejected"], {
+            "Expected APA_EVENT_V1 and one JSON code fence": 1,
+        })
+        self.assertEqual(result["conflicts"], 0)
+        again = bootstrap_channel(self.store, client, "C0C886E1PGR")
+        self.assertEqual(again["accepted"], 0)
+        self.assertEqual(again["duplicates"], 2)
+        self.assertEqual(self.store.changes()["next_cursor"], 2)
+        self.assertEqual(
+            self.store.latest_states()["state"]["APA-P10.A01.S01:SOURCE"]["effective_status"],
+            "INFO",
+        )
 
     def test_http_read_only_loopback(self):
         server = make_server(self.store, port=0)
