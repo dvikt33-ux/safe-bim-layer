@@ -116,3 +116,12 @@ Direct source: pinned Graphisoft DevKit 29.3100 Command/Memo Doxygen and Tapir 1
 |---|---|---|---|
 | `ART-APA-PAVILION-SAVED-READBACK-20261011` | `APA-P20.A02.S03` (controller task still BLOCKED) | [12/12 readback report](runs/2026-10-11/apa-p20-a02-s03-saved-pln-live-readback-20261010-222136.md), [commit 1e21c3a](https://github.com/dvikt33-ux/safe-bim-layer/commit/1e21c3aaa9541f03918372ad479621b0457a3018), uploaded JSON SHA-256 `593e637bfe738e5baac979d5cc897f49e1b0d23a4ae431b7f06468c0e829ecd5` | `GITHUB_READBACK_VERIFIED` for Markdown report; user-supplied `SAVED_COPY_LIVE_READBACK_PASS`, 12/12 native GUID/geometry/host checks, 0 write; operator explicitly attested **saved-copy close → reopen → read-only audit**, so **PERSISTENCE_REOPEN_PASS_REPORTED_WITH_LIVE_READBACK** (not independently witnessed/file-binary parsed); [attestation evidence commit 015a96e](https://github.com/dvikt33-ux/safe-bim-layer/commit/015a96e194930577b5b9f138077b4c04a6eb308e). Source JSON attachment not itself a GitHub blob. |
 
+
+
+## APA-P10.A01.S02 — Native stories/attributes, Basic/Composite slab blocker (2026-10-11)
+
+| Artifact ID | Task | Source | Verification |
+|---|---|---|---|
+| `ART-APA-ATTR-STORY-SLAB-20261011` | `APA-P10.A01.S02` / **PARTIAL** | [Typed AC29 story/material/composite/profile matrix](runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md), [commit 6b82b52](https://github.com/dvikt33-ux/safe-bim-layer/commit/6b82b52cbc65a661f49cbf1f01fe3bea8846d559) and [source-audit crosslink 569c9fd](https://github.com/dvikt33-ux/safe-bim-layer/commit/569c9fd7ab37373a017819e0dbd6ce5376b45387) | `GITHUB_READBACK_VERIFIED`, installed v1.5.10 per user reports, Basic/Composite failure+repair `USER_LIVE_API_REPORT_CHECKED`; upstream [Tapir PR #785](https://github.com/ENZYME-APD/tapir-archicad-automation/pull/785) source-diff verified but OPEN/unmerged, APX parity NOT_VERIFIED |
+| `ART-APA-TYPED-SLAB-PROPOSAL-20261011` | Candidate only, independent audit pending | [Proposal Basic/Composite slab capability adapter](control/proposals/APA-CAND-20261011-typed-slab-creation-adapter.md), [commit 4cd117a](https://github.com/dvikt33-ux/safe-bim-layer/commit/4cd117a91cfec38cc12eaf03d2f1bd195c67a821) | `GITHUB_READBACK_VERIFIED`, **not yet included** in `control/PROJECT_PLAN.json`, no implementation/build/live claimed |
+
