@@ -46,3 +46,7 @@ No secrets, user-owned file paths or session IDs are included here. The latest u
 Once CI passes, the owner can launch the probe in a second PowerShell window using the existing venv. Based only on the observed raw suffix categories, prepare a narrowly scoped compatibility fix and test it locally. Malformed/incomplete JSON and PASS without evidence must remain invalid.
 
 **Safety:** No main/PLN/APX changes, no mutation of existing feature/research branches. This report is immutable and published in the canonical APA research hub. GitHub readback required before declaring publication complete.
+
+## PR #28 CI receipt (subsequent verified update)
+
+[GitHub Actions 38088532442](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38088532442) completed **SUCCESS**: coordinator unit job **29/29 PASS** (including both new read-only probe privacy tests), Windows launcher static job **SUCCESS**. Independently retrieved the actual job log and checked the `Ran 29 tests` / `OK` lines. This verifies the implementation offline, **not** the actual raw Slack message shapes. The live coordinator still runs the older PR #27 checkout until the owner chooses to change it; the one-shot probe from PR #28 is designed to run concurrently without changing that daemon.
