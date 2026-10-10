@@ -13,16 +13,19 @@ from threading import Condition
 from urllib.parse import parse_qs, urlsplit
 
 EVENT_PREFIX = "APA_EVENT_V1"
-# A verified ChatGPT Slack integration appends its attribution line *after*
-# otherwise-valid APA events. Accept ONLY the known sender ID with or without
-# Slack's optional rendered display label, not
-# arbitrary trailing prose. The footer is not evidence or an authority claim.
+# The Slack app appends exactly one known attribution line after a completed
+# APA code fence. Raw Slack can compact the footer against the closing fence
+# without a linebreak; allow ONLY this fixed attribution, never arbitrary text.
 EVENT_PATTERN = re.compile(
     r"\AAPA_EVENT_V1\s*\n[\s\S]*?```(?:json|JSON)?\s*"
     r"(?P<payload>\{[\s\S]*?\})\s*```"
-    r"(?:[ \t]*\n+[ \t]*\*Sent using\*[ \t]+<@U0C90JE4WAC(?:\|ChatGPT)?>)?"
+    r"(?:[ \t]*\n*[ \t]*\*Sent using\*[ \t]+<@U0C90JE4WAC(?:\|ChatGPT)?>)?"
     r"\s*\Z"
 )
+# Slack escapes evidence links in its message text as <https://...>.
+# Only exact, UNLABELED HTTPS angle wrappers are transport-normalized.
+# Never remove arbitrary HTML/Slack syntax or bypass URL validation.
+SLACK_EVIDENCE_URL = re.compile(r"\A<(?P<url>https://[^\s<>|]+)>\Z")
 IDENT = re.compile(r"\A[A-Za-z0-9][A-Za-z0-9_.:-]{2,95}\Z")
 STATUSES = frozenset({"INFO", "PASS", "BLOCKED", "NOT_VERIFIED"})
 PHASES = frozenset({"SOURCE", "OFFLINE", "SYNTHETIC", "BUILD", "LIVE"})
@@ -70,18 +73,30 @@ def parse_event(text: str) -> dict | None:
     evidence = event.get("evidence_urls", [])
     if not isinstance(evidence, list) or len(evidence) > 8:
         raise InvalidEvent("Invalid evidence_urls")
+    normalized_evidence = []
     for url in evidence:
         if not isinstance(url, str) or len(url) > 500:
             raise InvalidEvent("Invalid evidence URL")
-        parsed = urlsplit(url)
+        wrapped = SLACK_EVIDENCE_URL.fullmatch(url)
+        if wrapped is not None:
+            url = wrapped.group("url")
+        # Reject stray angle brackets and Slack display-label separators.
+        # Only fully matched <https://...> transport wrappers may be stripped.
+        if any(ch in url for ch in "<>") or any(ch.isspace() for ch in url):
+            raise InvalidEvent("Invalid evidence URL")
+        try:
+            parsed = urlsplit(url)
+        except ValueError as exc:
+            raise InvalidEvent("Invalid evidence URL") from exc
         if parsed.scheme != "https" or not parsed.hostname or parsed.username or parsed.password:
             raise InvalidEvent("Evidence URL must be HTTPS without credentials")
+        normalized_evidence.append(url)
     if event["status"] == "PASS" and not evidence:
         raise InvalidEvent("PASS requires a verifiable evidence URL")
     supersedes = event.get("supersedes")
     if supersedes is not None and (not isinstance(supersedes, str) or not IDENT.fullmatch(supersedes)):
         raise InvalidEvent("Invalid supersedes event ID")
-    event["evidence_urls"] = evidence
+    event["evidence_urls"] = normalized_evidence
     event["supersedes"] = supersedes
     return event
 
