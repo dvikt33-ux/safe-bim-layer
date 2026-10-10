@@ -86,6 +86,48 @@ class EventFormatTests(unittest.TestCase):
                 self.assertEqual(parsed["phase"], "SOURCE")
                 self.assertEqual(parsed["status"], "INFO")
 
+    def test_raw_slack_chatgpt_mention_without_display_label(self):
+        # Slack's raw Web API text uses a bare mention; the separate
+        # ChatGPT connector may render this with a |ChatGPT display label.
+        sample = event(
+            schema="APA_EVENT_V1",
+            event_id="apa-native-slack-20261011-test",
+            task_id="APA-P10.A01.S01",
+            phase="SOURCE", status="INFO",
+            source="chatgpt:raw-slack",
+        )
+        trailer = "\n*Sent using* <@U0C90JE4WAC>"
+        for envelope in (
+            format_event(sample),
+            "APA_EVENT_V1\n```" + json.dumps(sample, ensure_ascii=False) + "```",
+            "APA_EVENT_V1\n```" + json.dumps(
+                sample, ensure_ascii=False, indent=2,
+            ) + "```",
+        ):
+            with self.subTest(envelope=envelope[:32]):
+                parsed = parse_event(envelope + trailer)
+                self.assertEqual(parsed["event_id"], sample["event_id"])
+                self.assertEqual(parsed["phase"], "SOURCE")
+                self.assertEqual(parsed["status"], "INFO")
+
+    def test_raw_footer_rejects_unknown_sender_and_attached_content(self):
+        full = format_event(event())
+        for extra in (
+            "\n*Sent using* <@U0C90JE4WAD>",
+            "\n*Sent using* <@U0C90JE4WAC|Other>",
+            "\n*Sent using* <@U0C90JE4WAC> approved",
+            "\n*Sent using* <@U0C90JE4WAC>\nBUILD PASS",
+            "\n*Sent using* <@U0C90JE4WAC|ChatGPT> extra",
+            "\n*Sent using* <@U0C90JE4WAC",
+            "\n*Sent using* <@U0C90JE4WAC>>",
+        ):
+            with self.subTest(suffix=extra):
+                with self.assertRaises(InvalidEvent):
+                    parse_event(full + extra)
+        with self.assertRaises(InvalidEvent):
+            parse_event(format_event(event(status="PASS", evidence_urls=[])) +
+                        "\n*Sent using* <@U0C90JE4WAC>")
+
     def test_chatgpt_footer_rejects_noncanonical_or_extra_text(self):
         clean = format_event(event())
         invalid = [
@@ -368,6 +410,36 @@ class EventStoreTests(unittest.TestCase):
             "INFO",
         )
 
+    def test_bootstrap_raw_unlabelled_sender_replay_is_idempotent(self):
+        old = event(
+            event_id="apa-historical-source-20261011-a",
+            task_id="APA-P10.A01.S01",
+            status="INFO", phase="SOURCE",
+        )
+        footer = "\n*Sent using* <@U0C90JE4WAC>"
+
+        class Client:
+            def conversations_history(self, **kwargs):
+                return {
+                    "messages": [
+                        {"ts": "402.1", "text": format_event(old) + footer},
+                        {"ts": "401.1", "text": "APA_EVENT_V1\n```json\n{}"},
+                    ],
+                    "response_metadata": {"next_cursor": ""},
+                }
+
+        client = Client()
+        first = bootstrap_channel(self.store, client, "C0C886E1PGR")
+        self.assertEqual(first["accepted"], 1)
+        self.assertEqual(first["conflicts"], 0)
+        self.assertEqual(first["rejected"], {
+            "Expected APA_EVENT_V1 and one JSON code fence": 1,
+        })
+        second = bootstrap_channel(self.store, client, "C0C886E1PGR")
+        self.assertEqual(second["accepted"], 0)
+        self.assertEqual(second["duplicates"], 1)
+        self.assertEqual(self.store.changes()["next_cursor"], 1)
+
     def test_http_read_only_loopback(self):
         server = make_server(self.store, port=0)
         thread = threading.Thread(target=server.serve_forever, daemon=True)
@@ -393,6 +465,10 @@ class RawSlackProbeTests(unittest.TestCase):
         self.assertEqual(
             characterize("APA_EVENT_V1\n```json\n{}\n```\n*Sent using* <@U0C90JE4WAC|ChatGPT>"),
             "fences=two;tail=exact_known_footer;tail_len=1-64;cr=no;invisible=no",
+        )
+        self.assertEqual(
+            characterize("APA_EVENT_V1\n```json\n{}\n```\n*Sent using* <@U0C90JE4WAC>"),
+            "fences=two;tail=exact_known_bare_mention_footer;tail_len=1-64;cr=no;invisible=no",
         )
         unknown = characterize("APA_EVENT_V1\n```json\n{}\n```\nconfidential private-data")
         self.assertIn("tail=other_suffix", unknown)

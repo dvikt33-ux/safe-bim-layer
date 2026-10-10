@@ -14,12 +14,13 @@ from urllib.parse import parse_qs, urlsplit
 
 EVENT_PREFIX = "APA_EVENT_V1"
 # A verified ChatGPT Slack integration appends its attribution line *after*
-# otherwise-valid APA events. Accept ONLY that exact platform footer, not
+# otherwise-valid APA events. Accept ONLY the known sender ID with or without
+# Slack's optional rendered display label, not
 # arbitrary trailing prose. The footer is not evidence or an authority claim.
 EVENT_PATTERN = re.compile(
     r"\AAPA_EVENT_V1\s*\n[\s\S]*?```(?:json|JSON)?\s*"
     r"(?P<payload>\{[\s\S]*?\})\s*```"
-    r"(?:[ \t]*\n+[ \t]*\*Sent using\*[ \t]+<@U0C90JE4WAC\|ChatGPT>)?"
+    r"(?:[ \t]*\n+[ \t]*\*Sent using\*[ \t]+<@U0C90JE4WAC(?:\|ChatGPT)?>)?"
     r"\s*\Z"
 )
 IDENT = re.compile(r"\A[A-Za-z0-9][A-Za-z0-9_.:-]{2,95}\Z")

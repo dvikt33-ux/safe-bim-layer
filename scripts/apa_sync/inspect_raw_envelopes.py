@@ -18,6 +18,7 @@ from scripts.apa_sync.coordinator import EVENT_PREFIX, InvalidEvent, parse_event
 
 CHANNEL_ID = "C0C886E1PGR"
 KNOWN_FOOTER = "*Sent using* <@U0C90JE4WAC|ChatGPT>"
+KNOWN_BARE_MENTION_FOOTER = "*Sent using* <@U0C90JE4WAC>"
 SECRETLESS_REASONS = {
     "Event exceeds 5000 characters": "length_rejected",
     "Expected APA_EVENT_V1 and one JSON code fence": "fence_envelope_rejected",
@@ -46,6 +47,8 @@ def _suffix_type(tail: str) -> str:
         return "empty"
     if cleaned == KNOWN_FOOTER:
         return "exact_known_footer"
+    if cleaned == KNOWN_BARE_MENTION_FOOTER:
+        return "exact_known_bare_mention_footer"
     if KNOWN_FOOTER in cleaned:
         return "contains_known_footer_plus_other"
     if "Sent using" in cleaned and "ChatGPT" in cleaned:
