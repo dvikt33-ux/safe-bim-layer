@@ -1,0 +1,112 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-EXACT-HEAD-72",
+      "evidence_ids": [
+        "EV-SNAPSHOT-72-SHA",
+        "EV-MATRIX-13-COMPARE"
+      ],
+      "statement": "The frozen inventory contains 72 branch refs but only 69 unique head SHAs, with two exact-head alias groups of 5 names total.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-PAIRWISE-13",
+      "evidence_ids": [
+        "EV-MATRIX-13-COMPARE"
+      ],
+      "statement": "Thirteen exact GitHub branch comparisons returned 3 identical, 8 ahead, 2 diverged; paths and counts are saved in the read-back machine matrix.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-KEEP-UNIQUE-APPROACHES",
+      "evidence_ids": [
+        "EV-MATRIX-13-COMPARE",
+        "EV-STAGE4-PERFORMANCE",
+        "EV-STAGE5-OFFLINE",
+        "EV-GDL-FORENSIC",
+        "EV-KAIMAN-AUDIT",
+        "EV-ROCKFACADE-AUDIT"
+      ],
+      "statement": "Stage 5 Hosted Window extends Stage 4 performance, GDL native probe extends checkpoint, and two detail-machine v2.3 branches diverge and cover different sources; they must not be deleted or treated as fully verified BIM capabilities.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-HISTORIC-RUNTIME-UNRERUN",
+      "evidence_ids": [
+        "EV-STAGE4-PERFORMANCE",
+        "EV-STAGE5-OFFLINE",
+        "EV-KAIMAN-AUDIT"
+      ],
+      "statement": "Historical performance and source coverage measurements in preserved branch acceptance JSON are reported artifacts, not rerun benchmarks or current Archicad LIVE validation.",
+      "status": "REPORTED"
+    },
+    {
+      "claim_id": "APA-CLAIM-SIX-RESEARCH-NAMES",
+      "evidence_ids": [
+        "EV-SNAPSHOT-72-SHA"
+      ],
+      "statement": "Completeness and global absence of six unnamed historical research summary filenames remain not established by this limited 13-pair audit.",
+      "status": "NOT_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-SNAPSHOT-72-SHA",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "0c0f5546920808942c838d009df5aa1a3b4b9714",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/BRANCH_HEADS_20261010.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-MATRIX-13-COMPARE",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "9452e8fc821dddf264ba73d8b28d40b698084306",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/BRANCH_DEDUP_MATRIX_20261011.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-STAGE4-PERFORMANCE",
+      "kind": "TEST_RESULT",
+      "sha256": null,
+      "source_revision": "dd847cef5be9d88dd98538b57ff8258c976f51cd",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/work%2Fstage4-performance-pass/outputs/closed-loop-stage4/stage4-performance-acceptance.json",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-STAGE5-OFFLINE",
+      "kind": "TEST_RESULT",
+      "sha256": null,
+      "source_revision": "22ddb509ac2fdef175243a39b763359ecf91be4c",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/work%2Fstage5-hosted-window/outputs/closed-loop-stage5/stage5-offline-acceptance.json",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-KAIMAN-AUDIT",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "a5d9283eef36d35935d53fdfe063f65bde10539a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/chatgpt%2Fkaiman-exact-v2.5/details/machine-db/releases/kaiman-v2.5/AUDIT_KAIMAN_v2.5.json",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-ROCKFACADE-AUDIT",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "5e8d98cd9831b1fae58706555532ea7a100ed758",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/chatgpt%2Fdetail-machine-db-v2.3-20261006/knowledge/detail-machine/releases/v2.3/AUDIT_v2.3.json",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-GDL-FORENSIC",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "b56c1456438b1c1f901ba14632c1a59da6dc5562",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-tn-gdl-create-01-native-probe-20261009/docs/research/APA_TN-GDL-CREATE-01_BLOCKER1_AUDIT_2026-10-09.md",
+      "verification": "SOURCE_READ"
+    }
+  ],
+  "run_id": "APA-RUN-20261010-235301Z-branch-evidence-dedup",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

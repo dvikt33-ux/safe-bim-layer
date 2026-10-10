@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 6,
+  "run_count": 7,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -42,6 +42,13 @@
       "phase": "SOURCE",
       "report": "runs/2026-10-10/APA-RUN-20261010-234200Z-slack-legacy-three-audit/REPORT.md",
       "run_id": "APA-RUN-20261010-234200Z-slack-legacy-three-audit",
+      "substep_id": "APA-P00.A02.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-10/APA-RUN-20261010-235301Z-branch-evidence-dedup/REPORT.md",
+      "run_id": "APA-RUN-20261010-235301Z-branch-evidence-dedup",
       "substep_id": "APA-P00.A02.S03"
     }
   ],
