@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 12,
+  "revision": 13,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -662,7 +662,7 @@
       ],
       "acceptance": "Версии SDK, первоисточники, проверенные сигнатуры",
       "owner": "chatgpt:apa-discovery",
-      "lease_until": "2026-10-10T15:47:37.911Z",
+      "lease_until": "2026-10-10T15:47:37Z",
       "claim_ref": "APA-RUN-20261010T141737Z-ac29-sdk-claim-6b42",
       "requires_approval": false,
       "evidence": [],
