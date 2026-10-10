@@ -8,6 +8,8 @@
 
 Запрос на круглосуточный режим означает последовательные обычные исследовательские проходы и публикации. **Он не доказывает наличие работающего 24/7 runner**: расписание, права GitHub и фактические циклы должны быть проверены отдельно. Пока это не подтверждено, статус NOT_RUNNING.
 
+**Уточнение механизма запуска:** [ChatGPT Scheduled Task — инструкция и статус](control/CHATGPT_SCHEDULED_TASK.md). Инициатор — расписание ChatGPT, а не GitHub controller. В начале выполнения обязательна подтверждённая запись `IN_PROGRESS` в PROJECT_PLAN, после проверки результата — `DONE_PUBLISHED` либо `PARTIAL/BLOCKED`. [CI с проверками статусов](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38047321489) — SUCCESS. **Scheduled Task пока NOT_CONFIGURED**; автоматически исследования не запускаются.
+
 ## ⚙️ Единый управляющий APA Project Controller (2026-10-10)
 
 **Единственный источник новых поручений и актуальных статусов:** [PROJECT_PLAN.json](control/PROJECT_PLAN.json). **Старт любому чату:** [HANDOFF](control/generated/HANDOFF.md) → [CONTROL_BOARD](control/generated/CONTROL_BOARD.md) → [TASK_CARDS](control/generated/TASK_CARDS.md). [THEMES](control/generated/THEMES.md) связывает 15 тематических направлений, [RELATIONSHIPS](control/generated/RELATIONSHIPS.md) — зависимости и связанные работы. [Инструкция управляющего](control/README.md).
