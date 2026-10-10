@@ -38,3 +38,7 @@ No evidence yet of dropped or modified SQLite data: earlier baseline confirmed e
 Next: offline CI PASS, owner runs updated read-only RawProbe in the second PowerShell, submits only `counts` and `rejected_stage_shapes`. Based on those counts, select the narrowest strict parser adjustment, verify negative tests, then controlled historical replay and dedupe. For the 2 unfenced + 1 incomplete messages, do not bypass validation; treat separately in provenance audit.
 
 **Do not** mark PROJECT_PLAN tasks DONE from Slack claims; keep source/offline/build/live gates distinct; no main, PLN, APX or installed Archicad changes.
+
+## PR #31 offline gate (independent GitHub verification)
+
+[GitHub Actions run 38090410179](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38090410179) finished **SUCCESS**, coordinator unit suite **36/36 PASS**, including both new envelope-stage and privacy tests. Windows launcher static check **PASS**. Retrieved and inspected job logs showing `Ran 36 tests` and `OK`. Source/test/document readback verified through GitHub API. The LIVE read-only staged count is **NOT_VERIFIED** until the owner executes it locally. No new SQLite backfill is claimed.
