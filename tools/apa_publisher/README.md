@@ -1,6 +1,6 @@
 # APA Research OS — GitHub Actions publisher
 
-**Status:** GitHub Actions workflow installed on canonical research branch. The workflow triggers on a push changing an inbox JSON, publisher code, or the workflow file. It does **not** autonomously perform research or schedule ChatGPT. See Actions run results for operational status.
+**Status: DEPLOYED / FIRST END-TO-END SYNTHETIC RUN PASS.** The push-triggered GitHub Actions workflow completed [run 38045964668](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38045964668) successfully, with 6 offline tests, report/index commits, GitHub REST content readback, receipt commit and receipt readback. [Published synthetic receipt](../../docs/research/apa-results/receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json). This is a publisher, **not** an autonomous ChatGPT research runner or 24/7 schedule.
 
 - Workflow: [apa-research-publisher.yml](../../.github/workflows/apa-research-publisher.yml)
 - Input: [PUBLISH_REQUEST_V1.schema.json](../../docs/research/apa-results/protocol/PUBLISH_REQUEST_V1.schema.json)
