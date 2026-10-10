@@ -2,7 +2,7 @@
 
 ## Split-Plane / V2 protocol
 
-[RUN_EVENT_V2 JSON Schema](protocol/RUN_EVENT_V2.schema.json), [publisher contract](protocol/PUBLISHER_CONTRACT.md), [evidence policy](protocol/EVIDENCE_POLICY.md) и [readback receipt](receipts/APA-RUN-20261010-102800Z-research-os-audit-readback.json) опубликованы. **Это проект формата и пример receipt, не развёрнутый сервис.**
+[RUN_EVENT_V2 JSON Schema](protocol/RUN_EVENT_V2.schema.json), [PUBLISH_REQUEST_V1](protocol/PUBLISH_REQUEST_V1.schema.json), [publisher contract](protocol/PUBLISHER_CONTRACT.md), [evidence policy](protocol/EVIDENCE_POLICY.md). **Push-triggered publisher DEPLOYED**: [workflow](../../.github/workflows/apa-research-publisher.yml), [source](../../tools/apa_publisher/publisher.py), [synthetic E2E success](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38045964668), [automatic receipt](receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json). Legacy flat reports остаются; 24/7 research scheduler не развёрнут.
 
 Порядок: immutable report/manifest/evidence → GitHub commit → readback/hash → отдельный receipt → восстановимые проекции/индексы → index commit/readback → DONE_PUBLISHED. Если индексация падает, восстанавливать из immutable run, не повторять исследование. До готовности index builder текущие Markdown обновляются вручную и проверяются. Не вставлять commit SHA в файл того же коммита (самоссылка). Не считать SOURCE_VERIFIED равным LIVE_PASS.
 
