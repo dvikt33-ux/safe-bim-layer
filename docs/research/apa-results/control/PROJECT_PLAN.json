@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 18,
+  "revision": 19,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -310,6 +310,12 @@
       "uri": "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md",
       "kind": "REPORT",
       "verification": "READBACK_VERIFIED"
+    },
+    "ART-PROFILE-SOURCE-20261010-8C21": {
+      "id": "ART-PROFILE-SOURCE-20261010-8C21",
+      "uri": "docs/research/apa-results/runs/2026-10-10/apa-technical-20261010-153928-profile-fields-edge-material-8c21.md",
+      "kind": "REPORT",
+      "verification": "GITHUB_READBACK_VERIFIED"
     }
   },
   "tasks": {
@@ -688,7 +694,7 @@
       "action_id": "APA-P10.A01",
       "title": "Этажи, building materials, surfaces, composites, profiles, связи",
       "kind": "RESEARCH",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "sdk-attributes-stories",
       "depends_on": [
@@ -702,11 +708,13 @@
         "Матрица native elements/attributes и readback"
       ],
       "acceptance": "Матрица native elements/attributes и readback",
-      "owner": "chatgpt:apa-technical",
-      "lease_until": "2026-10-10T17:30:00Z",
-      "claim_ref": "apa-tech-20261010T153651Z-stories-attributes-8c21",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-PROFILE-SOURCE-20261010-8C21"
+      ],
       "blocked_reason": null
     },
     "APA-P10.A01.S03": {
