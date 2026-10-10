@@ -18,12 +18,16 @@ import urllib.request
 
 import archicad_scene_run as RUN
 import archicad_scene_v1 as SCENE
+import archicad_building_shell as BUILD
 
 READS = frozenset({"GetProjectInfo", "GetStories", "GetAddOnVersion",
                   "GetAllElements", "Get3DBoundingBoxes", "GetDetailsOfElements", "API.GetProductInfo"})
 PRIMITIVES = {
     "pavilion-frame-v1": {"status": "EXECUTABLE_PENDING_LIVE_ACCEPTANCE",
                           "executor": "SceneWriter", "elementCount": 12},
+    "building-shell-v1": {"status": "COMPILES_TO_GUARDED_SCENE_WRITER",
+                          "executor": "SceneWriter",
+                          "structuralVerification": "NOT_VERIFIED"},
     "typical-floor-v1": {"status": "UNSUPPORTED", "reason": "no accepted floor executor"},
     "mep-network-v1": {"status": "UNSUPPORTED", "reason": "native routing/license/readback unverified"},
 }
@@ -101,39 +105,50 @@ def parse_documentation(folder, binding):
 
 
 def compile_intent(intent, schema_path):
-    if (not isinstance(intent, dict) or set(intent) != {"schemaVersion", "projectId", "units", "components"}
+    if (not isinstance(intent, dict) or set(intent) !=
+            {"schemaVersion", "projectId", "units", "components"}
             or intent["schemaVersion"] != "archicad-project-intent/1"
             or intent["units"] != "meters" or not isinstance(intent["projectId"], str)
             or not ID.fullmatch(intent["projectId"])):
         raise ValueError("INVALID_PROJECT_INTENT")
     parts = intent["components"]
     if not isinstance(parts, list) or len(parts) != 1:
-        raise ValueError("MVP_REQUIRES_ONE_WHOLE_PAVILION: multiple components unsupported")
+        raise ValueError("ONLY_ONE_COORDINATED_BUILDING_COMPONENT_SUPPORTED")
     part = parts[0]
-    if (not isinstance(part, dict) or set(part) != {"id", "primitive", "anchor"}
-            or not isinstance(part["id"], str) or not ID.fullmatch(part["id"])):
-        raise ValueError("INVALID_COMPONENT")
+    if not isinstance(part, dict) or part.get("primitive") not in {
+            "pavilion-frame-v1", "building-shell-v1"}:
+        raise ValueError("UNSUPPORTED_PRIMITIVE: " + str(part.get("primitive") if isinstance(part, dict) else part))
+    if not isinstance(part.get("id"), str) or not ID.fullmatch(part["id"]):
+        raise ValueError("INVALID_COMPONENT_ID")
     primitive = part["primitive"]
-    if not isinstance(primitive, str) or primitive != "pavilion-frame-v1":
-        raise ValueError("UNSUPPORTED_PRIMITIVE: " + str(primitive))
-    anchor = part["anchor"]
-    if not isinstance(anchor, dict) or set(anchor) != {"x", "y"}:
-        raise ValueError("INVALID_ANCHOR")
     catalog_with_provenance(schema_path)
-    preview = SCENE.prepare(anchor["x"], anchor["y"], schema_path)
-    routes = {s["id"]: {"executor": "SceneWriter", "command": s["command"],
-                         "readback": "GetDetailsOfElements"} for s in preview["graph"]["operations"]}
-    if any(s["command"] not in RUN.ALLOWED_WRITES for s in preview["graph"]["operations"]):
+    if primitive == "building-shell-v1":
+        preview = BUILD.prepare(part, schema_path)
+    else:
+        if set(part) != {"id", "primitive", "anchor"}:
+            raise ValueError("INVALID_PAVILION_COMPONENT")
+        anchor = part["anchor"]
+        if not isinstance(anchor, dict) or set(anchor) != {"x", "y"}:
+            raise ValueError("INVALID_ANCHOR")
+        preview = SCENE.prepare(anchor["x"], anchor["y"], schema_path)
+    routes = {step["id"]: {"executor": "SceneWriter", "command": step["command"],
+                           "readback": "GetDetailsOfElements"}
+              for step in preview["graph"]["operations"]}
+    if any(step["command"] not in RUN.ALLOWED_WRITES
+           for step in preview["graph"]["operations"]):
         raise ValueError("UNSUPPORTED_EXECUTOR_ROUTE")
     return {**preview, "status": "ACCELERATOR_COMPILED_OFFLINE", "intent": intent,
             "intentHash": RUN.digest(intent), "routes": routes,
-            "bimIntent": {"componentId": part["id"], "primitive": primitive,
-                          "entities": [{"id": s["id"], "kind": SCENE.GRAPH.CREATES[s["command"]],
-                                        "sourceComponent": part["id"]} for s in preview["graph"]["operations"]]},
+            "bimIntent": {
+                "componentId": part["id"], "primitive": primitive,
+                "entities": [{"id": step["id"], "kind": SCENE.GRAPH.CREATES[step["command"]],
+                              "sourceComponent": part["id"]}
+                             for step in preview["graph"]["operations"]]},
             "primitiveRegistry": PRIMITIVES,
-            "limitations": ["Pavilion frame only: no roof, zones, finishes or documentation",
-                            "Metrics are intent geometry, not structural or normative acceptance",
-                            "Typical floor and MEP blocked until independent live acceptance"]}
+            "limitations": preview.get("limitations", [
+                "Pavilion only: no roof, zones, finishes or documentation",
+                "Metrics are geometry, not structural/normative acceptance",
+                "Typical floor and MEP require independent live acceptance"])}
 
 
 class EvidenceAPI:
@@ -206,12 +221,16 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
         if mode not in {"preflight", "execute"}:
             raise ValueError("INVALID_MODE")
         api = EvidenceAPI(transport, folder, execute=mode == "execute")
-        binding = RUN.guarded_project(api)  # Identity before inventory or follow-ons.
+        required_story = (compiled.get("storyBindings") or [None])[0]
+        binding = RUN.guarded_project(api, required_story)  # Identity before inventory.
         result["archicadProduct"] = archicad29(api)
         before = inventory_guids(api)
         write_json(folder / "inventory-before.json", before)
         ledger_dir = Path(state_dir) if state_dir is not None else folder.parent / "accelerator-state"
-        writer = RUN.SceneWriter(api, ledger_dir / "scene-v1-attempts.sqlite3", schema)
+        writer = RUN.SceneWriter(api, ledger_dir / "scene-v1-attempts.sqlite3", schema,
+                                 preview_factory=(
+                                     (lambda x, y, path: BUILD.prepare(intent["components"][0], path))
+                                     if required_story is not None else None))
         anchor = intent["components"][0]["anchor"]
         ticket = writer.preflight(anchor["x"], anchor["y"])
         if ticket["binding"] != binding or ticket["graph"] != compiled["graph"]:
@@ -228,7 +247,7 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
             result["status"] = result["scene"]["status"]
         after = inventory_guids(api)
         write_json(folder / "inventory-after.json", after)
-        if RUN.guarded_project(api) != binding:
+        if RUN.guarded_project(api, required_story) != binding:
             raise ValueError("PROJECT_CHANGED_AFTER_RUN")
         added, removed = sorted(set(after)-set(before)), sorted(set(before)-set(after))
         result.update(addedGuids=added, removedGuids=removed, inventoryUnchanged=before == after)
@@ -242,11 +261,21 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
             created = {"__plan__": compiled["graph"], **{k: {"guid": v["guid"], "kind": v["kind"]}
                        for k, v in result["scene"]["steps"].items()}}
             for step in compiled["graph"]["operations"]:
-                RUN.guarded_project(api)
+                RUN.guarded_project(api, required_story)
                 params = RUN.resolve_params(step, created)
-                host = RUN.check_previous_wall(api, step, created) if step["command"] in {"CreateDoors", "CreateWindows"} else None
-                RUN.verify_readback(step["command"], params, RUN.requested_details(api, created[step["id"]]["guid"]), host)
-            if RUN.guarded_project(api) != binding:
+                host = (RUN.check_previous_wall(api, step, created)
+                        if step["command"] in {"CreateDoors", "CreateWindows"} else None)
+                if host:
+                    parent_id = next(iter(step["params"].values()))[0]["ownerWallId"]["guid"]["$createdGuid"]
+                    parent_step = next(s for s in compiled["graph"]["operations"]
+                                       if s["id"] == parent_id)
+                    expected_floor = parent_step["params"]["wallsData"][0]["floorIndex"]
+                else:
+                    expected_floor = next(iter(params.values()))[0]["floorIndex"]
+                RUN.verify_readback(step["command"], params,
+                                    RUN.requested_details(api, created[step["id"]]["guid"]),
+                                    host, expected_floor=expected_floor)
+            if RUN.guarded_project(api, required_story) != binding:
                 raise ValueError("PROJECT_CHANGED_DURING_WHOLE_ASSEMBLY_READBACK")
             result["wholeAssemblyReadback"] = True
     except Exception as exc:
