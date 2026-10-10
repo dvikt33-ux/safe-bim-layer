@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 1,
+  "run_count": 2,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -8,6 +8,13 @@
       "report": "runs/2026-10-10/APA-RUN-20261010-104437Z-publisher-integration-smoke/REPORT.md",
       "run_id": "APA-RUN-20261010-104437Z-publisher-integration-smoke",
       "substep_id": "APA-P00.A03.S04"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-10/APA-RUN-20261010-110048Z-legacy-traceability/REPORT.md",
+      "run_id": "APA-RUN-20261010-110048Z-legacy-traceability",
+      "substep_id": "APA-P50.A01.S01"
     }
   ],
   "schema": "APA_GENERATED_INDEX_V1",
