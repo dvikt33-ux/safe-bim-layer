@@ -21,13 +21,19 @@
 
 **Частичная техническая дельта APA-P10.A01.S01:** [AC29 Get3DInfo/contacts/Opening](runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md) сохранена, commit [d65c5bd](https://github.com/dvikt33-ux/safe-bim-layer/commit/d65c5bd327d077d7873ff720cda6dac3bf8a22cb), readback подтверждён. В официальной документации встречаются оба имени `ACAPI_Element_Get3DInfo` и `ACAPI_ModelAccess_Get3DInfo`; нельзя переименовывать код без SDK header/compile gate. Полный прежний Deep Research отчёт **не восстановлен**.
 
+## Автоматический publisher — DEPLOYED / SYNTHETIC_E2E_PASS (2026-10-10)
+
+**Проверено:** [GitHub Actions run 38045964668](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38045964668) — success; 6 offline tests, автоматический report+manifest+evidence, [generated index](generated/INDEX.md), GitHub REST SHA-256/blob readback, [automatic DONE_PUBLISHED receipt](receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json). Повторный запуск [38046020069](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38046020069) завершился success без нового коммита (idempotent no-op). [Workflow](../../.github/workflows/apa-research-publisher.yml), [publisher source](../../tools/apa_publisher/publisher.py), [операторская инструкция](../../tools/apa_publisher/README.md), [PUBLISH_REQUEST_V1](protocol/PUBLISH_REQUEST_V1.schema.json).
+
+**Граница:** это автоматический **push-triggered GitHub publisher**, а не автономный исследователь ChatGPT; 24/7 research scheduler/heartbeat **NOT_RUNNING**. Тест SYNTHETIC, не Archicad LIVE/BUILD. Legacy manual индексы пока обновляются отдельно.
+
 ## APA Research OS — результат публикации переданного аудита
 
 **Опубликовано и прочитано обратно:** [содержательно полная версия аудита](runs/2026-10-10/apa-research-os-audit-user-supplied-20261010.md), commit [9b07679](https://github.com/dvikt33-ux/safe-bim-layer/commit/9b076792124d99d67dcc0f01554b4834fc3ed8cb); [readback receipt](receipts/APA-RUN-20261010-102800Z-research-os-audit-readback.json). Это **другой** документ, не прежний пропавший полный AC29 Deep Research отчёт.
 
 **APA-P00.A01.S03 частично выполнен:** [снимок всех 72 веток с SHA и PR](inventories/FULL_BRANCH_INVENTORY.md) + [JSON](inventories/BRANCH_HEADS_20261010.json) опубликованы; ancestry, уникальные артефакты, superseded_by и локальные SHA остаются NOT_VERIFIED. Ни одна ветка не удалена.
 
-**APA-P00.A03.S03 — частичный дизайн внедрён:** [RUN_EVENT_V2.schema.json](protocol/RUN_EVENT_V2.schema.json), [PUBLISHER_CONTRACT.md](protocol/PUBLISHER_CONTRACT.md), [EVIDENCE_POLICY.md](protocol/EVIDENCE_POLICY.md) опубликованы и проверены readback. **Сам publisher/index builder не развёрнут, 24/7 NOT_RUNNING.** Индексы пока обновляются вручную с commit/readback; это не generated projections.
+**APA-P00.A03.S03 — PUBLISHER_DEPLOYED / SYNTHETIC_E2E_PASS:** [RUN_EVENT_V2.schema.json](protocol/RUN_EVENT_V2.schema.json), [publisher source](../../tools/apa_publisher/publisher.py), [workflow](../../.github/workflows/apa-research-publisher.yml), [generated V2 index](generated/INDEX.md), [receipt](receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json). GitHub Actions [38045964668](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38045964668) success; 6 offline tests + report/index/receipt API readback. **Publisher работает на push inbox, но scheduler/heartbeat/24h runner NOT_RUNNING.** Ручные legacy индексы ещё не переведены на generated projections.
 
 **Исполнитель:** обычный ChatGPT + GitHub write/readback подтверждён в этой сессии. Deep Research не запускался и без отдельного разрешения запускаться не должен. Права Scheduled Tasks на unattended GitHub write — NOT_VERIFIED.
 
