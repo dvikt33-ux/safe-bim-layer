@@ -2,7 +2,8 @@
 
 **Source of truth:** [PROJECT_PLAN.json](../../../../../docs/research/apa-results/control/PROJECT_PLAN.json).
 This file is generated. Never dispatch from chat memory or edit this board.
-**Publisher:** DEPLOYED; **24/7 research runner:** NOT_RUNNING.
+**Execution trigger:** ChatGPT Scheduled Tasks (user-configured, not a controller cron).
+**Scheduler state:** NOT_CONFIGURED; **Publisher:** DEPLOYED; **verified 24/7:** NOT_RUNNING.
 
 ## Task status
 

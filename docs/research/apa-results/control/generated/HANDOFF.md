@@ -5,11 +5,12 @@ Authority: [PROJECT_PLAN.json](../../../../../docs/research/apa-results/control/
 ## Mandatory procedure
 
 1. Select one eligible S-ID from the generated control board; inspect dependencies, related work and evidence.
-2. Claim the task in PROJECT_PLAN.json via GitHub blob-SHA compare-and-swap: status CLAIMED, owner, lease_until, claim_ref. Never overwrite a competing claim.
-3. Work only within the task scope and acceptance criteria. Check prior artifacts; do not repeat a work_key.
-4. Commit PUBLISH_REQUEST_V1 inbox JSON with matching S-ID and executor. Unclaimed new runs are rejected.
-5. Verify GitHub Actions success and DONE_PUBLISHED receipt; only then review acceptance, mark DONE_PUBLISHED, and clear claim.
-6. If blocked, preserve findings, document blocked_reason, and return to the controller. Do not create a parallel plan.
+2. On a scheduled ChatGPT trigger, atomically set status IN_PROGRESS, owner, lease_until and claim_ref=unique executor_run_id via GitHub blob-SHA CAS. Re-read the committed file before starting work.
+3. If the CAS fails or task is already IN_PROGRESS/DONE_PUBLISHED, do not work. Select another eligible S-ID only after fresh readback.
+4. Work only within task scope. Commit PUBLISH_REQUEST_V1 with matching substep_id, executor and executor_run_id; publisher rejects an unstarted or expired run.
+5. Verify report, CI, receipt and acceptance. Then atomically set DONE_PUBLISHED and attach evidence; for partial results use PARTIAL, for failure BLOCKED with reason. Clear owner/lease/claim_ref.
+6. Record status to GitHub and re-read it. If write/readback fails, report failure and do not claim completion.
+7. Scheduler is created and managed by the user in ChatGPT Scheduled. Controller never starts research and cannot guarantee a scheduled task will run.
 
 ## Parallel eligible work lanes
 

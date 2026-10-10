@@ -32,10 +32,10 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 
 ### AUTOMATION — Автономизация и 24h gate
 
-- APA-P40.A01.S01 [CONTROL/BLOCKED]: Утвердить 24/7 executor и GitHub auth; work_key=always-on-executor-auth; related=none
-- APA-P40.A01.S02 [BUILD/BLOCKED]: Периодический research→publish→readback цикл; work_key=unattended-research-cycle; related=none
-- APA-P40.A01.S03 [BUILD/BLOCKED]: Watchdog пропусков и журнал ошибок; work_key=watchdog-and-error-journal; related=none
-- APA-P40.A01.S04 [VALIDATION/BLOCKED]: 24-часовое доказательство непрерывности; work_key=24h-continuity-proof; related=none
+- APA-P40.A01.S01 [CONTROL/BLOCKED]: Настроить запуск через ChatGPT Scheduled Tasks и разрешённый GitHub доступ; work_key=always-on-executor-auth; related=none
+- APA-P40.A01.S02 [BUILD/BLOCKED]: Проверить Scheduled → IN_PROGRESS → результат → DONE_PUBLISHED/PARTIAL; work_key=unattended-research-cycle; related=none
+- APA-P40.A01.S03 [BUILD/BLOCKED]: Watchdog пропусков Scheduled Task, зависших IN_PROGRESS и журнал ошибок; work_key=watchdog-and-error-journal; related=none
+- APA-P40.A01.S04 [VALIDATION/BLOCKED]: Проверить 24 часа реальных запусков ChatGPT Scheduled Tasks без повторов; work_key=24h-continuity-proof; related=none
 
 ### CONTROLLER — Единый управляющий и межчатовый контекст
 

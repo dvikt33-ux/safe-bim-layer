@@ -500,39 +500,39 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P40.A01.S01
 
-**Утвердить 24/7 executor и GitHub auth** — CONTROL / BLOCKED / P2
+**Настроить запуск через ChatGPT Scheduled Tasks и разрешённый GitHub доступ** — CONTROL / BLOCKED / P2
 
 - Parent: APA-P40 → APA-P40.A01
 - Topic: AUTOMATION
 - Work key: always-on-executor-auth
 - Depends on: APA-P00.A03.S02
 - Related, check before duplicating: none
-- Acceptance: Внешний runner, бюджет и доступ
+- Acceptance: Пользователь создал Scheduled Task; сохранены task ID, расписание/часовой пояс; реальный GitHub write/readback PASS; без Deep Research/платных API
 - Owner/lease: unclaimed
-- Requires owner approval: False
+- Requires owner approval: True
 - Source inputs: [ART-OS-AUDIT](../../../../../docs/research/apa-results/runs/2026-10-10/apa-research-os-audit-user-supplied-20261010.md)
 - Existing V2 runs: none
-- Expected output: Внешний runner, бюджет и доступ
+- Expected output: ChatGPT Scheduled task ID, расписание, часовой пояс, подтверждённый GitHub write/readback
 
 ## APA-P40.A01.S02
 
-**Периодический research→publish→readback цикл** — BUILD / BLOCKED / P2
+**Проверить Scheduled → IN_PROGRESS → результат → DONE_PUBLISHED/PARTIAL** — BUILD / BLOCKED / P2
 
 - Parent: APA-P40 → APA-P40.A01
 - Topic: AUTOMATION
 - Work key: unattended-research-cycle
 - Depends on: APA-P40.A01.S01
 - Related, check before duplicating: none
-- Acceptance: Наблюдаемые unattended циклы
+- Acceptance: Scheduled trigger реально сработал, в GitHub IN_PROGRESS записан до работы, затем verified receipt/evidence и DONE/PARTIAL, повторный чат не берёт тот же S-ID
 - Owner/lease: unclaimed
 - Requires owner approval: True
 - Source inputs: [ART-PUBLISHER](../../../../../tools/apa_publisher/publisher.py)
 - Existing V2 runs: none
-- Expected output: Наблюдаемые unattended циклы
+- Expected output: Два реальных расписанных запуска с уникальным executor_run_id, status/readback и receipt
 
 ## APA-P40.A01.S03
 
-**Watchdog пропусков и журнал ошибок** — BUILD / BLOCKED / P2
+**Watchdog пропусков Scheduled Task, зависших IN_PROGRESS и журнал ошибок** — BUILD / BLOCKED / P2
 
 - Parent: APA-P40 → APA-P40.A01
 - Topic: AUTOMATION
@@ -548,7 +548,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P40.A01.S04
 
-**24-часовое доказательство непрерывности** — VALIDATION / BLOCKED / P2
+**Проверить 24 часа реальных запусков ChatGPT Scheduled Tasks без повторов** — VALIDATION / BLOCKED / P2
 
 - Parent: APA-P40 → APA-P40.A01
 - Topic: AUTOMATION
