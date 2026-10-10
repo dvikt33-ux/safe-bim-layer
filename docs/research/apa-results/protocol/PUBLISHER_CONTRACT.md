@@ -1,8 +1,14 @@
 # APA Research OS — Split-Plane publisher и crash recovery
 
 **ПЛАН:** APA-P00 → **ДЕЙСТВИЕ:** APA-P00.A03 → **ПОДШАГ:** APA-P00.A03.S03.  
-**Статус:** DESIGN_COMMITTED / PUBLISHER_NOT_DEPLOYED.  
+**Статус:** PUBLISHER_DEPLOYED / SYNTHETIC_E2E_PASS; 24H_RESEARCH_RUNNER_NOT_RUNNING. [GitHub Actions run 38045964668](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38045964668) success; [idempotent rerun 38046020069](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38046020069) success.  
 **Основание:** [переданный аудит APA Research OS](../runs/2026-10-10/apa-research-os-audit-user-supplied-20261010.md). **Обычные чаты ChatGPT с GitHub — основной исследователь и текущий publisher. Deep Research без отдельного запроса не запускать.**
+
+## Реализованный publisher (2026-10-10)
+
+[Workflow](../../../.github/workflows/apa-research-publisher.yml) слушает push в canonical research branch с изменениями в inbox/*.json, коде или workflow. [PUBLISH_REQUEST_V1](PUBLISH_REQUEST_V1.schema.json) содержит report_markdown, source/evidence и safety flags. [Python publisher](../../../tools/apa_publisher/publisher.py) валидирует запрос, создаёт immutable V2 run, строит [generated V2 index](../generated/INDEX.md), коммитит, сверяет SHA-256 и Git blob через REST API, коммитит [receipt](../receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json) и проверяет его через REST. Реальный [SYNTHETIC run 38045964668](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38045964668) SUCCESS. Это **не** подтверждение Archicad LIVE или 24/7 research.
+
+**Legacy индекс** пока остаётся ручным, а generated index строится только из V2 manifests. Это не полное исполнение целевого index builder. На следующий gate остаются legacy migration, watchdog/heartbeat, устойчивые retry и два отдельных SOURCE runs.
 
 ## Инварианты
 
@@ -65,9 +71,9 @@ Receipt должен содержать: run_id, report_path, report_commit_sha,
 
 ## Реальный gate внедрения
 
-- **Gate 0 (текущий):** документы, схема, снимок веток, публикация вручную через обычный ChatGPT + GitHub readback. Статус PARTIAL_IMPLEMENTATION.
-- **Gate 1:** отдельный безопасный publisher и index builder, тесты idempotency/partial commit/crash recovery, без изменения main.
-- **Gate 2:** два последовательных цикла с report commit, receipt, index commit и readback.
+- **Gate 0 (DONE):** документы, схема, снимок веток, публикация вручную через обычный ChatGPT + GitHub readback.
+- **Gate 1 (PARTIAL_PASS):** [push-triggered workflow](../../../.github/workflows/apa-research-publisher.yml), [stdlib publisher](../../../tools/apa_publisher/publisher.py), [6 offline tests](../../../tools/apa_publisher/tests/test_publisher.py), автоматические immutable runs + generated V2 index + GitHub REST readback + receipt; SYNTHETIC E2E PASS [38045964668](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38045964668). Реальные outage/retry, legacy index migration и security hardening ещё NOT_VERIFIED.
+- **Gate 2 (PARTIAL):** один полный SYNTHETIC E2E цикл + успешный идемпотентный повтор; два независимых SOURCE research cycles пока NOT_VERIFIED.
 - **Gate 3:** разрешённый unattended runner, реальный GitHub write без зависания на approval, heartbeat и watchdog; только после 24 часов наблюдения — 24H_VERIFIED.
 
 **Нельзя утверждать:** что JSON Schema — это работающий сервис; что Scheduled Tasks имеют unattended write; что PR #21 уже развёрнут; что старые ветки полностью классифицированы; что пропавший ответ восстановлен, если опубликована только другая работа.
