@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 21,
+  "revision": 22,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -314,6 +314,12 @@
     "ART-PROFILE-SOURCE-20261010-8C21": {
       "id": "ART-PROFILE-SOURCE-20261010-8C21",
       "uri": "docs/research/apa-results/runs/2026-10-10/apa-technical-20261010-153928-profile-fields-edge-material-8c21.md",
+      "kind": "REPORT",
+      "verification": "GITHUB_READBACK_VERIFIED"
+    },
+    "ART-TAPIR-COMPAT-20261010-6F29": {
+      "id": "ART-TAPIR-COMPAT-20261010-6F29",
+      "uri": "docs/research/apa-results/runs/2026-10-10/apa-technical-20261010-163950-tapir-compat-source-6f29.md",
       "kind": "REPORT",
       "verification": "GITHUB_READBACK_VERIFIED"
     }
@@ -752,7 +758,7 @@
       "action_id": "APA-P10.A02",
       "title": "Tapir публичные версии и Python/JSON vs локальная 1.5.10",
       "kind": "RESEARCH",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "tapir-python-compatibility",
       "depends_on": [
@@ -768,11 +774,13 @@
         "Compatibility matrix с source SHA"
       ],
       "acceptance": "Compatibility matrix с source SHA",
-      "owner": "chatgpt:apa-technical",
-      "lease_until": "2026-10-10T18:30:00Z",
-      "claim_ref": "APA-RUN-20261010-163950Z-tapir-compat-6f29",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-TAPIR-COMPAT-20261010-6F29"
+      ],
       "blocked_reason": null
     },
     "APA-P10.A02.S02": {
