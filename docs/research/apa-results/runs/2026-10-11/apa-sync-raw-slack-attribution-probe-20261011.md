@@ -43,3 +43,7 @@ If raw probe reports `tail=exact_known_bare_mention_footer` and `parse_valid` ri
 ## Evidence/provenance boundaries
 
 No credentials, raw Slack messages, author IDs or private paths are saved here. No Archicad, PLN, APX, main or canonical task-controller status changes. A source test is not a live data import PASS.
+
+## PR #30 independently confirmed OFFLINE PASS
+
+[GitHub Actions run 38089688047](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38089688047) completed **SUCCESS** for [draft PR #30](https://github.com/dvikt33-ux/safe-bim-layer/pull/30). The coordinator unit suite ran **34/34 PASS**, including the three new tests for unlabeled known Slack mention, strict wrong-sender rejection and historical-bootstrap deduplication; safe-probe footer classification also passed. Windows launcher static job completed SUCCESS. Actual CI logs were retrieved through GitHub and inspected. Source code, test file and operator document were independently read back from their GitHub branch. **This does not yet establish that the local raw Slack content matches the candidate form**, or that 20 old events were imported. Next LIVE gate is the non-mutating raw-probe preflight.
