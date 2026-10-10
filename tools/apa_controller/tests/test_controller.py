@@ -54,6 +54,40 @@ class ControllerTests(unittest.TestCase):
         self.assertEqual(state, second)
         self.assertEqual(first, {p.name: p.read_bytes() for p in c.GENERATED.iterdir()})
 
+    def test_development_board_and_aggregate_progress(self):
+        state = c.build(self.plan)
+        self.assertEqual(state["development"]["plan_id"], "APA-P70")
+        self.assertEqual(state["development"]["total"], 23)
+        self.assertEqual(state["development"]["done"], 0)
+        self.assertEqual(state["development"]["next_eligible"], "APA-P70.A01.S01")
+        board = (c.GENERATED / "DEVELOPMENT_BOARD.md").read_text(encoding="utf-8")
+        handoff = (c.GENERATED / "HANDOFF.md").read_text(encoding="utf-8")
+        self.assertIn("APA-P70.A01 —", board)
+        self.assertIn("APA-P70.A08.S03", board)
+        self.assertIn("DEVELOPMENT_BOARD.md", handoff)
+        self.assertNotEqual(state["development"]["status"], "DONE_PUBLISHED")
+        all_done = copy.deepcopy(self.plan)
+        for task in all_done["tasks"].values():
+            if task["plan_id"] == "APA-P70":
+                task["status"] = "DONE_PUBLISHED"
+                task["evidence"] = ["ART-APA-FULL-CYCLE"]
+        c.validate(all_done)
+        finished = c.build(all_done)
+        self.assertEqual(finished["development"]["status"], "DONE_PUBLISHED")
+        self.assertEqual(finished["development"]["done"], 23)
+        self.assertTrue(all(a["status"] == "DONE_PUBLISHED"
+                            for a in finished["development"]["actions"]))
+
+    def test_approval_required_is_not_dispatchable(self):
+        plan = copy.deepcopy(self.plan)
+        t = plan["tasks"]["APA-P70.A03.S02"]
+        t["depends_on"] = []
+        self.assertTrue(t["requires_approval"])
+        c.validate(plan)
+        self.assertFalse(c.eligible(t, plan))
+        t["requires_approval"] = False
+        self.assertTrue(c.eligible(t, plan))
+
     def test_cycle_rejected(self):
         plan = copy.deepcopy(self.plan)
         plan["tasks"]["APA-P00.A02.S02"]["depends_on"] = ["APA-P60.A01.S01"]
