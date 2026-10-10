@@ -65,3 +65,27 @@ User explicitly authorized changes **only to the existing test PLN**. New standa
 - The new attempt ledger is separate: `%LOCALAPPDATA%\\APA-MVP\\state\\scene-v1-recovery.sqlite3`. Original `scene-v1-attempts.sqlite3` is only opened read-only. Any existing recovery attempt prevents replay.
 - **Critical honesty:** full 12/12 is NOT VERIFIED until the user's live report returns `COMPLETE_UNSAVED` with eight successful recovery steps. The v1.4 package may BLOCK in user's specific PLN due to inability to find matching material, changed inventory, profile-specific readback, etc.; such blocking is preferable to blindly mutating a different model.
 - **No changes** to repository default/main/master, PR #16 source, installed APX, or actual test PLN were done from this documentation publication. Do not mark task complete on offline-only evidence.
+
+## 2026-10-10 live recovery COMPLETE_UNSAVED — 12/12 reported verified
+
+**Evidence:** user supplied direct console output of v1.4 `START_RECOVERY.cmd`, report path `C:\Users\Admin\Downloads\APA_MVP_Windows11_v1_4_RECOVER_EXISTING_SCENE\APA_MVP_Archicad29\results\recovery-execute-20261010T215858Z.json`. Exact recovery-report JSON file / SQLite recovery journal have **not** been uploaded independently as bytes: evidence class **USER_REPORTED_LIVE_CONSOLE_OUTPUT**, not independent persisted-PLN audit.
+
+- Preflight `READY_RECOVER_EXISTING_SCENE` on exact `C:\LocalAI\SafeBIM_Global_Library_Test_Projects\Тест MER .pln`, verified port `19724`, Tapir `1.5.10`, native story `0`, original 43 elements (38 baseline + four walls + slab); 13/13 pinned blobs integrity PASS.
+- Explicit authorization entered: `RECOVER TEST MER`. Execution result `status=COMPLETE_UNSAVED`, `totalSceneElementsVerified=12`, `createdInRecovery=7`, `modifiedInRecovery=1`, `originalFourWallsReused=true`, `plnSaved=false`, `automaticRetry=false`.
+- Existing 4 walls (reused, GUIDs preserved):
+  - south `6C6CB42D-8368-4749-81F9-D5FA8748AB20`
+  - east `BD622995-16E6-4C9B-BF42-4934AD40A931`
+  - north `1B95F857-025F-457F-A369-E455F33B7861`
+  - west `79B92DDC-9B38-44F3-9768-0F08CEC0274E`.
+- Existing slab modified and read back PASS: `7539799C-D432-42F5-9F31-FED10E1047C4`, `thickness=0.2 m`; material chosen from shared Basic walls for MVP, not necessarily architecturally final.
+- Newly created and per-operation readback PASS:
+  - `column-sw` `44113E51-830B-404F-910B-3AC34B540820`
+  - `column-se` `3BB1F6AD-8BFE-4EEF-9813-C84F58607AED`
+  - `column-ne` `C4B4412C-1A4D-41C1-951C-1222EAC7621E`
+  - `column-nw` `F3E77518-5BFA-4BBB-87EC-EBD29F428DCB`
+  - `door-south` `D0A1D988-7F03-4DA1-AC40-76A3867EDD98`
+  - `window-north-1` `C54E2C77-EDF8-4175-B8FA-12BA30A0C595`
+  - `window-north-2` `B48FEEB6-DC3D-4181-BD6C-ACDAC708FDA7`.
+- Recovery journal: `C:\Users\Admin\AppData\Local\APA-MVP\state\scene-v1-recovery.sqlite3`, a separate once-only journal. DO NOT rerun v1.4 recovery option 2 or earlier APA menu 5; attempt ledger protects against replay.
+- **Completion distinction:** first **LIVE WRITE + NATIVE READBACK 12/12 reported PASS** for fixed pavilion; **PLN disk persistence NOT_VERIFIED** because `COMPLETE_UNSAVED` and `plnSaved=false`; user should `Save As...` a distinct `.pln` copy and later independently inspect reopened copy and confirm all 12 GUIDs, locations, materials, and dimensions. Final architectural/structural design and material correctness are not certified.
+- Suggested task status: scene live-write/readback `DONE_REPORTED_PENDING_INDEPENDENT_REOPEN_AUDIT`; saved-PLN persistence `READY_FOR_VERIFICATION`; extensibility to arbitrary buildings and full APA MVP `NOT_VERIFIED`. No main/master or PR #16 code changed.
