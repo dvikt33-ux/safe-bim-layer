@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 33,
+  "revision": 34,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -120,6 +120,44 @@
         "APA-P60.A02": {
           "id": "APA-P60.A02",
           "title": "Интеграция с publisher и межчатовый handoff"
+        }
+      }
+    },
+    "APA-P70": {
+      "id": "APA-P70",
+      "title": "Разработка APA — полный цикл проектирования и выпуска",
+      "actions": {
+        "APA-P70.A01": {
+          "id": "APA-P70.A01",
+          "title": "Единая база существующих возможностей и доказательств"
+        },
+        "APA-P70.A02": {
+          "id": "APA-P70.A02",
+          "title": "Требования, нормативы и библиотека конкретного проекта"
+        },
+        "APA-P70.A03": {
+          "id": "APA-P70.A03",
+          "title": "Планировка и редактируемая нативная BIM-модель"
+        },
+        "APA-P70.A04": {
+          "id": "APA-P70.A04",
+          "title": "Конструктивные узлы, кладка, фасады и сопряжения"
+        },
+        "APA-P70.A05": {
+          "id": "APA-P70.A05",
+          "title": "Расчёт несущих систем и инженерная обратная связь"
+        },
+        "APA-P70.A06": {
+          "id": "APA-P70.A06",
+          "title": "MEP и междисциплинарная координация"
+        },
+        "APA-P70.A07": {
+          "id": "APA-P70.A07",
+          "title": "Ведомости, чертежи, нормативная проверка и выпуск"
+        },
+        "APA-P70.A08": {
+          "id": "APA-P70.A08",
+          "title": "Сквозная приёмка и расширение без переписывания ядра"
         }
       }
     }
@@ -352,6 +390,60 @@
       "uri": "docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md",
       "kind": "REPORT",
       "verification": "GITHUB_READBACK_VERIFIED"
+    },
+    "ART-APA-FULL-CYCLE": {
+      "id": "ART-APA-FULL-CYCLE",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md",
+      "kind": "DOCUMENT",
+      "verification": "SOURCE_READ_RESEARCH_NOT_INTEGRATED"
+    },
+    "ART-APA-PLP-CONTRACT": {
+      "id": "ART-APA-PLP-CONTRACT",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml",
+      "kind": "DOCUMENT",
+      "verification": "SOURCE_READ_RESEARCH_NOT_INTEGRATED"
+    },
+    "ART-APA-CSE-RESEARCH": {
+      "id": "ART-APA-CSE-RESEARCH",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md",
+      "kind": "DOCUMENT",
+      "verification": "SOURCE_READ_RESEARCH_NOT_INTEGRATED"
+    },
+    "ART-APA-FULL-CYCLE-RESEARCH": {
+      "id": "ART-APA-FULL-CYCLE-RESEARCH",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md",
+      "kind": "DOCUMENT",
+      "verification": "SOURCE_READ_RESEARCH_NOT_INTEGRATED"
+    },
+    "ART-APA-RU-JUNCTION-NORMS": {
+      "id": "ART-APA-RU-JUNCTION-NORMS",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md",
+      "kind": "DOCUMENT",
+      "verification": "SOURCE_READ_RESEARCH_NOT_INTEGRATED"
+    },
+    "ART-APA-FAST-COMPILER": {
+      "id": "ART-APA-FAST-COMPILER",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md",
+      "kind": "DOCUMENT",
+      "verification": "SOURCE_READ_RESEARCH_NOT_INTEGRATED"
+    },
+    "ART-APA-STRUCTURAL-HANDOFF": {
+      "id": "ART-APA-STRUCTURAL-HANDOFF",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md",
+      "kind": "DOCUMENT",
+      "verification": "SOURCE_READ_RESEARCH_NOT_INTEGRATED"
+    },
+    "ART-APA-PR16": {
+      "id": "ART-APA-PR16",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/16",
+      "kind": "PR",
+      "verification": "SOURCE_READ_DRAFT"
+    },
+    "ART-APA-DETAILS-V212": {
+      "id": "ART-APA-DETAILS-V212",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12",
+      "kind": "LIBRARY",
+      "verification": "SOURCE_READ_UNAPPROVED_DETAILS"
     }
   },
   "tasks": {
@@ -1838,6 +1930,662 @@
         "ART-SCHEDULED-INSTRUCTION"
       ],
       "blocked_reason": null
+    },
+    "APA-P70.A01.S01": {
+      "id": "APA-P70.A01.S01",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A01",
+      "title": "Сопоставить полный продуктовый контракт с существующим кодом и исследованиями",
+      "kind": "CONSOLIDATION",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "product-contract-and-code-baseline",
+      "depends_on": [
+        "APA-P00.A02.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-FULL-CYCLE",
+        "ART-APA-PR16",
+        "ART-APA-REUSE-NATIVE-20261011"
+      ],
+      "outputs": [
+        "Таблица требований полного цикла → исходные файлы/SHA → подтверждённые функции и ограничения; без новой реализации"
+      ],
+      "acceptance": "Таблица требований полного цикла → исходные файлы/SHA → подтверждённые функции и ограничения; без новой реализации",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A01.S02": {
+      "id": "APA-P70.A01.S02",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A01",
+      "title": "Привязать все значимые наработки к функциям продукта, выявить пробелы",
+      "kind": "CONSOLIDATION",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "product-evidence-to-capability-trace",
+      "depends_on": [
+        "APA-P70.A01.S01",
+        "APA-P50.A01.S01"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-REGISTER",
+        "ART-TRACE-REPORT",
+        "ART-APA-FULL-CYCLE-RESEARCH"
+      ],
+      "outputs": [
+        "Матрица research → S-ID → код/PR → тест → функциональная возможность; дубликаты и пробелы явно отмечены"
+      ],
+      "acceptance": "Матрица research → S-ID → код/PR → тест → функциональная возможность; дубликаты и пробелы явно отмечены",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A01.S03": {
+      "id": "APA-P70.A01.S03",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A01",
+      "title": "Утвердить минимальные границы интеграции и порядок сквозных поставок",
+      "kind": "INTEGRATION",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "product-integration-boundaries",
+      "depends_on": [
+        "APA-P70.A01.S02",
+        "APA-P50.A02.S01"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-REUSE-NATIVE-20261011",
+        "ART-APA-FAST-COMPILER"
+      ],
+      "outputs": [
+        "Проверенный маршрут полного цикла, reuse map, отсутствие дублирования SceneWriter/графа/исполнителя, приёмочные ворота"
+      ],
+      "acceptance": "Проверенный маршрут полного цикла, reuse map, отсутствие дублирования SceneWriter/графа/исполнителя, приёмочные ворота",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A02.S01": {
+      "id": "APA-P70.A02.S01",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A02",
+      "title": "Собрать семантический контракт задания, участка, этажей и помещений",
+      "kind": "BUILD",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "project-brief-and-story-contract",
+      "depends_on": [
+        "APA-P70.A01.S03"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-FULL-CYCLE",
+        "ART-APA-FULL-CYCLE-RESEARCH"
+      ],
+      "outputs": [
+        "Два режима GENERATE_FROM_ZERO/ADAPT_EXISTING; требования/ограничения, первый этаж на ±0.000, index только по GetStories"
+      ],
+      "acceptance": "Два режима GENERATE_FROM_ZERO/ADAPT_EXISTING; требования/ограничения, первый этаж на ±0.000, index только по GetStories",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A02.S02": {
+      "id": "APA-P70.A02.S02",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A02",
+      "title": "Связать проектные требования с версиями нормативов и проверяемыми правилами",
+      "kind": "BUILD",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "normative-applicability-pack",
+      "depends_on": [
+        "APA-P70.A02.S01"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-RU-JUNCTION-NORMS",
+        "ART-APA-CSE-RESEARCH"
+      ],
+      "outputs": [
+        "Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED"
+      ],
+      "acceptance": "Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A02.S03": {
+      "id": "APA-P70.A02.S03",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A02",
+      "title": "Собрать проектный Library Pack из проверяемых строительных систем и узлов",
+      "kind": "BUILD",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "project-library-pack-assembly",
+      "depends_on": [
+        "APA-P70.A02.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-PLP-CONTRACT",
+        "ART-APA-DETAILS-V212",
+        "ART-APA-CSE-RESEARCH"
+      ],
+      "outputs": [
+        "Отобранные CSE, источники/хэши/лицензии, интерфейсы, совместимые AC29 объекты и список неподтверждённых узлов"
+      ],
+      "acceptance": "Отобранные CSE, источники/хэши/лицензии, интерфейсы, совместимые AC29 объекты и список неподтверждённых узлов",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A03.S01": {
+      "id": "APA-P70.A03.S01",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A03",
+      "title": "Связать помещения, несущую схему, оси, уровни и конструктивные ограничения",
+      "kind": "INTEGRATION",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "semantic-spatial-structural-plan",
+      "depends_on": [
+        "APA-P70.A02.S03"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-FULL-CYCLE",
+        "ART-APA-FAST-COMPILER"
+      ],
+      "outputs": [
+        "Проверяемый граф помещений/нагрузочных путей/осей с привязкой к CSE и этажам; без условных стен"
+      ],
+      "acceptance": "Проверяемый граф помещений/нагрузочных путей/осей с привязкой к CSE и этажам; без условных стен",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A03.S02": {
+      "id": "APA-P70.A03.S02",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A03",
+      "title": "Собрать модель средствами уже существующих BIM-исполнителей",
+      "kind": "BUILD",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "reuse-native-whole-building-builder",
+      "depends_on": [
+        "APA-P70.A03.S01"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-PR16",
+        "ART-APA-REUSE-NATIVE-20261011"
+      ],
+      "outputs": [
+        "Создание полноценной BIM-геометрии из схемы через имеющиеся writer/graph; связные стены не дробятся без необходимости; тестовый PLN только после разрешения"
+      ],
+      "acceptance": "Создание полноценной BIM-геометрии из схемы через имеющиеся writer/graph; связные стены не дробятся без необходимости; тестовый PLN только после разрешения",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": true,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A03.S03": {
+      "id": "APA-P70.A03.S03",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A03",
+      "title": "Доказать редактируемость, GUID/host/story/material и инкрементальное обновление",
+      "kind": "VALIDATION",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "incremental-model-integrity-gates",
+      "depends_on": [
+        "APA-P70.A03.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-REUSE-NATIVE-20261011",
+        "ART-APA-FAST-COMPILER"
+      ],
+      "outputs": [
+        "Тесты обновления проекта без лишних элементов/потери GUID, readback этажей, материалов, хостов и откат изменений"
+      ],
+      "acceptance": "Тесты обновления проекта без лишних элементов/потери GUID, readback этажей, материалов, хостов и откат изменений",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A04.S01": {
+      "id": "APA-P70.A04.S01",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A04",
+      "title": "Вывести из модели обязательные семейства узлов и их условия применимости",
+      "kind": "INTEGRATION",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "required-junction-condition-coverage",
+      "depends_on": [
+        "APA-P70.A03.S01"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-CSE-RESEARCH",
+        "ART-APA-DETAILS-V212"
+      ],
+      "outputs": [
+        "Матрица всех применимых примыканий/отверстий/армопоясов/связей/крепежа с точным source/detail ID и открытыми пробелами"
+      ],
+      "acceptance": "Матрица всех применимых примыканий/отверстий/армопоясов/связей/крепежа с точным source/detail ID и открытыми пробелами",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A04.S02": {
+      "id": "APA-P70.A04.S02",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A04",
+      "title": "Привязать выбранные узлы и композиции к нативным BIM элементам",
+      "kind": "BUILD",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "native-details-to-cse-binding",
+      "depends_on": [
+        "APA-P70.A04.S01",
+        "APA-P70.A03.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-PLP-CONTRACT",
+        "ART-APA-RU-JUNCTION-NORMS"
+      ],
+      "outputs": [
+        "Редактируемые системы и узлы с параметрами, классификацией, происхождением и invalidation при изменении"
+      ],
+      "acceptance": "Редактируемые системы и узлы с параметрами, классификацией, происхождением и invalidation при изменении",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A04.S03": {
+      "id": "APA-P70.A04.S03",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A04",
+      "title": "Проверить узлы окон, облицовки, перекрытий и кровельных примыканий",
+      "kind": "VALIDATION",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "junction-evidence-acceptance",
+      "depends_on": [
+        "APA-P70.A04.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-RU-JUNCTION-NORMS",
+        "ART-APA-DETAILS-V212"
+      ],
+      "outputs": [
+        "Для каждого узла классификация PASS_GEOMETRY/PASS_DOCUMENTED/PASS_ENGINEERING/NOT_VERIFIED; ложные approvals запрещены"
+      ],
+      "acceptance": "Для каждого узла классификация PASS_GEOMETRY/PASS_DOCUMENTED/PASS_ENGINEERING/NOT_VERIFIED; ложные approvals запрещены",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A05.S01": {
+      "id": "APA-P70.A05.S01",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A05",
+      "title": "Получить проверяемую расчётную схему и исходные нагрузки",
+      "kind": "INTEGRATION",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "load-bearing-design-and-load-cases",
+      "depends_on": [
+        "APA-P70.A03.S01",
+        "APA-P70.A02.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-STRUCTURAL-HANDOFF",
+        "ART-APA-FULL-CYCLE"
+      ],
+      "outputs": [
+        "Нагрузки, расчётная схема, несущие стены/пролёты/фундаменты/стропила, комбинации и неподтверждённые допущения отдельно"
+      ],
+      "acceptance": "Нагрузки, расчётная схема, несущие стены/пролёты/фундаменты/стропила, комбинации и неподтверждённые допущения отдельно",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A05.S02": {
+      "id": "APA-P70.A05.S02",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A05",
+      "title": "Использовать SAM/SAF/IFC и доступный проверенный расчётный движок",
+      "kind": "BUILD",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "structural-engine-adapter-handoff",
+      "depends_on": [
+        "APA-P70.A05.S01",
+        "APA-P70.A03.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-STRUCTURAL-HANDOFF",
+        "ART-APA-FULL-CYCLE-RESEARCH"
+      ],
+      "outputs": [
+        "Экспорт и сверка идентичности элементов, материалов, уровней; расчёт только в доступном проверенном инструменте, отсутствие доступа явно BLOCKED"
+      ],
+      "acceptance": "Экспорт и сверка идентичности элементов, материалов, уровней; расчёт только в доступном проверенном инструменте, отсутствие доступа явно BLOCKED",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A05.S03": {
+      "id": "APA-P70.A05.S03",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A05",
+      "title": "Применить результаты инженерного расчёта и повторно проверить узлы",
+      "kind": "VALIDATION",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "engineering-feedback-to-bim",
+      "depends_on": [
+        "APA-P70.A05.S02",
+        "APA-P70.A04.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-STRUCTURAL-HANDOFF",
+        "ART-APA-RU-JUNCTION-NORMS"
+      ],
+      "outputs": [
+        "Контролируемое внесение инженерных изменений в BIM; сверка с расчётом и запись необходимости согласования специалистом"
+      ],
+      "acceptance": "Контролируемое внесение инженерных изменений в BIM; сверка с расчётом и запись необходимости согласования специалистом",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A06.S01": {
+      "id": "APA-P70.A06.S01",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A06",
+      "title": "Сформировать инженерные требования и трассы на базе штатного MEP",
+      "kind": "INTEGRATION",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "native-mep-semantic-network",
+      "depends_on": [
+        "APA-P70.A03.S02",
+        "APA-P70.A02.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-MEP-SOURCE-20261010-PORTGRAPH"
+      ],
+      "outputs": [
+        "Проверенные системы труб/воздуховодов с сетью и портами, применимые нормы и явные незакрытые расчёты"
+      ],
+      "acceptance": "Проверенные системы труб/воздуховодов с сетью и портами, применимые нормы и явные незакрытые расчёты",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A06.S02": {
+      "id": "APA-P70.A06.S02",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A06",
+      "title": "Проверить инженерные сети, проходки, коллизии и узлы пересечений",
+      "kind": "VALIDATION",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "mep-junction-collision-acceptance",
+      "depends_on": [
+        "APA-P70.A06.S01",
+        "APA-P70.A04.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-MEP-SOURCE-20261010-PORTGRAPH",
+        "ART-APA-RU-JUNCTION-NORMS"
+      ],
+      "outputs": [
+        "Readback связности и коллизий, согласованные проходки/узлы без ложных PASS и без потери идентичности"
+      ],
+      "acceptance": "Readback связности и коллизий, согласованные проходки/узлы без ложных PASS и без потери идентичности",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A07.S01": {
+      "id": "APA-P70.A07.S01",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A07",
+      "title": "Получить согласованные планы, разрезы, фасады, спецификации и узлы",
+      "kind": "BUILD",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "native-project-documentation-views",
+      "depends_on": [
+        "APA-P70.A03.S03",
+        "APA-P70.A04.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-FULL-CYCLE",
+        "ART-APA-PLP-CONTRACT"
+      ],
+      "outputs": [
+        "Чертежи и ведомости из одной BIM-модели, соответствие срезов/количеств/версий, без ручных дублирующих источников"
+      ],
+      "acceptance": "Чертежи и ведомости из одной BIM-модели, соответствие срезов/количеств/версий, без ручных дублирующих источников",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A07.S02": {
+      "id": "APA-P70.A07.S02",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A07",
+      "title": "Выполнить поэлементную и общепроектную проверку нормативов",
+      "kind": "VALIDATION",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "revisioned-compliance-and-coverage-report",
+      "depends_on": [
+        "APA-P70.A07.S01",
+        "APA-P70.A05.S03",
+        "APA-P70.A06.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-RU-JUNCTION-NORMS",
+        "ART-APA-FAST-COMPILER"
+      ],
+      "outputs": [
+        "Матрица применимых требований: PASS/FAIL/NOT_VERIFIED/NEEDS_SPECIALIST с источниками и журналом пересчётов"
+      ],
+      "acceptance": "Матрица применимых требований: PASS/FAIL/NOT_VERIFIED/NEEDS_SPECIALIST с источниками и журналом пересчётов",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A07.S03": {
+      "id": "APA-P70.A07.S03",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A07",
+      "title": "Собрать итоговый пакет BIM/IFC/PDF и доказательства проверки",
+      "kind": "BUILD",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "verified-final-project-release",
+      "depends_on": [
+        "APA-P70.A07.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-FULL-CYCLE",
+        "ART-APA-FULL-CYCLE-RESEARCH"
+      ],
+      "outputs": [
+        "Ревизионно согласованный комплект проекта с provenance и инженерными ограничениями; выпуск только после всех gates"
+      ],
+      "acceptance": "Ревизионно согласованный комплект проекта с provenance и инженерными ограничениями; выпуск только после всех gates",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A08.S01": {
+      "id": "APA-P70.A08.S01",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A08",
+      "title": "Проверить полный цикл создания проекта на эталонном ИЖС",
+      "kind": "VALIDATION",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "full-cycle-new-project-e2e",
+      "depends_on": [
+        "APA-P70.A07.S03"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-FULL-CYCLE",
+        "ART-APA-PR16"
+      ],
+      "outputs": [
+        "По одному brief сформирован редактируемый расчётно обоснованный проект; сохраняется, повторно открывается и читается; отдельное live-разрешение"
+      ],
+      "acceptance": "По одному brief сформирован редактируемый расчётно обоснованный проект; сохраняется, повторно открывается и читается; отдельное live-разрешение",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": true,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A08.S02": {
+      "id": "APA-P70.A08.S02",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A08",
+      "title": "Проверить доработку единственного открытого существующего PLN",
+      "kind": "VALIDATION",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "full-cycle-adapt-existing-e2e",
+      "depends_on": [
+        "APA-P70.A08.S01"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-FULL-CYCLE"
+      ],
+      "outputs": [
+        "ADAPT_EXISTING: проект дорабатывается без переключения/изменения чужого PLN; изменение только с разрешением, воспроизводимый readback"
+      ],
+      "acceptance": "ADAPT_EXISTING: проект дорабатывается без переключения/изменения чужого PLN; изменение только с разрешением, воспроизводимый readback",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": true,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A08.S03": {
+      "id": "APA-P70.A08.S03",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A08",
+      "title": "Доказать расширяемость на другом типе здания и системах",
+      "kind": "VALIDATION",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "building-type-extension-contract",
+      "depends_on": [
+        "APA-P70.A08.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-FAST-COMPILER",
+        "ART-APA-FULL-CYCLE"
+      ],
+      "outputs": [
+        "Новый тип здания или конструктивная система подключается без нового параллельного генератора и без регрессии старого проекта"
+      ],
+      "acceptance": "Новый тип здания или конструктивная система подключается без нового параллельного генератора и без регрессии старого проекта",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
     }
   },
   "topics": {
@@ -2077,6 +2825,43 @@
         "ART-PUB-WORKFLOW",
         "ART-PUBLISHER",
         "ART-PROPOSAL-PROTOCOL"
+      ],
+      "synthesis_state": "OPEN",
+      "owner": null
+    },
+    "PRODUCT_DEVELOPMENT": {
+      "id": "PRODUCT_DEVELOPMENT",
+      "title": "Полный цикл разработки APA: требования → узлы/расчёт → BIM → MEP → выпуск",
+      "task_ids": [
+        "APA-P70.A01.S01",
+        "APA-P70.A01.S02",
+        "APA-P70.A01.S03",
+        "APA-P70.A02.S01",
+        "APA-P70.A02.S02",
+        "APA-P70.A02.S03",
+        "APA-P70.A03.S01",
+        "APA-P70.A03.S02",
+        "APA-P70.A03.S03",
+        "APA-P70.A04.S01",
+        "APA-P70.A04.S02",
+        "APA-P70.A04.S03",
+        "APA-P70.A05.S01",
+        "APA-P70.A05.S02",
+        "APA-P70.A05.S03",
+        "APA-P70.A06.S01",
+        "APA-P70.A06.S02",
+        "APA-P70.A07.S01",
+        "APA-P70.A07.S02",
+        "APA-P70.A07.S03",
+        "APA-P70.A08.S01",
+        "APA-P70.A08.S02",
+        "APA-P70.A08.S03"
+      ],
+      "artifact_ids": [
+        "ART-APA-FULL-CYCLE",
+        "ART-APA-PLP-CONTRACT",
+        "ART-APA-REUSE-NATIVE-20261011",
+        "ART-APA-PR16"
       ],
       "synthesis_state": "OPEN",
       "owner": null
