@@ -132,7 +132,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P00.A03.S01
 
-**Проверить write/readback для всех классов исполнителей** — VALIDATION / IN_PROGRESS / P0
+**Проверить write/readback для всех классов исполнителей** — VALIDATION / PARTIAL / P0
 
 - Parent: APA-P00 → APA-P00.A03
 - Topic: PUBLISHER
@@ -140,7 +140,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P00.A02.S02
 - Related, check before duplicating: none
 - Acceptance: Capability matrix по каждому исполнителю
-- Owner/lease: chatgpt:apa-registry-alignment / 2026-10-10T16:30:00Z
+- Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-PUB-RECEIPT](../../../../../docs/research/apa-results/receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json)
 - Existing V2 runs: none
@@ -794,10 +794,26 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Topic: CONTROLLER
 - Work key: claim-concurrency-test
 - Depends on: APA-P60.A02.S01, APA-P60.A02.S02
-- Related, check before duplicating: none
+- Related, check before duplicating: APA-P60.A02.S04
 - Acceptance: Offline tests PASS; concurrent two-writer CAS and lease-expiry recovery NOT_VERIFIED
 - Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-CONTROLLER](../../../../../docs/research/apa-results/control/PROJECT_PLAN.json)
 - Existing V2 runs: none
 - Expected output: Два исполнителя не получают один work_key
+
+## APA-P60.A02.S04
+
+**Ввести сбор предложений задач исследователями и принятие аудитором в PROJECT_PLAN** — VALIDATION / PARTIAL / P1
+
+- Parent: APA-P60 → APA-P60.A02
+- Topic: CONTROLLER
+- Work key: research-proposals-audit-approval
+- Depends on: APA-P60.A02.S02
+- Related, check before duplicating: APA-P60.A02.S03
+- Acceptance: Процесс discovery proposal -> independent audit decision -> TASK registry admission задокументирован; CAS claim/readback и уникальность work_key/dependency DAG соблюдены; Scheduled instructions согласованы. End-to-end независимая публикация proposal, аудит, регистрация и валидатор контроллера подтверждены фактами. Не объявлять DONE по одним инструкциям.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-CONTROLLER](../../../../../docs/research/apa-results/control/PROJECT_PLAN.json), [ART-PLAN](../../../../../docs/research/apa-results/MASTER_PLAN.md)
+- Existing V2 runs: none
+- Expected output: Публичный protocol предложений задач; Инструкции трёх Scheduled исполнителей; Первый проверенный GitHub proposal + review + admission; Проверенный controller DAG и readback

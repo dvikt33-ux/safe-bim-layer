@@ -7,14 +7,14 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 | --- | ---: | ---: | ---: | --- |
 | ARCHITECTURE — Варианты архитектуры | 4 | 0 | 0 | ART-REGISTER |
 | AUTOMATION — Автономизация и 24h gate | 4 | 0 | 0 | ART-OS-AUDIT, ART-PUBLISHER |
-| CONTROLLER — Единый управляющий и межчатовый контекст | 7 | 6 | 1 | ART-CONTROLLER, ART-PLAN, ART-PUB-WORKFLOW, ART-PUBLISHER |
+| CONTROLLER — Единый управляющий и межчатовый контекст | 8 | 6 | 2 | ART-CONTROLLER, ART-PLAN, ART-PUB-WORKFLOW, ART-PUBLISHER, ART-PROPOSAL-PROTOCOL |
 | GDL_TN — GDL и ТЕХНОНИКОЛЬ | 1 | 0 | 1 | ART-PR20 |
 | HUB_GOVERNANCE — Канонический hub и реестр | 8 | 4 | 3 | ART-BRANCH-JSON, ART-BRANCHES, ART-PLAN, ART-PUB-RECEIPT, ART-QUEUE, ART-REGISTER, ART-STATUS |
 | IFC_MCP — IFC/openBIM и MCP | 1 | 0 | 1 | ART-REGISTER |
 | KNOWLEDGE_GRAPH — Сведение исследований и доказательств | 3 | 0 | 1 | ART-BRANCHES, ART-REGISTER, ART-TRACE-RECEIPT, ART-TRACE-REPORT |
 | MEP — MEP native и Tapir | 1 | 0 | 1 | ART-REGISTER |
 | MVP — MVP и внедрение | 2 | 0 | 0 | ART-PLAN |
-| PUBLISHER — Публикация, квитанции и capability | 4 | 0 | 1 | ART-OS-AUDIT, ART-PUB-RECEIPT, ART-PUBLISHER |
+| PUBLISHER — Публикация, квитанции и capability | 4 | 0 | 2 | ART-OS-AUDIT, ART-PUB-RECEIPT, ART-PUBLISHER |
 | SDK_NATIVE — Archicad 29 native SDK | 3 | 0 | 3 | ART-REGISTER, ART-SDK-GET3D, ART-SDK-SEO |
 | SYNTHESIS — Синтез research → implementation | 2 | 0 | 0 | ART-PLAN, ART-REGISTER |
 | TAPIR_PYTHON — Tapir и Python/JSON | 1 | 0 | 1 | ART-REGISTER |
@@ -45,7 +45,8 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 - APA-P60.A01.S04 [VALIDATION/DONE_PUBLISHED]: End-to-end controller workflow и readback; work_key=controller-github-e2e; related=none
 - APA-P60.A02.S01 [CONTROL/DONE_PUBLISHED]: Handoff protocol: каждый чат читает control plan, берёт S-ID; work_key=cross-chat-handoff; related=none
 - APA-P60.A02.S02 [INTEGRATION/DONE_PUBLISHED]: Связать publisher inbox с controller plan, запретить orphan runs; work_key=publisher-plan-claim-gate; related=APA-P00.A03.S03
-- APA-P60.A02.S03 [VALIDATION/PARTIAL]: Протестировать CAS-claim, lease, duplicate prevention; work_key=claim-concurrency-test; related=none
+- APA-P60.A02.S03 [VALIDATION/PARTIAL]: Протестировать CAS-claim, lease, duplicate prevention; work_key=claim-concurrency-test; related=APA-P60.A02.S04
+- APA-P60.A02.S04 [VALIDATION/PARTIAL]: Ввести сбор предложений задач исследователями и принятие аудитором в PROJECT_PLAN; work_key=research-proposals-audit-approval; related=APA-P60.A02.S03
 
 ### GDL_TN — GDL и ТЕХНОНИКОЛЬ
 
@@ -83,7 +84,7 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 
 ### PUBLISHER — Публикация, квитанции и capability
 
-- APA-P00.A03.S01 [VALIDATION/IN_PROGRESS]: Проверить write/readback для всех классов исполнителей; work_key=executor-capability-matrix; related=none
+- APA-P00.A03.S01 [VALIDATION/PARTIAL]: Проверить write/readback для всех классов исполнителей; work_key=executor-capability-matrix; related=none
 - APA-P00.A03.S02 [CONTROL/BLOCKED]: Выбрать разрешённый периодический research runner без платных API; work_key=unattended-runner-selection; related=none
 - APA-P00.A03.S03 [BUILD/PARTIAL]: Publisher, дедупликация, retry, heartbeat и ошибки; work_key=publisher-and-recovery; related=APA-P60.A02.S02
 - APA-P00.A03.S04 [VALIDATION/PARTIAL]: Два независимых SOURCE цикла с GitHub readback; work_key=two-independent-source-publishes; related=none
