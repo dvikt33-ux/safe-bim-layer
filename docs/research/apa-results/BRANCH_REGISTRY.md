@@ -8,6 +8,10 @@
 
 **PRODUCTION / NO WRITE:** [main](https://github.com/dvikt33-ux/safe-bim-layer/tree/main) — не изменять без отдельного разрешения.
 
+## Снимок всех 72 веток — 2026-10-10
+
+[Машинный JSON с branch/head SHA и PR](inventories/BRANCH_HEADS_20261010.json) и [читаемая таблица 72 веток](inventories/FULL_BRANCH_INVENTORY.md) получены из GitHub REST (20 open + 2 closed PR в полученных страницах). Это **этап 1/2**: точные имена/SHA подтверждены, но ancestry, уникальные файлы и superseded_by ещё не проверены. Все ветки KEEP_PENDING_FORENSIC_REVIEW, deletion_authorized=NO. Ни одна ветка не удалена.
+
 ## Обнаруженные ветки и назначение
 
 | Ветка | Класс | Что известно / действие |
