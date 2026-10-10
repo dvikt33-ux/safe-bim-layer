@@ -1,0 +1,53 @@
+{
+  "schema": "APA_PUBLISHER_DEPLOYMENT_V1",
+  "date": "2026-10-10",
+  "repository": "dvikt33-ux/safe-bim-layer",
+  "branch": "research/apa-verified-results-hub-20261010",
+  "workflow_path": ".github/workflows/apa-research-publisher.yml",
+  "workflow_commit": "901dd973293f3200749b5f37fd5bbfa7f7da4f21",
+  "publisher_source_path": "tools/apa_publisher/publisher.py",
+  "publisher_source_commit": "55bf99572a6be2523ded723b9ce95b6b29f743ff",
+  "test_source_path": "tools/apa_publisher/tests/test_publisher.py",
+  "input_schema_path": "docs/research/apa-results/protocol/PUBLISH_REQUEST_V1.schema.json",
+  "trigger": "push to canonical research branch changing inbox/*.json, tools/apa_publisher/**, or workflow file",
+  "mode": "PUSH_TRIGGERED_AUTOMATIC_PUBLISHER",
+  "status": "DEPLOYED_SYNTHETIC_E2E_PASS",
+  "offline_tests": {
+    "count": 6,
+    "result": "PASS",
+    "source": "GitHub Actions run 38045964668"
+  },
+  "e2e": {
+    "workflow_run_id": 38045964668,
+    "conclusion": "success",
+    "run_id": "APA-RUN-20261010-104437Z-publisher-integration-smoke",
+    "report_commit": "783a9f198a042343a4851ddc0eff91a993c70bcd",
+    "receipt_path": "docs/research/apa-results/receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json",
+    "report_readback": "VERIFIED_SHA256_AND_GIT_BLOB",
+    "receipt_readback": "VERIFIED_SHA256_AND_GIT_BLOB",
+    "generated_index_run_count": 1
+  },
+  "idempotency": {
+    "workflow_run_id": 38046020069,
+    "conclusion": "success",
+    "new_commits_from_rerun": 0,
+    "branch_head_after_rerun": "ffa5c9cf136114d3601624dbdc650457ff0382fb"
+  },
+  "not_deployed": [
+    "24/7 autonomous ChatGPT research scheduler",
+    "heartbeat/watchdog",
+    "automatic migration of legacy flat report registers",
+    "Archicad live testing",
+    "external outage retry validation",
+    "two independent SOURCE research runs"
+  ],
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_models_used": false,
+    "deep_research_used": false
+  },
+  "notes": "Deployment proves push-triggered GitHub publication, not continuous autonomous research. Workflow success and remote GitHub readback were independently checked from connected GitHub."
+}
