@@ -132,7 +132,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P00.A03.S01
 
-**Проверить write/readback для всех классов исполнителей** — VALIDATION / PARTIAL / P0
+**Проверить write/readback для всех классов исполнителей** — VALIDATION / IN_PROGRESS / P0
 
 - Parent: APA-P00 → APA-P00.A03
 - Topic: PUBLISHER
@@ -140,7 +140,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P00.A02.S02
 - Related, check before duplicating: none
 - Acceptance: Capability matrix по каждому исполнителю
-- Owner/lease: unclaimed
+- Owner/lease: chatgpt:apa-registry-alignment / 2026-10-10T16:30:00Z
 - Requires owner approval: False
 - Source inputs: [ART-PUB-RECEIPT](../../../../../docs/research/apa-results/receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json)
 - Existing V2 runs: none

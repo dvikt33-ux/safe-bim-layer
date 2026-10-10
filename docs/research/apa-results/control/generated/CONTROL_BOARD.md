@@ -12,11 +12,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | BLOCKED | 8 |
 | CLAIMED | 0 |
 | DONE_PUBLISHED | 10 |
-| IN_PROGRESS | 0 |
-| PARTIAL | 8 |
+| IN_PROGRESS | 1 |
+| PARTIAL | 7 |
 | READY | 24 |
 | SUPERSEDED | 0 |
-| DISPATCHABLE_NOW | 15 |
+| DISPATCHABLE_NOW | 14 |
 | HELD_BY_DEPENDENCIES | 17 |
 | EXPIRED_LEASES | 0 |
 
@@ -24,7 +24,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| — | — | — | — |
+| APA-P00.A03.S01 | chatgpt:apa-registry-alignment | 2026-10-10T16:30:00Z | executor-capability-matrix |
 
 ## CONTROL — 0 ready
 
@@ -65,11 +65,10 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | --- | --- | --- |
 | — | — | — |
 
-## VALIDATION — 3 ready
+## VALIDATION — 2 ready
 
 | Priority | Task | Acceptance |
 | --- | --- | --- |
-| P0 | APA-P00.A03.S01 — Проверить write/readback для всех классов исполнителей | Capability matrix по каждому исполнителю |
 | P1 | APA-P00.A02.S04 — Контролировать receipt/commit/readback всех завершённых отчётов | Нет ложных DONE без квитанции |
 | P1 | APA-P60.A02.S03 — Протестировать CAS-claim, lease, duplicate prevention | Offline tests PASS; concurrent two-writer CAS and lease-expiry recovery NOT_VERIFIED |
 

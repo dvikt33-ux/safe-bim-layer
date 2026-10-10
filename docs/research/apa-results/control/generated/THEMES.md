@@ -14,7 +14,7 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 | KNOWLEDGE_GRAPH — Сведение исследований и доказательств | 3 | 0 | 1 | ART-BRANCHES, ART-REGISTER, ART-TRACE-RECEIPT, ART-TRACE-REPORT |
 | MEP — MEP native и Tapir | 1 | 0 | 1 | ART-REGISTER |
 | MVP — MVP и внедрение | 2 | 0 | 0 | ART-PLAN |
-| PUBLISHER — Публикация, квитанции и capability | 4 | 0 | 2 | ART-OS-AUDIT, ART-PUB-RECEIPT, ART-PUBLISHER |
+| PUBLISHER — Публикация, квитанции и capability | 4 | 0 | 1 | ART-OS-AUDIT, ART-PUB-RECEIPT, ART-PUBLISHER |
 | SDK_NATIVE — Archicad 29 native SDK | 3 | 0 | 3 | ART-REGISTER, ART-SDK-GET3D, ART-SDK-SEO |
 | SYNTHESIS — Синтез research → implementation | 2 | 0 | 0 | ART-PLAN, ART-REGISTER |
 | TAPIR_PYTHON — Tapir и Python/JSON | 1 | 0 | 1 | ART-REGISTER |
@@ -83,7 +83,7 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 
 ### PUBLISHER — Публикация, квитанции и capability
 
-- APA-P00.A03.S01 [VALIDATION/PARTIAL]: Проверить write/readback для всех классов исполнителей; work_key=executor-capability-matrix; related=none
+- APA-P00.A03.S01 [VALIDATION/IN_PROGRESS]: Проверить write/readback для всех классов исполнителей; work_key=executor-capability-matrix; related=none
 - APA-P00.A03.S02 [CONTROL/BLOCKED]: Выбрать разрешённый периодический research runner без платных API; work_key=unattended-runner-selection; related=none
 - APA-P00.A03.S03 [BUILD/PARTIAL]: Publisher, дедупликация, retry, heartbeat и ошибки; work_key=publisher-and-recovery; related=APA-P60.A02.S02
 - APA-P00.A03.S04 [VALIDATION/PARTIAL]: Два независимых SOURCE цикла с GitHub readback; work_key=two-independent-source-publishes; related=none
