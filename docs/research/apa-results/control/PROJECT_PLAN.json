@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 24,
+  "revision": 25,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -328,6 +328,12 @@
       "uri": "docs/research/apa-results/receipts/APA-RUN-20261010-163950Z-tapir-compat-6f29.json",
       "kind": "RECEIPT",
       "verification": "GITHUB_READBACK_VERIFIED"
+    },
+    "ART-MEP-SOURCE-20261010-PORTGRAPH": {
+      "id": "ART-MEP-SOURCE-20261010-PORTGRAPH",
+      "uri": "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md",
+      "kind": "REPORT",
+      "verification": "SOURCE_VERIFIED_GITHUB_READBACK"
     }
   },
   "tasks": {
@@ -854,7 +860,7 @@
       "action_id": "APA-P10.A02",
       "title": "Native MEP/Tapir MEP команды, трассы, порты",
       "kind": "RESEARCH",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "native-and-tapir-mep",
       "depends_on": [
@@ -870,11 +876,13 @@
         "MEP command/route/port matrix"
       ],
       "acceptance": "MEP command/route/port matrix",
-      "owner": "chatgpt:apa-discovery",
-      "lease_until": "2026-10-10T21:08:23Z",
-      "claim_ref": "APA-RUN-20261010-200823Z-mep-route-port-gate",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-MEP-SOURCE-20261010-PORTGRAPH"
+      ],
       "blocked_reason": null
     },
     "APA-P10.A03.S01": {
