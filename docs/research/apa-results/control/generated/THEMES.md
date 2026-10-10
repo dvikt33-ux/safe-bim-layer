@@ -15,7 +15,7 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 | MEP — MEP native и Tapir | 1 | 0 | 1 | ART-REGISTER |
 | MVP — MVP и внедрение | 2 | 0 | 0 | ART-PLAN |
 | PUBLISHER — Публикация, квитанции и capability | 4 | 0 | 2 | ART-OS-AUDIT, ART-PUB-RECEIPT, ART-PUBLISHER |
-| SDK_NATIVE — Archicad 29 native SDK | 3 | 0 | 2 | ART-REGISTER, ART-SDK-GET3D, ART-SDK-SEO |
+| SDK_NATIVE — Archicad 29 native SDK | 3 | 0 | 3 | ART-REGISTER, ART-SDK-GET3D, ART-SDK-SEO |
 | SYNTHESIS — Синтез research → implementation | 2 | 0 | 0 | ART-PLAN, ART-REGISTER |
 | TAPIR_PYTHON — Tapir и Python/JSON | 1 | 0 | 1 | ART-REGISTER |
 | TESTS — Read-only и разрешённые live-тесты | 6 | 0 | 0 | ART-PLAN, ART-PR20, ART-REGISTER |
@@ -93,7 +93,7 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 
 - APA-P10.A01.S01 [RESEARCH/PARTIAL]: AC29 SDK headers и native create/change/get сигнатуры; work_key=sdk-native-signatures; related=none
 - APA-P10.A01.S02 [RESEARCH/READY]: Этажи, building materials, surfaces, composites, profiles, связи; work_key=sdk-attributes-stories; related=none
-- APA-P10.A01.S03 [RESEARCH/IN_PROGRESS]: Morph/Roof/Shell/Openings/SEO/3D dump; work_key=sdk-geometry-modeldump; related=none
+- APA-P10.A01.S03 [RESEARCH/PARTIAL]: Morph/Roof/Shell/Openings/SEO/3D dump; work_key=sdk-geometry-modeldump; related=none
 
 ### SYNTHESIS — Синтез research → implementation
 

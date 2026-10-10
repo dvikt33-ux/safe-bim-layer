@@ -1,17 +1,15 @@
 {
-  "active": [
-    "APA-P10.A01.S03"
-  ],
-  "artifact_count": 30,
+  "active": [],
+  "artifact_count": 31,
   "counts": {
     "BLOCKED": 8,
     "CLAIMED": 0,
-    "DISPATCHABLE_NOW": 15,
+    "DISPATCHABLE_NOW": 16,
     "DONE_PUBLISHED": 10,
     "EXPIRED_LEASES": 0,
     "HELD_BY_DEPENDENCIES": 17,
-    "IN_PROGRESS": 1,
-    "PARTIAL": 9,
+    "IN_PROGRESS": 0,
+    "PARTIAL": 10,
     "READY": 23,
     "SUPERSEDED": 0
   },
@@ -29,6 +27,7 @@
     "RESEARCH": [
       "APA-P10.A01.S01",
       "APA-P10.A01.S02",
+      "APA-P10.A01.S03",
       "APA-P10.A02.S01",
       "APA-P10.A02.S02",
       "APA-P10.A02.S04",
@@ -65,7 +64,7 @@
   "known_published_v2_runs": 3,
   "legacy_reports": "NOT_FULLY_INDEXED",
   "orphan_v2_manifests": [],
-  "plan_revision": 15,
+  "plan_revision": 16,
   "publisher": "DEPLOYED_SYNTHETIC_E2E_PASS",
   "research_runner_24h": "NOT_RUNNING",
   "scheduler": {
@@ -187,7 +186,7 @@
     },
     "SDK_NATIVE": {
       "done": 0,
-      "ready": 2,
+      "ready": 3,
       "task_ids": [
         "APA-P10.A01.S01",
         "APA-P10.A01.S02",
