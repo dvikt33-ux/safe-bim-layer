@@ -8,6 +8,10 @@
 
 **Предел:** обычный чат сам по себе не выполняется непрерывно между обращениями. Для 24/7 нужен подтверждённый механизм запуска обычных проходов и реальный GitHub write на каждом запуске. Не подменять его Deep Research, не обещать постоянную работу без наблюдаемых коммитов/heartbeat. Текущий статус до проверки — **NOT_RUNNING**.
 
+## Применение Split-Plane APA Research OS
+
+Сохранён [аудит владельца](runs/2026-10-10/apa-research-os-audit-user-supplied-20261010.md). Выбрана архитектура **Research / Publish / Control planes**, [RUN_EVENT_V2](protocol/RUN_EVENT_V2.schema.json) и [PUBLISHER_CONTRACT](protocol/PUBLISHER_CONTRACT.md) опубликованы. Получен [снимок 72 веток и 22 PR](inventories/FULL_BRANCH_INVENTORY.md). Это **PARTIAL_IMPLEMENTATION**: нет развёрнутого index builder, publisher, scheduler, heartbeat или подтверждённого unattended write. Исследования — в обычных чатах ChatGPT; Deep Research не запускать без отдельного запроса. Следующий gate — отдельный безопасный тест publisher/idempotency/crash recovery без изменения main.
+
 ## Требуемая система
 
 Постоянно доступный **scheduler/runner** → берёт один S-ID из [RESEARCH_QUEUE](RESEARCH_QUEUE.md) → читает ранее опубликованные доказательства → исследует и валидирует → создаёт Markdown → GitHub commit → readback → обновляет реестр/очередь/статус → записывает heartbeat и ошибку при сбое → повторяет цикл.
