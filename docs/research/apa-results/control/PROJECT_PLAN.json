@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 36,
+  "revision": 37,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -445,6 +445,12 @@
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12",
       "kind": "LIBRARY",
       "verification": "SOURCE_READ_UNAPPROVED_DETAILS"
+    },
+    "ART-APA-SLACK-THREE-RECON-20261011": {
+      "id": "ART-APA-SLACK-THREE-RECON-20261011",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-234200Z-slack-legacy-three-audit/REPORT.md",
+      "kind": "REPORT",
+      "verification": "GITHUB_READBACK_VERIFIED_V2_RECEIPT"
     }
   },
   "tasks": {
@@ -623,7 +629,7 @@
       "action_id": "APA-P00.A02",
       "title": "Связать старые находки с S-ID и удалить логические дубли без удаления оригиналов",
       "kind": "CONSOLIDATION",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 0,
       "work_key": "legacy-evidence-dedup",
       "depends_on": [
@@ -640,11 +646,13 @@
         "Evidence map и superseded_by для дублей"
       ],
       "acceptance": "Evidence map и superseded_by для дублей",
-      "owner": "chatgpt-gpt6-manual-20261011-audit",
-      "lease_until": "2026-10-11T02:00:00Z",
-      "claim_ref": "APA-RUN-20261010-2342Z-slack-legacy-three-audit-01",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-APA-SLACK-THREE-RECON-20261011"
+      ],
       "blocked_reason": null
     },
     "APA-P00.A02.S04": {
