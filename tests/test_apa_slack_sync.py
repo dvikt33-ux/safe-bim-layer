@@ -18,7 +18,7 @@ from scripts.apa_sync.coordinator import (
 )
 from scripts.apa_sync.step_sync import after_step, before_step
 from scripts.apa_sync.socket_mode import bootstrap_channel, rejected_message_shape
-from scripts.apa_sync.inspect_raw_envelopes import summarize, characterize, safe_slack_error_summary
+from scripts.apa_sync.inspect_raw_envelopes import summarize, characterize, safe_slack_error_summary, _staged_fence_diagnosis
 
 
 def event(**changes):
@@ -511,6 +511,45 @@ class RawSlackProbeTests(unittest.TestCase):
         output = json.dumps(result)
         for sensitive in ("xoxb", "sensitive", "conversation", "private"):
             self.assertNotIn(sensitive, output)
+
+    def test_envelope_stage_reason_has_no_message_content(self):
+        original = event(
+            event_id="sensitive-source-id",
+            task_id="SENSITIVE-DATA-001",
+            summary="confidential private organization",
+            phase="SOURCE", status="INFO",
+        )
+        # Deliberately no LF between marker and first fence.
+        malformed = (
+            "APA_EVENT_V1```" + json.dumps(original, ensure_ascii=False)
+            + "```\n*Sent using* <@U0C90JE4WAC>"
+        )
+        stage = _staged_fence_diagnosis(malformed)
+        self.assertEqual(
+            stage, "no_linebreak;object_open;valid_json_and_schema_envelope_mismatch"
+        )
+        result = summarize([{"text": malformed, "ts": "77.8"}])
+        self.assertEqual(result["counts"]["fence_envelope_rejected"], 1)
+        self.assertEqual(result["rejected_stage_shapes"], {stage: 1})
+        self.assertNotIn("confidential", json.dumps(result))
+        self.assertNotIn("sensitive-source-id", json.dumps(result))
+        self.assertNotIn("SENSITIVE", json.dumps(result))
+
+    def test_envelope_stage_detects_json_body_and_schema_failures(self):
+        malformed_json = (
+            "APA_EVENT_V1```{\"event_id\": bad JSON}```\n*Sent using* <@U0C90JE4WAC>"
+        )
+        self.assertEqual(
+            _staged_fence_diagnosis(malformed_json),
+            "no_linebreak;object_open;json_decoding_failed",
+        )
+        missing_schema = (
+            "APA_EVENT_V1```{} ```\n*Sent using* <@U0C90JE4WAC>"
+        )
+        self.assertEqual(
+            _staged_fence_diagnosis(missing_schema),
+            "no_linebreak;object_open;schema_rejected",
+        )
 
     def test_probe_does_not_emit_any_slack_message_contents(self):
         valid = format_event(event(event_id="probe-valid-event")) + (
