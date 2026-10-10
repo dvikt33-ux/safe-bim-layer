@@ -18,3 +18,12 @@
 - **Reproducibility limitation:** the supplied console report is a user-authored log transcript; no remote connection to Archicad or direct confirmation of unsaved current model was possible from this chat.
 - **Source reference for reader logic:** https://github.com/dvikt33-ux/safe-bim-layer/blob/bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd/scripts/archicad_scene_run.py
 - **No main/master, existing PR branch, PLN or installed APX modified by this GitHub report commit.**
+
+## Follow-up read-only observation (operator log: inspect-20261010T200754Z)
+
+- **INSPECT_READ_ONLY: PASS** on same reported bound TEST MER PLN and port `19724`, Tapir `1.5.10`, story index `0`.
+- Before live execution preflight inspected **38** elements; after live execution read-only inspect reported `element_count: 43` (**delta +5**).
+- This delta is consistent with 4 verified wall writes and one attempted slab creation, but **does not independently establish identity or validity of the fifth element**. Do not mark slab PASS on count alone.
+- **Evidence:** second user-supplied console transcript, lines 363–377 (reported UI log); path `C:\Users\Admin\Downloads\APA_MVP_Windows11_v1_3_COLUMN_PARENT\APA_MVP_Archicad29\results\inspect-20261010T200754Z.json`; underlying JSON artifact was not provided.
+- **Investigation priority:** read SQLite durable `steps` row for `scene_id=apa-pavilion-live-02`, `step_id=slab`; verify whether recorded `guid` is present and whether `state=CREATED_UNVERIFIED`. Fetch `GetDetailsOfElements` and bbox for that GUID READ-ONLY and compare to `CreateSlabs` intent fields: `thickness`, `level`, `polygonCoordinates` / returned `polygonOutline`. Preserve file/SQLite records. DO NOT replay writes.
+- **No additional automatic or manually initiated writes were performed for this follow-up.**
