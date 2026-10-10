@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 31,
+  "revision": 32,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -1434,7 +1434,7 @@
       "action_id": "APA-P50.A02",
       "title": "Единый каталог AC29 SDK/Tapir/Python/GDL/IFC/MEP инструментов",
       "kind": "RESEARCH",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "tool-capability-catalog",
       "depends_on": [
@@ -1453,9 +1453,9 @@
         "Capability matrix, версии, пересечения"
       ],
       "acceptance": "Capability matrix, версии, пересечения",
-      "owner": "chatgpt-gpt6-manual-anti-dup",
-      "lease_until": "2026-10-11T00:03:03.716Z",
-      "claim_ref": "APA-RUN-20261011-tool-reuse-anti-dup-01",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
