@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 4,
+  "run_count": 5,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -29,6 +29,13 @@
       "report": "runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md",
       "run_id": "APA-RUN-20261010-163950Z-tapir-compat-6f29",
       "substep_id": "APA-P10.A02.S01"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md",
+      "run_id": "APA-RUN-20261010-200823Z-mep-route-port-gate",
+      "substep_id": "APA-P10.A02.S04"
     }
   ],
   "schema": "APA_GENERATED_INDEX_V1",
