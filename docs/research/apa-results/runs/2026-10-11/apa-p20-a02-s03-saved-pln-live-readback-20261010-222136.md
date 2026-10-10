@@ -44,3 +44,14 @@ All twelve records have native story `floorIndex=0`. The four walls, slab and co
 - Further MVP next scope: generalize **typed Basic slab creation** (avoid `CreateSlabs` inheriting an unexpected Composite and 0.3 m), establish attribute provenance and tests on an independently expendable project, and build safe plan-driven native writer; do not assume the fixed pavilion proves general geometry coverage.
 
 **No PLN, APX, main/master, or tested PR branch was modified in preparing this report.**
+
+
+## Operator attestation — close and reopen of saved copy (2026-10-11)
+
+In the immediately following conversation, the owner explicitly answered **«да»** to the exact question: *«перед запуском этой проверки вы полностью закрывали APA_Pavilion_MVP_SUCCESS.pln и затем открывали его заново с диска?»*.
+
+**Accepted evidence:** user-asserted **Save As → close PLN → reopen from disk → live read-only API audit** of `APA_Pavilion_MVP_SUCCESS.pln` (`SAVED_COPY_LIVE_READBACK_PASS`, 12/12 GUIDs, exact element geometry, hosts, story and material, diskFile.exists true, and zero write calls). The order of the close/reopen event is established **by the owner's direct attestation**, not independently by programmatic observation.
+
+**Disposition of fixed-pavilion MVP acceptance:** `PERSISTENCE_REOPEN_PASS_REPORTED_WITH_LIVE_READBACK` for this **specific 12-element pavilion**. Both the initial 12/12 live result and subsequent saved-copy verification are confirmed by user-supplied API reports. The owner also supplied 3D screenshots. **No independent binary PLN parser or external observer witnessed the close/reopen**; do not label as an independently witnessed persistence test.
+
+**Task-control boundary:** Do not change `control/PROJECT_PLAN.json` solely on the basis of this comment. `APA-P20.A02.S03` remains blocked by its current dependency chain until the independent controller acceptance process handles the evidence. **Next engineering milestone:** generalize safe plan-driven BIM writes beyond one fixed pavilion, especially the Basic-vs-Composite slab creation default, with attributes, materials and story linkage verified per real project; avoid rerunning the original one-shot writer or recovery in this saved project.
