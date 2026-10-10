@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 3,
+  "run_count": 4,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -22,6 +22,13 @@
       "report": "runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md",
       "run_id": "APA-RUN-20261010-143940Z-opening-shell-geom",
       "substep_id": "APA-P10.A01.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md",
+      "run_id": "APA-RUN-20261010-163950Z-tapir-compat-6f29",
+      "substep_id": "APA-P10.A02.S01"
     }
   ],
   "schema": "APA_GENERATED_INDEX_V1",
