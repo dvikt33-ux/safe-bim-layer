@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 39,
+  "revision": 40,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -15,7 +15,8 @@
     "research": "Normal ChatGPT with GitHub connector; Deep Research and paid tools require explicit authorization.",
     "evidence": "REPORTED != SOURCE_VERIFIED != BUILD_PASS != LIVE_PASS. Synthetic publisher success proves no Archicad runtime behavior.",
     "trigger": "Only user-configured ChatGPT Scheduled Tasks initiate work; GitHub Actions is a publisher/validator on commits, not an autonomous research initiator. No controller-created research runs.",
-    "research_pipeline": "Same PROJECT_PLAN.json registry for research and development. research_routes links each P70 S-ID to source artifacts already in task.inputs and to reusable research S-IDs; read branch/file URLs from artifact.uri, verify current source SHA before use. Research may run ahead for later P70 actions while present action BUILD/INTEGRATION proceeds. SUFFICIENT must be independently reviewed with evidence before deferring its research; NOT_ASSESSED is never automatic PASS. Do not repeat completed research without changed source or uncovered applicability gap."
+    "research_pipeline": "Same PROJECT_PLAN.json registry for research and development. research_routes links each P70 S-ID to source artifacts already in task.inputs and to reusable research S-IDs; read branch/file URLs from artifact.uri, verify current source SHA before use. Research may run ahead for later P70 actions while present action BUILD/INTEGRATION proceeds. SUFFICIENT must be independently reviewed with evidence before deferring its research; NOT_ASSESSED is never automatic PASS. Do not repeat completed research without changed source or uncovered applicability gap.",
+    "integration_priority": "Reuse first: actual Project Accelerator/SceneWriter/Tapir + Native MVP + Template Builder + CSE/PLP; assemble working system before expanding governance. See ART-APA-ASSEMBLY-PLAN. Offline integration may proceed with bounded provisional CSE before comprehensive normative coverage; no ENGINEERING_PASS or BUILDING_CODE_PASS without evidence."
   },
   "plans": {
     "APA-P00": {
@@ -457,6 +458,12 @@
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/34",
       "kind": "PR",
       "verification": "GITHUB_CI_106_OFFLINE_SYNTHETIC_PASS_NO_LIVE"
+    },
+    "ART-APA-ASSEMBLY-PLAN": {
+      "id": "ART-APA-ASSEMBLY-PLAN",
+      "uri": "docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md",
+      "kind": "DOCUMENT",
+      "verification": "GITHUB_SOURCE_READBACK_PLAN_NOT_IMPLEMENTATION"
     }
   },
   "tasks": {
@@ -1963,7 +1970,8 @@
         "ART-APA-FULL-CYCLE",
         "ART-APA-PR16",
         "ART-APA-REUSE-NATIVE-20261011",
-        "ART-APA-HIGHLEVEL-PR34"
+        "ART-APA-HIGHLEVEL-PR34",
+        "ART-APA-ASSEMBLY-PLAN"
       ],
       "outputs": [
         "Таблица требований полного цикла → исходные файлы/SHA → подтверждённые функции и ограничения; без новой реализации"
@@ -2016,13 +2024,13 @@
       "priority": 2,
       "work_key": "product-integration-boundaries",
       "depends_on": [
-        "APA-P70.A01.S02",
-        "APA-P50.A02.S01"
+        "APA-P70.A01.S01"
       ],
       "related": [],
       "inputs": [
         "ART-APA-REUSE-NATIVE-20261011",
-        "ART-APA-FAST-COMPILER"
+        "ART-APA-FAST-COMPILER",
+        "ART-APA-ASSEMBLY-PLAN"
       ],
       "outputs": [
         "Проверенный маршрут полного цикла, reuse map, отсутствие дублирования SceneWriter/графа/исполнителя, приёмочные ворота"
@@ -2101,13 +2109,15 @@
       "priority": 2,
       "work_key": "project-library-pack-assembly",
       "depends_on": [
-        "APA-P70.A02.S02"
+        "APA-P70.A02.S01",
+        "APA-P70.A01.S03"
       ],
       "related": [],
       "inputs": [
         "ART-APA-PLP-CONTRACT",
         "ART-APA-DETAILS-V212",
-        "ART-APA-CSE-RESEARCH"
+        "ART-APA-CSE-RESEARCH",
+        "ART-APA-ASSEMBLY-PLAN"
       ],
       "outputs": [
         "Отобранные CSE, источники/хэши/лицензии, интерфейсы, совместимые AC29 объекты и список неподтверждённых узлов"
@@ -2135,7 +2145,8 @@
       "related": [],
       "inputs": [
         "ART-APA-FULL-CYCLE",
-        "ART-APA-FAST-COMPILER"
+        "ART-APA-FAST-COMPILER",
+        "ART-APA-ASSEMBLY-PLAN"
       ],
       "outputs": [
         "Проверяемый граф помещений/нагрузочных путей/осей с привязкой к CSE и этажам; без условных стен"
@@ -2164,7 +2175,8 @@
       "inputs": [
         "ART-APA-PR16",
         "ART-APA-REUSE-NATIVE-20261011",
-        "ART-APA-HIGHLEVEL-PR34"
+        "ART-APA-HIGHLEVEL-PR34",
+        "ART-APA-ASSEMBLY-PLAN"
       ],
       "outputs": [
         "Создание полноценной BIM-геометрии из схемы через имеющиеся writer/graph; связные стены не дробятся без необходимости; тестовый PLN только после разрешения"
@@ -2880,7 +2892,8 @@
         "ART-APA-PLP-CONTRACT",
         "ART-APA-REUSE-NATIVE-20261011",
         "ART-APA-PR16",
-        "ART-APA-HIGHLEVEL-PR34"
+        "ART-APA-HIGHLEVEL-PR34",
+        "ART-APA-ASSEMBLY-PLAN"
       ],
       "synthesis_state": "OPEN",
       "owner": null
