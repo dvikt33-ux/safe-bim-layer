@@ -69,3 +69,15 @@
 | RECOVER-IFCMCP-3F759 | [IfcMCP и IfcPatch MergeProjects](runs/2026-10-10/apa-recovery-20261010-132800-ifcmcp-merge-3f759.md) | [7c42418](https://github.com/dvikt33-ux/safe-bim-layer/commit/7c42418a7f64d827e45aa44b2993a67c0adb66cf) | PASS, blob `1a9cb5f5271d5ce41adc16ff61f728763bd464f7` | IfcOpenShell v0.9.0 claims; OFFLINE/BUILD/LIVE NOT_VERIFIED |
 
 **Что осталось:** не считать восстановление файла независимой технической проверкой или завершением подшага PROJECT_PLAN. Для повышения уровня доказательств назначить отдельный source re-audit по указанным pin/version/line links, затем офлайн/изолированные испытания. Обнаруженные повторы с APA-01…APA-12 и архивом должны быть дедуплицированы по исходникам.
+
+
+## Полные исходники аудитов из вложений — 2026-10-10
+
+В отличие от нормализованных/сокращённых документов, эти две записи — **полные текстовые снимки приложенных владельцем аудитов**. GitHub readback сравнил каждый текст с исходником посимвольно. **Это проверка факта публикации, а не верификация технических выводов.** Ссылки вида `turn…` и `filecite` в оригиналах являются внутренними маркерами исходного исследовательского ответа и не гарантируют независимую открываемость из GitHub.
+
+| ID | Полный исходник | Источник / объём | Commit и readback | Содержание |
+| --- | --- | --- | --- | --- |
+| IMPORT-FULL-001 | [APA Research OS — оригинал, 735 строк](runs/2026-10-10/apa-source-snapshot-research-os-full-20261010.md) | Вложение владельца `Вставленный текст.txt`, 2026-10-10; 26 160 символов | [fc8d3e7](https://github.com/dvikt33-ux/safe-bim-layer/commit/fc8d3e7a1c18090dad7f66035f8528f4081ce531); EXACT_GITHUB_READBACK_PASS; blob `6eb98cd428836c8fd73fbd2971e50ca9b24cba94` | USER_SUPPLIED_FULL_SOURCE / технические claims REPORTED; [краткая нормализованная версия](runs/2026-10-10/apa-research-os-audit-user-supplied-20261010.md) существовала ранее, это не новое независимое исследование |
+| IMPORT-FULL-002 | [APA Scheduled Task без Work/Codex — оригинал, 715 строк](runs/2026-10-10/apa-source-snapshot-scheduled-task-work-limits-full-20261010.md) | Вложение владельца `Вставленный текст.txt`, 2026-10-10; 31 539 символов | [c3d6945](https://github.com/dvikt33-ux/safe-bim-layer/commit/c3d6945c7972818bb380ccae0ae057488caa1ff8); EXACT_GITHUB_READBACK_PASS; blob `9b96f1f1023ca03d4c1bd7100e8a110f64987a2f` | USER_SUPPLIED_FULL_SOURCE / технические claims REPORTED; практический вывод о write-access обычной Scheduled Task требует отдельного теста именно scheduled execution |
+
+**Что эти записи НЕ закрывают:** все исследования из других чатов, не представленные вложениями или GitHub; полный forensic-аудит уникальных артефактов 72 веток; восстановление утраченных ответов, которых нет ни в источниках, ни в GitHub. Эти пробелы не считать DONE. Исторические отчёты не перезаписывались, `main` не менялся.
