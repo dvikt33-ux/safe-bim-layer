@@ -8,7 +8,7 @@
 
 ## 1. Две документированные формы Get3DInfo — не переименовывать API на основании одного сообщения
 
-В [официальном справочнике AC29 ModelAccess](https://graphisoft.github.io/archicad-api-devkit/group___model_access.html#gab) в перечне и разделе функции присутствует:
+В [официальном справочнике AC29 ModelAccess](https://graphisoft.github.io/archicad-api-devkit/group___model_access.html) в перечне и разделе функции присутствует:
 
 `GSErrCode ACAPI_ModelAccess_Get3DInfo(const API_Elem_Head& elemHead, API_ElemInfo3D* info3D)`.
 
