@@ -19,7 +19,7 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 | SYNTHESIS — Синтез research → implementation | 2 | 0 | 0 | ART-PLAN, ART-REGISTER |
 | TAPIR_PYTHON — Tapir и Python/JSON | 1 | 0 | 1 | ART-REGISTER |
 | TESTS — Read-only и разрешённые live-тесты | 6 | 0 | 0 | ART-PLAN, ART-PR20, ART-REGISTER |
-| TOOL_INTEGRATION — Каталог и интеграция инструментов | 3 | 0 | 1 | ART-PLAN, ART-REGISTER |
+| TOOL_INTEGRATION — Каталог и интеграция инструментов | 3 | 0 | 1 | ART-PLAN, ART-REGISTER, ART-APA-REUSE-NATIVE-20261011 |
 
 ## Tasks by topic
 
@@ -115,6 +115,6 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 
 ### TOOL_INTEGRATION — Каталог и интеграция инструментов
 
-- APA-P50.A02.S01 [RESEARCH/READY]: Единый каталог AC29 SDK/Tapir/Python/GDL/IFC/MEP инструментов; work_key=tool-capability-catalog; related=APA-P10.A02.S01, APA-P10.A02.S02, APA-P10.A02.S03, APA-P10.A02.S04
+- APA-P50.A02.S01 [RESEARCH/PARTIAL]: Единый каталог AC29 SDK/Tapir/Python/GDL/IFC/MEP инструментов; work_key=tool-capability-catalog; related=APA-P10.A02.S01, APA-P10.A02.S02, APA-P10.A02.S03, APA-P10.A02.S04
 - APA-P50.A02.S02 [INTEGRATION/READY]: Выявить дубли функций между инструментами и выбрать adapter boundaries; work_key=tool-adapter-overlap-map; related=APA-P10.A03.S01
 - APA-P50.A02.S03 [BUILD/READY]: Спланировать безопасное объединение инструментов; work_key=tool-consolidation-roadmap; related=none

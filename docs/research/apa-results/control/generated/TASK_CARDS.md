@@ -612,7 +612,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P50.A02.S01
 
-**Единый каталог AC29 SDK/Tapir/Python/GDL/IFC/MEP инструментов** — RESEARCH / READY / P1
+**Единый каталог AC29 SDK/Tapir/Python/GDL/IFC/MEP инструментов** — RESEARCH / PARTIAL / P1
 
 - Parent: APA-P50 → APA-P50.A02
 - Topic: TOOL_INTEGRATION

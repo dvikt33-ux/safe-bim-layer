@@ -13,8 +13,8 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | CLAIMED | 0 |
 | DONE_PUBLISHED | 10 |
 | IN_PROGRESS | 0 |
-| PARTIAL | 13 |
-| READY | 20 |
+| PARTIAL | 14 |
+| READY | 19 |
 | SUPERSEDED | 0 |
 | DISPATCHABLE_NOW | 16 |
 | HELD_BY_DEPENDENCIES | 17 |
