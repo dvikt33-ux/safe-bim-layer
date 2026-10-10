@@ -1,5 +1,10 @@
 # APA / Archicad 29 — independent technical audit
 
+
+
+> **ПОСТОЯННЫЙ АДРЕС РЕЗУЛЬТАТОВ:** [APA Research Hub](https://github.com/dvikt33-ux/safe-bim-layer/tree/research/apa-verified-results-hub-20261010/docs/research/apa-results) и [GitHub Issue #23](https://github.com/dvikt33-ux/safe-bim-layer/issues/23). Эта ветка — **только исторический указатель**, не место новых отчётов. Актуальные план, подшаг, очередь, карта веток и журнал находятся в canonical hub. Не создавать здесь дополнительные файлы.
+
+
 > **Status:** RESEARCH_IN_PROGRESS. This is a publication index and verification checklist, **not** a completed technical report. No Archicad API claim is considered verified merely because it appears in this index.
 
 ## Scope
