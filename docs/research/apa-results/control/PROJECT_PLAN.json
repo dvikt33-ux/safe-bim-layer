@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 3,
+  "revision": 4,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -267,6 +267,18 @@
       "uri": "docs/research/apa-results/control/README.md",
       "kind": "DOCUMENT",
       "verification": "GITHUB_READBACK_VERIFIED"
+    },
+    "ART-TRACE-REPORT": {
+      "id": "ART-TRACE-REPORT",
+      "uri": "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-110048Z-legacy-traceability/REPORT.md",
+      "kind": "REPORT",
+      "verification": "GITHUB_REST_READBACK_VERIFIED"
+    },
+    "ART-TRACE-RECEIPT": {
+      "id": "ART-TRACE-RECEIPT",
+      "uri": "docs/research/apa-results/receipts/APA-RUN-20261010-110048Z-legacy-traceability.json",
+      "kind": "RECEIPT",
+      "verification": "DONE_PUBLISHED_GITHUB_REST_READBACK_VERIFIED"
     }
   },
   "tasks": {
@@ -1250,7 +1262,7 @@
       "action_id": "APA-P50.A01",
       "title": "Карта связей: исследования ↔ S-ID ↔ артефакты ↔ PR",
       "kind": "CONSOLIDATION",
-      "status": "CLAIMED",
+      "status": "PARTIAL",
       "priority": 0,
       "work_key": "cross-research-traceability",
       "depends_on": [
@@ -1261,17 +1273,21 @@
       ],
       "inputs": [
         "ART-REGISTER",
-        "ART-BRANCHES"
+        "ART-BRANCHES",
+        "ART-TRACE-REPORT"
       ],
       "outputs": [
-        "Traceability matrix, orphan report list"
+        "Published first source-backed traceability map: five legacy flat reports + one V2; four explicit S-ID links, one candidate; 72-branch ancestry still open"
       ],
       "acceptance": "Traceability matrix, orphan report list",
-      "owner": "chatgpt-apa-controller-traceability-20261010",
-      "lease_until": "2026-10-11T12:00:00Z",
-      "claim_ref": "https://github.com/dvikt33-ux/safe-bim-layer/issues/23",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-TRACE-REPORT",
+        "ART-TRACE-RECEIPT"
+      ],
       "blocked_reason": null
     },
     "APA-P50.A01.S02": {
@@ -1876,9 +1892,11 @@
       ],
       "artifact_ids": [
         "ART-BRANCHES",
-        "ART-REGISTER"
+        "ART-REGISTER",
+        "ART-TRACE-RECEIPT",
+        "ART-TRACE-REPORT"
       ],
-      "synthesis_state": "OPEN",
+      "synthesis_state": "PARTIAL",
       "owner": null
     },
     "TOOL_INTEGRATION": {
