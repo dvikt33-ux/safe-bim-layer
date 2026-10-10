@@ -564,7 +564,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P50.A01.S01
 
-**Карта связей: исследования ↔ S-ID ↔ артефакты ↔ PR** — CONSOLIDATION / CLAIMED / P0
+**Карта связей: исследования ↔ S-ID ↔ артефакты ↔ PR** — CONSOLIDATION / PARTIAL / P0
 
 - Parent: APA-P50 → APA-P50.A01
 - Topic: KNOWLEDGE_GRAPH
@@ -572,11 +572,11 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P00.A02.S02
 - Related, check before duplicating: APA-P00.A01.S03
 - Acceptance: Traceability matrix, orphan report list
-- Owner/lease: chatgpt-apa-controller-traceability-20261010 / 2026-10-11T12:00:00Z
+- Owner/lease: unclaimed
 - Requires owner approval: False
-- Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md), [ART-BRANCHES](../../../../../docs/research/apa-results/inventories/FULL_BRANCH_INVENTORY.md)
+- Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md), [ART-BRANCHES](../../../../../docs/research/apa-results/inventories/FULL_BRANCH_INVENTORY.md), [ART-TRACE-REPORT](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-110048Z-legacy-traceability/REPORT.md)
 - Existing V2 runs: [APA-RUN-20261010-110048Z-legacy-traceability](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-110048Z-legacy-traceability/REPORT.md) (receipt verified)
-- Expected output: Traceability matrix, orphan report list
+- Expected output: Published first source-backed traceability map: five legacy flat reports + one V2; four explicit S-ID links, one candidate; 72-branch ancestry still open
 
 ## APA-P50.A01.S02
 

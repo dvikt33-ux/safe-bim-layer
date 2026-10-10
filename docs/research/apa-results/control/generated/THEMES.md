@@ -11,7 +11,7 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 | GDL_TN — GDL и ТЕХНОНИКОЛЬ | 1 | 0 | 1 | ART-PR20 |
 | HUB_GOVERNANCE — Канонический hub и реестр | 8 | 4 | 3 | ART-BRANCH-JSON, ART-BRANCHES, ART-PLAN, ART-PUB-RECEIPT, ART-QUEUE, ART-REGISTER, ART-STATUS |
 | IFC_MCP — IFC/openBIM и MCP | 1 | 0 | 1 | ART-REGISTER |
-| KNOWLEDGE_GRAPH — Сведение исследований и доказательств | 3 | 0 | 0 | ART-BRANCHES, ART-REGISTER |
+| KNOWLEDGE_GRAPH — Сведение исследований и доказательств | 3 | 0 | 1 | ART-BRANCHES, ART-REGISTER, ART-TRACE-RECEIPT, ART-TRACE-REPORT |
 | MEP — MEP native и Tapir | 1 | 0 | 1 | ART-REGISTER |
 | MVP — MVP и внедрение | 2 | 0 | 0 | ART-PLAN |
 | PUBLISHER — Публикация, квитанции и capability | 4 | 0 | 2 | ART-OS-AUDIT, ART-PUB-RECEIPT, ART-PUBLISHER |
@@ -68,7 +68,7 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 
 ### KNOWLEDGE_GRAPH — Сведение исследований и доказательств
 
-- APA-P50.A01.S01 [CONSOLIDATION/CLAIMED]: Карта связей: исследования ↔ S-ID ↔ артефакты ↔ PR; work_key=cross-research-traceability; related=APA-P00.A01.S03
+- APA-P50.A01.S01 [CONSOLIDATION/PARTIAL]: Карта связей: исследования ↔ S-ID ↔ артефакты ↔ PR; work_key=cross-research-traceability; related=APA-P00.A01.S03
 - APA-P50.A01.S02 [CONSOLIDATION/READY]: Дедупликация по work_key/source revision/claim; work_key=claim-and-evidence-dedup; related=APA-P00.A02.S03
 - APA-P50.A01.S03 [INTEGRATION/READY]: Сводить несколько исследований одной темы в решение; work_key=theme-research-synthesis; related=none
 
