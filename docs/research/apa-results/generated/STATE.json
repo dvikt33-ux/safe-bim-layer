@@ -1,7 +1,15 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 0,
-  "runs": [],
+  "run_count": 1,
+  "runs": [
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SYNTHETIC",
+      "report": "runs/2026-10-10/APA-RUN-20261010-104437Z-publisher-integration-smoke/REPORT.md",
+      "run_id": "APA-RUN-20261010-104437Z-publisher-integration-smoke",
+      "substep_id": "APA-P00.A03.S04"
+    }
+  ],
   "schema": "APA_GENERATED_INDEX_V1",
   "source": "immutable V2 runs"
 }
