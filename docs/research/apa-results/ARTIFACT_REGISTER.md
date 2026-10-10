@@ -20,6 +20,18 @@
 | OPS-006 | [AUTOMATION_AND_GATES](AUTOMATION_AND_GATES.md) | canonical hub | GITHUB_READBACK_VERIFIED после создания | Проект автоматики, не действующий сервис |
 | OPS-007 | [RESEARCH_QUEUE](RESEARCH_QUEUE.md) | canonical hub | GITHUB_READBACK_VERIFIED после создания | Очередь задач |
 
+## APA Research OS — материалы из переданного аудита
+
+| ID | Материал | Публикация | Достоверность |
+| --- | --- | --- | --- |
+| OS-AUDIT-001 | [Сохранённый аудит APA Research OS](runs/2026-10-10/apa-research-os-audit-user-supplied-20261010.md) | GITHUB_READBACK_VERIFIED, [commit 9b07679](https://github.com/dvikt33-ux/safe-bim-layer/commit/9b076792124d99d67dcc0f01554b4834fc3ed8cb) | USER_SUPPLIED_REPORT, нормализованная версия; исторические claims REPORTED |
+| OS-INV-001 | [72 branch heads + PR map JSON](inventories/BRANCH_HEADS_20261010.json) | GITHUB_READBACK_VERIFIED, [commit 7dc6544](https://github.com/dvikt33-ux/safe-bim-layer/commit/7dc65444282d6bf6f14013fd8621328ee08b18a9) | GitHub API branch/head/PR SOURCE_VERIFIED; ancestry/artifacts NOT_VERIFIED |
+| OS-INV-002 | [FULL_BRANCH_INVENTORY stage 1/2](inventories/FULL_BRANCH_INVENTORY.md) | GITHUB_READBACK_VERIFIED, [commit 895846f](https://github.com/dvikt33-ux/safe-bim-layer/commit/895846f096aea4440a7e292f8cc89adab79c78d9) | Все 72 имена/SHA, не полная forensic classification |
+| OS-SCHEMA-001 | [RUN_EVENT_V2 JSON Schema](protocol/RUN_EVENT_V2.schema.json) | GITHUB_READBACK_VERIFIED, [commit 2ff4dcf](https://github.com/dvikt33-ux/safe-bim-layer/commit/2ff4dcfde139c5f9b52df31ba07b59de9ca6dcd6) | Схема, не работающий publisher |
+| OS-CONTRACT-001 | [Publisher / crash recovery](protocol/PUBLISHER_CONTRACT.md) | GITHUB_READBACK_VERIFIED, [commit b736f23](https://github.com/dvikt33-ux/safe-bim-layer/commit/b736f23cf8573febfd6722e42e9db4b63c986f22) | Дизайн и gates; runtime NOT_DEPLOYED |
+| OS-POLICY-001 | [Evidence policy](protocol/EVIDENCE_POLICY.md) | GITHUB_READBACK_VERIFIED, [commit d6e60fb](https://github.com/dvikt33-ux/safe-bim-layer/commit/d6e60fb1044489fc88eb8015455464ae04f7f7cb) | Политика, не live-test |
+| OS-RECEIPT-001 | [Readback receipt исходного аудита](receipts/APA-RUN-20261010-102800Z-research-os-audit-readback.json) | GITHUB_READBACK_VERIFIED, [commit b64a491](https://github.com/dvikt33-ux/safe-bim-layer/commit/b64a4913249af780abac4b330b3958b5d1f93841) | GitHub blob SHA подтверждён; SHA256 NOT_COMPUTED; index pending |
+
 ## Найденные в архивных ветках
 
 | ID | Материал | URL | Состояние |
