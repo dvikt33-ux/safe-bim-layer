@@ -47,3 +47,11 @@ The new diagnostic **does not alter** the production parser, run live Socket Mod
 **Next gate:** verify offline GitHub CI, have the owner run the updated single-shot read-only probe from a separate PowerShell, capture only the aggregate `rejected_stage_shapes`, then implement a narrowly proven compatibility patch and verify a controlled replay with explicit status/conflict audit. Do not overclaim LIVE historical acceptance.
 
 **Publication:** canonical `docs/research/apa-results/` with independent GitHub readback. This report is separate from the feature PR and preserves the historical trace even if the PR is closed.
+
+## PR #32 CI acceptance and test correction
+
+The first GitHub Actions run on the new diagnostic branch [38090796152](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38090796152) **FAILED** in two newly authored synthetic tests. The tests had mistakenly supplied otherwise correctly fenced messages that were rejected directly at schema validation; their `rejected_stage_shapes` therefore remained empty, because the staged fallback intentionally runs only for the **outer envelope** error. The test fixtures were corrected to deliberately fail the outer envelope while retaining decodable JSON. No production parser or SQLite changes were needed.
+
+The corrected commit `1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9` passed [GitHub Actions run 38090858639](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38090858639): **38/38 unit tests PASS**, including both new tests `test_stage_validation_identifies_slack_angle_evidence_urls` and `test_stage_validation_separates_unknown_fields`. Windows launcher static check PASS. Jobs and detailed log lines independently fetched via GitHub API. The initial failed run is retained in the audit trail, not concealed.
+
+**New live outcome:** still NOT_VERIFIED. Next action is one read-only raw Slack probe with the user's local bot token to receive static `schema_rejected:<reason>` categories for the 20 messages. The tool does not write back to Slack, SQLite, GitHub or Archicad.
