@@ -144,6 +144,23 @@ def validate(plan):
     for sid, task in plan["tasks"].items():
         for other in task["related"]:
             check(sid in plan["tasks"][other]["related"], "ASYMMETRIC_RELATED " + sid)
+    topics = plan.get("topics")
+    check(isinstance(topics, dict) and bool(topics), "Missing thematic registry")
+    membership = {}
+    for topic_id, topic in topics.items():
+        check(topic.get("id") == topic_id and
+              isinstance(topic.get("title"), str) and bool(topic["title"]) and
+              isinstance(topic.get("task_ids"), list) and topic["task_ids"] and
+              isinstance(topic.get("artifact_ids"), list) and
+              topic.get("synthesis_state") in {"OPEN", "PARTIAL", "DONE_PUBLISHED", "BLOCKED"},
+              "Bad topic " + topic_id)
+        check(all(x in plan["artifacts"] for x in topic["artifact_ids"]),
+              "Unknown topic artifact " + topic_id)
+        for sid in topic["task_ids"]:
+            check(sid in plan["tasks"], "Unknown topic task " + str(sid))
+            check(sid not in membership, "DUPLICATE_TOPIC_MEMBERSHIP " + sid)
+            membership[sid] = topic_id
+    check(set(membership) == set(plan["tasks"]), "UNMAPPED_TASK_TOPIC")
     return plan
 
 
@@ -218,6 +235,8 @@ def write_if_changed(path, raw):
 def build(plan):
     runs, orphans = existing_runs(plan)
     tasks = plan["tasks"]
+    topics = plan["topics"]
+    topic_of = {sid: tid for tid, topic in topics.items() for sid in topic["task_ids"]}
     ready = sorted((t for t in tasks.values() if eligible(t, plan)),
                    key=lambda t: (t["priority"], t["id"]))
     held = sorted((t for t in tasks.values() if t["status"] in DISPATCHABLE
@@ -273,6 +292,7 @@ def build(plan):
                   "**" + safe(t["title"]) + "** — " + t["kind"] + " / " +
                   t["status"] + " / P" + str(t["priority"]), "",
                   "- Parent: " + t["plan_id"] + " → " + t["action_id"],
+                  "- Topic: " + topic_of[t["id"]],
                   "- Work key: " + t["work_key"],
                   "- Depends on: " + (", ".join(t["depends_on"]) or "none"),
                   "- Related, check before duplicating: " + (", ".join(t["related"]) or "none"),
@@ -289,20 +309,41 @@ def build(plan):
     relationships = [
         "# APA — dependency / research / integration traceability", "",
         "Explicit links from plan, not guessed semantic connections.", "",
-        "| Task | Kind | Dependencies | Related | Inputs | Verified V2 runs |",
-        "| --- | --- | --- | --- | --- | ---: |"]
+        "| Task | Topic | Kind | Dependencies | Related | Inputs | Verified V2 runs |",
+        "| --- | --- | --- | --- | --- | --- | ---: |"]
     for t in sorted(tasks.values(), key=lambda x: x["id"]):
-        relationships.append("| " + t["id"] + " | " + t["kind"] + " | " +
+        relationships.append("| " + t["id"] + " | " + topic_of[t["id"]] + " | " + t["kind"] + " | " +
                              ", ".join(t["depends_on"]) + " | " +
                              ", ".join(t["related"]) + " | " +
                              ", ".join(t["inputs"]) + " | " +
                              str(sum(r["verified"] for r in runs[t["id"]])) + " |")
     relationships.append("")
+    themes = ["# APA — тематическая карта исследований, разработки и интеграции", "",
+              "Generated from the sole project plan. Each task belongs to exactly one topic.",
+              "Related tasks and evidence are preserved; do not repeat a topic review blindly.",
+              "", "| Topic | Research/build tasks | Done | Ready | Existing inputs |",
+              "| --- | ---: | ---: | ---: | --- |"]
+    for tid, topic in sorted(topics.items()):
+        ids = topic["task_ids"]
+        done = sum(tasks[sid]["status"] == "DONE_PUBLISHED" for sid in ids)
+        available = sum(eligible(tasks[sid], plan) for sid in ids)
+        themes.append("| " + tid + " — " + safe(topic["title"]) + " | " +
+                      str(len(ids)) + " | " + str(done) + " | " + str(available) +
+                      " | " + ", ".join(topic["artifact_ids"]) + " |")
+    themes += ["", "## Tasks by topic", ""]
+    for tid, topic in sorted(topics.items()):
+        themes += ["### " + tid + " — " + safe(topic["title"]), ""]
+        for sid in topic["task_ids"]:
+            t = tasks[sid]
+            themes.append("- " + sid + " [" + t["kind"] + "/" + t["status"] +
+                          "]: " + safe(t["title"]) + "; work_key=" + t["work_key"] +
+                          "; related=" + (", ".join(t["related"]) or "none"))
+        themes.append("")
     handoff = [
         "# APA — START HERE for any new chat or agent", "",
         "Authority: " + link(str(PLAN), "PROJECT_PLAN.json") +
         ". Read [CONTROL_BOARD](CONTROL_BOARD.md), [TASK_CARDS](TASK_CARDS.md) and " +
-        "[RELATIONSHIPS](RELATIONSHIPS.md) before proposing work.",
+        "[RELATIONSHIPS](RELATIONSHIPS.md) and [THEMES](THEMES.md) before proposing work.",
         "", "## Mandatory procedure", "",
         "1. Select one eligible S-ID from the generated control board; inspect dependencies, related work and evidence.",
         "2. Claim the task in PROJECT_PLAN.json via GitHub blob-SHA compare-and-swap: status CLAIMED, owner, lease_until, claim_ref. Never overwrite a competing claim.",
@@ -321,6 +362,11 @@ def build(plan):
     state = {"schema": "APA_PROJECT_CONTROLLER_STATE_V1",
              "plan_revision": plan["revision"], "source_plan": str(PLAN),
              "task_count": len(tasks), "artifact_count": len(plan["artifacts"]),
+             "topic_count": len(topics),
+             "topics": {tid: {"task_ids": topic["task_ids"],
+                              "done": sum(tasks[sid]["status"] == "DONE_PUBLISHED" for sid in topic["task_ids"]),
+                              "ready": sum(eligible(tasks[sid], plan) for sid in topic["task_ids"])}
+                        for tid, topic in sorted(topics.items())},
              "counts": counts,
              "dispatchable": {kind: [t["id"] for t in ready if t["kind"] == kind]
                               for kind in sorted(KINDS)},
@@ -333,6 +379,7 @@ def build(plan):
     files = {"CONTROL_BOARD.md": "\n".join(board).encode(),
              "TASK_CARDS.md": "\n".join(cards).encode(),
              "RELATIONSHIPS.md": "\n".join(relationships).encode(),
+             "THEMES.md": "\n".join(themes).encode(),
              "HANDOFF.md": "\n".join(handoff).encode(),
              "STATE.json": encoded(state)}
     for name, raw in files.items():
