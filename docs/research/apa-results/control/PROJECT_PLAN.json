@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 9,
+  "revision": 10,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -1721,7 +1721,7 @@
       "action_id": "APA-P60.A02",
       "title": "Ввести сбор предложений задач исследователями и принятие аудитором в PROJECT_PLAN",
       "kind": "VALIDATION",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "research-proposals-audit-approval",
       "depends_on": [
@@ -1741,11 +1741,17 @@
         "Проверенный controller DAG и readback"
       ],
       "acceptance": "Процесс discovery proposal -> independent audit decision -> TASK registry admission задокументирован; CAS claim/readback и уникальность work_key/dependency DAG соблюдены; Scheduled instructions согласованы. End-to-end независимая публикация proposal, аудит, регистрация и валидатор контроллера подтверждены фактами. Не объявлять DONE по одним инструкциям.",
-      "owner": "chatgpt:apa-proposal-approval-setup",
-      "lease_until": "2026-10-10T18:00:00Z",
-      "claim_ref": "chatgpt-apa-proposal-approval-20261010-1414",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "https://github.com/dvikt33-ux/safe-bim-layer/commit/e99173c0e251f5214edb9baf64b6371d67069b48",
+        "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/control/TASK_PROPOSALS_AND_AUDIT.md",
+        "https://github.com/dvikt33-ux/safe-bim-layer/commit/1312e95d7b5b18bc43197918f1d717b7ccf17574",
+        "https://github.com/dvikt33-ux/safe-bim-layer/commit/24e114039dc2c3c636cc12b651a4b03576d6a3ff",
+        "https://github.com/dvikt33-ux/safe-bim-layer/commit/9d7ce61f44237ebdfbfadee443a7119e8a11c383"
+      ],
       "blocked_reason": null
     }
   },
