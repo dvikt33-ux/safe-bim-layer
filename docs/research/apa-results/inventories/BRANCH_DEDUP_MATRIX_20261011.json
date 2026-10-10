@@ -1,0 +1,894 @@
+{
+  "schema": "APA_BRANCH_DEDUP_MATRIX_V1",
+  "captured_at_utc": "2026-10-10T23:51:28.333Z",
+  "repository": "dvikt33-ux/safe-bim-layer",
+  "canonical_branch": "research/apa-verified-results-hub-20261010",
+  "controller_substep_id": "APA-P00.A02.S03",
+  "provenance": {
+    "baseline_snapshot": "docs/research/apa-results/inventories/BRANCH_HEADS_20261010.json",
+    "baseline_snapshot_blob_sha": "0c0f5546920808942c838d009df5aa1a3b4b9714",
+    "baseline_captured_at": "2026-10-10T10:30:11.098Z",
+    "comparisons": "GitHub compare_commits API on currently accessible refs"
+  },
+  "frozen_baseline": {
+    "branch_count": 72,
+    "unique_head_shas": 69,
+    "duplicate_head_groups": 2,
+    "branches_in_shared_head_groups": 5,
+    "extra_head_aliases": 3
+  },
+  "exact_head_alias_groups": [
+    {
+      "head_sha": "c6ab4749e8784cc65170167d166daa6cc219a931",
+      "branches": [
+        "arena/fix-house-offline-audit-f7d38af",
+        "arena/tapir159-compat-geometry-c6ab474"
+      ],
+      "classification": "EXACT_SHARED_HEAD_SNAPSHOT",
+      "interpretation": "same commit/tree at captured time; branch deletion NOT authorized"
+    },
+    {
+      "head_sha": "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+      "branches": [
+        "feature/project-accelerator-integration-pr-20261009",
+        "research/apa-20261009-api-mep-batching-audit",
+        "research/apa-20261009-resource-mep-bridges-audit-v1"
+      ],
+      "classification": "EXACT_SHARED_HEAD_SNAPSHOT",
+      "interpretation": "same commit/tree at captured time; branch deletion NOT authorized"
+    }
+  ],
+  "compared_pairs": [
+    {
+      "id": "alias_mep",
+      "base": "feature/project-accelerator-integration-pr-20261009",
+      "head": "research/apa-20261009-api-mep-batching-audit",
+      "status": "identical",
+      "ahead_by": 0,
+      "behind_by": 0,
+      "total_commits": 0,
+      "files_changed": 0,
+      "compare_truncated": false,
+      "changed_files": [],
+      "source": "https://github.com/dvikt33-ux/safe-bim-layer/compare/feature%2Fproject-accelerator-integration-pr-20261009...research%2Fapa-20261009-api-mep-batching-audit",
+      "scope": "GitHub compare direct metadata; not execution or contents of binaries"
+    },
+    {
+      "id": "alias_resource",
+      "base": "feature/project-accelerator-integration-pr-20261009",
+      "head": "research/apa-20261009-resource-mep-bridges-audit-v1",
+      "status": "identical",
+      "ahead_by": 0,
+      "behind_by": 0,
+      "total_commits": 0,
+      "files_changed": 0,
+      "compare_truncated": false,
+      "changed_files": [],
+      "source": "https://github.com/dvikt33-ux/safe-bim-layer/compare/feature%2Fproject-accelerator-integration-pr-20261009...research%2Fapa-20261009-resource-mep-bridges-audit-v1",
+      "scope": "GitHub compare direct metadata; not execution or contents of binaries"
+    },
+    {
+      "id": "alias_arena",
+      "base": "arena/fix-house-offline-audit-f7d38af",
+      "head": "arena/tapir159-compat-geometry-c6ab474",
+      "status": "identical",
+      "ahead_by": 0,
+      "behind_by": 0,
+      "total_commits": 0,
+      "files_changed": 0,
+      "compare_truncated": false,
+      "changed_files": [],
+      "source": "https://github.com/dvikt33-ux/safe-bim-layer/compare/arena%2Ffix-house-offline-audit-f7d38af...arena%2Ftapir159-compat-geometry-c6ab474",
+      "scope": "GitHub compare direct metadata; not execution or contents of binaries"
+    },
+    {
+      "id": "detail_v2_2_to_v2_3",
+      "base": "chatgpt/detail-machine-v2.2",
+      "head": "chatgpt/detail-machine-v2.3",
+      "status": "ahead",
+      "ahead_by": 1,
+      "behind_by": 0,
+      "total_commits": 1,
+      "files_changed": 10,
+      "compare_truncated": false,
+      "changed_files": [
+        {
+          "path": "details/machine-db/releases/v2.3/AUDIT_v2.3.json",
+          "status": "added"
+        },
+        {
+          "path": "details/machine-db/releases/v2.3/PACKAGE_SHA256.txt",
+          "status": "added"
+        },
+        {
+          "path": "details/machine-db/releases/v2.3/README_v2.3.md",
+          "status": "added"
+        },
+        {
+          "path": "details/machine-db/releases/v2.3/SUMMARY_v2.3.json",
+          "status": "added"
+        },
+        {
+          "path": "details/machine-db/releases/v2.3/SYSTEMATIZED_MANIFEST.json",
+          "status": "added"
+        },
+        {
+          "path": "details/machine-db/releases/v2.3/UPLOAD_NOTES.md",
+          "status": "added"
+        },
+        {
+          "path": "details/machine-db/releases/v2.3/archicad_detail_machine_db_v2.3_SHA256.txt",
+          "status": "added"
+        },
+        {
+          "path": "details/machine-db/releases/v2.3/detail-machine-v2.3-systematized.tar.gz",
+          "status": "added"
+        },
+        {
+          "path": "details/machine-db/releases/v2.3/kaiman_kerakam_dimension_templates_v2.3.json",
+          "status": "added"
+        },
+        {
+          "path": "details/machine-db/releases/v2.3/kaiman_kerakam_wt11_dimension_bindings_v2.3.jsonl",
+          "status": "added"
+        }
+      ],
+      "source": "https://github.com/dvikt33-ux/safe-bim-layer/compare/chatgpt%2Fdetail-machine-v2.2...chatgpt%2Fdetail-machine-v2.3",
+      "scope": "GitHub compare direct metadata; not execution or contents of binaries"
+    },
+    {
+      "id": "detail_db_v2_2_to_v2_3",
+      "base": "chatgpt/detail-machine-db-v2.2-20261006",
+      "head": "chatgpt/detail-machine-db-v2.3-20261006",
+      "status": "diverged",
+      "ahead_by": 5,
+      "behind_by": 2,
+      "total_commits": 5,
+      "files_changed": 43,
+      "compare_truncated": false,
+      "changed_files": [
+        {
+          "path": "knowledge/detail-machine/CURRENT",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.2/AUDIT_v2.2.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.2/ORIGINAL_PACKAGE_SHA256.txt",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.2/README_v2.2.md",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.2/RESTORE.md",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.2/SYSTEMATIZED_ARCHIVE_SHA256.txt",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.2/detail-machine-v2.2-systematized.tar.gz",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/AUDIT_v2.3.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/ORIGINAL_PACKAGE_SHA256.txt",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/README_v2.3.md",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/RESTORE.md",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/ROCKFACADE_SOURCE_VERIFY_v2.3.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/SUMMARY_v2.3.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/SYSTEMATIZED_ARCHIVE_SHA256.txt",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/detail-machine-v2.3-systematized.tar.gz",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/manifest_v2.3.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/AUDIT_v2.4.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/BRAAS_ROOF_DETAILS_SOURCE_VERIFY_v2.4.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/ORIGINAL_PACKAGE_SHA256.txt",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/README_v2.4.md",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/RESTORE.md",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/SUMMARY_v2.4.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/SYSTEMATIZED_ARCHIVE_SHA256.txt",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/detail-machine-v2.4-systematized.tar.gz",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/manifest_v2.4.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/AUDIT_v2.5.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/BRAAS_ROOF_TECH_SOURCE_VERIFY_v2.5.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/ORIGINAL_PACKAGE_SHA256.txt",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/README_v2.5.md",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/RESTORE.md",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/SUMMARY_v2.5.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/SYSTEMATIZED_ARCHIVE_SHA256.txt",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/detail-machine-v2.5-systematized.tar.gz",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/manifest_v2.5.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/AUDIT_v2.6.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/ORIGINAL_PACKAGE_SHA256.txt",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/POROTHERM_LOWRISE_SOURCE_VERIFY_v2.6.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/README_v2.6.md",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/RESTORE.md",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/SUMMARY_v2.6.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/SYSTEMATIZED_ARCHIVE_SHA256.txt",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/detail-machine-v2.6-systematized.tar.gz",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/manifest_v2.6.json",
+          "status": "added"
+        }
+      ],
+      "source": "https://github.com/dvikt33-ux/safe-bim-layer/compare/chatgpt%2Fdetail-machine-db-v2.2-20261006...chatgpt%2Fdetail-machine-db-v2.3-20261006",
+      "scope": "GitHub compare direct metadata; not execution or contents of binaries"
+    },
+    {
+      "id": "kaiman_v2_4_to_v2_5",
+      "base": "chatgpt/kaiman-exact-v2.4",
+      "head": "chatgpt/kaiman-exact-v2.5",
+      "status": "ahead",
+      "ahead_by": 1,
+      "behind_by": 0,
+      "total_commits": 1,
+      "files_changed": 3,
+      "compare_truncated": false,
+      "changed_files": [
+        {
+          "path": "details/machine-db/releases/kaiman-v2.5/AUDIT_KAIMAN_v2.5.json",
+          "status": "added"
+        },
+        {
+          "path": "details/machine-db/releases/kaiman-v2.5/README_KAIMAN_v2.5.md",
+          "status": "added"
+        },
+        {
+          "path": "details/machine-db/releases/kaiman-v2.5/kaiman-kerakam-exact-v2.5.tar.gz",
+          "status": "added"
+        }
+      ],
+      "source": "https://github.com/dvikt33-ux/safe-bim-layer/compare/chatgpt%2Fkaiman-exact-v2.4...chatgpt%2Fkaiman-exact-v2.5",
+      "scope": "GitHub compare direct metadata; not execution or contents of binaries"
+    },
+    {
+      "id": "kaiman_parent",
+      "base": "chatgpt/detail-machine-v2.3",
+      "head": "chatgpt/kaiman-exact-v2.4",
+      "status": "ahead",
+      "ahead_by": 1,
+      "behind_by": 0,
+      "total_commits": 1,
+      "files_changed": 8,
+      "compare_truncated": false,
+      "changed_files": [
+        {
+          "path": "details/machine-db/releases/kaiman-v2.4/AUDIT_KAIMAN_v2.4.json",
+          "status": "added"
+        },
+        {
+          "path": "details/machine-db/releases/kaiman-v2.4/PACKAGE_SHA256.txt",
+          "status": "added"
+        },
+        {
+          "path": "details/machine-db/releases/kaiman-v2.4/README_KAIMAN_v2.4.md",
+          "status": "added"
+        },
+        {
+          "path": "details/machine-db/releases/kaiman-v2.4/SUMMARY_KAIMAN_v2.4.json",
+          "status": "added"
+        },
+        {
+          "path": "details/machine-db/releases/kaiman-v2.4/kaiman-kerakam-exact-v2.4.tar.gz",
+          "status": "added"
+        },
+        {
+          "path": "details/machine-db/releases/kaiman-v2.4/kaiman_kerakam_dimension_templates_v2.4.json",
+          "status": "added"
+        },
+        {
+          "path": "details/machine-db/releases/kaiman-v2.4/kaiman_kerakam_exact_binding_index_v2.4.json",
+          "status": "added"
+        },
+        {
+          "path": "details/machine-db/releases/kaiman-v2.4/kaiman_kerakam_wt12_dimension_bindings_v2.4.jsonl",
+          "status": "added"
+        }
+      ],
+      "source": "https://github.com/dvikt33-ux/safe-bim-layer/compare/chatgpt%2Fdetail-machine-v2.3...chatgpt%2Fkaiman-exact-v2.4",
+      "scope": "GitHub compare direct metadata; not execution or contents of binaries"
+    },
+    {
+      "id": "detail_machine_vs_db_v2_3",
+      "base": "chatgpt/detail-machine-v2.3",
+      "head": "chatgpt/detail-machine-db-v2.3-20261006",
+      "status": "diverged",
+      "ahead_by": 5,
+      "behind_by": 33,
+      "total_commits": 5,
+      "files_changed": 43,
+      "compare_truncated": false,
+      "changed_files": [
+        {
+          "path": "knowledge/detail-machine/CURRENT",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.2/AUDIT_v2.2.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.2/ORIGINAL_PACKAGE_SHA256.txt",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.2/README_v2.2.md",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.2/RESTORE.md",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.2/SYSTEMATIZED_ARCHIVE_SHA256.txt",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.2/detail-machine-v2.2-systematized.tar.gz",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/AUDIT_v2.3.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/ORIGINAL_PACKAGE_SHA256.txt",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/README_v2.3.md",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/RESTORE.md",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/ROCKFACADE_SOURCE_VERIFY_v2.3.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/SUMMARY_v2.3.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/SYSTEMATIZED_ARCHIVE_SHA256.txt",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/detail-machine-v2.3-systematized.tar.gz",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/manifest_v2.3.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/AUDIT_v2.4.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/BRAAS_ROOF_DETAILS_SOURCE_VERIFY_v2.4.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/ORIGINAL_PACKAGE_SHA256.txt",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/README_v2.4.md",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/RESTORE.md",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/SUMMARY_v2.4.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/SYSTEMATIZED_ARCHIVE_SHA256.txt",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/detail-machine-v2.4-systematized.tar.gz",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/manifest_v2.4.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/AUDIT_v2.5.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/BRAAS_ROOF_TECH_SOURCE_VERIFY_v2.5.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/ORIGINAL_PACKAGE_SHA256.txt",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/README_v2.5.md",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/RESTORE.md",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/SUMMARY_v2.5.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/SYSTEMATIZED_ARCHIVE_SHA256.txt",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/detail-machine-v2.5-systematized.tar.gz",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/manifest_v2.5.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/AUDIT_v2.6.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/ORIGINAL_PACKAGE_SHA256.txt",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/POROTHERM_LOWRISE_SOURCE_VERIFY_v2.6.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/README_v2.6.md",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/RESTORE.md",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/SUMMARY_v2.6.json",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/SYSTEMATIZED_ARCHIVE_SHA256.txt",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/detail-machine-v2.6-systematized.tar.gz",
+          "status": "added"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/manifest_v2.6.json",
+          "status": "added"
+        }
+      ],
+      "source": "https://github.com/dvikt33-ux/safe-bim-layer/compare/chatgpt%2Fdetail-machine-v2.3...chatgpt%2Fdetail-machine-db-v2.3-20261006",
+      "scope": "GitHub compare direct metadata; not execution or contents of binaries"
+    },
+    {
+      "id": "gdl_checkpoint_to_blocker",
+      "base": "research/apa-tn-gdl-create-01-checkpoint-20261009",
+      "head": "research/apa-tn-gdl-create-01-blocker1-audit-20261009",
+      "status": "ahead",
+      "ahead_by": 1,
+      "behind_by": 0,
+      "total_commits": 1,
+      "files_changed": 1,
+      "compare_truncated": false,
+      "changed_files": [
+        {
+          "path": "docs/research/APA_TN-GDL-CREATE-01_BLOCKER1_AUDIT_2026-10-09.md",
+          "status": "added"
+        }
+      ],
+      "source": "https://github.com/dvikt33-ux/safe-bim-layer/compare/research%2Fapa-tn-gdl-create-01-checkpoint-20261009...research%2Fapa-tn-gdl-create-01-blocker1-audit-20261009",
+      "scope": "GitHub compare direct metadata; not execution or contents of binaries"
+    },
+    {
+      "id": "gdl_blocker_to_native",
+      "base": "research/apa-tn-gdl-create-01-blocker1-audit-20261009",
+      "head": "research/apa-tn-gdl-create-01-native-probe-20261009",
+      "status": "ahead",
+      "ahead_by": 1,
+      "behind_by": 0,
+      "total_commits": 1,
+      "files_changed": 5,
+      "compare_truncated": false,
+      "changed_files": [
+        {
+          "path": "docs/research/APA_TN-GDL-CREATE-01_BLOCKER1_AUDIT_2026-10-09.md",
+          "status": "modified"
+        },
+        {
+          "path": "docs/research/APA_TN-GDL-CREATE-01_CHECKPOINT_2026-10-09.md",
+          "status": "modified"
+        },
+        {
+          "path": "docs/research/patches/tapir-1.5.10-blocker1-readonly-diagnostic.patch",
+          "status": "added"
+        },
+        {
+          "path": "scripts/verify_apa_blocker1_patch.py",
+          "status": "added"
+        },
+        {
+          "path": "tests/test_apa_blocker1_patch.py",
+          "status": "added"
+        }
+      ],
+      "source": "https://github.com/dvikt33-ux/safe-bim-layer/compare/research%2Fapa-tn-gdl-create-01-blocker1-audit-20261009...research%2Fapa-tn-gdl-create-01-native-probe-20261009",
+      "scope": "GitHub compare direct metadata; not execution or contents of binaries"
+    },
+    {
+      "id": "stage4_hardening_to_performance",
+      "base": "work/stage4-live-hardening",
+      "head": "work/stage4-performance-pass",
+      "status": "ahead",
+      "ahead_by": 31,
+      "behind_by": 0,
+      "total_commits": 31,
+      "files_changed": 12,
+      "compare_truncated": false,
+      "changed_files": [
+        {
+          "path": "README.md",
+          "status": "modified"
+        },
+        {
+          "path": "closed_loop/live_wall.py",
+          "status": "modified"
+        },
+        {
+          "path": "closed_loop/stage4_live_scenario.py",
+          "status": "modified"
+        },
+        {
+          "path": "closed_loop/stage4_offline_evidence.py",
+          "status": "modified"
+        },
+        {
+          "path": "docs/CURRENT_STATUS.md",
+          "status": "modified"
+        },
+        {
+          "path": "docs/INDEX.md",
+          "status": "modified"
+        },
+        {
+          "path": "docs/STAGE4_PERFORMANCE_PASS.md",
+          "status": "added"
+        },
+        {
+          "path": "outputs/closed-loop-stage4/stage4-performance-acceptance.json",
+          "status": "added"
+        },
+        {
+          "path": "scripts/profile_stage4_audit.py",
+          "status": "added"
+        },
+        {
+          "path": "scripts/stage4_audit_pack.py",
+          "status": "modified"
+        },
+        {
+          "path": "tests_stage4_live/test_audit_integration.py",
+          "status": "modified"
+        },
+        {
+          "path": "tests_stage4_live/test_offline_fast.py",
+          "status": "added"
+        }
+      ],
+      "source": "https://github.com/dvikt33-ux/safe-bim-layer/compare/work%2Fstage4-live-hardening...work%2Fstage4-performance-pass",
+      "scope": "GitHub compare direct metadata; not execution or contents of binaries"
+    },
+    {
+      "id": "stage4_performance_to_stage5_window",
+      "base": "work/stage4-performance-pass",
+      "head": "work/stage5-hosted-window",
+      "status": "ahead",
+      "ahead_by": 40,
+      "behind_by": 0,
+      "total_commits": 40,
+      "files_changed": 19,
+      "compare_truncated": false,
+      "changed_files": [
+        {
+          "path": "closed_loop/live_wall.py",
+          "status": "modified"
+        },
+        {
+          "path": "closed_loop/live_window.py",
+          "status": "added"
+        },
+        {
+          "path": "closed_loop/models.py",
+          "status": "modified"
+        },
+        {
+          "path": "closed_loop/stage5_audit_pack.py",
+          "status": "added"
+        },
+        {
+          "path": "closed_loop/stage5_offline_evidence.py",
+          "status": "added"
+        },
+        {
+          "path": "closed_loop/stage5_window_scenario.py",
+          "status": "added"
+        },
+        {
+          "path": "closed_loop/wall_attempts.py",
+          "status": "modified"
+        },
+        {
+          "path": "closed_loop/window_attempts.py",
+          "status": "added"
+        },
+        {
+          "path": "docs/CURRENT_STATUS.md",
+          "status": "modified"
+        },
+        {
+          "path": "docs/INDEX.md",
+          "status": "modified"
+        },
+        {
+          "path": "docs/STAGE5_HOSTED_WINDOW.md",
+          "status": "added"
+        },
+        {
+          "path": "outputs/closed-loop-stage5/stage5-acceptance-contract.json",
+          "status": "added"
+        },
+        {
+          "path": "outputs/closed-loop-stage5/stage5-offline-acceptance.json",
+          "status": "added"
+        },
+        {
+          "path": "scripts/archicad_executor.py",
+          "status": "modified"
+        },
+        {
+          "path": "tests_stage5_window/__init__.py",
+          "status": "added"
+        },
+        {
+          "path": "tests_stage5_window/test_live_window_wiring.py",
+          "status": "added"
+        },
+        {
+          "path": "tests_stage5_window/test_stage5_audit_pack.py",
+          "status": "added"
+        },
+        {
+          "path": "tests_stage5_window/test_window_attempts.py",
+          "status": "added"
+        },
+        {
+          "path": "tests_stage5_window/test_window_orchestrator.py",
+          "status": "added"
+        }
+      ],
+      "source": "https://github.com/dvikt33-ux/safe-bim-layer/compare/work%2Fstage4-performance-pass...work%2Fstage5-hosted-window",
+      "scope": "GitHub compare direct metadata; not execution or contents of binaries"
+    },
+    {
+      "id": "whole_scene_to_integration",
+      "base": "chatgpt/whole-scene-v1-20261009",
+      "head": "feature/project-accelerator-integration-pr-20261009",
+      "status": "ahead",
+      "ahead_by": 2,
+      "behind_by": 0,
+      "total_commits": 2,
+      "files_changed": 19,
+      "compare_truncated": false,
+      "changed_files": [
+        {
+          "path": ".gitattributes",
+          "status": "added"
+        },
+        {
+          "path": ".github/workflows/archicad-contracts.yml",
+          "status": "modified"
+        },
+        {
+          "path": "docs/ARCHICAD_PROJECT_ACCELERATOR_MVP.md",
+          "status": "added"
+        },
+        {
+          "path": "docs/PROJECT_ACCELERATOR_INTEGRATION.md",
+          "status": "added"
+        },
+        {
+          "path": "docs/PROJECT_ACCELERATOR_VERIFICATION.json",
+          "status": "added"
+        },
+        {
+          "path": "examples/accelerator/pavilion.intent.json",
+          "status": "added"
+        },
+        {
+          "path": "schemas/accelerator/capability-registry.json",
+          "status": "added"
+        },
+        {
+          "path": "schemas/accelerator/research-manifest.json",
+          "status": "added"
+        },
+        {
+          "path": "schemas/tapir-live-1.5.10/command_definitions.js",
+          "status": "added"
+        },
+        {
+          "path": "schemas/tapir-live-1.5.10/common_schema_definitions.js",
+          "status": "added"
+        },
+        {
+          "path": "schemas/tapir-live-1.5.10/tapir-export-evidence.json",
+          "status": "added"
+        },
+        {
+          "path": "schemas/tapir-live-1.5.10/tapir-scene-live.json",
+          "status": "added"
+        },
+        {
+          "path": "scripts/archicad_accelerator_integration.py",
+          "status": "added"
+        },
+        {
+          "path": "scripts/archicad_project_accelerator.py",
+          "status": "added"
+        },
+        {
+          "path": "scripts/archicad_scene_run.py",
+          "status": "modified"
+        },
+        {
+          "path": "scripts/archicad_scene_v1.py",
+          "status": "modified"
+        },
+        {
+          "path": "tests/test_archicad_accelerator_integration.py",
+          "status": "added"
+        },
+        {
+          "path": "tests/test_archicad_project_accelerator.py",
+          "status": "added"
+        },
+        {
+          "path": "tests/test_archicad_scene_run.py",
+          "status": "modified"
+        }
+      ],
+      "source": "https://github.com/dvikt33-ux/safe-bim-layer/compare/chatgpt%2Fwhole-scene-v1-20261009...feature%2Fproject-accelerator-integration-pr-20261009",
+      "scope": "GitHub compare direct metadata; not execution or contents of binaries"
+    }
+  ],
+  "limits": [
+    "72-branch count and head identity is a historical 2026-10-10 snapshot, NOT fresh 2026-10-11 enumeration.",
+    "Compare API lists changed paths and commit ancestry for 13 selected pairs, NOT all possible branch pairs.",
+    "Same HEAD proves identical tree at that snapshot; not license to delete branch or collapse provenance records.",
+    "Other forks may share semantic content despite different Git SHAs; entire 72-branch semantic dedup is pending.",
+    "No model, APX, PLN, GitHub main/master or branch heads changed by this inventory publication."
+  ]
+}
