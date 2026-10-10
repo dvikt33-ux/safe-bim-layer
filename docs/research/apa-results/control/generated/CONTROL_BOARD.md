@@ -9,13 +9,13 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | Status | Count |
 | --- | ---: |
 | BLOCKED | 8 |
-| CLAIMED | 0 |
+| CLAIMED | 1 |
 | DONE_PUBLISHED | 10 |
 | IN_PROGRESS | 0 |
 | PARTIAL | 7 |
-| READY | 25 |
+| READY | 24 |
 | SUPERSEDED | 0 |
-| DISPATCHABLE_NOW | 15 |
+| DISPATCHABLE_NOW | 14 |
 | HELD_BY_DEPENDENCIES | 17 |
 | EXPIRED_LEASES | 0 |
 
@@ -23,7 +23,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| — | — | — | — |
+| APA-P50.A01.S01 | chatgpt-apa-controller-traceability-20261010 | 2026-10-11T12:00:00Z | cross-research-traceability |
 
 ## CONTROL — 0 ready
 
@@ -31,13 +31,12 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | --- | --- | --- |
 | — | — | — |
 
-## CONSOLIDATION — 3 ready
+## CONSOLIDATION — 2 ready
 
 | Priority | Task | Acceptance |
 | --- | --- | --- |
 | P0 | APA-P00.A01.S03 — Инвентаризировать 72 ветки и PR, проверить уникальные результаты и ancestry | Список уникальных артефактов, SHA, дубликатов и неизвестного |
 | P0 | APA-P00.A02.S03 — Связать старые находки с S-ID и удалить логические дубли без удаления оригиналов | Evidence map и superseded_by для дублей |
-| P0 | APA-P50.A01.S01 — Карта связей: исследования ↔ S-ID ↔ артефакты ↔ PR | Traceability matrix, orphan report list |
 
 ## RESEARCH — 8 ready
 

@@ -564,7 +564,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P50.A01.S01
 
-**Карта связей: исследования ↔ S-ID ↔ артефакты ↔ PR** — CONSOLIDATION / READY / P0
+**Карта связей: исследования ↔ S-ID ↔ артефакты ↔ PR** — CONSOLIDATION / CLAIMED / P0
 
 - Parent: APA-P50 → APA-P50.A01
 - Topic: KNOWLEDGE_GRAPH
@@ -572,7 +572,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P00.A02.S02
 - Related, check before duplicating: APA-P00.A01.S03
 - Acceptance: Traceability matrix, orphan report list
-- Owner/lease: unclaimed
+- Owner/lease: chatgpt-apa-controller-traceability-20261010 / 2026-10-11T12:00:00Z
 - Requires owner approval: False
 - Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md), [ART-BRANCHES](../../../../../docs/research/apa-results/inventories/FULL_BRANCH_INVENTORY.md)
 - Existing V2 runs: none
