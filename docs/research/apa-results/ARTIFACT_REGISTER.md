@@ -56,3 +56,16 @@
 - Наличие файла в GitHub: это только GITHUB_READBACK_VERIFIED. Истинность конкретного API claim требует отдельного SOURCE_VERIFIED/BUILD_PASS/LIVE_PASS.
 - Для каждого нового отчёта добавлять: ID, S-ID, прямую ссылку, commit SHA, readback, метод проверки, статус, дату, источник; не дублировать старые документы.
 - Если файл существует в архиве, сначала дать ссылку и delta, не создавать копию в другой ветке.
+
+
+## Восстановленные из чата результаты (2026-10-10)
+
+Эти файлы были восстановлены из видимых отчётов ChatGPT после прежних `GITHUB_PUBLISH_BLOCKED`. **Статус содержания: `RECOVERED_FROM_CHAT / REPORTED`, не независимо перепроверенный SOURCE_VERIFIED**. Для каждого файла отдельно подтверждены GitHub `create_file` commit SHA и `fetch_file` readback.
+
+| ID | Восстановленный отчёт | Commit SHA | GitHub readback | Содержание |
+|---|---|---|---|---|
+| RECOVER-TAPIR-7C3F | [Tapir: разрезы, размеры, автотекст](runs/2026-10-10/apa-recovery-20261010-132600-tapir-docs-7c3f.md) | [3b5197a](https://github.com/dvikt33-ux/safe-bim-layer/commit/3b5197adb2031b81853fd324d1a7fc93d80bbd46) | PASS, blob `efa84fd335ed1073cd3c8be5353e06d3f62990fe` | Предыдущий исходный аудит Tapir 1.5.9; installed 1.5.10 NOT_VERIFIED |
+| RECOVER-HOTLINK-277E19 | [Native Hotlink и MEP Transition](runs/2026-10-10/apa-recovery-20261010-132700-hotlink-mep-277e19.md) | [5e03f46](https://github.com/dvikt33-ux/safe-bim-layer/commit/5e03f4693016977b40dd7cf197bf643cb97ef030) | PASS, blob `e6d3eebacaef09c238009e3eb86823e344d7faa6` | AC29 SDK 29.3100 claims; LIVE NOT_VERIFIED |
+| RECOVER-IFCMCP-3F759 | [IfcMCP и IfcPatch MergeProjects](runs/2026-10-10/apa-recovery-20261010-132800-ifcmcp-merge-3f759.md) | [7c42418](https://github.com/dvikt33-ux/safe-bim-layer/commit/7c42418a7f64d827e45aa44b2993a67c0adb66cf) | PASS, blob `1a9cb5f5271d5ce41adc16ff61f728763bd464f7` | IfcOpenShell v0.9.0 claims; OFFLINE/BUILD/LIVE NOT_VERIFIED |
+
+**Что осталось:** не считать восстановление файла независимой технической проверкой или завершением подшага PROJECT_PLAN. Для повышения уровня доказательств назначить отдельный source re-audit по указанным pin/version/line links, затем офлайн/изолированные испытания. Обнаруженные повторы с APA-01…APA-12 и архивом должны быть дедуплицированы по исходникам.
