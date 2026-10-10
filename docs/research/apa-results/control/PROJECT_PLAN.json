@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 13,
+  "revision": 14,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -298,6 +298,12 @@
       "uri": "docs/research/apa-results/control/CHATGPT_SCHEDULED_TASK.md",
       "kind": "DOCUMENT",
       "verification": "READBACK_VERIFIED"
+    },
+    "ART-SDK-RECOVERY-20261010-6B42": {
+      "id": "ART-SDK-RECOVERY-20261010-6B42",
+      "uri": "docs/research/apa-results/runs/2026-10-10/apa-recovery-20261010-142600-sdk-native-6b42.md",
+      "kind": "REPORT",
+      "verification": "GITHUB_READBACK_VERIFIED_REPORTED"
     }
   },
   "tasks": {
@@ -646,7 +652,7 @@
       "action_id": "APA-P10.A01",
       "title": "AC29 SDK headers и native create/change/get сигнатуры",
       "kind": "RESEARCH",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "sdk-native-signatures",
       "depends_on": [
@@ -661,11 +667,13 @@
         "Версии SDK, первоисточники, проверенные сигнатуры"
       ],
       "acceptance": "Версии SDK, первоисточники, проверенные сигнатуры",
-      "owner": "chatgpt:apa-discovery",
-      "lease_until": "2026-10-10T15:47:37Z",
-      "claim_ref": "APA-RUN-20261010T141737Z-ac29-sdk-claim-6b42",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-SDK-RECOVERY-20261010-6B42"
+      ],
       "blocked_reason": null
     },
     "APA-P10.A01.S02": {
