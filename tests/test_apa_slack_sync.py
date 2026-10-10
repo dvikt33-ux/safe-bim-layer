@@ -669,7 +669,7 @@ class RawSlackProbeTests(unittest.TestCase):
             "no_linebreak;object_open;schema_rejected:missing_or_bad_event_id",
         )
 
-    def test_stage_validation_identifies_slack_angle_evidence_urls(self):
+    def test_stage_validation_accepts_known_slack_angle_evidence_urls(self):
         source = event(
             event_id="apa-stage-url-test-123",
             task_id="APA-P10.A01.S01",
@@ -680,7 +680,7 @@ class RawSlackProbeTests(unittest.TestCase):
         body = ("APA_EVENT_V1```" + json.dumps(source) +
                 "```\n*Sent using* <@U0C90JE4WAC>")
         result = summarize([{"text": body, "ts": "hidden"}])
-        key = "no_linebreak;object_open;schema_rejected:evidence_url_not_https:slack_angle_link"
+        key = "no_linebreak;object_open;valid_json_and_schema_envelope_mismatch"
         self.assertEqual(result["rejected_stage_shapes"], {key: 1})
         self.assertEqual(result["counts"]["fence_envelope_rejected"], 1)
         out = json.dumps(result)
