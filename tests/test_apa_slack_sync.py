@@ -45,6 +45,28 @@ class EventFormatTests(unittest.TestCase):
         compacted = original.replace("```json\n", "```").replace("\n```", "```")
         self.assertEqual(parse_event(compacted)["event_id"], value["event_id"])
 
+    def test_live_chat_schema_discriminator(self):
+        # Live APA chats already emit optional schema and pretty JSON.
+        sample = event(
+            schema="APA_EVENT_V1",
+            event_id="apa-20261010-taskproposal-audit-plan-1418",
+            task_id="APA-P60.A02.S04",
+            phase="OFFLINE",
+            status="INFO",
+            source="chatgpt:apa-controller-setup",
+            summary="PROJECT_PLAN task proposal checked; pending independent audit",
+        )
+        message = "APA_EVENT_V1\n```" + json.dumps(
+            sample, ensure_ascii=False, indent=2
+        ) + "```"
+        parsed = parse_event(message)
+        self.assertEqual(parsed["task_id"], "APA-P60.A02.S04")
+        self.assertEqual(parsed["schema"], "APA_EVENT_V1")
+
+    def test_invalid_schema_discriminator_rejected(self):
+        with self.assertRaises(InvalidEvent):
+            parse_event(format_event(event(schema="SOME_OTHER_PROTOCOL")))
+
     def test_ignore_freeform_messages(self):
         self.assertIsNone(parse_event("APA report: anything"))
         self.assertIsNone(parse_event("Random message"))

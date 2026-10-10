@@ -70,6 +70,8 @@ Example (**replace the event ID with a fresh unique ID**):
 
 Valid phases: `SOURCE`, `OFFLINE`, `SYNTHETIC`, `BUILD`, `LIVE`.
 Valid statuses: `INFO`, `PASS`, `BLOCKED`, `NOT_VERIFIED`.
+Optional `"schema":"APA_EVENT_V1"` is accepted because active research
+chats publish this discriminator. Any other schema value is rejected.
 A `PASS` must include at least one HTTPS evidence URL. This is **syntax**
 validation, NOT independent proof of PASS.
 
@@ -105,12 +107,19 @@ A separate Slack App must be configured by the workspace owner:
 4. Under **Event Subscriptions**, enable `message.channels`.
    Install the app to the workspace, obtain bot token (`xoxb-`),
    and invite the bot to `#apa-research`.
-5. From the repository checkout, in a *separate isolated environment*,
-   install `slack-bolt` (only when you explicitly authorize installation)
-   and set `SLACK_APP_TOKEN` and `SLACK_BOT_TOKEN` securely in the
-   process environment. Never put tokens in a tracked `.env` file.
-6. Start using `python -m scripts.apa_sync.socket_mode`.
-   Leave the process running for realtime event delivery.
+5. On Windows, get a checkout of the dedicated integration branch
+   (currently `feature/apa-sync-live-readiness-20261010`; do not change
+   main or an existing worktree used for Archicad).
+6. Execute `& .\\scripts\\apa_sync\\start_windows.ps1 -CheckOnly`
+   first, then `& .\\scripts\\apa_sync\\start_windows.ps1 -InstallDeps`.
+   The launcher installs Python dependencies **only into an isolated venv**
+   below `%LOCALAPPDATA%\\SafeBIM\\APA-Sync`, not system Python.
+   It prompts for `SLACK_BOT_TOKEN` and `SLACK_APP_TOKEN` locally with
+   hidden input. NEVER paste credentials in ChatGPT, GitHub or Slack.
+   The SQLite ledger also lives outside the checkout in LOCALAPPDATA.
+7. Leave the PowerShell window open while listening; Ctrl+C stops it.
+   The program is NOT a persistent Windows service yet, and will not
+   run while the computer is sleeping or powered off.
 7. Verify `http://127.0.0.1:8765/health` and
    `http://127.0.0.1:8765/v1/state` locally. Publish an explicit
    sample event in Slack, then verify that its sequence appears in

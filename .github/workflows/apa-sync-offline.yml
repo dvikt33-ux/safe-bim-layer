@@ -24,3 +24,22 @@ jobs:
         run: python -m compileall -q scripts/apa_sync tests/test_apa_slack_sync.py
       - name: Offline unit tests (no Slack tokens)
         run: python -m unittest discover -s tests -p 'test_apa_slack_sync.py' -v
+
+  windows-launcher-static:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Parse Windows launch script without running it
+        shell: pwsh
+        run: |
+          $tokens = $null
+          $parseErrors = $null
+          $path = 'scripts/apa_sync/start_windows.ps1'
+          [System.Management.Automation.Language.Parser]::ParseFile(
+            (Resolve-Path $path), [ref]$tokens, [ref]$parseErrors
+          ) | Out-Null
+          if ($parseErrors.Count -gt 0) {
+            $parseErrors | ForEach-Object { Write-Error $_.Message }
+            throw 'Windows launch script has PowerShell parser errors'
+          }
+          Write-Host 'POWERSHELL_SYNTAX_PASS'
