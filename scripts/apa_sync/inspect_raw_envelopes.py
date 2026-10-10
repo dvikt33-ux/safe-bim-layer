@@ -84,6 +84,42 @@ def characterize(text: str) -> str:
 
 
 
+
+# Explicit, content-free validation codes. Never print arbitrary exceptions.
+VALIDATOR_REASON_CODES = {
+    "Unexpected event keys": "unexpected_keys",
+    "Unsupported schema discriminator": "wrong_schema",
+    "Unknown status or phase": "unknown_status_or_phase",
+    "Invalid source": "source_length",
+    "Invalid summary": "summary_length",
+    "Invalid evidence_urls": "invalid_evidence_collection",
+    "Invalid evidence URL": "invalid_evidence_item",
+    "Evidence URL must be HTTPS without credentials": "evidence_url_not_https",
+    "PASS requires a verifiable evidence URL": "pass_missing_evidence",
+    "Invalid supersedes event ID": "bad_supersedes",
+    "Event exceeds 5000 characters": "size_limit",
+    "Invalid event JSON": "json_decode_failed",
+    "Expected APA_EVENT_V1 and one JSON code fence": "fence_pattern_failed",
+}
+for _required_field in ("event_id", "task_id", "status", "phase", "source", "summary"):
+    VALIDATOR_REASON_CODES[f"Missing or invalid {_required_field}"] = f"missing_or_bad_{_required_field}"
+for _identifier_field in ("event_id", "task_id"):
+    VALIDATOR_REASON_CODES[f"Invalid {_identifier_field}"] = f"bad_{_identifier_field}"
+
+
+def _safe_schema_rejection(exc: InvalidEvent, event: dict) -> str:
+    """Fixed-category reason; never echoes event content or exception text."""
+    reason = VALIDATOR_REASON_CODES.get(str(exc), "other_validation_failure")
+    if reason == "evidence_url_not_https":
+        urls = event.get("evidence_urls", [])
+        if isinstance(urls, list) and any(
+            isinstance(u, str) and u.startswith("<https://") for u in urls
+        ):
+            return reason + ":slack_angle_link"
+        return reason + ":other_url_shape"
+    return reason
+
+
 def _staged_fence_diagnosis(text: str) -> str:
     """Content-free reason category after decoding between exactly two fences.
 
@@ -133,8 +169,9 @@ def _staged_fence_diagnosis(text: str) -> str:
     ) + "\n```"
     try:
         normalized = parse_event(controlled)
-    except InvalidEvent:
-        return f"{preamble};{kind};schema_rejected"
+    except InvalidEvent as exc:
+        reason = _safe_schema_rejection(exc, value)
+        return f"{preamble};{kind};schema_rejected:{reason}"
     if normalized is None:
         return f"{preamble};{kind};prefix_rejected"
     return f"{preamble};{kind};valid_json_and_schema_envelope_mismatch"

@@ -548,8 +548,39 @@ class RawSlackProbeTests(unittest.TestCase):
         )
         self.assertEqual(
             _staged_fence_diagnosis(missing_schema),
-            "no_linebreak;object_open;schema_rejected",
+            "no_linebreak;object_open;schema_rejected:missing_or_bad_event_id",
         )
+
+    def test_stage_validation_identifies_slack_angle_evidence_urls(self):
+        source = event(
+            event_id="apa-stage-url-test-123",
+            task_id="APA-P10.A01.S01",
+            status="PASS",
+            phase="OFFLINE",
+            evidence_urls=["<https://github.com/example/project/pull/23>"],
+        )
+        body = ("APA_EVENT_V1```" + json.dumps(source) +
+                "```\n*Sent using* <@U0C90JE4WAC>")
+        result = summarize([{"text": body, "ts": "hidden"}])
+        key = "no_linebreak;object_open;schema_rejected:evidence_url_not_https:slack_angle_link"
+        self.assertEqual(result["rejected_stage_shapes"], {key: 1})
+        self.assertEqual(result["counts"]["fence_envelope_rejected"], 1)
+        out = json.dumps(result)
+        self.assertNotIn("github.com", out)
+        self.assertNotIn("apa-stage-url-test-123", out)
+
+    def test_stage_validation_separates_unknown_fields(self):
+        source = event()
+        source["private_internal_field"] = "highly confidential"
+        body = ("APA_EVENT_V1```" + json.dumps(source) +
+                "```\n*Sent using* <@U0C90JE4WAC>")
+        result = summarize([{"text": body}])
+        self.assertEqual(
+            result["rejected_stage_shapes"],
+            {"no_linebreak;object_open;schema_rejected:unexpected_keys": 1},
+        )
+        self.assertNotIn("private_internal_field", json.dumps(result))
+        self.assertNotIn("highly confidential", json.dumps(result))
 
     def test_probe_does_not_emit_any_slack_message_contents(self):
         valid = format_event(event(event_id="probe-valid-event")) + (
