@@ -164,3 +164,17 @@ SMOKE_PRESERVED: True
 - **CLOSED for tested scope:** raw Slack event parser compatibility, first 20-event recovery, original event retention, exact history deduplication, second restart and persistence readback over loopback API.
 - **OPEN:** audit the three malformed Slack messages against original GitHub immutable reports and receipts; verify that every imported claim has source evidence; ensure canonical `PROJECT_PLAN.json` controller task status changes only via claim/audit gates. `APA-P00.A02.S03` and `APA-P00.A02.S04` remain existing dispatch IDs for these activities.
 - **NOT CLAIMED:** 24/7 research agent, automatic collection of ChatGPT conversations into GitHub, native Archicad model functionality or technical validity of all 21 stored event claims.
+
+## Preliminary structural triage of 3 rejected Slack messages (not a completed source audit)
+
+**Method and provenance:** a separate **read-only** query of the connected Slack channel `#apa-research` (28 recent messages, connector-rendered content, not raw `conversations.history`) was used solely to classify the three message shapes already confirmed by the owner's bootstrap. No raw message text, credentials, personal author information, private research details or message content were copied into this report. The source/content verification of historical claims remains OPEN and requires the formal `APA-P00.A02.S03` controller task claim.
+
+| Rejected message | Structural classification | Disposition / next verification |
+| --- | --- | --- |
+| `apa-live-smoke-20261011-001`, task `APA-SYNC-SMOKE-01` | `APA_EVENT_V1` with **one** code fence, incomplete JSON enclosure; synthetic smoke attempt | Replacement `apa-live-smoke-20261011-002` already persists at `seq=1`. Treat the incomplete prior smoke as a malformed test, **not** an independent missing research result. Do not mutate the Slack message or invent a new event. |
+| Legacy `APA_EVENT_V1` message with a GitHub-link-rich free-form body and **no** JSON fences | Natural-language/URL compilation; no automatically recognized valid machine-readable envelope | Verify each referenced GitHub source and map genuinely distinct research artifacts in the canonical register under `APA-P00.A02.S03`; do **not** parse arbitrary prose into an authoritative PASS event. |
+| `apa-audit-20261010-reconcile-branch-research-v1`, task `APA-AUDIT-RECONCILE-01` | An apparent JSON object but **no** code fences; Slack connector-rendered evidence only | Source-link audit and canonical S-ID mapping required; no automatic acceptance without valid protocol envelope, and no retroactive approval of prior research status. |
+
+**Qualification:** the three shapes come from Slack connector rendering, and no direct comparison of the individual raw API message bytes was made by this assistant. They agree at category level with the owner's raw bootstrap histogram (two messages with no fences, one with a single fence), but the exact attribution/content semantics remain unverified. **This is triage, not closure of the source-backed audit**, nor a request to relax the validator.
+
+**Controller note:** at last read `PROJECT_PLAN.json` revision 35, `APA-P00.A02.S03` = READY and `APA-P00.A02.S04` = PARTIAL; no CAS claim or status transition was attempted. Future reconciliation must begin with a valid task claim, source retrieval, individual artifact checks and a GitHub publication receipt.
