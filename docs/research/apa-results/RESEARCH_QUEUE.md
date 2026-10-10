@@ -15,7 +15,7 @@
 | Q-009 | APA-P30.A02.S01 | P2 | verified technical matrix | QUEUED; MVP milestones |
 | Q-010 | APA-P40.A01.S01 | P0-OPS | [AUTOMATION_AND_GATES](AUTOMATION_AND_GATES.md) | BLOCKED_EXTERNAL; runtime choice + permissions |
 
-| Q-011 | APA-P00.A03.S03 | P0-OPS | [RUN_EVENT_V2](protocol/RUN_EVENT_V2.schema.json), [Publisher contract](protocol/PUBLISHER_CONTRACT.md) | PARTIAL_DESIGN_PUBLISHED: schema/contract/receipt readback verified; publisher/index builder/heartbeat NOT_DEPLOYED |
+| Q-011 | APA-P00.A03.S03 | P0-OPS | [Workflow](../../.github/workflows/apa-research-publisher.yml), [publisher](../../tools/apa_publisher/publisher.py), [receipt](receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json) | PUBLISHER_DEPLOYED: synthetic E2E success 38045964668; idempotent rerun 38046020069; research scheduler/heartbeat NOT_RUNNING |
 
 ## Правила диспетчеризации
 
