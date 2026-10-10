@@ -150,6 +150,91 @@ class EventFormatTests(unittest.TestCase):
         with self.assertRaises(InvalidEvent):
             parse_event(format_event(event(phase="UNSAFE", status="PASS")) + footer)
 
+    def test_native_slack_wrapped_https_evidence_and_adjacent_footer(self):
+        original = event(
+            event_id="apa-legacy-evidence-20261011-001",
+            task_id="APA-P10.A01.S01",
+            status="PASS",
+            phase="OFFLINE",
+            evidence_urls=[
+                "<https://github.com/example/safe-bim-layer/pull/20>",
+                "<https://github.com/example/safe-bim-layer/actions/runs/123>",
+            ],
+        )
+        # Slack may join the closing code fence directly to the attribution.
+        body = ("APA_EVENT_V1\n```" + json.dumps(original, ensure_ascii=False) +
+                "```*Sent using* <@U0C90JE4WAC>")
+        parsed = parse_event(body)
+        self.assertEqual(parsed["event_id"], original["event_id"])
+        self.assertEqual(parsed["status"], "PASS")
+        self.assertEqual(parsed["phase"], "OFFLINE")
+        self.assertEqual(parsed["evidence_urls"], [
+            "https://github.com/example/safe-bim-layer/pull/20",
+            "https://github.com/example/safe-bim-layer/actions/runs/123",
+        ])
+        self.assertEqual(original["evidence_urls"][0][0], "<")
+
+    def test_native_slack_links_compact_or_pretty_with_optional_footer(self):
+        original = event(
+            status="INFO",
+            phase="SOURCE",
+            evidence_urls=["<https://example.org/report?item=1&ok=yes>"],
+        )
+        cases = [
+            "APA_EVENT_V1\n```" + json.dumps(original) +
+                "```*Sent using* <@U0C90JE4WAC>",
+            "APA_EVENT_V1\nResearch header\n```json\n" +
+                json.dumps(original, indent=2) + "\n```\n*Sent using* <@U0C90JE4WAC>",
+            "APA_EVENT_V1\n```" + json.dumps(original) +
+                "```\n*Sent using* <@U0C90JE4WAC|ChatGPT>",
+            format_event(original),
+        ]
+        for value in cases:
+            with self.subTest(value_prefix=value[:40]):
+                parsed = parse_event(value)
+                self.assertEqual(parsed["phase"], "SOURCE")
+                self.assertEqual(parsed["evidence_urls"], [
+                    "https://example.org/report?item=1&ok=yes"
+                ])
+
+    def test_slack_evidence_rejects_labeled_or_broken_wrappers(self):
+        broken = [
+            "<https://github.com/example/issue|Trusted evidence>",
+            "<http://github.com/example/issue>",
+            "<https://github.com/example/issue> trailing",
+            "https://github.com/example/issue>",
+            "<<https://github.com/example/issue>>",
+            "<https://example.com/with white space>",
+            "<https://bad.example/foo|https://good.example/bar>",
+            "http://github.com/example/issue",
+            "<javascript:alert(1)>",
+            "<https://evil.example@trusted.example/repo>",
+        ]
+        for url in broken:
+            with self.subTest(invalid_kind=url[:20]):
+                original = event(
+                    status="PASS",
+                    evidence_urls=[url],
+                )
+                with self.assertRaises(InvalidEvent):
+                    parse_event(format_event(original))
+        with self.assertRaises(InvalidEvent):
+            parse_event(format_event(event(status="PASS", evidence_urls=[])))
+
+    def test_footer_does_not_authorize_arbitrary_trailing_text(self):
+        source = event(status="INFO", evidence_urls=["<https://example.org/doc>"])
+        body = ("APA_EVENT_V1\n```" + json.dumps(source) + "```")
+        for trailer in (
+            "Sent using ChatGPT",
+            "*Sent using* <@U0C90JE4WAD>",
+            "*Sent using* <@U0C90JE4WAC> LIVE PASS",
+            "*Sent using* <@U0C90JE4WAC|Other>",
+            "*Sent using* <@U0C90JE4WAC>\nExtra text",
+        ):
+            with self.subTest(trailer=trailer):
+                with self.assertRaises(InvalidEvent):
+                    parse_event(body + trailer)
+
     def test_invalid_schema_discriminator_rejected(self):
         with self.assertRaises(InvalidEvent):
             parse_event(format_event(event(schema="SOME_OTHER_PROTOCOL")))
@@ -440,6 +525,39 @@ class EventStoreTests(unittest.TestCase):
         self.assertEqual(second["duplicates"], 1)
         self.assertEqual(self.store.changes()["next_cursor"], 1)
 
+    def test_history_replay_with_slack_evidence_is_idempotent(self):
+        old = event(
+            event_id="apa-historical-20261011-source-001",
+            task_id="APA-P10.A01.S01",
+            status="INFO",
+            phase="SOURCE",
+            evidence_urls=["<https://github.com/example/safe-bim-layer/pull/25>"],
+        )
+        body = ("APA_EVENT_V1\n```" + json.dumps(old) +
+                "```*Sent using* <@U0C90JE4WAC>")
+        class Client:
+            def conversations_history(self, **kwargs):
+                return {
+                    "messages": [
+                        {"ts": "1001.1", "text": body},
+                        {"ts": "1000.1", "text": "unrelated"},
+                    ],
+                    "response_metadata": {"next_cursor": ""},
+                }
+        client = Client()
+        first = bootstrap_channel(self.store, client, "C0C886E1PGR")
+        self.assertEqual(first["accepted"], 1)
+        self.assertEqual(first["conflicts"], 0)
+        state = self.store.latest_states()["state"]["APA-P10.A01.S01:SOURCE"]
+        self.assertEqual(state["payload"]["evidence_urls"], [
+            "https://github.com/example/safe-bim-layer/pull/25"
+        ])
+        self.assertEqual(state["effective_status"], "INFO")
+        second = bootstrap_channel(self.store, client, "C0C886E1PGR")
+        self.assertEqual(second["accepted"], 0)
+        self.assertEqual(second["duplicates"], 1)
+        self.assertEqual(self.store.changes()["next_cursor"], 1)
+
     def test_http_read_only_loopback(self):
         server = make_server(self.store, port=0)
         thread = threading.Thread(target=server.serve_forever, daemon=True)
@@ -581,6 +699,25 @@ class RawSlackProbeTests(unittest.TestCase):
         )
         self.assertNotIn("private_internal_field", json.dumps(result))
         self.assertNotIn("highly confidential", json.dumps(result))
+
+    def test_raw_probe_predicts_safe_legacy_acceptance_without_sqlite(self):
+        source = event(
+            event_id="apa-legacy-probe-valid-20261011",
+            task_id="APA-P10.A01.S01",
+            status="INFO",
+            phase="SOURCE",
+            evidence_urls=["<https://github.com/example/verify>"],
+        )
+        body = ("APA_EVENT_V1\n```" + json.dumps(source) +
+                "```*Sent using* <@U0C90JE4WAC>")
+        result = summarize([
+            {"text": body, "ts": "1010.1"},
+            {"text": "APA_EVENT_V1\n```json\n{}", "ts": "1009.1"},
+        ])
+        self.assertEqual(result["counts"]["parse_valid"], 1)
+        self.assertEqual(result["counts"]["fence_envelope_rejected"], 1)
+        self.assertEqual(result["counts"]["scanned"], 2)
+        self.assertNotIn("apa-legacy-probe-valid-20261011", json.dumps(result))
 
     def test_probe_does_not_emit_any_slack_message_contents(self):
         valid = format_event(event(event_id="probe-valid-event")) + (
