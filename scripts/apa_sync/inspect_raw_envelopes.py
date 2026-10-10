@@ -110,6 +110,43 @@ def summarize(messages: Iterable[dict]) -> dict:
     }
 
 
+
+# Never emit raw Slack API errors: error.response may include arbitrary data.
+# Map only allowlisted static codes and numeric HTTP/retry metadata.
+SAFE_SLACK_ERROR_CODES = frozenset({
+    "invalid_auth", "not_authed", "account_inactive", "token_revoked",
+    "missing_scope", "not_in_channel", "channel_not_found",
+    "no_permission", "team_access_not_granted", "ekm_access_denied",
+    "org_login_required", "invalid_arguments", "restricted_action",
+    "is_archived", "ratelimited", "rate_limited", "internal_error",
+    "fatal_error", "request_timeout",
+})
+
+
+def safe_slack_error_summary(response) -> dict:
+    """Whitelisted error code plus safe HTTP/retry metadata only."""
+    try:
+        raw_code = response.get("error")
+    except (AttributeError, TypeError, KeyError):
+        raw_code = None
+    code = (raw_code if isinstance(raw_code, str)
+            and raw_code in SAFE_SLACK_ERROR_CODES else "other_slack_error")
+    details = {"error_code": code}
+    status = getattr(response, "status_code", None)
+    if type(status) is int and 100 <= status <= 599:
+        details["http_status"] = status
+    headers = getattr(response, "headers", None)
+    if hasattr(headers, "get"):
+        retry = headers.get("Retry-After")
+        if retry is None:
+            retry = headers.get("retry-after")
+        if isinstance(retry, str) and retry.isascii() and retry.isdigit():
+            delay = int(retry)
+            if 1 <= delay <= 3600:
+                details["retry_after_seconds"] = delay
+    return details
+
+
 def run() -> None:
     from slack_sdk import WebClient
     from slack_sdk.errors import SlackApiError
@@ -131,8 +168,9 @@ def run() -> None:
             cursor = response.get("response_metadata", {}).get("next_cursor")
             if not cursor:
                 break
-    except SlackApiError:
-        raise SystemExit("Slack API request failed (details withheld)") from None
+    except SlackApiError as exc:
+        details = safe_slack_error_summary(exc.response)
+        raise SystemExit("Slack API request failed: " + json.dumps(details, sort_keys=True)) from None
     except Exception:
         raise SystemExit("Slack read-only probe failed (details withheld)") from None
     print(json.dumps(summarize(messages), ensure_ascii=False, sort_keys=True, indent=2))

@@ -18,7 +18,7 @@ from scripts.apa_sync.coordinator import (
 )
 from scripts.apa_sync.step_sync import after_step, before_step
 from scripts.apa_sync.socket_mode import bootstrap_channel, rejected_message_shape
-from scripts.apa_sync.inspect_raw_envelopes import summarize, characterize
+from scripts.apa_sync.inspect_raw_envelopes import summarize, characterize, safe_slack_error_summary
 
 
 def event(**changes):
@@ -398,6 +398,43 @@ class RawSlackProbeTests(unittest.TestCase):
         self.assertIn("tail=other_suffix", unknown)
         self.assertNotIn("confidential", unknown)
         self.assertNotIn("private-data", unknown)
+
+    def test_safe_slack_error_allows_only_whitelisted_code_and_numeric_hints(self):
+        class Response(dict):
+            def __init__(self, code, status, headers=None):
+                super().__init__({"error": code, "extra": "private-slack-payload"})
+                self.status_code = status
+                self.headers = headers or {}
+
+        self.assertEqual(
+            safe_slack_error_summary(
+                Response("ratelimited", 429, {"Retry-After": "60"})
+            ),
+            {"error_code": "ratelimited", "http_status": 429,
+             "retry_after_seconds": 60},
+        )
+        self.assertEqual(
+            safe_slack_error_summary(Response("invalid_auth", 200)),
+            {"error_code": "invalid_auth", "http_status": 200},
+        )
+        self.assertEqual(
+            safe_slack_error_summary(Response("missing_scope", 200)),
+            {"error_code": "missing_scope", "http_status": 200},
+        )
+
+    def test_safe_slack_error_redacts_unknown_text_and_invalid_retry_header(self):
+        class Response(dict):
+            status_code = 900
+            headers = {"Retry-After": "sensitive-value"}
+        response = Response(
+            error="private-xoxb-token-do-not-log",
+            body="private Slack conversation content",
+        )
+        result = safe_slack_error_summary(response)
+        self.assertEqual(result, {"error_code": "other_slack_error"})
+        output = json.dumps(result)
+        for sensitive in ("xoxb", "sensitive", "conversation", "private"):
+            self.assertNotIn(sensitive, output)
 
     def test_probe_does_not_emit_any_slack_message_contents(self):
         valid = format_event(event(event_id="probe-valid-event")) + (
