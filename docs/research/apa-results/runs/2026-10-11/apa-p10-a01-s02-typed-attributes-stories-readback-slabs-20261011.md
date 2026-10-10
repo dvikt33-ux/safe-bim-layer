@@ -67,3 +67,10 @@ Direct upstream diff comparison confirmed:
 ## 6. Next task proposal (pending independent acceptance)
 
 Propose under `APA-P30.A02` a distinct substep **"Capability-negotiated typed slab creation and recovery adapter"** linked to `APA-P10.A01.S02` and `APA-P10.A02.S01`. The next step should deliver a plan/schema adapter plus offline negative tests and one separate owner-authorized test on an expendable PLN; explicitly reject mixed buildingMaterialId/compositeId, Composite thickness override, missing material GUID, ambiguous concurrent/create outcome. If it overlaps existing generic `APA-P30.A02.S01`, the independent auditor should re-scope/reject rather than duplicating work.
+
+
+## 7. Deduplication against earlier P10.A01.S02 source audit
+
+Previous [P10.A01.S02 profile/edge material source audit](../2026-10-10/apa-technical-20261010-153928-profile-fields-edge-material-8c21.md) independently identified **GetProfiles `skinOutlines` filtering bug** in public Tapir 1.5.9/1.7.0 code: requesting only `fields=["skinOutlines"]` may omit the result; a conservative client may request `fields=["skins","skinOutlines"]` or omit `fields`. It also identified per-edge material distinct from the skin's building material, and missing composite nComps fidelity in source. That work was SOURCE/SYNTHETIC only; installed 1.5.10 LIVE still NOT_VERIFIED.
+
+**No duplicate task requested:** this new report contributes *verified one-off AC29 live saved-copy attributes and observed Basic/Composite thickness failure*, plus upstream PR #785 actual schema/API diff and a parametric adapter decision. The earlier report remains canonical for profile/edge field limitations. A future full-model attribute resolver must integrate **both** sources rather than silently claiming that the simple metadata matrix above covers complete profile geometry or material override fidelity.
