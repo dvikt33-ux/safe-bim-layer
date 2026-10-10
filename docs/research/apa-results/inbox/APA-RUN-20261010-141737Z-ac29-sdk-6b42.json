@@ -1,0 +1,81 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261010-141737Z-ac29-sdk-6b42",
+  "plan_id": "APA-P10",
+  "action_id": "APA-P10.A01",
+  "substep_id": "APA-P10.A01.S01",
+  "executor": "chatgpt:apa-discovery",
+  "executor_run_id": "APA-RUN-20261010T141737Z-ac29-sdk-claim-6b42",
+  "phase": "SOURCE",
+  "started_at": "2026-10-10T14:17:37Z",
+  "finished_at": "2026-10-10T14:25:14Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29 build 5101 (target; not tested live)",
+    "sdk": "Graphisoft DevKit 29.3100 (prior report, headers not verified)",
+    "tapir": "public source 1.5.9; installed 1.5.10 not verified",
+    "source_branch": "research/apa-verified-results-hub-20261010"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/GRAPHISOFT/archicad-api-devkit/tree/29.3100",
+      "revision": "29.3100",
+      "source_sha": null
+    },
+    {
+      "uri": "https://github.com/ENZYME-APD/tapir-archicad-automation/tree/1.5.9",
+      "revision": "1.5.9",
+      "source_sha": null
+    }
+  ],
+  "inputs": [
+    "ART-SDK-GET3D",
+    "ART-SDK-SEO"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-SDK-RECOVERY-COMMAND",
+      "statement": "Prior assistant reported command/undo context and native create/get/change patterns from Graphisoft SDK 29.3100 and Tapir 1.5.9; independently re-verification still required.",
+      "status": "REPORTED",
+      "evidence_ids": [
+        "APA-EVID-SDK29-PRIOR",
+        "APA-EVID-TAPIR159-PRIOR"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-SDK-RECOVERY-WRITE-GATES",
+      "statement": "Need per-element outcomes, readback, settings restoration, and memo error/cleanup gates; no live tests conducted.",
+      "status": "TEST_REQUIRED",
+      "evidence_ids": [
+        "APA-EVID-TAPIR159-PRIOR"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "APA-EVID-SDK29-PRIOR",
+      "uri": "https://github.com/GRAPHISOFT/archicad-api-devkit/blob/29.3100/docs/group___command.html",
+      "kind": "OFFICIAL_DOC",
+      "verification": "REPORTED",
+      "sha256": null,
+      "source_revision": "29.3100"
+    },
+    {
+      "evidence_id": "APA-EVID-TAPIR159-PRIOR",
+      "uri": "https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.5.9/archicad-addon/Sources/ElementCreationCommands.cpp",
+      "kind": "SOURCE_CODE",
+      "verification": "REPORTED",
+      "sha256": null,
+      "source_revision": "1.5.9"
+    }
+  ],
+  "report_markdown": "# APA-P10.A01.S01 — частичный аудит Native Create / Change / Get (восстановление опубликованного в чате отчёта)\n\n- **Дата прохода:** 2026-10-10; **Run ID:** `APA-RUN-20261010-141737Z-ac29-sdk-6b42`\n- **Executor run ID:** `APA-RUN-20261010T141737Z-ac29-sdk-claim-6b42`\n- **ПЛАН:** APA-P10 — независимый технический аудит Archicad 29\n- **ДЕЙСТВИЕ:** APA-P10.A01 — SDK и нативная модель\n- **ТЕКУЩИЙ ПОДШАГ:** APA-P10.A01.S01 — AC29 SDK headers и native create/change/get сигнатуры\n- **Provenance:** `RECOVERED_FROM_PRIOR_CHAT`. Это сохранение предыдущего, не опубликованного из-за GitHub write отказа, отчёта. Он **не пересмотрен независимо в текущем восстановительном проходе**; ниже сохранены его заявленные наблюдения и ограничения.\n- **Матрица доказательств:** SOURCE = `REPORTED_FROM_PRIOR_CHAT` / PARTIAL; OFFLINE = NOT_RUN; BUILD = NOT_RUN; LIVE = NOT_VERIFIED; PERFORMANCE = NOT_MEASURED.\n- **Ограничение acceptance:** точные SDK headers/signatures ещё НЕ подтверждены. Не закрывать S-ID как DONE_PUBLISHED только по факту публикации этого текста.\n\n## 1. Конкретные ссылки и ранее указанные прочитанные разделы\n\n### Graphisoft Archicad API DevKit 29.3100\n\n- https://github.com/GRAPHISOFT/archicad-api-devkit/tree/29.3100\n- https://github.com/GRAPHISOFT/archicad-api-devkit/blob/29.3100/docs/group___command.html — операции и командный/Undo контекст.\n- https://github.com/GRAPHISOFT/archicad-api-devkit/blob/29.3100/docs/struct_a_p_i___element_memo.html — управление памятью element memo.\n- https://github.com/GRAPHISOFT/archicad-api-devkit/blob/29.3100/docs/struct_a_p_i___elem___head.html — Element Head.\n- README.md DevKit 29.3100.\n\n**Ранее сообщённое:** `ACAPI_CallUndoableCommand` используется для отменяемых изменений, вложенные командные вызовы имеют ограничения, часть операций должна идти в контексте главного потока. Это относится к описанию API, но конкретные объявления заголовков SDK ещё не верифицированы.\n\n### Tapir 1.5.9 (не приравнивать автоматически к установленному 1.5.10)\n\n- https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.5.9/archicad-addon/Sources/ElementCreationCommands.cpp — ранее указаны строки 47–167 и 1960–1985.\n- https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.5.9/archicad-addon/Sources/CommandBase.cpp — ранее указаны строки 153–175.\n- https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.5.9/archicad-addon/Sources/ProjectCommands.cpp — ранее указаны строки 2690–2708.\n\nЗаявленные вызовы: `ACAPI_Element_GetDefaults`, `ACAPI_Element_Create`, `ACAPI_Element_GetMemo`, `ACAPI_Element_Change`, `ACAPI_DisposeElemMemoHdls`. Для текущей версии библиотеки и установки эти пункты нуждаются в source re-audit.\n\n## 2. Три технических вывода предыдущего прохода\n\n### (A) Пакетная команда и частичные ошибки\n\nПредыдущий анализ описал обработку ошибок для каждого создаваемого элемента в Tapir и продолжение цикла в некоторых случаях, когда создание отдельного элемента не удалось.\n\n**Следствие для APA:** внешний успех команды не следует безусловно трактовать как создание ВСЕХ элементов; необходимо проверять индивидуальные результаты и делать GUID readback. Это осторожная инженерная рекомендация, а не измеренный дефект на установленной сборке.\n\n**Риск:** семантика Undo и атомарности зависит от точного command scope, исключений, версии и контекста; не утверждать без теста, что создание фактически оказалось частичным в AC29 5101.\n\n### (B) Favorites и AutoText как состояние инструментов\n\nПредыдущий аудит сообщил, что при операциях Tapir с Favorites встречаются механизмы сохранения/восстановления настроек, а также восстановление состояния AutoText.\n\n**Следствие для APA:** в writer-тестах нужно контролировать не только BIM GUID, геометрию и материалы, но и настройки инструментов, которые потенциально меняются в процессе.\n\n**Риск:** исходные факты изложены по исходникам Tapir 1.5.9; фактическая эквивалентность сборки 1.5.10 НЕ ВЕРИФИЦИРОВАНА.\n\n### (C) API_ElementMemo и освобождение памяти\n\nВ исследованном ранее чтении полигонов упомянуты маски `APIMemoMask_Polygon`, `APIMemoMask_MeshPolyZ` и освобождение `ACAPI_DisposeElemMemoHdls`.\n\nВ другом участке ранее отмечался вызов `ACAPI_Element_GetMemo` без непосредственной проверки кода возврата. **Это сигнал для source-аудита, не доказанная утечка, сбой или ошибка продукта.**\n\n**Следствие для APA:** обеспечить проверку ошибок и освобождение memo на всех путях исполнения (особенно раннее завершение/исключения).\n\n## 3. Сравнение архитектур и выбор для MVP\n\n| Вариант | Что повторно используем | Риск | Решение |\n| --- | --- | --- | --- |\n| Существующий Native Model Dump + Tapir | Работающие контуры геометрии и данных | Версии API/команд требуют точной сверки | **СОХРАНИТЬ** |\n| Native SDK writers для пробелов Tapir | Отсутствующие операции на нативной модели | Undo/partial failure/memo state | **ИНТЕГРИРОВАТЬ ПОСЛЕ GATES** |\n| Собственный универсальный геометрический writer | Гипотетический контроль | Дублирует готовое, увеличивает сроки | **ОТКЛОНИТЬ для MVP** |\n| IFC writer вместо редактирования PLN | Внешний IFC формат | Не эквивалентен нативной редактируемости | **НЕ ЗАМЕНЯТЬ native writer** |\n\nСокращение времени/ускорение не измерено. Дорогих AI API и внешних платных моделей не требуется.\n\n## 4. Что НЕ подтверждено\n\n- Точные объявления всех методов в заголовках Graphisoft DevKit WIN.29.3100.\n- Статус API на build Archicad 29 / 5101.\n- Идентичность установленного Tapir 1.5.10 относительно доступных исходников 1.5.9.\n- OFFLINE/BUILD/LIVE результаты в текущем восстановлении.\n- Полная атомарность/частичная неатомарность writer в runtime.\n- Реальный возврат Favorites, AutoText и освобождение памяти на всех failure paths.\n\nНекоторые предполагаемые ссылки на `Support/Inc` ранее дали 404; по ним нельзя заявлять SDK header PASS.\n\n## 5. Следующий технический шаг\n\n**APA-P10.A01.S01 остаётся PARTIAL.** Для доведения acceptance до DONE:\n1. Прочитать настоящие заголовки/сигнатуры SDK 29.3100 из подтверждённого пути/артефакта.\n2. Сверить конкретные реализации Tapir с pinned tag/commit.\n3. Построить таблицу `GetDefaults/Create/GetMemo/Change/Dispose/Undo` с обработкой ошибок.\n4. Выполнить независимый source-аудит частичного возврата и корректного cleanup.\n5. Только в отдельно разрешённом изолированном проекте провести writer-live tests.\n\n**Следующий предлагаемый eligible S-ID:** `APA-P10.A01.S02` — этажи/материалы/поверхности/композиты/профили после чтения актуального контроллера.\n\n## 6. Независимому аудитору\n\nПроверить source line URL / DevKit 29.3100 SHA, версии исходников, документированную транзакционную семантику, отсутствие завышенных PASS; подтвердить, что восстановление сообщения и GitHub-публикация не доказывают технический source-аудит. При наличии дубликатов ссылаться на provenance и не удалять исходные документы.\n\n**Условия безопасности:** PLN/APX/main/master/проверенные кодовые ветки не изменялись; Work, Codex и платные модели/API не использовались.\n",
+  "next_substep": "APA-P10.A01.S02",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}
