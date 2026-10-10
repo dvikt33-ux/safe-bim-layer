@@ -1,0 +1,1638 @@
+{
+  "schema": "APA_PROJECT_PLAN_V1",
+  "revision": 1,
+  "project": "Archicad Project Accelerator / Archicad 29",
+  "repository": "dvikt33-ux/safe-bim-layer",
+  "canonical_branch": "research/apa-verified-results-hub-20261010",
+  "created_at": "2026-10-10",
+  "authority": "This file is the sole dispatch source. MASTER_PLAN.md is human-readable background; generated views are derived. A new task must be added here before execution.",
+  "policies": {
+    "dispatch": "Only READY/PARTIAL tasks with all depends_on DONE_PUBLISHED and no lease are candidates; BLOCKED never dispatched.",
+    "claim": "Optimistic GitHub SHA compare-and-swap: set status CLAIMED, owner, lease_until, claim_ref; check work_key uniqueness before work; stale leases are flagged, not silently stolen.",
+    "completion": "Only after GitHub report commit + API readback + receipt, explicit acceptance review, and plan status transition to DONE_PUBLISHED.",
+    "deduplication": "One work_key per task; related is not duplicate. Cross-branch historical artifacts are indexed before creating new research.",
+    "mutation": "Only canonical research branch. Never modify main/master, PLN, APX, tested code branches or merge without approval.",
+    "research": "Normal ChatGPT with GitHub connector; Deep Research and paid tools require explicit authorization.",
+    "evidence": "REPORTED != SOURCE_VERIFIED != BUILD_PASS != LIVE_PASS. Synthetic publisher success proves no Archicad runtime behavior."
+  },
+  "plans": {
+    "APA-P00": {
+      "id": "APA-P00",
+      "title": "Восстановление, единый реестр, управление исследовательским знанием",
+      "actions": {
+        "APA-P00.A01": {
+          "id": "APA-P00.A01",
+          "title": "Инвентаризация опубликованного"
+        },
+        "APA-P00.A02": {
+          "id": "APA-P00.A02",
+          "title": "Навигация, дедупликация и реестр"
+        },
+        "APA-P00.A03": {
+          "id": "APA-P00.A03",
+          "title": "Публикация и координация"
+        }
+      }
+    },
+    "APA-P10": {
+      "id": "APA-P10",
+      "title": "Независимый технический аудит Archicad 29",
+      "actions": {
+        "APA-P10.A01": {
+          "id": "APA-P10.A01",
+          "title": "SDK и нативная модель"
+        },
+        "APA-P10.A02": {
+          "id": "APA-P10.A02",
+          "title": "Инструменты и интеграции"
+        },
+        "APA-P10.A03": {
+          "id": "APA-P10.A03",
+          "title": "Сравнение архитектур"
+        }
+      }
+    },
+    "APA-P20": {
+      "id": "APA-P20",
+      "title": "Воспроизводимые тесты без записи в PLN по умолчанию",
+      "actions": {
+        "APA-P20.A01": {
+          "id": "APA-P20.A01",
+          "title": "Read-only preflight"
+        },
+        "APA-P20.A02": {
+          "id": "APA-P20.A02",
+          "title": "Изолированные live-тесты с разрешением"
+        }
+      }
+    },
+    "APA-P30": {
+      "id": "APA-P30",
+      "title": "Решение об архитектуре и MVP",
+      "actions": {
+        "APA-P30.A01": {
+          "id": "APA-P30.A01",
+          "title": "Техническое решение"
+        },
+        "APA-P30.A02": {
+          "id": "APA-P30.A02",
+          "title": "План MVP"
+        }
+      }
+    },
+    "APA-P40": {
+      "id": "APA-P40",
+      "title": "Отдельный gate автономизации",
+      "actions": {
+        "APA-P40.A01": {
+          "id": "APA-P40.A01",
+          "title": "Операционный контур"
+        }
+      }
+    },
+    "APA-P50": {
+      "id": "APA-P50",
+      "title": "Объединение тем, знаний и инструментов",
+      "actions": {
+        "APA-P50.A01": {
+          "id": "APA-P50.A01",
+          "title": "Связи исследований и дедупликация"
+        },
+        "APA-P50.A02": {
+          "id": "APA-P50.A02",
+          "title": "Единый каталог инструментов и интеграций"
+        },
+        "APA-P50.A03": {
+          "id": "APA-P50.A03",
+          "title": "Синтез и единый маршрут внедрения"
+        }
+      }
+    },
+    "APA-P60": {
+      "id": "APA-P60",
+      "title": "Единый управляющий APA Project Controller",
+      "actions": {
+        "APA-P60.A01": {
+          "id": "APA-P60.A01",
+          "title": "Структура, граф, диспетчеризация"
+        },
+        "APA-P60.A02": {
+          "id": "APA-P60.A02",
+          "title": "Интеграция с publisher и межчатовый handoff"
+        }
+      }
+    }
+  },
+  "artifacts": {
+    "ART-PLAN": {
+      "id": "ART-PLAN",
+      "uri": "docs/research/apa-results/MASTER_PLAN.md",
+      "kind": "DOCUMENT",
+      "verification": "READBACK_VERIFIED"
+    },
+    "ART-QUEUE": {
+      "id": "ART-QUEUE",
+      "uri": "docs/research/apa-results/RESEARCH_QUEUE.md",
+      "kind": "DOCUMENT",
+      "verification": "READBACK_VERIFIED"
+    },
+    "ART-STATUS": {
+      "id": "ART-STATUS",
+      "uri": "docs/research/apa-results/CURRENT_STATUS.md",
+      "kind": "DOCUMENT",
+      "verification": "READBACK_VERIFIED"
+    },
+    "ART-REGISTER": {
+      "id": "ART-REGISTER",
+      "uri": "docs/research/apa-results/ARTIFACT_REGISTER.md",
+      "kind": "DOCUMENT",
+      "verification": "READBACK_VERIFIED"
+    },
+    "ART-BRANCHES": {
+      "id": "ART-BRANCHES",
+      "uri": "docs/research/apa-results/inventories/FULL_BRANCH_INVENTORY.md",
+      "kind": "INVENTORY",
+      "verification": "SOURCE_READ"
+    },
+    "ART-BRANCH-JSON": {
+      "id": "ART-BRANCH-JSON",
+      "uri": "docs/research/apa-results/inventories/BRANCH_HEADS_20261010.json",
+      "kind": "INVENTORY",
+      "verification": "SOURCE_READ"
+    },
+    "ART-OS-AUDIT": {
+      "id": "ART-OS-AUDIT",
+      "uri": "docs/research/apa-results/runs/2026-10-10/apa-research-os-audit-user-supplied-20261010.md",
+      "kind": "REPORT",
+      "verification": "USER_SUPPLIED"
+    },
+    "ART-SDK-GET3D": {
+      "id": "ART-SDK-GET3D",
+      "uri": "docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md",
+      "kind": "REPORT",
+      "verification": "SOURCE_VERIFIED_DOCS"
+    },
+    "ART-SDK-SEO": {
+      "id": "ART-SDK-SEO",
+      "uri": "docs/research/apa-results/runs/2026-10-10/apa-discovery-20261010-102440-slinktrim-9f2b7.md",
+      "kind": "REPORT",
+      "verification": "SOURCE_VERIFIED_DOCS"
+    },
+    "ART-PUBLISHER": {
+      "id": "ART-PUBLISHER",
+      "uri": "tools/apa_publisher/publisher.py",
+      "kind": "CODE",
+      "verification": "READBACK_VERIFIED"
+    },
+    "ART-PUB-WORKFLOW": {
+      "id": "ART-PUB-WORKFLOW",
+      "uri": ".github/workflows/apa-research-publisher.yml",
+      "kind": "WORKFLOW",
+      "verification": "GITHUB_ACTIONS_E2E_PASS"
+    },
+    "ART-PUB-RECEIPT": {
+      "id": "ART-PUB-RECEIPT",
+      "uri": "docs/research/apa-results/receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json",
+      "kind": "RECEIPT",
+      "verification": "GITHUB_REST_READBACK_VERIFIED"
+    },
+    "ART-GDL-AUDIT": {
+      "id": "ART-GDL-AUDIT",
+      "uri": "docs/research/APA_TN-GDL-CREATE-01_BLOCKER1_AUDIT_2026-10-09.md",
+      "kind": "ARCHIVED_POINTER",
+      "verification": "PATH_UNVERIFIED_IN_CANONICAL"
+    },
+    "ART-TAPIR-AUDIT": {
+      "id": "ART-TAPIR-AUDIT",
+      "uri": "docs/tapir-1510-upstream-contract-audit-20261009.md",
+      "kind": "ARCHIVED_POINTER",
+      "verification": "PATH_UNVERIFIED_IN_CANONICAL"
+    },
+    "ART-PR20": {
+      "id": "ART-PR20",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/20",
+      "kind": "EXTERNAL",
+      "verification": "REPORTED"
+    },
+    "ART-PR21": {
+      "id": "ART-PR21",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/21",
+      "kind": "EXTERNAL",
+      "verification": "REPORTED"
+    },
+    "ART-ISSUE23": {
+      "id": "ART-ISSUE23",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/issues/23",
+      "kind": "EXTERNAL",
+      "verification": "READBACK_VERIFIED"
+    },
+    "ART-CONTROLLER": {
+      "id": "ART-CONTROLLER",
+      "uri": "docs/research/apa-results/control/PROJECT_PLAN.json",
+      "kind": "STRUCTURE",
+      "verification": "CONTROL_SOURCE"
+    }
+  },
+  "tasks": {
+    "APA-P00.A01.S01": {
+      "id": "APA-P00.A01.S01",
+      "plan_id": "APA-P00",
+      "action_id": "APA-P00.A01",
+      "title": "Найти и прочитать исходный hub",
+      "kind": "CONTROL",
+      "status": "DONE_PUBLISHED",
+      "priority": 0,
+      "work_key": "apa-p00-a01-s01",
+      "depends_on": [],
+      "related": [],
+      "inputs": [
+        "ART-REGISTER"
+      ],
+      "outputs": [
+        "Перечень файлов с проверкой GitHub readback"
+      ],
+      "acceptance": "Перечень файлов с проверкой GitHub readback",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [
+        "ART-REGISTER"
+      ],
+      "blocked_reason": null
+    },
+    "APA-P00.A01.S02": {
+      "id": "APA-P00.A01.S02",
+      "plan_id": "APA-P00",
+      "action_id": "APA-P00.A01",
+      "title": "Найти архивные исследования и индекс",
+      "kind": "CONTROL",
+      "status": "DONE_PUBLISHED",
+      "priority": 0,
+      "work_key": "apa-p00-a01-s02",
+      "depends_on": [],
+      "related": [],
+      "inputs": [
+        "ART-REGISTER"
+      ],
+      "outputs": [
+        "Ссылки на архивные документы и происхождение"
+      ],
+      "acceptance": "Ссылки на архивные документы и происхождение",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [
+        "ART-REGISTER"
+      ],
+      "blocked_reason": null
+    },
+    "APA-P00.A01.S03": {
+      "id": "APA-P00.A01.S03",
+      "plan_id": "APA-P00",
+      "action_id": "APA-P00.A01",
+      "title": "Инвентаризировать 72 ветки и PR, проверить уникальные результаты и ancestry",
+      "kind": "CONSOLIDATION",
+      "status": "PARTIAL",
+      "priority": 0,
+      "work_key": "apa-p00-a01-s03",
+      "depends_on": [
+        "APA-P00.A01.S02"
+      ],
+      "related": [
+        "APA-P50.A01.S01"
+      ],
+      "inputs": [
+        "ART-BRANCHES",
+        "ART-BRANCH-JSON"
+      ],
+      "outputs": [
+        "Список уникальных артефактов, SHA, дубликатов и неизвестного"
+      ],
+      "acceptance": "Список уникальных артефактов, SHA, дубликатов и неизвестного",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P00.A01.S04": {
+      "id": "APA-P00.A01.S04",
+      "plan_id": "APA-P00",
+      "action_id": "APA-P00.A01",
+      "title": "Сопоставить локальные и удалённые SHA без догадок",
+      "kind": "VALIDATION",
+      "status": "BLOCKED",
+      "priority": 1,
+      "work_key": "apa-p00-a01-s04",
+      "depends_on": [
+        "APA-P00.A01.S03"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-BRANCHES"
+      ],
+      "outputs": [
+        "Подтверждённый доступ к локальным источникам"
+      ],
+      "acceptance": "Подтверждённый доступ к локальным источникам",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": "Dependency, external access or explicit owner approval required"
+    },
+    "APA-P00.A02.S01": {
+      "id": "APA-P00.A02.S01",
+      "plan_id": "APA-P00",
+      "action_id": "APA-P00.A02",
+      "title": "Установить единственную каноническую исследовательскую ветку",
+      "kind": "CONTROL",
+      "status": "DONE_PUBLISHED",
+      "priority": 0,
+      "work_key": "apa-p00-a02-s01",
+      "depends_on": [],
+      "related": [],
+      "inputs": [
+        "ART-PLAN"
+      ],
+      "outputs": [
+        "Каноническая ветка определена"
+      ],
+      "acceptance": "Каноническая ветка определена",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [
+        "ART-PLAN"
+      ],
+      "blocked_reason": null
+    },
+    "APA-P00.A02.S02": {
+      "id": "APA-P00.A02.S02",
+      "plan_id": "APA-P00",
+      "action_id": "APA-P00.A02",
+      "title": "Создать hub, план, реестр, очередь, протоколы",
+      "kind": "CONTROL",
+      "status": "DONE_PUBLISHED",
+      "priority": 0,
+      "work_key": "apa-p00-a02-s02",
+      "depends_on": [],
+      "related": [],
+      "inputs": [
+        "ART-PLAN",
+        "ART-QUEUE",
+        "ART-STATUS"
+      ],
+      "outputs": [
+        "Опубликованные документы с readback"
+      ],
+      "acceptance": "Опубликованные документы с readback",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [
+        "ART-PLAN",
+        "ART-QUEUE",
+        "ART-STATUS"
+      ],
+      "blocked_reason": null
+    },
+    "APA-P00.A02.S03": {
+      "id": "APA-P00.A02.S03",
+      "plan_id": "APA-P00",
+      "action_id": "APA-P00.A02",
+      "title": "Связать старые находки с S-ID и удалить логические дубли без удаления оригиналов",
+      "kind": "CONSOLIDATION",
+      "status": "READY",
+      "priority": 0,
+      "work_key": "apa-p00-a02-s03",
+      "depends_on": [
+        "APA-P00.A02.S02"
+      ],
+      "related": [
+        "APA-P50.A01.S02"
+      ],
+      "inputs": [
+        "ART-REGISTER",
+        "ART-BRANCHES"
+      ],
+      "outputs": [
+        "Evidence map и superseded_by для дублей"
+      ],
+      "acceptance": "Evidence map и superseded_by для дублей",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P00.A02.S04": {
+      "id": "APA-P00.A02.S04",
+      "plan_id": "APA-P00",
+      "action_id": "APA-P00.A02",
+      "title": "Контролировать receipt/commit/readback всех завершённых отчётов",
+      "kind": "VALIDATION",
+      "status": "PARTIAL",
+      "priority": 1,
+      "work_key": "apa-p00-a02-s04",
+      "depends_on": [
+        "APA-P00.A02.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-PUB-RECEIPT"
+      ],
+      "outputs": [
+        "Нет ложных DONE без квитанции"
+      ],
+      "acceptance": "Нет ложных DONE без квитанции",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P00.A03.S01": {
+      "id": "APA-P00.A03.S01",
+      "plan_id": "APA-P00",
+      "action_id": "APA-P00.A03",
+      "title": "Проверить write/readback для всех классов исполнителей",
+      "kind": "VALIDATION",
+      "status": "PARTIAL",
+      "priority": 0,
+      "work_key": "apa-p00-a03-s01",
+      "depends_on": [
+        "APA-P00.A02.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-PUB-RECEIPT"
+      ],
+      "outputs": [
+        "Capability matrix по каждому исполнителю"
+      ],
+      "acceptance": "Capability matrix по каждому исполнителю",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P00.A03.S02": {
+      "id": "APA-P00.A03.S02",
+      "plan_id": "APA-P00",
+      "action_id": "APA-P00.A03",
+      "title": "Выбрать разрешённый периодический research runner без платных API",
+      "kind": "CONTROL",
+      "status": "BLOCKED",
+      "priority": 1,
+      "work_key": "apa-p00-a03-s02",
+      "depends_on": [
+        "APA-P00.A03.S01"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-OS-AUDIT"
+      ],
+      "outputs": [
+        "Подтверждённый executor, бюджет, разрешения"
+      ],
+      "acceptance": "Подтверждённый executor, бюджет, разрешения",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": "Dependency, external access or explicit owner approval required"
+    },
+    "APA-P00.A03.S03": {
+      "id": "APA-P00.A03.S03",
+      "plan_id": "APA-P00",
+      "action_id": "APA-P00.A03",
+      "title": "Publisher, дедупликация, retry, heartbeat и ошибки",
+      "kind": "BUILD",
+      "status": "PARTIAL",
+      "priority": 0,
+      "work_key": "apa-p00-a03-s03",
+      "depends_on": [
+        "APA-P00.A02.S02"
+      ],
+      "related": [
+        "APA-P60.A02.S02"
+      ],
+      "inputs": [
+        "ART-PUBLISHER",
+        "ART-PUB-RECEIPT"
+      ],
+      "outputs": [
+        "Publisher E2E + оставшиеся recovery/heartbeat gates"
+      ],
+      "acceptance": "Publisher E2E + оставшиеся recovery/heartbeat gates",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P00.A03.S04": {
+      "id": "APA-P00.A03.S04",
+      "plan_id": "APA-P00",
+      "action_id": "APA-P00.A03",
+      "title": "Два независимых SOURCE цикла с GitHub readback",
+      "kind": "VALIDATION",
+      "status": "PARTIAL",
+      "priority": 1,
+      "work_key": "apa-p00-a03-s04",
+      "depends_on": [
+        "APA-P00.A03.S03"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-PUB-RECEIPT"
+      ],
+      "outputs": [
+        "Два разных SOURCE run_id, оба DONE_PUBLISHED"
+      ],
+      "acceptance": "Два разных SOURCE run_id, оба DONE_PUBLISHED",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P10.A01.S01": {
+      "id": "APA-P10.A01.S01",
+      "plan_id": "APA-P10",
+      "action_id": "APA-P10.A01",
+      "title": "AC29 SDK headers и native create/change/get сигнатуры",
+      "kind": "RESEARCH",
+      "status": "PARTIAL",
+      "priority": 1,
+      "work_key": "apa-p10-a01-s01",
+      "depends_on": [
+        "APA-P00.A02.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-SDK-GET3D",
+        "ART-SDK-SEO"
+      ],
+      "outputs": [
+        "Версии SDK, первоисточники, проверенные сигнатуры"
+      ],
+      "acceptance": "Версии SDK, первоисточники, проверенные сигнатуры",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P10.A01.S02": {
+      "id": "APA-P10.A01.S02",
+      "plan_id": "APA-P10",
+      "action_id": "APA-P10.A01",
+      "title": "Этажи, building materials, surfaces, composites, profiles, связи",
+      "kind": "RESEARCH",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "apa-p10-a01-s02",
+      "depends_on": [
+        "APA-P00.A02.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-REGISTER"
+      ],
+      "outputs": [
+        "Матрица native elements/attributes и readback"
+      ],
+      "acceptance": "Матрица native elements/attributes и readback",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P10.A01.S03": {
+      "id": "APA-P10.A01.S03",
+      "plan_id": "APA-P10",
+      "action_id": "APA-P10.A01",
+      "title": "Morph/Roof/Shell/Openings/SEO/3D dump",
+      "kind": "RESEARCH",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "apa-p10-a01-s03",
+      "depends_on": [
+        "APA-P00.A02.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-SDK-SEO"
+      ],
+      "outputs": [
+        "Матрица покрытия и побочных эффектов"
+      ],
+      "acceptance": "Матрица покрытия и побочных эффектов",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P10.A02.S01": {
+      "id": "APA-P10.A02.S01",
+      "plan_id": "APA-P10",
+      "action_id": "APA-P10.A02",
+      "title": "Tapir публичные версии и Python/JSON vs локальная 1.5.10",
+      "kind": "RESEARCH",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "apa-p10-a02-s01",
+      "depends_on": [
+        "APA-P00.A02.S02"
+      ],
+      "related": [
+        "APA-P50.A02.S01"
+      ],
+      "inputs": [
+        "ART-REGISTER"
+      ],
+      "outputs": [
+        "Compatibility matrix с source SHA"
+      ],
+      "acceptance": "Compatibility matrix с source SHA",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P10.A02.S02": {
+      "id": "APA-P10.A02.S02",
+      "plan_id": "APA-P10",
+      "action_id": "APA-P10.A02",
+      "title": "GDL/TN, Unicode, target identity и 92 ошибок",
+      "kind": "RESEARCH",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "apa-p10-a02-s02",
+      "depends_on": [
+        "APA-P00.A02.S02"
+      ],
+      "related": [
+        "APA-P50.A02.S01"
+      ],
+      "inputs": [
+        "ART-PR20"
+      ],
+      "outputs": [
+        "Разбор blockers без ложного LIVE"
+      ],
+      "acceptance": "Разбор blockers без ложного LIVE",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P10.A02.S03": {
+      "id": "APA-P10.A02.S03",
+      "plan_id": "APA-P10",
+      "action_id": "APA-P10.A02",
+      "title": "MCP/IFC/openBIM и альтернативы",
+      "kind": "RESEARCH",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "apa-p10-a02-s03",
+      "depends_on": [
+        "APA-P00.A02.S02"
+      ],
+      "related": [
+        "APA-P50.A02.S01"
+      ],
+      "inputs": [
+        "ART-REGISTER"
+      ],
+      "outputs": [
+        "Матрица альтернатив с границами"
+      ],
+      "acceptance": "Матрица альтернатив с границами",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P10.A02.S04": {
+      "id": "APA-P10.A02.S04",
+      "plan_id": "APA-P10",
+      "action_id": "APA-P10.A02",
+      "title": "Native MEP/Tapir MEP команды, трассы, порты",
+      "kind": "RESEARCH",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "apa-p10-a02-s04",
+      "depends_on": [
+        "APA-P00.A02.S02"
+      ],
+      "related": [
+        "APA-P50.A02.S01"
+      ],
+      "inputs": [
+        "ART-REGISTER"
+      ],
+      "outputs": [
+        "MEP command/route/port matrix"
+      ],
+      "acceptance": "MEP command/route/port matrix",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P10.A03.S01": {
+      "id": "APA-P10.A03.S01",
+      "plan_id": "APA-P10",
+      "action_id": "APA-P10.A03",
+      "title": "Сравнить native C++, Tapir/Python, IFC и hybrid",
+      "kind": "INTEGRATION",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "apa-p10-a03-s01",
+      "depends_on": [
+        "APA-P10.A01.S01",
+        "APA-P10.A02.S01",
+        "APA-P10.A02.S03"
+      ],
+      "related": [
+        "APA-P50.A02.S02"
+      ],
+      "inputs": [
+        "ART-REGISTER"
+      ],
+      "outputs": [
+        "Decision alternatives и зависимости"
+      ],
+      "acceptance": "Decision alternatives и зависимости",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P10.A03.S02": {
+      "id": "APA-P10.A03.S02",
+      "plan_id": "APA-P10",
+      "action_id": "APA-P10.A03",
+      "title": "Сравнить performance, обратимость, тестируемость, стоимость",
+      "kind": "INTEGRATION",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "apa-p10-a03-s02",
+      "depends_on": [
+        "APA-P10.A03.S01"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-REGISTER"
+      ],
+      "outputs": [
+        "Оценка без выдуманных измерений"
+      ],
+      "acceptance": "Оценка без выдуманных измерений",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P20.A01.S01": {
+      "id": "APA-P20.A01.S01",
+      "plan_id": "APA-P20",
+      "action_id": "APA-P20.A01",
+      "title": "Read-only provenance AC29 SDK/APX/source SHA",
+      "kind": "VALIDATION",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "apa-p20-a01-s01",
+      "depends_on": [
+        "APA-P10.A01.S01"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-PR20"
+      ],
+      "outputs": [
+        "Проверенные версии и commit"
+      ],
+      "acceptance": "Проверенные версии и commit",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P20.A01.S02": {
+      "id": "APA-P20.A01.S02",
+      "plan_id": "APA-P20",
+      "action_id": "APA-P20.A01",
+      "title": "Read-only доступность команд, GDL, MEP, model dump",
+      "kind": "VALIDATION",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "apa-p20-a01-s02",
+      "depends_on": [
+        "APA-P20.A01.S01"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-REGISTER"
+      ],
+      "outputs": [
+        "Raw evidence, no write"
+      ],
+      "acceptance": "Raw evidence, no write",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P20.A01.S03": {
+      "id": "APA-P20.A01.S03",
+      "plan_id": "APA-P20",
+      "action_id": "APA-P20.A01",
+      "title": "Сохранить PASS/FAIL с raw evidence",
+      "kind": "VALIDATION",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "apa-p20-a01-s03",
+      "depends_on": [
+        "APA-P20.A01.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-REGISTER"
+      ],
+      "outputs": [
+        "Полные воспроизводимые логи"
+      ],
+      "acceptance": "Полные воспроизводимые логи",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P20.A02.S01": {
+      "id": "APA-P20.A02.S01",
+      "plan_id": "APA-P20",
+      "action_id": "APA-P20.A02",
+      "title": "План изолированных тестов, rollback, критерии",
+      "kind": "CONTROL",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "apa-p20-a02-s01",
+      "depends_on": [
+        "APA-P20.A01.S03"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-PLAN"
+      ],
+      "outputs": [
+        "Test plan с защитами"
+      ],
+      "acceptance": "Test plan с защитами",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P20.A02.S02": {
+      "id": "APA-P20.A02.S02",
+      "plan_id": "APA-P20",
+      "action_id": "APA-P20.A02",
+      "title": "Получить отдельное разрешение на изменение BIM/APX",
+      "kind": "CONTROL",
+      "status": "BLOCKED",
+      "priority": 2,
+      "work_key": "apa-p20-a02-s02",
+      "depends_on": [
+        "APA-P20.A02.S01"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-PLAN"
+      ],
+      "outputs": [
+        "Явное разрешение владельца"
+      ],
+      "acceptance": "Явное разрешение владельца",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": true,
+      "evidence": [],
+      "blocked_reason": "Dependency, external access or explicit owner approval required"
+    },
+    "APA-P20.A02.S03": {
+      "id": "APA-P20.A02.S03",
+      "plan_id": "APA-P20",
+      "action_id": "APA-P20.A02",
+      "title": "Протоколировать разрешённые live тесты",
+      "kind": "VALIDATION",
+      "status": "BLOCKED",
+      "priority": 2,
+      "work_key": "apa-p20-a02-s03",
+      "depends_on": [
+        "APA-P20.A02.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-PLAN"
+      ],
+      "outputs": [
+        "LIVE PASS только с разрешением и raw evidence"
+      ],
+      "acceptance": "LIVE PASS только с разрешением и raw evidence",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": true,
+      "evidence": [],
+      "blocked_reason": "Dependency, external access or explicit owner approval required"
+    },
+    "APA-P30.A01.S01": {
+      "id": "APA-P30.A01.S01",
+      "plan_id": "APA-P30",
+      "action_id": "APA-P30.A01",
+      "title": "Decision matrix для нативной BIM-геометрии",
+      "kind": "INTEGRATION",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "apa-p30-a01-s01",
+      "depends_on": [
+        "APA-P10.A03.S02",
+        "APA-P20.A01.S03"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-REGISTER"
+      ],
+      "outputs": [
+        "Выбран shortest credible path"
+      ],
+      "acceptance": "Выбран shortest credible path",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P30.A01.S02": {
+      "id": "APA-P30.A01.S02",
+      "plan_id": "APA-P30",
+      "action_id": "APA-P30.A01",
+      "title": "Блокировки и альтернативные маршруты",
+      "kind": "INTEGRATION",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "apa-p30-a01-s02",
+      "depends_on": [
+        "APA-P30.A01.S01"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-REGISTER"
+      ],
+      "outputs": [
+        "Fallback plan"
+      ],
+      "acceptance": "Fallback plan",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P30.A02.S01": {
+      "id": "APA-P30.A02.S01",
+      "plan_id": "APA-P30",
+      "action_id": "APA-P30.A02",
+      "title": "MVP: этажи → атрибуты → геометрия → библиотека → MEP",
+      "kind": "BUILD",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "apa-p30-a02-s01",
+      "depends_on": [
+        "APA-P30.A01.S01"
+      ],
+      "related": [
+        "APA-P50.A03.S01"
+      ],
+      "inputs": [
+        "ART-PLAN"
+      ],
+      "outputs": [
+        "Milestones и входные условия"
+      ],
+      "acceptance": "Milestones и входные условия",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P30.A02.S02": {
+      "id": "APA-P30.A02.S02",
+      "plan_id": "APA-P30",
+      "action_id": "APA-P30.A02",
+      "title": "Acceptance gates и rollback по этапам MVP",
+      "kind": "VALIDATION",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "apa-p30-a02-s02",
+      "depends_on": [
+        "APA-P30.A02.S01"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-PLAN"
+      ],
+      "outputs": [
+        "PASS/FAIL, readback, rollback"
+      ],
+      "acceptance": "PASS/FAIL, readback, rollback",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P40.A01.S01": {
+      "id": "APA-P40.A01.S01",
+      "plan_id": "APA-P40",
+      "action_id": "APA-P40.A01",
+      "title": "Утвердить 24/7 executor и GitHub auth",
+      "kind": "CONTROL",
+      "status": "BLOCKED",
+      "priority": 2,
+      "work_key": "apa-p40-a01-s01",
+      "depends_on": [
+        "APA-P00.A03.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-OS-AUDIT"
+      ],
+      "outputs": [
+        "Внешний runner, бюджет и доступ"
+      ],
+      "acceptance": "Внешний runner, бюджет и доступ",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": "Dependency, external access or explicit owner approval required"
+    },
+    "APA-P40.A01.S02": {
+      "id": "APA-P40.A01.S02",
+      "plan_id": "APA-P40",
+      "action_id": "APA-P40.A01",
+      "title": "Периодический research→publish→readback цикл",
+      "kind": "BUILD",
+      "status": "BLOCKED",
+      "priority": 2,
+      "work_key": "apa-p40-a01-s02",
+      "depends_on": [
+        "APA-P40.A01.S01"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-PUBLISHER"
+      ],
+      "outputs": [
+        "Наблюдаемые unattended циклы"
+      ],
+      "acceptance": "Наблюдаемые unattended циклы",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": true,
+      "evidence": [],
+      "blocked_reason": "Dependency, external access or explicit owner approval required"
+    },
+    "APA-P40.A01.S03": {
+      "id": "APA-P40.A01.S03",
+      "plan_id": "APA-P40",
+      "action_id": "APA-P40.A01",
+      "title": "Watchdog пропусков и журнал ошибок",
+      "kind": "BUILD",
+      "status": "BLOCKED",
+      "priority": 2,
+      "work_key": "apa-p40-a01-s03",
+      "depends_on": [
+        "APA-P40.A01.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-OS-AUDIT"
+      ],
+      "outputs": [
+        "Heartbeat и alarm"
+      ],
+      "acceptance": "Heartbeat и alarm",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": "Dependency, external access or explicit owner approval required"
+    },
+    "APA-P40.A01.S04": {
+      "id": "APA-P40.A01.S04",
+      "plan_id": "APA-P40",
+      "action_id": "APA-P40.A01",
+      "title": "24-часовое доказательство непрерывности",
+      "kind": "VALIDATION",
+      "status": "BLOCKED",
+      "priority": 2,
+      "work_key": "apa-p40-a01-s04",
+      "depends_on": [
+        "APA-P40.A01.S03"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-OS-AUDIT"
+      ],
+      "outputs": [
+        "Реальные логи за 24h"
+      ],
+      "acceptance": "Реальные логи за 24h",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": "Dependency, external access or explicit owner approval required"
+    },
+    "APA-P50.A01.S01": {
+      "id": "APA-P50.A01.S01",
+      "plan_id": "APA-P50",
+      "action_id": "APA-P50.A01",
+      "title": "Карта связей: исследования ↔ S-ID ↔ артефакты ↔ PR",
+      "kind": "CONSOLIDATION",
+      "status": "READY",
+      "priority": 0,
+      "work_key": "apa-p50-a01-s01",
+      "depends_on": [
+        "APA-P00.A02.S02"
+      ],
+      "related": [
+        "APA-P00.A01.S03"
+      ],
+      "inputs": [
+        "ART-REGISTER",
+        "ART-BRANCHES"
+      ],
+      "outputs": [
+        "Traceability matrix, orphan report list"
+      ],
+      "acceptance": "Traceability matrix, orphan report list",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P50.A01.S02": {
+      "id": "APA-P50.A01.S02",
+      "plan_id": "APA-P50",
+      "action_id": "APA-P50.A01",
+      "title": "Дедупликация по work_key/source revision/claim",
+      "kind": "CONSOLIDATION",
+      "status": "READY",
+      "priority": 0,
+      "work_key": "apa-p50-a01-s02",
+      "depends_on": [
+        "APA-P50.A01.S01"
+      ],
+      "related": [
+        "APA-P00.A02.S03"
+      ],
+      "inputs": [
+        "ART-REGISTER"
+      ],
+      "outputs": [
+        "Duplicate map и superseded_by"
+      ],
+      "acceptance": "Duplicate map и superseded_by",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P50.A01.S03": {
+      "id": "APA-P50.A01.S03",
+      "plan_id": "APA-P50",
+      "action_id": "APA-P50.A01",
+      "title": "Сводить несколько исследований одной темы в решение",
+      "kind": "INTEGRATION",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "apa-p50-a01-s03",
+      "depends_on": [
+        "APA-P50.A01.S01"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-REGISTER"
+      ],
+      "outputs": [
+        "Theme synthesis с conflicts/unknown"
+      ],
+      "acceptance": "Theme synthesis с conflicts/unknown",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P50.A02.S01": {
+      "id": "APA-P50.A02.S01",
+      "plan_id": "APA-P50",
+      "action_id": "APA-P50.A02",
+      "title": "Единый каталог AC29 SDK/Tapir/Python/GDL/IFC/MEP инструментов",
+      "kind": "RESEARCH",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "apa-p50-a02-s01",
+      "depends_on": [
+        "APA-P00.A02.S02"
+      ],
+      "related": [
+        "APA-P10.A02.S01",
+        "APA-P10.A02.S02",
+        "APA-P10.A02.S03",
+        "APA-P10.A02.S04"
+      ],
+      "inputs": [
+        "ART-REGISTER"
+      ],
+      "outputs": [
+        "Capability matrix, версии, пересечения"
+      ],
+      "acceptance": "Capability matrix, версии, пересечения",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P50.A02.S02": {
+      "id": "APA-P50.A02.S02",
+      "plan_id": "APA-P50",
+      "action_id": "APA-P50.A02",
+      "title": "Выявить дубли функций между инструментами и выбрать adapter boundaries",
+      "kind": "INTEGRATION",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "apa-p50-a02-s02",
+      "depends_on": [
+        "APA-P50.A02.S01"
+      ],
+      "related": [
+        "APA-P10.A03.S01"
+      ],
+      "inputs": [
+        "ART-REGISTER"
+      ],
+      "outputs": [
+        "Integration architecture + canonical interfaces"
+      ],
+      "acceptance": "Integration architecture + canonical interfaces",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P50.A02.S03": {
+      "id": "APA-P50.A02.S03",
+      "plan_id": "APA-P50",
+      "action_id": "APA-P50.A02",
+      "title": "Спланировать безопасное объединение инструментов",
+      "kind": "BUILD",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "apa-p50-a02-s03",
+      "depends_on": [
+        "APA-P50.A02.S02",
+        "APA-P30.A01.S01"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-PLAN"
+      ],
+      "outputs": [
+        "Non-invasive integration sequence"
+      ],
+      "acceptance": "Non-invasive integration sequence",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": true,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P50.A03.S01": {
+      "id": "APA-P50.A03.S01",
+      "plan_id": "APA-P50",
+      "action_id": "APA-P50.A03",
+      "title": "Синтез тем: источник → решение → MVP → тесты",
+      "kind": "INTEGRATION",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "apa-p50-a03-s01",
+      "depends_on": [
+        "APA-P50.A01.S03",
+        "APA-P50.A02.S02"
+      ],
+      "related": [
+        "APA-P30.A02.S01"
+      ],
+      "inputs": [
+        "ART-PLAN"
+      ],
+      "outputs": [
+        "One implementation map"
+      ],
+      "acceptance": "One implementation map",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P50.A03.S02": {
+      "id": "APA-P50.A03.S02",
+      "plan_id": "APA-P50",
+      "action_id": "APA-P50.A03",
+      "title": "Проверка готовности интеграции и отсутствия повторов",
+      "kind": "VALIDATION",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "apa-p50-a03-s02",
+      "depends_on": [
+        "APA-P50.A03.S01"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-REGISTER"
+      ],
+      "outputs": [
+        "Evidence-backed go/no-go"
+      ],
+      "acceptance": "Evidence-backed go/no-go",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P60.A01.S01": {
+      "id": "APA-P60.A01.S01",
+      "plan_id": "APA-P60",
+      "action_id": "APA-P60.A01",
+      "title": "Зафиксировать единый машинный костяк проекта и ID",
+      "kind": "CONTROL",
+      "status": "DONE_PUBLISHED",
+      "priority": 0,
+      "work_key": "apa-p60-a01-s01",
+      "depends_on": [
+        "APA-P00.A02.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-CONTROLLER"
+      ],
+      "outputs": [
+        "Структурированный план сохранён и readback"
+      ],
+      "acceptance": "Структурированный план сохранён и readback",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [
+        "ART-CONTROLLER"
+      ],
+      "blocked_reason": null
+    },
+    "APA-P60.A01.S02": {
+      "id": "APA-P60.A01.S02",
+      "plan_id": "APA-P60",
+      "action_id": "APA-P60.A01",
+      "title": "Валидатор DAG, статусов, duplicate work и gates",
+      "kind": "BUILD",
+      "status": "READY",
+      "priority": 0,
+      "work_key": "apa-p60-a01-s02",
+      "depends_on": [
+        "APA-P60.A01.S01"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-CONTROLLER"
+      ],
+      "outputs": [
+        "Offline tests + fail-closed validation"
+      ],
+      "acceptance": "Offline tests + fail-closed validation",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P60.A01.S03": {
+      "id": "APA-P60.A01.S03",
+      "plan_id": "APA-P60",
+      "action_id": "APA-P60.A01",
+      "title": "Генератор единого control board, next work, context pack",
+      "kind": "BUILD",
+      "status": "READY",
+      "priority": 0,
+      "work_key": "apa-p60-a01-s03",
+      "depends_on": [
+        "APA-P60.A01.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-CONTROLLER"
+      ],
+      "outputs": [
+        "Автоматические views и provenance"
+      ],
+      "acceptance": "Автоматические views и provenance",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P60.A01.S04": {
+      "id": "APA-P60.A01.S04",
+      "plan_id": "APA-P60",
+      "action_id": "APA-P60.A01",
+      "title": "End-to-end controller workflow и readback",
+      "kind": "VALIDATION",
+      "status": "READY",
+      "priority": 0,
+      "work_key": "apa-p60-a01-s04",
+      "depends_on": [
+        "APA-P60.A01.S03"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-PUB-WORKFLOW"
+      ],
+      "outputs": [
+        "Actions success и generated views readback"
+      ],
+      "acceptance": "Actions success и generated views readback",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P60.A02.S01": {
+      "id": "APA-P60.A02.S01",
+      "plan_id": "APA-P60",
+      "action_id": "APA-P60.A02",
+      "title": "Handoff protocol: каждый чат читает control plan, берёт S-ID",
+      "kind": "CONTROL",
+      "status": "READY",
+      "priority": 0,
+      "work_key": "apa-p60-a02-s01",
+      "depends_on": [
+        "APA-P60.A01.S03"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-PLAN"
+      ],
+      "outputs": [
+        "Контекст доступен без пересылки чатов"
+      ],
+      "acceptance": "Контекст доступен без пересылки чатов",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P60.A02.S02": {
+      "id": "APA-P60.A02.S02",
+      "plan_id": "APA-P60",
+      "action_id": "APA-P60.A02",
+      "title": "Связать publisher inbox с controller plan, запретить orphan runs",
+      "kind": "INTEGRATION",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "apa-p60-a02-s02",
+      "depends_on": [
+        "APA-P60.A01.S02"
+      ],
+      "related": [
+        "APA-P00.A03.S03"
+      ],
+      "inputs": [
+        "ART-PUBLISHER"
+      ],
+      "outputs": [
+        "Publisher rejects unknown S-ID"
+      ],
+      "acceptance": "Publisher rejects unknown S-ID",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P60.A02.S03": {
+      "id": "APA-P60.A02.S03",
+      "plan_id": "APA-P60",
+      "action_id": "APA-P60.A02",
+      "title": "Протестировать CAS-claim, lease, duplicate prevention",
+      "kind": "VALIDATION",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "apa-p60-a02-s03",
+      "depends_on": [
+        "APA-P60.A02.S01",
+        "APA-P60.A02.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-CONTROLLER"
+      ],
+      "outputs": [
+        "Два исполнителя не получают один work_key"
+      ],
+      "acceptance": "Два исполнителя не получают один work_key",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    }
+  }
+}
