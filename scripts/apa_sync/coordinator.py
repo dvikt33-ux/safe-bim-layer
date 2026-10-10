@@ -14,7 +14,8 @@ from urllib.parse import parse_qs, urlsplit
 
 EVENT_PREFIX = "APA_EVENT_V1"
 # A verified ChatGPT Slack integration appends its attribution line *after*
-# otherwise-valid APA events. Accept ONLY the known sender ID with or without\n# Slack's optional rendered display label, not
+# otherwise-valid APA events. Accept ONLY the known sender ID with or without
+# Slack's optional rendered display label, not
 # arbitrary trailing prose. The footer is not evidence or an authority claim.
 EVENT_PATTERN = re.compile(
     r"\AAPA_EVENT_V1\s*\n[\s\S]*?```(?:json|JSON)?\s*"
