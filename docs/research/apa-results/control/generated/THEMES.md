@@ -14,6 +14,7 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 | KNOWLEDGE_GRAPH — Сведение исследований и доказательств | 3 | 0 | 1 | ART-BRANCHES, ART-REGISTER, ART-TRACE-RECEIPT, ART-TRACE-REPORT |
 | MEP — MEP native и Tapir | 1 | 0 | 1 | ART-REGISTER |
 | MVP — MVP и внедрение | 2 | 0 | 0 | ART-PLAN |
+| PRODUCT_DEVELOPMENT — Полный цикл разработки APA: требования → узлы/расчёт → BIM → MEP → выпуск | 23 | 0 | 1 | ART-APA-FULL-CYCLE, ART-APA-PLP-CONTRACT, ART-APA-REUSE-NATIVE-20261011, ART-APA-PR16 |
 | PUBLISHER — Публикация, квитанции и capability | 4 | 0 | 2 | ART-OS-AUDIT, ART-PUB-RECEIPT, ART-PUBLISHER |
 | SDK_NATIVE — Archicad 29 native SDK | 3 | 0 | 3 | ART-REGISTER, ART-SDK-GET3D, ART-SDK-SEO, ART-APA-ATTR-STORY-SLAB-20261011 |
 | SYNTHESIS — Синтез research → implementation | 2 | 0 | 0 | ART-PLAN, ART-REGISTER |
@@ -81,6 +82,32 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 
 - APA-P30.A02.S01 [BUILD/READY]: MVP: этажи → атрибуты → геометрия → библиотека → MEP; work_key=mvp-implementation-milestones; related=APA-P50.A03.S01
 - APA-P30.A02.S02 [VALIDATION/READY]: Acceptance gates и rollback по этапам MVP; work_key=mvp-acceptance-rollback; related=none
+
+### PRODUCT_DEVELOPMENT — Полный цикл разработки APA: требования → узлы/расчёт → BIM → MEP → выпуск
+
+- APA-P70.A01.S01 [CONSOLIDATION/READY]: Сопоставить полный продуктовый контракт с существующим кодом и исследованиями; work_key=product-contract-and-code-baseline; related=none
+- APA-P70.A01.S02 [CONSOLIDATION/READY]: Привязать все значимые наработки к функциям продукта, выявить пробелы; work_key=product-evidence-to-capability-trace; related=none
+- APA-P70.A01.S03 [INTEGRATION/READY]: Утвердить минимальные границы интеграции и порядок сквозных поставок; work_key=product-integration-boundaries; related=none
+- APA-P70.A02.S01 [BUILD/READY]: Собрать семантический контракт задания, участка, этажей и помещений; work_key=project-brief-and-story-contract; related=none
+- APA-P70.A02.S02 [BUILD/READY]: Связать проектные требования с версиями нормативов и проверяемыми правилами; work_key=normative-applicability-pack; related=none
+- APA-P70.A02.S03 [BUILD/READY]: Собрать проектный Library Pack из проверяемых строительных систем и узлов; work_key=project-library-pack-assembly; related=none
+- APA-P70.A03.S01 [INTEGRATION/READY]: Связать помещения, несущую схему, оси, уровни и конструктивные ограничения; work_key=semantic-spatial-structural-plan; related=none
+- APA-P70.A03.S02 [BUILD/READY]: Собрать модель средствами уже существующих BIM-исполнителей; work_key=reuse-native-whole-building-builder; related=none
+- APA-P70.A03.S03 [VALIDATION/READY]: Доказать редактируемость, GUID/host/story/material и инкрементальное обновление; work_key=incremental-model-integrity-gates; related=none
+- APA-P70.A04.S01 [INTEGRATION/READY]: Вывести из модели обязательные семейства узлов и их условия применимости; work_key=required-junction-condition-coverage; related=none
+- APA-P70.A04.S02 [BUILD/READY]: Привязать выбранные узлы и композиции к нативным BIM элементам; work_key=native-details-to-cse-binding; related=none
+- APA-P70.A04.S03 [VALIDATION/READY]: Проверить узлы окон, облицовки, перекрытий и кровельных примыканий; work_key=junction-evidence-acceptance; related=none
+- APA-P70.A05.S01 [INTEGRATION/READY]: Получить проверяемую расчётную схему и исходные нагрузки; work_key=load-bearing-design-and-load-cases; related=none
+- APA-P70.A05.S02 [BUILD/READY]: Использовать SAM/SAF/IFC и доступный проверенный расчётный движок; work_key=structural-engine-adapter-handoff; related=none
+- APA-P70.A05.S03 [VALIDATION/READY]: Применить результаты инженерного расчёта и повторно проверить узлы; work_key=engineering-feedback-to-bim; related=none
+- APA-P70.A06.S01 [INTEGRATION/READY]: Сформировать инженерные требования и трассы на базе штатного MEP; work_key=native-mep-semantic-network; related=none
+- APA-P70.A06.S02 [VALIDATION/READY]: Проверить инженерные сети, проходки, коллизии и узлы пересечений; work_key=mep-junction-collision-acceptance; related=none
+- APA-P70.A07.S01 [BUILD/READY]: Получить согласованные планы, разрезы, фасады, спецификации и узлы; work_key=native-project-documentation-views; related=none
+- APA-P70.A07.S02 [VALIDATION/READY]: Выполнить поэлементную и общепроектную проверку нормативов; work_key=revisioned-compliance-and-coverage-report; related=none
+- APA-P70.A07.S03 [BUILD/READY]: Собрать итоговый пакет BIM/IFC/PDF и доказательства проверки; work_key=verified-final-project-release; related=none
+- APA-P70.A08.S01 [VALIDATION/READY]: Проверить полный цикл создания проекта на эталонном ИЖС; work_key=full-cycle-new-project-e2e; related=none
+- APA-P70.A08.S02 [VALIDATION/READY]: Проверить доработку единственного открытого существующего PLN; work_key=full-cycle-adapt-existing-e2e; related=none
+- APA-P70.A08.S03 [VALIDATION/READY]: Доказать расширяемость на другом типе здания и системах; work_key=building-type-extension-contract; related=none
 
 ### PUBLISHER — Публикация, квитанции и capability
 

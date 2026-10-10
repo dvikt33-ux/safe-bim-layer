@@ -817,3 +817,371 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Source inputs: [ART-CONTROLLER](../../../../../docs/research/apa-results/control/PROJECT_PLAN.json), [ART-PLAN](../../../../../docs/research/apa-results/MASTER_PLAN.md)
 - Existing V2 runs: none
 - Expected output: Публичный protocol предложений задач; Инструкции трёх Scheduled исполнителей; Первый проверенный GitHub proposal + review + admission; Проверенный controller DAG и readback
+
+## APA-P70.A01.S01
+
+**Сопоставить полный продуктовый контракт с существующим кодом и исследованиями** — CONSOLIDATION / READY / P1
+
+- Parent: APA-P70 → APA-P70.A01
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: product-contract-and-code-baseline
+- Depends on: APA-P00.A02.S02
+- Related, check before duplicating: none
+- Acceptance: Таблица требований полного цикла → исходные файлы/SHA → подтверждённые функции и ограничения; без новой реализации
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-PR16](https://github.com/dvikt33-ux/safe-bim-layer/pull/16), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md)
+- Existing V2 runs: none
+- Expected output: Таблица требований полного цикла → исходные файлы/SHA → подтверждённые функции и ограничения; без новой реализации
+
+## APA-P70.A01.S02
+
+**Привязать все значимые наработки к функциям продукта, выявить пробелы** — CONSOLIDATION / READY / P2
+
+- Parent: APA-P70 → APA-P70.A01
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: product-evidence-to-capability-trace
+- Depends on: APA-P70.A01.S01, APA-P50.A01.S01
+- Related, check before duplicating: none
+- Acceptance: Матрица research → S-ID → код/PR → тест → функциональная возможность; дубликаты и пробелы явно отмечены
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md), [ART-TRACE-REPORT](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-110048Z-legacy-traceability/REPORT.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md)
+- Existing V2 runs: none
+- Expected output: Матрица research → S-ID → код/PR → тест → функциональная возможность; дубликаты и пробелы явно отмечены
+
+## APA-P70.A01.S03
+
+**Утвердить минимальные границы интеграции и порядок сквозных поставок** — INTEGRATION / READY / P2
+
+- Parent: APA-P70 → APA-P70.A01
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: product-integration-boundaries
+- Depends on: APA-P70.A01.S02, APA-P50.A02.S01
+- Related, check before duplicating: none
+- Acceptance: Проверенный маршрут полного цикла, reuse map, отсутствие дублирования SceneWriter/графа/исполнителя, приёмочные ворота
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md)
+- Existing V2 runs: none
+- Expected output: Проверенный маршрут полного цикла, reuse map, отсутствие дублирования SceneWriter/графа/исполнителя, приёмочные ворота
+
+## APA-P70.A02.S01
+
+**Собрать семантический контракт задания, участка, этажей и помещений** — BUILD / READY / P1
+
+- Parent: APA-P70 → APA-P70.A02
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: project-brief-and-story-contract
+- Depends on: APA-P70.A01.S03
+- Related, check before duplicating: none
+- Acceptance: Два режима GENERATE_FROM_ZERO/ADAPT_EXISTING; требования/ограничения, первый этаж на ±0.000, index только по GetStories
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md)
+- Existing V2 runs: none
+- Expected output: Два режима GENERATE_FROM_ZERO/ADAPT_EXISTING; требования/ограничения, первый этаж на ±0.000, index только по GetStories
+
+## APA-P70.A02.S02
+
+**Связать проектные требования с версиями нормативов и проверяемыми правилами** — BUILD / READY / P2
+
+- Parent: APA-P70 → APA-P70.A02
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: normative-applicability-pack
+- Depends on: APA-P70.A02.S01
+- Related, check before duplicating: none
+- Acceptance: Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md)
+- Existing V2 runs: none
+- Expected output: Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED
+
+## APA-P70.A02.S03
+
+**Собрать проектный Library Pack из проверяемых строительных систем и узлов** — BUILD / READY / P2
+
+- Parent: APA-P70 → APA-P70.A02
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: project-library-pack-assembly
+- Depends on: APA-P70.A02.S02
+- Related, check before duplicating: none
+- Acceptance: Отобранные CSE, источники/хэши/лицензии, интерфейсы, совместимые AC29 объекты и список неподтверждённых узлов
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md)
+- Existing V2 runs: none
+- Expected output: Отобранные CSE, источники/хэши/лицензии, интерфейсы, совместимые AC29 объекты и список неподтверждённых узлов
+
+## APA-P70.A03.S01
+
+**Связать помещения, несущую схему, оси, уровни и конструктивные ограничения** — INTEGRATION / READY / P1
+
+- Parent: APA-P70 → APA-P70.A03
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: semantic-spatial-structural-plan
+- Depends on: APA-P70.A02.S03
+- Related, check before duplicating: none
+- Acceptance: Проверяемый граф помещений/нагрузочных путей/осей с привязкой к CSE и этажам; без условных стен
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md)
+- Existing V2 runs: none
+- Expected output: Проверяемый граф помещений/нагрузочных путей/осей с привязкой к CSE и этажам; без условных стен
+
+## APA-P70.A03.S02
+
+**Собрать модель средствами уже существующих BIM-исполнителей** — BUILD / READY / P2
+
+- Parent: APA-P70 → APA-P70.A03
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: reuse-native-whole-building-builder
+- Depends on: APA-P70.A03.S01
+- Related, check before duplicating: none
+- Acceptance: Создание полноценной BIM-геометрии из схемы через имеющиеся writer/graph; связные стены не дробятся без необходимости; тестовый PLN только после разрешения
+- Owner/lease: unclaimed
+- Requires owner approval: True
+- Source inputs: [ART-APA-PR16](https://github.com/dvikt33-ux/safe-bim-layer/pull/16), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md)
+- Existing V2 runs: none
+- Expected output: Создание полноценной BIM-геометрии из схемы через имеющиеся writer/graph; связные стены не дробятся без необходимости; тестовый PLN только после разрешения
+
+## APA-P70.A03.S03
+
+**Доказать редактируемость, GUID/host/story/material и инкрементальное обновление** — VALIDATION / READY / P2
+
+- Parent: APA-P70 → APA-P70.A03
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: incremental-model-integrity-gates
+- Depends on: APA-P70.A03.S02
+- Related, check before duplicating: none
+- Acceptance: Тесты обновления проекта без лишних элементов/потери GUID, readback этажей, материалов, хостов и откат изменений
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md)
+- Existing V2 runs: none
+- Expected output: Тесты обновления проекта без лишних элементов/потери GUID, readback этажей, материалов, хостов и откат изменений
+
+## APA-P70.A04.S01
+
+**Вывести из модели обязательные семейства узлов и их условия применимости** — INTEGRATION / READY / P1
+
+- Parent: APA-P70 → APA-P70.A04
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: required-junction-condition-coverage
+- Depends on: APA-P70.A03.S01
+- Related, check before duplicating: none
+- Acceptance: Матрица всех применимых примыканий/отверстий/армопоясов/связей/крепежа с точным source/detail ID и открытыми пробелами
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12)
+- Existing V2 runs: none
+- Expected output: Матрица всех применимых примыканий/отверстий/армопоясов/связей/крепежа с точным source/detail ID и открытыми пробелами
+
+## APA-P70.A04.S02
+
+**Привязать выбранные узлы и композиции к нативным BIM элементам** — BUILD / READY / P2
+
+- Parent: APA-P70 → APA-P70.A04
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: native-details-to-cse-binding
+- Depends on: APA-P70.A04.S01, APA-P70.A03.S02
+- Related, check before duplicating: none
+- Acceptance: Редактируемые системы и узлы с параметрами, классификацией, происхождением и invalidation при изменении
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md)
+- Existing V2 runs: none
+- Expected output: Редактируемые системы и узлы с параметрами, классификацией, происхождением и invalidation при изменении
+
+## APA-P70.A04.S03
+
+**Проверить узлы окон, облицовки, перекрытий и кровельных примыканий** — VALIDATION / READY / P2
+
+- Parent: APA-P70 → APA-P70.A04
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: junction-evidence-acceptance
+- Depends on: APA-P70.A04.S02
+- Related, check before duplicating: none
+- Acceptance: Для каждого узла классификация PASS_GEOMETRY/PASS_DOCUMENTED/PASS_ENGINEERING/NOT_VERIFIED; ложные approvals запрещены
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12)
+- Existing V2 runs: none
+- Expected output: Для каждого узла классификация PASS_GEOMETRY/PASS_DOCUMENTED/PASS_ENGINEERING/NOT_VERIFIED; ложные approvals запрещены
+
+## APA-P70.A05.S01
+
+**Получить проверяемую расчётную схему и исходные нагрузки** — INTEGRATION / READY / P1
+
+- Parent: APA-P70 → APA-P70.A05
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: load-bearing-design-and-load-cases
+- Depends on: APA-P70.A03.S01, APA-P70.A02.S02
+- Related, check before duplicating: none
+- Acceptance: Нагрузки, расчётная схема, несущие стены/пролёты/фундаменты/стропила, комбинации и неподтверждённые допущения отдельно
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md)
+- Existing V2 runs: none
+- Expected output: Нагрузки, расчётная схема, несущие стены/пролёты/фундаменты/стропила, комбинации и неподтверждённые допущения отдельно
+
+## APA-P70.A05.S02
+
+**Использовать SAM/SAF/IFC и доступный проверенный расчётный движок** — BUILD / READY / P2
+
+- Parent: APA-P70 → APA-P70.A05
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: structural-engine-adapter-handoff
+- Depends on: APA-P70.A05.S01, APA-P70.A03.S02
+- Related, check before duplicating: none
+- Acceptance: Экспорт и сверка идентичности элементов, материалов, уровней; расчёт только в доступном проверенном инструменте, отсутствие доступа явно BLOCKED
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md)
+- Existing V2 runs: none
+- Expected output: Экспорт и сверка идентичности элементов, материалов, уровней; расчёт только в доступном проверенном инструменте, отсутствие доступа явно BLOCKED
+
+## APA-P70.A05.S03
+
+**Применить результаты инженерного расчёта и повторно проверить узлы** — VALIDATION / READY / P2
+
+- Parent: APA-P70 → APA-P70.A05
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: engineering-feedback-to-bim
+- Depends on: APA-P70.A05.S02, APA-P70.A04.S02
+- Related, check before duplicating: none
+- Acceptance: Контролируемое внесение инженерных изменений в BIM; сверка с расчётом и запись необходимости согласования специалистом
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md)
+- Existing V2 runs: none
+- Expected output: Контролируемое внесение инженерных изменений в BIM; сверка с расчётом и запись необходимости согласования специалистом
+
+## APA-P70.A06.S01
+
+**Сформировать инженерные требования и трассы на базе штатного MEP** — INTEGRATION / READY / P1
+
+- Parent: APA-P70 → APA-P70.A06
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: native-mep-semantic-network
+- Depends on: APA-P70.A03.S02, APA-P70.A02.S02
+- Related, check before duplicating: none
+- Acceptance: Проверенные системы труб/воздуховодов с сетью и портами, применимые нормы и явные незакрытые расчёты
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md)
+- Existing V2 runs: none
+- Expected output: Проверенные системы труб/воздуховодов с сетью и портами, применимые нормы и явные незакрытые расчёты
+
+## APA-P70.A06.S02
+
+**Проверить инженерные сети, проходки, коллизии и узлы пересечений** — VALIDATION / READY / P2
+
+- Parent: APA-P70 → APA-P70.A06
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: mep-junction-collision-acceptance
+- Depends on: APA-P70.A06.S01, APA-P70.A04.S02
+- Related, check before duplicating: none
+- Acceptance: Readback связности и коллизий, согласованные проходки/узлы без ложных PASS и без потери идентичности
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md)
+- Existing V2 runs: none
+- Expected output: Readback связности и коллизий, согласованные проходки/узлы без ложных PASS и без потери идентичности
+
+## APA-P70.A07.S01
+
+**Получить согласованные планы, разрезы, фасады, спецификации и узлы** — BUILD / READY / P1
+
+- Parent: APA-P70 → APA-P70.A07
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: native-project-documentation-views
+- Depends on: APA-P70.A03.S03, APA-P70.A04.S02
+- Related, check before duplicating: none
+- Acceptance: Чертежи и ведомости из одной BIM-модели, соответствие срезов/количеств/версий, без ручных дублирующих источников
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml)
+- Existing V2 runs: none
+- Expected output: Чертежи и ведомости из одной BIM-модели, соответствие срезов/количеств/версий, без ручных дублирующих источников
+
+## APA-P70.A07.S02
+
+**Выполнить поэлементную и общепроектную проверку нормативов** — VALIDATION / READY / P2
+
+- Parent: APA-P70 → APA-P70.A07
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: revisioned-compliance-and-coverage-report
+- Depends on: APA-P70.A07.S01, APA-P70.A05.S03, APA-P70.A06.S02
+- Related, check before duplicating: none
+- Acceptance: Матрица применимых требований: PASS/FAIL/NOT_VERIFIED/NEEDS_SPECIALIST с источниками и журналом пересчётов
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md)
+- Existing V2 runs: none
+- Expected output: Матрица применимых требований: PASS/FAIL/NOT_VERIFIED/NEEDS_SPECIALIST с источниками и журналом пересчётов
+
+## APA-P70.A07.S03
+
+**Собрать итоговый пакет BIM/IFC/PDF и доказательства проверки** — BUILD / READY / P2
+
+- Parent: APA-P70 → APA-P70.A07
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: verified-final-project-release
+- Depends on: APA-P70.A07.S02
+- Related, check before duplicating: none
+- Acceptance: Ревизионно согласованный комплект проекта с provenance и инженерными ограничениями; выпуск только после всех gates
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md)
+- Existing V2 runs: none
+- Expected output: Ревизионно согласованный комплект проекта с provenance и инженерными ограничениями; выпуск только после всех gates
+
+## APA-P70.A08.S01
+
+**Проверить полный цикл создания проекта на эталонном ИЖС** — VALIDATION / READY / P1
+
+- Parent: APA-P70 → APA-P70.A08
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: full-cycle-new-project-e2e
+- Depends on: APA-P70.A07.S03
+- Related, check before duplicating: none
+- Acceptance: По одному brief сформирован редактируемый расчётно обоснованный проект; сохраняется, повторно открывается и читается; отдельное live-разрешение
+- Owner/lease: unclaimed
+- Requires owner approval: True
+- Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-PR16](https://github.com/dvikt33-ux/safe-bim-layer/pull/16)
+- Existing V2 runs: none
+- Expected output: По одному brief сформирован редактируемый расчётно обоснованный проект; сохраняется, повторно открывается и читается; отдельное live-разрешение
+
+## APA-P70.A08.S02
+
+**Проверить доработку единственного открытого существующего PLN** — VALIDATION / READY / P2
+
+- Parent: APA-P70 → APA-P70.A08
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: full-cycle-adapt-existing-e2e
+- Depends on: APA-P70.A08.S01
+- Related, check before duplicating: none
+- Acceptance: ADAPT_EXISTING: проект дорабатывается без переключения/изменения чужого PLN; изменение только с разрешением, воспроизводимый readback
+- Owner/lease: unclaimed
+- Requires owner approval: True
+- Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md)
+- Existing V2 runs: none
+- Expected output: ADAPT_EXISTING: проект дорабатывается без переключения/изменения чужого PLN; изменение только с разрешением, воспроизводимый readback
+
+## APA-P70.A08.S03
+
+**Доказать расширяемость на другом типе здания и системах** — VALIDATION / READY / P2
+
+- Parent: APA-P70 → APA-P70.A08
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: building-type-extension-contract
+- Depends on: APA-P70.A08.S02
+- Related, check before duplicating: none
+- Acceptance: Новый тип здания или конструктивная система подключается без нового параллельного генератора и без регрессии старого проекта
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md)
+- Existing V2 runs: none
+- Expected output: Новый тип здания или конструктивная система подключается без нового параллельного генератора и без регрессии старого проекта

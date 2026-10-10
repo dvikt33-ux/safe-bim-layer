@@ -14,10 +14,10 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | DONE_PUBLISHED | 10 |
 | IN_PROGRESS | 0 |
 | PARTIAL | 14 |
-| READY | 19 |
+| READY | 42 |
 | SUPERSEDED | 0 |
-| DISPATCHABLE_NOW | 16 |
-| HELD_BY_DEPENDENCIES | 17 |
+| DISPATCHABLE_NOW | 17 |
+| HELD_BY_DEPENDENCIES | 39 |
 | EXPIRED_LEASES | 0 |
 
 ## Claimed tasks
@@ -32,13 +32,14 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | --- | --- | --- |
 | — | — | — |
 
-## CONSOLIDATION — 3 ready
+## CONSOLIDATION — 4 ready
 
 | Priority | Task | Acceptance |
 | --- | --- | --- |
 | P0 | APA-P00.A01.S03 — Инвентаризировать 72 ветки и PR, проверить уникальные результаты и ancestry | Список уникальных артефактов, SHA, дубликатов и неизвестного |
 | P0 | APA-P00.A02.S03 — Связать старые находки с S-ID и удалить логические дубли без удаления оригиналов | Evidence map и superseded_by для дублей |
 | P0 | APA-P50.A01.S01 — Карта связей: исследования ↔ S-ID ↔ артефакты ↔ PR | Traceability matrix, orphan report list |
+| P1 | APA-P70.A01.S01 — Сопоставить полный продуктовый контракт с существующим кодом и исследованиями | Таблица требований полного цикла → исходные файлы/SHA → подтверждённые функции и ограничения; без новой реализации |
 
 ## RESEARCH — 8 ready
 
@@ -95,6 +96,28 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | APA-P50.A02.S03 | APA-P50.A02.S02, APA-P30.A01.S01 |
 | APA-P50.A03.S01 | APA-P50.A01.S03, APA-P50.A02.S02 |
 | APA-P50.A03.S02 | APA-P50.A03.S01 |
+| APA-P70.A01.S02 | APA-P70.A01.S01, APA-P50.A01.S01 |
+| APA-P70.A01.S03 | APA-P70.A01.S02, APA-P50.A02.S01 |
+| APA-P70.A02.S01 | APA-P70.A01.S03 |
+| APA-P70.A02.S02 | APA-P70.A02.S01 |
+| APA-P70.A02.S03 | APA-P70.A02.S02 |
+| APA-P70.A03.S01 | APA-P70.A02.S03 |
+| APA-P70.A03.S02 | APA-P70.A03.S01 |
+| APA-P70.A03.S03 | APA-P70.A03.S02 |
+| APA-P70.A04.S01 | APA-P70.A03.S01 |
+| APA-P70.A04.S02 | APA-P70.A04.S01, APA-P70.A03.S02 |
+| APA-P70.A04.S03 | APA-P70.A04.S02 |
+| APA-P70.A05.S01 | APA-P70.A03.S01, APA-P70.A02.S02 |
+| APA-P70.A05.S02 | APA-P70.A05.S01, APA-P70.A03.S02 |
+| APA-P70.A05.S03 | APA-P70.A05.S02, APA-P70.A04.S02 |
+| APA-P70.A06.S01 | APA-P70.A03.S02, APA-P70.A02.S02 |
+| APA-P70.A06.S02 | APA-P70.A06.S01, APA-P70.A04.S02 |
+| APA-P70.A07.S01 | APA-P70.A03.S03, APA-P70.A04.S02 |
+| APA-P70.A07.S02 | APA-P70.A07.S01, APA-P70.A05.S03, APA-P70.A06.S02 |
+| APA-P70.A07.S03 | APA-P70.A07.S02 |
+| APA-P70.A08.S01 | APA-P70.A07.S03 |
+| APA-P70.A08.S02 | APA-P70.A08.S01 |
+| APA-P70.A08.S03 | APA-P70.A08.S02 |
 
 ## Warnings
 
