@@ -223,6 +223,38 @@ class EventStoreTests(unittest.TestCase):
         self.assertEqual(bootstrap_channel(self.store, client, "C0C886E1PGR")["accepted"], 0)
         self.assertEqual(len(self.store.changes()["changes"]), 2)
 
+    def test_bootstrap_reports_safe_rejection_counts(self):
+        fresh = event(task_id="APA-SYNC-BOOTSTRAP-TEST", phase="LIVE", status="INFO")
+
+        class Client:
+            def conversations_history(self, **kwargs):
+                return {
+                    "messages": [
+                        {"ts": "105.1", "text": "ordinary channel message"},
+                        {"ts": "104.1", "text": "APA_EVENT_V1\nmissing JSON fence"},
+                        {"ts": "103.1", "text": "secret should never be shown", "subtype": "channel_join"},
+                        {"ts": "102.1", "text": format_event(fresh)},
+                    ],
+                    "response_metadata": {"next_cursor": ""},
+                }
+
+        client = Client()
+        first = bootstrap_channel(self.store, client, "C0C886E1PGR")
+        self.assertEqual(first["scanned"], 4)
+        self.assertEqual(first["accepted"], 1)
+        self.assertEqual(first["duplicates"], 0)
+        self.assertEqual(first["not_apa_events"], 1)
+        self.assertEqual(first["ignored_subtype"], 1)
+        self.assertEqual(first["rejected"], {
+            "Expected APA_EVENT_V1 and one JSON code fence": 1,
+        })
+        # Running the bootstrap again must not re-insert the event.
+        second = bootstrap_channel(self.store, client, "C0C886E1PGR")
+        self.assertEqual(second["accepted"], 0)
+        self.assertEqual(second["duplicates"], 1)
+        self.assertEqual(self.store.changes()["next_cursor"], 1)
+        self.assertNotIn("secret", str(second))
+
     def test_http_read_only_loopback(self):
         server = make_server(self.store, port=0)
         thread = threading.Thread(target=server.serve_forever, daemon=True)
