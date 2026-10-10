@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 34,
+  "revision": 35,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -14,7 +14,8 @@
     "mutation": "Only canonical research branch. Never modify main/master, PLN, APX, tested code branches or merge without approval.",
     "research": "Normal ChatGPT with GitHub connector; Deep Research and paid tools require explicit authorization.",
     "evidence": "REPORTED != SOURCE_VERIFIED != BUILD_PASS != LIVE_PASS. Synthetic publisher success proves no Archicad runtime behavior.",
-    "trigger": "Only user-configured ChatGPT Scheduled Tasks initiate work; GitHub Actions is a publisher/validator on commits, not an autonomous research initiator. No controller-created research runs."
+    "trigger": "Only user-configured ChatGPT Scheduled Tasks initiate work; GitHub Actions is a publisher/validator on commits, not an autonomous research initiator. No controller-created research runs.",
+    "research_pipeline": "Same PROJECT_PLAN.json registry for research and development. research_routes links each P70 S-ID to source artifacts already in task.inputs and to reusable research S-IDs; read branch/file URLs from artifact.uri, verify current source SHA before use. Research may run ahead for later P70 actions while present action BUILD/INTEGRATION proceeds. SUFFICIENT must be independently reviewed with evidence before deferring its research; NOT_ASSESSED is never automatic PASS. Do not repeat completed research without changed source or uncovered applicability gap."
   },
   "plans": {
     "APA-P00": {
@@ -2881,6 +2882,236 @@
       "discovery": "6ac83b171cf08191b74e06caaa8ae1c7",
       "technical": "6ac9752aae8081919d9feeada08ad91e",
       "audit": "6ac7664c66f88191a51d8c0a414b0eac"
+    }
+  },
+  "research_routes": {
+    "APA-P70.A01.S01": {
+      "research_task_ids": [
+        "APA-P50.A01.S01",
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Сопоставить применимость существующих исследований с acceptance этой подзадачи. Не повторять изученное без выявленного пробела."
+    },
+    "APA-P70.A01.S02": {
+      "research_task_ids": [
+        "APA-P50.A01.S01",
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Сопоставить применимость существующих исследований с acceptance этой подзадачи. Не повторять изученное без выявленного пробела."
+    },
+    "APA-P70.A01.S03": {
+      "research_task_ids": [
+        "APA-P50.A01.S01",
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Сопоставить применимость существующих исследований с acceptance этой подзадачи. Не повторять изученное без выявленного пробела."
+    },
+    "APA-P70.A02.S01": {
+      "research_task_ids": [
+        "APA-P10.A01.S02",
+        "APA-P10.A02.S02",
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Сопоставить применимость существующих исследований с acceptance этой подзадачи. Не повторять изученное без выявленного пробела."
+    },
+    "APA-P70.A02.S02": {
+      "research_task_ids": [
+        "APA-P10.A01.S02",
+        "APA-P10.A02.S02",
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Сопоставить применимость существующих исследований с acceptance этой подзадачи. Не повторять изученное без выявленного пробела."
+    },
+    "APA-P70.A02.S03": {
+      "research_task_ids": [
+        "APA-P10.A01.S02",
+        "APA-P10.A02.S02",
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Сопоставить применимость существующих исследований с acceptance этой подзадачи. Не повторять изученное без выявленного пробела."
+    },
+    "APA-P70.A03.S01": {
+      "research_task_ids": [
+        "APA-P10.A01.S02",
+        "APA-P10.A01.S03",
+        "APA-P10.A03.S01",
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Сопоставить применимость существующих исследований с acceptance этой подзадачи. Не повторять изученное без выявленного пробела."
+    },
+    "APA-P70.A03.S02": {
+      "research_task_ids": [
+        "APA-P10.A01.S02",
+        "APA-P10.A01.S03",
+        "APA-P10.A03.S01",
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Сопоставить применимость существующих исследований с acceptance этой подзадачи. Не повторять изученное без выявленного пробела."
+    },
+    "APA-P70.A03.S03": {
+      "research_task_ids": [
+        "APA-P10.A01.S02",
+        "APA-P10.A01.S03",
+        "APA-P10.A03.S01",
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Сопоставить применимость существующих исследований с acceptance этой подзадачи. Не повторять изученное без выявленного пробела."
+    },
+    "APA-P70.A04.S01": {
+      "research_task_ids": [
+        "APA-P10.A02.S02",
+        "APA-P10.A01.S03",
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Сопоставить применимость существующих исследований с acceptance этой подзадачи. Не повторять изученное без выявленного пробела."
+    },
+    "APA-P70.A04.S02": {
+      "research_task_ids": [
+        "APA-P10.A02.S02",
+        "APA-P10.A01.S03",
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Сопоставить применимость существующих исследований с acceptance этой подзадачи. Не повторять изученное без выявленного пробела."
+    },
+    "APA-P70.A04.S03": {
+      "research_task_ids": [
+        "APA-P10.A02.S02",
+        "APA-P10.A01.S03",
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Сопоставить применимость существующих исследований с acceptance этой подзадачи. Не повторять изученное без выявленного пробела."
+    },
+    "APA-P70.A05.S01": {
+      "research_task_ids": [
+        "APA-P10.A01.S01",
+        "APA-P10.A03.S01",
+        "APA-P10.A03.S02"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Сопоставить применимость существующих исследований с acceptance этой подзадачи. Не повторять изученное без выявленного пробела."
+    },
+    "APA-P70.A05.S02": {
+      "research_task_ids": [
+        "APA-P10.A01.S01",
+        "APA-P10.A03.S01",
+        "APA-P10.A03.S02"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Сопоставить применимость существующих исследований с acceptance этой подзадачи. Не повторять изученное без выявленного пробела."
+    },
+    "APA-P70.A05.S03": {
+      "research_task_ids": [
+        "APA-P10.A01.S01",
+        "APA-P10.A03.S01",
+        "APA-P10.A03.S02"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Сопоставить применимость существующих исследований с acceptance этой подзадачи. Не повторять изученное без выявленного пробела."
+    },
+    "APA-P70.A06.S01": {
+      "research_task_ids": [
+        "APA-P10.A02.S04",
+        "APA-P10.A02.S03"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Сопоставить применимость существующих исследований с acceptance этой подзадачи. Не повторять изученное без выявленного пробела."
+    },
+    "APA-P70.A06.S02": {
+      "research_task_ids": [
+        "APA-P10.A02.S04",
+        "APA-P10.A02.S03"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Сопоставить применимость существующих исследований с acceptance этой подзадачи. Не повторять изученное без выявленного пробела."
+    },
+    "APA-P70.A07.S01": {
+      "research_task_ids": [
+        "APA-P10.A02.S03",
+        "APA-P10.A01.S03",
+        "APA-P50.A01.S03"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Сопоставить применимость существующих исследований с acceptance этой подзадачи. Не повторять изученное без выявленного пробела."
+    },
+    "APA-P70.A07.S02": {
+      "research_task_ids": [
+        "APA-P10.A02.S03",
+        "APA-P10.A01.S03",
+        "APA-P50.A01.S03"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Сопоставить применимость существующих исследований с acceptance этой подзадачи. Не повторять изученное без выявленного пробела."
+    },
+    "APA-P70.A07.S03": {
+      "research_task_ids": [
+        "APA-P10.A02.S03",
+        "APA-P10.A01.S03",
+        "APA-P50.A01.S03"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Сопоставить применимость существующих исследований с acceptance этой подзадачи. Не повторять изученное без выявленного пробела."
+    },
+    "APA-P70.A08.S01": {
+      "research_task_ids": [
+        "APA-P50.A01.S01",
+        "APA-P50.A03.S01",
+        "APA-P50.A03.S02"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Сопоставить применимость существующих исследований с acceptance этой подзадачи. Не повторять изученное без выявленного пробела."
+    },
+    "APA-P70.A08.S02": {
+      "research_task_ids": [
+        "APA-P50.A01.S01",
+        "APA-P50.A03.S01",
+        "APA-P50.A03.S02"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Сопоставить применимость существующих исследований с acceptance этой подзадачи. Не повторять изученное без выявленного пробела."
+    },
+    "APA-P70.A08.S03": {
+      "research_task_ids": [
+        "APA-P50.A01.S01",
+        "APA-P50.A03.S01",
+        "APA-P50.A03.S02"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Сопоставить применимость существующих исследований с acceptance этой подзадачи. Не повторять изученное без выявленного пробела."
     }
   }
 }
