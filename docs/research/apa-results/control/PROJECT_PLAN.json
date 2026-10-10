@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 32,
+  "revision": 33,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -344,6 +344,12 @@
     "ART-APA-ATTR-STORY-SLAB-20261011": {
       "id": "ART-APA-ATTR-STORY-SLAB-20261011",
       "uri": "docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md",
+      "kind": "REPORT",
+      "verification": "GITHUB_READBACK_VERIFIED"
+    },
+    "ART-APA-REUSE-NATIVE-20261011": {
+      "id": "ART-APA-REUSE-NATIVE-20261011",
+      "uri": "docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md",
       "kind": "REPORT",
       "verification": "GITHUB_READBACK_VERIFIED"
     }
@@ -1457,7 +1463,9 @@
       "lease_until": null,
       "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-APA-REUSE-NATIVE-20261011"
+      ],
       "blocked_reason": null
     },
     "APA-P50.A02.S02": {
@@ -2030,7 +2038,8 @@
       ],
       "artifact_ids": [
         "ART-PLAN",
-        "ART-REGISTER"
+        "ART-REGISTER",
+        "ART-APA-REUSE-NATIVE-20261011"
       ],
       "synthesis_state": "OPEN",
       "owner": null
