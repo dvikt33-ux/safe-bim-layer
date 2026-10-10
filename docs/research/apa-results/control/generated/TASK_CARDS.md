@@ -303,7 +303,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: chatgpt:apa-discovery / 2026-10-10T21:08:23Z
 - Requires owner approval: False
 - Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md)
-- Existing V2 runs: none
+- Existing V2 runs: [APA-RUN-20261010-200823Z-mep-route-port-gate](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md) (receipt verified)
 - Expected output: MEP command/route/port matrix
 
 ## APA-P10.A03.S01
