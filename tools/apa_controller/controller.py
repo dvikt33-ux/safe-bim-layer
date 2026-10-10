@@ -206,7 +206,7 @@ def link(uri, label=None):
     name = safe(label or Path(uri).name)
     if uri.startswith("https://"):
         return "[" + name + "](" + uri + ")"
-    return "[" + name + "](../../../../" + quote(uri, safe="/") + ")"
+    return "[" + name + "](../../../../../" + quote(uri, safe="/") + ")"
 
 
 def write_if_changed(path, raw):
