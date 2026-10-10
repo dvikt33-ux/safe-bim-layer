@@ -1,6 +1,6 @@
 # APA / Archicad 29 — единый план исследований и внедрения
 
-**Canonical source of truth:** эта папка в ветке research/apa-verified-results-hub-20261010. **Дата начала системы:** 2026-10-10. **Статус плана:** ACTIVE, но автономное исполнение 24/7 не запущено.
+**Единый источник новых задач и актуальных статусов:** [PROJECT_PLAN.json](control/PROJECT_PLAN.json); [CONTROL_BOARD](control/generated/CONTROL_BOARD.md) и [HANDOFF](control/generated/HANDOFF.md) формируются автоматически. Этот Markdown — историческая карта целей, не диспетчер. **Дата начала системы:** 2026-10-10. **Статус плана:** ACTIVE, но автономное исполнение 24/7 не запущено.
 
 ## Как читать и исполнять план
 
