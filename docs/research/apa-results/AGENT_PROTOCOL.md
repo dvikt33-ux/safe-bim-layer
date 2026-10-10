@@ -10,6 +10,10 @@
 - 24/7 — требование к процессу, **не** характеристика обычного чата. Не заявлять, что он запущен, пока не подтверждены расписание, исполнитель и два реальных цикла с SHA/readback. Не использовать платные API/Work/Codex для обхода ограничения.
 - Любое «применить исследование» сначала означает сверить первоисточник, версии, код и безопасные gates. Не изменять PLN/APX/main и проверенные ветки без отдельного разрешения.
 
+## Автоматическая публикация через inbox (DEPLOYED)
+
+Обычный ChatGPT может создать полный [PUBLISH_REQUEST_V1](protocol/PUBLISH_REQUEST_V1.schema.json) JSON в [inbox](inbox/) на canonical branch, включая Markdown-отчёт и source/evidence статус. Push запускает [GitHub Actions publisher](../../.github/workflows/apa-research-publisher.yml). Исполнитель обязан дождаться успешного run и [receipt](receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json); до этого не сообщать DONE_PUBLISHED. [Проверенный synthetic E2E run 38045964668](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38045964668), [idempotent rerun 38046020069](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38046020069). Это publisher, **не** самостоятельный исследователь и не 24/7 scheduler. При GitHub Actions failure — GITHUB_PUBLISH_BLOCKED; не терять исходный inbox/report, не запускать повторное исследование.
+
 ## Новый контракт V2 и восстановление
 
 Перед работой прочитать [сохранённый аудит APA Research OS](runs/2026-10-10/apa-research-os-audit-user-supplied-20261010.md), [RUN_EVENT_V2](protocol/RUN_EVENT_V2.schema.json), [PUBLISHER_CONTRACT](protocol/PUBLISHER_CONTRACT.md) и [EVIDENCE_POLICY](protocol/EVIDENCE_POLICY.md). **Выполнение схемы — проект, а не включённый publisher.**
