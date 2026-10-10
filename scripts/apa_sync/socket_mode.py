@@ -28,10 +28,18 @@ def bootstrap_channel(store, client, channel_id: str, max_messages: int = 100) -
         cursor = response.get("response_metadata", {}).get("next_cursor")
         if not cursor:
             break
-    accepted = 0
-    conflicts = 0
+    stats = {
+        "scanned": len(pages),
+        "accepted": 0,
+        "conflicts": 0,
+        "duplicates": 0,
+        "not_apa_events": 0,
+        "ignored_subtype": 0,
+        "rejected": {},
+    }
     for message in reversed(pages):
         if message.get("subtype") not in (None, "bot_message"):
+            stats["ignored_subtype"] += 1
             continue
         try:
             result = store.ingest(
@@ -39,12 +47,19 @@ def bootstrap_channel(store, client, channel_id: str, max_messages: int = 100) -
                 slack_channel=channel_id,
                 slack_ts=str(message.get("ts", "")),
             )
-        except InvalidEvent:
+        except InvalidEvent as exc:
+            # Counts only: no raw Slack text, event payloads, identifiers or tokens.
+            reason = str(exc)
+            stats["rejected"][reason] = stats["rejected"].get(reason, 0) + 1
             continue
         if result.get("accepted"):
-            accepted += 1
-            conflicts += int(result["conflict"])
-    return {"scanned": len(pages), "accepted": accepted, "conflicts": conflicts}
+            stats["accepted"] += 1
+            stats["conflicts"] += int(result["conflict"])
+        elif result.get("reason") == "duplicate":
+            stats["duplicates"] += 1
+        elif result.get("reason") == "not_an_apa_event":
+            stats["not_apa_events"] += 1
+    return stats
 
 
 def run():
