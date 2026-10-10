@@ -13,7 +13,7 @@
 ### APA-P00.A01 — Инвентаризация фактически опубликованного
 - [x] **APA-P00.A01.S01** Найти существующий research hub и прочитать его 5 файлов. **DONE_PUBLISHED** — см. [ARTIFACT_REGISTER](ARTIFACT_REGISTER.md).
 - [x] **APA-P00.A01.S02** Найти документы старых аудитов и индекс от 28 сентября. **DONE_PUBLISHED** — указатели в реестре; содержимое не переверифицировано.
-- [ ] **APA-P00.A01.S03** Полностью инвентаризировать все ветки/коммиты/документы, обнаружить дубли и осиротевшие результаты. **QUEUED**; текущий реестр — выборочный.
+- [ ] **APA-P00.A01.S03** Полностью инвентаризировать все ветки/коммиты/документы, обнаружить дубли и осиротевшие результаты. **IN_PROGRESS / PARTIAL:** [все 72 branch/head SHA и 22 PR mapping](inventories/FULL_BRANCH_INVENTORY.md) опубликованы и прочитаны обратно; ancestry, unique artifacts, superseded_by, локальные SHA остаются NOT_VERIFIED.
 - [ ] **APA-P00.A01.S04** Отдельно сопоставить старые локальные и GitHub SHA, проверить непушенные артефакты, когда будет доступ к их источнику. **BLOCKED_EXTERNAL** — удалённый GitHub не доказывает существование локальных файлов.
 
 ### APA-P00.A02 — Единый навигационный центр
@@ -25,8 +25,12 @@
 ### APA-P00.A03 — Режим работы и публикации
 - [ ] **APA-P00.A03.S01** Проверить доступность GitHub write/read для каждого типа исполнителя (обычный чат, Deep Research, расписание). **IN_PROGRESS**: обычный чат подтверждён, Deep Research и планировщик — нет.
 - [ ] **APA-P00.A03.S02** Утвердить безопасный способ периодического запуска без платных API и изменений main. **BLOCKED_EXTERNAL** — непрерывный агент пока не развёрнут.
-- [ ] **APA-P00.A03.S03** Реализовать очередь, дедупликацию, heartbeat, retry и сигнал о непубликации. **BLOCKED_EXTERNAL** до выбора раннера.
+- [ ] **APA-P00.A03.S03** Реализовать очередь, дедупликацию, heartbeat, retry и сигнал о непубликации. **PARTIAL_DESIGN_PUBLISHED:** [RUN_EVENT_V2.schema.json](protocol/RUN_EVENT_V2.schema.json), [publisher contract](protocol/PUBLISHER_CONTRACT.md), [evidence policy](protocol/EVIDENCE_POLICY.md), [readback receipt](receipts/APA-RUN-20261010-102800Z-research-os-audit-readback.json); работающий publisher/index builder/heartbeat/retry **BLOCKED_EXTERNAL / NOT_DEPLOYED**.
 - [ ] **APA-P00.A03.S04** Пройти тест: два последовательных цикла с публикацией и проверкой readback. **BLOCKED_EXTERNAL**.
+
+### Решение по APA Research OS (2026-10-10)
+
+[Предоставленный аудит](runs/2026-10-10/apa-research-os-audit-user-supplied-20261010.md) сохранён. Принят **Split-Plane Research / Publish / Control**: immutable runs и отдельные receipts, индексы как будущие восстанавливаемые проекции; **не объявлять их generated до готовности и тестов index builder**. Основной исполнитель — обычный ChatGPT с GitHub; Deep Research без отдельного разрешения не запускать. Ни main, ни runtime не менялись.
 
 ## APA-P10 — Независимый технический аудит AC29
 
