@@ -12,11 +12,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | BLOCKED | 8 |
 | CLAIMED | 0 |
 | DONE_PUBLISHED | 10 |
-| IN_PROGRESS | 1 |
-| PARTIAL | 12 |
+| IN_PROGRESS | 0 |
+| PARTIAL | 13 |
 | READY | 20 |
 | SUPERSEDED | 0 |
-| DISPATCHABLE_NOW | 15 |
+| DISPATCHABLE_NOW | 16 |
 | HELD_BY_DEPENDENCIES | 17 |
 | EXPIRED_LEASES | 0 |
 
@@ -24,7 +24,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| APA-P10.A02.S04 | chatgpt:apa-discovery | 2026-10-10T21:08:23Z | native-and-tapir-mep |
+| — | — | — | — |
 
 ## CONTROL — 0 ready
 
@@ -40,7 +40,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | P0 | APA-P00.A02.S03 — Связать старые находки с S-ID и удалить логические дубли без удаления оригиналов | Evidence map и superseded_by для дублей |
 | P0 | APA-P50.A01.S01 — Карта связей: исследования ↔ S-ID ↔ артефакты ↔ PR | Traceability matrix, orphan report list |
 
-## RESEARCH — 7 ready
+## RESEARCH — 8 ready
 
 | Priority | Task | Acceptance |
 | --- | --- | --- |
@@ -49,6 +49,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | P1 | APA-P10.A01.S03 — Morph/Roof/Shell/Openings/SEO/3D dump | Матрица покрытия и побочных эффектов |
 | P1 | APA-P10.A02.S01 — Tapir публичные версии и Python/JSON vs локальная 1.5.10 | Compatibility matrix с source SHA |
 | P1 | APA-P10.A02.S02 — GDL/TN, Unicode, target identity и 92 ошибок | Разбор blockers без ложного LIVE |
+| P1 | APA-P10.A02.S04 — Native MEP/Tapir MEP команды, трассы, порты | MEP command/route/port matrix |
 | P1 | APA-P50.A02.S01 — Единый каталог AC29 SDK/Tapir/Python/GDL/IFC/MEP инструментов | Capability matrix, версии, пересечения |
 | P2 | APA-P10.A02.S03 — MCP/IFC/openBIM и альтернативы | Матрица альтернатив с границами |
 

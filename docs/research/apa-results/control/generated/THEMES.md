@@ -12,7 +12,7 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 | HUB_GOVERNANCE — Канонический hub и реестр | 8 | 4 | 3 | ART-BRANCH-JSON, ART-BRANCHES, ART-PLAN, ART-PUB-RECEIPT, ART-QUEUE, ART-REGISTER, ART-STATUS |
 | IFC_MCP — IFC/openBIM и MCP | 1 | 0 | 1 | ART-REGISTER |
 | KNOWLEDGE_GRAPH — Сведение исследований и доказательств | 3 | 0 | 1 | ART-BRANCHES, ART-REGISTER, ART-TRACE-RECEIPT, ART-TRACE-REPORT |
-| MEP — MEP native и Tapir | 1 | 0 | 0 | ART-REGISTER |
+| MEP — MEP native и Tapir | 1 | 0 | 1 | ART-REGISTER |
 | MVP — MVP и внедрение | 2 | 0 | 0 | ART-PLAN |
 | PUBLISHER — Публикация, квитанции и capability | 4 | 0 | 2 | ART-OS-AUDIT, ART-PUB-RECEIPT, ART-PUBLISHER |
 | SDK_NATIVE — Archicad 29 native SDK | 3 | 0 | 3 | ART-REGISTER, ART-SDK-GET3D, ART-SDK-SEO |
@@ -75,7 +75,7 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 
 ### MEP — MEP native и Tapir
 
-- APA-P10.A02.S04 [RESEARCH/IN_PROGRESS]: Native MEP/Tapir MEP команды, трассы, порты; work_key=native-and-tapir-mep; related=APA-P50.A02.S01
+- APA-P10.A02.S04 [RESEARCH/PARTIAL]: Native MEP/Tapir MEP команды, трассы, порты; work_key=native-and-tapir-mep; related=APA-P50.A02.S01
 
 ### MVP — MVP и внедрение
 
