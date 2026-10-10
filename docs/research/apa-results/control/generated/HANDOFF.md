@@ -23,7 +23,9 @@ Authority: [PROJECT_PLAN.json](../../../../../docs/research/apa-results/control/
 
 ## Development context and mandatory response header
 
-Read [DEVELOPMENT_BOARD](DEVELOPMENT_BOARD.md) for APA-P70 in addition to this handoff.
+Read [DEVELOPMENT_BOARD](DEVELOPMENT_BOARD.md) and [RESEARCH_LOOKAHEAD](RESEARCH_LOOKAHEAD.md) for APA-P70.
+Research uses the same PROJECT_PLAN.json task registry; when stage N has sufficient accepted sources, work ahead on independent eligible research for N+1.
+A research substep has its own S-ID, claim and evidence. Link all research to its target product S-ID; avoid duplicating completed reports.
 Start every APA work reply with four brief fields: Этап P-ID, задача A-ID, подзадача S-ID, сейчас (действие/статус).
 Use current GitHub task status; never claim DONE without evidence, receipt and S-ID readback.
 Never invent another controller or repeat proven low-level BIM tests without a regression trigger.

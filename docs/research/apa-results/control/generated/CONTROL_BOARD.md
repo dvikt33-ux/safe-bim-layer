@@ -24,6 +24,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 [DEVELOPMENT_BOARD.md](DEVELOPMENT_BOARD.md) — стадии P → A → S, фактические статусы и следующий шаг.
 Родительские стадии DONE только если все дочерние S-ID DONE_PUBLISHED.
+[RESEARCH_LOOKAHEAD.md](RESEARCH_LOOKAHEAD.md) — исследования будущих этапов в том же реестре.
 
 ## Claimed tasks
 

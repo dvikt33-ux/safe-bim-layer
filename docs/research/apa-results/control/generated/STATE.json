@@ -155,6 +155,15 @@
   "orphan_v2_manifests": [],
   "plan_revision": 35,
   "publisher": "DEPLOYED_SYNTHETIC_E2E_PASS",
+  "research_lookahead": {
+    "linked_product_substeps": 23,
+    "next_eligible_research": [
+      "APA-P50.A01.S01",
+      "APA-P50.A02.S01"
+    ],
+    "next_target": "APA-P70.A01.S01",
+    "unassessed": 23
+  },
   "research_runner_24h": "NOT_RUNNING",
   "scheduler": {
     "activation_gate": "Schedules configured and task IDs independently read via automation listing on 2026-10-10. REAL scheduled GitHub status claim -> report/receipt -> completion NOT VERIFIED. Do not mark RUNNING_VERIFIED until observed.",
