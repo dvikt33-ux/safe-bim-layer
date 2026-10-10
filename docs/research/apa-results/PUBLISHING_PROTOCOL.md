@@ -1,5 +1,11 @@
 # APA — обязательная публикация результатов в GitHub
 
+## Split-Plane / V2 protocol
+
+[RUN_EVENT_V2 JSON Schema](protocol/RUN_EVENT_V2.schema.json), [publisher contract](protocol/PUBLISHER_CONTRACT.md), [evidence policy](protocol/EVIDENCE_POLICY.md) и [readback receipt](receipts/APA-RUN-20261010-102800Z-research-os-audit-readback.json) опубликованы. **Это проект формата и пример receipt, не развёрнутый сервис.**
+
+Порядок: immutable report/manifest/evidence → GitHub commit → readback/hash → отдельный receipt → восстановимые проекции/индексы → index commit/readback → DONE_PUBLISHED. Если индексация падает, восстанавливать из immutable run, не повторять исследование. До готовности index builder текущие Markdown обновляются вручную и проверяются. Не вставлять commit SHA в файл того же коммита (самоссылка). Не считать SOURCE_VERIFIED равным LIVE_PASS.
+
 ## Режим исполнения по прямому указанию владельца
 
 Исследования выполняются в **обычных чатах ChatGPT с GitHub connector**; Deep Research **не запускать по умолчанию** и не использовать как замену обычным чатам или автоматическому GitHub push. Каждое исследование: первоисточник → проверка → Markdown в canonical hub → commit SHA → readback → реестр/очередь/статус. Запрос на 24/7 не означает, что runner уже работает; проверять фактическое расписание и публикации. Если ранее показанный Deep Research отчёт исчез, не приписывать его содержимое другим артефактам и не запускать повторно без разрешения.
