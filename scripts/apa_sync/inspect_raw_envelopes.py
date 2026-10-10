@@ -94,7 +94,7 @@ def _staged_fence_diagnosis(text: str) -> str:
         return "not_two_fences"
     head, middle, tail = text.split("```")
     lead = head[len(EVENT_PREFIX):] if head.startswith(EVENT_PREFIX) else head
-    if "\\n" in lead:
+    if "\n" in lead:
         preamble = "has_linebreak"
     elif "\\r" in lead:
         preamble = "has_cr"
@@ -128,9 +128,9 @@ def _staged_fence_diagnosis(text: str) -> str:
 
     # Re-package only in memory for a strictly validated control comparison.
     # JSON validation errors are grouped, not emitted with untrusted details.
-    controlled = EVENT_PREFIX + "\\n```json\\n" + json.dumps(
+    controlled = EVENT_PREFIX + "\n```json\n" + json.dumps(
         value, ensure_ascii=False, sort_keys=True,
-    ) + "\\n```"
+    ) + "\n```"
     try:
         normalized = parse_event(controlled)
     except InvalidEvent:
