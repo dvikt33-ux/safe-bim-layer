@@ -56,3 +56,9 @@ Published isolated [draft PR #33](https://github.com/dvikt33-ux/safe-bim-layer/p
 6. Canonical governance: research artifacts require GitHub commit and readback, Slack ledger does not substitute for immutable reports nor autonomously mark `PROJECT_PLAN` tasks DONE.
 
 **Status at writing:** root cause verified by user output, code candidate published, CI/live backfill pending evidence. The canonical report remains separate from feature PR and will be updated with actual acceptance results.
+
+## Independent offline verification — PR #33
+
+Source/test/operator files from `feature/apa-sync-slack-envelope-evidence-recovery-20261011` were independently read back through GitHub API. [GitHub Actions run 38091580453](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38091580453) completed **SUCCESS**. The `coordinator-unit` job ran **44/44 tests PASS** (`Ran 44 tests`, `OK` from independently fetched logs), including strict positive/negative wrapped-link handling, optional exact footer adjacency, SQLite replay deduplication and no-DB read-only preflight. `windows-launcher-static` job also **SUCCESS**. This is **OFFLINE PASS**, not historical LIVE acceptance.
+
+The required next activity remains the isolated owner-side **read-only** raw Slack probe, keeping current Socket Mode daemon untouched. Only after its `parse_valid` count rises from the earlier observed 1 may the owner restart the daemon for append-only SQLite backfill. Preserve original smoke `seq=1` and audit for conflicts. The 3 malformed events stay rejected.
