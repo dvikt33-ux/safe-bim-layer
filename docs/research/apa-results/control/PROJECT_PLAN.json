@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 10,
+  "revision": 11,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -280,6 +280,24 @@
       "uri": "docs/research/apa-results/receipts/APA-RUN-20261010-110048Z-legacy-traceability.json",
       "kind": "RECEIPT",
       "verification": "DONE_PUBLISHED_GITHUB_REST_READBACK_VERIFIED"
+    },
+    "ART-REGISTRY-SCHEDULED": {
+      "id": "ART-REGISTRY-SCHEDULED",
+      "uri": "docs/research/apa-results/control/SCHEDULED_TASKS_REGISTRY_ACTIVATION_20261010.md",
+      "kind": "DOCUMENT",
+      "verification": "READBACK_VERIFIED"
+    },
+    "ART-PROPOSAL-PROTOCOL": {
+      "id": "ART-PROPOSAL-PROTOCOL",
+      "uri": "docs/research/apa-results/control/TASK_PROPOSALS_AND_AUDIT.md",
+      "kind": "DOCUMENT",
+      "verification": "READBACK_VERIFIED"
+    },
+    "ART-SCHEDULED-INSTRUCTION": {
+      "id": "ART-SCHEDULED-INSTRUCTION",
+      "uri": "docs/research/apa-results/control/CHATGPT_SCHEDULED_TASK.md",
+      "kind": "DOCUMENT",
+      "verification": "READBACK_VERIFIED"
     }
   },
   "tasks": {
@@ -534,8 +552,7 @@
       "claim_ref": null,
       "requires_approval": false,
       "evidence": [
-        "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/control/SCHEDULED_TASKS_REGISTRY_ACTIVATION_20261010.md",
-        "https://github.com/dvikt33-ux/safe-bim-layer/commit/d5fae489368294bd2a592cf6e441c2dc133d6ca9"
+        "ART-REGISTRY-SCHEDULED"
       ],
       "blocked_reason": null
     },
@@ -1700,7 +1717,9 @@
         "APA-P60.A02.S01",
         "APA-P60.A02.S02"
       ],
-      "related": [],
+      "related": [
+        "APA-P60.A02.S04"
+      ],
       "inputs": [
         "ART-CONTROLLER"
       ],
@@ -1746,11 +1765,8 @@
       "claim_ref": null,
       "requires_approval": false,
       "evidence": [
-        "https://github.com/dvikt33-ux/safe-bim-layer/commit/e99173c0e251f5214edb9baf64b6371d67069b48",
-        "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/control/TASK_PROPOSALS_AND_AUDIT.md",
-        "https://github.com/dvikt33-ux/safe-bim-layer/commit/1312e95d7b5b18bc43197918f1d717b7ccf17574",
-        "https://github.com/dvikt33-ux/safe-bim-layer/commit/24e114039dc2c3c636cc12b651a4b03576d6a3ff",
-        "https://github.com/dvikt33-ux/safe-bim-layer/commit/9d7ce61f44237ebdfbfadee443a7119e8a11c383"
+        "ART-PROPOSAL-PROTOCOL",
+        "ART-SCHEDULED-INSTRUCTION"
       ],
       "blocked_reason": null
     }
@@ -1988,7 +2004,8 @@
         "ART-CONTROLLER",
         "ART-PLAN",
         "ART-PUB-WORKFLOW",
-        "ART-PUBLISHER"
+        "ART-PUBLISHER",
+        "ART-PROPOSAL-PROTOCOL"
       ],
       "synthesis_state": "OPEN",
       "owner": null
