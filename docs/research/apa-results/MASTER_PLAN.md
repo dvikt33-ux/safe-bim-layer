@@ -79,6 +79,19 @@
 - [ ] **APA-P40.A01.S03** Включить watchdog пропущенных циклов и журнал ошибок. **NOT_RUNNING**.
 - [ ] **APA-P40.A01.S04** Доказать 24-часовую работу по реальным коммитам и heartbeat, а не по обещаниям. **NOT_VERIFIED**.
 
+## APA-P50 — объединение исследований, тем и инструментов
+
+- **APA-P50.A01.S01–S03:** traceability результатов, дедупликация evidence, синтез исследований одной темы.
+- **APA-P50.A02.S01–S03:** каталог SDK/Tapir/Python/GDL/IFC/MEP, пересечения инструментов, безопасный roadmap объединения.
+- **APA-P50.A03.S01–S02:** синтез research → MVP, проверка готовности интеграции.
+
+## APA-P60 — единый управляющий проектом
+
+- **APA-P60.A01.S01–S04:** машиночитаемый DAG, validator, generated queue/task cards/темы/handoff, GitHub Actions readback.
+- **APA-P60.A02.S01–S03:** единый межчатовый handoff, claim-gated publisher, отдельный concurrency/CAS gate.
+
+Актуальные статусы P50/P60 — [PROJECT_PLAN.json](control/PROJECT_PLAN.json), [THEMES](control/generated/THEMES.md) и [CONTROL_BOARD](control/generated/CONTROL_BOARD.md), а не этот статический перечень.
+
 ## Правила изменения плана
 
 1. Сначала открыть [CURRENT_STATUS](CURRENT_STATUS.md), затем выбрать конкретный S-ID.
