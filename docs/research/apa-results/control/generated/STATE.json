@@ -1,6 +1,6 @@
 {
   "active": [],
-  "artifact_count": 33,
+  "artifact_count": 34,
   "counts": {
     "BLOCKED": 8,
     "CLAIMED": 0,
@@ -64,7 +64,7 @@
   "known_published_v2_runs": 4,
   "legacy_reports": "NOT_FULLY_INDEXED",
   "orphan_v2_manifests": [],
-  "plan_revision": 22,
+  "plan_revision": 23,
   "publisher": "DEPLOYED_SYNTHETIC_E2E_PASS",
   "research_runner_24h": "NOT_RUNNING",
   "scheduler": {
