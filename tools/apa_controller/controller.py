@@ -173,8 +173,9 @@ def load():
 
 
 def eligible(task, plan):
-    return task["status"] in DISPATCHABLE and all(
-        plan["tasks"][d]["status"] == "DONE_PUBLISHED" for d in task["depends_on"])
+    return (task["status"] in DISPATCHABLE and not task["requires_approval"]
+            and all(plan["tasks"][d]["status"] == "DONE_PUBLISHED"
+                    for d in task["depends_on"]))
 
 
 def verify_inbox(plan):
@@ -262,6 +263,38 @@ def build(plan):
               for status in sorted(STATUSES)}
     counts.update(DISPATCHABLE_NOW=len(ready), HELD_BY_DEPENDENCIES=len(held),
                   EXPIRED_LEASES=len(expired))
+    # Product development uses the SAME S-ID registry and claim rules as research.
+    # Parent P/A status is a derived projection: never mark a parent DONE early.
+    def aggregate_status(members):
+        if members and all(t["status"] == "DONE_PUBLISHED" for t in members):
+            return "DONE_PUBLISHED"
+        if any(t["status"] in ACTIVE for t in members):
+            return "IN_PROGRESS"
+        if any(t["status"] in {"PARTIAL", "DONE_PUBLISHED"} for t in members):
+            return "PARTIAL"
+        if any(eligible(t, plan) for t in members):
+            return "READY"
+        if any(t["status"] == "BLOCKED" for t in members):
+            return "BLOCKED"
+        return "WAITING"
+
+    development_actions = []
+    product_plan = plan["plans"].get("APA-P70")
+    if product_plan:
+        for action_id, action in sorted(product_plan["actions"].items()):
+            members = sorted((t for t in tasks.values()
+                              if t["action_id"] == action_id), key=lambda t: t["id"])
+            development_actions.append({
+                "id": action_id, "title": action["title"],
+                "status": aggregate_status(members),
+                "done": sum(t["status"] == "DONE_PUBLISHED" for t in members),
+                "total": len(members),
+                "tasks": members})
+    development_members = [t for a in development_actions for t in a["tasks"]]
+    development_active = [t for t in development_members if t["status"] in ACTIVE]
+    development_next = next((t for t in development_members if eligible(t, plan)), None)
+    development_plan_status = aggregate_status(development_members)
+
     board = [
         "# APA — единственный Project Controller / Control Board", "",
         "**Source of truth:** " + link(str(PLAN), "PROJECT_PLAN.json") + ".",
@@ -271,6 +304,10 @@ def build(plan):
         "; **Publisher:** DEPLOYED; **verified 24/7:** NOT_RUNNING.",
         "", "## Task status", "", "| Status | Count |", "| --- | ---: |"]
     board.extend("| " + key + " | " + str(value) + " |" for key, value in counts.items())
+    if product_plan:
+        board.extend(["", "## Полный цикл разработки APA", "",
+                      "[DEVELOPMENT_BOARD.md](DEVELOPMENT_BOARD.md) — стадии P → A → S, фактические статусы и следующий шаг.",
+                      "Родительские стадии DONE только если все дочерние S-ID DONE_PUBLISHED."])
     board += ["", "## Claimed tasks", "",
               "| Task | Owner | Lease until | Work key |", "| --- | --- | --- | --- |"]
     board.extend("| " + t["id"] + " | " + safe(t["owner"]) + " | " +
@@ -369,7 +406,12 @@ def build(plan):
     for kind in ("CONTROL", "CONSOLIDATION", "RESEARCH", "BUILD", "INTEGRATION", "VALIDATION"):
         selected = [t["id"] for t in ready if t["kind"] == kind]
         handoff.append("- " + kind + ": " + (", ".join(selected[:4]) if selected else "none"))
-    handoff += ["", "## Safety", "",
+    handoff += ["", "## Development context and mandatory response header", "",
+                 "Read [DEVELOPMENT_BOARD](DEVELOPMENT_BOARD.md) for APA-P70 in addition to this handoff.",
+                 "Start every APA work reply with four brief fields: Этап P-ID, задача A-ID, подзадача S-ID, сейчас (действие/статус).",
+                 "Use current GitHub task status; never claim DONE without evidence, receipt and S-ID readback.",
+                 "Never invent another controller or repeat proven low-level BIM tests without a regression trigger.",
+                 "", "## Safety", "",
                 "No autonomous ChatGPT research is started by this controller. 24/7 NOT_RUNNING.",
                 "No Deep Research/paid API without explicit approval. No main, PLN, APX, tested branch edits or merge.",
                 "Legacy reports are not fully mapped; see APA-P50.A01.S01.", ""]
@@ -391,7 +433,53 @@ def build(plan):
              "research_runner_24h": "NOT_RUNNING",
              "publisher": "DEPLOYED_SYNTHETIC_E2E_PASS",
              "legacy_reports": "NOT_FULLY_INDEXED"}
+    development_board = [
+        "# APA — разработка продукта / DEVELOPMENT_BOARD", "",
+        "Generated from [PROJECT_PLAN.json](../PROJECT_PLAN.json); this is not a second register.",
+        "Source of truth: task statuses and evidence in PROJECT_PLAN.json.",
+        "P/A completion is computed; DONE_PUBLISHED requires **every** child S-ID DONE_PUBLISHED.",
+        "requires_approval tasks are not dispatchable until separate owner approval is recorded.", "",
+        "## Краткая сводка", "",
+        "- План: APA-P70 — " + (safe(product_plan["title"]) if product_plan else "not registered"),
+        "- Статус: **" + development_plan_status + "**; завершено " +
+        str(sum(t["status"] == "DONE_PUBLISHED" for t in development_members)) +
+        "/" + str(len(development_members)) + " подзадач.",
+        "- Сейчас: " + (", ".join(t["id"] for t in development_active)
+                        if development_active else "не выполняется; нет IN_PROGRESS."),
+        "- Следующая доступная: " + (development_next["id"] + " — " +
+                                    safe(development_next["title"])
+                                    if development_next else "нет, см. зависимости и разрешения"),
+        "", "## Этапы → задачи", "",
+        "| Задача | Состояние | Выполнено подзадач |",
+        "| --- | --- | ---: |"]
+    for action in development_actions:
+        development_board.append("| " + action["id"] + " — " + safe(action["title"]) +
+                                 " | " + action["status"] + " | " +
+                                 str(action["done"]) + "/" + str(action["total"]) + " |")
+    development_board += ["", "## Подзадачи и следующий шаг", ""]
+    for action in development_actions:
+        development_board += ["### " + action["id"] + " — " + safe(action["title"]), ""]
+        for t in action["tasks"]:
+            missing = [d for d in t["depends_on"]
+                       if tasks[d]["status"] != "DONE_PUBLISHED"]
+            label = t["status"] + (" / AWAITING_APPROVAL" if t["requires_approval"]
+                                   else " / WAITING_DEPS" if missing
+                                   else " / ELIGIBLE" if eligible(t, plan)
+                                   else "")
+            development_board.append("- **" + t["id"] + " [" + label + "]** " +
+                                     safe(t["title"]) +
+                                     ("; зависимости: " + ", ".join(missing) if missing else ""))
+        development_board.append("")
+    state["development"] = {
+        "plan_id": "APA-P70", "status": development_plan_status,
+        "total": len(development_members),
+        "done": sum(t["status"] == "DONE_PUBLISHED" for t in development_members),
+        "active": [t["id"] for t in development_active],
+        "next_eligible": development_next["id"] if development_next else None,
+        "actions": [{k: a[k] for k in ("id", "title", "status", "done", "total")}
+                    for a in development_actions]}
     files = {"CONTROL_BOARD.md": "\n".join(board).encode(),
+             "DEVELOPMENT_BOARD.md": "\n".join(development_board).encode(),
              "TASK_CARDS.md": "\n".join(cards).encode(),
              "RELATIONSHIPS.md": "\n".join(relationships).encode(),
              "THEMES.md": "\n".join(themes).encode(),
