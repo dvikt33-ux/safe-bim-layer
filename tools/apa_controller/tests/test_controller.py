@@ -114,6 +114,13 @@ class ControllerTests(unittest.TestCase):
         with self.assertRaisesRegex(c.ControllerError, "UNPROVEN_RESEARCH_SUFFICIENT"):
             c.validate(plan)
         route["readiness_evidence_ids"] = ["ART-APA-FULL-CYCLE"]
+        with self.assertRaisesRegex(c.ControllerError, "UNPROVEN_RESEARCH_SUFFICIENT"):
+            c.validate(plan)
+        plan["artifacts"]["ART-ACCEPTED-RESEARCH-REVIEW-TEST"] = {
+            "id": "ART-ACCEPTED-RESEARCH-REVIEW-TEST",
+            "uri": "docs/research/apa-results/control/reviews/synthetic-only.md",
+            "kind": "REVIEW", "verification": "AUDIT_READBACK_VERIFIED"}
+        route["readiness_evidence_ids"] = ["ART-ACCEPTED-RESEARCH-REVIEW-TEST"]
         c.validate(plan)
         plan = copy.deepcopy(self.plan)
         plan["research_routes"]["APA-P70.A01.S01"]["research_task_ids"] = ["APA-P99.A99.S99"]
