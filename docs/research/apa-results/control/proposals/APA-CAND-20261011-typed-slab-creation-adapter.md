@@ -51,3 +51,12 @@ risks: "This is a candidate only; upstream PR785 is OPEN and not part of proven 
 ## Independent audit required
 
 Before accepting, read current `PROJECT_PLAN.json`, check `work_key` uniqueness, genuine dependency completion, existing implementation in PR #16/#20/#21 and test lineage. Confirm separate approval for modifying any test PLN. Then write `TASK_REVIEW_V1` with the registration commit and actual readback; do not claim acceptance based solely on this proposal.
+
+
+## IMPORTANT 2026-10-11 anti-duplication evidence — do not admit the original scope
+
+**This proposal is under preliminary scope challenge, NOT approved/registered.** Subsequent [APA-P50.A02.S01 anti-dup audit](../../runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md) found a **pre-existing working-code path** in `scripts/archicad_executor.py` (older `feature/working-archicad-mvp` branch, `plan_action(create_slab)` and `run` lines 230–247) performing **CreateSlabs → ModifySlabs(structureType=Basic, buildingMaterialId)**. It also found `archicad_template_builder.py:material_dependency_plan` already resolving local Building Material/Surface/Fill attributes; PR #16 already has project intent, BIM dependency graph, SceneWriter, exact project guard and SQLite journal.
+
+**Therefore:** it is **not warranted to create a new stand-alone typed slab adapter, material resolver, BIM DAG or orchestration service** under this candidate. Independent auditor should **DEFER / REQUIRE RESCOPE** and compare existing P30.A02.S01/S02 acceptance first; if a distinct task remains, make it **integration of existing source modules plus missing strict geometry/attribute verification and durable no-replay gates**. Do not mark DUPLICATE or APPROVED as an audit decision without a separate auditor review and validated project-plan status change. No changes to user PLN/APX/main/master are implied.
+
+**Potential minimal missing delta:** dynamic multi-component intent translation (PR16 still restricts to 1 fixed pavilion), proven per-project selected Basic/Composite IDs and skin-derived thickness, source parity, non-atomic Create→Modify crash handling, and per-element readback accepting only exact type/geometry/story/host/material. No independent general multi-floor live PASS exists yet.
