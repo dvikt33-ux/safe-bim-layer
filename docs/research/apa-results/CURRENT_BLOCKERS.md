@@ -10,6 +10,7 @@
 | Roof surface modify | **BLOCKED live** | Read-only material provenance; затем отдельное разрешение на тест изменения поверхности без изменения Building Material |
 | MEP Tapir registration | **NOT_VERIFIED installed APX** | Read-only availability/response установленной версии; запись разрешать отдельно |
 | SomeStuff SyncGuids | **NOT_VERIFIED live** | Проверка отмены и `returned_unverified`, независимый readback в одноразовом PLN |
+| APA automatic GitHub publisher | **DEPLOYED / SYNTHETIC_E2E_PASS** | [Actions run 38045964668](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38045964668), [receipt](receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json). Для 24/7 исследования отдельно нужны scheduler/heartbeat и два независимых SOURCE runs; legacy index migration pending |
 | Slack Socket Mode coordinator | **NOT_DEPLOYED** | Реальный daemon + credentials + приём/дедупликация событий; offline 18/18 не считать live |
 | PR20 source parity | **NOT_VERIFIED** | Соответствие исходников PR коммиту сборки APX; локальная EOF-правка не должна теряться |
 | Historical vs current models | **CONTEXT DEPENDENT** | Проверять PID/порт/PLN/hash и каталог библиотек перед интерпретацией результатов |
