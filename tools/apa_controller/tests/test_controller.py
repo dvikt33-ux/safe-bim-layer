@@ -40,7 +40,8 @@ class ControllerTests(unittest.TestCase):
     def test_all_real_plan_tasks_valid(self):
         self.assertEqual(len(self.plan["tasks"]), 50)
         self.assertEqual(len(self.plan["plans"]), 7)
-        self.assertEqual(len(self.plan["artifacts"]), 18)
+        self.assertEqual(len(self.plan["artifacts"]), 24)
+        self.assertEqual(len(self.plan["topics"]), 15)
 
     def test_dispatch_and_generated_state_idempotent(self):
         state = c.build(self.plan)
@@ -57,6 +58,18 @@ class ControllerTests(unittest.TestCase):
         plan = copy.deepcopy(self.plan)
         plan["tasks"]["APA-P00.A02.S02"]["depends_on"] = ["APA-P60.A01.S01"]
         with self.assertRaisesRegex(c.ControllerError, "DEPENDENCY_CYCLE"):
+            c.validate(plan)
+
+    def test_duplicate_topic_membership_rejected(self):
+        plan = copy.deepcopy(self.plan)
+        plan["topics"]["SDK_NATIVE"]["task_ids"].append("APA-P10.A02.S01")
+        with self.assertRaisesRegex(c.ControllerError, "DUPLICATE_TOPIC_MEMBERSHIP"):
+            c.validate(plan)
+
+    def test_unmapped_topic_task_rejected(self):
+        plan = copy.deepcopy(self.plan)
+        plan["topics"]["SDK_NATIVE"]["task_ids"].remove("APA-P10.A01.S01")
+        with self.assertRaisesRegex(c.ControllerError, "UNMAPPED_TASK_TOPIC"):
             c.validate(plan)
 
     def test_duplicate_work_key_rejected(self):
