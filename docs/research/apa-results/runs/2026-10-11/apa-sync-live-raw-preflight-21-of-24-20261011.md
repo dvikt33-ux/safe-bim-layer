@@ -54,3 +54,15 @@ This preflight establishes syntax/schema acceptance against the actual Slack Web
 7. Three incomplete/unfenced events remain blocked for manual provenance audit. Slack ledger replay is not GitHub publication and never auto-completes `PROJECT_PLAN` tasks.
 
 **Status:** verified read-only preflight, controlled SQLite live replay PENDING.
+
+## Verified owner-side SQLite pre-recovery backup (2026-10-11)
+
+**Evidence class:** USER-SUPPLIED_LOCAL_COMMAND_OUTPUT. The owner used Python's `sqlite3.Connection.backup` to create a separate rollback snapshot of the existing event ledger. The first PowerShell `-c` invocation incorrectly quoted the terminal success message and produced a `NameError` **after** the database backup call; the owner then independently checked both source and backup using a new Python script via stdin. It executed `PRAGMA integrity_check` on both databases, compared ordered `(seq, event_id, payload)` tuples, and verified the original smoke event at sequence 1. Actual console output:
+
+```text
+SQLITE_BACKUP_VERIFIED
+EVENTS: 1
+ORIGINAL_SMOKE_PRESENT: True
+```
+
+This establishes **backup integrity and equality of stored event tuples at the moment of checking**, not a proof of post-recovery data acceptance. It does not expose the user's backup filename, tokens or raw event payloads. The original production event ledger remains at one row before the upcoming backfill. Coordinator Socket Mode first window had already been closed by the owner. New test branch `feature/apa-sync-slack-envelope-evidence-recovery-20261011` has 44/44 offline unit PASS and live **read-only** Slack parser preflight 21/24; the next controlled action is to launch the patched coordinator against the unchanged existing database and collect `APA Slack bootstrap` statistics. **Historical SQLite insertion and conflict/dedup audit remain PENDING / NOT_VERIFIED.**
