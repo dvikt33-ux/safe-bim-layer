@@ -165,6 +165,35 @@ def validate(plan):
             check(sid not in membership, "DUPLICATE_TOPIC_MEMBERSHIP " + sid)
             membership[sid] = topic_id
     check(set(membership) == set(plan["tasks"]), "UNMAPPED_TASK_TOPIC")
+    # Research and product work share exactly one dispatch/claim registry.
+    routes = plan.get("research_routes", {})
+    check(isinstance(routes, dict), "BAD_RESEARCH_ROUTES")
+    product_ids = {sid for sid, t in plan["tasks"].items()
+                   if t["plan_id"] == "APA-P70"}
+    if product_ids:
+        check(set(routes) == product_ids, "UNMAPPED_PRODUCT_RESEARCH")
+    for sid, route in routes.items():
+        check(isinstance(route, dict) and
+              set(route) == {"research_task_ids", "readiness",
+                             "readiness_evidence_ids", "note"},
+              "BAD_RESEARCH_ROUTE " + sid)
+        research_ids = route["research_task_ids"]
+        check(isinstance(research_ids, list) and bool(research_ids) and
+              len(set(research_ids)) == len(research_ids) and
+              all(rid in plan["tasks"] for rid in research_ids),
+              "UNKNOWN_RESEARCH_TASK " + sid)
+        check(all(plan["tasks"][rid]["plan_id"] != "APA-P70"
+                  for rid in research_ids), "RESEARCH_ROUTE_SELF_LINK " + sid)
+        check(route["readiness"] in {"NOT_ASSESSED", "GAP", "SUFFICIENT"},
+              "BAD_RESEARCH_READINESS " + sid)
+        check(isinstance(route["note"], str), "BAD_RESEARCH_ROUTE_NOTE " + sid)
+        evid = route["readiness_evidence_ids"]
+        check(isinstance(evid, list) and len(set(evid)) == len(evid) and
+              all(x in plan["artifacts"] for x in evid),
+              "UNKNOWN_READINESS_EVIDENCE " + sid)
+        if route["readiness"] == "SUFFICIENT":
+            check(bool(evid), "UNPROVEN_RESEARCH_SUFFICIENT " + sid)
+        check(bool(plan["tasks"][sid]["inputs"]), "RESEARCH_HAS_NO_SOURCE " + sid)
     return plan
 
 
@@ -294,6 +323,29 @@ def build(plan):
     development_active = [t for t in development_members if t["status"] in ACTIVE]
     development_next = next((t for t in development_members if eligible(t, plan)), None)
     development_plan_status = aggregate_status(development_members)
+    routes = plan.get("research_routes", {})
+    # Research is allowed to run ahead of BUILD. Only task.dependencies control
+    # actual execution, not whether the corresponding product action has begun.
+    research_lookahead = []
+    for t in development_members:
+        route = routes.get(t["id"])
+        if not route:
+            continue
+        pending = [tasks[rid] for rid in route["research_task_ids"]
+                   if tasks[rid]["status"] != "DONE_PUBLISHED"]
+        eligible_research = [r for r in pending if eligible(r, plan)]
+        research_lookahead.append({
+            "target": t["id"], "stage": t["action_id"],
+            "readiness": route["readiness"],
+            "research_tasks": route["research_task_ids"],
+            "eligible_research": [r["id"] for r in eligible_research],
+            "sources": t["inputs"]})
+    ahead = [x for x in research_lookahead
+             if x["readiness"] != "SUFFICIENT" and x["eligible_research"]]
+    # Earlier product stages first; research can work on later stages when an
+    # earlier stage has sufficient evidence or its linked tasks are unavailable.
+    ahead.sort(key=lambda x: (x["stage"], x["target"]))
+    next_research = ahead[0] if ahead else None
 
     board = [
         "# APA — единственный Project Controller / Control Board", "",
@@ -307,7 +359,8 @@ def build(plan):
     if product_plan:
         board.extend(["", "## Полный цикл разработки APA", "",
                       "[DEVELOPMENT_BOARD.md](DEVELOPMENT_BOARD.md) — стадии P → A → S, фактические статусы и следующий шаг.",
-                      "Родительские стадии DONE только если все дочерние S-ID DONE_PUBLISHED."])
+                      "Родительские стадии DONE только если все дочерние S-ID DONE_PUBLISHED.",
+                      "[RESEARCH_LOOKAHEAD.md](RESEARCH_LOOKAHEAD.md) — исследования будущих этапов в том же реестре."])
     board += ["", "## Claimed tasks", "",
               "| Task | Owner | Lease until | Work key |", "| --- | --- | --- | --- |"]
     board.extend("| " + t["id"] + " | " + safe(t["owner"]) + " | " +
@@ -407,7 +460,9 @@ def build(plan):
         selected = [t["id"] for t in ready if t["kind"] == kind]
         handoff.append("- " + kind + ": " + (", ".join(selected[:4]) if selected else "none"))
     handoff += ["", "## Development context and mandatory response header", "",
-                 "Read [DEVELOPMENT_BOARD](DEVELOPMENT_BOARD.md) for APA-P70 in addition to this handoff.",
+                 "Read [DEVELOPMENT_BOARD](DEVELOPMENT_BOARD.md) and [RESEARCH_LOOKAHEAD](RESEARCH_LOOKAHEAD.md) for APA-P70.",
+                 "Research uses the same PROJECT_PLAN.json task registry; when stage N has sufficient accepted sources, work ahead on independent eligible research for N+1.",
+                 "A research substep has its own S-ID, claim and evidence. Link all research to its target product S-ID; avoid duplicating completed reports.",
                  "Start every APA work reply with four brief fields: Этап P-ID, задача A-ID, подзадача S-ID, сейчас (действие/статус).",
                  "Use current GitHub task status; never claim DONE without evidence, receipt and S-ID readback.",
                  "Never invent another controller or repeat proven low-level BIM tests without a regression trigger.",
@@ -466,10 +521,47 @@ def build(plan):
                                    else " / WAITING_DEPS" if missing
                                    else " / ELIGIBLE" if eligible(t, plan)
                                    else "")
+            route = routes.get(t["id"], {})
+            source_ids = t["inputs"]
             development_board.append("- **" + t["id"] + " [" + label + "]** " +
                                      safe(t["title"]) +
-                                     ("; зависимости: " + ", ".join(missing) if missing else ""))
+                                     ("; зависимости: " + ", ".join(missing) if missing else "") +
+                                     "; исследования: " +
+                                     ", ".join(route.get("research_task_ids", [])))
+            development_board.append("  - Источники/ветки: " +
+                                     ", ".join(link(plan["artifacts"][art]["uri"], art)
+                                               for art in source_ids))
         development_board.append("")
+    research_board = [
+        "# APA — опережающие исследования / RESEARCH_LOOKAHEAD", "",
+        "Generated from the SAME [PROJECT_PLAN.json](../PROJECT_PLAN.json).",
+        "Research runs and BUILD use ONE registry, never independent plans.",
+        "NOT_ASSESSED ≠ GAP and not proof that an additional research run is required.",
+        "SUFFICIENT requires accepted evidence; it defers repetitive research on that target.",
+        "A candidate research S-ID must still satisfy its own dependencies and claim gate.", "",
+        "## Следующее исследование", "",
+        (("- Цель: " + next_research["target"] + "; доступные исследовательские S-ID: " +
+          ", ".join(next_research["eligible_research"]))
+         if next_research else "- Нет доступного связанного исследования. Проверить результаты и зависимости."),
+        "", "## Источники и очередь по продуктовым подзадачам", ""]
+    for target in research_lookahead:
+        t = tasks[target["target"]]
+        research_board += [
+            "### " + target["target"] + " — " + safe(t["title"]), "",
+            "- Готовность исследования: **" + target["readiness"] + "**",
+            "- Связанные исследования: " +
+            ", ".join(rid + " (" + tasks[rid]["status"] + ")"
+                      for rid in target["research_tasks"]),
+            "- Доступны сейчас: " + (", ".join(target["eligible_research"]) or "нет"),
+            "- Использовать источники (ветка/файл/PR): " +
+            (", ".join(link(plan["artifacts"][art]["uri"], art) for art in target["sources"])
+             or "не указаны"), ""]
+    state["research_lookahead"] = {
+        "next_target": next_research["target"] if next_research else None,
+        "next_eligible_research": (next_research["eligible_research"] if next_research else []),
+        "linked_product_substeps": len(research_lookahead),
+        "unassessed": sum(x["readiness"] == "NOT_ASSESSED" for x in research_lookahead)}
+
     state["development"] = {
         "plan_id": "APA-P70", "status": development_plan_status,
         "total": len(development_members),
@@ -480,6 +572,7 @@ def build(plan):
                     for a in development_actions]}
     files = {"CONTROL_BOARD.md": "\n".join(board).encode(),
              "DEVELOPMENT_BOARD.md": "\n".join(development_board).encode(),
+             "RESEARCH_LOOKAHEAD.md": "\n".join(research_board).encode(),
              "TASK_CARDS.md": "\n".join(cards).encode(),
              "RELATIONSHIPS.md": "\n".join(relationships).encode(),
              "THEMES.md": "\n".join(themes).encode(),
