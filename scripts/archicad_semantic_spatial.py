@@ -8,6 +8,7 @@ story indices, and feed existing archicad_bim_graph.compile_graph/SceneWriter.
 from __future__ import annotations
 
 from collections import Counter
+import copy
 import math
 
 import archicad_semantic_brief as BRIEF
@@ -231,3 +232,51 @@ def compile_spatial(brief,pack,layout):
                    "alignedCandidateLoadPathCount":len(links),
                    "perStoryRoomCount":dict(Counter(x["storyId"] for x in vals))}
     }
+
+
+def relocate_authored_xy(layout, dx, dy):
+    """Pure *explicit* authored-layout translation; no geometry inferred.
+
+    Shift whole BIM layout (outline, rooms, axes, continuous bearing lines)
+    in world XY. Leaves structural links and story identity unchanged. This
+    is NOT an automatic place-picker and does not grant Create/Modify.
+    The result still needs compile_spatial and native read-only collision scan.
+    """
+    delta_x=number(dx,"TRANSLATION_X")
+    delta_y=number(dy,"TRANSLATION_Y")
+    if not isinstance(layout,dict) or set(layout)!={
+            "schemaVersion","outline","rooms","axes","bearingLines","loadPaths"
+            } or layout["schemaVersion"]!=SCHEMA:
+        raise ValueError("AUTHORED_LAYOUT_REQUIRED_FOR_TRANSLATION")
+    copied=copy.deepcopy(layout)
+    def add(obj,key,delta):
+        obj[key]=number(obj[key],"SOURCE_"+key)+delta
+        if not math.isfinite(obj[key]) or abs(obj[key])>1e6:
+            raise ValueError("TRANSLATED_COORDINATE_OUT_OF_RANGE")
+    for key in ("xMin","xMax"):
+        add(copied["outline"],key,delta_x)
+    for key in ("yMin","yMax"):
+        add(copied["outline"],key,delta_y)
+    for room in copied["rooms"]:
+        rect=room["rectangle"]
+        for key in ("xMin","xMax"):
+            add(rect,key,delta_x)
+        for key in ("yMin","yMax"):
+            add(rect,key,delta_y)
+    axis_directions={}
+    for axis in copied["axes"]:
+        direction=axis["direction"]
+        if direction not in ("X","Y") or axis["id"] in axis_directions:
+            raise ValueError("INVALID_SOURCE_AXIS_FOR_TRANSLATION")
+        axis_directions[axis["id"]]=direction
+        add(axis,"coordinate",delta_x if direction=="X" else delta_y)
+    for line in copied["bearingLines"]:
+        direction=axis_directions.get(line["axisId"])
+        if direction is None:
+            raise ValueError("TRANSLATION_UNKNOWN_BEARING_AXIS")
+        # X-axis constant coordinate is world X, so the span is world Y.
+        # Y-axis constant coordinate is world Y, so the span is world X.
+        delta=delta_y if direction=="X" else delta_x
+        add(line,"fromCoordinate",delta)
+        add(line,"toCoordinate",delta)
+    return copied
