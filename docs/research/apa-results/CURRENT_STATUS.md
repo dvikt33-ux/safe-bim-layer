@@ -208,3 +208,17 @@
 **Canonical task/subtask:** `APA-P70.A03.S02 / Read-only preflight`. Following owner-supplied `GetProjectInfo` on port 19726 that correctly returned `C:\\институт проект\\Улучшенная копия APA_Test_House_01.pln` with `isUntitled=false` and `isTeamwork=false`, the owner reran the guarded preflight and received `RuntimeError: WRONG_PROJECT` at the identity condition, **before** the `GetStories` and `GetAttributesByType` calls. Therefore exact identity is apparently inconsistent **between samples**, with cause unknown. The latest failure output does not include the raw path or booleans and cannot prove .bpn, another PLN, a Unicode/path representation issue, or concurrent window/port switching. This is not a failed geometry check or evidence of native mutation. No native writes were requested.
 
 **Next one-shot read-only diagnostic:** capture `GetProjectInfo` exact returned `projectPath`, repr, projectName, flags and each individual predicate. If all pass, immediately collect `GetStories`, unique material match and recheck `GetProjectInfo` after the reads. Do not alter project settings, relax identity matching, start old Create scripts or block offline PR44 progress on this diagnostic. Owner requested leading canonical task/subtask in each response and advance Work instructions before any handoff.
+
+
+## S02 root cause confirmed — PowerShell piped here-string destroyed Cyrillic expectedPath (2026-10-11)
+
+**Task:** `APA-P70.A03.S02` / read-only PLN identity + story/material preflight. Owner supplied explicit diagnostic JSON:
+
+- `status=PROJECT_IDENTITY_MISMATCH`
+- `expectedPath="C:\\???????? ??????\\?????????? ????? APA_Test_House_01.pln"` — Cyrillic characters in user-authored expected Python literal were replaced with literal `?` during `PowerShell @'...'@ | python` text piping.
+- `actualPath="C:\\институт проект\\Улучшенная копия APA_Test_House_01.pln"` — correct native path returned from `GetProjectInfo`.
+- `projectName="Улучшенная копия APA_Test_House_01"`, `savedProject=true`, `notTeamwork=true`, `nativeWriteCalls=0`.
+
+**ROOT_CAUSE_IDENTIFIED: PIPE_STDIN_ENCODING_DATA_LOSS** in the *local expected-path literal*, not an Archicad document-path inconsistency. This accounts for the recent `WRONG_OPEN_PLN` / `WRONG_PROJECT` from the piped Cyrillic checks; earlier separately documented native .bpn vs .pln state is a distinct historical event, not retroactively reclassified. Do not switch/reopen/rename the saved project, alter the exact PLN guard, or assume geometry/material errors. The failed identity guard ran before `GetStories`/`GetAttributesByType`, so story/material readback **still requires one fresh safe read**.
+
+**Remedy:** One-shot, read-only preflight using ASCII-only Python source with `\\u` escapes for expected Cyrillic path and material names, or configure **both** `$OutputEncoding=[System.Text.UTF8Encoding]::new($false)` and `$env:PYTHONIOENCODING='utf-8'` before piping. The ASCII-only approach is insensitive to Windows PowerShell native pipe encoding. Retain exact normalized-path comparison and verify `GetProjectInfo` again after stories/material queries. Do not create/modify elements and don't re-run old 45-GUID smoke. Controller S02 remains PARTIAL, current code CI 261 PASS.
