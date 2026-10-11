@@ -1,0 +1,23 @@
+{
+  "status": "SAVED_REOPENED_NATIVE_READBACK_PASS",
+  "automaticRetry": false,
+  "nativeCreates": 0,
+  "fileHashBefore": "0ea8f499b4d286f1d9c174107fb6033cca0ccf3cfa6d5c7f4685652fff49b51d",
+  "saveResponse": {
+    "success": true
+  },
+  "fileHashAfterSave": "ecb6a1a7274e21bf331488cd7a59bad12d12798d64fce82f9259ec1959d72730",
+  "openResponse": {
+    "success": true
+  },
+  "guidCount": 30,
+  "verifiedCreatedGuids": 10,
+  "binding": {
+    "path": "C:\\LocalAI\\APA_Isolated_Writer_Test_01.pln",
+    "name": "APA_Isolated_Writer_Test_01",
+    "port": 19724,
+    "tapirVersion": "1.5.10",
+    "storyIndex": 0
+  },
+  "fileHashAfterReopen": "ecb6a1a7274e21bf331488cd7a59bad12d12798d64fce82f9259ec1959d72730"
+}
