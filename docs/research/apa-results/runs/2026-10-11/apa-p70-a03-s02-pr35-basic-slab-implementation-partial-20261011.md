@@ -77,3 +77,30 @@ Read-only continuation preflight requires: historical SHA256 evidence, exact ori
 - **Acceptance remains OFFLINE_PASS / LIVE_NOT_VERIFIED for continuation.** The user's recent live success refers **only** to the one-slab modification; no new 20 steps were executed by this assistant. A separately approved, exact-scope single-shot live trial is required.
 
 Do not promote APA-P70.A03.S02 to DONE_PUBLISHED until its dependency/owner-approval and full live acceptance gates are met.
+
+## Subsequent owner LIVE suffix trial: PARTIAL_OR_UNKNOWN_OUTCOME
+
+The owner executed the separately confirmed exact 20-step suffix on `C:\\LocalAI\\APA_Test_House_01.pln`, via Tapir 1.5.10, port 19726. Read-only preflight reported `READY_FOR_EXPLICIT_TWENTY_STEP_CONTINUATION`, reusedCount=5, remainingCount=20, modelWriteAttempts=0. Owner entered `ПОСТРОИТЬ`. Native attempt returned:
+
+```json
+{
+  "status":"PARTIAL_OR_UNKNOWN_OUTCOME",
+  "sceneId":"apa-suffix-20261011-031123-7181b47c",
+  "newCreatedCount":null,
+  "reusedCount":5,
+  "plnSaved":false,
+  "allGuidsReadback":false,
+  "reason":"ValueError: WALL_SIZE_READBACK_MISMATCH",
+  "failedStep":"s2-wall-south",
+  "manualReconciliationRequired":true
+}
+```
+
+**Evidence class: USER_SUPPLIED, REPORTED_LIVE_PARTIAL, NOT a full model PASS.** The suffix journal has been reserved and MUST NOT be replayed. Subsequent operations are not accepted; the failing second-story south wall may already exist and possess a durable returned GUID, pending read-only reconciliation. No native parameter mismatch field can be established solely from the generic exception; do NOT assume second-story elevation cause until exact actual-vs-requested fields are read.
+
+A new **strictly read-only** diagnostic was committed to the same PR branch:
+`scripts/diagnose_apa_suffix_wall_readback.py`. It checks exact PLN/version/two-storey map, original journal + repaired slab reservation, suffix reserved scene and last failed step, current GUID inventory, and typed live GetDetailsOfElements for the failed wall; prints each requested-versus-actual geometric field plus any unjournaled GUIDs. The diagnostic refuses any write command at its transport boundary.
+
+Source commit `35c280583cafb4829bb5929f6f679c5c7b7e2de0`; CI https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38143324357 — **SUCCESS, 126/126 offline tests PASS** including synthetic second-story native wall readback drift with read-only diagnosis and unchanged write-attempt count.
+
+**Next gate:** owner runs only `python .../diagnose_apa_suffix_wall_readback.py --port 19726`, preserving the open unsaved scratch project and original journal. Repair or continuation must be grounded in this output, separately authorized and single-shot. No automatic retry, save, rollback, or write has been attempted by ChatGPT.
