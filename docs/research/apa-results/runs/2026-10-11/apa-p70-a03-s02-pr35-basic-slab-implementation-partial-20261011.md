@@ -210,3 +210,20 @@ User executed read-only `continue_apa_after_s2_slab.py --port 19726 --material "
 **Interpretation:** active native story at the time of this preflight did not match the pinned test-story index **0**. This is a safety guard, not evidence of changed BIM geometry or a failed create operation; no Create/Modify calls were attempted by this script. Since PowerShell was still prompting for approval despite a prior `throw` (separately pasted commands), the correct immediate action is **cancel Read-Host using Ctrl+C**, not approve. Set the active tab/story to first floor (index 0, elevation 0) in the **same** open PLN; then rerun **read-only preflight only** and verify `READY_FOR_EXPLICIT_THIRTEEN_STEP_CONTINUATION` and zero writes. Do not reuse earlier approval tokens and do not alter original journals or run any create command before successful fresh preflight.
 
 **Current status:** 12/25 historical planned elements REPORTED LIVE verified; fourth suffix NOT_STARTED; file still unsaved; no automatic replay. Do not close or switch the PLN. Future automation of UI-level story activation remains outside scope and should not be invented in this source-safe workflow.
+
+## Live fourth-suffix read-only preflight succeeded after selecting bound story
+
+Owner activated the required first story in the *same* open Archicad 29 test PLN and reran read-only `continue_apa_after_s2_slab.py --port 19726 --material "Железобетон - Конструкционный"`. Observed result:
+
+```json
+{
+ "status":"READY_FOR_EXPLICIT_THIRTEEN_STEP_CONTINUATION",
+ "binding":{"path":"C:\\LocalAI\\APA_Test_House_01.pln","name":"APA_Test_House_01","port":19726,"tapirVersion":"1.5.10","storyIndex":0},
+ "sceneId":"apa-suffix4-20261011-031123-7181b47c",
+ "reusedCount":12,
+ "remainingCount":13,
+ "modelWriteAttempts":0
+}
+```
+
+**Evidence class USER_SUPPLIED / REPORTED_LIVE_PREFLIGHT_PASS.** The approval token is intentionally omitted from the durable report. No fourth-suffix Create was performed in this preflight; native full-scene results remain unverified and PLN unsaved. The previous `STORY_MISMATCH` is resolved for this read-only call, but a fresh execution must revalidate identity before native writes. Advise explicit user approval for 13 creates; after any partial/unknown outcome, NO blind retry.
