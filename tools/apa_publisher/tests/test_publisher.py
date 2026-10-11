@@ -90,6 +90,38 @@ class PublisherTests(unittest.TestCase):
         self.assertEqual(receipt_path.read_bytes(), first)
         self.assertEqual(p.read_json(receipt_path)["report_commit_sha"], commit)
 
+    def test_recovery_rejects_forged_receipt_fields(self):
+        r = request()
+        p.INBOX.mkdir(parents=True)
+        (p.INBOX / (r["run_id"] + ".json")).write_bytes(p.encoded(r))
+        p.prepare()
+        p.receipt("a" * 40)
+        receipt_path = p.RECEIPTS / (r["run_id"] + ".json")
+        original = p.read_json(receipt_path)
+        # Hash and idempotency fields alone must not authenticate a receipt.
+        invalid = (
+            ("status", "PARTIAL"),
+            ("indexed", False),
+            ("index_mode", "UNVERIFIED"),
+            ("report_commit_sha", "not-a-commit"),
+            ("index_commit_sha", "b" * 40),
+            ("report_path", "docs/other/REPORT.md"),
+            ("schema", "FAKE_SCHEMA"),
+            ("run_id", "APA-RUN-20260101-000000Z-other"),
+            ("readback_verified", False),
+        )
+        for field, value in invalid:
+            with self.subTest(field=field):
+                corrupt = dict(original)
+                corrupt[field] = value
+                receipt_path.write_bytes(p.encoded(corrupt))
+                with self.assertRaisesRegex(p.PublishError, "RECEIPT_CONFLICT"):
+                    p.receipt("a" * 40)
+        receipt_path.write_bytes(p.encoded(original))
+        # Reusing same immutable proof at a later head must remain idempotent.
+        p.receipt("b" * 40)
+        self.assertEqual(receipt_path.read_bytes(), p.encoded(original))
+
     def test_immutable_conflict_rejected(self):
         r = request()
         p.create_run(r)
