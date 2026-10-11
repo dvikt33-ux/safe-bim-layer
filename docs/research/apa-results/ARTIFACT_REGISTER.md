@@ -250,3 +250,9 @@ Controller artifact record: `PROJECT_PLAN.json` revision **52**, [commit 8af838f
 | Artifact | Source and validation | Classification |
 |---|---|---|
 | `ART-APA-PUBLISHER-RACE-PR38-20261011` | [Canonical report](runs/2026-10-11/apa-publisher-controller-push-race-pr38-20261011.md), [draft PR #38](https://github.com/dvikt33-ux/safe-bim-layer/pull/38), [Actions #38150011113](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38150011113) **SUCCESS**: 23 Controller + 6 Publisher unit tests, four synthetic Git race cases incl. concurrent plan rev preservation and code-change rejection | **OFFLINE_CI_PASS, CANONICAL_DEPLOYMENT_NOT_VERIFIED**. Proposed fix is in new branch only; `APA-P00.A03.S03` remains PARTIAL, no task status changes. Does not claim full three-stage publisher serialization. |
+
+## APA-P70.A03.S02 — live 25/25 building-shell acceptance UNSAVED (2026-10-11)
+
+| Artifact ID | Persisted source / provenance | Evidence classification and next gate |
+|---|---|---|
+| `ART-APA-AC29-SCRATCH-25-OF-25-LIVE-20261011` | [Full technical run report](runs/2026-10-11/apa-p70-a03-s02-pr35-basic-slab-implementation-partial-20261011.md), [source draft PR #35](https://github.com/dvikt33-ux/safe-bim-layer/pull/35), [source synthetic CI #38149533972](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38149533972). Live result report commit [516ae12](https://github.com/dvikt33-ux/safe-bim-layer/commit/516ae12ba2ffd585f4e6a4e68c185b852ef2fd4d), canonical fetch_file readback PASS. | **USER_SUPPLIED / REPORTED_LIVE_TYPED_READBACK_PASS_UNSAVED**. Archicad 29 / Tapir 1.5.10 / approved disposable PLN: suffix5 `COMPLETE_UNSAVED`, 13 GUID reused, 12 new, `allGuidsReadback=true`, original graph 25/25; expected overall 45 incl. preexisting 20. **Save As of scratch test copy and independent reopen+45 GUID typed scan NOT_VERIFIED**. Parent controller task `APA-P70.A03.S02` still broader than this test slice, do not auto-mark DONE. |
