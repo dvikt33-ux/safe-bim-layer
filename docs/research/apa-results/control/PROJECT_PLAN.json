@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 62,
+  "revision": 63,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -565,7 +565,7 @@
       "id": "ART-APA-PUBLISHER-THREE-STAGE-CAS-PR39-20261011",
       "uri": "docs/research/apa-results/runs/2026-10-11/apa-publisher-three-stage-race-recovery-pr39-20261011.md",
       "kind": "REPORT",
-      "verification": "SOURCE_GITHUB_READBACK_OFFLINE_CI_39_PASS_CANONICAL_NOT_DEPLOYED"
+      "verification": "DEPLOYED_CANONICAL_GITHUB_ACTIONS_REPORT_RECEIPT_CONTROLLER_REST_READBACK_SUCCESS_REAL_CAS_RACE_NOT_VERIFIED"
     },
     "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011": {
       "id": "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
