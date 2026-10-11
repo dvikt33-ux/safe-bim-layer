@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "archicad-project-intent/1",
+  "projectId": "apa-test-house-01",
+  "units": "meters",
+  "components": [
+    {
+      "id": "building-01",
+      "primitive": "building-shell-v1",
+      "anchor": {
+        "x": 300,
+        "y": 300
+      },
+      "specification": {
+        "width": 10,
+        "depth": 8,
+        "storyHeight": 3,
+        "wallThickness": 0.3,
+        "roomBays": 3,
+        "stories": [
+          {
+            "label": "Первый Этаж",
+            "nativeIndex": 0,
+            "floorId": 1,
+            "level": 0
+          },
+          {
+            "label": "",
+            "nativeIndex": 1,
+            "floorId": 2,
+            "level": 3
+          }
+        ]
+      }
+    }
+  ]
+}
