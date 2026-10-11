@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 15,
+  "run_count": 16,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -106,6 +106,13 @@
       "report": "runs/2026-10-11/APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial/REPORT.md",
       "run_id": "APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial",
       "substep_id": "APA-P70.A03.S02"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-11/APA-RUN-20261011-190658Z-roof-comp-context-map/REPORT.md",
+      "run_id": "APA-RUN-20261011-190658Z-roof-comp-context-map",
+      "substep_id": "APA-P00.A02.S03"
     }
   ],
   "schema": "APA_GENERATED_INDEX_V1",

@@ -1,0 +1,262 @@
+{
+  "action_id": "APA-P00.A02",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-ARCHIVE-ROOF-GABLE-CONTRACT-20261011",
+      "evidence_ids": [
+        "HIST-ROOF-20",
+        "HIST-ROOF-ADD",
+        "TAPIR-SCHEMA",
+        "HIGHLEVEL-WRITER",
+        "GAP-MATRIX"
+      ],
+      "statement": "Retained Tapir 1.5.10 CreateRoofs and RoofDetails schema lack per-edge Gable/Sloped input and readback while archived source proposes API_PolyRoofID; runtime unchanged and not tested.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-ARCHIVE-COMPOSITE-CONTRACT-20261011",
+      "evidence_ids": [
+        "HIST-COMP-18",
+        "HIST-COMP-ADD",
+        "TAPIR-SCHEMA",
+        "SCENEWRITER",
+        "COMPOSITE-BLUEPRINT",
+        "COMPOSITE-FAMILY-YAML",
+        "GAP-MATRIX"
+      ],
+      "statement": "Existing Get/CreateComposites 1.5.10 contracts expose skins/separators but schema does not require useWith; current SceneWriter covers exact Basic slab material rather than Composite authoring.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-ARCHIVE-CONTEXT-REUSE-20261011",
+      "evidence_ids": [
+        "HIST-CONTEXT-160",
+        "WATCHER",
+        "WATCHER-CONTEXT",
+        "SCENEWRITER",
+        "TAPIR-SCHEMA",
+        "GAP-MATRIX"
+      ],
+      "statement": "Existing read-only watcher and guarded SceneWriter provide partial project-context handling; retained schema does not expose native SafeBIM stamp/element state index; atomic coherent snapshot not proven.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-ARCHIVE-LIVE-BINARY-EQUIVALENCE-20261011",
+      "evidence_ids": [
+        "TAPIR-SCHEMA",
+        "GAP-MATRIX"
+      ],
+      "statement": "Loaded APX binary source parity, gable/Composite execution and project-stamp native runtime support were not tested in this run.",
+      "status": "NOT_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "HIST-ROOF-20",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "b61d2c34a877e7ffba24fff1825f216b7be67513",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/03_archicad_api_contracts/SINGLE_ELEMENT_GABLE_ROOF_RESEARCH_PASSES_01_20.md",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "HIST-ROOF-ADD",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "ed7721fbc6e117eb0c62ef6b7bf5aa846bba273d",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/09_final_audit/GABLE_ROOF_FINAL_AUDIT_ADDENDUM.md",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "HIST-COMP-18",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "b2d681e76e4bc59899a4e08a5b6d74b3a77d1707",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/03_archicad_api_contracts/COMPOSITE_STRUCTURES_RESEARCH_PASSES_01_18.md",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "HIST-COMP-ADD",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "128d715baf6f11a1abad5f35d7819f6e06b1e63b",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/09_final_audit/ROOF_PARAPET_COMPOSITE_FINAL_AUDIT_ADDENDUM.md",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "HIST-CONTEXT-160",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "208e807425f698b93838552ef15ed5ba53491ef0",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/09_final_audit/FINAL_PROJECT_CONTEXT_BRIDGE_AUDIT_AFTER_160.md",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "TAPIR-SCHEMA",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "e8ad53b6ea7c19dc34cbdcb723a79be995639cd7",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-spatial-clearance-20261011/schemas/tapir-live-1.5.10/tapir-scene-live.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "HIGHLEVEL-WRITER",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "04b08ee0cb8267f8e035158c419d99b15f13c62b",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-highlevel-whole-model-20261011/scripts/archicad_building_shell.py",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "SCENEWRITER",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "7905cfa237ec989da31b527aa931dd7f4663504e",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-spatial-clearance-20261011/scripts/archicad_scene_run.py",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "WATCHER",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "dcdb4c4b60eccd5c2d5fadd18fa951e7a1ed77bc",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-spatial-clearance-20261011/scripts/archicad_change_watch.py",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "WATCHER-CONTEXT",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "0d33ccaba442f0d5416e133a79ba1a9415cfafe5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-spatial-clearance-20261011/scripts/archicad_watch_context.py",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "COMPOSITE-BLUEPRINT",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "bfdc64dfc98d6619d2e429ac1308f6fdf9864444",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-highlevel-whole-model-20261011/docs/archicad-template/COMPOSITE_FAMILY_STRATEGY_v0.1.md",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "COMPOSITE-FAMILY-YAML",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "e2449fe7c5441adefb065e39634871a6d9ce4120",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-highlevel-whole-model-20261011/docs/archicad-template/composite-family-registry-v0.1.yaml",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "GAP-MATRIX",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "677f58bdaad358816f6d68d9a033324618a32a3b",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/ARCHIVE_ROOF_COMPOSITE_CONTEXT_GAPS_20261011.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "chatgpt-gpt6-manual-20261011-roof-composite-context",
+  "executor_run_id": "APA-RUN-20261011T185929Z-roof-comp-context",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-11T19:06:58Z",
+  "idempotency_key": "sha256:0fb22788217195f2887c3f8e5b9c3911f3ec00bf5e6b24f6ae88fb7658e1e6fc",
+  "inputs": [
+    "ART-APA-SOURCE-71-BYTE-EXACT-20261011",
+    "ART-APA-SOURCE-71-INDEX-20261011",
+    "ART-REGISTER"
+  ],
+  "next_substep": "APA-P00.A02.S03",
+  "phase": "SOURCE",
+  "plan_id": "APA-P00",
+  "run_id": "APA-RUN-20261011-190658Z-roof-comp-context-map",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "Archicad 29 (historical source only; no native runtime in this audit)",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "sdk": null,
+    "source_branch": "research/apa-verified-results-hub-20261010",
+    "tapir": "retained Tapir JSON 1.5.10; historical research 1.5.9"
+  },
+  "source_revisions": [
+    {
+      "revision": "research/apa-verified-results-hub-20261010",
+      "source_sha": "b61d2c34a877e7ffba24fff1825f216b7be67513",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/03_archicad_api_contracts/SINGLE_ELEMENT_GABLE_ROOF_RESEARCH_PASSES_01_20.md"
+    },
+    {
+      "revision": "research/apa-verified-results-hub-20261010",
+      "source_sha": "ed7721fbc6e117eb0c62ef6b7bf5aa846bba273d",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/09_final_audit/GABLE_ROOF_FINAL_AUDIT_ADDENDUM.md"
+    },
+    {
+      "revision": "research/apa-verified-results-hub-20261010",
+      "source_sha": "b2d681e76e4bc59899a4e08a5b6d74b3a77d1707",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/03_archicad_api_contracts/COMPOSITE_STRUCTURES_RESEARCH_PASSES_01_18.md"
+    },
+    {
+      "revision": "research/apa-verified-results-hub-20261010",
+      "source_sha": "128d715baf6f11a1abad5f35d7819f6e06b1e63b",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/09_final_audit/ROOF_PARAPET_COMPOSITE_FINAL_AUDIT_ADDENDUM.md"
+    },
+    {
+      "revision": "research/apa-verified-results-hub-20261010",
+      "source_sha": "208e807425f698b93838552ef15ed5ba53491ef0",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/09_final_audit/FINAL_PROJECT_CONTEXT_BRIDGE_AUDIT_AFTER_160.md"
+    },
+    {
+      "revision": "feature/apa-authored-spatial-clearance-20261011",
+      "source_sha": "e8ad53b6ea7c19dc34cbdcb723a79be995639cd7",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-spatial-clearance-20261011/schemas/tapir-live-1.5.10/tapir-scene-live.json"
+    },
+    {
+      "revision": "feature/apa-highlevel-whole-model-20261011",
+      "source_sha": "04b08ee0cb8267f8e035158c419d99b15f13c62b",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-highlevel-whole-model-20261011/scripts/archicad_building_shell.py"
+    },
+    {
+      "revision": "feature/apa-authored-spatial-clearance-20261011",
+      "source_sha": "7905cfa237ec989da31b527aa931dd7f4663504e",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-spatial-clearance-20261011/scripts/archicad_scene_run.py"
+    },
+    {
+      "revision": "feature/apa-authored-spatial-clearance-20261011",
+      "source_sha": "dcdb4c4b60eccd5c2d5fadd18fa951e7a1ed77bc",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-spatial-clearance-20261011/scripts/archicad_change_watch.py"
+    },
+    {
+      "revision": "feature/apa-authored-spatial-clearance-20261011",
+      "source_sha": "0d33ccaba442f0d5416e133a79ba1a9415cfafe5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-spatial-clearance-20261011/scripts/archicad_watch_context.py"
+    },
+    {
+      "revision": "feature/apa-highlevel-whole-model-20261011",
+      "source_sha": "bfdc64dfc98d6619d2e429ac1308f6fdf9864444",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-highlevel-whole-model-20261011/docs/archicad-template/COMPOSITE_FAMILY_STRATEGY_v0.1.md"
+    },
+    {
+      "revision": "feature/apa-highlevel-whole-model-20261011",
+      "source_sha": "e2449fe7c5441adefb065e39634871a6d9ce4120",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-highlevel-whole-model-20261011/docs/archicad-template/composite-family-registry-v0.1.yaml"
+    },
+    {
+      "revision": "2026-10-11 source-to-code gap matrix",
+      "source_sha": "677f58bdaad358816f6d68d9a033324618a32a3b",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/ARCHIVE_ROOF_COMPOSITE_CONTEXT_GAPS_20261011.json"
+    }
+  ],
+  "started_at": "2026-10-11T18:59:29Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P00.A02.S03"
+}
