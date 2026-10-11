@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 69,
+  "revision": 70,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2367,7 +2367,7 @@
         "ART-P70-A03-S02-AUTHORED-NATIVE-DAG-PARTIAL-20261011",
         "ART-P70-A03-S02-RECEIPT-PARTIAL-20261011"
       ],
-      "blocked_reason": "Native CreateSlabs->ModifySlabs material/Z not yet generalized; requires_approval=true, test PLN write not authorized. Source graph & 258/258 offline tests published."
+      "blocked_reason": "Existing SceneWriter already journals CreateSlabs->ModifySlabs Basic before native calls; missing safe authored-plan preview routing, independent project/story/material preflight and explicitly approved disposable PLN live test. PR44 offline graph: 258 PASS."
     },
     "APA-P70.A03.S03": {
       "id": "APA-P70.A03.S03",
