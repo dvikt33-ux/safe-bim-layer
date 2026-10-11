@@ -38,3 +38,42 @@
 ## Claim scope
 
 This is grounded in **user-pasted terminal logs**; this assistant cannot fetch the Windows SQLite journal or native slab readback directly. The diagnostic outcome remains a blocking unknown. The four walls' `PASS` values come from the live executor results, not independent model inspection.
+
+## Verified diagnosis from read-only reconciliation
+
+User executed the dedicated read-only reconciliation script on the same
+`APA_Test_House_01.pln` port 19726, and observed exactly five additional
+GUIDs (no removals). The durable journal matches four PASS walls and
+`s1-slab` CREATED_UNVERIFIED (Slab GUID
+`BB516C6F-587B-4F51-AFCC-180291542687`).
+
+**Exact field mismatch conclusively isolated:**
+
+| Field | Planned | Archicad readback | Match |
+|---|---|---|---|
+| type | Slab | Slab | yes |
+| native story | 0 | 0 | yes |
+| `level` | 0.0 m | 0 m | yes |
+| XY polygon | 10×8 m | 10×8 m (closing vertex) | yes |
+| `thickness` | 0.20 m | **0.30 m** | **NO** |
+| `structureType` | not explicit in CreateSlabs schema | **Composite** | inherited default |
+
+Native Slab `compositeId`: `A8836EE9-5C72-492B-A7F6-30EFED26B3EE`.
+The source-pinned Tapir 1.5.10 `CreateSlabs` JSON schema has no
+`structureType` or `buildingMaterialId` field, only optional thickness.
+`ModifySlabs` **does** support `structureType`, `thickness`,
+`buildingMaterialId` and `compositeId`. Historical
+`scripts/archicad_executor.py` already uses a native
+`ModifySlabs` operation to change new slab structure to Basic and
+apply a source building material. Reuse that proven approach rather
+than introducing a second executor, assuming composite thickness is
+0.2, or suppressing the mismatch.
+
+**No correction was executed by the assistant**. The unchanged live
+partial scene and its SQLite journal must be preserved. A future
+reconciliation must explicitly bind the slab GUID, target identity,
+user-approved building material, exact desired structure/thickness,
+verified native ModifySlabs semantics and one-shot approval, and
+must read the slab again before any continuation. Only after
+validated reconciliation should a separate continuation procedure
+be considered; never replay the original creation scene.
