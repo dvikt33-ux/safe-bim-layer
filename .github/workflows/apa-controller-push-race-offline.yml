@@ -26,8 +26,8 @@ jobs:
       - name: Synthetic parallel Git CAS, rebase safety and idempotency
         run: python -m unittest discover -s tools/apa_controller/tests -v
       - name: Publisher offline safety/idempotency regression
-        run: python -m unittest discover -s tools/apa_publisher/tests -v
+        run: env GITHUB_REF=refs/heads/research/apa-verified-results-hub-20261010 python -m unittest discover -s tools/apa_publisher/tests -v
       - name: Canonical controller DAG and inbox validation (read only)
         run: |
-          python tools/apa_controller/controller.py validate
-          python tools/apa_controller/controller.py verify-inbox
+          env GITHUB_REF=refs/heads/research/apa-verified-results-hub-20261010 python tools/apa_controller/controller.py validate
+          env GITHUB_REF=refs/heads/research/apa-verified-results-hub-20261010 python tools/apa_controller/controller.py verify-inbox
