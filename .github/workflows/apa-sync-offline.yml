@@ -46,6 +46,17 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Execute receipt and SQLite outbox tests on Windows
+        shell: pwsh
+        run: |
+          python -m unittest discover -s tests -p 'test_receipt_bridge.py' -v
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m unittest discover -s tests -p 'test_receipt_bridge_outbox.py' -v
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Write-Host 'WINDOWS_BRIDGE_OFFLINE_PASS'
       - name: Parse Windows launch script without running it
         shell: pwsh
         run: |
