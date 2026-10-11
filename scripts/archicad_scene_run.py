@@ -93,7 +93,7 @@ def guarded_project(api, required_story=None):
     if (stories.get("actStory") != native_index or not isinstance(floor, dict)
             or floor.get("floorId") != floor_id or not close(floor.get("level"), level)):
         raise ValueError("STORY_MISMATCH: active story must match pinned binding")
-    if label is not None and floor.get("name", floor.get("uName")) != label:
+    if label is not None and (floor.get("name") or floor.get("uName") or "") != label:
         raise ValueError("STORY_LABEL_MISMATCH_OR_MISSING")
     version = api("GetAddOnVersion", {}).get("version")
     if version != EXPECTED_TAPIR:
@@ -333,7 +333,7 @@ class SceneWriter:
                                r.get("index") == binding_row["nativeIndex"]), None)
                 if (not actual or actual.get("floorId") != binding_row["floorId"]
                         or not close(actual.get("level"), binding_row["level"])
-                        or actual.get("name", actual.get("uName")) != binding_row["label"]):
+                        or (actual.get("name") or actual.get("uName") or "") != binding_row["label"]):
                     raise ValueError("UNVERIFIED_NAMED_STORY: " + binding_row["label"])
         if preview["schemaVersion"] != binding["tapirVersion"]:
             raise ValueError("TAPIR_SCHEMA_VERSION_MISMATCH")
