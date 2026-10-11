@@ -228,3 +228,11 @@ This row indexes user-supplied logs verified for internal consistency by indepen
 | `ART-APA-SLACK-BRIDGE-PROPOSAL-20261011` | [Pending candidate](control/proposals/APA-CAND-20261011-slack-evidence-bridge.md), [commit 9e994de](https://github.com/dvikt33-ux/safe-bim-layer/commit/9e994de7f30c54cf3df99369513e7612ee4ee7dd) | `PENDING_INDEPENDENT_AUDIT`; no task ID admitted, no automatic Slack-initiated research authorized |
 
 Both artifacts registered in `PROJECT_PLAN.json` revision **50**, [commit 88d84d2](https://github.com/dvikt33-ux/safe-bim-layer/commit/88d84d2090f0d1c98f258abb63455f1b2c629e7d); all task statuses/claim fields left untouched. The CLI `step_sync.py` is opt-in, not an always-on evidence reconciler. Existing `APA-P60.A02.S04` governs independent task proposal admission.
+
+## Slack evidence bridge: review decision — 2026-10-11
+
+| Artifact | Source | Result | Task state |
+|---|---|---|---|
+| `ART-APA-SLACK-BRIDGE-REVIEW-20261011` | [Independent design review](control/reviews/APA-CAND-20261011-slack-evidence-bridge.md), [commit c2ad998](https://github.com/dvikt33-ux/safe-bim-layer/commit/c2ad99886ba18203a651c1db0a5caab8458c7cc2) | `DEFERRED` — no semantic duplicate found in checked tasks; code/runner permission and trust/deployment boundaries unresolved | `APA-P60.A02.S05` **not admitted**, `PROJECT_PLAN.json` revision **51**, [registration commit be6368f](https://github.com/dvikt33-ux/safe-bim-layer/commit/be6368ffcf7b2fbf113ade89ccc2aa0e8eb503ec); all existing task fields unchanged |
+
+Evidence gate: Slack → Socket Mode → SQLite live transport had PASS for event seq22; outbound automatic verified GitHub receipt → Slack and any Slack-triggered controller mutation remain unproved. Do not replace the existing controller/publisher, promote a task from INFO, or claim any 24h autonomous service. New candidate requires separate owner authorization and validated admission.
