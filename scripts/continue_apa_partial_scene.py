@@ -36,7 +36,7 @@ def verify_evidence_manifest(folder):
             raise ValueError("HISTORICAL_EVIDENCE_SHA256_MISMATCH: " + name)
 
 
-def read_repaired_ledger(journal, scene):
+def read_repaired_ledger(journal, scene, allow_existing_suffix=False):
     # Existing incomplete creation is preserved verbatim. The one-shot slab
     # repair has a separate durable row, checked without changing either.
     with closing(sqlite3.connect(journal.resolve().as_uri() + "?mode=ro", uri=True)) as db:
@@ -55,7 +55,7 @@ def read_repaired_ledger(journal, scene):
             (scene["sceneId"],)).fetchone() if exists else None)
         existing_suffix = db.execute(
             "SELECT 1 FROM scenes WHERE scene_id=?", (SUFFIX_ID,)).fetchone()
-    if existing_suffix:
+    if existing_suffix and not allow_existing_suffix:
         raise ValueError("SUFFIX_ALREADY_RESERVED_DO_NOT_REPLAY")
     if parent != (scene["planHash"], "PARTIAL_OR_UNKNOWN_OUTCOME"):
         raise ValueError("ORIGINAL_SCENE_NOT_PARTIAL")
@@ -193,11 +193,11 @@ def finish_verify(api, ticket, preflight, created):
     verify_live_story_map(api, ticket["storyBindings"])
     if set(created) - {"__plan__"} != set(ticket["executionOrder"]):
         raise ValueError("FINAL_GRAPH_HAS_MISSING_ELEMENTS")
-    expected_new = sorted(
-        created[sid]["guid"].lower() for sid in ticket["executionOrder"][5:])
+    new_step_ids = ticket.get("newStepIds", ticket["executionOrder"][5:])
+    expected_new = sorted(created[sid]["guid"].lower() for sid in new_step_ids)
     existing = set(ticket["before"])
     actual = REPAIR.all_guids(api)
-    if (len(expected_new) != 20 or set(expected_new) & existing
+    if (len(expected_new) != len(new_step_ids) or set(expected_new) & existing
             or actual != sorted([*existing, *expected_new]) or len(actual) != 45):
         raise ValueError("FINAL_NATIVE_GUID_INVENTORY_MISMATCH")
     for sid in ticket["executionOrder"]:
