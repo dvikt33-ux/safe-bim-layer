@@ -11,12 +11,12 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | --- | ---: |
 | BLOCKED | 8 |
 | CLAIMED | 0 |
-| DONE_PUBLISHED | 15 |
+| DONE_PUBLISHED | 16 |
 | IN_PROGRESS | 1 |
-| PARTIAL | 16 |
+| PARTIAL | 15 |
 | READY | 41 |
 | SUPERSEDED | 0 |
-| DISPATCHABLE_NOW | 17 |
+| DISPATCHABLE_NOW | 16 |
 | HELD_BY_DEPENDENCIES | 40 |
 | EXPIRED_LEASES | 0 |
 
@@ -30,7 +30,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| APA-P00.A02.S05 | codex-apa-core-first-20261011 | 2026-10-11T20:30:00Z | core-first-operating-plan-v2 |
+| APA-P70.A03.S02 | codex-apa-core-native-20261011 | 2026-10-11T21:00:00Z | reuse-native-whole-building-builder |
 
 ## CONTROL — 0 ready
 
@@ -59,11 +59,10 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | P7 | APA-P10.A02.S04 — Native MEP/Tapir MEP команды, трассы, порты | MEP command/route/port matrix |
 | P7 | APA-P50.A02.S01 — Единый каталог AC29 SDK/Tapir/Python/GDL/IFC/MEP инструментов | Capability matrix, версии, пересечения |
 
-## BUILD — 2 ready
+## BUILD — 1 ready
 
 | Priority | Task | Acceptance |
 | --- | --- | --- |
-| P0 | APA-P70.A03.S02 — Собрать модель средствами уже существующих BIM-исполнителей | Создание полноценной BIM-геометрии из схемы через имеющиеся writer/graph; связные стены не дробятся без необходимости; тестовый PLN только после разрешения |
 | P8 | APA-P00.A03.S03 — Publisher, дедупликация, retry, heartbeat и ошибки | Publisher E2E + оставшиеся recovery/heartbeat gates |
 
 ## INTEGRATION — 0 ready

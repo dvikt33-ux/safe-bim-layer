@@ -9,12 +9,12 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 | AUTOMATION — Автономизация и 24h gate | 4 | 0 | 0 | ART-OS-AUDIT, ART-PUBLISHER |
 | CONTROLLER — Единый управляющий и межчатовый контекст | 8 | 6 | 2 | ART-CONTROLLER, ART-PLAN, ART-PUB-WORKFLOW, ART-PUBLISHER, ART-PROPOSAL-PROTOCOL |
 | GDL_TN — GDL и ТЕХНОНИКОЛЬ | 1 | 0 | 1 | ART-PR20 |
-| HUB_GOVERNANCE — Канонический hub и реестр | 9 | 4 | 3 | ART-BRANCH-JSON, ART-BRANCHES, ART-PLAN, ART-PUB-RECEIPT, ART-QUEUE, ART-REGISTER, ART-STATUS, ART-APA-CORE-FIRST-ROADMAP, ART-APA-WORK-INSTRUCTION-V2, ART-APA-PLN-WRITE-AUTH-20261011 |
+| HUB_GOVERNANCE — Канонический hub и реестр | 9 | 5 | 3 | ART-BRANCH-JSON, ART-BRANCHES, ART-PLAN, ART-PUB-RECEIPT, ART-QUEUE, ART-REGISTER, ART-STATUS, ART-APA-CORE-FIRST-ROADMAP, ART-APA-WORK-INSTRUCTION-V2, ART-APA-PLN-WRITE-AUTH-20261011 |
 | IFC_MCP — IFC/openBIM и MCP | 1 | 0 | 1 | ART-REGISTER |
 | KNOWLEDGE_GRAPH — Сведение исследований и доказательств | 3 | 0 | 1 | ART-BRANCHES, ART-REGISTER, ART-TRACE-RECEIPT, ART-TRACE-REPORT |
 | MEP — MEP native и Tapir | 1 | 0 | 1 | ART-REGISTER |
 | MVP — MVP и внедрение | 2 | 0 | 0 | ART-PLAN |
-| PRODUCT_DEVELOPMENT — Полный цикл разработки APA: требования → узлы/расчёт → BIM → MEP → выпуск | 29 | 5 | 1 | ART-APA-FULL-CYCLE, ART-APA-PLP-CONTRACT, ART-APA-REUSE-NATIVE-20261011, ART-APA-PR16, ART-APA-HIGHLEVEL-PR34, ART-APA-ASSEMBLY-PLAN, ART-APA-LIVE-SCRATCH-PARTIAL-20261011 |
+| PRODUCT_DEVELOPMENT — Полный цикл разработки APA: требования → узлы/расчёт → BIM → MEP → выпуск | 29 | 5 | 0 | ART-APA-FULL-CYCLE, ART-APA-PLP-CONTRACT, ART-APA-REUSE-NATIVE-20261011, ART-APA-PR16, ART-APA-HIGHLEVEL-PR34, ART-APA-ASSEMBLY-PLAN, ART-APA-LIVE-SCRATCH-PARTIAL-20261011 |
 | PUBLISHER — Публикация, квитанции и capability | 4 | 0 | 2 | ART-OS-AUDIT, ART-PUB-RECEIPT, ART-PUBLISHER |
 | SDK_NATIVE — Archicad 29 native SDK | 3 | 0 | 3 | ART-REGISTER, ART-SDK-GET3D, ART-SDK-SEO, ART-APA-ATTR-STORY-SLAB-20261011 |
 | SYNTHESIS — Синтез research → implementation | 2 | 0 | 0 | ART-PLAN, ART-REGISTER |
@@ -63,7 +63,7 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 - APA-P00.A02.S02 [CONTROL/DONE_PUBLISHED]: Создать hub, план, реестр, очередь, протоколы; work_key=hub-operating-documents; related=none
 - APA-P00.A02.S03 [CONSOLIDATION/PARTIAL]: Связать старые находки с S-ID и удалить логические дубли без удаления оригиналов; work_key=legacy-evidence-dedup; related=APA-P50.A01.S02
 - APA-P00.A02.S04 [VALIDATION/PARTIAL]: Контролировать receipt/commit/readback всех завершённых отчётов; work_key=publication-completeness-audit; related=none
-- APA-P00.A02.S05 [CONTROL/IN_PROGRESS]: Обновить действующий план CORE FIRST → EXPANSION по рабочей инструкции v2; work_key=core-first-operating-plan-v2; related=none
+- APA-P00.A02.S05 [CONTROL/DONE_PUBLISHED]: Обновить действующий план CORE FIRST → EXPANSION по рабочей инструкции v2; work_key=core-first-operating-plan-v2; related=none
 
 ### IFC_MCP — IFC/openBIM и MCP
 
@@ -93,7 +93,7 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 - APA-P70.A02.S02 [BUILD/READY]: Связать проектные требования с версиями нормативов и проверяемыми правилами; work_key=normative-applicability-pack; related=none
 - APA-P70.A02.S03 [BUILD/DONE_PUBLISHED]: Собрать проектный Library Pack из проверяемых строительных систем и узлов; work_key=project-library-pack-assembly; related=none
 - APA-P70.A03.S01 [INTEGRATION/DONE_PUBLISHED]: Связать помещения, несущую схему, оси, уровни и конструктивные ограничения; work_key=semantic-spatial-structural-plan; related=none
-- APA-P70.A03.S02 [BUILD/PARTIAL]: Собрать модель средствами уже существующих BIM-исполнителей; work_key=reuse-native-whole-building-builder; related=none
+- APA-P70.A03.S02 [BUILD/IN_PROGRESS]: Собрать модель средствами уже существующих BIM-исполнителей; work_key=reuse-native-whole-building-builder; related=none
 - APA-P70.A03.S03 [VALIDATION/READY]: Доказать редактируемость, GUID/host/story/material и инкрементальное обновление; work_key=incremental-model-integrity-gates; related=none
 - APA-P70.A04.S01 [INTEGRATION/READY]: Вывести из модели обязательные семейства узлов и их условия применимости; work_key=required-junction-condition-coverage; related=none
 - APA-P70.A04.S02 [BUILD/READY]: Привязать выбранные узлы и композиции к нативным BIM элементам; work_key=native-details-to-cse-binding; related=none

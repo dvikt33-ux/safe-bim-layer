@@ -1,17 +1,17 @@
 {
   "active": [
-    "APA-P00.A02.S05"
+    "APA-P70.A03.S02"
   ],
   "artifact_count": 85,
   "counts": {
     "BLOCKED": 8,
     "CLAIMED": 0,
-    "DISPATCHABLE_NOW": 17,
-    "DONE_PUBLISHED": 15,
+    "DISPATCHABLE_NOW": 16,
+    "DONE_PUBLISHED": 16,
     "EXPIRED_LEASES": 0,
     "HELD_BY_DEPENDENCIES": 40,
     "IN_PROGRESS": 1,
-    "PARTIAL": 16,
+    "PARTIAL": 15,
     "READY": 41,
     "SUPERSEDED": 0
   },
@@ -34,7 +34,7 @@
       {
         "done": 1,
         "id": "APA-P70.A03",
-        "status": "PARTIAL",
+        "status": "IN_PROGRESS",
         "title": "Планировка и редактируемая нативная BIM-модель",
         "total": 4
       },
@@ -88,16 +88,17 @@
         "total": 1
       }
     ],
-    "active": [],
+    "active": [
+      "APA-P70.A03.S02"
+    ],
     "done": 5,
-    "next_eligible": "APA-P70.A03.S02",
+    "next_eligible": null,
     "plan_id": "APA-P70",
-    "status": "PARTIAL",
+    "status": "IN_PROGRESS",
     "total": 29
   },
   "dispatchable": {
     "BUILD": [
-      "APA-P70.A03.S02",
       "APA-P00.A03.S03"
     ],
     "CONSOLIDATION": [
@@ -170,7 +171,7 @@
   "known_published_v2_runs": 16,
   "legacy_reports": "NOT_FULLY_INDEXED",
   "orphan_v2_manifests": [],
-  "plan_revision": 79,
+  "plan_revision": 81,
   "publisher": "DEPLOYED_SYNTHETIC_E2E_PASS",
   "research_lookahead": {
     "linked_product_substeps": 29,
@@ -245,7 +246,7 @@
       ]
     },
     "HUB_GOVERNANCE": {
-      "done": 4,
+      "done": 5,
       "ready": 3,
       "task_ids": [
         "APA-P00.A01.S01",
@@ -292,7 +293,7 @@
     },
     "PRODUCT_DEVELOPMENT": {
       "done": 5,
-      "ready": 1,
+      "ready": 0,
       "task_ids": [
         "APA-P70.A01.S01",
         "APA-P70.A01.S02",

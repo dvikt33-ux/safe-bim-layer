@@ -132,7 +132,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P00.A02.S05
 
-**Обновить действующий план CORE FIRST → EXPANSION по рабочей инструкции v2** — CONTROL / IN_PROGRESS / P0
+**Обновить действующий план CORE FIRST → EXPANSION по рабочей инструкции v2** — CONTROL / DONE_PUBLISHED / P0
 
 - Parent: APA-P00 → APA-P00.A02
 - Topic: HUB_GOVERNANCE
@@ -140,7 +140,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P00.A02.S02
 - Related, check before duplicating: none
 - Acceptance: Сохранены все прежние ID/статусы/доказательства; последовательный CORE FIRST DAG валиден; карта компонентов находится в каноническом реестре; инструкция и план опубликованы и прочитаны обратно
-- Owner/lease: codex-apa-core-first-20261011 / 2026-10-11T20:30:00Z
+- Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-CONTROLLER](../../../../../docs/research/apa-results/control/PROJECT_PLAN.json), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md), [ART-APA-WORK-INSTRUCTION-V2](../../../../../docs/research/apa-results/control/WORK_OPERATING_INSTRUCTION.md)
 - Existing V2 runs: none
@@ -964,7 +964,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A03.S02
 
-**Собрать модель средствами уже существующих BIM-исполнителей** — BUILD / PARTIAL / P0
+**Собрать модель средствами уже существующих BIM-исполнителей** — BUILD / IN_PROGRESS / P0
 
 - Parent: APA-P70 → APA-P70.A03
 - Topic: PRODUCT_DEVELOPMENT
@@ -972,7 +972,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P70.A03.S01
 - Related, check before duplicating: none
 - Acceptance: Создание полноценной BIM-геометрии из схемы через имеющиеся writer/graph; связные стены не дробятся без необходимости; тестовый PLN только после разрешения
-- Owner/lease: unclaimed
+- Owner/lease: codex-apa-core-native-20261011 / 2026-10-11T21:00:00Z
 - Requires owner approval: False
 - Source inputs: [ART-APA-PR16](https://github.com/dvikt33-ux/safe-bim-layer/pull/16), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md), [ART-APA-LIVE-SCRATCH-PARTIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-live-scratch-partial-slab-reconciliation.md), [ART-APA-PLN-WRITE-AUTH-20261011](../../../../../docs/research/apa-results/control/IMPLEMENTATION_ROADMAP.md%23%D1%80%D0%B0%D0%B7%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8-%D0%B4%D0%BE%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D1%82%D0%B2%D0%B0)
 - Existing V2 runs: [APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial/REPORT.md) (receipt verified)
