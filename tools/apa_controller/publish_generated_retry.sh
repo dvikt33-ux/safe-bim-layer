@@ -45,6 +45,11 @@ for ((attempt=1; attempt<=max_attempts; attempt++)); do
     echo 'CONTROLLER_PUSH_BLOCKED: original verified anchor absent from remote' >&2
     exit 1
   fi
+  # New executable/validator code would invalidate tests run before the race.
+  if ! git diff --quiet "$anchor" FETCH_HEAD -- tools/apa_controller tools/apa_publisher .github/workflows/apa-research-publisher.yml; then
+    echo 'CONTROLLER_PUSH_BLOCKED: executable code changed after offline validation' >&2
+    exit 1
+  fi
   if [[ "$(git rev-list --count "${anchor}..HEAD")" -gt 1 ]]; then
     echo 'CONTROLLER_PUSH_BLOCKED: unexpected local commits since verified anchor' >&2
     exit 1
