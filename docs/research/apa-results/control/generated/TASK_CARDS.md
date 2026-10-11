@@ -852,7 +852,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A01.S03
 
-**Утвердить минимальные границы интеграции и порядок сквозных поставок** — INTEGRATION / IN_PROGRESS / P2
+**Утвердить минимальные границы интеграции и порядок сквозных поставок** — INTEGRATION / DONE_PUBLISHED / P2
 
 - Parent: APA-P70 → APA-P70.A01
 - Topic: PRODUCT_DEVELOPMENT
@@ -860,7 +860,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P70.A01.S01
 - Related, check before duplicating: none
 - Acceptance: Проверенный маршрут полного цикла, reuse map, отсутствие дублирования SceneWriter/графа/исполнителя, приёмочные ворота
-- Owner/lease: chatgpt-gpt6-manual / 2026-10-11T19:00:00Z
+- Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
 - Existing V2 runs: [APA-RUN-20261011-160327Z-p70-a01-s03-integration-freeze](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-160327Z-p70-a01-s03-integration-freeze/REPORT.md) (receipt verified)
