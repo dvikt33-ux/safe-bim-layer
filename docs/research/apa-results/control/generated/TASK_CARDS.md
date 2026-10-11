@@ -1247,7 +1247,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: codex-apa-core-native-20261011 / 2026-10-11T21:00:00Z
 - Requires owner approval: False
 - Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
-- Existing V2 runs: none
+- Existing V2 runs: [APA-RUN-20261011-200500Z-editable-core-acceptance](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md) (receipt verified)
 - Expected output: Один brief создаёт связное небольшое здание; все требуемые типы поддержаны, GUID/этажи/материалы/host/геометрия подтверждены; согласованная правка сохраняет GUID и не дублирует модель; сохранение и повторное чтение подтверждены. Четыре элемента и offline CI не достаточны. Инженерная/нормативная приёмка отдельно.
 
 ## APA-P70.A08.S05
