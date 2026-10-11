@@ -134,5 +134,54 @@ class AuthoredNativePlanTests(unittest.TestCase):
             A.compile_authored_native_candidate(b,pack,wrong,HEIGHTS,native)
 
 
+    def test_existing_writer_preview_denies_all_unapproved_open_pln_paths(self):
+        import archicad_authored_native_plan as N
+        b,pack,native=sample()
+        c=A.compile_authored_native_candidate(b,pack,layout(),HEIGHTS,native)
+        with self.assertRaisesRegex(ValueError,"WRITER_PREVIEW_ONLY_FOR_EXISTING_APPROVED"):
+            N.as_existing_scene_writer_preview(c)
+
+    def test_existing_writer_preview_exact_guard_and_authored_4_steps(self):
+        import archicad_authored_native_plan as N
+        b=valid()
+        b["targetProjectPath"]=A.RUN.APPROVED_SCRATCH_PATH
+        native=NativeGetOnly()
+        def approved(cmd,params):
+            result=native(cmd,params)
+            if cmd=="GetProjectInfo":
+                result["projectPath"]=A.RUN.APPROVED_SCRATCH_PATH
+            return result
+        pack=A.compile_project_library_pack(b,specimen(),approved)
+        candidate=A.compile_authored_native_candidate(
+            b,pack,layout(),HEIGHTS,approved)
+        preview=N.as_existing_scene_writer_preview(candidate)
+        self.assertEqual(preview["metrics"]["elementCount"],4)
+        self.assertEqual(preview["storyBindings"][0]["label"],"Первый Этаж")
+        self.assertEqual(preview["storyBindings"][0]["nativeIndex"],1)
+        self.assertEqual(preview["storyBindings"][1]["nativeIndex"],3)
+        self.assertEqual(preview["slabBasicMaterialName"],"Железобетон - Конструкционный")
+        self.assertEqual(preview["envelope"]["zMin"],-.3)
+        self.assertEqual(preview["envelope"]["zMax"],6.3)
+        self.assertEqual(preview["schemaVersion"],"1.5.10")
+        self.assertFalse(preview["liveWriteAuthorized"])
+        self.assertFalse(preview["plnChanged"])
+        self.assertTrue(set(native.calls)<={"GetProjectInfo","GetStories","GetAttributesByType"})
+
+    def test_writer_preview_rejects_source_plan_changed_after_native_compilation(self):
+        import archicad_authored_native_plan as N
+        b=valid()
+        b["targetProjectPath"]=A.RUN.APPROVED_SCRATCH_PATH
+        def approved(cmd,params):
+            x=NativeGetOnly()(cmd,params)
+            if cmd=="GetProjectInfo":
+                x["projectPath"]=A.RUN.APPROVED_SCRATCH_PATH
+            return x
+        pack=A.compile_project_library_pack(b,specimen(),approved)
+        c=A.compile_authored_native_candidate(b,pack,layout(),HEIGHTS,approved)
+        c["graph"]["operations"][0]["params"]["slabsData"][0]["thickness"]=.3
+        with self.assertRaisesRegex(ValueError,"AUTHORED_OPERATION_GRAPH_DRIFT"):
+            N.as_existing_scene_writer_preview(c)
+
+
 if __name__=="__main__":
     unittest.main()
