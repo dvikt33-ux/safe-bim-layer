@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 47,
+  "revision": 48,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -500,6 +500,12 @@
       "uri": "docs/research/apa-results/receipts/APA-RUN-20261011-091905Z-p70-source-integration-map.json",
       "kind": "RECEIPT",
       "verification": "GITHUB_READBACK_VERIFIED"
+    },
+    "ART-APA-SOURCE-71-BYTE-EXACT-20261011": {
+      "id": "ART-APA-SOURCE-71-BYTE-EXACT-20261011",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-092155Z-source71-byte-archive/REPORT.md",
+      "kind": "REPORT",
+      "verification": "GITHUB_READBACK_VERIFIED_V2_RECEIPT"
     }
   },
   "tasks": {
@@ -678,7 +684,7 @@
       "action_id": "APA-P00.A02",
       "title": "Связать старые находки с S-ID и удалить логические дубли без удаления оригиналов",
       "kind": "CONSOLIDATION",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 0,
       "work_key": "legacy-evidence-dedup",
       "depends_on": [
@@ -695,15 +701,16 @@
         "Evidence map и superseded_by для дублей"
       ],
       "acceptance": "Evidence map и superseded_by для дублей",
-      "owner": "chatgpt-gpt6-archive-source-audit-20261011",
-      "lease_until": "2026-10-11T10:17:56Z",
-      "claim_ref": "APA-RUN-20261011T091256Z-archival-content-audit",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
       "evidence": [
         "ART-APA-SLACK-THREE-RECON-20261011",
         "ART-APA-BRANCH-DEDUP-20261011",
         "ART-APA-BLOB-CENSUS-83-20261011",
-        "ART-APA-SOURCE-71-INDEX-20261011"
+        "ART-APA-SOURCE-71-INDEX-20261011",
+        "ART-APA-SOURCE-71-BYTE-EXACT-20261011"
       ],
       "blocked_reason": null
     },
