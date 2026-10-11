@@ -39,3 +39,41 @@ Structural safety, roof, foundation, reinforced slab design, actual product laye
 Extend this **same** executor to the already available native roof / composite / CSE / detail capabilities after verifying their exact write/readback contracts, then run a permitted disposable-project end-to-end test.
 
 Source / task: `APA-P70.A03.S02`, draft PR #34 stacked on PR #16. Status is not DONE until full acceptance.
+
+## Approved live scratch trial (2026-10-11, NOT YET RUN)
+
+The owner explicitly authorized testing a new disposable Archicad 29 PLN:
+`C:\LocalAI\APA_Test_House_01.pln` on port `19726`.
+Observed read-only native facts: story 0 = `Первый Этаж`, floorId 1, elevation 0;
+story 1 has empty name, floorId 2, elevation +3; story 2 +6 is unused;
+initial inventory 16 Object + 4 Elevation. The 16 Objects have NOT yet been
+individually cleared of overlap. Preflight will query every 3D bounding box
+and fail-closed if geometry is unavailable or intersects the building envelope.
+
+### Run the existing accelerator, not a new writer
+
+On Windows with Archicad open and saved scratch PLN active on port 19726,
+from a checkout of `feature/apa-highlevel-whole-model-20261011`:
+
+```powershell
+python -m pip install "jsonschema>=4,<5"
+.\scripts\run_apa_test_house_01.ps1 -Port 19726 -Execute
+```
+
+This wrapper first calls existing `archicad_project_accelerator.py` using
+`--preflight --scratch-port 19726` and exactly
+`examples/accelerator/apa-test-house-01.intent.json`.
+It requires matching project identity, all pinned story bindings, schema,
+runtime and spatial scan; no writes on any preflight failure.
+Only if preflight is accepted and `-Execute` is explicitly supplied does it
+call the SAME Python entrypoint in one-shot `--execute` mode with matching
+plan hash and a persistent no-replay SQLite ledger.
+
+Live evidence: `C:\LocalAI\APA_Trial_Evidence\<run-id>\preflight` and
+`...\execute`. The program will NOT save or switch projects.
+If there is an ambiguous partial write, NEVER re-run the same experiment;
+inspect the durable ledger and the open PLN first.
+
+This trial is **not** proof of installed APX package, roof, structure, MEP,
+normative correctness or full building release; native success is only
+`COMPLETE_UNSAVED` plus complete readback for this shell model.
