@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 84,
+  "revision": 85,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2938,7 +2938,7 @@
       "action_id": "APA-P70.A03",
       "title": "Дополнить авторскую модель до связного небольшого здания существующими writer-циклами",
       "kind": "BUILD",
-      "status": "READY",
+      "status": "IN_PROGRESS",
       "priority": 0,
       "work_key": "authored-building-native-component-completeness",
       "depends_on": [
@@ -2954,9 +2954,9 @@
         "Стены, перекрытия, колонны и hosted двери/окна из утверждённой схемы проходят typed GUID/host/story/material/geometry readback; требуемые неподдерживаемые элементы имеют конкретный blocker; один BIM Graph и SceneWriter."
       ],
       "acceptance": "Стены, перекрытия, колонны и hosted двери/окна из утверждённой схемы проходят typed GUID/host/story/material/geometry readback; требуемые неподдерживаемые элементы имеют конкретный blocker; один BIM Graph и SceneWriter.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "codex-apa-core-native-20261011",
+      "lease_until": "2026-10-11T21:00:00Z",
+      "claim_ref": "APA-RUN-20261011-200100Z-native-completeness",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
