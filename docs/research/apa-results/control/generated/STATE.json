@@ -2,7 +2,7 @@
   "active": [
     "APA-P70.A02.S01"
   ],
-  "artifact_count": 66,
+  "artifact_count": 67,
   "counts": {
     "BLOCKED": 8,
     "CLAIMED": 0,
@@ -154,7 +154,7 @@
   "known_published_v2_runs": 11,
   "legacy_reports": "NOT_FULLY_INDEXED",
   "orphan_v2_manifests": [],
-  "plan_revision": 59,
+  "plan_revision": 60,
   "publisher": "DEPLOYED_SYNTHETIC_E2E_PASS",
   "research_lookahead": {
     "linked_product_substeps": 23,
