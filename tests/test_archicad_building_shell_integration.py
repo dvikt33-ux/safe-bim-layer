@@ -36,6 +36,18 @@ class NamedStoriesNative(WholeNative):
         return super().__call__(command, params)
 
 
+class ExactScratchProjectNative(NamedStoriesNative):
+    """Synthetic transport representing observed GetStories from port 19726."""
+    def __call__(self, command, params):
+        if command == "GetStories":
+            self.calls.append(command)
+            return {"actStory": 0, "stories": [
+                {"index": 0, "floorId": 1, "level": 0., "name": "Первый Этаж"},
+                {"index": 1, "floorId": 2, "level": 3., "name": ""},
+                {"index": 2, "floorId": 3, "level": 6., "name": ""}]}
+        return super().__call__(command, params)
+
+
 class MultiStoreyEndToEndTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
@@ -106,6 +118,52 @@ class MultiStoreyEndToEndTests(unittest.TestCase):
         after = self.call("execute", before["confirmPlanHash"])
         self.assertEqual(after["status"], "BLOCKED")
         self.assertFalse(self.native.writes)
+
+    def test_actual_scratch_story_bindings_and_disposable_project_preflight(self):
+        from unittest.mock import patch
+
+        actual_intent = json.loads(
+            (ROOT / "examples/accelerator/apa-test-house-01.intent.json")
+            .read_text(encoding="utf-8"))
+        native = ExactScratchProjectNative()
+        with (patch.object(A.RUN, "PORT", 19726),
+              patch.object(A.RUN, "EXPECTED_PATH",
+                           r"C:\\LocalAI\\APA_Test_House_01.pln"),
+              patch.object(A.RUN, "EXPECTED_NAME", "APA_Test_House_01")):
+            first = A.run_project(actual_intent, A.RUN.DEFAULT_SCENE_SCHEMA,
+                                  self.root / "actual-scratch-preflight",
+                                  self.state, mode="preflight", transport=native)
+            self.assertEqual(first["status"], "READY_FOR_EXPLICIT_TEST_RUN", first)
+            self.assertFalse(native.writes)
+            second = A.run_project(actual_intent, A.RUN.DEFAULT_SCENE_SCHEMA,
+                                   self.root / "actual-scratch-exec",
+                                   self.state, mode="execute", transport=native,
+                                   run_id="actual-scratch-001",
+                                   confirm_hash=first["confirmPlanHash"])
+            self.assertEqual(second["status"], "COMPLETE_UNSAVED", second)
+            self.assertEqual(len(second["addedGuids"]), 25)
+            self.assertTrue(second["wholeAssemblyReadback"])
+            self.assertEqual(second["binding"]["port"], 19726)
+
+    def test_strict_scratch_pln_override_does_not_allow_protected_projects(self):
+        from unittest.mock import patch
+
+        old_path = A.RUN.EXPECTED_PATH
+        old_name = A.RUN.EXPECTED_NAME
+        old_port = A.RUN.PORT
+        try:
+            with self.assertRaisesRegex(ValueError, "TEST_PLN_NOT_APPROVED"):
+                A.RUN.bind_approved_scratch_pln(
+                    19724, r"C:\\Users\\Admin\\Documents\\APA_Pavilion_MVP_SUCCESS.pln")
+            self.assertEqual(A.RUN.EXPECTED_PATH, old_path)
+            A.RUN.bind_approved_scratch_pln(19726)
+            self.assertEqual(A.RUN.EXPECTED_PATH,
+                             r"C:\\LocalAI\\APA_Test_House_01.pln")
+            self.assertEqual(A.RUN.PORT, 19726)
+        finally:
+            A.RUN.EXPECTED_PATH = old_path
+            A.RUN.EXPECTED_NAME = old_name
+            A.RUN.PORT = old_port
 
     def test_unknown_structure_is_not_reported_as_engineered(self):
         preview = BUILD.prepare(self.intent["components"][0], A.RUN.DEFAULT_SCENE_SCHEMA)
