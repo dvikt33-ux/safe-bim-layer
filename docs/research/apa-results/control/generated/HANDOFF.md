@@ -1,6 +1,6 @@
 # APA — START HERE for any new chat or agent
 
-Authority: [PROJECT_PLAN.json](../../../../../docs%5Cresearch%5Capa-results%5Ccontrol%5CPROJECT_PLAN.json). Read [CONTROL_BOARD](CONTROL_BOARD.md), [TASK_CARDS](TASK_CARDS.md) and [RELATIONSHIPS](RELATIONSHIPS.md) and [THEMES](THEMES.md) before proposing work.
+Authority: [PROJECT_PLAN.json](../../../../../docs/research/apa-results/control/PROJECT_PLAN.json). Read [CONTROL_BOARD](CONTROL_BOARD.md), [TASK_CARDS](TASK_CARDS.md) and [RELATIONSHIPS](RELATIONSHIPS.md) and [THEMES](THEMES.md) before proposing work.
 
 ## Mandatory procedure
 
