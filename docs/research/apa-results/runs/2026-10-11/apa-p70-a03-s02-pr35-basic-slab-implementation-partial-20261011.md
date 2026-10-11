@@ -453,3 +453,40 @@ Next owner action: ensure there are no unsaved changes, close the document, manu
 The native `GetProjectInfo.projectPath` points to a **.bpn backup**, rather than the requested exact `C:\\институт проект\\Улучшенная копия APA_Test_House_01.pln`. The read-only verifier **correctly failed closed before 45-GUID/25-element inspection**. This result neither disproves the previous in-memory typed PASS nor verifies serialization to the .pln. The original `Get-Item` check previously showed the .pln exists on disk (15,957,232 bytes); no data-loss claim is supported.
 
 **Manual remediation:** do not rename/delete the .bpn or change historic journals, and do not run any Create/Modify/Save automation. In Archicad, explicitly open the exact .pln via File → Open → Open Project, verify the document path, then run only `verify_apa_saved_copy_read_only.py --port 19726`. If Tapir port changes, determine the new port before running. Confirm actual close/reopen manually and record fresh exact 45 GUID/25 typed readback. **SAVE_REOPEN_PASS remains NOT_VERIFIED.**
+
+
+## Reopen attempt #2: exact PLN reselected, 45/45 GUID native PASS (2026-10-11)
+
+**Classification: USER_SUPPLIED / LIVE_SAVED_COPY_REOPEN_SEQUENCE_TYPED_READBACK_PASS.** The owner ran the same **read-only** `verify_apa_saved_copy_read_only.py --port 19726` command twice, with a distinct native project path transition between attempts:
+
+1. First attempt: `BLOCKED_READ_ONLY_SAVED_COPY`, native GetProjectInfo path `C:\\институт проект\\Улучшенная копия APA_Test_House_01.bpn`, zero native writes. This was the backup and was safely rejected before inspecting geometry.
+2. Second attempt: `OPEN_SAVED_COPY_TYPED_READBACK_PASS`, native GetProjectInfo path `C:\\институт проект\\Улучшенная копия APA_Test_House_01.pln` (the exact owner-designated saved project), zero native writes.
+
+Exact output of successful attempt (owner PowerShell):
+
+```json
+{
+  "status": "OPEN_SAVED_COPY_TYPED_READBACK_PASS",
+  "copyPath": "C:\\институт проект\\Улучшенная копия APA_Test_House_01.pln",
+  "tapirVersion": "1.5.10",
+  "expectedTotalGuids": 45,
+  "actualTotalGuids": 45,
+  "plannedBuildingElementsVerified": 25,
+  "plannedBuildingKinds": {"Door": 5, "Slab": 2, "Wall": 12, "Window": 6},
+  "plannedElementsByNativeStory": {"0": 13, "1": 12},
+  "slabBuildingMaterialGuid": "63db2ce9-903d-45c0-b93c-b3c604c77394",
+  "crossStoryBindingsVerified": true,
+  "hostedOpeningGuidsVerified": true,
+  "allPlannedGuidsPreserved": true,
+  "original20GuidsPreserved": true,
+  "originalJournalChanged": false,
+  "nativeWriteCalls": 0,
+  "savedCopyWasManuallyReopened": "USER_CONFIRMATION_REQUIRED"
+}
+```
+
+**Acceptance:** Earlier filesystem `Get-Item` established physical `.pln` existence and 15,957,232-byte file size. The new **.bpn → .pln** native project-path transition is evidence that Archicad changed the open project from the backup to the precise saved `.pln` copy; fresh read-only typed checks after this transition matched all expected 45 unique GUIDs and 25 planned elements, including both story elevations, Slab material, 6 hosted Windows, 5 hosted Doors, and all original 20 pre-existing GUIDs. A semantic **saved-copy reopen-and-readback** gate is therefore **PASS by the owner-provided sequence**. No writes or legacy journal edits were made by either verification invocation.
+
+**UI-instrumentation limit:** The verifier's `savedCopyWasManuallyReopened` field remains `USER_CONFIRMATION_REQUIRED` by design because it does not observe GUI gestures or Windows process-level close/restart. The GitHub result should be labeled **USER_LOG_SUPPORTED_SAVE_REOPEN_READBACK_PASS** rather than claim a separately instrumented OS-process restart or an explicit verbal confirmation of the exact File → Open gesture. A process restart is not necessary for this project's document reopen gate. Do not overwrite prior blocked .bpn attempt: both are valid provenance.
+
+**Scope:** Proven for the separate disposable two-story 25-element building-shell test project, not production-grade structure, normative compliance, global material coverage or all features in broad task `APA-P70.A03.S02`. Preserve controller task status pending semantic building/CSE acceptance. Recommended next independent check: visualize floor plans and 3D, verify enclosure, openings, wall/slab intersections and absence of unintended collisions; then separately address native write robustness for cross-story visibility prompts and generic floor-1 CreateSlabs Z. **No old scene replay.**
