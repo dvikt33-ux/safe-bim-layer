@@ -4,6 +4,8 @@
 **Единственный управляющий реестр:** [PROJECT_PLAN.json](PROJECT_PLAN.json), S-ID из APA-P70.  
 **Цель:** дорабатывать один общий Fast Project Compiler для Archicad 29, а не вводить отдельный генератор ИЖС, новый SceneWriter, новый контроллер или искусственные циклы. См. [Full Cycle Goal](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md) и [Checkpoint 37 §5](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md).
 
+> **Рабочие этапы выпуска и приёмочные ворота:** [APA_ACCELERATOR_DELIVERY_ROADMAP_20261011.md](APA_ACCELERATOR_DELIVERY_ROADMAP_20261011.md). Это конкретизация данного интеграционного плана для доставки MVP и полного цикла; `PROJECT_PLAN.json` остаётся единственным управляющим реестром, а дорожная карта ждёт независимого аудита.
+
 ## 1. Реально существующие блоки, подключать их, а не переписывать
 
 | Роль | Использовать существующий источник | Состояние / граница |
