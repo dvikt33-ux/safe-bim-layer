@@ -40,7 +40,7 @@ jobs:
             --task-id APA-P70.A01.S01 \
             --receipt-path docs/research/apa-results/receipts/APA-RUN-20261011-091905Z-p70-source-integration-map.json \
             > /tmp/apa-verified-receipt-info.json
-          python -c 'import json; x=json.load(open("/tmp/apa-verified-receipt-info.json")); assert x["dry_run"] is True and x["event"]["status"] == "INFO" and x["event"]["task_id"] == "APA-P70.A01.S01"; print("REAL_RECEIPT_DRY_RUN_PASS")'
+          python -c 'import json; x=json.load(open("/tmp/apa-verified-receipt-info.json")); assert x["dry_run"] is True and x["event"]["status"] == "INFO" and x["event"]["task_id"] == "APA-RECEIPT-EVENT-APA-P70-A01-S01" and "APA-P70.A01.S01" in x["event"]["summary"]; print("REAL_RECEIPT_DRY_RUN_PASS")'
 
   windows-launcher-static:
     runs-on: windows-latest
