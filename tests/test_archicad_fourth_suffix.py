@@ -21,7 +21,11 @@ class FourthSuffixTests(unittest.TestCase):
         ticket = REPAIR.preflight(self.api, MATERIAL_NAME)
         out = REPAIR.execute(self.api, MATERIAL_NAME, ticket["token"])
         self.assertEqual(out["status"], "S2_SLAB_REPAIRED_VERIFIED_UNSAVED", out)
-        self.native.writes.clear()
+        # Synthetic FakeNative derives GUIDs from len(writes). The parent
+        # fixture cleared older synthetic calls; restore an unused index
+        # interval so new fake GUIDs cannot overwrite previous elements.
+        self.native.writes.extend(["HISTORICAL_NATIVE_CALL"] * 8)
+        self.writes_before = len(self.native.writes)
 
     def read_api(self, cmd, params):
         result = self.bad_slab_api(cmd, params)
@@ -51,7 +55,9 @@ class FourthSuffixTests(unittest.TestCase):
         self.assertEqual(out["reusedCount"], 12)
         self.assertEqual(out["newCreatedCount"], 13)
         self.assertEqual(len(self.native.created), 25)
-        self.assertEqual(len(self.native.writes), 13)
+        self.assertEqual(len(self.native.writes), self.writes_before + 13)
+        self.assertTrue(all(x.startswith("Create") for x in
+                            self.native.writes[self.writes_before:]))
         self.assertFalse(out["plnSaved"])
         with sqlite3.connect(self.journal) as db:
             self.assertEqual(db.execute(
@@ -63,11 +69,11 @@ class FourthSuffixTests(unittest.TestCase):
     def test_bad_token_and_inventory_change_block_before_any_write(self):
         with self.assertRaisesRegex(ValueError, "THIRTEEN_STEP_TOKEN_MISMATCH"):
             FINAL.execute(self.read_api, MATERIAL_NAME, "invalid")
-        self.assertFalse(self.native.writes)
+        self.assertEqual(len(self.native.writes), self.writes_before)
         self.native.existing.append(str(uuid.uuid4()))
         with self.assertRaisesRegex(ValueError, "NATIVE_32_GUIDS_NOT_EXACT_HISTORY"):
             FINAL.proof(self.read_api, MATERIAL_NAME)
-        self.assertFalse(self.native.writes)
+        self.assertEqual(len(self.native.writes), self.writes_before)
 
     def test_changed_s2_slab_z_fails_preflight_without_mutation(self):
         def drift(cmd,params):
@@ -79,7 +85,7 @@ class FourthSuffixTests(unittest.TestCase):
             return result
         with self.assertRaisesRegex(ValueError, "REPAIRED_SLAB_GLOBAL_Z_OR_LEVEL_DRIFT"):
             FINAL.proof(drift,MATERIAL_NAME)
-        self.assertFalse(self.native.writes)
+        self.assertEqual(len(self.native.writes), self.writes_before)
 
     def test_partial_fourth_suffix_cannot_be_restarted(self):
         token = FINAL.proof(self.read_api, MATERIAL_NAME)["token"]
