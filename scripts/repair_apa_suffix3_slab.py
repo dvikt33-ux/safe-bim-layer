@@ -74,7 +74,7 @@ def preflight(api, material_name):
                 "PASS", "PASS", "PASS", "CREATED_UNVERIFIED")
             or not third_rows[-1][2]
             or third_rows[-1][2].lower() != TARGET_GUID.lower()):
-        raise ValueError("THIRD_SCENE_JOURNAL_NOT_EXACT_3_WALLS_1_SLAB")
+        raise ValueError("THIRD_SCENE_JOURNAL_NOT_EXACT_3_WALLS_1_SLAB: " + RUN.canonical([(sid, state) for sid, state, _ in third_rows]))
     if (not first_repair or first_repair[0] != "READBACK_PASS"
             or first_repair[1].lower() != REPAIR.SLAB_GUID.lower()
             or json.loads(first_repair[3]).get("status") !=
