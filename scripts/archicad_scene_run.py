@@ -227,8 +227,24 @@ def compare_polygon(expected, actual):
                for start in range(n) for direction in (-1, 1))
 
 
+def story_level_for_floor(story_bindings, native_index):
+    """Resolve absolute story elevation by native index, never by ordinal guess."""
+    if not story_bindings:
+        if native_index != 0:
+            raise ValueError("NONZERO_STORY_WITHOUT_PINNED_ELEVATION")
+        return 0.0
+    matched = [s for s in story_bindings if s.get("nativeIndex") == native_index]
+    if len(matched) != 1 or not isinstance(matched[0].get("level"), (int, float)):
+        raise ValueError("STORY_ELEVATION_NOT_UNIQUELY_PINNED")
+    level = matched[0]["level"]
+    if not math.isfinite(level):
+        raise ValueError("STORY_ELEVATION_NOT_FINITE")
+    return level
+
+
 def verify_readback(command, params, row, owner_guid=None, expected_floor=0,
-                    expected_slab_material_guid=None, allow_slab_thickness_mismatch=False):
+                    expected_slab_material_guid=None, allow_slab_thickness_mismatch=False,
+                    expected_story_level=0.0):
     kind = command[6:-1]  # CreateWalls -> Wall, CreateDoors -> Door
     if row.get("type") != kind or row.get("floorIndex") != expected_floor:
         raise ValueError(f"READBACK_TYPE_OR_STORY: expected {kind} on native story {expected_floor}")
@@ -245,9 +261,15 @@ def verify_readback(command, params, row, owner_guid=None, expected_floor=0,
                 raise ValueError("WALL_POSITION_READBACK_MISMATCH")
         for source, target in (("height", "height"), ("thickness", "begThickness"),
                                ("thickness", "endThickness"), ("offset", "offset"),
-                               ("zCoordinate", "zCoordinate"), ("arcAngle", "arcAngle")):
+                               ("arcAngle", "arcAngle")):
             if not close(details.get(target), expected[source]):
-                raise ValueError("WALL_SIZE_READBACK_MISMATCH")
+                raise ValueError("WALL_SIZE_READBACK_MISMATCH: " + target)
+        # CreateWalls zCoordinate is a floor-local offset in the pinned graph;
+        # native GetDetailsOfElements returns absolute project Z in observed
+        # Archicad 29: story 1 at +3m => requested 0m, readback +3m.
+        if not close(details.get("zCoordinate"),
+                     expected_story_level + expected["zCoordinate"]):
+            raise ValueError("WALL_STORY_Z_READBACK_MISMATCH")
         if any(details.get(k) != v for k, v in (
             ("structureType", "Basic"), ("referenceLineLocation", "Center"),
             ("geometryType", "Straight"))):
@@ -306,7 +328,7 @@ def created_guid(raw):
     return guid
 
 
-def check_previous_wall(api, graph_step, created):
+def check_previous_wall(api, graph_step, created, story_bindings=None):
     key = graph_step["params"]
     data = list(key.values())[0][0]
     wallid = data["ownerWallId"]["guid"]["$createdGuid"]
@@ -318,8 +340,11 @@ def check_previous_wall(api, graph_step, created):
     if previous_step is None:
         raise ValueError("PARENT_PLAN_ROW_MISSING")
     row = requested_details(api, parent["guid"])
-    verify_readback("CreateWalls", previous_step["params"], row,
-                    expected_floor=previous_step["params"]["wallsData"][0]["floorIndex"])
+    parent_floor = previous_step["params"]["wallsData"][0]["floorIndex"]
+    verify_readback(
+        "CreateWalls", previous_step["params"], row,
+        expected_floor=parent_floor,
+        expected_story_level=story_level_for_floor(story_bindings, parent_floor))
     return parent["guid"]
 
 
@@ -446,7 +471,8 @@ class SceneWriter:
                         raise ValueError("PROJECT_SWITCHED_DURING_SCENE")
                     parent_guid = None
                     if command in ("CreateWindows", "CreateDoors"):
-                        parent_guid = check_previous_wall(self.api, step, created)
+                        parent_guid = check_previous_wall(
+                            self.api, step, created, preflight.get("storyBindings"))
                     params = resolve_params(step, created)
                     # Bind each operation to its exact resolved (including GUID)
                     # parameters, approved local test scope, source scene and target.
@@ -524,6 +550,8 @@ class SceneWriter:
                     kind = verify_readback(
                         command, params, row, parent_guid,
                         expected_floor=floor_index,
+                        expected_story_level=story_level_for_floor(
+                            preflight.get("storyBindings"), floor_index),
                         expected_slab_material_guid=(
                             preflight.get("slabBasicMaterialGuid")
                             if command == "CreateSlabs" else None))
