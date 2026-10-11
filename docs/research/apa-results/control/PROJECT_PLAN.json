@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 43,
+  "revision": 44,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -476,6 +476,18 @@
       "uri": "docs/research/apa-results/runs/2026-10-11/apa-p70-a03-live-scratch-partial-slab-reconciliation.md",
       "kind": "EVIDENCE",
       "verification": "USER_REPORTED_LIVE_PARTIAL_SLAB_READBACK_NOT_VERIFIED"
+    },
+    "ART-APA-BLOB-CENSUS-83-20261011": {
+      "id": "ART-APA-BLOB-CENSUS-83-20261011",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/b3fa4c84e7bbaa282d204915fe03c8b099be6a85/docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-001922Z-eighty-head-blob-inventory/REPORT.md",
+      "kind": "REPORT",
+      "verification": "GITHUB_READBACK_VERIFIED_V2_RECEIPT"
+    },
+    "ART-APA-SOURCE-71-INDEX-20261011": {
+      "id": "ART-APA-SOURCE-71-INDEX-20261011",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/6a8abe2ac4e5a3e664c94bc9e71f9e15da943e27/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json",
+      "kind": "SOURCE_INDEX",
+      "verification": "SOURCE_LINKS_VERIFIED_NOT_COPIED"
     }
   },
   "tasks": {
@@ -654,7 +666,7 @@
       "action_id": "APA-P00.A02",
       "title": "Связать старые находки с S-ID и удалить логические дубли без удаления оригиналов",
       "kind": "CONSOLIDATION",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 0,
       "work_key": "legacy-evidence-dedup",
       "depends_on": [
@@ -671,13 +683,15 @@
         "Evidence map и superseded_by для дублей"
       ],
       "acceptance": "Evidence map и superseded_by для дублей",
-      "owner": "chatgpt-gpt6-branch-blob-inventory-20261011",
-      "lease_until": "2026-10-11T01:19:52Z",
-      "claim_ref": "APA-RUN-20261011T000452Z-branch-blobs-69",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
       "evidence": [
         "ART-APA-SLACK-THREE-RECON-20261011",
-        "ART-APA-BRANCH-DEDUP-20261011"
+        "ART-APA-BRANCH-DEDUP-20261011",
+        "ART-APA-BLOB-CENSUS-83-20261011",
+        "ART-APA-SOURCE-71-INDEX-20261011"
       ],
       "blocked_reason": null
     },
