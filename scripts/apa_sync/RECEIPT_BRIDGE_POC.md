@@ -45,3 +45,11 @@ The code **does not provide exactly-once delivery**, 24/7 execution, automatic n
 ## Verified CI boundary
 
 [APA Slack offline CI #38145391099](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38145391099): SUCCESS; **44 existing receiver tests + 16 original receipt tests + 11 outbox/restart/concurrency tests = 71 offline tests PASS**; Python compile, Windows launcher parser, and pinned **real GitHub receipt → INFO dry-run** all PASS. No Slack post was made by this run.
+
+## Windows execution and immutable-send hardening
+
+[Windows + Linux CI run 38146011092](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38146011092) — **SUCCESS, attempt 1**. Linux: `44` legacy Slack + `16` receipt + `13` outbox = **73 unit tests PASS**. Windows runner: `16` receipt + `13` SQLite outbox = **29 unit tests PASS**, `WINDOWS_BRIDGE_OFFLINE_PASS`; PowerShell launcher syntax PASS. Both environments are CI-hosted; this is **not** a deployed test of the user's Archicad laptop.
+
+`NotificationOutbox.mark_sent` now accepts only a transition from `RESERVED`, `IN_FLIGHT` or `UNCERTAIN` to `SENT`. An identical Slack timestamp for an already-`SENT` message is idempotent; a different timestamp for the same ID is rejected, leaving the original intact. Extra tests prove both cases.
+
+**Remaining:** no socket-mode/Slack network LIVE test from this bridge, no automatic outgoing notifier on GitHub commit, no enrollment of candidate `APA-P60.A02.S05` and no authorization to install/auto-launch this module.
