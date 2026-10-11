@@ -276,3 +276,9 @@ Controller artifact record: `PROJECT_PLAN.json` revision **52**, [commit 8af838f
 | Artifact ID | Proof | Acceptance |
 |---|---|---|
 | `ART-APA-AC29-SCRATCH-SAVE-REOPEN-45-PASS-20261011` | [Full owner-output evidence and exact typed readback](runs/2026-10-11/apa-p70-a03-s02-pr35-basic-slab-implementation-partial-20261011.md). Two consecutive user-run read-only verifier calls: first `.bpn` rejected due to exact path guard; then reopened path `.pln` passed with **45/45 exact GUIDs**, **25/25 typed planned elements** (Wall 12 / Slab 2 / Door 5 / Window 6), 13+12 native stories, Basic slab material GUID `63db2ce9-903d-45c0-b93c-b3c604c77394`, hosts, original20 GUIDs unchanged, native writes=0. Owner previously provided `Get-Item` showing the on-disk `.pln` is 15,957,232 bytes. | **USER_LOG_SUPPORTED_SAVE_REOPEN_READBACK_PASS** for the bounded scratch shell. The verifier cannot independently observe GUI clicks; `savedCopyWasManuallyReopened=USER_CONFIRMATION_REQUIRED` remains a UI instrumentation limit, not a geometry failure. No proof of production structural/engineering quality; controller broad task stays non-DONE. |
+
+## APA Publisher — integrated three-stage CAS retry (2026-10-11)
+
+| Artifact | GitHub source and verified CI | Boundaries |
+|---|---|---|
+| `ART-APA-PUBLISHER-THREE-STAGE-CAS-PR39-20261011` | [Canonical report](runs/2026-10-11/apa-publisher-three-stage-race-recovery-pr39-20261011.md), [Draft PR #39](https://github.com/dvikt33-ux/safe-bim-layer/pull/39), [GitHub CI #38154416416](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38154416416) **SUCCESS (39 tests)** | Report/index + receipt + Controller CAS retry integrated. **SOURCE+OFFLINE_PASS, CANONICAL_LIVE_NOT_VERIFIED**, no merge. Task `APA-P00.A03.S03` **PARTIAL**; PR #38 overlaps and must not be independently merged without reconciliation. |
