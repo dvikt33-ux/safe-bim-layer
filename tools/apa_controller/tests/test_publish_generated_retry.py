@@ -104,9 +104,9 @@ class ControllerPushRaceTests(unittest.TestCase):
     def test_push_rejected_without_remote_move_fails_immediately(self):
         """A denied Git push is not a CAS race and must never be retried blindly."""
         hook = self.origin / "hooks" / "pre-receive"
-        hook.write_text("#!/bin/sh\\necho PUSH_BLOCKED_BY_POLICY >&2\\nexit 1\\n")
+        hook.write_text("#!/bin/sh\necho PUSH_BLOCKED_BY_POLICY >&2\nexit 1\n")
         hook.chmod(0o755)
-        (self.worker / "docs/research/apa-results/control/generated/HANDOFF.md").write_text("stale\\n")
+        (self.worker / "docs/research/apa-results/control/generated/HANDOFF.md").write_text("stale\n")
         p = self.execute()
         self.assertEqual(p.returncode, 1, p.stdout)
         self.assertIn("push rejected without remote advancement", p.stdout)
@@ -115,7 +115,7 @@ class ControllerPushRaceTests(unittest.TestCase):
         self.assertFalse(self.output.exists())
         self.assertEqual(git(self.rival, "show", "origin/" + BRANCH +
                              ":docs/research/apa-results/control/PROJECT_PLAN.json").stdout,
-                         "rev1\\n")
+                         "rev1\n")
 
     def test_wrong_repository_is_rejected(self):
         p = self.execute({**self.env, "GITHUB_REPOSITORY": "forged/repo"})
