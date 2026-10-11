@@ -14,7 +14,7 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 | KNOWLEDGE_GRAPH — Сведение исследований и доказательств | 3 | 0 | 1 | ART-BRANCHES, ART-REGISTER, ART-TRACE-RECEIPT, ART-TRACE-REPORT |
 | MEP — MEP native и Tapir | 1 | 0 | 1 | ART-REGISTER |
 | MVP — MVP и внедрение | 2 | 0 | 0 | ART-PLAN |
-| PRODUCT_DEVELOPMENT — Полный цикл разработки APA: требования → узлы/расчёт → BIM → MEP → выпуск | 23 | 4 | 1 | ART-APA-FULL-CYCLE, ART-APA-PLP-CONTRACT, ART-APA-REUSE-NATIVE-20261011, ART-APA-PR16, ART-APA-HIGHLEVEL-PR34, ART-APA-ASSEMBLY-PLAN, ART-APA-LIVE-SCRATCH-PARTIAL-20261011 |
+| PRODUCT_DEVELOPMENT — Полный цикл разработки APA: требования → узлы/расчёт → BIM → MEP → выпуск | 23 | 5 | 2 | ART-APA-FULL-CYCLE, ART-APA-PLP-CONTRACT, ART-APA-REUSE-NATIVE-20261011, ART-APA-PR16, ART-APA-HIGHLEVEL-PR34, ART-APA-ASSEMBLY-PLAN, ART-APA-LIVE-SCRATCH-PARTIAL-20261011 |
 | PUBLISHER — Публикация, квитанции и capability | 4 | 0 | 2 | ART-OS-AUDIT, ART-PUB-RECEIPT, ART-PUBLISHER |
 | SDK_NATIVE — Archicad 29 native SDK | 3 | 0 | 3 | ART-REGISTER, ART-SDK-GET3D, ART-SDK-SEO, ART-APA-ATTR-STORY-SLAB-20261011 |
 | SYNTHESIS — Синтез research → implementation | 2 | 0 | 0 | ART-PLAN, ART-REGISTER |
@@ -91,7 +91,7 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 - APA-P70.A02.S01 [BUILD/DONE_PUBLISHED]: Собрать семантический контракт задания, участка, этажей и помещений; work_key=project-brief-and-story-contract; related=none
 - APA-P70.A02.S02 [BUILD/READY]: Связать проектные требования с версиями нормативов и проверяемыми правилами; work_key=normative-applicability-pack; related=none
 - APA-P70.A02.S03 [BUILD/DONE_PUBLISHED]: Собрать проектный Library Pack из проверяемых строительных систем и узлов; work_key=project-library-pack-assembly; related=none
-- APA-P70.A03.S01 [INTEGRATION/IN_PROGRESS]: Связать помещения, несущую схему, оси, уровни и конструктивные ограничения; work_key=semantic-spatial-structural-plan; related=none
+- APA-P70.A03.S01 [INTEGRATION/DONE_PUBLISHED]: Связать помещения, несущую схему, оси, уровни и конструктивные ограничения; work_key=semantic-spatial-structural-plan; related=none
 - APA-P70.A03.S02 [BUILD/READY]: Собрать модель средствами уже существующих BIM-исполнителей; work_key=reuse-native-whole-building-builder; related=none
 - APA-P70.A03.S03 [VALIDATION/READY]: Доказать редактируемость, GUID/host/story/material и инкрементальное обновление; work_key=incremental-model-integrity-gates; related=none
 - APA-P70.A04.S01 [INTEGRATION/READY]: Вывести из модели обязательные семейства узлов и их условия применимости; work_key=required-junction-condition-coverage; related=none
