@@ -138,6 +138,40 @@ class ImmutableStageRetry(unittest.TestCase):
         self.assertIn("report_commit=" + anchor, body)
         self.assertEqual((self.rival / ROOT / "control/PROJECT_PLAN.json").read_text(), "revision=2\n")
 
+    def test_competing_identical_receipt_is_preserved(self):
+        anchor = self.setup_report_anchor()
+        import hashlib
+        receipt = self.rival / ROOT / "receipts/APA-RUN-test.json"
+        receipt.parent.mkdir(parents=True, exist_ok=True)
+        checksum = hashlib.sha256(b"fixed immutable report\n").hexdigest()
+        receipt.write_text("sha256=" + checksum + "\nreport_commit=" + anchor + "\n")
+        git(self.rival, "add", "-A")
+        git(self.rival, "commit", "-m", "independent valid receipt")
+        git(self.rival, "push", "origin", "HEAD:" + REF)
+        expected_sha = git(self.rival, "rev-parse", "HEAD")
+        out = self.execute("receipts", anchor)
+        self.assertEqual(out.returncode, 0, out.stdout)
+        self.assertIn("stage=receipts attempt=2", out.stdout)
+        self.assertEqual(git(self.worker, "rev-parse", "HEAD"), expected_sha)
+        self.assertEqual(receipt.read_text(),
+                         (self.worker / ROOT / "receipts/APA-RUN-test.json").read_text())
+
+    def test_competing_receipt_with_wrong_hash_is_rejected(self):
+        anchor = self.setup_report_anchor()
+        receipt = self.rival / ROOT / "receipts/APA-RUN-test.json"
+        receipt.parent.mkdir(parents=True, exist_ok=True)
+        receipt.write_text("sha256=unverified\nreport_commit=" + anchor + "\n")
+        git(self.rival, "add", "-A")
+        git(self.rival, "commit", "-m", "independent invalid receipt")
+        git(self.rival, "push", "origin", "HEAD:" + REF)
+        expected_sha = git(self.rival, "rev-parse", "HEAD")
+        out = self.execute("receipts", anchor)
+        self.assertNotEqual(out.returncode, 0, out.stdout)
+        self.assertIn("RECEIPT_CONFLICT", out.stdout)
+        self.assertFalse(self.output.exists())
+        self.assertEqual(git(self.worker, "ls-remote", "origin", REF).split()[0],
+                         expected_sha)
+
     def test_remote_immutable_mutation_fails_closed(self):
         anchor = self.setup_report_anchor()
         report = self.rival / ROOT / "runs/2026-10-11/APA-RUN-test/REPORT.md"
