@@ -29,7 +29,8 @@ import archicad_authored_native_plan as AUTHORED_NATIVE
 READS = frozenset({"GetProjectInfo", "GetStories", "GetAddOnVersion",
                   "GetAllElements", "Get3DBoundingBoxes", "GetDetailsOfElements",
                   "GetAttributesByType", "GetSubelementsOfHierarchicalElements", "GetModelDumpV1",
-                  "GetCollisions", "API.GetProductInfo"})
+                  "GetCollisions", "GetBuildingMaterials", "GetComposites", "GetProfiles",
+                  "GetSurfaces", "GetAvailableLibraryParts", "GetGDLParametersOfElements", "API.GetProductInfo"})
 NATIVE_MUTATIONS = RUN.ALLOWED_WRITES | frozenset({"ModifySlabs"})
 PRIMITIVES = {
     "pavilion-frame-v1": {"status": "EXECUTABLE_PENDING_LIVE_ACCEPTANCE",
@@ -286,7 +287,8 @@ class EvidenceAPI:
         with (self.folder / "dispatch.jsonl").open("a", encoding="utf-8") as f:
             f.write(RUN.canonical(record) + "\n")
         self.calls[command] += 1
-        self.write_attempts += int(command in NATIVE_MUTATIONS)
+        self.write_attempts += int(command in NATIVE_MUTATIONS or command in {
+            'ModifyWalls','ModifyColumns','ModifyWindows','ModifyDoors'})
         start = time.perf_counter()
         try:
             record["response"] = self.transport(command, params)
