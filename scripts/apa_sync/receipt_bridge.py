@@ -233,18 +233,18 @@ def summarize_changes(get_json, plan: dict, after: int = 0, max_pages: int = 10)
             "authority": "READ_ONLY_CANDIDATES_NOT_TASK_STATUS"}
 
 
-def send_notification(event: dict, channel: str = CHANNEL) -> dict:
-    """Explicit opt-in, re-read Slack history to avoid common duplicate sends.
+def find_notification(event: dict, channel: str = CHANNEL) -> dict | None:
+    """Read only: exact event ID + semantic payload equality, bounded history.
 
-    A crash between post and receipt is still at-least-once; not exactly-once.
+    A reused ID with different task/status/proof is a conflict, never a duplicate.
     """
     if channel != CHANNEL:
         raise BridgeError("outbound notification restricted to configured APA channel")
     from scripts.apa_sync.coordinator import parse_event
-    from scripts.apa_sync.step_sync import _client, after_step
+    from scripts.apa_sync.step_sync import _client
     client = _client()
     cursor = None
-    for _ in range(6):  # max 6 x 200 messages; fail-closed if more history exists
+    for _ in range(6):
         params = {"channel": channel, "limit": 200}
         if cursor:
             params["cursor"] = cursor
@@ -254,13 +254,58 @@ def send_notification(event: dict, channel: str = CHANNEL) -> dict:
                 candidate = parse_event(entry.get("text", ""))
             except ValueError:
                 continue
-            if candidate and candidate.get("event_id") == event["event_id"]:
-                return {"published": False, "already_present": True}
+            if candidate and candidate.get("event_id") == event.get("event_id"):
+                fields = ("task_id", "phase", "status", "source", "summary", "evidence_urls")
+                if any(candidate.get(key, []) != event.get(key, [])
+                       for key in fields):
+                    raise BridgeError("Slack notification ID has conflicting payload")
+                stamp = entry.get("ts")
+                if not isinstance(stamp, str) or not stamp:
+                    raise BridgeError("matching Slack notification lacks timestamp")
+                return {"channel_id": channel, "slack_ts": stamp}
         cursor = page.get("response_metadata", {}).get("next_cursor")
         if not cursor:
-            return after_step(channel, event, publish=True)
-    raise BridgeError("Slack dedup scan incomplete; refusing to send")
+            return None
+    raise BridgeError("Slack history scan incomplete: refuse to send")
 
+
+def send_notification(event: dict, channel: str = CHANNEL) -> dict:
+    """Legacy opt-in helper: bounded dedup; use publish_with_outbox for durable send."""
+    existing = find_notification(event, channel)
+    if existing:
+        return {"published": False, "already_present": True, **existing}
+    from scripts.apa_sync.step_sync import after_step
+    return after_step(channel, event, publish=True)
+
+
+def publish_with_outbox(event: dict, *, outbox_path=None, channel: str = CHANNEL) -> dict:
+    """Crash-conservative explicit send: don't blindly retry ambiguous posts."""
+    if channel != CHANNEL:
+        raise BridgeError("outbound notification restricted to configured APA channel")
+    from scripts.apa_sync.notification_outbox import NotificationOutbox, OutboxError, default_path
+    from scripts.apa_sync.step_sync import after_step
+    outbox = NotificationOutbox(outbox_path if outbox_path is not None else default_path())
+    state = outbox.reserve(event)
+    if state == "SENT":
+        return {"published": False, "already_recorded": True, "event_id": event["event_id"]}
+    # Always reconcile against Slack before a new send, including recovered IN_FLIGHT.
+    existing = find_notification(event, channel)
+    if existing:
+        outbox.mark_sent(event["event_id"], existing["slack_ts"])
+        return {"published": False, "already_present": True, **existing}
+    if state in ("IN_FLIGHT", "UNCERTAIN"):
+        raise BridgeError("delivery uncertain: Slack scan found no event; manual review required")
+    outbox.begin_send(event["event_id"])
+    try:
+        sent = after_step(channel, event, publish=True)
+        if not isinstance(sent, dict) or sent.get("published") is not True:
+            raise OutboxError("Slack send did not confirm publication")
+        outbox.mark_sent(event["event_id"], sent.get("slack_ts"))
+    except Exception:
+        outbox.mark_uncertain(event["event_id"])
+        raise BridgeError("Slack delivery uncertain; never retry blindly") from None
+    return {"published": True, "event_id": event["event_id"],
+            "slack_ts": sent["slack_ts"]}
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="APA receipt verification + Slack notification (opt-in)")
@@ -272,6 +317,7 @@ def main() -> None:
     notify.add_argument("--task-id", required=True)
     notify.add_argument("--receipt-path", required=True)
     notify.add_argument("--publish", action="store_true")
+    notify.add_argument("--outbox-db", default=None, help="separate durable notification state")
     args = parser.parse_args()
     reader = GitHubReader(token=os.environ.get("GITHUB_TOKEN"))
     try:
@@ -281,7 +327,7 @@ def main() -> None:
             proof = verify_receipt(reader, args.plan_commit, args.task_id, args.receipt_path)
             event = notification(proof)
             if args.publish:
-                result = {"event_id": event["event_id"], "send": send_notification(event)}
+                result = {"event_id": event["event_id"], "send": publish_with_outbox(event, outbox_path=args.outbox_db)}
             else:
                 result = {"dry_run": True, "event": event}
     except (BridgeError, OSError, KeyError, TypeError) as exc:
