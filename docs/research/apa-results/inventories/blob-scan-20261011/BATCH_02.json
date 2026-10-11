@@ -1,0 +1,4330 @@
+{
+  "schema": "APA_BRANCH_BLOB_SCAN_BATCH_V1",
+  "baseline": "BRANCH_HEADS_20261010.json",
+  "baseline_captured_at": "2026-10-10T10:30:11.098Z",
+  "batch_index": 1,
+  "head_offset": 10,
+  "head_count": 10,
+  "generated_at_utc": "2026-10-11T00:05:43.280Z",
+  "repository": "dvikt33-ux/safe-bim-layer",
+  "rows": [
+    {
+      "head_sha": "59239ceac83529c1fb6ad5d97fdf3d74edacc848",
+      "tree_sha": "59239ceac83529c1fb6ad5d97fdf3d74edacc848",
+      "truncated": false,
+      "files": [
+        {
+          "path": ".github/pull_request_template.md",
+          "sha": "1fdbca430b6f7a669074966d6405acd537d6880b",
+          "bytes": 679,
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha": "3068944546f0f7166cf7d3f68252c5750bab1e92",
+          "bytes": 701,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_CAPABILITY_MATRIX_20260928.md",
+          "sha": "4e317acae908383716df0eb7fc594af8909efb7e",
+          "bytes": 13476,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_FULL_SYSTEM_AUDIT_20260928.md",
+          "sha": "a90b24482c72bda191a90958abcf5e268bfee007",
+          "bytes": 60106,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_IMPLEMENTATION_PLAN_20260928.md",
+          "sha": "88db249a86a202aa617cdcf975bcf4f767f1c879",
+          "bytes": 9146,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_LIVE_TEST_PLAN_20260928.md",
+          "sha": "050318c2df6b1761fa239ac809f1ff0753aedc77",
+          "bytes": 18232,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_ARCHITECTURE_AUDIT.md",
+          "sha": "45f80903dd9e77f74564e2af6219fcc45edab7d1",
+          "bytes": 1701,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_FULL_SYSTEM_AUDIT_20260928.md",
+          "sha": "f3269761febe829b0edbf9e85eb192f39849eb83",
+          "bytes": 13441,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_RECONCILE_GPT_COUNTER_AUDIT_20260928.md",
+          "sha": "1a8d90c02204bfd603009aec4d669fc948eb8ba2",
+          "bytes": 4050,
+          "mode": "100644"
+        },
+        {
+          "path": "GPT_COUNTER_AUDIT_ARENA_20260928.md",
+          "sha": "579087256d033d005d3d5d8e6fb7345dd9835a65",
+          "bytes": 20886,
+          "mode": "100644"
+        },
+        {
+          "path": "LIVE_TEST_SUMMARY_R0_R4.md",
+          "sha": "22ca1b7f45a4df706512721a0693a4e757fe8fed",
+          "bytes": 6094,
+          "mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha": "d6e3c9eb1aaa81a0a1b369cf4d94d56f8fc31291",
+          "bytes": 1891,
+          "mode": "100644"
+        },
+        {
+          "path": "SAFE_BIM_V01_REPORT.md",
+          "sha": "a38ca0bba19bf03dd429dfefb8b2465a4a7c9fe6",
+          "bytes": 1698,
+          "mode": "100644"
+        },
+        {
+          "path": "W7_ARBITRARY_MORPH_GEOMETRY.md",
+          "sha": "d0b7fad2e5f1b6ecb2b2b5249eef24e6e4a5fc1d",
+          "bytes": 1705,
+          "mode": "100644"
+        },
+        {
+          "path": "W8_TRIM_AND_SOLID_SUBTRACTION.md",
+          "sha": "7f9cebdb35f93d48906c9b180fa14bd80c276807",
+          "bytes": 2180,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/arena-full-system-audit-20260928/ARENA_AUDIT_CYCLE_LOG_20260928.md",
+          "sha": "7e94e862d6e2d6a973dad2c5c2888fdfacfdf15d",
+          "bytes": 6052,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/arena-full-system-audit-20260928/TAPIR_1.5.9_COMMAND_INVENTORY.md",
+          "sha": "239ea0e579bc996db8cf2884c9a4b13c359df3bf",
+          "bytes": 29592,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/LIVE_TEST_SUMMARY_R0_R4.md",
+          "sha": "ab8fa39fc85a8133d354d2bac92e67f6e0c5a41d",
+          "bytes": 11400,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/R4_CONSOLE_TRANSCRIPT.txt",
+          "sha": "d766b0612938b4368378f880ab6099c729c4d6e7",
+          "bytes": 18374,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/R4_FIELD_DIFFS_AND_GEOMETRY.md",
+          "sha": "27f308ca80c5d085e397e3a8be137762bace73bf",
+          "bytes": 3473,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/W2_BEAM_SEMANTICS.md",
+          "sha": "1dd7d2a8e84fae1876034f2cf21e3a39a2b15f76",
+          "bytes": 2414,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/W3_COMPOSITE_WALL_THICKNESS.md",
+          "sha": "238431ce962d76a20c82b8fbd9de8247ef312c37",
+          "bytes": 1814,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/W4_ROOF_SEMANTICS.md",
+          "sha": "2f4707fb2f0e05a70a3f22a2d01587aef5783518",
+          "bytes": 1719,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/W5_W5B_STORY_WALL_WINDOW_SEMANTICS.md",
+          "sha": "f2f3c3798c7055a4f47dbb8d136355d0942bfbe9",
+          "bytes": 3636,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/COORDINATION.md",
+          "sha": "c0df5ee5904afc661df842ea3030a38765d483df",
+          "bytes": 2000,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_ARENA.md",
+          "sha": "1da37fb79a1ab7e4193c3b228264f308e403c0bc",
+          "bytes": 1901,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_WORK.md",
+          "sha": "a621651c0cfa2213d9fcdd230810ee84728c4e4d",
+          "bytes": 1447,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/README.md",
+          "sha": "c5253bcc705f4db40bb128f96f6580fdf7dab74f",
+          "bytes": 269,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/OPERATING_MODEL.md",
+          "sha": "6405a9eb186ac3b7115d961fd975c72428b6d05b",
+          "bytes": 2937,
+          "mode": "100644"
+        },
+        {
+          "path": "qwen_safe_bim_integration.py",
+          "sha": "837ac4d33b09cdf2a7f61af10aca81453252cfab",
+          "bytes": 5589,
+          "mode": "100644"
+        },
+        {
+          "path": "research/ARCHICAD_CAPABILITY_LEDGER_20260928.md",
+          "sha": "797a6cb9ea9e4cd763e0e4e2714c97e31634534d",
+          "bytes": 22107,
+          "mode": "100644"
+        },
+        {
+          "path": "research/ARCHICAD_EXECUTION_ARCHITECTURE_20260928.md",
+          "sha": "d770d52564eba089a8b5d26fce9412c780ef620f",
+          "bytes": 12801,
+          "mode": "100644"
+        },
+        {
+          "path": "research/GOST_ATTRIBUTES_PROFILES_LIBRARY_20260928.md",
+          "sha": "9a65f88a68cf74b768f80846187dca14e5d7d0ba",
+          "bytes": 12835,
+          "mode": "100644"
+        },
+        {
+          "path": "research/INDEX_20260928.md",
+          "sha": "cb281899b6f9ebc2ee1d168f0a6ae772c6f6fd4e",
+          "bytes": 2255,
+          "mode": "100644"
+        },
+        {
+          "path": "research/NEXT_LIVE_TEST_MATRIX_20260928.md",
+          "sha": "5c6fa9777c87655da15278f652da619752ef5a5a",
+          "bytes": 7098,
+          "mode": "100644"
+        },
+        {
+          "path": "safe-bim-v01-schema-test.json",
+          "sha": "79005e34a21e915ef2a72ccddef6ffc47ce174b3",
+          "bytes": 300,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_layer.py",
+          "sha": "eb8ebadaeb8619f96cbecd8e94043891853ebde2",
+          "bytes": 12837,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-1.5.8.json",
+          "sha": "01ca78e051c6efbf92812047aba168a3930dcb5e",
+          "bytes": 660670,
+          "mode": "100644"
+        }
+      ],
+      "blob_count": 38,
+      "tree_entries": 46,
+      "fetch_status": "PASS"
+    },
+    {
+      "head_sha": "b7fa4d304263f6dccc9edc11f607c26942ba695c",
+      "tree_sha": "b7fa4d304263f6dccc9edc11f607c26942ba695c",
+      "truncated": false,
+      "files": [
+        {
+          "path": ".github/pull_request_template.md",
+          "sha": "1fdbca430b6f7a669074966d6405acd537d6880b",
+          "bytes": 679,
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha": "3068944546f0f7166cf7d3f68252c5750bab1e92",
+          "bytes": 701,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_ARCHITECTURE_AUDIT.md",
+          "sha": "45f80903dd9e77f74564e2af6219fcc45edab7d1",
+          "bytes": 1701,
+          "mode": "100644"
+        },
+        {
+          "path": "LIVE_TEST_SUMMARY_R0_R4.md",
+          "sha": "22ca1b7f45a4df706512721a0693a4e757fe8fed",
+          "bytes": 6094,
+          "mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha": "d6e3c9eb1aaa81a0a1b369cf4d94d56f8fc31291",
+          "bytes": 1891,
+          "mode": "100644"
+        },
+        {
+          "path": "SAFE_BIM_V01_REPORT.md",
+          "sha": "a38ca0bba19bf03dd429dfefb8b2465a4a7c9fe6",
+          "bytes": 1698,
+          "mode": "100644"
+        },
+        {
+          "path": "W7_ARBITRARY_MORPH_GEOMETRY.md",
+          "sha": "d0b7fad2e5f1b6ecb2b2b5249eef24e6e4a5fc1d",
+          "bytes": 1705,
+          "mode": "100644"
+        },
+        {
+          "path": "W8_TRIM_AND_SOLID_SUBTRACTION.md",
+          "sha": "7f9cebdb35f93d48906c9b180fa14bd80c276807",
+          "bytes": 2180,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/LIVE_TEST_SUMMARY_R0_R4.md",
+          "sha": "ab8fa39fc85a8133d354d2bac92e67f6e0c5a41d",
+          "bytes": 11400,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/R4_CONSOLE_TRANSCRIPT.txt",
+          "sha": "d766b0612938b4368378f880ab6099c729c4d6e7",
+          "bytes": 18374,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/R4_FIELD_DIFFS_AND_GEOMETRY.md",
+          "sha": "27f308ca80c5d085e397e3a8be137762bace73bf",
+          "bytes": 3473,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/W2_BEAM_SEMANTICS.md",
+          "sha": "1dd7d2a8e84fae1876034f2cf21e3a39a2b15f76",
+          "bytes": 2414,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/W3_COMPOSITE_WALL_THICKNESS.md",
+          "sha": "238431ce962d76a20c82b8fbd9de8247ef312c37",
+          "bytes": 1814,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/W4_ROOF_SEMANTICS.md",
+          "sha": "2f4707fb2f0e05a70a3f22a2d01587aef5783518",
+          "bytes": 1719,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/W5_W5B_STORY_WALL_WINDOW_SEMANTICS.md",
+          "sha": "f2f3c3798c7055a4f47dbb8d136355d0942bfbe9",
+          "bytes": 3636,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/COORDINATION.md",
+          "sha": "c0df5ee5904afc661df842ea3030a38765d483df",
+          "bytes": 2000,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_ARENA.md",
+          "sha": "1da37fb79a1ab7e4193c3b228264f308e403c0bc",
+          "bytes": 1901,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_WORK.md",
+          "sha": "a621651c0cfa2213d9fcdd230810ee84728c4e4d",
+          "bytes": 1447,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/README.md",
+          "sha": "c5253bcc705f4db40bb128f96f6580fdf7dab74f",
+          "bytes": 269,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/OPERATING_MODEL.md",
+          "sha": "6405a9eb186ac3b7115d961fd975c72428b6d05b",
+          "bytes": 2937,
+          "mode": "100644"
+        },
+        {
+          "path": "qwen_safe_bim_integration.py",
+          "sha": "837ac4d33b09cdf2a7f61af10aca81453252cfab",
+          "bytes": 5589,
+          "mode": "100644"
+        },
+        {
+          "path": "safe-bim-v01-schema-test.json",
+          "sha": "79005e34a21e915ef2a72ccddef6ffc47ce174b3",
+          "bytes": 300,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_layer.py",
+          "sha": "eb8ebadaeb8619f96cbecd8e94043891853ebde2",
+          "bytes": 12837,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-1.5.8.json",
+          "sha": "01ca78e051c6efbf92812047aba168a3930dcb5e",
+          "bytes": 660670,
+          "mode": "100644"
+        }
+      ],
+      "blob_count": 24,
+      "tree_entries": 30,
+      "fetch_status": "PASS"
+    },
+    {
+      "head_sha": "751fdfbc1be929f3da601e1094f74fed2f02b322",
+      "tree_sha": "751fdfbc1be929f3da601e1094f74fed2f02b322",
+      "truncated": false,
+      "files": [
+        {
+          "path": ".github/pull_request_template.md",
+          "sha": "1fdbca430b6f7a669074966d6405acd537d6880b",
+          "bytes": 679,
+          "mode": "100644"
+        },
+        {
+          "path": ".github/workflows/archicad-contracts.yml",
+          "sha": "f0d0956c2ab093e797f3a88540c43a0914cf6236",
+          "bytes": 4262,
+          "mode": "100644"
+        },
+        {
+          "path": ".github/workflows/archicad-template-validate.yml",
+          "sha": "df6329c6e7aed52fb9608a153c9d59adbe548de8",
+          "bytes": 2241,
+          "mode": "100644"
+        },
+        {
+          "path": ".github/workflows/build-details-v210-favorit-s7.yml",
+          "sha": "2173826469b19562833a9f84e61ccf4d9d5793aa",
+          "bytes": 1081,
+          "mode": "100644"
+        },
+        {
+          "path": ".github/workflows/build-details-v211-favorit-s8-s9.yml",
+          "sha": "860cd3e884c0d612c6856b5d95a48af1c2cf1fe5",
+          "bytes": 1096,
+          "mode": "100644"
+        },
+        {
+          "path": ".github/workflows/build-details-v212-kaiman-exact47.yml",
+          "sha": "3da5bdcd52fdc383ec3789a8772714529dd3f6a4",
+          "bytes": 1133,
+          "mode": "100644"
+        },
+        {
+          "path": ".github/workflows/build-details-v24-porotherm.yml",
+          "sha": "eb62a3d6f7015786decb96d20ad506e7592f2705",
+          "bytes": 1049,
+          "mode": "100644"
+        },
+        {
+          "path": ".github/workflows/build-details-v25-braas.yml",
+          "sha": "84f94f7ab646a245494a12be1c3c750752485aed",
+          "bytes": 1139,
+          "mode": "100644"
+        },
+        {
+          "path": ".github/workflows/build-details-v26-favorit-s3.yml",
+          "sha": "a380462018cd6c8d07bd9504491ecdeb5b4ba984",
+          "bytes": 1077,
+          "mode": "100644"
+        },
+        {
+          "path": ".github/workflows/build-details-v27-favorit-s4.yml",
+          "sha": "adb4ad6e9ba40d4954057aa326a1388056f9f508",
+          "bytes": 1074,
+          "mode": "100644"
+        },
+        {
+          "path": ".github/workflows/build-details-v28-favorit-s5.yml",
+          "sha": "a2976bf70d6a26153e1fe93d66d8d64d27d3dc5c",
+          "bytes": 1073,
+          "mode": "100644"
+        },
+        {
+          "path": ".github/workflows/build-details-v29-favorit-s6.yml",
+          "sha": "5c02f2ece47484bccc933e20e7f06279cbcfea96",
+          "bytes": 1073,
+          "mode": "100644"
+        },
+        {
+          "path": ".github/workflows/index-detail-queue.yml",
+          "sha": "1aa8d9550d55fce08600066a4930f8a1a8181f70",
+          "bytes": 973,
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha": "8a808588b3241b8c658402ac69f5a7a4d2ffd889",
+          "bytes": 747,
+          "mode": "100644"
+        },
+        {
+          "path": "AGENTS.md",
+          "sha": "8c30e6dbd32859792d4cff4fd6f1530fb6915b3a",
+          "bytes": 2966,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_ARCHITECTURE_AUDIT.md",
+          "sha": "45f80903dd9e77f74564e2af6219fcc45edab7d1",
+          "bytes": 1701,
+          "mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha": "c25566be0aa91c8b41de9be686c3f0aa84747347",
+          "bytes": 11917,
+          "mode": "100644"
+        },
+        {
+          "path": "SAFE_BIM_V01_REPORT.md",
+          "sha": "a38ca0bba19bf03dd429dfefb8b2465a4a7c9fe6",
+          "bytes": 1698,
+          "mode": "100644"
+        },
+        {
+          "path": "archicad-addon/Examples/build_model_dump.py",
+          "sha": "0c2b2f965c45bd37e7da15a7017b1cda0d26856b",
+          "bytes": 7752,
+          "mode": "100644"
+        },
+        {
+          "path": "archicad-addon/Examples/model_dump_v1.cmd",
+          "sha": "c2a2c502924e9c6045b4372fae94afc56c6097ff",
+          "bytes": 44,
+          "mode": "100644"
+        },
+        {
+          "path": "archicad-addon/Examples/model_dump_v1.py",
+          "sha": "bd6bbda68de5a4c3384e099d8bd614bbaf270426",
+          "bytes": 6071,
+          "mode": "100644"
+        },
+        {
+          "path": "archicad-addon/Sources/ModelDumpCommands.cpp",
+          "sha": "573fa2077c843f6a8cfdd054364b7b67e0894970",
+          "bytes": 37056,
+          "mode": "100644"
+        },
+        {
+          "path": "archicad-addon/Sources/ModelDumpCommands.hpp",
+          "sha": "1528d9212c6d8237ddd044a4710223d29c408266",
+          "bytes": 1571,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/COORDINATION.md",
+          "sha": "c0df5ee5904afc661df842ea3030a38765d483df",
+          "bytes": 2000,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_ARENA.md",
+          "sha": "1da37fb79a1ab7e4193c3b228264f308e403c0bc",
+          "bytes": 1901,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_WORK.md",
+          "sha": "a621651c0cfa2213d9fcdd230810ee84728c4e4d",
+          "bytes": 1447,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/README.md",
+          "sha": "c5253bcc705f4db40bb128f96f6580fdf7dab74f",
+          "bytes": 269,
+          "mode": "100644"
+        },
+        {
+          "path": "details/ACTIVE_RELEASE",
+          "sha": "98daf44c321633d16d1a7688b083346ae67727bc",
+          "bytes": 6,
+          "mode": "100644"
+        },
+        {
+          "path": "details/README.md",
+          "sha": "055723de8018e649d5c0fea21d435489bc1d5f10",
+          "bytes": 478,
+          "mode": "100644"
+        },
+        {
+          "path": "details/import/kaiman-exact-v2.5/AUDIT_KAIMAN_v2.5.json",
+          "sha": "a5d9283eef36d35935d53fdfe063f65bde10539a",
+          "bytes": 2090,
+          "mode": "100644"
+        },
+        {
+          "path": "details/import/kaiman-exact-v2.5/README_KAIMAN_v2.5.md",
+          "sha": "45efa43dd3a5955477f1cba61f3b665db2f14c47",
+          "bytes": 1408,
+          "mode": "100644"
+        },
+        {
+          "path": "details/import/kaiman-exact-v2.5/kaiman-kerakam-exact-v2.5.tar.gz",
+          "sha": "96cc4cc007d1b1214e678804d4d8450f99be23cf",
+          "bytes": 18253,
+          "mode": "100644"
+        },
+        {
+          "path": "details/index/dimension_queue_by_source.json",
+          "sha": "d46b3b66ff7a70837c97d23add80cef861a0f5bb",
+          "bytes": 5065,
+          "mode": "100644"
+        },
+        {
+          "path": "details/index/source_counts.json",
+          "sha": "4f9cb39ba7f40fafbd11cb5b2f2735b3a43a75f5",
+          "bytes": 14696,
+          "mode": "100644"
+        },
+        {
+          "path": "details/index/sources.json",
+          "sha": "37607e1fdc05a122230dbc2c8fa61bfacae4a5de",
+          "bytes": 25612,
+          "mode": "100644"
+        },
+        {
+          "path": "details/index/systems.json",
+          "sha": "731f5a6e3c551727fb57f0359b6590d9ff6840c3",
+          "bytes": 1080,
+          "mode": "100644"
+        },
+        {
+          "path": "details/patches/v2.3-porotherm/AUDIT_v2.3.json",
+          "sha": "141281db6ebd95c813b445c3d1657f2423876327",
+          "bytes": 2420,
+          "mode": "100644"
+        },
+        {
+          "path": "details/patches/v2.3-porotherm/PATCH_ARCHIVE_SHA256.txt",
+          "sha": "83031d040dfcfbdbe8243fb7475c2e48316c7fa7",
+          "bytes": 205,
+          "mode": "100644"
+        },
+        {
+          "path": "details/patches/v2.3-porotherm/README.md",
+          "sha": "9ca3b2f4a68948f0e71b5dc805ea58828eb6f8bf",
+          "bytes": 1778,
+          "mode": "100644"
+        },
+        {
+          "path": "details/patches/v2.3-porotherm/SUMMARY_v2.3.json",
+          "sha": "656d09d94f7e622ece54700934f19bd9d18066f4",
+          "bytes": 772,
+          "mode": "100644"
+        },
+        {
+          "path": "details/patches/v2.3-porotherm/porotherm-v2.3-source-patch.tar.gz.b64",
+          "sha": "2ae6b037645cf483197d7fdcdfa2c5d01881b742",
+          "bytes": 31540,
+          "mode": "100644"
+        },
+        {
+          "path": "details/patches/v2.3-porotherm/registry_patch_v2.3.json",
+          "sha": "7701b2bdf044f4e6be929a38328fd4ddf1318d6e",
+          "bytes": 710,
+          "mode": "100644"
+        },
+        {
+          "path": "details/patches/v2.3-porotherm/unpack_porotherm_v23_patch.py",
+          "sha": "d7002b0d45b278792cd539a808c4dcead4be4efc",
+          "bytes": 1132,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.10/README.md",
+          "sha": "cb95855b6d9d6ce82e1e6056624ec567de2bca9d",
+          "bytes": 438,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.10/SHA256SUMS.txt",
+          "sha": "7f1b1c808c067742518f266c6bfc2ad0a591f00d",
+          "bytes": 93,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.10/audit.json",
+          "sha": "4c55e48c6f10e4bb1f796b9a30d2910e15f4ce2f",
+          "bytes": 1810,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.10/machine-state-v2.10.tar.gz.b64",
+          "sha": "84446f8c9a848f6846db5f2a5f87754b8067091b",
+          "bytes": 611500,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.10/manifest.json",
+          "sha": "07d57e3c91858f5c1ec57d22180305169ee00886",
+          "bytes": 10001,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.10/source_verify.json",
+          "sha": "952d99fd31e19a5d47a6d09a056a4b3edad87044",
+          "bytes": 15496,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.10/summary.json",
+          "sha": "ab41f965e260c5a3db7c25fdbb236cd823a46b5f",
+          "bytes": 748,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.11/README.md",
+          "sha": "8a920dfea057f2142ae70c2189b0db00cb74af42",
+          "bytes": 497,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.11/SHA256SUMS.txt",
+          "sha": "1d3ef6751a1a6453dd34c4f23cd71d53c6f04a7a",
+          "bytes": 93,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.11/audit.json",
+          "sha": "77e10555c88b1350acb2358159f5eff37412a7cc",
+          "bytes": 1745,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.11/machine-state-v2.11.tar.gz.b64",
+          "sha": "0158c71749b2ac435b32380ac6577e65af30f6b8",
+          "bytes": 615540,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.11/manifest.json",
+          "sha": "4b39bfe4c978c67c1752d48363e4f8e08bed6b0a",
+          "bytes": 10184,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.11/source_verify.json",
+          "sha": "b252813d9ce71fb61b93b5d9d4ebf3dc13eb65c2",
+          "bytes": 15496,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.11/summary.json",
+          "sha": "d12b456b6d9041d294d76f7ec33394939a38b1de",
+          "bytes": 702,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.12/README.md",
+          "sha": "ed2789c848afe8ce7a79e2ef5a05a19b8c26f991",
+          "bytes": 498,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.12/SHA256SUMS.txt",
+          "sha": "b7bf7a4af5a434cfb7374d1055d70e95d9d99df4",
+          "bytes": 93,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.12/audit.json",
+          "sha": "b453b6f870d3306bbe5dabc6377c13af504990f4",
+          "bytes": 1710,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.12/machine-state-v2.12.tar.gz.b64",
+          "sha": "005ca439c72ccb401f1a721003c8e9c22a773761",
+          "bytes": 670544,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.12/manifest.json",
+          "sha": "797752bd4eb5b82a0056e2bc475dd4005fff4abb",
+          "bytes": 11912,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.12/source_verify.json",
+          "sha": "1621356d9ca751bb631dbbdc36dbf5d7592dd010",
+          "bytes": 15496,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.12/summary.json",
+          "sha": "ad908833dcbf55d07104e39a426f72fd0ee81bd8",
+          "bytes": 703,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.2/SHA256SUMS.txt",
+          "sha": "bccdbaefd4253d10361c17402b5ac0c6b4628641",
+          "bytes": 91,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.2/audit.json",
+          "sha": "1a5b71e88bd63864d76a4f1325c544530ef85070",
+          "bytes": 2461,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.2/machine-state-v2.2.tar.gz",
+          "sha": "430a7e3b874f3c9d2e26b4ab4b08c673b44c9358",
+          "bytes": 411093,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.2/manifest.json",
+          "sha": "ec85b23ef9480056e3babf31e6a470595b4f9f63",
+          "bytes": 6586,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.2/source_verify.json",
+          "sha": "009078562cfd05e070b8115480dcca5eddb4a25f",
+          "bytes": 15493,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.2/summary.json",
+          "sha": "fcccfe4fd7ec160837beae660280e9e3848b6d35",
+          "bytes": 508,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.3/README.md",
+          "sha": "7018400091ea54c8826635686a0d59fcda68e157",
+          "bytes": 1204,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.3/SHA256SUMS.txt",
+          "sha": "4a62abe54c60e08a8c92e5f60babc7918e7685b4",
+          "bytes": 91,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.3/audit.json",
+          "sha": "3431773248319df7b1df00a6c6ea5435577a83b7",
+          "bytes": 2153,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.3/machine-state-v2.3.tar.gz.b64",
+          "sha": "891abb616fc992ffa7a26941f23dc189e6e97c6b",
+          "bytes": 524312,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.3/manifest.json",
+          "sha": "62e1af0b84991fae81acb9076f26b586bfedb58b",
+          "bytes": 6950,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.3/source_verify.json",
+          "sha": "009078562cfd05e070b8115480dcca5eddb4a25f",
+          "bytes": 15493,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.3/summary.json",
+          "sha": "a6fae20bedb7265edb2e2091ca465f28ef12d965",
+          "bytes": 603,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.4/README.md",
+          "sha": "55dc17f16d3d09282473650c4cc3a89d1edeb28b",
+          "bytes": 483,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.4/SHA256SUMS.txt",
+          "sha": "291dc8e6b18d1cdb0a70c57309e6f497afb714c7",
+          "bytes": 92,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.4/audit.json",
+          "sha": "cfb7b4a5158a484c697d372f22c071e58b7e607b",
+          "bytes": 1224,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.4/machine-state-v2.4.tar.gz.b64",
+          "sha": "998490d2c257e772274df7fb2faf9946706311a7",
+          "bytes": 556964,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.4/manifest.json",
+          "sha": "d1e54c31c1575706dea04a1357aab78933fa4b7f",
+          "bytes": 7839,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.4/source_verify.json",
+          "sha": "009078562cfd05e070b8115480dcca5eddb4a25f",
+          "bytes": 15493,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.4/summary.json",
+          "sha": "6da46e0ee46a3c2c3a58d41081dae2219e36dc50",
+          "bytes": 567,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.5/README.md",
+          "sha": "f914b12205896bed9d0a5a071760ba334acbd3a0",
+          "bytes": 292,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.5/SHA256SUMS.txt",
+          "sha": "7bb063ec1b3c069f7f70908aa47ff6c7ccb28769",
+          "bytes": 92,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.5/audit.json",
+          "sha": "2f88e1fda4fe140a8e1f7b1e07ac3c72d2929f63",
+          "bytes": 1376,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.5/machine-state-v2.5.tar.gz.b64",
+          "sha": "357eab54ea105998e0a38c7385b1b3e44e25f298",
+          "bytes": 586308,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.5/manifest.json",
+          "sha": "191c1d3b74df327c361fe97153b24294b1e94dd3",
+          "bytes": 8913,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.5/source_verify.json",
+          "sha": "009078562cfd05e070b8115480dcca5eddb4a25f",
+          "bytes": 15493,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.5/summary.json",
+          "sha": "529f0dc5f133449acd202c1afe7222a8db49e686",
+          "bytes": 756,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.6/README.md",
+          "sha": "15c899a3e064814c08fadf7e0f81a998fd0e98a5",
+          "bytes": 510,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.6/SHA256SUMS.txt",
+          "sha": "f47e08faa938cea77fecf81f9d4a4475d53edf62",
+          "bytes": 92,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.6/audit.json",
+          "sha": "81f169eec0126a876c893bb3fb86df7801b5f378",
+          "bytes": 1785,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.6/machine-state-v2.6.tar.gz.b64",
+          "sha": "54a94164424eb9b0048a0e43738ed11e9b31308a",
+          "bytes": 591772,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.6/manifest.json",
+          "sha": "c911714c95163f1022967ec39dfec5cec06f49c0",
+          "bytes": 9093,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.6/source_verify.json",
+          "sha": "15ba6dfeb871d158996497223f3cfc41d1051860",
+          "bytes": 15495,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.6/summary.json",
+          "sha": "9e23a6af1f4d28e9bc2091a04462cd2da9c779f6",
+          "bytes": 716,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.7/README.md",
+          "sha": "1161292df07c2177428cc7ad2ba293a77dcceaae",
+          "bytes": 443,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.7/SHA256SUMS.txt",
+          "sha": "829c34b3853db3a1f2b9047d85f44026d11673ff",
+          "bytes": 92,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.7/audit.json",
+          "sha": "fa80672b040d23e7c040daf159a1c4e8104c6a3b",
+          "bytes": 1631,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.7/machine-state-v2.7.tar.gz.b64",
+          "sha": "58998798c0fc370a75be7f89fecdd5fa230ab28a",
+          "bytes": 595060,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.7/manifest.json",
+          "sha": "efbfd57da9bd86de1ed65c1c393e28a44729988e",
+          "bytes": 9273,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.7/source_verify.json",
+          "sha": "256d7c8a52b11e8f692328daaf59cbb37fa1dd7b",
+          "bytes": 15495,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.7/summary.json",
+          "sha": "f02d9e56afe6d0b3137f86605375ba625e486f6c",
+          "bytes": 787,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.8/README.md",
+          "sha": "f455e2a7c9e563d6e7814b5d2969a8b23ae704ea",
+          "bytes": 473,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.8/SHA256SUMS.txt",
+          "sha": "0f7c4a134966484dd6684bdd42f0d7f1ad72d083",
+          "bytes": 92,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.8/audit.json",
+          "sha": "25f5d72369befd54c31ed06716a188df8e2ffca0",
+          "bytes": 2045,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.8/machine-state-v2.8.tar.gz.b64",
+          "sha": "b52ac6cdfb53db1783f8b9d79b748bc192ccf9b2",
+          "bytes": 603040,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.8/manifest.json",
+          "sha": "b5ddc7d3f6b8247f40f09f9bd8c3366b5a145dfc",
+          "bytes": 9628,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.8/source_verify.json",
+          "sha": "bf51b5d6bb5271a6ee3a3410fba6701d0bc9f959",
+          "bytes": 15495,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.8/summary.json",
+          "sha": "c19ff3417809fcea15b73ebb3e2261638beee44a",
+          "bytes": 787,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.9/README.md",
+          "sha": "9688d4ccaf4d9d103f1d2da009f7169babcf14ba",
+          "bytes": 444,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.9/SHA256SUMS.txt",
+          "sha": "65025db20d0cd1fa934b9badc691801adada02ff",
+          "bytes": 92,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.9/audit.json",
+          "sha": "561eb02e56cea36e17aa98d3044b4f5bbf6de371",
+          "bytes": 2082,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.9/machine-state-v2.9.tar.gz.b64",
+          "sha": "89f4116c71b03f645e1958c249276860120c0b0a",
+          "bytes": 607500,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.9/manifest.json",
+          "sha": "6c5bd6a49034ef304ca4646fd62aaf379b67d589",
+          "bytes": 9808,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.9/source_verify.json",
+          "sha": "3415328f6f0d8962860df986b016e65cda3b0575",
+          "bytes": 15495,
+          "mode": "100644"
+        },
+        {
+          "path": "details/releases/v2.9/summary.json",
+          "sha": "549088388b1b8564685bebd25f35ab694b55b1b5",
+          "bytes": 785,
+          "mode": "100644"
+        },
+        {
+          "path": "details/tools/build_v210_favorit_s7.py",
+          "sha": "dca68a9fa502ae45de27ab81af1a674afb077d58",
+          "bytes": 16258,
+          "mode": "100644"
+        },
+        {
+          "path": "details/tools/build_v211_favorit_s8_s9.py",
+          "sha": "313007e496bd2bd91ba726599f7420ba9e5e4c69",
+          "bytes": 17238,
+          "mode": "100644"
+        },
+        {
+          "path": "details/tools/build_v212_kaiman_exact47.py",
+          "sha": "d06ef94d44ee8eb2ac432ce00f386ae2e3c10648",
+          "bytes": 14368,
+          "mode": "100644"
+        },
+        {
+          "path": "details/tools/build_v24_porotherm.py",
+          "sha": "1e606a51ca9b350ef4b2e5587f51f6ebbb6b2fbc",
+          "bytes": 12437,
+          "mode": "100755"
+        },
+        {
+          "path": "details/tools/build_v25_braas.py",
+          "sha": "e606187f233217bf3e850660b3c91bba7c37e160",
+          "bytes": 40605,
+          "mode": "100755"
+        },
+        {
+          "path": "details/tools/build_v26_favorit_s3.py",
+          "sha": "706e1bea5969cca8b779b9f1868116f04d1a5332",
+          "bytes": 17924,
+          "mode": "100644"
+        },
+        {
+          "path": "details/tools/build_v27_favorit_s4.py",
+          "sha": "41a3e1c8992231b8a42eb61aca4a3ffdea2e8140",
+          "bytes": 14573,
+          "mode": "100644"
+        },
+        {
+          "path": "details/tools/build_v28_favorit_s5.py",
+          "sha": "8f45ead01b8aec65148040c1b537479c09a5a366",
+          "bytes": 19274,
+          "mode": "100644"
+        },
+        {
+          "path": "details/tools/build_v29_favorit_s6.py",
+          "sha": "cb86245cce5493763efd12e15933082a1fc8c1a1",
+          "bytes": 18076,
+          "mode": "100644"
+        },
+        {
+          "path": "details/tools/index_dimension_queue.py",
+          "sha": "10309a965af0bbbcc5bd9b02a301305e40a23215",
+          "bytes": 1596,
+          "mode": "100644"
+        },
+        {
+          "path": "details/tools/unpack_release.py",
+          "sha": "5ce47e22e5f1cbe19c6399639215e5e026f1d636",
+          "bytes": 831,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/ARCHICAD_RUNTIME_CURRENT.md",
+          "sha": "d81537f7e8b476b070f131840408af1cfa81037f",
+          "bytes": 3423,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/DEVELOPMENT_PRINCIPLES_SEARCH_BEFORE_BUILD.md",
+          "sha": "e07bc4a5931a3c2373af8fab02bc5ac40e0259d7",
+          "bytes": 4143,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md",
+          "sha": "8b1cb6e835c29859c7eb3fd4dc7df24a05e3f0c9",
+          "bytes": 4834,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/OPERATING_MODEL.md",
+          "sha": "09fe8ddb7c6c93930f5703d07d3be2024dddcebe",
+          "bytes": 4419,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-accelerator-floor-offline-20261009.md",
+          "sha": "9132d0c51218b4e85b2e779623c9479d47db0074",
+          "bytes": 10078,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-guarded-host-graph-integration.md",
+          "sha": "530208ef9600e64e5a62d7f48068f4a3cbaf863e",
+          "bytes": 4169,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-mailbox-autostart-and-version-probe.md",
+          "sha": "27fec395187e7e31f3729ade2b974b67b5c3a3bb",
+          "bytes": 3505,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-mailbox-graph-adapter.md",
+          "sha": "7472b3ad00c60b4eaf1b1bd1947d96f3799c11fd",
+          "bytes": 4156,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-mailbox-watch-runbook.md",
+          "sha": "ce96b194f81c475e5235cb6122f1856876cb2ee7",
+          "bytes": 4440,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-schema-batch-mvp.md",
+          "sha": "88ace7eed893f07f8fca6c3915e4301a292c8776",
+          "bytes": 6283,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/CHECKPOINT_2026-10-06.md",
+          "sha": "c37666fd9fbfbf53c664a4243125f1b2aa6e4276",
+          "bytes": 2566,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/CHECKPOINT_2026-10-06_BUILDER_STAGE2.md",
+          "sha": "16d93634cb1293e567491166b4b34cd4fb2b3a0e",
+          "bytes": 4431,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/CHECKPOINT_2026-10-06_EXCHANGE_MASTERLAYOUT.md",
+          "sha": "79d7235edf8de2769368bb45c36b9ab1fc343563",
+          "bytes": 3120,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/CHECKPOINT_2026-10-06_PRELIVE.md",
+          "sha": "e8b1e7f702053ba91dd4efe7eee45036ea5add94",
+          "bytes": 2146,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/COMPOSITE_FAMILY_STRATEGY_v0.1.md",
+          "sha": "bfdc64dfc98d6619d2e429ac1308f6fdf9864444",
+          "bytes": 2025,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/DATA_SCHEMA_v0.1.md",
+          "sha": "92c7a5cb35261330b87b19b7d8f00ffc9f983eae",
+          "bytes": 7550,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/DOCUMENTATION_STANDARD_v0.1.md",
+          "sha": "59315784cf9e9d526f30ae8dd7eb1b2136e09dc6",
+          "bytes": 7881,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/DWG_TRANSLATOR_STANDARD_v0.1.md",
+          "sha": "f4125d4f4683f90b1de8c1c34b9abe6dffb3a4d6",
+          "bytes": 1887,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/FAVORITE_CONTRACT_v0.1.md",
+          "sha": "515034d427b6a8ce19b4c23030c9c5d1cd510494",
+          "bytes": 1229,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/GRAPHICS_STANDARD_v0.1.md",
+          "sha": "f97b6746e2179aecb591a6f4a11422500486accf",
+          "bytes": 7253,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/IFC_TRANSLATOR_STANDARD_v0.1.md",
+          "sha": "af3a13b55f87430811163a04990620df16586a5c",
+          "bytes": 1906,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/LAYER_STANDARD_v0.1.md",
+          "sha": "dcdd73b94b957924f3d0706e8359280ae178de71",
+          "bytes": 830,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/LIBRARY_MIGRATION_POLICY_v0.1.md",
+          "sha": "6f2e1f74d833cb3de6340914cddaad9ece51e0b0",
+          "bytes": 4748,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/LIVE_EXECUTION_RUNBOOK_v0.1.md",
+          "sha": "738967cb038553d1ae0dd6ca631a5b77d1c3800e",
+          "bytes": 13230,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/MASTER_LAYOUT_FORM3_v0.1.md",
+          "sha": "bd660926cfffc8dfe1a4b8a78b5b652b83fc8e48",
+          "bytes": 1754,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/MATERIALS_STANDARD_v0.1.md",
+          "sha": "dfb485f2f9f0171d94185a6c7cc395ab63d1f57f",
+          "bytes": 10898,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/PROJECT_BASELINE_v0.1.md",
+          "sha": "666fc73384a1c91f4e9f00651822c68a27b63024",
+          "bytes": 6800,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/SEED_PRESETS_MANUAL_v0.1.md",
+          "sha": "f2d1a21a9b9e438d43e475bd247ff4bf2fc47a68",
+          "bytes": 2777,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/TEMPLATE_BUILDER_README.md",
+          "sha": "55f72d3f6609af38468aacdfcde3c1edda94b6e2",
+          "bytes": 5466,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/TEMPLATE_BUILD_ROADMAP_v0.1.yaml",
+          "sha": "73b053b7565afd1a023b32915766e6c12182eb11",
+          "bytes": 12781,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/WORKSTATION_BUNDLE_ARCHITECTURE_v0.1.md",
+          "sha": "61f835228108834944865daed2ddd90b1b9b9cfd",
+          "bytes": 7753,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/attribute-registry-v0.1.yaml",
+          "sha": "b5084e35b60a2d4d7986157d5b2bd6f28f03e0b5",
+          "bytes": 9656,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/autotext-titleblock-registry-v0.1.yaml",
+          "sha": "cfee5f3a122ee60019adf913bd1dad99a4ec562f",
+          "bytes": 6174,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/classification-registry-v0.1.yaml",
+          "sha": "bbe4268beb011cf0a6480a2845b2fcfda88280ab",
+          "bytes": 2151,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/composite-family-registry-v0.1.yaml",
+          "sha": "e2449fe7c5441adefb065e39634871a6d9ce4120",
+          "bytes": 9364,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/data-schema-v0.1.yaml",
+          "sha": "24410d65334dbb7b5360bfff0051abe35ecc6d49",
+          "bytes": 4814,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/documentation-standard-v0.1.yaml",
+          "sha": "cad889c396a429ac0dc4dc7ef5b4e4a619d9d3f5",
+          "bytes": 1724,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/dwg-translator-registry-v0.1.yaml",
+          "sha": "fce85366cfeef6ebf46a3b96dc09f42a1b1b8771",
+          "bytes": 3734,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/favorite-blueprints-v0.1.yaml",
+          "sha": "0e8fcd7439afc19582417b78fd91613d373dafe1",
+          "bytes": 4451,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/favorite-transfer-policy-v0.1.yaml",
+          "sha": "a617ae8e0d7a9e57682abddf404b818b9ffc2bf7",
+          "bytes": 2287,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/fill-registry-v0.1.yaml",
+          "sha": "45daa6c1ab3513daa54c622517154ef5f17a49fb",
+          "bytes": 2852,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/fonts-manifest.yaml",
+          "sha": "e096776a3a6613ddf3cd092586438729046cb6b5",
+          "bytes": 893,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/form3-geometry-v0.1.yaml",
+          "sha": "3628cac0cbcd2ee04edb13946f898acd40f4a5c2",
+          "bytes": 3475,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/graphics-registry-v0.1.yaml",
+          "sha": "347e3e198f0cede12c9f0db4bad4705b98582115",
+          "bytes": 2943,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/ifc-translator-registry-v0.1.yaml",
+          "sha": "b09961f3c0af5b3a21d2d3de909881436265955f",
+          "bytes": 4063,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/junction-test-matrix-v0.1.yaml",
+          "sha": "e45fc57cee48bceaca314206bfa05ff306cc6e36",
+          "bytes": 3421,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/layer-intersection-policy-v0.1.yaml",
+          "sha": "ba3903bc1e2f719bf90c464b8234a570deb00965",
+          "bytes": 1987,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/layer-registry-v0.1.yaml",
+          "sha": "fe3cb4964bc05d50b1472a07a66def8ae823b675",
+          "bytes": 8479,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/library-migration-policy-v0.1.yaml",
+          "sha": "bd972b3435f777c3407c48318a117abe2a311e3b",
+          "bytes": 1348,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/master-layout-coordinate-calibration-v0.1.yaml",
+          "sha": "5c87372491baeb3898e03dadc5f071de61ef5b9b",
+          "bytes": 2144,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/master-layout-form3-registry-v0.1.yaml",
+          "sha": "f5b3b6c7f540dc41f2efcc4c30ded54ac8f8722a",
+          "bytes": 5182,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/navigator-registry-v0.1.yaml",
+          "sha": "627057efdb42e649a9aa83c97200d48a2f4384d2",
+          "bytes": 9253,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/project-baseline-v0.1.yaml",
+          "sha": "23459d8cb64e10af12682a179da33d0791e94b84",
+          "bytes": 2406,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/seed-presets-registry-v0.1.yaml",
+          "sha": "7b5913eb714ae9260b5cabc50ff85d6defa7c289",
+          "bytes": 5831,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/surface-registry-v0.1.yaml",
+          "sha": "d97e7058d4f41256867280ee7094f6ed3acb7381",
+          "bytes": 3076,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/tapir-version-pin-v0.1.yaml",
+          "sha": "18f051c2203cff4d904779c338cdbeccc65283f0",
+          "bytes": 1323,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad-template/template-capability-matrix-v0.1.yaml",
+          "sha": "6bb71004bee22521c772769d2daefcdd6e4729ad",
+          "bytes": 3320,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/NORMATIVE_SOURCE_ADAPTER_CONTRACT_v0.1.md",
+          "sha": "8a01a939011de0cda1131dbe387f772eff1b8412",
+          "bytes": 2111,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/SEARCH_BEFORE_BUILD_REUSE_STRATEGY_v0.1.md",
+          "sha": "e7dc9e970f64f6f5e8c7b455c54ee2134d688b6b",
+          "bytes": 4614,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/agent_skills_candidate_matrix_v0.1.yaml",
+          "sha": "6afb637817e086fffa039725532e4922940d1727",
+          "bytes": 1564,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_03_context_and_model_capacity_2026-10-07.md",
+          "sha": "204cd0fcc35058ecdfdbc2e6928f60a6d47c27f4",
+          "bytes": 3722,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_04_performance_first_kernel_2026-10-07.md",
+          "sha": "b4050efe68955ea8c513dd6809ee30d80b603dff",
+          "bytes": 15467,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_05_compiled_project_kernel_and_model_fabric_2026-10-07.md",
+          "sha": "5d8498ce7c2a9abb570899901e920e5d93cd4327",
+          "bytes": 16515,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_07_prebuild_landscape_audit_2026-10-07.md",
+          "sha": "aa806a184ca0fba2b2b8917eaadecc564a51b339",
+          "bytes": 12715,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_08_control_plane_and_normative_sources_2026-10-07.md",
+          "sha": "f238371630bf70591913bc166ccb24a69288a8a7",
+          "bytes": 10367,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_09_normative_platforms_deep_audit_2026-10-07.md",
+          "sha": "62a468b9552b96f6f552ed428723147a98885da6",
+          "bytes": 20114,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_10_zero_cost_normative_fallback_2026-10-07.md",
+          "sha": "01d6c6c71beb9fcab0591bee5ea7176ff5d30922",
+          "bytes": 5553,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_11_free_open_normative_stack_2026-10-07.md",
+          "sha": "eb359c22b89d4e03bb20782ad0174cb6258c1d2b",
+          "bytes": 16697,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_12_has_someone_already_built_sbim_2026-10-08.md",
+          "sha": "338f274c1d33ea00190b8f742c4d4fa7c90d8244",
+          "bytes": 12111,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_13_integration_map_after_reuse_audit_2026-10-08.md",
+          "sha": "45b6e5bc7054fcd4f9968e433376021ef2332be9",
+          "bytes": 13268,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_14_layer_by_layer_product_dissection_2026-10-08.md",
+          "sha": "92b1b9b762ed2bbc6d7d093ebf3b0180b33f63d9",
+          "bytes": 20355,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_14_requirements_openbim_engineering_reuse_2026-10-08.md",
+          "sha": "8fc34cf33e38a867a31881c61c711032a8e6ef85",
+          "bytes": 21448,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_15_free_project_backbone_spatial_lca_cicd_2026-10-08.md",
+          "sha": "567c48229118dcbb81cef243cfe94767c804c64a",
+          "bytes": 10657,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_15_open_ac29_mcp_and_tapir_overlap_2026-10-08.md",
+          "sha": "3507c07280ae4d9406aba6f6d27c8740574fe6e5",
+          "bytes": 27669,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_16_best_of_breed_component_harvesting_2026-10-08.md",
+          "sha": "20cb5f4b3993f78ddc20156cd682756b2b62ff29",
+          "bytes": 22655,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_16_tangl_decision_memory_5d_2026-10-08.md",
+          "sha": "962e60f1f968bfcf896a6db52d61cf64df392f69",
+          "bytes": 13300,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_17_bimgrade_cype_motif_details_2026-10-08.md",
+          "sha": "4611dc4eed2c775f887d93829aa7dd5186ca35f1",
+          "bytes": 18727,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_17_time_to_project_fast_modeling_compliance_by_construction_2026-10-08.md",
+          "sha": "544b9a4e1635ea379a33ab9d71e8a8f2b63b7180",
+          "bytes": 12175,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_18_proektologiya_cype_agent_native_compliance_2026-10-08.md",
+          "sha": "7c64056dd681f3a5bbec760a8b62eecc1801a78d",
+          "bytes": 13607,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_19_change_intent_optimization_detail_reuse_2026-10-08.md",
+          "sha": "904fb3a9649a7eebb3420ad8aef8378175abbd39",
+          "bytes": 19779,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_20_accord_shacl_open_compliance_stack_2026-10-08.md",
+          "sha": "a9847eab2894321037c2d71400bb857f6a18fb5b",
+          "bytes": 21398,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md",
+          "sha": "3d001b3ce1227bb682fbc4f68798904136eca613",
+          "bytes": 10414,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_21_ifctolbd_icdd_sml_semantic_graph_2026-10-08.md",
+          "sha": "1d121bc93000fde27660f406052bc84156dcaf65",
+          "bytes": 14195,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_22_floorplan_spatial_logic_precedent_memory_2026-10-08.md",
+          "sha": "215aec7a70f95ee2b35b57ce8ddb56e5292aa87d",
+          "bytes": 18821,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_22_incremental_project_compiler_action_cache_2026-10-08.md",
+          "sha": "24f63f60e66ac90e67bec4857f88a959e996e66f",
+          "bytes": 19832,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_23_ac29_control_facade_openings_dependents_2026-10-08.md",
+          "sha": "01ccd85065e70da8222ea047051442ac124dbb12",
+          "bytes": 14977,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_23_native_archicad_graph_solvers_open_connector_harvest_2026-10-08.md",
+          "sha": "57a5533f01f494cfa6214756ce7e862f3411d15e",
+          "bytes": 9300,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md",
+          "sha": "5a6391cb176d28aa0d91dda93dcea0efd9bd1e27",
+          "bytes": 25562,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_24_schedule_elevation_curtainwall_hotlink_documentation_gaps_2026-10-08.md",
+          "sha": "e63f523578ecf20e7551691aa1eccc99de70fc81",
+          "bytes": 10730,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_25_native_mep_routes_design_options_favorites_quantities_2026-10-08.md",
+          "sha": "0309486d5d9c2aa958713224867646283e8308a2",
+          "bytes": 15973,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_25_verified_documentation_compiler_spds_ac29_2026-10-08.md",
+          "sha": "9e64848bb82455b9af2809bec3d9d87d8ef6f8ff",
+          "bytes": 21059,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_26_native_issues_keynotes_revisions_structural_renovation_2026-10-08.md",
+          "sha": "bd717d1828ac3fad58faa71b143fa526d5228f7c",
+          "bytes": 13009,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_26_section_callout_detail_need_planning_2026-10-08.md",
+          "sha": "ecf7ae77c0782fbb0b07532a0768bf458f316698",
+          "bytes": 21931,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_27_native_model_quality_check_saf_structural_context_2026-10-08.md",
+          "sha": "457f678eaf82ba639bb078656dfd73bdb90d3c51",
+          "bytes": 10897,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_27_whole_system_open_source_harnessbim_massing_2026-10-08.md",
+          "sha": "337333574e946d608c2887f8e25775f1c1a78a62",
+          "bytes": 12455,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_28_native_visual_qa_graphic_overrides_highlight_drilldown_2026-10-08.md",
+          "sha": "84898ba6bf63f0399394c426aff77a983e3de5a2",
+          "bytes": 9778,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_28_skill_runtime_incremental_graph_reality_audit_2026-10-08.md",
+          "sha": "56f064edcf64170fa462d3a101de74f501b142ee",
+          "bytes": 12518,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_28_skills_knowledge_spatial_fit_2026-10-08.md",
+          "sha": "ac590ebbda63b013fd3671a5bf2f0c38ea6f930c",
+          "bytes": 6253,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_28_vertical_core_design_grammar_2026-10-08.md",
+          "sha": "3e81bb57f7e3dc79b100b06231eca7151c0e600c",
+          "bytes": 19962,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_29_ac29_native_events_zone_adjacency_and_freshness_2026-10-08.md",
+          "sha": "ca599b516735d226fdd3e61cbf5588992d0d8c52",
+          "bytes": 13968,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_29_floora_training_alignment_benchmarks_2026-10-08.md",
+          "sha": "8d5929c5be5d63bf93cdd0370e021c3893371109",
+          "bytes": 20721,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_29_native_collision_difference_generator_reconciliation_2026-10-08.md",
+          "sha": "1a38651bb08435e179294fd52c726d72bb5d47f1",
+          "bytes": 12351,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_29_native_mep_system_graph_2026-10-08.md",
+          "sha": "03bb51aa13024d7056912a4bc4c6eaead05a0a0e",
+          "bytes": 5112,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_29_pascal_archsight_skills_2026-10-08.md",
+          "sha": "76fafffd7eb97b5cdd17e4ac9643cd0bf829761e",
+          "bytes": 9948,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md",
+          "sha": "3396bfafb8e5bbfe4b539c5184f0ee0bd0c27561",
+          "bytes": 4033,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_30_architect_skill_os_evidence_memory_routing_2026-10-08.md",
+          "sha": "d753801d041b84fe98aa6fa7d7531b1cd5b32190",
+          "bytes": 20171,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_30_live_delta_verifier_reuse_2026-10-08.md",
+          "sha": "c4ca2cdca4759fe4094a68dbd26e966c95564142",
+          "bytes": 10819,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_30_native_mep_system_browser_calculation_projection_2026-10-08.md",
+          "sha": "0c0dcf6152e0c31099d1dc4942010c8c79561150",
+          "bytes": 8094,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_31_native_ifc_hooks_dynamic_export_projection_2026-10-08.md",
+          "sha": "8df82c449be816f14165fc0b6995d5fc852908de",
+          "bytes": 12397,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_31_program_room_requirements_functional_graph_2026-10-08.md",
+          "sha": "8d31d95a5d63941c2ba1dcacc3387b3c38e3bf3e",
+          "bytes": 21791,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_32_activity_equipment_room_fit_2026-10-08.md",
+          "sha": "fc25a78838e7a61d4b9964ccbcab09fb57d13530",
+          "bytes": 12707,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_32_native_navigator_addon_viewpoints_reports_drawings_2026-10-08.md",
+          "sha": "e7aa13f4a8ed446e35a30361dd05fc3eeb204454",
+          "bytes": 10513,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_33_native_global_semantic_events_precise_invalidation_2026-10-08.md",
+          "sha": "1cabe6010b4eb777f71206c0d9773290b80fd5da",
+          "bytes": 12907,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_34_cross_representation_release_truth_2026-10-08.md",
+          "sha": "8ffc7b9037441e4c4765aeb9a575440ab32e4c5a",
+          "bytes": 8826,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_35_native_quantities_solid_operation_dependencies_2026-10-08.md",
+          "sha": "9181148ad5386c05a2957f4aee6202aceeb05f19",
+          "bytes": 10960,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md",
+          "sha": "6f14e37f835ec83e8f78b45b102046d5cbab8a59",
+          "bytes": 22856,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md",
+          "sha": "526089d34ce8090e7b9d05afc1c86ca74d509dfd",
+          "bytes": 20101,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_38_openbim_semantic_and_parametric_orchestration_2026-10-08.md",
+          "sha": "36b6c2602c01ef5bdd7af3379b004aecdfb8fe96",
+          "bytes": 6057,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_39_mep_deep_research_cycles_and_audit_2026-10-08.md",
+          "sha": "f29550e32bf6c4de63c205d340a07953552e9d66",
+          "bytes": 17687,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_checkpoint_40_offline_license_free_engineering_2026-10-08.md",
+          "sha": "52d09654c1c49af77ea1ad960d6ab95c26db712c",
+          "bytes": 5796,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/architectural_ai_priority_checkpoint_06_huskybim_first_2026-10-07.md",
+          "sha": "b21154372d279a66d2612205c1303ad6e104b24c",
+          "bytes": 7902,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/cross_representation_reuse_matrix_v0.1.yaml",
+          "sha": "ca8171b337ef0d8c19e223c9a33cf35923a5d516",
+          "bytes": 2183,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/free-normative-source-matrix-v0.2.yaml",
+          "sha": "77ea96f87d46b8e8835c9aded2e9d1a1ea2a12e7",
+          "bytes": 4910,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/integration-candidate-matrix-ac29-events-zone-graph-v0.1.yaml",
+          "sha": "1fb785f5ed2e91fefd430a3668c6d5a5dd45a0a8",
+          "bytes": 6957,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/integration-candidate-matrix-agent-runtime-incremental-v0.1.yaml",
+          "sha": "d96cb8b75d27179d177d930b2d8a2a928d0eabf4",
+          "bytes": 3755,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/integration-candidate-matrix-native-qto-seo-v0.1.yaml",
+          "sha": "f89c71d0b268b977267f9b650b62e8e4a2454f67",
+          "bytes": 4263,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/integration-candidate-matrix-v0.2.yaml",
+          "sha": "f1a8a357322783d6f8bff979ab2a138f21ed07db",
+          "bytes": 5020,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/integration-candidate-matrix-v0.3.yaml",
+          "sha": "1543aada26e93293ed57b26e1153ed4cdb5c8ee0",
+          "bytes": 5059,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/integration-candidate-matrix-v0.4.yaml",
+          "sha": "d982f914c1a0529c51546a19d6de869b8d2b2fed",
+          "bytes": 2367,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/integration-candidate-matrix-v0.5.yaml",
+          "sha": "a0f08320572aa64774e5a9f0a36e0443d1e3ceeb",
+          "bytes": 2606,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/integration-candidate-matrix-v0.6.yaml",
+          "sha": "6574cbbd3b4e22fa45c0c713355230790ab2a944",
+          "bytes": 4915,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/integration-candidate-matrix-v0.7.yaml",
+          "sha": "dfa2299e1b4973bafb9fe68aae709c4e47588b3a",
+          "bytes": 3802,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/integration-candidate-matrix-v0.8.yaml",
+          "sha": "c3651f8765d4b0b64de020ac37fbcd5d25a6bd8f",
+          "bytes": 5113,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/integration-candidate-matrix-v0.9.yaml",
+          "sha": "259d15a7123cee3dd088cf4922892b0024a19a6d",
+          "bytes": 4933,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/integration-candidate-matrix-v1.0.yaml",
+          "sha": "abe6b7f08bdc34aedc3bc649a008e86aa9c86243",
+          "bytes": 3266,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/integration-candidate-matrix-v1.1.yaml",
+          "sha": "a2c9dfe2abca349c12e591985e47b45943bbdd6d",
+          "bytes": 5627,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/integration-candidate-matrix-v1.2.yaml",
+          "sha": "2ff6a1e4a595ff7a185706e4d7ddd4645aca9a91",
+          "bytes": 4090,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/integration-candidate-matrix-v1.3.yaml",
+          "sha": "9d5fdc341155d93012d038ee02c3080e10e595ef",
+          "bytes": 6787,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/integration-candidate-matrix-v1.4.yaml",
+          "sha": "bf6db5cb1ce8c0d6ec0a14757073e6a5fae3e2ab",
+          "bytes": 5340,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/integration-candidate-matrix-v1.5.yaml",
+          "sha": "76f60aa4baeee1ad76f857a657693d5e71391435",
+          "bytes": 5856,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/integration-candidate-matrix-v1.6.yaml",
+          "sha": "902b87eaf3f68349f239d191b894d530f53f56dd",
+          "bytes": 3464,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/integration-candidate-matrix-v1.7.yaml",
+          "sha": "3cd11c14caddf575526076eaa5e98603e8a587c2",
+          "bytes": 5049,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/integration-candidate-matrix-v1.8.yaml",
+          "sha": "4c0d164d190b29c78901dde1dc7ceb07d1574e39",
+          "bytes": 4373,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/integration-candidate-matrix-v1.9.yaml",
+          "sha": "e30be9578cc0d8504626199d733f3901b4c4b03f",
+          "bytes": 4888,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/integration-candidate-matrix-v2.0.yaml",
+          "sha": "82dc1780ce1ffd1490cc7a6848b531cb553537d8",
+          "bytes": 5001,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/integration-candidate-matrix-v2.1.yaml",
+          "sha": "f58a2a26d009246e278c74165ac3f51e4af56cfe",
+          "bytes": 3314,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/layer-reuse-decision-matrix-v0.3.yaml",
+          "sha": "b13404546c879a6e51160a41a61dc3e31a333591",
+          "bytes": 4693,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/layer-reuse-decision-matrix-v0.4.yaml",
+          "sha": "f53272f3c093ad3124a857df6649d6c819010735",
+          "bytes": 14852,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/layer-reuse-decision-matrix-v0.5.yaml",
+          "sha": "e4b1dba180df2e1f61f6a4d805ed38bcee7b3e3d",
+          "bytes": 10952,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/layer-reuse-decision-matrix-v0.6.yaml",
+          "sha": "fe9b2a0211532239e733b12eb4a15a01b1ac3635",
+          "bytes": 7831,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/layer-reuse-decision-matrix-v0.7.yaml",
+          "sha": "62c71dab3b0bf6fe8bc32c503dbc29b21875e396",
+          "bytes": 4438,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/layer-reuse-decision-matrix-v0.8.yaml",
+          "sha": "10a0ad787a10ae811406f6d9ce7f7de617be338d",
+          "bytes": 8167,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/layer-reuse-decision-matrix-v0.9.yaml",
+          "sha": "161a34451e83643ec1bff8c6eaae63a0c26f2cdd",
+          "bytes": 9508,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/layer-reuse-decision-matrix-v1.0.yaml",
+          "sha": "bc7d5bf82d7afc5f7ce886027c7be40790895574",
+          "bytes": 14342,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/layer-reuse-decision-matrix-v1.1.yaml",
+          "sha": "57500bd3009f1634c7a6afef553577a96359f65c",
+          "bytes": 17623,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/layer-reuse-decision-matrix-v1.2.yaml",
+          "sha": "975ff62a6bb05fdc5f7da0ac1b7eb6cf41477807",
+          "bytes": 20173,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/layer-reuse-decision-matrix-v1.3.yaml",
+          "sha": "fc8b70b4f9bf7c4f235cda1be5caaa56496adc57",
+          "bytes": 21605,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/layer-reuse-decision-matrix-v1.4.yaml",
+          "sha": "08739689f7e4ad5c6c55c65fad700459462133e3",
+          "bytes": 23929,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/layer-reuse-decision-matrix-v1.5.yaml",
+          "sha": "7b8418691057e7f440b7eb39cd70d9432fd22857",
+          "bytes": 25312,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/layer-reuse-decision-matrix-v1.6.yaml",
+          "sha": "735591c9b6dd7260868cf57e8b11fc15c7cd0e7a",
+          "bytes": 27166,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/layer-reuse-decision-matrix-v1.7.yaml",
+          "sha": "b013463ee98f0a07bd5af9898630f5679510eda5",
+          "bytes": 30856,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/lira-fem-2026-com-structural-adapter-research-v0.1.yaml",
+          "sha": "3da62a183180fcbfd7ff9431e87fb01ca3bc0a9c",
+          "bytes": 3742,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/live-verifier-adapter-matrix-2026-10-08.yaml",
+          "sha": "d075c4b9daf1384c13305a5e4477fba09c215832",
+          "bytes": 2582,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/normative-provider-capability-matrix-v0.1.yaml",
+          "sha": "6b658aba040c5a26bbbfbf1daedab91447b6d902",
+          "bytes": 4369,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/pascal-editor-source-capability-audit-v0.1.yaml",
+          "sha": "4e66517ede5175f431b09d3a5392b3471518e25e",
+          "bytes": 3718,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/project-library-pack-contract-v0.1.yaml",
+          "sha": "3fc09f03c3ac6305fc73a92c6889ff9f6c7d8bd8",
+          "bytes": 2791,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/russian-junction-rule-matrix-2026-10-08.yaml",
+          "sha": "ae1813285e7f79f28af8180b099a07d040f7bc58",
+          "bytes": 2372,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/structural-handoff-integration-matrix-v0.1.yaml",
+          "sha": "41b229d1e15cdce3149d77c04f53e51e0c7b9798",
+          "bytes": 5884,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/third_party_skill_adoption_gate_v0.1.md",
+          "sha": "62f8b7eefbfaed5e67722b0088f5f92b894f07dd",
+          "bytes": 1179,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/whole-system-reuse-candidate-matrix-v0.1.yaml",
+          "sha": "eb7e302183095be210a963172a1ebc3995949a74",
+          "bytes": 2860,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/tapir-1510-upstream-contract-audit-20261009.md",
+          "sha": "2381b9e20113c29c86f0ed0637c0477bd5a48660",
+          "bytes": 4588,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/whole-scene-v1-readme.md",
+          "sha": "4702403e8cdc4ba02223d4a54f639712888e361b",
+          "bytes": 5582,
+          "mode": "100644"
+        },
+        {
+          "path": "examples/archicad_bim_graph.offline.sample.json",
+          "sha": "e4dbb40ec365cee831612a88d1c58dd4ec4c51e5",
+          "bytes": 1635,
+          "mode": "100644"
+        },
+        {
+          "path": "examples/model_dump_v1.sample.json",
+          "sha": "7f63495310107749b75806b50e04ea1fcb233e3b",
+          "bytes": 11050,
+          "mode": "100644"
+        },
+        {
+          "path": "examples/series178_typical_floor_v0.1.json",
+          "sha": "f2244884aef9351a4ced177c120b8f8184f44b46",
+          "bytes": 3650,
+          "mode": "100644"
+        },
+        {
+          "path": "qwen_safe_bim_integration.py",
+          "sha": "837ac4d33b09cdf2a7f61af10aca81453252cfab",
+          "bytes": 5589,
+          "mode": "100644"
+        },
+        {
+          "path": "safe-bim-v01-schema-test.json",
+          "sha": "79005e34a21e915ef2a72ccddef6ffc47ce174b3",
+          "bytes": 300,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_layer.py",
+          "sha": "eb8ebadaeb8619f96cbecd8e94043891853ebde2",
+          "bytes": 12837,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_accelerator_offline_benchmark.py",
+          "sha": "416b47f9a0be068e80c1a0614eaf3b6699766d8d",
+          "bytes": 9184,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_batch_contracts.py",
+          "sha": "afa0da4afac26a7b8fddf808367bcd437f92f42f",
+          "bytes": 9035,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_bim_graph.py",
+          "sha": "a19575e9179c9d604e67c3f10f7afa4dead2a187",
+          "bytes": 16574,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_change_watch.py",
+          "sha": "dcdb4c4b60eccd5c2d5fadd18fa951e7a1ed77bc",
+          "bytes": 11695,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_chat_executor.py",
+          "sha": "7719462c969b5527cabb7a0242609a1ba5e01f09",
+          "bytes": 13884,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_executor.py",
+          "sha": "efbaf139c4a6707226a2e6bbe07a7cc9f5fafa28",
+          "bytes": 24721,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_guarded_wall_probe.py",
+          "sha": "fd281ae957708afb839aaa171a378a33aeab029b",
+          "bytes": 7305,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_mailbox_graph_adapter.py",
+          "sha": "0f4378a5da1dc3740a1bf43f76f7533f199693da",
+          "bytes": 16119,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_mailbox_wall_host.py",
+          "sha": "a7291ea48f17a9261f380d97e02bcc92392421eb",
+          "bytes": 16371,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_mailbox_watch.py",
+          "sha": "9f2788a8dbf4f3637d293df1575dff0b7125f7b3",
+          "bytes": 12010,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_runtime_version_probe.py",
+          "sha": "c76e394b8ea1c9128ad3e34e93f3ebf09d3b543a",
+          "bytes": 4994,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_scene_run.py",
+          "sha": "464c490ba894a1effe304bd2e160969cec5b637c",
+          "bytes": 21835,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_scene_v1.py",
+          "sha": "46297167459d5342a2eb896e20ecf3fc41462e18",
+          "bytes": 7228,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_series178_CLEAN_REBUILD.py",
+          "sha": "ebfda5a367d4f07971c25fc327cfd2a996b1502e",
+          "bytes": 19519,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_series178_EMERGENCY_2D_SUBMIT.py",
+          "sha": "96d05ab2328da827705541689d7c36a331d37058",
+          "bytes": 13879,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_series178_EMERGENCY_BIM_WALLS.py",
+          "sha": "4ef8d6c0028f913632b56a1bf1a2e359f30b67ae",
+          "bytes": 8029,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_series178_FINAL_SUBMIT.py",
+          "sha": "43c2c2da364a8991be27d2ab94b9377116b587ec",
+          "bytes": 11896,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_series178_PANEL_REBUILD.py",
+          "sha": "0e61834e5050de63726e78a9398c79061bddc15b",
+          "bytes": 18139,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_series178_QUALITY_REBUILD.py",
+          "sha": "455b8e85773fff06433a752df750bb1f995236b3",
+          "bytes": 22624,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_series178_SOURCE_TRACE_SUBMIT.py",
+          "sha": "69f35dc27a94d964bbc1f67a2df0b43b152e7bea",
+          "bytes": 13223,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_series178_typical_floor.py",
+          "sha": "48427b88826fd2a0712a224450cd86d4c72f73ec",
+          "bytes": 13583,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_series178_v02_stair.py",
+          "sha": "030a268d7ab1cc2154490980de338349a67144e1",
+          "bytes": 7317,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_series178_v02_stair_access.py",
+          "sha": "1d95e1e26dfebd0ef9fb928c436440d158bc00a8",
+          "bytes": 9943,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_series178_v03_floor.py",
+          "sha": "9d9b619239521d642f4a4d90aad5735e18b0bb0a",
+          "bytes": 10465,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_series178_v04_area_partitions.py",
+          "sha": "2372c50a10bdb839cb2f57f81164fae626a845ce",
+          "bytes": 8756,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_series178_v05_split_transverse.py",
+          "sha": "f4b266b501b86e1d9fc44aeda5e06417d0111363",
+          "bytes": 8013,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_series178_v06_dimensions_cleanup.py",
+          "sha": "ef33c1148988832a541ad8c599a3c8c30d3ee6de",
+          "bytes": 8623,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_series178_v07_finish_floor.py",
+          "sha": "bb2c2c34c3574076c64ee0532d78008923409acf",
+          "bytes": 20860,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_series178_v08_submission_finish.py",
+          "sha": "c28d9155a22f98626ae93ae4d172451838635142",
+          "bytes": 6023,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_template_builder.py",
+          "sha": "eadef8875372578609985edbd30ceced5075d4e8",
+          "bytes": 163595,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_typical_floor_graph.py",
+          "sha": "4b376620af3a6c4926a1271385a93eddd348b481",
+          "bytes": 11847,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_watch_context.py",
+          "sha": "0d33ccaba442f0d5416e133a79ba1a9415cfafe5",
+          "bytes": 4365,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_write_cycles/hosted_morph_cycle.py",
+          "sha": "9c7067f2a2d134a78d0ae9050d34345bd76c1dfd",
+          "bytes": 21274,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_write_cycles/hosted_roof_cycle.py",
+          "sha": "5c6f77bff8975c7aa928877bb832763a2b6d5141",
+          "bytes": 22548,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_write_cycles/hosted_slab_cycle.py",
+          "sha": "083f897ba0677b063acf59c44ef7af95b55ddfaa",
+          "bytes": 25195,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_write_cycles/hosted_window_cycle.py",
+          "sha": "e7180ca74f334be80d8759c366321df3e9267cd5",
+          "bytes": 19370,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_write_cycles/wall_joint_cycle.py",
+          "sha": "c381ed015546bf5e69ad63843826451191227455",
+          "bytes": 14723,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_write_cycles/wall_material_cycle.py",
+          "sha": "b81ff845ddded845253dfa404feb8c1558748283",
+          "bytes": 25822,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/install_mailbox_watch_autostart.ps1",
+          "sha": "3d71d95888284406bea925816362df6b779dc541",
+          "bytes": 3963,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/promote_archicad_template_gate.py",
+          "sha": "f90edda886f231d3908bd76056a3f702ad68b2f0",
+          "bytes": 5352,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/requirements-template.txt",
+          "sha": "bfb190960cd2cc7d5314f71cc62c9ce5b0e6f008",
+          "bytes": 13,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/run_archicad_template_live.ps1",
+          "sha": "53d6e786bb79296b77fc0132e2057411bfb03ca7",
+          "bytes": 5235,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/start_archicad_mailbox_watch.ps1",
+          "sha": "d06df050238184bb9da21dd50bfd2b6558a6dadd",
+          "bytes": 3184,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/test_archicad_mailbox_wall_host.py",
+          "sha": "6f65714efab44dce3bf4aec54bb82ae89c5a1b18",
+          "bytes": 6199,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-1.5.8.json",
+          "sha": "01ca78e051c6efbf92812047aba168a3930dcb5e",
+          "bytes": 660670,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_archicad_batch_contracts.py",
+          "sha": "574790a9da796b3008cae6efd4a35df627be3dc4",
+          "bytes": 4417,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_archicad_bim_graph.py",
+          "sha": "0ce37f79a7619d09ff0768cda085091a8769a3e7",
+          "bytes": 12938,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_archicad_mailbox_graph_adapter.py",
+          "sha": "e7729882f82d80a836aa956d58db1833a4e7ab37",
+          "bytes": 10877,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_archicad_mailbox_watch.py",
+          "sha": "e6ef9f51de6c3c4054927f68b249e1039f1ec37c",
+          "bytes": 7533,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_archicad_runtime_version_probe.py",
+          "sha": "c6bc4fc542fd20fbc22fff1d6ec1e8a95f021ac5",
+          "bytes": 4779,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_archicad_scene_run.py",
+          "sha": "8091555ebd96a117b59e346264e256beeb2d09ff",
+          "bytes": 11341,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_archicad_typical_floor_graph.py",
+          "sha": "33ad6753fb51e1d361e1b3862f6cb970d0206e36",
+          "bytes": 7002,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_archicad_wall_host_integration.py",
+          "sha": "a503b57af54adfa0ee252658fe58b82e1f475508",
+          "bytes": 6911,
+          "mode": "100644"
+        }
+      ],
+      "blob_count": 361,
+      "tree_entries": 393,
+      "fetch_status": "PASS"
+    },
+    {
+      "head_sha": "81344925f06523bb60ee300f48af458ab0288938",
+      "tree_sha": "81344925f06523bb60ee300f48af458ab0288938",
+      "truncated": false,
+      "files": [
+        {
+          "path": ".github/pull_request_template.md",
+          "sha": "1fdbca430b6f7a669074966d6405acd537d6880b",
+          "bytes": 679,
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha": "3068944546f0f7166cf7d3f68252c5750bab1e92",
+          "bytes": 701,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_ARCHITECTURE_AUDIT.md",
+          "sha": "45f80903dd9e77f74564e2af6219fcc45edab7d1",
+          "bytes": 1701,
+          "mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha": "f9b509c1bbc98b36345d3bb6f2039a89b0ed6856",
+          "bytes": 4231,
+          "mode": "100644"
+        },
+        {
+          "path": "SAFE_BIM_V01_REPORT.md",
+          "sha": "a38ca0bba19bf03dd429dfefb8b2465a4a7c9fe6",
+          "bytes": 1698,
+          "mode": "100644"
+        },
+        {
+          "path": "bim_coordination_qa.py",
+          "sha": "7ac8c200b8fdd43e1b11205538597806a01329aa",
+          "bytes": 22773,
+          "mode": "100644"
+        },
+        {
+          "path": "bim_geometry_qa.py",
+          "sha": "6a427e653d4b9e7bfce14c403da624a29e580191",
+          "bytes": 16924,
+          "mode": "100644"
+        },
+        {
+          "path": "bim_qa.py",
+          "sha": "f605bbe83378e40d1797ede765afd45108b130de",
+          "bytes": 29115,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/COORDINATION.md",
+          "sha": "c0df5ee5904afc661df842ea3030a38765d483df",
+          "bytes": 2000,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_ARENA.md",
+          "sha": "1da37fb79a1ab7e4193c3b228264f308e403c0bc",
+          "bytes": 1901,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_WORK.md",
+          "sha": "a621651c0cfa2213d9fcdd230810ee84728c4e4d",
+          "bytes": 1447,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/README.md",
+          "sha": "c5253bcc705f4db40bb128f96f6580fdf7dab74f",
+          "bytes": 269,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/ARCHICAD_REFERENCE_MODEL_PROTOCOL.md",
+          "sha": "67a2208cebbc68978cf186a665bea7d824570882",
+          "bytes": 3941,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/BIM_COORDINATION_AND_DIMENSIONAL_STANDARD.md",
+          "sha": "d65c1e638780d00d9f8f4a69834b691f699ca333",
+          "bytes": 6677,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/BIM_COORDINATION_QA_VALIDATION.md",
+          "sha": "4a6a7efe482ee18a77d7296a07521d0053bc1435",
+          "bytes": 2290,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/BIM_GEOMETRY_QA.md",
+          "sha": "ba68d755d4db7045ff6d4f67f1deddb96d0fc41e",
+          "bytes": 4003,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/BIM_GEOMETRY_QA_VALIDATION.md",
+          "sha": "cedd5d0404e6cb1d3e5fe1176bbcd7bc607f5553",
+          "bytes": 1985,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/BIM_QA.md",
+          "sha": "2d966fd71fb564d9c48b2f07c2dd94eba12b0022",
+          "bytes": 9928,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/BIM_QA_VALIDATION.md",
+          "sha": "9f62576b7a56a1a2628c4cbe39e9be361567460b",
+          "bytes": 3005,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/OPERATING_MODEL.md",
+          "sha": "6405a9eb186ac3b7115d961fd975c72428b6d05b",
+          "bytes": 2937,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/SAFE_BIM_ARCHICAD_MODELING_STANDARD.md",
+          "sha": "442c37b4d368ed55681ee80c4d86388a0cdc507b",
+          "bytes": 17046,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/archicad_modeling_qa_rules.v1.json",
+          "sha": "9eb5c9c669d78ce7cd411107e0a5acbb79fb707d",
+          "bytes": 12890,
+          "mode": "100644"
+        },
+        {
+          "path": "qwen_safe_bim_integration.py",
+          "sha": "837ac4d33b09cdf2a7f61af10aca81453252cfab",
+          "bytes": 5589,
+          "mode": "100644"
+        },
+        {
+          "path": "safe-bim-v01-schema-test.json",
+          "sha": "79005e34a21e915ef2a72ccddef6ffc47ce174b3",
+          "bytes": 300,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_layer.py",
+          "sha": "eb8ebadaeb8619f96cbecd8e94043891853ebde2",
+          "bytes": 12837,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-1.5.8.json",
+          "sha": "01ca78e051c6efbf92812047aba168a3930dcb5e",
+          "bytes": 660670,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/__init__.py",
+          "sha": "7b2d3b034eb7b2fcc42dbaf2643c53276c67ea59",
+          "bytes": 28,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/fixtures/tapir_readback_partial.json",
+          "sha": "92f88f1279779b7b5c52a75fd7cd3f0780795fd4",
+          "bytes": 2320,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_bim_coordination_qa.py",
+          "sha": "dc2aa257901170a16808234f8cff766df62c3a45",
+          "bytes": 11739,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_bim_geometry_qa.py",
+          "sha": "a3bcea5c019ba6177426d9b384ff8ef2ea5db493",
+          "bytes": 7393,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_bim_qa.py",
+          "sha": "ac88d78f7aa298ef2130f2fb8341386adce50c29",
+          "bytes": 16788,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_bim_qa_policy_v11.py",
+          "sha": "2acd9b4d302fa111a8464ac77303d610a07be8e9",
+          "bytes": 10842,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/test_story_tapir_adapters.py",
+          "sha": "cc986973261a2da8cc3d7d967f5638aa0727dc63",
+          "bytes": 4095,
+          "mode": "100644"
+        }
+      ],
+      "blob_count": 33,
+      "tree_entries": 38,
+      "fetch_status": "PASS"
+    },
+    {
+      "head_sha": "f8b82ed3008c4669faf1424958b30f43aa4b5d92",
+      "tree_sha": "f8b82ed3008c4669faf1424958b30f43aa4b5d92",
+      "truncated": false,
+      "files": [
+        {
+          "path": ".github/pull_request_template.md",
+          "sha": "1fdbca430b6f7a669074966d6405acd537d6880b",
+          "bytes": 679,
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha": "8a808588b3241b8c658402ac69f5a7a4d2ffd889",
+          "bytes": 747,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_ARCHITECTURE_AUDIT.md",
+          "sha": "45f80903dd9e77f74564e2af6219fcc45edab7d1",
+          "bytes": 1701,
+          "mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha": "d5962a2425cfaf9b91ece2680f35e977a965adda",
+          "bytes": 5998,
+          "mode": "100644"
+        },
+        {
+          "path": "SAFE_BIM_V01_REPORT.md",
+          "sha": "a38ca0bba19bf03dd429dfefb8b2465a4a7c9fe6",
+          "bytes": 1698,
+          "mode": "100644"
+        },
+        {
+          "path": "archicad-addon/Examples/build_model_dump.py",
+          "sha": "65ccfc51f6238146a3130498f26f689f8c30c96e",
+          "bytes": 6888,
+          "mode": "100644"
+        },
+        {
+          "path": "archicad-addon/Examples/model_dump_v1.cmd",
+          "sha": "c2a2c502924e9c6045b4372fae94afc56c6097ff",
+          "bytes": 44,
+          "mode": "100644"
+        },
+        {
+          "path": "archicad-addon/Examples/model_dump_v1.py",
+          "sha": "bd6bbda68de5a4c3384e099d8bd614bbaf270426",
+          "bytes": 6071,
+          "mode": "100644"
+        },
+        {
+          "path": "archicad-addon/Sources/ModelDumpCommands.cpp",
+          "sha": "0d1a1bcf20292ca32c02f9966f748b91a463e47e",
+          "bytes": 29542,
+          "mode": "100644"
+        },
+        {
+          "path": "archicad-addon/Sources/ModelDumpCommands.hpp",
+          "sha": "d58639eebbe64f493da749e0b75f4ae34cb2ec2b",
+          "bytes": 413,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/COORDINATION.md",
+          "sha": "c0df5ee5904afc661df842ea3030a38765d483df",
+          "bytes": 2000,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_ARENA.md",
+          "sha": "1da37fb79a1ab7e4193c3b228264f308e403c0bc",
+          "bytes": 1901,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_WORK.md",
+          "sha": "a621651c0cfa2213d9fcdd230810ee84728c4e4d",
+          "bytes": 1447,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/README.md",
+          "sha": "c5253bcc705f4db40bb128f96f6580fdf7dab74f",
+          "bytes": 269,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/CLOSED_LOOP_IMPLEMENTATION_STAGES.md",
+          "sha": "04d813cac4238936c6f569a27010d85f1088c9d8",
+          "bytes": 6744,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/CLOSED_LOOP_ORCHESTRATOR_V1.md",
+          "sha": "bde95d4cf2e78f44eb7ead1c28b5fe15b68baeb3",
+          "bytes": 6566,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/OPERATING_MODEL.md",
+          "sha": "6405a9eb186ac3b7115d961fd975c72428b6d05b",
+          "bytes": 2937,
+          "mode": "100644"
+        },
+        {
+          "path": "examples/model_dump_v1.sample.json",
+          "sha": "7f63495310107749b75806b50e04ea1fcb233e3b",
+          "bytes": 11050,
+          "mode": "100644"
+        },
+        {
+          "path": "qwen_safe_bim_integration.py",
+          "sha": "837ac4d33b09cdf2a7f61af10aca81453252cfab",
+          "bytes": 5589,
+          "mode": "100644"
+        },
+        {
+          "path": "safe-bim-v01-schema-test.json",
+          "sha": "79005e34a21e915ef2a72ccddef6ffc47ce174b3",
+          "bytes": 300,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_layer.py",
+          "sha": "eb8ebadaeb8619f96cbecd8e94043891853ebde2",
+          "bytes": 12837,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_chat_executor.py",
+          "sha": "b76570f57a85e39a5d0ddaf2d9ab7bc4029d89ca",
+          "bytes": 12428,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_executor.py",
+          "sha": "efbaf139c4a6707226a2e6bbe07a7cc9f5fafa28",
+          "bytes": 24721,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_write_cycles/hosted_morph_cycle.py",
+          "sha": "9c7067f2a2d134a78d0ae9050d34345bd76c1dfd",
+          "bytes": 21274,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_write_cycles/hosted_roof_cycle.py",
+          "sha": "5c6f77bff8975c7aa928877bb832763a2b6d5141",
+          "bytes": 22548,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_write_cycles/hosted_slab_cycle.py",
+          "sha": "083f897ba0677b063acf59c44ef7af95b55ddfaa",
+          "bytes": 25195,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_write_cycles/hosted_window_cycle.py",
+          "sha": "e7180ca74f334be80d8759c366321df3e9267cd5",
+          "bytes": 19370,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_write_cycles/wall_joint_cycle.py",
+          "sha": "c381ed015546bf5e69ad63843826451191227455",
+          "bytes": 14723,
+          "mode": "100644"
+        },
+        {
+          "path": "scripts/archicad_write_cycles/wall_material_cycle.py",
+          "sha": "b81ff845ddded845253dfa404feb8c1558748283",
+          "bytes": 25822,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-1.5.8.json",
+          "sha": "01ca78e051c6efbf92812047aba168a3930dcb5e",
+          "bytes": 660670,
+          "mode": "100644"
+        }
+      ],
+      "blob_count": 30,
+      "tree_entries": 39,
+      "fetch_status": "PASS"
+    },
+    {
+      "head_sha": "2ec5c001544a0eede73daa99c618ba53448f226c",
+      "tree_sha": "2ec5c001544a0eede73daa99c618ba53448f226c",
+      "truncated": false,
+      "files": [
+        {
+          "path": ".github/pull_request_template.md",
+          "sha": "1fdbca430b6f7a669074966d6405acd537d6880b",
+          "bytes": 679,
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha": "3068944546f0f7166cf7d3f68252c5750bab1e92",
+          "bytes": 701,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_ARCHITECTURE_AUDIT.md",
+          "sha": "45f80903dd9e77f74564e2af6219fcc45edab7d1",
+          "bytes": 1701,
+          "mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha": "d6e3c9eb1aaa81a0a1b369cf4d94d56f8fc31291",
+          "bytes": 1891,
+          "mode": "100644"
+        },
+        {
+          "path": "SAFE_BIM_V01_REPORT.md",
+          "sha": "a38ca0bba19bf03dd429dfefb8b2465a4a7c9fe6",
+          "bytes": 1698,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/COORDINATION.md",
+          "sha": "c0df5ee5904afc661df842ea3030a38765d483df",
+          "bytes": 2000,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_ARENA.md",
+          "sha": "1da37fb79a1ab7e4193c3b228264f308e403c0bc",
+          "bytes": 1901,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_WORK.md",
+          "sha": "a621651c0cfa2213d9fcdd230810ee84728c4e4d",
+          "bytes": 1447,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/README.md",
+          "sha": "c5253bcc705f4db40bb128f96f6580fdf7dab74f",
+          "bytes": 269,
+          "mode": "100644"
+        },
+        {
+          "path": "construction_details/ACTIVE_RELEASE",
+          "sha": "5896cdf0ff24476c437b5072eec15a91bc891b5f",
+          "bytes": 4,
+          "mode": "100644"
+        },
+        {
+          "path": "construction_details/README.md",
+          "sha": "09df0c719b830aabb9e7ddd4c23aae7f954ca5b4",
+          "bytes": 2560,
+          "mode": "100644"
+        },
+        {
+          "path": "construction_details/index/source_counts.json",
+          "sha": "61ce655f1c025dd287333706cf02f8d42b52d311",
+          "bytes": 13362,
+          "mode": "100644"
+        },
+        {
+          "path": "construction_details/index/sources.json",
+          "sha": "37607e1fdc05a122230dbc2c8fa61bfacae4a5de",
+          "bytes": 25612,
+          "mode": "100644"
+        },
+        {
+          "path": "construction_details/index/systems.json",
+          "sha": "40e87d012001b1f923a41d6ecdb9e56562bad5de",
+          "bytes": 1078,
+          "mode": "100644"
+        },
+        {
+          "path": "construction_details/releases/v2.2/SHA256SUMS.txt",
+          "sha": "bccdbaefd4253d10361c17402b5ac0c6b4628641",
+          "bytes": 91,
+          "mode": "100644"
+        },
+        {
+          "path": "construction_details/releases/v2.2/audit.json",
+          "sha": "1a5b71e88bd63864d76a4f1325c544530ef85070",
+          "bytes": 2461,
+          "mode": "100644"
+        },
+        {
+          "path": "construction_details/releases/v2.2/machine-state-v2.2.tar.gz.b64",
+          "sha": "65e24d924f6cce6065b14e9d07ebb0f9158c79c1",
+          "bytes": 548124,
+          "mode": "100644"
+        },
+        {
+          "path": "construction_details/releases/v2.2/manifest.json",
+          "sha": "ec85b23ef9480056e3babf31e6a470595b4f9f63",
+          "bytes": 6586,
+          "mode": "100644"
+        },
+        {
+          "path": "construction_details/releases/v2.2/source_verify.json",
+          "sha": "009078562cfd05e070b8115480dcca5eddb4a25f",
+          "bytes": 15493,
+          "mode": "100644"
+        },
+        {
+          "path": "construction_details/releases/v2.2/summary.json",
+          "sha": "fcccfe4fd7ec160837beae660280e9e3848b6d35",
+          "bytes": 508,
+          "mode": "100644"
+        },
+        {
+          "path": "construction_details/tools/unpack_release.py",
+          "sha": "122eede8abfeb4be0eff12f6e0af0f5fc311b51e",
+          "bytes": 1309,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/OPERATING_MODEL.md",
+          "sha": "6405a9eb186ac3b7115d961fd975c72428b6d05b",
+          "bytes": 2937,
+          "mode": "100644"
+        },
+        {
+          "path": "qwen_safe_bim_integration.py",
+          "sha": "837ac4d33b09cdf2a7f61af10aca81453252cfab",
+          "bytes": 5589,
+          "mode": "100644"
+        },
+        {
+          "path": "safe-bim-v01-schema-test.json",
+          "sha": "79005e34a21e915ef2a72ccddef6ffc47ce174b3",
+          "bytes": 300,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_layer.py",
+          "sha": "eb8ebadaeb8619f96cbecd8e94043891853ebde2",
+          "bytes": 12837,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-1.5.8.json",
+          "sha": "01ca78e051c6efbf92812047aba168a3930dcb5e",
+          "bytes": 660670,
+          "mode": "100644"
+        }
+      ],
+      "blob_count": 26,
+      "tree_entries": 34,
+      "fetch_status": "PASS"
+    },
+    {
+      "head_sha": "ebe46536c85111248234235c8e7ac8cbd2bffac5",
+      "tree_sha": "ebe46536c85111248234235c8e7ac8cbd2bffac5",
+      "truncated": false,
+      "files": [
+        {
+          "path": ".github/pull_request_template.md",
+          "sha": "1fdbca430b6f7a669074966d6405acd537d6880b",
+          "bytes": 679,
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha": "3068944546f0f7166cf7d3f68252c5750bab1e92",
+          "bytes": 701,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_ARCHITECTURE_AUDIT.md",
+          "sha": "45f80903dd9e77f74564e2af6219fcc45edab7d1",
+          "bytes": 1701,
+          "mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha": "d6e3c9eb1aaa81a0a1b369cf4d94d56f8fc31291",
+          "bytes": 1891,
+          "mode": "100644"
+        },
+        {
+          "path": "SAFE_BIM_V01_REPORT.md",
+          "sha": "a38ca0bba19bf03dd429dfefb8b2465a4a7c9fe6",
+          "bytes": 1698,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/COORDINATION.md",
+          "sha": "c0df5ee5904afc661df842ea3030a38765d483df",
+          "bytes": 2000,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_ARENA.md",
+          "sha": "1da37fb79a1ab7e4193c3b228264f308e403c0bc",
+          "bytes": 1901,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_WORK.md",
+          "sha": "a621651c0cfa2213d9fcdd230810ee84728c4e4d",
+          "bytes": 1447,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/README.md",
+          "sha": "c5253bcc705f4db40bb128f96f6580fdf7dab74f",
+          "bytes": 269,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/OPERATING_MODEL.md",
+          "sha": "6405a9eb186ac3b7115d961fd975c72428b6d05b",
+          "bytes": 2937,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/CURRENT",
+          "sha": "e70ef1ddd8c33bae64e55d9c396e8c77808a783f",
+          "bytes": 5,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.2/AUDIT_v2.2.json",
+          "sha": "1a5b71e88bd63864d76a4f1325c544530ef85070",
+          "bytes": 2461,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.2/ORIGINAL_PACKAGE_SHA256.txt",
+          "sha": "1aaea4f220d008df900126e824e7f52b4c09c0ff",
+          "bytes": 235,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.2/README_v2.2.md",
+          "sha": "bbca648f9f036528ddbf5a663715b78fea7a5b00",
+          "bytes": 2496,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.2/RESTORE.md",
+          "sha": "727c40e5fef7edf9e7194b094d957bc33dc5e5f4",
+          "bytes": 811,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.2/SYSTEMATIZED_ARCHIVE_SHA256.txt",
+          "sha": "0c7680123324cbf264bbbf850e2b1780ba71b9ac",
+          "bytes": 106,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.2/detail-machine-v2.2-systematized.tar.gz",
+          "sha": "430a7e3b874f3c9d2e26b4ab4b08c673b44c9358",
+          "bytes": 411093,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/AUDIT_v2.3.json",
+          "sha": "5e8d98cd9831b1fae58706555532ea7a100ed758",
+          "bytes": 2181,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/ORIGINAL_PACKAGE_SHA256.txt",
+          "sha": "abc3de8d7d236c49445600830fdf270f6b0a87fc",
+          "bytes": 223,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/README_v2.3.md",
+          "sha": "a57dcde4877c07154f60e4173b92f8c6d0c694ab",
+          "bytes": 1752,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/RESTORE.md",
+          "sha": "e08b79b07f7fb7c9ca319ceca84c30c644ffd204",
+          "bytes": 764,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/ROCKFACADE_SOURCE_VERIFY_v2.3.json",
+          "sha": "5e8190ccd4018affde3a0d929df182c7b1d03a55",
+          "bytes": 1411,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/SUMMARY_v2.3.json",
+          "sha": "120f7cd26a7332bb76afe03abd471ed6587ecde2",
+          "bytes": 726,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/SYSTEMATIZED_ARCHIVE_SHA256.txt",
+          "sha": "e4f9b566d244a5756aa00c70574d4524de2e6e37",
+          "bytes": 105,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/detail-machine-v2.3-systematized.tar.gz",
+          "sha": "910a95e6b09c6b1f6a07fc0b2bf947f06a8c846b",
+          "bytes": 479640,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/manifest_v2.3.json",
+          "sha": "91b0350e02d5c000d9ba38454543ffc43efa7bc5",
+          "bytes": 7302,
+          "mode": "100644"
+        },
+        {
+          "path": "qwen_safe_bim_integration.py",
+          "sha": "837ac4d33b09cdf2a7f61af10aca81453252cfab",
+          "bytes": 5589,
+          "mode": "100644"
+        },
+        {
+          "path": "safe-bim-v01-schema-test.json",
+          "sha": "79005e34a21e915ef2a72ccddef6ffc47ce174b3",
+          "bytes": 300,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_layer.py",
+          "sha": "eb8ebadaeb8619f96cbecd8e94043891853ebde2",
+          "bytes": 12837,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-1.5.8.json",
+          "sha": "01ca78e051c6efbf92812047aba168a3930dcb5e",
+          "bytes": 660670,
+          "mode": "100644"
+        }
+      ],
+      "blob_count": 30,
+      "tree_entries": 38,
+      "fetch_status": "PASS"
+    },
+    {
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "tree_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "truncated": false,
+      "files": [
+        {
+          "path": ".github/pull_request_template.md",
+          "sha": "1fdbca430b6f7a669074966d6405acd537d6880b",
+          "bytes": 679,
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha": "3068944546f0f7166cf7d3f68252c5750bab1e92",
+          "bytes": 701,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_ARCHITECTURE_AUDIT.md",
+          "sha": "45f80903dd9e77f74564e2af6219fcc45edab7d1",
+          "bytes": 1701,
+          "mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha": "d6e3c9eb1aaa81a0a1b369cf4d94d56f8fc31291",
+          "bytes": 1891,
+          "mode": "100644"
+        },
+        {
+          "path": "SAFE_BIM_V01_REPORT.md",
+          "sha": "a38ca0bba19bf03dd429dfefb8b2465a4a7c9fe6",
+          "bytes": 1698,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/COORDINATION.md",
+          "sha": "c0df5ee5904afc661df842ea3030a38765d483df",
+          "bytes": 2000,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_ARENA.md",
+          "sha": "1da37fb79a1ab7e4193c3b228264f308e403c0bc",
+          "bytes": 1901,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_WORK.md",
+          "sha": "a621651c0cfa2213d9fcdd230810ee84728c4e4d",
+          "bytes": 1447,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/README.md",
+          "sha": "c5253bcc705f4db40bb128f96f6580fdf7dab74f",
+          "bytes": 269,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/OPERATING_MODEL.md",
+          "sha": "6405a9eb186ac3b7115d961fd975c72428b6d05b",
+          "bytes": 2937,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/CURRENT",
+          "sha": "62c36deb2b7dfb0fdb329754b013db5710f3ad2d",
+          "bytes": 5,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.2/AUDIT_v2.2.json",
+          "sha": "1a5b71e88bd63864d76a4f1325c544530ef85070",
+          "bytes": 2461,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.2/ORIGINAL_PACKAGE_SHA256.txt",
+          "sha": "1aaea4f220d008df900126e824e7f52b4c09c0ff",
+          "bytes": 235,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.2/README_v2.2.md",
+          "sha": "bbca648f9f036528ddbf5a663715b78fea7a5b00",
+          "bytes": 2496,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.2/RESTORE.md",
+          "sha": "727c40e5fef7edf9e7194b094d957bc33dc5e5f4",
+          "bytes": 811,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.2/SYSTEMATIZED_ARCHIVE_SHA256.txt",
+          "sha": "0c7680123324cbf264bbbf850e2b1780ba71b9ac",
+          "bytes": 106,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.2/detail-machine-v2.2-systematized.tar.gz",
+          "sha": "430a7e3b874f3c9d2e26b4ab4b08c673b44c9358",
+          "bytes": 411093,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/AUDIT_v2.3.json",
+          "sha": "5e8d98cd9831b1fae58706555532ea7a100ed758",
+          "bytes": 2181,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/ORIGINAL_PACKAGE_SHA256.txt",
+          "sha": "abc3de8d7d236c49445600830fdf270f6b0a87fc",
+          "bytes": 223,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/README_v2.3.md",
+          "sha": "a57dcde4877c07154f60e4173b92f8c6d0c694ab",
+          "bytes": 1752,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/RESTORE.md",
+          "sha": "e08b79b07f7fb7c9ca319ceca84c30c644ffd204",
+          "bytes": 764,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/ROCKFACADE_SOURCE_VERIFY_v2.3.json",
+          "sha": "5e8190ccd4018affde3a0d929df182c7b1d03a55",
+          "bytes": 1411,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/SUMMARY_v2.3.json",
+          "sha": "120f7cd26a7332bb76afe03abd471ed6587ecde2",
+          "bytes": 726,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/SYSTEMATIZED_ARCHIVE_SHA256.txt",
+          "sha": "e4f9b566d244a5756aa00c70574d4524de2e6e37",
+          "bytes": 105,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/detail-machine-v2.3-systematized.tar.gz",
+          "sha": "910a95e6b09c6b1f6a07fc0b2bf947f06a8c846b",
+          "bytes": 479640,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.3/manifest_v2.3.json",
+          "sha": "91b0350e02d5c000d9ba38454543ffc43efa7bc5",
+          "bytes": 7302,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/AUDIT_v2.4.json",
+          "sha": "c567cf6d07dc8dd0907014e9ddf0ad6b1b3bff39",
+          "bytes": 1634,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/BRAAS_ROOF_DETAILS_SOURCE_VERIFY_v2.4.json",
+          "sha": "c92991039091b9159f57affebfe83e38f00bb018",
+          "bytes": 356,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/ORIGINAL_PACKAGE_SHA256.txt",
+          "sha": "41f2274ce1897cc4c558e0addb65f11f99493795",
+          "bytes": 341,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/README_v2.4.md",
+          "sha": "1d6a01563541dd6bf40fcb1f277c671856870727",
+          "bytes": 1650,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/RESTORE.md",
+          "sha": "e4e1a129fe1383dd2dc2c4c68014d23654eb7095",
+          "bytes": 740,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/SUMMARY_v2.4.json",
+          "sha": "5b2fad5bd6ff0a1cd02d4350ef3fa2332bf2c364",
+          "bytes": 589,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/SYSTEMATIZED_ARCHIVE_SHA256.txt",
+          "sha": "809929972cdf0a0b762ed24870ad246134e30965",
+          "bytes": 105,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/detail-machine-v2.4-systematized.tar.gz",
+          "sha": "349e7e74080c0cc7f0a434fb1bc615e106744b9e",
+          "bytes": 464503,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.4/manifest_v2.4.json",
+          "sha": "ad22ef41815f5c7ff05c804a36b3c765b53b8ee6",
+          "bytes": 7682,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/AUDIT_v2.5.json",
+          "sha": "c63a642c1c534061cb1c3da7140ced3f94e03cdf",
+          "bytes": 2021,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/BRAAS_ROOF_TECH_SOURCE_VERIFY_v2.5.json",
+          "sha": "1649b4f2262d1742f90bc6dcf3b448aa0b1f0432",
+          "bytes": 335,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/ORIGINAL_PACKAGE_SHA256.txt",
+          "sha": "87be83d3398a70621b83aa73b3ec034e18c269cd",
+          "bytes": 341,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/README_v2.5.md",
+          "sha": "409bf1a14373a17f90f138564c863e7078e5427e",
+          "bytes": 2171,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/RESTORE.md",
+          "sha": "76de47741aed17278a5c7e7632cbfd837c180e33",
+          "bytes": 610,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/SUMMARY_v2.5.json",
+          "sha": "ec70a756396e31e2264f43161f9bbc25f32cc8ff",
+          "bytes": 605,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/SYSTEMATIZED_ARCHIVE_SHA256.txt",
+          "sha": "7852e09cbbbfb75238ea9d49dee79dca43e54f34",
+          "bytes": 115,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/detail-machine-v2.5-systematized.tar.gz",
+          "sha": "5691cdfd8a8445371232deed22b7fbc208a235aa",
+          "bytes": 320365,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.5/manifest_v2.5.json",
+          "sha": "87b9584bd023e03d58e6f27f2a7e40ffd40619f2",
+          "bytes": 4924,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/AUDIT_v2.6.json",
+          "sha": "a198d605076892e8497461568a9f5f21fce8ee40",
+          "bytes": 2139,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/ORIGINAL_PACKAGE_SHA256.txt",
+          "sha": "c9c60567c77e24a36d810096b6da7a7ff881fba9",
+          "bytes": 341,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/POROTHERM_LOWRISE_SOURCE_VERIFY_v2.6.json",
+          "sha": "2a8a5a953768e0948d8f4ba797e2312563be9e6c",
+          "bytes": 506,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/README_v2.6.md",
+          "sha": "51fcf8805530dbcb37ea10916befed4e0ba7c599",
+          "bytes": 2312,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/RESTORE.md",
+          "sha": "ce03262c8759162eac1d855c4b9ea0a9654e2414",
+          "bytes": 632,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/SUMMARY_v2.6.json",
+          "sha": "41a36a3a05a8e7830455a2e66aed21dd7bafe5fd",
+          "bytes": 600,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/SYSTEMATIZED_ARCHIVE_SHA256.txt",
+          "sha": "18681a2da7a4e95dd1b104924f8e956ea444815b",
+          "bytes": 105,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/detail-machine-v2.6-systematized.tar.gz",
+          "sha": "65a892a9e4f55fae340b4141f327a711cf0773c6",
+          "bytes": 1092462,
+          "mode": "100644"
+        },
+        {
+          "path": "knowledge/detail-machine/releases/v2.6/manifest_v2.6.json",
+          "sha": "843d85234649f9f2c039da46d6910d47a5097d83",
+          "bytes": 807,
+          "mode": "100644"
+        },
+        {
+          "path": "qwen_safe_bim_integration.py",
+          "sha": "837ac4d33b09cdf2a7f61af10aca81453252cfab",
+          "bytes": 5589,
+          "mode": "100644"
+        },
+        {
+          "path": "safe-bim-v01-schema-test.json",
+          "sha": "79005e34a21e915ef2a72ccddef6ffc47ce174b3",
+          "bytes": 300,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_layer.py",
+          "sha": "eb8ebadaeb8619f96cbecd8e94043891853ebde2",
+          "bytes": 12837,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-1.5.8.json",
+          "sha": "01ca78e051c6efbf92812047aba168a3930dcb5e",
+          "bytes": 660670,
+          "mode": "100644"
+        }
+      ],
+      "blob_count": 57,
+      "tree_entries": 68,
+      "fetch_status": "PASS"
+    },
+    {
+      "head_sha": "4559bf13a2b17dd525cf91ed00521cabbdaf5a0c",
+      "tree_sha": "4559bf13a2b17dd525cf91ed00521cabbdaf5a0c",
+      "truncated": false,
+      "files": [
+        {
+          "path": ".github/pull_request_template.md",
+          "sha": "1fdbca430b6f7a669074966d6405acd537d6880b",
+          "bytes": 679,
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha": "3068944546f0f7166cf7d3f68252c5750bab1e92",
+          "bytes": 701,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_ARCHITECTURE_AUDIT.md",
+          "sha": "45f80903dd9e77f74564e2af6219fcc45edab7d1",
+          "bytes": 1701,
+          "mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha": "d6e3c9eb1aaa81a0a1b369cf4d94d56f8fc31291",
+          "bytes": 1891,
+          "mode": "100644"
+        },
+        {
+          "path": "SAFE_BIM_V01_REPORT.md",
+          "sha": "a38ca0bba19bf03dd429dfefb8b2465a4a7c9fe6",
+          "bytes": 1698,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/COORDINATION.md",
+          "sha": "c0df5ee5904afc661df842ea3030a38765d483df",
+          "bytes": 2000,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_ARENA.md",
+          "sha": "1da37fb79a1ab7e4193c3b228264f308e403c0bc",
+          "bytes": 1901,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_WORK.md",
+          "sha": "a621651c0cfa2213d9fcdd230810ee84728c4e4d",
+          "bytes": 1447,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/README.md",
+          "sha": "c5253bcc705f4db40bb128f96f6580fdf7dab74f",
+          "bytes": 269,
+          "mode": "100644"
+        },
+        {
+          "path": "details/machine-db/releases/v2.2/AUDIT_v2.2.json",
+          "sha": "1a5b71e88bd63864d76a4f1325c544530ef85070",
+          "bytes": 2461,
+          "mode": "100644"
+        },
+        {
+          "path": "details/machine-db/releases/v2.2/PACKAGE_SHA256.txt",
+          "sha": "0c7680123324cbf264bbbf850e2b1780ba71b9ac",
+          "bytes": 106,
+          "mode": "100644"
+        },
+        {
+          "path": "details/machine-db/releases/v2.2/README_v2.2.md",
+          "sha": "bbca648f9f036528ddbf5a663715b78fea7a5b00",
+          "bytes": 2496,
+          "mode": "100644"
+        },
+        {
+          "path": "details/machine-db/releases/v2.2/SYSTEMATIZED_MANIFEST.json",
+          "sha": "ec85b23ef9480056e3babf31e6a470595b4f9f63",
+          "bytes": 6586,
+          "mode": "100644"
+        },
+        {
+          "path": "details/machine-db/releases/v2.2/UPLOAD_NOTES.md",
+          "sha": "1fe34b4c5fd63a08f3050411b918dcd25af66a87",
+          "bytes": 1044,
+          "mode": "100644"
+        },
+        {
+          "path": "details/machine-db/releases/v2.2/archicad_detail_machine_db_v2.2_SHA256.txt",
+          "sha": "1aaea4f220d008df900126e824e7f52b4c09c0ff",
+          "bytes": 235,
+          "mode": "100644"
+        },
+        {
+          "path": "details/machine-db/releases/v2.2/detail-machine-v2.2-systematized.tar.gz",
+          "sha": "430a7e3b874f3c9d2e26b4ab4b08c673b44c9358",
+          "bytes": 411093,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/OPERATING_MODEL.md",
+          "sha": "6405a9eb186ac3b7115d961fd975c72428b6d05b",
+          "bytes": 2937,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/ARCHITECTURAL_MODEL_QUALITY_RESEARCH.md",
+          "sha": "3f067ea262d9b25b5e64d2a554854c5402c9ecba",
+          "bytes": 26381,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/AUTOMATED_LIBRARY_PART_COMPILATION.md",
+          "sha": "0d4641533e44f3c217318df0759b4dc7fa0c4368",
+          "bytes": 5656,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/GENERATION_PIPELINE_V2.md",
+          "sha": "21042082a18a43114dcbd3eebc916f4b963db697",
+          "bytes": 20158,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/LIBRARY_FIRST_ACCELERATION_AND_PILOT.md",
+          "sha": "b842909cd1e1ba2220a6d79b1cfce6bdd582c33e",
+          "bytes": 8764,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/LIBRARY_FIRST_ARCHITECTURE.md",
+          "sha": "2be5d2c08ec7593d966cb9ceefb7d150e16215f4",
+          "bytes": 9114,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/MATERIAL_ROLE_RULES.md",
+          "sha": "baea30789ae3fb2b1043ffc039636a215cdeca86",
+          "bytes": 2547,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/QUALITY_GATES_AND_TEST_MATRIX.md",
+          "sha": "68ac1d0d76f6cfa88ebf55dc098b67257cd55fbe",
+          "bytes": 17044,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/REUSABLE_ARCHITECTURAL_MODULES_AND_TOWER_FAMILIES.md",
+          "sha": "d68837af79c21c285613ba4e69266178d808aa45",
+          "bytes": 6043,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/TAPIR_COMMAND_LIBRARY_AND_RECIPE_ARCHITECTURE.md",
+          "sha": "0121550a828cf750c262cb8131bf9b29dea01bb9",
+          "bytes": 9080,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/UNIVERSAL_COMPONENT_LIBRARY_ROUTER.md",
+          "sha": "bd0da910ad95a86a1023132b2ed76930a8872ed6",
+          "bytes": 11123,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/tasks/ARCHITECTURAL_MODEL_QUALITY_V2.md",
+          "sha": "3f9a3e58153c9236d26007d840dded799c9a9df5",
+          "bytes": 4831,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/tasks/UNIVERSAL_LIBRARY_SYSTEM_IMPLEMENTATION.md",
+          "sha": "4c2a220f6fb80cc674d2059a25f152b883d05e28",
+          "bytes": 2883,
+          "mode": "100644"
+        },
+        {
+          "path": "examples/library_first/gothic_lancet_master_v01.py",
+          "sha": "d9450aaa5bff78131ed2166fed06276b0dc11081",
+          "bytes": 13410,
+          "mode": "100644"
+        },
+        {
+          "path": "examples/repairs/gothic_tower_pointed_window_repair_v4.py",
+          "sha": "cecaddae82225c3c90854062a79bdcbd1e2725d7",
+          "bytes": 22187,
+          "mode": "100644"
+        },
+        {
+          "path": "qwen_safe_bim_integration.py",
+          "sha": "837ac4d33b09cdf2a7f61af10aca81453252cfab",
+          "bytes": 5589,
+          "mode": "100644"
+        },
+        {
+          "path": "safe-bim-v01-schema-test.json",
+          "sha": "79005e34a21e915ef2a72ccddef6ffc47ce174b3",
+          "bytes": 300,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_layer.py",
+          "sha": "eb8ebadaeb8619f96cbecd8e94043891853ebde2",
+          "bytes": 12837,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-1.5.8.json",
+          "sha": "01ca78e051c6efbf92812047aba168a3930dcb5e",
+          "bytes": 660670,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-patches/0001-window-door-libraryPartName.patch",
+          "sha": "62df6de73689b986d0c78b9de1d788d85da7bb8b",
+          "bytes": 5922,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-patches/README.md",
+          "sha": "e4470c6a5ba47f4ff8e527700d8f06df63a01af5",
+          "bytes": 1480,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-patches/apply_and_build_ac29.ps1",
+          "sha": "a7b1f9dbd2c87913ecffce5d1353a0e04aef4ba2",
+          "bytes": 6267,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-patches/apply_hosted_libpart_patch.py",
+          "sha": "2754f3fb3b67d545ae5c923016c03d2b241f5309",
+          "bytes": 7850,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-patches/apply_librarypart_compiler_patch.py",
+          "sha": "9db4547a0d6efc177bdeb424dd56066d6ecab62c",
+          "bytes": 14806,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-patches/apply_registration_isolation_patch.py",
+          "sha": "c535efebeafae4fceb02e5d5df6e5fd415000cac",
+          "bytes": 5155,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-patches/build_registration_isolation_ac29.ps1",
+          "sha": "680120b02a3e3c5b7d1138e927680a386eb9ff65",
+          "bytes": 2867,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-patches/diagnose_loaded_tapir_and_libraries.py",
+          "sha": "9de0742cd390211cd129d188e19570927bd102b5",
+          "bytes": 2432,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-patches/find_running_tapir_port.py",
+          "sha": "1a33403161d70b9bb2413fdf8e150af67e785f3f",
+          "bytes": 5742,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-patches/map_archicad_json_ports.ps1",
+          "sha": "9bc5d6945edb2642d7aa74558c7e551c25c5cac1",
+          "bytes": 3767,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-patches/pilot_create_true_gothic_window.py",
+          "sha": "c6d9136336096d8665187a06b3fb8b2c94829ec2",
+          "bytes": 9785,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-patches/smoke_test_window_libraryPartName.py",
+          "sha": "38f4cce9e68cac678ae97ada297ce722c67b0d96",
+          "bytes": 6532,
+          "mode": "100644"
+        }
+      ],
+      "blob_count": 47,
+      "tree_entries": 60,
+      "fetch_status": "PASS"
+    },
+    {
+      "head_sha": "3cbfc4e379b54d4249badd508fb64c21886ac186",
+      "tree_sha": "3cbfc4e379b54d4249badd508fb64c21886ac186",
+      "truncated": false,
+      "files": [
+        {
+          "path": ".github/pull_request_template.md",
+          "sha": "1fdbca430b6f7a669074966d6405acd537d6880b",
+          "bytes": 679,
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha": "3068944546f0f7166cf7d3f68252c5750bab1e92",
+          "bytes": 701,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_ARCHITECTURE_AUDIT.md",
+          "sha": "45f80903dd9e77f74564e2af6219fcc45edab7d1",
+          "bytes": 1701,
+          "mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha": "d6e3c9eb1aaa81a0a1b369cf4d94d56f8fc31291",
+          "bytes": 1891,
+          "mode": "100644"
+        },
+        {
+          "path": "SAFE_BIM_V01_REPORT.md",
+          "sha": "a38ca0bba19bf03dd429dfefb8b2465a4a7c9fe6",
+          "bytes": 1698,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/COORDINATION.md",
+          "sha": "c0df5ee5904afc661df842ea3030a38765d483df",
+          "bytes": 2000,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_ARENA.md",
+          "sha": "1da37fb79a1ab7e4193c3b228264f308e403c0bc",
+          "bytes": 1901,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_WORK.md",
+          "sha": "a621651c0cfa2213d9fcdd230810ee84728c4e4d",
+          "bytes": 1447,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/README.md",
+          "sha": "c5253bcc705f4db40bb128f96f6580fdf7dab74f",
+          "bytes": 269,
+          "mode": "100644"
+        },
+        {
+          "path": "details/machine-db/releases/v2.2/AUDIT_v2.2.json",
+          "sha": "1a5b71e88bd63864d76a4f1325c544530ef85070",
+          "bytes": 2461,
+          "mode": "100644"
+        },
+        {
+          "path": "details/machine-db/releases/v2.2/PACKAGE_SHA256.txt",
+          "sha": "0c7680123324cbf264bbbf850e2b1780ba71b9ac",
+          "bytes": 106,
+          "mode": "100644"
+        },
+        {
+          "path": "details/machine-db/releases/v2.2/README_v2.2.md",
+          "sha": "bbca648f9f036528ddbf5a663715b78fea7a5b00",
+          "bytes": 2496,
+          "mode": "100644"
+        },
+        {
+          "path": "details/machine-db/releases/v2.2/SYSTEMATIZED_MANIFEST.json",
+          "sha": "ec85b23ef9480056e3babf31e6a470595b4f9f63",
+          "bytes": 6586,
+          "mode": "100644"
+        },
+        {
+          "path": "details/machine-db/releases/v2.2/UPLOAD_NOTES.md",
+          "sha": "1fe34b4c5fd63a08f3050411b918dcd25af66a87",
+          "bytes": 1044,
+          "mode": "100644"
+        },
+        {
+          "path": "details/machine-db/releases/v2.2/archicad_detail_machine_db_v2.2_SHA256.txt",
+          "sha": "1aaea4f220d008df900126e824e7f52b4c09c0ff",
+          "bytes": 235,
+          "mode": "100644"
+        },
+        {
+          "path": "details/machine-db/releases/v2.2/detail-machine-v2.2-systematized.tar.gz",
+          "sha": "430a7e3b874f3c9d2e26b4ab4b08c673b44c9358",
+          "bytes": 411093,
+          "mode": "100644"
+        },
+        {
+          "path": "details/machine-db/releases/v2.3/AUDIT_v2.3.json",
+          "sha": "afd59763e4b9d7f9e244c6dc4adc498f55b524da",
+          "bytes": 2096,
+          "mode": "100644"
+        },
+        {
+          "path": "details/machine-db/releases/v2.3/PACKAGE_SHA256.txt",
+          "sha": "8cd9d266bd4ab0c67de313540f1e66ee24e9b2d8",
+          "bytes": 106,
+          "mode": "100644"
+        },
+        {
+          "path": "details/machine-db/releases/v2.3/README_v2.3.md",
+          "sha": "523588b17b3995c7b696dee0779cd59400ae4752",
+          "bytes": 1597,
+          "mode": "100644"
+        },
+        {
+          "path": "details/machine-db/releases/v2.3/SUMMARY_v2.3.json",
+          "sha": "bf5157972ed6816ea211ab38fe9d9294ffbea00c",
+          "bytes": 445,
+          "mode": "100644"
+        },
+        {
+          "path": "details/machine-db/releases/v2.3/SYSTEMATIZED_MANIFEST.json",
+          "sha": "de791ba8926bd3d5f0a7c3b40b65ec6b5125cdb8",
+          "bytes": 3314,
+          "mode": "100644"
+        },
+        {
+          "path": "details/machine-db/releases/v2.3/UPLOAD_NOTES.md",
+          "sha": "c6a7754e8204368e85a5abf2a5a09d64fa4e0bec",
+          "bytes": 643,
+          "mode": "100644"
+        },
+        {
+          "path": "details/machine-db/releases/v2.3/archicad_detail_machine_db_v2.3_SHA256.txt",
+          "sha": "883fe692e809a396078f88127ea8323fc167a2f7",
+          "bytes": 223,
+          "mode": "100644"
+        },
+        {
+          "path": "details/machine-db/releases/v2.3/detail-machine-v2.3-systematized.tar.gz",
+          "sha": "f28b6347212213d79ca80e68f4eeb355b86b37bd",
+          "bytes": 487066,
+          "mode": "100644"
+        },
+        {
+          "path": "details/machine-db/releases/v2.3/kaiman_kerakam_dimension_templates_v2.3.json",
+          "sha": "0b923a997e5e760b66f6726fb9da24f21a14a455",
+          "bytes": 5665,
+          "mode": "100644"
+        },
+        {
+          "path": "details/machine-db/releases/v2.3/kaiman_kerakam_wt11_dimension_bindings_v2.3.jsonl",
+          "sha": "fd86c52a03793d0d2e37d62ce654abe0cb875e52",
+          "bytes": 109593,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/OPERATING_MODEL.md",
+          "sha": "6405a9eb186ac3b7115d961fd975c72428b6d05b",
+          "bytes": 2937,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/ARCHITECTURAL_MODEL_QUALITY_RESEARCH.md",
+          "sha": "3f067ea262d9b25b5e64d2a554854c5402c9ecba",
+          "bytes": 26381,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/AUTOMATED_LIBRARY_PART_COMPILATION.md",
+          "sha": "0d4641533e44f3c217318df0759b4dc7fa0c4368",
+          "bytes": 5656,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/GENERATION_PIPELINE_V2.md",
+          "sha": "21042082a18a43114dcbd3eebc916f4b963db697",
+          "bytes": 20158,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/LIBRARY_FIRST_ACCELERATION_AND_PILOT.md",
+          "sha": "b842909cd1e1ba2220a6d79b1cfce6bdd582c33e",
+          "bytes": 8764,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/LIBRARY_FIRST_ARCHITECTURE.md",
+          "sha": "2be5d2c08ec7593d966cb9ceefb7d150e16215f4",
+          "bytes": 9114,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/MATERIAL_ROLE_RULES.md",
+          "sha": "baea30789ae3fb2b1043ffc039636a215cdeca86",
+          "bytes": 2547,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/QUALITY_GATES_AND_TEST_MATRIX.md",
+          "sha": "68ac1d0d76f6cfa88ebf55dc098b67257cd55fbe",
+          "bytes": 17044,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/REUSABLE_ARCHITECTURAL_MODULES_AND_TOWER_FAMILIES.md",
+          "sha": "d68837af79c21c285613ba4e69266178d808aa45",
+          "bytes": 6043,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/TAPIR_COMMAND_LIBRARY_AND_RECIPE_ARCHITECTURE.md",
+          "sha": "0121550a828cf750c262cb8131bf9b29dea01bb9",
+          "bytes": 9080,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/research/UNIVERSAL_COMPONENT_LIBRARY_ROUTER.md",
+          "sha": "bd0da910ad95a86a1023132b2ed76930a8872ed6",
+          "bytes": 11123,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/tasks/ARCHITECTURAL_MODEL_QUALITY_V2.md",
+          "sha": "3f9a3e58153c9236d26007d840dded799c9a9df5",
+          "bytes": 4831,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/tasks/UNIVERSAL_LIBRARY_SYSTEM_IMPLEMENTATION.md",
+          "sha": "4c2a220f6fb80cc674d2059a25f152b883d05e28",
+          "bytes": 2883,
+          "mode": "100644"
+        },
+        {
+          "path": "examples/library_first/gothic_lancet_master_v01.py",
+          "sha": "d9450aaa5bff78131ed2166fed06276b0dc11081",
+          "bytes": 13410,
+          "mode": "100644"
+        },
+        {
+          "path": "examples/repairs/gothic_tower_pointed_window_repair_v4.py",
+          "sha": "cecaddae82225c3c90854062a79bdcbd1e2725d7",
+          "bytes": 22187,
+          "mode": "100644"
+        },
+        {
+          "path": "qwen_safe_bim_integration.py",
+          "sha": "837ac4d33b09cdf2a7f61af10aca81453252cfab",
+          "bytes": 5589,
+          "mode": "100644"
+        },
+        {
+          "path": "safe-bim-v01-schema-test.json",
+          "sha": "79005e34a21e915ef2a72ccddef6ffc47ce174b3",
+          "bytes": 300,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_layer.py",
+          "sha": "eb8ebadaeb8619f96cbecd8e94043891853ebde2",
+          "bytes": 12837,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-1.5.8.json",
+          "sha": "01ca78e051c6efbf92812047aba168a3930dcb5e",
+          "bytes": 660670,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-patches/0001-window-door-libraryPartName.patch",
+          "sha": "62df6de73689b986d0c78b9de1d788d85da7bb8b",
+          "bytes": 5922,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-patches/README.md",
+          "sha": "e4470c6a5ba47f4ff8e527700d8f06df63a01af5",
+          "bytes": 1480,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-patches/apply_and_build_ac29.ps1",
+          "sha": "a7b1f9dbd2c87913ecffce5d1353a0e04aef4ba2",
+          "bytes": 6267,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-patches/apply_hosted_libpart_patch.py",
+          "sha": "2754f3fb3b67d545ae5c923016c03d2b241f5309",
+          "bytes": 7850,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-patches/apply_librarypart_compiler_patch.py",
+          "sha": "9db4547a0d6efc177bdeb424dd56066d6ecab62c",
+          "bytes": 14806,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-patches/apply_registration_isolation_patch.py",
+          "sha": "c535efebeafae4fceb02e5d5df6e5fd415000cac",
+          "bytes": 5155,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-patches/build_registration_isolation_ac29.ps1",
+          "sha": "680120b02a3e3c5b7d1138e927680a386eb9ff65",
+          "bytes": 2867,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-patches/diagnose_loaded_tapir_and_libraries.py",
+          "sha": "9de0742cd390211cd129d188e19570927bd102b5",
+          "bytes": 2432,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-patches/find_running_tapir_port.py",
+          "sha": "1a33403161d70b9bb2413fdf8e150af67e785f3f",
+          "bytes": 5742,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-patches/map_archicad_json_ports.ps1",
+          "sha": "9bc5d6945edb2642d7aa74558c7e551c25c5cac1",
+          "bytes": 3767,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-patches/pilot_create_true_gothic_window.py",
+          "sha": "c6d9136336096d8665187a06b3fb8b2c94829ec2",
+          "bytes": 9785,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-patches/smoke_test_window_libraryPartName.py",
+          "sha": "38f4cce9e68cac678ae97ada297ce722c67b0d96",
+          "bytes": 6532,
+          "mode": "100644"
+        }
+      ],
+      "blob_count": 57,
+      "tree_entries": 71,
+      "fetch_status": "PASS"
+    }
+  ]
+}
