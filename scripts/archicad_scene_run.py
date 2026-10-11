@@ -80,6 +80,13 @@ def digest(value):
     return hashlib.sha256(canonical(value).encode("utf-8")).hexdigest()
 
 
+def native_plan_hash(preview, graph_hash):
+    return digest({'graphHash':graph_hash, 'schemaSha256':preview['schemaSha256'],
+        'slabBasicMaterialName':preview.get('slabBasicMaterialName'),
+        'slabBasicMaterialGuid':preview.get('slabBasicMaterialGuid'),
+        'slabLevelConvention':preview.get('slabLevelConvention','LEGACY_RELATIVE')})
+
+
 def close(a, b, tolerance=1e-5):
     return (type(a) in (int, float) and type(b) in (int, float)
             and math.isfinite(a) and math.isfinite(b)
@@ -432,13 +439,7 @@ class SceneWriter:
                 or material_guid.casefold() != pinned_material.casefold()):
             raise ValueError("AUTHORED_SLAB_MATERIAL_CHANGED_BEFORE_PREFLIGHT")
         preview["slabBasicMaterialGuid"] = material_guid
-        preview["sourcePlanHash"] = digest({
-            "graphHash": preview["sourcePlanHash"],
-            "schemaSha256": preview["schemaSha256"],
-            "slabBasicMaterialName": basic_name,
-            "slabBasicMaterialGuid": material_guid,
-            "slabLevelConvention":preview.get("slabLevelConvention", "LEGACY_RELATIVE"),
-        })
+        preview["sourcePlanHash"] = native_plan_hash(preview,preview["sourcePlanHash"])
         scan_report = scan_for_existing_geometry(self.api, x, y, preview.get("envelope"))
         if self.guarded_binding() != binding:
             raise ValueError("project binding changed during read-only preflight")

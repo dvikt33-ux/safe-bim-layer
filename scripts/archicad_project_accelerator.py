@@ -1,7 +1,8 @@
 """Project intent -> existing BIM graph -> guarded native writer -> evidence.
 
-Only pavilion-frame-v1 is executable. Floor and MEP adapters are deliberately
-UNSUPPORTED. Default mode is offline. No daemon, save, deletion, or retry.
+Pavilion, parameterized building shell and authored native inputs reuse one
+SceneWriter. Floor and MEP adapters remain UNSUPPORTED. Default mode is offline.
+No daemon, save, deletion, or automatic retry.
 """
 from __future__ import annotations
 

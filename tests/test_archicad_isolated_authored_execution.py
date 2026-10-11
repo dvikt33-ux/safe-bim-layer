@@ -218,3 +218,4 @@ class IsolatedAuthoredExecutionTests(unittest.TestCase):
             plan=edit['intent']['newPlan']
         self.assertEqual(A.inventory_guids(self.native),initial)
         self.assertEqual(self.native.writes[count:],['ModifyWindows','ModifyWindows'])
+        self.assertEqual(plan['sourcePlanHash'],ticket['preflight']['sourcePlanHash'])

@@ -158,7 +158,7 @@ def prepare_opening_width(api, plan, created, step_id, width, journal, operation
     checked=A.SCENE.GRAPH.compile_graph(A.catalog_with_provenance(RUN.DEFAULT_SCENE_SCHEMA),changed['graph'],runtime_version=RUN.EXPECTED_TAPIR)
     if checked['status']!='PLAN_VALIDATED_OFFLINE':
         raise ValueError('OPENING_EDIT_GRAPH_REFUSED')
-    changed['sourcePlanHash']=checked['sourcePlanHash']
+    changed['sourcePlanHash']=RUN.native_plan_hash(changed,checked['sourcePlanHash'])
     command='ModifyWindows' if step['command']=='CreateWindows' else 'ModifyDoors'
     key='windowsWithDetails' if command=='ModifyWindows' else 'doorsWithDetails'
     record={'operationId':operation_id,'oldPlan':plan,'newPlan':changed,'created':verified,
