@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 88,
+  "revision": 89,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -3740,12 +3740,13 @@
         "purpose": "entrypoint",
         "source": "https://github.com/dvikt33-ux/safe-bim-layer/blob/03f94e9bb67e01a0944813b25eaea50b1afa0ead/scripts/archicad_project_accelerator.py",
         "source_artifact_ids": [
-          "ART-APA-HIGHLEVEL-PR34"
+          "ART-APA-HIGHLEVEL-PR34",
+          "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011"
         ],
-        "verification_level": "FOUND",
+        "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "scripts/archicad_project_accelerator.py",
         "advantage": "Reuse existing implementation and evidence; no parallel subsystem",
-        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied",
+        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied; Verified only explicit17element native core in PR48 head976c19c; expanded planner/engineering/junction/MEP/UI/AC30 remain unverified.",
         "integration_method": "Adapter to existing Project Accelerator/BIM Graph/SceneWriter",
         "priority": 0,
         "target_module": "entrypoint",
@@ -3754,19 +3755,20 @@
           "APA-P70.A03.S01"
         ],
         "acceptance": "Compile brief through existing entry; no second executor",
-        "implementation_state": "FOUND"
+        "implementation_state": "INTEGRATED"
       },
       {
         "name": "Semantic Brief",
         "purpose": "semantic input",
         "source": "https://github.com/dvikt33-ux/safe-bim-layer/blob/03f94e9bb67e01a0944813b25eaea50b1afa0ead/scripts/archicad_semantic_brief.py",
         "source_artifact_ids": [
-          "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011"
+          "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+          "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011"
         ],
-        "verification_level": "FOUND",
+        "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "scripts/archicad_semantic_brief.py",
         "advantage": "Reuse existing implementation and evidence; no parallel subsystem",
-        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied",
+        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied; Verified only explicit17element native core in PR48 head976c19c; expanded planner/engineering/junction/MEP/UI/AC30 remain unverified.",
         "integration_method": "Adapter to existing Project Accelerator/BIM Graph/SceneWriter",
         "priority": 0,
         "target_module": "semantic input",
@@ -3775,19 +3777,20 @@
           "APA-P70.A03.S01"
         ],
         "acceptance": "Real stories and hard constraints retained",
-        "implementation_state": "FOUND"
+        "implementation_state": "INTEGRATED"
       },
       {
         "name": "Semantic Spatial",
         "purpose": "authored geometry",
         "source": "https://github.com/dvikt33-ux/safe-bim-layer/blob/03f94e9bb67e01a0944813b25eaea50b1afa0ead/scripts/archicad_semantic_spatial.py",
         "source_artifact_ids": [
-          "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011"
+          "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+          "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011"
         ],
-        "verification_level": "FOUND",
+        "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "scripts/archicad_semantic_spatial.py",
         "advantage": "Reuse existing implementation and evidence; no parallel subsystem",
-        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied",
+        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied; Verified only explicit17element native core in PR48 head976c19c; expanded planner/engineering/junction/MEP/UI/AC30 remain unverified.",
         "integration_method": "Adapter to existing Project Accelerator/BIM Graph/SceneWriter",
         "priority": 0,
         "target_module": "authored geometry",
@@ -3796,7 +3799,7 @@
           "APA-P70.A03.S01"
         ],
         "acceptance": "Authored room/axis/bearing/load-path identity retained",
-        "implementation_state": "FOUND"
+        "implementation_state": "INTEGRATED"
       },
       {
         "name": "Project Library Pack / CSE",
@@ -3824,12 +3827,13 @@
         "purpose": "authoring adapter",
         "source": "https://github.com/dvikt33-ux/safe-bim-layer/blob/03f94e9bb67e01a0944813b25eaea50b1afa0ead/scripts/archicad_authored_native_plan.py",
         "source_artifact_ids": [
-          "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011"
+          "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+          "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011"
         ],
-        "verification_level": "FOUND",
+        "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "scripts/archicad_authored_native_plan.py",
         "advantage": "Reuse existing implementation and evidence; no parallel subsystem",
-        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied",
+        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied; Verified only explicit17element native core in PR48 head976c19c; expanded planner/engineering/junction/MEP/UI/AC30 remain unverified.",
         "integration_method": "Adapter to existing Project Accelerator/BIM Graph/SceneWriter",
         "priority": 0,
         "target_module": "authoring adapter",
@@ -3838,19 +3842,20 @@
           "APA-P70.A03.S01"
         ],
         "acceptance": "Original graph/writer receives approved authored plan",
-        "implementation_state": "FOUND"
+        "implementation_state": "INTEGRATED"
       },
       {
         "name": "BIM Graph",
         "purpose": "dependency DAG",
         "source": "https://github.com/dvikt33-ux/safe-bim-layer/blob/03f94e9bb67e01a0944813b25eaea50b1afa0ead/scripts/archicad_bim_graph.py",
         "source_artifact_ids": [
-          "ART-APA-HIGHLEVEL-PR34"
+          "ART-APA-HIGHLEVEL-PR34",
+          "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011"
         ],
-        "verification_level": "FOUND",
+        "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "scripts/archicad_bim_graph.py",
         "advantage": "Reuse existing implementation and evidence; no parallel subsystem",
-        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied",
+        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied; Verified only explicit17element native core in PR48 head976c19c; expanded planner/engineering/junction/MEP/UI/AC30 remain unverified.",
         "integration_method": "Adapter to existing Project Accelerator/BIM Graph/SceneWriter",
         "priority": 0,
         "target_module": "dependency DAG",
@@ -3859,19 +3864,20 @@
           "APA-P70.A03.S02"
         ],
         "acceptance": "Hosted openings use verified wall GUIDs and ordering",
-        "implementation_state": "FOUND"
+        "implementation_state": "INTEGRATED"
       },
       {
         "name": "SceneWriter / SQLite",
         "purpose": "native transaction journal",
         "source": "https://github.com/dvikt33-ux/safe-bim-layer/blob/03f94e9bb67e01a0944813b25eaea50b1afa0ead/scripts/archicad_scene_run.py",
         "source_artifact_ids": [
-          "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011"
+          "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+          "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011"
         ],
-        "verification_level": "FOUND",
+        "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "scripts/archicad_scene_run.py",
         "advantage": "Reuse existing implementation and evidence; no parallel subsystem",
-        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied",
+        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied; Verified only explicit17element native core in PR48 head976c19c; expanded planner/engineering/junction/MEP/UI/AC30 remain unverified.",
         "integration_method": "Adapter to existing Project Accelerator/BIM Graph/SceneWriter",
         "priority": 0,
         "target_module": "native transaction journal",
@@ -3880,19 +3886,20 @@
           "APA-P70.A03.S01"
         ],
         "acceptance": "Exact target, pinned hash, intent before every write, no blind replay",
-        "implementation_state": "FOUND"
+        "implementation_state": "INTEGRATED"
       },
       {
         "name": "Native MVP / write cycles",
         "purpose": "native donor adapters",
         "source": "https://github.com/dvikt33-ux/safe-bim-layer/blob/03f94e9bb67e01a0944813b25eaea50b1afa0ead/scripts/archicad_executor.py",
         "source_artifact_ids": [
-          "ART-APA-REUSE-NATIVE-20261011"
+          "ART-APA-REUSE-NATIVE-20261011",
+          "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011"
         ],
-        "verification_level": "FOUND",
+        "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "scripts/archicad_executor.py",
         "advantage": "Reuse existing implementation and evidence; no parallel subsystem",
-        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied",
+        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied; Verified only explicit17element native core in PR48 head976c19c; expanded planner/engineering/junction/MEP/UI/AC30 remain unverified.",
         "integration_method": "Adapter to existing Project Accelerator/BIM Graph/SceneWriter",
         "priority": 0,
         "target_module": "native donor adapters",
@@ -3901,7 +3908,7 @@
           "APA-P70.A03.S02"
         ],
         "acceptance": "Supported columns/doors/windows reused with typed readback",
-        "implementation_state": "FOUND"
+        "implementation_state": "INTEGRATED"
       },
       {
         "name": "Template Builder",
@@ -3929,12 +3936,13 @@
         "purpose": "transport",
         "source": "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md",
         "source_artifact_ids": [
-          "ART-TAPIR-COMPAT-20261010-6F29"
+          "ART-TAPIR-COMPAT-20261010-6F29",
+          "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011"
         ],
-        "verification_level": "FOUND",
+        "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
         "advantage": "Reuse published finding; compare only for a concrete gap",
-        "limitations": "Candidate/registered research, no inferred install/license/live support",
+        "limitations": "Candidate/registered research, no inferred install/license/live support; Verified only explicit17element native core in PR48 head976c19c; expanded planner/engineering/junction/MEP/UI/AC30 remain unverified.",
         "integration_method": "Reuse current module; isolate adapter only when required",
         "priority": 0,
         "target_module": "transport",
@@ -3943,7 +3951,7 @@
           "APA-P70.A03.S01"
         ],
         "acceptance": "Installed version/command schema and typed readback verified",
-        "implementation_state": "FOUND"
+        "implementation_state": "INTEGRATED"
       },
       {
         "name": "Native Model Dump / AC29 geometry",
