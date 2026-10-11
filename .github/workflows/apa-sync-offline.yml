@@ -7,6 +7,7 @@ on:
       - 'tests/test_apa_slack_sync.py'
       - 'tests/test_receipt_bridge.py'
       - 'tests/test_receipt_bridge_outbox.py'
+      - 'tests/test_live_receipt_probe.py'
       - 'docs/APA_SLACK_COORDINATOR.md'
       - '.github/workflows/apa-sync-offline.yml'
   workflow_dispatch:
@@ -23,13 +24,15 @@ jobs:
         with:
           python-version: '3.11'
       - name: Compile Python sources
-        run: python -m compileall -q scripts/apa_sync tests/test_apa_slack_sync.py tests/test_receipt_bridge.py tests/test_receipt_bridge_outbox.py
+        run: python -m compileall -q scripts/apa_sync tests/test_apa_slack_sync.py tests/test_receipt_bridge.py tests/test_receipt_bridge_outbox.py tests/test_live_receipt_probe.py
       - name: Offline unit tests (no Slack tokens)
         run: python -m unittest discover -s tests -p 'test_apa_slack_sync.py' -v
       - name: Receipt bridge offline tests (no network or tokens)
         run: python -m unittest discover -s tests -p 'test_receipt_bridge.py' -v
       - name: Receipt bridge durable outbox and crash tests
         run: python -m unittest discover -s tests -p 'test_receipt_bridge_outbox.py' -v
+      - name: One-shot receipt live probe offline simulation
+        run: python -m unittest discover -s tests -p 'test_live_receipt_probe.py' -v
       - name: Pinned real GitHub receipt readback to Slack INFO dry-run
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -55,6 +58,8 @@ jobs:
           python -m unittest discover -s tests -p 'test_receipt_bridge.py' -v
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           python -m unittest discover -s tests -p 'test_receipt_bridge_outbox.py' -v
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m unittest discover -s tests -p 'test_live_receipt_probe.py' -v
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           Write-Host 'WINDOWS_BRIDGE_OFFLINE_PASS'
       - name: Parse Windows launch script without running it
