@@ -396,7 +396,8 @@ class SceneWriter:
         return self._execute_verified_plan(preflight, scene_id, expected_hash)
 
     def _execute_verified_plan(self, preflight, scene_id, expected_hash,
-                               seeded_created=None, approval_source=None):
+                               seeded_created=None, approval_source=None,
+                               on_before_complete=None):
         """Same existing one-shot SceneWriter, with externally verified prefix.
 
         Only recovery after exact immutable old-ledger + current-native matching
@@ -536,6 +537,18 @@ class SceneWriter:
                     # Always stop and never retry, undo, or erase the step ledger.
                     result["status"] = "PARTIAL_OR_UNKNOWN_OUTCOME"
                     result["failedStep"] = step_id
+                    result["reason"] = type(exc).__name__ + ": " + str(exc)
+                    result["manualReconciliationRequired"] = True
+                    db.execute("UPDATE scenes SET state=?,result=? WHERE scene_id=?",
+                               (result["status"], canonical(result), scene_id))
+                    db.commit()
+                    return result
+            if on_before_complete is not None:
+                try:
+                    on_before_complete(preflight, created)
+                except Exception as exc:
+                    result["status"] = "PARTIAL_OR_UNKNOWN_OUTCOME"
+                    result["failedStep"] = "FINAL_READBACK"
                     result["reason"] = type(exc).__name__ + ": " + str(exc)
                     result["manualReconciliationRequired"] = True
                     db.execute("UPDATE scenes SET state=?,result=? WHERE scene_id=?",
