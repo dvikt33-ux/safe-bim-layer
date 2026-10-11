@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 70,
+  "revision": 71,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -620,6 +620,12 @@
       "uri": "docs/research/apa-results/receipts/APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial.json",
       "kind": "RECEIPT",
       "verification": "GITHUB_READBACK_VERIFIED"
+    },
+    "ART-APA-PUBLISHER-HOURLY-CONDITION-WATCH-20261011": {
+      "id": "ART-APA-PUBLISHER-HOURLY-CONDITION-WATCH-20261011",
+      "uri": "docs/research/apa-results/runs/2026-10-11/apa-publisher-hourly-chatgpt-watch-20261011.md",
+      "kind": "REPORT",
+      "verification": "SCHEDULER_ENABLED_HOURLY_GITHUB_READBACK_SUCCESS_NOTIFICATIONS_DISABLED_ALERT_DELIVERY_NOT_VERIFIED"
     }
   },
   "tasks": {
