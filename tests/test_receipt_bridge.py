@@ -129,7 +129,7 @@ class BridgeTests(unittest.TestCase):
         class FakeSlack:
             def conversations_history(self, **kwargs):
                 calls.append("history")
-                return {"messages": [{"text": "DUMMY EVENT"}], "response_metadata": {}}
+                return {"messages": [{"text": "DUMMY EVENT", "ts": "1791721617.730099"}], "response_metadata": {}}
         coordinator = types.ModuleType("scripts.apa_sync.coordinator")
         coordinator.parse_event = lambda t: event if t == "DUMMY EVENT" else None
         step_sync = types.ModuleType("scripts.apa_sync.step_sync")
@@ -138,7 +138,7 @@ class BridgeTests(unittest.TestCase):
         with patch.dict(sys.modules, {"scripts.apa_sync.coordinator": coordinator,
                                       "scripts.apa_sync.step_sync": step_sync}):
             outcome = b.send_notification(event)
-        self.assertEqual(outcome, {"published": False, "already_present": True})
+        self.assertEqual(outcome, {"published": False, "already_present": True, "channel_id": b.CHANNEL, "slack_ts": "1791721617.730099"})
         self.assertEqual(calls, ["history"])
 
     def test_slack_notification_send_only_on_explicit_call(self):
