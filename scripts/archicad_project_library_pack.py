@@ -17,7 +17,7 @@ _SHA256 = re.compile(r"^[a-f0-9]{64}$")
 _GUID = re.compile(r"^[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
 ROLES = frozenset({"floor-slab", "external-wall", "internal-partition",
                     "roof", "foundation", "opening-interface"})
-RIGHTS = frozenset({"LINK_ONLY_RIGHTS_UNVERIFIED", "LICENSE_SOURCE_VERIFIED"})
+RIGHTS = frozenset({"LINK_ONLY_RIGHTS_UNVERIFIED"})
 SOURCE_STATES = frozenset({"PROJECT_NATIVE_READBACK", "TECHNICAL_REFERENCE",
                            "UNREVIEWED"})
 DETAIL_STATES = frozenset({"UNVERIFIED", "BLOCKED"})
@@ -71,9 +71,7 @@ def compile_pack(brief, candidate, *, api=None):
     if source["rights"] not in RIGHTS or source["status"] not in SOURCE_STATES:
         raise ValueError("CSE_LICENSE_OR_EVIDENCE_STATUS_INVALID")
     license_uri=source["licenseEvidenceUri"]
-    if (source["rights"]=="LICENSE_SOURCE_VERIFIED"
-            and not isinstance(license_uri,str)):
-        raise ValueError("VERIFIED_LICENSE_REQUIRES_EVIDENCE")
+    # A self-declared URL must never upgrade rights to verified.
     if license_uri is not None:
         _text(license_uri,"LICENSE_EVIDENCE_URI")
     _text(source["publisher"],"SOURCE_PUBLISHER")
