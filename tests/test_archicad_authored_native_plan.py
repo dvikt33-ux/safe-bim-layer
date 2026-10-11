@@ -3,6 +3,7 @@ from pathlib import Path
 import copy
 import sys
 import unittest
+from unittest.mock import patch
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/"scripts"))
@@ -213,6 +214,105 @@ class AuthoredNativePlanTests(unittest.TestCase):
         c["graph"]["operations"][0]["params"]["slabsData"][0]["thickness"]=.3
         with self.assertRaisesRegex(ValueError,"AUTHORED_OPERATION_GRAPH_DRIFT"):
             N.as_existing_scene_writer_preview(c)
+
+
+    def _writer_fixture(self):
+        import archicad_authored_native_plan as N
+        b=valid()
+        b["targetProjectPath"]=A.RUN.APPROVED_SCRATCH_PATH
+        class ReadOnlyNative(NativeGetOnly):
+            def __init__(self):
+                super().__init__()
+                self.refuse_writes=True
+                self.inject_story=None
+            def __call__(self, cmd, params):
+                if cmd in ("CreateWalls","CreateSlabs","ModifySlabs",
+                           "CreateColumns","CreateDoors","CreateWindows"):
+                    raise AssertionError("NATIVE_WRITE_CALL_IN_READ_ONLY_PREFLIGHT")
+                if cmd=="GetProjectInfo":
+                    self.calls.append(cmd)
+                    return {"projectPath":A.RUN.APPROVED_SCRATCH_PATH,
+                            "projectName":"APA_Test_House_01",
+                            "isUntitled":False,"isTeamwork":False}
+                if cmd=="GetStories" and self.inject_story is not None:
+                    result=super().__call__(cmd,params)
+                    result["actStory"]=self.inject_story
+                    return result
+                if cmd=="GetAddOnVersion":
+                    self.calls.append(cmd)
+                    return {"version":"1.5.10"}
+                if cmd=="GetAllElements":
+                    self.calls.append(cmd)
+                    return {"elements":[]}
+                return super().__call__(cmd,params)
+        native=ReadOnlyNative()
+        pack=A.compile_project_library_pack(b,specimen(),native)
+        compiled=A.compile_authored_native_candidate(b,pack,layout(),HEIGHTS,native)
+        return N, native, compiled
+
+    def test_existing_scene_writer_preflight_uses_authored_metrics_and_zero_writes(self):
+        N, native, compiled=self._writer_fixture()
+        preview_factory=N.make_read_only_scene_writer_preview_factory(compiled)
+        preview=preview_factory(0,0,A.RUN.DEFAULT_SCENE_SCHEMA)
+        self.assertEqual(preview["metrics"]["dimensionsMeters"],
+                         {"width":10.0,"depth":8.0,"height":6.0})
+        self.assertEqual(preview["metrics"]["elementCount"],4)
+        self.assertEqual(preview["sourcePlanHash"],compiled["sourcePlanHash"])
+        self.assertFalse(preview["liveWriteAuthorized"])
+        native.calls.clear()
+        with patch.object(A.RUN,"EXPECTED_PATH",A.RUN.APPROVED_SCRATCH_PATH), \\
+             patch.object(A.RUN,"EXPECTED_NAME","APA_Test_House_01"), \\
+             patch.object(A.RUN,"PORT",19726):
+            writer=A.RUN.SceneWriter(
+                native,Path("never-create-synthetic-journal.sqlite3"),
+                preview_factory=preview_factory)
+            outcome=writer.preflight(0,0)
+        self.assertEqual(outcome["status"],"READY_FOR_EXPLICIT_TEST_RUN")
+        self.assertEqual(outcome["metrics"]["dimensionsMeters"],
+                         {"width":10.0,"depth":8.0,"height":6.0})
+        self.assertEqual(outcome["nativeElementsInspected"],0)
+        self.assertEqual(outcome["binding"]["storyIndex"],1)
+        self.assertEqual(outcome["slabBasicMaterialGuid"],
+                         compiled["provisionalBasicSlabMaterialGuid"])
+        self.assertFalse(outcome["liveWriteAuthorized"])
+        self.assertTrue(set(native.calls)<={
+            "GetProjectInfo","GetStories","GetAddOnVersion",
+            "GetAttributesByType","GetAllElements"})
+
+    def test_read_only_factory_never_ignores_authored_anchor_or_schema(self):
+        N, native, compiled=self._writer_fixture()
+        factory=N.make_read_only_scene_writer_preview_factory(compiled)
+        with self.assertRaisesRegex(ValueError,"SCENE_ANCHOR_DIFFERS"):
+            factory(30,0,A.RUN.DEFAULT_SCENE_SCHEMA)
+        with self.assertRaisesRegex(ValueError,"WRITER_SCHEMA_PATH_CHANGED"):
+            factory(0,0,Path("not-approved-schema.json"))
+        ok=factory(0,0,A.RUN.DEFAULT_SCENE_SCHEMA)
+        ok["graph"]["operations"][0]["params"]["slabsData"][0]["thickness"]=.3
+        again=factory(0,0,A.RUN.DEFAULT_SCENE_SCHEMA)
+        self.assertEqual(again["graph"]["operations"][0]
+                         ["params"]["slabsData"][0]["thickness"],.2)
+        self.assertEqual(compiled["graph"]["operations"][0]
+                         ["params"]["slabsData"][0]["thickness"],.2)
+
+    def test_existing_writer_preflight_wrong_active_story_stops_without_write(self):
+        N, native, compiled=self._writer_fixture()
+        native.inject_story=0
+        with patch.object(A.RUN,"EXPECTED_PATH",A.RUN.APPROVED_SCRATCH_PATH), \\
+             patch.object(A.RUN,"EXPECTED_NAME","APA_Test_House_01"):
+            writer=A.RUN.SceneWriter(
+                native,Path("never-create-synthetic-journal.sqlite3"),
+                preview_factory=N.make_read_only_scene_writer_preview_factory(compiled))
+            with self.assertRaisesRegex(ValueError,"STORY_MISMATCH"):
+                writer.preflight(0,0)
+        self.assertNotIn("GetAllElements",native.calls)
+
+    def test_existing_writer_refuses_user_saved_copy_candidate(self):
+        import archicad_authored_native_plan as N
+        b,pack,native=sample()
+        compiled=A.compile_authored_native_candidate(b,pack,layout(),HEIGHTS,native)
+        compiled["nativeTargetProjectPath"]="C:/Users/owner/saved-evidence.pln"
+        with self.assertRaisesRegex(ValueError,"WRITER_PREVIEW_ONLY_FOR_EXISTING_APPROVED"):
+            N.make_read_only_scene_writer_preview_factory(compiled)
 
 
 if __name__=="__main__":
