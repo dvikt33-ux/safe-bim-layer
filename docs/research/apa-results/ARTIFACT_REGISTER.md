@@ -301,3 +301,10 @@ Controller artifact record: `PROJECT_PLAN.json` revision **52**, [commit 8af838f
 | Artifact ID | Evidence / current result | Acceptance |
 |---|---|---|
 | `ART-P70-A03-S02-LIVE-STORY-MATERIAL-AND-UNNAMED-PINS-20261011` | [Source-pinned full report](runs/2026-10-11/apa-p70-a03-s02-owner-live-story-material-preflight-and-unnamed-story-native-pins-20261011.md), [draft PR #45](https://github.com/dvikt33-ux/safe-bim-layer/pull/45), [CI #38160976956](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38160976956) **267/267 offline PASS**. Owner native `GetStories` reported `index=0, floorId=1, 0m, "Первый Этаж"`; `index=1,floorId=2,+3m,name=""`; `index=2,floorId=3,+6m,name=""`. One exact Building Material name/GUID `63DB2CE9-903D-45C0-B93C-B3C604C77394`; current project unchanged; 0 native writes. | **USER_SUPPLIED_LIVE_READ_ONLY_PREFLIGHT_PASS** for current saved copy + **OFFLINE_PASS** for opt-in exact unnamed-story pin adaptation. Does **not** imply native Create/Modify execution or completion of `APA-P70.A03.S02` (still `PARTIAL`). |
+
+
+## APA-P70.A03.S02 — PR #46 existing SceneWriter preview contract (2026-10-11)
+
+| Artifact ID | Evidence | Acceptance |
+|---|---|---|
+| `ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011` | [Report / source-by-source contract gap and proof](runs/2026-10-11/apa-p70-a03-s02-pr46-original-scene-writer-preflight-contract-271-pass-20261011.md) · [Draft PR #46](https://github.com/dvikt33-ux/safe-bim-layer/pull/46) · [CI #38161552863](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38161552863), **271/271 tests PASS**. Existing `SceneWriter` preview now has `metrics.dimensionsMeters` and frozen factory with exact author anchor/schema/story material guards. Mock preflight invokes read-only native commands only. | **OFFLINE_PASS** (not live). Old scratch and saved 45-GUID PLN must not be modified. Broad task **PARTIAL**; separate empty test PLN and explicit user-approved native execution still required. |
