@@ -1,0 +1,5440 @@
+{
+  "schema": "APA_BRANCH_BLOB_SCAN_BATCH_V1",
+  "baseline": "BRANCH_HEADS_20261010.json",
+  "baseline_captured_at": "2026-10-10T10:30:11.098Z",
+  "batch_index": 0,
+  "head_offset": 0,
+  "head_count": 10,
+  "generated_at_utc": "2026-10-11T00:05:21.142Z",
+  "repository": "dvikt33-ux/safe-bim-layer",
+  "rows": [
+    {
+      "head_sha": "bdd38ef457ac1c56990f026aefecf14f623de4f8",
+      "tree_sha": "bdd38ef457ac1c56990f026aefecf14f623de4f8",
+      "truncated": false,
+      "files": [
+        {
+          "path": ".github/pull_request_template.md",
+          "sha": "1fdbca430b6f7a669074966d6405acd537d6880b",
+          "bytes": 679,
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha": "3068944546f0f7166cf7d3f68252c5750bab1e92",
+          "bytes": 701,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_ARCHITECTURE_AUDIT.md",
+          "sha": "45f80903dd9e77f74564e2af6219fcc45edab7d1",
+          "bytes": 1701,
+          "mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha": "d6e3c9eb1aaa81a0a1b369cf4d94d56f8fc31291",
+          "bytes": 1891,
+          "mode": "100644"
+        },
+        {
+          "path": "SAFE_BIM_V01_REPORT.md",
+          "sha": "a38ca0bba19bf03dd429dfefb8b2465a4a7c9fe6",
+          "bytes": 1698,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/COORDINATION.md",
+          "sha": "c0df5ee5904afc661df842ea3030a38765d483df",
+          "bytes": 2000,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_ARENA.md",
+          "sha": "1da37fb79a1ab7e4193c3b228264f308e403c0bc",
+          "bytes": 1901,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_WORK.md",
+          "sha": "a621651c0cfa2213d9fcdd230810ee84728c4e4d",
+          "bytes": 1447,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/README.md",
+          "sha": "c5253bcc705f4db40bb128f96f6580fdf7dab74f",
+          "bytes": 269,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/ARCHICAD_CAPABILITY_REGISTRY.md",
+          "sha": "e82d8c9d80f0725f9083056a18eafe97f39d7856",
+          "bytes": 7594,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/ARCHICAD_CAPABILITY_ROADMAP.md",
+          "sha": "b5776adfa870904f9f9f925744c389342388678e",
+          "bytes": 4151,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/ARCHICAD_MODELING_STANDARD.md",
+          "sha": "99f3e85c3f47e790b8f9204311a8cd0dd1e3bcae",
+          "bytes": 3389,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/OPERATING_MODEL.md",
+          "sha": "6405a9eb186ac3b7115d961fd975c72428b6d05b",
+          "bytes": 2937,
+          "mode": "100644"
+        },
+        {
+          "path": "qwen_safe_bim_integration.py",
+          "sha": "837ac4d33b09cdf2a7f61af10aca81453252cfab",
+          "bytes": 5589,
+          "mode": "100644"
+        },
+        {
+          "path": "safe-bim-v01-schema-test.json",
+          "sha": "79005e34a21e915ef2a72ccddef6ffc47ce174b3",
+          "bytes": 300,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_layer.py",
+          "sha": "eb8ebadaeb8619f96cbecd8e94043891853ebde2",
+          "bytes": 12837,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-1.5.8.json",
+          "sha": "01ca78e051c6efbf92812047aba168a3930dcb5e",
+          "bytes": 660670,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/smoke/basic_slab_favorite.py",
+          "sha": "91b5e350f83000af0a75d790a3b73b9a6e4889e2",
+          "bytes": 3933,
+          "mode": "100644"
+        },
+        {
+          "path": "tests/smoke/native_window_door_continuous_wall.py",
+          "sha": "a467cfbb993983f30e7cb9161489282aa13cfef2",
+          "bytes": 5664,
+          "mode": "100644"
+        }
+      ],
+      "blob_count": 19,
+      "tree_entries": 24,
+      "fetch_status": "PASS"
+    },
+    {
+      "head_sha": "c6ab4749e8784cc65170167d166daa6cc219a931",
+      "tree_sha": "c6ab4749e8784cc65170167d166daa6cc219a931",
+      "truncated": false,
+      "files": [
+        {
+          "path": ".github/pull_request_template.md",
+          "sha": "1fdbca430b6f7a669074966d6405acd537d6880b",
+          "bytes": 679,
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha": "0e69ae40eae0c168d35c2173c6c0c14b7f304a3b",
+          "bytes": 979,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_AUDIT_BRIEF_20260927.md",
+          "sha": "a262e45261805afa4e03ffd5133e4c2ee6e7a666",
+          "bytes": 3230,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_ARCHITECTURE_AUDIT.md",
+          "sha": "45f80903dd9e77f74564e2af6219fcc45edab7d1",
+          "bytes": 1701,
+          "mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha": "430e99e9c610756fa47da39af5daaa0d7619743d",
+          "bytes": 5301,
+          "mode": "100644"
+        },
+        {
+          "path": "SAFE_BIM_V01_REPORT.md",
+          "sha": "a38ca0bba19bf03dd429dfefb8b2465a4a7c9fe6",
+          "bytes": 1698,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/COORDINATION.md",
+          "sha": "b2077d316fa13acbfa662a16c8e23797ae03fc85",
+          "bytes": 3027,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_ARENA.md",
+          "sha": "14c9b1da309adf2a1d8b6e739efd8a48cf1d0644",
+          "bytes": 5763,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_WORK.md",
+          "sha": "a621651c0cfa2213d9fcdd230810ee84728c4e4d",
+          "bytes": 1447,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/README.md",
+          "sha": "9fa040a96737b39ef0d1866a7a267c0b20a8f8b8",
+          "bytes": 4026,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/docs/T0_RESULTS.md",
+          "sha": "f5ad1ccce1331ec0990011a854d157fa98fa2d05",
+          "bytes": 7686,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/docs/audits/BIMEXEC_audit_v1.md",
+          "sha": "9035b428a4e476f41631a9b2019dceb79749aba0",
+          "bytes": 82944,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/examples/README.md",
+          "sha": "ebe787d00075fccae8b17243900bec3ccdde305b",
+          "bytes": 2022,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/examples/capability_matrix.example.json",
+          "sha": "9d89c5ad1853019657671c0fdd4e11af75785d9c",
+          "bytes": 9571,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/examples/caps.example.json",
+          "sha": "f9b700a458b7bba82bfecf3fc487c492218e5ece",
+          "bytes": 5181,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/README_RUN_WINDOWS.txt",
+          "sha": "ca891f39b939dc7718407187aff705fc60d9dc79",
+          "bytes": 18197,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/SHA256SUMS.txt",
+          "sha": "aa8aa7190d4d474b45248c6e873c550dd310c66c",
+          "bytes": 402,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/T0_PLAN.md",
+          "sha": "6116f7b4d018f685b527176f497a4170b8a3c055",
+          "bytes": 35573,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/TEST_SEQUENCE.md",
+          "sha": "ac5471173200099a0aa8224ccb095d583acb2907",
+          "bytes": 2075,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/backends.py",
+          "sha": "80afaf4d5ba1d096205b33da27feb0de63a56851",
+          "bytes": 38859,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/backends_v13.py",
+          "sha": "8f47f98ae6a90f13c1af533e12c232bbab88a318",
+          "bytes": 7382,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0a.py",
+          "sha": "62189313139166c167cc3dcde9c5e09bf0cb252f",
+          "bytes": 28866,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0a_v13.py",
+          "sha": "6ce41023eb86c6f271fb09927d52ce82bcd89338",
+          "bytes": 1058,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0b.py",
+          "sha": "025397fe8ab9bc6e59aac8f0a6eb526b7bc46ef1",
+          "bytes": 21286,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0b_v13.py",
+          "sha": "3844b09365c5e0b18c6691d3db2a6e0d5761a126",
+          "bytes": 627,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t2_connections_v13.py",
+          "sha": "a8e199659f1eecb343a05957c566dd6a2c0840e4",
+          "bytes": 28786,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t2_live_v13.py",
+          "sha": "1e73a94978377b5f86680dfc1fa6cc6558b19f45",
+          "bytes": 18985,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t3_dependency_v13.py",
+          "sha": "44334d8e8791c647c615ffd25975fbb2f6c2da7e",
+          "bytes": 24896,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t4_timeout_v13.py",
+          "sha": "17979a63e5aa68452e253529f1e7322087d1eb6e",
+          "bytes": 11776,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t5_kill_v13.py",
+          "sha": "389e132f29f302837f835681a1708bbddc9f8032",
+          "bytes": 14765,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t6.py",
+          "sha": "e356422604c7ccd59e9654528e348b9b901fd084",
+          "bytes": 7852,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t7.py",
+          "sha": "3932d72084198b3fa4a6939dbd89d1fb8fb917ab",
+          "bytes": 5544,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t8.py",
+          "sha": "af5daf7aee2737d0d021c8a114dad83762fafd63",
+          "bytes": 5636,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t9.py",
+          "sha": "0602b85fc4be3be07561d5889d373f3cb9165fba",
+          "bytes": 5351,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/reconcile_t3_dependency_v13.py",
+          "sha": "672c6a2837d86e937effe97d852506f4885bda47",
+          "bytes": 8779,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/reconcile_t4_timeout_v13.py",
+          "sha": "672a23be9200a25c25196e9defca6cc5c86db421",
+          "bytes": 8002,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/reconcile_t5_kill_v13.py",
+          "sha": "cb753359ce32a5cc60c9ba52e3e111074c821eca",
+          "bytes": 8654,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/README.md",
+          "sha": "9455c8217f23b189d457fa18c14497b3d75c446e",
+          "bytes": 14158,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/__init__.py",
+          "sha": "a65f7f62bd4756bfe72efd260f0ea039633cedac",
+          "bytes": 217,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/adapters.py",
+          "sha": "acbeff5b89f0c5ca47fe52d5b3846d8c53d0da4c",
+          "bytes": 18407,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/binding.py",
+          "sha": "76e2d34f19ee23ab3c8aa390441411f3559e26e8",
+          "bytes": 5743,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/executor.py",
+          "sha": "176b19efc99eed7d67070c840bf1e314d2d6f1c7",
+          "bytes": 45780,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/journal.py",
+          "sha": "ddf453e2694523cb3e4dbe4fc50156c065636dff",
+          "bytes": 5869,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/lock.py",
+          "sha": "81cf714d11aea3abdbb161f34e4f948ba9a890cf",
+          "bytes": 3864,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/probe.py",
+          "sha": "4d017a64ffec40f01c58d9da5fe8e7909a5bee70",
+          "bytes": 24334,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/states.py",
+          "sha": "8498dc8a18ef38ad0047271073ad229749f290de",
+          "bytes": 8296,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/tapir_raw.py",
+          "sha": "64fb1c4dd7b2605143709880356779b091d47a1e",
+          "bytes": 14720,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/verify.py",
+          "sha": "7c437de35c719d5f3371be461f4cbd1789f244e3",
+          "bytes": 16059,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/tools/run_probe.py",
+          "sha": "f84ed81153ca554072354e608f6b60f8e0b99034",
+          "bytes": 3735,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/README.md",
+          "sha": "d4287790939f579d20dc55ec736d1b5ef7763ca1",
+          "bytes": 1495,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/T0_RUN_2026-09-26.md",
+          "sha": "7f7c2e216f937539a06b432d518080f091dd82ba",
+          "bytes": 4428,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/TEMPLATE_T0A_RUN.md",
+          "sha": "1ec9b8593cae25f182ad8e44628de71f53e41815",
+          "bytes": 2116,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t2_connections_visual_v13.json",
+          "sha": "378b0171a5ac4aae98c58d017f3b14d615f34b66",
+          "bytes": 864,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t3_dependency_visual_v13.json",
+          "sha": "ff6b009b6327c06d430ea279477079364fe4ec76",
+          "bytes": 1312,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t4_timeout_human_decision_v13.json",
+          "sha": "df103823aae1637723edf13e1352cbeea0eec70d",
+          "bytes": 1074,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t5_process_kill_human_decision_v13.json",
+          "sha": "6e5e89eacb9e584c10f6a39ad3834674ac87f81c",
+          "bytes": 798,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t6_model_drift_live_v13.json",
+          "sha": "55b7757c66f8f96aee9a1541e7a3bbb22ce6525b",
+          "bytes": 988,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/capability_matrix_v13_2.json",
+          "sha": "130c50e9893dc824f60f9afc70faed7475714075",
+          "bytes": 18732,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/t0b_receipt_live_v13.json",
+          "sha": "c5cfca8199d2ac272c70102ed2221205783b9641",
+          "bytes": 2829,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/t0b_report_live_v13.json",
+          "sha": "da4a37f0e876cec410804fc74b091156fef2b5f5",
+          "bytes": 939,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/specs/BIMEXEC_P0.md",
+          "sha": "40c56a2e26bd8732cd1daaac702dc5ca3c155800",
+          "bytes": 51858,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/specs/capability_matrix.schema.json",
+          "sha": "5b390e16f454c9d69f70a46398b3dc0ece0f2bda",
+          "bytes": 6580,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/README.md",
+          "sha": "abad7439791c843133707d2f1d34cbf3e8d1a5c3",
+          "bytes": 2606,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend.py",
+          "sha": "aabfe5e37397edeef63b7c9ec21bfef4eda91c90",
+          "bytes": 3605,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend_bad_guid.py",
+          "sha": "2467073160b68ba5449db46bbbcd597ea691257d",
+          "bytes": 782,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend_leftover.py",
+          "sha": "a5fdc37dc5922d5193882db3e4ab38e59e96b124",
+          "bytes": 409,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend_silentnoop.py",
+          "sha": "0e396952b55759d1447a82639b772f7aad4c51d9",
+          "bytes": 450,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_no_custom_prop.py",
+          "sha": "dce60eb146d6e677e12bad9ceb2548dc0869fd53",
+          "bytes": 817,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_no_custom_prop_silent.py",
+          "sha": "8d2b0f5e9e176930e0e18b7a9de2316b10daaa67",
+          "bytes": 1095,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_tapir_shape.py",
+          "sha": "e9f3b457414d2c7d91e233905d1f76ea12261582",
+          "bytes": 4111,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/selftest_probes.py",
+          "sha": "e0954ebbdc355bd6de30aa4f1e13eb13f7e43398",
+          "bytes": 22053,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_all.py",
+          "sha": "f536de855ab340e9573ab4b2e5a929171007e14f",
+          "bytes": 1168,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_p0.py",
+          "sha": "da558d1fe8f881b990f9d107a2e439435f361ac0",
+          "bytes": 23200,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_probe.py",
+          "sha": "e58f56f414ab201659d31d63b0f97594b72ec35c",
+          "bytes": 10955,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_probe_v13.py",
+          "sha": "9f02f0be4438ab352ca948f044db9159b2606ca1",
+          "bytes": 4721,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t2_connections.py",
+          "sha": "2a8d40721bf0a275ead4e1fed73d9741145eec27",
+          "bytes": 11059,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t2_probe.py",
+          "sha": "38f6fc7d3d6e8453cbd715d192f075155637d8d9",
+          "bytes": 9543,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t3_dependency.py",
+          "sha": "5d15d7b74f21438f16b4f6c19603a4c51b917e23",
+          "bytes": 11626,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t3_reconcile.py",
+          "sha": "40eb694c239c3fb93241e4403a6236181497512e",
+          "bytes": 5221,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t4_timeout.py",
+          "sha": "315195d15a8cb76ac66b7ad5dbedb090960577c4",
+          "bytes": 8369,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t5_kill.py",
+          "sha": "14af67fad82469c2e402b43f726bfc48f2c9e098",
+          "bytes": 10964,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t6.py",
+          "sha": "7ffe105975e2516346c952db03bb949a0c5bb974",
+          "bytes": 3560,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t7.py",
+          "sha": "f88422bd3c15f3e74bc6627ab089d07a8aaa718f",
+          "bytes": 2806,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t8.py",
+          "sha": "fc4f68e0ffb2d8906bef820eb31741ba00f08a88",
+          "bytes": 4700,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t9.py",
+          "sha": "781681d639ff153d79eb6561850ec75f08a9c641",
+          "bytes": 1843,
+          "mode": "100644"
+        },
+        {
+          "path": "continue_test_house.py",
+          "sha": "ecae1ac4b32656374ee284c9ddcd375c00635655",
+          "bytes": 9655,
+          "mode": "100644"
+        },
+        {
+          "path": "controller/__init__.py",
+          "sha": "a35a10e5ec89660ca8b1c87f24c2477c37a803c7",
+          "bytes": 46,
+          "mode": "100644"
+        },
+        {
+          "path": "controller/app.py",
+          "sha": "74565ea70ad651f243d3939725ee39d572667b44",
+          "bytes": 10486,
+          "mode": "100644"
+        },
+        {
+          "path": "controller/client.py",
+          "sha": "6570179a234fc9620fd0be856db9ffc4e81e5d44",
+          "bytes": 5338,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/OPERATING_MODEL.md",
+          "sha": "6405a9eb186ac3b7115d961fd975c72428b6d05b",
+          "bytes": 2937,
+          "mode": "100644"
+        },
+        {
+          "path": "launcher.py",
+          "sha": "41a63fccc4c11ddbfa4f74c399751432c5553450",
+          "bytes": 4890,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/CMakeLists.txt",
+          "sha": "03d91aad5e281ea784d6123fe25c274a87be5652",
+          "bytes": 2446,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/RFIX.win/Safe_BIM_Palette.rc2",
+          "sha": "81fc0d4c2f238ab0e29de8df493d61c5577926c2",
+          "bytes": 37,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/RFIX/Safe_BIM_Palette.grc",
+          "sha": "ed12107bbda537a7c520ac50a919bcc360ddd50b",
+          "bytes": 608,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/RFIX/Safe_BIM_Palette.html",
+          "sha": "59fda1088ee14601cbbe52db4acd110a5c1c31d1",
+          "bytes": 4081,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/Src/APIEnvir.h",
+          "sha": "489b35c60d2a1ce09af67dc0b6a33050a9a9aa7b",
+          "bytes": 207,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/Src/Main.cpp",
+          "sha": "dbfd621f94622cad78b6c17263e55b56282f3ec0",
+          "bytes": 1259,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/Src/SafeBIMPalette.cpp",
+          "sha": "cbd34b0a8740f333bf187b537e7efae5bc21f3a5",
+          "bytes": 2699,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/Src/SafeBIMPalette.hpp",
+          "sha": "bd9adfea2f1cc4758bf0a691bf83f21c591b14e9",
+          "bytes": 951,
+          "mode": "100644"
+        },
+        {
+          "path": "qwen_safe_bim_integration.py",
+          "sha": "837ac4d33b09cdf2a7f61af10aca81453252cfab",
+          "bytes": 5589,
+          "mode": "100644"
+        },
+        {
+          "path": "run_safe_bim_controller.bat",
+          "sha": "9cfad3df3f1ae7443800525504b40c14289c3fda",
+          "bytes": 74,
+          "mode": "100644"
+        },
+        {
+          "path": "safe-bim-v01-schema-test.json",
+          "sha": "79005e34a21e915ef2a72ccddef6ffc47ce174b3",
+          "bytes": 300,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_house_primitives.py",
+          "sha": "137649a80874b991dcdc80112a1a283a499d7174",
+          "bytes": 38386,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_ipc.py",
+          "sha": "2cc08600b3a78466095d952388019d1d6bdedf8f",
+          "bytes": 7974,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_layer.py",
+          "sha": "47316bf4f02534304be1a41c8fda2b0d0bc55a64",
+          "bytes": 31103,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_lock.py",
+          "sha": "4f3f0376c67652bf250b06afd44aec4c0c190f37",
+          "bytes": 1665,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_operations.py",
+          "sha": "4d8d47f5b5ad5973556a62a8cb12cd12647f625f",
+          "bytes": 7874,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_runtime.py",
+          "sha": "886e1531cc344bbc4f0a0a9111345b01e25ece2e",
+          "bytes": 25936,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_service.py",
+          "sha": "886771a2a37977a686b8a63aeebd88126ebc65db",
+          "bytes": 3120,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_verification.py",
+          "sha": "2de599bbd461fbc1942c3ca3f5aa161db092ea6e",
+          "bytes": 8625,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-1.5.8.json",
+          "sha": "01ca78e051c6efbf92812047aba168a3930dcb5e",
+          "bytes": 660670,
+          "mode": "100644"
+        },
+        {
+          "path": "test_controller.py",
+          "sha": "f0e9a3eb2803f3865a98ba1394a6be3fe8fc0288",
+          "bytes": 3885,
+          "mode": "100644"
+        },
+        {
+          "path": "test_house.py",
+          "sha": "6540c67231f7dc28666f52445398529ca10d7618",
+          "bytes": 8773,
+          "mode": "100644"
+        },
+        {
+          "path": "test_resumable_executor.py",
+          "sha": "b899ccbf662b697e4c4ee48deafa44bccf94ba3f",
+          "bytes": 9243,
+          "mode": "100644"
+        },
+        {
+          "path": "test_safe_bim_layer_regressions.py",
+          "sha": "a92cd7e1ee0f7a0c6888b9531a0d55f48ffe0b38",
+          "bytes": 3128,
+          "mode": "100644"
+        },
+        {
+          "path": "test_story_vertical_context.py",
+          "sha": "7c5acc07bc05e2cd15738222e7f8096616e4ed3a",
+          "bytes": 2096,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_house_primitives/__init__.py",
+          "sha": "dd65f4e22eac4904617bc3db07b56cf0b755261f",
+          "bytes": 61,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_house_primitives/test_house_primitives.py",
+          "sha": "50bc663496c89d71ab8467e4a64b65f799301e96",
+          "bytes": 21379,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/__init__.py",
+          "sha": "194b794ae10deb2c06991d902378fcbf2f87eb80",
+          "bytes": 61,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/crash_worker.py",
+          "sha": "c43d46be330af51faa695efe0f5ff89fa38b1b9a",
+          "bytes": 2046,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/fake_bim.py",
+          "sha": "4b1a0a665f3001bc68e4933efe1eaaa3a1e27834",
+          "bytes": 5433,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/test_controller_safety.py",
+          "sha": "b67cfc1577e9156111879030dc8dc1124f6ebcd1",
+          "bytes": 4832,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/test_crash_windows.py",
+          "sha": "a0ae2bf195ff90da0c569ce48f6c4a0c4f4bf569",
+          "bytes": 4081,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/test_runtime_safety.py",
+          "sha": "129cb33d0711d9989024aa91774759a45518473e",
+          "bytes": 26384,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/test_wall_readback_z.py",
+          "sha": "0e328aa6c4f12dc567cdaddd01bc2dfd6b597f3a",
+          "bytes": 12054,
+          "mode": "100644"
+        }
+      ],
+      "blob_count": 125,
+      "tree_entries": 146,
+      "fetch_status": "PASS"
+    },
+    {
+      "head_sha": "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+      "tree_sha": "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+      "truncated": false,
+      "files": [
+        {
+          "path": ".github/pull_request_template.md",
+          "sha": "1fdbca430b6f7a669074966d6405acd537d6880b",
+          "bytes": 679,
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha": "0e69ae40eae0c168d35c2173c6c0c14b7f304a3b",
+          "bytes": 979,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_AUDIT_BRIEF_20260927.md",
+          "sha": "a262e45261805afa4e03ffd5133e4c2ee6e7a666",
+          "bytes": 3230,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_ARCHITECTURE_AUDIT.md",
+          "sha": "45f80903dd9e77f74564e2af6219fcc45edab7d1",
+          "bytes": 1701,
+          "mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha": "430e99e9c610756fa47da39af5daaa0d7619743d",
+          "bytes": 5301,
+          "mode": "100644"
+        },
+        {
+          "path": "SAFE_BIM_V01_REPORT.md",
+          "sha": "a38ca0bba19bf03dd429dfefb8b2465a4a7c9fe6",
+          "bytes": 1698,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/COORDINATION.md",
+          "sha": "b2077d316fa13acbfa662a16c8e23797ae03fc85",
+          "bytes": 3027,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_ARENA.md",
+          "sha": "14c9b1da309adf2a1d8b6e739efd8a48cf1d0644",
+          "bytes": 5763,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_WORK.md",
+          "sha": "a621651c0cfa2213d9fcdd230810ee84728c4e4d",
+          "bytes": 1447,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/README.md",
+          "sha": "9fa040a96737b39ef0d1866a7a267c0b20a8f8b8",
+          "bytes": 4026,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/docs/T0_RESULTS.md",
+          "sha": "f5ad1ccce1331ec0990011a854d157fa98fa2d05",
+          "bytes": 7686,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/docs/audits/BIMEXEC_audit_v1.md",
+          "sha": "9035b428a4e476f41631a9b2019dceb79749aba0",
+          "bytes": 82944,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/examples/README.md",
+          "sha": "ebe787d00075fccae8b17243900bec3ccdde305b",
+          "bytes": 2022,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/examples/capability_matrix.example.json",
+          "sha": "9d89c5ad1853019657671c0fdd4e11af75785d9c",
+          "bytes": 9571,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/examples/caps.example.json",
+          "sha": "f9b700a458b7bba82bfecf3fc487c492218e5ece",
+          "bytes": 5181,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/README_RUN_WINDOWS.txt",
+          "sha": "ca891f39b939dc7718407187aff705fc60d9dc79",
+          "bytes": 18197,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/SHA256SUMS.txt",
+          "sha": "aa8aa7190d4d474b45248c6e873c550dd310c66c",
+          "bytes": 402,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/T0_PLAN.md",
+          "sha": "6116f7b4d018f685b527176f497a4170b8a3c055",
+          "bytes": 35573,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/TEST_SEQUENCE.md",
+          "sha": "ac5471173200099a0aa8224ccb095d583acb2907",
+          "bytes": 2075,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/backends.py",
+          "sha": "80afaf4d5ba1d096205b33da27feb0de63a56851",
+          "bytes": 38859,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/backends_v13.py",
+          "sha": "8f47f98ae6a90f13c1af533e12c232bbab88a318",
+          "bytes": 7382,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0a.py",
+          "sha": "62189313139166c167cc3dcde9c5e09bf0cb252f",
+          "bytes": 28866,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0a_v13.py",
+          "sha": "6ce41023eb86c6f271fb09927d52ce82bcd89338",
+          "bytes": 1058,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0b.py",
+          "sha": "025397fe8ab9bc6e59aac8f0a6eb526b7bc46ef1",
+          "bytes": 21286,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0b_v13.py",
+          "sha": "3844b09365c5e0b18c6691d3db2a6e0d5761a126",
+          "bytes": 627,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t2_connections_v13.py",
+          "sha": "a8e199659f1eecb343a05957c566dd6a2c0840e4",
+          "bytes": 28786,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t2_live_v13.py",
+          "sha": "1e73a94978377b5f86680dfc1fa6cc6558b19f45",
+          "bytes": 18985,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t3_dependency_v13.py",
+          "sha": "44334d8e8791c647c615ffd25975fbb2f6c2da7e",
+          "bytes": 24896,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t4_timeout_v13.py",
+          "sha": "17979a63e5aa68452e253529f1e7322087d1eb6e",
+          "bytes": 11776,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t5_kill_v13.py",
+          "sha": "389e132f29f302837f835681a1708bbddc9f8032",
+          "bytes": 14765,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t6.py",
+          "sha": "e356422604c7ccd59e9654528e348b9b901fd084",
+          "bytes": 7852,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t7.py",
+          "sha": "3932d72084198b3fa4a6939dbd89d1fb8fb917ab",
+          "bytes": 5544,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t8.py",
+          "sha": "af5daf7aee2737d0d021c8a114dad83762fafd63",
+          "bytes": 5636,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t9.py",
+          "sha": "0602b85fc4be3be07561d5889d373f3cb9165fba",
+          "bytes": 5351,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/reconcile_t3_dependency_v13.py",
+          "sha": "672c6a2837d86e937effe97d852506f4885bda47",
+          "bytes": 8779,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/reconcile_t4_timeout_v13.py",
+          "sha": "672a23be9200a25c25196e9defca6cc5c86db421",
+          "bytes": 8002,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/reconcile_t5_kill_v13.py",
+          "sha": "cb753359ce32a5cc60c9ba52e3e111074c821eca",
+          "bytes": 8654,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/README.md",
+          "sha": "9455c8217f23b189d457fa18c14497b3d75c446e",
+          "bytes": 14158,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/__init__.py",
+          "sha": "a65f7f62bd4756bfe72efd260f0ea039633cedac",
+          "bytes": 217,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/adapters.py",
+          "sha": "acbeff5b89f0c5ca47fe52d5b3846d8c53d0da4c",
+          "bytes": 18407,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/binding.py",
+          "sha": "76e2d34f19ee23ab3c8aa390441411f3559e26e8",
+          "bytes": 5743,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/executor.py",
+          "sha": "176b19efc99eed7d67070c840bf1e314d2d6f1c7",
+          "bytes": 45780,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/journal.py",
+          "sha": "ddf453e2694523cb3e4dbe4fc50156c065636dff",
+          "bytes": 5869,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/lock.py",
+          "sha": "81cf714d11aea3abdbb161f34e4f948ba9a890cf",
+          "bytes": 3864,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/probe.py",
+          "sha": "4d017a64ffec40f01c58d9da5fe8e7909a5bee70",
+          "bytes": 24334,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/states.py",
+          "sha": "8498dc8a18ef38ad0047271073ad229749f290de",
+          "bytes": 8296,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/tapir_raw.py",
+          "sha": "64fb1c4dd7b2605143709880356779b091d47a1e",
+          "bytes": 14720,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/verify.py",
+          "sha": "7c437de35c719d5f3371be461f4cbd1789f244e3",
+          "bytes": 16059,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/tools/run_probe.py",
+          "sha": "f84ed81153ca554072354e608f6b60f8e0b99034",
+          "bytes": 3735,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/README.md",
+          "sha": "d4287790939f579d20dc55ec736d1b5ef7763ca1",
+          "bytes": 1495,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/T0_RUN_2026-09-26.md",
+          "sha": "7f7c2e216f937539a06b432d518080f091dd82ba",
+          "bytes": 4428,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/TEMPLATE_T0A_RUN.md",
+          "sha": "1ec9b8593cae25f182ad8e44628de71f53e41815",
+          "bytes": 2116,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t2_connections_visual_v13.json",
+          "sha": "378b0171a5ac4aae98c58d017f3b14d615f34b66",
+          "bytes": 864,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t3_dependency_visual_v13.json",
+          "sha": "ff6b009b6327c06d430ea279477079364fe4ec76",
+          "bytes": 1312,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t4_timeout_human_decision_v13.json",
+          "sha": "df103823aae1637723edf13e1352cbeea0eec70d",
+          "bytes": 1074,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t5_process_kill_human_decision_v13.json",
+          "sha": "6e5e89eacb9e584c10f6a39ad3834674ac87f81c",
+          "bytes": 798,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t6_model_drift_live_v13.json",
+          "sha": "55b7757c66f8f96aee9a1541e7a3bbb22ce6525b",
+          "bytes": 988,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/capability_matrix_v13_2.json",
+          "sha": "130c50e9893dc824f60f9afc70faed7475714075",
+          "bytes": 18732,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/t0b_receipt_live_v13.json",
+          "sha": "c5cfca8199d2ac272c70102ed2221205783b9641",
+          "bytes": 2829,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/t0b_report_live_v13.json",
+          "sha": "da4a37f0e876cec410804fc74b091156fef2b5f5",
+          "bytes": 939,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/specs/BIMEXEC_P0.md",
+          "sha": "40c56a2e26bd8732cd1daaac702dc5ca3c155800",
+          "bytes": 51858,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/specs/capability_matrix.schema.json",
+          "sha": "5b390e16f454c9d69f70a46398b3dc0ece0f2bda",
+          "bytes": 6580,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/README.md",
+          "sha": "abad7439791c843133707d2f1d34cbf3e8d1a5c3",
+          "bytes": 2606,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend.py",
+          "sha": "aabfe5e37397edeef63b7c9ec21bfef4eda91c90",
+          "bytes": 3605,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend_bad_guid.py",
+          "sha": "2467073160b68ba5449db46bbbcd597ea691257d",
+          "bytes": 782,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend_leftover.py",
+          "sha": "a5fdc37dc5922d5193882db3e4ab38e59e96b124",
+          "bytes": 409,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend_silentnoop.py",
+          "sha": "0e396952b55759d1447a82639b772f7aad4c51d9",
+          "bytes": 450,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_no_custom_prop.py",
+          "sha": "dce60eb146d6e677e12bad9ceb2548dc0869fd53",
+          "bytes": 817,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_no_custom_prop_silent.py",
+          "sha": "8d2b0f5e9e176930e0e18b7a9de2316b10daaa67",
+          "bytes": 1095,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_tapir_shape.py",
+          "sha": "e9f3b457414d2c7d91e233905d1f76ea12261582",
+          "bytes": 4111,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/selftest_probes.py",
+          "sha": "e0954ebbdc355bd6de30aa4f1e13eb13f7e43398",
+          "bytes": 22053,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_all.py",
+          "sha": "f536de855ab340e9573ab4b2e5a929171007e14f",
+          "bytes": 1168,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_p0.py",
+          "sha": "da558d1fe8f881b990f9d107a2e439435f361ac0",
+          "bytes": 23200,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_probe.py",
+          "sha": "e58f56f414ab201659d31d63b0f97594b72ec35c",
+          "bytes": 10955,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_probe_v13.py",
+          "sha": "9f02f0be4438ab352ca948f044db9159b2606ca1",
+          "bytes": 4721,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t2_connections.py",
+          "sha": "2a8d40721bf0a275ead4e1fed73d9741145eec27",
+          "bytes": 11059,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t2_probe.py",
+          "sha": "38f6fc7d3d6e8453cbd715d192f075155637d8d9",
+          "bytes": 9543,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t3_dependency.py",
+          "sha": "5d15d7b74f21438f16b4f6c19603a4c51b917e23",
+          "bytes": 11626,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t3_reconcile.py",
+          "sha": "40eb694c239c3fb93241e4403a6236181497512e",
+          "bytes": 5221,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t4_timeout.py",
+          "sha": "315195d15a8cb76ac66b7ad5dbedb090960577c4",
+          "bytes": 8369,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t5_kill.py",
+          "sha": "14af67fad82469c2e402b43f726bfc48f2c9e098",
+          "bytes": 10964,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t6.py",
+          "sha": "7ffe105975e2516346c952db03bb949a0c5bb974",
+          "bytes": 3560,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t7.py",
+          "sha": "f88422bd3c15f3e74bc6627ab089d07a8aaa718f",
+          "bytes": 2806,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t8.py",
+          "sha": "fc4f68e0ffb2d8906bef820eb31741ba00f08a88",
+          "bytes": 4700,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t9.py",
+          "sha": "781681d639ff153d79eb6561850ec75f08a9c641",
+          "bytes": 1843,
+          "mode": "100644"
+        },
+        {
+          "path": "continue_test_house.py",
+          "sha": "ecae1ac4b32656374ee284c9ddcd375c00635655",
+          "bytes": 9655,
+          "mode": "100644"
+        },
+        {
+          "path": "controller/__init__.py",
+          "sha": "a35a10e5ec89660ca8b1c87f24c2477c37a803c7",
+          "bytes": 46,
+          "mode": "100644"
+        },
+        {
+          "path": "controller/app.py",
+          "sha": "74565ea70ad651f243d3939725ee39d572667b44",
+          "bytes": 10486,
+          "mode": "100644"
+        },
+        {
+          "path": "controller/client.py",
+          "sha": "6570179a234fc9620fd0be856db9ffc4e81e5d44",
+          "bytes": 5338,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/OPERATING_MODEL.md",
+          "sha": "6405a9eb186ac3b7115d961fd975c72428b6d05b",
+          "bytes": 2937,
+          "mode": "100644"
+        },
+        {
+          "path": "launcher.py",
+          "sha": "41a63fccc4c11ddbfa4f74c399751432c5553450",
+          "bytes": 4890,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/CMakeLists.txt",
+          "sha": "03d91aad5e281ea784d6123fe25c274a87be5652",
+          "bytes": 2446,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/RFIX.win/Safe_BIM_Palette.rc2",
+          "sha": "81fc0d4c2f238ab0e29de8df493d61c5577926c2",
+          "bytes": 37,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/RFIX/Safe_BIM_Palette.grc",
+          "sha": "ed12107bbda537a7c520ac50a919bcc360ddd50b",
+          "bytes": 608,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/RFIX/Safe_BIM_Palette.html",
+          "sha": "59fda1088ee14601cbbe52db4acd110a5c1c31d1",
+          "bytes": 4081,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/Src/APIEnvir.h",
+          "sha": "489b35c60d2a1ce09af67dc0b6a33050a9a9aa7b",
+          "bytes": 207,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/Src/Main.cpp",
+          "sha": "dbfd621f94622cad78b6c17263e55b56282f3ec0",
+          "bytes": 1259,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/Src/SafeBIMPalette.cpp",
+          "sha": "cbd34b0a8740f333bf187b537e7efae5bc21f3a5",
+          "bytes": 2699,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/Src/SafeBIMPalette.hpp",
+          "sha": "bd9adfea2f1cc4758bf0a691bf83f21c591b14e9",
+          "bytes": 951,
+          "mode": "100644"
+        },
+        {
+          "path": "qwen_safe_bim_integration.py",
+          "sha": "837ac4d33b09cdf2a7f61af10aca81453252cfab",
+          "bytes": 5589,
+          "mode": "100644"
+        },
+        {
+          "path": "run_safe_bim_controller.bat",
+          "sha": "9cfad3df3f1ae7443800525504b40c14289c3fda",
+          "bytes": 74,
+          "mode": "100644"
+        },
+        {
+          "path": "safe-bim-v01-schema-test.json",
+          "sha": "79005e34a21e915ef2a72ccddef6ffc47ce174b3",
+          "bytes": 300,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_ipc.py",
+          "sha": "2cc08600b3a78466095d952388019d1d6bdedf8f",
+          "bytes": 7974,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_layer.py",
+          "sha": "47316bf4f02534304be1a41c8fda2b0d0bc55a64",
+          "bytes": 31103,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_lock.py",
+          "sha": "4f3f0376c67652bf250b06afd44aec4c0c190f37",
+          "bytes": 1665,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_operations.py",
+          "sha": "4d8d47f5b5ad5973556a62a8cb12cd12647f625f",
+          "bytes": 7874,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_runtime.py",
+          "sha": "886e1531cc344bbc4f0a0a9111345b01e25ece2e",
+          "bytes": 25936,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_service.py",
+          "sha": "886771a2a37977a686b8a63aeebd88126ebc65db",
+          "bytes": 3120,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_verification.py",
+          "sha": "2de599bbd461fbc1942c3ca3f5aa161db092ea6e",
+          "bytes": 8625,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-1.5.8.json",
+          "sha": "01ca78e051c6efbf92812047aba168a3930dcb5e",
+          "bytes": 660670,
+          "mode": "100644"
+        },
+        {
+          "path": "test_controller.py",
+          "sha": "f0e9a3eb2803f3865a98ba1394a6be3fe8fc0288",
+          "bytes": 3885,
+          "mode": "100644"
+        },
+        {
+          "path": "test_house.py",
+          "sha": "6540c67231f7dc28666f52445398529ca10d7618",
+          "bytes": 8773,
+          "mode": "100644"
+        },
+        {
+          "path": "test_resumable_executor.py",
+          "sha": "b899ccbf662b697e4c4ee48deafa44bccf94ba3f",
+          "bytes": 9243,
+          "mode": "100644"
+        },
+        {
+          "path": "test_safe_bim_layer_regressions.py",
+          "sha": "a92cd7e1ee0f7a0c6888b9531a0d55f48ffe0b38",
+          "bytes": 3128,
+          "mode": "100644"
+        },
+        {
+          "path": "test_story_vertical_context.py",
+          "sha": "7c5acc07bc05e2cd15738222e7f8096616e4ed3a",
+          "bytes": 2096,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/__init__.py",
+          "sha": "194b794ae10deb2c06991d902378fcbf2f87eb80",
+          "bytes": 61,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/crash_worker.py",
+          "sha": "c43d46be330af51faa695efe0f5ff89fa38b1b9a",
+          "bytes": 2046,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/fake_bim.py",
+          "sha": "4b1a0a665f3001bc68e4933efe1eaaa3a1e27834",
+          "bytes": 5433,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/test_controller_safety.py",
+          "sha": "b67cfc1577e9156111879030dc8dc1124f6ebcd1",
+          "bytes": 4832,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/test_crash_windows.py",
+          "sha": "a0ae2bf195ff90da0c569ce48f6c4a0c4f4bf569",
+          "bytes": 4081,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/test_runtime_safety.py",
+          "sha": "129cb33d0711d9989024aa91774759a45518473e",
+          "bytes": 26384,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/test_wall_readback_z.py",
+          "sha": "0e328aa6c4f12dc567cdaddd01bc2dfd6b597f3a",
+          "bytes": 12054,
+          "mode": "100644"
+        }
+      ],
+      "blob_count": 122,
+      "tree_entries": 142,
+      "fetch_status": "PASS"
+    },
+    {
+      "head_sha": "f7d38af825de57fc57660eeddf1186cc5b21ac71",
+      "tree_sha": "f7d38af825de57fc57660eeddf1186cc5b21ac71",
+      "truncated": false,
+      "files": [
+        {
+          "path": ".github/pull_request_template.md",
+          "sha": "1fdbca430b6f7a669074966d6405acd537d6880b",
+          "bytes": 679,
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha": "0e69ae40eae0c168d35c2173c6c0c14b7f304a3b",
+          "bytes": 979,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_AUDIT_BRIEF_20260927.md",
+          "sha": "a262e45261805afa4e03ffd5133e4c2ee6e7a666",
+          "bytes": 3230,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_ARCHITECTURE_AUDIT.md",
+          "sha": "45f80903dd9e77f74564e2af6219fcc45edab7d1",
+          "bytes": 1701,
+          "mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha": "430e99e9c610756fa47da39af5daaa0d7619743d",
+          "bytes": 5301,
+          "mode": "100644"
+        },
+        {
+          "path": "SAFE_BIM_V01_REPORT.md",
+          "sha": "a38ca0bba19bf03dd429dfefb8b2465a4a7c9fe6",
+          "bytes": 1698,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/COORDINATION.md",
+          "sha": "b2077d316fa13acbfa662a16c8e23797ae03fc85",
+          "bytes": 3027,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_ARENA.md",
+          "sha": "14c9b1da309adf2a1d8b6e739efd8a48cf1d0644",
+          "bytes": 5763,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_WORK.md",
+          "sha": "a621651c0cfa2213d9fcdd230810ee84728c4e4d",
+          "bytes": 1447,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/README.md",
+          "sha": "9fa040a96737b39ef0d1866a7a267c0b20a8f8b8",
+          "bytes": 4026,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/docs/T0_RESULTS.md",
+          "sha": "f5ad1ccce1331ec0990011a854d157fa98fa2d05",
+          "bytes": 7686,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/docs/audits/BIMEXEC_audit_v1.md",
+          "sha": "9035b428a4e476f41631a9b2019dceb79749aba0",
+          "bytes": 82944,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/examples/README.md",
+          "sha": "ebe787d00075fccae8b17243900bec3ccdde305b",
+          "bytes": 2022,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/examples/capability_matrix.example.json",
+          "sha": "9d89c5ad1853019657671c0fdd4e11af75785d9c",
+          "bytes": 9571,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/examples/caps.example.json",
+          "sha": "f9b700a458b7bba82bfecf3fc487c492218e5ece",
+          "bytes": 5181,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/README_RUN_WINDOWS.txt",
+          "sha": "ca891f39b939dc7718407187aff705fc60d9dc79",
+          "bytes": 18197,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/SHA256SUMS.txt",
+          "sha": "aa8aa7190d4d474b45248c6e873c550dd310c66c",
+          "bytes": 402,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/T0_PLAN.md",
+          "sha": "6116f7b4d018f685b527176f497a4170b8a3c055",
+          "bytes": 35573,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/TEST_SEQUENCE.md",
+          "sha": "ac5471173200099a0aa8224ccb095d583acb2907",
+          "bytes": 2075,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/backends.py",
+          "sha": "80afaf4d5ba1d096205b33da27feb0de63a56851",
+          "bytes": 38859,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/backends_v13.py",
+          "sha": "8f47f98ae6a90f13c1af533e12c232bbab88a318",
+          "bytes": 7382,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0a.py",
+          "sha": "62189313139166c167cc3dcde9c5e09bf0cb252f",
+          "bytes": 28866,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0a_v13.py",
+          "sha": "6ce41023eb86c6f271fb09927d52ce82bcd89338",
+          "bytes": 1058,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0b.py",
+          "sha": "025397fe8ab9bc6e59aac8f0a6eb526b7bc46ef1",
+          "bytes": 21286,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0b_v13.py",
+          "sha": "3844b09365c5e0b18c6691d3db2a6e0d5761a126",
+          "bytes": 627,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t2_connections_v13.py",
+          "sha": "a8e199659f1eecb343a05957c566dd6a2c0840e4",
+          "bytes": 28786,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t2_live_v13.py",
+          "sha": "1e73a94978377b5f86680dfc1fa6cc6558b19f45",
+          "bytes": 18985,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t3_dependency_v13.py",
+          "sha": "44334d8e8791c647c615ffd25975fbb2f6c2da7e",
+          "bytes": 24896,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t4_timeout_v13.py",
+          "sha": "17979a63e5aa68452e253529f1e7322087d1eb6e",
+          "bytes": 11776,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t5_kill_v13.py",
+          "sha": "389e132f29f302837f835681a1708bbddc9f8032",
+          "bytes": 14765,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t6.py",
+          "sha": "e356422604c7ccd59e9654528e348b9b901fd084",
+          "bytes": 7852,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t7.py",
+          "sha": "3932d72084198b3fa4a6939dbd89d1fb8fb917ab",
+          "bytes": 5544,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t8.py",
+          "sha": "af5daf7aee2737d0d021c8a114dad83762fafd63",
+          "bytes": 5636,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t9.py",
+          "sha": "0602b85fc4be3be07561d5889d373f3cb9165fba",
+          "bytes": 5351,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/reconcile_t3_dependency_v13.py",
+          "sha": "672c6a2837d86e937effe97d852506f4885bda47",
+          "bytes": 8779,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/reconcile_t4_timeout_v13.py",
+          "sha": "672a23be9200a25c25196e9defca6cc5c86db421",
+          "bytes": 8002,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/reconcile_t5_kill_v13.py",
+          "sha": "cb753359ce32a5cc60c9ba52e3e111074c821eca",
+          "bytes": 8654,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/README.md",
+          "sha": "9455c8217f23b189d457fa18c14497b3d75c446e",
+          "bytes": 14158,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/__init__.py",
+          "sha": "a65f7f62bd4756bfe72efd260f0ea039633cedac",
+          "bytes": 217,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/adapters.py",
+          "sha": "acbeff5b89f0c5ca47fe52d5b3846d8c53d0da4c",
+          "bytes": 18407,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/binding.py",
+          "sha": "76e2d34f19ee23ab3c8aa390441411f3559e26e8",
+          "bytes": 5743,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/executor.py",
+          "sha": "176b19efc99eed7d67070c840bf1e314d2d6f1c7",
+          "bytes": 45780,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/journal.py",
+          "sha": "ddf453e2694523cb3e4dbe4fc50156c065636dff",
+          "bytes": 5869,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/lock.py",
+          "sha": "81cf714d11aea3abdbb161f34e4f948ba9a890cf",
+          "bytes": 3864,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/probe.py",
+          "sha": "4d017a64ffec40f01c58d9da5fe8e7909a5bee70",
+          "bytes": 24334,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/states.py",
+          "sha": "8498dc8a18ef38ad0047271073ad229749f290de",
+          "bytes": 8296,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/tapir_raw.py",
+          "sha": "64fb1c4dd7b2605143709880356779b091d47a1e",
+          "bytes": 14720,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/verify.py",
+          "sha": "7c437de35c719d5f3371be461f4cbd1789f244e3",
+          "bytes": 16059,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/tools/run_probe.py",
+          "sha": "f84ed81153ca554072354e608f6b60f8e0b99034",
+          "bytes": 3735,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/README.md",
+          "sha": "d4287790939f579d20dc55ec736d1b5ef7763ca1",
+          "bytes": 1495,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/T0_RUN_2026-09-26.md",
+          "sha": "7f7c2e216f937539a06b432d518080f091dd82ba",
+          "bytes": 4428,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/TEMPLATE_T0A_RUN.md",
+          "sha": "1ec9b8593cae25f182ad8e44628de71f53e41815",
+          "bytes": 2116,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t2_connections_visual_v13.json",
+          "sha": "378b0171a5ac4aae98c58d017f3b14d615f34b66",
+          "bytes": 864,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t3_dependency_visual_v13.json",
+          "sha": "ff6b009b6327c06d430ea279477079364fe4ec76",
+          "bytes": 1312,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t4_timeout_human_decision_v13.json",
+          "sha": "df103823aae1637723edf13e1352cbeea0eec70d",
+          "bytes": 1074,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t5_process_kill_human_decision_v13.json",
+          "sha": "6e5e89eacb9e584c10f6a39ad3834674ac87f81c",
+          "bytes": 798,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t6_model_drift_live_v13.json",
+          "sha": "55b7757c66f8f96aee9a1541e7a3bbb22ce6525b",
+          "bytes": 988,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/capability_matrix_v13_2.json",
+          "sha": "130c50e9893dc824f60f9afc70faed7475714075",
+          "bytes": 18732,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/t0b_receipt_live_v13.json",
+          "sha": "c5cfca8199d2ac272c70102ed2221205783b9641",
+          "bytes": 2829,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/t0b_report_live_v13.json",
+          "sha": "da4a37f0e876cec410804fc74b091156fef2b5f5",
+          "bytes": 939,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/specs/BIMEXEC_P0.md",
+          "sha": "40c56a2e26bd8732cd1daaac702dc5ca3c155800",
+          "bytes": 51858,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/specs/capability_matrix.schema.json",
+          "sha": "5b390e16f454c9d69f70a46398b3dc0ece0f2bda",
+          "bytes": 6580,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/README.md",
+          "sha": "abad7439791c843133707d2f1d34cbf3e8d1a5c3",
+          "bytes": 2606,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend.py",
+          "sha": "aabfe5e37397edeef63b7c9ec21bfef4eda91c90",
+          "bytes": 3605,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend_bad_guid.py",
+          "sha": "2467073160b68ba5449db46bbbcd597ea691257d",
+          "bytes": 782,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend_leftover.py",
+          "sha": "a5fdc37dc5922d5193882db3e4ab38e59e96b124",
+          "bytes": 409,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend_silentnoop.py",
+          "sha": "0e396952b55759d1447a82639b772f7aad4c51d9",
+          "bytes": 450,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_no_custom_prop.py",
+          "sha": "dce60eb146d6e677e12bad9ceb2548dc0869fd53",
+          "bytes": 817,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_no_custom_prop_silent.py",
+          "sha": "8d2b0f5e9e176930e0e18b7a9de2316b10daaa67",
+          "bytes": 1095,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_tapir_shape.py",
+          "sha": "e9f3b457414d2c7d91e233905d1f76ea12261582",
+          "bytes": 4111,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/selftest_probes.py",
+          "sha": "e0954ebbdc355bd6de30aa4f1e13eb13f7e43398",
+          "bytes": 22053,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_all.py",
+          "sha": "f536de855ab340e9573ab4b2e5a929171007e14f",
+          "bytes": 1168,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_p0.py",
+          "sha": "da558d1fe8f881b990f9d107a2e439435f361ac0",
+          "bytes": 23200,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_probe.py",
+          "sha": "e58f56f414ab201659d31d63b0f97594b72ec35c",
+          "bytes": 10955,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_probe_v13.py",
+          "sha": "9f02f0be4438ab352ca948f044db9159b2606ca1",
+          "bytes": 4721,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t2_connections.py",
+          "sha": "2a8d40721bf0a275ead4e1fed73d9741145eec27",
+          "bytes": 11059,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t2_probe.py",
+          "sha": "38f6fc7d3d6e8453cbd715d192f075155637d8d9",
+          "bytes": 9543,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t3_dependency.py",
+          "sha": "5d15d7b74f21438f16b4f6c19603a4c51b917e23",
+          "bytes": 11626,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t3_reconcile.py",
+          "sha": "40eb694c239c3fb93241e4403a6236181497512e",
+          "bytes": 5221,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t4_timeout.py",
+          "sha": "315195d15a8cb76ac66b7ad5dbedb090960577c4",
+          "bytes": 8369,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t5_kill.py",
+          "sha": "14af67fad82469c2e402b43f726bfc48f2c9e098",
+          "bytes": 10964,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t6.py",
+          "sha": "7ffe105975e2516346c952db03bb949a0c5bb974",
+          "bytes": 3560,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t7.py",
+          "sha": "f88422bd3c15f3e74bc6627ab089d07a8aaa718f",
+          "bytes": 2806,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t8.py",
+          "sha": "fc4f68e0ffb2d8906bef820eb31741ba00f08a88",
+          "bytes": 4700,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t9.py",
+          "sha": "781681d639ff153d79eb6561850ec75f08a9c641",
+          "bytes": 1843,
+          "mode": "100644"
+        },
+        {
+          "path": "continue_test_house.py",
+          "sha": "ecae1ac4b32656374ee284c9ddcd375c00635655",
+          "bytes": 9655,
+          "mode": "100644"
+        },
+        {
+          "path": "controller/__init__.py",
+          "sha": "a35a10e5ec89660ca8b1c87f24c2477c37a803c7",
+          "bytes": 46,
+          "mode": "100644"
+        },
+        {
+          "path": "controller/app.py",
+          "sha": "74565ea70ad651f243d3939725ee39d572667b44",
+          "bytes": 10486,
+          "mode": "100644"
+        },
+        {
+          "path": "controller/client.py",
+          "sha": "6570179a234fc9620fd0be856db9ffc4e81e5d44",
+          "bytes": 5338,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/OPERATING_MODEL.md",
+          "sha": "6405a9eb186ac3b7115d961fd975c72428b6d05b",
+          "bytes": 2937,
+          "mode": "100644"
+        },
+        {
+          "path": "launcher.py",
+          "sha": "41a63fccc4c11ddbfa4f74c399751432c5553450",
+          "bytes": 4890,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/CMakeLists.txt",
+          "sha": "03d91aad5e281ea784d6123fe25c274a87be5652",
+          "bytes": 2446,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/RFIX.win/Safe_BIM_Palette.rc2",
+          "sha": "81fc0d4c2f238ab0e29de8df493d61c5577926c2",
+          "bytes": 37,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/RFIX/Safe_BIM_Palette.grc",
+          "sha": "ed12107bbda537a7c520ac50a919bcc360ddd50b",
+          "bytes": 608,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/RFIX/Safe_BIM_Palette.html",
+          "sha": "59fda1088ee14601cbbe52db4acd110a5c1c31d1",
+          "bytes": 4081,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/Src/APIEnvir.h",
+          "sha": "489b35c60d2a1ce09af67dc0b6a33050a9a9aa7b",
+          "bytes": 207,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/Src/Main.cpp",
+          "sha": "dbfd621f94622cad78b6c17263e55b56282f3ec0",
+          "bytes": 1259,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/Src/SafeBIMPalette.cpp",
+          "sha": "cbd34b0a8740f333bf187b537e7efae5bc21f3a5",
+          "bytes": 2699,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/Src/SafeBIMPalette.hpp",
+          "sha": "bd9adfea2f1cc4758bf0a691bf83f21c591b14e9",
+          "bytes": 951,
+          "mode": "100644"
+        },
+        {
+          "path": "qwen_safe_bim_integration.py",
+          "sha": "837ac4d33b09cdf2a7f61af10aca81453252cfab",
+          "bytes": 5589,
+          "mode": "100644"
+        },
+        {
+          "path": "run_safe_bim_controller.bat",
+          "sha": "9cfad3df3f1ae7443800525504b40c14289c3fda",
+          "bytes": 74,
+          "mode": "100644"
+        },
+        {
+          "path": "safe-bim-v01-schema-test.json",
+          "sha": "79005e34a21e915ef2a72ccddef6ffc47ce174b3",
+          "bytes": 300,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_house_primitives.py",
+          "sha": "457399a4f87b8f81a06557412d055080574c60d1",
+          "bytes": 24639,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_ipc.py",
+          "sha": "2cc08600b3a78466095d952388019d1d6bdedf8f",
+          "bytes": 7974,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_layer.py",
+          "sha": "47316bf4f02534304be1a41c8fda2b0d0bc55a64",
+          "bytes": 31103,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_lock.py",
+          "sha": "4f3f0376c67652bf250b06afd44aec4c0c190f37",
+          "bytes": 1665,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_operations.py",
+          "sha": "4d8d47f5b5ad5973556a62a8cb12cd12647f625f",
+          "bytes": 7874,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_runtime.py",
+          "sha": "886e1531cc344bbc4f0a0a9111345b01e25ece2e",
+          "bytes": 25936,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_service.py",
+          "sha": "886771a2a37977a686b8a63aeebd88126ebc65db",
+          "bytes": 3120,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_verification.py",
+          "sha": "2de599bbd461fbc1942c3ca3f5aa161db092ea6e",
+          "bytes": 8625,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-1.5.8.json",
+          "sha": "01ca78e051c6efbf92812047aba168a3930dcb5e",
+          "bytes": 660670,
+          "mode": "100644"
+        },
+        {
+          "path": "test_controller.py",
+          "sha": "f0e9a3eb2803f3865a98ba1394a6be3fe8fc0288",
+          "bytes": 3885,
+          "mode": "100644"
+        },
+        {
+          "path": "test_house.py",
+          "sha": "6540c67231f7dc28666f52445398529ca10d7618",
+          "bytes": 8773,
+          "mode": "100644"
+        },
+        {
+          "path": "test_resumable_executor.py",
+          "sha": "b899ccbf662b697e4c4ee48deafa44bccf94ba3f",
+          "bytes": 9243,
+          "mode": "100644"
+        },
+        {
+          "path": "test_safe_bim_layer_regressions.py",
+          "sha": "a92cd7e1ee0f7a0c6888b9531a0d55f48ffe0b38",
+          "bytes": 3128,
+          "mode": "100644"
+        },
+        {
+          "path": "test_story_vertical_context.py",
+          "sha": "7c5acc07bc05e2cd15738222e7f8096616e4ed3a",
+          "bytes": 2096,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_house_primitives/__init__.py",
+          "sha": "dd65f4e22eac4904617bc3db07b56cf0b755261f",
+          "bytes": 61,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_house_primitives/test_house_primitives.py",
+          "sha": "4184d7846cb355fc6fcdfa5a5b2c1fc0f6afd20e",
+          "bytes": 11752,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/__init__.py",
+          "sha": "194b794ae10deb2c06991d902378fcbf2f87eb80",
+          "bytes": 61,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/crash_worker.py",
+          "sha": "c43d46be330af51faa695efe0f5ff89fa38b1b9a",
+          "bytes": 2046,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/fake_bim.py",
+          "sha": "4b1a0a665f3001bc68e4933efe1eaaa3a1e27834",
+          "bytes": 5433,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/test_controller_safety.py",
+          "sha": "b67cfc1577e9156111879030dc8dc1124f6ebcd1",
+          "bytes": 4832,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/test_crash_windows.py",
+          "sha": "a0ae2bf195ff90da0c569ce48f6c4a0c4f4bf569",
+          "bytes": 4081,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/test_runtime_safety.py",
+          "sha": "129cb33d0711d9989024aa91774759a45518473e",
+          "bytes": 26384,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/test_wall_readback_z.py",
+          "sha": "0e328aa6c4f12dc567cdaddd01bc2dfd6b597f3a",
+          "bytes": 12054,
+          "mode": "100644"
+        }
+      ],
+      "blob_count": 125,
+      "tree_entries": 146,
+      "fetch_status": "PASS"
+    },
+    {
+      "head_sha": "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+      "tree_sha": "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+      "truncated": false,
+      "files": [
+        {
+          "path": ".github/pull_request_template.md",
+          "sha": "1fdbca430b6f7a669074966d6405acd537d6880b",
+          "bytes": 679,
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha": "7b1eddd51c6cd0eb5704400c5aba73332d86d2e9",
+          "bytes": 783,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_AUDIT_BRIEF_20260927.md",
+          "sha": "a262e45261805afa4e03ffd5133e4c2ee6e7a666",
+          "bytes": 3230,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_ARCHITECTURE_AUDIT.md",
+          "sha": "45f80903dd9e77f74564e2af6219fcc45edab7d1",
+          "bytes": 1701,
+          "mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha": "430e99e9c610756fa47da39af5daaa0d7619743d",
+          "bytes": 5301,
+          "mode": "100644"
+        },
+        {
+          "path": "SAFE_BIM_V01_REPORT.md",
+          "sha": "a38ca0bba19bf03dd429dfefb8b2465a4a7c9fe6",
+          "bytes": 1698,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/COORDINATION.md",
+          "sha": "b2077d316fa13acbfa662a16c8e23797ae03fc85",
+          "bytes": 3027,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_ARENA.md",
+          "sha": "14c9b1da309adf2a1d8b6e739efd8a48cf1d0644",
+          "bytes": 5763,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_WORK.md",
+          "sha": "a621651c0cfa2213d9fcdd230810ee84728c4e4d",
+          "bytes": 1447,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/README.md",
+          "sha": "9fa040a96737b39ef0d1866a7a267c0b20a8f8b8",
+          "bytes": 4026,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/docs/T0_RESULTS.md",
+          "sha": "f5ad1ccce1331ec0990011a854d157fa98fa2d05",
+          "bytes": 7686,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/docs/audits/BIMEXEC_audit_v1.md",
+          "sha": "9035b428a4e476f41631a9b2019dceb79749aba0",
+          "bytes": 82944,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/examples/README.md",
+          "sha": "ebe787d00075fccae8b17243900bec3ccdde305b",
+          "bytes": 2022,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/examples/capability_matrix.example.json",
+          "sha": "9d89c5ad1853019657671c0fdd4e11af75785d9c",
+          "bytes": 9571,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/examples/caps.example.json",
+          "sha": "f9b700a458b7bba82bfecf3fc487c492218e5ece",
+          "bytes": 5181,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/README_RUN_WINDOWS.txt",
+          "sha": "ca891f39b939dc7718407187aff705fc60d9dc79",
+          "bytes": 18197,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/SHA256SUMS.txt",
+          "sha": "aa8aa7190d4d474b45248c6e873c550dd310c66c",
+          "bytes": 402,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/T0_PLAN.md",
+          "sha": "6116f7b4d018f685b527176f497a4170b8a3c055",
+          "bytes": 35573,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/TEST_SEQUENCE.md",
+          "sha": "ac5471173200099a0aa8224ccb095d583acb2907",
+          "bytes": 2075,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/backends.py",
+          "sha": "80afaf4d5ba1d096205b33da27feb0de63a56851",
+          "bytes": 38859,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/backends_v13.py",
+          "sha": "8f47f98ae6a90f13c1af533e12c232bbab88a318",
+          "bytes": 7382,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0a.py",
+          "sha": "62189313139166c167cc3dcde9c5e09bf0cb252f",
+          "bytes": 28866,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0a_v13.py",
+          "sha": "6ce41023eb86c6f271fb09927d52ce82bcd89338",
+          "bytes": 1058,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0b.py",
+          "sha": "025397fe8ab9bc6e59aac8f0a6eb526b7bc46ef1",
+          "bytes": 21286,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0b_v13.py",
+          "sha": "3844b09365c5e0b18c6691d3db2a6e0d5761a126",
+          "bytes": 627,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t2_connections_v13.py",
+          "sha": "a8e199659f1eecb343a05957c566dd6a2c0840e4",
+          "bytes": 28786,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t2_live_v13.py",
+          "sha": "1e73a94978377b5f86680dfc1fa6cc6558b19f45",
+          "bytes": 18985,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t3_dependency_v13.py",
+          "sha": "44334d8e8791c647c615ffd25975fbb2f6c2da7e",
+          "bytes": 24896,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t4_timeout_v13.py",
+          "sha": "17979a63e5aa68452e253529f1e7322087d1eb6e",
+          "bytes": 11776,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t5_kill_v13.py",
+          "sha": "389e132f29f302837f835681a1708bbddc9f8032",
+          "bytes": 14765,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t6.py",
+          "sha": "e356422604c7ccd59e9654528e348b9b901fd084",
+          "bytes": 7852,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t7.py",
+          "sha": "3932d72084198b3fa4a6939dbd89d1fb8fb917ab",
+          "bytes": 5544,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t8.py",
+          "sha": "af5daf7aee2737d0d021c8a114dad83762fafd63",
+          "bytes": 5636,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t9.py",
+          "sha": "0602b85fc4be3be07561d5889d373f3cb9165fba",
+          "bytes": 5351,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/reconcile_t3_dependency_v13.py",
+          "sha": "672c6a2837d86e937effe97d852506f4885bda47",
+          "bytes": 8779,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/reconcile_t4_timeout_v13.py",
+          "sha": "672a23be9200a25c25196e9defca6cc5c86db421",
+          "bytes": 8002,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/reconcile_t5_kill_v13.py",
+          "sha": "cb753359ce32a5cc60c9ba52e3e111074c821eca",
+          "bytes": 8654,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/README.md",
+          "sha": "9455c8217f23b189d457fa18c14497b3d75c446e",
+          "bytes": 14158,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/__init__.py",
+          "sha": "a65f7f62bd4756bfe72efd260f0ea039633cedac",
+          "bytes": 217,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/adapters.py",
+          "sha": "acbeff5b89f0c5ca47fe52d5b3846d8c53d0da4c",
+          "bytes": 18407,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/binding.py",
+          "sha": "76e2d34f19ee23ab3c8aa390441411f3559e26e8",
+          "bytes": 5743,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/executor.py",
+          "sha": "176b19efc99eed7d67070c840bf1e314d2d6f1c7",
+          "bytes": 45780,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/journal.py",
+          "sha": "ddf453e2694523cb3e4dbe4fc50156c065636dff",
+          "bytes": 5869,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/lock.py",
+          "sha": "81cf714d11aea3abdbb161f34e4f948ba9a890cf",
+          "bytes": 3864,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/probe.py",
+          "sha": "4d017a64ffec40f01c58d9da5fe8e7909a5bee70",
+          "bytes": 24334,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/states.py",
+          "sha": "8498dc8a18ef38ad0047271073ad229749f290de",
+          "bytes": 8296,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/tapir_raw.py",
+          "sha": "64fb1c4dd7b2605143709880356779b091d47a1e",
+          "bytes": 14720,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/verify.py",
+          "sha": "7c437de35c719d5f3371be461f4cbd1789f244e3",
+          "bytes": 16059,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/tools/run_probe.py",
+          "sha": "f84ed81153ca554072354e608f6b60f8e0b99034",
+          "bytes": 3735,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/README.md",
+          "sha": "d4287790939f579d20dc55ec736d1b5ef7763ca1",
+          "bytes": 1495,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/T0_RUN_2026-09-26.md",
+          "sha": "7f7c2e216f937539a06b432d518080f091dd82ba",
+          "bytes": 4428,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/TEMPLATE_T0A_RUN.md",
+          "sha": "1ec9b8593cae25f182ad8e44628de71f53e41815",
+          "bytes": 2116,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t2_connections_visual_v13.json",
+          "sha": "378b0171a5ac4aae98c58d017f3b14d615f34b66",
+          "bytes": 864,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t3_dependency_visual_v13.json",
+          "sha": "ff6b009b6327c06d430ea279477079364fe4ec76",
+          "bytes": 1312,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t4_timeout_human_decision_v13.json",
+          "sha": "df103823aae1637723edf13e1352cbeea0eec70d",
+          "bytes": 1074,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t5_process_kill_human_decision_v13.json",
+          "sha": "6e5e89eacb9e584c10f6a39ad3834674ac87f81c",
+          "bytes": 798,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t6_model_drift_live_v13.json",
+          "sha": "55b7757c66f8f96aee9a1541e7a3bbb22ce6525b",
+          "bytes": 988,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/capability_matrix_v13_2.json",
+          "sha": "130c50e9893dc824f60f9afc70faed7475714075",
+          "bytes": 18732,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/t0b_receipt_live_v13.json",
+          "sha": "c5cfca8199d2ac272c70102ed2221205783b9641",
+          "bytes": 2829,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/t0b_report_live_v13.json",
+          "sha": "da4a37f0e876cec410804fc74b091156fef2b5f5",
+          "bytes": 939,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/specs/BIMEXEC_P0.md",
+          "sha": "40c56a2e26bd8732cd1daaac702dc5ca3c155800",
+          "bytes": 51858,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/specs/capability_matrix.schema.json",
+          "sha": "5b390e16f454c9d69f70a46398b3dc0ece0f2bda",
+          "bytes": 6580,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/README.md",
+          "sha": "abad7439791c843133707d2f1d34cbf3e8d1a5c3",
+          "bytes": 2606,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend.py",
+          "sha": "aabfe5e37397edeef63b7c9ec21bfef4eda91c90",
+          "bytes": 3605,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend_bad_guid.py",
+          "sha": "2467073160b68ba5449db46bbbcd597ea691257d",
+          "bytes": 782,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend_leftover.py",
+          "sha": "a5fdc37dc5922d5193882db3e4ab38e59e96b124",
+          "bytes": 409,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend_silentnoop.py",
+          "sha": "0e396952b55759d1447a82639b772f7aad4c51d9",
+          "bytes": 450,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_no_custom_prop.py",
+          "sha": "dce60eb146d6e677e12bad9ceb2548dc0869fd53",
+          "bytes": 817,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_no_custom_prop_silent.py",
+          "sha": "8d2b0f5e9e176930e0e18b7a9de2316b10daaa67",
+          "bytes": 1095,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_tapir_shape.py",
+          "sha": "e9f3b457414d2c7d91e233905d1f76ea12261582",
+          "bytes": 4111,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/selftest_probes.py",
+          "sha": "e0954ebbdc355bd6de30aa4f1e13eb13f7e43398",
+          "bytes": 22053,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_all.py",
+          "sha": "f536de855ab340e9573ab4b2e5a929171007e14f",
+          "bytes": 1168,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_p0.py",
+          "sha": "da558d1fe8f881b990f9d107a2e439435f361ac0",
+          "bytes": 23200,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_probe.py",
+          "sha": "e58f56f414ab201659d31d63b0f97594b72ec35c",
+          "bytes": 10955,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_probe_v13.py",
+          "sha": "9f02f0be4438ab352ca948f044db9159b2606ca1",
+          "bytes": 4721,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t2_connections.py",
+          "sha": "2a8d40721bf0a275ead4e1fed73d9741145eec27",
+          "bytes": 11059,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t2_probe.py",
+          "sha": "38f6fc7d3d6e8453cbd715d192f075155637d8d9",
+          "bytes": 9543,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t3_dependency.py",
+          "sha": "5d15d7b74f21438f16b4f6c19603a4c51b917e23",
+          "bytes": 11626,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t3_reconcile.py",
+          "sha": "40eb694c239c3fb93241e4403a6236181497512e",
+          "bytes": 5221,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t4_timeout.py",
+          "sha": "315195d15a8cb76ac66b7ad5dbedb090960577c4",
+          "bytes": 8369,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t5_kill.py",
+          "sha": "14af67fad82469c2e402b43f726bfc48f2c9e098",
+          "bytes": 10964,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t6.py",
+          "sha": "7ffe105975e2516346c952db03bb949a0c5bb974",
+          "bytes": 3560,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t7.py",
+          "sha": "f88422bd3c15f3e74bc6627ab089d07a8aaa718f",
+          "bytes": 2806,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t8.py",
+          "sha": "fc4f68e0ffb2d8906bef820eb31741ba00f08a88",
+          "bytes": 4700,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t9.py",
+          "sha": "781681d639ff153d79eb6561850ec75f08a9c641",
+          "bytes": 1843,
+          "mode": "100644"
+        },
+        {
+          "path": "continue_test_house.py",
+          "sha": "ecae1ac4b32656374ee284c9ddcd375c00635655",
+          "bytes": 9655,
+          "mode": "100644"
+        },
+        {
+          "path": "controller/__init__.py",
+          "sha": "a35a10e5ec89660ca8b1c87f24c2477c37a803c7",
+          "bytes": 46,
+          "mode": "100644"
+        },
+        {
+          "path": "controller/app.py",
+          "sha": "ec49447ae039edfbc6c3ca20c170b731265ccab4",
+          "bytes": 7924,
+          "mode": "100644"
+        },
+        {
+          "path": "controller/client.py",
+          "sha": "c4948d2f9ad75a0e80cc750d4afc0df31858ac68",
+          "bytes": 2798,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/OPERATING_MODEL.md",
+          "sha": "6405a9eb186ac3b7115d961fd975c72428b6d05b",
+          "bytes": 2937,
+          "mode": "100644"
+        },
+        {
+          "path": "launcher.py",
+          "sha": "192f6e98418e4e96427d00fec061fa24c7578aa5",
+          "bytes": 4500,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/CMakeLists.txt",
+          "sha": "03d91aad5e281ea784d6123fe25c274a87be5652",
+          "bytes": 2446,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/RFIX.win/Safe_BIM_Palette.rc2",
+          "sha": "81fc0d4c2f238ab0e29de8df493d61c5577926c2",
+          "bytes": 37,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/RFIX/Safe_BIM_Palette.grc",
+          "sha": "ed12107bbda537a7c520ac50a919bcc360ddd50b",
+          "bytes": 608,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/RFIX/Safe_BIM_Palette.html",
+          "sha": "db9c4ab66a3e629daefeffd1aff53d2f9263d101",
+          "bytes": 2997,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/Src/APIEnvir.h",
+          "sha": "489b35c60d2a1ce09af67dc0b6a33050a9a9aa7b",
+          "bytes": 207,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/Src/Main.cpp",
+          "sha": "dbfd621f94622cad78b6c17263e55b56282f3ec0",
+          "bytes": 1259,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/Src/SafeBIMPalette.cpp",
+          "sha": "cbd34b0a8740f333bf187b537e7efae5bc21f3a5",
+          "bytes": 2699,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/Src/SafeBIMPalette.hpp",
+          "sha": "bd9adfea2f1cc4758bf0a691bf83f21c591b14e9",
+          "bytes": 951,
+          "mode": "100644"
+        },
+        {
+          "path": "qwen_safe_bim_integration.py",
+          "sha": "837ac4d33b09cdf2a7f61af10aca81453252cfab",
+          "bytes": 5589,
+          "mode": "100644"
+        },
+        {
+          "path": "run_safe_bim_controller.bat",
+          "sha": "9cfad3df3f1ae7443800525504b40c14289c3fda",
+          "bytes": 74,
+          "mode": "100644"
+        },
+        {
+          "path": "safe-bim-v01-schema-test.json",
+          "sha": "79005e34a21e915ef2a72ccddef6ffc47ce174b3",
+          "bytes": 300,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_ipc.py",
+          "sha": "e977d4ac8c5c1d4cfe30c50d5f4076130d38bbe5",
+          "bytes": 3074,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_layer.py",
+          "sha": "ff93e3d18f08c10bd67e75d6c69f5c48961dae66",
+          "bytes": 29190,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_operations.py",
+          "sha": "7979386f0db9fd88bc3596153921631c3c1529ce",
+          "bytes": 4630,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_runtime.py",
+          "sha": "30723e5fbf1688f880913f497c39d1790d7f300a",
+          "bytes": 18568,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_service.py",
+          "sha": "e4328bf8b4a6a6c0eb77d06e9d671173809a290e",
+          "bytes": 2242,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-1.5.8.json",
+          "sha": "01ca78e051c6efbf92812047aba168a3930dcb5e",
+          "bytes": 660670,
+          "mode": "100644"
+        },
+        {
+          "path": "test_controller.py",
+          "sha": "6401fcb34a11effe69aa49a68c2e720214c46b1d",
+          "bytes": 3841,
+          "mode": "100644"
+        },
+        {
+          "path": "test_house.py",
+          "sha": "6540c67231f7dc28666f52445398529ca10d7618",
+          "bytes": 8773,
+          "mode": "100644"
+        },
+        {
+          "path": "test_resumable_executor.py",
+          "sha": "c4c07b7c63ca54790881049951fa9b7a96d641f0",
+          "bytes": 8874,
+          "mode": "100644"
+        },
+        {
+          "path": "test_safe_bim_layer_regressions.py",
+          "sha": "bcd343462214ec3c09fdb5b70a6fcd98a72a6e3c",
+          "bytes": 4625,
+          "mode": "100644"
+        },
+        {
+          "path": "test_story_vertical_context.py",
+          "sha": "7c5acc07bc05e2cd15738222e7f8096616e4ed3a",
+          "bytes": 2096,
+          "mode": "100644"
+        }
+      ],
+      "blob_count": 113,
+      "tree_entries": 132,
+      "fetch_status": "PASS"
+    },
+    {
+      "head_sha": "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+      "tree_sha": "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+      "truncated": false,
+      "files": [
+        {
+          "path": ".github/pull_request_template.md",
+          "sha": "1fdbca430b6f7a669074966d6405acd537d6880b",
+          "bytes": 679,
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha": "3068944546f0f7166cf7d3f68252c5750bab1e92",
+          "bytes": 701,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_ARCHITECTURE_AUDIT.md",
+          "sha": "45f80903dd9e77f74564e2af6219fcc45edab7d1",
+          "bytes": 1701,
+          "mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha": "d6e3c9eb1aaa81a0a1b369cf4d94d56f8fc31291",
+          "bytes": 1891,
+          "mode": "100644"
+        },
+        {
+          "path": "SAFE_BIM_V01_REPORT.md",
+          "sha": "a38ca0bba19bf03dd429dfefb8b2465a4a7c9fe6",
+          "bytes": 1698,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/COORDINATION.md",
+          "sha": "b2077d316fa13acbfa662a16c8e23797ae03fc85",
+          "bytes": 3027,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_ARENA.md",
+          "sha": "14c9b1da309adf2a1d8b6e739efd8a48cf1d0644",
+          "bytes": 5763,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_WORK.md",
+          "sha": "a621651c0cfa2213d9fcdd230810ee84728c4e4d",
+          "bytes": 1447,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/README.md",
+          "sha": "9fa040a96737b39ef0d1866a7a267c0b20a8f8b8",
+          "bytes": 4026,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/docs/H1_ADAPTER_PARITY.md",
+          "sha": "7ea947365282826b44f28a02a41aa41dd4a851fc",
+          "bytes": 10886,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/docs/T0_RESULTS.md",
+          "sha": "f5ad1ccce1331ec0990011a854d157fa98fa2d05",
+          "bytes": 7686,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/docs/audits/BIMEXEC_audit_v1.md",
+          "sha": "9035b428a4e476f41631a9b2019dceb79749aba0",
+          "bytes": 82944,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/examples/README.md",
+          "sha": "ebe787d00075fccae8b17243900bec3ccdde305b",
+          "bytes": 2022,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/examples/capability_matrix.example.json",
+          "sha": "9d89c5ad1853019657671c0fdd4e11af75785d9c",
+          "bytes": 9571,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/examples/caps.example.json",
+          "sha": "f9b700a458b7bba82bfecf3fc487c492218e5ece",
+          "bytes": 5181,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/README_RUN_WINDOWS.txt",
+          "sha": "ca891f39b939dc7718407187aff705fc60d9dc79",
+          "bytes": 18197,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/SHA256SUMS.txt",
+          "sha": "aa8aa7190d4d474b45248c6e873c550dd310c66c",
+          "bytes": 402,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/T0_PLAN.md",
+          "sha": "6116f7b4d018f685b527176f497a4170b8a3c055",
+          "bytes": 35573,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/TEST_SEQUENCE.md",
+          "sha": "ac5471173200099a0aa8224ccb095d583acb2907",
+          "bytes": 2075,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/ac29_contract.py",
+          "sha": "b7ad7319b0b8a71a112618b624b36c811dd13317",
+          "bytes": 9072,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/backends.py",
+          "sha": "80afaf4d5ba1d096205b33da27feb0de63a56851",
+          "bytes": 38859,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/backends_v13.py",
+          "sha": "082a8b6dc119f4e868923ef286f5fc04c0e97f52",
+          "bytes": 9670,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0a.py",
+          "sha": "62189313139166c167cc3dcde9c5e09bf0cb252f",
+          "bytes": 28866,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0a_v13.py",
+          "sha": "6ce41023eb86c6f271fb09927d52ce82bcd89338",
+          "bytes": 1058,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0b.py",
+          "sha": "025397fe8ab9bc6e59aac8f0a6eb526b7bc46ef1",
+          "bytes": 21286,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0b_v13.py",
+          "sha": "3844b09365c5e0b18c6691d3db2a6e0d5761a126",
+          "bytes": 627,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t2_connections_v13.py",
+          "sha": "1ff6f61c68a7326d61879f260a7a157bc424d252",
+          "bytes": 27067,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t2_live_v13.py",
+          "sha": "5f23251f8d15b8fd4698011bf38feb8b6ec544ae",
+          "bytes": 18354,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t3_dependency_v13.py",
+          "sha": "44334d8e8791c647c615ffd25975fbb2f6c2da7e",
+          "bytes": 24896,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t4_timeout_v13.py",
+          "sha": "17979a63e5aa68452e253529f1e7322087d1eb6e",
+          "bytes": 11776,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t5_kill_v13.py",
+          "sha": "389e132f29f302837f835681a1708bbddc9f8032",
+          "bytes": 14765,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t6.py",
+          "sha": "e356422604c7ccd59e9654528e348b9b901fd084",
+          "bytes": 7852,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t7.py",
+          "sha": "3932d72084198b3fa4a6939dbd89d1fb8fb917ab",
+          "bytes": 5544,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t8.py",
+          "sha": "af5daf7aee2737d0d021c8a114dad83762fafd63",
+          "bytes": 5636,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t9.py",
+          "sha": "0602b85fc4be3be07561d5889d373f3cb9165fba",
+          "bytes": 5351,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/reconcile_t3_dependency_v13.py",
+          "sha": "672c6a2837d86e937effe97d852506f4885bda47",
+          "bytes": 8779,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/reconcile_t4_timeout_v13.py",
+          "sha": "672a23be9200a25c25196e9defca6cc5c86db421",
+          "bytes": 8002,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/reconcile_t5_kill_v13.py",
+          "sha": "cb753359ce32a5cc60c9ba52e3e111074c821eca",
+          "bytes": 8654,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/README.md",
+          "sha": "2bbcfd6d3b15d5032f6c54f7b2337e1cc084f727",
+          "bytes": 14822,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/__init__.py",
+          "sha": "a65f7f62bd4756bfe72efd260f0ea039633cedac",
+          "bytes": 217,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/adapters.py",
+          "sha": "f8e097ef0db7be56954ae93b9da370e7a582e779",
+          "bytes": 18423,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/binding.py",
+          "sha": "76e2d34f19ee23ab3c8aa390441411f3559e26e8",
+          "bytes": 5743,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/executor.py",
+          "sha": "176b19efc99eed7d67070c840bf1e314d2d6f1c7",
+          "bytes": 45780,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/journal.py",
+          "sha": "ddf453e2694523cb3e4dbe4fc50156c065636dff",
+          "bytes": 5869,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/lock.py",
+          "sha": "81cf714d11aea3abdbb161f34e4f948ba9a890cf",
+          "bytes": 3864,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/probe.py",
+          "sha": "4d017a64ffec40f01c58d9da5fe8e7909a5bee70",
+          "bytes": 24334,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/states.py",
+          "sha": "8498dc8a18ef38ad0047271073ad229749f290de",
+          "bytes": 8296,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/tapir_raw.py",
+          "sha": "b556ce314e7492cf5eb5c884d48339f4a5b0dee2",
+          "bytes": 8206,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/verify.py",
+          "sha": "7c437de35c719d5f3371be461f4cbd1789f244e3",
+          "bytes": 16059,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/tools/run_probe.py",
+          "sha": "f84ed81153ca554072354e608f6b60f8e0b99034",
+          "bytes": 3735,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/README.md",
+          "sha": "d4287790939f579d20dc55ec736d1b5ef7763ca1",
+          "bytes": 1495,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/T0_RUN_2026-09-26.md",
+          "sha": "7f7c2e216f937539a06b432d518080f091dd82ba",
+          "bytes": 4428,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/TEMPLATE_T0A_RUN.md",
+          "sha": "1ec9b8593cae25f182ad8e44628de71f53e41815",
+          "bytes": 2116,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t2_connections_visual_v13.json",
+          "sha": "378b0171a5ac4aae98c58d017f3b14d615f34b66",
+          "bytes": 864,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t3_dependency_visual_v13.json",
+          "sha": "ff6b009b6327c06d430ea279477079364fe4ec76",
+          "bytes": 1312,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t4_timeout_human_decision_v13.json",
+          "sha": "df103823aae1637723edf13e1352cbeea0eec70d",
+          "bytes": 1074,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t5_process_kill_human_decision_v13.json",
+          "sha": "6e5e89eacb9e584c10f6a39ad3834674ac87f81c",
+          "bytes": 798,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t6_model_drift_live_v13.json",
+          "sha": "55b7757c66f8f96aee9a1541e7a3bbb22ce6525b",
+          "bytes": 988,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/capability_matrix_v13_2.json",
+          "sha": "130c50e9893dc824f60f9afc70faed7475714075",
+          "bytes": 18732,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/t0b_receipt_live_v13.json",
+          "sha": "c5cfca8199d2ac272c70102ed2221205783b9641",
+          "bytes": 2829,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/t0b_report_live_v13.json",
+          "sha": "da4a37f0e876cec410804fc74b091156fef2b5f5",
+          "bytes": 939,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/specs/BIMEXEC_P0.md",
+          "sha": "40c56a2e26bd8732cd1daaac702dc5ca3c155800",
+          "bytes": 51858,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/specs/capability_matrix.schema.json",
+          "sha": "5b390e16f454c9d69f70a46398b3dc0ece0f2bda",
+          "bytes": 6580,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/README.md",
+          "sha": "e288703d9ae51de5bd05fea95c9418ce95a03dfd",
+          "bytes": 3371,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend.py",
+          "sha": "aabfe5e37397edeef63b7c9ec21bfef4eda91c90",
+          "bytes": 3605,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend_bad_guid.py",
+          "sha": "2467073160b68ba5449db46bbbcd597ea691257d",
+          "bytes": 782,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend_leftover.py",
+          "sha": "a5fdc37dc5922d5193882db3e4ab38e59e96b124",
+          "bytes": 409,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend_silentnoop.py",
+          "sha": "0e396952b55759d1447a82639b772f7aad4c51d9",
+          "bytes": 450,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_no_custom_prop.py",
+          "sha": "dce60eb146d6e677e12bad9ceb2548dc0869fd53",
+          "bytes": 817,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_no_custom_prop_silent.py",
+          "sha": "8d2b0f5e9e176930e0e18b7a9de2316b10daaa67",
+          "bytes": 1095,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_tapir_shape.py",
+          "sha": "e9f3b457414d2c7d91e233905d1f76ea12261582",
+          "bytes": 4111,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/h1_evidence/README.md",
+          "sha": "0a07db1c29a547e1ce65efd25f4a929e25a82aaa",
+          "bytes": 911,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/h1_evidence/py_compile.txt",
+          "sha": "dc9eab88c54e542a6fd7e203c2d85d0477853063",
+          "bytes": 208,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/h1_evidence/selftest_probes.txt",
+          "sha": "bf1ce76e3267c1da49cea441d37e838a502adc37",
+          "bytes": 4226,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/h1_evidence/test_all.txt",
+          "sha": "9a9aedb8c77fc250e339e29940e76f5d293ed031",
+          "bytes": 13193,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/h1_evidence/test_h1_contract.txt",
+          "sha": "ec0e923d1b62d8d37657013250c590a768f150be",
+          "bytes": 1477,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/h1_evidence/test_probe_v13.txt",
+          "sha": "584323dcefc5f814c84c44f8b436e95f5cb6aed4",
+          "bytes": 195,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/h1_evidence/verification.json",
+          "sha": "2bfbb4393539c29a75239445764112cff8bfc27e",
+          "bytes": 8189,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/selftest_probes.py",
+          "sha": "e0954ebbdc355bd6de30aa4f1e13eb13f7e43398",
+          "bytes": 22053,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_all.py",
+          "sha": "ee5b33c1f2797f3f5fed8c5e73895ace3e9897ca",
+          "bytes": 1208,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_h1_contract.py",
+          "sha": "b23462cb7a0dcd6c795dac3d2bbfb93eeb3b8832",
+          "bytes": 17924,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_p0.py",
+          "sha": "da558d1fe8f881b990f9d107a2e439435f361ac0",
+          "bytes": 23200,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_probe.py",
+          "sha": "e58f56f414ab201659d31d63b0f97594b72ec35c",
+          "bytes": 10955,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_probe_v13.py",
+          "sha": "fbba32707a6a160957bfc5ef009c14a0dfafebad",
+          "bytes": 4717,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t2_connections.py",
+          "sha": "2a8d40721bf0a275ead4e1fed73d9741145eec27",
+          "bytes": 11059,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t2_probe.py",
+          "sha": "38f6fc7d3d6e8453cbd715d192f075155637d8d9",
+          "bytes": 9543,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t3_dependency.py",
+          "sha": "5d15d7b74f21438f16b4f6c19603a4c51b917e23",
+          "bytes": 11626,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t3_reconcile.py",
+          "sha": "40eb694c239c3fb93241e4403a6236181497512e",
+          "bytes": 5221,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t4_timeout.py",
+          "sha": "315195d15a8cb76ac66b7ad5dbedb090960577c4",
+          "bytes": 8369,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t5_kill.py",
+          "sha": "14af67fad82469c2e402b43f726bfc48f2c9e098",
+          "bytes": 10964,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t6.py",
+          "sha": "7ffe105975e2516346c952db03bb949a0c5bb974",
+          "bytes": 3560,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t7.py",
+          "sha": "f88422bd3c15f3e74bc6627ab089d07a8aaa718f",
+          "bytes": 2806,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t8.py",
+          "sha": "fc4f68e0ffb2d8906bef820eb31741ba00f08a88",
+          "bytes": 4700,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t9.py",
+          "sha": "781681d639ff153d79eb6561850ec75f08a9c641",
+          "bytes": 1843,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/OPERATING_MODEL.md",
+          "sha": "6405a9eb186ac3b7115d961fd975c72428b6d05b",
+          "bytes": 2937,
+          "mode": "100644"
+        },
+        {
+          "path": "qwen_safe_bim_integration.py",
+          "sha": "837ac4d33b09cdf2a7f61af10aca81453252cfab",
+          "bytes": 5589,
+          "mode": "100644"
+        },
+        {
+          "path": "safe-bim-v01-schema-test.json",
+          "sha": "79005e34a21e915ef2a72ccddef6ffc47ce174b3",
+          "bytes": 300,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_layer.py",
+          "sha": "eb8ebadaeb8619f96cbecd8e94043891853ebde2",
+          "bytes": 12837,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-1.5.8.json",
+          "sha": "01ca78e051c6efbf92812047aba168a3930dcb5e",
+          "bytes": 660670,
+          "mode": "100644"
+        }
+      ],
+      "blob_count": 99,
+      "tree_entries": 114,
+      "fetch_status": "PASS"
+    },
+    {
+      "head_sha": "14bc0d2a37a751029381e506809025eb434aa721",
+      "tree_sha": "14bc0d2a37a751029381e506809025eb434aa721",
+      "truncated": false,
+      "files": [
+        {
+          "path": ".github/pull_request_template.md",
+          "sha": "1fdbca430b6f7a669074966d6405acd537d6880b",
+          "bytes": 679,
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha": "0e69ae40eae0c168d35c2173c6c0c14b7f304a3b",
+          "bytes": 979,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_AUDIT_BRIEF_20260927.md",
+          "sha": "a262e45261805afa4e03ffd5133e4c2ee6e7a666",
+          "bytes": 3230,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_ARCHITECTURE_AUDIT.md",
+          "sha": "45f80903dd9e77f74564e2af6219fcc45edab7d1",
+          "bytes": 1701,
+          "mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha": "430e99e9c610756fa47da39af5daaa0d7619743d",
+          "bytes": 5301,
+          "mode": "100644"
+        },
+        {
+          "path": "SAFE_BIM_V01_REPORT.md",
+          "sha": "a38ca0bba19bf03dd429dfefb8b2465a4a7c9fe6",
+          "bytes": 1698,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/COORDINATION.md",
+          "sha": "b2077d316fa13acbfa662a16c8e23797ae03fc85",
+          "bytes": 3027,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_ARENA.md",
+          "sha": "14c9b1da309adf2a1d8b6e739efd8a48cf1d0644",
+          "bytes": 5763,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_WORK.md",
+          "sha": "a621651c0cfa2213d9fcdd230810ee84728c4e4d",
+          "bytes": 1447,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/README.md",
+          "sha": "9fa040a96737b39ef0d1866a7a267c0b20a8f8b8",
+          "bytes": 4026,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/docs/T0_RESULTS.md",
+          "sha": "f5ad1ccce1331ec0990011a854d157fa98fa2d05",
+          "bytes": 7686,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/docs/audits/BIMEXEC_audit_v1.md",
+          "sha": "9035b428a4e476f41631a9b2019dceb79749aba0",
+          "bytes": 82944,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/examples/README.md",
+          "sha": "ebe787d00075fccae8b17243900bec3ccdde305b",
+          "bytes": 2022,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/examples/capability_matrix.example.json",
+          "sha": "9d89c5ad1853019657671c0fdd4e11af75785d9c",
+          "bytes": 9571,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/examples/caps.example.json",
+          "sha": "f9b700a458b7bba82bfecf3fc487c492218e5ece",
+          "bytes": 5181,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/README_RUN_WINDOWS.txt",
+          "sha": "ca891f39b939dc7718407187aff705fc60d9dc79",
+          "bytes": 18197,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/SHA256SUMS.txt",
+          "sha": "aa8aa7190d4d474b45248c6e873c550dd310c66c",
+          "bytes": 402,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/T0_PLAN.md",
+          "sha": "6116f7b4d018f685b527176f497a4170b8a3c055",
+          "bytes": 35573,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/TEST_SEQUENCE.md",
+          "sha": "ac5471173200099a0aa8224ccb095d583acb2907",
+          "bytes": 2075,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/backends.py",
+          "sha": "80afaf4d5ba1d096205b33da27feb0de63a56851",
+          "bytes": 38859,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/backends_v13.py",
+          "sha": "8f47f98ae6a90f13c1af533e12c232bbab88a318",
+          "bytes": 7382,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0a.py",
+          "sha": "62189313139166c167cc3dcde9c5e09bf0cb252f",
+          "bytes": 28866,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0a_v13.py",
+          "sha": "6ce41023eb86c6f271fb09927d52ce82bcd89338",
+          "bytes": 1058,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0b.py",
+          "sha": "025397fe8ab9bc6e59aac8f0a6eb526b7bc46ef1",
+          "bytes": 21286,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0b_v13.py",
+          "sha": "3844b09365c5e0b18c6691d3db2a6e0d5761a126",
+          "bytes": 627,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t2_connections_v13.py",
+          "sha": "a8e199659f1eecb343a05957c566dd6a2c0840e4",
+          "bytes": 28786,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t2_live_v13.py",
+          "sha": "1e73a94978377b5f86680dfc1fa6cc6558b19f45",
+          "bytes": 18985,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t3_dependency_v13.py",
+          "sha": "44334d8e8791c647c615ffd25975fbb2f6c2da7e",
+          "bytes": 24896,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t4_timeout_v13.py",
+          "sha": "17979a63e5aa68452e253529f1e7322087d1eb6e",
+          "bytes": 11776,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t5_kill_v13.py",
+          "sha": "389e132f29f302837f835681a1708bbddc9f8032",
+          "bytes": 14765,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t6.py",
+          "sha": "e356422604c7ccd59e9654528e348b9b901fd084",
+          "bytes": 7852,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t7.py",
+          "sha": "3932d72084198b3fa4a6939dbd89d1fb8fb917ab",
+          "bytes": 5544,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t8.py",
+          "sha": "af5daf7aee2737d0d021c8a114dad83762fafd63",
+          "bytes": 5636,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t9.py",
+          "sha": "0602b85fc4be3be07561d5889d373f3cb9165fba",
+          "bytes": 5351,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/reconcile_t3_dependency_v13.py",
+          "sha": "672c6a2837d86e937effe97d852506f4885bda47",
+          "bytes": 8779,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/reconcile_t4_timeout_v13.py",
+          "sha": "672a23be9200a25c25196e9defca6cc5c86db421",
+          "bytes": 8002,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/reconcile_t5_kill_v13.py",
+          "sha": "cb753359ce32a5cc60c9ba52e3e111074c821eca",
+          "bytes": 8654,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/README.md",
+          "sha": "9455c8217f23b189d457fa18c14497b3d75c446e",
+          "bytes": 14158,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/__init__.py",
+          "sha": "a65f7f62bd4756bfe72efd260f0ea039633cedac",
+          "bytes": 217,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/adapters.py",
+          "sha": "acbeff5b89f0c5ca47fe52d5b3846d8c53d0da4c",
+          "bytes": 18407,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/binding.py",
+          "sha": "76e2d34f19ee23ab3c8aa390441411f3559e26e8",
+          "bytes": 5743,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/executor.py",
+          "sha": "176b19efc99eed7d67070c840bf1e314d2d6f1c7",
+          "bytes": 45780,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/journal.py",
+          "sha": "ddf453e2694523cb3e4dbe4fc50156c065636dff",
+          "bytes": 5869,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/lock.py",
+          "sha": "81cf714d11aea3abdbb161f34e4f948ba9a890cf",
+          "bytes": 3864,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/probe.py",
+          "sha": "4d017a64ffec40f01c58d9da5fe8e7909a5bee70",
+          "bytes": 24334,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/states.py",
+          "sha": "8498dc8a18ef38ad0047271073ad229749f290de",
+          "bytes": 8296,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/tapir_raw.py",
+          "sha": "64fb1c4dd7b2605143709880356779b091d47a1e",
+          "bytes": 14720,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/verify.py",
+          "sha": "7c437de35c719d5f3371be461f4cbd1789f244e3",
+          "bytes": 16059,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/tools/run_probe.py",
+          "sha": "f84ed81153ca554072354e608f6b60f8e0b99034",
+          "bytes": 3735,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/README.md",
+          "sha": "d4287790939f579d20dc55ec736d1b5ef7763ca1",
+          "bytes": 1495,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/T0_RUN_2026-09-26.md",
+          "sha": "7f7c2e216f937539a06b432d518080f091dd82ba",
+          "bytes": 4428,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/TEMPLATE_T0A_RUN.md",
+          "sha": "1ec9b8593cae25f182ad8e44628de71f53e41815",
+          "bytes": 2116,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t2_connections_visual_v13.json",
+          "sha": "378b0171a5ac4aae98c58d017f3b14d615f34b66",
+          "bytes": 864,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t3_dependency_visual_v13.json",
+          "sha": "ff6b009b6327c06d430ea279477079364fe4ec76",
+          "bytes": 1312,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t4_timeout_human_decision_v13.json",
+          "sha": "df103823aae1637723edf13e1352cbeea0eec70d",
+          "bytes": 1074,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t5_process_kill_human_decision_v13.json",
+          "sha": "6e5e89eacb9e584c10f6a39ad3834674ac87f81c",
+          "bytes": 798,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t6_model_drift_live_v13.json",
+          "sha": "55b7757c66f8f96aee9a1541e7a3bbb22ce6525b",
+          "bytes": 988,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/capability_matrix_v13_2.json",
+          "sha": "130c50e9893dc824f60f9afc70faed7475714075",
+          "bytes": 18732,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/t0b_receipt_live_v13.json",
+          "sha": "c5cfca8199d2ac272c70102ed2221205783b9641",
+          "bytes": 2829,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/t0b_report_live_v13.json",
+          "sha": "da4a37f0e876cec410804fc74b091156fef2b5f5",
+          "bytes": 939,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/specs/BIMEXEC_P0.md",
+          "sha": "40c56a2e26bd8732cd1daaac702dc5ca3c155800",
+          "bytes": 51858,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/specs/capability_matrix.schema.json",
+          "sha": "5b390e16f454c9d69f70a46398b3dc0ece0f2bda",
+          "bytes": 6580,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/README.md",
+          "sha": "abad7439791c843133707d2f1d34cbf3e8d1a5c3",
+          "bytes": 2606,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend.py",
+          "sha": "aabfe5e37397edeef63b7c9ec21bfef4eda91c90",
+          "bytes": 3605,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend_bad_guid.py",
+          "sha": "2467073160b68ba5449db46bbbcd597ea691257d",
+          "bytes": 782,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend_leftover.py",
+          "sha": "a5fdc37dc5922d5193882db3e4ab38e59e96b124",
+          "bytes": 409,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend_silentnoop.py",
+          "sha": "0e396952b55759d1447a82639b772f7aad4c51d9",
+          "bytes": 450,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_no_custom_prop.py",
+          "sha": "dce60eb146d6e677e12bad9ceb2548dc0869fd53",
+          "bytes": 817,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_no_custom_prop_silent.py",
+          "sha": "8d2b0f5e9e176930e0e18b7a9de2316b10daaa67",
+          "bytes": 1095,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_tapir_shape.py",
+          "sha": "e9f3b457414d2c7d91e233905d1f76ea12261582",
+          "bytes": 4111,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/selftest_probes.py",
+          "sha": "e0954ebbdc355bd6de30aa4f1e13eb13f7e43398",
+          "bytes": 22053,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_all.py",
+          "sha": "f536de855ab340e9573ab4b2e5a929171007e14f",
+          "bytes": 1168,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_p0.py",
+          "sha": "da558d1fe8f881b990f9d107a2e439435f361ac0",
+          "bytes": 23200,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_probe.py",
+          "sha": "e58f56f414ab201659d31d63b0f97594b72ec35c",
+          "bytes": 10955,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_probe_v13.py",
+          "sha": "9f02f0be4438ab352ca948f044db9159b2606ca1",
+          "bytes": 4721,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t2_connections.py",
+          "sha": "2a8d40721bf0a275ead4e1fed73d9741145eec27",
+          "bytes": 11059,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t2_probe.py",
+          "sha": "38f6fc7d3d6e8453cbd715d192f075155637d8d9",
+          "bytes": 9543,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t3_dependency.py",
+          "sha": "5d15d7b74f21438f16b4f6c19603a4c51b917e23",
+          "bytes": 11626,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t3_reconcile.py",
+          "sha": "40eb694c239c3fb93241e4403a6236181497512e",
+          "bytes": 5221,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t4_timeout.py",
+          "sha": "315195d15a8cb76ac66b7ad5dbedb090960577c4",
+          "bytes": 8369,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t5_kill.py",
+          "sha": "14af67fad82469c2e402b43f726bfc48f2c9e098",
+          "bytes": 10964,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t6.py",
+          "sha": "7ffe105975e2516346c952db03bb949a0c5bb974",
+          "bytes": 3560,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t7.py",
+          "sha": "f88422bd3c15f3e74bc6627ab089d07a8aaa718f",
+          "bytes": 2806,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t8.py",
+          "sha": "fc4f68e0ffb2d8906bef820eb31741ba00f08a88",
+          "bytes": 4700,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t9.py",
+          "sha": "781681d639ff153d79eb6561850ec75f08a9c641",
+          "bytes": 1843,
+          "mode": "100644"
+        },
+        {
+          "path": "continue_test_house.py",
+          "sha": "ecae1ac4b32656374ee284c9ddcd375c00635655",
+          "bytes": 9655,
+          "mode": "100644"
+        },
+        {
+          "path": "controller/__init__.py",
+          "sha": "a35a10e5ec89660ca8b1c87f24c2477c37a803c7",
+          "bytes": 46,
+          "mode": "100644"
+        },
+        {
+          "path": "controller/app.py",
+          "sha": "74565ea70ad651f243d3939725ee39d572667b44",
+          "bytes": 10486,
+          "mode": "100644"
+        },
+        {
+          "path": "controller/client.py",
+          "sha": "6570179a234fc9620fd0be856db9ffc4e81e5d44",
+          "bytes": 5338,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/OPERATING_MODEL.md",
+          "sha": "6405a9eb186ac3b7115d961fd975c72428b6d05b",
+          "bytes": 2937,
+          "mode": "100644"
+        },
+        {
+          "path": "launcher.py",
+          "sha": "41a63fccc4c11ddbfa4f74c399751432c5553450",
+          "bytes": 4890,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/CMakeLists.txt",
+          "sha": "03d91aad5e281ea784d6123fe25c274a87be5652",
+          "bytes": 2446,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/RFIX.win/Safe_BIM_Palette.rc2",
+          "sha": "81fc0d4c2f238ab0e29de8df493d61c5577926c2",
+          "bytes": 37,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/RFIX/Safe_BIM_Palette.grc",
+          "sha": "ed12107bbda537a7c520ac50a919bcc360ddd50b",
+          "bytes": 608,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/RFIX/Safe_BIM_Palette.html",
+          "sha": "59fda1088ee14601cbbe52db4acd110a5c1c31d1",
+          "bytes": 4081,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/Src/APIEnvir.h",
+          "sha": "489b35c60d2a1ce09af67dc0b6a33050a9a9aa7b",
+          "bytes": 207,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/Src/Main.cpp",
+          "sha": "dbfd621f94622cad78b6c17263e55b56282f3ec0",
+          "bytes": 1259,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/Src/SafeBIMPalette.cpp",
+          "sha": "cbd34b0a8740f333bf187b537e7efae5bc21f3a5",
+          "bytes": 2699,
+          "mode": "100644"
+        },
+        {
+          "path": "palette/Src/SafeBIMPalette.hpp",
+          "sha": "bd9adfea2f1cc4758bf0a691bf83f21c591b14e9",
+          "bytes": 951,
+          "mode": "100644"
+        },
+        {
+          "path": "qwen_safe_bim_integration.py",
+          "sha": "837ac4d33b09cdf2a7f61af10aca81453252cfab",
+          "bytes": 5589,
+          "mode": "100644"
+        },
+        {
+          "path": "run_safe_bim_controller.bat",
+          "sha": "9cfad3df3f1ae7443800525504b40c14289c3fda",
+          "bytes": 74,
+          "mode": "100644"
+        },
+        {
+          "path": "safe-bim-v01-schema-test.json",
+          "sha": "79005e34a21e915ef2a72ccddef6ffc47ce174b3",
+          "bytes": 300,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_ipc.py",
+          "sha": "2cc08600b3a78466095d952388019d1d6bdedf8f",
+          "bytes": 7974,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_layer.py",
+          "sha": "02c97b3d7d7655a7044e4579df879a0c2e05ffba",
+          "bytes": 30848,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_lock.py",
+          "sha": "4f3f0376c67652bf250b06afd44aec4c0c190f37",
+          "bytes": 1665,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_operations.py",
+          "sha": "85aae22709d53628c1da0a160a0f84a8a6748c92",
+          "bytes": 6394,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_runtime.py",
+          "sha": "886e1531cc344bbc4f0a0a9111345b01e25ece2e",
+          "bytes": 25936,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_service.py",
+          "sha": "886771a2a37977a686b8a63aeebd88126ebc65db",
+          "bytes": 3120,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_verification.py",
+          "sha": "8e61cb3cbb2f823ddae305a674a33e71684832b7",
+          "bytes": 4408,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-1.5.8.json",
+          "sha": "01ca78e051c6efbf92812047aba168a3930dcb5e",
+          "bytes": 660670,
+          "mode": "100644"
+        },
+        {
+          "path": "test_controller.py",
+          "sha": "f0e9a3eb2803f3865a98ba1394a6be3fe8fc0288",
+          "bytes": 3885,
+          "mode": "100644"
+        },
+        {
+          "path": "test_house.py",
+          "sha": "6540c67231f7dc28666f52445398529ca10d7618",
+          "bytes": 8773,
+          "mode": "100644"
+        },
+        {
+          "path": "test_resumable_executor.py",
+          "sha": "b899ccbf662b697e4c4ee48deafa44bccf94ba3f",
+          "bytes": 9243,
+          "mode": "100644"
+        },
+        {
+          "path": "test_safe_bim_layer_regressions.py",
+          "sha": "a92cd7e1ee0f7a0c6888b9531a0d55f48ffe0b38",
+          "bytes": 3128,
+          "mode": "100644"
+        },
+        {
+          "path": "test_story_vertical_context.py",
+          "sha": "7c5acc07bc05e2cd15738222e7f8096616e4ed3a",
+          "bytes": 2096,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/__init__.py",
+          "sha": "194b794ae10deb2c06991d902378fcbf2f87eb80",
+          "bytes": 61,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/crash_worker.py",
+          "sha": "c43d46be330af51faa695efe0f5ff89fa38b1b9a",
+          "bytes": 2046,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/fake_bim.py",
+          "sha": "541b22666a217e03278d6652c7afef49ed50fc7d",
+          "bytes": 5140,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/test_controller_safety.py",
+          "sha": "b67cfc1577e9156111879030dc8dc1124f6ebcd1",
+          "bytes": 4832,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/test_crash_windows.py",
+          "sha": "a0ae2bf195ff90da0c569ce48f6c4a0c4f4bf569",
+          "bytes": 4081,
+          "mode": "100644"
+        },
+        {
+          "path": "tests_safety/test_runtime_safety.py",
+          "sha": "129cb33d0711d9989024aa91774759a45518473e",
+          "bytes": 26384,
+          "mode": "100644"
+        }
+      ],
+      "blob_count": 121,
+      "tree_entries": 141,
+      "fetch_status": "PASS"
+    },
+    {
+      "head_sha": "c55f404829e4e11004ea5c59c8b3aec18b663866",
+      "tree_sha": "c55f404829e4e11004ea5c59c8b3aec18b663866",
+      "truncated": false,
+      "files": [
+        {
+          "path": ".github/pull_request_template.md",
+          "sha": "1fdbca430b6f7a669074966d6405acd537d6880b",
+          "bytes": 679,
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha": "3068944546f0f7166cf7d3f68252c5750bab1e92",
+          "bytes": 701,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_ARCHITECTURE_AUDIT.md",
+          "sha": "45f80903dd9e77f74564e2af6219fcc45edab7d1",
+          "bytes": 1701,
+          "mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha": "d6e3c9eb1aaa81a0a1b369cf4d94d56f8fc31291",
+          "bytes": 1891,
+          "mode": "100644"
+        },
+        {
+          "path": "SAFE_BIM_V01_REPORT.md",
+          "sha": "a38ca0bba19bf03dd429dfefb8b2465a4a7c9fe6",
+          "bytes": 1698,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/COORDINATION.md",
+          "sha": "b2077d316fa13acbfa662a16c8e23797ae03fc85",
+          "bytes": 3027,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_ARENA.md",
+          "sha": "14c9b1da309adf2a1d8b6e739efd8a48cf1d0644",
+          "bytes": 5763,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_WORK.md",
+          "sha": "a621651c0cfa2213d9fcdd230810ee84728c4e4d",
+          "bytes": 1447,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/README.md",
+          "sha": "9fa040a96737b39ef0d1866a7a267c0b20a8f8b8",
+          "bytes": 4026,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/docs/T0_RESULTS.md",
+          "sha": "f5ad1ccce1331ec0990011a854d157fa98fa2d05",
+          "bytes": 7686,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/docs/audits/BIMEXEC_audit_v1.md",
+          "sha": "9035b428a4e476f41631a9b2019dceb79749aba0",
+          "bytes": 82944,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/examples/README.md",
+          "sha": "ebe787d00075fccae8b17243900bec3ccdde305b",
+          "bytes": 2022,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/examples/capability_matrix.example.json",
+          "sha": "9d89c5ad1853019657671c0fdd4e11af75785d9c",
+          "bytes": 9571,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/examples/caps.example.json",
+          "sha": "f9b700a458b7bba82bfecf3fc487c492218e5ece",
+          "bytes": 5181,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/README_RUN_WINDOWS.txt",
+          "sha": "ca891f39b939dc7718407187aff705fc60d9dc79",
+          "bytes": 18197,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/SHA256SUMS.txt",
+          "sha": "aa8aa7190d4d474b45248c6e873c550dd310c66c",
+          "bytes": 402,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/T0_PLAN.md",
+          "sha": "6116f7b4d018f685b527176f497a4170b8a3c055",
+          "bytes": 35573,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/TEST_SEQUENCE.md",
+          "sha": "ac5471173200099a0aa8224ccb095d583acb2907",
+          "bytes": 2075,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/backends.py",
+          "sha": "80afaf4d5ba1d096205b33da27feb0de63a56851",
+          "bytes": 38859,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/backends_v13.py",
+          "sha": "8f47f98ae6a90f13c1af533e12c232bbab88a318",
+          "bytes": 7382,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0a.py",
+          "sha": "62189313139166c167cc3dcde9c5e09bf0cb252f",
+          "bytes": 28866,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0a_v13.py",
+          "sha": "6ce41023eb86c6f271fb09927d52ce82bcd89338",
+          "bytes": 1058,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0b.py",
+          "sha": "025397fe8ab9bc6e59aac8f0a6eb526b7bc46ef1",
+          "bytes": 21286,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t0b_v13.py",
+          "sha": "3844b09365c5e0b18c6691d3db2a6e0d5761a126",
+          "bytes": 627,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t2_connections_v13.py",
+          "sha": "a8e199659f1eecb343a05957c566dd6a2c0840e4",
+          "bytes": 28786,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t2_live_v13.py",
+          "sha": "1e73a94978377b5f86680dfc1fa6cc6558b19f45",
+          "bytes": 18985,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t3_dependency_v13.py",
+          "sha": "44334d8e8791c647c615ffd25975fbb2f6c2da7e",
+          "bytes": 24896,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t4_timeout_v13.py",
+          "sha": "17979a63e5aa68452e253529f1e7322087d1eb6e",
+          "bytes": 11776,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t5_kill_v13.py",
+          "sha": "389e132f29f302837f835681a1708bbddc9f8032",
+          "bytes": 14765,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t6.py",
+          "sha": "e356422604c7ccd59e9654528e348b9b901fd084",
+          "bytes": 7852,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t7.py",
+          "sha": "3932d72084198b3fa4a6939dbd89d1fb8fb917ab",
+          "bytes": 5544,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t8.py",
+          "sha": "af5daf7aee2737d0d021c8a114dad83762fafd63",
+          "bytes": 5636,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/probe_t9.py",
+          "sha": "0602b85fc4be3be07561d5889d373f3cb9165fba",
+          "bytes": 5351,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/reconcile_t3_dependency_v13.py",
+          "sha": "672c6a2837d86e937effe97d852506f4885bda47",
+          "bytes": 8779,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/reconcile_t4_timeout_v13.py",
+          "sha": "672a23be9200a25c25196e9defca6cc5c86db421",
+          "bytes": 8002,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/probes/reconcile_t5_kill_v13.py",
+          "sha": "cb753359ce32a5cc60c9ba52e3e111074c821eca",
+          "bytes": 8654,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/README.md",
+          "sha": "9455c8217f23b189d457fa18c14497b3d75c446e",
+          "bytes": 14158,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/__init__.py",
+          "sha": "a65f7f62bd4756bfe72efd260f0ea039633cedac",
+          "bytes": 217,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/adapters.py",
+          "sha": "acbeff5b89f0c5ca47fe52d5b3846d8c53d0da4c",
+          "bytes": 18407,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/binding.py",
+          "sha": "76e2d34f19ee23ab3c8aa390441411f3559e26e8",
+          "bytes": 5743,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/executor.py",
+          "sha": "176b19efc99eed7d67070c840bf1e314d2d6f1c7",
+          "bytes": 45780,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/journal.py",
+          "sha": "ddf453e2694523cb3e4dbe4fc50156c065636dff",
+          "bytes": 5869,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/lock.py",
+          "sha": "81cf714d11aea3abdbb161f34e4f948ba9a890cf",
+          "bytes": 3864,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/probe.py",
+          "sha": "4d017a64ffec40f01c58d9da5fe8e7909a5bee70",
+          "bytes": 24334,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/states.py",
+          "sha": "8498dc8a18ef38ad0047271073ad229749f290de",
+          "bytes": 8296,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/tapir_raw.py",
+          "sha": "64fb1c4dd7b2605143709880356779b091d47a1e",
+          "bytes": 14720,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/bimexec/verify.py",
+          "sha": "7c437de35c719d5f3371be461f4cbd1789f244e3",
+          "bytes": 16059,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/reference/tools/run_probe.py",
+          "sha": "f84ed81153ca554072354e608f6b60f8e0b99034",
+          "bytes": 3735,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/README.md",
+          "sha": "d4287790939f579d20dc55ec736d1b5ef7763ca1",
+          "bytes": 1495,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/T0_RUN_2026-09-26.md",
+          "sha": "7f7c2e216f937539a06b432d518080f091dd82ba",
+          "bytes": 4428,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/TEMPLATE_T0A_RUN.md",
+          "sha": "1ec9b8593cae25f182ad8e44628de71f53e41815",
+          "bytes": 2116,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t2_connections_visual_v13.json",
+          "sha": "378b0171a5ac4aae98c58d017f3b14d615f34b66",
+          "bytes": 864,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t3_dependency_visual_v13.json",
+          "sha": "ff6b009b6327c06d430ea279477079364fe4ec76",
+          "bytes": 1312,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t4_timeout_human_decision_v13.json",
+          "sha": "df103823aae1637723edf13e1352cbeea0eec70d",
+          "bytes": 1074,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t5_process_kill_human_decision_v13.json",
+          "sha": "6e5e89eacb9e584c10f6a39ad3834674ac87f81c",
+          "bytes": 798,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/audit_t6_model_drift_live_v13.json",
+          "sha": "55b7757c66f8f96aee9a1541e7a3bbb22ce6525b",
+          "bytes": 988,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/capability_matrix_v13_2.json",
+          "sha": "130c50e9893dc824f60f9afc70faed7475714075",
+          "bytes": 18732,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/t0b_receipt_live_v13.json",
+          "sha": "c5cfca8199d2ac272c70102ed2221205783b9641",
+          "bytes": 2829,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/results/t0b_report_live_v13.json",
+          "sha": "da4a37f0e876cec410804fc74b091156fef2b5f5",
+          "bytes": 939,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/specs/BIMEXEC_P0.md",
+          "sha": "40c56a2e26bd8732cd1daaac702dc5ca3c155800",
+          "bytes": 51858,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/specs/capability_matrix.schema.json",
+          "sha": "5b390e16f454c9d69f70a46398b3dc0ece0f2bda",
+          "bytes": 6580,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/README.md",
+          "sha": "abad7439791c843133707d2f1d34cbf3e8d1a5c3",
+          "bytes": 2606,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend.py",
+          "sha": "aabfe5e37397edeef63b7c9ec21bfef4eda91c90",
+          "bytes": 3605,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend_bad_guid.py",
+          "sha": "2467073160b68ba5449db46bbbcd597ea691257d",
+          "bytes": 782,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend_leftover.py",
+          "sha": "a5fdc37dc5922d5193882db3e4ab38e59e96b124",
+          "bytes": 409,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_backend_silentnoop.py",
+          "sha": "0e396952b55759d1447a82639b772f7aad4c51d9",
+          "bytes": 450,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_no_custom_prop.py",
+          "sha": "dce60eb146d6e677e12bad9ceb2548dc0869fd53",
+          "bytes": 817,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_no_custom_prop_silent.py",
+          "sha": "8d2b0f5e9e176930e0e18b7a9de2316b10daaa67",
+          "bytes": 1095,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/fakes/fake_tapir_shape.py",
+          "sha": "e9f3b457414d2c7d91e233905d1f76ea12261582",
+          "bytes": 4111,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/selftest_probes.py",
+          "sha": "e0954ebbdc355bd6de30aa4f1e13eb13f7e43398",
+          "bytes": 22053,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_all.py",
+          "sha": "f536de855ab340e9573ab4b2e5a929171007e14f",
+          "bytes": 1168,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_p0.py",
+          "sha": "da558d1fe8f881b990f9d107a2e439435f361ac0",
+          "bytes": 23200,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_probe.py",
+          "sha": "e58f56f414ab201659d31d63b0f97594b72ec35c",
+          "bytes": 10955,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_probe_v13.py",
+          "sha": "9f02f0be4438ab352ca948f044db9159b2606ca1",
+          "bytes": 4721,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t2_connections.py",
+          "sha": "2a8d40721bf0a275ead4e1fed73d9741145eec27",
+          "bytes": 11059,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t2_probe.py",
+          "sha": "38f6fc7d3d6e8453cbd715d192f075155637d8d9",
+          "bytes": 9543,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t3_dependency.py",
+          "sha": "5d15d7b74f21438f16b4f6c19603a4c51b917e23",
+          "bytes": 11626,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t3_reconcile.py",
+          "sha": "40eb694c239c3fb93241e4403a6236181497512e",
+          "bytes": 5221,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t4_timeout.py",
+          "sha": "315195d15a8cb76ac66b7ad5dbedb090960577c4",
+          "bytes": 8369,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t5_kill.py",
+          "sha": "14af67fad82469c2e402b43f726bfc48f2c9e098",
+          "bytes": 10964,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t6.py",
+          "sha": "7ffe105975e2516346c952db03bb949a0c5bb974",
+          "bytes": 3560,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t7.py",
+          "sha": "f88422bd3c15f3e74bc6627ab089d07a8aaa718f",
+          "bytes": 2806,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t8.py",
+          "sha": "fc4f68e0ffb2d8906bef820eb31741ba00f08a88",
+          "bytes": 4700,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/tests/test_t9.py",
+          "sha": "781681d639ff153d79eb6561850ec75f08a9c641",
+          "bytes": 1843,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/OPERATING_MODEL.md",
+          "sha": "6405a9eb186ac3b7115d961fd975c72428b6d05b",
+          "bytes": 2937,
+          "mode": "100644"
+        },
+        {
+          "path": "qwen_safe_bim_integration.py",
+          "sha": "837ac4d33b09cdf2a7f61af10aca81453252cfab",
+          "bytes": 5589,
+          "mode": "100644"
+        },
+        {
+          "path": "safe-bim-v01-schema-test.json",
+          "sha": "79005e34a21e915ef2a72ccddef6ffc47ce174b3",
+          "bytes": 300,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_layer.py",
+          "sha": "eb8ebadaeb8619f96cbecd8e94043891853ebde2",
+          "bytes": 12837,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-1.5.8.json",
+          "sha": "01ca78e051c6efbf92812047aba168a3930dcb5e",
+          "bytes": 660670,
+          "mode": "100644"
+        }
+      ],
+      "blob_count": 89,
+      "tree_entries": 103,
+      "fetch_status": "PASS"
+    },
+    {
+      "head_sha": "181ca75229d9fd949797dbfa607c5245b121aaec",
+      "tree_sha": "181ca75229d9fd949797dbfa607c5245b121aaec",
+      "truncated": false,
+      "files": [
+        {
+          "path": ".github/pull_request_template.md",
+          "sha": "1fdbca430b6f7a669074966d6405acd537d6880b",
+          "bytes": 679,
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha": "3068944546f0f7166cf7d3f68252c5750bab1e92",
+          "bytes": 701,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_CAPABILITY_MATRIX_20260928.md",
+          "sha": "4e317acae908383716df0eb7fc594af8909efb7e",
+          "bytes": 13476,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_FULL_SYSTEM_AUDIT_20260928.md",
+          "sha": "a90b24482c72bda191a90958abcf5e268bfee007",
+          "bytes": 60106,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_IMPLEMENTATION_PLAN_20260928.md",
+          "sha": "88db249a86a202aa617cdcf975bcf4f767f1c879",
+          "bytes": 9146,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_LIVE_TEST_PLAN_20260928.md",
+          "sha": "050318c2df6b1761fa239ac809f1ff0753aedc77",
+          "bytes": 18232,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_ARCHITECTURE_AUDIT.md",
+          "sha": "45f80903dd9e77f74564e2af6219fcc45edab7d1",
+          "bytes": 1701,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_FULL_SYSTEM_AUDIT_20260928.md",
+          "sha": "f3269761febe829b0edbf9e85eb192f39849eb83",
+          "bytes": 13441,
+          "mode": "100644"
+        },
+        {
+          "path": "LIVE_TEST_SUMMARY_R0_R4.md",
+          "sha": "22ca1b7f45a4df706512721a0693a4e757fe8fed",
+          "bytes": 6094,
+          "mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha": "d6e3c9eb1aaa81a0a1b369cf4d94d56f8fc31291",
+          "bytes": 1891,
+          "mode": "100644"
+        },
+        {
+          "path": "SAFE_BIM_V01_REPORT.md",
+          "sha": "a38ca0bba19bf03dd429dfefb8b2465a4a7c9fe6",
+          "bytes": 1698,
+          "mode": "100644"
+        },
+        {
+          "path": "W7_ARBITRARY_MORPH_GEOMETRY.md",
+          "sha": "d0b7fad2e5f1b6ecb2b2b5249eef24e6e4a5fc1d",
+          "bytes": 1705,
+          "mode": "100644"
+        },
+        {
+          "path": "W8_TRIM_AND_SOLID_SUBTRACTION.md",
+          "sha": "7f9cebdb35f93d48906c9b180fa14bd80c276807",
+          "bytes": 2180,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/arena-full-system-audit-20260928/ARENA_AUDIT_CYCLE_LOG_20260928.md",
+          "sha": "7e94e862d6e2d6a973dad2c5c2888fdfacfdf15d",
+          "bytes": 6052,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/arena-full-system-audit-20260928/TAPIR_1.5.9_COMMAND_INVENTORY.md",
+          "sha": "239ea0e579bc996db8cf2884c9a4b13c359df3bf",
+          "bytes": 29592,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/LIVE_TEST_SUMMARY_R0_R4.md",
+          "sha": "ab8fa39fc85a8133d354d2bac92e67f6e0c5a41d",
+          "bytes": 11400,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/R4_CONSOLE_TRANSCRIPT.txt",
+          "sha": "d766b0612938b4368378f880ab6099c729c4d6e7",
+          "bytes": 18374,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/R4_FIELD_DIFFS_AND_GEOMETRY.md",
+          "sha": "27f308ca80c5d085e397e3a8be137762bace73bf",
+          "bytes": 3473,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/W2_BEAM_SEMANTICS.md",
+          "sha": "1dd7d2a8e84fae1876034f2cf21e3a39a2b15f76",
+          "bytes": 2414,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/W3_COMPOSITE_WALL_THICKNESS.md",
+          "sha": "238431ce962d76a20c82b8fbd9de8247ef312c37",
+          "bytes": 1814,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/W4_ROOF_SEMANTICS.md",
+          "sha": "2f4707fb2f0e05a70a3f22a2d01587aef5783518",
+          "bytes": 1719,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/W5_W5B_STORY_WALL_WINDOW_SEMANTICS.md",
+          "sha": "f2f3c3798c7055a4f47dbb8d136355d0942bfbe9",
+          "bytes": 3636,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/COORDINATION.md",
+          "sha": "c0df5ee5904afc661df842ea3030a38765d483df",
+          "bytes": 2000,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_ARENA.md",
+          "sha": "1da37fb79a1ab7e4193c3b228264f308e403c0bc",
+          "bytes": 1901,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_WORK.md",
+          "sha": "a621651c0cfa2213d9fcdd230810ee84728c4e4d",
+          "bytes": 1447,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/README.md",
+          "sha": "c5253bcc705f4db40bb128f96f6580fdf7dab74f",
+          "bytes": 269,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/OPERATING_MODEL.md",
+          "sha": "6405a9eb186ac3b7115d961fd975c72428b6d05b",
+          "bytes": 2937,
+          "mode": "100644"
+        },
+        {
+          "path": "qwen_safe_bim_integration.py",
+          "sha": "837ac4d33b09cdf2a7f61af10aca81453252cfab",
+          "bytes": 5589,
+          "mode": "100644"
+        },
+        {
+          "path": "research/ARCHICAD_CAPABILITY_LEDGER_20260928.md",
+          "sha": "797a6cb9ea9e4cd763e0e4e2714c97e31634534d",
+          "bytes": 22107,
+          "mode": "100644"
+        },
+        {
+          "path": "research/ARCHICAD_EXECUTION_ARCHITECTURE_20260928.md",
+          "sha": "d770d52564eba089a8b5d26fce9412c780ef620f",
+          "bytes": 12801,
+          "mode": "100644"
+        },
+        {
+          "path": "research/GOST_ATTRIBUTES_PROFILES_LIBRARY_20260928.md",
+          "sha": "9a65f88a68cf74b768f80846187dca14e5d7d0ba",
+          "bytes": 12835,
+          "mode": "100644"
+        },
+        {
+          "path": "research/INDEX_20260928.md",
+          "sha": "cb281899b6f9ebc2ee1d168f0a6ae772c6f6fd4e",
+          "bytes": 2255,
+          "mode": "100644"
+        },
+        {
+          "path": "research/NEXT_LIVE_TEST_MATRIX_20260928.md",
+          "sha": "5c6fa9777c87655da15278f652da619752ef5a5a",
+          "bytes": 7098,
+          "mode": "100644"
+        },
+        {
+          "path": "safe-bim-v01-schema-test.json",
+          "sha": "79005e34a21e915ef2a72ccddef6ffc47ce174b3",
+          "bytes": 300,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_layer.py",
+          "sha": "eb8ebadaeb8619f96cbecd8e94043891853ebde2",
+          "bytes": 12837,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-1.5.8.json",
+          "sha": "01ca78e051c6efbf92812047aba168a3930dcb5e",
+          "bytes": 660670,
+          "mode": "100644"
+        }
+      ],
+      "blob_count": 36,
+      "tree_entries": 44,
+      "fetch_status": "PASS"
+    },
+    {
+      "head_sha": "53d6b638b4e638c669ce169196088c3b3a5cdc30",
+      "tree_sha": "53d6b638b4e638c669ce169196088c3b3a5cdc30",
+      "truncated": false,
+      "files": [
+        {
+          "path": ".github/pull_request_template.md",
+          "sha": "1fdbca430b6f7a669074966d6405acd537d6880b",
+          "bytes": 679,
+          "mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha": "3068944546f0f7166cf7d3f68252c5750bab1e92",
+          "bytes": 701,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_CAPABILITY_MATRIX_20260928.md",
+          "sha": "4e317acae908383716df0eb7fc594af8909efb7e",
+          "bytes": 13476,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_FULL_SYSTEM_AUDIT_20260928.md",
+          "sha": "a90b24482c72bda191a90958abcf5e268bfee007",
+          "bytes": 60106,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_IMPLEMENTATION_PLAN_20260928.md",
+          "sha": "88db249a86a202aa617cdcf975bcf4f767f1c879",
+          "bytes": 9146,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_LIVE_TEST_PLAN_20260928.md",
+          "sha": "050318c2df6b1761fa239ac809f1ff0753aedc77",
+          "bytes": 18232,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_RECONCILIATION_GPT_COUNTER_AUDIT_20260928.md",
+          "sha": "bee522a73a65f4b8306b965e89b240a288cbdb20",
+          "bytes": 44633,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_ARCHITECTURE_AUDIT.md",
+          "sha": "45f80903dd9e77f74564e2af6219fcc45edab7d1",
+          "bytes": 1701,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_FULL_SYSTEM_AUDIT_20260928.md",
+          "sha": "f3269761febe829b0edbf9e85eb192f39849eb83",
+          "bytes": 13441,
+          "mode": "100644"
+        },
+        {
+          "path": "ARENA_TASK_RECONCILE_GPT_COUNTER_AUDIT_20260928.md",
+          "sha": "1a8d90c02204bfd603009aec4d669fc948eb8ba2",
+          "bytes": 4050,
+          "mode": "100644"
+        },
+        {
+          "path": "GPT_COUNTER_AUDIT_ARENA_20260928.md",
+          "sha": "579087256d033d005d3d5d8e6fb7345dd9835a65",
+          "bytes": 20886,
+          "mode": "100644"
+        },
+        {
+          "path": "LIVE_TEST_SUMMARY_R0_R4.md",
+          "sha": "22ca1b7f45a4df706512721a0693a4e757fe8fed",
+          "bytes": 6094,
+          "mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha": "d6e3c9eb1aaa81a0a1b369cf4d94d56f8fc31291",
+          "bytes": 1891,
+          "mode": "100644"
+        },
+        {
+          "path": "SAFE_BIM_V01_REPORT.md",
+          "sha": "a38ca0bba19bf03dd429dfefb8b2465a4a7c9fe6",
+          "bytes": 1698,
+          "mode": "100644"
+        },
+        {
+          "path": "W7_ARBITRARY_MORPH_GEOMETRY.md",
+          "sha": "d0b7fad2e5f1b6ecb2b2b5249eef24e6e4a5fc1d",
+          "bytes": 1705,
+          "mode": "100644"
+        },
+        {
+          "path": "W8_TRIM_AND_SOLID_SUBTRACTION.md",
+          "sha": "7f9cebdb35f93d48906c9b180fa14bd80c276807",
+          "bytes": 2180,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/arena-full-system-audit-20260928/ARENA_AUDIT_CYCLE_LOG_20260928.md",
+          "sha": "7e94e862d6e2d6a973dad2c5c2888fdfacfdf15d",
+          "bytes": 6052,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/arena-full-system-audit-20260928/TAPIR_1.5.9_COMMAND_INVENTORY.md",
+          "sha": "2ad24a6fcfa9a6d62f99b2f8b60bb3397abec277",
+          "bytes": 29614,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/LIVE_TEST_SUMMARY_R0_R4.md",
+          "sha": "ab8fa39fc85a8133d354d2bac92e67f6e0c5a41d",
+          "bytes": 11400,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/R4_CONSOLE_TRANSCRIPT.txt",
+          "sha": "d766b0612938b4368378f880ab6099c729c4d6e7",
+          "bytes": 18374,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/R4_FIELD_DIFFS_AND_GEOMETRY.md",
+          "sha": "27f308ca80c5d085e397e3a8be137762bace73bf",
+          "bytes": 3473,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/W2_BEAM_SEMANTICS.md",
+          "sha": "1dd7d2a8e84fae1876034f2cf21e3a39a2b15f76",
+          "bytes": 2414,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/W3_COMPOSITE_WALL_THICKNESS.md",
+          "sha": "238431ce962d76a20c82b8fbd9de8247ef312c37",
+          "bytes": 1814,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/W4_ROOF_SEMANTICS.md",
+          "sha": "2f4707fb2f0e05a70a3f22a2d01587aef5783518",
+          "bytes": 1719,
+          "mode": "100644"
+        },
+        {
+          "path": "audit/live-tests/2026-09-28/W5_W5B_STORY_WALL_WINDOW_SEMANTICS.md",
+          "sha": "f2f3c3798c7055a4f47dbb8d136355d0942bfbe9",
+          "bytes": 3636,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/COORDINATION.md",
+          "sha": "c0df5ee5904afc661df842ea3030a38765d483df",
+          "bytes": 2000,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_ARENA.md",
+          "sha": "1da37fb79a1ab7e4193c3b228264f308e403c0bc",
+          "bytes": 1901,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/HANDOFF_WORK.md",
+          "sha": "a621651c0cfa2213d9fcdd230810ee84728c4e4d",
+          "bytes": 1447,
+          "mode": "100644"
+        },
+        {
+          "path": "bimexec/README.md",
+          "sha": "c5253bcc705f4db40bb128f96f6580fdf7dab74f",
+          "bytes": 269,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/OPERATING_MODEL.md",
+          "sha": "6405a9eb186ac3b7115d961fd975c72428b6d05b",
+          "bytes": 2937,
+          "mode": "100644"
+        },
+        {
+          "path": "qwen_safe_bim_integration.py",
+          "sha": "837ac4d33b09cdf2a7f61af10aca81453252cfab",
+          "bytes": 5589,
+          "mode": "100644"
+        },
+        {
+          "path": "research/ARCHICAD_CAPABILITY_LEDGER_20260928.md",
+          "sha": "797a6cb9ea9e4cd763e0e4e2714c97e31634534d",
+          "bytes": 22107,
+          "mode": "100644"
+        },
+        {
+          "path": "research/ARCHICAD_EXECUTION_ARCHITECTURE_20260928.md",
+          "sha": "d770d52564eba089a8b5d26fce9412c780ef620f",
+          "bytes": 12801,
+          "mode": "100644"
+        },
+        {
+          "path": "research/GOST_ATTRIBUTES_PROFILES_LIBRARY_20260928.md",
+          "sha": "9a65f88a68cf74b768f80846187dca14e5d7d0ba",
+          "bytes": 12835,
+          "mode": "100644"
+        },
+        {
+          "path": "research/INDEX_20260928.md",
+          "sha": "cb281899b6f9ebc2ee1d168f0a6ae772c6f6fd4e",
+          "bytes": 2255,
+          "mode": "100644"
+        },
+        {
+          "path": "research/NEXT_LIVE_TEST_MATRIX_20260928.md",
+          "sha": "5c6fa9777c87655da15278f652da619752ef5a5a",
+          "bytes": 7098,
+          "mode": "100644"
+        },
+        {
+          "path": "safe-bim-v01-schema-test.json",
+          "sha": "79005e34a21e915ef2a72ccddef6ffc47ce174b3",
+          "bytes": 300,
+          "mode": "100644"
+        },
+        {
+          "path": "safe_bim_layer.py",
+          "sha": "eb8ebadaeb8619f96cbecd8e94043891853ebde2",
+          "bytes": 12837,
+          "mode": "100644"
+        },
+        {
+          "path": "tapir-1.5.8.json",
+          "sha": "01ca78e051c6efbf92812047aba168a3930dcb5e",
+          "bytes": 660670,
+          "mode": "100644"
+        }
+      ],
+      "blob_count": 39,
+      "tree_entries": 47,
+      "fetch_status": "PASS"
+    }
+  ]
+}
