@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 46,
+  "revision": 47,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -488,6 +488,18 @@
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/6a8abe2ac4e5a3e664c94bc9e71f9e15da943e27/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json",
       "kind": "SOURCE_INDEX",
       "verification": "SOURCE_LINKS_VERIFIED_NOT_COPIED"
+    },
+    "ART-P70-A01-S01-REPO-SOURCE-MAP-20261011": {
+      "id": "ART-P70-A01-S01-REPO-SOURCE-MAP-20261011",
+      "uri": "docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-091905Z-p70-source-integration-map/REPORT.md",
+      "kind": "REPORT",
+      "verification": "GITHUB_READBACK_VERIFIED"
+    },
+    "ART-P70-A01-S01-PUBLISH-RECEIPT-20261011": {
+      "id": "ART-P70-A01-S01-PUBLISH-RECEIPT-20261011",
+      "uri": "docs/research/apa-results/receipts/APA-RUN-20261011-091905Z-p70-source-integration-map.json",
+      "kind": "RECEIPT",
+      "verification": "GITHUB_READBACK_VERIFIED"
     }
   },
   "tasks": {
@@ -1986,7 +1998,7 @@
       "action_id": "APA-P70.A01",
       "title": "Сопоставить полный продуктовый контракт с существующим кодом и исследованиями",
       "kind": "CONSOLIDATION",
-      "status": "IN_PROGRESS",
+      "status": "DONE_PUBLISHED",
       "priority": 1,
       "work_key": "product-contract-and-code-baseline",
       "depends_on": [
@@ -2005,11 +2017,14 @@
         "Таблица требований полного цикла → исходные файлы/SHA → подтверждённые функции и ограничения; без новой реализации"
       ],
       "acceptance": "Таблица требований полного цикла → исходные файлы/SHA → подтверждённые функции и ограничения; без новой реализации",
-      "owner": "chatgpt-gpt6-p70-assembly-audit-20261011",
-      "lease_until": "2026-10-11T11:30:00Z",
-      "claim_ref": "chatgpt-gpt6-p70-assembly-audit-20261011",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-P70-A01-S01-REPO-SOURCE-MAP-20261011",
+        "ART-P70-A01-S01-PUBLISH-RECEIPT-20261011"
+      ],
       "blocked_reason": null
     },
     "APA-P70.A01.S02": {
