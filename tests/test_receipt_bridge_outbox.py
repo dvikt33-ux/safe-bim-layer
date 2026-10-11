@@ -76,6 +76,25 @@ class OutboxTests(unittest.TestCase):
                          "1791721617.730099")
         self.assertEqual(NotificationOutbox(self.path).reserve(EVENT), "SENT")
 
+    def test_sent_timestamp_same_is_idempotent(self):
+        a = NotificationOutbox(self.path)
+        a.reserve(EVENT)
+        a.begin_send(EVENT["event_id"])
+        a.mark_sent(EVENT["event_id"], "1791721617.730099")
+        a.mark_sent(EVENT["event_id"], "1791721617.730099")
+        self.assertEqual(a.status(EVENT["event_id"])["slack_ts"],
+                         "1791721617.730099")
+
+    def test_sent_timestamp_change_is_rejected(self):
+        a = NotificationOutbox(self.path)
+        a.reserve(EVENT)
+        a.begin_send(EVENT["event_id"])
+        a.mark_sent(EVENT["event_id"], "1791721617.730099")
+        with self.assertRaisesRegex(OutboxError, "conflicting sent timestamp"):
+            a.mark_sent(EVENT["event_id"], "1791729999.000001")
+        self.assertEqual(NotificationOutbox(self.path).status(EVENT["event_id"])["slack_ts"],
+                         "1791721617.730099")
+
     def test_send_once_then_durable_duplicate(self):
         calls = []
         def send(channel, event, publish=False):
