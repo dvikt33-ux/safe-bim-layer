@@ -178,8 +178,12 @@ def notification(proof: dict) -> dict:
     event_id = "apa-gh-receipt-" + hashlib.sha256(identity.encode()).hexdigest()[:24]
     report_url = f"https://github.com/{REPO}/blob/{proof['report_commit']}/{proof['report_path']}"
     receipt_url = f"https://github.com/{REPO}/blob/{proof['plan_commit']}/{proof['receipt_path']}"
+    # Notifications use their own ledger key. Reusing a real task's task_id
+    # could spuriously create CONFLICT against a previous PASS status for the
+    # same task+phase in EventStore.latest_states().
+    notice_stream = "APA-RECEIPT-EVENT-" + task["id"].replace(".", "-")
     return {"schema": "APA_EVENT_V1", "event_id": event_id,
-            "task_id": task["id"], "status": "INFO", "phase": "SOURCE",
+            "task_id": notice_stream, "status": "INFO", "phase": "SOURCE",
             "source": "apa:receipt-bridge:git-verified",
             "summary": (f"Verified immutable publisher receipt for {rec['run_id']}; "
                         f"controller task at pinned commit is {task['status']}. "
