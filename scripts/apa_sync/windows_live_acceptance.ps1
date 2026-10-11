@@ -23,7 +23,7 @@ if (-not (Test-Path -LiteralPath $PythonExe)) {
 
 $planCommit = '4e821c96a3cd94184bbad78f566eb037ff578c52'
 $receipt = 'docs/research/apa-results/receipts/APA-RUN-20261011-091905Z-p70-source-integration-map.json'
-$args = @(
+$probeArgs = @(
     '-m', 'scripts.apa_sync.live_receipt_probe',
     '--plan-commit', $planCommit,
     '--task-id', 'APA-P70.A01.S01',
@@ -33,14 +33,14 @@ $args = @(
 if ($Publish) {
     Write-Host 'APA LIVE PROBE: explicit Slack send enabled.'
     Write-Host 'No controller status write, PLN/APX edit or service restart.'
-    $args += '--publish'
+    $probeArgs += '--publish'
 } else {
     Write-Host 'APA PREFLIGHT: read-only; no Slack send.'
 }
 
 Push-Location $repo
 try {
-    & $PythonExe @args
+    & $PythonExe @probeArgs
     if ($LASTEXITCODE -ne 0) {
         throw "APA bridge acceptance NOT_VERIFIED (exit $LASTEXITCODE)."
     }
