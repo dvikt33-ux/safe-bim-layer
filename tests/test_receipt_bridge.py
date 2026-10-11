@@ -3,6 +3,7 @@ import hashlib
 import json
 import pathlib
 import sys
+import tempfile
 import types
 import unittest
 from unittest.mock import patch
@@ -58,11 +59,31 @@ class BridgeTests(unittest.TestCase):
         proof = b.verify_receipt(FakeReader(files), COMMIT, TASK, RECEIPT_PATH)
         ev = b.notification(proof)
         self.assertEqual((ev["status"], ev["phase"]), ("INFO", "SOURCE"))
-        self.assertEqual(ev["task_id"], TASK)
+        self.assertEqual(ev["task_id"], "APA-RECEIPT-EVENT-" + TASK.replace(".", "-"))
+        self.assertIn(TASK, ev["summary"])
         self.assertIn("PARTIAL", ev["summary"])
         self.assertEqual(len(ev["evidence_urls"]), 2)
         self.assertEqual(ev["event_id"], b.notification(proof)["event_id"])
         self.assertTrue(ev["evidence_urls"][0].startswith(f"https://github.com/{b.REPO}/blob/{COMMIT}/"))
+
+    def test_receipt_info_does_not_conflict_with_real_task_pass(self):
+        from scripts.apa_sync.coordinator import EventStore, format_event
+        files, _, _ = fixture()
+        event = b.notification(b.verify_receipt(FakeReader(files), COMMIT, TASK, RECEIPT_PATH))
+        prior = {"schema": "APA_EVENT_V1",
+                 "event_id": "preexisting-real-task-pass-123",
+                 "task_id": TASK, "status": "PASS", "phase": "SOURCE",
+                 "source": "independent-test", "summary": "Real task SOURCE PASS",
+                 "evidence_urls": [f"https://github.com/{b.REPO}/commit/{COMMIT}"]}
+        with tempfile.TemporaryDirectory() as temp:
+            store = EventStore(pathlib.Path(temp) / "events.sqlite3")
+            self.assertFalse(store.ingest(format_event(prior), slack_channel=b.CHANNEL, slack_ts="1")["conflict"])
+            received = store.ingest(format_event(event), slack_channel=b.CHANNEL, slack_ts="2")
+            self.assertFalse(received["conflict"])
+            states = store.latest_states()["state"]
+            self.assertEqual(states[f"{TASK}:SOURCE"]["effective_status"], "PASS")
+            self.assertEqual(states[f"{event['task_id']}:SOURCE"]["effective_status"], "INFO")
+            self.assertEqual(len(states), 2)
 
     def test_mismatch_report_hash_rejected(self):
         files, _, _ = fixture()
