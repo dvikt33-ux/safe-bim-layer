@@ -133,7 +133,6 @@ class ProjectLibraryPackTests(unittest.TestCase):
         native=NativeGetOnly()
         # Duplicate/unknown native BM always fails; first ensure story conflict gate.
         wrong=NativeGetOnly()
-        wrong.names=[BM]
         def story_drift(cmd,params):
             res=wrong(cmd,params)
             if cmd=="GetStories":
