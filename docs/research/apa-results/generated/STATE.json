@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 12,
+  "run_count": 13,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -85,6 +85,13 @@
       "report": "runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md",
       "run_id": "APA-RUN-20261011-161511Z-p70-semantic-brief-getstories",
       "substep_id": "APA-P70.A02.S01"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "OFFLINE",
+      "report": "runs/2026-10-11/APA-RUN-20261011-163145Z-p70-a02-s03-library-pack/REPORT.md",
+      "run_id": "APA-RUN-20261011-163145Z-p70-a02-s03-library-pack",
+      "substep_id": "APA-P70.A02.S03"
     }
   ],
   "schema": "APA_GENERATED_INDEX_V1",

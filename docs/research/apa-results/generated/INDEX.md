@@ -16,5 +16,6 @@ Generated projection from immutable V2 runs. Legacy reports remain in ARTIFACT_R
 | [APA-RUN-20261011-092155Z-source71-byte-archive](../runs/2026-10-11/APA-RUN-20261011-092155Z-source71-byte-archive/REPORT.md) | APA-P00.A02.S03 | SOURCE | EVIDENCE_READY |
 | [APA-RUN-20261011-160327Z-p70-a01-s03-integration-freeze](../runs/2026-10-11/APA-RUN-20261011-160327Z-p70-a01-s03-integration-freeze/REPORT.md) | APA-P70.A01.S03 | SOURCE | EVIDENCE_READY |
 | [APA-RUN-20261011-161511Z-p70-semantic-brief-getstories](../runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md) | APA-P70.A02.S01 | OFFLINE | EVIDENCE_READY |
+| [APA-RUN-20261011-163145Z-p70-a02-s03-library-pack](../runs/2026-10-11/APA-RUN-20261011-163145Z-p70-a02-s03-library-pack/REPORT.md) | APA-P70.A02.S03 | OFFLINE | EVIDENCE_READY |
 
 Publication receipts are in ../receipts/. Evidence status is not publication status.
