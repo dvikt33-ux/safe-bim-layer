@@ -8,8 +8,8 @@ requires_approval tasks are not dispatchable until separate owner approval is re
 ## Краткая сводка
 
 - План: APA-P70 — Разработка APA — полный цикл проектирования и выпуска
-- Статус: **PARTIAL**; завершено 9/29 подзадач.
-- Сейчас: не выполняется; нет IN_PROGRESS.
+- Статус: **IN_PROGRESS**; завершено 9/29 подзадач.
+- Сейчас: APA-P70.A09.S01
 - Следующая доступная: APA-P70.A02.S02 — Связать проектные требования с версиями нормативов и проверяемыми правилами
 
 ## Этапы → задачи
@@ -24,7 +24,7 @@ requires_approval tasks are not dispatchable until separate owner approval is re
 | APA-P70.A06 — MEP и междисциплинарная координация | WAITING | 0/2 |
 | APA-P70.A07 — Ведомости, чертежи, нормативная проверка и выпуск | WAITING | 0/3 |
 | APA-P70.A08 — Сквозная приёмка и расширение без переписывания ядра | PARTIAL | 1/5 |
-| APA-P70.A09 — Геометрия и точность после приёмки ядра | READY | 0/1 |
+| APA-P70.A09 — Геометрия и точность после приёмки ядра | IN_PROGRESS | 0/1 |
 | APA-P70.A10 — Измеримое ускорение стабильных операций | WAITING | 0/1 |
 
 ## Подзадачи и следующий шаг
@@ -109,7 +109,7 @@ requires_approval tasks are not dispatchable until separate owner approval is re
 
 ### APA-P70.A09 — Геометрия и точность после приёмки ядра
 
-- **APA-P70.A09.S01 [READY / ELIGIBLE]** Подключить Native Model Dump, графовую связность и реальные 3D-проверки; исследования: APA-P50.A02.S01
+- **APA-P70.A09.S01 [IN_PROGRESS]** Подключить Native Model Dump, графовую связность и реальные 3D-проверки; исследования: APA-P50.A02.S01
   - Источники/ветки: [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-SDK-SEO](../../../../../docs/research/apa-results/runs/2026-10-10/apa-discovery-20261010-102440-slinktrim-9f2b7.md)
 
 ### APA-P70.A10 — Измеримое ускорение стабильных операций

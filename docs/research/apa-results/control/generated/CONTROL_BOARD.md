@@ -12,11 +12,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | BLOCKED | 8 |
 | CLAIMED | 0 |
 | DONE_PUBLISHED | 20 |
-| IN_PROGRESS | 0 |
+| IN_PROGRESS | 1 |
 | PARTIAL | 15 |
-| READY | 38 |
+| READY | 37 |
 | SUPERSEDED | 0 |
-| DISPATCHABLE_NOW | 18 |
+| DISPATCHABLE_NOW | 17 |
 | HELD_BY_DEPENDENCIES | 35 |
 | EXPIRED_LEASES | 0 |
 
@@ -30,7 +30,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| — | — | — | — |
+| APA-P70.A09.S01 | codex-apa-core-native-20261011 | 2026-10-11T21:00:00Z | integrated-native-3d-geometry-precision |
 
 ## CONTROL — 0 ready
 
@@ -66,11 +66,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | P3 | APA-P70.A02.S02 — Связать проектные требования с версиями нормативов и проверяемыми правилами | Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED |
 | P8 | APA-P00.A03.S03 — Publisher, дедупликация, retry, heartbeat и ошибки | Publisher E2E + оставшиеся recovery/heartbeat gates |
 
-## INTEGRATION — 1 ready
+## INTEGRATION — 0 ready
 
 | Priority | Task | Acceptance |
 | --- | --- | --- |
-| P2 | APA-P70.A09.S01 — Подключить Native Model Dump, графовую связность и реальные 3D-проверки | Native dump/NetworkX/Shapely используются через существующий readback; стыки, XYZ, story и host проверены на подтверждённых ошибках; 2D пересечение не считается 3D коллизией; ядро сохраняет работоспособность. |
+| — | — | — |
 
 ## VALIDATION — 4 ready
 
