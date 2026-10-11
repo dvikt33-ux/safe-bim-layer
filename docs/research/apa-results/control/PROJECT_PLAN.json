@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 91,
+  "revision": 92,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -3070,7 +3070,7 @@
       "action_id": "APA-P70.A02",
       "title": "Интегрировать реальные материалы, Composite/Profile и выбранные GDL-библиотеки",
       "kind": "INTEGRATION",
-      "status": "READY",
+      "status": "IN_PROGRESS",
       "priority": 3,
       "work_key": "verified-project-material-library-integration",
       "depends_on": [
@@ -3087,9 +3087,9 @@
         "Проверенные CSE/PLP и реальные проектные BM/Composite/Profile/Surface/GDL применены и прочитаны обратно; Unicode и стабильная identity Library Parts проверены; источники/лицензия/AC29 совместимость учтены; найденный файл не равен LIVE_VERIFIED."
       ],
       "acceptance": "Проверенные CSE/PLP и реальные проектные BM/Composite/Profile/Surface/GDL применены и прочитаны обратно; Unicode и стабильная identity Library Parts проверены; источники/лицензия/AC29 совместимость учтены; найденный файл не равен LIVE_VERIFIED.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "codex-apa-material-native-20261011",
+      "lease_until": "2026-10-11T22:00:00Z",
+      "claim_ref": "APA-RUN-20261011-203100Z-material-library-integration",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
