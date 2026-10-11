@@ -104,3 +104,22 @@ A new **strictly read-only** diagnostic was committed to the same PR branch:
 Source commit `35c280583cafb4829bb5929f6f679c5c7b7e2de0`; CI https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38143324357 — **SUCCESS, 126/126 offline tests PASS** including synthetic second-story native wall readback drift with read-only diagnosis and unchanged write-attempt count.
 
 **Next gate:** owner runs only `python .../diagnose_apa_suffix_wall_readback.py --port 19726`, preserving the open unsaved scratch project and original journal. Repair or continuation must be grounded in this output, separately authorized and single-shot. No automatic retry, save, rollback, or write has been attempted by ChatGPT.
+
+## Subsequent read-only diagnostic: second-story Z false-positive and 8/25 prefix
+
+Owner's 2026-10-11 read-only diagnostic against the same exact unsaved disposable PLN, port 19726, returned:
+- `READ_ONLY_SUFFIX_DIAGNOSIS`; native inventory **28** = original 20 + earlier 5 + new suffix 3, zero removed or unjournaled suffix GUIDs.
+- First suffix PASS `s1-partition-1` GUID `E66B647F-885B-4D32-8D47-30960A388426`, PASS `s1-partition-2` GUID `572A37D0-6CEA-42F9-A836-2C1AE43A7812`.
+- Created-but-unverified second-floor `s2-wall-south` GUID **`66B28F44-FAAF-404B-BEB7-83CF48BEBB02`**.
+- Wall is native story `1`, Basic, height 3m, thickness 0.3m, correct X/Y endpoints/offset/arc; **only** reported mismatch: submitted `zCoordinate=0`, native details `zCoordinate=3`.
+- The actual story is at elevation **+3.0m**. This is the expected global native Z for a wall with a 0m story-local offset. No correction or wall move is warranted.
+
+Root cause is **readback coordinate-frame error**, not demonstrated geometry error. The old implementation compared local wall `zCoordinate` to absolute native `GetDetailsOfElements.zCoordinate` for nonzero stories.
+
+Source patch in [PR #35](https://github.com/dvikt33-ux/safe-bim-layer/pull/35) now passes exact pinned `GetStories` elevation through SceneWriter, hosted wall checks, final whole-model readback and existing Project Accelerator. It verifies `nativeZ = storyLevel + requestedLocalZ` (for the observed AC29 native contract) and fails closed when no unique nonzero-story binding exists.
+
+A narrowly scoped second recovery script `scripts/continue_apa_after_story_z.py` follows the original immutable 20/5/3 provenance, historical SHA256 manifest, verified slab repair, first suffix partial journal with exactly two PASS partitions and one CREATED_UNVERIFIED south wall, exact 28 present native GUIDs and typed readback of all eight existing planned elements. **Read-only default** returns a fresh explicit token; after separate owner confirmation it reuses the *same* SceneWriter for **only 17 missing** Create operations, durable per-operation journal and 25-element final typed readback. It never replays earlier reserved suffixes or alters old operation states.
+
+**GitHub CI:** https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38143964970 — **SUCCESS, 136/136 offline tests PASS**, including an 8-element verified prefix → 17 new operations → full synthetic 25-element acceptance and fail-closed Z-drift, journal-replay and inventory-drift cases.
+
+**Status remains:** past slab REPORTED_LIVE_PASS_UNSAVED; attempted previous suffix REPORTED_LIVE_PARTIAL; second Z fix / 17-op continuation OFFLINE_PASS only; actual save/reopen and full Archicad model remain NOT_VERIFIED. **Do not use old `ПОСТРОИТЬ` token or old continuation script again.** No protected PLN, main, installed Add-On or existing protected PR branches were changed by these source commits.
