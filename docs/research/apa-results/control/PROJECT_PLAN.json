@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 80,
+  "revision": 81,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2405,7 +2405,7 @@
       "action_id": "APA-P70.A03",
       "title": "Собрать модель средствами уже существующих BIM-исполнителей",
       "kind": "BUILD",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 0,
       "work_key": "reuse-native-whole-building-builder",
       "depends_on": [
@@ -2424,9 +2424,9 @@
         "Создание полноценной BIM-геометрии из схемы через имеющиеся writer/graph; связные стены не дробятся без необходимости; тестовый PLN только после разрешения"
       ],
       "acceptance": "Создание полноценной BIM-геометрии из схемы через имеющиеся writer/graph; связные стены не дробятся без необходимости; тестовый PLN только после разрешения",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "codex-apa-core-native-20261011",
+      "lease_until": "2026-10-11T21:00:00Z",
+      "claim_ref": "APA-RUN-20261011T1920Z-isolated-authored-native",
       "requires_approval": false,
       "evidence": [
         "ART-P70-A03-S02-AUTHORED-NATIVE-DAG-PARTIAL-20261011",
