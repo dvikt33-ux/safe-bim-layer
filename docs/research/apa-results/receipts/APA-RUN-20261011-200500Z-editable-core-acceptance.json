@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:b6fde3da74e2358f685f4ac8b1006ae3fe5f020ae1bac8a48e4ae04c66c4fc33",
+  "index_commit_sha": "84fc2013bbac7f33af675413c8aaac63858f6a12",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "84fc2013bbac7f33af675413c8aaac63858f6a12",
+  "report_path": "docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md",
+  "report_sha256": "883fd29aa16fcb1c01a94de3f1b76e9e8fd0da5032e58f78acb0e8a01028003f",
+  "run_id": "APA-RUN-20261011-200500Z-editable-core-acceptance",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}
