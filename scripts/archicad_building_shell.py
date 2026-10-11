@@ -70,7 +70,7 @@ def validate_spec(spec, anchor):
     for i, item in enumerate(stories):
         if not isinstance(item, dict) or set(item) != {"label", "nativeIndex", "floorId", "level"}:
             raise ValueError("STORY_BINDING_FIELDS_REQUIRED")
-        if (not isinstance(item["label"], str) or not item["label"].strip()
+        if (not isinstance(item["label"], str)
                 or type(item["nativeIndex"]) is not int
                 or type(item["floorId"]) is not int
                 or item["nativeIndex"] in seen):
