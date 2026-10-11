@@ -20,6 +20,10 @@ def verify_model(api, plan, created):
             continue
         step = operations[sid]
         params = RUN.resolve_params(step, {'__plan__': plan['graph'], **created})
+        expectations=plan.get('nativeAttributeExpectations',{}).get(sid,{})
+        if expectations:
+            params=copy.deepcopy(params)
+            next(iter(params.values()))[0].update(expectations)
         if step['command'] in ('CreateDoors', 'CreateWindows'):
             host = step['params'][step['command'][6:].lower()+'Data'][0]['ownerWallId']['guid']['$createdGuid']
             floor = verified[host]['floorIndex']
@@ -33,6 +37,11 @@ def verify_model(api, plan, created):
             expected_story_level=RUN.story_level_for_floor(plan['storyBindings'], floor),
             expected_slab_material_guid=plan['slabBasicMaterialGuid'] if step['command']=='CreateSlabs' else None,
             slab_level_is_absolute=True)
+        library=plan.get('nativeLibraryExpectations',{}).get(sid)
+        if library:
+            part=RUN.requested_details(api,created[sid]['guid'])['details'].get('libPart',{})
+            if part.get('name')!=library['name'] or part.get('ownUnID',{}).get('guid','').casefold()!=library['guid'].casefold():
+                raise ValueError('PLAN_LIBRARY_IDENTITY_READBACK_MISMATCH')
         verified[sid] = {'guid': created[sid]['guid'], 'kind': kind, 'floorIndex': floor}
     return verified
 
@@ -196,5 +205,84 @@ def execute_opening_width(api,ticket,journal,token):
         except Exception as exc:
             result={'status':'PARTIAL_OR_UNKNOWN_OUTCOME','reason':str(exc),'automaticRetry':False}
         db.execute('UPDATE authored_opening_edits SET state=?,result=? WHERE operation_id=?',
+            (result['status'],RUN.canonical(result),record['operationId']));db.commit()
+    return result
+
+
+def prepare_attribute_edit(api,plan,created,step_id,selection,journal,operation_id):
+    """Resolve a real project attribute for one explicitly owned existing element."""
+    from archicad_native_material_selection import compile_change
+    if RUN.guarded_project(api,plan['storyBindings'][0])!=plan['binding'] or plan['binding']['path']!=RUN.APPROVED_ISOLATED_WRITER_PATH:
+        raise ValueError('ATTRIBUTE_EDIT_TARGET_DRIFT')
+    if set(created)!=set(s['id'] for s in plan['graph']['operations']):raise ValueError('ATTRIBUTE_EDIT_SOURCE_INCOMPLETE')
+    verify_model(api,plan,created)
+    change=compile_change(api,plan,created,step_id,selection)
+    record={'operationId':operation_id,'oldPlan':plan,'created':created,'inventory':A.inventory_guids(api),
+        'columnSegments':A.column_subelements(api,created),'selection':selection,
+        'beforeDetails':RUN.requested_details(api,created[step_id]['guid'])['details'],**change}
+    return _reserve_attribute_ticket(record,journal)
+
+
+def _reserve_attribute_ticket(record,journal):
+    if not RUN._SCENE_ID.fullmatch(record['operationId']):raise ValueError('INVALID_ATTRIBUTE_EDIT_ID')
+    with closing(sqlite3.connect(journal)) as db:
+        db.execute('CREATE TABLE IF NOT EXISTS authored_attribute_edits(operation_id TEXT PRIMARY KEY,state TEXT,intent TEXT,result TEXT)');db.commit()
+        if db.execute('SELECT 1 FROM authored_attribute_edits WHERE operation_id=?',(record['operationId'],)).fetchone():
+            raise ValueError('ATTRIBUTE_EDIT_ALREADY_RESERVED_NEVER_RETRY')
+    return {'status':'READY_FOR_EXISTING_ATTRIBUTE_EDIT','intent':record,'confirmPlanHash':RUN.digest(record),'modelWriteAttempts':0}
+
+
+def prepare_attribute_restore(api,applied,journal,operation_id):
+    """Explicit restore is a separate operation; no automatic rollback or retry."""
+    record=applied['intent']
+    if RUN.guarded_project(api,record['newPlan']['storyBindings'][0])!=record['newPlan']['binding']:
+        raise ValueError('ATTRIBUTE_RESTORE_TARGET_DRIFT')
+    verify_model(api,record['newPlan'],record['created'])
+    step=next(s for s in record['oldPlan']['graph']['operations'] if s['id']==record['stepId'])
+    original=next(iter(step['params'].values()))[0];before=record['beforeDetails']
+    target=record['created'][record['stepId']]['guid'];kind=record['selection']['kind']
+    if kind=='Composite':
+        params={'wallsWithDetails':[{'elementId':{'guid':target},'structureType':'Basic',
+            'buildingMaterialId':original['buildingMaterialId'],'thickness':original['thickness']}]}
+    elif kind=='Surface':
+        params={'wallsWithDetails':[{'elementId':{'guid':target},'referenceMaterial':before['referenceMaterial']}]}
+    elif kind=='Profile':
+        params={'columnsWithDetails':[{'elementId':{'guid':target},'buildingMaterialId':original['buildingMaterialId'],
+            'width':original['width'],'depth':original['depth'],'coreAnchor':before['coreAnchor'],
+            'isWidthAndHeightLinked':before['isWidthAndHeightLinked']}]}
+    else:raise ValueError('ATTRIBUTE_RESTORE_UNSUPPORTED')
+    restore={'operationId':operation_id,'oldPlan':record['newPlan'],'newPlan':record['oldPlan'],
+        'created':record['created'],'inventory':record['inventory'],'columnSegments':record['columnSegments'],
+        'stepId':record['stepId'],'command':record['command'],'parameters':params,'explicitRestoreOf':record['operationId']}
+    return _reserve_attribute_ticket(restore,journal)
+
+
+def execute_attribute_edit(api,ticket,journal,token):
+    from archicad_native_material_selection import resolve
+    record=ticket['intent'];plan=record['oldPlan']
+    if token!=ticket['confirmPlanHash'] or RUN.digest(record)!=token:raise ValueError('ATTRIBUTE_EDIT_TOKEN_MISMATCH')
+    with closing(sqlite3.connect(journal)) as db:
+        db.execute('PRAGMA synchronous=FULL');db.execute('BEGIN IMMEDIATE')
+        db.execute('INSERT INTO authored_attribute_edits VALUES(?,?,?,?)',
+            (record['operationId'],'ATTEMPTED',RUN.canonical(record),'{}'));db.commit()
+        try:
+            if RUN.guarded_project(api,plan['storyBindings'][0])!=plan['binding'] or A.inventory_guids(api)!=record['inventory']:
+                raise ValueError('ATTRIBUTE_EDIT_OPERATION_BOUNDARY_DRIFT')
+            verify_model(api,plan,record['created'])
+            if 'selection' in record:
+                s=record['selection']
+                if resolve(api,s['kind'],s['name'],s['expectedGuid'])!=record['selected']:
+                    raise ValueError('SELECTED_ATTRIBUTE_CHANGED_BEFORE_WRITE')
+            response=api(record['command'],record['parameters'])
+            if response.get('executionResults')!=[{'success':True}]:raise ValueError('ATTRIBUTE_EDIT_NOT_CONFIRMED')
+            verify_model(api,record['newPlan'],record['created'])
+            if (A.inventory_guids(api)!=record['inventory'] or A.column_subelements(api,record['created'])!=record['columnSegments'] or
+                    RUN.guarded_project(api,plan['storyBindings'][0])!=plan['binding']):
+                raise ValueError('ATTRIBUTE_EDIT_GUID_HOST_OR_TARGET_DRIFT')
+            result={'status':'EXISTING_ATTRIBUTE_EDIT_READBACK_PASS','guidsPreserved':True,'newCreates':0,
+                'newPlanHash':record['newPlan']['sourcePlanHash'],'automaticRetry':False}
+        except Exception as exc:
+            result={'status':'PARTIAL_OR_UNKNOWN_OUTCOME','reason':str(exc),'automaticRetry':False}
+        db.execute('UPDATE authored_attribute_edits SET state=?,result=? WHERE operation_id=?',
             (result['status'],RUN.canonical(result),record['operationId']));db.commit()
     return result

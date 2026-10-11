@@ -17,6 +17,12 @@ on:
       - 'scripts/archicad_authored_native_plan.py'
       - 'scripts/archicad_authored_geometry.py'
       - 'scripts/requirements-geometry.txt'
+      - 'scripts/archicad_native_material_selection.py'
+      - 'scripts/archicad_selected_library_part.py'
+      - 'tests/test_archicad_selected_library_part.py'
+      - 'scripts/archicad_authored_extension.py'
+      - 'scripts/requirements-materials.txt'
+      - 'tests/test_archicad_native_material_selection.py'
       - 'scripts/run_apa_test_house_01.ps1'
       - 'schemas/accelerator/**'
       - 'schemas/tapir-live-1.5.10/**'
@@ -60,6 +66,12 @@ on:
       - 'scripts/archicad_authored_native_plan.py'
       - 'scripts/archicad_authored_geometry.py'
       - 'scripts/requirements-geometry.txt'
+      - 'scripts/archicad_native_material_selection.py'
+      - 'scripts/archicad_selected_library_part.py'
+      - 'tests/test_archicad_selected_library_part.py'
+      - 'scripts/archicad_authored_extension.py'
+      - 'scripts/requirements-materials.txt'
+      - 'tests/test_archicad_native_material_selection.py'
       - 'scripts/run_apa_test_house_01.ps1'
       - 'schemas/accelerator/**'
       - 'schemas/tapir-live-1.5.10/**'
@@ -105,7 +117,7 @@ jobs:
         with:
           python-version: '3.11'
       - run: python -m pip install 'jsonschema>=4,<5'
-      - run: python -m pip install -r scripts/requirements-geometry.txt
+      - run: python -m pip install -r scripts/requirements-materials.txt
       - run: python -m unittest discover -s tests -p 'test_archicad_*.py' -v
       - run: python scripts/archicad_batch_contracts.py --runtime-version 1.5.8
       - run: python scripts/archicad_bim_graph.py examples/archicad_bim_graph.offline.sample.json --runtime-version 1.5.8

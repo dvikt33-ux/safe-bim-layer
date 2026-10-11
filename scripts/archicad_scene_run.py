@@ -58,7 +58,7 @@ def bind_approved_scratch_pln(port, path=APPROVED_SCRATCH_PATH):
 
 DEFAULT_SCENE_SCHEMA = Path(__file__).resolve().parents[1] / "schemas/tapir-live-1.5.10/tapir-scene-live.json"
 ALLOWED_WRITES = frozenset(("CreateWalls", "CreateSlabs", "CreateColumns",
-                           "CreateWindows", "CreateDoors"))
+                           "CreateWindows", "CreateDoors", "CreateObjects"))
 _GUID = re.compile(r"^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$")
 _SCENE_ID = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_-]{3,79}$")
 _NONSPATIAL_TYPES = frozenset({
@@ -81,10 +81,15 @@ def digest(value):
 
 
 def native_plan_hash(preview, graph_hash):
-    return digest({'graphHash':graph_hash, 'schemaSha256':preview['schemaSha256'],
+    binding={'graphHash':graph_hash, 'schemaSha256':preview['schemaSha256'],
         'slabBasicMaterialName':preview.get('slabBasicMaterialName'),
         'slabBasicMaterialGuid':preview.get('slabBasicMaterialGuid'),
-        'slabLevelConvention':preview.get('slabLevelConvention','LEGACY_RELATIVE')})
+        'slabLevelConvention':preview.get('slabLevelConvention','LEGACY_RELATIVE')}
+    if preview.get('nativeAttributeExpectations'):
+        binding['nativeAttributeExpectations']=preview['nativeAttributeExpectations']
+    if preview.get('nativeLibraryExpectations'):
+        binding['nativeLibraryExpectations']=preview['nativeLibraryExpectations']
+    return digest(binding)
 
 
 def close(a, b, tolerance=1e-5):
@@ -291,13 +296,26 @@ def verify_readback(command, params, row, owner_guid=None, expected_floor=0,
                      expected_story_level + expected["zCoordinate"]):
             raise ValueError("WALL_STORY_Z_READBACK_MISMATCH")
         if any(details.get(k) != v for k, v in (
-            ("structureType", "Basic"), ("referenceLineLocation", "Center"),
+            ("structureType", expected.get("structureType", "Basic")), ("referenceLineLocation", "Center"),
             ("geometryType", "Straight"))):
             raise ValueError("WALL_TYPE_READBACK_MISMATCH")
         if "buildingMaterialId" in expected and (
                 str(details.get("buildingMaterialId",{}).get("guid","")).casefold()!=
                 expected["buildingMaterialId"]["guid"].casefold()):
             raise ValueError("WALL_MATERIAL_READBACK_MISMATCH")
+        if expected.get('structureType') == 'Composite' and (
+                str(details.get('compositeId',{}).get('guid','')).casefold()!=
+                expected['compositeId']['guid'].casefold()):
+            raise ValueError('WALL_COMPOSITE_READBACK_MISMATCH')
+        for face in ('referenceMaterial','oppositeMaterial','sideMaterial'):
+            if face in expected:
+                actual=details.get(face,{})
+                wanted=expected[face]
+                if actual.get('overridden') != wanted['overridden'] or (
+                        wanted['overridden'] and
+                        str(actual.get('attributeId',{}).get('guid','')).casefold()!=
+                        wanted['attributeId']['guid'].casefold()):
+                    raise ValueError('WALL_SURFACE_OVERRIDE_READBACK_MISMATCH')
     elif command == "CreateSlabs":
         # CreateSlabs may inherit Composite from the current defaults. Allow an
         # intermediate thickness mismatch ONLY before an explicitly journaled
@@ -336,6 +354,22 @@ def verify_readback(command, params, row, owner_guid=None, expected_floor=0,
                 str(details.get('buildingMaterialId',{}).get('guid','')).casefold()!=
                 expected['buildingMaterialId']['guid'].casefold()):
             raise ValueError('COLUMN_MATERIAL_READBACK_MISMATCH')
+        if 'profileId' in expected and (
+                str(details.get('profileId',{}).get('guid','')).casefold()!=
+                expected['profileId']['guid'].casefold()):
+            raise ValueError('COLUMN_PROFILE_READBACK_MISMATCH')
+    elif command == "CreateObjects":
+        if details.get('libPart', {}).get('name') != expected['libraryPartName']:
+            raise ValueError('OBJECT_LIBRARY_NAME_READBACK_MISMATCH')
+        if not all(close(details.get('origin', {}).get(axis), expected['coordinates'][axis])
+                   for axis in ('x','y','z')):
+            raise ValueError('OBJECT_POSITION_READBACK_MISMATCH')
+        if 'dimensions' in expected and not all(
+                close(details.get('dimensions',{}).get(axis), expected['dimensions'][axis])
+                for axis in ('x','y','z')):
+            raise ValueError('OBJECT_DIMENSIONS_READBACK_MISMATCH')
+        if 'angle' in expected and not close(details.get('angle'),expected['angle']):
+            raise ValueError('OBJECT_ROTATION_READBACK_MISMATCH')
     else:
         owner = details.get("ownerElementId")
         actual_guid = owner.get("guid") if isinstance(owner, dict) else None
