@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 61,
+  "revision": 62,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2233,7 +2233,7 @@
       "action_id": "APA-P70.A02",
       "title": "Собрать проектный Library Pack из проверяемых строительных систем и узлов",
       "kind": "BUILD",
-      "status": "READY",
+      "status": "IN_PROGRESS",
       "priority": 2,
       "work_key": "project-library-pack-assembly",
       "depends_on": [
@@ -2251,9 +2251,9 @@
         "Отобранные CSE, источники/хэши/лицензии, интерфейсы, совместимые AC29 объекты и список неподтверждённых узлов"
       ],
       "acceptance": "Отобранные CSE, источники/хэши/лицензии, интерфейсы, совместимые AC29 объекты и список неподтверждённых узлов",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "chatgpt-gpt6-manual",
+      "lease_until": "2026-10-11T21:30:00Z",
+      "claim_ref": "APA-RUN-20261011-170300Z-p70-a02-s03-project-library-pack",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
