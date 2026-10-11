@@ -1,16 +1,14 @@
 {
-  "active": [
-    "APA-P70.A02.S03"
-  ],
-  "artifact_count": 69,
+  "active": [],
+  "artifact_count": 71,
   "counts": {
     "BLOCKED": 8,
     "CLAIMED": 0,
-    "DISPATCHABLE_NOW": 17,
-    "DONE_PUBLISHED": 13,
+    "DISPATCHABLE_NOW": 18,
+    "DONE_PUBLISHED": 14,
     "EXPIRED_LEASES": 0,
-    "HELD_BY_DEPENDENCIES": 35,
-    "IN_PROGRESS": 1,
+    "HELD_BY_DEPENDENCIES": 34,
+    "IN_PROGRESS": 0,
     "PARTIAL": 15,
     "READY": 37,
     "SUPERSEDED": 0
@@ -25,16 +23,16 @@
         "total": 3
       },
       {
-        "done": 1,
+        "done": 2,
         "id": "APA-P70.A02",
-        "status": "IN_PROGRESS",
+        "status": "PARTIAL",
         "title": "Требования, нормативы и библиотека конкретного проекта",
         "total": 3
       },
       {
         "done": 0,
         "id": "APA-P70.A03",
-        "status": "WAITING",
+        "status": "READY",
         "title": "Планировка и редактируемая нативная BIM-модель",
         "total": 3
       },
@@ -74,13 +72,11 @@
         "total": 3
       }
     ],
-    "active": [
-      "APA-P70.A02.S03"
-    ],
-    "done": 3,
+    "active": [],
+    "done": 4,
     "next_eligible": "APA-P70.A02.S02",
     "plan_id": "APA-P70",
-    "status": "IN_PROGRESS",
+    "status": "PARTIAL",
     "total": 23
   },
   "dispatchable": {
@@ -94,7 +90,9 @@
       "APA-P50.A01.S01"
     ],
     "CONTROL": [],
-    "INTEGRATION": [],
+    "INTEGRATION": [
+      "APA-P70.A03.S01"
+    ],
     "RESEARCH": [
       "APA-P10.A01.S01",
       "APA-P10.A01.S02",
@@ -132,7 +130,6 @@
     "APA-P50.A03.S01",
     "APA-P50.A03.S02",
     "APA-P70.A01.S02",
-    "APA-P70.A03.S01",
     "APA-P70.A03.S02",
     "APA-P70.A03.S03",
     "APA-P70.A04.S01",
@@ -153,7 +150,7 @@
   "known_published_v2_runs": 13,
   "legacy_reports": "NOT_FULLY_INDEXED",
   "orphan_v2_manifests": [],
-  "plan_revision": 62,
+  "plan_revision": 64,
   "publisher": "DEPLOYED_SYNTHETIC_E2E_PASS",
   "research_lookahead": {
     "linked_product_substeps": 23,
@@ -273,8 +270,8 @@
       ]
     },
     "PRODUCT_DEVELOPMENT": {
-      "done": 3,
-      "ready": 1,
+      "done": 4,
+      "ready": 2,
       "task_ids": [
         "APA-P70.A01.S01",
         "APA-P70.A01.S02",
