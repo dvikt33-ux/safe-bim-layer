@@ -48,42 +48,26 @@ jobs:
           python tools/apa_controller/controller.py validate
           python tools/apa_controller/controller.py verify-inbox
 
-      - name: Prepare immutable run files and generated projections
-        run: python tools/apa_publisher/publisher.py prepare
-
-      - name: Commit report and index projection
+      - name: Commit immutable reports with bounded retry
         id: report
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "apa-research-publisher[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- docs/research/apa-results/runs docs/research/apa-results/generated
-          if ! git diff --cached --quiet; then
-            git commit -m "ops(APA): publish immutable V2 runs and generated projections"
-            git push origin HEAD:refs/heads/research/apa-verified-results-hub-20261010
-          fi
-          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          bash tools/apa_publisher/publish_stage_retry.sh reports
 
       - name: Verify remote GitHub report and index bytes
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: python tools/apa_publisher/publisher.py verify --commit "${{ steps.report.outputs.sha }}"
 
-      - name: Generate idempotent publication receipts
-        run: python tools/apa_publisher/publisher.py receipt --commit "${{ steps.report.outputs.sha }}"
-
-      - name: Commit receipts
+      - name: Commit verified receipts with bounded retry
         id: receipts
         shell: bash
         run: |
           set -euo pipefail
-          git add -- docs/research/apa-results/receipts
-          if ! git diff --cached --quiet; then
-            git commit -m "ops(APA): record GitHub-verified V2 publication receipts"
-            git push origin HEAD:refs/heads/research/apa-verified-results-hub-20261010
-          fi
-          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          bash tools/apa_publisher/publish_stage_retry.sh receipts "${{ steps.report.outputs.sha }}"
 
       - name: Verify remote GitHub receipts
         env:
