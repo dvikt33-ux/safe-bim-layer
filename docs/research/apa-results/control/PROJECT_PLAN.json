@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 86,
+  "revision": 87,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2982,7 +2982,7 @@
       "action_id": "APA-P70.A08",
       "title": "Принять ядро: задание → связное редактируемое здание → правка → readback",
       "kind": "VALIDATION",
-      "status": "READY",
+      "status": "IN_PROGRESS",
       "priority": 0,
       "work_key": "editable-native-core-e2e-acceptance",
       "depends_on": [
@@ -2998,9 +2998,9 @@
         "Один brief создаёт связное небольшое здание; все требуемые типы поддержаны, GUID/этажи/материалы/host/геометрия подтверждены; согласованная правка сохраняет GUID и не дублирует модель; сохранение и повторное чтение подтверждены. Четыре элемента и offline CI не достаточны. Инженерная/нормативная приёмка отдельно."
       ],
       "acceptance": "Один brief создаёт связное небольшое здание; все требуемые типы поддержаны, GUID/этажи/материалы/host/геометрия подтверждены; согласованная правка сохраняет GUID и не дублирует модель; сохранение и повторное чтение подтверждены. Четыре элемента и offline CI не достаточны. Инженерная/нормативная приёмка отдельно.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "codex-apa-core-native-20261011",
+      "lease_until": "2026-10-11T21:00:00Z",
+      "claim_ref": "APA-RUN-20261011-200500Z-editable-core-acceptance",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
