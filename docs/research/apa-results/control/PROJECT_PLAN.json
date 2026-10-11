@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 73,
+  "revision": 74,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -636,6 +636,12 @@
     "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011": {
       "id": "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
       "uri": "docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr46-original-scene-writer-preflight-contract-271-pass-20261011.md",
+      "kind": "REPORT",
+      "verification": "GITHUB_READBACK_VERIFIED"
+    },
+    "ART-P70-A03-S02-ISOLATED-19724-NONEMPTY20-20261011": {
+      "id": "ART-P70-A03-S02-ISOLATED-19724-NONEMPTY20-20261011",
+      "uri": "docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-isolated-pln-port-19724-baseline-20-readonly-20261011.md",
       "kind": "REPORT",
       "verification": "GITHUB_READBACK_VERIFIED"
     }
@@ -2385,9 +2391,10 @@
         "ART-P70-A03-S02-AUTHORED-NATIVE-DAG-PARTIAL-20261011",
         "ART-P70-A03-S02-RECEIPT-PARTIAL-20261011",
         "ART-P70-A03-S02-LIVE-STORY-MATERIAL-AND-UNNAMED-PINS-20261011",
-        "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011"
+        "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+        "ART-P70-A03-S02-ISOLATED-19724-NONEMPTY20-20261011"
       ],
-      "blocked_reason": "Owner saved PLN read-only identity/stories/material PASS (3 native stories, 1 Basic material GUID). PR45 267 tests PASS; PR46 original SceneWriter preview contract + mocked read-only preflight 271 tests PASS. Still missing NEW explicitly approved empty disposable PLN and authorized one-shot typed native run. Old scratch and saved copy must not be modified. requires_approval=true."
+      "blocked_reason": "Exact isolated test PLN at port 19724 PID 96948; project/story/material GET PASS, 0 native writes. GetAllElements=20, not confirmed empty/nonspatial; spatial envelope clearance and typed classifications NOT_VERIFIED. Requires explicit one-shot execution approval, exact isolated target guard, durable journal. PR46 271 offline tests PASS. S02 PARTIAL."
     },
     "APA-P70.A03.S03": {
       "id": "APA-P70.A03.S03",
