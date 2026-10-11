@@ -211,3 +211,11 @@ This row indexes user-supplied logs verified for internal consistency by indepen
 
 
 **CI outcome after artifact admission:** [run 38128367467](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38128367467) on controller artifact-registration commit `6f14dccaa0ffb947ac54b590f529ebbf26960f8e` **SUCCESS**; project-controller unit tests, validation, publisher prepare, immutable receipt and REST controller projection readback all succeeded. It supersedes the earlier CI **warning** from run `38128227619`; that was a transient failed test on an earlier SHA, not evidence that this 71-file source archive is invalid. The `APA-P00.A02.S03` work still remains **PARTIAL**, not completed.
+
+## APA Slack live transport E2E — 2026-10-11
+
+| Artifact | Published report | Proof level | Controller linkage |
+|---|---|---|---|
+| `ART-APA-SLACK-LIVE-TRANSPORT-E2E-20261011` | [Slack → SQLite LIVE test](runs/2026-10-11/apa-sync-live-message-delivery-e2e-20261011.md), [evidence commit 499e1dc](https://github.com/dvikt33-ux/safe-bim-layer/commit/499e1dcbc3ae17f96247be9c5bab04264d61b610) | Slack send+readback directly checked by ChatGPT; locally observed HTTP API output reports seq22/cursor22, conflict false. No GitHub-controller automated task mutation demonstrated. | Registered as evidence in `PROJECT_PLAN.json` revision 49, [commit 350565d](https://github.com/dvikt33-ux/safe-bim-layer/commit/350565d0b81706804352c10939a080429146ef50). No S-ID claimed or completed. |
+
+**Open gate:** controller registry admission/claims and reverse GitHub → Slack event propagation require an independent E2E. No Archicad LIVE or 24/7 autonomous execution claim.
