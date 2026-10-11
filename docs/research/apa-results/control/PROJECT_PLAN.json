@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 56,
+  "revision": 57,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2112,7 +2112,7 @@
       "action_id": "APA-P70.A01",
       "title": "Утвердить минимальные границы интеграции и порядок сквозных поставок",
       "kind": "INTEGRATION",
-      "status": "READY",
+      "status": "IN_PROGRESS",
       "priority": 2,
       "work_key": "product-integration-boundaries",
       "depends_on": [
@@ -2128,9 +2128,9 @@
         "Проверенный маршрут полного цикла, reuse map, отсутствие дублирования SceneWriter/графа/исполнителя, приёмочные ворота"
       ],
       "acceptance": "Проверенный маршрут полного цикла, reuse map, отсутствие дублирования SceneWriter/графа/исполнителя, приёмочные ворота",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "chatgpt-gpt6-manual",
+      "lease_until": "2026-10-11T19:00:00Z",
+      "claim_ref": "APA-RUN-20261011-1601Z-p70-a01-s03-integration-boundaries",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
