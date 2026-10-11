@@ -53,3 +53,23 @@ The code **does not provide exactly-once delivery**, 24/7 execution, automatic n
 `NotificationOutbox.mark_sent` now accepts only a transition from `RESERVED`, `IN_FLIGHT` or `UNCERTAIN` to `SENT`. An identical Slack timestamp for an already-`SENT` message is idempotent; a different timestamp for the same ID is rejected, leaving the original intact. Extra tests prove both cases.
 
 **Remaining:** no socket-mode/Slack network LIVE test from this bridge, no automatic outgoing notifier on GitHub commit, no enrollment of candidate `APA-P60.A02.S05` and no authorization to install/auto-launch this module.
+
+## Conflict-free notification + one-shot Windows LIVE acceptance
+
+**Critical state isolation fix:** published receipt notifications use a dedicated SQLite ledger stream `APA-RECEIPT-EVENT-APA-P70-A01-S01`, **not** `APA-P70.A01.S01`. The actual project task ID is still in the message summary and immutable proof links. This prevents an `INFO/SOURCE` receipt notice from incorrectly conflicting with the real task's `PASS/SOURCE` state. An offline real `EventStore` regression test verifies that the original task stays `PASS` and the separate receipt-notice key stays `INFO`.
+
+The new PowerShell wrapper is intended for an **isolated checkout of draft PR #37**, not for replacement of the active Windows Socket Mode service. From its repository root:
+
+```powershell
+# Read-only checks: local API health, current ledger cursor and pinned GitHub receipt
+.\scripts\apa_sync\windows_live_acceptance.ps1
+
+# One explicit outbound INFO notification and correlated SQLite LIVE verification
+.\scripts\apa_sync\windows_live_acceptance.ps1 -Publish
+```
+
+When `-Publish` is absent, no Slack SDK send is attempted and no outbox is created. With `-Publish`, the tool prompts for `SLACK_BOT_TOKEN` **locally and hidden** if not already available in the process, uses the isolated durable outbox, confirms Slack readback, then checks the existing `127.0.0.1:8765` API for the exact new event, matching timestamp, source and proof, and `conflict=False`. The token is not written to a file or passed to GitHub/ChatGPT. A preexisting notification is **not** mistaken for fresh LIVE proof. It does not stop/start processes or modify PLN, APX or task state.
+
+**CI:** [run #38148894163](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38148894163) SUCCESS on first attempt: Linux **93 tests** (44 existing + 17 receipt + 13 outbox + 19 probe); Windows **49 tests** (17 + 13 + 19), two PowerShell launchers parsed successfully; pinned real GitHub receipt → `INFO` dry-run PASS. The `19` live probe tests are *offline simulations*, not a real Socket Mode connection.
+
+**Still NOT VERIFIED:** actual one-shot `-Publish` Windows run with Slack/SQLite readback and automated GitHub-commit-driven notifications. Until the user explicitly runs the opt-in smoke, do not claim `FRESH_LIVE_PASS` or mark candidate `APA-P60.A02.S05` admitted.
