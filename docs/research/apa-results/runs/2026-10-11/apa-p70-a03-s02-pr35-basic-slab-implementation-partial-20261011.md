@@ -44,3 +44,23 @@ A separate **one-shot recovery utility** was published in the **same PR #35**, `
 **Latest CI:** https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38139865640 — SUCCESS, 120/120 `test_archicad_*.py` offline tests PASS. The seven additional tests cover exact partial-state preflight with zero writes, successful one-shot ModifySlabs + durable readback, invalid token blocking, unknown timeout and no retry, fake native success without real geometry correction, inventory drift, missing material.
 
 **Task registry unchanged:** APA-P70.A03.S02 still has dependency/owner-approval gates. This is source-safe progress, not DONE_PUBLISHED or live acceptance.
+
+## 2026-10-11 — owner-provided native repair outcome (LIVE_REPORTED)
+
+The owner ran the one-shot recovery utility against the approved single-open disposable `C:\\LocalAI\\APA_Test_House_01.pln`, Tapir 1.5.10, local port 19726, after read-only token preflight. The copied terminal result explicitly reports:
+
+```json
+{
+  "status": "SINGLE_SLAB_REPAIR_VERIFIED_UNSAVED",
+  "guid": "BB516C6F-587B-4F51-AFCC-180291542687",
+  "structureType": "Basic",
+  "thickness": 0.2,
+  "materialGuid": "63DB2CE9-903D-45C0-B93C-B3C604C77394",
+  "plnSaved": false,
+  "createCalls": 0,
+  "modifyCalls": 1,
+  "remainingSceneOperations": "NOT_EXECUTED"
+}
+```
+
+**Classification:** USER_SUPPLIED / REPORTED_LIVE_READBACK. It demonstrates that the utility returned its typed readback success on the owner's Windows Archicad session. Source did **not** directly access Windows or receive independent save/reopen evidence. **The PLN remains unsaved, and the remaining 20 historical operations are NOT EXECUTED.** Historic scene ledger is deliberately not rewritten; a separate reserved repair row is the authoritative second-operation evidence. No automatic replay or scene continuation is authorized. Future work: verified, journaled continuation of ONLY remaining operations after separate explicit permission and fresh guard checks.
