@@ -146,7 +146,7 @@ class PartialSceneContinuationTests(unittest.TestCase):
                 created = self.native.created.get(guid)
                 if (created and created[0] == "CreateWalls"
                         and created[1]["wallsData"][0]["floorIndex"] == 1):
-                    response["detailsOfElements"][0]["details"]["zCoordinate"] = 3.0
+                    response["detailsOfElements"][0]["details"]["zCoordinate"] = 4.0
             return response
 
         result = CONT.continue_scene(shifted_second_story_readback,
@@ -165,7 +165,7 @@ class PartialSceneContinuationTests(unittest.TestCase):
         self.assertEqual(info["failedWall"]["nativeFloorIndex"], 1)
         z = info["failedWall"]["fieldComparison"]["zCoordinate"]
         self.assertEqual(z["requested"], 0.0)
-        self.assertEqual(z["native"], 3.0)
+        self.assertEqual(z["native"], 4.0)
         self.assertFalse(z["matches"])
         self.assertEqual(len(self.native.writes), prior_writes)
 
