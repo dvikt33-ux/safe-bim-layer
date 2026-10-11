@@ -198,3 +198,15 @@ For a separately confirmed new approval token ONLY, the utility calls existing `
 **Source CI:** https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38145934082 — **SUCCESS; 159/159 offline tests PASS**. Synthetic test cases include 12+13 success, no duplicate GUIDs, exact approval required, unexpected native inventory, second-floor slab Z drift, interrupted fourth suffix cannot be replayed. Earlier intermediate CI failures in synthetic fixture due to repeated mock GUIDs were corrected; last PASS is the acceptance basis.
 
 **Current task:** APA-P70.A03.S02 remains INCOMPLETE / LIVE_FULL_MODEL_NOT_VERIFIED / requires controller approval. The live construction of remaining 13 elements is not yet performed. Generic future two-floor slab generator still has a coordinate-frame defect: it initially created second-floor Slab at global 0. A future separately accepted generator fix must not mutate the immutable historical graph or weaken native verification.
+
+## Fourth-suffix live preflight blocked safely: active story mismatch
+
+User executed read-only `continue_apa_after_s2_slab.py --port 19726 --material "Железобетон - Конструкционный"` after fetching PR #35 source head `db064af4566a350f7ffbd46900ad6158845a161a`. The CLI reported:
+
+```json
+{"status":"BLOCKED","reason":"ValueError: STORY_MISMATCH: active story must match pinned binding","modelWriteAttempts":0}
+```
+
+**Interpretation:** active native story at the time of this preflight did not match the pinned test-story index **0**. This is a safety guard, not evidence of changed BIM geometry or a failed create operation; no Create/Modify calls were attempted by this script. Since PowerShell was still prompting for approval despite a prior `throw` (separately pasted commands), the correct immediate action is **cancel Read-Host using Ctrl+C**, not approve. Set the active tab/story to first floor (index 0, elevation 0) in the **same** open PLN; then rerun **read-only preflight only** and verify `READY_FOR_EXPLICIT_THIRTEEN_STEP_CONTINUATION` and zero writes. Do not reuse earlier approval tokens and do not alter original journals or run any create command before successful fresh preflight.
+
+**Current status:** 12/25 historical planned elements REPORTED LIVE verified; fourth suffix NOT_STARTED; file still unsaved; no automatic replay. Do not close or switch the PLN. Future automation of UI-level story activation remains outside scope and should not be invented in this source-safe workflow.
