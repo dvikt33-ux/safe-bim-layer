@@ -1,7 +1,8 @@
 """Project intent -> existing BIM graph -> guarded native writer -> evidence.
 
-Only pavilion-frame-v1 is executable. Floor and MEP adapters are deliberately
-UNSUPPORTED. Default mode is offline. No daemon, save, deletion, or retry.
+Pavilion, parameterized building shell and authored native inputs reuse one
+SceneWriter. Floor and MEP adapters remain UNSUPPORTED. Default mode is offline.
+No daemon, save, deletion, or automatic retry.
 """
 from __future__ import annotations
 
@@ -10,6 +11,7 @@ from collections import Counter
 from datetime import datetime, timezone
 import hashlib
 import json
+import math
 from pathlib import Path
 import re
 import sys
@@ -26,7 +28,7 @@ import archicad_authored_native_plan as AUTHORED_NATIVE
 
 READS = frozenset({"GetProjectInfo", "GetStories", "GetAddOnVersion",
                   "GetAllElements", "Get3DBoundingBoxes", "GetDetailsOfElements",
-                  "GetAttributesByType", "API.GetProductInfo"})
+                  "GetAttributesByType", "GetSubelementsOfHierarchicalElements", "API.GetProductInfo"})
 NATIVE_MUTATIONS = RUN.ALLOWED_WRITES | frozenset({"ModifySlabs"})
 PRIMITIVES = {
     "pavilion-frame-v1": {"status": "EXECUTABLE_PENDING_LIVE_ACCEPTANCE",
@@ -205,6 +207,66 @@ def compile_intent(intent, schema_path):
                 "Typical floor and MEP require independent live acceptance"])}
 
 
+def compile_authored_intent(intent, schema_path, read_api):
+    """Join authored brief/PLP/geometry to the same existing native execution path."""
+    required = {
+            "schemaVersion", "projectId", "units", "brief", "cseCandidate",
+            "layout", "storyHeights"}
+    if (not isinstance(intent, dict) or not required <= set(intent)
+            or set(intent)-required-{"wallBasicMaterialName","nativeComponents"}
+            or intent["schemaVersion"] != "apa-authored-project/1"
+            or intent["units"] != "meters"
+            or not isinstance(intent["projectId"], str)
+            or not ID.fullmatch(intent["projectId"])
+            or intent["brief"].get("projectId") != intent["projectId"]
+            or intent["brief"].get("targetProjectPath") != RUN.EXPECTED_PATH):
+        raise ValueError("INVALID_AUTHORED_PROJECT_OR_WRITER_TARGET")
+    catalog_with_provenance(schema_path)
+    pack = compile_project_library_pack(intent["brief"], intent["cseCandidate"], read_api)
+    candidate = compile_authored_native_candidate(
+        intent["brief"], pack, intent["layout"], intent["storyHeights"],
+        read_api, schema_path=schema_path)
+    if "wallBasicMaterialName" in intent:
+        wall_guid = RUN.resolve_basic_slab_material(read_api,intent["wallBasicMaterialName"])
+        for step in candidate["graph"]["operations"]:
+            if step["command"] == "CreateWalls":
+                step["params"]["wallsData"][0]["buildingMaterialId"]={"guid":wall_guid}
+    additions = intent.get("nativeComponents", [])
+    if not isinstance(additions,list) or len(additions)>100:
+        raise ValueError("INVALID_AUTHORED_NATIVE_COMPONENTS")
+    story_indices={b["nativeIndex"] for b in candidate["storyBindings"]}
+    outline=candidate["authoredOutline"]
+    for step in additions:
+        if not isinstance(step,dict) or step.get("command") not in {
+                "CreateColumns","CreateDoors","CreateWindows"}:
+            raise ValueError("UNSUPPORTED_AUTHORED_NATIVE_COMPONENT")
+        if step["command"]=="CreateColumns":
+            columns=step.get("params",{}).get("columnsData",[])
+            if len(columns)!=1 or columns[0].get("floorIndex") not in story_indices:
+                raise ValueError("AUTHORED_COLUMN_STORY_REQUIRED")
+            point=columns[0].get("coordinates",{})
+            if not all(type(point.get(k)) in (int,float) and math.isfinite(point[k]) for k in ("x","y","z")):
+                raise ValueError("AUTHORED_COLUMN_COORDINATES_REQUIRED")
+            if not (outline["xMin"]<=point["x"]<=outline["xMax"] and
+                    outline["yMin"]<=point["y"]<=outline["yMax"]):
+                raise ValueError("AUTHORED_COLUMN_OUTSIDE_BUILDING")
+    if additions or "wallBasicMaterialName" in intent:
+        candidate["graph"]["operations"].extend(json.loads(RUN.canonical(additions)))
+        checked=SCENE.GRAPH.compile_graph(catalog_with_provenance(schema_path),candidate["graph"],runtime_version=RUN.EXPECTED_TAPIR)
+        if checked["status"]!="PLAN_VALIDATED_OFFLINE":
+            raise ValueError("AUTHORED_COMPONENT_GRAPH_REFUSED: "+checked["status"])
+        candidate.update(sourcePlanHash=checked["sourcePlanHash"],executionOrder=checked["executionOrder"],
+            operationCount=len(candidate["graph"]["operations"]),
+            plannedNativeCommands=dict(Counter(s["command"] for s in candidate["graph"]["operations"])))
+    preview = AUTHORED_NATIVE.as_existing_scene_writer_preview(candidate)
+    return {**preview, "status": "ACCELERATOR_COMPILED_OFFLINE",
+            "intent": intent, "intentHash": RUN.digest(intent),
+            "authoredCandidate": candidate,
+            "routes": {s["id"]: {"executor": "SceneWriter", "command": s["command"],
+                                    "readback": "GetDetailsOfElements"}
+                       for s in preview["graph"]["operations"]}}
+
+
 class EvidenceAPI:
     def __init__(self, transport, folder, execute=False, export=False):
         self.transport, self.folder = transport, Path(folder)
@@ -249,6 +311,32 @@ def inventory_guids(api):
     return guids
 
 
+def column_subelements(api, created):
+    columns = [v['guid'] for v in created.values() if v.get('kind')=='Column']
+    if not columns:
+        return {}
+    rows = api('GetSubelementsOfHierarchicalElements',
+        {'elements':[{'elementId':{'guid':g}} for g in columns]}).get('subelements')
+    if not isinstance(rows,list) or len(rows)!=len(columns):
+        raise ValueError('COLUMN_HIERARCHY_READBACK_MISMATCH')
+    mapping = {}
+    seen = {v['guid'].lower() for v in created.values()}
+    for parent, row in zip(columns,rows):
+        if not isinstance(row,dict) or set(row)-{'columnSegments'}:
+            raise ValueError('UNEXPECTED_COLUMN_SUBELEMENT_TYPE')
+        children = row.get('columnSegments')
+        if not isinstance(children,list) or not children:
+            raise ValueError('COLUMN_SEGMENTS_NOT_PROVEN')
+        guids=[]
+        for child in children:
+            guid=child.get('elementId',{}).get('guid')
+            if not isinstance(guid,str) or not RUN._GUID.fullmatch(guid) or guid.lower() in seen:
+                raise ValueError('INVALID_OR_DUPLICATED_COLUMN_SEGMENT_GUID')
+            seen.add(guid.lower());guids.append(guid.lower())
+        mapping[parent.lower()] = sorted(guids)
+    return mapping
+
+
 def approval_hash(compiled, preflight):
     return RUN.digest({"intentHash": compiled["intentHash"],
                        "routes": compiled["routes"], "binding": preflight["binding"],
@@ -266,7 +354,16 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
               "LIVE" if transport is native_transport else "SYNTHETIC",
               "automaticRetry": False, "plnSaved": False}
     try:
-        compiled = compile_intent(intent, schema)
+        authored = isinstance(intent, dict) and intent.get("schemaVersion") == "apa-authored-project/1"
+        if authored:
+            if mode not in {"preflight", "execute"} or not callable(transport):
+                raise ValueError("AUTHORED_NATIVE_REQUIRES_EXPLICIT_READ_ONLY_PREFLIGHT")
+            # Exact identity is checked before resolving any authored native data.
+            api = EvidenceAPI(transport, folder, execute=mode == "execute")
+            RUN.guarded_project(api)
+            compiled = compile_authored_intent(intent, schema, api)
+        else:
+            compiled = compile_intent(intent, schema)
         write_json(folder / "plan.json", compiled)
         result.update(intentHash=compiled["intentHash"], metrics=compiled["metrics"])
         if mode == "offline":
@@ -274,7 +371,8 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
             return result
         if mode not in {"preflight", "execute"}:
             raise ValueError("INVALID_MODE")
-        api = EvidenceAPI(transport, folder, execute=mode == "execute")
+        if api is None:
+            api = EvidenceAPI(transport, folder, execute=mode == "execute")
         required_story = (compiled.get("storyBindings") or [None])[0]
         binding = RUN.guarded_project(api, required_story)  # Identity before inventory.
         result["archicadProduct"] = archicad29(api)
@@ -283,9 +381,12 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
         ledger_dir = Path(state_dir) if state_dir is not None else folder.parent / "accelerator-state"
         writer = RUN.SceneWriter(api, ledger_dir / "scene-v1-attempts.sqlite3", schema,
                                  preview_factory=(
+                                     AUTHORED_NATIVE.make_read_only_scene_writer_preview_factory(
+                                         compiled["authoredCandidate"]) if authored else
                                      (lambda x, y, path: BUILD.prepare(intent["components"][0], path))
                                      if required_story is not None else None))
-        anchor = intent["components"][0]["anchor"]
+        anchor = ({"x": compiled["envelope"]["xMin"], "y": compiled["envelope"]["yMin"]}
+                  if authored else intent["components"][0]["anchor"])
         ticket = writer.preflight(anchor["x"], anchor["y"])
         if ticket["binding"] != binding or ticket["graph"] != compiled["graph"]:
             raise ValueError("PLAN_OR_BINDING_CHANGED")
@@ -309,6 +410,10 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
             raise ValueError("INVENTORY_CHANGED_DURING_READ_ONLY_PREFLIGHT")
         if result["status"] == "COMPLETE_UNSAVED":
             expected = sorted(s["guid"].lower() for s in result["scene"]["steps"].values())
+            if authored:
+                children=column_subelements(api,result['scene']['steps'])
+                expected=sorted(expected+[g for group in children.values() for g in group])
+                result['ownedColumnSegments']=children
             if added != expected or removed:
                 raise ValueError("FINAL_INVENTORY_DIFF_MISMATCH")
             # Verify every element again after the complete assembly, not just its creation.
@@ -335,7 +440,8 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
                         ticket.get("storyBindings"), expected_floor),
                     expected_slab_material_guid=(
                         ticket.get("slabBasicMaterialGuid")
-                        if step["command"] == "CreateSlabs" else None))
+                        if step["command"] == "CreateSlabs" else None),
+                    slab_level_is_absolute=(ticket.get("slabLevelConvention")=="PROJECT_ABSOLUTE"))
             if RUN.guarded_project(api, required_story) != binding:
                 raise ValueError("PROJECT_CHANGED_DURING_WHOLE_ASSEMBLY_READBACK")
             result["wholeAssemblyReadback"] = True
@@ -392,6 +498,8 @@ def main(argv=None):
     p.add_argument("--confirm-plan-hash")
     p.add_argument("--scratch-port", type=int,
                    help="Use only the approved disposable C:\\LocalAI\\APA_Test_House_01.pln on this port")
+    p.add_argument("--isolated-port", type=int,
+                   help="Use only user-authorized C:\\LocalAI\\APA_Isolated_Writer_Test_01.pln")
     args = p.parse_args(argv)
     try:
         transport = native_transport
@@ -403,7 +511,11 @@ def main(argv=None):
             if args.execute and (not args.run_id or not args.confirm_plan_hash or not args.data_dir):
                 raise ValueError("--execute requires --run-id, --confirm-plan-hash and stable --data-dir")
             intent = json.loads(args.intent.read_text(encoding="utf-8-sig"))
-            if args.scratch_port is not None:
+            if args.scratch_port is not None and args.isolated_port is not None:
+                raise ValueError("ONLY_ONE_EXPLICIT_NATIVE_TARGET")
+            if args.isolated_port is not None:
+                RUN.bind_isolated_writer_pln(args.isolated_port)
+            elif args.scratch_port is not None:
                 RUN.bind_approved_scratch_pln(args.scratch_port)
             elif (args.preflight or args.execute) and any(
                     c.get("primitive") == "building-shell-v1"

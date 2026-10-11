@@ -30,6 +30,19 @@ EXPECTED_TAPIR = "1.5.10"
 # Narrowly approved throwaway project. NEVER apply CLI target override to any
 # other PLN, including protected APA_Pavilion_MVP_SUCCESS.pln and SyncGuids.
 APPROVED_SCRATCH_PATH = r"C:\LocalAI\APA_Test_House_01.pln"
+APPROVED_ISOLATED_WRITER_PATH = r"C:\LocalAI\APA_Isolated_Writer_Test_01.pln"
+
+
+def bind_isolated_writer_pln(port, path=APPROVED_ISOLATED_WRITER_PATH):
+    """Bind the user-authorized isolated writer test; no arbitrary path override."""
+    global PORT, EXPECTED_NAME, EXPECTED_PATH
+    if type(port) is not int or not 1 <= port <= 65535:
+        raise ValueError("INVALID_TEST_PORT")
+    if path != APPROVED_ISOLATED_WRITER_PATH:
+        raise ValueError("ISOLATED_WRITER_PLN_NOT_APPROVED")
+    PORT = port
+    EXPECTED_PATH = APPROVED_ISOLATED_WRITER_PATH
+    EXPECTED_NAME = "APA_Isolated_Writer_Test_01"
 
 
 def bind_approved_scratch_pln(port, path=APPROVED_SCRATCH_PATH):
@@ -65,6 +78,13 @@ def canonical(value):
 
 def digest(value):
     return hashlib.sha256(canonical(value).encode("utf-8")).hexdigest()
+
+
+def native_plan_hash(preview, graph_hash):
+    return digest({'graphHash':graph_hash, 'schemaSha256':preview['schemaSha256'],
+        'slabBasicMaterialName':preview.get('slabBasicMaterialName'),
+        'slabBasicMaterialGuid':preview.get('slabBasicMaterialGuid'),
+        'slabLevelConvention':preview.get('slabLevelConvention','LEGACY_RELATIVE')})
 
 
 def close(a, b, tolerance=1e-5):
@@ -244,7 +264,7 @@ def story_level_for_floor(story_bindings, native_index):
 
 def verify_readback(command, params, row, owner_guid=None, expected_floor=0,
                     expected_slab_material_guid=None, allow_slab_thickness_mismatch=False,
-                    expected_story_level=0.0):
+                    expected_story_level=0.0, slab_level_is_absolute=False):
     kind = command[6:-1]  # CreateWalls -> Wall, CreateDoors -> Door
     if row.get("type") != kind or row.get("floorIndex") != expected_floor:
         raise ValueError(f"READBACK_TYPE_OR_STORY: expected {kind} on native story {expected_floor}")
@@ -274,11 +294,19 @@ def verify_readback(command, params, row, owner_guid=None, expected_floor=0,
             ("structureType", "Basic"), ("referenceLineLocation", "Center"),
             ("geometryType", "Straight"))):
             raise ValueError("WALL_TYPE_READBACK_MISMATCH")
+        if "buildingMaterialId" in expected and (
+                str(details.get("buildingMaterialId",{}).get("guid","")).casefold()!=
+                expected["buildingMaterialId"]["guid"].casefold()):
+            raise ValueError("WALL_MATERIAL_READBACK_MISMATCH")
     elif command == "CreateSlabs":
         # CreateSlabs may inherit Composite from the current defaults. Allow an
         # intermediate thickness mismatch ONLY before an explicitly journaled
         # ModifySlabs; still prove story, type, level and polygon first.
-        if (not close(details.get("level"), expected["level"])
+        relative_level = (expected["level"] - expected_story_level
+                          if slab_level_is_absolute else expected["level"])
+        if (not close(details.get("level"), relative_level)
+                or (slab_level_is_absolute
+                    and not close(details.get("zCoordinate"), expected["level"]))
                 or not compare_polygon(expected["polygonCoordinates"],
                                        details.get("polygonOutline"))
                 or (not allow_slab_thickness_mismatch
@@ -304,6 +332,10 @@ def verify_readback(command, params, row, owner_guid=None, expected_floor=0,
                     ("zCoordinate", point["z"]), ("height", expected["height"]),
                     ("width", expected["width"]), ("depth", expected["depth"])))):
             raise ValueError("COLUMN_READBACK_MISMATCH")
+        if 'buildingMaterialId' in expected and (
+                str(details.get('buildingMaterialId',{}).get('guid','')).casefold()!=
+                expected['buildingMaterialId']['guid'].casefold()):
+            raise ValueError('COLUMN_MATERIAL_READBACK_MISMATCH')
     else:
         owner = details.get("ownerElementId")
         actual_guid = owner.get("guid") if isinstance(owner, dict) else None
@@ -382,6 +414,9 @@ class SceneWriter:
         bindings = preview.get("storyBindings")
         self.required_story = bindings[0] if bindings else None
         binding = self.guarded_binding()
+        target = preview.get("nativeTargetProjectPath")
+        if target is not None and target != binding["path"]:
+            raise ValueError("AUTHORED_TARGET_DIFFERS_FROM_WRITER_BINDING")
         if bindings:
             stories = self.api("GetStories", {}).get("stories")
             if not isinstance(stories, list):
@@ -398,13 +433,13 @@ class SceneWriter:
         basic_name = preview.get("slabBasicMaterialName")
         material_guid = (resolve_basic_slab_material(self.api, basic_name)
                          if basic_name is not None else None)
+        pinned_material = preview.get("expectedPreflightSlabMaterialGuid")
+        if pinned_material is not None and (
+                not isinstance(material_guid, str)
+                or material_guid.casefold() != pinned_material.casefold()):
+            raise ValueError("AUTHORED_SLAB_MATERIAL_CHANGED_BEFORE_PREFLIGHT")
         preview["slabBasicMaterialGuid"] = material_guid
-        preview["sourcePlanHash"] = digest({
-            "graphHash": preview["sourcePlanHash"],
-            "schemaSha256": preview["schemaSha256"],
-            "slabBasicMaterialName": basic_name,
-            "slabBasicMaterialGuid": material_guid,
-        })
+        preview["sourcePlanHash"] = native_plan_hash(preview,preview["sourcePlanHash"])
         scan_report = scan_for_existing_geometry(self.api, x, y, preview.get("envelope"))
         if self.guarded_binding() != binding:
             raise ValueError("project binding changed during read-only preflight")
@@ -514,6 +549,9 @@ class SceneWriter:
                         floor = params["slabsData"][0]["floorIndex"]
                         verify_readback(command, params, intermediate,
                                         expected_floor=floor,
+                                        expected_story_level=story_level_for_floor(
+                                            preflight.get("storyBindings"),floor),
+                                        slab_level_is_absolute=(preflight.get("slabLevelConvention")=="PROJECT_ABSOLUTE"),
                                         allow_slab_thickness_mismatch=True)
                         modify = {"slabsWithDetails": [{
                             "elementId": {"guid": guid},
@@ -554,7 +592,8 @@ class SceneWriter:
                             preflight.get("storyBindings"), floor_index),
                         expected_slab_material_guid=(
                             preflight.get("slabBasicMaterialGuid")
-                            if command == "CreateSlabs" else None))
+                            if command == "CreateSlabs" else None),
+                        slab_level_is_absolute=(preflight.get("slabLevelConvention")=="PROJECT_ABSOLUTE"))
                     created[step_id] = {"guid": guid, "kind": kind, "floorIndex": floor_index}
                     result["steps"][step_id] = {"status": "PASS", "guid": guid, "kind": kind}
                     db.execute("UPDATE steps SET state='PASS',output=? WHERE scene_id=? AND step_id=?",
