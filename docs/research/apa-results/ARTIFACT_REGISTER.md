@@ -294,3 +294,10 @@ Controller artifact record: `PROJECT_PLAN.json` revision **52**, [commit 8af838f
 | Artifact | Evidence | Verified status |
 | --- | --- | --- |
 | `ART-APA-PUBLISHER-HOURLY-CONDITION-WATCH-20261011` | [Canonical report](runs/2026-10-11/apa-publisher-hourly-chatgpt-watch-20261011.md), [last successful canonical Publisher](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38157660584) | **SCHEDULER_ENABLED, AUTOMATION_RUN_OBSERVED, PUSH_EMAIL_NOTIFICATIONS_DISABLED, ALERT_DELIVERY_NOT_VERIFIED.** ChatGPT hourly watch filters only the canonical Publisher workflow; no `main` changes. `APA-P00.A03.S03` remains PARTIAL. |
+
+
+## P70.A03.S02 — live story/material and exact unnamed-story native pins (2026-10-11)
+
+| Artifact ID | Evidence / current result | Acceptance |
+|---|---|---|
+| `ART-P70-A03-S02-LIVE-STORY-MATERIAL-AND-UNNAMED-PINS-20261011` | [Source-pinned full report](runs/2026-10-11/apa-p70-a03-s02-owner-live-story-material-preflight-and-unnamed-story-native-pins-20261011.md), [draft PR #45](https://github.com/dvikt33-ux/safe-bim-layer/pull/45), [CI #38160976956](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38160976956) **267/267 offline PASS**. Owner native `GetStories` reported `index=0, floorId=1, 0m, "Первый Этаж"`; `index=1,floorId=2,+3m,name=""`; `index=2,floorId=3,+6m,name=""`. One exact Building Material name/GUID `63DB2CE9-903D-45C0-B93C-B3C604C77394`; current project unchanged; 0 native writes. | **USER_SUPPLIED_LIVE_READ_ONLY_PREFLIGHT_PASS** for current saved copy + **OFFLINE_PASS** for opt-in exact unnamed-story pin adaptation. Does **not** imply native Create/Modify execution or completion of `APA-P70.A03.S02` (still `PARTIAL`). |
