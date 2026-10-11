@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 72,
+  "revision": 73,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -630,6 +630,12 @@
     "ART-P70-A03-S02-LIVE-STORY-MATERIAL-AND-UNNAMED-PINS-20261011": {
       "id": "ART-P70-A03-S02-LIVE-STORY-MATERIAL-AND-UNNAMED-PINS-20261011",
       "uri": "docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-owner-live-story-material-preflight-and-unnamed-story-native-pins-20261011.md",
+      "kind": "REPORT",
+      "verification": "GITHUB_READBACK_VERIFIED"
+    },
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011": {
+      "id": "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+      "uri": "docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr46-original-scene-writer-preflight-contract-271-pass-20261011.md",
       "kind": "REPORT",
       "verification": "GITHUB_READBACK_VERIFIED"
     }
@@ -2378,9 +2384,10 @@
       "evidence": [
         "ART-P70-A03-S02-AUTHORED-NATIVE-DAG-PARTIAL-20261011",
         "ART-P70-A03-S02-RECEIPT-PARTIAL-20261011",
-        "ART-P70-A03-S02-LIVE-STORY-MATERIAL-AND-UNNAMED-PINS-20261011"
+        "ART-P70-A03-S02-LIVE-STORY-MATERIAL-AND-UNNAMED-PINS-20261011",
+        "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011"
       ],
-      "blocked_reason": "READ_ONLY_PREFLIGHT_PASS on saved PLN: GetStories indexes 0/1/2 (unnamed index1/2), one exact RC material GUID; PR45 explicit native story pins 267 offline PASS. Full authored-plan native writer execution needs separately approved disposable PLN and typed readback; user saved copy is read-only evidence. No writes authorized."
+      "blocked_reason": "Owner saved PLN read-only identity/stories/material PASS (3 native stories, 1 Basic material GUID). PR45 267 tests PASS; PR46 original SceneWriter preview contract + mocked read-only preflight 271 tests PASS. Still missing NEW explicitly approved empty disposable PLN and authorized one-shot typed native run. Old scratch and saved copy must not be modified. requires_approval=true."
     },
     "APA-P70.A03.S03": {
       "id": "APA-P70.A03.S03",
