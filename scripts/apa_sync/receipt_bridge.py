@@ -185,8 +185,8 @@ def notification(proof: dict) -> dict:
     return {"schema": "APA_EVENT_V1", "event_id": event_id,
             "task_id": notice_stream, "status": "INFO", "phase": "SOURCE",
             "source": "apa:receipt-bridge:git-verified",
-            "summary": (f"Verified immutable publisher receipt for {rec['run_id']}; "
-                        f"controller task at pinned commit is {task['status']}. "
+            "summary": (f"Verified immutable publisher receipt for {task['id']} "
+                        f"({rec['run_id']}); controller task at pinned commit is {task['status']}. "
                         "This INFO notification does not change the controller."),
             "evidence_urls": [receipt_url, report_url]}
 
