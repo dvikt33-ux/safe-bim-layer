@@ -5,8 +5,8 @@
 | Очередь | Подшаг | Приоритет | Входной материал | Состояние / выход |
 | --- | --- | --- | --- | --- |
 | Q-001 | APA-P00.A03.S01 | P0 | GitHub connector, Deep Research, scheduler | PARTIAL: ordinary ChatGPT GitHub write/readback PASS; Deep Research not used, unattended scheduled write NOT_VERIFIED |
-| Q-002 | APA-P00.A01.S03 | P0 | [72 branches and 22 PR map](inventories/FULL_BRANCH_INVENTORY.md) | IN_PROGRESS: APA Research OS audit published; branch snapshot and SHA verified, ancestry/unique artifacts NOT_VERIFIED |
-| Q-003 | APA-P00.A02.S03 | P0 | [ARTIFACT_REGISTER](ARTIFACT_REGISTER.md), 12 findings | QUEUED; дедуплицированная evidence map |
+| Q-002 | APA-P00.A01.S03 | P0 | [83 live refs / 80 complete HEAD SHA](inventories/blob-scan-20261011/CURRENT_BLOB_AGGREGATE_20261011.json) | PARTIAL: полный Git tree/byte-SHA snapshot получен, 422 exclusive blob SHA; семантика материалов, ancestry всех пар и техническое содержимое НЕ ДОКАЗАНЫ |
+| Q-003 | APA-P00.A02.S03 | P0 | [V2 full SHA audit](runs/2026-10-11/APA-RUN-20261011-001922Z-eighty-head-blob-inventory/REPORT.md), [71 source SHA index](inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json) | PARTIAL: 80/80 HEAD scanned; 71 архивный исходный файл ещё НЕ СКОПИРОВАН; [proposed source-copy gate](control/proposals/APA-CAND-20261011-source-archive-71.md) PENDING_AUDIT; проектный план — единственный диспетчер |
 | Q-004 | APA-P10.A01.S01 | P1 | SDK AC29 29.3100, primary headers/docs | IN_PROGRESS; [SEO/Trim/Morph source audit](runs/2026-10-10/apa-discovery-20261010-102440-slinktrim-9f2b7.md) SOURCE_VERIFIED; SDK header/build/live NOT_VERIFIED; [Get3DInfo/contacts source audit](runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md) SOURCE_VERIFIED (docs), SDK header/build/live NOT_VERIFIED |
 | Q-005 | APA-P10.A02.S01 | P1 | Tapir public tags, local 1.5.10 provenance | QUEUED; compatibility matrix |
 | Q-006 | APA-P10.A02.S02 | P1 | PR #20, GDL audit, catalog errors | QUEUED; blocker-specific proof |
