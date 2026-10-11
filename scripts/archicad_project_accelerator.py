@@ -21,6 +21,7 @@ import archicad_scene_v1 as SCENE
 import archicad_building_shell as BUILD
 import archicad_semantic_brief as BRIEF
 import archicad_project_library_pack as PACK
+import archicad_semantic_spatial as SPATIAL
 
 READS = frozenset({"GetProjectInfo", "GetStories", "GetAddOnVersion",
                   "GetAllElements", "Get3DBoundingBoxes", "GetDetailsOfElements",
@@ -131,6 +132,15 @@ def compile_project_library_pack(brief, cse_candidate, read_api=None):
     material resolver. No additional executor or geometry creation.
     """
     return PACK.compile_pack(brief, cse_candidate, api=read_api)
+
+
+def compile_project_spatial_plan(brief, project_pack, authored_layout):
+    """Plan authored rooms/axes/load paths in the existing accelerator.
+
+    Does not fabricate walls or modify PLN. The sole BIM DAG compiler remains
+    archicad_bim_graph.compile_graph, used in the later S02 emission gate.
+    """
+    return SPATIAL.compile_spatial(brief, project_pack, authored_layout)
 
 
 def compile_intent(intent, schema_path):
