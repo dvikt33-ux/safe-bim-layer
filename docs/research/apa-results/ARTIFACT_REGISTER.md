@@ -262,3 +262,10 @@ Controller artifact record: `PROJECT_PLAN.json` revision **52**, [commit 8af838f
 | Artifact ID | Published source and tests | Evidence / open acceptance |
 |---|---|---|
 | `ART-APA-AC29-SCRATCH-SAVED-COPY-READONLY-20261011` | [Draft PR #35 saved-copy verifier](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-slab-basic-journaled-20261011/scripts/verify_apa_saved_copy_read_only.py), [CI #38150899253](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38150899253) **207/207 offline PASS**, [full incident/report](runs/2026-10-11/apa-p70-a03-s02-pr35-basic-slab-implementation-partial-20261011.md). | Copy destination user-reported `C:\\институт проект\\Улучшенная копия APA_Test_House_01.pln`; **save-on-disk/reopened/45-native-GUID typed-pass NOT YET VERIFIED**. Source-only solution read-only by construction, compares exact Unicode copy path, original 20 + built 25 GUIDs, two Slabs, openings and story labels. |
+
+
+## APA-P70.A03.S02 — copy-on-disk plus read-only 45-GUID typed PASS (2026-10-11)
+
+| Artifact ID | Owner native evidence and report | Gate |
+|---|---|---|
+| `ART-APA-AC29-SCRATCH-SAVED-COPY-45-LIVE-20261011` | [Detailed source/incident and copy verification](runs/2026-10-11/apa-p70-a03-s02-pr35-basic-slab-implementation-partial-20261011.md); owner PowerShell `Get-Item` showed 15,957,232-byte PLN at exact Unicode copy path; `verify_apa_saved_copy_read_only.py` user-run on port 19726 yielded `OPEN_SAVED_COPY_TYPED_READBACK_PASS`, 45/45 exact GUIDs, 25/25 typed BIM elements (Walls 12 / Slabs 2 / Doors 5 / Windows 6), floor distribution 13+12, both Slabs same pinned Building Material GUID, host/story and original20 GUIDs preserved, `nativeWriteCalls:0`. | **USER_SUPPLIED / REPORTED_LIVE_COPY_OPEN_TYPED_PASS**. Manual close/reopen **USER_CONFIRMATION_REQUIRED**; `SAVE_REOPEN_PASS` remains **NOT_VERIFIED** until owner confirms a true reload and only read-only recheck if necessary. Does not close broad controller task `APA-P70.A03.S02`. |
