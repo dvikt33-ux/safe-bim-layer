@@ -124,7 +124,7 @@ def main():
     summary = os.environ.get("GITHUB_STEP_SUMMARY")
     if summary:
         with open(summary, "a", encoding="utf-8") as fh:
-            fh.write("### APA Publisher watchdog\n\n\`\`\`json\n" + json.dumps(outcome, indent=2) + "\n\`\`\`\n")
+            fh.write("### APA Publisher watchdog\n\n" + json.dumps(outcome, indent=2) + "\n")
     if not healthy:
         sys.exit(1)
 
