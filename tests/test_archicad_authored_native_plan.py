@@ -260,8 +260,8 @@ class AuthoredNativePlanTests(unittest.TestCase):
         self.assertEqual(preview["sourcePlanHash"],compiled["sourcePlanHash"])
         self.assertFalse(preview["liveWriteAuthorized"])
         native.calls.clear()
-        with patch.object(A.RUN,"EXPECTED_PATH",A.RUN.APPROVED_SCRATCH_PATH), \\
-             patch.object(A.RUN,"EXPECTED_NAME","APA_Test_House_01"), \\
+        with patch.object(A.RUN,"EXPECTED_PATH",A.RUN.APPROVED_SCRATCH_PATH), \
+             patch.object(A.RUN,"EXPECTED_NAME","APA_Test_House_01"), \
              patch.object(A.RUN,"PORT",19726):
             writer=A.RUN.SceneWriter(
                 native,Path("never-create-synthetic-journal.sqlite3"),
@@ -297,7 +297,7 @@ class AuthoredNativePlanTests(unittest.TestCase):
     def test_existing_writer_preflight_wrong_active_story_stops_without_write(self):
         N, native, compiled=self._writer_fixture()
         native.inject_story=0
-        with patch.object(A.RUN,"EXPECTED_PATH",A.RUN.APPROVED_SCRATCH_PATH), \\
+        with patch.object(A.RUN,"EXPECTED_PATH",A.RUN.APPROVED_SCRATCH_PATH), \
              patch.object(A.RUN,"EXPECTED_NAME","APA_Test_House_01"):
             writer=A.RUN.SceneWriter(
                 native,Path("never-create-synthetic-journal.sqlite3"),
