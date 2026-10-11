@@ -111,7 +111,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md), [ART-BRANCHES](../../../../../docs/research/apa-results/inventories/FULL_BRANCH_INVENTORY.md)
-- Existing V2 runs: [APA-RUN-20261010-234200Z-slack-legacy-three-audit](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-234200Z-slack-legacy-three-audit/REPORT.md) (receipt verified), [APA-RUN-20261010-235301Z-branch-evidence-dedup](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-235301Z-branch-evidence-dedup/REPORT.md) (receipt verified), [APA-RUN-20261011-001922Z-eighty-head-blob-inventory](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-001922Z-eighty-head-blob-inventory/REPORT.md) (receipt verified), [APA-RUN-20261011-092155Z-source71-byte-archive](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-092155Z-source71-byte-archive/REPORT.md) (receipt verified), [APA-RUN-20261011-190658Z-roof-comp-context-map](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-190658Z-roof-comp-context-map/REPORT.md) (receipt verified)
+- Existing V2 runs: [APA-RUN-20261010-234200Z-slack-legacy-three-audit](../../../../../docs%5Cresearch%5Capa-results%5Cruns%5C2026-10-10%5CAPA-RUN-20261010-234200Z-slack-legacy-three-audit%5CREPORT.md) (receipt verified), [APA-RUN-20261010-235301Z-branch-evidence-dedup](../../../../../docs%5Cresearch%5Capa-results%5Cruns%5C2026-10-10%5CAPA-RUN-20261010-235301Z-branch-evidence-dedup%5CREPORT.md) (receipt verified), [APA-RUN-20261011-001922Z-eighty-head-blob-inventory](../../../../../docs%5Cresearch%5Capa-results%5Cruns%5C2026-10-11%5CAPA-RUN-20261011-001922Z-eighty-head-blob-inventory%5CREPORT.md) (receipt verified), [APA-RUN-20261011-092155Z-source71-byte-archive](../../../../../docs%5Cresearch%5Capa-results%5Cruns%5C2026-10-11%5CAPA-RUN-20261011-092155Z-source71-byte-archive%5CREPORT.md) (receipt verified), [APA-RUN-20261011-190658Z-roof-comp-context-map](../../../../../docs%5Cresearch%5Capa-results%5Cruns%5C2026-10-11%5CAPA-RUN-20261011-190658Z-roof-comp-context-map%5CREPORT.md) (receipt verified)
 - Expected output: Evidence map и superseded_by для дублей
 
 ## APA-P00.A02.S04
@@ -207,7 +207,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-PUB-RECEIPT](../../../../../docs/research/apa-results/receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json)
-- Existing V2 runs: [APA-RUN-20261010-104437Z-publisher-integration-smoke](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-104437Z-publisher-integration-smoke/REPORT.md) (receipt verified)
+- Existing V2 runs: [APA-RUN-20261010-104437Z-publisher-integration-smoke](../../../../../docs%5Cresearch%5Capa-results%5Cruns%5C2026-10-10%5CAPA-RUN-20261010-104437Z-publisher-integration-smoke%5CREPORT.md) (receipt verified)
 - Expected output: Два разных SOURCE run_id, оба DONE_PUBLISHED
 
 ## APA-P10.A01.S01
@@ -255,7 +255,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-SDK-SEO](../../../../../docs/research/apa-results/runs/2026-10-10/apa-discovery-20261010-102440-slinktrim-9f2b7.md)
-- Existing V2 runs: [APA-RUN-20261010-143940Z-opening-shell-geom](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md) (receipt verified)
+- Existing V2 runs: [APA-RUN-20261010-143940Z-opening-shell-geom](../../../../../docs%5Cresearch%5Capa-results%5Cruns%5C2026-10-10%5CAPA-RUN-20261010-143940Z-opening-shell-geom%5CREPORT.md) (receipt verified)
 - Expected output: Матрица покрытия и побочных эффектов
 
 ## APA-P10.A02.S01
@@ -271,7 +271,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md)
-- Existing V2 runs: [APA-RUN-20261010-163950Z-tapir-compat-6f29](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md) (receipt verified)
+- Existing V2 runs: [APA-RUN-20261010-163950Z-tapir-compat-6f29](../../../../../docs%5Cresearch%5Capa-results%5Cruns%5C2026-10-10%5CAPA-RUN-20261010-163950Z-tapir-compat-6f29%5CREPORT.md) (receipt verified)
 - Expected output: Compatibility matrix с source SHA
 
 ## APA-P10.A02.S02
@@ -319,7 +319,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md)
-- Existing V2 runs: [APA-RUN-20261010-200823Z-mep-route-port-gate](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md) (receipt verified)
+- Existing V2 runs: [APA-RUN-20261010-200823Z-mep-route-port-gate](../../../../../docs%5Cresearch%5Capa-results%5Cruns%5C2026-10-10%5CAPA-RUN-20261010-200823Z-mep-route-port-gate%5CREPORT.md) (receipt verified)
 - Expected output: MEP command/route/port matrix
 
 ## APA-P10.A03.S01
@@ -591,7 +591,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md), [ART-BRANCHES](../../../../../docs/research/apa-results/inventories/FULL_BRANCH_INVENTORY.md), [ART-TRACE-REPORT](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-110048Z-legacy-traceability/REPORT.md)
-- Existing V2 runs: [APA-RUN-20261010-110048Z-legacy-traceability](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-110048Z-legacy-traceability/REPORT.md) (receipt verified)
+- Existing V2 runs: [APA-RUN-20261010-110048Z-legacy-traceability](../../../../../docs%5Cresearch%5Capa-results%5Cruns%5C2026-10-10%5CAPA-RUN-20261010-110048Z-legacy-traceability%5CREPORT.md) (receipt verified)
 - Expected output: Published first source-backed traceability map: five legacy flat reports + one V2; four explicit S-ID links, one candidate; 72-branch ancestry still open
 
 ## APA-P50.A01.S02
@@ -847,7 +847,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-PR16](https://github.com/dvikt33-ux/safe-bim-layer/pull/16), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md), [ART-APA-LIVE-SCRATCH-PARTIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-live-scratch-partial-slab-reconciliation.md)
-- Existing V2 runs: [APA-RUN-20261011-091905Z-p70-source-integration-map](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-091905Z-p70-source-integration-map/REPORT.md) (receipt verified)
+- Existing V2 runs: [APA-RUN-20261011-091905Z-p70-source-integration-map](../../../../../docs%5Cresearch%5Capa-results%5Cruns%5C2026-10-11%5CAPA-RUN-20261011-091905Z-p70-source-integration-map%5CREPORT.md) (receipt verified)
 - Expected output: Таблица требований полного цикла → исходные файлы/SHA → подтверждённые функции и ограничения; без новой реализации
 
 ## APA-P70.A01.S02
@@ -879,7 +879,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
-- Existing V2 runs: [APA-RUN-20261011-160327Z-p70-a01-s03-integration-freeze](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-160327Z-p70-a01-s03-integration-freeze/REPORT.md) (receipt verified)
+- Existing V2 runs: [APA-RUN-20261011-160327Z-p70-a01-s03-integration-freeze](../../../../../docs%5Cresearch%5Capa-results%5Cruns%5C2026-10-11%5CAPA-RUN-20261011-160327Z-p70-a01-s03-integration-freeze%5CREPORT.md) (receipt verified)
 - Expected output: Проверенный маршрут полного цикла, reuse map, отсутствие дублирования SceneWriter/графа/исполнителя, приёмочные ворота
 
 ## APA-P70.A02.S01
@@ -895,7 +895,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md)
-- Existing V2 runs: [APA-RUN-20261011-161511Z-p70-semantic-brief-getstories](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md) (receipt verified)
+- Existing V2 runs: [APA-RUN-20261011-161511Z-p70-semantic-brief-getstories](../../../../../docs%5Cresearch%5Capa-results%5Cruns%5C2026-10-11%5CAPA-RUN-20261011-161511Z-p70-semantic-brief-getstories%5CREPORT.md) (receipt verified)
 - Expected output: Два режима GENERATE_FROM_ZERO/ADAPT_EXISTING; требования/ограничения, первый этаж на ±0.000, index только по GetStories
 
 ## APA-P70.A02.S02
@@ -927,7 +927,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
-- Existing V2 runs: [APA-RUN-20261011-163145Z-p70-a02-s03-library-pack](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-163145Z-p70-a02-s03-library-pack/REPORT.md) (receipt verified)
+- Existing V2 runs: [APA-RUN-20261011-163145Z-p70-a02-s03-library-pack](../../../../../docs%5Cresearch%5Capa-results%5Cruns%5C2026-10-11%5CAPA-RUN-20261011-163145Z-p70-a02-s03-library-pack%5CREPORT.md) (receipt verified)
 - Expected output: Отобранные CSE, источники/хэши/лицензии, интерфейсы, совместимые AC29 объекты и список неподтверждённых узлов
 
 ## APA-P70.A02.S04
@@ -959,7 +959,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
-- Existing V2 runs: [APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md) (receipt verified)
+- Existing V2 runs: [APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths](../../../../../docs%5Cresearch%5Capa-results%5Cruns%5C2026-10-11%5CAPA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths%5CREPORT.md) (receipt verified)
 - Expected output: Проверяемый граф помещений/нагрузочных путей/осей с привязкой к CSE и этажам; без условных стен
 
 ## APA-P70.A03.S02
@@ -975,7 +975,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-APA-PR16](https://github.com/dvikt33-ux/safe-bim-layer/pull/16), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md), [ART-APA-LIVE-SCRATCH-PARTIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-live-scratch-partial-slab-reconciliation.md), [ART-APA-PLN-WRITE-AUTH-20261011](../../../../../docs/research/apa-results/control/IMPLEMENTATION_ROADMAP.md%23%D1%80%D0%B0%D0%B7%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8-%D0%B4%D0%BE%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D1%82%D0%B2%D0%B0)
-- Existing V2 runs: [APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial/REPORT.md) (receipt verified), [APA-RUN-20261011-195000Z-isolated-authored-core](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-195000Z-isolated-authored-core/REPORT.md) (receipt verified)
+- Existing V2 runs: [APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial](../../../../../docs%5Cresearch%5Capa-results%5Cruns%5C2026-10-11%5CAPA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial%5CREPORT.md) (receipt verified), [APA-RUN-20261011-195000Z-isolated-authored-core](../../../../../docs%5Cresearch%5Capa-results%5Cruns%5C2026-10-11%5CAPA-RUN-20261011-195000Z-isolated-authored-core%5CREPORT.md) (receipt verified)
 - Expected output: Создание полноценной BIM-геометрии из схемы через имеющиеся writer/graph; связные стены не дробятся без необходимости; тестовый PLN только после разрешения
 
 ## APA-P70.A03.S03
@@ -991,7 +991,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-LIVE-SCRATCH-PARTIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-live-scratch-partial-slab-reconciliation.md)
-- Existing V2 runs: [APA-RUN-20261011-195800Z-incremental-native-edit](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-195800Z-incremental-native-edit/REPORT.md) (receipt verified)
+- Existing V2 runs: [APA-RUN-20261011-195800Z-incremental-native-edit](../../../../../docs%5Cresearch%5Capa-results%5Cruns%5C2026-10-11%5CAPA-RUN-20261011-195800Z-incremental-native-edit%5CREPORT.md) (receipt verified)
 - Expected output: Тесты обновления проекта без лишних элементов/потери GUID, readback этажей, материалов, хостов и откат изменений
 
 ## APA-P70.A03.S04
@@ -1007,7 +1007,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
-- Existing V2 runs: [APA-RUN-20261011-200100Z-native-completeness](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200100Z-native-completeness/REPORT.md) (receipt verified)
+- Existing V2 runs: [APA-RUN-20261011-200100Z-native-completeness](../../../../../docs%5Cresearch%5Capa-results%5Cruns%5C2026-10-11%5CAPA-RUN-20261011-200100Z-native-completeness%5CREPORT.md) (receipt verified)
 - Expected output: Стены, перекрытия, колонны и hosted двери/окна из утверждённой схемы проходят typed GUID/host/story/material/geometry readback; требуемые неподдерживаемые элементы имеют конкретный blocker; один BIM Graph и SceneWriter.
 
 ## APA-P70.A04.S01
@@ -1247,7 +1247,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
-- Existing V2 runs: [APA-RUN-20261011-200500Z-editable-core-acceptance](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md) (receipt verified)
+- Existing V2 runs: [APA-RUN-20261011-200500Z-editable-core-acceptance](../../../../../docs%5Cresearch%5Capa-results%5Cruns%5C2026-10-11%5CAPA-RUN-20261011-200500Z-editable-core-acceptance%5CREPORT.md) (receipt verified)
 - Expected output: Один brief создаёт связное небольшое здание; все требуемые типы поддержаны, GUID/этажи/материалы/host/геометрия подтверждены; согласованная правка сохраняет GUID и не дублирует модель; сохранение и повторное чтение подтверждены. Четыре элемента и offline CI не достаточны. Инженерная/нормативная приёмка отдельно.
 
 ## APA-P70.A08.S05
@@ -1279,7 +1279,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-SDK-SEO](../../../../../docs/research/apa-results/runs/2026-10-10/apa-discovery-20261010-102440-slinktrim-9f2b7.md)
-- Existing V2 runs: [APA-RUN-20261011-202800Z-native-geometry-integration](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md) (receipt verified)
+- Existing V2 runs: [APA-RUN-20261011-202800Z-native-geometry-integration](../../../../../docs%5Cresearch%5Capa-results%5Cruns%5C2026-10-11%5CAPA-RUN-20261011-202800Z-native-geometry-integration%5CREPORT.md) (receipt verified)
 - Expected output: Native dump/NetworkX/Shapely используются через существующий readback; стыки, XYZ, story и host проверены на подтверждённых ошибках; 2D пересечение не считается 3D коллизией; ядро сохраняет работоспособность.
 
 ## APA-P70.A10.S01

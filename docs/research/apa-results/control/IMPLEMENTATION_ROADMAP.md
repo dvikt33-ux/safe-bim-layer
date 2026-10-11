@@ -4,7 +4,11 @@
 
 ## Ближайший работающий результат
 
-Продолжить APA-P70.A03.S02 из PR #47 (head `03f94e9bb67e01a0944813b25eaea50b1afa0ead`), поверх PR #46. Сохранить единственный Project Accelerator → Semantic Brief/Spatial/PLP → Authored Native Plan → BIM Graph → SceneWriter → Tapir → typed readback. Действующие исходники и выполненные задачи не переписывать.
+Ядро APA-P70.A03.S02/S03/S04 → A08.S04 принято и опубликовано: PR #48 head `976c19cecebe3f6bb4352365d9a59051d5b2b61b`, native 17 основных элементов + 2 принадлежащих колоннам сегмента + 20 исходных GUID. Подтверждены создание, материалы/этажи/host, инкрементальная правка окна с возвратом, сохранение и повторное открытие. PR остаётся draft без merge.
+
+Геометрия A09.S01 также DONE_PUBLISHED: PR #50 head `ec401314c185df4845ccb6ae7b15e57234a46cad`, CI 296 тестов PASS; native dump/XYZ/material/host, 34 контакта реальных BREP-граней, 40 пересечений XY без объёмной коллизии. Расчётная/нормативная пригодность и качество узлов остаются NOT_VERIFIED. Следующая область — A02.S04, реальные BM/Composite/Profile/Surface/GDL. Статусы и evidence читаются из единого реестра.
+
+Сохранён единственный Project Accelerator → Semantic Brief/Spatial/PLP → Authored Native Plan → BIM Graph → SceneWriter → Tapir → typed readback. Действующие исходники и выполненные задачи не переписывать.
 
 ## Последовательные этапы
 

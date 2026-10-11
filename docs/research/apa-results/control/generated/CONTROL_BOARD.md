@@ -1,6 +1,6 @@
 # APA — единственный Project Controller / Control Board
 
-**Source of truth:** [PROJECT_PLAN.json](../../../../../docs/research/apa-results/control/PROJECT_PLAN.json).
+**Source of truth:** [PROJECT_PLAN.json](../../../../../docs%5Cresearch%5Capa-results%5Ccontrol%5CPROJECT_PLAN.json).
 This file is generated. Never dispatch from chat memory or edit this board.
 **Execution trigger:** ChatGPT Scheduled Tasks (user-configured, not a controller cron).
 **Scheduler state:** CONFIGURED_UNVERIFIED; **Publisher:** DEPLOYED; **verified 24/7:** NOT_RUNNING.

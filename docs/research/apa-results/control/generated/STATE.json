@@ -195,7 +195,7 @@
     "timezone": "Europe/Moscow"
   },
   "schema": "APA_PROJECT_CONTROLLER_STATE_V1",
-  "source_plan": "docs/research/apa-results/control/PROJECT_PLAN.json",
+  "source_plan": "docs\\research\\apa-results\\control\\PROJECT_PLAN.json",
   "task_count": 81,
   "topic_count": 16,
   "topics": {

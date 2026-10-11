@@ -471,7 +471,7 @@ def build(plan):
                  "Never invent another controller or repeat proven low-level BIM tests without a regression trigger.",
                  "", "## Safety", "",
                 "No autonomous ChatGPT research is started by this controller. 24/7 NOT_RUNNING.",
-                "No Deep Research/paid API without explicit approval. No main, PLN, APX, tested branch edits or merge.",
+                "No Deep Research/paid API without explicit approval. PLN writes follow current user authorization and exact project binding in PROJECT_PLAN.json policies.mutation. No main, APX, tested branch edits or merge without authorization.",
                 "Legacy reports are not fully mapped; see APA-P50.A01.S01.", ""]
     state = {"schema": "APA_PROJECT_CONTROLLER_STATE_V1",
              "plan_revision": plan["revision"], "source_plan": str(PLAN),

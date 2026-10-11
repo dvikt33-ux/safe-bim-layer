@@ -1,6 +1,6 @@
 # APA — START HERE for any new chat or agent
 
-Authority: [PROJECT_PLAN.json](../../../../../docs/research/apa-results/control/PROJECT_PLAN.json). Read [CONTROL_BOARD](CONTROL_BOARD.md), [TASK_CARDS](TASK_CARDS.md) and [RELATIONSHIPS](RELATIONSHIPS.md) and [THEMES](THEMES.md) before proposing work.
+Authority: [PROJECT_PLAN.json](../../../../../docs%5Cresearch%5Capa-results%5Ccontrol%5CPROJECT_PLAN.json). Read [CONTROL_BOARD](CONTROL_BOARD.md), [TASK_CARDS](TASK_CARDS.md) and [RELATIONSHIPS](RELATIONSHIPS.md) and [THEMES](THEMES.md) before proposing work.
 
 ## Mandatory procedure
 
@@ -33,5 +33,5 @@ Never invent another controller or repeat proven low-level BIM tests without a r
 ## Safety
 
 No autonomous ChatGPT research is started by this controller. 24/7 NOT_RUNNING.
-No Deep Research/paid API without explicit approval. No main, PLN, APX, tested branch edits or merge.
+No Deep Research/paid API without explicit approval. PLN writes follow current user authorization and exact project binding in PROJECT_PLAN.json policies.mutation. No main, APX, tested branch edits or merge without authorization.
 Legacy reports are not fully mapped; see APA-P50.A01.S01.
