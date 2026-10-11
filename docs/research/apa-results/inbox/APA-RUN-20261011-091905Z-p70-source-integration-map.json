@@ -7,8 +7,8 @@
   "executor": "chatgpt-gpt6-p70-assembly-audit-20261011",
   "executor_run_id": "chatgpt-gpt6-p70-assembly-audit-20261011",
   "phase": "SOURCE",
-  "started_at": "2026-10-11T09:19:05.686Z",
-  "finished_at": "2026-10-11T09:19:05.686Z",
+  "started_at": "2026-10-11T09:19:05Z",
+  "finished_at": "2026-10-11T09:19:05Z",
   "scope": {
     "repository": "dvikt33-ux/safe-bim-layer",
     "archicad": "29 (source target; no local run)",
