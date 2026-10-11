@@ -61,3 +61,21 @@ The actual new bridge has **NOT** sent a Slack message from Windows with this ou
 - Source commits: Windows test workflow [bd53dd6](https://github.com/dvikt33-ux/safe-bim-layer/commit/bd53dd6d26f36d0d05856311af76ce073d915623), timestamp lock [563a85f](https://github.com/dvikt33-ux/safe-bim-layer/commit/563a85fba1d1c566171022281cee23dcb927bed2), regression cases [d5ead94](https://github.com/dvikt33-ux/safe-bim-layer/commit/d5ead9466d0c34584e1f0fa4d4b1857a222112a6), [draft PR #37](https://github.com/dvikt33-ux/safe-bim-layer/pull/37). New PR documentation [0ed1e89](https://github.com/dvikt33-ux/safe-bim-layer/commit/0ed1e8906f6a7538f771dddb82f591dd384d5f90).
 
 **Scope:** SOURCE + OFFLINE_CI_LINUX_AND_WINDOWS_PASS + PINNED_GITHUB_RECEIPT_DRY_RUN_PASS; **NOT** actual Windows laptop execution, outbound Slack LIVE, unattended GitHub↔Slack reconciliation, deployment, or task DONE. `APA-P60.A02.S05` was not admitted; controller tasks/leases untouched. Do not imply operational bidirectional sync from a synthetic/mocked Windows runner.
+
+## Avoid false task-status conflicts + single-command Windows acceptance — 2026-10-11
+
+**Important newly found and repaired correctness issue:** the original notification used the real controller S-ID as Slack ledger `task_id` with `status=INFO, phase=SOURCE`. Because the Socket Mode SQLite journal applies conflict semantics to the same `task_id:phase`, this could have changed a previously non-conflicted `PASS/SOURCE` task state to `CONFLICT`. The new notification uses an **isolated receipt-notice stream**, e.g. `APA-RECEIPT-EVENT-APA-P70-A01-S01`, while the real task ID remains in the summary and verified proof links. An actual offline `EventStore` test asserts the original task stays `PASS` and the notice stays `INFO`. This is a POC-only patch, not deployed to the user's local listener.
+
+- [Draft PR #37](https://github.com/dvikt33-ux/safe-bim-layer/pull/37) now includes `scripts/apa_sync/live_receipt_probe.py`: verifies pinned GitHub receipt + local `/health`, snapshots existing ledger before any send, uses explicit `--publish` to post through the existing durable outbox, checks Slack readback, and correlates a **new** event's ID, timestamp, source, evidence and `conflict=False` in local SQLite. It refuses to label preexisting or missing events as FRESH_LIVE_PASS. Default mode is read-only.
+- `scripts/apa_sync/windows_live_acceptance.ps1`: one-command wrapper for the **isolated PR branch**, with default read-only preflight and optional `-Publish`; it does not stop/restart the service or write the controller/PLN/APX. If publication requires a bot token it is prompted **locally** with hidden input; no token handling through the report/ChatGPT.
+- Added 19 mocked live probe tests, isolated real-task conflict regression and CI parsing of both Windows launchers. No externally hosted CI runner can access the user's `127.0.0.1:8765`; do not claim the bridge was installed or exercised live on Windows.
+
+### Verified external checks
+
+[GitHub Actions #38148894163](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38148894163) **SUCCESS** (attempt 1), with job logs and step names read back:
+- Linux **93/93 unit tests PASS**: 44 original receiver + 17 receipt + 13 outbox + 19 one-shot probe.
+- Windows CI **49/49 unit tests PASS**: 17 receipt + 13 outbox + 19 one-shot probe; parse of both `start_windows.ps1` and `windows_live_acceptance.ps1` PASS.
+- Pinned **real** GitHub receipt → isolated `INFO` notification dry-run PASS; no Slack posting was enabled in CI.
+- [Documented PR usage](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-sync-receipt-evidence-bridge-poc-20261011/scripts/apa_sync/RECEIPT_BRIDGE_POC.md), source doc commit [860d2a8](https://github.com/dvikt33-ux/safe-bim-layer/commit/860d2a8f9b6f594f142d1477ff1489c53b6d94ad).
+
+**Remaining:** LOCAL_WINDOWS_OUTBOUND_LIVE_NOT_VERIFIED, unattended GitHub event polling not implemented, eventual reconciliation after network failure not demonstrated end-to-end, task `APA-P60.A02.S05` still **DEFERRED / unregistered**, no `DONE_PUBLISHED` claim. No changes to main/master, installed APX or open PLN. 
