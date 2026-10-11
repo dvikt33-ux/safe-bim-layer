@@ -11,5 +11,6 @@ Generated projection from immutable V2 runs. Legacy reports remain in ARTIFACT_R
 | [APA-RUN-20261010-200823Z-mep-route-port-gate](../runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md) | APA-P10.A02.S04 | SOURCE | EVIDENCE_READY |
 | [APA-RUN-20261010-234200Z-slack-legacy-three-audit](../runs/2026-10-10/APA-RUN-20261010-234200Z-slack-legacy-three-audit/REPORT.md) | APA-P00.A02.S03 | SOURCE | EVIDENCE_READY |
 | [APA-RUN-20261010-235301Z-branch-evidence-dedup](../runs/2026-10-10/APA-RUN-20261010-235301Z-branch-evidence-dedup/REPORT.md) | APA-P00.A02.S03 | SOURCE | EVIDENCE_READY |
+| [APA-RUN-20261011-001922Z-eighty-head-blob-inventory](../runs/2026-10-11/APA-RUN-20261011-001922Z-eighty-head-blob-inventory/REPORT.md) | APA-P00.A02.S03 | SOURCE | EVIDENCE_READY |
 
 Publication receipts are in ../receipts/. Evidence status is not publication status.
