@@ -5,6 +5,9 @@ on:
     paths:
       - 'scripts/apa_sync/**'
       - 'tests/test_apa_slack_sync.py'
+      - 'tests/test_receipt_bridge.py'
+      - 'tests/test_receipt_bridge_outbox.py'
+      - 'tests/test_live_receipt_probe.py'
       - 'docs/APA_SLACK_COORDINATOR.md'
       - '.github/workflows/apa-sync-offline.yml'
   workflow_dispatch:
@@ -21,25 +24,59 @@ jobs:
         with:
           python-version: '3.11'
       - name: Compile Python sources
-        run: python -m compileall -q scripts/apa_sync tests/test_apa_slack_sync.py
+        run: python -m compileall -q scripts/apa_sync tests/test_apa_slack_sync.py tests/test_receipt_bridge.py tests/test_receipt_bridge_outbox.py tests/test_live_receipt_probe.py
       - name: Offline unit tests (no Slack tokens)
         run: python -m unittest discover -s tests -p 'test_apa_slack_sync.py' -v
+      - name: Receipt bridge offline tests (no network or tokens)
+        run: python -m unittest discover -s tests -p 'test_receipt_bridge.py' -v
+      - name: Receipt bridge durable outbox and crash tests
+        run: python -m unittest discover -s tests -p 'test_receipt_bridge_outbox.py' -v
+      - name: One-shot receipt live probe offline simulation
+        run: python -m unittest discover -s tests -p 'test_live_receipt_probe.py' -v
+      - name: Pinned real GitHub receipt readback to Slack INFO dry-run
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python -m scripts.apa_sync.receipt_bridge \
+            --plan-commit 8af838f0ad96c98bfcdafab86ad318901a23ecd1 \
+            notify \
+            --task-id APA-P70.A01.S01 \
+            --receipt-path docs/research/apa-results/receipts/APA-RUN-20261011-091905Z-p70-source-integration-map.json \
+            > /tmp/apa-verified-receipt-info.json
+          python -c 'import json; x=json.load(open("/tmp/apa-verified-receipt-info.json")); assert x["dry_run"] is True and x["event"]["status"] == "INFO" and x["event"]["task_id"] == "APA-RECEIPT-EVENT-APA-P70-A01-S01" and "APA-P70.A01.S01" in x["event"]["summary"]; print("REAL_RECEIPT_DRY_RUN_PASS")'
 
   windows-launcher-static:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Execute receipt and SQLite outbox tests on Windows
+        shell: pwsh
+        run: |
+          python -m unittest discover -s tests -p 'test_receipt_bridge.py' -v
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m unittest discover -s tests -p 'test_receipt_bridge_outbox.py' -v
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m unittest discover -s tests -p 'test_live_receipt_probe.py' -v
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Write-Host 'WINDOWS_BRIDGE_OFFLINE_PASS'
       - name: Parse Windows launch script without running it
         shell: pwsh
         run: |
           $tokens = $null
           $parseErrors = $null
-          $path = 'scripts/apa_sync/start_windows.ps1'
-          [System.Management.Automation.Language.Parser]::ParseFile(
-            (Resolve-Path $path), [ref]$tokens, [ref]$parseErrors
-          ) | Out-Null
-          if ($parseErrors.Count -gt 0) {
-            $parseErrors | ForEach-Object { Write-Error $_.Message }
-            throw 'Windows launch script has PowerShell parser errors'
+          foreach ($path in @('scripts/apa_sync/start_windows.ps1',
+                              'scripts/apa_sync/windows_live_acceptance.ps1')) {
+            $tokens = $null
+            $parseErrors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile(
+              (Resolve-Path $path), [ref]$tokens, [ref]$parseErrors
+            ) | Out-Null
+            if ($parseErrors.Count -gt 0) {
+              $parseErrors | ForEach-Object { Write-Error $_.Message }
+              throw "PowerShell parse errors: $path"
+            }
           }
           Write-Host 'POWERSHELL_SYNTAX_PASS'
