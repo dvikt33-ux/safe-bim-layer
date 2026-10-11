@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 60,
+  "revision": 61,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -566,6 +566,18 @@
       "uri": "docs/research/apa-results/runs/2026-10-11/apa-publisher-three-stage-race-recovery-pr39-20261011.md",
       "kind": "REPORT",
       "verification": "SOURCE_GITHUB_READBACK_OFFLINE_CI_39_PASS_CANONICAL_NOT_DEPLOYED"
+    },
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011": {
+      "id": "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+      "uri": "docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md",
+      "kind": "REPORT",
+      "verification": "GITHUB_READBACK_VERIFIED"
+    },
+    "ART-P70-A02-S01-PUBLISH-RECEIPT-20261011": {
+      "id": "ART-P70-A02-S01-PUBLISH-RECEIPT-20261011",
+      "uri": "docs/research/apa-results/receipts/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories.json",
+      "kind": "RECEIPT",
+      "verification": "GITHUB_READBACK_VERIFIED"
     }
   },
   "tasks": {
@@ -2162,7 +2174,7 @@
       "action_id": "APA-P70.A02",
       "title": "Собрать семантический контракт задания, участка, этажей и помещений",
       "kind": "BUILD",
-      "status": "IN_PROGRESS",
+      "status": "DONE_PUBLISHED",
       "priority": 1,
       "work_key": "project-brief-and-story-contract",
       "depends_on": [
@@ -2177,11 +2189,14 @@
         "Два режима GENERATE_FROM_ZERO/ADAPT_EXISTING; требования/ограничения, первый этаж на ±0.000, index только по GetStories"
       ],
       "acceptance": "Два режима GENERATE_FROM_ZERO/ADAPT_EXISTING; требования/ограничения, первый этаж на ±0.000, index только по GetStories",
-      "owner": "chatgpt-gpt6-manual",
-      "lease_until": "2026-10-11T20:00:00Z",
-      "claim_ref": "APA-RUN-20261011-1608Z-p70-a02-s01-semantic-brief",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+        "ART-P70-A02-S01-PUBLISH-RECEIPT-20261011"
+      ],
       "blocked_reason": null
     },
     "APA-P70.A02.S02": {
