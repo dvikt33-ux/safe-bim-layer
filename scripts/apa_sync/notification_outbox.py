@@ -110,11 +110,20 @@ class NotificationOutbox:
             db.execute("BEGIN IMMEDIATE")
             result = db.execute(
                 """UPDATE notifications SET status='SENT',slack_ts=?,
-                       updated_at=CURRENT_TIMESTAMP WHERE event_id=?""",
+                       updated_at=CURRENT_TIMESTAMP
+                   WHERE event_id=?
+                     AND status IN ('RESERVED','IN_FLIGHT','UNCERTAIN')""",
                 (slack_ts,event_id)
             )
             if result.rowcount != 1:
-                raise OutboxError("notification reservation missing")
+                existing = db.execute(
+                    "SELECT status,slack_ts FROM notifications WHERE event_id=?",
+                    (event_id,)
+                ).fetchone()
+                if (existing is not None and existing["status"] == "SENT"
+                        and existing["slack_ts"] == slack_ts):
+                    return  # idempotent readback of the exact same confirmed delivery
+                raise OutboxError("notification missing or conflicting sent timestamp")
 
     def status(self, event_id: str) -> dict | None:
         with self._connect() as db:
