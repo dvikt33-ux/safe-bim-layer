@@ -329,6 +329,8 @@ def main(argv=None):
     group.add_argument("--refresh-schema", action="store_true")
     p.add_argument("--run-id")
     p.add_argument("--confirm-plan-hash")
+    p.add_argument("--scratch-port", type=int,
+                   help="Use only the approved disposable C:\\LocalAI\\APA_Test_House_01.pln on this port")
     args = p.parse_args(argv)
     try:
         transport = native_transport
@@ -340,6 +342,12 @@ def main(argv=None):
             if args.execute and (not args.run_id or not args.confirm_plan_hash or not args.data_dir):
                 raise ValueError("--execute requires --run-id, --confirm-plan-hash and stable --data-dir")
             intent = json.loads(args.intent.read_text(encoding="utf-8-sig"))
+            if args.scratch_port is not None:
+                RUN.bind_approved_scratch_pln(args.scratch_port)
+            elif (args.preflight or args.execute) and any(
+                    c.get("primitive") == "building-shell-v1"
+                    for c in intent.get("components", []) if isinstance(c, dict)):
+                raise ValueError("BUILDING_LIVE_REQUIRES_EXPLICIT_APPROVED_SCRATCH_PORT")
             result = run_project(intent, args.schema, args.output, args.data_dir,
                                  "execute" if args.execute else "preflight" if args.preflight else "offline",
                                  transport, args.run_id, args.confirm_plan_hash)
