@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 45,
+  "revision": 46,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -1986,7 +1986,7 @@
       "action_id": "APA-P70.A01",
       "title": "Сопоставить полный продуктовый контракт с существующим кодом и исследованиями",
       "kind": "CONSOLIDATION",
-      "status": "READY",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "product-contract-and-code-baseline",
       "depends_on": [
@@ -2005,9 +2005,9 @@
         "Таблица требований полного цикла → исходные файлы/SHA → подтверждённые функции и ограничения; без новой реализации"
       ],
       "acceptance": "Таблица требований полного цикла → исходные файлы/SHA → подтверждённые функции и ограничения; без новой реализации",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "chatgpt-gpt6-p70-assembly-audit-20261011",
+      "lease_until": "2026-10-11T11:30:00Z",
+      "claim_ref": "chatgpt-gpt6-p70-assembly-audit-20261011",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
