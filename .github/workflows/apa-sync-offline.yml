@@ -5,6 +5,7 @@ on:
     paths:
       - 'scripts/apa_sync/**'
       - 'tests/test_apa_slack_sync.py'
+      - 'tests/test_receipt_bridge.py'
       - 'docs/APA_SLACK_COORDINATOR.md'
       - '.github/workflows/apa-sync-offline.yml'
   workflow_dispatch:
@@ -21,9 +22,11 @@ jobs:
         with:
           python-version: '3.11'
       - name: Compile Python sources
-        run: python -m compileall -q scripts/apa_sync tests/test_apa_slack_sync.py
+        run: python -m compileall -q scripts/apa_sync tests/test_apa_slack_sync.py tests/test_receipt_bridge.py
       - name: Offline unit tests (no Slack tokens)
         run: python -m unittest discover -s tests -p 'test_apa_slack_sync.py' -v
+      - name: Receipt bridge offline tests (no network or tokens)
+        run: python -m unittest discover -s tests -p 'test_receipt_bridge.py' -v
 
   windows-launcher-static:
     runs-on: windows-latest
