@@ -90,7 +90,7 @@
   ],
   "claims": [
     {
-      "claim_id": "APA-ARCHIVE-ROOF-GABLE-CONTRACT-20261011",
+      "claim_id": "APA-CLAIM-ARCHIVE-ROOF-GABLE-CONTRACT-20261011",
       "statement": "Retained Tapir 1.5.10 CreateRoofs and RoofDetails schema lack per-edge Gable/Sloped input and readback while archived source proposes API_PolyRoofID; runtime unchanged and not tested.",
       "status": "SOURCE_VERIFIED",
       "evidence_ids": [
@@ -102,7 +102,7 @@
       ]
     },
     {
-      "claim_id": "APA-ARCHIVE-COMPOSITE-CONTRACT-20261011",
+      "claim_id": "APA-CLAIM-ARCHIVE-COMPOSITE-CONTRACT-20261011",
       "statement": "Existing Get/CreateComposites 1.5.10 contracts expose skins/separators but schema does not require useWith; current SceneWriter covers exact Basic slab material rather than Composite authoring.",
       "status": "SOURCE_VERIFIED",
       "evidence_ids": [
@@ -116,7 +116,7 @@
       ]
     },
     {
-      "claim_id": "APA-ARCHIVE-CONTEXT-REUSE-20261011",
+      "claim_id": "APA-CLAIM-ARCHIVE-CONTEXT-REUSE-20261011",
       "statement": "Existing read-only watcher and guarded SceneWriter provide partial project-context handling; retained schema does not expose native SafeBIM stamp/element state index; atomic coherent snapshot not proven.",
       "status": "SOURCE_VERIFIED",
       "evidence_ids": [
@@ -129,7 +129,7 @@
       ]
     },
     {
-      "claim_id": "APA-ARCHIVE-LIVE-BINARY-EQUIVALENCE-20261011",
+      "claim_id": "APA-CLAIM-ARCHIVE-LIVE-BINARY-EQUIVALENCE-20261011",
       "statement": "Loaded APX binary source parity, gable/Composite execution and project-stamp native runtime support were not tested in this run.",
       "status": "NOT_VERIFIED",
       "evidence_ids": [
