@@ -11,6 +11,7 @@ on:
     paths:
       - 'scripts/archicad_accelerator_integration.py'
       - 'scripts/archicad_project_accelerator.py'
+      - 'scripts/run_apa_test_house_01.ps1'
       - 'schemas/accelerator/**'
       - 'schemas/tapir-live-1.5.10/**'
       - 'tests/test_archicad_accelerator_integration.py'
@@ -41,6 +42,7 @@ on:
     paths:
       - 'scripts/archicad_accelerator_integration.py'
       - 'scripts/archicad_project_accelerator.py'
+      - 'scripts/run_apa_test_house_01.ps1'
       - 'schemas/accelerator/**'
       - 'schemas/tapir-live-1.5.10/**'
       - 'tests/test_archicad_accelerator_integration.py'
@@ -86,7 +88,7 @@ jobs:
       - name: Static check Windows launcher syntax
         shell: pwsh
         run: |
-          $paths = @("scripts/start_archicad_mailbox_watch.ps1", "scripts/install_mailbox_watch_autostart.ps1")
+          $paths = @("scripts/start_archicad_mailbox_watch.ps1", "scripts/install_mailbox_watch_autostart.ps1", "scripts/run_apa_test_house_01.ps1")
           foreach ($path in $paths) {
             $tokens = $null
             $parseErrors = $null

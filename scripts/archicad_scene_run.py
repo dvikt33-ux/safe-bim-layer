@@ -26,6 +26,23 @@ PORT = 19723
 EXPECTED_NAME = "Тест MER "
 EXPECTED_PATH = r"C:\LocalAI\SafeBIM_Global_Library_Test_Projects\Тест MER .pln"
 EXPECTED_TAPIR = "1.5.10"
+
+# Narrowly approved throwaway project. NEVER apply CLI target override to any
+# other PLN, including protected APA_Pavilion_MVP_SUCCESS.pln and SyncGuids.
+APPROVED_SCRATCH_PATH = r"C:\LocalAI\APA_Test_House_01.pln"
+
+
+def bind_approved_scratch_pln(port, path=APPROVED_SCRATCH_PATH):
+    """Configure only the expressly designated disposable PLN; fail closed."""
+    global PORT, EXPECTED_NAME, EXPECTED_PATH
+    if type(port) is not int or port < 1 or port > 65535:
+        raise ValueError("INVALID_TEST_PORT")
+    if not isinstance(path, str) or path.casefold() != APPROVED_SCRATCH_PATH.casefold():
+        raise ValueError("TEST_PLN_NOT_APPROVED")
+    PORT = port
+    EXPECTED_PATH = APPROVED_SCRATCH_PATH
+    EXPECTED_NAME = "APA_Test_House_01"
+
 DEFAULT_SCENE_SCHEMA = Path(__file__).resolve().parents[1] / "schemas/tapir-live-1.5.10/tapir-scene-live.json"
 ALLOWED_WRITES = frozenset(("CreateWalls", "CreateSlabs", "CreateColumns",
                            "CreateWindows", "CreateDoors"))
@@ -56,7 +73,7 @@ def close(a, b, tolerance=1e-5):
             and abs(a-b) <= tolerance)
 
 
-def guarded_project(api):
+def guarded_project(api, required_story=None):
     info = api("GetProjectInfo", {})
     if (not isinstance(info, dict) or info.get("projectName") != EXPECTED_NAME
             or info.get("projectPath") != EXPECTED_PATH
@@ -64,19 +81,28 @@ def guarded_project(api):
             or info.get("isTeamwork") is not False):
         raise ValueError("WRONG_PROJECT: exact test PLN (including trailing space) required")
     stories = api("GetStories", {})
+    if required_story is None:
+        native_index, floor_id, level, label = 0, 1, 0.0, None
+    else:
+        native_index = required_story["nativeIndex"]
+        floor_id = required_story["floorId"]
+        level = required_story["level"]
+        label = required_story["label"]
     floor = next((x for x in stories.get("stories", [])
-                  if x.get("index") == 0), None)
-    if (stories.get("actStory") != 0 or not isinstance(floor, dict)
-            or floor.get("floorId") != 1 or not close(floor.get("level"), 0)):
-        raise ValueError("STORY_MISMATCH: require active first story, native index 0 / floorId 1")
+                  if x.get("index") == native_index), None)
+    if (stories.get("actStory") != native_index or not isinstance(floor, dict)
+            or floor.get("floorId") != floor_id or not close(floor.get("level"), level)):
+        raise ValueError("STORY_MISMATCH: active story must match pinned binding")
+    if label is not None and (floor.get("name") or floor.get("uName") or "") != label:
+        raise ValueError("STORY_LABEL_MISMATCH_OR_MISSING")
     version = api("GetAddOnVersion", {}).get("version")
     if version != EXPECTED_TAPIR:
         raise ValueError(f"TAPIR_VERSION_MISMATCH: {version!r} != {EXPECTED_TAPIR}")
     return {"path": info["projectPath"], "name": info["projectName"],
-            "port": PORT, "tapirVersion": version, "storyIndex": 0}
+            "port": PORT, "tapirVersion": version, "storyIndex": native_index}
 
 
-def scan_for_existing_geometry(api, anchor_x, anchor_y):
+def scan_for_existing_geometry(api, anchor_x, anchor_y, envelope=None):
     """Conservatively refuse if an existing 3D body touches the scene envelope.
 
     Every existing element is scanned, not just selected Walls. Malformed,
@@ -86,9 +112,25 @@ def scan_for_existing_geometry(api, anchor_x, anchor_y):
     elements = all_elements.get("elements") if isinstance(all_elements, dict) else None
     if not isinstance(elements, list) or len(elements) > 50000:
         raise ValueError("SPATIAL_SCAN_UNAVAILABLE: missing/oversized native inventory")
-    lowx, highx = anchor_x-.35, anchor_x+SCENE.WIDTH+.35
-    lowy, highy = anchor_y-.35, anchor_y+SCENE.DEPTH+.35
-    lowz, highz = -SCENE.SLAB_THICKNESS-.1, SCENE.HEIGHT+.1
+    if envelope is None:
+        lowx, highx = anchor_x-.35, anchor_x+SCENE.WIDTH+.35
+        lowy, highy = anchor_y-.35, anchor_y+SCENE.DEPTH+.35
+        lowz, highz = -SCENE.SLAB_THICKNESS-.1, SCENE.HEIGHT+.1
+    else:
+        if (not isinstance(envelope, dict) or set(envelope) !=
+                {"xMin", "xMax", "yMin", "yMax", "zMin", "zMax"}):
+            raise ValueError("INVALID_SCENE_ENVELOPE")
+        coordinates = [envelope[k] for k in
+                       ("xMin", "xMax", "yMin", "yMax", "zMin", "zMax")]
+        if any(type(n) not in (float, int) or not math.isfinite(n)
+               for n in coordinates):
+            raise ValueError("INVALID_SCENE_ENVELOPE")
+        if any(coordinates[i] >= coordinates[i+1] for i in (0, 2, 4)):
+            raise ValueError("INVERTED_SCENE_ENVELOPE")
+        lowx, highx, lowy, highy, lowz, highz = (
+            envelope["xMin"]-.35, envelope["xMax"]+.35,
+            envelope["yMin"]-.35, envelope["yMax"]+.35,
+            envelope["zMin"]-.1, envelope["zMax"]+.1)
     checked = 0
     nonspatial = 0
     # Batch modestly; do not hold a massive JSON response in memory.
@@ -185,10 +227,10 @@ def compare_polygon(expected, actual):
                for start in range(n) for direction in (-1, 1))
 
 
-def verify_readback(command, params, row, owner_guid=None):
+def verify_readback(command, params, row, owner_guid=None, expected_floor=0):
     kind = command[6:-1]  # CreateWalls -> Wall, CreateDoors -> Door
-    if row.get("type") != kind or row.get("floorIndex") != 0:
-        raise ValueError(f"READBACK_TYPE_OR_STORY: expected {kind} on native story 0")
+    if row.get("type") != kind or row.get("floorIndex") != expected_floor:
+        raise ValueError(f"READBACK_TYPE_OR_STORY: expected {kind} on native story {expected_floor}")
     details = row.get("details")
     if not isinstance(details, dict):
         raise ValueError("READBACK_DETAILS_MISSING")
@@ -259,28 +301,48 @@ def check_previous_wall(api, graph_step, created):
     if previous_step is None:
         raise ValueError("PARENT_PLAN_ROW_MISSING")
     row = requested_details(api, parent["guid"])
-    verify_readback("CreateWalls", previous_step["params"], row)
+    verify_readback("CreateWalls", previous_step["params"], row,
+                    expected_floor=previous_step["params"]["wallsData"][0]["floorIndex"])
     return parent["guid"]
 
 
 class SceneWriter:
-    def __init__(self, api, journal_path, schema_path=None):
+    def __init__(self, api, journal_path, schema_path=None, preview_factory=None):
         self.api = api
         self.journal_path = Path(journal_path)
         self.schema_path = Path(schema_path) if schema_path is not None else DEFAULT_SCENE_SCHEMA
+        self.preview_factory = preview_factory
+        self.required_story = None
+
+    def guarded_binding(self):
+        return guarded_project(self.api, self.required_story)
 
     def preflight(self, x, y):
-        binding = guarded_project(self.api)
-        preview = SCENE.prepare(x, y, self.schema_path)
+        preview = (self.preview_factory(x, y, self.schema_path)
+                   if self.preview_factory is not None
+                   else SCENE.prepare(x, y, self.schema_path))
+        bindings = preview.get("storyBindings")
+        self.required_story = bindings[0] if bindings else None
+        binding = self.guarded_binding()
+        if bindings:
+            stories = self.api("GetStories", {}).get("stories")
+            if not isinstance(stories, list):
+                raise ValueError("STORY_MAP_UNAVAILABLE")
+            for binding_row in bindings:
+                actual = next((r for r in stories if
+                               r.get("index") == binding_row["nativeIndex"]), None)
+                if (not actual or actual.get("floorId") != binding_row["floorId"]
+                        or not close(actual.get("level"), binding_row["level"])
+                        or (actual.get("name") or actual.get("uName") or "") != binding_row["label"]):
+                    raise ValueError("UNVERIFIED_NAMED_STORY: " + binding_row["label"])
         if preview["schemaVersion"] != binding["tapirVersion"]:
-            raise ValueError(f"TAPIR_SCHEMA_VERSION_MISMATCH: schema {preview['schemaVersion']!r} != runtime {binding['tapirVersion']!r}")
-        # Confirmation binds the geometry to the exact contract bytes as well.
+            raise ValueError("TAPIR_SCHEMA_VERSION_MISMATCH")
         preview["sourcePlanHash"] = digest({
             "graphHash": preview["sourcePlanHash"],
             "schemaSha256": preview["schemaSha256"],
         })
-        scan_report = scan_for_existing_geometry(self.api, x, y)
-        if guarded_project(self.api) != binding:
+        scan_report = scan_for_existing_geometry(self.api, x, y, preview.get("envelope"))
+        if self.guarded_binding() != binding:
             raise ValueError("project binding changed during read-only preflight")
         return {**preview, "status": "READY_FOR_EXPLICIT_TEST_RUN",
                 "binding": binding, **scan_report,
@@ -319,7 +381,7 @@ class SceneWriter:
                     raise ValueError("UNSUPPORTED_WRITE_RECIPE")
                 try:
                     # The FULL project identity is freshly checked at every step.
-                    if guarded_project(self.api) != preflight["binding"]:
+                    if self.guarded_binding() != preflight["binding"]:
                         raise ValueError("PROJECT_SWITCHED_DURING_SCENE")
                     parent_guid = None
                     if command in ("CreateWindows", "CreateDoors"):
@@ -346,7 +408,7 @@ class SceneWriter:
                                    "intent": intent, "localApproval": approval_record
                                })))
                     db.commit()  # Durable per-operation approval and intent BEFORE write.
-                    if (guarded_project(self.api) != intent["target"]
+                    if (self.guarded_binding() != intent["target"]
                             or digest(intent) != approval_record["operationHash"]
                             or approval_record["scope"] != EXPECTED_PATH):
                         raise ValueError("OPERATION_BOUNDARY_APPROVAL_MISMATCH")
@@ -355,11 +417,17 @@ class SceneWriter:
                     db.execute("UPDATE steps SET state='CREATED_UNVERIFIED',guid=? WHERE scene_id=? AND step_id=?",
                                (guid, scene_id, step_id))
                     db.commit()
-                    if guarded_project(self.api) != preflight["binding"]:
+                    if self.guarded_binding() != preflight["binding"]:
                         raise ValueError("PROJECT_CHANGED_AFTER_WRITE")
                     row = requested_details(self.api, guid)
-                    kind = verify_readback(command, params, row, parent_guid)
-                    created[step_id] = {"guid": guid, "kind": kind}
+                    if command in ("CreateWindows", "CreateDoors"):
+                        owner_ref = step["params"][command[6:].lower()+"Data"][0]["ownerWallId"]["guid"]["$createdGuid"]
+                        floor_index = created[owner_ref]["floorIndex"]
+                    else:
+                        floor_index = next(iter(params.values()))[0]["floorIndex"]
+                    kind = verify_readback(command, params, row, parent_guid,
+                                           expected_floor=floor_index)
+                    created[step_id] = {"guid": guid, "kind": kind, "floorIndex": floor_index}
                     result["steps"][step_id] = {"status": "PASS", "guid": guid, "kind": kind}
                     db.execute("UPDATE steps SET state='PASS',output=? WHERE scene_id=? AND step_id=?",
                                (canonical(result["steps"][step_id]), scene_id, step_id))
