@@ -117,3 +117,8 @@
 - **Оставшаяся работа S03:** semantic `superseded_by` карта архивных решений к современным артефактам/контрактам, затем независимый аудит SDK и live acceptance по существующим S-ID. Не открывать снова задачу на physical source archival.
 - **CI caveat:** [workflow 38128175054](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38128175054) SUCCESS после восстановления V2; более поздний [38128227619](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38128227619) FAIL по тесту контроллера `development.done (expected 0, got 1)`; это самостоятельная проверка состояния тестов, не ошибка source byte preservation. Последующая CI по ревизии плана требует отдельной оценки, не заявляется автоматически зелёной.
 
+
+
+## CI reconciliation after 71-file archival controller update (2026-10-11)
+
+**Последующая независимая проверка закрыла прежний CI warning.** [GitHub Actions #38128367467](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38128367467) на точном коммите контроллера `6f14dccaa0ffb947ac54b590f529ebbf26960f8e` завершился **SUCCESS**. Отдельно по job logs: `Project Controller DAG, claim and dispatch tests` SUCCESS, `Validate canonical project plan and reject orphan/unclaimed inbox` SUCCESS, `Prepare immutable run files and generated projections` SUCCESS, `Commit report and index projection` SUCCESS, `Verify controller projections via GitHub REST` SUCCESS. На этом прогоне подтверждено независимое `READBACK_VERIFIED` для `APA-RUN-20261011-092155Z-source71-byte-archive` receipt и `APA_CONTROLLER_READBACK_VERIFIED` для generated board/state. **Предыдущий fail #38128227619 является историческим и не текущей блокировкой этого controller commit.** Это не означает доступность Archicad LIVE.
