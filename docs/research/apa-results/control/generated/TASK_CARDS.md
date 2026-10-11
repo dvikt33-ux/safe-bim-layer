@@ -1279,7 +1279,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: codex-apa-core-native-20261011 / 2026-10-11T21:00:00Z
 - Requires owner approval: False
 - Source inputs: [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-SDK-SEO](../../../../../docs/research/apa-results/runs/2026-10-10/apa-discovery-20261010-102440-slinktrim-9f2b7.md)
-- Existing V2 runs: none
+- Existing V2 runs: [APA-RUN-20261011-202800Z-native-geometry-integration](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md) (receipt verified)
 - Expected output: Native dump/NetworkX/Shapely используются через существующий readback; стыки, XYZ, story и host проверены на подтверждённых ошибках; 2D пересечение не считается 3D коллизией; ядро сохраняет работоспособность.
 
 ## APA-P70.A10.S01
