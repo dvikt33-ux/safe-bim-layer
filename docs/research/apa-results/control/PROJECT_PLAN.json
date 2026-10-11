@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 68,
+  "revision": 69,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -606,6 +606,18 @@
     "ART-P70-A03-S01-RECEIPT-20261011": {
       "id": "ART-P70-A03-S01-RECEIPT-20261011",
       "uri": "docs/research/apa-results/receipts/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths.json",
+      "kind": "RECEIPT",
+      "verification": "GITHUB_READBACK_VERIFIED"
+    },
+    "ART-P70-A03-S02-AUTHORED-NATIVE-DAG-PARTIAL-20261011": {
+      "id": "ART-P70-A03-S02-AUTHORED-NATIVE-DAG-PARTIAL-20261011",
+      "uri": "docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial/REPORT.md",
+      "kind": "REPORT",
+      "verification": "GITHUB_READBACK_VERIFIED"
+    },
+    "ART-P70-A03-S02-RECEIPT-PARTIAL-20261011": {
+      "id": "ART-P70-A03-S02-RECEIPT-PARTIAL-20261011",
+      "uri": "docs/research/apa-results/receipts/APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial.json",
       "kind": "RECEIPT",
       "verification": "GITHUB_READBACK_VERIFIED"
     }
@@ -2329,7 +2341,7 @@
       "action_id": "APA-P70.A03",
       "title": "Собрать модель средствами уже существующих BIM-исполнителей",
       "kind": "BUILD",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 2,
       "work_key": "reuse-native-whole-building-builder",
       "depends_on": [
@@ -2347,12 +2359,15 @@
         "Создание полноценной BIM-геометрии из схемы через имеющиеся writer/graph; связные стены не дробятся без необходимости; тестовый PLN только после разрешения"
       ],
       "acceptance": "Создание полноценной BIM-геометрии из схемы через имеющиеся writer/graph; связные стены не дробятся без необходимости; тестовый PLN только после разрешения",
-      "owner": "chatgpt-gpt6-manual",
-      "lease_until": "2026-10-12T01:00:00Z",
-      "claim_ref": "APA-RUN-20261011-p70-a03-s02-authored-native-graph",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": true,
-      "evidence": [],
-      "blocked_reason": "SOURCE_OFFLINE_ONLY: Native PLN/APX writes require distinct explicit consent; task requires_approval=true."
+      "evidence": [
+        "ART-P70-A03-S02-AUTHORED-NATIVE-DAG-PARTIAL-20261011",
+        "ART-P70-A03-S02-RECEIPT-PARTIAL-20261011"
+      ],
+      "blocked_reason": "Native CreateSlabs->ModifySlabs material/Z not yet generalized; requires_approval=true, test PLN write not authorized. Source graph & 258/258 offline tests published."
     },
     "APA-P70.A03.S03": {
       "id": "APA-P70.A03.S03",
