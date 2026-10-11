@@ -1,0 +1,40 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-AUTHORED-NATIVE-SAVED-EVIDENCE",
+      "evidence_ids": [
+        "EV-AUTHORED-NATIVE-PERSISTENCE"
+      ],
+      "statement": "Captured native receipts prove17primary elements plus2ownedsegments, saved/reopened with20baselineGUIDs preserved. This publication is source inspection of these artifacts.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-AUTHORED-NATIVE-CODE-CI",
+      "evidence_ids": [
+        "EV-AUTHORED-CODE-CI"
+      ],
+      "statement": "PR48 source71b2885 passed289offline tests; native acceptance derives separately from captured readback.",
+      "status": "OFFLINE_PASS"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-AUTHORED-NATIVE-PERSISTENCE",
+      "kind": "LOCAL_LOG",
+      "sha256": "baa744d92a57a9ea75acda3152d5c0cdbc25213641c12ed56a96f56a1fbbc0bd",
+      "source_revision": "71b288576600c1855ae6673c16257bed491577f8",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261011-195000Z-isolated-authored-core/persistence-20261011-building17/result.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-AUTHORED-CODE-CI",
+      "kind": "TEST_RESULT",
+      "sha256": null,
+      "source_revision": "71b288576600c1855ae6673c16257bed491577f8",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38169485089",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261011-195000Z-isolated-authored-core",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}
