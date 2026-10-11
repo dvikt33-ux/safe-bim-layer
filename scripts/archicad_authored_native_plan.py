@@ -1,0 +1,137 @@
+"""P70.A03.S02 source-only authored line/slab -> existing BIM Graph adapter.
+
+No new graph engine or SceneWriter, no native writes, no PLN project opening,
+no automatic executor authorization. Only created from explicitly authored
+bearing lines, actual GetStories bindings and exact single Building Material.
+"""
+from __future__ import annotations
+
+from collections import Counter
+import hashlib
+import math
+from pathlib import Path
+
+import archicad_semantic_spatial as SPATIAL
+import archicad_semantic_brief as BRIEF
+import archicad_building_shell as BUILD
+import archicad_bim_graph as GRAPH
+import archicad_scene_run as RUN
+
+READS=frozenset({"GetProjectInfo","GetStories","GetAttributesByType"})
+
+
+def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None):
+    """Native-schema validated single DAG, but never executable by this adapter."""
+    if not callable(read_api):
+        raise ValueError("EXPLICIT_READ_ONLY_NATIVE_SOURCE_REQUIRED")
+    def api(cmd,params):
+        if cmd not in READS:
+            raise ValueError("READ_ONLY_API_COMMAND_DENIED")
+        return read_api(cmd,params)
+    geometry=SPATIAL.compile_spatial(brief,pack,layout)
+    doc=BRIEF.normalize(brief)
+    if not isinstance(heights,dict) or set(heights)!={x["id"] for x in doc["stories"]}:
+        raise ValueError("STORY_HEIGHTS_MUST_BE_AUTHORED")
+    for i,story in enumerate(doc["stories"]):
+        h=heights[story["id"]]
+        if type(h) not in (int,float) or not math.isfinite(h) or not 2.4<=h<=4.5:
+            raise ValueError("UNSUPPORTED_AUTHORED_STORY_HEIGHT")
+        if i+1<len(doc["stories"]):
+            next_level=doc["stories"][i+1]["level"]
+            if abs(story["level"]+h-next_level)>1e-5:
+                raise ValueError("STORY_HEIGHT_INCONSISTENT_WITH_LEVELS")
+
+    if pack.get("status")!="PROJECT_NATIVE_MATERIAL_RESOLVED_NOT_ENGINEER_APPROVED":
+        raise ValueError("PROJECT_NATIVE_CSE_BINDING_NOT_ESTABLISHED")
+    known=pack.get("nativeStoryBindings")
+    resolved=BRIEF.resolve_stories(doc,api)
+    if resolved["nativeResolution"]!="READY_FOR_ATTRIBUTE_RESOLUTION":
+        raise ValueError("REAL_STORY_MAP_UNRESOLVED")
+    if known!=resolved["nativeStoryBindings"]:
+        raise ValueError("PROJECT_STORY_MAPPING_CHANGED_SINCE_CSE_READ")
+    candidates=pack["selectedCseCandidates"]
+    slab=next(x for x in candidates if x.get("role")=="floor-slab")
+    if geometry["missingSlabCseStoryIds"]:
+        raise ValueError("FLOOR_SLAB_CSE_REQUIRED_ALL_STORIES")
+    material_name=slab["native"]["name"]
+    before=api("GetProjectInfo",{})
+    actual_guid=RUN.resolve_basic_slab_material(api,material_name)
+    after=api("GetProjectInfo",{})
+    if before!=after:
+        raise ValueError("ACTIVE_PROJECT_IDENTITY_CHANGED")
+    expected_guid=slab["native"].get("guid")
+    if (not isinstance(expected_guid,str)
+            or actual_guid.casefold()!=expected_guid.casefold()):
+        raise ValueError("PROJECT_SLAB_MATERIAL_CHANGED_AFTER_PACK_BINDING")
+
+    story_map={b["architecturalStoryId"]:b for b in known}
+    ops=[]
+    bounds=geometry["outline"]
+    polygon=[
+        BUILD.xy(bounds["xMin"],bounds["yMin"]),
+        BUILD.xy(bounds["xMax"],bounds["yMin"]),
+        BUILD.xy(bounds["xMax"],bounds["yMax"]),
+        BUILD.xy(bounds["xMin"],bounds["yMax"]),
+    ]
+    for s in doc["stories"]:
+        sid=s["id"]
+        native=story_map[sid]["nativeIndex"]
+        # One authored footprint slab per storey; no guessed room partitions.
+        step_id="native-slab-"+sid
+        ops.append(BUILD.step(step_id,"CreateSlabs",{
+            "level":0.0,"floorIndex":native,
+            "thickness":slab["thicknessMeters"],
+            "referencePlaneLocation":"Top",
+            "polygonCoordinates":polygon
+        }))
+        walls=sorted((m for m in geometry["bearingLines"]
+                      if m["storyId"]==sid),key=lambda v:v["id"])
+        for wall in walls:
+            if wall["direction"]=="X":
+                p1=BUILD.xy(wall["constantCoordinate"],wall["fromCoordinate"])
+                p2=BUILD.xy(wall["constantCoordinate"],wall["toCoordinate"])
+            else:
+                p1=BUILD.xy(wall["fromCoordinate"],wall["constantCoordinate"])
+                p2=BUILD.xy(wall["toCoordinate"],wall["constantCoordinate"])
+            ops.append(BUILD.step("native-"+wall["id"],"CreateWalls",
+                BUILD.wall(p1,p2,native,heights[sid],wall["thicknessMeters"])))
+    schema=Path(schema_path or RUN.DEFAULT_SCENE_SCHEMA)
+    if not schema.is_file():
+        raise ValueError("NATIVE_TAPIR_SCHEMA_MISSING")
+    catalog=GRAPH.CONTRACTS.load_catalog(schema)
+    graph={"operations":ops}
+    checked=GRAPH.compile_graph(catalog,graph,
+                                 runtime_version=RUN.EXPECTED_TAPIR)
+    if checked["status"]!="PLAN_VALIDATED_OFFLINE":
+        raise ValueError("EXISTING_BIM_GRAPH_REFUSED: "+checked["status"])
+    # The app can inspect/preview; no nonreviewed engineering facts become
+    # native write authorization just because JSON schema is valid.
+    unresolved={
+        "wallCse":list(geometry["unresolvedWallCseMemberIds"]),
+        "loadPath":list(geometry["upperMembersWithoutLoadPath"]),
+        "junctions":list(geometry["unresolvedJunctionConditions"]),
+        "engineeringChecks":["STRUCTURAL_LOAD_PATH_UNVERIFIED",
+                             "BUILDING_CODE_APPLICABILITY_UNVERIFIED"]
+    }
+    return {
+        "status":"OFFLINE_EXISTING_BIM_GRAPH_COMPILED_NOT_AUTHORIZED",
+        "projectId":doc["projectId"],"nativeTargetProjectPath":doc["targetProjectPath"],
+        "sourceLayoutStatus":geometry["status"],
+        "sourcePackStatus":pack["status"],
+        "graph":graph,"executionOrder":checked["executionOrder"],
+        "sourcePlanHash":checked["sourcePlanHash"],
+        "schemaVersion":checked["schemaVersion"],
+        "schemaSha256":hashlib.sha256(schema.read_bytes()).hexdigest(),
+        "provisionalBasicSlabMaterialGuid":actual_guid,
+        "storyBindings":known,
+        "authoredRoomIds":[r["id"] for r in geometry["rooms"]],
+        "plannedNativeCommands":dict(Counter(x["command"] for x in ops)),
+        "unresolved":unresolved,
+        "operationCount":len(ops),
+        "graphValidator":"EXISTING_ARCHICAD_BIM_GRAPH_COMPILE_GRAPH",
+        "nativeWriter":"EXISTING_SCENE_WRITER_NOT_CALLED",
+        "liveWriteAuthorized":False,
+        "sceneReservationCreated":False,
+        "plnChanged":False,
+        "nativeWriteCalls":0
+    }
