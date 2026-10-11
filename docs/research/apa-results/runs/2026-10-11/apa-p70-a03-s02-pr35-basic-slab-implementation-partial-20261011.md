@@ -123,3 +123,28 @@ A narrowly scoped second recovery script `scripts/continue_apa_after_story_z.py`
 **GitHub CI:** https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38143964970 — **SUCCESS, 136/136 offline tests PASS**, including an 8-element verified prefix → 17 new operations → full synthetic 25-element acceptance and fail-closed Z-drift, journal-replay and inventory-drift cases.
 
 **Status remains:** past slab REPORTED_LIVE_PASS_UNSAVED; attempted previous suffix REPORTED_LIVE_PARTIAL; second Z fix / 17-op continuation OFFLINE_PASS only; actual save/reopen and full Archicad model remain NOT_VERIFIED. **Do not use old `ПОСТРОИТЬ` token or old continuation script again.** No protected PLN, main, installed Add-On or existing protected PR branches were changed by these source commits.
+
+## Live 17-step suffix: PARTIAL on second-storey slab; read-only diagnostic published
+
+After a clean read-only preflight `READY_FOR_EXPLICIT_SEVENTEEN_STEP_CONTINUATION` confirmed 8 existing GUIDs and 17 missing, owner explicitly approved `СОЗДАТЬ17`. The live Archicad 29 trial, exact disposable `C:\\LocalAI\\APA_Test_House_01.pln`, Tapir 1.5.10 at port 19726, returned:
+
+```json
+{
+  "status": "PARTIAL_OR_UNKNOWN_OUTCOME",
+  "sceneId": "apa-suffix3-20261011-031123-7181b47c",
+  "reusedCount": 8,
+  "newCreatedCount": null,
+  "allGuidsReadback": false,
+  "failedStep": "s2-slab",
+  "reason": "ValueError: SLAB_READBACK_MISMATCH",
+  "plnSaved": false
+}
+```
+
+**Classification: USER_SUPPLIED / REPORTED_LIVE_PARTIAL.** This log does *not* prove the third suffix completed. Further elements may already exist. Do **not** repeat any earlier suffix or run a new create workflow until this third suffix journal is reconciled. The live native slab's GUID, journal phase (CREATED_UNVERIFIED vs BASIC_MODIFY_ATTEMPTED), actual level and thickness are **not established by the generic exception**; do not assume a story-level mismatch yet.
+
+Source update: `scripts/diagnose_apa_suffix3_slab_readback.py` on PR #35 is strict READ ONLY, with command allowlist limited to GetProjectInfo, GetStories, GetAddOnVersion, GetAllElements and GetDetailsOfElements. It validates the original and prior two suffix journal structures, lists third suffix operations and GUIDs, compares inventory with the original 28 verified GUIDs, and prints the *actual* s2-slab native story/type/thickness/level/globalZ/polygon/material fields alongside requested local level and pinned story absolute elevation. No Create, Modify, Save, rollback or automatic retry is attempted.
+
+GitHub source commit `876d697ab8abf97d5aa104dda613259c7ad2105e`; [CI #38144329697](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38144329697) **SUCCESS, 137/137 offline tests PASS**, including a synthetic second-storey slab readback-frame mismatch reproducer and proof that diagnosis adds zero writes.
+
+**Next gate:** user runs only the read-only third-suffix diagnostic in the same open unsaved PLN. Any fix must be gated on that evidence and use a *new* uniquely reserved durable scene, preserving all existing GUIDs and old journals. P70.A03.S02 still NOT_DONE; never equate CI success with live completed BIM or save/reopen.
