@@ -6,6 +6,7 @@ closed rather than automatically posting a second copy.
 """
 from __future__ import annotations
 
+from contextlib import contextmanager
 import hashlib
 import json
 import os
@@ -51,10 +52,15 @@ class NotificationOutbox:
                 updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
             )""")
 
+    @contextmanager
     def _connect(self):
         db = sqlite3.connect(str(self.path), timeout=15)
         db.row_factory = sqlite3.Row
-        return db
+        try:
+            with db:
+                yield db
+        finally:
+            db.close()
 
     def reserve(self, event: dict) -> str:
         """Idempotent reservation: conflicting same event ID is never reused."""
