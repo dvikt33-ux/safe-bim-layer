@@ -26,6 +26,23 @@ PORT = 19723
 EXPECTED_NAME = "Тест MER "
 EXPECTED_PATH = r"C:\LocalAI\SafeBIM_Global_Library_Test_Projects\Тест MER .pln"
 EXPECTED_TAPIR = "1.5.10"
+
+# Narrowly approved throwaway project. NEVER apply CLI target override to any
+# other PLN, including protected APA_Pavilion_MVP_SUCCESS.pln and SyncGuids.
+APPROVED_SCRATCH_PATH = r"C:\LocalAI\APA_Test_House_01.pln"
+
+
+def bind_approved_scratch_pln(port, path=APPROVED_SCRATCH_PATH):
+    """Configure only the expressly designated disposable PLN; fail closed."""
+    global PORT, EXPECTED_NAME, EXPECTED_PATH
+    if type(port) is not int or port < 1 or port > 65535:
+        raise ValueError("INVALID_TEST_PORT")
+    if not isinstance(path, str) or path.casefold() != APPROVED_SCRATCH_PATH.casefold():
+        raise ValueError("TEST_PLN_NOT_APPROVED")
+    PORT = port
+    EXPECTED_PATH = APPROVED_SCRATCH_PATH
+    EXPECTED_NAME = "APA_Test_House_01"
+
 DEFAULT_SCENE_SCHEMA = Path(__file__).resolve().parents[1] / "schemas/tapir-live-1.5.10/tapir-scene-live.json"
 ALLOWED_WRITES = frozenset(("CreateWalls", "CreateSlabs", "CreateColumns",
                            "CreateWindows", "CreateDoors"))
