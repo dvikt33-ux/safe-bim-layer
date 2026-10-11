@@ -134,6 +134,39 @@ class PartialSceneContinuationTests(unittest.TestCase):
             CONT.continue_scene(self.native, MATERIAL_NAME, token)
         self.assertEqual(len(self.native.writes), count)
 
+    def test_second_story_wall_mismatch_is_read_only_diagnosed_from_guid(self):
+        import diagnose_apa_suffix_wall_readback as DIAG
+
+        token = CONT.proof(self.native, MATERIAL_NAME)["token"]
+
+        def shifted_second_story_readback(command, params):
+            response = self.native(command, params)
+            if command == "GetDetailsOfElements":
+                guid = params["elements"][0]["elementId"]["guid"]
+                created = self.native.created.get(guid)
+                if (created and created[0] == "CreateWalls"
+                        and created[1]["wallsData"][0]["floorIndex"] == 1):
+                    response["detailsOfElements"][0]["details"]["zCoordinate"] = 3.0
+            return response
+
+        result = CONT.continue_scene(shifted_second_story_readback,
+                                     MATERIAL_NAME, token)
+        self.assertEqual(result["status"], "PARTIAL_OR_UNKNOWN_OUTCOME")
+        self.assertEqual(result["failedStep"], "s2-wall-south")
+        prior_writes = len(self.native.writes)
+        info = DIAG.collect(shifted_second_story_readback)
+        self.assertEqual(info["status"], "READ_ONLY_SUFFIX_DIAGNOSIS")
+        self.assertEqual(info["failedStep"], "s2-wall-south")
+        self.assertEqual(info["nativeInventory"]["missingFromOriginal25"], [])
+        self.assertEqual(info["nativeInventory"]["suffixGuidCount"], 11)
+        self.assertEqual(info["nativeInventory"]["nativeGuidsAbsentFromSuffixJournal"], [])
+        self.assertEqual(info["failedWall"]["nativeFloorIndex"], 1)
+        z = info["failedWall"]["fieldComparison"]["zCoordinate"]
+        self.assertEqual(z["requested"], 0.0)
+        self.assertEqual(z["native"], 3.0)
+        self.assertFalse(z["matches"])
+        self.assertEqual(len(self.native.writes), prior_writes)
+
     def test_unexpected_new_guid_blocks_before_write(self):
         self.native.existing.append(str(uuid.uuid4()))
         with self.assertRaisesRegex(ValueError, "BASELINE_DRIFT"):
