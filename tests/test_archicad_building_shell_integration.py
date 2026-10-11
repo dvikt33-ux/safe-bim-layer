@@ -128,7 +128,7 @@ class MultiStoreyEndToEndTests(unittest.TestCase):
         native = ExactScratchProjectNative()
         with (patch.object(A.RUN, "PORT", 19726),
               patch.object(A.RUN, "EXPECTED_PATH",
-                           r"C:\\LocalAI\\APA_Test_House_01.pln"),
+                           r"C:\LocalAI\APA_Test_House_01.pln"),
               patch.object(A.RUN, "EXPECTED_NAME", "APA_Test_House_01")):
             first = A.run_project(actual_intent, A.RUN.DEFAULT_SCENE_SCHEMA,
                                   self.root / "actual-scratch-preflight",
@@ -154,11 +154,11 @@ class MultiStoreyEndToEndTests(unittest.TestCase):
         try:
             with self.assertRaisesRegex(ValueError, "TEST_PLN_NOT_APPROVED"):
                 A.RUN.bind_approved_scratch_pln(
-                    19724, r"C:\\Users\\Admin\\Documents\\APA_Pavilion_MVP_SUCCESS.pln")
+                    19724, r"C:\Users\Admin\Documents\APA_Pavilion_MVP_SUCCESS.pln")
             self.assertEqual(A.RUN.EXPECTED_PATH, old_path)
             A.RUN.bind_approved_scratch_pln(19726)
             self.assertEqual(A.RUN.EXPECTED_PATH,
-                             r"C:\\LocalAI\\APA_Test_House_01.pln")
+                             r"C:\LocalAI\APA_Test_House_01.pln")
             self.assertEqual(A.RUN.PORT, 19726)
         finally:
             A.RUN.EXPECTED_PATH = old_path
