@@ -1,0 +1,60 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261011-200500Z-editable-core-acceptance",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A08",
+  "substep_id": "APA-P70.A08.S04",
+  "executor": "codex-apa-core-native-20261011",
+  "executor_run_id": "APA-RUN-20261011-200500Z-editable-core-acceptance",
+  "phase": "SOURCE",
+  "started_at": "2026-10-11T20:04:18Z",
+  "finished_at": "2026-10-11T20:04:18Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29 build5101 RUS (captured native evidence)",
+    "sdk": null,
+    "tapir": "1.5.10",
+    "source_branch": "feature/apa-isolated-authored-native-20261011"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/48",
+      "revision": "976c19cecebe3f6bb4352365d9a59051d5b2b61b",
+      "source_sha": "976c19cecebe3f6bb4352365d9a59051d5b2b61b"
+    }
+  ],
+  "inputs": [
+    "ART-APA-FULL-CYCLE",
+    "ART-APA-ASSEMBLY-PLAN",
+    "ART-P70-A03-S03-INCREMENTAL-EDIT-RESTORE-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-EDITABLE-CORE-ACCEPTED",
+      "statement": "Combined editable native core acceptance passed for the explicit17element example based on independently inspected captured native evidence. Expanded product remains incomplete.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-ACCEPTANCE-MATRIX"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-ACCEPTANCE-MATRIX",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261011-200500Z-editable-core-acceptance/acceptance.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "db27cf2cabe0ca8474600587e26db910d5fbe649cfa78a29aa5348092ec32b12",
+      "source_revision": "976c19cecebe3f6bb4352365d9a59051d5b2b61b"
+    }
+  ],
+  "report_markdown": "# APA-P70.A08.S04 — Combined editable native core acceptance\n\nAccepted scope: one explicit approved authored brief/layout yields a connected two-storey native building through the existing BIM Graph and SceneWriter; bounded incremental existing-window width edit and explicit restore preserve the model, then save/reopen and independent readback pass. Primary elements:8walls,2slabs,2columns,1door,4windows. Native inventory39contains20baselineGUIDs,17primary and2directly owned ColumnSegments. Material RC63DB2CE9-903D-45C0-B93C-B3C604C77394 for all10wall/slab elements and2columns;5openings have exact wall host GUIDs/stories. Observed native library part names/ownUnID/parentUnID are preserved in acceptance.json.\n\nThis task independently inspected immutable raw native evidence from S02/S03; it re-ran typed checks against the actual captured responses, checked exact hashes, all5required types, no required unsupported types in this explicit example, owned segment hierarchy, GUID preservation, edit/restore, restored graph/hash and save/reopen. It issues zero new Archicad calls and avoids duplicating historical smoke tests. Source inspection is separate from the already captured live operation.\n\nDependency acceptance: APA-P70.A03.S03, APA-P70.A03.S04 DONE_PUBLISHED. [Acceptance matrix](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261011-200500Z-editable-core-acceptance/acceptance.json). [Raw native records](https://github.com/dvikt33-ux/safe-bim-layer/tree/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261011-195800Z-incremental-native-edit). [PR48](https://github.com/dvikt33-ux/safe-bim-layer/pull/48) source `976c19cecebe3f6bb4352365d9a59051d5b2b61b`, [CI38170051997](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38170051997) SUCCESS289tests plus contracts. Code remains draft/unmerged.\n\nThis is acceptance of the explicit minimal editable native core, not the complete expanded product. Engineering/normative calculations, solid junction quality, general automatic planning, arbitrary library replacement, roof/stair/MEP and Archicad30 compatibility remain unverified and registered for later sequential expansion. Visible UI is NOT_VERIFIED. Default native door/window library parts worked here; that does not prove other libraries. No newPLNwrites, APX/main/protected branch mutation, merge, paid model rounds or Deep Research in this acceptance/publication action.\n",
+  "next_substep": "APA-P70.A09.S01",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}
