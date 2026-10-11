@@ -15,7 +15,9 @@ import archicad_project_accelerator as A
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / 'schemas/accelerator/capability-registry.json'
-READS = A.READS | {'API.IsAddOnCommandAvailable'}
+# This generic preflight adapter does not regenerate the 3D view. Native dump
+# and collision checks belong to the explicitly enabled, identity-bound audit.
+READS = (A.READS - {'GetModelDumpV1', 'GetCollisions'}) | {'API.IsAddOnCommandAvailable'}
 
 
 def require_capabilities(registry, required):
