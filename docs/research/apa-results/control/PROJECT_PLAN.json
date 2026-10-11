@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 75,
+  "revision": 76,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -828,7 +828,7 @@
       "action_id": "APA-P00.A02",
       "title": "Связать старые находки с S-ID и удалить логические дубли без удаления оригиналов",
       "kind": "CONSOLIDATION",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 0,
       "work_key": "legacy-evidence-dedup",
       "depends_on": [
@@ -845,9 +845,9 @@
         "Evidence map и superseded_by для дублей"
       ],
       "acceptance": "Evidence map и superseded_by для дублей",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "chatgpt-gpt6-manual-20261011-roof-composite-context",
+      "lease_until": "2026-10-11T19:49:29Z",
+      "claim_ref": "APA-RUN-20261011T185929Z-roof-comp-context",
       "requires_approval": false,
       "evidence": [
         "ART-APA-SLACK-THREE-RECON-20261011",
