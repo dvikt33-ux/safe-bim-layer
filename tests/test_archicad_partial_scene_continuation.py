@@ -158,7 +158,9 @@ class PartialSceneContinuationTests(unittest.TestCase):
         self.assertEqual(info["status"], "READ_ONLY_SUFFIX_DIAGNOSIS")
         self.assertEqual(info["failedStep"], "s2-wall-south")
         self.assertEqual(info["nativeInventory"]["missingFromOriginal25"], [])
-        self.assertEqual(info["nativeInventory"]["suffixGuidCount"], 11)
+        self.assertEqual(
+            info["nativeInventory"]["suffixGuidCount"],
+            self.plan["executionOrder"].index("s2-wall-south") + 1 - len(CONT.FIRST))
         self.assertEqual(info["nativeInventory"]["nativeGuidsAbsentFromSuffixJournal"], [])
         self.assertEqual(info["failedWall"]["nativeFloorIndex"], 1)
         z = info["failedWall"]["fieldComparison"]["zCoordinate"]
