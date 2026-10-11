@@ -1,0 +1,157 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261011-163145Z-p70-a02-s03-library-pack",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A02",
+  "substep_id": "APA-P70.A02.S03",
+  "executor": "chatgpt-gpt6-manual",
+  "executor_run_id": "APA-RUN-20261011-170300Z-p70-a02-s03-project-library-pack",
+  "phase": "OFFLINE",
+  "started_at": "2026-10-11T16:24:30Z",
+  "finished_at": "2026-10-11T16:31:45Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29 (source target; no new runtime)",
+    "sdk": null,
+    "tapir": "1.5.10 (prior test, not invoked)",
+    "source_branch": "feature/apa-project-library-pack-20261011"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-project-library-pack-20261011/scripts/archicad_project_library_pack.py",
+      "revision": "b6053b93d9956bcbfd22a528f4f5750e07e9f5a7",
+      "source_sha": "b6053b93d9956bcbfd22a528f4f5750e07e9f5a7"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-project-library-pack-20261011/scripts/archicad_project_accelerator.py",
+      "revision": "ac6e28f47a31ce543dcac9b8fed8622072843858",
+      "source_sha": "ac6e28f47a31ce543dcac9b8fed8622072843858"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-project-library-pack-20261011/tests/test_archicad_project_library_pack.py",
+      "revision": "9bd5e5ee808fe4b46b92ea062c832accfb9709af",
+      "source_sha": "9bd5e5ee808fe4b46b92ea062c832accfb9709af"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-project-library-pack-20261011/examples/accelerator/project-library-rc-slab.candidate.json",
+      "revision": "ab612835da674bb7af84191dc93f174c6d92d9fb",
+      "source_sha": "ab612835da674bb7af84191dc93f174c6d92d9fb"
+    }
+  ],
+  "inputs": [
+    "ART-APA-PLP-CONTRACT",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-CSE-RESEARCH",
+    "ART-APA-ASSEMBLY-PLAN",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-P70-S03-PROVISIONAL-PACK",
+      "statement": "A versioned project-local provisional RC slab CSE candidate and explicit missing junction conditions compiled through the existing accelerator entrypoint, no copy of global registry.",
+      "status": "OFFLINE_PASS",
+      "evidence_ids": [
+        "EV-PLP-COMPILER",
+        "EV-PLP-ENTRYPOINT",
+        "EV-PLP-EXAMPLE",
+        "EV-PLP-TESTS",
+        "EV-PLP-CI"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-S03-BM-STORY-REUSE",
+      "statement": "Native BM name-to-project GUID resolver and GetStories are reused from existing modules; precise PLN/read-only path fail closed on mismatches and never dispatch writes.",
+      "status": "OFFLINE_PASS",
+      "evidence_ids": [
+        "EV-PLP-COMPILER",
+        "EV-PLP-TESTS",
+        "EV-PLP-CI"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-S03-DETAILS-UNAPPROVED",
+      "statement": "v2.12 source index and user-reported Basic slab native readback are research/native evidence, not permission to import vendor files or structurally approve CSE, junctions, normative compliance.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-PLP-MANIFEST",
+        "EV-PLP-OWNER-BASIC-SLAB",
+        "EV-PLP-EXAMPLE"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-S03-NO-LIVE-ATTRIBUTE-THIS-RUN",
+      "statement": "No independent live project materials or manufactured library parts were queried in this S-ID; all new acceptance is offline-only.",
+      "status": "NOT_VERIFIED",
+      "evidence_ids": [
+        "EV-PLP-CI"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-PLP-COMPILER",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-project-library-pack-20261011/scripts/archicad_project_library_pack.py",
+      "kind": "SOURCE_CODE",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "b6053b93d9956bcbfd22a528f4f5750e07e9f5a7"
+    },
+    {
+      "evidence_id": "EV-PLP-ENTRYPOINT",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-project-library-pack-20261011/scripts/archicad_project_accelerator.py",
+      "kind": "SOURCE_CODE",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "ac6e28f47a31ce543dcac9b8fed8622072843858"
+    },
+    {
+      "evidence_id": "EV-PLP-TESTS",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-project-library-pack-20261011/tests/test_archicad_project_library_pack.py",
+      "kind": "SOURCE_CODE",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "9bd5e5ee808fe4b46b92ea062c832accfb9709af"
+    },
+    {
+      "evidence_id": "EV-PLP-EXAMPLE",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-project-library-pack-20261011/examples/accelerator/project-library-rc-slab.candidate.json",
+      "kind": "SOURCE_CODE",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "ab612835da674bb7af84191dc93f174c6d92d9fb"
+    },
+    {
+      "evidence_id": "EV-PLP-CI",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38155701345",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "83fd72e150e96cb90db75145436d023969365bd3"
+    },
+    {
+      "evidence_id": "EV-PLP-MANIFEST",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12/manifest.json",
+      "kind": "SOURCE_CODE",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "797752bd4eb5b82a0056e2bc475dd4005fff4abb"
+    },
+    {
+      "evidence_id": "EV-PLP-OWNER-BASIC-SLAB",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr35-basic-slab-implementation-partial-20261011.md",
+      "kind": "USER_SUPPLIED",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "e4bf711bdc3322f594699b59ea34107cde0bcfdf"
+    }
+  ],
+  "report_markdown": "# APA-P70.A02.S03 — первый проектный Library Pack, без дублирования источников и BIM-исполнителя\n\n**2026-10-11** · **Phase: OFFLINE** · **Источник:** [draft PR #41](https://github.com/dvikt33-ux/safe-bim-layer/pull/41) · **GitHub CI:** [#38155701345](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38155701345) **SUCCESS, 231/231 offline tests**. Контроллер `PROJECT_PLAN.json` source rev62, task `APA-P70.A02.S03` claimed with owner/lease/CAS and readback before implementation. Текущий отчёт — строгий **минимальный project-scope candidate pack**, НЕ полная пригодная к строительству библиотека.\n\n## Итог\n\nИспользован уже реализованный интерфейс `archicad_project_accelerator.py` и его `archicad_semantic_brief` из [PR #40](https://github.com/dvikt33-ux/safe-bim-layer/pull/40). В отдельном [PR #41](https://github.com/dvikt33-ux/safe-bim-layer/pull/41) добавлен только тонкий `archicad_project_library_pack.py::compile_pack`, вызываемый через существующий `compile_project_library_pack`. Он **не** создаёт собственные source registry, материал-резолвер, BIM DAG, SceneWriter, разрешения или native writer. Использует **существующий** `archicad_scene_run.resolve_basic_slab_material` для одного явного Building Material name→GUID в единственном открытом PLN. Native API только `GetProjectInfo`, `GetStories`, `GetAttributesByType`, все прочие вызовы запрещены.\n\n**Выбранный первый узкий CSE-кандидат**: `rc-basic-slab-v1`, семья `reinforced-concrete-slab-provisional`, роль `floor-slab`, Basic Slab **200 мм** и material name `Железобетон - Конструкционный`. При точном текущем тестовом PLN ожидается **не глобальный ID**, а локальный проверяемый Guid `63db2ce9-903d-45c0-b93c-b3c604c77394` из пользовательского live typed readback. Это только доказательство **геометрии и атрибута в конкретном PLN** (2 slabs на двух этажах, 25/25 элементов и 45/45 GUID после смены .bpn→.pln); это **не** подтверждение прочности, применимости строительной системы к реальному проекту, прав на внешнюю библиотеку или типовых узлов. Для других PLN несовпадение GUID → STOP, не silent selection.\n\n**Реально опубликован Project Library candidate:** `examples/accelerator/project-library-rc-slab.candidate.json` в PR #41; это editable source-safe JSON с id системы, реальным material name, expected project GUID, толщиной в метрах, per-story scope, source URI и Git blob hash, лицензией `LINK_ONLY_RIGHTS_UNVERIFIED`, статусом `PROJECT_NATIVE_READBACK`, явными *missing* интерфейсами. Авторизация внешних библиотечных загрузок **не дана**.\n\n### Source identity and rights\n\n| Объект | Точная публикация и source SHA (Git blob, НЕ SHA256) | Применимость / лицензионный вывод |\n|---|---|---|\n| Existing ProjectLibraryPack contract v0.1 | [project-library-pack-contract-v0.1.yaml](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), blob `3fc09f03c3ac6305fc73a92c6889ff9f6c7d8bd8` | RESEARCH_DRAFT — используется **ссылка** и список обязательных прав/статусов, без автозагрузки исходных документов |\n| Existing Details release v2.12 | [details/releases/v2.12/manifest.json](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12/manifest.json), blob `797752bd4eb5b82a0056e2bc475dd4005fff4abb` | 1 215 detail units / 1 835 parameter facts — это индекс знаний, не 1 215 утверждённых строительных узлов. Ни один узел не объявлен APPROVED автоматически; не делается импорт PLA/LCF/GDL |\n| Применимость выбранного Basic Slab | [проверенный пользовательский native отчёт](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr35-basic-slab-implementation-partial-20261011.md), Git blob `e4bf711bdc3322f594699b59ea34107cde0bcfdf` на дату отчёта | Evidence: USER_REPORTED_LIVE_TYPED_READBACK_PASS and .pln path switch. Ссылка указывает на source-safe отчет, а не на право повторно копировать сторонний контент или инженерное утверждение |\n\nOutput Project Pack включает `catalogReferences`, `sourceLinksAndGitBlobHashes`, `sourceRegistryRevision`, `native` (BM name/optional exact live GUID), `selectedCseCandidates`, `requiredJunctionConditions`, `missingCriticalConditionIds`, `licenseAndStoragePermission`, `normativePackDigest=null`, `importedLibraryObjects=[]`. Не объявляются выдуманные Favorites, Composites, Profiles, LCF и GDL; свойства `engineeringApproved=false`, `detailApproved=false`. В runtime переносимое user-provided source URI/hash считается **декларацией**, а не независимо загруженным SHA256/подтверждением источника; данный пример сверён отдельно GitHub fetch_file/readback.\n\n**Три реально открытых interface conditions:**\n1. `slab-wall-bearing` — опирание стены на плиту (недостаточно проектных нагрузок и detail applicability).\n2. `floor-waterproofing` — инженерно/архитектурно подтверждённая гидроизоляция и применимый узел.\n3. `slab-opening-penetration` — проходки, огнезащита, короба и условия сопряжений (пока нет индивидуального проектного source).\nВсе три имеют `UNVERIFIED` и `selectedDetailIds=[]`: **никакого construction/engineering normative PASS**.\n\n### Элементы и границы AC29\n\n- Подтверждён **один** AC29-compatible native attribute class: `BuildingMaterial` (exact name+GUID), в контексте ранее проверенного Basic Slab в approved scratch PLN. Другая модель требует **свежий** project identity + native material lookup и совпадение/отказ; не рассылается GUID между проектами.\n- Favorites / Composites / Profiles / custom GDL Objects: **NOT_SELECTED / NOT_VERIFIED**; не считаются существующими в активном Archicad по одному только каталогу. Расширение после source/license/native capability audit.\n- Native floors resolved `GetStories` по S01; `GENERATE_FROM_ZERO` остаётся только корректным source-level input, не триггером для открытия/создания PLN.\n- Requirement ambiguity, license status, unknown junctions сохраняются в результатах, а не подменяются «стандартным» решением.\n\n## Offline CI и тесты\n\n[CI #38155701345](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38155701345) — `231 tests, OK` — провёл 219 ранее существовавших и 12 новых тестов. Покрытие: оба режима и формирование pack без native; exact active PLN identity и GetStories; использование прежнего RUN material resolver; 0 native writes; поиск ровно одного BM / блокировка отсутствия и дублей; false expected material GUID; запрещение самосертификации прав и detail approval; wrong PLN; unresolved story; duplicate conditions, invalid SI thickness/source SHA; незавершённые нормативные требования. **Архикад локально не запускался в этом цикле**. CI — синтетическая проверка логики, а не live установленных библиотек.\n\nПервоначально тесты упали из-за ошибочного переиспользования поля mock `names` для этажей и материалов (тестовый fixture). Исправлено в отдельной ветке PR #41, финальная CI SUCCESS. Никакая native запись, PLN/APX/main/master/tested code branch не изменена этим S-ID.\n\n### Ограничения и следующее действие\n\n**Source/offline acceptance достигнут для одной проектно-локальной CSE-подсистемы**: источники+Git blob SHA+права, минимальный геометрический материал, scope этажа, явные интерфейсы/отсутствующие узлы и read-only точная атрибутика. Это **НЕ** полный каталог ограждений, не «готов к стройке», не аккредитация нормативных значений.\n\n**Следующий S-ID по текущему DAG:** `APA-P70.A03.S01` — semantic rooms / support axes / story and CSE condition inputs → existing BIM graph (still no write), игнорируя недоказанные инженерные/нормативные PASS. В нём использовать текущий минимальный pack как *provisional geometry envelope*, а нерешённые сопряжения как hard blockers до конструктивного acceptance. В параллельном потоке `APA-P70.A02.S02` — нормативные источники с применимостью, по мере необходимости; не блокировать создание первой геометрии избыточной нормативной археологией. Потребуется расширить system set только когда spatial designer реально запросит дополнительную семью.\n\n**Следующий PR:** не второй writer/граф; адаптировать semantic rooms/axes к существующему `archicad_bim_graph` и parameterized `building-shell` с duplicate guard, и только после положительного offline + отдельного разрешения native test.\n",
+  "next_substep": "APA-P70.A03.S01",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}
