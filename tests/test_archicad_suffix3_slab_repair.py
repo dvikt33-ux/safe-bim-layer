@@ -30,6 +30,13 @@ class Suffix3SlabRepairTests(unittest.TestCase):
 
     def bad_slab_api(self, command, params):
         reply = self.native(command, params)
+        if (command == "CreateSlabs"
+                and params["slabsData"][0]["floorIndex"] == 1):
+            # The regression is pinned to the exact owner-provided live GUID.
+            synthetic_guid = reply["elements"][0]["elementId"]["guid"]
+            self.native.created[REPAIR2.TARGET_GUID] = self.native.created.pop(
+                synthetic_guid)
+            reply["elements"][0]["elementId"]["guid"] = REPAIR2.TARGET_GUID
         if command == "GetDetailsOfElements":
             guid = params["elements"][0]["elementId"]["guid"]
             element = self.native.created.get(guid)
