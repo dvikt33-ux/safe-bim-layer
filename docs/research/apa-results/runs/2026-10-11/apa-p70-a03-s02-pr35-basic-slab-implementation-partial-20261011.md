@@ -246,3 +246,23 @@ Fourth-suffix outer exception reporting is corrected to `OUTCOME_UNKNOWN_NEEDS_J
 - Source head `9db6fdcb588c2a8c28c7b386600ffe3fcc4793d0` on PR #35.
 - Remaining live acceptance **NOT_VERIFIED**. Next check: run read-only journal-only utility. Do not rerun any Create token or assume 13 operations are missing until journal + native reconciliation.
 
+
+## Owner screenshot plus full fourth-suffix diagnostic — 1 unjournaled native GUID
+
+The owner supplied a screenshot of Archicad's Russian informational modal:
+
+> В результате выполнения последней операции были созданы и/или изменены Элементы, расположенные на невидимых в текущий момент Этажах.
+
+Buttons `Отменить` and `Продолжить`. This is consistent with a native Create on story 1 (+3m) while the active story is 0 and story 1 is hidden. **Causality is plausible, not yet proven by runtime traces:** the modal may delay native request completion until acknowledged.
+
+The owner also supplied results from `diagnose_apa_suffix4_timeout.py --journal-only` and `--with-native --port 19726`:
+- Fourth-suffix scene **reserved**, state `PARTIAL_OR_UNKNOWN_OUTCOME`, failed `s2-partition-1`, `TimeoutError: timed out`, `automaticRetry: false`.
+- The only fourth-suffix journal step `s2-partition-1` is **ATTEMPTED / guid=null**. No later steps dispatched.
+- First **32** native GUIDs still present; inventory now **33**.
+- Exactly one unjournaled new native GUID: **`bcfc99f0-50d2-4cd5-bf27-8f436c21683a`**.
+- Active story 0 at read-only diagnosis; no other missing or extra model GUIDs.
+- **DO NOT rerun fourth suffix or infer the orphan's BIM type from inventory alone.** The orphan needs exact typed readback; preserve open test PLN and journal.
+
+Published `scripts/inspect_apa_orphan_s2_partition.py` in [PR #35](https://github.com/dvikt33-ux/safe-bim-layer/pull/35): strictly read-only, validates the original fourth-step approved durable CreateWalls parameters, original 32 + exactly one new GUID, pinned project/stories, native Wall type and story 1 (+3m), reference coordinates, thickness, height, offset and Z. Emits `READ_ONLY_ORPHAN_S2_PARTITION_VERIFIED` only on full typed match, and never rewrites original journal or grants a replay. Synthetic tests recreate the exact failure mode where native Create succeeds but response times out because UI waits, leaving `ATTEMPTED` / GUID null in SQLite. [GitHub CI run #38148800622](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38148800622) **SUCCESS: 185/185 offline tests PASS**.
+
+**Next step:** close the Archicad informational modal with `Продолжить` once (do not silently disable warnings), then run the new read-only typed GUID audit. No additional native creates are authorized until the exact orphan is read back and a new unique, journal-backed 12-step suffix is independently approved. The original scene remains unsaved; full 25-element acceptance remains **NOT_VERIFIED**.
