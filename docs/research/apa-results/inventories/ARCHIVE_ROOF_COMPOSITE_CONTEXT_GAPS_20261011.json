@@ -276,7 +276,7 @@
           ]
         }
       ],
-      "status": "PARTIALLY_IMPLEMENTED_CURRENT_READONLY_POLLING_AND_WRITE_GATES; NATIVE_MO DI STAMP_AND_ATOMIC_PUBLICATION_UNVERIFIED",
+      "status": "PARTIALLY_IMPLEMENTED_CURRENT_READONLY_POLLING_AND_WRITE_GATES; NATIVE_MODISTAMP_AND_ATOMIC_PUBLICATION_UNVERIFIED",
       "dedup_policy": "KEEP historical coherence/epoch concept, reuse current watcher/SceneWriter. No second independent always-on watcher or new SQLite writer without value justification.",
       "target_s_ids": [
         "APA-P70.A03.S03",
