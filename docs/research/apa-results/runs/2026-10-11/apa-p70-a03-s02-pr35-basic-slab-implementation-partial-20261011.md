@@ -344,3 +344,33 @@ After the fourth-suffix timeout and invisible-story modal, the project owner ide
 **Minimal safe test protocol for the next fifth-suffix attempt:** In the same already-open test PLN, manually open the 3D window (not a new project). Run `continue_apa_after_orphan_partition.py --port 19726 --material "Железобетон - Конструкционный"` without any confirmation token. Confirm the read-only result still reports the exact PLN path, Tapir 1.5.10, active native story 0, 13 reused / 12 remaining and zero attempted writes. **If story guard rejects the 3D state, do not weaken/override it or use the old token; investigate the native story semantics and adapt safely.** If read-only preflight passes in 3D, a separate explicit owner approval may run the same one-shot fifth suffix with the freshly returned token while the 3D window stays active. Never automatically open 3D, hide dialogs or manipulate UI without the owner's request. No old scene replay.
 
 Keep `120s` Create HTTP timeout and immutable SQLite reservation checks until a live run establishes this mitigation's effectiveness. Record if a modal still appears, the step, actual outcome and whether final typed readbacks pass. Do not infer completion before live output.
+
+## MILESTONE — owner LIVE whole-scene 25/25 typed acceptance, UNSAVED (2026-10-11)
+
+After the previously recorded successful fifth-suffix **read-only** preflight (reused 13 / remaining 12), the owner explicitly executed the one-shot continuation on **Archicad 29 + Tapir 1.5.10**, local test PLN `C:\\LocalAI\\APA_Test_House_01.pln`, Tapir port `19726`, story index `0`:
+
+```json
+{
+  "status": "COMPLETE_UNSAVED",
+  "sceneId": "apa-suffix5-20261011-031123-7181b47c",
+  "reusedCount": 13,
+  "newCreatedCount": 12,
+  "allGuidsReadback": true,
+  "failedStep": null,
+  "reason": null,
+  "plnSaved": false,
+  "automaticRetry": false
+}
+```
+
+**Evidence classification: USER_SUPPLIED / REPORTED_LIVE_TYPED_READBACK_PASS_UNSAVED.** A new 12-step suffix was created after exact native readback verified the preceding 13 elements, including the orphan GUID `bcfc99f0-50d2-4cd5-bf27-8f436c21683a` that was created despite earlier transport timeout. The last run returned **COMPLETE_UNSAVED**, reported **12 newly created and 13 reused** planned elements and **allGuidsReadback=true**. Across the original 25-element graph, all **25/25** planned elements therefore passed in-session typed post-write acceptance. With 20 original elements, the expected live inventory is **45 elements**; this count is derived from the scene's verified inventory gate, not from a separately captured final manual `GetAllElements` printout. The scripted final readback covers existing host/story/geometry/material and GUID reconciliation according to the validated source, and uses the same SceneWriter; no user-confirmed PLN save occurred.
+
+**Boundary:** This does **not** prove PLN persistence across Save As/reopen, independent visual suitability, cross-session stability, or structural/design correctness. User's workaround of opening the same model in 3D was proposed; the supplied last CLI output does **not** independently prove which view was active or that modal suppression caused success. The 120s native Create timeout was enabled. Do not claim the 3D tactic is independently causal from this log alone.
+
+**Current gate result:** `APA-P70.A03.S02` slice `scratch-25-element-two-storey-shell` = **REPORTED_LIVE_COMPLETE_UNSAVED**. Do NOT mark the full controller S02 `DONE`, since its broad acceptance requires the upstream semantic structural graph and persistent/reopen/real-project gates; the canonical controller was not mutated. Next gated verification:
+1. No further native writes, replays, or closing the test PLN before persistence.
+2. Save a **new copy** of the disposable test PLN to a distinct, human-chosen path using Archicad Save As, without overwriting protected PLN or changing original journals (requires separate owner action).
+3. Independent read-only verification of **saved copy** after reopen: precise project path/story bindings, native 45 GUID inventory, all 25 planned elements' typed wall/slab/opening geometry, owner host references, materials, and expected story elevations. A new path binding may require a distinct read-only verifier; do not loosen exact existing Test_House pinned writer guards.
+4. Record explicit SAVE_REOPEN_PASS or FAIL from actual user output; only then consider promotion from `UNSAVED`.
+
+**Source:** [draft PR #35](https://github.com/dvikt33-ux/safe-bim-layer/pull/35), fifth suffix `scripts/continue_apa_after_orphan_partition.py`; [last 195/195 offline CI](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38149533972). All original failed/partial journals remain historical evidence, no retry.
