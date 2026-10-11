@@ -3,8 +3,12 @@
 Read-only default. Exact pinned 2026-10-11 disposable PLN + immutable history;
 three old suffixes and interrupted fourth may NEVER be replayed.
 --confirm-token requires fresh verified geometry and explicit user approval.
-Create requests are allotted up to 120 seconds to allow an Archicad
-modal prompt to be acknowledged manually. No auto-click, auto-save, retry,
+Owner-proposed mitigation for cross-story visibility prompts: manually open
+the SAME PLN in its 3D window BEFORE running a fresh read-only preflight.
+Whether 3D suppresses the prompt in this APA session is not yet live-verified.
+The pinned active story index 0 must still be verified; never bypass guard.
+Create requests are allotted up to 120 seconds to allow any modal
+prompt to be acknowledged manually. No auto-click, auto-save, retry,
 rollback, prior journal rewrite, or UI manipulation is attempted.
 """
 from __future__ import annotations
