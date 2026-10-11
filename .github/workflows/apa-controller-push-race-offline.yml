@@ -1,0 +1,33 @@
+name: APA Controller Git push race regression
+
+on:
+  pull_request:
+    paths:
+      - 'tools/apa_controller/**'
+      - 'tools/apa_publisher/**'
+      - '.github/workflows/apa-research-publisher.yml'
+      - '.github/workflows/apa-controller-push-race-offline.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  safe-controller-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Bash syntax
+        run: bash -n tools/apa_controller/publish_generated_retry.sh
+      - name: Synthetic parallel Git CAS, rebase safety and idempotency
+        run: python -m unittest discover -s tools/apa_controller/tests -v
+      - name: Publisher offline safety/idempotency regression
+        run: python -m unittest discover -s tools/apa_publisher/tests -v
+      - name: Canonical controller DAG and inbox validation (read only)
+        run: |
+          python tools/apa_controller/controller.py validate
+          python tools/apa_controller/controller.py verify-inbox
