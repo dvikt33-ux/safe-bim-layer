@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 49,
+  "revision": 50,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -512,6 +512,18 @@
       "uri": "docs/research/apa-results/runs/2026-10-11/apa-sync-live-message-delivery-e2e-20261011.md",
       "kind": "EVIDENCE",
       "verification": "CHATGPT_SLACK_SEND_READBACK_AND_USER_LOCAL_HTTP_LIVE_PASS_ONLY"
+    },
+    "ART-APA-SLACK-GAP-AUDIT-20261011": {
+      "id": "ART-APA-SLACK-GAP-AUDIT-20261011",
+      "uri": "docs/research/apa-results/runs/2026-10-11/apa-slack-controller-github-gap-audit-20261011.md",
+      "kind": "REPORT",
+      "verification": "SOURCE_CODE_READBACK_AND_PRIOR_USER_LOCAL_LIVE_EVIDENCE"
+    },
+    "ART-APA-SLACK-BRIDGE-PROPOSAL-20261011": {
+      "id": "ART-APA-SLACK-BRIDGE-PROPOSAL-20261011",
+      "uri": "docs/research/apa-results/control/proposals/APA-CAND-20261011-slack-evidence-bridge.md",
+      "kind": "PROPOSAL",
+      "verification": "PENDING_INDEPENDENT_AUDIT_NOT_ADMITTED"
     }
   },
   "tasks": {
