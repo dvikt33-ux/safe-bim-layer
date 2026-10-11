@@ -93,7 +93,14 @@ class ControllerTests(unittest.TestCase):
     def test_approval_required_is_not_dispatchable(self):
         plan = copy.deepcopy(self.plan)
         t = plan["tasks"]["APA-P70.A03.S02"]
+        # This test isolates approval dispatch, irrespective of the live
+        # task's progress in the canonical controller.
         t["depends_on"] = []
+        t["status"] = "READY"
+        t["owner"] = None
+        t["lease_until"] = None
+        t["claim_ref"] = None
+        t["blocked_reason"] = None
         self.assertTrue(t["requires_approval"])
         c.validate(plan)
         self.assertFalse(c.eligible(t, plan))
