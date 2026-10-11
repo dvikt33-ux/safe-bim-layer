@@ -59,7 +59,14 @@ class ControllerTests(unittest.TestCase):
         self.assertEqual(state["development"]["plan_id"], "APA-P70")
         self.assertEqual(state["development"]["total"], 23)
         self.assertEqual(state["development"]["done"], 0)
-        self.assertEqual(state["development"]["next_eligible"], "APA-P70.A01.S01")
+        # Live tasks can be claimed or completed; do not assume S01 is always free.
+        if self.plan["tasks"]["APA-P70.A01.S01"]["status"] != "READY":
+            self.assertNotEqual(state["development"]["next_eligible"], "APA-P70.A01.S01")
+        unclaimed = copy.deepcopy(self.plan)
+        unclaimed["tasks"]["APA-P70.A01.S01"].update(
+            status="READY", owner=None, lease_until=None, claim_ref=None)
+        c.validate(unclaimed)
+        self.assertEqual(c.build(unclaimed)["development"]["next_eligible"], "APA-P70.A01.S01")
         board = (c.GENERATED / "DEVELOPMENT_BOARD.md").read_text(encoding="utf-8")
         handoff = (c.GENERATED / "HANDOFF.md").read_text(encoding="utf-8")
         self.assertIn("APA-P70.A01 —", board)
