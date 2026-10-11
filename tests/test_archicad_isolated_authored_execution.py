@@ -12,12 +12,20 @@ from unittest.mock import patch
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
 import archicad_project_accelerator as A
+import archicad_authored_extension as EXT
 from test_archicad_basic_slab_integration import CompositeDefaultNative
 from test_archicad_project_library_pack import BM,BM_GUID
 
 
 class IsolatedNative(CompositeDefaultNative):
     def __call__(self,command,params):
+        if command=='ModifyWalls':
+            self.calls.append(command);self.writes.append(command)
+            if getattr(self,'wall_modify_timeout',False):raise TimeoutError('uncertain wall modify')
+            for item in params['wallsWithDetails']:
+                if not getattr(self,'wall_modify_noop',False):
+                    self.created[item['elementId']['guid']][1]['wallsData'][0]['buildingMaterialId']=item['buildingMaterialId']
+            return {'executionResults':[{'success':True} for _ in params['wallsWithDetails']]}
         if command=='GetStories':
             self.calls.append(command)
             return {'actStory':0,'stories':[
@@ -122,3 +130,42 @@ class IsolatedAuthoredExecutionTests(unittest.TestCase):
             A.RUN.verify_readback('CreateSlabs',upper['params'],row,
                 expected_floor=1,expected_story_level=3.,slab_level_is_absolute=True,
                 allow_slab_thickness_mismatch=True)
+
+    def extension(self):
+        pre=self.run_project()
+        result=self.run_project('execute',pre['confirmPlanHash'])
+        self.assertEqual(result['status'],'COMPLETE_UNSAVED',result)
+        plan=json.loads((self.root/'run-2/preflight.json').read_text(encoding='utf8'))
+        intent=json.loads((ROOT/'examples/accelerator/isolated-authored-building.json').read_text(encoding='utf8'))
+        ticket=EXT.prepare(self.native,intent,plan,result['scene']['steps'],self.state/'scene-v1-attempts.sqlite3','extension-test-01')
+        return intent,ticket
+
+    def test_existing_ten_guids_extend_to_seventeen_with_hosted_openings(self):
+        _,ticket=self.extension()
+        count=len(self.native.writes)
+        result=EXT.execute(self.native,ticket,self.state/'scene-v1-attempts.sqlite3',ticket['confirmPlanHash'])
+        self.assertEqual(result['status'],'COMPLETE_UNSAVED',result)
+        self.assertEqual(result['reusedCount'],10);self.assertEqual(result['newCreatedCount'],7)
+        self.assertEqual(len(self.native.writes)-count,8)
+        self.assertEqual({k:v['guid'] for k,v in ticket['intent']['oldCreated'].items()},
+            {k:result['steps'][k]['guid'] for k in ticket['intent']['oldCreated']})
+        with self.assertRaises(sqlite3.IntegrityError):
+            EXT.execute(self.native,ticket,self.state/'scene-v1-attempts.sqlite3',ticket['confirmPlanHash'])
+        self.assertEqual(len(self.native.writes)-count,8)
+
+    def test_material_noop_stops_before_any_additional_creates(self):
+        _,ticket=self.extension();self.native.wall_modify_noop=True;count=len(self.native.writes)
+        result=EXT.execute(self.native,ticket,self.state/'scene-v1-attempts.sqlite3',ticket['confirmPlanHash'])
+        self.assertEqual(result['status'],'PARTIAL_OR_UNKNOWN_OUTCOME',result)
+        self.assertIn('WALL_MATERIAL_READBACK_MISMATCH',result['reason'])
+        self.assertEqual(self.native.writes[count:],['ModifyWalls'])
+
+    def test_authored_column_outside_building_and_unsupported_command_block(self):
+        intent=json.loads((ROOT/'examples/accelerator/isolated-authored-building.json').read_text(encoding='utf8'))
+        intent['nativeComponents'][0]['params']['columnsData'][0]['coordinates']['x']=500
+        with self.assertRaisesRegex(ValueError,'OUTSIDE_BUILDING'):
+            A.compile_authored_intent(intent,A.RUN.DEFAULT_SCENE_SCHEMA,self.native)
+        intent['nativeComponents'][0]={'command':'DeleteElements'}
+        with self.assertRaisesRegex(ValueError,'UNSUPPORTED_AUTHORED_NATIVE_COMPONENT'):
+            A.compile_authored_intent(intent,A.RUN.DEFAULT_SCENE_SCHEMA,self.native)
+        self.assertFalse(self.native.writes)

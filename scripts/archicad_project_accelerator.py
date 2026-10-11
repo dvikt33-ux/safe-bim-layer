@@ -10,6 +10,7 @@ from collections import Counter
 from datetime import datetime, timezone
 import hashlib
 import json
+import math
 from pathlib import Path
 import re
 import sys
@@ -207,9 +208,11 @@ def compile_intent(intent, schema_path):
 
 def compile_authored_intent(intent, schema_path, read_api):
     """Join authored brief/PLP/geometry to the same existing native execution path."""
-    if (not isinstance(intent, dict) or set(intent) != {
+    required = {
             "schemaVersion", "projectId", "units", "brief", "cseCandidate",
             "layout", "storyHeights"}
+    if (not isinstance(intent, dict) or not required <= set(intent)
+            or set(intent)-required-{"wallBasicMaterialName","nativeComponents"}
             or intent["schemaVersion"] != "apa-authored-project/1"
             or intent["units"] != "meters"
             or not isinstance(intent["projectId"], str)
@@ -222,6 +225,38 @@ def compile_authored_intent(intent, schema_path, read_api):
     candidate = compile_authored_native_candidate(
         intent["brief"], pack, intent["layout"], intent["storyHeights"],
         read_api, schema_path=schema_path)
+    if "wallBasicMaterialName" in intent:
+        wall_guid = RUN.resolve_basic_slab_material(read_api,intent["wallBasicMaterialName"])
+        for step in candidate["graph"]["operations"]:
+            if step["command"] == "CreateWalls":
+                step["params"]["wallsData"][0]["buildingMaterialId"]={"guid":wall_guid}
+    additions = intent.get("nativeComponents", [])
+    if not isinstance(additions,list) or len(additions)>100:
+        raise ValueError("INVALID_AUTHORED_NATIVE_COMPONENTS")
+    story_indices={b["nativeIndex"] for b in candidate["storyBindings"]}
+    outline=candidate["authoredOutline"]
+    for step in additions:
+        if not isinstance(step,dict) or step.get("command") not in {
+                "CreateColumns","CreateDoors","CreateWindows"}:
+            raise ValueError("UNSUPPORTED_AUTHORED_NATIVE_COMPONENT")
+        if step["command"]=="CreateColumns":
+            columns=step.get("params",{}).get("columnsData",[])
+            if len(columns)!=1 or columns[0].get("floorIndex") not in story_indices:
+                raise ValueError("AUTHORED_COLUMN_STORY_REQUIRED")
+            point=columns[0].get("coordinates",{})
+            if not all(type(point.get(k)) in (int,float) and math.isfinite(point[k]) for k in ("x","y","z")):
+                raise ValueError("AUTHORED_COLUMN_COORDINATES_REQUIRED")
+            if not (outline["xMin"]<=point["x"]<=outline["xMax"] and
+                    outline["yMin"]<=point["y"]<=outline["yMax"]):
+                raise ValueError("AUTHORED_COLUMN_OUTSIDE_BUILDING")
+    if additions or "wallBasicMaterialName" in intent:
+        candidate["graph"]["operations"].extend(json.loads(RUN.canonical(additions)))
+        checked=SCENE.GRAPH.compile_graph(catalog_with_provenance(schema_path),candidate["graph"],runtime_version=RUN.EXPECTED_TAPIR)
+        if checked["status"]!="PLAN_VALIDATED_OFFLINE":
+            raise ValueError("AUTHORED_COMPONENT_GRAPH_REFUSED: "+checked["status"])
+        candidate.update(sourcePlanHash=checked["sourcePlanHash"],executionOrder=checked["executionOrder"],
+            operationCount=len(candidate["graph"]["operations"]),
+            plannedNativeCommands=dict(Counter(s["command"] for s in candidate["graph"]["operations"])))
     preview = AUTHORED_NATIVE.as_existing_scene_writer_preview(candidate)
     return {**preview, "status": "ACCELERATOR_COMPILED_OFFLINE",
             "intent": intent, "intentHash": RUN.digest(intent),

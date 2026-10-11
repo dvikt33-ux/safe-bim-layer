@@ -287,6 +287,10 @@ def verify_readback(command, params, row, owner_guid=None, expected_floor=0,
             ("structureType", "Basic"), ("referenceLineLocation", "Center"),
             ("geometryType", "Straight"))):
             raise ValueError("WALL_TYPE_READBACK_MISMATCH")
+        if "buildingMaterialId" in expected and (
+                str(details.get("buildingMaterialId",{}).get("guid","")).casefold()!=
+                expected["buildingMaterialId"]["guid"].casefold()):
+            raise ValueError("WALL_MATERIAL_READBACK_MISMATCH")
     elif command == "CreateSlabs":
         # CreateSlabs may inherit Composite from the current defaults. Allow an
         # intermediate thickness mismatch ONLY before an explicitly journaled
