@@ -146,3 +146,8 @@
 ## Owner clarification: saved copy not yet reopened (2026-10-11)
 
 Владелец подтвердил: после «Сохранить как» в `C:\институт проект\Улучшенная копия APA_Test_House_01.pln` продолжил работать в **том же открытом документе**; закрытия и нового открытия не было. Поэтому первый `OPEN_SAVED_COPY_TYPED_READBACK_PASS` сохраняет значение **45/45 GUID + 25/25 typed native проверено в текущем открытом файле**, но **не доказывает сохранность после reopening**. Gate `SAVE_REOPEN_PASS` = **NOT_VERIFIED**. Следующий шаг — убедиться в отсутствии несохранённых изменений, вручную закрыть и открыть именно копию, повторить `verify_apa_saved_copy_read_only.py` без записи. Старые Create-скрипты/токены не использовать.
+
+
+## APA-P70.A03.S02 — reopen ошибочно открыл резервную .bpn (2026-10-11)
+
+Новая read-only проверка от владельца остановилась до проверки BIM: `BLOCKED_READ_ONLY_SAVED_COPY`, `WRONG_OPEN_PROJECT_EXPECT_EXACT_SAVED_COPY`. Native `GetProjectInfo.projectPath` возвращает `C:\\институт проект\\Улучшенная копия APA_Test_House_01.bpn` (резервная копия), а нужен `.pln`. **nativeWriteCalls=0**. Это **ошибка выбора открытого файла, не провал геометрии**, и не свидетельство пропажи `.pln` (ранее 15,957,232 байта на диске). `SAVE_REOPEN_PASS=NOT_VERIFIED`. Вручную открыть именно `C:\\институт проект\\Улучшенная копия APA_Test_House_01.pln`, затем запустить только `verify_apa_saved_copy_read_only.py --port 19726`, подтвердить фактический reopen. Не выполнять Create-скрипты, не переименовывать/удалять `.bpn`.
