@@ -1,0 +1,5074 @@
+{
+  "schema": "APA_CURRENT_BRANCH_BLOB_EXCLUSIVE_V1",
+  "census": "CURRENT_BRANCH_HEADS_20261011.json",
+  "count": 422,
+  "entries": [
+    {
+      "git_blob_sha": "fd4e565b98e5a2e85a759a917e23688f7e215319",
+      "head_sha": "02ed7a8a5a6e199bdfcb7cc7c7836dd7038deacb",
+      "branch_names": [
+        "chatgpt-write-test"
+      ],
+      "paths": [
+        "chatgpt-write-test.txt"
+      ],
+      "size_bytes": 94,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "0368ad23f0781791523e61190f66e9b5412b6827",
+      "head_sha": "06f6e04974bbea23c12cff63f93004048579ff3e",
+      "branch_names": [
+        "work/stage5-hosted-window"
+      ],
+      "paths": [
+        "closed_loop/live_wall.py"
+      ],
+      "size_bytes": 24099,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "64ae5cb6c1a714286c97c9d74c10997999f3fdc7",
+      "head_sha": "06f6e04974bbea23c12cff63f93004048579ff3e",
+      "branch_names": [
+        "work/stage5-hosted-window"
+      ],
+      "paths": [
+        "closed_loop/live_window.py"
+      ],
+      "size_bytes": 17123,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "90955908c734ca04d9f6b68604d331c4eed1abea",
+      "head_sha": "06f6e04974bbea23c12cff63f93004048579ff3e",
+      "branch_names": [
+        "work/stage5-hosted-window"
+      ],
+      "paths": [
+        "closed_loop/models.py"
+      ],
+      "size_bytes": 9335,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "ac2d4cdcb484d1942446b73542820d7bd33228d7",
+      "head_sha": "06f6e04974bbea23c12cff63f93004048579ff3e",
+      "branch_names": [
+        "work/stage5-hosted-window"
+      ],
+      "paths": [
+        "closed_loop/stage5_audit_pack.py"
+      ],
+      "size_bytes": 3316,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "1088746a900362b7498f9de73109aa95023b3be1",
+      "head_sha": "06f6e04974bbea23c12cff63f93004048579ff3e",
+      "branch_names": [
+        "work/stage5-hosted-window"
+      ],
+      "paths": [
+        "closed_loop/stage5_offline_evidence.py"
+      ],
+      "size_bytes": 4187,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "a843bfba0e14cb98f0976a0c86245d476a17d0d0",
+      "head_sha": "06f6e04974bbea23c12cff63f93004048579ff3e",
+      "branch_names": [
+        "work/stage5-hosted-window"
+      ],
+      "paths": [
+        "closed_loop/stage5_window_scenario.py"
+      ],
+      "size_bytes": 5053,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "a244045348acb0eabc6cbd4d1741989303c446d8",
+      "head_sha": "06f6e04974bbea23c12cff63f93004048579ff3e",
+      "branch_names": [
+        "work/stage5-hosted-window"
+      ],
+      "paths": [
+        "closed_loop/wall_attempts.py"
+      ],
+      "size_bytes": 18798,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "8460c1141aa5eaa5f7b7ef6e3cf94b5f8cb67ffd",
+      "head_sha": "06f6e04974bbea23c12cff63f93004048579ff3e",
+      "branch_names": [
+        "work/stage5-hosted-window"
+      ],
+      "paths": [
+        "closed_loop/window_attempts.py"
+      ],
+      "size_bytes": 9599,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "67642c0a8ec74a3e4ea97f995dd8fcf0d1c16779",
+      "head_sha": "06f6e04974bbea23c12cff63f93004048579ff3e",
+      "branch_names": [
+        "work/stage5-hosted-window"
+      ],
+      "paths": [
+        "docs/CURRENT_STATUS.md"
+      ],
+      "size_bytes": 8662,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "f49955dbdf6a2c65ba4539fc6033c5a2656224f6",
+      "head_sha": "06f6e04974bbea23c12cff63f93004048579ff3e",
+      "branch_names": [
+        "work/stage5-hosted-window"
+      ],
+      "paths": [
+        "docs/INDEX.md"
+      ],
+      "size_bytes": 3180,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "7d95e63a26ea12558be501d0638a1d72dd2f84ca",
+      "head_sha": "06f6e04974bbea23c12cff63f93004048579ff3e",
+      "branch_names": [
+        "work/stage5-hosted-window"
+      ],
+      "paths": [
+        "docs/STAGE5_HOSTED_WINDOW.md"
+      ],
+      "size_bytes": 3637,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "1154ce0562ef5bcf295690ba88ecc5dc9e2c1c8d",
+      "head_sha": "06f6e04974bbea23c12cff63f93004048579ff3e",
+      "branch_names": [
+        "work/stage5-hosted-window"
+      ],
+      "paths": [
+        "outputs/closed-loop-stage5/stage5-acceptance-contract.json"
+      ],
+      "size_bytes": 3089,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "22ddb509ac2fdef175243a39b763359ecf91be4c",
+      "head_sha": "06f6e04974bbea23c12cff63f93004048579ff3e",
+      "branch_names": [
+        "work/stage5-hosted-window"
+      ],
+      "paths": [
+        "outputs/closed-loop-stage5/stage5-offline-acceptance.json"
+      ],
+      "size_bytes": 1045,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "65ccd67096762d6a1a90c022a7a8670cb6bb200f",
+      "head_sha": "06f6e04974bbea23c12cff63f93004048579ff3e",
+      "branch_names": [
+        "work/stage5-hosted-window"
+      ],
+      "paths": [
+        "scripts/archicad_executor.py"
+      ],
+      "size_bytes": 26565,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "ac36934605d0362de8f0262348c9270148c77b1e",
+      "head_sha": "06f6e04974bbea23c12cff63f93004048579ff3e",
+      "branch_names": [
+        "work/stage5-hosted-window"
+      ],
+      "paths": [
+        "tests_stage5_window/test_live_window_wiring.py"
+      ],
+      "size_bytes": 5473,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "7e92611f7f125e6fd8dd8d62616e53da759aed59",
+      "head_sha": "06f6e04974bbea23c12cff63f93004048579ff3e",
+      "branch_names": [
+        "work/stage5-hosted-window"
+      ],
+      "paths": [
+        "tests_stage5_window/test_stage5_audit_pack.py"
+      ],
+      "size_bytes": 2614,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "341a52bc30fbb1c7a11dfb372207cc959bd0c0c5",
+      "head_sha": "06f6e04974bbea23c12cff63f93004048579ff3e",
+      "branch_names": [
+        "work/stage5-hosted-window"
+      ],
+      "paths": [
+        "tests_stage5_window/test_window_attempts.py"
+      ],
+      "size_bytes": 8360,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "90fde147666b3bebf6ed4f2f538b6b7fe9e36687",
+      "head_sha": "06f6e04974bbea23c12cff63f93004048579ff3e",
+      "branch_names": [
+        "work/stage5-hosted-window"
+      ],
+      "paths": [
+        "tests_stage5_window/test_window_orchestrator.py"
+      ],
+      "size_bytes": 6745,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "9b0c7e2f6d9617855ae57d0d0debb44289556975",
+      "head_sha": "0ba3cc7408ba777546ae89fad4decd17d6421900",
+      "branch_names": [
+        "feature/apa-sync-envelope-stage-probe-20261011"
+      ],
+      "paths": [
+        "scripts/apa_sync/inspect_raw_envelopes.py"
+      ],
+      "size_bytes": 9327,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "54eea457a2a04a389fb60328af165ef877c8bcd5",
+      "head_sha": "0ba3cc7408ba777546ae89fad4decd17d6421900",
+      "branch_names": [
+        "feature/apa-sync-envelope-stage-probe-20261011"
+      ],
+      "paths": [
+        "tests/test_apa_slack_sync.py"
+      ],
+      "size_bytes": 25648,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "02c97b3d7d7655a7044e4579df879a0c2e05ffba",
+      "head_sha": "14bc0d2a37a751029381e506809025eb434aa721",
+      "branch_names": [
+        "arena/runtime-safety-fix-ac01"
+      ],
+      "paths": [
+        "safe_bim_layer.py"
+      ],
+      "size_bytes": 30848,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "85aae22709d53628c1da0a160a0f84a8a6748c92",
+      "head_sha": "14bc0d2a37a751029381e506809025eb434aa721",
+      "branch_names": [
+        "arena/runtime-safety-fix-ac01"
+      ],
+      "paths": [
+        "safe_bim_operations.py"
+      ],
+      "size_bytes": 6394,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "8e61cb3cbb2f823ddae305a674a33e71684832b7",
+      "head_sha": "14bc0d2a37a751029381e506809025eb434aa721",
+      "branch_names": [
+        "arena/runtime-safety-fix-ac01"
+      ],
+      "paths": [
+        "safe_bim_verification.py"
+      ],
+      "size_bytes": 4408,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "541b22666a217e03278d6652c7afef49ed50fc7d",
+      "head_sha": "14bc0d2a37a751029381e506809025eb434aa721",
+      "branch_names": [
+        "arena/runtime-safety-fix-ac01"
+      ],
+      "paths": [
+        "tests_safety/fake_bim.py"
+      ],
+      "size_bytes": 5140,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "a022c86f6932da496d506aba1923fb5d9beaeab2",
+      "head_sha": "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+      "branch_names": [
+        "feature/apa-slack-event-coordinator-20261010"
+      ],
+      "paths": [
+        ".github/workflows/apa-sync-offline.yml"
+      ],
+      "size_bytes": 724,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "ac73166dcb6cd24f905b1afbf07c22433fc45a34",
+      "head_sha": "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+      "branch_names": [
+        "feature/apa-slack-event-coordinator-20261010"
+      ],
+      "paths": [
+        "docs/APA_SLACK_COORDINATOR.md"
+      ],
+      "size_bytes": 9788,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "55b91ef104523adddb71a0ee34191d653a5dbfae",
+      "head_sha": "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+      "branch_names": [
+        "feature/apa-slack-event-coordinator-20261010"
+      ],
+      "paths": [
+        "scripts/apa_sync/coordinator.py"
+      ],
+      "size_bytes": 12661,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "752d8c6ac524eeae3e8a09290ea15b3586948619",
+      "head_sha": "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+      "branch_names": [
+        "feature/apa-slack-event-coordinator-20261010"
+      ],
+      "paths": [
+        "tests/test_apa_slack_sync.py"
+      ],
+      "size_bytes": 9185,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "1c451bd69284206d8f303958ee305198b3e60ccb",
+      "head_sha": "1b3a43479343d65ce1a63d181c5b83f683530050",
+      "branch_names": [
+        "feature/somestuff-syncguids-source-20261009"
+      ],
+      "paths": [
+        "integrations/somestuff-syncguids/patches/registrar.diff"
+      ],
+      "size_bytes": 1184,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "7807a7b2414df065cf23032d2f8abd20790c5c7c",
+      "head_sha": "1b3a43479343d65ce1a63d181c5b83f683530050",
+      "branch_names": [
+        "feature/somestuff-syncguids-source-20261009"
+      ],
+      "paths": [
+        "integrations/somestuff-syncguids/prepare_build_ac29.ps1"
+      ],
+      "size_bytes": 6991,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "bc327a83fb068d91eee9574acbbfaad7518608f5",
+      "head_sha": "1b3a43479343d65ce1a63d181c5b83f683530050",
+      "branch_names": [
+        "feature/somestuff-syncguids-source-20261009"
+      ],
+      "paths": [
+        "integrations/somestuff-syncguids/README.md"
+      ],
+      "size_bytes": 8955,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "077a1e915d09aefc90aabe5d4fcbb2f9de3fe8a6",
+      "head_sha": "1b3a43479343d65ce1a63d181c5b83f683530050",
+      "branch_names": [
+        "feature/somestuff-syncguids-source-20261009"
+      ],
+      "paths": [
+        "integrations/somestuff-syncguids/smoke_syncguids.py"
+      ],
+      "size_bytes": 10945,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "0b6669ebb6d6561e876813472ce3c4bcd9fc3a6d",
+      "head_sha": "1b3a43479343d65ce1a63d181c5b83f683530050",
+      "branch_names": [
+        "feature/somestuff-syncguids-source-20261009"
+      ],
+      "paths": [
+        "integrations/somestuff-syncguids/Sources/AddOn/json_commands/SyncGuidsCommand.cpp"
+      ],
+      "size_bytes": 5386,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "3280f551def5bbdcb850a65d47819db7f1f40ab0",
+      "head_sha": "1b3a43479343d65ce1a63d181c5b83f683530050",
+      "branch_names": [
+        "feature/somestuff-syncguids-source-20261009"
+      ],
+      "paths": [
+        "integrations/somestuff-syncguids/Sources/AddOn/json_commands/SyncGuidsCommand.hpp"
+      ],
+      "size_bytes": 735,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "36daf1c022bc606780c64113d249a264741b6a24",
+      "head_sha": "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+      "branch_names": [
+        "feature/apa-sync-api-error-codes-20261011"
+      ],
+      "paths": [
+        "scripts/apa_sync/inspect_raw_envelopes.py"
+      ],
+      "size_bytes": 6724,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "ddbf7cf2fe9f235c1388d530efa028c58fb43ddc",
+      "head_sha": "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+      "branch_names": [
+        "feature/apa-sync-api-error-codes-20261011"
+      ],
+      "paths": [
+        "tests/test_apa_slack_sync.py"
+      ],
+      "size_bytes": 20586,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "8c7f37f104bf9ea6e9671ef342e28e23339852ba",
+      "head_sha": "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+      "branch_names": [
+        "feature/apa-sync-schema-rejection-reasons-20261011"
+      ],
+      "paths": [
+        "tests/test_apa_slack_sync.py"
+      ],
+      "size_bytes": 27144,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "544c2f802a33c4ae3cd00132946a75ef23ea47f9",
+      "head_sha": "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+      "branch_names": [
+        "prototype/s2.5-runtime-bootstrap-20260929"
+      ],
+      "paths": [
+        "sync_bridge/host.py"
+      ],
+      "size_bytes": 22661,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "6717f8c582f4675bc6abbaacb3ceb0a2153009b7",
+      "head_sha": "1e87381693ef6467dfacd97374b8a990687881f7",
+      "branch_names": [
+        "prototype/s2.4-archicad-context-provider-20260929"
+      ],
+      "paths": [
+        "bimexec/probes/backends.py"
+      ],
+      "size_bytes": 39028,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "16aa613c320a469f082851d3780d79cde703a052",
+      "head_sha": "1e87381693ef6467dfacd97374b8a990687881f7",
+      "branch_names": [
+        "prototype/s2.4-archicad-context-provider-20260929"
+      ],
+      "paths": [
+        "sync_bridge/__main__.py"
+      ],
+      "size_bytes": 693,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "9f77ea89a6f49552b519f84b12d72fdcb8e26102",
+      "head_sha": "1e87381693ef6467dfacd97374b8a990687881f7",
+      "branch_names": [
+        "prototype/s2.4-archicad-context-provider-20260929"
+      ],
+      "paths": [
+        "sync_bridge/instance_lock.py"
+      ],
+      "size_bytes": 8703,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "db59b54328ab742640bd44c60c287b4061213b1a",
+      "head_sha": "1e87381693ef6467dfacd97374b8a990687881f7",
+      "branch_names": [
+        "prototype/s2.4-archicad-context-provider-20260929"
+      ],
+      "paths": [
+        "sync_bridge/store.py"
+      ],
+      "size_bytes": 24020,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "cfbdff862a19c449a79032c7a4fadaf2cb12ea4f",
+      "head_sha": "1e87381693ef6467dfacd97374b8a990687881f7",
+      "branch_names": [
+        "prototype/s2.4-archicad-context-provider-20260929"
+      ],
+      "paths": [
+        "tests_sync/closing.py"
+      ],
+      "size_bytes": 862,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "38b316996660bf517b542658bf25bedc1cdabb48",
+      "head_sha": "1e87381693ef6467dfacd97374b8a990687881f7",
+      "branch_names": [
+        "prototype/s2.4-archicad-context-provider-20260929"
+      ],
+      "paths": [
+        "tests_sync/test_s1_2_ownership.py"
+      ],
+      "size_bytes": 12099,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "ca23b520b82fa70cc65a2d2f8434075d2ef6e24c",
+      "head_sha": "1e87381693ef6467dfacd97374b8a990687881f7",
+      "branch_names": [
+        "prototype/s2.4-archicad-context-provider-20260929"
+      ],
+      "paths": [
+        "tests_sync/test_s1_3_liveness.py"
+      ],
+      "size_bytes": 12002,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "652e1263078589ef16cdeb396486a4df3a8647de",
+      "head_sha": "1e87381693ef6467dfacd97374b8a990687881f7",
+      "branch_names": [
+        "prototype/s2.4-archicad-context-provider-20260929"
+      ],
+      "paths": [
+        "tests_sync/test_s2_3_context_roundtrip.py"
+      ],
+      "size_bytes": 28960,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "e4ddb3396a85f37794e6b4d49780ba8042192a50",
+      "head_sha": "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+      "branch_names": [
+        "feature/apa-sync-raw-envelope-probe-20261011"
+      ],
+      "paths": [
+        "scripts/apa_sync/inspect_raw_envelopes.py"
+      ],
+      "size_bytes": 5113,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "0f5a48ed34d254f1765c842f6b5ed722ecff94ac",
+      "head_sha": "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+      "branch_names": [
+        "feature/apa-sync-raw-envelope-probe-20261011"
+      ],
+      "paths": [
+        "tests/test_apa_slack_sync.py"
+      ],
+      "size_bytes": 18986,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "a07addaaab68e52107c8d64616bf2749bed4babd",
+      "head_sha": "27906e2a1370146a8d740f02384ab02a584ce918",
+      "branch_names": [
+        "feature/chat-bridge-wall-write-mvp"
+      ],
+      "paths": [
+        "sync_bridge/archicad_context_provider.py"
+      ],
+      "size_bytes": 17021,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "fb245931313283e7a02502feabce50bf395bb250",
+      "head_sha": "27906e2a1370146a8d740f02384ab02a584ce918",
+      "branch_names": [
+        "feature/chat-bridge-wall-write-mvp"
+      ],
+      "paths": [
+        "sync_bridge/bridge.py"
+      ],
+      "size_bytes": 25155,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "3ac1a75a453fe479f5ae1756cd66984ee1bb65e5",
+      "head_sha": "27906e2a1370146a8d740f02384ab02a584ce918",
+      "branch_names": [
+        "feature/chat-bridge-wall-write-mvp"
+      ],
+      "paths": [
+        "sync_bridge/host.py"
+      ],
+      "size_bytes": 27671,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "3cd14b5ed5b4dc30d226dc03efa3de962cd1a2b1",
+      "head_sha": "27906e2a1370146a8d740f02384ab02a584ce918",
+      "branch_names": [
+        "feature/chat-bridge-wall-write-mvp"
+      ],
+      "paths": [
+        "sync_bridge/store.py"
+      ],
+      "size_bytes": 24750,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "0fa1a33082cf7b85d628e7b3f37dbaf3f0b66812",
+      "head_sha": "27906e2a1370146a8d740f02384ab02a584ce918",
+      "branch_names": [
+        "feature/chat-bridge-wall-write-mvp"
+      ],
+      "paths": [
+        "sync_bridge/wall_write.py"
+      ],
+      "size_bytes": 18970,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "3bd68b078100c3d040e2993ef537c11452fb22af",
+      "head_sha": "27906e2a1370146a8d740f02384ab02a584ce918",
+      "branch_names": [
+        "feature/chat-bridge-wall-write-mvp"
+      ],
+      "paths": [
+        "tests_sync/test_s2_5_runtime_bootstrap.py"
+      ],
+      "size_bytes": 9640,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "d02faf4a0d1ea576ce5bb5dece562d0409dbb641",
+      "head_sha": "27906e2a1370146a8d740f02384ab02a584ce918",
+      "branch_names": [
+        "feature/chat-bridge-wall-write-mvp"
+      ],
+      "paths": [
+        "tests_sync/test_wall_write_host_mvp.py"
+      ],
+      "size_bytes": 7227,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "c6e046bc3950e054dd9a09889a4038bbd180d3dd",
+      "head_sha": "27906e2a1370146a8d740f02384ab02a584ce918",
+      "branch_names": [
+        "feature/chat-bridge-wall-write-mvp"
+      ],
+      "paths": [
+        "tests_sync/test_wall_write_mvp.py"
+      ],
+      "size_bytes": 7406,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "5896cdf0ff24476c437b5072eec15a91bc891b5f",
+      "head_sha": "2ec5c001544a0eede73daa99c618ba53448f226c",
+      "branch_names": [
+        "chatgpt/construction-detail-library-v2.2-20261006"
+      ],
+      "paths": [
+        "construction_details/ACTIVE_RELEASE"
+      ],
+      "size_bytes": 4,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "61ce655f1c025dd287333706cf02f8d42b52d311",
+      "head_sha": "2ec5c001544a0eede73daa99c618ba53448f226c",
+      "branch_names": [
+        "chatgpt/construction-detail-library-v2.2-20261006"
+      ],
+      "paths": [
+        "construction_details/index/source_counts.json"
+      ],
+      "size_bytes": 13362,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "40e87d012001b1f923a41d6ecdb9e56562bad5de",
+      "head_sha": "2ec5c001544a0eede73daa99c618ba53448f226c",
+      "branch_names": [
+        "chatgpt/construction-detail-library-v2.2-20261006"
+      ],
+      "paths": [
+        "construction_details/index/systems.json"
+      ],
+      "size_bytes": 1078,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "09df0c719b830aabb9e7ddd4c23aae7f954ca5b4",
+      "head_sha": "2ec5c001544a0eede73daa99c618ba53448f226c",
+      "branch_names": [
+        "chatgpt/construction-detail-library-v2.2-20261006"
+      ],
+      "paths": [
+        "construction_details/README.md"
+      ],
+      "size_bytes": 2560,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "65e24d924f6cce6065b14e9d07ebb0f9158c79c1",
+      "head_sha": "2ec5c001544a0eede73daa99c618ba53448f226c",
+      "branch_names": [
+        "chatgpt/construction-detail-library-v2.2-20261006"
+      ],
+      "paths": [
+        "construction_details/releases/v2.2/machine-state-v2.2.tar.gz.b64"
+      ],
+      "size_bytes": 548124,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "122eede8abfeb4be0eff12f6e0af0f5fc311b51e",
+      "head_sha": "2ec5c001544a0eede73daa99c618ba53448f226c",
+      "branch_names": [
+        "chatgpt/construction-detail-library-v2.2-20261006"
+      ],
+      "paths": [
+        "construction_details/tools/unpack_release.py"
+      ],
+      "size_bytes": 1309,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "b95855fa9fb5ada791dd443252c44c11937734df",
+      "head_sha": "39231a1e63ab91ff05cabe484bf737c176434a44",
+      "branch_names": [
+        "research/apa-tn-gdl-create-01-blocker1-audit-20261009"
+      ],
+      "paths": [
+        "docs/research/APA_TN-GDL-CREATE-01_BLOCKER1_AUDIT_2026-10-09.md"
+      ],
+      "size_bytes": 9762,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "286edd26b6f9ec301726f53c85d54370e3351cbb",
+      "head_sha": "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+      "branch_names": [
+        "feature/apa-sync-chatgpt-trailer-20261011"
+      ],
+      "paths": [
+        "tests/test_apa_slack_sync.py"
+      ],
+      "size_bytes": 17198,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "53b85096f21e5e8299cc8857704dfed255e0bbbd",
+      "head_sha": "3bdf572b27b27a27335f24336625777f189fec4d",
+      "branch_names": [
+        "feature/apa-sync-slack-envelope-evidence-recovery-20261011"
+      ],
+      "paths": [
+        "docs/APA_SYNC_SLACK_EVIDENCE_RECOVERY.md"
+      ],
+      "size_bytes": 5302,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "046e69bccf2581123369c41f63539f1e0bd93cf8",
+      "head_sha": "3bdf572b27b27a27335f24336625777f189fec4d",
+      "branch_names": [
+        "feature/apa-sync-slack-envelope-evidence-recovery-20261011"
+      ],
+      "paths": [
+        "scripts/apa_sync/coordinator.py"
+      ],
+      "size_bytes": 14159,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "acea8aa4804f1c46cdfe36c01602d4887e5386bc",
+      "head_sha": "3bdf572b27b27a27335f24336625777f189fec4d",
+      "branch_names": [
+        "feature/apa-sync-slack-envelope-evidence-recovery-20261011"
+      ],
+      "paths": [
+        "tests/test_apa_slack_sync.py"
+      ],
+      "size_bytes": 33356,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "bee522a73a65f4b8306b965e89b240a288cbdb20",
+      "head_sha": "53d6b638b4e638c669ce169196088c3b3a5cdc30",
+      "branch_names": [
+        "audit/arena-reconciliation-gpt-counter-audit-20260928"
+      ],
+      "paths": [
+        "ARENA_RECONCILIATION_GPT_COUNTER_AUDIT_20260928.md"
+      ],
+      "size_bytes": 44633,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "2ad24a6fcfa9a6d62f99b2f8b60bb3397abec277",
+      "head_sha": "53d6b638b4e638c669ce169196088c3b3a5cdc30",
+      "branch_names": [
+        "audit/arena-reconciliation-gpt-counter-audit-20260928"
+      ],
+      "paths": [
+        "audit/arena-full-system-audit-20260928/TAPIR_1.5.9_COMMAND_INVENTORY.md"
+      ],
+      "size_bytes": 29614,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "c22b38cd018e5c028e08c87fe5f59cb042627e77",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        ".github/workflows/apa-research-publisher.yml"
+      ],
+      "size_bytes": 4277,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "071620bfce793b49451523363401fe0b0a61152c",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/2026-10-10-research-register.md"
+      ],
+      "size_bytes": 9736,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "9b6709172aa6150303467fa9cacdf6c1051543f8",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/AGENT_PROTOCOL.md"
+      ],
+      "size_bytes": 8978,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "512c5a8863ea75b770a89260acbb3adfb0921ab4",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/ARTIFACT_REGISTER.md"
+      ],
+      "size_bytes": 29515,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "207e36444dd634791aa8ce5c1f7edfee6086a8b5",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/AUTOMATION_AND_GATES.md"
+      ],
+      "size_bytes": 9693,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "f68c7bc9a04c37de8ef176fe5ad9ad2260b53717",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/BRANCH_REGISTRY.md"
+      ],
+      "size_bytes": 6106,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "dc07469a9ecb84cda4ef6b5108280cc00f970e8f",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md"
+      ],
+      "size_bytes": 13418,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "296858544f5debbf78c2f2be05d4536a7a1bdeee",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/control/CHATGPT_SCHEDULED_TASK.md"
+      ],
+      "size_bytes": 11380,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "ae0d19e1365363844139e3d124f5b5834373deec",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/control/generated/CONTROL_BOARD.md"
+      ],
+      "size_bytes": 7341,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "c051a3464f4d3562248ad308e36d76c0c4272c36",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/control/generated/DEVELOPMENT_BOARD.md"
+      ],
+      "size_bytes": 19889,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "3620ce636d9173764d0acfc664bbe24989d61615",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/control/generated/HANDOFF.md"
+      ],
+      "size_bytes": 2775,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "3d9451f121838cb626bbd90057ec5372c210d0a7",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/control/generated/RELATIONSHIPS.md"
+      ],
+      "size_bytes": 8362,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "afa5884a62579f588fa9e50cf3f0c30c9ecdca30",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/control/generated/RESEARCH_LOOKAHEAD.md"
+      ],
+      "size_bytes": 21084,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "eb0e8e841ae0f95d8e53cd622d35576e23aaf291",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/control/generated/STATE.json"
+      ],
+      "size_bytes": 8819,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "ff173329da8cad0846aae2505861bda1813d6ddc",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/control/generated/TASK_CARDS.md"
+      ],
+      "size_bytes": 65627,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "054bb094d6fd6ff4164feda543259a354dd3aa4a",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/control/generated/THEMES.md"
+      ],
+      "size_bytes": 17339,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "147b6be90777d6878381e785d984b8b0d72efad6",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/control/pending_events/apa-tapir-compat-v2-20261010-6f29.json"
+      ],
+      "size_bytes": 1050,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "6b1551511f82c008d58153b3de90740644d590fe",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/control/pending_publications/APA-RUN-20261010-163950Z-tapir-compat-6f29.json"
+      ],
+      "size_bytes": 18094,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "62214622710157399a1253da363bb02ef22bea87",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/control/PROJECT_PLAN.json"
+      ],
+      "size_bytes": 113279,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "6d696c3953beeb336bcc3163c4aae34d6d766dc7",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/control/proposals/APA-CAND-20261010-opening-geometry-parity-8e41.md"
+      ],
+      "size_bytes": 4464,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "3275802141889f051b823c586144250822d3effe",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/control/proposals/APA-CAND-20261010-profile-field-edge-material-8c21.md"
+      ],
+      "size_bytes": 3836,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "95cc305ac51c8e8d24ee44bbe89e6cbfb4b69bc2",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/control/proposals/APA-CAND-20261010-tapir-json-envelope-6f29.md"
+      ],
+      "size_bytes": 4854,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "49d7904852f7a89a46cc465828313431e7221ac9",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/control/proposals/APA-CAND-20261011-typed-slab-creation-adapter.md"
+      ],
+      "size_bytes": 6120,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "d04b69730c159cadd8040f0446906a01e4a326b2",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/control/README.md"
+      ],
+      "size_bytes": 6979,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "beb1b7dc000fb7b1bc674e824f019904b17da164",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/control/SCHEDULED_TASKS_REGISTRY_ACTIVATION_20261010.md"
+      ],
+      "size_bytes": 5018,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "9fbc6c26382bacb7747822d80d0b0aa7e89f0fab",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/control/TASK_PROPOSALS_AND_AUDIT.md"
+      ],
+      "size_bytes": 12746,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "20083771e3259c15a97b8df36a77b6bdf24620da",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/CURRENT_BLOCKERS.md"
+      ],
+      "size_bytes": 4504,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "4ed9526f4c2c584fd18cbe7c22288724b7a64ece",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/CURRENT_STATUS.md"
+      ],
+      "size_bytes": 17389,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "cb22f3e84e750661eeda893c5b8e549d624c1ce9",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/deployments/APA_PUBLISHER_DEPLOYMENT_20261010.json"
+      ],
+      "size_bytes": 2264,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "1b57742034ff667d0cea7b785829317fffe5bf9e",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/generated/INDEX.md"
+      ],
+      "size_bytes": 1522,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "00e6570cb2e47f543ebaa26f169523a986f3e5a5",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/generated/STATE.json"
+      ],
+      "size_bytes": 2102,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "a5ba5e6b8a4b6aee3d96b3ef51e62864bf8d822c",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/inbox/APA-RUN-20261010-104437Z-publisher-integration-smoke.json"
+      ],
+      "size_bytes": 2697,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "3f5778e46c27e4e4792f162747594572f8942dfa",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/inbox/APA-RUN-20261010-110048Z-legacy-traceability.json"
+      ],
+      "size_bytes": 14331,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "3769b78ac1f9d1c8aea1106b57438e94b09f0e95",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/inbox/APA-RUN-20261010-143940Z-opening-shell-geom.json"
+      ],
+      "size_bytes": 14168,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "72ceaba11397f54a42e08b8e973cd18cbe6566fe",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/inbox/APA-RUN-20261010-163950Z-tapir-compat-6f29.json"
+      ],
+      "size_bytes": 18090,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "5c6c71fe5f231a48152c117d74eed769f87c1012",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/inbox/APA-RUN-20261010-200823Z-mep-route-port-gate.json"
+      ],
+      "size_bytes": 16202,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "3d25b5ca415a220d847460b4276c4cd7f79b8a47",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/inbox/APA-RUN-20261010-234200Z-slack-legacy-three-audit.json"
+      ],
+      "size_bytes": 18088,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "be7032531ba67f5635d800be3e7e2ebd2e134a99",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/inbox/APA-RUN-20261010-235301Z-branch-evidence-dedup.json"
+      ],
+      "size_bytes": 21808,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "74b997204bbc26808baa73b46c09c5f4fe5aa62c",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json"
+      ],
+      "size_bytes": 31802,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "ed4847575f1dfe85ee143dab2abe561e66b8ba09",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/inventories/blob-scan-20261011/BATCH_01.json"
+      ],
+      "size_bytes": 169827,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "5c872e1013fc4a8962d3230005df4c83ad675d4c",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/inventories/blob-scan-20261011/BATCH_02.json"
+      ],
+      "size_bytes": 145372,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "44c88c809ab86f5e06175eac4cd4fc114c064cf1",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/inventories/blob-scan-20261011/BATCH_03.json"
+      ],
+      "size_bytes": 411085,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "da2f6a9646cd2157b4422fb344ae5c1c259f383a",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/inventories/blob-scan-20261011/BATCH_04.json"
+      ],
+      "size_bytes": 344939,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "532962c8faab49e4a2e917201cde04b935714b28",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/inventories/blob-scan-20261011/BATCH_05.json"
+      ],
+      "size_bytes": 370591,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "5765eb0133f82cb9d9a8c0ff036c6735f363ddf6",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/inventories/blob-scan-20261011/BATCH_06.json"
+      ],
+      "size_bytes": 234758,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "c7fecde954f9b24b506c0c2e126b6767a86c3ba0",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/inventories/blob-scan-20261011/BATCH_07.json"
+      ],
+      "size_bytes": 543988,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "12666c0431d595c174bfedcf380da7b772391e06",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/inventories/blob-scan-20261011/BLOB_AGGREGATE_20261011.json"
+      ],
+      "size_bytes": 33454,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "c9e4fd5fe914ced5fb1b80d55079a30b2ca8118a",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/inventories/blob-scan-20261011/BLOB_COLLISIONS_20261011.json"
+      ],
+      "size_bytes": 145137,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "9bdc3381ca1ea82903ba67b53b3b130e8a8db02d",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/inventories/blob-scan-20261011/BLOB_EXCLUSIVE_20261011.json"
+      ],
+      "size_bytes": 99084,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "5d7ed7d8fd8132e57cf6524f718238ccbfd6dab9",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/inventories/blob-scan-20261011/CANONICAL_BLOB_COVERAGE_20261011.json"
+      ],
+      "size_bytes": 4137,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "9452e8fc821dddf264ba73d8b28d40b698084306",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/inventories/BRANCH_DEDUP_MATRIX_20261011.json"
+      ],
+      "size_bytes": 30257,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "0c0f5546920808942c838d009df5aa1a3b4b9714",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/inventories/BRANCH_HEADS_20261010.json"
+      ],
+      "size_bytes": 38036,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "51babe5da094b98709b2656efc7e437368f6dcd8",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/inventories/FULL_BRANCH_INVENTORY.md"
+      ],
+      "size_bytes": 25297,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "885df288d2c47b24f55f977718aebfea8e23d017",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/MASTER_PLAN.md"
+      ],
+      "size_bytes": 13975,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "6295bfee236668e34c8c858527f6b8b7bb84ff63",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/protocol/EVIDENCE_POLICY.md"
+      ],
+      "size_bytes": 4395,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "8d4ad2d4b6f64a5e4d870fe8b6864600acebfbe6",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/protocol/PUBLISH_REQUEST_V1.schema.json"
+      ],
+      "size_bytes": 6092,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "f03bf593618fe09c1a4952cf44f5f5bfccc2a21e",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/protocol/PUBLISHER_CONTRACT.md"
+      ],
+      "size_bytes": 11682,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "bc24170791d7b8290f39d8c568658f5788380638",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/protocol/RUN_EVENT_V2.schema.json"
+      ],
+      "size_bytes": 7036,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "d39d8db3fba69a82c8077719fdc1e8881f25e8bc",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/PUBLISHING_PROTOCOL.md"
+      ],
+      "size_bytes": 9153,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "d6382778a0483403d86fc5e11e7f30d1c9fa672b",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/README.md"
+      ],
+      "size_bytes": 14940,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "8720a60c5d47a08b5b4cc978b8abe05807f06566",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/receipts/APA-RUN-20261010-102800Z-research-os-audit-indexed.json"
+      ],
+      "size_bytes": 1659,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "766ca0cdc778736bf73e2bf12c65593737f46464",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/receipts/APA-RUN-20261010-102800Z-research-os-audit-readback.json"
+      ],
+      "size_bytes": 883,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "d1be59eb8d38e85f154cd70bdc2048fa01ca05f4",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json"
+      ],
+      "size_bytes": 671,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "72537fbf5bfaf12fbd3aaff17a46f42e73fcaa1e",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/receipts/APA-RUN-20261010-110048Z-legacy-traceability.json"
+      ],
+      "size_bytes": 655,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "e48a31903807cff3c93e6c040c73114e260dc7a0",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/receipts/APA-RUN-20261010-143940Z-opening-shell-geom.json"
+      ],
+      "size_bytes": 653,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "9f670917bdc1c8494082535b0a5ab58a0d333a72",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/receipts/APA-RUN-20261010-163950Z-tapir-compat-6f29.json"
+      ],
+      "size_bytes": 651,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "443737859c29f1a513696f31814a532fc87205cc",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/receipts/APA-RUN-20261010-200823Z-mep-route-port-gate.json"
+      ],
+      "size_bytes": 655,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "8b53d7a3e33250c43bb88b7004489fc74129b720",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/receipts/APA-RUN-20261010-234200Z-slack-legacy-three-audit.json"
+      ],
+      "size_bytes": 665,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "4f102dba319d2f513d2ddbe56e828008792fef0e",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/receipts/APA-RUN-20261010-235301Z-branch-evidence-dedup.json"
+      ],
+      "size_bytes": 659,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "13704a38bba07afad3cf0ae0e44e09bf6a425450",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/RECOVERY_BLOCKED_RUNS_20261010.md"
+      ],
+      "size_bytes": 5062,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "64758480cfad7db6f93e99f8def3c83441969bf5",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/recovery/blocked-inbox/APA-RUN-20261010-153928Z-profile-attribute-readback.json"
+      ],
+      "size_bytes": 3879,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "a941f030cdbab98cf46af2381943e6213373e2cf",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/RESEARCH_QUEUE.md"
+      ],
+      "size_bytes": 5147,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "c356b87a56fb1c0854927d475b20d42d2a4dbc36",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/RESEARCH_TEMPLATE.md"
+      ],
+      "size_bytes": 3754,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "a47ef947c91ddc760b4d77e87c186c277893417f",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-audit-100141Z-event-contract-7c4e.md"
+      ],
+      "size_bytes": 7049,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "e9612caabdf77a9a2c81e22619308463e04fbe01",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-audit-140021Z-a71d4c.md"
+      ],
+      "size_bytes": 718,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "e32d13ffbc5370290bfd42023a5e808fc0947f38",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-discovery-20261010-102440-slinktrim-9f2b7.md"
+      ],
+      "size_bytes": 15768,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "b295ef7a0b1e963d7d9c8503d024ebc24482ab09",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-discovery-20261010-201457-sdk-native-signatures-fallback.md"
+      ],
+      "size_bytes": 9068,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "00a6b5e093d95c730b5c6a19b22e7affd430a68c",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-live-user-log-20261010-200512z-pavilion-slab-readback.md"
+      ],
+      "size_bytes": 21183,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "d89e23a6aab0adff27ad106939f5795b5a3f349c",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-recovered-20261010-composites-building-materials.md"
+      ],
+      "size_bytes": 6620,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "74480729420b6aedf3774f90aebaa4bd2cf23b07",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-recovered-20261010-mep-ports-network-integrity.md"
+      ],
+      "size_bytes": 6595,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "30c2d9882c8bcbcc1205363d03ddf306aff96d72",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-recovered-20261010-tapir17-slab-bbox-upper-story.md"
+      ],
+      "size_bytes": 8272,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "efa84fd335ed1073cd3c8be5353e06d3f62990fe",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-recovery-20261010-132600-tapir-docs-7c3f.md"
+      ],
+      "size_bytes": 8622,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "e6d3eebacaef09c238009e3eb86823e344d7faa6",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-recovery-20261010-132700-hotlink-mep-277e19.md"
+      ],
+      "size_bytes": 7946,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "1a9cb5f5271d5ce41adc16ff61f728763bd464f7",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-recovery-20261010-132800-ifcmcp-merge-3f759.md"
+      ],
+      "size_bytes": 8749,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "ebfa50e7b72bc27dff84276a4baf2b834a991b33",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-recovery-20261010-142600-sdk-native-6b42.md"
+      ],
+      "size_bytes": 10983,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "94cf8986c22839ce51e3983e7e4aa757a66f7c4a",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-research-os-audit-user-supplied-20261010.md"
+      ],
+      "size_bytes": 20707,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "d688686a64ab5571e6aebed42efaaa93a2a8adb2",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-104437Z-publisher-integration-smoke/evidence.json"
+      ],
+      "size_bytes": 812,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "f617998e82bc8ad65d40b4253d0c863e2e9085dd",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-104437Z-publisher-integration-smoke/manifest.json"
+      ],
+      "size_bytes": 2148,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "0027d30134f738935d7eeb37a0603d4d3ca84e66",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-104437Z-publisher-integration-smoke/REPORT.md"
+      ],
+      "size_bytes": 722,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "7b4c25dd5ee42598614d406450ad0061e2c96849",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-110048Z-legacy-traceability/evidence.json"
+      ],
+      "size_bytes": 3849,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "c85a26c4371239a2ab0165b00c7b5fa1d7af2ceb",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-110048Z-legacy-traceability/manifest.json"
+      ],
+      "size_bytes": 7482,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "3c656b35ccc60d9f38dbe6b2775d6fe4a1411d3b",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-110048Z-legacy-traceability/REPORT.md"
+      ],
+      "size_bytes": 6991,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "5adc7ad4f9d4c468651a95db566bbcd3e543009b",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/evidence.json"
+      ],
+      "size_bytes": 3169,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "b27634f6ef7d864ae4de3a65591a6deb2ce95d3a",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/manifest.json"
+      ],
+      "size_bytes": 5527,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "ac13166f3a242ce5b6d2782f60462e881179822f",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md"
+      ],
+      "size_bytes": 8760,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "5953edeb73a8ab0d01aa327e736ef04f752143ed",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/evidence.json"
+      ],
+      "size_bytes": 3565,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "13246beccb50cf25b92c325bd44b763fd5e5fad2",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/manifest.json"
+      ],
+      "size_bytes": 5312,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "a52f6149f792dc404ef4fe32d61c77990c94b438",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md"
+      ],
+      "size_bytes": 12884,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "069527ae8cb78d47767db53444b4695c6f5d4283",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/evidence.json"
+      ],
+      "size_bytes": 2879,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "cb4cf7783c0c36064199d5d0ad61b1464f651d90",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/manifest.json"
+      ],
+      "size_bytes": 4474,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "9bd4c828b4863795f4e93d99d8c352a86596b2ea",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md"
+      ],
+      "size_bytes": 11821,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "41e6fcc5fc432700fbf06502309eaffaa2204c94",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-234200Z-slack-legacy-three-audit/evidence.json"
+      ],
+      "size_bytes": 5164,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "b7ee88b14b52b8fe582f13ccce139602e0a1f15e",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-234200Z-slack-legacy-three-audit/manifest.json"
+      ],
+      "size_bytes": 7198,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "b9ea9d38a834aa2e0c1696d5d46d8fa4ac9c1322",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-234200Z-slack-legacy-three-audit/REPORT.md"
+      ],
+      "size_bytes": 11018,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "93805fbae588edf221b1d5673ec01ad864b17ff1",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-235301Z-branch-evidence-dedup/evidence.json"
+      ],
+      "size_bytes": 4731,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "cc1c2b1c978aa02f9e3051522935b85ad3c2b4b7",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-235301Z-branch-evidence-dedup/manifest.json"
+      ],
+      "size_bytes": 6419,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "cd07082e1c263e7de2e18061a2c38aeb6bf0a50a",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-235301Z-branch-evidence-dedup/REPORT.md"
+      ],
+      "size_bytes": 15496,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "aa3b419f72f2ae130ab5aa01acfb155b58a3053d",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md"
+      ],
+      "size_bytes": 9421,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "6eb98cd428836c8fd73fbd2971e50ca9b24cba94",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-source-snapshot-research-os-full-20261010.md"
+      ],
+      "size_bytes": 38539,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "9b96f1f1023ca03d4c1bd7100e8a110f64987a2f",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-source-snapshot-scheduled-task-work-limits-full-20261010.md"
+      ],
+      "size_bytes": 44623,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "19e1e1ad52b968bc27ef8b2293829df57b512cb4",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-technical-20261010-094254-publisher-layout-01.md"
+      ],
+      "size_bytes": 2052,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "97acb75806600aae730faf51463d79a806d7fc7f",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-technical-20261010-1340-floor-z-contract-8c29.md"
+      ],
+      "size_bytes": 2966,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "32a87775a659c2095d679a14a088f5ac6e43baf0",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-technical-20261010-153928-profile-fields-edge-material-8c21.md"
+      ],
+      "size_bytes": 11874,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "2cfa1f121a9321f2de8742e338e95de8dab81b59",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-technical-20261010-1542-publisher-ci-blocker-8c21.md"
+      ],
+      "size_bytes": 1798,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "b2600d29b54004094decfaa59279374dc2bffae5",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-technical-20261010-163950-tapir-compat-source-6f29.md"
+      ],
+      "size_bytes": 17259,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "bd696e35841c62936340a864711742f50692bda5",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md"
+      ],
+      "size_bytes": 15230,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "d5b956d85570b2d82659afb2757a84581520eab9",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-11/apa-p20-a02-s03-independent-saved-pln-readback-tool.md"
+      ],
+      "size_bytes": 5470,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "7527cf95d7a668e897b7497b6a5898ed27dee5da",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-11/apa-p20-a02-s03-saved-pln-live-readback-20261010-222136.md"
+      ],
+      "size_bytes": 7996,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "156cfb713aac1cec401d4fc1b0d0c479cda1043c",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md"
+      ],
+      "size_bytes": 11007,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "96c76f622aff4a85de478c19d3b13561c15a52fe",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-11/apa-p70-a03-live-scratch-partial-slab-reconciliation.md"
+      ],
+      "size_bytes": 3626,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "e9e79f38c75d527a2a4ab66326473389b8673bc5",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-11/apa-sync-chatgpt-attribution-compat-20261011.md"
+      ],
+      "size_bytes": 4760,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "07fc03b319e0b7a34a4cb652580685112775695e",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-11/apa-sync-confirmed-slack-evidence-url-cause-20261011.md"
+      ],
+      "size_bytes": 6103,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "262f13a04d317c89b1a68e59222747d603411fe6",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-11/apa-sync-envelope-shapes-ready-20261011.md"
+      ],
+      "size_bytes": 2479,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "e27c73a25bdc6d758c152716be28078f1d77ee3f",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-11/apa-sync-footer-live-rejection-pr27-20261011.md"
+      ],
+      "size_bytes": 4182,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "b9a6d6521237c032d00f13e0518074adcc7d1279",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-11/apa-sync-live-bootstrap-diagnostic-20261011.md"
+      ],
+      "size_bytes": 3206,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "9c79e0ad509b82dee6e6a08aa260c0a484c9a7c4",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-11/apa-sync-live-raw-preflight-21-of-24-20261011.md"
+      ],
+      "size_bytes": 5801,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "aff8acf24cdf2a6bdd7a7a3030fd780ef0e3405e",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-11/apa-sync-live-socket-e2e-20261011.md"
+      ],
+      "size_bytes": 4480,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "d2a1b8f034b806eb0d5a04eed9d0a6ebf766b2b9",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-11/apa-sync-live-sqlite-history-recovery-20261011.md"
+      ],
+      "size_bytes": 16549,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "d67f2848c30b44a4497845212845d047576bba03",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-11/apa-sync-raw-probe-api-rejection-20261011.md"
+      ],
+      "size_bytes": 3112,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "0e6c7b4dac1a5d30717b4fffc79d23a71676c4b6",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-11/apa-sync-raw-slack-attribution-probe-20261011.md"
+      ],
+      "size_bytes": 4328,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "de415896956f4c561e568e05b31e8e5057727557",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-11/apa-sync-restart-dedupe-20261011.md"
+      ],
+      "size_bytes": 2906,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "e997d82f237948e35b48dca52a88451d30d99dcf",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-11/apa-sync-strict-schema-failures-20261011.md"
+      ],
+      "size_bytes": 4887,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "9c8411e36f4074ed561191233bf019364d7ccbd8",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "docs/research/apa-results/runs/2026-10-11/apa-sync-verified-bare-footer-unresolved-envelope-20261011.md"
+      ],
+      "size_bytes": 3605,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "94e630689d15742bee61e5d5525c193650cb30f4",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "tools/apa_controller/controller.py"
+      ],
+      "size_bytes": 36826,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "f84b1049c5cb70ac3bc730369b6efc90e3e086a5",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "tools/apa_controller/tests/test_controller.py"
+      ],
+      "size_bytes": 13499,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "ab6afefc4395a9cebff1d4e2ba1a3e6896b952cc",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "tools/apa_publisher/publisher.py"
+      ],
+      "size_bytes": 14803,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "1989c244ec10985edacb650917c156b4cf1df145",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "tools/apa_publisher/README.md"
+      ],
+      "size_bytes": 3316,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "1d595a6d68c9ff3ad567a2abe317f744497607ea",
+      "head_sha": "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "paths": [
+        "tools/apa_publisher/tests/test_publisher.py"
+      ],
+      "size_bytes": 5794,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "b353a50f5ef1bd899496ce8cfe9bc304f93fde28",
+      "head_sha": "743b791504eb92805a18edf78d20b958a6220710",
+      "branch_names": [
+        "chatgpt/project-revision-consolidation-20261006"
+      ],
+      "paths": [
+        "docs/CLOSED_LOOP_MIGRATION_BUNDLE_1.md"
+      ],
+      "size_bytes": 8420,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "e7a01ac524bd4e3beca9ebdb0d7ca6199184f8f7",
+      "head_sha": "743b791504eb92805a18edf78d20b958a6220710",
+      "branch_names": [
+        "chatgpt/project-revision-consolidation-20261006"
+      ],
+      "paths": [
+        "docs/closed_loop_migration_bundle_1.v1.json"
+      ],
+      "size_bytes": 4344,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "19ecfeb7a42635558524ebff5eb1b7d14dcf6365",
+      "head_sha": "743b791504eb92805a18edf78d20b958a6220710",
+      "branch_names": [
+        "chatgpt/project-revision-consolidation-20261006"
+      ],
+      "paths": [
+        "docs/project_capability_migration_matrix.v1.json"
+      ],
+      "size_bytes": 26323,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "8cacb50c81affde2675d5f8ceb33e710b20506b5",
+      "head_sha": "743b791504eb92805a18edf78d20b958a6220710",
+      "branch_names": [
+        "chatgpt/project-revision-consolidation-20261006"
+      ],
+      "paths": [
+        "docs/PROJECT_REVISION_CONSOLIDATION_2026-10-06.md"
+      ],
+      "size_bytes": 16518,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "fc70c3e7b7a42b3066209c2f1b301a6f5f99c97e",
+      "head_sha": "743b791504eb92805a18edf78d20b958a6220710",
+      "branch_names": [
+        "chatgpt/project-revision-consolidation-20261006"
+      ],
+      "paths": [
+        "docs/stage4_live_hardening_acceptance.v1.json"
+      ],
+      "size_bytes": 3822,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "ee7b7004720bb273c562f1b099c924faa3bb457e",
+      "head_sha": "743b791504eb92805a18edf78d20b958a6220710",
+      "branch_names": [
+        "chatgpt/project-revision-consolidation-20261006"
+      ],
+      "paths": [
+        "docs/STAGE4_LIVE_HARDENING_REGRESSION_CONTRACT.md"
+      ],
+      "size_bytes": 11792,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "f0d0956c2ab093e797f3a88540c43a0914cf6236",
+      "head_sha": "751fdfbc1be929f3da601e1094f74fed2f02b322",
+      "branch_names": [
+        "chatgpt/accelerator-floor-offline-20261009"
+      ],
+      "paths": [
+        ".github/workflows/archicad-contracts.yml"
+      ],
+      "size_bytes": 4262,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "9132d0c51218b4e85b2e779623c9479d47db0074",
+      "head_sha": "751fdfbc1be929f3da601e1094f74fed2f02b322",
+      "branch_names": [
+        "chatgpt/accelerator-floor-offline-20261009"
+      ],
+      "paths": [
+        "docs/archicad-accelerator-floor-offline-20261009.md"
+      ],
+      "size_bytes": 10078,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "416b47f9a0be068e80c1a0614eaf3b6699766d8d",
+      "head_sha": "751fdfbc1be929f3da601e1094f74fed2f02b322",
+      "branch_names": [
+        "chatgpt/accelerator-floor-offline-20261009"
+      ],
+      "paths": [
+        "scripts/archicad_accelerator_offline_benchmark.py"
+      ],
+      "size_bytes": 9184,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "a19575e9179c9d604e67c3f10f7afa4dead2a187",
+      "head_sha": "751fdfbc1be929f3da601e1094f74fed2f02b322",
+      "branch_names": [
+        "chatgpt/accelerator-floor-offline-20261009"
+      ],
+      "paths": [
+        "scripts/archicad_bim_graph.py"
+      ],
+      "size_bytes": 16574,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "4b376620af3a6c4926a1271385a93eddd348b481",
+      "head_sha": "751fdfbc1be929f3da601e1094f74fed2f02b322",
+      "branch_names": [
+        "chatgpt/accelerator-floor-offline-20261009"
+      ],
+      "paths": [
+        "scripts/archicad_typical_floor_graph.py"
+      ],
+      "size_bytes": 11847,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "33ad6753fb51e1d361e1b3862f6cb970d0206e36",
+      "head_sha": "751fdfbc1be929f3da601e1094f74fed2f02b322",
+      "branch_names": [
+        "chatgpt/accelerator-floor-offline-20261009"
+      ],
+      "paths": [
+        "tests/test_archicad_typical_floor_graph.py"
+      ],
+      "size_bytes": 7002,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "dc9c0dd868f4705ffc923da7934e4463d69f30f0",
+      "head_sha": "7bd2f7076933e31cdf6d24855ca703c0c6e67545",
+      "branch_names": [
+        "chatgpt/minimal-archicad-inventory"
+      ],
+      "paths": [
+        "archicad_inventory.py"
+      ],
+      "size_bytes": 12577,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "f605bbe83378e40d1797ede765afd45108b130de",
+      "head_sha": "81344925f06523bb60ee300f48af458ab0288938",
+      "branch_names": [
+        "chatgpt/archicad-modeling-standard-v1"
+      ],
+      "paths": [
+        "bim_qa.py"
+      ],
+      "size_bytes": 29115,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "9f62576b7a56a1a2628c4cbe39e9be361567460b",
+      "head_sha": "81344925f06523bb60ee300f48af458ab0288938",
+      "branch_names": [
+        "chatgpt/archicad-modeling-standard-v1"
+      ],
+      "paths": [
+        "docs/BIM_QA_VALIDATION.md"
+      ],
+      "size_bytes": 3005,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "2d966fd71fb564d9c48b2f07c2dd94eba12b0022",
+      "head_sha": "81344925f06523bb60ee300f48af458ab0288938",
+      "branch_names": [
+        "chatgpt/archicad-modeling-standard-v1"
+      ],
+      "paths": [
+        "docs/BIM_QA.md"
+      ],
+      "size_bytes": 9928,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "2acd9b4d302fa111a8464ac77303d610a07be8e9",
+      "head_sha": "81344925f06523bb60ee300f48af458ab0288938",
+      "branch_names": [
+        "chatgpt/archicad-modeling-standard-v1"
+      ],
+      "paths": [
+        "tests/test_bim_qa_policy_v11.py"
+      ],
+      "size_bytes": 10842,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "cc986973261a2da8cc3d7d967f5638aa0727dc63",
+      "head_sha": "81344925f06523bb60ee300f48af458ab0288938",
+      "branch_names": [
+        "chatgpt/archicad-modeling-standard-v1"
+      ],
+      "paths": [
+        "tests/test_story_tapir_adapters.py"
+      ],
+      "size_bytes": 4095,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "b59c2b513584baf6d86655357bab804df110c0c9",
+      "head_sha": "8881c46c222a7adaf6372941c185db4ac67598e1",
+      "branch_names": [
+        "work/planning-engine-v0"
+      ],
+      "paths": [
+        "docs/examples/planning_engine_v0/house-inputs.json"
+      ],
+      "size_bytes": 31324,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "e48b27d461c61695a52641b5382b5b37a410667e",
+      "head_sha": "8881c46c222a7adaf6372941c185db4ac67598e1",
+      "branch_names": [
+        "work/planning-engine-v0"
+      ],
+      "paths": [
+        "docs/PLANNING_ENGINE_V0.md"
+      ],
+      "size_bytes": 9896,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "f5fb373af396db44cb1e2345b7e48069901c5119",
+      "head_sha": "8881c46c222a7adaf6372941c185db4ac67598e1",
+      "branch_names": [
+        "work/planning-engine-v0"
+      ],
+      "paths": [
+        "examples/planning_house_v0.py"
+      ],
+      "size_bytes": 3185,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "f7f82b6c12cfadebd3715cea509b1122626f99f3",
+      "head_sha": "8881c46c222a7adaf6372941c185db4ac67598e1",
+      "branch_names": [
+        "work/planning-engine-v0"
+      ],
+      "paths": [
+        "planning_engine.py"
+      ],
+      "size_bytes": 48801,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "69307ea70b1221088699a715fccf03333c393b76",
+      "head_sha": "8881c46c222a7adaf6372941c185db4ac67598e1",
+      "branch_names": [
+        "work/planning-engine-v0"
+      ],
+      "paths": [
+        "tests/test_planning_engine.py"
+      ],
+      "size_bytes": 26841,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "bd163d28a8b34454206686c6f496eb422ff164f7",
+      "head_sha": "88cf532c70362b3f404aa5bae2c640527fca5616",
+      "branch_names": [
+        "chatgpt/working-first-development-rule"
+      ],
+      "paths": [
+        "docs/OPERATING_MODEL.md"
+      ],
+      "size_bytes": 5514,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "b56c1456438b1c1f901ba14632c1a59da6dc5562",
+      "head_sha": "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+      "branch_names": [
+        "research/apa-tn-gdl-create-01-native-probe-20261009"
+      ],
+      "paths": [
+        "docs/research/APA_TN-GDL-CREATE-01_BLOCKER1_AUDIT_2026-10-09.md"
+      ],
+      "size_bytes": 12571,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "9ef3fecf6df5e0419fc752b8879221b6ea2fbea5",
+      "head_sha": "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+      "branch_names": [
+        "research/apa-tn-gdl-create-01-native-probe-20261009"
+      ],
+      "paths": [
+        "docs/research/APA_TN-GDL-CREATE-01_CHECKPOINT_2026-10-09.md"
+      ],
+      "size_bytes": 6572,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "3a2dadc733fe693d6c6157b04c3bc2c315fd80cd",
+      "head_sha": "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+      "branch_names": [
+        "research/apa-tn-gdl-create-01-native-probe-20261009"
+      ],
+      "paths": [
+        "docs/research/patches/tapir-1.5.10-blocker1-readonly-diagnostic.patch"
+      ],
+      "size_bytes": 6883,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "1d764e440a7f997cc66f66ec407929e3f997d7b3",
+      "head_sha": "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+      "branch_names": [
+        "research/apa-tn-gdl-create-01-native-probe-20261009"
+      ],
+      "paths": [
+        "scripts/verify_apa_blocker1_patch.py"
+      ],
+      "size_bytes": 2422,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "931cddbbccec2ae965a68d4163a6bfffd72b2258",
+      "head_sha": "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+      "branch_names": [
+        "research/apa-tn-gdl-create-01-native-probe-20261009"
+      ],
+      "paths": [
+        "tests/test_apa_blocker1_patch.py"
+      ],
+      "size_bytes": 2207,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "7ea947365282826b44f28a02a41aa41dd4a851fc",
+      "head_sha": "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+      "branch_names": [
+        "arena/runtime-hardening-v1"
+      ],
+      "paths": [
+        "bimexec/docs/H1_ADAPTER_PARITY.md"
+      ],
+      "size_bytes": 10886,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "b7ad7319b0b8a71a112618b624b36c811dd13317",
+      "head_sha": "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+      "branch_names": [
+        "arena/runtime-hardening-v1"
+      ],
+      "paths": [
+        "bimexec/probes/ac29_contract.py"
+      ],
+      "size_bytes": 9072,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "082a8b6dc119f4e868923ef286f5fc04c0e97f52",
+      "head_sha": "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+      "branch_names": [
+        "arena/runtime-hardening-v1"
+      ],
+      "paths": [
+        "bimexec/probes/backends_v13.py"
+      ],
+      "size_bytes": 9670,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "1ff6f61c68a7326d61879f260a7a157bc424d252",
+      "head_sha": "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+      "branch_names": [
+        "arena/runtime-hardening-v1"
+      ],
+      "paths": [
+        "bimexec/probes/probe_t2_connections_v13.py"
+      ],
+      "size_bytes": 27067,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "5f23251f8d15b8fd4698011bf38feb8b6ec544ae",
+      "head_sha": "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+      "branch_names": [
+        "arena/runtime-hardening-v1"
+      ],
+      "paths": [
+        "bimexec/probes/probe_t2_live_v13.py"
+      ],
+      "size_bytes": 18354,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "f8e097ef0db7be56954ae93b9da370e7a582e779",
+      "head_sha": "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+      "branch_names": [
+        "arena/runtime-hardening-v1"
+      ],
+      "paths": [
+        "bimexec/reference/bimexec/adapters.py"
+      ],
+      "size_bytes": 18423,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "b556ce314e7492cf5eb5c884d48339f4a5b0dee2",
+      "head_sha": "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+      "branch_names": [
+        "arena/runtime-hardening-v1"
+      ],
+      "paths": [
+        "bimexec/reference/bimexec/tapir_raw.py"
+      ],
+      "size_bytes": 8206,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "2bbcfd6d3b15d5032f6c54f7b2337e1cc084f727",
+      "head_sha": "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+      "branch_names": [
+        "arena/runtime-hardening-v1"
+      ],
+      "paths": [
+        "bimexec/reference/README.md"
+      ],
+      "size_bytes": 14822,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "dc9eab88c54e542a6fd7e203c2d85d0477853063",
+      "head_sha": "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+      "branch_names": [
+        "arena/runtime-hardening-v1"
+      ],
+      "paths": [
+        "bimexec/tests/h1_evidence/py_compile.txt"
+      ],
+      "size_bytes": 208,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "0a07db1c29a547e1ce65efd25f4a929e25a82aaa",
+      "head_sha": "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+      "branch_names": [
+        "arena/runtime-hardening-v1"
+      ],
+      "paths": [
+        "bimexec/tests/h1_evidence/README.md"
+      ],
+      "size_bytes": 911,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "bf1ce76e3267c1da49cea441d37e838a502adc37",
+      "head_sha": "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+      "branch_names": [
+        "arena/runtime-hardening-v1"
+      ],
+      "paths": [
+        "bimexec/tests/h1_evidence/selftest_probes.txt"
+      ],
+      "size_bytes": 4226,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "9a9aedb8c77fc250e339e29940e76f5d293ed031",
+      "head_sha": "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+      "branch_names": [
+        "arena/runtime-hardening-v1"
+      ],
+      "paths": [
+        "bimexec/tests/h1_evidence/test_all.txt"
+      ],
+      "size_bytes": 13193,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "ec0e923d1b62d8d37657013250c590a768f150be",
+      "head_sha": "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+      "branch_names": [
+        "arena/runtime-hardening-v1"
+      ],
+      "paths": [
+        "bimexec/tests/h1_evidence/test_h1_contract.txt"
+      ],
+      "size_bytes": 1477,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "584323dcefc5f814c84c44f8b436e95f5cb6aed4",
+      "head_sha": "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+      "branch_names": [
+        "arena/runtime-hardening-v1"
+      ],
+      "paths": [
+        "bimexec/tests/h1_evidence/test_probe_v13.txt"
+      ],
+      "size_bytes": 195,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "2bfbb4393539c29a75239445764112cff8bfc27e",
+      "head_sha": "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+      "branch_names": [
+        "arena/runtime-hardening-v1"
+      ],
+      "paths": [
+        "bimexec/tests/h1_evidence/verification.json"
+      ],
+      "size_bytes": 8189,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "e288703d9ae51de5bd05fea95c9418ce95a03dfd",
+      "head_sha": "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+      "branch_names": [
+        "arena/runtime-hardening-v1"
+      ],
+      "paths": [
+        "bimexec/tests/README.md"
+      ],
+      "size_bytes": 3371,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "ee5b33c1f2797f3f5fed8c5e73895ace3e9897ca",
+      "head_sha": "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+      "branch_names": [
+        "arena/runtime-hardening-v1"
+      ],
+      "paths": [
+        "bimexec/tests/test_all.py"
+      ],
+      "size_bytes": 1208,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "b23462cb7a0dcd6c795dac3d2bbfb93eeb3b8832",
+      "head_sha": "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+      "branch_names": [
+        "arena/runtime-hardening-v1"
+      ],
+      "paths": [
+        "bimexec/tests/test_h1_contract.py"
+      ],
+      "size_bytes": 17924,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "fbba32707a6a160957bfc5ef009c14a0dfafebad",
+      "head_sha": "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+      "branch_names": [
+        "arena/runtime-hardening-v1"
+      ],
+      "paths": [
+        "bimexec/tests/test_probe_v13.py"
+      ],
+      "size_bytes": 4717,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "e0eb9444e60005b8e2ec6213bf02af3d4ff79925",
+      "head_sha": "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+      "branch_names": [
+        "feature/gpt-direct-bridge-20261002"
+      ],
+      "paths": [
+        "scripts/start_gpt_archicad_bridge.py"
+      ],
+      "size_bytes": 10049,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "7b1eddd51c6cd0eb5704400c5aba73332d86d2e9",
+      "head_sha": "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+      "branch_names": [
+        "arena/plinth-grade-runtime-audit-20260927"
+      ],
+      "paths": [
+        ".gitignore"
+      ],
+      "size_bytes": 783,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "ec49447ae039edfbc6c3ca20c170b731265ccab4",
+      "head_sha": "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+      "branch_names": [
+        "arena/plinth-grade-runtime-audit-20260927"
+      ],
+      "paths": [
+        "controller/app.py"
+      ],
+      "size_bytes": 7924,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "c4948d2f9ad75a0e80cc750d4afc0df31858ac68",
+      "head_sha": "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+      "branch_names": [
+        "arena/plinth-grade-runtime-audit-20260927"
+      ],
+      "paths": [
+        "controller/client.py"
+      ],
+      "size_bytes": 2798,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "192f6e98418e4e96427d00fec061fa24c7578aa5",
+      "head_sha": "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+      "branch_names": [
+        "arena/plinth-grade-runtime-audit-20260927"
+      ],
+      "paths": [
+        "launcher.py"
+      ],
+      "size_bytes": 4500,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "db9c4ab66a3e629daefeffd1aff53d2f9263d101",
+      "head_sha": "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+      "branch_names": [
+        "arena/plinth-grade-runtime-audit-20260927"
+      ],
+      "paths": [
+        "palette/RFIX/Safe_BIM_Palette.html"
+      ],
+      "size_bytes": 2997,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "e977d4ac8c5c1d4cfe30c50d5f4076130d38bbe5",
+      "head_sha": "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+      "branch_names": [
+        "arena/plinth-grade-runtime-audit-20260927"
+      ],
+      "paths": [
+        "safe_bim_ipc.py"
+      ],
+      "size_bytes": 3074,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "ff93e3d18f08c10bd67e75d6c69f5c48961dae66",
+      "head_sha": "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+      "branch_names": [
+        "arena/plinth-grade-runtime-audit-20260927"
+      ],
+      "paths": [
+        "safe_bim_layer.py"
+      ],
+      "size_bytes": 29190,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "7979386f0db9fd88bc3596153921631c3c1529ce",
+      "head_sha": "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+      "branch_names": [
+        "arena/plinth-grade-runtime-audit-20260927"
+      ],
+      "paths": [
+        "safe_bim_operations.py"
+      ],
+      "size_bytes": 4630,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "30723e5fbf1688f880913f497c39d1790d7f300a",
+      "head_sha": "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+      "branch_names": [
+        "arena/plinth-grade-runtime-audit-20260927"
+      ],
+      "paths": [
+        "safe_bim_runtime.py"
+      ],
+      "size_bytes": 18568,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "e4328bf8b4a6a6c0eb77d06e9d671173809a290e",
+      "head_sha": "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+      "branch_names": [
+        "arena/plinth-grade-runtime-audit-20260927"
+      ],
+      "paths": [
+        "safe_bim_service.py"
+      ],
+      "size_bytes": 2242,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "6401fcb34a11effe69aa49a68c2e720214c46b1d",
+      "head_sha": "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+      "branch_names": [
+        "arena/plinth-grade-runtime-audit-20260927"
+      ],
+      "paths": [
+        "test_controller.py"
+      ],
+      "size_bytes": 3841,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "c4c07b7c63ca54790881049951fa9b7a96d641f0",
+      "head_sha": "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+      "branch_names": [
+        "arena/plinth-grade-runtime-audit-20260927"
+      ],
+      "paths": [
+        "test_resumable_executor.py"
+      ],
+      "size_bytes": 8874,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "bcd343462214ec3c09fdb5b70a6fcd98a72a6e3c",
+      "head_sha": "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+      "branch_names": [
+        "arena/plinth-grade-runtime-audit-20260927"
+      ],
+      "paths": [
+        "test_safe_bim_layer_regressions.py"
+      ],
+      "size_bytes": 4625,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "be259da413ff4b7c32912ad5c567217d0a291e73",
+      "head_sha": "ad0c0ed127c068d2a7446f3bf03a31f7584decad",
+      "branch_names": [
+        "work/stage4-performance-pass"
+      ],
+      "paths": [
+        "closed_loop/live_wall.py"
+      ],
+      "size_bytes": 23942,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "2f44fb01ed2a2ac380b8d577e36526f4ec2f3a5f",
+      "head_sha": "ad0c0ed127c068d2a7446f3bf03a31f7584decad",
+      "branch_names": [
+        "work/stage4-performance-pass"
+      ],
+      "paths": [
+        "docs/CURRENT_STATUS.md"
+      ],
+      "size_bytes": 7013,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "1e8633d5fdf3216a92026408f1c0c5439d202d1c",
+      "head_sha": "ad0c0ed127c068d2a7446f3bf03a31f7584decad",
+      "branch_names": [
+        "work/stage4-performance-pass"
+      ],
+      "paths": [
+        "docs/INDEX.md"
+      ],
+      "size_bytes": 3056,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "af662b0e38544e8a38485ba9a427ee2532f344ed",
+      "head_sha": "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+      "branch_names": [
+        "feature/apa-sync-fence-shapes-20261011"
+      ],
+      "paths": [
+        "tests/test_apa_slack_sync.py"
+      ],
+      "size_bytes": 13454,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "62c36deb2b7dfb0fdb329754b013db5710f3ad2d",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/CURRENT"
+      ],
+      "size_bytes": 5,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "c567cf6d07dc8dd0907014e9ddf0ad6b1b3bff39",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.4/AUDIT_v2.4.json"
+      ],
+      "size_bytes": 1634,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "c92991039091b9159f57affebfe83e38f00bb018",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.4/BRAAS_ROOF_DETAILS_SOURCE_VERIFY_v2.4.json"
+      ],
+      "size_bytes": 356,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "349e7e74080c0cc7f0a434fb1bc615e106744b9e",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.4/detail-machine-v2.4-systematized.tar.gz"
+      ],
+      "size_bytes": 464503,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "ad22ef41815f5c7ff05c804a36b3c765b53b8ee6",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.4/manifest_v2.4.json"
+      ],
+      "size_bytes": 7682,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "41f2274ce1897cc4c558e0addb65f11f99493795",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.4/ORIGINAL_PACKAGE_SHA256.txt"
+      ],
+      "size_bytes": 341,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "1d6a01563541dd6bf40fcb1f277c671856870727",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.4/README_v2.4.md"
+      ],
+      "size_bytes": 1650,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "e4e1a129fe1383dd2dc2c4c68014d23654eb7095",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.4/RESTORE.md"
+      ],
+      "size_bytes": 740,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "5b2fad5bd6ff0a1cd02d4350ef3fa2332bf2c364",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.4/SUMMARY_v2.4.json"
+      ],
+      "size_bytes": 589,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "809929972cdf0a0b762ed24870ad246134e30965",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.4/SYSTEMATIZED_ARCHIVE_SHA256.txt"
+      ],
+      "size_bytes": 105,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "c63a642c1c534061cb1c3da7140ced3f94e03cdf",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.5/AUDIT_v2.5.json"
+      ],
+      "size_bytes": 2021,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "1649b4f2262d1742f90bc6dcf3b448aa0b1f0432",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.5/BRAAS_ROOF_TECH_SOURCE_VERIFY_v2.5.json"
+      ],
+      "size_bytes": 335,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "5691cdfd8a8445371232deed22b7fbc208a235aa",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.5/detail-machine-v2.5-systematized.tar.gz"
+      ],
+      "size_bytes": 320365,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "87b9584bd023e03d58e6f27f2a7e40ffd40619f2",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.5/manifest_v2.5.json"
+      ],
+      "size_bytes": 4924,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "87be83d3398a70621b83aa73b3ec034e18c269cd",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.5/ORIGINAL_PACKAGE_SHA256.txt"
+      ],
+      "size_bytes": 341,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "409bf1a14373a17f90f138564c863e7078e5427e",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.5/README_v2.5.md"
+      ],
+      "size_bytes": 2171,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "76de47741aed17278a5c7e7632cbfd837c180e33",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.5/RESTORE.md"
+      ],
+      "size_bytes": 610,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "ec70a756396e31e2264f43161f9bbc25f32cc8ff",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.5/SUMMARY_v2.5.json"
+      ],
+      "size_bytes": 605,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "7852e09cbbbfb75238ea9d49dee79dca43e54f34",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.5/SYSTEMATIZED_ARCHIVE_SHA256.txt"
+      ],
+      "size_bytes": 115,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "a198d605076892e8497461568a9f5f21fce8ee40",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.6/AUDIT_v2.6.json"
+      ],
+      "size_bytes": 2139,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "65a892a9e4f55fae340b4141f327a711cf0773c6",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.6/detail-machine-v2.6-systematized.tar.gz"
+      ],
+      "size_bytes": 1092462,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "843d85234649f9f2c039da46d6910d47a5097d83",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.6/manifest_v2.6.json"
+      ],
+      "size_bytes": 807,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "c9c60567c77e24a36d810096b6da7a7ff881fba9",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.6/ORIGINAL_PACKAGE_SHA256.txt"
+      ],
+      "size_bytes": 341,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "2a8a5a953768e0948d8f4ba797e2312563be9e6c",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.6/POROTHERM_LOWRISE_SOURCE_VERIFY_v2.6.json"
+      ],
+      "size_bytes": 506,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "51fcf8805530dbcb37ea10916befed4e0ba7c599",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.6/README_v2.6.md"
+      ],
+      "size_bytes": 2312,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "ce03262c8759162eac1d855c4b9ea0a9654e2414",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.6/RESTORE.md"
+      ],
+      "size_bytes": 632,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "41a36a3a05a8e7830455a2e66aed21dd7bafe5fd",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.6/SUMMARY_v2.6.json"
+      ],
+      "size_bytes": 600,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "18681a2da7a4e95dd1b104924f8e956ea444815b",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/releases/v2.6/SYSTEMATIZED_ARCHIVE_SHA256.txt"
+      ],
+      "size_bytes": 105,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "84b1d8d1a00f1a10ca0239608efe8cccd79234c6",
+      "head_sha": "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1",
+      "branch_names": [
+        "chatgpt/tapir-1510-offline-preflight-20261009"
+      ],
+      "paths": [
+        ".github/workflows/archicad-contracts.yml"
+      ],
+      "size_bytes": 3284,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "e82d8c9d80f0725f9083056a18eafe97f39d7856",
+      "head_sha": "bdd38ef457ac1c56990f026aefecf14f623de4f8",
+      "branch_names": [
+        "archicad-capability-registry"
+      ],
+      "paths": [
+        "docs/ARCHICAD_CAPABILITY_REGISTRY.md"
+      ],
+      "size_bytes": 7594,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "b5776adfa870904f9f9f925744c389342388678e",
+      "head_sha": "bdd38ef457ac1c56990f026aefecf14f623de4f8",
+      "branch_names": [
+        "archicad-capability-registry"
+      ],
+      "paths": [
+        "docs/ARCHICAD_CAPABILITY_ROADMAP.md"
+      ],
+      "size_bytes": 4151,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "99f3e85c3f47e790b8f9204311a8cd0dd1e3bcae",
+      "head_sha": "bdd38ef457ac1c56990f026aefecf14f623de4f8",
+      "branch_names": [
+        "archicad-capability-registry"
+      ],
+      "paths": [
+        "docs/ARCHICAD_MODELING_STANDARD.md"
+      ],
+      "size_bytes": 3389,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "91b5e350f83000af0a75d790a3b73b9a6e4889e2",
+      "head_sha": "bdd38ef457ac1c56990f026aefecf14f623de4f8",
+      "branch_names": [
+        "archicad-capability-registry"
+      ],
+      "paths": [
+        "tests/smoke/basic_slab_favorite.py"
+      ],
+      "size_bytes": 3933,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "a467cfbb993983f30e7cb9161489282aa13cfef2",
+      "head_sha": "bdd38ef457ac1c56990f026aefecf14f623de4f8",
+      "branch_names": [
+        "archicad-capability-registry"
+      ],
+      "paths": [
+        "tests/smoke/native_window_door_continuous_wall.py"
+      ],
+      "size_bytes": 5664,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "133ddd1bff74e6b40e0d033c684059f9ca15e855",
+      "head_sha": "bf860e1557b9d54318c022191cdc1cef4a84e2d7",
+      "branch_names": [
+        "docs/chat-first-work-minimal"
+      ],
+      "paths": [
+        ".github/pull_request_template.md"
+      ],
+      "size_bytes": 925,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "56c70dff50119b58a440142b40d7c946dfaae37e",
+      "head_sha": "bf860e1557b9d54318c022191cdc1cef4a84e2d7",
+      "branch_names": [
+        "docs/chat-first-work-minimal"
+      ],
+      "paths": [
+        "docs/OPERATING_MODEL.md"
+      ],
+      "size_bytes": 3594,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "3b7fd448be2c855773a73dc11d7aa6c803e91522",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/00_master/project_profile_v0_1.schema.json"
+      ],
+      "size_bytes": 5653,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "35266227191d7151d456460c81113e874294d9d4",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/00_master/README.md"
+      ],
+      "size_bytes": 45,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "95062329914312a5518d811692b91affdec89720",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/00_master/RESEARCH_MASTER_AUDIT.md"
+      ],
+      "size_bytes": 2926,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "efab83f840c6b9f8e5d7800b409e14c607b645cf",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/01_missing_data_audit/MISSING_DATA_AUDIT_PASS_01_10.md"
+      ],
+      "size_bytes": 13883,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "b34813be7d53418f6fc6985a4fb147106999c934",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/01_missing_data_audit/MISSING_DATA_AUDIT_PASS_11_20.md"
+      ],
+      "size_bytes": 11781,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "c6a55cd4eadaabc88b230411e14e0cda04fe9be8",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/01_missing_data_audit/README.md"
+      ],
+      "size_bytes": 48,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "6530a05d8d05aac72a94b2a0341548cea450425e",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/02_tapir_159_delta/README.md"
+      ],
+      "size_bytes": 43,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "d317cb46a0c856bc27fef744892b37ae6c366bd2",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/02_tapir_159_delta/TAPIR_159_DELTA.md"
+      ],
+      "size_bytes": 5562,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "b2d681e76e4bc59899a4e08a5b6d74b3a77d1707",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/03_archicad_api_contracts/COMPOSITE_STRUCTURES_RESEARCH_PASSES_01_18.md"
+      ],
+      "size_bytes": 6979,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "c3059749948497f015e0cd23dd00e7f611a7d25e",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/03_archicad_api_contracts/FLAT_ROOF_PARAPET_RESEARCH_PASSES_01_15.md"
+      ],
+      "size_bytes": 5418,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "618a7040cb1c0bec5767a3e304dafa54583e91cb",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/03_archicad_api_contracts/README.md"
+      ],
+      "size_bytes": 47,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "b61d2c34a877e7ffba24fff1825f216b7be67513",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/03_archicad_api_contracts/SINGLE_ELEMENT_GABLE_ROOF_RESEARCH_PASSES_01_20.md"
+      ],
+      "size_bytes": 19084,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "babb7ef77dac15dff17ae0f9e5f6477ff9711c37",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/04_safe_bim_semantics/assistant_recipe_envelope_v0_1.schema.json"
+      ],
+      "size_bytes": 1866,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "83cd1d8d25b86f18967fdc471f85196eac71a610",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/04_safe_bim_semantics/github_execution_job_v0_1.schema.json"
+      ],
+      "size_bytes": 2610,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "669b0c633d0b45bc17f0c65f421337a8c8cb756e",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/04_safe_bim_semantics/project_context_snapshot_v0_1.schema.json"
+      ],
+      "size_bytes": 3549,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "2e5b47e484b79c987d4937dca79ba425987b8967",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/04_safe_bim_semantics/README.md"
+      ],
+      "size_bytes": 44,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "186a483102b271ab988357f0f7c5a6071321829c",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/05_expansion_candidates/AI_RUNTIME_AND_DEV_ACCELERATION.md"
+      ],
+      "size_bytes": 8034,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "ea41d8a4f4726318abf0e9ae67e59e5f7d5349e5",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/05_expansion_candidates/CAPABILITY_EXPANSION_MATRIX.md"
+      ],
+      "size_bytes": 7106,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "d6f4bca6a7680a4dcd42fd0cb6793ad29bd2ec36",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/05_expansion_candidates/PARAMETRIC_GDL_LIBRARY_FACTORY.md"
+      ],
+      "size_bytes": 8025,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "cc0d22aa098b552b1afcec5758e13d3f72892042",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/05_expansion_candidates/PROJECT_ACCELERATION_PASSES_01_20.md"
+      ],
+      "size_bytes": 16531,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "f2c35ddef6fd366645058bb88b6ed11e0502cff6",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/05_expansion_candidates/PROJECT_ACCELERATION_PASSES_31_40.md"
+      ],
+      "size_bytes": 8467,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "44300f941ad61d64f13da8ef9ed3168901778b07",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/05_expansion_candidates/PROJECT_ACCELERATION_PASSES_41_60.md"
+      ],
+      "size_bytes": 16312,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "828f3d239b5152e0d151f65a80c6cfafa404f011",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/05_expansion_candidates/PROJECT_ACCELERATION_PASSES_61_80.md"
+      ],
+      "size_bytes": 14613,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "467dae92524de337ca600a847cc8da35b63c4894",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/05_expansion_candidates/PROJECT_ACCELERATION_PASSES_81_90.md"
+      ],
+      "size_bytes": 9041,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "34cf79e0b9d672bdfa315ce71ed12de1b6648b05",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/05_expansion_candidates/PROJECT_CONTEXT_BRIDGE_PASSES_131_145.md"
+      ],
+      "size_bytes": 8209,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "808e88d31d8872bf11a12dc22eb1e0b87c185dcd",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/05_expansion_candidates/PROJECT_CONTEXT_BRIDGE_PASSES_146_155.md"
+      ],
+      "size_bytes": 6471,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "3ef9483d980c907713e09849364049688014e2fa",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/05_expansion_candidates/README.md"
+      ],
+      "size_bytes": 45,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "891ec53147fea783f140012c9f013e01a41d693d",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/05_expansion_candidates/TRANSPORT_SYNC_PASSES_181_190.md"
+      ],
+      "size_bytes": 5467,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "262d2f525851445cc9c4064bc6376e568dc97dc8",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/06_integration_audits/AI_RESOURCE_EFFICIENT_ARCHITECTURE.md"
+      ],
+      "size_bytes": 14713,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "6ea02533f60d229dfda9f2ce0c5b0f19b7e74201",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/06_integration_audits/DEVELOPMENT_ACCELERATION_AUDIT.md"
+      ],
+      "size_bytes": 11713,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "3f420ca447336c85bd9d9c3b51301b144b1dc844",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/06_integration_audits/DIRECT_GITHUB_EXECUTION_PASSES_161_170.md"
+      ],
+      "size_bytes": 6021,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "93df81f53a6694a492274088e64ac01b002f8108",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/06_integration_audits/DIRECT_GITHUB_EXECUTION_PASSES_171_176.md"
+      ],
+      "size_bytes": 3712,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "60b36e310430417462f236c04713ad8ddd4477d4",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/06_integration_audits/DIRECT_GITHUB_EXECUTION_PASSES_177_180.md"
+      ],
+      "size_bytes": 3061,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "f0c067c1d86bbdfb5efb28093fe8d574136480d1",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/06_integration_audits/EXTERNAL_TECHNOLOGY_INTEGRATION_AUDIT.md"
+      ],
+      "size_bytes": 8223,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "c85583dd42ed45b4e766f92f50c1981441ff1094",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/06_integration_audits/INTEGRATION_BACKLOG.md"
+      ],
+      "size_bytes": 4490,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "925e32aa755c31df1f28fc3632cdb0b73de1cd85",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/06_integration_audits/INTERMEDIATE_AUDIT_DIRECT_GITHUB_EXECUTION_AFTER_170.md"
+      ],
+      "size_bytes": 2629,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "34fc01ddb893564bbf0be58cebc5771dcee388cd",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/06_integration_audits/INTERMEDIATE_AUDIT_PROJECT_CONTEXT_BRIDGE_AFTER_145.md"
+      ],
+      "size_bytes": 2427,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "fe3a69c80e062a39a9510047de5b0915a959f441",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/06_integration_audits/INTERMEDIATE_AUDIT_TRANSPORT_SYNC_AFTER_190.md"
+      ],
+      "size_bytes": 3317,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "66bdc57aff059310735a4979f036df0ddd1a0194",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/06_integration_audits/INTERMEDIATE_AUDIT_UI_SANDBOX_AFTER_110.md"
+      ],
+      "size_bytes": 6978,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "ddd847bd53ebd9b4953dc8f4e80bd402a2ad4a94",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/06_integration_audits/PREFINAL_PROJECT_CONTEXT_BRIDGE_AUDIT_AFTER_155.md"
+      ],
+      "size_bytes": 4383,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "aad08bb1ef0a592bc3d91a61ac578241378b3139",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/06_integration_audits/PROJECT_ACCELERATION_FOLLOWUP_PASSES_21_30.md"
+      ],
+      "size_bytes": 10732,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "8137225a38a836e4dfaccfaa71d32b2f99839564",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/06_integration_audits/PROJECT_CONTEXT_BRIDGE_ARCHITECTURE.md"
+      ],
+      "size_bytes": 6620,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "720a269b465495a621af89068ad8116f8efc33e6",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/06_integration_audits/PROJECT_CONTEXT_BRIDGE_PASSES_156_160.md"
+      ],
+      "size_bytes": 4597,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "325c7f8c2e3fe14602c77635c7b02103133a8af2",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/06_integration_audits/README.md"
+      ],
+      "size_bytes": 43,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "afafb2394cd34c0673172cbace19becc5105cd52",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/06_integration_audits/SAFE_BIM_SANDBOX_VOICE_HISTORY_PASSES_111_120.md"
+      ],
+      "size_bytes": 11960,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "536ba1643378ab19f939bde01c46ba534e9fa7a1",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/06_integration_audits/SAFE_BIM_SYNTHESIS_PASSES_121_130.md"
+      ],
+      "size_bytes": 10933,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "1428796bea4a3bc818dcba7f7bca48e8fbe4ad63",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/06_integration_audits/SAFE_BIM_UI_SANDBOX_HISTORY_QA_PASSES_91_110.md"
+      ],
+      "size_bytes": 19287,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "d78a569450249dac7ddca78560918aa5974e9488",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/06_integration_audits/SINGLE_ELEMENT_GABLE_ROOF_INTEGRATION_AUDIT.md"
+      ],
+      "size_bytes": 8936,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "410c5583aef4707c82d4559f317fccfa56f7de55",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/06_integration_audits/TRANSPORT_SYNC_PASSES_191_196.md"
+      ],
+      "size_bytes": 5736,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "a13ac15db9476f91cecf346e69621903b8c022f3",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/06_integration_audits/TRANSPORT_SYNC_PASSES_197_200.md"
+      ],
+      "size_bytes": 4419,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "9838df4fb5bd2f785e2dde6a2af58ce40ccc2c70",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/06_integration_audits/WALL_COMPOSITE_THICKNESS_FAILURE_AUDIT.md"
+      ],
+      "size_bytes": 4393,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "dbc6abc9b83549f8dd352683bc407662c50749b4",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/07_live_probe_backlog/NEXT_CONTROLLED_PROBES.md"
+      ],
+      "size_bytes": 4226,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "bb296ebfca02f5d9c884d1f7842fb68f92f086e0",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/07_live_probe_backlog/README.md"
+      ],
+      "size_bytes": 48,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "a87c575e0c97b033ad9b0fe5e99a7b7d1fb84de8",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/08_sources_evidence/README.md"
+      ],
+      "size_bytes": 46,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "805777be30c9cc8a352c7be68ee8057ca6ad4f42",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/08_sources_evidence/SOURCE_MANIFEST.md"
+      ],
+      "size_bytes": 4269,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "61cf0d9eb54d1b01bf7cdb3817e349a69441b224",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/09_final_audit/FINAL_ASSEMBLY_AUDIT_UI_SANDBOX_QA_AFTER_130.md"
+      ],
+      "size_bytes": 14928,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "f69d887e1033a99f31fcb4799cd019e8ee42bde4",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/09_final_audit/FINAL_DIRECT_GITHUB_EXECUTION_AUDIT_AFTER_180.md"
+      ],
+      "size_bytes": 11177,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "dfbf70aff0844c1c2da7529ce11d93cc42075cab",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/09_final_audit/FINAL_PASSES_41_50.md"
+      ],
+      "size_bytes": 10047,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "208e807425f698b93838552ef15ed5ba53491ef0",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/09_final_audit/FINAL_PROJECT_CONTEXT_BRIDGE_AUDIT_AFTER_160.md"
+      ],
+      "size_bytes": 16271,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "6935db635db7f1cba2581ccc87feb3a606b3adb1",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/09_final_audit/FINAL_RESEARCH_AUDIT_V2_AFTER_PASS_90.md"
+      ],
+      "size_bytes": 15942,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "d48061addaf4a636363118ac9246cd932038ef39",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/09_final_audit/FINAL_RESEARCH_AUDIT.md"
+      ],
+      "size_bytes": 14768,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "4f1b24559ca10b55e60f017bb0a4b7eb2895e453",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/09_final_audit/FINAL_TRANSPORT_SYNC_OUT_OF_BOX_AUDIT_AFTER_200.md"
+      ],
+      "size_bytes": 11285,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "ed7721fbc6e117eb0c62ef6b7bf5aa846bba273d",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/09_final_audit/GABLE_ROOF_FINAL_AUDIT_ADDENDUM.md"
+      ],
+      "size_bytes": 1886,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "2a5ea49e272dfd0578c39314d43aedf40b93e70c",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/09_final_audit/PREFINAL_AUDIT_AFTER_PASS_40.md"
+      ],
+      "size_bytes": 7798,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "0812734ebb9dfe515837e8a3ba353befeebb7363",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/09_final_audit/PREFINAL_AUDIT_AFTER_PASS_80.md"
+      ],
+      "size_bytes": 8703,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "dca5c176d00b066f4c2cd95bd699abf02a24e0bc",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/09_final_audit/PREFINAL_DIRECT_GITHUB_EXECUTION_AUDIT_AFTER_176.md"
+      ],
+      "size_bytes": 2908,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "5c226616a3947c37261bbea478ef65504ec39735",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/09_final_audit/PREFINAL_TRANSPORT_SYNC_AUDIT_AFTER_196.md"
+      ],
+      "size_bytes": 3954,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "0ada800701d333a61617e02540691607584451a6",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/09_final_audit/PREFINAL_UI_SANDBOX_QA_AUDIT_AFTER_120.md"
+      ],
+      "size_bytes": 6982,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "333aee81f759c29ffa23b37d9c48eeac6a1da384",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/09_final_audit/README.md"
+      ],
+      "size_bytes": 41,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "128d715baf6f11a1abad5f35d7819f6e06b1e63b",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/09_final_audit/ROOF_PARAPET_COMPOSITE_FINAL_AUDIT_ADDENDUM.md"
+      ],
+      "size_bytes": 4834,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "24a5d23759dd94c1cd5f5c6c083315457f4a2dfe",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "paths": [
+        "research/archicad29-tapir159/README.md"
+      ],
+      "size_bytes": 160,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "137649a80874b991dcdc80112a1a283a499d7174",
+      "head_sha": "c6ab4749e8784cc65170167d166daa6cc219a931",
+      "branch_names": [
+        "arena/fix-house-offline-audit-f7d38af",
+        "arena/tapir159-compat-geometry-c6ab474"
+      ],
+      "paths": [
+        "safe_bim_house_primitives.py"
+      ],
+      "size_bytes": 38386,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "50bc663496c89d71ab8467e4a64b65f799301e96",
+      "head_sha": "c6ab4749e8784cc65170167d166daa6cc219a931",
+      "branch_names": [
+        "arena/fix-house-offline-audit-f7d38af",
+        "arena/tapir159-compat-geometry-c6ab474"
+      ],
+      "paths": [
+        "tests_house_primitives/test_house_primitives.py"
+      ],
+      "size_bytes": 21379,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "bbf8530c1f97fd8ac744e4408e5af59b5307c60c",
+      "head_sha": "d3c0dd51ba12eb6112822376b3aa05d3077b7afc",
+      "branch_names": [
+        "chatgpt/mailbox-graph-host-integration-20261009"
+      ],
+      "paths": [
+        ".github/workflows/archicad-contracts.yml"
+      ],
+      "size_bytes": 3235,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "570456497cf999ec86be7990b47b4a6b2629bfe5",
+      "head_sha": "d3c0dd51ba12eb6112822376b3aa05d3077b7afc",
+      "branch_names": [
+        "chatgpt/mailbox-graph-host-integration-20261009"
+      ],
+      "paths": [
+        "scripts/archicad_bim_graph.py"
+      ],
+      "size_bytes": 13243,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "b6b54f7bc89fddb2531141264e29c06fbbaae68c",
+      "head_sha": "d3c0dd51ba12eb6112822376b3aa05d3077b7afc",
+      "branch_names": [
+        "chatgpt/mailbox-graph-host-integration-20261009"
+      ],
+      "paths": [
+        "tests/test_archicad_bim_graph.py"
+      ],
+      "size_bytes": 9511,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "29324c44860c909614e8fcdd399eeb77ebd9f936",
+      "head_sha": "d3c0dd51ba12eb6112822376b3aa05d3077b7afc",
+      "branch_names": [
+        "chatgpt/mailbox-graph-host-integration-20261009"
+      ],
+      "paths": [
+        "tests/test_archicad_mailbox_graph_adapter.py"
+      ],
+      "size_bytes": 10663,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "3a8499db715097e5d7576409d01616719d0dce6c",
+      "head_sha": "d3c0dd51ba12eb6112822376b3aa05d3077b7afc",
+      "branch_names": [
+        "chatgpt/mailbox-graph-host-integration-20261009"
+      ],
+      "paths": [
+        "tests/test_archicad_wall_host_integration.py"
+      ],
+      "size_bytes": 6911,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "633ccf5b640fa038c400c0f6fe5647104199bfaa",
+      "head_sha": "d6ed3b071c1e7d17b8d819377e1984c80dd9ed33",
+      "branch_names": [
+        "work/stage2-orchestrator-skeleton"
+      ],
+      "paths": [
+        "closed_loop/models.py"
+      ],
+      "size_bytes": 8027,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "d4679bfb274838963b7f3df483597535ca0618fc",
+      "head_sha": "d6ed3b071c1e7d17b8d819377e1984c80dd9ed33",
+      "branch_names": [
+        "work/stage2-orchestrator-skeleton"
+      ],
+      "paths": [
+        "closed_loop/orchestrator.py"
+      ],
+      "size_bytes": 14371,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "ed1ee819cacd9fe5060b6ce899fb02804bcf475b",
+      "head_sha": "e2083582485933af83feea802c379f03ad947217",
+      "branch_names": [
+        "feature/apa-sync-slack-native-footer-20261011"
+      ],
+      "paths": [
+        "scripts/apa_sync/inspect_raw_envelopes.py"
+      ],
+      "size_bytes": 6876,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "639eca0e741e56be66c3c9b8bf4286b1f68accde",
+      "head_sha": "e2083582485933af83feea802c379f03ad947217",
+      "branch_names": [
+        "feature/apa-sync-slack-native-footer-20261011"
+      ],
+      "paths": [
+        "tests/test_apa_slack_sync.py"
+      ],
+      "size_bytes": 23959,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "8fa51e1c5d7da75611a5866b0b63d759940ae31b",
+      "head_sha": "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+      "branch_names": [
+        "feature/apa-sync-live-readiness-20261010"
+      ],
+      "paths": [
+        "tests/test_apa_slack_sync.py"
+      ],
+      "size_bytes": 10133,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "992477628c1ee75e6d6affd8636ec27b7de3851b",
+      "head_sha": "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+      "branch_names": [
+        "feature/apa-highlevel-whole-model-20261011"
+      ],
+      "paths": [
+        ".github/workflows/archicad-contracts.yml"
+      ],
+      "size_bytes": 4312,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "0ebe4e7b0efd526654a90512d537ce0b9c5cfcfe",
+      "head_sha": "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+      "branch_names": [
+        "feature/apa-highlevel-whole-model-20261011"
+      ],
+      "paths": [
+        "docs/APA_HIGHLEVEL_EXECUTION.md"
+      ],
+      "size_bytes": 4919,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "d953f4b073e1ad0e612d5bdcdbdc4f9426a95688",
+      "head_sha": "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+      "branch_names": [
+        "feature/apa-highlevel-whole-model-20261011"
+      ],
+      "paths": [
+        "examples/accelerator/apa-test-house-01.intent.json"
+      ],
+      "size_bytes": 734,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "c3015bd40c7b4e7baf454b286d92771f693a2691",
+      "head_sha": "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+      "branch_names": [
+        "feature/apa-highlevel-whole-model-20261011"
+      ],
+      "paths": [
+        "examples/accelerator/building-shell.intent.json"
+      ],
+      "size_bytes": 738,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "04b08ee0cb8267f8e035158c419d99b15f13c62b",
+      "head_sha": "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+      "branch_names": [
+        "feature/apa-highlevel-whole-model-20261011"
+      ],
+      "paths": [
+        "scripts/archicad_building_shell.py"
+      ],
+      "size_bytes": 8396,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "2017fbc43a3bebe11d65cd1786b0ae15a94acaea",
+      "head_sha": "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+      "branch_names": [
+        "feature/apa-highlevel-whole-model-20261011"
+      ],
+      "paths": [
+        "scripts/archicad_project_accelerator.py"
+      ],
+      "size_bytes": 19175,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "322f610b08c5434da0db1897f15f474665a40b8a",
+      "head_sha": "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+      "branch_names": [
+        "feature/apa-highlevel-whole-model-20261011"
+      ],
+      "paths": [
+        "scripts/archicad_scene_run.py"
+      ],
+      "size_bytes": 26486,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "82a4408599e12dcf2afbef24b1157c408aed1b21",
+      "head_sha": "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+      "branch_names": [
+        "feature/apa-highlevel-whole-model-20261011"
+      ],
+      "paths": [
+        "scripts/diagnose_apa_partial_scene.py"
+      ],
+      "size_bytes": 5089,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "281e048edc06fb5499a7ae540820dc9309509d52",
+      "head_sha": "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+      "branch_names": [
+        "feature/apa-highlevel-whole-model-20261011"
+      ],
+      "paths": [
+        "scripts/run_apa_test_house_01.ps1"
+      ],
+      "size_bytes": 3503,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "1d3dac1d52e71b833b5b53dca459f02878fba37b",
+      "head_sha": "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+      "branch_names": [
+        "feature/apa-highlevel-whole-model-20261011"
+      ],
+      "paths": [
+        "tests/test_archicad_building_shell_integration.py"
+      ],
+      "size_bytes": 8688,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "e70ef1ddd8c33bae64e55d9c396e8c77808a783f",
+      "head_sha": "ebe46536c85111248234235c8e7ac8cbd2bffac5",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.2-20261006"
+      ],
+      "paths": [
+        "knowledge/detail-machine/CURRENT"
+      ],
+      "size_bytes": 5,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "2800cff55979de1951bfa6778714ad2220bafed1",
+      "head_sha": "ee3d1a8e7d7d2bd7bd8ee3bc27cdac98c7f8decd",
+      "branch_names": [
+        "research/apa-archicad29-independent-audit-20261010"
+      ],
+      "paths": [
+        "AGENTS.md"
+      ],
+      "size_bytes": 4141,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "72f162566ead9942646978afc9b92db872182122",
+      "head_sha": "ee3d1a8e7d7d2bd7bd8ee3bc27cdac98c7f8decd",
+      "branch_names": [
+        "research/apa-archicad29-independent-audit-20261010"
+      ],
+      "paths": [
+        "RESEARCH_INDEX.md"
+      ],
+      "size_bytes": 7245,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "526676ce96d0b6eb72fff943ebe3a6b247f57677",
+      "head_sha": "f02a167eb73cb149713cf5e613911b144fce5be2",
+      "branch_names": [
+        "chatgpt/whole-scene-v1-20261009"
+      ],
+      "paths": [
+        ".github/workflows/archicad-contracts.yml"
+      ],
+      "size_bytes": 3563,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "d0b5a929ca14ae9bfdd833579d6f204e00dc75c1",
+      "head_sha": "f118fb1b11eba20d6e71d4aa48594459de8a4267",
+      "branch_names": [
+        "feature/apa-sync-bootstrap-diagnostics-20261011"
+      ],
+      "paths": [
+        "scripts/apa_sync/socket_mode.py"
+      ],
+      "size_bytes": 5521,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "7c22b791cd2e73c35a218a8fa2faf15b2ab44650",
+      "head_sha": "f118fb1b11eba20d6e71d4aa48594459de8a4267",
+      "branch_names": [
+        "feature/apa-sync-bootstrap-diagnostics-20261011"
+      ],
+      "paths": [
+        "tests/test_apa_slack_sync.py"
+      ],
+      "size_bytes": 11675,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "87bef69a04134e75f9e72ae6a8c85740ca71d906",
+      "head_sha": "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+      "branch_names": [
+        "feature/gpt-mailbox-write-path-20261005"
+      ],
+      "paths": [
+        "sync_bridge/__main__.py"
+      ],
+      "size_bytes": 362,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "22338f7e5cf569f61629b6291eb90729eb11034a",
+      "head_sha": "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+      "branch_names": [
+        "feature/gpt-mailbox-write-path-20261005"
+      ],
+      "paths": [
+        "sync_bridge/write_bridge.py"
+      ],
+      "size_bytes": 13624,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "0df5046cc924c0504c7254a20be802a9f444ab96",
+      "head_sha": "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+      "branch_names": [
+        "feature/gpt-mailbox-write-path-20261005"
+      ],
+      "paths": [
+        "tests_sync/test_s2_7_mailbox_write.py"
+      ],
+      "size_bytes": 3915,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "457399a4f87b8f81a06557412d055080574c60d1",
+      "head_sha": "f7d38af825de57fc57660eeddf1186cc5b21ac71",
+      "branch_names": [
+        "arena/house-primitives-offline-ebbe779"
+      ],
+      "paths": [
+        "safe_bim_house_primitives.py"
+      ],
+      "size_bytes": 24639,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "4184d7846cb355fc6fcdfa5a5b2c1fc0f6afd20e",
+      "head_sha": "f7d38af825de57fc57660eeddf1186cc5b21ac71",
+      "branch_names": [
+        "arena/house-primitives-offline-ebbe779"
+      ],
+      "paths": [
+        "tests_house_primitives/test_house_primitives.py"
+      ],
+      "size_bytes": 11752,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "2d2be3e966b40c4944f367d78d5276d428169712",
+      "head_sha": "faf2fd8adcfd3329ae77a137b37f739a9a462225",
+      "branch_names": [
+        "work/stage4-live-hardening"
+      ],
+      "paths": [
+        "closed_loop/live_wall.py"
+      ],
+      "size_bytes": 23564,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "3b0edbc36ad42d3e045898f59ed4c2b836db5206",
+      "head_sha": "faf2fd8adcfd3329ae77a137b37f739a9a462225",
+      "branch_names": [
+        "work/stage4-live-hardening"
+      ],
+      "paths": [
+        "closed_loop/stage4_live_scenario.py"
+      ],
+      "size_bytes": 15482,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "c3d98c26ec6c27718021780be3ec525ca959e090",
+      "head_sha": "faf2fd8adcfd3329ae77a137b37f739a9a462225",
+      "branch_names": [
+        "work/stage4-live-hardening"
+      ],
+      "paths": [
+        "closed_loop/stage4_offline_evidence.py"
+      ],
+      "size_bytes": 7783,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "a0815bfbd632986848eb32e35f5a1899b9df4554",
+      "head_sha": "faf2fd8adcfd3329ae77a137b37f739a9a462225",
+      "branch_names": [
+        "work/stage4-live-hardening"
+      ],
+      "paths": [
+        "docs/CURRENT_STATUS.md"
+      ],
+      "size_bytes": 6025,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "ea7d6e9f03ac2e3f17bedecffc67238edc91b692",
+      "head_sha": "faf2fd8adcfd3329ae77a137b37f739a9a462225",
+      "branch_names": [
+        "work/stage4-live-hardening"
+      ],
+      "paths": [
+        "docs/INDEX.md"
+      ],
+      "size_bytes": 2942,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "212e3c5f676a4dc08ea6ae83f35635366fd3c26b",
+      "head_sha": "faf2fd8adcfd3329ae77a137b37f739a9a462225",
+      "branch_names": [
+        "work/stage4-live-hardening"
+      ],
+      "paths": [
+        "README.md"
+      ],
+      "size_bytes": 4880,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "db27db904a2a42b76a7257a19826099aa1acd17f",
+      "head_sha": "faf2fd8adcfd3329ae77a137b37f739a9a462225",
+      "branch_names": [
+        "work/stage4-live-hardening"
+      ],
+      "paths": [
+        "scripts/stage4_audit_pack.py"
+      ],
+      "size_bytes": 6718,
+      "mode": "100644"
+    },
+    {
+      "git_blob_sha": "7dddb59be1a20c2f1940373f0646c0b2a41beda9",
+      "head_sha": "faf2fd8adcfd3329ae77a137b37f739a9a462225",
+      "branch_names": [
+        "work/stage4-live-hardening"
+      ],
+      "paths": [
+        "tests_stage4_live/test_audit_integration.py"
+      ],
+      "size_bytes": 2688,
+      "mode": "100644"
+    }
+  ],
+  "limit": "Only exclusive among 80 scanned Git head trees; does not certify unique source finding"
+}
