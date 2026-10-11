@@ -57,7 +57,8 @@ class ControllerTests(unittest.TestCase):
     def test_development_board_and_aggregate_progress(self):
         state = c.build(self.plan)
         self.assertEqual(state["development"]["plan_id"], "APA-P70")
-        self.assertEqual(state["development"]["total"], 23)
+        product_count = sum(t["plan_id"] == "APA-P70" for t in self.plan["tasks"].values())
+        self.assertEqual(state["development"]["total"], product_count)
         self.assertEqual(state["development"]["done"], sum(
             t["status"] == "DONE_PUBLISHED" for t in self.plan["tasks"].values()
             if t["plan_id"] == "APA-P70"))
@@ -66,7 +67,7 @@ class ControllerTests(unittest.TestCase):
             self.assertNotEqual(state["development"]["next_eligible"], "APA-P70.A01.S01")
         unclaimed = copy.deepcopy(self.plan)
         unclaimed["tasks"]["APA-P70.A01.S01"].update(
-            status="READY", owner=None, lease_until=None, claim_ref=None)
+            status="READY", priority=0, owner=None, lease_until=None, claim_ref=None)
         c.validate(unclaimed)
         self.assertEqual(c.build(unclaimed)["development"]["next_eligible"], "APA-P70.A01.S01")
         board = (c.GENERATED / "DEVELOPMENT_BOARD.md").read_text(encoding="utf-8")
@@ -86,7 +87,7 @@ class ControllerTests(unittest.TestCase):
         c.validate(all_done)
         finished = c.build(all_done)
         self.assertEqual(finished["development"]["status"], "DONE_PUBLISHED")
-        self.assertEqual(finished["development"]["done"], 23)
+        self.assertEqual(finished["development"]["done"], product_count)
         self.assertTrue(all(a["status"] == "DONE_PUBLISHED"
                             for a in finished["development"]["actions"]))
 
@@ -101,19 +102,20 @@ class ControllerTests(unittest.TestCase):
         t["lease_until"] = None
         t["claim_ref"] = None
         t["blocked_reason"] = None
-        self.assertTrue(t["requires_approval"])
+        t["requires_approval"] = True
         c.validate(plan)
         self.assertFalse(c.eligible(t, plan))
         t["requires_approval"] = False
         self.assertTrue(c.eligible(t, plan))
 
     def test_research_routes_link_every_product_task(self):
-        self.assertEqual(len(self.plan["research_routes"]), 23)
+        product_count = sum(t["plan_id"] == "APA-P70" for t in self.plan["tasks"].values())
+        self.assertEqual(len(self.plan["research_routes"]), product_count)
         self.assertEqual(set(self.plan["research_routes"]),
                          {sid for sid, t in self.plan["tasks"].items()
                           if t["plan_id"] == "APA-P70"})
         state = c.build(self.plan)
-        self.assertEqual(state["research_lookahead"]["linked_product_substeps"], 23)
+        self.assertEqual(state["research_lookahead"]["linked_product_substeps"], product_count)
         self.assertIsNotNone(state["research_lookahead"]["next_target"])
         self.assertTrue(state["research_lookahead"]["next_eligible_research"])
         board = (c.GENERATED / "RESEARCH_LOOKAHEAD.md").read_text(encoding="utf-8")

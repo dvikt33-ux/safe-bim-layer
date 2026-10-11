@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 78,
+  "revision": 79,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -11,12 +11,12 @@
     "claim": "At the BEGINNING of each Scheduled execution, read fresh PROJECT_PLAN.json; select exactly one READY/PARTIAL task whose dependencies are DONE_PUBLISHED; CAS-write status IN_PROGRESS + unique owner + UTC lease_until + claim_ref=executor_run_id; re-read commit. Do not perform work until IN_PROGRESS readback. Concurrent/expired/duplicate runs cannot publish.",
     "completion": "On actual completion, verify artifacts, CI/receipt and acceptance; CAS-write DONE_PUBLISHED with evidence and clear owner/lease/claim_ref. For incomplete results write PARTIAL with evidence; for failed work BLOCKED with blocked_reason. Never claim DONE from chat text or a publisher receipt alone.",
     "deduplication": "One semantic work_key per task, explicit topic_id through topics[].task_ids; duplicate work keys rejected; related tasks share sources but different scopes. Historical 72-branch semantic dedup remains open.",
-    "mutation": "Only canonical research branch. Never modify main/master, PLN, APX, tested code branches or merge without approval.",
+    "mutation": "Canonical research branch for plan/evidence. Development uses new isolated feature branches/PRs from verified existing code; no main/master/protected/tested-branch changes or merges without authorization. User grants PLN writes in current chat; bind this scenario to APA_Isolated_Writer_Test_01.pln and freshly verify identity. APX mutation still requires separate authorization.",
     "research": "Normal ChatGPT with GitHub connector; Deep Research and paid tools require explicit authorization.",
     "evidence": "REPORTED != SOURCE_VERIFIED != BUILD_PASS != LIVE_PASS. Synthetic publisher success proves no Archicad runtime behavior.",
-    "trigger": "Only user-configured ChatGPT Scheduled Tasks initiate work; GitHub Actions is a publisher/validator on commits, not an autonomous research initiator. No controller-created research runs.",
+    "trigger": "Current user-authorized persistent Work chat may execute sequential development; existing user-configured Scheduled tasks remain separate triggers. No new scheduler/controller-created runs. No promised execution outside the active session.",
     "research_pipeline": "Same PROJECT_PLAN.json registry for research and development. research_routes links each P70 S-ID to source artifacts already in task.inputs and to reusable research S-IDs; read branch/file URLs from artifact.uri, verify current source SHA before use. Research may run ahead for later P70 actions while present action BUILD/INTEGRATION proceeds. SUFFICIENT must be independently reviewed with evidence before deferring its research; NOT_ASSESSED is never automatic PASS. Do not repeat completed research without changed source or uncovered applicability gap.",
-    "integration_priority": "Reuse first: actual Project Accelerator/SceneWriter/Tapir + Native MVP + Template Builder + CSE/PLP; assemble working system before expanding governance. See ART-APA-ASSEMBLY-PLAN. Offline integration may proceed with bounded provisional CSE before comprehensive normative coverage; no ENGINEERING_PASS or BUILDING_CODE_PASS without evidence."
+    "integration_priority": "CORE FIRST → EXPANSION, user-directed working-first. Finish authored native S02 → incremental S03 and native completeness S04 → core acceptance A08.S04 before geometry A09, libraries A02.S04, constructive A04, engineering A05, MEP A06, measured optimization A10, release A07/full acceptance A08. One canonical plan, one graph, one SceneWriter. Research/governance must not displace eligible core work."
   },
   "plans": {
     "APA-P00": {
@@ -160,6 +160,14 @@
         "APA-P70.A08": {
           "id": "APA-P70.A08",
           "title": "Сквозная приёмка и расширение без переписывания ядра"
+        },
+        "APA-P70.A09": {
+          "id": "APA-P70.A09",
+          "title": "Геометрия и точность после приёмки ядра"
+        },
+        "APA-P70.A10": {
+          "id": "APA-P70.A10",
+          "title": "Измеримое ускорение стабильных операций"
         }
       }
     }
@@ -656,6 +664,24 @@
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-190658Z-roof-comp-context-map/REPORT.md",
       "kind": "REPORT",
       "verification": "GITHUB_READBACK_VERIFIED_V2_RECEIPT"
+    },
+    "ART-APA-CORE-FIRST-ROADMAP": {
+      "id": "ART-APA-CORE-FIRST-ROADMAP",
+      "uri": "docs/research/apa-results/control/IMPLEMENTATION_ROADMAP.md",
+      "kind": "DOCUMENT",
+      "verification": "SOURCE_READ_PLAN_NOT_RUNTIME"
+    },
+    "ART-APA-WORK-INSTRUCTION-V2": {
+      "id": "ART-APA-WORK-INSTRUCTION-V2",
+      "uri": "docs/research/apa-results/control/WORK_OPERATING_INSTRUCTION.md",
+      "kind": "USER_INSTRUCTION",
+      "verification": "USER_AUTHORED"
+    },
+    "ART-APA-PLN-WRITE-AUTH-20261011": {
+      "id": "ART-APA-PLN-WRITE-AUTH-20261011",
+      "uri": "docs/research/apa-results/control/IMPLEMENTATION_ROADMAP.md#разрешение-и-доказательства",
+      "kind": "USER_AUTHORIZATION",
+      "verification": "USER_GRANTED_IN_CURRENT_CHAT"
     }
   },
   "tasks": {
@@ -720,7 +746,7 @@
       "title": "Инвентаризировать 72 ветки и PR, проверить уникальные результаты и ancestry",
       "kind": "CONSOLIDATION",
       "status": "PARTIAL",
-      "priority": 0,
+      "priority": 8,
       "work_key": "branch-ancestry-forensics",
       "depends_on": [
         "APA-P00.A01.S02"
@@ -750,7 +776,7 @@
       "title": "Сопоставить локальные и удалённые SHA без догадок",
       "kind": "VALIDATION",
       "status": "BLOCKED",
-      "priority": 1,
+      "priority": 8,
       "work_key": "local-git-sha-parity",
       "depends_on": [
         "APA-P00.A01.S03"
@@ -872,7 +898,7 @@
       "title": "Контролировать receipt/commit/readback всех завершённых отчётов",
       "kind": "VALIDATION",
       "status": "PARTIAL",
-      "priority": 1,
+      "priority": 8,
       "work_key": "publication-completeness-audit",
       "depends_on": [
         "APA-P00.A02.S02"
@@ -899,7 +925,7 @@
       "title": "Проверить write/readback для всех классов исполнителей",
       "kind": "VALIDATION",
       "status": "PARTIAL",
-      "priority": 0,
+      "priority": 8,
       "work_key": "executor-capability-matrix",
       "depends_on": [
         "APA-P00.A02.S02"
@@ -928,7 +954,7 @@
       "title": "Выбрать разрешённый периодический research runner без платных API",
       "kind": "CONTROL",
       "status": "BLOCKED",
-      "priority": 1,
+      "priority": 8,
       "work_key": "unattended-runner-selection",
       "depends_on": [
         "APA-P00.A03.S01"
@@ -955,7 +981,7 @@
       "title": "Publisher, дедупликация, retry, heartbeat и ошибки",
       "kind": "BUILD",
       "status": "PARTIAL",
-      "priority": 0,
+      "priority": 8,
       "work_key": "publisher-and-recovery",
       "depends_on": [
         "APA-P00.A02.S02"
@@ -985,7 +1011,7 @@
       "title": "Два независимых SOURCE цикла с GitHub readback",
       "kind": "VALIDATION",
       "status": "PARTIAL",
-      "priority": 1,
+      "priority": 8,
       "work_key": "two-independent-source-publishes",
       "depends_on": [
         "APA-P00.A03.S03"
@@ -1012,7 +1038,7 @@
       "title": "AC29 SDK headers и native create/change/get сигнатуры",
       "kind": "RESEARCH",
       "status": "PARTIAL",
-      "priority": 1,
+      "priority": 7,
       "work_key": "sdk-native-signatures",
       "depends_on": [
         "APA-P00.A02.S02"
@@ -1043,7 +1069,7 @@
       "title": "Этажи, building materials, surfaces, composites, profiles, связи",
       "kind": "RESEARCH",
       "status": "PARTIAL",
-      "priority": 1,
+      "priority": 7,
       "work_key": "sdk-attributes-stories",
       "depends_on": [
         "APA-P00.A02.S02"
@@ -1073,7 +1099,7 @@
       "title": "Morph/Roof/Shell/Openings/SEO/3D dump",
       "kind": "RESEARCH",
       "status": "PARTIAL",
-      "priority": 1,
+      "priority": 7,
       "work_key": "sdk-geometry-modeldump",
       "depends_on": [
         "APA-P00.A02.S02"
@@ -1102,7 +1128,7 @@
       "title": "Tapir публичные версии и Python/JSON vs локальная 1.5.10",
       "kind": "RESEARCH",
       "status": "PARTIAL",
-      "priority": 1,
+      "priority": 7,
       "work_key": "tapir-python-compatibility",
       "depends_on": [
         "APA-P00.A02.S02"
@@ -1134,7 +1160,7 @@
       "title": "GDL/TN, Unicode, target identity и 92 ошибок",
       "kind": "RESEARCH",
       "status": "READY",
-      "priority": 1,
+      "priority": 7,
       "work_key": "gdl-tn-identity-and-92-errors",
       "depends_on": [
         "APA-P00.A02.S02"
@@ -1163,7 +1189,7 @@
       "title": "MCP/IFC/openBIM и альтернативы",
       "kind": "RESEARCH",
       "status": "READY",
-      "priority": 2,
+      "priority": 7,
       "work_key": "ifc-mcp-openbim",
       "depends_on": [
         "APA-P00.A02.S02"
@@ -1192,7 +1218,7 @@
       "title": "Native MEP/Tapir MEP команды, трассы, порты",
       "kind": "RESEARCH",
       "status": "PARTIAL",
-      "priority": 1,
+      "priority": 7,
       "work_key": "native-and-tapir-mep",
       "depends_on": [
         "APA-P00.A02.S02"
@@ -1223,7 +1249,7 @@
       "title": "Сравнить native C++, Tapir/Python, IFC и hybrid",
       "kind": "INTEGRATION",
       "status": "READY",
-      "priority": 2,
+      "priority": 8,
       "work_key": "architecture-option-matrix",
       "depends_on": [
         "APA-P10.A01.S01",
@@ -1254,7 +1280,7 @@
       "title": "Сравнить performance, обратимость, тестируемость, стоимость",
       "kind": "INTEGRATION",
       "status": "READY",
-      "priority": 2,
+      "priority": 8,
       "work_key": "architecture-constraints-cost",
       "depends_on": [
         "APA-P10.A03.S01"
@@ -1281,7 +1307,7 @@
       "title": "Read-only provenance AC29 SDK/APX/source SHA",
       "kind": "VALIDATION",
       "status": "READY",
-      "priority": 1,
+      "priority": 8,
       "work_key": "ac29-sdk-apx-provenance",
       "depends_on": [
         "APA-P10.A01.S01"
@@ -1308,7 +1334,7 @@
       "title": "Read-only доступность команд, GDL, MEP, model dump",
       "kind": "VALIDATION",
       "status": "READY",
-      "priority": 1,
+      "priority": 8,
       "work_key": "read-only-command-capabilities",
       "depends_on": [
         "APA-P20.A01.S01"
@@ -1335,7 +1361,7 @@
       "title": "Сохранить PASS/FAIL с raw evidence",
       "kind": "VALIDATION",
       "status": "READY",
-      "priority": 1,
+      "priority": 8,
       "work_key": "raw-test-evidence-register",
       "depends_on": [
         "APA-P20.A01.S02"
@@ -1362,7 +1388,7 @@
       "title": "План изолированных тестов, rollback, критерии",
       "kind": "CONTROL",
       "status": "READY",
-      "priority": 2,
+      "priority": 8,
       "work_key": "isolated-live-test-plan",
       "depends_on": [
         "APA-P20.A01.S03"
@@ -1389,7 +1415,7 @@
       "title": "Получить отдельное разрешение на изменение BIM/APX",
       "kind": "CONTROL",
       "status": "BLOCKED",
-      "priority": 2,
+      "priority": 8,
       "work_key": "owner-live-write-permission",
       "depends_on": [
         "APA-P20.A02.S01"
@@ -1416,7 +1442,7 @@
       "title": "Протоколировать разрешённые live тесты",
       "kind": "VALIDATION",
       "status": "BLOCKED",
-      "priority": 2,
+      "priority": 8,
       "work_key": "isolated-live-test-results",
       "depends_on": [
         "APA-P20.A02.S02"
@@ -1443,7 +1469,7 @@
       "title": "Decision matrix для нативной BIM-геометрии",
       "kind": "INTEGRATION",
       "status": "READY",
-      "priority": 2,
+      "priority": 8,
       "work_key": "native-bim-shortest-path",
       "depends_on": [
         "APA-P10.A03.S02",
@@ -1471,7 +1497,7 @@
       "title": "Блокировки и альтернативные маршруты",
       "kind": "INTEGRATION",
       "status": "READY",
-      "priority": 2,
+      "priority": 8,
       "work_key": "architecture-blockers-fallbacks",
       "depends_on": [
         "APA-P30.A01.S01"
@@ -1498,7 +1524,7 @@
       "title": "MVP: этажи → атрибуты → геометрия → библиотека → MEP",
       "kind": "BUILD",
       "status": "READY",
-      "priority": 2,
+      "priority": 8,
       "work_key": "mvp-implementation-milestones",
       "depends_on": [
         "APA-P30.A01.S01"
@@ -1527,7 +1553,7 @@
       "title": "Acceptance gates и rollback по этапам MVP",
       "kind": "VALIDATION",
       "status": "READY",
-      "priority": 2,
+      "priority": 8,
       "work_key": "mvp-acceptance-rollback",
       "depends_on": [
         "APA-P30.A02.S01"
@@ -1554,7 +1580,7 @@
       "title": "Настроить запуск через ChatGPT Scheduled Tasks и разрешённый GitHub доступ",
       "kind": "CONTROL",
       "status": "BLOCKED",
-      "priority": 2,
+      "priority": 8,
       "work_key": "always-on-executor-auth",
       "depends_on": [
         "APA-P00.A03.S02"
@@ -1581,7 +1607,7 @@
       "title": "Проверить Scheduled → IN_PROGRESS → результат → DONE_PUBLISHED/PARTIAL",
       "kind": "BUILD",
       "status": "BLOCKED",
-      "priority": 2,
+      "priority": 8,
       "work_key": "unattended-research-cycle",
       "depends_on": [
         "APA-P40.A01.S01"
@@ -1608,7 +1634,7 @@
       "title": "Watchdog пропусков Scheduled Task, зависших IN_PROGRESS и журнал ошибок",
       "kind": "BUILD",
       "status": "BLOCKED",
-      "priority": 2,
+      "priority": 8,
       "work_key": "watchdog-and-error-journal",
       "depends_on": [
         "APA-P40.A01.S02"
@@ -1635,7 +1661,7 @@
       "title": "Проверить 24 часа реальных запусков ChatGPT Scheduled Tasks без повторов",
       "kind": "VALIDATION",
       "status": "BLOCKED",
-      "priority": 2,
+      "priority": 8,
       "work_key": "24h-continuity-proof",
       "depends_on": [
         "APA-P40.A01.S03"
@@ -1662,7 +1688,7 @@
       "title": "Карта связей: исследования ↔ S-ID ↔ артефакты ↔ PR",
       "kind": "CONSOLIDATION",
       "status": "PARTIAL",
-      "priority": 0,
+      "priority": 8,
       "work_key": "cross-research-traceability",
       "depends_on": [
         "APA-P00.A02.S02"
@@ -1696,7 +1722,7 @@
       "title": "Дедупликация по work_key/source revision/claim",
       "kind": "CONSOLIDATION",
       "status": "READY",
-      "priority": 0,
+      "priority": 8,
       "work_key": "claim-and-evidence-dedup",
       "depends_on": [
         "APA-P50.A01.S01"
@@ -1725,7 +1751,7 @@
       "title": "Сводить несколько исследований одной темы в решение",
       "kind": "INTEGRATION",
       "status": "READY",
-      "priority": 1,
+      "priority": 8,
       "work_key": "theme-research-synthesis",
       "depends_on": [
         "APA-P50.A01.S01"
@@ -1752,7 +1778,7 @@
       "title": "Единый каталог AC29 SDK/Tapir/Python/GDL/IFC/MEP инструментов",
       "kind": "RESEARCH",
       "status": "PARTIAL",
-      "priority": 1,
+      "priority": 7,
       "work_key": "tool-capability-catalog",
       "depends_on": [
         "APA-P00.A02.S02"
@@ -1786,7 +1812,7 @@
       "title": "Выявить дубли функций между инструментами и выбрать adapter boundaries",
       "kind": "INTEGRATION",
       "status": "READY",
-      "priority": 1,
+      "priority": 8,
       "work_key": "tool-adapter-overlap-map",
       "depends_on": [
         "APA-P50.A02.S01"
@@ -1815,7 +1841,7 @@
       "title": "Спланировать безопасное объединение инструментов",
       "kind": "BUILD",
       "status": "READY",
-      "priority": 2,
+      "priority": 8,
       "work_key": "tool-consolidation-roadmap",
       "depends_on": [
         "APA-P50.A02.S02",
@@ -1843,7 +1869,7 @@
       "title": "Синтез тем: источник → решение → MVP → тесты",
       "kind": "INTEGRATION",
       "status": "READY",
-      "priority": 2,
+      "priority": 8,
       "work_key": "research-to-mvp-synthesis",
       "depends_on": [
         "APA-P50.A01.S03",
@@ -1873,7 +1899,7 @@
       "title": "Проверка готовности интеграции и отсутствия повторов",
       "kind": "VALIDATION",
       "status": "READY",
-      "priority": 2,
+      "priority": 8,
       "work_key": "integration-go-no-go",
       "depends_on": [
         "APA-P50.A03.S01"
@@ -2091,7 +2117,7 @@
       "title": "Протестировать CAS-claim, lease, duplicate prevention",
       "kind": "VALIDATION",
       "status": "PARTIAL",
-      "priority": 1,
+      "priority": 8,
       "work_key": "claim-concurrency-test",
       "depends_on": [
         "APA-P60.A02.S01",
@@ -2121,7 +2147,7 @@
       "title": "Ввести сбор предложений задач исследователями и принятие аудитором в PROJECT_PLAN",
       "kind": "VALIDATION",
       "status": "PARTIAL",
-      "priority": 1,
+      "priority": 8,
       "work_key": "research-proposals-audit-approval",
       "depends_on": [
         "APA-P60.A02.S02"
@@ -2192,7 +2218,7 @@
       "title": "Привязать все значимые наработки к функциям продукта, выявить пробелы",
       "kind": "CONSOLIDATION",
       "status": "READY",
-      "priority": 2,
+      "priority": 8,
       "work_key": "product-evidence-to-capability-trace",
       "depends_on": [
         "APA-P70.A01.S01",
@@ -2285,10 +2311,11 @@
       "title": "Связать проектные требования с версиями нормативов и проверяемыми правилами",
       "kind": "BUILD",
       "status": "READY",
-      "priority": 2,
+      "priority": 3,
       "work_key": "normative-applicability-pack",
       "depends_on": [
-        "APA-P70.A02.S01"
+        "APA-P70.A02.S01",
+        "APA-P70.A08.S04"
       ],
       "related": [],
       "inputs": [
@@ -2379,7 +2406,7 @@
       "title": "Собрать модель средствами уже существующих BIM-исполнителей",
       "kind": "BUILD",
       "status": "PARTIAL",
-      "priority": 2,
+      "priority": 0,
       "work_key": "reuse-native-whole-building-builder",
       "depends_on": [
         "APA-P70.A03.S01"
@@ -2390,7 +2417,8 @@
         "ART-APA-REUSE-NATIVE-20261011",
         "ART-APA-HIGHLEVEL-PR34",
         "ART-APA-ASSEMBLY-PLAN",
-        "ART-APA-LIVE-SCRATCH-PARTIAL-20261011"
+        "ART-APA-LIVE-SCRATCH-PARTIAL-20261011",
+        "ART-APA-PLN-WRITE-AUTH-20261011"
       ],
       "outputs": [
         "Создание полноценной BIM-геометрии из схемы через имеющиеся writer/graph; связные стены не дробятся без необходимости; тестовый PLN только после разрешения"
@@ -2399,7 +2427,7 @@
       "owner": null,
       "lease_until": null,
       "claim_ref": null,
-      "requires_approval": true,
+      "requires_approval": false,
       "evidence": [
         "ART-P70-A03-S02-AUTHORED-NATIVE-DAG-PARTIAL-20261011",
         "ART-P70-A03-S02-RECEIPT-PARTIAL-20261011",
@@ -2408,7 +2436,7 @@
         "ART-P70-A03-S02-ISOLATED-19724-NONEMPTY20-20261011",
         "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011"
       ],
-      "blocked_reason": "Isolated PLN 19724 exact GET identity/stories/material and 20 typed native bbox rows PASS, zero writes. Original (0,0) footprint collides four Object bboxes. PR47 explicit (+40,+40) source shift and original SceneWriter scan 275 offline PASS; LIVE relocated XY40..50/Y40..48 clearance NOT_VERIFIED. Exact disposable writer target and reviewed one-shot native mutation authorization still missing. S02 requires_approval=true."
+      "blocked_reason": "User authorizes PLN writes in this chat (2026-10-11); exact binding to APA_Isolated_Writer_Test_01.pln and one-shot SceneWriter contract still need implementation and fresh native preflight. Prior port 19724, 20 elements and spatial clearance are historical/user-supplied; recheck before mutation. No S02 native completion claimed."
     },
     "APA-P70.A03.S03": {
       "id": "APA-P70.A03.S03",
@@ -2417,7 +2445,7 @@
       "title": "Доказать редактируемость, GUID/host/story/material и инкрементальное обновление",
       "kind": "VALIDATION",
       "status": "READY",
-      "priority": 2,
+      "priority": 0,
       "work_key": "incremental-model-integrity-gates",
       "depends_on": [
         "APA-P70.A03.S02"
@@ -2447,10 +2475,11 @@
       "title": "Вывести из модели обязательные семейства узлов и их условия применимости",
       "kind": "INTEGRATION",
       "status": "READY",
-      "priority": 1,
+      "priority": 4,
       "work_key": "required-junction-condition-coverage",
       "depends_on": [
-        "APA-P70.A03.S01"
+        "APA-P70.A03.S01",
+        "APA-P70.A02.S04"
       ],
       "related": [],
       "inputs": [
@@ -2475,7 +2504,7 @@
       "title": "Привязать выбранные узлы и композиции к нативным BIM элементам",
       "kind": "BUILD",
       "status": "READY",
-      "priority": 2,
+      "priority": 4,
       "work_key": "native-details-to-cse-binding",
       "depends_on": [
         "APA-P70.A04.S01",
@@ -2504,7 +2533,7 @@
       "title": "Проверить узлы окон, облицовки, перекрытий и кровельных примыканий",
       "kind": "VALIDATION",
       "status": "READY",
-      "priority": 2,
+      "priority": 4,
       "work_key": "junction-evidence-acceptance",
       "depends_on": [
         "APA-P70.A04.S02"
@@ -2532,11 +2561,12 @@
       "title": "Получить проверяемую расчётную схему и исходные нагрузки",
       "kind": "INTEGRATION",
       "status": "READY",
-      "priority": 1,
+      "priority": 4,
       "work_key": "load-bearing-design-and-load-cases",
       "depends_on": [
         "APA-P70.A03.S01",
-        "APA-P70.A02.S02"
+        "APA-P70.A02.S02",
+        "APA-P70.A04.S03"
       ],
       "related": [],
       "inputs": [
@@ -2561,7 +2591,7 @@
       "title": "Использовать SAM/SAF/IFC и доступный проверенный расчётный движок",
       "kind": "BUILD",
       "status": "READY",
-      "priority": 2,
+      "priority": 4,
       "work_key": "structural-engine-adapter-handoff",
       "depends_on": [
         "APA-P70.A05.S01",
@@ -2590,7 +2620,7 @@
       "title": "Применить результаты инженерного расчёта и повторно проверить узлы",
       "kind": "VALIDATION",
       "status": "READY",
-      "priority": 2,
+      "priority": 4,
       "work_key": "engineering-feedback-to-bim",
       "depends_on": [
         "APA-P70.A05.S02",
@@ -2619,11 +2649,12 @@
       "title": "Сформировать инженерные требования и трассы на базе штатного MEP",
       "kind": "INTEGRATION",
       "status": "READY",
-      "priority": 1,
+      "priority": 5,
       "work_key": "native-mep-semantic-network",
       "depends_on": [
         "APA-P70.A03.S02",
-        "APA-P70.A02.S02"
+        "APA-P70.A02.S02",
+        "APA-P70.A05.S03"
       ],
       "related": [],
       "inputs": [
@@ -2647,7 +2678,7 @@
       "title": "Проверить инженерные сети, проходки, коллизии и узлы пересечений",
       "kind": "VALIDATION",
       "status": "READY",
-      "priority": 2,
+      "priority": 5,
       "work_key": "mep-junction-collision-acceptance",
       "depends_on": [
         "APA-P70.A06.S01",
@@ -2676,11 +2707,12 @@
       "title": "Получить согласованные планы, разрезы, фасады, спецификации и узлы",
       "kind": "BUILD",
       "status": "READY",
-      "priority": 1,
+      "priority": 7,
       "work_key": "native-project-documentation-views",
       "depends_on": [
         "APA-P70.A03.S03",
-        "APA-P70.A04.S02"
+        "APA-P70.A04.S02",
+        "APA-P70.A10.S01"
       ],
       "related": [],
       "inputs": [
@@ -2705,7 +2737,7 @@
       "title": "Выполнить поэлементную и общепроектную проверку нормативов",
       "kind": "VALIDATION",
       "status": "READY",
-      "priority": 2,
+      "priority": 7,
       "work_key": "revisioned-compliance-and-coverage-report",
       "depends_on": [
         "APA-P70.A07.S01",
@@ -2735,7 +2767,7 @@
       "title": "Собрать итоговый пакет BIM/IFC/PDF и доказательства проверки",
       "kind": "BUILD",
       "status": "READY",
-      "priority": 2,
+      "priority": 7,
       "work_key": "verified-final-project-release",
       "depends_on": [
         "APA-P70.A07.S02"
@@ -2763,7 +2795,7 @@
       "title": "Проверить полный цикл создания проекта на эталонном ИЖС",
       "kind": "VALIDATION",
       "status": "READY",
-      "priority": 1,
+      "priority": 8,
       "work_key": "full-cycle-new-project-e2e",
       "depends_on": [
         "APA-P70.A07.S03"
@@ -2791,7 +2823,7 @@
       "title": "Проверить доработку единственного открытого существующего PLN",
       "kind": "VALIDATION",
       "status": "READY",
-      "priority": 2,
+      "priority": 8,
       "work_key": "full-cycle-adapt-existing-e2e",
       "depends_on": [
         "APA-P70.A08.S01"
@@ -2818,7 +2850,7 @@
       "title": "Доказать расширяемость на другом типе здания и системах",
       "kind": "VALIDATION",
       "status": "READY",
-      "priority": 2,
+      "priority": 8,
       "work_key": "building-type-extension-contract",
       "depends_on": [
         "APA-P70.A08.S02"
@@ -2854,7 +2886,8 @@
       "related": [],
       "inputs": [
         "ART-CONTROLLER",
-        "ART-APA-ASSEMBLY-PLAN"
+        "ART-APA-ASSEMBLY-PLAN",
+        "ART-APA-WORK-INSTRUCTION-V2"
       ],
       "outputs": [
         "IMPLEMENTATION_ROADMAP.md; WORK_OPERATING_INSTRUCTION.md; согласованный PROJECT_PLAN.json; GitHub CAS/readback"
@@ -2863,6 +2896,178 @@
       "owner": "codex-apa-core-first-20261011",
       "lease_until": "2026-10-11T20:30:00Z",
       "claim_ref": "APA-RUN-20261011T190721Z-core-first-plan",
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A03.S04": {
+      "id": "APA-P70.A03.S04",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A03",
+      "title": "Дополнить авторскую модель до связного небольшого здания существующими writer-циклами",
+      "kind": "BUILD",
+      "status": "READY",
+      "priority": 0,
+      "work_key": "authored-building-native-component-completeness",
+      "depends_on": [
+        "APA-P70.A03.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-REUSE-NATIVE-20261011",
+        "ART-APA-HIGHLEVEL-PR34",
+        "ART-APA-ASSEMBLY-PLAN"
+      ],
+      "outputs": [
+        "Стены, перекрытия, колонны и hosted двери/окна из утверждённой схемы проходят typed GUID/host/story/material/geometry readback; требуемые неподдерживаемые элементы имеют конкретный blocker; один BIM Graph и SceneWriter."
+      ],
+      "acceptance": "Стены, перекрытия, колонны и hosted двери/окна из утверждённой схемы проходят typed GUID/host/story/material/geometry readback; требуемые неподдерживаемые элементы имеют конкретный blocker; один BIM Graph и SceneWriter.",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A08.S04": {
+      "id": "APA-P70.A08.S04",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A08",
+      "title": "Принять ядро: задание → связное редактируемое здание → правка → readback",
+      "kind": "VALIDATION",
+      "status": "READY",
+      "priority": 0,
+      "work_key": "editable-native-core-e2e-acceptance",
+      "depends_on": [
+        "APA-P70.A03.S03",
+        "APA-P70.A03.S04"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-FULL-CYCLE",
+        "ART-APA-ASSEMBLY-PLAN"
+      ],
+      "outputs": [
+        "Один brief создаёт связное небольшое здание; все требуемые типы поддержаны, GUID/этажи/материалы/host/геометрия подтверждены; согласованная правка сохраняет GUID и не дублирует модель; сохранение и повторное чтение подтверждены. Четыре элемента и offline CI не достаточны. Инженерная/нормативная приёмка отдельно."
+      ],
+      "acceptance": "Один brief создаёт связное небольшое здание; все требуемые типы поддержаны, GUID/этажи/материалы/host/геометрия подтверждены; согласованная правка сохраняет GUID и не дублирует модель; сохранение и повторное чтение подтверждены. Четыре элемента и offline CI не достаточны. Инженерная/нормативная приёмка отдельно.",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A09.S01": {
+      "id": "APA-P70.A09.S01",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A09",
+      "title": "Подключить Native Model Dump, графовую связность и реальные 3D-проверки",
+      "kind": "INTEGRATION",
+      "status": "READY",
+      "priority": 2,
+      "work_key": "integrated-native-3d-geometry-precision",
+      "depends_on": [
+        "APA-P70.A08.S04"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-REUSE-NATIVE-20261011",
+        "ART-SDK-GET3D",
+        "ART-SDK-SEO"
+      ],
+      "outputs": [
+        "Native dump/NetworkX/Shapely используются через существующий readback; стыки, XYZ, story и host проверены на подтверждённых ошибках; 2D пересечение не считается 3D коллизией; ядро сохраняет работоспособность."
+      ],
+      "acceptance": "Native dump/NetworkX/Shapely используются через существующий readback; стыки, XYZ, story и host проверены на подтверждённых ошибках; 2D пересечение не считается 3D коллизией; ядро сохраняет работоспособность.",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A02.S04": {
+      "id": "APA-P70.A02.S04",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A02",
+      "title": "Интегрировать реальные материалы, Composite/Profile и выбранные GDL-библиотеки",
+      "kind": "INTEGRATION",
+      "status": "READY",
+      "priority": 3,
+      "work_key": "verified-project-material-library-integration",
+      "depends_on": [
+        "APA-P70.A09.S01"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-PLP-CONTRACT",
+        "ART-APA-CSE-RESEARCH",
+        "ART-PR20",
+        "ART-APA-ATTR-STORY-SLAB-20261011"
+      ],
+      "outputs": [
+        "Проверенные CSE/PLP и реальные проектные BM/Composite/Profile/Surface/GDL применены и прочитаны обратно; Unicode и стабильная identity Library Parts проверены; источники/лицензия/AC29 совместимость учтены; найденный файл не равен LIVE_VERIFIED."
+      ],
+      "acceptance": "Проверенные CSE/PLP и реальные проектные BM/Composite/Profile/Surface/GDL применены и прочитаны обратно; Unicode и стабильная identity Library Parts проверены; источники/лицензия/AC29 совместимость учтены; найденный файл не равен LIVE_VERIFIED.",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A10.S01": {
+      "id": "APA-P70.A10.S01",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A10",
+      "title": "Оптимизировать конкретный стабильный сценарий с измерением результата",
+      "kind": "INTEGRATION",
+      "status": "READY",
+      "priority": 6,
+      "work_key": "stable-native-pipeline-measured-optimization",
+      "depends_on": [
+        "APA-P70.A06.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-FAST-COMPILER",
+        "ART-APA-REUSE-NATIVE-20261011"
+      ],
+      "outputs": [
+        "Есть воспроизводимый baseline и измеримое улучшение времени/числа native calls/ресурсов без потери точности; OR-Tools/CP-SAT внедряется лишь при явных ограничениях и критерии качества."
+      ],
+      "acceptance": "Есть воспроизводимый baseline и измеримое улучшение времени/числа native calls/ресурсов без потери точности; OR-Tools/CP-SAT внедряется лишь при явных ограничениях и критерии качества.",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A08.S05": {
+      "id": "APA-P70.A08.S05",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A08",
+      "title": "Адаптировать готовое ядро под установленный Archicad 30",
+      "kind": "INTEGRATION",
+      "status": "READY",
+      "priority": 8,
+      "work_key": "archicad30-existing-core-adaptation",
+      "depends_on": [
+        "APA-P70.A08.S03"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-FULL-CYCLE"
+      ],
+      "outputs": [
+        "После установки AC30 подтверждены API/библиотеки/проектный сценарий тем же ядром; нет отдельного генератора. Отсутствующая установка — конкретный BLOCKED, не ложный PASS."
+      ],
+      "acceptance": "После установки AC30 подтверждены API/библиотеки/проектный сценарий тем же ядром; нет отдельного генератора. Отсутствующая установка — конкретный BLOCKED, не ложный PASS.",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
@@ -2890,7 +3095,10 @@
         "ART-PUB-RECEIPT",
         "ART-QUEUE",
         "ART-REGISTER",
-        "ART-STATUS"
+        "ART-STATUS",
+        "ART-APA-CORE-FIRST-ROADMAP",
+        "ART-APA-WORK-INSTRUCTION-V2",
+        "ART-APA-PLN-WRITE-AUTH-20261011"
       ],
       "synthesis_state": "OPEN",
       "owner": null
@@ -3136,7 +3344,13 @@
         "APA-P70.A07.S03",
         "APA-P70.A08.S01",
         "APA-P70.A08.S02",
-        "APA-P70.A08.S03"
+        "APA-P70.A08.S03",
+        "APA-P70.A03.S04",
+        "APA-P70.A08.S04",
+        "APA-P70.A09.S01",
+        "APA-P70.A02.S04",
+        "APA-P70.A10.S01",
+        "APA-P70.A08.S05"
       ],
       "artifact_ids": [
         "ART-APA-FULL-CYCLE",
@@ -3395,6 +3609,556 @@
       "readiness": "NOT_ASSESSED",
       "readiness_evidence_ids": [],
       "note": "Сопоставить применимость существующих исследований с acceptance этой подзадачи. Не повторять изученное без выявленного пробела."
+    },
+    "APA-P70.A03.S04": {
+      "research_task_ids": [
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Reuse registered source artifacts; do not start new research unless a specific implementation gap blocks this step."
+    },
+    "APA-P70.A08.S04": {
+      "research_task_ids": [
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Reuse registered source artifacts; do not start new research unless a specific implementation gap blocks this step."
+    },
+    "APA-P70.A09.S01": {
+      "research_task_ids": [
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Reuse registered source artifacts; do not start new research unless a specific implementation gap blocks this step."
+    },
+    "APA-P70.A02.S04": {
+      "research_task_ids": [
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Reuse registered source artifacts; do not start new research unless a specific implementation gap blocks this step."
+    },
+    "APA-P70.A10.S01": {
+      "research_task_ids": [
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Reuse registered source artifacts; do not start new research unless a specific implementation gap blocks this step."
+    },
+    "APA-P70.A08.S05": {
+      "research_task_ids": [
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Reuse registered source artifacts; do not start new research unless a specific implementation gap blocks this step."
     }
-  }
+  },
+  "component_catalog": {
+    "schema": "APA_COMPONENT_CATALOG_V1",
+    "authority": "Embedded in this sole canonical plan; not a separate task registry",
+    "status_values": [
+      "FOUND",
+      "SOURCE_VERIFIED",
+      "OFFLINE_VERIFIED",
+      "LIVE_VERIFIED",
+      "INTEGRATED",
+      "BLOCKED",
+      "SUPERSEDED"
+    ],
+    "coverage": "Initial crosswalk of registered code, research artifacts and user candidates; exhaustive historical dedup remains existing APA-P70.A01.S02 / APA-P50.A02.S01 work. No invented full inventory PASS.",
+    "components": [
+      {
+        "name": "Project Accelerator",
+        "purpose": "entrypoint",
+        "source": "https://github.com/dvikt33-ux/safe-bim-layer/blob/03f94e9bb67e01a0944813b25eaea50b1afa0ead/scripts/archicad_project_accelerator.py",
+        "source_artifact_ids": [
+          "ART-APA-HIGHLEVEL-PR34"
+        ],
+        "verification_level": "FOUND",
+        "existing_apa_analog": "scripts/archicad_project_accelerator.py",
+        "advantage": "Reuse existing implementation and evidence; no parallel subsystem",
+        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied",
+        "integration_method": "Adapter to existing Project Accelerator/BIM Graph/SceneWriter",
+        "priority": 0,
+        "target_module": "entrypoint",
+        "target_task": "APA-P70.A03.S02",
+        "dependencies": [
+          "APA-P70.A03.S01"
+        ],
+        "acceptance": "Compile brief through existing entry; no second executor",
+        "implementation_state": "FOUND"
+      },
+      {
+        "name": "Semantic Brief",
+        "purpose": "semantic input",
+        "source": "https://github.com/dvikt33-ux/safe-bim-layer/blob/03f94e9bb67e01a0944813b25eaea50b1afa0ead/scripts/archicad_semantic_brief.py",
+        "source_artifact_ids": [
+          "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011"
+        ],
+        "verification_level": "FOUND",
+        "existing_apa_analog": "scripts/archicad_semantic_brief.py",
+        "advantage": "Reuse existing implementation and evidence; no parallel subsystem",
+        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied",
+        "integration_method": "Adapter to existing Project Accelerator/BIM Graph/SceneWriter",
+        "priority": 0,
+        "target_module": "semantic input",
+        "target_task": "APA-P70.A03.S02",
+        "dependencies": [
+          "APA-P70.A03.S01"
+        ],
+        "acceptance": "Real stories and hard constraints retained",
+        "implementation_state": "FOUND"
+      },
+      {
+        "name": "Semantic Spatial",
+        "purpose": "authored geometry",
+        "source": "https://github.com/dvikt33-ux/safe-bim-layer/blob/03f94e9bb67e01a0944813b25eaea50b1afa0ead/scripts/archicad_semantic_spatial.py",
+        "source_artifact_ids": [
+          "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011"
+        ],
+        "verification_level": "FOUND",
+        "existing_apa_analog": "scripts/archicad_semantic_spatial.py",
+        "advantage": "Reuse existing implementation and evidence; no parallel subsystem",
+        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied",
+        "integration_method": "Adapter to existing Project Accelerator/BIM Graph/SceneWriter",
+        "priority": 0,
+        "target_module": "authored geometry",
+        "target_task": "APA-P70.A03.S02",
+        "dependencies": [
+          "APA-P70.A03.S01"
+        ],
+        "acceptance": "Authored room/axis/bearing/load-path identity retained",
+        "implementation_state": "FOUND"
+      },
+      {
+        "name": "Project Library Pack / CSE",
+        "purpose": "construction resolver",
+        "source": "https://github.com/dvikt33-ux/safe-bim-layer/blob/03f94e9bb67e01a0944813b25eaea50b1afa0ead/scripts/archicad_project_library_pack.py",
+        "source_artifact_ids": [
+          "ART-APA-PLP-CONTRACT"
+        ],
+        "verification_level": "FOUND",
+        "existing_apa_analog": "scripts/archicad_project_library_pack.py",
+        "advantage": "Reuse existing implementation and evidence; no parallel subsystem",
+        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied",
+        "integration_method": "Adapter to existing Project Accelerator/BIM Graph/SceneWriter",
+        "priority": 3,
+        "target_module": "construction resolver",
+        "target_task": "APA-P70.A02.S04",
+        "dependencies": [
+          "APA-P70.A09.S01"
+        ],
+        "acceptance": "Verified selection and real attribute readback",
+        "implementation_state": "FOUND"
+      },
+      {
+        "name": "Authored Native Plan",
+        "purpose": "authoring adapter",
+        "source": "https://github.com/dvikt33-ux/safe-bim-layer/blob/03f94e9bb67e01a0944813b25eaea50b1afa0ead/scripts/archicad_authored_native_plan.py",
+        "source_artifact_ids": [
+          "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011"
+        ],
+        "verification_level": "FOUND",
+        "existing_apa_analog": "scripts/archicad_authored_native_plan.py",
+        "advantage": "Reuse existing implementation and evidence; no parallel subsystem",
+        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied",
+        "integration_method": "Adapter to existing Project Accelerator/BIM Graph/SceneWriter",
+        "priority": 0,
+        "target_module": "authoring adapter",
+        "target_task": "APA-P70.A03.S02",
+        "dependencies": [
+          "APA-P70.A03.S01"
+        ],
+        "acceptance": "Original graph/writer receives approved authored plan",
+        "implementation_state": "FOUND"
+      },
+      {
+        "name": "BIM Graph",
+        "purpose": "dependency DAG",
+        "source": "https://github.com/dvikt33-ux/safe-bim-layer/blob/03f94e9bb67e01a0944813b25eaea50b1afa0ead/scripts/archicad_bim_graph.py",
+        "source_artifact_ids": [
+          "ART-APA-HIGHLEVEL-PR34"
+        ],
+        "verification_level": "FOUND",
+        "existing_apa_analog": "scripts/archicad_bim_graph.py",
+        "advantage": "Reuse existing implementation and evidence; no parallel subsystem",
+        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied",
+        "integration_method": "Adapter to existing Project Accelerator/BIM Graph/SceneWriter",
+        "priority": 0,
+        "target_module": "dependency DAG",
+        "target_task": "APA-P70.A03.S04",
+        "dependencies": [
+          "APA-P70.A03.S02"
+        ],
+        "acceptance": "Hosted openings use verified wall GUIDs and ordering",
+        "implementation_state": "FOUND"
+      },
+      {
+        "name": "SceneWriter / SQLite",
+        "purpose": "native transaction journal",
+        "source": "https://github.com/dvikt33-ux/safe-bim-layer/blob/03f94e9bb67e01a0944813b25eaea50b1afa0ead/scripts/archicad_scene_run.py",
+        "source_artifact_ids": [
+          "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011"
+        ],
+        "verification_level": "FOUND",
+        "existing_apa_analog": "scripts/archicad_scene_run.py",
+        "advantage": "Reuse existing implementation and evidence; no parallel subsystem",
+        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied",
+        "integration_method": "Adapter to existing Project Accelerator/BIM Graph/SceneWriter",
+        "priority": 0,
+        "target_module": "native transaction journal",
+        "target_task": "APA-P70.A03.S02",
+        "dependencies": [
+          "APA-P70.A03.S01"
+        ],
+        "acceptance": "Exact target, pinned hash, intent before every write, no blind replay",
+        "implementation_state": "FOUND"
+      },
+      {
+        "name": "Native MVP / write cycles",
+        "purpose": "native donor adapters",
+        "source": "https://github.com/dvikt33-ux/safe-bim-layer/blob/03f94e9bb67e01a0944813b25eaea50b1afa0ead/scripts/archicad_executor.py",
+        "source_artifact_ids": [
+          "ART-APA-REUSE-NATIVE-20261011"
+        ],
+        "verification_level": "FOUND",
+        "existing_apa_analog": "scripts/archicad_executor.py",
+        "advantage": "Reuse existing implementation and evidence; no parallel subsystem",
+        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied",
+        "integration_method": "Adapter to existing Project Accelerator/BIM Graph/SceneWriter",
+        "priority": 0,
+        "target_module": "native donor adapters",
+        "target_task": "APA-P70.A03.S04",
+        "dependencies": [
+          "APA-P70.A03.S02"
+        ],
+        "acceptance": "Supported columns/doors/windows reused with typed readback",
+        "implementation_state": "FOUND"
+      },
+      {
+        "name": "Template Builder",
+        "purpose": "project attributes",
+        "source": "https://github.com/dvikt33-ux/safe-bim-layer/blob/03f94e9bb67e01a0944813b25eaea50b1afa0ead/scripts/archicad_template_builder.py",
+        "source_artifact_ids": [
+          "ART-APA-ATTR-STORY-SLAB-20261011"
+        ],
+        "verification_level": "FOUND",
+        "existing_apa_analog": "scripts/archicad_template_builder.py",
+        "advantage": "Reuse existing implementation and evidence; no parallel subsystem",
+        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied",
+        "integration_method": "Adapter to existing Project Accelerator/BIM Graph/SceneWriter",
+        "priority": 3,
+        "target_module": "project attributes",
+        "target_task": "APA-P70.A02.S04",
+        "dependencies": [
+          "APA-P70.A09.S01"
+        ],
+        "acceptance": "BM/Composite/Profile/Surface identities resolved independently",
+        "implementation_state": "FOUND"
+      },
+      {
+        "name": "Tapir / Python JSON",
+        "purpose": "transport",
+        "source": "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md",
+        "source_artifact_ids": [
+          "ART-TAPIR-COMPAT-20261010-6F29"
+        ],
+        "verification_level": "FOUND",
+        "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
+        "advantage": "Reuse published finding; compare only for a concrete gap",
+        "limitations": "Candidate/registered research, no inferred install/license/live support",
+        "integration_method": "Reuse current module; isolate adapter only when required",
+        "priority": 0,
+        "target_module": "transport",
+        "target_task": "APA-P70.A03.S02",
+        "dependencies": [
+          "APA-P70.A03.S01"
+        ],
+        "acceptance": "Installed version/command schema and typed readback verified",
+        "implementation_state": "FOUND"
+      },
+      {
+        "name": "Native Model Dump / AC29 geometry",
+        "purpose": "geometry",
+        "source": "docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md",
+        "source_artifact_ids": [
+          "ART-SDK-GET3D"
+        ],
+        "verification_level": "FOUND",
+        "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
+        "advantage": "Reuse published finding; compare only for a concrete gap",
+        "limitations": "Candidate/registered research, no inferred install/license/live support",
+        "integration_method": "Reuse current module; isolate adapter only when required",
+        "priority": 2,
+        "target_module": "geometry",
+        "target_task": "APA-P70.A09.S01",
+        "dependencies": [
+          "APA-P70.A08.S04"
+        ],
+        "acceptance": "Real XYZ/3D bodies and failure cases verified",
+        "implementation_state": "FOUND"
+      },
+      {
+        "name": "NetworkX / Shapely",
+        "purpose": "geometry",
+        "source": "docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md",
+        "source_artifact_ids": [
+          "ART-APA-REUSE-NATIVE-20261011"
+        ],
+        "verification_level": "FOUND",
+        "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
+        "advantage": "Reuse published finding; compare only for a concrete gap",
+        "limitations": "Candidate/registered research, no inferred install/license/live support",
+        "integration_method": "Reuse current module; isolate adapter only when required",
+        "priority": 2,
+        "target_module": "geometry",
+        "target_task": "APA-P70.A09.S01",
+        "dependencies": [
+          "APA-P70.A08.S04"
+        ],
+        "acceptance": "Graph/2D predicates used within declared scope; 3D proven separately",
+        "implementation_state": "FOUND"
+      },
+      {
+        "name": "Roof / Shell / Morph / Openings / SEO",
+        "purpose": "geometry",
+        "source": "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md",
+        "source_artifact_ids": [
+          "ART-SDK-OPENING-SHELL-20261010-8E41"
+        ],
+        "verification_level": "FOUND",
+        "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
+        "advantage": "Reuse published finding; compare only for a concrete gap",
+        "limitations": "Candidate/registered research, no inferred install/license/live support",
+        "integration_method": "Reuse current module; isolate adapter only when required",
+        "priority": 2,
+        "target_module": "geometry",
+        "target_task": "APA-P70.A09.S01",
+        "dependencies": [
+          "APA-P70.A08.S04"
+        ],
+        "acceptance": "Native capabilities adapted individually; required unsupported scope blocks",
+        "implementation_state": "FOUND"
+      },
+      {
+        "name": "GDL / ТЕХНОНИКОЛЬ / manufacturer catalogs",
+        "purpose": "library",
+        "source": "https://github.com/dvikt33-ux/safe-bim-layer/pull/20",
+        "source_artifact_ids": [
+          "ART-PR20"
+        ],
+        "verification_level": "FOUND",
+        "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
+        "advantage": "Reuse published finding; compare only for a concrete gap",
+        "limitations": "Candidate/registered research, no inferred install/license/live support",
+        "integration_method": "Reuse current module; isolate adapter only when required",
+        "priority": 3,
+        "target_module": "library",
+        "target_task": "APA-P70.A02.S04",
+        "dependencies": [
+          "APA-P70.A09.S01"
+        ],
+        "acceptance": "Unicode, stable library identity, rights and target-version runtime verified",
+        "implementation_state": "FOUND"
+      },
+      {
+        "name": "Details v2.12 / constructive nodes",
+        "purpose": "constructive",
+        "source": "https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12",
+        "source_artifact_ids": [
+          "ART-APA-DETAILS-V212"
+        ],
+        "verification_level": "FOUND",
+        "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
+        "advantage": "Reuse published finding; compare only for a concrete gap",
+        "limitations": "Candidate/registered research, no inferred install/license/live support",
+        "integration_method": "Reuse current module; isolate adapter only when required",
+        "priority": 4,
+        "target_module": "constructive",
+        "target_task": "APA-P70.A04.S01",
+        "dependencies": [
+          "APA-P70.A03.S01",
+          "APA-P70.A02.S04"
+        ],
+        "acceptance": "Applicability/source and BIM attachment verified; found detail not automatically approved",
+        "implementation_state": "FOUND"
+      },
+      {
+        "name": "SAM / SAF / structural handoff",
+        "purpose": "engineering",
+        "source": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md",
+        "source_artifact_ids": [
+          "ART-APA-STRUCTURAL-HANDOFF"
+        ],
+        "verification_level": "FOUND",
+        "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
+        "advantage": "Reuse published finding; compare only for a concrete gap",
+        "limitations": "Candidate/registered research, no inferred install/license/live support",
+        "integration_method": "Reuse current module; isolate adapter only when required",
+        "priority": 4,
+        "target_module": "engineering",
+        "target_task": "APA-P70.A05.S01",
+        "dependencies": [
+          "APA-P70.A03.S01",
+          "APA-P70.A02.S02",
+          "APA-P70.A04.S03"
+        ],
+        "acceptance": "Verified inputs, solver, loads, norms and BIM provenance; connectivity not carrying capacity",
+        "implementation_state": "FOUND"
+      },
+      {
+        "name": "Native MEP Designer",
+        "purpose": "MEP",
+        "source": "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md",
+        "source_artifact_ids": [
+          "ART-MEP-SOURCE-20261010-PORTGRAPH"
+        ],
+        "verification_level": "FOUND",
+        "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
+        "advantage": "Reuse published finding; compare only for a concrete gap",
+        "limitations": "Candidate/registered research, no inferred install/license/live support",
+        "integration_method": "Reuse current module; isolate adapter only when required",
+        "priority": 5,
+        "target_module": "MEP",
+        "target_task": "APA-P70.A06.S01",
+        "dependencies": [
+          "APA-P70.A03.S02",
+          "APA-P70.A02.S02",
+          "APA-P70.A05.S03"
+        ],
+        "acceptance": "Commands/routes/ports and model coordination proven; UI presence not integration",
+        "implementation_state": "FOUND"
+      },
+      {
+        "name": "OR-Tools / CP-SAT / batching / caches",
+        "purpose": "optimization",
+        "source": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md",
+        "source_artifact_ids": [
+          "ART-APA-FAST-COMPILER"
+        ],
+        "verification_level": "FOUND",
+        "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
+        "advantage": "Reuse published finding; compare only for a concrete gap",
+        "limitations": "Candidate/registered research, no inferred install/license/live support",
+        "integration_method": "Reuse current module; isolate adapter only when required",
+        "priority": 6,
+        "target_module": "optimization",
+        "target_task": "APA-P70.A10.S01",
+        "dependencies": [
+          "APA-P70.A06.S02"
+        ],
+        "acceptance": "Specific optimization objective/constraints plus measured benefit",
+        "implementation_state": "FOUND"
+      },
+      {
+        "name": "СП / ГОСТ normative sources",
+        "purpose": "release",
+        "source": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md",
+        "source_artifact_ids": [
+          "ART-APA-RU-JUNCTION-NORMS"
+        ],
+        "verification_level": "FOUND",
+        "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
+        "advantage": "Reuse published finding; compare only for a concrete gap",
+        "limitations": "Candidate/registered research, no inferred install/license/live support",
+        "integration_method": "Reuse current module; isolate adapter only when required",
+        "priority": 7,
+        "target_module": "release",
+        "target_task": "APA-P70.A07.S02",
+        "dependencies": [
+          "APA-P70.A07.S01",
+          "APA-P70.A05.S03",
+          "APA-P70.A06.S02"
+        ],
+        "acceptance": "Applicable norm/version/source linked to verified check",
+        "implementation_state": "FOUND"
+      },
+      {
+        "name": "IFC / openBIM / MCP / Twinmotion",
+        "purpose": "export",
+        "source": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md",
+        "source_artifact_ids": [
+          "ART-APA-FULL-CYCLE-RESEARCH"
+        ],
+        "verification_level": "FOUND",
+        "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
+        "advantage": "Reuse published finding; compare only for a concrete gap",
+        "limitations": "Candidate/registered research, no inferred install/license/live support",
+        "integration_method": "Reuse current module; isolate adapter only when required",
+        "priority": 7,
+        "target_module": "export",
+        "target_task": "APA-P70.A07.S03",
+        "dependencies": [
+          "APA-P70.A07.S02"
+        ],
+        "acceptance": "Required export/sync checked against native model; unsupported scope explicit",
+        "implementation_state": "FOUND"
+      },
+      {
+        "name": "Archived branches / alternate implementations / source71",
+        "purpose": "candidate donors",
+        "source": "https://github.com/dvikt33-ux/safe-bim-layer/blob/6a8abe2ac4e5a3e664c94bc9e71f9e15da943e27/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json",
+        "source_artifact_ids": [
+          "ART-APA-SOURCE-71-INDEX-20261011"
+        ],
+        "verification_level": "FOUND",
+        "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
+        "advantage": "Reuse published finding; compare only for a concrete gap",
+        "limitations": "Candidate/registered research, no inferred install/license/live support",
+        "integration_method": "Reuse current module; isolate adapter only when required",
+        "priority": 8,
+        "target_module": "candidate donors",
+        "target_task": "APA-P70.A01.S02",
+        "dependencies": [
+          "APA-P70.A01.S01",
+          "APA-P50.A01.S01"
+        ],
+        "acceptance": "Keep source provenance; compare measurable advantage before replace/merge",
+        "implementation_state": "FOUND"
+      }
+    ]
+  },
+  "execution_stages": [
+    {
+      "order": 1,
+      "name": "CORE",
+      "acceptance_task": "APA-P70.A08.S04"
+    },
+    {
+      "order": 2,
+      "name": "GEOMETRY",
+      "acceptance_task": "APA-P70.A09.S01"
+    },
+    {
+      "order": 3,
+      "name": "MATERIALS_LIBRARIES",
+      "acceptance_task": "APA-P70.A02.S04"
+    },
+    {
+      "order": 4,
+      "name": "CONSTRUCTIVE_ENGINEERING",
+      "acceptance_task": "APA-P70.A05.S03"
+    },
+    {
+      "order": 5,
+      "name": "MEP",
+      "acceptance_task": "APA-P70.A06.S02"
+    },
+    {
+      "order": 6,
+      "name": "OPTIMIZATION",
+      "acceptance_task": "APA-P70.A10.S01"
+    },
+    {
+      "order": 7,
+      "name": "RELEASE",
+      "acceptance_task": "APA-P70.A08.S02"
+    }
+  ]
 }
