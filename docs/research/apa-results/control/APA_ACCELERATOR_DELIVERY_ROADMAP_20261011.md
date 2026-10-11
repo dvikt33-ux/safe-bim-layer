@@ -145,7 +145,7 @@ GUID + геометрия + материал + этаж + связи → typed r
 3. Каждое исследование начинается с поиска существующих исходников/отчётов, содержит узкий question/gap и проверяемое доказательство. Если обнаружено новое направление — `TASK_PROPOSAL_V1`; отдельный аудитор принимает `TASK_REVIEW_V1` в реестр после дедупликации.
 4. **Build PR** из существующей codebase, CI, offline simulation и только затем user-authorized live. Не считать полноту CI доказательством работы Archicad.
 5. Публикация source-safe findings, tests/report, commit SHA и GitHub API readback обязательна. Только затем аудитор закрывает S-ID. Нельзя «исследовать» без публикации.
-6. Параллельно вести строго независимые ветки: **CORE** (slab+resume), **INTENT/STORIES+ATTRIBUTES**, **READBACK/QA**, **GTP/LOCAL-TRANSPORT feasibility**, **CSE/MEP/normative research**. Сводить только после прохождения общего interface contract, не создавать конкурирующие writer.
+6. Параллельно вести строго независимые ветки: **CORE** (slab+resume), **INTENT/STORIES+ATTRIBUTES**, **READBACK/QA**, **GPT/LOCAL-TRANSPORT feasibility**, **CSE/MEP/normative research**. Сводить только после прохождения общего interface contract, не создавать конкурирующие writer.
 7. Запланированные ChatGPT Scheduled Tasks в реестре: `CONFIGURED_UNVERIFIED`, а не доказанная бесперебойная 24/7 система. Не объявлять работу выполненной по расписанию без commit/receipt/status transition.
 
 ## 7. Решения и ограничения
