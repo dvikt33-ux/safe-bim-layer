@@ -219,3 +219,12 @@ This row indexes user-supplied logs verified for internal consistency by indepen
 | `ART-APA-SLACK-LIVE-TRANSPORT-E2E-20261011` | [Slack → SQLite LIVE test](runs/2026-10-11/apa-sync-live-message-delivery-e2e-20261011.md), [evidence commit 499e1dc](https://github.com/dvikt33-ux/safe-bim-layer/commit/499e1dcbc3ae17f96247be9c5bab04264d61b610) | Slack send+readback directly checked by ChatGPT; locally observed HTTP API output reports seq22/cursor22, conflict false. No GitHub-controller automated task mutation demonstrated. | Registered as evidence in `PROJECT_PLAN.json` revision 49, [commit 350565d](https://github.com/dvikt33-ux/safe-bim-layer/commit/350565d0b81706804352c10939a080429146ef50). No S-ID claimed or completed. |
 
 **Open gate:** controller registry admission/claims and reverse GitHub → Slack event propagation require an independent E2E. No Archicad LIVE or 24/7 autonomous execution claim.
+
+## Slack ↔ Controller ↔ GitHub source gap — 2026-10-11
+
+| Artifact | Location / version | Evidence status |
+|---|---|---|
+| `ART-APA-SLACK-GAP-AUDIT-20261011` | [Source-level gap audit](runs/2026-10-11/apa-slack-controller-github-gap-audit-20261011.md), [commit 8e79a88](https://github.com/dvikt33-ux/safe-bim-layer/commit/8e79a881bf4b533d0dd7c3a545c2edff4e58a057) | Source-inspected receiver/controller/publisher; prior user-observed SQLite LIVE transport; automated Slack→Github task mutation and reverse GitHub→Slack **NOT_VERIFIED** |
+| `ART-APA-SLACK-BRIDGE-PROPOSAL-20261011` | [Pending candidate](control/proposals/APA-CAND-20261011-slack-evidence-bridge.md), [commit 9e994de](https://github.com/dvikt33-ux/safe-bim-layer/commit/9e994de7f30c54cf3df99369513e7612ee4ee7dd) | `PENDING_INDEPENDENT_AUDIT`; no task ID admitted, no automatic Slack-initiated research authorized |
+
+Both artifacts registered in `PROJECT_PLAN.json` revision **50**, [commit 88d84d2](https://github.com/dvikt33-ux/safe-bim-layer/commit/88d84d2090f0d1c98f258abb63455f1b2c629e7d); all task statuses/claim fields left untouched. The CLI `step_sync.py` is opt-in, not an always-on evidence reconciler. Existing `APA-P60.A02.S04` governs independent task proposal admission.
