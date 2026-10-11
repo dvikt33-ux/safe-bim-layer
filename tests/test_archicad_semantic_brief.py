@@ -140,6 +140,83 @@ class SemanticBriefTests(unittest.TestCase):
         self.assertEqual(r["nativeResolution"],"NEEDS_STORY_RESOLUTION")
         self.assertFalse(r["nativeStoryBindings"])
 
+    def test_live_three_stories_with_unnamed_second_resolves_explicit_native_pins(self):
+        v=valid()
+        v["stories"][0].update({"existingNativeIndex":0,"existingFloorId":1})
+        v["stories"][1].update({"existingNativeIndex":1,"existingFloorId":2,
+                                "existingNativeLabel":""})
+        seen=[]
+        def live(cmd,args):
+            seen.append(cmd)
+            if cmd=="GetProjectInfo":
+                return {"projectPath":v["targetProjectPath"],
+                        "isUntitled":False,"isTeamwork":False}
+            if cmd=="GetStories":
+                return {"actStory":0,"stories":[
+                    {"index":0,"floorId":1,"level":0,"height":3,"name":"Первый Этаж"},
+                    {"index":1,"floorId":2,"level":3,"height":3,"name":""},
+                    {"index":2,"floorId":3,"level":6,"height":3,"name":""}]}
+            raise AssertionError("Read-only only")
+        out=A.compile_project_brief(v,read_api=live)
+        self.assertEqual(out["nativeResolution"],"READY_FOR_ATTRIBUTE_RESOLUTION")
+        self.assertEqual([(x["nativeIndex"],x["floorId"],x["nativeLabel"])
+                          for x in out["nativeStoryBindings"]],
+                         [(0,1,"Первый Этаж"),(1,2,"")])
+        self.assertEqual(seen,["GetProjectInfo","GetStories"])
+        self.assertEqual(out["nativeWriteCalls"],0)
+
+    def test_unnamed_stories_must_be_pinned_by_both_native_ids(self):
+        v=valid()
+        v["stories"][1]["existingNativeLabel"]=""
+        with self.assertRaisesRegex(ValueError,"INVALID_EXISTING_STORY_LABEL"):
+            A.compile_project_brief(v)
+        v["stories"][1]["existingNativeIndex"]=1
+        with self.assertRaisesRegex(ValueError,"EXPLICIT_NATIVE_STORY_IDENTITY"):
+            A.compile_project_brief(v)
+        v["stories"][1]["existingFloorId"]=2
+        self.assertEqual(A.compile_project_brief(v)["nativeResolution"],
+                         "NEEDS_STORY_RESOLUTION")
+
+    def test_pinned_unnamed_story_wrong_floor_id_is_not_silently_reassigned(self):
+        v=valid()
+        v["stories"][1].update({"existingNativeLabel":"",
+                                "existingNativeIndex":1,"existingFloorId":99})
+        seen=[]
+        def native(cmd,args):
+            seen.append(cmd)
+            if cmd=="GetProjectInfo":
+                return {"projectPath":v["targetProjectPath"],
+                        "isUntitled":False,"isTeamwork":False}
+            if cmd=="GetStories":
+                return {"stories":[
+                    {"index":0,"floorId":1,"level":0,"name":"Первый Этаж"},
+                    {"index":1,"floorId":2,"level":3,"name":""},
+                    {"index":2,"floorId":3,"level":6,"name":""}]}
+            raise AssertionError("unexpected command")
+        out=A.compile_project_brief(v,read_api=native)
+        self.assertEqual(out["nativeResolution"],"NEEDS_STORY_RESOLUTION")
+        self.assertEqual(out["unresolvedArchitecturalStoryId"],"level-2")
+        self.assertEqual(out["nativeStoryBindings"],[])
+        self.assertEqual(seen,["GetProjectInfo","GetStories"])
+
+    def test_two_unnamed_native_levels_can_resolve_only_with_distinct_pins(self):
+        v=valid()
+        v["stories"][1].update({"existingNativeLabel":"",
+                                "existingNativeIndex":1,"existingFloorId":2})
+        v["stories"].append({"id":"level-3","label":"3 этаж","level":6.0,
+                             "existingNativeLabel":"",
+                             "existingNativeIndex":2,"existingFloorId":3})
+        self.assertEqual(len(A.compile_project_brief(v)["stories"]),3)
+        v["stories"][2]["existingNativeIndex"]=1
+        with self.assertRaisesRegex(ValueError,"DUPLICATE_PINNED_NATIVE_STORY"):
+            A.compile_project_brief(v)
+
+    def test_zero_floor_pins_cannot_be_forged_in_generate_from_zero_mode(self):
+        v=valid("GENERATE_FROM_ZERO")
+        v["stories"][0].update({"existingNativeIndex":0,"existingFloorId":1})
+        with self.assertRaisesRegex(ValueError,"EXPLICIT_NATIVE_STORY_IDENTITY"):
+            A.compile_project_brief(v)
+
     def test_old_legacy_compiler_contract_unchanged(self):
         v=valid()
         with self.assertRaisesRegex(ValueError,"INVALID_PROJECT_INTENT"):

@@ -67,14 +67,33 @@ def normalize(doc):
     seen_ids=set(); seen_labels=set(); normalized=[]; last=None
     for i,row in enumerate(stories):
         if (not isinstance(row,dict) or
-                set(row)-{"id","label","level","existingNativeLabel"} or
+                set(row)-{"id","label","level","existingNativeLabel",
+                          "existingNativeIndex","existingFloorId"} or
                 not {"id","label","level"}<=set(row)):
             raise ValueError("STORY_FIELDS_REQUIRED")
         sid=_id(row["id"],"STORY_ID")
         label=_name(row["label"],"STORY_LABEL")
         level=_nonneg(row["level"],"STORY_LEVEL")
-        existing=row.get("existingNativeLabel",label)
-        _name(existing,"EXISTING_STORY_LABEL")
+        pinned=("existingNativeIndex" in row or "existingFloorId" in row)
+        if pinned:
+            if (doc["mode"]!="ADAPT_EXISTING"
+                    or not {"existingNativeIndex","existingFloorId",
+                            "existingNativeLabel"}<=set(row)
+                    or type(row["existingNativeIndex"]) is not int
+                    or type(row["existingFloorId"]) is not int):
+                raise ValueError("EXPLICIT_NATIVE_STORY_IDENTITY_REQUIRED")
+            native_index=row["existingNativeIndex"]
+            floor_id=row["existingFloorId"]
+            if native_index < -100 or floor_id < 0:
+                raise ValueError("INVALID_PINNED_NATIVE_STORY")
+            existing=row["existingNativeLabel"]
+            if existing!="":
+                _name(existing,"EXISTING_STORY_LABEL")
+        else:
+            native_index=None
+            floor_id=None
+            existing=row.get("existingNativeLabel",label)
+            _name(existing,"EXISTING_STORY_LABEL")
         if (sid in seen_ids or label in seen_labels
                 or (last is not None and level<=last)):
             raise ValueError("DUPLICATE_OR_UNORDERED_STORY")
@@ -82,9 +101,19 @@ def normalize(doc):
             raise ValueError("FIRST_ARCHITECTURAL_STORY_MUST_BE_1_AT_ZERO")
         seen_ids.add(sid);seen_labels.add(label);last=level
         normalized.append({"id":sid,"label":label,"level":level,
-                           "existingNativeLabel":existing})
-    if len({s["existingNativeLabel"] for s in normalized})!=len(normalized):
+                           "existingNativeLabel":existing,
+                           "existingNativeIndex":native_index,
+                           "existingFloorId":floor_id})
+    # Empty name is valid ONLY when exact native index/floorId/level are
+    # explicitly pinned. Multiple unnamed stories require unique IDs.
+    unpinned_names=[s["existingNativeLabel"] for s in normalized
+                    if s["existingNativeIndex"] is None]
+    if len(set(unpinned_names))!=len(unpinned_names):
         raise ValueError("DUPLICATE_EXISTING_STORY_LABEL")
+    pinned_rows=[s for s in normalized if s["existingNativeIndex"] is not None]
+    if (len({s["existingNativeIndex"] for s in pinned_rows})!=len(pinned_rows)
+            or len({s["existingFloorId"] for s in pinned_rows})!=len(pinned_rows)):
+        raise ValueError("DUPLICATE_PINNED_NATIVE_STORY")
 
     rooms=doc["rooms"]
     if not isinstance(rooms,list) or len(rooms)>100:
@@ -156,12 +185,16 @@ def resolve_stories(normalized, api):
     bindings=[]
     for story in normalized["stories"]:
         matches=[s for s in current if isinstance(s,dict)
-                 and (s.get("name") or s.get("uName") or "")==story["existingNativeLabel"]
-                 and isinstance(s.get("index"),int)
-                 and isinstance(s.get("floorId"),int)
+                 and (s.get("name") if isinstance(s.get("name"),str)
+                      else (s.get("uName") or ""))==story["existingNativeLabel"]
+                 and type(s.get("index")) is int
+                 and type(s.get("floorId")) is int
                  and type(s.get("level")) in (int,float)
                  and math.isfinite(s["level"])
-                 and abs(s["level"]-story["level"])<=1e-5]
+                 and abs(s["level"]-story["level"])<=1e-5
+                 and (story["existingNativeIndex"] is None
+                      or (s["index"]==story["existingNativeIndex"]
+                          and s["floorId"]==story["existingFloorId"]))]
         if len(matches)!=1:
             return {**normalized,"nativeResolution":"NEEDS_STORY_RESOLUTION",
                     "unresolvedArchitecturalStoryId":story["id"]}

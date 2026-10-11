@@ -23,6 +23,38 @@ def sample():
 
 
 class AuthoredNativePlanTests(unittest.TestCase):
+    def test_actual_three_story_inventory_maps_only_two_authored_floors(self):
+        b=valid()
+        b["stories"][0].update({"existingNativeIndex":0,"existingFloorId":1})
+        b["stories"][1].update({"existingNativeLabel":"",
+                               "existingNativeIndex":1,"existingFloorId":2})
+        class ThreeLevelNative(NativeGetOnly):
+            def __call__(self,cmd,args):
+                if cmd=="GetStories":
+                    self.calls.append(cmd)
+                    return {"actStory":0,"stories":[
+                        {"index":0,"floorId":1,"name":"Первый Этаж",
+                         "level":0,"height":3},
+                        {"index":1,"floorId":2,"name":"",
+                         "level":3,"height":3},
+                        {"index":2,"floorId":3,"name":"",
+                         "level":6,"height":3}]}
+                return super().__call__(cmd,args)
+        api=ThreeLevelNative()
+        pack=A.compile_project_library_pack(b,specimen(),read_api=api)
+        self.assertEqual(pack["status"],
+                         "PROJECT_NATIVE_MATERIAL_RESOLVED_NOT_ENGINEER_APPROVED")
+        out=A.compile_authored_native_candidate(b,pack,layout(),HEIGHTS,api)
+        floors=[next(iter(x["params"].values()))[0]["floorIndex"]
+                for x in out["graph"]["operations"]]
+        self.assertEqual(floors,[0,0,1,1])
+        self.assertEqual([x["nativeLabel"] for x in out["storyBindings"]],
+                         ["Первый Этаж",""])
+        self.assertEqual(out["provisionalBasicSlabMaterialGuid"],
+                         pack["selectedCseCandidates"][0]["native"]["guid"])
+        self.assertFalse(out["liveWriteAuthorized"])
+        self.assertEqual(out["nativeWriteCalls"],0)
+
     def test_two_authored_walls_two_slabs_compile_into_same_bim_dag(self):
         b,pack,native=sample()
         native.calls.clear()
