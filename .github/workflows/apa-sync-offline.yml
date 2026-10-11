@@ -27,6 +27,17 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_apa_slack_sync.py' -v
       - name: Receipt bridge offline tests (no network or tokens)
         run: python -m unittest discover -s tests -p 'test_receipt_bridge.py' -v
+      - name: Pinned real GitHub receipt readback to Slack INFO dry-run
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python -m scripts.apa_sync.receipt_bridge \
+            --plan-commit 8af838f0ad96c98bfcdafab86ad318901a23ecd1 \
+            notify \
+            --task-id APA-P70.A01.S01 \
+            --receipt-path docs/research/apa-results/receipts/APA-RUN-20261011-091905Z-p70-source-integration-map.json \
+            > /tmp/apa-verified-receipt-info.json
+          python -c 'import json; x=json.load(open("/tmp/apa-verified-receipt-info.json")); assert x["dry_run"] is True and x["event"]["status"] == "INFO" and x["event"]["task_id"] == "APA-P70.A01.S01"; print("REAL_RECEIPT_DRY_RUN_PASS")'
 
   windows-launcher-static:
     runs-on: windows-latest
