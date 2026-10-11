@@ -271,9 +271,22 @@ def receipt(commit):
                "idempotency_key": entry["idempotency_key"]}
         if path.exists():
             old = read_json(path)
-            check(old.get("report_sha256") == obj["report_sha256"] and
+            # An idempotent retry preserves the original verified commit,
+            # but cannot accept a partial or forged receipt with the same hash.
+            previous_commit = old.get("report_commit_sha")
+            check(isinstance(previous_commit, str) and
+                  re.fullmatch(r"[a-f0-9]{40}", previous_commit) is not None and
+                  old.get("index_commit_sha") == previous_commit and
+                  old.get("schema") == obj["schema"] and
+                  old.get("run_id") == obj["run_id"] and
+                  old.get("report_path") == obj["report_path"] and
+                  old.get("report_sha256") == obj["report_sha256"] and
                   old.get("idempotency_key") == obj["idempotency_key"] and
-                  old.get("readback_verified") is True, "RECEIPT_CONFLICT")
+                  old.get("index_mode") == obj["index_mode"] and
+                  old.get("status") == "DONE_PUBLISHED" and
+                  old.get("indexed") is True and
+                  old.get("readback_verified") is True and
+                  set(old) == set(obj), "RECEIPT_CONFLICT")
         else:
             write_if_absent(path, encoded(obj))
         print("RECEIPT_READY", path)
