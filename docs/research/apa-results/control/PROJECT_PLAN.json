@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 48,
+  "revision": 49,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -506,6 +506,12 @@
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-092155Z-source71-byte-archive/REPORT.md",
       "kind": "REPORT",
       "verification": "GITHUB_READBACK_VERIFIED_V2_RECEIPT"
+    },
+    "ART-APA-SLACK-LIVE-TRANSPORT-E2E-20261011": {
+      "id": "ART-APA-SLACK-LIVE-TRANSPORT-E2E-20261011",
+      "uri": "docs/research/apa-results/runs/2026-10-11/apa-sync-live-message-delivery-e2e-20261011.md",
+      "kind": "EVIDENCE",
+      "verification": "CHATGPT_SLACK_SEND_READBACK_AND_USER_LOCAL_HTTP_LIVE_PASS_ONLY"
     }
   },
   "tasks": {
