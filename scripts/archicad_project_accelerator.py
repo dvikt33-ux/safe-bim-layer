@@ -28,7 +28,8 @@ import archicad_authored_native_plan as AUTHORED_NATIVE
 
 READS = frozenset({"GetProjectInfo", "GetStories", "GetAddOnVersion",
                   "GetAllElements", "Get3DBoundingBoxes", "GetDetailsOfElements",
-                  "GetAttributesByType", "GetSubelementsOfHierarchicalElements", "API.GetProductInfo"})
+                  "GetAttributesByType", "GetSubelementsOfHierarchicalElements", "GetModelDumpV1",
+                  "GetCollisions", "API.GetProductInfo"})
 NATIVE_MUTATIONS = RUN.ALLOWED_WRITES | frozenset({"ModifySlabs"})
 PRIMITIVES = {
     "pavilion-frame-v1": {"status": "EXECUTABLE_PENDING_LIVE_ACCEPTANCE",
@@ -213,7 +214,8 @@ def compile_authored_intent(intent, schema_path, read_api):
             "schemaVersion", "projectId", "units", "brief", "cseCandidate",
             "layout", "storyHeights"}
     if (not isinstance(intent, dict) or not required <= set(intent)
-            or set(intent)-required-{"wallBasicMaterialName","nativeComponents"}
+            or set(intent)-required-{"wallBasicMaterialName","nativeComponents","nativeGeometryAudit"}
+            or type(intent.get('nativeGeometryAudit',False)) is not bool
             or intent["schemaVersion"] != "apa-authored-project/1"
             or intent["units"] != "meters"
             or not isinstance(intent["projectId"], str)
@@ -445,6 +447,9 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
             if RUN.guarded_project(api, required_story) != binding:
                 raise ValueError("PROJECT_CHANGED_DURING_WHOLE_ASSEMBLY_READBACK")
             result["wholeAssemblyReadback"] = True
+            if authored and intent.get('nativeGeometryAudit'):
+                import archicad_authored_geometry as GEOMETRY
+                result['nativeGeometry']=GEOMETRY.run(api,ticket,result['scene']['steps'],after,folder/'native-geometry')
     except Exception as exc:
         result.update(status="PARTIAL_OR_UNKNOWN_OUTCOME" if api and api.write_attempts else "BLOCKED",
                       reason=type(exc).__name__ + ": " + str(exc))
