@@ -25,6 +25,12 @@ class FifthSuffixTests(unittest.TestCase):
         OrphanS2WallDiagnosisTests.setUp(self)
         old_guid=next(reversed(self.native.created))
         self.native.created[FIFTH.VERIFIED_ORPHAN_GUID]=self.native.created.pop(old_guid)
+        # Synthetic source tokens differ from the exact pinned live token.
+        # Patch only the offline fixture, never loosen the live file guard.
+        token_patch=patch.object(
+            FIFTH,"APPROVED_FOURTH_PLAN_HASH",self.stopped["planHash"])
+        token_patch.start()
+        self.addCleanup(token_patch.stop)
         self.before_writes=len(self.native.writes)
 
     def test_read_only_13_prefix_and_12_new_steps(self):
