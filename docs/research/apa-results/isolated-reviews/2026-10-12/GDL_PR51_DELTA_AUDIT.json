@@ -1,0 +1,115 @@
+{
+  "schema": "APA_GDL_WORK_DELTA_AUDIT_V1",
+  "date": "2026-10-12",
+  "classification": "PINNED_SOURCE_ONLY_REVIEW",
+  "independent_live_reproduction": false,
+  "predecessor": {
+    "pr": 49,
+    "head_sha_at_review": "d6c041f064835bfa56cf3458b05523e41c6594b1",
+    "status": "DRAFT_NONINTERFERING"
+  },
+  "reviewedWork": {
+    "pr": 51,
+    "head_sha": "9139124176e3114afd8f3b7733cf40f423d0d8e5",
+    "base": "feature/apa-native-geometry-20261011",
+    "draft": true,
+    "live_outcome": "REPORTED_BY_WORK_NOT_REEXECUTED",
+    "selectedObjectMainGuid": "75DBC58A-E1D7-4096-9294-BB578516AD4C",
+    "reportedPrimaryCountAfter": 18,
+    "reportedTotalCountAfter": 40,
+    "reportedPhysicalHeightMeters": 0.31,
+    "reportedParametricHeightMeters": 0.34,
+    "ci": {
+      "workflow_run": 38174986480,
+      "status": "success",
+      "runtime_live_equivalence": false
+    }
+  },
+  "pinnedSources": [
+    {
+      "path": "scripts/archicad_selected_library_part.py",
+      "blob": "ac05fbe1f6c85aef44618e0f5a278a5d15bfceb1"
+    },
+    {
+      "path": "scripts/archicad_scene_run.py",
+      "blob": "cd188c341e1807290b068959d95bf07621024b03"
+    },
+    {
+      "path": "scripts/archicad_authored_extension.py",
+      "blob": "3108759d5725ad852ca5e7a5bc7126c2a41c782d"
+    },
+    {
+      "path": "tests/test_archicad_selected_library_part.py",
+      "blob": "2cbcbc3a314a4da65c6013caf41621d372c61024"
+    },
+    {
+      "path": "docs/APA_SELECTED_NATIVE_MATERIALS.md",
+      "blob": "6b30220db0e8a99d388f86defd5a906be8767051"
+    }
+  ],
+  "nativeDocs": [
+    "https://archicadapi.graphisoft.com/documentation/acapi_libpart_search",
+    "https://graphisoft.github.io/archicad-api-devkit/struct_a_p_i___lib_part.html",
+    "https://gdl.graphisoft.com/gdl-style-guide/library-part-format/"
+  ],
+  "findings": [
+    {
+      "id": "PR51_SELECTED_GSM_LIVE_SCOPE",
+      "status": "REPORTED_LIVE_SELECTED_OBJECT",
+      "confidence": "WORK_REPORT_ONLY",
+      "blocks_generalization": false,
+      "action": "Reuse existing adapter; no new importer"
+    },
+    {
+      "id": "G1_SAME_RESOLVER_PREWRITE_PARITY",
+      "status": "NOT_VERIFIED",
+      "risk": "HIGH_FOR_GENERALIZATION",
+      "blocks_generalization": true,
+      "evidence": "Inventory name+GUID preflight, SceneWriter name-only dispatch and postwrite Main GUID check; native predispatch parity not shown"
+    },
+    {
+      "id": "G2_TYPED_PARAMS_REVISION_MACROS",
+      "status": "NOT_VERIFIED",
+      "risk": "HIGH_FOR_GENERALIZATION",
+      "blocks_generalization": true,
+      "evidence": "No typed GetGDLParametersOfElements equality; Revision ID, macro IDs and UI not closure-proofed"
+    },
+    {
+      "id": "G3_IMPORT_PROVENANCE_PARTIAL_INVENTORY",
+      "status": "PARTIAL",
+      "risk": "MEDIUM",
+      "blocks_generalization": true,
+      "evidence": "Preimport local SHA256, overwrite false; no independent embedded-hash readback; catalog skippedCount positive accepted"
+    },
+    {
+      "id": "G4_GDL_FACTORY_NATIVE_ABI",
+      "status": "DEFERRED_SOURCE_NOT_VERIFIED",
+      "risk": "LOW_WHILE_DEFERRED",
+      "blocks_generalization": false,
+      "evidence": "PR51 selected GSM import does not exercise SafeBIMGlobalLibraryPart Compile/Register or LP_XMLConverter"
+    }
+  ],
+  "proposedTests": [
+    "same_native_resolver_no_virtual_reference_and_no_ambiguous_name",
+    "mutate_library_after_prepare_before_write_mock",
+    "typed_GDL_params_before_after_reopen_with_revision",
+    "macro_guid_ui_regression",
+    "embedded_import_manifest_and_hash_readback"
+  ],
+  "existingTaskPointers": [
+    "APA-P10.A02.S02",
+    "APA-P70.A02.S04",
+    "APA-P50.A02.S02",
+    "APA-P00.A02.S03"
+  ],
+  "actionPolicy": {
+    "doNotMergeDuringWork": true,
+    "modifyWorkBranches": false,
+    "modifyCanonicalBranch": false,
+    "modifyMain": false,
+    "modifyController": false,
+    "archicadWriteCalls": 0,
+    "newTaskClaim": false
+  },
+  "auditReport": "docs/research/apa-results/isolated-reviews/2026-10-12/GDL_PR51_DELTA_AUDIT.md"
+}
