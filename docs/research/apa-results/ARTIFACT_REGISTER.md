@@ -244,3 +244,9 @@ Evidence gate: Slack → Socket Mode → SQLite live transport had PASS for even
 | `ART-APA-SLACK-BRIDGE-PR37-OFFLINE-20261011` | [Canonical report](runs/2026-10-11/apa-slack-receipt-bridge-poc-pr37-20261011.md), [draft PR #37](https://github.com/dvikt33-ux/safe-bim-layer/pull/37) | [CI #38148894163](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38148894163) SUCCESS: **93 Linux + 49 Windows** offline tests; isolated receipt INFO stream prevents real-task state collision; real pinned GitHub receipt dry-run PASS; one-shot Windows PowerShell launcher parsed | User's Windows Slack→SQLite outbound LIVE and unattended two-way sync NOT_VERIFIED; candidate `APA-P60.A02.S05` not admitted; controller rev **54**. |
 
 Controller artifact record: `PROJECT_PLAN.json` revision **52**, [commit 8af838f](https://github.com/dvikt33-ux/safe-bim-layer/commit/8af838f0ad96c98bfcdafab86ad318901a23ecd1). No task claim or status mutation; existing `DEFERRED` review stands.
+
+## APA Research OS: controller projection race-repair POC (2026-10-11)
+
+| Artifact | Source and validation | Classification |
+|---|---|---|
+| `ART-APA-PUBLISHER-RACE-PR38-20261011` | [Canonical report](runs/2026-10-11/apa-publisher-controller-push-race-pr38-20261011.md), [draft PR #38](https://github.com/dvikt33-ux/safe-bim-layer/pull/38), [Actions #38150011113](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38150011113) **SUCCESS**: 23 Controller + 6 Publisher unit tests, four synthetic Git race cases incl. concurrent plan rev preservation and code-change rejection | **OFFLINE_CI_PASS, CANONICAL_DEPLOYMENT_NOT_VERIFIED**. Proposed fix is in new branch only; `APA-P00.A03.S03` remains PARTIAL, no task status changes. Does not claim full three-stage publisher serialization. |
