@@ -32,3 +32,16 @@ The second command is **dry-run**. The explicitly opted-in outbound send appends
 ## Controller change boundaries
 
 Any future automation of this module must pass independent audit and authorization of deployment rights, credential isolation, rate limiting, restart and failure semantics. The actual `PROJECT_PLAN.json` status and Scheduled Task dispatch policy continue to be the sole authority. This is a bounded source-code POC in a new branch, not the admission of provisional `APA-P60.A02.S05` to READY.
+
+## Durable delivery guard (new)
+
+Only explicit `notify ... --publish` opens a **separate** SQLite outbox:
+`%LOCALAPPDATA%\SafeBIM\APA-Sync\receipt-outbox.sqlite3` on Windows. This is NOT the receiver's existing `events.sqlite3` and does not change task status, Archicad or the current Socket Mode process.
+
+Workflow: deterministic notification reserved locally → scan up to 1200 Slack history messages for the *exact ID and payload* → if already present, record verified Slack timestamp → else mark `IN_FLIGHT` before attempting to post → mark `SENT` on Slack acknowledgement. Concurrent same-ID processes cannot both claim `RESERVED`. If Slack send or a process crashes before confirmation, the record remains `UNCERTAIN` or `IN_FLIGHT`. On the next explicitly requested run, Slack is rechecked; if the message still cannot be confirmed, the module **fails closed** and does NOT resend automatically. Operator/manual reconciliation is required. Do not remove the database to force an uncertain retry.
+
+The code **does not provide exactly-once delivery**, 24/7 execution, automatic notifications on GitHub commits, or a live deployed bridge. Optional `--outbox-db` on `notify` is for a disposable test store; production use should use the default isolated local path.
+
+## Verified CI boundary
+
+[APA Slack offline CI #38145391099](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38145391099): SUCCESS; **44 existing receiver tests + 16 original receipt tests + 11 outbox/restart/concurrency tests = 71 offline tests PASS**; Python compile, Windows launcher parser, and pinned **real GitHub receipt → INFO dry-run** all PASS. No Slack post was made by this run.
