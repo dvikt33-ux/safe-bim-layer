@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 57,
+  "revision": 58,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -548,6 +548,18 @@
       "uri": "docs/research/apa-results/control/reviews/APA-P00.A03.S03-PR38-controller-push-race-20261011.md",
       "kind": "REVIEW",
       "verification": "INDEPENDENT_SOURCE_AND_ACTUAL_GIT_OFFLINE_CI_PASS_LIMITED_SCOPE_NO_MERGE"
+    },
+    "ART-P70-A01-S03-INTEGRATION-BOUNDARIES-20261011": {
+      "id": "ART-P70-A01-S03-INTEGRATION-BOUNDARIES-20261011",
+      "uri": "docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-160327Z-p70-a01-s03-integration-freeze/REPORT.md",
+      "kind": "REPORT",
+      "verification": "GITHUB_READBACK_VERIFIED"
+    },
+    "ART-P70-A01-S03-PUBLISH-RECEIPT-20261011": {
+      "id": "ART-P70-A01-S03-PUBLISH-RECEIPT-20261011",
+      "uri": "docs/research/apa-results/receipts/APA-RUN-20261011-160327Z-p70-a01-s03-integration-freeze.json",
+      "kind": "RECEIPT",
+      "verification": "GITHUB_READBACK_VERIFIED"
     }
   },
   "tasks": {
@@ -2112,7 +2124,7 @@
       "action_id": "APA-P70.A01",
       "title": "Утвердить минимальные границы интеграции и порядок сквозных поставок",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "DONE_PUBLISHED",
       "priority": 2,
       "work_key": "product-integration-boundaries",
       "depends_on": [
@@ -2128,11 +2140,14 @@
         "Проверенный маршрут полного цикла, reuse map, отсутствие дублирования SceneWriter/графа/исполнителя, приёмочные ворота"
       ],
       "acceptance": "Проверенный маршрут полного цикла, reuse map, отсутствие дублирования SceneWriter/графа/исполнителя, приёмочные ворота",
-      "owner": "chatgpt-gpt6-manual",
-      "lease_until": "2026-10-11T19:00:00Z",
-      "claim_ref": "APA-RUN-20261011-1601Z-p70-a01-s03-integration-boundaries",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-P70-A01-S03-INTEGRATION-BOUNDARIES-20261011",
+        "ART-P70-A01-S03-PUBLISH-RECEIPT-20261011"
+      ],
       "blocked_reason": null
     },
     "APA-P70.A02.S01": {
