@@ -31,3 +31,23 @@ New PR-head commit [a8b11de](https://github.com/dvikt33-ux/safe-bim-layer/commit
 [CI run 38144870385](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38144870385) is **SUCCESS on attempt 1**, including step `Pinned real GitHub receipt readback to Slack INFO dry-run` PASS; independent job-step readback verifies it ran. The test exercised real GitHub REST pinned content, source report checksum/registration, and creation of `INFO` event without Slack send. Existing 44 + new 16 offline tests and Windows launcher parsing also PASS.
 
 **Revised evidence level:** GITHUB_PINNED_REAL_RECEIPT_DRY_RUN_PASS, OFFLINE_CI_PASS, **WINDOWS_AND_OUTBOUND_SLACK_LIVE_NOT_VERIFIED**. No claim that the bridge is enabled or automatically runs.
+
+## Durable SQLite outbox and safe retry layer — independent CI evidence (2026-10-11)
+
+Additional draft PR #37 changes on `feature/apa-sync-receipt-evidence-bridge-poc-20261011` implement separate opt-in `scripts/apa_sync/notification_outbox.py` and `publish_with_outbox()`, **without modifying the running Windows Socket Mode service or its `events.sqlite3`**.
+
+- New isolated outbox persisted in `%LOCALAPPDATA%/SafeBIM/APA-Sync/receipt-outbox.sqlite3` by default, only when `--publish` is used. SQLite `BEGIN IMMEDIATE` protects per-event reservation. Existing `SENT` event IDs are not resent.
+- Uncertain delivery or process crash after `IN_FLIGHT`: on the next explicitly requested attempt, scan Slack for the exact event ID and semantic payload; if found, reconcile the Slack timestamp as `SENT`, otherwise fail closed. **No blind retry**; exactly-once delivery not claimed.
+- Same event ID with changed proof/status rejected. Bounded Slack channel read protects against silent partial history dedup; no automation/daemon, GitHub write, controller lease or task mutation.
+- Code commit [d9629bb](https://github.com/dvikt33-ux/safe-bim-layer/commit/d9629bb8276a1b3dc0c54da8260f48e6916680af), outbox file commit [d32cd7d](https://github.com/dvikt33-ux/safe-bim-layer/commit/d32cd7d1c9ef625578eef7dad264937fdbb37e0f), outbox test commit [e3ca02e](https://github.com/dvikt33-ux/safe-bim-layer/commit/e3ca02e46c8c54b955db2e9085c9b3a8a1a62564), source readback confirmed. Updated [PR documentation](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-sync-receipt-evidence-bridge-poc-20261011/scripts/apa_sync/RECEIPT_BRIDGE_POC.md), commit [08a5970](https://github.com/dvikt33-ux/safe-bim-layer/commit/08a597088d3758a58d7806a6a296a9abce8d3b32).
+
+### Independent CI
+
+[GitHub Actions 38145391099](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38145391099) **SUCCESS on attempt 1**:
+- Existing Slack receiver: 44/44 offline PASS.
+- Receipt contract: 16/16 offline PASS.
+- Outbox/crash/restart/duplicate/concurrency: 11/11 offline PASS.
+- **TOTAL 71/71 unit tests PASS**, real pinned GitHub receipt INFO dry-run PASS, Windows PowerShell launcher syntax PASS.
+
+### Unclosed gates
+The actual new bridge has **NOT** sent a Slack message from Windows with this outbox; installed receiver remains untouched. Automatic GitHub→Slack push-trigger wiring, post-restart real Slack/SQLite readback, long-running reliability, transactional exactly-once and autonomous ChatGPT execution are **NOT_VERIFIED**. Candidate `APA-P60.A02.S05` remains `DEFERRED` and absent from executable `PROJECT_PLAN.json`. No new S-ID was claimed. Keep this implementation as draft until code security review and separately authorized LIVE deployment.
