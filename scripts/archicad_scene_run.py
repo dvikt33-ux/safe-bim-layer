@@ -393,12 +393,27 @@ class SceneWriter:
         preflight = self.preflight(x, y)
         if preflight["sourcePlanHash"] != expected_hash:
             raise ValueError("PLAN_HASH_MISMATCH: get hash from same-anchor dry-run")
+        return self._execute_verified_plan(preflight, scene_id, expected_hash)
+
+    def _execute_verified_plan(self, preflight, scene_id, expected_hash,
+                               seeded_created=None, approval_source=None):
+        """Same existing one-shot SceneWriter, with externally verified prefix.
+
+        Only recovery after exact immutable old-ledger + current-native matching
+        can supply a nonempty prefix. Never invokes preflight's spatial collision
+        scanner for a scene that legitimately already contains its first steps.
+        """
+        seeded_created = dict(seeded_created or {})
+        if (not isinstance(scene_id, str) or not _SCENE_ID.fullmatch(scene_id)
+                or preflight["sourcePlanHash"] != expected_hash):
+            raise ValueError("RESUME_PLAN_OR_ID_MISMATCH")
         if not self.journal_path.parent.exists():
             raise ValueError("journal state directory must already exist")
         result = {
             "sceneId": scene_id, "planHash": expected_hash, "status": "BLOCKED",
             "plnSaved": False, "automaticRetry": False, "steps": {},
             "sceneDimensions": preflight["metrics"]["dimensionsMeters"],
+            "reusedCount": len(seeded_created),
         }
         with closing(sqlite3.connect(str(self.journal_path))) as db:
             db.execute("PRAGMA synchronous=FULL")
@@ -412,8 +427,14 @@ class SceneWriter:
             db.execute("INSERT INTO scenes VALUES (?,?,?,?)",
                        (scene_id, expected_hash, "STARTED", canonical(result)))
             db.commit()
-            created = {"__plan__": preflight["graph"]}
+            created = {"__plan__": preflight["graph"], **seeded_created}
+            for sid, prior in seeded_created.items():
+                result["steps"][sid] = {
+                    "status": "REUSED_VERIFIED", "guid": prior["guid"],
+                    "kind": prior["kind"], "floorIndex": prior["floorIndex"]}
             for step_id in preflight["executionOrder"]:
+                if step_id in seeded_created:
+                    continue
                 step = next(s for s in preflight["graph"]["operations"] if s["id"] == step_id)
                 command = step["command"]
                 if command not in ALLOWED_WRITES:
@@ -437,7 +458,7 @@ class SceneWriter:
                         "scope": EXPECTED_PATH,
                         "approvedBy": "local-explicit--execute-with-matching-plan-hash",
                         "approvedAt": datetime.now(timezone.utc).isoformat(),
-                        "approvalSource": "standing-test-PLN-permission",
+                        "approvalSource": approval_source or "standing-test-PLN-permission",
                     }
                     if approval_record["permission"] not in ALLOWED_WRITES:
                         raise ValueError("UNREVIEWED_WRITE_SCOPE")
@@ -523,6 +544,7 @@ class SceneWriter:
                     return result
             result["status"] = "COMPLETE_UNSAVED"
             result["createdCount"] = len(result["steps"])
+            result["newCreatedCount"] = len(result["steps"]) - len(seeded_created)
             result["allGuidsReadback"] = True
             db.execute("UPDATE scenes SET state=?,result=? WHERE scene_id=?",
                        (result["status"], canonical(result), scene_id))
