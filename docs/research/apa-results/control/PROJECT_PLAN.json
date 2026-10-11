@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 66,
+  "revision": 67,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -596,6 +596,18 @@
       "uri": "docs/research/apa-results/runs/2026-10-11/apa-publisher-health-checker-merged-pr42-20261011.md",
       "kind": "REPORT",
       "verification": "SOURCE_MERGED_GITHUB_CI_17_PASS_MONITOR_SCHEDULER_NOT_DEPLOYED"
+    },
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011": {
+      "id": "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+      "uri": "docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md",
+      "kind": "REPORT",
+      "verification": "GITHUB_READBACK_VERIFIED"
+    },
+    "ART-P70-A03-S01-RECEIPT-20261011": {
+      "id": "ART-P70-A03-S01-RECEIPT-20261011",
+      "uri": "docs/research/apa-results/receipts/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths.json",
+      "kind": "RECEIPT",
+      "verification": "GITHUB_READBACK_VERIFIED"
     }
   },
   "tasks": {
@@ -2285,7 +2297,7 @@
       "action_id": "APA-P70.A03",
       "title": "Связать помещения, несущую схему, оси, уровни и конструктивные ограничения",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "DONE_PUBLISHED",
       "priority": 1,
       "work_key": "semantic-spatial-structural-plan",
       "depends_on": [
@@ -2301,11 +2313,14 @@
         "Проверяемый граф помещений/нагрузочных путей/осей с привязкой к CSE и этажам; без условных стен"
       ],
       "acceptance": "Проверяемый граф помещений/нагрузочных путей/осей с привязкой к CSE и этажам; без условных стен",
-      "owner": "chatgpt-gpt6-manual",
-      "lease_until": "2026-10-11T23:00:00Z",
-      "claim_ref": "APA-RUN-20261011-p70-a03-s01-spatial-model",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+        "ART-P70-A03-S01-RECEIPT-20261011"
+      ],
       "blocked_reason": null
     },
     "APA-P70.A03.S02": {
