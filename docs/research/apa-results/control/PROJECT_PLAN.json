@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 76,
+  "revision": 77,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2831,6 +2831,34 @@
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
+    },
+    "APA-P00.A02.S05": {
+      "id": "APA-P00.A02.S05",
+      "plan_id": "APA-P00",
+      "action_id": "APA-P00.A02",
+      "title": "Обновить действующий план CORE FIRST → EXPANSION по рабочей инструкции v2",
+      "kind": "CONTROL",
+      "status": "IN_PROGRESS",
+      "priority": 0,
+      "work_key": "core-first-operating-plan-v2",
+      "depends_on": [
+        "APA-P00.A02.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-CONTROLLER",
+        "ART-APA-ASSEMBLY-PLAN"
+      ],
+      "outputs": [
+        "IMPLEMENTATION_ROADMAP.md; WORK_OPERATING_INSTRUCTION.md; согласованный PROJECT_PLAN.json; GitHub CAS/readback"
+      ],
+      "acceptance": "Сохранены все прежние ID/статусы/доказательства; последовательный CORE FIRST DAG валиден; карта компонентов находится в каноническом реестре; инструкция и план опубликованы и прочитаны обратно",
+      "owner": "codex-apa-core-first-20261011",
+      "lease_until": "2026-10-11T20:30:00Z",
+      "claim_ref": "APA-RUN-20261011T190721Z-core-first-plan",
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
     }
   },
   "topics": {
@@ -2845,7 +2873,8 @@
         "APA-P00.A02.S01",
         "APA-P00.A02.S02",
         "APA-P00.A02.S03",
-        "APA-P00.A02.S04"
+        "APA-P00.A02.S04",
+        "APA-P00.A02.S05"
       ],
       "artifact_ids": [
         "ART-BRANCH-JSON",
