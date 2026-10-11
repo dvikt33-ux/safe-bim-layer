@@ -389,3 +389,40 @@ Source `scripts/verify_apa_saved_copy_read_only.py` is published in [draft PR #3
 **Explicit limitation:** native API and local path cannot independently prove that a user truly closed and reopened a file. Owner must **manually reopen** this specific copy before running the verifier; record this owner action separately. A file-path match alone must not be promoted to `SAVE_REOPEN_PASS` without that manual transition and a successful fresh readback.
 
 [GitHub CI #38150899253](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38150899253) **SUCCESS: 207/207 offline tests PASS**. Tests exercise synthetic fully created 45 GUID copy, exact UTF-8/Unicode copy path, wrong/old path, missing file, GUID drift, bad upper Slab Z and zero native writes. **No actual saved copy was accessed by CI.** Source commit `62789eca361df59b7749f3930aa77f269c5258ed` (script originally at `8b2e816`). **Next gate:** owner confirms actual copy exists, manually reopens that copy in Archicad 29, runs the read-only verifier, returns full JSON for independent publication.
+
+
+## Owner reported saved copy: exact 45 GUIDs + typed native readback PASS (2026-10-11)
+
+**Evidence type: USER_SUPPLIED / REPORTED_LIVE_COPY_NATIVE_TYPED_READBACK_PASS, REOPEN_NOT_CONFIRMED.**
+
+Owner supplied live PowerShell `Get-Item -LiteralPath $copy | Select-Object FullName, Length, LastWriteTime` output:
+- `C:\\институт проект\\Улучшенная копия APA_Test_House_01.pln`
+- **15,957,232 bytes**; reported Windows LastWriteTime **2026-10-11 18:16:32** (computer local time).
+- Fast-forward checkout: `f125c06..62789ec`, adding the independent source verifier.
+- `python "$repo\\scripts\\verify_apa_saved_copy_read_only.py" --port 19726` returned:
+```json
+{
+  "status":"OPEN_SAVED_COPY_TYPED_READBACK_PASS",
+  "copyPath":"C:\\институт проект\\Улучшенная копия APA_Test_House_01.pln",
+  "tapirVersion":"1.5.10",
+  "expectedTotalGuids":45,
+  "actualTotalGuids":45,
+  "plannedBuildingElementsVerified":25,
+  "plannedBuildingKinds":{"Door":5,"Slab":2,"Wall":12,"Window":6},
+  "plannedElementsByNativeStory":{"0":13,"1":12},
+  "slabBuildingMaterialGuid":"63db2ce9-903d-45c0-b93c-b3c604c77394",
+  "crossStoryBindingsVerified":true,
+  "hostedOpeningGuidsVerified":true,
+  "allPlannedGuidsPreserved":true,
+  "original20GuidsPreserved":true,
+  "originalJournalChanged":false,
+  "nativeWriteCalls":0,
+  "savedCopyWasManuallyReopened":"USER_CONFIRMATION_REQUIRED"
+}
+```
+
+**Meaning of the result:** The copy exists on disk per the owner's Windows filesystem check. The read-only verifier independently reported that the *currently open* Archicad document has the **exact copy path/name**, local non-Teamwork project, Tapir 1.5.10, exact historical 45 GUID inventory with no missing/extra GUIDs, all original 20 GUIDs preserved, all 25 planned BIM elements preserved, with 12 native Walls, 2 native Basic Slabs with material `63db2ce9-903d-45c0-b93c-b3c604c77394`, 5 Doors and 6 Windows. Distribution: floor index 0 => 13, index 1 => 12. Typed readback covers native geometries, absolute story Z, slab material, story labels, and hosted opening owner Wall GUID. The verifier performed **zero native writes** and did not modify historical SQLite journals.
+
+**Important gate boundary:** The owner has not explicitly said whether the saved copy was manually **closed and reopened before the verifier call**. The tool prints `savedCopyWasManuallyReopened: USER_CONFIRMATION_REQUIRED` and cannot prove a disk reload from GetProjectInfo. Therefore call this result **COPY_ON_DISK_AND_OPEN_COPY_TYPED_READBACK_PASS**, **not** `SAVE_REOPEN_PASS` until the owner confirms genuine reopen, or explicitly performs one and then reruns only the read-only verifier. A correct open path does not itself show whether Archicad currently holds the recently saved in-memory state. Do not claim PLN persistence across process restart or construction-code compliance solely from this check.
+
+**Project task:** This is a proven slice of `APA-P70.A03.S02`; its broad controller `PROJECT_PLAN.json` status remains not complete because upstream semantic building/CSE gates are distinct. **Next task/gate:** confirm genuine copy reopen, then independent reviewer verifies screenshots/plans/3D model, story and host/model semantics. Separately queue generic floor-1 CreateSlabs global-Z generator repair for future scenes only; never mutate the historical 25-step source graph or replay old suffixes.
