@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 83,
+  "revision": 84,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -692,6 +692,18 @@
     "ART-P70-A03-S02-AUTHORED-NATIVE-PUBLISH-RECEIPT-20261011": {
       "id": "ART-P70-A03-S02-AUTHORED-NATIVE-PUBLISH-RECEIPT-20261011",
       "uri": "docs/research/apa-results/receipts/APA-RUN-20261011-195000Z-isolated-authored-core.json",
+      "kind": "PUBLICATION_RECEIPT",
+      "verification": "GITHUB_READBACK_AND_CI_SUCCESS"
+    },
+    "ART-P70-A03-S03-INCREMENTAL-EDIT-RESTORE-20261011": {
+      "id": "ART-P70-A03-S03-INCREMENTAL-EDIT-RESTORE-20261011",
+      "uri": "docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-195800Z-incremental-native-edit/REPORT.md",
+      "kind": "LIVE_EVIDENCE_REPORT",
+      "verification": "NATIVE_EDIT_RESTORE_AND_SAVE_REOPEN_PASS"
+    },
+    "ART-P70-A03-S03-INCREMENTAL-PUBLISH-RECEIPT-20261011": {
+      "id": "ART-P70-A03-S03-INCREMENTAL-PUBLISH-RECEIPT-20261011",
+      "uri": "docs/research/apa-results/receipts/APA-RUN-20261011-195800Z-incremental-native-edit.json",
       "kind": "PUBLICATION_RECEIPT",
       "verification": "GITHUB_READBACK_AND_CI_SUCCESS"
     }
@@ -2458,7 +2470,7 @@
       "action_id": "APA-P70.A03",
       "title": "Доказать редактируемость, GUID/host/story/material и инкрементальное обновление",
       "kind": "VALIDATION",
-      "status": "IN_PROGRESS",
+      "status": "DONE_PUBLISHED",
       "priority": 0,
       "work_key": "incremental-model-integrity-gates",
       "depends_on": [
@@ -2475,11 +2487,14 @@
         "Тесты обновления проекта без лишних элементов/потери GUID, readback этажей, материалов, хостов и откат изменений"
       ],
       "acceptance": "Тесты обновления проекта без лишних элементов/потери GUID, readback этажей, материалов, хостов и откат изменений",
-      "owner": "codex-apa-core-native-20261011",
-      "lease_until": "2026-10-11T21:00:00Z",
-      "claim_ref": "APA-RUN-20261011-195400Z-incremental-native-edit",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-P70-A03-S03-INCREMENTAL-EDIT-RESTORE-20261011",
+        "ART-P70-A03-S03-INCREMENTAL-PUBLISH-RECEIPT-20261011"
+      ],
       "blocked_reason": null
     },
     "APA-P70.A04.S01": {
