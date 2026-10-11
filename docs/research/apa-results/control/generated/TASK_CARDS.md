@@ -111,7 +111,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: chatgpt-gpt6-archive-source-audit-20261011 / 2026-10-11T10:17:56Z
 - Requires owner approval: False
 - Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md), [ART-BRANCHES](../../../../../docs/research/apa-results/inventories/FULL_BRANCH_INVENTORY.md)
-- Existing V2 runs: [APA-RUN-20261010-234200Z-slack-legacy-three-audit](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-234200Z-slack-legacy-three-audit/REPORT.md) (receipt verified), [APA-RUN-20261010-235301Z-branch-evidence-dedup](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-235301Z-branch-evidence-dedup/REPORT.md) (receipt verified), [APA-RUN-20261011-001922Z-eighty-head-blob-inventory](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-001922Z-eighty-head-blob-inventory/REPORT.md) (receipt verified)
+- Existing V2 runs: [APA-RUN-20261010-234200Z-slack-legacy-three-audit](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-234200Z-slack-legacy-three-audit/REPORT.md) (receipt verified), [APA-RUN-20261010-235301Z-branch-evidence-dedup](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-235301Z-branch-evidence-dedup/REPORT.md) (receipt verified), [APA-RUN-20261011-001922Z-eighty-head-blob-inventory](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-001922Z-eighty-head-blob-inventory/REPORT.md) (receipt verified), [APA-RUN-20261011-092155Z-source71-byte-archive](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-092155Z-source71-byte-archive/REPORT.md) (receipt verified)
 - Expected output: Evidence map и superseded_by для дублей
 
 ## APA-P00.A02.S04
@@ -820,7 +820,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A01.S01
 
-**Сопоставить полный продуктовый контракт с существующим кодом и исследованиями** — CONSOLIDATION / READY / P1
+**Сопоставить полный продуктовый контракт с существующим кодом и исследованиями** — CONSOLIDATION / IN_PROGRESS / P1
 
 - Parent: APA-P70 → APA-P70.A01
 - Topic: PRODUCT_DEVELOPMENT
@@ -828,10 +828,10 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P00.A02.S02
 - Related, check before duplicating: none
 - Acceptance: Таблица требований полного цикла → исходные файлы/SHA → подтверждённые функции и ограничения; без новой реализации
-- Owner/lease: unclaimed
+- Owner/lease: chatgpt-gpt6-p70-assembly-audit-20261011 / 2026-10-11T11:30:00Z
 - Requires owner approval: False
 - Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-PR16](https://github.com/dvikt33-ux/safe-bim-layer/pull/16), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md), [ART-APA-LIVE-SCRATCH-PARTIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-live-scratch-partial-slab-reconciliation.md)
-- Existing V2 runs: none
+- Existing V2 runs: [APA-RUN-20261011-091905Z-p70-source-integration-map](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-091905Z-p70-source-integration-map/REPORT.md) (receipt verified)
 - Expected output: Таблица требований полного цикла → исходные файлы/SHA → подтверждённые функции и ограничения; без новой реализации
 
 ## APA-P70.A01.S02

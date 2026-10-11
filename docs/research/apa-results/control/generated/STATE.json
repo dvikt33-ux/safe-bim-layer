@@ -1,18 +1,19 @@
 {
   "active": [
-    "APA-P00.A02.S03"
+    "APA-P00.A02.S03",
+    "APA-P70.A01.S01"
   ],
   "artifact_count": 54,
   "counts": {
     "BLOCKED": 8,
     "CLAIMED": 0,
-    "DISPATCHABLE_NOW": 16,
+    "DISPATCHABLE_NOW": 15,
     "DONE_PUBLISHED": 10,
     "EXPIRED_LEASES": 0,
     "HELD_BY_DEPENDENCIES": 39,
-    "IN_PROGRESS": 1,
+    "IN_PROGRESS": 2,
     "PARTIAL": 14,
-    "READY": 41,
+    "READY": 40,
     "SUPERSEDED": 0
   },
   "development": {
@@ -20,7 +21,7 @@
       {
         "done": 0,
         "id": "APA-P70.A01",
-        "status": "READY",
+        "status": "IN_PROGRESS",
         "title": "Единая база существующих возможностей и доказательств",
         "total": 3
       },
@@ -74,11 +75,13 @@
         "total": 3
       }
     ],
-    "active": [],
+    "active": [
+      "APA-P70.A01.S01"
+    ],
     "done": 0,
-    "next_eligible": "APA-P70.A01.S01",
+    "next_eligible": null,
     "plan_id": "APA-P70",
-    "status": "READY",
+    "status": "IN_PROGRESS",
     "total": 23
   },
   "dispatchable": {
@@ -87,8 +90,7 @@
     ],
     "CONSOLIDATION": [
       "APA-P00.A01.S03",
-      "APA-P50.A01.S01",
-      "APA-P70.A01.S01"
+      "APA-P50.A01.S01"
     ],
     "CONTROL": [],
     "INTEGRATION": [],
@@ -151,10 +153,10 @@
     "APA-P70.A08.S02",
     "APA-P70.A08.S03"
   ],
-  "known_published_v2_runs": 8,
+  "known_published_v2_runs": 10,
   "legacy_reports": "NOT_FULLY_INDEXED",
   "orphan_v2_manifests": [],
-  "plan_revision": 45,
+  "plan_revision": 46,
   "publisher": "DEPLOYED_SYNTHETIC_E2E_PASS",
   "research_lookahead": {
     "linked_product_substeps": 23,
@@ -275,7 +277,7 @@
     },
     "PRODUCT_DEVELOPMENT": {
       "done": 0,
-      "ready": 1,
+      "ready": 0,
       "task_ids": [
         "APA-P70.A01.S01",
         "APA-P70.A01.S02",

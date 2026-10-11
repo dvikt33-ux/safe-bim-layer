@@ -12,11 +12,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | BLOCKED | 8 |
 | CLAIMED | 0 |
 | DONE_PUBLISHED | 10 |
-| IN_PROGRESS | 1 |
+| IN_PROGRESS | 2 |
 | PARTIAL | 14 |
-| READY | 41 |
+| READY | 40 |
 | SUPERSEDED | 0 |
-| DISPATCHABLE_NOW | 16 |
+| DISPATCHABLE_NOW | 15 |
 | HELD_BY_DEPENDENCIES | 39 |
 | EXPIRED_LEASES | 0 |
 
@@ -31,6 +31,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
 | APA-P00.A02.S03 | chatgpt-gpt6-archive-source-audit-20261011 | 2026-10-11T10:17:56Z | legacy-evidence-dedup |
+| APA-P70.A01.S01 | chatgpt-gpt6-p70-assembly-audit-20261011 | 2026-10-11T11:30:00Z | product-contract-and-code-baseline |
 
 ## CONTROL — 0 ready
 
@@ -38,13 +39,12 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | --- | --- | --- |
 | — | — | — |
 
-## CONSOLIDATION — 3 ready
+## CONSOLIDATION — 2 ready
 
 | Priority | Task | Acceptance |
 | --- | --- | --- |
 | P0 | APA-P00.A01.S03 — Инвентаризировать 72 ветки и PR, проверить уникальные результаты и ancestry | Список уникальных артефактов, SHA, дубликатов и неизвестного |
 | P0 | APA-P50.A01.S01 — Карта связей: исследования ↔ S-ID ↔ артефакты ↔ PR | Traceability matrix, orphan report list |
-| P1 | APA-P70.A01.S01 — Сопоставить полный продуктовый контракт с существующим кодом и исследованиями | Таблица требований полного цикла → исходные файлы/SHA → подтверждённые функции и ограничения; без новой реализации |
 
 ## RESEARCH — 8 ready
 
