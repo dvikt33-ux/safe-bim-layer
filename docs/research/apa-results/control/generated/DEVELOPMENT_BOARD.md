@@ -8,8 +8,8 @@ requires_approval tasks are not dispatchable until separate owner approval is re
 ## Краткая сводка
 
 - План: APA-P70 — Разработка APA — полный цикл проектирования и выпуска
-- Статус: **IN_PROGRESS**; завершено 9/29 подзадач.
-- Сейчас: APA-P70.A09.S01
+- Статус: **IN_PROGRESS**; завершено 10/29 подзадач.
+- Сейчас: APA-P70.A02.S04
 - Следующая доступная: APA-P70.A02.S02 — Связать проектные требования с версиями нормативов и проверяемыми правилами
 
 ## Этапы → задачи
@@ -17,14 +17,14 @@ requires_approval tasks are not dispatchable until separate owner approval is re
 | Задача | Состояние | Выполнено подзадач |
 | --- | --- | ---: |
 | APA-P70.A01 — Единая база существующих возможностей и доказательств | PARTIAL | 2/3 |
-| APA-P70.A02 — Требования, нормативы и библиотека конкретного проекта | PARTIAL | 2/4 |
+| APA-P70.A02 — Требования, нормативы и библиотека конкретного проекта | IN_PROGRESS | 2/4 |
 | APA-P70.A03 — Планировка и редактируемая нативная BIM-модель | DONE_PUBLISHED | 4/4 |
 | APA-P70.A04 — Конструктивные узлы, кладка, фасады и сопряжения | WAITING | 0/3 |
 | APA-P70.A05 — Расчёт несущих систем и инженерная обратная связь | WAITING | 0/3 |
 | APA-P70.A06 — MEP и междисциплинарная координация | WAITING | 0/2 |
 | APA-P70.A07 — Ведомости, чертежи, нормативная проверка и выпуск | WAITING | 0/3 |
 | APA-P70.A08 — Сквозная приёмка и расширение без переписывания ядра | PARTIAL | 1/5 |
-| APA-P70.A09 — Геометрия и точность после приёмки ядра | IN_PROGRESS | 0/1 |
+| APA-P70.A09 — Геометрия и точность после приёмки ядра | DONE_PUBLISHED | 1/1 |
 | APA-P70.A10 — Измеримое ускорение стабильных операций | WAITING | 0/1 |
 
 ## Подзадачи и следующий шаг
@@ -46,7 +46,7 @@ requires_approval tasks are not dispatchable until separate owner approval is re
   - Источники/ветки: [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md)
 - **APA-P70.A02.S03 [DONE_PUBLISHED]** Собрать проектный Library Pack из проверяемых строительных систем и узлов; исследования: APA-P10.A01.S02, APA-P10.A02.S02, APA-P50.A02.S01
   - Источники/ветки: [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
-- **APA-P70.A02.S04 [READY / WAITING_DEPS]** Интегрировать реальные материалы, Composite/Profile и выбранные GDL-библиотеки; зависимости: APA-P70.A09.S01; исследования: APA-P50.A02.S01
+- **APA-P70.A02.S04 [IN_PROGRESS]** Интегрировать реальные материалы, Composite/Profile и выбранные GDL-библиотеки; исследования: APA-P50.A02.S01
   - Источники/ветки: [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md)
 
 ### APA-P70.A03 — Планировка и редактируемая нативная BIM-модель
@@ -109,7 +109,7 @@ requires_approval tasks are not dispatchable until separate owner approval is re
 
 ### APA-P70.A09 — Геометрия и точность после приёмки ядра
 
-- **APA-P70.A09.S01 [IN_PROGRESS]** Подключить Native Model Dump, графовую связность и реальные 3D-проверки; исследования: APA-P50.A02.S01
+- **APA-P70.A09.S01 [DONE_PUBLISHED]** Подключить Native Model Dump, графовую связность и реальные 3D-проверки; исследования: APA-P50.A02.S01
   - Источники/ветки: [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-SDK-SEO](../../../../../docs/research/apa-results/runs/2026-10-10/apa-discovery-20261010-102440-slinktrim-9f2b7.md)
 
 ### APA-P70.A10 — Измеримое ускорение стабильных операций

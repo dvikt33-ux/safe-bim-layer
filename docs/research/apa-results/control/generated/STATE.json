@@ -1,18 +1,18 @@
 {
   "active": [
-    "APA-P70.A09.S01"
+    "APA-P70.A02.S04"
   ],
-  "artifact_count": 93,
+  "artifact_count": 95,
   "counts": {
     "BLOCKED": 8,
     "CLAIMED": 0,
     "DISPATCHABLE_NOW": 17,
-    "DONE_PUBLISHED": 20,
+    "DONE_PUBLISHED": 21,
     "EXPIRED_LEASES": 0,
-    "HELD_BY_DEPENDENCIES": 35,
+    "HELD_BY_DEPENDENCIES": 34,
     "IN_PROGRESS": 1,
     "PARTIAL": 15,
-    "READY": 37,
+    "READY": 36,
     "SUPERSEDED": 0
   },
   "development": {
@@ -27,7 +27,7 @@
       {
         "done": 2,
         "id": "APA-P70.A02",
-        "status": "PARTIAL",
+        "status": "IN_PROGRESS",
         "title": "Требования, нормативы и библиотека конкретного проекта",
         "total": 4
       },
@@ -74,9 +74,9 @@
         "total": 5
       },
       {
-        "done": 0,
+        "done": 1,
         "id": "APA-P70.A09",
-        "status": "IN_PROGRESS",
+        "status": "DONE_PUBLISHED",
         "title": "Геометрия и точность после приёмки ядра",
         "total": 1
       },
@@ -89,9 +89,9 @@
       }
     ],
     "active": [
-      "APA-P70.A09.S01"
+      "APA-P70.A02.S04"
     ],
-    "done": 9,
+    "done": 10,
     "next_eligible": "APA-P70.A02.S02",
     "plan_id": "APA-P70",
     "status": "IN_PROGRESS",
@@ -146,7 +146,6 @@
     "APA-P50.A03.S01",
     "APA-P50.A03.S02",
     "APA-P70.A01.S02",
-    "APA-P70.A02.S04",
     "APA-P70.A04.S01",
     "APA-P70.A04.S02",
     "APA-P70.A04.S03",
@@ -167,7 +166,7 @@
   "known_published_v2_runs": 21,
   "legacy_reports": "NOT_FULLY_INDEXED",
   "orphan_v2_manifests": [],
-  "plan_revision": 90,
+  "plan_revision": 92,
   "publisher": "DEPLOYED_SYNTHETIC_E2E_PASS",
   "research_lookahead": {
     "linked_product_substeps": 29,
@@ -288,7 +287,7 @@
       ]
     },
     "PRODUCT_DEVELOPMENT": {
-      "done": 9,
+      "done": 10,
       "ready": 1,
       "task_ids": [
         "APA-P70.A01.S01",

@@ -932,7 +932,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A02.S04
 
-**Интегрировать реальные материалы, Composite/Profile и выбранные GDL-библиотеки** — INTEGRATION / READY / P3
+**Интегрировать реальные материалы, Composite/Profile и выбранные GDL-библиотеки** — INTEGRATION / IN_PROGRESS / P3
 
 - Parent: APA-P70 → APA-P70.A02
 - Topic: PRODUCT_DEVELOPMENT
@@ -940,7 +940,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P70.A09.S01
 - Related, check before duplicating: none
 - Acceptance: Проверенные CSE/PLP и реальные проектные BM/Composite/Profile/Surface/GDL применены и прочитаны обратно; Unicode и стабильная identity Library Parts проверены; источники/лицензия/AC29 совместимость учтены; найденный файл не равен LIVE_VERIFIED.
-- Owner/lease: unclaimed
+- Owner/lease: codex-apa-material-native-20261011 / 2026-10-11T22:00:00Z
 - Requires owner approval: False
 - Source inputs: [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md)
 - Existing V2 runs: none
@@ -1268,7 +1268,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A09.S01
 
-**Подключить Native Model Dump, графовую связность и реальные 3D-проверки** — INTEGRATION / IN_PROGRESS / P2
+**Подключить Native Model Dump, графовую связность и реальные 3D-проверки** — INTEGRATION / DONE_PUBLISHED / P2
 
 - Parent: APA-P70 → APA-P70.A09
 - Topic: PRODUCT_DEVELOPMENT
@@ -1276,7 +1276,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P70.A08.S04
 - Related, check before duplicating: none
 - Acceptance: Native dump/NetworkX/Shapely используются через существующий readback; стыки, XYZ, story и host проверены на подтверждённых ошибках; 2D пересечение не считается 3D коллизией; ядро сохраняет работоспособность.
-- Owner/lease: codex-apa-core-native-20261011 / 2026-10-11T21:00:00Z
+- Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-SDK-SEO](../../../../../docs/research/apa-results/runs/2026-10-10/apa-discovery-20261010-102440-slinktrim-9f2b7.md)
 - Existing V2 runs: [APA-RUN-20261011-202800Z-native-geometry-integration](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md) (receipt verified)
