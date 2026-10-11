@@ -41,6 +41,13 @@ for ((attempt=1; attempt<=max_attempts; attempt++)); do
     exit 1
   fi
   git fetch --no-tags origin "$ref"
+  # Auth, hook, permissions and transient server failures must not masquerade
+  # as a CAS race when the remote head did not actually move.
+  remote_head="$(git rev-parse FETCH_HEAD)"
+  if [[ "$remote_head" == "$anchor" ]]; then
+    echo 'CONTROLLER_PUSH_BLOCKED: push rejected without remote advancement' >&2
+    exit 1
+  fi
   if ! git merge-base --is-ancestor "$anchor" FETCH_HEAD; then
     echo 'CONTROLLER_PUSH_BLOCKED: original verified anchor absent from remote' >&2
     exit 1
