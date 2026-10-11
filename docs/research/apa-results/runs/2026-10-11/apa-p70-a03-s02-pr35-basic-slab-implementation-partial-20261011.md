@@ -64,3 +64,16 @@ The owner ran the one-shot recovery utility against the approved single-open dis
 ```
 
 **Classification:** USER_SUPPLIED / REPORTED_LIVE_READBACK. It demonstrates that the utility returned its typed readback success on the owner's Windows Archicad session. Source did **not** directly access Windows or receive independent save/reopen evidence. **The PLN remains unsaved, and the remaining 20 historical operations are NOT EXECUTED.** Historic scene ledger is deliberately not rewritten; a separate reserved repair row is the authoritative second-operation evidence. No automatic replay or scene continuation is authorized. Future work: verified, journaled continuation of ONLY remaining operations after separate explicit permission and fresh guard checks.
+
+## Exact remaining-operation continuation, source implementation (not yet run in live Archicad)
+
+A follow-up change to [PR #35](https://github.com/dvikt33-ux/safe-bim-layer/pull/35) added `scripts/continue_apa_partial_scene.py`, which delegates native Create calls to the **existing** `SceneWriter._execute_verified_plan` rather than introducing a competing executor. The SceneWriter was refactored to accept an independently verified prefix and perform whole-scene verification before marking completion.
+
+Read-only continuation preflight requires: historical SHA256 evidence, exact original source graph and pinned schema, original PARTIAL journal containing four PASS walls and one CREATED_UNVERIFIED slab, matching separate READBACK_PASS slab repair record and material GUID, the unchanged 25-GUID current inventory, current typed native readback for five existing elements, valid 2-story mapping, and explicit whole-operation confirmation token. It does not repeat any old Create call. Execution is a **new** journaled suffix scene: exactly 20 Create operations, plus one ModifySlabs for the second-story slab. Every new operation is durably logged before dispatch. Final verification targets all **25 scene elements**, exact 45 native model GUIDs, expected structure/material/story and hosted opening parent GUIDs; no autosave, no rollback, no retry after ambiguous write.
+
+- Code source head (CI-tested): `f6b7244a7cf616d9e019135091c410c04dac16d9`.
+- [GitHub CI #38141606034](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38141606034) **SUCCESS: 125/125 offline tests**.
+- New offline cases: 5-prefix/20-suffix/1-ModifySlabs; exact GUID and ledger preservation; token mismatch; native unknown-outcome no replay; inventory drift; tampered historical evidence.
+- **Acceptance remains OFFLINE_PASS / LIVE_NOT_VERIFIED for continuation.** The user's recent live success refers **only** to the one-slab modification; no new 20 steps were executed by this assistant. A separately approved, exact-scope single-shot live trial is required.
+
+Do not promote APA-P70.A03.S02 to DONE_PUBLISHED until its dependency/owner-approval and full live acceptance gates are met.
