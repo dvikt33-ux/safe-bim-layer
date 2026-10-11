@@ -1,0 +1,31 @@
+{
+  "candidateId": "rc-basic-slab-v1",
+  "systemFamily": "reinforced-concrete-slab-provisional",
+  "role": "floor-slab",
+  "source": {
+    "sourceId": "apa-native-slab-readback-20261011",
+    "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr35-basic-slab-implementation-partial-20261011.md",
+    "gitBlobSha": "e4bf711bdc3322f594699b59ea34107cde0bcfdf",
+    "publisher": "APA user-supplied native readback",
+    "rights": "LINK_ONLY_RIGHTS_UNVERIFIED",
+    "status": "PROJECT_NATIVE_READBACK",
+    "licenseEvidenceUri": null,
+    "applicabilityNote": "Actual Basic slab material/thickness only for explicitly scoped disposable Archicad PLN, not structural design acceptance"
+  },
+  "native": {
+    "attributeType": "BuildingMaterial",
+    "name": "Железобетон - Конструкционный",
+    "expectedProjectGuid": "63db2ce9-903d-45c0-b93c-b3c604c77394"
+  },
+  "thicknessMeters": 0.2,
+  "storyIds": [
+    "level-1",
+    "level-2"
+  ],
+  "requiredInterfaceConditions": [
+    "slab-wall-bearing",
+    "floor-waterproofing",
+    "slab-opening-penetration"
+  ],
+  "selectedDetailIds": []
+}

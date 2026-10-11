@@ -20,6 +20,7 @@ import archicad_scene_run as RUN
 import archicad_scene_v1 as SCENE
 import archicad_building_shell as BUILD
 import archicad_semantic_brief as BRIEF
+import archicad_project_library_pack as PACK
 
 READS = frozenset({"GetProjectInfo", "GetStories", "GetAddOnVersion",
                   "GetAllElements", "Get3DBoundingBoxes", "GetDetailsOfElements",
@@ -121,6 +122,15 @@ def compile_project_brief(brief, read_api=None):
                                         else "NEEDS_STORY_RESOLUTION")
         return contract
     return BRIEF.resolve_stories(contract, read_api)
+
+
+def compile_project_library_pack(brief, cse_candidate, read_api=None):
+    """Read-only project-local CSE/attribute slice for the current single PLN.
+
+    Source rights/detail engineering status remain explicit; reuse the existing
+    material resolver. No additional executor or geometry creation.
+    """
+    return PACK.compile_pack(brief, cse_candidate, api=read_api)
 
 
 def compile_intent(intent, schema_path):
