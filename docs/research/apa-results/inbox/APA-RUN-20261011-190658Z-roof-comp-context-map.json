@@ -1,0 +1,256 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261011-190658Z-roof-comp-context-map",
+  "plan_id": "APA-P00",
+  "action_id": "APA-P00.A02",
+  "substep_id": "APA-P00.A02.S03",
+  "executor": "chatgpt-gpt6-manual-20261011-roof-composite-context",
+  "executor_run_id": "APA-RUN-20261011T185929Z-roof-comp-context",
+  "phase": "SOURCE",
+  "started_at": "2026-10-11T18:59:29Z",
+  "finished_at": "2026-10-11T19:06:58Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "Archicad 29 (historical source only; no native runtime in this audit)",
+    "sdk": null,
+    "tapir": "retained Tapir JSON 1.5.10; historical research 1.5.9",
+    "source_branch": "research/apa-verified-results-hub-20261010"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/03_archicad_api_contracts/SINGLE_ELEMENT_GABLE_ROOF_RESEARCH_PASSES_01_20.md",
+      "revision": "research/apa-verified-results-hub-20261010",
+      "source_sha": "b61d2c34a877e7ffba24fff1825f216b7be67513"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/09_final_audit/GABLE_ROOF_FINAL_AUDIT_ADDENDUM.md",
+      "revision": "research/apa-verified-results-hub-20261010",
+      "source_sha": "ed7721fbc6e117eb0c62ef6b7bf5aa846bba273d"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/03_archicad_api_contracts/COMPOSITE_STRUCTURES_RESEARCH_PASSES_01_18.md",
+      "revision": "research/apa-verified-results-hub-20261010",
+      "source_sha": "b2d681e76e4bc59899a4e08a5b6d74b3a77d1707"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/09_final_audit/ROOF_PARAPET_COMPOSITE_FINAL_AUDIT_ADDENDUM.md",
+      "revision": "research/apa-verified-results-hub-20261010",
+      "source_sha": "128d715baf6f11a1abad5f35d7819f6e06b1e63b"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/09_final_audit/FINAL_PROJECT_CONTEXT_BRIDGE_AUDIT_AFTER_160.md",
+      "revision": "research/apa-verified-results-hub-20261010",
+      "source_sha": "208e807425f698b93838552ef15ed5ba53491ef0"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-spatial-clearance-20261011/schemas/tapir-live-1.5.10/tapir-scene-live.json",
+      "revision": "feature/apa-authored-spatial-clearance-20261011",
+      "source_sha": "e8ad53b6ea7c19dc34cbdcb723a79be995639cd7"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-highlevel-whole-model-20261011/scripts/archicad_building_shell.py",
+      "revision": "feature/apa-highlevel-whole-model-20261011",
+      "source_sha": "04b08ee0cb8267f8e035158c419d99b15f13c62b"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-spatial-clearance-20261011/scripts/archicad_scene_run.py",
+      "revision": "feature/apa-authored-spatial-clearance-20261011",
+      "source_sha": "7905cfa237ec989da31b527aa931dd7f4663504e"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-spatial-clearance-20261011/scripts/archicad_change_watch.py",
+      "revision": "feature/apa-authored-spatial-clearance-20261011",
+      "source_sha": "dcdb4c4b60eccd5c2d5fadd18fa951e7a1ed77bc"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-spatial-clearance-20261011/scripts/archicad_watch_context.py",
+      "revision": "feature/apa-authored-spatial-clearance-20261011",
+      "source_sha": "0d33ccaba442f0d5416e133a79ba1a9415cfafe5"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-highlevel-whole-model-20261011/docs/archicad-template/COMPOSITE_FAMILY_STRATEGY_v0.1.md",
+      "revision": "feature/apa-highlevel-whole-model-20261011",
+      "source_sha": "bfdc64dfc98d6619d2e429ac1308f6fdf9864444"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-highlevel-whole-model-20261011/docs/archicad-template/composite-family-registry-v0.1.yaml",
+      "revision": "feature/apa-highlevel-whole-model-20261011",
+      "source_sha": "e2449fe7c5441adefb065e39634871a6d9ce4120"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/ARCHIVE_ROOF_COMPOSITE_CONTEXT_GAPS_20261011.json",
+      "revision": "2026-10-11 source-to-code gap matrix",
+      "source_sha": "677f58bdaad358816f6d68d9a033324618a32a3b"
+    }
+  ],
+  "inputs": [
+    "ART-APA-SOURCE-71-BYTE-EXACT-20261011",
+    "ART-APA-SOURCE-71-INDEX-20261011",
+    "ART-REGISTER"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-ARCHIVE-ROOF-GABLE-CONTRACT-20261011",
+      "statement": "Retained Tapir 1.5.10 CreateRoofs and RoofDetails schema lack per-edge Gable/Sloped input and readback while archived source proposes API_PolyRoofID; runtime unchanged and not tested.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "HIST-ROOF-20",
+        "HIST-ROOF-ADD",
+        "TAPIR-SCHEMA",
+        "HIGHLEVEL-WRITER",
+        "GAP-MATRIX"
+      ]
+    },
+    {
+      "claim_id": "APA-ARCHIVE-COMPOSITE-CONTRACT-20261011",
+      "statement": "Existing Get/CreateComposites 1.5.10 contracts expose skins/separators but schema does not require useWith; current SceneWriter covers exact Basic slab material rather than Composite authoring.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "HIST-COMP-18",
+        "HIST-COMP-ADD",
+        "TAPIR-SCHEMA",
+        "SCENEWRITER",
+        "COMPOSITE-BLUEPRINT",
+        "COMPOSITE-FAMILY-YAML",
+        "GAP-MATRIX"
+      ]
+    },
+    {
+      "claim_id": "APA-ARCHIVE-CONTEXT-REUSE-20261011",
+      "statement": "Existing read-only watcher and guarded SceneWriter provide partial project-context handling; retained schema does not expose native SafeBIM stamp/element state index; atomic coherent snapshot not proven.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "HIST-CONTEXT-160",
+        "WATCHER",
+        "WATCHER-CONTEXT",
+        "SCENEWRITER",
+        "TAPIR-SCHEMA",
+        "GAP-MATRIX"
+      ]
+    },
+    {
+      "claim_id": "APA-ARCHIVE-LIVE-BINARY-EQUIVALENCE-20261011",
+      "statement": "Loaded APX binary source parity, gable/Composite execution and project-stamp native runtime support were not tested in this run.",
+      "status": "NOT_VERIFIED",
+      "evidence_ids": [
+        "TAPIR-SCHEMA",
+        "GAP-MATRIX"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "HIST-ROOF-20",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/03_archicad_api_contracts/SINGLE_ELEMENT_GABLE_ROOF_RESEARCH_PASSES_01_20.md",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "b61d2c34a877e7ffba24fff1825f216b7be67513"
+    },
+    {
+      "evidence_id": "HIST-ROOF-ADD",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/09_final_audit/GABLE_ROOF_FINAL_AUDIT_ADDENDUM.md",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "ed7721fbc6e117eb0c62ef6b7bf5aa846bba273d"
+    },
+    {
+      "evidence_id": "HIST-COMP-18",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/03_archicad_api_contracts/COMPOSITE_STRUCTURES_RESEARCH_PASSES_01_18.md",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "b2d681e76e4bc59899a4e08a5b6d74b3a77d1707"
+    },
+    {
+      "evidence_id": "HIST-COMP-ADD",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/09_final_audit/ROOF_PARAPET_COMPOSITE_FINAL_AUDIT_ADDENDUM.md",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "128d715baf6f11a1abad5f35d7819f6e06b1e63b"
+    },
+    {
+      "evidence_id": "HIST-CONTEXT-160",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/09_final_audit/FINAL_PROJECT_CONTEXT_BRIDGE_AUDIT_AFTER_160.md",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "208e807425f698b93838552ef15ed5ba53491ef0"
+    },
+    {
+      "evidence_id": "TAPIR-SCHEMA",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-spatial-clearance-20261011/schemas/tapir-live-1.5.10/tapir-scene-live.json",
+      "kind": "SOURCE_CODE",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "e8ad53b6ea7c19dc34cbdcb723a79be995639cd7"
+    },
+    {
+      "evidence_id": "HIGHLEVEL-WRITER",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-highlevel-whole-model-20261011/scripts/archicad_building_shell.py",
+      "kind": "SOURCE_CODE",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "04b08ee0cb8267f8e035158c419d99b15f13c62b"
+    },
+    {
+      "evidence_id": "SCENEWRITER",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-spatial-clearance-20261011/scripts/archicad_scene_run.py",
+      "kind": "SOURCE_CODE",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "7905cfa237ec989da31b527aa931dd7f4663504e"
+    },
+    {
+      "evidence_id": "WATCHER",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-spatial-clearance-20261011/scripts/archicad_change_watch.py",
+      "kind": "SOURCE_CODE",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "dcdb4c4b60eccd5c2d5fadd18fa951e7a1ed77bc"
+    },
+    {
+      "evidence_id": "WATCHER-CONTEXT",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-spatial-clearance-20261011/scripts/archicad_watch_context.py",
+      "kind": "SOURCE_CODE",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "0d33ccaba442f0d5416e133a79ba1a9415cfafe5"
+    },
+    {
+      "evidence_id": "COMPOSITE-BLUEPRINT",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-highlevel-whole-model-20261011/docs/archicad-template/COMPOSITE_FAMILY_STRATEGY_v0.1.md",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "bfdc64dfc98d6619d2e429ac1308f6fdf9864444"
+    },
+    {
+      "evidence_id": "COMPOSITE-FAMILY-YAML",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-highlevel-whole-model-20261011/docs/archicad-template/composite-family-registry-v0.1.yaml",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "e2449fe7c5441adefb065e39634871a6d9ce4120"
+    },
+    {
+      "evidence_id": "GAP-MATRIX",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/ARCHIVE_ROOF_COMPOSITE_CONTEXT_GAPS_20261011.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "677f58bdaad358816f6d68d9a033324618a32a3b"
+    }
+  ],
+  "report_markdown": "# APA-P00.A02.S03 — техническая дедупликация 71 архивного source: Roof, Composite, Project Context против текущего APA\n\n**Task:** `APA-P00.A02.S03` / `legacy-evidence-dedup`.  \n**Run:** `APA-RUN-20261011-190658Z-roof-comp-context-map`. **Claim:** `APA-RUN-20261011T185929Z-roof-comp-context`.  \n**Source phase:** `SOURCE`, no live Archicad/API calls. **Task result:** `PARTIAL` (exact three-topic integration map; remaining semantic corpus audit open).  \n**Дата:** 2026-10-11; repo `dvikt33-ux/safe-bim-layer`; canonical branch `research/apa-verified-results-hub-20261010`.\n\n## 1. Зачем этот проход отличается от уже опубликованного\n\n71 исторический `research/archicad29-tapir159/` исходный Markdown/JSON уже были **физически архивированы побайтово** под `docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/` с 71/71 одинаковыми Git SHA и размерами, см. [предыдущий byte-exact V2 report](https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-092155Z-source71-byte-archive/REPORT.md) и [manifest](https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/ARCHIVE_MANIFEST_20261011.json). Также проведена первичная проверка 13 архивных документов. Поэтому перенос не повторяется, 71 файлов не копируем заново, исходную ветку не модифицируем.\n\nЦель **этого** прохода — проверка конкретных контрактных пробелов и сохранение неизбыточного `source → current code → S-ID → next acceptance gate` с pinned SHA. Исторический baseline — **Tapir 1.5.9**; сравнительная retained схема — **Tapir 1.5.10**, но это не readback загруженного APX.\n\n**Машинный результат:** [ARCHIVE_ROOF_COMPOSITE_CONTEXT_GAPS_20261011.json](https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/ARCHIVE_ROOF_COMPOSITE_CONTEXT_GAPS_20261011.json); 3 объекта `topics`, 12 исходников с точными Git blob SHA, сохранён в GitHub и повторно прочитан.\n\n## 2. Технический разбор и решения\n\n### A. Односоставная двускатная крыша (один Roof GUID)\n\nАрхивное [исследование 20 проходов](https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/03_archicad_api_contracts/SINGLE_ELEMENT_GABLE_ROOF_RESEARCH_PASSES_01_20.md) и [финальный addendum](https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/09_final_audit/GABLE_ROOF_FINAL_AUDIT_ADDENDUM.md) предлагают `API_PolyRoofID` с `API_PivotPolyEdgeData`, позволяющим различать `Gable` и `Sloped` у конкретного ребра. Это исследование по Graphisoft C++ API и старому Tapir 1.5.9, **не рабочий нынешний patch**.\n\nПроверен реальный retained [JSON export Tapir 1.5.10](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature%2Fapa-authored-spatial-clearance-20261011/schemas/tapir-live-1.5.10/tapir-scene-live.json), blob `e8ad53b6ea7c19dc34cbdcb723a79be995639cd7`:\n\n- `CreateRoofs`, schema command version **1.4.0**, допускает `polygonCoordinates`, `pivotLine`, `angle`, `levels`, `structureType`, `compositeId` и другие базовые поля; **нет** `pivotEdgeSettings`, `pivotPolyEdges` или typed edge-type input;\n- `common_schemas.RoofDetails` уже содержит `roofClass`, `levels`, `pivotPolygonOutline`, `compositeId`, но **нет** per-edge segment-type readback — для Gable proof этого недостаточно;\n- текущий [highlevel builder](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature%2Fapa-highlevel-whole-model-20261011/scripts/archicad_building_shell.py) явно ограничивает `WRITES` до `CreateWalls/CreateSlabs/CreateDoors/CreateWindows`. **Roof не включён**.\n\n**Решение о дедупликации:** не писать второй универсальный Roof-исполнитель и не объявлять две отдельные Single-plane Roof стандартной заменой одним Multi-plane Gable. Использовать имеющийся writer/graph и предложить узкое typed per-edge расширение со встречным native readback. Source-контрактный пробел **VERIFIED** в *сохранённой схеме*, **загруженный APX и LIVE Gable NOT_VERIFIED**.\n\n**Привязка:** `APA-P10.A01.S03` (Roof API/C++), `APA-P10.A02.S01` (Tapir 1.5.10 version/ABI), `APA-P70.A03.S02` (reuse native writer, только после отдельного согласования). **Следующий измеримый шаг:** source+schema сравнение loaded Tapir 1.5.10 и offline payload/memo+edge readback tests; перед любым реальным CreateRoof отдельное явное разрешение, exactly one GUID и independently verified roof face/edge evidence.\n\n### B. Composite — готовые attribute-команды, но нет доказанного end-to-end write\n\nАрхивное [исследование 18 проходов](https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/03_archicad_api_contracts/COMPOSITE_STRUCTURES_RESEARCH_PASSES_01_18.md) и [Addendum Roof/Composite](https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/09_final_audit/ROOF_PARAPET_COMPOSITE_FINAL_AUDIT_ADDENDUM.md) рекомендуют использовать `GetBuildingMaterials → CreateComposites/GetComposites → native Wall/Roof(compositeId)`, с предразрешением GUID материалов, lineType, ordinal skins, толщин и fingerprints. Исследование правильно отмечает глобальное влияние изменения атрибута Composite на другие элементы проекта.\n\nСохранённый 1.5.10 contract содержит:\n- `CreateComposites` version **1.0.2**, `GetComposites` **1.5.4**, `GetBuildingMaterials` **1.5.4**, и `CreateRoofs` с `compositeId`. Это **существующие команды**, а не предложение написать новый Tapir addon;\n- `CreateComposites` требует `name/skins/separators`, но **не требует `useWith` по schema.required**, несмотря на необходимость набора применяемых классов. Следовательно проектный валидатор должен **сам требовать** `useWith` и N+1 separator, точный GUID BuildingMaterial/LineType, fail-closed unresolved dependency, `overwriteExisting=false`, readback всего атрибута по ID;\n- нынешняя [стратегия семейств Composite](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature%2Fapa-highlevel-whole-model-20261011/docs/archicad-template/COMPOSITE_FAMILY_STRATEGY_v0.1.md) и [YAML blueprint](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature%2Fapa-highlevel-whole-model-20261011/docs/archicad-template/composite-family-registry-v0.1.yaml) уже задают source-driven семьи и запрещают универсальную толщину по рекламному названию;\n- действующий [highlevel builder](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature%2Fapa-highlevel-whole-model-20261011/scripts/archicad_building_shell.py) маркирует Walls как Basic до сертификации CSE; [SceneWriter](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature%2Fapa-authored-spatial-clearance-20261011/scripts/archicad_scene_run.py) разрешает **один exact BuildingMaterial для Basic slab**, и этот read-only material preflight не является Composite authoring gate.\n\n**Решение о дедупликации:** сохранить исторический spec про жёсткую привязку GUID и fingerprint, но **не** создавать ещё один attribute manager; реализовать тонкий resolver/receipt на уже существующем JSON-контракте после отдельного task gate. `CREATE/OVERWRITE` не запускать; **NO LIVE PROOF** доступности и точности установки Composite в конкретном PLN.\n\n**Привязка:** `APA-P10.A02.S01`, `APA-P70.A04.S02`, `APA-P70.A03.S02`. **Ближайший тест:** чисто read-only GET BuildingMaterials/Composites в точном открытом disposable PLN с GUID/useWith/skins/separators/total thickness, повторный project identity stamp. Затем отдельный offline plan guard без writes; лишь после approval — один controlled Composite attribute write (влияние на проект отдельно проверено).\n\n### C. Project Context Bridge — не создавать второй watcher\n\nАрхивный [проектный мост после 160 проходов](https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/09_final_audit/FINAL_PROJECT_CONTEXT_BRIDGE_AUDIT_AFTER_160.md) описывает атомарный по-проектный snapshot, cheap `project/element modiStamp`, индекс GUID, event queue и cloud mirror. Он содержит осмысленные требования к coherence/staleness, но не доказывает реализацию такого native моста.\n\nСовременный [archicad_change_watch.py](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature%2Fapa-authored-spatial-clearance-20261011/scripts/archicad_change_watch.py) **уже существует** и делает read-only polling `GetProjectInfo`, `GetStories`, `GetAllElements`, `GetDetailsOfElements`, `Get3DBoundingBoxes` с SHA отпечатками; при смене проекта останавливается. [archicad_watch_context.py](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature%2Fapa-authored-spatial-clearance-20261011/scripts/archicad_watch_context.py) превращает локальные файлы watcher в компактный контекст. [SceneWriter](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature%2Fapa-authored-spatial-clearance-20261011/scripts/archicad_scene_run.py) проверяет exact project path/name, native story index/floorId/level, `GetAddOnVersion`, 3D conflict envelope, frozen sourcePlanHash, журнал mutation до write и exact GUID readback. Повторно писать этот контур не нужно.\n\n**Конкретный оставшийся пробел:** в сохранённом 1.5.10 JSON export **нет** `GetSafeBIMProjectStamp` / `GetSafeBIMElementStateIndex`; watcher переснимает факты polling, а не подтверждённый native cheap `modiStamp` с атомарной версионированной границей. Из проверенных исходников не следует существование приватного coherent project-state mirror для обычного ChatGPT. **PARTIALLY IMPLEMENTED** в текущем источнике; **MULTI-INSTANCE/FULL EPOCH/PRIVATE MIRROR NOT_VERIFIED**.\n\n**Решение о дедупликации:** сохранить old source как требования к coherence, reuse нынешний watcher+SceneWriter; не делать второго постоянно работающего watcher или автопереключателя PLN. **Привязка:** `APA-P70.A03.S03`, `APA-P70.A01.S02`, `APA-P10.A02.S01`. **Следующий тест:** offline adversarial stale-context scenarios (смена даже одного атрибута/story внутри неизменившегося пути, project-switch, неточный GUID hash, partial snapshot), отдельный live read-only native APX capability probe; без физического write.\n\n## 3. Что именно принято и что запрещено объявлять\n\n| Проверяемый объект | Состояние | Доказательство |\n| --- | --- | --- |\n| Архив 71 файлов | **BYTE_EXACT_VERIFIED** ранее, исходные Git SHA сохранены | [Archive manifest](https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/ARCHIVE_MANIFEST_20261011.json) |\n| Проанализированы конкретные Roof/Composite/Context контракты | **SOURCE_READ_VERIFIED** (12 pinned sources, exact current schema code) | [Matrix](https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/ARCHIVE_ROOF_COMPOSITE_CONTEXT_GAPS_20261011.json) |\n| Отсутствует ввод per-edge Gable в retained Tapir 1.5.10 JSON | **SOURCE_CONTRACT_GAP_CONFIRMED** | CreateRoofs/RoofDetails props отсутствуют |\n| Get/CreateComposites как API surface | **SOURCE_SCHEMA_PRESENT**, current native runtime unverified | `CreateComposites/GetComposites` exported schemas |\n| Existing watcher and SceneWriter | **SOURCE_CODE_PRESENT**, current operation not executed | current checked Python source |\n| Пользовательский Archicad 29 LIVE Roof/Composite/stamp | **NOT_VERIFIED** | Neither native endpoint nor binary tested in this run |\n| Полная семантическая дедупликация 71 источника | **PARTIAL** | 13 previously reviewed and 5 key additional archives; many historic claims remain unvalidated |\n\n## 4. Задачи и дальнейший принцип\n\n**Не создаю новый work_key без нужды.** Все три темы покрываются уже зарегистрированными S-ID. Этот проход сохраняет явные `source → reused code → gap → validation` связи; конечная публикационная квитанция V2 не переводит `APA-P00.A02.S03` в DONE, пока архивные заявления и оставшиеся уникальные результаты не сопоставлены полностью.\n\n**Приоритет на следующий проход:** только read-only / offline проверка roof input+readback по реальному 1.5.10 addon source (не широкая реализация), затем отдельный typed Composite resolver, затем независимый тест project-context epoch на неизменившемся пути. Выбор зависит от действующего контроллера и уже имеющихся PR; нужно сначала прочитать актуальные задачи, не начинать конкурентную работу.\n\n## 5. Безопасность и источники\n\n12 pinned Git blob SHA доступны в матрице. Удаления веток, merge/force-push, автоматическое изменение проекта, открытие другого файла и локальный runtime отсутствуют. Никакой Deep Research, платный агент или имитация LIVE PASS. Исторические данные Tapir 1.5.9 не считаются текущей нативной аттестацией Tapir 1.5.10.\n",
+  "next_substep": "APA-P00.A02.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}
