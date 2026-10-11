@@ -1007,7 +1007,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: codex-apa-core-native-20261011 / 2026-10-11T21:00:00Z
 - Requires owner approval: False
 - Source inputs: [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
-- Existing V2 runs: none
+- Existing V2 runs: [APA-RUN-20261011-200100Z-native-completeness](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200100Z-native-completeness/REPORT.md) (receipt verified)
 - Expected output: Стены, перекрытия, колонны и hosted двери/окна из утверждённой схемы проходят typed GUID/host/story/material/geometry readback; требуемые неподдерживаемые элементы имеют конкретный blocker; один BIM Graph и SceneWriter.
 
 ## APA-P70.A04.S01
