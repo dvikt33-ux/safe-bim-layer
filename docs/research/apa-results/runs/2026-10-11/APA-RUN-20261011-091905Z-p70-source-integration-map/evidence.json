@@ -1,0 +1,117 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-P70-ONE-WRITER",
+      "evidence_ids": [
+        "EV-P70-SOURCE-COMPILER",
+        "EV-P70-SOURCE-GRAPH",
+        "EV-P70-SOURCE-WRITER"
+      ],
+      "statement": "Existing Project Accelerator, BIM Graph and SceneWriter provide a single preserved offline pipeline; no second executor is needed.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-SHELL-LIMITS",
+      "evidence_ids": [
+        "EV-P70-SOURCE-SHELL",
+        "EV-P70-SOURCE-WRITER"
+      ],
+      "statement": "Current shell is bounded parametric primitive and create-only, not a generic architectural planner or incremental editor.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-LIVE-PARTIAL",
+      "evidence_ids": [
+        "EV-P70-LIVE-USER-INCIDENT",
+        "EV-P70-SOURCE-SLAB-HELPER"
+      ],
+      "statement": "Native slab 0.30 Composite mismatch reported by local read-only diagnostic; not independently executed here.",
+      "status": "REPORTED"
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-PR34-CI",
+      "evidence_ids": [
+        "EV-P70-PR34-CI",
+        "EV-P70-SOURCE-SHELL"
+      ],
+      "statement": "PR34 latest head has GitHub Actions offline schema-contracts workflow SUCCESS; live 25-op assembly is unverified.",
+      "status": "OFFLINE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-ROADMAP-GATED",
+      "evidence_ids": [
+        "EV-P70-DELIVERY-ROADMAP"
+      ],
+      "statement": "Existing delivery roadmap must remain proposal until source-backed independent audit and controller acceptance.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-P70-SOURCE-COMPILER",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "2017fbc43a3bebe11d65cd1786b0ae15a94acaea",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-highlevel-whole-model-20261011/scripts/archicad_project_accelerator.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-P70-SOURCE-GRAPH",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "fc68f82b1d0cf89d5d4576ac03225572a6ffadf2",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-highlevel-whole-model-20261011/scripts/archicad_bim_graph.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-P70-SOURCE-WRITER",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "322f610b08c5434da0db1897f15f474665a40b8a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-highlevel-whole-model-20261011/scripts/archicad_scene_run.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-P70-SOURCE-SHELL",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "04b08ee0cb8267f8e035158c419d99b15f13c62b",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-highlevel-whole-model-20261011/scripts/archicad_building_shell.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-P70-SOURCE-SLAB-HELPER",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "efbaf139c4a6707226a2e6bbe07a7cc9f5fafa28",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-highlevel-whole-model-20261011/scripts/archicad_executor.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-P70-PR34-CI",
+      "kind": "TEST_RESULT",
+      "sha256": null,
+      "source_revision": "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38097687501",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-P70-LIVE-USER-INCIDENT",
+      "kind": "USER_SUPPLIED",
+      "sha256": null,
+      "source_revision": "b6e6f4e246829af04313af63b0e4487f7f043f86",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-11/apa-p70-a03-live-scratch-partial-slab-reconciliation.md",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-P70-DELIVERY-ROADMAP",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "10fb9eb468cae1c9bb8200b76440824b2469607e",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/control/APA_ACCELERATOR_DELIVERY_ROADMAP_20261011.md",
+      "verification": "SOURCE_READ"
+    }
+  ],
+  "run_id": "APA-RUN-20261011-091905Z-p70-source-integration-map",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

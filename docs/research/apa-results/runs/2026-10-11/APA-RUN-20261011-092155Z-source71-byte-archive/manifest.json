@@ -1,0 +1,187 @@
+{
+  "action_id": "APA-P00.A02",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-ARCHIVE-71-BYTE-EXACT",
+      "evidence_ids": [
+        "EV-ORIGINAL-71-PINNED",
+        "EV-ARCHIVE-COMMIT-71",
+        "EV-ARCHIVE-MANIFEST"
+      ],
+      "statement": "71 original source MD/JSON blobs (487455 bytes) were archived in a single no-force Git commit; direct source/target Git tree readback verifies all 71 blob SHA and sizes identical.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-ARCHIVE-DUPLICATE-S05",
+      "evidence_ids": [
+        "EV-ARCHIVE-TASK-REVIEW",
+        "EV-ARCHIVE-MANIFEST"
+      ],
+      "statement": "Separate candidate task S05 duplicates existing legacy source consolidation S03 and was not admitted to controller; reviewer filed TASK_REVIEW_V1 decision DUPLICATE.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-ARCHIVE-ROOF-COMPOSITE-GAP",
+      "evidence_ids": [
+        "EV-HISTORIC-GABLE",
+        "EV-HISTORIC-COMPOSITE",
+        "EV-CURRENT-WHOLE-BUILDING"
+      ],
+      "statement": "Historical gable/composite research exists, but current whole-building graph builder only allows Wall/Slab/Door/Window and no Roof/Composite; production-grade roof/current Tapir 1.5.10 behavior unverified.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-ARCHIVE-CONTEXT-TRANSPORT",
+      "evidence_ids": [
+        "EV-HISTORIC-CONTEXT",
+        "EV-HISTORIC-TRANSPORT"
+      ],
+      "statement": "Legacy bridge/transport proposals are source documents, not evidence of a 24x7 ChatGPT→Archicad execution system.",
+      "status": "REPORTED"
+    },
+    {
+      "claim_id": "APA-CLAIM-ARCHIVE-71-SEMANTIC-REVIEW",
+      "evidence_ids": [
+        "EV-ARCHIVE-MANIFEST",
+        "EV-ARCHIVE-GUIDE"
+      ],
+      "statement": "All 71 source blobs were preserved byte-exactly but independent technical semantic/runtimes were reviewed only for a selected 13-source subset; remaining content needs follow-up.",
+      "status": "NOT_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-ORIGINAL-71-PINNED",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "source pinned c651035d",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-ARCHIVE-COMMIT-71",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "477ba54a0620ce7c0efc1b835f1d0ad2f1a03ba5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/commit/477ba54a0620ce7c0efc1b835f1d0ad2f1a03ba5",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-ARCHIVE-MANIFEST",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "ef20b8dfc804289a7f97fed73f3918edb11c8673",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/ARCHIVE_MANIFEST_20261011.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-ARCHIVE-GUIDE",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "44f3bd36839bd8091d8547caa4fd3c2ac813144f",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/ARCHIVE_GUIDE_20261011.md",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-ARCHIVE-TASK-REVIEW",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "272038e4c8f971ff71d2a711ae781b4ab587588b",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/control/reviews/APA-CAND-20261011-source-archive-71.md",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-HISTORIC-GABLE",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "ed7721fbc6e117eb0c62ef6b7bf5aa846bba273d",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/c651035ddc77869fbc5a04bf23170b4f1188a9ab/research/archicad29-tapir159/09_final_audit/GABLE_ROOF_FINAL_AUDIT_ADDENDUM.md",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-HISTORIC-COMPOSITE",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "b2d681e76e4bc59899a4e08a5b6d74b3a77d1707",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/c651035ddc77869fbc5a04bf23170b4f1188a9ab/research/archicad29-tapir159/03_archicad_api_contracts/COMPOSITE_STRUCTURES_RESEARCH_PASSES_01_18.md",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-CURRENT-WHOLE-BUILDING",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "04b08ee0cb8267f8e035158c419d99b15f13c62b",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature%2Fapa-highlevel-whole-model-20261011/scripts/archicad_building_shell.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-HISTORIC-CONTEXT",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "208e807425f698b93838552ef15ed5ba53491ef0",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/c651035ddc77869fbc5a04bf23170b4f1188a9ab/research/archicad29-tapir159/09_final_audit/FINAL_PROJECT_CONTEXT_BRIDGE_AUDIT_AFTER_160.md",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-HISTORIC-TRANSPORT",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "4f1b24559ca10b55e60f017bb0a4b7eb2895e453",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/c651035ddc77869fbc5a04bf23170b4f1188a9ab/research/archicad29-tapir159/09_final_audit/FINAL_TRANSPORT_SYNC_OUT_OF_BOX_AUDIT_AFTER_200.md",
+      "verification": "SOURCE_READ"
+    }
+  ],
+  "executor": "chatgpt-gpt6-archive-source-audit-20261011",
+  "executor_run_id": "APA-RUN-20261011T091256Z-archival-content-audit",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-11T09:21:55Z",
+  "idempotency_key": "sha256:dab5552bde77c9a71630d825dddcdda0c25d4a5d102156f8c7856c157948bd37",
+  "inputs": [
+    "ART-REGISTER",
+    "ART-BRANCHES",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "next_substep": "APA-P00.A02.S03",
+  "phase": "SOURCE",
+  "plan_id": "APA-P00",
+  "run_id": "APA-RUN-20261011-092155Z-source71-byte-archive",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "Archicad 29, not accessed in this pass",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "sdk": null,
+    "source_branch": "research/apa-verified-results-hub-20261010",
+    "tapir": "Historic Tapir 1.5.9 research, current version NOT_REVERIFIED"
+  },
+  "source_revisions": [
+    {
+      "revision": "byte-exact archive commit",
+      "source_sha": "477ba54a0620ce7c0efc1b835f1d0ad2f1a03ba5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/commit/477ba54a0620ce7c0efc1b835f1d0ad2f1a03ba5"
+    },
+    {
+      "revision": "2026-10-11 archival readback",
+      "source_sha": "ef20b8dfc804289a7f97fed73f3918edb11c8673",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/ARCHIVE_MANIFEST_20261011.json"
+    },
+    {
+      "revision": "current code readback 2026-10-11",
+      "source_sha": "04b08ee0cb8267f8e035158c419d99b15f13c62b",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature%2Fapa-highlevel-whole-model-20261011/scripts/archicad_building_shell.py"
+    }
+  ],
+  "started_at": "2026-10-11T09:12:56Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P00.A02.S03"
+}

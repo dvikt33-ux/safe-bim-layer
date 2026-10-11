@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 8,
+  "run_count": 10,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -56,6 +56,20 @@
       "phase": "SOURCE",
       "report": "runs/2026-10-11/APA-RUN-20261011-001922Z-eighty-head-blob-inventory/REPORT.md",
       "run_id": "APA-RUN-20261011-001922Z-eighty-head-blob-inventory",
+      "substep_id": "APA-P00.A02.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-11/APA-RUN-20261011-091905Z-p70-source-integration-map/REPORT.md",
+      "run_id": "APA-RUN-20261011-091905Z-p70-source-integration-map",
+      "substep_id": "APA-P70.A01.S01"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-11/APA-RUN-20261011-092155Z-source71-byte-archive/REPORT.md",
+      "run_id": "APA-RUN-20261011-092155Z-source71-byte-archive",
       "substep_id": "APA-P00.A02.S03"
     }
   ],
