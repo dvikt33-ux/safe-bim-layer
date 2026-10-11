@@ -1,0 +1,66 @@
+{
+  "action_id": "APA-P70.A08",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-EDITABLE-CORE-ACCEPTED",
+      "evidence_ids": [
+        "EV-ACCEPTANCE-MATRIX"
+      ],
+      "statement": "Combined editable native core acceptance passed for the explicit17element example based on independently inspected captured native evidence. Expanded product remains incomplete.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-ACCEPTANCE-MATRIX",
+      "kind": "TEST_RESULT",
+      "sha256": "db27cf2cabe0ca8474600587e26db910d5fbe649cfa78a29aa5348092ec32b12",
+      "source_revision": "976c19cecebe3f6bb4352365d9a59051d5b2b61b",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261011-200500Z-editable-core-acceptance/acceptance.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "codex-apa-core-native-20261011",
+  "executor_run_id": "APA-RUN-20261011-200500Z-editable-core-acceptance",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-11T20:04:18Z",
+  "idempotency_key": "sha256:b6fde3da74e2358f685f4ac8b1006ae3fe5f020ae1bac8a48e4ae04c66c4fc33",
+  "inputs": [
+    "ART-APA-FULL-CYCLE",
+    "ART-APA-ASSEMBLY-PLAN",
+    "ART-P70-A03-S03-INCREMENTAL-EDIT-RESTORE-20261011"
+  ],
+  "next_substep": "APA-P70.A09.S01",
+  "phase": "SOURCE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261011-200500Z-editable-core-acceptance",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "29 build5101 RUS (captured native evidence)",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "sdk": null,
+    "source_branch": "feature/apa-isolated-authored-native-20261011",
+    "tapir": "1.5.10"
+  },
+  "source_revisions": [
+    {
+      "revision": "976c19cecebe3f6bb4352365d9a59051d5b2b61b",
+      "source_sha": "976c19cecebe3f6bb4352365d9a59051d5b2b61b",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/48"
+    }
+  ],
+  "started_at": "2026-10-11T20:04:18Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A08.S04"
+}
