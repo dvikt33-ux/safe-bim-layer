@@ -288,3 +288,9 @@ Controller artifact record: `PROJECT_PLAN.json` revision **52**, [commit 8af838f
 | Artifact | Evidence | Operational status |
 | --- | --- | --- |
 | `ART-APA-PUBLISHER-WATCHDOG-PR42-20261011` | [Canonical report](runs/2026-10-11/apa-publisher-health-checker-merged-pr42-20261011.md), [merged PR #42](https://github.com/dvikt33-ux/safe-bim-layer/pull/42), [17/17 CI PASS](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38156708432) | **SOURCE_MERGED + OFFLINE_PASS, AUTOMATED_MONITOR_NOT_DEPLOYED.** Scheduled GitHub Actions on nondefault branch would be inert; `main` changes prohibited. `APA-P00.A03.S03` remains PARTIAL. |
+
+## APA Publisher — hourly external condition watch (2026-10-11)
+
+| Artifact | Evidence | Verified status |
+| --- | --- | --- |
+| `ART-APA-PUBLISHER-HOURLY-CONDITION-WATCH-20261011` | [Canonical report](runs/2026-10-11/apa-publisher-hourly-chatgpt-watch-20261011.md), [last successful canonical Publisher](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38157660584) | **SCHEDULER_ENABLED, AUTOMATION_RUN_OBSERVED, PUSH_EMAIL_NOTIFICATIONS_DISABLED, ALERT_DELIVERY_NOT_VERIFIED.** ChatGPT hourly watch filters only the canonical Publisher workflow; no `main` changes. `APA-P00.A03.S03` remains PARTIAL. |
