@@ -18,7 +18,11 @@ from test_archicad_fourth_suffix import FourthSuffixTests
 from test_archicad_basic_slab_integration import MATERIAL_NAME
 
 
-class OrphanS2WallDiagnosisTests(FourthSuffixTests):
+class OrphanS2WallDiagnosisTests(unittest.TestCase):
+    bad_slab_api = FourthSuffixTests.bad_slab_api
+
+    read_api = FourthSuffixTests.read_api
+
     def setUp(self):
         FourthSuffixTests.setUp(self)
         RUN.bind_approved_scratch_pln(19726)
