@@ -12,11 +12,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | BLOCKED | 8 |
 | CLAIMED | 0 |
 | DONE_PUBLISHED | 11 |
-| IN_PROGRESS | 0 |
+| IN_PROGRESS | 1 |
 | PARTIAL | 15 |
-| READY | 40 |
+| READY | 39 |
 | SUPERSEDED | 0 |
-| DISPATCHABLE_NOW | 17 |
+| DISPATCHABLE_NOW | 16 |
 | HELD_BY_DEPENDENCIES | 38 |
 | EXPIRED_LEASES | 0 |
 
@@ -30,7 +30,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| — | — | — | — |
+| APA-P70.A01.S03 | chatgpt-gpt6-manual | 2026-10-11T19:00:00Z | product-integration-boundaries |
 
 ## CONTROL — 0 ready
 
@@ -65,11 +65,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | --- | --- | --- |
 | P0 | APA-P00.A03.S03 — Publisher, дедупликация, retry, heartbeat и ошибки | Publisher E2E + оставшиеся recovery/heartbeat gates |
 
-## INTEGRATION — 1 ready
+## INTEGRATION — 0 ready
 
 | Priority | Task | Acceptance |
 | --- | --- | --- |
-| P2 | APA-P70.A01.S03 — Утвердить минимальные границы интеграции и порядок сквозных поставок | Проверенный маршрут полного цикла, reuse map, отсутствие дублирования SceneWriter/графа/исполнителя, приёмочные ворота |
+| — | — | — |
 
 ## VALIDATION — 4 ready
 
