@@ -103,19 +103,25 @@ class ControllerPushRaceTests(unittest.TestCase):
 
     def test_push_rejected_without_remote_move_fails_immediately(self):
         """A denied Git push is not a CAS race and must never be retried blindly."""
+        # Commit an outdated generated board and publish it BEFORE installing
+        # the rejection hook; a subsequent build now creates a real new commit.
+        target = self.worker / "docs/research/apa-results/control/generated/HANDOFF.md"
+        target.write_text("stale\n")
+        git(self.worker, "add", str(target.relative_to(self.worker)))
+        git(self.worker, "commit", "-m", "stale generated board")
+        git(self.worker, "push", "origin", "HEAD:" + REF)
+        anchor = git(self.worker, "rev-parse", "HEAD").stdout.strip()
         hook = self.origin / "hooks" / "pre-receive"
         hook.write_text("#!/bin/sh\necho PUSH_BLOCKED_BY_POLICY >&2\nexit 1\n")
         hook.chmod(0o755)
-        (self.worker / "docs/research/apa-results/control/generated/HANDOFF.md").write_text("stale\n")
         p = self.execute()
         self.assertEqual(p.returncode, 1, p.stdout)
         self.assertIn("push rejected without remote advancement", p.stdout)
         self.assertIn("CONTROLLER_PUSH_RACE attempt=1", p.stdout)
         self.assertNotIn("CONTROLLER_PUSH_RACE attempt=2", p.stdout)
         self.assertFalse(self.output.exists())
-        self.assertEqual(git(self.rival, "show", "origin/" + BRANCH +
-                             ":docs/research/apa-results/control/PROJECT_PLAN.json").stdout,
-                         "rev1\n")
+        head = git(self.worker, "ls-remote", "origin", REF).stdout.split()[0]
+        self.assertEqual(head, anchor)
 
     def test_wrong_repository_is_rejected(self):
         p = self.execute({**self.env, "GITHUB_REPOSITORY": "forged/repo"})
