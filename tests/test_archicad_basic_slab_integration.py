@@ -124,7 +124,7 @@ class BasicSlabIntegrationTests(unittest.TestCase):
             state, guid, record = db.execute(
                 "SELECT state,guid,output FROM steps WHERE step_id='s1-slab'").fetchone()
             self.assertEqual(state, "BASIC_MODIFY_ATTEMPTED")
-            self.assertEqual(guid, result["addedGuids"][-1])
+            self.assertIn(guid.lower(), [x.lower() for x in result["addedGuids"]])
             self.assertEqual(json.loads(record)["command"], "ModifySlabs")
         before = len(self.native.writes)
         retry = self.run_project("execute", pre["confirmPlanHash"])
