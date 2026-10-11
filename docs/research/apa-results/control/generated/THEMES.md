@@ -9,7 +9,7 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 | AUTOMATION — Автономизация и 24h gate | 4 | 0 | 0 | ART-OS-AUDIT, ART-PUBLISHER |
 | CONTROLLER — Единый управляющий и межчатовый контекст | 8 | 6 | 2 | ART-CONTROLLER, ART-PLAN, ART-PUB-WORKFLOW, ART-PUBLISHER, ART-PROPOSAL-PROTOCOL |
 | GDL_TN — GDL и ТЕХНОНИКОЛЬ | 1 | 0 | 1 | ART-PR20 |
-| HUB_GOVERNANCE — Канонический hub и реестр | 8 | 4 | 3 | ART-BRANCH-JSON, ART-BRANCHES, ART-PLAN, ART-PUB-RECEIPT, ART-QUEUE, ART-REGISTER, ART-STATUS |
+| HUB_GOVERNANCE — Канонический hub и реестр | 8 | 4 | 2 | ART-BRANCH-JSON, ART-BRANCHES, ART-PLAN, ART-PUB-RECEIPT, ART-QUEUE, ART-REGISTER, ART-STATUS |
 | IFC_MCP — IFC/openBIM и MCP | 1 | 0 | 1 | ART-REGISTER |
 | KNOWLEDGE_GRAPH — Сведение исследований и доказательств | 3 | 0 | 1 | ART-BRANCHES, ART-REGISTER, ART-TRACE-RECEIPT, ART-TRACE-REPORT |
 | MEP — MEP native и Tapir | 1 | 0 | 1 | ART-REGISTER |
@@ -61,7 +61,7 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 - APA-P00.A01.S04 [VALIDATION/BLOCKED]: Сопоставить локальные и удалённые SHA без догадок; work_key=local-git-sha-parity; related=none
 - APA-P00.A02.S01 [CONTROL/DONE_PUBLISHED]: Установить единственную каноническую исследовательскую ветку; work_key=canonical-branch-policy; related=none
 - APA-P00.A02.S02 [CONTROL/DONE_PUBLISHED]: Создать hub, план, реестр, очередь, протоколы; work_key=hub-operating-documents; related=none
-- APA-P00.A02.S03 [CONSOLIDATION/PARTIAL]: Связать старые находки с S-ID и удалить логические дубли без удаления оригиналов; work_key=legacy-evidence-dedup; related=APA-P50.A01.S02
+- APA-P00.A02.S03 [CONSOLIDATION/IN_PROGRESS]: Связать старые находки с S-ID и удалить логические дубли без удаления оригиналов; work_key=legacy-evidence-dedup; related=APA-P50.A01.S02
 - APA-P00.A02.S04 [VALIDATION/PARTIAL]: Контролировать receipt/commit/readback всех завершённых отчётов; work_key=publication-completeness-audit; related=none
 
 ### IFC_MCP — IFC/openBIM и MCP
