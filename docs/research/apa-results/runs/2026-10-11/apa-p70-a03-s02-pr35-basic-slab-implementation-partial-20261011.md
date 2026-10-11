@@ -435,3 +435,21 @@ Owner explicitly confirmed the first `OPEN_SAVED_COPY_TYPED_READBACK_PASS` was e
 **Therefore** previous native 45/45 exact GUID + 25/25 typed result is a valid `COPY_EXISTS_AND_CURRENT_OPEN_DOCUMENT_TYPED_PASS` but **not** a save/reopen durability proof. The exact saved copy was visible on disk (15,957,232 bytes, last write time 11.10.2026 18:16:32), but Archicad may still have retained the post-write data in memory during that check. Update gate `SAVE_REOPEN_PASS` = **NOT_VERIFIED / MANUAL_REOPEN_PENDING**. No further Create/Modify/Save command was requested by the assistant.
 
 Next owner action: ensure there are no unsaved changes, close the document, manually reopen the same saved-copy PLN at its exact path (not the original scratch PLN), then execute only `python "C:\LocalAI\APA_PR35\scripts\verify_apa_saved_copy_read_only.py" --port 19726` (or use the newly reported Tapir port if it changes). Record user confirmation of reopened copy + resulting JSON before claiming `SAVE_REOPEN_PASS`. Preserve immutable original journals; do not replay any scene.
+
+
+## Reopen gate attempt blocked on BPN backup, no writes (2026-10-11)
+
+**Evidence: USER_SUPPLIED / LIVE_READ_ONLY_WRONG_PROJECT_BLOCK, not a BIM failure.** After the owner clarified that the prior typed readback was run without close/reopen, a new attempt at `verify_apa_saved_copy_read_only.py --port 19726` returned:
+
+```json
+{
+  "status":"BLOCKED_READ_ONLY_SAVED_COPY",
+  "reason":"ValueError: WRONG_OPEN_PROJECT_EXPECT_EXACT_SAVED_COPY: C:\\институт проект\\Улучшенная копия APA_Test_House_01.bpn",
+  "nativeWriteCalls":0,
+  "noAutomaticRetry":true
+}
+```
+
+The native `GetProjectInfo.projectPath` points to a **.bpn backup**, rather than the requested exact `C:\\институт проект\\Улучшенная копия APA_Test_House_01.pln`. The read-only verifier **correctly failed closed before 45-GUID/25-element inspection**. This result neither disproves the previous in-memory typed PASS nor verifies serialization to the .pln. The original `Get-Item` check previously showed the .pln exists on disk (15,957,232 bytes); no data-loss claim is supported.
+
+**Manual remediation:** do not rename/delete the .bpn or change historic journals, and do not run any Create/Modify/Save automation. In Archicad, explicitly open the exact .pln via File → Open → Open Project, verify the document path, then run only `verify_apa_saved_copy_read_only.py --port 19726`. If Tapir port changes, determine the new port before running. Confirm actual close/reopen manually and record fresh exact 45 GUID/25 typed readback. **SAVE_REOPEN_PASS remains NOT_VERIFIED.**
