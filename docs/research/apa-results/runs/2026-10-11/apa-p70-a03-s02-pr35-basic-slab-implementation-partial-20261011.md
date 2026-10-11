@@ -312,3 +312,27 @@ The shared Tapir helper remains default 15 seconds; it now accepts an opt-in bou
 Synthetic GitHub [CI #38149533972](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38149533972) **SUCCESS — 195/195 offline tests PASS**, including new 13+12 complete final-model result, no-retry after timed-out fifth scene, fail-closed native inventory mismatch, exact orphan GUID constraint and 120s-create/15s-read transport boundary. Intermediate CI failures from synthetic mocked fourth token and reservation-order regression were corrected; only latest successful head is acceptance evidence.
 
 **Status:** READY_FOR_OWNER_LIVE_PREFLIGHT; 13/25 reported live verified unsaved; 12 remaining NOT_LIVE_VERIFIED. Future source improvements: fix the generic second-story slab global-Z placement, and independently analyze/suppress modal warnings with an explicit user-approved UI preference rather than circumventing native dialogs.
+
+## Fifth suffix owner live read-only preflight PASS — awaiting explicit Create approval
+
+Owner's PowerShell fetched source to commit `f125c063031117cf8a77a83fd0fed8e1c288a047`, then executed `continue_apa_after_orphan_partition.py --port 19726 --material "Железобетон - Конструкционный"` with **no** `--confirm-token`. The CLI reported:
+
+```json
+{
+  "status":"READY_FOR_EXPLICIT_TWELVE_STEP_CONTINUATION",
+  "sceneId":"apa-suffix5-20261011-031123-7181b47c",
+  "binding":{
+    "path":"C:\\LocalAI\\APA_Test_House_01.pln",
+    "name":"APA_Test_House_01",
+    "port":19726,
+    "tapirVersion":"1.5.10",
+    "storyIndex":0
+  },
+  "reusedCount":13,
+  "remainingCount":12,
+  "modelWriteAttempts":0,
+  "maxCreateTimeoutSeconds":120
+}
+```
+
+**Evidence: USER_SUPPLIED / LIVE_READ_ONLY_PASS.** A fresh continuation approval token was returned but is intentionally omitted from the durable report. This is a preflight only; no fifth-suffix writes have yet been independently reported. The prescribed next action is one user-approved native Create of the 12 remaining steps in this uniquely reserved fifth scene. User should be present to acknowledge any invisible-story Archicad modal promptly; only Create calls have a 120s HTTP timeout. No automatic retries, file switch, PLN Save, rollback or journaling rewrite. Expected completion `COMPLETE_UNSAVED`, 13 reused + 12 created, full typed GUID readbacks, **45** total model elements; live completion and PLN persistence remain **NOT_VERIFIED** pending execution logs.
