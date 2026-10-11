@@ -21,7 +21,9 @@ import archicad_scene_v1 as SCENE
 import archicad_building_shell as BUILD
 
 READS = frozenset({"GetProjectInfo", "GetStories", "GetAddOnVersion",
-                  "GetAllElements", "Get3DBoundingBoxes", "GetDetailsOfElements", "API.GetProductInfo"})
+                  "GetAllElements", "Get3DBoundingBoxes", "GetDetailsOfElements",
+                  "GetAttributesByType", "API.GetProductInfo"})
+NATIVE_MUTATIONS = RUN.ALLOWED_WRITES | frozenset({"ModifySlabs"})
 PRIMITIVES = {
     "pavilion-frame-v1": {"status": "EXECUTABLE_PENDING_LIVE_ACCEPTANCE",
                           "executor": "SceneWriter", "elementCount": 12},
@@ -154,7 +156,7 @@ def compile_intent(intent, schema_path):
 class EvidenceAPI:
     def __init__(self, transport, folder, execute=False, export=False):
         self.transport, self.folder = transport, Path(folder)
-        self.allowed = READS | (RUN.ALLOWED_WRITES if execute else frozenset())
+        self.allowed = READS | (NATIVE_MUTATIONS if execute else frozenset())
         if export:
             self.allowed = self.allowed | {"GenerateDocumentation"}
         self.calls = Counter()
@@ -168,7 +170,7 @@ class EvidenceAPI:
         with (self.folder / "dispatch.jsonl").open("a", encoding="utf-8") as f:
             f.write(RUN.canonical(record) + "\n")
         self.calls[command] += 1
-        self.write_attempts += int(command in RUN.ALLOWED_WRITES)
+        self.write_attempts += int(command in NATIVE_MUTATIONS)
         start = time.perf_counter()
         try:
             record["response"] = self.transport(command, params)
@@ -272,9 +274,13 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
                     expected_floor = parent_step["params"]["wallsData"][0]["floorIndex"]
                 else:
                     expected_floor = next(iter(params.values()))[0]["floorIndex"]
-                RUN.verify_readback(step["command"], params,
-                                    RUN.requested_details(api, created[step["id"]]["guid"]),
-                                    host, expected_floor=expected_floor)
+                RUN.verify_readback(
+                    step["command"], params,
+                    RUN.requested_details(api, created[step["id"]]["guid"]),
+                    host, expected_floor=expected_floor,
+                    expected_slab_material_guid=(
+                        ticket.get("slabBasicMaterialGuid")
+                        if step["command"] == "CreateSlabs" else None))
             if RUN.guarded_project(api, required_story) != binding:
                 raise ValueError("PROJECT_CHANGED_DURING_WHOLE_ASSEMBLY_READBACK")
             result["wholeAssemblyReadback"] = True
