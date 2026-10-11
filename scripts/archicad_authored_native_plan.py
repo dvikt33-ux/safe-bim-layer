@@ -118,6 +118,9 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None):
         "projectId":doc["projectId"],"nativeTargetProjectPath":doc["targetProjectPath"],
         "sourceLayoutStatus":geometry["status"],
         "sourcePackStatus":pack["status"],
+        "authoredOutline":geometry["outline"],
+        "authoredStoryHeightsMeters":{k:float(v) for k,v in heights.items()},
+        "slabBasicMaterialName":material_name,
         "graph":graph,"executionOrder":checked["executionOrder"],
         "sourcePlanHash":checked["sourcePlanHash"],
         "schemaVersion":checked["schemaVersion"],
@@ -134,4 +137,80 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None):
         "sceneReservationCreated":False,
         "plnChanged":False,
         "nativeWriteCalls":0
+    }
+
+
+def as_existing_scene_writer_preview(candidate):
+    """Adapt validated authored DAG to pre-existing SceneWriter preview format.
+
+    This is PURE: no native calls, file writes or reservations. Only the
+    specifically already-approved throwaway scratch PLN is ever eligible for
+    that writer. Other PLN paths are blocked, NOT silently added to a grant.
+    """
+    if (not isinstance(candidate,dict) or
+            candidate.get("status")!="OFFLINE_EXISTING_BIM_GRAPH_COMPILED_NOT_AUTHORIZED"
+            or candidate.get("liveWriteAuthorized") is not False
+            or candidate.get("nativeWriteCalls")!=0):
+        raise ValueError("UNTRUSTED_OR_AUTHORIZED_SOURCE_CANDIDATE")
+    if (candidate.get("nativeTargetProjectPath")!=RUN.APPROVED_SCRATCH_PATH):
+        raise ValueError("WRITER_PREVIEW_ONLY_FOR_EXISTING_APPROVED_SCRATCH_PLN")
+    schema=RUN.DEFAULT_SCENE_SCHEMA
+    if (not schema.is_file() or
+            hashlib.sha256(schema.read_bytes()).hexdigest()!=candidate.get("schemaSha256")):
+        raise ValueError("PINNED_SCHEMA_CHANGED_SINCE_NATIVE_COMPILE")
+    graph=candidate.get("graph")
+    checked=GRAPH.compile_graph(GRAPH.CONTRACTS.load_catalog(schema),graph,
+                                 runtime_version=RUN.EXPECTED_TAPIR)
+    if (checked["status"]!="PLAN_VALIDATED_OFFLINE"
+            or checked["sourcePlanHash"]!=candidate.get("sourcePlanHash")
+            or checked["executionOrder"]!=candidate.get("executionOrder")):
+        raise ValueError("AUTHORED_OPERATION_GRAPH_DRIFT")
+    stories=candidate.get("storyBindings")
+    if not isinstance(stories,list) or not stories:
+        raise ValueError("STORY_BINDINGS_REQUIRED")
+    native=[]
+    for row in stories:
+        if not isinstance(row,dict) or set(row)!={
+                "architecturalStoryId","label","nativeIndex","floorId",
+                "nativeLabel","level"}:
+            raise ValueError("AUTHOR_TO_NATIVE_STORY_MAP_CHANGED")
+        native.append({"label":row["nativeLabel"],"nativeIndex":row["nativeIndex"],
+                       "floorId":row["floorId"],"level":row["level"]})
+    heights=candidate.get("authoredStoryHeightsMeters")
+    outline=candidate.get("authoredOutline")
+    if (not isinstance(heights,dict) or
+            not isinstance(outline,dict) or
+            set(outline)!={"xMin","xMax","yMin","yMax"}):
+        raise ValueError("AUTHORED_ENVELOPE_MISSING")
+    last=stories[-1]
+    final_height=heights.get(last["architecturalStoryId"])
+    if type(final_height) not in (float,int) or not math.isfinite(final_height):
+        raise ValueError("AUTHOR_LAST_STORY_HEIGHT_MISSING")
+    if not isinstance(candidate.get("slabBasicMaterialName"),str):
+        raise ValueError("EXPLICIT_BASIC_SLAB_MATERIAL_NAME_MISSING")
+    counts=dict(Counter(x["command"] for x in graph["operations"]))
+    if counts!=candidate.get("plannedNativeCommands"):
+        raise ValueError("GRAPH_NATIVE_COMMAND_COUNTS_DRIFT")
+    return {
+        "status":"SCENE_PREVIEW_OFFLINE",
+        "sourcePlanHash":checked["sourcePlanHash"],
+        "graph":graph,
+        "executionOrder":checked["executionOrder"],
+        "schemaVersion":checked["schemaVersion"],
+        "schemaPath":str(schema),
+        "schemaSha256":candidate["schemaSha256"],
+        "storyBindings":native,
+        "slabBasicMaterialName":candidate["slabBasicMaterialName"],
+        "expectedPreflightSlabMaterialGuid":candidate["provisionalBasicSlabMaterialGuid"],
+        "envelope":{**outline,
+                    "zMin":stories[0]["level"]-.3,
+                    "zMax":last["level"]+final_height+.3},
+        "metrics":{"elementCount":candidate["operationCount"],
+                   "nativeCommands":counts,
+                   "authoredRooms":len(candidate["authoredRoomIds"]),
+                   "structuralVerified":False,"normativeVerified":False},
+        "limitations":["PROVISIONAL_AUTHORED_GEOMETRY_NOT_STRUCTURAL_ACCEPTANCE",
+                       "NO_EXECUTION_GRANT_OR_NATIVE_WRITES",
+                       "MISSING_PROVEN_WALL_CSE_AND_JUNCTIONS"],
+        "liveWriteAuthorized":False,"plnChanged":False,
     }
