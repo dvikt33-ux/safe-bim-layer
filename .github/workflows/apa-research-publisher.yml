@@ -74,20 +74,12 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: python tools/apa_publisher/publisher.py verify-receipts --commit "${{ steps.receipts.outputs.sha }}"
 
-      - name: Generate canonical project control board and handoff views
-        run: python tools/apa_controller/controller.py build
-
-      - name: Commit controller projections
+      - name: Commit latest controller projections with bounded retry
         id: controller
         shell: bash
         run: |
           set -euo pipefail
-          git add -- docs/research/apa-results/control/generated
-          if ! git diff --cached --quiet; then
-            git commit -m "ops(APA): rebuild authoritative task board and cross-chat context"
-            git push origin HEAD:refs/heads/research/apa-verified-results-hub-20261010
-          fi
-          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          bash tools/apa_controller/publish_generated_retry.sh
 
       - name: Verify controller projections via GitHub REST
         env:
