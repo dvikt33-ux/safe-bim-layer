@@ -151,7 +151,9 @@ def preflight(api, directory, material_name):
             "expectedThickness": .20, "currentThickness": .30,
             "material": material_name, "materialGuid": material_guid,
             "modelWriteAttempts": 0, "repairIntent": intent,
-            "journalPath": str(journal)}
+            "journalPath": str(journal),
+            "projectStory": binding_rows[0],
+            "expectedSlabPolygon": expected["polygonCoordinates"]}
 
 
 def repair(api, directory, material, confirm_token):
@@ -180,9 +182,7 @@ def repair(api, directory, material, confirm_token):
         db.commit()  # durable reservation before the single native mutation
         try:
             # Guard AGAIN at the mutation boundary, including the exact target.
-            if (RUN.guarded_project(api, ticket["projectStory"]) if
-                    "projectStory" in ticket else
-                    RUN.guarded_project(api)) != ticket["project"]:
+            if RUN.guarded_project(api, ticket["projectStory"]) != ticket["project"]:
                 raise ValueError("PROJECT_SWITCHED_BEFORE_REPAIR")
             reply = api("ModifySlabs", params)
             results = reply.get("executionResults") if isinstance(reply, dict) else None
@@ -199,13 +199,11 @@ def repair(api, directory, material, confirm_token):
                     or details.get("buildingMaterialId", {}).get("guid", "").lower()
                        != ticket["materialGuid"].lower()):
                 raise ValueError("SLAB_REPAIR_TYPED_READBACK_MISMATCH")
-            expected_polygon = [dict(x) for x in (
-                ticket["repairIntent"]["slabPolygon"]
-                if "slabPolygon" in ticket["repairIntent"] else
-                [{"x": 300, "y": 300}, {"x": 310, "y": 300},
-                 {"x": 310, "y": 308}, {"x": 300, "y": 308}])]
+            expected_polygon = ticket["expectedSlabPolygon"]
             if not RUN.compare_polygon(expected_polygon, details.get("polygonOutline")):
                 raise ValueError("SLAB_POLYGON_CHANGED_AFTER_MODIFY")
+            if RUN.guarded_project(api, ticket["projectStory"]) != ticket["project"]:
+                raise ValueError("PROJECT_SWITCHED_AFTER_REPAIR")
             if all_guids(api) != ticket["repairIntent"]["baselineGuids"]:
                 raise ValueError("GUID_INVENTORY_CHANGED_AFTER_MODIFY")
             outcome = {"status": "SINGLE_SLAB_REPAIR_VERIFIED_UNSAVED",
@@ -244,7 +242,8 @@ def main(argv=None):
         output = repair(api, EVIDENCE, args.material, args.confirm_token)
     else:
         ticket = preflight(api, EVIDENCE, args.material)
-        output = {k: v for k, v in ticket.items() if k not in ("repairIntent",)}
+        output = {k: v for k, v in ticket.items()
+                  if k not in ("repairIntent", "expectedSlabPolygon")}
     print(json.dumps(output, ensure_ascii=False, indent=2))
     return 0 if output["status"] in (
         "READY_FOR_EXPLICIT_SINGLE_SLAB_REPAIR",
