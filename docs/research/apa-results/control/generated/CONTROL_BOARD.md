@@ -12,12 +12,12 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | BLOCKED | 8 |
 | CLAIMED | 0 |
 | DONE_PUBLISHED | 15 |
-| IN_PROGRESS | 1 |
-| PARTIAL | 15 |
+| IN_PROGRESS | 0 |
+| PARTIAL | 16 |
 | READY | 35 |
 | SUPERSEDED | 0 |
 | DISPATCHABLE_NOW | 18 |
-| HELD_BY_DEPENDENCIES | 32 |
+| HELD_BY_DEPENDENCIES | 33 |
 | EXPIRED_LEASES | 0 |
 
 ## Полный цикл разработки APA
@@ -30,7 +30,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| APA-P70.A03.S02 | chatgpt-gpt6-manual | 2026-10-12T01:00:00Z | reuse-native-whole-building-builder |
+| — | — | — | — |
 
 ## CONTROL — 0 ready
 
@@ -103,6 +103,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | APA-P50.A03.S01 | APA-P50.A01.S03, APA-P50.A02.S02 |
 | APA-P50.A03.S02 | APA-P50.A03.S01 |
 | APA-P70.A01.S02 | APA-P50.A01.S01 |
+| APA-P70.A03.S02 |  |
 | APA-P70.A03.S03 | APA-P70.A03.S02 |
 | APA-P70.A04.S02 | APA-P70.A04.S01, APA-P70.A03.S02 |
 | APA-P70.A04.S03 | APA-P70.A04.S02 |
