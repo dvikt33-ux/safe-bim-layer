@@ -315,5 +315,72 @@ class AuthoredNativePlanTests(unittest.TestCase):
             N.make_read_only_scene_writer_preview_factory(compiled)
 
 
+    def test_20_owner_observed_template_boxes_block_origin_but_clear_40_40(self):
+        import archicad_authored_native_plan as N
+        # The owner reported 16 Object and 4 Elevation at native Z = 0.
+        # Bounding boxes below are exact user-returned XY readings; simulated
+        # native APIs here do NOT establish the future live model inventory.
+        raw=[
+            (-4.87509,-.7,27.4,28),
+            (7.12491,11.3,27.4,28),
+            (22.7,26.87509,27.4,28),
+            (-3.862057698,0,-.361429,.33),
+            (27.4,28,22.7,27.00447),
+            (27.4,28,10.7,15.00447),
+            (27.4,28,-5.00447,-.7),
+            (-3.862057698,0,-.361429,.33),
+            (-4.36844,-.7,-6,-5.4),
+            (7.63156,11.3,-6,-5.4),
+            (22.7,26.36844,-6,-5.4),
+            (-3.862057698,0,-.361429,.33),
+            (-6,-5.4,22.7,26.84657),
+            (-6,-5.4,10.7,14.84657),
+            (-6,-5.4,-4.84657,-.7),
+            (-3.862057698,0,-.361429,.33),
+            (-1,23,27.4,28),
+            (27.4,28,-1,23),
+            (-1,23,-6,-5.4),
+            (-6,-5.4,-1,23)
+        ]
+        ids=[{"elementId":{"guid":
+                "00000000-0000-4000-8000-"+format(i+1,"012x")}}
+             for i in range(20)]
+        calls=[]
+        def fake_get(cmd,params):
+            calls.append(cmd)
+            if cmd=="GetAllElements":
+                return {"elements":ids}
+            if cmd=="Get3DBoundingBoxes":
+                batch=params["elements"]
+                return {"boundingBoxes3D":[{
+                    "boundingBox3D":{
+                        "xMin":raw[int(x["elementId"]["guid"][-12:],16)-1][0],
+                        "xMax":raw[int(x["elementId"]["guid"][-12:],16)-1][1],
+                        "yMin":raw[int(x["elementId"]["guid"][-12:],16)-1][2],
+                        "yMax":raw[int(x["elementId"]["guid"][-12:],16)-1][3],
+                        "zMin":0,"zMax":0
+                    }} for x in batch]}
+            raise AssertionError("READ_ONLY_NATIVE_COMMANDS_ONLY")
+        layout_shifted=N.SPATIAL.relocate_authored_xy(layout(),40,40)
+        b,pack,native=sample()
+        compiled=A.compile_authored_native_candidate(
+            b,pack,layout_shifted,HEIGHTS,native)
+        self.assertEqual(compiled["authoredOutline"],layout_shifted["outline"])
+        slabs=[x["params"]["slabsData"][0] for x in compiled["graph"]["operations"]
+               if x["command"]=="CreateSlabs"]
+        self.assertTrue(all(x["polygonCoordinates"][0]=={"x":40.0,"y":40.0}
+                            for x in slabs))
+        envelope={**layout_shifted["outline"],"zMin":-.3,"zMax":6.3}
+        accepted=A.RUN.scan_for_existing_geometry(fake_get,40,40,envelope)
+        self.assertEqual(accepted["nativeElementsInspected"],20)
+        self.assertEqual(accepted["volumetricBodiesChecked"],20)
+        self.assertEqual(accepted["nonSpatialElementsVerified"],0)
+        self.assertTrue(set(calls)<={"GetAllElements","Get3DBoundingBoxes"})
+        with self.assertRaisesRegex(ValueError,"SPATIAL_COLLISION"):
+            A.RUN.scan_for_existing_geometry(fake_get,0,0,{
+                "xMin":0,"xMax":10,"yMin":0,"yMax":8,
+                "zMin":-.3,"zMax":6.3})
+
+
 if __name__=="__main__":
     unittest.main()
