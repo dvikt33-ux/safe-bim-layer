@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 58,
+  "revision": 59,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2156,7 +2156,7 @@
       "action_id": "APA-P70.A02",
       "title": "Собрать семантический контракт задания, участка, этажей и помещений",
       "kind": "BUILD",
-      "status": "READY",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "project-brief-and-story-contract",
       "depends_on": [
@@ -2171,9 +2171,9 @@
         "Два режима GENERATE_FROM_ZERO/ADAPT_EXISTING; требования/ограничения, первый этаж на ±0.000, index только по GetStories"
       ],
       "acceptance": "Два режима GENERATE_FROM_ZERO/ADAPT_EXISTING; требования/ограничения, первый этаж на ±0.000, index только по GetStories",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "chatgpt-gpt6-manual",
+      "lease_until": "2026-10-11T20:00:00Z",
+      "claim_ref": "APA-RUN-20261011-1608Z-p70-a02-s01-semantic-brief",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
