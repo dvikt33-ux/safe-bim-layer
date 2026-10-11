@@ -92,7 +92,7 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 - APA-P70.A02.S02 [BUILD/READY]: Связать проектные требования с версиями нормативов и проверяемыми правилами; work_key=normative-applicability-pack; related=none
 - APA-P70.A02.S03 [BUILD/DONE_PUBLISHED]: Собрать проектный Library Pack из проверяемых строительных систем и узлов; work_key=project-library-pack-assembly; related=none
 - APA-P70.A03.S01 [INTEGRATION/DONE_PUBLISHED]: Связать помещения, несущую схему, оси, уровни и конструктивные ограничения; work_key=semantic-spatial-structural-plan; related=none
-- APA-P70.A03.S02 [BUILD/READY]: Собрать модель средствами уже существующих BIM-исполнителей; work_key=reuse-native-whole-building-builder; related=none
+- APA-P70.A03.S02 [BUILD/IN_PROGRESS]: Собрать модель средствами уже существующих BIM-исполнителей; work_key=reuse-native-whole-building-builder; related=none
 - APA-P70.A03.S03 [VALIDATION/READY]: Доказать редактируемость, GUID/host/story/material и инкрементальное обновление; work_key=incremental-model-integrity-gates; related=none
 - APA-P70.A04.S01 [INTEGRATION/READY]: Вывести из модели обязательные семейства узлов и их условия применимости; work_key=required-junction-condition-coverage; related=none
 - APA-P70.A04.S02 [BUILD/READY]: Привязать выбранные узлы и композиции к нативным BIM элементам; work_key=native-details-to-cse-binding; related=none
