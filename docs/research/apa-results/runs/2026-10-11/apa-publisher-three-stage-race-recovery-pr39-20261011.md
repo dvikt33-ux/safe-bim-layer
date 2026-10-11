@@ -29,3 +29,20 @@ All stage recovery is limited to **four normal fast-forward attempts**; no `--fo
 - Active Slack receiver, model bridge, Archicad PLN, installed APX and `main/master` unchanged.
 
 **Next measurable milestone:** one canonical full-chain Actions run *after approved integration* with report/index → GitHub readback → receipt → GitHub readback → Controller board → GitHub readback, plus an intentional concurrent plan revision test. Until then claim OFFLINE_CI_PASS only.
+
+## Post-merge canonical deployment verification — 2026-10-11
+
+**This post-merge evidence supersedes the pre-merge NOT_DEPLOYED statements above.** Draft [PR #39](https://github.com/dvikt33-ux/safe-bim-layer/pull/39) was merged into **only** `research/apa-verified-results-hub-20261010`, GitHub merge SHA [26e708c43849944017f18d44e54536c2277902e8](https://github.com/dvikt33-ux/safe-bim-layer/commit/26e708c43849944017f18d44e54536c2277902e8). The merged workflow GitHub contents readback contains all three bounded publish commands.
+
+**Real GitHub Actions post-merge [run #38155818514](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38155818514): SUCCESS, attempt 1.** Verified executed jobs, not just a CI badge:
+
+- `Commit immutable reports with bounded retry` — SUCCESS.
+- `Verify remote GitHub report and index bytes` — SUCCESS.
+- `Commit verified receipts with bounded retry` — SUCCESS.
+- `Verify remote GitHub receipts` — SUCCESS.
+- `Commit latest controller projections with bounded retry` — SUCCESS.
+- `Verify controller projections via GitHub REST` — SUCCESS.
+
+Additionally [run #38155821730](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38155821730) — SUCCESS for merged offline regression workflow. Last pre-merge hardened metadata CI [#38155742294](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38155742294) — SUCCESS; existing receipt verification now rejects forged/incomplete `schema`, `run_id`, `report_path`, `status`, `indexed`, `index_mode`, `report_commit_sha`, `index_commit_sha`, and `readback_verified` even when SHA256 and idempotency key happen to match. Existing valid published receipts remain idempotently preserved on later branch heads.
+
+**Verified level:** `CANONICAL_DEPLOYED_AND_THREE_STAGE_GITHUB_REST_READBACK_PASS`. A **real concurrent remote advance during this specific post-merge run was not observed**; actual live CAS conflict recovery remains `NOT_VERIFIED`, whereas two-clone offline real-Git races were verified in CI. The task `APA-P00.A03.S03` remains `PARTIAL` because continuous recovery/heartbeat/error-monitoring acceptance is broader than this implementation. Main/master, working PLN, APX, and Socket Mode service were not modified.
