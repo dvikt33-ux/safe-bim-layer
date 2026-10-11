@@ -36,7 +36,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P00.A01.S03
 
-**Инвентаризировать 72 ветки и PR, проверить уникальные результаты и ancestry** — CONSOLIDATION / PARTIAL / P0
+**Инвентаризировать 72 ветки и PR, проверить уникальные результаты и ancestry** — CONSOLIDATION / PARTIAL / P8
 
 - Parent: APA-P00 → APA-P00.A01
 - Topic: HUB_GOVERNANCE
@@ -52,7 +52,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P00.A01.S04
 
-**Сопоставить локальные и удалённые SHA без догадок** — VALIDATION / BLOCKED / P1
+**Сопоставить локальные и удалённые SHA без догадок** — VALIDATION / BLOCKED / P8
 
 - Parent: APA-P00 → APA-P00.A01
 - Topic: HUB_GOVERNANCE
@@ -116,7 +116,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P00.A02.S04
 
-**Контролировать receipt/commit/readback всех завершённых отчётов** — VALIDATION / PARTIAL / P1
+**Контролировать receipt/commit/readback всех завершённых отчётов** — VALIDATION / PARTIAL / P8
 
 - Parent: APA-P00 → APA-P00.A02
 - Topic: HUB_GOVERNANCE
@@ -142,13 +142,13 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Acceptance: Сохранены все прежние ID/статусы/доказательства; последовательный CORE FIRST DAG валиден; карта компонентов находится в каноническом реестре; инструкция и план опубликованы и прочитаны обратно
 - Owner/lease: codex-apa-core-first-20261011 / 2026-10-11T20:30:00Z
 - Requires owner approval: False
-- Source inputs: [ART-CONTROLLER](../../../../../docs/research/apa-results/control/PROJECT_PLAN.json), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
+- Source inputs: [ART-CONTROLLER](../../../../../docs/research/apa-results/control/PROJECT_PLAN.json), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md), [ART-APA-WORK-INSTRUCTION-V2](../../../../../docs/research/apa-results/control/WORK_OPERATING_INSTRUCTION.md)
 - Existing V2 runs: none
 - Expected output: IMPLEMENTATION_ROADMAP.md; WORK_OPERATING_INSTRUCTION.md; согласованный PROJECT_PLAN.json; GitHub CAS/readback
 
 ## APA-P00.A03.S01
 
-**Проверить write/readback для всех классов исполнителей** — VALIDATION / PARTIAL / P0
+**Проверить write/readback для всех классов исполнителей** — VALIDATION / PARTIAL / P8
 
 - Parent: APA-P00 → APA-P00.A03
 - Topic: PUBLISHER
@@ -164,7 +164,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P00.A03.S02
 
-**Выбрать разрешённый периодический research runner без платных API** — CONTROL / BLOCKED / P1
+**Выбрать разрешённый периодический research runner без платных API** — CONTROL / BLOCKED / P8
 
 - Parent: APA-P00 → APA-P00.A03
 - Topic: PUBLISHER
@@ -180,7 +180,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P00.A03.S03
 
-**Publisher, дедупликация, retry, heartbeat и ошибки** — BUILD / PARTIAL / P0
+**Publisher, дедупликация, retry, heartbeat и ошибки** — BUILD / PARTIAL / P8
 
 - Parent: APA-P00 → APA-P00.A03
 - Topic: PUBLISHER
@@ -196,7 +196,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P00.A03.S04
 
-**Два независимых SOURCE цикла с GitHub readback** — VALIDATION / PARTIAL / P1
+**Два независимых SOURCE цикла с GitHub readback** — VALIDATION / PARTIAL / P8
 
 - Parent: APA-P00 → APA-P00.A03
 - Topic: PUBLISHER
@@ -212,7 +212,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P10.A01.S01
 
-**AC29 SDK headers и native create/change/get сигнатуры** — RESEARCH / PARTIAL / P1
+**AC29 SDK headers и native create/change/get сигнатуры** — RESEARCH / PARTIAL / P7
 
 - Parent: APA-P10 → APA-P10.A01
 - Topic: SDK_NATIVE
@@ -228,7 +228,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P10.A01.S02
 
-**Этажи, building materials, surfaces, composites, profiles, связи** — RESEARCH / PARTIAL / P1
+**Этажи, building materials, surfaces, composites, profiles, связи** — RESEARCH / PARTIAL / P7
 
 - Parent: APA-P10 → APA-P10.A01
 - Topic: SDK_NATIVE
@@ -244,7 +244,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P10.A01.S03
 
-**Morph/Roof/Shell/Openings/SEO/3D dump** — RESEARCH / PARTIAL / P1
+**Morph/Roof/Shell/Openings/SEO/3D dump** — RESEARCH / PARTIAL / P7
 
 - Parent: APA-P10 → APA-P10.A01
 - Topic: SDK_NATIVE
@@ -260,7 +260,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P10.A02.S01
 
-**Tapir публичные версии и Python/JSON vs локальная 1.5.10** — RESEARCH / PARTIAL / P1
+**Tapir публичные версии и Python/JSON vs локальная 1.5.10** — RESEARCH / PARTIAL / P7
 
 - Parent: APA-P10 → APA-P10.A02
 - Topic: TAPIR_PYTHON
@@ -276,7 +276,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P10.A02.S02
 
-**GDL/TN, Unicode, target identity и 92 ошибок** — RESEARCH / READY / P1
+**GDL/TN, Unicode, target identity и 92 ошибок** — RESEARCH / READY / P7
 
 - Parent: APA-P10 → APA-P10.A02
 - Topic: GDL_TN
@@ -292,7 +292,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P10.A02.S03
 
-**MCP/IFC/openBIM и альтернативы** — RESEARCH / READY / P2
+**MCP/IFC/openBIM и альтернативы** — RESEARCH / READY / P7
 
 - Parent: APA-P10 → APA-P10.A02
 - Topic: IFC_MCP
@@ -308,7 +308,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P10.A02.S04
 
-**Native MEP/Tapir MEP команды, трассы, порты** — RESEARCH / PARTIAL / P1
+**Native MEP/Tapir MEP команды, трассы, порты** — RESEARCH / PARTIAL / P7
 
 - Parent: APA-P10 → APA-P10.A02
 - Topic: MEP
@@ -324,7 +324,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P10.A03.S01
 
-**Сравнить native C++, Tapir/Python, IFC и hybrid** — INTEGRATION / READY / P2
+**Сравнить native C++, Tapir/Python, IFC и hybrid** — INTEGRATION / READY / P8
 
 - Parent: APA-P10 → APA-P10.A03
 - Topic: ARCHITECTURE
@@ -340,7 +340,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P10.A03.S02
 
-**Сравнить performance, обратимость, тестируемость, стоимость** — INTEGRATION / READY / P2
+**Сравнить performance, обратимость, тестируемость, стоимость** — INTEGRATION / READY / P8
 
 - Parent: APA-P10 → APA-P10.A03
 - Topic: ARCHITECTURE
@@ -356,7 +356,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P20.A01.S01
 
-**Read-only provenance AC29 SDK/APX/source SHA** — VALIDATION / READY / P1
+**Read-only provenance AC29 SDK/APX/source SHA** — VALIDATION / READY / P8
 
 - Parent: APA-P20 → APA-P20.A01
 - Topic: TESTS
@@ -372,7 +372,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P20.A01.S02
 
-**Read-only доступность команд, GDL, MEP, model dump** — VALIDATION / READY / P1
+**Read-only доступность команд, GDL, MEP, model dump** — VALIDATION / READY / P8
 
 - Parent: APA-P20 → APA-P20.A01
 - Topic: TESTS
@@ -388,7 +388,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P20.A01.S03
 
-**Сохранить PASS/FAIL с raw evidence** — VALIDATION / READY / P1
+**Сохранить PASS/FAIL с raw evidence** — VALIDATION / READY / P8
 
 - Parent: APA-P20 → APA-P20.A01
 - Topic: TESTS
@@ -404,7 +404,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P20.A02.S01
 
-**План изолированных тестов, rollback, критерии** — CONTROL / READY / P2
+**План изолированных тестов, rollback, критерии** — CONTROL / READY / P8
 
 - Parent: APA-P20 → APA-P20.A02
 - Topic: TESTS
@@ -420,7 +420,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P20.A02.S02
 
-**Получить отдельное разрешение на изменение BIM/APX** — CONTROL / BLOCKED / P2
+**Получить отдельное разрешение на изменение BIM/APX** — CONTROL / BLOCKED / P8
 
 - Parent: APA-P20 → APA-P20.A02
 - Topic: TESTS
@@ -436,7 +436,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P20.A02.S03
 
-**Протоколировать разрешённые live тесты** — VALIDATION / BLOCKED / P2
+**Протоколировать разрешённые live тесты** — VALIDATION / BLOCKED / P8
 
 - Parent: APA-P20 → APA-P20.A02
 - Topic: TESTS
@@ -452,7 +452,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P30.A01.S01
 
-**Decision matrix для нативной BIM-геометрии** — INTEGRATION / READY / P2
+**Decision matrix для нативной BIM-геометрии** — INTEGRATION / READY / P8
 
 - Parent: APA-P30 → APA-P30.A01
 - Topic: ARCHITECTURE
@@ -468,7 +468,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P30.A01.S02
 
-**Блокировки и альтернативные маршруты** — INTEGRATION / READY / P2
+**Блокировки и альтернативные маршруты** — INTEGRATION / READY / P8
 
 - Parent: APA-P30 → APA-P30.A01
 - Topic: ARCHITECTURE
@@ -484,7 +484,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P30.A02.S01
 
-**MVP: этажи → атрибуты → геометрия → библиотека → MEP** — BUILD / READY / P2
+**MVP: этажи → атрибуты → геометрия → библиотека → MEP** — BUILD / READY / P8
 
 - Parent: APA-P30 → APA-P30.A02
 - Topic: MVP
@@ -500,7 +500,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P30.A02.S02
 
-**Acceptance gates и rollback по этапам MVP** — VALIDATION / READY / P2
+**Acceptance gates и rollback по этапам MVP** — VALIDATION / READY / P8
 
 - Parent: APA-P30 → APA-P30.A02
 - Topic: MVP
@@ -516,7 +516,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P40.A01.S01
 
-**Настроить запуск через ChatGPT Scheduled Tasks и разрешённый GitHub доступ** — CONTROL / BLOCKED / P2
+**Настроить запуск через ChatGPT Scheduled Tasks и разрешённый GitHub доступ** — CONTROL / BLOCKED / P8
 
 - Parent: APA-P40 → APA-P40.A01
 - Topic: AUTOMATION
@@ -532,7 +532,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P40.A01.S02
 
-**Проверить Scheduled → IN_PROGRESS → результат → DONE_PUBLISHED/PARTIAL** — BUILD / BLOCKED / P2
+**Проверить Scheduled → IN_PROGRESS → результат → DONE_PUBLISHED/PARTIAL** — BUILD / BLOCKED / P8
 
 - Parent: APA-P40 → APA-P40.A01
 - Topic: AUTOMATION
@@ -548,7 +548,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P40.A01.S03
 
-**Watchdog пропусков Scheduled Task, зависших IN_PROGRESS и журнал ошибок** — BUILD / BLOCKED / P2
+**Watchdog пропусков Scheduled Task, зависших IN_PROGRESS и журнал ошибок** — BUILD / BLOCKED / P8
 
 - Parent: APA-P40 → APA-P40.A01
 - Topic: AUTOMATION
@@ -564,7 +564,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P40.A01.S04
 
-**Проверить 24 часа реальных запусков ChatGPT Scheduled Tasks без повторов** — VALIDATION / BLOCKED / P2
+**Проверить 24 часа реальных запусков ChatGPT Scheduled Tasks без повторов** — VALIDATION / BLOCKED / P8
 
 - Parent: APA-P40 → APA-P40.A01
 - Topic: AUTOMATION
@@ -580,7 +580,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P50.A01.S01
 
-**Карта связей: исследования ↔ S-ID ↔ артефакты ↔ PR** — CONSOLIDATION / PARTIAL / P0
+**Карта связей: исследования ↔ S-ID ↔ артефакты ↔ PR** — CONSOLIDATION / PARTIAL / P8
 
 - Parent: APA-P50 → APA-P50.A01
 - Topic: KNOWLEDGE_GRAPH
@@ -596,7 +596,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P50.A01.S02
 
-**Дедупликация по work_key/source revision/claim** — CONSOLIDATION / READY / P0
+**Дедупликация по work_key/source revision/claim** — CONSOLIDATION / READY / P8
 
 - Parent: APA-P50 → APA-P50.A01
 - Topic: KNOWLEDGE_GRAPH
@@ -612,7 +612,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P50.A01.S03
 
-**Сводить несколько исследований одной темы в решение** — INTEGRATION / READY / P1
+**Сводить несколько исследований одной темы в решение** — INTEGRATION / READY / P8
 
 - Parent: APA-P50 → APA-P50.A01
 - Topic: KNOWLEDGE_GRAPH
@@ -628,7 +628,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P50.A02.S01
 
-**Единый каталог AC29 SDK/Tapir/Python/GDL/IFC/MEP инструментов** — RESEARCH / PARTIAL / P1
+**Единый каталог AC29 SDK/Tapir/Python/GDL/IFC/MEP инструментов** — RESEARCH / PARTIAL / P7
 
 - Parent: APA-P50 → APA-P50.A02
 - Topic: TOOL_INTEGRATION
@@ -644,7 +644,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P50.A02.S02
 
-**Выявить дубли функций между инструментами и выбрать adapter boundaries** — INTEGRATION / READY / P1
+**Выявить дубли функций между инструментами и выбрать adapter boundaries** — INTEGRATION / READY / P8
 
 - Parent: APA-P50 → APA-P50.A02
 - Topic: TOOL_INTEGRATION
@@ -660,7 +660,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P50.A02.S03
 
-**Спланировать безопасное объединение инструментов** — BUILD / READY / P2
+**Спланировать безопасное объединение инструментов** — BUILD / READY / P8
 
 - Parent: APA-P50 → APA-P50.A02
 - Topic: TOOL_INTEGRATION
@@ -676,7 +676,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P50.A03.S01
 
-**Синтез тем: источник → решение → MVP → тесты** — INTEGRATION / READY / P2
+**Синтез тем: источник → решение → MVP → тесты** — INTEGRATION / READY / P8
 
 - Parent: APA-P50 → APA-P50.A03
 - Topic: SYNTHESIS
@@ -692,7 +692,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P50.A03.S02
 
-**Проверка готовности интеграции и отсутствия повторов** — VALIDATION / READY / P2
+**Проверка готовности интеграции и отсутствия повторов** — VALIDATION / READY / P8
 
 - Parent: APA-P50 → APA-P50.A03
 - Topic: SYNTHESIS
@@ -804,7 +804,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P60.A02.S03
 
-**Протестировать CAS-claim, lease, duplicate prevention** — VALIDATION / PARTIAL / P1
+**Протестировать CAS-claim, lease, duplicate prevention** — VALIDATION / PARTIAL / P8
 
 - Parent: APA-P60 → APA-P60.A02
 - Topic: CONTROLLER
@@ -820,7 +820,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P60.A02.S04
 
-**Ввести сбор предложений задач исследователями и принятие аудитором в PROJECT_PLAN** — VALIDATION / PARTIAL / P1
+**Ввести сбор предложений задач исследователями и принятие аудитором в PROJECT_PLAN** — VALIDATION / PARTIAL / P8
 
 - Parent: APA-P60 → APA-P60.A02
 - Topic: CONTROLLER
@@ -852,7 +852,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A01.S02
 
-**Привязать все значимые наработки к функциям продукта, выявить пробелы** — CONSOLIDATION / READY / P2
+**Привязать все значимые наработки к функциям продукта, выявить пробелы** — CONSOLIDATION / READY / P8
 
 - Parent: APA-P70 → APA-P70.A01
 - Topic: PRODUCT_DEVELOPMENT
@@ -900,12 +900,12 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A02.S02
 
-**Связать проектные требования с версиями нормативов и проверяемыми правилами** — BUILD / READY / P2
+**Связать проектные требования с версиями нормативов и проверяемыми правилами** — BUILD / READY / P3
 
 - Parent: APA-P70 → APA-P70.A02
 - Topic: PRODUCT_DEVELOPMENT
 - Work key: normative-applicability-pack
-- Depends on: APA-P70.A02.S01
+- Depends on: APA-P70.A02.S01, APA-P70.A08.S04
 - Related, check before duplicating: none
 - Acceptance: Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED
 - Owner/lease: unclaimed
@@ -930,6 +930,22 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Existing V2 runs: [APA-RUN-20261011-163145Z-p70-a02-s03-library-pack](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-163145Z-p70-a02-s03-library-pack/REPORT.md) (receipt verified)
 - Expected output: Отобранные CSE, источники/хэши/лицензии, интерфейсы, совместимые AC29 объекты и список неподтверждённых узлов
 
+## APA-P70.A02.S04
+
+**Интегрировать реальные материалы, Composite/Profile и выбранные GDL-библиотеки** — INTEGRATION / READY / P3
+
+- Parent: APA-P70 → APA-P70.A02
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: verified-project-material-library-integration
+- Depends on: APA-P70.A09.S01
+- Related, check before duplicating: none
+- Acceptance: Проверенные CSE/PLP и реальные проектные BM/Composite/Profile/Surface/GDL применены и прочитаны обратно; Unicode и стабильная identity Library Parts проверены; источники/лицензия/AC29 совместимость учтены; найденный файл не равен LIVE_VERIFIED.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md)
+- Existing V2 runs: none
+- Expected output: Проверенные CSE/PLP и реальные проектные BM/Composite/Profile/Surface/GDL применены и прочитаны обратно; Unicode и стабильная identity Library Parts проверены; источники/лицензия/AC29 совместимость учтены; найденный файл не равен LIVE_VERIFIED.
+
 ## APA-P70.A03.S01
 
 **Связать помещения, несущую схему, оси, уровни и конструктивные ограничения** — INTEGRATION / DONE_PUBLISHED / P1
@@ -948,7 +964,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A03.S02
 
-**Собрать модель средствами уже существующих BIM-исполнителей** — BUILD / PARTIAL / P2
+**Собрать модель средствами уже существующих BIM-исполнителей** — BUILD / PARTIAL / P0
 
 - Parent: APA-P70 → APA-P70.A03
 - Topic: PRODUCT_DEVELOPMENT
@@ -957,14 +973,14 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Related, check before duplicating: none
 - Acceptance: Создание полноценной BIM-геометрии из схемы через имеющиеся writer/graph; связные стены не дробятся без необходимости; тестовый PLN только после разрешения
 - Owner/lease: unclaimed
-- Requires owner approval: True
-- Source inputs: [ART-APA-PR16](https://github.com/dvikt33-ux/safe-bim-layer/pull/16), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md), [ART-APA-LIVE-SCRATCH-PARTIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-live-scratch-partial-slab-reconciliation.md)
+- Requires owner approval: False
+- Source inputs: [ART-APA-PR16](https://github.com/dvikt33-ux/safe-bim-layer/pull/16), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md), [ART-APA-LIVE-SCRATCH-PARTIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-live-scratch-partial-slab-reconciliation.md), [ART-APA-PLN-WRITE-AUTH-20261011](../../../../../docs/research/apa-results/control/IMPLEMENTATION_ROADMAP.md%23%D1%80%D0%B0%D0%B7%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8-%D0%B4%D0%BE%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D1%82%D0%B2%D0%B0)
 - Existing V2 runs: [APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial/REPORT.md) (receipt verified)
 - Expected output: Создание полноценной BIM-геометрии из схемы через имеющиеся writer/graph; связные стены не дробятся без необходимости; тестовый PLN только после разрешения
 
 ## APA-P70.A03.S03
 
-**Доказать редактируемость, GUID/host/story/material и инкрементальное обновление** — VALIDATION / READY / P2
+**Доказать редактируемость, GUID/host/story/material и инкрементальное обновление** — VALIDATION / READY / P0
 
 - Parent: APA-P70 → APA-P70.A03
 - Topic: PRODUCT_DEVELOPMENT
@@ -978,14 +994,30 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Existing V2 runs: none
 - Expected output: Тесты обновления проекта без лишних элементов/потери GUID, readback этажей, материалов, хостов и откат изменений
 
+## APA-P70.A03.S04
+
+**Дополнить авторскую модель до связного небольшого здания существующими writer-циклами** — BUILD / READY / P0
+
+- Parent: APA-P70 → APA-P70.A03
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: authored-building-native-component-completeness
+- Depends on: APA-P70.A03.S02
+- Related, check before duplicating: none
+- Acceptance: Стены, перекрытия, колонны и hosted двери/окна из утверждённой схемы проходят typed GUID/host/story/material/geometry readback; требуемые неподдерживаемые элементы имеют конкретный blocker; один BIM Graph и SceneWriter.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
+- Existing V2 runs: none
+- Expected output: Стены, перекрытия, колонны и hosted двери/окна из утверждённой схемы проходят typed GUID/host/story/material/geometry readback; требуемые неподдерживаемые элементы имеют конкретный blocker; один BIM Graph и SceneWriter.
+
 ## APA-P70.A04.S01
 
-**Вывести из модели обязательные семейства узлов и их условия применимости** — INTEGRATION / READY / P1
+**Вывести из модели обязательные семейства узлов и их условия применимости** — INTEGRATION / READY / P4
 
 - Parent: APA-P70 → APA-P70.A04
 - Topic: PRODUCT_DEVELOPMENT
 - Work key: required-junction-condition-coverage
-- Depends on: APA-P70.A03.S01
+- Depends on: APA-P70.A03.S01, APA-P70.A02.S04
 - Related, check before duplicating: none
 - Acceptance: Матрица всех применимых примыканий/отверстий/армопоясов/связей/крепежа с точным source/detail ID и открытыми пробелами
 - Owner/lease: unclaimed
@@ -996,7 +1028,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A04.S02
 
-**Привязать выбранные узлы и композиции к нативным BIM элементам** — BUILD / READY / P2
+**Привязать выбранные узлы и композиции к нативным BIM элементам** — BUILD / READY / P4
 
 - Parent: APA-P70 → APA-P70.A04
 - Topic: PRODUCT_DEVELOPMENT
@@ -1012,7 +1044,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A04.S03
 
-**Проверить узлы окон, облицовки, перекрытий и кровельных примыканий** — VALIDATION / READY / P2
+**Проверить узлы окон, облицовки, перекрытий и кровельных примыканий** — VALIDATION / READY / P4
 
 - Parent: APA-P70 → APA-P70.A04
 - Topic: PRODUCT_DEVELOPMENT
@@ -1028,12 +1060,12 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A05.S01
 
-**Получить проверяемую расчётную схему и исходные нагрузки** — INTEGRATION / READY / P1
+**Получить проверяемую расчётную схему и исходные нагрузки** — INTEGRATION / READY / P4
 
 - Parent: APA-P70 → APA-P70.A05
 - Topic: PRODUCT_DEVELOPMENT
 - Work key: load-bearing-design-and-load-cases
-- Depends on: APA-P70.A03.S01, APA-P70.A02.S02
+- Depends on: APA-P70.A03.S01, APA-P70.A02.S02, APA-P70.A04.S03
 - Related, check before duplicating: none
 - Acceptance: Нагрузки, расчётная схема, несущие стены/пролёты/фундаменты/стропила, комбинации и неподтверждённые допущения отдельно
 - Owner/lease: unclaimed
@@ -1044,7 +1076,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A05.S02
 
-**Использовать SAM/SAF/IFC и доступный проверенный расчётный движок** — BUILD / READY / P2
+**Использовать SAM/SAF/IFC и доступный проверенный расчётный движок** — BUILD / READY / P4
 
 - Parent: APA-P70 → APA-P70.A05
 - Topic: PRODUCT_DEVELOPMENT
@@ -1060,7 +1092,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A05.S03
 
-**Применить результаты инженерного расчёта и повторно проверить узлы** — VALIDATION / READY / P2
+**Применить результаты инженерного расчёта и повторно проверить узлы** — VALIDATION / READY / P4
 
 - Parent: APA-P70 → APA-P70.A05
 - Topic: PRODUCT_DEVELOPMENT
@@ -1076,12 +1108,12 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A06.S01
 
-**Сформировать инженерные требования и трассы на базе штатного MEP** — INTEGRATION / READY / P1
+**Сформировать инженерные требования и трассы на базе штатного MEP** — INTEGRATION / READY / P5
 
 - Parent: APA-P70 → APA-P70.A06
 - Topic: PRODUCT_DEVELOPMENT
 - Work key: native-mep-semantic-network
-- Depends on: APA-P70.A03.S02, APA-P70.A02.S02
+- Depends on: APA-P70.A03.S02, APA-P70.A02.S02, APA-P70.A05.S03
 - Related, check before duplicating: none
 - Acceptance: Проверенные системы труб/воздуховодов с сетью и портами, применимые нормы и явные незакрытые расчёты
 - Owner/lease: unclaimed
@@ -1092,7 +1124,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A06.S02
 
-**Проверить инженерные сети, проходки, коллизии и узлы пересечений** — VALIDATION / READY / P2
+**Проверить инженерные сети, проходки, коллизии и узлы пересечений** — VALIDATION / READY / P5
 
 - Parent: APA-P70 → APA-P70.A06
 - Topic: PRODUCT_DEVELOPMENT
@@ -1108,12 +1140,12 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A07.S01
 
-**Получить согласованные планы, разрезы, фасады, спецификации и узлы** — BUILD / READY / P1
+**Получить согласованные планы, разрезы, фасады, спецификации и узлы** — BUILD / READY / P7
 
 - Parent: APA-P70 → APA-P70.A07
 - Topic: PRODUCT_DEVELOPMENT
 - Work key: native-project-documentation-views
-- Depends on: APA-P70.A03.S03, APA-P70.A04.S02
+- Depends on: APA-P70.A03.S03, APA-P70.A04.S02, APA-P70.A10.S01
 - Related, check before duplicating: none
 - Acceptance: Чертежи и ведомости из одной BIM-модели, соответствие срезов/количеств/версий, без ручных дублирующих источников
 - Owner/lease: unclaimed
@@ -1124,7 +1156,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A07.S02
 
-**Выполнить поэлементную и общепроектную проверку нормативов** — VALIDATION / READY / P2
+**Выполнить поэлементную и общепроектную проверку нормативов** — VALIDATION / READY / P7
 
 - Parent: APA-P70 → APA-P70.A07
 - Topic: PRODUCT_DEVELOPMENT
@@ -1140,7 +1172,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A07.S03
 
-**Собрать итоговый пакет BIM/IFC/PDF и доказательства проверки** — BUILD / READY / P2
+**Собрать итоговый пакет BIM/IFC/PDF и доказательства проверки** — BUILD / READY / P7
 
 - Parent: APA-P70 → APA-P70.A07
 - Topic: PRODUCT_DEVELOPMENT
@@ -1156,7 +1188,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A08.S01
 
-**Проверить полный цикл создания проекта на эталонном ИЖС** — VALIDATION / READY / P1
+**Проверить полный цикл создания проекта на эталонном ИЖС** — VALIDATION / READY / P8
 
 - Parent: APA-P70 → APA-P70.A08
 - Topic: PRODUCT_DEVELOPMENT
@@ -1172,7 +1204,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A08.S02
 
-**Проверить доработку единственного открытого существующего PLN** — VALIDATION / READY / P2
+**Проверить доработку единственного открытого существующего PLN** — VALIDATION / READY / P8
 
 - Parent: APA-P70 → APA-P70.A08
 - Topic: PRODUCT_DEVELOPMENT
@@ -1188,7 +1220,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A08.S03
 
-**Доказать расширяемость на другом типе здания и системах** — VALIDATION / READY / P2
+**Доказать расширяемость на другом типе здания и системах** — VALIDATION / READY / P8
 
 - Parent: APA-P70 → APA-P70.A08
 - Topic: PRODUCT_DEVELOPMENT
@@ -1201,3 +1233,67 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Source inputs: [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md)
 - Existing V2 runs: none
 - Expected output: Новый тип здания или конструктивная система подключается без нового параллельного генератора и без регрессии старого проекта
+
+## APA-P70.A08.S04
+
+**Принять ядро: задание → связное редактируемое здание → правка → readback** — VALIDATION / READY / P0
+
+- Parent: APA-P70 → APA-P70.A08
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: editable-native-core-e2e-acceptance
+- Depends on: APA-P70.A03.S03, APA-P70.A03.S04
+- Related, check before duplicating: none
+- Acceptance: Один brief создаёт связное небольшое здание; все требуемые типы поддержаны, GUID/этажи/материалы/host/геометрия подтверждены; согласованная правка сохраняет GUID и не дублирует модель; сохранение и повторное чтение подтверждены. Четыре элемента и offline CI не достаточны. Инженерная/нормативная приёмка отдельно.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
+- Existing V2 runs: none
+- Expected output: Один brief создаёт связное небольшое здание; все требуемые типы поддержаны, GUID/этажи/материалы/host/геометрия подтверждены; согласованная правка сохраняет GUID и не дублирует модель; сохранение и повторное чтение подтверждены. Четыре элемента и offline CI не достаточны. Инженерная/нормативная приёмка отдельно.
+
+## APA-P70.A08.S05
+
+**Адаптировать готовое ядро под установленный Archicad 30** — INTEGRATION / READY / P8
+
+- Parent: APA-P70 → APA-P70.A08
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: archicad30-existing-core-adaptation
+- Depends on: APA-P70.A08.S03
+- Related, check before duplicating: none
+- Acceptance: После установки AC30 подтверждены API/библиотеки/проектный сценарий тем же ядром; нет отдельного генератора. Отсутствующая установка — конкретный BLOCKED, не ложный PASS.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md)
+- Existing V2 runs: none
+- Expected output: После установки AC30 подтверждены API/библиотеки/проектный сценарий тем же ядром; нет отдельного генератора. Отсутствующая установка — конкретный BLOCKED, не ложный PASS.
+
+## APA-P70.A09.S01
+
+**Подключить Native Model Dump, графовую связность и реальные 3D-проверки** — INTEGRATION / READY / P2
+
+- Parent: APA-P70 → APA-P70.A09
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: integrated-native-3d-geometry-precision
+- Depends on: APA-P70.A08.S04
+- Related, check before duplicating: none
+- Acceptance: Native dump/NetworkX/Shapely используются через существующий readback; стыки, XYZ, story и host проверены на подтверждённых ошибках; 2D пересечение не считается 3D коллизией; ядро сохраняет работоспособность.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-SDK-SEO](../../../../../docs/research/apa-results/runs/2026-10-10/apa-discovery-20261010-102440-slinktrim-9f2b7.md)
+- Existing V2 runs: none
+- Expected output: Native dump/NetworkX/Shapely используются через существующий readback; стыки, XYZ, story и host проверены на подтверждённых ошибках; 2D пересечение не считается 3D коллизией; ядро сохраняет работоспособность.
+
+## APA-P70.A10.S01
+
+**Оптимизировать конкретный стабильный сценарий с измерением результата** — INTEGRATION / READY / P6
+
+- Parent: APA-P70 → APA-P70.A10
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: stable-native-pipeline-measured-optimization
+- Depends on: APA-P70.A06.S02
+- Related, check before duplicating: none
+- Acceptance: Есть воспроизводимый baseline и измеримое улучшение времени/числа native calls/ресурсов без потери точности; OR-Tools/CP-SAT внедряется лишь при явных ограничениях и критерии качества.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md)
+- Existing V2 runs: none
+- Expected output: Есть воспроизводимый baseline и измеримое улучшение времени/числа native calls/ресурсов без потери точности; OR-Tools/CP-SAT внедряется лишь при явных ограничениях и критерии качества.

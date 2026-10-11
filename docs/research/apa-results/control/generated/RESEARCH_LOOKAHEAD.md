@@ -54,6 +54,13 @@ A candidate research S-ID must still satisfy its own dependencies and claim gate
 - Доступны сейчас: APA-P10.A01.S02, APA-P10.A02.S02, APA-P50.A02.S01
 - Использовать источники (ветка/файл/PR): [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
 
+### APA-P70.A02.S04 — Интегрировать реальные материалы, Composite/Profile и выбранные GDL-библиотеки
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md)
+
 ### APA-P70.A03.S01 — Связать помещения, несущую схему, оси, уровни и конструктивные ограничения
 
 - Готовность исследования: **NOT_ASSESSED**
@@ -66,7 +73,7 @@ A candidate research S-ID must still satisfy its own dependencies and claim gate
 - Готовность исследования: **NOT_ASSESSED**
 - Связанные исследования: APA-P10.A01.S02 (PARTIAL), APA-P10.A01.S03 (PARTIAL), APA-P10.A03.S01 (READY), APA-P50.A02.S01 (PARTIAL)
 - Доступны сейчас: APA-P10.A01.S02, APA-P10.A01.S03, APA-P50.A02.S01
-- Использовать источники (ветка/файл/PR): [ART-APA-PR16](https://github.com/dvikt33-ux/safe-bim-layer/pull/16), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md), [ART-APA-LIVE-SCRATCH-PARTIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-live-scratch-partial-slab-reconciliation.md)
+- Использовать источники (ветка/файл/PR): [ART-APA-PR16](https://github.com/dvikt33-ux/safe-bim-layer/pull/16), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md), [ART-APA-LIVE-SCRATCH-PARTIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-live-scratch-partial-slab-reconciliation.md), [ART-APA-PLN-WRITE-AUTH-20261011](../../../../../docs/research/apa-results/control/IMPLEMENTATION_ROADMAP.md%23%D1%80%D0%B0%D0%B7%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8-%D0%B4%D0%BE%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D1%82%D0%B2%D0%B0)
 
 ### APA-P70.A03.S03 — Доказать редактируемость, GUID/host/story/material и инкрементальное обновление
 
@@ -74,6 +81,13 @@ A candidate research S-ID must still satisfy its own dependencies and claim gate
 - Связанные исследования: APA-P10.A01.S02 (PARTIAL), APA-P10.A01.S03 (PARTIAL), APA-P10.A03.S01 (READY), APA-P50.A02.S01 (PARTIAL)
 - Доступны сейчас: APA-P10.A01.S02, APA-P10.A01.S03, APA-P50.A02.S01
 - Использовать источники (ветка/файл/PR): [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-LIVE-SCRATCH-PARTIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-live-scratch-partial-slab-reconciliation.md)
+
+### APA-P70.A03.S04 — Дополнить авторскую модель до связного небольшого здания существующими writer-циклами
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
 
 ### APA-P70.A04.S01 — Вывести из модели обязательные семейства узлов и их условия применимости
 
@@ -172,3 +186,31 @@ A candidate research S-ID must still satisfy its own dependencies and claim gate
 - Связанные исследования: APA-P50.A01.S01 (PARTIAL), APA-P50.A03.S01 (READY), APA-P50.A03.S02 (READY)
 - Доступны сейчас: APA-P50.A01.S01
 - Использовать источники (ветка/файл/PR): [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md)
+
+### APA-P70.A08.S04 — Принять ядро: задание → связное редактируемое здание → правка → readback
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
+
+### APA-P70.A08.S05 — Адаптировать готовое ядро под установленный Archicad 30
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md)
+
+### APA-P70.A09.S01 — Подключить Native Model Dump, графовую связность и реальные 3D-проверки
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-SDK-SEO](../../../../../docs/research/apa-results/runs/2026-10-10/apa-discovery-20261010-102440-slinktrim-9f2b7.md)
+
+### APA-P70.A10.S01 — Оптимизировать конкретный стабильный сценарий с измерением результата
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md)
