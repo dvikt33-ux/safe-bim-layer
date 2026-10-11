@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 90,
+  "revision": 91,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -730,6 +730,18 @@
       "uri": "docs/research/apa-results/receipts/APA-RUN-20261011-200500Z-editable-core-acceptance.json",
       "kind": "PUBLICATION_RECEIPT",
       "verification": "GITHUB_READBACK_AND_CI_SUCCESS"
+    },
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011": {
+      "id": "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+      "uri": "docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md",
+      "kind": "NATIVE_GEOMETRY_INTEGRATION_REPORT",
+      "verification": "NATIVE17_DUMP_XYZ_HOST_MATERIAL_CONTACT_READBACK_PASS_296_CI"
+    },
+    "ART-P70-A09-S01-GEOMETRY-RECEIPT-20261011": {
+      "id": "ART-P70-A09-S01-GEOMETRY-RECEIPT-20261011",
+      "uri": "docs/research/apa-results/receipts/APA-RUN-20261011-202800Z-native-geometry-integration.json",
+      "kind": "PUBLISH_RECEIPT",
+      "verification": "GITHUB_READBACK_VERIFIED_PUBLISHER_CI_SUCCESS"
     }
   },
   "tasks": {
@@ -3026,7 +3038,7 @@
       "action_id": "APA-P70.A09",
       "title": "Подключить Native Model Dump, графовую связность и реальные 3D-проверки",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "DONE_PUBLISHED",
       "priority": 2,
       "work_key": "integrated-native-3d-geometry-precision",
       "depends_on": [
@@ -3042,11 +3054,14 @@
         "Native dump/NetworkX/Shapely используются через существующий readback; стыки, XYZ, story и host проверены на подтверждённых ошибках; 2D пересечение не считается 3D коллизией; ядро сохраняет работоспособность."
       ],
       "acceptance": "Native dump/NetworkX/Shapely используются через существующий readback; стыки, XYZ, story и host проверены на подтверждённых ошибках; 2D пересечение не считается 3D коллизией; ядро сохраняет работоспособность.",
-      "owner": "codex-apa-core-native-20261011",
-      "lease_until": "2026-10-11T21:00:00Z",
-      "claim_ref": "APA-RUN-20261011-201000Z-native-geometry-capability",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+        "ART-P70-A09-S01-GEOMETRY-RECEIPT-20261011"
+      ],
       "blocked_reason": null
     },
     "APA-P70.A02.S04": {
@@ -3958,12 +3973,13 @@
         "purpose": "geometry",
         "source": "docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md",
         "source_artifact_ids": [
-          "ART-SDK-GET3D"
+          "ART-SDK-GET3D",
+          "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011"
         ],
-        "verification_level": "FOUND",
+        "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
         "advantage": "Reuse published finding; compare only for a concrete gap",
-        "limitations": "Candidate/registered research, no inferred install/license/live support",
+        "limitations": "Candidate/registered research, no inferred install/license/live support; Accepted explicit17element AC29 native core with owned ColumnSegments:XYZ/story/material/host,34coplanar BREP contact pairs,40XY-only overlaps. Structural/normative/joint quality,positive collision calibration,curved/complex/roof/SEO/general GDL remain NOT_VERIFIED.",
         "integration_method": "Reuse current module; isolate adapter only when required",
         "priority": 2,
         "target_module": "geometry",
@@ -3972,19 +3988,20 @@
           "APA-P70.A08.S04"
         ],
         "acceptance": "Real XYZ/3D bodies and failure cases verified",
-        "implementation_state": "FOUND"
+        "implementation_state": "INTEGRATED"
       },
       {
         "name": "NetworkX / Shapely",
         "purpose": "geometry",
         "source": "docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md",
         "source_artifact_ids": [
-          "ART-APA-REUSE-NATIVE-20261011"
+          "ART-APA-REUSE-NATIVE-20261011",
+          "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011"
         ],
-        "verification_level": "FOUND",
+        "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
         "advantage": "Reuse published finding; compare only for a concrete gap",
-        "limitations": "Candidate/registered research, no inferred install/license/live support",
+        "limitations": "Candidate/registered research, no inferred install/license/live support; Accepted explicit17element AC29 native core with owned ColumnSegments:XYZ/story/material/host,34coplanar BREP contact pairs,40XY-only overlaps. Structural/normative/joint quality,positive collision calibration,curved/complex/roof/SEO/general GDL remain NOT_VERIFIED.",
         "integration_method": "Reuse current module; isolate adapter only when required",
         "priority": 2,
         "target_module": "geometry",
@@ -3993,7 +4010,7 @@
           "APA-P70.A08.S04"
         ],
         "acceptance": "Graph/2D predicates used within declared scope; 3D proven separately",
-        "implementation_state": "FOUND"
+        "implementation_state": "INTEGRATED"
       },
       {
         "name": "Roof / Shell / Morph / Openings / SEO",
