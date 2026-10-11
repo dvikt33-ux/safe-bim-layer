@@ -181,3 +181,23 @@
 **Next minimal diagnostic:** print only `GetProjectInfo` fields `projectPath/projectName/isUntitled/isTeamwork` for port 19726 and compare to expected path; do not save, switch documents, re-run Create scripts, start new scene or test 45 GUID until exact binding understood. This quick test is optional and must not block offline work on the existing Graph/SceneWriter path. If the path is .bpn, explicitly check and open the correct PLN; if another PLN, inspect Archicad instances and Tapir port; if path is semantically same but string differs, inspect precise difference before changing comparison behavior.
 
 **Coordination request from owner:** Start every progress message with **current canonical task and subtask**. If a subsequent operation truly needs ChatGPT Work, first send the complete proposed Work task as text **in this chat**; do **not** initiate a Work handoff/new conversation automatically. Prioritize GitHub-native source changes and asynchronous CI, surface optional read-only Windows probes without slowing main development.
+
+
+## S02 live diagnostic: exact saved PLN identity restored on port 19726 (2026-10-11)
+
+**Task:** `APA-P70.A03.S02`, read-only project/story/material preflight. After a previous `WRONG_OPEN_PLN` guard failure, the owner supplied a *separate* native `GetProjectInfo` diagnostic on Tapir port `19726`:
+
+```json
+{
+  "projectPath": "C:\\институт проект\\Улучшенная копия APA_Test_House_01.pln",
+  "projectName": "Улучшенная копия APA_Test_House_01",
+  "isUntitled": false,
+  "isTeamwork": false,
+  "port": 19726,
+  "nativeWriteCalls": 0
+}
+```
+
+**USER_SUPPLIED_LIVE_READ_ONLY_IDENTITY_PASS:** exact expected saved PLN path/name, local saved document, no Teamwork. Previous path mismatch is no longer observed **in this call**; there is no evidence identifying its cause, so do not assert previously opened .bpn or wrong Tapir connection. This call deliberately did not query `GetStories` or `GetAttributesByType`; those two parts remain pending and should use read-only preflight with fresh identity checks before/after. Do not relax exact path guard, reuse old scene token, or write to this saved copy. S02 continues **PARTIAL**, native writes require separate user approval for an appropriate disposable target. No repeating the previously accepted 45/45 GUID scan absent regression.
+
+**User operating protocol:** each future status begins with current canonical task and subtask. Work handoff must never be opened automatically; when essential, provide the complete proposed Work instruction in this conversation first and await approval. Optional short PowerShell native probes may be given between independent CI activities, not made bottlenecks.
