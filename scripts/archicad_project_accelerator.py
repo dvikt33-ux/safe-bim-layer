@@ -27,7 +27,7 @@ import archicad_authored_native_plan as AUTHORED_NATIVE
 
 READS = frozenset({"GetProjectInfo", "GetStories", "GetAddOnVersion",
                   "GetAllElements", "Get3DBoundingBoxes", "GetDetailsOfElements",
-                  "GetAttributesByType", "API.GetProductInfo"})
+                  "GetAttributesByType", "GetSubelementsOfHierarchicalElements", "API.GetProductInfo"})
 NATIVE_MUTATIONS = RUN.ALLOWED_WRITES | frozenset({"ModifySlabs"})
 PRIMITIVES = {
     "pavilion-frame-v1": {"status": "EXECUTABLE_PENDING_LIVE_ACCEPTANCE",
@@ -310,6 +310,32 @@ def inventory_guids(api):
     return guids
 
 
+def column_subelements(api, created):
+    columns = [v['guid'] for v in created.values() if v.get('kind')=='Column']
+    if not columns:
+        return {}
+    rows = api('GetSubelementsOfHierarchicalElements',
+        {'elements':[{'elementId':{'guid':g}} for g in columns]}).get('subelements')
+    if not isinstance(rows,list) or len(rows)!=len(columns):
+        raise ValueError('COLUMN_HIERARCHY_READBACK_MISMATCH')
+    mapping = {}
+    seen = {v['guid'].lower() for v in created.values()}
+    for parent, row in zip(columns,rows):
+        if not isinstance(row,dict) or set(row)-{'columnSegments'}:
+            raise ValueError('UNEXPECTED_COLUMN_SUBELEMENT_TYPE')
+        children = row.get('columnSegments')
+        if not isinstance(children,list) or not children:
+            raise ValueError('COLUMN_SEGMENTS_NOT_PROVEN')
+        guids=[]
+        for child in children:
+            guid=child.get('elementId',{}).get('guid')
+            if not isinstance(guid,str) or not RUN._GUID.fullmatch(guid) or guid.lower() in seen:
+                raise ValueError('INVALID_OR_DUPLICATED_COLUMN_SEGMENT_GUID')
+            seen.add(guid.lower());guids.append(guid.lower())
+        mapping[parent.lower()] = sorted(guids)
+    return mapping
+
+
 def approval_hash(compiled, preflight):
     return RUN.digest({"intentHash": compiled["intentHash"],
                        "routes": compiled["routes"], "binding": preflight["binding"],
@@ -383,6 +409,10 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
             raise ValueError("INVENTORY_CHANGED_DURING_READ_ONLY_PREFLIGHT")
         if result["status"] == "COMPLETE_UNSAVED":
             expected = sorted(s["guid"].lower() for s in result["scene"]["steps"].values())
+            if authored:
+                children=column_subelements(api,result['scene']['steps'])
+                expected=sorted(expected+[g for group in children.values() for g in group])
+                result['ownedColumnSegments']=children
             if added != expected or removed:
                 raise ValueError("FINAL_INVENTORY_DIFF_MISMATCH")
             # Verify every element again after the complete assembly, not just its creation.

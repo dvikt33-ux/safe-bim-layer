@@ -325,6 +325,10 @@ def verify_readback(command, params, row, owner_guid=None, expected_floor=0,
                     ("zCoordinate", point["z"]), ("height", expected["height"]),
                     ("width", expected["width"]), ("depth", expected["depth"])))):
             raise ValueError("COLUMN_READBACK_MISMATCH")
+        if 'buildingMaterialId' in expected and (
+                str(details.get('buildingMaterialId',{}).get('guid','')).casefold()!=
+                expected['buildingMaterialId']['guid'].casefold()):
+            raise ValueError('COLUMN_MATERIAL_READBACK_MISMATCH')
     else:
         owner = details.get("ownerElementId")
         actual_guid = owner.get("guid") if isinstance(owner, dict) else None

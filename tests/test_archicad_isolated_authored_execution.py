@@ -19,6 +19,13 @@ from test_archicad_project_library_pack import BM,BM_GUID
 
 class IsolatedNative(CompositeDefaultNative):
     def __call__(self,command,params):
+        if command=='GetSubelementsOfHierarchicalElements':
+            self.calls.append(command)
+            return {'subelements':[{'columnSegments':[{'elementId':{'guid':g}}]} for g in self.segments()]}
+        if command=='GetAllElements':
+            result=super().__call__(command,params)
+            result['elements'].extend({'elementId':{'guid':g}} for g in self.segments())
+            return result
         if command=='ModifyWalls':
             self.calls.append(command);self.writes.append(command)
             if getattr(self,'wall_modify_timeout',False):raise TimeoutError('uncertain wall modify')
@@ -26,6 +33,11 @@ class IsolatedNative(CompositeDefaultNative):
                 if not getattr(self,'wall_modify_noop',False):
                     self.created[item['elementId']['guid']][1]['wallsData'][0]['buildingMaterialId']=item['buildingMaterialId']
             return {'executionResults':[{'success':True} for _ in params['wallsWithDetails']]}
+        if command=='ModifyWindows':
+            self.calls.append(command);self.writes.append(command)
+            item=params['windowsWithDetails'][0]
+            self.created[item['elementId']['guid']][1]['windowsData'][0]['width']=item['width']
+            return {'executionResults':[{'success':True}]}
         if command=='GetStories':
             self.calls.append(command)
             return {'actStory':0,'stories':[
@@ -44,7 +56,13 @@ class IsolatedNative(CompositeDefaultNative):
                 details=result['detailsOfElements'][0]['details']
                 details['zCoordinate']=slab['level']
                 details['level']=slab['level']-3*slab['floorIndex']
+            if source=='CreateColumns':
+                result['detailsOfElements'][0]['details']['buildingMaterialId']=args['columnsData'][0]['buildingMaterialId']
         return result
+
+    def segments(self):
+        return ['00000000-0000-4000-8000-00000000000'+str(i+1)
+                for i,(cmd,_) in enumerate(v for v in self.created.values() if v[0]=='CreateColumns')]
 
 
 class IsolatedAuthoredExecutionTests(unittest.TestCase):
@@ -169,3 +187,34 @@ class IsolatedAuthoredExecutionTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'UNSUPPORTED_AUTHORED_NATIVE_COMPONENT'):
             A.compile_authored_intent(intent,A.RUN.DEFAULT_SCENE_SCHEMA,self.native)
         self.assertFalse(self.native.writes)
+
+    def test_full_authored_input_counts_proven_column_segments(self):
+        self.intent=json.loads((ROOT/'examples/accelerator/isolated-authored-building.json').read_text(encoding='utf8'))
+        pre=self.run_project();result=self.run_project('execute',pre['confirmPlanHash'])
+        self.assertEqual(result['status'],'COMPLETE_UNSAVED',result)
+        self.assertEqual(len(result['addedGuids']),19)
+        self.assertEqual(len(result['ownedColumnSegments']),2)
+        self.assertEqual(len(result['scene']['steps']),17)
+
+    def test_unrelated_extra_guid_still_blocks_final_acceptance(self):
+        _,ticket=self.extension()
+        def transport(cmd,params):
+            if cmd=='GetSubelementsOfHierarchicalElements':
+                self.native.existing.append('99999999-9999-4999-8999-999999999999')
+            return self.native(cmd,params)
+        result=EXT.execute(transport,ticket,self.state/'scene-v1-attempts.sqlite3',ticket['confirmPlanHash'])
+        self.assertEqual(result['status'],'PARTIAL_OR_UNKNOWN_OUTCOME',result)
+        self.assertIn('FINAL_WHOLE_MODEL_GUID_DIFF',result['reason'])
+
+    def test_existing_window_edit_and_explicit_restore_preserve_all_guids(self):
+        _,ticket=self.extension();journal=self.state/'scene-v1-attempts.sqlite3'
+        result=EXT.execute(self.native,ticket,journal,ticket['confirmPlanHash'])
+        self.assertEqual(result['status'],'COMPLETE_UNSAVED',result)
+        initial=A.inventory_guids(self.native);plan=ticket['preflight'];count=len(self.native.writes)
+        for op_id,width in [('edit-window-01',1.4),('restore-window-01',1.2)]:
+            edit=EXT.prepare_opening_width(self.native,plan,result['steps'],'authored-window-east-1',width,journal,op_id)
+            receipt=EXT.execute_opening_width(self.native,edit,journal,edit['confirmPlanHash'])
+            self.assertEqual(receipt['status'],'EXISTING_OPENING_EDIT_READBACK_PASS',receipt)
+            plan=edit['intent']['newPlan']
+        self.assertEqual(A.inventory_guids(self.native),initial)
+        self.assertEqual(self.native.writes[count:],['ModifyWindows','ModifyWindows'])
