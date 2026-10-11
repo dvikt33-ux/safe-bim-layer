@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 79,
+  "revision": 80,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -669,13 +669,13 @@
       "id": "ART-APA-CORE-FIRST-ROADMAP",
       "uri": "docs/research/apa-results/control/IMPLEMENTATION_ROADMAP.md",
       "kind": "DOCUMENT",
-      "verification": "SOURCE_READ_PLAN_NOT_RUNTIME"
+      "verification": "GITHUB_READBACK_AND_CI_SUCCESS"
     },
     "ART-APA-WORK-INSTRUCTION-V2": {
       "id": "ART-APA-WORK-INSTRUCTION-V2",
       "uri": "docs/research/apa-results/control/WORK_OPERATING_INSTRUCTION.md",
       "kind": "USER_INSTRUCTION",
-      "verification": "USER_AUTHORED"
+      "verification": "GITHUB_BYTE_EXACT_READBACK"
     },
     "ART-APA-PLN-WRITE-AUTH-20261011": {
       "id": "ART-APA-PLN-WRITE-AUTH-20261011",
@@ -2877,7 +2877,7 @@
       "action_id": "APA-P00.A02",
       "title": "Обновить действующий план CORE FIRST → EXPANSION по рабочей инструкции v2",
       "kind": "CONTROL",
-      "status": "IN_PROGRESS",
+      "status": "DONE_PUBLISHED",
       "priority": 0,
       "work_key": "core-first-operating-plan-v2",
       "depends_on": [
@@ -2893,11 +2893,14 @@
         "IMPLEMENTATION_ROADMAP.md; WORK_OPERATING_INSTRUCTION.md; согласованный PROJECT_PLAN.json; GitHub CAS/readback"
       ],
       "acceptance": "Сохранены все прежние ID/статусы/доказательства; последовательный CORE FIRST DAG валиден; карта компонентов находится в каноническом реестре; инструкция и план опубликованы и прочитаны обратно",
-      "owner": "codex-apa-core-first-20261011",
-      "lease_until": "2026-10-11T20:30:00Z",
-      "claim_ref": "APA-RUN-20261011T190721Z-core-first-plan",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-APA-CORE-FIRST-ROADMAP",
+        "ART-APA-WORK-INSTRUCTION-V2"
+      ],
       "blocked_reason": null
     },
     "APA-P70.A03.S04": {
