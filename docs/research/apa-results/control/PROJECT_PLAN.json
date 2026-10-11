@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 67,
+  "revision": 68,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2329,7 +2329,7 @@
       "action_id": "APA-P70.A03",
       "title": "Собрать модель средствами уже существующих BIM-исполнителей",
       "kind": "BUILD",
-      "status": "READY",
+      "status": "IN_PROGRESS",
       "priority": 2,
       "work_key": "reuse-native-whole-building-builder",
       "depends_on": [
@@ -2347,12 +2347,12 @@
         "Создание полноценной BIM-геометрии из схемы через имеющиеся writer/graph; связные стены не дробятся без необходимости; тестовый PLN только после разрешения"
       ],
       "acceptance": "Создание полноценной BIM-геометрии из схемы через имеющиеся writer/graph; связные стены не дробятся без необходимости; тестовый PLN только после разрешения",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "chatgpt-gpt6-manual",
+      "lease_until": "2026-10-12T01:00:00Z",
+      "claim_ref": "APA-RUN-20261011-p70-a03-s02-authored-native-graph",
       "requires_approval": true,
       "evidence": [],
-      "blocked_reason": null
+      "blocked_reason": "SOURCE_OFFLINE_ONLY: Native PLN/APX writes require distinct explicit consent; task requires_approval=true."
     },
     "APA-P70.A03.S03": {
       "id": "APA-P70.A03.S03",
