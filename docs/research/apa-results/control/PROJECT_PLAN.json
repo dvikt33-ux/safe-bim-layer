@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 42,
+  "revision": 43,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -470,6 +470,12 @@
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-235301Z-branch-evidence-dedup/REPORT.md",
       "kind": "REPORT",
       "verification": "GITHUB_READBACK_VERIFIED_V2_RECEIPT"
+    },
+    "ART-APA-LIVE-SCRATCH-PARTIAL-20261011": {
+      "id": "ART-APA-LIVE-SCRATCH-PARTIAL-20261011",
+      "uri": "docs/research/apa-results/runs/2026-10-11/apa-p70-a03-live-scratch-partial-slab-reconciliation.md",
+      "kind": "EVIDENCE",
+      "verification": "USER_REPORTED_LIVE_PARTIAL_SLAB_READBACK_NOT_VERIFIED"
     }
   },
   "tasks": {
@@ -1978,7 +1984,8 @@
         "ART-APA-PR16",
         "ART-APA-REUSE-NATIVE-20261011",
         "ART-APA-HIGHLEVEL-PR34",
-        "ART-APA-ASSEMBLY-PLAN"
+        "ART-APA-ASSEMBLY-PLAN",
+        "ART-APA-LIVE-SCRATCH-PARTIAL-20261011"
       ],
       "outputs": [
         "Таблица требований полного цикла → исходные файлы/SHA → подтверждённые функции и ограничения; без новой реализации"
@@ -2183,7 +2190,8 @@
         "ART-APA-PR16",
         "ART-APA-REUSE-NATIVE-20261011",
         "ART-APA-HIGHLEVEL-PR34",
-        "ART-APA-ASSEMBLY-PLAN"
+        "ART-APA-ASSEMBLY-PLAN",
+        "ART-APA-LIVE-SCRATCH-PARTIAL-20261011"
       ],
       "outputs": [
         "Создание полноценной BIM-геометрии из схемы через имеющиеся writer/graph; связные стены не дробятся без необходимости; тестовый PLN только после разрешения"
@@ -2212,7 +2220,8 @@
       "inputs": [
         "ART-APA-REUSE-NATIVE-20261011",
         "ART-APA-FAST-COMPILER",
-        "ART-APA-HIGHLEVEL-PR34"
+        "ART-APA-HIGHLEVEL-PR34",
+        "ART-APA-LIVE-SCRATCH-PARTIAL-20261011"
       ],
       "outputs": [
         "Тесты обновления проекта без лишних элементов/потери GUID, readback этажей, материалов, хостов и откат изменений"
@@ -2900,7 +2909,8 @@
         "ART-APA-REUSE-NATIVE-20261011",
         "ART-APA-PR16",
         "ART-APA-HIGHLEVEL-PR34",
-        "ART-APA-ASSEMBLY-PLAN"
+        "ART-APA-ASSEMBLY-PLAN",
+        "ART-APA-LIVE-SCRATCH-PARTIAL-20261011"
       ],
       "synthesis_state": "OPEN",
       "owner": null
