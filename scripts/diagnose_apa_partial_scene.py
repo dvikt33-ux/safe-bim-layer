@@ -16,12 +16,36 @@ import archicad_scene_run as RUN
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--evidence", type=Path, required=True,
+    source = parser.add_mutually_exclusive_group(required=True)
+    source.add_argument("--evidence", type=Path,
                         help="C:/LocalAI/APA_Trial_Evidence/<run-folder>")
+    source.add_argument("--latest-partial", action="store_true",
+                        help="Find the latest exact partial-slab evidence, read only")
     parser.add_argument("--port", type=int, default=19726)
     args = parser.parse_args(argv)
     RUN.bind_approved_scratch_pln(args.port)
-    directory = args.evidence.resolve()
+    if args.latest_partial:
+        root = Path(r"C:\LocalAI\APA_Trial_Evidence")
+        if not root.is_dir():
+            raise RuntimeError("APA_TRIAL_EVIDENCE_ROOT_MISSING")
+        matched = []
+        for candidate in root.iterdir():
+            result_file = candidate / "execute" / "result.json"
+            if not candidate.is_dir() or not result_file.is_file():
+                continue
+            try:
+                saved = json.loads(result_file.read_text(encoding="utf-8"))
+            except (OSError, UnicodeError, ValueError):
+                continue
+            if (saved.get("status") == "PARTIAL_OR_UNKNOWN_OUTCOME"
+                    and saved.get("scene", {}).get("failedStep") == "s1-slab"):
+                matched.append(candidate)
+        if not matched:
+            raise RuntimeError("PARTIAL_SLAB_EVIDENCE_NOT_FOUND")
+        directory = max(matched, key=lambda path: path.stat().st_mtime).resolve()
+    else:
+        directory = args.evidence.resolve()
+    print("EVIDENCE_DIRECTORY:", directory)
     result = json.loads((directory / "execute" / "result.json").read_text(encoding="utf-8"))
     plan = json.loads((directory / "execute" / "plan.json").read_text(encoding="utf-8"))
     original = json.loads((directory / "execute" / "inventory-before.json").read_text(encoding="utf-8"))
@@ -101,6 +125,18 @@ def main(argv=None):
     print(json.dumps(comparison, ensure_ascii=False, indent=2))
     if binding != RUN.guarded_project(api, story):
         raise RuntimeError("PROJECT_CHANGED_DURING_RECONCILIATION")
+    print("=== READ-ONLY PROJECT BUILDING MATERIALS (FIRST 40) ===")
+    try:
+        response = api("GetAttributesByType", {"attributeType": "BuildingMaterial"})
+        materials = response.get("attributes") if isinstance(response, dict) else None
+        if not isinstance(materials, list):
+            raise ValueError("MATERIAL_CATALOG_MISSING")
+        names = sorted({row["name"] for row in materials
+                        if isinstance(row, dict) and isinstance(row.get("name"), str)})
+        print(json.dumps({"count": len(names), "names": names[:40]},
+                         ensure_ascii=False, indent=2))
+    except Exception as exc:
+        print("MATERIAL_CATALOG_UNVERIFIED:", type(exc).__name__ + ": " + str(exc))
     print("APA_DIAGNOSTIC_READ_ONLY_COMPLETE: no Create/Modify/Delete/Save calls")
     print("DO NOT RE-RUN ORIGINAL SCENE; preserve source PLN and journal")
     return 0

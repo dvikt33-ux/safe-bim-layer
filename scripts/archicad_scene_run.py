@@ -227,7 +227,24 @@ def compare_polygon(expected, actual):
                for start in range(n) for direction in (-1, 1))
 
 
-def verify_readback(command, params, row, owner_guid=None, expected_floor=0):
+def story_level_for_floor(story_bindings, native_index):
+    """Resolve absolute story elevation by native index, never by ordinal guess."""
+    if not story_bindings:
+        if native_index != 0:
+            raise ValueError("NONZERO_STORY_WITHOUT_PINNED_ELEVATION")
+        return 0.0
+    matched = [s for s in story_bindings if s.get("nativeIndex") == native_index]
+    if len(matched) != 1 or not isinstance(matched[0].get("level"), (int, float)):
+        raise ValueError("STORY_ELEVATION_NOT_UNIQUELY_PINNED")
+    level = matched[0]["level"]
+    if not math.isfinite(level):
+        raise ValueError("STORY_ELEVATION_NOT_FINITE")
+    return level
+
+
+def verify_readback(command, params, row, owner_guid=None, expected_floor=0,
+                    expected_slab_material_guid=None, allow_slab_thickness_mismatch=False,
+                    expected_story_level=0.0):
     kind = command[6:-1]  # CreateWalls -> Wall, CreateDoors -> Door
     if row.get("type") != kind or row.get("floorIndex") != expected_floor:
         raise ValueError(f"READBACK_TYPE_OR_STORY: expected {kind} on native story {expected_floor}")
@@ -244,19 +261,41 @@ def verify_readback(command, params, row, owner_guid=None, expected_floor=0):
                 raise ValueError("WALL_POSITION_READBACK_MISMATCH")
         for source, target in (("height", "height"), ("thickness", "begThickness"),
                                ("thickness", "endThickness"), ("offset", "offset"),
-                               ("zCoordinate", "zCoordinate"), ("arcAngle", "arcAngle")):
+                               ("arcAngle", "arcAngle")):
             if not close(details.get(target), expected[source]):
-                raise ValueError("WALL_SIZE_READBACK_MISMATCH")
+                raise ValueError("WALL_SIZE_READBACK_MISMATCH: " + target)
+        # CreateWalls zCoordinate is a floor-local offset in the pinned graph;
+        # native GetDetailsOfElements returns absolute project Z in observed
+        # Archicad 29: story 1 at +3m => requested 0m, readback +3m.
+        if not close(details.get("zCoordinate"),
+                     expected_story_level + expected["zCoordinate"]):
+            raise ValueError("WALL_STORY_Z_READBACK_MISMATCH")
         if any(details.get(k) != v for k, v in (
             ("structureType", "Basic"), ("referenceLineLocation", "Center"),
             ("geometryType", "Straight"))):
             raise ValueError("WALL_TYPE_READBACK_MISMATCH")
     elif command == "CreateSlabs":
-        if (not close(details.get("thickness"), expected["thickness"])
-                or not close(details.get("level"), expected["level"])
+        # CreateSlabs may inherit Composite from the current defaults. Allow an
+        # intermediate thickness mismatch ONLY before an explicitly journaled
+        # ModifySlabs; still prove story, type, level and polygon first.
+        if (not close(details.get("level"), expected["level"])
                 or not compare_polygon(expected["polygonCoordinates"],
-                                       details.get("polygonOutline"))):
+                                       details.get("polygonOutline"))
+                or (not allow_slab_thickness_mismatch
+                    and not close(details.get("thickness"), expected["thickness"]))):
             raise ValueError("SLAB_READBACK_MISMATCH")
+        if allow_slab_thickness_mismatch and (
+                details.get("structureType") not in ("Basic", "Composite")
+                or type(details.get("thickness")) not in (int, float)
+                or not math.isfinite(details["thickness"]) or details["thickness"] <= 0):
+            raise ValueError("SLAB_INTERMEDIATE_STRUCTURE_UNVERIFIED")
+        if expected_slab_material_guid is not None:
+            material = details.get("buildingMaterialId")
+            actual_guid = material.get("guid") if isinstance(material, dict) else None
+            if (details.get("structureType") != "Basic"
+                    or not isinstance(actual_guid, str)
+                    or actual_guid.lower() != expected_slab_material_guid.lower()):
+                raise ValueError("BASIC_SLAB_MATERIAL_READBACK_MISMATCH")
     elif command == "CreateColumns":
         point = expected["coordinates"]
         origin = details.get("origin", {})
@@ -289,7 +328,7 @@ def created_guid(raw):
     return guid
 
 
-def check_previous_wall(api, graph_step, created):
+def check_previous_wall(api, graph_step, created, story_bindings=None):
     key = graph_step["params"]
     data = list(key.values())[0][0]
     wallid = data["ownerWallId"]["guid"]["$createdGuid"]
@@ -301,9 +340,28 @@ def check_previous_wall(api, graph_step, created):
     if previous_step is None:
         raise ValueError("PARENT_PLAN_ROW_MISSING")
     row = requested_details(api, parent["guid"])
-    verify_readback("CreateWalls", previous_step["params"], row,
-                    expected_floor=previous_step["params"]["wallsData"][0]["floorIndex"])
+    parent_floor = previous_step["params"]["wallsData"][0]["floorIndex"]
+    verify_readback(
+        "CreateWalls", previous_step["params"], row,
+        expected_floor=parent_floor,
+        expected_story_level=story_level_for_floor(story_bindings, parent_floor))
     return parent["guid"]
+
+
+def resolve_basic_slab_material(api, name):
+    """Resolve exactly one approved Building Material in the sole active PLN."""
+    data = api("GetAttributesByType", {"attributeType": "BuildingMaterial"})
+    headers = data.get("attributes") if isinstance(data, dict) else None
+    if not isinstance(headers, list):
+        raise ValueError("BUILDING_MATERIAL_INVENTORY_UNAVAILABLE")
+    matches = [row for row in headers if isinstance(row, dict) and row.get("name") == name]
+    if len(matches) != 1:
+        raise ValueError("BASIC_SLAB_MATERIAL_MISSING_OR_AMBIGUOUS")
+    attr = matches[0].get("attributeId")
+    guid = attr.get("guid") if isinstance(attr, dict) else None
+    if not isinstance(guid, str) or not _GUID.fullmatch(guid):
+        raise ValueError("BASIC_SLAB_MATERIAL_GUID_UNVERIFIED")
+    return guid
 
 
 class SceneWriter:
@@ -337,9 +395,15 @@ class SceneWriter:
                     raise ValueError("UNVERIFIED_NAMED_STORY: " + binding_row["label"])
         if preview["schemaVersion"] != binding["tapirVersion"]:
             raise ValueError("TAPIR_SCHEMA_VERSION_MISMATCH")
+        basic_name = preview.get("slabBasicMaterialName")
+        material_guid = (resolve_basic_slab_material(self.api, basic_name)
+                         if basic_name is not None else None)
+        preview["slabBasicMaterialGuid"] = material_guid
         preview["sourcePlanHash"] = digest({
             "graphHash": preview["sourcePlanHash"],
             "schemaSha256": preview["schemaSha256"],
+            "slabBasicMaterialName": basic_name,
+            "slabBasicMaterialGuid": material_guid,
         })
         scan_report = scan_for_existing_geometry(self.api, x, y, preview.get("envelope"))
         if self.guarded_binding() != binding:
@@ -354,12 +418,28 @@ class SceneWriter:
         preflight = self.preflight(x, y)
         if preflight["sourcePlanHash"] != expected_hash:
             raise ValueError("PLAN_HASH_MISMATCH: get hash from same-anchor dry-run")
+        return self._execute_verified_plan(preflight, scene_id, expected_hash)
+
+    def _execute_verified_plan(self, preflight, scene_id, expected_hash,
+                               seeded_created=None, approval_source=None,
+                               on_before_complete=None):
+        """Same existing one-shot SceneWriter, with externally verified prefix.
+
+        Only recovery after exact immutable old-ledger + current-native matching
+        can supply a nonempty prefix. Never invokes preflight's spatial collision
+        scanner for a scene that legitimately already contains its first steps.
+        """
+        seeded_created = dict(seeded_created or {})
+        if (not isinstance(scene_id, str) or not _SCENE_ID.fullmatch(scene_id)
+                or preflight["sourcePlanHash"] != expected_hash):
+            raise ValueError("RESUME_PLAN_OR_ID_MISMATCH")
         if not self.journal_path.parent.exists():
             raise ValueError("journal state directory must already exist")
         result = {
             "sceneId": scene_id, "planHash": expected_hash, "status": "BLOCKED",
             "plnSaved": False, "automaticRetry": False, "steps": {},
             "sceneDimensions": preflight["metrics"]["dimensionsMeters"],
+            "reusedCount": len(seeded_created),
         }
         with closing(sqlite3.connect(str(self.journal_path))) as db:
             db.execute("PRAGMA synchronous=FULL")
@@ -373,8 +453,14 @@ class SceneWriter:
             db.execute("INSERT INTO scenes VALUES (?,?,?,?)",
                        (scene_id, expected_hash, "STARTED", canonical(result)))
             db.commit()
-            created = {"__plan__": preflight["graph"]}
+            created = {"__plan__": preflight["graph"], **seeded_created}
+            for sid, prior in seeded_created.items():
+                result["steps"][sid] = {
+                    "status": "REUSED_VERIFIED", "guid": prior["guid"],
+                    "kind": prior["kind"], "floorIndex": prior["floorIndex"]}
             for step_id in preflight["executionOrder"]:
+                if step_id in seeded_created:
+                    continue
                 step = next(s for s in preflight["graph"]["operations"] if s["id"] == step_id)
                 command = step["command"]
                 if command not in ALLOWED_WRITES:
@@ -385,7 +471,8 @@ class SceneWriter:
                         raise ValueError("PROJECT_SWITCHED_DURING_SCENE")
                     parent_guid = None
                     if command in ("CreateWindows", "CreateDoors"):
-                        parent_guid = check_previous_wall(self.api, step, created)
+                        parent_guid = check_previous_wall(
+                            self.api, step, created, preflight.get("storyBindings"))
                     params = resolve_params(step, created)
                     # Bind each operation to its exact resolved (including GUID)
                     # parameters, approved local test scope, source scene and target.
@@ -398,7 +485,7 @@ class SceneWriter:
                         "scope": EXPECTED_PATH,
                         "approvedBy": "local-explicit--execute-with-matching-plan-hash",
                         "approvedAt": datetime.now(timezone.utc).isoformat(),
-                        "approvalSource": "standing-test-PLN-permission",
+                        "approvalSource": approval_source or "standing-test-PLN-permission",
                     }
                     if approval_record["permission"] not in ALLOWED_WRITES:
                         raise ValueError("UNREVIEWED_WRITE_SCOPE")
@@ -419,14 +506,55 @@ class SceneWriter:
                     db.commit()
                     if self.guarded_binding() != preflight["binding"]:
                         raise ValueError("PROJECT_CHANGED_AFTER_WRITE")
+                    basic_guid = preflight.get("slabBasicMaterialGuid")
+                    if command == "CreateSlabs" and basic_guid:
+                        # Read the newly created element BEFORE attempting the
+                        # second native mutation. The first GUID is never replayed.
+                        intermediate = requested_details(self.api, guid)
+                        floor = params["slabsData"][0]["floorIndex"]
+                        verify_readback(command, params, intermediate,
+                                        expected_floor=floor,
+                                        allow_slab_thickness_mismatch=True)
+                        modify = {"slabsWithDetails": [{
+                            "elementId": {"guid": guid},
+                            "structureType": "Basic",
+                            "thickness": params["slabsData"][0]["thickness"],
+                            "buildingMaterialId": {"guid": basic_guid},
+                        }]}
+                        modify_intent = {
+                            "sceneId": scene_id, "planHash": expected_hash,
+                            "stepId": step_id, "command": "ModifySlabs",
+                            "parameters": modify, "target": preflight["binding"],
+                            "createdGuid": guid,
+                            "approval": approval_record,
+                        }
+                        db.execute("UPDATE steps SET state=?,output=? "
+                                   "WHERE scene_id=? AND step_id=?",
+                                   ("BASIC_MODIFY_ATTEMPTED", canonical(modify_intent),
+                                    scene_id, step_id))
+                        db.commit()  # Crash-safe BEFORE ModifySlabs native call.
+                        if self.guarded_binding() != preflight["binding"]:
+                            raise ValueError("PROJECT_CHANGED_BEFORE_SLAB_MODIFY")
+                        modified = self.api("ModifySlabs", modify)
+                        responses = (modified.get("executionResults")
+                                     if isinstance(modified, dict) else None)
+                        if (not isinstance(responses, list) or len(responses) != 1
+                                or responses[0].get("success") is not True):
+                            raise ValueError("BASIC_SLAB_MODIFY_NOT_CONFIRMED")
                     row = requested_details(self.api, guid)
                     if command in ("CreateWindows", "CreateDoors"):
                         owner_ref = step["params"][command[6:].lower()+"Data"][0]["ownerWallId"]["guid"]["$createdGuid"]
                         floor_index = created[owner_ref]["floorIndex"]
                     else:
                         floor_index = next(iter(params.values()))[0]["floorIndex"]
-                    kind = verify_readback(command, params, row, parent_guid,
-                                           expected_floor=floor_index)
+                    kind = verify_readback(
+                        command, params, row, parent_guid,
+                        expected_floor=floor_index,
+                        expected_story_level=story_level_for_floor(
+                            preflight.get("storyBindings"), floor_index),
+                        expected_slab_material_guid=(
+                            preflight.get("slabBasicMaterialGuid")
+                            if command == "CreateSlabs" else None))
                     created[step_id] = {"guid": guid, "kind": kind, "floorIndex": floor_index}
                     result["steps"][step_id] = {"status": "PASS", "guid": guid, "kind": kind}
                     db.execute("UPDATE steps SET state='PASS',output=? WHERE scene_id=? AND step_id=?",
@@ -443,8 +571,21 @@ class SceneWriter:
                                (result["status"], canonical(result), scene_id))
                     db.commit()
                     return result
+            if on_before_complete is not None:
+                try:
+                    on_before_complete(preflight, created)
+                except Exception as exc:
+                    result["status"] = "PARTIAL_OR_UNKNOWN_OUTCOME"
+                    result["failedStep"] = "FINAL_READBACK"
+                    result["reason"] = type(exc).__name__ + ": " + str(exc)
+                    result["manualReconciliationRequired"] = True
+                    db.execute("UPDATE scenes SET state=?,result=? WHERE scene_id=?",
+                               (result["status"], canonical(result), scene_id))
+                    db.commit()
+                    return result
             result["status"] = "COMPLETE_UNSAVED"
             result["createdCount"] = len(result["steps"])
+            result["newCreatedCount"] = len(result["steps"]) - len(seeded_created)
             result["allGuidsReadback"] = True
             db.execute("UPDATE scenes SET state=?,result=? WHERE scene_id=?",
                        (result["status"], canonical(result), scene_id))

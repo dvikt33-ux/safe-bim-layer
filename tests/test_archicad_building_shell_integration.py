@@ -32,6 +32,8 @@ class NamedStoriesNative(WholeNative):
             else:
                 native_floor = next(iter(args.values()))[0]["floorIndex"]
             row["detailsOfElements"][0]["floorIndex"] = native_floor
+            if source == "CreateWalls" and native_floor == 1:
+                row["detailsOfElements"][0]["details"]["zCoordinate"] = 3.0
             return row
         return super().__call__(command, params)
 

@@ -16,7 +16,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 
-def tapir(port: int, command: str, params: dict | None = None) -> dict:
+def tapir(port: int, command: str, params: dict | None = None, *, timeout: float = 15) -> dict:
     request = {
         "command": "API.ExecuteAddOnCommand",
         "parameters": {
@@ -33,7 +33,9 @@ def tapir(port: int, command: str, params: dict | None = None) -> dict:
         headers={"Content-Type": "application/json; charset=utf-8"},
         method="POST",
     )
-    with urllib.request.urlopen(req, timeout=15) as response:
+    if type(timeout) not in (int, float) or not (0 < timeout <= 120):
+        raise ValueError("INVALID_HTTP_TIMEOUT")
+    with urllib.request.urlopen(req, timeout=timeout) as response:
         result = json.loads(response.read().decode("utf-8"))
     if result.get("succeeded") is not True:
         raise RuntimeError(f"{command} failed: {result.get('error')!r}")
