@@ -151,5 +151,51 @@ class SpatialPlanTests(unittest.TestCase):
         self.assertEqual(x["nativeWriteCalls"],0)
 
 
+    def test_explicit_xy_shift_preserves_rooms_axes_loadpaths_and_original(self):
+        import archicad_semantic_spatial as S
+        source=layout()
+        relocated=S.relocate_authored_xy(source,40,40)
+        self.assertEqual(source["outline"]["xMin"],0)
+        self.assertEqual(relocated["outline"],
+                         {"xMin":40.0,"xMax":50.0,"yMin":40.0,"yMax":48.0})
+        self.assertEqual(relocated["rooms"][0]["rectangle"]["xMin"],40.0)
+        self.assertEqual(relocated["rooms"][0]["rectangle"]["yMax"],48.0)
+        self.assertEqual(relocated["axes"][0]["coordinate"],40.0)
+        self.assertEqual(relocated["bearingLines"][0]["fromCoordinate"],40.0)
+        self.assertEqual(relocated["bearingLines"][0]["toCoordinate"],48.0)
+        self.assertEqual(relocated["loadPaths"],source["loadPaths"])
+        result=evaluate(geo=relocated)
+        self.assertEqual(result["summary"]["alignedCandidateLoadPathCount"],1)
+        self.assertFalse(result["bimEmissionAuthorized"])
+
+    def test_shift_y_axis_bearing_line_uses_x_displacement(self):
+        import archicad_semantic_spatial as S
+        x=layout()
+        x["axes"].append({"id":"axis-y-south","direction":"Y","coordinate":0})
+        x["bearingLines"].append({
+            "id":"wall-south-first","storyId":"level-1",
+            "axisId":"axis-y-south","fromCoordinate":0,"toCoordinate":5,
+            "wallThicknessMeters":.3,"cseCandidateId":None})
+        q=S.relocate_authored_xy(x,40,50)
+        by_id={m["id"]:m for m in q["bearingLines"]}
+        self.assertEqual(by_id["wall-south-first"]["fromCoordinate"],40.0)
+        self.assertEqual(by_id["wall-south-first"]["toCoordinate"],45.0)
+        self.assertEqual(q["axes"][1]["coordinate"],50.0)
+        self.assertEqual(by_id["wall-west-first"]["fromCoordinate"],50.0)
+        self.assertEqual(evaluate(geo=q)["summary"]["authoredBearingLineCount"],3)
+
+    def test_bad_shift_is_fail_closed_and_never_authorizes_creation(self):
+        import archicad_semantic_spatial as S
+        for dx,dy in [(float("inf"),0),(float("nan"),0),
+                      ("40",0),(1000001,0)]:
+            with self.subTest(dx=dx):
+                with self.assertRaises(ValueError):
+                    S.relocate_authored_xy(layout(),dx,dy)
+        bad=layout()
+        bad["bearingLines"][0]["axisId"]="missing-axis"
+        with self.assertRaisesRegex(ValueError,"TRANSLATION_UNKNOWN_BEARING_AXIS"):
+            S.relocate_authored_xy(bad,40,40)
+
+
 if __name__=="__main__":
     unittest.main()
