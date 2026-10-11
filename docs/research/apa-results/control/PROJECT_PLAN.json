@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 85,
+  "revision": 86,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -704,6 +704,18 @@
     "ART-P70-A03-S03-INCREMENTAL-PUBLISH-RECEIPT-20261011": {
       "id": "ART-P70-A03-S03-INCREMENTAL-PUBLISH-RECEIPT-20261011",
       "uri": "docs/research/apa-results/receipts/APA-RUN-20261011-195800Z-incremental-native-edit.json",
+      "kind": "PUBLICATION_RECEIPT",
+      "verification": "GITHUB_READBACK_AND_CI_SUCCESS"
+    },
+    "ART-P70-A03-S04-NATIVE-COMPLETENESS-20261011": {
+      "id": "ART-P70-A03-S04-NATIVE-COMPLETENESS-20261011",
+      "uri": "docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200100Z-native-completeness/REPORT.md",
+      "kind": "ACCEPTANCE_REPORT",
+      "verification": "CAPTURED_NATIVE_TYPED_READBACK_INDEPENDENTLY_CHECKED"
+    },
+    "ART-P70-A03-S04-COMPLETENESS-RECEIPT-20261011": {
+      "id": "ART-P70-A03-S04-COMPLETENESS-RECEIPT-20261011",
+      "uri": "docs/research/apa-results/receipts/APA-RUN-20261011-200100Z-native-completeness.json",
       "kind": "PUBLICATION_RECEIPT",
       "verification": "GITHUB_READBACK_AND_CI_SUCCESS"
     }
@@ -2938,7 +2950,7 @@
       "action_id": "APA-P70.A03",
       "title": "Дополнить авторскую модель до связного небольшого здания существующими writer-циклами",
       "kind": "BUILD",
-      "status": "IN_PROGRESS",
+      "status": "DONE_PUBLISHED",
       "priority": 0,
       "work_key": "authored-building-native-component-completeness",
       "depends_on": [
@@ -2954,11 +2966,14 @@
         "Стены, перекрытия, колонны и hosted двери/окна из утверждённой схемы проходят typed GUID/host/story/material/geometry readback; требуемые неподдерживаемые элементы имеют конкретный blocker; один BIM Graph и SceneWriter."
       ],
       "acceptance": "Стены, перекрытия, колонны и hosted двери/окна из утверждённой схемы проходят typed GUID/host/story/material/geometry readback; требуемые неподдерживаемые элементы имеют конкретный blocker; один BIM Graph и SceneWriter.",
-      "owner": "codex-apa-core-native-20261011",
-      "lease_until": "2026-10-11T21:00:00Z",
-      "claim_ref": "APA-RUN-20261011-200100Z-native-completeness",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-P70-A03-S04-NATIVE-COMPLETENESS-20261011",
+        "ART-P70-A03-S04-COMPLETENESS-RECEIPT-20261011"
+      ],
       "blocked_reason": null
     },
     "APA-P70.A08.S04": {
