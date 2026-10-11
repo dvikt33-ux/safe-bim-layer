@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 50,
+  "revision": 51,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -524,6 +524,12 @@
       "uri": "docs/research/apa-results/control/proposals/APA-CAND-20261011-slack-evidence-bridge.md",
       "kind": "PROPOSAL",
       "verification": "PENDING_INDEPENDENT_AUDIT_NOT_ADMITTED"
+    },
+    "ART-APA-SLACK-BRIDGE-REVIEW-20261011": {
+      "id": "ART-APA-SLACK-BRIDGE-REVIEW-20261011",
+      "uri": "docs/research/apa-results/control/reviews/APA-CAND-20261011-slack-evidence-bridge.md",
+      "kind": "REVIEW",
+      "verification": "GITHUB_SOURCE_READBACK_DEFERRED_NOT_ADMITTED"
     }
   },
   "tasks": {
