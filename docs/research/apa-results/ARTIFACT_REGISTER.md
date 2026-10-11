@@ -189,3 +189,10 @@ This row indexes user-supplied logs verified for internal consistency by indepen
 **Immutable V2 link erratum:** Some relative links in `runs/2026-10-11/APA-RUN-20261011-001922Z-eighty-head-blob-inventory/REPORT.md` begin `../inventories/blob-scan-20261011`. Relative to the immutable V2 run directory these do not resolve. The absolute GitHub links above are the canonical working links. Do **not** rewrite receipt-verified immutable REPORT.md bytes to repair links; this register section is an append-only correction.
 
 **Task status:** `APA-P00.A02.S03` remains **PARTIAL** until content-level deduplication and preservation review. `main`, PLN, APX, Archicad, Slack Socket Mode and SQLite not modified.
+
+## Publisher concurrency observation — existing APA-P00.A03.S03 (2026-10-11)
+
+| Artifact ID | Source | Verification and status |
+| --- | --- | --- |
+| `ART-APA-PUBLISH-RACE-20261011` | [GitHub Actions non-fast-forward incident and recovery audit](runs/2026-10-11/apa-publisher-concurrent-write-race-20261011.md) | **SOURCE_VERIFIED** directly from GitHub Actions job logs: [run 38097725783](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38097725783) failed at `Commit controller projections` with rejected non-fast-forward push, while subsequent [run 38098046479](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38098046479) and [38098175271](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38098175271) PASS and generated controller readback succeeded. **Recovery confirmed, retry safety fix NOT_IMPLEMENTED**; already covered by existing `APA-P00.A03.S03`, do not create duplicate S-ID. No force-push used. |
+
