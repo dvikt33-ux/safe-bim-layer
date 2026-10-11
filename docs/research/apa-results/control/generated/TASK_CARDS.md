@@ -996,7 +996,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A03.S04
 
-**Дополнить авторскую модель до связного небольшого здания существующими writer-циклами** — BUILD / IN_PROGRESS / P0
+**Дополнить авторскую модель до связного небольшого здания существующими writer-циклами** — BUILD / DONE_PUBLISHED / P0
 
 - Parent: APA-P70 → APA-P70.A03
 - Topic: PRODUCT_DEVELOPMENT
@@ -1004,7 +1004,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P70.A03.S02
 - Related, check before duplicating: none
 - Acceptance: Стены, перекрытия, колонны и hosted двери/окна из утверждённой схемы проходят typed GUID/host/story/material/geometry readback; требуемые неподдерживаемые элементы имеют конкретный blocker; один BIM Graph и SceneWriter.
-- Owner/lease: codex-apa-core-native-20261011 / 2026-10-11T21:00:00Z
+- Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
 - Existing V2 runs: [APA-RUN-20261011-200100Z-native-completeness](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200100Z-native-completeness/REPORT.md) (receipt verified)
@@ -1236,7 +1236,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A08.S04
 
-**Принять ядро: задание → связное редактируемое здание → правка → readback** — VALIDATION / READY / P0
+**Принять ядро: задание → связное редактируемое здание → правка → readback** — VALIDATION / IN_PROGRESS / P0
 
 - Parent: APA-P70 → APA-P70.A08
 - Topic: PRODUCT_DEVELOPMENT
@@ -1244,7 +1244,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P70.A03.S03, APA-P70.A03.S04
 - Related, check before duplicating: none
 - Acceptance: Один brief создаёт связное небольшое здание; все требуемые типы поддержаны, GUID/этажи/материалы/host/геометрия подтверждены; согласованная правка сохраняет GUID и не дублирует модель; сохранение и повторное чтение подтверждены. Четыре элемента и offline CI не достаточны. Инженерная/нормативная приёмка отдельно.
-- Owner/lease: unclaimed
+- Owner/lease: codex-apa-core-native-20261011 / 2026-10-11T21:00:00Z
 - Requires owner approval: False
 - Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
 - Existing V2 runs: none

@@ -1,18 +1,18 @@
 {
   "active": [
-    "APA-P70.A03.S04"
+    "APA-P70.A08.S04"
   ],
-  "artifact_count": 89,
+  "artifact_count": 91,
   "counts": {
     "BLOCKED": 8,
     "CLAIMED": 0,
     "DISPATCHABLE_NOW": 16,
-    "DONE_PUBLISHED": 18,
+    "DONE_PUBLISHED": 19,
     "EXPIRED_LEASES": 0,
-    "HELD_BY_DEPENDENCIES": 38,
+    "HELD_BY_DEPENDENCIES": 37,
     "IN_PROGRESS": 1,
     "PARTIAL": 15,
-    "READY": 39,
+    "READY": 38,
     "SUPERSEDED": 0
   },
   "development": {
@@ -32,9 +32,9 @@
         "total": 4
       },
       {
-        "done": 3,
+        "done": 4,
         "id": "APA-P70.A03",
-        "status": "IN_PROGRESS",
+        "status": "DONE_PUBLISHED",
         "title": "Планировка и редактируемая нативная BIM-модель",
         "total": 4
       },
@@ -69,7 +69,7 @@
       {
         "done": 0,
         "id": "APA-P70.A08",
-        "status": "WAITING",
+        "status": "IN_PROGRESS",
         "title": "Сквозная приёмка и расширение без переписывания ядра",
         "total": 5
       },
@@ -89,9 +89,9 @@
       }
     ],
     "active": [
-      "APA-P70.A03.S04"
+      "APA-P70.A08.S04"
     ],
-    "done": 7,
+    "done": 8,
     "next_eligible": null,
     "plan_id": "APA-P70",
     "status": "IN_PROGRESS",
@@ -161,7 +161,6 @@
     "APA-P70.A08.S01",
     "APA-P70.A08.S02",
     "APA-P70.A08.S03",
-    "APA-P70.A08.S04",
     "APA-P70.A08.S05",
     "APA-P70.A09.S01",
     "APA-P70.A10.S01"
@@ -169,7 +168,7 @@
   "known_published_v2_runs": 19,
   "legacy_reports": "NOT_FULLY_INDEXED",
   "orphan_v2_manifests": [],
-  "plan_revision": 85,
+  "plan_revision": 87,
   "publisher": "DEPLOYED_SYNTHETIC_E2E_PASS",
   "research_lookahead": {
     "linked_product_substeps": 29,
@@ -290,7 +289,7 @@
       ]
     },
     "PRODUCT_DEVELOPMENT": {
-      "done": 7,
+      "done": 8,
       "ready": 0,
       "task_ids": [
         "APA-P70.A01.S01",

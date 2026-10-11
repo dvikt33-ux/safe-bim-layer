@@ -8,8 +8,8 @@ requires_approval tasks are not dispatchable until separate owner approval is re
 ## Краткая сводка
 
 - План: APA-P70 — Разработка APA — полный цикл проектирования и выпуска
-- Статус: **IN_PROGRESS**; завершено 7/29 подзадач.
-- Сейчас: APA-P70.A03.S04
+- Статус: **IN_PROGRESS**; завершено 8/29 подзадач.
+- Сейчас: APA-P70.A08.S04
 - Следующая доступная: нет, см. зависимости и разрешения
 
 ## Этапы → задачи
@@ -18,12 +18,12 @@ requires_approval tasks are not dispatchable until separate owner approval is re
 | --- | --- | ---: |
 | APA-P70.A01 — Единая база существующих возможностей и доказательств | PARTIAL | 2/3 |
 | APA-P70.A02 — Требования, нормативы и библиотека конкретного проекта | PARTIAL | 2/4 |
-| APA-P70.A03 — Планировка и редактируемая нативная BIM-модель | IN_PROGRESS | 3/4 |
+| APA-P70.A03 — Планировка и редактируемая нативная BIM-модель | DONE_PUBLISHED | 4/4 |
 | APA-P70.A04 — Конструктивные узлы, кладка, фасады и сопряжения | WAITING | 0/3 |
 | APA-P70.A05 — Расчёт несущих систем и инженерная обратная связь | WAITING | 0/3 |
 | APA-P70.A06 — MEP и междисциплинарная координация | WAITING | 0/2 |
 | APA-P70.A07 — Ведомости, чертежи, нормативная проверка и выпуск | WAITING | 0/3 |
-| APA-P70.A08 — Сквозная приёмка и расширение без переписывания ядра | WAITING | 0/5 |
+| APA-P70.A08 — Сквозная приёмка и расширение без переписывания ядра | IN_PROGRESS | 0/5 |
 | APA-P70.A09 — Геометрия и точность после приёмки ядра | WAITING | 0/1 |
 | APA-P70.A10 — Измеримое ускорение стабильных операций | WAITING | 0/1 |
 
@@ -57,7 +57,7 @@ requires_approval tasks are not dispatchable until separate owner approval is re
   - Источники/ветки: [ART-APA-PR16](https://github.com/dvikt33-ux/safe-bim-layer/pull/16), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md), [ART-APA-LIVE-SCRATCH-PARTIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-live-scratch-partial-slab-reconciliation.md), [ART-APA-PLN-WRITE-AUTH-20261011](../../../../../docs/research/apa-results/control/IMPLEMENTATION_ROADMAP.md%23%D1%80%D0%B0%D0%B7%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8-%D0%B4%D0%BE%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D1%82%D0%B2%D0%B0)
 - **APA-P70.A03.S03 [DONE_PUBLISHED]** Доказать редактируемость, GUID/host/story/material и инкрементальное обновление; исследования: APA-P10.A01.S02, APA-P10.A01.S03, APA-P10.A03.S01, APA-P50.A02.S01
   - Источники/ветки: [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-LIVE-SCRATCH-PARTIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-live-scratch-partial-slab-reconciliation.md)
-- **APA-P70.A03.S04 [IN_PROGRESS]** Дополнить авторскую модель до связного небольшого здания существующими writer-циклами; исследования: APA-P50.A02.S01
+- **APA-P70.A03.S04 [DONE_PUBLISHED]** Дополнить авторскую модель до связного небольшого здания существующими writer-циклами; исследования: APA-P50.A02.S01
   - Источники/ветки: [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
 
 ### APA-P70.A04 — Конструктивные узлы, кладка, фасады и сопряжения
@@ -102,7 +102,7 @@ requires_approval tasks are not dispatchable until separate owner approval is re
   - Источники/ветки: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md)
 - **APA-P70.A08.S03 [READY / WAITING_DEPS]** Доказать расширяемость на другом типе здания и системах; зависимости: APA-P70.A08.S02; исследования: APA-P50.A01.S01, APA-P50.A03.S01, APA-P50.A03.S02
   - Источники/ветки: [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md)
-- **APA-P70.A08.S04 [READY / WAITING_DEPS]** Принять ядро: задание → связное редактируемое здание → правка → readback; зависимости: APA-P70.A03.S04; исследования: APA-P50.A02.S01
+- **APA-P70.A08.S04 [IN_PROGRESS]** Принять ядро: задание → связное редактируемое здание → правка → readback; исследования: APA-P50.A02.S01
   - Источники/ветки: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
 - **APA-P70.A08.S05 [READY / WAITING_DEPS]** Адаптировать готовое ядро под установленный Archicad 30; зависимости: APA-P70.A08.S03; исследования: APA-P50.A02.S01
   - Источники/ветки: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md)
