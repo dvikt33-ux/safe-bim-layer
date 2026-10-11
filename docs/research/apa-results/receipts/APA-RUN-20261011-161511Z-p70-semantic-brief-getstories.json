@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:64c04a8ac153a927724db0af4856733fbea73fca9ed64bcdd4eaa59682390d26",
+  "index_commit_sha": "369e409735e67209eb5dc5bc77ea04b2f82fc9c9",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "369e409735e67209eb5dc5bc77ea04b2f82fc9c9",
+  "report_path": "docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md",
+  "report_sha256": "13619f181c56b156806ef469b811d597ce5c387272ad62b8868034907d7543f4",
+  "run_id": "APA-RUN-20261011-161511Z-p70-semantic-brief-getstories",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}
