@@ -263,8 +263,15 @@ def main(argv=None):
         return 0 if public["status"] in (
             "READY_FOR_EXPLICIT_THIRTEEN_STEP_CONTINUATION","COMPLETE_UNSAVED") else 2
     except Exception as exc:
-        print(json.dumps({"status":"BLOCKED","reason":type(exc).__name__+": "+str(exc),
-                          "modelWriteAttempts":0},ensure_ascii=False,indent=2))
+        # Exceptions can also escape from a post-write native read/SQLite commit.
+        # Never report a fabricated zero native write count on a timeout.
+        print(json.dumps({
+            "status": "OUTCOME_UNKNOWN_NEEDS_JOURNAL_RECONCILIATION",
+            "reason": type(exc).__name__ + ": " + str(exc),
+            "modelWriteAttempts": None,
+            "automaticReplayAllowed": False,
+            "journalOnlyDiagnostic": "diagnose_apa_suffix4_timeout.py --journal-only",
+        }, ensure_ascii=False, indent=2))
         return 2
 
 
