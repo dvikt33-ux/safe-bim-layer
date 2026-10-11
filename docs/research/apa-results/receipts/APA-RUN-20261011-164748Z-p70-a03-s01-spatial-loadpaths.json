@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:6e98e38d4bd12fa5edb05ac1d0bf1df1c3e905c62968627d43523cb15d1c0416",
+  "index_commit_sha": "b85e333a65636ffd087b07a50194299ad06837da",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "b85e333a65636ffd087b07a50194299ad06837da",
+  "report_path": "docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md",
+  "report_sha256": "00ab4e4ad5fc855b4253960a4fbf9c292d6aaa12b9e0544e24614f03d2f4a4d5",
+  "run_id": "APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}
