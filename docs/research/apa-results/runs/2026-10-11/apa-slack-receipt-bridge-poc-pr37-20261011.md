@@ -23,3 +23,11 @@
 
 ## Trace
 PR `#37`, branch `feature/apa-sync-receipt-evidence-bridge-poc-20261011`, code commit `8300b69889938197d8409f717a8a13d72802c411`, tests commit `733d2b0bbe1a7e88d27b71704ce25e71831674cf`, docs commit `6b54c8ac12a311745fd727c6aae5b3a9f73eb13d`, CI wiring commit `8d4cef67648c83aa75f177467982ec240cce4749`.
+
+## Additional source-backed integration check (GitHub Actions)
+
+New PR-head commit [a8b11de](https://github.com/dvikt33-ux/safe-bim-layer/commit/a8b11deceb163857876de2136b7555fab479b3ed) added an actual pinned, published canonical GitHub receipt readback to the test workflow: controller snapshot commit `8af838f0ad96c98bfcdafab86ad318901a23ecd1`, `APA-P70.A01.S01`, registered receipt `APA-RUN-20261011-091905Z-p70-source-integration-map.json`.
+
+[CI run 38144870385](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38144870385) is **SUCCESS on attempt 1**, including step `Pinned real GitHub receipt readback to Slack INFO dry-run` PASS; independent job-step readback verifies it ran. The test exercised real GitHub REST pinned content, source report checksum/registration, and creation of `INFO` event without Slack send. Existing 44 + new 16 offline tests and Windows launcher parsing also PASS.
+
+**Revised evidence level:** GITHUB_PINNED_REAL_RECEIPT_DRY_RUN_PASS, OFFLINE_CI_PASS, **WINDOWS_AND_OUTBOUND_SLACK_LIVE_NOT_VERIFIED**. No claim that the bridge is enabled or automatically runs.
