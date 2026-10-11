@@ -11,13 +11,13 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | --- | ---: |
 | BLOCKED | 8 |
 | CLAIMED | 0 |
-| DONE_PUBLISHED | 19 |
-| IN_PROGRESS | 1 |
+| DONE_PUBLISHED | 20 |
+| IN_PROGRESS | 0 |
 | PARTIAL | 15 |
 | READY | 38 |
 | SUPERSEDED | 0 |
-| DISPATCHABLE_NOW | 16 |
-| HELD_BY_DEPENDENCIES | 37 |
+| DISPATCHABLE_NOW | 18 |
+| HELD_BY_DEPENDENCIES | 35 |
 | EXPIRED_LEASES | 0 |
 
 ## Полный цикл разработки APA
@@ -30,7 +30,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| APA-P70.A08.S04 | codex-apa-core-native-20261011 | 2026-10-11T21:00:00Z | editable-native-core-e2e-acceptance |
+| — | — | — | — |
 
 ## CONTROL — 0 ready
 
@@ -59,17 +59,18 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | P7 | APA-P10.A02.S04 — Native MEP/Tapir MEP команды, трассы, порты | MEP command/route/port matrix |
 | P7 | APA-P50.A02.S01 — Единый каталог AC29 SDK/Tapir/Python/GDL/IFC/MEP инструментов | Capability matrix, версии, пересечения |
 
-## BUILD — 1 ready
+## BUILD — 2 ready
 
 | Priority | Task | Acceptance |
 | --- | --- | --- |
+| P3 | APA-P70.A02.S02 — Связать проектные требования с версиями нормативов и проверяемыми правилами | Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED |
 | P8 | APA-P00.A03.S03 — Publisher, дедупликация, retry, heartbeat и ошибки | Publisher E2E + оставшиеся recovery/heartbeat gates |
 
-## INTEGRATION — 0 ready
+## INTEGRATION — 1 ready
 
 | Priority | Task | Acceptance |
 | --- | --- | --- |
-| — | — | — |
+| P2 | APA-P70.A09.S01 — Подключить Native Model Dump, графовую связность и реальные 3D-проверки | Native dump/NetworkX/Shapely используются через существующий readback; стыки, XYZ, story и host проверены на подтверждённых ошибках; 2D пересечение не считается 3D коллизией; ядро сохраняет работоспособность. |
 
 ## VALIDATION — 4 ready
 
@@ -102,7 +103,6 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | APA-P50.A03.S01 | APA-P50.A01.S03, APA-P50.A02.S02 |
 | APA-P50.A03.S02 | APA-P50.A03.S01 |
 | APA-P70.A01.S02 | APA-P50.A01.S01 |
-| APA-P70.A02.S02 | APA-P70.A08.S04 |
 | APA-P70.A02.S04 | APA-P70.A09.S01 |
 | APA-P70.A04.S01 | APA-P70.A02.S04 |
 | APA-P70.A04.S02 | APA-P70.A04.S01 |
@@ -119,7 +119,6 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | APA-P70.A08.S02 | APA-P70.A08.S01 |
 | APA-P70.A08.S03 | APA-P70.A08.S02 |
 | APA-P70.A08.S05 | APA-P70.A08.S03 |
-| APA-P70.A09.S01 | APA-P70.A08.S04 |
 | APA-P70.A10.S01 | APA-P70.A06.S02 |
 
 ## Warnings

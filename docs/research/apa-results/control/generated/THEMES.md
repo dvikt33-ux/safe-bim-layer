@@ -14,7 +14,7 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 | KNOWLEDGE_GRAPH — Сведение исследований и доказательств | 3 | 0 | 1 | ART-BRANCHES, ART-REGISTER, ART-TRACE-RECEIPT, ART-TRACE-REPORT |
 | MEP — MEP native и Tapir | 1 | 0 | 1 | ART-REGISTER |
 | MVP — MVP и внедрение | 2 | 0 | 0 | ART-PLAN |
-| PRODUCT_DEVELOPMENT — Полный цикл разработки APA: требования → узлы/расчёт → BIM → MEP → выпуск | 29 | 8 | 0 | ART-APA-FULL-CYCLE, ART-APA-PLP-CONTRACT, ART-APA-REUSE-NATIVE-20261011, ART-APA-PR16, ART-APA-HIGHLEVEL-PR34, ART-APA-ASSEMBLY-PLAN, ART-APA-LIVE-SCRATCH-PARTIAL-20261011 |
+| PRODUCT_DEVELOPMENT — Полный цикл разработки APA: требования → узлы/расчёт → BIM → MEP → выпуск | 29 | 9 | 2 | ART-APA-FULL-CYCLE, ART-APA-PLP-CONTRACT, ART-APA-REUSE-NATIVE-20261011, ART-APA-PR16, ART-APA-HIGHLEVEL-PR34, ART-APA-ASSEMBLY-PLAN, ART-APA-LIVE-SCRATCH-PARTIAL-20261011 |
 | PUBLISHER — Публикация, квитанции и capability | 4 | 0 | 2 | ART-OS-AUDIT, ART-PUB-RECEIPT, ART-PUBLISHER |
 | SDK_NATIVE — Archicad 29 native SDK | 3 | 0 | 3 | ART-REGISTER, ART-SDK-GET3D, ART-SDK-SEO, ART-APA-ATTR-STORY-SLAB-20261011 |
 | SYNTHESIS — Синтез research → implementation | 2 | 0 | 0 | ART-PLAN, ART-REGISTER |
@@ -110,7 +110,7 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 - APA-P70.A08.S02 [VALIDATION/READY]: Проверить доработку единственного открытого существующего PLN; work_key=full-cycle-adapt-existing-e2e; related=none
 - APA-P70.A08.S03 [VALIDATION/READY]: Доказать расширяемость на другом типе здания и системах; work_key=building-type-extension-contract; related=none
 - APA-P70.A03.S04 [BUILD/DONE_PUBLISHED]: Дополнить авторскую модель до связного небольшого здания существующими writer-циклами; work_key=authored-building-native-component-completeness; related=none
-- APA-P70.A08.S04 [VALIDATION/IN_PROGRESS]: Принять ядро: задание → связное редактируемое здание → правка → readback; work_key=editable-native-core-e2e-acceptance; related=none
+- APA-P70.A08.S04 [VALIDATION/DONE_PUBLISHED]: Принять ядро: задание → связное редактируемое здание → правка → readback; work_key=editable-native-core-e2e-acceptance; related=none
 - APA-P70.A09.S01 [INTEGRATION/READY]: Подключить Native Model Dump, графовую связность и реальные 3D-проверки; work_key=integrated-native-3d-geometry-precision; related=none
 - APA-P70.A02.S04 [INTEGRATION/READY]: Интегрировать реальные материалы, Composite/Profile и выбранные GDL-библиотеки; work_key=verified-project-material-library-integration; related=none
 - APA-P70.A10.S01 [INTEGRATION/READY]: Оптимизировать конкретный стабильный сценарий с измерением результата; work_key=stable-native-pipeline-measured-optimization; related=none
