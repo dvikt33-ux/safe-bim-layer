@@ -14,7 +14,7 @@ from scripts.apa_sync.notification_outbox import NotificationOutbox, OutboxError
 EVENT = {
     "schema": "APA_EVENT_V1",
     "event_id": "apa-gh-receipt-1234567890abcdef12345678",
-    "task_id": "APA-P70.A01.S01",
+    "task_id": "APA-RECEIPT-EVENT-APA-P70-A01-S01",
     "status": "INFO",
     "phase": "SOURCE",
     "source": "apa:receipt-bridge:git-verified",
