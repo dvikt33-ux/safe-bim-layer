@@ -23,6 +23,20 @@ SOURCE_STATES = frozenset({"PROJECT_NATIVE_READBACK", "TECHNICAL_REFERENCE",
 DETAIL_STATES = frozenset({"UNVERIFIED", "BLOCKED"})
 READS = frozenset({"GetProjectInfo","GetStories","GetAttributesByType"})
 
+# Read-only references to the EXISTING PLP contract and v2.12 release.
+# These are Git blob hashes, NOT SHA256 and NOT proof of approved details.
+CATALOG_REFERENCES = (
+    {"kind":"PLP_CONTRACT","release":"0.1","gitBlobSha":
+     "3fc09f03c3ac6305fc73a92c6889ff9f6c7d8bd8",
+     "uri":"https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml",
+     "authority":"RESEARCH_DRAFT_NOT_IMPLEMENTED"},
+    {"kind":"DETAILS_RELEASE_MANIFEST","release":"2.12","gitBlobSha":
+     "797752bd4eb5b82a0056e2bc475dd4005fff4abb",
+     "uri":"https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12/manifest.json",
+     "authority":"SOURCE_REFERENCED_DETAIL_APPLICABILITY_UNVERIFIED"},
+)
+
+
 
 def _text(v, field):
     if not isinstance(v,str) or not v or len(v)>256 or v!=v.strip():
@@ -109,6 +123,7 @@ def compile_pack(brief, candidate, *, api=None):
         "schemaVersion":SCHEMA,"projectId":doc["projectId"],
         "projectMode":doc["mode"],"site":doc["site"],
         "targetProjectPath":doc["targetProjectPath"],
+        "catalogReferences":[dict(x) for x in CATALOG_REFERENCES],
         "sourceLinksAndGitBlobHashes":[{
             "id":source_id,"uri":uri,"gitBlobSha":sha,
             "publisher":source["publisher"],"rights":source["rights"],
