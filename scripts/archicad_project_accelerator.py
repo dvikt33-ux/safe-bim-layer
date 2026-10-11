@@ -19,6 +19,7 @@ import urllib.request
 import archicad_scene_run as RUN
 import archicad_scene_v1 as SCENE
 import archicad_building_shell as BUILD
+import archicad_semantic_brief as BRIEF
 
 READS = frozenset({"GetProjectInfo", "GetStories", "GetAddOnVersion",
                   "GetAllElements", "Get3DBoundingBoxes", "GetDetailsOfElements",
@@ -104,6 +105,22 @@ def parse_documentation(folder, binding):
                                provider_version=binding["tapirVersion"],
                                origin="live TapirCommand.GenerateDocumentation", binding=binding,
                                inputs={"command_definitions.js": ch, "common_schema_definitions.js": sh}))
+
+
+def compile_project_brief(brief, read_api=None):
+    """Semantic contract entry for future project compiler stages (zero writes).
+
+    This deliberately does NOT route to SceneWriter or create projects;
+    current compile_intent()/run_project() behavior is unchanged.
+    P70.A02.S02/S03 will supply evidence-backed attributes and systems.
+    """
+    contract = BRIEF.normalize(brief)
+    if read_api is None:
+        contract["nativeResolution"] = ("NEEDS_NEW_PROJECT_SETUP"
+                                        if contract["mode"] == "GENERATE_FROM_ZERO"
+                                        else "NEEDS_STORY_RESOLUTION")
+        return contract
+    return BRIEF.resolve_stories(contract, read_api)
 
 
 def compile_intent(intent, schema_path):
