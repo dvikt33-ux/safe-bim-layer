@@ -160,3 +160,41 @@ Native slab readback: native story index **1** at +3m, actual slab `zCoordinate=
 Code remediation added `scripts/repair_apa_suffix3_slab.py` on PR #35. Read-only preflight requires exact original 20/5/3/4 journaling and 32 unchanged native GUIDs, rechecks all previous walls, first repaired slab and pinned story elevations, then resolves user-chosen exact material. Only owner confirmation triggers **ONE** durable journal-reserved `ModifySlabs` for the specific existing GUID, requesting `zCoordinate=3.0`, Basic, 0.20m and the exact existing buildingMaterialId. Readback checks absolute Z +3m, story-relative level 0m, polygon, thickness, material, floor and unchanged 32 GUID inventory. No recreate, save, retry or automatic cleanup.
 
 **New code status:** [CI #38145083946](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38145083946) **SUCCESS, 148/148 offline tests PASS**. No live mutation has been performed by this newly authored recovery tool yet. A previous CI run on intermediate commit failed due to a synthetic GUID fixture mismatch and was corrected; final tested head `e17a25a4ef482db8a4136bca736da7f4f8b8c8c1`. **Remaining original building scene steps: 13** (12 existing built planned elements + 13 missing). A future fourth suffix requires separate journal proof, write confirmation and retest.
+
+## LIVE reported: second-floor slab repaired at +3m (owner readback)
+
+The owner reported successful execution of the one-time exact-GUID slab recovery on disposable `C:\\LocalAI\\APA_Test_House_01.pln` through local Tapir port 19726. CLI outcome:
+
+```json
+{
+  "status":"S2_SLAB_REPAIRED_VERIFIED_UNSAVED",
+  "guid":"1020BDF5-AFEC-455E-BAB9-D17999AC1567",
+  "floorIndex":1,
+  "zCoordinate":3,
+  "localLevel":0.0,
+  "thickness":0.2,
+  "structureType":"Basic",
+  "buildingMaterialId":"63DB2CE9-903D-45C0-B93C-B3C604C77394",
+  "createCalls":0,
+  "modifyCalls":1,
+  "plnSaved":false
+}
+```
+
+**Evidence class: USER_SUPPLIED / REPORTED_LIVE_TYPED_READBACK, unsaved and not reopened.** This verifies in-session correction only, not full live 25-element creation, not persistent PLN save/reopen. Current in-memory model should be **32 total (20 original + 12 planned)**; this inventory still needs fresh native readback before new writes.
+
+## Fourth prefix-safe source implementation: exact 13 pending creates
+
+New source script `scripts/continue_apa_after_s2_slab.py` in [PR #35](https://github.com/dvikt33-ux/safe-bim-layer/pull/35) provides a default strictly read-only preflight for the sole authorized historical scratch PLN. Revalidates:
+
+- original SHA256 evidence and pinned 25-step, 2-story historical graph; no graph rewrite;
+- previous three immutable, partial Create scene ledger states (5 + 3 + 4), two separate `READBACK_PASS` slab repair reservations, and exact repair intent/token/result provenance;
+- reconstructed second and third suffix approval hashes, not simply state labels;
+- exact current 32 GUID inventory, with no unexpected or missing GUIDs;
+- typed native readback of all 12 existing model elements, including second-floor walls at +3m and both slabs with correct Basic structure, 0.2m thickness, material GUID, local level 0 and absolute elevation.
+
+For a separately confirmed new approval token ONLY, the utility calls existing `SceneWriter._execute_verified_plan` with seeded 12 GUIDs and a **new fourth scene id** to create only the remaining **13** elements, with per-write durable ledger and fail-closed stop on any native error. Final acceptance verifies all 25 generated elements plus expected model inventory 45, all hosted parent GUIDs, and slab story elevation. No auto-retry, no Save, no delete or rollback. Any failure requires read-only ledger reconciliation, not replay.
+
+**Source CI:** https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38145934082 — **SUCCESS; 159/159 offline tests PASS**. Synthetic test cases include 12+13 success, no duplicate GUIDs, exact approval required, unexpected native inventory, second-floor slab Z drift, interrupted fourth suffix cannot be replayed. Earlier intermediate CI failures in synthetic fixture due to repeated mock GUIDs were corrected; last PASS is the acceptance basis.
+
+**Current task:** APA-P70.A03.S02 remains INCOMPLETE / LIVE_FULL_MODEL_NOT_VERIFIED / requires controller approval. The live construction of remaining 13 elements is not yet performed. Generic future two-floor slab generator still has a coordinate-frame defect: it initially created second-floor Slab at global 0. A future separately accepted generator fix must not mutate the immutable historical graph or weaken native verification.
