@@ -49,10 +49,16 @@ def opening(host_id, offset, width, height, sill=0.0):
 
 
 def validate_spec(spec, anchor):
-    if not isinstance(spec, dict) or set(spec) != {
-            "width", "depth", "storyHeight", "wallThickness",
-            "roomBays", "stories"}:
+    required = {"width", "depth", "storyHeight", "wallThickness",
+                "roomBays", "stories"}
+    if (not isinstance(spec, dict) or not required <= set(spec)
+            or set(spec) - required - {"slabBasicMaterialName"}):
         raise ValueError("BUILDING_SPEC_FIELDS_REQUIRED")
+    if "slabBasicMaterialName" in spec:
+        name = spec["slabBasicMaterialName"]
+        if (not isinstance(name, str) or not (1 <= len(name) <= 128)
+                or name != name.strip()):
+            raise ValueError("INVALID_BASIC_SLAB_MATERIAL_NAME")
     ax, ay = finite(anchor["x"], "anchor_x"), finite(anchor["y"], "anchor_y")
     width, depth = finite(spec["width"], "width"), finite(spec["depth"], "depth")
     height = finite(spec["storyHeight"], "story_height")
@@ -160,6 +166,9 @@ def prepare(part, schema_path=None):
                      "yMax": y+depth, "zMin": base_level-.3,
                      "zMax": base_level+height*len(stories)+.3},
         "storyBindings": stories,
+        # Exact attribute identity is resolved only against the active PLN at preflight.
+        # No hidden fallback to Archicad's Composite defaults.
+        "slabBasicMaterialName": part["specification"].get("slabBasicMaterialName"),
         "limitations": [
             "NOT_FOR_CONSTRUCTION: no engineered load-path, strength or ground verification",
             "No verified roof/structural joints/foundation/MEP/documentation",
