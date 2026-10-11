@@ -58,7 +58,9 @@ class ControllerTests(unittest.TestCase):
         state = c.build(self.plan)
         self.assertEqual(state["development"]["plan_id"], "APA-P70")
         self.assertEqual(state["development"]["total"], 23)
-        self.assertEqual(state["development"]["done"], 0)
+        self.assertEqual(state["development"]["done"], sum(
+            t["status"] == "DONE_PUBLISHED" for t in self.plan["tasks"].values()
+            if t["plan_id"] == "APA-P70"))
         # Live tasks can be claimed or completed; do not assume S01 is always free.
         if self.plan["tasks"]["APA-P70.A01.S01"]["status"] != "READY":
             self.assertNotEqual(state["development"]["next_eligible"], "APA-P70.A01.S01")
