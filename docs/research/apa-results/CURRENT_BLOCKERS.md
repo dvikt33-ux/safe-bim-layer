@@ -17,6 +17,8 @@
 | PR20 source parity | **NOT_VERIFIED** | Соответствие исходников PR коммиту сборки APX; локальная EOF-правка не должна теряться |
 | Historical vs current models | **CONTEXT DEPENDENT** | Проверять PID/порт/PLN/hash и каталог библиотек перед интерпретацией результатов |
 
+| Roof/Composite/Project Context archive reuse | **SOURCE_GAP_MAP_PUBLISHED / LIVE_NOT_VERIFIED** | [12-source SHA matrix](inventories/ARCHIVE_ROOF_COMPOSITE_CONTEXT_GAPS_20261011.json), [V2 receipt](receipts/APA-RUN-20261011-190658Z-roof-comp-context-map.json), evidence `ART-APA-ARCHIVE-ROOF-COMP-CONTEXT-20261011`. Tapir 1.5.10 retained CreateRoofs and RoofDetails lack typed gable per-edge contract; existing Get/CreateComposites requires Safe BIM exact dependency resolution and readback; existing watcher+SceneWriter already cover partial project-context verification but atomic native modiStamp/index absent from saved schema. Separate installed APX/live verification required; existing S-IDs only, no new writer. |
+
 ## Механизм перехода в READY
 
 Любой пункт получает статус READY только после сохранения в GitHub: точных команд/шагов проверки, версии SDK/API/APX, результата и ссылки на доказательства. Нельзя опираться только на чатовую формулировку или старый GUID/индекс из другого проекта.
