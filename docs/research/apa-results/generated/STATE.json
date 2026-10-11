@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 18,
+  "run_count": 19,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -127,6 +127,13 @@
       "report": "runs/2026-10-11/APA-RUN-20261011-195800Z-incremental-native-edit/REPORT.md",
       "run_id": "APA-RUN-20261011-195800Z-incremental-native-edit",
       "substep_id": "APA-P70.A03.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-11/APA-RUN-20261011-200100Z-native-completeness/REPORT.md",
+      "run_id": "APA-RUN-20261011-200100Z-native-completeness",
+      "substep_id": "APA-P70.A03.S04"
     }
   ],
   "schema": "APA_GENERATED_INDEX_V1",

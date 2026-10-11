@@ -22,5 +22,6 @@ Generated projection from immutable V2 runs. Legacy reports remain in ARTIFACT_R
 | [APA-RUN-20261011-190658Z-roof-comp-context-map](../runs/2026-10-11/APA-RUN-20261011-190658Z-roof-comp-context-map/REPORT.md) | APA-P00.A02.S03 | SOURCE | EVIDENCE_READY |
 | [APA-RUN-20261011-195000Z-isolated-authored-core](../runs/2026-10-11/APA-RUN-20261011-195000Z-isolated-authored-core/REPORT.md) | APA-P70.A03.S02 | SOURCE | EVIDENCE_READY |
 | [APA-RUN-20261011-195800Z-incremental-native-edit](../runs/2026-10-11/APA-RUN-20261011-195800Z-incremental-native-edit/REPORT.md) | APA-P70.A03.S03 | SOURCE | EVIDENCE_READY |
+| [APA-RUN-20261011-200100Z-native-completeness](../runs/2026-10-11/APA-RUN-20261011-200100Z-native-completeness/REPORT.md) | APA-P70.A03.S04 | SOURCE | EVIDENCE_READY |
 
 Publication receipts are in ../receipts/. Evidence status is not publication status.

@@ -1,0 +1,24 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-NATIVE-TYPES-COMPLETE",
+      "evidence_ids": [
+        "EV-ACCEPTANCE-MATRIX"
+      ],
+      "statement": "Required native type completeness passed for the explicit17element example based on independently inspected captured native evidence. Expanded product remains incomplete.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-ACCEPTANCE-MATRIX",
+      "kind": "TEST_RESULT",
+      "sha256": "81c24b881d0276665f7db8f90c5f55ff663c8638b23bfd4da01aa61b4db00937",
+      "source_revision": "976c19cecebe3f6bb4352365d9a59051d5b2b61b",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261011-200100Z-native-completeness/acceptance.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261011-200100Z-native-completeness",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}
