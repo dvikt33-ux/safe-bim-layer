@@ -282,3 +282,9 @@ Controller artifact record: `PROJECT_PLAN.json` revision **52**, [commit 8af838f
 | Artifact | GitHub source and verified CI | Boundaries |
 |---|---|---|
 | `ART-APA-PUBLISHER-THREE-STAGE-CAS-PR39-20261011` | [Canonical report](runs/2026-10-11/apa-publisher-three-stage-race-recovery-pr39-20261011.md), [merged PR #39](https://github.com/dvikt33-ux/safe-bim-layer/pull/39), [post-merge Publisher #38155818514](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38155818514) **SUCCESS**, [regression #38155821730](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38155821730) **SUCCESS** | **DEPLOYED_CANONICAL_AND_3_STAGE_REST_READBACK_PASS**; actual concurrent CAS recovery after merge still NOT_VERIFIED. Hardened receipt metadata CI PASS. `APA-P00.A03.S03` PARTIAL pending heartbeat/operational recovery gates; no main/master, PLN, APX edits. |
+
+## APA Publisher health diagnostic — merge #42 (2026-10-11)
+
+| Artifact | Evidence | Operational status |
+| --- | --- | --- |
+| `ART-APA-PUBLISHER-WATCHDOG-PR42-20261011` | [Canonical report](runs/2026-10-11/apa-publisher-health-checker-merged-pr42-20261011.md), [merged PR #42](https://github.com/dvikt33-ux/safe-bim-layer/pull/42), [17/17 CI PASS](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38156708432) | **SOURCE_MERGED + OFFLINE_PASS, AUTOMATED_MONITOR_NOT_DEPLOYED.** Scheduled GitHub Actions on nondefault branch would be inert; `main` changes prohibited. `APA-P00.A03.S03` remains PARTIAL. |
