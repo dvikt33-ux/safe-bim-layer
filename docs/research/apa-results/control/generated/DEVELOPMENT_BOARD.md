@@ -8,8 +8,8 @@ requires_approval tasks are not dispatchable until separate owner approval is re
 ## Краткая сводка
 
 - План: APA-P70 — Разработка APA — полный цикл проектирования и выпуска
-- Статус: **IN_PROGRESS**; завершено 10/29 подзадач.
-- Сейчас: APA-P70.A02.S04
+- Статус: **PARTIAL**; завершено 11/29 подзадач.
+- Сейчас: не выполняется; нет IN_PROGRESS.
 - Следующая доступная: APA-P70.A02.S02 — Связать проектные требования с версиями нормативов и проверяемыми правилами
 
 ## Этапы → задачи
@@ -17,9 +17,9 @@ requires_approval tasks are not dispatchable until separate owner approval is re
 | Задача | Состояние | Выполнено подзадач |
 | --- | --- | ---: |
 | APA-P70.A01 — Единая база существующих возможностей и доказательств | PARTIAL | 2/3 |
-| APA-P70.A02 — Требования, нормативы и библиотека конкретного проекта | IN_PROGRESS | 2/4 |
+| APA-P70.A02 — Требования, нормативы и библиотека конкретного проекта | PARTIAL | 3/4 |
 | APA-P70.A03 — Планировка и редактируемая нативная BIM-модель | DONE_PUBLISHED | 4/4 |
-| APA-P70.A04 — Конструктивные узлы, кладка, фасады и сопряжения | WAITING | 0/3 |
+| APA-P70.A04 — Конструктивные узлы, кладка, фасады и сопряжения | READY | 0/3 |
 | APA-P70.A05 — Расчёт несущих систем и инженерная обратная связь | WAITING | 0/3 |
 | APA-P70.A06 — MEP и междисциплинарная координация | WAITING | 0/2 |
 | APA-P70.A07 — Ведомости, чертежи, нормативная проверка и выпуск | WAITING | 0/3 |
@@ -46,7 +46,7 @@ requires_approval tasks are not dispatchable until separate owner approval is re
   - Источники/ветки: [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md)
 - **APA-P70.A02.S03 [DONE_PUBLISHED]** Собрать проектный Library Pack из проверяемых строительных систем и узлов; исследования: APA-P10.A01.S02, APA-P10.A02.S02, APA-P50.A02.S01
   - Источники/ветки: [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
-- **APA-P70.A02.S04 [IN_PROGRESS]** Интегрировать реальные материалы, Composite/Profile и выбранные GDL-библиотеки; исследования: APA-P50.A02.S01
+- **APA-P70.A02.S04 [DONE_PUBLISHED]** Интегрировать реальные материалы, Composite/Profile и выбранные GDL-библиотеки; исследования: APA-P50.A02.S01
   - Источники/ветки: [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md)
 
 ### APA-P70.A03 — Планировка и редактируемая нативная BIM-модель
@@ -62,7 +62,7 @@ requires_approval tasks are not dispatchable until separate owner approval is re
 
 ### APA-P70.A04 — Конструктивные узлы, кладка, фасады и сопряжения
 
-- **APA-P70.A04.S01 [READY / WAITING_DEPS]** Вывести из модели обязательные семейства узлов и их условия применимости; зависимости: APA-P70.A02.S04; исследования: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- **APA-P70.A04.S01 [READY / ELIGIBLE]** Вывести из модели обязательные семейства узлов и их условия применимости; исследования: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
   - Источники/ветки: [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12)
 - **APA-P70.A04.S02 [READY / WAITING_DEPS]** Привязать выбранные узлы и композиции к нативным BIM элементам; зависимости: APA-P70.A04.S01; исследования: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
   - Источники/ветки: [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md)

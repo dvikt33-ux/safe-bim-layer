@@ -11,13 +11,13 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | --- | ---: |
 | BLOCKED | 8 |
 | CLAIMED | 0 |
-| DONE_PUBLISHED | 21 |
-| IN_PROGRESS | 1 |
+| DONE_PUBLISHED | 22 |
+| IN_PROGRESS | 0 |
 | PARTIAL | 15 |
 | READY | 36 |
 | SUPERSEDED | 0 |
-| DISPATCHABLE_NOW | 17 |
-| HELD_BY_DEPENDENCIES | 34 |
+| DISPATCHABLE_NOW | 18 |
+| HELD_BY_DEPENDENCIES | 33 |
 | EXPIRED_LEASES | 0 |
 
 ## Полный цикл разработки APA
@@ -30,7 +30,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| APA-P70.A02.S04 | codex-apa-material-native-20261011 | 2026-10-11T22:00:00Z | verified-project-material-library-integration |
+| — | — | — | — |
 
 ## CONTROL — 0 ready
 
@@ -66,11 +66,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | P3 | APA-P70.A02.S02 — Связать проектные требования с версиями нормативов и проверяемыми правилами | Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED |
 | P8 | APA-P00.A03.S03 — Publisher, дедупликация, retry, heartbeat и ошибки | Publisher E2E + оставшиеся recovery/heartbeat gates |
 
-## INTEGRATION — 0 ready
+## INTEGRATION — 1 ready
 
 | Priority | Task | Acceptance |
 | --- | --- | --- |
-| — | — | — |
+| P4 | APA-P70.A04.S01 — Вывести из модели обязательные семейства узлов и их условия применимости | Матрица всех применимых примыканий/отверстий/армопоясов/связей/крепежа с точным source/detail ID и открытыми пробелами |
 
 ## VALIDATION — 4 ready
 
@@ -103,7 +103,6 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | APA-P50.A03.S01 | APA-P50.A01.S03, APA-P50.A02.S02 |
 | APA-P50.A03.S02 | APA-P50.A03.S01 |
 | APA-P70.A01.S02 | APA-P50.A01.S01 |
-| APA-P70.A04.S01 | APA-P70.A02.S04 |
 | APA-P70.A04.S02 | APA-P70.A04.S01 |
 | APA-P70.A04.S03 | APA-P70.A04.S02 |
 | APA-P70.A05.S01 | APA-P70.A02.S02, APA-P70.A04.S03 |
