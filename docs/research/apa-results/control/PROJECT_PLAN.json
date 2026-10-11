@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 55,
+  "revision": 56,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -541,7 +541,13 @@
       "id": "ART-APA-PUBLISHER-RACE-PR38-20261011",
       "uri": "docs/research/apa-results/runs/2026-10-11/apa-publisher-controller-push-race-pr38-20261011.md",
       "kind": "REPORT",
-      "verification": "GITHUB_READBACK_PR38_OFFLINE_GIT_RACE_CI_PASS_NOT_DEPLOYED"
+      "verification": "GITHUB_READBACK_PR38_CI_5_GIT_CASES_DENIED_PUSH_FAIL_CLOSED_NOT_DEPLOYED"
+    },
+    "ART-APA-PUBLISHER-RACE-PR38-REVIEW-20261011": {
+      "id": "ART-APA-PUBLISHER-RACE-PR38-REVIEW-20261011",
+      "uri": "docs/research/apa-results/control/reviews/APA-P00.A03.S03-PR38-controller-push-race-20261011.md",
+      "kind": "REVIEW",
+      "verification": "INDEPENDENT_SOURCE_AND_ACTUAL_GIT_OFFLINE_CI_PASS_LIMITED_SCOPE_NO_MERGE"
     }
   },
   "tasks": {
