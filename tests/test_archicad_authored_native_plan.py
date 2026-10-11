@@ -41,7 +41,7 @@ class AuthoredNativePlanTests(unittest.TestCase):
                          "level":6,"height":3}]}
                 return super().__call__(cmd,args)
         api=ThreeLevelNative()
-        pack=A.compile_project_library_pack(b,specimen(),api=api)
+        pack=A.compile_project_library_pack(b,specimen(),read_api=api)
         self.assertEqual(pack["status"],
                          "PROJECT_NATIVE_MATERIAL_RESOLVED_NOT_ENGINEER_APPROVED")
         out=A.compile_authored_native_candidate(b,pack,layout(),HEIGHTS,api)
