@@ -252,3 +252,17 @@ See [full canonical factual report](runs/2026-10-11/apa-p70-a03-s02-owner-live-s
 **Technical finding:** the authored-BIM preview in PR44 missed `metrics.dimensionsMeters` required by the original `SceneWriter` execution contract. PR46 adds this required field and a deep-copy immutable preview factory with source XY-anchor and schema checks. A mocked call exercises the ORIGINAL `SceneWriter.preflight` with only GET commands; it confirms exact approved scratch identity, GetStories, Tapir version, material GUID and collision inventory, while rejecting active story mismatches. No live PLN run, native Create/Modify, Save or SQLite journal writes occurred.
 
 **Remaining human decision before a native mutation:** old `C:\\LocalAI\\APA_Test_House_01.pln` is the historical scratch scene and could contain earlier work; owner's `C:\\институт проект\\Улучшенная копия APA_Test_House_01.pln` is saved 45-GUID evidence; neither is an appropriate NEW-write target. User must designate a **fresh empty, disposable** saved project (e.g. a NEW unique PLN path) before an exact-path authorization gate can be added for a single explicit native test. The `го` permission to proceed with development does NOT supersede the `requires_approval` for an unidentified file's native Create/Modify. Next gate: verify that new PLN's exact identity/story/attribute/empty spatial inventory READ ONLY, bind it explicitly, then obtain approval for specific native graph+plan hash; never replay old journals.
+
+
+## S02 isolated-test PLN port diagnostics — Archicad processes 75280 and 96948 (2026-10-11)
+
+**Task:** `APA-P70.A03.S02 / Isolated PLN read-only preflight`. Owner created `C:\\LocalAI\\APA_Isolated_Writer_Test_01.pln` and attempted existing Tapir GET preflight at historical port `19726`. HTTP connection failed at the initial `GetProjectInfo` call with `ConnectionRefusedError [WinError 10061]`; **no native query was completed and no write request was made**.
+
+Owner then supplied `Get-Process` / `Get-NetTCPConnection -State Listen`:
+- Archicad PID `75280` listens on `0.0.0.0:19723` (plus other non-Tapir-candidate ports);
+- Archicad PID `96948` listens on `0.0.0.0:19724` (plus other non-Tapir-candidate ports);
+- no listener at `19726` in supplied result.
+
+**Confirmed:** two Archicad processes; historical port `19726` was no longer listening. **Not yet confirmed:** which candidate socket responds to Tapir JSON GET and whether either is attached to the *new exact* disposable PLN. Therefore do **not** select port 19723 or 19724 by guess, do **not** assert that either instance's model is empty or that its materials/stories match, and do not run native Create/Modify.
+
+**Next minimal owner-only diagnostic (read-only):** try `GetProjectInfo` against both candidate ports, compare each exact `projectPath` to `C:\\LocalAI\\APA_Isolated_Writer_Test_01.pln` and require exactly one match; then on that port only run `GetStories`, `GetAllElements`, `GetAttributesByType(BuildingMaterial)`, followed by a final `GetProjectInfo` identity comparison. The user-facing script uses ASCII Python literals and Unicode escapes for the material name to avoid PowerShell STDIN encoding loss. `P70.A03.S02` remains PARTIAL and `requires_approval=true`; no native mutation permission follows from the port discovery.
