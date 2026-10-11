@@ -249,7 +249,7 @@ Controller artifact record: `PROJECT_PLAN.json` revision **52**, [commit 8af838f
 
 | Artifact | Source and validation | Classification |
 |---|---|---|
-| `ART-APA-PUBLISHER-RACE-PR38-20261011` | [Canonical report](runs/2026-10-11/apa-publisher-controller-push-race-pr38-20261011.md), [draft PR #38](https://github.com/dvikt33-ux/safe-bim-layer/pull/38), [Actions #38150011113](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38150011113) **SUCCESS**: 23 Controller + 6 Publisher unit tests, four synthetic Git race cases incl. concurrent plan rev preservation and code-change rejection | **OFFLINE_CI_PASS, CANONICAL_DEPLOYMENT_NOT_VERIFIED**. Proposed fix is in new branch only; `APA-P00.A03.S03` remains PARTIAL, no task status changes. Does not claim full three-stage publisher serialization. |
+| `ART-APA-PUBLISHER-RACE-PR38-20261011` | [Canonical report](runs/2026-10-11/apa-publisher-controller-push-race-pr38-20261011.md), [independent source review](control/reviews/APA-P00.A03.S03-PR38-controller-push-race-20261011.md), [draft PR #38](https://github.com/dvikt33-ux/safe-bim-layer/pull/38), [Actions #38150622305](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38150622305) **SUCCESS**: five actual Git race/denial cases, Controller + Publisher unit suites, canonical plan/inbox PASS | **SOURCE+OFFLINE_CI_PASS / DEPLOYMENT_NOT_VERIFIED.** Remote race retries preserve accepted commits; rejected push with unchanged remote stops immediately. Only generated-view stage covered; prior report/receipt push risks remain. `APA-P00.A03.S03` PARTIAL, no task status changes. |
 
 ## APA-P70.A03.S02 — live 25/25 building-shell acceptance UNSAVED (2026-10-11)
 
