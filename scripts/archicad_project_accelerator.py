@@ -22,6 +22,7 @@ import archicad_building_shell as BUILD
 import archicad_semantic_brief as BRIEF
 import archicad_project_library_pack as PACK
 import archicad_semantic_spatial as SPATIAL
+import archicad_authored_native_plan as AUTHORED_NATIVE
 
 READS = frozenset({"GetProjectInfo", "GetStories", "GetAddOnVersion",
                   "GetAllElements", "Get3DBoundingBoxes", "GetDetailsOfElements",
@@ -141,6 +142,20 @@ def compile_project_spatial_plan(brief, project_pack, authored_layout):
     archicad_bim_graph.compile_graph, used in the later S02 emission gate.
     """
     return SPATIAL.compile_spatial(brief, project_pack, authored_layout)
+
+
+def compile_authored_native_candidate(brief, project_pack, authored_layout,
+                                      authored_story_heights, read_api,
+                                      schema_path=RUN.DEFAULT_SCENE_SCHEMA):
+    """Read-only existing BIM DAG compiler, no SceneWriter.execute.
+
+    Never exposes a native mutation token; no authority to write follows from
+    a valid offline command graph or from prior successful scratch evidence.
+    """
+    catalog_with_provenance(schema_path)
+    return AUTHORED_NATIVE.compile_candidate(
+        brief,project_pack,authored_layout,authored_story_heights,
+        read_api,schema_path=schema_path)
 
 
 def compile_intent(intent, schema_path):
