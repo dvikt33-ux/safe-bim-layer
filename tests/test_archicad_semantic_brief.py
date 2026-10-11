@@ -122,13 +122,16 @@ class SemanticBriefTests(unittest.TestCase):
         v=valid();v["targetProjectPath"]=r"C:\test\something.bpn"
         with self.assertRaisesRegex(ValueError,"EXACT_WINDOWS_PLN"):
             A.compile_project_brief(v)
+        v=valid();v["targetProjectPath"]=r"C:relative.pln"
+        with self.assertRaisesRegex(ValueError,"EXACT_WINDOWS_PLN"):
+            A.compile_project_brief(v)
 
     def test_never_accepts_unverified_room_story_or_forged_norm_pass(self):
         v=valid();v["rooms"][0]["storyId"]="unknown"
         with self.assertRaisesRegex(ValueError,"ROOM_HAS_UNKNOWN_STORY"):
             A.compile_project_brief(v)
         v=valid();v["constraints"][0]["evidenceStatus"]="PASS"
-        with self.assertRaisesRegex(ValueError,"DUPLICATE_OR_FALSE_VERIFIED"):
+        with self.assertRaisesRegex(ValueError,"DUPLICATE_OR_UNVERIFIED_PROVENANCE"):
             A.compile_project_brief(v)
 
     def test_duplicate_native_mapping_blocks(self):
