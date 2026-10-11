@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 92,
+  "revision": 93,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -742,6 +742,18 @@
       "uri": "docs/research/apa-results/receipts/APA-RUN-20261011-202800Z-native-geometry-integration.json",
       "kind": "PUBLISH_RECEIPT",
       "verification": "GITHUB_READBACK_VERIFIED_PUBLISHER_CI_SUCCESS"
+    },
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011": {
+      "id": "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+      "uri": "docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-211000Z-native-material-library-integration/REPORT.md",
+      "kind": "NATIVE_MATERIAL_LIBRARY_INTEGRATION_REPORT",
+      "verification": "SELECTED_BM_COMPOSITE_PROFILE_SURFACE_GDL_AC29_READBACK_PERSISTENCE_PASS_316_CI"
+    },
+    "ART-P70-A02-S04-MATERIAL-LIBRARY-RECEIPT-20261011": {
+      "id": "ART-P70-A02-S04-MATERIAL-LIBRARY-RECEIPT-20261011",
+      "uri": "docs/research/apa-results/receipts/APA-RUN-20261011-211000Z-native-material-library-integration.json",
+      "kind": "APA_PUBLISH_RECEIPT",
+      "verification": "DONE_PUBLISHED_READBACK_VERIFIED_PUBLISHER_CI38175547524_PASS"
     }
   },
   "tasks": {
@@ -3070,7 +3082,7 @@
       "action_id": "APA-P70.A02",
       "title": "Интегрировать реальные материалы, Composite/Profile и выбранные GDL-библиотеки",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "DONE_PUBLISHED",
       "priority": 3,
       "work_key": "verified-project-material-library-integration",
       "depends_on": [
@@ -3087,11 +3099,14 @@
         "Проверенные CSE/PLP и реальные проектные BM/Composite/Profile/Surface/GDL применены и прочитаны обратно; Unicode и стабильная identity Library Parts проверены; источники/лицензия/AC29 совместимость учтены; найденный файл не равен LIVE_VERIFIED."
       ],
       "acceptance": "Проверенные CSE/PLP и реальные проектные BM/Composite/Profile/Surface/GDL применены и прочитаны обратно; Unicode и стабильная identity Library Parts проверены; источники/лицензия/AC29 совместимость учтены; найденный файл не равен LIVE_VERIFIED.",
-      "owner": "codex-apa-material-native-20261011",
-      "lease_until": "2026-10-11T22:00:00Z",
-      "claim_ref": "APA-RUN-20261011-203100Z-material-library-integration",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+        "ART-P70-A02-S04-MATERIAL-LIBRARY-RECEIPT-20261011"
+      ],
       "blocked_reason": null
     },
     "APA-P70.A10.S01": {
@@ -3821,13 +3836,14 @@
         "purpose": "construction resolver",
         "source": "https://github.com/dvikt33-ux/safe-bim-layer/blob/03f94e9bb67e01a0944813b25eaea50b1afa0ead/scripts/archicad_project_library_pack.py",
         "source_artifact_ids": [
-          "ART-APA-PLP-CONTRACT"
+          "ART-APA-PLP-CONTRACT",
+          "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011"
         ],
-        "verification_level": "FOUND",
+        "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "scripts/archicad_project_library_pack.py",
         "advantage": "Reuse existing implementation and evidence; no parallel subsystem",
-        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied",
-        "integration_method": "Adapter to existing Project Accelerator/BIM Graph/SceneWriter",
+        "limitations": "Bounded original RC floor/native core selection only; construction-system suitability and engineer/normative approval NOT_VERIFIED",
+        "integration_method": "Retained project-local RC floor CSE/PLP feeds the existing authored core; selected native attributes use one journaled executor",
         "priority": 3,
         "target_module": "construction resolver",
         "target_task": "APA-P70.A02.S04",
@@ -3835,7 +3851,7 @@
           "APA-P70.A09.S01"
         ],
         "acceptance": "Verified selection and real attribute readback",
-        "implementation_state": "FOUND"
+        "implementation_state": "INTEGRATED"
       },
       {
         "name": "Authored Native Plan",
@@ -3930,13 +3946,14 @@
         "purpose": "project attributes",
         "source": "https://github.com/dvikt33-ux/safe-bim-layer/blob/03f94e9bb67e01a0944813b25eaea50b1afa0ead/scripts/archicad_template_builder.py",
         "source_artifact_ids": [
-          "ART-APA-ATTR-STORY-SLAB-20261011"
+          "ART-APA-ATTR-STORY-SLAB-20261011",
+          "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011"
         ],
-        "verification_level": "FOUND",
+        "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "scripts/archicad_template_builder.py",
         "advantage": "Reuse existing implementation and evidence; no parallel subsystem",
-        "limitations": "Historical source evidence requires current-source verification; live acceptance not implied",
-        "integration_method": "Adapter to existing Project Accelerator/BIM Graph/SceneWriter",
+        "limitations": "Bounded existing wall/column edits: total composite thickness retained; straight nonstretchable profile; no broad template regeneration or UI/engineering acceptance",
+        "integration_method": "Retained typed attribute headers reused by exact-name/GUID/details material adapter; native composite skins/profile outline/override readback plus explicit restore",
         "priority": 3,
         "target_module": "project attributes",
         "target_task": "APA-P70.A02.S04",
@@ -3944,7 +3961,7 @@
           "APA-P70.A09.S01"
         ],
         "acceptance": "BM/Composite/Profile/Surface identities resolved independently",
-        "implementation_state": "FOUND"
+        "implementation_state": "INTEGRATED"
       },
       {
         "name": "Tapir / Python JSON",
@@ -4036,15 +4053,16 @@
       {
         "name": "GDL / ТЕХНОНИКОЛЬ / manufacturer catalogs",
         "purpose": "library",
-        "source": "https://github.com/dvikt33-ux/safe-bim-layer/pull/20",
+        "source": "https://github.com/dvikt33-ux/safe-bim-layer/pull/51",
         "source_artifact_ids": [
-          "ART-PR20"
+          "ART-PR20",
+          "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011"
         ],
-        "verification_level": "FOUND",
+        "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
         "advantage": "Reuse published finding; compare only for a concrete gap",
-        "limitations": "Candidate/registered research, no inferred install/license/live support",
-        "integration_method": "Reuse current module; isolate adapter only when required",
+        "limitations": "Exact TN ЭКО75х340 on AC29 only. Stored height340mm, physical body310mm. Same-name UI macro differs in GUID; UI/roof installation/full151file compatibility/full-package rights/92unreadable catalog slots/AC30 NOT_VERIFIED. Source GSM CC0 1.0 metadata recorded.",
+        "integration_method": "One selected local TN GSM and two UI pictures, no overwrite; exact Unicode/GUID Object-tool identity; retained Graph/SceneWriter creates one object with whole-model readback and Save/Open",
         "priority": 3,
         "target_module": "library",
         "target_task": "APA-P70.A02.S04",
@@ -4052,7 +4070,7 @@
           "APA-P70.A09.S01"
         ],
         "acceptance": "Unicode, stable library identity, rights and target-version runtime verified",
-        "implementation_state": "FOUND"
+        "implementation_state": "INTEGRATED"
       },
       {
         "name": "Details v2.12 / constructive nodes",
