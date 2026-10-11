@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/safe-bim/project-profile-v0.1.schema.json",
+  "title": "Safe BIM Project Profile v0.1 (research draft)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "profile_id",
+    "profile_version",
+    "compatibility",
+    "resource_policy"
+  ],
+  "properties": {
+    "schema_version": { "const": "0.1" },
+    "profile_id": { "type": "string", "minLength": 1 },
+    "profile_version": { "type": "string", "minLength": 1 },
+    "description": { "type": "string" },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["archicad_major", "tapir_version"],
+      "properties": {
+        "archicad_major": { "type": "integer", "const": 29 },
+        "archicad_build_min": { "type": "integer" },
+        "archicad_build_max": { "type": "integer" },
+        "tapir_version": { "type": "string", "const": "1.5.9" },
+        "tapir_source_commit": { "type": "string" },
+        "safe_bim_capability_manifest_version": { "type": "string" }
+      }
+    },
+    "project_seed": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "type": "string", "enum": ["tpl", "seed_pln", "existing_project"] },
+        "path_hint": { "type": "string" },
+        "sha256": { "type": "string" },
+        "required_project_info": { "type": "object" }
+      }
+    },
+    "stories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["index", "level"],
+        "properties": {
+          "index": { "type": "integer" },
+          "level": { "type": "number" },
+          "name": { "type": "string" },
+          "required": { "type": "boolean", "default": true }
+        }
+      }
+    },
+    "resource_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["libraries", "favorites", "attributes"],
+      "properties": {
+        "libraries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["role", "required"],
+            "properties": {
+              "role": { "type": "string" },
+              "required": { "type": "boolean" },
+              "name": { "type": "string" },
+              "path_hint": { "type": "string" },
+              "kind": { "type": "string" },
+              "sha256": { "type": "string" }
+            }
+          }
+        },
+        "favorites": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["role", "element_type", "favorite_name", "required"],
+            "properties": {
+              "role": { "type": "string" },
+              "element_type": { "type": "string" },
+              "favorite_name": { "type": "string" },
+              "required": { "type": "boolean" },
+              "source_profile_version": { "type": "string" },
+              "dependency_fingerprint": { "type": "object" }
+            }
+          }
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["role", "attribute_type", "name", "required"],
+            "properties": {
+              "role": { "type": "string" },
+              "attribute_type": { "type": "string" },
+              "name": { "type": "string" },
+              "guid": { "type": "string" },
+              "critical_fingerprint": { "type": "object" },
+              "required": { "type": "boolean" }
+            }
+          }
+        }
+      }
+    },
+    "classifications": { "type": "array", "items": { "type": "object" } },
+    "properties": { "type": "array", "items": { "type": "object" } },
+    "zone_categories": { "type": "array", "items": { "type": "object" } },
+    "annotation_presets": { "type": "object" },
+    "document_presets": { "type": "object" },
+    "hotlink_catalog": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role", "source_path", "sha256"],
+        "properties": {
+          "role": { "type": "string" },
+          "source_path": { "type": "string" },
+          "sha256": { "type": "string" },
+          "expected_story_structure": { "type": "array", "items": { "type": "object" } },
+          "version": { "type": "string" }
+        }
+      }
+    },
+    "gdl_catalog": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role", "main_guid"],
+        "properties": {
+          "role": { "type": "string" },
+          "main_guid": { "type": "string" },
+          "library_part_name": { "type": "string" },
+          "version": { "type": "string" },
+          "source_hash": { "type": "string" }
+        }
+      }
+    },
+    "navigator_expectations": { "type": "object" },
+    "publisher_expectations": { "type": "object" },
+    "global_operation_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "allow_story_changes": { "type": "boolean", "default": false },
+        "allow_library_set_changes": { "type": "boolean", "default": false },
+        "allow_hotlink_relink": { "type": "boolean", "default": false },
+        "allow_geolocation_changes": { "type": "boolean", "default": false },
+        "save_policy": { "type": "string", "enum": ["manual", "phase", "explicit_nodes"] }
+      }
+    }
+  }
+}
