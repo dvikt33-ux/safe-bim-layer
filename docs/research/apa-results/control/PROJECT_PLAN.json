@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 87,
+  "revision": 88,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -716,6 +716,18 @@
     "ART-P70-A03-S04-COMPLETENESS-RECEIPT-20261011": {
       "id": "ART-P70-A03-S04-COMPLETENESS-RECEIPT-20261011",
       "uri": "docs/research/apa-results/receipts/APA-RUN-20261011-200100Z-native-completeness.json",
+      "kind": "PUBLICATION_RECEIPT",
+      "verification": "GITHUB_READBACK_AND_CI_SUCCESS"
+    },
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011": {
+      "id": "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+      "uri": "docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md",
+      "kind": "CORE_ACCEPTANCE_REPORT",
+      "verification": "AUTHORED_NATIVE_CREATE_EDIT_RESTORE_SAVE_REOPEN_PASS"
+    },
+    "ART-P70-A08-S04-CORE-ACCEPTANCE-RECEIPT-20261011": {
+      "id": "ART-P70-A08-S04-CORE-ACCEPTANCE-RECEIPT-20261011",
+      "uri": "docs/research/apa-results/receipts/APA-RUN-20261011-200500Z-editable-core-acceptance.json",
       "kind": "PUBLICATION_RECEIPT",
       "verification": "GITHUB_READBACK_AND_CI_SUCCESS"
     }
@@ -2982,7 +2994,7 @@
       "action_id": "APA-P70.A08",
       "title": "Принять ядро: задание → связное редактируемое здание → правка → readback",
       "kind": "VALIDATION",
-      "status": "IN_PROGRESS",
+      "status": "DONE_PUBLISHED",
       "priority": 0,
       "work_key": "editable-native-core-e2e-acceptance",
       "depends_on": [
@@ -2998,11 +3010,14 @@
         "Один brief создаёт связное небольшое здание; все требуемые типы поддержаны, GUID/этажи/материалы/host/геометрия подтверждены; согласованная правка сохраняет GUID и не дублирует модель; сохранение и повторное чтение подтверждены. Четыре элемента и offline CI не достаточны. Инженерная/нормативная приёмка отдельно."
       ],
       "acceptance": "Один brief создаёт связное небольшое здание; все требуемые типы поддержаны, GUID/этажи/материалы/host/геометрия подтверждены; согласованная правка сохраняет GUID и не дублирует модель; сохранение и повторное чтение подтверждены. Четыре элемента и offline CI не достаточны. Инженерная/нормативная приёмка отдельно.",
-      "owner": "codex-apa-core-native-20261011",
-      "lease_until": "2026-10-11T21:00:00Z",
-      "claim_ref": "APA-RUN-20261011-200500Z-editable-core-acceptance",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+        "ART-P70-A08-S04-CORE-ACCEPTANCE-RECEIPT-20261011"
+      ],
       "blocked_reason": null
     },
     "APA-P70.A09.S01": {
