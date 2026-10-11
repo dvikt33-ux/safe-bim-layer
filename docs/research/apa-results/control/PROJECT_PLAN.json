@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 63,
+  "revision": 64,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -576,6 +576,18 @@
     "ART-P70-A02-S01-PUBLISH-RECEIPT-20261011": {
       "id": "ART-P70-A02-S01-PUBLISH-RECEIPT-20261011",
       "uri": "docs/research/apa-results/receipts/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories.json",
+      "kind": "RECEIPT",
+      "verification": "GITHUB_READBACK_VERIFIED"
+    },
+    "ART-P70-A02-S03-PROJECT-LIBRARY-20261011": {
+      "id": "ART-P70-A02-S03-PROJECT-LIBRARY-20261011",
+      "uri": "docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-163145Z-p70-a02-s03-library-pack/REPORT.md",
+      "kind": "REPORT",
+      "verification": "GITHUB_READBACK_VERIFIED"
+    },
+    "ART-P70-A02-S03-PUBLISH-RECEIPT-20261011": {
+      "id": "ART-P70-A02-S03-PUBLISH-RECEIPT-20261011",
+      "uri": "docs/research/apa-results/receipts/APA-RUN-20261011-163145Z-p70-a02-s03-library-pack.json",
       "kind": "RECEIPT",
       "verification": "GITHUB_READBACK_VERIFIED"
     }
@@ -2233,7 +2245,7 @@
       "action_id": "APA-P70.A02",
       "title": "Собрать проектный Library Pack из проверяемых строительных систем и узлов",
       "kind": "BUILD",
-      "status": "IN_PROGRESS",
+      "status": "DONE_PUBLISHED",
       "priority": 2,
       "work_key": "project-library-pack-assembly",
       "depends_on": [
@@ -2251,11 +2263,14 @@
         "Отобранные CSE, источники/хэши/лицензии, интерфейсы, совместимые AC29 объекты и список неподтверждённых узлов"
       ],
       "acceptance": "Отобранные CSE, источники/хэши/лицензии, интерфейсы, совместимые AC29 объекты и список неподтверждённых узлов",
-      "owner": "chatgpt-gpt6-manual",
-      "lease_until": "2026-10-11T21:30:00Z",
-      "claim_ref": "APA-RUN-20261011-170300Z-p70-a02-s03-project-library-pack",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-P70-A02-S03-PROJECT-LIBRARY-20261011",
+        "ART-P70-A02-S03-PUBLISH-RECEIPT-20261011"
+      ],
       "blocked_reason": null
     },
     "APA-P70.A03.S01": {
