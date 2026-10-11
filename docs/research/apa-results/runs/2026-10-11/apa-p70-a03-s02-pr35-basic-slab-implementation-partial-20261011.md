@@ -266,3 +266,32 @@ The owner also supplied results from `diagnose_apa_suffix4_timeout.py --journal-
 Published `scripts/inspect_apa_orphan_s2_partition.py` in [PR #35](https://github.com/dvikt33-ux/safe-bim-layer/pull/35): strictly read-only, validates the original fourth-step approved durable CreateWalls parameters, original 32 + exactly one new GUID, pinned project/stories, native Wall type and story 1 (+3m), reference coordinates, thickness, height, offset and Z. Emits `READ_ONLY_ORPHAN_S2_PARTITION_VERIFIED` only on full typed match, and never rewrites original journal or grants a replay. Synthetic tests recreate the exact failure mode where native Create succeeds but response times out because UI waits, leaving `ATTEMPTED` / GUID null in SQLite. [GitHub CI run #38148800622](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38148800622) **SUCCESS: 185/185 offline tests PASS**.
 
 **Next step:** close the Archicad informational modal with `Продолжить` once (do not silently disable warnings), then run the new read-only typed GUID audit. No additional native creates are authorized until the exact orphan is read back and a new unique, journal-backed 12-step suffix is independently approved. The original scene remains unsaved; full 25-element acceptance remains **NOT_VERIFIED**.
+
+## Live independent typed readback: fourth-suffix timeout orphan IS s2-partition-1
+
+After modal review, owner ran `scripts/inspect_apa_orphan_s2_partition.py --port 19726`. The command produced:
+
+```json
+{
+ "status":"READ_ONLY_ORPHAN_S2_PARTITION_VERIFIED",
+ "sceneId":"apa-suffix4-20261011-031123-7181b47c",
+ "operation":"s2-partition-1",
+ "guid":"bcfc99f0-50d2-4cd5-bf27-8f436c21683a",
+ "journalState":"ATTEMPTED",
+ "nativeType":"Wall",
+ "nativeFloorIndex":1,
+ "expectedAbsoluteZ":3.0,
+ "nativeAbsoluteZ":3,
+ "plannedElementsVerified":13,
+ "totalModelElements":33,
+ "remainingPlannedCreates":12,
+ "journalRewritten":false,
+ "modelWriteCalls":0,
+ "replayOfFourthSceneAllowed":false,
+ "outcome":"RECONCILED_IN_NATIVE_NOT_IN_ORIGINAL_CREATE_LEDGER"
+}
+```
+
+**Classification: USER_SUPPLIED / LIVE_TYPED_READ_ONLY_PASS.** All native wall geometry fields from the historical `s2-partition-1` CreateWalls intent were verified, including endpoints, height, thickness, offset, arc and absolute story Z. The model now contains original 20 + verified planned 13 = **33**. Zero old GUIDs missing. The native GUID above remains absent from the *old* fourth Create journal (`ATTEMPTED, guid=null`), and that journal must never be rewritten to pretend the transport response succeeded. Do not replay the fourth reserved scene. The next step is a uniquely reserved **fifth** continuation using 13 proven existing GUIDs, only the remaining **12** planned creates, preserving original graph and all old partial records. The missing-visibility modal is consistent with the earlier 15-second HTTP timeout, but timing causality is not formally proven.
+
+**Status:** 13/25 reported live verified, 12 unbuilt, unsaved project, no fifth scene created.
