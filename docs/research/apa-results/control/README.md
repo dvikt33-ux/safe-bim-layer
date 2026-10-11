@@ -2,6 +2,8 @@
 
 **Реальный статус:** GitHub Actions [38046610758](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38046610758) SUCCESS; 6 publisher + 10 controller offline tests, generated views и GitHub REST readback. Это управляющий реестр/диспетчер, **не** автономный ChatGPT-агент 24/7.
 
+**План выпуска ускорителя:** [APA_ACCELERATOR_DELIVERY_ROADMAP_20261011.md](APA_ACCELERATOR_DELIVERY_ROADMAP_20261011.md) — последовательные рабочие поставки, критический путь, критерии приёмки и границы интеграции. Это proposed delivery roadmap, а **не** второй источник статусов: до независимого аудита задачи/зависимости/claims действуют только из `PROJECT_PLAN.json`.
+
 ## Один источник поручений
 
 [PROJECT_PLAN.json](PROJECT_PLAN.json) — единственный авторитетный машиночитаемый план. Его статусы и зависимости важнее устаревших ручных MASTER_PLAN, CURRENT_STATUS и RESEARCH_QUEUE.
