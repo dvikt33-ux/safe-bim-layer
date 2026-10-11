@@ -8,16 +8,16 @@ requires_approval tasks are not dispatchable until separate owner approval is re
 ## Краткая сводка
 
 - План: APA-P70 — Разработка APA — полный цикл проектирования и выпуска
-- Статус: **PARTIAL**; завершено 2/23 подзадач.
-- Сейчас: не выполняется; нет IN_PROGRESS.
-- Следующая доступная: APA-P70.A02.S01 — Собрать семантический контракт задания, участка, этажей и помещений
+- Статус: **IN_PROGRESS**; завершено 2/23 подзадач.
+- Сейчас: APA-P70.A02.S01
+- Следующая доступная: нет, см. зависимости и разрешения
 
 ## Этапы → задачи
 
 | Задача | Состояние | Выполнено подзадач |
 | --- | --- | ---: |
 | APA-P70.A01 — Единая база существующих возможностей и доказательств | PARTIAL | 2/3 |
-| APA-P70.A02 — Требования, нормативы и библиотека конкретного проекта | READY | 0/3 |
+| APA-P70.A02 — Требования, нормативы и библиотека конкретного проекта | IN_PROGRESS | 0/3 |
 | APA-P70.A03 — Планировка и редактируемая нативная BIM-модель | WAITING | 0/3 |
 | APA-P70.A04 — Конструктивные узлы, кладка, фасады и сопряжения | WAITING | 0/3 |
 | APA-P70.A05 — Расчёт несущих систем и инженерная обратная связь | WAITING | 0/3 |
@@ -38,7 +38,7 @@ requires_approval tasks are not dispatchable until separate owner approval is re
 
 ### APA-P70.A02 — Требования, нормативы и библиотека конкретного проекта
 
-- **APA-P70.A02.S01 [READY / ELIGIBLE]** Собрать семантический контракт задания, участка, этажей и помещений; исследования: APA-P10.A01.S02, APA-P10.A02.S02, APA-P50.A02.S01
+- **APA-P70.A02.S01 [IN_PROGRESS]** Собрать семантический контракт задания, участка, этажей и помещений; исследования: APA-P10.A01.S02, APA-P10.A02.S02, APA-P50.A02.S01
   - Источники/ветки: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md)
 - **APA-P70.A02.S02 [READY / WAITING_DEPS]** Связать проектные требования с версиями нормативов и проверяемыми правилами; зависимости: APA-P70.A02.S01; исследования: APA-P10.A01.S02, APA-P10.A02.S02, APA-P50.A02.S01
   - Источники/ветки: [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md)

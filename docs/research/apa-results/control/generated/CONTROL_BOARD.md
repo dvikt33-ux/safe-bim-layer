@@ -12,11 +12,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | BLOCKED | 8 |
 | CLAIMED | 0 |
 | DONE_PUBLISHED | 12 |
-| IN_PROGRESS | 0 |
+| IN_PROGRESS | 1 |
 | PARTIAL | 15 |
-| READY | 39 |
+| READY | 38 |
 | SUPERSEDED | 0 |
-| DISPATCHABLE_NOW | 17 |
+| DISPATCHABLE_NOW | 16 |
 | HELD_BY_DEPENDENCIES | 37 |
 | EXPIRED_LEASES | 0 |
 
@@ -30,7 +30,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| — | — | — | — |
+| APA-P70.A02.S01 | chatgpt-gpt6-manual | 2026-10-11T20:00:00Z | project-brief-and-story-contract |
 
 ## CONTROL — 0 ready
 
@@ -59,12 +59,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | P1 | APA-P50.A02.S01 — Единый каталог AC29 SDK/Tapir/Python/GDL/IFC/MEP инструментов | Capability matrix, версии, пересечения |
 | P2 | APA-P10.A02.S03 — MCP/IFC/openBIM и альтернативы | Матрица альтернатив с границами |
 
-## BUILD — 2 ready
+## BUILD — 1 ready
 
 | Priority | Task | Acceptance |
 | --- | --- | --- |
 | P0 | APA-P00.A03.S03 — Publisher, дедупликация, retry, heartbeat и ошибки | Publisher E2E + оставшиеся recovery/heartbeat gates |
-| P1 | APA-P70.A02.S01 — Собрать семантический контракт задания, участка, этажей и помещений | Два режима GENERATE_FROM_ZERO/ADAPT_EXISTING; требования/ограничения, первый этаж на ±0.000, index только по GetStories |
 
 ## INTEGRATION — 0 ready
 

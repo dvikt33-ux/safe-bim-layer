@@ -868,7 +868,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A02.S01
 
-**Собрать семантический контракт задания, участка, этажей и помещений** — BUILD / READY / P1
+**Собрать семантический контракт задания, участка, этажей и помещений** — BUILD / IN_PROGRESS / P1
 
 - Parent: APA-P70 → APA-P70.A02
 - Topic: PRODUCT_DEVELOPMENT
@@ -876,7 +876,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P70.A01.S03
 - Related, check before duplicating: none
 - Acceptance: Два режима GENERATE_FROM_ZERO/ADAPT_EXISTING; требования/ограничения, первый этаж на ±0.000, index только по GetStories
-- Owner/lease: unclaimed
+- Owner/lease: chatgpt-gpt6-manual / 2026-10-11T20:00:00Z
 - Requires owner approval: False
 - Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md)
 - Existing V2 runs: none
