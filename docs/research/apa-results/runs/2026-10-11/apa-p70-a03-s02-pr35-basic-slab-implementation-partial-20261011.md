@@ -374,3 +374,18 @@ After the previously recorded successful fifth-suffix **read-only** preflight (r
 4. Record explicit SAVE_REOPEN_PASS or FAIL from actual user output; only then consider promotion from `UNSAVED`.
 
 **Source:** [draft PR #35](https://github.com/dvikt33-ux/safe-bim-layer/pull/35), fifth suffix `scripts/continue_apa_after_orphan_partition.py`; [last 195/195 offline CI](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38149533972). All original failed/partial journals remain historical evidence, no retry.
+
+## Owner-supplied Save As destination; independent read-only re-open verification ready
+
+**Owner-supplied saved-copy path:** `C:\\институт проект\\Улучшенная копия APA_Test_House_01.pln`. The owner supplied this path after the successful in-memory 25/25 scene. Path alone does **not** establish that the file exists on disk, has been closed/reopened, or has retained all the geometry after serialization. **SAVE_REOPEN = NOT_VERIFIED** until direct native readback from the reopened exact-copy path.
+
+Source `scripts/verify_apa_saved_copy_read_only.py` is published in [draft PR #35](https://github.com/dvikt33-ux/safe-bim-layer/pull/35) to verify the *new exact path*, not the original approved scratch writer path. The verifier:
+- checks physical file existence/nonzero size and `GetProjectInfo.projectPath` / `projectName` matching the owner's Unicode saved-copy path, exact Tapir 1.5.10 version and local, non-Teamwork saved project; no active-story requirement on a reopened copy;
+- independently loads the SHA256-checked original graph and the immutable first/second/third/fourth/fifth SQLite journals in **mode=ro**, demands final fifth scene `COMPLETE_UNSAVED`, exactly 12 fifth PASS GUIDs, 13 previously verified elements including the orphan GUID, both prior slab repair states/hashes;
+- requires an exact `GetAllElements` set of **45 GUIDs** = original 20 + planned 25 (no duplicates, no missing, no unexpected);
+- for *each* of the original 25 steps performs typed `GetDetailsOfElements` and validates Wall positions/heights/thickness/absolute native story Z, Slab Basic/thickness/polygon/building-material GUID/absolute 0m and +3m Z, hosted opening width/height/sill/offset and owner Wall GUID, and story mapping; checks copy identity and inventory once more before PASS;
+- allows **only** `GetProjectInfo`, `GetAddOnVersion`, `GetStories`, `GetAllElements`, `GetDetailsOfElements` native commands, makes no file or SQLite writes, and does not call original write utilities' exact old-file guard. Reports `OPEN_SAVED_COPY_TYPED_READBACK_PASS` only on full native matches, otherwise blocks without any mutation.
+
+**Explicit limitation:** native API and local path cannot independently prove that a user truly closed and reopened a file. Owner must **manually reopen** this specific copy before running the verifier; record this owner action separately. A file-path match alone must not be promoted to `SAVE_REOPEN_PASS` without that manual transition and a successful fresh readback.
+
+[GitHub CI #38150899253](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38150899253) **SUCCESS: 207/207 offline tests PASS**. Tests exercise synthetic fully created 45 GUID copy, exact UTF-8/Unicode copy path, wrong/old path, missing file, GUID drift, bad upper Slab Z and zero native writes. **No actual saved copy was accessed by CI.** Source commit `62789eca361df59b7749f3930aa77f269c5258ed` (script originally at `8b2e816`). **Next gate:** owner confirms actual copy exists, manually reopens that copy in Archicad 29, runs the read-only verifier, returns full JSON for independent publication.
