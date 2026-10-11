@@ -49,7 +49,7 @@ def normalize(doc):
     if target is not None:
         if (not isinstance(target,str) or
                 len(target)>260 or target!=target.strip() or
-                not PureWindowsPath(target).drive or
+                not PureWindowsPath(target).is_absolute() or
                 PureWindowsPath(target).suffix.casefold()!=".pln"):
             raise ValueError("EXACT_WINDOWS_PLN_TARGET_REQUIRED")
     if doc["mode"]=="ADAPT_EXISTING" and target is None:
@@ -113,8 +113,8 @@ def normalize(doc):
         if not isinstance(row,dict) or set(row)!={"id","text","evidenceStatus"}:
             raise ValueError("INVALID_CONSTRAINT_FIELDS")
         cid=_id(row["id"],"CONSTRAINT_ID")
-        if cid in seen_cons or row["evidenceStatus"] not in {"UNVERIFIED","SOURCE_VERIFIED"}:
-            raise ValueError("DUPLICATE_OR_FALSE_VERIFIED_CONSTRAINT")
+        if cid in seen_cons or row["evidenceStatus"] != "UNVERIFIED":
+            raise ValueError("DUPLICATE_OR_UNVERIFIED_PROVENANCE_CANNOT_ASSERT_RULE_PASS")
         seen_cons.add(cid)
         checked_cons.append({"id":cid,"text":_name(row["text"],"CONSTRAINT_TEXT"),
                              "evidenceStatus":row["evidenceStatus"]})
