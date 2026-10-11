@@ -900,7 +900,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A02.S03
 
-**Собрать проектный Library Pack из проверяемых строительных систем и узлов** — BUILD / READY / P2
+**Собрать проектный Library Pack из проверяемых строительных систем и узлов** — BUILD / IN_PROGRESS / P2
 
 - Parent: APA-P70 → APA-P70.A02
 - Topic: PRODUCT_DEVELOPMENT
@@ -908,7 +908,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P70.A02.S01, APA-P70.A01.S03
 - Related, check before duplicating: none
 - Acceptance: Отобранные CSE, источники/хэши/лицензии, интерфейсы, совместимые AC29 объекты и список неподтверждённых узлов
-- Owner/lease: unclaimed
+- Owner/lease: chatgpt-gpt6-manual / 2026-10-11T21:30:00Z
 - Requires owner approval: False
 - Source inputs: [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
 - Existing V2 runs: none

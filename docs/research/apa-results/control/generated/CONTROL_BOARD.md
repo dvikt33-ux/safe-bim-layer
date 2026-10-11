@@ -12,11 +12,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | BLOCKED | 8 |
 | CLAIMED | 0 |
 | DONE_PUBLISHED | 13 |
-| IN_PROGRESS | 0 |
+| IN_PROGRESS | 1 |
 | PARTIAL | 15 |
-| READY | 38 |
+| READY | 37 |
 | SUPERSEDED | 0 |
-| DISPATCHABLE_NOW | 18 |
+| DISPATCHABLE_NOW | 17 |
 | HELD_BY_DEPENDENCIES | 35 |
 | EXPIRED_LEASES | 0 |
 
@@ -30,7 +30,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| — | — | — | — |
+| APA-P70.A02.S03 | chatgpt-gpt6-manual | 2026-10-11T21:30:00Z | project-library-pack-assembly |
 
 ## CONTROL — 0 ready
 
@@ -59,13 +59,12 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | P1 | APA-P50.A02.S01 — Единый каталог AC29 SDK/Tapir/Python/GDL/IFC/MEP инструментов | Capability matrix, версии, пересечения |
 | P2 | APA-P10.A02.S03 — MCP/IFC/openBIM и альтернативы | Матрица альтернатив с границами |
 
-## BUILD — 3 ready
+## BUILD — 2 ready
 
 | Priority | Task | Acceptance |
 | --- | --- | --- |
 | P0 | APA-P00.A03.S03 — Publisher, дедупликация, retry, heartbeat и ошибки | Publisher E2E + оставшиеся recovery/heartbeat gates |
 | P2 | APA-P70.A02.S02 — Связать проектные требования с версиями нормативов и проверяемыми правилами | Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED |
-| P2 | APA-P70.A02.S03 — Собрать проектный Library Pack из проверяемых строительных систем и узлов | Отобранные CSE, источники/хэши/лицензии, интерфейсы, совместимые AC29 объекты и список неподтверждённых узлов |
 
 ## INTEGRATION — 0 ready
 
