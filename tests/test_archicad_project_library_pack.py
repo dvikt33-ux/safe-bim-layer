@@ -45,13 +45,13 @@ def specimen():
 class NativeGetOnly(SyntheticStories):
     def __init__(self, names=None):
         super().__init__()
-        self.names=names or [BM]
+        self.material_names=names if names is not None else [BM]
     def __call__(self,cmd,args):
         if cmd=="GetAttributesByType":
             self.calls.append(cmd)
             self._assert_attribute_type(args)
             return {"attributes":[{"name":x,"attributeId":{"guid":BM_GUID}}
-                                  for x in self.names]}
+                                  for x in self.material_names]}
         return super().__call__(cmd,args)
     @staticmethod
     def _assert_attribute_type(args):
@@ -131,7 +131,6 @@ class ProjectLibraryPackTests(unittest.TestCase):
 
     def test_never_accepts_missing_story(self):
         native=NativeGetOnly()
-        native.names=("Elsewhere","Not used")
         # Duplicate/unknown native BM always fails; first ensure story conflict gate.
         wrong=NativeGetOnly()
         wrong.names=[BM]
