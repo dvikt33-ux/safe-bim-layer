@@ -7,6 +7,7 @@ bearing lines, actual GetStories bindings and exact single Building Material.
 from __future__ import annotations
 
 from collections import Counter
+import copy
 import hashlib
 import math
 from pathlib import Path
@@ -191,6 +192,14 @@ def as_existing_scene_writer_preview(candidate):
     counts=dict(Counter(x["command"] for x in graph["operations"]))
     if counts!=candidate.get("plannedNativeCommands"):
         raise ValueError("GRAPH_NATIVE_COMMAND_COUNTS_DRIFT")
+    dimensions={
+        "width":outline["xMax"]-outline["xMin"],
+        "depth":outline["yMax"]-outline["yMin"],
+        "height":last["level"]+final_height-stories[0]["level"],
+    }
+    if any(type(v) not in (int,float) or not math.isfinite(v) or v<=0
+           for v in dimensions.values()):
+        raise ValueError("INVALID_AUTHORED_SCENE_DIMENSIONS")
     return {
         "status":"SCENE_PREVIEW_OFFLINE",
         "sourcePlanHash":checked["sourcePlanHash"],
@@ -205,7 +214,8 @@ def as_existing_scene_writer_preview(candidate):
         "envelope":{**outline,
                     "zMin":stories[0]["level"]-.3,
                     "zMax":last["level"]+final_height+.3},
-        "metrics":{"elementCount":candidate["operationCount"],
+        "metrics":{"dimensionsMeters":dimensions,
+                   "elementCount":candidate["operationCount"],
                    "nativeCommands":counts,
                    "authoredRooms":len(candidate["authoredRoomIds"]),
                    "structuralVerified":False,"normativeVerified":False},
@@ -214,3 +224,30 @@ def as_existing_scene_writer_preview(candidate):
                        "MISSING_PROVEN_WALL_CSE_AND_JUNCTIONS"],
         "liveWriteAuthorized":False,"plnChanged":False,
     }
+
+
+def make_read_only_scene_writer_preview_factory(candidate):
+    """Existing SceneWriter.preview_factory contract; only pure and immutable.
+
+    This object cannot invoke the writer, set a port, create a journal, or
+    grant permission. Requires caller's anchors to equal authored XY minima
+    instead of ignoring coordinates and silently planning somewhere else.
+    Each request revalidates the source schema/hash and yields a deep copy.
+    """
+    frozen=copy.deepcopy(candidate)
+    preview=as_existing_scene_writer_preview(frozen)
+    outline=preview["envelope"]
+    def factory(x, y, schema_path):
+        if (type(x) not in (int,float) or type(y) not in (int,float)
+                or not math.isfinite(x) or not math.isfinite(y)
+                or abs(x-outline["xMin"])>1e-6
+                or abs(y-outline["yMin"])>1e-6):
+            raise ValueError("SCENE_ANCHOR_DIFFERS_FROM_AUTHORED_OUTLINE")
+        expected=Path(preview["schemaPath"]).resolve()
+        if Path(schema_path).resolve()!=expected:
+            raise ValueError("WRITER_SCHEMA_PATH_CHANGED_FROM_AUTHORED_PLAN")
+        fresh=as_existing_scene_writer_preview(frozen)
+        if fresh["sourcePlanHash"]!=preview["sourcePlanHash"]:
+            raise ValueError("AUTHORED_PREVIEW_SOURCE_HASH_CHANGED")
+        return copy.deepcopy(fresh)
+    return factory
