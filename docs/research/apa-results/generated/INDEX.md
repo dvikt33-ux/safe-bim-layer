@@ -18,5 +18,6 @@ Generated projection from immutable V2 runs. Legacy reports remain in ARTIFACT_R
 | [APA-RUN-20261011-161511Z-p70-semantic-brief-getstories](../runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md) | APA-P70.A02.S01 | OFFLINE | EVIDENCE_READY |
 | [APA-RUN-20261011-163145Z-p70-a02-s03-library-pack](../runs/2026-10-11/APA-RUN-20261011-163145Z-p70-a02-s03-library-pack/REPORT.md) | APA-P70.A02.S03 | OFFLINE | EVIDENCE_READY |
 | [APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths](../runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md) | APA-P70.A03.S01 | OFFLINE | EVIDENCE_READY |
+| [APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial](../runs/2026-10-11/APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial/REPORT.md) | APA-P70.A03.S02 | OFFLINE | EVIDENCE_READY |
 
 Publication receipts are in ../receipts/. Evidence status is not publication status.

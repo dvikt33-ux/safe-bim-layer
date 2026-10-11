@@ -1,0 +1,69 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-P70-S02-EXISTING-NATIVE-DAG-OFFLINE",
+      "evidence_ids": [
+        "EV-P70-S02-NATIVE-ADAPTER",
+        "EV-P70-S02-ENTRY",
+        "EV-P70-S02-TESTS",
+        "EV-P70-S02-CI"
+      ],
+      "statement": "Authored bearing line/slab geometry and real source-story material bindings compile to the existing native Tapir BIM graph without synthetic non-authored walls.",
+      "status": "OFFLINE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-S02-NO-WRITES",
+      "evidence_ids": [
+        "EV-P70-S02-NATIVE-ADAPTER",
+        "EV-P70-S02-TESTS"
+      ],
+      "statement": "The new adapter has no native write commands, journal reservations or auto-execute; source valid does not grant approval.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-S02-LIVE-BLOCKERS",
+      "evidence_ids": [
+        "EV-P70-S02-NATIVE-ADAPTER",
+        "EV-P70-S02-CI"
+      ],
+      "statement": "Generic durable Basic slab Create->Modify and live test-PLN approval remain open, full S02/native structure NOT_VERIFIED.",
+      "status": "NOT_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-P70-S02-NATIVE-ADAPTER",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "92df00e0a3728f71e45514376767af76ba1dffb5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-native-bim-plan-20261011/scripts/archicad_authored_native_plan.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-P70-S02-ENTRY",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "74b18e021207de1beaf0a8f63e3718d84540b011",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-native-bim-plan-20261011/scripts/archicad_project_accelerator.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-P70-S02-TESTS",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "c383ca5d58f6ff8defe259f073b3cd74ae2c24e0",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-native-bim-plan-20261011/tests/test_archicad_authored_native_plan.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-P70-S02-CI",
+      "kind": "TEST_RESULT",
+      "sha256": null,
+      "source_revision": "cec308f50d14cafc6ea3b895ec91cd16346d90db",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38157380799",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

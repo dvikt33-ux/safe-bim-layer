@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 14,
+  "run_count": 15,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -99,6 +99,13 @@
       "report": "runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md",
       "run_id": "APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths",
       "substep_id": "APA-P70.A03.S01"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "OFFLINE",
+      "report": "runs/2026-10-11/APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial/REPORT.md",
+      "run_id": "APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial",
+      "substep_id": "APA-P70.A03.S02"
     }
   ],
   "schema": "APA_GENERATED_INDEX_V1",
