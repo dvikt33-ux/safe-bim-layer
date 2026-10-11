@@ -78,6 +78,9 @@ class ControllerTests(unittest.TestCase):
             if task["plan_id"] == "APA-P70":
                 task["status"] = "DONE_PUBLISHED"
                 task["evidence"] = ["ART-APA-FULL-CYCLE"]
+                task["owner"] = None
+                task["lease_until"] = None
+                task["claim_ref"] = None
         c.validate(all_done)
         finished = c.build(all_done)
         self.assertEqual(finished["development"]["status"], "DONE_PUBLISHED")
