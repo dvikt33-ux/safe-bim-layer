@@ -62,9 +62,9 @@ def compile_spatial(brief,pack,layout):
     if (slab.get("engineeringApproved") is not False or
             slab.get("detailApproved") is not False):
         raise ValueError("UNTRUSTED_SELF_APPROVED_CSE")
-    if not isinstance(layout,dict) or set(layout)!={
+    if (not isinstance(layout,dict) or set(layout)!={
             "schemaVersion","outline","rooms","axes","bearingLines","loadPaths"} or
-            layout["schemaVersion"]!=SCHEMA:
+            layout["schemaVersion"]!=SCHEMA):
         raise ValueError("SPATIAL_LAYOUT_SCHEMA_MISMATCH")
     outline=rectangle(layout["outline"],"OUTLINE")
     if any(abs(x)>1e6 for x in outline.values()):
