@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:3a82c8dda1d1de74798f625eb128410a91df876b7566f87351f5981de466f57a",
+  "index_commit_sha": "85ff961efe07fc58aa0fc1349e28cdba05943860",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "85ff961efe07fc58aa0fc1349e28cdba05943860",
+  "report_path": "docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-195800Z-incremental-native-edit/REPORT.md",
+  "report_sha256": "4f215492cde530b7582cef5143b63178771cafa611cebd6f2326fcef76c48a95",
+  "run_id": "APA-RUN-20261011-195800Z-incremental-native-edit",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}
