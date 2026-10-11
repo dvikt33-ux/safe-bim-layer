@@ -71,6 +71,40 @@ class AfterStoryZRecoveryTests(unittest.TestCase):
             AFTER.proof(self.drift_readback, MATERIAL_NAME)
         self.assertEqual(len(self.native.writes), before)
 
+    def test_second_story_slab_read_only_diagnosis_preserves_third_ledger(self):
+        import diagnose_apa_suffix3_slab_readback as DIAG
+        token = AFTER.proof(self.native, MATERIAL_NAME)["token"]
+
+        def absolute_slab_level_from_native(command, params):
+            reply = self.native(command, params)
+            if command == "GetDetailsOfElements":
+                guid = params["elements"][0]["elementId"]["guid"]
+                entry = self.native.created.get(guid)
+                if (entry and entry[0] == "CreateSlabs"
+                        and entry[1]["slabsData"][0]["floorIndex"] == 1):
+                    reply["detailsOfElements"][0]["details"]["level"] = 3.0
+                    reply["detailsOfElements"][0]["details"]["zCoordinate"] = 3.0
+            return reply
+
+        failed = AFTER.execute(absolute_slab_level_from_native,
+                               MATERIAL_NAME, token)
+        self.assertEqual(failed["status"], "PARTIAL_OR_UNKNOWN_OUTCOME")
+        self.assertEqual(failed["failedStep"], "s2-slab")
+        count = len(self.native.writes)
+        report = DIAG.collect(absolute_slab_level_from_native)
+        self.assertEqual(report["status"], "READ_ONLY_THIRD_SUFFIX_SLAB_DIAGNOSIS")
+        self.assertEqual(report["failedSlab"]["journalState"], "CREATED_UNVERIFIED")
+        self.assertEqual(report["inventory"]["missingPreviouslyVerifiedGuids"], [])
+        self.assertEqual(report["inventory"]["nativeGuidsNotInThirdJournal"], [])
+        self.assertEqual(report["inventory"]["journaledGuidsAbsentFromModel"], [])
+        level = report["failedSlab"]["fieldComparison"]["level"]
+        self.assertEqual(level["requestedLocal"], 0.0)
+        self.assertEqual(level["requestedPlusStory"], 3.0)
+        self.assertEqual(level["native"], 3.0)
+        self.assertFalse(level["matchesLocal"])
+        self.assertTrue(level["matchesAbsolute"])
+        self.assertEqual(len(self.native.writes), count)
+
     def test_extra_live_guid_fails_closed(self):
         import uuid
         self.native.existing.append(str(uuid.uuid4()))
