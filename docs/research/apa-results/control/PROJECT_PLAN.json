@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 64,
+  "revision": 65,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2279,7 +2279,7 @@
       "action_id": "APA-P70.A03",
       "title": "Связать помещения, несущую схему, оси, уровни и конструктивные ограничения",
       "kind": "INTEGRATION",
-      "status": "READY",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "semantic-spatial-structural-plan",
       "depends_on": [
@@ -2295,9 +2295,9 @@
         "Проверяемый граф помещений/нагрузочных путей/осей с привязкой к CSE и этажам; без условных стен"
       ],
       "acceptance": "Проверяемый граф помещений/нагрузочных путей/осей с привязкой к CSE и этажам; без условных стен",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "chatgpt-gpt6-manual",
+      "lease_until": "2026-10-11T23:00:00Z",
+      "claim_ref": "APA-RUN-20261011-p70-a03-s01-spatial-model",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
