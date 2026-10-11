@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 82,
+  "revision": 83,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2458,7 +2458,7 @@
       "action_id": "APA-P70.A03",
       "title": "Доказать редактируемость, GUID/host/story/material и инкрементальное обновление",
       "kind": "VALIDATION",
-      "status": "READY",
+      "status": "IN_PROGRESS",
       "priority": 0,
       "work_key": "incremental-model-integrity-gates",
       "depends_on": [
@@ -2475,9 +2475,9 @@
         "Тесты обновления проекта без лишних элементов/потери GUID, readback этажей, материалов, хостов и откат изменений"
       ],
       "acceptance": "Тесты обновления проекта без лишних элементов/потери GUID, readback этажей, материалов, хостов и откат изменений",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "codex-apa-core-native-20261011",
+      "lease_until": "2026-10-11T21:00:00Z",
+      "claim_ref": "APA-RUN-20261011-195400Z-incremental-native-edit",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
