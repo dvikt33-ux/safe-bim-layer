@@ -63,6 +63,14 @@ def proof(api, material):
                 "step":ORPHAN_STEP, "state":"ATTEMPTED", "guid":None}
             or report["journaledNewCount"] != 0):
         raise ValueError("PREVIOUS_TIMEOUT_JOURNAL_CHANGED")
+    # Check reservation before live reconciliation: after a previous attempt
+    # the inventory is expected to differ from 33, but retries must always
+    # fail with the durable scene reservation, not an incidental count error.
+    with closing(sqlite3.connect(journal.resolve().as_uri()+"?mode=ro",uri=True)) as db:
+        db.execute("PRAGMA query_only=ON")
+        if db.execute("SELECT 1 FROM scenes WHERE scene_id=?",
+                      (FIFTH_SCENE_ID,)).fetchone():
+            raise ValueError("FIFTH_SCENE_ALREADY_RESERVED_NO_REPLAY")
     verified_orphan = ORPHAN.reconcile(api)
     if (verified_orphan["status"] != "READ_ONLY_ORPHAN_S2_PARTITION_VERIFIED"
             or verified_orphan["guid"].lower() != VERIFIED_ORPHAN_GUID
