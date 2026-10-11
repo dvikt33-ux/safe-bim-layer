@@ -14,6 +14,8 @@ from test_archicad_basic_slab_integration import MATERIAL_NAME
 
 
 class FourthSuffixTests(unittest.TestCase):
+    bad_slab_api = Suffix3SlabRepairTests.bad_slab_api
+
     def setUp(self):
         Suffix3SlabRepairTests.setUp(self)
         ticket = REPAIR.preflight(self.api, MATERIAL_NAME)
