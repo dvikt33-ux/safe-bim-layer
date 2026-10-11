@@ -11,13 +11,13 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | --- | ---: |
 | BLOCKED | 8 |
 | CLAIMED | 0 |
-| DONE_PUBLISHED | 10 |
-| IN_PROGRESS | 2 |
+| DONE_PUBLISHED | 11 |
+| IN_PROGRESS | 1 |
 | PARTIAL | 14 |
 | READY | 40 |
 | SUPERSEDED | 0 |
-| DISPATCHABLE_NOW | 15 |
-| HELD_BY_DEPENDENCIES | 39 |
+| DISPATCHABLE_NOW | 16 |
+| HELD_BY_DEPENDENCIES | 38 |
 | EXPIRED_LEASES | 0 |
 
 ## Полный цикл разработки APA
@@ -31,7 +31,6 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
 | APA-P00.A02.S03 | chatgpt-gpt6-archive-source-audit-20261011 | 2026-10-11T10:17:56Z | legacy-evidence-dedup |
-| APA-P70.A01.S01 | chatgpt-gpt6-p70-assembly-audit-20261011 | 2026-10-11T11:30:00Z | product-contract-and-code-baseline |
 
 ## CONTROL — 0 ready
 
@@ -65,11 +64,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | --- | --- | --- |
 | P0 | APA-P00.A03.S03 — Publisher, дедупликация, retry, heartbeat и ошибки | Publisher E2E + оставшиеся recovery/heartbeat gates |
 
-## INTEGRATION — 0 ready
+## INTEGRATION — 1 ready
 
 | Priority | Task | Acceptance |
 | --- | --- | --- |
-| — | — | — |
+| P2 | APA-P70.A01.S03 — Утвердить минимальные границы интеграции и порядок сквозных поставок | Проверенный маршрут полного цикла, reuse map, отсутствие дублирования SceneWriter/графа/исполнителя, приёмочные ворота |
 
 ## VALIDATION — 4 ready
 
@@ -101,8 +100,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | APA-P50.A02.S03 | APA-P50.A02.S02, APA-P30.A01.S01 |
 | APA-P50.A03.S01 | APA-P50.A01.S03, APA-P50.A02.S02 |
 | APA-P50.A03.S02 | APA-P50.A03.S01 |
-| APA-P70.A01.S02 | APA-P70.A01.S01, APA-P50.A01.S01 |
-| APA-P70.A01.S03 | APA-P70.A01.S01 |
+| APA-P70.A01.S02 | APA-P50.A01.S01 |
 | APA-P70.A02.S01 | APA-P70.A01.S03 |
 | APA-P70.A02.S02 | APA-P70.A02.S01 |
 | APA-P70.A02.S03 | APA-P70.A02.S01, APA-P70.A01.S03 |

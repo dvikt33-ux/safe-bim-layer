@@ -1,17 +1,16 @@
 {
   "active": [
-    "APA-P00.A02.S03",
-    "APA-P70.A01.S01"
+    "APA-P00.A02.S03"
   ],
-  "artifact_count": 54,
+  "artifact_count": 56,
   "counts": {
     "BLOCKED": 8,
     "CLAIMED": 0,
-    "DISPATCHABLE_NOW": 15,
-    "DONE_PUBLISHED": 10,
+    "DISPATCHABLE_NOW": 16,
+    "DONE_PUBLISHED": 11,
     "EXPIRED_LEASES": 0,
-    "HELD_BY_DEPENDENCIES": 39,
-    "IN_PROGRESS": 2,
+    "HELD_BY_DEPENDENCIES": 38,
+    "IN_PROGRESS": 1,
     "PARTIAL": 14,
     "READY": 40,
     "SUPERSEDED": 0
@@ -19,9 +18,9 @@
   "development": {
     "actions": [
       {
-        "done": 0,
+        "done": 1,
         "id": "APA-P70.A01",
-        "status": "IN_PROGRESS",
+        "status": "PARTIAL",
         "title": "Единая база существующих возможностей и доказательств",
         "total": 3
       },
@@ -75,13 +74,11 @@
         "total": 3
       }
     ],
-    "active": [
-      "APA-P70.A01.S01"
-    ],
-    "done": 0,
-    "next_eligible": null,
+    "active": [],
+    "done": 1,
+    "next_eligible": "APA-P70.A01.S03",
     "plan_id": "APA-P70",
-    "status": "IN_PROGRESS",
+    "status": "PARTIAL",
     "total": 23
   },
   "dispatchable": {
@@ -93,7 +90,9 @@
       "APA-P50.A01.S01"
     ],
     "CONTROL": [],
-    "INTEGRATION": [],
+    "INTEGRATION": [
+      "APA-P70.A01.S03"
+    ],
     "RESEARCH": [
       "APA-P10.A01.S01",
       "APA-P10.A01.S02",
@@ -131,7 +130,6 @@
     "APA-P50.A03.S01",
     "APA-P50.A03.S02",
     "APA-P70.A01.S02",
-    "APA-P70.A01.S03",
     "APA-P70.A02.S01",
     "APA-P70.A02.S02",
     "APA-P70.A02.S03",
@@ -156,7 +154,7 @@
   "known_published_v2_runs": 10,
   "legacy_reports": "NOT_FULLY_INDEXED",
   "orphan_v2_manifests": [],
-  "plan_revision": 46,
+  "plan_revision": 47,
   "publisher": "DEPLOYED_SYNTHETIC_E2E_PASS",
   "research_lookahead": {
     "linked_product_substeps": 23,
@@ -276,8 +274,8 @@
       ]
     },
     "PRODUCT_DEVELOPMENT": {
-      "done": 0,
-      "ready": 0,
+      "done": 1,
+      "ready": 1,
       "task_ids": [
         "APA-P70.A01.S01",
         "APA-P70.A01.S02",
