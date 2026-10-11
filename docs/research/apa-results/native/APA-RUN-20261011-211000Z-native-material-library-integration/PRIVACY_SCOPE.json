@@ -1,0 +1,22 @@
+{
+  "included": [
+    "bounded synthetic-test geometry/typed selected readback",
+    "public manufacturer/component metadata",
+    "exact attribute/library identities required for selection",
+    "counts and hashes",
+    "source PR and CI links"
+  ],
+  "excluded": [
+    "all local filesystem paths",
+    "full project-name/path identity responses",
+    "complete native catalogs",
+    "baseline/unrelated element payload",
+    "arbitrary GDL parameter list",
+    "original native model element GUIDs",
+    "manufacturer binaries"
+  ],
+  "originalRawFileCount": 109,
+  "newArchicadCalls": 0,
+  "originalFilesPreservedLocally": true,
+  "nativeVerificationPerformedBeforeReduction": true
+}

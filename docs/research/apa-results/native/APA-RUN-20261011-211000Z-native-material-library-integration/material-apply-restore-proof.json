@@ -1,0 +1,92 @@
+{
+  "composite": {
+    "selectedName": "Общая Стена/Оболочка",
+    "selectedGuid": "29EE690D-089C-4573-94C8-DEC75CFA0950",
+    "applyStatus": "EXISTING_ATTRIBUTE_EDIT_READBACK_PASS",
+    "restoreStatus": "EXISTING_ATTRIBUTE_EDIT_READBACK_PASS",
+    "wholePrimaryReadbackCount": 17,
+    "preservedInventoryCount": 39,
+    "nativeProof": {
+      "nativeBodyCount": 1,
+      "nativeCompositeSkins": [
+        {
+          "index": 0,
+          "thickness": 0.05,
+          "buildingMaterial": {
+            "nativeField": "composite.skin.buildingMaterial",
+            "attributeType": 12,
+            "attributeIndex": 51,
+            "guid": "A24B0919-6AB3-4FCE-9E5E-AE20A8177F5E",
+            "name": "ОБЩИЙ - НАРУЖНАЯ ОТДЕЛКА",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 66,
+              "guid": "059A3D33-3138-4F53-8857-D2646AEC13C0",
+              "name": "Краска - Песочно-Бежевая"
+            }
+          }
+        },
+        {
+          "index": 1,
+          "thickness": 0.25,
+          "buildingMaterial": {
+            "nativeField": "composite.skin.buildingMaterial",
+            "attributeType": 12,
+            "attributeIndex": 59,
+            "guid": "922C639B-9875-48DF-A3FC-E0A8AC5F2839",
+            "name": "ОБЩИЙ - КОНСТРУКЦИОННЫЙ МАТЕРИАЛ",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 99,
+              "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+              "name": "Краска - Светло-Серая"
+            }
+          }
+        }
+      ],
+      "elementToken": "test-element-0f66b42e488c2972"
+    },
+    "restoredSourcePlanHash": "dc7fa97c737f8334587647d8d877315ec0850c8383ea7d07373eebc4dfd565de"
+  },
+  "surface": {
+    "selectedName": "Бетон - 02",
+    "selectedGuid": "8840119E-5F2F-48B9-B071-FB72B6958B5A",
+    "applyStatus": "EXISTING_ATTRIBUTE_EDIT_READBACK_PASS",
+    "restoreStatus": "EXISTING_ATTRIBUTE_EDIT_READBACK_PASS",
+    "wholePrimaryReadbackCount": 17,
+    "preservedInventoryCount": 39,
+    "nativeProof": {
+      "nativeBodyCount": 1,
+      "nativeSurfaceOverride": {
+        "nativeField": "wall.refMat",
+        "attributeType": 5,
+        "attributeIndex": 4,
+        "guid": "8840119E-5F2F-48B9-B071-FB72B6958B5A",
+        "name": "Бетон - 02",
+        "overridden": true,
+        "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+      },
+      "elementToken": "test-element-4b2c7d00e3d409a9"
+    },
+    "restoredSourcePlanHash": "dc7fa97c737f8334587647d8d877315ec0850c8383ea7d07373eebc4dfd565de"
+  },
+  "profile": {
+    "selectedName": "HEA200",
+    "selectedGuid": "61682A57-134B-4EF0-A3A4-AC1006308694",
+    "applyStatus": "EXISTING_ATTRIBUTE_EDIT_READBACK_PASS",
+    "restoreStatus": "EXISTING_ATTRIBUTE_EDIT_READBACK_PASS",
+    "wholePrimaryReadbackCount": 17,
+    "preservedInventoryCount": 39,
+    "nativeProof": {
+      "nativeBodyCount": 1,
+      "width": 0.20000000000000284,
+      "depth": 0.18999999999999773,
+      "topCrossSectionArea": 0.005104999999999714,
+      "profileOutlineArea": 0.0051049999999999976,
+      "elementToken": "test-element-6ad65ff5e9324d47"
+    },
+    "restoredSourcePlanHash": "dc7fa97c737f8334587647d8d877315ec0850c8383ea7d07373eebc4dfd565de"
+  }
+}

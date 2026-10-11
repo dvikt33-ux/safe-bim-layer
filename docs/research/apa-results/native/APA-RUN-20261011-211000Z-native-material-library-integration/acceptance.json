@@ -1,0 +1,199 @@
+{
+  "status": "SELECTED_NATIVE_MATERIAL_LIBRARY_INTEGRATION_ACCEPTANCE_PASS",
+  "task": "APA-P70.A02.S04",
+  "sourceHead": "9139124176e3114afd8f3b7733cf40f423d0d8e5",
+  "pullRequest": 51,
+  "offlineCI": 38174986480,
+  "offlineTests": 316,
+  "evidenceKind": "SOURCE_REPLAY_OF_CAPTURED_NATIVE_REQUEST_RESPONSE",
+  "publicationNewArchicadCalls": 0,
+  "materialSelections": {
+    "composite": {
+      "applyAndRestorePassed": true,
+      "fullPrimaryTypedReadback": 17,
+      "nativeGeometry": {
+        "nativeBodyCount": 1,
+        "nativeCompositeSkins": [
+          {
+            "index": 0,
+            "thickness": 0.05,
+            "buildingMaterial": {
+              "nativeField": "composite.skin.buildingMaterial",
+              "attributeType": 12,
+              "attributeIndex": 51,
+              "guid": "A24B0919-6AB3-4FCE-9E5E-AE20A8177F5E",
+              "name": "ОБЩИЙ - НАРУЖНАЯ ОТДЕЛКА",
+              "defaultSurface": {
+                "nativeField": "buildingMaterial.cutMaterial",
+                "attributeType": 5,
+                "attributeIndex": 66,
+                "guid": "059A3D33-3138-4F53-8857-D2646AEC13C0",
+                "name": "Краска - Песочно-Бежевая"
+              }
+            }
+          },
+          {
+            "index": 1,
+            "thickness": 0.25,
+            "buildingMaterial": {
+              "nativeField": "composite.skin.buildingMaterial",
+              "attributeType": 12,
+              "attributeIndex": 59,
+              "guid": "922C639B-9875-48DF-A3FC-E0A8AC5F2839",
+              "name": "ОБЩИЙ - КОНСТРУКЦИОННЫЙ МАТЕРИАЛ",
+              "defaultSurface": {
+                "nativeField": "buildingMaterial.cutMaterial",
+                "attributeType": 5,
+                "attributeIndex": 99,
+                "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                "name": "Краска - Светло-Серая"
+              }
+            }
+          }
+        ],
+        "elementToken": "test-element-0f66b42e488c2972"
+      },
+      "preservedInventory": 39,
+      "fiveDefaultLibraryIdentities": true
+    },
+    "surface": {
+      "applyAndRestorePassed": true,
+      "fullPrimaryTypedReadback": 17,
+      "nativeGeometry": {
+        "nativeBodyCount": 1,
+        "nativeSurfaceOverride": {
+          "nativeField": "wall.refMat",
+          "attributeType": 5,
+          "attributeIndex": 4,
+          "guid": "8840119E-5F2F-48B9-B071-FB72B6958B5A",
+          "name": "Бетон - 02",
+          "overridden": true,
+          "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+        },
+        "elementToken": "test-element-4b2c7d00e3d409a9"
+      },
+      "preservedInventory": 39,
+      "fiveDefaultLibraryIdentities": true
+    },
+    "profile": {
+      "applyAndRestorePassed": true,
+      "fullPrimaryTypedReadback": 17,
+      "nativeGeometry": {
+        "nativeBodyCount": 1,
+        "width": 0.20000000000000284,
+        "depth": 0.18999999999999773,
+        "topCrossSectionArea": 0.005104999999999714,
+        "profileOutlineArea": 0.0051049999999999976,
+        "elementToken": "test-element-6ad65ff5e9324d47"
+      },
+      "preservedInventory": 39,
+      "fiveDefaultLibraryIdentities": true
+    }
+  },
+  "nativeModelMutations": {
+    "ModifyWalls": 4,
+    "ModifyColumns": 2,
+    "CreateObjects": 1
+  },
+  "nativeLibraryMutations": {
+    "AddFilesToEmbeddedLibrary": 1,
+    "files": 3,
+    "overwriteExisting": false
+  },
+  "SaveOpenOperations": "Material restoration then selected-object persistence; each SaveProject/OpenProject independently verified",
+  "primaryCount": 18,
+  "inventoryCount": 40,
+  "original39GeometryAndMaterialSemanticsRetainedAfterSelectedGDLImport": true,
+  "nativeTableRenumbering": {
+    "libraryTableSlots": [
+      {
+        "before": 905,
+        "after": 908,
+        "elementToken": "test-element-8ae117c09289712b"
+      },
+      {
+        "before": 905,
+        "after": 908,
+        "elementToken": "test-element-3940fd04267e7b5d"
+      },
+      {
+        "before": 905,
+        "after": 908,
+        "elementToken": "test-element-d247a6d036a10f9f"
+      },
+      {
+        "before": 905,
+        "after": 908,
+        "elementToken": "test-element-b766ca8c720e1b6d"
+      },
+      {
+        "before": 833,
+        "after": 836,
+        "elementToken": "test-element-96904ae0a9a643d0"
+      }
+    ],
+    "faceMaterialSlotChanges": 382,
+    "geometryAndReferencedMaterialSemanticsUnchanged": true,
+    "fiveLibraryGUIDNamesVerified": true
+  },
+  "selectedObject": {
+    "name": "TN_Аэратор_Кровельный_ТехноНИКОЛЬ_ЭКО_75х340",
+    "libraryGuid": "75DBC58A-E1D7-4096-9294-BB578516AD4C",
+    "geometry": {
+      "bodies": 1,
+      "vertices": 685,
+      "bounds": {
+        "x": [
+          54.865,
+          55.135
+        ],
+        "y": [
+          44.865,
+          45.135
+        ],
+        "z": [
+          0,
+          0.31
+        ]
+      },
+      "parameterHeight": 0.34,
+      "physicalHeight": 0.31,
+      "parameterHeightEqualsPhysicalHeight": false
+    },
+    "sourceLicenseMetadata": {
+      "type": "CC0",
+      "version": "1.0"
+    },
+    "sourceAuthor": "ТехноНИКОЛЬ",
+    "elementToken": "test-element-9e0883de777aee5a"
+  },
+  "topologyCounts": {
+    "elements": 40,
+    "bodies": 57,
+    "vertices": 1473,
+    "faces": 1039,
+    "holeContours": 12
+  },
+  "latestPLNSha256": "7607d265b3f6ec5bae26e5f397c378eb35b4a05024079115cd1b6fc6925e1210",
+  "boundPlanHash": "5ad2e45c1cbe8460cf7ef1a4bebc68303772153c9da2c67197bef8f224862943",
+  "unreadableCatalogSlots": 92,
+  "reusedResearch": [
+    "ART-APA-PLP-CONTRACT",
+    "ART-APA-CSE-RESEARCH",
+    "ART-PR20",
+    "ART-APA-ATTR-STORY-SLAB-20261011"
+  ],
+  "CSEPLP": "Existing project RC floor selection and native core, reference-only source contract retained; not engineer approved",
+  "limits": [
+    "VisibleUI_NOT_VERIFIED",
+    "ExactHistoricalUIMacroGuid_NOT_VERIFIED",
+    "RoofInstallation_NOT_VERIFIED",
+    "General151FileLibraryCompatibility_NOT_VERIFIED",
+    "AllPackageRights_NOT_VERIFIED",
+    "NormativeStructuralEngineering_NOT_VERIFIED",
+    "Archicad30_NOT_VERIFIED"
+  ],
+  "evidencePrivacy": "BOUND_SELECTED_TEST_PROOF_ONLY: local paths/project identity, full catalogs, arbitrary GDL parameters and original element GUIDs excluded",
+  "fullOriginalRawEvidence": "Retained locally, SHA256 manifest published; full raw payload not uploaded",
+  "publicRawClaim": "Scoped selected-operation summaries derived from captured responses; not full raw export"
+}
