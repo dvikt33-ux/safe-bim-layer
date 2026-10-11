@@ -295,3 +295,20 @@ After modal review, owner ran `scripts/inspect_apa_orphan_s2_partition.py --port
 **Classification: USER_SUPPLIED / LIVE_TYPED_READ_ONLY_PASS.** All native wall geometry fields from the historical `s2-partition-1` CreateWalls intent were verified, including endpoints, height, thickness, offset, arc and absolute story Z. The model now contains original 20 + verified planned 13 = **33**. Zero old GUIDs missing. The native GUID above remains absent from the *old* fourth Create journal (`ATTEMPTED, guid=null`), and that journal must never be rewritten to pretend the transport response succeeded. Do not replay the fourth reserved scene. The next step is a uniquely reserved **fifth** continuation using 13 proven existing GUIDs, only the remaining **12** planned creates, preserving original graph and all old partial records. The missing-visibility modal is consistent with the earlier 15-second HTTP timeout, but timing causality is not formally proven.
 
 **Status:** 13/25 reported live verified, 12 unbuilt, unsaved project, no fifth scene created.
+
+## Fifth suffix published and offline verified — only 12 remaining creates
+
+Source published in draft [PR #35](https://github.com/dvikt33-ux/safe-bim-layer/pull/35) with `scripts/continue_apa_after_orphan_partition.py`. This source is **not** evidence that the last 12 elements have been created live.
+
+The new default read-only gate:
+- validates original 25-step historical graph from pinned original SHA256 evidence, story bindings and Tapir 1.5.10 schema;
+- requires fourth suffix journal `PARTIAL_OR_UNKNOWN_OUTCOME` on exactly `s2-partition-1` with 1 `ATTEMPTED` row, fourth plan hash `f426fb1f7c8363850440226ad949aab39729dd5927a63bf0854cb043e8874b75`, no fourth GUID; independently reruns read-only native orphan geometry checks;
+- pins verified orphan native GUID `bcfc99f0-50d2-4cd5-bf27-8f436c21683a`, revalidates first 12 historical GUIDs, both slab repair material and intent hash, strict 33 native GUIDs, active floor 0, existing floor levels, structure, geometry, and project identity;
+- refuses immediately if a new fifth scene already exists; never replays fourth, never rewrites old journal; reserves new distinct `apa-suffix5-20261011-031123-7181b47c` only after a fresh explicit owner token, then creates **exactly 12** pending operations through the existing journaled SceneWriter, followed by all 25 typed readbacks and expected total 45 native GUIDs;
+- improves transport for this continuation only: native Create HTTP timeout is `120s` rather than `15s`; all GET calls remain `15s`. No auto-acknowledgement of Graphisoft dialogs, no auto-retry. User must be present to click `Продолжить` promptly if the invisible-story modal appears. Longer timeout reduces the risk of orphan responses but cannot guarantee a dialog will complete or prevent native errors.
+
+The shared Tapir helper remains default 15 seconds; it now accepts an opt-in bounded timeout `0 < timeout <= 120s`. The old attempts remain immutable.
+
+Synthetic GitHub [CI #38149533972](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38149533972) **SUCCESS — 195/195 offline tests PASS**, including new 13+12 complete final-model result, no-retry after timed-out fifth scene, fail-closed native inventory mismatch, exact orphan GUID constraint and 120s-create/15s-read transport boundary. Intermediate CI failures from synthetic mocked fourth token and reservation-order regression were corrected; only latest successful head is acceptance evidence.
+
+**Status:** READY_FOR_OWNER_LIVE_PREFLIGHT; 13/25 reported live verified unsaved; 12 remaining NOT_LIVE_VERIFIED. Future source improvements: fix the generic second-story slab global-Z placement, and independently analyze/suppress modal warnings with an explicit user-approved UI preference rather than circumventing native dialogs.
