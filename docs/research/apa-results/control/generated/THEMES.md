@@ -9,7 +9,7 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 | AUTOMATION — Автономизация и 24h gate | 4 | 0 | 0 | ART-OS-AUDIT, ART-PUBLISHER |
 | CONTROLLER — Единый управляющий и межчатовый контекст | 8 | 6 | 2 | ART-CONTROLLER, ART-PLAN, ART-PUB-WORKFLOW, ART-PUBLISHER, ART-PROPOSAL-PROTOCOL |
 | GDL_TN — GDL и ТЕХНОНИКОЛЬ | 1 | 0 | 1 | ART-PR20 |
-| HUB_GOVERNANCE — Канонический hub и реестр | 8 | 4 | 2 | ART-BRANCH-JSON, ART-BRANCHES, ART-PLAN, ART-PUB-RECEIPT, ART-QUEUE, ART-REGISTER, ART-STATUS |
+| HUB_GOVERNANCE — Канонический hub и реестр | 9 | 4 | 2 | ART-BRANCH-JSON, ART-BRANCHES, ART-PLAN, ART-PUB-RECEIPT, ART-QUEUE, ART-REGISTER, ART-STATUS |
 | IFC_MCP — IFC/openBIM и MCP | 1 | 0 | 1 | ART-REGISTER |
 | KNOWLEDGE_GRAPH — Сведение исследований и доказательств | 3 | 0 | 1 | ART-BRANCHES, ART-REGISTER, ART-TRACE-RECEIPT, ART-TRACE-REPORT |
 | MEP — MEP native и Tapir | 1 | 0 | 1 | ART-REGISTER |
@@ -63,6 +63,7 @@ Related tasks and evidence are preserved; do not repeat a topic review blindly.
 - APA-P00.A02.S02 [CONTROL/DONE_PUBLISHED]: Создать hub, план, реестр, очередь, протоколы; work_key=hub-operating-documents; related=none
 - APA-P00.A02.S03 [CONSOLIDATION/IN_PROGRESS]: Связать старые находки с S-ID и удалить логические дубли без удаления оригиналов; work_key=legacy-evidence-dedup; related=APA-P50.A01.S02
 - APA-P00.A02.S04 [VALIDATION/PARTIAL]: Контролировать receipt/commit/readback всех завершённых отчётов; work_key=publication-completeness-audit; related=none
+- APA-P00.A02.S05 [CONTROL/IN_PROGRESS]: Обновить действующий план CORE FIRST → EXPANSION по рабочей инструкции v2; work_key=core-first-operating-plan-v2; related=none
 
 ### IFC_MCP — IFC/openBIM и MCP
 

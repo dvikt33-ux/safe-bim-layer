@@ -12,7 +12,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | BLOCKED | 8 |
 | CLAIMED | 0 |
 | DONE_PUBLISHED | 15 |
-| IN_PROGRESS | 1 |
+| IN_PROGRESS | 2 |
 | PARTIAL | 15 |
 | READY | 35 |
 | SUPERSEDED | 0 |
@@ -31,6 +31,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
 | APA-P00.A02.S03 | chatgpt-gpt6-manual-20261011-roof-composite-context | 2026-10-11T19:49:29Z | legacy-evidence-dedup |
+| APA-P00.A02.S05 | codex-apa-core-first-20261011 | 2026-10-11T20:30:00Z | core-first-operating-plan-v2 |
 
 ## CONTROL — 0 ready
 

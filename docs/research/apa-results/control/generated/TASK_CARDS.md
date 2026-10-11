@@ -111,7 +111,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: chatgpt-gpt6-manual-20261011-roof-composite-context / 2026-10-11T19:49:29Z
 - Requires owner approval: False
 - Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md), [ART-BRANCHES](../../../../../docs/research/apa-results/inventories/FULL_BRANCH_INVENTORY.md)
-- Existing V2 runs: [APA-RUN-20261010-234200Z-slack-legacy-three-audit](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-234200Z-slack-legacy-three-audit/REPORT.md) (receipt verified), [APA-RUN-20261010-235301Z-branch-evidence-dedup](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-235301Z-branch-evidence-dedup/REPORT.md) (receipt verified), [APA-RUN-20261011-001922Z-eighty-head-blob-inventory](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-001922Z-eighty-head-blob-inventory/REPORT.md) (receipt verified), [APA-RUN-20261011-092155Z-source71-byte-archive](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-092155Z-source71-byte-archive/REPORT.md) (receipt verified)
+- Existing V2 runs: [APA-RUN-20261010-234200Z-slack-legacy-three-audit](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-234200Z-slack-legacy-three-audit/REPORT.md) (receipt verified), [APA-RUN-20261010-235301Z-branch-evidence-dedup](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-235301Z-branch-evidence-dedup/REPORT.md) (receipt verified), [APA-RUN-20261011-001922Z-eighty-head-blob-inventory](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-001922Z-eighty-head-blob-inventory/REPORT.md) (receipt verified), [APA-RUN-20261011-092155Z-source71-byte-archive](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-092155Z-source71-byte-archive/REPORT.md) (receipt verified), [APA-RUN-20261011-190658Z-roof-comp-context-map](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-190658Z-roof-comp-context-map/REPORT.md) (receipt verified)
 - Expected output: Evidence map и superseded_by для дублей
 
 ## APA-P00.A02.S04
@@ -129,6 +129,22 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Source inputs: [ART-PUB-RECEIPT](../../../../../docs/research/apa-results/receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json)
 - Existing V2 runs: none
 - Expected output: Нет ложных DONE без квитанции
+
+## APA-P00.A02.S05
+
+**Обновить действующий план CORE FIRST → EXPANSION по рабочей инструкции v2** — CONTROL / IN_PROGRESS / P0
+
+- Parent: APA-P00 → APA-P00.A02
+- Topic: HUB_GOVERNANCE
+- Work key: core-first-operating-plan-v2
+- Depends on: APA-P00.A02.S02
+- Related, check before duplicating: none
+- Acceptance: Сохранены все прежние ID/статусы/доказательства; последовательный CORE FIRST DAG валиден; карта компонентов находится в каноническом реестре; инструкция и план опубликованы и прочитаны обратно
+- Owner/lease: codex-apa-core-first-20261011 / 2026-10-11T20:30:00Z
+- Requires owner approval: False
+- Source inputs: [ART-CONTROLLER](../../../../../docs/research/apa-results/control/PROJECT_PLAN.json), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
+- Existing V2 runs: none
+- Expected output: IMPLEMENTATION_ROADMAP.md; WORK_OPERATING_INSTRUCTION.md; согласованный PROJECT_PLAN.json; GitHub CAS/readback
 
 ## APA-P00.A03.S01
 
