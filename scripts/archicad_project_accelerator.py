@@ -265,7 +265,8 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
             for step in compiled["graph"]["operations"]:
                 RUN.guarded_project(api, required_story)
                 params = RUN.resolve_params(step, created)
-                host = (RUN.check_previous_wall(api, step, created)
+                host = (RUN.check_previous_wall(
+                            api, step, created, ticket.get("storyBindings"))
                         if step["command"] in {"CreateDoors", "CreateWindows"} else None)
                 if host:
                     parent_id = next(iter(step["params"].values()))[0]["ownerWallId"]["guid"]["$createdGuid"]
@@ -278,6 +279,8 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
                     step["command"], params,
                     RUN.requested_details(api, created[step["id"]]["guid"]),
                     host, expected_floor=expected_floor,
+                    expected_story_level=RUN.story_level_for_floor(
+                        ticket.get("storyBindings"), expected_floor),
                     expected_slab_material_guid=(
                         ticket.get("slabBasicMaterialGuid")
                         if step["command"] == "CreateSlabs" else None))
