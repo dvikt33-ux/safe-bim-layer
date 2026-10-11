@@ -12,11 +12,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | BLOCKED | 8 |
 | CLAIMED | 0 |
 | DONE_PUBLISHED | 14 |
-| IN_PROGRESS | 0 |
+| IN_PROGRESS | 1 |
 | PARTIAL | 15 |
-| READY | 37 |
+| READY | 36 |
 | SUPERSEDED | 0 |
-| DISPATCHABLE_NOW | 18 |
+| DISPATCHABLE_NOW | 17 |
 | HELD_BY_DEPENDENCIES | 34 |
 | EXPIRED_LEASES | 0 |
 
@@ -30,7 +30,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| — | — | — | — |
+| APA-P70.A03.S01 | chatgpt-gpt6-manual | 2026-10-11T23:00:00Z | semantic-spatial-structural-plan |
 
 ## CONTROL — 0 ready
 
@@ -66,11 +66,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | P0 | APA-P00.A03.S03 — Publisher, дедупликация, retry, heartbeat и ошибки | Publisher E2E + оставшиеся recovery/heartbeat gates |
 | P2 | APA-P70.A02.S02 — Связать проектные требования с версиями нормативов и проверяемыми правилами | Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED |
 
-## INTEGRATION — 1 ready
+## INTEGRATION — 0 ready
 
 | Priority | Task | Acceptance |
 | --- | --- | --- |
-| P1 | APA-P70.A03.S01 — Связать помещения, несущую схему, оси, уровни и конструктивные ограничения | Проверяемый граф помещений/нагрузочных путей/осей с привязкой к CSE и этажам; без условных стен |
+| — | — | — |
 
 ## VALIDATION — 4 ready
 

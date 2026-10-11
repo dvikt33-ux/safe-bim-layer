@@ -8,8 +8,8 @@ requires_approval tasks are not dispatchable until separate owner approval is re
 ## Краткая сводка
 
 - План: APA-P70 — Разработка APA — полный цикл проектирования и выпуска
-- Статус: **PARTIAL**; завершено 4/23 подзадач.
-- Сейчас: не выполняется; нет IN_PROGRESS.
+- Статус: **IN_PROGRESS**; завершено 4/23 подзадач.
+- Сейчас: APA-P70.A03.S01
 - Следующая доступная: APA-P70.A02.S02 — Связать проектные требования с версиями нормативов и проверяемыми правилами
 
 ## Этапы → задачи
@@ -18,7 +18,7 @@ requires_approval tasks are not dispatchable until separate owner approval is re
 | --- | --- | ---: |
 | APA-P70.A01 — Единая база существующих возможностей и доказательств | PARTIAL | 2/3 |
 | APA-P70.A02 — Требования, нормативы и библиотека конкретного проекта | PARTIAL | 2/3 |
-| APA-P70.A03 — Планировка и редактируемая нативная BIM-модель | READY | 0/3 |
+| APA-P70.A03 — Планировка и редактируемая нативная BIM-модель | IN_PROGRESS | 0/3 |
 | APA-P70.A04 — Конструктивные узлы, кладка, фасады и сопряжения | WAITING | 0/3 |
 | APA-P70.A05 — Расчёт несущих систем и инженерная обратная связь | WAITING | 0/3 |
 | APA-P70.A06 — MEP и междисциплинарная координация | WAITING | 0/2 |
@@ -47,7 +47,7 @@ requires_approval tasks are not dispatchable until separate owner approval is re
 
 ### APA-P70.A03 — Планировка и редактируемая нативная BIM-модель
 
-- **APA-P70.A03.S01 [READY / ELIGIBLE]** Связать помещения, несущую схему, оси, уровни и конструктивные ограничения; исследования: APA-P10.A01.S02, APA-P10.A01.S03, APA-P10.A03.S01, APA-P50.A02.S01
+- **APA-P70.A03.S01 [IN_PROGRESS]** Связать помещения, несущую схему, оси, уровни и конструктивные ограничения; исследования: APA-P10.A01.S02, APA-P10.A01.S03, APA-P10.A03.S01, APA-P50.A02.S01
   - Источники/ветки: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
 - **APA-P70.A03.S02 [READY / AWAITING_APPROVAL]** Собрать модель средствами уже существующих BIM-исполнителей; зависимости: APA-P70.A03.S01; исследования: APA-P10.A01.S02, APA-P10.A01.S03, APA-P10.A03.S01, APA-P50.A02.S01
   - Источники/ветки: [ART-APA-PR16](https://github.com/dvikt33-ux/safe-bim-layer/pull/16), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md), [ART-APA-LIVE-SCRATCH-PARTIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-live-scratch-partial-slab-reconciliation.md)
