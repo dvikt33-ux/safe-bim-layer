@@ -1,18 +1,17 @@
 {
   "active": [
-    "APA-P00.A02.S03",
     "APA-P00.A02.S05"
   ],
-  "artifact_count": 81,
+  "artifact_count": 82,
   "counts": {
     "BLOCKED": 8,
     "CLAIMED": 0,
-    "DISPATCHABLE_NOW": 17,
+    "DISPATCHABLE_NOW": 18,
     "DONE_PUBLISHED": 15,
     "EXPIRED_LEASES": 0,
     "HELD_BY_DEPENDENCIES": 33,
-    "IN_PROGRESS": 2,
-    "PARTIAL": 15,
+    "IN_PROGRESS": 1,
+    "PARTIAL": 16,
     "READY": 35,
     "SUPERSEDED": 0
   },
@@ -89,6 +88,7 @@
     ],
     "CONSOLIDATION": [
       "APA-P00.A01.S03",
+      "APA-P00.A02.S03",
       "APA-P50.A01.S01"
     ],
     "CONTROL": [],
@@ -151,7 +151,7 @@
   "known_published_v2_runs": 16,
   "legacy_reports": "NOT_FULLY_INDEXED",
   "orphan_v2_manifests": [],
-  "plan_revision": 77,
+  "plan_revision": 78,
   "publisher": "DEPLOYED_SYNTHETIC_E2E_PASS",
   "research_lookahead": {
     "linked_product_substeps": 23,
@@ -227,7 +227,7 @@
     },
     "HUB_GOVERNANCE": {
       "done": 4,
-      "ready": 2,
+      "ready": 3,
       "task_ids": [
         "APA-P00.A01.S01",
         "APA-P00.A01.S02",
