@@ -51,3 +51,13 @@ Additional draft PR #37 changes on `feature/apa-sync-receipt-evidence-bridge-poc
 
 ### Unclosed gates
 The actual new bridge has **NOT** sent a Slack message from Windows with this outbox; installed receiver remains untouched. Automatic GitHub→Slack push-trigger wiring, post-restart real Slack/SQLite readback, long-running reliability, transactional exactly-once and autonomous ChatGPT execution are **NOT_VERIFIED**. Candidate `APA-P60.A02.S05` remains `DEFERRED` and absent from executable `PROJECT_PLAN.json`. No new S-ID was claimed. Keep this implementation as draft until code security review and separately authorized LIVE deployment.
+
+## Windows-native SQLite/outbox offline verification — CI acceptance
+
+[GitHub Actions 38146011092](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38146011092): `SUCCESS`, attempt 1, checked jobs/logs:
+- Linux coordinator-unit: 44 pre-existing Slack tests + 16 receipt validation tests + 13 outbox/replay/concurrency tests = **73/73 tests PASS**; pinned **real** canonical GitHub receipt → `INFO` dry-run PASS.
+- Windows `windows-latest`: actual Python 3.11 execution of 16 receipt tests + 13 SQLite outbox tests = **29/29 tests PASS**; `WINDOWS_BRIDGE_OFFLINE_PASS`, Windows PowerShell launcher parse `POWERSHELL_SYNTAX_PASS`.
+- Hardened `NotificationOutbox.mark_sent`: transition to SENT only from RESERVED/IN_FLIGHT/UNCERTAIN. Reconfirming the identical Slack timestamp is idempotent; changing it is rejected and the stored timestamp remains unchanged.
+- Source commits: Windows test workflow [bd53dd6](https://github.com/dvikt33-ux/safe-bim-layer/commit/bd53dd6d26f36d0d05856311af76ce073d915623), timestamp lock [563a85f](https://github.com/dvikt33-ux/safe-bim-layer/commit/563a85fba1d1c566171022281cee23dcb927bed2), regression cases [d5ead94](https://github.com/dvikt33-ux/safe-bim-layer/commit/d5ead9466d0c34584e1f0fa4d4b1857a222112a6), [draft PR #37](https://github.com/dvikt33-ux/safe-bim-layer/pull/37). New PR documentation [0ed1e89](https://github.com/dvikt33-ux/safe-bim-layer/commit/0ed1e8906f6a7538f771dddb82f591dd384d5f90).
+
+**Scope:** SOURCE + OFFLINE_CI_LINUX_AND_WINDOWS_PASS + PINNED_GITHUB_RECEIPT_DRY_RUN_PASS; **NOT** actual Windows laptop execution, outbound Slack LIVE, unattended GitHub↔Slack reconciliation, deployment, or task DONE. `APA-P60.A02.S05` was not admitted; controller tasks/leases untouched. Do not imply operational bidirectional sync from a synthetic/mocked Windows runner.
