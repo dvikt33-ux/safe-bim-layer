@@ -105,6 +105,8 @@ def inspect_live_prefix(api, plan, prefix, material_guid):
         row = RUN.requested_details(api, guid)
         kind = RUN.verify_readback(
             step["command"], params, row, expected_floor=expected_floor,
+            expected_story_level=RUN.story_level_for_floor(
+                plan["storyBindings"], expected_floor),
             expected_slab_material_guid=(
                 material_guid if sid == REPAIR.FAILED_STEP else None))
         seeded[sid] = {"guid": guid, "kind": kind, "floorIndex": expected_floor}
@@ -201,13 +203,16 @@ def finish_verify(api, ticket, preflight, created):
     for sid in ticket["executionOrder"]:
         step = next(x for x in ticket["graph"]["operations"] if x["id"] == sid)
         params = RUN.resolve_params(step, created)
-        host = (RUN.check_previous_wall(api, step, created)
+        host = (RUN.check_previous_wall(api, step, created,
+                                        ticket["storyBindings"])
                 if step["command"] in ("CreateWindows", "CreateDoors") else None)
         floor = created[sid]["floorIndex"]
         RUN.verify_readback(
             step["command"], params,
             RUN.requested_details(api, created[sid]["guid"]),
             host, expected_floor=floor,
+            expected_story_level=RUN.story_level_for_floor(
+                ticket["storyBindings"], floor),
             expected_slab_material_guid=(
                 preflight["slabBasicMaterialGuid"]
                 if step["command"] == "CreateSlabs" else None))
