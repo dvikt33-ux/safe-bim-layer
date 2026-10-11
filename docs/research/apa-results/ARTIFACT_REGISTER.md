@@ -236,3 +236,11 @@ Both artifacts registered in `PROJECT_PLAN.json` revision **50**, [commit 88d84d
 | `ART-APA-SLACK-BRIDGE-REVIEW-20261011` | [Independent design review](control/reviews/APA-CAND-20261011-slack-evidence-bridge.md), [commit c2ad998](https://github.com/dvikt33-ux/safe-bim-layer/commit/c2ad99886ba18203a651c1db0a5caab8458c7cc2) | `DEFERRED` — no semantic duplicate found in checked tasks; code/runner permission and trust/deployment boundaries unresolved | `APA-P60.A02.S05` **not admitted**, `PROJECT_PLAN.json` revision **51**, [registration commit be6368f](https://github.com/dvikt33-ux/safe-bim-layer/commit/be6368ffcf7b2fbf113ade89ccc2aa0e8eb503ec); all existing task fields unchanged |
 
 Evidence gate: Slack → Socket Mode → SQLite live transport had PASS for event seq22; outbound automatic verified GitHub receipt → Slack and any Slack-triggered controller mutation remain unproved. Do not replace the existing controller/publisher, promote a task from INFO, or claim any 24h autonomous service. New candidate requires separate owner authorization and validated admission.
+
+## Slack receipt evidence bridge prototype — 2026-10-11
+
+| Artifact | Immutable source | Proven | Open |
+|---|---|---|---|
+| `ART-APA-SLACK-BRIDGE-PR37-OFFLINE-20261011` | [Canonical report](runs/2026-10-11/apa-slack-receipt-bridge-poc-pr37-20261011.md), [draft PR #37](https://github.com/dvikt33-ux/safe-bim-layer/pull/37) | GitHub readback PASS, [Actions #38144639897](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38144639897) SUCCESS: 44 prior Slack tests + 16 new receipt bridge tests, Windows PowerShell parse PASS | Windows LIVE, actual outbound Slack posting, GitHub↔Slack automatic scheduling, transactional outbox and independent admission remain NOT_VERIFIED. Candidate `APA-P60.A02.S05` **not in plan**. |
+
+Controller artifact record: `PROJECT_PLAN.json` revision **52**, [commit 8af838f](https://github.com/dvikt33-ux/safe-bim-layer/commit/8af838f0ad96c98bfcdafab86ad318901a23ecd1). No task claim or status mutation; existing `DEFERRED` review stands.
