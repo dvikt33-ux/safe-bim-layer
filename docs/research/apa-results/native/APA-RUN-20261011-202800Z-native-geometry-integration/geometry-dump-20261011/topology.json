@@ -1,0 +1,224 @@
+{
+  "status": "SAVED_DUMP_STRUCTURE_VERIFIED",
+  "evidenceKind": "SAVED_FILE",
+  "sampleOnly": false,
+  "geometryScope": "ALL_AVAILABLE_BODIES_IN_REGENERATED_3D_VIEW; existing layer/design-option/3D filters remain in force",
+  "sha256": "83a7a8e4cd2f62f5f8f99d6e55f90bffc1e9e64725ffb6c3855662b881fc2aa6",
+  "counts": {
+    "elements": 39,
+    "bodies": 56,
+    "vertices": 788,
+    "faces": 524,
+    "holeContours": 12
+  },
+  "bounds": {
+    "0ca6a748-e5e1-41d4-aae6-778ace39d960": {
+      "min": [
+        49.85,
+        39.85,
+        0
+      ],
+      "max": [
+        50.15,
+        48.15,
+        3
+      ]
+    },
+    "10b4a356-5618-4326-b7f6-8850113c2a6d": {
+      "min": [
+        39.85,
+        39.85,
+        0
+      ],
+      "max": [
+        49.85,
+        40.15,
+        3
+      ]
+    },
+    "1be6ced6-ad75-47f0-8009-3791c957b50c": {
+      "min": [
+        50.1,
+        43.4,
+        1
+      ],
+      "max": [
+        50.175,
+        44.6,
+        2.2
+      ]
+    },
+    "2a99cbab-342d-4f04-a382-2a669d8f5149": {
+      "min": [
+        40,
+        40,
+        -0.2
+      ],
+      "max": [
+        50,
+        48,
+        0
+      ]
+    },
+    "3ee2af7f-c4e8-44d0-8b4f-f34baa1d4718": {
+      "min": [
+        40.1,
+        43.4,
+        1
+      ],
+      "max": [
+        40.175,
+        44.6,
+        2.2
+      ]
+    },
+    "488041d0-4406-4172-bb37-aed4eab729f5": {
+      "min": [
+        39.85,
+        40.15,
+        3
+      ],
+      "max": [
+        40.15,
+        47.85,
+        6
+      ]
+    },
+    "4e2bf074-c554-4284-a0eb-b4ae3de11d90": {
+      "min": [
+        49.85,
+        39.85,
+        3
+      ],
+      "max": [
+        50.15,
+        48.15,
+        6
+      ]
+    },
+    "55d1a829-c83c-4fe1-8073-f8b83d102170": {
+      "min": [
+        42.85,
+        43.85,
+        0
+      ],
+      "max": [
+        43.15,
+        44.15,
+        3
+      ]
+    },
+    "5988ad8c-dcc4-43fe-9bd5-cf3fcc8fc48a": {
+      "min": [
+        46.85,
+        43.85,
+        0
+      ],
+      "max": [
+        47.15,
+        44.15,
+        3
+      ]
+    },
+    "86b450ac-c2f2-4bdb-ac09-1e2ff483a89e": {
+      "min": [
+        39.85,
+        47.85,
+        3
+      ],
+      "max": [
+        49.85,
+        48.15,
+        6
+      ]
+    },
+    "b11481a3-ae24-4b64-8c32-9a5bdadf9562": {
+      "min": [
+        40,
+        40,
+        2.8
+      ],
+      "max": [
+        50,
+        48,
+        3
+      ]
+    },
+    "c5d73ba8-ef22-4070-9967-38ddab3a70d9": {
+      "min": [
+        39.85,
+        40.15,
+        0
+      ],
+      "max": [
+        40.15,
+        47.85,
+        3
+      ]
+    },
+    "cd8753b0-2d63-468f-82e2-94efa81c57f5": {
+      "min": [
+        50.1,
+        43.4,
+        4
+      ],
+      "max": [
+        50.175,
+        44.6,
+        5.2
+      ]
+    },
+    "da37fc9a-5b19-415f-8ed4-6e31842ab437": {
+      "min": [
+        40.1,
+        43.4,
+        4
+      ],
+      "max": [
+        40.175,
+        44.6,
+        5.2
+      ]
+    },
+    "f5a029cc-2b0e-44be-a045-85e0d8677bc5": {
+      "min": [
+        39.85,
+        39.85,
+        3
+      ],
+      "max": [
+        49.85,
+        40.15,
+        6
+      ]
+    },
+    "fa851f24-b66c-48f9-b688-443d5b82ab40": {
+      "min": [
+        44.463,
+        39.831,
+        0
+      ],
+      "max": [
+        45.537,
+        40.169,
+        2.137
+      ]
+    },
+    "fc9289a2-257c-4c41-a823-7fe104278a4b": {
+      "min": [
+        39.85,
+        47.85,
+        0
+      ],
+      "max": [
+        49.85,
+        48.15,
+        3
+      ]
+    }
+  },
+  "currentProjectVerified": false,
+  "pavilionGeometryVerified": false,
+  "materialSemantics": "materialId references material pool; not attributeIndex",
+  "solidIntersectionVerified": false
+}

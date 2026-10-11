@@ -1,0 +1,27 @@
+{
+  "before": {
+    "path": "C:\\LocalAI\\APA_Isolated_Writer_Test_01.pln",
+    "name": "APA_Isolated_Writer_Test_01",
+    "port": 19724,
+    "tapirVersion": "1.5.10",
+    "storyIndex": 0
+  },
+  "after": {
+    "path": "C:\\LocalAI\\APA_Isolated_Writer_Test_01.pln",
+    "name": "APA_Isolated_Writer_Test_01",
+    "port": 19724,
+    "tapirVersion": "1.5.10",
+    "storyIndex": 0
+  },
+  "exportResponse": {
+    "success": true
+  },
+  "archicadProduct": {
+    "version": 29,
+    "buildNumber": 5101,
+    "languageCode": "RUS"
+  },
+  "inventoryUnchanged": true,
+  "modelWriteCommands": 0,
+  "plnSaved": false
+}

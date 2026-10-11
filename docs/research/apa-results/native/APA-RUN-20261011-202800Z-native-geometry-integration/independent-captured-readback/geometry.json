@@ -1,0 +1,1005 @@
+{
+  "status": "NATIVE_AUTHORED_GEOMETRY_READBACK_PASS",
+  "primaryCoverage": 17,
+  "columnGeometrySource": "DIRECTLY_OWNED_NATIVE_COLUMN_SEGMENTS",
+  "bounds": {
+    "2a99cbab-342d-4f04-a382-2a669d8f5149": {
+      "min": [
+        40,
+        40,
+        -0.2
+      ],
+      "max": [
+        50,
+        48,
+        0
+      ]
+    },
+    "0ca6a748-e5e1-41d4-aae6-778ace39d960": {
+      "min": [
+        49.85,
+        39.85,
+        0
+      ],
+      "max": [
+        50.15,
+        48.15,
+        3
+      ]
+    },
+    "fc9289a2-257c-4c41-a823-7fe104278a4b": {
+      "min": [
+        39.85,
+        47.85,
+        0
+      ],
+      "max": [
+        49.85,
+        48.15,
+        3
+      ]
+    },
+    "10b4a356-5618-4326-b7f6-8850113c2a6d": {
+      "min": [
+        39.85,
+        39.85,
+        0
+      ],
+      "max": [
+        49.85,
+        40.15,
+        3
+      ]
+    },
+    "c5d73ba8-ef22-4070-9967-38ddab3a70d9": {
+      "min": [
+        39.85,
+        40.15,
+        0
+      ],
+      "max": [
+        40.15,
+        47.85,
+        3
+      ]
+    },
+    "b11481a3-ae24-4b64-8c32-9a5bdadf9562": {
+      "min": [
+        40,
+        40,
+        2.8
+      ],
+      "max": [
+        50,
+        48,
+        3
+      ]
+    },
+    "4e2bf074-c554-4284-a0eb-b4ae3de11d90": {
+      "min": [
+        49.85,
+        39.85,
+        3
+      ],
+      "max": [
+        50.15,
+        48.15,
+        6
+      ]
+    },
+    "86b450ac-c2f2-4bdb-ac09-1e2ff483a89e": {
+      "min": [
+        39.85,
+        47.85,
+        3
+      ],
+      "max": [
+        49.85,
+        48.15,
+        6
+      ]
+    },
+    "f5a029cc-2b0e-44be-a045-85e0d8677bc5": {
+      "min": [
+        39.85,
+        39.85,
+        3
+      ],
+      "max": [
+        49.85,
+        40.15,
+        6
+      ]
+    },
+    "488041d0-4406-4172-bb37-aed4eab729f5": {
+      "min": [
+        39.85,
+        40.15,
+        3
+      ],
+      "max": [
+        40.15,
+        47.85,
+        6
+      ]
+    },
+    "8761cd95-bfbe-41bf-9b36-72b14ec7615b": {
+      "min": [
+        42.85,
+        43.85,
+        0
+      ],
+      "max": [
+        43.15,
+        44.15,
+        3
+      ]
+    },
+    "eeb04639-35ca-4171-b511-04fd80788c99": {
+      "min": [
+        46.85,
+        43.85,
+        0
+      ],
+      "max": [
+        47.15,
+        44.15,
+        3
+      ]
+    },
+    "1be6ced6-ad75-47f0-8009-3791c957b50c": {
+      "min": [
+        50.1,
+        43.4,
+        1
+      ],
+      "max": [
+        50.175,
+        44.6,
+        2.2
+      ]
+    },
+    "fa851f24-b66c-48f9-b688-443d5b82ab40": {
+      "min": [
+        44.463,
+        39.831,
+        0
+      ],
+      "max": [
+        45.537,
+        40.169,
+        2.137
+      ]
+    },
+    "3ee2af7f-c4e8-44d0-8b4f-f34baa1d4718": {
+      "min": [
+        40.1,
+        43.4,
+        1
+      ],
+      "max": [
+        40.175,
+        44.6,
+        2.2
+      ]
+    },
+    "cd8753b0-2d63-468f-82e2-94efa81c57f5": {
+      "min": [
+        50.1,
+        43.4,
+        4
+      ],
+      "max": [
+        50.175,
+        44.6,
+        5.2
+      ]
+    },
+    "da37fc9a-5b19-415f-8ed4-6e31842ab437": {
+      "min": [
+        40.1,
+        43.4,
+        4
+      ],
+      "max": [
+        40.175,
+        44.6,
+        5.2
+      ]
+    }
+  },
+  "nativeVolumeIntersectionPairs": [],
+  "nativeSurfaceCheckPairs": [],
+  "xyOverlapWithoutNativeVolumeCollision": [
+    [
+      "0ca6a748-e5e1-41d4-aae6-778ace39d960",
+      "2a99cbab-342d-4f04-a382-2a669d8f5149"
+    ],
+    [
+      "0ca6a748-e5e1-41d4-aae6-778ace39d960",
+      "4e2bf074-c554-4284-a0eb-b4ae3de11d90"
+    ],
+    [
+      "0ca6a748-e5e1-41d4-aae6-778ace39d960",
+      "86b450ac-c2f2-4bdb-ac09-1e2ff483a89e"
+    ],
+    [
+      "0ca6a748-e5e1-41d4-aae6-778ace39d960",
+      "cd8753b0-2d63-468f-82e2-94efa81c57f5"
+    ],
+    [
+      "0ca6a748-e5e1-41d4-aae6-778ace39d960",
+      "f5a029cc-2b0e-44be-a045-85e0d8677bc5"
+    ],
+    [
+      "10b4a356-5618-4326-b7f6-8850113c2a6d",
+      "2a99cbab-342d-4f04-a382-2a669d8f5149"
+    ],
+    [
+      "10b4a356-5618-4326-b7f6-8850113c2a6d",
+      "488041d0-4406-4172-bb37-aed4eab729f5"
+    ],
+    [
+      "10b4a356-5618-4326-b7f6-8850113c2a6d",
+      "4e2bf074-c554-4284-a0eb-b4ae3de11d90"
+    ],
+    [
+      "10b4a356-5618-4326-b7f6-8850113c2a6d",
+      "f5a029cc-2b0e-44be-a045-85e0d8677bc5"
+    ],
+    [
+      "1be6ced6-ad75-47f0-8009-3791c957b50c",
+      "4e2bf074-c554-4284-a0eb-b4ae3de11d90"
+    ],
+    [
+      "1be6ced6-ad75-47f0-8009-3791c957b50c",
+      "cd8753b0-2d63-468f-82e2-94efa81c57f5"
+    ],
+    [
+      "2a99cbab-342d-4f04-a382-2a669d8f5149",
+      "3ee2af7f-c4e8-44d0-8b4f-f34baa1d4718"
+    ],
+    [
+      "2a99cbab-342d-4f04-a382-2a669d8f5149",
+      "488041d0-4406-4172-bb37-aed4eab729f5"
+    ],
+    [
+      "2a99cbab-342d-4f04-a382-2a669d8f5149",
+      "4e2bf074-c554-4284-a0eb-b4ae3de11d90"
+    ],
+    [
+      "2a99cbab-342d-4f04-a382-2a669d8f5149",
+      "86b450ac-c2f2-4bdb-ac09-1e2ff483a89e"
+    ],
+    [
+      "2a99cbab-342d-4f04-a382-2a669d8f5149",
+      "8761cd95-bfbe-41bf-9b36-72b14ec7615b"
+    ],
+    [
+      "2a99cbab-342d-4f04-a382-2a669d8f5149",
+      "b11481a3-ae24-4b64-8c32-9a5bdadf9562"
+    ],
+    [
+      "2a99cbab-342d-4f04-a382-2a669d8f5149",
+      "c5d73ba8-ef22-4070-9967-38ddab3a70d9"
+    ],
+    [
+      "2a99cbab-342d-4f04-a382-2a669d8f5149",
+      "da37fc9a-5b19-415f-8ed4-6e31842ab437"
+    ],
+    [
+      "2a99cbab-342d-4f04-a382-2a669d8f5149",
+      "eeb04639-35ca-4171-b511-04fd80788c99"
+    ],
+    [
+      "2a99cbab-342d-4f04-a382-2a669d8f5149",
+      "f5a029cc-2b0e-44be-a045-85e0d8677bc5"
+    ],
+    [
+      "2a99cbab-342d-4f04-a382-2a669d8f5149",
+      "fa851f24-b66c-48f9-b688-443d5b82ab40"
+    ],
+    [
+      "2a99cbab-342d-4f04-a382-2a669d8f5149",
+      "fc9289a2-257c-4c41-a823-7fe104278a4b"
+    ],
+    [
+      "3ee2af7f-c4e8-44d0-8b4f-f34baa1d4718",
+      "488041d0-4406-4172-bb37-aed4eab729f5"
+    ],
+    [
+      "3ee2af7f-c4e8-44d0-8b4f-f34baa1d4718",
+      "b11481a3-ae24-4b64-8c32-9a5bdadf9562"
+    ],
+    [
+      "3ee2af7f-c4e8-44d0-8b4f-f34baa1d4718",
+      "da37fc9a-5b19-415f-8ed4-6e31842ab437"
+    ],
+    [
+      "488041d0-4406-4172-bb37-aed4eab729f5",
+      "b11481a3-ae24-4b64-8c32-9a5bdadf9562"
+    ],
+    [
+      "488041d0-4406-4172-bb37-aed4eab729f5",
+      "c5d73ba8-ef22-4070-9967-38ddab3a70d9"
+    ],
+    [
+      "488041d0-4406-4172-bb37-aed4eab729f5",
+      "fc9289a2-257c-4c41-a823-7fe104278a4b"
+    ],
+    [
+      "4e2bf074-c554-4284-a0eb-b4ae3de11d90",
+      "b11481a3-ae24-4b64-8c32-9a5bdadf9562"
+    ],
+    [
+      "4e2bf074-c554-4284-a0eb-b4ae3de11d90",
+      "fc9289a2-257c-4c41-a823-7fe104278a4b"
+    ],
+    [
+      "86b450ac-c2f2-4bdb-ac09-1e2ff483a89e",
+      "b11481a3-ae24-4b64-8c32-9a5bdadf9562"
+    ],
+    [
+      "86b450ac-c2f2-4bdb-ac09-1e2ff483a89e",
+      "c5d73ba8-ef22-4070-9967-38ddab3a70d9"
+    ],
+    [
+      "86b450ac-c2f2-4bdb-ac09-1e2ff483a89e",
+      "fc9289a2-257c-4c41-a823-7fe104278a4b"
+    ],
+    [
+      "b11481a3-ae24-4b64-8c32-9a5bdadf9562",
+      "da37fc9a-5b19-415f-8ed4-6e31842ab437"
+    ],
+    [
+      "b11481a3-ae24-4b64-8c32-9a5bdadf9562",
+      "f5a029cc-2b0e-44be-a045-85e0d8677bc5"
+    ],
+    [
+      "b11481a3-ae24-4b64-8c32-9a5bdadf9562",
+      "fa851f24-b66c-48f9-b688-443d5b82ab40"
+    ],
+    [
+      "c5d73ba8-ef22-4070-9967-38ddab3a70d9",
+      "da37fc9a-5b19-415f-8ed4-6e31842ab437"
+    ],
+    [
+      "c5d73ba8-ef22-4070-9967-38ddab3a70d9",
+      "f5a029cc-2b0e-44be-a045-85e0d8677bc5"
+    ],
+    [
+      "f5a029cc-2b0e-44be-a045-85e0d8677bc5",
+      "fa851f24-b66c-48f9-b688-443d5b82ab40"
+    ]
+  ],
+  "aabbCandidates": [
+    [
+      "0ca6a748-e5e1-41d4-aae6-778ace39d960",
+      "10b4a356-5618-4326-b7f6-8850113c2a6d"
+    ],
+    [
+      "0ca6a748-e5e1-41d4-aae6-778ace39d960",
+      "1be6ced6-ad75-47f0-8009-3791c957b50c"
+    ],
+    [
+      "0ca6a748-e5e1-41d4-aae6-778ace39d960",
+      "b11481a3-ae24-4b64-8c32-9a5bdadf9562"
+    ],
+    [
+      "0ca6a748-e5e1-41d4-aae6-778ace39d960",
+      "fc9289a2-257c-4c41-a823-7fe104278a4b"
+    ],
+    [
+      "10b4a356-5618-4326-b7f6-8850113c2a6d",
+      "b11481a3-ae24-4b64-8c32-9a5bdadf9562"
+    ],
+    [
+      "10b4a356-5618-4326-b7f6-8850113c2a6d",
+      "c5d73ba8-ef22-4070-9967-38ddab3a70d9"
+    ],
+    [
+      "10b4a356-5618-4326-b7f6-8850113c2a6d",
+      "fa851f24-b66c-48f9-b688-443d5b82ab40"
+    ],
+    [
+      "3ee2af7f-c4e8-44d0-8b4f-f34baa1d4718",
+      "c5d73ba8-ef22-4070-9967-38ddab3a70d9"
+    ],
+    [
+      "488041d0-4406-4172-bb37-aed4eab729f5",
+      "86b450ac-c2f2-4bdb-ac09-1e2ff483a89e"
+    ],
+    [
+      "488041d0-4406-4172-bb37-aed4eab729f5",
+      "da37fc9a-5b19-415f-8ed4-6e31842ab437"
+    ],
+    [
+      "488041d0-4406-4172-bb37-aed4eab729f5",
+      "f5a029cc-2b0e-44be-a045-85e0d8677bc5"
+    ],
+    [
+      "4e2bf074-c554-4284-a0eb-b4ae3de11d90",
+      "86b450ac-c2f2-4bdb-ac09-1e2ff483a89e"
+    ],
+    [
+      "4e2bf074-c554-4284-a0eb-b4ae3de11d90",
+      "cd8753b0-2d63-468f-82e2-94efa81c57f5"
+    ],
+    [
+      "4e2bf074-c554-4284-a0eb-b4ae3de11d90",
+      "f5a029cc-2b0e-44be-a045-85e0d8677bc5"
+    ],
+    [
+      "8761cd95-bfbe-41bf-9b36-72b14ec7615b",
+      "b11481a3-ae24-4b64-8c32-9a5bdadf9562"
+    ],
+    [
+      "b11481a3-ae24-4b64-8c32-9a5bdadf9562",
+      "c5d73ba8-ef22-4070-9967-38ddab3a70d9"
+    ],
+    [
+      "b11481a3-ae24-4b64-8c32-9a5bdadf9562",
+      "eeb04639-35ca-4171-b511-04fd80788c99"
+    ],
+    [
+      "b11481a3-ae24-4b64-8c32-9a5bdadf9562",
+      "fc9289a2-257c-4c41-a823-7fe104278a4b"
+    ],
+    [
+      "c5d73ba8-ef22-4070-9967-38ddab3a70d9",
+      "fc9289a2-257c-4c41-a823-7fe104278a4b"
+    ]
+  ],
+  "relationshipComponents": [
+    [
+      "0ca6a748-e5e1-41d4-aae6-778ace39d960",
+      "10b4a356-5618-4326-b7f6-8850113c2a6d",
+      "1be6ced6-ad75-47f0-8009-3791c957b50c",
+      "2a99cbab-342d-4f04-a382-2a669d8f5149",
+      "3ee2af7f-c4e8-44d0-8b4f-f34baa1d4718",
+      "488041d0-4406-4172-bb37-aed4eab729f5",
+      "4e2bf074-c554-4284-a0eb-b4ae3de11d90",
+      "86b450ac-c2f2-4bdb-ac09-1e2ff483a89e",
+      "8761cd95-bfbe-41bf-9b36-72b14ec7615b",
+      "b11481a3-ae24-4b64-8c32-9a5bdadf9562",
+      "c5d73ba8-ef22-4070-9967-38ddab3a70d9",
+      "cd8753b0-2d63-468f-82e2-94efa81c57f5",
+      "da37fc9a-5b19-415f-8ed4-6e31842ab437",
+      "eeb04639-35ca-4171-b511-04fd80788c99",
+      "f5a029cc-2b0e-44be-a045-85e0d8677bc5",
+      "fa851f24-b66c-48f9-b688-443d5b82ab40",
+      "fc9289a2-257c-4c41-a823-7fe104278a4b"
+    ]
+  ],
+  "graphEdges": [
+    {
+      "guids": [
+        "2a99cbab-342d-4f04-a382-2a669d8f5149",
+        "0ca6a748-e5e1-41d4-aae6-778ace39d960"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "2a99cbab-342d-4f04-a382-2a669d8f5149",
+        "10b4a356-5618-4326-b7f6-8850113c2a6d"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "2a99cbab-342d-4f04-a382-2a669d8f5149",
+        "8761cd95-bfbe-41bf-9b36-72b14ec7615b"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "2a99cbab-342d-4f04-a382-2a669d8f5149",
+        "c5d73ba8-ef22-4070-9967-38ddab3a70d9"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "2a99cbab-342d-4f04-a382-2a669d8f5149",
+        "eeb04639-35ca-4171-b511-04fd80788c99"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "2a99cbab-342d-4f04-a382-2a669d8f5149",
+        "fa851f24-b66c-48f9-b688-443d5b82ab40"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "2a99cbab-342d-4f04-a382-2a669d8f5149",
+        "fc9289a2-257c-4c41-a823-7fe104278a4b"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "0ca6a748-e5e1-41d4-aae6-778ace39d960",
+        "1be6ced6-ad75-47f0-8009-3791c957b50c"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "0ca6a748-e5e1-41d4-aae6-778ace39d960",
+        "10b4a356-5618-4326-b7f6-8850113c2a6d"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "0ca6a748-e5e1-41d4-aae6-778ace39d960",
+        "4e2bf074-c554-4284-a0eb-b4ae3de11d90"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "0ca6a748-e5e1-41d4-aae6-778ace39d960",
+        "b11481a3-ae24-4b64-8c32-9a5bdadf9562"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "0ca6a748-e5e1-41d4-aae6-778ace39d960",
+        "fc9289a2-257c-4c41-a823-7fe104278a4b"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "fc9289a2-257c-4c41-a823-7fe104278a4b",
+        "86b450ac-c2f2-4bdb-ac09-1e2ff483a89e"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "fc9289a2-257c-4c41-a823-7fe104278a4b",
+        "b11481a3-ae24-4b64-8c32-9a5bdadf9562"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "fc9289a2-257c-4c41-a823-7fe104278a4b",
+        "c5d73ba8-ef22-4070-9967-38ddab3a70d9"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "10b4a356-5618-4326-b7f6-8850113c2a6d",
+        "fa851f24-b66c-48f9-b688-443d5b82ab40"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "10b4a356-5618-4326-b7f6-8850113c2a6d",
+        "b11481a3-ae24-4b64-8c32-9a5bdadf9562"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "10b4a356-5618-4326-b7f6-8850113c2a6d",
+        "c5d73ba8-ef22-4070-9967-38ddab3a70d9"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "10b4a356-5618-4326-b7f6-8850113c2a6d",
+        "f5a029cc-2b0e-44be-a045-85e0d8677bc5"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "c5d73ba8-ef22-4070-9967-38ddab3a70d9",
+        "3ee2af7f-c4e8-44d0-8b4f-f34baa1d4718"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "c5d73ba8-ef22-4070-9967-38ddab3a70d9",
+        "488041d0-4406-4172-bb37-aed4eab729f5"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "c5d73ba8-ef22-4070-9967-38ddab3a70d9",
+        "b11481a3-ae24-4b64-8c32-9a5bdadf9562"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "b11481a3-ae24-4b64-8c32-9a5bdadf9562",
+        "488041d0-4406-4172-bb37-aed4eab729f5"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "b11481a3-ae24-4b64-8c32-9a5bdadf9562",
+        "4e2bf074-c554-4284-a0eb-b4ae3de11d90"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "b11481a3-ae24-4b64-8c32-9a5bdadf9562",
+        "86b450ac-c2f2-4bdb-ac09-1e2ff483a89e"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "b11481a3-ae24-4b64-8c32-9a5bdadf9562",
+        "8761cd95-bfbe-41bf-9b36-72b14ec7615b"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "b11481a3-ae24-4b64-8c32-9a5bdadf9562",
+        "eeb04639-35ca-4171-b511-04fd80788c99"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "b11481a3-ae24-4b64-8c32-9a5bdadf9562",
+        "f5a029cc-2b0e-44be-a045-85e0d8677bc5"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "4e2bf074-c554-4284-a0eb-b4ae3de11d90",
+        "cd8753b0-2d63-468f-82e2-94efa81c57f5"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "4e2bf074-c554-4284-a0eb-b4ae3de11d90",
+        "86b450ac-c2f2-4bdb-ac09-1e2ff483a89e"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "4e2bf074-c554-4284-a0eb-b4ae3de11d90",
+        "f5a029cc-2b0e-44be-a045-85e0d8677bc5"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "86b450ac-c2f2-4bdb-ac09-1e2ff483a89e",
+        "488041d0-4406-4172-bb37-aed4eab729f5"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "f5a029cc-2b0e-44be-a045-85e0d8677bc5",
+        "488041d0-4406-4172-bb37-aed4eab729f5"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "488041d0-4406-4172-bb37-aed4eab729f5",
+        "da37fc9a-5b19-415f-8ed4-6e31842ab437"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    }
+  ],
+  "sharedNativeSurfaces": [
+    {
+      "guids": [
+        "0ca6a748-e5e1-41d4-aae6-778ace39d960",
+        "10b4a356-5618-4326-b7f6-8850113c2a6d"
+      ],
+      "sharedAreaSquareMeters": 0.8699999999999917,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "0ca6a748-e5e1-41d4-aae6-778ace39d960",
+        "1be6ced6-ad75-47f0-8009-3791c957b50c"
+      ],
+      "sharedAreaSquareMeters": 0.23999999999998664,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "0ca6a748-e5e1-41d4-aae6-778ace39d960",
+        "2a99cbab-342d-4f04-a382-2a669d8f5149"
+      ],
+      "sharedAreaSquareMeters": 1.1999999999999886,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "0ca6a748-e5e1-41d4-aae6-778ace39d960",
+        "4e2bf074-c554-4284-a0eb-b4ae3de11d90"
+      ],
+      "sharedAreaSquareMeters": 1.2899999999999867,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "0ca6a748-e5e1-41d4-aae6-778ace39d960",
+        "b11481a3-ae24-4b64-8c32-9a5bdadf9562"
+      ],
+      "sharedAreaSquareMeters": 2.8599999999999897,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "0ca6a748-e5e1-41d4-aae6-778ace39d960",
+        "fc9289a2-257c-4c41-a823-7fe104278a4b"
+      ],
+      "sharedAreaSquareMeters": 0.8699999999999917,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "10b4a356-5618-4326-b7f6-8850113c2a6d",
+        "2a99cbab-342d-4f04-a382-2a669d8f5149"
+      ],
+      "sharedAreaSquareMeters": 1.3274999999999877,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "10b4a356-5618-4326-b7f6-8850113c2a6d",
+        "b11481a3-ae24-4b64-8c32-9a5bdadf9562"
+      ],
+      "sharedAreaSquareMeters": 3.477499999999988,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "10b4a356-5618-4326-b7f6-8850113c2a6d",
+        "c5d73ba8-ef22-4070-9967-38ddab3a70d9"
+      ],
+      "sharedAreaSquareMeters": 0.8699999999999917,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "10b4a356-5618-4326-b7f6-8850113c2a6d",
+        "f5a029cc-2b0e-44be-a045-85e0d8677bc5"
+      ],
+      "sharedAreaSquareMeters": 1.522499999999985,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "10b4a356-5618-4326-b7f6-8850113c2a6d",
+        "fa851f24-b66c-48f9-b688-443d5b82ab40"
+      ],
+      "sharedAreaSquareMeters": 1.9502759999999766,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "2a99cbab-342d-4f04-a382-2a669d8f5149",
+        "8761cd95-bfbe-41bf-9b36-72b14ec7615b"
+      ],
+      "sharedAreaSquareMeters": 0.08999999999999829,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "2a99cbab-342d-4f04-a382-2a669d8f5149",
+        "c5d73ba8-ef22-4070-9967-38ddab3a70d9"
+      ],
+      "sharedAreaSquareMeters": 1.1549999999999896,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "2a99cbab-342d-4f04-a382-2a669d8f5149",
+        "eeb04639-35ca-4171-b511-04fd80788c99"
+      ],
+      "sharedAreaSquareMeters": 0.08999999999999829,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "2a99cbab-342d-4f04-a382-2a669d8f5149",
+        "fa851f24-b66c-48f9-b688-443d5b82ab40"
+      ],
+      "sharedAreaSquareMeters": 0.00939999999999923,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "2a99cbab-342d-4f04-a382-2a669d8f5149",
+        "fc9289a2-257c-4c41-a823-7fe104278a4b"
+      ],
+      "sharedAreaSquareMeters": 1.4774999999999863,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "3ee2af7f-c4e8-44d0-8b4f-f34baa1d4718",
+        "c5d73ba8-ef22-4070-9967-38ddab3a70d9"
+      ],
+      "sharedAreaSquareMeters": 0.23999999999998664,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "488041d0-4406-4172-bb37-aed4eab729f5",
+        "86b450ac-c2f2-4bdb-ac09-1e2ff483a89e"
+      ],
+      "sharedAreaSquareMeters": 0.8999999999999915,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "488041d0-4406-4172-bb37-aed4eab729f5",
+        "b11481a3-ae24-4b64-8c32-9a5bdadf9562"
+      ],
+      "sharedAreaSquareMeters": 1.1549999999999896,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "488041d0-4406-4172-bb37-aed4eab729f5",
+        "c5d73ba8-ef22-4070-9967-38ddab3a70d9"
+      ],
+      "sharedAreaSquareMeters": 1.1549999999999896,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "488041d0-4406-4172-bb37-aed4eab729f5",
+        "da37fc9a-5b19-415f-8ed4-6e31842ab437"
+      ],
+      "sharedAreaSquareMeters": 0.2399999999999866,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "488041d0-4406-4172-bb37-aed4eab729f5",
+        "f5a029cc-2b0e-44be-a045-85e0d8677bc5"
+      ],
+      "sharedAreaSquareMeters": 0.8999999999999915,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "4e2bf074-c554-4284-a0eb-b4ae3de11d90",
+        "86b450ac-c2f2-4bdb-ac09-1e2ff483a89e"
+      ],
+      "sharedAreaSquareMeters": 0.8999999999999915,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "4e2bf074-c554-4284-a0eb-b4ae3de11d90",
+        "b11481a3-ae24-4b64-8c32-9a5bdadf9562"
+      ],
+      "sharedAreaSquareMeters": 1.1999999999999886,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "4e2bf074-c554-4284-a0eb-b4ae3de11d90",
+        "cd8753b0-2d63-468f-82e2-94efa81c57f5"
+      ],
+      "sharedAreaSquareMeters": 0.2399999999999866,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "4e2bf074-c554-4284-a0eb-b4ae3de11d90",
+        "f5a029cc-2b0e-44be-a045-85e0d8677bc5"
+      ],
+      "sharedAreaSquareMeters": 0.8999999999999915,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "86b450ac-c2f2-4bdb-ac09-1e2ff483a89e",
+        "b11481a3-ae24-4b64-8c32-9a5bdadf9562"
+      ],
+      "sharedAreaSquareMeters": 1.4774999999999863,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "86b450ac-c2f2-4bdb-ac09-1e2ff483a89e",
+        "fc9289a2-257c-4c41-a823-7fe104278a4b"
+      ],
+      "sharedAreaSquareMeters": 1.5224999999999853,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "8761cd95-bfbe-41bf-9b36-72b14ec7615b",
+        "b11481a3-ae24-4b64-8c32-9a5bdadf9562"
+      ],
+      "sharedAreaSquareMeters": 0.23999999999999794,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "b11481a3-ae24-4b64-8c32-9a5bdadf9562",
+        "c5d73ba8-ef22-4070-9967-38ddab3a70d9"
+      ],
+      "sharedAreaSquareMeters": 2.6949999999999914,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "b11481a3-ae24-4b64-8c32-9a5bdadf9562",
+        "eeb04639-35ca-4171-b511-04fd80788c99"
+      ],
+      "sharedAreaSquareMeters": 0.23999999999999794,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "b11481a3-ae24-4b64-8c32-9a5bdadf9562",
+        "f5a029cc-2b0e-44be-a045-85e0d8677bc5"
+      ],
+      "sharedAreaSquareMeters": 1.4774999999999863,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "b11481a3-ae24-4b64-8c32-9a5bdadf9562",
+        "fc9289a2-257c-4c41-a823-7fe104278a4b"
+      ],
+      "sharedAreaSquareMeters": 3.477499999999988,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "c5d73ba8-ef22-4070-9967-38ddab3a70d9",
+        "fc9289a2-257c-4c41-a823-7fe104278a4b"
+      ],
+      "sharedAreaSquareMeters": 0.8699999999999917,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    }
+  ],
+  "collisionEngine": "Tapir.GetCollisions; Shapely/AABB produce candidates only",
+  "structuralAcceptance": "NOT_VERIFIED",
+  "jointQualityAcceptance": "NOT_VERIFIED",
+  "topologyCounts": {
+    "elements": 39,
+    "bodies": 56,
+    "vertices": 788,
+    "faces": 524,
+    "holeContours": 12
+  },
+  "geometryScope": "ALL_AVAILABLE_BODIES_IN_REGENERATED_3D_VIEW; existing layer/design-option/3D filters remain in force",
+  "modelWriteAttempts": 0,
+  "inventoryUnchanged": true,
+  "dumpSha256": {
+    "native-model.json": "be6170201b0b3f0c5e079089f4323da148491274f7797ba51999cee194dbb343",
+    "normalized-model.json": "76f2ddc4d598b7339756c3e55042f48ca1e74cc5c9e34e79bfe31a8074543f43"
+  }
+}

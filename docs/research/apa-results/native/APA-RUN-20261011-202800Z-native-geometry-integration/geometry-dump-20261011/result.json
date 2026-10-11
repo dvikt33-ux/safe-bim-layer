@@ -1,0 +1,38 @@
+{
+  "status": "PARTIAL_NATIVE_DUMP_COVERAGE",
+  "modelWriteAttempts": 0,
+  "automaticRetry": false,
+  "missingPrimaryGuids": [
+    "8761cd95-bfbe-41bf-9b36-72b14ec7615b",
+    "eeb04639-35ca-4171-b511-04fd80788c99"
+  ],
+  "geometryScope": "ALL_AVAILABLE_BODIES_IN_REGENERATED_3D_VIEW; existing layer/design-option/3D filters remain in force",
+  "nativeCounts": {
+    "elements": 39,
+    "elementsWithBodies": 17,
+    "unresolvedBodyOwners": 0,
+    "bodies": 56,
+    "vertices": 788,
+    "faces": 524,
+    "materials": 3,
+    "holeContours": 12,
+    "elementTypes": {
+      "Wall": 8,
+      "Window": 4,
+      "Object": 16,
+      "Slab": 2,
+      "ColumnSegment": 2,
+      "Elevation": 4,
+      "Column": 2,
+      "Door": 1
+    },
+    "bodyTypes": {
+      "Wall": 8,
+      "Window": 28,
+      "Slab": 2,
+      "ColumnSegment": 2,
+      "Door": 16
+    }
+  },
+  "inventoryUnchanged": true
+}
