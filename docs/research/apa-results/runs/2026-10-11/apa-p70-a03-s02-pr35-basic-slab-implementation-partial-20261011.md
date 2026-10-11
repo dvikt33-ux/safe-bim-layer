@@ -227,3 +227,22 @@ Owner activated the required first story in the *same* open Archicad 29 test PLN
 ```
 
 **Evidence class USER_SUPPLIED / REPORTED_LIVE_PREFLIGHT_PASS.** The approval token is intentionally omitted from the durable report. No fourth-suffix Create was performed in this preflight; native full-scene results remain unverified and PLN unsaved. The previous `STORY_MISMATCH` is resolved for this read-only call, but a fresh execution must revalidate identity before native writes. Advise explicit user approval for 13 creates; after any partial/unknown outcome, NO blind retry.
+
+## Fourth-suffix approved live execute returned transport timeout; write outcome UNKNOWN
+
+After the previously reported read-only fourth preflight PASS (12 previous GUIDs / 13 planned new), the owner explicitly ran the one-shot fourth suffix command in the same Archicad 29 scratch PLN on Tapir port 19726. The exact externally reported output:
+
+```json
+{"status":"BLOCKED","reason":"TimeoutError: timed out","modelWriteAttempts":0}
+```
+
+**Do not interpret the displayed `modelWriteAttempts:0` as a measured zero.** Source audit found that the fourth-suffix `main` outer exception handler hardcoded this value **unconditionally**. Depending on where the timeout escaped, there may be no fourth-scene reservation and zero created elements OR there may be a reserved/partially created fourth scene. **LIVE_STATUS = TIMEOUT_UNKNOWN; no repeat, no save/undo/delete.** The original approval token is not reusable for a blind execute.
+
+A new strictly READ ONLY utility `scripts/diagnose_apa_suffix4_timeout.py` is published on PR #35. Its default `--journal-only` performs **zero Archicad calls**, inspects the local historical SHA256 evidence and SQLite journal in `mode=ro`, checks the original 20+12 provenance and two repaired-slab markers, and reports whether the fourth suffix was ever reserved; any created or ambiguous recorded steps and GUIDs are included. Optional `--with-native` performs **only** allowlisted GET calls (GetProjectInfo, GetAddOnVersion, GetStories, GetAllElements, GetDetailsOfElements) and reports whether any original 32 GUIDs vanished, new native GUIDs exist without journal rows, or fourth-suffix registered GUIDs are missing. A transient native timeout does not erase the journal report. This utility never creates or modifies model elements, never modifies the journal, and never licenses automatic replay.
+
+Fourth-suffix outer exception reporting is corrected to `OUTCOME_UNKNOWN_NEEDS_JOURNAL_RECONCILIATION` and `modelWriteAttempts:null` rather than a false zero count. **These code changes were published, but the original live timeout occurred before their installation**.
+
+- [Latest offline CI run #38148329249](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38148329249): **175/175 tests PASS**.
+- Source head `9db6fdcb588c2a8c28c7b386600ffe3fcc4793d0` on PR #35.
+- Remaining live acceptance **NOT_VERIFIED**. Next check: run read-only journal-only utility. Do not rerun any Create token or assume 13 operations are missing until journal + native reconciliation.
+
