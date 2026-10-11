@@ -30,6 +30,19 @@ EXPECTED_TAPIR = "1.5.10"
 # Narrowly approved throwaway project. NEVER apply CLI target override to any
 # other PLN, including protected APA_Pavilion_MVP_SUCCESS.pln and SyncGuids.
 APPROVED_SCRATCH_PATH = r"C:\LocalAI\APA_Test_House_01.pln"
+APPROVED_ISOLATED_WRITER_PATH = r"C:\LocalAI\APA_Isolated_Writer_Test_01.pln"
+
+
+def bind_isolated_writer_pln(port, path=APPROVED_ISOLATED_WRITER_PATH):
+    """Bind the user-authorized isolated writer test; no arbitrary path override."""
+    global PORT, EXPECTED_NAME, EXPECTED_PATH
+    if type(port) is not int or not 1 <= port <= 65535:
+        raise ValueError("INVALID_TEST_PORT")
+    if path != APPROVED_ISOLATED_WRITER_PATH:
+        raise ValueError("ISOLATED_WRITER_PLN_NOT_APPROVED")
+    PORT = port
+    EXPECTED_PATH = APPROVED_ISOLATED_WRITER_PATH
+    EXPECTED_NAME = "APA_Isolated_Writer_Test_01"
 
 
 def bind_approved_scratch_pln(port, path=APPROVED_SCRATCH_PATH):
@@ -382,6 +395,9 @@ class SceneWriter:
         bindings = preview.get("storyBindings")
         self.required_story = bindings[0] if bindings else None
         binding = self.guarded_binding()
+        target = preview.get("nativeTargetProjectPath")
+        if target is not None and target != binding["path"]:
+            raise ValueError("AUTHORED_TARGET_DIFFERS_FROM_WRITER_BINDING")
         if bindings:
             stories = self.api("GetStories", {}).get("stories")
             if not isinstance(stories, list):
@@ -398,6 +414,11 @@ class SceneWriter:
         basic_name = preview.get("slabBasicMaterialName")
         material_guid = (resolve_basic_slab_material(self.api, basic_name)
                          if basic_name is not None else None)
+        pinned_material = preview.get("expectedPreflightSlabMaterialGuid")
+        if pinned_material is not None and (
+                not isinstance(material_guid, str)
+                or material_guid.casefold() != pinned_material.casefold()):
+            raise ValueError("AUTHORED_SLAB_MATERIAL_CHANGED_BEFORE_PREFLIGHT")
         preview["slabBasicMaterialGuid"] = material_guid
         preview["sourcePlanHash"] = digest({
             "graphHash": preview["sourcePlanHash"],

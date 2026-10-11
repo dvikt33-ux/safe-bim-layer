@@ -153,7 +153,8 @@ def as_existing_scene_writer_preview(candidate):
             or candidate.get("liveWriteAuthorized") is not False
             or candidate.get("nativeWriteCalls")!=0):
         raise ValueError("UNTRUSTED_OR_AUTHORIZED_SOURCE_CANDIDATE")
-    if (candidate.get("nativeTargetProjectPath")!=RUN.APPROVED_SCRATCH_PATH):
+    if candidate.get("nativeTargetProjectPath") not in (
+            RUN.APPROVED_SCRATCH_PATH, RUN.APPROVED_ISOLATED_WRITER_PATH):
         raise ValueError("WRITER_PREVIEW_ONLY_FOR_EXISTING_APPROVED_SCRATCH_PLN")
     schema=RUN.DEFAULT_SCENE_SCHEMA
     if (not schema.is_file() or
@@ -202,6 +203,7 @@ def as_existing_scene_writer_preview(candidate):
         raise ValueError("INVALID_AUTHORED_SCENE_DIMENSIONS")
     return {
         "status":"SCENE_PREVIEW_OFFLINE",
+        "nativeTargetProjectPath":candidate["nativeTargetProjectPath"],
         "sourcePlanHash":checked["sourcePlanHash"],
         "graph":graph,
         "executionOrder":checked["executionOrder"],

@@ -205,6 +205,32 @@ def compile_intent(intent, schema_path):
                 "Typical floor and MEP require independent live acceptance"])}
 
 
+def compile_authored_intent(intent, schema_path, read_api):
+    """Join authored brief/PLP/geometry to the same existing native execution path."""
+    if (not isinstance(intent, dict) or set(intent) != {
+            "schemaVersion", "projectId", "units", "brief", "cseCandidate",
+            "layout", "storyHeights"}
+            or intent["schemaVersion"] != "apa-authored-project/1"
+            or intent["units"] != "meters"
+            or not isinstance(intent["projectId"], str)
+            or not ID.fullmatch(intent["projectId"])
+            or intent["brief"].get("projectId") != intent["projectId"]
+            or intent["brief"].get("targetProjectPath") != RUN.EXPECTED_PATH):
+        raise ValueError("INVALID_AUTHORED_PROJECT_OR_WRITER_TARGET")
+    catalog_with_provenance(schema_path)
+    pack = compile_project_library_pack(intent["brief"], intent["cseCandidate"], read_api)
+    candidate = compile_authored_native_candidate(
+        intent["brief"], pack, intent["layout"], intent["storyHeights"],
+        read_api, schema_path=schema_path)
+    preview = AUTHORED_NATIVE.as_existing_scene_writer_preview(candidate)
+    return {**preview, "status": "ACCELERATOR_COMPILED_OFFLINE",
+            "intent": intent, "intentHash": RUN.digest(intent),
+            "authoredCandidate": candidate,
+            "routes": {s["id"]: {"executor": "SceneWriter", "command": s["command"],
+                                    "readback": "GetDetailsOfElements"}
+                       for s in preview["graph"]["operations"]}}
+
+
 class EvidenceAPI:
     def __init__(self, transport, folder, execute=False, export=False):
         self.transport, self.folder = transport, Path(folder)
@@ -266,7 +292,16 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
               "LIVE" if transport is native_transport else "SYNTHETIC",
               "automaticRetry": False, "plnSaved": False}
     try:
-        compiled = compile_intent(intent, schema)
+        authored = isinstance(intent, dict) and intent.get("schemaVersion") == "apa-authored-project/1"
+        if authored:
+            if mode not in {"preflight", "execute"} or not callable(transport):
+                raise ValueError("AUTHORED_NATIVE_REQUIRES_EXPLICIT_READ_ONLY_PREFLIGHT")
+            # Exact identity is checked before resolving any authored native data.
+            api = EvidenceAPI(transport, folder, execute=mode == "execute")
+            RUN.guarded_project(api)
+            compiled = compile_authored_intent(intent, schema, api)
+        else:
+            compiled = compile_intent(intent, schema)
         write_json(folder / "plan.json", compiled)
         result.update(intentHash=compiled["intentHash"], metrics=compiled["metrics"])
         if mode == "offline":
@@ -274,7 +309,8 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
             return result
         if mode not in {"preflight", "execute"}:
             raise ValueError("INVALID_MODE")
-        api = EvidenceAPI(transport, folder, execute=mode == "execute")
+        if api is None:
+            api = EvidenceAPI(transport, folder, execute=mode == "execute")
         required_story = (compiled.get("storyBindings") or [None])[0]
         binding = RUN.guarded_project(api, required_story)  # Identity before inventory.
         result["archicadProduct"] = archicad29(api)
@@ -283,9 +319,12 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
         ledger_dir = Path(state_dir) if state_dir is not None else folder.parent / "accelerator-state"
         writer = RUN.SceneWriter(api, ledger_dir / "scene-v1-attempts.sqlite3", schema,
                                  preview_factory=(
+                                     AUTHORED_NATIVE.make_read_only_scene_writer_preview_factory(
+                                         compiled["authoredCandidate"]) if authored else
                                      (lambda x, y, path: BUILD.prepare(intent["components"][0], path))
                                      if required_story is not None else None))
-        anchor = intent["components"][0]["anchor"]
+        anchor = ({"x": compiled["envelope"]["xMin"], "y": compiled["envelope"]["yMin"]}
+                  if authored else intent["components"][0]["anchor"])
         ticket = writer.preflight(anchor["x"], anchor["y"])
         if ticket["binding"] != binding or ticket["graph"] != compiled["graph"]:
             raise ValueError("PLAN_OR_BINDING_CHANGED")
@@ -392,6 +431,8 @@ def main(argv=None):
     p.add_argument("--confirm-plan-hash")
     p.add_argument("--scratch-port", type=int,
                    help="Use only the approved disposable C:\\LocalAI\\APA_Test_House_01.pln on this port")
+    p.add_argument("--isolated-port", type=int,
+                   help="Use only user-authorized C:\\LocalAI\\APA_Isolated_Writer_Test_01.pln")
     args = p.parse_args(argv)
     try:
         transport = native_transport
@@ -403,7 +444,11 @@ def main(argv=None):
             if args.execute and (not args.run_id or not args.confirm_plan_hash or not args.data_dir):
                 raise ValueError("--execute requires --run-id, --confirm-plan-hash and stable --data-dir")
             intent = json.loads(args.intent.read_text(encoding="utf-8-sig"))
-            if args.scratch_port is not None:
+            if args.scratch_port is not None and args.isolated_port is not None:
+                raise ValueError("ONLY_ONE_EXPLICIT_NATIVE_TARGET")
+            if args.isolated_port is not None:
+                RUN.bind_isolated_writer_pln(args.isolated_port)
+            elif args.scratch_port is not None:
                 RUN.bind_approved_scratch_pln(args.scratch_port)
             elif (args.preflight or args.execute) and any(
                     c.get("primitive") == "building-shell-v1"
