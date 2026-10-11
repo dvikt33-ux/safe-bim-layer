@@ -80,7 +80,9 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None):
         # One authored footprint slab per storey; no guessed room partitions.
         step_id="native-slab-"+sid
         ops.append(BUILD.step(step_id,"CreateSlabs",{
-            "level":0.0,"floorIndex":native,
+            # Tapir CreateSlabs level is absolute project Z; native details
+            # return level relative to the home story and zCoordinate absolute.
+            "level":float(s["level"]),"floorIndex":native,
             "thickness":slab["thicknessMeters"],
             "referencePlaneLocation":"Top",
             "polygonCoordinates":polygon
@@ -213,6 +215,7 @@ def as_existing_scene_writer_preview(candidate):
         "storyBindings":native,
         "slabBasicMaterialName":candidate["slabBasicMaterialName"],
         "expectedPreflightSlabMaterialGuid":candidate["provisionalBasicSlabMaterialGuid"],
+        "slabLevelConvention":"PROJECT_ABSOLUTE",
         "envelope":{**outline,
                     "zMin":stories[0]["level"]-.3,
                     "zMax":last["level"]+final_height+.3},

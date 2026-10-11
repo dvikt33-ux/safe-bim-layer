@@ -257,7 +257,7 @@ def story_level_for_floor(story_bindings, native_index):
 
 def verify_readback(command, params, row, owner_guid=None, expected_floor=0,
                     expected_slab_material_guid=None, allow_slab_thickness_mismatch=False,
-                    expected_story_level=0.0):
+                    expected_story_level=0.0, slab_level_is_absolute=False):
     kind = command[6:-1]  # CreateWalls -> Wall, CreateDoors -> Door
     if row.get("type") != kind or row.get("floorIndex") != expected_floor:
         raise ValueError(f"READBACK_TYPE_OR_STORY: expected {kind} on native story {expected_floor}")
@@ -291,7 +291,11 @@ def verify_readback(command, params, row, owner_guid=None, expected_floor=0,
         # CreateSlabs may inherit Composite from the current defaults. Allow an
         # intermediate thickness mismatch ONLY before an explicitly journaled
         # ModifySlabs; still prove story, type, level and polygon first.
-        if (not close(details.get("level"), expected["level"])
+        relative_level = (expected["level"] - expected_story_level
+                          if slab_level_is_absolute else expected["level"])
+        if (not close(details.get("level"), relative_level)
+                or (slab_level_is_absolute
+                    and not close(details.get("zCoordinate"), expected["level"]))
                 or not compare_polygon(expected["polygonCoordinates"],
                                        details.get("polygonOutline"))
                 or (not allow_slab_thickness_mismatch
@@ -425,6 +429,7 @@ class SceneWriter:
             "schemaSha256": preview["schemaSha256"],
             "slabBasicMaterialName": basic_name,
             "slabBasicMaterialGuid": material_guid,
+            "slabLevelConvention":preview.get("slabLevelConvention", "LEGACY_RELATIVE"),
         })
         scan_report = scan_for_existing_geometry(self.api, x, y, preview.get("envelope"))
         if self.guarded_binding() != binding:
@@ -535,6 +540,9 @@ class SceneWriter:
                         floor = params["slabsData"][0]["floorIndex"]
                         verify_readback(command, params, intermediate,
                                         expected_floor=floor,
+                                        expected_story_level=story_level_for_floor(
+                                            preflight.get("storyBindings"),floor),
+                                        slab_level_is_absolute=(preflight.get("slabLevelConvention")=="PROJECT_ABSOLUTE"),
                                         allow_slab_thickness_mismatch=True)
                         modify = {"slabsWithDetails": [{
                             "elementId": {"guid": guid},
@@ -575,7 +583,8 @@ class SceneWriter:
                             preflight.get("storyBindings"), floor_index),
                         expected_slab_material_guid=(
                             preflight.get("slabBasicMaterialGuid")
-                            if command == "CreateSlabs" else None))
+                            if command == "CreateSlabs" else None),
+                        slab_level_is_absolute=(preflight.get("slabLevelConvention")=="PROJECT_ABSOLUTE"))
                     created[step_id] = {"guid": guid, "kind": kind, "floorIndex": floor_index}
                     result["steps"][step_id] = {"status": "PASS", "guid": guid, "kind": kind}
                     db.execute("UPDATE steps SET state='PASS',output=? WHERE scene_id=? AND step_id=?",

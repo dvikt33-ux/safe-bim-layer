@@ -27,7 +27,16 @@ class IsolatedNative(CompositeDefaultNative):
         if command=='GetAttributesByType':
             self.calls.append(command)
             return {'attributes':[{'attributeId':{'guid':BM_GUID},'name':BM}]}
-        return super().__call__(command,params)
+        result=super().__call__(command,params)
+        if command=='GetDetailsOfElements':
+            guid=params['elements'][0]['elementId']['guid']
+            source,args=self.created[guid]
+            if source=='CreateSlabs':
+                slab=args['slabsData'][0]
+                details=result['detailsOfElements'][0]['details']
+                details['zCoordinate']=slab['level']
+                details['level']=slab['level']-3*slab['floorIndex']
+        return result
 
 
 class IsolatedAuthoredExecutionTests(unittest.TestCase):
@@ -101,3 +110,15 @@ class IsolatedAuthoredExecutionTests(unittest.TestCase):
         writer=A.RUN.SceneWriter(drift,self.state/'unused.sqlite3',preview_factory=factory)
         with self.assertRaisesRegex(ValueError,'AUTHORED_SLAB_MATERIAL_CHANGED'):writer.preflight(40,40)
         self.assertFalse(self.native.writes)
+
+    def test_upper_slab_requires_absolute_three_meters_and_relative_zero(self):
+        compiled=A.compile_authored_intent(self.intent,A.RUN.DEFAULT_SCENE_SCHEMA,self.native)
+        upper=next(s for s in compiled['graph']['operations'] if s['id']=='native-slab-level-2')
+        self.assertEqual(upper['params']['slabsData'][0]['level'],3.)
+        row={'type':'Slab','floorIndex':1,'details':{
+            'level':-3.,'zCoordinate':0.,'structureType':'Composite','thickness':.3,
+            'polygonOutline':upper['params']['slabsData'][0]['polygonCoordinates']}}
+        with self.assertRaisesRegex(ValueError,'SLAB_READBACK_MISMATCH'):
+            A.RUN.verify_readback('CreateSlabs',upper['params'],row,
+                expected_floor=1,expected_story_level=3.,slab_level_is_absolute=True,
+                allow_slab_thickness_mismatch=True)

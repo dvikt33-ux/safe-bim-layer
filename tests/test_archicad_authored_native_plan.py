@@ -106,9 +106,9 @@ class AuthoredNativePlanTests(unittest.TestCase):
         slabs=[o["params"]["slabsData"][0] for o in out["graph"]["operations"]
                if o["command"]=="CreateSlabs"]
         self.assertEqual(len(slabs),2)
-        for s in slabs:
+        for s,expected_level in zip(slabs,[0.,3.]):
             self.assertEqual(s["thickness"],.2)
-            self.assertEqual(s["level"],0)
+            self.assertEqual(s["level"],expected_level)
             self.assertEqual(s["referencePlaneLocation"],"Top")
             self.assertEqual(len(s["polygonCoordinates"]),4)
 

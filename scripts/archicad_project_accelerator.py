@@ -374,7 +374,8 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
                         ticket.get("storyBindings"), expected_floor),
                     expected_slab_material_guid=(
                         ticket.get("slabBasicMaterialGuid")
-                        if step["command"] == "CreateSlabs" else None))
+                        if step["command"] == "CreateSlabs" else None),
+                    slab_level_is_absolute=(ticket.get("slabLevelConvention")=="PROJECT_ABSOLUTE"))
             if RUN.guarded_project(api, required_story) != binding:
                 raise ValueError("PROJECT_CHANGED_DURING_WHOLE_ASSEMBLY_READBACK")
             result["wholeAssemblyReadback"] = True
