@@ -3,6 +3,12 @@
 Дата создания: 2026-10-10. Цель: **сохранять проверяемые результаты исследования Archicad Project Accelerator (APA) для Archicad 29 в GitHub**. Slack #apa-research используется для оперативной передачи событий, но не заменяет сохраняемую техническую документацию.
 
 
+## Глубокий аудит поиска и систематизации GitHub — 2026-10-13
+
+- [Многоэтапный сравнительный аудит v2 — фактические тесты поиска, ограничения решений, противоречия текущего APA и архитектура индексирования](runs/2026-10-13/apa-github-knowledge-search-deep-audit-20261013-v2.md) — SOURCE_RESEARCH + 3 негативных connector search probes; **поисковая система НЕ внедрена**, экспериментальные Pagefind/Sourcebot/CodeGraphContext не тестировались на локальном корпусе. Указаны конкретные criteria/30 gold queries и upstream источники.
+- [Исходный предварительный обзор v1](runs/2026-10-13/apa-github-machine-discovery-architecture-20261013.md) — сохранён для provenance; его прежняя приоритетная рекомендация SQLite+Zoekt **не считать окончательной**.
+- Исследование не является V2 publisher receipt и не переводит S-ID в DONE; до реализации необходим независимый task-admission и GitHub readback.
+
 ## Сохранённые полные исходники аудитов — 2026-10-10
 
 - [Полный аудит APA Research OS — 735 строк](runs/2026-10-10/apa-source-snapshot-research-os-full-20261010.md) — оригинал из вложения, точный GitHub readback, [commit fc8d3e7](https://github.com/dvikt33-ux/safe-bim-layer/commit/fc8d3e7a1c18090dad7f66035f8528f4081ce531). Нормализованный предыдущий вариант сохранён отдельно, без перезаписи.
