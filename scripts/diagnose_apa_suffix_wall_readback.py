@@ -9,6 +9,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 import sqlite3
+from contextlib import closing
 import sys
 
 import archicad_scene_run as RUN
@@ -39,7 +40,7 @@ def collect(api):
         raise ValueError("FAILED_WALL_NOT_IN_ORIGINAL_PLAN")
     # Do not run continuation preflight: 25-GUID baseline no longer applies.
     uri = journal.resolve().as_uri() + "?mode=ro"
-    with sqlite3.connect(uri, uri=True) as db:
+    with closing(sqlite3.connect(uri, uri=True)) as db:
         scene_row = db.execute(
             "SELECT state,plan_hash,result FROM scenes WHERE scene_id=?",
             (CONT.SUFFIX_ID,)).fetchone()

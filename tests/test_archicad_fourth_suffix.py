@@ -1,5 +1,6 @@
 """12 verified GUIDs + one-shot 13 remaining native creates (synthetic only)."""
 import sqlite3
+from contextlib import closing
 from pathlib import Path
 import sys
 import unittest
@@ -59,7 +60,7 @@ class FourthSuffixTests(unittest.TestCase):
         self.assertTrue(all(x.startswith("Create") for x in
                             self.native.writes[self.writes_before:]))
         self.assertFalse(out["plnSaved"])
-        with sqlite3.connect(self.journal) as db:
+        with closing(sqlite3.connect(self.journal)) as db, db:
             self.assertEqual(db.execute(
                 "SELECT COUNT(*) FROM steps WHERE scene_id=? AND state='PASS'",
                 (FINAL.FOURTH_SCENE_ID,)).fetchone()[0], 13)

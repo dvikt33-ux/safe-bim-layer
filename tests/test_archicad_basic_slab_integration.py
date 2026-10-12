@@ -5,6 +5,7 @@ No Archicad runtime; tests native-shaped readback, journal, and no replay.
 import json
 from pathlib import Path
 import sqlite3
+from contextlib import closing
 import sys
 import tempfile
 import unittest
@@ -101,7 +102,7 @@ class BasicSlabIntegrationTests(unittest.TestCase):
             self.assertEqual(self.native.modified[guid]["thickness"], 0.2)
             self.assertEqual(self.native.modified[guid]["buildingMaterialId"]["guid"],
                              MATERIAL_GUID)
-        with sqlite3.connect(self.state / "scene-v1-attempts.sqlite3") as db:
+        with closing(sqlite3.connect(self.state / "scene-v1-attempts.sqlite3")) as db, db:
             self.assertEqual(db.execute(
                 "SELECT COUNT(*) FROM steps WHERE state='PASS'").fetchone()[0], 25)
 
@@ -120,7 +121,7 @@ class BasicSlabIntegrationTests(unittest.TestCase):
         self.assertEqual(result["status"], "PARTIAL_OR_UNKNOWN_OUTCOME", result)
         self.assertEqual(result["scene"]["failedStep"], "s1-slab")
         self.assertEqual(result["modelWriteAttempts"], 6)  # 4 walls, slab, ModifySlabs
-        with sqlite3.connect(self.state / "scene-v1-attempts.sqlite3") as db:
+        with closing(sqlite3.connect(self.state / "scene-v1-attempts.sqlite3")) as db, db:
             state, guid, record = db.execute(
                 "SELECT state,guid,output FROM steps WHERE step_id='s1-slab'").fetchone()
             self.assertEqual(state, "BASIC_MODIFY_ATTEMPTED")

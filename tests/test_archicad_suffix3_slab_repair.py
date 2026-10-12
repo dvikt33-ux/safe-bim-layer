@@ -4,6 +4,7 @@ Uses existing tests' exact native-shaped 20+5+3 scene and immutable ledger,
 does not connect to real Archicad, and never reruns an old reservation.
 """
 import sqlite3
+from contextlib import closing
 from pathlib import Path
 import sys
 import unittest
@@ -58,7 +59,7 @@ class Suffix3SlabRepairTests(unittest.TestCase):
         self.assertEqual(proposal["nativeCurrentZ"], 0.0)
         self.assertEqual(proposal["targetStoryLevel"], 3.0)
         self.assertEqual(self.native.writes, [])
-        with sqlite3.connect(self.journal) as db:
+        with closing(sqlite3.connect(self.journal)) as db, db:
             self.assertIsNone(db.execute(
                 "SELECT name FROM sqlite_master WHERE name=?",
                 (REPAIR2.REPAIR_TABLE,)).fetchone())
@@ -73,7 +74,7 @@ class Suffix3SlabRepairTests(unittest.TestCase):
         self.assertEqual(self.native.writes, ["ModifySlabs"])
         self.assertEqual(len(self.native.created), 12)
         self.assertIn("zCoordinate", self.native.modified[REPAIR2.TARGET_GUID])
-        with sqlite3.connect(self.journal) as db:
+        with closing(sqlite3.connect(self.journal)) as db, db:
             state = db.execute(
                 "SELECT state FROM apa_suffix3_slab_repairs").fetchone()
             self.assertEqual(state[0], "READBACK_PASS")
