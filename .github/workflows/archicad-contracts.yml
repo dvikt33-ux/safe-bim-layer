@@ -8,7 +8,13 @@ on:
       - 'chatgpt/tapir-1510-offline-preflight-*'
       - 'chatgpt/whole-scene-v1-*'
       - 'feature/project-accelerator-integration-*'
+      - 'feature/apa-connected-*'
     paths:
+      - 'scripts/archicad_connected_components.py'
+      - 'scripts/archicad_connected_ifc.py'
+      - 'scripts/archicad_connected_solver.py'
+      - 'scripts/requirements-connected.txt'
+      - 'tests/test_archicad_connected_components.py'
       - 'scripts/archicad_accelerator_integration.py'
       - 'scripts/archicad_project_accelerator.py'
       - 'scripts/archicad_semantic_brief.py'
@@ -57,6 +63,11 @@ on:
       - '.github/workflows/archicad-contracts.yml'
   pull_request:
     paths:
+      - 'scripts/archicad_connected_components.py'
+      - 'scripts/archicad_connected_ifc.py'
+      - 'scripts/archicad_connected_solver.py'
+      - 'scripts/requirements-connected.txt'
+      - 'tests/test_archicad_connected_components.py'
       - '.github/workflows/archicad-contracts.yml'
       - 'scripts/archicad_accelerator_integration.py'
       - 'scripts/archicad_project_accelerator.py'
@@ -117,7 +128,7 @@ jobs:
         with:
           python-version: '3.11'
       - run: python -m pip install 'jsonschema>=4,<5'
-      - run: python -m pip install -r scripts/requirements-materials.txt
+      - run: python -m pip install -r scripts/requirements-connected.txt
       - run: python -m unittest discover -s tests -p 'test_archicad_*.py' -v
       - run: python scripts/archicad_batch_contracts.py --runtime-version 1.5.8
       - run: python scripts/archicad_bim_graph.py examples/archicad_bim_graph.offline.sample.json --runtime-version 1.5.8

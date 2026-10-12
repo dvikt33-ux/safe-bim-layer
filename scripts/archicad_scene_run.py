@@ -59,6 +59,8 @@ def bind_approved_scratch_pln(port, path=APPROVED_SCRATCH_PATH):
 DEFAULT_SCENE_SCHEMA = Path(__file__).resolve().parents[1] / "schemas/tapir-live-1.5.10/tapir-scene-live.json"
 ALLOWED_WRITES = frozenset(("CreateWalls", "CreateSlabs", "CreateColumns",
                            "CreateWindows", "CreateDoors", "CreateObjects"))
+# Opt-in typed adapters reuse this journal; a command name alone never enables it.
+EXTENDED_WRITES = frozenset({'CreateRoofs','CreateMorphs','CreateMEPRoutingElements'})
 _GUID = re.compile(r"^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$")
 _SCENE_ID = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_-]{3,79}$")
 _NONSPATIAL_TYPES = frozenset({
@@ -89,6 +91,8 @@ def native_plan_hash(preview, graph_hash):
         binding['nativeAttributeExpectations']=preview['nativeAttributeExpectations']
     if preview.get('nativeLibraryExpectations'):
         binding['nativeLibraryExpectations']=preview['nativeLibraryExpectations']
+    if preview.get('integrationBindings'):
+        binding['integrationBindings']=preview['integrationBindings']
     return digest(binding)
 
 
@@ -431,12 +435,66 @@ def resolve_basic_slab_material(api, name):
 
 
 class SceneWriter:
-    def __init__(self, api, journal_path, schema_path=None, preview_factory=None):
+    def __init__(self, api, journal_path, schema_path=None, preview_factory=None,
+                 adapters=None):
         self.api = api
         self.journal_path = Path(journal_path)
         self.schema_path = Path(schema_path) if schema_path is not None else DEFAULT_SCENE_SCHEMA
         self.preview_factory = preview_factory
         self.required_story = None
+        self.adapters = dict(adapters or {})
+        if set(self.adapters) - EXTENDED_WRITES:
+            raise ValueError('UNSUPPORTED_NATIVE_ADAPTER')
+        self.allowed_writes = ALLOWED_WRITES | self.adapters.keys()
+
+    def modify_morph_body(self, preflight, scene_id, parameters, expected_hash,
+                          verify_after):
+        """One explicit in-place repair through the same durable writer ledger.
+
+        A failed create is reconciled externally first. This is a new, hashed
+        Modify intent, never a retry of CreateMorphs or an automatic rollback.
+        """
+        if ('CreateMorphs' not in self.adapters or
+                not _SCENE_ID.fullmatch(scene_id) or not callable(verify_after)):
+            raise ValueError('MORPH_CHANGE_REQUIRES_TYPED_ADAPTER_AND_READBACK')
+        command='ModifyMorphs'
+        intent={'sceneId':scene_id,'sourcePlanHash':preflight['sourcePlanHash'],
+            'command':command,'parameters':parameters,'target':preflight['binding']}
+        if digest(intent)!=expected_hash:
+            raise ValueError('MORPH_CHANGE_INTENT_HASH_MISMATCH')
+        rows=parameters.get('morphsWithDetails',[])
+        if len(rows)!=1 or set(rows[0])!={'elementId','body'}:
+            raise ValueError('ONLY_ONE_EXPLICIT_MORPH_BODY_REPAIR')
+        checked=SCENE.GRAPH.CONTRACTS.compile_batch(
+            SCENE.GRAPH.CONTRACTS.load_catalog(self.schema_path),
+            {'requests':[{'id':'repair','command':command,'params':parameters}]},
+            runtime_version=EXPECTED_TAPIR)
+        if checked['status']!='SCHEMA_VALID':
+            raise ValueError('MORPH_CHANGE_SCHEMA_INVALID')
+        result={'status':'BLOCKED','automaticRetry':False,'sceneId':scene_id,
+            'operationHash':expected_hash,'command':command,'nativeCreates':0}
+        with closing(sqlite3.connect(self.journal_path)) as db:
+            db.execute('PRAGMA synchronous=FULL');db.execute('BEGIN IMMEDIATE')
+            if db.execute('SELECT 1 FROM scenes WHERE scene_id=? OR plan_hash=?',(scene_id,expected_hash)).fetchone():
+                raise ValueError('MORPH_CHANGE_ALREADY_RESERVED_NEVER_RETRY')
+            db.execute('INSERT INTO scenes VALUES(?,?,?,?)',(scene_id,expected_hash,'STARTED',canonical(result)))
+            db.execute('INSERT INTO steps VALUES(?,?,?,?,?)',(scene_id,'repair','ATTEMPTED',rows[0]['elementId']['guid'],canonical(intent)))
+            db.commit()
+            try:
+                if self.guarded_binding()!=preflight['binding']:
+                    raise ValueError('MORPH_CHANGE_PROJECT_DRIFT')
+                reply=self.api(command,parameters)
+                if reply.get('executionResults')!=[{'success':True}]:
+                    raise ValueError('MORPH_CHANGE_NOT_CONFIRMED')
+                if self.guarded_binding()!=preflight['binding']:
+                    raise ValueError('MORPH_CHANGE_TARGET_CHANGED_AFTER_WRITE')
+                result['readback']=verify_after()
+                result['status']='EXISTING_MORPH_BODY_READBACK_PASS'
+                db.execute("UPDATE steps SET state='PASS',output=? WHERE scene_id=? AND step_id='repair'",(canonical(result),scene_id))
+            except Exception as exc:
+                result.update(status='PARTIAL_OR_UNKNOWN_OUTCOME',reason=type(exc).__name__+': '+str(exc),manualReconciliationRequired=True)
+            db.execute('UPDATE scenes SET state=?,result=? WHERE scene_id=?',(result['status'],canonical(result),scene_id));db.commit()
+        return result
 
     def guarded_binding(self):
         return guarded_project(self.api, self.required_story)
@@ -532,7 +590,7 @@ class SceneWriter:
                     continue
                 step = next(s for s in preflight["graph"]["operations"] if s["id"] == step_id)
                 command = step["command"]
-                if command not in ALLOWED_WRITES:
+                if command not in self.allowed_writes:
                     raise ValueError("UNSUPPORTED_WRITE_RECIPE")
                 try:
                     # The FULL project identity is freshly checked at every step.
@@ -542,7 +600,19 @@ class SceneWriter:
                     if command in ("CreateWindows", "CreateDoors"):
                         parent_guid = check_previous_wall(
                             self.api, step, created, preflight.get("storyBindings"))
-                    params = resolve_params(step, created)
+                    adapter = self.adapters.get(command)
+                    if adapter is not None:
+                        params = adapter.resolve(step, created, preflight)
+                        # Compile against the same installed schema immediately
+                        # before durable reservation; no unchecked plug-in payload.
+                        catalog = SCENE.GRAPH.CONTRACTS.load_catalog(self.schema_path)
+                        validated = SCENE.GRAPH.CONTRACTS.compile_batch(catalog,
+                            {'requests':[{'id':step_id,'command':command,'params':params}]},
+                            runtime_version=EXPECTED_TAPIR)
+                        if validated['status'] != 'SCHEMA_VALID':
+                            raise ValueError('ADAPTER_PARAMETERS_INVALID')
+                    else:
+                        params = resolve_params(step, created)
                     # Bind each operation to its exact resolved (including GUID)
                     # parameters, approved local test scope, source scene and target.
                     intent = {"sceneId": scene_id, "planHash": expected_hash,
@@ -556,7 +626,7 @@ class SceneWriter:
                         "approvedAt": datetime.now(timezone.utc).isoformat(),
                         "approvalSource": approval_source or "standing-test-PLN-permission",
                     }
-                    if approval_record["permission"] not in ALLOWED_WRITES:
+                    if approval_record["permission"] not in self.allowed_writes:
                         raise ValueError("UNREVIEWED_WRITE_SCOPE")
                     db.execute("BEGIN IMMEDIATE")
                     db.execute("INSERT INTO steps VALUES (?,?,?,?,?)",
@@ -617,17 +687,23 @@ class SceneWriter:
                     if command in ("CreateWindows", "CreateDoors"):
                         owner_ref = step["params"][command[6:].lower()+"Data"][0]["ownerWallId"]["guid"]["$createdGuid"]
                         floor_index = created[owner_ref]["floorIndex"]
+                    elif adapter is not None:
+                        floor_index = adapter.floor(params, preflight)
                     else:
                         floor_index = next(iter(params.values()))[0]["floorIndex"]
-                    kind = verify_readback(
-                        command, params, row, parent_guid,
-                        expected_floor=floor_index,
-                        expected_story_level=story_level_for_floor(
-                            preflight.get("storyBindings"), floor_index),
-                        expected_slab_material_guid=(
-                            preflight.get("slabBasicMaterialGuid")
-                            if command == "CreateSlabs" else None),
-                        slab_level_is_absolute=(preflight.get("slabLevelConvention")=="PROJECT_ABSOLUTE"))
+                    if adapter is not None:
+                        kind = adapter.verify(self.api, guid, params, row, floor_index,
+                            story_level_for_floor(preflight.get('storyBindings'),floor_index))
+                    else:
+                        kind = verify_readback(
+                            command, params, row, parent_guid,
+                            expected_floor=floor_index,
+                            expected_story_level=story_level_for_floor(
+                                preflight.get("storyBindings"), floor_index),
+                            expected_slab_material_guid=(
+                                preflight.get("slabBasicMaterialGuid")
+                                if command == "CreateSlabs" else None),
+                            slab_level_is_absolute=(preflight.get("slabLevelConvention")=="PROJECT_ABSOLUTE"))
                     created[step_id] = {"guid": guid, "kind": kind, "floorIndex": floor_index}
                     result["steps"][step_id] = {"status": "PASS", "guid": guid, "kind": kind}
                     db.execute("UPDATE steps SET state='PASS',output=? WHERE scene_id=? AND step_id=?",
