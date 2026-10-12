@@ -1,0 +1,73 @@
+{
+  "action_id": "APA-P70.A02",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-NORMATIVE-BINDINGS",
+      "evidence_ids": [
+        "EV-JUNCTION-PROOF",
+        "EV-JUNCTION-BYTES"
+      ],
+      "statement": "Working existing-accelerator normative pack attachment, six conditional requirements from five verified official registry metadata entries. Actual cached109GUID/fourjunction body signatures bind24rows:20NOT_VERIFIED and4familyNOT_APPLICABLE. Native geometry/class cannot certify system or jurisdiction. Fullclauses, project applicability and engineering NOT_VERIFIED; no numericlimits invented/enforced. Existing provisional CSE approval unchanged.18newtests,513host/Windows+LinuxCI PASS;5exact code blobs. Zero nativecalls; A02.S02PARTIAL, A11.S03PARTIAL/S10BLOCKED unchanged.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-JUNCTION-PROOF",
+      "kind": "TEST_RESULT",
+      "sha256": "1135798a13e3948bd6581e1e9324c6f4dfccf395aed2e1eb12e8ccab5a127b28",
+      "source_revision": "e43bc6055d648270b72dc573a22c9d52c71a83f8",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-191815Z-normative-bindings/integration.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-JUNCTION-BYTES",
+      "kind": "LOCAL_LOG",
+      "sha256": "976e6a52fb23c83f628420d04971f6f068082fb8e7b594900ba441889b54721b",
+      "source_revision": "e43bc6055d648270b72dc573a22c9d52c71a83f8",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-191815Z-normative-bindings/EVIDENCE_SHA256.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "work-normative-bindings-20261012",
+  "executor_run_id": "APA-RUN-20261012-185922Z-normative-bindings",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-12T19:18:15Z",
+  "idempotency_key": "sha256:47b85adab6b9f969bce23aaf5a1384d2f06809d7316546670fbc256114ce0610",
+  "inputs": [
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-CSE-RESEARCH"
+  ],
+  "next_substep": "APA-P70.A11.S03",
+  "phase": "SOURCE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261012-191815Z-normative-bindings",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "29 native evidence captured; publication makes zero native calls",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "source_branch": "feature/apa-normative-bindings-20261012",
+    "tapir": "1.5.10"
+  },
+  "source_revisions": [
+    {
+      "revision": "e43bc6055d648270b72dc573a22c9d52c71a83f8",
+      "source_sha": "e43bc6055d648270b72dc573a22c9d52c71a83f8",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/66"
+    }
+  ],
+  "started_at": "2026-10-12T18:59:22Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A02.S02"
+}

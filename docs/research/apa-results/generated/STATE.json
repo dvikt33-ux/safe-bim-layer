@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 35,
+  "run_count": 36,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -246,6 +246,13 @@
       "report": "runs/2026-10-12/APA-RUN-20261012-185427Z-four-real-wall-roof-native109/REPORT.md",
       "run_id": "APA-RUN-20261012-185427Z-four-real-wall-roof-native109",
       "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-12/APA-RUN-20261012-191815Z-normative-bindings/REPORT.md",
+      "run_id": "APA-RUN-20261012-191815Z-normative-bindings",
+      "substep_id": "APA-P70.A02.S02"
     }
   ],
   "schema": "APA_GENERATED_INDEX_V1",
