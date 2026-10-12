@@ -900,7 +900,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A02.S02
 
-**Связать проектные требования с версиями нормативов и проверяемыми правилами** — BUILD / READY / P3
+**Связать проектные требования с версиями нормативов и проверяемыми правилами** — BUILD / IN_PROGRESS / P3
 
 - Parent: APA-P70 → APA-P70.A02
 - Topic: PRODUCT_DEVELOPMENT
@@ -908,7 +908,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P70.A02.S01, APA-P70.A08.S04
 - Related, check before duplicating: none
 - Acceptance: Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED
-- Owner/lease: unclaimed
+- Owner/lease: work-normative-bindings-20261012 / 2026-10-12T21:59:22Z
 - Requires owner approval: False
 - Source inputs: [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md)
 - Existing V2 runs: none
