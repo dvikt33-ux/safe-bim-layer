@@ -1,180 +1,187 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 25,
+  "run_count": 26,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "SYNTHETIC",
-      "report": "runs/2026-10-10/APA-RUN-20261010-104437Z-publisher-integration-smoke/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-10\\APA-RUN-20261010-104437Z-publisher-integration-smoke\\REPORT.md",
       "run_id": "APA-RUN-20261010-104437Z-publisher-integration-smoke",
       "substep_id": "APA-P00.A03.S04"
     },
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "SOURCE",
-      "report": "runs/2026-10-10/APA-RUN-20261010-110048Z-legacy-traceability/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-10\\APA-RUN-20261010-110048Z-legacy-traceability\\REPORT.md",
       "run_id": "APA-RUN-20261010-110048Z-legacy-traceability",
       "substep_id": "APA-P50.A01.S01"
     },
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "SOURCE",
-      "report": "runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-10\\APA-RUN-20261010-143940Z-opening-shell-geom\\REPORT.md",
       "run_id": "APA-RUN-20261010-143940Z-opening-shell-geom",
       "substep_id": "APA-P10.A01.S03"
     },
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "SOURCE",
-      "report": "runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-10\\APA-RUN-20261010-163950Z-tapir-compat-6f29\\REPORT.md",
       "run_id": "APA-RUN-20261010-163950Z-tapir-compat-6f29",
       "substep_id": "APA-P10.A02.S01"
     },
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "SOURCE",
-      "report": "runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-10\\APA-RUN-20261010-200823Z-mep-route-port-gate\\REPORT.md",
       "run_id": "APA-RUN-20261010-200823Z-mep-route-port-gate",
       "substep_id": "APA-P10.A02.S04"
     },
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "SOURCE",
-      "report": "runs/2026-10-10/APA-RUN-20261010-234200Z-slack-legacy-three-audit/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-10\\APA-RUN-20261010-234200Z-slack-legacy-three-audit\\REPORT.md",
       "run_id": "APA-RUN-20261010-234200Z-slack-legacy-three-audit",
       "substep_id": "APA-P00.A02.S03"
     },
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "SOURCE",
-      "report": "runs/2026-10-10/APA-RUN-20261010-235301Z-branch-evidence-dedup/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-10\\APA-RUN-20261010-235301Z-branch-evidence-dedup\\REPORT.md",
       "run_id": "APA-RUN-20261010-235301Z-branch-evidence-dedup",
       "substep_id": "APA-P00.A02.S03"
     },
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "SOURCE",
-      "report": "runs/2026-10-11/APA-RUN-20261011-001922Z-eighty-head-blob-inventory/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-11\\APA-RUN-20261011-001922Z-eighty-head-blob-inventory\\REPORT.md",
       "run_id": "APA-RUN-20261011-001922Z-eighty-head-blob-inventory",
       "substep_id": "APA-P00.A02.S03"
     },
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "SOURCE",
-      "report": "runs/2026-10-11/APA-RUN-20261011-091905Z-p70-source-integration-map/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-11\\APA-RUN-20261011-091905Z-p70-source-integration-map\\REPORT.md",
       "run_id": "APA-RUN-20261011-091905Z-p70-source-integration-map",
       "substep_id": "APA-P70.A01.S01"
     },
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "SOURCE",
-      "report": "runs/2026-10-11/APA-RUN-20261011-092155Z-source71-byte-archive/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-11\\APA-RUN-20261011-092155Z-source71-byte-archive\\REPORT.md",
       "run_id": "APA-RUN-20261011-092155Z-source71-byte-archive",
       "substep_id": "APA-P00.A02.S03"
     },
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "SOURCE",
-      "report": "runs/2026-10-11/APA-RUN-20261011-160327Z-p70-a01-s03-integration-freeze/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-11\\APA-RUN-20261011-160327Z-p70-a01-s03-integration-freeze\\REPORT.md",
       "run_id": "APA-RUN-20261011-160327Z-p70-a01-s03-integration-freeze",
       "substep_id": "APA-P70.A01.S03"
     },
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "OFFLINE",
-      "report": "runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-11\\APA-RUN-20261011-161511Z-p70-semantic-brief-getstories\\REPORT.md",
       "run_id": "APA-RUN-20261011-161511Z-p70-semantic-brief-getstories",
       "substep_id": "APA-P70.A02.S01"
     },
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "OFFLINE",
-      "report": "runs/2026-10-11/APA-RUN-20261011-163145Z-p70-a02-s03-library-pack/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-11\\APA-RUN-20261011-163145Z-p70-a02-s03-library-pack\\REPORT.md",
       "run_id": "APA-RUN-20261011-163145Z-p70-a02-s03-library-pack",
       "substep_id": "APA-P70.A02.S03"
     },
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "OFFLINE",
-      "report": "runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-11\\APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths\\REPORT.md",
       "run_id": "APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths",
       "substep_id": "APA-P70.A03.S01"
     },
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "OFFLINE",
-      "report": "runs/2026-10-11/APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-11\\APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial\\REPORT.md",
       "run_id": "APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial",
       "substep_id": "APA-P70.A03.S02"
     },
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "SOURCE",
-      "report": "runs/2026-10-11/APA-RUN-20261011-190658Z-roof-comp-context-map/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-11\\APA-RUN-20261011-190658Z-roof-comp-context-map\\REPORT.md",
       "run_id": "APA-RUN-20261011-190658Z-roof-comp-context-map",
       "substep_id": "APA-P00.A02.S03"
     },
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "SOURCE",
-      "report": "runs/2026-10-11/APA-RUN-20261011-195000Z-isolated-authored-core/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-11\\APA-RUN-20261011-195000Z-isolated-authored-core\\REPORT.md",
       "run_id": "APA-RUN-20261011-195000Z-isolated-authored-core",
       "substep_id": "APA-P70.A03.S02"
     },
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "SOURCE",
-      "report": "runs/2026-10-11/APA-RUN-20261011-195800Z-incremental-native-edit/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-11\\APA-RUN-20261011-195800Z-incremental-native-edit\\REPORT.md",
       "run_id": "APA-RUN-20261011-195800Z-incremental-native-edit",
       "substep_id": "APA-P70.A03.S03"
     },
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "SOURCE",
-      "report": "runs/2026-10-11/APA-RUN-20261011-200100Z-native-completeness/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-11\\APA-RUN-20261011-200100Z-native-completeness\\REPORT.md",
       "run_id": "APA-RUN-20261011-200100Z-native-completeness",
       "substep_id": "APA-P70.A03.S04"
     },
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "SOURCE",
-      "report": "runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-11\\APA-RUN-20261011-200500Z-editable-core-acceptance\\REPORT.md",
       "run_id": "APA-RUN-20261011-200500Z-editable-core-acceptance",
       "substep_id": "APA-P70.A08.S04"
     },
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "SOURCE",
-      "report": "runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-11\\APA-RUN-20261011-202800Z-native-geometry-integration\\REPORT.md",
       "run_id": "APA-RUN-20261011-202800Z-native-geometry-integration",
       "substep_id": "APA-P70.A09.S01"
     },
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "SOURCE",
-      "report": "runs/2026-10-11/APA-RUN-20261011-211000Z-native-material-library-integration/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-11\\APA-RUN-20261011-211000Z-native-material-library-integration\\REPORT.md",
       "run_id": "APA-RUN-20261011-211000Z-native-material-library-integration",
       "substep_id": "APA-P70.A02.S04"
     },
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "SOURCE",
-      "report": "runs/2026-10-12/APA-RUN-20261012-010000Z-compatible-integration-v31/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-12\\APA-RUN-20261012-010000Z-compatible-integration-v31\\REPORT.md",
       "run_id": "APA-RUN-20261012-010000Z-compatible-integration-v31",
       "substep_id": "APA-P70.A11.S01"
     },
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "SOURCE",
-      "report": "runs/2026-10-12/APA-RUN-20261012-011500Z-connected-system-v31/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-12\\APA-RUN-20261012-011500Z-connected-system-v31\\REPORT.md",
       "run_id": "APA-RUN-20261012-011500Z-connected-system-v31",
       "substep_id": "APA-P70.A11.S02"
     },
     {
       "evidence_status": "EVIDENCE_READY",
       "phase": "OFFLINE",
-      "report": "runs/2026-10-12/APA-RUN-20261012-012500Z-gap-windows-sqlite-v31/REPORT.md",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-12\\APA-RUN-20261012-012500Z-gap-windows-sqlite-v31\\REPORT.md",
       "run_id": "APA-RUN-20261012-012500Z-gap-windows-sqlite-v31",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "docs\\research\\apa-results\\runs\\2026-10-12\\APA-RUN-20261012-075300Z-functional-gaps-v31\\REPORT.md",
+      "run_id": "APA-RUN-20261012-075300Z-functional-gaps-v31",
       "substep_id": "APA-P70.A11.S03"
     }
   ],

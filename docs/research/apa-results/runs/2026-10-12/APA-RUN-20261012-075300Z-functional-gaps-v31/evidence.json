@@ -1,0 +1,33 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-FUNCTIONAL-GAPS-V31",
+      "evidence_ids": [
+        "EV-FUNCTIONAL-GAPS-ACCEPTANCE",
+        "EV-FUNCTIONAL-GAPS-BYTES"
+      ],
+      "statement": "Working Details73context adapter, reciprocal native connected MEP and hosted Opening/SEO share accepted native context and SceneWriter. Original48GUID preserved;27primary/59GUID saved/reopened. IFC host/port/material observations are bounded. S03PARTIAL; external data/provider dependencies and engineering NOT_VERIFIED remain explicit. Publication replays captured evidence with no new native calls.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-FUNCTIONAL-GAPS-ACCEPTANCE",
+      "kind": "TEST_RESULT",
+      "sha256": "b8c7320625263df61c86f620fecd28d957377314e7ce05c8bc99ffe3f1449a63",
+      "source_revision": "3191e7ce5071e6de7401f6e520fbd8f3ef2a1ea2",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-075300Z-functional-gaps-v31/acceptance.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-FUNCTIONAL-GAPS-BYTES",
+      "kind": "LOCAL_LOG",
+      "sha256": "8adb2d20cda2a9d1cd4c22fdcde011eed2b27418a166268553af5b95cbdf94af",
+      "source_revision": "3191e7ce5071e6de7401f6e520fbd8f3ef2a1ea2",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-075300Z-functional-gaps-v31/EVIDENCE_SHA256.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261012-075300Z-functional-gaps-v31",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}
