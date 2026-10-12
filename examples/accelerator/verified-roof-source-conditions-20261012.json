@@ -1,0 +1,48 @@
+{
+  "schema": "APA_VERIFIED_SOURCE_CONDITIONS_V1",
+  "verifiedAt": "2026-10-12",
+  "sourceScope": "Exact public registry scope and amendment instruction only; consolidated technical clauses unavailable",
+  "sources": {
+    "roofScope": {
+      "edition": "СП 17.13330.2017",
+      "uri": "https://protect.gost.ru/sp/details/844352c5-dda6-4006-acd8-b6875d1ed6a8",
+      "locator": "Область применения — full displayed scope paragraph",
+      "verification": "VERIFIED_DISPLAYED_SOURCE_CONDITION",
+      "excerpt": "во всех климатических зонах Российской Федерации",
+      "paraphrase": "Scope concerns new roofing, reconstruction or major repair of the specified roofing technologies in Russian buildings; material name alone does not identify a listed technology",
+      "registryAmendments": [1, 2, 3, 4, 5],
+      "allowedWorkTypes": ["new", "reconstruction", "major_repair"],
+      "allowedRoofSystems": ["bitumen_roll", "polymer_roll", "mastic", "chrysotile_cement_corrugated", "cement_fiber_corrugated", "bitumen_corrugated", "cement_sand_tile", "ceramic_tile", "polymer_cement_tile", "bitumen_tile", "chrysotile_cement_flat_tile", "composite_tile", "cement_fiber_flat_tile", "slate_tile", "galvanized_steel_sheet", "copper_sheet", "zinc_titanium_sheet", "aluminum_sheet", "metal_profile_sheet", "metal_tile", "metal_seam_tile", "reinforced_concrete_trough_panels"]
+    },
+    "thermalScope": {
+      "edition": "СП 50.13330.2024",
+      "uri": "https://protect.gost.ru/sp/details/5081dae9-9ee9-455f-80e8-d093d495361c",
+      "locator": "Область применения — displayed scope and all exclusions",
+      "verification": "VERIFIED_DISPLAYED_SOURCE_CONDITION",
+      "excerpt": "общей площадью более 50 м2",
+      "paraphrase": "Scope needs new construction/reconstruction, listed building purpose, total area greater than the stated limit and maintained temperature/humidity regime, with exclusions explicitly checked",
+      "effectiveDate": "2024-06-16",
+      "areaStrictlyGreaterThanM2": 50,
+      "allowedWorkTypes": ["new", "reconstruction"],
+      "allowedBuildingUses": ["residential", "public", "industrial", "agricultural", "warehouse"],
+      "exclusions": ["religious", "periodic_heating_below_3_days_week", "seasonal_heating_below_3_months_year", "temporary_up_to_2_heating_seasons", "greenhouse", "cold_store", "cultural_heritage", "utility_structure"],
+      "historicAuthorityDecisionRequired": true
+    },
+    "roofThermalReference": {
+      "edition": "СП 17.13330.2017 — изменение №5",
+      "uri": "https://protect.gost.ru/sp/changesdetails/c660c8fe-0ace-4b25-b976-8acad8a8154e",
+      "locator": "Содержание изменения к НД — replacement of thermal normative reference",
+      "verification": "VERIFIED_DISPLAYED_AMENDMENT_INSTRUCTION",
+      "excerpt": "СП 50.13330.2024",
+      "paraphrase": "The fifth amendment replaces the earlier thermal-design reference with the current thermal standard; check the project requirement graph's edition edge, not thermal performance",
+      "effectiveDate": "2025-01-10",
+      "expectedThermalEdition": "СП 50.13330.2024",
+      "geometryOrEngineeringApproval": false
+    }
+  },
+  "unavailableTechnicalClauses": [
+    {"id": "roof-slope-by-system", "locator": "SP17 technical minimum slope provisions/table", "status": "NOT_VERIFIED", "reason": "Primary full consolidated clause and selected roofing technology unavailable; actual BREP slope can be measured but no normative threshold applied"},
+    {"id": "roof-parapet-waterproofing", "locator": "SP17 section5.1 clauses referenced by existing GitHub research", "status": "NOT_VERIFIED", "reason": "Full primary clause, parapet role and waterproofing-layer evidence absent; research dimensions not promoted"},
+    {"id": "wall-roof-thermal-interface", "locator": "SP50 technical envelope provisions / SP230 junction tables", "status": "NOT_VERIFIED", "reason": "Full clause/table row, certified layers and thermal design evidence absent; body contact is not insulation continuity or thermal approval"}
+  ]
+}

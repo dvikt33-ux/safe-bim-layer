@@ -177,6 +177,61 @@ def roof_underside_plane(roof):
     return {'normal':normal,'distance':min(distances),'authority':'ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE'}
 
 
+def assess_single_plane_contour_candidate(roof,details,proposal=None):
+    """Qualify geometry for a ready SDK path; never dispatch unsupported Tapir."""
+    from shapely.geometry import Polygon
+    from shapely.ops import unary_union
+    if roof.get('type')!='Roof' or details.get('type')!='Roof' or details.get('details',{}).get('roofClass')!='SinglePlane':
+        raise ValueError('CONTOUR_REQUIRES_TRUE_SINGLE_PLANE_ROOF')
+    plane=roof_underside_plane(roof);n,d=plane['normal'],plane['distance'];polygons=[]
+    for face in C.G.planar_faces(roof):
+        if all(abs(sum(n[k]*v[k] for k in range(3))-d)<=1e-6 for v in face['points']):
+            body=roof['bodies'][face['bodyIndex']];rings=[[[body['vertices'][i][k] for k in (0,1)] for i in ring] for ring in body['faces'][face['faceIndex']]['contours']]
+            polygons.append(Polygon(rings[0],rings[1:]))
+    actual=unary_union(polygons);rd=details['details'];outline=rd.get('polygonOutline',[])
+    holes=rd.get('holes',[])
+    if holes:raise ValueError('CONTOUR_HOLE_MEMO_CONTRACT_NOT_QUALIFIED')
+    ring=[[v['x'],v['y']] for v in outline];memo=Polygon(ring)
+    # The memo/reference contour can match the upper principal face. The
+    # lower face is translated by the native thickness/edge construction.
+    # Match an actual principal face; do not equate memo XY with underside XY.
+    matching_planes=[]
+    distances={round(sum(n[k]*f['points'][0][k] for k in range(3)),6) for f in C.G.planar_faces(roof)
+        if all(abs(sum(n[k]*v[k] for k in range(3))-sum(n[k]*f['points'][0][k] for k in range(3)))<=1e-6 for v in f['points'])}
+    for distance in distances:
+        same=[]
+        for face in C.G.planar_faces(roof):
+            if all(abs(sum(n[k]*v[k] for k in range(3))-distance)<=1e-6 for v in face['points']):
+                body=roof['bodies'][face['bodyIndex']];rings=[[[body['vertices'][i][k] for k in (0,1)] for i in ring] for ring in body['faces'][face['faceIndex']]['contours']]
+                same.append(Polygon(rings[0],rings[1:]))
+        if same and unary_union(same).symmetric_difference(memo).area<=1e-5:matching_planes.append(distance)
+    if not memo.is_valid or not matching_planes:raise ValueError('CONTOUR_NATIVE_MEMO_BREP_MISMATCH')
+    result={'schema':'APA_SINGLE_PLANE_CONTOUR_CANDIDATE_V1','roofGuid':roof['guid'],'sourceBodyHash':C.RUN.digest(C.ROOF.geometry_signature(roof)),
+        'sourceDetailsHash':C.RUN.digest(details),'actualOutline':ring,'holes':holes,'homeStory':roof['homeStory'],
+        'materials':copy.deepcopy(roof.get('materialBindings',{})),'lowerPlane':plane,'nativeWrites':0,
+        'memoMatchedActualPlaneDistances':sorted(matching_planes),
+        'memoToLowerFaceCentroidOffsetXY':[actual.centroid.x-memo.centroid.x,actual.centroid.y-memo.centroid.y],
+        'memoToLowerFaceSymmetricDifferenceSquareMeters':actual.symmetric_difference(memo).area,
+        'lowerFaceAuthority':'Actual BREP; memo contour is not the lower-face footprint',
+        'nativeSdkPath':'ACAPI_Element_GetMemo + ACAPI_Element_ChangeMemo',
+        'memoMasks':['APIMemoMask_Polygon','APIMemoMask_EdgeTrims','APIMemoMask_SideMaterials','APIMemoMask_RoofEdgeTypes'],
+        'edgeCustomizations':'Must preserve and synchronize native edge arrays; do not use sample null-clearing defaults',
+        'runtimeContract':'NOT_VERIFIED_INSTALLED_COMMAND; inspected ModifyRoofs rejects SinglePlane',
+        'executionAllowed':False,'status':'NEEDS_APPROVED_PROJECT_CONTOUR_AND_RUNTIME_CONTRACT'}
+    if proposal is not None:
+        if set(proposal)!={'outline','holes','designSourceUri','baselineBodyHash'} or not proposal['designSourceUri'] or proposal['baselineBodyHash']!=result['sourceBodyHash']:
+            raise ValueError('CONTOUR_EXACT_SOURCE_BOUND_DESIGN_REQUIRED')
+        points=proposal['outline']
+        if (not isinstance(points,list) or len(points)!=len(ring) or proposal['holes']!=holes or
+                any(not isinstance(v,list) or len(v)!=2 or any(type(x) not in (int,float) or not math.isfinite(x) for x in v) for v in points) or
+                points[0]!=points[-1]):raise ValueError('CONTOUR_TOPOLOGY_OR_HOLES_CHANGED')
+        proposed=Polygon(points)
+        if not proposed.is_valid or proposed.area<=0:raise ValueError('CONTOUR_PROPOSAL_INVALID')
+        result.update(status='OFFLINE_GEOMETRY_CANDIDATE_NOT_EXECUTABLE',proposal=copy.deepcopy(proposal),
+            areaSquareMeters=proposed.area,changedMemoAreaSquareMeters=memo.symmetric_difference(proposed).area)
+    result['candidateDigest']=C.RUN.digest(result);return result
+
+
 def underside_contact_geometry(wall,roof,expected_area,expected_plane=None):
     if wall.get('type')!='Wall' or wall.get('homeStory')!=roof.get('homeStory'):
         raise ValueError('UNDERSIDE_REQUIRES_NATIVE_WALL_ROOF_SAME_STORY')
