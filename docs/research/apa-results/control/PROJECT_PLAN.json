@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 124,
+  "revision": 125,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -18,7 +18,8 @@
     "research_pipeline": "Same PROJECT_PLAN.json registry for research and development. research_routes links each P70 S-ID to source artifacts already in task.inputs and to reusable research S-IDs; read branch/file URLs from artifact.uri, verify current source SHA before use. Research may run ahead for later P70 actions while present action BUILD/INTEGRATION proceeds. SUFFICIENT must be independently reviewed with evidence before deferring its research; NOT_ASSESSED is never automatic PASS. Do not repeat completed research without changed source or uncovered applicability gap.",
     "integration_priority": "MASTER v3.1: INTEGRATE ALL → CONNECT TOGETHER → SYSTEM TEST → GAP-DRIVEN FIX → OPTIMIZE → PACKAGE. Compatible donor adapters may be developed in one claimed package. Preserve accepted core and mandatory engineering/native acceptance. Independent source/offline preparation is not blocked by later operational gates. One canonical plan and one SceneWriter.",
     "native_tool_priority": "MORPH LAST RESORT — permanent mandatory rule for all subsequent APA creation/editing. Choose Archicad native parametric Wall/Slab/Beam/Column/Roof/Shell/Stair/Railing/Opening/MEP or another suitable tool by construction purpose. Inspect available native tools and API first; a missing APA adapter is not a reason to use Morph. Morph only when checked native tools cannot faithfully realize the geometry, the API/geometry rejection is documented, and mandatory BIM properties/relationships are preserved. Battens25x150mm and counterbattens50x50mm prioritize true native Beam. Morph classified Beam/IfcBeam is not an Archicad Beam. Retain accepted existing Morphs without repeating their creation.",
-    "normative_evidence": "Verified displayed source/edition/reference or applicability is distinct from technical construction compliance. Bind actual native GUID/body/material/story and source-backed CSE/project facts. Unknown full clause, system or mandatory input stays NOT_VERIFIED; document PASS, native contact, material name and SinglePlane cannot promote engineering approval. User-confirmed RU/Central Russia is not a climatic design basis."
+    "normative_evidence": "Verified displayed source/edition/reference or applicability is distinct from technical construction compliance. Bind actual native GUID/body/material/story and source-backed CSE/project facts. Unknown full clause, system or mandatory input stays NOT_VERIFIED; document PASS, native contact, material name and SinglePlane cannot promote engineering approval. User-confirmed RU/Central Russia is not a climatic design basis.",
+    "existing_normative_machine": "Existing normative database is primary rule source. Read mandatory protocol first; mount a pinned byte-exact scoped source slice; reuse original routes/compiled resolver/evidence validator through the existing APA executor. Profile/module/depth/stage/function defaultdeny; no IZHS/MKD/TRC cross-class fallback. Confirmed or document PASS cannot bypass quarantine and SOURCE-DOCUMENT-REVISION-CLAUSE-EVIDENCE-APPLICABILITY-RULE closure. Missing calculators/project inputs produce NOT_VERIFIED; numeric/engineering acceptance forbidden without actual evidence. Preserve historical PR66/67 source claims and exact-reference occurrence revision policy."
   },
   "plans": {
     "APA-P00": {
@@ -1132,6 +1133,48 @@
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-203851Z-verified-roof-rules/gap-register.json",
       "kind": "DATASET",
       "verification": "G01_G09_546_TESTS_SOURCE_CONTOUR_OFFSET_AND_NORMATIVE_GATES_RECONCILED"
+    },
+    "ART-P70-A02-TDK-MACHINE-SOURCE-20261012": {
+      "id": "ART-P70-A02-TDK-MACHINE-SOURCE-20261012",
+      "uri": "https://github.com/dvikt33-ux/tdk-course-project/tree/67f17d407d14aebb091daaf79f11c10178b87440/01_Normative_Base/_Machine",
+      "kind": "DATASET",
+      "verification": "EXISTING_CANONICAL_MACHINE_BASE_PINNED_QUARANTINED_28_SOURCE_BLOBS_MATCH"
+    },
+    "ART-P70-A02-S02-PR68-20261012": {
+      "id": "ART-P70-A02-S02-PR68-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/68",
+      "kind": "CODE",
+      "verification": "DRAFT_PR67_EXACT_BASE_573_WINDOWS_LINUX_PASS_37_CODE_BLOBS_MATCH"
+    },
+    "ART-P70-A02-S02-MACHINE-INTEGRATION-20261012": {
+      "id": "ART-P70-A02-S02-MACHINE-INTEGRATION-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-210815Z-machine-normative/integration.json",
+      "kind": "TEST_RESULT",
+      "verification": "CACHED_FOUR_ACTUAL_JUNCTIONS_36_MACHINE_BINDINGS_NOT_VERIFIED_ZERO_NATIVE_CALLS"
+    },
+    "ART-P70-A02-S02-MACHINE-SOURCE-20261012": {
+      "id": "ART-P70-A02-S02-MACHINE-SOURCE-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-210815Z-machine-normative/source-readback.json",
+      "kind": "DATASET",
+      "verification": "28_BYTE_EXACT_UPSTREAM_FILES_GITHUB_BLOBS_MATCH_SOURCE_PINNED_QUARANTINE_RETAINED"
+    },
+    "ART-P70-A02-S02-REPORT68-20261012": {
+      "id": "ART-P70-A02-S02-REPORT68-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-210815Z-machine-normative/REPORT.md",
+      "kind": "REPORT",
+      "verification": "DONE_PUBLISHED_WITH_GITHUB_READBACK"
+    },
+    "ART-P70-A02-S02-RECEIPT68-20261012": {
+      "id": "ART-P70-A02-S02-RECEIPT68-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261012-210815Z-machine-normative.json",
+      "kind": "RECEIPT",
+      "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
+    },
+    "ART-P70-A02-S02-GAP68-20261012": {
+      "id": "ART-P70-A02-S02-GAP68-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-210815Z-machine-normative/gap-register.json",
+      "kind": "DATASET",
+      "verification": "MACHINE_DEFAULT_DENY_QUARANTINE_AND_EXISTING_G01_G09_PRESERVED"
     }
   },
   "tasks": {
@@ -2760,7 +2803,7 @@
       "action_id": "APA-P70.A02",
       "title": "Связать проектные требования с версиями нормативов и проверяемыми правилами",
       "kind": "BUILD",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 3,
       "work_key": "normative-applicability-pack",
       "depends_on": [
@@ -2770,7 +2813,8 @@
       "related": [],
       "inputs": [
         "ART-APA-RU-JUNCTION-NORMS",
-        "ART-APA-CSE-RESEARCH"
+        "ART-APA-CSE-RESEARCH",
+        "ART-P70-A02-TDK-MACHINE-SOURCE-20261012"
       ],
       "outputs": [
         "Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED",
@@ -2784,12 +2828,19 @@
         "User directly confirmed jurisdiction RU/Central Russia and federal norms. Region confirmation supplies no city/climate design values, roof covering/layers/role, total building area, purpose or loads. Prior 24source bindings and CSE approvals remain unchanged; no invented normative or engineering value.",
         "Primary current sources: SP17 registry amendments1-5, amendment5 effective2025-01-10 and its explicit current thermal reference; SP50.13330.2024 effective2024-06-16. Exact displayed source scope/conditions were reviewed, full consolidated technical slope/parapet/thermal clauses were not obtained. Official ministry/FCS fetches and local registry TLS retrieval failed. Existing GitHub research blob3396bfafb8e5bbfe4b539c5184f0ee0bd0c27561 retained without promoting research-only dimensions.",
         "LIVE_READ_ONLY_PASS freshly verifies five target GUID/BREP/material/story signatures against accepted109 baseline, exact project identity/saved hash and unchanged existing SQLite journal. Actual shared Roof slope8.594366924degrees/15.1135218percent measured once; normative slope limit/verdict NOT_VERIFIED. No Create/Modify/Save/Open/IFC export/APX changes.",
-        "External dependencies retained within existing A02.S02: full primary applicable technical clauses/table rows, source-bound actual roof technology/layers, building work/purpose/area/regime/exclusions, engineering evidence. Next functional normative step uses these inputs in the existing evaluator, not a new library. A02.S02 remainsPARTIAL; A05.S01 requires its DONE_PUBLISHED dependency and cannot be dispatched or populated with invented loads."
+        "External dependencies retained within existing A02.S02: full primary applicable technical clauses/table rows, source-bound actual roof technology/layers, building work/purpose/area/regime/exclusions, engineering evidence. Next functional normative step uses these inputs in the existing evaluator, not a new library. A02.S02 remainsPARTIAL; A05.S01 requires its DONE_PUBLISHED dependency and cannot be dispatched or populated with invented loads.",
+        "Published draft PR68 head 29aa06a6e9bbef0d991bea922e1ad4101ab29bdd on exact PR67 base633c799da125622be6317ea9d09a9b7eb83fb98a;27newtests,573Windows host/Windows+LinuxCI38308362910 PASS.37code blobs and28pinned source files match GitHub; publisher receipt/readback verified.",
+        "Existing machine normative database dvikt33-ux/tdk-course-project normative-recovery-2026-10-06 commit67f17d407d14aebb091daaf79f11c10178b87440 is connected through the existing APA normative executor. Mandatory protocol read first; original source policies/schemas/routes/compiled blocks/aliases/evidence/rules unchanged. Byte-exact scoped source snapshot supplies existing CompiledBlockResolver and validate_confirmed, not a second normative engine.",
+        "Current project building type IZHS directly confirmed by user. Exact Project Profile -> Object/Module Route -> Applicable Rule -> Evidence Gate -> BIM Facts -> Rule Evaluation -> Result interface enforces defaultdeny and object/function/module/depth/stage isolation. MKD/TRC cannot borrow IZHS roof rules; one roof rules file read, inactive engineering libraries not loaded.",
+        "Four existing actual Wall/Roof junctions bind to nine existing canonical SP17 rules:36NOT_VERIFIED results. Stored evidence-field checks pass but source quarantine/design_only, unknown source-bound roof construction/applicability and declared-not-implemented upstream roof calculators prohibit authoritative stage pack, numeric evaluation or engineering acceptance. No normative values inferred or applied.",
+        "PR66/67 remain operational:24legacy bindings and12source checks preserved by digest and mapped to machine source identities without promotion. SP17 amendment1-5 chain and exact changed-table-row overlay gate retained; SP50.2024 passport identity is distinct from occurrence-level dependency resolution. No blanket pinning/floating or edition upgrade.",
+        "Prior109GUID native baseline, five source target signatures/material/story data and measured gaps reused as cached evidence. Zero new native calls, zero geometry rechecks, no PLN/APX modifications. Current live state is not independently refreshed in this package. NativeA11.S03PARTIAL/S10BLOCKED and prior accepted A04 evidence remain unchanged.",
+        "Next within existing A02.S02: source-bound actual roof system/layers/role and required block inputs; exact per-rule revision/clause/evidence/applicability closure and reviewed authoritative release; qualify an available existing roof calculator through the same interface. Unknown locality/load/engineering inputs remain unverified. Other domains extend the same reviewed exact route/source interface; no full library load or second engine. A02.S02PARTIAL; downstreamA05.S01 dependency remains unsatisfied."
       ],
       "acceptance": "Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED",
-      "owner": "work-machine-normative-integration-20261012",
-      "lease_until": "2026-10-12T23:52:18Z",
-      "claim_ref": "APA-CLAIM-MACHINE-NORMATIVE-20261012T205218Z",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
       "evidence": [
         "ART-P70-A02-S02-PR66-20261012",
@@ -2801,7 +2852,14 @@
         "ART-P70-A02-S02-SOURCE-CHECKS-20261012",
         "ART-P70-A02-S02-VERIFIED-CONDITIONS-20261012",
         "ART-P70-A02-S02-REPORT67-20261012",
-        "ART-P70-A02-S02-RECEIPT67-20261012"
+        "ART-P70-A02-S02-RECEIPT67-20261012",
+        "ART-P70-A02-TDK-MACHINE-SOURCE-20261012",
+        "ART-P70-A02-S02-PR68-20261012",
+        "ART-P70-A02-S02-MACHINE-INTEGRATION-20261012",
+        "ART-P70-A02-S02-MACHINE-SOURCE-20261012",
+        "ART-P70-A02-S02-REPORT68-20261012",
+        "ART-P70-A02-S02-RECEIPT68-20261012",
+        "ART-P70-A02-S02-GAP68-20261012"
       ],
       "blocked_reason": null
     },
@@ -4555,7 +4613,14 @@
         "ART-P70-A02-S02-REPORT67-20261012",
         "ART-P70-A02-S02-RECEIPT67-20261012",
         "ART-P70-A11-S03-SINGLE-PLANE-SDK-20261012",
-        "ART-P70-A11-S03-GAP67-20261012"
+        "ART-P70-A11-S03-GAP67-20261012",
+        "ART-P70-A02-TDK-MACHINE-SOURCE-20261012",
+        "ART-P70-A02-S02-PR68-20261012",
+        "ART-P70-A02-S02-MACHINE-INTEGRATION-20261012",
+        "ART-P70-A02-S02-MACHINE-SOURCE-20261012",
+        "ART-P70-A02-S02-REPORT68-20261012",
+        "ART-P70-A02-S02-RECEIPT68-20261012",
+        "ART-P70-A02-S02-GAP68-20261012"
       ],
       "synthesis_state": "PARTIAL",
       "owner": null
