@@ -1023,7 +1023,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: work-construction-junctions-20261012 / 2026-10-12T16:08:54Z
 - Requires owner approval: False
 - Source inputs: [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-P70-A11-S03-NATIVE95-V32-20261012](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-110611Z-connected-native-continuation-v32/REPORT.md)
-- Existing V2 runs: [APA-RUN-20261012-122511Z-construction-junctions-s01](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-122511Z-construction-junctions-s01/REPORT.md) (receipt verified)
+- Existing V2 runs: [APA-RUN-20261012-122511Z-construction-junctions-s01](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-122511Z-construction-junctions-s01/REPORT.md) (receipt verified), [APA-RUN-20261012-123259Z-construction-junctions-s01-openings](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-123259Z-construction-junctions-s01-openings/REPORT.md) (receipt verified)
 - Expected output: Матрица всех применимых примыканий/отверстий/армопоясов/связей/крепежа с точным source/detail ID и открытыми пробелами
 
 ## APA-P70.A04.S02
