@@ -1,0 +1,78 @@
+{
+  "substep": "APA-P70.A11.S03",
+  "status": "PARTIAL",
+  "codeHead": "744e0bd184a11f1de4a1cf16382d21aec6f8cfca",
+  "gaps": [
+    {
+      "id": "G01",
+      "status": "FIXED_VERIFIED_PR54_RETAINED",
+      "evidence": "455Windows host/Windows+Linux CI tests; no second SQLite implementation",
+      "remaining": "455Windows host/Windows+Linux CI tests; no second SQLite implementation"
+    },
+    {
+      "id": "G02",
+      "status": "LIVE73_DETAILS_CONTEXT_NATIVE_BEAM_SOURCE_CONTACT_PASS",
+      "remaining": "Actual typed Beam/Beam support plus separate Wall/Roof abutment; four original roof gaps, missing cladding, full construction families and engineering remain unverified"
+    },
+    {
+      "id": "G03",
+      "status": "REAL_NATIVE_C4_C5_BEAM_SUPPORT_PASS_FULL_ASSEMBLY_BLOCKED",
+      "dependency": "APA-P70.A11.S06",
+      "remaining": "25x150mm and50x50mm real Beams with75cm2contact; c5 vertical native end contact to original Morph batten73.1108100945cm2; eight full-assembly dimensions/source commit=false/grade/fixings/rafter bearing remain"
+    },
+    {
+      "id": "G04",
+      "status": "LIVE_REFERENCE200_DIAMETER_AND_RECIPROCAL_TERMINAL_CONNECTION_PASS_MAIN_BRIDGE_BLOCKED",
+      "dependency": "APA-P70.A11.S10",
+      "remaining": "NewØ200lead and terminal pair are physically connected; full8route graph has2components. Sized circular/rectangular transition and baseline-preserving main bridge unverified; no global preference/APX change"
+    },
+    {
+      "id": "G05",
+      "status": "LIVE_NATIVE_WALL_ROOF_TRIM_PERIMETER_ABUTMENT_PASS_UNDERSIDE_SHELL_EDIT_GAPS",
+      "dependency": "APA-P70.A11.S07",
+      "remaining": "Native Trim and actual3.236340608m2perimeter contact verified. Reverse Wall trim row fails in installed provider. NewSEO link accepted but no incremental body change/underside bearing; Shell/Opening-edit contracts still unavailable"
+    },
+    {
+      "id": "G06",
+      "status": "REAL_ANALYTICAL_ADAPTERS_RETAINED_EXTERNAL_SAM_SAF_ENGINE_LOAD_NORM_GATES",
+      "dependency": "APA-P70.A11.S08"
+    },
+    {
+      "id": "G07",
+      "status": "ACTUAL43_IFC_MAPPINGS_50_ELEMENTS_REAL_NATIVE_BEAMS_12_PORT_LINKS_PASS",
+      "dependency": "APA-P70.A11.S09",
+      "remaining": "43/43bounds,24material assignments,12port relations,6opening hosts,18quantitymatches/0mismatch. NativeBeam/IfcBeam distinct from Morph/IfcBeam and Morph/IfcBuildingElementProxy; native structural/trim/SEO connection semantics and full receiver compatibility unverified"
+    },
+    {
+      "id": "G08",
+      "status": "NATIVE_BEAM_SEGMENT_OWNER_GEOMETRY_AND_CIRCULAR_PREFERENCE_INTERPRETATION_PASS",
+      "remaining": "Actual SDK-owned Beam/Column segments feed context/IFC quantities; native profile angles compare modulo2pi; connected terminal keeps single context identity. Dedicated ports authoritative; reverse trim provider-row error remains explicit"
+    },
+    {
+      "id": "G09",
+      "status": "FUNCTIONAL_WORK_PRIORITIZED_NO_INSTALLER_OR_OPTIMIZATION_CLAIM",
+      "remaining": "A11.S04 waits actual S03 completion; S03 remainsPARTIAL andS10BLOCKED"
+    }
+  ],
+  "baselinePR56GuidCount": 95,
+  "currentGuidCount": 107,
+  "sharedContextRecords": 43,
+  "tests": 455,
+  "nextAction": "Qualify an available circular/rectangular transition with retained96GUID preservation; independently address native wall/roof underside bearing using verified sources. No global preference/APX change or blind replay.",
+  "baselinePR57GuidCount": 96,
+  "nativeToolPolicy": "NATIVE_PARAMETRIC_FIRST; MORPH_LAST_RESORT; real Beam for source c4/c5; missing APA adapter not exemption",
+  "historicalPR57Junctions": {
+    "interfacePairs": 49,
+    "PASS_GEOMETRY": 34,
+    "PASS_DOCUMENTED": 1,
+    "NOT_VERIFIED": 14,
+    "PASS_ENGINEERING": 0,
+    "completeFamilies": "NOT_VERIFIED"
+  },
+  "currentWorkingNativeFunctions": [
+    "REFERENCE200_CIRCULAR_TERMINAL_PAIR",
+    "REAL_BEAM25X150_BEAM50X50_CONTACT",
+    "NATIVE_WALL_ROOF_PERIMETER_ABUTMENT",
+    "SDK_SEGMENT_OWNERSHIP_IFC_QUANTITIES"
+  ]
+}

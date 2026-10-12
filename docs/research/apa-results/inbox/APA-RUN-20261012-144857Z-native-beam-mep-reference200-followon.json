@@ -1,0 +1,87 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A11",
+  "substep_id": "APA-P70.A11.S03",
+  "executor": "work-native-beam-mep-20261012",
+  "executor_run_id": "APA-RUN-20261012-134235Z-native-beam-mep-followon",
+  "phase": "SOURCE",
+  "started_at": "2026-10-12T13:42:35Z",
+  "finished_at": "2026-10-12T14:48:57Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29 native evidence captured; publication makes zero native calls",
+    "tapir": "1.5.10",
+    "source_branch": "feature/apa-native-beam-mep-20261012"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/59",
+      "revision": "744e0bd184a11f1de4a1cf16382d21aec6f8cfca",
+      "source_sha": "744e0bd184a11f1de4a1cf16382d21aec6f8cfca"
+    }
+  ],
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-NATIVE-BEAM-MEP-REFERENCE200-FOLLOWON",
+      "statement": "Native reference200 creates actualØ200terminal lead with reciprocal physical ports; real Beam25x150/Beam50x50support contact75cm2 and source/material/story/body proof; separate native Wall/Roof perimeter abutment3.236340608m2, not underside bearing.107GUID/43context saved/reopened; all96accepted GUID/body signatures retained, no new collision. IFC50elements/43bounds/18quantitymatches/0mismatch/12port relations.455Windows host/Windows+LinuxCI PASS,13exact GitHub source blobs. S03PARTIAL/S10BLOCKED; original4roofgaps, main-network transition, full assembly/receiver/engineering unverified. Permanent native-first rule published. Publication zero native calls.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-JUNCTION-PROOF",
+        "EV-JUNCTION-BYTES"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-JUNCTION-PROOF",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon/acceptance.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "7858f49d7f6ed508c6f91f7fda948413b690e00019ae5d3aae652681d5d5e8fd",
+      "source_revision": "744e0bd184a11f1de4a1cf16382d21aec6f8cfca"
+    },
+    {
+      "evidence_id": "EV-JUNCTION-BYTES",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon/EVIDENCE_SHA256.json",
+      "kind": "LOCAL_LOG",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "aa6289fb03521a4c79d61a1340f26111717094a86b6bfd5fcfd7f15450bd5edd",
+      "source_revision": "744e0bd184a11f1de4a1cf16382d21aec6f8cfca"
+    }
+  ],
+  "report_markdown": "# APA native Beam / reference200 MEP follow-on\n\nBase: exact PR57 head `b1abd584585feb0f286621337986c8a5d3077507`.\nThe published A04.S01–S03 remain accepted; this package continues A11.S03.\n\n## Working native functions\n\n* `circular_reference_selection` reads the installed Ventilation table and pins\n  the unique reference200 / diameter0.2m row. SceneWriter rechecks the table\n  and route-local selector before one Create. Global preferences are unchanged.\n  The new circular lead has actual0.2m ports and automatically connects at the\n  exact terminal port. Reciprocal physical readback confirms this connection.\n  The terminal pair remains separate from the original rectangular network:\n  no circular/rectangular transition or whole-network completion is claimed.\n* `prepare_native_batten` and `prepare_native_counterbatten` use existing\n  Details source joins, measured roof/support bodies and explicit materials.\n  They select real `CreateBeams` through the existing SceneWriter. Both Morph\n  and actual SDK-owned Beam segments can supply the measured batten geometry.\n  Parent GUID, BeamSegment ownership, story, section and material are read back.\n* A separate actual25×150mm Beam and actual50×50mm Beam form a native support\n  contact of75cm². The original accepted Morph junction remains intact.\n  The new50×50mm Beam also contacts the original batten over73.1108100945cm².\n  Its native vertical end cut differs from the Morph perpendicular cut; the\n  source section is preserved, but identical end geometry is not claimed.\n* Beam cross-section rotation uses Archicad's opposite angle convention to the\n  retained Morph matrix. Readback accepts equivalent angles modulo2pi.\n  One confirmed profile edit corrected the new Beam. No Create/Modify replay\n  occurred; the temporarily joined new counterbatten body was restored exactly.\n* A separate Wall/Roof specimen uses measured wall span/thickness, native roof\n  polygon/pitch/material and the existing TrimElements contract. Actual native\n  trimming and material joining produce a perimeter abutment through the roof\n  layer: shared surface3.236340608m² and no resultant volume collision.\n  This is not underside bearing. The four original upper-wall/roof gaps remain.\n* GetElementTrims returns the roof's actual trimmed-wall identity. The installed\n  provider discards the target Wall row when GetTrimmedElements is inapplicable.\n  That reverse metadata remains explicitly unverified. An accepted new SEO\n  SubtractionUpwards link produced no incremental body change with the joined\n  roof cutout; it does not qualify underside bearing.\n\n## Shared contracts and exchange\n\nThe same BIM Graph, source-bound SceneWriter, Details, Shapely face analysis,\nnative dump and dedicated MEP readers are retained. Actual BeamSegment bodies\nfeed shared context, junction coverage and IFC quantity comparisons through\ntheir SDK host GUIDs. An auto-connected terminal keeps its existing context\nidentity instead of gaining a duplicate GUID entry.\n\nActual local IFC has50elements,43/43native world-bound matches,\n18quantity matches/0mismatch,12port relations and6opening hosts.\nBoth new native Beams export as IfcBeam with structural timber material and\nmatching actual BREP quantities. The accepted classified Morph counterbatten\nalso exports as IfcBeam; its native tool remains Morph. The original unclassified\nMorph batten exports as IfcBuildingElementProxy. Classification is not tool proof.\nNative trim/SEO or structural connection semantics are not inferred from bounds.\nComplete receiver compatibility and engineering approval remain unverified.\n\n## Persistent native state and limits\n\nThe isolated model now contains107GUID and43shared records. All96previous\nGUID/body/material/story signatures are unchanged. New typed elements and\ncontacts survived Save/Open; final independent readback found no new native\ncollision. The known diagnostic roof/Morph collision is retained.\nFinal PLN SHA256: `47366e08ecdc7cd5340480c7e0bd455e8ab0aaea64b1321085d9fdbad1a2591c`.\n\nThe23new unit checks cover reference ambiguity/drift, native Beam selection,\nhierarchy, typed section defaults, shared identities, actual-owned quantities,\ncontact attribution and partial trim metadata. Full Windows host suite passes\n455tests; published Windows/Linux CI is recorded with the evidence package.\n\nA11.S03 stays PARTIAL. A11.S10 stays BLOCKED for a sized native transition and\nbaseline-preserving bridge to the rectangular network. ConnectLogically can\ndelete or split a target routing GUID, so it was not applied to retained routes.\nManufacturer grade/fixings, eight assembly dimensions and load-bearing capacity\nremain unverified. A11.S04 optimization is not started ahead of those criteria.\n\n## Permanent native-first rule\n\nUse the appropriate native parametric BIM tool before considering Morph.\nAn absent APA adapter is not a reason to select Morph. New Morph creation and\ngeometry edits require documented native contract/geometry limitations and\npreservation of mandatory BIM properties and relations. Source c4/c5 rectangular\nmembers are refused as Morph and routed to the real Beam adapter.\nThis rule is also published in the canonical operating instruction and plan.\n\nNext: qualify a ready circular/rectangular transition contract without global\npreference changes or retained-GUID deletion; independently address the measured\nroof underside-bearing gap using supported native geometry and verified sources.\n\nPublished code: [draft PR59](https://github.com/dvikt33-ux/safe-bim-layer/pull/59), exact head744e0bd184a11f1de4a1cf16382d21aec6f8cfca. All13GitHub source blobs match committed bytes. [CI38265044684](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38265044684):455/455PASS on Ubuntu and Windows; Windows host455/455PASS. No new model calls during publication.\n\n\nEvidence: [APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon](https://github.com/dvikt33-ux/safe-bim-layer/tree/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon). Draft PR59, head 744e0bd184a11f1de4a1cf16382d21aec6f8cfca. Stable SHA tokens replace private native identities; raw payloads stay local. Publication makes zero native calls.\n",
+  "next_substep": "APA-P70.A11.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

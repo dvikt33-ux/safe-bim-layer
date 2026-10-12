@@ -1,0 +1,1412 @@
+{
+  "substep": "APA-P70.A11.S03",
+  "status": "PARTIAL",
+  "codeHead": "744e0bd184a11f1de4a1cf16382d21aec6f8cfca",
+  "draftPR": 59,
+  "basePR57Head": "b1abd584585feb0f286621337986c8a5d3077507",
+  "nativeGuidCount": 107,
+  "sharedContextRecords": 43,
+  "retained96GuidAndGeometry": "LIVE_PASS",
+  "all107SavedReopenedIndependentReadback": "LIVE_PASS",
+  "plnSha256": "47366e08ecdc7cd5340480c7e0bd455e8ab0aaea64b1321085d9fdbad1a2591c",
+  "newNativeCollisions": [],
+  "baselineCollisionPairsPreserved": [
+    [
+      "id-sha256:51fe26b6654ee6ca9854",
+      "id-sha256:37e03a097129cc9aa5b9"
+    ]
+  ],
+  "mep": {
+    "selection": {
+      "domain": "Ventilation",
+      "referenceId": 200,
+      "diameterMeters": 0.2,
+      "tableGuid": "id-sha256:645cf71deba19b67b300",
+      "tableSha256": "9d7d6b5c6b4c775f074547105c9064f4153778a6b934d37375f6fddd79a65234",
+      "scope": "EXISTING_LOCAL_ROUTE_DEFAULT; GLOBAL_PREFERENCES_UNCHANGED"
+    },
+    "terminalPair": {
+      "schema": "APA_NATIVE_MEP_NETWORK_V1",
+      "routes": [
+        {
+          "guid": "id-sha256:f66575dbc77af2affa42",
+          "details": {
+            "domain": "Ventilation",
+            "mepSystemId": {
+              "attributeId": {
+                "guid": "id-sha256:fea97c3fd32c996b3844"
+              }
+            },
+            "polyline": [
+              {
+                "x": 45.675,
+                "y": 43,
+                "z": 2.275
+              },
+              {
+                "x": 44,
+                "y": 43,
+                "z": 2.275
+              }
+            ],
+            "segments": [
+              {
+                "elementId": {
+                  "guid": "id-sha256:2d63df324b908c434ace"
+                },
+                "crossSectionWidth": 0.2,
+                "crossSectionHeight": 0.2,
+                "crossSectionShape": "Circular"
+              }
+            ],
+            "nodes": [
+              {
+                "elementId": {
+                  "guid": "id-sha256:cfca4a0f28e61fc2c83d"
+                },
+                "position": {
+                  "x": 45.675,
+                  "y": 43,
+                  "z": 2.275
+                }
+              },
+              {
+                "elementId": {
+                  "guid": "id-sha256:67a19893688e79732840"
+                },
+                "position": {
+                  "x": 44,
+                  "y": 43,
+                  "z": 2.275
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "routeGuids": [
+        "id-sha256:f66575dbc77af2affa42"
+      ],
+      "ownedNodeSegmentGuids": [
+        "id-sha256:2d63df324b908c434ace",
+        "id-sha256:cfca4a0f28e61fc2c83d",
+        "id-sha256:67a19893688e79732840"
+      ],
+      "physicalGuids": [
+        "id-sha256:165c75f73387d775e6b9",
+        "id-sha256:37ebaaa4f87380b91b8e"
+      ],
+      "ports": [
+        {
+          "ownerGuid": "id-sha256:165c75f73387d775e6b9",
+          "portId": "id-sha256:0d24b392faf2c528a716",
+          "name": "Соединение Конца Воздуховода",
+          "position": {
+            "x": 45.675,
+            "y": 43,
+            "z": 2.275
+          },
+          "direction": {
+            "x": -1,
+            "y": 0,
+            "z": 0
+          },
+          "shape": "Circular",
+          "width": 0.2,
+          "height": 0.2,
+          "domain": "Ventilation",
+          "mepSystemId": {
+            "attributeId": {
+              "guid": "id-sha256:fea97c3fd32c996b3844"
+            }
+          },
+          "isPhysicallyConnected": true,
+          "connectedPortId": "id-sha256:828e6e36b57e53ecf55e",
+          "connectedElementId": {
+            "guid": "id-sha256:37ebaaa4f87380b91b8e"
+          }
+        },
+        {
+          "ownerGuid": "id-sha256:37ebaaa4f87380b91b8e",
+          "portId": "id-sha256:828e6e36b57e53ecf55e",
+          "name": "Unnamed port",
+          "position": {
+            "x": 45.675,
+            "y": 43,
+            "z": 2.275
+          },
+          "direction": {
+            "x": 1,
+            "y": 0,
+            "z": 0
+          },
+          "shape": "Circular",
+          "width": 0.2,
+          "height": 0.2,
+          "domain": "Ventilation",
+          "mepSystemId": {
+            "attributeId": {
+              "guid": "id-sha256:fea97c3fd32c996b3844"
+            }
+          },
+          "isPhysicallyConnected": true,
+          "connectedPortId": "id-sha256:0d24b392faf2c528a716",
+          "connectedElementId": {
+            "guid": "id-sha256:165c75f73387d775e6b9"
+          }
+        },
+        {
+          "ownerGuid": "id-sha256:37ebaaa4f87380b91b8e",
+          "portId": "id-sha256:30b4b6e5d89a88c702b4",
+          "name": "Unnamed port",
+          "position": {
+            "x": 44,
+            "y": 43,
+            "z": 2.275
+          },
+          "direction": {
+            "x": -1,
+            "y": 0,
+            "z": 0
+          },
+          "shape": "Circular",
+          "width": 0.2,
+          "height": 0.2,
+          "domain": "Ventilation",
+          "mepSystemId": {
+            "attributeId": {
+              "guid": "id-sha256:fea97c3fd32c996b3844"
+            }
+          },
+          "isPhysicallyConnected": false
+        }
+      ],
+      "routePhysicalMembers": {
+        "id-sha256:f66575dbc77af2affa42": [
+          "id-sha256:37ebaaa4f87380b91b8e"
+        ]
+      },
+      "logicalConnected": true,
+      "physicalConnected": true,
+      "physicalConnectionEdges": 1,
+      "segmentCount": 1,
+      "nodeCount": 2,
+      "openPorts": [
+        {
+          "ownerGuid": "id-sha256:37ebaaa4f87380b91b8e",
+          "portId": "id-sha256:30b4b6e5d89a88c702b4",
+          "name": "Unnamed port",
+          "position": {
+            "x": 44,
+            "y": 43,
+            "z": 2.275
+          },
+          "direction": {
+            "x": -1,
+            "y": 0,
+            "z": 0
+          },
+          "shape": "Circular",
+          "width": 0.2,
+          "height": 0.2,
+          "domain": "Ventilation",
+          "mepSystemId": {
+            "attributeId": {
+              "guid": "id-sha256:fea97c3fd32c996b3844"
+            }
+          },
+          "isPhysicallyConnected": false
+        }
+      ],
+      "distributionComponentCount": 2,
+      "physicalScope": "REQUESTED_ROUTES_AND_RECIPROCAL_CONNECTED_MEMBERS",
+      "outsideRouteScopePhysicalGuids": [
+        "id-sha256:6f5c8cd1f485e8dfca51",
+        "id-sha256:7aceefb5dbff9a83d77e",
+        "id-sha256:140a12084f45fa25a86d",
+        "id-sha256:39a5f0d1373b0229ce67",
+        "id-sha256:3bb26ddf3d02f3f38127",
+        "id-sha256:b6e42c76b71bc00a7acd",
+        "id-sha256:2c88ec3d0c4c09d2e805",
+        "id-sha256:5d3c6f3e0bf40c432f06",
+        "id-sha256:97690b217421517e82fc",
+        "id-sha256:4a5e1ec4a141728545dc",
+        "id-sha256:600707477b3d39d83401",
+        "id-sha256:60536d193a32708d49dd"
+      ],
+      "genericEnumerationCount": 0,
+      "nativeTopologyAuthority": "Dedicated routing + native system membership + physical port flags/section/positions",
+      "engineeringAcceptance": "NOT_VERIFIED"
+    },
+    "fullRoutedNetworkComponents": 2,
+    "circularTerminalPair": "LIVE_PASS",
+    "mainRectangularBridge": "NOT_VERIFIED",
+    "globalPreferencesChanged": false,
+    "installedAPXChanged": false,
+    "nativeCreateAttempts": 1,
+    "explicitConnectAttempts": 0,
+    "transitionContract": "No exposed qualified per-segment mixed circular/rectangular or sized transition setter; ConnectLogically may delete/split target routing GUID"
+  },
+  "nativeBeams": {
+    "contacts": {
+      "nativeBeamToNativeBeam": {
+        "status": "LIVE_NATIVE_BEAM_SOURCE_CONTACT_PASS",
+        "nativeTool": "Beam",
+        "parentGuid": "id-sha256:769aeba818492b4cc744",
+        "segmentGuids": [
+          "id-sha256:fd9a8ca900b736676d20"
+        ],
+        "counterpartGuids": [
+          "id-sha256:6dc4d8041bb04f44a9c2"
+        ],
+        "sharedAreaSquareMeters": 0.007500000016360793,
+        "nominalPerpendicularEndContactAreaSquareMeters": 0.0075,
+        "nativeEndCutScope": "Actual native end geometry; equivalence to original Morph end cut not claimed",
+        "sourceSectionMeters": {
+          "width": 0.15,
+          "height": 0.025
+        },
+        "nativeVolumeCollision": {
+          "collisions": []
+        },
+        "actualSegments": [
+          {
+            "guid": "id-sha256:fd9a8ca900b736676d20",
+            "bounds": [
+              [
+                40,
+                50
+              ],
+              [
+                45.948257889,
+                46.100309504
+              ],
+              [
+                6.874271976,
+                6.921406973
+              ]
+            ],
+            "homeStory": 1,
+            "materialBindings": {
+              "api": "ACAPI_Element_Get",
+              "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+              "structureType": 0,
+              "buildingMaterial": {
+                "nativeField": "beamSegment.assemblySegmentData",
+                "attributeType": 12,
+                "attributeIndex": 49,
+                "guid": "id-sha256:cffa184ae2595efce663",
+                "name": "Дерево - Конструкционное",
+                "defaultSurface": {
+                  "nativeField": "buildingMaterial.cutMaterial",
+                  "attributeType": 5,
+                  "attributeIndex": 15,
+                  "guid": "id-sha256:e0b0fe701a1cc64446a5",
+                  "name": "Дерево - Сосна Сучковатая Горизонтальная"
+                }
+              },
+              "leftMaterial": {
+                "nativeField": "beamSegment.leftMaterial",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "topMaterial": {
+                "nativeField": "beamSegment.topMaterial",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "rightMaterial": {
+                "nativeField": "beamSegment.rightMaterial",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "bottomMaterial": {
+                "nativeField": "beamSegment.bottomMaterial",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "endsMaterial": {
+                "nativeField": "beamSegment.endsMaterial",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              }
+            },
+            "relationships": {
+              "hostGuid": "id-sha256:769aeba818492b4cc744"
+            }
+          }
+        ],
+        "engineeringAcceptance": "ENGINEERING_NOT_VERIFIED",
+        "completeManufacturerAssembly": "NOT_VERIFIED"
+      },
+      "nativeBeamToAcceptedBatten": {
+        "status": "LIVE_NATIVE_BEAM_SOURCE_CONTACT_PASS",
+        "nativeTool": "Beam",
+        "parentGuid": "id-sha256:faa8e878d06048cf2f74",
+        "segmentGuids": [
+          "id-sha256:6dc4d8041bb04f44a9c2"
+        ],
+        "counterpartGuids": [
+          "id-sha256:21cedb48f056d6ebc819"
+        ],
+        "sharedAreaSquareMeters": 0.00731108100944968,
+        "nominalPerpendicularEndContactAreaSquareMeters": 0.0075,
+        "nativeEndCutScope": "Actual native end geometry; equivalence to original Morph end cut not claimed",
+        "sourceSectionMeters": {
+          "width": 0.05,
+          "height": 0.05
+        },
+        "nativeVolumeCollision": {
+          "collisions": []
+        },
+        "actualSegments": [
+          {
+            "guid": "id-sha256:6dc4d8041bb04f44a9c2",
+            "bounds": [
+              [
+                42.475,
+                42.525
+              ],
+              [
+                41.940785982,
+                47.853735953
+              ],
+              [
+                6.217469379,
+                7.161692188
+              ]
+            ],
+            "homeStory": 1,
+            "materialBindings": {
+              "api": "ACAPI_Element_Get",
+              "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+              "structureType": 0,
+              "buildingMaterial": {
+                "nativeField": "beamSegment.assemblySegmentData",
+                "attributeType": 12,
+                "attributeIndex": 49,
+                "guid": "id-sha256:cffa184ae2595efce663",
+                "name": "Дерево - Конструкционное",
+                "defaultSurface": {
+                  "nativeField": "buildingMaterial.cutMaterial",
+                  "attributeType": 5,
+                  "attributeIndex": 15,
+                  "guid": "id-sha256:e0b0fe701a1cc64446a5",
+                  "name": "Дерево - Сосна Сучковатая Горизонтальная"
+                }
+              },
+              "leftMaterial": {
+                "nativeField": "beamSegment.leftMaterial",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "topMaterial": {
+                "nativeField": "beamSegment.topMaterial",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "rightMaterial": {
+                "nativeField": "beamSegment.rightMaterial",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "bottomMaterial": {
+                "nativeField": "beamSegment.bottomMaterial",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "endsMaterial": {
+                "nativeField": "beamSegment.endsMaterial",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              }
+            },
+            "relationships": {
+              "hostGuid": "id-sha256:faa8e878d06048cf2f74"
+            }
+          }
+        ],
+        "engineeringAcceptance": "ENGINEERING_NOT_VERIFIED",
+        "completeManufacturerAssembly": "NOT_VERIFIED"
+      }
+    },
+    "sourceBindings": {
+      "c4": {
+        "detailId": "ARMO_SELFLOCK_ROOF__P0003",
+        "entityId": "c4",
+        "sourceFactId": "ARMO_SELFLOCK_ROOF__P0003__PF001",
+        "sourceLocator": {
+          "representation": "albom_tehnicheskih_reshenii_samozaschelkivayuscheisya_krovli_armo.pdf",
+          "page": 3
+        },
+        "archiveSha256": "fbd23cbca9d306b630537679b75ff5b015f1e35a2b8470811387c137a32bdeb6",
+        "hostGuid": "id-sha256:51fe26b6654ee6ca9854",
+        "hostGeometryHash": "0cc7605d8ace8f21e5434c6daa568efb0c5df953a29af766edef4c5f669562ee",
+        "hostMaterialBindings": {
+          "api": "ACAPI_Element_Get",
+          "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "structureType": 0,
+          "buildingMaterial": {
+            "nativeField": "shellBase.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "id-sha256:460ab9cf8caf48c17c0c",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "id-sha256:547d736d45b5e8718116",
+              "name": "Бетон - 02"
+            }
+          },
+          "topMat": {
+            "nativeField": "shellBase.topMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "sidMat": {
+            "nativeField": "shellBase.sidMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "botMat": {
+            "nativeField": "shellBase.botMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          }
+        },
+        "hostHomeStory": 1,
+        "expectedPlacement": {
+          "floorIndex": 1,
+          "basePoint": {
+            "x": 40,
+            "y": 45.95199384196459,
+            "z": 6.87427197590234
+          },
+          "xAxis": {
+            "x": 1.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "yAxis": {
+            "x": 0.0,
+            "y": 0.9887710779445592,
+            "z": -0.14943813241724602
+          },
+          "zAxis": {
+            "x": 0.0,
+            "y": 0.14943813241724602,
+            "z": 0.9887710779445592
+          }
+        },
+        "projectMaterialSelection": {
+          "kind": "BuildingMaterial",
+          "name": "Дерево - Конструкционное",
+          "expectedGuid": "id-sha256:cffa184ae2595efce663"
+        },
+        "sourceSectionMeters": {
+          "width": 0.15,
+          "height": 0.025
+        },
+        "modelDerivedLengthMeters": 10,
+        "assemblyWriteAllowed": false,
+        "scope": "INDEPENDENT_SOURCE_SECTION_PART; NOT_COMPLETE_MANUFACTURER_ASSEMBLY",
+        "materialAcceptance": "PROJECT_SELECTION_REQUIRES_FRESH_NATIVE_RESOLVE; SOURCE_MATERIAL_NOT_SPECIFIED",
+        "engineeringAcceptance": "NOT_VERIFIED",
+        "missingAssemblyDimensionEntities": [
+          "c1",
+          "c2",
+          "c3",
+          "c6",
+          "c7",
+          "c8",
+          "c9",
+          "c10"
+        ],
+        "physicalContact": {
+          "counterpartGuid": "id-sha256:faa8e878d06048cf2f74",
+          "expectedAreaSquareMeters": 0.0075,
+          "sourceRelation": "battens_supported_by_counterbattens",
+          "sourceEntityPair": [
+            "c4",
+            "c5"
+          ]
+        },
+        "nativeDependencyBodies": [
+          {
+            "guid": "id-sha256:6dc4d8041bb04f44a9c2",
+            "geometryHash": "ad989b457829dab0f055a1e6a910392be8b58529c4bc34b42be51df258a690b6",
+            "materialBindings": {
+              "api": "ACAPI_Element_Get",
+              "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+              "structureType": 0,
+              "buildingMaterial": {
+                "nativeField": "beamSegment.assemblySegmentData",
+                "attributeType": 12,
+                "attributeIndex": 49,
+                "guid": "id-sha256:cffa184ae2595efce663",
+                "name": "Дерево - Конструкционное",
+                "defaultSurface": {
+                  "nativeField": "buildingMaterial.cutMaterial",
+                  "attributeType": 5,
+                  "attributeIndex": 15,
+                  "guid": "id-sha256:e0b0fe701a1cc64446a5",
+                  "name": "Дерево - Сосна Сучковатая Горизонтальная"
+                }
+              },
+              "leftMaterial": {
+                "nativeField": "beamSegment.leftMaterial",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "topMaterial": {
+                "nativeField": "beamSegment.topMaterial",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "rightMaterial": {
+                "nativeField": "beamSegment.rightMaterial",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "bottomMaterial": {
+                "nativeField": "beamSegment.bottomMaterial",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "endsMaterial": {
+                "nativeField": "beamSegment.endsMaterial",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              }
+            },
+            "homeStory": 1
+          }
+        ],
+        "expectedNativeBeamParameters": {
+          "begCoordinate": {
+            "x": 40.0,
+            "y": 46.024283696155216
+          },
+          "endCoordinate": {
+            "x": 50.0,
+            "y": 46.024283696155216
+          },
+          "zCoordinate": 6.89783947430794,
+          "floorIndex": 1,
+          "offset": 0.0,
+          "slantAngle": 0.0,
+          "isSlanted": false,
+          "profileAngle": -0.14999999994300683,
+          "arcAngle": 0.0,
+          "verticalCurveHeight": 0.0,
+          "width": 0.15,
+          "height": 0.025,
+          "anchorPoint": "Center",
+          "circleBased": false,
+          "isWidthAndHeightLinked": false,
+          "buildingMaterialId": {
+            "guid": "id-sha256:cffa184ae2595efce663"
+          }
+        },
+        "nativeTool": "Beam",
+        "geometryAuthority": "Accepted planar source recipe and actual native roof/support span",
+        "placementAuthority": "Measured native roof three-quarter Y; distinct retained batten alternative",
+        "nativeEndCutAcceptance": "REQUIRES_ACTUAL_SEGMENT_BODY_AND_CONTACT_READBACK"
+      },
+      "c5": {
+        "detailId": "ARMO_SELFLOCK_ROOF__P0003",
+        "entityId": "c5",
+        "sourceFactId": "ARMO_SELFLOCK_ROOF__P0003__PF002",
+        "sourceLocator": {
+          "representation": "albom_tehnicheskih_reshenii_samozaschelkivayuscheisya_krovli_armo.pdf",
+          "page": 3
+        },
+        "archiveSha256": "fbd23cbca9d306b630537679b75ff5b015f1e35a2b8470811387c137a32bdeb6",
+        "hostGuid": "id-sha256:51fe26b6654ee6ca9854",
+        "hostGeometryHash": "0cc7605d8ace8f21e5434c6daa568efb0c5df953a29af766edef4c5f669562ee",
+        "hostMaterialBindings": {
+          "api": "ACAPI_Element_Get",
+          "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "structureType": 0,
+          "buildingMaterial": {
+            "nativeField": "shellBase.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "id-sha256:460ab9cf8caf48c17c0c",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "id-sha256:547d736d45b5e8718116",
+              "name": "Бетон - 02"
+            }
+          },
+          "topMat": {
+            "nativeField": "shellBase.topMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "sidMat": {
+            "nativeField": "shellBase.sidMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "botMat": {
+            "nativeField": "shellBase.botMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          }
+        },
+        "hostHomeStory": 1,
+        "expectedPlacement": {
+          "floorIndex": 1,
+          "basePoint": {
+            "x": 45.025,
+            "y": 41.94452193565046,
+            "z": 6.218034013107245
+          },
+          "xAxis": {
+            "x": 0.0,
+            "y": -1.0,
+            "z": 0.0
+          },
+          "yAxis": {
+            "x": 0.9887710778551003,
+            "y": 0.0,
+            "z": -0.14943813300915973
+          },
+          "zAxis": {
+            "x": 0.14943813300915973,
+            "y": 0.0,
+            "z": 0.9887710778551003
+          }
+        },
+        "projectMaterialSelection": {
+          "kind": "BuildingMaterial",
+          "name": "Дерево - Конструкционное",
+          "expectedGuid": "id-sha256:cffa184ae2595efce663"
+        },
+        "sourceSectionMeters": {
+          "width": 0.05,
+          "height": 0.05
+        },
+        "modelDerivedLengthMeters": 5.980100048867446,
+        "modelSpanAuthority": {
+          "start": "Actual accepted batten underside low edge",
+          "end": "Actual upper wall inner face",
+          "startY": 41.937050029,
+          "endY": 47.85
+        },
+        "nativeDependencyBodies": [
+          {
+            "guid": "id-sha256:21cedb48f056d6ebc819",
+            "geometryHash": "63e3b58f58137cc4b5fc1c8539e54cac87685aa7de64316e233a0384e416d425",
+            "materialBindings": {
+              "api": "ACAPI_Element_Get",
+              "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+              "buildingMaterial": {
+                "nativeField": "morph.buildingMaterial",
+                "attributeType": 12,
+                "attributeIndex": 49,
+                "guid": "id-sha256:cffa184ae2595efce663",
+                "name": "Дерево - Конструкционное",
+                "defaultSurface": {
+                  "nativeField": "buildingMaterial.cutMaterial",
+                  "attributeType": 5,
+                  "attributeIndex": 15,
+                  "guid": "id-sha256:e0b0fe701a1cc64446a5",
+                  "name": "Дерево - Сосна Сучковатая Горизонтальная"
+                }
+              },
+              "material": {
+                "nativeField": "morph.material (non-customized faces)",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "customFaceAssignments": "effective surfaces are in resultant mesh; custom Morph face source is not expanded"
+            },
+            "homeStory": 1
+          },
+          {
+            "guid": "id-sha256:4b2c7d00e3d409a9ab32",
+            "geometryHash": "7fdd7b0bbf69c73437407d02fc685e4775a4b8973b1b466b36b8f81eef4a1307",
+            "materialBindings": {
+              "api": "ACAPI_Element_Get",
+              "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+              "structureType": 0,
+              "buildingMaterial": {
+                "nativeField": "wall.structure",
+                "attributeType": 12,
+                "attributeIndex": 10,
+                "guid": "id-sha256:460ab9cf8caf48c17c0c",
+                "name": "Железобетон - Конструкционный",
+                "defaultSurface": {
+                  "nativeField": "buildingMaterial.cutMaterial",
+                  "attributeType": 5,
+                  "attributeIndex": 4,
+                  "guid": "id-sha256:547d736d45b5e8718116",
+                  "name": "Бетон - 02"
+                }
+              },
+              "refMat": {
+                "nativeField": "wall.refMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "oppMat": {
+                "nativeField": "wall.oppMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "sidMat": {
+                "nativeField": "wall.sidMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              }
+            },
+            "homeStory": 1
+          }
+        ],
+        "physicalContact": {
+          "counterpartGuid": "id-sha256:21cedb48f056d6ebc819",
+          "expectedAreaSquareMeters": 0.007311080976734612,
+          "sourceRelation": "battens_supported_by_counterbattens",
+          "sourceEntityPair": [
+            "c4",
+            "c5"
+          ],
+          "nominalPerpendicularEndContactAreaSquareMeters": 0.0075,
+          "nativeEndCutAuthority": "Vertical native end plane at centerline begin; actual segment faces must confirm it"
+        },
+        "classification": {
+          "role": "counterbatten",
+          "scope": "SOURCE_ROLE_IN_BIM_GRAPH; NATIVE_CLASSIFICATION_ITEM_NOT_ASSIGNED"
+        },
+        "assemblyWriteAllowed": false,
+        "scope": "COMPLETE_BOUNDED_BATTEN_COUNTERBATTEN_SUPPORT_CONTACT; FULL_MANUFACTURER_ASSEMBLY_NOT_VERIFIED",
+        "materialAcceptance": "VERIFIED_EXISTING_PROJECT_TIMBER; SOURCE_GRADE_NOT_SPECIFIED",
+        "engineeringAcceptance": "NOT_VERIFIED",
+        "missingAssemblyDimensionEntities": [
+          "c1",
+          "c2",
+          "c3",
+          "c6",
+          "c7",
+          "c8",
+          "c9",
+          "c10"
+        ],
+        "expectedNativeBeamParameters": {
+          "begCoordinate": {
+            "x": 42.5,
+            "y": 41.94078598232523
+          },
+          "endCoordinate": {
+            "x": 42.5,
+            "y": 47.85373595332523
+          },
+          "zCoordinate": 6.2427532900536225,
+          "floorIndex": 1,
+          "offset": 0.0,
+          "slantAngle": 0.15000000054164286,
+          "isSlanted": true,
+          "profileAngle": 0.0,
+          "arcAngle": 0.0,
+          "verticalCurveHeight": 0.0,
+          "width": 0.05,
+          "height": 0.05,
+          "anchorPoint": "Center",
+          "circleBased": false,
+          "isWidthAndHeightLinked": false,
+          "buildingMaterialId": {
+            "guid": "id-sha256:cffa184ae2595efce663"
+          }
+        },
+        "nativeTool": "Beam",
+        "geometryAuthority": "Accepted planar source recipe and actual native roof/support span",
+        "placementAuthority": "Measured native roof quarter X; separate retained c5 alternative at X42.5",
+        "nativeEndCutAcceptance": "REQUIRES_ACTUAL_SEGMENT_BODY_AND_CONTACT_READBACK"
+      }
+    },
+    "nativeCreateAttempts": 2,
+    "nativeProfileModifyAttempts": 1,
+    "nativeMutationReplays": 0,
+    "profileConvention": "Beam rotation opposite Morph rows; readback equivalent modulo2pi",
+    "newBodyTemporaryChange": "Only new c5 segment joined during c4 profile mismatch; final103preexisting signatures fully restored",
+    "originalMorphSupport": "PRESERVED; no removal, re-creation or geometry edit"
+  },
+  "wallRoof": {
+    "source": {
+      "sourceWallGuid": "id-sha256:3677c5da2430b7bed34b",
+      "sourceRoofGuid": "id-sha256:51fe26b6654ee6ca9854",
+      "sourceBodies": [
+        {
+          "guid": "id-sha256:3677c5da2430b7bed34b",
+          "geometryHash": "531ef1d6df0a8bfae9b89a3727577f522dcec5a5ef849fb3697cba57c80f5064",
+          "materialBindings": {
+            "api": "ACAPI_Element_Get",
+            "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+            "structureType": 0,
+            "buildingMaterial": {
+              "nativeField": "wall.structure",
+              "attributeType": 12,
+              "attributeIndex": 10,
+              "guid": "id-sha256:460ab9cf8caf48c17c0c",
+              "name": "Железобетон - Конструкционный",
+              "defaultSurface": {
+                "nativeField": "buildingMaterial.cutMaterial",
+                "attributeType": 5,
+                "attributeIndex": 4,
+                "guid": "id-sha256:547d736d45b5e8718116",
+                "name": "Бетон - 02"
+              }
+            },
+            "refMat": {
+              "nativeField": "wall.refMat",
+              "attributeType": 5,
+              "attributeIndex": 0,
+              "overridden": false,
+              "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+            },
+            "oppMat": {
+              "nativeField": "wall.oppMat",
+              "attributeType": 5,
+              "attributeIndex": 0,
+              "overridden": false,
+              "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+            },
+            "sidMat": {
+              "nativeField": "wall.sidMat",
+              "attributeType": 5,
+              "attributeIndex": 0,
+              "overridden": false,
+              "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+            }
+          },
+          "homeStory": 1
+        },
+        {
+          "guid": "id-sha256:51fe26b6654ee6ca9854",
+          "geometryHash": "0cc7605d8ace8f21e5434c6daa568efb0c5df953a29af766edef4c5f669562ee",
+          "materialBindings": {
+            "api": "ACAPI_Element_Get",
+            "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+            "structureType": 0,
+            "buildingMaterial": {
+              "nativeField": "shellBase.structure",
+              "attributeType": 12,
+              "attributeIndex": 10,
+              "guid": "id-sha256:460ab9cf8caf48c17c0c",
+              "name": "Железобетон - Конструкционный",
+              "defaultSurface": {
+                "nativeField": "buildingMaterial.cutMaterial",
+                "attributeType": 5,
+                "attributeIndex": 4,
+                "guid": "id-sha256:547d736d45b5e8718116",
+                "name": "Бетон - 02"
+              }
+            },
+            "topMat": {
+              "nativeField": "shellBase.topMat",
+              "attributeType": 5,
+              "attributeIndex": 0,
+              "overridden": false,
+              "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+            },
+            "sidMat": {
+              "nativeField": "shellBase.sidMat",
+              "attributeType": 5,
+              "attributeIndex": 0,
+              "overridden": false,
+              "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+            },
+            "botMat": {
+              "nativeField": "shellBase.botMat",
+              "attributeType": 5,
+              "attributeIndex": 0,
+              "overridden": false,
+              "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+            }
+          },
+          "homeStory": 1
+        }
+      ],
+      "placementAuthority": "Separate native specimen beyond actual maximum model X by one measured roof span; wall at copied roof center",
+      "dimensionAuthority": "Actual wall thickness and resultant span, roof pitch/thickness/polygon, wall base and roof highest vertex",
+      "sourceInterface": "Published49-pair west-upper-wall/roof gap; original model is preserved",
+      "expectedAreaSquareMeters": 2.336233382576165,
+      "fullConstructionSolution": "NOT_VERIFIED",
+      "engineeringAcceptance": "ENGINEERING_NOT_VERIFIED"
+    },
+    "created": {
+      "native-trim-specimen-roof": {
+        "guid": "id-sha256:a18f5c0bbe1448a89762",
+        "kind": "Roof",
+        "floorIndex": 1
+      },
+      "native-trim-specimen-wall": {
+        "guid": "id-sha256:66615501f4aa073ece20",
+        "kind": "Wall",
+        "floorIndex": 1
+      }
+    },
+    "interpretation": "NATIVE_WALL_ROOF_PERIMETER_ABUTMENT; roof top trim plus native material join; not underside bearing",
+    "sharedAreaSquareMeters": 3.2363406080000052,
+    "nativeTrimRelations": [
+      {
+        "error": {
+          "code": -2130313103,
+          "message": "Failed to read the elements this element trims."
+        }
+      },
+      {
+        "trimmedBy": [],
+        "trims": [
+          {
+            "elementId": {
+              "guid": "id-sha256:66615501f4aa073ece20"
+            }
+          }
+        ]
+      }
+    ],
+    "reciprocalTrimMetadata": "NOT_VERIFIED_INSTALLED_PROVIDER_TARGET_ROW_ERROR",
+    "wallBounds": [
+      [
+        86.85,
+        87.15
+      ],
+      [
+        40.15,
+        47.85
+      ],
+      [
+        3,
+        7.38868275
+      ]
+    ],
+    "roofBounds": [
+      [
+        82,
+        92
+      ],
+      [
+        40,
+        48.029887626
+      ],
+      [
+        6.004517073,
+        7.411353033
+      ]
+    ],
+    "wallBodyHash": "ea99c7190678d119593293e46584315c74cced95731e8f28b4bd5234ae9eea84",
+    "roofBodyHash": "73e107ba5bbf48c680e429c0105ce0619d8e419a18012e5dddc604579e753742",
+    "seo": {
+      "nativeRelation": [
+        {
+          "solidLinksWithTheGivenTarget": [
+            {
+              "operatorId": {
+                "guid": "id-sha256:a18f5c0bbe1448a89762"
+              },
+              "operation": "SubtractionUpwards",
+              "linkFlags": {
+                "inheritOperatorAttributes": false,
+                "skipPolygonHoles": false
+              }
+            }
+          ],
+          "solidLinksWithTheGivenOperator": []
+        }
+      ],
+      "nativeOperationAccepted": true,
+      "incrementalBodyChange": false,
+      "undersideGoal": "NOT_VERIFIED; auto-joined operator roof contains wall cutout"
+    },
+    "undersideBearing": "NOT_VERIFIED",
+    "originalFourWallRoofGaps": "UNCHANGED",
+    "nativeTrimAttempts": 1,
+    "nativeSEOAttempts": 1,
+    "newVolumeCollisions": []
+  },
+  "persistence": [
+    {
+      "function": "MEP",
+      "saveAttempts": 1,
+      "openAttempts": 1,
+      "status": "SAVED_REOPENED_REFERENCE200_AND_RECIPROCAL_TERMINAL_PASS",
+      "fileSha256": "998f49080b32ae22bc3c29787d226326ffad75032dcb485c76c689d392e4e71b"
+    },
+    {
+      "function": "BeamPair",
+      "saveAttempts": 1,
+      "openAttempts": 1,
+      "status": "SAVED_REOPENED_TRUE_NATIVE_BEAM_PAIR_CONTACT_PASS",
+      "fileSha256": "7372feeb6b69a0323776e47246dee3e13017e64f0632ff43b0071864adb1d051"
+    },
+    {
+      "function": "WallRoof",
+      "saveAttempts": 1,
+      "openAttempts": 1,
+      "status": "SAVED_REOPENED_NATIVE_WALL_ROOF_ABUTMENT_GEOMETRY_PASS",
+      "fileSha256": "47366e08ecdc7cd5340480c7e0bd455e8ab0aaea64b1321085d9fdbad1a2591c"
+    }
+  ],
+  "ifc": {
+    "ifcFileSha256": "31753cb88f64aebe2d3c487116c4a207538e081d605e5db995a2ea1cacc30f83",
+    "nativeGuidCount": 107,
+    "contextMappings": 43,
+    "boundsMatchCount": 43,
+    "ifcElementCount": 50,
+    "materialAssignmentCount": 24,
+    "nativePortRelationCount": 12,
+    "openingHostCount": 6,
+    "quantities": {
+      "schema": "APA_QUANTIFIED_IFC_EXCHANGE_V1",
+      "ifcSchema": "IFC2X3",
+      "fileSha256": "31753cb88f64aebe2d3c487116c4a207538e081d605e5db995a2ea1cacc30f83",
+      "lengthUnitScaleToMeters": 0.001,
+      "quantityMatchCount": 18,
+      "quantityMismatchCount": 0,
+      "semanticCompatibility": "NOT_VERIFIED",
+      "engineeringAcceptance": "NOT_VERIFIED",
+      "nativeWrites": 0
+    },
+    "nativeAndClassifiedMorphDistinction": [
+      {
+        "stepId": "native-source-beam-c4",
+        "nativeTool": "Beam",
+        "actualNativeType": "Beam",
+        "actualIfcType": "IfcBeam",
+        "materials": [
+          "Дерево - Конструкционное"
+        ],
+        "sourceSegmentGuids": [
+          "id-sha256:fd9a8ca900b736676d20"
+        ],
+        "nativeComparison": {
+          "areaDeltaSquareMeters": 1.781769398689903e-09,
+          "volumeDeltaCubicMeters": 7.787288869298692e-11,
+          "status": "IFC_NATIVE_QUANTITIES_MATCH"
+        },
+        "classifications": [
+          {
+            "type": "IfcClassificationReference",
+            "identifier": "Балка",
+            "name": null,
+            "source": "Классификация Archicad"
+          }
+        ],
+        "nativeQuantities": {
+          "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+          "surfaceAreaSquareMeters": 3.5074999982182264,
+          "volumeCubicMeters": 0.03750000007823655,
+          "bodyCount": 1,
+          "authority": "Actual resultant planar faces with holes and independently counted closed edges",
+          "sourceSegmentGuids": [
+            "id-sha256:fd9a8ca900b736676d20"
+          ],
+          "ownershipAuthority": "SDK_HOST_GUID_AND_NATIVE_SEGMENT_TYPE"
+        },
+        "ifcBoundsMeters": [
+          [
+            40.0,
+            50.0
+          ],
+          [
+            45.94825788865416,
+            46.10030950365628
+          ],
+          [
+            6.87427197590234,
+            6.92140697271354
+          ]
+        ],
+        "boundsDeltaMeters": 3.4583536034915596e-10
+      },
+      {
+        "stepId": "native-source-beam-c5",
+        "nativeTool": "Beam",
+        "actualNativeType": "Beam",
+        "actualIfcType": "IfcBeam",
+        "materials": [
+          "Дерево - Конструкционное"
+        ],
+        "sourceSegmentGuids": [
+          "id-sha256:6dc4d8041bb04f44a9c2"
+        ],
+        "nativeComparison": {
+          "areaDeltaSquareMeters": 4.319128832364072e-09,
+          "volumeDeltaCubicMeters": 1.0617991902384105e-10,
+          "status": "IFC_NATIVE_QUANTITIES_MATCH"
+        },
+        "classifications": [
+          {
+            "type": "IfcClassificationReference",
+            "identifier": "Балка",
+            "name": null,
+            "source": "Классификация Archicad"
+          }
+        ],
+        "nativeQuantities": {
+          "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+          "surfaceAreaSquareMeters": 1.2010767963063635,
+          "volumeCubicMeters": 0.014950250229727222,
+          "bodyCount": 1,
+          "authority": "Actual resultant planar faces with holes and independently counted closed edges",
+          "sourceSegmentGuids": [
+            "id-sha256:6dc4d8041bb04f44a9c2"
+          ],
+          "ownershipAuthority": "SDK_HOST_GUID_AND_NATIVE_SEGMENT_TYPE"
+        },
+        "ifcBoundsMeters": [
+          [
+            42.475,
+            42.525
+          ],
+          [
+            41.94078598232523,
+            47.85373595332522
+          ],
+          [
+            6.21746937898471,
+            7.161692187633269
+          ]
+        ],
+        "boundsDeltaMeters": 3.667306458510211e-10
+      },
+      {
+        "stepId": "source-section-c4",
+        "nativeTool": "Morph",
+        "actualNativeType": "Morph",
+        "actualIfcType": "IfcBuildingElementProxy",
+        "materials": [
+          "Дерево - Конструкционное"
+        ],
+        "sourceSegmentGuids": [],
+        "nativeComparison": null,
+        "classifications": [
+          {
+            "type": "IfcClassificationReference",
+            "identifier": "Прокси Строительного Элемента",
+            "name": null,
+            "source": "Классификация Archicad"
+          }
+        ],
+        "nativeQuantities": {
+          "status": "NATIVE_QUANTITIES_NOT_VERIFIED",
+          "reason": "CURVED_NATIVE_BODY_NOT_QUANTIFIED"
+        },
+        "ifcBoundsMeters": [
+          [
+            40.0,
+            50.0
+          ],
+          [
+            41.93331407611876,
+            42.08536569112088
+          ],
+          [
+            6.267472567151421,
+            6.314607563962621
+          ]
+        ],
+        "boundsDeltaMeters": 1.5142020970415615e-10
+      },
+      {
+        "stepId": "source-support-counterbatten-c5",
+        "nativeTool": "Morph",
+        "actualNativeType": "Morph",
+        "actualIfcType": "IfcBeam",
+        "materials": [
+          "Дерево - Конструкционное"
+        ],
+        "sourceSegmentGuids": [],
+        "nativeComparison": null,
+        "classifications": [
+          {
+            "type": "IfcClassificationReference",
+            "identifier": "Балка",
+            "name": null,
+            "source": "Классификация Archicad"
+          }
+        ],
+        "nativeQuantities": {
+          "status": "NATIVE_QUANTITIES_NOT_VERIFIED",
+          "reason": "CURVED_NATIVE_BODY_NOT_QUANTIFIED"
+        },
+        "ifcBoundsMeters": [
+          [
+            44.975,
+            45.025
+          ],
+          [
+            41.937050029,
+            47.85747190665046
+          ],
+          [
+            6.2180340131072445,
+            7.161127553510735
+          ]
+        ],
+        "boundsDeltaMeters": 4.892655169896898e-10
+      },
+      {
+        "stepId": "native-trim-specimen-wall",
+        "nativeTool": "Wall",
+        "actualNativeType": "Wall",
+        "actualIfcType": "IfcWall",
+        "materials": [
+          "Железобетон - Конструкционный"
+        ],
+        "sourceSegmentGuids": [],
+        "nativeComparison": {
+          "areaDeltaSquareMeters": 4.288793320483819e-09,
+          "volumeDeltaCubicMeters": 6.188631829218139e-10,
+          "status": "IFC_NATIVE_QUANTITIES_MATCH"
+        },
+        "classifications": [
+          {
+            "type": "IfcClassificationReference",
+            "identifier": "Стена",
+            "name": null,
+            "source": "Классификация Archicad"
+          }
+        ],
+        "nativeQuantities": {
+          "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+          "surfaceAreaSquareMeters": 65.55522795057426,
+          "volumeCubicMeters": 8.793736090754438,
+          "bodyCount": 1,
+          "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+        },
+        "ifcBoundsMeters": [
+          [
+            86.85,
+            87.15
+          ],
+          [
+            40.15,
+            47.85
+          ],
+          [
+            3.0,
+            7.38868275029235
+          ]
+        ],
+        "boundsDeltaMeters": 2.923501440932341e-10
+      },
+      {
+        "stepId": "native-trim-specimen-roof",
+        "nativeTool": "Roof",
+        "actualNativeType": "Roof",
+        "actualIfcType": "IfcRoof",
+        "materials": [
+          "Железобетон - Конструкционный"
+        ],
+        "sourceSegmentGuids": [],
+        "nativeComparison": {
+          "areaDeltaSquareMeters": 2.1557582385867136e-09,
+          "volumeDeltaCubicMeters": 2.746816640808447e-08,
+          "status": "IFC_NATIVE_QUANTITIES_MATCH"
+        },
+        "classifications": [
+          {
+            "type": "IfcClassificationReference",
+            "identifier": "Крыша",
+            "name": null,
+            "source": "Классификация Archicad"
+          }
+        ],
+        "nativeQuantities": {
+          "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+          "surfaceAreaSquareMeters": 167.61724529790098,
+          "volumeCubicMeters": 15.714456433731275,
+          "bodyCount": 1,
+          "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+        },
+        "ifcBoundsMeters": [
+          [
+            82.0,
+            92.0
+          ],
+          [
+            40.0,
+            48.02988762649472
+          ],
+          [
+            6.004517072947524,
+            7.4113530330010935
+          ]
+        ],
+        "boundsDeltaMeters": 4.947224852003274e-10
+      }
+    ]
+  },
+  "fullSemanticCompatibility": "NOT_VERIFIED",
+  "engineeringAcceptance": "ENGINEERING_NOT_VERIFIED",
+  "visualConfirmation": "NOT_VERIFIED",
+  "A11.S10": "BLOCKED",
+  "A04.S01-S03": "DONE_PUBLISHED_RETAINED",
+  "nativeMutationReplays": 0,
+  "evidenceHashes": {
+    "apa-live-evidence/native-followon-circular-terminal-persistence/result.json": "d7c53d20e3e2b59aff67b09fdc2721504a30ae492cba6ef07d8e039369ebe811",
+    "apa-live-evidence/native-followon-beam-pair-persistence/result.json": "19b6895b4195d5bc843856db0f7ae2c9b1eb64b1a48f32c7a33e0b9a729097ed",
+    "apa-live-evidence/native-followon-wall-roof-junction-persistence/result.json": "c1b4fa1b59dbb1944c4b157d4d529d5a4247abf1b3088c6f561d8d786b565e0a",
+    "apa-live-evidence/native-followon-final-readback107/result.json": "311682b64c59e7bbba1a8973bb52ea10362d71a6fdeb2c7b694f3cbed5c9ad40",
+    "apa-live-evidence/native-followon-ifc-current107-readonly-final/result.json": "0e91bbbc95f3301c0a0dee007de296bb5701d1f712372a574302ceee20a4caf2"
+  }
+}
