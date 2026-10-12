@@ -1,17 +1,15 @@
 {
-  "active": [
-    "APA-P70.A02.S02"
-  ],
-  "artifact_count": 152,
+  "active": [],
+  "artifact_count": 159,
   "counts": {
     "BLOCKED": 13,
     "CLAIMED": 0,
-    "DISPATCHABLE_NOW": 17,
+    "DISPATCHABLE_NOW": 18,
     "DONE_PUBLISHED": 27,
     "EXPIRED_LEASES": 0,
     "HELD_BY_DEPENDENCIES": 33,
-    "IN_PROGRESS": 1,
-    "PARTIAL": 16,
+    "IN_PROGRESS": 0,
+    "PARTIAL": 17,
     "READY": 34,
     "SUPERSEDED": 0
   },
@@ -27,7 +25,7 @@
       {
         "done": 3,
         "id": "APA-P70.A02",
-        "status": "IN_PROGRESS",
+        "status": "PARTIAL",
         "title": "Требования, нормативы и библиотека конкретного проекта",
         "total": 4
       },
@@ -95,17 +93,16 @@
         "total": 10
       }
     ],
-    "active": [
-      "APA-P70.A02.S02"
-    ],
+    "active": [],
     "done": 16,
-    "next_eligible": "APA-P70.A11.S03",
+    "next_eligible": "APA-P70.A02.S02",
     "plan_id": "APA-P70",
-    "status": "IN_PROGRESS",
+    "status": "PARTIAL",
     "total": 39
   },
   "dispatchable": {
     "BUILD": [
+      "APA-P70.A02.S02",
       "APA-P00.A03.S03"
     ],
     "CONSOLIDATION": [
@@ -173,7 +170,7 @@
   "known_published_v2_runs": 37,
   "legacy_reports": "NOT_FULLY_INDEXED",
   "orphan_v2_manifests": [],
-  "plan_revision": 122,
+  "plan_revision": 123,
   "publisher": "DEPLOYED_SYNTHETIC_E2E_PASS",
   "research_lookahead": {
     "linked_product_substeps": 39,
@@ -295,7 +292,7 @@
     },
     "PRODUCT_DEVELOPMENT": {
       "done": 16,
-      "ready": 1,
+      "ready": 2,
       "task_ids": [
         "APA-P70.A01.S01",
         "APA-P70.A01.S02",
