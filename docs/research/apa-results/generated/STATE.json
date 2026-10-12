@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 29,
+  "run_count": 30,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -203,6 +203,13 @@
       "phase": "SOURCE",
       "report": "runs/2026-10-12/APA-RUN-20261012-122511Z-construction-junctions-s01/REPORT.md",
       "run_id": "APA-RUN-20261012-122511Z-construction-junctions-s01",
+      "substep_id": "APA-P70.A04.S01"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-12/APA-RUN-20261012-123259Z-construction-junctions-s01-openings/REPORT.md",
+      "run_id": "APA-RUN-20261012-123259Z-construction-junctions-s01-openings",
       "substep_id": "APA-P70.A04.S01"
     }
   ],

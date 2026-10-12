@@ -1,0 +1,33 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-CONSTRUCTION-JUNCTIONS-S01-OPENINGS",
+      "evidence_ids": [
+        "EV-JUNCTION-PROOF",
+        "EV-JUNCTION-BYTES"
+      ],
+      "statement": "S01 complete: all required accepted-model construction interface families, actual Generic Opening wall-hole contours, source/material/story/XYZ conditions and explicit reinforcement/fixing gaps.95GUID/body signatures preserved.414Windows/Linux tests PASS. Existing source batten/counterbatten relation qualifies next bounded native support junction. No native writes; publication zero native calls.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-JUNCTION-PROOF",
+      "kind": "TEST_RESULT",
+      "sha256": "a613f08deca7b408f18f51b8e825041d5eaabb6c522ef5659a473e3e7cd38105",
+      "source_revision": "32b9f6f670e0c8bfb723172259436e28d1a2100e",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-123259Z-construction-junctions-s01-openings/coverage.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-JUNCTION-BYTES",
+      "kind": "LOCAL_LOG",
+      "sha256": "fbaa42ba7da223db4c682dc93de6cbd76b925813e1ce981480da73de0b4fa85c",
+      "source_revision": "32b9f6f670e0c8bfb723172259436e28d1a2100e",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-123259Z-construction-junctions-s01-openings/EVIDENCE_SHA256.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261012-123259Z-construction-junctions-s01-openings",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}
