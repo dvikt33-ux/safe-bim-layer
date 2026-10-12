@@ -291,7 +291,8 @@ def verify_readback(command, params, row, owner_guid=None, expected_floor=0,
         for source, target in (("height", "height"), ("thickness", "begThickness"),
                                ("thickness", "endThickness"), ("offset", "offset"),
                                ("arcAngle", "arcAngle")):
-            if not close(details.get(target), expected[source]):
+            wanted = expected.get(source, 0.0) if source in ('offset', 'arcAngle') else expected[source]
+            if not close(details.get(target), wanted):
                 raise ValueError("WALL_SIZE_READBACK_MISMATCH: " + target)
         # CreateWalls zCoordinate is a floor-local offset in the pinned graph;
         # native GetDetailsOfElements returns absolute project Z in observed
@@ -498,6 +499,66 @@ class SceneWriter:
 
     def guarded_binding(self):
         return guarded_project(self.api, self.required_story)
+
+    def execute_bound_operation(self, preflight, scene_id, command, parameters,
+                                expected_hash, verify_before, verify_after):
+        """Opt-in non-create adapters use this same SceneWriter/SQLite ledger.
+
+        Callbacks prove current ownership/geometry before the durable intent
+        and independently read the resulting native relations after one call.
+        No replay, second executor or automatic rollback.
+        """
+        if (command not in {'ConnectMEPElements','ModifyMEPRoutingElements',
+                            'CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks'}
+                or not _SCENE_ID.fullmatch(scene_id) or not callable(verify_before) or not callable(verify_after)):
+            raise ValueError('BOUNDED_OPERATION_ADAPTER_REQUIRED')
+        intent={'sceneId':scene_id,'sourcePlanHash':preflight['sourcePlanHash'],
+                'command':command,'parameters':parameters,'target':preflight['binding']}
+        if digest(intent)!=expected_hash:raise ValueError('BOUNDED_OPERATION_HASH_MISMATCH')
+        slots={'ConnectMEPElements':'connectionsData','ModifyMEPRoutingElements':'routingElementsData',
+               'CreateOpenings':'openingsData','CreateSolidElementLinks':'solidLinks','RemoveSolidElementLinks':'solidLinks'}
+        rows=parameters.get(slots[command])
+        if not isinstance(rows,list) or len(rows)!=1:raise ValueError('BOUNDED_OPERATION_REQUIRES_SINGLE_NATIVE_TARGET')
+        checked=SCENE.GRAPH.CONTRACTS.compile_batch(SCENE.GRAPH.CONTRACTS.load_catalog(self.schema_path),
+            {'requests':[{'id':'operation','command':command,'params':parameters}]},runtime_version=EXPECTED_TAPIR)
+        if checked['status']!='SCHEMA_VALID':raise ValueError('BOUNDED_OPERATION_SCHEMA_INVALID')
+        if self.guarded_binding()!=preflight['binding']:raise ValueError('BOUNDED_OPERATION_TARGET_DRIFT')
+        before=verify_before()
+        result={'status':'BLOCKED','automaticRetry':False,'sceneId':scene_id,'command':command,'operationHash':expected_hash}
+        with closing(sqlite3.connect(self.journal_path)) as db:
+            db.execute('PRAGMA synchronous=FULL')
+            db.execute('CREATE TABLE IF NOT EXISTS scenes (scene_id TEXT PRIMARY KEY, plan_hash TEXT NOT NULL, state TEXT NOT NULL, result TEXT NOT NULL)')
+            db.execute('CREATE TABLE IF NOT EXISTS steps (scene_id TEXT NOT NULL, step_id TEXT NOT NULL, state TEXT NOT NULL, guid TEXT, output TEXT NOT NULL, PRIMARY KEY(scene_id,step_id))')
+            db.commit();db.execute('BEGIN IMMEDIATE')
+            if db.execute('SELECT 1 FROM scenes WHERE scene_id=? OR plan_hash=?',(scene_id,expected_hash)).fetchone():
+                raise ValueError('BOUNDED_OPERATION_RESERVED_NEVER_RETRY')
+            db.execute('INSERT INTO scenes VALUES(?,?,?,?)',(scene_id,expected_hash,'STARTED',canonical(result)))
+            db.execute('INSERT INTO steps VALUES(?,?,?,?,?)',(scene_id,'operation','ATTEMPTED',None,canonical({'intent':intent,'before':before})));db.commit()
+            try:
+                if self.guarded_binding()!=preflight['binding']:raise ValueError('BOUNDED_OPERATION_TARGET_DRIFT')
+                reply=self.api(command,parameters)
+                result['nativeResponse']=reply
+                if command != 'CreateOpenings':
+                    key = 'connectionResults' if command == 'ConnectMEPElements' else 'executionResults'
+                    rows = reply.get(key)
+                    if not isinstance(rows, list) or len(rows) != 1 or any('error' in r for r in rows):
+                        raise ValueError('BOUNDED_OPERATION_NATIVE_RESPONSE_REJECTED')
+                    if command != 'ConnectMEPElements' and rows[0].get('success') is not True:
+                        raise ValueError('BOUNDED_OPERATION_NATIVE_SUCCESS_NOT_CONFIRMED')
+                if command=='CreateOpenings':
+                    result['createdGuid']=created_guid(reply)
+                    db.execute("UPDATE steps SET state='CREATED_UNVERIFIED',guid=? WHERE scene_id=? AND step_id='operation'",(result['createdGuid'],scene_id));db.commit()
+                if self.guarded_binding()!=preflight['binding']:raise ValueError('BOUNDED_OPERATION_AFTER_TARGET_DRIFT')
+                result['readback']=verify_after(reply,before)
+                if not isinstance(result['readback'],dict) or not str(result['readback'].get('status','')).endswith('PASS'):
+                    raise ValueError('BOUNDED_OPERATION_INDEPENDENT_READBACK_NOT_CONFIRMED')
+                result['status']='PASS'
+                db.execute("UPDATE steps SET state='PASS',output=? WHERE scene_id=? AND step_id='operation'",(canonical(result),scene_id))
+            except Exception as exc:
+                result.update(status='PARTIAL_OR_UNKNOWN_OUTCOME',reason=type(exc).__name__+': '+str(exc),manualReconciliationRequired=True)
+                db.execute("UPDATE steps SET state='UNKNOWN_OUTCOME',output=? WHERE scene_id=? AND step_id='operation'",(canonical(result),scene_id))
+            db.execute('UPDATE scenes SET state=?,result=? WHERE scene_id=?',(result['status'],canonical(result),scene_id));db.commit()
+        return result
 
     def preflight(self, x, y):
         preview = (self.preview_factory(x, y, self.schema_path)

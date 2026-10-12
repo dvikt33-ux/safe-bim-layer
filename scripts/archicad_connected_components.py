@@ -399,6 +399,19 @@ def attach_physical_route(api,context,normalized,step_id,ownership):
     return context
 
 
+def route_ownership(api,plan,created,baseline):
+    steps=[s for s in plan['graph']['operations'] if s['command']=='CreateMEPRoutingElements']
+    if len(steps)==1:
+        return straight_route_ownership(api,plan,created,baseline)
+    import archicad_native_mep_network as M
+    systems={s['params']['routingElementsData'][0]['mepSystemId']['guid'].lower() for s in steps}
+    domains={s['params']['routingElementsData'][0]['domain'] for s in steps}
+    if len(systems)!=1 or len(domains)!=1:raise ValueError('NETWORK_REQUIRES_ONE_PINNED_NATIVE_SYSTEM')
+    network=M.read_network(api,[created[s['id']]['guid'] for s in steps],next(iter(systems)),next(iter(domains)))
+    return {'owned':sorted(set(network['ownedNodeSegmentGuids'])|set(network['physicalGuids'])),
+        'network':network,'scope':'DEDICATED_NATIVE_NETWORK','engineeringAcceptance':'NOT_VERIFIED'}
+
+
 def main(argv=None):
     """Reusable offline/native preflight CLI; execution stays opt-in SceneWriter."""
     parser=argparse.ArgumentParser(description=__doc__)
@@ -422,8 +435,6 @@ def main(argv=None):
     combined_enabled=sorted(set(enabled)|set(prior_plan['integrationBindings']['enabled'] if prior_plan else []))
     plan=bind_plan(source,prior_ops+new_ops,combined_enabled,dependencies={
         'request':request.get('dependencies',{}),'acceptedPrefixHash':RUN.digest(prior_created)})
-    if sum(s['command']=='CreateMEPRoutingElements' for s in plan['graph']['operations'])>1:
-        raise ValueError('MULTIPLE_ROUTE_OWNERSHIP_NOT_IMPLEMENTED')
     result={'status':'PLAN_VALIDATED_OFFLINE','source':source,'plan':plan,'automaticRetry':False,'modelWriteAttempts':0}
     if args.mode=='offline':
         args.output.mkdir(parents=True,exist_ok=False);A.write_json(args.output/'result.json',result)
@@ -431,13 +442,13 @@ def main(argv=None):
     RUN.bind_isolated_writer_pln(19724)
     args.output.mkdir(parents=True,exist_ok=False)
     api=A.EvidenceAPI(A.native_transport,args.output,execute=args.mode=='execute')
-    api.allowed|={'GetMEPRoutingElements','GetMEPDistributionSystems','GetMEPPorts','GetIFCIdsOfElements'}
+    api.allowed|={'GetMEPRoutingElements','GetMEPDistributionSystems','GetMEPPorts','GetMEPElements','GetIFCIdsOfElements'}
     before_context,before=native_context(api,source,prior_plan,prior_created)
     expected_inventory=record.get('context',{}).get('inventory',source['inventory'])
     if before_context['inventory']!=expected_inventory:
         raise ValueError('ACCEPTED_WHOLE_INVENTORY_DRIFT')
     if prior_plan and any(s['command']=='CreateMEPRoutingElements' for s in prior_ops):
-        ownership=straight_route_ownership(api,prior_plan,prior_created,source['inventory'])
+        ownership=route_ownership(api,prior_plan,prior_created,source['inventory'])
         verify_inventory(before_context,source,prior_created,ownership['owned'])
     plan['integrationBindings']['liveBaselineGeometryHash']=RUN.digest(retained_geometry_signatures(before,expected_inventory))
     checked=A.SCENE.GRAPH.compile_graph(A.catalog_with_provenance(RUN.DEFAULT_SCENE_SCHEMA),plan['graph'],runtime_version=RUN.EXPECTED_TAPIR)
@@ -451,7 +462,7 @@ def main(argv=None):
             after_context,after=native_context(api,source,preflight,extra)
             owned=[]
             if any(s['command']=='CreateMEPRoutingElements' for s in preflight['graph']['operations']):
-                proof=straight_route_ownership(api,preflight,extra,source['inventory']);owned=proof['owned']
+                proof=route_ownership(api,preflight,extra,source['inventory']);owned=proof['owned']
                 result['routeOwnership']=proof
             verify_inventory(after_context,source,extra,owned)
             if retained_geometry_signatures(after,expected_inventory)!=retained_geometry_signatures(before,expected_inventory):
