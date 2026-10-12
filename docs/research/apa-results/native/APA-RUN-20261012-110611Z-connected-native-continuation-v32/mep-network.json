@@ -1,0 +1,1336 @@
+{
+  "status": "LIVE_ROUTED_NETWORK_PASS",
+  "counts": {
+    "routes": 7,
+    "logicalSegments": 9,
+    "physicalMembers": 12,
+    "reciprocalEdges": 11,
+    "logicalNodes": 16,
+    "openRoutedPorts": 3,
+    "excludedStandaloneMembers": 1
+  },
+  "network": {
+    "schema": "APA_NATIVE_MEP_NETWORK_V1",
+    "routes": [
+      {
+        "guid": "id-sha256:3681f77a29a2a203bcc3",
+        "details": {
+          "domain": "Ventilation",
+          "mepSystemId": {
+            "attributeId": {
+              "guid": "id-sha256:fea97c3fd32c996b3844"
+            }
+          },
+          "polyline": [
+            {
+              "x": 42,
+              "y": 46,
+              "z": 2.5
+            },
+            {
+              "x": 41,
+              "y": 46,
+              "z": 2.5
+            },
+            {
+              "x": 41,
+              "y": 43,
+              "z": 2.5
+            },
+            {
+              "x": 43,
+              "y": 43,
+              "z": 2.5
+            }
+          ],
+          "segments": [
+            {
+              "elementId": {
+                "guid": "id-sha256:129cc6a66fea06ae262a"
+              },
+              "crossSectionWidth": 0.2,
+              "crossSectionHeight": 0.15,
+              "crossSectionShape": "Rectangular"
+            },
+            {
+              "elementId": {
+                "guid": "id-sha256:58ffd22c8fc299b3039f"
+              },
+              "crossSectionWidth": 0.2,
+              "crossSectionHeight": 0.15,
+              "crossSectionShape": "Rectangular"
+            },
+            {
+              "elementId": {
+                "guid": "id-sha256:e86f47fcff81ffb3ceaa"
+              },
+              "crossSectionWidth": 0.2,
+              "crossSectionHeight": 0.15,
+              "crossSectionShape": "Rectangular"
+            }
+          ],
+          "nodes": [
+            {
+              "elementId": {
+                "guid": "id-sha256:2e4006d733c22fbc97ca"
+              },
+              "position": {
+                "x": 42,
+                "y": 46,
+                "z": 2.5
+              }
+            },
+            {
+              "elementId": {
+                "guid": "id-sha256:95d44c0d67046d06e9b4"
+              },
+              "position": {
+                "x": 41,
+                "y": 46,
+                "z": 2.5
+              }
+            },
+            {
+              "elementId": {
+                "guid": "id-sha256:70acf7e1f7254acba828"
+              },
+              "position": {
+                "x": 41,
+                "y": 43,
+                "z": 2.5
+              }
+            },
+            {
+              "elementId": {
+                "guid": "id-sha256:19330513db8989aa5298"
+              },
+              "position": {
+                "x": 43,
+                "y": 43,
+                "z": 2.5
+              }
+            }
+          ]
+        }
+      },
+      {
+        "guid": "id-sha256:af5b7e3e5c20aad91756",
+        "details": {
+          "domain": "Ventilation",
+          "mepSystemId": {
+            "attributeId": {
+              "guid": "id-sha256:fea97c3fd32c996b3844"
+            }
+          },
+          "polyline": [
+            {
+              "x": 43,
+              "y": 43,
+              "z": 2.5
+            },
+            {
+              "x": 44,
+              "y": 43,
+              "z": 2.5
+            }
+          ],
+          "segments": [
+            {
+              "elementId": {
+                "guid": "id-sha256:4838dc9c333f7d29375c"
+              },
+              "crossSectionWidth": 0.2,
+              "crossSectionHeight": 0.15,
+              "crossSectionShape": "Rectangular"
+            }
+          ],
+          "nodes": [
+            {
+              "elementId": {
+                "guid": "id-sha256:1473f62926158952a6de"
+              },
+              "position": {
+                "x": 43,
+                "y": 43,
+                "z": 2.5
+              }
+            },
+            {
+              "elementId": {
+                "guid": "id-sha256:52b436987fbc011b7773"
+              },
+              "position": {
+                "x": 44,
+                "y": 43,
+                "z": 2.5
+              }
+            }
+          ]
+        }
+      },
+      {
+        "guid": "id-sha256:5bd1280da374a3ac49cc",
+        "details": {
+          "domain": "Ventilation",
+          "mepSystemId": {
+            "attributeId": {
+              "guid": "id-sha256:fea97c3fd32c996b3844"
+            }
+          },
+          "polyline": [
+            {
+              "x": 42,
+              "y": 46,
+              "z": 2.5
+            },
+            {
+              "x": 48,
+              "y": 46,
+              "z": 2.5
+            }
+          ],
+          "segments": [
+            {
+              "elementId": {
+                "guid": "id-sha256:090d2f258b4e01543c0c"
+              },
+              "crossSectionWidth": 0.2,
+              "crossSectionHeight": 0.15,
+              "crossSectionShape": "Rectangular"
+            }
+          ],
+          "nodes": [
+            {
+              "elementId": {
+                "guid": "id-sha256:4717d5fa594add33be5b"
+              },
+              "position": {
+                "x": 42,
+                "y": 46,
+                "z": 2.5
+              }
+            },
+            {
+              "elementId": {
+                "guid": "id-sha256:9e4d7bba4df1d8e66ec5"
+              },
+              "position": {
+                "x": 48,
+                "y": 46,
+                "z": 2.5
+              }
+            }
+          ]
+        }
+      },
+      {
+        "guid": "id-sha256:bddca15174c4f381c0b1",
+        "details": {
+          "domain": "Ventilation",
+          "mepSystemId": {
+            "attributeId": {
+              "guid": "id-sha256:fea97c3fd32c996b3844"
+            }
+          },
+          "polyline": [
+            {
+              "x": 44,
+              "y": 43,
+              "z": 2.5
+            },
+            {
+              "x": 46,
+              "y": 43,
+              "z": 2.5
+            }
+          ],
+          "segments": [
+            {
+              "elementId": {
+                "guid": "id-sha256:c1348749ca9a4bf9e544"
+              },
+              "crossSectionWidth": 0.2,
+              "crossSectionHeight": 0.15,
+              "crossSectionShape": "Rectangular"
+            }
+          ],
+          "nodes": [
+            {
+              "elementId": {
+                "guid": "id-sha256:67b4b40a00b2c93ba614"
+              },
+              "position": {
+                "x": 44,
+                "y": 43,
+                "z": 2.5
+              }
+            },
+            {
+              "elementId": {
+                "guid": "id-sha256:9a70a347c621fcdd161b"
+              },
+              "position": {
+                "x": 46,
+                "y": 43,
+                "z": 2.5
+              }
+            }
+          ]
+        }
+      },
+      {
+        "guid": "id-sha256:4fa474eed7a78d38a4d7",
+        "details": {
+          "domain": "Ventilation",
+          "mepSystemId": {
+            "attributeId": {
+              "guid": "id-sha256:fea97c3fd32c996b3844"
+            }
+          },
+          "polyline": [
+            {
+              "x": 44,
+              "y": 43,
+              "z": 2.5
+            },
+            {
+              "x": 44,
+              "y": 44.5,
+              "z": 2.5
+            }
+          ],
+          "segments": [
+            {
+              "elementId": {
+                "guid": "id-sha256:7f22c60020d6c0f86ec3"
+              },
+              "crossSectionWidth": 0.2,
+              "crossSectionHeight": 0.15,
+              "crossSectionShape": "Rectangular"
+            }
+          ],
+          "nodes": [
+            {
+              "elementId": {
+                "guid": "id-sha256:410b61d2231caafc2791"
+              },
+              "position": {
+                "x": 44,
+                "y": 43,
+                "z": 2.5
+              }
+            },
+            {
+              "elementId": {
+                "guid": "id-sha256:bb8821fb3af481091b78"
+              },
+              "position": {
+                "x": 44,
+                "y": 44.5,
+                "z": 2.5
+              }
+            }
+          ]
+        }
+      },
+      {
+        "guid": "id-sha256:6a716e1074906d9be5c1",
+        "details": {
+          "domain": "Ventilation",
+          "mepSystemId": {
+            "attributeId": {
+              "guid": "id-sha256:fea97c3fd32c996b3844"
+            }
+          },
+          "polyline": [
+            {
+              "x": 48,
+              "y": 46,
+              "z": 2.5
+            },
+            {
+              "x": 49,
+              "y": 46,
+              "z": 2.5
+            }
+          ],
+          "segments": [
+            {
+              "elementId": {
+                "guid": "id-sha256:c75bae23adc901c4d287"
+              },
+              "crossSectionWidth": 0.2,
+              "crossSectionHeight": 0.15,
+              "crossSectionShape": "Rectangular"
+            }
+          ],
+          "nodes": [
+            {
+              "elementId": {
+                "guid": "id-sha256:0453524a0d35b76c6ee0"
+              },
+              "position": {
+                "x": 48,
+                "y": 46,
+                "z": 2.5
+              }
+            },
+            {
+              "elementId": {
+                "guid": "id-sha256:6fa92310c3ec2da3952f"
+              },
+              "position": {
+                "x": 49,
+                "y": 46,
+                "z": 2.5
+              }
+            }
+          ]
+        }
+      },
+      {
+        "guid": "id-sha256:e85468403ed51bc18981",
+        "details": {
+          "domain": "Ventilation",
+          "mepSystemId": {
+            "attributeId": {
+              "guid": "id-sha256:fea97c3fd32c996b3844"
+            }
+          },
+          "polyline": [
+            {
+              "x": 44,
+              "y": 44.5,
+              "z": 2.5
+            },
+            {
+              "x": 44,
+              "y": 45.5,
+              "z": 2.5
+            }
+          ],
+          "segments": [
+            {
+              "elementId": {
+                "guid": "id-sha256:5ab07db7746daaec98a1"
+              },
+              "crossSectionWidth": 0.2,
+              "crossSectionHeight": 0.15,
+              "crossSectionShape": "Rectangular"
+            }
+          ],
+          "nodes": [
+            {
+              "elementId": {
+                "guid": "id-sha256:e89f42f47ad4eba84739"
+              },
+              "position": {
+                "x": 44,
+                "y": 44.5,
+                "z": 2.5
+              }
+            },
+            {
+              "elementId": {
+                "guid": "id-sha256:9121f07f4dd58e3235e6"
+              },
+              "position": {
+                "x": 44,
+                "y": 45.5,
+                "z": 2.5
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "routeGuids": [
+      "id-sha256:3681f77a29a2a203bcc3",
+      "id-sha256:af5b7e3e5c20aad91756",
+      "id-sha256:5bd1280da374a3ac49cc",
+      "id-sha256:bddca15174c4f381c0b1",
+      "id-sha256:4fa474eed7a78d38a4d7",
+      "id-sha256:6a716e1074906d9be5c1",
+      "id-sha256:e85468403ed51bc18981"
+    ],
+    "ownedNodeSegmentGuids": [
+      "id-sha256:67b4b40a00b2c93ba614",
+      "id-sha256:7f22c60020d6c0f86ec3",
+      "id-sha256:9e4d7bba4df1d8e66ec5",
+      "id-sha256:19330513db8989aa5298",
+      "id-sha256:0453524a0d35b76c6ee0",
+      "id-sha256:2e4006d733c22fbc97ca",
+      "id-sha256:58ffd22c8fc299b3039f",
+      "id-sha256:410b61d2231caafc2791",
+      "id-sha256:70acf7e1f7254acba828",
+      "id-sha256:090d2f258b4e01543c0c",
+      "id-sha256:bb8821fb3af481091b78",
+      "id-sha256:5ab07db7746daaec98a1",
+      "id-sha256:c1348749ca9a4bf9e544",
+      "id-sha256:6fa92310c3ec2da3952f",
+      "id-sha256:e89f42f47ad4eba84739",
+      "id-sha256:52b436987fbc011b7773",
+      "id-sha256:e86f47fcff81ffb3ceaa",
+      "id-sha256:4838dc9c333f7d29375c",
+      "id-sha256:c75bae23adc901c4d287",
+      "id-sha256:129cc6a66fea06ae262a",
+      "id-sha256:4717d5fa594add33be5b",
+      "id-sha256:9a70a347c621fcdd161b",
+      "id-sha256:95d44c0d67046d06e9b4",
+      "id-sha256:9121f07f4dd58e3235e6",
+      "id-sha256:1473f62926158952a6de"
+    ],
+    "physicalGuids": [
+      "id-sha256:60536d193a32708d49dd",
+      "id-sha256:39a5f0d1373b0229ce67",
+      "id-sha256:97690b217421517e82fc",
+      "id-sha256:600707477b3d39d83401",
+      "id-sha256:140a12084f45fa25a86d",
+      "id-sha256:6f5c8cd1f485e8dfca51",
+      "id-sha256:3bb26ddf3d02f3f38127",
+      "id-sha256:b6e42c76b71bc00a7acd",
+      "id-sha256:2c88ec3d0c4c09d2e805",
+      "id-sha256:7aceefb5dbff9a83d77e",
+      "id-sha256:5d3c6f3e0bf40c432f06",
+      "id-sha256:4a5e1ec4a141728545dc"
+    ],
+    "ports": [
+      {
+        "ownerGuid": "id-sha256:60536d193a32708d49dd",
+        "portId": "id-sha256:9da5e61769fc8815415a",
+        "name": "Unnamed port",
+        "position": {
+          "x": 42,
+          "y": 46,
+          "z": 2.5
+        },
+        "direction": {
+          "x": -1,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": true,
+        "connectedPortId": "id-sha256:478c6b8067332199deaf",
+        "connectedElementId": {
+          "guid": "id-sha256:39a5f0d1373b0229ce67"
+        }
+      },
+      {
+        "ownerGuid": "id-sha256:60536d193a32708d49dd",
+        "portId": "id-sha256:87c7da425479e93773c4",
+        "name": "Unnamed port",
+        "position": {
+          "x": 48,
+          "y": 46,
+          "z": 2.5
+        },
+        "direction": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": true,
+        "connectedPortId": "id-sha256:160e6ff5042ea8bd73ba",
+        "connectedElementId": {
+          "guid": "id-sha256:4a5e1ec4a141728545dc"
+        }
+      },
+      {
+        "ownerGuid": "id-sha256:39a5f0d1373b0229ce67",
+        "portId": "id-sha256:478c6b8067332199deaf",
+        "name": "Unnamed port",
+        "position": {
+          "x": 42,
+          "y": 46,
+          "z": 2.5
+        },
+        "direction": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": true,
+        "connectedPortId": "id-sha256:9da5e61769fc8815415a",
+        "connectedElementId": {
+          "guid": "id-sha256:60536d193a32708d49dd"
+        }
+      },
+      {
+        "ownerGuid": "id-sha256:39a5f0d1373b0229ce67",
+        "portId": "id-sha256:1b7e3247cca4d58c7ac1",
+        "name": "Unnamed port",
+        "position": {
+          "x": 41.2,
+          "y": 46,
+          "z": 2.5
+        },
+        "direction": {
+          "x": -1,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": true,
+        "connectedPortId": "id-sha256:37e586bd1c2aa91417a6",
+        "connectedElementId": {
+          "guid": "id-sha256:97690b217421517e82fc"
+        }
+      },
+      {
+        "ownerGuid": "id-sha256:97690b217421517e82fc",
+        "portId": "id-sha256:37e586bd1c2aa91417a6",
+        "name": "Unnamed port",
+        "position": {
+          "x": 41.2,
+          "y": 46,
+          "z": 2.5
+        },
+        "direction": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": true,
+        "connectedPortId": "id-sha256:1b7e3247cca4d58c7ac1",
+        "connectedElementId": {
+          "guid": "id-sha256:39a5f0d1373b0229ce67"
+        }
+      },
+      {
+        "ownerGuid": "id-sha256:97690b217421517e82fc",
+        "portId": "id-sha256:316a6a7621468e0d3251",
+        "name": "Unnamed port",
+        "position": {
+          "x": 41,
+          "y": 45.8,
+          "z": 2.5
+        },
+        "direction": {
+          "x": 0,
+          "y": -1,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": true,
+        "connectedPortId": "id-sha256:101182308d131f790452",
+        "connectedElementId": {
+          "guid": "id-sha256:600707477b3d39d83401"
+        }
+      },
+      {
+        "ownerGuid": "id-sha256:600707477b3d39d83401",
+        "portId": "id-sha256:101182308d131f790452",
+        "name": "Unnamed port",
+        "position": {
+          "x": 41,
+          "y": 45.8,
+          "z": 2.5
+        },
+        "direction": {
+          "x": 0,
+          "y": 1,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": true,
+        "connectedPortId": "id-sha256:316a6a7621468e0d3251",
+        "connectedElementId": {
+          "guid": "id-sha256:97690b217421517e82fc"
+        }
+      },
+      {
+        "ownerGuid": "id-sha256:600707477b3d39d83401",
+        "portId": "id-sha256:7eabc01a47d703b1b1cc",
+        "name": "Unnamed port",
+        "position": {
+          "x": 41,
+          "y": 43.2,
+          "z": 2.5
+        },
+        "direction": {
+          "x": 0,
+          "y": -1,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": true,
+        "connectedPortId": "id-sha256:a1b4708aa11ebaea4661",
+        "connectedElementId": {
+          "guid": "id-sha256:140a12084f45fa25a86d"
+        }
+      },
+      {
+        "ownerGuid": "id-sha256:140a12084f45fa25a86d",
+        "portId": "id-sha256:a1b4708aa11ebaea4661",
+        "name": "Unnamed port",
+        "position": {
+          "x": 41,
+          "y": 43.2,
+          "z": 2.5
+        },
+        "direction": {
+          "x": 0,
+          "y": 1,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": true,
+        "connectedPortId": "id-sha256:7eabc01a47d703b1b1cc",
+        "connectedElementId": {
+          "guid": "id-sha256:600707477b3d39d83401"
+        }
+      },
+      {
+        "ownerGuid": "id-sha256:140a12084f45fa25a86d",
+        "portId": "id-sha256:1512aa19220c20401e48",
+        "name": "Unnamed port",
+        "position": {
+          "x": 41.2,
+          "y": 43,
+          "z": 2.5
+        },
+        "direction": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": true,
+        "connectedPortId": "id-sha256:80cedeeab5eb9772789c",
+        "connectedElementId": {
+          "guid": "id-sha256:6f5c8cd1f485e8dfca51"
+        }
+      },
+      {
+        "ownerGuid": "id-sha256:6f5c8cd1f485e8dfca51",
+        "portId": "id-sha256:80cedeeab5eb9772789c",
+        "name": "Unnamed port",
+        "position": {
+          "x": 41.2,
+          "y": 43,
+          "z": 2.5
+        },
+        "direction": {
+          "x": -1,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": true,
+        "connectedPortId": "id-sha256:1512aa19220c20401e48",
+        "connectedElementId": {
+          "guid": "id-sha256:140a12084f45fa25a86d"
+        }
+      },
+      {
+        "ownerGuid": "id-sha256:6f5c8cd1f485e8dfca51",
+        "portId": "id-sha256:8d214aaf707db6755506",
+        "name": "Unnamed port",
+        "position": {
+          "x": 43,
+          "y": 43,
+          "z": 2.5
+        },
+        "direction": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": true,
+        "connectedPortId": "id-sha256:f9995cbc13ab4adb8705",
+        "connectedElementId": {
+          "guid": "id-sha256:3bb26ddf3d02f3f38127"
+        }
+      },
+      {
+        "ownerGuid": "id-sha256:3bb26ddf3d02f3f38127",
+        "portId": "id-sha256:f9995cbc13ab4adb8705",
+        "name": "Unnamed port",
+        "position": {
+          "x": 43,
+          "y": 43,
+          "z": 2.5
+        },
+        "direction": {
+          "x": -1,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": true,
+        "connectedPortId": "id-sha256:8d214aaf707db6755506",
+        "connectedElementId": {
+          "guid": "id-sha256:6f5c8cd1f485e8dfca51"
+        }
+      },
+      {
+        "ownerGuid": "id-sha256:3bb26ddf3d02f3f38127",
+        "portId": "id-sha256:5002e07ad2798e0ded24",
+        "name": "Unnamed port",
+        "position": {
+          "x": 43.5,
+          "y": 43,
+          "z": 2.5
+        },
+        "direction": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": true,
+        "connectedPortId": "id-sha256:1dac3b0e109931b4fbf3",
+        "connectedElementId": {
+          "guid": "id-sha256:b6e42c76b71bc00a7acd"
+        }
+      },
+      {
+        "ownerGuid": "id-sha256:b6e42c76b71bc00a7acd",
+        "portId": "id-sha256:1dac3b0e109931b4fbf3",
+        "name": "Unnamed port",
+        "position": {
+          "x": 43.5,
+          "y": 43,
+          "z": 2.5
+        },
+        "direction": {
+          "x": -1,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": true,
+        "connectedPortId": "id-sha256:5002e07ad2798e0ded24",
+        "connectedElementId": {
+          "guid": "id-sha256:3bb26ddf3d02f3f38127"
+        }
+      },
+      {
+        "ownerGuid": "id-sha256:b6e42c76b71bc00a7acd",
+        "portId": "id-sha256:b3a37ace23b9597ea021",
+        "name": "Unnamed port",
+        "position": {
+          "x": 45,
+          "y": 43,
+          "z": 2.5
+        },
+        "direction": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": true,
+        "connectedPortId": "id-sha256:a785a31a84982d7baea6",
+        "connectedElementId": {
+          "guid": "id-sha256:2c88ec3d0c4c09d2e805"
+        }
+      },
+      {
+        "ownerGuid": "id-sha256:b6e42c76b71bc00a7acd",
+        "portId": "id-sha256:aac6eb050c686672d3f7",
+        "name": "Unnamed port",
+        "position": {
+          "x": 44,
+          "y": 43.251,
+          "z": 2.5
+        },
+        "direction": {
+          "x": 0,
+          "y": 1,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": true,
+        "connectedPortId": "id-sha256:f2de962b96d43332202e",
+        "connectedElementId": {
+          "guid": "id-sha256:7aceefb5dbff9a83d77e"
+        }
+      },
+      {
+        "ownerGuid": "id-sha256:2c88ec3d0c4c09d2e805",
+        "portId": "id-sha256:a785a31a84982d7baea6",
+        "name": "Unnamed port",
+        "position": {
+          "x": 45,
+          "y": 43,
+          "z": 2.5
+        },
+        "direction": {
+          "x": -1,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": true,
+        "connectedPortId": "id-sha256:b3a37ace23b9597ea021",
+        "connectedElementId": {
+          "guid": "id-sha256:b6e42c76b71bc00a7acd"
+        }
+      },
+      {
+        "ownerGuid": "id-sha256:2c88ec3d0c4c09d2e805",
+        "portId": "id-sha256:49a1c4e1610113694e4f",
+        "name": "Unnamed port",
+        "position": {
+          "x": 46,
+          "y": 43,
+          "z": 2.5
+        },
+        "direction": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": false
+      },
+      {
+        "ownerGuid": "id-sha256:7aceefb5dbff9a83d77e",
+        "portId": "id-sha256:f2de962b96d43332202e",
+        "name": "Unnamed port",
+        "position": {
+          "x": 44,
+          "y": 43.251,
+          "z": 2.5
+        },
+        "direction": {
+          "x": 0,
+          "y": -1,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": true,
+        "connectedPortId": "id-sha256:aac6eb050c686672d3f7",
+        "connectedElementId": {
+          "guid": "id-sha256:b6e42c76b71bc00a7acd"
+        }
+      },
+      {
+        "ownerGuid": "id-sha256:7aceefb5dbff9a83d77e",
+        "portId": "id-sha256:4901642a38680ce017b3",
+        "name": "Unnamed port",
+        "position": {
+          "x": 44,
+          "y": 44.5,
+          "z": 2.5
+        },
+        "direction": {
+          "x": 0,
+          "y": 1,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": true,
+        "connectedPortId": "id-sha256:924a73aed043c27f7130",
+        "connectedElementId": {
+          "guid": "id-sha256:5d3c6f3e0bf40c432f06"
+        }
+      },
+      {
+        "ownerGuid": "id-sha256:5d3c6f3e0bf40c432f06",
+        "portId": "id-sha256:924a73aed043c27f7130",
+        "name": "Unnamed port",
+        "position": {
+          "x": 44,
+          "y": 44.5,
+          "z": 2.5
+        },
+        "direction": {
+          "x": 0,
+          "y": -1,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": true,
+        "connectedPortId": "id-sha256:4901642a38680ce017b3",
+        "connectedElementId": {
+          "guid": "id-sha256:7aceefb5dbff9a83d77e"
+        }
+      },
+      {
+        "ownerGuid": "id-sha256:5d3c6f3e0bf40c432f06",
+        "portId": "id-sha256:b91a70277f28b26dd520",
+        "name": "Unnamed port",
+        "position": {
+          "x": 44,
+          "y": 45.5,
+          "z": 2.5
+        },
+        "direction": {
+          "x": 0,
+          "y": 1,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": false
+      },
+      {
+        "ownerGuid": "id-sha256:4a5e1ec4a141728545dc",
+        "portId": "id-sha256:160e6ff5042ea8bd73ba",
+        "name": "Unnamed port",
+        "position": {
+          "x": 48,
+          "y": 46,
+          "z": 2.5
+        },
+        "direction": {
+          "x": -1,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": true,
+        "connectedPortId": "id-sha256:87c7da425479e93773c4",
+        "connectedElementId": {
+          "guid": "id-sha256:60536d193a32708d49dd"
+        }
+      },
+      {
+        "ownerGuid": "id-sha256:4a5e1ec4a141728545dc",
+        "portId": "id-sha256:e502e4c903aaae797a22",
+        "name": "Unnamed port",
+        "position": {
+          "x": 49,
+          "y": 46,
+          "z": 2.5
+        },
+        "direction": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": false
+      }
+    ],
+    "routePhysicalMembers": {
+      "id-sha256:3681f77a29a2a203bcc3": [
+        "id-sha256:6f5c8cd1f485e8dfca51",
+        "id-sha256:39a5f0d1373b0229ce67",
+        "id-sha256:600707477b3d39d83401"
+      ],
+      "id-sha256:af5b7e3e5c20aad91756": [
+        "id-sha256:3bb26ddf3d02f3f38127"
+      ],
+      "id-sha256:5bd1280da374a3ac49cc": [
+        "id-sha256:60536d193a32708d49dd"
+      ],
+      "id-sha256:bddca15174c4f381c0b1": [
+        "id-sha256:2c88ec3d0c4c09d2e805"
+      ],
+      "id-sha256:4fa474eed7a78d38a4d7": [
+        "id-sha256:7aceefb5dbff9a83d77e"
+      ],
+      "id-sha256:6a716e1074906d9be5c1": [
+        "id-sha256:4a5e1ec4a141728545dc"
+      ],
+      "id-sha256:e85468403ed51bc18981": [
+        "id-sha256:5d3c6f3e0bf40c432f06"
+      ]
+    },
+    "logicalConnected": true,
+    "physicalConnected": true,
+    "physicalConnectionEdges": 11,
+    "segmentCount": 9,
+    "nodeCount": 16,
+    "openPorts": [
+      {
+        "ownerGuid": "id-sha256:2c88ec3d0c4c09d2e805",
+        "portId": "id-sha256:49a1c4e1610113694e4f",
+        "name": "Unnamed port",
+        "position": {
+          "x": 46,
+          "y": 43,
+          "z": 2.5
+        },
+        "direction": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": false
+      },
+      {
+        "ownerGuid": "id-sha256:5d3c6f3e0bf40c432f06",
+        "portId": "id-sha256:b91a70277f28b26dd520",
+        "name": "Unnamed port",
+        "position": {
+          "x": 44,
+          "y": 45.5,
+          "z": 2.5
+        },
+        "direction": {
+          "x": 0,
+          "y": 1,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": false
+      },
+      {
+        "ownerGuid": "id-sha256:4a5e1ec4a141728545dc",
+        "portId": "id-sha256:e502e4c903aaae797a22",
+        "name": "Unnamed port",
+        "position": {
+          "x": 49,
+          "y": 46,
+          "z": 2.5
+        },
+        "direction": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": false
+      }
+    ],
+    "distributionComponentCount": 2,
+    "physicalScope": "REQUESTED_ROUTES_AND_RECIPROCAL_CONNECTED_MEMBERS",
+    "outsideRouteScopePhysicalGuids": [
+      "id-sha256:165c75f73387d775e6b9"
+    ],
+    "genericEnumerationCount": 0,
+    "nativeTopologyAuthority": "Dedicated routing + native system membership + physical port flags/section/positions",
+    "engineeringAcceptance": "NOT_VERIFIED"
+  },
+  "collision": {
+    "status": "NATIVE_MEP_ARCHITECTURAL_COLLISIONS_PASS",
+    "reply": {
+      "collisions": []
+    }
+  },
+  "terminalConnectionStatus": "OPEN_OUTSIDE_ROUTED_SCOPE",
+  "nativeTypeEnumeration": "Omitted generic MEP enumeration does not override physical bodies/ports"
+}

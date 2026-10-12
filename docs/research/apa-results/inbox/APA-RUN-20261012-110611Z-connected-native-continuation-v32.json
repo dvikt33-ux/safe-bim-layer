@@ -1,0 +1,87 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261012-110611Z-connected-native-continuation-v32",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A11",
+  "substep_id": "APA-P70.A11.S03",
+  "executor": "work-functional-expansion-v32",
+  "executor_run_id": "APA-RUN-20261012-095401Z-functional-expansion-v32",
+  "phase": "SOURCE",
+  "started_at": "2026-10-12T10:40:00Z",
+  "finished_at": "2026-10-12T11:13:39Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29 persisted LIVE_PASS captured; publication only performs zero native calls",
+    "tapir": "1.5.10",
+    "source_branch": "feature/apa-connected-expansion-v32-20261012"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/56",
+      "revision": "3a743a4f96a98acdcbb837946603f0681d9a1f54",
+      "source_sha": "3a743a4f96a98acdcbb837946603f0681d9a1f54"
+    }
+  ],
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-CONNECTED-NATIVE-CONTINUATION-V32",
+      "statement": "Native7route graph with tee/elbows and an independent source-bound timber part saved/reopened;95GUID and original48/baseline59 geometry preserved.403Windows/LinuxPASS. ActualIFC37/37bounds and11native/IFCowner-pair multiplicities match. Terminal open; manufacturer/provider/SAM/receiver engineering gaps remain. S03PARTIAL. This publication performs zero native calls.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-NATIVE32-ACCEPTANCE",
+        "EV-NATIVE32-BYTES"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-NATIVE32-ACCEPTANCE",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-110611Z-connected-native-continuation-v32/acceptance.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "09e68333cd2f112bfa260a3019e02bd560c6772340efc38c967f443278a50270",
+      "source_revision": "3a743a4f96a98acdcbb837946603f0681d9a1f54"
+    },
+    {
+      "evidence_id": "EV-NATIVE32-BYTES",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-110611Z-connected-native-continuation-v32/EVIDENCE_SHA256.json",
+      "kind": "LOCAL_LOG",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "6c30d8813f39c0cfcee8f5f6f77f564f152560a88a03d6f97859fa553c44a3f8",
+      "source_revision": "3a743a4f96a98acdcbb837946603f0681d9a1f54"
+    }
+  ],
+  "report_markdown": "# APA A11.S03 — functional expansion v3.2\n\nContinues verified PR55 on the separate PR56 feature branch, using the existing BIM Graph, CP-SAT, Details archive, SceneWriter, SQLite journal and installed Tapir. Full Windows host validation: **403/403 PASS**, including 32 expansion tests. S03 remains PARTIAL because terminal/provider, full manufacturer and engineering requirements remain open.\n\n## Native end-to-end result\n\nAfter the user reopened Archicad, read-only recovery found 69 GUID: all 59 accepted baseline identities and bodies were unchanged, and two previous Create results were recovered. The failed historical Connect was absent. Neither old Create nor Connect intent was replayed. Two new journaled Modify operations moved only those additional routes into free space selected by existing CP-SAT. A distinct Connect in changed geometry created a native tee with all three physical ports connected. A new four-node route with two native elbows joined the branch to the accepted network. A further route was reconciled into a rectangular extension.\n\nDedicated native routing, system membership, reciprocal port position/size/direction and resultant bodies prove connectivity. Exact native MEP-to-architecture collision readback is empty. Explicit orthogonal polylines reuse CP-SAT through coordinate permutation; no new pathfinder was built. Actual fitting extents determine acceptance.\n\nOne native default terminal was created and independently read back. AC29 omits it from GetMEPElements. Typed creation, native type150/body and dedicated ports qualify a component; its exact subtype remains unverified. Its actual port is circular 0.2 m and offset from insertion. A requested circular 0.2 m route instead read back as 0.8 m from the native preference default. A new Modify intent reconciled that known result into the working rectangular extension, without Create retry. The terminal remains **open, outside the explicit routed graph**, and is returned in outsideRouteScopePhysicalGuids. Complete system scope remains the reader default; opt-in route scope always reports exclusions. This is not a terminal-connected complete HVAC system. Diameter preference/transition qualification needs a ready provider path; no APX/default-table change was made.\n\n## Details to native source part\n\nAll **73 Details v2.12 context records** participate in source/fact/host/material joins and a bounded junction-family matrix for existing A04.S01-S03. ARMO page3 entityc4/factPF001 supplies the confirmed **25×150 mm** section. The measured planar roof supplies the **10 m** span, slope, home story and footprint. Fresh typed lookup selects actual project structural timber.\n\nExisting BIM Graph/CreateMorphs and SceneWriter created one native source part. Live readback showed Tapir axis fields are placement-matrix **rows**. The adapter now verifies that contract and the compiler transposes the roof basis. A new in-place Modify corrected the already-created part. The middle candidate intersected the retained diagnostic Morph; a distinct placement intent selected a measured roof quarter-span. Final native vertices, closed BREP edges, timber material, story and logical roof/source binding match, with empty exact collision readback. All original bodies and the diagnostic object remain intact.\n\nThe guard reacquires source/archive, host geometry/material/story and project material before writing. Changed dimensions or placement invalidate the operation. Native-bound candidate screening is followed by exact collisions. This is an independent geometric part, not a complete assembly or native roof-child relationship. Eight required dimensions, manufacturer material approval and c5 rafter orientation remain missing. A04 tasks are not marked complete from a bounded matrix.\n\n## Save, reopen and actual IFC\n\nThe authorized isolated PLN was saved and reopened once. Independent readback preserved **37 context records / 95 GUID**, all 95 resultant geometry signatures and the routed graph. All original48 and baseline59 identities/bodies remain intact. Persisted SHA256: dea93fe0fd520747bf4fee5f12d86372f57d972a7021b65029419d2d127892c8. A local journal column error occurred after successful native verification; read-only reconciliation marked persistence complete without repeating Save/Open.\n\nA new actual IFC export was parsed with IfcOpenShell. **37/37 native world-bound mappings** match, including **7 physical route mappings** and the Opening host cut. Multi-member route fallback reads actual exported ducts. The file contains **44 elements, 19 material assignments, 39 classified elements, 26 owned ports, 11 port links and 6 Opening-host relations**. Twelve verified native/IFC area-and-volume comparisons match; zero verified comparisons mismatch. Source qsets are absent. The new timber proxy's closed IFC mesh measures **0.0375 m³** and **3.5075 m²**; native quantity comparison stays unverified because the dump marks its body curved. The terminal exports as IfcDistributionFlowElement, without qualified terminal subtype.\n\nQuantities, source qsets, materials, classifications, hosts and port connectivity remain distinct. Full receiver semantics, loads, norms and calculation results are ENGINEERING_NOT_VERIFIED. Raw payloads, personal paths and PLN/IFC binaries stay local; selected publication evidence uses stable SHA tokens and hashes.\n\n## Historical probe and continuation\n\nThe separately published first probe used insufficient space for the installed 1.5 m tee, produced a disconnected/overshooting branch and was not accepted. A general GDL query on unknown MEP timed out before isolated process closure; internal cause is unproven. That query is quarantined. Automatic approval review rejected a duplicate recovery launch; it never executed. The user reopened the correct project, enabling fresh identity/body checks and this successful continuation. Historical outcomes remain preserved.\n\nG01 retains SQLite proof. G02 and G04 now have independently working native parts and a routed graph with contextual/terminal gaps. G05 retains Opening/SEO proof; Shell/edit contracts remain unavailable. S06-S09 preserve manufacturer, provider, SAM/SAF and receiver dependencies. Terminal diameter/transition is recorded separately without blocking independent Details/IFC work. S04 remains gated on real S03 completion. Main/master, other PLN and installed APX were not changed.\n\n## Published verification\n\n[Draft PR56](https://github.com/dvikt33-ux/safe-bim-layer/pull/56), head 3a743a4f96a98acdcbb837946603f0681d9a1f54;403/403Windows hostPASS65.313s. [Full Windows/Linux CI](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38240417301) SUCCESS, Linux17.098s/Windows92.266s. All11changed GitHub blobs match committed local bytes. Native graph:7routes/9segments/12physical members/11reciprocal edges, three tee ports, two elbows, empty architectural collision readback. Persisted95GUID/37context records, original48/baseline59preserved. Source25x150mm timber part works through existing writer. All11native/IFC owner-pair multiplicities match. Terminal remains open; complete system and engineering are unverified.\n\n[Acceptance](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-110611Z-connected-native-continuation-v32/acceptance.json), [G01-G09 registry](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-110611Z-connected-native-continuation-v32/gap-register.json), [proofs](https://github.com/dvikt33-ux/safe-bim-layer/tree/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-110611Z-connected-native-continuation-v32), [checksums](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-110611Z-connected-native-continuation-v32/EVIDENCE_SHA256.json). Stable SHA tokens replace native/IFC identities; raw payloads and binaries remain local. SOURCE-phase publication performs zero native calls; preceding approved native execution changed only the isolated PLN.\n\nA11.S03 PARTIAL. Next: reuse a ready provider path for the actual terminal diameter/transition (S10); continue existing A04 contextual/source qualification independently. S06-S09 remain external dependencies, S04 gated. Historical failed probe/run remains immutable and fully byte-verified.\n",
+  "next_substep": "APA-P70.A11.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

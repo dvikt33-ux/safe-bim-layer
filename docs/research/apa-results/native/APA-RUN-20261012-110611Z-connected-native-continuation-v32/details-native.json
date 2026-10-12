@@ -1,0 +1,1599 @@
+{
+  "status": "LIVE_SOURCE_PART_READBACK_SAVED_REOPENED_PASS",
+  "binding": {
+    "detailId": "ARMO_SELFLOCK_ROOF__P0003",
+    "entityId": "c4",
+    "sourceFactId": "ARMO_SELFLOCK_ROOF__P0003__PF001",
+    "sourceLocator": {
+      "representation": "albom_tehnicheskih_reshenii_samozaschelkivayuscheisya_krovli_armo.pdf",
+      "page": 3
+    },
+    "archiveSha256": "fbd23cbca9d306b630537679b75ff5b015f1e35a2b8470811387c137a32bdeb6",
+    "hostGuid": "id-sha256:51fe26b6654ee6ca9854",
+    "hostGeometryHash": "0cc7605d8ace8f21e5434c6daa568efb0c5df953a29af766edef4c5f669562ee",
+    "hostMaterialBindings": {
+      "api": "ACAPI_Element_Get",
+      "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+      "structureType": 0,
+      "buildingMaterial": {
+        "nativeField": "shellBase.structure",
+        "attributeType": 12,
+        "attributeIndex": 10,
+        "guid": "id-sha256:460ab9cf8caf48c17c0c",
+        "name": "Железобетон - Конструкционный",
+        "defaultSurface": {
+          "nativeField": "buildingMaterial.cutMaterial",
+          "attributeType": 5,
+          "attributeIndex": 4,
+          "guid": "id-sha256:547d736d45b5e8718116",
+          "name": "Бетон - 02"
+        }
+      },
+      "topMat": {
+        "nativeField": "shellBase.topMat",
+        "attributeType": 5,
+        "attributeIndex": 0,
+        "overridden": false,
+        "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+      },
+      "sidMat": {
+        "nativeField": "shellBase.sidMat",
+        "attributeType": 5,
+        "attributeIndex": 0,
+        "overridden": false,
+        "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+      },
+      "botMat": {
+        "nativeField": "shellBase.botMat",
+        "attributeType": 5,
+        "attributeIndex": 0,
+        "overridden": false,
+        "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+      }
+    },
+    "hostHomeStory": 1,
+    "expectedPlacement": {
+      "floorIndex": 1,
+      "basePoint": {
+        "x": 40,
+        "y": 41.93705002896459,
+        "z": 6.267472567466833
+      },
+      "xAxis": {
+        "x": 1.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "yAxis": {
+        "x": 0.0,
+        "y": 0.9887710779445592,
+        "z": -0.14943813241724602
+      },
+      "zAxis": {
+        "x": 0.0,
+        "y": 0.14943813241724602,
+        "z": 0.9887710779445592
+      }
+    },
+    "projectMaterialSelection": {
+      "kind": "BuildingMaterial",
+      "name": "Дерево - Конструкционное",
+      "expectedGuid": "id-sha256:cffa184ae2595efce663"
+    },
+    "sourceSectionMeters": {
+      "width": 0.15,
+      "height": 0.025
+    },
+    "modelDerivedLengthMeters": 10,
+    "assemblyWriteAllowed": false,
+    "scope": "INDEPENDENT_SOURCE_SECTION_PART; NOT_COMPLETE_MANUFACTURER_ASSEMBLY",
+    "materialAcceptance": "PROJECT_SELECTION_REQUIRES_FRESH_NATIVE_RESOLVE; SOURCE_MATERIAL_NOT_SPECIFIED",
+    "engineeringAcceptance": "NOT_VERIFIED",
+    "missingAssemblyDimensionEntities": [
+      "c1",
+      "c2",
+      "c3",
+      "c6",
+      "c7",
+      "c8",
+      "c9",
+      "c10"
+    ]
+  },
+  "compiledOperation": {
+    "id": "source-section-c4",
+    "command": "CreateMorphs",
+    "params": {
+      "morphsData": [
+        {
+          "floorIndex": 1,
+          "basePoint": {
+            "x": 40,
+            "y": 41.93705002896459,
+            "z": 6.267472567466833
+          },
+          "xAxis": {
+            "x": 1.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "yAxis": {
+            "x": 0.0,
+            "y": 0.9887710779445592,
+            "z": -0.14943813241724602
+          },
+          "zAxis": {
+            "x": 0.0,
+            "y": 0.14943813241724602,
+            "z": 0.9887710779445592
+          },
+          "body": {
+            "bodyType": "Solid",
+            "edgeDefault": "HardVisible",
+            "vertices": [
+              {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "z": 0.025
+              },
+              {
+                "x": 0,
+                "y": 0.15,
+                "z": 0
+              },
+              {
+                "x": 0,
+                "y": 0.15,
+                "z": 0.025
+              },
+              {
+                "x": 10,
+                "y": 0,
+                "z": 0
+              },
+              {
+                "x": 10,
+                "y": 0,
+                "z": 0.025
+              },
+              {
+                "x": 10,
+                "y": 0.15,
+                "z": 0
+              },
+              {
+                "x": 10,
+                "y": 0.15,
+                "z": 0.025
+              }
+            ],
+            "polygons": [
+              {
+                "vertexIds": [
+                  0,
+                  2,
+                  6,
+                  4
+                ],
+                "filled": true
+              },
+              {
+                "vertexIds": [
+                  0,
+                  4,
+                  5,
+                  1
+                ],
+                "filled": true
+              },
+              {
+                "vertexIds": [
+                  3,
+                  1,
+                  5,
+                  7
+                ],
+                "filled": true
+              },
+              {
+                "vertexIds": [
+                  6,
+                  2,
+                  3,
+                  7
+                ],
+                "filled": true
+              },
+              {
+                "vertexIds": [
+                  2,
+                  0,
+                  1,
+                  3
+                ],
+                "filled": true
+              },
+              {
+                "vertexIds": [
+                  4,
+                  6,
+                  7,
+                  5
+                ],
+                "filled": true
+              }
+            ]
+          },
+          "buildingMaterialId": {
+            "guid": "id-sha256:cffa184ae2595efce663"
+          }
+        }
+      ]
+    }
+  },
+  "placementCandidates": {
+    "selectedY": 42.0074719065,
+    "rejected": [
+      {
+        "y": 44.014943813,
+        "blockedBy": [
+          "connected-dimension-specimen"
+        ]
+      }
+    ],
+    "authority": "Explicit native roof quarter-span candidates; exact native collision readback still required"
+  },
+  "actualNativeBoundsMeters": [
+    [
+      40,
+      50
+    ],
+    [
+      41.933314076,
+      42.085365691
+    ],
+    [
+      6.267472567,
+      6.314607564
+    ]
+  ],
+  "nativeGeometryHash": "63e3b58f58137cc4b5fc1c8539e54cac87685aa7de64316e233a0384e416d425",
+  "actualMaterialBindings": {
+    "api": "ACAPI_Element_Get",
+    "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+    "buildingMaterial": {
+      "nativeField": "morph.buildingMaterial",
+      "attributeType": 12,
+      "attributeIndex": 49,
+      "guid": "id-sha256:cffa184ae2595efce663",
+      "name": "Дерево - Конструкционное",
+      "defaultSurface": {
+        "nativeField": "buildingMaterial.cutMaterial",
+        "attributeType": 5,
+        "attributeIndex": 15,
+        "guid": "id-sha256:e0b0fe701a1cc64446a5",
+        "name": "Дерево - Сосна Сучковатая Горизонтальная"
+      }
+    },
+    "material": {
+      "nativeField": "morph.material (non-customized faces)",
+      "attributeType": 5,
+      "attributeIndex": 0,
+      "overridden": false,
+      "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+    },
+    "customFaceAssignments": "effective surfaces are in resultant mesh; custom Morph face source is not expanded"
+  },
+  "collision": {
+    "collisions": []
+  },
+  "junctionMatrix": {
+    "schema": "APA_REQUIRED_JUNCTION_MATRIX_V1",
+    "existingTasks": [
+      "APA-P70.A04.S01",
+      "APA-P70.A04.S02",
+      "APA-P70.A04.S03"
+    ],
+    "nativeContextHash": "f3388c47a4283ddd02d0f07a6b7b054bf46fd452bcd7c59a6abc323f079f64e5",
+    "families": [
+      {
+        "family": "openings",
+        "hostGuids": [
+          "id-sha256:6a94dc736ea218863f63",
+          "id-sha256:1e3ed023078481e26610",
+          "id-sha256:74e13663688cd71e3a87",
+          "id-sha256:f7a694272de27df78773",
+          "id-sha256:497e0b19b9b41188698e",
+          "id-sha256:4b2c7d00e3d409a9ab32",
+          "id-sha256:0f66b42e488c297215cd",
+          "id-sha256:3677c5da2430b7bed34b",
+          "id-sha256:43142421afc7d8a55e82"
+        ],
+        "contextGuids": [
+          "id-sha256:4a4567797321729af159",
+          "id-sha256:8ae117c09289712b0e11",
+          "id-sha256:3940fd04267e7b5d887b",
+          "id-sha256:d247a6d036a10f9f1ff1",
+          "id-sha256:b766ca8c720e1b6dd174",
+          "id-sha256:96904ae0a9a643d0bdd1"
+        ],
+        "sourceCandidates": [
+          {
+            "detailId": "POROTHERM_LOWRISE__P0040",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 40,
+              "sheet": "4.1"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0041",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 41,
+              "sheet": "4.2"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0042",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 42,
+              "sheet": "4.3"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0044",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 44,
+              "sheet": "5.1"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0045",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 45,
+              "sheet": "5.2"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0046",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 46,
+              "sheet": "5.3"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0047",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 47,
+              "sheet": "5.4"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0048",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 48,
+              "sheet": "5.5"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0049",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 49,
+              "sheet": "5.6"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0050",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 50,
+              "sheet": "5.7"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0051",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 51,
+              "sheet": "5.8"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0052",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 52,
+              "sheet": "5.9"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0053",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 53,
+              "sheet": "5.10"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified",
+              "source_product_selection_required"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0054",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 54,
+              "sheet": "5.11"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0055",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 55,
+              "sheet": "5.12"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0056",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 56,
+              "sheet": "5.13"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0057",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 57,
+              "sheet": "5.14"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0058",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 58,
+              "sheet": "5.15"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0101",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 101,
+              "sheet": "11.1"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0102",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 102,
+              "sheet": "11.2"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          }
+        ],
+        "status": "MODEL_FAMILY_REQUIRES_QUALIFIED_SOURCE_AND_JUNCTION_GEOMETRY",
+        "engineeringAcceptance": "NOT_VERIFIED"
+      },
+      {
+        "family": "wall_floor",
+        "hostGuids": [
+          "id-sha256:6a94dc736ea218863f63",
+          "id-sha256:1e3ed023078481e26610",
+          "id-sha256:74e13663688cd71e3a87",
+          "id-sha256:f7a694272de27df78773",
+          "id-sha256:497e0b19b9b41188698e",
+          "id-sha256:4b2c7d00e3d409a9ab32",
+          "id-sha256:0f66b42e488c297215cd",
+          "id-sha256:3677c5da2430b7bed34b",
+          "id-sha256:43142421afc7d8a55e82"
+        ],
+        "contextGuids": [
+          "id-sha256:301c85f39127ffe91075",
+          "id-sha256:f5f2c00fc1a32e21c0d6"
+        ],
+        "sourceCandidates": [
+          {
+            "detailId": "POROTHERM_LOWRISE__P0036",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 36,
+              "sheet": "3.1"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified",
+              "source_product_selection_required"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0037",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 37,
+              "sheet": "3.2"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified",
+              "source_product_selection_required"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0038",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 38,
+              "sheet": "3.3"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified",
+              "source_product_selection_required"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0040",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 40,
+              "sheet": "4.1"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0041",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 41,
+              "sheet": "4.2"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0042",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 42,
+              "sheet": "4.3"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0044",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 44,
+              "sheet": "5.1"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0045",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 45,
+              "sheet": "5.2"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0046",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 46,
+              "sheet": "5.3"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0047",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 47,
+              "sheet": "5.4"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0048",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 48,
+              "sheet": "5.5"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0049",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 49,
+              "sheet": "5.6"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0050",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 50,
+              "sheet": "5.7"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0056",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 56,
+              "sheet": "5.13"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0057",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 57,
+              "sheet": "5.14"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0058",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 58,
+              "sheet": "5.15"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          }
+        ],
+        "status": "MODEL_FAMILY_REQUIRES_QUALIFIED_SOURCE_AND_JUNCTION_GEOMETRY",
+        "engineeringAcceptance": "NOT_VERIFIED"
+      },
+      {
+        "family": "wall_roof",
+        "hostGuids": [
+          "id-sha256:6a94dc736ea218863f63",
+          "id-sha256:1e3ed023078481e26610",
+          "id-sha256:74e13663688cd71e3a87",
+          "id-sha256:f7a694272de27df78773",
+          "id-sha256:497e0b19b9b41188698e",
+          "id-sha256:4b2c7d00e3d409a9ab32",
+          "id-sha256:0f66b42e488c297215cd",
+          "id-sha256:3677c5da2430b7bed34b",
+          "id-sha256:43142421afc7d8a55e82"
+        ],
+        "contextGuids": [
+          "id-sha256:51fe26b6654ee6ca9854"
+        ],
+        "sourceCandidates": [
+          {
+            "detailId": "POROTHERM_LOWRISE__P0081",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 81,
+              "sheet": "9.1"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified",
+              "source_product_selection_required"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0082",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 82,
+              "sheet": "9.2"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0083",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 83,
+              "sheet": "9.3"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0084",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 84,
+              "sheet": "9.4"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0085",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 85,
+              "sheet": "9.5"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0086",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 86,
+              "sheet": "9.6"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0087",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 87,
+              "sheet": "9.7"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0088",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 88,
+              "sheet": "9.8"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0089",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 89,
+              "sheet": "9.9"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0091",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 91,
+              "sheet": "10.1"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified",
+              "source_product_selection_required"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0092",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 92,
+              "sheet": "10.2"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified",
+              "source_product_selection_required"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0093",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 93,
+              "sheet": "10.3"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified",
+              "source_product_selection_required"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0094",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 94,
+              "sheet": "10.4"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified",
+              "source_product_selection_required"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0095",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 95,
+              "sheet": "10.5"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified",
+              "source_product_selection_required"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0096",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 96,
+              "sheet": "10.6"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified",
+              "source_product_selection_required"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0097",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 97,
+              "sheet": "10.7"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified",
+              "source_product_selection_required"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0098",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 98,
+              "sheet": "10.8"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified",
+              "source_product_selection_required"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0099",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 99,
+              "sheet": "10.9"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified",
+              "source_product_selection_required"
+            ]
+          }
+        ],
+        "status": "MODEL_FAMILY_REQUIRES_QUALIFIED_SOURCE_AND_JUNCTION_GEOMETRY",
+        "engineeringAcceptance": "NOT_VERIFIED"
+      },
+      {
+        "family": "wall_intersections",
+        "hostGuids": [
+          "id-sha256:6a94dc736ea218863f63",
+          "id-sha256:1e3ed023078481e26610",
+          "id-sha256:74e13663688cd71e3a87",
+          "id-sha256:f7a694272de27df78773",
+          "id-sha256:497e0b19b9b41188698e",
+          "id-sha256:4b2c7d00e3d409a9ab32",
+          "id-sha256:0f66b42e488c297215cd",
+          "id-sha256:3677c5da2430b7bed34b",
+          "id-sha256:43142421afc7d8a55e82"
+        ],
+        "contextGuids": [
+          "id-sha256:6a94dc736ea218863f63",
+          "id-sha256:1e3ed023078481e26610",
+          "id-sha256:74e13663688cd71e3a87",
+          "id-sha256:f7a694272de27df78773",
+          "id-sha256:497e0b19b9b41188698e",
+          "id-sha256:4b2c7d00e3d409a9ab32",
+          "id-sha256:0f66b42e488c297215cd",
+          "id-sha256:3677c5da2430b7bed34b",
+          "id-sha256:43142421afc7d8a55e82"
+        ],
+        "sourceCandidates": [
+          {
+            "detailId": "POROTHERM_LOWRISE__P0060",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 60,
+              "sheet": "6.1"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0061",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 61,
+              "sheet": "6.2"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0062",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 62,
+              "sheet": "6.3"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0063",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 63,
+              "sheet": "6.4"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0064",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 64,
+              "sheet": "6.5"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0065",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 65,
+              "sheet": "6.6"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0066",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 66,
+              "sheet": "6.7"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0067",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 67,
+              "sheet": "6.8"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0069",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 69,
+              "sheet": "7.1"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0070",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 70,
+              "sheet": "7.2"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0071",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 71,
+              "sheet": "7.3"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0072",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 72,
+              "sheet": "7.4"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0073",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 73,
+              "sheet": "7.5"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0075",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 75,
+              "sheet": "8.1"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0076",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 76,
+              "sheet": "8.2"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0077",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 77,
+              "sheet": "8.3"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          }
+        ],
+        "status": "MODEL_FAMILY_REQUIRES_QUALIFIED_SOURCE_AND_JUNCTION_GEOMETRY",
+        "engineeringAcceptance": "NOT_VERIFIED"
+      },
+      {
+        "family": "mep_penetrations",
+        "hostGuids": [
+          "id-sha256:6a94dc736ea218863f63",
+          "id-sha256:1e3ed023078481e26610",
+          "id-sha256:74e13663688cd71e3a87",
+          "id-sha256:f7a694272de27df78773",
+          "id-sha256:497e0b19b9b41188698e",
+          "id-sha256:4b2c7d00e3d409a9ab32",
+          "id-sha256:0f66b42e488c297215cd",
+          "id-sha256:3677c5da2430b7bed34b",
+          "id-sha256:43142421afc7d8a55e82"
+        ],
+        "contextGuids": [
+          "id-sha256:5bd1280da374a3ac49cc",
+          "id-sha256:6a716e1074906d9be5c1",
+          "id-sha256:3681f77a29a2a203bcc3",
+          "id-sha256:af5b7e3e5c20aad91756",
+          "id-sha256:bddca15174c4f381c0b1",
+          "id-sha256:4fa474eed7a78d38a4d7",
+          "id-sha256:e85468403ed51bc18981"
+        ],
+        "sourceCandidates": [
+          {
+            "detailId": "POROTHERM_LOWRISE__P0078",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 78,
+              "sheet": "8.4"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          },
+          {
+            "detailId": "POROTHERM_LOWRISE__P0079",
+            "sourceId": "POROTHERM_LOWRISE",
+            "sourceLocator": {
+              "representation": "albom_teh_reshenii_dlya_maloetazhnogo_stroitelstva.pdf",
+              "page": 79,
+              "sheet": "8.5"
+            },
+            "candidateHostGuids": [],
+            "sourceBlockers": [
+              "sheet_specific_printed_dimension_endpoint_binding_pending",
+              "project_structural_and_host_context_unresolved",
+              "raster_geometry_is_not_dimension_authority",
+              "manufacturer_album_normative_currentness_not_verified"
+            ]
+          }
+        ],
+        "status": "MODEL_FAMILY_REQUIRES_QUALIFIED_SOURCE_AND_JUNCTION_GEOMETRY",
+        "engineeringAcceptance": "NOT_VERIFIED"
+      }
+    ],
+    "coverageScope": "Bounded accepted model; bounding boxes are candidate evidence only"
+  },
+  "engineeringAcceptance": "NOT_VERIFIED"
+}

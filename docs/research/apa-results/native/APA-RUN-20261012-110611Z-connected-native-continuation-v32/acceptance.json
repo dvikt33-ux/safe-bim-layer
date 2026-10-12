@@ -1,0 +1,102 @@
+{
+  "substep": "APA-P70.A11.S03",
+  "status": "PARTIAL",
+  "nativeWorkingSubset": "LIVE_PASS",
+  "offline": "OFFLINE_PASS",
+  "engineering": "ENGINEERING_NOT_VERIFIED",
+  "codePR": "https://github.com/dvikt33-ux/safe-bim-layer/pull/56",
+  "codeHead": "3a743a4f96a98acdcbb837946603f0681d9a1f54",
+  "CI": {
+    "status": "SUCCESS",
+    "run": 38240417301,
+    "head": "3a743a4f96a98acdcbb837946603f0681d9a1f54",
+    "tests": 403,
+    "linux": {
+      "job": 114781347250,
+      "status": "SUCCESS",
+      "seconds": 17.098
+    },
+    "windows": {
+      "job": 114781347368,
+      "status": "SUCCESS",
+      "seconds": 92.266
+    },
+    "hostWindows": {
+      "tests": 403,
+      "seconds": 65.313,
+      "status": "PASS"
+    }
+  },
+  "expansionTests": 32,
+  "persistedPLN": {
+    "status": "SAVED_REOPENED_CONNECTED_DETAILS_AND_MEP_PASS",
+    "sha256": "dea93fe0fd520747bf4fee5f12d86372f57d972a7021b65029419d2d127892c8",
+    "contextRecordCount": 37,
+    "guidCount": 95,
+    "original48AndBaseline59GuidsAndBodiesPreserved": true,
+    "all95GeometryPreservedOnReopen": true,
+    "nativeSaveAttempts": 1,
+    "nativeOpenAttempts": 1,
+    "persistenceCommandsReplayed": 0,
+    "stateHash": "801dbb5493776f17442de1efee98ad4c478f6c8e600295860d7cca9905842c8e"
+  },
+  "MEP": {
+    "routes": 7,
+    "logicalSegments": 9,
+    "physicalMembers": 12,
+    "reciprocalEdges": 11,
+    "logicalNodes": 16,
+    "openRoutedPorts": 3,
+    "excludedStandaloneMembers": 1,
+    "physicalConnected": true,
+    "logicalConnected": true,
+    "nativeArchitecturalCollisionCount": 0,
+    "nativeTeeThreePortsConnected": true,
+    "nativeElbowCount": 2,
+    "terminalCreatedAndReadback": true,
+    "terminalConnected": false,
+    "terminalSubtype": "NOT_VERIFIED",
+    "terminalDiameterProviderGap": "Explicit circular0.2m request read back native preference0.8m; failed test lead reconciled to working rectangular extension",
+    "dependency": "APA-P70.A11.S10"
+  },
+  "Details": {
+    "contextRecords": 73,
+    "independentNativeParts": 1,
+    "sourceSectionMeters": {
+      "width": 0.15,
+      "height": 0.025
+    },
+    "modelDerivedLengthMeters": 10,
+    "actualProjectMaterial": "Structural timber",
+    "sourceHostStoryGeometryMaterialReadback": "PASS",
+    "newExactNativeCollisionCount": 0,
+    "fullManufacturerAssembly": false,
+    "missingAssemblyDimensions": 8,
+    "logicalHostBinding": true,
+    "nativeRoofChildRelationClaimed": false
+  },
+  "IFC": {
+    "elements": 44,
+    "worldBoundsMappings": 37,
+    "worldBoundsMatches": 37,
+    "physicalRouteMappings": 7,
+    "materials": 19,
+    "classifiedElements": 39,
+    "ports": 26,
+    "links": 11,
+    "openingHosts": 6,
+    "nativeOwnerPairMultiplicityMatches": 11,
+    "quantityMatches": 12,
+    "verifiedQuantityMismatches": 0,
+    "sourceQuantitySets": 0,
+    "semanticCompatibility": "NOT_VERIFIED"
+  },
+  "historicalFailedProbePreserved": true,
+  "blindCreateOrConnectReplays": 0,
+  "mainChanged": false,
+  "installedAPXChanged": false,
+  "otherPLNChanged": false,
+  "publicationNativeCalls": 0,
+  "nativeExecutionChangedOnlyApprovedIsolatedPLN": true,
+  "nextStep": "Qualify terminal diameter/transition via existing ready provider path (S10); continue A04 source/applicability coverage independently, with S06-S09 external gates retained. S04 remains gated."
+}

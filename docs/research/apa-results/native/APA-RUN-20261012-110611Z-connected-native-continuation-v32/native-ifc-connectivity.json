@@ -1,0 +1,132 @@
+{
+  "status": "SHARED_NATIVE_IFC_PORT_OWNER_TOPOLOGY_PASS",
+  "nativeOwnerPairs": [
+    [
+      "id-sha256:7c27ee0cf38fa79d61e1",
+      "id-sha256:13e739b6b5dd3523df1f"
+    ],
+    [
+      "id-sha256:1d6a936a1ff91a48932f",
+      "id-sha256:13e739b6b5dd3523df1f"
+    ],
+    [
+      "id-sha256:7c27ee0cf38fa79d61e1",
+      "id-sha256:d4230b696d21ad8f9935"
+    ],
+    [
+      "id-sha256:d4230b696d21ad8f9935",
+      "id-sha256:3e0dd64d98e5b5463d66"
+    ],
+    [
+      "id-sha256:2acef546f2e341b094cf",
+      "id-sha256:3e0dd64d98e5b5463d66"
+    ],
+    [
+      "id-sha256:49db503616f82a36b232",
+      "id-sha256:2acef546f2e341b094cf"
+    ],
+    [
+      "id-sha256:49db503616f82a36b232",
+      "id-sha256:166cc56fe95380c5bf47"
+    ],
+    [
+      "id-sha256:166cc56fe95380c5bf47",
+      "id-sha256:a1d505bef2b0250ffde6"
+    ],
+    [
+      "id-sha256:a1d505bef2b0250ffde6",
+      "id-sha256:09901ef387de835ea1c4"
+    ],
+    [
+      "id-sha256:7890c8cc82c5a21efb4a",
+      "id-sha256:a1d505bef2b0250ffde6"
+    ],
+    [
+      "id-sha256:7890c8cc82c5a21efb4a",
+      "id-sha256:8f1e6853631abe6713a8"
+    ]
+  ],
+  "ifcOwnerPairs": [
+    [
+      "id-sha256:7c27ee0cf38fa79d61e1",
+      "id-sha256:13e739b6b5dd3523df1f"
+    ],
+    [
+      "id-sha256:1d6a936a1ff91a48932f",
+      "id-sha256:13e739b6b5dd3523df1f"
+    ],
+    [
+      "id-sha256:49db503616f82a36b232",
+      "id-sha256:166cc56fe95380c5bf47"
+    ],
+    [
+      "id-sha256:166cc56fe95380c5bf47",
+      "id-sha256:a1d505bef2b0250ffde6"
+    ],
+    [
+      "id-sha256:7890c8cc82c5a21efb4a",
+      "id-sha256:a1d505bef2b0250ffde6"
+    ],
+    [
+      "id-sha256:7890c8cc82c5a21efb4a",
+      "id-sha256:8f1e6853631abe6713a8"
+    ],
+    [
+      "id-sha256:a1d505bef2b0250ffde6",
+      "id-sha256:09901ef387de835ea1c4"
+    ],
+    [
+      "id-sha256:7c27ee0cf38fa79d61e1",
+      "id-sha256:d4230b696d21ad8f9935"
+    ],
+    [
+      "id-sha256:d4230b696d21ad8f9935",
+      "id-sha256:3e0dd64d98e5b5463d66"
+    ],
+    [
+      "id-sha256:49db503616f82a36b232",
+      "id-sha256:2acef546f2e341b094cf"
+    ],
+    [
+      "id-sha256:2acef546f2e341b094cf",
+      "id-sha256:3e0dd64d98e5b5463d66"
+    ]
+  ],
+  "edgeCount": 11,
+  "opening": {
+    "status": "NATIVE_OPENING_HOST_AND_BODY_CHANGE_PASS",
+    "hostGuid": "id-sha256:43142421afc7d8a55e82",
+    "homeStory": 0,
+    "nativeHoleBoundsMeters": [
+      [
+        64.8,
+        65.2
+      ],
+      [
+        59.85,
+        60.15
+      ],
+      [
+        1,
+        1.6
+      ]
+    ],
+    "geometryAuthority": "TWO_ACTUAL_NATIVE_HOST_INNER_FACE_CONTOURS"
+  },
+  "seo": {
+    "status": "SEO_SUBTRACTION_NATIVE_LINK_AND_BREP_PASS",
+    "targetGuid": "id-sha256:df53ca227a0b386ef451",
+    "operatorGuid": "id-sha256:a0739fb99f636d01a87e"
+  },
+  "terminal": {
+    "status": "NATIVE_COMPONENT_READONLY_QUALIFIED_PASS",
+    "kind": "MEPComponent",
+    "nativeGuid": "id-sha256:165c75f73387d775e6b9",
+    "connected": false,
+    "ifcType": "IfcDistributionFlowElement",
+    "exactTerminalSubtype": "NOT_VERIFIED",
+    "CreateReplayed": false
+  },
+  "semanticScope": "Actual native/IFC owner-pair multiplicities agree through shared GUID map; not receiver/engineering certification",
+  "nativeWrites": 0
+}
