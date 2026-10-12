@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:b8283e23f046462f75716f3036c69dca1cfc587da39e00c78bf6fd3bcddc1495",
+  "index_commit_sha": "ec03d9b0266145a3029818c7df693da3f85830a2",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "ec03d9b0266145a3029818c7df693da3f85830a2",
+  "report_path": "docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-122511Z-construction-junctions-s01/REPORT.md",
+  "report_sha256": "00e9306d2ac5a4f6476c91d86660d458381207e921d57aea4009fa344795427c",
+  "run_id": "APA-RUN-20261012-122511Z-construction-junctions-s01",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}
