@@ -12,11 +12,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | BLOCKED | 8 |
 | CLAIMED | 0 |
 | DONE_PUBLISHED | 23 |
-| IN_PROGRESS | 0 |
+| IN_PROGRESS | 1 |
 | PARTIAL | 15 |
-| READY | 40 |
+| READY | 39 |
 | SUPERSEDED | 0 |
-| DISPATCHABLE_NOW | 19 |
+| DISPATCHABLE_NOW | 18 |
 | HELD_BY_DEPENDENCIES | 36 |
 | EXPIRED_LEASES | 0 |
 
@@ -30,7 +30,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| — | — | — | — |
+| APA-P70.A11.S02 | codex-apa-system-v31-20261012 | 2026-10-12T04:00:00Z | connected-system-native-test-v31 |
 
 ## CONTROL — 0 ready
 
@@ -72,11 +72,10 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | --- | --- | --- |
 | P4 | APA-P70.A04.S01 — Вывести из модели обязательные семейства узлов и их условия применимости | Матрица всех применимых примыканий/отверстий/армопоясов/связей/крепежа с точным source/detail ID и открытыми пробелами |
 
-## VALIDATION — 5 ready
+## VALIDATION — 4 ready
 
 | Priority | Task | Acceptance |
 | --- | --- | --- |
-| P1 | APA-P70.A11.S02 — Проверить объединённую систему в тестовом PLN | Reproducible combined native scenario uses retained graph/journal/writer/readback; source elements preserved, save/reopen verified. Source/offline/live/engineering statuses separate. Unsupported mandatory module never silently omitted. |
 | P8 | APA-P00.A02.S04 — Контролировать receipt/commit/readback всех завершённых отчётов | Нет ложных DONE без квитанции |
 | P8 | APA-P00.A03.S01 — Проверить write/readback для всех классов исполнителей | Capability matrix по каждому исполнителю |
 | P8 | APA-P60.A02.S03 — Протестировать CAS-claim, lease, duplicate prevention | Offline tests PASS; concurrent two-writer CAS and lease-expiry recovery NOT_VERIFIED |
