@@ -11,6 +11,8 @@ on:
       - 'feature/apa-connected-*'
     paths:
       - 'scripts/archicad_connected_components.py'
+      - 'scripts/apa_tatarstan_readonly_snapshot.py'
+      - 'tests/test_archicad_tatarstan_readonly_snapshot.py'
       - 'scripts/archicad_details_context.py'
       - 'scripts/archicad_native_mep_network.py'
       - 'scripts/archicad_native_operations.py'
@@ -77,6 +79,8 @@ on:
   pull_request:
     paths:
       - 'scripts/archicad_connected_components.py'
+      - 'scripts/apa_tatarstan_readonly_snapshot.py'
+      - 'tests/test_archicad_tatarstan_readonly_snapshot.py'
       - 'scripts/archicad_details_context.py'
       - 'scripts/archicad_native_mep_network.py'
       - 'scripts/archicad_native_operations.py'
