@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 94,
+  "revision": 95,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -3174,7 +3174,7 @@
       "action_id": "APA-P70.A11",
       "title": "Подключить готовые компоненты совместимым пакетом",
       "kind": "INTEGRATION",
-      "status": "READY",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "compatible-component-batch-v31",
       "depends_on": [
@@ -3209,9 +3209,9 @@
         "Ready donor functions execute through shared XYZ/GUID/story/material/host context. Functional geometry/Details/MEP/IFC adapters integrated where implementation exists; research-only and missing provider functions explicitly identified. Independent optional modules disabled safely; no second writer or placeholder/catalog-only PASS."
       ],
       "acceptance": "Ready donor functions execute through shared XYZ/GUID/story/material/host context. Functional geometry/Details/MEP/IFC adapters integrated where implementation exists; research-only and missing provider functions explicitly identified. Independent optional modules disabled safely; no second writer or placeholder/catalog-only PASS.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "codex-apa-batch-v31-20261012",
+      "lease_until": "2026-10-12T04:00:00Z",
+      "claim_ref": "APA-RUN-20261012-002200Z-compatible-integration-v31",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
