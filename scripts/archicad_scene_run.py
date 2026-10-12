@@ -13,7 +13,7 @@ from datetime import datetime, timezone
 import hashlib
 import json
 import math
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 import re
 import sqlite3
 import sys
@@ -43,6 +43,27 @@ def bind_isolated_writer_pln(port, path=APPROVED_ISOLATED_WRITER_PATH):
     PORT = port
     EXPECTED_PATH = APPROVED_ISOLATED_WRITER_PATH
     EXPECTED_NAME = "APA_Isolated_Writer_Test_01"
+
+
+def bind_authorized_saved_copy(port, path, name, saved_sha256, authorization_ref):
+    """Bind an explicitly authorized renamed test copy, never a CLI override.
+
+    The caller supplies the current human authorization reference and exact
+    saved-file hash. Identity and accepted GUID/body checks still run before
+    every native mutation through the existing SceneWriter.
+    """
+    global PORT, EXPECTED_NAME, EXPECTED_PATH
+    if type(port) is not int or not 1 <= port <= 65535:
+        raise ValueError('INVALID_TEST_PORT')
+    if (not isinstance(path,str) or not PureWindowsPath(path).is_absolute() or
+            PureWindowsPath(path).suffix.casefold()!='.pln' or
+            not isinstance(name,str) or name!=PureWindowsPath(path).stem or
+            not isinstance(authorization_ref,str) or not authorization_ref.strip() or
+            not isinstance(saved_sha256,str) or not re.fullmatch('[0-9a-f]{64}',saved_sha256)):
+        raise ValueError('EXPLICIT_SAVED_COPY_AUTHORIZATION_REQUIRED')
+    if hashlib.sha256(Path(path).read_bytes()).hexdigest()!=saved_sha256:
+        raise ValueError('AUTHORIZED_SAVED_COPY_HASH_MISMATCH')
+    PORT,EXPECTED_PATH,EXPECTED_NAME=port,path,name
 
 
 def bind_approved_scratch_pln(port, path=APPROVED_SCRATCH_PATH):
@@ -502,6 +523,12 @@ class SceneWriter:
     def guarded_binding(self):
         return guarded_project(self.api, self.required_story)
 
+    def verify_source_bindings(self,preflight):
+        binding=preflight.get('integrationBindings',{}).get('dependencies',{}).get('sourceRoofTrimBinding')
+        if binding is not None:
+            from archicad_native_operations import verify_roof_trim_source
+            verify_roof_trim_source(self.api,binding)
+
     def execute_bound_operation(self, preflight, scene_id, command, parameters,
                                 expected_hash, verify_before, verify_after):
         """Opt-in non-create adapters use this same SceneWriter/SQLite ledger.
@@ -541,6 +568,7 @@ class SceneWriter:
             {'requests':[{'id':'operation','command':command,'params':parameters}]},runtime_version=EXPECTED_TAPIR)
         if checked['status']!='SCHEMA_VALID':raise ValueError('BOUNDED_OPERATION_SCHEMA_INVALID')
         if self.guarded_binding()!=preflight['binding']:raise ValueError('BOUNDED_OPERATION_TARGET_DRIFT')
+        self.verify_source_bindings(preflight)
         before=verify_before()
         result={'status':'BLOCKED','automaticRetry':False,'sceneId':scene_id,'command':command,'operationHash':expected_hash}
         with closing(sqlite3.connect(self.journal_path)) as db:
@@ -696,6 +724,7 @@ class SceneWriter:
                             adapter.before_write(self.api,params,preflight)
                     else:
                         params = resolve_params(step, created)
+                    self.verify_source_bindings(preflight)
                     # Bind each operation to its exact resolved (including GUID)
                     # parameters, approved local test scope, source scene and target.
                     intent = {"sceneId": scene_id, "planHash": expected_hash,

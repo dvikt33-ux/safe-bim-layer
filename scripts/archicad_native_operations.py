@@ -1,5 +1,6 @@
 """Thin native Opening/SEO/roof-trim adapters over retained writer contracts."""
 import math
+import copy
 import archicad_connected_components as C
 
 
@@ -160,12 +161,121 @@ def verify_roof_trim_source(api,binding):
     return {'status':'ROOF_TRIM_SOURCE_BINDING_PASS'}
 
 
-def roof_bearing_seo_readback(api,wall_guid,roof_guid,before_wall,expected_area):
+def roof_underside_plane(roof):
+    """Lower of two actual parallel principal roof faces, independent of Trim."""
+    if roof.get('type')!='Roof':raise ValueError('UNDERSIDE_REQUIRES_NATIVE_ROOF')
+    faces=list(C.G.planar_faces(roof))
+    if not faces:raise ValueError('ROOF_PRINCIPAL_FACES_MISSING')
+    principal=max(faces,key=lambda f:f['area'])
+    normal=principal['normal']
+    if abs(normal[2])<.5:raise ValueError('ROOF_UNDERSIDE_SLOPE_UNSUPPORTED')
+    sign=1 if normal[2]>0 else -1
+    normal=[v*sign for v in normal]
+    distances={round(f['distance']*sign,6) for f in faces
+        if all(C.RUN.close(a,b,1e-6) for a,b in zip(f['normal'],principal['normal']))}
+    if len(distances)!=2:raise ValueError('ROOF_PARALLEL_PRINCIPAL_PLANES_AMBIGUOUS')
+    return {'normal':normal,'distance':min(distances),'authority':'ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE'}
+
+
+def underside_contact_geometry(wall,roof,expected_area,expected_plane=None):
+    if wall.get('type')!='Wall' or wall.get('homeStory')!=roof.get('homeStory'):
+        raise ValueError('UNDERSIDE_REQUIRES_NATIVE_WALL_ROOF_SAME_STORY')
+    plane=roof_underside_plane(roof)
+    if expected_plane is not None and (not all(C.RUN.close(a,b,1e-6) for a,b in zip(plane['normal'],expected_plane['normal'])) or
+            not C.RUN.close(plane['distance'],expected_plane['distance'],1e-6)):
+        raise ValueError('ROOF_UNDERSIDE_PINNED_PLANE_CHANGED')
+    n,d=plane['normal'],plane['distance']
+    if any(sum(n[k]*v[k] for k in range(3))>d+1e-6 for body in wall['bodies'] for v in body['vertices']):
+        raise ValueError('WALL_EXTENDS_ABOVE_ROOF_UNDERSIDE')
+    selected={}
+    indices={}
+    for key,native in [('wall',wall),('roof',roof)]:
+        selected[key]=copy.deepcopy(native);accepted=[]
+        for f in C.G.planar_faces(native):
+            if all(abs(sum(n[k]*v[k] for k in range(3))-d)<=1e-6 for v in f['points']):
+                accepted.append((f['bodyIndex'],f['faceIndex']))
+        for bi,body in enumerate(selected[key]['bodies']):
+            body['faces']=[face for fi,face in enumerate(body['faces']) if (bi,fi) in accepted]
+        indices[key]=accepted
+    contact=C.G.shared_surfaces(selected,{g:g for g in selected})
+    area=sum(c['sharedAreaSquareMeters'] for c in contact)
+    if type(expected_area) not in (int,float) or expected_area<=0 or not C.RUN.close(area,expected_area,1e-6):
+        raise ValueError('ROOF_ACTUAL_UNDERSIDE_CONTACT_AREA_MISMATCH:'+str(area))
+    return {'status':'ACTUAL_NATIVE_ROOF_UNDERSIDE_FACE_CONTACT_PASS','plane':plane,
+        'sharedAreaSquareMeters':area,'actualFaceIndices':indices,
+        'wallEntirelyBelowUnderside':True,'holesPreservedInContactCheck':True}
+
+
+def wall_roof_underside_gap(wall,roof):
+    """Measure a flat native wall cap against the actual sloped roof underside."""
+    from shapely.geometry import Polygon
+    from shapely.ops import unary_union
+    if wall.get('type')!='Wall' or wall.get('homeStory')!=roof.get('homeStory'):
+        raise ValueError('GAP_REQUIRES_NATIVE_WALL_ROOF_SAME_STORY')
+    plane=roof_underside_plane(roof);n,d=plane['normal'],plane['distance']
+    caps=[f for f in C.G.planar_faces(wall) if abs(abs(f['normal'][2])-1)<1e-6]
+    if not caps:raise ValueError('GAP_FLAT_WALL_CAP_UNAVAILABLE')
+    top=max(f['points'][0][2] for f in caps)
+    def polygons(native,predicate):
+        result=[]
+        for f in C.G.planar_faces(native):
+            if not predicate(f):continue
+            body=native['bodies'][f['bodyIndex']];face=body['faces'][f['faceIndex']]
+            rings=[[[body['vertices'][i][k] for k in (0,1)] for i in ring] for ring in face['contours']]
+            result.append(Polygon(rings[0],rings[1:]))
+        return unary_union(result)
+    cap=polygons(wall,lambda f:all(abs(v[2]-top)<1e-6 for v in f['points']))
+    underside=polygons(roof,lambda f:all(abs(sum(n[k]*v[k] for k in range(3))-d)<1e-6 for v in f['points']))
+    overlap=cap.intersection(underside)
+    if overlap.area<=1e-8:raise ValueError('GAP_NO_ACTUAL_PROJECTED_FACE_OVERLAP')
+    parts=[overlap] if overlap.geom_type=='Polygon' else [g for g in overlap.geoms if g.geom_type=='Polygon']
+    gaps=[(d-n[0]*x-n[1]*y)/n[2]-top for part in parts for x,y in part.exterior.coords]
+    return {'status':'ACTUAL_NATIVE_UNDERSIDE_GAP_MEASURED','minimumVerticalGapMeters':min(gaps),
+        'maximumVerticalGapMeters':max(gaps),'projectedOverlapAreaSquareMeters':overlap.area,
+        'wallTopAbsoluteZ':top,'roofUndersidePlane':plane,'authority':'ACTUAL_NATIVE_FACE_OVERLAP; not bounding-box separation',
+        'engineeringAcceptance':'ENGINEERING_NOT_VERIFIED'}
+
+
+def prepare_roof_underside_specimen(api,source,context,native,wall_guid,roof_guid):
+    """Reuse the native specimen recipe; one SEO replaces the unsuitable Trim."""
+    part=prepare_roof_trim_specimen(api,source,context,native,wall_guid,roof_guid)
+    operations=copy.deepcopy(part['plan']['graph']['operations'])
+    ids={'native-trim-specimen-roof':'native-underside-roof','native-trim-specimen-wall':'native-underside-wall'}
+    for op in operations:
+        op['id']=ids[op['id']]
+        if 'after' in op:op['after']=[ids[x] for x in op['after']]
+    roof=next(e for e in native['elements'] if e['guid'].lower()==roof_guid.lower())
+    plane=roof_underside_plane(roof)
+    row=C.RUN.requested_details(api,roof_guid)['details']
+    dx=operations[0]['params']['roofsData'][0]['pivotLine']['begCoordinate']['x']-row['pivotLine']['begin']['x']
+    plane['distance']+=plane['normal'][0]*dx
+    binding=copy.deepcopy(part['binding'])
+    binding.update(expectedUndersidePlane=plane,operation='SubtractionUpwards',
+        linkFlags={'inheritOperatorAttributes':False,'skipPolygonHoles':True},
+        nativeOperationReason='Ignore operator polygon holes during upward subtraction; preserve actual roof thickness/material and accepted specimen',
+        noTrimRequired=True)
+    plan=C.bind_plan(source,operations,['roof','wall'],{'sourceRoofTrimBinding':binding})
+    return {'status':'OFFLINE_NATIVE_UNDERSIDE_SPECIMEN_PREPARED','binding':binding,'plan':plan,'nativeWrites':0}
+
+
+def roof_bearing_seo_readback(api,wall_guid,roof_guid,before_wall,expected_area,expected_plane=None):
     links=api('GetSolidElementLinks',{'elements':[{'elementId':{'guid':wall_guid}}]}).get('solidLinks',[])
-    if len(links)!=1 or not any(r['operatorId']['guid'].lower()==roof_guid.lower() and r['operation']=='SubtractionUpwards'
-            for r in links[0]['solidLinksWithTheGivenTarget']):raise ValueError('ROOF_BEARING_SEO_LINK_NOT_PROVEN')
-    proof=roof_trim_readback(api,wall_guid,roof_guid,before_wall,expected_area)
-    proof.update(status='NATIVE_WALL_ROOF_UNDERSIDE_SEO_CONTACT_PASS',solidLinks=links,
-        undersideContact='ACTUAL_COPLANAR_NATIVE_FACE_AREA_PASS',
-        operation='SubtractionUpwards',scope='Separate native Wall/Roof underside contact specimen; original building gaps unchanged')
-    return proof
+    matches=[r for entry in links for r in entry.get('solidLinksWithTheGivenTarget',[])
+        if r.get('operatorId',{}).get('guid','').lower()==roof_guid.lower() and r.get('operation')=='SubtractionUpwards']
+    if len(links)!=1 or len(matches)!=1:raise ValueError('ROOF_BEARING_SEO_LINK_NOT_PROVEN')
+    flags=matches[0].get('linkFlags')
+    if not isinstance(flags,dict) or set(flags)!={'inheritOperatorAttributes','skipPolygonHoles'} or any(type(v) is not bool for v in flags.values()):
+        raise ValueError('ROOF_BEARING_SEO_LINK_NOT_PROVEN')
+    wall=element_body(api,wall_guid);roof=element_body(api,roof_guid)
+    if wall['geometryHash']==before_wall['geometryHash']:raise ValueError('ROOF_BEARING_NATIVE_WALL_BODY_NOT_CHANGED')
+    contact=underside_contact_geometry(wall['native'],roof['native'],expected_area,expected_plane)
+    collision=api('GetCollisions',{'elementsGroup1':[{'elementId':{'guid':wall_guid}}],
+        'elementsGroup2':[{'elementId':{'guid':roof_guid}}]})
+    if collision.get('collisions')!=[]:raise ValueError('ROOF_BEARING_NATIVE_VOLUME_INTERSECTION')
+    return {'status':'NATIVE_WALL_ROOF_UNDERSIDE_SEO_CONTACT_PASS','solidLinks':links,
+        'undersideContact':contact,'wall':wall,'roof':roof,'volumeCollisions':collision,
+        'requestedLinkFlags':{'inheritOperatorAttributes':False,'skipPolygonHoles':True},
+        'nativeFlagReadback':'PASS' if flags=={'inheritOperatorAttributes':False,'skipPolygonHoles':True} else 'NOT_VERIFIED_REQUEST_READBACK_DIFFERENCE',
+        'geometryAuthority':'ACTUAL_NATIVE_LOWER_FACE_CONTACT_AND_CHANGED_WALL_BODY; flag equality is not inferred',
+        'operation':'SubtractionUpwards','scope':'Separate native Wall/Roof actual underside contact; original building gaps unchanged',
+        'engineeringAcceptance':'ENGINEERING_NOT_VERIFIED'}
