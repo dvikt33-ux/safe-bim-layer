@@ -900,7 +900,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A02.S02
 
-**Связать проектные требования с версиями нормативов и проверяемыми правилами** — BUILD / IN_PROGRESS / P3
+**Связать проектные требования с версиями нормативов и проверяемыми правилами** — BUILD / PARTIAL / P3
 
 - Parent: APA-P70 → APA-P70.A02
 - Topic: PRODUCT_DEVELOPMENT
@@ -908,11 +908,11 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P70.A02.S01, APA-P70.A08.S04
 - Related, check before duplicating: none
 - Acceptance: Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED
-- Owner/lease: work-normative-bindings-20261012 / 2026-10-12T21:59:22Z
+- Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md)
 - Existing V2 runs: [APA-RUN-20261012-191815Z-normative-bindings](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-191815Z-normative-bindings/REPORT.md) (receipt verified)
-- Expected output: Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED
+- Expected output: Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED; Published draft PR66 head e43bc6055d648270b72dc573a22c9d52c71a83f8 on exact PR64 parent b056cb76929a62047c82fd66961b72eb4d9078a8.18newtests;513Windows host and Windows/LinuxCI38296039263 PASS. All5code and8source/report blobs match GitHub; publisher receipt DONE_PUBLISHED.; Working compile_project_normative_pack attaches an immutable source/edition/applicability digest to the existing provisional CSE/project pack. Actual native GUID/material/context/body signatures invalidate stale CSE evidence; existing selections and approval states remain unchanged. Cached current109GUID/fourjunction evidence reused, zero new native calls.; Six conditional requirement bindings reference five official registry metadata records verified2026-10-12: SP50.13330.2024, SP230.1325800.2015, SP17.13330.2017, SP2.13130.2020, GOST30971-2012. Full clauses and exact system/project applicability NOT_VERIFIED; metadata ACTIVE is not engineering compliance. No numerical norm or engineering class/load/result is invented.; Existing four actual Wall/Roof targets yield24rows:20NOT_VERIFIED and4window-familyNOT_APPLICABLE. Jurisdiction is not inferred from brief region or file name; native SinglePlane is not roofing technology. Unknown or stale system data never excludes a specific rule. Engineering remains ENGINEERING_NOT_VERIFIED.; External dependencies retained within A02.S02: source-backed actual site/jurisdiction, project thermal/fire/roof design facts, certified source-bound CSE layer/system evidence and qualified full clauses/table rows. Adapter is working and published; project-specific normative acceptance remainsPARTIAL. Native A11.S03PARTIAL and S10BLOCKED are independent and unchanged. Exact next available native step remains approved SinglePlane contour qualification followed by four-target remeasurement; no source-junction writes authorized or executed.
 
 ## APA-P70.A02.S03
 
