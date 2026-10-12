@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 98,
+  "revision": 99,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -782,6 +782,18 @@
       "uri": "docs/research/apa-results/receipts/APA-RUN-20261012-011500Z-connected-system-v31.json",
       "kind": "PUBLISH_RECEIPT",
       "verification": "DONE_PUBLISHED_READBACK_VERIFIED_PUBLISHER_CI38191219275_PASS"
+    },
+    "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012": {
+      "id": "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
+      "uri": "docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-012500Z-gap-windows-sqlite-v31/REPORT.md",
+      "kind": "GAP_FIX_OFFLINE_REGRESSION_REPORT",
+      "verification": "G01_SQLITE_LIFETIME_FIXED_WINDOWS_HOST340_AND_WINDOWS_LINUX_CI340_EACH_PASS_OTHER_GAPS_OPEN"
+    },
+    "ART-P70-A11-S03-G01-RECEIPT-20261012": {
+      "id": "ART-P70-A11-S03-G01-RECEIPT-20261012",
+      "uri": "docs/research/apa-results/receipts/APA-RUN-20261012-012500Z-gap-windows-sqlite-v31.json",
+      "kind": "PUBLISH_RECEIPT",
+      "verification": "DONE_PUBLISHED_GITHUB_READBACK_VERIFIED"
     }
   },
   "tasks": {
@@ -3300,7 +3312,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -3335,11 +3347,14 @@
         "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
-      "owner": "codex-apa-gap-v31-20261012",
-      "lease_until": "2026-10-12T04:00:00Z",
-      "claim_ref": "APA-RUN-20261012-012500Z-gap-windows-sqlite-v31",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
+        "ART-P70-A11-S03-G01-RECEIPT-20261012"
+      ],
       "blocked_reason": null
     },
     "APA-P70.A11.S04": {
@@ -4358,7 +4373,9 @@
         "connection_verification": {
           "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
           "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
-          "scope": "One SQLite writer; four creates and one explicit in-place body repair verified"
+          "scope": "One SQLite writer; four creates and one explicit in-place body repair verified",
+          "regression_repair_artifact_id": "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
+          "regression_scope": "G01 fixed;340Windows host and340each Windows/Linux CI PASS atPR54head2b499730; original writer journal semantics preserved"
         }
       },
       {
@@ -4486,7 +4503,7 @@
         "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
         "advantage": "Reuse published finding; compare only for a concrete gap",
-        "limitations": "Candidate/registered research, no inferred install/license/live support; Accepted explicit17element AC29 native core with owned ColumnSegments:XYZ/story/material/host,34coplanar BREP contact pairs,40XY-only overlaps. Structural/normative/joint quality,positive collision calibration,curved/complex/roof/SEO/general GDL remain NOT_VERIFIED.",
+        "limitations": "Current22primary/48GUID body preservation; positive Roof/Morph native collision proved; complete engineering, UI and AC30 acceptance NOT_VERIFIED",
         "integration_method": "Reuse current module; isolate adapter only when required",
         "priority": 2,
         "target_module": "geometry",
@@ -4511,7 +4528,13 @@
           "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
           "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
           "scope": "Current22primary/48GUID body preservation; positive Roof/Morph native collision proved"
-        }
+        },
+        "limitations_history": [
+          {
+            "before_revision": 99,
+            "text": "Candidate/registered research, no inferred install/license/live support; Accepted explicit17element AC29 native core with owned ColumnSegments:XYZ/story/material/host,34coplanar BREP contact pairs,40XY-only overlaps. Structural/normative/joint quality,positive collision calibration,curved/complex/roof/SEO/general GDL remain NOT_VERIFIED."
+          }
+        ]
       },
       {
         "name": "NetworkX / Shapely",
@@ -4524,7 +4547,7 @@
         "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
         "advantage": "Reuse published finding; compare only for a concrete gap",
-        "limitations": "Candidate/registered research, no inferred install/license/live support; Accepted explicit17element AC29 native core with owned ColumnSegments:XYZ/story/material/host,34coplanar BREP contact pairs,40XY-only overlaps. Structural/normative/joint quality,positive collision calibration,curved/complex/roof/SEO/general GDL remain NOT_VERIFIED.",
+        "limitations": "2D predicates retain declared scope; native body collision checked independently; complete engineering, UI and AC30 acceptance NOT_VERIFIED",
         "integration_method": "Reuse current module; isolate adapter only when required",
         "priority": 2,
         "target_module": "geometry",
@@ -4549,7 +4572,13 @@
           "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
           "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
           "scope": "2D predicates retain declared scope; native body collision checked independently"
-        }
+        },
+        "limitations_history": [
+          {
+            "before_revision": 99,
+            "text": "Candidate/registered research, no inferred install/license/live support; Accepted explicit17element AC29 native core with owned ColumnSegments:XYZ/story/material/host,34coplanar BREP contact pairs,40XY-only overlaps. Structural/normative/joint quality,positive collision calibration,curved/complex/roof/SEO/general GDL remain NOT_VERIFIED."
+          }
+        ]
       },
       {
         "name": "Roof / Shell / Morph / Openings / SEO",
@@ -4561,7 +4590,7 @@
         "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
         "advantage": "Reuse published finding; compare only for a concrete gap",
-        "limitations": "Candidate/registered research, no inferred install/license/live support",
+        "limitations": "Single-plane Roof and closed explicit Morph proved; Shell/Opening/SEO execution unsupported or untested; complete engineering, UI and AC30 acceptance NOT_VERIFIED",
         "integration_method": "Reuse current module; isolate adapter only when required",
         "priority": 2,
         "target_module": "geometry",
@@ -4586,7 +4615,13 @@
           "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
           "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
           "scope": "Single-plane Roof and closed explicit Morph proved; Shell/Opening/SEO execution unsupported or untested"
-        }
+        },
+        "limitations_history": [
+          {
+            "before_revision": 99,
+            "text": "Candidate/registered research, no inferred install/license/live support"
+          }
+        ]
       },
       {
         "name": "GDL / ТЕХНОНИКОЛЬ / manufacturer catalogs",
@@ -4636,7 +4671,7 @@
         "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
         "advantage": "Reuse published finding; compare only for a concrete gap",
-        "limitations": "Candidate/registered research, no inferred install/license/live support",
+        "limitations": "1142ordinary IR read; selected2facts used;8missing entity dimensions/source commit=false block whole assembly;73context records need adapter; complete engineering, UI and AC30 acceptance NOT_VERIFIED",
         "integration_method": "Reuse current module; isolate adapter only when required",
         "priority": 4,
         "target_module": "constructive",
@@ -4663,7 +4698,13 @@
           "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
           "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
           "scope": "1142ordinary IR read; selected2facts used;8missing entity dimensions/source commit=false block whole assembly;73context records need adapter"
-        }
+        },
+        "limitations_history": [
+          {
+            "before_revision": 99,
+            "text": "Candidate/registered research, no inferred install/license/live support"
+          }
+        ]
       },
       {
         "name": "SAM / SAF / structural handoff",
@@ -4716,7 +4757,7 @@
         "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
         "advantage": "Reuse published finding; compare only for a concrete gap",
-        "limitations": "Candidate/registered research, no inferred install/license/live support",
+        "limitations": "One Ventilation route/segment/two nodes/physical duct/two ports proved; ports unconnected; branched network unverified; complete engineering, UI and AC30 acceptance NOT_VERIFIED",
         "integration_method": "Reuse current module; isolate adapter only when required",
         "priority": 5,
         "target_module": "MEP",
@@ -4745,7 +4786,13 @@
           "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
           "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
           "scope": "One Ventilation route/segment/two nodes/physical duct/two ports proved; ports unconnected; branched network unverified"
-        }
+        },
+        "limitations_history": [
+          {
+            "before_revision": 99,
+            "text": "Candidate/registered research, no inferred install/license/live support"
+          }
+        ]
       },
       {
         "name": "OR-Tools / CP-SAT / batching / caches",
@@ -4757,7 +4804,7 @@
         "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
         "advantage": "Reuse published finding; compare only for a concrete gap",
-        "limitations": "Candidate/registered research, no inferred install/license/live support",
+        "limitations": "Actual native obstacle bounds and flange clearance;3candidate routes; no batching/cache or large-model speedup claim; complete engineering, UI and AC30 acceptance NOT_VERIFIED",
         "integration_method": "Reuse current module; isolate adapter only when required",
         "priority": 6,
         "target_module": "optimization",
@@ -4782,7 +4829,13 @@
           "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
           "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
           "scope": "Actual native obstacle bounds and flange clearance;3candidate routes; no batching/cache or large-model speedup claim"
-        }
+        },
+        "limitations_history": [
+          {
+            "before_revision": 99,
+            "text": "Candidate/registered research, no inferred install/license/live support"
+          }
+        ]
       },
       {
         "name": "СП / ГОСТ normative sources",
@@ -4835,7 +4888,7 @@
         "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
         "advantage": "Reuse published finding; compare only for a concrete gap",
-        "limitations": "Candidate/registered research, no inferred install/license/live support",
+        "limitations": "22native/IFC world-bound matches1e-5m; explicit physical duct identity; full semantic quantities/MCP/Twinmotion unverified; complete engineering, UI and AC30 acceptance NOT_VERIFIED",
         "integration_method": "Reuse current module; isolate adapter only when required",
         "priority": 7,
         "target_module": "export",
@@ -4860,7 +4913,13 @@
           "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
           "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
           "scope": "22native/IFC world-bound matches1e-5m; explicit physical duct identity; full semantic quantities/MCP/Twinmotion unverified"
-        }
+        },
+        "limitations_history": [
+          {
+            "before_revision": 99,
+            "text": "Candidate/registered research, no inferred install/license/live support"
+          }
+        ]
       },
       {
         "name": "Archived branches / alternate implementations / source71",
