@@ -26,6 +26,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Install existing APA YAML dependency
+        run: python -m pip install PyYAML==6.0.3
       - name: Run unit, negative and real plan regression tests
         run: python -m unittest discover -s tools/apa_knowledge_graph/tests -v
       - name: Build disposable graph from canonical plan
@@ -43,6 +45,14 @@ jobs:
           python tools/apa_knowledge_graph/sections.py search \
             --index "${RUNNER_TEMP}/apa-sections.sqlite" \
             --query "кровли" --source-class PROJECT_CONTROL --limit 3 --max-snippet 160
+      - name: Read exact PR68 normative source bytes and build real field-to-task chain
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python tools/apa_knowledge_graph/machine_adapter.py \
+            --index "${RUNNER_TEMP}/apa-knowledge-index.json" \
+            --out "${RUNNER_TEMP}/apa-real-machine-chain.json" \
+            --change-field roof_slope_length_m --before 10 --after 12
       - name: Query real APA normative artifact (bounded)
         run: |
           python tools/apa_knowledge_graph/graph.py artifact \
