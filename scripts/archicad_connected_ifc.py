@@ -45,15 +45,59 @@ def inspect_export(path,context,mapping):
                 delta=max(abs(a-b) for left,right in zip(bounds,native_bounds) for a,b in zip(left,right))
                 row.update(ifcBoundsMeters=bounds,nativeBoundsMeters=native_bounds,boundsDeltaMeters=delta,
                     status=('IFC_PHYSICAL_ROUTE_WORLD_BOUNDS_MATCH' if physical else 'IFC_NATIVE_WORLD_BOUNDS_MATCH') if delta<1e-5 else 'IFC_NATIVE_BOUNDS_MISMATCH')
+                if native['kind']=='Opening' and native.get('geometryAuthority')=='TWO_ACTUAL_NATIVE_HOST_INNER_FACE_CONTOURS':
+                    host=[e for e in context['elements'].values() if e['guid'].lower()==native.get('hostGuid','').lower()]
+                    if len(host)!=1:raise ValueError('IFC_OPENING_HOST_NOT_UNIQUE')
+                    host_ifc=mapping[host[0]['guid'].lower()]
+                    if not any(r.RelatedOpeningElement.GlobalId==identifier and r.RelatingBuildingElement.GlobalId==host_ifc for r in model.by_type('IfcRelVoidsElement')):
+                        raise ValueError('IFC_OPENING_HOST_RELATION_MISMATCH')
+                    h=[(min(b[i][0] for b in host[0]['bounds']),max(b[i][1] for b in host[0]['bounds'])) for i in range(3)]
+                    clipped=[(max(a[0],b[0]),min(a[1],b[1])) for a,b in zip(bounds,h)]
+                    cut_delta=max(abs(a-b) for left,right in zip(clipped,native_bounds) for a,b in zip(left,right))
+                    row.update(ifcHostCutBoundsMeters=clipped,hostCutDeltaMeters=cut_delta,
+                        geometryScope='IFC_CUTTER_INTERSECTION_WITH_VERIFIED_HOST_BOUNDS; STANDALONE_CUTTER_EXTENTS_REMAIN_RECORDED',
+                        status='IFC_OPENING_HOST_CUT_BOUNDS_MATCH' if cut_delta<1e-5 else 'IFC_OPENING_HOST_CUT_BOUNDS_MISMATCH')
             except Exception as exc:row.update(status='IFC_IDENTITY_ONLY_GEOMETRY_NOT_VERIFIED',reason=type(exc).__name__+': '+str(exc))
         rows.append(row)
     return {'schema':model.schema,'ifcLengthUnitScaleToMeters':scale,'ifcopenshellVersion':ifcopenshell.version,
         'elements':rows,'mappedCount':sum(r['status']!='IFC_ROOT_NOT_EXPORTED' for r in rows),
-        'boundsMatchCount':sum(r['status'] in {'IFC_NATIVE_WORLD_BOUNDS_MATCH','IFC_PHYSICAL_ROUTE_WORLD_BOUNDS_MATCH'} for r in rows),
+        'boundsMatchCount':sum(r['status'] in {'IFC_NATIVE_WORLD_BOUNDS_MATCH','IFC_PHYSICAL_ROUTE_WORLD_BOUNDS_MATCH','IFC_OPENING_HOST_CUT_BOUNDS_MATCH'} for r in rows),
+        'openingHostCutMappings':sum(r['status']=='IFC_OPENING_HOST_CUT_BOUNDS_MATCH' for r in rows),
         'physicalRouteMappings':sum(r['status']=='IFC_PHYSICAL_ROUTE_WORLD_BOUNDS_MATCH' for r in rows),
-        'requestedCount':len(rows),'status':'IFC_COORDINATION_BOUNDS_PASS_WITH_EXPLICIT_PHYSICAL_ROUTE_MAPPING' if all(r['status'] in {'IFC_NATIVE_WORLD_BOUNDS_MATCH','IFC_PHYSICAL_ROUTE_WORLD_BOUNDS_MATCH'} for r in rows) else 'IFC_COORDINATION_WITH_EXPLICIT_GAPS',
-        'scope':'GUID + absolute metre world bounds; not face/quantity/engineering equivalence',
+        'requestedCount':len(rows),'status':'IFC_COORDINATION_BOUNDS_PASS_WITH_EXPLICIT_PHYSICAL_ROUTE_MAPPING' if all(r['status'] in {'IFC_NATIVE_WORLD_BOUNDS_MATCH','IFC_PHYSICAL_ROUTE_WORLD_BOUNDS_MATCH','IFC_OPENING_HOST_CUT_BOUNDS_MATCH'} for r in rows) else 'IFC_COORDINATION_WITH_EXPLICIT_GAPS',
+        'scope':'GUID + world bounds; Opening uses native host hole and IFC host-cut intersection; not full face/quantity/engineering equivalence',
         'structuralAcceptance':'NOT_VERIFIED'}
+
+
+def inspect_exchange_semantics(path):
+    """Observe real IFC relationships separately from coordinate agreement.
+
+    Structural data are exported only when present in the actual file; an
+    architectural body is never silently converted into an analytical member.
+    """
+    import ifcopenshell
+    import ifcopenshell.util.element
+    model=ifcopenshell.open(str(path))
+    openings=[{'openingIfcId':r.RelatedOpeningElement.GlobalId,'hostIfcId':r.RelatingBuildingElement.GlobalId,
+        'hostIfcType':r.RelatingBuildingElement.is_a()} for r in model.by_type('IfcRelVoidsElement')]
+    connections=[{'firstPortIfcId':r.RelatingPort.GlobalId,'secondPortIfcId':r.RelatedPort.GlobalId}
+        for r in model.by_type('IfcRelConnectsPorts')]
+    materials=[]
+    for e in model.by_type('IfcElement'):
+        material=ifcopenshell.util.element.get_material(e)
+        if material:materials.append({'ifcId':e.GlobalId,'materialType':material.is_a(),
+            'materialName':getattr(material,'Name',None)})
+    analytical=[]
+    for e in model.by_type('IfcStructuralMember'):
+        analytical.append({'ifcId':e.GlobalId,'ifcType':e.is_a(),'name':e.Name,
+            'representationPresent':e.Representation is not None})
+    return {'schema':model.schema,'voidRelations':openings,'nativePortRelationsExported':connections,
+        'materialAssignments':materials,'analyticalMembers':analytical,
+        'analysisModels':[{'ifcId':e.GlobalId,'name':e.Name} for e in model.by_type('IfcStructuralAnalysisModel')],
+        'loadGroupCount':len(model.by_type('IfcStructuralLoadGroup')),
+        'analyticalExchangeStatus':'ACTUAL_IFC_ANALYTICAL_DATA_PRESENT_REQUIRES_ENGINEER_REVIEW' if analytical else 'NO_ANALYTICAL_MEMBERS_IN_ACTUAL_EXPORT',
+        'safStatus':'EXTERNAL_DEPENDENCY_NATIVE_SAF_FILE_AND_QUALIFIED_MAPPING_REQUIRED',
+        'semanticCompatibility':'NOT_VERIFIED','calculationResults':'NOT_PROVIDED'}
 
 
 def export_once(api,context,mapping,path,translator,journal,operation_id):

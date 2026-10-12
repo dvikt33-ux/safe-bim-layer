@@ -11,6 +11,11 @@ on:
       - 'feature/apa-connected-*'
     paths:
       - 'scripts/archicad_connected_components.py'
+      - 'scripts/archicad_details_context.py'
+      - 'scripts/archicad_native_mep_network.py'
+      - 'scripts/archicad_native_operations.py'
+      - 'scripts/archicad_functional_gaps.py'
+      - 'tests/test_archicad_functional_gaps.py'
       - 'scripts/archicad_connected_ifc.py'
       - 'scripts/archicad_connected_solver.py'
       - 'scripts/requirements-connected.txt'
@@ -70,6 +75,11 @@ on:
   pull_request:
     paths:
       - 'scripts/archicad_connected_components.py'
+      - 'scripts/archicad_details_context.py'
+      - 'scripts/archicad_native_mep_network.py'
+      - 'scripts/archicad_native_operations.py'
+      - 'scripts/archicad_functional_gaps.py'
+      - 'tests/test_archicad_functional_gaps.py'
       - 'scripts/archicad_connected_ifc.py'
       - 'scripts/archicad_connected_solver.py'
       - 'scripts/requirements-connected.txt'
