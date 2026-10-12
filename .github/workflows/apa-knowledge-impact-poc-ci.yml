@@ -27,7 +27,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install existing APA YAML dependency
-        run: python -m pip install PyYAML==6.0.3
+        run: python -m pip install PyYAML==6.0.3 tiktoken==0.14.0
       - name: Run unit, negative and real plan regression tests
         run: python -m unittest discover -s tools/apa_knowledge_graph/tests -v
       - name: Build disposable graph from canonical plan
@@ -52,6 +52,7 @@ jobs:
           python tools/apa_knowledge_graph/machine_adapter.py \
             --index "${RUNNER_TEMP}/apa-knowledge-index.json" \
             --out "${RUNNER_TEMP}/apa-real-machine-chain.json" \
+            --benchmark-plan docs/research/apa-results/control/PROJECT_PLAN.json \
             --change-field roof_slope_length_m --before 10 --after 12
       - name: Query real APA normative artifact (bounded)
         run: |
