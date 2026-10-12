@@ -28,3 +28,15 @@ for scoped architecture reviews and pull requests in its own branch; it never
 operates a local or real Archicad project. See
 [the operating model](docs/OPERATING_MODEL.md) and the
 [first Arena audit brief](ARENA_TASK_ARCHITECTURE_AUDIT.md).
+
+## Architectural visualization: consistent plan / elevations / sections / 3D
+
+For architectural drawings and AI-assisted presentations, do **not** generate
+independent incompatible views. Start from one geometry source, derive projections,
+validate cross-view relationships, and only then apply image styling.
+
+- [AV-01 protocol (RU)](docs/architectural-visualization/CONSISTENT_VIEWS_PROTOCOL.md)
+- [Reusable ChatGPT Project / new-chat prompt (RU)](docs/architectural-visualization/CHATGPT_PROMPT.md)
+
+This is a **documentation workflow**, not evidence of an implemented APA image
+renderer or proof that text-to-image alone can produce dimensionally correct BIM views.
