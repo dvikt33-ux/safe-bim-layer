@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 110,
+  "revision": 111,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -884,6 +884,36 @@
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/57",
       "kind": "CODE",
       "verification": "DRAFT_PUBLISHED_426_WINDOWS_LINUX_PASS"
+    },
+    "ART-P70-A04-S03-QUALIFICATION-20261012": {
+      "id": "ART-P70-A04-S03-QUALIFICATION-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-132353Z-construction-junction-qualification-s03/REPORT.md",
+      "kind": "REPORT",
+      "verification": "DONE_PUBLISHED_NATIVE_READBACK_432_CI"
+    },
+    "ART-P70-A04-S03-RECEIPT-20261012": {
+      "id": "ART-P70-A04-S03-RECEIPT-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261012-132353Z-construction-junction-qualification-s03.json",
+      "kind": "RECEIPT",
+      "verification": "GITHUB_BYTE_READBACK_VERIFIED"
+    },
+    "ART-P70-A04-S03-GAP96-20261012": {
+      "id": "ART-P70-A04-S03-GAP96-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-132353Z-construction-junction-qualification-s03/gap-register.json",
+      "kind": "DATASET",
+      "verification": "CURRENT_NATIVE96_432_CI_READBACK_VERIFIED"
+    },
+    "ART-P70-A04-S03-IFC96-20261012": {
+      "id": "ART-P70-A04-S03-IFC96-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-132353Z-construction-junction-qualification-s03/ifc.json",
+      "kind": "TEST_RESULT",
+      "verification": "ACTUAL_CURRENT96_EXPORT_38_BOUNDS_IFCBEAM_MATERIAL_PASS"
+    },
+    "ART-P70-A11-S10-REFERENCE200-20261012": {
+      "id": "ART-P70-A11-S10-REFERENCE200-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-132353Z-construction-junction-qualification-s03/mep-preferences.json",
+      "kind": "TEST_RESULT",
+      "verification": "LIVE_READONLY_EXISTING_CREATE_SELECTOR_NO_CONNECTION_CLAIM"
     }
   },
   "tasks": {
@@ -2751,7 +2781,7 @@
       "action_id": "APA-P70.A04",
       "title": "Проверить узлы окон, облицовки, перекрытий и кровельных примыканий",
       "kind": "VALIDATION",
-      "status": "IN_PROGRESS",
+      "status": "DONE_PUBLISHED",
       "priority": 4,
       "work_key": "junction-evidence-acceptance",
       "depends_on": [
@@ -2763,14 +2793,20 @@
         "ART-APA-DETAILS-V212"
       ],
       "outputs": [
-        "Для каждого узла классификация PASS_GEOMETRY/PASS_DOCUMENTED/PASS_ENGINEERING/NOT_VERIFIED; ложные approvals запрещены"
+        "All49actual candidate native interface pairs independently graded:34PASS_GEOMETRY,1PASS_DOCUMENTED bounded source support,14NOT_VERIFIED,0PASS_ENGINEERING. New50x50mm timber/Beam-classified Morph contact75cm2/material/story/placement validated after save/reopen.95accepted GUID/body signatures preserved,96current GUID/38context. Current IFC45elements/38bounds matches/new IfcBeam material/11port links/12quantitymatches0mismatch.432Windows/LinuxPASS. Complete families, cladding, fixings/grades/structural capacity and visible3D remain NOT_VERIFIED. Qualification complete; whole-family construction acceptance not inferred."
       ],
       "acceptance": "Для каждого узла классификация PASS_GEOMETRY/PASS_DOCUMENTED/PASS_ENGINEERING/NOT_VERIFIED; ложные approvals запрещены",
-      "owner": "work-construction-junctions-20261012",
-      "lease_until": "2026-10-12T17:10:00Z",
-      "claim_ref": "APA-RUN-20261012-131000Z-construction-junction-qualification-s03",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-P70-A04-S03-QUALIFICATION-20261012",
+        "ART-P70-A04-S03-RECEIPT-20261012",
+        "ART-P70-A04-S03-GAP96-20261012",
+        "ART-P70-A04-S03-IFC96-20261012",
+        "ART-P70-A11-S10-REFERENCE200-20261012"
+      ],
       "blocked_reason": null
     },
     "APA-P70.A05.S01": {
@@ -3426,7 +3462,8 @@
         "APA-P70.A11.S08",
         "APA-P70.A11.S09",
         "APA-P70.A11.S10",
-        "APA-P70.A04.S01"
+        "APA-P70.A04.S01",
+        "APA-P70.A04.S03"
       ],
       "inputs": [
         "ART-APA-HIGHLEVEL-PR34",
@@ -3457,12 +3494,13 @@
         "Historical PR55 baseline: Published PR55 head3191e7ce5071e6de7401f6e520fbd8f3ef2a1ea2 stacked on PR54;31new tests,371/371Windows/LinuxPASS.",
         "Historical PR55 baseline: Details73context/source/host/material/fact exchange, reciprocal two-section MEP, Generic Opening/SEO, specialized metadata and IFC host/port observations work together.",
         "Historical PR55 baseline: Saved/reopened isolated PLN:27primary/59totalGUID, all original48GUID/geometry preserved; SHA256da37fa0fe9b1b255f1618a881a79eb9d4ae8b66993a99cb75fdba30cddc69bb4. Engineering/visibleUI NOT_VERIFIED.",
-        "Current published draft PR56 head3a743a4f96a98acdcbb837946603f0681d9a1f54:403/403Windows host and Windows/Linux CI PASS; all11GitHub code blobs and all15publication blobs exactly match committed/generated bytes.",
+        "Historical PR56 baseline: Current published draft PR56 head3a743a4f96a98acdcbb837946603f0681d9a1f54:403/403Windows host and Windows/Linux CI PASS; all11GitHub code blobs and all15publication blobs exactly match committed/generated bytes.",
         "LIVE_PASS working routed graph:7routes/9segments/12physical members/11reciprocal edges, one three-port-connected tee and two elbows; exact architectural collisions empty. Native default terminal is separately read back but open/outside routed scope.",
         "LIVE_PASS independent Details c4 timber part:source25x150mm section, actual10mroof span/slope/story/material, model-bound placement and empty exact collision readback; full8-dimension manufacturer assembly and native roof-child relationship not claimed.",
-        "Save/reopen95GUID and37context records; all95resultant geometry signatures unchanged, original48/baseline59preserved. PLN SHA256dea93fe0fd520747bf4fee5f12d86372f57d972a7021b65029419d2d127892c8.",
-        "Actual IFC37/37world bounds and all11native/IFCowner-pair multiplicities agree;44elements/19materials/39classifications/26ports. Twelve verified quantity comparisons match,0verified mismatch. Engineering/full receiver semantics remain NOT_VERIFIED.",
-        "Next independent step:existing A04.S01 applicability/source coverage using the shared model/matrix; S10 separately qualifies actual terminal diameter/transition via an existing ready provider. S06-S09 retain external gates. S04 waits actual S03 completion."
+        "Historical PR56 baseline: Save/reopen95GUID and37context records; all95resultant geometry signatures unchanged, original48/baseline59preserved. PLN SHA256dea93fe0fd520747bf4fee5f12d86372f57d972a7021b65029419d2d127892c8.",
+        "Historical PR56 baseline: Actual IFC37/37world bounds and all11native/IFCowner-pair multiplicities agree;44elements/19materials/39classifications/26ports. Twelve verified quantity comparisons match,0verified mismatch. Engineering/full receiver semantics remain NOT_VERIFIED.",
+        "Current continuation: A04.S01-S03 qualification/source-bound support published. S10 ready Create reference selector found read-only; actual transition/terminal connection unverified. S06-S09 retain existing source/Shell/analytical/receiver gates. S04 waits real A11.S03 completion.",
+        "Current draft PR57 headb1abd584585feb0f286621337986c8a5d3077507:432/432Windows host and Windows/LinuxCI PASS;96GUID/38context saved/reopened, all95accepted GUID/body signatures preserved. Native source c4/c5support contact75cm2 and timber/Beam classification;49interface grades with no family/engineering promotion; IFC38/38bounds/45elements/20material assignments/11port links."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
       "owner": null,
@@ -3480,7 +3518,12 @@
         "ART-P70-A11-S03-NATIVE95-V32-20261012",
         "ART-P70-A11-S03-GAP95-V32-20261012",
         "ART-P70-A11-S03-RECEIPT95-V32-20261012",
-        "ART-P70-A11-S03-FIRST-V32-20261012"
+        "ART-P70-A11-S03-FIRST-V32-20261012",
+        "ART-P70-A04-S03-QUALIFICATION-20261012",
+        "ART-P70-A04-S03-RECEIPT-20261012",
+        "ART-P70-A04-S03-GAP96-20261012",
+        "ART-P70-A04-S03-IFC96-20261012",
+        "ART-P70-A11-S10-REFERENCE200-20261012"
       ],
       "blocked_reason": null
     },
@@ -3832,9 +3875,10 @@
       "evidence": [
         "ART-P70-A11-S03-PR56-20261012",
         "ART-P70-A11-S03-NATIVE95-V32-20261012",
-        "ART-P70-A11-S03-GAP95-V32-20261012"
+        "ART-P70-A11-S03-GAP95-V32-20261012",
+        "ART-P70-A11-S10-REFERENCE200-20261012"
       ],
-      "blocked_reason": "Actual terminal has circular0.2m port; installed circular Create route reads native preference0.8m despite explicit0.2m. Terminal remains open. Current exposed route contract lacks preference-reference/terminal port setters; qualify an existing ready path before another write."
+      "blocked_reason": "Ready mechanism found: live Ventilation referenceId200/diameter0.2m; installed CreateMEPRoutingElements exposes crossSectionReferenceId and retained source uses a local route default, without global preference edit. Modify lacks this selector. Actual reference-based Create, transition and reciprocal terminal connection remain NOT_VERIFIED; terminal remains open. No potentially ambiguous MEP write repeated under the user's restriction."
     }
   },
   "topics": {
@@ -4148,7 +4192,12 @@
         "ART-P70-A04-S01-PR57-20261012",
         "ART-P70-A04-S02-NATIVE96-20261012",
         "ART-P70-A04-S02-RECEIPT-20261012",
-        "ART-P70-A04-S02-PR57-20261012"
+        "ART-P70-A04-S02-PR57-20261012",
+        "ART-P70-A04-S03-QUALIFICATION-20261012",
+        "ART-P70-A04-S03-RECEIPT-20261012",
+        "ART-P70-A04-S03-GAP96-20261012",
+        "ART-P70-A04-S03-IFC96-20261012",
+        "ART-P70-A11-S10-REFERENCE200-20261012"
       ],
       "synthesis_state": "PARTIAL",
       "owner": null
