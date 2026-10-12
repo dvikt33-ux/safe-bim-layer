@@ -1,15 +1,17 @@
 {
-  "active": [],
+  "active": [
+    "APA-P70.A11.S03"
+  ],
   "artifact_count": 107,
   "counts": {
     "BLOCKED": 12,
     "CLAIMED": 0,
-    "DISPATCHABLE_NOW": 19,
+    "DISPATCHABLE_NOW": 18,
     "DONE_PUBLISHED": 24,
     "EXPIRED_LEASES": 0,
     "HELD_BY_DEPENDENCIES": 35,
-    "IN_PROGRESS": 0,
-    "PARTIAL": 16,
+    "IN_PROGRESS": 1,
+    "PARTIAL": 15,
     "READY": 38,
     "SUPERSEDED": 0
   },
@@ -88,16 +90,18 @@
       {
         "done": 2,
         "id": "APA-P70.A11",
-        "status": "PARTIAL",
+        "status": "IN_PROGRESS",
         "title": "v3.1: пакетная интеграция, взаимодействие и системные проверки",
         "total": 9
       }
     ],
-    "active": [],
+    "active": [
+      "APA-P70.A11.S03"
+    ],
     "done": 13,
     "next_eligible": "APA-P70.A02.S02",
     "plan_id": "APA-P70",
-    "status": "PARTIAL",
+    "status": "IN_PROGRESS",
     "total": 38
   },
   "dispatchable": {
@@ -112,7 +116,6 @@
     ],
     "CONTROL": [],
     "INTEGRATION": [
-      "APA-P70.A11.S03",
       "APA-P70.A04.S01"
     ],
     "RESEARCH": [
@@ -173,7 +176,7 @@
   "known_published_v2_runs": 26,
   "legacy_reports": "NOT_FULLY_INDEXED",
   "orphan_v2_manifests": [],
-  "plan_revision": 101,
+  "plan_revision": 103,
   "publisher": "DEPLOYED_SYNTHETIC_E2E_PASS",
   "research_lookahead": {
     "linked_product_substeps": 38,
@@ -295,7 +298,7 @@
     },
     "PRODUCT_DEVELOPMENT": {
       "done": 13,
-      "ready": 3,
+      "ready": 2,
       "task_ids": [
         "APA-P70.A01.S01",
         "APA-P70.A01.S02",
