@@ -1,0 +1,56 @@
+{
+  "sourcePR": "https://github.com/dvikt33-ux/safe-bim-layer/pull/56",
+  "codeHead": "1908482fdb3df381c1bf6d04f8c2fa28f41069bd",
+  "substep": "APA-P70.A11.S03",
+  "status": "PARTIAL",
+  "gaps": [
+    {
+      "id": "G01",
+      "status": "FIXED_VERIFIED_PR54",
+      "evidence": "397Windows/Linux tests retain SQLite regression; no repeated implementation"
+    },
+    {
+      "id": "G02",
+      "status": "73CONTEXT_TO_JUNCTION_MATRIX_AND_SOURCE_SECTION_WRITER_GRAPH_OFFLINE_PASS",
+      "remaining": "Native part readback/save/reopen after recovery; actual selected timber/project material qualification; exact contextual dimension gaps"
+    },
+    {
+      "id": "G03",
+      "status": "SOURCE_SECTION_C4_READY_INDEPENDENTLY_FULL_ASSEMBLY_BLOCKED",
+      "dependency": "APA-P70.A11.S06",
+      "remaining": "Eight source dimensions and qualified source/material; c5actual rafter orientation absent"
+    },
+    {
+      "id": "G04",
+      "status": "PRIOR_TWO_ROUTE_NATIVE_PASS_RETAINED; NEW_BRANCH_PROBE_NOT_ACCEPTED",
+      "remaining": "Recover isolated native session, fit actual tee extents, reciprocal all-port readback and qualified terminal; no new tracer",
+      "dependency": "APA-P70.A11.S10"
+    },
+    {
+      "id": "G05",
+      "status": "PRIOR_HOSTED_OPENING_SEO_PASS_RETAINED; SHELL_EDIT_UNSUPPORTED_PROVIDER",
+      "dependency": "APA-P70.A11.S07"
+    },
+    {
+      "id": "G06",
+      "status": "EXTERNAL_SAM_SAF_ENGINE_LOAD_NORM_DEPENDENCY",
+      "dependency": "APA-P70.A11.S08"
+    },
+    {
+      "id": "G07",
+      "status": "ACTUAL_IFC_QUANTITIES_MATERIAL_CLASSIFICATION_HOST_PORT_EXTRACTION_OFFLINE_PASS",
+      "remaining": "Full semantic equivalence and real MCP/Twinmotion receiver",
+      "dependency": "APA-P70.A11.S09"
+    },
+    {
+      "id": "G08",
+      "status": "DEDICATED_MULTI_COMPONENT_MEP_RECIPROCAL_AND_OVERSHOOT_DIAGNOSTICS_WORK",
+      "remaining": "Native unknown-type GDL read quarantined after observed closure; internal crash cause unproven; no APX modification"
+    },
+    {
+      "id": "G09",
+      "status": "TIMINGS_RECORDED_NO_OPTIMIZATION_OR_INSTALLER_CLAIM",
+      "remaining": "A11.S04after realS03acceptance"
+    }
+  ]
+}
