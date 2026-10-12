@@ -45,7 +45,7 @@ A candidate research S-ID must still satisfy its own dependencies and claim gate
 - Готовность исследования: **NOT_ASSESSED**
 - Связанные исследования: APA-P10.A01.S02 (PARTIAL), APA-P10.A02.S02 (READY), APA-P50.A02.S01 (PARTIAL)
 - Доступны сейчас: APA-P10.A01.S02, APA-P10.A02.S02, APA-P50.A02.S01
-- Использовать источники (ветка/файл/PR): [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md)
+- Использовать источники (ветка/файл/PR): [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-P70-A02-TDK-MACHINE-SOURCE-20261012](https://github.com/dvikt33-ux/tdk-course-project/tree/67f17d407d14aebb091daaf79f11c10178b87440/01_Normative_Base/_Machine)
 
 ### APA-P70.A02.S03 — Собрать проектный Library Pack из проверяемых строительных систем и узлов
 

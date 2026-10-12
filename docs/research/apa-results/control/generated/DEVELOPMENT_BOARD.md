@@ -8,16 +8,16 @@ requires_approval tasks are not dispatchable until separate owner approval is re
 ## Краткая сводка
 
 - План: APA-P70 — Разработка APA — полный цикл проектирования и выпуска
-- Статус: **IN_PROGRESS**; завершено 16/39 подзадач.
-- Сейчас: APA-P70.A02.S02
-- Следующая доступная: APA-P70.A11.S03 — Исправить пробелы после системного теста
+- Статус: **PARTIAL**; завершено 16/39 подзадач.
+- Сейчас: не выполняется; нет IN_PROGRESS.
+- Следующая доступная: APA-P70.A02.S02 — Связать проектные требования с версиями нормативов и проверяемыми правилами
 
 ## Этапы → задачи
 
 | Задача | Состояние | Выполнено подзадач |
 | --- | --- | ---: |
 | APA-P70.A01 — Единая база существующих возможностей и доказательств | PARTIAL | 2/3 |
-| APA-P70.A02 — Требования, нормативы и библиотека конкретного проекта | IN_PROGRESS | 3/4 |
+| APA-P70.A02 — Требования, нормативы и библиотека конкретного проекта | PARTIAL | 3/4 |
 | APA-P70.A03 — Планировка и редактируемая нативная BIM-модель | DONE_PUBLISHED | 4/4 |
 | APA-P70.A04 — Конструктивные узлы, кладка, фасады и сопряжения | DONE_PUBLISHED | 3/3 |
 | APA-P70.A05 — Расчёт несущих систем и инженерная обратная связь | WAITING | 0/3 |
@@ -43,8 +43,8 @@ requires_approval tasks are not dispatchable until separate owner approval is re
 
 - **APA-P70.A02.S01 [DONE_PUBLISHED]** Собрать семантический контракт задания, участка, этажей и помещений; исследования: APA-P10.A01.S02, APA-P10.A02.S02, APA-P50.A02.S01
   - Источники/ветки: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md)
-- **APA-P70.A02.S02 [IN_PROGRESS]** Связать проектные требования с версиями нормативов и проверяемыми правилами; исследования: APA-P10.A01.S02, APA-P10.A02.S02, APA-P50.A02.S01
-  - Источники/ветки: [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md)
+- **APA-P70.A02.S02 [PARTIAL / ELIGIBLE]** Связать проектные требования с версиями нормативов и проверяемыми правилами; исследования: APA-P10.A01.S02, APA-P10.A02.S02, APA-P50.A02.S01
+  - Источники/ветки: [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-P70-A02-TDK-MACHINE-SOURCE-20261012](https://github.com/dvikt33-ux/tdk-course-project/tree/67f17d407d14aebb091daaf79f11c10178b87440/01_Normative_Base/_Machine)
 - **APA-P70.A02.S03 [DONE_PUBLISHED]** Собрать проектный Library Pack из проверяемых строительных систем и узлов; исследования: APA-P10.A01.S02, APA-P10.A02.S02, APA-P50.A02.S01
   - Источники/ветки: [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
 - **APA-P70.A02.S04 [DONE_PUBLISHED]** Интегрировать реальные материалы, Composite/Profile и выбранные GDL-библиотеки; исследования: APA-P50.A02.S01

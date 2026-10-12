@@ -12,11 +12,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | BLOCKED | 13 |
 | CLAIMED | 0 |
 | DONE_PUBLISHED | 27 |
-| IN_PROGRESS | 1 |
-| PARTIAL | 16 |
+| IN_PROGRESS | 0 |
+| PARTIAL | 17 |
 | READY | 34 |
 | SUPERSEDED | 0 |
-| DISPATCHABLE_NOW | 17 |
+| DISPATCHABLE_NOW | 18 |
 | HELD_BY_DEPENDENCIES | 33 |
 | EXPIRED_LEASES | 0 |
 
@@ -30,7 +30,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| APA-P70.A02.S02 | work-machine-normative-integration-20261012 | 2026-10-12T23:52:18Z | normative-applicability-pack |
+| — | — | — | — |
 
 ## CONTROL — 0 ready
 
@@ -59,10 +59,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | P7 | APA-P10.A02.S04 — Native MEP/Tapir MEP команды, трассы, порты | MEP command/route/port matrix |
 | P7 | APA-P50.A02.S01 — Единый каталог AC29 SDK/Tapir/Python/GDL/IFC/MEP инструментов | Capability matrix, версии, пересечения |
 
-## BUILD — 1 ready
+## BUILD — 2 ready
 
 | Priority | Task | Acceptance |
 | --- | --- | --- |
+| P3 | APA-P70.A02.S02 — Связать проектные требования с версиями нормативов и проверяемыми правилами | Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED |
 | P8 | APA-P00.A03.S03 — Publisher, дедупликация, retry, heartbeat и ошибки | Publisher E2E + оставшиеся recovery/heartbeat gates |
 
 ## INTEGRATION — 1 ready
