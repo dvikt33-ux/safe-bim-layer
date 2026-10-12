@@ -73,6 +73,43 @@ An initial Actions execution [38320136500](https://github.com/dvikt33-ux/safe-bi
 
 GitHub: https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38320136500
 
+## Verified PR68 field lineage and tokenizer proxy (2026-10-13)
+
+The **existing TDK normative compiled-block routing is reused**, not recreated. Relevant upstream, source-read and SHA-locked at PR68 HEAD `29aa06a6e9bbef0d991bea922e1ad4101ab29bdd`:
+- `01_Normative_Base/_Machine/retrieval_policy.yaml` already requires `compiled_blocks_primary_retrieval_reserve` and prohibits a normative full-library scan.
+- `residential.izhs.yaml` exact architecture/details route selects `IZHS.ROOF.DETAILS`, without MKD/TRC fallback.
+- Existing Central release whitelist and `IZHS.ROOF.DETAILS` both name `ROOF-VENT-CHANNEL-TABLE-A2-001`.
+- Rule declares required parameters `roof_slope_length_m` and `roof_slope`, but does **not** implement an approved numeric calculation.
+- The source set is `design_only` and quarantined. `APA-P70.A02.S02` cites PR68 as an artifact; a task-artifact relationship is traceable, but this alone does not prove conformity or complete field-level propagation.
+
+The new `machine_adapter.py` reads **exactly six pinned files** via GitHub REST (existing SOURCE_LOCK + exact route, release, block, catalog, rules), verifies each Git blob SHA-1 and five independent SOURCE_LOCK SHA-256 entries, then emits a minimal `APA_REAL_SOURCE_DEPENDENCY_CHAIN_V1`. It rejects unlisted paths, moving branch names, another building class, missing whitelist entries, tampered content or attempted normative authority promotion. It does not modify PR68 or `PROJECT_PLAN.json`.
+
+Verified Actions [run 38323012649](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38323012649) **PASS 56 tests** and a real source GitHub byte readback. A simulated `roof_slope_length_m` change `10→12` outputs `RECHECK_REQUIRED_NOT_RECOMPUTED`, with `normative_authority=false` and `engineering_acceptance=NOT_VERIFIED`. Values 10 and 12 are **synthetic**, not measurements of a user's PLN.
+
+Follow-up Actions [run 38323164778](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38323164778) **PASS 56 tests**. Using `tiktoken==0.14.0` and encoding `o200k_base` on the exact same machine-source probe:
+
+| Model-visible *text payload comparison* | UTF-8 bytes | `o200k_base` proxy tokens |
+|---|---:|---:|
+| Raw APA plan + six exact upstream source files | 342,057 | 92,866 |
+| Raw six exact upstream source files only | 62,137 | 16,861 |
+| Correct compact impact answer payload | 393 | **100** |
+
+This is a **text tokenization proxy**, NOT measured GPT-6 billed tokens or a head-to-head recall/latency benchmark. Tool schemas, hidden reasoning, indexing, retries, correction rounds and question-to-evidence recall are excluded. Compact response / raw source is ~169× fewer tokenizer-proxy tokens for this *particular precise question*; a normative legal claim would require primary source excerpts and may cost more. These ratios cannot be generalized to arbitrary corpus questions.
+
+Reproducible CI example:
+
+```sh
+python tools/apa_knowledge_graph/machine_adapter.py \
+  --index /tmp/apa-knowledge-index.json \
+  --out /tmp/apa-real-machine-chain.json \
+  --benchmark-plan docs/research/apa-results/control/PROJECT_PLAN.json \
+  --change-field roof_slope_length_m --before 10 --after 12
+```
+
+The repository's existing `PyYAML==6.0.3` and independently chosen `tiktoken==0.14.0` are used **only for this optional PR68 adapter/benchmark**, not for the stdlib core graph/search or any model inference calls.
+
+**Major missing gate:** A complete chain **official SP clause edition → validated normative calculation → project material/roof system → actual PLN field → engineering result → regression test** is NOT yet available. This first real chain verifies machine-source routing and declared parameter relationships, not numerical engineering semantics.
+
 ## Trust contract and known limitations
 
 - `depends_on` means task *scheduling*, not a calculation or normative relation. `inputs/evidence` means the task *references an artifact*, not that a changed parameter actually invalidates the task.
