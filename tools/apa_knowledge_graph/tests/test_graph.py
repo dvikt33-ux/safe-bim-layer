@@ -179,6 +179,40 @@ class GraphTest(unittest.TestCase):
             self.assertNotEqual(proc.returncode, 0)
             self.assertEqual(json.loads(src.read_text()), self.source)
 
+    def test_verified_edge_rejects_unpinned_revision(self):
+        lineage = fields()
+        lineage["edges"][0]["source_revision"] = "moving-branch-head"
+        with self.assertRaisesRegex(ValueError, "pinned 40/64"):
+            validate_lineage(lineage, self.index)
+
+    def test_cli_rejects_stale_graph_without_modifying_source(self):
+        with tempfile.TemporaryDirectory() as d:
+            src, idx = Path(d)/"source.json", Path(d)/"index.json"
+            src.write_text(json.dumps(self.source), encoding="utf-8")
+            subprocess.run([sys.executable, str(SCRIPT), "build",
+                            "--plan", str(src), "--out", str(idx)],
+                           capture_output=True, text=True, check=True)
+            changed = copy.deepcopy(self.source)
+            changed["tasks"]["S2"]["title"] = "Updated"
+            src.write_text(json.dumps(changed), encoding="utf-8")
+            q = subprocess.run([sys.executable, str(SCRIPT), "task",
+                                "--index", str(idx), "--id", "S2",
+                                "--verify-plan", str(src)],
+                               capture_output=True, text=True)
+            self.assertEqual(q.returncode, 2)
+            self.assertIn("STALE_INDEX", q.stderr)
+
+    def test_cli_refuses_overwrite_of_derived_output(self):
+        with tempfile.TemporaryDirectory() as d:
+            src, idx = Path(d)/"plan.json", Path(d)/"index.json"
+            src.write_text(json.dumps(self.source), encoding="utf-8")
+            idx.write_text("DO_NOT_OVERWRITE", encoding="utf-8")
+            q = subprocess.run([sys.executable, str(SCRIPT), "build",
+                                "--plan", str(src), "--out", str(idx)],
+                               capture_output=True, text=True)
+            self.assertNotEqual(q.returncode, 0)
+            self.assertEqual(idx.read_text(encoding="utf-8"), "DO_NOT_OVERWRITE")
+
     @unittest.skipUnless(REAL_PLAN.is_file(), "Current APA canonical plan not in local checkout")
     def test_real_plan_regression(self):
         real = json.loads(REAL_PLAN.read_text(encoding="utf-8"))
