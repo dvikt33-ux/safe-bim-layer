@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 120,
+  "revision": 121,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -1059,6 +1059,36 @@
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261012-185427Z-four-real-wall-roof-native109.json",
       "kind": "RECEIPT",
       "verification": "DONE_PUBLISHED_GITHUB_READBACK_VERIFIED"
+    },
+    "ART-P70-A02-S02-PR66-20261012": {
+      "id": "ART-P70-A02-S02-PR66-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/66",
+      "kind": "CODE",
+      "verification": "DRAFT_EXACT_PR64_PARENT_513_WINDOWS_LINUX_CI_5_BLOBS_MATCH"
+    },
+    "ART-P70-A02-S02-BINDINGS-20261012": {
+      "id": "ART-P70-A02-S02-BINDINGS-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-191815Z-normative-bindings/integration.json",
+      "kind": "TEST_RESULT",
+      "verification": "OFFLINE_PASS_WITH_ACTUAL_CACHED109_FOUR_JUNCTIONS_24_BINDINGS_NO_ENGINEERING_PASS"
+    },
+    "ART-P70-A02-S02-CATALOG-20261012": {
+      "id": "ART-P70-A02-S02-CATALOG-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/e43bc6055d648270b72dc573a22c9d52c71a83f8/examples/accelerator/ru-junction-rulepack-20261012.json",
+      "kind": "DATASET",
+      "verification": "FIVE_OFFICIAL_REGISTRY_METADATA_VERIFIED_SIX_SOURCE_REQUIREMENTS_FULL_CLAUSES_NOT_VERIFIED"
+    },
+    "ART-P70-A02-S02-REPORT-20261012": {
+      "id": "ART-P70-A02-S02-REPORT-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-191815Z-normative-bindings/REPORT.md",
+      "kind": "REPORT",
+      "verification": "DONE_PUBLISHED_EXACT_GITHUB_BLOBS_MATCH"
+    },
+    "ART-P70-A02-S02-RECEIPT-20261012": {
+      "id": "ART-P70-A02-S02-RECEIPT-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261012-191815Z-normative-bindings.json",
+      "kind": "RECEIPT",
+      "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
     }
   },
   "tasks": {
@@ -2687,7 +2717,7 @@
       "action_id": "APA-P70.A02",
       "title": "Связать проектные требования с версиями нормативов и проверяемыми правилами",
       "kind": "BUILD",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 3,
       "work_key": "normative-applicability-pack",
       "depends_on": [
@@ -2700,14 +2730,25 @@
         "ART-APA-CSE-RESEARCH"
       ],
       "outputs": [
-        "Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED"
+        "Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED",
+        "Published draft PR66 head e43bc6055d648270b72dc573a22c9d52c71a83f8 on exact PR64 parent b056cb76929a62047c82fd66961b72eb4d9078a8.18newtests;513Windows host and Windows/LinuxCI38296039263 PASS. All5code and8source/report blobs match GitHub; publisher receipt DONE_PUBLISHED.",
+        "Working compile_project_normative_pack attaches an immutable source/edition/applicability digest to the existing provisional CSE/project pack. Actual native GUID/material/context/body signatures invalidate stale CSE evidence; existing selections and approval states remain unchanged. Cached current109GUID/fourjunction evidence reused, zero new native calls.",
+        "Six conditional requirement bindings reference five official registry metadata records verified2026-10-12: SP50.13330.2024, SP230.1325800.2015, SP17.13330.2017, SP2.13130.2020, GOST30971-2012. Full clauses and exact system/project applicability NOT_VERIFIED; metadata ACTIVE is not engineering compliance. No numerical norm or engineering class/load/result is invented.",
+        "Existing four actual Wall/Roof targets yield24rows:20NOT_VERIFIED and4window-familyNOT_APPLICABLE. Jurisdiction is not inferred from brief region or file name; native SinglePlane is not roofing technology. Unknown or stale system data never excludes a specific rule. Engineering remains ENGINEERING_NOT_VERIFIED.",
+        "External dependencies retained within A02.S02: source-backed actual site/jurisdiction, project thermal/fire/roof design facts, certified source-bound CSE layer/system evidence and qualified full clauses/table rows. Adapter is working and published; project-specific normative acceptance remainsPARTIAL. Native A11.S03PARTIAL and S10BLOCKED are independent and unchanged. Exact next available native step remains approved SinglePlane contour qualification followed by four-target remeasurement; no source-junction writes authorized or executed."
       ],
       "acceptance": "Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED",
-      "owner": "work-normative-bindings-20261012",
-      "lease_until": "2026-10-12T21:59:22Z",
-      "claim_ref": "APA-RUN-20261012-185922Z-normative-bindings",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-P70-A02-S02-PR66-20261012",
+        "ART-P70-A02-S02-BINDINGS-20261012",
+        "ART-P70-A02-S02-CATALOG-20261012",
+        "ART-P70-A02-S02-REPORT-20261012",
+        "ART-P70-A02-S02-RECEIPT-20261012"
+      ],
       "blocked_reason": null
     },
     "APA-P70.A02.S03": {
@@ -4443,7 +4484,12 @@
         "ART-P70-A11-S03-GAP-FOUR-20261012",
         "ART-P70-A11-S03-SEO-FLAGS-20261012",
         "ART-P70-A11-S03-FOUR-REPORT-20261012",
-        "ART-P70-A11-S03-FOUR-RECEIPT-20261012"
+        "ART-P70-A11-S03-FOUR-RECEIPT-20261012",
+        "ART-P70-A02-S02-PR66-20261012",
+        "ART-P70-A02-S02-BINDINGS-20261012",
+        "ART-P70-A02-S02-CATALOG-20261012",
+        "ART-P70-A02-S02-REPORT-20261012",
+        "ART-P70-A02-S02-RECEIPT-20261012"
       ],
       "synthesis_state": "PARTIAL",
       "owner": null
