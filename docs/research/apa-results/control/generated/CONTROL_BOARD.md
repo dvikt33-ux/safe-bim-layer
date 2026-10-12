@@ -9,14 +9,14 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Status | Count |
 | --- | ---: |
-| BLOCKED | 8 |
+| BLOCKED | 12 |
 | CLAIMED | 0 |
 | DONE_PUBLISHED | 24 |
-| IN_PROGRESS | 1 |
-| PARTIAL | 15 |
+| IN_PROGRESS | 0 |
+| PARTIAL | 16 |
 | READY | 38 |
 | SUPERSEDED | 0 |
-| DISPATCHABLE_NOW | 18 |
+| DISPATCHABLE_NOW | 19 |
 | HELD_BY_DEPENDENCIES | 35 |
 | EXPIRED_LEASES | 0 |
 
@@ -30,7 +30,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| APA-P70.A11.S03 | codex-apa-functional-gaps-v31-20261012 | 2026-10-12T23:59:00Z | system-gap-driven-development-v31 |
+| — | — | — | — |
 
 ## CONTROL — 0 ready
 
@@ -66,10 +66,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | P3 | APA-P70.A02.S02 — Связать проектные требования с версиями нормативов и проверяемыми правилами | Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED |
 | P8 | APA-P00.A03.S03 — Publisher, дедупликация, retry, heartbeat и ошибки | Publisher E2E + оставшиеся recovery/heartbeat gates |
 
-## INTEGRATION — 1 ready
+## INTEGRATION — 2 ready
 
 | Priority | Task | Acceptance |
 | --- | --- | --- |
+| P1 | APA-P70.A11.S03 — Исправить пробелы после системного теста | Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. |
 | P4 | APA-P70.A04.S01 — Вывести из модели обязательные семейства узлов и их условия применимости | Матрица всех применимых примыканий/отверстий/армопоясов/связей/крепежа с точным source/detail ID и открытыми пробелами |
 
 ## VALIDATION — 4 ready
