@@ -53,6 +53,12 @@ class JunctionCoverageTests(unittest.TestCase):
         c,n=self.fixture();n['elements'][0]['bodies'][0]['vertices'][0][2]+=.1
         j=self.junction(D.native_junction_coverage(c,n,D.DetailsContext(ROOT)))
         self.assertEqual(j['physicalRelation'],'NOT_VERIFIED');self.assertIn('NONPLANAR',j['contactAnalysisLimitation'])
+    def test_column_segment_geometry_is_attributed_to_native_parent(self):
+        c,n=self.fixture();c['elements']['wall']['kind']='Column'
+        child=copy.deepcopy(n['elements'][0]);child['guid']=guid(3);n['elements'][0]['bodies']=[]
+        n['elements'].append(child);c['columnSegments']={guid(1):[guid(3)]}
+        r=D.native_junction_coverage(c,n,D.DetailsContext(ROOT));j=next(f for f in r['families'] if f['family']=='column_floor')['junctions'][0]
+        self.assertEqual(j['guids'],[guid(1),guid(2)]);self.assertAlmostEqual(j['sharedAreaSquareMeters'],1)
 
 
 if __name__=='__main__':unittest.main()

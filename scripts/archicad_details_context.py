@@ -184,8 +184,9 @@ def native_junction_coverage(context,native,details,collision_pairs=()):
             if not (explicit_host or near):continue
             owners={}
             for g in pair:
-                owners[g]=g
-                for child in context.get('columnSegments',{}).get(g,[]):owners[child.lower()]=g
+                children=next((v for k,v in context.get('columnSegments',{}).items() if k.lower()==g),[])
+                if bodies.get(g,{}).get('bodies') or not children:owners[g]=g
+                for child in children:owners[child.lower()]=g
             area=None;reason=None
             try:
                 if any(g not in bodies or not bodies[g].get('bodies') for g in owners):raise ValueError('NATIVE_BODY_NOT_AVAILABLE')
