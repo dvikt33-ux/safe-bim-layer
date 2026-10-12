@@ -31,5 +31,6 @@ Generated projection from immutable V2 runs. Legacy reports remain in ARTIFACT_R
 | [APA-RUN-20261012-012500Z-gap-windows-sqlite-v31](../runs/2026-10-12/APA-RUN-20261012-012500Z-gap-windows-sqlite-v31/REPORT.md) | APA-P70.A11.S03 | OFFLINE | EVIDENCE_READY |
 | [APA-RUN-20261012-075300Z-functional-gaps-v31](../runs/2026-10-12/APA-RUN-20261012-075300Z-functional-gaps-v31/REPORT.md) | APA-P70.A11.S03 | SOURCE | EVIDENCE_READY |
 | [APA-RUN-20261012-095401Z-functional-expansion-v32](../runs/2026-10-12/APA-RUN-20261012-095401Z-functional-expansion-v32/REPORT.md) | APA-P70.A11.S03 | SOURCE | EVIDENCE_READY |
+| [APA-RUN-20261012-110611Z-connected-native-continuation-v32](../runs/2026-10-12/APA-RUN-20261012-110611Z-connected-native-continuation-v32/REPORT.md) | APA-P70.A11.S03 | SOURCE | EVIDENCE_READY |
 
 Publication receipts are in ../receipts/. Evidence status is not publication status.
