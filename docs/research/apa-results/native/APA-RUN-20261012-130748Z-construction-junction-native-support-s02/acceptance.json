@@ -1,0 +1,360 @@
+{
+  "status": "LIVE_PASS",
+  "acceptanceScope": "One editable source-bound batten/counterbatten support sub-junction, not full roof assembly or other families",
+  "sourceBinding": {
+    "detailId": "ARMO_SELFLOCK_ROOF__P0003",
+    "entityId": "c5",
+    "sourceFactId": "ARMO_SELFLOCK_ROOF__P0003__PF002",
+    "sourceLocator": {
+      "representation": "albom_tehnicheskih_reshenii_samozaschelkivayuscheisya_krovli_armo.pdf",
+      "page": 3
+    },
+    "archiveSha256": "fbd23cbca9d306b630537679b75ff5b015f1e35a2b8470811387c137a32bdeb6",
+    "hostGuid": "id-sha256:51fe26b6654ee6ca9854",
+    "hostGeometryHash": "0cc7605d8ace8f21e5434c6daa568efb0c5df953a29af766edef4c5f669562ee",
+    "hostMaterialBindings": {
+      "api": "ACAPI_Element_Get",
+      "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+      "structureType": 0,
+      "buildingMaterial": {
+        "nativeField": "shellBase.structure",
+        "attributeType": 12,
+        "attributeIndex": 10,
+        "guid": "id-sha256:460ab9cf8caf48c17c0c",
+        "name": "Железобетон - Конструкционный",
+        "defaultSurface": {
+          "nativeField": "buildingMaterial.cutMaterial",
+          "attributeType": 5,
+          "attributeIndex": 4,
+          "guid": "id-sha256:547d736d45b5e8718116",
+          "name": "Бетон - 02"
+        }
+      },
+      "topMat": {
+        "nativeField": "shellBase.topMat",
+        "attributeType": 5,
+        "attributeIndex": 0,
+        "overridden": false,
+        "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+      },
+      "sidMat": {
+        "nativeField": "shellBase.sidMat",
+        "attributeType": 5,
+        "attributeIndex": 0,
+        "overridden": false,
+        "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+      },
+      "botMat": {
+        "nativeField": "shellBase.botMat",
+        "attributeType": 5,
+        "attributeIndex": 0,
+        "overridden": false,
+        "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+      }
+    },
+    "hostHomeStory": 1,
+    "expectedPlacement": {
+      "floorIndex": 1,
+      "basePoint": {
+        "x": 45.025,
+        "y": 41.94452193565046,
+        "z": 6.218034013107245
+      },
+      "xAxis": {
+        "x": 0.0,
+        "y": -1.0,
+        "z": 0.0
+      },
+      "yAxis": {
+        "x": 0.9887710778551003,
+        "y": 0.0,
+        "z": -0.14943813300915973
+      },
+      "zAxis": {
+        "x": 0.14943813300915973,
+        "y": 0.0,
+        "z": 0.9887710778551003
+      }
+    },
+    "projectMaterialSelection": {
+      "kind": "BuildingMaterial",
+      "name": "Дерево - Конструкционное",
+      "expectedGuid": "id-sha256:cffa184ae2595efce663"
+    },
+    "sourceSectionMeters": {
+      "width": 0.05,
+      "height": 0.05
+    },
+    "modelDerivedLengthMeters": 5.980100048867446,
+    "modelSpanAuthority": {
+      "start": "Actual accepted batten underside low edge",
+      "end": "Actual upper wall inner face",
+      "startY": 41.937050029,
+      "endY": 47.85
+    },
+    "nativeDependencyBodies": [
+      {
+        "guid": "id-sha256:21cedb48f056d6ebc819",
+        "geometryHash": "63e3b58f58137cc4b5fc1c8539e54cac87685aa7de64316e233a0384e416d425",
+        "materialBindings": {
+          "api": "ACAPI_Element_Get",
+          "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "buildingMaterial": {
+            "nativeField": "morph.buildingMaterial",
+            "attributeType": 12,
+            "attributeIndex": 49,
+            "guid": "id-sha256:cffa184ae2595efce663",
+            "name": "Дерево - Конструкционное",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 15,
+              "guid": "id-sha256:e0b0fe701a1cc64446a5",
+              "name": "Дерево - Сосна Сучковатая Горизонтальная"
+            }
+          },
+          "material": {
+            "nativeField": "morph.material (non-customized faces)",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "customFaceAssignments": "effective surfaces are in resultant mesh; custom Morph face source is not expanded"
+        },
+        "homeStory": 1
+      },
+      {
+        "guid": "id-sha256:4b2c7d00e3d409a9ab32",
+        "geometryHash": "7fdd7b0bbf69c73437407d02fc685e4775a4b8973b1b466b36b8f81eef4a1307",
+        "materialBindings": {
+          "api": "ACAPI_Element_Get",
+          "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "structureType": 0,
+          "buildingMaterial": {
+            "nativeField": "wall.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "id-sha256:460ab9cf8caf48c17c0c",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "id-sha256:547d736d45b5e8718116",
+              "name": "Бетон - 02"
+            }
+          },
+          "refMat": {
+            "nativeField": "wall.refMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "oppMat": {
+            "nativeField": "wall.oppMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "sidMat": {
+            "nativeField": "wall.sidMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          }
+        },
+        "homeStory": 1
+      }
+    ],
+    "physicalContact": {
+      "counterpartGuid": "id-sha256:21cedb48f056d6ebc819",
+      "expectedAreaSquareMeters": 0.0075,
+      "sourceRelation": "battens_supported_by_counterbattens",
+      "sourceEntityPair": [
+        "c4",
+        "c5"
+      ]
+    },
+    "classification": {
+      "role": "counterbatten",
+      "scope": "SOURCE_ROLE_IN_BIM_GRAPH; NATIVE_CLASSIFICATION_ITEM_NOT_ASSIGNED"
+    },
+    "assemblyWriteAllowed": false,
+    "scope": "COMPLETE_BOUNDED_BATTEN_COUNTERBATTEN_SUPPORT_CONTACT; FULL_MANUFACTURER_ASSEMBLY_NOT_VERIFIED",
+    "materialAcceptance": "VERIFIED_EXISTING_PROJECT_TIMBER; SOURCE_GRADE_NOT_SPECIFIED",
+    "engineeringAcceptance": "NOT_VERIFIED",
+    "missingAssemblyDimensionEntities": [
+      "c1",
+      "c2",
+      "c3",
+      "c6",
+      "c7",
+      "c8",
+      "c9",
+      "c10"
+    ]
+  },
+  "nativeMemberGuid": "id-sha256:4a42a41a3b3a6f609480",
+  "physicalContact": {
+    "status": "LIVE_SOURCE_SUPPORT_CONTACT_PASS",
+    "newGuid": "id-sha256:4a42a41a3b3a6f609480",
+    "counterpartGuid": "id-sha256:21cedb48f056d6ebc819",
+    "sourceDetailId": "ARMO_SELFLOCK_ROOF__P0003",
+    "sourceRelation": "battens_supported_by_counterbattens",
+    "sharedAreaSquareMeters": 0.007500000016360793,
+    "sourceSectionMeters": {
+      "width": 0.05,
+      "height": 0.05
+    },
+    "modelDerivedLengthMeters": 5.980100048867446,
+    "nativeBoundsMeters": [
+      [
+        44.975,
+        45.025
+      ],
+      [
+        41.937050029,
+        47.857471907
+      ],
+      [
+        6.218034013,
+        7.161127554
+      ]
+    ],
+    "actualMaterialBindings": {
+      "api": "ACAPI_Element_Get",
+      "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+      "buildingMaterial": {
+        "nativeField": "morph.buildingMaterial",
+        "attributeType": 12,
+        "attributeIndex": 49,
+        "guid": "id-sha256:cffa184ae2595efce663",
+        "name": "Дерево - Конструкционное",
+        "defaultSurface": {
+          "nativeField": "buildingMaterial.cutMaterial",
+          "attributeType": 5,
+          "attributeIndex": 15,
+          "guid": "id-sha256:e0b0fe701a1cc64446a5",
+          "name": "Дерево - Сосна Сучковатая Горизонтальная"
+        }
+      },
+      "material": {
+        "nativeField": "morph.material (non-customized faces)",
+        "attributeType": 5,
+        "attributeIndex": 0,
+        "overridden": false,
+        "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+      },
+      "customFaceAssignments": "effective surfaces are in resultant mesh; custom Morph face source is not expanded"
+    },
+    "actualHomeStory": 1,
+    "nativeBodyHash": "f57685a4408e0174e948d51788ec5ced406bf5a4b163caf0d80bdeb96e37bcb7",
+    "physicalContact": "PASS_GEOMETRY",
+    "nativeVolumeCollision": {
+      "collisions": []
+    },
+    "logicalBinding": "SOURCE_RELATION_IN_BIM_GRAPH",
+    "nativeParentChildRelation": "NOT_CLAIMED_FOR_MORPH",
+    "classification": {
+      "role": "counterbatten",
+      "scope": "SOURCE_ROLE_IN_BIM_GRAPH; NATIVE_CLASSIFICATION_ITEM_NOT_ASSIGNED"
+    },
+    "completeManufacturerAssembly": "NOT_VERIFIED",
+    "engineeringAcceptance": "NOT_VERIFIED"
+  },
+  "actualNativeClassification": {
+    "status": "ACTUAL_NATIVE_MEMBER_CLASSIFICATION_PASS",
+    "elementGuid": "id-sha256:4a42a41a3b3a6f609480",
+    "selection": {
+      "systemName": "Классификация Archicad",
+      "systemVersion": "v 2.0",
+      "systemGuid": "id-sha256:7725d6f2c91375a3037f",
+      "itemId": "Балка",
+      "itemGuid": "id-sha256:383eb24489c486165e32"
+    },
+    "nativeReadback": [
+      {
+        "classificationIds": [
+          {
+            "classificationSystemId": {
+              "guid": "id-sha256:7725d6f2c91375a3037f"
+            },
+            "classificationItemId": {
+              "guid": "id-sha256:383eb24489c486165e32"
+            }
+          }
+        ]
+      }
+    ],
+    "scope": "Native Beam classification of source counterbatten; tool remains editable Morph; load-bearing suitability not inferred"
+  },
+  "acceptedBaselineGuidCount": 95,
+  "currentNativeGuidCount": 96,
+  "sharedContextRecords": 38,
+  "retained95GuidAndGeometry": "PASS",
+  "all96GeometryAfterReopen": "PASS",
+  "networkUnchanged": "PASS",
+  "sourceDependencyInvalidation": "Pinned source archive, roof, batten, endpoint-wall geometry, material, story; drift tests PASS",
+  "persistence": {
+    "saveResponse": {
+      "success": true
+    },
+    "openResponse": {
+      "success": true
+    },
+    "fileHashAfterSave": "8a835dc7a9ada894f102121845015ba053f6443417aa48e8b76fb9650936cb7f",
+    "fileHashAfterReopen": "8a835dc7a9ada894f102121845015ba053f6443417aa48e8b76fb9650936cb7f",
+    "nativeCreateAttempts": 1,
+    "nativeClassificationAttempts": 1,
+    "nativeSaveAttempts": 1,
+    "totalNativeOpenAttempts": 2,
+    "nativeCreateModifySetReplays": 0,
+    "controlledOpenAfterCompleteStateReconciliation": true
+  },
+  "reconciliationHistory": {
+    "create": "COMPLETE_UNSAVED; initial helper status comparison corrected through independent readback, no Create replay",
+    "classification": "Native success with direct ClassificationId; wrapper mismatch reconciled read-only, no setter replay",
+    "firstOpen": "15-second response timeout, no success assumed; exact saved/current state and ready UI reconciled before separate controlled 45-second Open acknowledged success"
+  },
+  "verification": {
+    "OFFLINE_PASS": 426,
+    "LIVE_PASS": "Typed body/material/story/classification/contact/collision, retained baseline, save and reopen",
+    "ENGINEERING_NOT_VERIFIED": [
+      "fixings",
+      "timber grade",
+      "rafter bearing",
+      "loads/capacity",
+      "full manufacturer assembly",
+      "other junction families"
+    ]
+  },
+  "rawEvidenceFileSha256": {
+    "junction-c5-native-create/dispatch.jsonl": "8a309d574f9eb0886cdccb594024b9d1834f9ac643ec13383d30b15d8b12c5ef",
+    "junction-c5-native-create/normalized.json": "9bbd6e3cf245928add430ca8d70f3f4dc707bc59cf2775e7aeb28a2b4850c2f6",
+    "junction-c5-native-create/raw.jsonl": "db58ef4488ba6734d5546e1cbf4cde63085f489bc552102f0b2edbd52b420349",
+    "junction-c5-native-create/result.json": "3406379ff1e34000ca973a35b91d33fdf58d792bb6d9efa687f269def0448da1",
+    "junction-c5-independent-readback/dispatch.jsonl": "e0dac7b15a287a4226f95210f0cb1069614bc5c6f052aae37d9a9a34e006ee9e",
+    "junction-c5-independent-readback/normalized.json": "59cd5c31bae2190e3de3594d0739e30d561375e786559f177218fecbe8084d1b",
+    "junction-c5-independent-readback/raw.jsonl": "8bb6b39aff8e3bb96c6801b19678eed9bb210b11dae54ac7dbcd8797481209b0",
+    "junction-c5-independent-readback/result.json": "dc3a58d7f99d54da2891ed3b2500a90c320e43ea8e2f165e72e80ac8a15216ca",
+    "junction-c5-native-classification/dispatch.jsonl": "a4d119f3a4a59111c48a491866c4d605dfa252bce6995ccd0a2e002efcf053d9",
+    "junction-c5-native-classification/raw.jsonl": "778b2e47b025540a80584d40c9ba9d04e57af5c945ace9955ae48ff4846b7f2f",
+    "junction-c5-native-classification/result.json": "f2a72ef5c7443e1e0eeaf4457336eee1f32cc7dc84a186f8e3ab37669b1a2349",
+    "junction-c5-classification-reconciled/dispatch.jsonl": "79d4b481170483ca42e23f83d72214101f539c0edcc69f33a2d75a6199f04c14",
+    "junction-c5-classification-reconciled/raw.jsonl": "736dea53dd1061803842bd75c550e59c8e358fe1fc2ed81021e6edbea3cac7a5",
+    "junction-c5-classification-reconciled/result.json": "4d8b60730dbdde531a33842f1ceadfc05d3fee372a99e2eb1c3207949af2f885",
+    "junction-c5-saved-reopened/dispatch.jsonl": "72132f1f92f92362ed8dfbd7143f351b400ca6d97323cb6f804b11d2d80b5318",
+    "junction-c5-saved-reopened/normalized.json": "0c2165f7d31aec35437c75ba86dae2c819def15efdef8e132f48353cc072d71a",
+    "junction-c5-saved-reopened/raw.jsonl": "56e159eda0d0a692c15981a5853027d492ece5535b06d6eb61964f7e1e891c07",
+    "junction-c5-saved-reopened/result.json": "384da0f6810539eafb1a61cefc693331175164fc322957188422f3e586c04fc3",
+    "junction-c5-open-after-state-reconciliation/dispatch.jsonl": "c20b9529e7a26cbdfd847d22475213ac3bb77598d7f48b4bb0aec217b06b2512",
+    "junction-c5-open-after-state-reconciliation/normalized.json": "aad924c03194eeb5cd1170915ff35a3aa663a71396085a4bd200e24ee38efe8e",
+    "junction-c5-open-after-state-reconciliation/raw.jsonl": "4f76eaa7077d57a48e578eb349708148e73568256edd55dc157cd805c44a49d0",
+    "junction-c5-open-after-state-reconciliation/result.json": "28913ea7731cabc33635ba4c70214539f74bc0faa3e210ebba01a3f215559f10"
+  },
+  "rawEvidenceScope": "Retained locally; selected normalized data only published"
+}
