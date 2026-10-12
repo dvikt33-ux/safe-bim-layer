@@ -27,5 +27,6 @@ Generated projection from immutable V2 runs. Legacy reports remain in ARTIFACT_R
 | [APA-RUN-20261011-202800Z-native-geometry-integration](../runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md) | APA-P70.A09.S01 | SOURCE | EVIDENCE_READY |
 | [APA-RUN-20261011-211000Z-native-material-library-integration](../runs/2026-10-11/APA-RUN-20261011-211000Z-native-material-library-integration/REPORT.md) | APA-P70.A02.S04 | SOURCE | EVIDENCE_READY |
 | [APA-RUN-20261012-010000Z-compatible-integration-v31](../runs/2026-10-12/APA-RUN-20261012-010000Z-compatible-integration-v31/REPORT.md) | APA-P70.A11.S01 | SOURCE | EVIDENCE_READY |
+| [APA-RUN-20261012-011500Z-connected-system-v31](../runs/2026-10-12/APA-RUN-20261012-011500Z-connected-system-v31/REPORT.md) | APA-P70.A11.S02 | SOURCE | EVIDENCE_READY |
 
 Publication receipts are in ../receipts/. Evidence status is not publication status.

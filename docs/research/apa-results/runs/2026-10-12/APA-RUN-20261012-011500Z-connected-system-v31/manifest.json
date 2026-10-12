@@ -1,0 +1,85 @@
+{
+  "action_id": "APA-P70.A11",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-CONNECTED-SYSTEM-V31",
+      "evidence_ids": [
+        "EV-SYSTEM-ACCEPTANCE"
+      ],
+      "statement": "Combined22primary/48GUID native readback, source preservation, current Details/solver/collision/IFC interactions pass; mandatory unsupported modules explicitly block engineering scope.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-SYSTEM-ACCEPTANCE",
+      "kind": "TEST_RESULT",
+      "sha256": "5bf1f56155e868263c74c967eea0cbfd69163a6bbcb096d13abdf480705b878b",
+      "source_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-011500Z-connected-system-v31/acceptance.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "codex-apa-system-v31-20261012",
+  "executor_run_id": "APA-RUN-20261012-011500Z-connected-system-v31",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-12T01:15:24Z",
+  "idempotency_key": "sha256:3354806417497c13772518944991f598dffcd7a21649e665e56e23c2196464de",
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "next_substep": "APA-P70.A11.S03",
+  "phase": "SOURCE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261012-011500Z-connected-system-v31",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "29build5101RUS(capturednative)",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "sdk": null,
+    "source_branch": "feature/apa-connected-batch-v31-20261012",
+    "tapir": "1.5.10"
+  },
+  "source_revisions": [
+    {
+      "revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+      "source_sha": "286b1ae8614421b927af95c4c278147c8d55baba",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/53"
+    }
+  ],
+  "started_at": "2026-10-12T01:15:24Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A11.S02"
+}
