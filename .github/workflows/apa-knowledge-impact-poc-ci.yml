@@ -1,0 +1,46 @@
+name: APA knowledge impact read-only POC CI
+
+on:
+  pull_request:
+    branches:
+      - research/apa-verified-results-hub-20261010
+    paths:
+      - 'tools/apa_knowledge_graph/**'
+      - '.github/workflows/apa-knowledge-impact-poc-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  graph-offline-tests:
+    if: github.repository == 'dvikt33-ux/safe-bim-layer'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout pull request (no write token)
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run unit, negative and real plan regression tests
+        run: python -m unittest discover -s tools/apa_knowledge_graph/tests -v
+      - name: Build disposable graph from canonical plan
+        run: |
+          python tools/apa_knowledge_graph/graph.py build \
+            --plan docs/research/apa-results/control/PROJECT_PLAN.json \
+            --out "${RUNNER_TEMP}/apa-knowledge-index.json"
+      - name: Query real APA normative artifact (bounded)
+        run: |
+          python tools/apa_knowledge_graph/graph.py artifact \
+            --index "${RUNNER_TEMP}/apa-knowledge-index.json" \
+            --id ART-APA-RU-JUNCTION-NORMS --limit 5
+      - name: Join two real APA artifacts without full files
+        run: |
+          python tools/apa_knowledge_graph/multidoc.py \
+            --index "${RUNNER_TEMP}/apa-knowledge-index.json" \
+            --artifacts ART-APA-RU-JUNCTION-NORMS ART-APA-CSE-RESEARCH \
+            --max-tasks 5
