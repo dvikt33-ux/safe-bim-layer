@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 108,
+  "revision": 109,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -866,6 +866,24 @@
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/57",
       "kind": "CODE",
       "verification": "414_WINDOWS_LINUX_PASS_COMMITTED_BLOBS_MATCH"
+    },
+    "ART-P70-A04-S02-NATIVE96-20261012": {
+      "id": "ART-P70-A04-S02-NATIVE96-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-130748Z-construction-junction-native-support-s02/REPORT.md",
+      "kind": "REPORT",
+      "verification": "DONE_PUBLISHED_NATIVE_SAVE_REOPEN_426_CI"
+    },
+    "ART-P70-A04-S02-RECEIPT-20261012": {
+      "id": "ART-P70-A04-S02-RECEIPT-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261012-130748Z-construction-junction-native-support-s02.json",
+      "kind": "RECEIPT",
+      "verification": "GITHUB_BYTE_READBACK_VERIFIED"
+    },
+    "ART-P70-A04-S02-PR57-20261012": {
+      "id": "ART-P70-A04-S02-PR57-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/57",
+      "kind": "CODE",
+      "verification": "DRAFT_PUBLISHED_426_WINDOWS_LINUX_PASS"
     }
   },
   "tasks": {
@@ -2700,7 +2718,7 @@
       "action_id": "APA-P70.A04",
       "title": "Привязать выбранные узлы и композиции к нативным BIM элементам",
       "kind": "BUILD",
-      "status": "IN_PROGRESS",
+      "status": "DONE_PUBLISHED",
       "priority": 4,
       "work_key": "native-details-to-cse-binding",
       "depends_on": [
@@ -2713,14 +2731,18 @@
         "ART-APA-RU-JUNCTION-NORMS"
       ],
       "outputs": [
-        "Редактируемые системы и узлы с параметрами, классификацией, происхождением и invalidation при изменении"
+        "Editable source-bound ARMO PF001/PF002 batten/counterbatten support sub-junction: native50x50mm structural-timber Morph, existing Archicad2.0Beam classification,5.9801000489m model span, actual75cm2contact/no new collisions, pinned source/body/material/story invalidation.95accepted GUID/body signatures preserved,96GUID/38context saved/reopened.426Windows/LinuxPASS. Full assembly/fixings/grade/capacity and other families not inferred."
       ],
       "acceptance": "Редактируемые системы и узлы с параметрами, классификацией, происхождением и invalidation при изменении",
-      "owner": "work-construction-junctions-20261012",
-      "lease_until": "2026-10-12T16:35:09Z",
-      "claim_ref": "APA-RUN-20261012-123509Z-construction-junction-s02",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-P70-A04-S02-NATIVE96-20261012",
+        "ART-P70-A04-S02-RECEIPT-20261012",
+        "ART-P70-A04-S02-PR57-20261012"
+      ],
       "blocked_reason": null
     },
     "APA-P70.A04.S03": {
@@ -4123,7 +4145,10 @@
         "ART-P70-A11-S03-FIRST-V32-20261012",
         "ART-P70-A04-S01-COVERAGE-20261012",
         "ART-P70-A04-S01-RECEIPT-20261012",
-        "ART-P70-A04-S01-PR57-20261012"
+        "ART-P70-A04-S01-PR57-20261012",
+        "ART-P70-A04-S02-NATIVE96-20261012",
+        "ART-P70-A04-S02-RECEIPT-20261012",
+        "ART-P70-A04-S02-PR57-20261012"
       ],
       "synthesis_state": "PARTIAL",
       "owner": null
