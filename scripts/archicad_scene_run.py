@@ -60,7 +60,7 @@ DEFAULT_SCENE_SCHEMA = Path(__file__).resolve().parents[1] / "schemas/tapir-live
 ALLOWED_WRITES = frozenset(("CreateWalls", "CreateSlabs", "CreateColumns",
                            "CreateWindows", "CreateDoors", "CreateObjects"))
 # Opt-in typed adapters reuse this journal; a command name alone never enables it.
-EXTENDED_WRITES = frozenset({'CreateRoofs','CreateMorphs','CreateMEPRoutingElements'})
+EXTENDED_WRITES = frozenset({'CreateRoofs','CreateMorphs','CreateMEPRoutingElements','CreateMEPElements'})
 _GUID = re.compile(r"^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$")
 _SCENE_ID = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_-]{3,79}$")
 _NONSPATIAL_TYPES = frozenset({
@@ -672,6 +672,8 @@ class SceneWriter:
                             runtime_version=EXPECTED_TAPIR)
                         if validated['status'] != 'SCHEMA_VALID':
                             raise ValueError('ADAPTER_PARAMETERS_INVALID')
+                        if callable(getattr(adapter,'before_write',None)):
+                            adapter.before_write(self.api,params,preflight)
                     else:
                         params = resolve_params(step, created)
                     # Bind each operation to its exact resolved (including GUID)

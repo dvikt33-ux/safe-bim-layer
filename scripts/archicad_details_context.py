@@ -6,6 +6,7 @@ retained; a geometric candidate does not certify a manufacturer assembly.
 import base64,copy,hashlib,io,json,tarfile
 from pathlib import Path
 import networkx as nx
+import math
 from shapely.geometry import box
 import archicad_connected_components as C
 
@@ -90,3 +91,106 @@ class DetailsContext:
         row=copy.deepcopy(rows[0]);bindings=[b for b in row['bindings'] if b['hostGuid']==host_guid]
         if len(bindings)!=1:raise ValueError('DETAIL_HOST_NOT_VERIFIED')
         row['bindings']=bindings;return row
+
+
+def required_junction_matrix(context,evaluated):
+    """Model-derived families for existing A04.S01-S03, without source approval."""
+    kinds={};rows=[]
+    for sid,e in context['elements'].items():kinds.setdefault(e['kind'],[]).append(e['guid'])
+    families={'openings':('Wall',('Opening','Window','Door')),'wall_floor':('Wall',('Slab',)),
+        'wall_roof':('Wall',('Roof',)),'wall_intersections':('Wall',('Wall',)),
+        'mep_penetrations':('Wall',('MEPRouting',))}
+    for family,(host_kind,neighbors) in families.items():
+        hosts=kinds.get(host_kind,[]);targets=[g for k in neighbors for g in kinds.get(k,[])]
+        junctions={'openings':{'wall_floor_opening_section','balcony_door_or_balcony_slab','bay_window'},
+            'wall_floor':{'wall_floor_opening_section','foundation_slab_with_or_without_grade_beam'},
+            'wall_roof':{'pitched_roof_wall_junction','flat_roof_parapet'},
+            'wall_intersections':{'external_corner','internal_corner','exterior_internal_wall_intersection','internal_loadbearing_wall'},
+            'mep_penetrations':{'airduct_masonry_bond'}}
+        evidence=[{'detailId':d['detailId'],'sourceId':d['sourceId'],'sourceLocator':d['sourceLocator'],
+            'candidateHostGuids':[b['hostGuid'] for b in d['bindings'] if b['applicability']=='CANDIDATE_CONTEXT_MATCH'],
+            'sourceBlockers':d['compileBlockers']} for d in evaluated['details'] if d['junctionType'] in junctions[family] and any(
+                b['hostGuid'] in hosts for b in d['bindings'])]
+        rows.append({'family':family,'hostGuids':hosts,'contextGuids':targets,'sourceCandidates':evidence,
+            'status':'MODEL_FAMILY_REQUIRES_QUALIFIED_SOURCE_AND_JUNCTION_GEOMETRY' if hosts and targets else 'NOT_PRESENT_IN_MODEL',
+            'engineeringAcceptance':'NOT_VERIFIED'})
+    return {'schema':'APA_REQUIRED_JUNCTION_MATRIX_V1','existingTasks':['APA-P70.A04.S01','APA-P70.A04.S02','APA-P70.A04.S03'],
+        'nativeContextHash':C.RUN.digest(context),'families':rows,'coverageScope':'Bounded accepted model; bounding boxes are candidate evidence only'}
+
+
+def prepare_source_section(root,source,context,native,host_guid,entity_id,material_selection):
+    """Two confirmed ARMO cross sections as independent geometric parts.
+
+    Length and placement come from a measured native planar roof. The material
+    is explicitly project-selected, with no manufacturer material approval.
+    Missing assembly dimensions remain blocked. This returns the existing
+    SceneWriter graph; execution must reacquire host/material and target.
+    """
+    from shapely.geometry import Polygon,Point
+    hosts=[e for e in context['elements'].values() if e['guid'].lower()==host_guid.lower()]
+    if len(hosts)!=1 or hosts[0]['kind']!='Roof':raise ValueError('DETAIL_PART_REQUIRES_UNIQUE_NATIVE_ROOF')
+    if (set(material_selection)!={'kind','name','expectedGuid'} or material_selection['kind']!='BuildingMaterial'
+            or not material_selection['name'] or not C.RUN._GUID.fullmatch(material_selection['expectedGuid'])):
+        raise ValueError('DETAIL_PART_TYPED_MATERIAL_SELECTION_REQUIRED')
+    material_guid=material_selection['expectedGuid']
+    host=hosts[0];candidate=C.details_candidate(root,'ARMO_SELFLOCK_ROOF__P0003',host)
+    selected=[r for r in candidate['resolvedFacts'] if r['entity']==entity_id]
+    if len(selected)!=1 or selected[0]['fact']['fact_kind']!='cross_section' or selected[0]['fact']['normalized_unit']!='mm':
+        raise ValueError('DETAIL_PART_SOURCE_CROSS_SECTION_NOT_UNIQUE')
+    fact=selected[0];width= fact['values']['value_2']/1000;height=fact['values']['value']/1000
+    if any(type(v) not in (float,int) or not math.isfinite(v) or v<=0 for v in (width,height)):
+        raise ValueError('DETAIL_PART_DIMENSION_INVALID')
+    bodies=[e for e in native['elements'] if e['guid'].lower()==host_guid.lower()]
+    if len(bodies)!=1:raise ValueError('DETAIL_PART_HOST_BODY_MISSING')
+    body=bodies[0];b=C.ROOF.bounds(body);y=(b[1][0]+b[1][1])/2
+    planes=[]
+    for solid in body['bodies']:
+        if solid['curved']:raise ValueError('DETAIL_PART_CURVED_ROOF_NOT_SUPPORTED')
+        for face in solid['faces']:
+            points=[solid['vertices'][i] for i in face['vertices']]
+            if len(points)<3:continue
+            a,v,w=points[0],points[1],points[2]
+            n=[(v[(k+1)%3]-a[(k+1)%3])*(w[(k+2)%3]-a[(k+2)%3])-(v[(k+2)%3]-a[(k+2)%3])*(w[(k+1)%3]-a[(k+1)%3]) for k in range(3)]
+            if abs(n[2])<1e-8:continue
+            if any(abs(sum(n[k]*(p[k]-a[k]) for k in range(3)))>1e-6 for p in points):continue
+            polygon=Polygon([(p[0],p[1]) for p in points], [[tuple(solid['vertices'][i][:2]) for i in ring] for ring in face.get('holes',[])])
+            if not polygon.is_valid:continue
+            if all(polygon.covers(Point(x,yy)) for x in (b[0][0],b[0][1]) for yy in (y-width/2,y+width/2)):
+                z=lambda x,yy,a=a,n=n:a[2]-(n[0]*(x-a[0])+n[1]*(yy-a[1]))/n[2]
+                planes.append((z((b[0][0]+b[0][1])/2,y),z,n))
+    if not planes:raise ValueError('DETAIL_PART_NATIVE_FACE_FOOTPRINT_NOT_VERIFIED')
+    _,z,n=min(planes,key=lambda p:p[0]);slope=-n[1]/n[2]
+    # Bounded horizontal-x batten. Do not pretend this is rafter-following c5.
+    if entity_id!='c4' or abs(n[0]/n[2])>1e-8:raise ValueError('DETAIL_PART_ORIENTATION_RELATION_UNSUPPORTED')
+    tangent={'x':0.,'y':1/math.sqrt(1+slope*slope),'z':slope/math.sqrt(1+slope*slope)}
+    normal={'x':0.,'y':-tangent['z'],'z':tangent['y']}
+    base={'x':b[0][0],'y':y-tangent['y']*width/2-normal['y']*height,
+          'z':z(b[0][0],y)-tangent['z']*width/2-normal['z']*height}
+    data={'floorIndex':host['floorIndex'],'basePoint':base,'xAxis':{'x':1.,'y':0.,'z':0.},'yAxis':tangent,'zAxis':normal,
+          'body':C.explicit_box_body({'x':b[0][1]-b[0][0],'y':width,'z':height}),'buildingMaterialId':{'guid':material_guid}}
+    binding={'detailId':candidate['detailId'],'entityId':entity_id,'sourceFactId':fact['fact']['fact_id'],
+        'sourceLocator':candidate['sourceLocator'],'archiveSha256':candidate['archiveSha256'],'hostGuid':host['guid'],
+        'hostGeometryHash':C.RUN.digest(C.ROOF.geometry_signature(body)),'hostMaterialBindings':host['materialBindings'],
+        'hostHomeStory':body['homeStory'],'expectedPlacement':{k:data[k] for k in ('floorIndex','basePoint','xAxis','yAxis','zAxis')},
+        'projectMaterialSelection':dict(material_selection),'sourceSectionMeters':{'width':width,'height':height},
+        'modelDerivedLengthMeters':b[0][1]-b[0][0],'assemblyWriteAllowed':False,
+        'scope':'INDEPENDENT_SOURCE_SECTION_PART; NOT_COMPLETE_MANUFACTURER_ASSEMBLY',
+        'materialAcceptance':'PROJECT_SELECTION_REQUIRES_FRESH_NATIVE_RESOLVE; SOURCE_MATERIAL_NOT_SPECIFIED',
+        'engineeringAcceptance':'NOT_VERIFIED','missingAssemblyDimensionEntities':candidate['missingDimensionEntities']}
+    plan=C.bind_plan(source,[{'id':'source-section-'+entity_id,'command':'CreateMorphs','params':{'morphsData':[data]}}],['morph'],{'sourceDetailBinding':binding})
+    return {'status':'OFFLINE_SOURCE_SECTION_GRAPH_PREPARED','binding':binding,'plan':plan,'nativeWrites':0,
+        'livePrerequisites':['exact PLN/port/process/Tapir/journal','baseline59 preservation','fresh host geometry/material match','fresh project material resolve']}
+
+
+def verify_source_section_binding(api,binding):
+    from archicad_native_operations import element_body
+    body=element_body(api,binding['hostGuid'])
+    if C.RUN.digest(C.ROOF.geometry_signature(body['native']))!=binding['hostGeometryHash']:
+        raise ValueError('DETAIL_PART_HOST_GEOMETRY_INVALIDATED')
+    if body['native'].get('materialBindings',{})!=binding['hostMaterialBindings']:
+        raise ValueError('DETAIL_PART_HOST_MATERIAL_INVALIDATED')
+    if body['native'].get('homeStory')!=binding['hostHomeStory']:raise ValueError('DETAIL_PART_HOST_STORY_INVALIDATED')
+    from archicad_native_material_selection import resolve
+    selection=binding['projectMaterialSelection']
+    resolve(api,selection['kind'],selection['name'],selection['expectedGuid'])
+    return {'status':'DETAIL_PART_HOST_BINDING_PASS','hostGuid':binding['hostGuid']}

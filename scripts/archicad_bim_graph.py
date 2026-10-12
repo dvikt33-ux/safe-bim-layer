@@ -35,6 +35,7 @@ CREATES = {
     "CreateStairs": "Stair", "CreateZones": "Zone",
     "CreateOpenings": "Opening",
     "CreateMEPRoutingElements": "MEPRouting",
+    "CreateMEPElements": "MEPComponent",
 }
 # Schema alone does not establish semantic ownership.
 HOST_REFERENCE_KEYS = {"ownerWallId": "Wall"}
