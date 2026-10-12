@@ -1,0 +1,24 @@
+{
+  "schema": "APA_NORMATIVE_JUNCTION_CATALOG_V1",
+  "verifiedAt": "2026-10-12",
+  "scope": "Registry metadata and source-linked applicability requirements; no clause or engineering certification",
+  "researchSources": [
+    {"id": "ART-APA-RU-JUNCTION-NORMS", "gitBlobSha": "3396bfafb8e5bbfe4b539c5184f0ee0bd0c27561"},
+    {"id": "ART-APA-CSE-RESEARCH", "gitBlobSha": "5a6391cb176d28aa0d91dda93dcea0efd9bd1e27"}
+  ],
+  "documents": {
+    "thermal": {"edition": "СП 50.13330.2024", "jurisdiction": "RU", "registryStatus": "ACTIVE", "metadataVerification": "VERIFIED_REGISTRY_METADATA", "effectiveDate": "2024-06-16", "replaces": "СП 50.13330.2012", "uri": "https://protect.gost.ru/sp/details/5081dae9-9ee9-455f-80e8-d093d495361c", "clauseVerification": "NOT_VERIFIED"},
+    "thermal_bridge": {"edition": "СП 230.1325800.2015", "jurisdiction": "RU", "registryStatus": "ACTIVE", "metadataVerification": "VERIFIED_REGISTRY_METADATA", "registryAmendments": [1, 2], "uri": "https://protect.gost.ru/sp/details/e8f68a1e-2928-41be-bf89-21330a32f8b5", "clauseVerification": "NOT_VERIFIED"},
+    "roof": {"edition": "СП 17.13330.2017", "jurisdiction": "RU", "registryStatus": "ACTIVE", "metadataVerification": "VERIFIED_REGISTRY_METADATA", "registryAmendments": [1, 2, 3, 4, 5], "uri": "https://protect.gost.ru/sp/details/844352c5-dda6-4006-acd8-b6875d1ed6a8", "clauseVerification": "NOT_VERIFIED"},
+    "fire": {"edition": "СП 2.13130.2020", "jurisdiction": "RU", "registryStatus": "ACTIVE", "metadataVerification": "VERIFIED_REGISTRY_METADATA", "registryAmendments": [1, 2], "uri": "https://protect.gost.ru/sp/details/90783c81-7eaa-4b90-b774-55ad27e6dfa1", "clauseVerification": "NOT_VERIFIED"},
+    "window": {"edition": "ГОСТ 30971-2012", "jurisdiction": "RU", "registryStatus": "ACTIVE", "metadataVerification": "VERIFIED_REGISTRY_METADATA", "uri": "https://protect.gost.ru/gost/details/09b731bf-531e-428b-8ef9-556ed2d1c110", "clauseVerification": "NOT_VERIFIED"}
+  },
+  "rules": [
+    {"id": "thermal-envelope-interface", "document": "thermal", "families": ["wall_roof", "wall_floor", "wall_window"], "requiredProjectFacts": ["thermalEnvelopeApplicability", "climateDesignBasis"], "requiredCseFacts": ["insulationLayers", "layerContinuityEvidence"], "requiredEngineeringEvidence": ["validatedThermalAssessment"], "clauseLocator": "Applicable envelope provisions require full clause verification"},
+    {"id": "thermal-bridge-table-binding", "document": "thermal_bridge", "families": ["wall_roof", "wall_floor", "wall_window"], "requiredProjectFacts": ["thermalEnvelopeApplicability"], "requiredCseFacts": ["tableRowSource", "tableGeometrySignature", "thermalMaterialProperties"], "requiredEngineeringEvidence": ["qualifiedTableOrThermalEngine"], "clauseLocator": "Applicable thermal-nonuniformity table; exact row not selected"},
+    {"id": "roof-system-and-junction", "document": "roof", "families": ["wall_roof"], "requiredProjectFacts": ["roofDesignBasis"], "requiredCseFacts": ["roofSystem", "waterproofingLayerEvidence", "junctionRole"], "requiredEngineeringEvidence": [], "clauseLocator": "System-specific roofing provisions; native SinglePlane is not a roofing technology"},
+    {"id": "bitumen-parapet-detail", "document": "roof", "families": ["wall_roof"], "requiredProjectFacts": ["roofDesignBasis"], "requiredCseFacts": ["roofSystem", "junctionRole", "waterproofingLayerEvidence"], "requiredEngineeringEvidence": [], "systemPredicate": {"roofSystem": "bitumen_rolled_or_mastic", "junctionRole": "parapet"}, "clauseLocator": "Research references SP17 section5.1, clauses5.1.17/18/20/22/23/25; NOT_VERIFIED_CLAUSE", "numericRulesEnabled": false},
+    {"id": "fire-interface-evidence", "document": "fire", "families": ["wall_roof", "wall_floor", "wall_window"], "requiredProjectFacts": ["fireDesignBasis", "fireCompartmentRole"], "requiredCseFacts": ["fireSystemTestEvidence"], "requiredEngineeringEvidence": ["fireResistanceAssessment"], "clauseLocator": "Applicable fire-resistance requirement; no class or limit inferred from material"},
+    {"id": "window-installation-layer-evidence", "document": "window", "families": ["wall_window"], "requiredProjectFacts": ["windowInstallationScope"], "requiredCseFacts": ["windowSystem", "installationLayerEvidence", "productTestEvidence"], "requiredEngineeringEvidence": [], "clauseLocator": "Applicable installation-joint provisions and AnnexA; missing layers remain NOT_VERIFIED"}
+  ]
+}

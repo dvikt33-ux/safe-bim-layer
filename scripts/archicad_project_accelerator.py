@@ -142,6 +142,13 @@ def compile_project_library_pack(brief, cse_candidate, read_api=None):
     return PACK.compile_pack(brief, cse_candidate, api=read_api)
 
 
+def compile_project_normative_pack(brief,project_pack,native_context,requirements,junctions):
+    """Bind editions/applicability/evidence to the existing CSE/native context."""
+    import archicad_normative_bindings as NORM
+    normative=NORM.compile_normative_pack(brief,project_pack,native_context,requirements,junctions)
+    return {'normative':normative,'projectPack':NORM.attach_to_project_pack(project_pack,normative)}
+
+
 def compile_project_spatial_plan(brief, project_pack, authored_layout):
     """Plan authored rooms/axes/load paths in the existing accelerator.
 
