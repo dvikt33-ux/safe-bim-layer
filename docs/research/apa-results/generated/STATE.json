@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 37,
+  "run_count": 38,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -259,6 +259,13 @@
       "phase": "SOURCE",
       "report": "runs/2026-10-12/APA-RUN-20261012-203851Z-verified-roof-rules/REPORT.md",
       "run_id": "APA-RUN-20261012-203851Z-verified-roof-rules",
+      "substep_id": "APA-P70.A02.S02"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-12/APA-RUN-20261012-210815Z-machine-normative/REPORT.md",
+      "run_id": "APA-RUN-20261012-210815Z-machine-normative",
       "substep_id": "APA-P70.A02.S02"
     }
   ],

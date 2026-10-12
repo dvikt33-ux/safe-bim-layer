@@ -41,5 +41,6 @@ Generated projection from immutable V2 runs. Legacy reports remain in ARTIFACT_R
 | [APA-RUN-20261012-185427Z-four-real-wall-roof-native109](../runs/2026-10-12/APA-RUN-20261012-185427Z-four-real-wall-roof-native109/REPORT.md) | APA-P70.A11.S03 | SOURCE | EVIDENCE_READY |
 | [APA-RUN-20261012-191815Z-normative-bindings](../runs/2026-10-12/APA-RUN-20261012-191815Z-normative-bindings/REPORT.md) | APA-P70.A02.S02 | SOURCE | EVIDENCE_READY |
 | [APA-RUN-20261012-203851Z-verified-roof-rules](../runs/2026-10-12/APA-RUN-20261012-203851Z-verified-roof-rules/REPORT.md) | APA-P70.A02.S02 | SOURCE | EVIDENCE_READY |
+| [APA-RUN-20261012-210815Z-machine-normative](../runs/2026-10-12/APA-RUN-20261012-210815Z-machine-normative/REPORT.md) | APA-P70.A02.S02 | SOURCE | EVIDENCE_READY |
 
 Publication receipts are in ../receipts/. Evidence status is not publication status.

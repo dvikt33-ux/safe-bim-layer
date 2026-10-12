@@ -1,0 +1,73 @@
+{
+  "action_id": "APA-P70.A02",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-MACHINE-NORMATIVE",
+      "evidence_ids": [
+        "EV-JUNCTION-PROOF",
+        "EV-JUNCTION-BYTES"
+      ],
+      "statement": "Existing TDK normative machine base connected to current APA normative executor and CSE/BIM context. Exact pinned28file source slice; upstream resolver/evidence validator execute directly; one roof rule file, nine existing IDs, four cached real junctions and36NOT_VERIFIEDbindings. User-confirmedIZHS/defaultdeny/exact object-module-depth-stage gates; quarantine design_only cannot promote confirmed/docPASS to engineering. Legacy24bindings/12sourcechecks retained by digest and mapped without edition upgrade.27newtests;573host/Windows+LinuxCI PASS;37code/28source blobs matched. No new native calls or geometry checks. A02.S02PARTIAL; A11.S03PARTIAL/S10BLOCKED unchanged. Next source-bound roof facts, exact rule/revision/evidence closure and available existing evaluator qualification through sameinterface.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-JUNCTION-PROOF",
+      "kind": "TEST_RESULT",
+      "sha256": "8de2b229afa7203a433e3a1e3e92c97ec29548ef1d1388cc8cc02c1f1a2eb178",
+      "source_revision": "29aa06a6e9bbef0d991bea922e1ad4101ab29bdd",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-210815Z-machine-normative/integration.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-JUNCTION-BYTES",
+      "kind": "LOCAL_LOG",
+      "sha256": "bb9b4992150b464f6c919de99a0ad4804366e147b185ff5419d884a7a4aac2a2",
+      "source_revision": "29aa06a6e9bbef0d991bea922e1ad4101ab29bdd",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-210815Z-machine-normative/EVIDENCE_SHA256.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "work-machine-normative-integration-20261012",
+  "executor_run_id": "APA-CLAIM-MACHINE-NORMATIVE-20261012T205218Z",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-12T21:08:15Z",
+  "idempotency_key": "sha256:d6caf3dac3f9cab53833bff7de2cb92029f52a3e3314e3c6faa29589423c621b",
+  "inputs": [
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-CSE-RESEARCH"
+  ],
+  "next_substep": "APA-P70.A02.S02",
+  "phase": "SOURCE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261012-210815Z-machine-normative",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "29 cached109 evidence reused; zero new native calls",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "source_branch": "feature/apa-machine-normative-integration-20261012",
+    "tapir": "1.5.10"
+  },
+  "source_revisions": [
+    {
+      "revision": "29aa06a6e9bbef0d991bea922e1ad4101ab29bdd",
+      "source_sha": "29aa06a6e9bbef0d991bea922e1ad4101ab29bdd",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/68"
+    }
+  ],
+  "started_at": "2026-10-12T20:52:18Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A02.S02"
+}
