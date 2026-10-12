@@ -123,6 +123,30 @@ def read_typed_elements(api, ids):
     return details, bounding_boxes
 
 
+def classify_box(row):
+    """A provider wrapper is not necessarily a geometrically valid AABB.
+
+    AC29 may return sentinel x/y extents of +/-1e35 for unknown, MEP or
+    segment types. A 2D marker may return a valid zero-volume box. Neither
+    case proves a closed 3D solid.
+    """
+    from math import isfinite
+    provider = row.get("provider") if isinstance(row, dict) else None
+    b = provider.get("boundingBox3D") if isinstance(provider, dict) else None
+    if not isinstance(b, dict):
+        return "INVALID_OR_UNBOUNDED"
+    for lo, hi in (("xMin", "xMax"), ("yMin", "yMax"), ("zMin", "zMax")):
+        a, z = b.get(lo), b.get(hi)
+        if (type(a) not in (int, float) or type(z) not in (int, float)
+                or not isfinite(a) or not isfinite(z)
+                or max(abs(a), abs(z)) >= 1e30 or a > z):
+            return "INVALID_OR_UNBOUNDED"
+    if any(b[hi] - b[lo] <= 1e-6 for lo, hi in
+           (("xMin", "xMax"), ("yMin", "yMax"), ("zMin", "zMax"))):
+        return "VALID_ZERO_VOLUME_AABB"
+    return "VALID_NONZERO_VOLUME_AABB"
+
+
 def collect(api):
     start = assert_project(api)
     version = api("GetAddOnVersion", {}).get("version")
@@ -172,9 +196,14 @@ def collect(api):
         if isinstance(row["provider"], dict) else "UNRESOLVED"
         for row in details
     ))
-    bboxes_ok = sum(isinstance(row["provider"], dict) and
-                    isinstance(row["provider"].get("boundingBox3D"), dict)
-                    for row in boxes)
+    bbox_kinds = Counter(classify_box(row) for row in boxes)
+    bboxes_ok = (bbox_kinds["VALID_ZERO_VOLUME_AABB"]
+                 + bbox_kinds["VALID_NONZERO_VOLUME_AABB"])
+    invalid_by_type = dict(Counter(
+        detail["provider"].get("type", "UNRESOLVED")
+        for detail, box in zip(details, boxes)
+        if classify_box(box) == "INVALID_OR_UNBOUNDED"
+    ))
     snapshot = {
         "schema": "APA_TATARSTAN_READONLY_SNAPSHOT_V1",
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
@@ -187,6 +216,14 @@ def collect(api):
         "typed_readback": details,
         "bounding_boxes_3d": boxes,
         "bounding_boxes_available": bboxes_ok,
+        "bounding_boxes_provider_rows": len(boxes),
+        "bounding_boxes_invalid_or_unbounded": bbox_kinds["INVALID_OR_UNBOUNDED"],
+        "bounding_boxes_valid_zero_volume": bbox_kinds["VALID_ZERO_VOLUME_AABB"],
+        "bounding_boxes_valid_nonzero_volume": bbox_kinds["VALID_NONZERO_VOLUME_AABB"],
+        "bounding_boxes_invalid_by_type": invalid_by_type,
+        "bbox_validation_scope": (
+            "SENTINEL_FILTERED_NUMERIC_AABB_ONLY; NONZERO_AABB_DOES_NOT_PROVE_SOLID"
+        ),
         "native_status": native_status,
         "native_error": native_error,
         "geometry_coverage": (
@@ -250,7 +287,9 @@ def main(argv=None):
     print("PROJECT VERIFIED:", snapshot["project"]["projectPath"])
     print("INVENTORY GUIDS:", snapshot["inventory_count"])
     print("TYPED ELEMENTS:", snapshot["typed_element_counts"])
-    print("3D BOUNDS:", snapshot["bounding_boxes_available"])
+    print("VALID 3D AABB INTERVALS:", snapshot["bounding_boxes_available"])
+    print("INVALID/UNBOUNDED AABBS:", snapshot["bounding_boxes_invalid_or_unbounded"])
+    print("NONZERO-VOLUME AABBS:", snapshot["bounding_boxes_valid_nonzero_volume"])
     print("MODEL DUMP:", snapshot["native_status"])
     if snapshot["native_error"]:
         print("MODEL DUMP LIMIT:", snapshot["native_error"])
