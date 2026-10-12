@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:a35e049db6c134427d4260b718ffd47e32f52ff31564bf401f628c9feb1c75dc",
+  "index_commit_sha": "bd3966ea89a7609b6fe49f6d763610e42f17c435",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "bd3966ea89a7609b6fe49f6d763610e42f17c435",
+  "report_path": "docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-010000Z-compatible-integration-v31/REPORT.md",
+  "report_sha256": "2ac8469b010fb4451ce5ab385e92f42e7fb6a8206a99d553c5683b5fe2792792",
+  "run_id": "APA-RUN-20261012-010000Z-compatible-integration-v31",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}
