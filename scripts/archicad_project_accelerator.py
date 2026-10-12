@@ -149,6 +149,11 @@ def compile_project_normative_pack(brief,project_pack,native_context,requirement
     return {'normative':normative,'projectPack':NORM.attach_to_project_pack(project_pack,normative)}
 
 
+def evaluate_project_native_requirements(normative,native_context,native_model,requirements,junctions):
+    import archicad_normative_bindings as NORM
+    return NORM.evaluate_native_source_conditions(normative,native_context,native_model,requirements,junctions)
+
+
 def compile_project_spatial_plan(brief, project_pack, authored_layout):
     """Plan authored rooms/axes/load paths in the existing accelerator.
 
