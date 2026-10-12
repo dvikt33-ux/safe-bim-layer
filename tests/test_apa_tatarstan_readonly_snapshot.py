@@ -62,8 +62,9 @@ class FakeApi:
         if name == "GetModelDumpV1":
             if self.no_native:
                 raise RuntimeError("COMMAND_NOT_INSTALLED")
-            return {"schemaVersion": "1.0", "elements": [], "bodies": [],
-                    "materials": [], "nativeBodySlots": 0}
+            return {"schemaVersion": "1.0", "elements": [],
+                    "bodies": [{"parentGuid": A, "vertices": [], "faces": []}],
+                    "materials": [], "nativeBodySlots": 1}
         raise AssertionError("Unexpected command: " + name)
 
 
