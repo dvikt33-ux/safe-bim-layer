@@ -1028,7 +1028,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A04.S02
 
-**Привязать выбранные узлы и композиции к нативным BIM элементам** — BUILD / IN_PROGRESS / P4
+**Привязать выбранные узлы и композиции к нативным BIM элементам** — BUILD / DONE_PUBLISHED / P4
 
 - Parent: APA-P70 → APA-P70.A04
 - Topic: PRODUCT_DEVELOPMENT
@@ -1036,15 +1036,15 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P70.A04.S01, APA-P70.A03.S02
 - Related, check before duplicating: none
 - Acceptance: Редактируемые системы и узлы с параметрами, классификацией, происхождением и invalidation при изменении
-- Owner/lease: work-construction-junctions-20261012 / 2026-10-12T16:35:09Z
+- Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md)
 - Existing V2 runs: [APA-RUN-20261012-130748Z-construction-junction-native-support-s02](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-130748Z-construction-junction-native-support-s02/REPORT.md) (receipt verified)
-- Expected output: Редактируемые системы и узлы с параметрами, классификацией, происхождением и invalidation при изменении
+- Expected output: Editable source-bound ARMO PF001/PF002 batten/counterbatten support sub-junction: native50x50mm structural-timber Morph, existing Archicad2.0Beam classification,5.9801000489m model span, actual75cm2contact/no new collisions, pinned source/body/material/story invalidation.95accepted GUID/body signatures preserved,96GUID/38context saved/reopened.426Windows/LinuxPASS. Full assembly/fixings/grade/capacity and other families not inferred.
 
 ## APA-P70.A04.S03
 
-**Проверить узлы окон, облицовки, перекрытий и кровельных примыканий** — VALIDATION / READY / P4
+**Проверить узлы окон, облицовки, перекрытий и кровельных примыканий** — VALIDATION / IN_PROGRESS / P4
 
 - Parent: APA-P70 → APA-P70.A04
 - Topic: PRODUCT_DEVELOPMENT
@@ -1052,7 +1052,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P70.A04.S02
 - Related, check before duplicating: none
 - Acceptance: Для каждого узла классификация PASS_GEOMETRY/PASS_DOCUMENTED/PASS_ENGINEERING/NOT_VERIFIED; ложные approvals запрещены
-- Owner/lease: unclaimed
+- Owner/lease: work-construction-junctions-20261012 / 2026-10-12T17:10:00Z
 - Requires owner approval: False
 - Source inputs: [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12)
 - Existing V2 runs: none
