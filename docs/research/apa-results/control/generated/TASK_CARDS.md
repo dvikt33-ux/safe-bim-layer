@@ -1012,7 +1012,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A04.S01
 
-**Вывести из модели обязательные семейства узлов и их условия применимости** — INTEGRATION / IN_PROGRESS / P4
+**Вывести из модели обязательные семейства узлов и их условия применимости** — INTEGRATION / DONE_PUBLISHED / P4
 
 - Parent: APA-P70 → APA-P70.A04
 - Topic: PRODUCT_DEVELOPMENT
@@ -1020,15 +1020,15 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P70.A03.S01, APA-P70.A02.S04
 - Related, check before duplicating: APA-P70.A11.S03
 - Acceptance: Матрица всех применимых примыканий/отверстий/армопоясов/связей/крепежа с точным source/detail ID и открытыми пробелами
-- Owner/lease: work-construction-junctions-20261012 / 2026-10-12T16:08:54Z
+- Owner/lease: unclaimed
 - Requires owner approval: False
 - Source inputs: [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-P70-A11-S03-NATIVE95-V32-20261012](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-110611Z-connected-native-continuation-v32/REPORT.md)
 - Existing V2 runs: [APA-RUN-20261012-122511Z-construction-junctions-s01](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-122511Z-construction-junctions-s01/REPORT.md) (receipt verified), [APA-RUN-20261012-123259Z-construction-junctions-s01-openings](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-123259Z-construction-junctions-s01-openings/REPORT.md) (receipt verified)
-- Expected output: Матрица всех применимых примыканий/отверстий/армопоясов/связей/крепежа с точным source/detail ID и открытыми пробелами
+- Expected output: Accepted-model construction junction/source coverage:47interfaces/34actual planar BREP contacts, actual0.4x0.6m Generic Opening host holes; seven model families incl absent cladding;73context/1142source Details;95GUID/body signatures retained;414Windows/LinuxPASS. Reinforcement/fastener/source-grade/full-assembly/engineering gaps explicit. Next ready bounded sub-junction:source PF001/PF002 batten/counterbatten contact.
 
 ## APA-P70.A04.S02
 
-**Привязать выбранные узлы и композиции к нативным BIM элементам** — BUILD / READY / P4
+**Привязать выбранные узлы и композиции к нативным BIM элементам** — BUILD / IN_PROGRESS / P4
 
 - Parent: APA-P70 → APA-P70.A04
 - Topic: PRODUCT_DEVELOPMENT
@@ -1036,7 +1036,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P70.A04.S01, APA-P70.A03.S02
 - Related, check before duplicating: none
 - Acceptance: Редактируемые системы и узлы с параметрами, классификацией, происхождением и invalidation при изменении
-- Owner/lease: unclaimed
+- Owner/lease: work-construction-junctions-20261012 / 2026-10-12T16:35:09Z
 - Requires owner approval: False
 - Source inputs: [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md)
 - Existing V2 runs: none

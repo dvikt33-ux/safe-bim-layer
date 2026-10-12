@@ -11,13 +11,13 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | --- | ---: |
 | BLOCKED | 13 |
 | CLAIMED | 0 |
-| DONE_PUBLISHED | 24 |
+| DONE_PUBLISHED | 25 |
 | IN_PROGRESS | 1 |
 | PARTIAL | 16 |
-| READY | 37 |
+| READY | 36 |
 | SUPERSEDED | 0 |
 | DISPATCHABLE_NOW | 18 |
-| HELD_BY_DEPENDENCIES | 35 |
+| HELD_BY_DEPENDENCIES | 34 |
 | EXPIRED_LEASES | 0 |
 
 ## Полный цикл разработки APA
@@ -30,7 +30,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| APA-P70.A04.S01 | work-construction-junctions-20261012 | 2026-10-12T16:08:54Z | required-junction-condition-coverage |
+| APA-P70.A04.S02 | work-construction-junctions-20261012 | 2026-10-12T16:35:09Z | native-details-to-cse-binding |
 
 ## CONTROL — 0 ready
 
@@ -103,7 +103,6 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | APA-P50.A03.S01 | APA-P50.A01.S03, APA-P50.A02.S02 |
 | APA-P50.A03.S02 | APA-P50.A03.S01 |
 | APA-P70.A01.S02 | APA-P50.A01.S01 |
-| APA-P70.A04.S02 | APA-P70.A04.S01 |
 | APA-P70.A04.S03 | APA-P70.A04.S02 |
 | APA-P70.A05.S01 | APA-P70.A02.S02, APA-P70.A04.S03 |
 | APA-P70.A05.S02 | APA-P70.A05.S01 |

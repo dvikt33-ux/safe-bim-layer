@@ -1,18 +1,18 @@
 {
   "active": [
-    "APA-P70.A04.S01"
+    "APA-P70.A04.S02"
   ],
-  "artifact_count": 112,
+  "artifact_count": 115,
   "counts": {
     "BLOCKED": 13,
     "CLAIMED": 0,
     "DISPATCHABLE_NOW": 18,
-    "DONE_PUBLISHED": 24,
+    "DONE_PUBLISHED": 25,
     "EXPIRED_LEASES": 0,
-    "HELD_BY_DEPENDENCIES": 35,
+    "HELD_BY_DEPENDENCIES": 34,
     "IN_PROGRESS": 1,
     "PARTIAL": 16,
-    "READY": 37,
+    "READY": 36,
     "SUPERSEDED": 0
   },
   "development": {
@@ -39,7 +39,7 @@
         "total": 4
       },
       {
-        "done": 0,
+        "done": 1,
         "id": "APA-P70.A04",
         "status": "IN_PROGRESS",
         "title": "Конструктивные узлы, кладка, фасады и сопряжения",
@@ -96,9 +96,9 @@
       }
     ],
     "active": [
-      "APA-P70.A04.S01"
+      "APA-P70.A04.S02"
     ],
-    "done": 13,
+    "done": 14,
     "next_eligible": "APA-P70.A02.S02",
     "plan_id": "APA-P70",
     "status": "IN_PROGRESS",
@@ -155,7 +155,6 @@
     "APA-P50.A03.S01",
     "APA-P50.A03.S02",
     "APA-P70.A01.S02",
-    "APA-P70.A04.S02",
     "APA-P70.A04.S03",
     "APA-P70.A05.S01",
     "APA-P70.A05.S02",
@@ -176,7 +175,7 @@
   "known_published_v2_runs": 30,
   "legacy_reports": "NOT_FULLY_INDEXED",
   "orphan_v2_manifests": [],
-  "plan_revision": 106,
+  "plan_revision": 108,
   "publisher": "DEPLOYED_SYNTHETIC_E2E_PASS",
   "research_lookahead": {
     "linked_product_substeps": 39,
@@ -297,7 +296,7 @@
       ]
     },
     "PRODUCT_DEVELOPMENT": {
-      "done": 13,
+      "done": 14,
       "ready": 2,
       "task_ids": [
         "APA-P70.A01.S01",
