@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 125,
+  "revision": 126,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -3750,7 +3750,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -3829,9 +3829,9 @@
         "Exact native next step: approve actual roof design/contour and a separate saved copy, qualify an available exposed SDK/UI memo operation preserving all edge data/holes, then use the existing SceneWriter once with independent actual lower-contact/collision/GUID/material/story and Save/Open readback. Candidate/source contract is not LIVE write acceptance. S03PARTIAL/S10BLOCKED retained."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "work-bim-documentation-20261013",
+      "lease_until": "2026-10-13T02:02:01Z",
+      "claim_ref": "APA-CLAIM-DOCUMENTATION-20261012T230201Z",
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
