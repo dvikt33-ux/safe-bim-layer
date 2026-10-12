@@ -1,0 +1,79 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261012-011500Z-connected-system-v31",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A11",
+  "substep_id": "APA-P70.A11.S02",
+  "executor": "codex-apa-system-v31-20261012",
+  "executor_run_id": "APA-RUN-20261012-011500Z-connected-system-v31",
+  "phase": "SOURCE",
+  "started_at": "2026-10-12T01:15:24Z",
+  "finished_at": "2026-10-12T01:15:24Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29build5101RUS(capturednative)",
+    "sdk": null,
+    "tapir": "1.5.10",
+    "source_branch": "feature/apa-connected-batch-v31-20261012"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/53",
+      "revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+      "source_sha": "286b1ae8614421b927af95c4c278147c8d55baba"
+    }
+  ],
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-CONNECTED-SYSTEM-V31",
+      "statement": "Combined22primary/48GUID native readback, source preservation, current Details/solver/collision/IFC interactions pass; mandatory unsupported modules explicitly block engineering scope.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-SYSTEM-ACCEPTANCE"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-SYSTEM-ACCEPTANCE",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-011500Z-connected-system-v31/acceptance.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "5bf1f56155e868263c74c967eea0cbfd69163a6bbcb096d13abdf480705b878b",
+      "source_revision": "286b1ae8614421b927af95c4c278147c8d55baba"
+    }
+  ],
+  "report_markdown": "# APA-P70.A11.S02 — connected native system acceptance\n\nFresh identity-first read-only execution against the authorized isolated AC29\nbuild5101RUS/Tapir1.5.10 project confirms the combined22primary/48GUID model.\nAll48previous native geometry/material/story/relationship signatures remain\nequal to the independently verified save/reopen capture. Saved PLN SHA256\n`3164f8ea86c9df4491d4b66c852c6b247d6769faf857a5f3381867e3aa801f2d` is unchanged before/after this system test.\n\nThe combined scenario re-reads core/material/GDL plus Roof/Morph/one Ventilation\nroute through the retained typed adapters and native absolute metre XYZ context.\nThe retained SQLite ledger is read-only; prior verified writes, stopped attempts\nand GUID reservations remain intact. The earlier component acceptance proves\nexplicit SaveProject/OpenProject success and independent whole-model readback.\nThis system acceptance makes zero native writes, exports, saves or reopen calls.\n\nActual interactions pass together: two selected Details entity/fact joins bind\nto the current native Roof; CP-SAT selects the existingY46route over current\nnative obstacles and physical0.262x0.212m flange envelope; native duct-vs18core\ncollision query returns zero rows; separate Roof/Morph query reports a positive\nbody collision. IfcOpenShell parses the retained local IFC2X3 and confirms all22\nworld-bound comparisons within1e-5m, with one explicitly mapped physical duct.\nThese are geometry/cooperation tests, not structural or full IFC-semantic approval.\n\nAll8roof/morph/mep optional switch combinations resolve independently offline.\nA disabled operation is rejected. Each required unsupported module Shell,\nOpening, SEO, SAM, SAF, normative evaluator and Twinmotion returns an explicit\nrejection; no required module is silently omitted or represented by a placeholder\nPASS. Eight Details entities lack dimensions and source commit=false continues\nto block the whole assembly. MEP ports remain unconnected. Engineering, visual\nUI and whole manufacturer assembly acceptance remain BLOCKED/NOT_VERIFIED.\n\nThe bounded shared-system test is accepted, with9explicit gap areas. The first\nactionable gap is the reproduced28historical Windows SQLite fixture cleanup\nerrors; complete Windows regression PASS is not claimed. Remaining adapters,\nsource/engineering inputs and provider limits are preserved in the gap register.\nLarge-model optimization and installer are not accepted at this stage.\n\n[Code draftPR53](https://github.com/dvikt33-ux/safe-bim-layer/pull/53), revision\n`286b1ae8614421b927af95c4c278147c8d55baba`,\n[Linux340test CI](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38189925845).\n[Selected acceptance](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-011500Z-connected-system-v31/acceptance.json) and\n[gap register](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-011500Z-connected-system-v31/gap-register.json).\nFull current raw responses and model identifiers stay local unchanged; public\nproof contains only selected statuses/counts/hashes and no local paths, original\nnative/IFC identities, full project metadata or binaries. main/APX/accepted code\nbranches are unchanged. No paid runtime or delegated agent.\n\nNext: A11.S03 gap-driven repairs; full product acceptance is not complete.\n",
+  "next_substep": "APA-P70.A11.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

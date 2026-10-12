@@ -1,0 +1,60 @@
+{
+  "systemAcceptance": "BOUNDED_WORKING_SYSTEM_PASS",
+  "completeProduct": "NOT_COMPLETE",
+  "gaps": [
+    {
+      "id": "G01",
+      "area": "Windows regression fixtures",
+      "status": "REPRODUCED",
+      "next": "Close two legacy SQLite fixture connections before TemporaryDirectory cleanup; run complete Windows suite"
+    },
+    {
+      "id": "G02",
+      "area": "Details73context records",
+      "status": "MISSING_ADAPTER",
+      "next": "Adapt Porotherm context IR without inventing source facts"
+    },
+    {
+      "id": "G03",
+      "area": "Whole manufacturer assembly",
+      "status": "BLOCKED_SOURCE",
+      "next": "Eight missing dimensions and source commit=false require qualified source inputs"
+    },
+    {
+      "id": "G04",
+      "area": "Connected MEP network",
+      "status": "MISSING_IMPLEMENTATION",
+      "next": "Multi-route junction ownership and connected endpoint verification"
+    },
+    {
+      "id": "G05",
+      "area": "Shell/Opening/SEO",
+      "status": "UNSUPPORTED_IN_CONNECTED_EXECUTOR",
+      "next": "Verified provider capability and typed bounded adapters before writes"
+    },
+    {
+      "id": "G06",
+      "area": "SAM/SAF structural solver and norms",
+      "status": "MISSING_IMPLEMENTATION_AND_INPUTS",
+      "next": "Loads, applicable norms, actual solver and result provenance"
+    },
+    {
+      "id": "G07",
+      "area": "IFC face/quantity/full semantics; MCP/Twinmotion",
+      "status": "NOT_VERIFIED",
+      "next": "Only current22identity/world-bound export is accepted"
+    },
+    {
+      "id": "G08",
+      "area": "Native metadata discrepancies",
+      "status": "EXPLICIT_PROVIDER_GAP",
+      "next": "MEP generic getter omissions; Morph memo closed flag disagrees with BREP; preserve dedicated proof"
+    },
+    {
+      "id": "G09",
+      "area": "Large-model speed/performance and installer",
+      "status": "NOT_READY",
+      "next": "Optimize measured working pipeline after required scope and final acceptance"
+    }
+  ]
+}

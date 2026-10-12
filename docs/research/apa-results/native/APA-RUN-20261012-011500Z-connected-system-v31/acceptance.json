@@ -1,0 +1,151 @@
+{
+  "status": "CONNECTED_SYSTEM_ACCEPTANCE_WITH_EXPLICIT_ENGINEERING_GAPS",
+  "modelWriteAttempts": 0,
+  "fullEngineeringAcceptance": "BLOCKED",
+  "automaticRetry": false,
+  "primaryCount": 22,
+  "inventoryCount": 48,
+  "wholePrior48GeometryPreserved": true,
+  "plnSha256": "3164f8ea86c9df4491d4b66c852c6b247d6769faf857a5f3381867e3aa801f2d",
+  "nativeStatus": "LIVE_VERIFIED_BOUNDED",
+  "offlineStatus": "MODULE_SWITCHES_AND_REQUIRED_REJECTION_PASS",
+  "optionalSwitches": [
+    {
+      "enabled": [],
+      "status": "OFFLINE_PASS"
+    },
+    {
+      "enabled": [
+        "mep"
+      ],
+      "status": "OFFLINE_PASS"
+    },
+    {
+      "enabled": [
+        "morph"
+      ],
+      "status": "OFFLINE_PASS"
+    },
+    {
+      "enabled": [
+        "morph",
+        "mep"
+      ],
+      "status": "OFFLINE_PASS"
+    },
+    {
+      "enabled": [
+        "roof"
+      ],
+      "status": "OFFLINE_PASS"
+    },
+    {
+      "enabled": [
+        "roof",
+        "mep"
+      ],
+      "status": "OFFLINE_PASS"
+    },
+    {
+      "enabled": [
+        "roof",
+        "morph"
+      ],
+      "status": "OFFLINE_PASS"
+    },
+    {
+      "enabled": [
+        "roof",
+        "morph",
+        "mep"
+      ],
+      "status": "OFFLINE_PASS"
+    }
+  ],
+  "unsupportedMandatory": [
+    {
+      "module": "shell",
+      "requiredStatus": "UNSUPPORTED_BLOCKED",
+      "response": "UNKNOWN_OPTIONAL_MODULE",
+      "nativeWrites": 0
+    },
+    {
+      "module": "opening",
+      "requiredStatus": "UNSUPPORTED_BLOCKED",
+      "response": "UNKNOWN_OPTIONAL_MODULE",
+      "nativeWrites": 0
+    },
+    {
+      "module": "seo",
+      "requiredStatus": "UNSUPPORTED_BLOCKED",
+      "response": "UNKNOWN_OPTIONAL_MODULE",
+      "nativeWrites": 0
+    },
+    {
+      "module": "saf",
+      "requiredStatus": "UNSUPPORTED_BLOCKED",
+      "response": "UNKNOWN_OPTIONAL_MODULE",
+      "nativeWrites": 0
+    },
+    {
+      "module": "sam",
+      "requiredStatus": "UNSUPPORTED_BLOCKED",
+      "response": "UNKNOWN_OPTIONAL_MODULE",
+      "nativeWrites": 0
+    },
+    {
+      "module": "normative",
+      "requiredStatus": "UNSUPPORTED_BLOCKED",
+      "response": "UNKNOWN_OPTIONAL_MODULE",
+      "nativeWrites": 0
+    },
+    {
+      "module": "twinmotion",
+      "requiredStatus": "UNSUPPORTED_BLOCKED",
+      "response": "UNKNOWN_OPTIONAL_MODULE",
+      "nativeWrites": 0
+    }
+  ],
+  "disabledOperation": "DISABLED_MODULE_OPERATION",
+  "windowsFullSuite": "28_HISTORICAL_SQLITE_CLEANUP_ERRORS",
+  "visualUI": "NOT_VERIFIED",
+  "commandCounts": {
+    "GetProjectInfo": 2,
+    "GetStories": 2,
+    "GetAddOnVersion": 2,
+    "GetDetailsOfElements": 25,
+    "GetModelDumpV1": 3,
+    "GetMEPRoutingElements": 2,
+    "GetSubelementsOfHierarchicalElements": 1,
+    "GetAllElements": 2,
+    "GetMEPDistributionSystems": 1,
+    "GetMEPPorts": 1,
+    "GetIFCIdsOfElements": 2,
+    "GetCollisions": 2
+  },
+  "retainedWriter": "Same SceneWriter/SQLite; this acceptance made zero writes",
+  "priorPersistenceProof": "APA-RUN-20261012-010000Z-compatible-integration-v31",
+  "selectedDetailsFacts": 2,
+  "missingRequiredDetailsDimensions": 8,
+  "manufacturerAssemblyWriteAllowed": false,
+  "cpSatStatus": "OPTIMAL",
+  "nativeRouteMatchesSolver": true,
+  "ductVs18CoreCollisionRows": 0,
+  "roofMorphPositiveBodyCollision": true,
+  "ifcBoundsMatchCount": 22,
+  "ifcPhysicalRouteMappings": 1,
+  "coordinateSystem": "ABSOLUTE_PROJECT_XYZ",
+  "units": "m",
+  "journalStates": [
+    "PARTIAL_OR_UNKNOWN_OUTCOME",
+    "PARTIAL_OR_UNKNOWN_OUTCOME",
+    "COMPLETE_UNSAVED",
+    "EXISTING_MORPH_BODY_READBACK_PASS",
+    "PARTIAL_OR_UNKNOWN_OUTCOME",
+    "COMPLETE_UNSAVED",
+    "PARTIAL_OR_UNKNOWN_OUTCOME",
+    "COMPLETE_UNSAVED"
+  ],
+  "journalReadScope": "read-only; retained created reservations and previous stopped attempts preserved",
+  "verificationBoundary": "Native geometry and interactions PASS; complete engineering/manufacturer/connected-network acceptance BLOCKED"
+}
