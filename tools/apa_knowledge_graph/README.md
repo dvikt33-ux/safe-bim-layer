@@ -10,6 +10,7 @@ This is an **execution of a useful first slice**, not just a research memo. It b
 - `graph.py`: `build`, `task`, `artifact`, `descendants`, `field-impact`. Explicit normalized task/artifact reverse maps and revision fingerprint, source read-only; no implicit graph inference.
 - `multidoc.py`: combine 1–16 documented artifact IDs; return only a small set of task cards, shared evidence refs, citation provenance flags and count of omitted results.
 - `delta.py`: compare authoritative plan versions or field-value snapshots; report exact changed records / keys and only their candidate impacts.
+- `sections.py`: build a disposable SQLite FTS5 **section-level** index for allowlisted Markdown roots, split documents by heading/line, search only top-K snippets, verify original source-byte SHA-256 before returning; tag result origin as `ARCHIVED_SOURCE`, `RESEARCH_RUN`, `PROJECT_CONTROL`, `OTHER_DOCUMENT`. **Class is a path label, not a normative approval**. Can scope by class.
 - `tests/`: negative tests of cross-project-class contamination, proposed vs verified links, source pinned digests, stale index, cycle termination, content/value diff, authorization flags, no plan changes, CLI budgets, real APA plan regression.
 - `.github/workflows/apa-knowledge-impact-poc-ci.yml`: read-only `pull_request` workflow, Python 3.11 stdlib, no token persistence, derived JSON in GitHub Actions temporary directory.
 
@@ -36,6 +37,14 @@ python tools/apa_knowledge_graph/multidoc.py \
   --artifacts ART-APA-RU-JUNCTION-NORMS ART-APA-CSE-RESEARCH \
   --max-tasks 5
 
+# Content retrieval without reading every Markdown file into GPT:
+python tools/apa_knowledge_graph/sections.py build \
+  --root docs/research/apa-results --out /tmp/apa-sections.sqlite
+
+python tools/apa_knowledge_graph/sections.py search \
+  --index /tmp/apa-sections.sqlite --query "кровли" \
+  --source-class PROJECT_CONTROL --limit 3 --max-snippet 160
+
 # Different canonical plan versions:
 python tools/apa_knowledge_graph/delta.py plan \
   --before old-project-plan.json --after new-project-plan.json --limit 10
@@ -56,6 +65,7 @@ An initial Actions execution [38320136500](https://github.com/dvikt33-ux/safe-bi
 - Source canonical plan revision **126 at CI checkout**, 91 tasks, 166 artifacts (the earlier research memo saw rev 125).
 - `ART-APA-RU-JUNCTION-NORMS` direct registered referencing tasks **15**; CLI with `--limit 5` returned 5 and `omitted=10`, all labelled `POSSIBLE_IMPACT`.
 - Multi-document join `ART-APA-RU-JUNCTION-NORMS` + `ART-APA-CSE-RESEARCH` completed with `max_tasks=5`. Both are flagged `UNPINNED_OR_UNVERIFIED_URI` because their current URIs point to a moving feature branch.
+- A later Actions run [38320696467](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38320696467) passed **43 tests**, indexed **204 actual Markdown files / 2,113 sections**, and read back bytes for returned hits. **Adversarial failure found**: for a broad query `кровли`, the first unfiltered hit was a research gold-query report, not a normative primary source. This motivated the subsequent source-class filtering; a later CI result must confirm the new filter.
 - These are **observed functional checks**, not a corpus-wide semantic benchmark or measured billed GPT-token reduction.
 - New stale-index and pinned-revision guards have been added after the first run; their separate CI result must be rechecked before calling the latest head PASS.
 
@@ -69,6 +79,7 @@ GitHub: https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38320136500
 - Empty field edges do **not** mean no impact; output is `UNKNOWN`. A linked document can be unreadable or superseded; retrieval must validate exact version, edition, permissions and facts before authoritative answers.
 - `source_revision` in the lineage is a syntactically pinned digest; it is **not an attestation of its authenticity**. Production needs independent byte readback/receipt signatures before trusting links.
 - No automatic propagation to derived documents and no automatic edit/claim/DONE. Existing `TASK_PROPOSAL_V1` → independent `TASK_REVIEW_V1` → CAS `PROJECT_PLAN.json` protocol remains untouched.
+- The FTS lexical backend is **not** a normative source classifier: it distinguishes path classes and can filter reports out, but cannot attest official SP scope, effective editions, truth or Russian stemming. A zero-hit scoped query does NOT mean the regulation does not exist; it can be outside the GitHub checkout.
 - No passive change watcher or MCP endpoint yet: caller executes explicit CLI or can wrap it in a **read-only** tool adapter once independently audited.
 - Index contains source URI and task title; do not serve it publicly unless access restrictions and licensed material controls are checked.
 - Early raw-to-compact character ratios reported by prior research measure **text size**, not billed GPT tokens or retrieval quality. No final DB technology selection was made.
