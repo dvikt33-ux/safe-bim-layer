@@ -31,9 +31,10 @@ READS = frozenset({"GetProjectInfo", "GetStories", "GetAddOnVersion",
                   "GetAllElements", "Get3DBoundingBoxes", "GetDetailsOfElements",
                   "GetAttributesByType", "GetSubelementsOfHierarchicalElements", "GetModelDumpV1",
                   "GetCollisions", "GetBuildingMaterials", "GetComposites", "GetProfiles",
-                  "GetSurfaces", "GetAvailableLibraryParts", "GetGDLParametersOfElements", "API.GetProductInfo"})
+                  "GetSurfaces", "GetAvailableLibraryParts", "GetGDLParametersOfElements", "API.GetProductInfo",
+                  'API.GetAllClassificationSystems','API.GetAllClassificationsInSystem','GetClassificationsOfElements'})
 NATIVE_MUTATIONS = RUN.ALLOWED_WRITES | RUN.EXTENDED_WRITES | frozenset({"ModifySlabs","ModifyMorphs",
-    'ConnectMEPElements','ModifyMEPRoutingElements','CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks'})
+    'ConnectMEPElements','ModifyMEPRoutingElements','CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks','SetClassificationsOfElements'})
 PRIMITIVES = {
     "pavilion-frame-v1": {"status": "EXECUTABLE_PENDING_LIVE_ACCEPTANCE",
                           "executor": "SceneWriter", "elementCount": 12},
@@ -52,7 +53,7 @@ def write_json(path, value):
 
 
 def native_transport(command, params):
-    if command != "API.GetProductInfo":
+    if command not in {'API.GetProductInfo','API.GetAllClassificationSystems','API.GetAllClassificationsInSystem'}:
         return RUN.tapir(RUN.PORT, command, params)
     request = urllib.request.Request(f"http://127.0.0.1:{RUN.PORT}",
         data=json.dumps({"command": command, "parameters": params}).encode("utf-8"),
@@ -60,7 +61,7 @@ def native_transport(command, params):
     with urllib.request.urlopen(request, timeout=15) as response:
         result = json.loads(response.read().decode("utf-8"))
     if result.get("succeeded") is not True or not isinstance(result.get("result"), dict):
-        raise ValueError("ARCHICAD_PRODUCT_INFO_UNAVAILABLE")
+        raise ValueError("ARCHICAD_PRODUCT_INFO_UNAVAILABLE" if command=='API.GetProductInfo' else 'ARCHICAD_CLASSIFICATION_INFO_UNAVAILABLE')
     return result["result"]
 
 

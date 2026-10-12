@@ -29,3 +29,26 @@ manufacturer assembly remain unverified.
 
 Tests cover true area contact, edge-only contact, overlap, polygon holes,
 nonplanar limitations, untrimmed roof gaps, missing cladding and source gates.
+
+## Source-bound native support junction
+
+The new counterbatten uses PF00250x50mm, follows the measured roof/batten slope
+and physically supports the unchanged PF00125x150mm batten. Its5.9801000489m
+length comes from the actual batten underside edge and upper-wall inner face.
+The native result has0.007500000016m2shared surface contact, no new native body
+collision, home story1and the accepted structural-timber Building Material.
+All95old GUID/body signatures remain unchanged; the model now has96GUID and
+38shared-context records. Only the new element receives the existing native
+Archicad2.0Beam classification; its editable tool remains Morph. Classification
+systems, defaults, original elements and the installed APX are unchanged.
+
+Source, roof, batten and endpoint-wall geometry/material/story pins invalidate
+the graph before another write if dependencies drift. Exact source dimensions,
+right-handed native placement-matrix rows and contact area are tested. Native
+classification readback accepts only the catalog's exact wrapper and the
+installed provider's exact direct ClassificationId row. The observed wrapper
+discrepancy was reconciled through read-only facts without replaying the setter.
+
+This completes the bounded batten/counterbatten support sub-junction. Fixings,
+timber grade, rafter support capacity, complete roof assembly and engineering
+remain NOT_VERIFIED; another family's completion is not inferred.

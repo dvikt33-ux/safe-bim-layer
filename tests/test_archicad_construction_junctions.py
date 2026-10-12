@@ -1,10 +1,12 @@
 import copy,sys,unittest
+from unittest.mock import patch
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
 import archicad_details_context as D
 from test_archicad_functional_gaps import guid
 from test_archicad_functional_expansion import cube
+import test_archicad_functional_expansion as TEST_EXP
 
 
 class JunctionCoverageTests(unittest.TestCase):
@@ -81,6 +83,85 @@ class JunctionCoverageTests(unittest.TestCase):
         for face in n['elements'][0]['bodies'][0]['faces']:face['holes']=[]
         o=D.native_junction_coverage(c,n,D.DetailsContext(ROOT))['hostedOpenings'][0]
         self.assertEqual(o['status'],'NOT_VERIFIED');self.assertIn('AMBIGUOUS',o['limitation'])
+
+
+class CounterbattenTests(unittest.TestCase):
+    def fixture(self):
+        source,context,native,selection=TEST_EXP.SourceSectionTests().fixture()
+        material={'buildingMaterial':{'guid':selection['expectedGuid'],'name':selection['name']}}
+        native['elements'][0]['materialBindings']=material;context['elements']['roof']['materialBindings']=material
+        batten=D.prepare_source_section(ROOT,source,context,native,guid(2),'c4',selection)
+        data=batten['plan']['graph']['operations'][0]['params']['morphsData'][0]
+        body=cube((10,.15,.025));body['guid']=guid(4);body['homeStory']={'index':1};body['materialBindings']=material
+        body['bodies'][0]['vertices']=[D.C.morph_api_world_point(p,data['basePoint'],[data[k] for k in ('xAxis','yAxis','zAxis')]) for p in data['body']['vertices']]
+        wall=cube((10,.3,3),(40,47.85,3));wall.update(guid=guid(5),homeStory={'index':1},materialBindings=material)
+        native['elements'] += [body,wall]
+        context['elements']['batten']={'guid':guid(4),'kind':'Morph','floorIndex':1,'hostGuid':guid(2),'bounds':[D.C.ROOF.bounds(body)],'materialBindings':material}
+        context['elements']['wall']={'guid':guid(5),'kind':'Wall','floorIndex':1,'bounds':[D.C.ROOF.bounds(wall)],'materialBindings':material}
+        source['inventory']=[guid(2),guid(4),guid(5)]
+        return source,context,native
+    def part(self):
+        s,c,n=self.fixture();return D.prepare_counterbatten_junction(ROOT,s,c,n,guid(4),guid(5))
+    def test_source_relation_section_and_model_span_are_pinned(self):
+        p=self.part();b=p['binding'];self.assertEqual(b['sourceSectionMeters'],{'width':.05,'height':.05})
+        self.assertEqual(b['physicalContact']['sourceRelation'],'battens_supported_by_counterbattens')
+        self.assertEqual(b['physicalContact']['expectedAreaSquareMeters'],.0075)
+        self.assertEqual(len(b['nativeDependencyBodies']),2);self.assertFalse(b['assemblyWriteAllowed'])
+        self.assertEqual(b['modelSpanAuthority']['endY'],47.85)
+    def test_predicted_real_source_member_contacts_batten_underside(self):
+        s,c,n=self.fixture();p=D.prepare_counterbatten_junction(ROOT,s,c,n,guid(4),guid(5));data=p['plan']['graph']['operations'][0]['params']['morphsData'][0]
+        body=cube();body['guid']=guid(6)
+        body['bodies'][0]['vertices']=[D.C.morph_api_world_point(v,data['basePoint'],[data[k] for k in ('xAxis','yAxis','zAxis')]) for v in data['body']['vertices']]
+        pair={guid(4):n['elements'][1],guid(6):body}
+        r=D.C.G.shared_surfaces(pair,{g:g for g in pair});self.assertAlmostEqual(r[0]['sharedAreaSquareMeters'],.0075,places=7)
+        v=data['body']['vertices'];a=D.C.morph_api_world_point(v[0],data['basePoint'],[data[k] for k in ('xAxis','yAxis','zAxis')]);z=D.C.morph_api_world_point(v[-2],data['basePoint'],[data[k] for k in ('xAxis','yAxis','zAxis')])
+        self.assertGreater(z[1],a[1]);self.assertGreater(z[2],a[2])
+    def test_wrong_upper_wall_story_rejected(self):
+        s,c,n=self.fixture()
+        c['elements']['wall']['floorIndex']=0
+        with self.assertRaisesRegex(ValueError,'UPPER_WALL'):D.prepare_counterbatten_junction(ROOT,s,c,n,guid(4),guid(5))
+    def test_changed_batten_height_rejected(self):
+        s,c,n=self.fixture();body=n['elements'][1]['bodies'][0]
+        for i in (1,3,5,7):body['vertices'][i][2]+=.02
+        with self.assertRaisesRegex(ValueError,'SECTION_DRIFT'):D.prepare_counterbatten_junction(ROOT,s,c,n,guid(4),guid(5))
+    def test_before_write_rejects_wrong_counterbatten_material(self):
+        p=self.part();params=copy.deepcopy(p['plan']['graph']['operations'][0]['params']);params['morphsData'][0]['buildingMaterialId']['guid']=guid(99)
+        with patch.object(D,'verify_source_section_binding',return_value={}):
+            with self.assertRaisesRegex(ValueError,'MATERIAL_MISMATCH'):D.C.NativeAdapter('CreateMorphs').before_write(None,params,p['plan'])
+    def test_dependency_material_drift_invalidates_before_write(self):
+        p=self.part();b=p['binding'];dep=b['nativeDependencyBodies'][0]
+        def body(api,g):
+            if g==b['hostGuid']:return {'native':{'homeStory':b['hostHomeStory'],'materialBindings':b['hostMaterialBindings'],'hash':b['hostGeometryHash']}}
+            return {'native':{'homeStory':dep['homeStory'],'materialBindings':{},'hash':dep['geometryHash']}}
+        with patch('archicad_native_operations.element_body',side_effect=body),patch.object(D.C.ROOF,'geometry_signature',side_effect=lambda n:n['hash']),patch.object(D.C.RUN,'digest',side_effect=lambda v:v),patch('archicad_native_material_selection.resolve',return_value={}):
+            with self.assertRaisesRegex(ValueError,'DEPENDENCY_INVALIDATED'):D.verify_source_section_binding(None,b)
+
+
+class NativeClassificationTests(unittest.TestCase):
+    def selection(self):return {'systemName':'Native system','systemVersion':'2.0','systemGuid':guid(20),'itemId':'Beam','itemGuid':guid(21)}
+    def read(self,value):
+        with patch.object(D,'resolve_existing_classification',return_value={}):
+            return D.verify_member_classification(lambda c,p:{'elementClassifications':[{'classificationIds':value}]},guid(6),self.selection())
+    def wanted(self):return {'classificationSystemId':{'guid':guid(20)},'classificationItemId':{'guid':guid(21)}}
+    def test_actual_direct_classification_row_is_verified(self):self.assertEqual(self.read([self.wanted()])['status'],'ACTUAL_NATIVE_MEMBER_CLASSIFICATION_PASS')
+    def test_catalog_wrapped_classification_row_is_verified(self):self.assertEqual(self.read([{'classificationId':self.wanted()}])['status'],'ACTUAL_NATIVE_MEMBER_CLASSIFICATION_PASS')
+    def test_wrong_item_or_duplicate_row_is_not_verified(self):
+        wrong=self.wanted();wrong['classificationItemId']['guid']=guid(99)
+        for rows in ([wrong],[self.wanted(),self.wanted()]):
+            with self.assertRaisesRegex(ValueError,'READBACK_MISMATCH'):self.read(rows)
+    def test_unrecognized_extra_wrapper_keys_are_rejected(self):
+        with self.assertRaisesRegex(ValueError,'READBACK_MISMATCH'):self.read([{'classificationId':self.wanted(),'extra':True}])
+    def test_changed_native_system_is_rejected(self):
+        selection=self.selection()
+        api=lambda c,p:{'classificationSystems':[{'name':selection['systemName'],'version':selection['systemVersion'],'classificationSystemId':{'guid':guid(99)}}]}
+        with self.assertRaisesRegex(ValueError,'SYSTEM_INVALIDATED'):D.resolve_existing_classification(api,selection)
+    def test_unclassifying_is_blocked_by_bounded_writer(self):
+        writer=D.C.RUN.SceneWriter(None,'unused',adapters=D.C.adapters(['morph']))
+        plan={'sourcePlanHash':'hash','binding':{}}
+        params={'elementClassifications':[{'elementId':{'guid':guid(6)},'classificationId':{'classificationSystemId':{'guid':guid(20)}}}]}
+        scene='negative-classification-explicit-item';command='SetClassificationsOfElements'
+        digest=D.C.RUN.digest({'sceneId':scene,'sourcePlanHash':'hash','command':command,'parameters':params,'target':{}})
+        with self.assertRaisesRegex(ValueError,'EXPLICIT_ITEM'):writer.execute_bound_operation(plan,scene,command,params,digest,lambda:None,lambda a,b:None)
 
 
 if __name__=='__main__':unittest.main()
