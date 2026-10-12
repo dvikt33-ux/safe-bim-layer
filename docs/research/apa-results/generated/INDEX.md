@@ -37,5 +37,6 @@ Generated projection from immutable V2 runs. Legacy reports remain in ARTIFACT_R
 | [APA-RUN-20261012-130748Z-construction-junction-native-support-s02](../runs/2026-10-12/APA-RUN-20261012-130748Z-construction-junction-native-support-s02/REPORT.md) | APA-P70.A04.S02 | SOURCE | EVIDENCE_READY |
 | [APA-RUN-20261012-132353Z-construction-junction-qualification-s03](../runs/2026-10-12/APA-RUN-20261012-132353Z-construction-junction-qualification-s03/REPORT.md) | APA-P70.A04.S03 | SOURCE | EVIDENCE_READY |
 | [APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon](../runs/2026-10-12/APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon/REPORT.md) | APA-P70.A11.S03 | SOURCE | EVIDENCE_READY |
+| [APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109](../runs/2026-10-12/APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109/REPORT.md) | APA-P70.A11.S03 | SOURCE | EVIDENCE_READY |
 
 Publication receipts are in ../receipts/. Evidence status is not publication status.

@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 33,
+  "run_count": 34,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -231,6 +231,13 @@
       "phase": "SOURCE",
       "report": "runs/2026-10-12/APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon/REPORT.md",
       "run_id": "APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-12/APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109/REPORT.md",
+      "run_id": "APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109",
       "substep_id": "APA-P70.A11.S03"
     }
   ],
