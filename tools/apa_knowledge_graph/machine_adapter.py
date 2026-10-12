@@ -195,9 +195,9 @@ def token_benchmark(raw_plan, raw_files, impact):
         raise ValueError("Token proxy needs separate tiktoken benchmark dependency") from exc
     enc = tiktoken.get_encoding("o200k_base")
     contexts = {
-        "naive_plan_and_selected_sources": (raw_plan.decode("utf-8") + "\\n" +
-                                            "\\n".join(raw_files[k].decode("utf-8") for k in ALLOWED_FILES)),
-        "exact_source_closure_raw": "\\n".join(raw_files[k].decode("utf-8") for k in ALLOWED_FILES),
+        "naive_plan_and_selected_sources": (raw_plan.decode("utf-8") + "\n" +
+                                            "\n".join(raw_files[k].decode("utf-8") for k in ALLOWED_FILES)),
+        "exact_source_closure_raw": "\n".join(raw_files[k].decode("utf-8") for k in ALLOWED_FILES),
         "compact_answer_payload": canonical(impact)
     }
     measurements = {k: {"utf8_bytes": len(v.encode("utf-8")),
