@@ -111,6 +111,18 @@ class RealSourceLineageTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,"Unreviewed PR68 revision"):
             M.parse_verified_sources(self.files,expected_commit="0"*40)
 
+    def test_proxy_token_measurement_is_explicitly_not_billing(self):
+        result = M.change_impact(self.build(), "roof_slope_length_m", "10", "12")
+        raw_plan = json.dumps({"tasks": self.index["tasks"], "artifacts": self.index["artifacts"]}).encode()
+        measured = M.token_benchmark(raw_plan, self.files, result)
+        cases = measured["cases"]
+        self.assertEqual(measured["tokenizer"], "tiktoken:o200k_base")
+        self.assertIn("actual_GPT6_billed_tokens", measured["not_measured"])
+        self.assertGreater(cases["naive_plan_and_selected_sources"]["o200k_base_proxy_tokens"],
+                           cases["compact_answer_payload"]["o200k_base_proxy_tokens"])
+        self.assertGreater(cases["exact_source_closure_raw"]["o200k_base_proxy_tokens"],
+                           cases["compact_answer_payload"]["o200k_base_proxy_tokens"])
+
     def test_github_fetch_refuses_unscoped_files(self):
         with self.assertRaisesRegex(ValueError,"allowlisted"):
             M.fetch_pinned(M.REPO,M.SOURCE_REF,"all-private-pln.json",opener=lambda *_:None)
