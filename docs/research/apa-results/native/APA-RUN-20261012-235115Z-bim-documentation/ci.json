@@ -1,0 +1,21 @@
+{
+  "runId": 38323722458,
+  "head": "f5aa4754a0ace251e8541001f17f6fa8eddfe8e5",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "offline-contracts (windows-latest)",
+      "id": 115057484988,
+      "conclusion": "success",
+      "tests": 587
+    },
+    {
+      "name": "offline-contracts (ubuntu-latest)",
+      "id": 115057485112,
+      "conclusion": "success",
+      "tests": 587
+    }
+  ],
+  "hostTests": 587,
+  "newTests": 14
+}

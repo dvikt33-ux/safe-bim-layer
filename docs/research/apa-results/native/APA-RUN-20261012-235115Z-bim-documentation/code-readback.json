@@ -1,0 +1,16 @@
+{
+  "head": "f5aa4754a0ace251e8541001f17f6fa8eddfe8e5",
+  "parent": "29aa06a6e9bbef0d991bea922e1ad4101ab29bdd",
+  "branch": "feature/apa-bim-documentation-20261013",
+  "pr": 70,
+  "files": {
+    ".github/workflows/archicad-contracts.yml": "ee824748bf4872da844aafac0ed8ab77364fb177",
+    "scripts/archicad_bim_documentation.py": "8ecc95399c6c4ab6279ac3d84f48d5f0147086c8",
+    "scripts/archicad_project_accelerator.py": "4a84c08e5fb17995016b7c35166b12c6bd759f17",
+    "scripts/archicad_scene_run.py": "0100c51161ef1af64351d2c4fd74ed3f9083115b",
+    "tests/test_archicad_bim_documentation.py": "60a92aa4ed73721c8d247c696063175638209e42",
+    "docs/APA_BIM_DOCUMENTATION.md": "186742a9baf18c47e37447b28663c2a9314367b8"
+  },
+  "githubBlobReadback": "ALL_SIX_MATCH",
+  "normativeAndSearchCode": "UNCHANGED"
+}
