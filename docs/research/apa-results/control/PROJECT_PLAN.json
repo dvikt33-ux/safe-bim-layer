@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 111,
+  "revision": 112,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2787,7 +2787,9 @@
       "depends_on": [
         "APA-P70.A04.S02"
       ],
-      "related": [],
+      "related": [
+        "APA-P70.A11.S03"
+      ],
       "inputs": [
         "ART-APA-RU-JUNCTION-NORMS",
         "ART-APA-DETAILS-V212"
