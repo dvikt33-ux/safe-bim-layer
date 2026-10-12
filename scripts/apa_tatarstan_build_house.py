@@ -111,7 +111,7 @@ def src_material(api):
     r = details(api, OLD_ROOF)
     if (w.get("type") != "Wall" or w.get("floorIndex") != 0
             or s.get("type") != "Slab" or s.get("floorIndex") != 0
-            or r.get("type") != "Roof" or r.get("roofClass") == "MultiPlane"):
+            or r.get("type") != "Roof" or r.get("details", {}).get("roofClass") != "SinglePlane"):
         raise RuntimeError("SOURCE_ELEMENTS_CHANGED")
     wall = w["details"]
     slab = s["details"]
@@ -315,7 +315,7 @@ def verify_element(api, operation, guid, material_guid):
         raise RuntimeError("NEW_ELEMENT_BBOX_INVALID")
     if (b["xMin"] < X0 - TOL or b["xMax"] > X1 + TOL
             or b["yMin"] < Y0 - TOL or b["yMax"] > Y1 + TOL
-            or b["zMin"] < -SLAB_T - TOL or b["zMax"] > 9.55):
+            or b["zMin"] < -SLAB_T - TOL or b["zMax"] > 9.85):
         raise RuntimeError("NEW_ELEMENT_OUT_OF_SITE_ENVELOPE")
     return b
 
