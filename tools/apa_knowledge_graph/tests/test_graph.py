@@ -48,13 +48,13 @@ def fields():
         "edges": [
             {"from": "area", "to": "calc", "kind": "USES_PARAMETER",
              "verification": "SOURCE_VERIFIED", "project_class": "IZHS",
-             "source_revision": "ref@a1", "evidence_uri": "file#area"},
+             "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "evidence_uri": "file#area"},
             {"from": "calc", "to": "check", "kind": "DERIVED_FROM",
              "verification": "SOURCE_VERIFIED", "project_class": "IZHS",
-             "source_revision": "ref@a1", "evidence_uri": "file#check"},
+             "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "evidence_uri": "file#check"},
             {"from": "area", "to": "other", "kind": "REFERENCES",
              "verification": "SOURCE_VERIFIED", "project_class": "IZHS",
-             "source_revision": "ref@a1", "evidence_uri": "file#mention"},
+             "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "evidence_uri": "file#mention"},
         ]
     }
 
@@ -133,7 +133,7 @@ class GraphTest(unittest.TestCase):
         lineage = fields()
         lineage["edges"].append({"from": "check", "to": "area", "kind": "DERIVED_FROM",
                                 "verification": "SOURCE_VERIFIED", "project_class": "IZHS",
-                                "source_revision": "ref@a1", "evidence_uri": "file#cycle"})
+                                "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "evidence_uri": "file#cycle"})
         r = field_impact(self.index, lineage, {"field_id": "area", "project_class": "IZHS",
                                                 "before": 1, "after": 2})
         self.assertEqual(r["verified_relation_count"], 2)
