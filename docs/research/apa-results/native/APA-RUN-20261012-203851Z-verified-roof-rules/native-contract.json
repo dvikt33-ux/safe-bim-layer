@@ -1,0 +1,37 @@
+{
+  "status": "SOURCE_VERIFIED_READY_NATIVE_SDK_PATH_RUNTIME_NOT_VERIFIED",
+  "sourceHashes": {
+    "Element_Modify_Polygon.cpp": "275cf4baa66bccf6f283a11e2f28256151527445e48aaf0e3dc3c02822502d5a",
+    "ExtendedElementCommands.cpp": "f83c83f61d6f77ff620c2b5b5f7dbf23b8ddc918d254e8a43a66b2a2cff87cee",
+    "AddOnMain.cpp": "39b82029552a8cbaf7e583bc7da3ce25f05a32e441e86a00f98723ab2b50e8d6"
+  },
+  "sdkPath": {
+    "authority": "Installed Archicad29 DevKit Element_Test polygon example",
+    "functions": [
+      "ACAPI_Element_GetMemo",
+      "ACAPI_Polygon_InsertPolyNode",
+      "ACAPI_Element_ChangeMemo"
+    ],
+    "planeRoofExplicitlyAccepted": true,
+    "nativeGuidRetainedByMemoTarget": true,
+    "edgeArrayWarning": "Example can clear edge customizations; production must preserve synchronized edge trims, side materials and roof edge types"
+  },
+  "installedProvider": {
+    "sourceCommand": "ModifyRoofs",
+    "singlePlaneRejectedInInspectedSource": true,
+    "sourceBinaryCorrespondence": "NOT_VERIFIED",
+    "noQualifiedRuntimeEditContract": true
+  },
+  "execution": "NOT_EXECUTED_NO_SEPARATELY_AUTHORIZED_COPY_OR_CONFIRMED_PROJECT_CONTOUR",
+  "safeScenario": [
+    "Read exact separately authorized saved-copy identity, journal and accepted109 baseline",
+    "Bind a confirmed contour and its design source to roof GUID/body/details/plane/material/story/holes",
+    "Require exposed qualified SinglePlane operation; schema or source-only SDK does not enable SceneWriter",
+    "Preserve and synchronize native memo edge arrays and holes; reject unqualified topology changes",
+    "Use the existing SceneWriter journal exactly once; unknown outcome halts without replay",
+    "Independently read actual upper/lower contours, unchanged GUID/material/story/holes/SEO and collision set",
+    "Save/Open only after unambiguous write acceptance; independently verify retained geometry"
+  ],
+  "nativeWrites": 0,
+  "apxChanged": false
+}
