@@ -41,6 +41,17 @@ class SectionSearchTest(unittest.TestCase):
         res = search(self.db, "roof", limit=5)
         self.assertGreaterEqual(res["count"], 1)
 
+    def test_scope_excludes_unwanted_document_class(self):
+        selected = search(self.db, "кровли", selected_class="OTHER_DOCUMENT")
+        self.assertGreaterEqual(selected["count"], 1)
+        self.assertEqual({r["source_class"] for r in selected["results"]}, {"OTHER_DOCUMENT"})
+        meta_only = search(self.db, "кровли", selected_class="RESEARCH_RUN")
+        self.assertEqual(meta_only["count"], 0)
+
+    def test_unknown_source_class_fails_closed(self):
+        with self.assertRaisesRegex(ValueError, "Invalid source class"):
+            search(self.db, "кровли", selected_class="LEGAL_NORM_APPROVED")
+
     def test_sqlite_fts_query_is_escaped(self):
         q = normalized_query('"; DROP TABLE sections; --')
         self.assertNotIn("DROP TABLE sections;", q)
