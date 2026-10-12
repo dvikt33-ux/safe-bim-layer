@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 102,
+  "revision": 103,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -3381,7 +3381,7 @@
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
       "owner": "work-functional-expansion-v32",
-      "lease_until": "2026-10-12T15:54:01.811Z",
+      "lease_until": "2026-10-12T15:54:01Z",
       "claim_ref": "APA-RUN-20261012-095401Z-functional-expansion-v32",
       "requires_approval": false,
       "evidence": [
