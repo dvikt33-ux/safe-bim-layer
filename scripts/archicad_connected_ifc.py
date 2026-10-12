@@ -7,6 +7,8 @@ from contextlib import closing
 import hashlib
 from pathlib import Path
 import sqlite3
+import math
+from collections import Counter
 import archicad_connected_components as C
 
 
@@ -25,22 +27,32 @@ def inspect_export(path,context,mapping):
         except RuntimeError:element=None
         row={'stepId':sid,'nativeKind':native['kind'],'ifcId':identifier,'status':'IFC_ROOT_NOT_EXPORTED'}
         physical=False
+        exported=[element] if element else []
+        if element is None and native.get('physicalIfcIds'):
+            try:exported=[model.by_guid(identifier) for identifier in native['physicalIfcIds']]
+            except RuntimeError:exported=[]
+            if exported:
+                element=exported[0];physical=True
+                row.update(aggregateIfcIdNotExported=identifier,physicalIfcIds=native['physicalIfcIds'],
+                    physicalNativeGuids=native['physicalElementGuids'],mappingScope='ACTUAL_EXPORTED_PHYSICAL_DUCT_MEMBERS; CONTAINER_IS_NOT_AN_IFC_ROOT')
         if element is None and native.get('physicalIfcId'):
             try:element=model.by_guid(native['physicalIfcId'])
             except RuntimeError:element=None
             if element:
                 physical=True
+                exported=[element]
                 row.update(aggregateIfcIdNotExported=identifier,physicalIfcId=native['physicalIfcId'],
                     physicalNativeGuid=native['physicalElementGuid'],mappingScope='EXPORTED_PHYSICAL_DUCT; CONTAINER_IS_NOT_AN_IFC_ROOT')
         if element:
             row.update(ifcType=element.is_a(),status='IFC_IDENTITY_MAPPED')
             try:
-                shape=ifcopenshell.geom.create_shape(settings,element)
-                v=shape.geometry.verts
-                points=[v[i:i+3] for i in range(0,len(v),3)]
+                points=[]
+                for member in exported:
+                    shape=ifcopenshell.geom.create_shape(settings,member);v=shape.geometry.verts
+                    points.extend(v[i:i+3] for i in range(0,len(v),3))
                 if not points:raise ValueError('EMPTY_IFC_SHAPE')
                 bounds=[(min(p[i] for p in points),max(p[i] for p in points)) for i in range(3)]
-                source_bounds=native['physicalBounds'] if physical else native['bounds']
+                source_bounds=native.get('physicalBounds',native['bounds']) if physical else native['bounds']
                 native_bounds=[(min(b[i][0] for b in source_bounds),max(b[i][1] for b in source_bounds)) for i in range(3)]
                 delta=max(abs(a-b) for left,right in zip(bounds,native_bounds) for a,b in zip(left,right))
                 row.update(ifcBoundsMeters=bounds,nativeBoundsMeters=native_bounds,boundsDeltaMeters=delta,
@@ -100,6 +112,120 @@ def inspect_exchange_semantics(path):
         'semanticCompatibility':'NOT_VERIFIED','calculationResults':'NOT_PROVIDED'}
 
 
+def native_body_quantities(element):
+    """Planar resultant BREP quantities, with closure and orientation evidence.
+
+    Curved bodies and nonplanar faces are reported rather than approximated.
+    Face holes use Shapely's actual inner contours, independent of ring winding.
+    """
+    from shapely.geometry import Polygon
+    area=volume=0.;bodies=element.get('bodies',[])
+    if not bodies:return {'status':'NATIVE_BODY_NOT_AVAILABLE'}
+    try:
+        for body in bodies:
+            if body.get('curved'):raise ValueError('CURVED_NATIVE_BODY_NOT_QUANTIFIED')
+            vertices=body['vertices'];edges=Counter();signed_volume=0.;area_vector=[0.,0.,0.];body_area=0.
+            if not body.get('closed'):raise ValueError('NATIVE_BODY_NOT_CLOSED')
+            for face in body['faces']:
+                rings=face['contours'];points=[vertices[i] for i in rings[0]]
+                n=[sum(p[(k+1)%3]*q[(k+2)%3]-p[(k+2)%3]*q[(k+1)%3] for p,q in zip(points,points[1:]+points[:1])) for k in range(3)]
+                length=math.sqrt(sum(x*x for x in n))
+                if length<1e-12:raise ValueError('NATIVE_FACE_DEGENERATE')
+                n=[x/length for x in n];drop=max(range(3),key=lambda k:abs(n[k]));axes=[k for k in range(3) if k!=drop]
+                if any(abs(sum(n[k]*(vertices[i][k]-points[0][k]) for k in range(3)))>1e-6 for ring in rings for i in ring):
+                    raise ValueError('NATIVE_FACE_NONPLANAR')
+                project=lambda ring:[tuple(vertices[i][k] for k in axes) for i in ring]
+                polygon=Polygon(project(rings[0]),[project(r) for r in rings[1:]])
+                if not polygon.is_valid or polygon.area<=0:raise ValueError('NATIVE_FACE_CONTOURS_INVALID')
+                face_area=polygon.area/abs(n[drop]);area+=face_area;body_area+=face_area
+                for k in range(3):area_vector[k]+=face_area*n[k]
+                centroid=[0.,0.,0.];centroid[axes[0]]=polygon.centroid.x;centroid[axes[1]]=polygon.centroid.y
+                centroid[drop]=(sum(n[k]*points[0][k] for k in range(3))-sum(n[k]*centroid[k] for k in axes))/n[drop]
+                signed_volume+=face_area*sum(n[k]*centroid[k] for k in range(3))/3
+                for ring in rings:
+                    for a,b in zip(ring,ring[1:]+ring[:1]):edges[tuple(sorted((a,b)))]+=1
+            if not edges or any(count!=2 for count in edges.values()):raise ValueError('NATIVE_EDGE_CLOSURE_NOT_PROVEN')
+            if math.sqrt(sum(x*x for x in area_vector))>max(1e-7,body_area*1e-7):raise ValueError('NATIVE_FACE_ORIENTATION_NOT_BALANCED')
+            if abs(signed_volume)<=1e-12:raise ValueError('NATIVE_VOLUME_ZERO_OR_WINDING_AMBIGUOUS')
+            volume+=abs(signed_volume)
+    except (ValueError,KeyError,TypeError) as exc:return {'status':'NATIVE_QUANTITIES_NOT_VERIFIED','reason':str(exc)}
+    return {'status':'NATIVE_PLANAR_BREP_QUANTITIES','surfaceAreaSquareMeters':area,'volumeCubicMeters':volume,
+            'bodyCount':len(bodies),'authority':'Actual resultant planar faces with holes and independently counted closed edges'}
+
+
+def inspect_quantified_exchange(path,native=None,native_ifc_map=None):
+    """Read actual IFC quantities/material layers/classifications and topology.
+
+    Source qsets remain distinct from geometric measurements. Missing semantics
+    are explicit; extracting an actual relationship does not certify a receiver.
+    """
+    import ifcopenshell
+    import ifcopenshell.geom
+    import ifcopenshell.util.element as E
+    import ifcopenshell.util.shape as S
+    import ifcopenshell.util.unit as U
+    if native is not None and (native.get('units')!='m' or native.get('coordinateSystem')!='ABSOLUTE_PROJECT_XYZ'):
+        raise ValueError('IFC_QUANTITIES_REQUIRE_NATIVE_WORLD_METRES')
+    model=ifcopenshell.open(str(path));scale=U.calculate_unit_scale(model)
+    settings=ifcopenshell.geom.settings();settings.set(settings.USE_WORLD_COORDS,True)
+    mapped={identifier:guid.lower() for guid,identifier in (native_ifc_map or {}).items()}
+    if len(mapped)!=len(native_ifc_map or {}):raise ValueError('IFC_QUANTITY_MAP_NOT_UNIQUE')
+    bodies={e['guid'].lower():e for e in (native or {}).get('elements',[])}
+    rows=[]
+    for e in model.by_type('IfcElement'):
+        row={'ifcId':e.GlobalId,'ifcType':e.is_a(),'name':e.Name,'predefinedType':E.get_predefined_type(e),
+             'sourceQuantities':E.get_psets(e,qtos_only=True),'classifications':[],'materials':[]}
+        for rel in getattr(e,'HasAssociations',()):
+            if rel.is_a('IfcRelAssociatesClassification'):
+                c=rel.RelatingClassification;source=getattr(c,'ReferencedSource',None)
+                row['classifications'].append({'type':c.is_a(),'identifier':getattr(c,'Identification',getattr(c,'ItemReference',None)),
+                    'name':getattr(c,'Name',None),'source':getattr(source,'Name',None)})
+        for material in E.get_materials(e):row['materials'].append({'name':material.Name,'category':getattr(material,'Category',None)})
+        assignment=E.get_material(e,should_skip_usage=True)
+        if assignment and assignment.is_a('IfcMaterialLayerSet'):
+            row['materialLayers']=[{'name':layer.Material.Name if layer.Material else None,
+                'thicknessMeters':layer.LayerThickness*scale} for layer in assignment.MaterialLayers]
+        guid=mapped.get(e.GlobalId)
+        if guid:
+            row['nativeGuid']=guid;row['nativeQuantities']=native_body_quantities(bodies.get(guid,{}))
+        try:
+            shape=ifcopenshell.geom.create_shape(settings,e);geometry=shape.geometry
+            vertices=geometry.verts;faces=geometry.faces;edges=Counter()
+            key=lambda index:tuple(round(vertices[3*index+k],8) for k in range(3))
+            for i in range(0,len(faces),3):
+                tri=faces[i:i+3]
+                for a,b in zip(tri,tri[1:]+tri[:1]):edges[tuple(sorted((key(a),key(b))))]+=1
+            closed=bool(edges) and all(count==2 for count in edges.values())
+            row['geometry']={'status':'ACTUAL_IFC_TRIANGULATED_GEOMETRY','surfaceAreaSquareMeters':S.get_area(geometry),
+                'closedEdgeIncidence':closed,'triangleCount':len(faces)//3,
+                'dimensionsMeters':[S.get_x(geometry),S.get_y(geometry),S.get_z(geometry)]}
+            if closed:row['geometry']['volumeCubicMeters']=S.get_volume(geometry)
+            else:row['geometry']['volumeStatus']='IFC_MESH_CLOSURE_NOT_PROVEN'
+            if guid and row['nativeQuantities']['status']=='NATIVE_PLANAR_BREP_QUANTITIES' and closed:
+                nq=row['nativeQuantities'];iq=row['geometry']
+                area_delta=abs(nq['surfaceAreaSquareMeters']-iq['surfaceAreaSquareMeters'])
+                volume_delta=abs(nq['volumeCubicMeters']-iq['volumeCubicMeters'])
+                row['nativeComparison']={'areaDeltaSquareMeters':area_delta,'volumeDeltaCubicMeters':volume_delta,
+                    'status':'IFC_NATIVE_QUANTITIES_MATCH' if area_delta<=max(1e-5,nq['surfaceAreaSquareMeters']*1e-6) and volume_delta<=max(1e-7,nq['volumeCubicMeters']*1e-6) else 'IFC_NATIVE_QUANTITY_MISMATCH'}
+        except Exception as exc:row['geometry']={'status':'IFC_GEOMETRY_NOT_VERIFIED','reason':type(exc).__name__+': '+str(exc)}
+        rows.append(row)
+    ports={}
+    for r in model.by_type('IfcRelConnectsPortToElement'):ports[r.RelatingPort.GlobalId]=r.RelatedElement.GlobalId
+    for r in model.by_type('IfcRelNests'):
+        for p in r.RelatedObjects:
+            if p.is_a('IfcDistributionPort'):ports[p.GlobalId]=r.RelatingObject.GlobalId
+    connections=[{'firstPortIfcId':r.RelatingPort.GlobalId,'secondPortIfcId':r.RelatedPort.GlobalId,
+        'firstOwnerIfcId':ports.get(r.RelatingPort.GlobalId),'secondOwnerIfcId':ports.get(r.RelatedPort.GlobalId)} for r in model.by_type('IfcRelConnectsPorts')]
+    return {'schema':'APA_QUANTIFIED_IFC_EXCHANGE_V1','ifcSchema':model.schema,'fileSha256':hashlib.sha256(Path(path).read_bytes()).hexdigest(),
+        'lengthUnitScaleToMeters':scale,'elements':rows,'portOwnership':ports,'portConnections':connections,
+        'elementConnections':[{'firstIfcId':r.RelatingElement.GlobalId,'secondIfcId':r.RelatedElement.GlobalId,'relationType':r.is_a()}
+                              for r in model.by_type('IfcRelConnectsElements')],
+        'openingHosts':[{'openingIfcId':r.RelatedOpeningElement.GlobalId,'hostIfcId':r.RelatingBuildingElement.GlobalId} for r in model.by_type('IfcRelVoidsElement')],
+        'quantityMatchCount':sum(r.get('nativeComparison',{}).get('status')=='IFC_NATIVE_QUANTITIES_MATCH' for r in rows),
+        'quantityMismatchCount':sum(r.get('nativeComparison',{}).get('status')=='IFC_NATIVE_QUANTITY_MISMATCH' for r in rows),
+        'semanticCompatibility':'NOT_VERIFIED','engineeringAcceptance':'NOT_VERIFIED','nativeWrites':0}
+
+
 def export_once(api,context,mapping,path,translator,journal,operation_id):
     path=Path(path).resolve()
     if path.suffix.lower()!='.ifc' or path.exists() or not path.parent.is_dir():
@@ -130,3 +256,21 @@ def export_once(api,context,mapping,path,translator,journal,operation_id):
             result.update(status='PARTIAL_OR_UNKNOWN_OUTCOME',reason=type(exc).__name__+': '+str(exc))
         db.execute('UPDATE isolated_ifc_exports SET state=?,result=? WHERE operation_id=?',(result['status'],C.RUN.canonical(result),operation_id));db.commit()
     return result
+
+
+def main(argv=None):
+    import argparse,json
+    p=argparse.ArgumentParser(description='Read actual local IFC quantities and semantic links, without native calls.')
+    p.add_argument('--ifc',type=Path,required=True);p.add_argument('--native',type=Path)
+    p.add_argument('--native-map',type=Path);p.add_argument('--output',type=Path,required=True)
+    args=p.parse_args(argv)
+    if args.output.exists():raise ValueError('IFC_REPORT_REQUIRES_NEW_FILE')
+    read=lambda path:json.loads(path.read_text(encoding='utf8')) if path else None
+    result=inspect_quantified_exchange(args.ifc,read(args.native),read(args.native_map))
+    C.A.write_json(args.output,result)
+    print(C.RUN.canonical({'elements':len(result['elements']),'quantityMatchCount':result['quantityMatchCount'],
+        'quantityMismatchCount':result['quantityMismatchCount'],'nativeWrites':0,'semanticCompatibility':'NOT_VERIFIED'}))
+    return 0
+
+
+if __name__=='__main__':raise SystemExit(main())

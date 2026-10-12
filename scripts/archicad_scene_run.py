@@ -60,7 +60,7 @@ DEFAULT_SCENE_SCHEMA = Path(__file__).resolve().parents[1] / "schemas/tapir-live
 ALLOWED_WRITES = frozenset(("CreateWalls", "CreateSlabs", "CreateColumns",
                            "CreateWindows", "CreateDoors", "CreateObjects"))
 # Opt-in typed adapters reuse this journal; a command name alone never enables it.
-EXTENDED_WRITES = frozenset({'CreateRoofs','CreateMorphs','CreateMEPRoutingElements'})
+EXTENDED_WRITES = frozenset({'CreateRoofs','CreateMorphs','CreateMEPRoutingElements','CreateMEPElements'})
 _GUID = re.compile(r"^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$")
 _SCENE_ID = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_-]{3,79}$")
 _NONSPATIAL_TYPES = frozenset({
@@ -509,16 +509,19 @@ class SceneWriter:
         No replay, second executor or automatic rollback.
         """
         if (command not in {'ConnectMEPElements','ModifyMEPRoutingElements',
-                            'CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks'}
+                            'CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks','ModifyMorphs'}
                 or not _SCENE_ID.fullmatch(scene_id) or not callable(verify_before) or not callable(verify_after)):
             raise ValueError('BOUNDED_OPERATION_ADAPTER_REQUIRED')
         intent={'sceneId':scene_id,'sourcePlanHash':preflight['sourcePlanHash'],
                 'command':command,'parameters':parameters,'target':preflight['binding']}
         if digest(intent)!=expected_hash:raise ValueError('BOUNDED_OPERATION_HASH_MISMATCH')
         slots={'ConnectMEPElements':'connectionsData','ModifyMEPRoutingElements':'routingElementsData',
-               'CreateOpenings':'openingsData','CreateSolidElementLinks':'solidLinks','RemoveSolidElementLinks':'solidLinks'}
+               'CreateOpenings':'openingsData','CreateSolidElementLinks':'solidLinks','RemoveSolidElementLinks':'solidLinks','ModifyMorphs':'morphsWithDetails'}
         rows=parameters.get(slots[command])
         if not isinstance(rows,list) or len(rows)!=1:raise ValueError('BOUNDED_OPERATION_REQUIRES_SINGLE_NATIVE_TARGET')
+        if command=='ModifyMorphs' and ('CreateMorphs' not in self.adapters or
+                set(rows[0]) not in ({'elementId','xAxis','yAxis','zAxis'},{'elementId','translation'})):
+            raise ValueError('BOUNDED_MORPH_PLACEMENT_REQUIRES_TYPED_ADAPTER_AND_EXPLICIT_TRANSFORM')
         checked=SCENE.GRAPH.CONTRACTS.compile_batch(SCENE.GRAPH.CONTRACTS.load_catalog(self.schema_path),
             {'requests':[{'id':'operation','command':command,'params':parameters}]},runtime_version=EXPECTED_TAPIR)
         if checked['status']!='SCHEMA_VALID':raise ValueError('BOUNDED_OPERATION_SCHEMA_INVALID')
@@ -672,6 +675,8 @@ class SceneWriter:
                             runtime_version=EXPECTED_TAPIR)
                         if validated['status'] != 'SCHEMA_VALID':
                             raise ValueError('ADAPTER_PARAMETERS_INVALID')
+                        if callable(getattr(adapter,'before_write',None)):
+                            adapter.before_write(self.api,params,preflight)
                     else:
                         params = resolve_params(step, created)
                     # Bind each operation to its exact resolved (including GUID)

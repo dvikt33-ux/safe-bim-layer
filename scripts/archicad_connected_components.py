@@ -54,6 +54,29 @@ class NativeAdapter:
             raise ValueError('UNKNOWN_TYPED_COMPONENT')
         self.command=command
 
+    def before_write(self,api,params,plan):
+        binding=plan.get('integrationBindings',{}).get('dependencies',{}).get('sourceDetailBinding')
+        if binding is not None:
+            if self.command!='CreateMorphs':raise ValueError('SOURCE_DETAIL_WRITER_COMPONENT_MISMATCH')
+            from archicad_details_context import verify_source_section_binding
+            verify_source_section_binding(api,binding)
+            fact=details_candidate(Path(__file__).resolve().parents[1],binding['detailId'],
+                {'guid':binding['hostGuid'],'kind':'Roof'})
+            matched=[r for r in fact['resolvedFacts'] if r['entity']==binding['entityId'] and r['fact']['fact_id']==binding['sourceFactId']]
+            if len(matched)!=1:raise ValueError('SOURCE_DETAIL_FACT_INVALIDATED')
+            section={'width':matched[0]['values']['value_2']/1000,'height':matched[0]['values']['value']/1000}
+            if section!=binding['sourceSectionMeters'] or binding['archiveSha256']!=DETAILS_SHA:
+                raise ValueError('SOURCE_DETAIL_DIMENSION_INVALIDATED')
+            data=params['morphsData'][0];body=data['body'];vertices=body['vertices']
+            if {k:data.get(k) for k in binding['expectedPlacement']}!=binding['expectedPlacement']:
+                raise ValueError('SOURCE_DETAIL_WRITE_PLACEMENT_MISMATCH')
+            wanted={'x':binding['modelDerivedLengthMeters'],'y':section['width'],'z':section['height']}
+            if body_face_keys(body)!=body_face_keys(explicit_box_body(wanted)) or any(
+                    not RUN.close(max(p[k] for p in vertices)-min(p[k] for p in vertices),size) for k,size in wanted.items()):
+                raise ValueError('SOURCE_DETAIL_WRITE_BODY_MISMATCH')
+            if data['buildingMaterialId']['guid'].lower()!=binding['projectMaterialSelection']['expectedGuid'].lower():
+                raise ValueError('SOURCE_DETAIL_WRITE_MATERIAL_MISMATCH')
+
     def resolve(self,step,created,plan):
         params=copy.deepcopy(step['params'])
         values=next(iter(params.values()))
@@ -73,7 +96,7 @@ class NativeAdapter:
         return params
 
     def floor(self,params,plan):
-        if self.command=='CreateMEPRoutingElements':
+        if self.command in ('CreateMEPRoutingElements','CreateMEPElements'):
             # Place has no story argument. Explicitly expect the active story;
             # geometric Z must never masquerade as native home-story evidence.
             return plan['binding']['storyIndex']
@@ -81,6 +104,30 @@ class NativeAdapter:
 
     def verify(self,api,guid,params,row,floor,story_level):
         expected=next(iter(params.values()))[0]
+        if self.command=='CreateMEPElements':
+            if row.get('floorIndex')!=floor:raise ValueError('MEP_COMPONENT_STORY_MISMATCH')
+            members=[e for e in api('GetMEPElements',{}).get('elements',[]) if e['elementId']['guid'].lower()==guid.lower()]
+            if len(members)>1 or (members and (members[0]['type']!=expected['type'] or members[0]['domain']!=expected.get('domain',''))):
+                raise ValueError('MEP_COMPONENT_DEDICATED_TYPE_MISMATCH')
+            ports=api('GetMEPPorts',{'elements':[{'elementId':{'guid':guid}}]}).get('elementPorts',[])
+            if len(ports)!=1 or 'error' in ports[0] or not ports[0].get('ports'):
+                raise ValueError('MEP_COMPONENT_NATIVE_PORTS_MISSING')
+            normalized=G.normalize_dump(api('GetModelDumpV1',{}))
+            body=next((e for e in normalized['elements'] if e['guid'].lower()==guid.lower()),None)
+            if not body or not body.get('bodies'):raise ValueError('MEP_COMPONENT_NATIVE_BODY_MISSING')
+            if not members and (row.get('type')!='Unknown' or body.get('nativeTypeId')!=150):
+                raise ValueError('MEP_COMPONENT_OMITTED_WITHOUT_NATIVE_MEP_BODY')
+            if any(p.get('domain')!=expected.get('domain','') for p in ports[0]['ports']) and expected['type']!='Equipment':
+                raise ValueError('MEP_COMPONENT_ACTUAL_PORT_DOMAIN_MISMATCH')
+            bounds=ROOF.bounds(body)
+            if not bounds or not all(bounds[i][0]-1e-6<=expected['position'][k]<=bounds[i][1]+1e-6 for i,k in enumerate(('x','y','z'))):
+                raise ValueError('MEP_COMPONENT_INSERTION_OUTSIDE_ACTUAL_BODY')
+            if any(type(p.get(k)) not in (int,float) or not math.isfinite(p[k]) or p[k]<=0 for p in ports[0]['ports'] for k in ('width','height')):
+                raise ValueError('MEP_COMPONENT_ACTUAL_PORT_SECTION_INVALID')
+            # Installed AC29 also omits terminals from GetMEPElements. Typed
+            # creation + physical MEP body/ports prove a component; exchange
+            # classification must independently qualify its exact subtype.
+            return 'MEP'+expected['type'] if members else 'MEPComponent'
         # Installed AC29 routing rows report Unknown/nativeType150. They are
         # accepted only alongside successful dedicated MEP geometry readback.
         wanted={'CreateRoofs':'Roof','CreateMorphs':'Morph','CreateMEPRoutingElements':'Unknown'}[self.command]
@@ -132,13 +179,13 @@ class NativeAdapter:
                 element=next((e for e in normalized['elements'] if e['guid'].lower()==guid.lower()),None)
                 if element is None:
                     raise ValueError('MORPH_NATIVE_BODY_GUID_MISSING')
-                expected_cloud=[MORPH.transform_point(v,expected['basePoint'],axes) for v in vertices]
+                expected_cloud=[morph_api_world_point(v,expected['basePoint'],axes) for v in vertices]
                 if not MORPH.cloud_compare(expected_cloud,MORPH.points_from_dump(element))[0]:
                     raise ValueError('MORPH_NATIVE_WORLD_GEOMETRY_MISMATCH')
             else:
                 normalized=G.normalize_dump(api('GetModelDumpV1',{}))
                 element=next((e for e in normalized['elements'] if e['guid'].lower()==guid.lower()),None)
-                cloud=[MORPH.transform_point(v,expected['basePoint'],[actual[k] for k in ('xAxis','yAxis','zAxis')]) for v in expected['body']['vertices']]
+                cloud=[morph_api_world_point(v,expected['basePoint'],[actual[k] for k in ('xAxis','yAxis','zAxis')]) for v in expected['body']['vertices']]
                 if element is None or not MORPH.cloud_compare(cloud,MORPH.points_from_dump(element))[0]:
                     raise ValueError('MORPH_EXPLICIT_BODY_WORLD_COORDINATES_MISMATCH')
                 if expected['body'].get('bodyType')=='Solid' and any(not b.get('closed') for b in element['bodies']):
@@ -175,6 +222,11 @@ class NativeAdapter:
         return 'MEPRouting'
 
 
+def morph_api_world_point(point,base,axis_rows):
+    """Installed Tapir xAxis/yAxis/zAxis are placement-matrix ROWS."""
+    return [base[k]+sum(axis_rows[i][a]*point[a] for a in ('x','y','z')) for i,k in enumerate(('x','y','z'))]
+
+
 def attribute_guid(value):
     if not isinstance(value,dict):
         raise ValueError('ATTRIBUTE_REFERENCE_INVALID')
@@ -186,7 +238,7 @@ def attribute_guid(value):
 
 
 def adapters(enabled):
-    known={'roof':'CreateRoofs','morph':'CreateMorphs','mep':'CreateMEPRoutingElements'}
+    known={'roof':'CreateRoofs','morph':'CreateMorphs','mep':'CreateMEPRoutingElements','mep-component':'CreateMEPElements'}
     if set(enabled)-set(known):
         raise ValueError('UNKNOWN_OPTIONAL_MODULE')
     return {known[k]:NativeAdapter(known[k]) for k in enabled}

@@ -4,7 +4,7 @@ import networkx as nx
 import archicad_connected_components as C
 
 
-def read_network(api,route_guids,system_guid,domain='Ventilation'):
+def read_network(api,route_guids,system_guid,domain='Ventilation',scope_to_routes=False):
     if not route_guids or len(set(g.lower() for g in route_guids))!=len(route_guids):raise ValueError('MEP_ROUTE_IDENTITIES_NOT_UNIQUE')
     routes=api('GetMEPRoutingElements',{'elements':[{'elementId':{'guid':g}} for g in route_guids]}).get('routingElements',[])
     if len(routes)!=len(route_guids) or any('error'in r for r in routes):raise ValueError('MEP_DEDICATED_ROUTE_READBACK_MISSING')
@@ -24,8 +24,10 @@ def read_network(api,route_guids,system_guid,domain='Ventilation'):
                 width=segment['crossSectionWidth'],height=segment['crossSectionHeight'],shape=segment['crossSectionShape'])
         logical.append({'guid':guid,'details':route})
     systems=[s for s in api('GetMEPDistributionSystems',{}).get('distributionSystems',[]) if s['domain']==domain and C.attribute_guid(s['mepSystemId'])==system_guid.lower()]
-    if len(systems)!=1:raise ValueError('MEP_NETWORK_DISTRIBUTION_NOT_UNIQUE')
-    members=[r['elementId']['guid'].lower() for r in systems[0]['elements']]
+    if not systems:raise ValueError('MEP_NETWORK_DISTRIBUTION_MISSING')
+    # Native API reports a row per connected component, sharing one attribute.
+    members=[r['elementId']['guid'].lower() for system in systems for r in system['elements']]
+    if len(members)!=len(set(members)):raise ValueError('MEP_DISTRIBUTION_MEMBER_DUPLICATED')
     # Dedicated ports identify physical members even when GetMEPElements omits
     # them. No membership is inferred from an inventory delta alone.
     rows=api('GetMEPPorts',{'elements':[{'elementId':{'guid':g}} for g in members]}).get('elementPorts',[])
@@ -49,6 +51,13 @@ def read_network(api,route_guids,system_guid,domain='Ventilation'):
             p.get('connectedElementId',{}).get('guid','').lower()!=peer['ownerGuid'] or
             peer.get('connectedElementId',{}).get('guid','').lower()!=p['ownerGuid']):
             raise ValueError('MEP_CONNECTED_PORT_NOT_RECIPROCAL_OR_OUTSIDE_SCOPE')
+        if not C.points_equal(p['position'],peer['position']):raise ValueError('MEP_CONNECTED_PORT_POSITION_MISMATCH')
+        if p['ownerGuid']==peer['ownerGuid']:raise ValueError('MEP_CONNECTED_PORT_SELF_OWNER')
+        if p['shape']!=peer['shape'] or any(not C.RUN.close(p[k],peer[k]) for k in ('width','height')):
+            raise ValueError('MEP_JOIN_PORT_SECTION_MISMATCH')
+        if not C.RUN.close(sum(p['direction'][k]*peer['direction'][k] for k in ('x','y','z')),-1.):
+            raise ValueError('MEP_CONNECTED_PORT_DIRECTION_MISMATCH')
+        port_graph.add_edge(p['ownerGuid'],peer['ownerGuid'],position=p['position'])
     for i,p in enumerate(ports):
         for q in ports[i+1:]:
             if p['ownerGuid']==q['ownerGuid'] or not C.points_equal(p['position'],q['position']):continue
@@ -61,14 +70,59 @@ def read_network(api,route_guids,system_guid,domain='Ventilation'):
                     raise ValueError('MEP_CONNECTED_PORT_DIRECTION_MISMATCH')
                 junction=[gid for gid,v in graph.nodes(data=True) if C.points_equal(p['position'],v['position'])]
                 if len(junction)==2:graph.add_edge(*junction,connection='RECIPROCAL_NATIVE_PHYSICAL_PORTS')
+    # Split routes meet at the branch centre while the fitting's physical ports
+    # lie away from that centre. Bind routes to actual collinear physical ducts,
+    # then use reciprocal native connectivity through fittings as the authority.
+    ownership=physical_route_members(logical,ports)
+    excluded=[]
+    if scope_to_routes:
+        seeds={g for values in ownership.values() for g in values}
+        selected=set().union(*(set(component) for component in nx.connected_components(port_graph) if seeds.intersection(component)))
+        excluded=sorted(set(physical)-selected)
+        physical=[g for g in physical if g in selected]
+        ports=[p for p in ports if p['ownerGuid'] in selected]
+        port_graph=port_graph.subgraph(selected).copy()
+    if physical and nx.is_connected(port_graph):
+        if all(ownership[g['guid'].lower()] for g in logical):
+            for i,left in enumerate(logical):
+                for right in logical[i+1:]:
+                    for a in left['details']['nodes']:
+                        for b in right['details']['nodes']:
+                            if C.points_equal(a['position'],b['position']):
+                                graph.add_edge(a['elementId']['guid'].lower(),b['elementId']['guid'].lower(),connection='NATIVE_BRANCH_PHYSICAL_GRAPH')
     return {'schema':'APA_NATIVE_MEP_NETWORK_V1','routes':logical,'routeGuids':route_guids,'ownedNodeSegmentGuids':sorted(owned),
-        'physicalGuids':physical,'ports':ports,'logicalConnected':nx.is_connected(graph),
+        'physicalGuids':physical,'ports':ports,'routePhysicalMembers':ownership,'logicalConnected':nx.is_connected(graph),
         'physicalConnected':bool(physical) and nx.is_connected(port_graph),
         'physicalConnectionEdges':port_graph.number_of_edges(),'segmentCount':segment_count,'nodeCount':graph.number_of_nodes(),
         'openPorts':[p for p in ports if not p['isPhysicallyConnected']],
+        'distributionComponentCount':len(systems),
+        'physicalScope':'REQUESTED_ROUTES_AND_RECIPROCAL_CONNECTED_MEMBERS' if scope_to_routes else 'ALL_MATCHING_SYSTEM_MEMBERS',
+        'outsideRouteScopePhysicalGuids':excluded,
         'genericEnumerationCount':len(api('GetMEPElements',{}).get('elements',[])),
         'nativeTopologyAuthority':'Dedicated routing + native system membership + physical port flags/section/positions',
         'engineeringAcceptance':'NOT_VERIFIED'}
+
+
+def physical_route_members(routes,ports):
+    """Native port segments contained in a logical polyline, including trims."""
+    by_owner={}
+    for p in ports:by_owner.setdefault(p['ownerGuid'],[]).append(p)
+    result={}
+    for route in routes:
+        members=[];line=route['details']['polyline']
+        for guid,pp in by_owner.items():
+            if len(pp)!=2:continue  # A tee is a connection, not a duct segment.
+            for a,b in zip(line,line[1:]):
+                d=[b[k]-a[k] for k in ('x','y','z')];length2=sum(x*x for x in d)
+                if length2<=1e-14:raise ValueError('MEP_ZERO_LENGTH_LOGICAL_SEGMENT')
+                def contained(p):
+                    v=[p[k]-a[k] for k in ('x','y','z')];t=sum(x*y for x,y in zip(v,d))/length2
+                    return -1e-6<=t<=1+1e-6 and sum((x-t*y)**2 for x,y in zip(v,d))<1e-10
+                if all(contained(p['position']) for p in pp):members.append(guid);break
+        result[route['guid'].lower()]=sorted(members)
+    assigned=[g for values in result.values() for g in values]
+    if len(set(assigned))!=len(assigned):raise ValueError('MEP_PHYSICAL_ROUTE_OWNERSHIP_AMBIGUOUS')
+    return result
 
 
 def connection_intent(network,first_guid,second_guid):
