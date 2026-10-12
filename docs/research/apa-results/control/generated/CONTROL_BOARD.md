@@ -11,13 +11,13 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | --- | ---: |
 | BLOCKED | 8 |
 | CLAIMED | 0 |
-| DONE_PUBLISHED | 23 |
+| DONE_PUBLISHED | 24 |
 | IN_PROGRESS | 1 |
 | PARTIAL | 15 |
-| READY | 39 |
+| READY | 38 |
 | SUPERSEDED | 0 |
 | DISPATCHABLE_NOW | 18 |
-| HELD_BY_DEPENDENCIES | 36 |
+| HELD_BY_DEPENDENCIES | 35 |
 | EXPIRED_LEASES | 0 |
 
 ## Полный цикл разработки APA
@@ -30,7 +30,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| APA-P70.A11.S02 | codex-apa-system-v31-20261012 | 2026-10-12T04:00:00Z | connected-system-native-test-v31 |
+| APA-P70.A11.S03 | codex-apa-gap-v31-20261012 | 2026-10-12T04:00:00Z | system-gap-driven-development-v31 |
 
 ## CONTROL — 0 ready
 
@@ -118,7 +118,6 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | APA-P70.A08.S03 | APA-P70.A08.S02 |
 | APA-P70.A08.S05 | APA-P70.A08.S03 |
 | APA-P70.A10.S01 | APA-P70.A06.S02 |
-| APA-P70.A11.S03 | APA-P70.A11.S02 |
 | APA-P70.A11.S04 | APA-P70.A11.S03 |
 | APA-P70.A11.S05 | APA-P70.A11.S04, APA-P70.A08.S02 |
 
