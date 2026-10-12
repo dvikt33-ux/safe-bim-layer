@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:a625f28c6cb8bdb563dcdd8faab51897e08c6b145dafe28139344fe200422ed4",
+  "index_commit_sha": "bf66c2f7ebd25819a70f41278c90d1f20e437210",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "bf66c2f7ebd25819a70f41278c90d1f20e437210",
+  "report_path": "docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109/REPORT.md",
+  "report_sha256": "f0be1cd74a860f72435864a2acd197f3f7094f9567cf0295616217cde344c645",
+  "run_id": "APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}
