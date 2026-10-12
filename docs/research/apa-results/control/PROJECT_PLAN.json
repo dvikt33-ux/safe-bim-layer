@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 115,
+  "revision": 116,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -11,7 +11,7 @@
     "claim": "Fresh canonical plan; one READY/PARTIAL task or compatible package represented by one task; dependencies DONE_PUBLISHED. CAS IN_PROGRESS with owner/UTC lease/run and mandatory readback before implementation. Package may combine components; native operations retain exact target/journal gates. No new schedulers.",
     "completion": "On actual completion, verify artifacts, CI/receipt and acceptance; CAS-write DONE_PUBLISHED with evidence and clear owner/lease/claim_ref. For incomplete results write PARTIAL with evidence; for failed work BLOCKED with blocked_reason. Never claim DONE from chat text or a publisher receipt alone.",
     "deduplication": "One semantic work_key per task, explicit topic_id through topics[].task_ids; duplicate work keys rejected; related tasks share sources but different scopes. Historical 72-branch semantic dedup remains open.",
-    "mutation": "Canonical research branch for plan/evidence. Development uses new isolated feature branches/PRs from verified existing code; no main/master/protected/tested-branch changes or merges without authorization. User grants PLN writes in current chat; bind this scenario to APA_Isolated_Writer_Test_01.pln and freshly verify identity. APX mutation still requires separate authorization.",
+    "mutation": "Canonical research branch for plan/evidence. Development uses new isolated feature branches/PRs from verified existing code; no main/master/protected/tested-branch changes or merges without authorization. User grants PLN writes in current chat; bind this scenario to APA_Isolated_Writer_Test_01.pln and freshly verify identity. APX mutation still requires separate authorization. Current directly authorized renamed isolated copy may be bound only with exact locally recorded identity/saved-file hash and independently verified accepted native baseline; existing default project/CLI restrictions remain. Full private paths and raw PLN/IFC/dumps stay local.",
     "research": "Normal ChatGPT with GitHub connector; Deep Research and paid tools require explicit authorization.",
     "evidence": "REPORTED != SOURCE_VERIFIED != BUILD_PASS != LIVE_PASS. Synthetic publisher success proves no Archicad runtime behavior.",
     "trigger": "Current user-authorized persistent Work chat may execute sequential development; existing user-configured Scheduled tasks remain separate triggers. No new scheduler/controller-created runs. No promised execution outside the active session.",
@@ -963,6 +963,60 @@
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/control/WORK_OPERATING_INSTRUCTION.md",
       "kind": "INSTRUCTION",
       "verification": "GITHUB_READBACK_RULE_AND_RUNTIME_MORPH_LAST_RESORT_GUARD"
+    },
+    "ART-P70-A11-S03-PR63-20261012": {
+      "id": "ART-P70-A11-S03-PR63-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/63",
+      "kind": "CODE",
+      "verification": "DRAFT_EXACT_PR59_PARENT_469_WINDOWS_LINUX_CI_6_BLOBS_MATCH"
+    },
+    "ART-P70-A11-S03-NATIVE109-20261012": {
+      "id": "ART-P70-A11-S03-NATIVE109-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109/acceptance.json",
+      "kind": "TEST_RESULT",
+      "verification": "LIVE_ACTUAL_UNDERSIDE109_SAVE_REOPEN_RETAINED107_READBACK"
+    },
+    "ART-P70-A11-S03-GAP109-20261012": {
+      "id": "ART-P70-A11-S03-GAP109-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109/gap-register.json",
+      "kind": "DATASET",
+      "verification": "ACTUAL_NATIVE109_G01_G09_469_CI_READBACK_VERIFIED"
+    },
+    "ART-P70-A11-S03-IFC109-20261012": {
+      "id": "ART-P70-A11-S03-IFC109-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109/ifc.json",
+      "kind": "TEST_RESULT",
+      "verification": "ACTUAL_IFC52_BOUNDS45_QUANTITY20_ZERO_MISMATCH"
+    },
+    "ART-P70-A11-S03-FOUR-GAPS-20261012": {
+      "id": "ART-P70-A11-S03-FOUR-GAPS-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109/four-original-gaps.json",
+      "kind": "TEST_RESULT",
+      "verification": "ACTUAL_FACE_OVERLAP_LOWER_PLANE_FOUR_ORIGINAL_GAPS_MEASURED"
+    },
+    "ART-P70-A11-S03-REPORT109-20261012": {
+      "id": "ART-P70-A11-S03-REPORT109-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109/REPORT.md",
+      "kind": "REPORT",
+      "verification": "DONE_PUBLISHED_12_GITHUB_BLOBS_MATCH"
+    },
+    "ART-P70-A11-S03-RECEIPT109-20261012": {
+      "id": "ART-P70-A11-S03-RECEIPT109-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109.json",
+      "kind": "RECEIPT",
+      "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
+    },
+    "ART-P70-RENAMED-ISOLATED-AUTH-20261012": {
+      "id": "ART-P70-RENAMED-ISOLATED-AUTH-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109/acceptance.json",
+      "kind": "TEST_RESULT",
+      "verification": "DIRECT_USER_AUTH_EXACT_IDENTITY_SAVED_HASH_RETAINED107_BEFORE_WRITE"
+    },
+    "ART-P70-A11-S10-TRANSITION-CONTRACT-20261012": {
+      "id": "ART-P70-A11-S10-TRANSITION-CONTRACT-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109/source-and-reconciliation.json",
+      "kind": "REPORT",
+      "verification": "SOURCE_SCOPE_VERIFIED_NO_NATIVE_TRANSITION_WRITE_NO_APX_CHANGE"
     }
   },
   "tasks": {
@@ -3501,7 +3555,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -3552,19 +3606,27 @@
         "Historical PR56 baseline: Actual IFC37/37world bounds and all11native/IFCowner-pair multiplicities agree;44elements/19materials/39classifications/26ports. Twelve verified quantity comparisons match,0verified mismatch. Engineering/full receiver semantics remain NOT_VERIFIED.",
         "Historical PR57 qualification: Current continuation: A04.S01-S03 qualification/source-bound support published. S10 ready Create reference selector found read-only; actual transition/terminal connection unverified. S06-S09 retain existing source/Shell/analytical/receiver gates. S04 waits real A11.S03 completion.",
         "Historical draft PR57 headb1abd584585feb0f286621337986c8a5d3077507:432/432Windows host and Windows/LinuxCI PASS;96GUID/38context saved/reopened, all95accepted GUID/body signatures preserved. Native source c4/c5support contact75cm2 and timber/Beam classification;49interface grades with no family/engineering promotion; IFC38/38bounds/45elements/20material assignments/11port links.",
-        "Current draft PR59 head744e0bd184a11f1de4a1cf16382d21aec6f8cfca on exact PR57 headb1abd584585feb0f286621337986c8a5d3077507:455/455Windows host and Windows/LinuxCI PASS,23new checks. All13code and11evidence/report GitHub blobs exactly match; publisher receipt DONE_PUBLISHED.",
+        "Historical draft PR59 head744e0bd184a11f1de4a1cf16382d21aec6f8cfca on exact PR57 headb1abd584585feb0f286621337986c8a5d3077507:455/455Windows host and Windows/LinuxCI PASS,23new checks. All13code and11evidence/report GitHub blobs exactly match; publisher receipt DONE_PUBLISHED.",
         "LIVE_PASS actual new route-local crossSectionReferenceId200 gives circular diameter0.2m and automatically connects the original terminal with reciprocal physical ports. Unique current preference row/identity/journal verified; no global preferences/APX changes. Full8route graph has2components; main circular/rectangular bridge remains S10 BLOCKED.",
         "LIVE_PASS real native Beam25x150mm and Beam50x50mm with actual75cm2Beam/Beam contact, source dimensions, Wood material/story/profile and SDK-owned BeamSegments. Native vertical end cut gives73.1108100945cm2contact to retained Morph batten, explicitly distinguished from nominal75cm2. Original Morph support is retained. Single confirmed profile edit and independent modulo2pi reconciliation; zero mutation replays.",
         "LIVE_PASS bounded new Wall/Roof Trim perimeter abutment3.236340608m2 with no new volume collision; not underside bearing. Four original upper Wall/Roof gaps unchanged. Reverse Wall trim metadata returns installed provider target-row error. SEO relation accepted but no incremental body change/underside goal; engineering and full family remain NOT_VERIFIED.",
-        "LIVE_PASS saved/reopened107GUID/43shared context; all96PR57GUID/geometry/material/story preserved. Independent final readback and baseline collision pairs agree. PLN SHA25647366e08ecdc7cd5340480c7e0bd455e8ab0aaea64b1321085d9fdbad1a2591c.",
+        "Historical PR59: LIVE_PASS saved/reopened107GUID/43shared context; all96PR57GUID/geometry/material/story preserved. Independent final readback and baseline collision pairs agree. PLN SHA25647366e08ecdc7cd5340480c7e0bd455e8ab0aaea64b1321085d9fdbad1a2591c.",
         "Actual IFC50elements/43of43world bounds,24material assignments,12port relations,6opening hosts and18native/IFCquantity matches with0mismatch. True nativeBeam/IfcBeam distinct from retained Morph/IfcBeam and Morph/IfcBuildingElementProxy. Structural contact/Trim/SEO relationship semantics and full receiver compatibility NOT_VERIFIED.",
         "Permanent MORPH LAST RESORT published in canonical operating instruction/plan and feature AGENTS; runtime creation/geometry edit requires documented checked native tool rejection and preserved mandatory BIM properties/relationships. Source c4/c5 must use real Beam. A04.S01-S03 DONE_PUBLISHED retained; S03 remainsPARTIAL and S04 waits its acceptance.",
-        "Exact next work: qualify a supported sized circular/rectangular transition and main bridge preserving accepted96GUID, and independently qualify native Wall/Roof underside bearing from verified geometry/source. S06-S09 external source, Shell/edit, analytical and receiver dependencies remain explicit; no new roadmap or writer."
+        "Historical PR59 next work: qualify a supported sized circular/rectangular transition and main bridge preserving accepted96GUID, and independently qualify native Wall/Roof underside bearing from verified geometry/source. S06-S09 external source, Shell/edit, analytical and receiver dependencies remain explicit; no new roadmap or writer.",
+        "Current draft PR63 head7966db58ca8830b43938a03cc064bcc3e952a21e, exact PR59 parent744e0bd184a11f1de4a1cf16382d21aec6f8cfca.469/469Windows host and Windows/LinuxCI38287308901 PASS;14new focused checks. All6code blobs and12native/source/report blobs match GitHub exactly; publisher receipt DONE_PUBLISHED.",
+        "LIVE_PASS new true native Wall/Roof lower-face contact2.33623338255613m2 versus measured-source expected2.336233382576165m2. Actual lower principal BREP plane and contact face contours/holes verified; Wall body changed, all Wall vertices below underside. Materials/story/native types correct; native pair and architecture collision checks empty.",
+        "Working existing SceneWriter recipe:2native creates and1SubtractionUpwardsSEO; no Morph/new executor/prior accepted experiment replay. Shared actual planar face reader and actual sloped wall-cap overlap measure all4original upper Wall/Roof gaps. Original4gaps and accepted perimeter specimen preserved.",
+        "Requested skipPolygonHoles=true but native relation reads false. Flag metadata NOT_VERIFIED_REQUEST_READBACK_DIFFERENCE; actual underside geometry/SEOrelation independently proven. Initial strict flag-check failure retained in journal and reconciled read-only, zero native replay. GetFlags source ignores SDK return code; cause/application is not inferred.",
+        "LIVE_PASS saved/reopened109GUID/45shared records; all107accepted GUID/body/material/story signatures preserved, including prior96. Independent final geometry/network/collision readback PASS. PLN SHA2560d87954de1a0b75f0510c4bbd1a7424db2eb09fa928d5e0fb746c58d9a18f14d. User authorized renamed isolated copy; exact identity/saved hash and107baseline verified before writing; full paths/raw files stay local.",
+        "Actual IFC52elements/45of45world bounds/26material assignments/12port relations/6opening hosts/20quantitymatches/0mismatch. New true native Wall/IfcWall and Roof/IfcRoof BREP/material quantities agree. Native contact/SEOexport semantics, full receiver and engineering remain NOT_VERIFIED.",
+        "S10BLOCKED remains only sized circular/rectangular transition/main bridge: closed CreateMEPElements default-placement enum lacks sized ports; exposed route Place supplies empty per-segment section maps despite SDK support. SDK TransitionDefault is non-geometric settings, not a sized standalone factory. Existing8routes/two components/Ø200terminal pair unchanged; no ConnectLogically on retained routes, APX or global preference change.",
+        "Exact continuation: qualify the tested native underside recipe for required actual building interfaces, explicitly binding any intended target geometry change and edge overlap; retain GUIDs and do not invent overhang/fastening/load dimensions. S10 needs an exposed qualified route-local mixed-section and GUID-preserving physical connection contract; installed APX changes require separate authorization. Existing S06-S09 dependencies and S04 acceptance gate remain. A11.S03PARTIAL; A04.S01-S03DONE_PUBLISHED retained."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
-      "owner": "work-wall-roof-underside-20261012",
-      "lease_until": "2026-10-12T21:28:31Z",
-      "claim_ref": "APA-RUN-20261012-172831Z-wall-roof-underside",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
@@ -3590,7 +3652,16 @@
         "ART-P70-A11-S03-REPORT107-20261012",
         "ART-P70-A11-S03-RECEIPT107-20261012",
         "ART-P70-A11-S10-CIRCULAR200-TERMINAL-20261012",
-        "ART-P70-NATIVE-FIRST-RULE-20261012"
+        "ART-P70-NATIVE-FIRST-RULE-20261012",
+        "ART-P70-A11-S03-PR63-20261012",
+        "ART-P70-A11-S03-NATIVE109-20261012",
+        "ART-P70-A11-S03-GAP109-20261012",
+        "ART-P70-A11-S03-IFC109-20261012",
+        "ART-P70-A11-S03-FOUR-GAPS-20261012",
+        "ART-P70-A11-S03-REPORT109-20261012",
+        "ART-P70-A11-S03-RECEIPT109-20261012",
+        "ART-P70-RENAMED-ISOLATED-AUTH-20261012",
+        "ART-P70-A11-S10-TRANSITION-CONTRACT-20261012"
       ],
       "blocked_reason": null
     },
@@ -3790,7 +3861,8 @@
       ],
       "outputs": [
         "Use an existing ready native path with GUID/story/material/body readback. Any installed APX change requires separate user authorization.",
-        "Native Wall/Roof Trim perimeter contact verified. Reverse Trim metadata provider error and ineffective underside SEO goal remain explicit; Shell/Opening-edit contract blocker unchanged."
+        "Native Wall/Roof Trim perimeter contact verified. Reverse Trim metadata provider error and ineffective underside SEO goal remain explicit; Shell/Opening-edit contract blocker unchanged.",
+        "Native Wall/Roof actual underside contact and SEOrelation are now LIVE_PASS in a separate specimen. Flag readback difference remains explicit; missing Shell/Opening-edit runtime contracts still BLOCKED."
       ],
       "acceptance": "Use an existing ready native path with GUID/story/material/body readback. Any installed APX change requires separate user authorization.",
       "owner": null,
@@ -3803,7 +3875,9 @@
         "ART-P70-A11-S03-NATIVE95-V32-20261012",
         "ART-P70-A11-S03-GAP95-V32-20261012",
         "ART-P70-A11-S03-NATIVE107-20261012",
-        "ART-P70-A11-S03-GAP107-20261012"
+        "ART-P70-A11-S03-GAP107-20261012",
+        "ART-P70-A11-S03-NATIVE109-20261012",
+        "ART-P70-A11-S03-GAP109-20261012"
       ],
       "blocked_reason": "Current source-verified provider catalog lacks CreateShells/ModifyShells/ModifyOpenings; SDK source alone is not an exposed runtime path."
     },
@@ -3906,7 +3980,8 @@
       ],
       "outputs": [
         "Use an existing actual receiver implementation and independently validate supported semantics, distinguished from IFC geometry coordination.",
-        "Actual IFC43mappings/50elements/18quantity matches/0mismatch/24material assignments/12port relations/6opening hosts verified. Structural contact/Trim/SEO export semantics and receiver compatibility remain unverified."
+        "Actual IFC43mappings/50elements/18quantity matches/0mismatch/24material assignments/12port relations/6opening hosts verified. Structural contact/Trim/SEO export semantics and receiver compatibility remain unverified.",
+        "Actual IFC45mappings/52elements/26materials/20quantity matches/0mismatch; native new Wall/Roof bodies/materials agree. SEO/contact relationship export semantics and actual receiver compatibility remain unverified."
       ],
       "acceptance": "Use an existing actual receiver implementation and independently validate supported semantics, distinguished from IFC geometry coordination.",
       "owner": null,
@@ -3919,7 +3994,9 @@
         "ART-P70-A11-S03-NATIVE95-V32-20261012",
         "ART-P70-A11-S03-GAP95-V32-20261012",
         "ART-P70-A11-S03-IFC107-20261012",
-        "ART-P70-A11-S03-GAP107-20261012"
+        "ART-P70-A11-S03-GAP107-20261012",
+        "ART-P70-A11-S03-IFC109-20261012",
+        "ART-P70-A11-S03-GAP109-20261012"
       ],
       "blocked_reason": "Receiver endpoint/session and full semantic/quantity/face compatibility are not verified; current IFC proves bounded identity/world bounds and host/port/material observations."
     },
@@ -3947,7 +4024,8 @@
       "outputs": [
         "Reuse a ready exposed provider path; connect actual terminal port to routed network with native diameter/transition readback, original baseline preservation and save/reopen. No installed APX change without separate authorization.",
         "LIVE_PASS unique live reference200/diameter0.2m row binding and one new circular route; original terminal now connected automatically with reciprocal actual0.2mports and saved/reopened independently. No preference/APX modification or Create/Connect replay.",
-        "The connected terminal/circular pair has one reciprocal edge and one open downstream port; full8route network still has2components. Existing rectangular network preserved. Native mixed-section transition and baseline-preserving main bridge not verified."
+        "The connected terminal/circular pair has one reciprocal edge and one open downstream port; full8route network still has2components. Existing rectangular network preserved. Native mixed-section transition and baseline-preserving main bridge not verified.",
+        "Read-only existing source/SDK/schema/native-port scope reconfirmed; minimally expose and qualify the existing route-local per-segment SDK maps on a new specimen before claiming a native transition. Retained-GUID-safe main connectivity is a separate contract/acceptance. No transition write was attempted."
       ],
       "acceptance": "Actual terminal port and route sections agree through a verified native transition and reciprocal physical connections; preserve original baseline and persist readback.",
       "owner": null,
@@ -3962,9 +4040,11 @@
         "ART-P70-A11-S10-CIRCULAR200-TERMINAL-20261012",
         "ART-P70-A11-S03-PR59-20261012",
         "ART-P70-A11-S03-GAP107-20261012",
-        "ART-P70-A11-S03-RECEIPT107-20261012"
+        "ART-P70-A11-S03-RECEIPT107-20261012",
+        "ART-P70-A11-S10-TRANSITION-CONTRACT-20261012",
+        "ART-P70-A11-S03-GAP109-20261012"
       ],
-      "blocked_reason": "Actual reference200 Create and reciprocal terminal connection are now LIVE_PASS. Remaining blocker: no qualified exposed per-segment mixed circular/rectangular section or explicitly sized transition port setter to bridge the new pair into the retained main network. Create exposes one route section selector; Modify has no reference selector; ConnectLogically may delete/split a retained route GUID. Full8route graph has2components. Preserve96accepted GUID; no global preference/APX edit or blind replay."
+      "blocked_reason": "Ø200reference200 route and reciprocal terminal connection remain LIVE_PASS and unchanged. No exposed contract for a sized two-port circular/rectangular transition: CreateMEPElements offers only default Terminal/Accessory/Equipment/Fitting with no section setters; route Place passes empty per-segment rectangular/circular maps despite native SDK support. TransitionDefault exposes non-geometric settings. ConnectLogically may delete/split retained routing GUID; no qualified non-destructive main bridge. Eight routes still form2components. No installed APX/global preference/network changes; do not repeat accepted route/terminal creation."
     }
   },
   "topics": {
@@ -4291,7 +4371,16 @@
         "ART-P70-A11-S03-REPORT107-20261012",
         "ART-P70-A11-S03-RECEIPT107-20261012",
         "ART-P70-A11-S10-CIRCULAR200-TERMINAL-20261012",
-        "ART-P70-NATIVE-FIRST-RULE-20261012"
+        "ART-P70-NATIVE-FIRST-RULE-20261012",
+        "ART-P70-A11-S03-PR63-20261012",
+        "ART-P70-A11-S03-NATIVE109-20261012",
+        "ART-P70-A11-S03-GAP109-20261012",
+        "ART-P70-A11-S03-IFC109-20261012",
+        "ART-P70-A11-S03-FOUR-GAPS-20261012",
+        "ART-P70-A11-S03-REPORT109-20261012",
+        "ART-P70-A11-S03-RECEIPT109-20261012",
+        "ART-P70-RENAMED-ISOLATED-AUTH-20261012",
+        "ART-P70-A11-S10-TRANSITION-CONTRACT-20261012"
       ],
       "synthesis_state": "PARTIAL",
       "owner": null
