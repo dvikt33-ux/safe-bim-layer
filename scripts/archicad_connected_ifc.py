@@ -153,6 +153,20 @@ def native_body_quantities(element):
             'bodyCount':len(bodies),'authority':'Actual resultant planar faces with holes and independently counted closed edges'}
 
 
+def native_element_quantities(elements,guid):
+    """Use actual SDK-owned segment bodies for a body-less Beam/Column root."""
+    parent=elements.get(guid,{})
+    if parent.get('bodies') or parent.get('type') not in ('Beam','Column'):
+        return native_body_quantities(parent)
+    children=[e for e in elements.values() if e.get('relationships',{}).get('hostGuid','').lower()==guid]
+    if (not children or any(e.get('type')!=parent['type']+'Segment' or
+            e.get('homeStory')!=parent.get('homeStory') or not e.get('bodies') for e in children)):
+        return {'status':'NATIVE_QUANTITIES_NOT_VERIFIED','reason':'NATIVE_ASSEMBLY_SEGMENT_OWNERSHIP_NOT_PROVEN'}
+    proof=native_body_quantities({'bodies':[b for e in children for b in e['bodies']]})
+    proof.update(sourceSegmentGuids=sorted(e['guid'].lower() for e in children),ownershipAuthority='SDK_HOST_GUID_AND_NATIVE_SEGMENT_TYPE')
+    return proof
+
+
 def inspect_quantified_exchange(path,native=None,native_ifc_map=None):
     """Read actual IFC quantities/material layers/classifications and topology.
 
@@ -187,7 +201,7 @@ def inspect_quantified_exchange(path,native=None,native_ifc_map=None):
                 'thicknessMeters':layer.LayerThickness*scale} for layer in assignment.MaterialLayers]
         guid=mapped.get(e.GlobalId)
         if guid:
-            row['nativeGuid']=guid;row['nativeQuantities']=native_body_quantities(bodies.get(guid,{}))
+            row['nativeGuid']=guid;row['nativeQuantities']=native_element_quantities(bodies,guid)
         try:
             shape=ifcopenshell.geom.create_shape(settings,e);geometry=shape.geometry
             vertices=geometry.verts;faces=geometry.faces;edges=Counter()

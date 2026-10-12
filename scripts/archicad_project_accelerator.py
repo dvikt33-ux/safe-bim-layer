@@ -32,9 +32,9 @@ READS = frozenset({"GetProjectInfo", "GetStories", "GetAddOnVersion",
                   "GetAttributesByType", "GetSubelementsOfHierarchicalElements", "GetModelDumpV1",
                   "GetCollisions", "GetBuildingMaterials", "GetComposites", "GetProfiles",
                   "GetSurfaces", "GetAvailableLibraryParts", "GetGDLParametersOfElements", "API.GetProductInfo",
-                  'API.GetAllClassificationSystems','API.GetAllClassificationsInSystem','GetClassificationsOfElements'})
-NATIVE_MUTATIONS = RUN.ALLOWED_WRITES | RUN.EXTENDED_WRITES | frozenset({"ModifySlabs","ModifyMorphs",
-    'ConnectMEPElements','ModifyMEPRoutingElements','CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks','SetClassificationsOfElements'})
+                  'API.GetAllClassificationSystems','API.GetAllClassificationsInSystem','GetClassificationsOfElements','GetMEPPreferenceTables'})
+NATIVE_MUTATIONS = RUN.ALLOWED_WRITES | RUN.EXTENDED_WRITES | frozenset({"ModifySlabs","ModifyMorphs","ModifyBeams",
+    'ConnectMEPElements','ModifyMEPRoutingElements','CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks','SetClassificationsOfElements','TrimElements'})
 PRIMITIVES = {
     "pavilion-frame-v1": {"status": "EXECUTABLE_PENDING_LIVE_ACCEPTANCE",
                           "executor": "SceneWriter", "elementCount": 12},
@@ -319,7 +319,13 @@ def inventory_guids(api):
 
 
 def column_subelements(api, created):
-    columns = [v['guid'] for v in created.values() if v.get('kind')=='Column']
+    return assembly_subelements(api,created,'Column')
+
+
+def assembly_subelements(api,created,kind):
+    if kind not in ('Column','Beam'):raise ValueError('UNSUPPORTED_ASSEMBLY_PARENT_KIND')
+    slot=kind.lower()+'Segments'
+    columns = [v['guid'] for v in created.values() if v.get('kind')==kind]
     if not columns:
         return {}
     rows = api('GetSubelementsOfHierarchicalElements',
@@ -329,9 +335,9 @@ def column_subelements(api, created):
     mapping = {}
     seen = {v['guid'].lower() for v in created.values()}
     for parent, row in zip(columns,rows):
-        if not isinstance(row,dict) or set(row)-{'columnSegments'}:
+        if not isinstance(row,dict) or set(row)-{slot}:
             raise ValueError('UNEXPECTED_COLUMN_SUBELEMENT_TYPE')
-        children = row.get('columnSegments')
+        children = row.get(slot)
         if not isinstance(children,list) or not children:
             raise ValueError('COLUMN_SEGMENTS_NOT_PROVEN')
         guids=[]

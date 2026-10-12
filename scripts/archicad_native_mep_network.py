@@ -4,6 +4,49 @@ import networkx as nx
 import archicad_connected_components as C
 
 
+def circular_reference_selection(api,domain,diameter,reference_id):
+    """Read a unique installed circular row; never modify global preferences."""
+    if (domain not in ('Ventilation','Piping') or type(diameter) not in (int,float)
+            or not math.isfinite(diameter) or diameter<=0 or type(reference_id) is not int
+            or not 0<=reference_id<=4294967295):
+        raise ValueError('MEP_CIRCULAR_REFERENCE_REQUEST_INVALID')
+    tables=api('GetMEPPreferenceTables',{'domain':domain}).get('tables')
+    if not isinstance(tables,list) or not tables:raise ValueError('MEP_CIRCULAR_TABLES_MISSING')
+    found=[]
+    for table in tables:
+        if not isinstance(table.get('guid'),str) or not C.RUN._GUID.fullmatch(table['guid']):
+            raise ValueError('MEP_CIRCULAR_TABLE_ID_INVALID')
+        rows=table.get('rows')
+        if not isinstance(rows,list):raise ValueError('MEP_CIRCULAR_TABLE_ROWS_MISSING')
+        for row in rows:
+            if row.get('referenceId')!=reference_id:continue
+            actual=row.get('diameter')
+            if (type(row.get('referenceId')) is not int or type(actual) not in (int,float)
+                    or not math.isfinite(actual) or actual<=0):raise ValueError('MEP_CIRCULAR_ROW_INVALID')
+            found.append((table,row))
+    # Create does not expose an active preference table selector. A duplicated
+    # reference across tables is ambiguous even when diameters happen to agree.
+    if len(found)!=1:raise ValueError('MEP_CIRCULAR_REFERENCE_NOT_UNIQUE')
+    table,row=found[0]
+    if not C.RUN.close(row['diameter'],diameter,1e-9):raise ValueError('MEP_CIRCULAR_DIAMETER_MISMATCH')
+    return {'domain':domain,'referenceId':reference_id,'diameterMeters':diameter,
+        'tableGuid':table['guid'].lower(),'tableSha256':C.RUN.digest(table),
+        'scope':'EXISTING_LOCAL_ROUTE_DEFAULT; GLOBAL_PREFERENCES_UNCHANGED'}
+
+
+def verify_circular_reference_binding(api,data,selection):
+    if (data.get('crossSectionShape')!='Circular' or
+            not C.RUN.close(data.get('crossSectionWidth'),selection.get('diameterMeters'),1e-9)
+            or not C.RUN.close(data.get('crossSectionHeight'),selection.get('diameterMeters'),1e-9)
+            or data.get('domain')!=selection.get('domain')
+            or type(data.get('crossSectionReferenceId')) is not int
+            or data['crossSectionReferenceId']!=selection.get('referenceId')):
+        raise ValueError('MEP_CIRCULAR_REFERENCE_PARAMETERS_MISMATCH')
+    fresh=circular_reference_selection(api,selection['domain'],selection['diameterMeters'],selection['referenceId'])
+    if fresh!=selection:raise ValueError('MEP_CIRCULAR_PREFERENCE_INVALIDATED')
+    return fresh
+
+
 def read_network(api,route_guids,system_guid,domain='Ventilation',scope_to_routes=False):
     if not route_guids or len(set(g.lower() for g in route_guids))!=len(route_guids):raise ValueError('MEP_ROUTE_IDENTITIES_NOT_UNIQUE')
     routes=api('GetMEPRoutingElements',{'elements':[{'elementId':{'guid':g}} for g in route_guids]}).get('routingElements',[])
