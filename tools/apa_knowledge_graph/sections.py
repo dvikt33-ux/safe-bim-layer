@@ -122,6 +122,19 @@ def search(db, query, limit=5, max_snippet=240):
             FROM sections WHERE sections MATCH ?
            ORDER BY rank LIMIT ?
         """, (q, limit)).fetchall()
+        # Revalidate only the selected top-K original source bytes.
+        checked = {}
+        stale = []
+        for row in rows:
+            location = row["path"]
+            if location not in checked:
+                src = Path(location)
+                checked[location] = sha(src.read_bytes()) if src.is_file() else None
+            if checked[location] != row["source_sha256"]:
+                stale.append(location)
+        if stale:
+            return {"status": "STALE_INDEX", "count": 0, "results": [],
+                    "stale_paths": sorted(set(stale)), "warning": "Source byte hashes mismatch; rebuild"}
         results = []
         for row in rows:
             snippet_text = row["excerpt"].strip().replace("\n", " ")
@@ -133,7 +146,7 @@ def search(db, query, limit=5, max_snippet=240):
                 "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT"
             })
         return {"status": "OK", "count": len(results), "results": results,
-                "query_type": "LEXICAL_OR_FTS5",
+                "query_type": "LEXICAL_OR_FTS5", "source_byte_readback": "MATCH_FOR_RETURNED_HITS",
                 "warning": "Exact source blob/edition/readback and applicability must be verified before use"}
     finally:
         conn.close()
