@@ -1,0 +1,33 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-CONSTRUCTION-JUNCTION-NATIVE-SUPPORT-S02",
+      "evidence_ids": [
+        "EV-JUNCTION-PROOF",
+        "EV-JUNCTION-BYTES"
+      ],
+      "statement": "Working editable source-bound c4/c5 support sub-junction: native50x50mm timber member, actual75cm2face contact, existing Beam classification, source and dependency invalidation, no new collision;95old GUID/body signatures preserved,96current GUID/38context, saved/reopened.426Windows/Linux tests PASS. Complete roof assembly and engineering remain NOT_VERIFIED. Publication zero native calls; preceding execution modified only the approved isolated PLN.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-JUNCTION-PROOF",
+      "kind": "TEST_RESULT",
+      "sha256": "0f1107d22f78d3c58919756b583fdb6813c620fcde7484d5d0de6aede872c72a",
+      "source_revision": "b17c460e92e794de94149c8405a8fb48d885ab27",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-130748Z-construction-junction-native-support-s02/acceptance.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-JUNCTION-BYTES",
+      "kind": "LOCAL_LOG",
+      "sha256": "b8f4947d7d77ec3c190383d3e3bcb89cfd316a9a69debc983afda449850e51af",
+      "source_revision": "b17c460e92e794de94149c8405a8fb48d885ab27",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-130748Z-construction-junction-native-support-s02/EVIDENCE_SHA256.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261012-130748Z-construction-junction-native-support-s02",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}
