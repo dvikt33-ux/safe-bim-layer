@@ -31,7 +31,7 @@ READS = frozenset({"GetProjectInfo", "GetStories", "GetAddOnVersion",
                   "GetAllElements", "Get3DBoundingBoxes", "GetDetailsOfElements",
                   "GetAttributesByType", "GetSubelementsOfHierarchicalElements", "GetModelDumpV1",
                   "GetCollisions", "GetBuildingMaterials", "GetComposites", "GetProfiles",
-                  "GetSurfaces", "GetAvailableLibraryParts", "GetGDLParametersOfElements", "API.GetProductInfo",
+                  "GetSurfaces", "GetAvailableLibraryParts", "GetGDLParametersOfElements", "API.GetProductInfo", 'API.GetPublisherSetNames',
                   'API.GetAllClassificationSystems','API.GetAllClassificationsInSystem','GetClassificationsOfElements','GetMEPPreferenceTables'})
 NATIVE_MUTATIONS = RUN.ALLOWED_WRITES | RUN.EXTENDED_WRITES | frozenset({"ModifySlabs","ModifyMorphs","ModifyBeams",
     'ConnectMEPElements','ModifyMEPRoutingElements','CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks','SetClassificationsOfElements','TrimElements'})
@@ -53,7 +53,8 @@ def write_json(path, value):
 
 
 def native_transport(command, params):
-    if command not in {'API.GetProductInfo','API.GetAllClassificationSystems','API.GetAllClassificationsInSystem'}:
+    if command not in {'API.GetProductInfo','API.GetAllClassificationSystems','API.GetAllClassificationsInSystem',
+                       'API.GetPublisherSetNames'}:
         return RUN.tapir(RUN.PORT, command, params)
     request = urllib.request.Request(f"http://127.0.0.1:{RUN.PORT}",
         data=json.dumps({"command": command, "parameters": params}).encode("utf-8"),

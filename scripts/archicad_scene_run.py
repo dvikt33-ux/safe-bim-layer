@@ -541,7 +541,13 @@ class SceneWriter:
         and independently read the resulting native relations after one call.
         No replay, second executor or automatic rollback.
         """
-        if (command not in {'ConnectMEPElements','ModifyMEPRoutingElements',
+        documentation=preflight.get('integrationBindings',{}).get('dependencies',{}).get('documentationOperation')
+        document_command=False
+        if documentation is not None:
+            from archicad_bim_documentation import qualify_operation, DOCUMENT_COMMANDS
+            qualify_operation(documentation,command,parameters,preflight['sourcePlanHash'])
+            document_command=command in DOCUMENT_COMMANDS
+        if (not document_command and command not in {'ConnectMEPElements','ModifyMEPRoutingElements',
                             'CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks','ModifyMorphs','ModifyBeams','ModifyWalls','SetClassificationsOfElements','TrimElements'}
                 or not _SCENE_ID.fullmatch(scene_id) or not callable(verify_before) or not callable(verify_after)):
             raise ValueError('BOUNDED_OPERATION_ADAPTER_REQUIRED')
@@ -551,9 +557,9 @@ class SceneWriter:
         slots={'ConnectMEPElements':'connectionsData','ModifyMEPRoutingElements':'routingElementsData',
                'CreateOpenings':'openingsData','CreateSolidElementLinks':'solidLinks','RemoveSolidElementLinks':'solidLinks','ModifyMorphs':'morphsWithDetails',
                'SetClassificationsOfElements':'elementClassifications','ModifyBeams':'beamsWithDetails','ModifyWalls':'wallsWithDetails','TrimElements':'elements'}
-        rows=parameters.get(slots[command])
-        if not isinstance(rows,list) or len(rows)!=1:raise ValueError('BOUNDED_OPERATION_REQUIRES_SINGLE_NATIVE_TARGET')
-        if command=='ModifyWalls':
+        rows=parameters.get(slots.get(command))
+        if not document_command and (not isinstance(rows,list) or len(rows)!=1):raise ValueError('BOUNDED_OPERATION_REQUIRES_SINGLE_NATIVE_TARGET')
+        if command=='ModifyWalls' and documentation is None:
             repair=preflight.get('integrationBindings',{}).get('dependencies',{}).get('wallRoofRepair',{})
             candidates=repair.get('operationCandidates',[])
             if (repair.get('status')!='APPLICABLE_NOT_EXECUTED' or not repair.get('executionAllowed') or
@@ -576,8 +582,17 @@ class SceneWriter:
                 set(rows[0])!={'elementId','classificationId'} or
                 set(rows[0].get('classificationId',{}))!={'classificationSystemId','classificationItemId'}):
             raise ValueError('BOUNDED_CLASSIFICATION_REQUIRES_TYPED_NEW_MEMBER_AND_EXPLICIT_ITEM')
-        checked=SCENE.GRAPH.CONTRACTS.compile_batch(SCENE.GRAPH.CONTRACTS.load_catalog(self.schema_path),
-            {'requests':[{'id':'operation','command':command,'params':parameters}]},runtime_version=EXPECTED_TAPIR)
+        if document_command and command in {'SaveProject','OpenProject'}:
+            # SPECIAL_REVIEW stays unexecutable in ordinary writer operations;
+            # only this explicit, bound documentation persistence opts in.
+            if command=='OpenProject' and parameters!={'projectFilePath':preflight['binding']['path']}:
+                raise ValueError('DOCUMENTATION_OPEN_FOREIGN_PROJECT_DENIED')
+            catalog=SCENE.GRAPH.CONTRACTS.load_catalog(self.schema_path)
+            checked={'status':'SCHEMA_VALID' if SCENE.GRAPH.CONTRACTS.source_version(catalog)==EXPECTED_TAPIR and
+                not list(SCENE.GRAPH.CONTRACTS._validator(catalog,command).iter_errors(parameters)) else 'INVALID'}
+        else:
+            checked=SCENE.GRAPH.CONTRACTS.compile_batch(SCENE.GRAPH.CONTRACTS.load_catalog(self.schema_path),
+                {'requests':[{'id':'operation','command':command,'params':parameters}]},runtime_version=EXPECTED_TAPIR)
         if checked['status']!='SCHEMA_VALID':raise ValueError('BOUNDED_OPERATION_SCHEMA_INVALID')
         if self.guarded_binding()!=preflight['binding']:raise ValueError('BOUNDED_OPERATION_TARGET_DRIFT')
         self.verify_source_bindings(preflight)
@@ -596,7 +611,13 @@ class SceneWriter:
                 if self.guarded_binding()!=preflight['binding']:raise ValueError('BOUNDED_OPERATION_TARGET_DRIFT')
                 reply=self.api(command,parameters)
                 result['nativeResponse']=reply
-                if command=='TrimElements':
+                if document_command:
+                    from archicad_bim_documentation import native_response
+                    guid=native_response(command,reply)
+                    if guid:
+                        result['createdGuid']=guid
+                        db.execute("UPDATE steps SET state='CREATED_UNVERIFIED',guid=? WHERE scene_id=? AND step_id='operation'",(guid,scene_id));db.commit()
+                elif command=='TrimElements':
                     if reply!={'success':True}:raise ValueError('BOUNDED_TRIM_NATIVE_SUCCESS_NOT_CONFIRMED')
                 elif command != 'CreateOpenings':
                     key = 'connectionResults' if command == 'ConnectMEPElements' else 'executionResults'
