@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:efe419660b82b8c7f309d554958ac3c87f1e5fbb10fea509152cd6046cad7a8f",
+  "index_commit_sha": "1523cff619daaa55cb066f32142fb609516103c7",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "1523cff619daaa55cb066f32142fb609516103c7",
+  "report_path": "docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-123259Z-construction-junctions-s01-openings/REPORT.md",
+  "report_sha256": "391966a99796979e4052b4bccbf989a92c10c12f32e1e12129715c1f2dc12c37",
+  "run_id": "APA-RUN-20261012-123259Z-construction-junctions-s01-openings",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}
