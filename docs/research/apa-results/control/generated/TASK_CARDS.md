@@ -1039,7 +1039,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: work-construction-junctions-20261012 / 2026-10-12T16:35:09Z
 - Requires owner approval: False
 - Source inputs: [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md)
-- Existing V2 runs: none
+- Existing V2 runs: [APA-RUN-20261012-130748Z-construction-junction-native-support-s02](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-130748Z-construction-junction-native-support-s02/REPORT.md) (receipt verified)
 - Expected output: Редактируемые системы и узлы с параметрами, классификацией, происхождением и invalidation при изменении
 
 ## APA-P70.A04.S03
