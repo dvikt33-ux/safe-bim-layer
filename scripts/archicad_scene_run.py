@@ -509,19 +509,24 @@ class SceneWriter:
         No replay, second executor or automatic rollback.
         """
         if (command not in {'ConnectMEPElements','ModifyMEPRoutingElements',
-                            'CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks','ModifyMorphs'}
+                            'CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks','ModifyMorphs','SetClassificationsOfElements'}
                 or not _SCENE_ID.fullmatch(scene_id) or not callable(verify_before) or not callable(verify_after)):
             raise ValueError('BOUNDED_OPERATION_ADAPTER_REQUIRED')
         intent={'sceneId':scene_id,'sourcePlanHash':preflight['sourcePlanHash'],
                 'command':command,'parameters':parameters,'target':preflight['binding']}
         if digest(intent)!=expected_hash:raise ValueError('BOUNDED_OPERATION_HASH_MISMATCH')
         slots={'ConnectMEPElements':'connectionsData','ModifyMEPRoutingElements':'routingElementsData',
-               'CreateOpenings':'openingsData','CreateSolidElementLinks':'solidLinks','RemoveSolidElementLinks':'solidLinks','ModifyMorphs':'morphsWithDetails'}
+               'CreateOpenings':'openingsData','CreateSolidElementLinks':'solidLinks','RemoveSolidElementLinks':'solidLinks','ModifyMorphs':'morphsWithDetails',
+               'SetClassificationsOfElements':'elementClassifications'}
         rows=parameters.get(slots[command])
         if not isinstance(rows,list) or len(rows)!=1:raise ValueError('BOUNDED_OPERATION_REQUIRES_SINGLE_NATIVE_TARGET')
         if command=='ModifyMorphs' and ('CreateMorphs' not in self.adapters or
                 set(rows[0]) not in ({'elementId','xAxis','yAxis','zAxis'},{'elementId','translation'})):
             raise ValueError('BOUNDED_MORPH_PLACEMENT_REQUIRES_TYPED_ADAPTER_AND_EXPLICIT_TRANSFORM')
+        if command=='SetClassificationsOfElements' and ('CreateMorphs' not in self.adapters or
+                set(rows[0])!={'elementId','classificationId'} or
+                set(rows[0].get('classificationId',{}))!={'classificationSystemId','classificationItemId'}):
+            raise ValueError('BOUNDED_CLASSIFICATION_REQUIRES_TYPED_NEW_MEMBER_AND_EXPLICIT_ITEM')
         checked=SCENE.GRAPH.CONTRACTS.compile_batch(SCENE.GRAPH.CONTRACTS.load_catalog(self.schema_path),
             {'requests':[{'id':'operation','command':command,'params':parameters}]},runtime_version=EXPECTED_TAPIR)
         if checked['status']!='SCHEMA_VALID':raise ValueError('BOUNDED_OPERATION_SCHEMA_INVALID')
