@@ -59,6 +59,28 @@ class JunctionCoverageTests(unittest.TestCase):
         n['elements'].append(child);c['columnSegments']={guid(1):[guid(3)]}
         r=D.native_junction_coverage(c,n,D.DetailsContext(ROOT));j=next(f for f in r['families'] if f['family']=='column_floor')['junctions'][0]
         self.assertEqual(j['guids'],[guid(1),guid(2)]);self.assertAlmostEqual(j['sharedAreaSquareMeters'],1)
+    def opening_fixture(self):
+        c,n=self.fixture();c['elements'].pop('floor');n['elements'].pop()
+        e=n['elements'][0]
+        for p in e['bodies'][0]['vertices']:p[1]*=.3
+        c['elements']['wall']['bounds']=[[[0,1],[0,.3],[0,1]]]
+        body=e['bodies'][0]
+        for face in body['faces']:
+            points=[body['vertices'][i] for i in face['vertices']]
+            if max(p[1] for p in points)==min(p[1] for p in points):
+                y=points[0][1];index=len(body['vertices'])
+                body['vertices'] += [[.25,y,.25],[.75,y,.25],[.75,y,.75],[.25,y,.75]]
+                face['holes']=[list(range(index,index+4))];face['contours'].append(face['holes'][0])
+        c['elements']['opening']={'guid':guid(9),'kind':'Opening','floorIndex':0,'hostGuid':guid(1),'bounds':[[[.25,.75],[0,.3],[.25,.75]]]}
+        return c,n
+    def test_opening_geometry_comes_from_actual_host_holes(self):
+        c,n=self.opening_fixture();r=D.native_junction_coverage(c,n,D.DetailsContext(ROOT));o=r['hostedOpenings'][0]
+        self.assertEqual(o['status'],'ACTUAL_HOST_INNER_CONTOURS_PASS');self.assertEqual(o['nativeHoleBoundsMeters'],[[.25,.75],[0,.3],[.25,.75]])
+    def test_opening_proxy_without_host_cut_is_not_pass(self):
+        c,n=self.opening_fixture()
+        for face in n['elements'][0]['bodies'][0]['faces']:face['holes']=[]
+        o=D.native_junction_coverage(c,n,D.DetailsContext(ROOT))['hostedOpenings'][0]
+        self.assertEqual(o['status'],'NOT_VERIFIED');self.assertIn('AMBIGUOUS',o['limitation'])
 
 
 if __name__=='__main__':unittest.main()

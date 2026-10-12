@@ -208,10 +208,28 @@ def native_junction_coverage(context,native,details,collision_pairs=()):
             'sourceMaterialQualification':'No product-name equivalence to native structural concrete/timber is inferred',
             'gaps':['Construction layer/fastener/grade/load capacity require source and engineering qualification'],
             'engineeringAcceptance':'NOT_VERIFIED'})
+    openings=[]
+    from archicad_native_operations import opening_hole_bounds
+    for e in context['elements'].values():
+        if e['kind']!='Opening':continue
+        g=e['guid'].lower();host=(e.get('hostGuid') or '').lower();row={'guid':g,'hostGuid':host,
+            'homeStory':e['floorIndex'],'boundsMeters':e['bounds'],'engineeringAcceptance':'NOT_VERIFIED',
+            'status':'NOT_VERIFIED','sourceCandidates':[s for s in sources if s['junctionType'] in source_types['wall_window']]}
+        try:
+            bounds=e['bounds'][0];hb=entries[host]['bounds'][0]
+            horizontal=max(range(2),key=lambda k:hb[k][1]-hb[k][0])
+            expected={'width':bounds[horizontal][1]-bounds[horizontal][0],
+                'height':bounds[2][1]-bounds[2][0],
+                'basePoint':{'x':sum(bounds[0])/2,'y':sum(bounds[1])/2,'z':bounds[2][0]}}
+            row['nativeHoleBoundsMeters']=opening_hole_bounds({'native':bodies[host]},expected)
+            row.update(status='ACTUAL_HOST_INNER_CONTOURS_PASS',geometryAuthority='TWO_NATIVE_HOST_FACE_HOLES; OPENING_PROXY_HAS_NO_SOLID')
+        except (ValueError,KeyError,IndexError) as exc:row['limitation']=str(exc)
+        openings.append(row)
     return {'schema':'APA_NATIVE_JUNCTION_COVERAGE_V1','nativeContextHash':C.RUN.digest(context),
         'nativeBodyHash':C.RUN.digest(native),'archiveSha256':C.DETAILS_SHA,'contextDetailCount':len(evaluated['details']),
         'sourceDetailCount':len(details.detail_records),'families':rows,'graphNodes':graph.number_of_nodes(),'graphEdges':graph.number_of_edges(),
         'sourceApprovedFullAssemblyCount':sum(s['sourceCommitAllowed'] for s in sources),
+        'hostedOpenings':openings,
         'armopoyasAndFasteners':{'status':'NOT_VERIFIED','reason':'Existing concrete geometry does not establish reinforcement, anchoring or fastener schedules',
             'sourceCandidates':[s for s in sources if any(word in s['junctionType'] for word in ('armop','reinfor','anchor','tie'))]},
         'coverageScope':'All required families in accepted native context, plus actual wall/column interfaces. Surface contact and native intersection are separate. No full-family or engineering approval.'}
