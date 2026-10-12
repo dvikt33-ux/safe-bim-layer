@@ -187,12 +187,51 @@ def change_impact(chain, changed_field, before, after):
     }
 
 
-def run(index_path, output_path=None, rule_id=DEFAULT_RULE):
+def token_benchmark(raw_plan, raw_files, impact):
+    """Count tokenizer proxy; NOT GPT-6 billing, correctness, tool schemas or prompt cache."""
+    try:
+        import tiktoken
+    except ImportError as exc:
+        raise ValueError("Token proxy needs separate tiktoken benchmark dependency") from exc
+    enc = tiktoken.get_encoding("o200k_base")
+    contexts = {
+        "naive_plan_and_selected_sources": (raw_plan.decode("utf-8") + "\\n" +
+                                            "\\n".join(raw_files[k].decode("utf-8") for k in ALLOWED_FILES)),
+        "exact_source_closure_raw": "\\n".join(raw_files[k].decode("utf-8") for k in ALLOWED_FILES),
+        "compact_answer_payload": canonical(impact)
+    }
+    measurements = {k: {"utf8_bytes": len(v.encode("utf-8")),
+                        "o200k_base_proxy_tokens": len(enc.encode(v))}
+                    for k,v in contexts.items()}
+    return {"status": "MEASURED_TOKENIZER_PROXY",
+            "tokenizer": "tiktoken:o200k_base",
+            "not_measured": ["actual_GPT6_billed_tokens", "tool_schema_tokens", "hidden_reasoning_tokens",
+                             "retry_calls", "embedding_index_cost", "answer_quality"],
+            "cases": measurements,
+            "interpretation": "Same known input chain; NOT candidate-engine head-to-head"}
+
+
+def run(index_path, output_path=None, rule_id=DEFAULT_RULE, plan_path=None,
+        changed_field=None, before=None, after=None):
     index = json.loads(Path(index_path).read_text(encoding="utf-8"))
     token = os.environ.get("GITHUB_TOKEN")
     files = {p: fetch_pinned(REPO, SOURCE_REF, p, token=token) for p in ALLOWED_FILES}
     data, meta, lock = parse_verified_sources(files)
     report = compile_trace(data, meta, lock, index, rule_id)
+    impact = None
+    if changed_field is not None:
+        if before is None or after is None:
+            raise ValueError("Change simulation requires both values")
+        impact = change_impact(report, changed_field, before, after)
+    if plan_path is not None:
+        if impact is None:
+            raise ValueError("Token proxy requires a specified change scenario")
+        original_plan = Path(plan_path).read_bytes()
+        supplied = json.loads(original_plan)
+        from graph import fingerprint
+        if fingerprint(supplied) != index["plan_sha256"]:
+            raise ValueError("BENCHMARK_PLAN_STALE: benchmark plan does not match index")
+        report["token_budget_audit"] = token_benchmark(original_plan, files, impact)
     if output_path:
         out = Path(output_path)
         if out.exists():
@@ -203,6 +242,10 @@ def run(index_path, output_path=None, rule_id=DEFAULT_RULE):
                          "normative_authority": False}))
     else:
         print(canonical(report))
+    if impact is not None:
+        print(canonical(impact))
+    if plan_path is not None:
+        print(canonical(report["token_budget_audit"]))
     return report
 
 
@@ -211,15 +254,14 @@ def main():
     parser.add_argument("--index", type=Path, required=True)
     parser.add_argument("--out", type=Path)
     parser.add_argument("--rule", default=DEFAULT_RULE)
+    parser.add_argument("--benchmark-plan", type=Path,
+                        help="Run tokenizer proxy against unchanged canonical plan and same exact sources")
     parser.add_argument("--change-field")
     parser.add_argument("--before")
     parser.add_argument("--after")
     a = parser.parse_args()
-    report = run(a.index, a.out, a.rule)
-    if a.change_field is not None:
-        if a.before is None or a.after is None:
-            parser.error("--change-field requires --before and --after")
-        print(canonical(change_impact(report, a.change_field, a.before, a.after)))
+    run(a.index, a.out, a.rule, a.benchmark_plan,
+        a.change_field, a.before, a.after)
 
 
 if __name__ == "__main__":
