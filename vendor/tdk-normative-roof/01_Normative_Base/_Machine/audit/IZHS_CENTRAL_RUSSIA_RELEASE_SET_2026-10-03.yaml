@@ -1,0 +1,186 @@
+release_set_version: 5
+date: '2026-10-03'
+profile_id: IZHS.CENTRAL_RUSSIA
+object_type: residential.izhs
+status: evidence_gate_requires_rerun_coverage_gaps_daylight_locality_and_sp20_snow_selection
+purpose: 'Первый нормативный release-set для типового отдельно стоящего ИЖС Центральной России. Проверяется отдельно от глобальной карантинной базы; чужие типы зданий и отложенные региональные специальные случаи не являются блокерами этого профиля.'
+
+selection_policy:
+  confirmed_only: true
+  exact_object_class: residential.izhs
+  no_parent_fallback: true
+  no_neighbor_object_classes: true
+  canonical_rule_ids_only: true
+  north_overlay_excluded: true
+  source_tiers: [A1_primary_legal_system, A2_one_hop_from_A1]
+  require_schema_v4_evidence: true
+  fail_closed: true
+
+mandatory_exact_object_files:
+  - path: 01_Normative_Base/_Machine/rules/residential_izhs.yaml
+    selector: confirmed_rules_with_exact_object_class
+  - path: 01_Normative_Base/_Machine/rules/residential_izhs_2026.yaml
+    selector: confirmed_rules_with_exact_object_class
+  - path: 01_Normative_Base/_Machine/rules/site_izhs_legal_2026.yaml
+    selector: confirmed_rules_with_exact_object_class
+  - path: 01_Normative_Base/_Machine/rules/structural_loads_izhs_sp20_2026.yaml
+    selector: confirmed_rules_with_exact_object_class
+    exclude_rule_ids:
+      - IZHS-LOAD-SP20-SNOW-REGION-001
+      - IZHS-LOAD-SP20-SNOW-PROCEDURE-001
+  - path: 01_Normative_Base/_Machine/rules/water_sewer_izhs_sp30_2026.yaml
+    selector: confirmed_rules_with_exact_object_class
+  - path: 01_Normative_Base/_Machine/rules/hvac_izhs_sp55_2026.yaml
+    selector: confirmed_rules_with_exact_object_class
+  - path: 01_Normative_Base/_Machine/rules/electrical_izhs_sp256_2026.yaml
+    selector: confirmed_rules_with_exact_object_class
+  - path: 01_Normative_Base/_Machine/rules/thermal_izhs_sp50_2024.yaml
+    selector: confirmed_rules_with_exact_object_class
+  - path: 01_Normative_Base/_Machine/rules/thermal_izhs_sp50_table3_2026.yaml
+    selector: confirmed_rules_with_exact_object_class
+  - path: 01_Normative_Base/_Machine/rules/evacuation_izhs_sp1_2026.yaml
+    selector: confirmed_rules_with_exact_object_class
+  - path: 01_Normative_Base/_Machine/rules/fire_site_izhs_sp4_2026.yaml
+    selector: confirmed_rules_with_exact_object_class
+    exclude_jurisdictions: [RU_NORTH_OVERLAY]
+  - path: 01_Normative_Base/_Machine/rules/fire_resistance_izhs_sp2_2026.yaml
+    selector: confirmed_rules_with_exact_object_class
+  - path: 01_Normative_Base/_Machine/rules/roof_fire_izhs_sp2_2026.yaml
+    selector: confirmed_rules_with_exact_object_class
+  - path: 01_Normative_Base/_Machine/rules/acoustics_izhs_sp51_2026.yaml
+    selector: confirmed_rules_with_exact_object_class
+
+explicit_generic_rule_whitelist:
+  - path: 01_Normative_Base/_Machine/rules/roofing_2026.yaml
+    reason: 'Технические кровельные нормы СП17 являются межклассовыми; допускаются только перечисленные уже locator-audited правила, а не parent fallback по residential.'
+    rule_ids:
+      - ROOF-SP17-MATERIAL-SLOPE-001
+      - ROOF-VENT-CHANNEL-TABLE-A2-001
+      - ROOF-NO-DYNAMIC-LOAD-ON-MEMBRANE-001
+      - ROOF-SCREED-JOINTS-001
+      - ROOF-WATERPROOF-UPSTAND-300-001
+      - ROOF-DRAIN-LOWERING-001
+      - ROOF-EXIT-UPSTAND-150-001
+      - ROOF-USABLE-LOAD-CHECK-001
+      - ROOF-USABLE-PARAPET-1200-001
+  - path: 01_Normative_Base/_Machine/rules/floors_2026.yaml
+    reason: 'Технические нормы СП29 разрешены только точечным whitelist для обычных жилых полов/мокрых помещений.'
+    rule_ids:
+      - FLOOR-SP29-SCOPE-001
+      - FLOOR-WET-ROOM-DROP-15-20-001
+      - FLOOR-DEFLECTION-2MM-001
+      - FLOOR-WATERPROOF-UPSTAND-200-001
+      - FLOOR-DEFORMATION-JOINT-COINCIDE-001
+  - path: 01_Normative_Base/_Machine/rules/geotechnical_sp22.yaml
+    reason: 'СП22 универсален по типу сооружения; в Central release допускаются только перечисленные locator-audited процедуры. Фактические грунтовые параметры поступают из изысканий.'
+    rule_ids:
+      - GEO-SP22-SURVEY-GATE-001
+      - GEO-SP22-GEOTECH-CATEGORY-001
+      - GEO-SP22-DIRECT-TESTS-GC2-GC3-001
+      - GEO-SP22-MONITORING-GC2-GC3-001
+      - GEO-SP22-LIMIT-STATES-001
+      - GEO-SP22-DEFORMATION-CHECK-001
+      - GEO-SP22-BEARING-CAPACITY-CONDITIONS-001
+      - GEO-SP22-GROUNDWATER-FORECAST-001
+
+conditional_exact_object_files:
+  - path: 01_Normative_Base/_Machine/rules/gas_izhs_sp402_2026.yaml
+    activate_when: 'internal natural-gas system is selected'
+  - path: 01_Normative_Base/_Machine/rules/structural_rc_izhs_sp63_2026.yaml
+    activate_when: 'load-bearing reinforced concrete is selected'
+  - path: 01_Normative_Base/_Machine/rules/structural_steel_izhs_sp16_2026.yaml
+    activate_when: 'load-bearing steel is selected'
+  - path: 01_Normative_Base/_Machine/rules/structural_timber_izhs_sp64_2026.yaml
+    activate_when: 'load-bearing timber is selected'
+    exclude_rule_ids:
+      - IZHS-TIMBER-SP64-MEMBER-SIZING-GATE-001
+
+known_release_gaps:
+  - rule_id: IZHS-TIMBER-SP64-MEMBER-SIZING-GATE-001
+    state: excluded_until_exact_locator_isolated
+    reason: 'Запись ссылается только на широкие разделы 6-7 СП64; этого недостаточно для exact-locator. Остальные подтвержденные timber rules могут использоваться, но sizing должен выбирать и отдельно подтверждать конкретную формулу/ветвь по фактическому напряженному состоянию.'
+  - rule_id: IZHS-LOAD-SP20-SNOW-REGION-001
+    state: excluded_pending_current_10_2_selection_path_reaudit
+    reason: 'Таблица 10.1 и ее численные значения подтверждены, но прежняя машинная запись разрешала lookup только по snow_region. Аудит выявил ветку п.10.2 для отдельных населенных пунктов через приложение К. До повторного прямого A1-чтения текущего п.10.2 и явного кодирования приоритета settlement-specific branch над regional Table 10.1 автоматический региональный lookup исключен из release-set.'
+  - rule_id: IZHS-LOAD-SP20-SNOW-PROCEDURE-001
+    state: excluded_dependency_unresolved_by_sp20_10_2_reaudit
+    reason: 'Общая процедура снеговой нагрузки сама по себе подтверждена, но зависит от корректно разрешенного ground-snow input. Пока selection path п.10.2 не закрыт A1-аудитом, правило исключено вместе с зависимостью, чтобы Central release не мог тихо использовать Table 10.1 для населенного пункта из приложения К.'
+  - gap_id: DAYLIGHT_SP55_9_18_CURRENT_A1
+    state: blocking_locator_gap
+    reason: 'Кандидатные отношения световых проемов 1:8/1:10 подтверждаются другими текущими A1 текстами, но точный действующий locator СП55 п.9.18 в этом проходе не изолирован. Запрещено подтверждать норму заменой источника или совпадением текста.'
+  - gap_id: SP402_TABLE5_1_GAS_VENTILATION
+    state: conditional_pending_visual_numeric_audit
+    reason: 'Нужна только при выбранном газовом оборудовании; текущий текст п.5.9 подтвержден, но численные строки таблицы 5.1 не транскрибированы из-за графических обозначений единиц.'
+  - gap_id: LOCALITY_CLIMATE_RESOLVER
+    state: project_overlay_required_with_sp20_snow_selection_guard
+    reason: 'Central Russia не получает усредненных снеговых, ветровых или климатических значений. Для SP50 применима аудированная датированная цепочка SP131.13330.2020 с Изм. N1-N2; для других потребителей версия SP131 разрешается по их собственной ссылочной семантике. Снеговой input дополнительно заблокирован до A1-reconciliation п.10.2 settlement-specific branch vs regional Table 10.1.'
+
+resolved_boundary_items:
+  - item_id: ORDINARY_IZHS_SITE_PLANNING
+    state: resolved_as_federal_gate_plus_local_project_input
+    sources:
+      - GRK-RF-190FZ-CONSULTANT-2026 Article 38
+      - GRK-RF-190FZ-CONSULTANT-2026 Article 57.3
+    rule_file: 01_Normative_Base/_Machine/rules/site_izhs_legal_2026.yaml
+    meaning: 'Федеральная база задает типы site-specific параметров и механизм их получения/фиксации; конкретные числа отступов, высоты, этажности, процента застройки и ограничения участка должны приходить из применимого градостроительного регламента/ГПЗУ/local overlay.'
+  - item_id: SP50_TABLE3_RESIDENTIAL_LOOKUP
+    state: resolved_source_exact
+    rule_file: 01_Normative_Base/_Machine/rules/thermal_izhs_sp50_table3_2026.yaml
+    source: 'SP50.13330.2024 Table 3 category 1.1, official ConsultantPlus PDF'
+    meaning: 'GSOP tabular values and a/b coefficients are stored exactly; window a/b cells remain null because the source table contains dashes.'
+  - item_id: SP2_ROOF_FIRE_CHANGE2
+    state: resolved_source_exact
+    rule_file: 01_Normative_Base/_Machine/rules/roof_fire_izhs_sp2_2026.yaml
+    meaning: 'Current subsection 5.5/Table 5.1 is encoded only for its actual roll/mastic waterproofing branch.'
+  - item_id: IZHS_ACOUSTICS_CORE
+    state: resolved_source_exact
+    rule_file: 01_Normative_Base/_Machine/rules/acoustics_izhs_sp51_2026.yaml
+    meaning: 'Living-room noise limits, equipment data gate and conditional engineering-room adjacency rule are exact.'
+
+regional_inputs_not_encoded_as_average:
+  - SP20 snow input / selection branch
+  - SP20 wind_region
+  - SP131 locality climate row
+  - SP50 GSOP inputs
+  - local PZZ / land-use rules
+  - GPZU / applicable gradreg site parameters
+  - provider utility connection conditions
+
+conditional_edges_not_blocking_central_base:
+  - {document: SP32.13330.2018, trigger: external_sewer_network_or_structure}
+  - {document: SP62.13330, trigger: external_gas_network}
+  - {document: SP24.13330, trigger: pile_foundation}
+  - {document: SP7.13130, trigger: exact fire-HVAC condition}
+  - {document: STU_or_fire_risk, trigger: project_specific_requirement}
+
+deferred_profiles_and_documents:
+  - IZHS.SOUTH_RUSSIA
+  - IZHS.NORTH_RUSSIA
+  - IZHS.FAR_NORTH_SPECIAL
+  - SP25_permafrost
+  - extreme_cold_special_cases
+  - rare_complex_geotechnical_special_cases
+
+release_gates:
+  - selected_rule_exists
+  - selected_rule_status_confirmed
+  - exact_locator_present
+  - evidence_note_present
+  - verification_present
+  - verification_text_opened_true
+  - verification_locator_read_true
+  - verification_source_tier_A1_or_A2
+  - verification_content_access_partial_or_full
+  - verification_source_url_present
+  - verification_checked_at_present
+  - verifier_present
+  - confidence_source_exact
+  - numeric_table_context_complete_when_required
+  - no_duplicate_selected_rule_id
+  - no_selected_canonical_alias
+  - no_north_overlay_in_central_release
+  - no_deprecated_conflict_reserve_rule_selected
+  - no_forbidden_neighbor_object_scope_from_exact_selector
+  - every_excluded_rule_is_documented_as_known_release_gap
+
+success_meaning: 'PASS означает evidence-готовность выбранного Central-Russia IZHS release-set, а не абсолютную полноту всех расчетных ветвей. known_release_gaps остаются fail-closed/conditional и не могут выдаваться как подтвержденные значения. PASS не снимает глобальный quarantine и не подтверждает South/North/Far-North profiles.'

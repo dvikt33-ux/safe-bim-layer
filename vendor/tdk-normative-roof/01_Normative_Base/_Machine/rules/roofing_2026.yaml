@@ -1,0 +1,384 @@
+rules:
+  - rule_id: ROOF-SP17-MATERIAL-SLOPE-001
+    status: confirmed
+    rule_type: procedure
+    short_rule: 'Уклон кровли назначают в зависимости от применяемого кровельного материала по таблице 4.1 СП 17; единого уклона для всех кровель нет. Числовое значение выбирается только из актуальной строки таблицы с учетом Изменения N 5.'
+    source_id: SP-17-13330-2017-GARANT
+    source_locator: {document_code: 'СП 17.13330.2017', clause: '4.3', table: '4.1'}
+    scope:
+      object_classes: ['residential', 'public', 'industrial', 'warehouse', 'transport']
+      disciplines: ['roofing', 'architecture']
+      modules: ['architecture']
+      phases: ['concept', 'design', 'working_documentation']
+    dependencies: ['roof_material_type']
+    evidence_note: 'A1 GARANT current SP17 text directly states in 4.3 that roof slopes depend on material and are given in Table 4.1. Amendment N5 modifies at least one Table 4.1 value/footnote, so this generic procedure is confirmed but no material-specific numeric slope may be inferred without reading the current row with the N5 overlay.'
+    verification:
+      source_tier: A1_primary_legal_system
+      content_access: partial_text
+      text_opened: true
+      locator_read: true
+      source_url: 'https://base.garant.ru/71729740/'
+      checked_at: '2026-10-03'
+    verified_at: '2026-10-03'
+    verifier: 'ChatGPT_A1_GARANT_audit'
+    confidence: source_exact
+
+  - rule_id: ROOF-VENT-GAP-50-001
+    status: deprecated
+    rule_type: minimum
+    short_rule: 'Устаревшее упрощение «вентиляционный канал не менее 50 мм». Не использовать как расчетное правило: высота канала зависит от длины ската и уклона по таблице А.2.'
+    source_id: SP-17-13330-2017-GARANT
+    source_locator: {document_code: 'СП 17.13330.2017', appendix: 'A', table: 'A.2'}
+    scope:
+      object_classes: ['residential', 'public', 'industrial', 'warehouse']
+      functions: ['roof.pitched_insulated']
+      disciplines: ['roofing', 'architecture', 'building_physics']
+      modules: ['architecture']
+      phases: ['design', 'working_documentation']
+    supersedes: []
+    evidence_note: 'Reverse audit 2026-10-03: Table A.2 is parametric. Although 50 mm occurs in many cells, other cells require 60, 80 or 100 mm. Hardcoding 50 mm can under-design the ventilation channel.'
+    verified_at: '2026-10-03'
+    confidence: unresolved
+
+  - rule_id: ROOF-VENT-CHANNEL-TABLE-A2-001
+    status: confirmed
+    rule_type: procedure
+    short_rule: 'Высоту вентиляционного канала в крыше стропильной конструкции принимают по таблице А.2 СП 17 в зависимости от длины ската и уклона; допустимый диапазон значений таблицы — 50–100 мм, поэтому фиксированное значение 50 мм применять нельзя без проверки строки и графы.'
+    source_id: SP-17-13330-2017-GARANT
+    source_locator: {document_code: 'СП 17.13330.2017', appendix: 'A', table: 'A.2'}
+    scope:
+      object_classes: ['residential', 'public', 'industrial', 'warehouse']
+      functions: ['roof.pitched_insulated']
+      disciplines: ['roofing', 'architecture', 'building_physics']
+      modules: ['architecture']
+      phases: ['design', 'working_documentation']
+    derived_values:
+      allowed: true
+      formula: 'lookup Table A.2 by roof_slope_length_m and roof_slope_percent_or_degrees'
+      required_inputs: ['roof_slope_length_m', 'roof_slope']
+    evidence_note: 'A1 GARANT Appendix A opened/read. Table A.2 gives channel height by slope length 5/10/15/20/25 m and roof slopes 18/27/36/47/56% (10/15/20/25/30°), with values from 50 to 100 mm. Machine rule intentionally stores lookup semantics rather than collapsing the table to one minimum.'
+    verification:
+      source_tier: A1_primary_legal_system
+      content_access: full_text
+      text_opened: true
+      locator_read: true
+      source_url: 'https://base.garant.ru/71729740/53f89421bbdaf741eb2d1ecc4ddb4c33/'
+      checked_at: '2026-10-03'
+    verified_at: '2026-10-03'
+    verifier: 'ChatGPT_A1_GARANT_audit'
+    confidence: source_exact
+
+  - rule_id: ROOF-NO-DYNAMIC-LOAD-ON-MEMBRANE-001
+    status: confirmed
+    rule_type: prohibition
+    short_rule: 'Передача динамических нагрузок на кровлю от аппаратов и оборудования, установленных на крыше, не допускается; расстояние между стойками под оборудование и от основания под водоизоляционный ковер до низа оборудования должно быть не менее 600 мм.'
+    source_id: SP-17-13330-2017-GARANT
+    source_locator: {document_code: 'СП 17.13330.2017', clause: '4.10'}
+    scope:
+      object_classes: ['residential', 'public', 'industrial', 'warehouse']
+      disciplines: ['roofing', 'structures', 'engineering']
+      modules: ['architecture', 'structures']
+      phases: ['design', 'working_documentation']
+    evidence_note: 'A1 GARANT current SP17 clause 4.10 opened/read. Both the prohibition on dynamic load transfer and the 600 mm service-clearance requirement are stated in the locator.'
+    verification:
+      source_tier: A1_primary_legal_system
+      content_access: full_text
+      text_opened: true
+      locator_read: true
+      source_url: 'https://base.garant.ru/71729740/'
+      checked_at: '2026-10-03'
+    verified_at: '2026-10-03'
+    verifier: 'ChatGPT_A1_GARANT_audit'
+    confidence: source_exact
+
+  - rule_id: ROOF-SCREED-JOINTS-001
+    status: confirmed
+    rule_type: maximum
+    short_rule: 'Температурно-усадочные швы шириной до 10 мм разделяют цементно-песчаную стяжку на участки не более 6×6 м, песчаную асфальтобетонную — не более 4×4 м; в холодных покрытиях с несущими плитами длиной 6 м — 3×3 м.'
+    source_id: SP-17-13330-2017-GARANT
+    source_locator: {document_code: 'СП 17.13330.2017', clause: '5.1.9'}
+    scope:
+      object_classes: ['residential', 'public', 'industrial', 'warehouse']
+      disciplines: ['roofing', 'architecture']
+      modules: ['architecture']
+      phases: ['design', 'working_documentation']
+    evidence_note: 'A1 GARANT current clause 5.1.9 opened/read directly. Values 6×6, 4×4 and 3×3 m and joint width up to 10 mm are stated explicitly.'
+    verification:
+      source_tier: A1_primary_legal_system
+      content_access: full_text
+      text_opened: true
+      locator_read: true
+      source_url: 'https://base.garant.ru/71729740/'
+      checked_at: '2026-10-03'
+    verified_at: '2026-10-03'
+    verifier: 'ChatGPT_A1_GARANT_audit'
+    confidence: source_exact
+
+  - rule_id: ROOF-WATERPROOF-UPSTAND-300-001
+    status: confirmed
+    rule_type: minimum
+    short_rule: 'Дополнительный водоизоляционный ковер из рулонных и мастичных материалов заводят на вертикальные поверхности не менее чем на 300 мм от поверхности кровли — основного водоизоляционного ковра или защитного слоя.'
+    source_id: SP-17-13330-2017-GARANT
+    source_locator: {document_code: 'СП 17.13330.2017', clause: '5.1.20'}
+    scope:
+      object_classes: ['residential', 'public', 'industrial', 'warehouse']
+      disciplines: ['roofing', 'architecture']
+      modules: ['architecture']
+      phases: ['design', 'working_documentation']
+    evidence_note: 'A1 GARANT current clause 5.1.20 opened/read directly; 300 mm is the exact minimum.'
+    verification:
+      source_tier: A1_primary_legal_system
+      content_access: full_text
+      text_opened: true
+      locator_read: true
+      source_url: 'https://base.garant.ru/71729740/'
+      checked_at: '2026-10-03'
+    verified_at: '2026-10-03'
+    verifier: 'ChatGPT_A1_GARANT_audit'
+    confidence: source_exact
+
+  - rule_id: ROOF-DRAIN-LOWERING-001
+    status: confirmed
+    rule_type: requirement
+    short_rule: 'У воронки внутреннего водостока в радиусе 0,5–1,0 м предусматривают понижение от уровня водоизоляционного ковра на 15–20 мм; ось воронки должна быть не ближе 600 мм от парапета и других выступающих частей здания.'
+    source_id: SP-17-13330-2017-GARANT
+    source_locator: {document_code: 'СП 17.13330.2017', clause: '5.1.25'}
+    scope:
+      object_classes: ['residential', 'public', 'industrial', 'warehouse']
+      disciplines: ['roofing', 'water_sewer', 'architecture']
+      modules: ['architecture', 'water_sewer']
+      phases: ['design', 'working_documentation']
+    evidence_note: 'A1 GARANT current clause 5.1.25 opened/read directly. Radius 0.5–1.0 m, lowering 15–20 mm and 600 mm minimum axis clearance are all present in the same locator.'
+    verification:
+      source_tier: A1_primary_legal_system
+      content_access: full_text
+      text_opened: true
+      locator_read: true
+      source_url: 'https://base.garant.ru/71729740/'
+      checked_at: '2026-10-03'
+    verified_at: '2026-10-03'
+    verifier: 'ChatGPT_A1_GARANT_audit'
+    confidence: source_exact
+
+  - rule_id: ROOF-EXIT-UPSTAND-150-001
+    status: confirmed
+    rule_type: minimum
+    short_rule: 'У выхода на крышу высота стенки от поверхности водоизоляционного ковра или защитного слоя до дверного проема должна быть не менее 150 мм; при наличии водоотводящего лотка или дренажа с решеткой допускается не менее 50 мм.'
+    source_id: SP-17-13330-2017-GARANT
+    source_locator: {document_code: 'СП 17.13330.2017', clause: '5.1.27'}
+    scope:
+      object_classes: ['residential', 'public', 'industrial', 'warehouse']
+      disciplines: ['roofing', 'architecture']
+      modules: ['architecture']
+      phases: ['design', 'working_documentation']
+    evidence_note: 'A1 GARANT current clause 5.1.27 opened/read. Reverse audit adds the previously omitted conditional 50 mm branch for a drainage channel or grated drain; hardcoding only 150 mm was incomplete.'
+    verification:
+      source_tier: A1_primary_legal_system
+      content_access: full_text
+      text_opened: true
+      locator_read: true
+      source_url: 'https://base.garant.ru/71729740/'
+      checked_at: '2026-10-03'
+    verified_at: '2026-10-03'
+    verifier: 'ChatGPT_A1_GARANT_audit'
+    confidence: source_exact
+
+  - rule_id: ROOF-USABLE-LOAD-CHECK-001
+    status: confirmed
+    rule_type: requirement
+    short_rule: 'При проектировании эксплуатируемой кровли крышу проверяют расчетом на дополнительные нагрузки от оборудования, транспорта, людей и других предусмотренных воздействий по СП 20.13330.'
+    source_id: SP-17-13330-2017-GARANT
+    source_locator: {document_code: 'СП 17.13330.2017', clause: '5.3.1'}
+    scope:
+      object_classes: ['residential', 'public', 'industrial', 'transport']
+      functions: ['roof.usable']
+      disciplines: ['roofing', 'structures', 'architecture']
+      modules: ['architecture', 'structures']
+      phases: ['concept', 'design', 'working_documentation']
+    dependencies: ['SP-20-13330-2016-GARANT', 'actual_use_loads']
+    evidence_note: 'A1 GARANT current clause 5.3.1 opened/read directly. SP20 calculation remains a separate dependency.'
+    verification:
+      source_tier: A1_primary_legal_system
+      content_access: full_text
+      text_opened: true
+      locator_read: true
+      source_url: 'https://base.garant.ru/71729740/'
+      checked_at: '2026-10-03'
+    verified_at: '2026-10-03'
+    verifier: 'ChatGPT_A1_GARANT_audit'
+    confidence: source_exact
+
+  - rule_id: ROOF-USABLE-PARAPET-1200-001
+    status: confirmed
+    rule_type: minimum
+    short_rule: 'По периметру эксплуатируемой кровли предусматривают парапет высотой не менее 1,2 м; в местах детских и спортивных площадок над ним предусматривают сетчатое ограждение высотой не менее 1,8 м.'
+    source_id: SP-17-13330-2017-GARANT
+    source_locator: {document_code: 'СП 17.13330.2017', amendment: 'N 4', clause: '5.3.4'}
+    scope:
+      object_classes: ['residential', 'public']
+      functions: ['roof.usable', 'roof.playground', 'roof.sport']
+      disciplines: ['roofing', 'architecture', 'safety']
+      modules: ['architecture']
+      phases: ['concept', 'design', 'working_documentation']
+    dependencies: ['SP 251.1325800.2016 clause 6.3 for child/sport площадки']
+    evidence_note: 'A1 GARANT Amendment N4 directly rewrites clause 5.3.4. Reverse audit corrects the stale machine value 1.0 m to the exact current 1.8 m netted-fence height. Amendment N5 does not modify clause 5.3.4.'
+    verification:
+      source_tier: A1_primary_legal_system
+      content_access: partial_text
+      text_opened: true
+      locator_read: true
+      source_url: 'https://base.garant.ru/408556555/'
+      checked_at: '2026-10-03'
+    verified_at: '2026-10-03'
+    verifier: 'ChatGPT_A1_GARANT_audit'
+    confidence: source_exact
+
+  - rule_id: ROOF-INVERTED-INSULATION-001
+    status: confirmed
+    rule_type: requirement
+    short_rule: 'В инверсионной кровле теплоизоляцию предусматривают из материалов с водопоглощением не более 0,7% по объему за 28 суток и прочностью на сжатие не менее 100 кПа; теплоизоляция должна быть однослойной.'
+    source_id: SP-17-13330-2017-GARANT
+    source_locator: {document_code: 'СП 17.13330.2017', clause: '5.4.3'}
+    scope:
+      object_classes: ['residential', 'public', 'industrial']
+      functions: ['roof.inverted']
+      disciplines: ['roofing', 'building_physics']
+      modules: ['architecture', 'thermal_protection']
+      phases: ['design', 'working_documentation']
+    evidence_note: 'A1 GARANT current clause 5.4.3 opened/read directly. Numeric limits 0.7%/28 days and 100 kPa plus one-layer requirement are explicit.'
+    verification:
+      source_tier: A1_primary_legal_system
+      content_access: full_text
+      text_opened: true
+      locator_read: true
+      source_url: 'https://base.garant.ru/71729740/'
+      checked_at: '2026-10-03'
+    verified_at: '2026-10-03'
+    verifier: 'ChatGPT_A1_GARANT_audit'
+    confidence: source_exact
+
+  - rule_id: ROOF-INVERTED-INSULATION-PLUS10-001
+    status: confirmed
+    rule_type: formula
+    short_rule: 'Расчетную толщину теплоизоляционных плит инверсионной кровли увеличивают на 10% из-за теплопотерь при попадании воды в стыки и быстрого съема тепла при стекании воды.'
+    source_id: SP-17-13330-2017-GARANT
+    source_locator: {document_code: 'СП 17.13330.2017', clause: '5.4.5'}
+    scope:
+      object_classes: ['residential', 'public', 'industrial']
+      functions: ['roof.inverted']
+      disciplines: ['roofing', 'thermal_protection']
+      modules: ['architecture', 'thermal_protection']
+      phases: ['design', 'working_documentation']
+    derived_values:
+      allowed: true
+      formula: 'design_insulation_thickness = calculated_thickness * 1.10'
+      required_inputs: ['calculated_thickness']
+    evidence_note: 'A1 GARANT current clause 5.4.5 opened/read directly; 10% increase is explicit.'
+    verification:
+      source_tier: A1_primary_legal_system
+      content_access: full_text
+      text_opened: true
+      locator_read: true
+      source_url: 'https://base.garant.ru/71729740/'
+      checked_at: '2026-10-03'
+    verified_at: '2026-10-03'
+    verifier: 'ChatGPT_A1_GARANT_audit'
+    confidence: source_exact
+
+  - rule_id: ROOF-INVERTED-NO-FASTEN-THROUGH-MEMBRANE-001
+    status: confirmed
+    rule_type: prohibition
+    short_rule: 'В инверсионной кровле механическое крепление теплоизоляционных плит через водоизоляционный ковер не допускается.'
+    source_id: SP-17-13330-2017-GARANT
+    source_locator: {document_code: 'СП 17.13330.2017', amendment: 'N 5', clause: '5.4.6'}
+    scope:
+      object_classes: ['residential', 'public', 'industrial']
+      functions: ['roof.inverted']
+      disciplines: ['roofing', 'architecture']
+      modules: ['architecture']
+      phases: ['design', 'working_documentation']
+    evidence_note: 'A1 GARANT Amendment N5 directly replaces 5.4.6 with this wording. The older consolidated rendering saying that both insulation and waterproofing cannot be mechanically fastened is not used because N5 narrows the exact current text to fastening insulation boards through the waterproofing layer.'
+    verification:
+      source_tier: A1_primary_legal_system
+      content_access: partial_text
+      text_opened: true
+      locator_read: true
+      source_url: 'https://base.garant.ru/411461695/'
+      checked_at: '2026-10-03'
+    verified_at: '2026-10-03'
+    verifier: 'ChatGPT_A1_GARANT_audit'
+    confidence: source_exact
+
+  - rule_id: ROOF-INVERTED-GEOTEXTILE-001
+    status: confirmed
+    rule_type: minimum
+    short_rule: 'Предохранительный слой инверсионной кровли выполняют из свободноуложенного нетканого геотекстиля с нахлестом не менее 200 мм и прочностью при статическом продавливании не менее 1300 Н.'
+    source_id: SP-17-13330-2017-GARANT
+    source_locator: {document_code: 'СП 17.13330.2017', amendment: 'N 5', clause: '5.4.6a'}
+    scope:
+      object_classes: ['residential', 'public', 'industrial']
+      functions: ['roof.inverted']
+      disciplines: ['roofing', 'architecture']
+      modules: ['architecture']
+      phases: ['design', 'working_documentation']
+    dependencies: ['GOST R 56335']
+    evidence_note: 'A1 GARANT Amendment N5 directly introduces clause 5.4.6a with the 200 mm overlap and 1300 N static-puncture strength.'
+    verification:
+      source_tier: A1_primary_legal_system
+      content_access: partial_text
+      text_opened: true
+      locator_read: true
+      source_url: 'https://base.garant.ru/411461695/'
+      checked_at: '2026-10-03'
+    verified_at: '2026-10-03'
+    verifier: 'ChatGPT_A1_GARANT_audit'
+    confidence: source_exact
+
+  - rule_id: ROOF-GREEN-STRUCTURAL-CHECK-001
+    status: confirmed
+    rule_type: requirement
+    short_rule: 'При проектировании озелененной кровли на существующем здании или сооружении проверяют несущую способность всех конструкций и состояние слоев крыши; водоизоляционный ковер должен быть корнестойким либо дополняться противокорневым слоем.'
+    source_id: SP-17-13330-2017-GARANT
+    source_locator: {document_code: 'СП 17.13330.2017', clause: '5.5.1-5.5.2'}
+    scope:
+      object_classes: ['residential', 'public', 'industrial']
+      functions: ['roof.green']
+      disciplines: ['roofing', 'structures', 'architecture']
+      modules: ['architecture', 'structures']
+      phases: ['reconstruction', 'design', 'working_documentation']
+    evidence_note: 'A1 GARANT current clauses 5.5.1 and 5.5.2 opened/read. N5 only adds a bibliographic reference to 5.5.1 and does not change these substantive requirements.'
+    verification:
+      source_tier: A1_primary_legal_system
+      content_access: full_text
+      text_opened: true
+      locator_read: true
+      source_url: 'https://base.garant.ru/71729740/'
+      checked_at: '2026-10-03'
+    verified_at: '2026-10-03'
+    verifier: 'ChatGPT_A1_GARANT_audit'
+    confidence: source_exact
+
+  - rule_id: ROOF-RAFTER-CALC-SP20-001
+    status: confirmed
+    rule_type: requirement
+    short_rule: 'Сечение и шаг стропил устанавливают расчетом на действие нагрузки по СП 20.13330; высота брусков контробрешетки должна быть равна требуемой высоте вентиляционного канала.'
+    source_id: SP-17-13330-2017-GARANT
+    source_locator: {document_code: 'СП 17.13330.2017', clause: '6.1.4'}
+    scope:
+      object_classes: ['residential', 'public']
+      functions: ['roof.pitched']
+      disciplines: ['roofing', 'structures', 'architecture']
+      modules: ['architecture', 'structures']
+      phases: ['design', 'working_documentation']
+    dependencies: ['SP-20-13330-2016-GARANT', 'ROOF-VENT-CHANNEL-TABLE-A2-001']
+    evidence_note: 'A1 GARANT current clause 6.1.4 opened/read directly. It requires structural sizing/spacing by SP20 and ties counter-batten height to the ventilation-channel height.'
+    verification:
+      source_tier: A1_primary_legal_system
+      content_access: full_text
+      text_opened: true
+      locator_read: true
+      source_url: 'https://base.garant.ru/71729740/'
+      checked_at: '2026-10-03'
+    verified_at: '2026-10-03'
+    verifier: 'ChatGPT_A1_GARANT_audit'
+    confidence: source_exact

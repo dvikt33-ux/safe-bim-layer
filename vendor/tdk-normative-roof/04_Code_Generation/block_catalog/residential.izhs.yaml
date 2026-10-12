@@ -1,0 +1,179 @@
+catalog_version: 8
+object_type: residential.izhs
+release_status: design_only
+warning: "Каталог связан с реальными compiled-block файлами и текущим Central release-set, но reusable Central base остается fail-closed до закрытия DAYLIGHT_SP55_9_18_CURRENT_A1 и SP20_SNOW_CURRENT_SELECTION_PATH; design_only не является нормативным выпуском."
+
+implemented_blocks:
+  IZHS.ELEMENTS.CORE:
+    file: 04_Code_Generation/blocks/residential.izhs/IZHS.ELEMENTS.CORE.yaml
+    module: architecture
+    depth: shell
+    kind: static
+    requires: []
+    release_status: design_only
+  IZHS.SHELL.CORE:
+    file: 04_Code_Generation/blocks/residential.izhs/IZHS.SHELL.CORE.yaml
+    module: architecture
+    depth: shell
+    kind: composite
+    requires: [IZHS.ELEMENTS.CORE]
+    release_status: design_only
+  IZHS.ARCH.DETAILS:
+    file: 04_Code_Generation/blocks/residential.izhs/IZHS.ARCH.DETAILS.yaml
+    module: architecture
+    depth: details
+    kind: composite
+    requires: [IZHS.SHELL.CORE]
+    release_status: design_only
+  IZHS.ROOF.DETAILS:
+    file: 04_Code_Generation/blocks/residential.izhs/IZHS.ROOF.DETAILS.yaml
+    module: architecture
+    depth: details
+    kind: parametric
+    requires: [IZHS.SHELL.CORE]
+    release_status: design_only
+  IZHS.SITE.CORE:
+    file: 04_Code_Generation/blocks/residential.izhs/IZHS.SITE.CORE.yaml
+    module: general_plan
+    secondary_modules: [fire_safety]
+    depth: schematic
+    kind: parametric
+    requires: []
+    release_status: design_only
+  IZHS.EGRESS.DETAILS:
+    file: 04_Code_Generation/blocks/residential.izhs/IZHS.EGRESS.DETAILS.yaml
+    module: evacuation
+    depth: detailed
+    kind: parametric
+    requires: [IZHS.SHELL.CORE]
+    release_status: design_only
+  IZHS.THERMAL.CORE:
+    file: 04_Code_Generation/blocks/residential.izhs/IZHS.THERMAL.CORE.yaml
+    module: thermal_protection
+    depth: calculation
+    kind: parametric
+    requires: [IZHS.SHELL.CORE]
+    release_status: design_only
+  IZHS.STRUCTURES.CORE:
+    file: 04_Code_Generation/blocks/residential.izhs/IZHS.STRUCTURES.CORE.yaml
+    module: structures
+    depth: calculation
+    kind: parametric
+    requires: [IZHS.SHELL.CORE]
+    release_status: design_only
+  IZHS.GEOTECH.CORE:
+    file: 04_Code_Generation/blocks/residential.izhs/IZHS.GEOTECH.CORE.yaml
+    module: geotechnics
+    secondary_modules: [foundation]
+    depth: calculation
+    kind: parametric
+    requires: [IZHS.SHELL.CORE]
+    release_status: design_only
+  IZHS.VK.SCHEMATIC:
+    file: 04_Code_Generation/blocks/residential.izhs/IZHS.VK.SCHEMATIC.yaml
+    module: water_supply
+    secondary_modules: [sewerage]
+    depth: schematic
+    kind: parametric
+    requires: [IZHS.SHELL.CORE]
+    release_status: design_only
+  IZHS.VK.CALC:
+    file: 04_Code_Generation/blocks/residential.izhs/IZHS.VK.CALC.yaml
+    module: water_supply
+    secondary_modules: [sewerage]
+    depth: coordinated
+    kind: parametric
+    requires: [IZHS.VK.SCHEMATIC]
+    release_status: design_only
+  IZHS.EOM.CORE:
+    file: 04_Code_Generation/blocks/residential.izhs/IZHS.EOM.CORE.yaml
+    module: electrical_power
+    secondary_modules: [lighting]
+    depth: schematic
+    kind: composite
+    requires: []
+    release_status: design_only
+  IZHS.EOM.SCHEMATIC:
+    file: 04_Code_Generation/blocks/residential.izhs/IZHS.EOM.SCHEMATIC.yaml
+    module: electrical_power
+    secondary_modules: [lighting]
+    depth: schematic
+    kind: parametric
+    requires: [IZHS.SHELL.CORE, IZHS.EOM.CORE]
+    release_status: design_only
+  IZHS.HVAC.SCHEMATIC:
+    file: 04_Code_Generation/blocks/residential.izhs/IZHS.HVAC.SCHEMATIC.yaml
+    module: heating
+    secondary_modules: [ventilation, air_conditioning, acoustics]
+    depth: schematic
+    kind: parametric
+    requires: [IZHS.SHELL.CORE]
+    release_status: design_only
+  IZHS.GAS.SCHEMATIC:
+    file: 04_Code_Generation/blocks/residential.izhs/IZHS.GAS.SCHEMATIC.yaml
+    module: gas_supply
+    secondary_modules: [architecture, ventilation, electrical_power, fire_safety]
+    depth: schematic
+    kind: parametric
+    requires: [IZHS.SHELL.CORE]
+    release_status: design_only
+
+planned_blocks:
+  - IZHS.ARCH.DEVELOPED
+  - IZHS.STRUCTURES.WORKING
+  - IZHS.VK.WORKING
+  - IZHS.EOM.WORKING
+  - IZHS.HVAC.CALC
+  - IZHS.HVAC.WORKING
+  - IZHS.GAS.WORKING
+  - IZHS.DOCUMENTATION.AR
+
+presets:
+  box_only:
+    blocks: [IZHS.ELEMENTS.CORE, IZHS.SHELL.CORE]
+  site_core:
+    blocks: [IZHS.SITE.CORE]
+  box_plus_site:
+    blocks: [IZHS.ELEMENTS.CORE, IZHS.SHELL.CORE, IZHS.SITE.CORE]
+  box_plus_details:
+    blocks: [IZHS.ELEMENTS.CORE, IZHS.SHELL.CORE, IZHS.ARCH.DETAILS, IZHS.ROOF.DETAILS]
+  box_plus_details_thermal:
+    blocks: [IZHS.ELEMENTS.CORE, IZHS.SHELL.CORE, IZHS.ARCH.DETAILS, IZHS.ROOF.DETAILS, IZHS.THERMAL.CORE]
+  box_plus_structures:
+    blocks: [IZHS.ELEMENTS.CORE, IZHS.SHELL.CORE, IZHS.STRUCTURES.CORE]
+  box_plus_geotech:
+    blocks: [IZHS.ELEMENTS.CORE, IZHS.SHELL.CORE, IZHS.GEOTECH.CORE]
+  box_plus_structures_geotech:
+    blocks: [IZHS.ELEMENTS.CORE, IZHS.SHELL.CORE, IZHS.STRUCTURES.CORE, IZHS.GEOTECH.CORE]
+  box_plus_egress_details:
+    blocks: [IZHS.ELEMENTS.CORE, IZHS.SHELL.CORE, IZHS.EGRESS.DETAILS]
+  box_plus_vk:
+    blocks: [IZHS.ELEMENTS.CORE, IZHS.SHELL.CORE, IZHS.VK.SCHEMATIC]
+  box_plus_vk_calc:
+    blocks: [IZHS.ELEMENTS.CORE, IZHS.SHELL.CORE, IZHS.VK.CALC]
+  box_plus_eom:
+    blocks: [IZHS.ELEMENTS.CORE, IZHS.SHELL.CORE, IZHS.EOM.SCHEMATIC]
+  box_plus_hvac:
+    blocks: [IZHS.ELEMENTS.CORE, IZHS.SHELL.CORE, IZHS.HVAC.SCHEMATIC]
+  box_plus_gas:
+    blocks: [IZHS.ELEMENTS.CORE, IZHS.SHELL.CORE, IZHS.GAS.SCHEMATIC]
+  box_details_vk_eom:
+    blocks: [IZHS.ELEMENTS.CORE, IZHS.SHELL.CORE, IZHS.ARCH.DETAILS, IZHS.ROOF.DETAILS, IZHS.VK.SCHEMATIC, IZHS.EOM.SCHEMATIC]
+  box_deep_vk_eom:
+    blocks: [IZHS.ELEMENTS.CORE, IZHS.SHELL.CORE, IZHS.ARCH.DETAILS, IZHS.ROOF.DETAILS, IZHS.EGRESS.DETAILS, IZHS.THERMAL.CORE, IZHS.VK.CALC, IZHS.EOM.SCHEMATIC]
+  box_deep_all_schematic_mep:
+    blocks: [IZHS.ELEMENTS.CORE, IZHS.SHELL.CORE, IZHS.ARCH.DETAILS, IZHS.ROOF.DETAILS, IZHS.EGRESS.DETAILS, IZHS.THERMAL.CORE, IZHS.STRUCTURES.CORE, IZHS.GEOTECH.CORE, IZHS.VK.CALC, IZHS.EOM.SCHEMATIC, IZHS.HVAC.SCHEMATIC]
+
+selection_semantics:
+  - "Preset является коротким путем; пользователь может выбрать произвольное подмножество implemented_blocks."
+  - "Dependency resolver добавляет только requires, а не все предыдущие/чужие разделы автоматически."
+  - "general_plan=schematic выбирает только IZHS.SITE.CORE; отсутствие site-specific PZZ/GPZU параметров является missing project input, а не разрешением подставить средние значения."
+  - "architecture=shell выбирает только core shell; architecture=details добавляет architectural detail/roof blocks."
+  - "structures=calculation, geotechnics=calculation, evacuation=detailed и thermal_protection=calculation являются независимыми модулями и не включаются автоматически только из-за глубины architecture."
+  - "geotechnics=calculation может выдать проверки/стратегии фундамента, но без достаточных инженерных изысканий не имеет права выдавать authoritative foundation sizing."
+  - "water_supply=schematic выбирает IZHS.VK.SCHEMATIC; water_supply=coordinated добавляет IZHS.VK.CALC."
+  - "heating/ventilation/air_conditioning=schematic выбирает единый IZHS.HVAC.SCHEMATIC с прямыми ИЖС-правилами СП55; расчет мощности и сечений остается отдельной будущей глубиной."
+  - "gas_supply=schematic выбирает только IZHS.GAS.SCHEMATIC при фактически выбранной внутренней системе природного газа; блок не включается в общий MEP preset автоматически."
+  - "Нормативное/расчетное ядро инженерного раздела отделяется от геометрического блока, когда это уменьшает повторный аудит и загрузку контекста."
+  - "FAST PACK включается только если конкретный implemented block или его core сообщает незакрытую зависимость для текущей операции."
+  - "Planned block нельзя подменять похожим implemented block другого раздела или типа здания."

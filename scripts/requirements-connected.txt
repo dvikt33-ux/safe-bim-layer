@@ -1,3 +1,4 @@
 -r requirements-materials.txt
 ifcopenshell==0.8.5
 ortools==9.15.6755
+PyYAML==6.0.3

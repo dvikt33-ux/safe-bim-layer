@@ -1,0 +1,140 @@
+block_id: IZHS.SHELL.CORE
+version: '0.3.0'
+object_scope:
+  object_classes: [residential.izhs]
+  object_subclasses: [detached_single_family]
+  functions: [residential_core, embedded_public_program_screening]
+  jurisdictions: [RU]
+module: architecture
+depth: shell
+block_kind: composite
+release_status: design_only
+source_pack_ref:
+  branch: normative-audit-2026-10-02
+  primary_rule_files:
+    - 01_Normative_Base/_Machine/rules/residential_izhs.yaml
+    - 01_Normative_Base/_Machine/rules/residential_izhs_2026.yaml
+  release_set: 01_Normative_Base/_Machine/audit/IZHS_CENTRAL_RUSSIA_RELEASE_SET_2026-10-03.yaml
+  note: 'Shell runtime is restricted to current canonical Central-release SP55 rules. Embedded public/nonresidential program is screened only by the exact released clause 4.7 prohibition; dependent sanitary/fire thresholds are separate edges. Detailed evacuation, roof, structures and engineering rules are delegated to their dedicated blocks.'
+normative_closure:
+  rule_ids:
+    - IZH55-SCOPE-001
+    - IZH55-PRIVATE-AREAS-BY-BRIEF-001
+    - IZH55-MUNICIPAL-ROOM-AREAS-001
+    - IZH55-CLEAR-HEIGHT-001
+    - IZH55-BASEMENT-LIVING-PROHIBITED-001
+    - IZHS-2STOREY-OPEN-STAIR-EVAC-001
+    - IZHS-3STOREY-OPEN-STAIR-EVAC-001
+    - IZHS-1-2STOREY-FIRE-RESISTANCE-NOT-NORMED-001
+    - IZHS-3STOREY-FIRE-RESISTANCE-III-001
+  conditional_rule_ids:
+    - IZHS-HARMFUL-EMBEDDED-FUNCTIONS-001
+  source_ids:
+    - SP-55-13330-2016-GARANT
+  source_revision_hash: sp55_current_canonical_shell_subset_plus_clause4_7_2026-10-03
+  dependency_blocks:
+    - IZHS.ELEMENTS.CORE
+  optional_dependency_blocks:
+    - IZHS.EGRESS.DETAILS
+    - IZHS.ROOF.DETAILS
+    - IZHS.STRUCTURES.CORE
+  unresolved_dependencies:
+    - 'Exact SP54 Appendix A area/volume calculation rules are not compiled merely from the SP55 cross-reference.'
+    - 'DAYLIGHT_SP55_9_18_CURRENT_A1 remains fail-closed and is not executable in shell generation.'
+    - 'If an embedded public/nonresidential use cannot be classified from the project brief as permitted/prohibited by the exact SP55 clause 4.7 wording without quantitative harmful-factor evaluation, the relevant sanitary/fire dependencies (including the cited SanPiN/SP documents) must be resolved separately; clause 4.7 does not auto-confirm their thresholds.'
+    - 'Detailed stair/egress geometry is delegated to IZHS.EGRESS.DETAILS; no generic stair rule may override the exact F1.4 branch.'
+    - 'Roof technical detailing is delegated to IZHS.ROOF.DETAILS.'
+    - 'Snow-load execution remains blocked in IZHS.STRUCTURES.CORE until SP20_SNOW_CURRENT_SELECTION_PATH closes.'
+  conflicts: []
+runtime_interface:
+  required_inputs:
+    - project_id
+    - housing_stock_type
+    - room_program
+    - aboveground_storeys
+    - building_height_m
+    - climate_region
+    - basement_or_ground_floor_intent
+    - attic_intent
+  optional_inputs:
+    - structural_material_intent
+    - roof_form
+    - heavy_equipment_or_fireplaces
+    - accessibility_needs
+    - embedded_public_or_nonresidential_functions
+    - embedded_function_harmful_impact_classification
+    - embedded_trade_explosive_or_fire_hazardous_goods_present
+    - embedded_consumer_service_flammable_liquids_present
+    - embedded_consumer_service_exception_type
+  derived_inputs:
+    - room_height_minima
+    - prohibited_floor_uses
+    - embedded_function_program_constraints
+    - embedded_function_dependency_requests
+    - egress_strategy
+    - stair_strategy
+    - structural_fire_requirements
+  guards:
+    - 'housing_stock_type == private -> room areas come from the design brief with ergonomics/equipment checks; do not load state/municipal minima'
+    - 'housing_stock_type in [state, municipal] -> evaluate IZH55-MUNICIPAL-ROOM-AREAS-001'
+    - 'basement/plinth/underground level -> rooms and kitchen/kitchen-dining are prohibited by IZH55-BASEMENT-LIVING-PROHIBITED-001'
+    - 'climate_region unresolved -> do not choose the 2.7 m vs 2.5 m room-height branch'
+    - 'embedded public/nonresidential function requested -> evaluate exact released SP55 4.7 prohibition before accepting that function into the program'
+    - 'embedded trade/production workshop/storage classified as a source of harmful impacts -> prohibit under SP55 4.7; do not search for a permissive generic commercial rule'
+    - 'embedded trade with explosive/fire-hazardous substances/materials -> prohibit under SP55 4.7'
+    - 'embedded consumer service with flammable liquids -> prohibit under SP55 4.7 except only the explicit hairdresser and watch/shoe-repair exceptions stated by that clause'
+    - 'harmful-impact status cannot be resolved from project brief without quantitative sanitary criteria -> return exact dependency request; do not invent threshold or assume harmlessness'
+    - 'aboveground_storeys == 2 -> evaluate released two-storey open-stair branch and delegate detailed egress checks'
+    - 'aboveground_storeys == 3 -> evaluate released three-storey stair/fire-resistance branches and delegate detailed egress checks'
+  calculators:
+    - resolve_room_height_by_verified_climate_region
+    - screen_embedded_functions_against_sp55_clause4_7
+    - resolve_fire_strategy_by_storey_count
+  model_anchors_read:
+    - reusable_type_ids
+    - site_level_reference_if_available
+  model_entities_write:
+    - stories
+    - primary_walls
+    - primary_partitions
+    - slabs
+    - roof_geometry
+    - main_openings
+    - main_stairs
+    - guards
+    - required_shafts_reservations_if_known
+    - embedded_function_program_rejection_markers
+  outputs:
+    - shell_entity_ids
+    - room_anchor_map
+    - embedded_function_program_constraints
+    - wet_zone_reservations
+    - engineering_shaft_anchors
+    - unresolved_shell_checks
+code_assets:
+  template_files:
+    - 03_Archicad_Template/07_AR_GOST_Spec.md
+    - 03_Archicad_Template/08_KR_KZh_GOST_Spec.md
+  library_types: []
+  helper_functions:
+    - create_or_update_story
+    - create_or_update_wall
+    - create_or_update_slab
+    - create_or_update_roof
+    - create_or_update_opening
+    - create_or_update_stair
+    - screen_embedded_functions_against_sp55_clause4_7
+execution_semantics:
+  delta_only: true
+  idempotent: true
+  preserve_existing_valid_geometry: true
+  daylight_execution_before_sp55_9_18_source_gate: forbidden
+  harmful_factor_threshold_inference_without_dependency_evidence: forbidden
+  full_normative_scan: forbidden
+fallback:
+  allowed: true
+  trigger_codes:
+    - BLOCK_DEPENDENCY_UNRESOLVED
+    - BLOCK_CONFLICT
+    - SPECIAL_TECHNICAL_CONDITIONS
+    - FIRE_RISK_OR_CASE_SPECIFIC_JUSTIFICATION

@@ -1,0 +1,133 @@
+block_id: IZHS.ROOF.DETAILS
+version: '0.3.0'
+object_scope:
+  object_classes: [residential.izhs]
+  object_subclasses: [detached_single_family]
+  functions: [roof, roof_details]
+  jurisdictions: [RU]
+module: architecture
+depth: details
+block_kind: parametric
+release_status: design_only
+source_pack_ref:
+  branch: normative-audit-2026-10-02
+  primary_rule_file: 01_Normative_Base/_Machine/rules/roofing_2026.yaml
+  roof_fire_rule_file: 01_Normative_Base/_Machine/rules/roof_fire_izhs_sp2_2026.yaml
+  release_set: 01_Normative_Base/_Machine/audit/IZHS_CENTRAL_RUSSIA_RELEASE_SET_2026-10-03.yaml
+  selection: explicit_sp17_whitelist_plus_exact_object_sp2_roof_fire
+  note: 'Only the nine SP17 rule ids explicitly whitelisted by Central release-set v5 plus the exact-object SP2 roof-fire rules are executable. SP2 roof-fire rules remain condition-gated to their roll/mastic/no-gravel/fire-belt branches. Historical imported IZHS-SP17-* candidates and stale amendment copies are not runtime authority.'
+normative_closure:
+  rule_ids:
+    - ROOF-SP17-MATERIAL-SLOPE-001
+    - ROOF-VENT-CHANNEL-TABLE-A2-001
+    - ROOF-NO-DYNAMIC-LOAD-ON-MEMBRANE-001
+    - ROOF-SCREED-JOINTS-001
+    - ROOF-WATERPROOF-UPSTAND-300-001
+    - ROOF-DRAIN-LOWERING-001
+    - ROOF-EXIT-UPSTAND-150-001
+    - ROOF-USABLE-LOAD-CHECK-001
+    - ROOF-USABLE-PARAPET-1200-001
+  conditional_rule_ids:
+    - IZHS-ROOF-FIRE-SP2-TABLE51-AREA-001
+    - IZHS-ROOF-FIRE-SP2-KP1-DEFAULT-001
+    - IZHS-ROOF-FIRE-SP2-BELT-UPPER-001
+    - IZHS-ROOF-FIRE-SP2-BELT-LOWER-G3G4-001
+    - IZHS-ROOF-FIRE-SP2-ALT-BELT-TESTED-001
+  source_ids:
+    - SP-17-13330-2017-GARANT
+    - SP-2-13130-2020-CONSULTANT
+  source_revision_hash: central_release_v5_sp17_whitelist_plus_sp2_roof_fire_2026-10-03
+  dependency_blocks:
+    - IZHS.SHELL.CORE
+  optional_dependency_blocks:
+    - IZHS.THERMAL.CORE
+    - IZHS.STRUCTURES.CORE
+  unresolved_dependencies:
+    - 'Roof-material/system-specific SP17 branch activates only after the exact roof material/system is selected and matched to the released rule conditions.'
+    - 'Snow retention is not an executable Central roof rule in this block; any snow-dependent decision remains blocked by SP20_SNOW_CURRENT_SELECTION_PATH or another exact released edge.'
+    - 'SP2 roof-fire Table 5.1 branch activates only for roll/mastic waterproofing without gravel protection and only after exact roof/fire/material classification inputs are available.'
+    - 'Alternative SP2 fire-belt solution may not be generated without documented full-scale fire-test evidence and the exact applicable SP2 5.4.6 provisions.'
+    - 'Thermal/moisture roof calculation requires IZHS.THERMAL.CORE when applicable.'
+  conflicts: []
+runtime_interface:
+  required_inputs:
+    - roof_form
+    - roof_material_or_system
+  optional_inputs:
+    - insulated_roof
+    - cold_attic
+    - operated_roof
+    - roof_equipment
+    - valley_present
+    - membrane_roof_present
+    - internal_drain_present
+    - roof_exit_present
+    - roof_waterproofing_type
+    - gravel_protection_layer_present
+    - roof_fire_hazard_group
+    - roof_fire_hazard_group_test_evidence_absent
+    - waterproofing_flame_spread_group
+    - waterproofing_flammability_group
+    - substrate_combustibility_group
+    - fire_belt_required_by_Table_5_1_or_selected_solution
+    - fire_belt_present
+    - roof_base_or_insulation_combustibility
+    - alternative_fire_belt_solution_selected
+    - documented_full_scale_fire_test_result
+  derived_inputs:
+    - applicable_roof_detail_family
+    - roof_detail_constraints
+    - roof_ventilation_constraints
+    - roof_fire_constraints
+    - unresolved_roof_edges
+  guards:
+    - 'select only exact released roof-material/system branch whose conditions match project inputs'
+    - 'candidate/historical IZHS-SP17-* value cannot be recovered from imported pack'
+    - 'operated_roof == true -> evaluate only released usable-roof load/parapet rules whose conditions match'
+    - 'membrane_roof_present == true -> evaluate released membrane/screed/upstand/drain rules as applicable'
+    - 'roof_exit_present == true -> evaluate released exit-upstand rule when its conditions match'
+    - 'roof_waterproofing_type in [roll,mastic] and gravel_protection_layer_present == false -> evaluate exact SP2 roof-fire branch; otherwise do not load Table 5.1 area rule'
+    - 'fire-belt construction rules execute only when a fire belt is required/present under the selected exact SP2 branch'
+    - 'alternative_fire_belt_solution_selected == true -> require documented full-scale fire-test evidence; no model-generated substitute'
+    - 'snow-dependent roof decision -> unresolved until SP20_SNOW_CURRENT_SELECTION_PATH closes or an independent released rule supplies the required input'
+    - 'thermal dependency activates only when selected detail requires building-physics calculation'
+  calculators:
+    - resolve_roof_detail_family
+    - resolve_roof_dependency_set
+    - resolve_sp2_roof_fire_branch
+  model_anchors_read:
+    - roof_geometry
+    - roof_types
+    - walls
+    - chimneys
+    - shafts
+    - roof_openings
+  model_entities_write:
+    - roof_detail_anchors
+    - roof_safety_element_requests
+    - roof_fire_belt_requests
+  outputs:
+    - roof_detail_constraints
+    - roof_fire_constraints
+    - roof_detail_anchor_ids
+    - unresolved_roof_edges
+code_assets:
+  template_files:
+    - 03_Archicad_Template/07_AR_GOST_Spec.md
+  library_types: []
+  helper_functions:
+    - resolve_roof_detail_family
+    - resolve_sp2_roof_fire_branch
+execution_semantics:
+  delta_only: true
+  idempotent: true
+  historical_imported_sp17_recovery: forbidden
+  roof_fire_branch_without_exact_activation_inputs: forbidden
+  snow_dependent_execution_before_sp20_10_2_source_gate: forbidden
+  full_normative_scan: forbidden
+fallback:
+  allowed: true
+  trigger_codes:
+    - BLOCK_DEPENDENCY_UNRESOLVED
+    - BLOCK_STALE_SOURCE_REVISION
+    - READY_BLOCK_MISSING

@@ -1,0 +1,69 @@
+route_index_version: 3
+mode: exact_object_route_then_compiled_block
+
+object_route_template: "routes/objects/{object_class}.{object_subclass}.yaml"
+
+rules:
+  full_rules_scan: forbidden
+  missing_object_route: route_missing
+  missing_module_route: module_route_missing
+  fallback_to_parent_object: forbidden_unless_explicit
+  fallback_to_other_object: forbidden
+  candidate_union_across_inactive_modules: forbidden
+  active_function_filter_after_object_route: required
+  compiled_blocks_first: required
+  fast_pack_mode: reserve_minimal_gap_only
+  evidence_gate_required_before_audited_ready_release: true
+
+implemented_routes:
+  - residential.izhs
+  - residential.mkd
+  - public.trade_entertainment_complex
+
+implemented_route_status:
+  residential.izhs: design_only
+  residential.mkd: design_only
+  public.trade_entertainment_complex: design_only
+
+audited_ready_routes: []
+
+priority_routes_to_compile:
+  - public.trade_entertainment_complex
+  - public.multifunctional
+  - public.trade
+  - transport.parking
+
+pending_routes:
+  - residential.blocked_housing
+  - residential.dormitory
+  - residential.specialized_residential
+  - public.multifunctional
+  - public.trade
+  - public.office
+  - public.education
+  - public.healthcare
+  - public.culture_entertainment
+  - public.sport
+  - public.food_service
+  - public.service
+  - public.administration
+  - industrial.production
+  - industrial.laboratory
+  - industrial.energy
+  - warehouse.general
+  - warehouse.logistics
+  - warehouse.cold_storage
+  - transport.parking
+  - transport.station
+  - transport.service
+  - territorial.general_plan
+  - territorial.landscaping
+  - territorial.street_road_network
+
+pending_route_behavior: "Не извлекать нормы по соседнему классу и не сканировать всю базу; сначала скомпилировать и проверить точный route manifest."
+
+release_semantics:
+  - "implemented означает: route manifest существует и может использоваться для структурной/дизайнерской компоновки."
+  - "audited_ready означает: все включенные compiled blocks прошли evidence + revision + dependency closure gates и могут использоваться нормативно авторитетно."
+  - "residential.mkd recovery route currently exposes only architecture.shell and remains design_only; other MKD modules must fall back only by exact unresolved edge, never by cross-class substitution."
+  - "public.trade_entertainment_complex has an exact design_only route; it must not fall back to generic public.trade. Only confirmed same-class rules may enter FAST_PACK; SP464 quarantine layers remain excluded."

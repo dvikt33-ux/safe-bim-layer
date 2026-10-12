@@ -1,0 +1,139 @@
+schema_version: 4
+rule:
+  required:
+    - rule_id
+    - status
+    - short_rule
+    - source_id
+    - scope
+    - verified_at
+  fields:
+    rule_id: string
+    status:
+      enum: [confirmed, needs_recheck, conflict, deprecated, reserve_unverified]
+    rule_type:
+      enum: [definition, requirement, prohibition, conditional_permission, formula, minimum, maximum, reference, procedure, recommendation]
+    short_rule: string
+    source_id: string
+    source_locator:
+      document_code: string
+      edition_date: string
+      amendment: string
+      section: string
+      article: string
+      clause: string
+      subclause: string
+      term: string
+      table: string
+      row: string
+      column: string
+      appendix: string
+      paragraph: string
+      page_or_anchor: string
+    scope:
+      object_classes: [string]
+      object_subclasses: [string]
+      functions: [string]
+      disciplines: [string]
+      modules: [string]
+      affects_modules: [string]
+      stages: [string]
+      module_depth:
+        type: map
+        key: module_id
+        value:
+          min: string
+          max: string
+      phases: [string]
+      jurisdictions: [string]
+      applies_when: [string]
+      not_applicable_when: [string]
+      exclusions: [string]
+    dependencies: [string]
+    conflicts_with: [string]
+    supersedes: [string]
+    derived_values:
+      allowed: boolean
+      formula: string
+      required_inputs: [string]
+    evidence_note: string
+    verification:
+      source_tier:
+        enum: [A1_primary_legal_system, A2_one_hop_from_A1, B_candidate_official_primary, C_secondary_reference, D_unknown]
+      content_access:
+        enum: [title_only, metadata_only, partial_text, full_text]
+      text_opened: boolean
+      locator_read: boolean
+      source_url: string
+      checked_at: date
+      table_context:
+        row: string
+        column: string
+        unit: string
+        conditions: string
+    verified_at: date
+    verifier: string
+    confidence:
+      enum: [source_exact, source_partial, unresolved]
+
+confirmed_gate:
+  fail_closed: true
+  require_fields:
+    - source_locator
+    - evidence_note
+    - verification
+    - verifier
+    - confidence
+  require:
+    confidence: source_exact
+    verification.text_opened: true
+    verification.locator_read: true
+    verification.content_access: [partial_text, full_text]
+    verification.source_tier: [A1_primary_legal_system, A2_one_hop_from_A1]
+  require_locator_identity: true
+  require_nonempty_evidence_note: true
+  forbid_confirmation_from:
+    - title_only
+    - metadata_only
+    - document_card_only
+    - search_snippet_only
+    - table_of_contents_only
+    - model_memory_only
+    - secondary_summary_only
+  table_numeric_gate:
+    when:
+      source_locator.table_present: true
+      rule_type_in: [formula, minimum, maximum, requirement, prohibition]
+    require:
+      - source_locator.table
+      - verification.table_context.row
+      - verification.table_context.column
+      - verification.table_context.unit
+      - verification.table_context.conditions
+
+fast_path_gate:
+  purpose: "Допуск нормы в компактный stage_pack для генерации кода."
+  fail_closed: true
+  require:
+    - confirmed_gate_passed
+    - exact_object_scope_or_explicit_universal
+    - explicit_modules_or_affects_modules
+    - stage_relevance_resolvable
+  missing_module_scope: exclude_from_fast_path
+  missing_object_scope: exclude_from_fast_path
+  unknown_depth_mapping: exclude_from_depth_specific_pack
+
+selection_policy:
+  default: deny
+  require_scope_match: true
+  require_active_status: true
+  require_active_module_for_fast_path: true
+  require_depth_match_when_defined: true
+  universal_rules_must_be_explicit: true
+  mixed_use_objects:
+    whole_building_rules: true
+    active_function_rules_only: true
+    unrelated_function_rules: false
+  deprecated_rules_in_working_context: false
+  reserve_rules_in_working_context: false
+  quarantined_branch_authoritative_use: false

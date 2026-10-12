@@ -1,0 +1,63 @@
+passport_version: 1
+checked_at: '2026-10-03'
+source_id: SP-50-13330-2024-GARANT
+title: 'СП 50.13330.2024 СНиП 23-02-2003 Тепловая защита зданий'
+provider: GARANT
+source_tier: A1_primary_legal_system
+source_url: 'https://base.garant.ru/409274974/'
+approving_act: 'Приказ Минстроя России от 15.05.2024 N 327/пр'
+valid_from: '2024-06-16'
+replaces: 'СП 50.13330.2012'
+content_access: full_text
+text_opened: true
+locator_read: true
+status: verified_locator_subset
+can_confirm_substantive_rule: true
+object_audit_scope: [residential.izhs]
+
+supersession_note:
+  - 'ФАУ ФЦС разъясняет, что СП 50.13330.2012 утратил силу; current thermal core must use SP50.13330.2024.'
+  - 'Legacy rules tied to SP50.13330.2012 are not a current authority unless separately preserved as historical context.'
+
+opened_locators:
+  - locator: '1.1-1.2'
+    read: true
+    summary: 'Applies to thermal protection of new/reconstructed residential and other buildings >50 m2 requiring controlled temperature-humidity regime; lists explicit exclusions.'
+  - locator: '5.1'
+    read: true
+    summary: 'Thermal envelope must simultaneously satisfy element R-value, whole-building specific thermal-protection characteristic and internal-surface temperature requirements.'
+  - locator: '5.2, formulas 5.1-5.2, Table 3 method'
+    read: true
+    summary: 'Required R-value is climate dependent; base value is selected from Table 3 by heating degree-days and construction region; heating degree-days use indoor temperature plus outdoor mean temperature and duration of heating period from SP131.13330.'
+  - locator: '5.5-5.7'
+    read: true
+    summary: 'Whole-building specific thermal-protection characteristic and internal-surface/dew-point checks are separate mandatory checks.'
+  - locator: '6.8'
+    read: true
+    summary: 'Solar-protection branch activates where mean July temperature is >=21 C; held for South-Russia priority pass unless actual project climate triggers it.'
+  - locator: '10.1, Table 14'
+    read: true
+    summary: 'Table 14 gives normalized base specific heating/ventilation energy characteristic for low-rise single-family residential buildings by area and storey count; intermediate area 50-1000 m2 by linear interpolation.'
+
+central_russia_policy:
+  - 'Do not hardcode a single Central-Russia GSOP, design outdoor temperature, heating-period duration, snow region or wind region.'
+  - 'Climate values are project-location inputs resolved from an audited climate source.'
+  - 'SP50 calculation may run for the Central base once locality climate inputs are resolved; Far-North/permafrost branches are not core blockers.'
+
+release_allowed_for:
+  - 'Applicability/exclusions, three simultaneous thermal checks, climate-dependent calculation procedure, Table 14 low-rise single-family lookup/interpolation semantics.'
+release_not_allowed_for:
+  - 'Legacy SP50.13330.2012 values as current rules.'
+  - 'A single universal R-value for Central Russia.'
+  - 'Climate values inferred from city name/model memory.'
+  - 'South/North/Far-North overlay details not yet selected by actual climate inputs.'
+  - 'Table 3 numeric machine lookup until row/column layout is independently captured in a table-specific audit artifact.'
+
+verification:
+  source_tier: A1_primary_legal_system
+  content_access: full_text
+  text_opened: true
+  locator_read: true
+  source_url: 'https://base.garant.ru/409274974/'
+  checked_at: '2026-10-03'
+  method: 'Opened current GARANT SP50.13330.2024; read only the IZHS-relevant thermal subset and explicitly rejected superseded SP50.13330.2012 as current authority.'

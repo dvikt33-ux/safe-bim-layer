@@ -1,0 +1,144 @@
+block_id: IZHS.ARCH.DETAILS
+version: '0.4.0'
+object_scope:
+  object_classes: [residential.izhs]
+  object_subclasses: [detached_single_family]
+  functions: [building_envelope, roof, facade, guards, detailing, floors, wet_rooms, fire_barriers]
+  jurisdictions: [RU]
+module: architecture
+depth: details
+block_kind: composite
+release_status: design_only
+source_pack_ref:
+  branch: normative-audit-2026-10-02
+  floor_rule_file: 01_Normative_Base/_Machine/rules/floors_2026.yaml
+  fire_barrier_rule_file: 01_Normative_Base/_Machine/rules/fire_resistance_izhs_sp2_2026.yaml
+  release_set: 01_Normative_Base/_Machine/audit/IZHS_CENTRAL_RUSSIA_RELEASE_SET_2026-10-03.yaml
+  delegated_rule_blocks:
+    roof: IZHS.ROOF.DETAILS
+    thermal: IZHS.THERMAL.CORE
+    shell: IZHS.SHELL.CORE
+  note: 'Direct runtime authority is limited to the Central-release SP29 floor whitelist and exact-object SP2 fire-barrier details. Roof and thermal numeric branches remain delegated. Historical imported IZHS-SP55-* detail ids are not executable authority.'
+normative_closure:
+  rule_ids:
+    - FLOOR-SP29-SCOPE-001
+    - FLOOR-WET-ROOM-DROP-15-20-001
+    - FLOOR-DEFLECTION-2MM-001
+    - FLOOR-WATERPROOF-UPSTAND-200-001
+    - FLOOR-DEFORMATION-JOINT-COINCIDE-001
+  conditional_rule_ids:
+    - IZHS-FIRE-SP2-BARRIER-CLASS-001
+    - IZHS-FIRE-SP2-BARRIER-EXTERIOR-PIER-001
+    - IZHS-FIRE-SP2-BARRIER-EXTERIOR-PIER-BASEMENT-EXCEPTION-001
+    - IZHS-FIRE-SP2-FIREWALL1-EXTERIOR-JUNCTION-001
+  source_ids:
+    - SP-29-13330-2011-GARANT
+    - SP-2-13130-2020-CONSULTANT
+  source_revision_hash: central_release_v5_sp29_floor_whitelist_plus_sp2_fire_barriers_2026-10-03
+  dependency_blocks:
+    - IZHS.SHELL.CORE
+  optional_dependency_blocks:
+    - IZHS.ROOF.DETAILS
+    - IZHS.THERMAL.CORE
+  unresolved_dependencies:
+    - 'Panoramic-glazing guard geometry must remain unresolved until an exact released rule/dependency for the selected glazing/guard system is present.'
+    - 'Any operated-roof, parapet, waterproofing or roof-safety numeric requirement outside the released floor interface must come from IZHS.ROOF.DETAILS release-authorized rules, not historical SP55/SP17 ids.'
+    - 'Any thermal/moisture numeric requirement must come from IZHS.THERMAL.CORE or another exact released specialist edge.'
+    - 'SP2 clause 5.4.11 branch-dependent adjacent-wall widths remain unresolved; only the explicitly released 0.30 m/E60/K0 branch content may be used and no missing width may be reconstructed.'
+    - 'Engineering penetration firestop specification remains unresolved unless its exact applicable fire/MEP edge is released.'
+  conflicts: []
+runtime_interface:
+  required_inputs:
+    - shell_entity_ids
+    - wall_assemblies
+    - floor_assemblies
+    - roof_assembly
+    - facade_system
+  optional_inputs:
+    - climate_region
+    - operated_roof_present
+    - panoramic_glazing_present
+    - balcony_present
+    - terrace_present
+    - wet_zone_locations
+    - floor_covering_temperature_variation
+    - floor_waterproofing_required
+    - engineering_penetrations
+    - fire_barrier_present
+    - building_constructive_fire_hazard_class
+    - fire_barrier_exterior_wall_junction_present
+    - separate_basement_or_plinth_exit_present
+    - junction_partition_type
+    - partition_separates_exit_from_remainder_of_stair_enclosure
+    - fire_wall_type_1_exterior_wall_junction_present
+    - exterior_wall_material_combustibility
+    - facade_insulation_combustibility
+    - adjacent_fire_compartment_function
+  derived_inputs:
+    - detail_node_set
+    - floor_detail_constraints
+    - fire_barrier_detail_constraints
+    - optional_detail_dependency_set
+    - unresolved_detail_checks
+  guards:
+    - 'roof detail requested -> resolve IZHS.ROOF.DETAILS; do not use historical imported SP17/SP55 values'
+    - 'thermal detail requested -> resolve IZHS.THERMAL.CORE; do not use legacy SP50 values'
+    - 'sanitary.toilet or sanitary.bathroom -> evaluate released SP29 wet-room level alternatives; do not reduce the rule to a mandatory step-down when protected same-level solution is used'
+    - 'floor_waterproofing_required == true -> evaluate SP29 waterproofing continuity/upstand rule; the rule itself does not invent the waterproofing trigger'
+    - 'floor_covering_temperature_variation == true -> evaluate SP29 coincident deformation-joint rule'
+    - 'floor structural deflection check requested -> use released SP29 2 mm / residential 2 kN branch only within its exact floor scope'
+    - 'fire_barrier_present == true -> evaluate exact SP2 barrier-class rule using actual constructive fire-hazard class'
+    - 'fire_barrier_exterior_wall_junction_present == true -> evaluate exact SP2 pier branch and its narrow basement/plinth exception only when all exception conditions match'
+    - 'fire_wall_type_1_exterior_wall_junction_present == true -> evaluate released SP2 5.4.11 procedure; unresolved branch-dependent adjacent-wall widths remain blocked'
+    - 'panoramic_glazing_present == true -> emit unresolved normative edge unless an exact released guard/glazing rule is available'
+    - 'engineering penetration exists -> preserve maintenance access/coordination geometry but do not invent firestop specification'
+  calculators:
+    - resolve_detail_node_set_by_assembly_interfaces
+    - resolve_floor_detail_constraints
+    - resolve_fire_barrier_detail_constraints
+    - resolve_optional_detail_dependencies
+  model_anchors_read:
+    - shell_entity_ids
+    - opening_ids
+    - stair_ids
+    - guard_ids
+    - engineering_shaft_anchors
+    - floors
+    - exterior_walls
+  model_entities_write:
+    - wall_floor_nodes
+    - wall_roof_nodes
+    - window_door_nodes
+    - parapet_nodes
+    - balcony_terrace_nodes
+    - waterproofing_interfaces
+    - floor_detail_nodes
+    - fire_barrier_junction_nodes
+    - penetration_details
+  outputs:
+    - detail_entity_ids
+    - floor_detail_constraints
+    - fire_barrier_detail_constraints
+    - unresolved_detail_checks
+code_assets:
+  template_files:
+    - 03_Archicad_Template/07_AR_GOST_Spec.md
+    - 03_Archicad_Template/04_Main_Sections_Core_Spec.md
+  library_types: []
+  helper_functions:
+    - create_or_update_detail_marker
+    - create_or_update_detail_geometry
+    - bind_detail_to_model_anchor
+execution_semantics:
+  delta_only: true
+  idempotent: true
+  shell_geometry_changes: only_if_detail_coordination_requires
+  historical_imported_normative_value_recovery: forbidden
+  unresolved_sp2_branch_width_inference: forbidden
+  full_normative_scan: forbidden
+fallback:
+  allowed: true
+  trigger_codes:
+    - BLOCK_DEPENDENCY_UNRESOLVED
+    - BLOCK_STALE_SOURCE_REVISION
+    - SPECIAL_TECHNICAL_CONDITIONS

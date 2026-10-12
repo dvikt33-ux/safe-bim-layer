@@ -1,0 +1,114 @@
+taxonomy_version: 1
+note: "Внутренняя таксономия разделов и глубины проектирования. Не является нормативной классификацией."
+
+principles:
+  - "Тип объекта, функция здания и проектный раздел являются независимыми осями маршрутизации."
+  - "Неактивный раздел не загружается."
+  - "Глубина задаётся отдельно для каждого активного раздела, а не одним уровнем на весь проект."
+  - "Наличие правила в базе не означает, что оно должно попадать в контекст проекта."
+  - "Междисциплинарное правило подключается только если явно указано, какой активный раздел оно ограничивает."
+
+modules:
+  general_plan:
+    aliases: ["генплан", "ГП", "участок", "посадка здания"]
+    depth_levels: [off, concept, developed, working]
+  landscaping:
+    aliases: ["благоустройство", "озеленение"]
+    depth_levels: [off, concept, developed, working]
+
+  architecture:
+    aliases: ["АР", "архитектура", "архитектурные решения"]
+    depth_levels: [off, shell, developed, details, working]
+    depth_meaning:
+      shell: "Коробка: габариты, этажность, основные стены/проёмы, кровля, основные лестницы и принципиальные разрезы в объёме, необходимом для коробки."
+      developed: "Полноценные планировочные решения, помещения, основные разрезы, фасады, лестницы, входы и ограждающие конструкции."
+      details: "АР с архитектурными узлами, деталями сопряжений и углублённой проработкой конструктивно-архитектурных мест."
+      working: "Рабочая архитектурная документация с деталями, спецификациями и координационными требованиями."
+
+  accessibility:
+    aliases: ["МГН", "доступность"]
+    depth_levels: [off, concept, developed, detailed, working]
+
+  structures:
+    aliases: ["КР", "конструкции"]
+    depth_levels: [off, concept, developed, calculation, working]
+  foundations:
+    aliases: ["фундаменты", "КЖ0", "основания"]
+    depth_levels: [off, concept, developed, calculation, working]
+  reinforced_concrete:
+    aliases: ["КЖ", "железобетон"]
+    depth_levels: [off, concept, developed, calculation, working]
+  steel_structures:
+    aliases: ["КМ", "металлоконструкции"]
+    depth_levels: [off, concept, developed, calculation, working]
+
+  fire_safety:
+    aliases: ["ПБ", "пожарная безопасность"]
+    depth_levels: [off, concept, developed, systems, working]
+  evacuation:
+    aliases: ["эвакуация"]
+    depth_levels: [off, concept, developed, detailed, working]
+
+  water_supply:
+    aliases: ["В", "водоснабжение", "водопровод"]
+    depth_levels: [off, concept, schematic, coordinated, working]
+  sewerage:
+    aliases: ["К", "канализация", "водоотведение"]
+    depth_levels: [off, concept, schematic, coordinated, working]
+  heating:
+    aliases: ["О", "отопление"]
+    depth_levels: [off, concept, schematic, coordinated, working]
+  ventilation:
+    aliases: ["Вент", "вентиляция"]
+    depth_levels: [off, concept, schematic, coordinated, working]
+  air_conditioning:
+    aliases: ["КВ", "кондиционирование"]
+    depth_levels: [off, concept, schematic, coordinated, working]
+  smoke_control:
+    aliases: ["противодымная вентиляция", "дымоудаление"]
+    depth_levels: [off, concept, schematic, coordinated, working]
+  gas_supply:
+    aliases: ["ГСВ", "газоснабжение"]
+    depth_levels: [off, concept, schematic, coordinated, working]
+
+  electrical_power:
+    aliases: ["ЭОМ", "электроснабжение", "силовая электрика"]
+    depth_levels: [off, concept, schematic, coordinated, working]
+  lighting:
+    aliases: ["освещение", "электроосвещение"]
+    depth_levels: [off, concept, schematic, coordinated, working]
+  low_current:
+    aliases: ["СС", "слаботочные системы"]
+    depth_levels: [off, concept, schematic, coordinated, working]
+  fire_automation:
+    aliases: ["АПС", "СПС", "СОУЭ", "пожарная автоматика"]
+    depth_levels: [off, concept, schematic, coordinated, working]
+  automation_dispatching:
+    aliases: ["АОВ", "диспетчеризация", "автоматизация"]
+    depth_levels: [off, concept, schematic, coordinated, working]
+
+  thermal_protection:
+    aliases: ["теплотехника", "тепловая защита"]
+    depth_levels: [off, concept, developed, calculation, working]
+  acoustics:
+    aliases: ["акустика", "защита от шума"]
+    depth_levels: [off, concept, developed, calculation, working]
+  daylight_insolation:
+    aliases: ["КЕО", "инсоляция", "естественное освещение"]
+    depth_levels: [off, concept, developed, calculation, working]
+
+  technology:
+    aliases: ["ТХ", "технология"]
+    depth_levels: [off, concept, developed, detailed, working]
+
+routing_rules:
+  unspecified_module: off
+  default_inheritance_between_modules: false
+  full_project_does_not_mean_all_possible_modules: true
+  cross_module_rules:
+    require_explicit_affects_modules: true
+    load_only_when_target_module_active: true
+  examples:
+    - "ИЖС + architecture=shell не загружает water_supply, sewerage, ventilation или electrical_power."
+    - "ИЖС + architecture=details + water_supply=schematic загружает АР до узлов и только профильный слой ВК, без ЭОМ и ОВ."
+    - "ТРК + architecture=developed + fire_safety=developed + electrical_power=schematic не получает нормы МКД и не получает вентиляцию, если ventilation=off."

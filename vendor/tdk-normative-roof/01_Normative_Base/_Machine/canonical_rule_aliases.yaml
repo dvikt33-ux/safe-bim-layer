@@ -1,0 +1,19 @@
+canonicalization_version: 2
+checked_at: '2026-10-03'
+purpose: 'Не выдавать несколько rule_id для одной и той же подтвержденной нормы. Исторические rule_id сохраняются для обратной совместимости, но retrieval возвращает только canonical_id.'
+aliases:
+  FIRE-EGRESS-EXIT-COUNT-FUNCTION-001: EVAC-MIXED-USE-INDEPENDENT-EXITS-001
+  FIRE-EGRESS-EXIT-COUNT-50-001: EVAC-FLOOR-50PLUS-TWO-EXITS-001
+  FIRE-EGRESS-DISTRIBUTED-001: EVAC-EXIT-SEPARATION-001
+  FIRE-EGRESS-EXIT-WIDTH-GENERAL-001: EVAC-EXIT-WIDTH-GENERAL-001
+  FIRE-EGRESS-MIXED-USE-RISK-001: EVAC-MIXED-USE-COMMON-ROUTE-RISK-001
+  FIRE-EGRESS-TAMBUR-001: EVAC-TAMBOUR-DIMENSIONS-001
+  FIRE-EGRESS-L1-HEIGHT-001: EVAC-L1-HEIGHT-001
+  FIRE-EGRESS-OVER28-001: EVAC-HIGHRISE-SMOKEPROOF-001
+  IZHS-SP55-SCOPE-001: IZH55-SCOPE-001
+rules:
+  - 'Alias-rule не является deprecated нормативно; это только неканионический идентификатор той же действующей нормы.'
+  - 'В рабочий контекст выводить canonical_id один раз.'
+  - 'Если старый файл/проект ссылается на alias, resolver должен вернуть canonical_id и сохранить alias_used в трассировке.'
+  - 'Канонизация выполняется после hard scope/status filters, но до формирования контекста.'
+  - 'Alias добавляется только когда смысл и область применения совпадают; частичные/более узкие правила не склеиваются автоматически.'

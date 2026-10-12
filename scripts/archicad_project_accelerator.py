@@ -154,6 +154,16 @@ def evaluate_project_native_requirements(normative,native_context,native_model,r
     return NORM.evaluate_native_source_conditions(normative,native_context,native_model,requirements,junctions)
 
 
+def connect_existing_normative_database(project_pack,normative,native_context,requirements,
+                                       junctions,cached_source_checks,project_profile,**selection):
+    """Bind existing machine rules to cached BIM facts without new geometry calls."""
+    import archicad_normative_bindings as NORM
+    import archicad_normative_machine as MACHINE
+    result=NORM.evaluate_existing_machine_requirements(normative,native_context,requirements,
+        junctions,cached_source_checks,project_profile,**selection)
+    return {'normative':result,'projectPack':MACHINE.attach_existing_machine(project_pack,result)}
+
+
 def compile_project_spatial_plan(brief, project_pack, authored_layout):
     """Plan authored rooms/axes/load paths in the existing accelerator.
 

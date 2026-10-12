@@ -1,0 +1,153 @@
+route_version: 6
+object_type: residential.izhs
+route_status: design_only
+purpose: "Точный быстрый маршрут ИЖС: текущий Central release-set -> готовые compiled blocks -> FAST PACK только для конкретного незакрытого нормативного edge."
+
+scope:
+  include_object_classes: [residential.izhs]
+  exclude_object_classes:
+    - residential.mkd
+    - residential.blocked_housing
+    - public.*
+    - industrial.*
+    - warehouse.*
+    - transport.*
+  cross_class_fallback: forbidden
+  parent_fallback: forbidden
+
+source_pack:
+  branch: normative-audit-2026-10-02
+  release_set: 01_Normative_Base/_Machine/audit/IZHS_CENTRAL_RUSSIA_RELEASE_SET_2026-10-03.yaml
+  coverage: 01_Normative_Base/_Machine/audit/IZHS_CENTRAL_RUSSIA_COVERAGE_2026-10-03.yaml
+  gap_queue: 01_Normative_Base/_Machine/audit/IZHS_CENTRAL_NEXT_GAPS_2026-10-03.yaml
+  status: current_central_release_lineage_design_only
+  legacy_import_branch: izhs-machine-import-2026-10-02
+  legacy_import_status: historical_navigation_only_not_runtime_authority
+  legacy_rules: exclude_until_reconciled
+
+confirmed_supplement_packs:
+  - 01_Normative_Base/_Machine/rules/water_sewer_core_sp30_current_2026.yaml
+  - 01_Normative_Base/_Machine/rules/hot_water_core_sp30_current_2026.yaml
+  - 01_Normative_Base/_Machine/rules/communications_izhs_scope_2026.yaml
+  - 01_Normative_Base/_Machine/rules/site_utilities_izhs_sp42_sp519_2026.yaml
+
+scope_guards:
+  communications:
+    excluded_source: 'СП 134.13330.2022'
+    reason: 'Clause 1.2 excludes private individual houses.'
+    cross_class_inheritance: forbidden
+    external_network_layer: 'SP 42.13330.2026 + SP 519.1325800.2023'
+    internal_private_house_layer: unresolved_object_specific_source_or_project_provider_layer
+
+block_catalog: 04_Code_Generation/block_catalog/residential.izhs.yaml
+
+compiled_blocks:
+  general_plan:
+    schematic:
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.SITE.CORE.yaml
+  architecture:
+    shell:
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.ELEMENTS.CORE.yaml
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.SHELL.CORE.yaml
+    details:
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.ELEMENTS.CORE.yaml
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.SHELL.CORE.yaml
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.ARCH.DETAILS.yaml
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.ROOF.DETAILS.yaml
+  structures:
+    calculation:
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.STRUCTURES.CORE.yaml
+  geotechnics:
+    calculation:
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.GEOTECH.CORE.yaml
+  foundation:
+    calculation:
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.GEOTECH.CORE.yaml
+  evacuation:
+    detailed:
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.EGRESS.DETAILS.yaml
+  thermal_protection:
+    calculation:
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.THERMAL.CORE.yaml
+  water_supply:
+    schematic:
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.VK.SCHEMATIC.yaml
+    coordinated:
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.VK.SCHEMATIC.yaml
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.VK.CALC.yaml
+  sewerage:
+    schematic:
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.VK.SCHEMATIC.yaml
+    coordinated:
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.VK.SCHEMATIC.yaml
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.VK.CALC.yaml
+  electrical_power:
+    schematic:
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.EOM.CORE.yaml
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.EOM.SCHEMATIC.yaml
+  lighting:
+    schematic:
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.EOM.CORE.yaml
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.EOM.SCHEMATIC.yaml
+  heating:
+    schematic:
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.HVAC.SCHEMATIC.yaml
+  ventilation:
+    schematic:
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.HVAC.SCHEMATIC.yaml
+  air_conditioning:
+    schematic:
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.HVAC.SCHEMATIC.yaml
+  gas_supply:
+    schematic:
+      - 04_Code_Generation/blocks/residential.izhs/IZHS.GAS.SCHEMATIC.yaml
+
+legacy_exclusions:
+  - IZHS-LIVING-ROOM-MIN-12-001
+  - IZHS-ATTIC-ROOM-HEIGHT-2300-001
+  - BLOCK55-OPENING-DISTANCE-001
+
+selection_order:
+  - exact_object_match
+  - exact_requested_module
+  - requested_depth_or_nearest_lower_implemented_depth
+  - dependency_closure
+  - block_release_check
+  - execute_compiled_block
+  - minimal_fast_pack_only_if_block_reports_gap
+
+fallback:
+  engine: FAST_PACK
+  mode: minimal_gap_only
+  forbidden:
+    - full_rules_scan
+    - other_object_class_substitution
+    - SP134_communications_inheritance_for_private_individual_house
+    - automatic_use_of_legacy_conflicts
+    - legacy_import_pack_as_runtime_fallback
+  triggers:
+    - selected_block_missing
+    - selected_block_stale
+    - selected_block_dependency_unresolved_for_requested_operation
+    - novel_embedded_function
+    - local_or_regional_overlay_missing
+    - special_technical_conditions
+    - fire_risk_case_specific
+
+release_constraints:
+  authoritative_use: false
+  reason:
+    - compiled blocks remain design_only
+    - reusable Central source blocker DAYLIGHT_SP55_9_18_CURRENT_A1 remains open
+    - reusable Central source blocker SP20_SNOW_CURRENT_SELECTION_PATH remains open
+    - local/site/climate/provider values remain project-input overlays where applicable
+  current_machine_state:
+    release_set_version: 5
+    verified_selected_rules: 136
+    runtime_release_alignment: pass_for_current_compiled_rule_references
+    confirmed_water_sewer_shared_core_available: true
+    SP134_communications_scope_guard_active: true
+    external_low_current_site_layer_available: true
+    internal_low_current_object_specific_normative_source_complete: false
+    reusable_central_base_complete: false
+    south_russia_started: false

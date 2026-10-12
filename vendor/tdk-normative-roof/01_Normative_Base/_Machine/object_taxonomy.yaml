@@ -1,0 +1,93 @@
+taxonomy_version: 1
+note: "Внутренняя машинная таксономия маршрутизации. Не является нормативной классификацией сама по себе."
+
+object_classes:
+  universal:
+    description: "Только правила, действительно применимые независимо от типа объекта. Использовать крайне ограниченно."
+
+  residential:
+    children:
+      izhs:
+        aliases: ["ИЖС", "индивидуальный жилой дом"]
+      blocked_housing:
+        aliases: ["дом блокированной застройки", "блокированная жилая застройка"]
+      mkd:
+        aliases: ["МКД", "многоквартирный жилой дом"]
+      dormitory:
+        aliases: ["общежитие"]
+      specialized_residential:
+        aliases: ["специализированное жильё"]
+
+  public:
+    children:
+      trade:
+        aliases: ["магазин", "торговый центр"]
+      trade_entertainment_complex:
+        aliases: ["ТРЦ", "ТРК", "торгово-развлекательный центр", "торгово-развлекательный комплекс"]
+      multifunctional:
+        aliases: ["МФК", "многофункциональный комплекс", "ТДК"]
+      office:
+        aliases: ["офис", "деловой центр"]
+      education:
+        aliases: ["школа", "ДОО", "детский сад", "вуз", "учебное здание"]
+      healthcare:
+        aliases: ["медицинское здание", "поликлиника", "больница"]
+      culture_entertainment:
+        aliases: ["кинотеатр", "театр", "клуб", "развлекательный центр"]
+      sport:
+        aliases: ["спортзал", "ФОК", "фитнес", "каток", "арена"]
+      food_service:
+        aliases: ["кафе", "ресторан", "фудкорт", "столовая"]
+      service:
+        aliases: ["бытовые услуги", "сервис", "ремонтные услуги"]
+      administration:
+        aliases: ["административное здание"]
+
+  industrial:
+    children:
+      production:
+        aliases: ["производственное здание", "цех"]
+      laboratory:
+        aliases: ["лабораторный корпус"]
+      energy:
+        aliases: ["энергетический объект"]
+
+  warehouse:
+    children:
+      general:
+        aliases: ["склад"]
+      logistics:
+        aliases: ["логистический центр", "распределительный центр"]
+      cold_storage:
+        aliases: ["холодильный склад"]
+
+  transport:
+    children:
+      parking:
+        aliases: ["автостоянка", "паркинг", "гараж-стоянка"]
+      station:
+        aliases: ["вокзал", "пассажирский терминал"]
+      service:
+        aliases: ["СТО", "транспортное обслуживание"]
+
+  territorial:
+    children:
+      general_plan:
+        aliases: ["генплан", "территория", "участок"]
+      landscaping:
+        aliases: ["благоустройство", "озеленение"]
+      street_road_network:
+        aliases: ["УДС", "улица", "дорога", "проезд"]
+
+routing_rules:
+  default_inheritance: false
+  allow_parent_rules_only_if_explicitly_marked: true
+  cross_class_rules_require_explicit_scope: true
+  mixed_use:
+    compose_from_active_children: true
+    load_inactive_children: false
+  examples:
+    - "public.multifunctional + functions=[trade, food_service, culture_entertainment] не получает healthcare или education"
+    - "residential.mkd + embedded trade получает нормы МКД и только профильные нормы встроенной торговли"
+    - "residential.izhs не наследует residential.mkd"
+    - "industrial.production не наследует public"

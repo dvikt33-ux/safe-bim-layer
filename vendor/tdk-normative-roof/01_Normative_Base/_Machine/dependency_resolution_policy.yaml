@@ -1,0 +1,101 @@
+policy_version: 1
+policy_status: recovery_verified
+checked_at: '2026-10-06'
+purpose: >-
+  Resolve normative dependencies per the exact reference occurrence instead of globally pinning or floating
+  a document merely from the bibliography entry in section 2.
+
+normative_basis:
+  - source_id: GOST-R-1.19-2023
+    locator: '4.8.8'
+    rule_summary:
+      undated_replaced_reference: 'use the current version with all amendments'
+      dated_replaced_reference: 'use the version with the stated approval/adoption year'
+      dated_reference_later_amendment_affects_referenced_provision: 'apply the referenced provision without that later amendment'
+      cancelled_without_replacement: 'apply the source provision only insofar as it does not depend on the cancelled reference'
+    source_url: 'https://base.garant.ru/406967648/'
+  - source_id: GOST-R-1.5-2012
+    locators: ['3.6.5', '4.3.4', '4.3.5']
+    rule_summary:
+      whole_document_reference: 'undated reference, written without approval/adoption year'
+      structural_element_reference: 'dated reference, written with approval/adoption year and referenced structural element'
+      bibliography_year_semantics: >-
+        If one referenced document has both dated and undated occurrences in the same source document,
+        its bibliography/list entry includes the year. Therefore the year shown in the bibliography cannot
+        by itself classify every body occurrence as dated/pinned.
+    source_url: 'https://base.garant.ru/70475486/'
+
+resolution_unit: exact_reference_occurrence
+
+reference_classes:
+  undated_whole_document:
+    binding: floating_current
+    detection:
+      - 'body occurrence names referenced document without approval/adoption year'
+      - 'reference applies to the referenced document as a whole rather than a named structural element'
+    replacement_behavior: 'resolve to current replacing document at evaluation_date, including its current amendments'
+    required_evidence:
+      - exact_source_locator
+      - literal_reference_text_or_structured_capture
+      - official_or_A1_status_of_replacement_document
+
+  dated_structural_or_explicit_year:
+    binding: pinned_version
+    detection_any:
+      - 'body occurrence contains approval/adoption year in the referenced document designation'
+      - 'reference is to a concrete section/subsection/clause/subclause/table/appendix or other structural element and is written as dated'
+    replacement_behavior: 'keep the stated year/version'
+    later_amendment_behavior: >-
+      If a later amendment to the referenced document affects the specifically referenced provision, do not
+      silently apply that amendment through this dated reference unless the source document itself is amended accordingly.
+    required_evidence:
+      - exact_source_locator
+      - literal_reference_text_or_structured_capture
+
+  ambiguous_or_malformed:
+    binding: fail_closed
+    conditions_any:
+      - 'body occurrence cannot be read exactly'
+      - 'source text and bibliography metadata conflict on the reference form'
+      - 'reference syntax is defective or cross-reference target is semantically inconsistent'
+    action: 'do not auto-upgrade or auto-pin; create conflict evidence and require locator audit'
+
+section_2_registry_role:
+  authoritative_for:
+    - referenced_document_identity
+    - title_and_registered_version_as_published_in_that_source_revision
+  not_sufficient_for:
+    - deciding_binding_of_each_body_occurrence
+    - globally_pinning_all_occurrences_to_the_year_shown_in_section_2
+  reason: >-
+    A source may contain both dated and undated occurrences to the same referenced document while the section-2
+    list still shows a year. Binding must therefore be inferred from the exact body occurrence.
+
+runtime_resolution:
+  required_inputs:
+    - source_document_id
+    - source_locator
+    - literal_reference_occurrence
+    - evaluation_date
+    - reference_class
+  output_fields:
+    - resolved_target_document_id
+    - resolved_target_revision
+    - binding
+    - resolution_evidence
+    - unresolved_conflict_if_any
+  no_global_document_default: true
+
+safety_guards:
+  - 'Never rewrite a dated reference to the newest edition just because a replacement exists.'
+  - 'Never keep an undated whole-document reference on an obsolete edition just because section 2 lists that old year.'
+  - 'Never infer binding from document title/card metadata without reading the source occurrence.'
+  - 'Never silently repair a malformed internal reference; preserve literal text and fail closed.'
+  - 'Resolve recursive dependencies only for the active rule edge; do not load all rules of the target document.'
+
+migration_corrections:
+  - prior_behavior: blanket_pinned_from_section2_year
+    authoritative: false
+  - prior_behavior: blanket_floating_to_latest
+    authoritative: false
+  - replacement: occurrence_level_resolution
