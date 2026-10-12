@@ -33,6 +33,16 @@ jobs:
           python tools/apa_knowledge_graph/graph.py build \
             --plan docs/research/apa-results/control/PROJECT_PLAN.json \
             --out "${RUNNER_TEMP}/apa-knowledge-index.json"
+      - name: Build derived section index without changing source documents
+        run: |
+          python tools/apa_knowledge_graph/sections.py build \
+            --root docs/research/apa-results \
+            --out "${RUNNER_TEMP}/apa-sections.sqlite"
+      - name: Search real research sections with source SHA readback
+        run: |
+          python tools/apa_knowledge_graph/sections.py search \
+            --index "${RUNNER_TEMP}/apa-sections.sqlite" \
+            --query "кровли" --limit 3 --max-snippet 160
       - name: Query real APA normative artifact (bounded)
         run: |
           python tools/apa_knowledge_graph/graph.py artifact \
