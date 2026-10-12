@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 32,
+  "run_count": 33,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -225,6 +225,13 @@
       "report": "runs/2026-10-12/APA-RUN-20261012-132353Z-construction-junction-qualification-s03/REPORT.md",
       "run_id": "APA-RUN-20261012-132353Z-construction-junction-qualification-s03",
       "substep_id": "APA-P70.A04.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-12/APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon/REPORT.md",
+      "run_id": "APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon",
+      "substep_id": "APA-P70.A11.S03"
     }
   ],
   "schema": "APA_GENERATED_INDEX_V1",

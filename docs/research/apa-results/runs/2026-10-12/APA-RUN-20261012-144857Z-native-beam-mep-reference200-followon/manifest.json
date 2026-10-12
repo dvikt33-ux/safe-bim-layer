@@ -1,0 +1,93 @@
+{
+  "action_id": "APA-P70.A11",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-NATIVE-BEAM-MEP-REFERENCE200-FOLLOWON",
+      "evidence_ids": [
+        "EV-JUNCTION-PROOF",
+        "EV-JUNCTION-BYTES"
+      ],
+      "statement": "Native reference200 creates actualØ200terminal lead with reciprocal physical ports; real Beam25x150/Beam50x50support contact75cm2 and source/material/story/body proof; separate native Wall/Roof perimeter abutment3.236340608m2, not underside bearing.107GUID/43context saved/reopened; all96accepted GUID/body signatures retained, no new collision. IFC50elements/43bounds/18quantitymatches/0mismatch/12port relations.455Windows host/Windows+LinuxCI PASS,13exact GitHub source blobs. S03PARTIAL/S10BLOCKED; original4roofgaps, main-network transition, full assembly/receiver/engineering unverified. Permanent native-first rule published. Publication zero native calls.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-JUNCTION-PROOF",
+      "kind": "TEST_RESULT",
+      "sha256": "7858f49d7f6ed508c6f91f7fda948413b690e00019ae5d3aae652681d5d5e8fd",
+      "source_revision": "744e0bd184a11f1de4a1cf16382d21aec6f8cfca",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon/acceptance.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-JUNCTION-BYTES",
+      "kind": "LOCAL_LOG",
+      "sha256": "aa6289fb03521a4c79d61a1340f26111717094a86b6bfd5fcfd7f15450bd5edd",
+      "source_revision": "744e0bd184a11f1de4a1cf16382d21aec6f8cfca",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon/EVIDENCE_SHA256.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "work-native-beam-mep-20261012",
+  "executor_run_id": "APA-RUN-20261012-134235Z-native-beam-mep-followon",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-12T14:48:57Z",
+  "idempotency_key": "sha256:290bc02c2c207331326fbfecd5cacc22ca9aefb10eab60a623602e39cc435c60",
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "next_substep": "APA-P70.A11.S03",
+  "phase": "SOURCE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "29 native evidence captured; publication makes zero native calls",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "source_branch": "feature/apa-native-beam-mep-20261012",
+    "tapir": "1.5.10"
+  },
+  "source_revisions": [
+    {
+      "revision": "744e0bd184a11f1de4a1cf16382d21aec6f8cfca",
+      "source_sha": "744e0bd184a11f1de4a1cf16382d21aec6f8cfca",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/59"
+    }
+  ],
+  "started_at": "2026-10-12T13:42:35Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A11.S03"
+}
