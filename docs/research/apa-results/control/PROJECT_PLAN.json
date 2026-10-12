@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 95,
+  "revision": 96,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -758,6 +758,18 @@
       "uri": "docs/research/apa-results/receipts/APA-RUN-20261011-211000Z-native-material-library-integration.json",
       "kind": "APA_PUBLISH_RECEIPT",
       "verification": "DONE_PUBLISHED_READBACK_VERIFIED_PUBLISHER_CI38175547524_PASS"
+    },
+    "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012": {
+      "id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
+      "uri": "docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-010000Z-compatible-integration-v31/REPORT.md",
+      "kind": "CONNECTED_COMPONENT_INTEGRATION_REPORT",
+      "verification": "AC29_22_PRIMARY_48_GUID_PERSISTENCE_IFC_CPSAT_NATIVE_COLLISION_PASS_LINUX340"
+    },
+    "ART-P70-A11-S01-PUBLISH-RECEIPT-20261012": {
+      "id": "ART-P70-A11-S01-PUBLISH-RECEIPT-20261012",
+      "uri": "docs/research/apa-results/receipts/APA-RUN-20261012-010000Z-compatible-integration-v31.json",
+      "kind": "PUBLISH_RECEIPT",
+      "verification": "DONE_PUBLISHED_READBACK_VERIFIED_PUBLISHER_CI38190321586_PASS"
     }
   },
   "tasks": {
@@ -3174,7 +3186,7 @@
       "action_id": "APA-P70.A11",
       "title": "Подключить готовые компоненты совместимым пакетом",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "DONE_PUBLISHED",
       "priority": 1,
       "work_key": "compatible-component-batch-v31",
       "depends_on": [
@@ -3209,11 +3221,14 @@
         "Ready donor functions execute through shared XYZ/GUID/story/material/host context. Functional geometry/Details/MEP/IFC adapters integrated where implementation exists; research-only and missing provider functions explicitly identified. Independent optional modules disabled safely; no second writer or placeholder/catalog-only PASS."
       ],
       "acceptance": "Ready donor functions execute through shared XYZ/GUID/story/material/host context. Functional geometry/Details/MEP/IFC adapters integrated where implementation exists; research-only and missing provider functions explicitly identified. Independent optional modules disabled safely; no second writer or placeholder/catalog-only PASS.",
-      "owner": "codex-apa-batch-v31-20261012",
-      "lease_until": "2026-10-12T04:00:00Z",
-      "claim_ref": "APA-RUN-20261012-002200Z-compatible-integration-v31",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
+        "ART-P70-A11-S01-PUBLISH-RECEIPT-20261012"
+      ],
       "blocked_reason": null
     },
     "APA-P70.A11.S02": {
@@ -4093,10 +4108,15 @@
         "operational_dependencies": [
           "APA-P70.A03.S01"
         ],
-        "available_functions": "Existing accepted functions within recorded scope",
+        "available_functions": "compile_intent; run_project; native_transport",
         "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
-        "required_adapter": "Shared context preserving accepted implementation",
-        "preparation_task": "APA-P70.A11.S01"
+        "required_adapter": "Shared context adapter implemented; accepted functions retained",
+        "preparation_task": "APA-P70.A11.S01",
+        "connection_verification": {
+          "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+          "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
+          "scope": "Retained entrypoint with connected CLI prefix/readback; original core accepted"
+        }
       },
       {
         "name": "Semantic Brief",
@@ -4126,10 +4146,15 @@
         "operational_dependencies": [
           "APA-P70.A03.S01"
         ],
-        "available_functions": "Existing accepted functions within recorded scope",
+        "available_functions": "normalize; resolve_stories",
         "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
-        "required_adapter": "Shared context preserving accepted implementation",
-        "preparation_task": "APA-P70.A11.S01"
+        "required_adapter": "Shared context adapter implemented; accepted functions retained",
+        "preparation_task": "APA-P70.A11.S01",
+        "connection_verification": {
+          "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+          "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
+          "scope": "Real GetStories retained; engineering brief not accepted"
+        }
       },
       {
         "name": "Semantic Spatial",
@@ -4159,10 +4184,15 @@
         "operational_dependencies": [
           "APA-P70.A03.S01"
         ],
-        "available_functions": "Existing accepted functions within recorded scope",
+        "available_functions": "compile_spatial; relocate_authored_xy",
         "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
-        "required_adapter": "Shared context preserving accepted implementation",
-        "preparation_task": "APA-P70.A11.S01"
+        "required_adapter": "Shared context adapter implemented; accepted functions retained",
+        "preparation_task": "APA-P70.A11.S01",
+        "connection_verification": {
+          "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+          "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
+          "scope": "Authored core layout retained; no global design optimizer"
+        }
       },
       {
         "name": "Project Library Pack / CSE",
@@ -4192,10 +4222,15 @@
         "operational_dependencies": [
           "APA-P70.A09.S01"
         ],
-        "available_functions": "Existing accepted functions within recorded scope",
+        "available_functions": "compile_pack",
         "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
-        "required_adapter": "Shared context preserving accepted implementation",
-        "preparation_task": "APA-P70.A11.S01"
+        "required_adapter": "Shared context adapter implemented; accepted functions retained",
+        "preparation_task": "APA-P70.A11.S01",
+        "connection_verification": {
+          "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+          "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
+          "scope": "Retained RC floor resolver; manufacturer system approval not implied"
+        }
       },
       {
         "name": "Authored Native Plan",
@@ -4225,10 +4260,15 @@
         "operational_dependencies": [
           "APA-P70.A03.S01"
         ],
-        "available_functions": "Existing accepted functions within recorded scope",
+        "available_functions": "compile_candidate; make_read_only_scene_writer_preview_factory",
         "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
-        "required_adapter": "Shared context preserving accepted implementation",
-        "preparation_task": "APA-P70.A11.S01"
+        "required_adapter": "Shared context adapter implemented; accepted functions retained",
+        "preparation_task": "APA-P70.A11.S01",
+        "connection_verification": {
+          "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+          "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
+          "scope": "Authored native graph retained; required unsupported modules block"
+        }
       },
       {
         "name": "BIM Graph",
@@ -4258,10 +4298,15 @@
         "operational_dependencies": [
           "APA-P70.A03.S02"
         ],
-        "available_functions": "Existing accepted functions within recorded scope",
+        "available_functions": "compile_graph",
         "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
-        "required_adapter": "Shared context preserving accepted implementation",
-        "preparation_task": "APA-P70.A11.S01"
+        "required_adapter": "Shared context adapter implemented; accepted functions retained",
+        "preparation_task": "APA-P70.A11.S01",
+        "connection_verification": {
+          "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+          "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
+          "scope": "One DAG, fixed extended native creates; host ordering retained"
+        }
       },
       {
         "name": "SceneWriter / SQLite",
@@ -4291,10 +4336,15 @@
         "operational_dependencies": [
           "APA-P70.A03.S01"
         ],
-        "available_functions": "Existing accepted functions within recorded scope",
+        "available_functions": "SceneWriter._execute_verified_plan; SceneWriter.modify_morph_body",
         "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
-        "required_adapter": "Shared context preserving accepted implementation",
-        "preparation_task": "APA-P70.A11.S01"
+        "required_adapter": "Shared context adapter implemented; accepted functions retained",
+        "preparation_task": "APA-P70.A11.S01",
+        "connection_verification": {
+          "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+          "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
+          "scope": "One SQLite writer; four creates and one explicit in-place body repair verified"
+        }
       },
       {
         "name": "Native MVP / write cycles",
@@ -4324,10 +4374,15 @@
         "operational_dependencies": [
           "APA-P70.A03.S02"
         ],
-        "available_functions": "Existing accepted functions within recorded scope",
+        "available_functions": "Roof.geometry_signature/bounds; Morph.transform_point/native_faces_from_body/cloud_compare",
         "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
-        "required_adapter": "Shared context preserving accepted implementation",
-        "preparation_task": "APA-P70.A11.S01"
+        "required_adapter": "Shared context adapter implemented; accepted functions retained",
+        "preparation_task": "APA-P70.A11.S01",
+        "connection_verification": {
+          "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+          "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
+          "scope": "Pure donor helpers reused; standalone donor transports/deletions not used"
+        }
       },
       {
         "name": "Template Builder",
@@ -4357,10 +4412,15 @@
         "operational_dependencies": [
           "APA-P70.A09.S01"
         ],
-        "available_functions": "Existing accepted functions within recorded scope",
+        "available_functions": "Retained attribute header resolver; native material resolve/compile_change/readback",
         "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
-        "required_adapter": "Shared context preserving accepted implementation",
-        "preparation_task": "APA-P70.A11.S01"
+        "required_adapter": "Shared context adapter implemented; accepted functions retained",
+        "preparation_task": "APA-P70.A11.S01",
+        "connection_verification": {
+          "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+          "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
+          "scope": "Existing selected material edits/restores retained"
+        }
       },
       {
         "name": "Tapir / Python JSON",
@@ -4390,10 +4450,15 @@
         "operational_dependencies": [
           "APA-P70.A03.S01"
         ],
-        "available_functions": "Existing accepted functions within recorded scope",
+        "available_functions": "Native command schema validation; GetProjectInfo/GetAddOnVersion; dedicated typed getters",
         "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
-        "required_adapter": "Shared context preserving accepted implementation",
-        "preparation_task": "APA-P70.A11.S01"
+        "required_adapter": "Shared context adapter implemented; accepted functions retained",
+        "preparation_task": "APA-P70.A11.S01",
+        "connection_verification": {
+          "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+          "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
+          "scope": "Installed1.5.10/263commands; generic MEP getters inconsistent, dedicated proof bounded"
+        }
       },
       {
         "name": "Native Model Dump / AC29 geometry",
@@ -4423,10 +4488,15 @@
         "operational_dependencies": [
           "APA-P70.A08.S04"
         ],
-        "available_functions": "Existing accepted functions within recorded scope",
+        "available_functions": "normalize_dump; native_context; exact GUID/body/story/material mapping",
         "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
-        "required_adapter": "Shared context preserving accepted implementation",
-        "preparation_task": "APA-P70.A11.S01"
+        "required_adapter": "Shared context adapter implemented; accepted functions retained",
+        "preparation_task": "APA-P70.A11.S01",
+        "connection_verification": {
+          "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+          "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
+          "scope": "Current22primary/48GUID body preservation; positive Roof/Morph native collision proved"
+        }
       },
       {
         "name": "NetworkX / Shapely",
@@ -4456,10 +4526,15 @@
         "operational_dependencies": [
           "APA-P70.A08.S04"
         ],
-        "available_functions": "Existing accepted functions within recorded scope",
+        "available_functions": "Retained NetworkX dependency graph and Shapely coplanar contact predicates",
         "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
-        "required_adapter": "Shared context preserving accepted implementation",
-        "preparation_task": "APA-P70.A11.S01"
+        "required_adapter": "Shared context adapter implemented; accepted functions retained",
+        "preparation_task": "APA-P70.A11.S01",
+        "connection_verification": {
+          "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+          "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
+          "scope": "2D predicates retain declared scope; native body collision checked independently"
+        }
       },
       {
         "name": "Roof / Shell / Morph / Openings / SEO",
@@ -4468,7 +4543,7 @@
         "source_artifact_ids": [
           "ART-SDK-OPENING-SHELL-20261010-8E41"
         ],
-        "verification_level": "FOUND",
+        "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
         "advantage": "Reuse published finding; compare only for a concrete gap",
         "limitations": "Candidate/registered research, no inferred install/license/live support",
@@ -4480,7 +4555,7 @@
           "APA-P70.A08.S04"
         ],
         "acceptance": "Native capabilities adapted individually; required unsupported scope blocks",
-        "implementation_state": "FOUND",
+        "implementation_state": "INTEGRATED",
         "connection_point": "geometry",
         "preparation_dependencies": [
           "APA-P70.A02.S04"
@@ -4488,10 +4563,15 @@
         "operational_dependencies": [
           "APA-P70.A08.S04"
         ],
-        "available_functions": "Donor functions after source inspection; research-only interface is not implementation",
+        "available_functions": "NativeAdapter Roof/Morph verify; explicit_box_body; modify_morph_body",
         "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
-        "required_adapter": "Thin compatible adapter when donor functions exist; otherwise explicit missing implementation",
-        "preparation_task": "APA-P70.A11.S01"
+        "required_adapter": "Bounded adapter implemented; expansion gaps described in connection_verification",
+        "preparation_task": "APA-P70.A11.S01",
+        "connection_verification": {
+          "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+          "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
+          "scope": "Single-plane Roof and closed explicit Morph proved; Shell/Opening/SEO execution unsupported or untested"
+        }
       },
       {
         "name": "GDL / ТЕХНОНИКОЛЬ / manufacturer catalogs",
@@ -4521,10 +4601,15 @@
         "operational_dependencies": [
           "APA-P70.A09.S01"
         ],
-        "available_functions": "Existing accepted functions within recorded scope",
+        "available_functions": "Selected library resolve/verify_geometry; retained exact Unicode/library GUID",
         "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
-        "required_adapter": "Shared context preserving accepted implementation",
-        "preparation_task": "APA-P70.A11.S01"
+        "required_adapter": "Shared context adapter implemented; accepted functions retained",
+        "preparation_task": "APA-P70.A11.S01",
+        "connection_verification": {
+          "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+          "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
+          "scope": "Selected TN Object preserved; stored340mm versus physical310mm remains explicit"
+        }
       },
       {
         "name": "Details v2.12 / constructive nodes",
@@ -4533,7 +4618,7 @@
         "source_artifact_ids": [
           "ART-APA-DETAILS-V212"
         ],
-        "verification_level": "FOUND",
+        "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
         "advantage": "Reuse published finding; compare only for a concrete gap",
         "limitations": "Candidate/registered research, no inferred install/license/live support",
@@ -4546,7 +4631,7 @@
           "APA-P70.A02.S04"
         ],
         "acceptance": "Applicability/source and BIM attachment verified; found detail not automatically approved",
-        "implementation_state": "FOUND",
+        "implementation_state": "INTEGRATED",
         "connection_point": "constructive",
         "preparation_dependencies": [
           "APA-P70.A02.S04"
@@ -4555,10 +4640,15 @@
           "APA-P70.A03.S01",
           "APA-P70.A02.S04"
         ],
-        "available_functions": "Donor functions after source inspection; research-only interface is not implementation",
+        "available_functions": "details_candidate joins detail IR/entities/parameter facts to Roof context",
         "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
-        "required_adapter": "Thin compatible adapter when donor functions exist; otherwise explicit missing implementation",
-        "preparation_task": "APA-P70.A11.S01"
+        "required_adapter": "Bounded adapter implemented; expansion gaps described in connection_verification",
+        "preparation_task": "APA-P70.A11.S01",
+        "connection_verification": {
+          "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+          "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
+          "scope": "1142ordinary IR read; selected2facts used;8missing entity dimensions/source commit=false block whole assembly;73context records need adapter"
+        }
       },
       {
         "name": "SAM / SAF / structural handoff",
@@ -4567,7 +4657,7 @@
         "source_artifact_ids": [
           "ART-APA-STRUCTURAL-HANDOFF"
         ],
-        "verification_level": "FOUND",
+        "verification_level": "SOURCE_VERIFIED",
         "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
         "advantage": "Reuse published finding; compare only for a concrete gap",
         "limitations": "Candidate/registered research, no inferred install/license/live support",
@@ -4581,7 +4671,7 @@
           "APA-P70.A04.S03"
         ],
         "acceptance": "Verified inputs, solver, loads, norms and BIM provenance; connectivity not carrying capacity",
-        "implementation_state": "FOUND",
+        "implementation_state": "SOURCE_VERIFIED",
         "connection_point": "engineering",
         "preparation_dependencies": [
           "APA-P70.A02.S04"
@@ -4591,10 +4681,15 @@
           "APA-P70.A02.S02",
           "APA-P70.A04.S03"
         ],
-        "available_functions": "Donor functions after source inspection; research-only interface is not implementation",
+        "available_functions": "Registered SAM/SAF source contracts only; no connected native solver executor",
         "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
-        "required_adapter": "Thin compatible adapter when donor functions exist; otherwise explicit missing implementation",
-        "preparation_task": "APA-P70.A11.S01"
+        "required_adapter": "Missing runtime/applicability implementation described in connection_verification; source references retained",
+        "preparation_task": "APA-P70.A11.S01",
+        "connection_verification": {
+          "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+          "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
+          "scope": "Structural loads/normative/solver result absent; required structural scope BLOCKED"
+        }
       },
       {
         "name": "Native MEP Designer",
@@ -4603,7 +4698,7 @@
         "source_artifact_ids": [
           "ART-MEP-SOURCE-20261010-PORTGRAPH"
         ],
-        "verification_level": "FOUND",
+        "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
         "advantage": "Reuse published finding; compare only for a concrete gap",
         "limitations": "Candidate/registered research, no inferred install/license/live support",
@@ -4617,7 +4712,7 @@
           "APA-P70.A05.S03"
         ],
         "acceptance": "Commands/routes/ports and model coordination proven; UI presence not integration",
-        "implementation_state": "FOUND",
+        "implementation_state": "INTEGRATED",
         "connection_point": "MEP",
         "preparation_dependencies": [
           "APA-P70.A02.S04"
@@ -4627,10 +4722,15 @@
           "APA-P70.A02.S02",
           "APA-P70.A05.S03"
         ],
-        "available_functions": "Donor functions after source inspection; research-only interface is not implementation",
+        "available_functions": "NativeAdapter MEP verify; straight_route_ownership; attach_physical_route",
         "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
-        "required_adapter": "Thin compatible adapter when donor functions exist; otherwise explicit missing implementation",
-        "preparation_task": "APA-P70.A11.S01"
+        "required_adapter": "Bounded adapter implemented; expansion gaps described in connection_verification",
+        "preparation_task": "APA-P70.A11.S01",
+        "connection_verification": {
+          "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+          "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
+          "scope": "One Ventilation route/segment/two nodes/physical duct/two ports proved; ports unconnected; branched network unverified"
+        }
       },
       {
         "name": "OR-Tools / CP-SAT / batching / caches",
@@ -4639,7 +4739,7 @@
         "source_artifact_ids": [
           "ART-APA-FAST-COMPILER"
         ],
-        "verification_level": "FOUND",
+        "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
         "advantage": "Reuse published finding; compare only for a concrete gap",
         "limitations": "Candidate/registered research, no inferred install/license/live support",
@@ -4651,7 +4751,7 @@
           "APA-P70.A06.S02"
         ],
         "acceptance": "Specific optimization objective/constraints plus measured benefit",
-        "implementation_state": "FOUND",
+        "implementation_state": "INTEGRATED",
         "connection_point": "optimization",
         "preparation_dependencies": [
           "APA-P70.A02.S04"
@@ -4659,10 +4759,15 @@
         "operational_dependencies": [
           "APA-P70.A06.S02"
         ],
-        "available_functions": "Donor functions after source inspection; research-only interface is not implementation",
+        "available_functions": "choose_straight_route via OR-Tools CP-SAT",
         "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
-        "required_adapter": "Thin compatible adapter when donor functions exist; otherwise explicit missing implementation",
-        "preparation_task": "APA-P70.A11.S01"
+        "required_adapter": "Bounded adapter implemented; expansion gaps described in connection_verification",
+        "preparation_task": "APA-P70.A11.S01",
+        "connection_verification": {
+          "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+          "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
+          "scope": "Actual native obstacle bounds and flange clearance;3candidate routes; no batching/cache or large-model speedup claim"
+        }
       },
       {
         "name": "СП / ГОСТ normative sources",
@@ -4671,7 +4776,7 @@
         "source_artifact_ids": [
           "ART-APA-RU-JUNCTION-NORMS"
         ],
-        "verification_level": "FOUND",
+        "verification_level": "SOURCE_VERIFIED",
         "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
         "advantage": "Reuse published finding; compare only for a concrete gap",
         "limitations": "Candidate/registered research, no inferred install/license/live support",
@@ -4685,7 +4790,7 @@
           "APA-P70.A06.S02"
         ],
         "acceptance": "Applicable norm/version/source linked to verified check",
-        "implementation_state": "FOUND",
+        "implementation_state": "SOURCE_VERIFIED",
         "connection_point": "release",
         "preparation_dependencies": [
           "APA-P70.A02.S04"
@@ -4695,10 +4800,15 @@
           "APA-P70.A05.S03",
           "APA-P70.A06.S02"
         ],
-        "available_functions": "Donor functions after source inspection; research-only interface is not implementation",
+        "available_functions": "Registered normative source references only; no applicable compliance evaluator",
         "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
-        "required_adapter": "Thin compatible adapter when donor functions exist; otherwise explicit missing implementation",
-        "preparation_task": "APA-P70.A11.S01"
+        "required_adapter": "Missing runtime/applicability implementation described in connection_verification; source references retained",
+        "preparation_task": "APA-P70.A11.S01",
+        "connection_verification": {
+          "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+          "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
+          "scope": "Norm/version/load applicability not evaluated; mandatory normative acceptance BLOCKED"
+        }
       },
       {
         "name": "IFC / openBIM / MCP / Twinmotion",
@@ -4707,7 +4817,7 @@
         "source_artifact_ids": [
           "ART-APA-FULL-CYCLE-RESEARCH"
         ],
-        "verification_level": "FOUND",
+        "verification_level": "LIVE_VERIFIED",
         "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
         "advantage": "Reuse published finding; compare only for a concrete gap",
         "limitations": "Candidate/registered research, no inferred install/license/live support",
@@ -4719,7 +4829,7 @@
           "APA-P70.A07.S02"
         ],
         "acceptance": "Required export/sync checked against native model; unsupported scope explicit",
-        "implementation_state": "FOUND",
+        "implementation_state": "INTEGRATED",
         "connection_point": "export",
         "preparation_dependencies": [
           "APA-P70.A02.S04"
@@ -4727,10 +4837,15 @@
         "operational_dependencies": [
           "APA-P70.A07.S02"
         ],
-        "available_functions": "Donor functions after source inspection; research-only interface is not implementation",
+        "available_functions": "export_once; inspect_export via IfcOpenShell",
         "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
-        "required_adapter": "Thin compatible adapter when donor functions exist; otherwise explicit missing implementation",
-        "preparation_task": "APA-P70.A11.S01"
+        "required_adapter": "Bounded adapter implemented; expansion gaps described in connection_verification",
+        "preparation_task": "APA-P70.A11.S01",
+        "connection_verification": {
+          "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+          "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
+          "scope": "22native/IFC world-bound matches1e-5m; explicit physical duct identity; full semantic quantities/MCP/Twinmotion unverified"
+        }
       },
       {
         "name": "Archived branches / alternate implementations / source71",
@@ -4739,7 +4854,7 @@
         "source_artifact_ids": [
           "ART-APA-SOURCE-71-INDEX-20261011"
         ],
-        "verification_level": "FOUND",
+        "verification_level": "SOURCE_VERIFIED",
         "existing_apa_analog": "See registered source artifact; applicability requires source inspection",
         "advantage": "Reuse published finding; compare only for a concrete gap",
         "limitations": "Candidate/registered research, no inferred install/license/live support",
@@ -4752,7 +4867,7 @@
           "APA-P50.A01.S01"
         ],
         "acceptance": "Keep source provenance; compare measurable advantage before replace/merge",
-        "implementation_state": "FOUND",
+        "implementation_state": "SOURCE_VERIFIED",
         "connection_point": "candidate donors",
         "preparation_dependencies": [
           "APA-P70.A02.S04"
@@ -4761,10 +4876,15 @@
           "APA-P70.A01.S01",
           "APA-P50.A01.S01"
         ],
-        "available_functions": "Donor functions after source inspection; research-only interface is not implementation",
+        "available_functions": "Pinned source71 inventory; accepted native donor helpers reused",
         "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
-        "required_adapter": "Thin compatible adapter when donor functions exist; otherwise explicit missing implementation",
-        "preparation_task": "APA-P70.A11.S01"
+        "required_adapter": "Missing runtime/applicability implementation described in connection_verification; source references retained",
+        "preparation_task": "APA-P70.A11.S01",
+        "connection_verification": {
+          "code_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+          "report_artifact_id": "ART-P70-A11-S01-CONNECTED-COMPONENTS-20261012",
+          "scope": "No exhaustive historical dedup/full runtime acceptance claim"
+        }
       }
     ]
   },
