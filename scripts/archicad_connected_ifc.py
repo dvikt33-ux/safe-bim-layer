@@ -27,22 +27,32 @@ def inspect_export(path,context,mapping):
         except RuntimeError:element=None
         row={'stepId':sid,'nativeKind':native['kind'],'ifcId':identifier,'status':'IFC_ROOT_NOT_EXPORTED'}
         physical=False
+        exported=[element] if element else []
+        if element is None and native.get('physicalIfcIds'):
+            try:exported=[model.by_guid(identifier) for identifier in native['physicalIfcIds']]
+            except RuntimeError:exported=[]
+            if exported:
+                element=exported[0];physical=True
+                row.update(aggregateIfcIdNotExported=identifier,physicalIfcIds=native['physicalIfcIds'],
+                    physicalNativeGuids=native['physicalElementGuids'],mappingScope='ACTUAL_EXPORTED_PHYSICAL_DUCT_MEMBERS; CONTAINER_IS_NOT_AN_IFC_ROOT')
         if element is None and native.get('physicalIfcId'):
             try:element=model.by_guid(native['physicalIfcId'])
             except RuntimeError:element=None
             if element:
                 physical=True
+                exported=[element]
                 row.update(aggregateIfcIdNotExported=identifier,physicalIfcId=native['physicalIfcId'],
                     physicalNativeGuid=native['physicalElementGuid'],mappingScope='EXPORTED_PHYSICAL_DUCT; CONTAINER_IS_NOT_AN_IFC_ROOT')
         if element:
             row.update(ifcType=element.is_a(),status='IFC_IDENTITY_MAPPED')
             try:
-                shape=ifcopenshell.geom.create_shape(settings,element)
-                v=shape.geometry.verts
-                points=[v[i:i+3] for i in range(0,len(v),3)]
+                points=[]
+                for member in exported:
+                    shape=ifcopenshell.geom.create_shape(settings,member);v=shape.geometry.verts
+                    points.extend(v[i:i+3] for i in range(0,len(v),3))
                 if not points:raise ValueError('EMPTY_IFC_SHAPE')
                 bounds=[(min(p[i] for p in points),max(p[i] for p in points)) for i in range(3)]
-                source_bounds=native['physicalBounds'] if physical else native['bounds']
+                source_bounds=native.get('physicalBounds',native['bounds']) if physical else native['bounds']
                 native_bounds=[(min(b[i][0] for b in source_bounds),max(b[i][1] for b in source_bounds)) for i in range(3)]
                 delta=max(abs(a-b) for left,right in zip(bounds,native_bounds) for a,b in zip(left,right))
                 row.update(ifcBoundsMeters=bounds,nativeBoundsMeters=native_bounds,boundsDeltaMeters=delta,

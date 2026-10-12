@@ -118,7 +118,7 @@ def required_junction_matrix(context,evaluated):
         'nativeContextHash':C.RUN.digest(context),'families':rows,'coverageScope':'Bounded accepted model; bounding boxes are candidate evidence only'}
 
 
-def prepare_source_section(root,source,context,native,host_guid,entity_id,material_selection):
+def prepare_source_section(root,source,context,native,host_guid,entity_id,material_selection,placement_y=None):
     """Two confirmed ARMO cross sections as independent geometric parts.
 
     Length and placement come from a measured native planar roof. The material
@@ -142,7 +142,24 @@ def prepare_source_section(root,source,context,native,host_guid,entity_id,materi
         raise ValueError('DETAIL_PART_DIMENSION_INVALID')
     bodies=[e for e in native['elements'] if e['guid'].lower()==host_guid.lower()]
     if len(bodies)!=1:raise ValueError('DETAIL_PART_HOST_BODY_MISSING')
-    body=bodies[0];b=C.ROOF.bounds(body);y=(b[1][0]+b[1][1])/2
+    body=bodies[0];b=C.ROOF.bounds(body)
+    if placement_y is None:
+        candidates=[(b[1][0]+b[1][1])/2,b[1][0]+(b[1][1]-b[1][0])/4,b[1][0]+3*(b[1][1]-b[1][0])/4]
+        rejected=[]
+        for y in candidates:
+            part=prepare_source_section(root,source,context,native,host_guid,entity_id,material_selection,y)
+            data=part['plan']['graph']['operations'][0]['params']['morphsData'][0]
+            cloud=[C.morph_api_world_point(p,data['basePoint'],[data[k] for k in ('xAxis','yAxis','zAxis')]) for p in data['body']['vertices']]
+            bounds=[(min(p[k] for p in cloud),max(p[k] for p in cloud)) for k in range(3)]
+            blockers=[sid for sid,e in context['elements'].items() if e['guid'].lower()!=host_guid.lower() and
+                any(all(min(a[1],box[1])-max(a[0],box[0])>1e-7 for a,box in zip(bounds,b)) for b in e.get('bounds',[]))]
+            if not blockers:
+                part['placementCandidates']={'selectedY':y,'rejected':rejected,'authority':'Explicit native roof quarter-span candidates; exact native collision readback still required'}
+                return part
+            rejected.append({'y':y,'blockedBy':blockers})
+        raise ValueError('DETAIL_PART_NO_UNOBSTRUCTED_NATIVE_ROOF_CANDIDATE')
+    if type(placement_y) not in (int,float) or not math.isfinite(placement_y):raise ValueError('DETAIL_PART_PLACEMENT_Y_INVALID')
+    y=placement_y
     planes=[]
     for solid in body['bodies']:
         if solid['curved']:raise ValueError('DETAIL_PART_CURVED_ROOF_NOT_SUPPORTED')
@@ -166,7 +183,10 @@ def prepare_source_section(root,source,context,native,host_guid,entity_id,materi
     normal={'x':0.,'y':-tangent['z'],'z':tangent['y']}
     base={'x':b[0][0],'y':y-tangent['y']*width/2-normal['y']*height,
           'z':z(b[0][0],y)-tangent['z']*width/2-normal['z']*height}
-    data={'floorIndex':host['floorIndex'],'basePoint':base,'xAxis':{'x':1.,'y':0.,'z':0.},'yAxis':tangent,'zAxis':normal,
+    # Tapir stores these fields as matrix rows. Transpose the desired local
+    # basis so actual BREP rises with the measured roof, not against its slope.
+    data={'floorIndex':host['floorIndex'],'basePoint':base,'xAxis':{'x':1.,'y':0.,'z':0.},
+          'yAxis':{'x':0.,'y':tangent['y'],'z':normal['y']},'zAxis':{'x':0.,'y':tangent['z'],'z':normal['z']},
           'body':C.explicit_box_body({'x':b[0][1]-b[0][0],'y':width,'z':height}),'buildingMaterialId':{'guid':material_guid}}
     binding={'detailId':candidate['detailId'],'entityId':entity_id,'sourceFactId':fact['fact']['fact_id'],
         'sourceLocator':candidate['sourceLocator'],'archiveSha256':candidate['archiveSha256'],'hostGuid':host['guid'],

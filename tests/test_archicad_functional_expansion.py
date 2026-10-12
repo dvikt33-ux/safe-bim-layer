@@ -5,6 +5,7 @@ ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'scripts'))
 import archicad_functional_expansion as X
 import archicad_connected_ifc as I
 import archicad_details_context as D
+import archicad_connected_solver as SOLVER
 from test_archicad_functional_gaps import native_fixture,guid
 C=X.C;M=X.M
 
@@ -92,6 +93,29 @@ class ExpandedMEPTests(unittest.TestCase):
     def test_component_creation_is_opt_in(self):
         self.assertNotIn('CreateMEPElements',C.RUN.SceneWriter(None,'unused').allowed_writes)
         self.assertIn('CreateMEPElements',C.RUN.SceneWriter(None,'unused',adapters=C.adapters(['mep-component'])).allowed_writes)
+    def test_standalone_terminal_is_reported_outside_explicit_route_scope(self):
+        r,_=native_fixture();terminal=guid(23)
+        r['GetMEPDistributionSystems']['distributionSystems'].append({'domain':'Ventilation','mepSystemId':{'guid':guid(1)},'elements':[{'elementId':{'guid':terminal}}]})
+        port=copy.deepcopy(r['GetMEPPorts']['elementPorts'][0]['ports'][0]);port.update(portId='unconnected-terminal',position={'x':20.,'y':0.,'z':0.},isPhysicallyConnected=False)
+        r['GetMEPPorts']['elementPorts'].append({'ports':[port]})
+        all_members=self.read(r);self.assertFalse(all_members['physicalConnected'])
+        scoped=M.read_network(lambda c,p:copy.deepcopy(r[c]),[guid(10),guid(11)],guid(1),scope_to_routes=True)
+        self.assertTrue(scoped['physicalConnected']);self.assertEqual(scoped['outsideRouteScopePhysicalGuids'],[terminal])
+    def test_missing_enumeration_requires_native_type_and_port_domain(self):
+        raw=cube((1.,1.,1.));raw['nativeTypeId']=150
+        replies={'GetMEPElements':{'elements':[]},'GetMEPPorts':{'elementPorts':[{'ports':[{'domain':'Ventilation','width':.2,'height':.2}]}]},'GetModelDumpV1':{}}
+        adapter=C.NativeAdapter('CreateMEPElements');params={'elementsData':[{'type':'Terminal','domain':'Ventilation','position':{'x':0.,'y':0.,'z':0.}}]}
+        with patch.object(C.G,'normalize_dump',return_value={'elements':[raw]}):
+            self.assertEqual(adapter.verify(lambda c,p:replies[c],guid(2),params,{'type':'Unknown','floorIndex':0},0,0),'MEPComponent')
+            raw['nativeTypeId']=45
+            with self.assertRaisesRegex(ValueError,'NATIVE_MEP_BODY'):adapter.verify(lambda c,p:replies[c],guid(2),params,{'type':'Unknown','floorIndex':0},0,0)
+    def test_supplied_polyline_checks_world_y_collision(self):
+        context={'units':'m','coordinateSystem':'ABSOLUTE_PROJECT_XYZ','elements':{'wall':{'kind':'Wall','bounds':[[[0.,1.],[2.,3.],[0.,4.]]]}}}
+        points=[{'x':.5,'y':0.,'z':2.},{'x':.5,'y':4.,'z':2.}]
+        r=SOLVER.check_explicit_polyline(context,points,.1,.1)
+        self.assertEqual(r['status'],'INFEASIBLE');self.assertEqual(r['segments'][0]['solver']['candidates'][0]['blockedBy'],['wall'])
+    def test_supplied_polyline_does_not_invent_diagonal_route(self):
+        with self.assertRaisesRegex(ValueError,'ORTHOGONAL'):SOLVER.check_explicit_polyline({},[{'x':0.,'y':0.,'z':0.},{'x':1.,'y':1.,'z':0.}],.1,.1)
 
 
 class SourceSectionTests(unittest.TestCase):
@@ -116,6 +140,16 @@ class SourceSectionTests(unittest.TestCase):
     def test_unknown_entity_not_turned_into_geometry(self):
         s,c,n,m=self.fixture()
         with self.assertRaisesRegex(ValueError,'CROSS_SECTION'):D.prepare_source_section(ROOT,s,c,n,guid(2),'c1',m)
+    def test_native_matrix_rows_make_batten_rise_with_roof(self):
+        part=self.part();data=part['plan']['graph']['operations'][0]['params']['morphsData'][0]
+        a=C.morph_api_world_point({'x':0.,'y':0.,'z':0.},data['basePoint'],[data[k] for k in ('xAxis','yAxis','zAxis')])
+        b=C.morph_api_world_point({'x':0.,'y':.15,'z':0.},data['basePoint'],[data[k] for k in ('xAxis','yAxis','zAxis')])
+        self.assertGreater(b[2],a[2]);self.assertAlmostEqual((b[2]-a[2])/(b[1]-a[1]),.15)
+    def test_diagnostic_morph_blocks_middle_and_selects_measured_quarter(self):
+        s,c,n,m=self.fixture();c['elements']['diagnostic']={'guid':guid(99),'kind':'Morph','bounds':[[[42,44],[43.9,44.1],[6.4,6.7]]]}
+        part=D.prepare_source_section(ROOT,s,c,n,guid(2),'c4',m)
+        self.assertEqual(part['placementCandidates']['selectedY'],42.)
+        self.assertEqual(part['placementCandidates']['rejected'][0]['blockedBy'],['diagnostic'])
     def test_counterbatten_requires_actual_rafter_orientation(self):
         s,c,n,m=self.fixture()
         with self.assertRaisesRegex(ValueError,'ORIENTATION'):D.prepare_source_section(ROOT,s,c,n,guid(2),'c5',m)

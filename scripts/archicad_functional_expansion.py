@@ -25,7 +25,7 @@ def discover_network(api,baseline):
     rows=api('GetMEPRoutingElements',{'elements':[{'elementId':{'guid':g}} for g in candidates]}).get('routingElements',[])
     if len(rows)!=len(candidates):raise ValueError('EXPANSION_ROUTING_DISCOVERY_CARDINALITY')
     routes=[g for g,r in zip(candidates,rows) if 'error' not in r and all(k in r for k in ('polyline','segments','nodes'))]
-    return M.read_network(api,routes,baseline['receipt']['systemGuid'])
+    return M.read_network(api,routes,baseline['receipt']['systemGuid'],scope_to_routes=True)
 
 
 def expanded_context(api,baseline,new_primary=None):

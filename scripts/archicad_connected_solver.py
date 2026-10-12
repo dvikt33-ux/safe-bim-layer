@@ -44,3 +44,28 @@ def choose_straight_route(context,start_x,end_x,ys,z,half_width,half_height,
         index=next(i for i,v in enumerate(selected) if solver.Value(v))
         result.update(selectedIndex=index,nodeCoordinates=[{'x':x,'y':ys[index],'z':z} for x in (start_x,end_x)])
     return result
+
+
+def check_explicit_polyline(context,points,half_width,half_height,clearance=0.05):
+    """Reuse CP-SAT for supplied orthogonal segments; never invent a path."""
+    import copy
+    if len(points)<2 or any(set(p)!={'x','y','z'} for p in points):
+        raise ValueError('EXPLICIT_POLYLINE_COORDINATES_INVALID')
+    segments=[];axes=('x','y','z')
+    for a,b in zip(points,points[1:]):
+        changed=[k for k in axes if a[k]!=b[k]]
+        if len(changed)!=1:raise ValueError('EXPLICIT_POLYLINE_REQUIRES_NONZERO_ORTHOGONAL_SEGMENTS')
+        along=changed[0];transverse=[k for k in axes if k!=along]
+        order=[along,*transverse];permuted=copy.deepcopy(context)
+        for e in permuted['elements'].values():
+            e['bounds']=[[box[axes.index(k)] for k in order] for box in e.get('bounds',[])]
+        # A vertical segment has width on both horizontal axes. Horizontal
+        # segments keep height on Z. The native fitting body is checked later.
+        widths=(half_width,half_width) if along=='z' else (half_width,half_height)
+        proof=choose_straight_route(permuted,min(a[along],b[along]),max(a[along],b[along]),
+            [a[transverse[0]]],a[transverse[1]],*widths,a[transverse[0]],clearance=clearance)
+        segments.append({'worldAxes':order,'from':a,'to':b,'solver':proof})
+    return {'status':'OPTIMAL' if all(s['solver']['status']=='OPTIMAL' for s in segments) else 'INFEASIBLE',
+        'segments':segments,'nodeCoordinates':copy.deepcopy(points),'provider':'OR-Tools CP-SAT',
+        'scope':'SUPPLIED_ORTHOGONAL_POLYLINE_ONLY','nativeCollisionAcceptance':'NOT_VERIFIED',
+        'engineeringAcceptance':'NOT_VERIFIED'}

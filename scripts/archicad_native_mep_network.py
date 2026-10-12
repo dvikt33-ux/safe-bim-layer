@@ -4,7 +4,7 @@ import networkx as nx
 import archicad_connected_components as C
 
 
-def read_network(api,route_guids,system_guid,domain='Ventilation'):
+def read_network(api,route_guids,system_guid,domain='Ventilation',scope_to_routes=False):
     if not route_guids or len(set(g.lower() for g in route_guids))!=len(route_guids):raise ValueError('MEP_ROUTE_IDENTITIES_NOT_UNIQUE')
     routes=api('GetMEPRoutingElements',{'elements':[{'elementId':{'guid':g}} for g in route_guids]}).get('routingElements',[])
     if len(routes)!=len(route_guids) or any('error'in r for r in routes):raise ValueError('MEP_DEDICATED_ROUTE_READBACK_MISSING')
@@ -74,6 +74,14 @@ def read_network(api,route_guids,system_guid,domain='Ventilation'):
     # lie away from that centre. Bind routes to actual collinear physical ducts,
     # then use reciprocal native connectivity through fittings as the authority.
     ownership=physical_route_members(logical,ports)
+    excluded=[]
+    if scope_to_routes:
+        seeds={g for values in ownership.values() for g in values}
+        selected=set().union(*(set(component) for component in nx.connected_components(port_graph) if seeds.intersection(component)))
+        excluded=sorted(set(physical)-selected)
+        physical=[g for g in physical if g in selected]
+        ports=[p for p in ports if p['ownerGuid'] in selected]
+        port_graph=port_graph.subgraph(selected).copy()
     if physical and nx.is_connected(port_graph):
         if all(ownership[g['guid'].lower()] for g in logical):
             for i,left in enumerate(logical):
@@ -88,6 +96,8 @@ def read_network(api,route_guids,system_guid,domain='Ventilation'):
         'physicalConnectionEdges':port_graph.number_of_edges(),'segmentCount':segment_count,'nodeCount':graph.number_of_nodes(),
         'openPorts':[p for p in ports if not p['isPhysicallyConnected']],
         'distributionComponentCount':len(systems),
+        'physicalScope':'REQUESTED_ROUTES_AND_RECIPROCAL_CONNECTED_MEMBERS' if scope_to_routes else 'ALL_MATCHING_SYSTEM_MEMBERS',
+        'outsideRouteScopePhysicalGuids':excluded,
         'genericEnumerationCount':len(api('GetMEPElements',{}).get('elements',[])),
         'nativeTopologyAuthority':'Dedicated routing + native system membership + physical port flags/section/positions',
         'engineeringAcceptance':'NOT_VERIFIED'}

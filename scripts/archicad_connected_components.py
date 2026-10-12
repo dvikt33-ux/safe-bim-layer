@@ -107,7 +107,7 @@ class NativeAdapter:
         if self.command=='CreateMEPElements':
             if row.get('floorIndex')!=floor:raise ValueError('MEP_COMPONENT_STORY_MISMATCH')
             members=[e for e in api('GetMEPElements',{}).get('elements',[]) if e['elementId']['guid'].lower()==guid.lower()]
-            if len(members)!=1 or members[0]['type']!=expected['type'] or members[0]['domain']!=expected.get('domain',''):
+            if len(members)>1 or (members and (members[0]['type']!=expected['type'] or members[0]['domain']!=expected.get('domain',''))):
                 raise ValueError('MEP_COMPONENT_DEDICATED_TYPE_MISMATCH')
             ports=api('GetMEPPorts',{'elements':[{'elementId':{'guid':guid}}]}).get('elementPorts',[])
             if len(ports)!=1 or 'error' in ports[0] or not ports[0].get('ports'):
@@ -115,12 +115,19 @@ class NativeAdapter:
             normalized=G.normalize_dump(api('GetModelDumpV1',{}))
             body=next((e for e in normalized['elements'] if e['guid'].lower()==guid.lower()),None)
             if not body or not body.get('bodies'):raise ValueError('MEP_COMPONENT_NATIVE_BODY_MISSING')
+            if not members and (row.get('type')!='Unknown' or body.get('nativeTypeId')!=150):
+                raise ValueError('MEP_COMPONENT_OMITTED_WITHOUT_NATIVE_MEP_BODY')
+            if any(p.get('domain')!=expected.get('domain','') for p in ports[0]['ports']) and expected['type']!='Equipment':
+                raise ValueError('MEP_COMPONENT_ACTUAL_PORT_DOMAIN_MISMATCH')
             bounds=ROOF.bounds(body)
             if not bounds or not all(bounds[i][0]-1e-6<=expected['position'][k]<=bounds[i][1]+1e-6 for i,k in enumerate(('x','y','z'))):
                 raise ValueError('MEP_COMPONENT_INSERTION_OUTSIDE_ACTUAL_BODY')
             if any(type(p.get(k)) not in (int,float) or not math.isfinite(p[k]) or p[k]<=0 for p in ports[0]['ports'] for k in ('width','height')):
                 raise ValueError('MEP_COMPONENT_ACTUAL_PORT_SECTION_INVALID')
-            return 'MEP'+expected['type']
+            # Installed AC29 also omits terminals from GetMEPElements. Typed
+            # creation + physical MEP body/ports prove a component; exchange
+            # classification must independently qualify its exact subtype.
+            return 'MEP'+expected['type'] if members else 'MEPComponent'
         # Installed AC29 routing rows report Unknown/nativeType150. They are
         # accepted only alongside successful dedicated MEP geometry readback.
         wanted={'CreateRoofs':'Roof','CreateMorphs':'Morph','CreateMEPRoutingElements':'Unknown'}[self.command]
@@ -172,13 +179,13 @@ class NativeAdapter:
                 element=next((e for e in normalized['elements'] if e['guid'].lower()==guid.lower()),None)
                 if element is None:
                     raise ValueError('MORPH_NATIVE_BODY_GUID_MISSING')
-                expected_cloud=[MORPH.transform_point(v,expected['basePoint'],axes) for v in vertices]
+                expected_cloud=[morph_api_world_point(v,expected['basePoint'],axes) for v in vertices]
                 if not MORPH.cloud_compare(expected_cloud,MORPH.points_from_dump(element))[0]:
                     raise ValueError('MORPH_NATIVE_WORLD_GEOMETRY_MISMATCH')
             else:
                 normalized=G.normalize_dump(api('GetModelDumpV1',{}))
                 element=next((e for e in normalized['elements'] if e['guid'].lower()==guid.lower()),None)
-                cloud=[MORPH.transform_point(v,expected['basePoint'],[actual[k] for k in ('xAxis','yAxis','zAxis')]) for v in expected['body']['vertices']]
+                cloud=[morph_api_world_point(v,expected['basePoint'],[actual[k] for k in ('xAxis','yAxis','zAxis')]) for v in expected['body']['vertices']]
                 if element is None or not MORPH.cloud_compare(cloud,MORPH.points_from_dump(element))[0]:
                     raise ValueError('MORPH_EXPLICIT_BODY_WORLD_COORDINATES_MISMATCH')
                 if expected['body'].get('bodyType')=='Solid' and any(not b.get('closed') for b in element['bodies']):
@@ -213,6 +220,11 @@ class NativeAdapter:
         if any(not points_equal(p,q.get('position')) for p,q in zip(expected['nodeCoordinates'],route['nodes'])):
             raise ValueError('MEP_NODE_POSITION_READBACK_MISMATCH')
         return 'MEPRouting'
+
+
+def morph_api_world_point(point,base,axis_rows):
+    """Installed Tapir xAxis/yAxis/zAxis are placement-matrix ROWS."""
+    return [base[k]+sum(axis_rows[i][a]*point[a] for a in ('x','y','z')) for i,k in enumerate(('x','y','z'))]
 
 
 def attribute_guid(value):
