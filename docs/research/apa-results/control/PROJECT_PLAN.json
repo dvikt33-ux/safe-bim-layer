@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 96,
+  "revision": 97,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -3237,7 +3237,7 @@
       "action_id": "APA-P70.A11",
       "title": "Проверить объединённую систему в тестовом PLN",
       "kind": "VALIDATION",
-      "status": "READY",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "connected-system-native-test-v31",
       "depends_on": [
@@ -3272,9 +3272,9 @@
         "Reproducible combined native scenario uses retained graph/journal/writer/readback; source elements preserved, save/reopen verified. Source/offline/live/engineering statuses separate. Unsupported mandatory module never silently omitted."
       ],
       "acceptance": "Reproducible combined native scenario uses retained graph/journal/writer/readback; source elements preserved, save/reopen verified. Source/offline/live/engineering statuses separate. Unsupported mandatory module never silently omitted.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "codex-apa-system-v31-20261012",
+      "lease_until": "2026-10-12T04:00:00Z",
+      "claim_ref": "APA-RUN-20261012-011500Z-connected-system-v31",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
