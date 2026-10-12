@@ -911,7 +911,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: work-normative-bindings-20261012 / 2026-10-12T21:59:22Z
 - Requires owner approval: False
 - Source inputs: [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md)
-- Existing V2 runs: none
+- Existing V2 runs: [APA-RUN-20261012-191815Z-normative-bindings](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-191815Z-normative-bindings/REPORT.md) (receipt verified)
 - Expected output: Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED
 
 ## APA-P70.A02.S03
