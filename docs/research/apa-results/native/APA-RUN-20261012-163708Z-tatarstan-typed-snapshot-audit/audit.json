@@ -1,0 +1,126 @@
+{
+  "schema": "APA_TATARSTAN_TYPED_SNAPSHOT_AUDIT_V1",
+  "audit_status": "OFFLINE_ATTACHMENT_INSPECTION_COMPLETE_NATIVE_BREP_NOT_ATTACHED",
+  "audit_date_utc": "2026-10-12",
+  "source": {
+    "type": "user_supplied_archicad_readonly_snapshot",
+    "filename": "snapshot.json",
+    "sha256": "11e7fcb8cb1737d78ef8215c37eec2b6aedc76ce89045d4914cec618aad5dab5",
+    "created_at_utc": "2026-10-12T16:37:08.430311+00:00",
+    "schema": "APA_TATARSTAN_READONLY_SNAPSHOT_V1",
+    "target_basename": "для теста из изоляции татарстан .pln",
+    "port_at_capture": 19724,
+    "native_status_reported": "NATIVE_GEOMETRY_RETURNED",
+    "native_model_json_attached_for_audit": false,
+    "pln_modified_by_reader": false
+  },
+  "evidence_scope": "TYPED_ELEMENTS_AND_PROVIDER_AABB_ONLY; NO_FACE_MESH_MATERIAL_SURFACE_OR_CONTACT_ACCEPTANCE",
+  "inventory": {
+    "total_guids": 107,
+    "provider_aabb_rows": 107,
+    "valid_numeric_ordered_aabbs": 75,
+    "valid_aabb_nonzero_3d_extents": 29,
+    "valid_aabb_zero_volume": 46,
+    "invalid_or_unbounded_provider_aabbs": 32,
+    "invalid_by_type": {
+      "Unknown": 28,
+      "BeamSegment": 2,
+      "ColumnSegment": 2
+    },
+    "typed_counts": {
+      "Object": 19,
+      "Unknown": 50,
+      "Wall": 10,
+      "BeamSegment": 2,
+      "Window": 4,
+      "Slab": 2,
+      "Morph": 6,
+      "ColumnSegment": 2,
+      "Elevation": 4,
+      "Beam": 2,
+      "Column": 2,
+      "Opening": 1,
+      "Roof": 2,
+      "Door": 1
+    },
+    "story_levels_m": {
+      "0": 0,
+      "1": 3,
+      "2": 6
+    },
+    "reported_full_model_native_geom_status": "NATIVE_GEOMETRY_RETURNED_BUT_CONTENT_NOT_SHARED"
+  },
+  "extents": {
+    "all_valid_ordered_aabbs": {
+      "x_min": -6,
+      "x_max": 92,
+      "y_min": -6,
+      "y_max": 62,
+      "note": "Includes annotations and 2D objects, NOT physical 3D solids bounding box"
+    },
+    "old_primary_house": {
+      "wall_reference_x_min": 40,
+      "wall_reference_x_max": 50,
+      "wall_reference_y_min": 40,
+      "wall_reference_y_max": 48,
+      "main_footprint_m": [
+        10,
+        8
+      ],
+      "wall_story0_count": 4,
+      "wall_story1_count": 4,
+      "slab_count": 2,
+      "slab_levels_top_m": [
+        0,
+        3
+      ],
+      "single_plane_roof_count": 1,
+      "roof_slope_radians": 0.15,
+      "roof_bbox_z_min_m": 6.004516602,
+      "roof_bbox_z_max_m": 7.411353111
+    },
+    "test_roof_and_wall": {
+      "roof_x_min": 82,
+      "roof_x_max": 92,
+      "roof_y_min": 40,
+      "roof_y_max_approx": 48.03,
+      "separate_wall_x_m": 87,
+      "wall_z_min_m": 3,
+      "wall_z_max_m": 7.411353033
+    },
+    "test_morph_and_opening_zone": {
+      "x_min_approx": 60,
+      "x_max_approx": 72,
+      "y_min_approx": 59.85,
+      "y_max_approx": 62
+    },
+    "proposed_new_house": {
+      "x_min": 112,
+      "x_max": 122,
+      "y_min": 39,
+      "y_max": 51,
+      "intended_floor_levels_m": [
+        0,
+        3,
+        6
+      ],
+      "valid_aabb_overlaps": 0,
+      "unbounded_elements_not_cleared": 32,
+      "new_house_elements_proven_created_by_failed_s01_s02_runs": 0,
+      "spatial_clearance_status": "NO_OVERLAPS_IN_75_VALID_AABBS; COMPLETE_NATIVE_CLEARANCE_NOT_VERIFIED"
+    }
+  },
+  "observations": [
+    "Typed provider 'Unknown' is not proof of absent native MEP elements; many identifiers are duct/route/fitting classes unsupported by GetDetailsOfElements.",
+    "107 provider wrapper boundingBox3D dictionaries were reported as available, but 32 use invalid +/-1e35 sentinel ordering and 46 have zero 3D extent.",
+    "The two Roof entities are single-plane separate specimens, not a gable roof at proposed new coordinates.",
+    "Two native Beam elements and six Morph elements belong to existing specimen/old model; no Morph is justified for future new house.",
+    "Native Model Dump V1 was reported returned by reader, but user attached snapshot.json and README.txt only; native-model.json not analyzed.",
+    "Raw model, project path and source GUID inventory are NOT uploaded into the research branch."
+  ],
+  "next_required_input": "native-model.json from the already-created local APA_TATARSTAN_20261012T163708Z_6ac337bc.zip",
+  "next_step_after_native_read": "Independent native body/face spatial scan at X112..122 Y39..51 Z-1..11; verify all baseline GUIDs and materials before building the new house via SceneWriter in one journal.",
+  "read_only": true,
+  "github_raw_model_published": false,
+  "engineering_certified": false
+}
