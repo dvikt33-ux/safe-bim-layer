@@ -22,6 +22,7 @@ class DetailsContext:
                 f=t.extractfile(member);return [json.loads(l) for l in f if l.strip()] if lines else json.load(f)
             active=read('details_active_v2.12.jsonl',True)
             self.records={r['context_detail_id']:r for r in active if 'context_detail_id' in r}
+            self.detail_records={r['detail']['detail_id']:r for r in active if 'detail' in r}
             if len(self.records)!=73:raise ValueError('CONTEXT_ID_COVERAGE_OR_DUPLICATE')
             self.facts={r['fact_id']:r for r in read('parameter_facts_v2.12.jsonl',True)}
             self.sources={r['source_id']:r for r in read('sources_v2.12.json')}
@@ -116,6 +117,103 @@ def required_junction_matrix(context,evaluated):
             'engineeringAcceptance':'NOT_VERIFIED'})
     return {'schema':'APA_REQUIRED_JUNCTION_MATRIX_V1','existingTasks':['APA-P70.A04.S01','APA-P70.A04.S02','APA-P70.A04.S03'],
         'nativeContextHash':C.RUN.digest(context),'families':rows,'coverageScope':'Bounded accepted model; bounding boxes are candidate evidence only'}
+
+
+def native_junction_coverage(context,native,details,collision_pairs=()):
+    """Join real host/material/body facts to all model junction families.
+
+    Retained Shapely BREP surface analysis proves planar surface coincidence;
+    native collision pairs independently identify volume overlap. Logical host
+    links do not imply either physical contact or engineering acceptance.
+    """
+    import itertools
+    bodies={e['guid'].lower():e for e in native['elements']}
+    if native.get('units')!='m' or native.get('coordinateSystem')!='ABSOLUTE_PROJECT_XYZ':
+        raise ValueError('JUNCTION_REQUIRES_NATIVE_WORLD_METRES')
+    entries={e['guid'].lower():dict(e,stepId=sid) for sid,e in context['elements'].items()
+             if not e['kind'].startswith('MEP') and e['kind']!='Opening'}
+    collisions={tuple(sorted(g.lower() for g in pair)) for pair in collision_pairs}
+    definitions={
+        'wall_floor':({'Wall'},{'Slab'}),
+        'wall_window':({'Wall'},{'Window','Door'}),
+        'wall_roof':({'Wall'},{'Roof'}),
+        'roof_members_and_abutments':({'Roof','Morph'},{'Morph'}),
+        'cladding_structure':({'CurtainWall','Cladding'},{'Wall','Column','Roof'}),
+        'wall_intersections_and_ties':({'Wall'},{'Wall'}),
+        'column_floor':({'Column'},{'Slab'}),
+    }
+    source_types={
+        'wall_floor':{'wall_floor_opening_section','foundation_slab_with_or_without_grade_beam'},
+        'wall_window':{'wall_floor_opening_section','window_opening','bay_window'},
+        'wall_roof':{'pitched_roof_wall_junction','flat_roof_parapet'},
+        'roof_members_and_abutments':{'ridge','eaves_with_overhang','gable_end','sheet_metal_profile'},
+        'cladding_structure':{'facade_plinth','external_corner','window_opening'},
+        'wall_intersections_and_ties':{'internal_loadbearing_wall','external_corner','exterior_internal_wall_intersection'},
+        'column_floor':{'foundation_slab_with_or_without_grade_beam'},
+    }
+    sources=[]
+    evaluated=details.evaluate(context)
+    for d in evaluated['details']:
+        sources.append({'detailId':d['detailId'],'sourceId':d['sourceId'],'junctionType':d['junctionType'],
+            'sourceLocator':d['sourceLocator'],'compileBlockers':d['compileBlockers'],
+            'sourceCommitAllowed':d['sourceCommitAllowed'],'assemblyWriteAllowed':False,
+            'nativeMaterialMatchCount':sum(b['applicability']=='CANDIDATE_CONTEXT_MATCH' for b in d['bindings'])})
+    for r in details.detail_records.values():
+        d=r['detail'];sources.append({'detailId':d['detail_id'],'sourceId':d['source_id'],
+            'junctionType':d['junction_type'],'sourceLocator':json.loads(d['source_locator_json']),
+            'sourceCommitAllowed':bool(r['ir']['commit_allowed']),'assemblyWriteAllowed':False,
+            'compileBlockers':json.loads(r['ir']['preconditions_json']).get('source_blockers',[])})
+    graph=nx.Graph();rows=[]
+    for g,e in entries.items():graph.add_node(g,kind=e['kind'],floorIndex=e['floorIndex'])
+    for family,(left,right) in definitions.items():
+        pairs=[]
+        for a,b in itertools.combinations(entries,2):
+            ea,eb=entries[a],entries[b]
+            if not ((ea['kind'] in left and eb['kind'] in right) or (eb['kind'] in left and ea['kind'] in right)):continue
+            pair=tuple(sorted((a,b)))
+            explicit_host=(ea.get('hostGuid','') or '').lower()==b or (eb.get('hostGuid','') or '').lower()==a
+            near=any(all(min(x[k][1],y[k][1])-max(x[k][0],y[k][0])>=-1e-6 for k in range(3))
+                     for x in ea.get('bounds',[]) for y in eb.get('bounds',[]))
+            if family=='wall_roof' and ea['floorIndex']==eb['floorIndex']:
+                # Upper-storey walls still require a roof junction even where
+                # the actual untrimmed wall stops below the sloping roof.
+                near=near or any(all(min(x[k][1],y[k][1])-max(x[k][0],y[k][0])>=-1e-6 for k in range(2))
+                                for x in ea.get('bounds',[]) for y in eb.get('bounds',[]))
+            if family=='roof_members_and_abutments' and not (ea['kind']=='Roof' or eb['kind']=='Roof' or
+                    any(entries.get((e.get('hostGuid') or '').lower(),{}).get('kind')=='Roof' for e in (ea,eb))):continue
+            if not (explicit_host or near):continue
+            owners={}
+            for g in pair:
+                owners[g]=g
+                for child in context.get('columnSegments',{}).get(g,[]):owners[child.lower()]=g
+            area=None;reason=None
+            try:
+                if any(g not in bodies or not bodies[g].get('bodies') for g in owners):raise ValueError('NATIVE_BODY_NOT_AVAILABLE')
+                contacts=C.G.shared_surfaces(bodies,owners)
+                area=sum(c['sharedAreaSquareMeters'] for c in contacts if tuple(c['guids'])==pair)
+            except (ValueError,KeyError,IndexError) as exc:reason=str(exc)
+            intersection=pair in collisions
+            physical='SURFACE_CONTACT' if area is not None and area>1e-8 else ('VOLUME_INTERSECTION' if intersection else 'NOT_VERIFIED' if reason else 'NO_SHARED_SURFACE')
+            if intersection and physical=='SURFACE_CONTACT':physical='SHARED_SURFACE_AND_VOLUME_INTERSECTION'
+            relation={'guids':list(pair),'elements':[{'guid':g,'kind':entries[g]['kind'],'floorIndex':entries[g]['floorIndex'],
+                'boundsMeters':entries[g]['bounds'],'materialBindings':entries[g].get('materialBindings',{})} for g in pair],
+                'logicalBinding':explicit_host,'logicalBindingAuthority':'CONTEXT_HOST; NATIVE_RELATION_REQUIRES_READBACK' if explicit_host else None,
+                'sharedAreaSquareMeters':area,'physicalRelation':physical,'nativeVolumeIntersection':intersection,
+                'contactAnalysisLimitation':reason,'engineeringAcceptance':'NOT_VERIFIED','family':family}
+            pairs.append(relation);graph.add_edge(a,b,family=family,physicalRelation=physical)
+        candidates=[s for s in sources if s['junctionType'] in source_types[family]]
+        rows.append({'family':family,'status':'MODEL_CONTACTS_CLASSIFIED_WITH_SOURCE_GAPS' if pairs else 'NOT_PRESENT_OR_NO_BOUND_INTERFACE',
+            'junctions':pairs,'sourceCandidates':candidates,
+            'sourceMaterialQualification':'No product-name equivalence to native structural concrete/timber is inferred',
+            'gaps':['Construction layer/fastener/grade/load capacity require source and engineering qualification'],
+            'engineeringAcceptance':'NOT_VERIFIED'})
+    return {'schema':'APA_NATIVE_JUNCTION_COVERAGE_V1','nativeContextHash':C.RUN.digest(context),
+        'nativeBodyHash':C.RUN.digest(native),'archiveSha256':C.DETAILS_SHA,'contextDetailCount':len(evaluated['details']),
+        'sourceDetailCount':len(details.detail_records),'families':rows,'graphNodes':graph.number_of_nodes(),'graphEdges':graph.number_of_edges(),
+        'sourceApprovedFullAssemblyCount':sum(s['sourceCommitAllowed'] for s in sources),
+        'armopoyasAndFasteners':{'status':'NOT_VERIFIED','reason':'Existing concrete geometry does not establish reinforcement, anchoring or fastener schedules',
+            'sourceCandidates':[s for s in sources if any(word in s['junctionType'] for word in ('armop','reinfor','anchor','tie'))]},
+        'coverageScope':'All required families in accepted native context, plus actual wall/column interfaces. Surface contact and native intersection are separate. No full-family or engineering approval.'}
 
 
 def prepare_source_section(root,source,context,native,host_guid,entity_id,material_selection,placement_y=None):
