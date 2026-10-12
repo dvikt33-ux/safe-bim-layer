@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 116,
+  "revision": 117,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -3555,7 +3555,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -3624,9 +3624,9 @@
         "Exact continuation: qualify the tested native underside recipe for required actual building interfaces, explicitly binding any intended target geometry change and edge overlap; retain GUIDs and do not invent overhang/fastening/load dimensions. S10 needs an exposed qualified route-local mixed-section and GUID-preserving physical connection contract; installed APX changes require separate authorization. Existing S06-S09 dependencies and S04 acceptance gate remain. A11.S03PARTIAL; A04.S01-S03DONE_PUBLISHED retained."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "work-four-real-wall-roof-20261012",
+      "lease_until": "2026-10-12T22:24:29.289Z",
+      "claim_ref": "APA-RUN-20261012T182429Z-four-real-wall-roof",
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
