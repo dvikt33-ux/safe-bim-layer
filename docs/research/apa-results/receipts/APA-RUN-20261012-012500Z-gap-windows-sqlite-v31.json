@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:e220fbf942e6a4a660f5a92acb420455381999b7b2abfc07b5184a2b78109c3c",
+  "index_commit_sha": "e24c0746c0024b941a1c4f5ecd574500c855e1b8",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "e24c0746c0024b941a1c4f5ecd574500c855e1b8",
+  "report_path": "docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-012500Z-gap-windows-sqlite-v31/REPORT.md",
+  "report_sha256": "2dbb71b4da8a2a5f342a53ccc601697005e2d2b0f4997173f2bec3c9dbf2ea72",
+  "run_id": "APA-RUN-20261012-012500Z-gap-windows-sqlite-v31",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}
