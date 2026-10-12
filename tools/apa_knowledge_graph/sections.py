@@ -41,6 +41,17 @@ def split_sections(text):
     return parts
 
 
+def source_class(path):
+    parts = set(Path(path).parts)
+    if "source-archives" in parts:
+        return "ARCHIVED_SOURCE"
+    if "runs" in parts:
+        return "RESEARCH_RUN"
+    if "control" in parts:
+        return "PROJECT_CONTROL"
+    return "OTHER_DOCUMENT"
+
+
 def list_sources(roots):
     paths = set()
     for root in roots:
@@ -74,7 +85,7 @@ def build(root_paths, output):
     conn = sqlite3.connect(str(target))
     n = 0
     try:
-        conn.execute("CREATE VIRTUAL TABLE sections USING fts5(path UNINDEXED, heading, content, line UNINDEXED, source_sha256 UNINDEXED, tokenize='unicode61 remove_diacritics 2')")
+        conn.execute("CREATE VIRTUAL TABLE sections USING fts5(path UNINDEXED, heading, content, line UNINDEXED, source_sha256 UNINDEXED, source_class UNINDEXED, tokenize='unicode61 remove_diacritics 2')")
         conn.execute("CREATE TABLE provenance (key TEXT PRIMARY KEY, value TEXT NOT NULL)")
         for file in files:
             raw = file.read_bytes()
@@ -82,8 +93,8 @@ def build(root_paths, output):
             digest = sha(raw)
             for title, line, body in split_sections(text):
                 if body.strip() or title not in {"(intro)", "(document)"}:
-                    conn.execute("INSERT INTO sections(path,heading,content,line,source_sha256) VALUES (?,?,?,?,?)",
-                                 (str(file), title, body, line, digest))
+                    conn.execute("INSERT INTO sections(path,heading,content,line,source_sha256,source_class) VALUES (?,?,?,?,?,?)",
+                                 (str(file), title, body, line, digest, source_class(file)))
                     n += 1
         conn.execute("INSERT INTO provenance VALUES (?,?)", ("authority", "DERIVED_READ_ONLY"))
         conn.execute("INSERT INTO provenance VALUES (?,?)", ("schema", "APA_MARKDOWN_SECTION_FTS_V1"))
@@ -105,7 +116,7 @@ def normalized_query(query):
     return " OR ".join('"' + t.replace('"', '""') + '"' for t in terms)
 
 
-def search(db, query, limit=5, max_snippet=240):
+def search(db, query, limit=5, max_snippet=240, selected_class=None):
     if limit < 1 or limit > 20 or max_snippet < 40 or max_snippet > 1000:
         raise ValueError("Bounded search requires limit=1..20, max_snippet=40..1000")
     conn = sqlite3.connect("file:" + Path(db).resolve().as_posix() + "?mode=ro", uri=True)
@@ -115,13 +126,25 @@ def search(db, query, limit=5, max_snippet=240):
         if meta != {"authority":"DERIVED_READ_ONLY", "schema":"APA_MARKDOWN_SECTION_FTS_V1"}:
             raise ValueError("Unknown or modified index provenance")
         q = normalized_query(query)
-        rows = conn.execute("""
-          SELECT path, heading, line, source_sha256,
-                 snippet(sections, 2, '', '', ' … ', 28) AS excerpt,
-                 bm25(sections) AS rank
-            FROM sections WHERE sections MATCH ?
-           ORDER BY rank LIMIT ?
-        """, (q, limit)).fetchall()
+        allowed = {"ARCHIVED_SOURCE", "RESEARCH_RUN", "PROJECT_CONTROL", "OTHER_DOCUMENT"}
+        if selected_class is not None and selected_class not in allowed:
+            raise ValueError("Invalid source class")
+        if selected_class is None:
+            rows = conn.execute("""
+              SELECT path, heading, line, source_sha256, source_class,
+                     snippet(sections, 2, '', '', ' … ', 28) AS excerpt,
+                     bm25(sections) AS rank
+                FROM sections WHERE sections MATCH ?
+               ORDER BY rank LIMIT ?
+            """, (q, limit)).fetchall()
+        else:
+            rows = conn.execute("""
+              SELECT path, heading, line, source_sha256, source_class,
+                     snippet(sections, 2, '', '', ' … ', 28) AS excerpt,
+                     bm25(sections) AS rank
+                FROM sections WHERE sections MATCH ? AND source_class = ?
+               ORDER BY rank LIMIT ?
+            """, (q, selected_class, limit)).fetchall()
         # Revalidate only the selected top-K original source bytes.
         checked = {}
         stale = []
@@ -142,11 +165,13 @@ def search(db, query, limit=5, max_snippet=240):
                 snippet_text = snippet_text[:max_snippet-1] + "…"
             results.append({
                 "path": row["path"], "heading": row["heading"], "line": int(row["line"]),
+                "source_class": row["source_class"],
                 "source_sha256": row["source_sha256"], "excerpt": snippet_text,
                 "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT"
             })
         return {"status": "OK", "count": len(results), "results": results,
-                "query_type": "LEXICAL_OR_FTS5", "source_byte_readback": "MATCH_FOR_RETURNED_HITS",
+                "query_type": "LEXICAL_OR_FTS5", "source_class_filter": selected_class,
+                "source_byte_readback": "MATCH_FOR_RETURNED_HITS",
                 "warning": "Exact source blob/edition/readback and applicability must be verified before use"}
     finally:
         conn.close()
@@ -161,6 +186,7 @@ def main(argv=None):
     p.add_argument("--query")
     p.add_argument("--limit", type=int, default=5)
     p.add_argument("--max-snippet", type=int, default=240)
+    p.add_argument("--source-class", choices=["ARCHIVED_SOURCE","RESEARCH_RUN","PROJECT_CONTROL","OTHER_DOCUMENT"])
     args = p.parse_args(argv)
     if args.action == "build":
         if not args.root or not args.out:
@@ -169,7 +195,7 @@ def main(argv=None):
     else:
         if not args.index or not args.query:
             p.error("search requires --index and --query")
-        result = search(args.index, args.query, args.limit, args.max_snippet)
+        result = search(args.index, args.query, args.limit, args.max_snippet, args.source_class)
     print(canonical(result))
 
 
