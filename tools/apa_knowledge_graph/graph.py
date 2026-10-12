@@ -10,6 +10,7 @@ import argparse
 from collections import defaultdict, deque
 import hashlib
 import json
+import re
 from pathlib import Path
 import sys
 
@@ -182,6 +183,8 @@ def validate_lineage(lineage, index):
         if edge["verification"] == "SOURCE_VERIFIED":
             if not edge.get("source_revision") or not edge.get("evidence_uri"):
                 raise ValueError("A verified edge requires source_revision and evidence_uri")
+            if not isinstance(edge["source_revision"], str) or not re.fullmatch(r"(?:[a-f0-9]{40}|[a-f0-9]{64})", edge["source_revision"]):
+                raise ValueError("Verified edge source_revision must be a pinned 40/64 hexadecimal digest")
     return True
 
 
@@ -257,7 +260,8 @@ def field_impact(index, lineage, change, limit=20):
         "omitted_review": review_omitted,
         "potential_next_tasks_not_claimed": sorted_unique(eligible),
         "no_impact_proven": False,
-        "warning": "Coverage of unregistered dependencies is UNKNOWN; no automatic status update"
+        "runtime_evidence_readback": "NOT_PERFORMED",
+        "warning": "Edges are declared verified by input, NOT independently read back during this query; unregistered dependencies remain UNKNOWN"
     }
 
 
@@ -266,6 +270,8 @@ def main(argv=None):
     parser.add_argument("command", choices=("build", "task", "artifact", "descendants", "field-impact"))
     parser.add_argument("--plan", type=Path)
     parser.add_argument("--index", type=Path)
+    parser.add_argument("--verify-plan", type=Path,
+                        help="Reject query if index hash differs from current canonical plan")
     parser.add_argument("--out", type=Path)
     parser.add_argument("--id")
     parser.add_argument("--lineage", type=Path)
@@ -282,6 +288,8 @@ def main(argv=None):
             target = args.out.resolve()
             if target == args.plan.resolve():
                 parser.error("--out may not overwrite --plan")
+            if target.exists():
+                parser.error("--out must be a fresh disposable file (refusing overwrite)")
             target.write_text(json.dumps(result, ensure_ascii=False, sort_keys=True, indent=2) + "\n", encoding="utf-8")
             print(canonical({"status": "DERIVED_INDEX_WRITTEN", "path": str(target),
                              "tasks": len(result["tasks"]), "artifacts": len(result["artifacts"]),
@@ -292,6 +300,10 @@ def main(argv=None):
             parser.error("query requires --index")
         index = json.loads(args.index.read_text(encoding="utf-8"))
         assert_index(index)
+        if args.verify_plan:
+            latest_plan = json.loads(args.verify_plan.read_text(encoding="utf-8"))
+            if fingerprint(latest_plan) != index["plan_sha256"]:
+                raise ValueError("STALE_INDEX: plan changed; rebuild before querying")
         if args.command == "task":
             result = task_card(index, args.id)
         elif args.command == "artifact":
