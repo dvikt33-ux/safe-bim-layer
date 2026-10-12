@@ -75,12 +75,31 @@ class SnapshotContractTests(unittest.TestCase):
         self.assertEqual(snapshot["inventory_count"], 2)
         self.assertEqual(snapshot["typed_element_counts"], {"Wall": 1, "Roof": 1})
         self.assertEqual(snapshot["bounding_boxes_available"], 2)
+        self.assertEqual(snapshot["bounding_boxes_provider_rows"], 2)
+        self.assertEqual(snapshot["bounding_boxes_invalid_or_unbounded"], 0)
+        self.assertEqual(snapshot["bounding_boxes_valid_nonzero_volume"], 2)
         self.assertEqual(snapshot["native_status"], "NATIVE_GEOMETRY_RETURNED")
         self.assertIsNotNone(native)
         self.assertEqual(fake.inventory_calls, 2)
         self.assertEqual(snapshot["sent_model_write_commands"], 0)
         self.assertTrue(set(fake.calls) <= S.READ_COMMANDS)
         self.assertFalse(snapshot["upload_to_github"])
+
+    def test_invalid_sentinel_aabb_never_counts_as_real_geometry(self):
+        row = {"provider": {"boundingBox3D": {
+            "xMin": 1e35, "xMax": -1e35,
+            "yMin": 1e35, "yMax": -1e35,
+            "zMin": 3, "zMax": 3,
+        }}}
+        self.assertEqual(S.classify_box(row), "INVALID_OR_UNBOUNDED")
+
+    def test_valid_2d_marker_does_not_count_as_volume(self):
+        row = {"provider": {"boundingBox3D": {
+            "xMin": 40, "xMax": 50,
+            "yMin": 40, "yMax": 48,
+            "zMin": 0, "zMax": 0,
+        }}}
+        self.assertEqual(S.classify_box(row), "VALID_ZERO_VOLUME_AABB")
 
     def test_native_unavailable_falls_back_to_typed_bounds(self):
         fake = FakeApi(no_native=True)
