@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 114,
+  "revision": 115,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -3501,7 +3501,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -3562,9 +3562,9 @@
         "Exact next work: qualify a supported sized circular/rectangular transition and main bridge preserving accepted96GUID, and independently qualify native Wall/Roof underside bearing from verified geometry/source. S06-S09 external source, Shell/edit, analytical and receiver dependencies remain explicit; no new roadmap or writer."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "work-wall-roof-underside-20261012",
+      "lease_until": "2026-10-12T21:28:31Z",
+      "claim_ref": "APA-RUN-20261012-172831Z-wall-roof-underside",
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
