@@ -31,7 +31,7 @@ def lineage():
                       "irrelevant":{"project_class":"IZHS", "task_id":"S3"}},
             "edges":[{"from":"source", "to":"derived", "kind":"DERIVED_FROM",
                       "verification":"SOURCE_VERIFIED", "project_class":"IZHS",
-                      "source_revision":"ref@sha", "evidence_uri":"docs/field-ref"}]}
+                      "source_revision":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "evidence_uri":"docs/field-ref"}]}
 
 
 class DeltaTest(unittest.TestCase):
