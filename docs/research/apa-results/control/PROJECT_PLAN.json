@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 100,
+  "revision": 101,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -794,6 +794,30 @@
       "uri": "docs/research/apa-results/receipts/APA-RUN-20261012-012500Z-gap-windows-sqlite-v31.json",
       "kind": "PUBLISH_RECEIPT",
       "verification": "DONE_PUBLISHED_GITHUB_READBACK_VERIFIED"
+    },
+    "ART-P70-A11-S03-FUNCTIONAL-GAPS-20261012": {
+      "id": "ART-P70-A11-S03-FUNCTIONAL-GAPS-20261012",
+      "uri": "docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-075300Z-functional-gaps-v31/REPORT.md",
+      "kind": "FUNCTIONAL_GAP_INTEGRATION_REPORT",
+      "verification": "SOURCE_AND_BOUNDED_NATIVE_READBACK_VERIFIED_S03_PARTIAL"
+    },
+    "ART-P70-A11-S03-PR55-20261012": {
+      "id": "ART-P70-A11-S03-PR55-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/55",
+      "kind": "GITHUB_PR",
+      "verification": "PR55_3191E7C_STACKED_PR54_WINDOWS_LINUX371PASS"
+    },
+    "ART-P70-A11-S03-GAP-REGISTER-20261012": {
+      "id": "ART-P70-A11-S03-GAP-REGISTER-20261012",
+      "uri": "docs/research/apa-results/native/APA-RUN-20261012-075300Z-functional-gaps-v31/gap-register.json",
+      "kind": "FUNCTIONAL_GAP_REGISTER",
+      "verification": "G01_FIXED_DETAILS73_AND_BOUNDED_MEP_OPENING_SEO_VERIFIED_EXTERNAL_GAPS_EXPLICIT"
+    },
+    "ART-P70-A11-S03-FUNCTIONAL-RECEIPT-20261012": {
+      "id": "ART-P70-A11-S03-FUNCTIONAL-RECEIPT-20261012",
+      "uri": "docs/research/apa-results/receipts/APA-RUN-20261012-075300Z-functional-gaps-v31.json",
+      "kind": "PUBLICATION_RECEIPT",
+      "verification": "GITHUB_READBACK_VERIFIED_DONE_PUBLISHED_S03_IS_PARTIAL"
     }
   },
   "tasks": {
@@ -3312,13 +3336,18 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
         "APA-P70.A11.S02"
       ],
-      "related": [],
+      "related": [
+        "APA-P70.A11.S06",
+        "APA-P70.A11.S07",
+        "APA-P70.A11.S08",
+        "APA-P70.A11.S09"
+      ],
       "inputs": [
         "ART-APA-HIGHLEVEL-PR34",
         "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
@@ -3344,16 +3373,24 @@
         "ART-APA-SOURCE-71-INDEX-20261011"
       ],
       "outputs": [
-        "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason."
+        "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
+        "Published PR55 head3191e7ce5071e6de7401f6e520fbd8f3ef2a1ea2 stacked on PR54;31new tests,371/371Windows/LinuxPASS.",
+        "Details73context/source/host/material/fact exchange, reciprocal two-section MEP, Generic Opening/SEO, specialized metadata and IFC host/port observations work together.",
+        "Saved/reopened isolated PLN:27primary/59totalGUID, all original48GUID/geometry preserved; SHA256da37fa0fe9b1b255f1618a881a79eb9d4ae8b66993a99cb75fdba30cddc69bb4. Engineering/visibleUI NOT_VERIFIED.",
+        "Continue S03 from PR55 using current gap register. Source/provider/SAM/receiver dependencies S06-S09 are separate; independent S03 work remains eligible. S04 waits for real S03 completion."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
-      "owner": "codex-apa-functional-gaps-v31-20261012",
-      "lease_until": "2026-10-12T23:59:00Z",
-      "claim_ref": "APA-RUN-20261012-functional-gaps-v31",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
-        "ART-P70-A11-S03-G01-RECEIPT-20261012"
+        "ART-P70-A11-S03-G01-RECEIPT-20261012",
+        "ART-P70-A11-S03-FUNCTIONAL-GAPS-20261012",
+        "ART-P70-A11-S03-PR55-20261012",
+        "ART-P70-A11-S03-GAP-REGISTER-20261012",
+        "ART-P70-A11-S03-FUNCTIONAL-RECEIPT-20261012"
       ],
       "blocked_reason": null
     },
@@ -3453,6 +3490,218 @@
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
+    },
+    "APA-P70.A11.S06": {
+      "id": "APA-P70.A11.S06",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A11",
+      "title": "Получить подтверждённые размеры и источник сборки производителя",
+      "kind": "INTEGRATION",
+      "status": "BLOCKED",
+      "priority": 2,
+      "work_key": "manufacturer-dimensions-source-v31",
+      "depends_on": [
+        "APA-P70.A11.S02"
+      ],
+      "related": [
+        "APA-P70.A11.S03"
+      ],
+      "inputs": [
+        "ART-APA-HIGHLEVEL-PR34",
+        "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+        "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+        "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+        "ART-APA-PLP-CONTRACT",
+        "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+        "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+        "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+        "ART-APA-REUSE-NATIVE-20261011",
+        "ART-APA-ATTR-STORY-SLAB-20261011",
+        "ART-TAPIR-COMPAT-20261010-6F29",
+        "ART-SDK-GET3D",
+        "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+        "ART-SDK-OPENING-SHELL-20261010-8E41",
+        "ART-PR20",
+        "ART-APA-DETAILS-V212",
+        "ART-APA-STRUCTURAL-HANDOFF",
+        "ART-MEP-SOURCE-20261010-PORTGRAPH",
+        "ART-APA-FAST-COMPILER",
+        "ART-APA-RU-JUNCTION-NORMS",
+        "ART-APA-FULL-CYCLE-RESEARCH",
+        "ART-APA-SOURCE-71-INDEX-20261011"
+      ],
+      "outputs": [
+        "Qualified source/page/fact dimensions and product-to-native-material mapping; exact assembly waits for source compile gates."
+      ],
+      "acceptance": "Qualified source/page/fact dimensions and product-to-native-material mapping; exact assembly waits for source compile gates.",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [
+        "ART-P70-A11-S03-FUNCTIONAL-GAPS-20261012",
+        "ART-P70-A11-S03-GAP-REGISTER-20261012"
+      ],
+      "blocked_reason": "Eight required ARMOdimension entities and source commit=false remain unresolved; qualified source is needed without blocking independent Details."
+    },
+    "APA-P70.A11.S07": {
+      "id": "APA-P70.A11.S07",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A11",
+      "title": "Подтвердить доступный нативный контракт Shell и редактирования Opening",
+      "kind": "INTEGRATION",
+      "status": "BLOCKED",
+      "priority": 2,
+      "work_key": "shell-opening-edit-provider-v31",
+      "depends_on": [
+        "APA-P70.A11.S02"
+      ],
+      "related": [
+        "APA-P70.A11.S03"
+      ],
+      "inputs": [
+        "ART-APA-HIGHLEVEL-PR34",
+        "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+        "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+        "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+        "ART-APA-PLP-CONTRACT",
+        "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+        "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+        "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+        "ART-APA-REUSE-NATIVE-20261011",
+        "ART-APA-ATTR-STORY-SLAB-20261011",
+        "ART-TAPIR-COMPAT-20261010-6F29",
+        "ART-SDK-GET3D",
+        "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+        "ART-SDK-OPENING-SHELL-20261010-8E41",
+        "ART-PR20",
+        "ART-APA-DETAILS-V212",
+        "ART-APA-STRUCTURAL-HANDOFF",
+        "ART-MEP-SOURCE-20261010-PORTGRAPH",
+        "ART-APA-FAST-COMPILER",
+        "ART-APA-RU-JUNCTION-NORMS",
+        "ART-APA-FULL-CYCLE-RESEARCH",
+        "ART-APA-SOURCE-71-INDEX-20261011"
+      ],
+      "outputs": [
+        "Use an existing ready native path with GUID/story/material/body readback. Any installed APX change requires separate user authorization."
+      ],
+      "acceptance": "Use an existing ready native path with GUID/story/material/body readback. Any installed APX change requires separate user authorization.",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [
+        "ART-P70-A11-S03-FUNCTIONAL-GAPS-20261012",
+        "ART-P70-A11-S03-GAP-REGISTER-20261012"
+      ],
+      "blocked_reason": "Current source-verified provider catalog lacks CreateShells/ModifyShells/ModifyOpenings; SDK source alone is not an exposed runtime path."
+    },
+    "APA-P70.A11.S08": {
+      "id": "APA-P70.A11.S08",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A11",
+      "title": "Подключить фактический SAM/SAF обмен и входы расчётного движка",
+      "kind": "INTEGRATION",
+      "status": "BLOCKED",
+      "priority": 2,
+      "work_key": "sam-saf-qualified-exchange-v31",
+      "depends_on": [
+        "APA-P70.A11.S02"
+      ],
+      "related": [
+        "APA-P70.A11.S03"
+      ],
+      "inputs": [
+        "ART-APA-HIGHLEVEL-PR34",
+        "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+        "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+        "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+        "ART-APA-PLP-CONTRACT",
+        "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+        "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+        "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+        "ART-APA-REUSE-NATIVE-20261011",
+        "ART-APA-ATTR-STORY-SLAB-20261011",
+        "ART-TAPIR-COMPAT-20261010-6F29",
+        "ART-SDK-GET3D",
+        "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+        "ART-SDK-OPENING-SHELL-20261010-8E41",
+        "ART-PR20",
+        "ART-APA-DETAILS-V212",
+        "ART-APA-STRUCTURAL-HANDOFF",
+        "ART-MEP-SOURCE-20261010-PORTGRAPH",
+        "ART-APA-FAST-COMPILER",
+        "ART-APA-RU-JUNCTION-NORMS",
+        "ART-APA-FULL-CYCLE-RESEARCH",
+        "ART-APA-SOURCE-71-INDEX-20261011"
+      ],
+      "outputs": [
+        "Actual SAM/SAF artifact/provider and receiver mapping; approved inputs and available solver/results with provenance. No architectural-body-to-SAM inference."
+      ],
+      "acceptance": "Actual SAM/SAF artifact/provider and receiver mapping; approved inputs and available solver/results with provenance. No architectural-body-to-SAM inference.",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [
+        "ART-P70-A11-S03-FUNCTIONAL-GAPS-20261012",
+        "ART-P70-A11-S03-GAP-REGISTER-20261012"
+      ],
+      "blocked_reason": "Native SAM/SAF artifact/provider, qualified mappings, approved loads/norms and calculation-engine handoff are not verified; actual IFC contains zero analytical members/models/load groups."
+    },
+    "APA-P70.A11.S09": {
+      "id": "APA-P70.A11.S09",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A11",
+      "title": "Подтвердить семантический обмен с MCP/Twinmotion",
+      "kind": "INTEGRATION",
+      "status": "BLOCKED",
+      "priority": 2,
+      "work_key": "mcp-twinmotion-semantic-receiver-v31",
+      "depends_on": [
+        "APA-P70.A11.S02"
+      ],
+      "related": [
+        "APA-P70.A11.S03"
+      ],
+      "inputs": [
+        "ART-APA-HIGHLEVEL-PR34",
+        "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+        "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+        "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+        "ART-APA-PLP-CONTRACT",
+        "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+        "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+        "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+        "ART-APA-REUSE-NATIVE-20261011",
+        "ART-APA-ATTR-STORY-SLAB-20261011",
+        "ART-TAPIR-COMPAT-20261010-6F29",
+        "ART-SDK-GET3D",
+        "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+        "ART-SDK-OPENING-SHELL-20261010-8E41",
+        "ART-PR20",
+        "ART-APA-DETAILS-V212",
+        "ART-APA-STRUCTURAL-HANDOFF",
+        "ART-MEP-SOURCE-20261010-PORTGRAPH",
+        "ART-APA-FAST-COMPILER",
+        "ART-APA-RU-JUNCTION-NORMS",
+        "ART-APA-FULL-CYCLE-RESEARCH",
+        "ART-APA-SOURCE-71-INDEX-20261011"
+      ],
+      "outputs": [
+        "Use an existing actual receiver implementation and independently validate supported semantics, distinguished from IFC geometry coordination."
+      ],
+      "acceptance": "Use an existing actual receiver implementation and independently validate supported semantics, distinguished from IFC geometry coordination.",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [
+        "ART-P70-A11-S03-FUNCTIONAL-GAPS-20261012",
+        "ART-P70-A11-S03-GAP-REGISTER-20261012"
+      ],
+      "blocked_reason": "Receiver endpoint/session and full semantic/quantity/face compatibility are not verified; current IFC proves bounded identity/world bounds and host/port/material observations."
     }
   },
   "topics": {
@@ -3737,7 +3986,11 @@
         "APA-P70.A11.S02",
         "APA-P70.A11.S03",
         "APA-P70.A11.S04",
-        "APA-P70.A11.S05"
+        "APA-P70.A11.S05",
+        "APA-P70.A11.S06",
+        "APA-P70.A11.S07",
+        "APA-P70.A11.S08",
+        "APA-P70.A11.S09"
       ],
       "artifact_ids": [
         "ART-APA-FULL-CYCLE",
@@ -3746,9 +3999,13 @@
         "ART-APA-PR16",
         "ART-APA-HIGHLEVEL-PR34",
         "ART-APA-ASSEMBLY-PLAN",
-        "ART-APA-LIVE-SCRATCH-PARTIAL-20261011"
+        "ART-APA-LIVE-SCRATCH-PARTIAL-20261011",
+        "ART-P70-A11-S03-FUNCTIONAL-GAPS-20261012",
+        "ART-P70-A11-S03-PR55-20261012",
+        "ART-P70-A11-S03-GAP-REGISTER-20261012",
+        "ART-P70-A11-S03-FUNCTIONAL-RECEIPT-20261012"
       ],
-      "synthesis_state": "OPEN",
+      "synthesis_state": "PARTIAL",
       "owner": null
     }
   },
@@ -4071,9 +4328,12 @@
         "APA-P10.A01.S03",
         "APA-P50.A02.S01"
       ],
-      "readiness": "NOT_ASSESSED",
-      "readiness_evidence_ids": [],
-      "note": "Reuse current donors and published research. Preparation separated from operational/engineering gates; changed interfaces determine actual gaps."
+      "readiness": "GAP",
+      "readiness_evidence_ids": [
+        "ART-P70-A11-S03-FUNCTIONAL-GAPS-20261012",
+        "ART-P70-A11-S03-GAP-REGISTER-20261012"
+      ],
+      "note": "Reuse verified PR55 and current sources. Available subset is integrated and published; separate external dependencies S06-S09 do not blanket-block independent S03 work."
     },
     "APA-P70.A11.S04": {
       "research_task_ids": [
@@ -4094,6 +4354,58 @@
       "readiness": "NOT_ASSESSED",
       "readiness_evidence_ids": [],
       "note": "Reuse current donors and published research. Preparation separated from operational/engineering gates; changed interfaces determine actual gaps."
+    },
+    "APA-P70.A11.S06": {
+      "research_task_ids": [
+        "APA-P10.A02.S02",
+        "APA-P10.A01.S03",
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "GAP",
+      "readiness_evidence_ids": [
+        "ART-P70-A11-S03-FUNCTIONAL-GAPS-20261012",
+        "ART-P70-A11-S03-GAP-REGISTER-20261012"
+      ],
+      "note": "Eight required ARMOdimension entities and source commit=false remain unresolved; qualified source is needed without blocking independent Details."
+    },
+    "APA-P70.A11.S07": {
+      "research_task_ids": [
+        "APA-P10.A02.S02",
+        "APA-P10.A01.S03",
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "GAP",
+      "readiness_evidence_ids": [
+        "ART-P70-A11-S03-FUNCTIONAL-GAPS-20261012",
+        "ART-P70-A11-S03-GAP-REGISTER-20261012"
+      ],
+      "note": "Current source-verified provider catalog lacks CreateShells/ModifyShells/ModifyOpenings; SDK source alone is not an exposed runtime path."
+    },
+    "APA-P70.A11.S08": {
+      "research_task_ids": [
+        "APA-P10.A02.S02",
+        "APA-P10.A01.S03",
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "GAP",
+      "readiness_evidence_ids": [
+        "ART-P70-A11-S03-FUNCTIONAL-GAPS-20261012",
+        "ART-P70-A11-S03-GAP-REGISTER-20261012"
+      ],
+      "note": "Native SAM/SAF artifact/provider, qualified mappings, approved loads/norms and calculation-engine handoff are not verified; actual IFC contains zero analytical members/models/load groups."
+    },
+    "APA-P70.A11.S09": {
+      "research_task_ids": [
+        "APA-P10.A02.S02",
+        "APA-P10.A01.S03",
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "GAP",
+      "readiness_evidence_ids": [
+        "ART-P70-A11-S03-FUNCTIONAL-GAPS-20261012",
+        "ART-P70-A11-S03-GAP-REGISTER-20261012"
+      ],
+      "note": "Receiver endpoint/session and full semantic/quantity/face compatibility are not verified; current IFC proves bounded identity/world bounds and host/port/material observations."
     }
   },
   "component_catalog": {
