@@ -1,0 +1,27 @@
+{
+  "runId": 38308362910,
+  "head": "29aa06a6e9bbef0d991bea922e1ad4101ab29bdd",
+  "conclusion": "success",
+  "host": {
+    "tests": 573,
+    "seconds": 75.567,
+    "conclusion": "success"
+  },
+  "jobs": [
+    {
+      "platform": "windows-latest",
+      "jobId": 115007791964,
+      "tests": 573,
+      "seconds": 117.533,
+      "conclusion": "success"
+    },
+    {
+      "platform": "ubuntu-latest",
+      "jobId": 115007792202,
+      "tests": 573,
+      "seconds": 30.926,
+      "conclusion": "success"
+    }
+  ],
+  "url": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38308362910"
+}

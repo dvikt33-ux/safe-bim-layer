@@ -1,0 +1,127 @@
+{
+  "sourceCommit": "67f17d407d14aebb091daaf79f11c10178b87440",
+  "filesMatched": 28,
+  "allMatched": true,
+  "snapshot": {
+    "schema": "APA_EXISTING_NORMATIVE_SOURCE_LOCK_V1",
+    "repository": "dvikt33-ux/tdk-course-project",
+    "branch": "normative-recovery-2026-10-06",
+    "commit": "67f17d407d14aebb091daaf79f11c10178b87440",
+    "authoritativeUse": false,
+    "files": {
+      "NORMATIVE_WORK_PROTOCOL.md": {
+        "sha256": "b674c89443902515297aebb43b9b2a8a0e2ee9a08871c9a014d180cd840fd85c",
+        "gitBlob": "b4128cd74f494f82b94495b56f16f65495b490b5"
+      },
+      "01_Normative_Base/_Machine/README.md": {
+        "sha256": "f5657213c828fd5f05045e2e5790eb762f132c76b76d75f00801cdb45e27dadd",
+        "gitBlob": "df1a9bfc094b42578b01aa48d6109b501f952710"
+      },
+      "01_Normative_Base/_Machine/TRUST_STATUS.md": {
+        "sha256": "be1e2f7cdf5fc948f0f614371bd3e40571946322b09dd59d7bb42c5f968eaa9b",
+        "gitBlob": "d3a9e1d4748cf9b028acf4a174c9591d6fd351f6"
+      },
+      "01_Normative_Base/_Machine/source_policy.yaml": {
+        "sha256": "fca914254a56828133bd55d0273179df0204cda028b3f33f918b69905650edba",
+        "gitBlob": "2851ff231a3dea86933679c32df8371115d020e3"
+      },
+      "01_Normative_Base/_Machine/rule.schema.yaml": {
+        "sha256": "6ce2582c94255ab35249a026c5adbd0d84f521bccce6e915c09a503904510b74",
+        "gitBlob": "0067e0aa68bf84c548f2cc602d248fab20b8e314"
+      },
+      "01_Normative_Base/_Machine/project_profile.schema.yaml": {
+        "sha256": "96153d22cf6d27580826a974e555147247e89741c41e007b9d0aad6a2d49f0ef",
+        "gitBlob": "f8e6bfc7792cd156adf1764d217446820c37d85c"
+      },
+      "01_Normative_Base/_Machine/object_taxonomy.yaml": {
+        "sha256": "6e49378f55cd5e1366038d57bc6e228ffb01e027016b9d6e1f5da7d487ad6b7f",
+        "gitBlob": "8940387c4b85b872cf67bc43c9327a5a4f8b7bf1"
+      },
+      "01_Normative_Base/_Machine/module_taxonomy.yaml": {
+        "sha256": "c8b6099893793f77e4998e3e3032dc83be7009721f375ae230f02f8156fd3d2e",
+        "gitBlob": "3ddbba1cf01ba2d25501781f0ee89f322ca453d7"
+      },
+      "01_Normative_Base/_Machine/retrieval_policy.yaml": {
+        "sha256": "114249d9e7d982bcc5fb457b3ec218b239bf07ab952d0d05c307e037f0498930",
+        "gitBlob": "c6bc9347a1b03796d7f9d64973015b391c873a13"
+      },
+      "01_Normative_Base/_Machine/dependency_resolution_policy.yaml": {
+        "sha256": "9a161820c09717683ec7008545a93b111bf294e0cb69c87190487956887206d3",
+        "gitBlob": "fb22aca671dfca1aad0dd11cf8eb48b7d1a194b1"
+      },
+      "01_Normative_Base/_Machine/canonical_rule_aliases.yaml": {
+        "sha256": "245ef7f53761a9f9d07d89c106feca0ae41fea47ed7d0a54847c9f9aa7cd49f9",
+        "gitBlob": "86229d0d06fd38502ddde8bd9bdc2032589bd4a8"
+      },
+      "01_Normative_Base/_Machine/routes/README.md": {
+        "sha256": "dc7f5b1784c7813323397cec8839f2d4e8511b2e56135c505d7d11c459c42bb3",
+        "gitBlob": "107a0757dc80cd09ade87c8807c9ad1115d7a920"
+      },
+      "01_Normative_Base/_Machine/routes/index.yaml": {
+        "sha256": "62f2e631415507fa5c0641db35763bed05e8f3a3a0e352a10fe6a7be92f2a29c",
+        "gitBlob": "c881b9692bb4551b6a9a3f9f5c7b9cbc1a74de1a"
+      },
+      "01_Normative_Base/_Machine/routes/objects/residential.izhs.yaml": {
+        "sha256": "743bbd25368ba9efcd0ea41c28786e62834c12124a9ec6bf18a5fb162ee8e7ac",
+        "gitBlob": "0a96af3d80221edd3db02ba812999eb075a8954e"
+      },
+      "01_Normative_Base/_Machine/routes/objects/residential.mkd.yaml": {
+        "sha256": "377d66899dbd3dd2acfdde17c8142991670f5943a4aa13c511588219796a4176",
+        "gitBlob": "3b81c662a1bc82076e418aad213421244c52e1f9"
+      },
+      "01_Normative_Base/_Machine/routes/objects/public.trade_entertainment_complex.yaml": {
+        "sha256": "44804b99c42e7062d4b842dc2d72d0855b72b63725a66c4953e08fddaa624a9b",
+        "gitBlob": "701489ae638ec2af59cdcefe8c4a5fc3743bf1c0"
+      },
+      "01_Normative_Base/_Machine/audit/IZHS_CENTRAL_RUSSIA_RELEASE_SET_2026-10-03.yaml": {
+        "sha256": "6d832cc777d00ceeafe6c2d9a5bfe8b8184d06dc4be45160746326bdb532b7f1",
+        "gitBlob": "ca584dbcaf74a324f5df039e756b061a25782125"
+      },
+      "01_Normative_Base/_Machine/rules/roofing_2026.yaml": {
+        "sha256": "557a6efde757d08443a4e4cc48125e1828c67b268bd6a541fb8d4cabf9572b77",
+        "gitBlob": "548abff72b9396b3a9923aff06a16c999b31c242"
+      },
+      "01_Normative_Base/_Machine/evidence/sources_roofing_2026.yaml": {
+        "sha256": "53342f106fa696f2cf98b4894eebb784a4970059d28bf52aaa862b4351944caf",
+        "gitBlob": "20a22800642e5123f7af5234ea73349b98b1a075"
+      },
+      "01_Normative_Base/_Machine/evidence/source_sp50_2024_izhs.yaml": {
+        "sha256": "1449baf6c4024e3d8a561d69f9dacdee464db291fb0b965bd6fd6311dc1d0bb5",
+        "gitBlob": "3cb2a36d08dcb7a6dd8bbe673be9457d4f7a2f5d"
+      },
+      "scripts/validate_normative_evidence.py": {
+        "sha256": "b3893a303c91fb4816b27f04b37225e49e697ab694f18f90c8e4f00fafec8fcd",
+        "gitBlob": "7c24f0e65cbf64f4e0ec3f48ce64657e505e32b3"
+      },
+      "04_Code_Generation/runtime/block_resolver.py": {
+        "sha256": "94f260e17b67b442294a0784f65b6725baa89e64c2b99d31d9e37fd2d9a0f204",
+        "gitBlob": "5b58bb2da6689c00de5a8c55b95ccd8af8d1a42b"
+      },
+      "04_Code_Generation/block_resolution_policy.yaml": {
+        "sha256": "05d6de983bde437f0dc8a963ab703eda09e06755c3f3071707a27186ea9ea15b",
+        "gitBlob": "141d8ec3a4c7d84b1dca3b28d2f022f5e1831a85"
+      },
+      "04_Code_Generation/block_catalog/residential.izhs.yaml": {
+        "sha256": "da4de4d18f4ac680755e9d65bf327b242967c20836951b7ab5f41cd7d0f8f5ae",
+        "gitBlob": "57df0fb4ca6e2aca17288d7e1226213c92967e3f"
+      },
+      "04_Code_Generation/blocks/residential.izhs/IZHS.ELEMENTS.CORE.yaml": {
+        "sha256": "e6af73f006760a16653f870060c16ee235e04d297de13812a51678a71b13a118",
+        "gitBlob": "7c37e13a3f196d030fbdb00d53d71137eda14082"
+      },
+      "04_Code_Generation/blocks/residential.izhs/IZHS.SHELL.CORE.yaml": {
+        "sha256": "2980bc20eb1f8921827aef2a8fbb981be0d4a2b6dbcdbcf98682f4a6bd04f579",
+        "gitBlob": "1cac7cc5740079fc4e695b63bf41957e32e92f38"
+      },
+      "04_Code_Generation/blocks/residential.izhs/IZHS.ARCH.DETAILS.yaml": {
+        "sha256": "c5c36b9a2be41f1f7cd322ededf4e6415448893129f544a8f1d81145d75da748",
+        "gitBlob": "8f3d9d08f3e4a9ade4f55d50f2b929dbb7db6427"
+      },
+      "04_Code_Generation/blocks/residential.izhs/IZHS.ROOF.DETAILS.yaml": {
+        "sha256": "ac0a1fb19ec0878004a917232954a7f263bad6e8e44fea8360c0d39080c10977",
+        "gitBlob": "47ee7bbec6cd22d3b56728a7fab5021b2747e47b"
+      }
+    }
+  },
+  "verification": "GITHUB_TREE_BLOBS_MATCH_PINNED_SOURCE"
+}
