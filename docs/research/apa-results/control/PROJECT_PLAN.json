@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 93,
+  "revision": 94,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -8,7 +8,7 @@
   "authority": "This file is the sole dispatch source. MASTER_PLAN.md is human-readable background; generated views are derived. A new task must be added here before execution.",
   "policies": {
     "dispatch": "Only READY/PARTIAL tasks with all depends_on DONE_PUBLISHED and no lease are candidates; BLOCKED never dispatched.",
-    "claim": "At the BEGINNING of each Scheduled execution, read fresh PROJECT_PLAN.json; select exactly one READY/PARTIAL task whose dependencies are DONE_PUBLISHED; CAS-write status IN_PROGRESS + unique owner + UTC lease_until + claim_ref=executor_run_id; re-read commit. Do not perform work until IN_PROGRESS readback. Concurrent/expired/duplicate runs cannot publish.",
+    "claim": "Fresh canonical plan; one READY/PARTIAL task or compatible package represented by one task; dependencies DONE_PUBLISHED. CAS IN_PROGRESS with owner/UTC lease/run and mandatory readback before implementation. Package may combine components; native operations retain exact target/journal gates. No new schedulers.",
     "completion": "On actual completion, verify artifacts, CI/receipt and acceptance; CAS-write DONE_PUBLISHED with evidence and clear owner/lease/claim_ref. For incomplete results write PARTIAL with evidence; for failed work BLOCKED with blocked_reason. Never claim DONE from chat text or a publisher receipt alone.",
     "deduplication": "One semantic work_key per task, explicit topic_id through topics[].task_ids; duplicate work keys rejected; related tasks share sources but different scopes. Historical 72-branch semantic dedup remains open.",
     "mutation": "Canonical research branch for plan/evidence. Development uses new isolated feature branches/PRs from verified existing code; no main/master/protected/tested-branch changes or merges without authorization. User grants PLN writes in current chat; bind this scenario to APA_Isolated_Writer_Test_01.pln and freshly verify identity. APX mutation still requires separate authorization.",
@@ -16,7 +16,7 @@
     "evidence": "REPORTED != SOURCE_VERIFIED != BUILD_PASS != LIVE_PASS. Synthetic publisher success proves no Archicad runtime behavior.",
     "trigger": "Current user-authorized persistent Work chat may execute sequential development; existing user-configured Scheduled tasks remain separate triggers. No new scheduler/controller-created runs. No promised execution outside the active session.",
     "research_pipeline": "Same PROJECT_PLAN.json registry for research and development. research_routes links each P70 S-ID to source artifacts already in task.inputs and to reusable research S-IDs; read branch/file URLs from artifact.uri, verify current source SHA before use. Research may run ahead for later P70 actions while present action BUILD/INTEGRATION proceeds. SUFFICIENT must be independently reviewed with evidence before deferring its research; NOT_ASSESSED is never automatic PASS. Do not repeat completed research without changed source or uncovered applicability gap.",
-    "integration_priority": "CORE FIRST → EXPANSION, user-directed working-first. Finish authored native S02 → incremental S03 and native completeness S04 → core acceptance A08.S04 before geometry A09, libraries A02.S04, constructive A04, engineering A05, MEP A06, measured optimization A10, release A07/full acceptance A08. One canonical plan, one graph, one SceneWriter. Research/governance must not displace eligible core work."
+    "integration_priority": "MASTER v3.1: INTEGRATE ALL → CONNECT TOGETHER → SYSTEM TEST → GAP-DRIVEN FIX → OPTIMIZE → PACKAGE. Compatible donor adapters may be developed in one claimed package. Preserve accepted core and mandatory engineering/native acceptance. Independent source/offline preparation is not blocked by later operational gates. One canonical plan and one SceneWriter."
   },
   "plans": {
     "APA-P00": {
@@ -168,6 +168,10 @@
         "APA-P70.A10": {
           "id": "APA-P70.A10",
           "title": "Измеримое ускорение стабильных операций"
+        },
+        "APA-P70.A11": {
+          "id": "APA-P70.A11",
+          "title": "v3.1: пакетная интеграция, взаимодействие и системные проверки"
         }
       }
     }
@@ -3163,6 +3167,247 @@
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
+    },
+    "APA-P70.A11.S01": {
+      "id": "APA-P70.A11.S01",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A11",
+      "title": "Подключить готовые компоненты совместимым пакетом",
+      "kind": "INTEGRATION",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "compatible-component-batch-v31",
+      "depends_on": [
+        "APA-P70.A02.S04"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-HIGHLEVEL-PR34",
+        "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+        "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+        "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+        "ART-APA-PLP-CONTRACT",
+        "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+        "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+        "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+        "ART-APA-REUSE-NATIVE-20261011",
+        "ART-APA-ATTR-STORY-SLAB-20261011",
+        "ART-TAPIR-COMPAT-20261010-6F29",
+        "ART-SDK-GET3D",
+        "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+        "ART-SDK-OPENING-SHELL-20261010-8E41",
+        "ART-PR20",
+        "ART-APA-DETAILS-V212",
+        "ART-APA-STRUCTURAL-HANDOFF",
+        "ART-MEP-SOURCE-20261010-PORTGRAPH",
+        "ART-APA-FAST-COMPILER",
+        "ART-APA-RU-JUNCTION-NORMS",
+        "ART-APA-FULL-CYCLE-RESEARCH",
+        "ART-APA-SOURCE-71-INDEX-20261011"
+      ],
+      "outputs": [
+        "Ready donor functions execute through shared XYZ/GUID/story/material/host context. Functional geometry/Details/MEP/IFC adapters integrated where implementation exists; research-only and missing provider functions explicitly identified. Independent optional modules disabled safely; no second writer or placeholder/catalog-only PASS."
+      ],
+      "acceptance": "Ready donor functions execute through shared XYZ/GUID/story/material/host context. Functional geometry/Details/MEP/IFC adapters integrated where implementation exists; research-only and missing provider functions explicitly identified. Independent optional modules disabled safely; no second writer or placeholder/catalog-only PASS.",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A11.S02": {
+      "id": "APA-P70.A11.S02",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A11",
+      "title": "Проверить объединённую систему в тестовом PLN",
+      "kind": "VALIDATION",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "connected-system-native-test-v31",
+      "depends_on": [
+        "APA-P70.A11.S01"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-HIGHLEVEL-PR34",
+        "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+        "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+        "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+        "ART-APA-PLP-CONTRACT",
+        "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+        "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+        "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+        "ART-APA-REUSE-NATIVE-20261011",
+        "ART-APA-ATTR-STORY-SLAB-20261011",
+        "ART-TAPIR-COMPAT-20261010-6F29",
+        "ART-SDK-GET3D",
+        "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+        "ART-SDK-OPENING-SHELL-20261010-8E41",
+        "ART-PR20",
+        "ART-APA-DETAILS-V212",
+        "ART-APA-STRUCTURAL-HANDOFF",
+        "ART-MEP-SOURCE-20261010-PORTGRAPH",
+        "ART-APA-FAST-COMPILER",
+        "ART-APA-RU-JUNCTION-NORMS",
+        "ART-APA-FULL-CYCLE-RESEARCH",
+        "ART-APA-SOURCE-71-INDEX-20261011"
+      ],
+      "outputs": [
+        "Reproducible combined native scenario uses retained graph/journal/writer/readback; source elements preserved, save/reopen verified. Source/offline/live/engineering statuses separate. Unsupported mandatory module never silently omitted."
+      ],
+      "acceptance": "Reproducible combined native scenario uses retained graph/journal/writer/readback; source elements preserved, save/reopen verified. Source/offline/live/engineering statuses separate. Unsupported mandatory module never silently omitted.",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A11.S03": {
+      "id": "APA-P70.A11.S03",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A11",
+      "title": "Исправить пробелы после системного теста",
+      "kind": "INTEGRATION",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "system-gap-driven-development-v31",
+      "depends_on": [
+        "APA-P70.A11.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-HIGHLEVEL-PR34",
+        "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+        "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+        "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+        "ART-APA-PLP-CONTRACT",
+        "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+        "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+        "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+        "ART-APA-REUSE-NATIVE-20261011",
+        "ART-APA-ATTR-STORY-SLAB-20261011",
+        "ART-TAPIR-COMPAT-20261010-6F29",
+        "ART-SDK-GET3D",
+        "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+        "ART-SDK-OPENING-SHELL-20261010-8E41",
+        "ART-PR20",
+        "ART-APA-DETAILS-V212",
+        "ART-APA-STRUCTURAL-HANDOFF",
+        "ART-MEP-SOURCE-20261010-PORTGRAPH",
+        "ART-APA-FAST-COMPILER",
+        "ART-APA-RU-JUNCTION-NORMS",
+        "ART-APA-FULL-CYCLE-RESEARCH",
+        "ART-APA-SOURCE-71-INDEX-20261011"
+      ],
+      "outputs": [
+        "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason."
+      ],
+      "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A11.S04": {
+      "id": "APA-P70.A11.S04",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A11",
+      "title": "Измерить и ускорить объединённый контур",
+      "kind": "INTEGRATION",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "combined-system-measured-optimization-v31",
+      "depends_on": [
+        "APA-P70.A11.S03"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-HIGHLEVEL-PR34",
+        "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+        "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+        "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+        "ART-APA-PLP-CONTRACT",
+        "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+        "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+        "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+        "ART-APA-REUSE-NATIVE-20261011",
+        "ART-APA-ATTR-STORY-SLAB-20261011",
+        "ART-TAPIR-COMPAT-20261010-6F29",
+        "ART-SDK-GET3D",
+        "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+        "ART-SDK-OPENING-SHELL-20261010-8E41",
+        "ART-PR20",
+        "ART-APA-DETAILS-V212",
+        "ART-APA-STRUCTURAL-HANDOFF",
+        "ART-MEP-SOURCE-20261010-PORTGRAPH",
+        "ART-APA-FAST-COMPILER",
+        "ART-APA-RU-JUNCTION-NORMS",
+        "ART-APA-FULL-CYCLE-RESEARCH",
+        "ART-APA-SOURCE-71-INDEX-20261011"
+      ],
+      "outputs": [
+        "Same scenario before/after timings/API counts with native semantics retained; optional optimizer verified within deterministic bounds."
+      ],
+      "acceptance": "Same scenario before/after timings/API counts with native semantics retained; optional optimizer verified within deterministic bounds.",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A11.S05": {
+      "id": "APA-P70.A11.S05",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A11",
+      "title": "Собрать установщик стабилизированного APA",
+      "kind": "INTEGRATION",
+      "status": "READY",
+      "priority": 1,
+      "work_key": "integrated-apa-installer-ac29-v31",
+      "depends_on": [
+        "APA-P70.A11.S04",
+        "APA-P70.A08.S02"
+      ],
+      "related": [],
+      "inputs": [
+        "ART-APA-HIGHLEVEL-PR34",
+        "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+        "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+        "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+        "ART-APA-PLP-CONTRACT",
+        "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+        "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+        "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+        "ART-APA-REUSE-NATIVE-20261011",
+        "ART-APA-ATTR-STORY-SLAB-20261011",
+        "ART-TAPIR-COMPAT-20261010-6F29",
+        "ART-SDK-GET3D",
+        "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+        "ART-SDK-OPENING-SHELL-20261010-8E41",
+        "ART-PR20",
+        "ART-APA-DETAILS-V212",
+        "ART-APA-STRUCTURAL-HANDOFF",
+        "ART-MEP-SOURCE-20261010-PORTGRAPH",
+        "ART-APA-FAST-COMPILER",
+        "ART-APA-RU-JUNCTION-NORMS",
+        "ART-APA-FULL-CYCLE-RESEARCH",
+        "ART-APA-SOURCE-71-INDEX-20261011"
+      ],
+      "outputs": [
+        "Version-aware installer/diagnostics/uninstall tested on actual supported AC29 builds; installation/APX changes require separate authorization. AC30 separate."
+      ],
+      "acceptance": "Version-aware installer/diagnostics/uninstall tested on actual supported AC29 builds; installation/APX changes require separate authorization. AC30 separate.",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
     }
   },
   "topics": {
@@ -3442,7 +3687,12 @@
         "APA-P70.A09.S01",
         "APA-P70.A02.S04",
         "APA-P70.A10.S01",
-        "APA-P70.A08.S05"
+        "APA-P70.A08.S05",
+        "APA-P70.A11.S01",
+        "APA-P70.A11.S02",
+        "APA-P70.A11.S03",
+        "APA-P70.A11.S04",
+        "APA-P70.A11.S05"
       ],
       "artifact_ids": [
         "ART-APA-FULL-CYCLE",
@@ -3749,6 +3999,56 @@
       "readiness": "NOT_ASSESSED",
       "readiness_evidence_ids": [],
       "note": "Reuse registered source artifacts; do not start new research unless a specific implementation gap blocks this step."
+    },
+    "APA-P70.A11.S01": {
+      "research_task_ids": [
+        "APA-P10.A02.S02",
+        "APA-P10.A01.S03",
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Reuse current donors and published research. Preparation separated from operational/engineering gates; changed interfaces determine actual gaps."
+    },
+    "APA-P70.A11.S02": {
+      "research_task_ids": [
+        "APA-P10.A02.S02",
+        "APA-P10.A01.S03",
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Reuse current donors and published research. Preparation separated from operational/engineering gates; changed interfaces determine actual gaps."
+    },
+    "APA-P70.A11.S03": {
+      "research_task_ids": [
+        "APA-P10.A02.S02",
+        "APA-P10.A01.S03",
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Reuse current donors and published research. Preparation separated from operational/engineering gates; changed interfaces determine actual gaps."
+    },
+    "APA-P70.A11.S04": {
+      "research_task_ids": [
+        "APA-P10.A02.S02",
+        "APA-P10.A01.S03",
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Reuse current donors and published research. Preparation separated from operational/engineering gates; changed interfaces determine actual gaps."
+    },
+    "APA-P70.A11.S05": {
+      "research_task_ids": [
+        "APA-P10.A02.S02",
+        "APA-P10.A01.S03",
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "NOT_ASSESSED",
+      "readiness_evidence_ids": [],
+      "note": "Reuse current donors and published research. Preparation separated from operational/engineering gates; changed interfaces determine actual gaps."
     }
   },
   "component_catalog": {
@@ -3785,7 +4085,18 @@
           "APA-P70.A03.S01"
         ],
         "acceptance": "Compile brief through existing entry; no second executor",
-        "implementation_state": "INTEGRATED"
+        "implementation_state": "INTEGRATED",
+        "connection_point": "entrypoint",
+        "preparation_dependencies": [
+          "APA-P70.A02.S04"
+        ],
+        "operational_dependencies": [
+          "APA-P70.A03.S01"
+        ],
+        "available_functions": "Existing accepted functions within recorded scope",
+        "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
+        "required_adapter": "Shared context preserving accepted implementation",
+        "preparation_task": "APA-P70.A11.S01"
       },
       {
         "name": "Semantic Brief",
@@ -3807,7 +4118,18 @@
           "APA-P70.A03.S01"
         ],
         "acceptance": "Real stories and hard constraints retained",
-        "implementation_state": "INTEGRATED"
+        "implementation_state": "INTEGRATED",
+        "connection_point": "semantic input",
+        "preparation_dependencies": [
+          "APA-P70.A02.S04"
+        ],
+        "operational_dependencies": [
+          "APA-P70.A03.S01"
+        ],
+        "available_functions": "Existing accepted functions within recorded scope",
+        "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
+        "required_adapter": "Shared context preserving accepted implementation",
+        "preparation_task": "APA-P70.A11.S01"
       },
       {
         "name": "Semantic Spatial",
@@ -3829,7 +4151,18 @@
           "APA-P70.A03.S01"
         ],
         "acceptance": "Authored room/axis/bearing/load-path identity retained",
-        "implementation_state": "INTEGRATED"
+        "implementation_state": "INTEGRATED",
+        "connection_point": "authored geometry",
+        "preparation_dependencies": [
+          "APA-P70.A02.S04"
+        ],
+        "operational_dependencies": [
+          "APA-P70.A03.S01"
+        ],
+        "available_functions": "Existing accepted functions within recorded scope",
+        "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
+        "required_adapter": "Shared context preserving accepted implementation",
+        "preparation_task": "APA-P70.A11.S01"
       },
       {
         "name": "Project Library Pack / CSE",
@@ -3851,7 +4184,18 @@
           "APA-P70.A09.S01"
         ],
         "acceptance": "Verified selection and real attribute readback",
-        "implementation_state": "INTEGRATED"
+        "implementation_state": "INTEGRATED",
+        "connection_point": "construction resolver",
+        "preparation_dependencies": [
+          "APA-P70.A02.S04"
+        ],
+        "operational_dependencies": [
+          "APA-P70.A09.S01"
+        ],
+        "available_functions": "Existing accepted functions within recorded scope",
+        "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
+        "required_adapter": "Shared context preserving accepted implementation",
+        "preparation_task": "APA-P70.A11.S01"
       },
       {
         "name": "Authored Native Plan",
@@ -3873,7 +4217,18 @@
           "APA-P70.A03.S01"
         ],
         "acceptance": "Original graph/writer receives approved authored plan",
-        "implementation_state": "INTEGRATED"
+        "implementation_state": "INTEGRATED",
+        "connection_point": "authoring adapter",
+        "preparation_dependencies": [
+          "APA-P70.A02.S04"
+        ],
+        "operational_dependencies": [
+          "APA-P70.A03.S01"
+        ],
+        "available_functions": "Existing accepted functions within recorded scope",
+        "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
+        "required_adapter": "Shared context preserving accepted implementation",
+        "preparation_task": "APA-P70.A11.S01"
       },
       {
         "name": "BIM Graph",
@@ -3895,7 +4250,18 @@
           "APA-P70.A03.S02"
         ],
         "acceptance": "Hosted openings use verified wall GUIDs and ordering",
-        "implementation_state": "INTEGRATED"
+        "implementation_state": "INTEGRATED",
+        "connection_point": "dependency DAG",
+        "preparation_dependencies": [
+          "APA-P70.A02.S04"
+        ],
+        "operational_dependencies": [
+          "APA-P70.A03.S02"
+        ],
+        "available_functions": "Existing accepted functions within recorded scope",
+        "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
+        "required_adapter": "Shared context preserving accepted implementation",
+        "preparation_task": "APA-P70.A11.S01"
       },
       {
         "name": "SceneWriter / SQLite",
@@ -3917,7 +4283,18 @@
           "APA-P70.A03.S01"
         ],
         "acceptance": "Exact target, pinned hash, intent before every write, no blind replay",
-        "implementation_state": "INTEGRATED"
+        "implementation_state": "INTEGRATED",
+        "connection_point": "native transaction journal",
+        "preparation_dependencies": [
+          "APA-P70.A02.S04"
+        ],
+        "operational_dependencies": [
+          "APA-P70.A03.S01"
+        ],
+        "available_functions": "Existing accepted functions within recorded scope",
+        "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
+        "required_adapter": "Shared context preserving accepted implementation",
+        "preparation_task": "APA-P70.A11.S01"
       },
       {
         "name": "Native MVP / write cycles",
@@ -3939,7 +4316,18 @@
           "APA-P70.A03.S02"
         ],
         "acceptance": "Supported columns/doors/windows reused with typed readback",
-        "implementation_state": "INTEGRATED"
+        "implementation_state": "INTEGRATED",
+        "connection_point": "native donor adapters",
+        "preparation_dependencies": [
+          "APA-P70.A02.S04"
+        ],
+        "operational_dependencies": [
+          "APA-P70.A03.S02"
+        ],
+        "available_functions": "Existing accepted functions within recorded scope",
+        "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
+        "required_adapter": "Shared context preserving accepted implementation",
+        "preparation_task": "APA-P70.A11.S01"
       },
       {
         "name": "Template Builder",
@@ -3961,7 +4349,18 @@
           "APA-P70.A09.S01"
         ],
         "acceptance": "BM/Composite/Profile/Surface identities resolved independently",
-        "implementation_state": "INTEGRATED"
+        "implementation_state": "INTEGRATED",
+        "connection_point": "project attributes",
+        "preparation_dependencies": [
+          "APA-P70.A02.S04"
+        ],
+        "operational_dependencies": [
+          "APA-P70.A09.S01"
+        ],
+        "available_functions": "Existing accepted functions within recorded scope",
+        "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
+        "required_adapter": "Shared context preserving accepted implementation",
+        "preparation_task": "APA-P70.A11.S01"
       },
       {
         "name": "Tapir / Python JSON",
@@ -3983,7 +4382,18 @@
           "APA-P70.A03.S01"
         ],
         "acceptance": "Installed version/command schema and typed readback verified",
-        "implementation_state": "INTEGRATED"
+        "implementation_state": "INTEGRATED",
+        "connection_point": "transport",
+        "preparation_dependencies": [
+          "APA-P70.A02.S04"
+        ],
+        "operational_dependencies": [
+          "APA-P70.A03.S01"
+        ],
+        "available_functions": "Existing accepted functions within recorded scope",
+        "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
+        "required_adapter": "Shared context preserving accepted implementation",
+        "preparation_task": "APA-P70.A11.S01"
       },
       {
         "name": "Native Model Dump / AC29 geometry",
@@ -4005,7 +4415,18 @@
           "APA-P70.A08.S04"
         ],
         "acceptance": "Real XYZ/3D bodies and failure cases verified",
-        "implementation_state": "INTEGRATED"
+        "implementation_state": "INTEGRATED",
+        "connection_point": "geometry",
+        "preparation_dependencies": [
+          "APA-P70.A02.S04"
+        ],
+        "operational_dependencies": [
+          "APA-P70.A08.S04"
+        ],
+        "available_functions": "Existing accepted functions within recorded scope",
+        "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
+        "required_adapter": "Shared context preserving accepted implementation",
+        "preparation_task": "APA-P70.A11.S01"
       },
       {
         "name": "NetworkX / Shapely",
@@ -4027,7 +4448,18 @@
           "APA-P70.A08.S04"
         ],
         "acceptance": "Graph/2D predicates used within declared scope; 3D proven separately",
-        "implementation_state": "INTEGRATED"
+        "implementation_state": "INTEGRATED",
+        "connection_point": "geometry",
+        "preparation_dependencies": [
+          "APA-P70.A02.S04"
+        ],
+        "operational_dependencies": [
+          "APA-P70.A08.S04"
+        ],
+        "available_functions": "Existing accepted functions within recorded scope",
+        "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
+        "required_adapter": "Shared context preserving accepted implementation",
+        "preparation_task": "APA-P70.A11.S01"
       },
       {
         "name": "Roof / Shell / Morph / Openings / SEO",
@@ -4048,7 +4480,18 @@
           "APA-P70.A08.S04"
         ],
         "acceptance": "Native capabilities adapted individually; required unsupported scope blocks",
-        "implementation_state": "FOUND"
+        "implementation_state": "FOUND",
+        "connection_point": "geometry",
+        "preparation_dependencies": [
+          "APA-P70.A02.S04"
+        ],
+        "operational_dependencies": [
+          "APA-P70.A08.S04"
+        ],
+        "available_functions": "Donor functions after source inspection; research-only interface is not implementation",
+        "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
+        "required_adapter": "Thin compatible adapter when donor functions exist; otherwise explicit missing implementation",
+        "preparation_task": "APA-P70.A11.S01"
       },
       {
         "name": "GDL / ТЕХНОНИКОЛЬ / manufacturer catalogs",
@@ -4070,7 +4513,18 @@
           "APA-P70.A09.S01"
         ],
         "acceptance": "Unicode, stable library identity, rights and target-version runtime verified",
-        "implementation_state": "INTEGRATED"
+        "implementation_state": "INTEGRATED",
+        "connection_point": "library",
+        "preparation_dependencies": [
+          "APA-P70.A02.S04"
+        ],
+        "operational_dependencies": [
+          "APA-P70.A09.S01"
+        ],
+        "available_functions": "Existing accepted functions within recorded scope",
+        "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
+        "required_adapter": "Shared context preserving accepted implementation",
+        "preparation_task": "APA-P70.A11.S01"
       },
       {
         "name": "Details v2.12 / constructive nodes",
@@ -4092,7 +4546,19 @@
           "APA-P70.A02.S04"
         ],
         "acceptance": "Applicability/source and BIM attachment verified; found detail not automatically approved",
-        "implementation_state": "FOUND"
+        "implementation_state": "FOUND",
+        "connection_point": "constructive",
+        "preparation_dependencies": [
+          "APA-P70.A02.S04"
+        ],
+        "operational_dependencies": [
+          "APA-P70.A03.S01",
+          "APA-P70.A02.S04"
+        ],
+        "available_functions": "Donor functions after source inspection; research-only interface is not implementation",
+        "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
+        "required_adapter": "Thin compatible adapter when donor functions exist; otherwise explicit missing implementation",
+        "preparation_task": "APA-P70.A11.S01"
       },
       {
         "name": "SAM / SAF / structural handoff",
@@ -4115,7 +4581,20 @@
           "APA-P70.A04.S03"
         ],
         "acceptance": "Verified inputs, solver, loads, norms and BIM provenance; connectivity not carrying capacity",
-        "implementation_state": "FOUND"
+        "implementation_state": "FOUND",
+        "connection_point": "engineering",
+        "preparation_dependencies": [
+          "APA-P70.A02.S04"
+        ],
+        "operational_dependencies": [
+          "APA-P70.A03.S01",
+          "APA-P70.A02.S02",
+          "APA-P70.A04.S03"
+        ],
+        "available_functions": "Donor functions after source inspection; research-only interface is not implementation",
+        "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
+        "required_adapter": "Thin compatible adapter when donor functions exist; otherwise explicit missing implementation",
+        "preparation_task": "APA-P70.A11.S01"
       },
       {
         "name": "Native MEP Designer",
@@ -4138,7 +4617,20 @@
           "APA-P70.A05.S03"
         ],
         "acceptance": "Commands/routes/ports and model coordination proven; UI presence not integration",
-        "implementation_state": "FOUND"
+        "implementation_state": "FOUND",
+        "connection_point": "MEP",
+        "preparation_dependencies": [
+          "APA-P70.A02.S04"
+        ],
+        "operational_dependencies": [
+          "APA-P70.A03.S02",
+          "APA-P70.A02.S02",
+          "APA-P70.A05.S03"
+        ],
+        "available_functions": "Donor functions after source inspection; research-only interface is not implementation",
+        "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
+        "required_adapter": "Thin compatible adapter when donor functions exist; otherwise explicit missing implementation",
+        "preparation_task": "APA-P70.A11.S01"
       },
       {
         "name": "OR-Tools / CP-SAT / batching / caches",
@@ -4159,7 +4651,18 @@
           "APA-P70.A06.S02"
         ],
         "acceptance": "Specific optimization objective/constraints plus measured benefit",
-        "implementation_state": "FOUND"
+        "implementation_state": "FOUND",
+        "connection_point": "optimization",
+        "preparation_dependencies": [
+          "APA-P70.A02.S04"
+        ],
+        "operational_dependencies": [
+          "APA-P70.A06.S02"
+        ],
+        "available_functions": "Donor functions after source inspection; research-only interface is not implementation",
+        "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
+        "required_adapter": "Thin compatible adapter when donor functions exist; otherwise explicit missing implementation",
+        "preparation_task": "APA-P70.A11.S01"
       },
       {
         "name": "СП / ГОСТ normative sources",
@@ -4182,7 +4685,20 @@
           "APA-P70.A06.S02"
         ],
         "acceptance": "Applicable norm/version/source linked to verified check",
-        "implementation_state": "FOUND"
+        "implementation_state": "FOUND",
+        "connection_point": "release",
+        "preparation_dependencies": [
+          "APA-P70.A02.S04"
+        ],
+        "operational_dependencies": [
+          "APA-P70.A07.S01",
+          "APA-P70.A05.S03",
+          "APA-P70.A06.S02"
+        ],
+        "available_functions": "Donor functions after source inspection; research-only interface is not implementation",
+        "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
+        "required_adapter": "Thin compatible adapter when donor functions exist; otherwise explicit missing implementation",
+        "preparation_task": "APA-P70.A11.S01"
       },
       {
         "name": "IFC / openBIM / MCP / Twinmotion",
@@ -4203,7 +4719,18 @@
           "APA-P70.A07.S02"
         ],
         "acceptance": "Required export/sync checked against native model; unsupported scope explicit",
-        "implementation_state": "FOUND"
+        "implementation_state": "FOUND",
+        "connection_point": "export",
+        "preparation_dependencies": [
+          "APA-P70.A02.S04"
+        ],
+        "operational_dependencies": [
+          "APA-P70.A07.S02"
+        ],
+        "available_functions": "Donor functions after source inspection; research-only interface is not implementation",
+        "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
+        "required_adapter": "Thin compatible adapter when donor functions exist; otherwise explicit missing implementation",
+        "preparation_task": "APA-P70.A11.S01"
       },
       {
         "name": "Archived branches / alternate implementations / source71",
@@ -4225,45 +4752,90 @@
           "APA-P50.A01.S01"
         ],
         "acceptance": "Keep source provenance; compare measurable advantage before replace/merge",
-        "implementation_state": "FOUND"
+        "implementation_state": "FOUND",
+        "connection_point": "candidate donors",
+        "preparation_dependencies": [
+          "APA-P70.A02.S04"
+        ],
+        "operational_dependencies": [
+          "APA-P70.A01.S01",
+          "APA-P50.A01.S01"
+        ],
+        "available_functions": "Donor functions after source inspection; research-only interface is not implementation",
+        "cooperation": "Shared XYZ/GUID/story/material/host facts; native writes use retained SceneWriter; independent optional module switches",
+        "required_adapter": "Thin compatible adapter when donor functions exist; otherwise explicit missing implementation",
+        "preparation_task": "APA-P70.A11.S01"
       }
     ]
   },
   "execution_stages": [
     {
       "order": 1,
-      "name": "CORE",
-      "acceptance_task": "APA-P70.A08.S04"
+      "name": "INTEGRATE_ALL",
+      "acceptance_task": "APA-P70.A11.S01"
     },
     {
       "order": 2,
-      "name": "GEOMETRY",
-      "acceptance_task": "APA-P70.A09.S01"
+      "name": "CONNECT_AND_SYSTEM_TEST",
+      "acceptance_task": "APA-P70.A11.S02"
     },
     {
       "order": 3,
-      "name": "MATERIALS_LIBRARIES",
-      "acceptance_task": "APA-P70.A02.S04"
+      "name": "GAP_DRIVEN_FIX",
+      "acceptance_task": "APA-P70.A11.S03"
     },
     {
       "order": 4,
-      "name": "CONSTRUCTIVE_ENGINEERING",
-      "acceptance_task": "APA-P70.A05.S03"
+      "name": "MEASURED_OPTIMIZATION",
+      "acceptance_task": "APA-P70.A11.S04"
     },
     {
       "order": 5,
-      "name": "MEP",
-      "acceptance_task": "APA-P70.A06.S02"
-    },
+      "name": "PACKAGE",
+      "acceptance_task": "APA-P70.A11.S05"
+    }
+  ],
+  "strategy_history": [
     {
-      "order": 6,
-      "name": "OPTIMIZATION",
-      "acceptance_task": "APA-P70.A10.S01"
-    },
-    {
-      "order": 7,
-      "name": "RELEASE",
-      "acceptance_task": "APA-P70.A08.S02"
+      "revision": 93,
+      "strategy": "CORE FIRST → EXPANSION, user-directed working-first. Finish authored native S02 → incremental S03 and native completeness S04 → core acceptance A08.S04 before geometry A09, libraries A02.S04, constructive A04, engineering A05, MEP A06, measured optimization A10, release A07/full acceptance A08. One canonical plan, one graph, one SceneWriter. Research/governance must not displace eligible core work.",
+      "execution_stages": [
+        {
+          "order": 1,
+          "name": "CORE",
+          "acceptance_task": "APA-P70.A08.S04"
+        },
+        {
+          "order": 2,
+          "name": "GEOMETRY",
+          "acceptance_task": "APA-P70.A09.S01"
+        },
+        {
+          "order": 3,
+          "name": "MATERIALS_LIBRARIES",
+          "acceptance_task": "APA-P70.A02.S04"
+        },
+        {
+          "order": 4,
+          "name": "CONSTRUCTIVE_ENGINEERING",
+          "acceptance_task": "APA-P70.A05.S03"
+        },
+        {
+          "order": 5,
+          "name": "MEP",
+          "acceptance_task": "APA-P70.A06.S02"
+        },
+        {
+          "order": 6,
+          "name": "OPTIMIZATION",
+          "acceptance_task": "APA-P70.A10.S01"
+        },
+        {
+          "order": 7,
+          "name": "RELEASE",
+          "acceptance_task": "APA-P70.A08.S02"
+        }
+      ]
     }
   ]
 }
