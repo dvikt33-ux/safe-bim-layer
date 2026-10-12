@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 119,
+  "revision": 120,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2687,7 +2687,7 @@
       "action_id": "APA-P70.A02",
       "title": "Связать проектные требования с версиями нормативов и проверяемыми правилами",
       "kind": "BUILD",
-      "status": "READY",
+      "status": "IN_PROGRESS",
       "priority": 3,
       "work_key": "normative-applicability-pack",
       "depends_on": [
@@ -2703,9 +2703,9 @@
         "Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED"
       ],
       "acceptance": "Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "work-normative-bindings-20261012",
+      "lease_until": "2026-10-12T21:59:22Z",
+      "claim_ref": "APA-RUN-20261012-185922Z-normative-bindings",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
