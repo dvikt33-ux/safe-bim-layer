@@ -1,7 +1,8 @@
 """Project intent -> existing BIM graph -> guarded native writer -> evidence.
 
 Pavilion, parameterized building shell and authored native inputs reuse one
-SceneWriter. Floor and MEP adapters remain UNSUPPORTED. Default mode is offline.
+SceneWriter. Full floor/MEP-network recipes remain UNSUPPORTED. The connected
+component CLI adds bounded roof/Morph/single-route adapters. Default is offline.
 No daemon, save, deletion, or automatic retry.
 """
 from __future__ import annotations
@@ -31,7 +32,7 @@ READS = frozenset({"GetProjectInfo", "GetStories", "GetAddOnVersion",
                   "GetAttributesByType", "GetSubelementsOfHierarchicalElements", "GetModelDumpV1",
                   "GetCollisions", "GetBuildingMaterials", "GetComposites", "GetProfiles",
                   "GetSurfaces", "GetAvailableLibraryParts", "GetGDLParametersOfElements", "API.GetProductInfo"})
-NATIVE_MUTATIONS = RUN.ALLOWED_WRITES | frozenset({"ModifySlabs"})
+NATIVE_MUTATIONS = RUN.ALLOWED_WRITES | RUN.EXTENDED_WRITES | frozenset({"ModifySlabs","ModifyMorphs"})
 PRIMITIVES = {
     "pavilion-frame-v1": {"status": "EXECUTABLE_PENDING_LIVE_ACCEPTANCE",
                           "executor": "SceneWriter", "elementCount": 12},
