@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 28,
+  "run_count": 29,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -197,6 +197,13 @@
       "report": "runs/2026-10-12/APA-RUN-20261012-110611Z-connected-native-continuation-v32/REPORT.md",
       "run_id": "APA-RUN-20261012-110611Z-connected-native-continuation-v32",
       "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-12/APA-RUN-20261012-122511Z-construction-junctions-s01/REPORT.md",
+      "run_id": "APA-RUN-20261012-122511Z-construction-junctions-s01",
+      "substep_id": "APA-P70.A04.S01"
     }
   ],
   "schema": "APA_GENERATED_INDEX_V1",

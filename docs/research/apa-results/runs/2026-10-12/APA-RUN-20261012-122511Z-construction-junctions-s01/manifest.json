@@ -1,0 +1,74 @@
+{
+  "action_id": "APA-P70.A04",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-CONSTRUCTION-JUNCTIONS-S01",
+      "evidence_ids": [
+        "EV-JUNCTION-PROOF",
+        "EV-JUNCTION-BYTES"
+      ],
+      "statement": "S01 accepted-model construction interface/source coverage complete:47interfaces across required families,34actual native shared-surface contacts,95GUID/body signatures preserved.412Windows/Linux tests PASS; source and engineering gaps explicit. Existing batten/counterbatten source relation qualifies the next bounded support sub-junction. Publication makes zero native calls.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-JUNCTION-PROOF",
+      "kind": "TEST_RESULT",
+      "sha256": "575721587033e754484ff40488336eb7e7fa46547b4412a6ac74ec38d4c2d6fb",
+      "source_revision": "fab5fd71c68616de510ad8b6b06ce22eaf58520b",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-122511Z-construction-junctions-s01/coverage.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-JUNCTION-BYTES",
+      "kind": "LOCAL_LOG",
+      "sha256": "776fd2e236795c4d5dd53d2d9e2620353c0e17fef2aa53b3bafc04cd3e11a8e2",
+      "source_revision": "fab5fd71c68616de510ad8b6b06ce22eaf58520b",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-122511Z-construction-junctions-s01/EVIDENCE_SHA256.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "work-construction-junctions-20261012",
+  "executor_run_id": "APA-RUN-20261012T120854Z-construction-junctions-s01",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-12T12:25:11Z",
+  "idempotency_key": "sha256:b8283e23f046462f75716f3036c69dca1cfc587da39e00c78bf6fd3bcddc1495",
+  "inputs": [
+    "ART-APA-CSE-RESEARCH",
+    "ART-APA-DETAILS-V212",
+    "ART-P70-A11-S03-NATIVE95-V32-20261012"
+  ],
+  "next_substep": "APA-P70.A04.S02",
+  "phase": "SOURCE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261012-122511Z-construction-junctions-s01",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "29 native evidence captured; publication makes zero native calls",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "source_branch": "feature/apa-construction-junctions-20261012",
+    "tapir": "1.5.10"
+  },
+  "source_revisions": [
+    {
+      "revision": "fab5fd71c68616de510ad8b6b06ce22eaf58520b",
+      "source_sha": "fab5fd71c68616de510ad8b6b06ce22eaf58520b",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/57"
+    }
+  ],
+  "started_at": "2026-10-12T12:08:54Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A04.S01"
+}
