@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 103,
+  "revision": 104,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -818,6 +818,12 @@
       "uri": "docs/research/apa-results/receipts/APA-RUN-20261012-075300Z-functional-gaps-v31.json",
       "kind": "PUBLICATION_RECEIPT",
       "verification": "GITHUB_READBACK_VERIFIED_DONE_PUBLISHED_S03_IS_PARTIAL"
+    },
+    "ART-P70-A11-S03-PR56-20261012": {
+      "id": "ART-P70-A11-S03-PR56-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/56",
+      "kind": "CONNECTED_NATIVE_DETAILS_AND_MEP_CODE",
+      "verification": "SOURCE_READBACK_VERIFIED_NATIVE_LIMITS_RECORDED"
     }
   },
   "tasks": {
@@ -3346,7 +3352,8 @@
         "APA-P70.A11.S06",
         "APA-P70.A11.S07",
         "APA-P70.A11.S08",
-        "APA-P70.A11.S09"
+        "APA-P70.A11.S09",
+        "APA-P70.A11.S10"
       ],
       "inputs": [
         "ART-APA-HIGHLEVEL-PR34",
@@ -3390,7 +3397,8 @@
         "ART-P70-A11-S03-FUNCTIONAL-GAPS-20261012",
         "ART-P70-A11-S03-PR55-20261012",
         "ART-P70-A11-S03-GAP-REGISTER-20261012",
-        "ART-P70-A11-S03-FUNCTIONAL-RECEIPT-20261012"
+        "ART-P70-A11-S03-FUNCTIONAL-RECEIPT-20261012",
+        "ART-P70-A11-S03-PR56-20261012"
       ],
       "blocked_reason": null
     },
@@ -3702,6 +3710,39 @@
         "ART-P70-A11-S03-GAP-REGISTER-20261012"
       ],
       "blocked_reason": "Receiver endpoint/session and full semantic/quantity/face compatibility are not verified; current IFC proves bounded identity/world bounds and host/port/material observations."
+    },
+    "APA-P70.A11.S10": {
+      "id": "APA-P70.A11.S10",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A11",
+      "title": "Подтвердить нативный круглый порт терминала, предпочтения диаметра и переход MEP",
+      "kind": "INTEGRATION",
+      "status": "BLOCKED",
+      "priority": 2,
+      "work_key": "mep-terminal-diameter-transition-provider-v32",
+      "depends_on": [
+        "APA-P70.A11.S02"
+      ],
+      "related": [
+        "APA-P70.A11.S03"
+      ],
+      "inputs": [
+        "ART-P70-A11-S03-PR56-20261012",
+        "ART-MEP-SOURCE-20261010-PORTGRAPH",
+        "ART-TAPIR-COMPAT-20261010-6F29"
+      ],
+      "outputs": [
+        "Reuse a ready exposed provider path; connect actual terminal port to routed network with native diameter/transition readback, original baseline preservation and save/reopen. No installed APX change without separate authorization."
+      ],
+      "acceptance": "Actual terminal port and route sections agree through a verified native transition and reciprocal physical connections; preserve original baseline and persist readback.",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [
+        "ART-P70-A11-S03-PR56-20261012"
+      ],
+      "blocked_reason": "Actual terminal has circular0.2m port; installed circular Create route reads native preference0.8m despite explicit0.2m. Terminal remains open. Current exposed route contract lacks preference-reference/terminal port setters; qualify an existing ready path before another write."
     }
   },
   "topics": {
@@ -3990,7 +4031,8 @@
         "APA-P70.A11.S06",
         "APA-P70.A11.S07",
         "APA-P70.A11.S08",
-        "APA-P70.A11.S09"
+        "APA-P70.A11.S09",
+        "APA-P70.A11.S10"
       ],
       "artifact_ids": [
         "ART-APA-FULL-CYCLE",
@@ -4003,7 +4045,8 @@
         "ART-P70-A11-S03-FUNCTIONAL-GAPS-20261012",
         "ART-P70-A11-S03-PR55-20261012",
         "ART-P70-A11-S03-GAP-REGISTER-20261012",
-        "ART-P70-A11-S03-FUNCTIONAL-RECEIPT-20261012"
+        "ART-P70-A11-S03-FUNCTIONAL-RECEIPT-20261012",
+        "ART-P70-A11-S03-PR56-20261012"
       ],
       "synthesis_state": "PARTIAL",
       "owner": null
@@ -4406,6 +4449,18 @@
         "ART-P70-A11-S03-GAP-REGISTER-20261012"
       ],
       "note": "Receiver endpoint/session and full semantic/quantity/face compatibility are not verified; current IFC proves bounded identity/world bounds and host/port/material observations."
+    },
+    "APA-P70.A11.S10": {
+      "research_task_ids": [
+        "APA-P10.A02.S02",
+        "APA-P10.A01.S03",
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "GAP",
+      "readiness_evidence_ids": [
+        "ART-P70-A11-S03-PR56-20261012"
+      ],
+      "note": "Provider diameter/transition dependency is separate; working rectangular branch and source parts continue independently."
     }
   },
   "component_catalog": {
