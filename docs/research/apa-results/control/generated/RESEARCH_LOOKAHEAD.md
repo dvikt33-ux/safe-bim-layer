@@ -94,7 +94,7 @@ A candidate research S-ID must still satisfy its own dependencies and claim gate
 - Готовность исследования: **NOT_ASSESSED**
 - Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
 - Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
-- Использовать источники (ветка/файл/PR): [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12)
+- Использовать источники (ветка/файл/PR): [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-P70-A11-S03-NATIVE95-V32-20261012](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-110611Z-connected-native-continuation-v32/REPORT.md)
 
 ### APA-P70.A04.S02 — Привязать выбранные узлы и композиции к нативным BIM элементам
 
