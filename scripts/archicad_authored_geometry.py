@@ -18,44 +18,52 @@ def normalize_dump(raw):
     return module.normalize(copy.deepcopy(raw))
 
 
+def planar_faces(native):
+    """Actual planar BREP contours for contact checks; holes stay authoritative."""
+    from shapely.geometry import Polygon
+    for body_index,body in enumerate(native['bodies']):
+        vertices=body['vertices']
+        for face_index,face in enumerate(body['faces']):
+            contours=face['contours'];outer=[vertices[i] for i in contours[0]]
+            origin=outer[0];normal=None
+            for i in range(1,len(outer)-1):
+                a=[outer[i][k]-origin[k] for k in range(3)]
+                b=[outer[i+1][k]-origin[k] for k in range(3)]
+                cross=[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]]
+                length=math.sqrt(sum(v*v for v in cross))
+                if length>1e-12:normal=[v/length for v in cross];break
+            if normal is None:continue
+            if next(v for v in normal if abs(v)>1e-8)<0:normal=[-v for v in normal]
+            distance=sum(normal[k]*origin[k] for k in range(3))
+            points=[vertices[i] for contour in contours for i in contour]
+            if any(abs(sum(normal[k]*v[k] for k in range(3))-distance)>1e-6 for v in points):
+                raise ValueError('NONPLANAR_NATIVE_FACE_CONTACT_NOT_SUPPORTED')
+            drop=max(range(3),key=lambda k:abs(normal[k]));axes=[k for k in range(3) if k!=drop]
+            polygon=Polygon([[v[k] for k in axes] for v in outer],
+                [[[vertices[i][k] for k in axes] for i in c] for c in contours[1:]])
+            if not polygon.is_valid:raise ValueError('INVALID_NATIVE_FACE_POLYGON')
+            yield {'normal':normal,'distance':distance,'polygon':polygon,'drop':drop,
+                'area':polygon.area/abs(normal[drop]),'bodyIndex':body_index,'faceIndex':face_index,
+                'nativeFaceIndex':face.get('nativeFaceIndex'),'points':points}
+
+
 def shared_surfaces(elements, owners):
     """Compare actual coplanar BREP face contours, preserving polygon holes.
 
     Surface contact is distinct from native body intersection and load transfer.
     No new solid/boolean engine or model modification is introduced.
     """
-    from shapely.geometry import Polygon
     planes={};areas={}
     for native_guid,parent in owners.items():
-        for body in elements[native_guid]['bodies']:
-            vertices=body['vertices']
-            for face in body['faces']:
-                contours=face['contours'];outer=[vertices[i] for i in contours[0]]
-                origin=outer[0];normal=None
-                for i in range(1,len(outer)-1):
-                    a=[outer[i][k]-origin[k] for k in range(3)]
-                    b=[outer[i+1][k]-origin[k] for k in range(3)]
-                    cross=[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]]
-                    length=math.sqrt(sum(v*v for v in cross))
-                    if length>1e-12:normal=[v/length for v in cross];break
-                if normal is None:continue  # Zero-area contour cannot prove contact.
-                first=next(v for v in normal if abs(v)>1e-8)
-                if first<0:normal=[-v for v in normal]
-                distance=sum(normal[k]*origin[k] for k in range(3))
-                points=[vertices[i] for c in contours for i in c]
-                if any(abs(sum(normal[k]*v[k] for k in range(3))-distance)>1e-6 for v in points):
-                    raise ValueError('NONPLANAR_NATIVE_FACE_CONTACT_NOT_SUPPORTED')
-                drop=max(range(3),key=lambda k:abs(normal[k]));axes=[k for k in range(3) if k!=drop]
-                polygon=Polygon([[v[k] for k in axes] for v in outer],
-                    [[[vertices[i][k] for k in axes] for i in c] for c in contours[1:]])
-                if not polygon.is_valid:raise ValueError('INVALID_NATIVE_FACE_POLYGON')
-                key=tuple(round(v,6) for v in normal)+(round(distance,6),)
-                for other,previous in planes.get(key,[]):
-                    if other==parent:continue
-                    area=polygon.intersection(previous).area/abs(normal[drop])
-                    if area>1e-8:
-                        pair=tuple(sorted((parent,other)));areas[pair]=areas.get(pair,0)+area
-                planes.setdefault(key,[]).append((parent,polygon))
+        for face in planar_faces(elements[native_guid]):
+            normal,distance,polygon,drop=(face[k] for k in ('normal','distance','polygon','drop'))
+            key=tuple(round(v,6) for v in normal)+(round(distance,6),)
+            for other,previous in planes.get(key,[]):
+                if other==parent:continue
+                area=polygon.intersection(previous).area/abs(normal[drop])
+                if area>1e-8:
+                    pair=tuple(sorted((parent,other)));areas[pair]=areas.get(pair,0)+area
+            planes.setdefault(key,[]).append((parent,polygon))
     return [{'guids':list(pair),'sharedAreaSquareMeters':area,
              'evidence':'resultant-native-BREP-coplanar-surface'} for pair,area in sorted(areas.items())]
 
