@@ -1055,7 +1055,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Owner/lease: work-construction-junctions-20261012 / 2026-10-12T17:10:00Z
 - Requires owner approval: False
 - Source inputs: [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12)
-- Existing V2 runs: none
+- Existing V2 runs: [APA-RUN-20261012-132353Z-construction-junction-qualification-s03](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-132353Z-construction-junction-qualification-s03/REPORT.md) (receipt verified)
 - Expected output: Для каждого узла классификация PASS_GEOMETRY/PASS_DOCUMENTED/PASS_ENGINEERING/NOT_VERIFIED; ложные approvals запрещены
 
 ## APA-P70.A05.S01
