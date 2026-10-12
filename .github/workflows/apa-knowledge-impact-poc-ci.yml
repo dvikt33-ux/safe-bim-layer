@@ -42,7 +42,7 @@ jobs:
         run: |
           python tools/apa_knowledge_graph/sections.py search \
             --index "${RUNNER_TEMP}/apa-sections.sqlite" \
-            --query "кровли" --limit 3 --max-snippet 160
+            --query "кровли" --source-class PROJECT_CONTROL --limit 3 --max-snippet 160
       - name: Query real APA normative artifact (bounded)
         run: |
           python tools/apa_knowledge_graph/graph.py artifact \
