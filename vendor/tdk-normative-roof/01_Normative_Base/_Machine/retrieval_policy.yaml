@@ -1,0 +1,123 @@
+policy_version: 6
+mode: compiled_blocks_primary_retrieval_reserve
+purpose: "Не допускать нерелевантные/неподтвержденные нормы и минимизировать чтение: штатно runtime работает по заранее скомпилированным blocks; dynamic normative retrieval используется только для конкретного безопасно определенного gap."
+
+primary_generation_contract:
+  runtime_entrypoint: 04_Code_Generation/runtime/dispatcher.py
+  selection_policy: 04_Code_Generation/block_resolution_policy.yaml
+  block_schema: 04_Code_Generation/compiled_block.schema.yaml
+  execution_plan_schema: 04_Code_Generation/execution_plan.schema.yaml
+  rules:
+    - "Если exact compiled blocks структурно закрывают текущую операцию, _Machine/rules и evidence в runtime не читаются."
+    - "release_status=design_only сам по себе не запускает retrieval: structural/code execution разрешен при normative_authority=false."
+    - "Если операция требует unresolved/stale normative edge, retrieval открывает только этот edge."
+    - "Если известный module не имеет готового block, retrieval scope ограничивается этим module внутри exact object route."
+    - "Неизвестное сообщение без безопасного module/edge scope не запускает retrieval."
+
+compile_time_contract:
+  purpose: "Сборка и аудит повторяемых compiled blocks из большой нормативной базы."
+  may_read_machine_rules: true
+  may_expand_evidence: true
+  object_route_isolation_required: true
+  result: "static/parametric/composite block candidate; audited_ready только после evidence + dependency + compile gates."
+  note: "Compile-time retrieval не является runtime project generation."
+
+reserve_query_pipeline:
+  activation: "Только по fallback trigger из block_resolution_policy.yaml или RuntimeDispatcher с безопасно определенным scope."
+  steps:
+    - step: identify_fallback_gap
+      required_outputs: [reason_codes, fallback_scope, affected_block_ids, requested_subject]
+    - step: classify_object
+      required_outputs: [object_class, object_subclass]
+    - step: load_exact_object_route
+      rule: "Открыть только route manifest точного object type. Cross-class/parent fallback запрещены."
+      on_missing: route_missing
+    - step: constrain_scope
+      rule: "Оставить только fallback_scope, переданный RuntimeDispatcher/CompiledBlockResolver; не расширять соседними modules или классами."
+    - step: identify_active_functions
+      required_outputs: [functions]
+    - step: resolve_project_modules
+      required_outputs: [active_modules, module_depths]
+      rule: "Работать только с module/edge из fallback_scope."
+    - step: prefilter_metadata
+      rule: "Оставить только правила, потенциально закрывающие fallback gap; не перечитывать правила уже закрытые валидными blocks."
+    - step: verify_source_text_access
+      require: ['text_opened == true', 'content_access in [partial_text, full_text]', 'locator_read == true']
+      on_failure: exclude_or_keep_gap_unresolved
+    - step: evaluate_conditions
+      fields: [applies_when, not_applicable_when, exclusions]
+    - step: retrieve_quick_rules
+      allowed_statuses: [confirmed]
+      note: "На quarantined branch статус confirmed недостаточен для normative authority; evidence gate все равно обязателен."
+    - step: canonicalize_rule_ids
+      mapping: canonical_rule_aliases.yaml
+    - step: deduplicate_evidence
+    - step: build_minimal_fast_pack
+      schema: 04_Code_Generation/fast_pack.schema.yaml
+    - step: return_gap_result
+      outputs: [fast_pack, unresolved_edges, evidence_status, promotion_candidate]
+
+hard_filters:
+  status:
+    include: [confirmed]
+    exclude: [needs_recheck, conflict, deprecated, reserve_unverified]
+  evidence_strength:
+    require_opened_text: true
+    reject_title_only: true
+    reject_metadata_only_for_rule_content: true
+    reject_no_content_available: true
+  object_scope:
+    require_match: true
+    unrelated_classes: exclude
+    cross_class_substitution: forbidden
+    parent_fallback: forbidden
+  function_scope:
+    require_active_function_if_function_specific: true
+    inactive_functions: exclude
+  module_scope:
+    require_fallback_scope_match: true
+    inactive_modules: exclude
+    sibling_module_expansion: forbidden
+    cross_module_rule_requires_explicit_target: true
+  depth_scope:
+    require_depth_match_when_depth_specific: true
+  jurisdiction:
+    require_match_when_rule_is_regional_or_municipal: true
+
+runtime_parameter_semantics:
+  rule: "Параметрическая зависимость или отсутствие project input не являются поводом для retrieval, если нормативная ветка уже известна готовому block."
+  examples:
+    - "floor_occupancy >= 50 оценивается guard внутри evacuation block."
+    - "количество санприборов вычисляется calculator внутри sanitary/VK block."
+    - "парковочные места от площади/мест вычисляются внутри parking block."
+    - "лифтовый порог по высоте оценивается внутри vertical transport block."
+    - "отсутствующие инженерно-геологические изыскания дают missing_input, а не нормативный поиск."
+    - "климатические значения подаются в thermal block из проверенного climate/jurisdiction overlay."
+
+fallback_required_examples:
+  - "известный module не имеет готового block exact object route"
+  - "текущая операция реально затрагивает unresolved cross-document edge"
+  - "source revision stale и изменение может затронуть текущий output"
+  - "нестандартная смешанная функция не покрыта готовой композицией"
+  - "нужна локальная/региональная норма, а jurisdiction block отсутствует"
+  - "СТУ, расчет пожарного риска или case-specific обоснование"
+  - "между готовыми blocks обнаружен нормативный конфликт, влияющий на запрос"
+
+not_fallback_examples:
+  - "design_only block используется для structural/code output без нормативного утверждения"
+  - "нет числового/проектного input"
+  - "известная формула или guard"
+  - "completed dependency доступна через project_state/interfaces"
+  - "неизвестная команда без безопасного scope"
+
+safety_guards:
+  - "Запрещено fallback-извлечение по всей базе."
+  - "Пустой профильный результат означает route_missing/needs_audit, а не похожую норму другого класса."
+  - "Rule с неполным scope не используется до уточнения scope."
+  - "Rule без подтверждения фактически открытого текста источника не используется, даже если source_id доверенный."
+  - "Карточка документа подтверждает реквизиты, но не содержимое нормы."
+  - "Reserve branch никогда не индексируется рабочим retrieval-процессом."
+  - "Совпадение ключевых слов не может отменить object/function/module scope."
+  - "Нельзя подменять готовый block другого типа здания FAST PACK-ом."
+  - "Dynamic FAST PACK не становится audited_ready block автоматически."
+  - "Runtime retrieval не имеет права повышать normative_authority, пока evidence/release gate не закрыт."

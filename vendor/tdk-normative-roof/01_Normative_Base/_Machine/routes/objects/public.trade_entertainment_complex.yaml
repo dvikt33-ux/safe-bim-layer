@@ -1,0 +1,86 @@
+route_version: 1
+object_type: public.trade_entertainment_complex
+route_status: design_only
+purpose: >-
+  Exact-object route for shopping and entertainment complexes (TRC/TRK). It exposes only
+  same-class confirmed rules. Generic public.trade rules, unrelated public functions and all
+  quarantined SP464 recovery layers are excluded unless an active embedded function explicitly
+  requests its own exact function branch.
+
+scope:
+  include_object_classes: [public.trade_entertainment_complex]
+  exclude_object_classes:
+    - public.trade
+    - residential.*
+    - industrial.*
+    - warehouse.*
+    - transport.*
+  cross_class_fallback: forbidden
+  parent_fallback: forbidden
+
+source_pack:
+  branch: normative-recovery-2026-10-06
+  canonical_audit: 01_Normative_Base/_Machine/audit/ENGINEERING_SYSTEMS_PRIORITY_AUDIT_2026-10-06.yaml
+  status: recovery_design_only
+  selection_status_allowed: [confirmed]
+  legacy_rules: exclude_until_migrated
+
+confirmed_candidate_packs:
+  - 01_Normative_Base/_Machine/rules/trc_sp464_hotfix_2026-10-06.yaml
+  - 01_Normative_Base/_Machine/rules/trc_sp464_recovery_2026.yaml
+  - 01_Normative_Base/_Machine/rules/trc_sp464_food_geometry_2026.yaml
+  - 01_Normative_Base/_Machine/rules/trc_sp464_food_fire_2026.yaml
+  - 01_Normative_Base/_Machine/rules/trc_sp464_food_vent_2026.yaml
+  - 01_Normative_Base/_Machine/rules/trc_sp464_appendix_v_change1_a_2026.yaml
+  - 01_Normative_Base/_Machine/rules/trc_sp464_change1_remaining_confirmed_2026.yaml
+  - 01_Normative_Base/_Machine/rules/water_sewer_core_sp30_current_2026.yaml
+  - 01_Normative_Base/_Machine/rules/hot_water_core_sp30_current_2026.yaml
+  - 01_Normative_Base/_Machine/rules/communications_core_sp134_current_2026.yaml
+  - 01_Normative_Base/_Machine/rules/trc_sp464_communications_2026.yaml
+  - 01_Normative_Base/_Machine/rules/trc_sp464_vertical_transport_2026.yaml
+  - 01_Normative_Base/_Machine/rules/trc_sp464_functional_classification_2026.yaml
+
+quarantine_exclusions:
+  - 01_Normative_Base/_Machine/rules/trc_sp464_engineering_section11_quarantine_2026.yaml
+  - 01_Normative_Base/_Machine/evidence/table_sp464_E1_foodservice_2026.yaml
+  - 01_Normative_Base/_Machine/rules/trc_sp464_appendix_v_change1_b_2026.yaml
+
+compiled_blocks: {}
+
+selection_order:
+  - exact_object_match
+  - exact_requested_module
+  - active_function_filter
+  - confirmed_status_gate
+  - dependency_closure
+  - scoped_fast_pack_for_exact_uncompiled_edge
+
+fallback:
+  engine: FAST_PACK
+  mode: exact_object_confirmed_edge_only
+  forbidden:
+    - full_rules_scan
+    - generic_trade_substitution
+    - other_object_class_substitution
+    - parent_class_substitution
+    - automatic_use_of_needs_recheck_rules
+    - automatic_use_of_quarantine_rules
+  triggers:
+    - requested_module_not_compiled
+    - exact_confirmed_rule_edge_available
+    - active_embedded_function_requires_explicit_function_branch
+
+release_constraints:
+  authoritative_use: false
+  reason:
+    - no_compiled_trc_blocks_yet
+    - full_SP464_section11_A1_promotion_not_complete
+    - appendix_E_A1_table_promotion_not_complete
+    - reverse_audit_of_legacy_SP464_recovery_not_complete
+  current_machine_state:
+    exact_route_exists: true
+    confirmed_fast_pack_allowed: true
+    quarantine_runtime_use: false
+    confirmed_water_sewer_fast_pack_available: true
+    confirmed_communications_fast_pack_available: true
+    full_trc_release_complete: false

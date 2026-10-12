@@ -1,0 +1,127 @@
+policy_version: 2
+mode: compiled_blocks_first_with_edge_scoped_fastpack_fallback
+objective: "Максимизировать скорость написания кода: выбирать готовые блоки по точному типу объекта, разделу и глубине; статус нормативного релиза проверять отдельно от структурной исполнимости блока."
+
+primary_path:
+  - step: classify_object
+    output: [object_class, object_subclass, active_functions]
+  - step: resolve_requested_depth
+    output: [active_modules, module_depths]
+  - step: select_preset_or_blocks
+    rule: "Выбрать заранее скомпилированные block_id для точного типа здания и требуемой глубины."
+  - step: resolve_block_dependencies
+    rule: "Добавить только обязательную dependency closure выбранных блоков."
+  - step: validate_structural_execution
+    require:
+      - exact_object_scope_match
+      - requested_module_depth_match
+      - compiled_block_schema_valid
+      - mandatory_dependency_blocks_exist
+      - no_blocking_structural_conflict_for_requested_operation
+    note: "release_status=audited_ready НЕ является обязательным для структурного/code execution."
+  - step: resolve_normative_authority
+    outputs: [normative_authority, unresolved_normative_edges]
+  - step: execute_blocks
+    rule: "Передать в генератор только project_state + выбранные блоки + текущий пользовательский запрос + нормативный статус затронутых edge."
+
+release_semantics:
+  audited_ready:
+    structural_execution: allowed
+    normative_authority: allowed_within_pinned_scope
+    fast_pack_due_to_release_status_alone: false
+  design_only:
+    structural_execution: allowed
+    normative_authority: forbidden
+    behavior:
+      - "Разрешена генерация геометрии, anchors, типов, маршрутов, check requests и иных явно structural/design outputs блока."
+      - "Нельзя представлять unresolved/quarantined normative value как подтвержденную норму."
+      - "FAST PACK запускается только если текущая операция реально требует unresolved normative edge, а не просто потому, что весь block design_only."
+      - "Выход должен сохранять unresolved_normative_checks/normative_status."
+  quarantined:
+    structural_execution: forbidden_by_default
+    normative_authority: forbidden
+    exception: "Только явный отдельный audit/recovery workflow; не штатная генерация проекта."
+  stale:
+    structural_execution: conditional
+    normative_authority: forbidden_until_revision_check
+    behavior: "Если изменение редакции может затронуть текущий output — активировать точный stale edge; иначе сохраненную чисто техническую code structure можно использовать без нормативного утверждения."
+  blocked:
+    structural_execution: forbidden_for_blocked_operation
+    normative_authority: forbidden
+
+operation_edge_resolution:
+  rule: "Оценивать не весь block целиком, а только нормативные edge, реально требуемые requested_operation."
+  examples:
+    - case: "IZHS.SHELL.CORE создает стены/этажи по заданной пользователем геометрии, а незакрытый SP17 roof-detail edge не используется."
+      result: "Выполнить shell delta без FAST PACK по SP17."
+    - case: "Пользователь просит нормативный уклон выбранной кровли, а IZHS.ROOF.DETAILS имеет stale SP17 edge."
+      result: "Активировать только SP17 edge fallback/audit; не перечитывать shell/VK/EOM/HVAC."
+    - case: "IZHS.GEOTECH.CORE вызван без достаточных изысканий."
+      result: "Сформировать missing-input/check outputs; не запускать broad normative search и не выдавать размеры фундамента."
+    - case: "IZHS.HVAC.SCHEMATIC использует уже скомпилированные SP55 room targets, а working-depth SP60 edge не затронут."
+      result: "Выполнить schematic outputs; не открывать SP60 только из-за design_only статуса блока."
+
+fallback_path:
+  engine: FAST_PACK
+  priority: reserve_only
+  activate_only_when_any:
+    - IMPLEMENTED_BLOCK_MISSING
+    - REQUESTED_DEPTH_NOT_IMPLEMENTED_AND_LOWER_DEPTH_INSUFFICIENT
+    - REQUEST_TOUCHES_UNRESOLVED_NORMATIVE_EDGE
+    - BLOCK_STALE_SOURCE_REVISION_AFFECTS_REQUEST
+    - BLOCK_SCOPE_MISMATCH
+    - MANDATORY_BLOCK_DEPENDENCY_UNRESOLVED
+    - BLOCK_CONFLICT_AFFECTS_REQUEST
+    - NOVEL_FUNCTION_COMBINATION
+    - MIXED_USE_DEPENDENCY_NOT_PRECOMPILED
+    - LOCAL_OR_REGIONAL_RULESET_NOT_PRECOMPILED
+    - SPECIAL_TECHNICAL_CONDITIONS
+    - FIRE_RISK_OR_CASE_SPECIFIC_JUSTIFICATION
+    - USER_EXPLICITLY_REQUESTS_NORMATIVE_RESEARCH
+  behavior:
+    - "Искать только в точном object route и затронутых модулях."
+    - "Открывать только unresolved/stale edge, который действительно нужен текущей операции."
+    - "Не выполнять fallback по всей нормативной библиотеке."
+    - "Вернуть минимальный dynamic pack, закрывающий конкретный пробел."
+    - "Не менять готовые блоки без явной причины."
+
+not_fallback_triggers:
+  - case: "Block release_status == design_only, но requested operation не использует unresolved normative edge."
+    action: "Исполнить structural/code часть блока; сохранить normative_authority=false."
+  - case: "Не хватает площади/вместимости/высоты/числа приборов/массы оборудования."
+    action: "Оставить готовый parametric block; получить или вычислить runtime input."
+  - case: "Нет инженерно-геологических, провайдерских или иных проектных исходных данных."
+    action: "Вернуть missing-input/check request; не заменять отсутствие исходных данных нормативным поиском."
+  - case: "Норма содержит applies_when/not_applicable_when."
+    action: "Оценить guard внутри готового блока."
+  - case: "Норма содержит формулу."
+    action: "Исполнить calculator внутри готового блока, если его нормативный источник выпущен для требуемого уровня authority; иначе вернуть расчетный check как unresolved."
+  - case: "Нужно выбрать одно из заранее известных подусловий."
+    action: "Выбрать ветвь parametric block, не запускать поиск."
+
+blockability_classes:
+  PRECOMPILE_STATIC:
+    criteria: ["состав применимых норм известен", "scope однозначен", "нет нерешенных обязательных edge для данного output"]
+  PRECOMPILE_PARAMETRIC:
+    criteria: ["нормативная цепочка известна заранее", "результат зависит от проектных параметров"]
+  PRECOMPILE_COMPOSITE:
+    criteria: ["междисциплинарная dependency closure известна и маршрутизирована именованными blocks"]
+  DYNAMIC_ONLY:
+    criteria:
+      - "сам набор применимых норм нельзя надежно определить до анализа конкретной ситуации"
+    examples: ["непредусмотренная смешанная функция", "СТУ", "расчет пожарного риска", "локальный overlay без готового блока", "неразрешенный нормативный конфликт"]
+
+promotion_loop:
+  rule: "FAST PACK не должен навсегда оставаться динамическим, если ситуация повторяется."
+  steps:
+    - "Сохранить причину fallback и фактически использованный минимальный набор правил."
+    - "Провести отдельный evidence/dependency audit."
+    - "Если scope повторяем и closure закрыта — создать новый static/parametric/composite block."
+    - "Только после evidence + compile gates перевести normative release в audited_ready."
+
+safety:
+  - "Нельзя использовать блок другого типа здания как fallback."
+  - "Нельзя считать design_only/quarantined block нормативно авторитетным."
+  - "Design_only structural execution не снимает unresolved_normative_checks и не повышает confidence нормативных значений."
+  - "Нельзя автоматически промотировать dynamic FAST PACK в audited_ready block."
+  - "Отсутствующие проектные исходные данные нельзя выдумывать или заменять поиском похожей нормы."

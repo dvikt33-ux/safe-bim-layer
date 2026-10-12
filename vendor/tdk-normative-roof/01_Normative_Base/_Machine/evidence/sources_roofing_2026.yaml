@@ -1,0 +1,57 @@
+registry_fragment_version: 2
+verified_at: '2026-10-03'
+sources:
+  - source_id: SP-17-13330-2017-GARANT
+    title: 'СП 17.13330.2017 Кровли. Актуализированная редакция СНиП II-26-76'
+    source_tier: A1_primary_legal_system
+    provider: GARANT
+    url: 'https://base.garant.ru/71729740/'
+    valid_from: '2017-12-01'
+    approving_act: 'Приказ Минстроя России от 31.05.2017 N 827/пр'
+    amendments:
+      - title: 'Изменение N 1'
+        approving_act: 'Приказ Минстроя России от 18.02.2019 N 111/пр'
+        valid_from: '2019-08-19'
+      - title: 'Изменение N 2'
+        approving_act: 'Приказ Минстроя России от 29.12.2020 N 890/пр'
+        valid_from: '2021-06-30'
+        url: 'https://base.garant.ru/400437167/'
+      - title: 'Изменение N 3'
+        approving_act: 'Приказ Минстроя России от 31.05.2022 N 434/пр'
+        valid_from: '2022-06-30'
+      - title: 'Изменение N 4'
+        approving_act: 'Приказ Минстроя России от 06.12.2023 N 873/пр'
+        valid_from: '2024-01-07'
+        url: 'https://base.garant.ru/408556555/'
+      - title: 'Изменение N 5'
+        approving_act: 'Приказ Минстроя России от 09.12.2024 N 843/пр'
+        valid_from: '2025-01-10'
+        url: 'https://base.garant.ru/411461695/'
+    status: verified_current_revision_chain
+    content_access: partial_text
+    text_opened: true
+    locator_read: true
+    exact_locators_checked_2026_10_03:
+      - '4.3 and Table 4.1 rule structure; numeric rows require Amendment N5 overlay where changed'
+      - '4.10'
+      - '5.1.9'
+      - '5.1.20'
+      - '5.1.25'
+      - '5.1.27'
+      - '5.3.1'
+      - '5.3.4 via Amendment N4; N5 does not modify 5.3.4'
+      - '5.4.3'
+      - '5.4.5'
+      - '5.4.6 via Amendment N5'
+      - '5.5.1-5.5.2'
+      - '6.1.4'
+      - 'Appendix A, Table A.2'
+    audit_note: 'Reverse audit 2026-10-03 found the old evidence passport stale: it tracked only Amendments N1-N2 while GARANT lists N1-N5. Current consolidated search text can lag an amendment at a changed locator (e.g. Table 4.1/5.4.6), therefore any locator explicitly modified by N5 is resolved from the opened N5 text, not by blindly trusting an older consolidated rendering. Unchanged opened locators may be confirmed from current GARANT text. Old hardcoded 50 mm ventilation-gap rule is not retained: Table A.2 is parametric by slope and roof-slope length.'
+    verification:
+      source_tier: A1_primary_legal_system
+      content_access: partial_text
+      text_opened: true
+      locator_read: true
+      source_url: 'https://base.garant.ru/71729740/'
+      checked_at: '2026-10-03'
+      method: 'Opened GARANT current SP17 page and exact Amendment N4/N5 pages; compared changed locators against amendment text and read selected current clauses/tables directly.'

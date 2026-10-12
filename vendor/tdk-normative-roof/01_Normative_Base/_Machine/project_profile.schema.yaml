@@ -1,0 +1,126 @@
+schema_version: 2
+purpose: "Минимальный профиль проекта для маршрутизации нормативной базы без чтения нерелевантных разделов."
+
+project_profile:
+  required:
+    - object_class
+    - object_subclass
+    - active_functions
+    - modules
+  fields:
+    object_class: string
+    object_subclass: string
+    active_functions: [string]
+    jurisdiction: string
+    project_phase: string
+    requested_subject: string
+    modules:
+      type: map
+      key: "module id from module_taxonomy.yaml"
+      value: "one allowed depth level for that module"
+    explicit_dependencies: [string]
+    exclusions: [string]
+    location:
+      type: map
+      purpose: "Identity only. Numeric climate/PZZ values are not stored here; they are supplied by an audited locality overlay."
+      fields:
+        country_code: string
+        subject_rf: string
+        municipality: string
+        settlement: string
+        address_or_site_label: string
+        cadastral_number: string
+        coordinates:
+          latitude: number
+          longitude: number
+        locality_overlay_ref: string
+
+semantics:
+  unspecified_module: off
+  unspecified_function: inactive
+  unspecified_object_subclass: invalid_profile
+  empty_active_functions: allowed_for_single_function_objects
+  project_phase_does_not_enable_modules: true
+  module_depth_is_independent: true
+  location_is_not_a_source_of_numeric_normative_values: true
+  central_russia_is_not_a_numeric_climate_value: true
+  location_dependent_modules_fail_closed_without_audited_overlay: true
+
+location_resolution_contract:
+  resolver_schema: 01_Normative_Base/_Machine/locality_overlay.schema.yaml
+  identity_requirement:
+    - "A settlement name alone may be insufficient where map boundaries, territorial zones or parcel-specific planning constraints matter."
+    - "Use cadastral number and/or coordinates when needed to resolve the applicable map/territorial-zone branch."
+  fail_closed_for_unresolved:
+    - sp20_snow_input
+    - sp20_wind_region
+    - sp131_climate_inputs
+    - sp50_thermal_climate_inputs
+    - local_PZZ_parameters
+    - GPZU_site_parameters_when_used
+  forbidden:
+    - "infer numeric climate values from the label Central Russia"
+    - "infer snow/wind region from model memory"
+    - "invent local PZZ/GPZU parameters"
+    - "reuse an overlay from another settlement or territorial zone without an explicit applicability match"
+
+retrieval_contract:
+  candidate_rule_must_match:
+    - object_class/object_subclass
+    - active function when function-specific
+    - at least one active module or explicit cross-module target
+    - requested module depth
+    - jurisdiction when scoped
+    - locality/overlay scope when the rule or input is location-dependent
+    - applicability conditions
+    - confirmed evidence gate
+  forbidden:
+    - "enable all disciplines because project_phase=working"
+    - "enable all engineering systems because architecture depth is detailed"
+    - "fallback to another building type when exact route is empty"
+    - "scan complete rules directory when route manifest exists or is required"
+    - "fallback from missing locality overlay to a regional average"
+
+examples:
+  izhs_shell:
+    object_class: residential
+    object_subclass: izhs
+    active_functions: []
+    modules:
+      architecture: shell
+      structures: concept
+      fire_safety: concept
+      water_supply: off
+      sewerage: off
+      heating: off
+      ventilation: off
+      electrical_power: off
+
+  izhs_arch_details_with_water:
+    object_class: residential
+    object_subclass: izhs
+    active_functions: []
+    modules:
+      architecture: details
+      structures: developed
+      fire_safety: developed
+      water_supply: schematic
+      sewerage: schematic
+      electrical_power: off
+      ventilation: off
+
+  multifunctional_trade_with_electrical:
+    object_class: public
+    object_subclass: multifunctional
+    active_functions: [trade, food_service]
+    modules:
+      general_plan: developed
+      architecture: developed
+      accessibility: developed
+      fire_safety: developed
+      evacuation: developed
+      electrical_power: schematic
+      lighting: schematic
+      water_supply: off
+      sewerage: off
+      ventilation: off

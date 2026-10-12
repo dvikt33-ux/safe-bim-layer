@@ -1,0 +1,86 @@
+block_id: IZHS.ELEMENTS.CORE
+version: '0.2.0'
+object_scope:
+  object_classes: [residential.izhs]
+  object_subclasses: [detached_single_family]
+  functions: []
+  jurisdictions: [RU]
+module: architecture
+depth: shell
+block_kind: static
+release_status: design_only
+source_pack_ref:
+  branch: normative-audit-2026-10-02
+  primary_rule_file: 01_Normative_Base/_Machine/rules/residential_izhs.yaml
+  release_set: 01_Normative_Base/_Machine/audit/IZHS_CENTRAL_RUSSIA_RELEASE_SET_2026-10-03.yaml
+  note: 'Runtime scope uses only canonical Central-release rule ids. Historical imported SP55 ids remain navigation/history only and are not executable authority.'
+normative_closure:
+  rule_ids:
+    - IZH55-SCOPE-001
+  source_ids:
+    - SP-55-13330-2016-GARANT
+  source_revision_hash: sp55_amendment2_scope_2026-10-03
+  dependency_blocks: []
+  optional_dependency_blocks: []
+  unresolved_dependencies:
+    - 'Mobile-building exclusion is outside the exact residential.izhs release selector; object classification must reject mobile objects before this block is routed.'
+  conflicts: []
+runtime_interface:
+  required_inputs:
+    - project_id
+    - intended_use
+    - detached_or_blocked
+    - aboveground_storeys
+    - building_height_m
+    - mobile_or_capital
+  optional_inputs:
+    - preferred_wall_system
+    - preferred_floor_system
+    - preferred_roof_system
+    - preferred_window_family
+    - preferred_door_family
+  derived_inputs:
+    - profile_applicable
+    - object_subclass
+  guards:
+    - aboveground_storeys <= 3
+    - building_height_m <= 20
+    - mobile_or_capital == capital
+    - detached_or_blocked == detached
+  calculators: []
+  model_anchors_read: []
+  model_entities_write:
+    - story_types
+    - wall_types
+    - slab_types
+    - roof_types
+    - opening_types
+    - window_types
+    - door_types
+    - stair_types
+    - railing_types
+    - material_bindings
+    - stable_id_registry
+  outputs:
+    - reusable_type_ids
+    - library_object_ids
+    - stable_id_registry
+code_assets:
+  template_files:
+    - 03_Archicad_Template/07_AR_GOST_Spec.md
+  library_types: []
+  helper_functions:
+    - ensure_type_exists
+    - ensure_library_object_exists
+    - register_stable_id
+execution_semantics:
+  create_geometry: false
+  idempotent: true
+  reuse_existing_types: true
+  full_normative_scan: forbidden
+fallback:
+  allowed: true
+  trigger_codes:
+    - READY_BLOCK_MISSING
+    - BLOCK_SCOPE_MISMATCH
+    - NOVEL_FUNCTION_COMBINATION

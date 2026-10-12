@@ -1,0 +1,84 @@
+route_version: 1
+object_type: residential.mkd
+route_status: design_only
+purpose: >-
+  Minimal exact-object MKD recovery route: verified architecture shell subset -> compiled recovery block -> scoped
+  fallback for all unimplemented depths/modules. No cross-class or parent fallback.
+
+scope:
+  include_object_classes: [residential.mkd]
+  exclude_object_classes:
+    - residential.izhs
+    - residential.blocked_individual
+    - public.*
+    - industrial.*
+    - warehouse.*
+    - transport.*
+  cross_class_fallback: forbidden
+  parent_fallback: forbidden
+
+source_pack:
+  branch: normative-recovery-2026-10-06
+  canonical_audit: 01_Normative_Base/_Machine/audit/MKD_RECOVERY_DELTA_2026-10-06.yaml
+  status: recovery_design_only
+  legacy_rules: exclude_until_migrated
+
+confirmed_candidate_packs:
+  - 01_Normative_Base/_Machine/rules/residential_mkd_engineering_sp54_current_delta_2026.yaml
+  - 01_Normative_Base/_Machine/rules/water_sewer_core_sp30_current_2026.yaml
+  - 01_Normative_Base/_Machine/rules/hot_water_core_sp30_current_2026.yaml
+  - 01_Normative_Base/_Machine/rules/communications_core_sp134_current_2026.yaml
+
+quarantine_exclusions:
+  - 01_Normative_Base/_Machine/rules/residential_mkd_engineering_sp54_section9_quarantine_2026.yaml
+  - 01_Normative_Base/_Machine/rules/residential_mkd_engineering_recovery_2026.yaml
+
+block_catalog: 04_Code_Generation/block_catalog/residential.mkd.yaml
+
+compiled_blocks:
+  architecture:
+    shell:
+      - 04_Code_Generation/blocks/residential.mkd/MKD.SHELL.RECOVERY.yaml
+
+selection_order:
+  - exact_object_match
+  - exact_requested_module
+  - exact_requested_depth
+  - dependency_closure
+  - block_release_check
+  - execute_compiled_block
+  - scoped_fast_pack_only_for_unresolved_or_unimplemented_edge
+
+fallback:
+  engine: FAST_PACK
+  mode: minimal_gap_only
+  forbidden:
+    - full_rules_scan
+    - other_object_class_substitution
+    - parent_class_substitution
+    - automatic_use_of_legacy_needs_recheck_rules
+  triggers:
+    - requested_depth_not_implemented
+    - selected_block_stale
+    - selected_block_dependency_unresolved_for_requested_operation
+    - novel_embedded_function
+    - local_or_regional_overlay_missing
+    - special_technical_conditions
+    - fire_risk_case_specific
+
+release_constraints:
+  authoritative_use: false
+  reason:
+    - route_contains_only_recovery_architecture_shell
+    - compiled_block_release_status_is_design_only
+    - full_SP54_gap_audit_not_complete
+    - engineering_and_parking_blocks_not_yet_compiled
+    - water_sewer_and_communications_are_confirmed_fast_pack_candidates_but_not_compiled_blocks
+  current_machine_state:
+    canonical_recovery_audit_version: 6
+    exact_route_exists: true
+    architecture_shell_compiled: true
+    confirmed_water_sewer_fast_pack_available: true
+    confirmed_communications_fast_pack_available: true
+    quarantined_SP54_section9_runtime_use: false
+    full_mkd_release_complete: false

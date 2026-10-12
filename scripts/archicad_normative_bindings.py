@@ -166,3 +166,11 @@ def attach_to_project_pack(project_pack,normative):
     result=copy.deepcopy(project_pack);result['normativePackDigest']=normative['normativePackDigest']
     result['normativeRequirementBindings']=copy.deepcopy(normative['bindings'])
     return result
+
+
+def evaluate_existing_machine_requirements(normative,context,requirements,junctions,
+                                            source_checks,profile,**selection):
+    """Use the mounted machine base through the existing normative contour."""
+    import archicad_normative_machine as MACHINE
+    return MACHINE.integrate_existing_machine(normative,context,requirements,junctions,
+                                              source_checks,profile,**selection)
