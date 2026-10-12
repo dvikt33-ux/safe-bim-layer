@@ -1,0 +1,14 @@
+{
+  "head": "32b9f6f670e0c8bfb723172259436e28d1a2100e",
+  "status": "COMMITTED_GITHUB_BLOBS_MATCH",
+  "files": [
+    {
+      "path": "scripts/archicad_details_context.py",
+      "sha": "4622c6ee5177c16cf4162d369638b7a2111b01de"
+    },
+    {
+      "path": "tests/test_archicad_construction_junctions.py",
+      "sha": "7effe9ff81b515088f6b52233ea068ec152077c7"
+    }
+  ]
+}
