@@ -206,8 +206,8 @@ def underside_contact_geometry(wall,roof,expected_area,expected_plane=None):
         'wallEntirelyBelowUnderside':True,'holesPreservedInContactCheck':True}
 
 
-def wall_roof_underside_gap(wall,roof):
-    """Measure a flat native wall cap against the actual sloped roof underside."""
+def wall_roof_face_overlap(wall,roof):
+    """Actual flat cap and lower-face XY polygons, including every hole."""
     from shapely.geometry import Polygon
     from shapely.ops import unary_union
     if wall.get('type')!='Wall' or wall.get('homeStory')!=roof.get('homeStory'):
@@ -227,13 +227,217 @@ def wall_roof_underside_gap(wall,roof):
     cap=polygons(wall,lambda f:all(abs(v[2]-top)<1e-6 for v in f['points']))
     underside=polygons(roof,lambda f:all(abs(sum(n[k]*v[k] for k in range(3))-d)<1e-6 for v in f['points']))
     overlap=cap.intersection(underside)
+    return cap,underside,overlap,top,plane
+
+
+def wall_roof_underside_gap(wall,roof):
+    """Measure only where an actual lower roof face covers the native cap."""
+    cap,underside,overlap,top,plane=wall_roof_face_overlap(wall,roof)
+    n,d=plane['normal'],plane['distance']
     if overlap.area<=1e-8:raise ValueError('GAP_NO_ACTUAL_PROJECTED_FACE_OVERLAP')
     parts=[overlap] if overlap.geom_type=='Polygon' else [g for g in overlap.geoms if g.geom_type=='Polygon']
     gaps=[(d-n[0]*x-n[1]*y)/n[2]-top for part in parts for x,y in part.exterior.coords]
     return {'status':'ACTUAL_NATIVE_UNDERSIDE_GAP_MEASURED','minimumVerticalGapMeters':min(gaps),
         'maximumVerticalGapMeters':max(gaps),'projectedOverlapAreaSquareMeters':overlap.area,
+        'wallCapAreaSquareMeters':cap.area,'uncoveredCapAreaSquareMeters':cap.difference(underside).area,
+        'coverageFraction':overlap.area/cap.area,'expectedOverlapContactSquareMeters':overlap.area/n[2],
         'wallTopAbsoluteZ':top,'roofUndersidePlane':plane,'authority':'ACTUAL_NATIVE_FACE_OVERLAP; not bounding-box separation',
         'engineeringAcceptance':'ENGINEERING_NOT_VERIFIED'}
+
+
+def assess_wall_roof_junction(wall,roof,wall_details,roof_details,solid_links):
+    """Qualify the proven SEO recipe, never confuse partial with full support.
+
+    VERIFIED means measured geometry only; no analysis promotes a repair.
+    The complete-cap recipe is deliberately narrower than partial contact.
+    """
+    result={'schema':'APA_WALL_ROOF_JUNCTION_PLAN_V1','status':'NOT_VERIFIED',
+        'wallGuid':wall['guid'],'roofGuid':roof['guid'],'nativeWrites':0,
+        'repairExecuted':False,'engineeringAcceptance':'ENGINEERING_NOT_VERIFIED'}
+    try:
+        if any(not b.get('closed') or b.get('curved') for e in (wall,roof) for b in e['bodies']):
+            raise ValueError('DIRECT_RECIPE_REQUIRES_CLOSED_PLANAR_NATIVE_BODIES')
+        gap=wall_roof_underside_gap(wall,roof)
+        cap,underside,overlap,top,plane=wall_roof_face_overlap(wall,roof)
+        result.update(measurementStatus='VERIFIED',gap=gap,
+            actualCapProjection=cap.__geo_interface__,actualLowerFaceProjection=underside.__geo_interface__,
+            uncoveredCapProjection=cap.difference(underside).__geo_interface__,
+            nativeBindings=[{'guid':e['guid'],'geometryHash':C.RUN.digest(C.ROOF.geometry_signature(e)),
+                'materialBindings':copy.deepcopy(e['materialBindings']),'homeStory':e['homeStory']} for e in (wall,roof)])
+        w=wall_details['details'];r=roof_details['details']
+        if (wall_details['type']!='Wall' or roof_details['type']!='Roof' or
+                wall_details['floorIndex']!=wall['homeStory'] or roof_details['floorIndex']!=roof['homeStory'] or
+                w.get('geometryType')!='Straight' or w.get('arcAngle')!=0 or w.get('profileType')!='Normal' or
+                w.get('structureType')!='Basic' or w.get('relativeTopStory')!=0 or
+                w.get('isAutoOnStoryVisibility') is not False or
+                r.get('roofClass')!='SinglePlane' or r.get('structureType')!='Basic'):
+            raise ValueError('DIRECT_RECIPE_TYPED_SOURCE_UNSUPPORTED')
+        if (not isinstance(solid_links,dict) or
+                any(not isinstance(solid_links.get(k),list) for k in ('solidLinksWithTheGivenTarget','solidLinksWithTheGivenOperator'))):
+            raise ValueError('SEO_RELATION_STATE_NOT_READABLE')
+        reasons=[]
+        if gap['uncoveredCapAreaSquareMeters']>1e-8:reasons.append('ACTUAL_LOWER_FACE_DOES_NOT_COVER_COMPLETE_WALL_CAP')
+        if r.get('holes'):reasons.append('ROOF_HOLE_BEHAVIOR_NOT_QUALIFIED_SKIP_FLAG_NOT_VERIFIED')
+        if any(solid_links.values()):reasons.append('EXISTING_SEO_DEPENDENCIES_REQUIRE_SEPARATE_PLAN')
+        if gap['minimumVerticalGapMeters'] < -1e-6:reasons.append('EXISTING_PENETRATION_REQUIRES_SEPARATE_PLAN')
+        if gap['maximumVerticalGapMeters']<=1e-6:reasons.append('NO_POSITIVE_GAP_REPAIR_REQUIRED')
+        # The temporary uncut height comes from actual roof vertices, not an
+        # invented margin, bearing dimension or load-transfer assumption.
+        base=min(v[2] for b in wall['bodies'] for v in b['vertices'])
+        roof_top=max(v[2] for b in roof['bodies'] for v in b['vertices'])
+        cap_points=[p for f in C.G.planar_faces(wall) if all(abs(p[2]-top)<1e-6 for p in f['points']) for p in f['points']]
+        required_top=max((plane['distance']-plane['normal'][0]*p[0]-plane['normal'][1]*p[1])/plane['normal'][2] for p in cap_points)
+        if roof_top+1e-6<required_top:reasons.append('MEASURED_ROOF_TOP_DOES_NOT_REACH_ALL_CAP_PLANE_POINTS')
+        operations=[{'id':'raise-wall','command':'ModifyWalls','params':{'wallsWithDetails':[{'elementId':{'guid':wall['guid']},'height':roof_top-base}]}},
+            {'id':'seo-underside','command':'CreateSolidElementLinks','after':['raise-wall'],
+             'params':{'solidLinks':[{'targetId':{'guid':wall['guid']},'operatorId':{'guid':roof['guid']},'operation':'SubtractionUpwards',
+                'linkFlags':{'inheritOperatorAttributes':False,'skipPolygonHoles':True}}]}}]
+        result.update(status='NOT_APPLICABLE' if reasons else 'APPLICABLE_NOT_EXECUTED',reasons=reasons,
+            operationCandidates=operations,executionAllowed=not reasons,wallDetailsBefore=copy.deepcopy(wall_details),
+            expectedCompleteContactSquareMeters=cap.area/plane['normal'][2],
+            temporaryUncutTopZ=roof_top,requiredLowerPlaneTopZ=required_top,
+            cause={'vertical':'Flat wall cap at fixed height while actual roof underside slopes above it',
+                'coverage':'Native lower roof contour leaves part of the wall cap outside its footprint' if gap['uncoveredCapAreaSquareMeters']>1e-8 else 'Complete actual lower-face coverage'},
+            alternative={'tool':'Native single-plane Roof contour editing, then native Wall height + SEO',
+                'requiredGeometry':cap.difference(underside).__geo_interface__,
+                'authority':'Measured uncovered wall-cap footprint; minimum coverage requirement, not an approved roof design or overhang',
+                'contract':'Inspected ModifyRoofs implementation rejects SinglePlane roofs. Native UI/SDK single-plane memo edit must be qualified separately.',
+                'status':'NOT_VERIFIED_REQUIRES_CONTOUR_DESIGN_AND_SEPARATE_COPY_AUTHORIZATION'},
+            acceptance=['Actual complete lower-face contact area','All target Wall vertices below pinned underside plane',
+                'Same Wall/Roof GUID, material, story and plan placement','SEO relation and explicit flag metadata status',
+                'All other baseline native signatures unchanged','No new collision pairs','Save/Open and independent readback'],
+            nativeFlagReadback='NOT_VERIFIED_REQUEST_READBACK_DIFFERENCE_FROM_PR63',
+            scope='COMPLETE_ACTUAL_WALL_CAP_UNDERSIDE_CONTACT; partial overlapping contact is not full repair')
+    except (ValueError,KeyError,TypeError) as exc:
+        result.update(status='NOT_VERIFIED',executionAllowed=False,reasons=[str(exc)])
+    result['assessmentHash']=C.RUN.digest(result)
+    return result
+
+
+def prepare_wall_roof_repair(source,assessment):
+    """Bind a qualified exact target to the existing BIM Graph, no new writer."""
+    if (assessment.get('status')!='APPLICABLE_NOT_EXECUTED' or not assessment.get('executionAllowed') or
+            assessment.get('assessmentHash')!=C.RUN.digest({k:v for k,v in assessment.items() if k!='assessmentHash'})):
+        raise ValueError('WALL_ROOF_COMPLETE_CAP_RECIPE_NOT_QUALIFIED')
+    plan={k:copy.deepcopy(source['preflight'][k]) for k in ('binding','storyBindings','schemaVersion','schemaSha256')}
+    plan['graph']={'operations':copy.deepcopy(assessment['operationCandidates'])}
+    checked=C.A.SCENE.GRAPH.compile_graph(C.A.catalog_with_provenance(C.RUN.DEFAULT_SCENE_SCHEMA),plan['graph'],runtime_version=C.RUN.EXPECTED_TAPIR)
+    if checked['status']!='PLAN_VALIDATED_OFFLINE':raise ValueError('WALL_ROOF_REPAIR_GRAPH_NOT_VALID')
+    plan['executionOrder']=checked['executionOrder']
+    plan['integrationBindings']={'enabled':['wall','roof'],'retainedGuidHash':C.RUN.digest(source['inventory']),
+        'dependencies':{'wallRoofRepair':copy.deepcopy(assessment)}}
+    plan['sourcePlanHash']=C.RUN.native_plan_hash(plan,checked['sourcePlanHash'])
+    return plan
+
+
+def execute_wall_roof_repair(writer,plan,baseline,authorization,scene_id):
+    """Two bounded calls through the retained writer, only in an approved copy.
+
+    A partial result stops the sequence. No replay, save or rollback here;
+    accepted geometry in the source PLN is never an authorized target.
+    """
+    from pathlib import Path
+    import hashlib
+    a=plan.get('integrationBindings',{}).get('dependencies',{}).get('wallRoofRepair',{})
+    if (a.get('status')!='APPLICABLE_NOT_EXECUTED' or not a.get('executionAllowed') or
+            a.get('assessmentHash')!=C.RUN.digest({k:v for k,v in a.items() if k!='assessmentHash'})):
+        raise ValueError('WALL_ROOF_COMPLETE_CAP_RECIPE_NOT_QUALIFIED')
+    binding=plan['binding']
+    if (not isinstance(authorization,dict) or not authorization.get('humanAuthorizationRef') or
+            authorization.get('scope')!='ONE_WALL_HEIGHT_AND_UNDERSIDE_SEO_IN_SEPARATE_COPY' or
+            authorization.get('sourcePlanHash')!=plan['sourcePlanHash'] or
+            authorization.get('wallGuid','').lower()!=a['wallGuid'].lower() or
+            authorization.get('copyBinding')!=binding or not authorization.get('protectedSourcePath') or
+            authorization['protectedSourcePath'].casefold()==binding['path'].casefold() or
+            not isinstance(authorization.get('savedSha256'),str) or len(authorization['savedSha256'])!=64):
+        raise ValueError('SEPARATE_COPY_EXACT_OPERATION_AUTHORIZATION_REQUIRED')
+    want=prepare_wall_roof_repair({'preflight':plan,'inventory':baseline['inventory']},a)
+    if want!=plan:raise ValueError('WALL_ROOF_REVIEWED_PLAN_CHANGED')
+    wall_guid=a['wallGuid'].lower();roof_guid=a['roofGuid'].lower()
+    if (set(baseline['geometrySignatures'])!=set(baseline['inventory']) or
+            wall_guid not in baseline['inventory'] or roof_guid not in baseline['inventory']):
+        raise ValueError('WALL_ROOF_COMPLETE_BASELINE_REQUIRED')
+    expected_height=a['operationCandidates'][0]['params']['wallsWithDetails'][0]['height']
+    writer.required_story=next(s for s in plan['storyBindings'] if s['nativeIndex']==a['wallDetailsBefore']['floorIndex'])
+    raised={}
+
+    def capture(stage):
+        if hashlib.sha256(Path(binding['path']).read_bytes()).hexdigest()!=authorization['savedSha256']:
+            raise ValueError('WALL_ROOF_APPROVED_SAVED_COPY_CHANGED')
+        if writer.guarded_binding()!=binding:raise ValueError('WALL_ROOF_COPY_IDENTITY_DRIFT')
+        inventory=C.A.inventory_guids(writer.api)
+        if inventory!=baseline['inventory']:raise ValueError('WALL_ROOF_GUID_INVENTORY_DRIFT')
+        native=C.G.normalize_dump(writer.api('GetModelDumpV1',{}))
+        signatures=C.retained_geometry_signatures(native,inventory)
+        protected=inventory if stage=='before' else [g for g in inventory if g!=wall_guid]
+        if any(signatures[g]!=baseline['geometrySignatures'][g] for g in protected):
+            raise ValueError('WALL_ROOF_PROTECTED_BASELINE_CHANGED')
+        by_guid={e['guid'].lower():e for e in native['elements']}
+        wall=by_guid[wall_guid];roof=by_guid[roof_guid]
+        expected=a['nativeBindings'][0]
+        if wall['materialBindings']!=expected['materialBindings'] or wall['homeStory']!=expected['homeStory'] or wall['type']!='Wall':
+            raise ValueError('WALL_ROOF_TARGET_MATERIAL_STORY_TYPE_CHANGED')
+        detail=C.RUN.requested_details(writer.api,wall_guid)
+        before=copy.deepcopy(a['wallDetailsBefore'])
+        if stage!='before':before['details']['height']=expected_height
+        if detail!=before:raise ValueError('WALL_ROOF_TARGET_TYPED_PLACEMENT_CHANGED')
+        if stage=='raised' and signatures[wall_guid]!=raised['signature']:
+            raise ValueError('WALL_ROOF_RAISED_BODY_DRIFT')
+        return {'native':native,'wall':wall,'roof':roof,'signature':signatures[wall_guid],
+            'geometryHash':C.RUN.digest(C.ROOF.geometry_signature(wall))}
+
+    def no_links():
+        rows=writer.api('GetSolidElementLinks',{'elements':[{'elementId':{'guid':wall_guid}}]}).get('solidLinks')
+        if (not isinstance(rows,list) or len(rows)!=1 or
+                set(rows[0])!={'solidLinksWithTheGivenTarget','solidLinksWithTheGivenOperator'} or
+                any(rows[0].values())):
+            raise ValueError('WALL_ROOF_EXISTING_RELATION_NO_REPLAY')
+
+    def before_height():
+        state=capture('before');no_links();return {'geometryHash':state['geometryHash']}
+
+    def after_height(reply,before):
+        state=capture('height')
+        cap,_,_,top,_=wall_roof_face_overlap(state['wall'],state['roof'])
+        original=a['actualCapProjection']
+        from shapely.geometry import shape
+        if cap.symmetric_difference(shape(original)).area>1e-8 or not C.RUN.close(top,a['temporaryUncutTopZ'],1e-6):
+            raise ValueError('WALL_ROOF_RAISED_ACTUAL_CAP_CHANGED')
+        raised.update(signature=state['signature'],geometryHash=state['geometryHash'])
+        return {'status':'NATIVE_WALL_HEIGHT_AND_PROTECTED_BASELINE_PASS','geometryHash':state['geometryHash']}
+
+    def before_seo():
+        state=capture('raised');no_links();return {'geometryHash':state['geometryHash']}
+
+    def after_seo(reply,before):
+        proof=roof_bearing_seo_readback(writer.api,wall_guid,roof_guid,before,
+            a['expectedCompleteContactSquareMeters'],a['gap']['roofUndersidePlane'])
+        capture('seo')
+        all_guids=[g for g in baseline['inventory'] if g!=wall_guid]
+        collisions=writer.api('GetCollisions',{'elementsGroup1':[{'elementId':{'guid':wall_guid}}],
+            'elementsGroup2':[{'elementId':{'guid':g}} for g in all_guids]})
+        if collisions.get('collisions')!=baseline.get('targetCollisions'):
+            raise ValueError('WALL_ROOF_NEW_OR_CHANGED_COLLISION_PAIRS')
+        return {'status':'NATIVE_COMPLETE_CAP_JUNCTION_AND_RETAINED_GUIDS_PASS','contact':proof,
+            'engineeringAcceptance':'ENGINEERING_NOT_VERIFIED','persistence':'SAVE_OPEN_NOT_VERIFIED'}
+
+    result={'status':'BLOCKED','automaticRetry':False,'operations':[]}
+    for step,checks in zip(a['operationCandidates'],[(before_height,after_height),(before_seo,after_seo)]):
+        sid=scene_id+'-'+step['id']
+        intent={'sceneId':sid,'sourcePlanHash':plan['sourcePlanHash'],'command':step['command'],
+            'parameters':step['params'],'target':binding}
+        try:
+            receipt=writer.execute_bound_operation(plan,sid,step['command'],step['params'],C.RUN.digest(intent),*checks)
+        except Exception as exc:
+            result.update(status='PARTIAL_OR_UNKNOWN_OUTCOME' if result['operations'] else 'BLOCKED',
+                reason=type(exc).__name__+': '+str(exc),manualReconciliationRequired=bool(result['operations']))
+            return result
+        result['operations'].append(receipt)
+        if receipt['status']!='PASS':
+            result.update(status='PARTIAL_OR_UNKNOWN_OUTCOME',manualReconciliationRequired=True)
+            return result
+    result.update(status='NATIVE_COMPLETE_CAP_REPAIR_UNSAVED_PASS',persistence='SAVE_OPEN_NOT_VERIFIED')
+    return result
 
 
 def prepare_roof_underside_specimen(api,source,context,native,wall_guid,roof_guid):
