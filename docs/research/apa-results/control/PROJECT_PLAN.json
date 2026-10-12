@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 123,
+  "revision": 124,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2760,7 +2760,7 @@
       "action_id": "APA-P70.A02",
       "title": "Связать проектные требования с версиями нормативов и проверяемыми правилами",
       "kind": "BUILD",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 3,
       "work_key": "normative-applicability-pack",
       "depends_on": [
@@ -2787,9 +2787,9 @@
         "External dependencies retained within existing A02.S02: full primary applicable technical clauses/table rows, source-bound actual roof technology/layers, building work/purpose/area/regime/exclusions, engineering evidence. Next functional normative step uses these inputs in the existing evaluator, not a new library. A02.S02 remainsPARTIAL; A05.S01 requires its DONE_PUBLISHED dependency and cannot be dispatched or populated with invented loads."
       ],
       "acceptance": "Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "work-machine-normative-integration-20261012",
+      "lease_until": "2026-10-12T23:52:18Z",
+      "claim_ref": "APA-CLAIM-MACHINE-NORMATIVE-20261012T205218Z",
       "requires_approval": false,
       "evidence": [
         "ART-P70-A02-S02-PR66-20261012",
