@@ -528,6 +528,10 @@ class SceneWriter:
         if binding is not None:
             from archicad_native_operations import verify_roof_trim_source
             verify_roof_trim_source(self.api,binding)
+        repair=preflight.get('integrationBindings',{}).get('dependencies',{}).get('wallRoofRepair')
+        if repair is not None:
+            from archicad_native_operations import verify_roof_trim_source
+            verify_roof_trim_source(self.api,{'sourceBodies':[repair['nativeBindings'][1]]})
 
     def execute_bound_operation(self, preflight, scene_id, command, parameters,
                                 expected_hash, verify_before, verify_after):
@@ -538,7 +542,7 @@ class SceneWriter:
         No replay, second executor or automatic rollback.
         """
         if (command not in {'ConnectMEPElements','ModifyMEPRoutingElements',
-                            'CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks','ModifyMorphs','ModifyBeams','SetClassificationsOfElements','TrimElements'}
+                            'CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks','ModifyMorphs','ModifyBeams','ModifyWalls','SetClassificationsOfElements','TrimElements'}
                 or not _SCENE_ID.fullmatch(scene_id) or not callable(verify_before) or not callable(verify_after)):
             raise ValueError('BOUNDED_OPERATION_ADAPTER_REQUIRED')
         intent={'sceneId':scene_id,'sourcePlanHash':preflight['sourcePlanHash'],
@@ -546,9 +550,17 @@ class SceneWriter:
         if digest(intent)!=expected_hash:raise ValueError('BOUNDED_OPERATION_HASH_MISMATCH')
         slots={'ConnectMEPElements':'connectionsData','ModifyMEPRoutingElements':'routingElementsData',
                'CreateOpenings':'openingsData','CreateSolidElementLinks':'solidLinks','RemoveSolidElementLinks':'solidLinks','ModifyMorphs':'morphsWithDetails',
-               'SetClassificationsOfElements':'elementClassifications','ModifyBeams':'beamsWithDetails','TrimElements':'elements'}
+               'SetClassificationsOfElements':'elementClassifications','ModifyBeams':'beamsWithDetails','ModifyWalls':'wallsWithDetails','TrimElements':'elements'}
         rows=parameters.get(slots[command])
         if not isinstance(rows,list) or len(rows)!=1:raise ValueError('BOUNDED_OPERATION_REQUIRES_SINGLE_NATIVE_TARGET')
+        if command=='ModifyWalls':
+            repair=preflight.get('integrationBindings',{}).get('dependencies',{}).get('wallRoofRepair',{})
+            candidates=repair.get('operationCandidates',[])
+            if (repair.get('status')!='APPLICABLE_NOT_EXECUTED' or not repair.get('executionAllowed') or
+                    repair.get('assessmentHash')!=digest({k:v for k,v in repair.items() if k!='assessmentHash'}) or
+                    len(candidates)!=2 or parameters!=candidates[0].get('params') or
+                    set(parameters)!={'wallsWithDetails'} or set(rows[0])!={'elementId','height'}):
+                raise ValueError('BOUNDED_WALL_HEIGHT_REQUIRES_QUALIFIED_EXACT_JUNCTION_PLAN')
         if command=='ModifyBeams' and ('CreateBeams' not in self.adapters or set(rows[0])!={'elementId','profileAngle'}):
             raise ValueError('BOUNDED_BEAM_PROFILE_REQUIRES_TYPED_ADAPTER_AND_EXPLICIT_ANGLE')
         if command=='TrimElements' and ('CreateRoofs' not in self.adapters or
