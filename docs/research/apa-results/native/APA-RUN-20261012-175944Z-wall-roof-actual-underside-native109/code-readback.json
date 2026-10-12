@@ -1,0 +1,36 @@
+{
+  "status": "ALL6_GITHUB_BLOBS_MATCH_EXACT_COMMITTED_BYTES",
+  "head": "7966db58ca8830b43938a03cc064bcc3e952a21e",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "sha": "3129eafa5d9192662872896feb1cf15b5cb44c42",
+      "match": true
+    },
+    {
+      "path": "scripts/archicad_authored_geometry.py",
+      "sha": "8e320d081ec48e537dd034b60a5883f893e8a984",
+      "match": true
+    },
+    {
+      "path": "scripts/archicad_native_operations.py",
+      "sha": "327d4d38ca43f79ed5dcd36cec1f6ba97392aa92",
+      "match": true
+    },
+    {
+      "path": "scripts/archicad_scene_run.py",
+      "sha": "f9c12291f185ae31bef0191e82e3d6775858f49a",
+      "match": true
+    },
+    {
+      "path": "tests/test_archicad_roof_underside.py",
+      "sha": "b276a9036a2f3991416b570c9cff55447dc14d4c",
+      "match": true
+    },
+    {
+      "path": "docs/research/apa_wall_roof_underside_2026-10-12.md",
+      "sha": "b267ce3bda649edcdff7b2e3b02bf4255a5304d5",
+      "match": true
+    }
+  ]
+}
