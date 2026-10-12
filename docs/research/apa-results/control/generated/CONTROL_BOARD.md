@@ -9,7 +9,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Status | Count |
 | --- | ---: |
-| BLOCKED | 12 |
+| BLOCKED | 13 |
 | CLAIMED | 0 |
 | DONE_PUBLISHED | 24 |
 | IN_PROGRESS | 1 |

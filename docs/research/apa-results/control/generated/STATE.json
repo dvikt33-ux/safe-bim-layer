@@ -2,9 +2,9 @@
   "active": [
     "APA-P70.A11.S03"
   ],
-  "artifact_count": 107,
+  "artifact_count": 108,
   "counts": {
-    "BLOCKED": 12,
+    "BLOCKED": 13,
     "CLAIMED": 0,
     "DISPATCHABLE_NOW": 18,
     "DONE_PUBLISHED": 24,
@@ -92,7 +92,7 @@
         "id": "APA-P70.A11",
         "status": "IN_PROGRESS",
         "title": "v3.1: пакетная интеграция, взаимодействие и системные проверки",
-        "total": 9
+        "total": 10
       }
     ],
     "active": [
@@ -102,7 +102,7 @@
     "next_eligible": "APA-P70.A02.S02",
     "plan_id": "APA-P70",
     "status": "IN_PROGRESS",
-    "total": 38
+    "total": 39
   },
   "dispatchable": {
     "BUILD": [
@@ -176,10 +176,10 @@
   "known_published_v2_runs": 27,
   "legacy_reports": "NOT_FULLY_INDEXED",
   "orphan_v2_manifests": [],
-  "plan_revision": 103,
+  "plan_revision": 104,
   "publisher": "DEPLOYED_SYNTHETIC_E2E_PASS",
   "research_lookahead": {
-    "linked_product_substeps": 38,
+    "linked_product_substeps": 39,
     "next_eligible_research": [
       "APA-P50.A01.S01",
       "APA-P50.A02.S01"
@@ -206,7 +206,7 @@
   },
   "schema": "APA_PROJECT_CONTROLLER_STATE_V1",
   "source_plan": "docs/research/apa-results/control/PROJECT_PLAN.json",
-  "task_count": 90,
+  "task_count": 91,
   "topic_count": 16,
   "topics": {
     "ARCHITECTURE": {
@@ -337,7 +337,8 @@
         "APA-P70.A11.S06",
         "APA-P70.A11.S07",
         "APA-P70.A11.S08",
-        "APA-P70.A11.S09"
+        "APA-P70.A11.S09",
+        "APA-P70.A11.S10"
       ]
     },
     "PUBLISHER": {
