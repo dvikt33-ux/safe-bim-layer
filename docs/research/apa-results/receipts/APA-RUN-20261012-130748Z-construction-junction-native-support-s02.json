@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:07dc3483891e35352b889742a71b7b11462911c6abd345ed6d801a32737cedf5",
+  "index_commit_sha": "4ccf060d75258dbae19d5b2ea6a5abb853be7c2b",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "4ccf060d75258dbae19d5b2ea6a5abb853be7c2b",
+  "report_path": "docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-130748Z-construction-junction-native-support-s02/REPORT.md",
+  "report_sha256": "da988459c46a6c0f243a0f43569043ec46a52b87f71858b4e4f91459296053d3",
+  "run_id": "APA-RUN-20261012-130748Z-construction-junction-native-support-s02",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}
