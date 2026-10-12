@@ -52,3 +52,37 @@ discrepancy was reconciled through read-only facts without replaying the setter.
 This completes the bounded batten/counterbatten support sub-junction. Fixings,
 timber grade, rafter support capacity, complete roof assembly and engineering
 remain NOT_VERIFIED; another family's completion is not inferred.
+
+## Independent qualification after persistence
+
+The isolated model was saved and reopened successfully; all96body signatures,
+classification, timber material, story and75cm2contact match independent native
+readback. The first Open response timed out; a second controlled Open occurred
+only after exact saved/current state reconciliation. No geometry or classifier
+mutation was replayed.
+
+The reusable qualifier grades49actual model interface pairs:34PASS_GEOMETRY,
+one PASS_DOCUMENTED bounded source support,14NOT_VERIFIED and zero
+PASS_ENGINEERING. The49include the original47interfaces plus two candidates
+introduced by the new counterbatten. Source support proof must match the exact
+pair and measured area; missing/duplicate/stale proofs and volume intersections
+cannot be promoted. Generic Opening host holes are independently checked.
+Cladding is absent and four upper-wall/roof interfaces retain real gaps.
+Each family remains NOT_VERIFIED as a complete construction assembly.
+
+## Separate MEP preference qualification
+
+Read-only live inspection found an existing Ventilation preference row:
+referenceId200, diameter0.2m. The installed CreateMEPRoutingElements contract
+already exposes crossSectionReferenceId, and retained native source applies it
+to a local segment default before placing a new route. User preference tables
+and global defaults need not be changed. The earlier gap statement that all
+route contracts lacked this selector was incomplete.
+
+ModifyMEPRoutingElements exposes no reference selector in either the actual
+schema or source; the donor example's broader claim cannot be used as proof.
+No explicit transition or terminal port-size setter was qualified. The existing
+terminal remains unconnected. Reference-based route creation and a reciprocal
+terminal connection require a separate unambiguous native probe; no MEP write
+was repeated during this qualification. S10 remains BLOCKED for the actual
+transition/connection criterion.

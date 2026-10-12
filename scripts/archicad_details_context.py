@@ -235,6 +235,65 @@ def native_junction_coverage(context,native,details,collision_pairs=()):
         'coverageScope':'All required families in accepted native context, plus actual wall/column interfaces. Surface contact and native intersection are separate. No full-family or engineering approval.'}
 
 
+def qualify_native_junctions(coverage,support_readbacks=()):
+    """Grade actual interfaces without promoting contact to assembly approval.
+
+    Documentation applies only to independently verified source support
+    sub-junctions whose exact native pair and area agree with this coverage.
+    These records are verification outputs, never an engineering certificate.
+    """
+    if coverage.get('schema')!='APA_NATIVE_JUNCTION_COVERAGE_V1':
+        raise ValueError('JUNCTION_QUALIFICATION_REQUIRES_NATIVE_COVERAGE')
+    verified={}
+    for proof in support_readbacks:
+        pair=tuple(sorted((proof['newGuid'].lower(),proof['counterpartGuid'].lower())))
+        if (proof.get('status')!='LIVE_SOURCE_SUPPORT_CONTACT_PASS' or len(set(pair))!=2
+                or proof.get('physicalContact')!='PASS_GEOMETRY'
+                or proof.get('nativeVolumeCollision',{}).get('collisions')!=[]
+                or not proof.get('sourceDetailId') or not proof.get('sourceRelation')
+                or proof.get('completeManufacturerAssembly')!='NOT_VERIFIED'
+                or proof.get('engineeringAcceptance')!='NOT_VERIFIED' or pair in verified):
+            raise ValueError('JUNCTION_SUPPORT_PROOF_INVALID_OR_DUPLICATE')
+        verified[pair]=proof
+    families=[];matched=set();counts={'PASS_GEOMETRY':0,'PASS_DOCUMENTED':0,'PASS_ENGINEERING':0,'NOT_VERIFIED':0}
+    for family in coverage['families']:
+        rows=[]
+        for j in family['junctions']:
+            pair=tuple(sorted(g.lower() for g in j['guids']))
+            area=j.get('sharedAreaSquareMeters')
+            geometry=(type(area) in (int,float) and math.isfinite(area) and area>1e-8
+                and j['physicalRelation']=='SURFACE_CONTACT' and not j['nativeVolumeIntersection']
+                and not j['contactAnalysisLimitation'])
+            documented=False;proof=verified.get(pair)
+            if proof:
+                if not geometry or not C.RUN.close(area,proof['sharedAreaSquareMeters'],1e-6):
+                    raise ValueError('JUNCTION_SUPPORT_PROOF_COVERAGE_MISMATCH')
+                documented=True;matched.add(pair)
+            status='PASS_DOCUMENTED' if documented else 'PASS_GEOMETRY' if geometry else 'NOT_VERIFIED'
+            counts[status]+=1
+            rows.append({'guids':list(pair),'status':status,'geometry':'PASS_GEOMETRY' if geometry else 'NOT_VERIFIED',
+                'documentation':'PASS_DOCUMENTED' if documented else 'NOT_VERIFIED',
+                'engineering':'NOT_VERIFIED','sharedAreaSquareMeters':area,
+                'physicalRelation':j['physicalRelation'],'nativeVolumeIntersection':j['nativeVolumeIntersection'],
+                'contactAnalysisLimitation':j['contactAnalysisLimitation'],
+                'sourceDetailId':proof['sourceDetailId'] if proof else None,
+                'sourceRelation':proof['sourceRelation'] if proof else None,
+                'scope':'SOURCE_SUPPORT_SUBJUNCTION' if documented else 'ACTUAL_INTERFACE_ONLY',
+                'completeAssembly':'NOT_VERIFIED','elements':j['elements']})
+        families.append({'family':family['family'],'junctions':rows,
+            'completeFamily':'NOT_VERIFIED','engineering':'NOT_VERIFIED',
+            'presence':family['status'],'sourceCandidates':family['sourceCandidates'],'gaps':family['gaps']})
+    if matched!=set(verified):raise ValueError('JUNCTION_SUPPORT_PROOF_PAIR_NOT_IN_COVERAGE')
+    openings=[dict(o,geometry='PASS_GEOMETRY' if o['status']=='ACTUAL_HOST_INNER_CONTOURS_PASS' else 'NOT_VERIFIED',
+        documentation='NOT_VERIFIED',engineering='NOT_VERIFIED',completeAssembly='NOT_VERIFIED') for o in coverage['hostedOpenings']]
+    return {'schema':'APA_NATIVE_JUNCTION_QUALIFICATION_V1','families':families,'hostedOpenings':openings,
+        'counts':counts,'archiveSha256':coverage['archiveSha256'],'nativeContextHash':coverage['nativeContextHash'],
+        'nativeBodyHash':coverage['nativeBodyHash'],'sourceApprovedFullAssemblyCount':coverage['sourceApprovedFullAssemblyCount'],
+        'armopoyasAndFasteners':coverage['armopoyasAndFasteners'],
+        'engineeringAcceptance':'ENGINEERING_NOT_VERIFIED','completeFamilies':'NOT_VERIFIED',
+        'scope':'Native face contact, documented bounded support and volume intersection are separate; no family or engineering promotion'}
+
+
 def prepare_source_section(root,source,context,native,host_guid,entity_id,material_selection,placement_y=None):
     """Two confirmed ARMO cross sections as independent geometric parts.
 

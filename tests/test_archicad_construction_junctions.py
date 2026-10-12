@@ -164,4 +164,35 @@ class NativeClassificationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'EXPLICIT_ITEM'):writer.execute_bound_operation(plan,scene,command,params,digest,lambda:None,lambda a,b:None)
 
 
+class JunctionQualificationTests(unittest.TestCase):
+    def coverage(self,collision=False):
+        return JunctionCoverageTests().evaluate(collisions=[(guid(1),guid(2))] if collision else ())
+    def proof(self):
+        return {'status':'LIVE_SOURCE_SUPPORT_CONTACT_PASS','newGuid':guid(2),'counterpartGuid':guid(1),
+            'physicalContact':'PASS_GEOMETRY','nativeVolumeCollision':{'collisions':[]},'sourceDetailId':'checked-page',
+            'sourceRelation':'supports','sharedAreaSquareMeters':1,'completeManufacturerAssembly':'NOT_VERIFIED','engineeringAcceptance':'NOT_VERIFIED'}
+    def test_face_contact_does_not_imply_documentation_or_family_completion(self):
+        r=D.qualify_native_junctions(self.coverage());self.assertEqual(r['counts']['PASS_GEOMETRY'],1)
+        self.assertEqual(r['counts']['PASS_DOCUMENTED'],0);self.assertEqual(r['counts']['PASS_ENGINEERING'],0)
+        self.assertEqual(r['completeFamilies'],'NOT_VERIFIED')
+    def test_documented_support_keeps_full_assembly_and_engineering_unverified(self):
+        r=D.qualify_native_junctions(self.coverage(),[self.proof()]);j=r['families'][0]['junctions'][0]
+        self.assertEqual(j['status'],'PASS_DOCUMENTED');self.assertEqual(j['geometry'],'PASS_GEOMETRY')
+        self.assertEqual(j['completeAssembly'],'NOT_VERIFIED');self.assertEqual(j['engineering'],'NOT_VERIFIED')
+    def test_native_volume_collision_does_not_pass_geometry_even_with_shared_face(self):
+        r=D.qualify_native_junctions(self.coverage(True));self.assertEqual(r['counts']['NOT_VERIFIED'],1)
+    def test_stale_support_area_or_native_collision_cannot_be_promoted(self):
+        proof=self.proof();proof['sharedAreaSquareMeters']=.5
+        with self.assertRaisesRegex(ValueError,'COVERAGE_MISMATCH'):D.qualify_native_junctions(self.coverage(),[proof])
+        with self.assertRaisesRegex(ValueError,'COVERAGE_MISMATCH'):D.qualify_native_junctions(self.coverage(True),[self.proof()])
+    def test_absent_pair_and_duplicate_proof_are_rejected(self):
+        proof=self.proof();proof['newGuid']=guid(99)
+        with self.assertRaisesRegex(ValueError,'PAIR_NOT_IN_COVERAGE'):D.qualify_native_junctions(self.coverage(),[proof])
+        with self.assertRaisesRegex(ValueError,'DUPLICATE'):D.qualify_native_junctions(self.coverage(),[self.proof(),self.proof()])
+    def test_unverified_or_engineering_approved_payload_is_rejected(self):
+        for key,value in [('status','OFFLINE_PASS'),('engineeringAcceptance','PASS_ENGINEERING')]:
+            proof=self.proof();proof[key]=value
+            with self.assertRaisesRegex(ValueError,'PROOF_INVALID'):D.qualify_native_junctions(self.coverage(),[proof])
+
+
 if __name__=='__main__':unittest.main()
