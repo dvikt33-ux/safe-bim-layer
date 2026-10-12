@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 104,
+  "revision": 105,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -824,6 +824,30 @@
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/56",
       "kind": "CONNECTED_NATIVE_DETAILS_AND_MEP_CODE",
       "verification": "SOURCE_READBACK_VERIFIED_NATIVE_LIMITS_RECORDED"
+    },
+    "ART-P70-A11-S03-NATIVE95-V32-20261012": {
+      "id": "ART-P70-A11-S03-NATIVE95-V32-20261012",
+      "uri": "docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-110611Z-connected-native-continuation-v32/REPORT.md",
+      "kind": "CONNECTED_NATIVE_DETAILS_MEP_IFC_REPORT",
+      "verification": "LIVE_SAVED_REOPENED_WORKING_SUBSET_AND_GITHUB_BYTES_VERIFIED_S03_PARTIAL"
+    },
+    "ART-P70-A11-S03-GAP95-V32-20261012": {
+      "id": "ART-P70-A11-S03-GAP95-V32-20261012",
+      "uri": "docs/research/apa-results/native/APA-RUN-20261012-110611Z-connected-native-continuation-v32/gap-register.json",
+      "kind": "CURRENT_G01_G09_GAP_REGISTER",
+      "verification": "SOURCE_AND_NATIVE_READBACK_VERIFIED_WITH_EXPLICIT_DEPENDENCIES"
+    },
+    "ART-P70-A11-S03-RECEIPT95-V32-20261012": {
+      "id": "ART-P70-A11-S03-RECEIPT95-V32-20261012",
+      "uri": "docs/research/apa-results/receipts/APA-RUN-20261012-110611Z-connected-native-continuation-v32.json",
+      "kind": "PUBLICATION_RECEIPT",
+      "verification": "DONE_PUBLISHED_INDEXED_READBACK_VERIFIED"
+    },
+    "ART-P70-A11-S03-FIRST-V32-20261012": {
+      "id": "ART-P70-A11-S03-FIRST-V32-20261012",
+      "uri": "docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-095401Z-functional-expansion-v32/REPORT.md",
+      "kind": "HISTORICAL_FIRST_V32_PARTIAL_REPORT",
+      "verification": "PUBLICATION_BYTES_VERIFIED_FAILED_NATIVE_PROBE_PRESERVED"
     }
   },
   "tasks": {
@@ -2628,10 +2652,13 @@
         "APA-P70.A03.S01",
         "APA-P70.A02.S04"
       ],
-      "related": [],
+      "related": [
+        "APA-P70.A11.S03"
+      ],
       "inputs": [
         "ART-APA-CSE-RESEARCH",
-        "ART-APA-DETAILS-V212"
+        "ART-APA-DETAILS-V212",
+        "ART-P70-A11-S03-NATIVE95-V32-20261012"
       ],
       "outputs": [
         "Матрица всех применимых примыканий/отверстий/армопоясов/связей/крепежа с точным source/detail ID и открытыми пробелами"
@@ -2641,7 +2668,9 @@
       "lease_until": null,
       "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-P70-A11-S03-NATIVE95-V32-20261012"
+      ],
       "blocked_reason": null
     },
     "APA-P70.A04.S02": {
@@ -3342,7 +3371,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -3353,7 +3382,8 @@
         "APA-P70.A11.S07",
         "APA-P70.A11.S08",
         "APA-P70.A11.S09",
-        "APA-P70.A11.S10"
+        "APA-P70.A11.S10",
+        "APA-P70.A04.S01"
       ],
       "inputs": [
         "ART-APA-HIGHLEVEL-PR34",
@@ -3381,15 +3411,20 @@
       ],
       "outputs": [
         "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
-        "Published PR55 head3191e7ce5071e6de7401f6e520fbd8f3ef2a1ea2 stacked on PR54;31new tests,371/371Windows/LinuxPASS.",
-        "Details73context/source/host/material/fact exchange, reciprocal two-section MEP, Generic Opening/SEO, specialized metadata and IFC host/port observations work together.",
-        "Saved/reopened isolated PLN:27primary/59totalGUID, all original48GUID/geometry preserved; SHA256da37fa0fe9b1b255f1618a881a79eb9d4ae8b66993a99cb75fdba30cddc69bb4. Engineering/visibleUI NOT_VERIFIED.",
-        "Continue S03 from PR55 using current gap register. Source/provider/SAM/receiver dependencies S06-S09 are separate; independent S03 work remains eligible. S04 waits for real S03 completion."
+        "Historical PR55 baseline: Published PR55 head3191e7ce5071e6de7401f6e520fbd8f3ef2a1ea2 stacked on PR54;31new tests,371/371Windows/LinuxPASS.",
+        "Historical PR55 baseline: Details73context/source/host/material/fact exchange, reciprocal two-section MEP, Generic Opening/SEO, specialized metadata and IFC host/port observations work together.",
+        "Historical PR55 baseline: Saved/reopened isolated PLN:27primary/59totalGUID, all original48GUID/geometry preserved; SHA256da37fa0fe9b1b255f1618a881a79eb9d4ae8b66993a99cb75fdba30cddc69bb4. Engineering/visibleUI NOT_VERIFIED.",
+        "Current published draft PR56 head3a743a4f96a98acdcbb837946603f0681d9a1f54:403/403Windows host and Windows/Linux CI PASS; all11GitHub code blobs and all15publication blobs exactly match committed/generated bytes.",
+        "LIVE_PASS working routed graph:7routes/9segments/12physical members/11reciprocal edges, one three-port-connected tee and two elbows; exact architectural collisions empty. Native default terminal is separately read back but open/outside routed scope.",
+        "LIVE_PASS independent Details c4 timber part:source25x150mm section, actual10mroof span/slope/story/material, model-bound placement and empty exact collision readback; full8-dimension manufacturer assembly and native roof-child relationship not claimed.",
+        "Save/reopen95GUID and37context records; all95resultant geometry signatures unchanged, original48/baseline59preserved. PLN SHA256dea93fe0fd520747bf4fee5f12d86372f57d972a7021b65029419d2d127892c8.",
+        "Actual IFC37/37world bounds and all11native/IFCowner-pair multiplicities agree;44elements/19materials/39classifications/26ports. Twelve verified quantity comparisons match,0verified mismatch. Engineering/full receiver semantics remain NOT_VERIFIED.",
+        "Next independent step:existing A04.S01 applicability/source coverage using the shared model/matrix; S10 separately qualifies actual terminal diameter/transition via an existing ready provider. S06-S09 retain external gates. S04 waits actual S03 completion."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
-      "owner": "work-functional-expansion-v32",
-      "lease_until": "2026-10-12T15:54:01Z",
-      "claim_ref": "APA-RUN-20261012-095401Z-functional-expansion-v32",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
@@ -3398,7 +3433,11 @@
         "ART-P70-A11-S03-PR55-20261012",
         "ART-P70-A11-S03-GAP-REGISTER-20261012",
         "ART-P70-A11-S03-FUNCTIONAL-RECEIPT-20261012",
-        "ART-P70-A11-S03-PR56-20261012"
+        "ART-P70-A11-S03-PR56-20261012",
+        "ART-P70-A11-S03-NATIVE95-V32-20261012",
+        "ART-P70-A11-S03-GAP95-V32-20261012",
+        "ART-P70-A11-S03-RECEIPT95-V32-20261012",
+        "ART-P70-A11-S03-FIRST-V32-20261012"
       ],
       "blocked_reason": null
     },
@@ -3548,7 +3587,9 @@
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-FUNCTIONAL-GAPS-20261012",
-        "ART-P70-A11-S03-GAP-REGISTER-20261012"
+        "ART-P70-A11-S03-GAP-REGISTER-20261012",
+        "ART-P70-A11-S03-NATIVE95-V32-20261012",
+        "ART-P70-A11-S03-GAP95-V32-20261012"
       ],
       "blocked_reason": "Eight required ARMOdimension entities and source commit=false remain unresolved; qualified source is needed without blocking independent Details."
     },
@@ -3601,7 +3642,9 @@
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-FUNCTIONAL-GAPS-20261012",
-        "ART-P70-A11-S03-GAP-REGISTER-20261012"
+        "ART-P70-A11-S03-GAP-REGISTER-20261012",
+        "ART-P70-A11-S03-NATIVE95-V32-20261012",
+        "ART-P70-A11-S03-GAP95-V32-20261012"
       ],
       "blocked_reason": "Current source-verified provider catalog lacks CreateShells/ModifyShells/ModifyOpenings; SDK source alone is not an exposed runtime path."
     },
@@ -3654,7 +3697,9 @@
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-FUNCTIONAL-GAPS-20261012",
-        "ART-P70-A11-S03-GAP-REGISTER-20261012"
+        "ART-P70-A11-S03-GAP-REGISTER-20261012",
+        "ART-P70-A11-S03-NATIVE95-V32-20261012",
+        "ART-P70-A11-S03-GAP95-V32-20261012"
       ],
       "blocked_reason": "Native SAM/SAF artifact/provider, qualified mappings, approved loads/norms and calculation-engine handoff are not verified; actual IFC contains zero analytical members/models/load groups."
     },
@@ -3707,7 +3752,9 @@
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-FUNCTIONAL-GAPS-20261012",
-        "ART-P70-A11-S03-GAP-REGISTER-20261012"
+        "ART-P70-A11-S03-GAP-REGISTER-20261012",
+        "ART-P70-A11-S03-NATIVE95-V32-20261012",
+        "ART-P70-A11-S03-GAP95-V32-20261012"
       ],
       "blocked_reason": "Receiver endpoint/session and full semantic/quantity/face compatibility are not verified; current IFC proves bounded identity/world bounds and host/port/material observations."
     },
@@ -3740,7 +3787,9 @@
       "claim_ref": null,
       "requires_approval": false,
       "evidence": [
-        "ART-P70-A11-S03-PR56-20261012"
+        "ART-P70-A11-S03-PR56-20261012",
+        "ART-P70-A11-S03-NATIVE95-V32-20261012",
+        "ART-P70-A11-S03-GAP95-V32-20261012"
       ],
       "blocked_reason": "Actual terminal has circular0.2m port; installed circular Create route reads native preference0.8m despite explicit0.2m. Terminal remains open. Current exposed route contract lacks preference-reference/terminal port setters; qualify an existing ready path before another write."
     }
@@ -4046,7 +4095,11 @@
         "ART-P70-A11-S03-PR55-20261012",
         "ART-P70-A11-S03-GAP-REGISTER-20261012",
         "ART-P70-A11-S03-FUNCTIONAL-RECEIPT-20261012",
-        "ART-P70-A11-S03-PR56-20261012"
+        "ART-P70-A11-S03-PR56-20261012",
+        "ART-P70-A11-S03-NATIVE95-V32-20261012",
+        "ART-P70-A11-S03-GAP95-V32-20261012",
+        "ART-P70-A11-S03-RECEIPT95-V32-20261012",
+        "ART-P70-A11-S03-FIRST-V32-20261012"
       ],
       "synthesis_state": "PARTIAL",
       "owner": null
@@ -4374,9 +4427,11 @@
       "readiness": "GAP",
       "readiness_evidence_ids": [
         "ART-P70-A11-S03-FUNCTIONAL-GAPS-20261012",
-        "ART-P70-A11-S03-GAP-REGISTER-20261012"
+        "ART-P70-A11-S03-GAP-REGISTER-20261012",
+        "ART-P70-A11-S03-NATIVE95-V32-20261012",
+        "ART-P70-A11-S03-GAP95-V32-20261012"
       ],
-      "note": "Reuse verified PR55 and current sources. Available subset is integrated and published; separate external dependencies S06-S09 do not blanket-block independent S03 work."
+      "note": "PR56 native95 working subset and403Windows/Linux tests published/read back. Terminal diameter/transition S10 and S06-S09 dependencies do not blanket-block existing A04/shared-context independent work; S03PARTIAL, S04gated."
     },
     "APA-P70.A11.S04": {
       "research_task_ids": [
@@ -4458,7 +4513,9 @@
       ],
       "readiness": "GAP",
       "readiness_evidence_ids": [
-        "ART-P70-A11-S03-PR56-20261012"
+        "ART-P70-A11-S03-PR56-20261012",
+        "ART-P70-A11-S03-NATIVE95-V32-20261012",
+        "ART-P70-A11-S03-GAP95-V32-20261012"
       ],
       "note": "Provider diameter/transition dependency is separate; working rectangular branch and source parts continue independently."
     }
