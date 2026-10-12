@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 109,
+  "revision": 110,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2751,7 +2751,7 @@
       "action_id": "APA-P70.A04",
       "title": "Проверить узлы окон, облицовки, перекрытий и кровельных примыканий",
       "kind": "VALIDATION",
-      "status": "READY",
+      "status": "IN_PROGRESS",
       "priority": 4,
       "work_key": "junction-evidence-acceptance",
       "depends_on": [
@@ -2766,9 +2766,9 @@
         "Для каждого узла классификация PASS_GEOMETRY/PASS_DOCUMENTED/PASS_ENGINEERING/NOT_VERIFIED; ложные approvals запрещены"
       ],
       "acceptance": "Для каждого узла классификация PASS_GEOMETRY/PASS_DOCUMENTED/PASS_ENGINEERING/NOT_VERIFIED; ложные approvals запрещены",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "work-construction-junctions-20261012",
+      "lease_until": "2026-10-12T17:10:00Z",
+      "claim_ref": "APA-RUN-20261012-131000Z-construction-junction-qualification-s03",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
