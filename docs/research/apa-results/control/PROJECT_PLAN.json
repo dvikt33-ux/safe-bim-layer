@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 106,
+  "revision": 107,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -848,6 +848,24 @@
       "uri": "docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-095401Z-functional-expansion-v32/REPORT.md",
       "kind": "HISTORICAL_FIRST_V32_PARTIAL_REPORT",
       "verification": "PUBLICATION_BYTES_VERIFIED_FAILED_NATIVE_PROBE_PRESERVED"
+    },
+    "ART-P70-A04-S01-COVERAGE-20261012": {
+      "id": "ART-P70-A04-S01-COVERAGE-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-123259Z-construction-junctions-s01-openings/REPORT.md",
+      "kind": "REPORT",
+      "verification": "DONE_PUBLISHED_NATIVE_READBACK_414_CI"
+    },
+    "ART-P70-A04-S01-RECEIPT-20261012": {
+      "id": "ART-P70-A04-S01-RECEIPT-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261012-123259Z-construction-junctions-s01-openings.json",
+      "kind": "RECEIPT",
+      "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
+    },
+    "ART-P70-A04-S01-PR57-20261012": {
+      "id": "ART-P70-A04-S01-PR57-20261012",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/57",
+      "kind": "CODE",
+      "verification": "414_WINDOWS_LINUX_PASS_COMMITTED_BLOBS_MATCH"
     }
   },
   "tasks": {
@@ -2645,7 +2663,7 @@
       "action_id": "APA-P70.A04",
       "title": "Вывести из модели обязательные семейства узлов и их условия применимости",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "DONE_PUBLISHED",
       "priority": 4,
       "work_key": "required-junction-condition-coverage",
       "depends_on": [
@@ -2661,15 +2679,18 @@
         "ART-P70-A11-S03-NATIVE95-V32-20261012"
       ],
       "outputs": [
-        "Матрица всех применимых примыканий/отверстий/армопоясов/связей/крепежа с точным source/detail ID и открытыми пробелами"
+        "Accepted-model construction junction/source coverage:47interfaces/34actual planar BREP contacts, actual0.4x0.6m Generic Opening host holes; seven model families incl absent cladding;73context/1142source Details;95GUID/body signatures retained;414Windows/LinuxPASS. Reinforcement/fastener/source-grade/full-assembly/engineering gaps explicit. Next ready bounded sub-junction:source PF001/PF002 batten/counterbatten contact."
       ],
       "acceptance": "Матрица всех применимых примыканий/отверстий/армопоясов/связей/крепежа с точным source/detail ID и открытыми пробелами",
-      "owner": "work-construction-junctions-20261012",
-      "lease_until": "2026-10-12T16:08:54Z",
-      "claim_ref": "APA-RUN-20261012T120854Z-construction-junctions-s01",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
       "evidence": [
-        "ART-P70-A11-S03-NATIVE95-V32-20261012"
+        "ART-P70-A11-S03-NATIVE95-V32-20261012",
+        "ART-P70-A04-S01-COVERAGE-20261012",
+        "ART-P70-A04-S01-RECEIPT-20261012",
+        "ART-P70-A04-S01-PR57-20261012"
       ],
       "blocked_reason": null
     },
@@ -4099,7 +4120,10 @@
         "ART-P70-A11-S03-NATIVE95-V32-20261012",
         "ART-P70-A11-S03-GAP95-V32-20261012",
         "ART-P70-A11-S03-RECEIPT95-V32-20261012",
-        "ART-P70-A11-S03-FIRST-V32-20261012"
+        "ART-P70-A11-S03-FIRST-V32-20261012",
+        "ART-P70-A04-S01-COVERAGE-20261012",
+        "ART-P70-A04-S01-RECEIPT-20261012",
+        "ART-P70-A04-S01-PR57-20261012"
       ],
       "synthesis_state": "PARTIAL",
       "owner": null
