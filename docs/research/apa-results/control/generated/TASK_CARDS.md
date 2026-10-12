@@ -1012,7 +1012,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A04.S01
 
-**Вывести из модели обязательные семейства узлов и их условия применимости** — INTEGRATION / READY / P4
+**Вывести из модели обязательные семейства узлов и их условия применимости** — INTEGRATION / IN_PROGRESS / P4
 
 - Parent: APA-P70 → APA-P70.A04
 - Topic: PRODUCT_DEVELOPMENT
@@ -1020,7 +1020,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P70.A03.S01, APA-P70.A02.S04
 - Related, check before duplicating: APA-P70.A11.S03
 - Acceptance: Матрица всех применимых примыканий/отверстий/армопоясов/связей/крепежа с точным source/detail ID и открытыми пробелами
-- Owner/lease: unclaimed
+- Owner/lease: work-construction-junctions-20261012 / 2026-10-12T16:08:54Z
 - Requires owner approval: False
 - Source inputs: [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-P70-A11-S03-NATIVE95-V32-20261012](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-110611Z-connected-native-continuation-v32/REPORT.md)
 - Existing V2 runs: none
