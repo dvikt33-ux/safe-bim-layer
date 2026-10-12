@@ -154,6 +154,8 @@ def collect(api):
                 candidate.get("bodies"), list) or not isinstance(
                 candidate.get("materials"), list):
             raise RuntimeError("NATIVE_DUMP_SHAPE_UNVERIFIED")
+        if candidate.get("nativeBodySlots", 0) < 1 or len(candidate["bodies"]) < 1:
+            raise RuntimeError("NATIVE_DUMP_HAS_NO_3D_BODIES")
         native_dump = candidate
         native_status = "NATIVE_GEOMETRY_RETURNED"
     except (RuntimeError, KeyError, TypeError, ValueError) as exc:
