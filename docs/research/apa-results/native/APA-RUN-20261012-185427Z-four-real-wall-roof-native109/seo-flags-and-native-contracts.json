@@ -1,0 +1,34 @@
+{
+  "status": "READ_ONLY_RECIPROCAL_SEO_FLAG_DISCREPANCY_RECONFIRMED",
+  "nativeWrites": 0,
+  "requestedFlags": {
+    "inheritOperatorAttributes": false,
+    "skipPolygonHoles": true
+  },
+  "targetReadback": {
+    "inheritOperatorAttributes": false,
+    "skipPolygonHoles": false
+  },
+  "operatorReadback": {
+    "inheritOperatorAttributes": false,
+    "skipPolygonHoles": false
+  },
+  "metadataStatus": "NOT_VERIFIED_REQUEST_READBACK_DIFFERENCE",
+  "queryDirectionsAgree": true,
+  "sourceFindings": {
+    "serializer": "skipPolygonHoles boolean maps to APISolidFlag_SkipPolygonHoles=0x00000004 and the reverse uses same bit",
+    "getter": "Both target/operator branches ignore SDK GetFlags return code and initialize flags to zero",
+    "sdk": "GetFlags can report database/ownership/argument/link errors; false value alone does not establish successful query or actual applied flags",
+    "geometry": "Actual proven specimen has no roof holes. Underside geometry cannot identify whether hole-skip flag was applied",
+    "roofEdit": "ModifyRoofs implementation explicitly rejects all roofs except PolyRoof; current Roof is SinglePlane",
+    "minimalFix": "Qualify a provider GetFlags result/error contract and native SinglePlane polygon memo editing in source/build. Do not replace installed APX without separate authorization"
+  },
+  "cause": "NOT_VERIFIED",
+  "binarySourceCorrespondence": "NOT_VERIFIED",
+  "sourceHashes": {
+    "SolidElementOperationCommands.cpp": "2f15b4a437909dd558efa83291ea849f55ee21a2462426454c67c5a539530b6b",
+    "ExtendedElementCommands.cpp": "f83c83f61d6f77ff620c2b5b5f7dbf23b8ddc918d254e8a43a66b2a2cff87cee",
+    "ACAPinc.h": "fc73f7676304da9a19ca8e44b172b6b8ffbfca18dfed0ceea3e3ef66740d7290",
+    "APIdefs_Elements.h": "6304a8e8e9d67eb161f44ca55bf82548107f20323a6581399d826db624c64356"
+  }
+}

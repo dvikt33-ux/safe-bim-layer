@@ -1,0 +1,37 @@
+{
+  "status": "EXACT_GITHUB_COMMITTED_BLOBS_PASS",
+  "head": "b056cb76929a62047c82fd66961b72eb4d9078a8",
+  "parent": "7966db58ca8830b43938a03cc064bcc3e952a21e",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "sha": "b91f76c323d055f54394e5e4074f9a86e86bcdc2",
+      "match": true
+    },
+    {
+      "path": "scripts/archicad_native_operations.py",
+      "sha": "4ab3be5abe4123c9ef31fd8528f94c1c8bfe5df0",
+      "match": true
+    },
+    {
+      "path": "scripts/archicad_scene_run.py",
+      "sha": "7838e22d5b124edbd990bc9e59d570d674b3e8b6",
+      "match": true
+    },
+    {
+      "path": "scripts/archicad_wall_roof_assessment.py",
+      "sha": "00d0660f13e8d145e6e010a7aee13b49dccba03a",
+      "match": true
+    },
+    {
+      "path": "tests/test_archicad_wall_roof_assessment.py",
+      "sha": "67c98acd6ab303b8d6cbfbea96227911262538cb",
+      "match": true
+    },
+    {
+      "path": "docs/research/apa_four_real_wall_roof_2026-10-12.md",
+      "sha": "0e02834b4dcbc0eb541d973f85d89ca465061dc4",
+      "match": true
+    }
+  ]
+}
