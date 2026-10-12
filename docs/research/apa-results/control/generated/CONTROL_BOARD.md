@@ -14,10 +14,10 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | DONE_PUBLISHED | 22 |
 | IN_PROGRESS | 0 |
 | PARTIAL | 15 |
-| READY | 36 |
+| READY | 41 |
 | SUPERSEDED | 0 |
-| DISPATCHABLE_NOW | 18 |
-| HELD_BY_DEPENDENCIES | 33 |
+| DISPATCHABLE_NOW | 19 |
+| HELD_BY_DEPENDENCIES | 37 |
 | EXPIRED_LEASES | 0 |
 
 ## Полный цикл разработки APA
@@ -66,10 +66,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | P3 | APA-P70.A02.S02 — Связать проектные требования с версиями нормативов и проверяемыми правилами | Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED |
 | P8 | APA-P00.A03.S03 — Publisher, дедупликация, retry, heartbeat и ошибки | Publisher E2E + оставшиеся recovery/heartbeat gates |
 
-## INTEGRATION — 1 ready
+## INTEGRATION — 2 ready
 
 | Priority | Task | Acceptance |
 | --- | --- | --- |
+| P1 | APA-P70.A11.S01 — Подключить готовые компоненты совместимым пакетом | Ready donor functions execute through shared XYZ/GUID/story/material/host context. Functional geometry/Details/MEP/IFC adapters integrated where implementation exists; research-only and missing provider functions explicitly identified. Independent optional modules disabled safely; no second writer or placeholder/catalog-only PASS. |
 | P4 | APA-P70.A04.S01 — Вывести из модели обязательные семейства узлов и их условия применимости | Матрица всех применимых примыканий/отверстий/армопоясов/связей/крепежа с точным source/detail ID и открытыми пробелами |
 
 ## VALIDATION — 4 ready
@@ -118,6 +119,10 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | APA-P70.A08.S03 | APA-P70.A08.S02 |
 | APA-P70.A08.S05 | APA-P70.A08.S03 |
 | APA-P70.A10.S01 | APA-P70.A06.S02 |
+| APA-P70.A11.S02 | APA-P70.A11.S01 |
+| APA-P70.A11.S03 | APA-P70.A11.S02 |
+| APA-P70.A11.S04 | APA-P70.A11.S03 |
+| APA-P70.A11.S05 | APA-P70.A11.S04, APA-P70.A08.S02 |
 
 ## Warnings
 
