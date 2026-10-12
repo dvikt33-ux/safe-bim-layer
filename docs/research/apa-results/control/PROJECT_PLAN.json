@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 117,
+  "revision": 118,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -3625,7 +3625,7 @@
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
       "owner": "work-four-real-wall-roof-20261012",
-      "lease_until": "2026-10-12T22:24:29.289Z",
+      "lease_until": "2026-10-12T22:24:29Z",
       "claim_ref": "APA-RUN-20261012T182429Z-four-real-wall-roof",
       "requires_approval": false,
       "evidence": [
