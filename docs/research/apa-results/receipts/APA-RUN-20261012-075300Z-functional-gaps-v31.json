@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:c7b7cab8db987bf8672b67e6f0aed69b41fe55dc934b7853c9f19c6e89f3fada",
+  "index_commit_sha": "2e076719c4b4c6d8c1173e65389a375a41907582",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "2e076719c4b4c6d8c1173e65389a375a41907582",
+  "report_path": "docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-075300Z-functional-gaps-v31/REPORT.md",
+  "report_sha256": "1a6b4779ae194911947f562ecb3dee8c17cf1dd152dcfdc33990274412eee95d",
+  "run_id": "APA-RUN-20261012-075300Z-functional-gaps-v31",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}
