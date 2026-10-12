@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 97,
+  "revision": 98,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -770,6 +770,18 @@
       "uri": "docs/research/apa-results/receipts/APA-RUN-20261012-010000Z-compatible-integration-v31.json",
       "kind": "PUBLISH_RECEIPT",
       "verification": "DONE_PUBLISHED_READBACK_VERIFIED_PUBLISHER_CI38190321586_PASS"
+    },
+    "ART-P70-A11-S02-CONNECTED-SYSTEM-20261012": {
+      "id": "ART-P70-A11-S02-CONNECTED-SYSTEM-20261012",
+      "uri": "docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-011500Z-connected-system-v31/REPORT.md",
+      "kind": "CONNECTED_SYSTEM_ACCEPTANCE_REPORT",
+      "verification": "NATIVE22_48_PRESERVED_IFC_CPSAT_COLLISION_INTERACTIONS_PASS_REQUIRED_UNSUPPORTED_EXPLICIT"
+    },
+    "ART-P70-A11-S02-RECEIPT-20261012": {
+      "id": "ART-P70-A11-S02-RECEIPT-20261012",
+      "uri": "docs/research/apa-results/receipts/APA-RUN-20261012-011500Z-connected-system-v31.json",
+      "kind": "PUBLISH_RECEIPT",
+      "verification": "DONE_PUBLISHED_READBACK_VERIFIED_PUBLISHER_CI38191219275_PASS"
     }
   },
   "tasks": {
@@ -3237,7 +3249,7 @@
       "action_id": "APA-P70.A11",
       "title": "Проверить объединённую систему в тестовом PLN",
       "kind": "VALIDATION",
-      "status": "IN_PROGRESS",
+      "status": "DONE_PUBLISHED",
       "priority": 1,
       "work_key": "connected-system-native-test-v31",
       "depends_on": [
@@ -3272,11 +3284,14 @@
         "Reproducible combined native scenario uses retained graph/journal/writer/readback; source elements preserved, save/reopen verified. Source/offline/live/engineering statuses separate. Unsupported mandatory module never silently omitted."
       ],
       "acceptance": "Reproducible combined native scenario uses retained graph/journal/writer/readback; source elements preserved, save/reopen verified. Source/offline/live/engineering statuses separate. Unsupported mandatory module never silently omitted.",
-      "owner": "codex-apa-system-v31-20261012",
-      "lease_until": "2026-10-12T04:00:00Z",
-      "claim_ref": "APA-RUN-20261012-011500Z-connected-system-v31",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
-      "evidence": [],
+      "evidence": [
+        "ART-P70-A11-S02-CONNECTED-SYSTEM-20261012",
+        "ART-P70-A11-S02-RECEIPT-20261012"
+      ],
       "blocked_reason": null
     },
     "APA-P70.A11.S03": {
@@ -3285,7 +3300,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "READY",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -3320,9 +3335,9 @@
         "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "codex-apa-gap-v31-20261012",
+      "lease_until": "2026-10-12T04:00:00Z",
+      "claim_ref": "APA-RUN-20261012-012500Z-gap-windows-sqlite-v31",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
