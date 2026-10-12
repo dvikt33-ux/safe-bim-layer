@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 24,
+  "run_count": 25,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -169,6 +169,13 @@
       "report": "runs/2026-10-12/APA-RUN-20261012-011500Z-connected-system-v31/REPORT.md",
       "run_id": "APA-RUN-20261012-011500Z-connected-system-v31",
       "substep_id": "APA-P70.A11.S02"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "OFFLINE",
+      "report": "runs/2026-10-12/APA-RUN-20261012-012500Z-gap-windows-sqlite-v31/REPORT.md",
+      "run_id": "APA-RUN-20261012-012500Z-gap-windows-sqlite-v31",
+      "substep_id": "APA-P70.A11.S03"
     }
   ],
   "schema": "APA_GENERATED_INDEX_V1",
