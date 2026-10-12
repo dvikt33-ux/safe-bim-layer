@@ -1,0 +1,181 @@
+{
+  "status": "READY_CREATE_REFERENCE_MECHANISM_IDENTIFIED_READ_ONLY",
+  "tables": {
+    "tables": [
+      {
+        "guid": "id-sha256:645cf71deba19b67b300",
+        "rows": [
+          {
+            "referenceId": 63,
+            "diameter": 0.063,
+            "description": ""
+          },
+          {
+            "referenceId": 80,
+            "diameter": 0.08,
+            "description": ""
+          },
+          {
+            "referenceId": 100,
+            "diameter": 0.1,
+            "description": ""
+          },
+          {
+            "referenceId": 125,
+            "diameter": 0.125,
+            "description": ""
+          },
+          {
+            "referenceId": 150,
+            "diameter": 0.15,
+            "description": ""
+          },
+          {
+            "referenceId": 160,
+            "diameter": 0.16,
+            "description": ""
+          },
+          {
+            "referenceId": 180,
+            "diameter": 0.18,
+            "description": ""
+          },
+          {
+            "referenceId": 200,
+            "diameter": 0.2,
+            "description": ""
+          },
+          {
+            "referenceId": 250,
+            "diameter": 0.25,
+            "description": ""
+          },
+          {
+            "referenceId": 300,
+            "diameter": 0.3,
+            "description": ""
+          },
+          {
+            "referenceId": 315,
+            "diameter": 0.315,
+            "description": ""
+          },
+          {
+            "referenceId": 355,
+            "diameter": 0.355,
+            "description": ""
+          },
+          {
+            "referenceId": 400,
+            "diameter": 0.4,
+            "description": ""
+          },
+          {
+            "referenceId": 450,
+            "diameter": 0.45,
+            "description": ""
+          },
+          {
+            "referenceId": 500,
+            "diameter": 0.5,
+            "description": ""
+          },
+          {
+            "referenceId": 560,
+            "diameter": 0.56,
+            "description": ""
+          },
+          {
+            "referenceId": 630,
+            "diameter": 0.63,
+            "description": ""
+          },
+          {
+            "referenceId": 710,
+            "diameter": 0.71,
+            "description": ""
+          },
+          {
+            "referenceId": 800,
+            "diameter": 0.8,
+            "description": ""
+          },
+          {
+            "referenceId": 900,
+            "diameter": 0.9,
+            "description": ""
+          },
+          {
+            "referenceId": 1000,
+            "diameter": 1,
+            "description": ""
+          },
+          {
+            "referenceId": 1120,
+            "diameter": 1.12,
+            "description": ""
+          },
+          {
+            "referenceId": 1250,
+            "diameter": 1.25,
+            "description": ""
+          }
+        ]
+      }
+    ]
+  },
+  "diameterPoint2Candidates": [
+    {
+      "tableGuid": "id-sha256:645cf71deba19b67b300",
+      "referenceId": 200,
+      "diameter": 0.2,
+      "description": ""
+    }
+  ],
+  "terminalReadback": {
+    "elementPorts": [
+      {
+        "ports": [
+          {
+            "portId": "id-sha256:0d24b392faf2c528a716",
+            "name": "Соединение Конца Воздуховода",
+            "position": {
+              "x": 45.675,
+              "y": 43,
+              "z": 2.275
+            },
+            "direction": {
+              "x": -1,
+              "y": 0,
+              "z": 0
+            },
+            "shape": "Circular",
+            "width": 0.2,
+            "height": 0.2,
+            "domain": "Ventilation",
+            "mepSystemId": {
+              "attributeId": {
+                "guid": "id-sha256:fea97c3fd32c996b3844"
+              }
+            },
+            "isPhysicallyConnected": false
+          }
+        ]
+      }
+    ]
+  },
+  "createReferenceField": "crossSectionReferenceId",
+  "modifyReferenceField": "NOT_EXPOSED",
+  "sourceSha256": "f2238e8e192e63cdce43ea4e1538d8fed4d1e3120167edd9ebc4c97015db4e7c",
+  "sourceBehavior": "Get current routing-element default by value, modify segmentDefault locally, inject into route default and Place; no global preference-table edit",
+  "previousGapCorrection": "Create route exposes reference selector; earlier statement that every exposed route contract lacked it was incomplete",
+  "qualification": "LIVE preference table and terminal reads; installed catalog plus retained native source; actual reference-based Create and transition connection NOT_VERIFIED",
+  "examplesLimitation": "Donor example claims Modify support too, but actual Modify schema/implementation lacks the reference field; no unsupported Modify inferred",
+  "retained96GuidAndGeometry": "PASS",
+  "plnSha256Unchanged": "8a835dc7a9ada894f102121845015ba053f6443417aa48e8b76fb9650936cb7f",
+  "writeAttempts": 0,
+  "S10": "BLOCKED_PENDING_UNAMBIGUOUS_NEW_ROUTE_TRANSITION_PROBE",
+  "reason": "Actual terminal remains unconnected; user forbids repeating potentially ambiguous MEP writes without permission; no ready explicit transition/terminal port-size setter qualified",
+  "userPreferencesChanged": false,
+  "installedAPXChanged": false
+}

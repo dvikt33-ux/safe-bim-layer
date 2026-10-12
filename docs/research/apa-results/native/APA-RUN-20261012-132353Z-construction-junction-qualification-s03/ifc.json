@@ -1,0 +1,56 @@
+{
+  "status": "ACTUAL_CURRENT96_IFC_BODY_CLASS_MATERIAL_PASS",
+  "ifcFileSha256": "79969e2b60c574c9c20d0c9c6016385d70a518077461a90eeaa66d43f9e83261",
+  "nativeGuidCount": 96,
+  "contextMappings": 38,
+  "boundsMatchCount": 38,
+  "ifcElementCount": 45,
+  "newCounterbatten": {
+    "nativeGuid": "id-sha256:4a42a41a3b3a6f609480",
+    "actualIfcType": "IfcBeam",
+    "material": "Дерево - Конструкционное",
+    "ifcBoundsMeters": [
+      [
+        44.975,
+        45.025
+      ],
+      [
+        41.937050029,
+        47.85747190665046
+      ],
+      [
+        6.2180340131072445,
+        7.161127553510735
+      ]
+    ],
+    "boundsDeltaMeters": 4.892655169896898e-10,
+    "sourceSectionMeters": {
+      "width": 0.05,
+      "height": 0.05
+    },
+    "modelDerivedLengthMeters": 5.980100048867446
+  },
+  "quantities": {
+    "schema": "APA_QUANTIFIED_IFC_EXCHANGE_V1",
+    "ifcSchema": "IFC2X3",
+    "fileSha256": "79969e2b60c574c9c20d0c9c6016385d70a518077461a90eeaa66d43f9e83261",
+    "lengthUnitScaleToMeters": 0.001,
+    "quantityMatchCount": 12,
+    "quantityMismatchCount": 0,
+    "semanticCompatibility": "NOT_VERIFIED",
+    "engineeringAcceptance": "NOT_VERIFIED",
+    "nativeWrites": 0
+  },
+  "materialAssignmentCount": 20,
+  "nativePortRelationCount": 11,
+  "openingHostCount": 6,
+  "retained95GuidAndGeometry": "PASS",
+  "all96Geometry": "PASS",
+  "networkUnchanged": "PASS",
+  "plnSha256Unchanged": "8a835dc7a9ada894f102121845015ba053f6443417aa48e8b76fb9650936cb7f",
+  "modelWriteAttempts": 0,
+  "exportAttempts": 1,
+  "scope": "Actual IFC body bounds, Beam class, timber material and observed relations; complete receiver semantic/engineering compatibility NOT_VERIFIED",
+  "fullSemanticCompatibility": "NOT_VERIFIED",
+  "engineeringAcceptance": "ENGINEERING_NOT_VERIFIED"
+}
