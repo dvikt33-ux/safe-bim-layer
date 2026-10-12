@@ -15,6 +15,12 @@ on:
       - 'scripts/archicad_connected_solver.py'
       - 'scripts/requirements-connected.txt'
       - 'tests/test_archicad_connected_components.py'
+      - 'scripts/diagnose_apa_suffix_wall_readback.py'
+      - 'tests/test_archicad_basic_slab_integration.py'
+      - 'tests/test_archicad_fourth_suffix.py'
+      - 'tests/test_archicad_partial_scene_continuation.py'
+      - 'tests/test_archicad_partial_slab_repair.py'
+      - 'tests/test_archicad_suffix3_slab_repair.py'
       - 'scripts/archicad_accelerator_integration.py'
       - 'scripts/archicad_project_accelerator.py'
       - 'scripts/archicad_semantic_brief.py'
@@ -68,6 +74,12 @@ on:
       - 'scripts/archicad_connected_solver.py'
       - 'scripts/requirements-connected.txt'
       - 'tests/test_archicad_connected_components.py'
+      - 'scripts/diagnose_apa_suffix_wall_readback.py'
+      - 'tests/test_archicad_basic_slab_integration.py'
+      - 'tests/test_archicad_fourth_suffix.py'
+      - 'tests/test_archicad_partial_scene_continuation.py'
+      - 'tests/test_archicad_partial_slab_repair.py'
+      - 'tests/test_archicad_suffix3_slab_repair.py'
       - '.github/workflows/archicad-contracts.yml'
       - 'scripts/archicad_accelerator_integration.py'
       - 'scripts/archicad_project_accelerator.py'
@@ -121,7 +133,11 @@ permissions:
 
 jobs:
   offline-contracts:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

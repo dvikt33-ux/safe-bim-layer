@@ -1,6 +1,7 @@
 """Offline-only exact scratch slab recovery proof. No Windows PLN, no network."""
 import json
 import sqlite3
+from contextlib import closing
 from pathlib import Path
 import sys
 import tempfile
@@ -57,7 +58,7 @@ class PartialSlabRecoveryTests(unittest.TestCase):
         }), encoding="utf-8")
         (self.run / "execute" / "inventory-before.json").write_text(
             json.dumps(self.native.existing), encoding="utf-8")
-        with sqlite3.connect(self.ledger) as db:
+        with closing(sqlite3.connect(self.ledger)) as db, db:
             db.execute("CREATE TABLE scenes (scene_id TEXT PRIMARY KEY,plan_hash TEXT NOT NULL,"
                        "state TEXT NOT NULL,result TEXT NOT NULL)")
             db.execute("CREATE TABLE steps (scene_id TEXT NOT NULL,step_id TEXT NOT NULL,"
@@ -83,7 +84,7 @@ class PartialSlabRecoveryTests(unittest.TestCase):
         self.assertEqual(p["slabGuid"], REPAIR.SLAB_GUID)
         self.assertEqual(p["modelWriteAttempts"], 0)
         self.assertEqual(self.native.writes, [])
-        with sqlite3.connect(self.ledger) as db:
+        with closing(sqlite3.connect(self.ledger)) as db, db:
             self.assertIsNone(db.execute(
                 "SELECT name FROM sqlite_master WHERE name=?",
                 (REPAIR.REPAIR_TABLE,)).fetchone())
@@ -94,7 +95,7 @@ class PartialSlabRecoveryTests(unittest.TestCase):
         self.assertEqual(out["status"], "SINGLE_SLAB_REPAIR_VERIFIED_UNSAVED", out)
         self.assertEqual(self.native.writes, ["ModifySlabs"])
         self.assertEqual(len(self.native.created), 5)
-        with sqlite3.connect(self.ledger) as db:
+        with closing(sqlite3.connect(self.ledger)) as db, db:
             record = db.execute(
                 "SELECT state FROM apa_partial_slab_repairs").fetchone()
             self.assertEqual(record[0], "READBACK_PASS")
@@ -117,7 +118,7 @@ class PartialSlabRecoveryTests(unittest.TestCase):
         out = REPAIR.repair(self.native, self.run, MATERIAL_NAME, ticket["token"])
         self.assertEqual(out["status"], "REPAIR_OUTCOME_UNCERTAIN_NO_RETRY", out)
         self.assertEqual(self.native.writes, ["ModifySlabs"])
-        with sqlite3.connect(self.ledger) as db:
+        with closing(sqlite3.connect(self.ledger)) as db, db:
             row = db.execute(
                 "SELECT state,slab_guid FROM apa_partial_slab_repairs").fetchone()
             self.assertEqual(row, ("UNKNOWN_NEEDS_MANUAL_INSPECTION", REPAIR.SLAB_GUID))

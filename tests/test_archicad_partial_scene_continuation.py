@@ -7,6 +7,7 @@ import hashlib
 import json
 from pathlib import Path
 import sqlite3
+from contextlib import closing
 import sys
 import tempfile
 import unittest
@@ -71,7 +72,7 @@ class PartialSceneContinuationTests(unittest.TestCase):
         manifest = {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
                     for p in self.out.iterdir() if p.is_file()}
         (self.out / "SHA256.json").write_text(json.dumps(manifest), encoding="utf-8")
-        with sqlite3.connect(self.journal) as db:
+        with closing(sqlite3.connect(self.journal)) as db, db:
             db.execute("CREATE TABLE scenes (scene_id TEXT PRIMARY KEY,plan_hash TEXT NOT NULL,"
                        "state TEXT NOT NULL,result TEXT NOT NULL)")
             db.execute("CREATE TABLE steps (scene_id TEXT NOT NULL,step_id TEXT NOT NULL,"
@@ -110,7 +111,7 @@ class PartialSceneContinuationTests(unittest.TestCase):
         self.assertEqual(len(self.native.writes), 21)  # 20 Creates + 1 ModifySlabs
         self.assertEqual(self.native.writes.count("ModifySlabs"), 1)
         self.assertEqual(len([x for x in self.native.writes if x.startswith("Create")]), 20)
-        with sqlite3.connect(self.journal) as db:
+        with closing(sqlite3.connect(self.journal)) as db, db:
             count = db.execute(
                 "SELECT COUNT(*) FROM steps WHERE scene_id=? AND state='PASS'",
                 (CONT.SUFFIX_ID,)).fetchone()[0]
