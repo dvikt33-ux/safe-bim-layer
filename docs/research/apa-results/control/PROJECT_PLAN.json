@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 107,
+  "revision": 108,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2700,7 +2700,7 @@
       "action_id": "APA-P70.A04",
       "title": "Привязать выбранные узлы и композиции к нативным BIM элементам",
       "kind": "BUILD",
-      "status": "READY",
+      "status": "IN_PROGRESS",
       "priority": 4,
       "work_key": "native-details-to-cse-binding",
       "depends_on": [
@@ -2716,9 +2716,9 @@
         "Редактируемые системы и узлы с параметрами, классификацией, происхождением и invalidation при изменении"
       ],
       "acceptance": "Редактируемые системы и узлы с параметрами, классификацией, происхождением и invalidation при изменении",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "work-construction-junctions-20261012",
+      "lease_until": "2026-10-12T16:35:09Z",
+      "claim_ref": "APA-RUN-20261012-123509Z-construction-junction-s02",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
