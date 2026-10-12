@@ -142,6 +142,11 @@ class ConnectedComponentsTests(unittest.TestCase):
                 return native(command,params)
             writer=C.RUN.SceneWriter(api,journal,adapters=C.adapters(['morph']))
             plan={'sourcePlanHash':'OLD','binding':C.RUN.guarded_project(api)}
+            plan['integrationBindings']={'dependencies':{'nativeToolAssessment':{
+                'checkedNativeTools':[{'tool':'Beam','contractEvidence':'Synthetic retained-GUID repair fixture',
+                    'geometryLimitation':'No supported native type conversion preserving the existing Morph GUID'}],
+                'reasonNativeGeometryImpossible':'This test exercises an explicit repair retaining the original Morph GUID',
+                'mandatoryBimPropertiesAndRelationsPreserved':True}}}
             params={'morphsWithDetails':[{'elementId':{'guid':GUID},'body':C.explicit_box_body({'x':1,'y':1,'z':1})}]}
             token=C.RUN.digest({'sceneId':'repair-timeout-test','sourcePlanHash':'OLD','command':'ModifyMorphs','parameters':params,'target':plan['binding']})
             result=writer.modify_morph_body(plan,'repair-timeout-test',params,token,lambda:None)

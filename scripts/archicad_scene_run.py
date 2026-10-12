@@ -60,7 +60,7 @@ DEFAULT_SCENE_SCHEMA = Path(__file__).resolve().parents[1] / "schemas/tapir-live
 ALLOWED_WRITES = frozenset(("CreateWalls", "CreateSlabs", "CreateColumns",
                            "CreateWindows", "CreateDoors", "CreateObjects"))
 # Opt-in typed adapters reuse this journal; a command name alone never enables it.
-EXTENDED_WRITES = frozenset({'CreateRoofs','CreateMorphs','CreateMEPRoutingElements','CreateMEPElements'})
+EXTENDED_WRITES = frozenset({'CreateRoofs','CreateBeams','CreateMorphs','CreateMEPRoutingElements','CreateMEPElements'})
 _GUID = re.compile(r"^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$")
 _SCENE_ID = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_-]{3,79}$")
 _NONSPATIAL_TYPES = frozenset({
@@ -472,6 +472,8 @@ class SceneWriter:
             runtime_version=EXPECTED_TAPIR)
         if checked['status']!='SCHEMA_VALID':
             raise ValueError('MORPH_CHANGE_SCHEMA_INVALID')
+        from archicad_native_beam_details import require_morph_last_resort
+        require_morph_last_resort(preflight.get('integrationBindings',{}).get('dependencies',{}))
         result={'status':'BLOCKED','automaticRetry':False,'sceneId':scene_id,
             'operationHash':expected_hash,'command':command,'nativeCreates':0}
         with closing(sqlite3.connect(self.journal_path)) as db:
@@ -509,7 +511,7 @@ class SceneWriter:
         No replay, second executor or automatic rollback.
         """
         if (command not in {'ConnectMEPElements','ModifyMEPRoutingElements',
-                            'CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks','ModifyMorphs','SetClassificationsOfElements'}
+                            'CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks','ModifyMorphs','ModifyBeams','SetClassificationsOfElements','TrimElements'}
                 or not _SCENE_ID.fullmatch(scene_id) or not callable(verify_before) or not callable(verify_after)):
             raise ValueError('BOUNDED_OPERATION_ADAPTER_REQUIRED')
         intent={'sceneId':scene_id,'sourcePlanHash':preflight['sourcePlanHash'],
@@ -517,12 +519,20 @@ class SceneWriter:
         if digest(intent)!=expected_hash:raise ValueError('BOUNDED_OPERATION_HASH_MISMATCH')
         slots={'ConnectMEPElements':'connectionsData','ModifyMEPRoutingElements':'routingElementsData',
                'CreateOpenings':'openingsData','CreateSolidElementLinks':'solidLinks','RemoveSolidElementLinks':'solidLinks','ModifyMorphs':'morphsWithDetails',
-               'SetClassificationsOfElements':'elementClassifications'}
+               'SetClassificationsOfElements':'elementClassifications','ModifyBeams':'beamsWithDetails','TrimElements':'elements'}
         rows=parameters.get(slots[command])
         if not isinstance(rows,list) or len(rows)!=1:raise ValueError('BOUNDED_OPERATION_REQUIRES_SINGLE_NATIVE_TARGET')
+        if command=='ModifyBeams' and ('CreateBeams' not in self.adapters or set(rows[0])!={'elementId','profileAngle'}):
+            raise ValueError('BOUNDED_BEAM_PROFILE_REQUIRES_TYPED_ADAPTER_AND_EXPLICIT_ANGLE')
+        if command=='TrimElements' and ('CreateRoofs' not in self.adapters or
+                set(parameters)!={'elements','trimmingElement','trimType'} or parameters['trimType']!='KeepInside'):
+            raise ValueError('BOUNDED_ROOF_TRIM_REQUIRES_TYPED_ROOF_AND_EXPLICIT_INSIDE')
         if command=='ModifyMorphs' and ('CreateMorphs' not in self.adapters or
                 set(rows[0]) not in ({'elementId','xAxis','yAxis','zAxis'},{'elementId','translation'})):
             raise ValueError('BOUNDED_MORPH_PLACEMENT_REQUIRES_TYPED_ADAPTER_AND_EXPLICIT_TRANSFORM')
+        if command=='ModifyMorphs':
+            from archicad_native_beam_details import require_morph_last_resort
+            require_morph_last_resort(preflight.get('integrationBindings',{}).get('dependencies',{}))
         if command=='SetClassificationsOfElements' and ('CreateMorphs' not in self.adapters or
                 set(rows[0])!={'elementId','classificationId'} or
                 set(rows[0].get('classificationId',{}))!={'classificationSystemId','classificationItemId'}):
@@ -546,7 +556,9 @@ class SceneWriter:
                 if self.guarded_binding()!=preflight['binding']:raise ValueError('BOUNDED_OPERATION_TARGET_DRIFT')
                 reply=self.api(command,parameters)
                 result['nativeResponse']=reply
-                if command != 'CreateOpenings':
+                if command=='TrimElements':
+                    if reply!={'success':True}:raise ValueError('BOUNDED_TRIM_NATIVE_SUCCESS_NOT_CONFIRMED')
+                elif command != 'CreateOpenings':
                     key = 'connectionResults' if command == 'ConnectMEPElements' else 'executionResults'
                     rows = reply.get(key)
                     if not isinstance(rows, list) or len(rows) != 1 or any('error' in r for r in rows):

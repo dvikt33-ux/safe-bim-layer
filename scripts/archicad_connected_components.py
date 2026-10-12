@@ -55,6 +55,17 @@ class NativeAdapter:
         self.command=command
 
     def before_write(self,api,params,plan):
+        dependencies=plan.get('integrationBindings',{}).get('dependencies',{})
+        if self.command=='CreateBeams' and dependencies.get('sourceBeamBinding'):
+            from archicad_native_beam_details import verify_beam_binding
+            verify_beam_binding(api,params,dependencies['sourceBeamBinding'])
+        if self.command=='CreateMEPRoutingElements':
+            data=params['routingElementsData'][0]
+            if data.get('crossSectionShape')=='Circular':
+                from archicad_native_mep_network import verify_circular_reference_binding
+                selection=plan.get('integrationBindings',{}).get('dependencies',{}).get('circularReferenceSelection')
+                if not selection:raise ValueError('MEP_CIRCULAR_EXPLICIT_REFERENCE_BINDING_REQUIRED')
+                verify_circular_reference_binding(api,data,selection)
         binding=plan.get('integrationBindings',{}).get('dependencies',{}).get('sourceDetailBinding')
         if binding is not None:
             if self.command!='CreateMorphs':raise ValueError('SOURCE_DETAIL_WRITER_COMPONENT_MISMATCH')
@@ -76,6 +87,9 @@ class NativeAdapter:
                 raise ValueError('SOURCE_DETAIL_WRITE_BODY_MISMATCH')
             if data['buildingMaterialId']['guid'].lower()!=binding['projectMaterialSelection']['expectedGuid'].lower():
                 raise ValueError('SOURCE_DETAIL_WRITE_MATERIAL_MISMATCH')
+        if self.command=='CreateMorphs':
+            from archicad_native_beam_details import require_morph_last_resort
+            require_morph_last_resort(dependencies)
 
     def resolve(self,step,created,plan):
         params=copy.deepcopy(step['params'])
@@ -83,6 +97,13 @@ class NativeAdapter:
         if len(values)!=1:
             raise ValueError('ONLY_ONE_ELEMENT_PER_JOURNALED_WRITE')
         data=values[0]
+        if self.command=='CreateBeams':
+            explicit={'begCoordinate','endCoordinate','zCoordinate','floorIndex','offset','slantAngle','isSlanted',
+                'profileAngle','arcAngle','verticalCurveHeight','width','height','anchorPoint','circleBased',
+                'isWidthAndHeightLinked','buildingMaterialId'}
+            if (set(data)!=explicit or data['anchorPoint']!='Center' or data['circleBased'] is not False or
+                    data['isWidthAndHeightLinked'] is not False or data['arcAngle']!=0 or data['verticalCurveHeight']!=0):
+                raise ValueError('BEAM_REQUIRES_EXPLICIT_BASIC_STRAIGHT_SECTION_AND_PLACEMENT')
         if self.command=='CreateMorphs':
             if set(data)&{'size','body'} not in ({'size'},{'body'}):
                 raise ValueError('MORPH_REQUIRES_EXACTLY_ONE_BODY_SPECIFICATION')
@@ -130,10 +151,36 @@ class NativeAdapter:
             return 'MEP'+expected['type'] if members else 'MEPComponent'
         # Installed AC29 routing rows report Unknown/nativeType150. They are
         # accepted only alongside successful dedicated MEP geometry readback.
-        wanted={'CreateRoofs':'Roof','CreateMorphs':'Morph','CreateMEPRoutingElements':'Unknown'}[self.command]
+        wanted={'CreateRoofs':'Roof','CreateBeams':'Beam','CreateMorphs':'Morph','CreateMEPRoutingElements':'Unknown'}[self.command]
         if row.get('type')!=wanted or row.get('floorIndex')!=floor:
             raise ValueError('COMPONENT_NATIVE_TYPE_OR_STORY_MISMATCH')
         actual=row.get('details',{})
+        if self.command=='CreateBeams':
+            for key in ('begCoordinate','endCoordinate'):
+                if any(not RUN.close(actual.get(key,{}).get(k),expected[key][k]) for k in ('x','y')):
+                    raise ValueError('BEAM_NATIVE_REFERENCE_LINE_MISMATCH')
+            for key in ('zCoordinate','offset','slantAngle','width','height'):
+                if not RUN.close(actual.get(key),expected[key]):raise ValueError('BEAM_NATIVE_PARAMETER_MISMATCH:'+key)
+            angle=actual.get('profileAngle')
+            if type(angle) not in (int,float) or not math.isfinite(angle) or not RUN.close(
+                    math.atan2(math.sin(angle-expected['profileAngle']),math.cos(angle-expected['profileAngle'])),0.):
+                raise ValueError('BEAM_NATIVE_PROFILE_ROTATION_MISMATCH')
+            if not RUN.close(actual.get('level'),expected['zCoordinate']-story_level):
+                raise ValueError('BEAM_NATIVE_HOME_STORY_LEVEL_MISMATCH')
+            for key in ('isSlanted','circleBased','isWidthAndHeightLinked','anchorPoint'):
+                if actual.get(key)!=expected[key]:raise ValueError('BEAM_NATIVE_PROFILE_MISMATCH:'+key)
+            if attribute_guid(actual.get('buildingMaterialId'))!=attribute_guid(expected['buildingMaterialId']):
+                raise ValueError('BEAM_NATIVE_MATERIAL_MISMATCH')
+            native=G.normalize_dump(api('GetModelDumpV1',{}));bodies={e['guid'].lower():e for e in native['elements']}
+            children=A.assembly_subelements(api,{'member':{'guid':guid,'kind':'Beam'}},'Beam')[guid.lower()]
+            for child in children:
+                body=bodies.get(child,{})
+                if (body.get('type')!='BeamSegment' or body.get('relationships',{}).get('hostGuid','').lower()!=guid.lower()
+                        or body.get('materialBindings',{}).get('buildingMaterial',{}).get('guid','').lower()!=attribute_guid(expected['buildingMaterialId'])):
+                    raise ValueError('BEAM_NATIVE_SEGMENT_OWNER_OR_MATERIAL_MISMATCH')
+                if not body.get('bodies') or any(not b['closed'] for b in body['bodies']):
+                    raise ValueError('BEAM_NATIVE_SEGMENT_SOLID_NOT_PROVEN')
+            return 'Beam'
         if self.command=='CreateRoofs':
             if (actual.get('roofClass')!='SinglePlane' or actual.get('structureType')!='Basic'
                     or not RUN.close(actual.get('zCoordinate'),expected['level'])
@@ -238,10 +285,11 @@ def attribute_guid(value):
 
 
 def adapters(enabled):
-    known={'roof':'CreateRoofs','morph':'CreateMorphs','mep':'CreateMEPRoutingElements','mep-component':'CreateMEPElements'}
-    if set(enabled)-set(known):
+    known={'roof':'CreateRoofs','beam':'CreateBeams','morph':'CreateMorphs','mep':'CreateMEPRoutingElements','mep-component':'CreateMEPElements'}
+    if set(enabled)-set(known)-{'wall'}:
         raise ValueError('UNKNOWN_OPTIONAL_MODULE')
-    return {known[k]:NativeAdapter(known[k]) for k in enabled}
+    # Wall uses the retained core SceneWriter verification and dispatch.
+    return {known[k]:NativeAdapter(known[k]) for k in enabled if k in known}
 
 
 def details_candidate(root,detail_id,host=None):
@@ -295,30 +343,35 @@ def native_context(api,source,extra_plan=None,extra_created=None):
     if extra_plan:
         enabled=adapters(extra_plan['integrationBindings']['enabled'])
         for step in extra_plan['graph']['operations']:
-            value=extra_created[step['id']];handler=enabled[step['command']]
-            row=RUN.requested_details(api,value['guid']);floor=handler.floor(step['params'],extra_plan)
-            kind=handler.verify(api,value['guid'],step['params'],row,floor,RUN.story_level_for_floor(old['storyBindings'],floor))
+            value=extra_created[step['id']];handler=enabled.get(step['command'])
+            row=RUN.requested_details(api,value['guid'])
+            floor=handler.floor(step['params'],extra_plan) if handler else step['params']['wallsData'][0]['floorIndex']
+            level=RUN.story_level_for_floor(old['storyBindings'],floor)
+            kind=handler.verify(api,value['guid'],step['params'],row,floor,level) if handler else RUN.verify_readback(
+                step['command'],step['params'],row,expected_floor=floor,expected_story_level=level)
             if value.get('kind')!=kind or value.get('floorIndex')!=floor:
                 raise ValueError('CONNECTED_LEDGER_KIND_OR_STORY_DRIFT')
             verified[step['id']]=value
     children=A.column_subelements(api,source['created'])
+    beams=A.assembly_subelements(api,extra_created or {},'Beam')
     raw=api('GetModelDumpV1',{});normalized=G.normalize_dump(raw)
     geometry={e['guid'].lower():e for e in normalized['elements']}
     context={'coordinateSystem':normalized['coordinateSystem'],'units':normalized['units'],
         'binding':old['binding'],'storyBindings':old['storyBindings'],'elements':{},
-        'inventory':A.inventory_guids(api),'columnSegments':children}
+        'inventory':A.inventory_guids(api),'columnSegments':children,'beamSegments':beams}
     if context['units']!='m' or context['coordinateSystem']!='ABSOLUTE_PROJECT_XYZ':
         raise ValueError('CONNECTED_UNITS_OR_COORDINATES_MISMATCH')
     for sid,value in verified.items():
         g=value['guid'].lower();row=geometry.get(g)
         members=[row] if row else []
         members += [geometry[c] for c in children.get(g,[])]
+        members += [geometry[c] for c in beams.get(g,[])]
         native_bounds=[ROOF.bounds(r) for r in members]
         native_bounds=[b for b in native_bounds if b]
         if not native_bounds and value['kind']!='MEPRouting':
             raise ValueError('CONNECTED_BODY_NOT_READABLE: '+sid)
         context['elements'][sid]={**value,'bounds':native_bounds,
-            'materialBindings':row.get('materialBindings',{}) if row else {},
+            'materialBindings':geometry[beams[g][0]].get('materialBindings',{}) if g in beams else row.get('materialBindings',{}) if row else {},
             'hostGuid':row.get('relationships',{}).get('hostGuid') if row else None}
         if value['kind']=='Morph':
             memo=RUN.requested_details(api,value['guid']).get('details',{}).get('body',{})
@@ -329,7 +382,8 @@ def native_context(api,source,extra_plan=None,extra_created=None):
 
 def bind_plan(source,operations,enabled,dependencies=None):
     handlers=adapters(enabled)
-    if any(s['command'] not in handlers for s in operations):
+    core={'CreateWalls'} if 'wall' in enabled else set()
+    if any(s['command'] not in set(handlers)|core for s in operations):
         raise ValueError('DISABLED_MODULE_OPERATION')
     plan={k:copy.deepcopy(source['preflight'][k]) for k in ('binding','storyBindings','schemaVersion','schemaSha256')}
     operations=copy.deepcopy(operations)
@@ -380,6 +434,7 @@ def retained_geometry_signatures(normalized,guids):
 
 def verify_inventory(context,source,extra_created,route_owned):
     expected=set(source['inventory'])|{v['guid'].lower() for v in extra_created.values()}|set(route_owned)
+    expected|={g for members in context.get('beamSegments',{}).values() for g in members}
     if set(context['inventory'])!=expected:
         raise ValueError('CONNECTED_INVENTORY_HAS_UNOWNED_OR_MISSING_GUIDS')
     return sorted(expected)
@@ -480,13 +535,13 @@ def main(argv=None):
     request=json.loads(args.intent.read_text(encoding='utf-8'))
     enabled=request['enabled'];adapters(enabled)
     new_ops=request['operations']
-    if not new_ops or any(s['command'] not in adapters(enabled) for s in new_ops):
+    if not new_ops or any(s['command'] not in set(adapters(enabled))|({'CreateWalls'} if 'wall' in enabled else set()) for s in new_ops):
         raise ValueError('ONLY_EXPLICIT_ENABLED_NEW_COMPONENTS')
     prior_plan=record.get('connectedPlan');prior_created=record.get('connectedCreated',{})
     prior_ops=prior_plan['graph']['operations'] if prior_plan else []
     combined_enabled=sorted(set(enabled)|set(prior_plan['integrationBindings']['enabled'] if prior_plan else []))
-    plan=bind_plan(source,prior_ops+new_ops,combined_enabled,dependencies={
-        'request':request.get('dependencies',{}),'acceptedPrefixHash':RUN.digest(prior_created)})
+    dependencies=copy.deepcopy(request.get('dependencies',{}));dependencies['acceptedPrefixHash']=RUN.digest(prior_created)
+    plan=bind_plan(source,prior_ops+new_ops,combined_enabled,dependencies=dependencies)
     result={'status':'PLAN_VALIDATED_OFFLINE','source':source,'plan':plan,'automaticRetry':False,'modelWriteAttempts':0}
     if args.mode=='offline':
         args.output.mkdir(parents=True,exist_ok=False);A.write_json(args.output/'result.json',result)

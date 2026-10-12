@@ -46,11 +46,17 @@ def expanded_context(api,baseline,new_primary=None):
     for guid in set(network['physicalGuids'])-route_parts:
         row=C.RUN.requested_details(api,guid);body=geometry.get(guid)
         if body is None:raise ValueError('EXPANSION_FITTING_BODY_MISSING')
-        context['elements']['mep-physical-'+guid]={'guid':guid,'kind':'MEPComponent','floorIndex':row['floorIndex'],
+        sid=next((sid for sid,e in context['elements'].items() if e['guid'].lower()==guid),'mep-physical-'+guid)
+        context['elements'][sid]={**context['elements'].get(sid,{}),'guid':guid,'kind':'MEPComponent','floorIndex':row['floorIndex'],
             'bounds':[C.ROOF.bounds(body)],'materialBindings':body.get('materialBindings',{}),'hostGuid':None}
     for sid,value in (new_primary or {}).items():
         guid=value['guid'].lower();body=geometry[guid]
-        context['elements'][sid]={**value,'bounds':[C.ROOF.bounds(body)],'materialBindings':body.get('materialBindings',{}),
+        children=C.A.assembly_subelements(api,{sid:value},'Beam').get(guid,[]) if value.get('kind')=='Beam' else []
+        actual=[geometry[g] for g in children] if children else [body]
+        if children:context.setdefault('beamSegments',{})[guid]=children
+        materials=actual[0].get('materialBindings',{})
+        if any(e.get('materialBindings',{})!=materials for e in actual):raise ValueError('EXPANSION_MULTIMATERIAL_ASSEMBLY_REQUIRES_SEGMENT_CONTEXT')
+        context['elements'][sid]={**value,'bounds':[C.ROOF.bounds(e) for e in actual],'materialBindings':materials,
             'hostGuid':value.get('hostGuid')}
     return context,native,network
 

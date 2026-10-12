@@ -137,7 +137,7 @@ def native_junction_coverage(context,native,details,collision_pairs=()):
         'wall_floor':({'Wall'},{'Slab'}),
         'wall_window':({'Wall'},{'Window','Door'}),
         'wall_roof':({'Wall'},{'Roof'}),
-        'roof_members_and_abutments':({'Roof','Morph'},{'Morph'}),
+        'roof_members_and_abutments':({'Roof','Morph','Beam'},{'Morph','Beam'}),
         'cladding_structure':({'CurtainWall','Cladding'},{'Wall','Column','Roof'}),
         'wall_intersections_and_ties':({'Wall'},{'Wall'}),
         'column_floor':({'Column'},{'Slab'}),
@@ -184,7 +184,7 @@ def native_junction_coverage(context,native,details,collision_pairs=()):
             if not (explicit_host or near):continue
             owners={}
             for g in pair:
-                children=next((v for k,v in context.get('columnSegments',{}).items() if k.lower()==g),[])
+                children=next((v for slot in ('columnSegments','beamSegments') for k,v in context.get(slot,{}).items() if k.lower()==g),[])
                 if bodies.get(g,{}).get('bodies') or not children:owners[g]=g
                 for child in children:owners[child.lower()]=g
             area=None;reason=None
@@ -409,7 +409,7 @@ def prepare_counterbatten_junction(root,source,context,native,batten_guid,end_wa
     bodies={e['guid'].lower():e for e in native['elements']}
     batten=entries[batten_guid.lower()];wall=entries[end_wall_guid.lower()]
     roof=entries[(batten.get('hostGuid') or '').lower()]
-    if batten['kind']!='Morph' or roof['kind']!='Roof' or wall['kind']!='Wall' or wall['floorIndex']!=roof['floorIndex']:
+    if batten['kind'] not in ('Morph','Beam') or roof['kind']!='Roof' or wall['kind']!='Wall' or wall['floorIndex']!=roof['floorIndex']:
         raise ValueError('COUNTERBATTEN_REQUIRES_ACCEPTED_BATTEN_ROOF_UPPER_WALL')
     candidate=C.details_candidate(root,'ARMO_SELFLOCK_ROOF__P0003',roof)
     if not any(r['relation']=='battens_supported_by_counterbattens' and r['battens_position']==4 and r['counterbattens_position']==5
@@ -420,6 +420,15 @@ def prepare_counterbatten_junction(root,source,context,native,batten_guid,end_wa
     width=facts['c5']['values']['value_2']/1000;height=facts['c5']['values']['value']/1000
     from shapely.geometry import Polygon
     planes=[];body=bodies[batten_guid.lower()]
+    segment_dependencies=[]
+    if batten['kind']=='Beam':
+        segments=[e for e in bodies.values() if e.get('relationships',{}).get('hostGuid','').lower()==batten_guid.lower()]
+        if not segments or any(e['type']!='BeamSegment' or e['homeStory']!=body['homeStory'] or not e.get('bodies') for e in segments):
+            raise ValueError('COUNTERBATTEN_NATIVE_BEAM_SEGMENTS_NOT_PROVEN')
+        material=segments[0]['materialBindings']
+        if any(e['materialBindings']!=material for e in segments):raise ValueError('COUNTERBATTEN_MULTIMATERIAL_BEAM_UNSUPPORTED')
+        body={**body,'bodies':[s for e in segments for s in e['bodies']],'materialBindings':material}
+        segment_dependencies=segments
     for solid in body['bodies']:
         for face in solid['faces']:
             points=[solid['vertices'][i] for i in face['vertices']]
@@ -461,7 +470,7 @@ def prepare_counterbatten_junction(root,source,context,native,batten_guid,end_wa
         'projectMaterialSelection':selection,'sourceSectionMeters':{'width':width,'height':height},'modelDerivedLengthMeters':length,
         'modelSpanAuthority':{'start':'Actual accepted batten underside low edge','end':'Actual upper wall inner face','startY':start,'endY':end},
         'nativeDependencyBodies':[{'guid':e['guid'],'geometryHash':C.RUN.digest(C.ROOF.geometry_signature(bodies[e['guid'].lower()])),
-            'materialBindings':bodies[e['guid'].lower()]['materialBindings'],'homeStory':bodies[e['guid'].lower()]['homeStory']} for e in (batten,wall)],
+            'materialBindings':bodies[e['guid'].lower()]['materialBindings'],'homeStory':bodies[e['guid'].lower()]['homeStory']} for e in [batten,wall]+segment_dependencies],
         'physicalContact':{'counterpartGuid':batten['guid'],'expectedAreaSquareMeters':width*facts['c4']['values']['value_2']/1000,
             'sourceRelation':'battens_supported_by_counterbattens','sourceEntityPair':['c4','c5']},
         'classification':{'role':'counterbatten','scope':'SOURCE_ROLE_IN_BIM_GRAPH; NATIVE_CLASSIFICATION_ITEM_NOT_ASSIGNED'},
