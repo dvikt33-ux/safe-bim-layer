@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 105,
+  "revision": 106,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2645,7 +2645,7 @@
       "action_id": "APA-P70.A04",
       "title": "Вывести из модели обязательные семейства узлов и их условия применимости",
       "kind": "INTEGRATION",
-      "status": "READY",
+      "status": "IN_PROGRESS",
       "priority": 4,
       "work_key": "required-junction-condition-coverage",
       "depends_on": [
@@ -2664,9 +2664,9 @@
         "Матрица всех применимых примыканий/отверстий/армопоясов/связей/крепежа с точным source/detail ID и открытыми пробелами"
       ],
       "acceptance": "Матрица всех применимых примыканий/отверстий/армопоясов/связей/крепежа с точным source/detail ID и открытыми пробелами",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "work-construction-junctions-20261012",
+      "lease_until": "2026-10-12T16:08:54Z",
+      "claim_ref": "APA-RUN-20261012T120854Z-construction-junctions-s01",
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-NATIVE95-V32-20261012"
