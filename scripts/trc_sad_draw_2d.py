@@ -221,6 +221,8 @@ def main(argv=None):
     args = ap.parse_args(argv)
     if args.port != PORT:
         raise ValueError("ONLY_APPROVED_PORT_19727")
+    if args.draw:
+        raise RuntimeError("RETIRED_WRITER: user rejected imitation axes/2D plans; do not draw or duplicate. Use native Archicad Grid System after safe GUID cleanup.")
     spec = json.loads(DATA.read_text(encoding="utf-8"))
     floors = ["1", "2", "3"] if args.floor == "all" else [args.floor]
     plans = [plan_floor(spec, sid) for sid in floors]
