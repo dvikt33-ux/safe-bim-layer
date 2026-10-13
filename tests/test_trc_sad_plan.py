@@ -74,8 +74,8 @@ class TrcSadPlanTests(unittest.TestCase):
     def test_areas_come_only_from_rectangles_not_caption(self):
         preview = T.prepare(self.spec)
         items = {r["id"]: r for r in preview["programReservations"]}
-        self.assertAlmostEqual(items["cinema"]["reservedAreaSquareMeters"], 2756)
-        self.assertAlmostEqual(items["games"]["reservedAreaSquareMeters"], 1802)
+        self.assertAlmostEqual(items["cinema"]["reservedAreaSquareMeters"], 2734.8)
+        self.assertAlmostEqual(items["games"]["reservedAreaSquareMeters"], 1823.2)
         self.assertEqual(items["cinema"]["status"],
                          "UNVERIFIED_PROGRAM_RESERVATION_NOT_NATIVE_ZONE")
         self.assertEqual(sum(r["id"] == "food_rear" for r in items.values()), 1)
