@@ -87,8 +87,18 @@ def build(root_paths, output):
     try:
         conn.execute("CREATE VIRTUAL TABLE sections USING fts5(path UNINDEXED, heading, content, line UNINDEXED, source_sha256 UNINDEXED, source_class UNINDEXED, tokenize='unicode61 remove_diacritics 2')")
         conn.execute("CREATE TABLE provenance (key TEXT PRIMARY KEY, value TEXT NOT NULL)")
+        conn.execute("CREATE TABLE indexed_sources (path TEXT PRIMARY KEY, size_bytes INTEGER NOT NULL, mtime_ns INTEGER NOT NULL)")
+        conn.execute("CREATE TABLE indexed_roots (path TEXT PRIMARY KEY)")
+        for root in root_paths:
+            conn.execute("INSERT INTO indexed_roots VALUES (?)", (str(Path(root).resolve()),))
         for file in files:
+            before_stat = file.stat()
             raw = file.read_bytes()
+            after_stat = file.stat()
+            if (before_stat.st_size, before_stat.st_mtime_ns) != (after_stat.st_size, after_stat.st_mtime_ns):
+                raise ValueError("Source changed during index build")
+            conn.execute("INSERT INTO indexed_sources VALUES (?,?,?)",
+                         (str(file), after_stat.st_size, after_stat.st_mtime_ns))
             text = raw.decode("utf-8-sig", errors="strict")
             digest = sha(raw)
             for title, line, body in split_sections(text):
@@ -97,7 +107,7 @@ def build(root_paths, output):
                                  (str(file), title, body, line, digest, source_class(file)))
                     n += 1
         conn.execute("INSERT INTO provenance VALUES (?,?)", ("authority", "DERIVED_READ_ONLY"))
-        conn.execute("INSERT INTO provenance VALUES (?,?)", ("schema", "APA_MARKDOWN_SECTION_FTS_V1"))
+        conn.execute("INSERT INTO provenance VALUES (?,?)", ("schema", "APA_MARKDOWN_SECTION_FTS_V2"))
         conn.commit()
     except Exception:
         conn.close()
@@ -106,6 +116,32 @@ def build(root_paths, output):
     conn.close()
     return {"status": "DERIVED_SECTION_INDEX", "files": len(files), "sections": n,
             "index": str(target), "search_backend": "sqlite-fts5"}
+
+
+def check_index_manifest(conn):
+    """Fail closed on unseen added/deleted/stat-changed files before FTS query.
+
+    Only directory names, mtime and size are checked for ALL files, so this
+    does not read whole archive on each query; top-K raw bytes remain checked.
+    Adversarial same-length/same-mtime changes outside top-K require source
+    revision pinning or manual reindex; no total-corpus byte attestation claim.
+    """
+    stored = {r["path"]: (r["size_bytes"], r["mtime_ns"])
+              for r in conn.execute("SELECT path,size_bytes,mtime_ns FROM indexed_sources")}
+    roots = [row["path"] for row in conn.execute("SELECT path FROM indexed_roots")]
+    if not roots:
+        return False
+    try:
+        paths = list_sources(roots)
+        if set(map(str, paths)) != set(stored):
+            return False
+        for path in paths:
+            state = path.stat()
+            if (state.st_size, state.st_mtime_ns) != stored[str(path)]:
+                return False
+    except (OSError, ValueError):
+        return False
+    return True
 
 
 def normalized_query(query):
@@ -123,8 +159,11 @@ def search(db, query, limit=5, max_snippet=240, selected_class=None):
     conn.row_factory = sqlite3.Row
     try:
         meta = dict(conn.execute("SELECT key,value FROM provenance"))
-        if meta != {"authority":"DERIVED_READ_ONLY", "schema":"APA_MARKDOWN_SECTION_FTS_V1"}:
+        if meta != {"authority":"DERIVED_READ_ONLY", "schema":"APA_MARKDOWN_SECTION_FTS_V2"}:
             raise ValueError("Unknown or modified index provenance")
+        if not check_index_manifest(conn):
+            return {"status": "STALE_INDEX", "count": 0, "results": [],
+                    "warning": "Directory or source stat changed since indexing; rebuild"}
         q = normalized_query(query)
         allowed = {"ARCHIVED_SOURCE", "RESEARCH_RUN", "PROJECT_CONTROL", "OTHER_DOCUMENT"}
         if selected_class is not None and selected_class not in allowed:
@@ -172,6 +211,7 @@ def search(db, query, limit=5, max_snippet=240, selected_class=None):
         return {"status": "OK", "count": len(results), "results": results,
                 "query_type": "LEXICAL_OR_FTS5", "source_class_filter": selected_class,
                 "source_byte_readback": "MATCH_FOR_RETURNED_HITS",
+                "source_manifest_check": "PATH_SIZE_MTIME_MATCH",
                 "warning": "Exact source blob/edition/readback and applicability must be verified before use"}
     finally:
         conn.close()
