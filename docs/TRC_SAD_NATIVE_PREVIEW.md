@@ -134,3 +134,42 @@ This is a 2D concept drawing, not verified door/egress/MEP, kitchen or
 cinema layouts; program labels and provisional square metre reservations
 do not imply code approval or physical partitioned rooms. No true BIM Zone,
 Stair, Wall, Slab or 3D element is created.
+
+## Measured planning grid — 2D only (after successful existing floor sketches)
+
+The user confirmed native 2D drawing SUCCESS_UNSAVED at port 19727:
+27 native Hatches, 51 native Polylines and 46 native Texts. No 3D or
+SaveProject. The next priority is coordinate AXES and DIMENSION CHAINS, not
+another 3D shell or modification of floor heights.
+
+The file `scripts/trc_sad_grid_2d.py` adds 23 numerical axes 1..23
+(X=0..184.8m) and 18 Cyrillic letter axes А..Ф (Y=0..142.8m), on a
+confirmed exact 8.4m module. Every second axis indicates a tentative
+16.8m planning span, NOT a verified structural support/column grid.
+Native 2D primitives are CreatePolylines, CreateCircles and CreateTexts;
+no Hatches or previously created plans are recreated. Dimensions in mm
+are drawn as non-associative 2D chains with witness/tick markers: 22 x 8400
+in X, 17 x 8400 in Y, and overall 184800 x 142800. The atrium bounding
+rectangle reads 42000 x 50400. All values are computed from the same
+coordinated geometry manifest, not manually inserted arbitrary room areas.
+
+PowerShell from C:\LocalAI\TRC_SAD_Preview, with the same PLN still open:
+
+    git pull --ff-only
+    python scripts/trc_sad_grid_2d.py --floor all
+    python scripts/trc_sad_grid_2d.py --port 19727 --floor all --draw
+
+The first invocation is strictly offline. The second intentionally adds
+native 2D grid lines, markers and dimensions to EXISTING floors 0/1/2 in
+`ТРЦ с GP.pln` at port 19727 WITHOUT saving. Other ports/PLN filenames,
+Tapir revisions or story mappings are rejected. One-shot attempt record
+`trc-sad-grid-19727-attempt.jsonl` prevents blind retries. If there is a
+partial failure, inspect in Archicad before rerunning; never repeat the
+original `trc_sad_draw_2d.py --draw` operation, which already completed.
+
+Grid circles/text are native editable symbols, while the dimensions are
+**plain 2D drawn annotations**, not native associative Dimension elements.
+This is appropriate for immediate schematic setting-out; subsequent
+structural and normative design must verify real grids/column locations.
+
+No native 3D Walls, Columns, Slabs, Roofs, Zones, or Story edits are executed.
