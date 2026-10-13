@@ -54,17 +54,19 @@ def verify_model(api, plan, created):
 
 
 MODEL_COMMANDS = frozenset({'MoveElements', 'ModifyWalls', 'ModifyWindows', 'ModifyDoors',
-                           'CreateSolidElementLinks','SetPropertyValuesOfElements'})
+                           'CreateSolidElementLinks','SetPropertyValuesOfElements','CreateStairs','ModifySlabs'})
 
 
 def model_operation_scope(command, parameters, source_hash, owned_guids,
-                          retained_guids, authorization_ref):
+                          retained_guids, authorization_ref, isolated_inventory=None):
     """Exact new-building edit scope for the existing SceneWriter, not a grant."""
     scope={'schema':'APA_AUTHORED_MODEL_OPERATION_V1','command':command,
         'parameters':parameters,'sourceHash':source_hash,
         'ownedGuids':sorted(g.lower() for g in owned_guids),
         'retainedGuids':sorted(g.lower() for g in retained_guids),
         'authorizationRef':authorization_ref}
+    if isolated_inventory is not None:
+        scope['isolatedInventory']=sorted(g.lower() for g in isolated_inventory)
     scope['scopeHash']=RUN.digest(scope)
     qualify_model_operation(scope,command,parameters,source_hash)
     return scope
@@ -78,16 +80,42 @@ def qualify_model_operation(scope,command,parameters,source_hash):
                 {k:v for k,v in scope.items() if k!='scopeHash'})):
         raise ValueError('MODEL_OPERATION_SCOPE_MISMATCH')
     owned=set(scope['ownedGuids']);retained=set(scope['retainedGuids'])
-    if not owned or not retained or owned&retained:raise ValueError('MODEL_OWNERSHIP_SCOPE_INVALID')
+    if (not owned or owned&retained or (not retained and
+            (scope.get('isolatedInventory')!=sorted(owned)))):
+        raise ValueError('MODEL_OWNERSHIP_SCOPE_INVALID')
     slots={'MoveElements':'elementsWithMoveVectors','ModifyWalls':'wallsWithDetails',
         'ModifyWindows':'windowsWithDetails','ModifyDoors':'doorsWithDetails',
-        'CreateSolidElementLinks':'solidLinks','SetPropertyValuesOfElements':'elementPropertyValues'}
+        'CreateSolidElementLinks':'solidLinks','SetPropertyValuesOfElements':'elementPropertyValues',
+        'CreateStairs':'stairsData','ModifySlabs':'slabsWithDetails'}
     if set(parameters)!={slots[command]} or len(parameters[slots[command]])!=1:
         raise ValueError('MODEL_OPERATION_REQUIRES_ONE_EXPLICIT_TARGET')
     row=parameters[slots[command]][0]
     ids=[row.get('elementId',{}).get('guid','').lower()]
     import math
-    if command=='MoveElements':
+    if command=='CreateStairs':
+        ids=[]
+        fields={'favoriteName','baseLinePoints','zCoordinate','floorIndex','totalHeight',
+                'flightWidth','stepNum','riserHeight','treadDepth','finishVisible'}
+        points=row.get('baseLinePoints',[])
+        if (set(row)!=fields or not isinstance(row['favoriteName'],str) or not row['favoriteName']
+                or type(row['floorIndex']) is not int or type(row['stepNum']) is not int or row['stepNum']<2
+                or len(points)!=2 or any(set(p)!={'x','y'} or any(type(v) not in (int,float)
+                    or not math.isfinite(v) for v in p.values()) for p in points)
+                or points[0]==points[1] or type(row['finishVisible']) is not bool
+                or any(type(row[k]) not in (int,float) or not math.isfinite(row[k]) or row[k]<=0
+                    for k in ['totalHeight','flightWidth','riserHeight','treadDepth'])
+                or type(row['zCoordinate']) not in (int,float) or not math.isfinite(row['zCoordinate'])
+                or abs(row['stepNum']*row['riserHeight']-row['totalHeight'])>1e-6):
+            raise ValueError('MODEL_STAIR_REQUIRES_COMPLETE_SOURCE_BASELINE_AND_DIMENSIONS')
+    elif command=='ModifySlabs':
+        if set(row)!={'elementId','holes'} or not isinstance(row['holes'],list) or len(row['holes'])!=1:
+            raise ValueError('MODEL_SLAB_HOLE_REQUIRES_EXACT_OWNED_CONTOUR')
+        hole=row['holes'][0]
+        points=hole.get('polygonCoordinates',[])
+        if set(hole)!={'polygonCoordinates'} or len(points)!=4 or any(set(p)!={'x','y'} or
+                any(type(v) not in (int,float) or not math.isfinite(v) for v in p.values()) for p in points):
+            raise ValueError('MODEL_STAIR_HOLE_REQUIRES_MEASURED_RECTANGULAR_FOOTPRINT')
+    elif command=='MoveElements':
         vector=row.get('moveVector',{})
         if (set(row)!={'elementId','moveVector','copy'} or row['copy'] is not False or
                 set(vector)!={'x','y','z'} or any(type(v) not in (int,float) or not math.isfinite(v) for v in vector.values())):
@@ -106,9 +134,10 @@ def qualify_model_operation(scope,command,parameters,source_hash):
             raise ValueError('MODEL_ROLE_REQUIRES_EXPLICIT_NATIVE_ENUM_AND_PROPERTY_ID')
     else:
         fields=set(row)-{'elementId'}
-        allowed={'height'} if command=='ModifyWalls' else {'width','height'}
+        allowed={'height'} if command=='ModifyWalls' else {'width','height','sillHeight'}
         if not fields or not fields<=allowed or any(
-                type(row[k]) not in (int,float) or not math.isfinite(row[k]) or row[k]<=0 for k in fields):
+                type(row[k]) not in (int,float) or not math.isfinite(row[k]) or
+                (k!='sillHeight' and row[k]<=0) for k in fields):
             raise ValueError('MODEL_EDIT_REQUIRES_SOURCE_DIMENSIONS')
     if any(g not in owned or g in retained for g in ids):
         raise ValueError('MODEL_EDIT_ONLY_NEW_OWNED_ELEMENTS')
@@ -133,7 +162,7 @@ def prepare_building_parameter_edit(api,old_plan,created,new_intent,schema_path)
         guid=created[sid]['guid'];command=before['command']
         if command=='CreateWalls' and changed=={'height'}:
             native='ModifyWalls';params={'wallsWithDetails':[{'elementId':{'guid':guid},'height':b['height']}]}
-        elif command in {'CreateWindows','CreateDoors'} and changed<={'width','height'}:
+        elif command in {'CreateWindows','CreateDoors'} and changed<={'width','height','sillHeight'}:
             native='Modify'+command[6:];key=command[6:].lower()+'WithDetails'
             params={key:[{'elementId':{'guid':guid},**{k:b[k] for k in sorted(changed)}}]}
         elif command=='CreateRoofs' and changed=={'level'}:
@@ -157,16 +186,20 @@ def prepare_building_parameter_edit(api,old_plan,created,new_intent,schema_path)
 
 
 def execute_model_operation(writer,scene_id,command,parameters,source_hash,owned_guids,
-                            retained_signatures,verify_after,authorization_ref,saved_sha256):
+                            retained_signatures,verify_after,authorization_ref,saved_sha256,
+                            owned_before_check=None):
     """Delegate one exact model operation to the retained SceneWriter journal."""
     from pathlib import Path
     import hashlib
     import archicad_connected_components as C
+    isolated_inventory=A.inventory_guids(writer.api) if not retained_signatures else None
     scope=model_operation_scope(command,parameters,source_hash,owned_guids,
-        retained_signatures,authorization_ref)
+        retained_signatures,authorization_ref,isolated_inventory=isolated_inventory)
     pre={'sourcePlanHash':source_hash,'binding':writer.guarded_binding(),
         'integrationBindings':{'dependencies':{'modelOperation':scope}}}
     def retained():
+        if not retained_signatures and A.inventory_guids(writer.api)!=scope['isolatedInventory']:
+            raise ValueError('MODEL_ISOLATED_INVENTORY_CHANGED')
         native=C.G.normalize_dump(writer.api('GetModelDumpV1',{}))
         if C.retained_geometry_signatures(native,list(retained_signatures))!=retained_signatures:
             raise ValueError('MODEL_RETAINED_GEOMETRY_CHANGED')
@@ -174,6 +207,7 @@ def execute_model_operation(writer,scene_id,command,parameters,source_hash,owned
             raise ValueError('MODEL_OWNED_GUID_MISSING')
         return native
     def before():
+        if owned_before_check is not None:owned_before_check(writer.api)
         if hashlib.sha256(Path(pre['binding']['path']).read_bytes()).hexdigest()!=saved_sha256:
             raise ValueError('MODEL_SAVED_FILE_HASH_CHANGED')
         native=retained()

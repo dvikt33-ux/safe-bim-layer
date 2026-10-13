@@ -149,6 +149,7 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
         "sourcePlanHash":checked["sourcePlanHash"],
         "schemaVersion":checked["schemaVersion"],
         "schemaSha256":hashlib.sha256(schema.read_bytes()).hexdigest(),
+        "schemaPath":str(schema.resolve()),
         "provisionalBasicSlabMaterialGuid":actual_guid,
         "storyBindings":known,
         "authoredRoomIds":[r["id"] for r in geometry["rooms"]],
@@ -178,7 +179,7 @@ def as_existing_scene_writer_preview(candidate):
         raise ValueError("UNTRUSTED_OR_AUTHORIZED_SOURCE_CANDIDATE")
     if not RUN.authorized_authored_target(candidate.get("nativeTargetProjectPath")):
         raise ValueError("WRITER_PREVIEW_ONLY_FOR_EXISTING_APPROVED_SCRATCH_PLN")
-    schema=RUN.DEFAULT_SCENE_SCHEMA
+    schema=Path(candidate.get('schemaPath',RUN.DEFAULT_SCENE_SCHEMA))
     if (not schema.is_file() or
             hashlib.sha256(schema.read_bytes()).hexdigest()!=candidate.get("schemaSha256")):
         raise ValueError("PINNED_SCHEMA_CHANGED_SINCE_NATIVE_COMPILE")

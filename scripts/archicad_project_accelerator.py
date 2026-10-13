@@ -34,11 +34,11 @@ READS = frozenset({"GetProjectInfo", "GetStories", "GetAddOnVersion",
                   "GetCollisions", "GetBuildingMaterials", "GetComposites", "GetProfiles",
                   "GetSurfaces", "GetAvailableLibraryParts", "GetGDLParametersOfElements", "API.GetProductInfo", 'API.GetPublisherSetNames',
                   'API.GetAllClassificationSystems','API.GetAllClassificationsInSystem','GetClassificationsOfElements','GetMEPPreferenceTables',
-                  'API.GetPropertyIds','API.GetAllPropertyNames','API.GetDetailsOfProperties',
+                  'API.GetPropertyIds','API.GetAllPropertyNames','API.GetDetailsOfProperties','API.GetPropertyValuesOfElements',
                   'GetSolidElementLinks','GetPropertyValuesOfElements'})
 NATIVE_MUTATIONS = RUN.ALLOWED_WRITES | RUN.EXTENDED_WRITES | frozenset({"ModifySlabs","ModifyMorphs","ModifyBeams",
     'ConnectMEPElements','ModifyMEPRoutingElements','CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks','SetClassificationsOfElements','TrimElements',
-    'MoveElements','SetPropertyValuesOfElements'})
+    'MoveElements','ModifyWalls','ModifyWindows','ModifyDoors','SetPropertyValuesOfElements','SetStories','CreateStairs'})
 PRIMITIVES = {
     "pavilion-frame-v1": {"status": "EXECUTABLE_PENDING_LIVE_ACCEPTANCE",
                           "executor": "SceneWriter", "elementCount": 12},
@@ -58,7 +58,7 @@ def write_json(path, value):
 
 def native_transport(command, params):
     if command not in {'API.GetProductInfo','API.GetAllClassificationSystems','API.GetAllClassificationsInSystem',
-                       'API.GetPublisherSetNames','API.GetPropertyIds','API.GetAllPropertyNames','API.GetDetailsOfProperties'}:
+                       'API.GetPublisherSetNames','API.GetPropertyIds','API.GetAllPropertyNames','API.GetDetailsOfProperties','API.GetPropertyValuesOfElements'}:
         return RUN.tapir(RUN.PORT, command, params)
     request = urllib.request.Request(f"http://127.0.0.1:{RUN.PORT}",
         data=json.dumps({"command": command, "parameters": params}).encode("utf-8"),
@@ -210,6 +210,18 @@ def compile_authored_native_candidate(brief, project_pack, authored_layout,
     return AUTHORED_NATIVE.compile_candidate(
         brief,project_pack,authored_layout,authored_story_heights,
         read_api,schema_path=schema_path,junction_policy=junction_policy)
+
+
+def apply_native_story_height_change(writer, change, run_id, saved_sha256, output):
+    """Main orchestrator entry; adapter reuses this writer and its journal."""
+    from archicad_native_spatial_structure import execute_height_change
+    return execute_height_change(writer,change,run_id,saved_sha256,output)
+
+
+def apply_native_stair_connection(writer, recipe, run_id, saved_sha256):
+    """Main orchestrator entry; no second native dispatcher or scene retry."""
+    from archicad_native_stair_connection import execute
+    return execute(writer,recipe,run_id,saved_sha256)
 
 
 def compile_intent(intent, schema_path):
@@ -486,8 +498,13 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
             protected=None
             if authored and (intent.get('nativeRoofJunctions') or intent.get('structuralFunctions')):
                 import archicad_connected_components as CONNECTED
-                original=CONNECTED.G.normalize_dump(api('GetModelDumpV1',{}))
-                protected=CONNECTED.retained_geometry_signatures(original,before)
+                try:
+                    original=CONNECTED.G.normalize_dump(api('GetModelDumpV1',{}))
+                    protected=CONNECTED.retained_geometry_signatures(original,before)
+                except ValueError as exc:
+                    if str(exc)!='Native 3D model has zero bodies; full geometry dump is unavailable':raise
+                    from archicad_native_spatial_structure import template_reference_signatures
+                    protected=template_reference_signatures(api,before)
                 saved_hash=hashlib.sha256(Path(binding['path']).read_bytes()).hexdigest()
             # Reuse the original one-shot reservation/host/readback implementation.
             result["scene"] = writer.execute(anchor["x"], anchor["y"], run_id, ticket["sourcePlanHash"])

@@ -54,12 +54,14 @@ def overlay_registration(addon_source):
         if text.count(include_anchor) != 1:
             raise RuntimeError("Could not locate the unique ElementCommands include in AddOnMain.cpp")
         text = text.replace(include_anchor, include_anchor + include_line + "\n", 1)
+    grid_include = '#include "NativeGridCommands.hpp"'
+    if grid_include not in text:
+        text = text.replace(include_line, include_line + "\n" + grid_include, 1)
 
     model_register = ('        err |= RegisterCommand<GetModelDumpV1Command> (elementCommands, "model-dump-v1", '
                       '"Dump all available regenerated resultant 3D bodies, stories, native bindings and effective face materials.");')
     if model_register not in text:
-        group_anchor = "        err |= RegisterCommand<GetCurrent2DDocumentV1Command> (elementCommands, "document-2d-v1", "Read current-database Line and Text geometry/content, including raw and interpreted AutoText, without modifying project elements.");
-        AddCommandGroup (elementCommands);"
+        group_anchor = '        err |= RegisterCommand<GetCurrent2DDocumentV1Command> (elementCommands, "document-2d-v1", "Read current-database Line and Text geometry/content, including raw and interpreted AutoText, without modifying project elements.");\n        AddCommandGroup (elementCommands);'
         if text.count(group_anchor) != 1:
             raise RuntimeError("Could not locate the unique elementCommands registration group")
         text = text.replace(group_anchor, model_register + "\n" + group_anchor, 1)
@@ -67,13 +69,23 @@ def overlay_registration(addon_source):
     autotext_register = ('        err |= RegisterCommand<GetAutoTextsV1Command> (projectCommands, "autotext-v1", '
                          '"Enumerate current Archicad AutoText description/key/value triplets without modifying the project.");')
     if autotext_register not in text:
-        project_anchor = "        err |= RegisterCommand<SetMasterLayoutContextV1Command> (projectCommands, "master-layout-context-v1", "Set or clear the current Master Layout context to a concrete Layout database for AutoText evaluation.");
-        AddCommandGroup (projectCommands);"
+        project_anchor = '        err |= RegisterCommand<SetMasterLayoutContextV1Command> (projectCommands, "master-layout-context-v1", "Set or clear the current Master Layout context to a concrete Layout database for AutoText evaluation.");\n        AddCommandGroup (projectCommands);'
         if text.count(project_anchor) != 1:
             raise RuntimeError("Could not locate the unique projectCommands registration group")
         text = text.replace(project_anchor, autotext_register + "\n" + project_anchor, 1)
 
     main_cpp.write_text(text, encoding="utf-8")
+
+    # Read-only native Grid tool defaults. This builds a source overlay only;
+    # installing or replacing an APX remains a separate explicit action.
+    grid_register = ('        err |= RegisterCommand<GetNativeGridDefaultsV1Command> (elementCommands, "native-grid-defaults-v1", '
+                     '"Read true GridElement tool defaults and source parameter names without creating elements or changing defaults.");')
+    text = main_cpp.read_text(encoding="utf-8")
+    if grid_register not in text:
+        if text.count(model_register) != 1:
+            raise RuntimeError("Could not locate the unique model-dump registration for Grid defaults")
+        text = text.replace(model_register, model_register + "\n" + grid_register, 1)
+        main_cpp.write_text(text, encoding="utf-8")
 
 
 def main():
@@ -113,6 +125,8 @@ def main():
     addon_overlay = Path(__file__).resolve().parents[1]
     shutil.copy2(addon_overlay / "Sources" / "ModelDumpCommands.cpp", addon_source / "Sources" / "ModelDumpCommands.cpp")
     shutil.copy2(addon_overlay / "Sources" / "ModelDumpCommands.hpp", addon_source / "Sources" / "ModelDumpCommands.hpp")
+    for name in ("NativeGridCommands.cpp", "NativeGridCommands.hpp"):
+        shutil.copy2(addon_overlay / "Sources" / name, addon_source / "Sources" / name)
     overlay_registration(addon_source)
 
     vc, sdk_root, sdk_version, cmake = resolve_toolchain(args)
