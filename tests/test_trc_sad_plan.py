@@ -33,9 +33,9 @@ class TrcSadPlanTests(unittest.TestCase):
         self.assertEqual(result["status"], "NATIVE_DAG_PREVIEW_OFFLINE_NOT_AUTHORIZED")
         self.assertEqual(result["nativeGraphStatus"], "SCHEMA_VALID_NOT_EXECUTION_AUTHORIZED")
         commands = [op["command"] for op in result["nativeGraph"]["operations"]]
-        self.assertEqual(commands.count("CreateWalls"), 24)
+        self.assertEqual(commands.count("CreateWalls"), 21)
         self.assertEqual(commands.count("CreateSlabs"), 9)
-        self.assertEqual(len(result["executionOrder"]), 33)
+        self.assertEqual(len(result["executionOrder"]), 30)
         self.assertFalse(result["plnChanged"])
         self.assertEqual(result["nativeWrites"], 0)
 
