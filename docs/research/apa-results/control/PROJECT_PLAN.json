@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 130,
+  "revision": 131,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -1257,6 +1257,54 @@
     "ART-P70-A11-S03-KNOWLEDGE-RECEIPT71-20261013": {
       "id": "ART-P70-A11-S03-KNOWLEDGE-RECEIPT71-20261013",
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261013-013642Z-knowledge-core-mcp.json",
+      "kind": "RECEIPT",
+      "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
+    },
+    "ART-P70-A11-S03-NATIVE-DOC-PR73-20261013": {
+      "id": "ART-P70-A11-S03-NATIVE-DOC-PR73-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/73",
+      "kind": "CODE",
+      "verification": "EXACT_PR71_BASE_623_APA_102_UPSTREAM_WINDOWS_LINUX_PASS_SIX_BLOBS_MATCH"
+    },
+    "ART-P70-A11-S03-NATIVE-DOC-NATIVE-20261013": {
+      "id": "ART-P70-A11-S03-NATIVE-DOC-NATIVE-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-082134Z-native-documentation-followon/native-readback.json",
+      "kind": "TEST_RESULT",
+      "verification": "LIVE_PASS_TRUE_ELEVATION_DIMENSION_SAVE_OPEN_ORIGINAL121_UNCHANGED_126_TOTAL"
+    },
+    "ART-P70-A11-S03-NATIVE-DOC-PDF-20261013": {
+      "id": "ART-P70-A11-S03-NATIVE-DOC-PDF-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-082134Z-native-documentation-followon/pdf-export.json",
+      "kind": "TEST_RESULT",
+      "verification": "LIVE_PASS_SELECTED_ONE_A2_LAYOUT_NATIVE_PDF_FULL_WEST_FACE_ROOF_SPAN_VERIFIED"
+    },
+    "ART-P70-A11-S03-NATIVE-DOC-COORDINATES-20261013": {
+      "id": "ART-P70-A11-S03-NATIVE-DOC-COORDINATES-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-082134Z-native-documentation-followon/coordinates.json",
+      "kind": "TEST_RESULT",
+      "verification": "LIVE_PASS_ASSOCIATIVE_WITNESSES_PLAN32_SECTION34_CONTOURS_FULL_PRIMITIVES_UNVERIFIED"
+    },
+    "ART-P70-A11-S03-NATIVE-DOC-GAP-20261013": {
+      "id": "ART-P70-A11-S03-NATIVE-DOC-GAP-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-082134Z-native-documentation-followon/gap-register.json",
+      "kind": "DATASET",
+      "verification": "G01_G09_NORMATIVE_HISTORY_RETAINED_NATIVE_SCHEDULE_ROWS_UNSUPPORTED"
+    },
+    "ART-P70-A11-S03-NATIVE-DOC-CORE-KG-20261013": {
+      "id": "ART-P70-A11-S03-NATIVE-DOC-CORE-KG-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-082134Z-native-documentation-followon/core-knowledge-query.json",
+      "kind": "TEST_RESULT",
+      "verification": "MAIN_APA_ORCHESTRATOR_READ_ONLY_GITHUB_CURRENT129_BEFORE_CLAIM130_NO_KG_CHANGES"
+    },
+    "ART-P70-A11-S03-NATIVE-DOC-REPORT73-20261013": {
+      "id": "ART-P70-A11-S03-NATIVE-DOC-REPORT73-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-082134Z-native-documentation-followon/REPORT.md",
+      "kind": "REPORT",
+      "verification": "DONE_PUBLISHED_GITHUB_READBACK_VERIFIED"
+    },
+    "ART-P70-A11-S03-NATIVE-DOC-RECEIPT73-20261013": {
+      "id": "ART-P70-A11-S03-NATIVE-DOC-RECEIPT73-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261013-082134Z-native-documentation-followon.json",
       "kind": "RECEIPT",
       "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
     }
@@ -3834,7 +3882,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -3925,12 +3973,21 @@
         "StageII localMCP DONE: official Python SDK2.3.0 actual client launches separate stdio server and calls only apa_retrieve for task/artifact and denied source class. No model-supplied paths, BIM writes or task management. Target ChatGPT registration/call NOT_VERIFIED; current official Secure MCP Tunnel/ChatGPT operator steps documented, account/workspace association unavailable here. No server registration, tunnel, external deployment or paid model calls.",
         "StageIII measured five real core queries and ordinary GitHub plan GET separately: payload bytes/chars, latency, GET counts and o200k_base tokenizer proxy. Captured raw plan286718bytes/77867proxy tokens; compact query payloads approximately386-662proxy tokens. Exact requests use2freshness GETs, section case5, ordinary plan GET1; no universal token/latency/call saving claim. Exact oracle91tasks/173artifacts/40shared-reference pairs has0failures; broad semantic missed/false dependencies and actual billed GPT tokens NOT_MEASURED. Prior research benchmarks retained.",
         "PR70 documentation/BIMGraph/SceneWriter and normative modules unchanged; full587prior tests retained within606. Zero Archicad calls, PLN/APX/main changes in this package; prior saved native121inventory is historical evidence, not newly checked live. Normative parallel system untouched. A11.S03 remainsPARTIAL/A11.S10BLOCKED; A07 status/dependencies unchanged. P50.A01.S04 not admitted: compatible core scope already usesA11.S03; broader80question semantic proposal remainsNEEDS_EVIDENCE for independent audit.",
-        "Next available knowledge step: operator-supported ChatGPT tunnel/endpoint registration and actual apa_retrieve call with fresh provenance. On any canonical revision change, fetch the operator-owned source checkout and rebuild the same cache or returnSTALE_INDEX; no automated CAS claim. Independent native documentation work still needs trueElevation/vertical primitive/native schedule-row contracts. No repeated normative research or new roadmap."
+        "Next available knowledge step: operator-supported ChatGPT tunnel/endpoint registration and actual apa_retrieve call with fresh provenance. On any canonical revision change, fetch the operator-owned source checkout and rebuild the same cache or returnSTALE_INDEX; no automated CAS claim. Independent native documentation work still needs trueElevation/vertical primitive/native schedule-row contracts. No repeated normative research or new roadmap.",
+        "Published draft PR73 head93557ed0cd59c471b0f903a03708ed88c8feb31b on exact PR71 head88169d358e4c329f8959f557c944300adcec2df9.17newtests;623/623APA host and Windows/Linux CI38367671224PASS;102/102upstream graph tests and core/MCP integration in each environment. Six code blobs, native evidence/report/receipt independently read back. Full committed diff privacy scan PASS.",
+        "Real native exterior Elevation copied from an accepted template via retained SceneWriter/SQLite, without CreateElevations contract or InteriorElevation/Morph substitution. Initial finite segment captured half the building; user screenshot identified scope failure. Only newly created Elevation movedprojectY-5m. Rebuild/update/readback and rendered native PDF now show full west face, both stories/windows and complete roof. Native roof horizontal span8.029912m vs actual BREP projection8.029888m within0.0001m. Visible owners9->12 are not used alone as full-facade proof.",
+        "New associative native Section dimension reports0.20000006m actual Slab thickness with5native witness coordinates and verified SectionElement->Slab ownership. Native Drawing fill contours32plan/34section; inverse Drawing-transform vertical levels agree with dimension witnesses within0.000001m. Drawing2D/paperXY/UV are not projectXYZ. Facade fill contours, full line/text and per-contour model ownership remain unexposed/NOT_VERIFIED.",
+        "Three new saved views frame plan/Section/Elevation at1:100; one native A2 Layout/master with3printed native Drawings. Preliminary oversized new Drawing parked offsheet and retained. GUID domains distinguished. Provider source-link GUID differs from requested ViewMapGUID: metadata identity NOT_VERIFIED. Controlled newplan view scale100->125->100 produces native Drawing0.01->0.008->0.01, while clipping frame remains fixed; behavior independently proved.",
+        "Existing native Layout Publisher selected new sheet and generated oneA2PDFpage. File hash/pages/titles/scale/render verified afterSave/Open. Publisher2views produced65pages despite2selected items and is not accepted as a subset. New empty local output directories; native empty-success reply is insufficient without file proof. No global Publisher preferences/APX changes. Local native PDF and processed public PNG retained; raw paths/PLN/full dumps excluded.",
+        "Save/Open and independent final readback: original121GUID/BREP/material/story signatures unchanged, including original109; all126current main identities persist. Added Elevation+4native Objects. Native dimension/Layout/Drawings/ViewMap/database IDs separately verified. Physical primary modelVersion unchanged; no new physical BIM construction or testWall change. Historical PR70 edit-synchronization proof retained, not claimed as a fresh BIM-edit test.",
+        "Layout ShowAllIn3D error-2130313109 uses the same writer for a view-only floor0 activation, exact identity/saved-byte checks and subsequent complete native-signature proof. Historical UNKNOWN_OUTCOME events kept and independently reconciled, no blind Create/Modify retry. AfterOpen Drawing fill caches initially absent; known-success update onlynewDrawings restored32/34contours.",
+        "13native Schedule definitions discovered; native rowread/configure contracts unsupported. Existing six-type CSV specification adapter retained without duplication. Main APA orchestrator actually queried existing read-only Knowledge Graph with GitHub-current revision129 beforeclaim130. KG/search implementation and normative-system code/branches/policies unchanged.",
+        "A11.S03 remainsPARTIAL; A07.S01 not closed and dependencies preserved; S10BLOCKED unchanged. No normative/engineering drawing acceptance. Next: supported native schedule row/configuration contract and complete vertical primitive/owner mapping; require actual rendered projection extent for all future facade placement acceptance."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
-      "owner": "work-native-documentation2-20261013",
-      "lease_until": "2026-10-13T09:20:25Z",
-      "claim_ref": "APA-CLAIM-NATIVE-DOC2-20261013T062025Z",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
@@ -3988,7 +4045,15 @@
         "ART-P70-A11-S03-KNOWLEDGE-MEASUREMENTS-20261013",
         "ART-P70-A11-S03-KNOWLEDGE-REVIEW-20261013",
         "ART-P70-A11-S03-KNOWLEDGE-REPORT71-20261013",
-        "ART-P70-A11-S03-KNOWLEDGE-RECEIPT71-20261013"
+        "ART-P70-A11-S03-KNOWLEDGE-RECEIPT71-20261013",
+        "ART-P70-A11-S03-NATIVE-DOC-PR73-20261013",
+        "ART-P70-A11-S03-NATIVE-DOC-NATIVE-20261013",
+        "ART-P70-A11-S03-NATIVE-DOC-PDF-20261013",
+        "ART-P70-A11-S03-NATIVE-DOC-COORDINATES-20261013",
+        "ART-P70-A11-S03-NATIVE-DOC-GAP-20261013",
+        "ART-P70-A11-S03-NATIVE-DOC-CORE-KG-20261013",
+        "ART-P70-A11-S03-NATIVE-DOC-REPORT73-20261013",
+        "ART-P70-A11-S03-NATIVE-DOC-RECEIPT73-20261013"
       ],
       "blocked_reason": null
     },
@@ -4747,7 +4812,15 @@
         "ART-P70-A11-S03-KNOWLEDGE-MEASUREMENTS-20261013",
         "ART-P70-A11-S03-KNOWLEDGE-REVIEW-20261013",
         "ART-P70-A11-S03-KNOWLEDGE-REPORT71-20261013",
-        "ART-P70-A11-S03-KNOWLEDGE-RECEIPT71-20261013"
+        "ART-P70-A11-S03-KNOWLEDGE-RECEIPT71-20261013",
+        "ART-P70-A11-S03-NATIVE-DOC-PR73-20261013",
+        "ART-P70-A11-S03-NATIVE-DOC-NATIVE-20261013",
+        "ART-P70-A11-S03-NATIVE-DOC-PDF-20261013",
+        "ART-P70-A11-S03-NATIVE-DOC-COORDINATES-20261013",
+        "ART-P70-A11-S03-NATIVE-DOC-GAP-20261013",
+        "ART-P70-A11-S03-NATIVE-DOC-CORE-KG-20261013",
+        "ART-P70-A11-S03-NATIVE-DOC-REPORT73-20261013",
+        "ART-P70-A11-S03-NATIVE-DOC-RECEIPT73-20261013"
       ],
       "synthesis_state": "PARTIAL",
       "owner": null
