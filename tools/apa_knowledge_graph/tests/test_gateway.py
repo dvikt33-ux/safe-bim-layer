@@ -128,6 +128,14 @@ class GatewayTest(unittest.TestCase):
         self.assertFalse(any("APA-P50.A01.S03" in x.get("eligible_tasks_not_claimed", []) for x in cards))
         self.assertFalse(any("APA-P50.A01.S04" in x.get("eligible_tasks_not_claimed", []) for x in cards))
 
+    def test_lease_blocks_provisional_next_task_even_with_no_owner(self):
+        p = copy.deepcopy(self.plan)
+        p["tasks"]["APA-P50.A01.S02"]["lease_until"] = "2026-10-13T23:59:00+03:00"
+        ix = build_index(p)
+        r = self.call("кровли", mode="next", ix=ix, plan=p)
+        self.assertFalse(any("APA-P50.A01.S02" in x.get("eligible_tasks_not_claimed", [])
+                             for x in r["items"]))
+
     def test_new_plan_invalidates_caches(self):
         modified = copy.deepcopy(self.plan)
         modified["tasks"]["APA-P50.A01.S02"]["status"] = "IN_PROGRESS"
