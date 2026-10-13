@@ -13,6 +13,7 @@ from datetime import datetime, timezone
 import hashlib
 import json
 import math
+import os
 from pathlib import Path
 import re
 import sys
@@ -116,6 +117,26 @@ def parse_documentation(folder, binding):
                                provider_version=binding["tapirVersion"],
                                origin="live TapirCommand.GenerateDocumentation", binding=binding,
                                inputs={"command_definitions.js": ch, "common_schema_definitions.js": sh}))
+
+
+def retrieve_project_knowledge(config, query, mode="research", remote=None, **bounds):
+    """Opt-in read-only PR69 gateway. Never grants SceneWriter/task authority."""
+    if config.get("enabled") is not True:
+        return {"status": "FEATURE_DISABLED", "items": []}
+    import archicad_knowledge_access as KNOWLEDGE
+    if remote is None and config.get("source_mode") == "GITHUB_CURRENT":
+        remote = KNOWLEDGE.GitHubSource(os.environ.get("APA_GITHUB_READ_TOKEN"))
+    return KNOWLEDGE.KnowledgeAccess(config, remote).query(query, mode, **bounds)
+
+
+def inspect_project_knowledge(config, operation, arguments, remote=None, **bounds):
+    """Read-only dependency/change/source traces from the existing graph module."""
+    if config.get("enabled") is not True:
+        return {"status": "FEATURE_DISABLED", "items": []}
+    import archicad_knowledge_access as KNOWLEDGE
+    if remote is None and config.get("source_mode") == "GITHUB_CURRENT":
+        remote = KNOWLEDGE.GitHubSource(os.environ.get("APA_GITHUB_READ_TOKEN"))
+    return KNOWLEDGE.KnowledgeAccess(config, remote).inspect(operation, arguments, **bounds)
 
 
 def compile_project_brief(brief, read_api=None):
