@@ -1,0 +1,41 @@
+{
+  "status": "PUBLISHED_PARTIAL_TRUE_GRID_LIVE_STAIR_RUNTIME_BLOCKED",
+  "revision": 146,
+  "codeHead": "60a78e0cd55fc4951c1de3c8d060adf4f9538134",
+  "ci": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38485644027",
+  "tests": 707,
+  "newTests": 10,
+  "existingProjectOnly": true,
+  "accepted143Preserved": true,
+  "saved144": true,
+  "newGrid": 1,
+  "nativeGridCRUD": "LIVE_PASS",
+  "nativeGridSaveOpen": "LIVE_PASS",
+  "renderedGridSpan": "NOT_VERIFIED",
+  "candidateLoad": "LIVE_PASS_MODULE_SHA_FRESH_SCHEMA",
+  "originalAPXRestored": true,
+  "postRestorationReadback": "PENDING_USER_OPEN",
+  "stairCreateModify": 0,
+  "detachedSolverCalls": 1,
+  "stairSourceDimensions": "NOT_VERIFIED",
+  "engineering": "NOT_VERIFIED",
+  "blocking_dependencies": [
+    {
+      "id": "DEP-APA-STAIR-DETACHED-SOLVER-RUNTIME",
+      "status": "BLOCKED_PROCESS_TERMINATED_CAUSE_NOT_VERIFIED",
+      "target_task": "APA-P70.A11.S03",
+      "next": "QUALIFY_NEW_SDK_MEMO_BASE_PLANE_CANDIDATE_BEFORE_WRITE"
+    },
+    {
+      "id": "DEP-APA-GRID-RENDERED-SPAN",
+      "status": "NOT_VERIFIED_GDL_WIRE_GEOMETRY_NOT_IN_BREP",
+      "target_task": "APA-P70.A11.S03"
+    },
+    {
+      "id": "DEP-APA-POST-RESTORE-PROJECT-READBACK",
+      "status": "PENDING_USER_OPEN",
+      "target_task": "APA-P70.A11.S03"
+    }
+  ],
+  "historicalTasksPreserved": 91
+}
