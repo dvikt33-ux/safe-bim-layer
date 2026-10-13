@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "trc-sad-grid/2",
+  "projectId": "trc-sad",
+  "purpose": "PRELIMINARY_STRUCTURAL_COORDINATION_NOT_DESIGN_APPROVAL",
+  "sourceGeometry": "data/trc_sad_concept_v1.json",
+  "units": "m",
+  "x": {
+    "axisNames": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "bays": [
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      22.4,
+      22.4
+    ]
+  },
+  "y": {
+    "axisNames": [
+      "А",
+      "Б",
+      "В",
+      "Г",
+      "Д",
+      "Е",
+      "Ж",
+      "И"
+    ],
+    "bays": [
+      18,
+      18,
+      18,
+      22.2,
+      22.2,
+      22.2,
+      22.2
+    ]
+  },
+  "supportRules": {
+    "regularBayMin": 18,
+    "regularBayMax": 24,
+    "interstoryTransferOption": {
+      "direction": "Y",
+      "from": 0,
+      "to": 36,
+      "length": 36,
+      "notes": "2 x 18m bays with a proposed 36m clear span; support and transfer system must be designed, not automatically delete intermediate columns."
+    },
+    "roofOption": {
+      "direction": "X",
+      "from": 60,
+      "to": 120,
+      "length": 60,
+      "notes": "3 x 20m bays over atrium as a 60m roof-span option ONLY above third floor, never interstory."
+    }
+  },
+  "actualGrid": "NATIVE_ARCHICAD_GRID_SYSTEM_REQUIRED_NOT_POLYLINE",
+  "excludes": [
+    "no 3D loads or construction changes",
+    "no automatic supports or columns",
+    "no modifications of existing PLN story heights",
+    "no artificial axes or circles",
+    "no claim of member sizing, loading, fire or constructability approval"
+  ]
+}
