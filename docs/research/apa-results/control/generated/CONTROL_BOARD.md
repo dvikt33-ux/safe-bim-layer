@@ -12,11 +12,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | BLOCKED | 13 |
 | CLAIMED | 0 |
 | DONE_PUBLISHED | 27 |
-| IN_PROGRESS | 0 |
-| PARTIAL | 17 |
+| IN_PROGRESS | 1 |
+| PARTIAL | 16 |
 | READY | 34 |
 | SUPERSEDED | 0 |
-| DISPATCHABLE_NOW | 18 |
+| DISPATCHABLE_NOW | 17 |
 | HELD_BY_DEPENDENCIES | 33 |
 | EXPIRED_LEASES | 0 |
 
@@ -30,7 +30,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| — | — | — | — |
+| APA-P70.A11.S03 | work-knowledge-integration-20261013 | 2026-10-13T04:10:26Z | system-gap-driven-development-v31 |
 
 ## CONTROL — 0 ready
 
@@ -66,11 +66,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | P3 | APA-P70.A02.S02 — Связать проектные требования с версиями нормативов и проверяемыми правилами | Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED |
 | P8 | APA-P00.A03.S03 — Publisher, дедупликация, retry, heartbeat и ошибки | Publisher E2E + оставшиеся recovery/heartbeat gates |
 
-## INTEGRATION — 1 ready
+## INTEGRATION — 0 ready
 
 | Priority | Task | Acceptance |
 | --- | --- | --- |
-| P1 | APA-P70.A11.S03 — Исправить пробелы после системного теста | Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. |
+| — | — | — |
 
 ## VALIDATION — 4 ready
 
