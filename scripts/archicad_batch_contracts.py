@@ -30,7 +30,8 @@ BIM_RECIPE_CANDIDATES = frozenset({
     "CreateZones", "CreateOpenings", "CreateStairs", "CreateMEPElements",
     "CreateMEPRoutingElements", "ModifyWalls", "ModifySlabs",
     "ModifyColumns", "ModifyBeams", "ModifyRoofs", "ModifyMorphs",
-    "ModifyWindows", "ModifyDoors",
+    "ModifyWindows", "ModifyDoors", "CreateNativeGridElementsV1", "ModifyNativeGridElementsV1",
+    "CreateExactStairsV1", "ModifyNativeStairGeometryV1",
 })
 
 

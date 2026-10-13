@@ -10,3 +10,28 @@ public:
     GS::Optional<GS::UniString> GetRawResponseSchema () const override;
     GS::ObjectState Execute (const GS::ObjectState&, GS::ProcessControl&) const override;
 };
+
+class GetNativeGridElementsV1Command : public CommandBase {
+public:
+    GetNativeGridElementsV1Command ();
+    GS::String GetName () const override;
+    GS::Optional<GS::UniString> GetInputParametersSchema () const override;
+    GS::Optional<GS::UniString> GetRawResponseSchema () const override;
+    GS::ObjectState Execute (const GS::ObjectState&, GS::ProcessControl&) const override;
+};
+class CreateNativeGridElementsV1Command : public CommandBase {
+public:
+    CreateNativeGridElementsV1Command ();
+    GS::String GetName () const override;
+    GS::Optional<GS::UniString> GetInputParametersSchema () const override;
+    GS::Optional<GS::UniString> GetRawResponseSchema () const override;
+    GS::ObjectState Execute (const GS::ObjectState&, GS::ProcessControl&) const override;
+};
+class ModifyNativeGridElementsV1Command : public CommandBase {
+public:
+    ModifyNativeGridElementsV1Command ();
+    GS::String GetName () const override;
+    GS::Optional<GS::UniString> GetInputParametersSchema () const override;
+    GS::Optional<GS::UniString> GetRawResponseSchema () const override;
+    GS::ObjectState Execute (const GS::ObjectState&, GS::ProcessControl&) const override;
+};

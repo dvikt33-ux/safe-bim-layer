@@ -54,7 +54,8 @@ def verify_model(api, plan, created):
 
 
 MODEL_COMMANDS = frozenset({'MoveElements', 'ModifyWalls', 'ModifyWindows', 'ModifyDoors',
-                           'CreateSolidElementLinks','SetPropertyValuesOfElements','CreateStairs','ModifySlabs'})
+                           'CreateSolidElementLinks','SetPropertyValuesOfElements','CreateStairs','ModifySlabs',
+                           'CreateNativeGridElementsV1','ModifyNativeGridElementsV1','CreateExactStairsV1','ModifyNativeStairGeometryV1'})
 
 
 def model_operation_scope(command, parameters, source_hash, owned_guids,
@@ -80,9 +81,13 @@ def qualify_model_operation(scope,command,parameters,source_hash):
                 {k:v for k,v in scope.items() if k!='scopeHash'})):
         raise ValueError('MODEL_OPERATION_SCOPE_MISMATCH')
     owned=set(scope['ownedGuids']);retained=set(scope['retainedGuids'])
-    if (not owned or owned&retained or (not retained and
+    if ((not owned and command not in {'CreateNativeGridElementsV1','CreateExactStairsV1'}) or owned&retained or (not retained and
             (scope.get('isolatedInventory')!=sorted(owned)))):
         raise ValueError('MODEL_OWNERSHIP_SCOPE_INVALID')
+    if command in {'CreateNativeGridElementsV1','ModifyNativeGridElementsV1','CreateExactStairsV1','ModifyNativeStairGeometryV1'}:
+        from archicad_native_spatial_tools import qualify_operation
+        qualify_operation(command,parameters,owned,retained)
+        return
     slots={'MoveElements':'elementsWithMoveVectors','ModifyWalls':'wallsWithDetails',
         'ModifyWindows':'windowsWithDetails','ModifyDoors':'doorsWithDetails',
         'CreateSolidElementLinks':'solidLinks','SetPropertyValuesOfElements':'elementPropertyValues',

@@ -35,10 +35,11 @@ READS = frozenset({"GetProjectInfo", "GetStories", "GetAddOnVersion",
                   "GetSurfaces", "GetAvailableLibraryParts", "GetGDLParametersOfElements", "API.GetProductInfo", 'API.GetPublisherSetNames',
                   'API.GetAllClassificationSystems','API.GetAllClassificationsInSystem','GetClassificationsOfElements','GetMEPPreferenceTables',
                   'API.GetPropertyIds','API.GetAllPropertyNames','API.GetDetailsOfProperties','API.GetPropertyValuesOfElements',
-                  'GetSolidElementLinks','GetPropertyValuesOfElements'})
+                  'GetSolidElementLinks','GetPropertyValuesOfElements','GetNativeGridDefaultsV1','GetNativeGridElementsV1','GetNativeStairGeometryV1','EvaluateNativeStairGeometryV1'})
 NATIVE_MUTATIONS = RUN.ALLOWED_WRITES | RUN.EXTENDED_WRITES | frozenset({"ModifySlabs","ModifyMorphs","ModifyBeams",
     'ConnectMEPElements','ModifyMEPRoutingElements','CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks','SetClassificationsOfElements','TrimElements',
-    'MoveElements','ModifyWalls','ModifyWindows','ModifyDoors','SetPropertyValuesOfElements','SetStories','CreateStairs'})
+    'MoveElements','ModifyWalls','ModifyWindows','ModifyDoors','SetPropertyValuesOfElements','SetStories','CreateStairs',
+    'CreateNativeGridElementsV1','ModifyNativeGridElementsV1','CreateExactStairsV1','ModifyNativeStairGeometryV1'})
 PRIMITIVES = {
     "pavilion-frame-v1": {"status": "EXECUTABLE_PENDING_LIVE_ACCEPTANCE",
                           "executor": "SceneWriter", "elementCount": 12},
@@ -130,6 +131,14 @@ def retrieve_project_knowledge(config, query, mode="research", remote=None, **bo
     if remote is None and config.get("source_mode") == "GITHUB_CURRENT":
         remote = KNOWLEDGE.GitHubSource(os.environ.get("APA_GITHUB_READ_TOKEN"))
     return KNOWLEDGE.KnowledgeAccess(config, remote).query(query, mode, **bounds)
+
+def apply_native_axis_grid(writer,recipe,scene_id,retained_signatures,saved_sha256,authorization_ref,existing_guid=None):
+    from archicad_native_spatial_tools import create_or_reuse_axis
+    return create_or_reuse_axis(writer,recipe,scene_id,retained_signatures,saved_sha256,authorization_ref,existing_guid)
+
+def apply_exact_native_stair(writer,row,scene_id,retained_signatures,saved_sha256,authorization_ref,source):
+    from archicad_native_spatial_tools import create_exact_stair
+    return create_exact_stair(writer,row,scene_id,retained_signatures,saved_sha256,authorization_ref,source)
 
 
 def inspect_project_knowledge(config, operation, arguments, remote=None, **bounds):

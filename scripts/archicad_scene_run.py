@@ -688,7 +688,7 @@ class SceneWriter:
                     if guid:
                         result['createdGuid']=guid
                         db.execute("UPDATE steps SET state='CREATED_UNVERIFIED',guid=? WHERE scene_id=? AND step_id='operation'",(guid,scene_id));db.commit()
-                elif command=='CreateStairs' and model_command:
+                elif command in {'CreateStairs','CreateNativeGridElementsV1','CreateExactStairsV1'} and model_command:
                     result['createdGuid']=created_guid(reply)
                     db.execute("UPDATE steps SET state='CREATED_UNVERIFIED',guid=? WHERE scene_id=? AND step_id='operation'",(result['createdGuid'],scene_id));db.commit()
                 elif command=='TrimElements':

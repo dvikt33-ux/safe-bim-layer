@@ -4,6 +4,8 @@ import os
 import shutil
 import subprocess
 import tarfile
+import hashlib
+import json
 from pathlib import Path
 
 
@@ -54,14 +56,14 @@ def overlay_registration(addon_source):
         if text.count(include_anchor) != 1:
             raise RuntimeError("Could not locate the unique ElementCommands include in AddOnMain.cpp")
         text = text.replace(include_anchor, include_anchor + include_line + "\n", 1)
-    grid_include = '#include "NativeGridCommands.hpp"'
-    if grid_include not in text:
-        text = text.replace(include_line, include_line + "\n" + grid_include, 1)
+    for header in ('NativeGridCommands.hpp','NativeStairCommands.hpp'):
+        extra='#include "'+header+'"'
+        if extra not in text:text=text.replace(include_line,include_line+'\n'+extra,1)
 
     model_register = ('        err |= RegisterCommand<GetModelDumpV1Command> (elementCommands, "model-dump-v1", '
                       '"Dump all available regenerated resultant 3D bodies, stories, native bindings and effective face materials.");')
     if model_register not in text:
-        group_anchor = '        err |= RegisterCommand<GetCurrent2DDocumentV1Command> (elementCommands, "document-2d-v1", "Read current-database Line and Text geometry/content, including raw and interpreted AutoText, without modifying project elements.");\n        AddCommandGroup (elementCommands);'
+        group_anchor = '        AddCommandGroup (elementCommands);'
         if text.count(group_anchor) != 1:
             raise RuntimeError("Could not locate the unique elementCommands registration group")
         text = text.replace(group_anchor, model_register + "\n" + group_anchor, 1)
@@ -69,7 +71,7 @@ def overlay_registration(addon_source):
     autotext_register = ('        err |= RegisterCommand<GetAutoTextsV1Command> (projectCommands, "autotext-v1", '
                          '"Enumerate current Archicad AutoText description/key/value triplets without modifying the project.");')
     if autotext_register not in text:
-        project_anchor = '        err |= RegisterCommand<SetMasterLayoutContextV1Command> (projectCommands, "master-layout-context-v1", "Set or clear the current Master Layout context to a concrete Layout database for AutoText evaluation.");\n        AddCommandGroup (projectCommands);'
+        project_anchor = '        AddCommandGroup (projectCommands);'
         if text.count(project_anchor) != 1:
             raise RuntimeError("Could not locate the unique projectCommands registration group")
         text = text.replace(project_anchor, autotext_register + "\n" + project_anchor, 1)
@@ -87,11 +89,33 @@ def overlay_registration(addon_source):
         text = text.replace(model_register, model_register + "\n" + grid_register, 1)
         main_cpp.write_text(text, encoding="utf-8")
 
+    # Preserve all installed documentation endpoints while repairing only build
+    # registration. New commands use the same native provider and command groups.
+    groups={'elementCommands':[
+        ('GetCurrent2DDocumentV1Command','Read current native 2D document.'),
+        ('GetNativeGridElementsV1Command','Read true Grid variation and parameters.'),
+        ('CreateNativeGridElementsV1Command','Create one true native Grid from source defaults.'),
+        ('ModifyNativeGridElementsV1Command','Edit one true native Grid with retained GUID.'),
+        ('GetNativeStairGeometryV1Command','Read exact native Stair geometry and solver rules.'),
+        ('EvaluateNativeStairGeometryV1Command','Solve a detached Stair without model writes.'),
+        ('CreateExactStairsV1Command','Create one Stair with locked source dimensions.'),
+        ('ModifyNativeStairGeometryV1Command','Edit one owned Stair with locked source dimensions.')],
+        'projectCommands':[('SetMasterLayoutContextV1Command','Bind native master layout context.') ]}
+    for group,entries in groups.items():
+        anchor='        AddCommandGroup ('+group+');'
+        if text.count(anchor)!=1:raise RuntimeError('Unique existing command group required: '+group)
+        for cls,description in entries:
+            if 'RegisterCommand<'+cls+'>' not in text:
+                line='        err |= RegisterCommand<'+cls+'> ('+group+', "1.5.10", "'+description+'");'
+                text=text.replace(anchor,line+'\n'+anchor,1)
+    main_cpp.write_text(text,encoding='utf-8')
+
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--tapir-repo", required=True, help="Clean or dirty Tapir Git checkout; only git archive of --ref is copied")
     parser.add_argument("--ref", default="HEAD", help="Tapir Git ref to build from")
+    parser.add_argument("--runtime-source-snapshot", action="store_true", help="Read-only capture of the existing local Sources overlay; no changes to that checkout")
     parser.add_argument("--devkit", required=True, help="Archicad DevKit Support directory")
     parser.add_argument("--build", required=True, help="Build/output directory; generated files stay here")
     parser.add_argument("--vc", help="MSVC VC/Tools/MSVC/<version> path; otherwise auto-detected")
@@ -109,7 +133,7 @@ def main():
     if overlay_root == tapir_repo or tapir_repo in overlay_root.parents:
         raise RuntimeError("Build source must not be inside or replace the supplied Tapir checkout")
     if overlay_root.exists():
-        shutil.rmtree(overlay_root)
+        raise RuntimeError('Build source already exists; use a new isolated build folder')
     overlay_root.mkdir(parents=True)
     archive = build_root / "tapir-source.tar"
     with archive.open("wb") as output:
@@ -123,9 +147,18 @@ def main():
     if not (addon_source / "CMakeLists.txt").exists():
         raise RuntimeError(f"Tapir ref {args.ref!r} has no archicad-addon/CMakeLists.txt")
     addon_overlay = Path(__file__).resolve().parents[1]
+    if args.runtime_source_snapshot:
+        source=tapir_repo/'archicad-addon/Sources'
+        files=[p for p in source.rglob('*') if p.is_file() and p.suffix.lower() in {'.cpp','.hpp','.h','.inc','.json','.grc','.rc2','.svg','.png','.html','.js','.css','.plist'} and '.bak' not in p.name]
+        manifest={}
+        for path in files:
+            if path.is_symlink() or not path.resolve().is_relative_to(source.resolve()):raise RuntimeError('Runtime source path escapes supplied checkout')
+            relative=path.relative_to(source);target=addon_source/'Sources'/relative;target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(path,target)
+            manifest[relative.as_posix()]=hashlib.sha256(path.read_bytes()).hexdigest()
+        (build_root/'runtime-source-snapshot.json').write_bytes((json.dumps(manifest,sort_keys=True,indent=2)+'\n').encode())
     shutil.copy2(addon_overlay / "Sources" / "ModelDumpCommands.cpp", addon_source / "Sources" / "ModelDumpCommands.cpp")
     shutil.copy2(addon_overlay / "Sources" / "ModelDumpCommands.hpp", addon_source / "Sources" / "ModelDumpCommands.hpp")
-    for name in ("NativeGridCommands.cpp", "NativeGridCommands.hpp"):
+    for name in ("NativeGridCommands.cpp", "NativeGridCommands.hpp", "NativeStairCommands.cpp", "NativeStairCommands.hpp"):
         shutil.copy2(addon_overlay / "Sources" / name, addon_source / "Sources" / name)
     overlay_registration(addon_source)
 
