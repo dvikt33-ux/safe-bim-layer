@@ -1,0 +1,273 @@
+{
+  "status": "NATIVE_DOCUMENTATION_FINAL_READBACK_PASS",
+  "originalGuidCount": 121,
+  "currentMainGuidCount": 126,
+  "original109AlsoRetained": true,
+  "original121Unchanged": true,
+  "all126PersistedSignaturesUnchanged": true,
+  "savedFileSHA256": "703671d5b656100661d54e1a4dd56521603ad2de9035d95c92894578d6dbb1ee",
+  "modelVersion": "5230750bf868c8e39c8e3982e788fa986e9ee71365063ad9664259e121e3a639",
+  "physicalModelVersionUnchanged": true,
+  "created": {
+    "Elevation": 1,
+    "ObjectSubordinates": 4,
+    "AssociativeSectionDimension": 1,
+    "Layout": 1,
+    "MasterLayout": 1,
+    "SavedViewMapEntries": 3,
+    "PrintedDrawings": 3,
+    "ParkedPreliminaryDrawing": 1
+  },
+  "guidDomainBoundary": "Main model126 excludes layout Drawings, section dimensions and navigator/database identities",
+  "elevation": {
+    "status": "NATIVE_VIEW_GEOMETRY_PRESENT",
+    "viewGuid": "id-sha256:fb60e8476036597866bf",
+    "nativeType": "ElevationItem",
+    "database": {
+      "databaseId": {
+        "guid": "id-sha256:50751b4e0ef0b3bb7abc"
+      }
+    },
+    "ownerCount": 24,
+    "selectedOwnerCount": 12,
+    "selectedOwners": [
+      {
+        "sectionElementId": {
+          "guid": "id-sha256:8941d2c6bf9e17b0da3b"
+        },
+        "ownerElementId": {
+          "guid": "id-sha256:efd26943ca1678f8c9fd"
+        },
+        "ownerElementType": "Column"
+      },
+      {
+        "sectionElementId": {
+          "guid": "id-sha256:d93499000099ec23ef97"
+        },
+        "ownerElementId": {
+          "guid": "id-sha256:301c85f39127ffe91075"
+        },
+        "ownerElementType": "Slab"
+      },
+      {
+        "sectionElementId": {
+          "guid": "id-sha256:d350a7b4c104d49c5795"
+        },
+        "ownerElementId": {
+          "guid": "id-sha256:1e3ed023078481e26610"
+        },
+        "ownerElementType": "Wall"
+      },
+      {
+        "sectionElementId": {
+          "guid": "id-sha256:0730a58c0778dcdb472a"
+        },
+        "ownerElementId": {
+          "guid": "id-sha256:f7a694272de27df78773"
+        },
+        "ownerElementType": "Wall"
+      },
+      {
+        "sectionElementId": {
+          "guid": "id-sha256:9c5987216c9ab31ecdc2"
+        },
+        "ownerElementId": {
+          "guid": "id-sha256:4b2c7d00e3d409a9ab32"
+        },
+        "ownerElementType": "Wall"
+      },
+      {
+        "sectionElementId": {
+          "guid": "id-sha256:22955f4ba7a2ea0bd228"
+        },
+        "ownerElementId": {
+          "guid": "id-sha256:3677c5da2430b7bed34b"
+        },
+        "ownerElementType": "Wall"
+      },
+      {
+        "sectionElementId": {
+          "guid": "id-sha256:16fdca8a21b9b0a8dcc2"
+        },
+        "ownerElementId": {
+          "guid": "id-sha256:3940fd04267e7b5d887b"
+        },
+        "ownerElementType": "Window"
+      },
+      {
+        "sectionElementId": {
+          "guid": "id-sha256:300464309b87050bb91b"
+        },
+        "ownerElementId": {
+          "guid": "id-sha256:b766ca8c720e1b6dd174"
+        },
+        "ownerElementType": "Window"
+      },
+      {
+        "sectionElementId": {
+          "guid": "id-sha256:b0cf4fb3e1aec557b872"
+        },
+        "ownerElementId": {
+          "guid": "id-sha256:51fe26b6654ee6ca9854"
+        },
+        "ownerElementType": "Roof"
+      },
+      {
+        "sectionElementId": {
+          "guid": "id-sha256:73fd5cdd80451ad8bc34"
+        },
+        "ownerElementId": {
+          "guid": "id-sha256:74e13663688cd71e3a87"
+        },
+        "ownerElementType": "Wall"
+      },
+      {
+        "sectionElementId": {
+          "guid": "id-sha256:76dbe6d95d82921a80fb"
+        },
+        "ownerElementId": {
+          "guid": "id-sha256:0f66b42e488c297215cd"
+        },
+        "ownerElementType": "Wall"
+      },
+      {
+        "sectionElementId": {
+          "guid": "id-sha256:f7013ceec49ab92260fe"
+        },
+        "ownerElementId": {
+          "guid": "id-sha256:96904ae0a9a643d0bdd1"
+        },
+        "ownerElementType": "Door"
+      }
+    ],
+    "coverageMeaning": "Visible native owners only; occluded elements need not appear on one exterior view",
+    "allVerticalPrimitives": "NOT_VERIFIED",
+    "normativeAcceptance": false
+  },
+  "dimension": {
+    "status": "NATIVE_ASSOCIATIVE_DIMENSION_COORDINATES_PASS",
+    "guid": "id-sha256:8fd8d1b3f00c7aff5bec",
+    "modelVersion": "5230750bf868c8e39c8e3982e788fa986e9ee71365063ad9664259e121e3a639",
+    "coordinateSystem": "Active native section/elevation drawing2D, not project XYZ",
+    "points": [
+      {
+        "drawingXYMeters": {
+          "x": 45,
+          "y": -0.2
+        },
+        "dimensionPosition": {
+          "x": 39,
+          "y": -0.2
+        },
+        "nativeReportedValue": 0,
+        "sectionElementGuid": "id-sha256:843c83ac916dac4e3f1c",
+        "modelOwnerGuid": "id-sha256:301c85f39127ffe91075"
+      },
+      {
+        "drawingXYMeters": {
+          "x": 45,
+          "y": -0.2
+        },
+        "dimensionPosition": {
+          "x": 39,
+          "y": -0.2
+        },
+        "nativeReportedValue": 0,
+        "sectionElementGuid": "id-sha256:843c83ac916dac4e3f1c",
+        "modelOwnerGuid": "id-sha256:301c85f39127ffe91075"
+      },
+      {
+        "drawingXYMeters": {
+          "x": 45,
+          "y": 6e-08
+        },
+        "dimensionPosition": {
+          "x": 39,
+          "y": 6e-08
+        },
+        "nativeReportedValue": 0.20000006,
+        "sectionElementGuid": "id-sha256:843c83ac916dac4e3f1c",
+        "modelOwnerGuid": "id-sha256:301c85f39127ffe91075"
+      },
+      {
+        "drawingXYMeters": {
+          "x": 45,
+          "y": 6e-08
+        },
+        "dimensionPosition": {
+          "x": 39,
+          "y": 6e-08
+        },
+        "nativeReportedValue": 0,
+        "sectionElementGuid": "id-sha256:843c83ac916dac4e3f1c",
+        "modelOwnerGuid": "id-sha256:301c85f39127ffe91075"
+      },
+      {
+        "drawingXYMeters": {
+          "x": 45,
+          "y": 6e-08
+        },
+        "dimensionPosition": {
+          "x": 39,
+          "y": 6e-08
+        },
+        "nativeReportedValue": 0,
+        "sectionElementGuid": "id-sha256:843c83ac916dac4e3f1c",
+        "modelOwnerGuid": "id-sha256:301c85f39127ffe91075"
+      }
+    ],
+    "coordinate3DField": "Drawing memo loc3D is not proof of project-world coordinates",
+    "allVerticalPrimitives": "NOT_VERIFIED",
+    "normativeAcceptance": false
+  },
+  "sectionAxisCheck": {
+    "status": "NATIVE_SECTION_UV_VERTICAL_ANCHOR_AGREEMENT_PASS",
+    "witnessCoordinateSystem": "native section drawing2D",
+    "nativeDrawingInverseTransformCandidate": "Agreement of two vertical levels only; full coordinate/owner/line-text coverage not accepted",
+    "nativeDimensionY": [
+      -0.2,
+      6e-08
+    ],
+    "maximumLevelErrorMeters": 9.999999978083096e-08,
+    "slabThicknessMeters": 0.20000006
+  },
+  "layoutSettings": {
+    "layoutSettings": [
+      {
+        "layoutName": "A.02.1 APA NATIVE DOCUMENTATION DOC2",
+        "horizontalSize": 594,
+        "verticalSize": 420,
+        "leftMargin": 15,
+        "topMargin": 15,
+        "rightMargin": 15,
+        "bottomMargin": 15,
+        "customLayoutNumber": "",
+        "customLayoutNumbering": false,
+        "doNotIncludeInNumbering": false,
+        "displayMasterLayoutBelow": false
+      }
+    ]
+  },
+  "newViewDatabases": {
+    "plan": {
+      "databaseId": {
+        "guid": "id-sha256:c44c67ade01ea316da45"
+      }
+    },
+    "section": {
+      "databaseId": {
+        "guid": "id-sha256:8a4e84447ff736115f48"
+      }
+    }
+  },
+  "saveOpen": {
+    "save": "PASS",
+    "open": "PASS"
+  },
+  "retainedMaterialsAndStories": "PASS_SIGNATURES",
+  "newPhysicalBuildingElements": 0,
+  "knownDiagnosticCollision": "Preserved historical Morph/roof diagnostic, not a new error",
+  "liveModifiedApprovedTestCopy": true,
+  "publisherProcessNativeWrites": 0,
+  "engineeringAndNormativeAcceptance": "NOT_EXECUTED"
+}

@@ -1,0 +1,106 @@
+{
+  "schema": "APA_NATIVE_DOCUMENTATION_COORDINATE_PROOF_V1",
+  "modelVersion": "5230750bf868c8e39c8e3982e788fa986e9ee71365063ad9664259e121e3a639",
+  "drawings": {
+    "plan": {
+      "status": "NATIVE_DRAWING_VECTOR_COORDINATES_PASS",
+      "elementGuid": "id-sha256:7da5b252f1d779a168b9",
+      "requestedSourceViewGuid": "id-sha256:79b3e01260294f38b9d4",
+      "nativeReportedLinkGuid": "id-sha256:31c503d327581f54668b",
+      "contourCount": 32,
+      "coordinateSystem": "Native Layout paperXY meters",
+      "derivedViewCoordinates": "CANDIDATE_REQUIRES_NATIVE_WITNESS_CHECK",
+      "ownerPerContour": "NOT_EXPOSED",
+      "lineAndTextPrimitives": "NOT_EXPOSED",
+      "allVerticalPrimitives": "NOT_VERIFIED",
+      "reason": null
+    },
+    "section": {
+      "status": "NATIVE_DRAWING_VECTOR_COORDINATES_PASS",
+      "elementGuid": "id-sha256:2f81fc46e46eb4e6ab0b",
+      "requestedSourceViewGuid": "id-sha256:d07cc28a0dc97122a855",
+      "nativeReportedLinkGuid": "id-sha256:2100bbc218b26357ebc9",
+      "contourCount": 34,
+      "coordinateSystem": "Native Layout paperXY meters",
+      "derivedViewCoordinates": "CANDIDATE_REQUIRES_NATIVE_WITNESS_CHECK",
+      "ownerPerContour": "NOT_EXPOSED",
+      "lineAndTextPrimitives": "NOT_EXPOSED",
+      "allVerticalPrimitives": "NOT_VERIFIED",
+      "reason": null
+    },
+    "elevation": {
+      "status": "NATIVE_DRAWING_VECTOR_COORDINATES_NOT_VERIFIED",
+      "elementGuid": "id-sha256:00d8aa04dcc649c7e8be",
+      "requestedSourceViewGuid": "id-sha256:e6a342abb1ffa9ef069c",
+      "nativeReportedLinkGuid": null,
+      "contourCount": 0,
+      "coordinateSystem": null,
+      "derivedViewCoordinates": null,
+      "ownerPerContour": null,
+      "lineAndTextPrimitives": null,
+      "allVerticalPrimitives": "NOT_VERIFIED",
+      "reason": "Installed provider exposes no fill contours for this Drawing; use independent native PDF readback."
+    }
+  },
+  "links": {
+    "plan": {
+      "status": "NATIVE_DRAWING_LINK_METADATA_NOT_VERIFIED",
+      "elementGuid": "id-sha256:7da5b252f1d779a168b9",
+      "requestedSourceViewGuid": "id-sha256:79b3e01260294f38b9d4",
+      "nativeReportedLinkGuid": "id-sha256:31c503d327581f54668b",
+      "sourceIdentity": "DIFFERENT_GUID_REQUIRES_INDEPENDENT_BEHAVIOR_PROOF",
+      "boundsPaperMeters": {
+        "xMin": 0.025,
+        "yMin": 0.23,
+        "xMax": 0.135,
+        "yMax": 0.32
+      },
+      "scaleRatio": 0.01,
+      "nativeElementAndNavigatorGuidDomains": "DISTINCT_DO_NOT_REQUIRE_EQUALITY"
+    },
+    "section": {
+      "status": "NATIVE_DRAWING_LINK_METADATA_NOT_VERIFIED",
+      "elementGuid": "id-sha256:2f81fc46e46eb4e6ab0b",
+      "requestedSourceViewGuid": "id-sha256:d07cc28a0dc97122a855",
+      "nativeReportedLinkGuid": "id-sha256:2100bbc218b26357ebc9",
+      "sourceIdentity": "DIFFERENT_GUID_REQUIRES_INDEPENDENT_BEHAVIOR_PROOF",
+      "boundsPaperMeters": {
+        "xMin": 0.32,
+        "yMin": 0.23,
+        "xMax": 0.445,
+        "yMax": 0.32
+      },
+      "scaleRatio": 0.01,
+      "nativeElementAndNavigatorGuidDomains": "DISTINCT_DO_NOT_REQUIRE_EQUALITY"
+    },
+    "elevation": {
+      "status": "NATIVE_DRAWING_LINK_METADATA_NOT_VERIFIED",
+      "elementGuid": "id-sha256:00d8aa04dcc649c7e8be",
+      "requestedSourceViewGuid": "id-sha256:e6a342abb1ffa9ef069c",
+      "nativeReportedLinkGuid": "id-sha256:233a6d7af1356bfdfc09",
+      "sourceIdentity": "DIFFERENT_GUID_REQUIRES_INDEPENDENT_BEHAVIOR_PROOF",
+      "boundsPaperMeters": {
+        "xMin": 0.025,
+        "yMin": 0.03,
+        "xMax": 0.145,
+        "yMax": 0.12
+      },
+      "scaleRatio": 0.01,
+      "nativeElementAndNavigatorGuidDomains": "DISTINCT_DO_NOT_REQUIRE_EQUALITY"
+    }
+  },
+  "sectionAxisCheck": {
+    "status": "NATIVE_SECTION_UV_VERTICAL_ANCHOR_AGREEMENT_PASS",
+    "witnessCoordinateSystem": "native section drawing2D",
+    "nativeDrawingInverseTransformCandidate": "Agreement of two vertical levels only; full coordinate/owner/line-text coverage not accepted",
+    "nativeDimensionY": [
+      -0.2,
+      6e-08
+    ],
+    "maximumLevelErrorMeters": 9.999999978083096e-08,
+    "slabThicknessMeters": 0.20000006
+  },
+  "sectionSlabAnchorPointCount": 5,
+  "fullNativeVerticalGraphicExport": "NOT_VERIFIED",
+  "polygonCoordinates": "Processed count and witness checks published; complete raw native graphics stay local"
+}
