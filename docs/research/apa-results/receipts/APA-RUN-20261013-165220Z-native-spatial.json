@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:44e819b938982ad2955185bdffc182bd90d6fde139705ed2e2a15564ec229f7c",
+  "index_commit_sha": "5a2a21619e7591d9fde36b462ca93fe087898fee",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "5a2a21619e7591d9fde36b462ca93fe087898fee",
+  "report_path": "docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-165220Z-native-spatial/REPORT.md",
+  "report_sha256": "78401330535247c83e303fc1100def2705b355b105064468eaefbc9f76f214c7",
+  "run_id": "APA-RUN-20261013-165220Z-native-spatial",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}
