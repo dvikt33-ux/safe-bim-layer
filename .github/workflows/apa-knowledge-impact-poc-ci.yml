@@ -40,6 +40,10 @@ jobs:
           python tools/apa_knowledge_graph/sections.py build \
             --root docs/research/apa-results \
             --out "${RUNNER_TEMP}/apa-sections.sqlite"
+      - name: Benchmark 100 real documents for self-source lexical recall (diagnostic, not semantic gold)
+        run: |
+          python tools/apa_knowledge_graph/benchmark_retrieval.py \
+            --index "${RUNNER_TEMP}/apa-sections.sqlite" --size 100 --k 5
       - name: Search real research sections with source SHA readback
         run: |
           python tools/apa_knowledge_graph/sections.py search \
