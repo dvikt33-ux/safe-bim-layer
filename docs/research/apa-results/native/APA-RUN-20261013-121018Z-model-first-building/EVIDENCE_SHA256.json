@@ -1,0 +1,12 @@
+{
+  "ci.json": "245d015b8b24b05dc19c7f7a88eccc05f8045cee2872fec650525ff89458e31c",
+  "code-readback.json": "90c312e350086e8cd831e8b7ff49ac7eed7bfede136e0fbff99d501fac6c545a",
+  "core-knowledge-query.json": "95eeb9e71d7c8d4969d04ed83f30f844a4e1ceb366431855d6f0cc5d039e2319",
+  "gap-register.json": "643355cdd5319284403820bc0ffa0f816c83f275fa11daedd4d648e740df5855",
+  "geometry-and-connections.json": "8682066f2a6faefe78979aac4d68461e96afcdfd634a7e620a5d4b3302e8983d",
+  "idempotence.json": "af0457a840cc2ec31b6ea0e360fc7709e799a0c95554880a615d9cb1d01b6361",
+  "journal-reconciliation.json": "312ca4b4117e417b4649cd2dcf21ecca5b6a9bb300433daa9687a7f827347cdb",
+  "native-readback.json": "1690a6ede95e80164982183d5f2bbe6b3975fc5fb94b39ec4be05c1fe152bbbb",
+  "native-structural-functions.json": "c74f7f1dfc1f9af123da2977e2d854fe16d3f41fb04335cc4a26106dc7c1d518",
+  "parameter-edits.json": "89404799fb5906a524abaa5221e5e7fc96f940ab2a2670f48769ec050939b945"
+}

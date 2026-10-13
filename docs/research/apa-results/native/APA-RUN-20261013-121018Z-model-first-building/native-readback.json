@@ -1,0 +1,48 @@
+{
+  "status": "LIVE_NATIVE_BUILDING_FINAL_READBACK_PASS",
+  "nativeCount": 168,
+  "planHash": "2ac8738a474efad33629012fb10cc0bf483816d4f78b01e11aa65ccbde096d29",
+  "modelVersion": "c24997691433c8f19f4ac57e12406aa6c6f95cf4a15215fae008d09247940f03",
+  "savedFileSHA256": "5dabdf89262f2aef0f482687eedcdeff295a99ce92a2f088dca332e2e9dac713",
+  "prior126Unchanged": true,
+  "prototype147Unchanged": true,
+  "all168SaveOpenUnchanged": true,
+  "newCreationCalls": 0,
+  "newNativeWriteCount": 0,
+  "saveOpen": {
+    "save": "PASS",
+    "open": "PASS"
+  },
+  "originalAccepted121And109Retained": true,
+  "nativeTestScenarios": 2,
+  "eachNativeElementCount": 21,
+  "createdTypes": {
+    "Wall": 10,
+    "Slab": 2,
+    "Window": 6,
+    "Door": 2,
+    "Roof": 1
+  },
+  "nativeMorphCreations": 0,
+  "sourceDimensions": {
+    "centerlineWidthMeters": 10,
+    "centerlineDepthMeters": 8,
+    "floorElevationsMeters": [
+      0,
+      3
+    ],
+    "slabThicknessMeters": 0.2,
+    "lowerWallClearHeightMeters": 2.8,
+    "upperUncutEditableWallHeightMeters": 4,
+    "roofSlopeRadians": 0.05,
+    "roofThicknessMeters": 0.2,
+    "windowEditedWidthMeters": 1.4
+  },
+  "sourceRole": "EXPLICIT_TEST_PARAMETERS_NOT_ENGINEERING_DESIGN",
+  "retainedMaterialsStoriesAndBodySignatures": "PASS",
+  "knownHistoricalDiagnosticMorphRoofCollision": "PRESERVED_NOT_A_NEW_ERROR",
+  "nativeUIInspection": "NOT_PERFORMED_THIS_PACKAGE",
+  "privateRawEvidence": "RETAINED_LOCAL_PATHS_PLN_DUMPS_NOT_PUBLISHED",
+  "publisherProcessNativeWrites": 0,
+  "liveModifiedApprovedTestCopy": true
+}
