@@ -200,7 +200,7 @@ class GatewayTest(unittest.TestCase):
             stable_relative(self.root, external)
 
     def test_source_mutation_aborts_not_returns_outdated_excerpts(self):
-        self.a.write_text(self.a.read_text() + "\nChanged content.", encoding="utf-8")
+        self.a.write_text(self.a.read_text(encoding="utf-8") + "\nChanged content.", encoding="utf-8")
         r = self.call("кровли", limit=4)
         self.assertEqual(r["status"], "STALE_INDEX")
         self.assertEqual(r["items"], [])
