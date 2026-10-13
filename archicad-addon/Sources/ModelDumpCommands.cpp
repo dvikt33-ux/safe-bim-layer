@@ -519,7 +519,7 @@ GS::ObjectState GetCurrent2DDocumentV1Command::Execute (const GS::ObjectState&, 
             "guid", APIGuidToString (guid),
             "begCoordinate", XY (element.line.begC),
             "endCoordinate", XY (element.line.endC),
-            "penIndex", static_cast<Int32> (element.line.linePen),
+                "penIndex", static_cast<Int32> (element.line.linePen.GetEffectiveColorIndex ()),
             "roomSeparator", element.line.roomSeparator));
     }
 
