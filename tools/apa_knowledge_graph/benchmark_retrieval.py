@@ -14,7 +14,7 @@ import statistics
 import sys
 import time
 
-from graph import canonical
+from graph import canonical, configure_stdio
 from sections import search
 
 STOP = frozenset(("apa", "архикад", "исследование", "проект", "документы", "работа", "этап",
@@ -104,6 +104,7 @@ def main():
 
 
 if __name__ == "__main__":
+    configure_stdio()
     try:
         main()
     except (ValueError, OSError, sqlite3.Error) as exc:
