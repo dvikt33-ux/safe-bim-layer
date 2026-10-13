@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 139,
+  "revision": 140,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -4086,7 +4086,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -4214,9 +4214,9 @@
         "A11.S03 remainsPARTIAL and claimreleased afterpublished checkpoint. All91S-ID/history/A07dependencies/S10BLOCKED preserved. Mainorchestrator used read-onlyKGcurrent137 beforeCAS138. Next exactgate: userpermissiontocandidateAPXloadandisolatednativeprobe. NativeGridrenderedspan and0.35Stairsource-dimensioncriteria stillNOT_VERIFIED; ENGINEERING_NOT_VERIFIED. Roofcontour/slope development follows actualGrid/Staircriteria."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "work-grid-stair-live-20261013",
+      "lease_until": "2026-10-13T22:41:30Z",
+      "claim_ref": "APA-CLAIM-GRID-LIVE-20261013T194130Z",
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
