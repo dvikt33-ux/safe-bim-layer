@@ -74,6 +74,11 @@ class Integration(unittest.TestCase):
         self.assertEqual(r['status'],'UNVERIFIED_RELATIONSHIP');self.assertEqual(r['items'][0]['verified_impacts'],[])
     def test_cross_building_trace_default_deny(self):
         r=APA.inspect_project_knowledge(self.cfg,'tdk-trace',{'project_class':'residential.mkd'},self.remote);self.assertEqual(r['status'],'SOURCE_OR_RELATION_NOT_VERIFIED')
+    def test_caller_verified_label_cannot_bypass_reviewed_lineage(self):
+        fields={k:{'project_class':'residential.izhs','task_id':S2} for k in ['a','b']}
+        lineage={'schema':'APA_FIELD_LINEAGE_V1','fields':fields,'edges':[{'from':'a','to':'b','kind':'DERIVED_FROM','verification':'SOURCE_VERIFIED','project_class':'residential.izhs','source_revision':'a'*40,'evidence_uri':'https://example.invalid/claim'}]}
+        r=APA.inspect_project_knowledge(self.cfg,'fields',{'lineage':lineage,'change':{'field_id':'a','project_class':'residential.izhs','before':1,'after':2}},self.remote)
+        self.assertEqual(r['status'],'UNVERIFIED_RELATIONSHIP');self.assertEqual(r['items'][0]['verified_impacts'],[])
     def test_corrupt_remote_contents_digest_is_rejected(self):
         import io
         def opener(*a,**kw):return io.BytesIO(json.dumps({'encoding':'base64','path':K.PLAN,'content':'e30=','sha':'f'*40}).encode())

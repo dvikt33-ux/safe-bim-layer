@@ -118,6 +118,9 @@ class KnowledgeAccess:
             c,plan,index,prov=self.snapshot()
             service=c['mcp_adapter'].SnapshotService(self.root/PLAN,self.cache/'apa-graph.json',self.cache/'apa-sections.sqlite',self.root,self.allowed_classes,self.ceiling)
             result=service.query(query,mode,source_class,limit,max_chars)
+            if result.get('plan_sha256') not in (None,prov['plan_sha256']):raise ValueError('STALE_INDEX')
+            latest=json.loads((self.cache/'apa-graph.json').read_text(encoding='utf8'))
+            if c['graph'].fingerprint(latest)!=c['graph'].fingerprint(index):raise ValueError('INDEX_TAMPERED')
             result['authority']='VERIFIED_GITHUB_PLAN_SNAPSHOT' if self.remote else 'LOCAL_CHECKOUT_PLAN_ONLY'
             if result.get('retrieval')=='EXACT_TASK':
                 for item in result['items']:
@@ -147,8 +150,16 @@ class KnowledgeAccess:
             elif operation=='impact':result=c['graph'].artifact_impact(index,arguments['artifact_id'],limit=10)
             elif operation=='delta':result=c['delta'].compare_plans(arguments['before'],plan,limit=10)
             elif operation=='fields':
-                result=c['graph'].field_impact(index,arguments['lineage'],arguments['change'],limit=10)
-                if result.get('review_required'):result['status']='UNVERIFIED_RELATIONSHIP'
+                lineage=arguments['lineage']
+                c['graph'].validate_lineage(lineage,index)
+                # A caller-supplied SOURCE_VERIFIED label is not evidence. Only an
+                # operator-reviewed exact lineage digest may propagate; default deny.
+                approved=self.config.get('approved_lineage_hashes',())
+                if c['graph'].fingerprint(lineage) not in approved:
+                    result={'status':'UNVERIFIED_RELATIONSHIP','verified_impacts':[],'reason':'LINEAGE_NOT_IN_OPERATOR_REVIEWED_DIGEST_ALLOWLIST'}
+                else:
+                    result=c['graph'].field_impact(index,lineage,arguments['change'],limit=10)
+                    if result.get('review_required'):result['status']='UNVERIFIED_RELATIONSHIP'
             elif operation=='tdk-trace':
                 if arguments.get('project_class')!='residential.izhs':raise ValueError('ACCESS_DENIED_PROJECT_CLASS')
                 # Existing machine source reads protocol first, verifies its lock,
