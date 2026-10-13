@@ -1,0 +1,49 @@
+{
+  "status": "LIVE_NATIVE_SPATIAL_MODEL_FINAL_READBACK_PASS",
+  "currentNativeGuidCount": 143,
+  "primaryBuildingCount": 22,
+  "original168SavedAndLiveUnchanged": true,
+  "all143SaveOpenSignaturesUnchanged": true,
+  "newStairCount": 1,
+  "nativePartCounts": {
+    "stairRisers": 20,
+    "stairTreads": 20,
+    "stairStructures": 1
+  },
+  "preciseStairProperties": {
+    "Stair_DefaultGoing": 0.32,
+    "Stair_DefaultRiserHeight": 0.165,
+    "Stair_FlightWidth": 1,
+    "Stair_WalkingLineLength": 6.4
+  },
+  "stairGoingAcceptance": "NOT_VERIFIED_NATIVE_SOLVER_CHANGED_GOING",
+  "savedFileSHA256": "7ace6c5bb96e32f993e14e8aece8977b7fb1e65f08193adff8601f243ed931a5",
+  "modelVersion": "eec922f3ef382b758d0d432303c53109474c4816ee0d5bdb27c4049eb3ac72fb",
+  "repeatStairGate": "NATIVE_STAIR_CREATION_BASELINE_CHANGED_OR_ALREADY_CREATED",
+  "repeatNativeWrites": 0,
+  "templateMarkerCount": 20,
+  "templateSharedGuidInterpretation": "Fresh template native references are not proof of a copied physical model;20preserved in both projects",
+  "primaryNativeTypes": {
+    "Wall": 10,
+    "Slab": 2,
+    "Window": 6,
+    "Door": 2,
+    "Roof": 1,
+    "Stair": 1,
+    "Morph": 0
+  },
+  "approvedTarget": "APA_Stories_Grid_Stair_Test_01.pln",
+  "initialPhysicalBodies": 0,
+  "initialTemplateReferences": 20,
+  "occupancy": "TWO_OCCUPIED_FLOORS_PLUS_TWO_DATUM_STORIES",
+  "geometryScope": "AVAILABLE_REGENERATED_NATIVE_BODIES; EXISTING_VIEW_FILTERS_REMAIN",
+  "auxiliaryObjectOwnerSemantics": {
+    "nativeAuxiliaryObjects": 60,
+    "knownOwnerBindings": 50,
+    "outsideAvailableDump": 10,
+    "missingHostAcceptance": "NOT_VERIFIED"
+  },
+  "nativeUIInspection": "NOT_PERFORMED_THIS_PACKAGE",
+  "privateRawEvidence": "LOCAL_ONLY_NO_PLN_PRIVATE_PATHS_OR_COMPLETE_DUMPS",
+  "publisherProcessNativeWrites": 0
+}

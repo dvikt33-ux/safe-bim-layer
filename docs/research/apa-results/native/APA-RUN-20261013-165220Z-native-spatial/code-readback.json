@@ -1,0 +1,42 @@
+{
+  "head": "8ee3fcd89efa5220dc4d1ceb4fb92a26e0d8c07f",
+  "parent": "5a3a9201a715a5528c93bed4a5318e2acb32eea7",
+  "branch": "feature/apa-native-stories-grid-stair-20261013",
+  "expected": {
+    ".github/workflows/archicad-contracts.yml": "4a83fd6a105d69fe47b5d4399720a196e125f8a8",
+    "archicad-addon/Examples/build_model_dump.py": "cc04d6bb06ca4d716811073e27b03d3201e2230f",
+    "archicad-addon/Examples/model_dump_v1.py": "84543ba1fe1285ed82f825dca32a185e516f7cc6",
+    "archicad-addon/Sources/NativeGridCommands.cpp": "5f18299484ee3d893fd43f759991a1822c0ca7d1",
+    "archicad-addon/Sources/NativeGridCommands.hpp": "d36646e4d5a0703fc1f07628e28e86bda25395e3",
+    "docs/APA_NATIVE_SPATIAL_STRUCTURE.md": "b1951cbe0d451c4f7dbe253b61d8c56977596bd0",
+    "examples/accelerator/native-spatial-building.json": "01b773a51019c1552f34337f4ee263200dbdd581",
+    "scripts/archicad_accelerator_integration.py": "9c99a5b61d256ac9b262e76b523883989f74e72a",
+    "scripts/archicad_authored_extension.py": "e8b7c8c6e1556d20891bc2d9e4176135e948fc15",
+    "scripts/archicad_authored_geometry.py": "52c808b91aaa74046e2e02c3573fff2c9aa785f0",
+    "scripts/archicad_authored_native_plan.py": "b71237dba9be4044c9ce9a2624074098982795f0",
+    "scripts/archicad_project_accelerator.py": "71bb5e805eae4bce2c2fc626d0d565160d635f84",
+    "scripts/archicad_scene_run.py": "ae618dee26e57206ce9bd8a139341fafe3f94c14",
+    "scripts/archicad_native_spatial_structure.py": "78ec60e89f018ef400bb80ab187fdb1cbe926244",
+    "scripts/archicad_native_stair_connection.py": "97ca7b7f1369a062bee56cdce4cf37d3a32c0bcb",
+    "tests/test_archicad_native_spatial_structure.py": "e8874e2cc47dfe255519990f53b8a9468616ab4d",
+    "tests/test_archicad_native_stair_connection.py": "1acfa05ccc59fa0d4662bdf2dd966412df00ddaf"
+  },
+  "hostTests": 668,
+  "newTests": 30,
+  "fullCommittedDiffPrivacyScan": "PASS",
+  "excludedCodeUnchanged": true,
+  "pr": 75,
+  "prReadback": {
+    "baseRefName": "feature/apa-model-first-building-20261013",
+    "headRefName": "feature/apa-native-stories-grid-stair-20261013",
+    "headRefOid": "8ee3fcd89efa5220dc4d1ceb4fb92a26e0d8c07f",
+    "isDraft": true,
+    "number": 75,
+    "url": "https://github.com/dvikt33-ux/safe-bim-layer/pull/75"
+  },
+  "githubBlobReadback": "ALL_17_MATCH",
+  "tipParent": "fced229b6235f0dd251edede5708be1959657b63",
+  "commitCount": 2,
+  "initialLinuxCI": "FAILED_TEST_POSIX_TEMP_PATH_IN_WINDOWS_SEMANTIC_TARGET",
+  "crossPlatformTestCorrection": "PASS_HOST_TARGETED_RETEST"
+}

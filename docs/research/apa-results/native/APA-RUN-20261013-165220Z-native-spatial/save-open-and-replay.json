@@ -1,0 +1,54 @@
+{
+  "save-stair-final": {
+    "status": "PASS",
+    "readback": {
+      "status": "NATIVE_STORY_STAIR_SAVE_OPEN_PASS",
+      "mode": "save",
+      "all143SignaturesUnchanged": true,
+      "primaryBuildingCount": 22,
+      "template20Unchanged": true,
+      "sourceGoingAcceptance": "NOT_VERIFIED_NATIVE_SOLVER_CHANGED_GOING",
+      "upperContactArea": 0.33420170468891786,
+      "slabVoid": {
+        "status": "NATIVE_SLAB_VOID_CONTOUR_READBACK_PASS",
+        "nativeHoleCount": 1,
+        "outerContourPreserved": true,
+        "materialPreserved": true,
+        "floorPreserved": true,
+        "coordinateComparison": "NATIVE_RING_CYCLIC_ORIENTATION_AND_ENDPOINT_NORMALIZATION_1E-6"
+      },
+      "modelVersion": "eec922f3ef382b758d0d432303c53109474c4816ee0d5bdb27c4049eb3ac72fb",
+      "savedFileSHA256": "7ace6c5bb96e32f993e14e8aece8977b7fb1e65f08193adff8601f243ed931a5"
+    }
+  },
+  "open-stair-final": {
+    "status": "PASS",
+    "readback": {
+      "status": "NATIVE_STORY_STAIR_SAVE_OPEN_PASS",
+      "mode": "open",
+      "all143SignaturesUnchanged": true,
+      "primaryBuildingCount": 22,
+      "template20Unchanged": true,
+      "sourceGoingAcceptance": "NOT_VERIFIED_NATIVE_SOLVER_CHANGED_GOING",
+      "upperContactArea": 0.33420170468891786,
+      "slabVoid": {
+        "status": "NATIVE_SLAB_VOID_CONTOUR_READBACK_PASS",
+        "nativeHoleCount": 1,
+        "outerContourPreserved": true,
+        "materialPreserved": true,
+        "floorPreserved": true,
+        "coordinateComparison": "NATIVE_RING_CYCLIC_ORIENTATION_AND_ENDPOINT_NORMALIZATION_1E-6"
+      },
+      "modelVersion": "eec922f3ef382b758d0d432303c53109474c4816ee0d5bdb27c4049eb3ac72fb",
+      "savedFileSHA256": "7ace6c5bb96e32f993e14e8aece8977b7fb1e65f08193adff8601f243ed931a5"
+    }
+  },
+  "status": "LIVE_FINAL_SAVE_OPEN_ALL143_PASS",
+  "retainedOriginal168SavedAndLiveUnchanged": true,
+  "all143SignaturesUnchanged": true,
+  "savedFileSHA256": "7ace6c5bb96e32f993e14e8aece8977b7fb1e65f08193adff8601f243ed931a5",
+  "modelVersion": "eec922f3ef382b758d0d432303c53109474c4816ee0d5bdb27c4049eb3ac72fb",
+  "historicalFirstOpenTimeout": "UNKNOWN_LEDGER_RETAINED_INDEPENDENTLY_RECONCILED_NO_BLIND_RETRY",
+  "creationReplayGate": "NATIVE_STAIR_CREATION_BASELINE_CHANGED_OR_ALREADY_CREATED",
+  "replayNativeWrites": 0
+}
