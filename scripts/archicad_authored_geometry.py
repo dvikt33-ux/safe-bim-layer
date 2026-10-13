@@ -97,6 +97,18 @@ def analyze(normalized, plan, created, children, volume_pairs, surface_pairs):
         if row['type']=='Wall':
             bottom=floor+data['zCoordinate'];top=bottom+data['height']
             allowed=LineString([(data[k]['x'],data[k]['y']) for k in ('begCoordinate','endCoordinate')]).buffer(data['thickness']/2,cap_style=3).buffer(1e-6)
+            joint=plan.get('integrationBindings',{}).get('dependencies',{}).get('authoredRoofJunctions',{})
+            if sid in joint.get('targetStepIds',[]):
+                import archicad_native_operations as N
+                roof=elements[created[joint['roofStepId']]['guid'].lower()]
+                plane=N.roof_underside_plane(roof)
+                expected=joint.get('expectedContactAreas',{}).get(sid)
+                if expected is None:raise ValueError('NATIVE_JUNCTION_SOURCE_CONTACT_AREA_REQUIRED')
+                N.underside_contact_geometry(row,roof,expected,plane)
+                # Memo height is the editable uncut source. Resultant SEO cap
+                # must follow the actual lower roof plane, not that memo top.
+                top=bounds[guid]['max'][2]
+                graph.add_edge(guid,roof['guid'].lower(),evidence='native-underside-geometry')
         elif row['type']=='Slab':
             top=data['level'];bottom=top-data['thickness']
             allowed=Polygon([(v['x'],v['y']) for v in data['polygonCoordinates']]).buffer(1e-6)
@@ -104,6 +116,15 @@ def analyze(normalized, plan, created, children, volume_pairs, surface_pairs):
             bottom=data['coordinates']['z'];top=bottom+data['height']
             x,y=data['coordinates']['x'],data['coordinates']['y']
             allowed=box(x-data['width']/2,y-data['depth']/2,x+data['width']/2,y+data['depth']/2).buffer(1e-6)
+        elif row['type']=='Roof':
+            if any(not body.get('closed') for body in row['bodies']):
+                raise ValueError('NATIVE_ROOF_BODY_NOT_CLOSED')
+            material=data['buildingMaterialId']['guid'].lower()
+            if row.get('materialBindings',{}).get('buildingMaterial',{}).get('guid','').lower()!=material:
+                raise ValueError('NATIVE_ROOF_MATERIAL_MISMATCH')
+            # Typed Roof adapter already checks angle, pivot, memo contour,
+            # level and thickness. Preserve resultant BREP/holes separately.
+            continue
         else:
             host=data['ownerWallId']['guid']['$createdGuid'];parent=created[host]['guid'].lower()
             if row.get('relationships',{}).get('hostGuid','').lower()!=parent:
