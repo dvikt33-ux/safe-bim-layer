@@ -124,6 +124,11 @@ jobs:
           $cache=Join-Path $env:RUNNER_TEMP "apa-windows-local-cache"
           python tools/apa_knowledge_graph/bootstrap.py --repo-root . --cache-dir $cache
           if ($LASTEXITCODE -ne 0) { exit 1 }
+      - name: Run actual user-facing one-click Windows setup command
+        shell: pwsh
+        run: |
+          cmd /c "tools\\apa_knowledge_graph\\Setup-APA-Knowledge.cmd"
+          if ($LASTEXITCODE -ne 0) { exit 1 }
       - name: Build and query Windows local indexes
         shell: pwsh
         run: |
