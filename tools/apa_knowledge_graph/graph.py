@@ -69,6 +69,7 @@ def build_index(plan):
             "related": sorted_unique(item.get("related", [])),
             "artifacts": refs,
             "owner": item.get("owner"), "claim_ref": item.get("claim_ref"),
+            "lease_until": item.get("lease_until"),
             "requires_approval": bool(item.get("requires_approval", False))
         }
     return {
