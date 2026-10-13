@@ -14,7 +14,7 @@ import sqlite3
 import sys
 import tempfile
 
-from graph import build_index, canonical
+from graph import build_index, canonical, configure_stdio
 from sections import build as build_sections, check_index_manifest
 
 
@@ -83,6 +83,7 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
+    configure_stdio()
     try:
         main()
     except (OSError, ValueError, sqlite3.Error) as e:
