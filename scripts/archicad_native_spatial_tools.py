@@ -172,17 +172,42 @@ def create_exact_stair(writer,row,scene_id,retained_signatures,saved_sha256,auth
     if allowed['violations']:raise ValueError('EXACT_STAIR_SOURCE_RULE_CONFLICT_NO_CREATE')
     params={'stairsData':[copy.deepcopy(row)]};qualify_operation('CreateExactStairsV1',params,set(),set(retained_signatures))
     runtime_catalog(writer,'CreateExactStairsV1',params,'GetNativeStairGeometryV1')
+    source_hash=RUN.digest([row,source['sourceSHA256']])
+    binding=writer.guarded_binding()
+    if writer.journal_path.exists():
+        with closing(sqlite3.connect(writer.journal_path)) as db:
+            exists=db.execute("SELECT 1 FROM sqlite_master WHERE name='steps'").fetchone()
+            prior=db.execute("SELECT state,guid,output FROM steps WHERE scene_id=? AND step_id='operation'",(scene_id,)).fetchone() if exists else None
+        if prior:
+            if prior[0]!='PASS' or not prior[1]:raise ValueError('STAIR_PREVIOUS_OPERATION_REQUIRES_RECONCILIATION_NEVER_RETRY')
+            proof=json.loads(prior[2]).get('readback',{})
+            if proof.get('sourceHash')!=source_hash:raise ValueError('STAIR_EXISTING_SOURCE_CHANGED_EXPLICIT_EDIT_REQUIRED')
+            if proof.get('targetBinding')!=binding:raise ValueError('STAIR_COMPLETED_TARGET_BINDING_CHANGED')
+            if prior[1].lower() in {g.lower() for g in retained_signatures}:raise ValueError('STAIR_COMPLETED_GUID_IS_RETAINED_NOT_OWNED')
+            if hashlib.sha256(Path(binding['path']).read_bytes()).hexdigest()!=saved_sha256:raise ValueError('MODEL_SAVED_FILE_HASH_CHANGED')
+            import archicad_connected_components as C
+            native=C.G.normalize_dump(writer.api('GetModelDumpV1',{}))
+            if C.retained_geometry_signatures(native,list(retained_signatures))!=retained_signatures:raise ValueError('MODEL_RETAINED_GEOMETRY_CHANGED')
+            current_proof=verify_exact_stair(writer.api,prior[1],row)
+            verify_stair_rules(current_proof['native'],source)
+            return dict(status='NATIVE_EXACT_STAIR_REUSE_PASS',createdGuid=prior[1],readback=current_proof,nativeCreateCalls=0)
     def before(api):
         if source['favoriteName'] not in api('GetFavoritesByType',{'elementType':'Stair'}).get('favorites',[]):raise ValueError('EXACT_STAIR_FAVORITE_NO_LONGER_AVAILABLE')
         if hashlib.sha256(Path(source['sourcePath']).read_bytes()).hexdigest()!=source['sourceSHA256']:raise ValueError('EXACT_STAIR_SOURCE_CHANGED_BEFORE_DISPATCH')
     def after(reply,*_):
         proof=verify_exact_stair(writer.api,RUN.created_guid(reply),row)
-        actual=proof['native'].get('rules',{})
-        for key,value in source['rules'].items():
-            native_key=key[0].lower()+key[1:]
-            if native_key not in actual or (actual[native_key]!=value if type(value) is bool else not RUN.close(actual[native_key],value)):raise ValueError('EXACT_STAIR_NATIVE_FAVORITE_RULE_READBACK_MISMATCH')
+        verify_stair_rules(proof['native'],source)
+        proof['sourceHash']=source_hash
+        proof['targetBinding']=binding
         return proof
-    return E.execute_model_operation(writer,scene_id,'CreateExactStairsV1',params,RUN.digest([row,source['sourceSHA256']]),[],retained_signatures,after,authorization_ref,saved_sha256,owned_before_check=before)
+    result=E.execute_model_operation(writer,scene_id,'CreateExactStairsV1',params,source_hash,[],retained_signatures,after,authorization_ref,saved_sha256,owned_before_check=before)
+    return {**result,'nativeCreateCalls':1}
+
+def verify_stair_rules(native,source):
+    actual=native.get('rules',{})
+    for key,value in source['rules'].items():
+        native_key=key[0].lower()+key[1:]
+        if native_key not in actual or (actual[native_key]!=value if type(value) is bool else not RUN.close(actual[native_key],value)):raise ValueError('EXACT_STAIR_NATIVE_FAVORITE_RULE_READBACK_MISMATCH')
 
 def edit_exact_stair(writer,guid,row,scene_id,retained_signatures,saved_sha256,authorization_ref):
     actual=writer.api('GetNativeStairGeometryV1',{'elementId':{'guid':guid}})
