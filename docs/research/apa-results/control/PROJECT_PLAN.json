@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 131,
+  "revision": 132,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -3882,7 +3882,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -3985,9 +3985,9 @@
         "A11.S03 remainsPARTIAL; A07.S01 not closed and dependencies preserved; S10BLOCKED unchanged. No normative/engineering drawing acceptance. Next: supported native schedule row/configuration contract and complete vertical primitive/owner mapping; require actual rendered projection extent for all future facade placement acceptance."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "work-multi-sheet-documentation-20261013",
+      "lease_until": "2026-10-13T12:44:58Z",
+      "claim_ref": "APA-CLAIM-MULTI-SHEET-20261013T084458Z",
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
