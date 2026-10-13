@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 import sys
 
-from graph import build_index, artifact_impact, field_impact, canonical, fingerprint
+from graph import build_index, artifact_impact, field_impact, canonical, fingerprint, configure_stdio
 
 
 def compact_value(value, cap=100):
@@ -114,6 +114,7 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
+    configure_stdio()
     try:
         main()
     except (ValueError, KeyError) as exc:
