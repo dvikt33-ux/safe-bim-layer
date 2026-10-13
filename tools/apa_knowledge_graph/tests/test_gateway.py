@@ -136,6 +136,27 @@ class GatewayTest(unittest.TestCase):
         self.assertFalse(any("APA-P50.A01.S02" in x.get("eligible_tasks_not_claimed", [])
                              for x in r["items"]))
 
+    def test_plan_mode_reads_no_sections_and_never_claims(self):
+        r = self.call("что делать дальше?", mode="plan", budget=1600)
+        self.assertEqual(r["retrieval"], "DETERMINISTIC_PLAN_CANDIDATES")
+        self.assertEqual(r["task_claim"], "NEVER_AUTOMATIC")
+        self.assertEqual([x["task_id"] for x in r["items"]], ["APA-P50.A01.S02"])
+        self.assertTrue(all(x["requires_claim"] for x in r["items"]))
+        self.assertTrue(all("excerpt" not in x for x in r["items"]))
+
+    def test_plan_mode_without_search_database(self):
+        result = retrieve(self.index, self.plan, None, None, "dvikt33-ux/safe-bim-layer",
+                          "next plan", mode="plan", max_chars=1600)
+        self.assertEqual(result["retrieval"], "DETERMINISTIC_PLAN_CANDIDATES")
+
+    def test_plan_mode_does_not_suggest_claimed_or_blocked_work(self):
+        plan = copy.deepcopy(self.plan)
+        plan["tasks"]["APA-P50.A01.S02"]["claim_ref"] = "claim:remote"
+        idx = build_index(plan)
+        r = self.call("что дальше", mode="plan", ix=idx, plan=plan)
+        self.assertEqual(r["items"], [])
+        self.assertEqual(r["total_candidates"], 0)
+
     def test_new_plan_invalidates_caches(self):
         modified = copy.deepcopy(self.plan)
         modified["tasks"]["APA-P50.A01.S02"]["status"] = "IN_PROGRESS"
