@@ -7,13 +7,17 @@ on:
     paths:
       - 'data/trc_sad_concept_v1.json'
       - 'scripts/trc_sad_plan.py'
+      - 'scripts/trc_sad_port_probe.py'
       - 'tests/test_trc_sad_plan.py'
+      - 'tests/test_trc_sad_port_probe.py'
       - '.github/workflows/trc-sad-offline.yml'
   pull_request:
     paths:
       - 'data/trc_sad_concept_v1.json'
       - 'scripts/trc_sad_plan.py'
+      - 'scripts/trc_sad_port_probe.py'
       - 'tests/test_trc_sad_plan.py'
+      - 'tests/test_trc_sad_port_probe.py'
       - '.github/workflows/trc-sad-offline.yml'
   workflow_dispatch:
 
@@ -34,5 +38,6 @@ jobs:
           python-version: '3.11'
       - run: python -m pip install 'jsonschema>=4,<5'
       - run: python -m unittest discover -s tests -p 'test_trc_sad_plan.py' -v
+      - run: python -m unittest discover -s tests -p 'test_trc_sad_port_probe.py' -v
       - run: python scripts/trc_sad_plan.py --output trc-preview.json
       - run: python -c "import json; d=json.load(open('trc-preview.json',encoding='utf8')); assert d['nativeWrites']==0 and d['plnChanged']==False and d['aboveGroundSlabAreaSquareMeters']==72712.08"
