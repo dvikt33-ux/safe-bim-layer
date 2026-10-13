@@ -66,3 +66,28 @@ by name alone.
 
 Current status: OFFLINE_PREVIEW_ONLY; normative/engineering/live PLN acceptance
 NOT_VERIFIED. No main, APA core, parent PRs, PLN or APX changes.
+
+## User-selected Archicad port 19727 — read-only binding
+
+The port discovery observed candidate TRC ... GP.pln at 19727 under
+C:\LocalAI\SafeBIM_Global_Library_Test_Projects. Port 19724 is a different
+Tatarstan test PLN and is excluded.
+
+Actual floor levels reported for the TRC candidate are 0 / +3 / +6 metres.
+The concept requires basement -4.5, first 0, second +6.3, third +12.6.
+These are NOT equivalent; never fake the mapping or edit the original PLN.
+
+From C:\LocalAI\TRC_SAD_Preview after git pull --ff-only, with Archicad open:
+
+    python scripts/trc_sad_port_probe.py --port 19727 --output trc-sad-port19727-readonly.json
+
+The CLI reads GetProjectInfo, GetAddOnVersion, GetStories and rechecks
+GetProjectInfo using existing UTF-8 Tapir transport. It refuses any other
+port, directory or inconsistent PLN identity. Evidence contains exact path,
+actual levels, differences, and liveWriteAuthorized=false; nativeWrites=0.
+The expected blocked story-elevation mismatch returns process exit code 2
+by design, while preserving the evidence JSON. It does not change the
+SceneWriter default port, any material or story, or existing saved PLN.
+
+Native Fill/Zone/annotation adapters and live BIM operations remain separate
+work and require accepted contracts and an explicit isolated-test authorization.
