@@ -91,3 +91,46 @@ SceneWriter default port, any material or story, or existing saved PLN.
 
 Native Fill/Zone/annotation adapters and live BIM operations remain separate
 work and require accepted contracts and an explicit isolated-test authorization.
+
+
+## Rapid native 2D floor-plan drafting (no 3D)
+
+Priority: editable 2D Archicad plans, not a new BIM building. The scoped
+scripts/trc_sad_draw_2d.py uses the EXISTING APA Tapir UTF-8 transport;
+this is not a second general model-writing engine. It only uses
+CreateHatches, CreatePolylines and CreateTexts after GetProjectInfo,
+GetAddOnVersion and GetStories project guards; it never calls
+CreateWalls, CreateSlabs, SetStories, OpenProject or SaveProject.
+
+Observed target: C:\LocalAI\SafeBIM_Global_Library_Test_Projects\ТРЦ с GP.pln
+on port 19727, Tapir 1.5.10, with native floors 0/1/2 at +0/+3/+6m.
+These floors act only as 2D drawing storage. Titles distinguish
+proposed design elevations 0/+6.3/+12.6 from actual native ones.
+Basement -4.5m is NOT created and its footprint remains unresolved.
+
+From PowerShell in C:\LocalAI\TRC_SAD_Preview:
+
+    git pull --ff-only
+    python scripts/trc_sad_draw_2d.py --port 19727 --floor all
+    python scripts/trc_sad_draw_2d.py --port 19727 --floor all --draw
+
+Without --draw, the command prepares and reports the intended 2D operations
+without touching Archicad. With --draw it writes native 2D elements on
+the open PLN, but does NOT save the PLN. One-shot attempt evidence is written
+before the first mutation to trc-sad-2d-19727-attempt.jsonl. If execution
+fails or times out, never run --draw again blindly; inspect the log and
+current Archicad 2D elements. A second attempt using the same evidence
+file is explicitly refused. There is no automatic deletion or rollback.
+
+Native content on each story: building outline, atrium, public gallery
+and circulation guide lines; labelled native 2D Hatch areas, and 6 reserved
+vertical-core rectangles. Hatches exclude reserve core overlaps, especially
+the rear lift/stair within the foodcourt footprint. The user-requested
+cinema/bowling swap is applied: left FRONT = cinema (60% of left wing),
+left REAR = bowling/e-sports (40%). Foodcourt spans right/rear and behind
+the atrium; quiet functions on right progress from rest to cowork to library.
+
+This is a 2D concept drawing, not verified door/egress/MEP, kitchen or
+cinema layouts; program labels and provisional square metre reservations
+do not imply code approval or physical partitioned rooms. No true BIM Zone,
+Stair, Wall, Slab or 3D element is created.
