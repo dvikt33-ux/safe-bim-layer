@@ -55,7 +55,7 @@ def verify_model(api, plan, created):
 
 MODEL_COMMANDS = frozenset({'MoveElements', 'ModifyWalls', 'ModifyWindows', 'ModifyDoors',
                            'CreateSolidElementLinks','SetPropertyValuesOfElements','CreateStairs','ModifySlabs',
-                           'CreateNativeGridElementsV1','ModifyNativeGridElementsV1','CreateExactStairsV1','ModifyNativeStairGeometryV1'})
+                           'CreateNativeGridElementsV1','ModifyNativeGridElementsV1','CreateExactStairsV1','ModifyNativeStairGeometryV1','SetGDLParametersOfElements'})
 
 
 def model_operation_scope(command, parameters, source_hash, owned_guids,
@@ -84,6 +84,10 @@ def qualify_model_operation(scope,command,parameters,source_hash):
     if ((not owned and command not in {'CreateNativeGridElementsV1','CreateExactStairsV1'}) or owned&retained or (not retained and
             (scope.get('isolatedInventory')!=sorted(owned)))):
         raise ValueError('MODEL_OWNERSHIP_SCOPE_INVALID')
+    if command=='SetGDLParametersOfElements':
+        from archicad_native_spatial_tools import qualify_grid_parameter_edit
+        qualify_grid_parameter_edit(parameters,owned,retained)
+        return
     if command in {'CreateNativeGridElementsV1','ModifyNativeGridElementsV1','CreateExactStairsV1','ModifyNativeStairGeometryV1'}:
         from archicad_native_spatial_tools import qualify_operation
         qualify_operation(command,parameters,owned,retained)

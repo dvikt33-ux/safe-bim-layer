@@ -39,7 +39,7 @@ READS = frozenset({"GetProjectInfo", "GetStories", "GetAddOnVersion",
 NATIVE_MUTATIONS = RUN.ALLOWED_WRITES | RUN.EXTENDED_WRITES | frozenset({"ModifySlabs","ModifyMorphs","ModifyBeams",
     'ConnectMEPElements','ModifyMEPRoutingElements','CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks','SetClassificationsOfElements','TrimElements',
     'MoveElements','ModifyWalls','ModifyWindows','ModifyDoors','SetPropertyValuesOfElements','SetStories','CreateStairs',
-    'CreateNativeGridElementsV1','ModifyNativeGridElementsV1','CreateExactStairsV1','ModifyNativeStairGeometryV1'})
+    'CreateNativeGridElementsV1','ModifyNativeGridElementsV1','CreateExactStairsV1','ModifyNativeStairGeometryV1','SetGDLParametersOfElements'})
 PRIMITIVES = {
     "pavilion-frame-v1": {"status": "EXECUTABLE_PENDING_LIVE_ACCEPTANCE",
                           "executor": "SceneWriter", "elementCount": 12},
@@ -139,6 +139,11 @@ def apply_native_axis_grid(writer,recipe,scene_id,retained_signatures,saved_sha2
 def apply_exact_native_stair(writer,row,scene_id,retained_signatures,saved_sha256,authorization_ref,source):
     from archicad_native_spatial_tools import create_exact_stair
     return create_exact_stair(writer,row,scene_id,retained_signatures,saved_sha256,authorization_ref,source)
+
+
+def synchronize_native_axis_geometry(writer,guid,recipe,scene_id,retained_signatures,saved_sha256,authorization_ref):
+    from archicad_native_spatial_tools import synchronize_grid_geometry
+    return synchronize_grid_geometry(writer,guid,recipe,scene_id,retained_signatures,saved_sha256,authorization_ref)
 
 
 def inspect_project_knowledge(config, operation, arguments, remote=None, **bounds):
