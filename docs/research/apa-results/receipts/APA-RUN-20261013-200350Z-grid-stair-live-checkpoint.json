@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:a737a10ea0d5f40c2a88a32bb76c429165c443a07aa71794f6df4619e92b1194",
+  "index_commit_sha": "319447a3d1f46d85239c267f8872c3a0ff3f66e7",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "319447a3d1f46d85239c267f8872c3a0ff3f66e7",
+  "report_path": "docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-200350Z-grid-stair-live-checkpoint/REPORT.md",
+  "report_sha256": "c5fdd7f280a73de396af592b77e6ff1104c3dec4f4e3c95dc0873cf982b4c714",
+  "run_id": "APA-RUN-20261013-200350Z-grid-stair-live-checkpoint",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}
