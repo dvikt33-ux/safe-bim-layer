@@ -170,7 +170,7 @@ def search(db, query, limit=5, max_snippet=240, selected_class=None):
             raise ValueError("Invalid source class")
         if selected_class is None:
             rows = conn.execute("""
-              SELECT path, heading, line, source_sha256, source_class,
+              SELECT path, heading, content, line, source_sha256, source_class,
                      snippet(sections, 2, '', '', ' … ', 28) AS excerpt,
                      bm25(sections) AS rank
                 FROM sections WHERE sections MATCH ?
@@ -178,7 +178,7 @@ def search(db, query, limit=5, max_snippet=240, selected_class=None):
             """, (q, limit)).fetchall()
         else:
             rows = conn.execute("""
-              SELECT path, heading, line, source_sha256, source_class,
+              SELECT path, heading, content, line, source_sha256, source_class,
                      snippet(sections, 2, '', '', ' … ', 28) AS excerpt,
                      bm25(sections) AS rank
                 FROM sections WHERE sections MATCH ? AND source_class = ?
@@ -186,17 +186,29 @@ def search(db, query, limit=5, max_snippet=240, selected_class=None):
             """, (q, selected_class, limit)).fetchall()
         # Revalidate only the selected top-K original source bytes.
         checked = {}
+        decoded = {}
         stale = []
+        tampered = []
         for row in rows:
             location = row["path"]
             if location not in checked:
                 src = Path(location)
-                checked[location] = sha(src.read_bytes()) if src.is_file() else None
+                raw = src.read_bytes() if src.is_file() else None
+                checked[location] = sha(raw) if raw is not None else None
+                if raw is not None:
+                    decoded[location] = {(heading, line): body for heading, line, body
+                                         in split_sections(raw.decode("utf-8-sig"))}
             if checked[location] != row["source_sha256"]:
                 stale.append(location)
+            elif (source_class(location) != row["source_class"] or
+                  decoded.get(location, {}).get((row["heading"], row["line"])) != row["content"]):
+                tampered.append(location)
         if stale:
             return {"status": "STALE_INDEX", "count": 0, "results": [],
                     "stale_paths": sorted(set(stale)), "warning": "Source byte hashes mismatch; rebuild"}
+        if tampered:
+            return {"status": "INDEX_TAMPERED", "count": 0, "results": [],
+                    "warning": "Retrieved section text/class does not match source bytes; rebuild trusted cache"}
         results = []
         for row in rows:
             snippet_text = row["excerpt"].strip().replace("\n", " ")
