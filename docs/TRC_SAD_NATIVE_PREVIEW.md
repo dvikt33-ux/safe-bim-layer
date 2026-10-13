@@ -14,7 +14,7 @@ second executor, unreviewed API write, project switch or SaveProject.
 - Building levels: basement -4.5, first 0, second +6.3, third +12.6 m.
 - Basement footprint and 75,000 m2 target reconciliation remain UNRESOLVED.
 - Unverified placeholders for core positioning, circulation and room zoning.
-- Third-floor cinema (rear left), bowling/e-sports (front left), continuous
+- Third-floor cinema (front left, 60% of wing), bowling/e-sports (rear left, 40% of wing), continuous
   dining area behind the atrium and right rear, quiet zone/right front.
 - Exterior Walls use basic reference lines offset 0.15 m inward from the
   approved outer boundary. A 25.2 m opening at the front is a conceptual
