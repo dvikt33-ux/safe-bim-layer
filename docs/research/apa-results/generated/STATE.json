@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 41,
+  "run_count": 42,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -287,6 +287,13 @@
       "phase": "LIVE",
       "report": "runs/2026-10-13/APA-RUN-20261013-082134Z-native-documentation-followon/REPORT.md",
       "run_id": "APA-RUN-20261013-082134Z-native-documentation-followon",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-13/APA-RUN-20261013-121018Z-model-first-building/REPORT.md",
+      "run_id": "APA-RUN-20261013-121018Z-model-first-building",
       "substep_id": "APA-P70.A11.S03"
     }
   ],
