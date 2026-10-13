@@ -30,7 +30,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| APA-P70.A11.S03 | work-multi-sheet-documentation-20261013 | 2026-10-13T12:44:58Z | system-gap-driven-development-v31 |
+| APA-P70.A11.S03 | work-model-first-building-20261013 | 2026-10-13T12:58:58Z | system-gap-driven-development-v31 |
 
 ## CONTROL — 0 ready
 
