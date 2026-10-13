@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 127,
+  "revision": 128,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -3792,7 +3792,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -3878,9 +3878,9 @@
         "A11.S03 remains PARTIAL and A11.S10 remains BLOCKED. This is preparatory architectural functionality for A07.S01; dependencies and status unchanged, not closed. Normative/engineering acceptance NOT_EXECUTED, PDF/nativePublisher output NOT_EXECUTED. Next available documentation work: qualify true exterior Elevation placement, vertical primitive readback and native schedule rows through the same executor, then actual publisher-file proof. No normative/search re-research."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "work-knowledge-integration-20261013",
+      "lease_until": "2026-10-13T04:10:26Z",
+      "claim_ref": "APA-CLAIM-KNOWLEDGE-20261013T011026Z",
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
