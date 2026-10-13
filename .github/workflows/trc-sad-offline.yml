@@ -9,9 +9,11 @@ on:
       - 'scripts/trc_sad_plan.py'
       - 'scripts/trc_sad_port_probe.py'
       - 'scripts/trc_sad_draw_2d.py'
+      - 'scripts/trc_sad_grid_2d.py'
       - 'tests/test_trc_sad_plan.py'
       - 'tests/test_trc_sad_port_probe.py'
       - 'tests/test_trc_sad_draw_2d.py'
+      - 'tests/test_trc_sad_grid_2d.py'
       - '.github/workflows/trc-sad-offline.yml'
   pull_request:
     paths:
@@ -19,9 +21,11 @@ on:
       - 'scripts/trc_sad_plan.py'
       - 'scripts/trc_sad_port_probe.py'
       - 'scripts/trc_sad_draw_2d.py'
+      - 'scripts/trc_sad_grid_2d.py'
       - 'tests/test_trc_sad_plan.py'
       - 'tests/test_trc_sad_port_probe.py'
       - 'tests/test_trc_sad_draw_2d.py'
+      - 'tests/test_trc_sad_grid_2d.py'
       - '.github/workflows/trc-sad-offline.yml'
   workflow_dispatch:
 
@@ -45,5 +49,7 @@ jobs:
       - run: python -m unittest discover -s tests -p 'test_trc_sad_port_probe.py' -v
       - run: python -m unittest discover -s tests -p 'test_trc_sad_draw_2d.py' -v
       - run: python scripts/trc_sad_draw_2d.py --floor all
+      - run: python -m unittest discover -s tests -p 'test_trc_sad_grid_2d.py' -v
+      - run: python scripts/trc_sad_grid_2d.py --floor all
       - run: python scripts/trc_sad_plan.py --output trc-preview.json
       - run: python -c "import json; d=json.load(open('trc-preview.json',encoding='utf8')); assert d['nativeWrites']==0 and d['plnChanged']==False and d['aboveGroundSlabAreaSquareMeters']==72712.08"
