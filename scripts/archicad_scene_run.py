@@ -582,7 +582,7 @@ class SceneWriter:
                 set(rows[0])!={'elementId','classificationId'} or
                 set(rows[0].get('classificationId',{}))!={'classificationSystemId','classificationItemId'}):
             raise ValueError('BOUNDED_CLASSIFICATION_REQUIRES_TYPED_NEW_MEMBER_AND_EXPLICIT_ITEM')
-        if document_command and command in {'SaveProject','OpenProject'}:
+        if document_command and command in {'SaveProject','OpenProject','PublishPublisherSet'}:
             # SPECIAL_REVIEW stays unexecutable in ordinary writer operations;
             # only this explicit, bound documentation persistence opts in.
             if command=='OpenProject' and parameters!={'projectFilePath':preflight['binding']['path']}:

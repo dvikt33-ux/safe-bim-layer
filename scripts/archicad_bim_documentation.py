@@ -16,10 +16,13 @@ from archicad_connected_ifc import native_body_quantities
 
 RUN = C.RUN
 DOCUMENT_COMMANDS = frozenset({'CreateSections', 'CreateInteriorElevations', 'CreateViewsInViewMap',
-    'ChangeWindow', 'RebuildView', 'CreateWalls', 'SaveProject', 'OpenProject'})
-SPECIAL_DOCUMENT_COMMANDS = frozenset({'SaveProject', 'OpenProject'})
+    'ChangeWindow', 'RebuildView', 'CreateWalls', 'SaveProject', 'OpenProject',
+    'MoveElements', 'CreateAssociativeDimensionsOnSection', 'CreateLayout', 'CreateDrawings', 'PublishPublisherSet','SetViewSettings','UpdateDrawings'})
+SPECIAL_DOCUMENT_COMMANDS = frozenset({'SaveProject', 'OpenProject', 'PublishPublisherSet'})
 SLOTS = {'CreateSections': 'sectionsData', 'CreateInteriorElevations': 'interiorElevationsData', 'CreateViewsInViewMap': 'viewsData',
-         'CreateWalls': 'wallsData'}
+         'CreateWalls': 'wallsData', 'MoveElements': 'elementsWithMoveVectors',
+         'CreateAssociativeDimensionsOnSection': 'dimensionsData', 'CreateLayout': 'layoutsData',
+         'CreateDrawings': 'drawingsData','SetViewSettings':'navigatorItemIdsWithViewSettings','UpdateDrawings':'elements'}
 
 
 def flatten(tree):
@@ -86,14 +89,65 @@ def qualify_operation(scope, command, parameters, source_hash):
     if command == 'OpenProject' and (set(parameters) != {'projectFilePath'} or
             not isinstance(parameters['projectFilePath'], str)):
         raise ValueError('DOCUMENTATION_OPEN_EXACT_BOUND_SAVED_PROJECT_ONLY')
+    if command == 'MoveElements':
+        row=parameters['elementsWithMoveVectors'][0]
+        vector=row.get('moveVector',{})
+        guid=row.get('elementId',{}).get('guid','').lower()
+        copy_source=row.get('copy') is True and guid in scope['retainedGuids']
+        new_test_target=row.get('copy') is False and guid in scope['testGuids'] and guid not in scope['retainedGuids']
+        if (set(row)!={'elementId','moveVector','copy'} or not (copy_source or new_test_target) or
+                set(vector)!={'x','y','z'} or vector['z']!=0 or
+                any(type(v) not in (int,float) or not math.isfinite(v) for v in vector.values())):
+            raise ValueError('DOCUMENTATION_COPY_ONLY_NO_EXISTING_ELEMENT_MOVE')
+    if command == 'PublishPublisherSet':
+        from pathlib import PureWindowsPath
+        selected=parameters.get('selectedNavigatorItemIds')
+        output=parameters.get('outputPath','')
+        if (set(parameters)!={'publisherSetName','outputPath','selectedNavigatorItemIds'} or
+                not isinstance(selected,list) or not 1<=len(selected)<=4 or
+                not isinstance(output,str) or output.startswith(('\\\\','//')) or
+                not (Path(output).is_absolute() or PureWindowsPath(output).is_absolute())):
+            raise ValueError('DOCUMENTATION_EXPLICIT_LOCAL_SELECTED_PUBLICATION_REQUIRED')
+    if command=='CreateLayout':
+        row=parameters['layoutsData'][0]
+        if not (row.get('masterLayoutName') or row.get('masterNavigatorItemId')):
+            raise ValueError('DOCUMENTATION_LAYOUT_REQUIRES_EXPLICIT_MASTER')
+    if command=='SetViewSettings':
+        row=parameters['navigatorItemIdsWithViewSettings'][0];guid=row.get('navigatorItemId',{}).get('guid','').lower();settings=row.get('viewSettings',{});zoom=settings.get('zoom',{})
+        if (guid not in scope['testGuids'] or guid in scope['retainedGuids'] or
+                set(settings)!={'drawingScale','saveZoom','ignoreSavedZoom','zoom'} or
+                settings['saveZoom'] is not True or settings['ignoreSavedZoom'] is not False or
+                type(settings['drawingScale']) not in (int,float) or settings['drawingScale']<=0 or
+                set(zoom)!={'xMin','yMin','xMax','yMax'} or
+                any(type(v) not in (int,float) or not math.isfinite(v) for v in zoom.values()) or
+                zoom['xMin']>=zoom['xMax'] or zoom['yMin']>=zoom['yMax']):
+            raise ValueError('DOCUMENTATION_ONLY_NEW_VIEW_SCALE_AND_FRAME_ALLOWED')
+    if command=='UpdateDrawings':
+        guid=parameters['elements'][0].get('elementId',{}).get('guid','').lower()
+        if guid not in scope['testGuids'] or guid in scope['retainedGuids']:
+            raise ValueError('DOCUMENTATION_ONLY_NEW_DRAWING_UPDATE_ALLOWED')
 
 
 def native_response(command, reply):
     if command in {'ChangeWindow', 'RebuildView', 'SaveProject', 'OpenProject'}:
         if reply != {'success': True}:
             raise ValueError('DOCUMENTATION_NATIVE_SUCCESS_NOT_CONFIRMED')
-    elif command in {'CreateWalls', 'CreateSections', 'CreateInteriorElevations'}:
+    elif command in {'CreateWalls', 'CreateSections', 'CreateInteriorElevations', 'CreateDrawings', 'CreateAssociativeDimensionsOnSection'}:
         return RUN.created_guid(reply)
+    elif command=='CreateLayout':
+        rows=reply.get('databases',[])
+        if len(rows)!=1 or 'error' in rows[0] or not RUN._GUID.fullmatch(rows[0].get('databaseId',{}).get('guid','')):
+            raise ValueError('DOCUMENTATION_NATIVE_LAYOUT_NOT_CONFIRMED')
+        return rows[0]['databaseId']['guid'].lower()
+    elif command in {'MoveElements','SetViewSettings'}:
+        if reply!={'executionResults':[{'success':True}]}:
+            raise ValueError('DOCUMENTATION_NATIVE_COPY_NOT_CONFIRMED')
+    elif command=='UpdateDrawings':
+        if reply!={'success':True}:raise ValueError('DOCUMENTATION_NATIVE_DRAWING_UPDATE_NOT_CONFIRMED')
+    elif command=='PublishPublisherSet':
+        # SDK returns an empty object on success. Independent file readback is
+        # mandatory in execute_operation; a successful command alone proves no PDF.
+        if reply!={}:raise ValueError('DOCUMENTATION_PUBLISH_NATIVE_REJECTED')
     elif command == 'CreateViewsInViewMap':
         rows = reply.get('navigatorItems')
         if not isinstance(rows, list) or len(rows) != 1 or 'error' in rows[0]:
@@ -123,6 +177,10 @@ def execute_operation(writer, scene_id, command, parameters, source_hash,
 
     def retained():
         native = capture_full_model(writer.api, retained_signatures)
+        if command=='MoveElements' and parameters['elementsWithMoveVectors'][0]['copy']:
+            source=parameters['elementsWithMoveVectors'][0]['elementId']['guid'].lower()
+            if next((e['type'] for e in native['elements'] if e['guid'].lower()==source),None)!='Elevation':
+                raise ValueError('DOCUMENTATION_NATIVE_ELEVATION_COPY_SOURCE_REQUIRED')
         actual = C.retained_geometry_signatures(native, sorted(retained_signatures))
         if actual != retained_signatures:
             raise ValueError('DOCUMENTATION_RETAINED_MODEL_CHANGED')
@@ -135,9 +193,19 @@ def execute_operation(writer, scene_id, command, parameters, source_hash,
         import hashlib
         if hashlib.sha256(Path(preflight['binding']['path']).read_bytes()).hexdigest() != saved_sha256:
             raise ValueError('DOCUMENTATION_SAVED_FILE_HASH_CHANGED')
-        proof = retained()
+        if command == 'PublishPublisherSet':
+            output = Path(parameters['outputPath'])
+            if output.is_symlink() or (output.exists() and
+                    (not output.is_dir() or any(output.iterdir()))):
+                raise ValueError('DOCUMENTATION_EXPORT_REQUIRES_NEW_EMPTY_DIRECTORY')
+        try:
+            proof=retained()
+        except ValueError as exc:
+            if str(exc)!='DOCUMENTATION_LAYOUT_MODEL_WINDOW_REQUIRED':raise
+            proof=restore_model_window(writer,scene_id+'-db-before',source_hash,
+                retained_signatures,authorization_ref,saved_sha256)
         if activate_navigator_id is not None:
-            if expected_window not in {'FloorPlan', 'Section', 'Elevation', 'InteriorElevation'}:
+            if expected_window not in {'FloorPlan', 'Section', 'Elevation', 'InteriorElevation', 'Layout'}:
                 raise ValueError('DOCUMENTATION_EXPLICIT_WINDOW_BINDING_REQUIRED')
             nav_params = {'navigatorItemId': {'guid': activate_navigator_id}}
             nav_scope = operation_scope('ChangeWindow', nav_params, source_hash,
@@ -167,7 +235,13 @@ def execute_operation(writer, scene_id, command, parameters, source_hash,
         proof = verify_after(reply, prior)
         if not isinstance(proof, dict) or not str(proof.get('status', '')).endswith('PASS'):
             raise ValueError('DOCUMENTATION_NATIVE_READBACK_REQUIRED')
-        return {**proof, 'retained': retained()}
+        try:
+            retained_proof=retained()
+        except ValueError as exc:
+            if str(exc)!='DOCUMENTATION_LAYOUT_MODEL_WINDOW_REQUIRED':raise
+            retained_proof=restore_model_window(writer,scene_id+'-db-after',source_hash,
+                retained_signatures,authorization_ref,saved_sha256)
+        return {**proof, 'retained': retained_proof}
 
     return writer.execute_bound_operation(preflight, scene_id, command, parameters,
         RUN.digest(intent), before, after)
@@ -182,12 +256,44 @@ def capture_full_model(api, retained_guids):
     Callers must activate their target database AFTER this geometry barrier.
     """
     selected = {g.lower() for g in retained_guids}
-    native = C.G.normalize_dump(api('GetModelDumpV1', {}))
+    raw=api('GetModelDumpV1', {})
+    if raw.get('error')=={'code':-2130313109,'message':'ShowAllIn3D'}:
+        raise ValueError('DOCUMENTATION_LAYOUT_MODEL_WINDOW_REQUIRED')
+    if 'error' in raw:raise ValueError('DOCUMENTATION_NATIVE_DUMP_REJECTED')
+    native=C.G.normalize_dump(raw)
     if not selected <= {e['guid'].lower() for e in native['elements']}:
         native = C.G.normalize_dump(api('GetModelDumpV1', {}))
     if not selected <= {e['guid'].lower() for e in native['elements']}:
         raise ValueError('DOCUMENTATION_COMPLETE_NATIVE_INVENTORY_UNAVAILABLE')
     return native
+
+
+def restore_model_window(writer,scene_id,source_hash,retained_signatures,authorization_ref,saved_sha256):
+    """View-only recovery via the existing journal, then full native proof.
+
+    Installed ShowAllIn3D rejects Layout. This changes only the active window;
+    identity/saved bytes precede the call. No Create/Modify/Publish replay.
+    """
+    import hashlib
+    if writer.api('GetCurrentWindowType',{})!={'currentWindowType':'Layout'}:
+        raise ValueError('DOCUMENTATION_MODEL_WINDOW_RECOVERY_NOT_LAYOUT')
+    floor=source_view(writer.api('GetNavigatorItemTree',{'navigatorMapId':'ProjectMap'}),'StoryItem',0)
+    params={'navigatorItemId':floor['navigatorItemId']};hash_ref=RUN.digest([source_hash,'LAYOUT_MODEL_WINDOW_RECOVERY',scene_id])
+    scope=operation_scope('ChangeWindow',params,hash_ref,retained_signatures,authorization_ref=authorization_ref)
+    preflight={'sourcePlanHash':hash_ref,'binding':writer.guarded_binding(),'integrationBindings':{'dependencies':{'documentationOperation':scope}}}
+    intent={'sceneId':scene_id,'sourcePlanHash':hash_ref,'command':'ChangeWindow','parameters':params,'target':preflight['binding']}
+    def before():
+        if hashlib.sha256(Path(preflight['binding']['path']).read_bytes()).hexdigest()!=saved_sha256:
+            raise ValueError('DOCUMENTATION_SAVED_FILE_HASH_CHANGED')
+        return {'status':'VIEW_ONLY_RECOVERY_IDENTITY_AND_SAVED_BYTES_CHECKED','modelGeometryWrite':False}
+    def after(reply,_):
+        if writer.api('GetCurrentWindowType',{})!={'currentWindowType':'FloorPlan'}:raise ValueError('DOCUMENTATION_FLOOR_WINDOW_RECOVERY_FAILED')
+        native=capture_full_model(writer.api,retained_signatures);actual=C.retained_geometry_signatures(native,sorted(retained_signatures))
+        if actual!=retained_signatures:raise ValueError('DOCUMENTATION_RETAINED_MODEL_CHANGED')
+        return {'status':'NATIVE_MODEL_DATABASE_RECOVERY_PASS','count':len(actual),'signatureHash':RUN.digest(actual)}
+    result=writer.execute_bound_operation(preflight,scene_id,'ChangeWindow',params,RUN.digest(intent),before,after)
+    if result['status']!='PASS':raise ValueError('DOCUMENTATION_MODEL_WINDOW_RECOVERY_UNVERIFIED')
+    return result['readback']
 
 
 def make_snapshot(native, guids, details=None):
