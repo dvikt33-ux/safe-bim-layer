@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 134,
+  "revision": 135,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -3954,7 +3954,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -4066,9 +4066,9 @@
         "Existing plans/Sections/Elevations/PDF/CSV and PR73 code preserved; cancelledmultisheet expansion notcontinued. Normative/search/KnowledgeGraphimplementation/APX/main/master unchanged. Actual mainorchestrator read-onlyKnowledgeGraphquery atGitHubcurrentplan133. A11.S03PARTIAL/A07dependencies/S10BLOCKED preserved. Next:supportednativeaxescontract and separatelyauthorizedstory-isolatedcreate/editcycle, then broaderqualifiedhost/Roofedits and sourceStair."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "work-native-spatial-20261013",
+      "lease_until": "2026-10-13T16:32:58Z",
+      "claim_ref": "APA-CLAIM-NATIVE-SPATIAL-20261013T123258Z",
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
