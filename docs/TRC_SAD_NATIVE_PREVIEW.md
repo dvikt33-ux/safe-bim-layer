@@ -173,3 +173,79 @@ This is appropriate for immediate schematic setting-out; subsequent
 structural and normative design must verify real grids/column locations.
 
 No native 3D Walls, Columns, Slabs, Roofs, Zones, or Story edits are executed.
+
+
+## Retraction of prior 2D drawings — IMPORTANT (Oct 13)
+
+The user explicitly rejected the previously scripted 2D approximation of a
+native Archicad grid and asked to remove all our generated drawings without
+losing ANY unrelated UNSAVED work. The old two CLI writers now reject
+the --draw flag. Do NOT close the unsaved original PLN or use repeated Undo.
+
+Caution: the existing model is LOCAL. GitHub commits DO NOT remove native
+elements from the user's open Archicad instance. The existing user-confirmed
+floor pass created 27 Hatches + 51 Polylines + 46 Texts at port 19727;
+the additional grid attempt may or may not have been executed. Distinguish
+those groups by source journals.
+
+### Safe cleanup procedure
+
+1. In Archicad, SAVE AS:
+   C:\LocalAI\SafeBIM_Global_Library_Test_Projects\ТРЦ с GP - BEFORE_CLEANUP.pln
+   This preserves ALL current unsaved edits, including the unwanted drawings,
+   without overwriting the originally saved PLN.
+2. While that copied project is still open, SAVE AS again:
+   C:\LocalAI\SafeBIM_Global_Library_Test_Projects\ТРЦ с GP - CLEANUP_WORKING.pln
+   This leaves the immutable before-cleanup backup on disk.
+3. In C:\LocalAI\TRC_SAD_Preview run git pull --ff-only and from that same
+   directory run: python scripts/trc_sad_cleanup.py
+   By default this reads the immutable first copy and active second copy
+   identities, native inventory, all actual authoring GUIDs from:
+   trc-sad-2d-19727-attempt.jsonl and (if it exists)
+   trc-sad-grid-19727-attempt.jsonl. It checks native element types/stories,
+   verifies the original journals are complete and outputs
+   trc-sad-cleanup-preflight.json with an approval hash.
+   No native writes in preflight.
+4. ONLY after reviewing exact GUID counts and success, execute:
+   python scripts/trc_sad_cleanup.py --execute --approve-hash HASH_FROM_PREFLIGHT
+   This deletes only source-journal GUIDs after exact live project checks
+   and expected native type/stories. It creates local
+   trc-sad-cleanup-attempt.jsonl BEFORE any native delete, verifies after
+   each batch; never auto-retries or saves. Partial outcome requires
+   manual inspection, never blind rerun.
+
+This new cleanup has syntax/static CI checks but has NOT yet been demonstrated
+on the actual local Archicad PLN. Never claim the deletion is finished until
+the exact native response and inventory verification are received. Do NOT
+destroy either PLN backup or original.
+
+### Correct NATIVE editable Archicad 29 Grid System
+
+ONLY Design > Grid System in Archicad 29, with native Grid Elements and
+associated optional Grid dimensions. The native Grid System is documented
+at https://help.graphisoft.com/AC/29/INT/_AC29_Help/070_Documentation/070_Documentation-59.htm .
+No substitute lines, circles, texts or DXF imitation. The bundled Tapir
+1.5.10 schema does not expose creation of actual Grid Elements, so APA must
+NOT pretend the prior script creates one.
+
+The new grid is a structural CONCEPT, not a verified engineering model:
+data/trc_sad_structural_grid_v2.json
+
+Direction X, 10 axes 1..10, nine bays (metres):
+20, 20, 20, 20, 20, 20, 20, 22.4, 22.4 (184.8 total).
+
+Direction Y, 8 axes А,Б,В,Г,Д,Е,Ж,И, seven bays (metres):
+18, 18, 18, 22.2, 22.2, 22.2, 22.2 (142.8 total).
+
+36m interstory long-span option: 0..36m in Y (two x18m bays),
+subject to engineering analysis of supporting system and load transfer.
+60m roof-only long-span option: X=60..120m, three x20m bays,
+covering central atrium region, subject to roof-truss verification.
+No unsupported claims of structural member sizing or grid intersection columns.
+
+In native Grid System Settings:
+- Enter axis counts and separate consecutive distances above.
+- Disable automatic Column/Beam/Object placement.
+- Enable segment and overall associative grid dimension settings.
+- Place once and verify genuinely editable native Grid Elements.
+- Do NOT write until the rejected original 2D elements have been safely removed.
