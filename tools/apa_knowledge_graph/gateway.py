@@ -143,6 +143,8 @@ def retrieve(index, plan, section_db, repo_root, repo, query, mode="research",
                   "relation": "SCHEDULE_CANDIDATE_NOT_AUTHORIZED"} for tid, item in eligible]
         return compact_fit({**base, "retrieval": "DETERMINISTIC_PLAN_CANDIDATES",
                             "task_claim": "NEVER_AUTOMATIC", "plan_scope": "CHECKOUT_SNAPSHOT_ONLY",
+                            "total_eligible_tasks": len(cards),
+                            "omitted_due_to_limit": max(0, len(cards) - limit),
                             "warning": "Controller may require fresh remote plan/lease and independent audit."},
                            cards[:limit], max_chars)
     if ids:
