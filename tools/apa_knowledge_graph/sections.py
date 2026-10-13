@@ -152,7 +152,7 @@ def normalized_query(query):
     return " OR ".join('"' + t.replace('"', '""') + '"' for t in terms)
 
 
-def search(db, query, limit=5, max_snippet=240, selected_class=None):
+def search(db, query, limit=5, max_snippet=240, selected_class=None, heading_boost=True):
     if limit < 1 or limit > 20 or max_snippet < 40 or max_snippet > 1000:
         raise ValueError("Bounded search requires limit=1..20, max_snippet=40..1000")
     conn = sqlite3.connect("file:" + Path(db).resolve().as_posix() + "?mode=ro", uri=True)
@@ -165,22 +165,23 @@ def search(db, query, limit=5, max_snippet=240, selected_class=None):
             return {"status": "STALE_INDEX", "count": 0, "results": [],
                     "warning": "Directory or source stat changed since indexing; rebuild"}
         q = normalized_query(query)
+        rank_sql = "bm25(sections, 0.0, 9.0, 1.0)" if heading_boost else "bm25(sections)"
         allowed = {"ARCHIVED_SOURCE", "RESEARCH_RUN", "PROJECT_CONTROL", "OTHER_DOCUMENT"}
         if selected_class is not None and selected_class not in allowed:
             raise ValueError("Invalid source class")
         if selected_class is None:
-            rows = conn.execute("""
+            rows = conn.execute(f"""
               SELECT path, heading, content, line, source_sha256, source_class,
                      snippet(sections, 2, '', '', ' … ', 28) AS excerpt,
-                     bm25(sections) AS rank
+                     {rank_sql} AS rank
                 FROM sections WHERE sections MATCH ?
                ORDER BY rank LIMIT ?
             """, (q, min(500, limit * 30))).fetchall()
         else:
-            rows = conn.execute("""
+            rows = conn.execute(f"""
               SELECT path, heading, content, line, source_sha256, source_class,
                      snippet(sections, 2, '', '', ' … ', 28) AS excerpt,
-                     bm25(sections) AS rank
+                     {rank_sql} AS rank
                 FROM sections WHERE sections MATCH ? AND source_class = ?
                ORDER BY rank LIMIT ?
             """, (q, selected_class, min(500, limit * 30))).fetchall()
@@ -235,6 +236,7 @@ def search(db, query, limit=5, max_snippet=240, selected_class=None):
         return {"status": "OK", "count": len(results), "results": results,
                 "query_type": "LEXICAL_OR_FTS5", "source_class_filter": selected_class,
                 "diversity_policy": "ONE_BEST_SECTION_PER_DOCUMENT",
+                "ranking": "BM25_HEADING_X9" if heading_boost else "BM25_BASELINE",
                 "source_byte_readback": "MATCH_FOR_RETURNED_HITS",
                 "source_manifest_check": "PATH_SIZE_MTIME_MATCH",
                 "warning": "Exact source blob/edition/readback and applicability must be verified before use"}
