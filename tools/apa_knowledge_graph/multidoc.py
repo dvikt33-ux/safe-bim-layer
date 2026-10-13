@@ -11,7 +11,7 @@ import json
 from pathlib import Path
 import sys
 
-from graph import assert_index, canonical
+from graph import assert_index, canonical, configure_stdio
 
 
 def document_bundle(index, artifact_ids, max_tasks=12):
@@ -75,6 +75,7 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
+    configure_stdio()
     try:
         main()
     except (ValueError, KeyError) as exc:
