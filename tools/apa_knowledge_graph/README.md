@@ -1,6 +1,6 @@
 # APA Knowledge Impact POC — read-only, token-bounded, audited
 
-**Status (2026-10-13): WORKING OFFLINE PROTOTYPE, NOT PRODUCTION/MERGED.**
+**Status (2026-10-13): MERGED into canonical RESEARCH hub (PR #69, merge `64cec581b257b209a097556ae19d498e53631ba1`); 102 tests PASS Linux + 102 tests PASS Windows. NOT installed as a ChatGPT plugin, NOT merged to production/main, normative engineering NOT_VERIFIED.**
 Draft PR [#69](https://github.com/dvikt33-ux/safe-bim-layer/pull/69) targets only the existing research hub branch. Does not edit `main`, PLN, APX, existing publisher, controller, task claims or statuses. No API key, embedding model, server, new task controller, or external paid tool required.
 
 This is an **execution of a useful first slice**, not just a research memo. It builds a derived index from the current `PROJECT_PLAN.json` and answers exact task, artifact impact, bounded multi-document join, task descendants and **explicit field-value change** queries through local Python. It does **not** claim to have extracted every semantic link in the GitHub library or to know real normative field dependencies automatically.
@@ -10,6 +10,18 @@ This is an **execution of a useful first slice**, not just a research memo. It b
 **[92 tests PASS / 304 real-PLAN structural queries / 209 Markdown files and 2142 indexed sections](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38327961036).** On a real checkout the evaluation resolved all 91 tasks, all 173 artifacts and 40 pairs of related artifacts against direct plan metadata, with no disagreements. This is not independent natural-language relevance evidence. The plan-mode query counted **18 potential unclaimed tasks**, offered five candidates, and never issued a claim. Source manifest now detects new, missing or stat-changed Markdown before search; selected snippets additionally require exact text/section/class byte-readback from the original file. Poisoned SQLite cached snippets and false source classification return `INDEX_TAMPERED` with **no excerpts**. This is integrity hardening, not a guarantee of legal/normative trust or global cryptographic rehash of every unreturned source.
 
 The complete source-linked evidence, failure modes and required independent review are preserved in [canonical research hardening report](../../docs/research/apa-results/runs/2026-10-13/apa-gpt-knowledge-gateway-hardening-acceptance-20261013.md).
+
+## One-command Windows setup — tested on real Windows CI
+
+In a checkout of `research/apa-verified-results-hub-20261010`, run `tools\\apa_knowledge_graph\\Setup-APA-Knowledge.cmd`. The script is verified by the actual CMD invocation in [Windows and Linux CI run 38329224160](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38329224160). Derived SQLite/text indexes are atomically generated in `%LOCALAPPDATA%\\APA\\Knowledge`, not in the Git repository or Archicad PLN. It prints the optional local MCP v2 stdio subprocess command; this does **not** register the tool with ChatGPT automatically.
+
+Default MCP class access only permits `PROJECT_CONTROL` and `RESEARCH_RUN`; `ARCHIVED_SOURCE` and `OTHER_DOCUMENT` require operator opt-in. The model cannot widen these class permissions, source roots or the operator's output budget.
+
+[Canonical finalized research integration report](../../docs/research/apa-results/runs/2026-10-13/apa-knowledge-gateway-research-merge-final-20261013.md):
+- CI: 102 Linux + 102 Windows tests passed. Exact registry 91 task IDs, 173 art IDs, 40 two-artifact joins, no structural mismatches.
+- Identical source-heading sample of 100 real Markdown documents: BM25 recall@5 94%, heading-weighted recall@5 100%, *not an independently human-scored natural-language test*.
+- One known two-ART query: 77,829 full-plan vs 359 bounded output `o200k_base` tokenizer-proxy tokens, *not GPT-6 billed usage*.
+- SQLite FTS poisoned body/class, stale new/deleted files and unsafe MCP class access fail closed.
 
 ## Files
 
