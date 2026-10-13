@@ -143,23 +143,27 @@ def retrieve(index, plan, section_db, repo_root, repo, query, mode="research",
                                     {"missing_artifacts": combined["missing"]}
                                 ], max_chars)
         shared = [task for task in combined["tasks"] if task["shared_artifact_count"] > 1]
-        cards = [
-            {"source_id": source["id"], "uri": source["uri"],
-             "source_version": source["revision"], "source_verification": source["verification"],
-             "relation": "REGISTERED_ARTIFACT_NOT_FIELD_LINK"}
-            for source in combined["source_artifacts"]
-        ]
-        cards.extend({
+        # HIGH-VALUE information FIRST. Long GitHub URIs previously crowded the
+        # one shared task out of a 1600-char budget; resolve exact ART-ID on demand.
+        cards = [{
             "task_id": t["task_id"], "status": t["status"],
             "shared_artifacts": t["artifacts"],
             "relation": "COMMON_TASK_REFERENCE_NOT_SEMANTIC_DEPENDENCY"
-        } for t in shared)
+        } for t in shared]
+        cards.extend({
+            "source_id": source["id"],
+            "source_version": source["revision"],
+            "source_verification": source["verification"],
+            "uri_lookup": "EXACT_ARTIFACT",
+            "relation": "REGISTERED_ARTIFACT_NOT_FIELD_LINK"
+        } for source in combined["source_artifacts"])
         return compact_fit({**base,
                             "retrieval": "MULTI_ARTIFACT_GRAPH",
                             "task_refs_any": combined["tasks_with_any_reference"],
                             "task_refs_all": combined["tasks_referencing_all"],
-                            "unverified_source_revisions": combined["source_revision_warnings"],
-                            "relation": "TASK_CITES_DOCUMENTS_ONLY"},
+                            "unpinned_source_count": len(combined["source_revision_warnings"]),
+                            "relation": "TASK_CITES_DOCUMENTS_ONLY",
+                            "url_disclosure": "RESOLVE_ART_ID_ONLY_IF_NEEDED"},
                            cards, max_chars)
     if aids:
         cards = []
