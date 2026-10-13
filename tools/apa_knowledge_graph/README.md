@@ -5,6 +5,12 @@ Draft PR [#69](https://github.com/dvikt33-ux/safe-bim-layer/pull/69) targets onl
 
 This is an **execution of a useful first slice**, not just a research memo. It builds a derived index from the current `PROJECT_PLAN.json` and answers exact task, artifact impact, bounded multi-document join, task descendants and **explicit field-value change** queries through local Python. It does **not** claim to have extracted every semantic link in the GitHub library or to know real normative field dependencies automatically.
 
+## Latest hardening acceptance (2026-10-13)
+
+**[92 tests PASS / 304 real-PLAN structural queries / 209 Markdown files and 2142 indexed sections](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38327961036).** On a real checkout the evaluation resolved all 91 tasks, all 173 artifacts and 40 pairs of related artifacts against direct plan metadata, with no disagreements. This is not independent natural-language relevance evidence. The plan-mode query counted **18 potential unclaimed tasks**, offered five candidates, and never issued a claim. Source manifest now detects new, missing or stat-changed Markdown before search; selected snippets additionally require exact text/section/class byte-readback from the original file. Poisoned SQLite cached snippets and false source classification return `INDEX_TAMPERED` with **no excerpts**. This is integrity hardening, not a guarantee of legal/normative trust or global cryptographic rehash of every unreturned source.
+
+The complete source-linked evidence, failure modes and required independent review are preserved in [canonical research hardening report](../../docs/research/apa-results/runs/2026-10-13/apa-gpt-knowledge-gateway-hardening-acceptance-20261013.md).
+
 ## Files
 
 - `graph.py`: `build`, `task`, `artifact`, `descendants`, `field-impact`. Explicit normalized task/artifact reverse maps and revision fingerprint, source read-only; no implicit graph inference.
@@ -160,7 +166,7 @@ Untrusted documents remain text data. No source content from the research index 
 - `source_revision` in the lineage is a syntactically pinned digest; it is **not an attestation of its authenticity**. Production needs independent byte readback/receipt signatures before trusting links.
 - No automatic propagation to derived documents and no automatic edit/claim/DONE. Existing `TASK_PROPOSAL_V1` → independent `TASK_REVIEW_V1` → CAS `PROJECT_PLAN.json` protocol remains untouched.
 - The FTS lexical backend is **not** a normative source classifier: it distinguishes path classes and can filter reports out, but cannot attest official SP scope, effective editions, truth or Russian stemming. A zero-hit scoped query does NOT mean the regulation does not exist; it can be outside the GitHub checkout.
-- No passive change watcher or MCP endpoint yet: caller executes explicit CLI or can wrap it in a **read-only** tool adapter once independently audited.
+- No remote change watcher or public MCP HTTP endpoint exists; a **local stdio MCP v2 adapter** has passed tests, but is not installed or connected to this user's ChatGPT client. Run as an explicit operator-owned local tool only after host/security review.
 - Index contains source URI and task title; do not serve it publicly unless access restrictions and licensed material controls are checked.
 - Early raw-to-compact character ratios reported by prior research measure **text size**, not billed GPT tokens or retrieval quality. No final DB technology selection was made.
 
