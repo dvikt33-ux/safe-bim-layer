@@ -89,8 +89,16 @@ class RealRegistryRetrievalCensus(unittest.TestCase):
         self.assertEqual(result["task_claim"], "NEVER_AUTOMATIC")
         self.assertTrue(all(item["requires_claim"] for item in result["items"]))
         self.assertLessEqual(len(canonical(result)), 2500)
+        expected = sum(1 for tid,item in self.index["tasks"].items()
+                       if item["status"] in ("READY", "PARTIAL")
+                       and not (item["owner"] or item["claim_ref"] or item.get("lease_until")
+                                or item["requires_approval"])
+                       and all(self.index["tasks"][d]["status"] == "DONE_PUBLISHED"
+                               for d in item["depends_on"]))
+        self.assertEqual(result["total_eligible_tasks"], expected)
+        self.assertGreaterEqual(result["total_eligible_tasks"], len(result["items"]))
         print("REAL_CENSUS_NEXT_TASKS", len(result["items"]),
-              "candidate_total", result["total_candidates"])
+              "total_eligible", result["total_eligible_tasks"])
 
 
 if __name__ == "__main__":
