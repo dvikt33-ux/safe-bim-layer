@@ -64,6 +64,27 @@ class SectionSearchTest(unittest.TestCase):
         res = search(self.db, "кровли", limit=3)
         self.assertEqual(res["status"], "STALE_INDEX")
 
+    def test_new_relevant_doc_not_silently_missed(self):
+        (self.root / "new.md").write_text("# Новая кровля\\nНовая редакция кровли.", encoding="utf-8")
+        result = search(self.db, "кровли", limit=3)
+        self.assertEqual(result["status"], "STALE_INDEX")
+        self.assertEqual(result["results"], [])
+
+    def test_unrelated_nonhit_doc_modification_invalidates_index(self):
+        (self.root / "geometry.md").write_text(
+            "# Wall join\\nTotally different content.", encoding="utf-8")
+        result = search(self.db, "кровли", limit=3)
+        self.assertEqual(result["status"], "STALE_INDEX")
+
+    def test_removed_document_invalidates_index(self):
+        (self.root / "geometry.md").unlink()
+        result = search(self.db, "кровли", limit=3)
+        self.assertEqual(result["status"], "STALE_INDEX")
+
+    def test_current_manifest_passed(self):
+        result = search(self.db, "кровли", limit=3)
+        self.assertEqual(result["source_manifest_check"], "PATH_SIZE_MTIME_MATCH")
+
     def test_no_overwrite_existing_database(self):
         with self.assertRaisesRegex(ValueError, "overwrite"):
             build([self.root], self.db)
