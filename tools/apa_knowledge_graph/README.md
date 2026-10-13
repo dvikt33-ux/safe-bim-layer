@@ -110,6 +110,47 @@ The repository's existing `PyYAML==6.0.3` and independently chosen `tiktoken==0.
 
 **Major missing gate:** A complete chain **official SP clause edition → validated normative calculation → project material/roof system → actual PLN field → engineering result → regression test** is NOT yet available. This first real chain verifies machine-source routing and declared parameter relationships, not numerical engineering semantics.
 
+## One-tool GPT gateway and optional modern MCP adapter (2026-10-13)
+
+The read-only `gateway.py` combines the graph and section index into a **single call**. The caller can use:
+- `APA-P70.A02.S02`: exact task status and dependency IDs, **without a full plan/context dump**.
+- `ART-APA-RU-JUNCTION-NORMS ART-APA-CSE-RESEARCH`: join **multiple registered documents** and show tasks referencing both. Reference is NOT field-level impact, and moving branch URIs remain explicitly unpinned.
+- `кровли` with `--source-class PROJECT_CONTROL`: source-byte-verified snippets from bounded diverse documents, with repo-relative line/source paths and optional candidate task IDs. `mode=normative` may supply leads but will always report `NOT_VERIFIED_OFFICIAL_SOURCE`; a path category is never government-source attestation.
+- `--mode next`: **potential** unclaimed tasks based on the checkout plan, not actual dispatcher priority or task claim.
+
+Enforcement: one tool-side plan fingerprint comparison on EVERY query; source SHA-256 recheck on returned FTS hits; output capped `--max-chars 400..12000` without silently truncating a citation or declaring an unsupported claim. When budget cannot accommodate a complete minimum card, `BUDGET_TOO_SMALL` is returned and evidence is not fabricated. Repeated headings from the same document are deduplicated in the visible context. The index is a checkout SNAPSHOT; this does not prove the GitHub remote branch has not moved.
+
+Example direct CLI in a current branch checkout:
+
+```sh
+python tools/apa_knowledge_graph/gateway.py \
+  --index /tmp/apa-knowledge-index.json \
+  --plan docs/research/apa-results/control/PROJECT_PLAN.json \
+  --query "ART-APA-RU-JUNCTION-NORMS ART-APA-CSE-RESEARCH" \
+  --max-chars 1600
+
+python tools/apa_knowledge_graph/gateway.py \
+  --index /tmp/apa-knowledge-index.json \
+  --plan docs/research/apa-results/control/PROJECT_PLAN.json \
+  --sections /tmp/apa-sections.sqlite \
+  --repo-root . --query "кровли" --source-class PROJECT_CONTROL --max-chars 1800
+```
+
+Optional **official MCP Python SDK v2 adapter**, using `MCPServer` with **one tool `apa_retrieve`**: [MCP SDK v2.3.0](https://pypi.org/project/mcp/2.3.0/). This source is not an obsolete v1 FastMCP API. Do not install this extra dependency unless using an MCP-compatible local host.
+
+```sh
+python -m pip install mcp==2.3.0
+python tools/apa_knowledge_graph/mcp_adapter.py \
+  --plan docs/research/apa-results/control/PROJECT_PLAN.json \
+  --index /tmp/apa-knowledge-index.json \
+  --sections /tmp/apa-sections.sqlite \
+  --repo-root .
+```
+
+Transport: **stdio only**, local host launches subprocess and owns the root/index paths. Tool arguments `query`, `mode`, `source_class`, `limit`, `max_chars` do not accept paths or write operations. This is **NOT already connected to this ChatGPT session**, and desktop/host configuration must independently support local MCP. No need to run a public HTTP endpoint for current POC. Neither the connector nor one registered tool magically enforces permissions beyond the local host's process rights.
+
+Untrusted documents remain text data. No source content from the research index is allowed to instruct the model to execute commands, change plans, or promote a rule. `PROJECT_PLAN.json` is still the only task authority. If index/plan mismatch occurs, rebuild the derived index before retrying.
+
 ## Trust contract and known limitations
 
 - `depends_on` means task *scheduling*, not a calculation or normative relation. `inputs/evidence` means the task *references an artifact*, not that a changed parameter actually invalidates the task.
