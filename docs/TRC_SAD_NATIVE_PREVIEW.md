@@ -18,7 +18,7 @@ second executor, unreviewed API write, project switch or SaveProject.
   dining area behind the atrium and right rear, quiet zone/right front.
 - Exterior Walls use basic reference lines offset 0.15 m inward from the
   approved outer boundary. A 25.2 m opening at the front is a conceptual
-  entrance/c Curtain Wall gap; **no** large door object is invented.
+  entrance/curtain wall gap; **no** large door object is invented.
 - Upper floor slab polygons are split into 4 nonoverlapping regions; no
   unsupported native Slab-hole parameters are fabricated.
 - Does **not** draw door swings, real stairs, room partitions, protected
