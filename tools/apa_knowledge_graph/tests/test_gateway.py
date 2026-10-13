@@ -84,7 +84,14 @@ class GatewayTest(unittest.TestCase):
         matches = [x for x in r["items"] if x.get("task_id") == "APA-P50.A01.S01"]
         self.assertEqual(len(matches), 1)
         self.assertEqual(matches[0]["relation"], "COMMON_TASK_REFERENCE_NOT_SEMANTIC_DEPENDENCY")
-        self.assertTrue(r["unverified_source_revisions"])
+        self.assertEqual(r["unpinned_source_count"], 2)
+        self.assertLessEqual(len(canonical(r)), 2600)
+        small = self.call("ART-CONTROL ART-RESEARCH", ix=ix, plan=p, budget=1200)
+        self.assertEqual(small["status"], "OK")
+        self.assertTrue(any(item.get("task_id") == "APA-P50.A01.S01" for item in small["items"]),
+                        "Must never omit the central cross-document relation just to show full URLs")
+        self.assertTrue(all("uri" not in item for item in small["items"]))
+
 
     def test_multi_artifact_unknown_fails_closed(self):
         r = self.call("ART-CONTROL ART-NONEXISTENT")
