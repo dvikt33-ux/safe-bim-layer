@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 39,
+  "run_count": 40,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -273,6 +273,13 @@
       "phase": "LIVE",
       "report": "runs/2026-10-12/APA-RUN-20261012-235115Z-bim-documentation/REPORT.md",
       "run_id": "APA-RUN-20261012-235115Z-bim-documentation",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-13/APA-RUN-20261013-013642Z-knowledge-core-mcp/REPORT.md",
+      "run_id": "APA-RUN-20261013-013642Z-knowledge-core-mcp",
       "substep_id": "APA-P70.A11.S03"
     }
   ],
