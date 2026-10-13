@@ -15,6 +15,7 @@ import sys
 from urllib.parse import unquote, urlparse
 
 from graph import assert_index, canonical, fingerprint, task_card
+from multidoc import document_bundle
 from sections import search as search_sections
 
 SID = re.compile(r"\bAPA-P\d{2}\.A\d{2}\.S\d{2}\b", re.I)
@@ -134,6 +135,32 @@ def retrieve(index, plan, section_db, repo_root, repo, query, mode="research",
         cards = [task_card(index, sid, include_artifacts=False) for sid in dict.fromkeys(ids)]
         return compact_fit({**base, "retrieval": "EXACT_TASK", "task_claim": "NEVER_AUTOMATIC"},
                            cards[:limit], max_chars)
+    if len(set(aids)) > 1:
+        combined = document_bundle(index, list(dict.fromkeys(aids)), max_tasks=min(limit, 10))
+        if combined["status"] != "OK":
+            return compact_fit({**base, "status": "NOT_FOUND",
+                                "retrieval": "MULTI_ARTIFACT_GRAPH"}, [
+                                    {"missing_artifacts": combined["missing"]}
+                                ], max_chars)
+        shared = [task for task in combined["tasks"] if task["shared_artifact_count"] > 1]
+        cards = [
+            {"source_id": source["id"], "uri": source["uri"],
+             "source_version": source["revision"], "source_verification": source["verification"],
+             "relation": "REGISTERED_ARTIFACT_NOT_FIELD_LINK"}
+            for source in combined["source_artifacts"]
+        ]
+        cards.extend({
+            "task_id": t["task_id"], "status": t["status"],
+            "shared_artifacts": t["artifacts"],
+            "relation": "COMMON_TASK_REFERENCE_NOT_SEMANTIC_DEPENDENCY"
+        } for t in shared)
+        return compact_fit({**base,
+                            "retrieval": "MULTI_ARTIFACT_GRAPH",
+                            "task_refs_any": combined["tasks_with_any_reference"],
+                            "task_refs_all": combined["tasks_referencing_all"],
+                            "unverified_source_revisions": combined["source_revision_warnings"],
+                            "relation": "TASK_CITES_DOCUMENTS_ONLY"},
+                           cards, max_chars)
     if aids:
         cards = []
         for aid in dict.fromkeys(aids):
