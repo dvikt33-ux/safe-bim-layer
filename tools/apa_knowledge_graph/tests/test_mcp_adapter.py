@@ -62,6 +62,32 @@ class MCPTest(unittest.TestCase):
         self.assertEqual(result["items"][0]["status"], "PARTIAL")
         self.assertEqual(self.planpath.read_bytes(), snap)
 
+    def test_operator_default_denies_archived_or_other_sources(self):
+        with self.assertRaisesRegex(ValueError, "ACCESS_DENIED_SOURCE_CLASS"):
+            self.svc.query("Кровли", source_class="ARCHIVED_SOURCE")
+        with self.assertRaisesRegex(ValueError, "ACCESS_DENIED_SOURCE_CLASS"):
+            self.svc.query("Кровли", source_class="OTHER_DOCUMENT")
+        self.assertEqual(self.svc.query("Кровли")["source_class_filter"], "PROJECT_CONTROL")
+
+    def test_operator_can_explicitly_allow_additional_source_class(self):
+        admin = SnapshotService(self.planpath, self.indexpath, self.secpath, self.root,
+                                allowed_classes=("PROJECT_CONTROL", "ARCHIVED_SOURCE"))
+        self.assertEqual(admin.query("Кровли", source_class="ARCHIVED_SOURCE")["source_class_filter"],
+                         "ARCHIVED_SOURCE")
+
+    def test_operator_response_ceiling_cannot_be_overridden(self):
+        bounded = SnapshotService(self.planpath, self.indexpath, self.secpath, self.root,
+                                  max_return_chars=700)
+        res = bounded.query("APA-P70.A02.S02", max_chars=11000)
+        self.assertLessEqual(len(json.dumps(res, ensure_ascii=False, sort_keys=True,
+                                          separators=(",", ":"))), 700)
+        self.assertEqual(res["retrieval"], "EXACT_TASK")
+
+    def test_invalid_operator_acl_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "allowlist"):
+            SnapshotService(self.planpath, self.indexpath, self.secpath, self.root,
+                            allowed_classes=("LICENSED_NORM_OFFICIAL",))
+
     def test_freshness_check_rejects_changed_plan(self):
         modified = json.loads(self.planpath.read_text())
         modified["tasks"]["APA-P70.A02.S02"]["status"] = "IN_PROGRESS"
