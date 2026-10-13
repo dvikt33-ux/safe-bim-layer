@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 135,
+  "revision": 136,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -4067,7 +4067,7 @@
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
       "owner": "work-native-spatial-20261013",
-      "lease_until": "2026-10-13T16:32:58Z",
+      "lease_until": "2026-10-13T18:51:43Z",
       "claim_ref": "APA-CLAIM-NATIVE-SPATIAL-20261013T123258Z",
       "requires_approval": false,
       "evidence": [
