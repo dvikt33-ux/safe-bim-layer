@@ -72,6 +72,10 @@ def prepare_axis(axis,outline,defaults,profile,floor_index=0):
     span=outline['yMax']-outline['yMin'] if vertical else outline['xMax']-outline['xMin']
     if span<=0 or type(floor_index) is not int:raise ValueError('SOURCE_AXIS_SPAN_FLOOR_REQUIRED')
     row=dict(x=axis['coordinate'] if vertical else outline['xMin'],y=outline['yMin'] if vertical else axis['coordinate'],angle=math.pi/2 if vertical else 0.,floorIndex=floor_index,expectedLibraryPartIndex=defaults['libraryPartIndex'],parameters=[dict(name=length['name'],nativeType=length['nativeType'],value=span),dict(name=label['name'],nativeType=label['nativeType'],value=axis['id'])])
+    if profile.get('angleParameter'):
+        angle=lookup.get(profile['angleParameter'])
+        if not angle or angle.get('isArray') or angle.get('nativeTypeName')!='Angle':raise ValueError('ACTUAL_NATIVE_GRID_ANGLE_PARAMETER_REQUIRED')
+        row['parameters'].append(dict(name=angle['name'],nativeType=angle['nativeType'],value=row['angle']))
     params={'gridsData':[row]};qualify_operation('CreateNativeGridElementsV1',params,set(),{'retained'})
     recipe=dict(schema='APA_NATIVE_AXIS_GRID_V1',axis=copy.deepcopy(axis),outline=copy.deepcopy(outline),defaults=copy.deepcopy(defaults),profile=copy.deepcopy(profile),parameters=params)
     recipe['sourceHash']=RUN.digest(recipe)
@@ -127,6 +131,46 @@ def edit_axis(writer,guid,recipe,new_position,scene_id,retained_signatures,saved
     if result['status']=='PASS':result.update(updatedRecipe=updated,nativeAxisBinding={'axisId':updated['axis']['id'],'guid':guid,'coordinate':updated['axis']['coordinate'],'sourceHash':updated['sourceHash']})
     return result
 
+def qualify_grid_parameter_edit(parameters,owned,retained):
+    if set(parameters)!={'elementsWithGDLParameters'} or len(parameters['elementsWithGDLParameters'])!=1:raise ValueError('GRID_PARAMETER_SINGLE_OWNED_TARGET_REQUIRED')
+    row=parameters['elementsWithGDLParameters'][0];guid=row.get('elementId',{}).get('guid','').lower()
+    if set(row)!={'elementId','gdlParameters'} or guid not in owned or guid in retained:raise ValueError('GRID_PARAMETERS_ONLY_NEW_OWNED_AXIS')
+    changes=row['gdlParameters']
+    if len(changes)!=2 or {p.get('name') for p in changes}!={'AC_Length','AC_Angle'} or any(set(p)!={'name','value'} or not finite(p['value']) for p in changes):raise ValueError('GRID_PARAMETERS_EXACT_LENGTH_ANGLE_REQUIRED')
+    if next(p['value'] for p in changes if p['name']=='AC_Length')<=0:raise ValueError('GRID_PARAMETER_LENGTH_MUST_BE_POSITIVE')
+
+def synchronize_grid_geometry(writer,guid,recipe,scene_id,retained_signatures,saved_sha256,authorization_ref):
+    """Run the existing native GDL parameter script on only this true Grid.
+
+    Grid's AC_Angle is independent of Object.angle. A/B or raw memo fields are
+    not a substitute for the library's native dimension/angle parameters.
+    """
+    verify_grid(writer.api,guid,recipe);row=recipe['parameters']['gridsData'][0]
+    actual=writer.api('GetNativeGridElementsV1',{'elements':[{'elementId':{'guid':guid}}]})['grids'][0]
+    lookup={p['name']:p for p in actual['nativeParameters']}
+    if lookup.get('AC_Length',{}).get('nativeTypeName')!='Length' or lookup.get('AC_Angle',{}).get('nativeTypeName')!='Angle':raise ValueError('GRID_SOURCE_NATIVE_LENGTH_ANGLE_NOT_FOUND')
+    length=next(p['value'] for p in row['parameters'] if p['name']==recipe['profile']['lengthParameter'])
+    # Existing ChangeAParameter consumes degrees; native memo/GetGrid uses radians.
+    params={'elementsWithGDLParameters':[{'elementId':{'guid':guid},'gdlParameters':[{'name':'AC_Length','value':length},{'name':'AC_Angle','value':math.degrees(row['angle'])}]}]}
+    runtime_catalog(writer,'SetGDLParametersOfElements',params,'GetNativeGridElementsV1')
+    updated=copy.deepcopy(recipe);updated['profile']['angleParameter']='AC_Angle'
+    updated['parameters']['gridsData'][0]['parameters']=[p for p in updated['parameters']['gridsData'][0]['parameters'] if p['name']!='AC_Angle']+[{'name':'AC_Angle','nativeType':lookup['AC_Angle']['nativeType'],'value':row['angle']}]
+    updated['sourceHash']=RUN.digest({k:v for k,v in updated.items() if k not in {'sourceHash','graph'}})
+    updated['graph']={'operations':[{'id':recipe['axis']['id']+'-parameters','command':'SetGDLParametersOfElements','params':params,'dependsOn':[]}]}
+    def before(api):
+        if api('GetNativeGridDefaultsV1',{})!=recipe['defaults']:raise ValueError('GRID_NATIVE_DEFAULTS_CHANGED')
+        verify_grid(api,guid,recipe)
+        current=api('GetNativeGridElementsV1',{'elements':[{'elementId':{'guid':guid}}]})['grids'][0]
+        now={p['name']:p for p in current['nativeParameters']}
+        if not RUN.close(now['AC_Angle']['value'],lookup['AC_Angle']['value']):raise ValueError('GRID_NATIVE_ANGLE_CHANGED_BEFORE_PARAMETER_EDIT')
+    def after(*_):
+        proof=verify_grid(writer.api,guid,updated)
+        if writer.api('GetNativeGridDefaultsV1',{})!=recipe['defaults']:raise ValueError('GRID_NATIVE_DEFAULTS_MODIFIED_UNEXPECTEDLY')
+        return dict(proof,nativeParameterScript='EXISTING_SET_GDL_API',globalDefaultsUnchanged=True)
+    result=E.execute_model_operation(writer,scene_id,'SetGDLParametersOfElements',params,RUN.digest([recipe['sourceHash'],params,lookup['AC_Angle']['value']]),[guid],retained_signatures,after,authorization_ref,saved_sha256,owned_before_check=before)
+    if result['status']=='PASS':result.update(updatedRecipe=updated,nativeAxisBinding={'axisId':updated['axis']['id'],'guid':guid,'coordinate':updated['axis']['coordinate'],'sourceHash':updated['sourceHash']})
+    return result
+
 def favorite_rules(xml_path):
     raw=Path(xml_path).read_bytes();root=ET.fromstring(raw);stair=root.find('.//StairDefault')
     if root.tag!='Favorites' or stair is None:raise ValueError('EXACT_STAIR_SOURCE_FAVORITE_REQUIRED')
@@ -164,6 +208,32 @@ def verify_exact_stair(api,guid,row):
     if len(points)!=2 or any(not RUN.close(q.get(k),p[k]) for p,q in zip(row['baseLinePoints'],points) for k in ['x','y']):raise ValueError('EXACT_STAIR_SOURCE_BASELINE_MISMATCH')
     return dict(status='NATIVE_EXACT_STAIR_DIMENSION_READBACK_PASS',guid=guid,native=actual,sourceDimensionStatus='SOURCE_DIMENSION_PASS',engineeringAcceptance='NOT_VERIFIED')
 
+def require_detached_stair_proof(writer,row,retained_signatures,saved_sha256,source):
+    """A compatible Favourite is insufficient after a failed native solver probe.
+
+    Consume an independently recorded, hash-pinned detached result; never run or
+    retry the solver here. The known terminating candidate cannot qualify itself.
+    """
+    artifact=source.get('detachedPreflight',{})
+    if not artifact.get('path') or not artifact.get('sha256'):raise ValueError('EXACT_STAIR_DETACHED_NATIVE_PROOF_REQUIRED_NO_WRITE')
+    raw=Path(artifact['path']).read_bytes()
+    if hashlib.sha256(raw).hexdigest()!=artifact['sha256']:raise ValueError('EXACT_STAIR_DETACHED_PROOF_BYTES_CHANGED')
+    proof=json.loads(raw)
+    if proof.get('status')!='DETACHED_NATIVE_SOURCE_DIMENSION_PASS_NO_CREATE' or proof.get('preservationReadback') is not True:raise ValueError('EXACT_STAIR_DETACHED_PROBE_FAILED_NO_WRITE')
+    candidate=proof.get('candidateSHA256','')
+    if len(candidate)!=64 or any(c not in '0123456789abcdef' for c in candidate) or candidate=='8ad672092aa93e4bf1b4d469cbf7840cb60acd538820183bb68d5d6786ea221d':raise ValueError('EXACT_STAIR_FAILED_CANDIDATE_REQUIRES_REQUALIFICATION')
+    expected={'rowHash':RUN.digest(row),'sourceSHA256':source['sourceSHA256'],'targetBinding':writer.guarded_binding(),'savedSHA256':saved_sha256,'retainedSignaturesHash':RUN.digest(retained_signatures),'schemaSHA256':hashlib.sha256(writer.schema_path.read_bytes()).hexdigest()}
+    if any(proof.get(k)!=v for k,v in expected.items()):raise ValueError('EXACT_STAIR_DETACHED_PROOF_BINDING_CHANGED_NO_WRITE')
+    actual=proof.get('result',{})
+    if actual.get('status')!='DETACHED_NATIVE_SOLVER_PASS_NOT_CREATED' or type(actual.get('nativeModelWrites')) is not int or actual['nativeModelWrites']!=0:raise ValueError('EXACT_STAIR_DETACHED_RESULT_NOT_QUALIFIED')
+    for key in ['totalHeight','riserHeight','treadDepth','flightWidth']:
+        if not RUN.close(actual.get(key),row[key]):raise ValueError('EXACT_STAIR_DETACHED_DIMENSION_MISMATCH')
+    if actual.get('stepNum')!=row['stepNum'] or actual.get('treadDepthLocked') is not True:raise ValueError('EXACT_STAIR_DETACHED_LOCK_COUNT_MISMATCH')
+    points=actual.get('baseLinePoints',[])
+    if len(points)!=2 or any(not RUN.close(q.get(k),p[k]) for p,q in zip(row['baseLinePoints'],points) for k in ['x','y']):raise ValueError('EXACT_STAIR_DETACHED_BASELINE_FRAME_NOT_VERIFIED')
+    verify_stair_rules(actual,source)
+    return artifact['sha256']
+
 def create_exact_stair(writer,row,scene_id,retained_signatures,saved_sha256,authorization_ref,source):
     if source.get('favoriteName')!=row['favoriteName'] or not source.get('sourcePath') or hashlib.sha256(Path(source['sourcePath']).read_bytes()).hexdigest()!=source.get('sourceSHA256'):raise ValueError('EXACT_STAIR_FAVORITE_SOURCE_CHANGED')
     current=favorite_rules(source['sourcePath'])
@@ -191,9 +261,11 @@ def create_exact_stair(writer,row,scene_id,retained_signatures,saved_sha256,auth
             current_proof=verify_exact_stair(writer.api,prior[1],row)
             verify_stair_rules(current_proof['native'],source)
             return dict(status='NATIVE_EXACT_STAIR_REUSE_PASS',createdGuid=prior[1],readback=current_proof,nativeCreateCalls=0)
+    require_detached_stair_proof(writer,row,retained_signatures,saved_sha256,source)
     def before(api):
         if source['favoriteName'] not in api('GetFavoritesByType',{'elementType':'Stair'}).get('favorites',[]):raise ValueError('EXACT_STAIR_FAVORITE_NO_LONGER_AVAILABLE')
         if hashlib.sha256(Path(source['sourcePath']).read_bytes()).hexdigest()!=source['sourceSHA256']:raise ValueError('EXACT_STAIR_SOURCE_CHANGED_BEFORE_DISPATCH')
+        require_detached_stair_proof(writer,row,retained_signatures,saved_sha256,source)
     def after(reply,*_):
         proof=verify_exact_stair(writer.api,RUN.created_guid(reply),row)
         verify_stair_rules(proof['native'],source)
@@ -209,10 +281,12 @@ def verify_stair_rules(native,source):
         native_key=key[0].lower()+key[1:]
         if native_key not in actual or (actual[native_key]!=value if type(value) is bool else not RUN.close(actual[native_key],value)):raise ValueError('EXACT_STAIR_NATIVE_FAVORITE_RULE_READBACK_MISMATCH')
 
-def edit_exact_stair(writer,guid,row,scene_id,retained_signatures,saved_sha256,authorization_ref):
+def edit_exact_stair(writer,guid,row,scene_id,retained_signatures,saved_sha256,authorization_ref,source=None):
+    if source is None:raise ValueError('EXACT_STAIR_DETACHED_NATIVE_PROOF_REQUIRED_NO_WRITE')
+    require_detached_stair_proof(writer,row,retained_signatures,saved_sha256,source)
     actual=writer.api('GetNativeStairGeometryV1',{'elementId':{'guid':guid}})
     params={k:v for k,v in row.items() if k!='favoriteName'};params.update(elementId={'guid':guid},expectedTotalHeight=actual['totalHeight'],expectedGoing=actual['treadDepth'],expectedStepNum=actual['stepNum'])
     qualify_operation('ModifyNativeStairGeometryV1',params,{guid.lower()},set(retained_signatures))
     runtime_catalog(writer,'ModifyNativeStairGeometryV1',params,'GetNativeStairGeometryV1')
     def after(*_):return verify_exact_stair(writer.api,guid,row)
-    return E.execute_model_operation(writer,scene_id,'ModifyNativeStairGeometryV1',params,RUN.digest(params),[guid],retained_signatures,after,authorization_ref,saved_sha256)
+    return E.execute_model_operation(writer,scene_id,'ModifyNativeStairGeometryV1',params,RUN.digest(params),[guid],retained_signatures,after,authorization_ref,saved_sha256,owned_before_check=lambda _:require_detached_stair_proof(writer,row,retained_signatures,saved_sha256,source))

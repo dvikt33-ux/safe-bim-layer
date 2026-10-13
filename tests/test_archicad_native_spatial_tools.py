@@ -155,7 +155,11 @@ class SpatialSDKTests(unittest.TestCase):
             if command=='GetNativeStairGeometryV1':return copy.deepcopy(self.actual_stair)
             if command=='GetModelDumpV1':return {'elements':[{'guid':OLD}]+([{'guid':NEW}] if self.actual_stair else [])}
             return old(command,params)
-        self.writer.api=native;self.geometry();return source
+        self.writer.api=native;self.geometry();self.detached_fixture(source);return source
+    def detached_fixture(self,source,**changes):
+        row=stair();actual=dict(row,status='DETACHED_NATIVE_SOLVER_PASS_NOT_CREATED',nativeModelWrites=0,rules={k[0].lower()+k[1:]:v for k,v in source['rules'].items()})
+        proof=dict(status='DETACHED_NATIVE_SOURCE_DIMENSION_PASS_NO_CREATE',preservationReadback=True,candidateSHA256='a'*64,rowHash=T.RUN.digest(row),sourceSHA256=source['sourceSHA256'],targetBinding=self.writer.guarded_binding(),savedSHA256=self.sha,retainedSignaturesHash=T.RUN.digest({OLD:'pinned'}),schemaSHA256=hashlib.sha256(self.writer.schema_path.read_bytes()).hexdigest(),result=actual,evidenceBoundary='SYNTHETIC_OFFLINE_FIXTURE_NOT_NATIVE_EVIDENCE')
+        proof.update(changes);path=self.root/'detached.json';raw=json.dumps(proof).encode();path.write_bytes(raw);source['detachedPreflight']=dict(path=str(path),sha256=hashlib.sha256(raw).hexdigest());return proof
     def exact_create(self,source,row=None,retained=None):
         return A.apply_exact_native_stair(self.writer,row or stair(),'exact-stair-replay',retained or {OLD:'pinned'},self.sha,'explicit fixture',source)
     def test_exact_stair_completed_sqlite_result_reuses_without_second_create(self):
@@ -198,5 +202,62 @@ class SpatialSDKTests(unittest.TestCase):
         source=self.exact_stair_fixture()
         with self.runtime():self.exact_create(source)
         with self.runtime(),patch.object(C,'retained_geometry_signatures',return_value={OLD:'changed'}),self.assertRaisesRegex(ValueError,'RETAINED_GEOMETRY'):self.exact_create(source)
+
+    def test_source_compatibility_without_detached_result_cannot_create(self):
+        source=self.exact_stair_fixture();source.pop('detachedPreflight')
+        with self.runtime(),self.assertRaisesRegex(ValueError,'PROOF_REQUIRED'):self.exact_create(source)
+        self.assertEqual(self.api.writes,[])
+    def test_failed_detached_result_blocks_create_without_retrying_probe(self):
+        source=self.exact_stair_fixture();self.detached_fixture(source,status='PROCESS_TERMINATED_DURING_DETACHED_SOLVER')
+        with self.runtime(),self.assertRaisesRegex(ValueError,'PROBE_FAILED'):self.exact_create(source)
+        self.assertEqual(self.api.writes,[])
+    def test_known_terminating_candidate_cannot_qualify_itself(self):
+        source=self.exact_stair_fixture();self.detached_fixture(source,candidateSHA256='8ad672092aa93e4bf1b4d469cbf7840cb60acd538820183bb68d5d6786ea221d')
+        with self.runtime(),self.assertRaisesRegex(ValueError,'REQUALIFICATION'):self.exact_create(source)
+        self.assertEqual(self.api.writes,[])
+    def test_stale_probe_bindings_and_local_baseline_are_denied(self):
+        source=self.exact_stair_fixture()
+        for change in [dict(savedSHA256='stale'),dict(retainedSignaturesHash='stale'),dict(schemaSHA256='stale'),dict(rowHash='stale')]:
+            self.detached_fixture(source,**change)
+            with self.runtime(),self.assertRaisesRegex(ValueError,'BINDING_CHANGED'):self.exact_create(source)
+        proof=self.detached_fixture(source);proof['result']['baseLinePoints']=[dict(x=0,y=0),dict(x=0,y=7.7)];self.detached_fixture(source,result=proof['result'])
+        with self.runtime(),self.assertRaisesRegex(ValueError,'BASELINE_FRAME'):self.exact_create(source)
+        self.assertEqual(self.api.writes,[])
+    def test_detached_artifact_changes_cannot_dispatch(self):
+        source=self.exact_stair_fixture();Path(source['detachedPreflight']['path']).write_bytes(b'changed')
+        with self.runtime(),self.assertRaisesRegex(ValueError,'BYTES_CHANGED'):self.exact_create(source)
+        self.assertEqual(self.api.writes,[])
+    def test_completed_stair_reuse_does_not_repeat_detached_solver(self):
+        source=self.exact_stair_fixture()
+        with self.runtime():self.exact_create(source)
+        source.pop('detachedPreflight')
+        with self.runtime():result=self.exact_create(source)
+        self.assertEqual(result['nativeCreateCalls'],0);self.assertEqual(self.api.writes,['CreateExactStairsV1'])
+    def test_exact_edit_without_detached_validation_blocks_before_any_read(self):
+        with patch.object(self.writer,'api') as api,self.assertRaisesRegex(ValueError,'PROOF_REQUIRED'):
+            T.edit_exact_stair(self.writer,NEW,stair(),'edit',{OLD:'pinned'},self.sha,'explicit')
+        api.assert_not_called()
+    def test_grid_parameter_scope_cannot_modify_retained_elements_or_other_parameters(self):
+        params={'elementsWithGDLParameters':[{'elementId':{'guid':NEW},'gdlParameters':[{'name':'AC_Length','value':8},{'name':'AC_Angle','value':90}]}]}
+        T.E.model_operation_scope('SetGDLParametersOfElements',params,'hash',[NEW],[OLD],'explicit')
+        with self.assertRaisesRegex(ValueError,'ONLY_NEW_OWNED'):T.qualify_grid_parameter_edit(params,{NEW},{NEW})
+        params['elementsWithGDLParameters'][0]['gdlParameters'][1]['name']='A'
+        with self.assertRaisesRegex(ValueError,'EXACT_LENGTH_ANGLE'):T.qualify_grid_parameter_edit(params,{NEW},{OLD})
+    def test_grid_angle_mapping_uses_radians_for_sdk_create(self):
+        d=defaults();d['nativeParameters'].append(dict(name='AC_Angle',nativeType=3,nativeTypeName='Angle',isArray=False,value=2.094395102))
+        profile=dict(status='SOURCE_VERIFIED',defaultsHash=T.RUN.digest(d),lengthParameter='actual_length',labelParameter='actual_label',angleParameter='AC_Angle')
+        r=T.prepare_axis(dict(id='axis-A',direction='X',coordinate=2),dict(xMin=0,xMax=10,yMin=0,yMax=8),d,profile)
+        self.assertAlmostEqual(r['parameters']['gridsData'][0]['parameters'][-1]['value'],T.math.pi/2)
+    def test_grid_parameter_script_uses_degrees_and_updates_graph_binding(self):
+        r=recipe();r['profile']['lengthParameter']='AC_Length';r['parameters']['gridsData'][0]['parameters'][0]['name']='AC_Length'
+        actual=dict(nativeParameters=[dict(name='AC_Length',nativeType=2,nativeTypeName='Length',value=8),dict(name='AC_Angle',nativeType=3,nativeTypeName='Angle',value=2.094395102)])
+        captured={}
+        def execute(writer,scene_id,command,params,*args,**kw):
+            captured.update(command=command,params=params);return dict(status='PASS')
+        with patch.object(T,'verify_grid'),patch.object(self.writer,'api',return_value={'grids':[actual]}),self.runtime(),patch.object(T.E,'execute_model_operation',side_effect=execute):
+            result=A.synchronize_native_axis_geometry(self.writer,NEW,r,'sync',{OLD:'pinned'},self.sha,'explicit')
+        p=captured['params']['elementsWithGDLParameters'][0]['gdlParameters'];self.assertEqual(p,[dict(name='AC_Length',value=8),dict(name='AC_Angle',value=90)])
+        updated=result['updatedRecipe'];self.assertEqual(result['nativeAxisBinding']['sourceHash'],updated['sourceHash']);self.assertEqual(updated['graph']['operations'][0]['params'],captured['params'])
+        self.assertAlmostEqual(updated['parameters']['gridsData'][0]['parameters'][-1]['value'],T.math.pi/2)
 
 if __name__=='__main__':unittest.main()
