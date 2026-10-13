@@ -14,7 +14,7 @@ import re
 import sqlite3
 import sys
 
-from graph import canonical
+from graph import canonical, configure_stdio
 
 HEADING = re.compile(r"^(#{1,6})\s+(.+?)\s*$", re.MULTILINE)
 WORDS = re.compile(r"[^\W_]+(?:[-.][^\W_]+)*", re.UNICODE)
@@ -267,6 +267,7 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
+    configure_stdio()
     try:
         main()
     except (OSError, sqlite3.Error, ValueError, UnicodeError) as exc:
