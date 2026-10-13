@@ -54,6 +54,23 @@ jobs:
             --out "${RUNNER_TEMP}/apa-real-machine-chain.json" \
             --benchmark-plan docs/research/apa-results/control/PROJECT_PLAN.json \
             --change-field roof_slope_length_m --before 10 --after 12
+      - name: Verify unified GPT gateway exact and multi-document lookup on actual APA
+        run: |
+          python tools/apa_knowledge_graph/gateway.py \
+            --index "${RUNNER_TEMP}/apa-knowledge-index.json" \
+            --plan docs/research/apa-results/control/PROJECT_PLAN.json \
+            --query "APA-P70.A02.S02" --max-chars 850
+          python tools/apa_knowledge_graph/gateway.py \
+            --index "${RUNNER_TEMP}/apa-knowledge-index.json" \
+            --plan docs/research/apa-results/control/PROJECT_PLAN.json \
+            --query "ART-APA-RU-JUNCTION-NORMS ART-APA-CSE-RESEARCH" \
+            --max-chars 1600
+          python tools/apa_knowledge_graph/gateway.py \
+            --index "${RUNNER_TEMP}/apa-knowledge-index.json" \
+            --plan docs/research/apa-results/control/PROJECT_PLAN.json \
+            --sections "${RUNNER_TEMP}/apa-sections.sqlite" \
+            --repo-root . --query "кровли" --source-class PROJECT_CONTROL \
+            --max-chars 1800 --limit 4
       - name: Query real APA normative artifact (bounded)
         run: |
           python tools/apa_knowledge_graph/graph.py artifact \
