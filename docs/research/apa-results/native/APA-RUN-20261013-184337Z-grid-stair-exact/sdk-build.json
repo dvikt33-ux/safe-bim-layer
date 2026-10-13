@@ -1,0 +1,50 @@
+{
+  "status": "BUILD_PASS_WINDOWS_RELEASE_SDK29",
+  "compiler": "MSVC143_CXX20_W4_WX",
+  "sourceBase": "d2dfeec7936dd1dbed4e2412f406b30291959c26",
+  "sourceMode": "EXPLICIT_READ_ONLY_CAPTURED_LOCAL_RUNTIME_OVERLAY",
+  "runtimeSourceFiles": 94,
+  "runtimeSourceManifestSHA256": "fb1a816171bbe1ae345cc9a32e13e4fa874faca74ad54f33a41eb24c6108947c",
+  "originalDirtySourceUnchanged": true,
+  "oldDocumentedCommandCount": 263,
+  "candidateSourceRegistryCommandCount": 274,
+  "missingExistingCommandNames": [],
+  "newCommandNames": [
+    "GetNativeGridDefaultsV1",
+    "GetNativeGridElementsV1",
+    "CreateNativeGridElementsV1",
+    "ModifyNativeGridElementsV1",
+    "GetNativeStairGeometryV1",
+    "EvaluateNativeStairGeometryV1",
+    "CreateExactStairsV1",
+    "ModifyNativeStairGeometryV1"
+  ],
+  "sourceRegistryAcceptance": "SOURCE_VERIFIED_NOT_RUNTIME_LOAD_ACCEPTANCE",
+  "candidateAPX": {
+    "filename": "TapirAddOn_AC29_Win.apx",
+    "bytes": 3157504,
+    "sha256": "8ad672092aa93e4bf1b4d469cbf7840cb60acd538820183bb68d5d6786ea221d"
+  },
+  "installedAPX": {
+    "TapirAddOn_AC29_Win.apx": "dc99af071d3dbcff9626653ccc37001613cb3fa4a8eff50c6000c1cc70e8d7c7"
+  },
+  "installedAPXChanged": false,
+  "loadedRuntimeAcceptance": "NOT_VERIFIED_NOT_INSTALLED",
+  "nativeWrites": 0,
+  "protectedModels": {
+    "143": {
+      "savedFileMatchesLastVerified": true,
+      "expectedSHA256": "7ace6c5bb96e32f993e14e8aece8977b7fb1e65f08193adff8601f243ed931a5",
+      "actualSHA256": "7ace6c5bb96e32f993e14e8aece8977b7fb1e65f08193adff8601f243ed931a5",
+      "nativeWritesThisPackage": 0
+    },
+    "168": {
+      "savedFileMatchesLastVerified": true,
+      "expectedSHA256": "5dabdf89262f2aef0f482687eedcdeff295a99ce92a2f088dca332e2e9dac713",
+      "actualSHA256": "5dabdf89262f2aef0f482687eedcdeff295a99ce92a2f088dca332e2e9dac713",
+      "nativeWritesThisPackage": 0
+    }
+  },
+  "documentationChange": "ONLY_SDK29_LINE_EXTENDED_PEN_COMPILE_CONVERSION_NO_LAYOUT_WORK",
+  "engineeringAcceptance": "NOT_VERIFIED"
+}

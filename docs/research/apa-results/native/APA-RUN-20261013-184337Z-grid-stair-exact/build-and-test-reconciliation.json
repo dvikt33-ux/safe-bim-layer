@@ -1,0 +1,14 @@
+{
+  "nativeWrites": 0,
+  "nativeOperationsPending": false,
+  "installedAPXChanged": false,
+  "events": [
+    "Initial standalone Grid/Stair SDK compilation passed with /WX.",
+    "Full build exposed existing Line extended-pen cast; changed only effective Line index conversion. A provisional Text extended-pen assumption was rejected by compiler and restored to original short. Final fullAPX compiles/links. No sheet/layout work.",
+    "Overlay source archive initially lacked prior document command anchors. Registration now targets unique existing groups and preserves all old documented command names, with read-only explicit runtime-source snapshot. Original dirty source untouched.",
+    "First synthetic Grid tests used old schema; changed to explicitly marked C++ SDK source fixtures. Actual runtime gate still denies old installed schemas. Final689tests and Windows/LinuxCI pass.",
+    "No APX was deployed; no native sample, model edit, Save/Open or runtime source-dimension acceptance is claimed. Historical native journals/results are unchanged."
+  ],
+  "nativeLive": "NOT_VERIFIED_PENDING_USER_DEPLOYMENT_PERMISSION",
+  "engineering": "NOT_VERIFIED"
+}

@@ -1,0 +1,38 @@
+{
+  "head": "bc8f8575ed65e308e10c5ac5f573b7d8ad9466a6",
+  "parent": "8ee3fcd89efa5220dc4d1ceb4fb92a26e0d8c07f",
+  "branch": "feature/apa-grid-stair-exact-20261013",
+  "expected": {
+    ".github/workflows/archicad-contracts.yml": "4cc06cf1ec023c5e0dee349ffb57099b85426059",
+    "archicad-addon/Examples/build_model_dump.py": "a042b76b34a821277575f9256cf19f2a936ce9f9",
+    "archicad-addon/Sources/ModelDumpCommands.cpp": "c47f12b894dec28d2251b9a18d06678e73603808",
+    "archicad-addon/Sources/NativeGridCommands.cpp": "5e43402ab943ff1314b27db42d5db972aab665c1",
+    "archicad-addon/Sources/NativeGridCommands.hpp": "6129783d181173d03d8f1e030ccc75a60152c273",
+    "archicad-addon/Sources/NativeStairCommands.cpp": "7d09cd83bc5f03cf34b205a2b2828620fd9f3084",
+    "archicad-addon/Sources/NativeStairCommands.hpp": "f80fc0ede9f298a78f4c67d505abb761faaa4207",
+    "docs/APA_TRUE_GRID_EXACT_STAIR.md": "558ac705df750d02816ce7074729d13c98066a8e",
+    "examples/accelerator/native-grid-stair-test.json": "4a1fb4a81118e77adeb693093c45bdad23dc0982",
+    "scripts/archicad_authored_extension.py": "8cec7c715b3a6c4dbad323c01ff9eb6998bfe671",
+    "scripts/archicad_batch_contracts.py": "4afbe545360f919209f086f2d3cd13e573d13393",
+    "scripts/archicad_native_spatial_tools.py": "715ac7e2943019c3367c4ee5d93be6d83b4893a4",
+    "scripts/archicad_project_accelerator.py": "a1fda0dcb7d9699481f46aee72148b5a03b24939",
+    "scripts/archicad_scene_run.py": "10bcb3f88fca3928cb86a99d9d44896fe1e2243e",
+    "tests/test_archicad_native_spatial_tools.py": "efa620f7f93027b08dd0b20fd8e19fb3376bc80b"
+  },
+  "hostTests": 689,
+  "newTests": 21,
+  "fullCommittedDiffPrivacyScan": "PASS",
+  "excludedKGNormativeSearchUnchanged": true,
+  "nativeWrites": 0,
+  "installedAPXChanged": false,
+  "pr": 76,
+  "prReadback": {
+    "baseRefName": "feature/apa-native-stories-grid-stair-20261013",
+    "headRefName": "feature/apa-grid-stair-exact-20261013",
+    "headRefOid": "bc8f8575ed65e308e10c5ac5f573b7d8ad9466a6",
+    "isDraft": true,
+    "number": 76,
+    "url": "https://github.com/dvikt33-ux/safe-bim-layer/pull/76"
+  },
+  "githubBlobReadback": "ALL_15_MATCH"
+}
