@@ -55,33 +55,42 @@ def evaluate(db, size=100, k=5):
     # Uniform sample through the entire sorted corpus avoids prefix bias.
     selected = [samples[i * len(samples) // min(size, len(samples))]
                 for i in range(min(size, len(samples)))]
-    results = []
-    seconds = []
-    for query, expected_path, source_heading, source_class in selected:
-        start = time.perf_counter()
-        r = search(db, query, limit=k, max_snippet=100, selected_class=source_class)
-        seconds.append(time.perf_counter() - start)
-        candidates = [x["path"] for x in r.get("results", [])]
-        correct = expected_path in candidates
-        results.append({
-            "query": query, "expected": expected_path, "class": source_class,
-            "source_heading": source_heading, "found": correct,
-            "rank": candidates.index(expected_path) + 1 if correct else None,
-            "response_status": r.get("status"),
-        })
-    n = len(results)
-    p95 = sorted(seconds)[min(n-1, int(n*.95))]
+    experiments = {}
+    for name, boosted in (("baseline_BM25", False), ("heading_weight_x9", True)):
+        results = []
+        seconds = []
+        for query, expected_path, source_heading, source_class in selected:
+            start = time.perf_counter()
+            r = search(db, query, limit=k, max_snippet=100,
+                       selected_class=source_class, heading_boost=boosted)
+            seconds.append(time.perf_counter() - start)
+            candidates = [x["path"] for x in r.get("results", [])]
+            correct = expected_path in candidates
+            results.append({
+                "query": query, "expected": expected_path, "class": source_class,
+                "source_heading": source_heading, "found": correct,
+                "rank": candidates.index(expected_path) + 1 if correct else None,
+                "response_status": r.get("status"),
+            })
+        n = len(results)
+        p95 = sorted(seconds)[min(n-1, int(n*.95))]
+        experiments[name] = {
+            "recall_at_k": round(sum(x["found"] for x in results)/n, 4),
+            "error_total": sum(not x["found"] for x in results),
+            "errors_or_missing": [x for x in results if not x["found"]][:12],
+            "latency_ms_p50": round(statistics.median(seconds)*1000,2),
+            "latency_ms_p95": round(p95*1000,2)
+        }
     return {
-        "schema": "APA_LEXICAL_SELF_SOURCE_DIAGNOSTIC_V1",
+        "schema": "APA_LEXICAL_SELF_SOURCE_DIAGNOSTIC_V2",
         "status": "DIAGNOSTIC_NOT_HUMAN_SEMANTIC_GOLD",
-        "sampled_documents": n, "total_candidate_documents": len(samples),
+        "sampled_documents": len(selected), "total_candidate_documents": len(samples),
         "retrieval_top_k": k,
-        "document_recall_at_k": round(sum(x["found"] for x in results)/n, 4),
-        "errors_or_missing": [x for x in results if not x["found"]][:20],
-        "error_total": sum(not x["found"] for x in results),
-        "latency_ms_p50": round(statistics.median(seconds)*1000,2),
-        "latency_ms_p95": round(p95*1000,2),
-        "notes": "Questions derived from their target document headings; not independent semantic questions. Does not evaluate norm truth or GPT token billing."
+        "experiments": experiments,
+        "selected_default": "heading_weight_x9",
+        "recall_delta": round(experiments["heading_weight_x9"]["recall_at_k"] -
+                             experiments["baseline_BM25"]["recall_at_k"], 4),
+        "notes": "Same fixed document-heading prompts for both BM25 configurations; not human-reviewed semantics or GPT billing."
     }
 
 
