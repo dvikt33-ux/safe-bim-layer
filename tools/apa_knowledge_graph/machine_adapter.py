@@ -20,7 +20,7 @@ from urllib.request import Request, urlopen
 
 import yaml
 
-from graph import canonical
+from graph import canonical, configure_stdio
 
 REPO = "dvikt33-ux/safe-bim-layer"
 SOURCE_REF = "29aa06a6e9bbef0d991bea922e1ad4101ab29bdd"
@@ -265,6 +265,7 @@ def main():
 
 
 if __name__ == "__main__":
+    configure_stdio()
     try:
         main()
     except (ValueError, KeyError, OSError, yaml.YAMLError) as exc:
