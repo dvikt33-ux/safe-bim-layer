@@ -19,6 +19,13 @@ REVIEWS = frozenset({"PROPOSED", "UNVERIFIED", "REVIEW_REQUIRED"})
 READY = frozenset({"READY", "PARTIAL"})
 
 
+def configure_stdio():
+    """Always deliver UTF-8 JSON over stdout even on cp1251/cp1252 Windows."""
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="backslashreplace")
+
+
 def canonical(value):
     return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
 
@@ -321,6 +328,7 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
+    configure_stdio()
     try:
         sys.exit(main())
     except (ValueError, KeyError, json.JSONDecodeError) as exc:
