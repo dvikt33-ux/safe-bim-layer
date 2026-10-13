@@ -109,12 +109,14 @@ class StoriesTests(unittest.TestCase):
         with patch.object(A.RUN,'requested_details',return_value={'details':{'sillHeight':.7}}):r=S.prepare_dependency_corrections(self.api,change)
         self.assertEqual(r[0]['command'],'ModifyWindows');self.assertEqual(r[0]['beforeValue'],.7);self.assertEqual(r[0]['parameters']['windowsWithDetails'][0]['sillHeight'],1)
     def test_actual_supplied_schema_is_pinned_instead_of_hardcoded_default(self):
-        intent=json.loads((ROOT/'examples/accelerator/model-first-building.json').read_text(encoding='utf8'));intent['brief']['targetProjectPath']=str(self.file)
+        intent=json.loads((ROOT/'examples/accelerator/model-first-building.json').read_text(encoding='utf8'))
         schema=self.root/'fresh-schema.json';raw=json.loads(A.RUN.DEFAULT_SCENE_SCHEMA.read_text(encoding='utf8'))
         for name in ('command_definitions.js','common_schema_definitions.js'):
             (self.root/name).write_bytes((A.RUN.DEFAULT_SCENE_SCHEMA.parent/name).read_bytes())
         binding=copy.deepcopy(raw['_metadata']['binding']);binding['testSource']='explicit fresh export';A.write_json(schema,A.parse_documentation(self.root,binding))
-        compiled=A.compile_authored_intent(intent,schema,self.api);candidate=compiled['authoredCandidate']
+        with patch.object(A.RUN,'EXPECTED_PATH',intent['brief']['targetProjectPath']):
+            compiled=A.compile_authored_intent(intent,schema,self.api)
+        candidate=compiled['authoredCandidate']
         self.assertEqual(Path(candidate['schemaPath']),schema.resolve());self.assertEqual(compiled['schemaSha256'],hashlib.sha256(schema.read_bytes()).hexdigest())
         schema.write_text(schema.read_text(encoding='utf8')+' ',encoding='utf8')
         with self.assertRaisesRegex(ValueError,'PINNED_SCHEMA_CHANGED'):NATIVE_PLAN.as_existing_scene_writer_preview(candidate)
