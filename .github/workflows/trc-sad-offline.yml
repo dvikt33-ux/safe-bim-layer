@@ -1,0 +1,38 @@
+name: TRC-SAD isolated geometry and APA graph preview
+
+on:
+  push:
+    branches:
+      - 'feature/trc-sad-native-plan-preview-*'
+    paths:
+      - 'data/trc_sad_concept_v1.json'
+      - 'scripts/trc_sad_plan.py'
+      - 'tests/test_trc_sad_plan.py'
+      - '.github/workflows/trc-sad-offline.yml'
+  pull_request:
+    paths:
+      - 'data/trc_sad_concept_v1.json'
+      - 'scripts/trc_sad_plan.py'
+      - 'tests/test_trc_sad_plan.py'
+      - '.github/workflows/trc-sad-offline.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install 'jsonschema>=4,<5'
+      - run: python -m unittest discover -s tests -p 'test_trc_sad_plan.py' -v
+      - run: python scripts/trc_sad_plan.py --output trc-preview.json
+      - run: python -c "import json; d=json.load(open('trc-preview.json',encoding='utf8')); assert d['nativeWrites']==0 and d['plnChanged']==False and d['aboveGroundSlabAreaSquareMeters']==72712.08"
