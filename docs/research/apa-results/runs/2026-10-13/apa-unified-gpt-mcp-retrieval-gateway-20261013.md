@@ -16,7 +16,7 @@ Solution in PR #69:
 - [38326877256](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38326877256): read-only real query execution PASS.
 - [38327026352](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38327026352): **78 tests PASS**, including genuine MCP v2 list_tools/call_tool against prepared plan/section fixtures; real APA checkout plan revision **127** in this run (up from earlier rev 125/126; user concurrent development untouched).
 - [38327181425](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38327181425): **78 tests PASS** and explicit validation that the shared task survives multi-document budget; details below.
-- Last claim/lease safety test added in subsequent commit; its independent Actions result must be checked before calling that change CI PASS.
+- [38327223046](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38327223046): **79 tests PASS** at the current documented implementation, including the new conservative lease/claim guard, shared task preservation (3 cards; 1,259 output characters) and measured exact two-document retrieval proxy (77,829 vs 359 tokens). Independent PR review and production integration remain PENDING.
 
 ### Real correctness problem caught, and fixed before release
 The first real join `ART-APA-RU-JUNCTION-NORMS ART-APA-CSE-RESEARCH` found 18 tasks mentioning at least one input and **one task mentioning both**, but when constrained to 1,600 characters it emitted both verbose source URLs and **omitted the only shared task**. This defeated the user objective even though lookup returned PASS: counts alone cannot tell GPT *which* task joins the documents.
