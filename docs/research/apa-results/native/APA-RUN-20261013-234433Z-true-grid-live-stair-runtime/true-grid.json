@@ -1,0 +1,48 @@
+{
+  "status": "LIVE_PASS_TRUE_GRID_CREATE_READ_EDIT_REUSE_SAVE_OPEN",
+  "acceptedBaselineGUID": 143,
+  "savedInventoryGUID": 144,
+  "newTrueGridCount": 1,
+  "original143GeometryMaterialStory": "UNCHANGED",
+  "nativeTypeId": 6,
+  "nativeVariationId": 1196574028,
+  "nativeVariationName": "APIVarId_GridElement",
+  "libraryPartIndex": 278,
+  "axisId": "APA-A",
+  "guidSHA256": "1d18e50d5c700ab6dae99756d1a20ef377677ab3a672dba7829b0acff06956f3",
+  "createdPlacement": {
+    "x": 70,
+    "y": 0
+  },
+  "editedPlacement": {
+    "x": 71,
+    "y": 0
+  },
+  "floorIndex": 0,
+  "requestedLength": 8,
+  "objectAngleRadians": 1.5707963267948966,
+  "nativeGridAngleRadians": 1.5707963267948966,
+  "parameterScriptAngleDegrees": 90,
+  "sourceHash": "783a01b66eea1b527528def4d2fc68501954dbe34a2be04a9072185e14bcb71f",
+  "retainedSignatureSetHash": "931446741dfc769121469403210006688b82fc92b4ce826bf656109f1882c430",
+  "savedSignatureSetHash": "9da523c1b6a3fc14c84e36a36025bf333ba603f814bbbb8995e209368d59ca47",
+  "beforeSavedSHA256": "e92f3907b72acaaf796534adfc582d95965b3d1988eecfee7b5d5f1565474aca",
+  "afterSavedSHA256": "831dada412da9cb905566eb09db99b2bcb81976fbd8d7f852f78dc8b431fa91d",
+  "repeatCreateCalls": 0,
+  "afterOpenCreateCalls": 0,
+  "save": "PASS",
+  "open": "PASS",
+  "renderedSpan": "NOT_VERIFIED_MARKER_BREP_DOES_NOT_PROVE_WIRE_GEOMETRY",
+  "engineering": "NOT_VERIFIED",
+  "journal": {
+    "PASS": 59,
+    "UNKNOWN_OUTCOME": 4
+  },
+  "modelWrites": {
+    "createGrid": 1,
+    "modifyOwnedGrid": 2,
+    "setOwnedGDLParameters": 2
+  },
+  "viewWrites": 1,
+  "persistenceWrites": 2
+}

@@ -1,0 +1,38 @@
+{
+  "status": "BLOCKED_PROCESS_TERMINATED_DURING_DETACHED_SOLVER",
+  "nativeStairCreateModifyCalls": 0,
+  "detachedRequests": 1,
+  "requestDimensions": {
+    "totalHeight": 3.3,
+    "stepNum": 22,
+    "riserHeight": 0.15,
+    "treadDepth": 0.35,
+    "flightWidth": 1,
+    "baseLinePoints": [
+      {
+        "x": 90,
+        "y": 0
+      },
+      {
+        "x": 90,
+        "y": 7.7
+      }
+    ]
+  },
+  "error": "CONNECTION_RESET_WINERROR_10054",
+  "elapsedSeconds": 4.444478299992625,
+  "processTerminatedObserved": true,
+  "exactFailureCause": "NOT_VERIFIED",
+  "savedSHA256AfterFailure": "831dada412da9cb905566eb09db99b2bcb81976fbd8d7f852f78dc8b431fa91d",
+  "savedBytesUnchanged": true,
+  "favoriteSourceSHA256": "ae2ac9b234889b75835062356cd293ea9881d7a839e68d68dca5106de5a3296f",
+  "favoriteRuleCompatibility": "SOURCE_RULE_COMPATIBLE_NATIVE_SOLVER_NOT_VERIFIED",
+  "sourceDimensionStatus": "NOT_VERIFIED",
+  "engineering": "NOT_VERIFIED",
+  "baselineFrame": "NATIVE_LOCAL_REQUEST_WORLD_TRANSFORM_NOT_EXPOSED",
+  "automaticRetry": false,
+  "failedCandidateSHA256": "8ad672092aa93e4bf1b4d469cbf7840cb60acd538820183bb68d5d6786ea221d",
+  "rawRequestSHA256": "8b0fc211cfa666872b9829330fc75b89fb15ba64e700964cf00b628bb7795c33",
+  "rawResponseSHA256": "4213668652451585942ff7fb20f28fbe3f7e025048e1d7edcf64ef04522640fe",
+  "nextGate": "FIX_AND_QUALIFY_SDK_MEMO_AND_BASE_PLANE_FRAME_NEW_CANDIDATE_THEN_DETACHED_PROOF_BEFORE_CREATE"
+}

@@ -1,0 +1,30 @@
+{
+  "status": "CANDIDATE_LOADED_GRID_LIVE_ORIGINAL_FILES_RESTORED",
+  "candidateModuleSHA256": "8ad672092aa93e4bf1b4d469cbf7840cb60acd538820183bb68d5d6786ea221d",
+  "actualProcessModuleHashVerified": true,
+  "loadedFreshCommandCount": 274,
+  "oldCommandCountPreserved": 263,
+  "freshNativeCommands": [
+    "GetNativeGridDefaultsV1",
+    "GetNativeGridElementsV1",
+    "CreateNativeGridElementsV1",
+    "ModifyNativeGridElementsV1",
+    "GetNativeStairGeometryV1",
+    "EvaluateNativeStairGeometryV1",
+    "CreateExactStairsV1",
+    "ModifyNativeStairGeometryV1"
+  ],
+  "sameMDID": [
+    826567491,
+    368333322
+  ],
+  "sameIDSimultaneousLoad": "NOT_SUPPORTED",
+  "temporaryInstalledReplacement": "EXPLICITLY_AUTHORIZED_BACKUP_VERIFIED",
+  "originalInstalledSHA256": "dc99af071d3dbcff9626653ccc37001613cb3fa4a8eff50c6000c1cc70e8d7c7",
+  "originalInstalledByteExactRestoration": true,
+  "originalRegistrationRestored": true,
+  "newPLNCreated": false,
+  "otherProjectsModified": false,
+  "acceptedStairModified": false,
+  "postRestorationIndependentOpenReadback": "PENDING_USER_OPEN"
+}

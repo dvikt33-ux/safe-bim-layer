@@ -1,0 +1,11 @@
+{
+  "schema": "APA_COMPACT_RETRIEVAL_V1",
+  "status": "OK",
+  "authority": "VERIFIED_GITHUB_PLAN_SNAPSHOT",
+  "plan_revision": 145,
+  "plan_sha256": "fb27738f368c447de9b657ec8607211bc02add883beb3d239d0de0144a774c06",
+  "retrieval": "EXACT_TASK",
+  "task_claim": "NEVER_AUTOMATIC",
+  "executor": "MAIN_ARCHICAD_PROJECT_ACCELERATOR_RETRIEVE_PROJECT_KNOWLEDGE",
+  "implementation": "UNCHANGED"
+}
