@@ -1,0 +1,10 @@
+{
+  "schema": "APA_KNOWLEDGE_ACCESS_V1",
+  "enabled": false,
+  "source_mode": "LOCAL_CHECKOUT",
+  "repo_root": ".",
+  "cache_dir": "../apa-knowledge-cache",
+  "allowed_classes": ["PROJECT_CONTROL", "RESEARCH_RUN"],
+  "max_return_chars": 2500,
+  "source_files": ["scripts/archicad_bim_documentation.py", "scripts/archicad_project_accelerator.py"]
+}
