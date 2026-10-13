@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 129,
+  "revision": 130,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -3834,7 +3834,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -3928,9 +3928,9 @@
         "Next available knowledge step: operator-supported ChatGPT tunnel/endpoint registration and actual apa_retrieve call with fresh provenance. On any canonical revision change, fetch the operator-owned source checkout and rebuild the same cache or returnSTALE_INDEX; no automated CAS claim. Independent native documentation work still needs trueElevation/vertical primitive/native schedule-row contracts. No repeated normative research or new roadmap."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "work-native-documentation2-20261013",
+      "lease_until": "2026-10-13T09:20:25Z",
+      "claim_ref": "APA-CLAIM-NATIVE-DOC2-20261013T062025Z",
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
