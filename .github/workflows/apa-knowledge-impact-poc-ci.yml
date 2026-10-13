@@ -71,6 +71,17 @@ jobs:
             --sections "${RUNNER_TEMP}/apa-sections.sqlite" \
             --repo-root . --query "кровли" --source-class PROJECT_CONTROL \
             --max-chars 1800 --limit 4
+      - name: Guard against dropping shared cross-document task under token budget
+        run: |
+          python tools/apa_knowledge_graph/gateway.py \
+            --index "${RUNNER_TEMP}/apa-knowledge-index.json" \
+            --plan docs/research/apa-results/control/PROJECT_PLAN.json \
+            --query "ART-APA-RU-JUNCTION-NORMS ART-APA-CSE-RESEARCH" \
+            --max-chars 1600 > "${RUNNER_TEMP}/apa-compact-multidoc.json"
+          python -c 'import os,json; from pathlib import Path; p=Path(os.environ["RUNNER_TEMP"])/"apa-compact-multidoc.json"; r=json.loads(p.read_text()); assert r["status"]=="OK"; assert r["task_refs_all"]==1; assert any(x.get("task_id")=="APA-P70.A02.S02" for x in r["items"]); assert len(p.read_text())<=1601; print("REAL_SHARED_TASK_SURVIVES_BUDGET",len(r["items"]),len(p.read_text()))'
+      - name: Measure prompt-visible real APA multi-document join context proxy
+        run: |
+          python -c 'import os,json,tiktoken; from pathlib import Path; t=tiktoken.get_encoding("o200k_base"); a=Path("docs/research/apa-results/control/PROJECT_PLAN.json").read_text(); b=(Path(os.environ["RUNNER_TEMP"])/"apa-compact-multidoc.json").read_text(); print(json.dumps({"scenario":"EXACT_TWO_ARTIFACT_JOIN","raw_plan_proxy_tokens":len(t.encode(a)),"compact_response_proxy_tokens":len(t.encode(b)),"note":"Not total GPT6 billed tokens, schema cost, routing or quality"}))'
       - name: Query real APA normative artifact (bounded)
         run: |
           python tools/apa_knowledge_graph/graph.py artifact \
