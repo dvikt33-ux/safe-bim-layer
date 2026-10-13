@@ -175,7 +175,7 @@ def search(db, query, limit=5, max_snippet=240, selected_class=None):
                      bm25(sections) AS rank
                 FROM sections WHERE sections MATCH ?
                ORDER BY rank LIMIT ?
-            """, (q, limit)).fetchall()
+            """, (q, min(500, limit * 30))).fetchall()
         else:
             rows = conn.execute("""
               SELECT path, heading, content, line, source_sha256, source_class,
@@ -183,7 +183,19 @@ def search(db, query, limit=5, max_snippet=240, selected_class=None):
                      bm25(sections) AS rank
                 FROM sections WHERE sections MATCH ? AND source_class = ?
                ORDER BY rank LIMIT ?
-            """, (q, selected_class, limit)).fetchall()
+            """, (q, selected_class, min(500, limit * 30))).fetchall()
+        # FTS top rows can all belong to ONE giant report. Diversify by
+        # document path BEFORE returning and byte-verifying snippets. This
+        # preserves relevance order while avoiding wasted context from repeats.
+        diverse = []
+        seen_docs = set()
+        for row in rows:
+            if row["path"] not in seen_docs:
+                diverse.append(row)
+                seen_docs.add(row["path"])
+                if len(diverse) == limit:
+                    break
+        rows = diverse
         # Revalidate only the selected top-K original source bytes.
         checked = {}
         decoded = {}
@@ -222,6 +234,7 @@ def search(db, query, limit=5, max_snippet=240, selected_class=None):
             })
         return {"status": "OK", "count": len(results), "results": results,
                 "query_type": "LEXICAL_OR_FTS5", "source_class_filter": selected_class,
+                "diversity_policy": "ONE_BEST_SECTION_PER_DOCUMENT",
                 "source_byte_readback": "MATCH_FOR_RETURNED_HITS",
                 "source_manifest_check": "PATH_SIZE_MTIME_MATCH",
                 "warning": "Exact source blob/edition/readback and applicability must be verified before use"}
