@@ -80,7 +80,7 @@ def ready_to_suggest(index, task_id):
     task = index["tasks"][task_id]
     if task["status"] not in ("READY", "PARTIAL"):
         return False
-    if task["owner"] or task["claim_ref"] or task["requires_approval"]:
+    if task["owner"] or task["claim_ref"] or task.get("lease_until") or task["requires_approval"]:
         return False
     return all(index["tasks"][dep]["status"] == "DONE_PUBLISHED"
                for dep in task["depends_on"])
