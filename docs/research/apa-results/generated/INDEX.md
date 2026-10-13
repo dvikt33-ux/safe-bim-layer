@@ -49,5 +49,6 @@ Generated projection from immutable V2 runs. Legacy reports remain in ARTIFACT_R
 | [APA-RUN-20261013-165220Z-native-spatial](../runs/2026-10-13/APA-RUN-20261013-165220Z-native-spatial/REPORT.md) | APA-P70.A11.S03 | LIVE | EVIDENCE_READY |
 | [APA-RUN-20261013-184337Z-grid-stair-exact](../runs/2026-10-13/APA-RUN-20261013-184337Z-grid-stair-exact/REPORT.md) | APA-P70.A11.S03 | BUILD | EVIDENCE_READY |
 | [APA-RUN-20261013-200350Z-grid-stair-live-checkpoint](../runs/2026-10-13/APA-RUN-20261013-200350Z-grid-stair-live-checkpoint/REPORT.md) | APA-P70.A11.S03 | LIVE | EVIDENCE_READY |
+| [APA-RUN-20261013-234433Z-true-grid-live-stair-runtime](../runs/2026-10-13/APA-RUN-20261013-234433Z-true-grid-live-stair-runtime/REPORT.md) | APA-P70.A11.S03 | LIVE | EVIDENCE_READY |
 
 Publication receipts are in ../receipts/. Evidence status is not publication status.

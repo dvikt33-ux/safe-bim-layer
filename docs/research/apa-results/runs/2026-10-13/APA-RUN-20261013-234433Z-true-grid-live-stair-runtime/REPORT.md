@@ -1,0 +1,25 @@
+# True native Grid LIVE checkpoint and exact Stair runtime blocker
+
+[Draft PR79](https://github.com/dvikt33-ux/safe-bim-layer/pull/79), head `60a78e0cd55fc4951c1de3c8d060adf4f9538134`, exact parent PR77 `c1b4e1a565bcd903273933d8917608df156ac600`.
+
+## Working native result
+
+One genuine Archicad Grid Element was created in the existing authorized test PLN, read independently, moved from X70 to X71 with the same GUID and verified after SceneWriter Save/Open. Native type6 plus GREL variation1196574028/library278 and the native Axis tool distinguish it from a Generic Object. Default parameters were read before creation and preserved. AC_Length8 and AC_Angle90degrees/1.570796327radians were independently read. Repeated ownership checks made0Create calls; the143original GUID/geometry/material/story signatures remained unchanged. Saved inventory144 is not a scalability measurement. No building was recreated, no new PLN or Morph was made.
+
+The existing GDL parameter script synchronizes the Grid geometry; SDK memo angles use radians while ChangeAParameter input uses degrees. The orchestrator adapter returns an updated BIM Graph operation and GUID/source binding. Rendered full wire-span remains NOT_VERIFIED because the native dump exposes marker bodies rather than complete GDL wire primitives. A native parameter value alone is not proof of visible span.
+
+An earlier parameter edit sent radians to the degrees-input API; the successful native response failed exact angle readback and retained UNKNOWN_OUTCOME. Independent reading identified the actual applied value, then a distinct correction sent90degrees and passed. A UI-inspection placement drift was independently reconciled on the newly owned axis; its cause is NOT_VERIFIED. Old elements were protected and no ambiguous operation was replayed. JournalPASS59/UNKNOWN4 retains the earlier history.
+
+## Stair and deployment
+
+One detached native Stair solver request for3.3m/22risers/0.15m/0.35m ended in connection reset WinError10054 after4.444s; the Archicad process disappeared. No CreateExactStairsV1 or ModifyNativeStairGeometryV1 was sent. Saved PLN bytes remained `831dada412da9cb905566eb09db99b2bcb81976fbd8d7f852f78dc8b431fa91d`. The fault module/cause is NOT_VERIFIED. Favourite compatibility is source evidence only; SOURCE_DIMENSION_PASS and engineering acceptance remain NOT_VERIFIED.
+
+The old native Stair readback uses local baseline coordinates while requests use world coordinates; an authoritative base-plane transform is not exposed by this candidate. New exact Stair writes require a hash-pinned successful detached result bound to request/source/project/model/schema and independently preserved geometry. Missing, failed, stale or changed evidence cannot create/edit a Stair; the known terminating candidate cannot qualify itself. Prior verified SQLite results remain reusable without another solver/Create.
+
+Candidate loading was proved by the actual process module SHA256`8ad672092aa93e4bf1b4d469cbf7840cb60acd538820183bb68d5d6786ea221d` and fresh274commands, retaining263old commands and exposing8newGrid/Stair commands. Tapir version alone is insufficient. Both builds share an identifier; [Graphisoft's add-on management contract](https://archicadapi.graphisoft.com/documentation/add-on-management) rejects simultaneous add-ons with the same identifier. The explicitly authorized temporary replacement resolved the runtime-loading gate. Original installed APX SHA256`dc99af071d3dbcff9626653ccc37001613cb3fa4a8eff50c6000c1cc70e8d7c7` and the original registry registration are restored. Post-restoration project reading: **PENDING_USER_OPEN**. Do not interpret restored original runtime as permanent installation of the candidate's new commands.
+
+## Validation and continuation
+
+**707/707host and WindowsCI PASS**,10new regression tests,102upstream graph tests and main-core/MCP integration. [Windows CI](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38485644027). Historical Linux results are retained; this feature CI is Windows-only as requested. Main orchestrator read-only Knowledge Graph verified current GitHub plan revision145; its implementation is unchanged. Native raw dumps, projects, private paths and APX binaries remain local.
+
+A11.S03 remains PARTIAL. Grid CRUD/persistence is LIVE_PASS; full rendered span remains NOT_VERIFIED. Exact Stair is BLOCKED by actual runtime failure, not missing permission. Next: fix/qualify SDK detached memo preparation and native base-plane frame in a new candidate, build it, obtain separate authorization for that different APX and validate one detached result before any Create. Roof contour/slope work follows native qualification; A07 dependencies and S10 blocker are preserved. TRC is excluded; normative/search/documentation development was not performed. This publication uses the existing publisher and CAS claim. Safety fields refer to the artifact-only publication operation, not the earlier explicitly authorized PLN/APX trial reported above.

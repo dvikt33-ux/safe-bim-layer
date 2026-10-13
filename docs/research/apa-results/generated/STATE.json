@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 45,
+  "run_count": 46,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -315,6 +315,13 @@
       "phase": "LIVE",
       "report": "runs/2026-10-13/APA-RUN-20261013-200350Z-grid-stair-live-checkpoint/REPORT.md",
       "run_id": "APA-RUN-20261013-200350Z-grid-stair-live-checkpoint",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-13/APA-RUN-20261013-234433Z-true-grid-live-stair-runtime/REPORT.md",
+      "run_id": "APA-RUN-20261013-234433Z-true-grid-live-stair-runtime",
       "substep_id": "APA-P70.A11.S03"
     }
   ],
