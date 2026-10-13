@@ -1,0 +1,449 @@
+{
+  "schema": "APA_AI_CANDIDATE_REGISTRY_V1",
+  "created_at": "2026-10-14",
+  "scope": "research_only",
+  "repo": "dvikt33-ux/safe-bim-layer",
+  "branch": "research/apa-ai-candidates-registry-20261014",
+  "hardware": {
+    "os": "Windows 11",
+    "gpu": "NVIDIA RTX 4060 Laptop",
+    "vram_gb": 8,
+    "ram_gb": 48,
+    "archicad": "29",
+    "ram_upgrade_planned": false
+  },
+  "constraints": {
+    "additional_spend_rub": 0,
+    "student_license_available": false,
+    "do_not_modify_main_or_active_pln": true
+  },
+  "priorities": [
+    "VERY_PROMISING",
+    "PROMISING",
+    "LOW_PRIORITY",
+    "DO_NOT_CONSIDER"
+  ],
+  "status_definition": "NOT_TESTED never means passed; source checks verify existence only",
+  "baseline": "GPT-6 is existing main developer; not a free candidate; compare objectively on same tasks.",
+  "candidates": [
+    {
+      "id": "gemma4-12b-q4",
+      "name": "Gemma 4 12B IT QAT Q4_0",
+      "kind": "local_llm",
+      "priority": "VERY_PROMISING",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "C++/Python-код, JSON-контракты, независимая проверка отдельных задач",
+      "rationale": "Официальная Q4 модель около 7 ГБ весов; сравнительно реалистичный тест на 8 ГБ GPU при коротком контексте.",
+      "blockers": "ОЗУ/VRAM/скорость с Archicad не измерялись; длинный контекст может потребовать offload.",
+      "source_urls": [
+        "https://huggingface.co/google/gemma-4-12B-it-qat-q4_0-gguf"
+      ],
+      "source_state": "PRIMARY_PAGE_CHECKED_2026-10-14",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "gemma4-26b-a4b-q4",
+      "name": "Gemma 4 26B A4B IT QAT Q4_0",
+      "kind": "local_llm",
+      "priority": "VERY_PROMISING",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Сложная независимая ревизия, рассуждение над BIM-алгоритмами",
+      "rationale": "MoE с малым числом активных параметров; официальная QAT GGUF и Apache 2.0.",
+      "blockers": "Полные веса превышают VRAM; нужен тест гибридной загрузки и скорости.",
+      "source_urls": [
+        "https://huggingface.co/google/gemma-4-26B-A4B-it-qat-q4_0-gguf"
+      ],
+      "source_state": "PRIMARY_PAGE_CHECKED_2026-10-14",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "qwen38-installed-27b",
+      "name": "Локальная Qwen 27B пользователя (точный ID уточнить)",
+      "kind": "local_llm",
+      "priority": "PROMISING",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Контрольная базовая модель для A/B; уже используется локально",
+      "rationale": "Сопоставление с текущей установкой даёт измеримый прирост/регрессию без новой инфраструктуры.",
+      "blockers": "Не подтверждены точное название версии, движок, квантование, текущая скорость и доступ к API.",
+      "source_urls": [
+        "https://huggingface.co/Qwen/Qwen3.8-27B"
+      ],
+      "source_state": "NOT_INDEPENDENTLY_VERIFIED",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "strata-qwen38-flash-next",
+      "name": "Qwen3.8-Flash-Next через Strata (Strata — движок, НЕ модель)",
+      "kind": "local_llm_plus_inference_engine",
+      "priority": "PROMISING",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Большой MoE для глубокого анализа и ревизии",
+      "rationale": "Потенциально высокий уровень при небольшой доле активных параметров; Strata оптимизирована под потребительские GPU.",
+      "blockers": "У проекта заявлены аппаратные требования выше 8 ГБ VRAM / 48 ГБ RAM; реальная работоспособность не доказана.",
+      "source_urls": [
+        "https://github.com/Niko1221/Strata",
+        "https://huggingface.co/Qwen/Qwen3.8-Flash-Next"
+      ],
+      "source_state": "PRIMARY_PAGE_CHECKED_2026-10-14",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "gemma4-e4b-q4",
+      "name": "Gemma 4 E4B IT QAT Q4_0",
+      "kind": "local_llm",
+      "priority": "PROMISING",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Быстрый triage ошибок, фильтрация и задачи маршрутизации",
+      "rationale": "Малый кандидат для экономного фонового AI-прохода.",
+      "blockers": "Для глубокой автономной ревизии C++ может оказаться недостаточен; нет APA измерений.",
+      "source_urls": [
+        "https://blog.google/innovation-and-ai/technology/developers-tools/gemma-4/"
+      ],
+      "source_state": "PRIMARY_PAGE_CHECKED_2026-10-14",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "qwen3-4b",
+      "name": "Qwen3 4B GGUF",
+      "kind": "local_llm",
+      "priority": "PROMISING",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Недорогая локальная классификация и предварительная проверка JSON",
+      "rationale": "Небольшой базовый кандидат на лёгкие подпроцессы.",
+      "blockers": "Точный файл/квантование и выигрыш относительно уже установленной Qwen не выбраны.",
+      "source_urls": [
+        "https://huggingface.co/Qwen/Qwen3-4B-GGUF"
+      ],
+      "source_state": "NOT_INDEPENDENTLY_VERIFIED",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "google-antigravity",
+      "name": "Google Antigravity (individual)",
+      "kind": "external_ai_agent",
+      "priority": "PROMISING",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Отдельный ревизор и разработчик задач по GitHub",
+      "rationale": "Может позволить независимую проверку архитектуры, а не только модели локально.",
+      "blockers": "Текущие условия, квоты и доступность бесплатной работы с репозиторием требуют проверки перед подключением.",
+      "source_urls": [
+        "https://antigravity.google/"
+      ],
+      "source_state": "NOT_INDEPENDENTLY_VERIFIED",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "github-copilot-free",
+      "name": "GitHub Copilot Free",
+      "kind": "external_ai_agent",
+      "priority": "PROMISING",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Дополнительные замечания по PR и коду",
+      "rationale": "Возможный второй взгляд на локальные изменения.",
+      "blockers": "Квоты Free и глубина программной интеграции требуют актуальной проверки.",
+      "source_urls": [
+        "https://github.com/features/copilot"
+      ],
+      "source_state": "NOT_INDEPENDENTLY_VERIFIED",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "saluki-27b-iq2",
+      "name": "Underdog Saluki 27B 1.0 IQ2-mix",
+      "kind": "local_llm",
+      "priority": "LOW_PRIORITY",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Альтернативная модель для tool-calling и код-ревизии",
+      "rationale": "Очень компактный 2-bit GGUF ~7.9 ГБ; можно использовать как резервный независимый эксперимент.",
+      "blockers": "Сильное квантование и отсутствие измерений на APA; приоритет ниже Gemma 4 12B / 26B.",
+      "source_urls": [
+        "https://huggingface.co/ConwayResearch/Underdog-Saluki-27B-1.0"
+      ],
+      "source_state": "PRIMARY_PAGE_CHECKED_2026-10-14",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "gemma4-31b-q4",
+      "name": "Gemma 4 31B IT Q4",
+      "kind": "local_llm",
+      "priority": "LOW_PRIORITY",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Возможный контроль качества относительно 26B A4B",
+      "rationale": "Большая dense модель полезна лишь если объективно обойдёт 26B на задачах APA.",
+      "blockers": "Высокие требования памяти и потенциально низкая скорость; без A/B не оправдана.",
+      "source_urls": [
+        "https://blog.google/innovation-and-ai/technology/developers-tools/gemma-4/"
+      ],
+      "source_state": "PRIMARY_PAGE_CHECKED_2026-10-14",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "gemma4-e2b",
+      "name": "Gemma 4 E2B",
+      "kind": "local_llm",
+      "priority": "LOW_PRIORITY",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Сверхлёгкий извлекатель фактов/маршрутизатор",
+      "rationale": "Малая стоимость локального исполнения.",
+      "blockers": "Глубокое программирование и BIM-проверка маловероятно являются её сильной стороной — гипотеза.",
+      "source_urls": [
+        "https://blog.google/innovation-and-ai/technology/developers-tools/gemma-4/"
+      ],
+      "source_state": "PRIMARY_PAGE_CHECKED_2026-10-14",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "housediffusion",
+      "name": "HouseDiffusion",
+      "kind": "research_floorplan_model",
+      "priority": "LOW_PRIORITY",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Исследование синтеза схем и векторных контуров",
+      "rationale": "Предметная модель для планировок, но не готовый BIM Writer.",
+      "blockers": "Масштабирование на многоэтажные ТРЦ, лицензии всех данных и корректность геометрии не проверены.",
+      "source_urls": [
+        "https://github.com/aminshabani/HouseDiffusion"
+      ],
+      "source_state": "NOT_INDEPENDENTLY_VERIFIED",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "arkdesign-ai",
+      "name": "ArkDesign.ai (ARK, если идентификация верна)",
+      "kind": "hosted_floorplan_service",
+      "priority": "LOW_PRIORITY",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Внешний эталон концептуальных планировок",
+      "rationale": "Интересен как пример размещения помещений и эффективного использования площади.",
+      "blockers": "Идентификацию сервиса, бесплатный экспорт и официальный API не подтвердили; не считать интеграцией.",
+      "source_urls": [
+        "https://arkdesign.ai/"
+      ],
+      "source_state": "NOT_INDEPENDENTLY_VERIFIED",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "finch3d",
+      "name": "Finch 3D",
+      "kind": "hosted_floorplan_service",
+      "priority": "DO_NOT_CONSIDER",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Генерация планов",
+      "rationale": "Пока нет подтверждённого постоянно бесплатного доступа к AI-генерации планов через API для APA.",
+      "blockers": "Нужна платная коммерческая интеграция или иные условия; переоценивать при появлении free API.",
+      "source_urls": [
+        "https://www.finch3d.com/"
+      ],
+      "source_state": "NOT_INDEPENDENTLY_VERIFIED",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "snaptrude",
+      "name": "Snaptrude",
+      "kind": "hosted_bim_service",
+      "priority": "DO_NOT_CONSIDER",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Концепция, IFC",
+      "rationale": "Студенческая лицензия недоступна, а бесплатный API для APA не подтверждён.",
+      "blockers": "Не включать в бесплатный runtime APA; переоценить при изменении тарифов.",
+      "source_urls": [
+        "https://www.snaptrude.com/"
+      ],
+      "source_state": "NOT_INDEPENDENTLY_VERIFIED",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "maket-ai",
+      "name": "Maket AI",
+      "kind": "hosted_floorplan_service",
+      "priority": "DO_NOT_CONSIDER",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Планы жилья",
+      "rationale": "Разовые бесплатные кредиты не дают бесплатного постоянного API/BIM-контура.",
+      "blockers": "Платные функции экспорта и специализация под жильё.",
+      "source_urls": [
+        "https://www.maket.ai/"
+      ],
+      "source_state": "NOT_INDEPENDENTLY_VERIFIED",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "architechtures",
+      "name": "ARCHITEChTURES",
+      "kind": "hosted_floorplan_service",
+      "priority": "DO_NOT_CONSIDER",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Генеративные жилые здания",
+      "rationale": "Trial не является бесплатной интеграцией; специализация отличается от основного APA-модуля.",
+      "blockers": "Требуется отдельный платный рабочий доступ.",
+      "source_urls": [
+        "https://architechtures.com/en"
+      ],
+      "source_state": "NOT_INDEPENDENTLY_VERIFIED",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "testfit",
+      "name": "TestFit",
+      "kind": "hosted_site_planning_service",
+      "priority": "DO_NOT_CONSIDER",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Посадка здания и парковки",
+      "rationale": "Бесплатный программный API/рабочая интеграция с APA не подтверждены.",
+      "blockers": "Внешний сервис, нет доказанного бесплатного BIM-маршрута.",
+      "source_urls": [
+        "https://www.testfit.io/"
+      ],
+      "source_state": "NOT_INDEPENDENTLY_VERIFIED",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "luma-ai",
+      "name": "Luma AI",
+      "kind": "hosted_media_service",
+      "priority": "DO_NOT_CONSIDER",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Изображения и видео",
+      "rationale": "Нет прямой пользы для создания редактируемых планов и BIM-геометрии в APA.",
+      "blockers": "Рендеры не заменяют геометрический контролируемый Writer.",
+      "source_urls": [
+        "https://lumalabs.ai/"
+      ],
+      "source_state": "NOT_INDEPENDENTLY_VERIFIED",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "architect-ai",
+      "name": "Architect AI (название неоднозначно)",
+      "kind": "hosted_archviz_service",
+      "priority": "DO_NOT_CONSIDER",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Эскизы и рендеры",
+      "rationale": "Недостаточно доказательств наличия пригодного бесплатного BIM API; продукт неоднозначно идентифицирован.",
+      "blockers": "Уточнить точный URL перед пересмотром; сейчас исключить.",
+      "source_urls": [],
+      "source_state": "NOT_INDEPENDENTLY_VERIFIED",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "autodesk-forma",
+      "name": "Autodesk Forma",
+      "kind": "hosted_concept_service",
+      "priority": "DO_NOT_CONSIDER",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Генпланы и концептуальная стадия",
+      "rationale": "Бесплатный непрерывный маршрут к Archicad APA не установлен.",
+      "blockers": "Подписка / условия экспорта / интеграция требуют проверки.",
+      "source_urls": [
+        "https://www.autodesk.com/products/forma/overview"
+      ],
+      "source_state": "NOT_INDEPENDENTLY_VERIFIED",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
+    }
+  ]
+}
