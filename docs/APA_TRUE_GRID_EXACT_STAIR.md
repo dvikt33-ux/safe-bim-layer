@@ -58,6 +58,13 @@ and checks exact going, riser, height, width, count, baseline and source-rule re
 The XML's existing partial export remains partial; no complete GDL bundle is claimed.
 The accepted0.32m Stair is read-only. There is no rule override or hidden resizing.
 
+Completed exact-Stair operations now reuse the same SQLite result and root GUID
+without another Create. Reuse requires a matching source hash and original project
+binding, current saved-file hash, retained geometry signatures, exact native
+dimensions and unchanged Favorite rules. Unknown or unverified journal outcomes,
+changed source parameters or native drift require reconciliation or an explicit
+edit; an existing element is never sufficient evidence to retry a creation.
+
 ## Build and deployment boundary
 
 The existing overlay builder now registers all previous documentation commands and
@@ -78,8 +85,11 @@ idempotence, source-rule conflicts, native-type rejection and strict numeric gat
 
 ## Prepared isolated test
 
-Use a separately approved copy named APA_Grid_Stair_Exact_Test_01.pln with the loaded
-library. Preserve the original143 and168 identities and files. Initial identity,
+The latest user instruction supersedes the previous proposed new test copy. Use
+the already open authorized APA_Stories_Grid_Stair_Test_01.pln; do not create another
+PLN or recreate the building. Preserve all143 existing identities and signatures,
+and the separate accepted168 model. Only new Grid/Stair samples and edits of those
+new samples are authorized. Initial identity,
 port, saved-file hash, source-plan hash and journal gates precede every mutation.
 Read the new Grid defaults and source parameter roles; create/update/reuse native
 axes from the existing semantic layout. Run detached Stair combinations first and
@@ -88,7 +98,20 @@ accepted geometry. Independently read dimensions/BREP, native type/variation/GUI
 materials/floors/contacts/collisions; Save/Open and compare retained signatures.
 Timeout or mismatch means reconciliation, never blind Create/Modify retry.
 
-No native live result is claimed until the new APX is separately loaded and this
+The candidate hash was verified, and the user authorized temporary switching in
+the test instance without overwriting the installed APX. The Add-On Manager
+showed the original installed path for both same-identifier Tapir entries after
+the external candidate was added. Automatic approval review rejected applying
+that ambiguous configuration. No candidate load or new Grid/Stair write occurred.
+The original module was restored through the manager with two explicit UI
+Save/Open cycles overall. These deployment actions used a separate recorded UI
+intent; they were not SceneWriter model operations and did not alter its ledger.
+Independent readback confirms all143 retained geometry/material/story signatures
+and story structure unchanged, and a fresh export contains all263 old commands
+but none of the8 new endpoints. The changed PLN file hash after Save is recorded
+separately from unchanged geometry signatures. Original APX bytes are unchanged.
+
+No native live result is claimed until the new APX is unambiguously loaded and this
 test succeeds. A11.S03 remains PARTIAL; A07 dependencies/S10/historical DONE are
 retained. Roof contour/slope development follows actual Grid/Stair acceptance.
 

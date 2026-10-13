@@ -138,4 +138,65 @@ class SpatialSDKTests(unittest.TestCase):
         source=self.root/'overlay';(source/'Sources').mkdir(parents=True);main=source/'Sources/AddOnMain.cpp';main.write_text('#include "ElementCommands.hpp"\n        err |= RegisterCommand<CreateWallsCommand> (elementCommands, "x", "original");\n        AddCommandGroup (elementCommands);\n        AddCommandGroup (projectCommands);',encoding='utf8')
         m.overlay_registration(source);first=main.read_bytes();m.overlay_registration(source);self.assertEqual(first,main.read_bytes());self.assertEqual(first.count(b'RegisterCommand<CreateWallsCommand>'),1);self.assertEqual(first.count(b'RegisterCommand<CreateExactStairsV1Command>'),1)
 
+    def exact_stair_fixture(self):
+        source=self.source_rules();source.update(sourcePath=str(self.root/'favorite.xml'),favoriteName='source')
+        catalog=json.loads(self.writer.schema_path.read_text(encoding='utf8'))
+        cpp=(ROOT/'archicad-addon/Sources/NativeStairCommands.cpp').read_text(encoding='utf8')
+        item=json.loads(re.search(r'StairDataSchema.*?return R"\((.*?)\)";',cpp,re.S).group(1))
+        catalog['commands']['CreateExactStairsV1']=dict(name='CreateExactStairsV1',api='tapir',version='1.5.10',category='SDK_SOURCE_FIXTURE_NOT_INSTALLED',parameters=dict(type='object',properties={'stairsData':dict(type='array',minItems=1,maxItems=1,items=item)},required=['stairsData'],additionalProperties=False),returns={})
+        self.writer.schema_path.write_text(json.dumps(catalog),encoding='utf8')
+        self.actual_stair=None;self.stair_timeout=False;old=self.api
+        def native(command,params):
+            if command=='GetFavoritesByType':return {'favorites':['source']}
+            if command=='CreateExactStairsV1':
+                old.writes.append(command);row=copy.deepcopy(params['stairsData'][0]);row.update(elementId={'guid':NEW},nativeType='Stair',rules={k[0].lower()+k[1:]:v for k,v in source['rules'].items()});self.actual_stair=row
+                if self.stair_timeout:raise TimeoutError('possibly applied')
+                return {'elements':[{'elementId':{'guid':NEW}}]}
+            if command=='GetNativeStairGeometryV1':return copy.deepcopy(self.actual_stair)
+            if command=='GetModelDumpV1':return {'elements':[{'guid':OLD}]+([{'guid':NEW}] if self.actual_stair else [])}
+            return old(command,params)
+        self.writer.api=native;self.geometry();return source
+    def exact_create(self,source,row=None,retained=None):
+        return A.apply_exact_native_stair(self.writer,row or stair(),'exact-stair-replay',retained or {OLD:'pinned'},self.sha,'explicit fixture',source)
+    def test_exact_stair_completed_sqlite_result_reuses_without_second_create(self):
+        source=self.exact_stair_fixture()
+        with self.runtime():first=self.exact_create(source);again=self.exact_create(source)
+        self.assertEqual(first['status'],'PASS',first);self.assertEqual(again['nativeCreateCalls'],0);self.assertEqual(again['createdGuid'],first['createdGuid']);self.assertEqual(self.api.writes,['CreateExactStairsV1'])
+    def test_exact_stair_unknown_outcome_cannot_replay_even_if_element_exists(self):
+        source=self.exact_stair_fixture();self.stair_timeout=True
+        with self.runtime():first=self.exact_create(source)
+        self.assertEqual(first['status'],'PARTIAL_OR_UNKNOWN_OUTCOME')
+        with self.runtime(),self.assertRaisesRegex(ValueError,'NEVER_RETRY'):self.exact_create(source)
+        self.assertEqual(self.api.writes,['CreateExactStairsV1'])
+    def test_completed_stair_changed_source_requires_explicit_edit(self):
+        source=self.exact_stair_fixture()
+        with self.runtime():self.exact_create(source)
+        row=stair();row['baseLinePoints'][0]['x']+=1;row['baseLinePoints'][1]['x']+=1
+        with self.runtime(),self.assertRaisesRegex(ValueError,'EXPLICIT_EDIT'):self.exact_create(source,row)
+        self.assertEqual(len(self.api.writes),1)
+    def test_completed_stair_changed_native_going_cannot_reuse_pass(self):
+        source=self.exact_stair_fixture()
+        with self.runtime():self.exact_create(source)
+        self.actual_stair['treadDepth']=.32
+        with self.runtime(),self.assertRaisesRegex(ValueError,'DIMENSION_MISMATCH'):self.exact_create(source)
+    def test_completed_stair_changed_native_rules_cannot_reuse_pass(self):
+        source=self.exact_stair_fixture()
+        with self.runtime():self.exact_create(source)
+        self.actual_stair['rules']['ruleMaxValue']=.7
+        with self.runtime(),self.assertRaisesRegex(ValueError,'RULE_READBACK'):self.exact_create(source)
+    def test_completed_stair_wrong_project_is_denied_before_reuse(self):
+        source=self.exact_stair_fixture()
+        with self.runtime():self.exact_create(source)
+        self.api.wrong_project=True
+        with self.runtime(),self.assertRaises(ValueError):self.exact_create(source)
+    def test_completed_stair_saved_file_drift_requires_reconciliation(self):
+        source=self.exact_stair_fixture()
+        with self.runtime():self.exact_create(source)
+        self.file.write_bytes(b'changed')
+        with self.runtime(),self.assertRaisesRegex(ValueError,'SAVED_FILE_HASH'):self.exact_create(source)
+    def test_completed_stair_retained_geometry_drift_denies_reuse(self):
+        source=self.exact_stair_fixture()
+        with self.runtime():self.exact_create(source)
+        with self.runtime(),patch.object(C,'retained_geometry_signatures',return_value={OLD:'changed'}),self.assertRaisesRegex(ValueError,'RETAINED_GEOMETRY'):self.exact_create(source)
+
 if __name__=='__main__':unittest.main()

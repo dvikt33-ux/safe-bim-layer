@@ -1,17 +1,34 @@
 {
   "schema": "APA_NATIVE_GRID_STAIR_ISOLATED_TEST_V1",
-  "targetProjectBasename": "APA_Grid_Stair_Exact_Test_01.pln",
-  "status": "PREPARED_REQUIRES_SEPARATE_APX_DEPLOYMENT_PERMISSION",
+  "targetProjectBasename": "APA_Stories_Grid_Stair_Test_01.pln",
+  "status": "AUTHORIZED_NEW_SAMPLES_RUNTIME_LOAD_NOT_VERIFIED",
   "recreateBuilding": false,
-  "protectedPriorModelCounts": [143, 168],
+  "protectedPriorModelCounts": [
+    143,
+    168
+  ],
   "gridSource": "EXISTING_SEMANTIC_LAYOUT_AXES_AND_ACTUAL_NATIVE_GRID_DEFAULTS",
   "gridRoleMapping": "NOT_VERIFIED_UNTIL_NATIVE_DEFAULTS_LIBRARY_ROLE_READBACK",
   "stairCases": [
-    {"rise": 3.3, "risers": 20, "going": 0.35, "sourceRuleStatus": "CONFLICT_RULE_MAX_2R_PLUS_G", "nativeCreateAllowed": false},
-    {"rise": 3.0, "risers": 20, "going": 0.35, "sourceRuleStatus": "COMPATIBLE_SOLVER_NOT_VERIFIED", "nativeCreateAllowed": false},
-    {"rise": 3.3, "risers": 22, "going": 0.35, "sourceRuleStatus": "COMPATIBLE_SOLVER_NOT_VERIFIED", "nativeCreateAllowed": false}
+    {
+      "rise": 3.3,
+      "risers": 22,
+      "going": 0.35,
+      "sourceRuleStatus": "COMPATIBLE_SOLVER_NOT_VERIFIED",
+      "nativeCreateAllowed": false
+    }
   ],
-  "nextGate": "DEPLOYMENT_PERMISSION_THEN_EXACT_PROJECT_IDENTITY_AND_DETACHED_NATIVE_SOLVER",
-  "acceptance": ["TRUE_GRID_VARIATION_GUID_CREATE_EDIT_REUSE", "SOURCE_STAIR_GOING_0.35_INDEPENDENT_NATIVE_READBACK", "OLD_SIGNATURES_PRESERVED", "SAVE_OPEN_READBACK"],
-  "engineeringAcceptance": "NOT_VERIFIED"
+  "nextGate": "UNAMBIGUOUS_CANDIDATE_MODULE_PATH_AND_HASH_THEN_FRESH_SCHEMA_AND_DETACHED_SOLVER",
+  "acceptance": [
+    "TRUE_GRID_VARIATION_GUID_CREATE_EDIT_REUSE",
+    "SOURCE_STAIR_GOING_0.35_INDEPENDENT_NATIVE_READBACK",
+    "OLD_SIGNATURES_PRESERVED",
+    "SAVE_OPEN_READBACK"
+  ],
+  "engineeringAcceptance": "NOT_VERIFIED",
+  "createNewProject": false,
+  "editAcceptedElements": false,
+  "apxMode": "TEMPORARY_TEST_INSTANCE_EXTERNAL_PATH_ONLY_NO_INSTALLED_FILE_OVERWRITE",
+  "apxLoadStatus": "BLOCKED_AMBIGUOUS_ADDON_MANAGER_PATH_ORIGINAL_RUNTIME_RESTORED",
+  "repeatability": "COMPLETED_SQLITE_GUID_REUSE_WITH_SOURCE_TARGET_GEOMETRY_RULE_READBACK_UNKNOWN_NEVER_RETRIED"
 }
