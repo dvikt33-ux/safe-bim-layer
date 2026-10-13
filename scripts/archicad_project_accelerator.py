@@ -33,9 +33,12 @@ READS = frozenset({"GetProjectInfo", "GetStories", "GetAddOnVersion",
                   "GetAttributesByType", "GetSubelementsOfHierarchicalElements", "GetModelDumpV1",
                   "GetCollisions", "GetBuildingMaterials", "GetComposites", "GetProfiles",
                   "GetSurfaces", "GetAvailableLibraryParts", "GetGDLParametersOfElements", "API.GetProductInfo", 'API.GetPublisherSetNames',
-                  'API.GetAllClassificationSystems','API.GetAllClassificationsInSystem','GetClassificationsOfElements','GetMEPPreferenceTables'})
+                  'API.GetAllClassificationSystems','API.GetAllClassificationsInSystem','GetClassificationsOfElements','GetMEPPreferenceTables',
+                  'API.GetPropertyIds','API.GetAllPropertyNames','API.GetDetailsOfProperties',
+                  'GetSolidElementLinks','GetPropertyValuesOfElements'})
 NATIVE_MUTATIONS = RUN.ALLOWED_WRITES | RUN.EXTENDED_WRITES | frozenset({"ModifySlabs","ModifyMorphs","ModifyBeams",
-    'ConnectMEPElements','ModifyMEPRoutingElements','CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks','SetClassificationsOfElements','TrimElements'})
+    'ConnectMEPElements','ModifyMEPRoutingElements','CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks','SetClassificationsOfElements','TrimElements',
+    'MoveElements','SetPropertyValuesOfElements'})
 PRIMITIVES = {
     "pavilion-frame-v1": {"status": "EXECUTABLE_PENDING_LIVE_ACCEPTANCE",
                           "executor": "SceneWriter", "elementCount": 12},
@@ -55,7 +58,7 @@ def write_json(path, value):
 
 def native_transport(command, params):
     if command not in {'API.GetProductInfo','API.GetAllClassificationSystems','API.GetAllClassificationsInSystem',
-                       'API.GetPublisherSetNames'}:
+                       'API.GetPublisherSetNames','API.GetPropertyIds','API.GetAllPropertyNames','API.GetDetailsOfProperties'}:
         return RUN.tapir(RUN.PORT, command, params)
     request = urllib.request.Request(f"http://127.0.0.1:{RUN.PORT}",
         data=json.dumps({"command": command, "parameters": params}).encode("utf-8"),
@@ -197,7 +200,7 @@ def compile_project_spatial_plan(brief, project_pack, authored_layout):
 
 def compile_authored_native_candidate(brief, project_pack, authored_layout,
                                       authored_story_heights, read_api,
-                                      schema_path=RUN.DEFAULT_SCENE_SCHEMA):
+                                      schema_path=RUN.DEFAULT_SCENE_SCHEMA, junction_policy=None):
     """Read-only existing BIM DAG compiler, no SceneWriter.execute.
 
     Never exposes a native mutation token; no authority to write follows from
@@ -206,7 +209,7 @@ def compile_authored_native_candidate(brief, project_pack, authored_layout,
     catalog_with_provenance(schema_path)
     return AUTHORED_NATIVE.compile_candidate(
         brief,project_pack,authored_layout,authored_story_heights,
-        read_api,schema_path=schema_path)
+        read_api,schema_path=schema_path,junction_policy=junction_policy)
 
 
 def compile_intent(intent, schema_path):
@@ -262,8 +265,9 @@ def compile_authored_intent(intent, schema_path, read_api):
             "schemaVersion", "projectId", "units", "brief", "cseCandidate",
             "layout", "storyHeights"}
     if (not isinstance(intent, dict) or not required <= set(intent)
-            or set(intent)-required-{"wallBasicMaterialName","nativeComponents","nativeGeometryAudit"}
+            or set(intent)-required-{"wallBasicMaterialName","nativeComponents","nativeGeometryAudit","junctionPolicy","nativeRoofJunctions","structuralFunctions"}
             or type(intent.get('nativeGeometryAudit',False)) is not bool
+            or type(intent.get('nativeRoofJunctions',False)) is not bool
             or intent["schemaVersion"] != "apa-authored-project/1"
             or intent["units"] != "meters"
             or not isinstance(intent["projectId"], str)
@@ -275,7 +279,7 @@ def compile_authored_intent(intent, schema_path, read_api):
     pack = compile_project_library_pack(intent["brief"], intent["cseCandidate"], read_api)
     candidate = compile_authored_native_candidate(
         intent["brief"], pack, intent["layout"], intent["storyHeights"],
-        read_api, schema_path=schema_path)
+        read_api, schema_path=schema_path,junction_policy=intent.get('junctionPolicy'))
     if "wallBasicMaterialName" in intent:
         wall_guid = RUN.resolve_basic_slab_material(read_api,intent["wallBasicMaterialName"])
         for step in candidate["graph"]["operations"]:
@@ -288,8 +292,23 @@ def compile_authored_intent(intent, schema_path, read_api):
     outline=candidate["authoredOutline"]
     for step in additions:
         if not isinstance(step,dict) or step.get("command") not in {
-                "CreateColumns","CreateDoors","CreateWindows"}:
+                "CreateColumns","CreateDoors","CreateWindows","CreateWalls","CreateRoofs"}:
             raise ValueError("UNSUPPORTED_AUTHORED_NATIVE_COMPONENT")
+        if step['command'] in {'CreateWalls','CreateRoofs'}:
+            rows=next(iter(step.get('params',{}).values()),[])
+            if len(rows)!=1 or rows[0].get('floorIndex') not in story_indices:
+                raise ValueError('AUTHORED_COMPONENT_STORY_REQUIRED')
+            if step['command']=='CreateRoofs' and (not rows[0].get('pivotLine') or
+                    rows[0].get('structureType')!='Basic' or not rows[0].get('buildingMaterialId')):
+                raise ValueError('AUTHORED_ROOF_REQUIRES_TYPED_BASIC_SINGLE_PLANE_AND_MATERIAL')
+            points=([rows[0].get(k,{}) for k in ('begCoordinate','endCoordinate')]
+                if step['command']=='CreateWalls' else rows[0].get('polygonCoordinates',[]))
+            margin=0 if step['command']=='CreateWalls' else .35
+            if not points or any(type(p.get(k)) not in (float,int) or not math.isfinite(p[k])
+                    for p in points for k in ('x','y')) or any(
+                    not (outline['xMin']-margin<=p['x']<=outline['xMax']+margin and
+                         outline['yMin']-margin<=p['y']<=outline['yMax']+margin) for p in points):
+                raise ValueError('AUTHORED_ADDITION_OUTSIDE_DECLARED_ENVELOPE')
         if step["command"]=="CreateColumns":
             columns=step.get("params",{}).get("columnsData",[])
             if len(columns)!=1 or columns[0].get("floorIndex") not in story_indices:
@@ -308,6 +327,12 @@ def compile_authored_intent(intent, schema_path, read_api):
         candidate.update(sourcePlanHash=checked["sourcePlanHash"],executionOrder=checked["executionOrder"],
             operationCount=len(candidate["graph"]["operations"]),
             plannedNativeCommands=dict(Counter(s["command"] for s in candidate["graph"]["operations"])))
+    roles=intent.get('structuralFunctions',{})
+    kinds={s['id']:s['command'] for s in candidate['graph']['operations']}
+    if (not isinstance(roles,dict) or any(sid not in kinds or
+            kinds[sid] not in {'CreateWalls','CreateSlabs','CreateRoofs'} or
+            value not in {'LoadBearingElement','NonLoadBearingElement'} for sid,value in roles.items())):
+        raise ValueError('AUTHORED_STRUCTURAL_FUNCTIONS_REQUIRE_EXPLICIT_ELEMENT_ROLES')
     preview = AUTHORED_NATIVE.as_existing_scene_writer_preview(candidate)
     return {**preview, "status": "ACCELERATOR_COMPILED_OFFLINE",
             "intent": intent, "intentHash": RUN.digest(intent),
@@ -436,12 +461,16 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
         before = inventory_guids(api)
         write_json(folder / "inventory-before.json", before)
         ledger_dir = Path(state_dir) if state_dir is not None else folder.parent / "accelerator-state"
+        typed_adapters = {}
+        if any(s['command']=='CreateRoofs' for s in compiled['graph']['operations']):
+            import archicad_connected_components as CONNECTED
+            typed_adapters = CONNECTED.adapters(['roof'])
         writer = RUN.SceneWriter(api, ledger_dir / "scene-v1-attempts.sqlite3", schema,
                                  preview_factory=(
                                      AUTHORED_NATIVE.make_read_only_scene_writer_preview_factory(
                                          compiled["authoredCandidate"]) if authored else
                                      (lambda x, y, path: BUILD.prepare(intent["components"][0], path))
-                                     if required_story is not None else None))
+                                     if required_story is not None else None), adapters=typed_adapters)
         anchor = ({"x": compiled["envelope"]["xMin"], "y": compiled["envelope"]["yMin"]}
                   if authored else intent["components"][0]["anchor"])
         ticket = writer.preflight(anchor["x"], anchor["y"])
@@ -454,9 +483,36 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
         if mode == "execute":
             if not run_id or not confirm_hash or token != confirm_hash:
                 raise ValueError("EXPLICIT_EXECUTE_REQUIRES_RUN_ID_AND_MATCHING_CONFIRM_PLAN_HASH")
+            protected=None
+            if authored and (intent.get('nativeRoofJunctions') or intent.get('structuralFunctions')):
+                import archicad_connected_components as CONNECTED
+                original=CONNECTED.G.normalize_dump(api('GetModelDumpV1',{}))
+                protected=CONNECTED.retained_geometry_signatures(original,before)
+                saved_hash=hashlib.sha256(Path(binding['path']).read_bytes()).hexdigest()
             # Reuse the original one-shot reservation/host/readback implementation.
             result["scene"] = writer.execute(anchor["x"], anchor["y"], run_id, ticket["sourcePlanHash"])
             result["status"] = result["scene"]["status"]
+            if result['status']=='COMPLETE_UNSAVED' and protected is not None:
+                import archicad_authored_extension as EXTENSION
+                owned={sid:{'guid':v['guid'],'kind':v['kind'],
+                    'floorIndex':next(iter(next(op for op in ticket['graph']['operations'] if op['id']==sid)['params'].values()))[0].get('floorIndex',0)}
+                    for sid,v in result['scene']['steps'].items()}
+                for sid,v in owned.items():
+                    op=next(x for x in ticket['graph']['operations'] if x['id']==sid)
+                    if op['command'] in {'CreateWindows','CreateDoors'}:
+                        host=next(iter(op['params'].values()))[0]['ownerWallId']['guid']['$createdGuid']
+                        v['floorIndex']=owned[host]['floorIndex']
+                if intent.get('nativeRoofJunctions'):
+                    completed=EXTENSION.complete_roof_junctions(writer,ticket,owned,protected,
+                        run_id+'-junctions','Explicit source intent nativeRoofJunctions in authorized test project',saved_hash)
+                    ticket=completed['plan'];compiled['graph']=ticket['graph']
+                    result['nativeRoofJunctions']={k:v for k,v in completed.items() if k!='plan'}
+                    write_json(folder/'junction-completed-plan.json',ticket)
+                if intent.get('structuralFunctions'):
+                    api.allowed|={'SetPropertyValuesOfElements','GetPropertyValuesOfElements'}
+                    result['structuralFunctions']=EXTENSION.assign_structural_functions(writer,ticket,owned,
+                        intent['structuralFunctions'],protected,run_id+'-roles',
+                        'Explicit source intent structuralFunctions; no engineering capacity inference',saved_hash)
         after = inventory_guids(api)
         write_json(folder / "inventory-after.json", after)
         if RUN.guarded_project(api, required_story) != binding:
@@ -489,6 +545,12 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
                     expected_floor = parent_step["params"]["wallsData"][0]["floorIndex"]
                 else:
                     expected_floor = next(iter(params.values()))[0]["floorIndex"]
+                adapter=typed_adapters.get(step['command'])
+                if adapter:
+                    adapter.verify(api,created[step['id']]['guid'],params,
+                        RUN.requested_details(api,created[step['id']]['guid']),expected_floor,
+                        RUN.story_level_for_floor(ticket.get('storyBindings'),expected_floor))
+                    continue
                 RUN.verify_readback(
                     step["command"], params,
                     RUN.requested_details(api, created[step["id"]]["guid"]),

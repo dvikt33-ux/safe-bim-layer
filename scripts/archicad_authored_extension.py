@@ -31,6 +31,13 @@ def verify_model(api, plan, created):
         else:
             floor = next(iter(params.values()))[0]['floorIndex']
             owner = None
+        if step['command']=='CreateRoofs':
+            from archicad_connected_components import NativeAdapter
+            kind=NativeAdapter('CreateRoofs').verify(api,created[sid]['guid'],params,
+                RUN.requested_details(api,created[sid]['guid']),floor,
+                RUN.story_level_for_floor(plan['storyBindings'],floor))
+            verified[sid]={'guid':created[sid]['guid'],'kind':kind,'floorIndex':floor}
+            continue
         kind = RUN.verify_readback(step['command'], params,
             RUN.requested_details(api, created[sid]['guid']), owner,
             expected_floor=floor,
@@ -44,6 +51,312 @@ def verify_model(api, plan, created):
                 raise ValueError('PLAN_LIBRARY_IDENTITY_READBACK_MISMATCH')
         verified[sid] = {'guid': created[sid]['guid'], 'kind': kind, 'floorIndex': floor}
     return verified
+
+
+MODEL_COMMANDS = frozenset({'MoveElements', 'ModifyWalls', 'ModifyWindows', 'ModifyDoors',
+                           'CreateSolidElementLinks','SetPropertyValuesOfElements'})
+
+
+def model_operation_scope(command, parameters, source_hash, owned_guids,
+                          retained_guids, authorization_ref):
+    """Exact new-building edit scope for the existing SceneWriter, not a grant."""
+    scope={'schema':'APA_AUTHORED_MODEL_OPERATION_V1','command':command,
+        'parameters':parameters,'sourceHash':source_hash,
+        'ownedGuids':sorted(g.lower() for g in owned_guids),
+        'retainedGuids':sorted(g.lower() for g in retained_guids),
+        'authorizationRef':authorization_ref}
+    scope['scopeHash']=RUN.digest(scope)
+    qualify_model_operation(scope,command,parameters,source_hash)
+    return scope
+
+
+def qualify_model_operation(scope,command,parameters,source_hash):
+    if (scope.get('schema')!='APA_AUTHORED_MODEL_OPERATION_V1' or
+            command not in MODEL_COMMANDS or not scope.get('authorizationRef') or
+            scope.get('command')!=command or scope.get('parameters')!=parameters or
+            scope.get('sourceHash')!=source_hash or scope.get('scopeHash')!=RUN.digest(
+                {k:v for k,v in scope.items() if k!='scopeHash'})):
+        raise ValueError('MODEL_OPERATION_SCOPE_MISMATCH')
+    owned=set(scope['ownedGuids']);retained=set(scope['retainedGuids'])
+    if not owned or not retained or owned&retained:raise ValueError('MODEL_OWNERSHIP_SCOPE_INVALID')
+    slots={'MoveElements':'elementsWithMoveVectors','ModifyWalls':'wallsWithDetails',
+        'ModifyWindows':'windowsWithDetails','ModifyDoors':'doorsWithDetails',
+        'CreateSolidElementLinks':'solidLinks','SetPropertyValuesOfElements':'elementPropertyValues'}
+    if set(parameters)!={slots[command]} or len(parameters[slots[command]])!=1:
+        raise ValueError('MODEL_OPERATION_REQUIRES_ONE_EXPLICIT_TARGET')
+    row=parameters[slots[command]][0]
+    ids=[row.get('elementId',{}).get('guid','').lower()]
+    import math
+    if command=='MoveElements':
+        vector=row.get('moveVector',{})
+        if (set(row)!={'elementId','moveVector','copy'} or row['copy'] is not False or
+                set(vector)!={'x','y','z'} or any(type(v) not in (int,float) or not math.isfinite(v) for v in vector.values())):
+            raise ValueError('MODEL_MOVE_REQUIRES_EXPLICIT_OWNED_TRANSFORM_NO_COPY')
+    elif command=='CreateSolidElementLinks':
+        ids=[row.get(k,{}).get('guid','').lower() for k in ['targetId','operatorId']]
+        if (set(row)!={'targetId','operatorId','operation','linkFlags'} or
+                row['operation']!='SubtractionUpwards' or
+                row['linkFlags']!={'inheritOperatorAttributes':False,'skipPolygonHoles':True} or ids[0]==ids[1]):
+            raise ValueError('MODEL_SEO_REQUIRES_EXPLICIT_UNDERSIDE_CONSTRUCTION_LINK')
+    elif command=='SetPropertyValuesOfElements':
+        value=row.get('propertyValue',{})
+        if (set(row)!={'elementId','propertyId','propertyValue'} or
+                not RUN._GUID.fullmatch(row.get('propertyId',{}).get('guid','')) or
+                set(value)!={'value'} or not isinstance(value['value'],str) or not value['value']):
+            raise ValueError('MODEL_ROLE_REQUIRES_EXPLICIT_NATIVE_ENUM_AND_PROPERTY_ID')
+    else:
+        fields=set(row)-{'elementId'}
+        allowed={'height'} if command=='ModifyWalls' else {'width','height'}
+        if not fields or not fields<=allowed or any(
+                type(row[k]) not in (int,float) or not math.isfinite(row[k]) or row[k]<=0 for k in fields):
+            raise ValueError('MODEL_EDIT_REQUIRES_SOURCE_DIMENSIONS')
+    if any(g not in owned or g in retained for g in ids):
+        raise ValueError('MODEL_EDIT_ONLY_NEW_OWNED_ELEMENTS')
+
+
+def prepare_building_parameter_edit(api,old_plan,created,new_intent,schema_path):
+    """Diff the existing authored graph into native edits; never recreate a host."""
+    verified=verify_model(api,old_plan,created)
+    if set(verified)!=set(s['id'] for s in old_plan['graph']['operations']):
+        raise ValueError('MODEL_EDIT_REQUIRES_COMPLETE_AUTHORED_SOURCE')
+    proposed=A.compile_authored_intent(new_intent,schema_path,api)
+    old={s['id']:s for s in old_plan['graph']['operations']}
+    new={s['id']:s for s in proposed['graph']['operations']}
+    if old.keys()!=new.keys():raise ValueError('MODEL_EDIT_CANNOT_ADD_REMOVE_OR_RECREATE_ELEMENTS')
+    operations=[]
+    for sid,before in old.items():
+        after=new[sid]
+        if before['command']!=after['command']:raise ValueError('MODEL_EDIT_TOOL_CHANGE_UNSUPPORTED')
+        a=next(iter(before['params'].values()))[0];b=next(iter(after['params'].values()))[0]
+        changed={k for k in a.keys()|b.keys() if a.get(k)!=b.get(k)}
+        if not changed:continue
+        guid=created[sid]['guid'];command=before['command']
+        if command=='CreateWalls' and changed=={'height'}:
+            native='ModifyWalls';params={'wallsWithDetails':[{'elementId':{'guid':guid},'height':b['height']}]}
+        elif command in {'CreateWindows','CreateDoors'} and changed<={'width','height'}:
+            native='Modify'+command[6:];key=command[6:].lower()+'WithDetails'
+            params={key:[{'elementId':{'guid':guid},**{k:b[k] for k in sorted(changed)}}]}
+        elif command=='CreateRoofs' and changed=={'level'}:
+            native='MoveElements';params={'elementsWithMoveVectors':[{'elementId':{'guid':guid},
+                'moveVector':{'x':0,'y':0,'z':b['level']-a['level']},'copy':False}]}
+        else:raise ValueError('MODEL_PARAMETER_EDIT_UNSUPPORTED:'+sid+':'+','.join(sorted(changed)))
+        operations.append({'id':sid,'command':native,'parameters':params})
+    if not operations:raise ValueError('MODEL_EDIT_NO_PARAMETER_CHANGE')
+    if old_plan['storyBindings']!=proposed['storyBindings']:
+        raise ValueError('MODEL_EDIT_GLOBAL_STORIES_REQUIRE_SEPARATE_PROJECT_SCOPE')
+    next_plan=copy.deepcopy(old_plan)
+    next_plan.update(graph=proposed['graph'],intent=copy.deepcopy(new_intent))
+    checked=A.SCENE.GRAPH.compile_graph(A.catalog_with_provenance(schema_path),
+        next_plan['graph'],runtime_version=RUN.EXPECTED_TAPIR)
+    next_plan['sourcePlanHash']=RUN.native_plan_hash(next_plan,checked['sourcePlanHash'])
+    payload={'schema':'APA_AUTHORED_MODEL_PARAMETER_EDIT_V1','oldPlanHash':old_plan['sourcePlanHash'],
+        'newPlan':next_plan,'created':verified,'operations':operations,'newCreates':0,
+        'guidPolicy':'PRESERVE_ALL_EXISTING','automaticRetry':False}
+    payload['sourceHash']=RUN.digest(payload)
+    return payload
+
+
+def execute_model_operation(writer,scene_id,command,parameters,source_hash,owned_guids,
+                            retained_signatures,verify_after,authorization_ref,saved_sha256):
+    """Delegate one exact model operation to the retained SceneWriter journal."""
+    from pathlib import Path
+    import hashlib
+    import archicad_connected_components as C
+    scope=model_operation_scope(command,parameters,source_hash,owned_guids,
+        retained_signatures,authorization_ref)
+    pre={'sourcePlanHash':source_hash,'binding':writer.guarded_binding(),
+        'integrationBindings':{'dependencies':{'modelOperation':scope}}}
+    def retained():
+        native=C.G.normalize_dump(writer.api('GetModelDumpV1',{}))
+        if C.retained_geometry_signatures(native,list(retained_signatures))!=retained_signatures:
+            raise ValueError('MODEL_RETAINED_GEOMETRY_CHANGED')
+        if not set(scope['ownedGuids'])<={e['guid'].lower() for e in native['elements']}:
+            raise ValueError('MODEL_OWNED_GUID_MISSING')
+        return native
+    def before():
+        if hashlib.sha256(Path(pre['binding']['path']).read_bytes()).hexdigest()!=saved_sha256:
+            raise ValueError('MODEL_SAVED_FILE_HASH_CHANGED')
+        native=retained()
+        if command=='SetPropertyValuesOfElements':
+            binding=resolve_structural_function(writer.api)
+            row=parameters['elementPropertyValues'][0]
+            if row['propertyId']!=binding['propertyId'] or row['propertyValue']['value'] not in binding['displayValues'].values():
+                raise ValueError('MODEL_STRUCTURAL_FUNCTION_DEFINITION_CHANGED')
+        return {'status':'NATIVE_RETAINED_MODEL_PASS','retainedCount':len(retained_signatures),
+            'inventoryCount':len(native['elements'])}
+    def after(reply,prior):
+        proof=verify_after(reply,prior)
+        if not isinstance(proof,dict) or not str(proof.get('status','')).endswith('PASS'):
+            raise ValueError('MODEL_INDEPENDENT_READBACK_REQUIRED')
+        retained()
+        return {**proof,'retainedGuidCount':len(retained_signatures)}
+    token=RUN.digest({'sceneId':scene_id,'sourcePlanHash':source_hash,'command':command,
+        'parameters':parameters,'target':pre['binding']})
+    return writer.execute_bound_operation(pre,scene_id,command,parameters,token,before,after)
+
+
+def resolve_structural_function(api):
+    """Read the installed built-in definition and localized enum display values."""
+    rows=api('API.GetPropertyIds',{'properties':[{'type':'BuiltIn',
+        'nonLocalizedName':'Category_StructuralFunction'}]})['properties']
+    if len(rows)!=1 or 'error' in rows[0]:raise ValueError('NATIVE_STRUCTURAL_FUNCTION_UNAVAILABLE')
+    prop=rows[0]['propertyId']
+    definition=api('API.GetDetailsOfProperties',{'properties':[{'propertyId':prop}]})['propertyDefinitions'][0]['propertyDefinition']
+    values={r['enumValue']['nonLocalizedValue']:r['enumValue']['displayValue'] for r in definition['possibleEnumValues']}
+    allowed={'LoadBearingElement','NonLoadBearingElement'}
+    if definition.get('isEditable') is not True or definition.get('type')!='singleEnum' or not allowed<=values.keys():
+        raise ValueError('NATIVE_STRUCTURAL_FUNCTION_NOT_EDITABLE_ENUM')
+    return {'propertyId':prop,'displayValues':{k:values[k] for k in allowed},
+        'definitionHash':RUN.digest(definition),'engineeringCapacity':'NOT_VERIFIED'}
+
+
+def assign_structural_functions(writer,plan,created,roles,retained_signatures,run_id,
+                                authorization_ref,saved_sha256):
+    verify_model(writer.api,plan,created)
+    binding=resolve_structural_function(writer.api);owned=[v['guid'] for v in created.values()]
+    proof={};writes=[]
+    for sid,role in roles.items():
+        if sid not in created or created[sid]['kind'] not in {'Wall','Slab','Roof'} or role not in binding['displayValues']:
+            raise ValueError('MODEL_ROLE_NOT_EXPLICIT_OWNED_STRUCTURAL_ELEMENT')
+        guid=created[sid]['guid'];value={'value':binding['displayValues'][role]}
+        def read(g=guid):
+            return writer.api('GetPropertyValuesOfElements',{'elements':[{'elementId':{'guid':g}}],
+                'properties':[{'propertyId':binding['propertyId']}]})['propertyValuesForElements'][0]['propertyValues'][0]['propertyValue']
+        if read()==value:
+            proof[sid]={'role':role,'nativeDisplay':value['value'],'reused':True};continue
+        params={'elementPropertyValues':[{'elementId':{'guid':guid},'propertyId':binding['propertyId'],'propertyValue':value}]}
+        def verify(*_,g=guid,expected=value):
+            actual=writer.api('GetPropertyValuesOfElements',{'elements':[{'elementId':{'guid':g}}],
+                'properties':[{'propertyId':binding['propertyId']}]})['propertyValuesForElements'][0]['propertyValues'][0]['propertyValue']
+            if actual!=expected:raise ValueError('NATIVE_STRUCTURAL_FUNCTION_VALUE_MISMATCH')
+            return {'status':'NATIVE_STRUCTURAL_FUNCTION_PASS','guid':g,'nativeValue':actual}
+        result=execute_model_operation(writer,run_id+'-'+sid,'SetPropertyValuesOfElements',params,
+            RUN.digest([plan['sourcePlanHash'],binding,sid,role]),owned,retained_signatures,verify,
+            authorization_ref,saved_sha256)
+        if result['status']!='PASS':raise ValueError('MODEL_ROLE_UNKNOWN_OUTCOME_STOP')
+        writes.append(result);proof[sid]={'role':role,'nativeDisplay':value['value'],'reused':False}
+    return {'status':'NATIVE_BUILDING_STRUCTURAL_FUNCTIONS_PASS','roles':proof,
+        'nativeWriteCount':len(writes),'propertyBinding':binding,'journalResults':writes,
+        'engineeringCapacity':'NOT_VERIFIED_EXPLICIT_TEST_ROLE_ASSIGNMENTS'}
+
+
+def complete_roof_junctions(writer,plan,created,retained_signatures,run_id,
+                            authorization_ref,saved_sha256):
+    """Native underside completion of one rectangular authored roof, no renderer.
+
+    Actual native lower contours supply the placement correction. Existing
+    complete SEO links are independently checked and reused without writes;
+    a partial or unexpected link set requires reconciliation, never replay.
+    """
+    import archicad_connected_components as C
+    import archicad_native_operations as N
+    verify_model(writer.api,plan,created)
+    roofs=[sid for sid,v in created.items() if v['kind']=='Roof']
+    if len(roofs)!=1:raise ValueError('MODEL_JUNCTION_REQUIRES_ONE_NATIVE_ROOF')
+    roof_id=roofs[0];roof_guid=created[roof_id]['guid'];floor=created[roof_id]['floorIndex']
+    targets=[sid for sid,v in created.items() if v['kind']=='Wall' and v['floorIndex']==floor]
+    if not targets:raise ValueError('MODEL_JUNCTION_HAS_NO_UPPER_WALLS')
+    owned=[v['guid'] for v in created.values()];updated=copy.deepcopy(plan);proofs={};writes=[]
+    def capture():
+        native=C.G.normalize_dump(writer.api('GetModelDumpV1',{}))
+        if C.retained_geometry_signatures(native,list(retained_signatures))!=retained_signatures:
+            raise ValueError('MODEL_RETAINED_GEOMETRY_CHANGED')
+        return {e['guid'].lower():e for e in native['elements']}
+    native=capture();roof=native[roof_guid.lower()]
+    if RUN.requested_details(writer.api,roof_guid)['details'].get('holes'):
+        raise ValueError('MODEL_ROOF_HOLE_POLICY_NOT_QUALIFIED')
+    link_counts={}
+    for sid in targets:
+        rows=writer.api('GetSolidElementLinks',{'elements':[{'elementId':{'guid':created[sid]['guid']}}]})['solidLinks']
+        links=[x for r in rows for x in r.get('solidLinksWithTheGivenTarget',[])]
+        if any(x.get('operatorId',{}).get('guid','').lower()!=roof_guid.lower() or
+                x.get('operation')!='SubtractionUpwards' for x in links):
+            raise ValueError('MODEL_JUNCTION_UNEXPECTED_EXISTING_LINK')
+        link_counts[sid]=len(links)
+    if any(link_counts.values()) and set(link_counts.values())!={1}:
+        raise ValueError('MODEL_JUNCTION_PARTIAL_SET_MANUAL_RECONCILIATION_REQUIRED')
+    already=all(v==1 for v in link_counts.values())
+    def coverage(current):
+        reports={}
+        for sid in targets:
+            cap,lower,overlap,top,plane=N.wall_roof_face_overlap(current[created[sid]['guid'].lower()],current[roof_guid.lower()])
+            missing=cap.difference(lower).area
+            if missing>1e-6:raise ValueError('MODEL_ROOF_DOES_NOT_COVER_COMPLETE_WALL_FOOTPRINT:'+sid)
+            reports[sid]={'expectedArea':cap.area/plane['normal'][2], 'uncoveredArea':missing}
+        return reports
+    if not already:
+        try:coverage(native)
+        except ValueError:
+            calibration=N.assess_single_plane_contour_candidate(roof,RUN.requested_details(writer.api,roof_guid))
+            dx,dy=calibration['memoToLowerFaceCentroidOffsetXY']
+            params={'elementsWithMoveVectors':[{'elementId':{'guid':roof_guid},
+                'moveVector':{'x':-dx,'y':-dy,'z':0},'copy':False}]}
+            def verify_alignment(*_):
+                checks=coverage(capture())
+                return {'status':'NATIVE_ROOF_LOWER_FOOTPRINT_ALIGNMENT_PASS','coverage':checks}
+            result=execute_model_operation(writer,run_id+'-align','MoveElements',params,
+                RUN.digest([plan['sourcePlanHash'],'align',params]),owned,retained_signatures,
+                verify_alignment,authorization_ref,saved_sha256)
+            if result['status']!='PASS':raise ValueError('MODEL_ALIGNMENT_UNKNOWN_OUTCOME_STOP')
+            writes.append(result)
+            data=next(s for s in updated['graph']['operations'] if s['id']==roof_id)['params']['roofsData'][0]
+            for point in data['polygonCoordinates']+list(data['pivotLine'].values()):
+                point['x']-=dx;point['y']-=dy
+            checked=A.SCENE.GRAPH.compile_graph(A.catalog_with_provenance(writer.schema_path),
+                updated['graph'],runtime_version=RUN.EXPECTED_TAPIR)
+            updated['sourcePlanHash']=RUN.native_plan_hash(updated,checked['sourcePlanHash'])
+    if already:
+        areas=plan.get('integrationBindings',{}).get('dependencies',{}).get('authoredRoofJunctions',{}).get('expectedContactAreas',{})
+        if set(areas)!=set(targets):
+            raise ValueError('MODEL_EXISTING_JUNCTION_SOURCE_AREAS_REQUIRED')
+        expectations={sid:{'expectedArea':areas[sid]} for sid in targets}
+    else:
+        expectations=coverage(capture())
+    for sid in targets:
+        target=created[sid]['guid'];current=capture();plane=N.roof_underside_plane(current[roof_guid.lower()])
+        area=expectations[sid]['expectedArea']
+        if already:
+            proofs[sid]=N.underside_contact_geometry(current[target.lower()],current[roof_guid.lower()],area,plane)
+            continue
+        before=N.element_body(writer.api,target)
+        params={'solidLinks':[{'targetId':{'guid':target},'operatorId':{'guid':roof_guid},
+            'operation':'SubtractionUpwards','linkFlags':{'inheritOperatorAttributes':False,'skipPolygonHoles':True}}]}
+        def verify(*_,t=target,b=before,a=area,p=plane):
+            return N.roof_bearing_seo_readback(writer.api,t,roof_guid,b,a,p)
+        result=execute_model_operation(writer,run_id+'-'+sid,'CreateSolidElementLinks',params,
+            RUN.digest([updated['sourcePlanHash'],'seo',params]),owned,retained_signatures,
+            verify,authorization_ref,saved_sha256)
+        if result['status']!='PASS':raise ValueError('MODEL_JUNCTION_UNKNOWN_OUTCOME_STOP')
+        writes.append(result);proofs[sid]=result['readback']
+    updated.setdefault('integrationBindings',{}).setdefault('dependencies',{})['authoredRoofJunctions']={
+        'roofStepId':roof_id,'targetStepIds':targets,'status':'NATIVE_UNDERSIDE_LINKS_VERIFIED',
+        'expectedContactAreas':{sid:v['expectedArea'] for sid,v in expectations.items()}}
+    return {'status':'NATIVE_BUILDING_ROOF_JUNCTIONS_PASS','plan':updated,'junctions':proofs,
+        'nativeWriteCount':len(writes),'reusedCompleteLinks':already,'journalResults':writes,
+        'engineeringAcceptance':'NOT_VERIFIED'}
+
+
+def finish_created_model(writer,plan,created,intent,retained_signatures,run_id,
+                         authorization_ref,saved_sha256):
+    """Complete only verified existing creation GUIDs after a read-stage failure.
+
+    No CreateWalls/Slabs/Roof or blind scene retry. Partial native relation
+    outcomes remain reconciliation gates in complete_roof_junctions.
+    """
+    verified=verify_model(writer.api,plan,created)
+    if set(verified)!=set(s['id'] for s in plan['graph']['operations']):
+        raise ValueError('MODEL_COMPLETION_REQUIRES_VERIFIED_COMPLETE_CREATION')
+    if {v['guid'].lower() for v in verified.values()} & set(retained_signatures):
+        raise ValueError('MODEL_COMPLETION_CANNOT_OWN_RETAINED_ELEMENTS')
+    result={'status':'NATIVE_AUTHORED_MODEL_COMPLETION_PASS','newCreationCalls':0,'plan':plan}
+    if intent.get('nativeRoofJunctions'):
+        junctions=complete_roof_junctions(writer,plan,verified,retained_signatures,
+            run_id+'-junctions',authorization_ref,saved_sha256)
+        result.update(plan=junctions['plan'],junctions=junctions)
+    if intent.get('structuralFunctions'):
+        result['roles']=assign_structural_functions(writer,result['plan'],verified,
+            intent['structuralFunctions'],retained_signatures,run_id+'-roles',authorization_ref,saved_sha256)
+    return result
 
 
 def prepare(api, intent, old_plan, old_created, journal, operation_id):

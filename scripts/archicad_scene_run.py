@@ -31,11 +31,12 @@ EXPECTED_TAPIR = "1.5.10"
 # other PLN, including protected APA_Pavilion_MVP_SUCCESS.pln and SyncGuids.
 APPROVED_SCRATCH_PATH = r"C:\LocalAI\APA_Test_House_01.pln"
 APPROVED_ISOLATED_WRITER_PATH = r"C:\LocalAI\APA_Isolated_Writer_Test_01.pln"
+_SAVED_COPY_AUTHORIZATION = None
 
 
 def bind_isolated_writer_pln(port, path=APPROVED_ISOLATED_WRITER_PATH):
     """Bind the user-authorized isolated writer test; no arbitrary path override."""
-    global PORT, EXPECTED_NAME, EXPECTED_PATH
+    global PORT, EXPECTED_NAME, EXPECTED_PATH, _SAVED_COPY_AUTHORIZATION
     if type(port) is not int or not 1 <= port <= 65535:
         raise ValueError("INVALID_TEST_PORT")
     if path != APPROVED_ISOLATED_WRITER_PATH:
@@ -43,6 +44,7 @@ def bind_isolated_writer_pln(port, path=APPROVED_ISOLATED_WRITER_PATH):
     PORT = port
     EXPECTED_PATH = APPROVED_ISOLATED_WRITER_PATH
     EXPECTED_NAME = "APA_Isolated_Writer_Test_01"
+    _SAVED_COPY_AUTHORIZATION = None
 
 
 def bind_authorized_saved_copy(port, path, name, saved_sha256, authorization_ref):
@@ -52,7 +54,7 @@ def bind_authorized_saved_copy(port, path, name, saved_sha256, authorization_ref
     saved-file hash. Identity and accepted GUID/body checks still run before
     every native mutation through the existing SceneWriter.
     """
-    global PORT, EXPECTED_NAME, EXPECTED_PATH
+    global PORT, EXPECTED_NAME, EXPECTED_PATH, _SAVED_COPY_AUTHORIZATION
     if type(port) is not int or not 1 <= port <= 65535:
         raise ValueError('INVALID_TEST_PORT')
     if (not isinstance(path,str) or not PureWindowsPath(path).is_absolute() or
@@ -64,6 +66,17 @@ def bind_authorized_saved_copy(port, path, name, saved_sha256, authorization_ref
     if hashlib.sha256(Path(path).read_bytes()).hexdigest()!=saved_sha256:
         raise ValueError('AUTHORIZED_SAVED_COPY_HASH_MISMATCH')
     PORT,EXPECTED_PATH,EXPECTED_NAME=port,path,name
+    _SAVED_COPY_AUTHORIZATION = {'path': path, 'sha256': saved_sha256,
+                                'authorizationRef': authorization_ref}
+
+
+def authorized_authored_target(path):
+    """Pure preview eligibility, not an execution grant or arbitrary override."""
+    if path in (APPROVED_SCRATCH_PATH, APPROVED_ISOLATED_WRITER_PATH):
+        return True
+    record = _SAVED_COPY_AUTHORIZATION
+    return bool(record and path == EXPECTED_PATH == record['path'] and
+        hashlib.sha256(Path(path).read_bytes()).hexdigest() == record['sha256'])
 
 
 def bind_approved_scratch_pln(port, path=APPROVED_SCRATCH_PATH):
@@ -183,6 +196,10 @@ def scan_for_existing_geometry(api, anchor_x, anchor_y, envelope=None):
             envelope["zMin"]-.1, envelope["zMax"]+.1)
     checked = 0
     nonspatial = 0
+    native_dump = None
+    native_elements = None
+    resultant_fallbacks = []
+    bodyless_external = []
     # Batch modestly; do not hold a massive JSON response in memory.
     for i in range(0, len(elements), 100):
         batch = elements[i:i+100]
@@ -209,7 +226,41 @@ def scan_for_existing_geometry(api, anchor_x, anchor_y, envelope=None):
                 raise ValueError("SPATIAL_SCAN_UNAVAILABLE: invalid 3D bbox")
             if (b["xMin"] > b["xMax"] or b["yMin"] > b["yMax"]
                     or b["zMin"] > b["zMax"]):
-                raise ValueError("SPATIAL_SCAN_UNAVAILABLE: inverted 3D bbox")
+                # The installed universal API returns empty sentinel XY extents
+                # for real Beam/Column segments. Use actual resultant bodies,
+                # not an invented box or a rewritten provider field.
+                if native_dump is None:
+                    native_dump = api('GetModelDumpV1', {})
+                    slots = native_dump.get('nativeBodySlots')
+                    body_ids = [v.get('nativeBodyIndex') for v in native_dump.get('bodies', [])]
+                    deleted = native_dump.get('deletedBodySlots', [])
+                    if (type(slots) is not int or native_dump.get('regenerated3D') is not True or
+                            native_dump.get('coordinateSystem') != 'ABSOLUTE_PROJECT_XYZ' or
+                            len(body_ids + deleted) != len(set(body_ids + deleted)) or
+                            set(body_ids + deleted) != set(range(1, slots + 1))):
+                        raise ValueError('SPATIAL_SCAN_UNAVAILABLE: incomplete native body slots')
+                    import archicad_authored_geometry as GEOMETRY
+                    native_elements = {e['guid'].lower(): e for e in
+                        GEOMETRY.normalize_dump(native_dump)['elements']}
+                guid = batch[index]['elementId']['guid'].lower()
+                element = native_elements.get(guid)
+                if not element:raise ValueError('SPATIAL_SCAN_UNAVAILABLE: missing native identity')
+                vertices = [v for body in element['bodies'] for v in body['vertices']]
+                if vertices:
+                    b = {axis + bound: fn(v[k] for v in vertices)
+                        for k, axis in enumerate(('x', 'y', 'z'))
+                        for bound, fn in [('Min', min), ('Max', max)]}
+                    resultant_fallbacks.append(guid)
+                elif (element.get('nativeTypeId') == 150 and
+                        all(b[a+'Min'] == 1e35 and b[a+'Max'] == -1e35 for a in ('x','y'))):
+                    # No semantic MEP/analytical classification is inferred.
+                    # Slot-complete native model and empty universal extent both
+                    # establish no available volumetric body. Preserve the GUID
+                    # and explicitly retain the native view/filter scope below.
+                    bodyless_external.append(guid)
+                    nonspatial += 1
+                    continue
+                else:raise ValueError('SPATIAL_SCAN_UNAVAILABLE: inverted 3D bbox')
             if (b["xMin"] <= highx and b["xMax"] >= lowx
                     and b["yMin"] <= highy and b["yMax"] >= lowy
                     and b["zMin"] <= highz and b["zMax"] >= lowz):
@@ -225,7 +276,11 @@ def scan_for_existing_geometry(api, anchor_x, anchor_y, envelope=None):
             nonspatial += len(unavailable)
     return {"nativeElementsInspected": checked+nonspatial,
             "volumetricBodiesChecked": checked,
-            "nonSpatialElementsVerified": nonspatial}
+            "nonSpatialElementsVerified": nonspatial - len(bodyless_external),
+            "resultantBodyBoundsFallbackGuids": resultant_fallbacks,
+            "bodylessExternalGuids": bodyless_external,
+            "bodylessExternalSemantics": 'NOT_VERIFIED_NO_TYPE_INFERENCE',
+            "geometryScope": native_dump.get('geometryScope') if native_dump else 'UNIVERSAL_NATIVE_BOUNDS'}
 
 
 def requested_details(api, guid):
@@ -542,12 +597,20 @@ class SceneWriter:
         No replay, second executor or automatic rollback.
         """
         documentation=preflight.get('integrationBindings',{}).get('dependencies',{}).get('documentationOperation')
+        model_scope=preflight.get('integrationBindings',{}).get('dependencies',{}).get('modelOperation')
+        if documentation is not None and model_scope is not None:
+            raise ValueError('EXACTLY_ONE_BOUNDED_OPERATION_SCOPE_REQUIRED')
+        model_command=False
+        if model_scope is not None:
+            from archicad_authored_extension import qualify_model_operation
+            qualify_model_operation(model_scope,command,parameters,preflight['sourcePlanHash'])
+            model_command=True
         document_command=False
         if documentation is not None:
             from archicad_bim_documentation import qualify_operation, DOCUMENT_COMMANDS
             qualify_operation(documentation,command,parameters,preflight['sourcePlanHash'])
             document_command=command in DOCUMENT_COMMANDS
-        if (not document_command and command not in {'ConnectMEPElements','ModifyMEPRoutingElements',
+        if (not document_command and not model_command and command not in {'ConnectMEPElements','ModifyMEPRoutingElements',
                             'CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks','ModifyMorphs','ModifyBeams','ModifyWalls','SetClassificationsOfElements','TrimElements'}
                 or not _SCENE_ID.fullmatch(scene_id) or not callable(verify_before) or not callable(verify_after)):
             raise ValueError('BOUNDED_OPERATION_ADAPTER_REQUIRED')
@@ -558,8 +621,8 @@ class SceneWriter:
                'CreateOpenings':'openingsData','CreateSolidElementLinks':'solidLinks','RemoveSolidElementLinks':'solidLinks','ModifyMorphs':'morphsWithDetails',
                'SetClassificationsOfElements':'elementClassifications','ModifyBeams':'beamsWithDetails','ModifyWalls':'wallsWithDetails','TrimElements':'elements'}
         rows=parameters.get(slots.get(command))
-        if not document_command and (not isinstance(rows,list) or len(rows)!=1):raise ValueError('BOUNDED_OPERATION_REQUIRES_SINGLE_NATIVE_TARGET')
-        if command=='ModifyWalls' and documentation is None:
+        if not document_command and not model_command and (not isinstance(rows,list) or len(rows)!=1):raise ValueError('BOUNDED_OPERATION_REQUIRES_SINGLE_NATIVE_TARGET')
+        if command=='ModifyWalls' and documentation is None and model_scope is None:
             repair=preflight.get('integrationBindings',{}).get('dependencies',{}).get('wallRoofRepair',{})
             candidates=repair.get('operationCandidates',[])
             if (repair.get('status')!='APPLICABLE_NOT_EXECUTED' or not repair.get('executionAllowed') or

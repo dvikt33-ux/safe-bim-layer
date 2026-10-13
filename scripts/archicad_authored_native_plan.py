@@ -21,7 +21,7 @@ import archicad_scene_run as RUN
 READS=frozenset({"GetProjectInfo","GetStories","GetAttributesByType"})
 
 
-def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None):
+def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junction_policy=None):
     """Native-schema validated single DAG, but never executable by this adapter."""
     if not callable(read_api):
         raise ValueError("EXPLICIT_READ_ONLY_NATIVE_SOURCE_REQUIRED")
@@ -52,6 +52,11 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None):
         raise ValueError("PROJECT_STORY_MAPPING_CHANGED_SINCE_CSE_READ")
     candidates=pack["selectedCseCandidates"]
     slab=next(x for x in candidates if x.get("role")=="floor-slab")
+    if junction_policy is not None and junction_policy != {
+            'schema': 'apa-native-junction-policy/1',
+            'slabFootprint': 'OUTER_WALL_FACE',
+            'intermediateWallTop': 'SLAB_UNDERSIDE'}:
+        raise ValueError('UNSUPPORTED_AUTHORED_JUNCTION_POLICY')
     if geometry["missingSlabCseStoryIds"]:
         raise ValueError("FLOOR_SLAB_CSE_REQUIRED_ALL_STORIES")
     material_name=slab["native"]["name"]
@@ -74,21 +79,37 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None):
         BUILD.xy(bounds["xMax"],bounds["yMax"]),
         BUILD.xy(bounds["xMin"],bounds["yMax"]),
     ]
-    for s in doc["stories"]:
+    for story_number,s in enumerate(doc["stories"]):
         sid=s["id"]
         native=story_map[sid]["nativeIndex"]
         # One authored footprint slab per storey; no guessed room partitions.
         step_id="native-slab-"+sid
+        walls=sorted((m for m in geometry["bearingLines"]
+                      if m["storyId"]==sid),key=lambda v:v["id"])
+        footprint=copy.deepcopy(bounds)
+        wall_height=heights[sid]
+        if junction_policy:
+            for field,direction in [('xMin','X'),('xMax','X'),('yMin','Y'),('yMax','Y')]:
+                boundary=[w for w in walls if w['direction']==direction and
+                    abs(w['constantCoordinate']-bounds[field])<1e-6]
+                if not boundary:raise ValueError('JUNCTION_POLICY_REQUIRES_RECTANGULAR_PERIMETER_WALLS')
+                margin=max(w['thicknessMeters']/2 for w in boundary)
+                footprint[field] += margin * (-1 if field.endswith('Min') else 1)
+            if story_number+1<len(doc['stories']):
+                wall_height-=slab['thicknessMeters']
+                if wall_height<=0:raise ValueError('SLAB_LEAVES_NO_CLEAR_WALL_HEIGHT')
+        slab_polygon=[BUILD.xy(footprint['xMin'],footprint['yMin']),
+            BUILD.xy(footprint['xMax'],footprint['yMin']),
+            BUILD.xy(footprint['xMax'],footprint['yMax']),
+            BUILD.xy(footprint['xMin'],footprint['yMax'])] if junction_policy else polygon
         ops.append(BUILD.step(step_id,"CreateSlabs",{
             # Tapir CreateSlabs level is absolute project Z; native details
             # return level relative to the home story and zCoordinate absolute.
             "level":float(s["level"]),"floorIndex":native,
             "thickness":slab["thicknessMeters"],
             "referencePlaneLocation":"Top",
-            "polygonCoordinates":polygon
+            "polygonCoordinates":slab_polygon
         }))
-        walls=sorted((m for m in geometry["bearingLines"]
-                      if m["storyId"]==sid),key=lambda v:v["id"])
         for wall in walls:
             if wall["direction"]=="X":
                 p1=BUILD.xy(wall["constantCoordinate"],wall["fromCoordinate"])
@@ -97,7 +118,7 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None):
                 p1=BUILD.xy(wall["fromCoordinate"],wall["constantCoordinate"])
                 p2=BUILD.xy(wall["toCoordinate"],wall["constantCoordinate"])
             ops.append(BUILD.step("native-"+wall["id"],"CreateWalls",
-                BUILD.wall(p1,p2,native,heights[sid],wall["thicknessMeters"])))
+                BUILD.wall(p1,p2,native,wall_height,wall["thicknessMeters"])))
     schema=Path(schema_path or RUN.DEFAULT_SCENE_SCHEMA)
     if not schema.is_file():
         raise ValueError("NATIVE_TAPIR_SCHEMA_MISSING")
@@ -155,8 +176,7 @@ def as_existing_scene_writer_preview(candidate):
             or candidate.get("liveWriteAuthorized") is not False
             or candidate.get("nativeWriteCalls")!=0):
         raise ValueError("UNTRUSTED_OR_AUTHORIZED_SOURCE_CANDIDATE")
-    if candidate.get("nativeTargetProjectPath") not in (
-            RUN.APPROVED_SCRATCH_PATH, RUN.APPROVED_ISOLATED_WRITER_PATH):
+    if not RUN.authorized_authored_target(candidate.get("nativeTargetProjectPath")):
         raise ValueError("WRITER_PREVIEW_ONLY_FOR_EXISTING_APPROVED_SCRATCH_PLN")
     schema=RUN.DEFAULT_SCENE_SCHEMA
     if (not schema.is_file() or
