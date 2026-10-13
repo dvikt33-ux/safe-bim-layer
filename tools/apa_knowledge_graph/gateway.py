@@ -14,7 +14,7 @@ import re
 import sys
 from urllib.parse import unquote, urlparse
 
-from graph import assert_index, canonical, fingerprint, task_card
+from graph import assert_index, canonical, fingerprint, task_card, configure_stdio
 from multidoc import document_bundle
 from sections import search as search_sections
 
@@ -268,6 +268,7 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
+    configure_stdio()
     try:
         main()
     except (ValueError, OSError, json.JSONDecodeError) as exc:
