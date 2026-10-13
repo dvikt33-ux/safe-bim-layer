@@ -1,0 +1,62 @@
+{
+  "cases": [
+    {
+      "case": "project",
+      "elapsedMs": 1418.495999998413,
+      "githubCalls": 2,
+      "responseChars": 2006,
+      "responseBytes": 2158,
+      "o200kBaseProxyTokens": 590
+    },
+    {
+      "case": "task",
+      "elapsedMs": 1315.8648000098765,
+      "githubCalls": 2,
+      "responseChars": 1212,
+      "responseBytes": 1248,
+      "o200kBaseProxyTokens": 396
+    },
+    {
+      "case": "artifact",
+      "elapsedMs": 1199.3535000365227,
+      "githubCalls": 2,
+      "responseChars": 1183,
+      "responseBytes": 1183,
+      "o200kBaseProxyTokens": 386
+    },
+    {
+      "case": "multidoc",
+      "elapsedMs": 1391.8003999860957,
+      "githubCalls": 2,
+      "responseChars": 1866,
+      "responseBytes": 1866,
+      "o200kBaseProxyTokens": 575
+    },
+    {
+      "case": "section",
+      "elapsedMs": 2876.5334999770857,
+      "githubCalls": 5,
+      "responseChars": 2180,
+      "responseBytes": 2242,
+      "o200kBaseProxyTokens": 662
+    }
+  ],
+  "rawPlanBytes": 286718,
+  "rawPlanProxyTokens": 77867,
+  "baselinePlanFileReadMs": 929.4701999751851,
+  "baselineGitHubCalls": 1,
+  "tokenizer": "tiktoken:o200k_base",
+  "actualModelBilledTokens": "NOT_MEASURED",
+  "quality": "Exact task/artifact/status/shared-reference oracle; not a broad semantic benchmark",
+  "warning": "Fresh GitHub verification adds calls; no universal token/call/latency saving claim. Cache build/source retrieval cost and actual MCP tool schema are separate.",
+  "sourceCorpusRevision": 128,
+  "registryOracle": {
+    "tasks": 91,
+    "artifacts": 173,
+    "sharedArtifactPairs": 40,
+    "failedExactLookups": 0
+  },
+  "falseAndMissedSemanticDependencies": "NOT_MEASURED_BROAD_SEMANTIC_BENCHMARK",
+  "negativeRelationshipTest": "Unreviewed caller SOURCE_VERIFIED label does not propagate; arbitrary relationships are not engineering evidence",
+  "historicalPR69Benchmarks": "PRESERVED_UNCHANGED_NO_MASS_BENCHMARK_REPEAT"
+}

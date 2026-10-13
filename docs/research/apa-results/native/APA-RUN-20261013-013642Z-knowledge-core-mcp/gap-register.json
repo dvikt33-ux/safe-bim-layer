@@ -1,0 +1,12 @@
+{
+  "substep": "APA-P70.A11.S03",
+  "status": "PARTIAL",
+  "documentationPackagePR70": "PRESERVED_587_REGRESSION_TESTS",
+  "stageI": "DONE",
+  "stageII_localMCP": "DONE",
+  "targetChatGPT": "NOT_VERIFIED_NOT_REGISTERED",
+  "next": "Operator account/workspace tunnel registration and actual ChatGPT apa_retrieve call; no deployment or credentials change in this package. Existing native gaps remain.",
+  "G01_G09": "EXISTING_REGISTER_UNCHANGED_REFER_TO_PRIOR_DOCUMENTATION_REGISTER",
+  "A11.S10": "BLOCKED_UNCHANGED",
+  "A07.S01": "NOT_CLOSED_DEPENDENCIES_RETAINED"
+}
