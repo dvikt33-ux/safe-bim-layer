@@ -48,6 +48,6 @@ This is a **216.79× text-token ratio for the exact query and two stated payload
 1. PR #69 remains DRAFT until independent review of source/provenance, root privilege, content injection and CI quality. No merge into product branches based on research-only tests.
 2. **Source trust and retrieval coverage are the next correctness bottleneck**, not adding another vector database. Review one real authoritative numeric chain before any plan/PLN writes.
 3. Run >=80 manually adjudicated APA multi-doc/impact queries across raw GitHub, exact graph+FTS, and candidate hybrid reranker, reporting total model tokens per correct answer. Benchmarks above are a narrow proof-of-mechanism only.
-4. Existing research [TASK_PROPOSAL_V1](../control/proposals/APA-CAND-20261013-knowledge-impact-gateway.md) awaits independent `TASK_REVIEW_V1`. Do not alter `PROJECT_PLAN.json`, `IN_PROGRESS` claims, controller dispatch, main, PLN or APX.
+4. Existing research [TASK_PROPOSAL_V1](../../control/proposals/APA-CAND-20261013-knowledge-impact-gateway.md) awaits independent `TASK_REVIEW_V1`. Do not alter `PROJECT_PLAN.json`, `IN_PROGRESS` claims, controller dispatch, main, PLN or APX.
 
 **Artifact itself is source-backed research persistence with GitHub readback, not a V2 publisher receipt; no S-ID is made DONE here.**
