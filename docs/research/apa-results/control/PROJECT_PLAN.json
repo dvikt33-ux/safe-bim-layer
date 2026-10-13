@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 136,
+  "revision": 137,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -1377,6 +1377,78 @@
     "ART-P70-A11-S03-MODEL-FIRST-RECEIPT74-20261013": {
       "id": "ART-P70-A11-S03-MODEL-FIRST-RECEIPT74-20261013",
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261013-121018Z-model-first-building.json",
+      "kind": "RECEIPT",
+      "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
+    },
+    "ART-P70-A11-S03-NATIVE-SPATIAL-PR75-20261013": {
+      "id": "ART-P70-A11-S03-NATIVE-SPATIAL-PR75-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/75",
+      "kind": "CODE",
+      "verification": "EXACT_PR74_CHAIN_668_APA_102_UPSTREAM_WINDOWS_LINUX_PASS_17_BLOBS_MATCH"
+    },
+    "ART-P70-A11-S03-NATIVE-SPATIAL-MODEL-20261013": {
+      "id": "ART-P70-A11-S03-NATIVE-SPATIAL-MODEL-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/native-readback.json",
+      "kind": "TEST_RESULT",
+      "verification": "LIVE_PASS_143_NATIVE_IDENTITIES_22_PRIMARY_ORIGINAL168_SAVED_LIVE_UNCHANGED"
+    },
+    "ART-P70-A11-S03-NATIVE-SPATIAL-STORIES-20261013": {
+      "id": "ART-P70-A11-S03-NATIVE-SPATIAL-STORIES-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/native-stories-and-dependencies.json",
+      "kind": "TEST_RESULT",
+      "verification": "LIVE_PASS_GLOBAL_STORY_INSERT_EDIT_3_TO_3.3_FLOOR_IDS_5_WALL_4_HOSTED_SILL_CORRECTIONS"
+    },
+    "ART-P70-A11-S03-NATIVE-SPATIAL-CONTACT-20261013": {
+      "id": "ART-P70-A11-S03-NATIVE-SPATIAL-CONTACT-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/geometry-and-connections.json",
+      "kind": "TEST_RESULT",
+      "verification": "LIVE_PASS_22_ONE_PHYSICAL_COMPONENT_NATIVE_STAIR_SLAB_CONTACT_AND_MEASURED_VOID"
+    },
+    "ART-P70-A11-S03-NATIVE-SPATIAL-STAIR-20261013": {
+      "id": "ART-P70-A11-S03-NATIVE-SPATIAL-STAIR-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/native-stair-source-and-readback.json",
+      "kind": "TEST_RESULT",
+      "verification": "LIVE_NATIVE_STAIR_SOURCE_GOING_0.35_TO_0.32_NOT_VERIFIED_NO_LOCK_OR_MODIFY_CONTRACT"
+    },
+    "ART-P70-A11-S03-NATIVE-SPATIAL-PERSISTENCE-20261013": {
+      "id": "ART-P70-A11-S03-NATIVE-SPATIAL-PERSISTENCE-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/save-open-and-replay.json",
+      "kind": "TEST_RESULT",
+      "verification": "LIVE_PASS_FINAL_SAVE_OPEN_143_SIGNATURES_ZERO_STAIR_REPLAY_WRITES"
+    },
+    "ART-P70-A11-S03-NATIVE-SPATIAL-GRID-20261013": {
+      "id": "ART-P70-A11-S03-NATIVE-SPATIAL-GRID-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/native-grid-sdk-build.json",
+      "kind": "TEST_RESULT",
+      "verification": "SDK29_SOURCE_COMPILE_PASS_NOT_INSTALLED_GRID_RUNTIME_BLOCKED_NO_NATIVE_AXES"
+    },
+    "ART-P70-A11-S03-NATIVE-SPATIAL-JOURNAL-20261013": {
+      "id": "ART-P70-A11-S03-NATIVE-SPATIAL-JOURNAL-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/journal-reconciliation.json",
+      "kind": "TEST_RESULT",
+      "verification": "NO_BLIND_NATIVE_RETRIES_UNKNOWN_LEDGER_RETAINED_INDEPENDENT_RECONCILIATION"
+    },
+    "ART-P70-A11-S03-NATIVE-SPATIAL-GAP-20261013": {
+      "id": "ART-P70-A11-S03-NATIVE-SPATIAL-GAP-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/gap-register.json",
+      "kind": "DATASET",
+      "verification": "PR74_G01_G09_NORMS_DOCUMENTATION_HISTORY_RETAINED_CURRENT_NATIVE_SPATIAL_LIMITS"
+    },
+    "ART-P70-A11-S03-NATIVE-SPATIAL-CORE-KG-20261013": {
+      "id": "ART-P70-A11-S03-NATIVE-SPATIAL-CORE-KG-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/core-knowledge-query.json",
+      "kind": "TEST_RESULT",
+      "verification": "MAIN_APA_READ_ONLY_GITHUB_CURRENT134_BEFORE_CAS135_IMPLEMENTATION_UNCHANGED"
+    },
+    "ART-P70-A11-S03-NATIVE-SPATIAL-REPORT75-20261013": {
+      "id": "ART-P70-A11-S03-NATIVE-SPATIAL-REPORT75-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-165220Z-native-spatial/REPORT.md",
+      "kind": "REPORT",
+      "verification": "DONE_PUBLISHED_GITHUB_BYTE_READBACK_VERIFIED"
+    },
+    "ART-P70-A11-S03-NATIVE-SPATIAL-RECEIPT75-20261013": {
+      "id": "ART-P70-A11-S03-NATIVE-SPATIAL-RECEIPT75-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261013-165220Z-native-spatial.json",
       "kind": "RECEIPT",
       "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
     }
@@ -3954,7 +4026,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -4063,12 +4135,21 @@
         "Two distinct clear-zone21-element scenarios verified. Public orchestrator createdall21successfully then failedread-onlyGetSolidElementLinks allowance. Fixedrouter and independently reconciledcomplete existingGUIDset with publicfinish_created_model, neverrepeatedCreate. Partial/unexpectedSEO sets remainmanualreconciliation, complete links and source areas persisted. Final completionreuse0Creates/0SEO/0propertywrites and168signaturesunchanged.",
         "Final model168mainGUIDs saved/reopened with independent all168body/material/story signatures. Original126includes accepted121/109 preserved, editedprototype147 preserved. Primarysecondbuilding21oneconnectedcomponent and nointernal/new-to-retained nativevolume collisions. Additional firstprototype21vsoriginal126 nativecollision query zero. Historical diagnosticMorph/roof collision retained. NativeUI inspection notperformed; availablebody/regeneratedview/filter scope explicit.",
         "Nativeaxes blocked:installedCreateObjects lacksSDKGridElement variationcontract; genericStructuralGridObject notacceptednativeGridtool. Globalstoryediting requires separatelyauthorizedstory-isolatedproject toprotectoriginalgeometry. SinglePlaneRoof contour/slope edits unqualified. NewhostedDoor/Windowvoidsverified; noGenericOpening/Staircreated; sourceStairrequirement remainsNOT_VERIFIED. RequestedSEOskipPolygonHolestrue readsfalse; holes rejected andflagNOT_VERIFIED. BodylessExternal semanticsNOT_VERIFIED. These are model-first acceptance gaps, not changes to historicalDONE criteria.",
-        "Existing plans/Sections/Elevations/PDF/CSV and PR73 code preserved; cancelledmultisheet expansion notcontinued. Normative/search/KnowledgeGraphimplementation/APX/main/master unchanged. Actual mainorchestrator read-onlyKnowledgeGraphquery atGitHubcurrentplan133. A11.S03PARTIAL/A07dependencies/S10BLOCKED preserved. Next:supportednativeaxescontract and separatelyauthorizedstory-isolatedcreate/editcycle, then broaderqualifiedhost/Roofedits and sourceStair."
+        "Existing plans/Sections/Elevations/PDF/CSV and PR73 code preserved; cancelledmultisheet expansion notcontinued. Normative/search/KnowledgeGraphimplementation/APX/main/master unchanged. Actual mainorchestrator read-onlyKnowledgeGraphquery atGitHubcurrentplan133. A11.S03PARTIAL/A07dependencies/S10BLOCKED preserved. Next:supportednativeaxescontract and separatelyauthorizedstory-isolatedcreate/editcycle, then broaderqualifiedhost/Roofedits and sourceStair.",
+        "Native spatial continuation published in draft PR75 head 8ee3fcd89efa5220dc4d1ceb4fb92a26e0d8c07f on exact PR74 base 5a3a9201a715a5528c93bed4a5318e2acb32eea7. 30 new tests; 668/668 APA Windows host and Windows/Linux CI 38416422147 PASS, 102 upstream tests and actual core/MCP smoke each. All 17 code blobs and processed canonical evidence/report/receipt match GitHub. Initial Linux synthetic target-path test corrected; no native replay.",
+        "Fresh separately authorized story-isolated project initially contains 20 native template marker/Elevation references and zero available physical bodies. Same-template shared GUIDs were initially misclassified as copied model; interpretation corrected by native body/library readback. All 20 references preserved. Previous 168 accepted model signatures and saved bytes independently unchanged.",
+        "Native SetStories inserts actual datum story ID4 while preserving floor IDs1/2/3. Existing generator creates 21 native elements in isolated project. Real global height change 3.0 -> 3.3m produces native levels 0/3.3/6.3/9.3m: two occupied floors plus two datum stories. Upper Walls/Slab/Roof move through global stories, not Z-only MoveElements. Five lower Walls change 2.8 -> 3.1m under 0.2mSlab. Four upper Window sills left at0.7m are restored to authored1.0m by exact ModifyWindows, preservingGUID/host. ZeroCreate/MoveElements during height edit; five actual sloped Roof contacts and nativeSEO remain.",
+        "One true native concrete Stair from installed source Favorite connects floors0/3.3m. Source width1m/20risers/preferred going0.35m and derived test riser0.165m are explicit test data. Actual native20Risers/20Treads/1Structure plus60auxiliary Objects. One nativeSlab hole derives actual1x6.4mBREP footprint. Slab outer ring/GUID/material/floor/thickness preserved by semantic native-ring comparison. Real upperSlab contact0.3342017047m2, zero upperSlab nativevolume collision; intentional lower foot0.1membed recorded separately from engineering capacity.",
+        "Native Stair solver changes requested going0.35 -> 0.32m. Official precise property readback gives going0.32/riser0.165/width1/line length6.4; rounded localized strings are not numeric acceptance. Source-going NOT_VERIFIED, installed contract lacks going-lock and nativeStair baseline/parameter Modify. Favorite export-7003 wrote mainXML scalar data but completeFavorite/GDL bundle remainsNOT_VERIFIED. Ten auxiliary Object owner GUIDs outside availabledump remainNOT_VERIFIED.",
+        "Final new saved revision Save/Open both return nativePASS under120sload timeout. All143identities/signatures persist:20template+21building+102Stair-related IDs (1root/41parts/60auxiliaryObjects). Twenty-two primary elements form one actual physical component by existing BREP/host/NetworkX logic; no other architectural volume collisions. Original168saved/live unchanged. ExistingStairpacket replay fails on baseline before anywrite. NoMorph/secondexecutor/nativepreferences change.",
+        "TrueGrid runtime BLOCKED: installedCreateObjects has no Grid tool variation contract. Source-only GetNativeGridDefaultsV1 uses SDK29API_ObjectID+APIVarId_GridElement actual defaults and parameter names, compiles C++20, registers through existing overlay. NoAPXinstalled/noaxescreated/fullAPXlinking notclaimed; unrelated documentation extended-pen compile gap left untouched. Minimum runtime: nativeGrid variation/defaultparameterread/create/readback/stableGUIDedit. Semantic BIMGraphaxes retained.",
+        "Historical UNKNOWN ledger rows preserved. Local Wall router refusal proved zero native dispatch before distinct reconciled scoped corrections. First41Open30s timeout independently reconciled without blind retry. One successful nativeSlab-hole write had literal-contour callback failure; actual rotated/closed/quantized contour, BREP and contacts independently proved without ModifySlabs repetition. Final143Save/Open has native repliesPASS. Private UTF8 story-label recovery recorded explicitly.",
+        "Canonical single task A11.S03 staysPARTIAL; historicalDONE/A07dependencies/S10BLOCKED preserved. Existing documentation/normative/KG/search/main/master/APX unchanged. Mainorchestrator read-only KnowledgeGraph used GitHub-current134 before CASclaim135; publication rechecks owncurrentclaim. Next: qualify trueGrid runtime and strictStairgoing edit using existingSDK overlay; installing changedAPX requires separate permission. Preserve original168and accepted143 and never replay creation."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
-      "owner": "work-native-spatial-20261013",
-      "lease_until": "2026-10-13T18:51:43Z",
-      "claim_ref": "APA-CLAIM-NATIVE-SPATIAL-20261013T123258Z",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
@@ -4146,7 +4227,19 @@
         "ART-P70-A11-S03-MODEL-FIRST-GAP-20261013",
         "ART-P70-A11-S03-MODEL-FIRST-CORE-KG-20261013",
         "ART-P70-A11-S03-MODEL-FIRST-REPORT74-20261013",
-        "ART-P70-A11-S03-MODEL-FIRST-RECEIPT74-20261013"
+        "ART-P70-A11-S03-MODEL-FIRST-RECEIPT74-20261013",
+        "ART-P70-A11-S03-NATIVE-SPATIAL-PR75-20261013",
+        "ART-P70-A11-S03-NATIVE-SPATIAL-MODEL-20261013",
+        "ART-P70-A11-S03-NATIVE-SPATIAL-STORIES-20261013",
+        "ART-P70-A11-S03-NATIVE-SPATIAL-CONTACT-20261013",
+        "ART-P70-A11-S03-NATIVE-SPATIAL-STAIR-20261013",
+        "ART-P70-A11-S03-NATIVE-SPATIAL-PERSISTENCE-20261013",
+        "ART-P70-A11-S03-NATIVE-SPATIAL-GRID-20261013",
+        "ART-P70-A11-S03-NATIVE-SPATIAL-JOURNAL-20261013",
+        "ART-P70-A11-S03-NATIVE-SPATIAL-GAP-20261013",
+        "ART-P70-A11-S03-NATIVE-SPATIAL-CORE-KG-20261013",
+        "ART-P70-A11-S03-NATIVE-SPATIAL-REPORT75-20261013",
+        "ART-P70-A11-S03-NATIVE-SPATIAL-RECEIPT75-20261013"
       ],
       "blocked_reason": null
     },
@@ -4925,7 +5018,19 @@
         "ART-P70-A11-S03-MODEL-FIRST-GAP-20261013",
         "ART-P70-A11-S03-MODEL-FIRST-CORE-KG-20261013",
         "ART-P70-A11-S03-MODEL-FIRST-REPORT74-20261013",
-        "ART-P70-A11-S03-MODEL-FIRST-RECEIPT74-20261013"
+        "ART-P70-A11-S03-MODEL-FIRST-RECEIPT74-20261013",
+        "ART-P70-A11-S03-NATIVE-SPATIAL-PR75-20261013",
+        "ART-P70-A11-S03-NATIVE-SPATIAL-MODEL-20261013",
+        "ART-P70-A11-S03-NATIVE-SPATIAL-STORIES-20261013",
+        "ART-P70-A11-S03-NATIVE-SPATIAL-CONTACT-20261013",
+        "ART-P70-A11-S03-NATIVE-SPATIAL-STAIR-20261013",
+        "ART-P70-A11-S03-NATIVE-SPATIAL-PERSISTENCE-20261013",
+        "ART-P70-A11-S03-NATIVE-SPATIAL-GRID-20261013",
+        "ART-P70-A11-S03-NATIVE-SPATIAL-JOURNAL-20261013",
+        "ART-P70-A11-S03-NATIVE-SPATIAL-GAP-20261013",
+        "ART-P70-A11-S03-NATIVE-SPATIAL-CORE-KG-20261013",
+        "ART-P70-A11-S03-NATIVE-SPATIAL-REPORT75-20261013",
+        "ART-P70-A11-S03-NATIVE-SPATIAL-RECEIPT75-20261013"
       ],
       "synthesis_state": "PARTIAL",
       "owner": null

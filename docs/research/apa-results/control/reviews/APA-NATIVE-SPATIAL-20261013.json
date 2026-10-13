@@ -1,0 +1,19 @@
+{
+  "status": "PUBLISHED_PARTIAL_NATIVE_SPATIAL_ACCEPTANCE",
+  "revision": 137,
+  "codeHead": "8ee3fcd89efa5220dc4d1ceb4fb92a26e0d8c07f",
+  "original168Preserved": true,
+  "current143SaveOpen": true,
+  "primaryElements": 22,
+  "physicalComponents": 1,
+  "nativeStories": "GLOBAL_STORY_INSERT_AND_HEIGHT_EDIT_LIVE_PASS",
+  "nativeStair": "ACTUAL_NATIVE_GEOMETRY_CONNECTION_LIVE_PASS",
+  "strictSourceGoing": "NOT_VERIFIED_NATIVE_0.35_TO_0.32",
+  "nativeGrid": "BLOCKED_RUNTIME_SOURCE_ONLY_SDK_COMPILE_PASS",
+  "historicalTaskIdsPreserved": 91,
+  "otherTasksUnchanged": true,
+  "priorEvidencePreserved": true,
+  "sourcePLNPublished": false,
+  "installedAPXChanged": false,
+  "engineeringAcceptance": "NOT_VERIFIED"
+}
