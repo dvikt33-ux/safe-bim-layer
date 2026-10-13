@@ -97,3 +97,34 @@ jobs:
             --index "${RUNNER_TEMP}/apa-knowledge-index.json" \
             --artifacts ART-APA-RU-JUNCTION-NORMS ART-APA-CSE-RESEARCH \
             --max-tasks 5
+  windows-compatibility:
+    if: github.repository == 'dvikt33-ux/safe-bim-layer'
+    runs-on: windows-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout no writable token
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Windows Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install exact optional dependencies
+        run: python -m pip install PyYAML==6.0.3 tiktoken==0.14.0 mcp==2.3.0
+      - name: Run Windows tests
+        run: python -m unittest discover -s tools/apa_knowledge_graph/tests -v
+      - name: Build and query Windows local indexes
+        shell: pwsh
+        run: |
+          $plan="docs/research/apa-results/control/PROJECT_PLAN.json"
+          $graph=Join-Path $env:RUNNER_TEMP "apa-graph-win.json"
+          $sections=Join-Path $env:RUNNER_TEMP "apa-sections-win.sqlite"
+          python tools/apa_knowledge_graph/graph.py build --plan $plan --out $graph
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+          python tools/apa_knowledge_graph/sections.py build --root docs/research/apa-results --out $sections
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+          python tools/apa_knowledge_graph/gateway.py --plan $plan --index $graph --query "что делать дальше" --mode plan --max-chars 1600
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+          python tools/apa_knowledge_graph/gateway.py --plan $plan --index $graph --sections $sections --repo-root . --query "кровли" --source-class PROJECT_CONTROL --max-chars 1600
+          if ($LASTEXITCODE -ne 0) { exit 1 }
