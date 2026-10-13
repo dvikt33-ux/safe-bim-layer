@@ -1,0 +1,66 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-GRID-LIVE-REPLAY",
+      "evidence_ids": [
+        "EV-CI",
+        "EV-REPLAY"
+      ],
+      "statement": "Same SceneWriter SQLite exact-Stair completion reuse and drift gates pass697 host/Windows/Linux tests; live reuse not verified.",
+      "status": "OFFLINE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-GRID-LIVE-PRESERVE",
+      "evidence_ids": [
+        "EV-PRESERVE",
+        "EV-DEPLOY"
+      ],
+      "statement": "Independent readback after two UI module Save/Open cycles preserves143GUID/geometry/material/story signatures and original168saved bytes; original runtime restored.",
+      "status": "LIVE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-GRID-LIVE-NATIVE",
+      "evidence_ids": [
+        "EV-DEPLOY"
+      ],
+      "statement": "Candidate activation rejected for ambiguous manager path; no newGrid or exactStair sample created; required native acceptance not verified.",
+      "status": "NOT_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-CI",
+      "kind": "TEST_RESULT",
+      "sha256": "7086079766b4a071b5dbc85b995f5d9bb98ee2b5b5dd2f9459488fdfc2724d55",
+      "source_revision": "c1b4e1a565bcd903273933d8917608df156ac600",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-200350Z-grid-stair-live-checkpoint/ci.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-REPLAY",
+      "kind": "TEST_RESULT",
+      "sha256": "8f6552bd1619324132dff14eafc8b53528efa44a300a50d8c7021ee65105f932",
+      "source_revision": "c1b4e1a565bcd903273933d8917608df156ac600",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-200350Z-grid-stair-live-checkpoint/stair-repeatability.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-PRESERVE",
+      "kind": "TEST_RESULT",
+      "sha256": "0f0ad71cfe2c3241a88ddac31bdcb40e0fbcaba5f6bc7c73047daa4538a506a0",
+      "source_revision": "c1b4e1a565bcd903273933d8917608df156ac600",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-200350Z-grid-stair-live-checkpoint/preservation-save-open.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-DEPLOY",
+      "kind": "TEST_RESULT",
+      "sha256": "3d24b55789900eb15b7ae6396039c5020c0b01f152b3db68b152d680ba40996d",
+      "source_revision": "c1b4e1a565bcd903273933d8917608df156ac600",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-200350Z-grid-stair-live-checkpoint/deployment-reconciliation.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261013-200350Z-grid-stair-live-checkpoint",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}
