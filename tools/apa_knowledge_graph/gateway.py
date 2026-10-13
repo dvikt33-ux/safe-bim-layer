@@ -116,8 +116,8 @@ def retrieve(index, plan, section_db, repo_root, repo, query, mode="research",
     verify_plan(index, plan)
     if not isinstance(query, str) or not 1 <= len(query.strip()) <= MAX_QUERY_CHARS:
         raise ValueError("Query length must be 1..280 characters")
-    if mode not in ("research", "next", "normative"):
-        raise ValueError("Allowed modes: research, next, normative")
+    if mode not in ("research", "next", "normative", "plan"):
+        raise ValueError("Allowed modes: research, next, normative, plan")
     if not isinstance(limit, int) or not 1 <= limit <= 10:
         raise ValueError("limit 1..10")
     ids = SID.findall(query.upper())
@@ -131,6 +131,20 @@ def retrieve(index, plan, section_db, repo_root, repo, query, mode="research",
         "normative_authority": False,
         "limitations": "Cross-document mentions are NOT proven field lineage; verify source edition and rule gates."
     }
+    if mode == "plan" and not ids and not aids:
+        # Deterministic task triage reads only the plan, not Markdown.
+        # These are potential next tasks, NEVER an authorization or claim.
+        eligible = [(tid, item) for tid, item in index["tasks"].items()
+                    if ready_to_suggest(index, tid)]
+        eligible.sort(key=lambda pair: (pair[1]["priority"] if isinstance(pair[1]["priority"], (int, float)) else 999,
+                                        0 if pair[1]["status"] == "READY" else 1, pair[0]))
+        cards = [{"task_id": tid, "title": item["title"], "priority": item["priority"],
+                  "status": item["status"], "requires_claim": True,
+                  "relation": "SCHEDULE_CANDIDATE_NOT_AUTHORIZED"} for tid, item in eligible]
+        return compact_fit({**base, "retrieval": "DETERMINISTIC_PLAN_CANDIDATES",
+                            "task_claim": "NEVER_AUTOMATIC", "plan_scope": "CHECKOUT_SNAPSHOT_ONLY",
+                            "warning": "Controller may require fresh remote plan/lease and independent audit."},
+                           cards[:limit], max_chars)
     if ids:
         cards = [task_card(index, sid, include_artifacts=False) for sid in dict.fromkeys(ids)]
         return compact_fit({**base, "retrieval": "EXACT_TASK", "task_claim": "NEVER_AUTOMATIC"},
@@ -235,7 +249,7 @@ def main(argv=None):
     parser.add_argument("--repo-root", type=Path)
     parser.add_argument("--repo", default="dvikt33-ux/safe-bim-layer")
     parser.add_argument("--query", required=True)
-    parser.add_argument("--mode", choices=("research", "next", "normative"), default="research")
+    parser.add_argument("--mode", choices=("research", "next", "normative", "plan"), default="research")
     parser.add_argument("--source-class", choices=("ARCHIVED_SOURCE", "RESEARCH_RUN",
                                                    "PROJECT_CONTROL", "OTHER_DOCUMENT"))
     parser.add_argument("--limit", type=int, default=4)
@@ -243,7 +257,7 @@ def main(argv=None):
     a = parser.parse_args(argv)
     plan = json.loads(a.plan.read_text(encoding="utf-8"))
     index = json.loads(a.index.read_text(encoding="utf-8"))
-    if not SID.search(a.query.upper()) and not ART.search(a.query.upper()):
+    if a.mode != "plan" and not SID.search(a.query.upper()) and not ART.search(a.query.upper()):
         if a.sections is None or a.repo_root is None:
             parser.error("Free-text query requires --sections and --repo-root")
     result = retrieve(index, plan, a.sections, a.repo_root, a.repo, a.query,
