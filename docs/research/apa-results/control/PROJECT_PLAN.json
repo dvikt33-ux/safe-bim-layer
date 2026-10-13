@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 133,
+  "revision": 134,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -1313,6 +1313,72 @@
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/control/reviews/APA-MODEL-FIRST-20261013.md",
       "kind": "REPORT",
       "verification": "SOURCE_READ_CANCELLED_DOCUMENTATION_ZERO_NATIVE_WRITES_MODEL_FIRST_CRITERIA_NOT_DONE"
+    },
+    "ART-P70-A11-S03-MODEL-FIRST-PR74-20261013": {
+      "id": "ART-P70-A11-S03-MODEL-FIRST-PR74-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/74",
+      "kind": "CODE",
+      "verification": "EXACT_PR73_BASE_638_APA_102_UPSTREAM_WINDOWS_LINUX_PASS_TEN_BLOBS_MATCH"
+    },
+    "ART-P70-A11-S03-MODEL-FIRST-NATIVE-20261013": {
+      "id": "ART-P70-A11-S03-MODEL-FIRST-NATIVE-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-121018Z-model-first-building/native-readback.json",
+      "kind": "TEST_RESULT",
+      "verification": "LIVE_PASS_TWO_NATIVE21_SCENARIOS_SAVE_OPEN_ALL168_ORIGINAL126_PROTOTYPE147_UNCHANGED"
+    },
+    "ART-P70-A11-S03-MODEL-FIRST-GEOMETRY-20261013": {
+      "id": "ART-P70-A11-S03-MODEL-FIRST-GEOMETRY-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-121018Z-model-first-building/geometry-and-connections.json",
+      "kind": "TEST_RESULT",
+      "verification": "LIVE_PASS_CONNECTED21_ACTUAL_SLOPED_ROOF_CONTACTS5_NATIVE_VOLUME_COLLISIONS_ZERO"
+    },
+    "ART-P70-A11-S03-MODEL-FIRST-EDITS-20261013": {
+      "id": "ART-P70-A11-S03-MODEL-FIRST-EDITS-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-121018Z-model-first-building/parameter-edits.json",
+      "kind": "TEST_RESULT",
+      "verification": "LIVE_PASS_ROOF_LEVEL_FIVE_DEPENDENT_WALLS_WINDOW_WIDTH_HOST_BREP_GUIDS_RETAINED"
+    },
+    "ART-P70-A11-S03-MODEL-FIRST-ROLES-20261013": {
+      "id": "ART-P70-A11-S03-MODEL-FIRST-ROLES-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-121018Z-model-first-building/native-structural-functions.json",
+      "kind": "TEST_RESULT",
+      "verification": "LIVE_PASS_NATIVE8_BEARING_2_NONBEARING_TEST_ROLES_ENGINEERING_NOT_VERIFIED"
+    },
+    "ART-P70-A11-S03-MODEL-FIRST-REUSE-20261013": {
+      "id": "ART-P70-A11-S03-MODEL-FIRST-REUSE-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-121018Z-model-first-building/idempotence.json",
+      "kind": "TEST_RESULT",
+      "verification": "LIVE_PASS_COMPLETE_JUNCTION_PROPERTY_REUSE_ZERO_NATIVE_CREATES_WRITES"
+    },
+    "ART-P70-A11-S03-MODEL-FIRST-PROTOTYPE-CROSS-20261013": {
+      "id": "ART-P70-A11-S03-MODEL-FIRST-PROTOTYPE-CROSS-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/control/reviews/APA-MODEL-FIRST-PROTOTYPE-CROSS-20261013.json",
+      "kind": "TEST_RESULT",
+      "verification": "LIVE_PASS_FIRST21_AGAINST_ORIGINAL126_NATIVE_VOLUME_COLLISIONS_ZERO"
+    },
+    "ART-P70-A11-S03-MODEL-FIRST-GAP-20261013": {
+      "id": "ART-P70-A11-S03-MODEL-FIRST-GAP-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-121018Z-model-first-building/gap-register.json",
+      "kind": "DATASET",
+      "verification": "G01_G09_NORMS_DOCUMENTATION_HISTORY_PRESERVED_AXES_STORY_ROOF_STAIR_LIMITS_EXPLICIT"
+    },
+    "ART-P70-A11-S03-MODEL-FIRST-CORE-KG-20261013": {
+      "id": "ART-P70-A11-S03-MODEL-FIRST-CORE-KG-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-121018Z-model-first-building/core-knowledge-query.json",
+      "kind": "TEST_RESULT",
+      "verification": "MAIN_APA_ORCHESTRATOR_READ_ONLY_GITHUB_CURRENT133_NO_KG_CHANGES"
+    },
+    "ART-P70-A11-S03-MODEL-FIRST-REPORT74-20261013": {
+      "id": "ART-P70-A11-S03-MODEL-FIRST-REPORT74-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-121018Z-model-first-building/REPORT.md",
+      "kind": "REPORT",
+      "verification": "DONE_PUBLISHED_GITHUB_BYTE_READBACK_VERIFIED"
+    },
+    "ART-P70-A11-S03-MODEL-FIRST-RECEIPT74-20261013": {
+      "id": "ART-P70-A11-S03-MODEL-FIRST-RECEIPT74-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261013-121018Z-model-first-building.json",
+      "kind": "RECEIPT",
+      "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
     }
   },
   "tasks": {
@@ -3888,7 +3954,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -3989,12 +4055,20 @@
         "Layout ShowAllIn3D error-2130313109 uses the same writer for a view-only floor0 activation, exact identity/saved-byte checks and subsequent complete native-signature proof. Historical UNKNOWN_OUTCOME events kept and independently reconciled, no blind Create/Modify retry. AfterOpen Drawing fill caches initially absent; known-success update onlynewDrawings restored32/34contours.",
         "13native Schedule definitions discovered; native rowread/configure contracts unsupported. Existing six-type CSV specification adapter retained without duplication. Main APA orchestrator actually queried existing read-only Knowledge Graph with GitHub-current revision129 beforeclaim130. KG/search implementation and normative-system code/branches/policies unchanged.",
         "A11.S03 remainsPARTIAL; A07.S01 not closed and dependencies preserved; S10BLOCKED unchanged. No normative/engineering drawing acceptance. Next: supported native schedule row/configuration contract and complete vertical primitive/owner mapping; require actual rendered projection extent for all future facade placement acceptance.",
-        "User changed priority to MODEL_FIRST2026-10-13. Cancelled multi-sheet follow-on performed fresh126GUID/journal/identity read-only preflight and main APA Knowledge Graph query132, zero new native writes/artifacts. PR73 retained. New audited A11.S03 acceptance package creates/edits/verifies a complete separate native two-story building through existing generator/SceneWriter. Historical DONE_PUBLISHED criteria retained; no full-building DONE claim."
+        "User changed priority to MODEL_FIRST2026-10-13. Cancelled multi-sheet follow-on performed fresh126GUID/journal/identity read-only preflight and main APA Knowledge Graph query132, zero new native writes/artifacts. PR73 retained. New audited A11.S03 acceptance package creates/edits/verifies a complete separate native two-story building through existing generator/SceneWriter. Historical DONE_PUBLISHED criteria retained; no full-building DONE claim.",
+        "Model-first scope audit preserves historical DONE_PUBLISHED and cancelled documentation checkpoint. Draft PR74 head5a3a9201a715a5528c93bed4a5318e2acb32eea7 exact parentPR73 93557ed0cd59c471b0f903a03708ed88c8feb31b;10code blobs matchGitHub.15newtests;638/638APA Windows host/Windows/LinuxCI38394734173PASS;102upstream tests and actual core/MCP smoke each. Canonical native evidence/report/receipt and complete committed privacy scan verified.",
+        "Existing authored intent/BIMGraph/CSE/material pack/SceneWriter now creates one native21-element two-story test model:10Walls,2Slabs,6Windows,2Doors,1SinglePlaneRoof. NoMorph/newgenerator/secondexecutor. Actual storybindings0/3m; outerWall-face Slab footprint,0.2mSlab and lowerWall2.8m; upper editable uncutWall4m; testRoof slope0.05rad/thickness0.2m. Dimensions/materials/structural roles are explicit TEST inputs, not engineering design.",
+        "Actual native lowerRoof face/memo offset measured and corrected through an owned native translation. Five upperWalls receive SubtractionUpwardsSEO with actual sloped sharedface areas and native zero-volume collision proof. One connected component21using physicalBREPcontact/nativehost edges. Native Category_StructuralFunction actual editable enum resolved:8exteriorWalls bearing,2partitions nonbearing. Native readback afterSave/Open PASS; no structural-capacity inference.",
+        "SourceRoof level6.0->6.2m editsoneownedRoof withoutCreate; existingSEO makes all5upper resultantWall caps rise0.2m while memo.height4m remains. HostedWindow width1.2->1.4m preservesGUID/host and changes actualhostWallBREP. Existing snapshot/modelVersion delta6then2changednativefacts,0added/removedGUIDs. Exact sourceDiff scopes use sameSceneWriter/journal with retained126signature gates before each native write.",
+        "Two distinct clear-zone21-element scenarios verified. Public orchestrator createdall21successfully then failedread-onlyGetSolidElementLinks allowance. Fixedrouter and independently reconciledcomplete existingGUIDset with publicfinish_created_model, neverrepeatedCreate. Partial/unexpectedSEO sets remainmanualreconciliation, complete links and source areas persisted. Final completionreuse0Creates/0SEO/0propertywrites and168signaturesunchanged.",
+        "Final model168mainGUIDs saved/reopened with independent all168body/material/story signatures. Original126includes accepted121/109 preserved, editedprototype147 preserved. Primarysecondbuilding21oneconnectedcomponent and nointernal/new-to-retained nativevolume collisions. Additional firstprototype21vsoriginal126 nativecollision query zero. Historical diagnosticMorph/roof collision retained. NativeUI inspection notperformed; availablebody/regeneratedview/filter scope explicit.",
+        "Nativeaxes blocked:installedCreateObjects lacksSDKGridElement variationcontract; genericStructuralGridObject notacceptednativeGridtool. Globalstoryediting requires separatelyauthorizedstory-isolatedproject toprotectoriginalgeometry. SinglePlaneRoof contour/slope edits unqualified. NewhostedDoor/Windowvoidsverified; noGenericOpening/Staircreated; sourceStairrequirement remainsNOT_VERIFIED. RequestedSEOskipPolygonHolestrue readsfalse; holes rejected andflagNOT_VERIFIED. BodylessExternal semanticsNOT_VERIFIED. These are model-first acceptance gaps, not changes to historicalDONE criteria.",
+        "Existing plans/Sections/Elevations/PDF/CSV and PR73 code preserved; cancelledmultisheet expansion notcontinued. Normative/search/KnowledgeGraphimplementation/APX/main/master unchanged. Actual mainorchestrator read-onlyKnowledgeGraphquery atGitHubcurrentplan133. A11.S03PARTIAL/A07dependencies/S10BLOCKED preserved. Next:supportednativeaxescontract and separatelyauthorizedstory-isolatedcreate/editcycle, then broaderqualifiedhost/Roofedits and sourceStair."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
-      "owner": "work-model-first-building-20261013",
-      "lease_until": "2026-10-13T12:58:58Z",
-      "claim_ref": "APA-CLAIM-MODEL-FIRST-20261013T085858Z",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
@@ -4061,7 +4135,18 @@
         "ART-P70-A11-S03-NATIVE-DOC-CORE-KG-20261013",
         "ART-P70-A11-S03-NATIVE-DOC-REPORT73-20261013",
         "ART-P70-A11-S03-NATIVE-DOC-RECEIPT73-20261013",
-        "ART-P70-A11-S03-MODEL-FIRST-SCOPE-20261013"
+        "ART-P70-A11-S03-MODEL-FIRST-SCOPE-20261013",
+        "ART-P70-A11-S03-MODEL-FIRST-PR74-20261013",
+        "ART-P70-A11-S03-MODEL-FIRST-NATIVE-20261013",
+        "ART-P70-A11-S03-MODEL-FIRST-GEOMETRY-20261013",
+        "ART-P70-A11-S03-MODEL-FIRST-EDITS-20261013",
+        "ART-P70-A11-S03-MODEL-FIRST-ROLES-20261013",
+        "ART-P70-A11-S03-MODEL-FIRST-REUSE-20261013",
+        "ART-P70-A11-S03-MODEL-FIRST-PROTOTYPE-CROSS-20261013",
+        "ART-P70-A11-S03-MODEL-FIRST-GAP-20261013",
+        "ART-P70-A11-S03-MODEL-FIRST-CORE-KG-20261013",
+        "ART-P70-A11-S03-MODEL-FIRST-REPORT74-20261013",
+        "ART-P70-A11-S03-MODEL-FIRST-RECEIPT74-20261013"
       ],
       "blocked_reason": null
     },
@@ -4829,7 +4914,18 @@
         "ART-P70-A11-S03-NATIVE-DOC-CORE-KG-20261013",
         "ART-P70-A11-S03-NATIVE-DOC-REPORT73-20261013",
         "ART-P70-A11-S03-NATIVE-DOC-RECEIPT73-20261013",
-        "ART-P70-A11-S03-MODEL-FIRST-SCOPE-20261013"
+        "ART-P70-A11-S03-MODEL-FIRST-SCOPE-20261013",
+        "ART-P70-A11-S03-MODEL-FIRST-PR74-20261013",
+        "ART-P70-A11-S03-MODEL-FIRST-NATIVE-20261013",
+        "ART-P70-A11-S03-MODEL-FIRST-GEOMETRY-20261013",
+        "ART-P70-A11-S03-MODEL-FIRST-EDITS-20261013",
+        "ART-P70-A11-S03-MODEL-FIRST-ROLES-20261013",
+        "ART-P70-A11-S03-MODEL-FIRST-REUSE-20261013",
+        "ART-P70-A11-S03-MODEL-FIRST-PROTOTYPE-CROSS-20261013",
+        "ART-P70-A11-S03-MODEL-FIRST-GAP-20261013",
+        "ART-P70-A11-S03-MODEL-FIRST-CORE-KG-20261013",
+        "ART-P70-A11-S03-MODEL-FIRST-REPORT74-20261013",
+        "ART-P70-A11-S03-MODEL-FIRST-RECEIPT74-20261013"
       ],
       "synthesis_state": "PARTIAL",
       "owner": null
