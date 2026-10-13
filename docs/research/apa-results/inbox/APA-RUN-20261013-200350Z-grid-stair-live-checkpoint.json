@@ -1,0 +1,121 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261013-200350Z-grid-stair-live-checkpoint",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A11",
+  "substep_id": "APA-P70.A11.S03",
+  "executor": "work-grid-stair-live-20261013",
+  "executor_run_id": "APA-CLAIM-GRID-LIVE-20261013T194130Z",
+  "phase": "LIVE",
+  "started_at": "2026-10-13T19:35:42Z",
+  "finished_at": "2026-10-13T20:03:50Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29 existing authorized project, UI module recovery recorded; artifact-only publication",
+    "sdk": "29 exactPR76candidate preserved",
+    "tapir": "1.5.10 original restored263commands",
+    "source_branch": "feature/apa-grid-stair-live-20261013"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/77",
+      "revision": "c1b4e1a565bcd903273933d8917608df156ac600",
+      "source_sha": "c1b4e1a565bcd903273933d8917608df156ac600"
+    }
+  ],
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-GRID-LIVE-REPLAY",
+      "statement": "Same SceneWriter SQLite exact-Stair completion reuse and drift gates pass697 host/Windows/Linux tests; live reuse not verified.",
+      "status": "OFFLINE_PASS",
+      "evidence_ids": [
+        "EV-CI",
+        "EV-REPLAY"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-GRID-LIVE-PRESERVE",
+      "statement": "Independent readback after two UI module Save/Open cycles preserves143GUID/geometry/material/story signatures and original168saved bytes; original runtime restored.",
+      "status": "LIVE_PASS",
+      "evidence_ids": [
+        "EV-PRESERVE",
+        "EV-DEPLOY"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-GRID-LIVE-NATIVE",
+      "statement": "Candidate activation rejected for ambiguous manager path; no newGrid or exactStair sample created; required native acceptance not verified.",
+      "status": "NOT_VERIFIED",
+      "evidence_ids": [
+        "EV-DEPLOY"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-CI",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-200350Z-grid-stair-live-checkpoint/ci.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "7086079766b4a071b5dbc85b995f5d9bb98ee2b5b5dd2f9459488fdfc2724d55",
+      "source_revision": "c1b4e1a565bcd903273933d8917608df156ac600"
+    },
+    {
+      "evidence_id": "EV-REPLAY",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-200350Z-grid-stair-live-checkpoint/stair-repeatability.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "8f6552bd1619324132dff14eafc8b53528efa44a300a50d8c7021ee65105f932",
+      "source_revision": "c1b4e1a565bcd903273933d8917608df156ac600"
+    },
+    {
+      "evidence_id": "EV-PRESERVE",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-200350Z-grid-stair-live-checkpoint/preservation-save-open.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "0f0ad71cfe2c3241a88ddac31bdcb40e0fbcaba5f6bc7c73047daa4538a506a0",
+      "source_revision": "c1b4e1a565bcd903273933d8917608df156ac600"
+    },
+    {
+      "evidence_id": "EV-DEPLOY",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-200350Z-grid-stair-live-checkpoint/deployment-reconciliation.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "3d24b55789900eb15b7ae6396039c5020c0b01f152b3db68b152d680ba40996d",
+      "source_revision": "c1b4e1a565bcd903273933d8917608df156ac600"
+    }
+  ],
+  "report_markdown": "# Existing-project Grid/Stair checkpoint and safe module recovery\n\n[Draft PR77](https://github.com/dvikt33-ux/safe-bim-layer/pull/77), head `c1b4e1a565bcd903273933d8917608df156ac600`, exact parent PR76 `bc8f8575ed65e308e10c5ac5f573b7d8ad9466a6`.\n\n## Working code\n\nCompleted exact Stair operations now reuse their existing SceneWriter SQLite GUID without a new Create. Source hash, original target binding, current saved-file hash, retained signatures, exact native dimensions and Favorite rules must still match. Unknown outcomes, changed source and native drift are denied. Eight new tests exercise actual SceneWriter/SQLite completion and rejection paths. **697/697 host and Windows/Linux CI PASS**,102 upstream graph tests and actual core-MCP integration in both CI jobs. [CI](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38459091689). This is OFFLINE_PASS; new native Stair repeatability is NOT_VERIFIED.\n\nThe recipe now uses the existing authorized test PLN. No new PLN, building, Grid, Stair or Morph was created. Accepted Stair remains unchanged. PR76 C++/compiled candidate is preserved byte-for-byte.\n\n## Native preservation and deployment outcome\n\nActual candidate SHA256 `8ad672092aa93e4bf1b4d469cbf7840cb60acd538820183bb68d5d6786ea221d` verified. User explicitly authorized temporary test-instance switching without overwriting the installed file. The original Tapir was disabled using the manager and Archicad's required Save/Open. After selecting the external candidate, the manager displayed the original installed path for both Tapir entries. **Automatic approval review rejected applying the ambiguous configuration because it could load the original module instead of the authorized candidate.** No candidate load or new model write was attempted after the rejection.\n\nThe original module was restored. Two recorded UI deployment Save/Open cycles overall are distinct from SceneWriter model operations; its journal is unchanged: PASS52/UNKNOWN_OUTCOME3. No blind replay or historical journal deletion. Independent native readback proves all143 accepted GUID/geometry/material/story signatures and native story structure unchanged. Separate accepted168 saved bytes match. Installed APX bytes remain unchanged; other instances were not reconfigured. Backup bytes were verified and remain local.\n\nCurrent saved PLN SHA256 `b1f0b8e415f3e07f5a9c5c488a212456972f0a1c37afcebfef6554fdec08eecd` differs from the prior saved hash as expected after Save; retained model signatures match exactly. Fresh installed export has263 old commands and none of the8 new Grid/Stair endpoints. A version number alone does not qualify the candidate. **PRESERVATION_PASS** applies to retained143; **Grid LIVE_PASS, new Stair SOURCE_DIMENSION_PASS and live REPEATABILITY_PASS remain NOT_VERIFIED**. Engineering suitability is NOT_VERIFIED.\n\n## Continuation\n\nUnambiguously load the exact candidate in the existing authorized test instance, then verify actual process module path/hash, fresh schema and all old/new commands. Do not overwrite installed APX or affect other instances without separate permission. Obtain actual GREL defaults/parameter roles; use detached native solve for3.3m/22risers/0.15m/0.35m before a single new Stair. Create/edit/read true axes, independently verify rendered span, run zero-Create reuse and SceneWriter Save/Open with all143 signatures preserved. No new test PLN is required. SinglePlane Roof follows actual Grid/Stair acceptance.\n\nA11.S03 remains PARTIAL; historical DONE tasks, A07 dependencies and S10 blocker are preserved. Normative, Knowledge Graph/search and documentation implementation are unchanged. Main orchestrator used read-only current GitHub Knowledge Graph revision139 before CAS140. Raw projects, private paths and dumps are not published. Publisher safety fields apply to this artifact-only publication operation; the earlier authorized UI Save/Open/file-hash change is explicitly reported above.\n",
+  "next_substep": "APA-P70.A11.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

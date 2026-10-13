@@ -1,0 +1,19 @@
+{
+  "status": "OFFLINE_PASS",
+  "newTests": 8,
+  "totalAPA": 697,
+  "nativeCreateReplayCalls": 0,
+  "actualLiveReplay": "NOT_VERIFIED",
+  "executor": "EXISTING_SCENEWRITER_SQLITE",
+  "gates": [
+    "COMPLETE_PASS_GUID",
+    "SOURCE_HASH",
+    "TARGET_BINDING",
+    "CURRENT_SAVED_HASH",
+    "RETAINED_GEOMETRY",
+    "EXACT_NATIVE_DIMENSIONS",
+    "FAVORITE_RULES"
+  ],
+  "unknown": "NO_RETRY_RECONCILIATION_REQUIRED",
+  "legacyUnpinnedCompletedResults": "DENIED_NOT_SILENTLY_UPGRADED"
+}
