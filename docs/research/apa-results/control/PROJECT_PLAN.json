@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 140,
+  "revision": 141,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -1509,6 +1509,66 @@
     "ART-P70-A11-S03-GRID-STAIR-RECEIPT76-20261013": {
       "id": "ART-P70-A11-S03-GRID-STAIR-RECEIPT76-20261013",
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261013-184337Z-grid-stair-exact.json",
+      "kind": "RECEIPT",
+      "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
+    },
+    "ART-P70-A11-S03-GRID-LIVE-PR77-20261013": {
+      "id": "ART-P70-A11-S03-GRID-LIVE-PR77-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/77",
+      "kind": "CODE",
+      "verification": "EXACT_PR76_PARENT_697_HOST_WINDOWS_LINUX_PASS_4_GITHUB_BLOBS_MATCH"
+    },
+    "ART-P70-A11-S03-GRID-LIVE-PRESERVE-20261013": {
+      "id": "ART-P70-A11-S03-GRID-LIVE-PRESERVE-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-200350Z-grid-stair-live-checkpoint/preservation-save-open.json",
+      "kind": "TEST_RESULT",
+      "verification": "PRESERVATION_PASS_RETAINED143_GEOMETRY_MATERIAL_STORY_AFTER_TWO_UI_SAVE_OPEN_CYCLES_168_SAVED_BYTES_MATCH"
+    },
+    "ART-P70-A11-S03-GRID-LIVE-DEPLOY-20261013": {
+      "id": "ART-P70-A11-S03-GRID-LIVE-DEPLOY-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-200350Z-grid-stair-live-checkpoint/deployment-reconciliation.json",
+      "kind": "TEST_RESULT",
+      "verification": "CANDIDATE_LOAD_REJECTED_AMBIGUOUS_PATH_ORIGINAL_MODULE_RESTORED_INSTALLED_APX_UNCHANGED_263_OLD_COMMANDS_NEW8_MISSING"
+    },
+    "ART-P70-A11-S03-GRID-LIVE-REPLAY-20261013": {
+      "id": "ART-P70-A11-S03-GRID-LIVE-REPLAY-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-200350Z-grid-stair-live-checkpoint/stair-repeatability.json",
+      "kind": "TEST_RESULT",
+      "verification": "OFFLINE_PASS_EXACT_STAIR_SQLITE_GUID_REUSE_NO_RECREATE_SOURCE_TARGET_FILE_GEOMETRY_RULE_GATES"
+    },
+    "ART-P70-A11-S03-GRID-LIVE-RECIPE-20261013": {
+      "id": "ART-P70-A11-S03-GRID-LIVE-RECIPE-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-200350Z-grid-stair-live-checkpoint/existing-project-test.json",
+      "kind": "DATASET",
+      "verification": "EXISTING_AUTHORIZED_PLN_ONLY_NO_NEW_FILE_NO_ACCEPTED_ELEMENT_EDITS_RUNTIME_PENDING"
+    },
+    "ART-P70-A11-S03-GRID-LIVE-GAPS-20261013": {
+      "id": "ART-P70-A11-S03-GRID-LIVE-GAPS-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-200350Z-grid-stair-live-checkpoint/gap-register.json",
+      "kind": "DATASET",
+      "verification": "G01_G09_HISTORY_RETAINED_A11S03_PARTIAL_GRID_STAIR_LIVE_NOT_VERIFIED"
+    },
+    "ART-P70-A11-S03-GRID-LIVE-CI-20261013": {
+      "id": "ART-P70-A11-S03-GRID-LIVE-CI-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-200350Z-grid-stair-live-checkpoint/ci.json",
+      "kind": "TEST_RESULT",
+      "verification": "697_APA_102_UPSTREAM_CORE_MCP_EACH_WINDOWS_LINUX_PASS"
+    },
+    "ART-P70-A11-S03-GRID-LIVE-KG-20261013": {
+      "id": "ART-P70-A11-S03-GRID-LIVE-KG-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-200350Z-grid-stair-live-checkpoint/core-knowledge-query.json",
+      "kind": "TEST_RESULT",
+      "verification": "MAIN_ORCHESTRATOR_CURRENT139_BEFORE_CAS140_IMPLEMENTATION_UNCHANGED"
+    },
+    "ART-P70-A11-S03-GRID-LIVE-REPORT77-20261013": {
+      "id": "ART-P70-A11-S03-GRID-LIVE-REPORT77-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-200350Z-grid-stair-live-checkpoint/REPORT.md",
+      "kind": "REPORT",
+      "verification": "DONE_PUBLISHED_GITHUB_BYTE_READBACK_VERIFIED"
+    },
+    "ART-P70-A11-S03-GRID-LIVE-RECEIPT77-20261013": {
+      "id": "ART-P70-A11-S03-GRID-LIVE-RECEIPT77-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261013-200350Z-grid-stair-live-checkpoint.json",
       "kind": "RECEIPT",
       "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
     }
@@ -4086,7 +4146,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -4211,12 +4271,18 @@
         "NativeStair4contracts: exacttype/count/locks/rules/baseline/walkingline read; detachedSDKsolving withoutmodel/defaultwrites; lockedsource creation through existingproviderFavorite handling; oneownedroot edit with expectedheight/going/count. SourceXMLhash/active-rules gate denies incompatible case beforeCreate. SDKsolver changedsource dimensions/baseline deniescreation; exactnativeNumeric/rule readback remains mandatory. Accepted0.32Stair untouched; hierarchicaledit onlynewtestsample becausechildGUIDchanges possible. MainFavorite export stayspartial, nofullGDLbundleacceptance.",
         "Read-only94file runtime-source snapshot preserves originaldirty Tapir checkout. Candidate source registry includes all263old documentednames and predicts274names:8newGrid/Stair and3prior document endpoints registered by repairedoverlay. Source registry is not runtimeacceptance. ExistingLine extendedpenSDK29compilecast fixed usingeffectiveindex; originalTextshort unchanged. NoSheet/layout,normative,KG,search ormain/master edits. InstalledAPXhash dc99af071d3dbcff9626653ccc37001613cb3fa4a8eff50c6000c1cc70e8d7c7 unchanged; accepted143/168savedfilebytesmatch. Zero native writes thispackage, no newSave/Open/livePASS.",
         "READY candidateAPX SHA256 8ad672092aa93e4bf1b4d469cbf7840cb60acd538820183bb68d5d6786ea221d; package APA_Grid_Stair_SDK29_Candidate_20261013.zip SHA256 07715253d6a3a73ec6b61a408a0200c70b5c2048f49a8fa1cce33546525dee94. Binaries,fullprivatepaths,PLN andrawtechnicaldumps notcommitted. Separate deployment permission remainsDEP-APA-GRID-STAIR-APX-LOAD. Preparedisolatedcopy basenameAPA_Grid_Stair_Exact_Test_01.pln: freshidentity/port/hash/journal, installedschema and actualGridlibraryroles, detachedStaircases beforeonecompatible exactnewStair; nativeaxiscreate/edit/reuse, independentreadbackandSave/Open,retain143/168andacceptedStair. BuildcannotstandinforLive.",
-        "A11.S03 remainsPARTIAL and claimreleased afterpublished checkpoint. All91S-ID/history/A07dependencies/S10BLOCKED preserved. Mainorchestrator used read-onlyKGcurrent137 beforeCAS138. Next exactgate: userpermissiontocandidateAPXloadandisolatednativeprobe. NativeGridrenderedspan and0.35Stairsource-dimensioncriteria stillNOT_VERIFIED; ENGINEERING_NOT_VERIFIED. Roofcontour/slope development follows actualGrid/Staircriteria."
+        "A11.S03 remainsPARTIAL and claimreleased afterpublished checkpoint. All91S-ID/history/A07dependencies/S10BLOCKED preserved. Mainorchestrator used read-onlyKGcurrent137 beforeCAS138. Next exactgate: userpermissiontocandidateAPXloadandisolatednativeprobe. NativeGridrenderedspan and0.35Stairsource-dimensioncriteria stillNOT_VERIFIED; ENGINEERING_NOT_VERIFIED. Roofcontour/slope development follows actualGrid/Staircriteria.",
+        "PR77 c1b4e1a565bcd903273933d8917608df156ac600 preserves exactPR76 parent bc8f8575ed65e308e10c5ac5f573b7d8ad9466a6. Eight new exactStair SQLite completion/drift tests;697/697APA host and Windows/LinuxCI 38459091689 PASS,102upstream graph tests/core-MCPsmoke each. Four committed code blobs and canonical report/receipt independently verified. Native Grid/Stair acceptance remains NOT_VERIFIED; no new samples created.",
+        "Existing authorized APA_Stories_Grid_Stair_Test_01.pln is the sole current target. Previous proposed new APA_Grid_Stair_Exact_Test_01.pln superseded by direct user instruction; no newPLN/building created. All143accepted GUID/geometry/material/story signatures and native story structure unchanged after two UI module-switch Save/Open cycles. Separate original168saved bytes match. Saved143filehash changed after Save and is recorded separately from unchanged signatures; local current-state hash updated with recovery provenance, historical snapshots/journal preserved.",
+        "User explicitly authorized temporary test-instance Tapir switching without installedfile overwrite. Candidate exactPR76APX SHA2568ad672092aa93e4bf1b4d469cbf7840cb60acd538820183bb68d5d6786ea221d verified. Manager displayed original installedpath for bothTapir entries after externalcandidate selection; automatic approval review rejected applying ambiguous configuration as potentially loading wrongmodule. Candidate notloaded; originalmodule restored and actualprocessmodules/schema read back. InstalledAPX bytes unchanged, otherinstances not reconfigured; verifiedlocalbackup retained. This is a pathidentity blocker, not missing general user authorization.",
+        "Freshactualschema retains263oldcommands; all8newGrid/Stair endpoints absent. NativeGrid defaults/actualrole mapping/renderedspan and detached3.3m/22R/0.15m/0.35m Stairsolver/newsource dimension remainNOT_VERIFIED. No Create/Modify/newnativeStair or acceptedStair edit. UIdeploymentSave/Open was separatelyrecorded and not mislabeled asSceneWriteroperation; existing modelledger unchangedPASS52/UNKNOWN3, no blindretry.",
+        "ExactStair completedPASS now reuses sameSceneWriterSQLite rootGUID with0Create, after sourceXML/rules/hash, targetbinding, currentsavedhash, retainedgeometry, exactnativefield/rule checks. Unknown/unverifiedhistory or changedsource cannotreplay; explicitownededit/reconciliation required. WorkingOFFLINE skeleton extends existingmainorchestrator, no secondexecutor. LiveREPEATABILITY and GridLIVE/StairSOURCE_DIMENSION remainNOT_VERIFIED, ENGINEERING_NOT_VERIFIED.",
+        "Publishedcheckpoint APA-RUN-20261013-200350Z-grid-stair-live-checkpoint with correctedgapregister/roadmap and exactGitHubreadback. A11.S03PARTIAL; A07deps, S10BLOCKED,91S-ID/history preserved. Nextgate: unambiguously load external exactcandidate in sameapprovedinstance, independentlyverify actualmodulepath/hash andfresh8commands, qualifyGRELdefaults and detachedStairsolve before newone-samplewrites, nativegeometry/renderedspan/edit/reuse andSceneWriterSave/Open. Userassistance may be necessary for ambiguousmanager selection; no installedAPXoverwrite or otherinstancechanges withoutspecificpermission. Roofcontour/slope follows actualGrid/Staircriteria."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
-      "owner": "work-grid-stair-live-20261013",
-      "lease_until": "2026-10-13T22:41:30Z",
-      "claim_ref": "APA-CLAIM-GRID-LIVE-20261013T194130Z",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
@@ -4316,7 +4382,17 @@
         "ART-P70-A11-S03-GRID-STAIR-GAP-20261013",
         "ART-P70-A11-S03-GRID-STAIR-KG-20261013",
         "ART-P70-A11-S03-GRID-STAIR-REPORT76-20261013",
-        "ART-P70-A11-S03-GRID-STAIR-RECEIPT76-20261013"
+        "ART-P70-A11-S03-GRID-STAIR-RECEIPT76-20261013",
+        "ART-P70-A11-S03-GRID-LIVE-PR77-20261013",
+        "ART-P70-A11-S03-GRID-LIVE-PRESERVE-20261013",
+        "ART-P70-A11-S03-GRID-LIVE-DEPLOY-20261013",
+        "ART-P70-A11-S03-GRID-LIVE-REPLAY-20261013",
+        "ART-P70-A11-S03-GRID-LIVE-RECIPE-20261013",
+        "ART-P70-A11-S03-GRID-LIVE-GAPS-20261013",
+        "ART-P70-A11-S03-GRID-LIVE-CI-20261013",
+        "ART-P70-A11-S03-GRID-LIVE-KG-20261013",
+        "ART-P70-A11-S03-GRID-LIVE-REPORT77-20261013",
+        "ART-P70-A11-S03-GRID-LIVE-RECEIPT77-20261013"
       ],
       "blocked_reason": null
     },
@@ -5117,7 +5193,17 @@
         "ART-P70-A11-S03-GRID-STAIR-GAP-20261013",
         "ART-P70-A11-S03-GRID-STAIR-KG-20261013",
         "ART-P70-A11-S03-GRID-STAIR-REPORT76-20261013",
-        "ART-P70-A11-S03-GRID-STAIR-RECEIPT76-20261013"
+        "ART-P70-A11-S03-GRID-STAIR-RECEIPT76-20261013",
+        "ART-P70-A11-S03-GRID-LIVE-PR77-20261013",
+        "ART-P70-A11-S03-GRID-LIVE-PRESERVE-20261013",
+        "ART-P70-A11-S03-GRID-LIVE-DEPLOY-20261013",
+        "ART-P70-A11-S03-GRID-LIVE-REPLAY-20261013",
+        "ART-P70-A11-S03-GRID-LIVE-RECIPE-20261013",
+        "ART-P70-A11-S03-GRID-LIVE-GAPS-20261013",
+        "ART-P70-A11-S03-GRID-LIVE-CI-20261013",
+        "ART-P70-A11-S03-GRID-LIVE-KG-20261013",
+        "ART-P70-A11-S03-GRID-LIVE-REPORT77-20261013",
+        "ART-P70-A11-S03-GRID-LIVE-RECEIPT77-20261013"
       ],
       "synthesis_state": "PARTIAL",
       "owner": null
