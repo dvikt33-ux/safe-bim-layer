@@ -74,6 +74,23 @@ class GatewayTest(unittest.TestCase):
         self.assertEqual(r["items"][0]["task_reference_count"], 2)
         self.assertEqual(r["items"][0]["relation"], "REFERENCE_ONLY")
 
+    def test_two_artifact_join_returns_shared_task_without_semantic_promotion(self):
+        p = copy.deepcopy(self.plan)
+        p["tasks"]["APA-P50.A01.S01"]["inputs"].append("ART-RESEARCH")
+        ix = build_index(p)
+        r = self.call("ART-CONTROL ART-RESEARCH", ix=ix, plan=p)
+        self.assertEqual(r["retrieval"], "MULTI_ARTIFACT_GRAPH")
+        self.assertEqual(r["task_refs_all"], 1)
+        matches = [x for x in r["items"] if x.get("task_id") == "APA-P50.A01.S01"]
+        self.assertEqual(len(matches), 1)
+        self.assertEqual(matches[0]["relation"], "COMMON_TASK_REFERENCE_NOT_SEMANTIC_DEPENDENCY")
+        self.assertTrue(r["unverified_source_revisions"])
+
+    def test_multi_artifact_unknown_fails_closed(self):
+        r = self.call("ART-CONTROL ART-NONEXISTENT")
+        self.assertEqual(r["status"], "NOT_FOUND")
+        self.assertEqual(r["retrieval"], "MULTI_ARTIFACT_GRAPH")
+
     def test_source_based_research_returns_bounded_multiple_docs(self):
         r = self.call("кровли", limit=4)
         self.assertEqual(r["retrieval"], "SECTION_SEARCH_PLUS_TASK_GRAPH")
