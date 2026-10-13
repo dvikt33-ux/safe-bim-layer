@@ -30,6 +30,10 @@ jobs:
         run: python -m pip install PyYAML==6.0.3 tiktoken==0.14.0 mcp==2.3.0
       - name: Run unit, negative and real plan regression tests
         run: python -m unittest discover -s tools/apa_knowledge_graph/tests -v
+      - name: Bootstrap local read-only cache from actual repo
+        run: |
+          python tools/apa_knowledge_graph/bootstrap.py \
+            --repo-root . --cache-dir "${RUNNER_TEMP}/apa-local-knowledge"
       - name: Build disposable graph from canonical plan
         run: |
           python tools/apa_knowledge_graph/graph.py build \
@@ -114,6 +118,12 @@ jobs:
         run: python -m pip install PyYAML==6.0.3 tiktoken==0.14.0 mcp==2.3.0
       - name: Run Windows tests
         run: python -m unittest discover -s tools/apa_knowledge_graph/tests -v
+      - name: Windows one-command bootstrap
+        shell: pwsh
+        run: |
+          $cache=Join-Path $env:RUNNER_TEMP "apa-windows-local-cache"
+          python tools/apa_knowledge_graph/bootstrap.py --repo-root . --cache-dir $cache
+          if ($LASTEXITCODE -ne 0) { exit 1 }
       - name: Build and query Windows local indexes
         shell: pwsh
         run: |
