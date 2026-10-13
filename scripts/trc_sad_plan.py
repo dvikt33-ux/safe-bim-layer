@@ -280,9 +280,9 @@ def prepare(spec, native_story_bindings=None, schema_path=None):
         sourcePlanHash=check["sourcePlanHash"],
         executionOrder=check["executionOrder"],
         nativeCommandCount=len(operations),
-        nativeKinds={"Wall": 24, "Slab": 9},
+        nativeKinds={"Wall": 21, "Slab": 9},
     )
-    if len(operations) != 33:
+    if len(operations) != 30:
         raise ValueError("UNEXPECTED_OPERATION_CARDINALITY")
     return result
 
