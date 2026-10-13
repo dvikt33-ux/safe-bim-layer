@@ -1,0 +1,515 @@
+{
+  "schemaVersion": "apa-authored-project/1",
+  "projectId": "apa-native-story-change-20261013",
+  "units": "meters",
+  "brief": {
+    "schemaVersion": "apa-semantic-project-brief/1",
+    "projectId": "apa-native-story-change-20261013",
+    "mode": "ADAPT_EXISTING",
+    "units": "meters",
+    "site": {
+      "siteId": "parcel-a",
+      "region": "Россия"
+    },
+    "stories": [
+      {
+        "id": "level-1",
+        "label": "1 этаж",
+        "level": 0.0,
+        "existingNativeLabel": "Первый Этаж",
+        "existingNativeIndex": 0,
+        "existingFloorId": 1
+      },
+      {
+        "id": "level-2",
+        "label": "2 этаж",
+        "level": 3.0,
+        "existingNativeLabel": "APA Floor 2",
+        "existingNativeIndex": 1,
+        "existingFloorId": 2
+      }
+    ],
+    "rooms": [
+      {
+        "id": "living-01",
+        "name": "Гостиная",
+        "storyId": "level-1",
+        "minAreaM2": 20.0
+      },
+      {
+        "id": "bed-01",
+        "name": "Спальня",
+        "storyId": "level-2",
+        "minAreaM2": 12.0
+      }
+    ],
+    "constraints": [
+      {
+        "id": "stairs-source",
+        "text": "Лестничная связь между этажами",
+        "evidenceStatus": "UNVERIFIED"
+      }
+    ],
+    "targetProjectPath": "C:\\LocalAI\\APA_Stories_Grid_Stair_Test_01.pln"
+  },
+  "cseCandidate": {
+    "candidateId": "rc-basic-slab-v1",
+    "systemFamily": "reinforced-concrete-slab-provisional",
+    "role": "floor-slab",
+    "source": {
+      "sourceId": "apa-native-slab-readback-20261011",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr35-basic-slab-implementation-partial-20261011.md",
+      "gitBlobSha": "e4bf711bdc3322f594699b59ea34107cde0bcfdf",
+      "publisher": "APA user-supplied native readback",
+      "rights": "LINK_ONLY_RIGHTS_UNVERIFIED",
+      "status": "PROJECT_NATIVE_READBACK",
+      "licenseEvidenceUri": null,
+      "applicabilityNote": "Only existing disposable PLN Basic Slab source; structural design not assessed"
+    },
+    "native": {
+      "attributeType": "BuildingMaterial",
+      "name": "Железобетон - Конструкционный",
+      "expectedProjectGuid": "63db2ce9-903d-45c0-b93c-b3c604c77394"
+    },
+    "thicknessMeters": 0.2,
+    "storyIds": [
+      "level-1",
+      "level-2"
+    ],
+    "requiredInterfaceConditions": [
+      "slab-wall-bearing",
+      "floor-waterproofing",
+      "slab-opening-penetration"
+    ],
+    "selectedDetailIds": []
+  },
+  "layout": {
+    "schemaVersion": "apa-authored-spatial-layout/1",
+    "outline": {
+      "xMin": 40,
+      "xMax": 50,
+      "yMin": 40,
+      "yMax": 48
+    },
+    "rooms": [
+      {
+        "roomId": "living-01",
+        "storyId": "level-1",
+        "rectangle": {
+          "xMin": 40,
+          "xMax": 50,
+          "yMin": 40,
+          "yMax": 48
+        }
+      },
+      {
+        "roomId": "bed-01",
+        "storyId": "level-2",
+        "rectangle": {
+          "xMin": 40,
+          "xMax": 50,
+          "yMin": 40,
+          "yMax": 48
+        }
+      }
+    ],
+    "axes": [
+      {
+        "id": "axis-west",
+        "direction": "X",
+        "coordinate": 40
+      },
+      {
+        "id": "axis-east",
+        "direction": "X",
+        "coordinate": 50
+      },
+      {
+        "id": "axis-south",
+        "direction": "Y",
+        "coordinate": 40
+      },
+      {
+        "id": "axis-north",
+        "direction": "Y",
+        "coordinate": 48
+      }
+    ],
+    "bearingLines": [
+      {
+        "id": "wall-west-level-1",
+        "storyId": "level-1",
+        "axisId": "axis-west",
+        "fromCoordinate": 40,
+        "toCoordinate": 48,
+        "wallThicknessMeters": 0.3,
+        "cseCandidateId": null
+      },
+      {
+        "id": "wall-west-level-2",
+        "storyId": "level-2",
+        "axisId": "axis-west",
+        "fromCoordinate": 40,
+        "toCoordinate": 48,
+        "wallThicknessMeters": 0.3,
+        "cseCandidateId": null
+      },
+      {
+        "id": "wall-east-level-1",
+        "storyId": "level-1",
+        "axisId": "axis-east",
+        "fromCoordinate": 40,
+        "toCoordinate": 48,
+        "wallThicknessMeters": 0.3,
+        "cseCandidateId": null
+      },
+      {
+        "id": "wall-east-level-2",
+        "storyId": "level-2",
+        "axisId": "axis-east",
+        "fromCoordinate": 40,
+        "toCoordinate": 48,
+        "wallThicknessMeters": 0.3,
+        "cseCandidateId": null
+      },
+      {
+        "id": "wall-south-level-1",
+        "storyId": "level-1",
+        "axisId": "axis-south",
+        "fromCoordinate": 40,
+        "toCoordinate": 50,
+        "wallThicknessMeters": 0.3,
+        "cseCandidateId": null
+      },
+      {
+        "id": "wall-south-level-2",
+        "storyId": "level-2",
+        "axisId": "axis-south",
+        "fromCoordinate": 40,
+        "toCoordinate": 50,
+        "wallThicknessMeters": 0.3,
+        "cseCandidateId": null
+      },
+      {
+        "id": "wall-north-level-1",
+        "storyId": "level-1",
+        "axisId": "axis-north",
+        "fromCoordinate": 40,
+        "toCoordinate": 50,
+        "wallThicknessMeters": 0.3,
+        "cseCandidateId": null
+      },
+      {
+        "id": "wall-north-level-2",
+        "storyId": "level-2",
+        "axisId": "axis-north",
+        "fromCoordinate": 40,
+        "toCoordinate": 50,
+        "wallThicknessMeters": 0.3,
+        "cseCandidateId": null
+      }
+    ],
+    "loadPaths": [
+      {
+        "upperMemberId": "wall-west-level-2",
+        "lowerMemberId": "wall-west-level-1"
+      },
+      {
+        "upperMemberId": "wall-east-level-2",
+        "lowerMemberId": "wall-east-level-1"
+      },
+      {
+        "upperMemberId": "wall-south-level-2",
+        "lowerMemberId": "wall-south-level-1"
+      },
+      {
+        "upperMemberId": "wall-north-level-2",
+        "lowerMemberId": "wall-north-level-1"
+      }
+    ]
+  },
+  "storyHeights": {
+    "level-1": 3.0,
+    "level-2": 4
+  },
+  "wallBasicMaterialName": "Железобетон - Конструкционный",
+  "nativeComponents": [
+    {
+      "id": "authored-entry-door",
+      "command": "CreateDoors",
+      "params": {
+        "doorsData": [
+          {
+            "ownerWallId": {
+              "guid": {
+                "$createdGuid": "native-wall-south-level-1"
+              }
+            },
+            "centerOffset": 2.5,
+            "sillHeight": 0.0,
+            "width": 1.0,
+            "height": 2.1
+          }
+        ]
+      }
+    },
+    {
+      "id": "authored-window-east-1",
+      "command": "CreateWindows",
+      "params": {
+        "windowsData": [
+          {
+            "ownerWallId": {
+              "guid": {
+                "$createdGuid": "native-wall-east-level-1"
+              }
+            },
+            "centerOffset": 4.0,
+            "sillHeight": 1.0,
+            "width": 1.2,
+            "height": 1.2
+          }
+        ]
+      }
+    },
+    {
+      "id": "authored-window-west-1",
+      "command": "CreateWindows",
+      "params": {
+        "windowsData": [
+          {
+            "ownerWallId": {
+              "guid": {
+                "$createdGuid": "native-wall-west-level-1"
+              }
+            },
+            "centerOffset": 4.0,
+            "sillHeight": 1.0,
+            "width": 1.4,
+            "height": 1.2
+          }
+        ]
+      }
+    },
+    {
+      "id": "authored-window-east-2",
+      "command": "CreateWindows",
+      "params": {
+        "windowsData": [
+          {
+            "ownerWallId": {
+              "guid": {
+                "$createdGuid": "native-wall-east-level-2"
+              }
+            },
+            "centerOffset": 4.0,
+            "sillHeight": 1.0,
+            "width": 1.2,
+            "height": 1.2
+          }
+        ]
+      }
+    },
+    {
+      "id": "authored-window-west-2",
+      "command": "CreateWindows",
+      "params": {
+        "windowsData": [
+          {
+            "ownerWallId": {
+              "guid": {
+                "$createdGuid": "native-wall-west-level-2"
+              }
+            },
+            "centerOffset": 4.0,
+            "sillHeight": 1.0,
+            "width": 1.2,
+            "height": 1.2
+          }
+        ]
+      }
+    },
+    {
+      "id": "test-partition-0",
+      "command": "CreateWalls",
+      "params": {
+        "wallsData": [
+          {
+            "begCoordinate": {
+              "x": 45,
+              "y": 40.15
+            },
+            "endCoordinate": {
+              "x": 45,
+              "y": 47.85
+            },
+            "floorIndex": 0,
+            "zCoordinate": 0,
+            "height": 2.8,
+            "thickness": 0.1,
+            "structureType": "Basic",
+            "referenceLineLocation": "Center",
+            "buildingMaterialId": {
+              "guid": "63db2ce9-903d-45c0-b93c-b3c604c77394"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "test-partition-1",
+      "command": "CreateWalls",
+      "params": {
+        "wallsData": [
+          {
+            "begCoordinate": {
+              "x": 45,
+              "y": 40.15
+            },
+            "endCoordinate": {
+              "x": 45,
+              "y": 47.85
+            },
+            "floorIndex": 1,
+            "zCoordinate": 0,
+            "height": 4,
+            "thickness": 0.1,
+            "structureType": "Basic",
+            "referenceLineLocation": "Center",
+            "buildingMaterialId": {
+              "guid": "63db2ce9-903d-45c0-b93c-b3c604c77394"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "test-internal-door",
+      "command": "CreateDoors",
+      "params": {
+        "doorsData": [
+          {
+            "ownerWallId": {
+              "guid": {
+                "$createdGuid": "test-partition-0"
+              }
+            },
+            "centerOffset": 3.85,
+            "width": 0.9,
+            "height": 2.1,
+            "sillHeight": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "test-window-south-upper",
+      "command": "CreateWindows",
+      "params": {
+        "windowsData": [
+          {
+            "ownerWallId": {
+              "guid": {
+                "$createdGuid": "native-wall-south-level-2"
+              }
+            },
+            "centerOffset": 2.5,
+            "width": 1.2,
+            "height": 1.2,
+            "sillHeight": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "test-window-north-upper",
+      "command": "CreateWindows",
+      "params": {
+        "windowsData": [
+          {
+            "ownerWallId": {
+              "guid": {
+                "$createdGuid": "native-wall-north-level-2"
+              }
+            },
+            "centerOffset": 7.5,
+            "width": 1.2,
+            "height": 1.2,
+            "sillHeight": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "test-roof",
+      "command": "CreateRoofs",
+      "params": {
+        "roofsData": [
+          {
+            "floorIndex": 1,
+            "level": 6.2,
+            "thickness": 0.2,
+            "structureType": "Basic",
+            "buildingMaterialId": {
+              "guid": "63db2ce9-903d-45c0-b93c-b3c604c77394"
+            },
+            "angle": 0.05,
+            "pivotLine": {
+              "begCoordinate": {
+                "x": 39.849999999999994,
+                "y": 39.840004166
+              },
+              "endCoordinate": {
+                "x": 50.150000000000006,
+                "y": 39.840004166
+              }
+            },
+            "polygonCoordinates": [
+              {
+                "x": 39.849999999999994,
+                "y": 39.840004166
+              },
+              {
+                "x": 50.150000000000006,
+                "y": 39.840004166
+              },
+              {
+                "x": 50.150000000000006,
+                "y": 48.140004166
+              },
+              {
+                "x": 39.849999999999994,
+                "y": 48.140004166
+              }
+            ]
+          }
+        ]
+      },
+      "after": [
+        "native-wall-west-level-2",
+        "native-wall-east-level-2",
+        "native-wall-south-level-2",
+        "native-wall-north-level-2"
+      ]
+    }
+  ],
+  "nativeGeometryAudit": true,
+  "junctionPolicy": {
+    "schema": "apa-native-junction-policy/1",
+    "slabFootprint": "OUTER_WALL_FACE",
+    "intermediateWallTop": "SLAB_UNDERSIDE"
+  },
+  "nativeRoofJunctions": true,
+  "structuralFunctions": {
+    "native-wall-east-level-1": "LoadBearingElement",
+    "native-wall-north-level-1": "LoadBearingElement",
+    "native-wall-south-level-1": "LoadBearingElement",
+    "native-wall-west-level-1": "LoadBearingElement",
+    "native-wall-east-level-2": "LoadBearingElement",
+    "native-wall-north-level-2": "LoadBearingElement",
+    "native-wall-south-level-2": "LoadBearingElement",
+    "native-wall-west-level-2": "LoadBearingElement",
+    "test-partition-0": "NonLoadBearingElement",
+    "test-partition-1": "NonLoadBearingElement"
+  }
+}

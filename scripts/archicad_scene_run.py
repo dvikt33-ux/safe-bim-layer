@@ -598,8 +598,14 @@ class SceneWriter:
         """
         documentation=preflight.get('integrationBindings',{}).get('dependencies',{}).get('documentationOperation')
         model_scope=preflight.get('integrationBindings',{}).get('dependencies',{}).get('modelOperation')
-        if documentation is not None and model_scope is not None:
+        spatial_scope=preflight.get('integrationBindings',{}).get('dependencies',{}).get('spatialOperation')
+        if sum(x is not None for x in (documentation,model_scope,spatial_scope))>1:
             raise ValueError('EXACTLY_ONE_BOUNDED_OPERATION_SCOPE_REQUIRED')
+        spatial_command=False
+        if spatial_scope is not None:
+            from archicad_native_spatial_structure import qualify_spatial_operation
+            qualify_spatial_operation(spatial_scope,command,parameters,preflight['sourcePlanHash'])
+            spatial_command=True
         model_command=False
         if model_scope is not None:
             from archicad_authored_extension import qualify_model_operation
@@ -610,7 +616,7 @@ class SceneWriter:
             from archicad_bim_documentation import qualify_operation, DOCUMENT_COMMANDS
             qualify_operation(documentation,command,parameters,preflight['sourcePlanHash'])
             document_command=command in DOCUMENT_COMMANDS
-        if (not document_command and not model_command and command not in {'ConnectMEPElements','ModifyMEPRoutingElements',
+        if (not document_command and not model_command and not spatial_command and command not in {'ConnectMEPElements','ModifyMEPRoutingElements',
                             'CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks','ModifyMorphs','ModifyBeams','ModifyWalls','SetClassificationsOfElements','TrimElements'}
                 or not _SCENE_ID.fullmatch(scene_id) or not callable(verify_before) or not callable(verify_after)):
             raise ValueError('BOUNDED_OPERATION_ADAPTER_REQUIRED')
@@ -621,7 +627,7 @@ class SceneWriter:
                'CreateOpenings':'openingsData','CreateSolidElementLinks':'solidLinks','RemoveSolidElementLinks':'solidLinks','ModifyMorphs':'morphsWithDetails',
                'SetClassificationsOfElements':'elementClassifications','ModifyBeams':'beamsWithDetails','ModifyWalls':'wallsWithDetails','TrimElements':'elements'}
         rows=parameters.get(slots.get(command))
-        if not document_command and not model_command and (not isinstance(rows,list) or len(rows)!=1):raise ValueError('BOUNDED_OPERATION_REQUIRES_SINGLE_NATIVE_TARGET')
+        if not document_command and not model_command and not spatial_command and (not isinstance(rows,list) or len(rows)!=1):raise ValueError('BOUNDED_OPERATION_REQUIRES_SINGLE_NATIVE_TARGET')
         if command=='ModifyWalls' and documentation is None and model_scope is None:
             repair=preflight.get('integrationBindings',{}).get('dependencies',{}).get('wallRoofRepair',{})
             candidates=repair.get('operationCandidates',[])
@@ -674,12 +680,17 @@ class SceneWriter:
                 if self.guarded_binding()!=preflight['binding']:raise ValueError('BOUNDED_OPERATION_TARGET_DRIFT')
                 reply=self.api(command,parameters)
                 result['nativeResponse']=reply
-                if document_command:
+                if spatial_command:
+                    if reply!={'success':True}:raise ValueError('SPATIAL_NATIVE_SUCCESS_NOT_CONFIRMED')
+                elif document_command:
                     from archicad_bim_documentation import native_response
                     guid=native_response(command,reply)
                     if guid:
                         result['createdGuid']=guid
                         db.execute("UPDATE steps SET state='CREATED_UNVERIFIED',guid=? WHERE scene_id=? AND step_id='operation'",(guid,scene_id));db.commit()
+                elif command=='CreateStairs' and model_command:
+                    result['createdGuid']=created_guid(reply)
+                    db.execute("UPDATE steps SET state='CREATED_UNVERIFIED',guid=? WHERE scene_id=? AND step_id='operation'",(result['createdGuid'],scene_id));db.commit()
                 elif command=='TrimElements':
                     if reply!={'success':True}:raise ValueError('BOUNDED_TRIM_NATIVE_SUCCESS_NOT_CONFIRMED')
                 elif command != 'CreateOpenings':

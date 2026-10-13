@@ -30,9 +30,13 @@ def call(command, parameters=None, port=19723, timeout=600):
     return result, elapsed, raw, payload
 
 
-def normalize(native):
-    if native["nativeBodySlots"] == 0:
+def normalize(native, *, allow_empty=False):
+    if native["nativeBodySlots"] == 0 and not allow_empty:
         raise ValueError("Native 3D model has zero bodies; full geometry dump is unavailable")
+    if native["nativeBodySlots"] == 0 and (native.get('bodies')!=[] or
+            native.get('deletedBodySlots')!=[] or native.get('regenerated3D') is not True
+            or native.get('coordinateSystem')!='ABSOLUTE_PROJECT_XYZ'):
+        raise ValueError('Empty native body inventory is not independently established')
     elements = {e["guid"].lower(): e for e in native["elements"]}
     materials = {m["id"]: m for m in native["materials"]}
     for material in materials.values():

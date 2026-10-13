@@ -12,10 +12,10 @@ import archicad_project_accelerator as A
 import archicad_accelerator_integration as I
 
 
-def normalize_dump(raw):
+def normalize_dump(raw, *, allow_empty=False):
     spec=importlib.util.spec_from_file_location('retained_native_dump',I.ROOT/'archicad-addon/Examples/model_dump_v1.py')
     module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
-    return module.normalize(copy.deepcopy(raw))
+    return module.normalize(copy.deepcopy(raw),allow_empty=allow_empty)
 
 
 def planar_faces(native):
