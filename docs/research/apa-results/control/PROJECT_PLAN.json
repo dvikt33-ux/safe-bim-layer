@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 132,
+  "revision": 133,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -1307,6 +1307,12 @@
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261013-082134Z-native-documentation-followon.json",
       "kind": "RECEIPT",
       "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
+    },
+    "ART-P70-A11-S03-MODEL-FIRST-SCOPE-20261013": {
+      "id": "ART-P70-A11-S03-MODEL-FIRST-SCOPE-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/control/reviews/APA-MODEL-FIRST-20261013.md",
+      "kind": "REPORT",
+      "verification": "SOURCE_READ_CANCELLED_DOCUMENTATION_ZERO_NATIVE_WRITES_MODEL_FIRST_CRITERIA_NOT_DONE"
     }
   },
   "tasks": {
@@ -3982,12 +3988,13 @@
         "Save/Open and independent final readback: original121GUID/BREP/material/story signatures unchanged, including original109; all126current main identities persist. Added Elevation+4native Objects. Native dimension/Layout/Drawings/ViewMap/database IDs separately verified. Physical primary modelVersion unchanged; no new physical BIM construction or testWall change. Historical PR70 edit-synchronization proof retained, not claimed as a fresh BIM-edit test.",
         "Layout ShowAllIn3D error-2130313109 uses the same writer for a view-only floor0 activation, exact identity/saved-byte checks and subsequent complete native-signature proof. Historical UNKNOWN_OUTCOME events kept and independently reconciled, no blind Create/Modify retry. AfterOpen Drawing fill caches initially absent; known-success update onlynewDrawings restored32/34contours.",
         "13native Schedule definitions discovered; native rowread/configure contracts unsupported. Existing six-type CSV specification adapter retained without duplication. Main APA orchestrator actually queried existing read-only Knowledge Graph with GitHub-current revision129 beforeclaim130. KG/search implementation and normative-system code/branches/policies unchanged.",
-        "A11.S03 remainsPARTIAL; A07.S01 not closed and dependencies preserved; S10BLOCKED unchanged. No normative/engineering drawing acceptance. Next: supported native schedule row/configuration contract and complete vertical primitive/owner mapping; require actual rendered projection extent for all future facade placement acceptance."
+        "A11.S03 remainsPARTIAL; A07.S01 not closed and dependencies preserved; S10BLOCKED unchanged. No normative/engineering drawing acceptance. Next: supported native schedule row/configuration contract and complete vertical primitive/owner mapping; require actual rendered projection extent for all future facade placement acceptance.",
+        "User changed priority to MODEL_FIRST2026-10-13. Cancelled multi-sheet follow-on performed fresh126GUID/journal/identity read-only preflight and main APA Knowledge Graph query132, zero new native writes/artifacts. PR73 retained. New audited A11.S03 acceptance package creates/edits/verifies a complete separate native two-story building through existing generator/SceneWriter. Historical DONE_PUBLISHED criteria retained; no full-building DONE claim."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
-      "owner": "work-multi-sheet-documentation-20261013",
-      "lease_until": "2026-10-13T12:44:58Z",
-      "claim_ref": "APA-CLAIM-MULTI-SHEET-20261013T084458Z",
+      "owner": "work-model-first-building-20261013",
+      "lease_until": "2026-10-13T12:58:58Z",
+      "claim_ref": "APA-CLAIM-MODEL-FIRST-20261013T085858Z",
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
@@ -4053,7 +4060,8 @@
         "ART-P70-A11-S03-NATIVE-DOC-GAP-20261013",
         "ART-P70-A11-S03-NATIVE-DOC-CORE-KG-20261013",
         "ART-P70-A11-S03-NATIVE-DOC-REPORT73-20261013",
-        "ART-P70-A11-S03-NATIVE-DOC-RECEIPT73-20261013"
+        "ART-P70-A11-S03-NATIVE-DOC-RECEIPT73-20261013",
+        "ART-P70-A11-S03-MODEL-FIRST-SCOPE-20261013"
       ],
       "blocked_reason": null
     },
@@ -4820,7 +4828,8 @@
         "ART-P70-A11-S03-NATIVE-DOC-GAP-20261013",
         "ART-P70-A11-S03-NATIVE-DOC-CORE-KG-20261013",
         "ART-P70-A11-S03-NATIVE-DOC-REPORT73-20261013",
-        "ART-P70-A11-S03-NATIVE-DOC-RECEIPT73-20261013"
+        "ART-P70-A11-S03-NATIVE-DOC-RECEIPT73-20261013",
+        "ART-P70-A11-S03-MODEL-FIRST-SCOPE-20261013"
       ],
       "synthesis_state": "PARTIAL",
       "owner": null
