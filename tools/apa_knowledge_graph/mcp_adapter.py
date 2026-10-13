@@ -16,11 +16,20 @@ from gateway import retrieve
 
 class SnapshotService:
     """Operator-owned paths: no model-supplied file or network destinations."""
-    def __init__(self, plan, index, sections, repo_root):
+    def __init__(self, plan, index, sections, repo_root,
+                 allowed_classes=("PROJECT_CONTROL", "RESEARCH_RUN"), max_return_chars=2500):
         self.plan = Path(plan).resolve()
         self.index = Path(index).resolve()
         self.sections = Path(sections).resolve()
         self.repo_root = Path(repo_root).resolve()
+        known = {"PROJECT_CONTROL", "RESEARCH_RUN", "ARCHIVED_SOURCE", "OTHER_DOCUMENT"}
+        classes = frozenset(allowed_classes)
+        if not classes or not classes <= known:
+            raise ValueError("Invalid operator-owned allowlist")
+        if not isinstance(max_return_chars, int) or not 400 <= max_return_chars <= 12000:
+            raise ValueError("Invalid operator-owned response ceiling")
+        self.allowed_classes = classes
+        self.max_return_chars = max_return_chars
 
     def query(self, query: str, mode: str = "research",
               source_class: str | None = None, limit: int = 4,
@@ -29,9 +38,18 @@ class SnapshotService:
         # never let an old JSON cache silently determine a new task suggestion.
         plan = json.loads(self.plan.read_text(encoding="utf-8"))
         index = json.loads(self.index.read_text(encoding="utf-8"))
+        # The LLM cannot widen the operator-set document access policy.
+        # If no scope is explicitly selected, choose a safe default instead
+        # of searching a mixture of archived/licensed/private source classes.
+        scoped = source_class or "PROJECT_CONTROL"
+        if scoped not in self.allowed_classes:
+            raise ValueError("ACCESS_DENIED_SOURCE_CLASS")
+        if not isinstance(max_chars, int):
+            raise ValueError("Invalid model-requested budget")
+        max_chars = min(max_chars, self.max_return_chars)
         return retrieve(index, plan, self.sections, self.repo_root,
                         "dvikt33-ux/safe-bim-layer", query, mode,
-                        source_class, limit, max_chars)
+                        scoped, limit, max_chars)
 
 
 def build_server(service):
@@ -63,8 +81,14 @@ def main(argv=None):
     p.add_argument("--index", type=Path, required=True)
     p.add_argument("--sections", type=Path, required=True)
     p.add_argument("--repo-root", type=Path, required=True)
+    p.add_argument("--allow-class", action="append", dest="allow_classes",
+                   choices=["PROJECT_CONTROL", "RESEARCH_RUN", "ARCHIVED_SOURCE", "OTHER_DOCUMENT"],
+                   help="Operator-managed explicit read access; default: PROJECT_CONTROL and RESEARCH_RUN")
+    p.add_argument("--max-return-chars", type=int, default=2500)
     args = p.parse_args(argv)
-    service = SnapshotService(args.plan, args.index, args.sections, args.repo_root)
+    service = SnapshotService(args.plan, args.index, args.sections, args.repo_root,
+                              allowed_classes=(args.allow_classes or ("PROJECT_CONTROL", "RESEARCH_RUN")),
+                              max_return_chars=args.max_return_chars)
     # Stdio only; do not expose a local filesystem reader on 0.0.0.0.
     build_server(service).run(transport="stdio")
 
