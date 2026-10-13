@@ -108,6 +108,21 @@ class SectionSearchTest(unittest.TestCase):
         self.assertEqual(result["status"], "INDEX_TAMPERED")
         self.assertEqual(result["results"], [])
 
+    def test_dense_single_document_cannot_starve_another_document(self):
+        first = self.root / "norm.md"
+        dense = "# Кровли\\n" + "".join(
+            "## Кровли раздел " + str(i) + "\\nКровли, кровли, кровли.\\n"
+            for i in range(35))
+        first.write_text(dense, encoding="utf-8")
+        (self.root / "geometry.md").write_text("# Кровли дополнение\\nКровли пересечение\\n", encoding="utf-8")
+        alternate_db = self.root / "diverse.sqlite"
+        build([first, self.root / "geometry.md"], alternate_db)
+        result = search(alternate_db, "кровли", limit=2)
+        self.assertEqual(result["status"], "OK")
+        self.assertEqual(result["count"], 2)
+        self.assertEqual(len({x["path"] for x in result["results"]}), 2)
+        self.assertEqual(result["diversity_policy"], "ONE_BEST_SECTION_PER_DOCUMENT")
+
     def test_no_overwrite_existing_database(self):
         with self.assertRaisesRegex(ValueError, "overwrite"):
             build([self.root], self.db)
