@@ -7,6 +7,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import sys
 from pathlib import Path, PureWindowsPath
 from archicad_guarded_wall_probe import tapir
 import trc_sad_plan as PLAN
@@ -136,6 +137,10 @@ def main(argv=None):
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n",
                            encoding="utf-8")
+    # Windows CI and legacy terminals can default to cp1252, which cannot
+    # encode a Cyrillic PLN name. Preserve actual UTF-8 output and evidence.
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="backslashreplace")
     print(json.dumps({"status": report["status"], "port": args.port,
                       "projectName": report["projectName"],
                       "projectPath": report["projectPath"],
