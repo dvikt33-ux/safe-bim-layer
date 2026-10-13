@@ -27,7 +27,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install existing APA YAML dependency
-        run: python -m pip install PyYAML==6.0.3 tiktoken==0.14.0
+        run: python -m pip install PyYAML==6.0.3 tiktoken==0.14.0 mcp==2.3.0
       - name: Run unit, negative and real plan regression tests
         run: python -m unittest discover -s tools/apa_knowledge_graph/tests -v
       - name: Build disposable graph from canonical plan
