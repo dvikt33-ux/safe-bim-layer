@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 128,
+  "revision": 129,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -1215,6 +1215,48 @@
     "ART-P70-A11-S03-DOCUMENTATION-RECEIPT70-20261013": {
       "id": "ART-P70-A11-S03-DOCUMENTATION-RECEIPT70-20261013",
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261012-235115Z-bim-documentation.json",
+      "kind": "RECEIPT",
+      "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
+    },
+    "ART-P70-A11-S03-KNOWLEDGE-PR71-20261013": {
+      "id": "ART-P70-A11-S03-KNOWLEDGE-PR71-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/71",
+      "kind": "CODE",
+      "verification": "EXACT_PR70_BASE_606_APA_102_UPSTREAM_WINDOWS_LINUX_PASS_29_CODE_BLOBS_MATCH"
+    },
+    "ART-P70-A11-S03-KNOWLEDGE-INTEGRATION-20261013": {
+      "id": "ART-P70-A11-S03-KNOWLEDGE-INTEGRATION-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-013642Z-knowledge-core-mcp/integration.json",
+      "kind": "TEST_RESULT",
+      "verification": "ACTUAL_APA_CORE_CURRENT_GITHUB128_AND_REAL_MCP_STDIO_PASS_CHATGPT_NOT_VERIFIED"
+    },
+    "ART-P70-A11-S03-KNOWLEDGE-STALE-20261013": {
+      "id": "ART-P70-A11-S03-KNOWLEDGE-STALE-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-013642Z-knowledge-core-mcp/real-stale-rebuild.json",
+      "kind": "TEST_RESULT",
+      "verification": "REAL_CANONICAL_GITHUB127_TO128_STALE_REFUSAL_AND_SAFE_REBUILD_PASS"
+    },
+    "ART-P70-A11-S03-KNOWLEDGE-MEASUREMENTS-20261013": {
+      "id": "ART-P70-A11-S03-KNOWLEDGE-MEASUREMENTS-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-013642Z-knowledge-core-mcp/measurements.json",
+      "kind": "DATASET",
+      "verification": "LATENCY_GET_COUNTS_PAYLOAD_BYTES_TOKENIZER_PROXY_EXACT_REGISTRY_ORACLE_NO_SEMANTIC_OR_BILLING_CLAIM"
+    },
+    "ART-P70-A11-S03-KNOWLEDGE-REVIEW-20261013": {
+      "id": "ART-P70-A11-S03-KNOWLEDGE-REVIEW-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/control/reviews/APA-CAND-20261013-knowledge-impact-gateway-core-integration.md",
+      "kind": "REPORT",
+      "verification": "DUPLICATE_CORE_INTEGRATION_EXISTING_SID_NO_NEW_P50_S04_BROAD_BENCHMARK_NEEDS_EVIDENCE"
+    },
+    "ART-P70-A11-S03-KNOWLEDGE-REPORT71-20261013": {
+      "id": "ART-P70-A11-S03-KNOWLEDGE-REPORT71-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-013642Z-knowledge-core-mcp/REPORT.md",
+      "kind": "REPORT",
+      "verification": "DONE_PUBLISHED_GITHUB_READBACK_VERIFIED"
+    },
+    "ART-P70-A11-S03-KNOWLEDGE-RECEIPT71-20261013": {
+      "id": "ART-P70-A11-S03-KNOWLEDGE-RECEIPT71-20261013",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261013-013642Z-knowledge-core-mcp.json",
       "kind": "RECEIPT",
       "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
     }
@@ -3792,7 +3834,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -3875,12 +3917,20 @@
         "Six CSV native-fact specifications share one immutable modelVersion for19primary elements:9Wall,2Slab,2Column,4Window,1Door,1Roof. Wall/Slab quantities use actual resultant bodies; Column parent body absent and Door quantities unsupported remain explicit. Native interactive schedule row/configuration contract absent; CSV is not native schedule acceptance. Some Native Model Dump display labels damaged; identities/numeric stories retained, damaged labels not promoted.",
         "One new separate native Wall changed height1.0->1.2m and actual joined volume0.085->0.102m3. Native floor cutfills15->16; adjoining Column drawing facts changed while its native3D signature stayed unchanged. Explicit public refresh regenerated linked native databases and owner readback after change and after Open. No background watcher; full vertical drawn-coordinate synchronization NOT_VERIFIED. Original ambiguous Modify ledger event preserved and independently reconciled without repeat.",
         "Save/Open PASS with independent final native readback: original109GUID/geometry/material/story signatures unchanged; full inventory121 includes newWall+CutPlane+InteriorElevation+9native Object markers/subordinates.112explicit retained persistence identities plus separate ViewMap/database checks. Authorized isolated testPLN savedSHA256c7350d717e223fd5ec8e82dbaa44197e4483a54b31c54c3913e317a0893054c9. No new testWall volume collision. No Morph/APX/global preference change; raw identities/PLN/paths remain local.",
-        "A11.S03 remains PARTIAL and A11.S10 remains BLOCKED. This is preparatory architectural functionality for A07.S01; dependencies and status unchanged, not closed. Normative/engineering acceptance NOT_EXECUTED, PDF/nativePublisher output NOT_EXECUTED. Next available documentation work: qualify true exterior Elevation placement, vertical primitive readback and native schedule rows through the same executor, then actual publisher-file proof. No normative/search re-research."
+        "A11.S03 remains PARTIAL and A11.S10 remains BLOCKED. This is preparatory architectural functionality for A07.S01; dependencies and status unchanged, not closed. Normative/engineering acceptance NOT_EXECUTED, PDF/nativePublisher output NOT_EXECUTED. Next available documentation work: qualify true exterior Elevation placement, vertical primitive readback and native schedule rows through the same executor, then actual publisher-file proof. No normative/search re-research.",
+        "Published draft PR71 head88169d358e4c329f8959f557c944300adcec2df9 on exact PR70 f5aa4754a0ace251e8541001f17f6fa8eddfe8e5.19newtests;606/606APA and102/102upstream Windows host/Windows+Linux CI38332614305 PASS including actual separate MCP stdio client.29code blobs and evidence/report/receipt independently read back; publisher receipt DONE_PUBLISHED.",
+        "StageI DONE: existing PR69 component tools/apa_knowledge_graph transferred19files unchanged from merge64cec581b257b209a097556ae19d498e53631ba1, eight runtime source hashes pinned. APA core read-only feature-flag entry points directly call original gateway/graph/sections/multidoc/delta/bootstrap/machine/mcp modules. Default flag off; no second search engine/task controller/publisher/normative executor.",
+        "Current GitHub source capture at revision128: project/status/lease and S-ID/ART-ID, shared document references, scheduling dependencies, possible changed-artifact impact, next eligible suggestions without claim, source-bound TDK design_only trace and pinned small PR70 source fragment. Each live request checks current canonical commit/plan bytes, graph integrity and returned source bytes. LOCAL_CHECKOUT explicitly local-only, cache never task authority; source texts untrusted data.",
+        "Actual canonical plan127->128 CAS reservation is detected as STALE_INDEX_REMOTE_PLAN on an independently retained historical source copy; safe source refresh/original bootstrap rebuild restores verified response. Corrupt source/forged index/denied source class/unavailable remote reject without authority fallback. Caller SOURCE_VERIFIED labels do not grant verified field propagation; only operator-reviewed exact lineage digest allowed. No guessed semantic edges or engineering/normative promotion.",
+        "StageII localMCP DONE: official Python SDK2.3.0 actual client launches separate stdio server and calls only apa_retrieve for task/artifact and denied source class. No model-supplied paths, BIM writes or task management. Target ChatGPT registration/call NOT_VERIFIED; current official Secure MCP Tunnel/ChatGPT operator steps documented, account/workspace association unavailable here. No server registration, tunnel, external deployment or paid model calls.",
+        "StageIII measured five real core queries and ordinary GitHub plan GET separately: payload bytes/chars, latency, GET counts and o200k_base tokenizer proxy. Captured raw plan286718bytes/77867proxy tokens; compact query payloads approximately386-662proxy tokens. Exact requests use2freshness GETs, section case5, ordinary plan GET1; no universal token/latency/call saving claim. Exact oracle91tasks/173artifacts/40shared-reference pairs has0failures; broad semantic missed/false dependencies and actual billed GPT tokens NOT_MEASURED. Prior research benchmarks retained.",
+        "PR70 documentation/BIMGraph/SceneWriter and normative modules unchanged; full587prior tests retained within606. Zero Archicad calls, PLN/APX/main changes in this package; prior saved native121inventory is historical evidence, not newly checked live. Normative parallel system untouched. A11.S03 remainsPARTIAL/A11.S10BLOCKED; A07 status/dependencies unchanged. P50.A01.S04 not admitted: compatible core scope already usesA11.S03; broader80question semantic proposal remainsNEEDS_EVIDENCE for independent audit.",
+        "Next available knowledge step: operator-supported ChatGPT tunnel/endpoint registration and actual apa_retrieve call with fresh provenance. On any canonical revision change, fetch the operator-owned source checkout and rebuild the same cache or returnSTALE_INDEX; no automated CAS claim. Independent native documentation work still needs trueElevation/vertical primitive/native schedule-row contracts. No repeated normative research or new roadmap."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
-      "owner": "work-knowledge-integration-20261013",
-      "lease_until": "2026-10-13T04:10:26Z",
-      "claim_ref": "APA-CLAIM-KNOWLEDGE-20261013T011026Z",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
@@ -3931,7 +3981,14 @@
         "ART-P70-A11-S03-DOCUMENTATION-SYNC-20261013",
         "ART-P70-A11-S03-DOCUMENTATION-GAP-20261013",
         "ART-P70-A11-S03-DOCUMENTATION-REPORT70-20261013",
-        "ART-P70-A11-S03-DOCUMENTATION-RECEIPT70-20261013"
+        "ART-P70-A11-S03-DOCUMENTATION-RECEIPT70-20261013",
+        "ART-P70-A11-S03-KNOWLEDGE-PR71-20261013",
+        "ART-P70-A11-S03-KNOWLEDGE-INTEGRATION-20261013",
+        "ART-P70-A11-S03-KNOWLEDGE-STALE-20261013",
+        "ART-P70-A11-S03-KNOWLEDGE-MEASUREMENTS-20261013",
+        "ART-P70-A11-S03-KNOWLEDGE-REVIEW-20261013",
+        "ART-P70-A11-S03-KNOWLEDGE-REPORT71-20261013",
+        "ART-P70-A11-S03-KNOWLEDGE-RECEIPT71-20261013"
       ],
       "blocked_reason": null
     },
@@ -4683,7 +4740,14 @@
         "ART-P70-A11-S03-DOCUMENTATION-SYNC-20261013",
         "ART-P70-A11-S03-DOCUMENTATION-GAP-20261013",
         "ART-P70-A11-S03-DOCUMENTATION-REPORT70-20261013",
-        "ART-P70-A11-S03-DOCUMENTATION-RECEIPT70-20261013"
+        "ART-P70-A11-S03-DOCUMENTATION-RECEIPT70-20261013",
+        "ART-P70-A11-S03-KNOWLEDGE-PR71-20261013",
+        "ART-P70-A11-S03-KNOWLEDGE-INTEGRATION-20261013",
+        "ART-P70-A11-S03-KNOWLEDGE-STALE-20261013",
+        "ART-P70-A11-S03-KNOWLEDGE-MEASUREMENTS-20261013",
+        "ART-P70-A11-S03-KNOWLEDGE-REVIEW-20261013",
+        "ART-P70-A11-S03-KNOWLEDGE-REPORT71-20261013",
+        "ART-P70-A11-S03-KNOWLEDGE-RECEIPT71-20261013"
       ],
       "synthesis_state": "PARTIAL",
       "owner": null
