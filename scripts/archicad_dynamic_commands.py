@@ -313,7 +313,7 @@ class DynamicCommands:
             else:
                 if writer is None or sid not in (scopes or {}):raise ValueError('WORKFLOW_MUTATION_REQUIRES_EXACT_STEP_SCOPE')
                 scope=scopes[sid]
-                outcome=self.execute(writer,scope['scene_id'],ticket,scope['affected'],scope['retained_signatures'],scope['saved_sha256'],scope['authorization'],scope['impact'],scope['verify_after'])
+                outcome=self.execute(writer,scope['scene_id'],ticket,scope['affected'],scope['retained_signatures'],scope['saved_sha256'],scope['authorization'],scope['impact'],scope['verify_after'],verify_before=scope.get('verify_before'))
                 if outcome['status']!='PASS':return dict(status='STOPPED_UNKNOWN_OUTCOME',stoppedAt=sid,outcome=outcome,completedSteps=trace,automaticRetry=False)
                 reply=outcome['nativeResponse']
             results[sid]=reply;trace.append(dict(id=sid,command=step['command'],resultHash=self.A.RUN.digest(reply),status='CALLABLE_VERIFIED'))
@@ -336,7 +336,7 @@ class DynamicCommands:
             rows.append(dict(guid=guid,type=element['type'],homeStory=element['homeStory'],materials=element.get('materialBindings',{}),relationships=element.get('relationships',{}),bounds=bounds,geometryAuthority='ACTUAL_RESULTANT_NATIVE_BREP' if bounds else 'NATIVE_BODY_NOT_AVAILABLE',quantities=native_body_quantities(element),providerBounds=provider,providerBoundsDelta=delta,providerBoundsInterpretation='MATCH' if delta is not None and delta<1e-5 else 'DIFFERS_NOT_PHYSICAL_BODY_AUTHORITY' if delta is not None else 'NOT_QUERIED'))
         return dict(schema='APA_SHARED_NATIVE_FACTS_V1',sourcePlanHash=workflow['sourcePlanHash'],elements=rows,engineering='NOT_VERIFIED')
 
-    def execute(self,writer,scene_id,ticket,affected,retained_signatures,saved_sha256,authorization,impact,verify_after):
+    def execute(self,writer,scene_id,ticket,affected,retained_signatures,saved_sha256,authorization,impact,verify_after,verify_before=None):
         """Delegate exactly one approved intent to the existing SceneWriter."""
         import hashlib
         import archicad_bim_documentation as D
@@ -349,13 +349,18 @@ class DynamicCommands:
             model=D.capture_full_model(writer.api,retained_signatures)
             if C.retained_geometry_signatures(model,list(retained_signatures))!=retained_signatures:raise ValueError('DYNAMIC_RETAINED_MODEL_CHANGED')
         def before():
+            if ticket['effect']!='READ_ONLY' and not (ticket['command']=='SaveProject' and ticket['parameters']=={}) and not callable(verify_before):raise ValueError('OPERATION_SPECIFIC_PREFLIGHT_REQUIRED')
             if self.catalog.get('_metadata',{}).get('binding',{}).get('apaRuntimeIdentity'):
                 self.A.verify_native_runtime_identity(writer.api,self.catalog)
             if writer.api('GetAddOnVersion',{}).get('version')!=CONTRACTS.source_version(self.catalog):raise ValueError('DYNAMIC_PROVIDER_VERSION_DRIFT')
             if hashlib.sha256(Path(binding['path']).read_bytes()).hexdigest()!=saved_sha256:raise ValueError('DYNAMIC_SAVED_FILE_CHANGED')
             current=set(self.A.inventory_guids(writer.api))
             if current!=set(scope['affectedGuids'])|set(scope['retainedGuids']):raise ValueError('DYNAMIC_COMPLETE_INVENTORY_SCOPE_REQUIRED')
-            preserved();return dict(status='DYNAMIC_BASELINE_PASS')
+            preserved()
+            if verify_before is not None:
+                proof=verify_before(writer.api)
+                if not isinstance(proof,dict) or not str(proof.get('status','')).endswith('PASS'):raise ValueError('OPERATION_SPECIFIC_PREFLIGHT_NOT_VERIFIED')
+            return dict(status='DYNAMIC_BASELINE_PASS')
         def after(reply,prior):
             self.validate_result(ticket['command'],reply)
             proof=verify_after(reply,prior)
