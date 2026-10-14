@@ -8,6 +8,64 @@ import archicad_connected_components as C
 RUN=A.RUN
 
 
+def compatible_native_step_counts(height, going, rules):
+    """Native configured limits only; no building-code or engineering verdict."""
+    if any(type(v) not in (int,float) or not math.isfinite(v) or v<=0 for v in (height,going)):
+        raise ValueError('NATIVE_STAIR_EXPLICIT_FINITE_DIMENSIONS_REQUIRED')
+    fields=[('ruleMin','ruleMax'),('treadDepthMin','treadDepthMax'),('riserHeightMin','riserHeightMax')]
+    for low,high in fields:
+        for name in (low,high):
+            if type(rules.get(name+'Applied')) is not bool or type(rules.get(name+'Value')) not in (int,float) or not math.isfinite(rules[name+'Value']) or rules[name+'Value']<=0:
+                raise ValueError('NATIVE_STAIR_CONFIGURED_RULE_SOURCE_INCOMPLETE')
+        if rules[low+'Applied'] and rules[high+'Applied'] and rules[low+'Value']>rules[high+'Value']:
+            raise ValueError('NATIVE_STAIR_CONFIGURED_RULE_SOURCE_INCONSISTENT')
+    def within(value,low,high):
+        return (not rules[low+'Applied'] or value>=rules[low+'Value']-1e-8) and (not rules[high+'Applied'] or value<=rules[high+'Value']+1e-8)
+    if not within(going,'treadDepthMin','treadDepthMax'):return []
+    return [n for n in range(2,201) if within(height/n,'riserHeightMin','riserHeightMax') and within(2*height/n+going,'ruleMin','ruleMax')]
+
+
+def prepare_source_dimension_example(api, source, native_state, data, schema_path):
+    """One explicit native Stair graph; never silently alter count or dimensions.
+
+    The caller supplies the independently captured native rule snapshot and
+    complete test parameters. Normal identity/free-space/journal/retained checks
+    still precede execution through the existing SceneWriter.
+    """
+    if hashlib.sha256(Path(source['sourcePath']).read_bytes()).hexdigest()!=source['sourceSHA256']:
+        raise ValueError('NATIVE_STAIR_SOURCE_CHANGED_BEFORE_PLAN')
+    source_guid=native_state.get('elementId',{}).get('guid','')
+    if native_state.get('contract')!='APA_NATIVE_STAIR_GEOMETRY_V1' or native_state.get('nativeType')!='Stair' or not RUN._GUID.fullmatch(source_guid):
+        raise ValueError('NATIVE_STAIR_TYPED_RULE_SNAPSHOT_REQUIRED')
+    if data.get('favoriteName')!=source['favoriteName'] or source['favoriteName'] not in api('GetFavoritesByType',{'elementType':'Stair'}).get('favorites',[]):
+        raise ValueError('NATIVE_STAIR_SOURCE_FAVORITE_UNAVAILABLE')
+    params={'stairsData':[copy.deepcopy(data)]}
+    # The ordinary scope validator checks every required field and H=N*R.
+    E.model_operation_scope('CreateStairs',params,'source-validation',[],[source_guid],'explicit source test')
+    if not RUN.close(data['flightWidth'],source['values']['FlightWidth']) or not RUN.close(data['treadDepth'],source['values']['TreadDepth']):
+        raise ValueError('NATIVE_STAIR_FAVORITE_SOURCE_WIDTH_OR_GOING_CHANGED')
+    counts=compatible_native_step_counts(data['totalHeight'],data['treadDepth'],native_state['rules'])
+    if data['stepNum'] not in counts:
+        raise ValueError('NATIVE_STAIR_REQUEST_INCOMPATIBLE_WITH_CONFIGURED_RULES_NO_SILENT_CHANGE')
+    stories=api('GetStories',{})['stories'];lower=next((r for r in stories if r['index']==data['floorIndex']),None)
+    if lower is None or not RUN.close(lower['level'],data['zCoordinate']):
+        raise ValueError('NATIVE_STAIR_EXACT_LOWER_STORY_REQUIRED')
+    upper=next((r for r in stories if RUN.close(r['level'],data['zCoordinate']+data['totalHeight'])),None)
+    if upper is None:raise ValueError('NATIVE_STAIR_EXACT_UPPER_STORY_REQUIRED')
+    a,b=data['baseLinePoints']
+    if not RUN.close(a['x'],b['x']) or b['y']<=a['y']:
+        raise ValueError('NATIVE_STAIR_EXAMPLE_REQUIRES_SOURCE_STRAIGHT_POSITIVE_Y_FRAME')
+    length=math.hypot(b['x']-a['x'],b['y']-a['y'])
+    if not RUN.close(length,data['stepNum']*data['treadDepth']):
+        raise ValueError('NATIVE_STAIR_TEST_REQUIRES_EXPLICIT_FULL_WALKING_LINE')
+    graph={'operations':[dict(id='source-native-stair-example',command='CreateStairs',params=params,after=[])]}
+    checked=A.SCENE.GRAPH.compile_graph(A.catalog_with_provenance(schema_path),graph,runtime_version=RUN.EXPECTED_TAPIR)
+    if checked['status']!='PLAN_VALIDATED_OFFLINE':raise ValueError('NATIVE_STAIR_SOURCE_GRAPH_INVALID')
+    recipe=dict(schema='APA_NATIVE_STAIR_SOURCE_DIMENSION_EXAMPLE_V1',source=copy.deepcopy(source),nativeRuleSnapshot=copy.deepcopy(native_state),parameters=params,graph=graph,graphPlanHash=checked['sourcePlanHash'],lowerStory=lower,upperStory=upper,compatibleCounts=counts,dimensionPolicy='EXPLICIT_TEST_COUNT_AND_HEIGHT_SOURCE_FAVOURITE_WIDTH_GOING_NO_SILENT_CORRECTION',physicalConnection='NOT_VERIFIED_DETACHED_EXAMPLE',engineeringAcceptance='NOT_VERIFIED')
+    recipe['sourceHash']=RUN.digest(recipe)
+    return recipe
+
+
 def favorite_dimensions(xml_path,favorite_name):
     raw=Path(xml_path).read_bytes();root=ET.fromstring(raw)
     stair=root.find('.//StairDefault')
@@ -23,6 +81,35 @@ def favorite_dimensions(xml_path,favorite_name):
         raise ValueError('NATIVE_STAIR_FAVORITE_DIMENSIONS_INCONSISTENT')
     return dict(favoriteName=favorite_name,sourceSHA256=hashlib.sha256(raw).hexdigest(),sourcePath=str(Path(xml_path).resolve()),values=values,
         exportAcceptance='MAIN_XML_PARSED; RELATED_GDL_EXPORT_SEPARATELY_QUALIFIED',engineeringAcceptance='NOT_VERIFIED')
+
+
+def audit_stair_inventory(native, inventory, retained, stair_guid, child_guids):
+    """Explain actual native inventory without inventing hidden Stair ownership.
+
+    Bodyless Objects are still elements. Native object.owner is an owner
+    reference, not automatically a host or proof of ancestry to this Stair.
+    An unresolved delta stays NOT_VERIFIED and never permits a Create replay.
+    """
+    ids={g.lower() for g in inventory};baseline={g.lower() for g in retained}
+    members={stair_guid.lower(),*(g.lower() for g in child_guids)}
+    if baseline & members or not baseline|members <= ids:
+        raise ValueError('NATIVE_STAIR_RETAINED_OR_MEMBER_INVENTORY_MISMATCH')
+    rows={e['guid'].lower():e for e in native['elements']}
+    if not ids <= rows.keys():raise ValueError('NATIVE_STAIR_INVENTORY_NOT_FULLY_READ_BACK')
+    if C.retained_geometry_signatures(native,list(retained))!=retained:
+        raise ValueError('NATIVE_STAIR_RETAINED_GEOMETRY_CHANGED')
+    extra=[]
+    for guid in sorted(ids-baseline-members):
+        row=rows[guid];relation=row.get('relationships',{})
+        owner=relation.get('ownerGuid','').lower()
+        resolved=row['type']=='Object' and relation.get('nativeField')=='object.owner' and owner in members
+        extra.append(dict(guid=guid,nativeType=row['type'],bodyCount=len(row['bodies']),
+            ownerGuid=owner or None,ownership='NATIVE_OWNER_IN_STAIR_MEMBERS' if resolved else 'NOT_VERIFIED'))
+    unresolved=[r['guid'] for r in extra if r['ownership']=='NOT_VERIFIED']
+    return dict(status='NOT_VERIFIED' if unresolved else 'NATIVE_STAIR_INVENTORY_PASS',
+        retainedCount=len(baseline),nativeMemberCount=len(members),inventoryCount=len(ids),
+        additionalElements=extra,unresolvedGuids=unresolved,automaticRetry=False,
+        dimensionAcceptanceIndependent=True)
 
 
 def prepare(api,plan,created,source):
