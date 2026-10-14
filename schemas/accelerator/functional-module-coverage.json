@@ -1,0 +1,638 @@
+{
+  "schema": "APA_FUNCTIONAL_MODULE_COVERAGE_V1",
+  "basis": "Bounded reuse of PR84-85 inventories; no new provider binary/ABI research",
+  "counters": {
+    "nativeAndOfficialPrepared": 368,
+    "localPrepared": 9,
+    "totalPrepared": 377,
+    "currentNativeCompatible": 337,
+    "newNativeSDKContracts": 5,
+    "sourceOnlyNativeRuntime": 31,
+    "newLocalAnalyticalCapabilities": 6,
+    "existingAPALocalUtilitiesNowRoutable": 3,
+    "retainedCandidateBuildCommands": 12,
+    "existingDevKitBuildCommand": 1,
+    "newSDKBuildCommands": 5,
+    "nonTapirProviderContracts": 0
+  },
+  "groups": {
+    "BIM_element_management": {
+      "existing": [
+        "CreateWalls",
+        "ModifyWalls",
+        "CreateSlabs",
+        "ModifySlabs",
+        "CreateColumns",
+        "CreateBeams"
+      ],
+      "new": [
+        "GetNativeElementDefaultsV1"
+      ]
+    },
+    "complex_geometry_memo": {
+      "existing": [
+        "GetModelDumpV1",
+        "ModifyRoofs",
+        "ModifySlabs",
+        "ModifyMeshes"
+      ],
+      "new": [
+        "GetNativePolygonMemoV1"
+      ],
+      "boundary": "Polygon memo and holes/arcs differ from resultant BREP. Shell memo write not integrated."
+    },
+    "attributes_materials": {
+      "existing": [
+        "GetBuildingMaterials",
+        "CreateBuildingMaterials",
+        "GetProfiles",
+        "CreateProfiles"
+      ],
+      "new": [],
+      "boundary": "Existing contracts retained; not newly counted."
+    },
+    "properties_classifications": {
+      "existing": [
+        "API.GetPropertyValuesOfElements",
+        "SetPropertyValuesOfElements",
+        "SetClassificationsOfElements"
+      ],
+      "new": [],
+      "boundary": "Prior provider output mismatch remains registered."
+    },
+    "stories_zones_units": {
+      "existing": [
+        "GetStories",
+        "SetStories",
+        "GetZoneBoundaries",
+        "CreateZones"
+      ],
+      "new": [
+        "GetNativeWorkingUnitsV1"
+      ]
+    },
+    "roof_shell_stair_railing": {
+      "existing": [
+        "CreateRoofs",
+        "ModifyRoofs",
+        "CreateStairs"
+      ],
+      "new": [
+        "GetNativeElementDefaultsV1",
+        "GetNativePolygonMemoV1"
+      ],
+      "boundary": "Header defaults for complex types; no new Shell/Railing factory or solver acceptance."
+    },
+    "curtain_wall": {
+      "existing": [],
+      "new": [
+        "GetNativeElementDefaultsV1"
+      ],
+      "boundary": "CurtainWall header defaults only. Creation/component memo contract still missing."
+    },
+    "MEP": {
+      "existing": [
+        "CreateMEPRoutingElements",
+        "ConnectMEPElements"
+      ],
+      "new": [],
+      "boundary": "Round-to-rectangular S10 bridge remains blocked."
+    },
+    "SEO": {
+      "existing": [
+        "CreateSolidElementLinks",
+        "GetSolidElementLinks"
+      ],
+      "new": []
+    },
+    "documentation_navigator_layout": {
+      "existing": [
+        "CreateSections",
+        "CreateElevations",
+        "PublishPublisherSet",
+        "GetNavigatorItemTree"
+      ],
+      "new": [],
+      "boundary": "Schedule rows and full vertical 2D primitive export remain not exposed."
+    },
+    "IFC_SAF_analytical": {
+      "existing": [
+        "IFCFileOperation",
+        "GetIFCIdsOfElements"
+      ],
+      "new": [
+        "IFCSelect",
+        "IFCValidate",
+        "IFCGeometry"
+      ],
+      "boundary": "IfcOpenShell file analytics; not engineering/SAF acceptance."
+    },
+    "GDL_library": {
+      "existing": [
+        "GetAvailableLibraryParts",
+        "CreateLibraryPartFromScripts"
+      ],
+      "new": [
+        "GetNativeLibraryPartOriginV1"
+      ]
+    },
+    "selection_grouping": {
+      "existing": [
+        "ChangeSelectionOfElements",
+        "GroupElements"
+      ],
+      "new": [
+        "GetNativeGroupRootsV1"
+      ]
+    },
+    "import_export": {
+      "existing": [
+        "OpenProject",
+        "SaveProject",
+        "IFCFileOperation",
+        "PublishPublisherSet"
+      ],
+      "new": [],
+      "boundary": "Closed RVT/Rhino/point-cloud/Collada/AI/provider APIs not inferred from internal exports."
+    },
+    "dependencies_spatial_optimization": {
+      "existing": [
+        "BIMGraph",
+        "NativeModelDump",
+        "SceneWriter"
+      ],
+      "new": [
+        "DependencyImpact",
+        "PolygonRelations",
+        "ConstrainedAssignment"
+      ],
+      "boundary": "Caller facts and constraints; no inferred loads or dimensions."
+    }
+  },
+  "providers": [
+    {
+      "provider": "BibimAI.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [],
+      "alternativeBoundary": "NO_EXISTING_SUPPORTED_PROGRAMMATIC_ALTERNATIVE_IN_BOUNDED_REGISTRY",
+      "blocker": "Existing Bibim native tools are returned to its LLM/UI host, not exposed as independent JSON RPC; existing MCP8001 endpoint unreachable. Router not imported because it starts a scheduler.",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "SAF In-Out.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [
+        "AddOn.APAAnalysis.IFCExchangeFacts"
+      ],
+      "alternativeBoundary": "ACTUAL_IFC_ANALYTICAL_FACTS_ONLY_NO_NATIVE_SAF_EXPORT_CONTRACT",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "Corner Window.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [
+        "CreateWindows",
+        "ModifyWindows"
+      ],
+      "alternativeBoundary": "STANDARD_HOSTED_WINDOWS_ONLY_CORNER_TOOL_VARIATION_CONTRACT_MISSING",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "RegisterLightworksFileTypes.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [],
+      "alternativeBoundary": "NO_EXISTING_SUPPORTED_PROGRAMMATIC_ALTERNATIVE_IN_BOUNDED_REGISTRY",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "SDAExporter.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [],
+      "alternativeBoundary": "NO_EXISTING_SUPPORTED_PROGRAMMATIC_ALTERNATIVE_IN_BOUNDED_REGISTRY",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "Apartment Stamp.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [],
+      "alternativeBoundary": "NO_EXISTING_SUPPORTED_PROGRAMMATIC_ALTERNATIVE_IN_BOUNDED_REGISTRY",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "Quick Layers.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [
+        "GetLayers",
+        "CreateLayers"
+      ],
+      "alternativeBoundary": "EXISTING_LAYER_READ_CREATE_NOT_FULL_QUICKLAYERS_STATE",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "RFA and RVT Geometry Exchange.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [],
+      "alternativeBoundary": "NO_EXISTING_SUPPORTED_PROGRAMMATIC_ALTERNATIVE_IN_BOUNDED_REGISTRY",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "KeynoteLegend.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [],
+      "alternativeBoundary": "NO_EXISTING_SUPPORTED_PROGRAMMATIC_ALTERNATIVE_IN_BOUNDED_REGISTRY",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "Element Information.apx",
+      "originalStatus": "INDIRECT_OFFICIAL_API_DEPENDENCY_CALLABLE_VERIFIED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [
+        "GetDetailsOfElements",
+        "GetModelDumpV1",
+        "AddOn.TapirCommand.GetNativeElementDefaultsV1",
+        "AddOn.TapirCommand.GetNativePolygonMemoV1"
+      ],
+      "alternativeBoundary": "EXISTING_ELEMENT_NATIVE_INFO_PLUS_NEW_SDK_TOOL_AND_MEMO_QUERIES",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "Interactive Schedule.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [
+        "API.GetNavigatorItemTree"
+      ],
+      "alternativeBoundary": "DEFINITIONS_NAVIGATOR_ONLY_ROWS_AND_EDITING_NOT_EXPOSED_CSV_RETAINED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "Grid Tool.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [
+        "GetNativeGridDefaultsV1",
+        "GetNativeGridElementsV1",
+        "CreateNativeGridElementsV1",
+        "ModifyNativeGridElementsV1"
+      ],
+      "alternativeBoundary": "EXISTING_CANDIDATE_SDK_BRIDGE_BUILD_REUSED_NOT_CURRENT_RUNTIME",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "Collada In-Out.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [],
+      "alternativeBoundary": "NO_EXISTING_SUPPORTED_PROGRAMMATIC_ALTERNATIVE_IN_BOUNDED_REGISTRY",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "MeshImport.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [
+        "CreateMeshes",
+        "ModifyMeshes"
+      ],
+      "alternativeBoundary": "NATIVE_MESH_INPUT_SUPPORTED_SOURCE_FILE_PARSER_NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "PointCloud_In.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [],
+      "alternativeBoundary": "NO_EXISTING_SUPPORTED_PROGRAMMATIC_ALTERNATIVE_IN_BOUNDED_REGISTRY",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "Active Layer.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [
+        "AddOn.TapirCommand.GetNativeElementDefaultsV1"
+      ],
+      "alternativeBoundary": "NEW_TOOL_DEFAULT_LAYER_READ_ONLY_ACTIVE_LAYER_EDIT_NOT_IMPLEMENTED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "Selections.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [
+        "ChangeSelectionOfElements"
+      ],
+      "alternativeBoundary": "EXISTING_SELECTION_OPERATION_NOT_VENDOR_APX_RPC",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "GoogleEarthConnectivity.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [],
+      "alternativeBoundary": "NO_EXISTING_SUPPORTED_PROGRAMMATIC_ALTERNATIVE_IN_BOUNDED_REGISTRY",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "Quick Rotate.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [],
+      "alternativeBoundary": "NO_EXISTING_SUPPORTED_PROGRAMMATIC_ALTERNATIVE_IN_BOUNDED_REGISTRY",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "Profile Database.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [
+        "CreateProfiles",
+        "GetProfiles",
+        "API.GetProfileAttributePreview",
+        "API.GetProfileAttributes"
+      ],
+      "alternativeBoundary": "EXISTING_NATIVE_PROFILE_OPERATIONS_NOT_VENDOR_APX_RPC",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "3Dconnexion Enabler.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [],
+      "alternativeBoundary": "NO_EXISTING_SUPPORTED_PROGRAMMATIC_ALTERNATIVE_IN_BOUNDED_REGISTRY",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "Ventilation.apx",
+      "originalStatus": "EXISTING_TAPIR_MEP_BRIDGE",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [
+        "CreateMEPRoutingElements",
+        "GetMEPElements"
+      ],
+      "alternativeBoundary": "EXISTING_TAPIR_MEP_BRIDGE_NO_NEW_VENDOR_CONTRACT",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "Rhino_Out.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [],
+      "alternativeBoundary": "NO_EXISTING_SUPPORTED_PROGRAMMATIC_ALTERNATIVE_IN_BOUNDED_REGISTRY",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "Rhino_In.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [],
+      "alternativeBoundary": "NO_EXISTING_SUPPORTED_PROGRAMMATIC_ALTERNATIVE_IN_BOUNDED_REGISTRY",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "IFC In-Out.apx",
+      "originalStatus": "INDIRECT_NATIVE_IFC_BRIDGE_CALLABLE_VERIFIED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [
+        "IFCFileOperation",
+        "GetIFCIdsOfElements",
+        "AddOn.APAAnalysis.IFCSelect",
+        "AddOn.APAAnalysis.IFCValidate",
+        "AddOn.APAAnalysis.IFCGeometry",
+        "AddOn.APAAnalysis.IFCExchangeFacts"
+      ],
+      "alternativeBoundary": "EXISTING_NATIVE_IFC_PLUS_NEW_LOCAL_FILE_ANALYTICS_NOT_VENDOR_APX_RPC",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "Hydronics.apx",
+      "originalStatus": "EXISTING_TAPIR_MEP_BRIDGE",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [
+        "CreateMEPRoutingElements",
+        "GetMEPElements"
+      ],
+      "alternativeBoundary": "EXISTING_TAPIR_MEP_BRIDGE_NO_NEW_VENDOR_CONTRACT",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "EnergyEvaluation.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [],
+      "alternativeBoundary": "NO_EXISTING_SUPPORTED_PROGRAMMATIC_ALTERNATIVE_IN_BOUNDED_REGISTRY",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "DXF-DWG In-Out.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [
+        "PublishPublisherSet"
+      ],
+      "alternativeBoundary": "EXISTING_CONFIGURED_PUBLISHER_ONLY_NO_NEW_TRANSLATOR_SETUP_CONTRACT",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "BluebeamConnection.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [],
+      "alternativeBoundary": "NO_EXISTING_SUPPORTED_PROGRAMMATIC_ALTERNATIVE_IN_BOUNDED_REGISTRY",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "BimplusConnection.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [],
+      "alternativeBoundary": "NO_EXISTING_SUPPORTED_PROGRAMMATIC_ALTERNATIVE_IN_BOUNDED_REGISTRY",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "AI Visualizer.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [],
+      "alternativeBoundary": "NO_EXISTING_SUPPORTED_PROGRAMMATIC_ALTERNATIVE_IN_BOUNDED_REGISTRY",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    },
+    {
+      "provider": "AI Assistant.apx",
+      "originalStatus": "NOT_EXPOSED",
+      "directCommandsDiscovered": 0,
+      "directCommandsIntegrated": 0,
+      "supportedAlternatives": [],
+      "alternativeBoundary": "NO_EXISTING_SUPPORTED_PROGRAMMATIC_ALTERNATIVE_IN_BOUNDED_REGISTRY",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "runtimeNewVendorContract": false
+    }
+  ],
+  "devKitExamples": [
+    {
+      "command": "AddOn.LibraryManagement_Test.AddLibraryCommand",
+      "status": "SOURCE_ONLY_NOT_INTEGRATED",
+      "reason": "SDK example uses UI reports/dialogs, implicit selection, library mutation or BIMcloud/network context; no explicit target/scope/result suitable for unmodified generic native execution.",
+      "reuse": "Use existing Tapir library operations or new modern SDK library-part origin query where equivalent; do not count substitutes as this command."
+    },
+    {
+      "command": "AddOn.LibraryManagement_Test.AddLibrariesCommand",
+      "status": "SOURCE_ONLY_NOT_INTEGRATED",
+      "reason": "SDK example uses UI reports/dialogs, implicit selection, library mutation or BIMcloud/network context; no explicit target/scope/result suitable for unmodified generic native execution.",
+      "reuse": "Use existing Tapir library operations or new modern SDK library-part origin query where equivalent; do not count substitutes as this command."
+    },
+    {
+      "command": "AddOn.LibraryManagement_Test.AddServerLibraryCommand",
+      "status": "SOURCE_ONLY_NOT_INTEGRATED",
+      "reason": "SDK example uses UI reports/dialogs, implicit selection, library mutation or BIMcloud/network context; no explicit target/scope/result suitable for unmodified generic native execution.",
+      "reuse": "Use existing Tapir library operations or new modern SDK library-part origin query where equivalent; do not count substitutes as this command."
+    },
+    {
+      "command": "AddOn.LibraryManagement_Test.AddServerLibrariesCommand",
+      "status": "SOURCE_ONLY_NOT_INTEGRATED",
+      "reason": "SDK example uses UI reports/dialogs, implicit selection, library mutation or BIMcloud/network context; no explicit target/scope/result suitable for unmodified generic native execution.",
+      "reuse": "Use existing Tapir library operations or new modern SDK library-part origin query where equivalent; do not count substitutes as this command."
+    },
+    {
+      "command": "AddOn.LibraryManagement_Test.RemoveAllLibrariesCommand",
+      "status": "SOURCE_ONLY_NOT_INTEGRATED",
+      "reason": "SDK example uses UI reports/dialogs, implicit selection, library mutation or BIMcloud/network context; no explicit target/scope/result suitable for unmodified generic native execution.",
+      "reuse": "Use existing Tapir library operations or new modern SDK library-part origin query where equivalent; do not count substitutes as this command."
+    },
+    {
+      "command": "AddOn.LibraryManagement_Test.RemoveMissingLibrariesCommand",
+      "status": "SOURCE_ONLY_NOT_INTEGRATED",
+      "reason": "SDK example uses UI reports/dialogs, implicit selection, library mutation or BIMcloud/network context; no explicit target/scope/result suitable for unmodified generic native execution.",
+      "reuse": "Use existing Tapir library operations or new modern SDK library-part origin query where equivalent; do not count substitutes as this command."
+    },
+    {
+      "command": "AddOn.LibraryManagement_Test.DumpLibraryListCommand",
+      "status": "SOURCE_ONLY_NOT_INTEGRATED",
+      "reason": "SDK example uses UI reports/dialogs, implicit selection, library mutation or BIMcloud/network context; no explicit target/scope/result suitable for unmodified generic native execution.",
+      "reuse": "Use existing Tapir library operations or new modern SDK library-part origin query where equivalent; do not count substitutes as this command."
+    },
+    {
+      "command": "AddOn.LibraryManagement_Test.DumpAllLibPartsCommand",
+      "status": "SOURCE_ONLY_NOT_INTEGRATED",
+      "reason": "SDK example uses UI reports/dialogs, implicit selection, library mutation or BIMcloud/network context; no explicit target/scope/result suitable for unmodified generic native execution.",
+      "reuse": "Use existing Tapir library operations or new modern SDK library-part origin query where equivalent; do not count substitutes as this command."
+    },
+    {
+      "command": "AddOn.LibraryManagement_Test.DuplicateSelectionToEmbeddedCommand",
+      "status": "SOURCE_ONLY_NOT_INTEGRATED",
+      "reason": "SDK example uses UI reports/dialogs, implicit selection, library mutation or BIMcloud/network context; no explicit target/scope/result suitable for unmodified generic native execution.",
+      "reuse": "Use existing Tapir library operations or new modern SDK library-part origin query where equivalent; do not count substitutes as this command."
+    },
+    {
+      "command": "AddOn.LibraryManagement_Test.CreateNewObjectFromSelectionCommand",
+      "status": "SOURCE_ONLY_NOT_INTEGRATED",
+      "reason": "SDK example uses UI reports/dialogs, implicit selection, library mutation or BIMcloud/network context; no explicit target/scope/result suitable for unmodified generic native execution.",
+      "reuse": "Use existing Tapir library operations or new modern SDK library-part origin query where equivalent; do not count substitutes as this command."
+    },
+    {
+      "command": "AddOn.LibraryManagement_Test.UploadLibrariesToServerCommand",
+      "status": "SOURCE_ONLY_NOT_INTEGRATED",
+      "reason": "SDK example uses UI reports/dialogs, implicit selection, library mutation or BIMcloud/network context; no explicit target/scope/result suitable for unmodified generic native execution.",
+      "reuse": "Use existing Tapir library operations or new modern SDK library-part origin query where equivalent; do not count substitutes as this command."
+    },
+    {
+      "command": "AddOn.LibraryManagement_Test.RemoveLibrariesFromServerCommand",
+      "status": "SOURCE_ONLY_NOT_INTEGRATED",
+      "reason": "SDK example uses UI reports/dialogs, implicit selection, library mutation or BIMcloud/network context; no explicit target/scope/result suitable for unmodified generic native execution.",
+      "reuse": "Use existing Tapir library operations or new modern SDK library-part origin query where equivalent; do not count substitutes as this command."
+    },
+    {
+      "command": "AddOn.AddOnCommandTest.CreateColumnCommand",
+      "status": "DUPLICATE_EXISTING_NATIVE_CREATE_COLUMNS_NOT_INTEGRATED",
+      "reuse": "CreateColumns has existing typed input, provider route and SceneWriter; do not add duplicate selection/default-based example."
+    },
+    {
+      "command": "AddOn.AddOnCommandTest.ProtectionInfoCommand",
+      "status": "BUILD_INTEGRATED_NOT_RUNTIME_REGISTERED",
+      "reuse": "Existing DevKit license flags, same namespace/name; full APX registration uses owned handler."
+    }
+  ],
+  "newSDKPublicCalls": [
+    "ACAPI_Element_GetDefaults",
+    "ACAPI_Element_Get",
+    "ACAPI_Element_GetMemo",
+    "ACAPI_ProjectSetting_GetPreferences",
+    "ACAPI_Grouping_GetGroup",
+    "ACAPI_Grouping_GetRootGroup",
+    "ACAPI::Library::GetLibraryManager",
+    "LibraryManager.GetLibPartByLibInd",
+    "LibraryManager.GetLibraryOfLibPart",
+    "ACAPI_Licensing_GetProtectionMode"
+  ],
+  "sdkInventory": "848 previously inventoried public function declarations are not JSON commands or capability count"
+}

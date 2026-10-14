@@ -159,11 +159,13 @@ def main():
         (build_root/'runtime-source-snapshot.json').write_bytes((json.dumps(manifest,sort_keys=True,indent=2)+'\n').encode())
     shutil.copy2(addon_overlay / "Sources" / "ModelDumpCommands.cpp", addon_source / "Sources" / "ModelDumpCommands.cpp")
     shutil.copy2(addon_overlay / "Sources" / "ModelDumpCommands.hpp", addon_source / "Sources" / "ModelDumpCommands.hpp")
-    for name in ("NativeGridCommands.cpp", "NativeGridCommands.hpp", "NativeStairCommands.cpp", "NativeStairCommands.hpp"):
+    for name in ("NativeGridCommands.cpp", "NativeGridCommands.hpp", "NativeStairCommands.cpp", "NativeStairCommands.hpp", "NativeModuleCommands.cpp", "NativeModuleCommands.hpp"):
         shutil.copy2(addon_overlay / "Sources" / name, addon_source / "Sources" / name)
     overlay_registration(addon_source)
     from roof_edit_overlay import apply as apply_roof_edit_overlay
     apply_roof_edit_overlay(addon_source)
+    from module_expansion_overlay import apply as apply_module_overlay
+    apply_module_overlay(addon_source)
     # The ID covers the actual copied source/resource snapshot, not Tapir's shared
     # version string. It changes when any runtime implementation/resource changes.
     identity_files={p.relative_to(addon_source).as_posix():hashlib.sha256(p.read_bytes()).hexdigest()
