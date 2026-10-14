@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 150,
+  "revision": 151,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -1703,6 +1703,12 @@
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261014-074612Z-universal-native-floor-contours.json",
       "kind": "RECEIPT",
       "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
+    },
+    "ART-P70-A11-S03-RUNTIME-WINDOWS-CHECKPOINT-20261014": {
+      "id": "ART-P70-A11-S03-RUNTIME-WINDOWS-CHECKPOINT-20261014",
+      "kind": "REPORT",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/control/reviews/APA-RUNTIME-IDENTITY-WINDOWS-CHECKPOINT-20261014.json",
+      "verification": "ORIGINAL_APX_SHA_UNCHANGED_NO_REPLACEMENT_RECORD_WINDOWS_RUNAS_CANCELLED_NEW_CANDIDATE_NOT_INSTALLED"
     }
   },
   "tasks": {
@@ -4278,7 +4284,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -4424,12 +4430,13 @@
         "Stair preparation remainsBLOCKED: stockcreate setter removesbaseline edge/vertexdata, leavesoldwalkingmemo beforeSolveStair. RootfaultcauseNOT_VERIFIED. Detacheddiagnostic candidate nowreads source/frame/buffers withoutsetter orsolver; exactwrite requires qualifieddetachedPASS andcompletebuffers. Oldterminatingrequest neverrepeated. Local/world baselineframe exposedsource/buildonly. DifferentAPXdeployment requires separateauthorization.",
         "Livepreflight fixedforbodyless hiddenRiser/Tread sentinelbounds through slotcompleteNativeDump/actualStairowner/specializedmembership; parentgeometry stillchecked, no2Dsemanticguess. Nativecreate1.002s/edit1.446s/Save3.251s/Open11.458s includingreadback; sourcecompile0.489s separatePythonmeasurement. No largemodel/scalability/optimizationclaim.",
         "718/718WindowsAPA host/CI 38527855349 PASS,11newregressions,102upstream/coreMCP. Mainorchestrator unchangedKG fresh148 beforecompletion149. Code13blobs, canonicalreport/evidence14files/receipt APA-RUN-20261014-074612Z-universal-native-floor-contours GitHubbyte-readbackverified. A11.S03PARTIAL; other90tasks, historicalDONE, A07deps andS10BLOCKED preserved.",
-        "Directuserapproval: allnativeoperations in existingtestPLN areauthorized, with retained145protection/identity/journal/readback; no newPLN required. APXreplacement remains separatepermission. Nextqualify newruntimeidentity/safe read-onlyStairdiagnostic under separatelyauthorizedtemporarycandidate; SinglePlaneRoof contour/slope is nextindependent SDK/nativecontract. Normative/search/documentation/Trc/main untouched."
+        "Directuserapproval: allnativeoperations in existingtestPLN areauthorized, with retained145protection/identity/journal/readback; no newPLN required. APXreplacement remains separatepermission. Nextqualify newruntimeidentity/safe read-onlyStairdiagnostic under separatelyauthorizedtemporarycandidate; SinglePlaneRoof contour/slope is nextindependent SDK/nativecontract. Normative/search/documentation/Trc/main untouched.",
+        "Runtime continuation afterPR80: directuser authorized f6f0861ffb76aced7de89922bdfa5f271d9aa371795c3849cbfe6e585003187f temporaryAPX, safe identity/Stair read-only diagnosis and agentfileopen/close. Retained145 independently rechecked before UIclose; test saved/closed, current SHA256 f25438ef700ef590a4f85634c14bc95384df866b039783b31e77479648cfe8c0 and backupverified. Windows RunAs cancelled before replacementhelper executed; installedoriginal dc99af071d3dbcff9626653ccc37001613cb3fa4a8eff50c6000c1cc70e8d7c7 unchanged, registry unchanged,0modelgeometrywrites. Candidate LIVE NOT_VERIFIED; exactStair remainsBLOCKED. Windowsconfirmationretry pendinguser; no repeatedwrite and no repeated terminating solver. Supplemental readback afterUI Save requiresreopening. Published Slab LIVE/718Windows result remainsvalid in its original scope."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
-      "owner": "work-universal-runtime-readonly-20261014",
-      "lease_until": "2026-10-14T11:10:31Z",
-      "claim_ref": "APA-CLAIM-UNIVERSAL-RUNTIME-20261014T081031Z",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
@@ -4561,7 +4568,8 @@
         "ART-P70-A11-S03-SOURCE-CONTOURS-CI-20261014",
         "ART-P70-A11-S03-SOURCE-CONTOURS-KG-20261014",
         "ART-P70-A11-S03-SOURCE-CONTOURS-REPORT80-20261014",
-        "ART-P70-A11-S03-SOURCE-CONTOURS-RECEIPT80-20261014"
+        "ART-P70-A11-S03-SOURCE-CONTOURS-RECEIPT80-20261014",
+        "ART-P70-A11-S03-RUNTIME-WINDOWS-CHECKPOINT-20261014"
       ],
       "blocked_reason": null
     },
@@ -5394,7 +5402,8 @@
         "ART-P70-A11-S03-SOURCE-CONTOURS-CI-20261014",
         "ART-P70-A11-S03-SOURCE-CONTOURS-KG-20261014",
         "ART-P70-A11-S03-SOURCE-CONTOURS-REPORT80-20261014",
-        "ART-P70-A11-S03-SOURCE-CONTOURS-RECEIPT80-20261014"
+        "ART-P70-A11-S03-SOURCE-CONTOURS-RECEIPT80-20261014",
+        "ART-P70-A11-S03-RUNTIME-WINDOWS-CHECKPOINT-20261014"
       ],
       "synthesis_state": "PARTIAL",
       "owner": null
