@@ -1,7 +1,7 @@
 {
   "schema": "APA_NATIVE_ROOF_CHECKPOINT_V1",
   "status": "LIVE_PASS_GEOMETRY_EDIT_SAVE_OPEN",
-  "savedSHA256": "ad7998d2bc60c876be6a54a6dadfd61be5feb16d1e3cf5fddd84ed4a3b93de46",
+  "savedSHA256": "3a1164d9ea63d66dae4143f6b21060a564ce126629194ff97ffeed9057be8f59",
   "inventory": 258,
   "retained": 255,
   "sourceRoofPreservedBecauseSEOOperators": 5,
@@ -400,7 +400,8 @@
   ],
   "candidateSHA256": "fd5ac013fe2837a0516cf1e609c29fdb87703a46a2f8c767d42fc0ee05bca1ff",
   "candidateSourceCommit": "5f4777d761a24b5419e4006a0e493a0b38efdfab",
-  "visual": "NOT_VERIFIED_PENDING",
-  "originalAPXRestoration": "PENDING",
-  "engineering": "NOT_VERIFIED"
+  "visual": "PASS_NATIVE_3D_BOTH_ASSEMBLIES",
+  "originalAPXRestoration": "BYTE_EXACT_FILES_AND_REGISTRATION",
+  "engineering": "NOT_VERIFIED",
+  "originalRuntimeReadback": "ALL258_SIGNATURES_AND_BOTH_ASSEMBLIES_PASS"
 }

@@ -134,6 +134,13 @@ class DynamicCommands:
         if not authorization or impact not in {'READ_ONLY','MODEL','PROJECT','ATTRIBUTES','DOCUMENTATION','EXTERNAL'}:raise ValueError('EXPLICIT_IMPACT_AND_AUTHORIZATION_REQUIRED')
         affected=sorted(g.lower() for g in affected);retained=sorted(g.lower() for g in retained)
         if set(affected)&set(retained):raise ValueError('AFFECTED_AND_RETAINED_SCOPE_OVERLAP')
+        def target_ids(v):
+            if isinstance(v,dict):
+                if 'elementId' in v and isinstance(v['elementId'],dict) and 'guid' in v['elementId']:yield v['elementId']['guid'].lower()
+                for item in v.values():yield from target_ids(item)
+            elif isinstance(v,list):
+                for item in v:yield from target_ids(item)
+        if impact=='MODEL' and ticket['effect'] in {'MODIFY','DELETE'} and not set(target_ids(ticket['parameters']))<=set(affected):raise ValueError('DYNAMIC_ELEMENT_TARGET_OUTSIDE_AUTHORIZED_SCOPE')
         value=dict(schema='APA_DYNAMIC_OPERATION_V1',ticket=ticket,binding=binding,affectedGuids=affected,retainedGuids=retained,authorizationRef=authorization,impact=impact)
         value['hash']=self.A.RUN.digest(value);return value
 

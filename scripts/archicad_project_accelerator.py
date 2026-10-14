@@ -349,6 +349,8 @@ def compile_authored_intent(intent, schema_path, read_api):
         if (not isinstance(step,dict) or step.get('command') not in catalog_with_provenance(schema_path)['commands']
                 or not step['command'].startswith('Create')):
             raise ValueError("UNSUPPORTED_AUTHORED_NATIVE_COMPONENT")
+        if 'Morph' in step['command']:
+            raise ValueError('UNSUPPORTED_AUTHORED_MORPH_REQUIRES_DOCUMENTED_LAST_RESORT_SCOPE')
         if step['command'] in {'CreateWalls','CreateRoofs'}:
             rows=next(iter(step.get('params',{}).values()),[])
             if len(rows)!=1 or rows[0].get('floorIndex') not in story_indices:
