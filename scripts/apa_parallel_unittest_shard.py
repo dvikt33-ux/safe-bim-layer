@@ -39,16 +39,25 @@ def main() -> int:
     # We deliberately discover all tracked top-level tests, not just
     # test_archicad_*.py, and report import errors as real errors.
     suite = unittest.TestLoader().discover(start_dir="tests", pattern="test_*.py")
-    discovered = list(cases(suite))
-    identifiers = [t.id() for t in discovered]
-    duplicates = len(identifiers) - len(set(identifiers))
+    raw_discovered = list(cases(suite))
+    # Some legacy load_tests helpers expose the same unittest ID multiple
+    # times; deduplicate by canonical ID and record every collapsed duplicate.
+    by_id = {}
+    duplicated_ids = []
+    for item in raw_discovered:
+        if item.id() in by_id:
+            duplicated_ids.append(item.id())
+        else:
+            by_id[item.id()] = item
+    discovered = list(by_id.values())
+    identifiers = list(by_id)
     selected = [t for t in discovered if target(t.id(), args.shards) == args.shard]
     unique_assignments = all(sum(target(k, args.shards) == s for s in range(args.shards)) == 1 for k in identifiers)
-    if duplicates or not unique_assignments:
-        print(f"ERROR: duplicate IDs={duplicates} unique assignments={unique_assignments}", file=sys.stderr)
+    if not unique_assignments:
+        print('ERROR: a test was not assigned to exactly one shard',file=sys.stderr)
         return 2
-    ordered_digest = hashlib.sha256("\n".join(sorted(identifiers)).encode()).hexdigest()
-    print(f"OFFLINE_SHARD {args.shard + 1}/{args.shards}; DISCOVERED={len(discovered)}; ASSIGNED={len(selected)}; DISCOVERY_SHA={ordered_digest}", flush=True)
+    ordered_digest = hashlib.sha256('\n'.join(sorted(identifiers)).encode()).hexdigest()
+    print(f'OFFLINE_SHARD {args.shard+1}/{args.shards}; RAW={len(raw_discovered)}; UNIQUE={len(discovered)}; DUPLICATES={len(duplicated_ids)}; ASSIGNED={len(selected)}; SHA={ordered_digest}',flush=True)
     runner = unittest.TextTestRunner(verbosity=1, failfast=False)
     result = runner.run(unittest.TestSuite(selected))
     payload = {
@@ -56,6 +65,9 @@ def main() -> int:
         "shard": args.shard,
         "shards": args.shards,
         "totalDiscovered": len(discovered),
+        "discoveredOccurrences": len(raw_discovered),
+        "duplicateIdsCollapsed": len(duplicated_ids),
+        "duplicateExamples": duplicated_ids[:25],
         "assigned": len(selected),
         "suiteSHA256": ordered_digest,
         "testsRun": result.testsRun,
