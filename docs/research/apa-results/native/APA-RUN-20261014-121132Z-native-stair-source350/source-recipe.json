@@ -1,0 +1,57 @@
+{
+  "status": "SOURCE_DIMENSION_PASS",
+  "nativeType": "Stair",
+  "sourceFavourite": "Лестница Монолитная без Отделки",
+  "mainXMLSHA256": "ae2ac9b234889b75835062356cd293ea9881d7a839e68d68dca5106de5a3296f",
+  "sourceValues": {
+    "FlightWidth": 1.0,
+    "StepNum": 20.0,
+    "RiserHeight": 0.15,
+    "TreadDepth": 0.35,
+    "TotalHeight": 3.0
+  },
+  "relatedGDLExport": "NOT_FULLY_VERIFIED_NATIVE_EXPORT7003_MAIN_XML_VALID",
+  "capturedNativeRules": {
+    "ruleMinValue": 0.6,
+    "ruleMinApplied": true,
+    "ruleMaxValue": 0.65,
+    "ruleMaxApplied": true,
+    "treadDepthMinValue": 0.25,
+    "treadDepthMinApplied": true,
+    "treadDepthMaxValue": 0.35,
+    "treadDepthMaxApplied": true,
+    "riserHeightMinValue": 0.15,
+    "riserHeightMinApplied": true,
+    "riserHeightMaxValue": 0.2,
+    "riserHeightMaxApplied": true
+  },
+  "explicitTestParameters": {
+    "favoriteName": "Лестница Монолитная без Отделки",
+    "baseLinePoints": [
+      {
+        "x": 120.0,
+        "y": 40.0
+      },
+      {
+        "x": 120.0,
+        "y": 47.7
+      }
+    ],
+    "zCoordinate": 0.0,
+    "floorIndex": 0,
+    "totalHeight": 3.3,
+    "flightWidth": 1.0,
+    "stepNum": 22,
+    "riserHeight": 0.15,
+    "treadDepth": 0.35,
+    "finishVisible": false
+  },
+  "graphPlanHash": "fe27858aa98c469c95aa1cad906ed973373b4ba8affbd586664d7f391bc3e32a",
+  "sourceHash": "c9347947517fa68f62154065d2cd75188b55207044f4ae5751de1d9d36f29081",
+  "compatibleExplicitCounts": [
+    22
+  ],
+  "globalPreferencesChanged": false,
+  "existingStairChanged": false,
+  "engineering": "NOT_VERIFIED"
+}

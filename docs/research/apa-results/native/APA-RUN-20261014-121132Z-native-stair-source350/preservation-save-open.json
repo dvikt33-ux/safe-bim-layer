@@ -1,0 +1,29 @@
+{
+  "status": "LIVE_PASS_SAVE_OPEN_INDEPENDENT_READBACK",
+  "retained145GeometryMaterialStoriesUnchanged": true,
+  "all255SignaturesUnchanged": true,
+  "signatureSetHash": "4d0bd70549087b9b2d2a8c6d15b8e0dd85d12afe299e3925793f0223a8b37b7d",
+  "savedSHA256": "01f47ad21aa5aa6975d824cf9999b56b7e89578ce1baa7e4b594ab49bc22b59e",
+  "save": "PASS",
+  "open": "PASS",
+  "independentReadWrites": 0,
+  "nativeCollisionPairs": 0,
+  "actualFaceMaterials": [
+    {
+      "id": 5,
+      "name": "Бетон - 04",
+      "attribute": {
+        "nativeField": "API_UmatType.mater.head.index",
+        "attributeType": 5,
+        "attributeIndex": 53,
+        "name": "Бетон - 04",
+        "guidSHA256": "780397c0380334f5153518f390919e0984c06f93aaf4b9470ba85ba3570a9d2e"
+      }
+    }
+  ],
+  "materialInterpretation": "SURFACE_ATTRIBUTES_NOT_STRUCTURAL_BUILDING_MATERIAL_ACCEPTANCE",
+  "noNewPLN": true,
+  "noAPXChanges": true,
+  "TRC": "EXCLUDED",
+  "separate168Model": "NOT_MODIFIED"
+}
