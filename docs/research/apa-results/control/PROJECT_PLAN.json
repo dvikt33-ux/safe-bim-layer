@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 161,
+  "revision": 162,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -1923,6 +1923,54 @@
     "ART-P70-A11-S03-MASS-RECEIPT-20261014": {
       "id": "ART-P70-A11-S03-MASS-RECEIPT-20261014",
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261014-193327Z-mass-capability-integration.json",
+      "kind": "RECEIPT",
+      "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
+    },
+    "ART-P70-A11-S03-EXECUTABLE-MATRIX-20261015": {
+      "id": "ART-P70-A11-S03-EXECUTABLE-MATRIX-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-215514Z-executable-bim-workflows/execution-matrix.json",
+      "kind": "DATASET",
+      "verification": "363_PREPARED_335_EFFECT_QUALIFIED_25_CALLABLE_9_LIVE"
+    },
+    "ART-P70-A11-S03-EXECUTABLE-EFFECTS-20261015": {
+      "id": "ART-P70-A11-S03-EXECUTABLE-EFFECTS-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-215514Z-executable-bim-workflows/effect-review.json",
+      "kind": "DATASET",
+      "verification": "49_OF51_CLASSIFIED_2_UNKNOWN_SOURCE_VERIFIED"
+    },
+    "ART-P70-A11-S03-EXECUTABLE-NATIVE-20261015": {
+      "id": "ART-P70-A11-S03-EXECUTABLE-NATIVE-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-215514Z-executable-bim-workflows/native-workflows.json",
+      "kind": "TEST_RESULT",
+      "verification": "LIVE17_STEPS_12_JOURNAL_PASS_4_TEMP_CREATED_DELETED_258_PRESERVED"
+    },
+    "ART-P70-A11-S03-EXECUTABLE-GAPS-20261015": {
+      "id": "ART-P70-A11-S03-EXECUTABLE-GAPS-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-215514Z-executable-bim-workflows/gap-register.json",
+      "kind": "DATASET",
+      "verification": "S03_PARTIAL_OUTPUT_COMPATIBILITY_AND_SOURCE_RUNTIME_GAPS"
+    },
+    "ART-P70-A11-S03-EXECUTABLE-CI-20261015": {
+      "id": "ART-P70-A11-S03-EXECUTABLE-CI-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-215514Z-executable-bim-workflows/windows-ci.json",
+      "kind": "TEST_RESULT",
+      "verification": "WINDOWS_CI_PASS_EXACT_HEAD"
+    },
+    "ART-P70-A11-S03-EXECUTABLE-KG-20261015": {
+      "id": "ART-P70-A11-S03-EXECUTABLE-KG-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-215514Z-executable-bim-workflows/core-knowledge-query.json",
+      "kind": "TEST_RESULT",
+      "verification": "MAIN_ORCHESTRATOR_GITHUB_CURRENT_CAS_PASS"
+    },
+    "ART-P70-A11-S03-EXECUTABLE-REPORT-20261015": {
+      "id": "ART-P70-A11-S03-EXECUTABLE-REPORT-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-14/APA-RUN-20261014-215514Z-executable-bim-workflows/REPORT.md",
+      "kind": "REPORT",
+      "verification": "DONE_PUBLISHED_FUNCTIONAL_BLOCK_ONLY"
+    },
+    "ART-P70-A11-S03-EXECUTABLE-RECEIPT-20261015": {
+      "id": "ART-P70-A11-S03-EXECUTABLE-RECEIPT-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261014-215514Z-executable-bim-workflows.json",
       "kind": "RECEIPT",
       "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
     }
@@ -4500,7 +4548,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -4667,12 +4715,17 @@
         "Actual12step read-only workflow:10Walls GUIDs feed details/bounds/IFC; attributeIDs feed59BuildingMaterials; stories,navigator,MEP,2779libraryObjects queried. Shared NativeDump/IFCBREP/Shapely facts retainGUID,XYZ,stories,materials,relationships. Official9of10Wallboxes differ from actualBREP, bothstored separately; actual resultant nativebody isphysicalauthority, nofalseequality/IFCsemantics. All258accepted signatures unchanged. Existing SceneWriter/SQLite authorizedSaveProject service PASS,0geometrymutations,1journaledservicecall. NoAPXchanges/newPLN/unsafe replay.",
         "Source-bound effects instead ofname-derived safety:142read,72create,46modify,18delete,7transaction,1service,51UNKNOWNblocked untilreview. Genericwrites require operation-specific preflight and independentreadback, exactidentity/hash, explicitimpact/scope andcompleteaffected/retained inventory. Registrationrechecked atselectedcall, concreteparameters revalidatedafterdataflowbinding. Fullschemas selectedondemand viaexistingKG. Sourceavailability never grantswritepermission.",
         "WindowsCI PASS exact 08527c0edde2096cf5d7be534b5e49f5c9038647;7localcriticalroutingtests only. Publishedreport/receipt/evidence GitHubbyte-readbackverified. S03PARTIAL; S10/A07dependenciesunchanged. Currentpriority massintegration preserved, narrowRoofSurface/Stair/MEP defects deferred with priorcontext. Next: source-review remaining51UNKNOWN effects and safe category workflows; vendor namespace/MDCLABI/license oraccepted SDKproviders required forremainingexternal gaps.",
-        "Current user priority: maximum executable BIM workflows and cross-provider dependency routing first. Roof Surface/Stair/MEP narrow fixes remain registered and deferred unless blocking the common interface. Do not infer native availability or safety from command names or source presence."
+        "Current user priority: maximum executable BIM workflows and cross-provider dependency routing first. Roof Surface/Stair/MEP narrow fixes remain registered and deferred unless blocking the common interface. Do not infer native availability or safety from command names or source presence.",
+        "PR85 45ef6b734e70c0e2c40ea57ed9a0099d70c4a917 atop exactPR84 08527c0edde2096cf5d7be534b5e49f5c9038647. Currentuserpriority executableBIMtasks throughexistinginterfaces. Maincompile_intent/compile_authored_intent andbuildingeditbridge supportGPTselected native-task graphs beyondlegacyfixedcomposition/tool/Rooflevel restrictions. OneBIMGraph,SceneWriter,SQLite;contextscopefactories andresultpointerdependencies validateactualproducerGUIDs beforeeachwrite. No secondexecutor/MCP/scheduler/normative/KG/searchengine.",
+        "51UNKNOWN boundedsource review:49classified,2remainblocked. GetNativePhysicalGeometry exactimplementation absent;API.ExecuteAddOnCommand arbitraryinnerdispatch remainsUNKNOWN,useproviderqualifiednames.335of337currentstack policies sourceeffectqualified,not335LIVEacceptances. Contracthashes bindexpandedinput/output/provider/version/SDKimplementation yetallowfreshPLNbinding. UI/modal/quit/window/rebuild,externalfiles/printer/notifications/library,Teamwork andcompoundGUIDreplacement sideeffects explicit. Allwrites requireexactscope/identity/hash,operation-specificbefore/after,completepreservation anddurableintent;hostGUIDcannotimplicitlymutateretainedmodel.",
+        "LIVEcorrectedcoldscenario17typedgraphsteps/12journaledcalls:8modelmutationrequests+4Save/Openservices.4temporarynativeelements=2Wall+2Window created/copied thenall4deleted. Wall6mx.25m,height2.8to3.1m,Window1.2x1.2m/sill1m;actualnativeMaterial/Surface/classification/ElementID,movement.5m/copy3m,IFCmapping/MEP/collisiondataflow pass. NativeWallroughopening1.35m2 differsfromWindowoverall1.44m2;2holefaces andclosedBREPvolume4.3125m3 agree. Same258original GUID/geometry/material/story/relationships preservedafterSave/Open withtemporarymodel andaftercleanup. NoAPXchange,newPLN/building orengineeringacceptance.",
+        "Initial3successfulnativewrites stoppedonreadback/testframework defects;existingWall/Window/classification independentlyreconciled,oldUNKNOWNjournalrecords preservedunchanged,noidenticalCreate/Setreplay. ContinuationsuseprovenGUIDs;thenfreshcorrectedcoldscenario12SQLitePASS. Tapirclassificationoutputschemaflattenswrapper,currentofficialtypedgetterworks. WallGetElementTrims nativeerror-2130313103 remainsNOT_VERIFIED,notpromotedbyreadonlysourceclassification. 25distinctcommandsCALLABLEthispass,16correctedworkflow;9independentwrite/serviceLIVEeffects. Source-only26 andotherAPX32NOT_EXPOSED unchanged;363preparedcontracts preserved.",
+        "Natural-language toolselection verifiedfor7requiredcommands viaexistingKG shortqueries;readablecommandwords/canonicalIDs andonecommanddocument respectexistingdiversitypolicy. Onlyselectedschemas expanded,GPTprovidesgraph,noautonomousNLparser/inventeddimensions. Planpreparation0.186s+0.026s,guardedcycle58.331s,execution35.065s+21.431s,318APIcallsinclcompletepreservationchecks,49.202stransport/22.497sreadverificationtransport. Manualspeedupnotmeasured. WindowsCI PASS exact 45ef6b734e70c0e2c40ea57ed9a0099d70c4a917;localonlycriticalmodifiedtests. Code/report/proof/receipt GitHubbyte-readbackPASS. S03PARTIAL,A07/S10dependenciesunchanged. Next:reusecommonworkflow fornextmodelconstraints andprovideroutputcompatibility throughavailableAPIs;preservenarrowRoofSurface/Stair/MEPdeferredcontext."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
-      "owner": "work-executable-bim-integration-20261014",
-      "lease_until": "2026-10-15T01:14:17Z",
-      "claim_ref": "APA-CLAIM-EXECUTABLE-BIM-20261014T211417Z",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
@@ -4841,7 +4894,15 @@
         "ART-P70-A11-S03-MASS-CI-20261014",
         "ART-P70-A11-S03-MASS-KG-20261014",
         "ART-P70-A11-S03-MASS-REPORT-20261014",
-        "ART-P70-A11-S03-MASS-RECEIPT-20261014"
+        "ART-P70-A11-S03-MASS-RECEIPT-20261014",
+        "ART-P70-A11-S03-EXECUTABLE-MATRIX-20261015",
+        "ART-P70-A11-S03-EXECUTABLE-EFFECTS-20261015",
+        "ART-P70-A11-S03-EXECUTABLE-NATIVE-20261015",
+        "ART-P70-A11-S03-EXECUTABLE-GAPS-20261015",
+        "ART-P70-A11-S03-EXECUTABLE-CI-20261015",
+        "ART-P70-A11-S03-EXECUTABLE-KG-20261015",
+        "ART-P70-A11-S03-EXECUTABLE-REPORT-20261015",
+        "ART-P70-A11-S03-EXECUTABLE-RECEIPT-20261015"
       ],
       "blocked_reason": null
     },
@@ -5711,7 +5772,15 @@
         "ART-P70-A11-S03-MASS-CI-20261014",
         "ART-P70-A11-S03-MASS-KG-20261014",
         "ART-P70-A11-S03-MASS-REPORT-20261014",
-        "ART-P70-A11-S03-MASS-RECEIPT-20261014"
+        "ART-P70-A11-S03-MASS-RECEIPT-20261014",
+        "ART-P70-A11-S03-EXECUTABLE-MATRIX-20261015",
+        "ART-P70-A11-S03-EXECUTABLE-EFFECTS-20261015",
+        "ART-P70-A11-S03-EXECUTABLE-NATIVE-20261015",
+        "ART-P70-A11-S03-EXECUTABLE-GAPS-20261015",
+        "ART-P70-A11-S03-EXECUTABLE-CI-20261015",
+        "ART-P70-A11-S03-EXECUTABLE-KG-20261015",
+        "ART-P70-A11-S03-EXECUTABLE-REPORT-20261015",
+        "ART-P70-A11-S03-EXECUTABLE-RECEIPT-20261015"
       ],
       "synthesis_state": "PARTIAL",
       "owner": null
