@@ -1,0 +1,35 @@
+{
+  "schema": "APA_FUNCTIONAL_MODULE_BUILD_V1",
+  "status": "BUILD_PASS_BINARY_IDENTITY_VERIFIED_NOT_INSTALLED",
+  "platform": "Archicad29 Windows x64 Release",
+  "sdk": "29.3000",
+  "implementationCommit": "07e73f9c3f634ed93ea06be79bdf603bf0124abf",
+  "sourceBuildIdentity": "1b0c1144380b288e5fd620ec55cbf0502ab16e8cd32ffabc2cc437b53862eb00",
+  "apxSHA256": "9e5e6f487c10e4d252516ffcea6125a7d1e0bdaf6451e06a9974ce664b985e71",
+  "bytes": 3198976,
+  "nativeModuleSourceSHA256": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72",
+  "sourceContractHashEncoding": "UTF8_LF_BINARY_HASH_RAW_BYTES",
+  "tapirSourceRegistrations": 280,
+  "otherNamespaceSourceRegistrations": 1,
+  "totalSourceRegistrations": 281,
+  "newSDKContracts": [
+    "GetNativeElementDefaultsV1",
+    "GetNativePolygonMemoV1",
+    "GetNativeWorkingUnitsV1",
+    "GetNativeGroupRootsV1",
+    "GetNativeLibraryPartOriginV1"
+  ],
+  "reusedDevKitCommand": "AddOn.AddOnCommandTest.ProtectionInfoCommand",
+  "retainedCandidateCommands": 12,
+  "runtimeRegistration": "NOT_VERIFIED",
+  "liveVerification": "NOT_RUN",
+  "installedAPXChanged": false,
+  "PLNchanged": false,
+  "rawBuildLogSHA256": "bee69fc316bd54dc4a9f43907a41b0f35564bbfa9decab0b36f7479b8c33ac32",
+  "initialBuildFailuresResolved": [
+    "Sandbox compiler C1902; same build succeeds outside sandbox",
+    "DevKit handler requires GS::NewOwned rather than GS::NewRef",
+    "SDK attribute indices use compatible ToInt32_Deprecated serialization"
+  ],
+  "regressionCheck": "Only changed contracts locally; full existing Windows CI"
+}
