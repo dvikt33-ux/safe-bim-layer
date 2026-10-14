@@ -1,0 +1,20 @@
+{
+  "status": "ORIGINAL_APX_POST_RESTORE_READBACK_COMPLETE_NEW_SLAB_145_PRESERVED",
+  "postRestoration144": "ALL_SIGNATURES_UNCHANGED",
+  "priorPostRestore144Status": "ORIGINAL_APX_RESTORED_SAVED_GRID_144_READBACK_PASS",
+  "originalModulePathVerified": true,
+  "originalModuleSHA256": "dc99af071d3dbcff9626653ccc37001613cb3fa4a8eff50c6000c1cc70e8d7c7",
+  "actualRuntimeProduct": {
+    "version": 29,
+    "buildNumber": 5101,
+    "languageCode": "RUS"
+  },
+  "actualTapirVersion": "1.5.10",
+  "freshOriginalCommandCount": 263,
+  "newCandidateAvailableInCurrentRuntime": false,
+  "originalInstalledFileUnchanged": true,
+  "noNewPLN": true,
+  "separate168Project": "NOT_MODIFIED",
+  "TRC": "EXCLUDED_NOT_READ_OR_MODIFIED",
+  "postSlabSaveOpen145": "INDEPENDENT_FINAL_NATIVE145_SAVED_SAME_GUID_READBACK_PASS"
+}

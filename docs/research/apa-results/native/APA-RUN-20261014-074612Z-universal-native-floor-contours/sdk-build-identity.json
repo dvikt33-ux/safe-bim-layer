@@ -1,0 +1,25 @@
+{
+  "status": "BUILD_PASS_WINDOWS_RELEASE_SDK29_NOT_INSTALLED",
+  "codeHead": "cb73cd578c7cd7577f80397920d9e81b8d09c6e1",
+  "buildIdentity": "0b929f11a7e892b5cab062a9a6dc7bdc77363cec3a59109245f95e18de770eef",
+  "sourceSnapshotManifestSHA256": "015ab96ab2454507efbd443c03d358af058abf83b4bab33163e98552ae48a918",
+  "sourceFiles": 101,
+  "candidateAPX": {
+    "filename": "TapirAddOn_AC29_Win.apx",
+    "bytes": 3163648,
+    "sha256": "f6f0861ffb76aced7de89922bdfa5f271d9aa371795c3849cbfe6e585003187f"
+  },
+  "installedOriginalSHA256": "dc99af071d3dbcff9626653ccc37001613cb3fa4a8eff50c6000c1cc70e8d7c7",
+  "installedUnchanged": true,
+  "modelWrites": 0,
+  "stairSolver": "GUARDED_NO_CALL_ON_UNQUALIFIED_MEMO",
+  "stairExactDimensions": "NOT_VERIFIED",
+  "runtimeIdentityLIVE": "NOT_VERIFIED_CANDIDATE_NOT_INSTALLED",
+  "compiler": "MSVC143_WINDOWS_SDK29_RELEASE",
+  "binaryEmbeddedRevisionAndIdentityVerified": true,
+  "staleIncrementalBinaryRejected": true,
+  "cleanBuildRequiredAfterObservedDependencyIssue": true,
+  "detachedDiagnosticPolicy": "READONLY_NO_SETTER_NO_SOLVER_NO_MODEL_WRITE",
+  "crashRootCause": "NOT_VERIFIED",
+  "candidateInstalled": false
+}
