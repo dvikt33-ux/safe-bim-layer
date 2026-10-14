@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 151,
+  "revision": 152,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -4284,7 +4284,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -4434,9 +4434,9 @@
         "Runtime continuation afterPR80: directuser authorized f6f0861ffb76aced7de89922bdfa5f271d9aa371795c3849cbfe6e585003187f temporaryAPX, safe identity/Stair read-only diagnosis and agentfileopen/close. Retained145 independently rechecked before UIclose; test saved/closed, current SHA256 f25438ef700ef590a4f85634c14bc95384df866b039783b31e77479648cfe8c0 and backupverified. Windows RunAs cancelled before replacementhelper executed; installedoriginal dc99af071d3dbcff9626653ccc37001613cb3fa4a8eff50c6000c1cc70e8d7c7 unchanged, registry unchanged,0modelgeometrywrites. Candidate LIVE NOT_VERIFIED; exactStair remainsBLOCKED. Windowsconfirmationretry pendinguser; no repeatedwrite and no repeated terminating solver. Supplemental readback afterUI Save requiresreopening. Published Slab LIVE/718Windows result remainsvalid in its original scope."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "work-universal-runtime-retry-20261014",
+      "lease_until": "2026-10-14T11:55:09Z",
+      "claim_ref": "APA-CLAIM-UNIVERSAL-RUNTIME-20261014T085509Z",
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
