@@ -214,7 +214,7 @@ def sdk_case(name,variant):
         if variant==0:self.assertEqual(row["commandName"],name)
         elif variant==1:self.assertEqual(row["version"],"29")
         elif variant==2:self.assertEqual(row["api"],"addon-json")
-        elif variant==3:self.assertEqual(row["availability"],"SOURCE_CONTRACT_NOT_RUNTIME_PROBED")
+        elif variant==3:self.assertEqual(row["availability"],"BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED")
     return test
 SDK_NAMES=["GetNativeElementDefaultsV1","GetNativePolygonMemoV1","GetNativeWorkingUnitsV1","GetNativeGroupRootsV1","GetNativeLibraryPartOriginV1"]
 for idx,name in enumerate(SDK_NAMES):
