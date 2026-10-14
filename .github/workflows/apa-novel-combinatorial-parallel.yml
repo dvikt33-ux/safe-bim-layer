@@ -1,0 +1,72 @@
+name: APA 378 novel property QA parallel
+
+on:
+  pull_request:
+    paths:
+      - 'tests/test_archicad_novel_combinatorial_qa.py'
+      - 'scripts/apa_novel_unittest_shard.py'
+      - 'scripts/apa_novel_aggregate.py'
+      - '.github/workflows/apa-novel-combinatorial-parallel.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  novel-shards:
+    name: Novel tests ${{ matrix.shard }} of 10
+    runs-on: windows-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    env:
+      APA_OFFLINE_ONLY: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+      PYTHONHASHSEED: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install existing functional-module dependencies
+        run: |
+          python -m pip install 'jsonschema>=4,<5'
+          python -m pip install -r scripts/requirements-connected.txt
+          python -m pip install -r scripts/requirements-knowledge.txt
+      - name: Execute only newly designed tests
+        run: python scripts/apa_novel_unittest_shard.py --shard ${{ matrix.shard }} --shards 10 --report reports/shard-${{ matrix.shard }}.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: apa-novel-shard-${{ matrix.shard }}
+          path: reports/shard-${{ matrix.shard }}.json
+          if-no-files-found: warn
+
+  account:
+    name: Verify 10 shards, every new test ID exactly once
+    needs: novel-shards
+    if: always()
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: apa-novel-shard-*
+          path: reports
+          merge-multiple: true
+      - run: python scripts/apa_novel_aggregate.py --reports-dir reports --shards 10
+      - name: Require all novel CI shards to finish
+        env:
+          SHARDS_RESULT: ${{ needs.novel-shards.result }}
+        run: python -c "import os,sys; status=os.environ.get('SHARDS_RESULT'); print('NOVEL_QA_SHARDS',status);sys.exit(0 if status=='success' else 1)"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: apa-novel-full-report
+          path: reports/full-offline-aggregate.json
+          if-no-files-found: warn
