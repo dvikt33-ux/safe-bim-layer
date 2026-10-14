@@ -1,0 +1,90 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-MASS-CONTRACTS",
+      "evidence_ids": [
+        "EV-0",
+        "EV-1",
+        "EV-2"
+      ],
+      "statement": "363 unique contracts prepared;337 current compatible,26source-only,official68unprobed and32APX NOT_EXPOSED separately.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-CONNECTED-WORKFLOW",
+      "evidence_ids": [
+        "EV-3"
+      ],
+      "statement": "12step native dataflow with15actualcalls and4independent effects;258retained,zero geometry writes,shared SceneWriter Save service.",
+      "status": "LIVE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-MASS-LIMITS",
+      "evidence_ids": [
+        "EV-4"
+      ],
+      "statement": "Full functional coverage not achieved; source runtime/effects/vendor ABI blockers exact;S03PARTIAL.",
+      "status": "NOT_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-0",
+      "kind": "TEST_RESULT",
+      "sha256": "487b4f141ed2e08efa5e39efb58e72e2ccd0ff7a1ccfb9f3a73a52642ed50594",
+      "source_revision": "08527c0edde2096cf5d7be534b5e49f5c9038647",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-193327Z-mass-capability-integration/capability-counts.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-1",
+      "kind": "TEST_RESULT",
+      "sha256": "14cb67210c78a11e6376dcc7ae8d1865a78aa1dcecd245192e5d8832fdbe4dba",
+      "source_revision": "08527c0edde2096cf5d7be534b5e49f5c9038647",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-193327Z-mass-capability-integration/provider-matrix.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-2",
+      "kind": "TEST_RESULT",
+      "sha256": "20471fa23bf7dc465d111d87dbe0740a56f6df44d79ea2babe2552442a286036",
+      "source_revision": "08527c0edde2096cf5d7be534b5e49f5c9038647",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-193327Z-mass-capability-integration/historical-providers.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-3",
+      "kind": "TEST_RESULT",
+      "sha256": "1a6c06634c7888b73096d3a4840845a9a080dcaa6f00e9ade2d55b35a3801841",
+      "source_revision": "08527c0edde2096cf5d7be534b5e49f5c9038647",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-193327Z-mass-capability-integration/connected-workflow.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-4",
+      "kind": "TEST_RESULT",
+      "sha256": "69c10e0b607e21ce8c7303f0b0402efb859a11451cb0f089de96ac55afa25adc",
+      "source_revision": "08527c0edde2096cf5d7be534b5e49f5c9038647",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-193327Z-mass-capability-integration/gap-register.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-5",
+      "kind": "TEST_RESULT",
+      "sha256": "653c61a976b64af81f5463ce9658ed15418810f3c94f76d1ed2af45f1145a6fd",
+      "source_revision": "08527c0edde2096cf5d7be534b5e49f5c9038647",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-193327Z-mass-capability-integration/windows-ci.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-6",
+      "kind": "TEST_RESULT",
+      "sha256": "be4c566d35f09b2f16dc8a6c272d85dcb8905086d58cc5fbc705b4bea922264c",
+      "source_revision": "08527c0edde2096cf5d7be534b5e49f5c9038647",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-193327Z-mass-capability-integration/core-knowledge-query.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261014-193327Z-mass-capability-integration",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}
