@@ -15,6 +15,37 @@ class StairTests(unittest.TestCase):
         self.data=dict(favoriteName='Source favorite',baseLinePoints=[dict(x=2,y=1),dict(x=2,y=7.65)],zCoordinate=0,floorIndex=0,totalHeight=3.3,flightWidth=1,stepNum=20,riserHeight=.165,treadDepth=.35,finishVisible=False)
     def test_native_favorite_dimensions_are_parsed_and_hashed(self):
         source=T.favorite_dimensions(self.xml,'Source favorite');self.assertEqual(source['values']['StepNum'],20);self.assertEqual(source['values']['FlightWidth'],1);self.assertEqual(source['engineeringAcceptance'],'NOT_VERIFIED');self.assertEqual(len(source['sourceSHA256']),64)
+    def test_bodyless_object_does_not_prove_hidden_owner_ancestry(self):
+        extra='00000000-0000-4000-8000-000000000004';hidden='00000000-0000-4000-8000-000000000005'
+        native={'elements':[dict(guid=g,type='Stair' if g==G else 'Object',bodies=[],relationships={}) for g in [OLD,G,CH,extra]]}
+        native['elements'][-1]['relationships']=dict(ownerGuid=hidden,nativeField='object.owner')
+        with patch.object(T.C,'retained_geometry_signatures',return_value={OLD:'signature'}):
+            proof=T.audit_stair_inventory(native,[OLD,G,CH,extra],{OLD:'signature'},G,[CH])
+            self.assertEqual(proof['status'],'NOT_VERIFIED');self.assertEqual(proof['unresolvedGuids'],[extra]);self.assertFalse(proof['automaticRetry'])
+            native['elements'][-1]['relationships']['ownerGuid']=CH
+            self.assertEqual(T.audit_stair_inventory(native,[OLD,G,CH,extra],{OLD:'signature'},G,[CH])['status'],'NATIVE_STAIR_INVENTORY_PASS')
+    def test_stair_inventory_audit_rejects_loss_and_retained_geometry_change(self):
+        native={'elements':[dict(guid=g,type='Stair',bodies=[]) for g in [OLD,G,CH]]}
+        with self.assertRaisesRegex(ValueError,'INVENTORY_MISMATCH'):T.audit_stair_inventory(native,[G,CH],{OLD:'old'},G,[CH])
+        with patch.object(T.C,'retained_geometry_signatures',return_value={OLD:'changed'}):
+            with self.assertRaisesRegex(ValueError,'GEOMETRY_CHANGED'):T.audit_stair_inventory(native,[OLD,G,CH],{OLD:'old'},G,[CH])
+    def native_rules(self):
+        values={'ruleMin':.6,'ruleMax':.65,'treadDepthMin':.25,'treadDepthMax':.35,'riserHeightMin':.15,'riserHeightMax':.2}
+        return {key+suffix:value if suffix=='Value' else True for key,value in values.items() for suffix in ['Value','Applied']}
+    def test_source_limits_explain_320mm_without_silently_accepting_350mm_20rises(self):
+        rules=self.native_rules();self.assertEqual(T.compatible_native_step_counts(3.3,.35,rules),[22]);self.assertNotIn(20,T.compatible_native_step_counts(3.3,.35,rules));self.assertEqual(T.compatible_native_step_counts(3,.35,rules),[20])
+        rules.pop('ruleMaxApplied')
+        with self.assertRaisesRegex(ValueError,'SOURCE_INCOMPLETE'):T.compatible_native_step_counts(3.3,.35,rules)
+    def test_standalone_stair_creation_keeps_complete_retention_and_other_edits_fail_closed(self):
+        data=copy.deepcopy(self.data);data.update(stepNum=22,riserHeight=.15)
+        scope=E.model_operation_scope('CreateStairs',{'stairsData':[data]},'hash',[],[OLD],'explicit');self.assertEqual(scope['retainedGuids'],[OLD]);self.assertEqual(scope['ownedGuids'],[])
+        with self.assertRaisesRegex(ValueError,'OWNERSHIP'):E.model_operation_scope('CreateStairs',{'stairsData':[data]},'hash',[],[],'explicit')
+        with self.assertRaisesRegex(ValueError,'OWNERSHIP'):E.model_operation_scope('ModifyWalls',{'wallsWithDetails':[{'elementId':{'guid':G},'height':3}]},'hash',[],[OLD],'explicit')
+    def test_incompatible_example_never_changes_declared_count_or_dispatches_create(self):
+        source=T.favorite_dimensions(self.xml,'Source favorite');state=dict(contract='APA_NATIVE_STAIR_GEOMETRY_V1',nativeType='Stair',elementId={'guid':G},rules=self.native_rules());before=copy.deepcopy(self.data);calls=[]
+        def api(command,params):calls.append(command);return {'favorites':['Source favorite']}
+        with self.assertRaisesRegex(ValueError,'NO_SILENT_CHANGE'):T.prepare_source_dimension_example(api,source,state,self.data,'unused')
+        self.assertEqual(self.data,before);self.assertEqual(calls,['GetFavoritesByType'])
     def test_missing_or_inconsistent_source_rejected_without_guessing(self):
         for text in ['<Favorites/>','<Favorites><StairDefault/></Favorites>',self.xml.read_text().replace('<TotalHeight>3','<TotalHeight>4')]:
             self.xml.write_text(text,encoding='utf8')
