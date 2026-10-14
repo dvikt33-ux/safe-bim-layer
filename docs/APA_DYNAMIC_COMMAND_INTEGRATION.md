@@ -1,0 +1,15 @@
+# Dynamic native command integration
+
+The APA core now exposes `native_command_router()` and `prepare_native_command()`. The current runtime exports 275 registered Tapir/SDK commands; the installed Archicad 29 official SDK contributes 73 typed contracts. All 348 commands can be selected and prepared without a Python handler per name. Preparation validates pinned input schemas and official typed constructors. Official output schemas expose SDK result keys; their nested constraints are not represented as complete JSON schemas.
+
+Command summaries use the unchanged Knowledge Graph section index. Search returns bounded summaries; `select()` returns the full schema only for the selected command. The existing GitHub-current Knowledge Graph task/claim checks remain authoritative. This adapter adds neither a search implementation nor an SDK engine.
+
+EvidenceAPI supports a validated dynamic ticket instead of requiring membership in NATIVE_MUTATIONS/allowed. A write additionally requires an exact journaled scope. The same SceneWriter verifies catalog/build identity, project binding, file hash, complete affected/retained inventory, protected BREP and independent callback. It writes durable ATTEMPTED before dispatch. Error rows and uncertain readback remain UNKNOWN_OUTCOME and cannot replay. Unknown effects require explicit impact review; a Get prefix alone does not authorize a read. MORPH LAST RESORT remains enforced.
+
+Authored components now accept discovered Create commands for preparation. Explicit `apa-native-operations/1` building edits prepare arbitrary schema-qualified operations and declared lineage, including composition changes. Existing automatic diff recipes retain their geometry-specific limits; an arbitrary create/modify/type conversion is not guessed. Use the explicit dynamic route for additional operations. This is feature availability, not native mutation permission.
+
+Native universal SaveProject/OpenProject and selection were exercised through the existing journal. Seven safe read commands were checked through the dynamic route, including ventilation preferences with its required domain. Both Roof assemblies remained correct; all 258 signatures were preserved. Repeating either requested final pitch performs zero native writes and creates zero duplicates. Original Roof and its five SEO-dependent Walls remain unchanged; tests use authorized derived specimens in the same PLN.
+
+Other installed extensions without exposed namespace/contracts remain NOT_EXPOSED. There is no global JSON command namespace enumeration contract; UI presence and source code do not establish programmatic availability. Runtime availability is distinct from successful invocation. No arbitrary catalog mutator was exercised beyond the authorized Roof/persistence/view scope. Engineering acceptance remains NOT_VERIFIED.
+
+Validation uses three focused dynamic routing/replay tests and seven Roof tests. Broad regressions run in Windows CI. Candidate APX restoration and final original-runtime readback follow in the same PR; no new project, controller, journal, normative or Knowledge Graph implementation is introduced.

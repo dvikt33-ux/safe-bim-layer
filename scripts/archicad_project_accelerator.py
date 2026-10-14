@@ -58,8 +58,7 @@ def write_json(path, value):
 
 
 def native_transport(command, params):
-    if command not in {'API.GetProductInfo','API.GetAllClassificationSystems','API.GetAllClassificationsInSystem',
-                       'API.GetPublisherSetNames','API.GetPropertyIds','API.GetAllPropertyNames','API.GetDetailsOfProperties','API.GetPropertyValuesOfElements'}:
+    if not command.startswith('API.'):
         return RUN.tapir(RUN.PORT, command, params)
     request = urllib.request.Request(f"http://127.0.0.1:{RUN.PORT}",
         data=json.dumps({"command": command, "parameters": params}).encode("utf-8"),
@@ -131,6 +130,14 @@ def retrieve_project_knowledge(config, query, mode="research", remote=None, **bo
     if remote is None and config.get("source_mode") == "GITHUB_CURRENT":
         remote = KNOWLEDGE.GitHubSource(os.environ.get("APA_GITHUB_READ_TOKEN"))
     return KNOWLEDGE.KnowledgeAccess(config, remote).query(query, mode, **bounds)
+
+def native_command_router(schema_path, official_commands=None):
+    """Core entry point: fresh provider export, existing schemas and KG index."""
+    from archicad_dynamic_commands import DynamicCommands
+    return DynamicCommands(catalog_with_provenance(schema_path),official_commands)
+
+def prepare_native_command(router, command, parameters):
+    return router.prepare(command,parameters)
 
 def apply_native_axis_grid(writer,recipe,scene_id,retained_signatures,saved_sha256,authorization_ref,existing_guid=None):
     from archicad_native_spatial_tools import create_or_reuse_axis
@@ -339,8 +346,8 @@ def compile_authored_intent(intent, schema_path, read_api):
     story_indices={b["nativeIndex"] for b in candidate["storyBindings"]}
     outline=candidate["authoredOutline"]
     for step in additions:
-        if not isinstance(step,dict) or step.get("command") not in {
-                "CreateColumns","CreateDoors","CreateWindows","CreateWalls","CreateRoofs"}:
+        if (not isinstance(step,dict) or step.get('command') not in catalog_with_provenance(schema_path)['commands']
+                or not step['command'].startswith('Create')):
             raise ValueError("UNSUPPORTED_AUTHORED_NATIVE_COMPONENT")
         if step['command'] in {'CreateWalls','CreateRoofs'}:
             rows=next(iter(step.get('params',{}).values()),[])
@@ -398,16 +405,39 @@ class EvidenceAPI:
             self.allowed = self.allowed | {"GenerateDocumentation"}
         self.calls = Counter()
         self.write_attempts = 0
+        self.dynamic_commands = None
+        self._dynamic_ticket = None
+
+    def bind_dynamic_commands(self, router):
+        self.dynamic_commands = router
+
+    def dynamic_call(self, ticket, journal_scope=None):
+        from contextlib import contextmanager
+        @contextmanager
+        def grant():
+            if self.dynamic_commands is None or self._dynamic_ticket is not None:
+                raise ValueError('DYNAMIC_CALL_NOT_BOUND_OR_NESTED')
+            self.dynamic_commands.validate(ticket)
+            if ticket['effect']!='READ_CANDIDATE':
+                if journal_scope is None:raise ValueError('DYNAMIC_WRITE_REQUIRES_SCENEWRITER_JOURNALED_SCOPE')
+                self.dynamic_commands.qualify_scope(journal_scope,ticket['command'],ticket['parameters'],ticket['hash'])
+            self._dynamic_ticket = ticket
+            try:yield
+            finally:self._dynamic_ticket = None
+        return grant()
 
     def __call__(self, command, params):
-        if command not in self.allowed:
+        dynamic = self._dynamic_ticket
+        if dynamic is not None and (dynamic['command']!=command or dynamic['parameters']!=params):
+            raise ValueError('DYNAMIC_DISPATCH_TICKET_MISMATCH')
+        if command not in self.allowed and dynamic is None:
             raise ValueError("ROUTER_REFUSED: " + command)
         record = {"at": datetime.now(timezone.utc).isoformat(), "command": command, "parameters": params}
         # Persist dispatch intent BEFORE transport, including uncertain writes.
         with (self.folder / "dispatch.jsonl").open("a", encoding="utf-8") as f:
             f.write(RUN.canonical(record) + "\n")
         self.calls[command] += 1
-        self.write_attempts += int(command in NATIVE_MUTATIONS or command in {
+        self.write_attempts += int(dynamic['effect']!='READ_CANDIDATE' if dynamic else command in NATIVE_MUTATIONS or command in {
             'ModifyWalls','ModifyColumns','ModifyWindows','ModifyDoors'})
         start = time.perf_counter()
         try:

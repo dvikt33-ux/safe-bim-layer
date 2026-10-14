@@ -164,6 +164,16 @@ def _qualify_legacy_stair_hole(row):
 
 def prepare_building_parameter_edit(api,old_plan,created,new_intent,schema_path):
     """Diff the existing authored graph into native edits; never recreate a host."""
+    if new_intent.get('schemaVersion')=='apa-native-operations/1':
+        # Explicit discovered operations support composition changes without
+        # guessing create/modify equivalence or silently regenerating hosts.
+        router=A.native_command_router(schema_path)
+        operations=new_intent.get('operations')
+        if not isinstance(operations,list) or not operations:raise ValueError('EXPLICIT_NATIVE_OPERATIONS_REQUIRED')
+        tickets=[router.prepare(s['command'],s['parameters']) for s in operations]
+        return dict(schema='APA_DYNAMIC_BUILDING_EDIT_PREVIEW_V1',oldPlanHash=old_plan['sourcePlanHash'],
+            tickets=tickets,createdBindings=copy.deepcopy(created),executionPermission=False,
+            dependencyRebinding='CALLER_MUST_SUPPLY_EXPLICIT_BIM_GRAPH_LINEAGE',automaticRetry=False)
     verified=verify_model(api,old_plan,created)
     if set(verified)!=set(s['id'] for s in old_plan['graph']['operations']):
         raise ValueError('MODEL_EDIT_REQUIRES_COMPLETE_AUTHORED_SOURCE')
