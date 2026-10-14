@@ -1,5 +1,5 @@
 {
-  "schema": "APA_OPERATION_EFFECT_MANIFEST_V1",
+  "schema": "APA_OPERATION_EFFECT_MANIFEST_V2",
   "catalogHash": "e2af1f277c65ac13a2c98accb999d05d45e5c24dfef43ec47a89393c49676c91",
   "operations": {
     "GetAddOnVersion": {
@@ -23,24 +23,50 @@
       }
     },
     "QuitArchicad": {
-      "kind": "UNKNOWN",
+      "kind": "SERVICE",
       "impact": "PROJECT",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "267c2202fc48e46c6651bf8525e1fc1751862fea97d04f63f5bca240c6b7c983",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "d89c808da3fd233907902ce915415a8156a73e364ab0586ff5086752d3532eeb",
+        "implementation": {
+          "file": "ApplicationCommands.cpp",
+          "lineStart": 144,
+          "lineEnd": 157,
+          "sha256": "d89c808da3fd233907902ce915415a8156a73e364ab0586ff5086752d3532eeb",
+          "fileSHA256": "aafce47625c17ad4e7d239875cf3b51cb8082351f80462aa27361ac26ba0d698"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Session/UI effect. Quit closes instance; user input/modal can block JSON queue; views/redraw/cache affected. ModelDump explicitly shows/rebuilds3D and restores sight, not previous window",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Current window/UI/process completion; ModelDump BREP + retained model; explicit non-geometric scope",
+      "liveVerifiedThisPass": false
     },
     "GetPointFromUser": {
-      "kind": "UNKNOWN",
+      "kind": "SERVICE",
       "impact": "PROJECT",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "aadcfb44cebdf2bdc21533993e6cc0bfc7a64ec38029ec45a9cee7968c7b354e",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "529c10e94c08ca3dcded034d7f62be127ba980741cc793b8d17aca83d58724ca",
+        "implementation": {
+          "file": "ApplicationCommands.cpp",
+          "lineStart": 747,
+          "lineEnd": 767,
+          "sha256": "529c10e94c08ca3dcded034d7f62be127ba980741cc793b8d17aca83d58724ca",
+          "fileSHA256": "aafce47625c17ad4e7d239875cf3b51cb8082351f80462aa27361ac26ba0d698"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Session/UI effect. Quit closes instance; user input/modal can block JSON queue; views/redraw/cache affected. ModelDump explicitly shows/rebuilds3D and restores sight, not previous window",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Current window/UI/process completion; ModelDump BREP + retained model; explicit non-geometric scope",
+      "liveVerifiedThisPass": false
     },
     "GetCurrentWindowType": {
       "kind": "READ_ONLY",
@@ -53,14 +79,27 @@
       }
     },
     "ChangeWindow": {
-      "kind": "UNKNOWN",
+      "kind": "SERVICE",
       "impact": "PROJECT",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "898cfae268fd59838a13dcf90594a8d0e22612d0d5b2351bec814bc4f491a0ad",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "2cf65398b717d9ee9d16afecf087cd13052554a512f763bf3596a4e164afd33a",
+        "implementation": {
+          "file": "ApplicationCommands.cpp",
+          "lineStart": 311,
+          "lineEnd": 409,
+          "sha256": "2cf65398b717d9ee9d16afecf087cd13052554a512f763bf3596a4e164afd33a",
+          "fileSHA256": "aafce47625c17ad4e7d239875cf3b51cb8082351f80462aa27361ac26ba0d698"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Session/UI effect. Quit closes instance; user input/modal can block JSON queue; views/redraw/cache affected. ModelDump explicitly shows/rebuilds3D and restores sight, not previous window",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Current window/UI/process completion; ModelDump BREP + retained model; explicit non-geometric scope",
+      "liveVerifiedThisPass": false
     },
     "GetUserGSID": {
       "kind": "READ_ONLY",
@@ -73,14 +112,27 @@
       }
     },
     "ShowAlert": {
-      "kind": "UNKNOWN",
+      "kind": "SERVICE",
       "impact": "PROJECT",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "9fcfe310215e0a211e3264f95531340ecf42a548504bca21ad751135f9914721",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "ca60ebef14069d1b7337f05c3142357eb9e622cce80191afb81919b34a211ea2",
+        "implementation": {
+          "file": "ApplicationCommands.cpp",
+          "lineStart": 477,
+          "lineEnd": 500,
+          "sha256": "ca60ebef14069d1b7337f05c3142357eb9e622cce80191afb81919b34a211ea2",
+          "fileSHA256": "aafce47625c17ad4e7d239875cf3b51cb8082351f80462aa27361ac26ba0d698"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Session/UI effect. Quit closes instance; user input/modal can block JSON queue; views/redraw/cache affected. ModelDump explicitly shows/rebuilds3D and restores sight, not previous window",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Current window/UI/process completion; ModelDump BREP + retained model; explicit non-geometric scope",
+      "liveVerifiedThisPass": false
     },
     "GetSpecialFolders": {
       "kind": "READ_ONLY",
@@ -203,14 +255,27 @@
       }
     },
     "CreateHotlinkInstances": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "CREATE",
+      "impact": "MODEL",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "c50ed5dc30b75f3b6e8f175752f25395be4972b498d3e83261cc541a56f02a17",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "9c404205277cc489bc37e1c5b3e5e64ec9609fb914e4ac303ce779eab36c9e11",
+        "implementation": {
+          "file": "ProjectCommands.cpp",
+          "lineStart": 2664,
+          "lineEnd": 2750,
+          "sha256": "9c404205277cc489bc37e1c5b3e5e64ec9609fb914e4ac303ce779eab36c9e11",
+          "fileSHA256": "4cb77079cc5b3df02cfdfbf83c62dc1164cd52bd9200c71610a366171288284f"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "MODEL",
+      "possibleSideEffects": "Places native Hotlink instances; module/story dependencies required",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Created GUIDs, module binding, placements and actual bodies",
+      "liveVerifiedThisPass": false
     },
     "ChangeHotlinkInstances": {
       "kind": "MODIFY",
@@ -303,24 +368,50 @@
       }
     },
     "PrintView": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "SERVICE",
+      "impact": "EXTERNAL",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "bcacb0b510e3db19173df593fb6985fe57ac7a6bfbd0d3b5cfc69910691aac32",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "992101617b4972c3ab3d756ec205b61acadff4dd61703a457e33dbcab79a0da6",
+        "implementation": {
+          "file": "ProjectCommands.cpp",
+          "lineStart": 2286,
+          "lineEnd": 2317,
+          "sha256": "992101617b4972c3ab3d756ec205b61acadff4dd61703a457e33dbcab79a0da6",
+          "fileSHA256": "4cb77079cc5b3df02cfdfbf83c62dc1164cd52bd9200c71610a366171288284f"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "EXTERNAL",
+      "possibleSideEffects": "External file/printer/network/registration side effects. SafeBIM action dependent: compile writes, register changes library, inspect queries",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Exact authorized file/endpoint/printer/library/action scope; content/hash and registration/readback",
+      "liveVerifiedThisPass": false
     },
     "RebuildView": {
-      "kind": "UNKNOWN",
+      "kind": "SERVICE",
       "impact": "PROJECT",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "3007c1ce81e8f8ae475c88c2468b046be65a53b8c970130ef9f8f4d9906d3ce0",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "b44761ab989f553fd4306bdc4b8dd2a3479ff788b05808f4426a618d028464aa",
+        "implementation": {
+          "file": "ProjectCommands.cpp",
+          "lineStart": 2352,
+          "lineEnd": 2364,
+          "sha256": "b44761ab989f553fd4306bdc4b8dd2a3479ff788b05808f4426a618d028464aa",
+          "fileSHA256": "4cb77079cc5b3df02cfdfbf83c62dc1164cd52bd9200c71610a366171288284f"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Session/UI effect. Quit closes instance; user input/modal can block JSON queue; views/redraw/cache affected. ModelDump explicitly shows/rebuilds3D and restores sight, not previous window",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Current window/UI/process completion; ModelDump BREP + retained model; explicit non-geometric scope",
+      "liveVerifiedThisPass": false
     },
     "GetSelectedElements": {
       "kind": "READ_ONLY",
@@ -363,14 +454,27 @@
       }
     },
     "FilterElements": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "d23249d6a33982399d4724c3d31108841cbec8bc586822ed8c8843014a262e0a",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "5ca411b4c838fcf3bcfa8ecb3ed01ba4b68ee1bbbcdeea9051d34bdb7edbd889",
+        "implementation": {
+          "file": "ElementCommands.cpp",
+          "lineStart": 3848,
+          "lineEnd": 3882,
+          "sha256": "5ca411b4c838fcf3bcfa8ecb3ed01ba4b68ee1bbbcdeea9051d34bdb7edbd889",
+          "fileSHA256": "a4405f831bbbb81d2392574fb46a2214cfdd32fa7679ade3c2730f28cf0abdae"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "READ_ONLY",
+      "possibleSideEffects": "Native filters, collision query and reciprocal trim query; no model setter",
+      "saveRequired": false,
+      "confirmationRequired": "IDENTITY_BOUND_QUERY",
+      "verification": "Query result and retained inventory",
+      "liveVerifiedThisPass": false
     },
     "GetDetailsOfElements": {
       "kind": "READ_ONLY",
@@ -463,24 +567,50 @@
       }
     },
     "GetCollisions": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "31d0e3e9ab24ab87204be17b68a4ca96909d144c68f1fa5c2b7833e5dd61298f",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "2fd062eb47e8f9e3a736b8412588f92a01450381f52c4d290841b76bdf932f45",
+        "implementation": {
+          "file": "ElementCommands.cpp",
+          "lineStart": 3454,
+          "lineEnd": 3496,
+          "sha256": "2fd062eb47e8f9e3a736b8412588f92a01450381f52c4d290841b76bdf932f45",
+          "fileSHA256": "a4405f831bbbb81d2392574fb46a2214cfdd32fa7679ade3c2730f28cf0abdae"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "READ_ONLY",
+      "possibleSideEffects": "Native filters, collision query and reciprocal trim query; no model setter",
+      "saveRequired": false,
+      "confirmationRequired": "IDENTITY_BOUND_QUERY",
+      "verification": "Query result and retained inventory",
+      "liveVerifiedThisPass": false
     },
     "HighlightElements": {
-      "kind": "UNKNOWN",
+      "kind": "SERVICE",
       "impact": "PROJECT",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "47a42de7272453dce5fdeeb3d5a3e620bc6b204c35e5cebed54b6eb3a0d7a189",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "ca2d34914d1d4eb739b34737cae5079d761fa76491b982cdf959ebafc53e2b8d",
+        "implementation": {
+          "file": "ElementCommands.cpp",
+          "lineStart": 3966,
+          "lineEnd": 4009,
+          "sha256": "ca2d34914d1d4eb739b34737cae5079d761fa76491b982cdf959ebafc53e2b8d",
+          "fileSHA256": "a4405f831bbbb81d2392574fb46a2214cfdd32fa7679ade3c2730f28cf0abdae"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Session/UI effect. Quit closes instance; user input/modal can block JSON queue; views/redraw/cache affected. ModelDump explicitly shows/rebuilds3D and restores sight, not previous window",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Current window/UI/process completion; ModelDump BREP + retained model; explicit non-geometric scope",
+      "liveVerifiedThisPass": false
     },
     "MoveElements": {
       "kind": "MODIFY",
@@ -513,24 +643,50 @@
       }
     },
     "LockElements": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "MODIFY",
+      "impact": "MODEL",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "9c19c815ecec88ef3e152fa5d8b15b8157ae8913166be70a17f1c7434ae6c0cf",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "a8267491e383e0f36046e850daff6bc531d3fe8d58c6182a64a27f85a621fa22",
+        "implementation": {
+          "file": "ElementCommands.cpp",
+          "lineStart": 4354,
+          "lineEnd": 4369,
+          "sha256": "a8267491e383e0f36046e850daff6bc531d3fe8d58c6182a64a27f85a621fa22",
+          "fileSHA256": "a4405f831bbbb81d2392574fb46a2214cfdd32fa7679ade3c2730f28cf0abdae"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "MODEL",
+      "possibleSideEffects": "Target model mutation; MEP may merge/delete/split route GUIDs; trim modifies actual bodies; Favorite modifies settings/properties",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Target settings/relations/body and full GUID delta, preserved unrelated elements",
+      "liveVerifiedThisPass": false
     },
     "UnlockElements": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "MODIFY",
+      "impact": "MODEL",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "bf0bc1db14408b138255bf3c8d264d99510361d23b2ed44ab8ca54236f6fa399",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "8d2b637eed2f8972c667cffc15f53b3cc09fdf6219c07eace410f73d55f727f3",
+        "implementation": {
+          "file": "ElementCommands.cpp",
+          "lineStart": 4404,
+          "lineEnd": 4419,
+          "sha256": "8d2b637eed2f8972c667cffc15f53b3cc09fdf6219c07eace410f73d55f727f3",
+          "fileSHA256": "a4405f831bbbb81d2392574fb46a2214cfdd32fa7679ade3c2730f28cf0abdae"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "MODEL",
+      "possibleSideEffects": "Target model mutation; MEP may merge/delete/split route GUIDs; trim modifies actual bodies; Favorite modifies settings/properties",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Target settings/relations/body and full GUID delta, preserved unrelated elements",
+      "liveVerifiedThisPass": false
     },
     "GetGDLParametersOfElements": {
       "kind": "READ_ONLY",
@@ -973,24 +1129,50 @@
       }
     },
     "SetElementNotificationClient": {
-      "kind": "UNKNOWN",
+      "kind": "SERVICE",
       "impact": "EXTERNAL",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "e665e4171ff1e05bfa707b75ea91eeed9cb962d3227b89104bd4e80ee9c04092",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "1738ea11e5d7ceb1ffad110a1054a1be321f7a1a7617fb42563d9314028730a6",
+        "implementation": {
+          "file": "NotificationCommands.cpp",
+          "lineStart": 141,
+          "lineEnd": 195,
+          "sha256": "1738ea11e5d7ceb1ffad110a1054a1be321f7a1a7617fb42563d9314028730a6",
+          "fileSHA256": "875416fdd3b2091a1d4f84eef72c93cecee3ea0dbbd2ba311a69d48cf0bdae76"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "EXTERNAL",
+      "possibleSideEffects": "External file/printer/network/registration side effects. SafeBIM action dependent: compile writes, register changes library, inspect queries",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Exact authorized file/endpoint/printer/library/action scope; content/hash and registration/readback",
+      "liveVerifiedThisPass": false
     },
     "RemoveElementNotificationClient": {
-      "kind": "UNKNOWN",
+      "kind": "SERVICE",
       "impact": "EXTERNAL",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "aabfb28147d24c1db131441801a7813163ea2b0d1752fb4a543c779e4702969a",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "6ec50bbe8e0af7af27aea366266f7b095a8a443b63d3cf84a2422f847eafe59f",
+        "implementation": {
+          "file": "NotificationCommands.cpp",
+          "lineStart": 393,
+          "lineEnd": 414,
+          "sha256": "6ec50bbe8e0af7af27aea366266f7b095a8a443b63d3cf84a2422f847eafe59f",
+          "fileSHA256": "875416fdd3b2091a1d4f84eef72c93cecee3ea0dbbd2ba311a69d48cf0bdae76"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "EXTERNAL",
+      "possibleSideEffects": "External file/printer/network/registration side effects. SafeBIM action dependent: compile writes, register changes library, inspect queries",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Exact authorized file/endpoint/printer/library/action scope; content/hash and registration/readback",
+      "liveVerifiedThisPass": false
     },
     "GetNativePhysicalGeometry": {
       "kind": "UNKNOWN",
@@ -1000,17 +1182,31 @@
         "sha256": "3a9be459e8efe716e43eb7d215d567077e99625d89052baf449bea3c36f0a59a",
         "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
         "effectConfidence": "UNREVIEWED"
-      }
+      },
+      "blocker": "Exact implementation absent from existing overlay; documentation alone insufficient to prove no side effects"
     },
     "GetModelDumpV1": {
-      "kind": "UNKNOWN",
+      "kind": "SERVICE",
       "impact": "PROJECT",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "a8523d0ea1a93133a32ac5fc4ab34ff0a9545788738fc74cf153dc2c3ae0d744",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "f434a0504f26f6a30ef79b9c4b1454491359a05235b28a76b12e94da0559fb0b",
+        "implementation": {
+          "file": "ModelDumpCommands.cpp",
+          "lineStart": 277,
+          "lineEnd": 390,
+          "sha256": "f434a0504f26f6a30ef79b9c4b1454491359a05235b28a76b12e94da0559fb0b",
+          "fileSHA256": "336b3a63f2d3b3b36bdf938398fb473ead9f1933a8a9b31602c11e441e355ca6"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Session/UI effect. Quit closes instance; user input/modal can block JSON queue; views/redraw/cache affected. ModelDump explicitly shows/rebuilds3D and restores sight, not previous window",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Current window/UI/process completion; ModelDump BREP + retained model; explicit non-geometric scope",
+      "liveVerifiedThisPass": false
     },
     "CreateGroups": {
       "kind": "CREATE",
@@ -1053,14 +1249,27 @@
       }
     },
     "SetSuspendGroupsMode": {
-      "kind": "UNKNOWN",
+      "kind": "MODIFY",
       "impact": "PROJECT",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "6985c7c75f36f2229a5dec11cb8faee4d1b413189f2015fdd1d8e26c28222a89",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "523c673aaf41853f8104886c02a736392fe2de70284cb70200cfb0743b9fc69a",
+        "implementation": {
+          "file": "ElementGroupingCommands.cpp",
+          "lineStart": 381,
+          "lineEnd": 403,
+          "sha256": "523c673aaf41853f8104886c02a736392fe2de70284cb70200cfb0743b9fc69a",
+          "fileSHA256": "4286566b1a6e077ba29f70d547f50a64c205d66cb0cf3db6c37b59e063430d05"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Defaults/favorite/group/library state mutation; library reload may affect dependent parts",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Defaults/favorites/libraries/group state snapshot and retained model",
+      "liveVerifiedThisPass": false
     },
     "GetFavoritesByType": {
       "kind": "READ_ONLY",
@@ -1083,14 +1292,27 @@
       }
     },
     "ApplyFavoritesToElementDefaults": {
-      "kind": "UNKNOWN",
+      "kind": "MODIFY",
       "impact": "PROJECT",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "650943367343ab2aeb668d6c849e2215401b4e4d321c91a152d48b8bcde8e9dc",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "16cc49bae7f4c3c396cc4716b0dee01fced4483959ab15146b22ba80f5ae7522",
+        "implementation": {
+          "file": "FavoritesCommands.cpp",
+          "lineStart": 229,
+          "lineEnd": 281,
+          "sha256": "16cc49bae7f4c3c396cc4716b0dee01fced4483959ab15146b22ba80f5ae7522",
+          "fileSHA256": "49f070b47ce1c80a32e2fc7f3039b7a9bc317843c32af9d29eee227cd8bad3c2"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Defaults/favorite/group/library state mutation; library reload may affect dependent parts",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Defaults/favorites/libraries/group state snapshot and retained model",
+      "liveVerifiedThisPass": false
     },
     "CreateFavoritesFromElements": {
       "kind": "CREATE",
@@ -1103,34 +1325,73 @@
       }
     },
     "ImportFavorites": {
-      "kind": "UNKNOWN",
+      "kind": "MODIFY",
       "impact": "PROJECT",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "1e7fd517e44d1f540202307b90d30e58432d0f1bcb7ba9fb4d62000cd2bab52a",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "dfe7e499b14b8af9195ffe5980e1d9bf9954f6fb01b8dc304f2afcac76a41b5f",
+        "implementation": {
+          "file": "FavoritesCommands.cpp",
+          "lineStart": 565,
+          "lineEnd": 612,
+          "sha256": "dfe7e499b14b8af9195ffe5980e1d9bf9954f6fb01b8dc304f2afcac76a41b5f",
+          "fileSHA256": "49f070b47ce1c80a32e2fc7f3039b7a9bc317843c32af9d29eee227cd8bad3c2"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Defaults/favorite/group/library state mutation; library reload may affect dependent parts",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Defaults/favorites/libraries/group state snapshot and retained model",
+      "liveVerifiedThisPass": false
     },
     "ExportFavorites": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "SERVICE",
+      "impact": "EXTERNAL",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "73155e91e4bb582367aa30a230d1cf4b2588b12c92f9be44ea9f11eb3742ef35",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "ac2662757ea1e9df157665527b22f54bca50cc696e3d009898cb636fe0c4cf39",
+        "implementation": {
+          "file": "FavoritesCommands.cpp",
+          "lineStart": 652,
+          "lineEnd": 677,
+          "sha256": "ac2662757ea1e9df157665527b22f54bca50cc696e3d009898cb636fe0c4cf39",
+          "fileSHA256": "49f070b47ce1c80a32e2fc7f3039b7a9bc317843c32af9d29eee227cd8bad3c2"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "EXTERNAL",
+      "possibleSideEffects": "External file/printer/network/registration side effects. SafeBIM action dependent: compile writes, register changes library, inspect queries",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Exact authorized file/endpoint/printer/library/action scope; content/hash and registration/readback",
+      "liveVerifiedThisPass": false
     },
     "ApplyFavoritesToElements": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "MODIFY",
+      "impact": "MODEL",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "11baa5c28340840dab0340a48c12730e7e10d7d3d3c11232457f19398d221d6c",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "ae0254d9c3f2e6f895d136e4ea365408ee39313cfe4779400b07d2015d4ca2c9",
+        "implementation": {
+          "file": "FavoritesCommands.cpp",
+          "lineStart": 790,
+          "lineEnd": 898,
+          "sha256": "ae0254d9c3f2e6f895d136e4ea365408ee39313cfe4779400b07d2015d4ca2c9",
+          "fileSHA256": "49f070b47ce1c80a32e2fc7f3039b7a9bc317843c32af9d29eee227cd8bad3c2"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "MODEL",
+      "possibleSideEffects": "Target model mutation; MEP may merge/delete/split route GUIDs; trim modifies actual bodies; Favorite modifies settings/properties",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Target settings/relations/body and full GUID delta, preserved unrelated elements",
+      "liveVerifiedThisPass": false
     },
     "UpdateFavoritesFromElements": {
       "kind": "MODIFY",
@@ -1143,14 +1404,27 @@
       }
     },
     "RenameFavorites": {
-      "kind": "UNKNOWN",
+      "kind": "MODIFY",
       "impact": "PROJECT",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "b56413ab0df38f2415b90d855536d13f4daf8877702f0dca0f6f74e170bfd6d8",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "a0d818098a5492138b047614ea039179b6b3567e3b4fddb53bcee88ee18b0270",
+        "implementation": {
+          "file": "FavoritesCommands.cpp",
+          "lineStart": 1061,
+          "lineEnd": 1084,
+          "sha256": "a0d818098a5492138b047614ea039179b6b3567e3b4fddb53bcee88ee18b0270",
+          "fileSHA256": "49f070b47ce1c80a32e2fc7f3039b7a9bc317843c32af9d29eee227cd8bad3c2"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Defaults/favorite/group/library state mutation; library reload may affect dependent parts",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Defaults/favorites/libraries/group state snapshot and retained model",
+      "liveVerifiedThisPass": false
     },
     "DeleteFavorites": {
       "kind": "DELETE",
@@ -1273,14 +1547,27 @@
       }
     },
     "ImportPropertiesXml": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "MODIFY",
+      "impact": "ATTRIBUTES",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "7e6da0349f5acb580a2973f1ce528a6f1afa3e1776ce088dd1dfe4dd2f5348dc",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "e58be1e9612aa478ab1b69937be7bacb0a8931ab36a84440b6cfa6608b37c668",
+        "implementation": {
+          "file": "PropertyCommands.cpp",
+          "lineStart": 2000,
+          "lineEnd": 2024,
+          "sha256": "e58be1e9612aa478ab1b69937be7bacb0a8931ab36a84440b6cfa6608b37c668",
+          "fileSHA256": "9a15f510959cbc6924eaed2d380248598535aec2dce469275a463cff72bc8501"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "ATTRIBUTES",
+      "possibleSideEffects": "Definitions import may create/remove/replace; folder rename changes attribute organization",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Before/after definition IDs, affected element properties and unrelated definitions",
+      "liveVerifiedThisPass": false
     },
     "GetClassificationsOfElements": {
       "kind": "READ_ONLY",
@@ -1363,14 +1650,27 @@
       }
     },
     "ImportClassificationsXml": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "MODIFY",
+      "impact": "ATTRIBUTES",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "fc51ee5ef3ba555084ec3a8dfa0019248ff979f3107cb1081d0caf8acd4bcafe",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "4941eb3c6b282f33b05e632a882faf2219cdf7714831fc4059019dc0e4e32f70",
+        "implementation": {
+          "file": "ClassificationCommands.cpp",
+          "lineStart": 822,
+          "lineEnd": 849,
+          "sha256": "4941eb3c6b282f33b05e632a882faf2219cdf7714831fc4059019dc0e4e32f70",
+          "fileSHA256": "3f7472282aade56ac89c30f58a3b25f83d2e3ac561680da8b4ebbea1cf85fb3a"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "ATTRIBUTES",
+      "possibleSideEffects": "Definitions import may create/remove/replace; folder rename changes attribute organization",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Before/after definition IDs, affected element properties and unrelated definitions",
+      "liveVerifiedThisPass": false
     },
     "GetAttributesByType": {
       "kind": "READ_ONLY",
@@ -1623,14 +1923,27 @@
       }
     },
     "IFCFileOperation": {
-      "kind": "UNKNOWN",
-      "impact": "EXTERNAL",
+      "kind": "TRANSACTION",
+      "impact": "PROJECT",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "7c0f2d2800f2f5bef02027830644de9bd086c916ff52cce78f2896a12ad358b3",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "0fcbef09965340e74b3af0e10e72248d127bf553bbef8a1b587ef7ce77e7ca42",
+        "implementation": {
+          "file": "ProjectCommands.cpp",
+          "lineStart": 2167,
+          "lineEnd": 2238,
+          "sha256": "0fcbef09965340e74b3af0e10e72248d127bf553bbef8a1b587ef7ce77e7ca42",
+          "fileSHA256": "4cb77079cc5b3df02cfdfbf83c62dc1164cd52bd9200c71610a366171288284f"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "IFC method open/merge/save may switch model/import/write file; Teamwork sends/receives remote data",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Exact method/project/remote/file scope plus GUID/attributes; not granted by isolated geometry permission",
+      "liveVerifiedThisPass": false
     },
     "GetIFCExportTranslators": {
       "kind": "READ_ONLY",
@@ -1693,24 +2006,50 @@
       }
     },
     "ReloadLibraries": {
-      "kind": "UNKNOWN",
-      "impact": "EXTERNAL",
-      "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "6d1d666114c035f16c6fcc2355975bd0bd925dd3a73668f9b6fb4a14b29beeb2",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
-    },
-    "AddFilesToEmbeddedLibrary": {
-      "kind": "UNKNOWN",
+      "kind": "MODIFY",
       "impact": "PROJECT",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "f20aca6edcc6ae4f8fcacbe286ec4a0cb813431cddc521b26b690d7e6559e519",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "a742602580ce5b58d56ee8c85971b25e01bd583a8ec3a13c71cf0e4f8636f2ff",
+        "implementation": {
+          "file": "LibraryCommands.cpp",
+          "lineStart": 569,
+          "lineEnd": 577,
+          "sha256": "a742602580ce5b58d56ee8c85971b25e01bd583a8ec3a13c71cf0e4f8636f2ff",
+          "fileSHA256": "2cfad266adeb95336957b3b321576a9a14b5777cdc53dc070be1f35066206936"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Defaults/favorite/group/library state mutation; library reload may affect dependent parts",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Defaults/favorites/libraries/group state snapshot and retained model",
+      "liveVerifiedThisPass": false
+    },
+    "AddFilesToEmbeddedLibrary": {
+      "kind": "MODIFY",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "c08fc8998213af8e8485595ebe6e9e4a329482737a2632de5e1c170cbb4e1f92",
+        "implementation": {
+          "file": "LibraryCommands.cpp",
+          "lineStart": 54,
+          "lineEnd": 163,
+          "sha256": "c08fc8998213af8e8485595ebe6e9e4a329482737a2632de5e1c170cbb4e1f92",
+          "fileSHA256": "2cfad266adeb95336957b3b321576a9a14b5777cdc53dc070be1f35066206936"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Reads source files, writes embedded items, may delete existing and reload libraries",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Authorized source/destination and overwrite policy, library entries and dependent elements",
+      "liveVerifiedThisPass": false
     },
     "DeleteEmbeddedLibraryItems": {
       "kind": "DELETE",
@@ -1723,24 +2062,50 @@
       }
     },
     "SetLibraries": {
-      "kind": "UNKNOWN",
+      "kind": "MODIFY",
       "impact": "PROJECT",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "f21c8e66f0bc582021c05fbd45d2ca0b98088ffcf77aadfca3a852cc888be6ec",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "c8dbb430e9015bf65cf57bf3d73422b5e5bc6804bc60a2aa97bc3085d2d5e05e",
+        "implementation": {
+          "file": "LibraryCommands.cpp",
+          "lineStart": 413,
+          "lineEnd": 431,
+          "sha256": "c8dbb430e9015bf65cf57bf3d73422b5e5bc6804bc60a2aa97bc3085d2d5e05e",
+          "fileSHA256": "2cfad266adeb95336957b3b321576a9a14b5777cdc53dc070be1f35066206936"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Defaults/favorite/group/library state mutation; library reload may affect dependent parts",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Defaults/favorites/libraries/group state snapshot and retained model",
+      "liveVerifiedThisPass": false
     },
     "AddLibraries": {
-      "kind": "UNKNOWN",
+      "kind": "MODIFY",
       "impact": "PROJECT",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "96d5f95c8038063f6c84e9efa3853b0edacebbcb95c869d8776771216a4ddb5f",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "b373a8c7c21dd702a0ed0746c12cab627e6cacdc0facef7d03bb71e089f7bec8",
+        "implementation": {
+          "file": "LibraryCommands.cpp",
+          "lineStart": 455,
+          "lineEnd": 480,
+          "sha256": "b373a8c7c21dd702a0ed0746c12cab627e6cacdc0facef7d03bb71e089f7bec8",
+          "fileSHA256": "2cfad266adeb95336957b3b321576a9a14b5777cdc53dc070be1f35066206936"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Defaults/favorite/group/library state mutation; library reload may affect dependent parts",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Defaults/favorites/libraries/group state snapshot and retained model",
+      "liveVerifiedThisPass": false
     },
     "GetAvailableLibraryParts": {
       "kind": "READ_ONLY",
@@ -1753,14 +2118,27 @@
       }
     },
     "SafeBIMGlobalLibraryPart": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "SERVICE",
+      "impact": "EXTERNAL",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "f700e0378eb87e5ce6e37cdb75bc713e7c14b49383411f16ff22bf15356432fe",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "789e3482dd1ea07e215564be3a50e054e22d63612af92ec4eedbec536a5b22c4",
+        "implementation": {
+          "file": "GlobalLibraryCommands.cpp",
+          "lineStart": 865,
+          "lineEnd": 902,
+          "sha256": "789e3482dd1ea07e215564be3a50e054e22d63612af92ec4eedbec536a5b22c4",
+          "fileSHA256": "3542d0e95ee7290d611db136ab7c113e37b1bf0c8614ac1e8e063f29ed9a0ac3"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "EXTERNAL",
+      "possibleSideEffects": "External file/printer/network/registration side effects. SafeBIM action dependent: compile writes, register changes library, inspect queries",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Exact authorized file/endpoint/printer/library/action scope; content/hash and registration/readback",
+      "liveVerifiedThisPass": false
     },
     "SafeBIMGlobalPreview": {
       "kind": "CREATE",
@@ -1773,14 +2151,27 @@
       }
     },
     "CreateLibraryPartFromScripts": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "SERVICE",
+      "impact": "EXTERNAL",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "01626f2ec6e6841111e9ec3b748683e3e56bb1acbf51a68979ac5b8f8336219c",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "0bc4d6d3b07ad73c2c50729bc3ac1bfe8e541d2cc50238c83ab5797b5b0a1656",
+        "implementation": {
+          "file": "LibraryCommands.cpp",
+          "lineStart": 785,
+          "lineEnd": 792,
+          "sha256": "0bc4d6d3b07ad73c2c50729bc3ac1bfe8e541d2cc50238c83ab5797b5b0a1656",
+          "fileSHA256": "2cfad266adeb95336957b3b321576a9a14b5777cdc53dc070be1f35066206936"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "EXTERNAL",
+      "possibleSideEffects": "External file/printer/network/registration side effects. SafeBIM action dependent: compile writes, register changes library, inspect queries",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Exact authorized file/endpoint/printer/library/action scope; content/hash and registration/readback",
+      "liveVerifiedThisPass": false
     },
     "SafeBIMAttributeCatalog": {
       "kind": "CREATE",
@@ -1793,24 +2184,50 @@
       }
     },
     "TeamworkSend": {
-      "kind": "UNKNOWN",
+      "kind": "TRANSACTION",
       "impact": "PROJECT",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "24869a37009a192e0ebcc02ddecfad4a7dd57b37ee1b5e8ebe51c5718368fd33",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "d60668a5080be69cbd25a75f560c2d867a4db47291ea189e40108844f52e938f",
+        "implementation": {
+          "file": "TeamworkCommands.cpp",
+          "lineStart": 23,
+          "lineEnd": 30,
+          "sha256": "d60668a5080be69cbd25a75f560c2d867a4db47291ea189e40108844f52e938f",
+          "fileSHA256": "8aee12c665015cd187d9bb82120c7531a391e5862ab6f55549da40c0be2d1405"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "IFC method open/merge/save may switch model/import/write file; Teamwork sends/receives remote data",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Exact method/project/remote/file scope plus GUID/attributes; not granted by isolated geometry permission",
+      "liveVerifiedThisPass": false
     },
     "TeamworkReceive": {
-      "kind": "UNKNOWN",
+      "kind": "TRANSACTION",
       "impact": "PROJECT",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "baf06016fd702c79464146b3e9b51eaf9c271dfc0754c28ebc4fcb2e9e7ec5a5",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "d624b44c7557a0eedd5f82298c405785ba0683e32a83195adfdf5b51a4b7e6af",
+        "implementation": {
+          "file": "TeamworkCommands.cpp",
+          "lineStart": 49,
+          "lineEnd": 56,
+          "sha256": "d624b44c7557a0eedd5f82298c405785ba0683e32a83195adfdf5b51a4b7e6af",
+          "fileSHA256": "8aee12c665015cd187d9bb82120c7531a391e5862ab6f55549da40c0be2d1405"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "IFC method open/merge/save may switch model/import/write file; Teamwork sends/receives remote data",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Exact method/project/remote/file scope plus GUID/attributes; not granted by isolated geometry permission",
+      "liveVerifiedThisPass": false
     },
     "ReserveElements": {
       "kind": "TRANSACTION",
@@ -1833,24 +2250,50 @@
       }
     },
     "PublishPublisherSet": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "SERVICE",
+      "impact": "EXTERNAL",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "dea15aa9d49063b852406b2237bfd470de77658aa313839ea8a7b5c307664915",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "a11f8e5e4e77c38d1f5b362a8fe5bb8a74ef377c1a2c656d0f38a1d09a4227a2",
+        "implementation": {
+          "file": "NavigatorCommands.cpp",
+          "lineStart": 63,
+          "lineEnd": 110,
+          "sha256": "a11f8e5e4e77c38d1f5b362a8fe5bb8a74ef377c1a2c656d0f38a1d09a4227a2",
+          "fileSHA256": "fc155c1d30c244f3a430798a47dd9b381e13917a28020f0237a9f2ac8e2e9354"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "EXTERNAL",
+      "possibleSideEffects": "External file/printer/network/registration side effects. SafeBIM action dependent: compile writes, register changes library, inspect queries",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Exact authorized file/endpoint/printer/library/action scope; content/hash and registration/readback",
+      "liveVerifiedThisPass": false
     },
     "UpdateDrawings": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "MODIFY",
+      "impact": "DOCUMENTATION",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "996d19b3d2aef4b359b534e68d7a88fc4b7e7090d48312e92b1cc3e156f5aad5",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "ac74be844377afbc336030c9bb3d6038afde56d155849cb8e91a4e700bfc8651",
+        "implementation": {
+          "file": "NavigatorCommands.cpp",
+          "lineStart": 145,
+          "lineEnd": 161,
+          "sha256": "ac74be844377afbc336030c9bb3d6038afde56d155849cb8e91a4e700bfc8651",
+          "fileSHA256": "fc155c1d30c244f3a430798a47dd9b381e13917a28020f0237a9f2ac8e2e9354"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "DOCUMENTATION",
+      "possibleSideEffects": "Drawings/navigator/markup mutation; import reads external file",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Navigator/drawing/issue identifiers, data and native linked model",
+      "liveVerifiedThisPass": false
     },
     "GetDatabaseIdFromNavigatorItemId": {
       "kind": "READ_ONLY",
@@ -1913,14 +2356,27 @@
       }
     },
     "ChangeDrawingLink": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "TRANSACTION",
+      "impact": "DOCUMENTATION",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "27380a3ca0860be434b9e4368eacb5f6095124e8f56dff4ea4aaed085e807a9e",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "678011cead8f5c1fb6dd1fdab476caab168efdbc4bed88a8b5b80b6016c859d6",
+        "implementation": {
+          "file": "DocumentCreationCommands.cpp",
+          "lineStart": 950,
+          "lineEnd": 1505,
+          "sha256": "678011cead8f5c1fb6dd1fdab476caab168efdbc4bed88a8b5b80b6016c859d6",
+          "fileSHA256": "1e7da50a53230faf38d89594d5ff2fc6b70c2d6b7bd6f9508cba02cedce6bdb9"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "DOCUMENTATION",
+      "possibleSideEffects": "Creates replacement Drawing then deletes original; GUID changes and title-position limitation",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Explicit old/new GUID mapping, link/layout and preserved other drawings",
+      "liveVerifiedThisPass": false
     },
     "GetLayoutSettings": {
       "kind": "READ_ONLY",
@@ -2043,14 +2499,27 @@
       }
     },
     "FitInWindow": {
-      "kind": "UNKNOWN",
+      "kind": "SERVICE",
       "impact": "PROJECT",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "15c018ca71d85a4bc7c679f9237cf990166afce2ef897ea2688b146b4ef96710",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "01c803eff1a19d1e9d08eac4b05b690d9fe7687e608874546109e4cd35157a47",
+        "implementation": {
+          "file": "NavigatorCommands.cpp",
+          "lineStart": 905,
+          "lineEnd": 924,
+          "sha256": "01c803eff1a19d1e9d08eac4b05b690d9fe7687e608874546109e4cd35157a47",
+          "fileSHA256": "fc155c1d30c244f3a430798a47dd9b381e13917a28020f0237a9f2ac8e2e9354"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Session/UI effect. Quit closes instance; user input/modal can block JSON queue; views/redraw/cache affected. ModelDump explicitly shows/rebuilds3D and restores sight, not previous window",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Current window/UI/process completion; ModelDump BREP + retained model; explicit non-geometric scope",
+      "liveVerifiedThisPass": false
     },
     "CreateSections": {
       "kind": "CREATE",
@@ -2083,14 +2552,27 @@
       }
     },
     "RenameNavigatorItem": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "MODIFY",
+      "impact": "DOCUMENTATION",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "eb300692c1596097c880d5599164f4d648b16760bd53c4a63392b618c0ee6e4a",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "3162047a42d967171abd5b9641ce419d93150d8b09956fe76786bbb132cdf07e",
+        "implementation": {
+          "file": "NavigatorCommands.cpp",
+          "lineStart": 1330,
+          "lineEnd": 1373,
+          "sha256": "3162047a42d967171abd5b9641ce419d93150d8b09956fe76786bbb132cdf07e",
+          "fileSHA256": "fc155c1d30c244f3a430798a47dd9b381e13917a28020f0237a9f2ac8e2e9354"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "DOCUMENTATION",
+      "possibleSideEffects": "Drawings/navigator/markup mutation; import reads external file",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Navigator/drawing/issue identifiers, data and native linked model",
+      "liveVerifiedThisPass": false
     },
     "DeleteNavigatorItems": {
       "kind": "DELETE",
@@ -2143,14 +2625,27 @@
       }
     },
     "AddCommentToIssue": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "MODIFY",
+      "impact": "DOCUMENTATION",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "c8250cf57efeeb516f473013de203eb9faad0de29653c849e084fefc7f3b2688",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "cdbb16a4f2c891b3a2dd98069fcadac2eeb37c771f41f213b300001e96ca61bf",
+        "implementation": {
+          "file": "IssueCommands.cpp",
+          "lineStart": 370,
+          "lineEnd": 393,
+          "sha256": "cdbb16a4f2c891b3a2dd98069fcadac2eeb37c771f41f213b300001e96ca61bf",
+          "fileSHA256": "4a7db5003f72eb82aeb9c0ca84afe36bdccb41d9d4698f5e2a673caf0cfdde1e"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "DOCUMENTATION",
+      "possibleSideEffects": "Drawings/navigator/markup mutation; import reads external file",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Navigator/drawing/issue identifiers, data and native linked model",
+      "liveVerifiedThisPass": false
     },
     "GetCommentsFromIssue": {
       "kind": "READ_ONLY",
@@ -2163,24 +2658,50 @@
       }
     },
     "AttachElementsToIssue": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "MODIFY",
+      "impact": "DOCUMENTATION",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "c0ede9e6be0d0e51e042ddd1aa509b3fd05048e9e34e9a3f2c7dc1b957fe7741",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "edf4a8bebf5d9cf9a06ad16040a7f42f210a25ef210f90eaa78a2df5a5bbf2dd",
+        "implementation": {
+          "file": "IssueCommands.cpp",
+          "lineStart": 556,
+          "lineEnd": 577,
+          "sha256": "edf4a8bebf5d9cf9a06ad16040a7f42f210a25ef210f90eaa78a2df5a5bbf2dd",
+          "fileSHA256": "4a7db5003f72eb82aeb9c0ca84afe36bdccb41d9d4698f5e2a673caf0cfdde1e"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "DOCUMENTATION",
+      "possibleSideEffects": "Drawings/navigator/markup mutation; import reads external file",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Navigator/drawing/issue identifiers, data and native linked model",
+      "liveVerifiedThisPass": false
     },
     "DetachElementsFromIssue": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "MODIFY",
+      "impact": "DOCUMENTATION",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "13935c2f1be4b9bc27c4e89edabe13e69d73b5f0f061e6811057be3410fa1017",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "9910de2933cadfb46cdf9cf70bd2e43eb355473585cb7b50d09ad0127314a050",
+        "implementation": {
+          "file": "IssueCommands.cpp",
+          "lineStart": 616,
+          "lineEnd": 636,
+          "sha256": "9910de2933cadfb46cdf9cf70bd2e43eb355473585cb7b50d09ad0127314a050",
+          "fileSHA256": "4a7db5003f72eb82aeb9c0ca84afe36bdccb41d9d4698f5e2a673caf0cfdde1e"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "DOCUMENTATION",
+      "possibleSideEffects": "Drawings/navigator/markup mutation; import reads external file",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Navigator/drawing/issue identifiers, data and native linked model",
+      "liveVerifiedThisPass": false
     },
     "GetElementsAttachedToIssue": {
       "kind": "READ_ONLY",
@@ -2193,24 +2714,50 @@
       }
     },
     "ExportIssuesToBCF": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "SERVICE",
+      "impact": "EXTERNAL",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "a7852f4d7af326f283cc6ad7836bef2b11a43796cdae5f842967a67b3c470471",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "f44c7f86f7153df08c702e375c25683290b762a1bba2be5b1b827c3dd9280462",
+        "implementation": {
+          "file": "IssueCommands.cpp",
+          "lineStart": 758,
+          "lineEnd": 791,
+          "sha256": "f44c7f86f7153df08c702e375c25683290b762a1bba2be5b1b827c3dd9280462",
+          "fileSHA256": "4a7db5003f72eb82aeb9c0ca84afe36bdccb41d9d4698f5e2a673caf0cfdde1e"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "EXTERNAL",
+      "possibleSideEffects": "External file/printer/network/registration side effects. SafeBIM action dependent: compile writes, register changes library, inspect queries",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Exact authorized file/endpoint/printer/library/action scope; content/hash and registration/readback",
+      "liveVerifiedThisPass": false
     },
     "ImportIssuesFromBCF": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "MODIFY",
+      "impact": "DOCUMENTATION",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "0166ce4ed0e055d8a8c3811db48fdb81d799c740b166c510612af1fb1ac50d46",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "f32249afd0d0bd47a84f8c54c3a567f209f27be1379eaa1ced63e91aa86406c6",
+        "implementation": {
+          "file": "IssueCommands.cpp",
+          "lineStart": 832,
+          "lineEnd": 852,
+          "sha256": "f32249afd0d0bd47a84f8c54c3a567f209f27be1379eaa1ced63e91aa86406c6",
+          "fileSHA256": "4a7db5003f72eb82aeb9c0ca84afe36bdccb41d9d4698f5e2a673caf0cfdde1e"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "DOCUMENTATION",
+      "possibleSideEffects": "Drawings/navigator/markup mutation; import reads external file",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Navigator/drawing/issue identifiers, data and native linked model",
+      "liveVerifiedThisPass": false
     },
     "GetRevisionIssues": {
       "kind": "READ_ONLY",
@@ -2533,14 +3080,27 @@
       }
     },
     "ConnectMEPElements": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "MODIFY",
+      "impact": "MODEL",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "6ea5394a3216ed0e6efa627f2633e5a0266fd15908bd25866d154170455b4c5d",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "39268a978b2eba0d0e0d8b140bbb2fe7335d404e6ccf293ba37e1c4a134e5661",
+        "implementation": {
+          "file": "MEPCommands.cpp",
+          "lineStart": 1157,
+          "lineEnd": 1220,
+          "sha256": "39268a978b2eba0d0e0d8b140bbb2fe7335d404e6ccf293ba37e1c4a134e5661",
+          "fileSHA256": "f2238e8e192e63cdce43ea4e1538d8fed4d1e3120167edd9ebc4c97015db4e7c"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "MODEL",
+      "possibleSideEffects": "Target model mutation; MEP may merge/delete/split route GUIDs; trim modifies actual bodies; Favorite modifies settings/properties",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Target settings/relations/body and full GUID delta, preserved unrelated elements",
+      "liveVerifiedThisPass": false
     },
     "GetMEPPreferenceTables": {
       "kind": "READ_ONLY",
@@ -2583,14 +3143,27 @@
       }
     },
     "TrimElements": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "MODIFY",
+      "impact": "MODEL",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "dae98015c048263f30fd6323dc1dd2524dce1a3e89490e05da7ef5b668968a67",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "0c30d30a9784df250024ce11dabb484c3a0526011eda061d99a64537e74e32ca",
+        "implementation": {
+          "file": "SolidElementOperationCommands.cpp",
+          "lineStart": 463,
+          "lineEnd": 493,
+          "sha256": "0c30d30a9784df250024ce11dabb484c3a0526011eda061d99a64537e74e32ca",
+          "fileSHA256": "2f15b4a437909dd558efa83291ea849f55ee21a2462426454c67c5a539530b6b"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "MODEL",
+      "possibleSideEffects": "Target model mutation; MEP may merge/delete/split route GUIDs; trim modifies actual bodies; Favorite modifies settings/properties",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Target settings/relations/body and full GUID delta, preserved unrelated elements",
+      "liveVerifiedThisPass": false
     },
     "RemoveElementTrims": {
       "kind": "DELETE",
@@ -2603,24 +3176,50 @@
       }
     },
     "GetElementTrims": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "d0e1010810c88c3f15bc7c42d255e8ff2b3eb605ddc169790474aa00ea9daa1c",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "4982281882d5e1829ce1120c276ac52c72cdfaf0806adee4cedb71c54c245dc8",
+        "implementation": {
+          "file": "SolidElementOperationCommands.cpp",
+          "lineStart": 632,
+          "lineEnd": 679,
+          "sha256": "4982281882d5e1829ce1120c276ac52c72cdfaf0806adee4cedb71c54c245dc8",
+          "fileSHA256": "2f15b4a437909dd558efa83291ea849f55ee21a2462426454c67c5a539530b6b"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "READ_ONLY",
+      "possibleSideEffects": "Native filters, collision query and reciprocal trim query; no model setter",
+      "saveRequired": false,
+      "confirmationRequired": "IDENTITY_BOUND_QUERY",
+      "verification": "Query result and retained inventory",
+      "liveVerifiedThisPass": false
     },
     "ShowScriptUI": {
-      "kind": "UNKNOWN",
-      "impact": "EXTERNAL",
+      "kind": "SERVICE",
+      "impact": "PROJECT",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "8ad0a14d9481eab98f3e29bc4154c145d67ff572d2584f668ee6c84e36419563",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "7503553c61677234d0c94015604acbf2075d44d53698946e34cd4fbe0b85ef0a",
+        "implementation": {
+          "file": "ScriptUICommands.cpp",
+          "lineStart": 90,
+          "lineEnd": 120,
+          "sha256": "7503553c61677234d0c94015604acbf2075d44d53698946e34cd4fbe0b85ef0a",
+          "fileSHA256": "f88bafd23a1db0ef89fa22b1c5b6689271a0f2e3aa6717892c407047f36c8218"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Session/UI effect. Quit closes instance; user input/modal can block JSON queue; views/redraw/cache affected. ModelDump explicitly shows/rebuilds3D and restores sight, not previous window",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Current window/UI/process completion; ModelDump BREP + retained model; explicit non-geometric scope",
+      "liveVerifiedThisPass": false
     },
     "GetScriptUIResult": {
       "kind": "READ_ONLY",
@@ -2633,14 +3232,27 @@
       }
     },
     "GenerateDocumentation": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "SERVICE",
+      "impact": "EXTERNAL",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "6c16dd0caf675a7d256f9d245561eaba1c193733669dec8e34ca98cac7f3adb6",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "62ab41883467f8bc55c55e178e8bd50472aa948cc90ef0e4b6117e18d6c5e384",
+        "implementation": {
+          "file": "DeveloperTools.cpp",
+          "lineStart": 134,
+          "lineEnd": 144,
+          "sha256": "62ab41883467f8bc55c55e178e8bd50472aa948cc90ef0e4b6117e18d6c5e384",
+          "fileSHA256": "0d4e963e58c423b511690ed998824ecacda1eabfedae1f5d060ff26f610a1b6e"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "EXTERNAL",
+      "possibleSideEffects": "External file/printer/network/registration side effects. SafeBIM action dependent: compile writes, register changes library, inspect queries",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Exact authorized file/endpoint/printer/library/action scope; content/hash and registration/readback",
+      "liveVerifiedThisPass": false
     },
     "API.CloneProjectMapItemToViewMap": {
       "kind": "CREATE",
@@ -2730,7 +3342,8 @@
         "sha256": "0a4152e793bbc0bcf39b974123f220585865445bba3c5a84952eb4e04d67ec13",
         "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
         "effectConfidence": "UNREVIEWED"
-      }
+      },
+      "blocker": "Nested arbitrary add-on dispatch lacks inner effect/scope contract; use provider-qualified registered command instead"
     },
     "API.Get2DBoundingBoxes": {
       "kind": "READ_ONLY",
@@ -3323,24 +3936,44 @@
       }
     },
     "API.RenameAttributeFolders": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "MODIFY",
+      "impact": "ATTRIBUTES",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "4a51e58f2618800ad975275d3b7e10bc430e5a918d0b41f415409f1db36b4839",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "cb86f81922feb813dd9d831be9f905e41299afc0148de6a4393f96b1f46001f5",
+        "implementation": {
+          "file": "installed official Archicad29 Python SDK",
+          "sha256": "cb86f81922feb813dd9d831be9f905e41299afc0148de6a4393f96b1f46001f5"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "ATTRIBUTES",
+      "possibleSideEffects": "Definitions import may create/remove/replace; folder rename changes attribute organization",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Before/after definition IDs, affected element properties and unrelated definitions",
+      "liveVerifiedThisPass": false
     },
     "API.RenameNavigatorItem": {
-      "kind": "UNKNOWN",
-      "impact": "PROJECT",
+      "kind": "MODIFY",
+      "impact": "DOCUMENTATION",
       "evidence": {
-        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
-        "sha256": "fd884e87bf5640e2a1f1fd37eee7f734fe1133a9437b74c69cf40dcc7dd29f3d",
-        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
-        "effectConfidence": "UNREVIEWED"
-      }
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "972e4ab6bfc21421a145be0f20c5826b76126cf15895f73dcb1d05f400520732",
+        "implementation": {
+          "file": "installed official Archicad29 Python SDK",
+          "sha256": "972e4ab6bfc21421a145be0f20c5826b76126cf15895f73dcb1d05f400520732"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "DOCUMENTATION",
+      "possibleSideEffects": "Drawings/navigator/markup mutation; import reads external file",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Navigator/drawing/issue identifiers, data and native linked model",
+      "liveVerifiedThisPass": false
     },
     "API.SetClassificationsOfElements": {
       "kind": "MODIFY",
@@ -3373,5 +4006,359 @@
       }
     }
   },
-  "executionApproval": false
+  "executionApproval": false,
+  "contractHashes": {
+    "GetAddOnVersion": "2ac88bcab0d00840c4cf6c9ea1e7a07126f7ebd85f16b858dafeecff41949670",
+    "GetArchicadLocation": "377be33dde0bc2993bb38b8d502c928b9592ece488d896bce87c3a463f02117c",
+    "QuitArchicad": "f7b4c9bcbf0e4176974e943725267690902ec4d5cfa6b6b8c2c95bbf40598832",
+    "GetPointFromUser": "97842051660d4d89910a4093e359b72e96cc7d871bce3ef2ebcc67561e6fc443",
+    "GetCurrentWindowType": "9fc0875e2914bcc969724346f9193f87e333d0284bb5cfbeaf213f0014cc05ef",
+    "ChangeWindow": "d026c148abf792ae59b5635845164ee817c81185ec493891e3f9ac9db78dee67",
+    "GetUserGSID": "63e31c92308259e94df22e558719ff5b6c8ec4888411aae91db4bcf285b56401",
+    "ShowAlert": "cc08d6bed9c7269180f99d19bd027eb2f9e9d02040d09d1a83d4363821a023fe",
+    "GetSpecialFolders": "8592eca607e0e108d007f1ccadb555d272ddd5d3df1c3fcc517f9436e784f3ea",
+    "GetProjectInfo": "2ac53684432e7e8f86ec7b7244bd27db5af1d97ef35e28cc7c5f55b308b477fb",
+    "GetProjectInfoFields": "62a64ac44d90ae69356211860938470a7794d6fb2d734254bf9d47e0d829be61",
+    "SetProjectInfoField": "c60240dc7687f24534c038e1ae776adeb5e854a08aaccf577c2bae6ea76f78a5",
+    "CreateProjectInfoFields": "ea7cbcb968bfcc643481ef32ba030aa9aa24903e9ed5d3f4b2bb70f794b995ea",
+    "DeleteProjectInfoFields": "c9fe744ef5cef6c4321fa8e9b365674380b85437b3940ce4c745e0c7a71a09e4",
+    "GetStories": "a0bf03be5f70f5ea047ac0ab6253eb54b2359df27323232f86ef9f8b8462ff02",
+    "SetStories": "27c587ac1a353c856ae1f94137d943d6c023c18590e268f7e8f3043465e0b146",
+    "GetAutoTextKeys": "d9da40ed3bc0686afd9f2f2c9cd5f7da09e8487d4b5fc24e3cdc163d7dded9c5",
+    "GetAutoTextName": "d78b2c32207756b990145feebc535e85606093cf3ebc1261ccc2d2f223876fda",
+    "GetHotlinks": "2453fdeccb185239ba4cff54709e0f663b5fa8c44ce06d4a4ebf9ab9d78e050a",
+    "CreateHotlinkNodes": "07cb8fc354c02a6ab1be3dc4b097e8cb5aede40c384654b9b8e20de99f5b57df",
+    "CreateHotlinkInstances": "2774fe09377c8bc5b485d73d361a0d1dddadb78cfdeec92888fc0a0514d76b85",
+    "ChangeHotlinkInstances": "66c739ed694ba86a6ba8ace31dbcdc839ff1e5cd3b57354a74f42b34ca398726",
+    "OpenProject": "4a84cbaf5b96cd713bade2e7a655673100c39b251ec95fa980848ced6ea6b14f",
+    "CloseProject": "b5b0d64ac49a5d746faa233a33bd1640a463451e83840adfa8010878395edf65",
+    "SaveProject": "315ca05f4f3648f284aea03eedfbc1035a64528f6562555012ebceb526bdfec4",
+    "SaveAsModuleFile": "507dd85b96c8d6188f4f8ca2daeb72cecfd6935774f56144679d2d64add0b7a9",
+    "SaveProjectAsArchive": "88f1f2aba3b893a9237d756560b55a11112686f210809180d3ec9f62d596bcca",
+    "GetCalculationUnits": "bec3bfbebff81eec8858888eaac15afef70ea58033f1c489f6d7f6ec1a4e5e89",
+    "GetGeoLocation": "8833ca340c1d74fb422c19220b68218dbc20415b1dfff7d255980abab948ed57",
+    "SetGeoLocation": "a462b7d0cbef19241a85adc70deca8721229d3125075f3948c106a49dcb706c9",
+    "PrintView": "9bf80a8f32180f595e67fb4bbd3a7aad85c179bade111ae1dac6c36295100af2",
+    "RebuildView": "fac5eb4593eafcf21acb7bf44391ff34b50d50f0e2cbe33479ffaa3bb69cc30f",
+    "GetSelectedElements": "6d386a79c834200a16e6a003b64fc255007b6902af4ecca2a3d81a9702e8ecdc",
+    "GetElementsByType": "ac246ea3bc7cc4233b3b1f46e796c4e66bd694b700ad6166207f0d9f7e057f10",
+    "GetAllElements": "e9d01221a5a927524bccd7bd6ba15a00c4fec4158d7119c7b9d1a362cdaf6903",
+    "ChangeSelectionOfElements": "16f5d4f5afd52e12b570ce14ce9a77885dfd8ddc532e820fcc0d28c245c2f26a",
+    "FilterElements": "707c5a52f49036e62b0da66f00490201b564239d7248fa84d50ec11ec452e2af",
+    "GetDetailsOfElements": "0a54cb98b2279758bea39db910233a75a7e71c41dd60ac1951b5a597cefedf55",
+    "SetDetailsOfElements": "1305308c406fedb31765464f8fd0ee4def093667ba6dfd4690915f7a96cbc001",
+    "Get3DBoundingBoxes": "0245514d0aed7c848cc8eb6853c5e469542647b392167860c7fccc632ff885f8",
+    "GetSubelementsOfHierarchicalElements": "c96fe3b1757889a0c4b9e5b33b22b8b07cf07833dce00f492f841dfa4ffb1971",
+    "GetConnectedElements": "2e5ea488921dd30fdba0837207d1488de9ef59ee735ada9eda4c970c6235d3f6",
+    "GetSectionElements": "223ad21558c23003bf00c69e9aa43c1ef2301a7404878db10389c9ad00bed49f",
+    "GetRelationsOfElements": "696281c2bdee4c97cfc5464245aeedd3d9f9491e00f3d89b288ad86dab21c1a2",
+    "GetZoneBoundaries": "c72ea111d606317b8d89b2036708046d8934e6bb568560e50df02f5680e90e02",
+    "UpdateZones": "a217702bb4cc9bbbcb4f814353a368ec61e6178bef760f54ff179fb56f29ddc6",
+    "GetCollisions": "4495a2935ba67cde3828611abda89fbc461dc8121bc37b3e3115b674ee7bed0d",
+    "HighlightElements": "36008dde4efb92234e4033e7678eeb15d2d78247e0cf29847010597f0a56a3c7",
+    "MoveElements": "d90f7a5780b85a9815dff32a8f69145bb7d4d517b8da0a87cf66a52369fb0297",
+    "RotateElements": "cae686b66be6b4003196f6d7d2000183c18c6f8e9b33c12cba87080a111ff404",
+    "DeleteElements": "6ef472abfdf84bfc9f654ebe57e801694bb7aaebbba95d449c1f4f101a7e6416",
+    "LockElements": "d2d6aef3c39d2c7afac7046f6dcf3cf207c44b20f5436ff0668eafd0bef735bf",
+    "UnlockElements": "9162e906aec342e899b4d244a7ca2f75afb4f7712c3088510fa0f7a65005fad1",
+    "GetGDLParametersOfElements": "ea0521bce6eefc62fcfc2f04bd778ed92a38cde509aec4e3ddcf726b36783d44",
+    "SetGDLParametersOfElements": "8f118a1a1efc668f7987f604b0fd3d1f10b4e2b9202a80fe2e780f3fe3a3656f",
+    "CreateColumns": "d83b0e17ea460c80342df21016527c2705a2aa1c1fc2ede31658781f9904ba85",
+    "CreateWalls": "09d8fec530b2118224a201cb39dd2d25427cb5a9fe264a2c64bad609f0cda750",
+    "CreateBeams": "5abad184b7452871e1380dd0baf93aeca506d0c1028cfeeb43d593c1161f22c3",
+    "CreateStairs": "397b247911e3211a18d8fc0bc9f900925dac9bc5647fd8cd5783cf42dbe90b7e",
+    "CreateSlabs": "71c0535d73dda563d479e13790056a361081ba6167aaff14998cad494cbb24f8",
+    "CreateWindows": "79fd0261877d0d6fb27ccfff879a616f12527f155aceb5768b34c8937b6a2074",
+    "CreateDoors": "f2bb92573bbdc5a00d1cdce4b8c990673580c94bdb2939642e7f5159238f17d5",
+    "CreateOpenings": "90358c039242de92832684b364fffae3ddcfe4b58eea3abc10b602a25f967179",
+    "CreateMorphs": "7faa097a9a42e566fbe6e728b0e48292a96d35006265342b804df4cd5dd8f0a8",
+    "CreateRoofs": "eb30bce5e8c9f37d577db8b0a900d7c870dbc4cfb3153f4d6872dd5e39198985",
+    "CreateAssociativeDimensions": "b5210bf317df5b225a090a17f1c9fc5268f5485d113872aed045e22ed83b7b7e",
+    "CreateAssociativeDimensionsOnSection": "7077dd53f589877d21d9ec6ccc2cbb65f5e98552850dae3b9d0c1efdb7e29584",
+    "CreateWallThicknessDimensions": "f4996ce4fdd80376bccce806e79d7511211d7cd30736f14a1d959f259112b20a",
+    "GetDimensionData": "d15260f85aab8d618bfb0851b2d46d7a330dacd8b9a5b0b91cdfa9a2df32ed46",
+    "CreateZones": "880fa4048c65c64a2f6a6beab33d7afafe60f060a464957f64734ac1cfb1eb77",
+    "CreatePolylines": "04b0764b570d3031b1d753cdc4b86a18efee08228643633d34ab87106a96935b",
+    "CreateLineElements": "ab5ab08706f7cd72509e8fb75847bc45e1ef65195dbbe7aed4b77b32c2429bff",
+    "CreateArcs": "6e20ec5feb19166a78c57bc006b76c322a1760a6637d40946d1e57e8b3d4d97b",
+    "CreateCircles": "7e9d74c027348b664ddf4673d84bdffa8b199418973c883c9163031597a6a7d1",
+    "CreateHotspots": "36ba210701654bd8d6a7e62a671c1afe55ae163905c0b7bd5cb26102acb73803",
+    "CreateHatches": "1f91a6b5dd24ebb477aae28c480d88c338cf028446a925d6cb730bdc58828cd2",
+    "CreateSplines": "7ecf414aec45466901fad991aa71c407be8489e166c88b5d4f75a26b34f84a22",
+    "CreateObjects": "88c3bf474a400ca86fad68751883016fdcb7da30d21df360f28a47fee505723c",
+    "CreateLamps": "9549e1bce1893c6874495de65fb2fba3e867e49cadcf7ac5b1d65a3d257f96a1",
+    "CreateMeshes": "1da332aad9db5ce285c1bd33b863f37be4af67b600ad6a9202148263a58273bb",
+    "CreateLabels": "43c88a5f4d43dc778b1fd9185b6331796118a083ffc859b713bd2ac9a266d601",
+    "CreateTexts": "034f6062a8292472ce7f570c3297d866011c78f43247bbf4160bf2b82a0c249a",
+    "ModifyWalls": "8a71cdf115ccf691ca3dd5e3ebd2650bdcb00840a837b0df8625980cb338786f",
+    "ModifyBeams": "24cc239fd4641a139e5fb7b901058f9237c5a5bba5f72af0b7d11461322cb51f",
+    "ModifySlabs": "db9196129b4c7d3106c6d7715889e061583a4875b548426220cb62f2abfc1166",
+    "ModifyColumns": "f25f5f578468341aca33fae8d389374b9fc6e5c07f877a75ba48761e09558fcd",
+    "ModifyWindows": "e48540d4ce1658887082c0834faf89e3b0370a79a795342b32ea89be66f046fc",
+    "ModifyDoors": "0b6be93de7c814c1a8a5c54dc8d67b8709a08dc8813e3ff677c69879248cd1bd",
+    "ModifyMorphs": "4180a5254723334fb2be01c7911d134a661bded4c1fd81b90ec3ad8cd0dc8636",
+    "ModifyRoofs": "4eee9bcadad132e7e27f97eec9b6ef4b224d1dfd08b5f5cfa7315b8da13a7939",
+    "ModifyMeshes": "aa2e9ba418e2c41fbb993928131dec66bdcae1b0e25035acee2377233abdaf71",
+    "ModifyObjects": "1880c5d52696f1dc7e7c4b015bb2c70908fc1e7b0f69d3c179236673dfab812e",
+    "ModifyLamps": "5f61e185c9550220d29c13e63ab2a13013294567031917ce1059e59e7cfb776a",
+    "ModifyTexts": "7b04675023971a1b6d8e83f0f8d5ff5795de250cda30c9edcfc4176012af1b69",
+    "ModifyLabels": "87b1691798ece2578636494d687f27d808b90df2c21e66ebfd402c392c07fcd0",
+    "GetElementPreviewImage": "70681f8af4946c7f28712e23e17ca31c02e07122d8ba1fa40e89e10edb6cec6e",
+    "GetRoomImage": "10bae4df4b6ec25f109d7db44f93f9f351c02d3d203dc8ae600746d4621ed580",
+    "SetElementNotificationClient": "821da1cc8425008327cc5e79adef5818102a2e65709ab23e2b94b262cd04608a",
+    "RemoveElementNotificationClient": "c7bf08e4e423ae841516e8cb085fca12dd79e75d4ce5fa2e683760842479f418",
+    "GetNativePhysicalGeometry": "1f6c1c6f54d63d486870bd6fafb435d9142f33b36e7c8c0612856e118d2f13b9",
+    "GetModelDumpV1": "7bc6f385cec9fd8f0dc9798b39e55bbb442b3ce47637a4137641121a1c05bdad",
+    "CreateGroups": "d17fbf05667ceac18d91a8c0940474cd91ce5f57d62e6370d89c4bbf791b046a",
+    "GetGroupsOfElements": "dc43bb78ab0c754c7881e6fd26e4fab729cee92e007c299a0b4f1a6dd9e8a3db",
+    "GetElementsOfGroups": "f82163402e08d0c33e58b5f0019bef0b76a05e1f0e1a7a6cc7b62a08f192beae",
+    "GetSuspendGroupsMode": "6fd03728a6e0389123833747f24068a139e27b08cc5d1e3944121768d13d5174",
+    "SetSuspendGroupsMode": "298d43ab5712d497cf165781e6c590a3ec9c40db28befb7933eb29a345847d2a",
+    "GetFavoritesByType": "8340a5c9329a5cde978cf2560b73e0e5f94b02b16ab1c54df4e78b66fb0ebd3f",
+    "GetFavoritePreviewImage": "ff1b8d040fd715f471cc2d3c4414fc1a05e333f78386fc09cea5d8b2c6e053e0",
+    "ApplyFavoritesToElementDefaults": "ffe16978619c2307a201fbd4ebbfaff58208d1c0590845c31bc476cda9ee4d87",
+    "CreateFavoritesFromElements": "a853ca9507f2f4890a4e56adc0dfdb5d61c450c9759f288806fbf10a58db40a5",
+    "ImportFavorites": "fe632457b425677c0b438d53a40e2e2468642f72ce4b9514a6ce3df5ab9870d5",
+    "ExportFavorites": "dc957d4f60aa6e9518d164033c390cbef8d17064f2ea60a0cb84b39e76d9128f",
+    "ApplyFavoritesToElements": "8155412b1fae895d09eb3205f82b3d6e9891217233d5f3297ec5844c2b71ccf7",
+    "UpdateFavoritesFromElements": "4c677113d8d21fba6f49855f411e7985c204d4b63686e5976dae2979064bd2f6",
+    "RenameFavorites": "6dcbfc597d768801d6d03ee39d619706d39e85080f2fdb434746a17778bed9d3",
+    "DeleteFavorites": "ae1bfe5ad7ea5302fc28f32bf4066f2367840a579317f0cfd858b3a26b8adcf8",
+    "GetAllProperties": "3e2ed42b7167246575c3bd508b7ba266e6e06161f49db8e32083aba84762de8f",
+    "GetPropertyValuesOfElements": "d518f4fe8afeaecb9d1405c88251fab57bb373ce572f8a0a388d78404181d5df",
+    "SetPropertyValuesOfElements": "92c28b06c398cec24c57fd29e7d2975245fa5431d5eebc9e08c8a6ebb4ffa0ff",
+    "GetPropertyValuesOfAttributes": "75105baaeb6fd117edb65af432ccc214fa618264bc694c8d2e2273dc8b487c05",
+    "SetPropertyValuesOfAttributes": "67cccad19e6d8358ad8cffe41f1933ee16e7b6b8e0811891681a27b5a1c123b5",
+    "CreatePropertyGroups": "2abe66c06babdcd1cdbe1480ffd7ce5bebd8335ea103b12258f010aea01a5a0c",
+    "DeletePropertyGroups": "4f2bf374a63080945fdf65081732e31c2a012955b0eae50d35eaf259b50409fd",
+    "CreatePropertyDefinitions": "36c55ac505450ab301402881e64231e92f4af99859b14afffbce7e312ea94838",
+    "DeletePropertyDefinitions": "069018f16f1b189eb089a5199bdf4cf66ff7aa8b1a6bcd9e8f858a0d748ae0ba",
+    "UpdatePropertyDefinitions": "4afe61d2c3c3625e07369f2305b6886a45f9cda84bcc768c5da39e741fc22d8b",
+    "UpdatePropertyGroups": "b7b8db56ea74591c47a4d508bfa633d16fd025c84dfa38b80102ddbb98dc9f16",
+    "ImportPropertiesXml": "54a534c2e5053b1ceaaee3123e0fdd20324d68df4e40f9b82af135238ea23a79",
+    "GetClassificationsOfElements": "21cfa83c479d9cdc14ece66f08f4a4d282616eb9a83bb53248983e559b507a7c",
+    "SetClassificationsOfElements": "8e6c0538a0fa963423c53dceedf689aa20ecdf47293d1ad8e460160a028ce7fd",
+    "CreateClassificationSystems": "af80acf8281ffc0537375330baf5ca5b5f1fd75a21c9b2d89bebc4dd104d7c2d",
+    "CreateClassificationItems": "8c9399794ec42aba08e426b8011abfc6ed0d2fbef2b61ac5df4f0316c602aee0",
+    "DeleteClassificationSystems": "f55919867a0bc7ce57ac0f88dc13d38db0c5971265c618f363f0bf46bf22ed61",
+    "DeleteClassificationItems": "f47a07a51a83f0621f7edf9774707c59bea88ab7bd67f265cfc8021e1daa7181",
+    "UpdateClassificationSystems": "1db6207aa759ef7099f4bdab443921f08971ca4be0833b039472d2035ed8e034",
+    "UpdateClassificationItems": "86d3b18c0f1e05c26956c2f862fcb3fd2979d3f1df887da339ea228f983276da",
+    "ImportClassificationsXml": "1b506a7d6d78533ba437e49afaf145dcf3ee1c0c79b84bb8ccb88e1338275ea1",
+    "GetAttributesByType": "19b710a976e4d3ee95d7a0c57ee50e28c68c22b3114cf8b613ede5714eac30d4",
+    "DeleteAttributes": "2e898e2990f9cd0e5084edf164930b86db20fa396f7f9324530542dc09a6bdc6",
+    "CreateLayers": "fcb2a6c0367206533d9df989b91708e105fbb576f497ea9981599f6a901359bb",
+    "CreateLayerCombinations": "24cfa76eb54bbf583a6f050542c821c4b377114aa7170febd4f910534184aa56",
+    "CreateLines": "d3f9af0b91b2df765e79a3e6430cf346717019948e691fed53802feef02f3aeb",
+    "CreateFills": "daa1063abbfac3d2ced9ba6d623c1bc774a9f5af557a50fdfca80f6930380d67",
+    "CreateZoneCategories": "2b93db0c2f0512513e93d87464e22c1bd599b5f7b2f4f021fe001bd28a76c1f2",
+    "CreateMEPSystems": "ccacec2d1d0e935fbafb15c2c70f873a2ccf41d79fa7a99aa8b9b0365c6be3ae",
+    "CreatePenTables": "7d2a59c3bb857937b0b5e3c34510182a52269c3b81aaaa3ca258656c52d09af2",
+    "CreateProfiles": "a9a0151794ce8588feef1600ca883f4f69ee0099142a08c3b04bc7ec173cc41d",
+    "CreateBuildingMaterials": "8c5fd18aa06b427d8f365778ce97d09f6801c7b98353d3165a3c7c091a05fe8c",
+    "CreateComposites": "2bdf5837ab41b1fa2a01f062c17906bc9104d15305b0488c1b665553cbfe0945",
+    "CreateSurfaces": "ffad5e41e0b84ee43a9876f58278f21a16f9f35f692de1e48ccc8c0f9606bf1c",
+    "GetBuildingMaterialPhysicalProperties": "b814c7d2c2bf530adbcda3f7d511a7b66baa6dda6a7d4c3fdfb24c6757f05ce3",
+    "GetLayerCombinations": "6ebbcba648cb5988701f065c0f6af34b6fc577f82fdaf93e202c779cbb9d202a",
+    "GetLines": "eaa8547bdc7cb67d8371cc7b9a7782e0f7636d79056f5cbf40b1426d2fb3aad8",
+    "GetFills": "834fb115a374899ef305df58c73d8aea4d585e26b0a57e1d2929d2cecca1d26c",
+    "GetZoneCategories": "8b8777f48e6ec7cae19d56a6dc675023a8150a475b4774b153c472318ce4848a",
+    "GetMEPSystems": "6e8ffe559ddfa1a57ebf41c80e29e24f56042ad3ab6527361155b4b46fe466f0",
+    "GetPenTables": "29e6642247f5ee0dbbe7d50c32edd60b49f96fa0602a0362a10752a4a828eb1c",
+    "GetProfiles": "4fd6707708cfc8a6d25facc5003dca1c52f2716fe258b461a08f46ad64e44e97",
+    "GetComposites": "cdf77a5a0097da9e9eeba888d3c11214f919cde75f3bad274777d7edf5afd8f4",
+    "GetSurfaces": "e92d9146c6c023e7b4ab5c2231d0449f43782dd16ab09c2dd684fa2cad38f631",
+    "GetLayers": "1a3816e9d123422255becd0f87570c8e2308914e783b685f3fce02f1041ddb22",
+    "GetBuildingMaterials": "03e0f44f5fbb59ac2345c40de92aa2083a83e711403a9bb233967f517376a040",
+    "IFCFileOperation": "05971526232f6a62ced818fd88a8dfb07385d2ec0e92f67d4bd41e5102d5f652",
+    "GetIFCExportTranslators": "411f36e74c6c7b80cf5890f01e96cbf51f635d5194a1ebf796fd85723440df18",
+    "GetElementsByIFCIds": "03d19f5bf0d376bce52e9e2f5f1fb0aad5b64450bfc297aa5ba5652539688052",
+    "GetIFCIdsOfElements": "eb4f51f43a648b7c0a3a288e86c23c6bc081ff7e0d307acfb539adce29e60fa2",
+    "GetIFCTypeOfElements": "f17721d31ff509e0950e736d40c3e1dfa3b39e02202d10238a30e3114e82f1de",
+    "GetIFCPropertiesOfElements": "a57a6c3ccaa340bb7d9fd66c7860457fb11aaee1b41f46288f880140e5019b96",
+    "GetLibraries": "e4d184f217ebd9421883dcbec48542bfb1d3d0cac63cea6ee4577f3d819e263b",
+    "ReloadLibraries": "7a10bf5fcfa64e06c26f899c6f73f313eaf3798a2f838be23d4ce57adc69a031",
+    "AddFilesToEmbeddedLibrary": "528570f142cef11d6be8528929afb5c803204ff9fff9325f0b374ad2588cff43",
+    "DeleteEmbeddedLibraryItems": "297c6b98566c839c9d7eaea33a1bf0e9cfbd19cb3fa1de20e90c6cf5557a69ee",
+    "SetLibraries": "fe1eb168d9888fe7f8ced43e1f617fc81cff212b38d6e999e0b4cad0c95faf6b",
+    "AddLibraries": "a00fdf516dee1e6609c2f4376329c7dd2c1938969d58ac9cc524a8a3c4ff28e5",
+    "GetAvailableLibraryParts": "a398457ed77e88f00e4988ffd0b57b332da1cb66057e241a7359b89166a19305",
+    "SafeBIMGlobalLibraryPart": "6385ac30b68e0c1336eb25c8e716660241a27c10f8256889f845e840efb89e83",
+    "SafeBIMGlobalPreview": "da4c9bbf863f01fbdfcc9e06b99fa15d4be96f33b6ce1394604ed421c6fd17bb",
+    "CreateLibraryPartFromScripts": "8d655f4932256912d4c09bc86531b7609c405914fb0ffa8070e48d071065618b",
+    "SafeBIMAttributeCatalog": "7583a516787bde43df0f161f4e0f595971499b4b8dc00a0282e11ccad591a0b7",
+    "TeamworkSend": "4a385d650a41e4b715e6f750adf2a64d321b3e65755f94aa6682e239b9b395bf",
+    "TeamworkReceive": "38a6eefabef25886eec7a46c30bb2dd0e5fc7edfaec00982dc8b0fc4f4c44519",
+    "ReserveElements": "026b7e2a2e802c38b64736e40337826ba1c5d71dafebc54176f9b4fe4f8da743",
+    "ReleaseElements": "22df2499df77b1c134ab8ba9a628e0344306dfeb5916f2fa05ba8d848dfc1519",
+    "PublishPublisherSet": "443258f750afb31d758950a152d7a0d9a33dcf44a183c11b2f211058714261a8",
+    "UpdateDrawings": "bd212bddedd0e8fdeb6d8fdbc3f773e516f1003d232e30c106f1468a6c5e215c",
+    "GetDatabaseIdFromNavigatorItemId": "ff1a576770784134aa57e76d39de1e331bd00231407c1eeac19e9d82a96c56a9",
+    "CreateDetails": "c7815eb3cc6f69cd114668a40ff185d8c9a77ec08e9d97cd6f30ad0fad8c0342",
+    "CreateWorksheets": "06b890ed6f7e52de3da55c90b08d4254bece85971f1ea7d57a3e95db5a4bbbfc",
+    "CreateLayout": "c53dc6bef5fda5eeb3b6fd191069c0a3d7159a2eb8593c7dc5fa45a2116e461c",
+    "CreateLayoutSubset": "f3feac146e9cb9d99e03e28befda949262b83d565946c1cb5d06d1e877f08c24",
+    "CreateDrawings": "71fcc623d0765a25851fcb31128b5ab35f5ba72e9a5c200bdc74536f0fa13e96",
+    "ChangeDrawingLink": "267b6fce234bcec1753265b3fb2a4c46ca0ee5d2de625f699cc7dea19187c916",
+    "GetLayoutSettings": "23cb224dc1fc97b457e60dcc2692be6e4d3701f020f684b9da60c2d68848dd3d",
+    "SetLayoutSettings": "48f2123305a530b98c505336c37dc83c2f4876a1ecb53df7da2bc878089ccad1",
+    "GetLayoutCustomScheme": "147df9e187dddbd6f2eeee1c0ed4c79aeb95cefba1d7b3d40d4197503fdf907d",
+    "GetModelViewOptions": "322a16b04aa2cc40cdfce0ce31c8ae908dba3b41f2c33c8ec28a034bd9e05346",
+    "GetViewSettings": "d88a81acb5436a90f2a127787fcaaf21775ec99452496bf5f0ca6cf96befdbcb",
+    "SetViewSettings": "ba0bb08376bd8b339cebbb52138244f8235356dd304bbc87a278d1f302c90d01",
+    "GetView2DTransformations": "4dbf3cfb9d8a07322315697d7f6eb64dfff7c6d830a6ca01b367d229ec90b5bf",
+    "SetViewRotation": "9f054c89c1aa7e10975ce87aa078f2ad81f5bb15c9cd1a491a09bbdbc700a9cb",
+    "CloneProjectMapItemToViewMap": "f2631c7b52ac6aad2f23aaedf960adc12d0104cfa297c981e2ab587682061655",
+    "CreateViewsInViewMap": "ab9255ce4933bfa5b050cbd2c6c1104ec3baaec6ce8cefc3009210d1c8561421",
+    "CreateViewMapFolder": "3cdb7277a0b6aa4e01f1b8a6c511342f8997b42cce7978494157dcccae5a514b",
+    "Set3DCutPlanes": "7de4fbbc5bc2b382f6336939933a2a782d4f3a61d159d84d6cd2da08761f1926",
+    "FitInWindow": "92669b5bbbe90cb71a3ced151ab8b9f5cc99fb85b9a2745826660de0de277292",
+    "CreateSections": "0978112a54022fab2e4e0c96d15f22faf475960e3fb7d513fb985e031c336b96",
+    "CreateInteriorElevations": "4d867d5d31b5d59a60e52955e99aa14a3c40054b03d7828615d1a8a35919ae0b",
+    "MoveNavigatorItem": "42fdff5cd65680995d132dc648bfaeecc11c375e359ab608a8877ad52866ca58",
+    "RenameNavigatorItem": "c44aa4d7476f33a77a6b07e6875b49c6361ef08e5f9bfdbe93315f56f7873a94",
+    "DeleteNavigatorItems": "8bf70e06d8cdaa5a32365c92aaece67da33eedd6a9d50306ab522875ccb0ba92",
+    "GetNavigatorItemTree": "62be7e6a2e9c940730a521276a0507606f002440199dbd87951a0b53da5061d4",
+    "CreateIssue": "208d254cc4c72f45219d130092b70ba0f69be2c25b140c89a09f9846df73a4e0",
+    "DeleteIssue": "d79680fb5bcf7f5af9cb59238f96d4ef9877ddfed978bfacab0352c3eaa998ee",
+    "GetIssues": "9778f99fc033b227b6e921db63d1d74c9080142a5121786de4a0a8d355e1c0b3",
+    "AddCommentToIssue": "6b725c0e515e2d58fd5dbf90511259096973043002b1b77604484f766ee15906",
+    "GetCommentsFromIssue": "598b90e86e78c273731dd32b0288d5f3b210878d0308acd8e7ee5d73702e9da5",
+    "AttachElementsToIssue": "13e46a975319c585af9f7af9e1013307f0308a621bc16558918dab05353dae1d",
+    "DetachElementsFromIssue": "81f629f6b999b3a44ca791a6a4c1cd0236770de21c57cfb7feadda5b3b7d1c4c",
+    "GetElementsAttachedToIssue": "159240cad5ca0bafaecbb47aca514f014b2ff92c3db082ed0f1aa7342cbbf61c",
+    "ExportIssuesToBCF": "e219a1a28ea21a8719a04a1c97664f8743035d3fcb9e2a41e622ab200a2c618f",
+    "ImportIssuesFromBCF": "1afce4982288b365da3eb94ef589294a449a04cf698cd27b0fba19c3f63bdc6c",
+    "GetRevisionIssues": "43409c4ab235a4b182de46c5bc95a4c66ce1d2cd071ad21e60ddda5c51d0f70b",
+    "GetRevisionChanges": "c594d4e09a10c7bcf4bbeebb3fbe00bf3727db3334c45e9b3c1fe1e678e690bf",
+    "GetDocumentRevisions": "afa11293bddc0326de6be5c2ed67f2323aa59d3cb5e157ff56c60484c8e61a87",
+    "GetCurrentRevisionChangesOfLayouts": "d60ae37df0cf0bdf8398c80a2c6e8d0999122bd42170d5b0b65290c0580e3353",
+    "GetRevisionChangesOfElements": "ccd8e7410db74a250d6d2eac040e5da1c47447c3cc653cd459b35d209bc2fec6",
+    "GetDesignOptions": "d4f2118c0d8a6a3362768cb09f1c2d62f7d9546a379762166b38c49768e3a585",
+    "GetDesignOptionSets": "8af33e871d23707d8ac819e7ccc5e898c34a4f21d53d6be23c9faa95bc12589a",
+    "GetDesignOptionCombinations": "c19fe9034556813ee79e6a16aa2e7a0e30af217991b4543f20c2f32f4d027e48",
+    "GetElementsOfDesignOptions": "d6b586b9157a6c795907467d88ea6cbe7944e79308f73b75ad7460fab220b8ed",
+    "GetDesignOptionForElements": "3db4442085aaff98b996c08726a55736940109c94edb86c82eb431c787f216b4",
+    "CreateDesignOptionSets": "f32c7b083328f40b8f0387feefadba440ee896358e2334a09c8d955b92eeb801",
+    "CreateDesignOptions": "d3a8b3f99902782d2fb9c0735818a00ac6b8d12cc07f95631ec5548bfe34a816",
+    "CreateDesignOptionCombinations": "e78df4dd84e26378aa242bf596855cd63e251a4cc9b16b8615ba6eb765d26cdb",
+    "SetActiveDesignOptionsInCombinations": "217985f982602160087418605f817824d882cb5b15782ce6df825158f053f235",
+    "MoveElementsToDesignOptions": "d5e758a362f480de5a760ac626f759a33b151cb16be06e711d0e51fcf661daed",
+    "MoveDesignOptionsToAnotherSet": "84bfce919db6b7cc1410a58fd5ab92b6f9bab202f3babbd206c86a41f35c8a7a",
+    "GetKeynoteTree": "59ed3aa4b316fd09e2744681d5f307eb6bb62fecb922440a449e26864aec6851",
+    "GetKeynoteAutoTexts": "6220022a93b6626294e443a80ad57714a981f659be9e372b02da85e467bccc8a",
+    "CreateKeynoteFolders": "bba61b86437c3c6eabd6d088b6ee64e8788210fbed2d298c2608bbc4ea826f41",
+    "CreateKeynoteItems": "ff8b339b006a8643cf60988506cf6c7d788adf59d3bc59ddfcf75e431fa7d946",
+    "ModifyKeynoteFolders": "80169f2304c26c661db96fb4134d4ed154439f40dd6b2c300b539aea1d5b6331",
+    "ModifyKeynoteItems": "4afea0af42daa81164cd1f09409830d170488fc2c8da12c6c4b6c91380246b40",
+    "DeleteKeynoteFolders": "4c380e5ebcc07d1385c3086ee98237385cb8e3d4fffb3c2fab01f3bc07c69688",
+    "DeleteKeynoteItems": "08ef9e02271b3da6a5819086248d9086f10f8b5c5b4ce861aa24115daab9f1e6",
+    "CreateKeynoteLabels": "19d4773a44661824b8057970276890cfc81a53bf97b8c95f27d9f8d8176df852",
+    "GetMEPElements": "674492755e4d2082abf5d2b566443c90c2ff9ade631555cb45c4fb141d70feba",
+    "GetMEPRoutingElements": "e01cb7f38aa785d066c2b6d9122b546ea36d66e83e083fbeecb2861ea1c9d539",
+    "GetMEPPorts": "039450e4768fa66b57170441d7efcb78869405ef3a1f90e0b63bb305fc28a154",
+    "GetMEPDistributionSystems": "c382e32f657a04cfff3123e3527b983d294d4ea7ebfce4956b9016efefe20a14",
+    "CreateMEPRoutingElements": "6a94a981405a5a2214d43d2b97614fa1b8e846df564b340ae7706fd3551f117d",
+    "CreateMEPElements": "3d391bd6193a862ab55b5ee4bb562a3b825010eaebbd96e6d107c17f56ff32cf",
+    "ModifyMEPRoutingElements": "e4281fa1e66b77b7ea06a4e355e556af018671ac5b235975f8d905a642787d0d",
+    "ConnectMEPElements": "c5b9d40c0bf50eaa0307c0d5d9bec1e8ee4d5998fc549332196abcd7a5c6f07d",
+    "GetMEPPreferenceTables": "2c06b22d7a67132f3cd7634d174eef2f9953b391bedda58ebf0521f186fe5066",
+    "CreateSolidElementLinks": "227712716bfe1cd2b7f3b3cd96832b1d3a763ec05674cfa16ecfc330e554f760",
+    "RemoveSolidElementLinks": "04103c54e72be5a002cf1db17d1171e9127348c286568fc7bfc05b035ef7f4cb",
+    "GetSolidElementLinks": "fb273c12e0930fa80a73cf8b39e1410ef6b305b7038188877dccfb1529853c0e",
+    "TrimElements": "3e0775dfc4c414c4adf1a16216f1723b1881e220f42cff27c9602e5b4defbf1f",
+    "RemoveElementTrims": "dc87e8fafd1dc41acac8169097b05456c5f371b1399b089d12f5f70cc1ea9e25",
+    "GetElementTrims": "e1e5cb8ccdf50930e8845535e7945fad9373aa43f24a4cc1274fb9d14b0a0d4a",
+    "ShowScriptUI": "3b9c0d494acd09e21a3faa43d331ce0bd24523d4f0fa463f6e28ff73f5e6279e",
+    "GetScriptUIResult": "2c0d772666765dced426c7093c0978e4f1950284f95a5091bbf1b2a71ef89060",
+    "GenerateDocumentation": "9bb33f80ce229beee8b101c483472e19dbd2627668589fba7129a3184069db63",
+    "API.CloneProjectMapItemToViewMap": "68aa2306359a481c5b9ab95a55aed4d024962a9513d2c20616f42a70d7845eb5",
+    "API.CreateAttributeFolders": "8dfdd8346db70edaf0b4c07872714f58f163f4f3b863e68729613a126f88ae93",
+    "API.CreateLayout": "d9972e9b37438cacbb3f25e41a011d671dd6041686433a6e612797d4d0740a45",
+    "API.CreateLayoutSubset": "36b023e2a7616af4bb6222fef29138525912ad91efd68e3f64157f34e5cfcc62",
+    "API.CreateViewMapFolder": "011998568e95e3aac49a14fcd287bd5bbdb8580e9b234506d9adc029e40930f5",
+    "API.DeleteAttributeFolders": "b99c1c49d01427b9bf21dac4490f97fc407870d7c0d9aa7123aa56b986413441",
+    "API.DeleteAttributes": "27094bb8968ee3cd6516228a210abcf36dab0c8b1fb6b6616c774f5d51081f8b",
+    "API.DeleteNavigatorItems": "264e90c7246de82c9ae3ce95981d671e80e360f98fe3381dc980f1bb6f7c37b2",
+    "API.ExecuteAddOnCommand": "60c4ac66f647a855900eda0d2fa722ec1e6c497d73f98598232abbb1653abdba",
+    "API.Get2DBoundingBoxes": "630e947eddb373b03e998e33064074f6178bc5d87151b942af647134874abdea",
+    "API.Get3DBoundingBoxes": "aafaa7098ea1678534fa69c33eb1a68133e13581ddeb5cbfe160323fd755c22b",
+    "API.GetActivePenTables": "b9f0af59800411ed65aaa0931ee2f90ff8f47a7d77e00baa305fa606c9f15d3f",
+    "API.GetAllClassificationSystems": "fd20fe1395f9bf17fd71d57b9f31f390022ade3b1d0a1e2d8bae5b669b9a1b81",
+    "API.GetAllClassificationsInSystem": "0fe6e3970180fc64ffcce268a7cd4d32bc774d6bdaafa3fca2c4244d98260a5d",
+    "API.GetAllElements": "b7ee14ef7ba0dd41c859e0b506c22499822442e8209b263efc528ec4eda13901",
+    "API.GetAllPropertyGroupIds": "ced3ab217d00d6054057fb664b1a2bb49e37bcad72ffedf8802cea44c3ff2d45",
+    "API.GetAllPropertyIds": "52766ac7034dd4ef8cad101e183cf1d9238e256515a4159a52ed2ce513a3cf45",
+    "API.GetAllPropertyIdsOfElements": "29cbfec7ae6d20d0c2b178036cbb08154ba0a3f143d7e0445737bf1e59c47f6a",
+    "API.GetAllPropertyNames": "64bec99916f3c1dc8fb380575faf7de55b57c310d3739d482591aa67ccd6c87f",
+    "API.GetAttributeFolderStructure": "db0ecdab4c728ef3ea42aeab1cf915e03da6259b8788a6feb550a7e95c453df8",
+    "API.GetAttributeFolders": "b90da4a7a001cac51db1c7d6de66b581d6fd194ca6b21910b486605b0c93182d",
+    "API.GetAttributesByType": "538a927205a1b5ae1252bca3fc747a6388cb2b1a39e8cff88bc8984e22b8ded0",
+    "API.GetAttributesIndices": "fd9b9e78620250b303af7a9238d0df427ffc02ee7835bf1aafb508142ebfb998",
+    "API.GetBuildingMaterialAttributes": "2caaa4c316245b7b255d5fbf25c96c25b903e53ebe086731522834f0f42d62bd",
+    "API.GetBuiltInContainerNavigatorItems": "ebbddbe2f781b5e36070d402bd57a792e0847acfffbf3ce012532e18e213df37",
+    "API.GetClassificationItemAvailability": "09920d16941ce45a788f1dfd4ec2ce0b0f148b827f3b83f432abaa758142144a",
+    "API.GetClassificationSystemIds": "7e85391df7e1245532335c38f8e1442dc450cf2c0ec3f6c25d94b01316e72ea1",
+    "API.GetClassificationSystems": "7e3bf2ec99bbc10e0564f041699ac5271e3e9d6296d1c699aec2924f340af875",
+    "API.GetClassificationsOfElements": "a23141925c58dfbb5b71308fb0562c5ff8f158539f5213bc8a38aacd00ae76a5",
+    "API.GetComponentsOfElements": "4ab9badf9e758b3cbf7c816e6b1af98961a836f14426ef1fe220aa266c03b159",
+    "API.GetCompositeAttributes": "73a7a482285a3df7ef02d25648cdb69ac1747d08881d5c0c6a07d94671ecb1f0",
+    "API.GetDetailNavigatorItems": "59f8fbbe2f0cc3630c3d247eabbc5fd290c789ccb27b4d7c8f8593ed6d965fa4",
+    "API.GetDetailsOfClassificationItems": "278945ca7c47a36c5a347aef6a5c9ee6fd5ed0a8c45264c3fe3d2f8d5938da43",
+    "API.GetDetailsOfProperties": "394f96701b67d1070424437887870435fbf7338ec962409b5cbff9b0f88274ba",
+    "API.GetDocument3DNavigatorItems": "ce3c5ebf1a8937228d196e77f63343e30cb997dc1afe026cee3bb7a9327070ef",
+    "API.GetElementsByClassification": "4ee9f2335b240df9da6219b9e1e7783d95340171d6e12972d324e010917d7365",
+    "API.GetElementsByType": "ba5ce153afef9cd640662886ad8ddd6ba295ec1132674b78495bc57000612302",
+    "API.GetElementsRelatedToZones": "d2342998585250864319501772e82991d02615bc2aa65ae80621cc9feb575f73",
+    "API.GetElevationNavigatorItems": "9f9fe70bd5b138077729dc9b85b622ea54bc6430c06944ae59620b474cb5cf8c",
+    "API.GetFillAttributes": "def16116432c4e5fd86408a39a7f9c5cf36fd3035404c6c0f0239b312e691309",
+    "API.GetInteriorElevationNavigatorItems": "9e19cd111283f45062e5a3792de6e7199535c1053bf84a92fc33192e6e705d71",
+    "API.GetLayerAttributes": "ba72a644a10801a276e08a2ffe9a7d3995e4535f005533b1930941c349039b19",
+    "API.GetLayerCombinationAttributes": "97cf7bb7a8236f5cc34df79ae0029727ea6d7ae529f950e35168be55578013f3",
+    "API.GetLayoutSettings": "fe9a01459c4bc5a0eda27ba3cd8168f27be0466a5f916913bb4726cd274c8dff",
+    "API.GetLineAttributes": "a7c6c2b52ca7b0d4634c88ff092345da99ebaebf95b858bb70d6cd9f026e99bc",
+    "API.GetNavigatorItemTree": "337f783f18ac50f3f6a1a324a66d527125d3aa6a357f3c77e50bb48cad989139",
+    "API.GetNavigatorItemsType": "8f39c14e46ff6259ed9bb9b9743910daeb91fd2df0fa88b2b3ff8541d38a618e",
+    "API.GetPenTableAttributes": "d20ab28a4cf48676f71637bc13e9f679bef4acf22d33a9e6f62431bdd19af88d",
+    "API.GetProductInfo": "ab33c945a80c65c2ca6ec2fe49390165713ad05552f3011a8133d8ced50dc16a",
+    "API.GetProfileAttributePreview": "9308301ee495b232d42d925c0317a7ceba3c7b7e22f7bb997af8fd9e8974aa39",
+    "API.GetProfileAttributes": "ffd62ffe7bcf4ebb4b71be2141cb6bb7cc506cc8e89c3241f6497735ca518dd3",
+    "API.GetPropertyDefinitionAvailability": "76bc8356ac667b08b150382a968436fa1d90dd8e852f65f00f28821c702ae161",
+    "API.GetPropertyGroups": "171340bdfa23f9627ab31210c5d678420fab89de8d3fafe36ef3100511dea25b",
+    "API.GetPropertyIds": "0aea38c52d10021e1f48949afdedda3fcc56d29e3ea82e0bb5311cd2314c8236",
+    "API.GetPropertyValuesOfElementComponents": "e322bf0af354128dd56ab3e54c39269906c3c428cb94937d2f3ff09dac493f33",
+    "API.GetPropertyValuesOfElements": "2aa37fc0b280ba73b824592f1e3a9de19d63c1accd390817e75b9daa61216d4c",
+    "API.GetPublisherSetNames": "14d29df87b5d4ef8c5997b22e8c16de0987aa37e199ae3721be0b3524f4031f4",
+    "API.GetSectionNavigatorItems": "b60c96be80d8bbfb51b5aef3ac463b13533c2ef007353925398c576964becc77",
+    "API.GetSelectedElements": "7d09cf215cee9d786943d58258691a2349ce22dfdfffd0ad7b2060d7cfa2de11",
+    "API.GetStoryNavigatorItems": "27b4dab0ef6f1a1954b274777592a9600aed324f7dfac53c9a4d5ac9bb8636f0",
+    "API.GetSurfaceAttributes": "d1b5e6229c2c2eefa60b1397279936772f7d0288a663ecfae671b6df46b22b24",
+    "API.GetTypesOfElements": "dc4222d6a97c285444e6c1bba90872b96214e6b03d4e254f07eecd3683087c68",
+    "API.GetWorksheetNavigatorItems": "1e1c52136e81dfde48ac6806c6d3f22306f3b9df80c52a5892a9af85c213af9b",
+    "API.GetZoneCategoryAttributes": "365b9e17751880801bf9e2aded949045e4ca70d9f5575b8fb5c868a0f1b1be1c",
+    "API.IsAddOnCommandAvailable": "091da38fe9d3175ad975c761907c71f547c6f6bbedbcba7922ba58176c48de2a",
+    "API.IsAlive": "23db1a58c638de479d0d7aa2f28ee82a976b193dd7e8f13de06aa027c1512bbc",
+    "API.MoveAttributesAndFolders": "5c6f9f50948442a37d3c02e777d36f44c55fdcac3df833de153b0dd22bc71840",
+    "API.MoveNavigatorItem": "0c7e58bc5bdcd1043abc60deb8868f4b480ba0c48fc7cc6e6e53bce8e7805fc9",
+    "API.RenameAttributeFolders": "312217c653647fced6b605b7fc048dee5dad80eb11b4e810f8e243339415159b",
+    "API.RenameNavigatorItem": "9de32172f787e4fe1dd858d41ead7faafa9c7be840ca3f09d41a049ca8090ae0",
+    "API.SetClassificationsOfElements": "a10cadbdc0ace2480625b5b1d158ddd06d3afe22c7be12dfbb8787ac9811685f",
+    "API.SetLayoutSettings": "12cb1df62313559db876fd7173db087d6e5c5a4f515c78e12ba8c22846ed7b6a",
+    "API.SetPropertyValuesOfElements": "f46f59aef64d424c1c13648803719558d8729fba59aaa15e7f99b10c7d05eed5"
+  },
+  "reviewSummary": {
+    "previousUnknown": 51,
+    "sourceClassified": 49,
+    "remainingUnknown": 2,
+    "remaining": {
+      "GetNativePhysicalGeometry": {
+        "reason": "Exact implementation absent from existing overlay; documentation alone insufficient to prove no side effects"
+      },
+      "API.ExecuteAddOnCommand": {
+        "reason": "Nested arbitrary add-on dispatch lacks inner effect/scope contract; use provider-qualified registered command instead"
+      }
+    },
+    "notRuntimeAcceptance": true,
+    "projectBindingExcludedFromContractHash": true
+  }
 }
