@@ -1,0 +1,23 @@
+{
+  "status": "LIVE_PASS_ORIGINAL_USER_APX_RESTORED_SAVE_OPEN_145_INDEPENDENT_READBACK",
+  "currentGUIDCount": 145,
+  "retained145": "ALL_GEOMETRY_MATERIAL_STORY_SIGNATURES_UNCHANGED",
+  "signatureSetHash": "7f4294d7268c698d8800a928dbd9e60ded173e57926a71ebb353f17cbb812ebf",
+  "savedSHA256": "5f6766eb2b4d6d5036196036361162cd3ef39fe37e68b585020ed1e215c4bff8",
+  "userAPXOriginalSHA256": "8f5a9341bb9d51cb98a0a58bdbc63d3d3623a0c9f74b3cd3f1a4732c06961969",
+  "programFilesAPXOriginalSHA256": "dc99af071d3dbcff9626653ccc37001613cb3fa4a8eff50c6000c1cc70e8d7c7",
+  "bothAPXByteExact": true,
+  "actualRestoredModuleVerified": true,
+  "registryUnchanged": true,
+  "saveOpen": "AUTHORIZED_UI_SAVE_CLOSE_REOPEN_AND_INDEPENDENT_NATIVE_READBACK_PASS",
+  "slabSameGUID": true,
+  "slabContourHole": "NATIVE_READBACK_PASS",
+  "modelGeometryWrites": 0,
+  "newPLN": false,
+  "TRC": "EXCLUDED_NOT_READ_OR_MODIFIED",
+  "separate168Project": "NOT_MODIFIED",
+  "UAC": "REQUEST_NOT_SHOWN_USER_REPORTED_SHELLEXECUTE_CANCELLED_NO_INSTALLED_APX_REPLACEMENT",
+  "adminRightsUsed": false,
+  "securitySettingsChanged": false,
+  "initialRestoreReview": "AUTO_REVIEW_REFUSED_WHILE_ARCHICAD_SHUTTING_DOWN; VERIFIED_NO_PROCESSES_THEN_SAME_RESTORE_AUTHORIZED_AND_COMPLETED"
+}

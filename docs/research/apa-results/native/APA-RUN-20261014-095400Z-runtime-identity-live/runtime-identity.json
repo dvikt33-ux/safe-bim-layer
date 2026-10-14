@@ -1,0 +1,20 @@
+{
+  "status": "LIVE_PASS_ACTUAL_MODULE_AND_FRESH_CORE_IDENTITY",
+  "actualAPXSHA256": "f6f0861ffb76aced7de89922bdfa5f271d9aa371795c3849cbfe6e585003187f",
+  "actualModulePathVerified": true,
+  "loadedFrom": "EXISTING_USER_REGISTERED_ADDON_LOCATION_NOT_PROGRAMFILES",
+  "identity": {
+    "contract": "APA_NATIVE_RUNTIME_IDENTITY_V1",
+    "buildIdentity": "0b929f11a7e892b5cab062a9a6dc7bdc77363cec3a59109245f95e18de770eef",
+    "sourceRevision": "cb73cd578c7cd7577f80397920d9e81b8d09c6e1",
+    "sdkMajor": 29,
+    "developerId": 826567491,
+    "localId": 368333322,
+    "stairSolverPolicy": "DETACHED_DIAGNOSTIC_READONLY_NO_SETTER_OR_SOLVER",
+    "nativeModelWrites": 0
+  },
+  "freshCommandCount": 275,
+  "mainCoreIdentityPinning": "FRESH_EXPORT_AND_VERIFY_NATIVE_RUNTIME_IDENTITY_PASS",
+  "newModelGeometryWrites": 0,
+  "paidResearch": false
+}

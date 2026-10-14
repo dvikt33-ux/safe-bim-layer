@@ -1,0 +1,89 @@
+{
+  "status": "CURRENT_20_STEP_350MM_REQUEST_INCOMPATIBLE_WITH_NATIVE_FAVOURITE_CONSTRAINT",
+  "source": "LIVE_GET_NATIVE_STAIR_GEOMETRY_V1_CONFIGURED_RULES_NOT_NORMATIVE_ACCEPTANCE",
+  "rules": {
+    "ruleMinValue": 0.6,
+    "ruleMinApplied": true,
+    "ruleMaxValue": 0.65,
+    "ruleMaxApplied": true,
+    "treadDepthMinValue": 0.25,
+    "treadDepthMinApplied": true,
+    "treadDepthMaxValue": 0.35,
+    "treadDepthMaxApplied": true,
+    "riserHeightMinValue": 0.15,
+    "riserHeightMinApplied": true,
+    "riserHeightMaxValue": 0.2,
+    "riserHeightMaxApplied": true
+  },
+  "current": {
+    "totalHeightMeters": 3.3,
+    "stepNum": 20,
+    "riserHeightMeters": 0.165,
+    "requestedGoingMeters": 0.35,
+    "configured2RPlusG": 0.6799999999999999,
+    "maximum": 0.65
+  },
+  "actualBREP": {
+    "owner": "REAL_NATIVE_STAIR_STRUCTURE_CHILD_OF_STAIR",
+    "horizontalLevelCount": 20,
+    "regularFrontEdgePitchMeters": [
+      0.3200000000000003,
+      0.3200000000000003,
+      0.3200000000000003,
+      0.3200000000000003,
+      0.3200000000000003,
+      0.3200000000000003,
+      0.3200000000000003,
+      0.3200000000000003,
+      0.3200000000000003,
+      0.3200000000000003,
+      0.3200000000000003,
+      0.3200000000000003,
+      0.3200000000000003,
+      0.3200000000000003,
+      0.3199999999999932,
+      0.3200000000000003,
+      0.3200000000000003,
+      0.3200000000000003
+    ],
+    "finalStructuralTopTransitionPitchMeters": 0.2757883830000054,
+    "topTransitionInterpretation": "NOT_VERIFIED_NOT_USED_AS_DEFAULT_GOING",
+    "riseMeters": [
+      0.165,
+      0.16499999999999998,
+      0.16500000000000004,
+      0.16499999999999992,
+      0.16500000000000004,
+      0.16500000000000004,
+      0.16500000000000004,
+      0.16500000000000004,
+      0.1649999999999998,
+      0.16500000000000004,
+      0.16500000000000004,
+      0.16500000000000004,
+      0.16500000000000004,
+      0.16500000000000004,
+      0.16500000000000004,
+      0.16500000000000004,
+      0.16500000000000004,
+      0.1649999999999996,
+      0.16500000000000004
+    ],
+    "actualGoingAuthority": "OFFICIAL_DEFAULT_GOING_PROPERTY_CORROBORATED_BY18REGULAR_3D_PITCHES",
+    "actualGoingMeters": 0.32,
+    "unionSurfaceSpanNotTreatedAsGoing": true
+  },
+  "compatibleTestAlternatives": [
+    {
+      "stepNum": 22,
+      "riserHeightMeters": 0.15,
+      "goingMeters": 0.35,
+      "configured2RPlusG": 0.6499999999999999,
+      "exampleWalkingLengthMeters": 7.699999999999999,
+      "status": "SOURCE_CONSTRAINT_COMPATIBLE_NOT_EXECUTED_TEST_PROPOSAL"
+    }
+  ],
+  "globalPreferencesChanged": false,
+  "existingStairChanged": false,
+  "engineering": "NOT_VERIFIED"
+}
