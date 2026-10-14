@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 47,
+  "run_count": 48,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -329,6 +329,13 @@
       "phase": "LIVE",
       "report": "runs/2026-10-14/APA-RUN-20261014-074612Z-universal-native-floor-contours/REPORT.md",
       "run_id": "APA-RUN-20261014-074612Z-universal-native-floor-contours",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-14/APA-RUN-20261014-095400Z-runtime-identity-live/REPORT.md",
+      "run_id": "APA-RUN-20261014-095400Z-runtime-identity-live",
       "substep_id": "APA-P70.A11.S03"
     }
   ],
