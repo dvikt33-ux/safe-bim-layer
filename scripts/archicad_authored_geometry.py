@@ -111,7 +111,15 @@ def analyze(normalized, plan, created, children, volume_pairs, surface_pairs):
                 graph.add_edge(guid,roof['guid'].lower(),evidence='native-underside-geometry')
         elif row['type']=='Slab':
             top=data['level'];bottom=top-data['thickness']
-            allowed=Polygon([(v['x'],v['y']) for v in data['polygonCoordinates']]).buffer(1e-6)
+            footprint=Polygon([(v['x'],v['y']) for v in data['polygonCoordinates']],
+                [[(v['x'],v['y']) for v in hole['polygonCoordinates']] for hole in data.get('holes',[])])
+            allowed=footprint.buffer(1e-6)
+            if 'holes' in data:
+                from shapely.ops import unary_union
+                caps=[face['polygon'] for face in planar_faces(row) if face['drop']==2 and
+                    all(abs(p[2]-top)<1e-6 for p in face['points'])]
+                if not caps or unary_union(caps).symmetric_difference(footprint).area>1e-6:
+                    raise ValueError('NATIVE_SLAB_CAP_FOOTPRINT_OR_HOLES_MISMATCH:'+sid)
         elif row['type']=='Column':
             bottom=data['coordinates']['z'];top=bottom+data['height']
             x,y=data['coordinates']['x'],data['coordinates']['y']

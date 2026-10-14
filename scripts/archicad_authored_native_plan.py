@@ -21,7 +21,7 @@ import archicad_scene_run as RUN
 READS=frozenset({"GetProjectInfo","GetStories","GetAttributesByType"})
 
 
-def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junction_policy=None):
+def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junction_policy=None,floor_plans=None):
     """Native-schema validated single DAG, but never executable by this adapter."""
     if not callable(read_api):
         raise ValueError("EXPLICIT_READ_ONLY_NATIVE_SOURCE_REQUIRED")
@@ -31,6 +31,8 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
         return read_api(cmd,params)
     geometry=SPATIAL.compile_spatial(brief,pack,layout)
     doc=BRIEF.normalize(brief)
+    if floor_plans is not None and (not isinstance(floor_plans,dict) or set(floor_plans)!={s['id'] for s in doc['stories']}):
+        raise ValueError('SOURCE_FLOOR_PLAN_REQUIRED_EVERY_STORY')
     if not isinstance(heights,dict) or set(heights)!={x["id"] for x in doc["stories"]}:
         raise ValueError("STORY_HEIGHTS_MUST_BE_AUTHORED")
     for i,story in enumerate(doc["stories"]):
@@ -102,13 +104,29 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
             BUILD.xy(footprint['xMax'],footprint['yMin']),
             BUILD.xy(footprint['xMax'],footprint['yMax']),
             BUILD.xy(footprint['xMin'],footprint['yMax'])] if junction_policy else polygon
+        authored_floor=None
+        if floor_plans is not None:
+            from shapely.geometry import LineString,Point,box
+            authored_floor,shape=BUILD.source_floor_polygon(floor_plans[sid])
+            envelope=box(bounds['xMin'],bounds['yMin'],bounds['xMax'],bounds['yMax']).buffer(.6)
+            if not envelope.covers(shape):raise ValueError('SOURCE_FLOOR_OUTSIDE_DECLARED_ENVELOPE')
+            for member in walls:
+                c=member['constantCoordinate'];a=member['fromCoordinate'];b=member['toCoordinate']
+                points=[(c,a),(c,b)] if member['direction']=='X' else [(a,c),(b,c)]
+                if not shape.buffer(1e-6).covers(LineString(points)):raise ValueError('SOURCE_WALL_OVER_FLOOR_VOID_OR_OUTSIDE_CONTOUR')
+            for room in geometry['rooms']:
+                if room['storyId']==sid:
+                    q=room['rectangle'];room_polygon=box(q['xMin'],q['yMin'],q['xMax'],q['yMax'])
+                    if not shape.buffer(1e-6).covers(room_polygon):raise ValueError('SOURCE_ROOM_OVER_FLOOR_VOID')
+            slab_polygon=authored_floor['polygonCoordinates']
         ops.append(BUILD.step(step_id,"CreateSlabs",{
             # Tapir CreateSlabs level is absolute project Z; native details
             # return level relative to the home story and zCoordinate absolute.
             "level":float(s["level"]),"floorIndex":native,
             "thickness":slab["thicknessMeters"],
             "referencePlaneLocation":"Top",
-            "polygonCoordinates":slab_polygon
+            "polygonCoordinates":slab_polygon,
+            **({'holes':authored_floor['holes']} if authored_floor is not None else {})
         }))
         for wall in walls:
             if wall["direction"]=="X":
@@ -144,6 +162,7 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
         "sourcePackStatus":pack["status"],
         "authoredOutline":geometry["outline"],
         "authoredStoryHeightsMeters":{k:float(v) for k,v in heights.items()},
+        "authoredFloorPlans":copy.deepcopy(floor_plans),
         "slabBasicMaterialName":material_name,
         "graph":graph,"executionOrder":checked["executionOrder"],
         "sourcePlanHash":checked["sourcePlanHash"],

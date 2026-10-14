@@ -2,6 +2,17 @@
 #include "MigrationHelper.hpp"
 #include <cmath>
 #include <cstring>
+#include "APABuildIdentity.hpp"
+
+GetAPARuntimeInfoV1Command::GetAPARuntimeInfoV1Command () : CommandBase (CommonSchema::NotUsed) {}
+GS::String GetAPARuntimeInfoV1Command::GetName () const { return "GetAPARuntimeInfoV1"; }
+GS::Optional<GS::UniString> GetAPARuntimeInfoV1Command::GetInputParametersSchema () const { return R"({"type":"object","properties":{},"additionalProperties":false})"; }
+GS::Optional<GS::UniString> GetAPARuntimeInfoV1Command::GetRawResponseSchema () const { return R"({"type":"object","additionalProperties":true})"; }
+GS::ObjectState GetAPARuntimeInfoV1Command::Execute (const GS::ObjectState&, GS::ProcessControl&) const {
+    return GS::ObjectState ("contract", "APA_NATIVE_RUNTIME_IDENTITY_V1", "buildIdentity", APA_BUILD_IDENTITY,
+        "sourceRevision", APA_SOURCE_REVISION, "sdkMajor", 29, "developerId", 826567491, "localId", 368333322,
+        "stairSolverPolicy", "DETACHED_DIAGNOSTIC_READONLY_NO_SETTER_OR_SOLVER", "nativeModelWrites", 0);
+}
 
 static bool IsGrid (const API_Element& e) {
     return e.header.type.typeID == API_ObjectID && e.header.type.variationID == APIVarId_GridElement;

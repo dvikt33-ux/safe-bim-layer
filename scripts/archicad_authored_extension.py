@@ -5,6 +5,7 @@ columns. Existing geometry must match; durable reservation precedes mutation.
 """
 from contextlib import closing
 import copy
+import math
 import sqlite3
 import archicad_project_accelerator as A
 
@@ -117,13 +118,11 @@ def qualify_model_operation(scope,command,parameters,source_hash):
                 or abs(row['stepNum']*row['riserHeight']-row['totalHeight'])>1e-6):
             raise ValueError('MODEL_STAIR_REQUIRES_COMPLETE_SOURCE_BASELINE_AND_DIMENSIONS')
     elif command=='ModifySlabs':
-        if set(row)!={'elementId','holes'} or not isinstance(row['holes'],list) or len(row['holes'])!=1:
-            raise ValueError('MODEL_SLAB_HOLE_REQUIRES_EXACT_OWNED_CONTOUR')
-        hole=row['holes'][0]
-        points=hole.get('polygonCoordinates',[])
-        if set(hole)!={'polygonCoordinates'} or len(points)!=4 or any(set(p)!={'x','y'} or
-                any(type(v) not in (int,float) or not math.isfinite(v) for v in p.values()) for p in points):
-            raise ValueError('MODEL_STAIR_HOLE_REQUIRES_MEASURED_RECTANGULAR_FOOTPRINT')
+        if set(row)=={'elementId','polygonOutline','holes'}:
+            import archicad_building_shell as BUILD
+            BUILD.source_floor_polygon({'polygonCoordinates':row['polygonOutline'],'holes':row['holes']})
+        else:
+            _qualify_legacy_stair_hole(row)
     elif command=='MoveElements':
         vector=row.get('moveVector',{})
         if (set(row)!={'elementId','moveVector','copy'} or row['copy'] is not False or
@@ -152,12 +151,20 @@ def qualify_model_operation(scope,command,parameters,source_hash):
         raise ValueError('MODEL_EDIT_ONLY_NEW_OWNED_ELEMENTS')
 
 
+def _qualify_legacy_stair_hole(row):
+    if set(row)!={'elementId','holes'} or not isinstance(row['holes'],list) or len(row['holes'])!=1:
+        raise ValueError('MODEL_SLAB_HOLE_REQUIRES_EXACT_OWNED_CONTOUR')
+    hole=row['holes'][0];points=hole.get('polygonCoordinates',[])
+    if set(hole)!={'polygonCoordinates'} or len(points)!=4 or any(set(p)!={'x','y'} or any(type(v) not in (int,float) or not math.isfinite(v) for v in p.values()) for p in points):
+        raise ValueError('MODEL_STAIR_HOLE_REQUIRES_MEASURED_RECTANGULAR_FOOTPRINT')
+
 def prepare_building_parameter_edit(api,old_plan,created,new_intent,schema_path):
     """Diff the existing authored graph into native edits; never recreate a host."""
     verified=verify_model(api,old_plan,created)
     if set(verified)!=set(s['id'] for s in old_plan['graph']['operations']):
         raise ValueError('MODEL_EDIT_REQUIRES_COMPLETE_AUTHORED_SOURCE')
-    proposed=A.compile_authored_intent(new_intent,schema_path,api)
+    proposed=(A.compile_intent(new_intent,schema_path) if new_intent.get('schemaVersion')=='archicad-project-intent/1'
+        else A.compile_authored_intent(new_intent,schema_path,api))
     old={s['id']:s for s in old_plan['graph']['operations']}
     new={s['id']:s for s in proposed['graph']['operations']}
     if old.keys()!=new.keys():raise ValueError('MODEL_EDIT_CANNOT_ADD_REMOVE_OR_RECREATE_ELEMENTS')
@@ -171,6 +178,8 @@ def prepare_building_parameter_edit(api,old_plan,created,new_intent,schema_path)
         guid=created[sid]['guid'];command=before['command']
         if command=='CreateWalls' and changed=={'height'}:
             native='ModifyWalls';params={'wallsWithDetails':[{'elementId':{'guid':guid},'height':b['height']}]}
+        elif command=='CreateSlabs' and changed<={'polygonCoordinates','holes'}:
+            native='ModifySlabs';params={'slabsWithDetails':[{'elementId':{'guid':guid},'polygonOutline':b['polygonCoordinates'],'holes':b.get('holes',[])}]}
         elif command in {'CreateWindows','CreateDoors'} and changed<={'width','height','sillHeight'}:
             native='Modify'+command[6:];key=command[6:].lower()+'WithDetails'
             params={key:[{'elementId':{'guid':guid},**{k:b[k] for k in sorted(changed)}}]}
@@ -183,7 +192,7 @@ def prepare_building_parameter_edit(api,old_plan,created,new_intent,schema_path)
     if old_plan['storyBindings']!=proposed['storyBindings']:
         raise ValueError('MODEL_EDIT_GLOBAL_STORIES_REQUIRE_SEPARATE_PROJECT_SCOPE')
     next_plan=copy.deepcopy(old_plan)
-    next_plan.update(graph=proposed['graph'],intent=copy.deepcopy(new_intent))
+    next_plan.update(graph=proposed['graph'],intent=copy.deepcopy(new_intent),metrics=proposed['metrics'])
     checked=A.SCENE.GRAPH.compile_graph(A.catalog_with_provenance(schema_path),
         next_plan['graph'],runtime_version=RUN.EXPECTED_TAPIR)
     next_plan['sourcePlanHash']=RUN.native_plan_hash(next_plan,checked['sourcePlanHash'])
