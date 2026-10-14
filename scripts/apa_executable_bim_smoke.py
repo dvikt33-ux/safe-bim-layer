@@ -12,7 +12,7 @@ import archicad_bim_documentation as D
 from archicad_connected_ifc import native_body_quantities
 from archicad import ACConnection
 
-def run(baseline,inputs,output,journal,effects,authorization,prepare_only=False):
+def run(baseline,inputs,output,journal,effects,authorization,prepare_only=False,reconciled_wall=None,reconciled_window=None,reconciled_classification=None):
     if not authorization or Path(baseline['project']['projectPath']).stem!='APA_Stories_Grid_Stair_Test_01':raise ValueError('EXACT_AUTHORIZED_TEST_PROJECT_REQUIRED')
     b=baseline;out=Path(output);out.mkdir();api=A.EvidenceAPI(A.native_transport,out);A.RUN.PORT=b['port']
     assert api('GetProjectInfo',{})==b['project'];saved=lambda:hashlib.sha256(Path(b['project']['projectPath']).read_bytes()).hexdigest()
@@ -22,17 +22,22 @@ def run(baseline,inputs,output,journal,effects,authorization,prepare_only=False)
     request='Create a native Wall with a hosted Window in a free test region; edit height, material, surface, classification and ElementID; move and copy; verify IFC/MEP, Save/Open, remove only temporary elements.'
     selection=A.native_task_tools(router,out/'selected-tool-index.sqlite3','CreateWalls ModifyWalls CreateWindows MoveElements DeleteElements');A.write_json(out/'gpt-tool-selection.json',selection)
     selected=['CreateWalls','ModifyWalls','CreateWindows','MoveElements','DeleteElements','SetClassificationsOfElements','SetPropertyValuesOfElements'];A.write_json(out/'selected-schemas.json',{n:router.select(n) for n in selected})
-    writer=A.RUN.SceneWriter(api,journal,b['schemaFile']);owned=set();records=[];current={};protected=b['signatures'];steps=0;preparation=[];execution=[]
+    existing_wall=(reconciled_wall or {}).get('guid','').lower()
+    existing_window=(reconciled_window or {}).get('guid','').lower()
+    if reconciled_wall and (reconciled_wall.get('status')!='LIVE_RECONCILED_NO_REPLAY_PASS' or not reconciled_wall.get('originalSceneId')):raise ValueError('MANUAL_RECONCILIATION_REQUIRED')
+    if reconciled_window and (reconciled_window.get('status')!='LIVE_RECONCILED_NO_REPLAY_PASS' or not reconciled_window.get('originalSceneId')):raise ValueError('MANUAL_WINDOW_RECONCILIATION_REQUIRED')
+    writer=A.RUN.SceneWriter(api,journal,b['schemaFile']);owned={g for g in [existing_wall,existing_window] if g};records=[];current={};protected=b['signatures'];steps=0;preparation=[];execution=[]
     def capture():
         ids=A.inventory_guids(api);model=D.capture_full_model(api,ids);signatures=C.retained_geometry_signatures(model,ids)
         if C.retained_geometry_signatures(model,list(protected))!=protected:raise ValueError('ORIGINAL258_CHANGED')
         return ids,model,signatures
     def detail(g):return A.RUN.requested_details(api,g)
     def by_id(model):return {e['guid'].lower():e for e in model['elements']}
-    initial=capture();assert initial[0]==b['inventory']
+    initial=capture();assert set(initial[0])==set(b['inventory'])|owned
     # Explicit test dimensions, checked against actual accepted geometry.
     region=dict(xMin=110,xMax=117,yMin=29.5,yMax=33.5,zMin=-.01,zMax=3.11)
     for e in by_id(initial[1]).values():
+        if e['guid'].lower() in owned:continue
         vertices=[v for body in e.get('bodies',[]) for v in body['vertices']]
         if vertices and all(max(v[i] for v in vertices)>region[k+'Min'] and min(v[i] for v in vertices)<region[k+'Max'] for i,k in enumerate('xyz')):raise ValueError('TEST_REGION_OCCUPIED')
     material=inputs['materialFacts']['buildingMaterials'][0];other=inputs['materialFacts']['buildingMaterials'][1];surface=inputs['surfaces']['attributeIds'][0]['attributeId'];lib=inputs['windows']['detailsOfElements'][0]['details']['libPart']['name']
@@ -43,11 +48,11 @@ def run(baseline,inputs,output,journal,effects,authorization,prepare_only=False)
     cls=next(c for c in flatten(system['tree']['classificationItems']) if c.get('id','').casefold() in {'стена','wall'})
     wall_data=dict(begCoordinate=dict(x=110,y=30),endCoordinate=dict(x=116,y=30),floorIndex=0,zCoordinate=0,height=2.8,thickness=.25,referenceLineLocation='Center',structureType='Basic',buildingMaterialId=material['attributeId'])
     ref=lambda sid,pointer:{'$result':dict(step=sid,pointer=pointer)}
-    element=lambda sid:ref(sid,'/elements/0/elementId')
+    element=lambda sid:dict(guid=existing_wall) if sid=='wall' and existing_wall else dict(guid=existing_window) if sid=='window' and existing_window else ref(sid,'/elements/0/elementId')
     prop=router.read(api,router.prepare('API.GetPropertyIds',dict(properties=[dict(type='BuiltIn',nonLocalizedName='General_ElementID')])),True)['properties'][0]['propertyId']
     def check_wall(g,height,x=110,material_id=None,face=None):
         row=detail(g);d=row['details'];assert row['type']=='Wall' and row['floorIndex']==0
-        for key,value in [('height',height),('thickness',.25)]:assert A.RUN.close(d[key],value),(key,d[key],value)
+        for key,value in [('height',height),('begThickness',.25),('endThickness',.25)]:assert A.RUN.close(d[key],value),(key,d[key],value)
         begin=d.get('begCoordinate',d.get('beginCoordinate'));end=d.get('endCoordinate');assert A.RUN.close(begin['x'],x) and A.RUN.close(end['x'],x+6)
         if material_id:assert d['buildingMaterialId']['guid'].lower()==material_id['guid'].lower()
         if face:assert d['referenceMaterial']['overridden'] and d['referenceMaterial']['attributeId']['guid'].lower()==face['guid'].lower()
@@ -59,7 +64,7 @@ def run(baseline,inputs,output,journal,effects,authorization,prepare_only=False)
     def scoped(step,ticket,results):
         nonlocal steps
         sid=step['id'];before_ids,before_model,before_signatures=capture();affected=[]
-        wall=results.get('wall',{}).get('elements',[{}])[0].get('elementId',{}).get('guid','').lower();window=results.get('window',{}).get('elements',[{}])[0].get('elementId',{}).get('guid','').lower()
+        wall=existing_wall or results.get('wall',{}).get('elements',[{}])[0].get('elementId',{}).get('guid','').lower();window=existing_window or results.get('window',{}).get('elements',[{}])[0].get('elementId',{}).get('guid','').lower()
         if sid in {'edit','classify','property'}:affected=[wall]
         elif sid in {'window','move','copy'}:affected=[wall]+([window] if window else [])
         elif sid=='cleanup':affected=sorted(owned)
@@ -85,15 +90,25 @@ def run(baseline,inputs,output,journal,effects,authorization,prepare_only=False)
                 if sid=='edit':check_wall(wall,3.1,material_id=other['attributeId'],face=surface)
                 elif sid=='move':check_wall(wall,3.1,x=110.5,material_id=other['attributeId'],face=surface);check_window(window,wall)
                 elif sid=='classify':
-                    got=router.read(api,router.prepare('GetClassificationsOfElements',dict(elements=[dict(elementId=dict(guid=wall))],classificationSystemIds=[dict(classificationSystemId=system['classificationSystemId'])])),True);assert cls['classificationItemId']['guid'].lower() in A.RUN.canonical(got).lower();record['classificationReadback']=got
+                    got=router.read(api,router.prepare('API.GetClassificationsOfElements',dict(elements=[dict(elementId=dict(guid=wall))],classificationSystemIds=[dict(classificationSystemId=system['classificationSystemId'])])),True);assert cls['classificationItemId']['guid'].lower() in A.RUN.canonical(got).lower();record['classificationReadback']=got
                 elif sid=='property':
-                    got=router.read(api,router.prepare('GetPropertyValuesOfElements',dict(elements=[dict(elementId=dict(guid=wall))],properties=[dict(propertyId=prop)])),True);assert 'APA-EXECUTABLE-WALL-01' in A.RUN.canonical(got);record['propertyReadback']=got
+                    got=router.read(api,router.prepare('API.GetPropertyValuesOfElements',dict(elements=[dict(elementId=dict(guid=wall))],properties=[dict(propertyId=prop)])),True);assert 'APA-EXECUTABLE-WALL-01' in A.RUN.canonical(got);record['propertyReadback']=got
             physical=by_id(after_model)
             if sid in {'window','move','copy','open'}:
                 for g in owned:
                     if physical[g]['type']=='Wall':
                         quantity=native_body_quantities(physical[g]);record.setdefault('wallBodies',{})[g]=quantity
-                        assert quantity['status']=='NATIVE_PLANAR_BREP_QUANTITIES' and abs(quantity['volumeCubicMeters']-((6*3.1-1.2*1.2)*.25))<1e-5,quantity
+                        from shapely.geometry import Polygon
+                        hole_areas=[]
+                        for body in physical[g]['bodies']:
+                            vertices=body['vertices']
+                            for face in body['faces']:
+                                for ring in face['contours'][1:]:
+                                    points=[vertices[i] for i in ring]
+                                    if max(p[1] for p in points)-min(p[1] for p in points)<1e-6:hole_areas.append(Polygon([(p[0],p[2]) for p in points]).area)
+                        assert quantity['status']=='NATIVE_PLANAR_BREP_QUANTITIES' and len(hole_areas)==2 and abs(hole_areas[0]-hole_areas[1])<1e-5 and abs(quantity['volumeCubicMeters']-(6*3.1-hole_areas[0])*.25)<1e-5,quantity
+                        record.setdefault('actualOpeningAreas',{})[g]=hole_areas[0]
+                        record['windowOverallDimensionsAreNotRoughOpeningDimensions']=True
             if sid=='open':assert after_signatures==current['beforeOpenSignatures'],'SAVE_OPEN_CHANGED_MODEL'
             if sid=='save':current['beforeOpenSignatures']=after_signatures
             record['status']='LIVE_EFFECT_PASS';A.write_json(out/'mutation-readback.json',records)
@@ -106,6 +121,23 @@ def run(baseline,inputs,output,journal,effects,authorization,prepare_only=False)
         start=time.perf_counter();result=A.run_native_task(router,api,preview,writer,scoped,lambda state:A.write_json(out/(label+'-checkpoint.json'),state));execution.append(time.perf_counter()-start);A.write_json(out/(label+'-result.json'),result)
         assert result['status']=='WORKFLOW_CALLABLE_VERIFIED',result
         return result
+    if existing_wall:
+        check_wall(existing_wall,3.1 if existing_window else 2.8,material_id=other['attributeId'] if existing_window else material['attributeId']);quantity=native_body_quantities(by_id(initial[1])[existing_wall]);assert quantity['status']=='NATIVE_PLANAR_BREP_QUANTITIES'
+        if existing_window:check_window(existing_window,existing_wall)
+        completed={'wall','edit','window'} if existing_window else {'wall'}
+        if reconciled_classification:
+            if reconciled_classification.get('status')!='LIVE_RECONCILED_NO_REPLAY_PASS' or not reconciled_classification.get('originalSceneId'):raise ValueError('MANUAL_CLASSIFICATION_RECONCILIATION_REQUIRED')
+            got=router.read(api,router.prepare('API.GetClassificationsOfElements',dict(elements=[dict(elementId=dict(guid=existing_wall))],classificationSystemIds=[dict(classificationSystemId=system['classificationSystemId'])])),True);assert cls['classificationItemId']['guid'].lower() in A.RUN.canonical(got).lower();completed.add('classify')
+        graph['operations']=[step for step in graph['operations'] if step['id'] not in completed]
+        for step in graph['operations']:step['after']=[sid for sid in step.get('after',[]) if sid not in completed]
+        def replace_wall_reference(value):
+            if isinstance(value,dict) and '$result' in value and value['$result']['step'] in completed:
+                guid=existing_wall if value['$result']['step']=='wall' else existing_window
+                return [dict(elementId=dict(guid=guid))] if value['$result']['pointer']=='/elements' else dict(guid=guid)
+            if isinstance(value,dict):return {k:replace_wall_reference(v) for k,v in value.items()}
+            if isinstance(value,list):return [replace_wall_reference(v) for v in value]
+            return value
+        graph=replace_wall_reference(graph)
     if prepare_only:
         preview=A.compile_intent(dict(schemaVersion='apa-native-task/1',request=request,graph=graph),b['schemaFile'],router=router);A.write_json(out/'create-edit-plan.json',preview)
         proof=dict(status='REAL_INPUTS_AND_TYPED_WORKFLOW_PREPARED',stepCount=len(graph['operations']),original258Preserved=True,nativeWrites=api.write_attempts,modelChanges=0)
@@ -121,4 +153,4 @@ def run(baseline,inputs,output,journal,effects,authorization,prepare_only=False)
 
 if __name__=='__main__':
     read=lambda p:json.loads(Path(p).read_text(encoding='utf8'))
-    cfg=read(sys.argv[1]);proof=run(read(cfg['baseline']),read(cfg['inputs']),cfg['output'],cfg['journal'],read(cfg['effects']),cfg['authorization'],prepare_only=cfg.get('prepareOnly',False));print(json.dumps({k:proof[k] for k in ['status','temporaryCreated','temporaryDeleted','finalGuidCount','saveOpen','performance','nativeWrites'] if k in proof}))
+    cfg=read(sys.argv[1]);proof=run(read(cfg['baseline']),read(cfg['inputs']),cfg['output'],cfg['journal'],read(cfg['effects']),cfg['authorization'],prepare_only=cfg.get('prepareOnly',False),reconciled_wall=cfg.get('reconciledWall'),reconciled_window=cfg.get('reconciledWindow'),reconciled_classification=cfg.get('reconciledClassification'));print(json.dumps({k:proof[k] for k in ['status','temporaryCreated','temporaryDeleted','finalGuidCount','saveOpen','performance','nativeWrites'] if k in proof}))

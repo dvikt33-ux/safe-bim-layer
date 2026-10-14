@@ -103,6 +103,7 @@ class DynamicCommands:
             if not contracts or set(contracts)!=set(manifest['operations']) or any(name not in self.catalog['commands'] or value!=self.contract_hash(name) for name,value in contracts.items()):raise ValueError('OPERATION_MANIFEST_CATALOG_DRIFT')
         for name,policy in manifest['operations'].items():
             self.review_policy(name,policy['kind'],policy['impact'],policy['evidence'])
+            self.policies[name].update({k:copy.deepcopy(v) for k,v in policy.items() if k not in {'kind','impact','evidence'}})
         return dict(reviewed=len(self.policies),unknown=sum(p['kind']=='UNKNOWN' for p in self.policies.values()))
 
     def contract_hash(self,command):
