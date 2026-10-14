@@ -1,0 +1,18 @@
+{
+  "status": "DONE_PUBLISHED_RUNTIME_BLOCK_S03_PARTIAL",
+  "revision": 153,
+  "codePR": 80,
+  "codeHead": "cb73cd578c7cd7577f80397920d9e81b8d09c6e1",
+  "runtimeIdentity": "LIVE_PASS_ACTUAL_MODULE_AND_CORE_GATE",
+  "grid": "LIVE_READ_EXISTING_TRUE_GRID_NO_CREATE",
+  "stair": "LIVE_READONLY_DIAG_NO_SOLVER_EXACT_BLOCKED",
+  "newModelGeometryWrites": 0,
+  "retained145": "ALL_SIGNATURES_UNCHANGED_AFTER_SAVE_OPEN_RESTORE",
+  "bothAPXOriginals": "BYTE_EXACT_RESTORED_OR_UNCHANGED",
+  "registryUnchanged": true,
+  "paidResearch": false,
+  "engineering": "NOT_VERIFIED",
+  "sourceCompatible22Rise350mm": "NOT_EXECUTED",
+  "receiptRun": "APA-RUN-20261014-095400Z-runtime-identity-live",
+  "filesVerified": 13
+}
