@@ -157,4 +157,8 @@ def verify_assembly(api,guids,recipe):
     if len(joins)!=(1 if recipe['scheme']=='GABLE' else 5):raise ValueError('ROOF_ACTUAL_RIDGE_HIP_TOPOLOGY_MISMATCH')
     contacts=C.G.shared_surfaces(rows,{g.lower():g.lower() for g in guids}) if len(guids)>1 else []
     if recipe['scheme']=='GABLE' and not contacts:raise ValueError('ROOF_SOLID_SEAM_CONTACT_NOT_VERIFIED')
-    return dict(status='NATIVE_ROOF_ASSEMBLY_GEOMETRY_PASS',scheme=recipe['scheme'],nativeElementCount=len(guids),actualSlopePlaneCount=len(planes),pitchDegrees=recipe['testParameters']['angleDegrees'],footprintGapAreaSquareMeters=gap,joins=joins,solidSeamContacts=contacts,nativeDetails=details,engineering='NOT_VERIFIED')
+    source=rows.get(recipe['sourceGuid'].lower())
+    source_surfaces=set(C.ROOF.face_material_guids(source,model)) if source else set()
+    actual_surfaces=set(s for g in guids for s in C.ROOF.face_material_guids(rows[g.lower()],model))
+    return dict(status='NATIVE_ROOF_ASSEMBLY_GEOMETRY_PASS',scheme=recipe['scheme'],nativeElementCount=len(guids),actualSlopePlaneCount=len(planes),pitchDegrees=recipe['testParameters']['angleDegrees'],footprintGapAreaSquareMeters=gap,joins=joins,solidSeamContacts=contacts,nativeDetails=details,
+        buildingMaterialTransfer='PASS',surfaceTransfer='SOURCE_MATCH' if source_surfaces and actual_surfaces==source_surfaces else 'NOT_VERIFIED_MULTIPLANE_FACE_OVERRIDES_DIFFER',engineering='NOT_VERIFIED')
