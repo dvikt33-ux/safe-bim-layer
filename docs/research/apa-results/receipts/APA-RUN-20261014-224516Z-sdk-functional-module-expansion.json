@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:3ae9a2d0deeed80b28f769ec5c4e61f39c2157e2cc1395e3d78c1c0261060889",
+  "index_commit_sha": "8e263892f2e6c9e2a1f35c24723e80af8b37800c",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "8e263892f2e6c9e2a1f35c24723e80af8b37800c",
+  "report_path": "docs/research/apa-results/runs/2026-10-14/APA-RUN-20261014-224516Z-sdk-functional-module-expansion/REPORT.md",
+  "report_sha256": "d63d37cd885ad069a48a335b9675ed8068c1cbe88f5ac3689358e8b4bd11562c",
+  "run_id": "APA-RUN-20261014-224516Z-sdk-functional-module-expansion",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}
