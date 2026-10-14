@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 51,
+  "run_count": 52,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -357,6 +357,13 @@
       "phase": "LIVE",
       "report": "runs/2026-10-14/APA-RUN-20261014-193327Z-mass-capability-integration/REPORT.md",
       "run_id": "APA-RUN-20261014-193327Z-mass-capability-integration",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-14/APA-RUN-20261014-215514Z-executable-bim-workflows/REPORT.md",
+      "run_id": "APA-RUN-20261014-215514Z-executable-bim-workflows",
       "substep_id": "APA-P70.A11.S03"
     }
   ],
