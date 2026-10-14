@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 148,
+  "revision": 149,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -1635,6 +1635,72 @@
     "ART-P70-A11-S03-NATIVE-RECEIPT79-20261014": {
       "id": "ART-P70-A11-S03-NATIVE-RECEIPT79-20261014",
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261013-234433Z-true-grid-live-stair-runtime.json",
+      "kind": "RECEIPT",
+      "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
+    },
+    "ART-P70-A11-S03-SOURCE-CONTOURS-PR80-20261014": {
+      "id": "ART-P70-A11-S03-SOURCE-CONTOURS-PR80-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/80",
+      "kind": "CODE",
+      "verification": "EXACT_PR79_BASE_STACK_PRESERVED_13_BLOBS_BYTE_READBACK_718_WINDOWS_PASS"
+    },
+    "ART-P70-A11-S03-FLOORPLATE-LIVE-20261014": {
+      "id": "ART-P70-A11-S03-FLOORPLATE-LIVE-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-074612Z-universal-native-floor-contours/native-floorplate.json",
+      "kind": "TEST_RESULT",
+      "verification": "ARCHICAD_LIVE_PASS_REAL_SLAB_TRUE_HOLE_CONTOUR_EDIT_SAME_GUID_SAVE_OPEN145_RETAINED144"
+    },
+    "ART-P70-A11-S03-FLOORPLATE-PERFORMANCE-20261014": {
+      "id": "ART-P70-A11-S03-FLOORPLATE-PERFORMANCE-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-074612Z-universal-native-floor-contours/native-performance.json",
+      "kind": "TEST_RESULT",
+      "verification": "ACTUAL_NATIVE_CREATE_EDIT_SAVE_OPEN_TIMINGS_NOT_LARGE_MODEL_BENCHMARK"
+    },
+    "ART-P70-A11-S03-RUNTIME-IDENTITY-BUILD-20261014": {
+      "id": "ART-P70-A11-S03-RUNTIME-IDENTITY-BUILD-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-074612Z-universal-native-floor-contours/sdk-build-identity.json",
+      "kind": "TEST_RESULT",
+      "verification": "WINDOWS_SDK_BUILD_PASS_EMBEDDED_IDENTITY_REVISION_VERIFIED_NOT_INSTALLED"
+    },
+    "ART-P70-A11-S03-STAIR-PREPARATION-20261014": {
+      "id": "ART-P70-A11-S03-STAIR-PREPARATION-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-074612Z-universal-native-floor-contours/stair-preparation-blocker.json",
+      "kind": "TEST_RESULT",
+      "verification": "DETACHED_READONLY_DIAGNOSTIC_NO_SETTER_SOLVER_SOURCE_BUILD_ONLY_EXACT_STAIR_BLOCKED"
+    },
+    "ART-P70-A11-S03-POST-RESTORE-READBACK-20261014": {
+      "id": "ART-P70-A11-S03-POST-RESTORE-READBACK-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-074612Z-universal-native-floor-contours/preservation-runtime.json",
+      "kind": "TEST_RESULT",
+      "verification": "ORIGINAL_APX_MODULE_SHA263_COMMANDS_144_POST_RESTORE_AND145_POST_SLAB_READBACK_PASS"
+    },
+    "ART-P70-A11-S03-SOURCE-CONTOURS-GAPS-20261014": {
+      "id": "ART-P70-A11-S03-SOURCE-CONTOURS-GAPS-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-074612Z-universal-native-floor-contours/gap-register.json",
+      "kind": "DATASET",
+      "verification": "G01_G09_HISTORY_PRESERVED_A11S03_PARTIAL_S10_BLOCKED"
+    },
+    "ART-P70-A11-S03-SOURCE-CONTOURS-CI-20261014": {
+      "id": "ART-P70-A11-S03-SOURCE-CONTOURS-CI-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38527855349",
+      "kind": "TEST_RESULT",
+      "verification": "718_APA_102_UPSTREAM_MAIN_CORE_MCP_WINDOWS_PASS"
+    },
+    "ART-P70-A11-S03-SOURCE-CONTOURS-KG-20261014": {
+      "id": "ART-P70-A11-S03-SOURCE-CONTOURS-KG-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-074612Z-universal-native-floor-contours/core-knowledge-query.json",
+      "kind": "TEST_RESULT",
+      "verification": "MAIN_ORCHESTRATOR_FRESH148_KG_READONLY_IMPLEMENTATION_UNCHANGED"
+    },
+    "ART-P70-A11-S03-SOURCE-CONTOURS-REPORT80-20261014": {
+      "id": "ART-P70-A11-S03-SOURCE-CONTOURS-REPORT80-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-14/APA-RUN-20261014-074612Z-universal-native-floor-contours/REPORT.md",
+      "kind": "REPORT",
+      "verification": "DONE_PUBLISHED_14_FILES_BYTE_READBACK"
+    },
+    "ART-P70-A11-S03-SOURCE-CONTOURS-RECEIPT80-20261014": {
+      "id": "ART-P70-A11-S03-SOURCE-CONTOURS-RECEIPT80-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261014-074612Z-universal-native-floor-contours.json",
       "kind": "RECEIPT",
       "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
     }
@@ -4212,7 +4278,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -4351,12 +4417,19 @@
         "Candidate actual moduleSHA8ad672092aa93e4bf1b4d469cbf7840cb60acd538820183bb68d5d6786ea221d and fresh274schema/263oldcommands/new8 verified. Explicitly authorized temporary installed replacement unblocked loading. OriginalAPX SHA dc99af071d3dbcff9626653ccc37001613cb3fa4a8eff50c6000c1cc70e8d7c7 and originalsingle registryvalue restored byte-exact. Post-restoration test-project opening/readback is PENDING_USER_OPEN. New commands are not claimed permanently installed.",
         "Detached Stair3.3m/22risers/0.15m/0.35m source-compatible probe reset connection and Archicad process disappeared. Exactly1Evaluate,0CreateExact/ModifyStair; saved144 bytes unchanged. FailurecauseNOT_VERIFIED. Native baseline local vs request world; qualified frame absent. NewexactStair writes require pinned detached PASS bound to source/target/savedmodel/retainedgeometry/schema; missing/failed/stale proof and knownterminatingcandidate denied. CompletedverifiedSQLite reuse avoids solver/Create. SOURCE_DIMENSION and ENGINEERING_NOT_VERIFIED.",
         "707/707host and Windows-onlyCI 38485644027 PASS,10newtests,102upstream/coreMCP PASS. HistoricalLinux results preserved. Mainorchestrator KG read current145 before completion146; implementation unchanged. Report/evidence14files/receipt APA-RUN-20261013-234433Z-true-grid-live-stair-runtime GitHubbyte-readback verified. A11.S03PARTIAL, A07 dependencies/S10BLOCKED and other90tasks preserved. TRC excluded; normative/search/documentation implementation untouched. Next: correctedSDK detached memo/base-plane candidate, build then separateauthorization and detachedqualification beforewrite; Roofcontour/slope independent native contracts follow.",
-        "Resume same-owner native runtime/source-contour work after resource interruption. No competing claim overwritten; temporary review-limit denial executed no test action. Original APX and saved144 preserved; supplemental post-restoration144native readback completed with0modelwrites. Newcontour/stair candidate writes still require specific separate approval."
+        "Resume same-owner native runtime/source-contour work after resource interruption. No competing claim overwritten; temporary review-limit denial executed no test action. Original APX and saved144 preserved; supplemental post-restoration144native readback completed with0modelwrites. Newcontour/stair candidate writes still require specific separate approval.",
+        "PR80 cb73cd578c7cd7577f80397920d9e81b8d09c6e1 begins at exactPR79 60a78e0cd55fc4951c1de3c8d060adf4f9538134 and preserves stacked ancestry. Existing compiler now accepts authored nonrectangular floor contours/trueholes by story and emits native Slab graphs; targeted contour/hole delta emits1ModifySlabs,0Creates, preserves GUID. SameSceneWriter/SQLite; no newgenerator/controller/renderer.",
+        "ARCHICAD_LIVE_PASS:1L-shaped nativeSlab10x8m/2x2mvoid/0.2m created, then outer11x8m/void3x2m edited sameGUID. Actual native memo and closed BREP top/hole contours prove60to62m2, exact current acceptedSlab material.3modelcalls=1CreateSlabs+2ModifySlabs,0extraCreate in delta; native collisionsnone. Testparameters only, engineeringNOT_VERIFIED. Save/Open and separate145readbackPASS; all144previous signatures includingoriginal143 unchanged, separate168/Trc untouched. Current savedSHA256 bfbae730dc65a8cd68dad707685406649f6a3e5ea79f4d63140241043b02f689.",
+        "OriginalAPX module/path/SHA dc99af071d3dbcff9626653ccc37001613cb3fa4a8eff50c6000c1cc70e8d7c7 and263freshcommands verified; prior pendingpostrestore144readback completed. Actual Archicad29build5101. NewSDK candidate f6f0861ffb76aced7de89922bdfa5f271d9aa371795c3849cbfe6e585003187f source/build identity 0b929f11a7e892b5cab062a9a6dc7bdc77363cec3a59109245f95e18de770eef compiledWindowsRelease and embedded revision cb73cd578c7cd7577f80397920d9e81b8d09c6e1 checked; notinstalled. Staleincrementalbinary detected/rejected and cleanrebuilt; builder refuses mismatched outputreceipt. SharedTapirversion alone cannotqualifySDKdispatch.",
+        "Stair preparation remainsBLOCKED: stockcreate setter removesbaseline edge/vertexdata, leavesoldwalkingmemo beforeSolveStair. RootfaultcauseNOT_VERIFIED. Detacheddiagnostic candidate nowreads source/frame/buffers withoutsetter orsolver; exactwrite requires qualifieddetachedPASS andcompletebuffers. Oldterminatingrequest neverrepeated. Local/world baselineframe exposedsource/buildonly. DifferentAPXdeployment requires separateauthorization.",
+        "Livepreflight fixedforbodyless hiddenRiser/Tread sentinelbounds through slotcompleteNativeDump/actualStairowner/specializedmembership; parentgeometry stillchecked, no2Dsemanticguess. Nativecreate1.002s/edit1.446s/Save3.251s/Open11.458s includingreadback; sourcecompile0.489s separatePythonmeasurement. No largemodel/scalability/optimizationclaim.",
+        "718/718WindowsAPA host/CI 38527855349 PASS,11newregressions,102upstream/coreMCP. Mainorchestrator unchangedKG fresh148 beforecompletion149. Code13blobs, canonicalreport/evidence14files/receipt APA-RUN-20261014-074612Z-universal-native-floor-contours GitHubbyte-readbackverified. A11.S03PARTIAL; other90tasks, historicalDONE, A07deps andS10BLOCKED preserved.",
+        "Directuserapproval: allnativeoperations in existingtestPLN areauthorized, with retained145protection/identity/journal/readback; no newPLN required. APXreplacement remains separatepermission. Nextqualify newruntimeidentity/safe read-onlyStairdiagnostic under separatelyauthorizedtemporarycandidate; SinglePlaneRoof contour/slope is nextindependent SDK/nativecontract. Normative/search/documentation/Trc/main untouched."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
-      "owner": "work-universal-native-20261014",
-      "lease_until": "2026-10-14T09:55:28Z",
-      "claim_ref": "APA-CLAIM-UNIVERSAL-NATIVE-20261014T000121Z",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
@@ -4477,7 +4550,18 @@
         "ART-P70-A11-S03-NATIVE-CI-20261014",
         "ART-P70-A11-S03-NATIVE-KG-20261014",
         "ART-P70-A11-S03-NATIVE-REPORT79-20261014",
-        "ART-P70-A11-S03-NATIVE-RECEIPT79-20261014"
+        "ART-P70-A11-S03-NATIVE-RECEIPT79-20261014",
+        "ART-P70-A11-S03-SOURCE-CONTOURS-PR80-20261014",
+        "ART-P70-A11-S03-FLOORPLATE-LIVE-20261014",
+        "ART-P70-A11-S03-FLOORPLATE-PERFORMANCE-20261014",
+        "ART-P70-A11-S03-RUNTIME-IDENTITY-BUILD-20261014",
+        "ART-P70-A11-S03-STAIR-PREPARATION-20261014",
+        "ART-P70-A11-S03-POST-RESTORE-READBACK-20261014",
+        "ART-P70-A11-S03-SOURCE-CONTOURS-GAPS-20261014",
+        "ART-P70-A11-S03-SOURCE-CONTOURS-CI-20261014",
+        "ART-P70-A11-S03-SOURCE-CONTOURS-KG-20261014",
+        "ART-P70-A11-S03-SOURCE-CONTOURS-REPORT80-20261014",
+        "ART-P70-A11-S03-SOURCE-CONTOURS-RECEIPT80-20261014"
       ],
       "blocked_reason": null
     },
@@ -5299,7 +5383,18 @@
         "ART-P70-A11-S03-NATIVE-CI-20261014",
         "ART-P70-A11-S03-NATIVE-KG-20261014",
         "ART-P70-A11-S03-NATIVE-REPORT79-20261014",
-        "ART-P70-A11-S03-NATIVE-RECEIPT79-20261014"
+        "ART-P70-A11-S03-NATIVE-RECEIPT79-20261014",
+        "ART-P70-A11-S03-SOURCE-CONTOURS-PR80-20261014",
+        "ART-P70-A11-S03-FLOORPLATE-LIVE-20261014",
+        "ART-P70-A11-S03-FLOORPLATE-PERFORMANCE-20261014",
+        "ART-P70-A11-S03-RUNTIME-IDENTITY-BUILD-20261014",
+        "ART-P70-A11-S03-STAIR-PREPARATION-20261014",
+        "ART-P70-A11-S03-POST-RESTORE-READBACK-20261014",
+        "ART-P70-A11-S03-SOURCE-CONTOURS-GAPS-20261014",
+        "ART-P70-A11-S03-SOURCE-CONTOURS-CI-20261014",
+        "ART-P70-A11-S03-SOURCE-CONTOURS-KG-20261014",
+        "ART-P70-A11-S03-SOURCE-CONTOURS-REPORT80-20261014",
+        "ART-P70-A11-S03-SOURCE-CONTOURS-RECEIPT80-20261014"
       ],
       "synthesis_state": "PARTIAL",
       "owner": null

@@ -112,6 +112,12 @@ Grid/Stair — [draft PR77](https://github.com/dvikt33-ux/safe-bim-layer/pull/77
 
 Следующийэтап: исправитьиподтвердитьSDKmemo/base-planeконтрактвновомкандидате, выполнитьсборку, отдельноразрешитьегоустановку, получитьdetachedPASSбезпотеримодели, лишьзатемточнуюStair. СамосовместимоеFavouriteнеразрешаетзапись. A11.S03PARTIAL, A07/S10/историясохранены; ТРЦисключён. Производительностьнеподменятьколичеством2Dэлементов.
 
+Контуры и редактирование — [draft PR80](https://github.com/dvikt33-ux/safe-bim-layer/pull/80), head `cb73cd578c7cd7577f80397920d9e81b8d09c6e1`, точная основа PR79. План revision149; **718/718 Windows PASS**, [CI](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38527855349),102 upstream/coreMCP. [Отчёт](../runs/2026-10-14/APA-RUN-20261014-074612Z-universal-native-floor-contours/REPORT.md), [нативное перекрытие](../native/APA-RUN-20261014-074612Z-universal-native-floor-contours/native-floorplate.json), [измерения](../native/APA-RUN-20261014-074612Z-universal-native-floor-contours/native-performance.json), [сборка](../native/APA-RUN-20261014-074612Z-universal-native-floor-contours/sdk-build-identity.json), [реестр](../native/APA-RUN-20261014-074612Z-universal-native-floor-contours/gap-register.json).
+
+Реальный Slab с L-контуром и отверстием создан и изменён с тем же GUID; площадь по BREP60→62м², толщина200мм, Save/Open и независимый readback PASS. Модель145GUID, предыдущие144/исходные143 сохранены. Контур и отверстия задаются через существующий компилятор, изменения через1ModifySlabs без пересоздания модели. Архитектурная/расчётная пригодность NOT_VERIFIED. Source/model/native performance разделены.
+
+Исходный APX/263команды и post-restore144 чтение подтверждены. Новый APX собран с проверенной встроенной идентичностью; stale binary выявлен и отвергнут. Detached Stair диагностика не меняет memo и не вызывает setter/solver; новая сборка ещё не установлена, точная Stair остаётся BLOCKED. Следующее разрешение относится только к временному APX-кандидату; операции в этом тестовом PLN уже разрешены. SinglePlane Roof contour/slope — следующий независимый контракт. A11.S03 PARTIAL, A07/S10 и исторические результаты сохранены.
+
 | Пакет | Проверяемый результат |
 | --- | --- |
 | A11.S01 — INTEGRATE ALL | Готовые функции доноров соединены общими XYZ/GUID/story/material/host контрактами. Геометрия, Details, MEP/IFC и оптимизаторы подключаются по фактической реализации; исследование без кода обозначается конкретным пробелом. Независимые адаптеры не ждут последующей эксплуатационной приёмки. |
