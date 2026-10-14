@@ -58,6 +58,10 @@ def write_json(path, value):
 
 
 def native_transport(command, params):
+    if command.startswith('AddOn.'):
+        parts=command.split('.')
+        if len(parts)!=3 or not all(parts):raise ValueError('INVALID_PROVIDER_COMMAND_ID')
+        return RUN.tapir(RUN.PORT,parts[2],params,namespace=parts[1])
     if not command.startswith('API.'):
         return RUN.tapir(RUN.PORT, command, params)
     request = urllib.request.Request(f"http://127.0.0.1:{RUN.PORT}",
@@ -138,6 +142,9 @@ def native_command_router(schema_path, official_commands=None):
 
 def prepare_native_command(router, command, parameters):
     return router.prepare(command,parameters)
+
+def prepare_native_workflow(router, graph):
+    return router.prepare_workflow(graph)
 
 def apply_native_axis_grid(writer,recipe,scene_id,retained_signatures,saved_sha256,authorization_ref,existing_guid=None):
     from archicad_native_spatial_tools import create_or_reuse_axis
@@ -420,7 +427,7 @@ class EvidenceAPI:
             if self.dynamic_commands is None or self._dynamic_ticket is not None:
                 raise ValueError('DYNAMIC_CALL_NOT_BOUND_OR_NESTED')
             self.dynamic_commands.validate(ticket)
-            if ticket['effect']!='READ_CANDIDATE':
+            if ticket['effect']!='READ_ONLY':
                 if journal_scope is None:raise ValueError('DYNAMIC_WRITE_REQUIRES_SCENEWRITER_JOURNALED_SCOPE')
                 self.dynamic_commands.qualify_scope(journal_scope,ticket['command'],ticket['parameters'],ticket['hash'])
             self._dynamic_ticket = ticket
@@ -439,7 +446,7 @@ class EvidenceAPI:
         with (self.folder / "dispatch.jsonl").open("a", encoding="utf-8") as f:
             f.write(RUN.canonical(record) + "\n")
         self.calls[command] += 1
-        self.write_attempts += int(dynamic['effect']!='READ_CANDIDATE' if dynamic else command in NATIVE_MUTATIONS or command in {
+        self.write_attempts += int(dynamic['effect']!='READ_ONLY' if dynamic else command in NATIVE_MUTATIONS or command in {
             'ModifyWalls','ModifyColumns','ModifyWindows','ModifyDoors'})
         start = time.perf_counter()
         try:

@@ -1,0 +1,3377 @@
+{
+  "schema": "APA_OPERATION_EFFECT_MANIFEST_V1",
+  "catalogHash": "e2af1f277c65ac13a2c98accb999d05d45e5c24dfef43ec47a89393c49676c91",
+  "operations": {
+    "GetAddOnVersion": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "9b802e710c2cdd2b78abe5e395c550e2cd931043c1572bbc9335c83ae7e86a8f",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetArchicadLocation": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "2cded83cb8f20bcbb6c37662fe3d4172346218cf509936c9275551bc311255ff",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "QuitArchicad": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "267c2202fc48e46c6651bf8525e1fc1751862fea97d04f63f5bca240c6b7c983",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "GetPointFromUser": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "aadcfb44cebdf2bdc21533993e6cc0bfc7a64ec38029ec45a9cee7968c7b354e",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "GetCurrentWindowType": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "ca7d8d7d1ae6a5861db8de34f8123dd811b95242a17761d753126ab7847e0e82",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ChangeWindow": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "898cfae268fd59838a13dcf90594a8d0e22612d0d5b2351bec814bc4f491a0ad",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "GetUserGSID": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "dbc9d26a2c5cf87667cd4414542b18dd56afce197bc04cbcc29a8e7370fd1dbd",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ShowAlert": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "9fcfe310215e0a211e3264f95531340ecf42a548504bca21ad751135f9914721",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "GetSpecialFolders": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "c68979ec613a777be75ed29a51b9ae1496760a70c829f17776f7cdb57d731c7c",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetProjectInfo": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "58c5f7995f5cea4c60ede32f748a18e68f9de4281a33e3bb1d7ca9c6753595c3",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetProjectInfoFields": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "137f98fb0a6623e47bdc248e321f3d4ef6a125f92d705947c463c79b4188331f",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "SetProjectInfoField": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "973e15f6a0c39a5cd1a29439621a65afcd9b4226a35d8f8a0134197ad97cc097",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateProjectInfoFields": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "9870d1119812d921f6470a47495ab882fe54f4ddac0b6a2f01feb56b1fd8c9e6",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "DeleteProjectInfoFields": {
+      "kind": "DELETE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "3bbca69a336ef52aef32c0ce5ebfc471c6df7de65159cb063264aec247bfa437",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetStories": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "315858785d2a5c10ecef29758c7dc22f48400b1f295d8477423ef41f7681d33a",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "SetStories": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "81dd08068e653f22656aa3c45a99a51cd46ea4ce56674aed95aa3fd52340c364",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetAutoTextKeys": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "e019bfdc52e97af5cd457fd2aae7cacd05ea53a516497935df69b486b6d29f2f",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetAutoTextName": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "ffdf3866efdf121e20da0c94568c587d1f8e01d09dde9023e16e5e2d611bff36",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetHotlinks": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "3db4943c57845dbf929f98b574ab6d6ec6ce6e6bcef08a9e1be99bfbf5b47012",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateHotlinkNodes": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "5fdf25c9b41e3e654cca6cb509c9d6b2fa2c63828fb79cf080c1e8332ec3eb91",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateHotlinkInstances": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "c50ed5dc30b75f3b6e8f175752f25395be4972b498d3e83261cc541a56f02a17",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "ChangeHotlinkInstances": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "4fed08b2e4d3fb2e0420afd88f51b1b9520a53aa2e58b3b5234c66df4b2ac2a9",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "OpenProject": {
+      "kind": "TRANSACTION",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "9fd6bbd7c673c29f09c19159aaba1070eb33e1b551f21d77f93dc4df5ad74bbc",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CloseProject": {
+      "kind": "TRANSACTION",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "84c5c1cd4727a6983e89d401ea7c6e65717d7653a8f1b7b99ed1c54f7e978065",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "SaveProject": {
+      "kind": "TRANSACTION",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "b72a3b55cfc64da06b1509f1459db57dde97f1a1ca7c4ddeea5720c5dc62ba1a",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "SaveAsModuleFile": {
+      "kind": "TRANSACTION",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "8c20c128cb5e7b4ee8b2a83ba0ebcb970c0d88462d5f86c419c5272e93fb4d3b",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "SaveProjectAsArchive": {
+      "kind": "TRANSACTION",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "ee988a4f70720ccad91175395d534540b3fa8ab0bf4edc2187bf4ceb5e51dd71",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetCalculationUnits": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "4f7e7dfe2c068d8df7423db6d20fbc37515e0e327d9b19e2767bb27e65a51405",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetGeoLocation": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "44ea0c8f7793982ae5e68e44bc61b5d295a9516812bc7a0efdddffffef685a9b",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "SetGeoLocation": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "ce9941f4c7a89ab2543a37cee3306846ff2e9a81706abd1455dc3dd9bbbe6838",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "PrintView": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "bcacb0b510e3db19173df593fb6985fe57ac7a6bfbd0d3b5cfc69910691aac32",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "RebuildView": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "3007c1ce81e8f8ae475c88c2468b046be65a53b8c970130ef9f8f4d9906d3ce0",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "GetSelectedElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "568de569ae4b2b3b706ccb7c23cd9dd45f07da446dd4025e90bf1b45a567ff11",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetElementsByType": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "d8423330d150c128cc5dfc12ce80655000d1c21b690636abadd705bd08f35633",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetAllElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "3e8f3819b5b3d76f9daf821b7c7000d575c54f48189a58719f2530c384b83989",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ChangeSelectionOfElements": {
+      "kind": "SERVICE",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "ee7ddbf6b4297ee8746c29eb4296396dd4f7dec40f5ec541e92f8020910cfbd6",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "FilterElements": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "d23249d6a33982399d4724c3d31108841cbec8bc586822ed8c8843014a262e0a",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "GetDetailsOfElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "a5b0b19d2e4252e97ddacd93885a5ef1de992fc029d1893faf97bb9a89d0d2db",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "SetDetailsOfElements": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "de7ec13ad20a181f1822cd65ec331dd9ae0a215ef3a3876d8b9630e2e78acba6",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "Get3DBoundingBoxes": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "dec0f1c5d3f351409055e7dfd3af4745e4921aeb6c95903965b99882470dc9e7",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetSubelementsOfHierarchicalElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "9e73e43034d4e4537bccaead3577158c3b8ae4bd0efca047cb24da7d91c7feeb",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetConnectedElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "ffaf8ff37261ee4bfef2bc84cf7a6887f945cbde8070856e7995fd0b1af84d49",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetSectionElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "40aaa0cf50507bfa6ed10201f9c49e218fdebe9e10804cd6d0928bb64a456bac",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetRelationsOfElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "7cb504d963bacbef4f2b39ff6660ec92b329612b952680b7560e1a085ad90bad",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetZoneBoundaries": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "2a95aa181b8e38f4e71114ac41d69019768c0d4352be2eb0125ed24df28e0828",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "UpdateZones": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "0d4fb2b63332501ba6fb7a94ef6c20887119fbe6fc1d7c94b7d0ad7d098f05d5",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetCollisions": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "31d0e3e9ab24ab87204be17b68a4ca96909d144c68f1fa5c2b7833e5dd61298f",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "HighlightElements": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "47a42de7272453dce5fdeeb3d5a3e620bc6b204c35e5cebed54b6eb3a0d7a189",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "MoveElements": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "7fe017779118e32f2871c5ed14052b6de50761aca31d96c1fbe123f7a2cb54a4",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "RotateElements": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "d8392a561a6657b3269c7eec75e37fc5c39cf1f6931b2cf5ce8added0112a3eb",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "DeleteElements": {
+      "kind": "DELETE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "913ade834086301659320d6a6c96eff461aeb026849538923bcce3e403eedb1f",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "LockElements": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "9c19c815ecec88ef3e152fa5d8b15b8157ae8913166be70a17f1c7434ae6c0cf",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "UnlockElements": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "bf0bc1db14408b138255bf3c8d264d99510361d23b2ed44ab8ca54236f6fa399",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "GetGDLParametersOfElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "16d9ab190f28049c189ed56aa329f49043ab30ecd8dce5ec8e3e763b34c94de0",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "SetGDLParametersOfElements": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "42630a998f9af9b61917b30731dfcbda725b4f5b9de14e867851db60d1e4f1e3",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateColumns": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "c767e817cd9c5b8b802d173ec9e6f793436668658b18d1b37441947daaf690f7",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateWalls": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "046629f8f12e72cba913ed5d4b504749fff3fc5c6ef5b6117c9be9757b3d21c8",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateBeams": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "d40f5fc99573cd6c994a03ba321d819d5840c510964aed01312816cfb0478798",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateStairs": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "0bf97d5bb30fac6979df8191206479569f87323320ae46d21865c850eb411336",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateSlabs": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "3e3fdb9e44efeb0fd7f0bbf41854424bc3b95b1505a976b8760e88e40ed7d124",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateWindows": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "351217c4029bb7da8aaf908d650c6da574f6e0e8a49fe3a88220b159b6f3d403",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateDoors": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "723d7bb78eed8b3cda1970b922894f13cc75ae529092fe2e8818251f81c85347",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateOpenings": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "93dd17a82dabf8a4e4b6212509da76ccd0bda1f4d70404350bc489296a5a92ca",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateMorphs": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "1cad99045180d153bd3ded138157695950e5209e804b1806a9391244534666aa",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateRoofs": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "3e6d41f88f9de4698a682103a352f6229acdc3d93c51c33b0a3bd40cde467fd4",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateAssociativeDimensions": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "1af538106e23cfeab6c6396083c7cc23aa1b0f51b7055b3caced8555d2ca1339",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateAssociativeDimensionsOnSection": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "b0d915a2d485c8837eda5e306af91fdfd449426b7c2692b330589c0a344ec162",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateWallThicknessDimensions": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "b80444991a4efbcadd3467654aab9a358ae33332b89241857698b6cd5177a191",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetDimensionData": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "01a81cabf82ca78053d7871b84657e8205daf100036cbd97c11b486cf87dacab",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateZones": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "01045fdffdb43338fbf24604f38977b93b1fa86dbb717dbf4f5a6f0b3c143a2c",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreatePolylines": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "41f49cc49703146255a3e4196658fec50c4326ef9ae1a96399324bb2c9a28db3",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateLineElements": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "e7dfe9e9ff6aa68049ecb50606e4b5795580d48e1a4daee403b3b8b82c049d3d",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateArcs": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "12516005725ae735ae9f05fdc373667d1d527beb5422203ab294f5103e5387eb",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateCircles": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "a15844a4d68c6d129f46e73ff3b8829921beb82927c5d09a809b26fa2ea2e7a6",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateHotspots": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "7379a327c5fd06c96721309c463574f32e3fc271a5f22e33f9311edd9a65bab3",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateHatches": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "01ad41bcb75527108a679ab8e635c9f46d24ba3f1c9565ff69eb083d1c462470",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateSplines": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "7421d9d9b8e69905441b96154e6aa961de69ad318427f5f1f7d00802f35d1958",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateObjects": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "3539146e5696dbd9c572dd198ce0446d2201a6d09c09b9515d60f762b1fba51b",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateLamps": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "1c3b1d9e647c94364a71e4f7e1533facba4dc72fe4e115ccf4659a4ef72be208",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateMeshes": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "8304c30c4f7469197627344bcdbbb9a8e679b517d6f786a4878fa5bbb7bfe353",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateLabels": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "938a494a7dd630e9f3c748613b4c17f7bc3a8f543f3b27436220f64acbaa8f0f",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateTexts": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "945cbdb749028ef0750bf14389d33fd142b3e3d792cbd9456d0fb0fc3f22861c",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ModifyWalls": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "3e59189b55860de83d2eb03f5015c11692d9a394e1b0e7b8e8cc72ba1cabfb9d",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ModifyBeams": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "750d91c49aa01dcb3288aac76e1b6c253664272ba6c4950f4b93f7a6c9bfc653",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ModifySlabs": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "65daa503bf8a6928641fcc313b9d3e6f8778a802e3f5dcfed40503a281c1ec0f",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ModifyColumns": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "4277470bbc9bfe60c5938afe00b221c60ea6f3c2d23eb692407b80eb9d49c753",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ModifyWindows": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "da223e2a1a817354b5ce8101fbf86fa2613367c265864634ab393b280cbac458",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ModifyDoors": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "a1b86d232ed6cdd8a4d7449cb769284bcee8ce41ae04432b0da3ea5194ed0e89",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ModifyMorphs": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "9b9857a2b3ae098415bb1e8b74935446392634c87b72be20d48c316c4671b006",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ModifyRoofs": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "7099feec15dfbdd56266096d9897aadafb2ff3c20c808ac3f04993b489de62f2",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ModifyMeshes": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "01a49bf783805d682acdc7c29422c0c86e04f11175eb3c7ae20cc0c61178d3f3",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ModifyObjects": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "6d2d15f52ccae2058b46d0e86b3ce6f336f34054c6a7ab0b87241647c7c2f0db",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ModifyLamps": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "05b1637b5426408718cd7ce699fa864bfa0a68ced52ea11ef6f07b5dc1b2836d",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ModifyTexts": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "8ce58c6a5f81ce0b6fa670612c89e90d3b1e6619ac1c9551fbf852b469690018",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ModifyLabels": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "92f64b4dbca3289a3c10a54dfcb26a58ea5b24b72344bb835d3dad7e5d5bbd79",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetElementPreviewImage": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "79d934f6e1c5237ee88c332fd3d2af7e8d43b6f1bfea5cc176f4fd8d7ee53aa0",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetRoomImage": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "a0a2def87098537f4aaad1010a664c5b350d589a4c1250741a8996dff2b6c552",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "SetElementNotificationClient": {
+      "kind": "UNKNOWN",
+      "impact": "EXTERNAL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "e665e4171ff1e05bfa707b75ea91eeed9cb962d3227b89104bd4e80ee9c04092",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "RemoveElementNotificationClient": {
+      "kind": "UNKNOWN",
+      "impact": "EXTERNAL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "aabfb28147d24c1db131441801a7813163ea2b0d1752fb4a543c779e4702969a",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "GetNativePhysicalGeometry": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "3a9be459e8efe716e43eb7d215d567077e99625d89052baf449bea3c36f0a59a",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "GetModelDumpV1": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "a8523d0ea1a93133a32ac5fc4ab34ff0a9545788738fc74cf153dc2c3ae0d744",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "CreateGroups": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "b22cabc23b1e578ee7a7596d532f0b4d80d4bf57cc7903257fe92045fc524589",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetGroupsOfElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "4536f8b9bced6f2a22306cf7540fb08638416851ee973bb6060ac419e9a6b359",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetElementsOfGroups": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "cc84406e44d5f955a13aa44fbcb223c83c171837ca9cc30fe5c61b2fda24a895",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetSuspendGroupsMode": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "878dcdc0a9488b5f07858e8e29dd81774ea55b3f788b90b58a7345d8a2ba8615",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "SetSuspendGroupsMode": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "6985c7c75f36f2229a5dec11cb8faee4d1b413189f2015fdd1d8e26c28222a89",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "GetFavoritesByType": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "234af5c175ac9d3e5abcc7622909a33ccd4f7ec0d212417bd044c3a7749b878a",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetFavoritePreviewImage": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "4444a12714fa67d8708b2621639516b64d007ff34052301f2004e8359dde2ecb",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ApplyFavoritesToElementDefaults": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "650943367343ab2aeb668d6c849e2215401b4e4d321c91a152d48b8bcde8e9dc",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "CreateFavoritesFromElements": {
+      "kind": "CREATE",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "ea861ab8f20b7f3db312ab3b23ca606ab8454d68be6156e616062ca82f07feea",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ImportFavorites": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "1e7fd517e44d1f540202307b90d30e58432d0f1bcb7ba9fb4d62000cd2bab52a",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "ExportFavorites": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "73155e91e4bb582367aa30a230d1cf4b2588b12c92f9be44ea9f11eb3742ef35",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "ApplyFavoritesToElements": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "11baa5c28340840dab0340a48c12730e7e10d7d3d3c11232457f19398d221d6c",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "UpdateFavoritesFromElements": {
+      "kind": "MODIFY",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "412eab748d51b9b69721faac20d2de4453bbcd31d26223d24cc73b83684d3769",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "RenameFavorites": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "b56413ab0df38f2415b90d855536d13f4daf8877702f0dca0f6f74e170bfd6d8",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "DeleteFavorites": {
+      "kind": "DELETE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "33adc8470fc8a1d1196285886e85f96749ce7b6091ad4924f96df9bf1a75a740",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetAllProperties": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "5db3d4c55d03695a0a29637dfb99475857f91f4731202218d915015fb0e98f94",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetPropertyValuesOfElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "9887cd6163af60a9ddbcfc7b365cd492fc146a52f741663960724819937d7767",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "SetPropertyValuesOfElements": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "2a61be0c3d4720965c4c0f219206e7eef04c18b1d6b5945a87eb972b49bcc774",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetPropertyValuesOfAttributes": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "185bad301a14660ff72e094e336f70624ea334b134e4fdf135a2f29ee27cfc12",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "SetPropertyValuesOfAttributes": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "89007f0297faddeae9e770f214d9f560759bf5a14e726bc3c016761ad100c466",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreatePropertyGroups": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "5ec8b2fcb84adddc36a0fe1875bd8f61502a5d7e5efc0c347e13775bb43a065c",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "DeletePropertyGroups": {
+      "kind": "DELETE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "07205d86359bdf9072c16070f702d614ec4a7769c2219468be93b0986eed84d5",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreatePropertyDefinitions": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "e9a070f6a9bb531f8c5416eba6f4c1db66edbbab7c17f78af4e72360ae1ec0da",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "DeletePropertyDefinitions": {
+      "kind": "DELETE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "55ecdbed7c3bdcd94fdae6e24c7db3d0f3abe7b4e8819dd906a4793062d5bda5",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "UpdatePropertyDefinitions": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "2422126bf93e25037e54af9d653e41955e3b1491e8d48e4f39ec3a4e0f646bc3",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "UpdatePropertyGroups": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "47f79349951d23ea6088e8758f07cd15809d1f0b1946feeac8e28eb4f2003a7c",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ImportPropertiesXml": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "7e6da0349f5acb580a2973f1ce528a6f1afa3e1776ce088dd1dfe4dd2f5348dc",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "GetClassificationsOfElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "903d9ae7d83006886ddfb31376d3962dea132ed1681ceebff258dfd534952f3d",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "SetClassificationsOfElements": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "2cb693eadca25f53771eb9b0bf636b6197004debc1742a912677f6d4302bfb2c",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateClassificationSystems": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "b67e99be2dda960152973a97b944e192ba75837ef4a6d942e8999f463066eaf4",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateClassificationItems": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "937b336ba8181a10f7dae85384bb40b205f250728795144e80389699936ac208",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "DeleteClassificationSystems": {
+      "kind": "DELETE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "e5fc6d67ca32a0c3d54262a2b23cdaec44795ac03b8076f0789c8c44b0758151",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "DeleteClassificationItems": {
+      "kind": "DELETE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "2c31ef5afc33bf3889596d908615281d41305d042b81a3ce25b90d24b16be3a5",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "UpdateClassificationSystems": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "d447ffc6a19d3f575decbeec709804870b9b476285c1e76ff19b3ae616b2d822",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "UpdateClassificationItems": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "b729ae5c0467b7903cdd71219aa7309de5d20bb067729b6f1321866d0aa479cc",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ImportClassificationsXml": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "fc51ee5ef3ba555084ec3a8dfa0019248ff979f3107cb1081d0caf8acd4bcafe",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "GetAttributesByType": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "4edf9dc34297c6566a68c43b8d506f9e1b3a49c8d68b68f6ef3fddba63ab7729",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "DeleteAttributes": {
+      "kind": "DELETE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "259bce40e7df11f38865400b50f364367207f28cce76bff1fbceec7144cccc83",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateLayers": {
+      "kind": "CREATE",
+      "impact": "ATTRIBUTES",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "7f1de2644d94f74ea1bdf7b09ba11d2a8e1a20ae89efef931fecb6015be0c900",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateLayerCombinations": {
+      "kind": "CREATE",
+      "impact": "ATTRIBUTES",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "8fec4ee69d91f4bdbda17a71ff92cd7bbc277d2522458fabb8090cad10c4ed33",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateLines": {
+      "kind": "CREATE",
+      "impact": "ATTRIBUTES",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "c2397808088f682df7c3dedb2cf4c79fe6d3ee2c577815420ad5ea506bffa5ca",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateFills": {
+      "kind": "CREATE",
+      "impact": "ATTRIBUTES",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "d5ef08c1b1a578ad21bf29d28398aa1372012d24227a8bd6575103927b46827f",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateZoneCategories": {
+      "kind": "CREATE",
+      "impact": "ATTRIBUTES",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "ec9d16697159932cec570f7db6c025bec57f11e3a9ec5e49054fbbf625be24a3",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateMEPSystems": {
+      "kind": "CREATE",
+      "impact": "ATTRIBUTES",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "16944ffd37be0c848b35540e7364a46bfbe05babfbdd06ff71d839bd4ae524b4",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreatePenTables": {
+      "kind": "CREATE",
+      "impact": "ATTRIBUTES",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "1b5bce7a3eae91ea45cd14b4f1a7377fa78b953a24f289befdf6d9a2e36ca034",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateProfiles": {
+      "kind": "CREATE",
+      "impact": "ATTRIBUTES",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "bd3eb718ecf498666ba8c57013543c5d7737226dbc64b63c3988859f49c78475",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateBuildingMaterials": {
+      "kind": "CREATE",
+      "impact": "ATTRIBUTES",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "c91f4dc460a05728b80ad940f108eec58e489e2ab6b98fdf08eaa7a8623a0d2b",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateComposites": {
+      "kind": "CREATE",
+      "impact": "ATTRIBUTES",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "51a1527ed1b179f9b6a475eb69f2896dec2e0d0a3aff700f2548ce48addf2ffc",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateSurfaces": {
+      "kind": "CREATE",
+      "impact": "ATTRIBUTES",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "2df29c7c5c470f52adeb72e977a53b217c6c8b6c8f117d619b3a293e438a46c8",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetBuildingMaterialPhysicalProperties": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "f920a351bc96583d0d5522ed3395f09079fe79d891f9a5c23c489a434a351a8d",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetLayerCombinations": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "86fc94c1f8a75ccfa1100518b626addde2520251e0847b3e564ef28063d65346",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetLines": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "1c7abe14b59ba54696ad3a72560568b695195b80b4fb5ed9a5c9d131bc2636be",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetFills": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "04ca23c1112830524159bc8c7636afe0a7cb501c3522d93e9a05e45b3ec93e0e",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetZoneCategories": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "1cb754f06ecfdb13e9d365f063a0537bf242c019ee1b333917b8efcdfe01b80d",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetMEPSystems": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "f44495c0972bd64a807e33d57a6f2dcbe54b81afdc4b413930cfc2760a7ab069",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetPenTables": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "4f94a971596a61792ab67616fe8d5c517547a8af361b0ec7a9a1968cc29898f7",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetProfiles": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "a6029ef79e7951e8bd96332aab5dcd170686ba2e09e1c10d540b604a685b2785",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetComposites": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "8abcd99718a23cc6574c6d6b27962195fbacd55228c721e4cc6e0d10c307613d",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetSurfaces": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "ddb0eadb5319637cef4900f7a54cf42af176b90f3f49be04b917f4d9c86cb57f",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetLayers": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "1128eaa2a4fad41b829be9de2e723328960bd47ca28c339624ded75821a478aa",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetBuildingMaterials": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "6b0388c1c0691b4f06d89743acf43b33f45eb91230ae9f684fca20b8685b6c52",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "IFCFileOperation": {
+      "kind": "UNKNOWN",
+      "impact": "EXTERNAL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "7c0f2d2800f2f5bef02027830644de9bd086c916ff52cce78f2896a12ad358b3",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "GetIFCExportTranslators": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "0ef6af5abcd026399b57bcfc214f172a001570d514009f3923ac4d71ff8cb87c",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetElementsByIFCIds": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "5a48b6eefdd10dd3cc6bae1e9ff794b8ce865aa83b4c11f88468695aa3e88a0b",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetIFCIdsOfElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "b4d31ee1e2d95cf93e649f86be9761b19f04b26d7f97bd9be225fee5dc1972c7",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetIFCTypeOfElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "b328d25940c638f71b71de1f6757c4a4b2c669779c50cd41a26e73fed6cbded6",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetIFCPropertiesOfElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "26e8c00da270832c2c7074957630a3c0790c01374db0c49d992f704504f38c22",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetLibraries": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "404086b5c8cda12026c17ade99bd568036521a0f04cfd7045ff37e46d090c8cf",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ReloadLibraries": {
+      "kind": "UNKNOWN",
+      "impact": "EXTERNAL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "6d1d666114c035f16c6fcc2355975bd0bd925dd3a73668f9b6fb4a14b29beeb2",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "AddFilesToEmbeddedLibrary": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "f20aca6edcc6ae4f8fcacbe286ec4a0cb813431cddc521b26b690d7e6559e519",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "DeleteEmbeddedLibraryItems": {
+      "kind": "DELETE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "d786334946f78e8eb60a17b781d29ed7553e30f1a8c714d79e2fd138bb73c202",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "SetLibraries": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "f21c8e66f0bc582021c05fbd45d2ca0b98088ffcf77aadfca3a852cc888be6ec",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "AddLibraries": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "96d5f95c8038063f6c84e9efa3853b0edacebbcb95c869d8776771216a4ddb5f",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "GetAvailableLibraryParts": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "7d6a1e2ac167c7f76a9a5a992f552e9227fae32a5209b78bdf612154611f007a",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "SafeBIMGlobalLibraryPart": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "f700e0378eb87e5ce6e37cdb75bc713e7c14b49383411f16ff22bf15356432fe",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "SafeBIMGlobalPreview": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "cb85484cab1a9be9d4773f0245580902e1efcd333bb3994cb5390a4db1a08ef1",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateLibraryPartFromScripts": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "01626f2ec6e6841111e9ec3b748683e3e56bb1acbf51a68979ac5b8f8336219c",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "SafeBIMAttributeCatalog": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "3d5978e9b4110c0c154f16310e4361d9503cc086005bbccc6407b52f0c4f8788",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "TeamworkSend": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "24869a37009a192e0ebcc02ddecfad4a7dd57b37ee1b5e8ebe51c5718368fd33",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "TeamworkReceive": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "baf06016fd702c79464146b3e9b51eaf9c271dfc0754c28ebc4fcb2e9e7ec5a5",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "ReserveElements": {
+      "kind": "TRANSACTION",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "4edf576337862fbe8e065d089e167fe04a56745c2459756fa2ee61562fea3e8d",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ReleaseElements": {
+      "kind": "TRANSACTION",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "95c1fcd732a14f7ad0b3d51651aa4586e3f6b81356df6d27f7c80d3818b0cb50",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "PublishPublisherSet": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "dea15aa9d49063b852406b2237bfd470de77658aa313839ea8a7b5c307664915",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "UpdateDrawings": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "996d19b3d2aef4b359b534e68d7a88fc4b7e7090d48312e92b1cc3e156f5aad5",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "GetDatabaseIdFromNavigatorItemId": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "2269d632a7d7d1e1e82abada2b05130ba9aba3f2c7d08730f1f7d39d3c34b5f8",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateDetails": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "bb63a66fdef13cf947d281c410ecd599cc7138583cf58d540d48752d01829cce",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateWorksheets": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "f9a40f255a64108cc52e7bc29b3ac7019c959ce91bed5cff0b45696d9e0ec484",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateLayout": {
+      "kind": "CREATE",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "d4f457f50b7666b3386b6f815c344bee4802998ebb8f0726153fa46d032faa17",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateLayoutSubset": {
+      "kind": "CREATE",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "49b46ce4bcd077357d44b40f4a85809659932d0bd10df565c3684f48968370cc",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateDrawings": {
+      "kind": "CREATE",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "6c80f0539316057b1fdfc186899fc528f310c18a348afb11f5f5be7d73676327",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ChangeDrawingLink": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "27380a3ca0860be434b9e4368eacb5f6095124e8f56dff4ea4aaed085e807a9e",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "GetLayoutSettings": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "f5ca861bb3c2cbb767609341caa11871235286a4aabcd53283ff0287939996b5",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "SetLayoutSettings": {
+      "kind": "MODIFY",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "726f615f1e2dddd3ce86b59af8fe50ba49ceb73cc0b70054ebb54759d714b3a6",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetLayoutCustomScheme": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "8eb74c7538bac5a096f49d453047341937df945cbbbb9f5320531d3dce0c5527",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetModelViewOptions": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "662bd0d9d4857762302fc12299a16fe766c49a503dccdf5a2494e649d77947bc",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetViewSettings": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "f5d9fee1c7a7231ae0b26b7d999bac2ba703d133e927567d3b9004c204b1baf4",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "SetViewSettings": {
+      "kind": "MODIFY",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "9d4929cf91bc259404e0c6996c8ce790ac5cb238d91988e976ce4c015d2f8226",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetView2DTransformations": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "99e89b7847911638974870ed2108c8cdb9f84196f3854fc3f1a8c74a3f7db986",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "SetViewRotation": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "6ce7603d8209ce5bbbc0ea92c04f6013da69fd303956e89250f2503fdab80ea0",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CloneProjectMapItemToViewMap": {
+      "kind": "CREATE",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "d346c200499fecb5321e13bdd0493ceffc7d42a3e4a41c69d170cb7a4ca86773",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateViewsInViewMap": {
+      "kind": "CREATE",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "a8258fbb9d46edc89b788bcfd4599c5652766f2c432df9dcd5c68a4d7db6b903",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateViewMapFolder": {
+      "kind": "CREATE",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "cd3eccf0df16c4a68f876023a24bf7045a0d568034a6fb9246582317d2fb37e6",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "Set3DCutPlanes": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "d13cfaffca7cf1319e0175dcaa213a15636822c819c72dffd84174f67ce28ec5",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "FitInWindow": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "15c018ca71d85a4bc7c679f9237cf990166afce2ef897ea2688b146b4ef96710",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "CreateSections": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "3b8cd63680beb7dd3e8c5a2f8d07ae7003836c5b7f8308300decfcf7edebbe99",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateInteriorElevations": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "94e4dca9f2abc0e7e45a851d87f55da43f87fba8bb700bfa5ad2b375498f42e0",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "MoveNavigatorItem": {
+      "kind": "MODIFY",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "b30bd37ea727a9a560a90397d540fe6cbe8434fc50952312cd4edd121a7e6af0",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "RenameNavigatorItem": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "eb300692c1596097c880d5599164f4d648b16760bd53c4a63392b618c0ee6e4a",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "DeleteNavigatorItems": {
+      "kind": "DELETE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "4d5fe7eb617d060c67e55660632dd95f043a70593b7a4207946b35ac37b2373c",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetNavigatorItemTree": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "c6debb1b479cb70c84da23735bc6ca8f792c34927f933e3cedbcea53795eb4a5",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateIssue": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "c9c56c1c71cfc3ed4b2fef2b8944484adc6d39823f55ff3654fecb83822bbd83",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "DeleteIssue": {
+      "kind": "DELETE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "821f73f77d927a6807688fc99567b5c15ccb5990d5b2d85c4c83bd147c48d0d2",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetIssues": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "6765ee039743ced1d9d00bbbe7b091a4e3593057531e7aa31af635a1849efced",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "AddCommentToIssue": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "c8250cf57efeeb516f473013de203eb9faad0de29653c849e084fefc7f3b2688",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "GetCommentsFromIssue": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "f078e46377747610838f18e614bc10505d3d9d3b22b7170408956cc4b46a8f5b",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "AttachElementsToIssue": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "c0ede9e6be0d0e51e042ddd1aa509b3fd05048e9e34e9a3f2c7dc1b957fe7741",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "DetachElementsFromIssue": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "13935c2f1be4b9bc27c4e89edabe13e69d73b5f0f061e6811057be3410fa1017",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "GetElementsAttachedToIssue": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "80da947f64b45e92e0f744f9e899fb1cc71d57c32163e2fee5fe05e4148d8546",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ExportIssuesToBCF": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "a7852f4d7af326f283cc6ad7836bef2b11a43796cdae5f842967a67b3c470471",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "ImportIssuesFromBCF": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "0166ce4ed0e055d8a8c3811db48fdb81d799c740b166c510612af1fb1ac50d46",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "GetRevisionIssues": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "fcfc98632e6f73e773eda451b28e014859b464a7feac1e3b1daac49525bd5457",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetRevisionChanges": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "75cdf820868532eb3cb9e56384680d72b85f852066254b63d2d5b301af55ec3b",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetDocumentRevisions": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "2883d54a2f94a83c813780d18878d26f53449f2713b9faf6e8165f4314d2f6b6",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetCurrentRevisionChangesOfLayouts": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "c7a39841acaca4fff19d46cb18c78ef717694d31b7cebf517e6e0d233a72c728",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetRevisionChangesOfElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "5b79f18997d7e18d92d076c399d32fad464af4bcf47b0b64d4e673956774d94d",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetDesignOptions": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "91ceed23e4d970687b2d81219f114dd77135be8dac4216f28d088621cd56da30",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetDesignOptionSets": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "0890867ad9e3ea13a390f949b366d9809496c92bd7352972a9db5c5cbb542187",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetDesignOptionCombinations": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "94bb862c1e59657715a686c0bb9b44dbb5418a3fc318e21906ef78609c25564f",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetElementsOfDesignOptions": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "dec3d15e509784507ecf501631a9f5fb9b6072aab7afa2a16d67f8a03aed1118",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetDesignOptionForElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "9382a30b4489b70745bd52fede542dbd4590583eb019131f78d4a2ca4dde0015",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateDesignOptionSets": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "87101aa5534b513a9ca1ddae24071dd2360794e50ba7ae0100dda9c726aa3bea",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateDesignOptions": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "eebfc965829443ba51cc7978397a4724e16a2b7d0edc92913820f8b7f94a1594",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateDesignOptionCombinations": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "ecc14c076ff36ceae903e37978c731e9aeca01276cfb2b63af62b0f12e3440f6",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "SetActiveDesignOptionsInCombinations": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "687c94acbdfe718eced4e4f60110d24152d14377b860a1c2e0a93f71bd004b4a",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "MoveElementsToDesignOptions": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "436c023cb0b956d2ad5dd2e0c7cc577510c8f9765941efff6e465bd3ba487160",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "MoveDesignOptionsToAnotherSet": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "1465356a7fd83960d97ce3e5c4f3d45abc14ab6ad88e59a069d4aac97266c77d",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetKeynoteTree": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "8a5bc52a0af860eb037b5da1b94c443ae14f23cc55e3d52443d6299691101428",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetKeynoteAutoTexts": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "586737aac6300ad60f4adda2b97e8da5c10c54a1c4a646b166fb05c399e853c9",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateKeynoteFolders": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "8acf6617d4b0a40a6e87f953488024265a22a5f95a7ac3846e7752ec94dfd284",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateKeynoteItems": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "786b62d0bc42210bc9eeb8d73b29b12d98d4217367ab68c66a79752556e860ed",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ModifyKeynoteFolders": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "069056c2fb5a71d6c66ed3b434c531b7b4b4dc8ee216dec6238fdee8170ddcd9",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ModifyKeynoteItems": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "686fe9e9d9cc922a378435d83f62f7a5106f575e308391f9bf23bdf434704aa5",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "DeleteKeynoteFolders": {
+      "kind": "DELETE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "ac7ee260b802d41201d02452b4881c80be9edb850b82dd08a14363a469aa1e8d",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "DeleteKeynoteItems": {
+      "kind": "DELETE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "a53f8c634cb9624cf0c8e0b7d17061da360f1737b754489c0d54a0dc9e353b56",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateKeynoteLabels": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "8040efe3336f3fcb19bc62f9c92af37cb92ba44b8ec70e1810e8bcb9e7dbc644",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetMEPElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "c80aac59346c930af5159f785cf52fc3fc068b9cbe5b8ae54ac88f5ac2ada730",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetMEPRoutingElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "ed6f126d0891f5c18fb168b2db6dbe242d4a7da1771d855b3476af2be5a2c412",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetMEPPorts": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "d0df18e009a7c3bbfea7898cd533fbbb8c37a6d05f2343a0b82e32464e9536c6",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetMEPDistributionSystems": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "edf5ca90426b57cd1dbfc47606d1993d4767dbfe63d3b24b1df0b940a3a3f205",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateMEPRoutingElements": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "73c1c4a44fadd1587a8ddb2ceec42fae2452d24a19b564827505933c8a9493e5",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateMEPElements": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "7a37885f63c28e8b1d98036d1ffaa19d93dbe3260fa2fc2f0d52b696dd197428",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ModifyMEPRoutingElements": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "e6e5eacfc1f2030fb6a8519d2f8a91ac039c2def78b6b194f72ff2406303289a",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "ConnectMEPElements": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "6ea5394a3216ed0e6efa627f2633e5a0266fd15908bd25866d154170455b4c5d",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "GetMEPPreferenceTables": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "dabb6d1fdeeab84a415351df31ad2eb417862c506a197268a7bbbe49d8509da5",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "CreateSolidElementLinks": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "3d41d59cf5a19276ab811c61feb61a0dfb32a852a07b099a0fa905c9cb46ec72",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "RemoveSolidElementLinks": {
+      "kind": "DELETE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "67df8d9ffb4bff368ee7c3b3216733d277390f5cf09148f6e2334adb3085d49b",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetSolidElementLinks": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "4e7060430e7bfe1580d4a95f17beeed69859301acf750805ace9c63db39c8737",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "TrimElements": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "dae98015c048263f30fd6323dc1dd2524dce1a3e89490e05da7ef5b668968a67",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "RemoveElementTrims": {
+      "kind": "DELETE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "ce505993756d58d919dcdbf630e4cf9b754c3b25b5cab656b76e5d5f8c19fba4",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GetElementTrims": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "d0e1010810c88c3f15bc7c42d255e8ff2b3eb605ddc169790474aa00ea9daa1c",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "ShowScriptUI": {
+      "kind": "UNKNOWN",
+      "impact": "EXTERNAL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "8ad0a14d9481eab98f3e29bc4154c145d67ff572d2584f668ee6c84e36419563",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "GetScriptUIResult": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "f06c4ffa0f3f51c8fb5120633889015426aa7c001d864a511e75e03a4def7f3f",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "GenerateDocumentation": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "6c16dd0caf675a7d256f9d245561eaba1c193733669dec8e34ca98cac7f3adb6",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "API.CloneProjectMapItemToViewMap": {
+      "kind": "CREATE",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "12d5934e2e00985d19606be423483edadcee106a4c2fe738c6f395cc152f0bb1",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.CreateAttributeFolders": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "11bf538abf4f84ef9c1a57748d08204ab64b8071e1609ca3f0425387880e9b36",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.CreateLayout": {
+      "kind": "CREATE",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "d5f8cdd9267b0f5012bdd3a8a5f56ee2c5cb5661baa33904bbfbc3eae012f396",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.CreateLayoutSubset": {
+      "kind": "CREATE",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "c8df8e59544946e2e20c3636ac93d2b4693882c8fb3dd941f1b0a6f0f062a509",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.CreateViewMapFolder": {
+      "kind": "CREATE",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "b7ccd2314aec7301441819800ad0f4143507b4fb9eab48ba81335e5cd391d28f",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.DeleteAttributeFolders": {
+      "kind": "DELETE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "75f607b49db286ee3c9adfde313201bd1ca83ffb0807b1d47ef431be3046e90a",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.DeleteAttributes": {
+      "kind": "DELETE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "ecf350475ecfd6410b4934b3167e9b8c2e54b2bef5c97fb899630d4cfdd7f078",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.DeleteNavigatorItems": {
+      "kind": "DELETE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "98934a18f17979dc264e0f139b9c643ebde9e57e33bf90daa5d487a00ee62dd7",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.ExecuteAddOnCommand": {
+      "kind": "UNKNOWN",
+      "impact": "EXTERNAL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "0a4152e793bbc0bcf39b974123f220585865445bba3c5a84952eb4e04d67ec13",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "API.Get2DBoundingBoxes": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "572ae0230ed303d8b4728c79891a82354f6cf2e375bd82d95e17f84612425902",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.Get3DBoundingBoxes": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "ed0f97f40ae17e2a7614983ce2dd7895a9470ab796fc96fcfd2b7525f7dc65fa",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetActivePenTables": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "3724ef7bdda571987c620dd099dd430edba13fc66528b3c327054d3e7d594c9e",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetAllClassificationSystems": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "91e23ee0b610abf46b51843fb50d232063aeff630d17efec4c21de26dedc9a6a",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetAllClassificationsInSystem": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "102da7af8fc64e651a9bdd2d6da8053e70517a76f34f9b752a97ab9efcb5a226",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetAllElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "19cc02edb4515c0d33033e31258679c5077c29c5a30201f28866736e5280c0a8",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetAllPropertyGroupIds": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "b8ba04029fc61ef7b42485a548309bbf0482ea9fecb451e850e3ec3563257f70",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetAllPropertyIds": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "5da3e704985ca5b0429e6ee6111740c77445e8697f9323d75d89898dc39b4afd",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetAllPropertyIdsOfElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "dbcff80ca7c20cc23a7839a2a09a87314905939dd146861248d6507f78982408",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetAllPropertyNames": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "181caae317f9464d9a7769c22b90844ba572373ba3efde3a4a7035fcc5779209",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetAttributeFolderStructure": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "b81f2056bd1524a88412c212b60d5a0a2d2191b6c82939f558978006e06ebe67",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetAttributeFolders": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "5bf955499cf57f997e7b06f0c88c1c6a3ead8f4b42e0daf2e1b85a69cce73e62",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetAttributesByType": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "9bdd239eca5bc94370ab84dc50b3c4fcc0b5b3d5a2a09c9d3d9374cf1e7170d0",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetAttributesIndices": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "ee838cfa4a7e66a9b02711f93e8ef383e33b23476902ce35d929537151541261",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetBuildingMaterialAttributes": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "f3da4eb1fdb39f8c38dd8ca924ddf017bd64285d07253ae95b6105a9564d19d6",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetBuiltInContainerNavigatorItems": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "7c5bda75a551f83bb2693195e945cd2bd1726001a77cec920f0c09b35c4aded3",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetClassificationItemAvailability": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "bcc3fe83fa4ee2b4d537ecf79b93ea3cf4f47db730c07ac4e748be4a4eb75473",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetClassificationSystemIds": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "77140b05b4b4344febea0e66b59f2455690c7a2241c623965fe70f4d6826ae02",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetClassificationSystems": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "11b55ba050e24e6c26295d9f157adaf1d74f8f0eed6c72ed40982fb22756ca20",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetClassificationsOfElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "a138b163f794d4e67368f6dd2174dfa3500635c32f4559c76bbad4922f15b597",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetComponentsOfElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "b0de04a1a7a81253d8607d416ff2006173d94a645bb8a03b4f9a58cd90a1f7ca",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetCompositeAttributes": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "2e67302ba8358b53b81b2ca66acf6f5b1404668ed0edb5a30a5fa58c59770f2a",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetDetailNavigatorItems": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "4f9c47dbfaab91547be72c4a21e206d7fe2f60e407d8766cc42982651080e65b",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetDetailsOfClassificationItems": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "848f72459e6e3c7ce36ffa561a6a64cf13166da313516497addee5d76ba232b1",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetDetailsOfProperties": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "10b5fd3de408878cd341f1b03db6bef1107da8adbe4b2a9bdb981ded12c46631",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetDocument3DNavigatorItems": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "4fb3cb4509892b9cf6c2603774f75db2ac116042abbbf94c0b53523ce1abb8d4",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetElementsByClassification": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "c66ca1cb797a2b04535e2f952a1d0a68d138094008c95a31b064ef22fa46d072",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetElementsByType": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "ef24746e9f6dbf72602ed77bddc779e7645b9ed5f52ddd4971c9df89d6fb476b",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetElementsRelatedToZones": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "0bacd339237c732e59188e30d53d9f96f478652bf98746692f1e43f47e3b3f3a",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetElevationNavigatorItems": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "9d038d084d71a44d38e8c2f62636290763ea8ec1c0cfcb7e17e96fd93a366d39",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetFillAttributes": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "c9618e90892af4b270df65936f2844b0d548889ce9bcd6dbff9fcf251f252ec1",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetInteriorElevationNavigatorItems": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "64a9ce46edf20f2d3e724d53b88c80fecd811d840201998ace56edef1ff22d4c",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetLayerAttributes": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "aa951cdc8328156e17faa3845c95036973dca437c8fe8e73e0d25e7c3813a73a",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetLayerCombinationAttributes": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "338dd023ca14a8719d8dca1d296214dd7bc19bf35af8992885925140fe01759c",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetLayoutSettings": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "ed95e85c592c22ed8d7794dd60318f38155e8110472550320ee4096a26ed504b",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetLineAttributes": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "318613ee05c43cbb0073deb5d5848678a01fe57c6be47431169b008791c8a345",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetNavigatorItemTree": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "c5779ddaa0cf6f58043c5620b1d3bdaa19f04890613fcfa45bd25d5a247f553e",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetNavigatorItemsType": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "fcf2be7083f0981fb58e05505eb8cc97afbcdf489327865067ac4b453327e22d",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetPenTableAttributes": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "28c8559ba7cd6ed2392aad380fcbf86d2f657945a72fa8563304619959f02733",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetProductInfo": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "15b8b0be01367029cb9963193e6cbcf6101a4a4748fb934808b7a0f6e30c626c",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetProfileAttributePreview": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "2e58b542f7e6b12d2ca53eb477dafe4111e99c8c4fc036034ae1425df6cbf777",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetProfileAttributes": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "642660f3ef827fbe056014167d7aab4633eca6594cc02119a3b9bbbee409ec8d",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetPropertyDefinitionAvailability": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "3d41218040ee6fb90c9aba474dc7f65080b1833679a80ff5d2969fe3f07862e3",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetPropertyGroups": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "833d1995d22efbe4f17ae2b2a9a2e87383ac0e815bd99d75daba7cea9cdda95d",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetPropertyIds": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "5677b3493ef9721dc259c29b9f161cb65a9a8139f0408e83c012e40463e2d50c",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetPropertyValuesOfElementComponents": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "0b0780e40ca4f00bc4c2f737fc3c615eed2bd7a50fca367a2b95f3280802e9f2",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetPropertyValuesOfElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "dbdaa33fafa7e7da15e06b1aea81a578de1d1c686b1e2f7c0d4a9587b6d82d50",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetPublisherSetNames": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "0cbae927a788707f38c237d05b8f11a5e9f726585b999d801580ed24bc2afaae",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetSectionNavigatorItems": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "a06dd9d4cca35e0c3226d8edbc9c21e1970a20fb125590f2510dff3de5ab2ad3",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetSelectedElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "1c8bae35c0c45094a440a1c5dfdf0245197485cd647941b6dfa807100498ea68",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetStoryNavigatorItems": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "9ee077ff579e9469166ca0e208c171392aa82a73a76937ee0fc8baef8b5bef54",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetSurfaceAttributes": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "c09b86847e55946abf7905b69a74e936ff0e2f7c18f1cac72726f43a3f69509d",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetTypesOfElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "e13fc601fddecf2a9c08defc4bcf4a661b35843547c11aebe8613d18fadfa3ba",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetWorksheetNavigatorItems": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "d937bf1ae5cb29aae8d54da7edfeff0c3b3fbcebd1ca1af881c14284c0c673fc",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.GetZoneCategoryAttributes": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "67b0a33f28da497ec88c99f85cef54cfb4863f084e70bd31d1bb639e97964041",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.IsAddOnCommandAvailable": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "b4eb94258db0d7d4ef1617343c5f0d508c6ff6f058b39c8de103406e23a4e772",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.IsAlive": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "5fad82a19afad7cdd484cc09eef458327060f10d966d11d98cfc6fe17fb79930",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.MoveAttributesAndFolders": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "2b5e70c49ba316704fffa1254b8259d9e3c47d35c722fc9313cc62c997a18306",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.MoveNavigatorItem": {
+      "kind": "MODIFY",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "f6634655069081f75eb036c8b929319a0e346f9ef970b1420aa63abb455c2ece",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.RenameAttributeFolders": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "4a51e58f2618800ad975275d3b7e10bc430e5a918d0b41f415409f1db36b4839",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "API.RenameNavigatorItem": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "fd884e87bf5640e2a1f1fd37eee7f734fe1133a9437b74c69cf40dcc7dd29f3d",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      }
+    },
+    "API.SetClassificationsOfElements": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "4612cadb7da9fc167df7a6c802efbe06128b7927a1431aa5e8e250d1ced5439c",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.SetLayoutSettings": {
+      "kind": "MODIFY",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "cbd922ed97061095db856a91b1af4b72ae613d5edeb869ee2d5c532b1b528b41",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    },
+    "API.SetPropertyValuesOfElements": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "626dc3a16f896950353e78daa5ef22b27a0afdb5b085fbb0e65d96ff029a27a7",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "DOCUMENTED_ONLY"
+      }
+    }
+  },
+  "executionApproval": false
+}
