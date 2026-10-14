@@ -146,6 +146,29 @@ def prepare_native_command(router, command, parameters):
 def prepare_native_workflow(router, graph):
     return router.prepare_workflow(graph)
 
+
+def native_task_tools(router, knowledge_db, request, limit=6):
+    """GPT tool selection reuses KG summaries; expand only selected schemas."""
+    if not isinstance(request,str) or not request.strip():raise ValueError('ARCHITECTURAL_TASK_REQUIRED')
+    return dict(request=request,matches=router.search(knowledge_db,request,limit),schemaAccess='router.select(command)',executionPermission=False)
+
+
+def prepare_native_task(router, intent):
+    """Compile GPT-selected operations through the existing BIM Graph.
+
+    Natural language is retained as provenance, never parsed into guessed
+    dimensions or authorization. GPT supplies the selected typed operations.
+    """
+    if not isinstance(intent,dict) or set(intent)!={'schemaVersion','request','graph'} or intent['schemaVersion']!='apa-native-task/1' or not isinstance(intent['request'],str) or not intent['request'].strip():raise ValueError('INVALID_NATIVE_TASK_INTENT')
+    workflow=router.prepare_workflow(intent['graph'])
+    return dict(schema='APA_NATIVE_TASK_PREVIEW_V1',request=intent['request'],intentHash=RUN.digest(intent),workflow=workflow,sourcePlanHash=workflow['sourcePlanHash'],executor='SceneWriter',executionPermission=False,toolSelection='GPT_SELECTED_SCHEMAS_NOT_AUTOMATIC_DIMENSION_INFERENCE')
+
+
+def run_native_task(router, api, preview, writer, scopes, checkpoint=None):
+    intent=dict(schemaVersion='apa-native-task/1',request=preview['request'],graph=preview['workflow']['graph'])
+    if preview.get('intentHash')!=RUN.digest(intent) or preview.get('sourcePlanHash')!=preview['workflow']['sourcePlanHash']:raise ValueError('NATIVE_TASK_PREVIEW_DRIFT')
+    return router.run_workflow(api,preview['workflow'],writer,scopes,checkpoint)
+
 def apply_native_axis_grid(writer,recipe,scene_id,retained_signatures,saved_sha256,authorization_ref,existing_guid=None):
     from archicad_native_spatial_tools import create_or_reuse_axis
     return create_or_reuse_axis(writer,recipe,scene_id,retained_signatures,saved_sha256,authorization_ref,existing_guid)
@@ -274,7 +297,9 @@ def apply_native_stair_connection(writer, recipe, run_id, saved_sha256):
     return execute(writer,recipe,run_id,saved_sha256)
 
 
-def compile_intent(intent, schema_path):
+def compile_intent(intent, schema_path, router=None):
+    if isinstance(intent,dict) and intent.get('schemaVersion')=='apa-native-task/1':
+        return prepare_native_task(router or native_command_router(schema_path),intent)
     if (not isinstance(intent, dict) or set(intent) !=
             {"schemaVersion", "projectId", "units", "components"}
             or intent["schemaVersion"] != "archicad-project-intent/1"
@@ -321,8 +346,10 @@ def compile_intent(intent, schema_path):
                 "Typical floor and MEP require independent live acceptance"])}
 
 
-def compile_authored_intent(intent, schema_path, read_api):
+def compile_authored_intent(intent, schema_path, read_api, router=None):
     """Join authored brief/PLP/geometry to the same existing native execution path."""
+    if isinstance(intent,dict) and intent.get('schemaVersion')=='apa-native-task/1':
+        return prepare_native_task(router or native_command_router(schema_path),intent)
     required = {
             "schemaVersion", "projectId", "units", "brief", "cseCandidate",
             "layout", "storyHeights"}

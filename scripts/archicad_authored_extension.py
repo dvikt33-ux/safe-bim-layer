@@ -164,6 +164,9 @@ def _qualify_legacy_stair_hole(row):
 
 def prepare_building_parameter_edit(api,old_plan,created,new_intent,schema_path):
     """Diff the existing authored graph into native edits; never recreate a host."""
+    if new_intent.get('schemaVersion')=='apa-native-task/1':
+        preview=A.prepare_native_task(A.native_command_router(schema_path),new_intent)
+        return {**preview,'oldPlanHash':old_plan['sourcePlanHash'],'createdBindings':copy.deepcopy(created),'dependencyRebinding':'EXPLICIT_RESULT_POINTER_BIM_GRAPH','automaticRetry':False}
     if new_intent.get('schemaVersion')=='apa-native-operations/1':
         # Explicit discovered operations support composition changes without
         # guessing create/modify equivalence or silently regenerating hosts.

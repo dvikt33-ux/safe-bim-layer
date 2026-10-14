@@ -11,6 +11,7 @@ import json
 import textwrap
 import typing
 import hashlib
+import re
 from pathlib import Path
 import archicad_batch_contracts as CONTRACTS
 
@@ -98,10 +99,27 @@ class DynamicCommands:
 
     def load_policies(self,manifest):
         """Explicit version/hash-bound operator metadata, not name inference."""
-        if manifest.get('catalogHash')!=self.fingerprint:raise ValueError('OPERATION_MANIFEST_CATALOG_DRIFT')
+        if manifest.get('catalogHash')!=self.fingerprint:
+            contracts=manifest.get('contractHashes')
+            if not contracts or set(contracts)!=set(manifest['operations']) or any(name not in self.catalog['commands'] or value!=self.contract_hash(name) for name,value in contracts.items()):raise ValueError('OPERATION_MANIFEST_CATALOG_DRIFT')
         for name,policy in manifest['operations'].items():
             self.review_policy(name,policy['kind'],policy['impact'],policy['evidence'])
+            self.policies[name].update({k:copy.deepcopy(v) for k,v in policy.items() if k not in {'kind','impact','evidence'}})
         return dict(reviewed=len(self.policies),unknown=sum(p['kind']=='UNKNOWN' for p in self.policies.values()))
+
+    def contract_hash(self,command):
+        """Bind effect review to complete schemas/version, independent of PLN."""
+        row=self.catalog['commands'][command]
+        def expand(value,seen=()):
+            if isinstance(value,dict):
+                if '$ref' in value and value['$ref'].startswith('#/'):
+                    key=value['$ref'][2:]
+                    if key in seen:return dict(recursiveRef=key)
+                    return expand(self.catalog['common_schemas'][key],(*seen,key))
+                return {k:expand(v,seen) for k,v in value.items()}
+            if isinstance(value,list):return [expand(v,seen) for v in value]
+            return value
+        return self.A.RUN.digest({k:expand(row.get(k)) for k in ['name','provider','namespace','commandName','version','parameters','returns','implementationSHA256']})
 
     def operation_kind(self,command):
         return self.policies.get(command,{}).get('kind','UNKNOWN')
@@ -143,18 +161,32 @@ class DynamicCommands:
         row=copy.deepcopy(self.catalog['commands'][command]);row.update(effect=self.operation_kind(command),policy=copy.deepcopy(self.policies.get(command)),status='LIVE_VERIFIED' if command in self.live else 'CALLABLE_VERIFIED' if command in self.callable else 'BLOCKED' if self.registration.get(command) is False else 'SCHEMA_VALID',catalogDiscovered=True,routable=True,runtimeRegistered=self.registration.get(command),catalogHash=self.fingerprint)
         return row
 
-    def index(self,markdown,db):
+    def index(self,markdown,db,command_documents=True):
         """Reuse the unchanged Knowledge Graph section index, with summaries only."""
         from archicad_knowledge_access import components
-        text=['# APA registered command catalog']
+        text=['# APA registered command catalog'];documents=[]
+        directory=Path(markdown).with_suffix('')
+        if command_documents:directory.mkdir(parents=True,exist_ok=True)
         for name,row in sorted(self.catalog['commands'].items()):
-            text.extend(['## '+name,row['category']+' / '+effect(name)+' / '+row.get('description','')[:700]])
+            summary=row['category']+' / '+self.operation_kind(name)+' / '+row.get('description','')[:700]
+            policy=self.policies.get(name,{})
+            if policy.get('possibleSideEffects'):summary+='\nSide effects: '+policy['possibleSideEffects']
+            text.extend(['## '+name,summary])
+            if command_documents:
+                words=re.sub(r'([a-z0-9])([A-Z])',r'\1 \2',name).replace('.',' ')
+                path=directory/(hashlib.sha256(name.encode()).hexdigest()+'.md');path.write_text('# '+name+' | '+words+'\n\n'+summary+'\n',encoding='utf8');documents.append(path)
         Path(markdown).write_text('\n\n'.join(text),encoding='utf8')
-        return components()['sections'].build([Path(markdown)],Path(db))
+        # Existing KG keeps one hit per document. One command summary per
+        # document preserves that policy without hiding all but one tool.
+        return components()['sections'].build(documents or [Path(markdown)],Path(db))
 
     def search(self,db,query,limit=5):
         from archicad_knowledge_access import components
-        return components()['sections'].search(Path(db),query,limit=min(limit,10),max_snippet=220)
+        result=components()['sections'].search(Path(db),query,limit=min(limit,10),max_snippet=220)
+        for hit in result.get('results',[]):
+            command=hit.get('heading','').split(' | ',1)[0]
+            if command in self.catalog['commands']:hit['command']=command
+        return result
 
     def prepare(self,command,parameters):
         if self.A.RUN.digest(self.catalog)!=self.fingerprint:raise ValueError('CATALOG_CONTENT_DRIFT')
@@ -196,11 +228,12 @@ class DynamicCommands:
         if set(affected)&set(retained):raise ValueError('AFFECTED_AND_RETAINED_SCOPE_OVERLAP')
         def target_ids(v):
             if isinstance(v,dict):
-                if 'elementId' in v and isinstance(v['elementId'],dict) and 'guid' in v['elementId']:yield v['elementId']['guid'].lower()
+                if 'elementId' in v and isinstance(v['elementId'],dict) and isinstance(v['elementId'].get('guid'),str):yield v['elementId']['guid'].lower()
+                if isinstance(v.get('guid'),str) and v['guid'].lower() in set(affected)|set(retained):yield v['guid'].lower()
                 for item in v.values():yield from target_ids(item)
             elif isinstance(v,list):
                 for item in v:yield from target_ids(item)
-        if impact=='MODEL' and ticket['effect'] not in {'READ_ONLY','CREATE'} and not set(target_ids(ticket['parameters']))<=set(affected):raise ValueError('DYNAMIC_ELEMENT_TARGET_OUTSIDE_AUTHORIZED_SCOPE')
+        if impact=='MODEL' and ticket['effect']!='READ_ONLY' and not set(target_ids(ticket['parameters']))<=set(affected):raise ValueError('DYNAMIC_ELEMENT_TARGET_OUTSIDE_AUTHORIZED_SCOPE')
         value=dict(schema='APA_DYNAMIC_OPERATION_V1',ticket=ticket,binding=binding,affectedGuids=affected,retainedGuids=retained,authorizationRef=authorization,impact=impact)
         value['hash']=self.A.RUN.digest(value);return value
 
@@ -240,6 +273,15 @@ class DynamicCommands:
                 if not ref.startswith('#/'):raise ValueError('EXTERNAL_SCHEMA_REFERENCE_NOT_PINNED')
                 schema=self.catalog['common_schemas'][ref[2:]]
             token=token.replace('~1','/').replace('~0','~')
+            alternatives=schema.get('anyOf',schema.get('oneOf'))
+            if alternatives:
+                candidates=[]
+                for candidate in alternatives:
+                    try:candidates.append(self._schema_at(candidate,'/'+token.replace('~','~0').replace('/','~1')))
+                    except (KeyError,ValueError):pass
+                if not candidates:raise ValueError('RESULT_POINTER_NOT_IN_SUCCESS_CONTRACT')
+                schema=candidates[0] if len(candidates)==1 else dict(anyOf=candidates)
+                continue
             if schema.get('type')=='array':
                 if not token.isdigit():raise ValueError('RESULT_POINTER_ARRAY_INDEX_REQUIRED')
                 schema=schema['items']
@@ -293,7 +335,7 @@ class DynamicCommands:
         if checked['status']!='PLAN_VALIDATED_OFFLINE':raise ValueError('BIM_GRAPH_DEPENDENCY_OR_SCHEMA_INVALID:'+str(checked))
         return dict(schema='APA_DYNAMIC_BIM_WORKFLOW_V1',graph=copy.deepcopy(graph),catalogHash=self.fingerprint,policyHash=self.A.RUN.digest(self.policies),sourcePlanHash=self.A.RUN.digest(graph),templatePlanHash=checked['sourcePlanHash'],executionOrder=checked['executionOrder'],dependencies=bindings,executionPermission=False)
 
-    def run_workflow(self,api,plan,writer=None,scopes=None):
+    def run_workflow(self,api,plan,writer=None,scopes=None,checkpoint=None):
         """Sequential graph reuse; each mutation uses the same writer/SQLite.
 
         No failed step is retried. External result bindings are resolved and
@@ -311,12 +353,17 @@ class DynamicCommands:
             step=steps[sid];ticket=self.prepare(step['command'],resolve(step['params']))
             if ticket['effect']=='READ_ONLY':reply=self.read(api,ticket,reviewed_read_only=True)
             else:
-                if writer is None or sid not in (scopes or {}):raise ValueError('WORKFLOW_MUTATION_REQUIRES_EXACT_STEP_SCOPE')
-                scope=scopes[sid]
+                if writer is None or not callable(scopes) and sid not in (scopes or {}):raise ValueError('WORKFLOW_MUTATION_REQUIRES_EXACT_STEP_SCOPE')
+                scope=scopes(step,ticket,copy.deepcopy(results)) if callable(scopes) else scopes[sid]
                 outcome=self.execute(writer,scope['scene_id'],ticket,scope['affected'],scope['retained_signatures'],scope['saved_sha256'],scope['authorization'],scope['impact'],scope['verify_after'],verify_before=scope.get('verify_before'))
-                if outcome['status']!='PASS':return dict(status='STOPPED_UNKNOWN_OUTCOME',stoppedAt=sid,outcome=outcome,completedSteps=trace,automaticRetry=False)
+                if outcome['status']!='PASS':
+                    stopped=dict(status='STOPPED_UNKNOWN_OUTCOME',stoppedAt=sid,outcome=outcome,completedSteps=trace,results=results,automaticRetry=False)
+                    if checkpoint:checkpoint(copy.deepcopy(stopped))
+                    return stopped
                 reply=outcome['nativeResponse']
             results[sid]=reply;trace.append(dict(id=sid,command=step['command'],resultHash=self.A.RUN.digest(reply),status='CALLABLE_VERIFIED'))
+            self.callable[step['command']]=dict(kind='WORKFLOW_SCHEMA_PASS',resultHash=self.A.RUN.digest(reply))
+            if checkpoint:checkpoint(dict(status='WORKFLOW_CHECKPOINT',sourcePlanHash=plan['sourcePlanHash'],trace=copy.deepcopy(trace),results=copy.deepcopy(results),automaticRetry=False))
         return dict(status='WORKFLOW_CALLABLE_VERIFIED',sourcePlanHash=plan['sourcePlanHash'],trace=trace,results=results,automaticRetry=False)
 
     def native_facts(self,workflow,model_step,elements_step,boxes_step=None):
