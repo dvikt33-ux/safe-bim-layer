@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 49,
+  "run_count": 50,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -343,6 +343,13 @@
       "phase": "LIVE",
       "report": "runs/2026-10-14/APA-RUN-20261014-121132Z-native-stair-source350/REPORT.md",
       "run_id": "APA-RUN-20261014-121132Z-native-stair-source350",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-14/APA-RUN-20261014-172915Z-full-native-command-roofs/REPORT.md",
+      "run_id": "APA-RUN-20261014-172915Z-full-native-command-roofs",
       "substep_id": "APA-P70.A11.S03"
     }
   ],

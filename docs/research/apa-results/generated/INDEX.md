@@ -53,5 +53,6 @@ Generated projection from immutable V2 runs. Legacy reports remain in ARTIFACT_R
 | [APA-RUN-20261014-074612Z-universal-native-floor-contours](../runs/2026-10-14/APA-RUN-20261014-074612Z-universal-native-floor-contours/REPORT.md) | APA-P70.A11.S03 | LIVE | EVIDENCE_READY |
 | [APA-RUN-20261014-095400Z-runtime-identity-live](../runs/2026-10-14/APA-RUN-20261014-095400Z-runtime-identity-live/REPORT.md) | APA-P70.A11.S03 | LIVE | EVIDENCE_READY |
 | [APA-RUN-20261014-121132Z-native-stair-source350](../runs/2026-10-14/APA-RUN-20261014-121132Z-native-stair-source350/REPORT.md) | APA-P70.A11.S03 | LIVE | EVIDENCE_READY |
+| [APA-RUN-20261014-172915Z-full-native-command-roofs](../runs/2026-10-14/APA-RUN-20261014-172915Z-full-native-command-roofs/REPORT.md) | APA-P70.A11.S03 | LIVE | EVIDENCE_READY |
 
 Publication receipts are in ../receipts/. Evidence status is not publication status.
