@@ -470,21 +470,23 @@
       "id": "boti-ormandi-archicad-mcp",
       "name": "Boti-Ormandi / archicad-mcp",
       "kind": "archicad_mcp_connector",
-      "priority": "VERY_PROMISING",
+      "priority": "PROMISING",
       "decision": "UNDECIDED",
       "test_status": "NOT_TESTED",
       "workflow_status": "SHORTLISTED",
       "role": "Поиск реальных Archicad/Tapir JSON-схем, диагностика и discovery; исследовать интеграцию со схемным ядром APA",
-      "rationale": "MIT, uvx, schemas can be read without Archicad; потенциально минимальные затраты на проверку API.",
-      "blockers": "Критический риск: execute_script исполняет произвольный Python в текущей ОС без песочницы, не разрешать подключение к рабочей модели; точную версию и схему сверить.",
+      "rationale": "Статически проверенные source-level schema registry (exact/batch/fuzzy search, immutable versioned docs). Возможен выборочный read-only reuse, но не новая готовая безопасная writer-интеграция.",
+      "blockers": "CRITICAL: execute_script runs arbitrary same-user Python (no sandbox/allowlist). HIGH: get_docs not tied to selected instance port; packaged Tapir v1.5.8 vs local 1.5.10; no PLN identity/write journal. MEDIUM: property cache keyed only by port. Audited source only; NOT_TESTED in APA.",
       "source_urls": [
-        "https://github.com/Boti-Ormandi/archicad-mcp"
+        "https://github.com/Boti-Ormandi/archicad-mcp/tree/b6557cf0455f31cc00086fdaa45fd57f429c613b",
+        "https://github.com/Boti-Ormandi/archicad-mcp/blob/b6557cf0455f31cc00086fdaa45fd57f429c613b/docs/script-execution.md"
       ],
-      "source_state": "PRIMARY_PAGE_CHECKED_2026-10-14",
+      "source_state": "SOURCE_CODE_READ_AT_PINNED_COMMIT",
       "local_benchmark": null,
-      "version_or_quantization": null,
+      "version_or_quantization": "Source revision: b6557cf0455f31cc00086fdaa45fd57f429c613b; packaged Tapir schema v1.5.8",
       "integrated_in_apa": false,
-      "last_reviewed": "2026-10-14"
+      "last_reviewed": "2026-10-14",
+      "audit_evidence": "docs/research/apa-results/ai-candidates/ARCHICAD_MCP_SOURCE_AUDIT_20261014.md"
     },
     {
       "id": "solidworks-mcp-reference",
