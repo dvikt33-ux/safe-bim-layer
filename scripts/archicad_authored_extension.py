@@ -55,7 +55,7 @@ def verify_model(api, plan, created):
 
 
 MODEL_COMMANDS = frozenset({'MoveElements', 'ModifyWalls', 'ModifyWindows', 'ModifyDoors',
-                           'CreateSolidElementLinks','SetPropertyValuesOfElements','CreateStairs','ModifySlabs',
+                           'CreateSolidElementLinks','SetPropertyValuesOfElements','CreateStairs','ModifySlabs','CreateRoofs','ModifyRoofs',
                            'CreateNativeGridElementsV1','ModifyNativeGridElementsV1','CreateExactStairsV1','ModifyNativeStairGeometryV1','SetGDLParametersOfElements'})
 
 
@@ -82,9 +82,13 @@ def qualify_model_operation(scope,command,parameters,source_hash):
                 {k:v for k,v in scope.items() if k!='scopeHash'})):
         raise ValueError('MODEL_OPERATION_SCOPE_MISMATCH')
     owned=set(scope['ownedGuids']);retained=set(scope['retainedGuids'])
-    if ((not owned and command not in {'CreateStairs','CreateNativeGridElementsV1','CreateExactStairsV1'}) or owned&retained or (not retained and
+    if ((not owned and command not in {'CreateStairs','CreateRoofs','CreateNativeGridElementsV1','CreateExactStairsV1'}) or owned&retained or (not retained and
             (scope.get('isolatedInventory')!=sorted(owned)))):
         raise ValueError('MODEL_OWNERSHIP_SCOPE_INVALID')
+    if command in {'CreateRoofs','ModifyRoofs'}:
+        from archicad_native_roof_editing import qualify_operation
+        qualify_operation(command,parameters,owned,retained)
+        return
     if command=='SetGDLParametersOfElements':
         from archicad_native_spatial_tools import qualify_grid_parameter_edit
         qualify_grid_parameter_edit(parameters,owned,retained)

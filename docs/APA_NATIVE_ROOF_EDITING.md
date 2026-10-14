@@ -1,0 +1,9 @@
+# Native Roof checkpoint
+
+Existing BIM Graph / SceneWriter / SQLite now create source-derived native Roof assemblies and edit pitch and contour without regeneration. Gable: two SinglePlane Roofs, 25 to 28 degrees. Hip: one MultiPlane Roof, four real planes, 30 to 35 degrees. Both footprints were extended by 1 m with unchanged experimental GUIDs. Actual BREP proves one gable ridge with solid seam contact and five hip/ridge joins. Save/Open independently preserves all 258 signatures, including the original 255.
+
+The original Roof is an SEO operator for five accepted Walls. It remains unchanged. Authorized source-derived experimental Roofs occupy separate free areas of the same existing test PLN. This is a test conversion, not a change to the accepted building or engineering acceptance.
+
+The existing CreateRoofs/ModifyRoofs SDK overlay adds source attributes, SinglePlane angle/pivot and official polygon/edge memo masks. Failed BADPOLY/BADPARS attempts remain in the journal; a full PolyRoof request reported success without changing its pitch. A separate minimal levels-only request was independently verified. No blind replay occurred. Topology changes and source-hole clipping remain blocked until qualified; no Morph fallback.
+
+Seven focused tests passed using existing geometry dependencies. Windows CI provides broad regression coverage. The candidate was built from source commit 5f4777d; its identity is independent of this later Python/evidence commit. Visual acceptance and original APX restoration are pending at this checkpoint. All raw paths, PLN, APX and native dumps remain local. The same draft PR will carry the subsequent dynamic API integration.
