@@ -96,16 +96,17 @@ def apply(addon_source):
     if block.count(anchor)!=1:raise ValueError('ROOF_MODIFY_IMPLEMENTATION_CHANGED')
     block=block.replace(anchor,replacement,1)
     block=block.replace('''                ACAPI_Element_GetMemo (element.header.guid, &memo);''','''                // Preserve native polygon IDs; rebuild GetMemo-owned buffers safely.
-                if (ACAPI_Element_GetMemo (element.header.guid, &memo) != NoError) {
+                if (ACAPI_Element_GetMemo (element.header.guid, &memo, isSinglePlane ? APIMemoMask_Polygon : APIMemoMask_All) != NoError) {
                     results.Push (CreateFailedExecutionResult (APIERR_BADPARS, "Roof memo unavailable."));
                     continue;
                 }''',1)
     block=block.replace('''auto error = BuildRoofMemoFromGeometry (element, memo, polygonOutline, polygonArcs, holes);''','''auto error = isSinglePlane
                     ? BuildPlaneRoofMemoFromGeometry (element, memo, polygonOutline, polygonArcs, holes)
                     : BuildRoofMemoFromGeometry (element, memo, polygonOutline, polygonArcs, holes);''',1)
-    block=block.replace('''                err = ACAPI_Element_Change (&element, &mask, &memo, APIMemoMask_AdditionalPolygon, true);''','''                if (isSinglePlane) ACAPI_ELEMENT_MASK_SET (mask, API_RoofType, u.planeRoof.poly);
+    block=block.replace('''                err = ACAPI_Element_Change (&element, &mask, &memo, APIMemoMask_AdditionalPolygon, true);''','''                // Match the DevKit Roof-edit example: memo updates the polygon
+                // and RoofEdgeTypes must be reset alongside side/trim data.
                 err = ACAPI_Element_Change (&element, &mask, &memo,
-                    isSinglePlane ? (APIMemoMask_Polygon | APIMemoMask_EdgeTrims | APIMemoMask_SideMaterials) : APIMemoMask_AdditionalPolygon, true);''',1)
+                    isSinglePlane ? (APIMemoMask_Polygon | APIMemoMask_EdgeTrims | APIMemoMask_SideMaterials | APIMemoMask_RoofEdgeTypes) : APIMemoMask_AdditionalPolygon, true);''',1)
     text=text[:start]+block+text[end:]
     # Vertical cuts give genuine matching faces at assembled SinglePlane ridges.
     start=text.index('GS::Optional<GS::UniString> BuildPlaneRoofMemoFromGeometry')
