@@ -1,0 +1,407 @@
+{
+  "schema": "APA_NATIVE_ROOF_CHECKPOINT_V1",
+  "status": "LIVE_PASS_GEOMETRY_EDIT_SAVE_OPEN",
+  "savedSHA256": "3a1164d9ea63d66dae4143f6b21060a564ce126629194ff97ffeed9057be8f59",
+  "inventory": 258,
+  "retained": 255,
+  "sourceRoofPreservedBecauseSEOOperators": 5,
+  "derivedNativeSpecimens": true,
+  "geometry": {
+    "status": "ROOF_SAVE_OPEN_INDEPENDENT_PASS",
+    "count": 258,
+    "original255Unchanged": true,
+    "gable": {
+      "status": "NATIVE_ROOF_ASSEMBLY_GEOMETRY_PASS",
+      "scheme": "GABLE",
+      "nativeElementCount": 2,
+      "actualSlopePlaneCount": 2,
+      "pitchDegrees": 28.0,
+      "footprintGapAreaSquareMeters": 3.446132268436484e-13,
+      "joins": [
+        {
+          "lengthXY": 12.099999999999994,
+          "segmentsXYZ": [
+            [
+              [
+                151.7,
+                44.15,
+                8.933108152000003
+              ],
+              [
+                139.6,
+                44.15,
+                8.933108152000003
+              ]
+            ]
+          ]
+        }
+      ],
+      "solidSeamContacts": [
+        {
+          "guids": [
+            "guid-sha256:441eb6f2b92a9b35a0f9529a0a157b463742f9b6b23fdec7c4dc2aa30985ed2f",
+            "guid-sha256:c07e12981be1f4c407ac10fddf29f501b3856ccebe4d7385435d450d71d0ae50"
+          ],
+          "sharedAreaSquareMeters": 2.7408195331000083,
+          "evidence": "resultant-native-BREP-coplanar-surface"
+        }
+      ],
+      "nativeDetails": [
+        {
+          "type": "Roof",
+          "floorIndex": 1,
+          "layerIndex": 4,
+          "drawIndex": 7,
+          "id": "КР - 002",
+          "details": {
+            "roofClass": "SinglePlane",
+            "structureType": "Basic",
+            "thickness": 0.2,
+            "level": 3.2,
+            "zCoordinate": 6.5,
+            "buildingMaterialId": {
+              "guid": "guid-sha256:460ab9cf8caf48c17c0ccc65548f6e30d64471a255f116f194a695aa913be014"
+            },
+            "angle": 0.488692191,
+            "pivotLine": {
+              "begin": {
+                "x": 140,
+                "y": 40
+              },
+              "end": {
+                "x": 151.3,
+                "y": 40
+              }
+            },
+            "polygonOutline": [
+              {
+                "x": 139.6,
+                "y": 39.6
+              },
+              {
+                "x": 151.7,
+                "y": 39.6
+              },
+              {
+                "x": 151.7,
+                "y": 44.15
+              },
+              {
+                "x": 139.6,
+                "y": 44.15
+              },
+              {
+                "x": 139.6,
+                "y": 39.6
+              }
+            ],
+            "holes": []
+          }
+        },
+        {
+          "type": "Roof",
+          "floorIndex": 1,
+          "layerIndex": 4,
+          "drawIndex": 7,
+          "id": "КР - 004",
+          "details": {
+            "roofClass": "SinglePlane",
+            "structureType": "Basic",
+            "thickness": 0.2,
+            "level": 3.2,
+            "zCoordinate": 6.5,
+            "buildingMaterialId": {
+              "guid": "guid-sha256:460ab9cf8caf48c17c0ccc65548f6e30d64471a255f116f194a695aa913be014"
+            },
+            "angle": 0.488692191,
+            "pivotLine": {
+              "begin": {
+                "x": 151.3,
+                "y": 48.3
+              },
+              "end": {
+                "x": 140,
+                "y": 48.3
+              }
+            },
+            "polygonOutline": [
+              {
+                "x": 139.6,
+                "y": 44.15
+              },
+              {
+                "x": 151.7,
+                "y": 44.15
+              },
+              {
+                "x": 151.7,
+                "y": 48.7
+              },
+              {
+                "x": 139.6,
+                "y": 48.7
+              },
+              {
+                "x": 139.6,
+                "y": 44.15
+              }
+            ],
+            "holes": []
+          }
+        }
+      ],
+      "engineering": "NOT_VERIFIED"
+    },
+    "hip": {
+      "status": "NATIVE_ROOF_ASSEMBLY_GEOMETRY_PASS",
+      "scheme": "HIP",
+      "nativeElementCount": 1,
+      "actualSlopePlaneCount": 4,
+      "pitchDegrees": 35.0,
+      "footprintGapAreaSquareMeters": 1.0224999300589843e-06,
+      "joins": [
+        {
+          "lengthXY": 3.0,
+          "segmentsXYZ": [
+            [
+              [
+                164.15,
+                44.15,
+                9.650016201000003
+              ],
+              [
+                167.15,
+                44.15,
+                9.650016201000003
+              ]
+            ]
+          ]
+        },
+        {
+          "lengthXY": 6.434671767487449,
+          "segmentsXYZ": [
+            [
+              [
+                167.15,
+                44.15,
+                9.650016201000003
+              ],
+              [
+                171.700000001,
+                48.700000082,
+                6.464071902000001
+              ]
+            ]
+          ]
+        },
+        {
+          "lengthXY": 6.434671767487449,
+          "segmentsXYZ": [
+            [
+              [
+                159.599999999,
+                48.700000082,
+                6.464071902000001
+              ],
+              [
+                164.15,
+                44.15,
+                9.650016201000003
+              ]
+            ]
+          ]
+        },
+        {
+          "lengthXY": 6.434671710211797,
+          "segmentsXYZ": [
+            [
+              [
+                171.700000001,
+                39.599999999,
+                6.464071902000001
+              ],
+              [
+                167.15,
+                44.15,
+                9.650016201
+              ]
+            ]
+          ]
+        },
+        {
+          "lengthXY": 6.434671710211797,
+          "segmentsXYZ": [
+            [
+              [
+                164.15,
+                44.15,
+                9.650016201
+              ],
+              [
+                159.599999999,
+                39.599999999,
+                6.464071902000001
+              ]
+            ]
+          ]
+        }
+      ],
+      "solidSeamContacts": [],
+      "nativeDetails": [
+        {
+          "type": "Roof",
+          "floorIndex": 1,
+          "layerIndex": 4,
+          "drawIndex": 7,
+          "id": "КР - 003",
+          "details": {
+            "roofClass": "MultiPlane",
+            "structureType": "Basic",
+            "thickness": 0.2,
+            "level": 3.2,
+            "zCoordinate": 6.5,
+            "buildingMaterialId": {
+              "guid": "guid-sha256:460ab9cf8caf48c17c0ccc65548f6e30d64471a255f116f194a695aa913be014"
+            },
+            "eavesOverhang": 0.4,
+            "levels": [
+              {
+                "height": 10,
+                "angle": 0.610865238
+              }
+            ],
+            "pivotPolygonOutline": [
+              {
+                "x": 160,
+                "y": 40
+              },
+              {
+                "x": 171.3,
+                "y": 40
+              },
+              {
+                "x": 171.3,
+                "y": 48.3
+              },
+              {
+                "x": 160,
+                "y": 48.3
+              },
+              {
+                "x": 160,
+                "y": 40
+              }
+            ],
+            "polygonOutline": [
+              {
+                "x": 159.599999999,
+                "y": 39.599999999
+              },
+              {
+                "x": 171.700000001,
+                "y": 39.599999999
+              },
+              {
+                "x": 171.700000001,
+                "y": 48.700000082
+              },
+              {
+                "x": 159.599999999,
+                "y": 48.700000082
+              },
+              {
+                "x": 159.599999999,
+                "y": 39.599999999
+              }
+            ],
+            "holes": []
+          }
+        }
+      ],
+      "engineering": "NOT_VERIFIED"
+    },
+    "retained": {
+      "status": "RETAINED_NATIVE_MODEL_PASS",
+      "count": 258,
+      "signatureHash": "c7e6b7cc9824eb2545a0c6191e3eb63141f954b3d837664a539bfb499d1278c4"
+    }
+  },
+  "lineage": {
+    "gable-a": "guid-sha256:c07e12981be1f4c407ac10fddf29f501b3856ccebe4d7385435d450d71d0ae50",
+    "hip": "guid-sha256:9e1be4dfaba7d2f5953d2834a1a9566ab4ca8ae01cfb70fee0d6213cb3e455ca",
+    "gable-b": "guid-sha256:441eb6f2b92a9b35a0f9529a0a157b463742f9b6b23fdec7c4dc2aa30985ed2f"
+  },
+  "operations": [
+    {
+      "step": "gable-copy",
+      "status": "PASS",
+      "command": "CreateRoofs"
+    },
+    {
+      "step": "gable-half",
+      "status": "PARTIAL_OR_UNKNOWN_OUTCOME",
+      "command": "ModifyRoofs"
+    },
+    {
+      "step": "gable-half-fixed",
+      "status": "PARTIAL_OR_UNKNOWN_OUTCOME",
+      "command": "ModifyRoofs"
+    },
+    {
+      "step": "hip-create",
+      "status": "PASS",
+      "command": "CreateRoofs"
+    },
+    {
+      "step": "hip-pitch",
+      "status": "PARTIAL_OR_UNKNOWN_OUTCOME",
+      "command": "ModifyRoofs"
+    },
+    {
+      "step": "hip-pitch-delta",
+      "status": "PASS",
+      "command": "ModifyRoofs"
+    },
+    {
+      "step": "gable-contour-delta",
+      "status": "PARTIAL_OR_UNKNOWN_OUTCOME",
+      "command": "ModifyRoofs"
+    },
+    {
+      "step": "hip-contour",
+      "status": "PASS",
+      "command": "ModifyRoofs"
+    },
+    {
+      "step": "gable-contour-sdk3",
+      "status": "PASS",
+      "command": "ModifyRoofs"
+    },
+    {
+      "step": "gable-single-pitch",
+      "status": "PASS",
+      "command": "ModifyRoofs"
+    },
+    {
+      "step": "gable-mate",
+      "status": "PASS",
+      "command": "CreateRoofs"
+    },
+    {
+      "step": "gable-pitch",
+      "status": "PASS",
+      "command": "ModifyRoofs"
+    },
+    {
+      "step": "gable-contour",
+      "status": "PASS",
+      "command": "ModifyRoofs"
+    }
+  ],
+  "candidateSHA256": "fd5ac013fe2837a0516cf1e609c29fdb87703a46a2f8c767d42fc0ee05bca1ff",
+  "candidateSourceCommit": "5f4777d761a24b5419e4006a0e493a0b38efdfab",
+  "visual": "PASS_NATIVE_3D_BOTH_ASSEMBLIES",
+  "originalAPXRestoration": "BYTE_EXACT_FILES_AND_REGISTRATION",
+  "engineering": "NOT_VERIFIED",
+  "originalRuntimeReadback": "ALL258_SIGNATURES_AND_BOTH_ASSEMBLIES_PASS"
+}

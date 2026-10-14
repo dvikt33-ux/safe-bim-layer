@@ -1,0 +1,18 @@
+{
+  "status": "LIVE_PASS_SAVE_OPEN_ORIGINAL_RUNTIME",
+  "retained255": true,
+  "all258Signatures": true,
+  "savedSHA256": "3a1164d9ea63d66dae4143f6b21060a564ce126629194ff97ffeed9057be8f59",
+  "candidateSave": "PASS",
+  "candidateOpen": "PASS",
+  "restoredSave": "PASS",
+  "independentReadWrites": 0,
+  "geometryGable": "PASS_2_PLANES_1_RIDGE_SOLID_CONTACT",
+  "geometryHip": "PASS_4_PLANES_5_JOINS",
+  "newRoofElements": 3,
+  "newPLN": false,
+  "originalSourceRoofAndFiveSEOWalls": "PRESERVED",
+  "idempotentRepeatWrites": 0,
+  "visual": "BOTH_NATIVE_3D_PASS",
+  "engineering": "NOT_VERIFIED"
+}
