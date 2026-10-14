@@ -1,0 +1,152 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261014-224516Z-sdk-functional-module-expansion",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A11",
+  "substep_id": "APA-P70.A11.S03",
+  "executor": "work-module-expansion-integration-20261014",
+  "executor_run_id": "APA-CLAIM-SDK-MODULE-EXPANSION-20261014T221358Z",
+  "phase": "BUILD",
+  "started_at": "2026-10-14T22:13:58Z",
+  "finished_at": "2026-10-14T22:45:16Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "Archicad29 Windows11 build only;existingtestPLNunchanged",
+    "sdk": "PublicSDK29.3000 groupedquery adapters;existingAPXoverlay build;noinstallation",
+    "tapir": "1.5.10 currentstackretained;candidate source only",
+    "source_branch": "feature/apa-sdk-module-expansion-20261015"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/88",
+      "revision": "a444d5a6b481bfabd9c48f23c17df05c51ab0ea4",
+      "source_sha": "a444d5a6b481bfabd9c48f23c17df05c51ab0ea4"
+    }
+  ],
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-MODULE-COVERAGE",
+      "statement": "377prepared=368native/source+9local;337lastverifiedoriginal runtime;32APX noindependentcontract;source andlocalcounterdomains separate.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-0",
+        "EV-3"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-LOCAL-MODULES",
+      "statement": "Nineinstalledlibrary/oldAPAentries callable onarchived native/IFC data throughsamecatalog/BIMGraph; sixnewanalytics, threeutilityaccess entries;noNativeLIVEclaim.",
+      "status": "OFFLINE_PASS",
+      "evidence_ids": [
+        "EV-1"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-SDK-BUILD",
+      "statement": "FullRelease APX280Tapir+1DevKit sourcehandlers; fiveSDKgroupadapters andoneDevKitreuse; exactbinaryidentity/sourcehash;notinstalled.",
+      "status": "BUILD_PASS",
+      "evidence_ids": [
+        "EV-2"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-MODULE-LIMITS",
+      "statement": "S03PARTIAL;31nativecontracts needruntime;complexmemo/vendor/schedule/MEP gaps andengineering notverified;zeroPLN/APXmutation.",
+      "status": "NOT_VERIFIED",
+      "evidence_ids": [
+        "EV-4"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-0",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-224516Z-sdk-functional-module-expansion/module-coverage.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "cac0c20bb68ece74aa50ae27290d13431e86c2267a190ba638493a17888175c9",
+      "source_revision": "a444d5a6b481bfabd9c48f23c17df05c51ab0ea4"
+    },
+    {
+      "evidence_id": "EV-1",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-224516Z-sdk-functional-module-expansion/local-functional-results.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "2a4e92d1c49985199f73fdaa4a79e17d78f51dd734222c368fa4377f918f3f27",
+      "source_revision": "a444d5a6b481bfabd9c48f23c17df05c51ab0ea4"
+    },
+    {
+      "evidence_id": "EV-2",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-224516Z-sdk-functional-module-expansion/sdk-build.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "91e34c6399a9bb1ec72464e44576c7c779695eea633a71a4ebdee998797d471d",
+      "source_revision": "a444d5a6b481bfabd9c48f23c17df05c51ab0ea4"
+    },
+    {
+      "evidence_id": "EV-3",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-224516Z-sdk-functional-module-expansion/module-contracts.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "63e909a76bcdf610c84333cefe0edb790d34603c1f639e6ed1f3eaa83b3493bf",
+      "source_revision": "a444d5a6b481bfabd9c48f23c17df05c51ab0ea4"
+    },
+    {
+      "evidence_id": "EV-4",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-224516Z-sdk-functional-module-expansion/gap-register.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "fa07f84d21048e9926b3ebada034630470633fa64e6c39995aaeb55365d83bce",
+      "source_revision": "a444d5a6b481bfabd9c48f23c17df05c51ab0ea4"
+    },
+    {
+      "evidence_id": "EV-5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-224516Z-sdk-functional-module-expansion/windows-ci.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "c4a825efa70d1f2877f814afef7538960b9231b78ca124ede9bc01ccb07de4ca",
+      "source_revision": "a444d5a6b481bfabd9c48f23c17df05c51ab0ea4"
+    },
+    {
+      "evidence_id": "EV-6",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-224516Z-sdk-functional-module-expansion/core-knowledge-query.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "5795fbee32970fda49e692654413828820e82b2c99f700138c3ad3f814e3737a",
+      "source_revision": "a444d5a6b481bfabd9c48f23c17df05c51ab0ea4"
+    }
+  ],
+  "report_markdown": "# APA SDK and installed module functional expansion\n\n[Draft PR88](https://github.com/dvikt33-ux/safe-bim-layer/pull/88), head `a444d5a6b481bfabd9c48f23c17df05c51ab0ea4`, implementation `07e73f9c3f634ed93ea06be79bdf603bf0124abf`, exact PR85 base `45ef6b734e70c0e2c40ea57ed9a0099d70c4a917`. Main orchestrator/unchanged Knowledge Graph verified canonical revision163 and own CAS lease. One existing catalog, BIM Graph, SceneWriter/SQLite. No new controller, search engine, journal, MCP, APX installation or PLN/native mutation.\n\n## Functional delta\n\nFive new SDK query contracts cover twelve native tool default headers, polygon memo/holes/arcs, working units, nested group roots and modern GDL library-part origin. FullRelease APX compile/link and embedded source/binary identity verified.280Tapir source registrations plus one reused DevKit `AddOnCommandTest.ProtectionInfoCommand` handler; source registration is not runtime registration. Twelve existing candidate commands retained in build, not new discoveries. One DevKit license query integrated; thirteen other DevKit entries remain duplicate/UI/library/network dependencies. Code uses public SDK and existing registration/overlay, not private exports or vendor ABI.\n\nNine local entries callable through the common router: six newly exposed NetworkX/Shapely/CP-SAT/IfcOpenShell analytical capabilities plus three existing APA utilities. Dependency descendants/order and cycle witness, indexed polygon holes/contact, explicit assignment optimum, IFC selector/property sets, schema/optionalEXPRESS validation, world-coordinate geometry kernel. Existing NativeDump normalizer, planar BREP quantities and IFC exchange facts reuse old implementation. Dependencies import on selected call; code-owned manifest/source binding, input/output schemas, result-pointer dependencies and idempotent attachment pass. Source hashes normalize CRLF/LF; binary hashes use raw bytes. Native mutations still use one SceneWriter with exact identity/scope/readback and durable intent; local computation grants no native permission.\n\nActual saved-data computation:126archived native elements,25planar BREP quantities,22NOT_VERIFIED,79without bodies. Existing Archicad IFC export contains9selected walls,6void relations,19material assignments,0analytical members; schema valid,three actual walls have positive geometry volumes/bounds. No current model/readback or engineering claim. NativeDump normalization→quantity input binds directly in existing BIM Graph. Existing KG finds new module summaries and expands only selected schema. Nine localCALLABLE;zero new nativeCALLABLE/LIVE in thispass.\n\n## Coverage and limits\n\n377prepared entries=368native/official/source+9local. Lastverified original runtime337=264Tapir+73official remains separate;31native source contracts require runtime support. Five new native adapters+one reused DevKit handler are BUILD_PASS,not LIVE_PASS. Six new analytical capabilities are functional delta; three old APA utilities/catalog entries and twelve oldcandidate commands are reuse. All32nonTapir APX lack an independently documented callable contract; matrix gives SDK/existing alternatives with exact subset boundaries,without claiming vendor integration. InteractiveSchedule rows, Shell/Railing/CurtainWall complex memo creation, closedformat/vendor/energy/AI interfaces, SAF and existingMEP/S10 remain exact gaps.848previously inventoried SDK declaration names are not848commands or capabilities. No duplicatecolumn factory or arbitrary library UI bridge added. No model/dependency/source geometry invented.\n\n## Publication and next\n\nWindowsCI [PASS](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38649371374) at exact `a444d5a6b481bfabd9c48f23c17df05c51ab0ea4`. Local verification only changed contracts plus saved-data functional scenario; existing broad regressions belong to CI. PrivatePLN/rawdumps/buildlogs/paths/binary notpublished; publicproof binds hashes and processed results. Code readback all15changedfiles byte-exact. SDK rawbinarySHA `9e5e6f487c10e4d252516ffcea6125a7d1e0bdaf6451e06a9974ce664b985e71`; compiledsourceidentity `1b0c1144380b288e5fd620ec55cbf0502ab16e8cd32ffabc2cc437b53862eb00`. Experimentalbinary is local and notinstalled. A11.S03PARTIAL,history and A07/S10dependenciesretained. Nextbounded functional block: approved candidate load/registration and selected read-only SDK/DevKit calls,then missing complexmemo/dependency adapters through the same executor. Do not repeat WallWindow or broad native geometry tests before module expansion criteria.\n",
+  "next_substep": "APA-P70.A11.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

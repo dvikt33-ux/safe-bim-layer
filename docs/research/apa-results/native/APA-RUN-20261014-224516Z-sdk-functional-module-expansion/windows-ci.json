@@ -1,0 +1,83 @@
+{
+  "status": "WINDOWS_CI_PASS",
+  "run": 38649371374,
+  "headSha": "a444d5a6b481bfabd9c48f23c17df05c51ab0ea4",
+  "url": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38649371374",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "offline-contracts (windows-latest)",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install 'jsonschema>=4,<5'",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install -r scripts/requirements-connected.txt",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install -r scripts/requirements-knowledge.txt",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve upstream graph tests on the full canonical corpus",
+          "conclusion": "success"
+        },
+        {
+          "name": "APA core and actual MCP stdio integration",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m unittest discover -s tests -p 'test_archicad_*.py' -v",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python scripts/archicad_batch_contracts.py --runtime-version 1.5.8",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python scripts/archicad_bim_graph.py examples/archicad_bim_graph.offline.sample.json --runtime-version 1.5.8",
+          "conclusion": "success"
+        },
+        {
+          "name": "Static check Windows launcher syntax",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ]
+}
