@@ -202,7 +202,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest]
+        os: [windows-latest, ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -212,6 +212,8 @@ jobs:
       - run: python -m pip install 'jsonschema>=4,<5'
       - run: python -m pip install -r scripts/requirements-connected.txt
       - run: python -m pip install -r scripts/requirements-knowledge.txt
+      - name: Independent compile check for all Python scripts
+        run: python -m compileall -q scripts tools/apa_knowledge_graph
       - uses: actions/checkout@v4
         with:
           ref: research/apa-verified-results-hub-20261010
