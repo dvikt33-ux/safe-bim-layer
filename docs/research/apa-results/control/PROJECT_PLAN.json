@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 155,
+  "revision": 156,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -4386,7 +4386,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -4544,9 +4544,9 @@
         "723/723Windows hosttests,5newsource/inventoryregressions andcurrentWindows CI PASS. DraftPR81/fourcodefiles/13published evidence+reportfiles/readbackreceipt verified. Existingnormative/search/KGimplementation/docs/layout/TRC/main/168project/APX preserved. A11.S03 PARTIAL,S10BLOCKED,A07deps unchanged. Next: resolve10supportObject ancestries read-only beforefullinventoryacceptance; independentlynativeSinglePlaneRoofcontour/slope."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "work-native-roof-edit-20261014",
+      "lease_until": "2026-10-14T16:52:34Z",
+      "claim_ref": "APA-CLAIM-NATIVE-ROOF-EDIT-20261014T135234Z",
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
