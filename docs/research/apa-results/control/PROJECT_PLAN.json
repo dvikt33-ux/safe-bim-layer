@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 160,
+  "revision": 161,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -4500,7 +4500,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -4666,12 +4666,13 @@
         "363unique prepared contracts:264registered originalTapirSDK+73official typed+12candidate-only+14registered DevKit sourceexamples.337current client-compatible; only5official methods called,68not individually runtime-probed.26source-only runtimefalse.15CALLABLE_VERIFIED and4independent LIVE effects thispass; prior16LIVE preserved not recounted.33loadedAPX PE inventory;32other standalone namespaces NOT_EXPOSED.848ACAPI source declarations,7702internalABI exports,2779GDL resources separate fromcommandcount. Alternatives250aliases deduplicated,2fork-only schemas incomplete/runtimeabsent,5MCPbroker tools not new native operations. Historical16provider ledger reconciled, originalsnapshotpreserved; NativeDump andIfcOpenShell stale statuses corrected in derivedledger.",
         "Actual12step read-only workflow:10Walls GUIDs feed details/bounds/IFC; attributeIDs feed59BuildingMaterials; stories,navigator,MEP,2779libraryObjects queried. Shared NativeDump/IFCBREP/Shapely facts retainGUID,XYZ,stories,materials,relationships. Official9of10Wallboxes differ from actualBREP, bothstored separately; actual resultant nativebody isphysicalauthority, nofalseequality/IFCsemantics. All258accepted signatures unchanged. Existing SceneWriter/SQLite authorizedSaveProject service PASS,0geometrymutations,1journaledservicecall. NoAPXchanges/newPLN/unsafe replay.",
         "Source-bound effects instead ofname-derived safety:142read,72create,46modify,18delete,7transaction,1service,51UNKNOWNblocked untilreview. Genericwrites require operation-specific preflight and independentreadback, exactidentity/hash, explicitimpact/scope andcompleteaffected/retained inventory. Registrationrechecked atselectedcall, concreteparameters revalidatedafterdataflowbinding. Fullschemas selectedondemand viaexistingKG. Sourceavailability never grantswritepermission.",
-        "WindowsCI PASS exact 08527c0edde2096cf5d7be534b5e49f5c9038647;7localcriticalroutingtests only. Publishedreport/receipt/evidence GitHubbyte-readbackverified. S03PARTIAL; S10/A07dependenciesunchanged. Currentpriority massintegration preserved, narrowRoofSurface/Stair/MEP defects deferred with priorcontext. Next: source-review remaining51UNKNOWN effects and safe category workflows; vendor namespace/MDCLABI/license oraccepted SDKproviders required forremainingexternal gaps."
+        "WindowsCI PASS exact 08527c0edde2096cf5d7be534b5e49f5c9038647;7localcriticalroutingtests only. Publishedreport/receipt/evidence GitHubbyte-readbackverified. S03PARTIAL; S10/A07dependenciesunchanged. Currentpriority massintegration preserved, narrowRoofSurface/Stair/MEP defects deferred with priorcontext. Next: source-review remaining51UNKNOWN effects and safe category workflows; vendor namespace/MDCLABI/license oraccepted SDKproviders required forremainingexternal gaps.",
+        "Current user priority: maximum executable BIM workflows and cross-provider dependency routing first. Roof Surface/Stair/MEP narrow fixes remain registered and deferred unless blocking the common interface. Do not infer native availability or safety from command names or source presence."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "work-executable-bim-integration-20261014",
+      "lease_until": "2026-10-15T01:14:17Z",
+      "claim_ref": "APA-CLAIM-EXECUTABLE-BIM-20261014T211417Z",
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
