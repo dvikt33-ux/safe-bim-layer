@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 164,
+  "revision": 165,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -4602,7 +4602,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -4780,12 +4780,13 @@
         "Five new public SDK query groups: tool default headers for twelve native types, polygon memo coordinates/contour ends/arcs, working units, nested group roots, modern GDL library-part origin. Full Release APX compile/link PASS:280 Tapir source registration expressions plus reused DevKit AddOnCommandTest.ProtectionInfoCommand. Existing twelve candidate commands retained, not newly discovered. Binary source identity, published implementation commit 07e73f9c3f634ed93ea06be79bdf603bf0124abf and raw SHA verified; candidate NOT_INSTALLED, zero new native CALLABLE/LIVE this pass. Thirteen other DevKit examples remain duplicate/implicit selection/UI/library/BIMcloud dependencies. No installed APX or PLN changed.",
         "Nine local catalog entries CALLABLE on saved actual NativeDump/Archicad IFC data. Six newly exposed analytical capabilities: NetworkX dependency impact/order with bounded cycle witness, Shapely indexed polygon holes/contact, OR-Tools CP-SAT explicit integer assignment, IfcOpenShell selector/property sets, schema/optional EXPRESS validation, kernel world-coordinate bounds/area/volume. Three old APA utilities gain shared catalog access without new algorithms: NativeDump normalization, planar BREP quantities, IFC exchange facts. Typed source/results, idempotent attachment, immutable source/contract checks and lazy installed dependencies. Local domain is separate from native runtime and grants no model write permission.",
         "Existing BIM Graph passes normalized elements directly to quantity adapter; typed IFC selection to geometry preparation and existing Knowledge Graph selection verified. Archived126-element NativeDump:25 planar quantities,22 NOT_VERIFIED,79 no body. Actual IFC:9 walls selected, schema valid,3 positive geometry volumes/bounds,6 void relations,19 material assignments,0 analytical members. No fresh native model readback or engineering/normative/SAF acceptance. 377 prepared entries=368 native/official/source+9 local;337 last-verified original compatible contracts retained,31 native source contracts lack current runtime. Source hashes normalize CRLF/LF while binary/proof hashes use actual bytes.",
-        "All32 non-Tapir APX remain without independent public command contract. Bounded existing inventory mapped supported subsets to existing SDK/JSON providers and new local IFC modules, without internal ABI calls or false vendor integration.848 inventoried SDK declarations are not848commands. Schedule rows, complex Shell/Railing/CurtainWall memo/factories, closed-format/vendor/energy/AI interfaces and native SAF remain explicit gaps; old Roof Surface/Stair/MEP/S10 evidence retained. Windows CI PASS at exact a444d5a6b481bfabd9c48f23c17df05c51ab0ea4. Code15-file byte readback and canonical report/receipt verified. A11.S03 PARTIAL, A07 dependencies/history unchanged. Next: approved bounded candidate registration and selected read-only SDK/DevKit probes, then remaining useful complex memo/dependency adapters through the same executor; no repeat WallWindow or broad native geometry tests."
+        "All32 non-Tapir APX remain without independent public command contract. Bounded existing inventory mapped supported subsets to existing SDK/JSON providers and new local IFC modules, without internal ABI calls or false vendor integration.848 inventoried SDK declarations are not848commands. Schedule rows, complex Shell/Railing/CurtainWall memo/factories, closed-format/vendor/energy/AI interfaces and native SAF remain explicit gaps; old Roof Surface/Stair/MEP/S10 evidence retained. Windows CI PASS at exact a444d5a6b481bfabd9c48f23c17df05c51ab0ea4. Code15-file byte readback and canonical report/receipt verified. A11.S03 PARTIAL, A07 dependencies/history unchanged. Next: approved bounded candidate registration and selected read-only SDK/DevKit probes, then remaining useful complex memo/dependency adapters through the same executor; no repeat WallWindow or broad native geometry tests.",
+        "Current user priority after PR88: six SDK/DevKit runtime registration/read probes, atomic provider/schema registration fixes from PR87, then additional useful SDK module groups. Preserve existing executor and defer broad native BIM tests. Experimental APX replacement requires specific authorization if outside earlier test scope."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "work-sdk-runtime-integration-20261014",
+      "lease_until": "2026-10-15T02:59:51Z",
+      "claim_ref": "APA-CLAIM-SDK-RUNTIME-20261014T225951Z",
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
