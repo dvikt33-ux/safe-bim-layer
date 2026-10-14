@@ -95,8 +95,11 @@ def apply(addon_source):
             auto error = ApplyRoofDetails (element, &mask, item, stories, changed);'''
     if block.count(anchor)!=1:raise ValueError('ROOF_MODIFY_IMPLEMENTATION_CHANGED')
     block=block.replace(anchor,replacement,1)
-    block=block.replace('''                ACAPI_Element_GetMemo (element.header.guid, &memo);''','''                // Build new contour handles; never reuse mismatched edge arrays.
-                if (!isSinglePlane) ACAPI_Element_GetMemo (element.header.guid, &memo);''',1)
+    block=block.replace('''                ACAPI_Element_GetMemo (element.header.guid, &memo);''','''                // Preserve native polygon IDs; rebuild GetMemo-owned buffers safely.
+                if (ACAPI_Element_GetMemo (element.header.guid, &memo) != NoError) {
+                    results.Push (CreateFailedExecutionResult (APIERR_BADPARS, "Roof memo unavailable."));
+                    continue;
+                }''',1)
     block=block.replace('''auto error = BuildRoofMemoFromGeometry (element, memo, polygonOutline, polygonArcs, holes);''','''auto error = isSinglePlane
                     ? BuildPlaneRoofMemoFromGeometry (element, memo, polygonOutline, polygonArcs, holes)
                     : BuildRoofMemoFromGeometry (element, memo, polygonOutline, polygonArcs, holes);''',1)
@@ -108,9 +111,27 @@ def apply(addon_source):
     start=text.index('GS::Optional<GS::UniString> BuildPlaneRoofMemoFromGeometry')
     end=text.index('\n}\n',start)
     block=text[start:end]
+    allocation_start=block.index('    memo.coords = reinterpret_cast<API_Coord**>')
+    allocation_end=block.index('    Int32 iCoord = 1;',allocation_start)
+    allocations='''    if (memo.coords != nullptr &&
+        ((BMGetHandleSize (reinterpret_cast<GSHandle> (memo.coords)) / sizeof (API_Coord)) != nCoords + 1 ||
+         memo.pends == nullptr || (BMGetHandleSize (reinterpret_cast<GSHandle> (memo.pends)) / sizeof (Int32)) != nSubPolys + 1))
+        return "Roof contour topology change requires qualified native polygon ID remapping.";
+    if (memo.coords != nullptr) BMKillHandle (reinterpret_cast<GSHandle*> (&memo.coords));
+    if (memo.pends != nullptr) BMKillHandle (reinterpret_cast<GSHandle*> (&memo.pends));
+    if (memo.parcs != nullptr) BMKillHandle (reinterpret_cast<GSHandle*> (&memo.parcs));
+    memo.coords = reinterpret_cast<API_Coord**> (BMAllocateHandle ((nCoords + 1) * sizeof (API_Coord), ALLOCATE_CLEAR, 0));
+    memo.pends = reinterpret_cast<Int32**> (BMAllocateHandle ((nSubPolys + 1) * sizeof (Int32), ALLOCATE_CLEAR, 0));
+    if (nArcs > 0) memo.parcs = reinterpret_cast<API_PolyArc**> (BMAllocateHandle (nArcs * sizeof (API_PolyArc), ALLOCATE_CLEAR, 0));
+    if (memo.coords == nullptr || memo.pends == nullptr || (nArcs > 0 && memo.parcs == nullptr)) return "Roof polygon allocation failed.";
+
+'''
+    block=block[:allocation_start]+allocations+block[allocation_end:]
     index=block.rfind('    return {};')
     if index<0:raise ValueError('ROOF_MEMO_RETURN_CHANGED')
-    edge='''    memo.edgeTrims = reinterpret_cast<API_EdgeTrim**> (BMAllocateHandle ((nCoords + 1) * sizeof (API_EdgeTrim), ALLOCATE_CLEAR, 0));
+    edge='''    if (memo.edgeTrims != nullptr) BMKillHandle (reinterpret_cast<GSHandle*> (&memo.edgeTrims));
+    if (memo.sideMaterials != nullptr) BMKillPtr (reinterpret_cast<GSPtr*> (&memo.sideMaterials));
+    memo.edgeTrims = reinterpret_cast<API_EdgeTrim**> (BMAllocateHandle ((nCoords + 1) * sizeof (API_EdgeTrim), ALLOCATE_CLEAR, 0));
     memo.sideMaterials = reinterpret_cast<API_OverriddenAttribute*> (BMAllocatePtr ((nCoords + 1) * sizeof (API_OverriddenAttribute), ALLOCATE_CLEAR, 0));
     if (memo.edgeTrims == nullptr || memo.sideMaterials == nullptr) return "Roof edge allocation failed.";
     for (Int32 i = 1; i <= nCoords; ++i) {
