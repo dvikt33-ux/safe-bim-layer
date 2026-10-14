@@ -1,10 +1,17 @@
-import unittest,sys,copy
+import unittest,sys,copy,tempfile
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 import archicad_project_accelerator as A
 import test_archicad_mass_capabilities as M
 
 class ExecutableWorkflowTests(unittest.TestCase):
+    def test_tool_summaries_preserve_existing_kg_diversity_without_hiding_tools(self):
+        r=M.MassTests().router()
+        with tempfile.TemporaryDirectory() as folder:
+            r.index(Path(folder)/'summaries.md',Path(folder)/'existing-kg.sqlite3')
+            tools=A.native_task_tools(r,Path(folder)/'existing-kg.sqlite3','source consume')
+            self.assertEqual({hit['command'] for hit in tools['matches']['results']},{'GetSource','Consume'})
+
     def test_source_policy_rebinds_only_identical_contracts(self):
         r=M.MassTests().router();manifest=dict(catalogHash='old-project',operations={'GetSource':dict(kind='READ_ONLY',impact='READ_ONLY',evidence=dict(source='reviewed implementation',sha256='1'*64))},contractHashes={'GetSource':r.contract_hash('GetSource')})
         r.load_policies(manifest);r.catalog['commands']['GetSource']['version']='changed'

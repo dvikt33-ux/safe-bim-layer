@@ -11,6 +11,7 @@ import json
 import textwrap
 import typing
 import hashlib
+import re
 from pathlib import Path
 import archicad_batch_contracts as CONTRACTS
 
@@ -160,18 +161,32 @@ class DynamicCommands:
         row=copy.deepcopy(self.catalog['commands'][command]);row.update(effect=self.operation_kind(command),policy=copy.deepcopy(self.policies.get(command)),status='LIVE_VERIFIED' if command in self.live else 'CALLABLE_VERIFIED' if command in self.callable else 'BLOCKED' if self.registration.get(command) is False else 'SCHEMA_VALID',catalogDiscovered=True,routable=True,runtimeRegistered=self.registration.get(command),catalogHash=self.fingerprint)
         return row
 
-    def index(self,markdown,db):
+    def index(self,markdown,db,command_documents=True):
         """Reuse the unchanged Knowledge Graph section index, with summaries only."""
         from archicad_knowledge_access import components
-        text=['# APA registered command catalog']
+        text=['# APA registered command catalog'];documents=[]
+        directory=Path(markdown).with_suffix('')
+        if command_documents:directory.mkdir(parents=True,exist_ok=True)
         for name,row in sorted(self.catalog['commands'].items()):
-            text.extend(['## '+name,row['category']+' / '+self.operation_kind(name)+' / '+row.get('description','')[:700]])
+            summary=row['category']+' / '+self.operation_kind(name)+' / '+row.get('description','')[:700]
+            policy=self.policies.get(name,{})
+            if policy.get('possibleSideEffects'):summary+='\nSide effects: '+policy['possibleSideEffects']
+            text.extend(['## '+name,summary])
+            if command_documents:
+                words=re.sub(r'([a-z0-9])([A-Z])',r'\1 \2',name).replace('.',' ')
+                path=directory/(hashlib.sha256(name.encode()).hexdigest()+'.md');path.write_text('# '+name+' | '+words+'\n\n'+summary+'\n',encoding='utf8');documents.append(path)
         Path(markdown).write_text('\n\n'.join(text),encoding='utf8')
-        return components()['sections'].build([Path(markdown)],Path(db))
+        # Existing KG keeps one hit per document. One command summary per
+        # document preserves that policy without hiding all but one tool.
+        return components()['sections'].build(documents or [Path(markdown)],Path(db))
 
     def search(self,db,query,limit=5):
         from archicad_knowledge_access import components
-        return components()['sections'].search(Path(db),query,limit=min(limit,10),max_snippet=220)
+        result=components()['sections'].search(Path(db),query,limit=min(limit,10),max_snippet=220)
+        for hit in result.get('results',[]):
+            command=hit.get('heading','').split(' | ',1)[0]
+            if command in self.catalog['commands']:hit['command']=command
+        return result
 
     def prepare(self,command,parameters):
         if self.A.RUN.digest(self.catalog)!=self.fingerprint:raise ValueError('CATALOG_CONTENT_DRIFT')

@@ -3649,7 +3649,8 @@
     "apiCalls": 318,
     "transportSeconds": 49.20170319981116,
     "transportReadAndVerifySeconds": 22.497192299808376,
-    "manualSpeedup": "NOT_MEASURED"
+    "manualSpeedup": "NOT_MEASURED",
+    "nativeEvidenceSpanSeconds": 58.132713
   },
   "engineering": "NOT_VERIFIED",
   "APXchanged": false,
@@ -3832,5 +3833,546 @@
     "Tapir classification output flattens classificationId; reuse official typed getter, no APX repair"
   ],
   "otherRuntimeQueryBlocker": "GetElementTrims for Walls returns native error-2130313103; not a successful general query; source effect classification remains read-only",
-  "candidateSDK": "NOT_LOADED_NO_APX_CHANGES"
+  "candidateSDK": "NOT_LOADED_NO_APX_CHANGES",
+  "naturalTaskToolSelection": {
+    "status": "EXISTING_KG_NATURAL_LANGUAGE_TOOL_SELECTION_PASS",
+    "request": "Create wall and window, change height and material, classify and set properties, move and copy, delete temporary elements",
+    "GPTDecomposedQueries": [
+      "Creates Wall",
+      "Creates Window",
+      "wall height building material",
+      "element classifications",
+      "property values",
+      "move copy elements",
+      "delete elements"
+    ],
+    "results": [
+      {
+        "request": "Creates Wall",
+        "matches": {
+          "status": "OK",
+          "count": 5,
+          "results": [
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "CreateWallThicknessDimensions | Create Wall Thickness Dimensions",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "1fd8c20ae49d9ebbe186d7c8f07ae87ea94b6e47a23b101f958fde7074f89f53",
+              "excerpt": "Element Commands / CREATE / Creates associative wall thickness dimensions for the given walls.",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "CreateWallThicknessDimensions"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "CreateWalls | Create Walls",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "4d2bb78f514015f9d420b9a4dc083eb9aa135da3f07dc389e90e14248a68f256",
+              "excerpt": "Element Commands / CREATE / Creates Wall elements based on the given parameters.",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "CreateWalls"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "ModifyWalls | Modify Walls",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "151e39f9f0e69d430ffca8c3a26968945236ed0d6f6956448c717a42d602b391",
+              "excerpt": "Element Commands / MODIFY / Modifies Wall elements based on the given parameters.",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "ModifyWalls"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "CreateAssociativeDimensionsOnSection | Create Associative Dimensions On Section",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "00d3bafd8756be2a37831792423d696eaa286c2eadce0c22f45c1f64651acc16",
+              "excerpt": "Element Commands / CREATE / Creates associative linear dimensions on section elements using common wall, slab, beam, column and opening presets. The preset points of multiple section elements can be \u2026",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "CreateAssociativeDimensionsOnSection"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "GetConnectedElements | Get Connected Elements",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "04fa01785400286240be1d947d1df00391102085256193919cc75da23670397a",
+              "excerpt": "\u2026 for example the Windows or Doors of a Wall, the frames, panels, junctions and accessories of a Curtain Wall, the risers, treads and structures of a Stair, or \u2026",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "GetConnectedElements"
+            }
+          ],
+          "query_type": "LEXICAL_OR_FTS5",
+          "source_class_filter": null,
+          "diversity_policy": "ONE_BEST_SECTION_PER_DOCUMENT",
+          "ranking": "BM25_HEADING_X9",
+          "source_byte_readback": "MATCH_FOR_RETURNED_HITS",
+          "source_manifest_check": "PATH_SIZE_MTIME_MATCH",
+          "warning": "Exact source blob/edition/readback and applicability must be verified before use"
+        },
+        "schemaAccess": "router.select(command)",
+        "executionPermission": false
+      },
+      {
+        "request": "Creates Window",
+        "matches": {
+          "status": "OK",
+          "count": 5,
+          "results": [
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "GetCurrentWindowType | Get Current Window Type",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "d0111b72e0703bdb301987706d8bcb82c9db7a0688d66c7856ea5b49b81c9e71",
+              "excerpt": "Application Commands / READ_ONLY / Returns the type of the current (active) window.",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "GetCurrentWindowType"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "ChangeWindow | Change Window",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "b98a83adc4ac43b0f5d3239bff79638f6329edd55454725803ce7a111f74ee23",
+              "excerpt": "Application Commands / SERVICE / Changes the current (active) window to the given window.\r Side effects: Session/UI effect. Quit closes instance; user input/modal can block JSON queue; views \u2026",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "ChangeWindow"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "FitInWindow | Fit In Window",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "a91809b68124798e688eaaf35688d07b5a62f3e1e877fee6468734188a2db367",
+              "excerpt": "Navigator Commands / SERVICE / Zooms to the given elements or fits everything in the window.\r Side effects: Session/UI effect. Quit closes instance; user input/modal can block JSON \u2026",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "FitInWindow"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "CreateWindows | Create Windows",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "08fe7d038915dc65ac196e7305ef1f2003999ce8a1b815d01d13030f8fadf276",
+              "excerpt": "Element Commands / CREATE / Creates Window elements in host walls based on the given parameters.",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "CreateWindows"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "ModifyWindows | Modify Windows",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "d85c9207eb9dde561bc8b52b1ff61dd87afd9e5bf51a3cfe1769a3162f74e0b9",
+              "excerpt": "Element Commands / MODIFY / Modifies Window elements based on the given parameters.",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "ModifyWindows"
+            }
+          ],
+          "query_type": "LEXICAL_OR_FTS5",
+          "source_class_filter": null,
+          "diversity_policy": "ONE_BEST_SECTION_PER_DOCUMENT",
+          "ranking": "BM25_HEADING_X9",
+          "source_byte_readback": "MATCH_FOR_RETURNED_HITS",
+          "source_manifest_check": "PATH_SIZE_MTIME_MATCH",
+          "warning": "Exact source blob/edition/readback and applicability must be verified before use"
+        },
+        "schemaAccess": "router.select(command)",
+        "executionPermission": false
+      },
+      {
+        "request": "wall height building material",
+        "matches": {
+          "status": "OK",
+          "count": 5,
+          "results": [
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "GetBuildingMaterialPhysicalProperties | Get Building Material Physical Properties",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "317da74eb63bc4effd39ac96fba5070b2630890cb81dc71818aa61f733e8a0d7",
+              "excerpt": "Attribute Commands / READ_ONLY / Retrieves the physical properties of the given Building Materials.",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "GetBuildingMaterialPhysicalProperties"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "API.GetBuildingMaterialAttributes | API Get Building Material Attributes",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "4366e590786cdcb920fa8b28dae9622c4a997354866da45c9af6e96c5c60d1ed",
+              "excerpt": "Official JSON API / READ_ONLY / Returns the detailed building material attributes identified by their GUIDs.\r \r Args:\r     attributeIds (:obj:`list` of :obj:`AttributeIdWrapperItem`): A list of attribute identifiers.\r \r\u2026",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "API.GetBuildingMaterialAttributes"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "GetBuildingMaterials | Get Building Materials",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "323d195624182dca19cac3f86fdddcc34b509e45dc8ce3253a5db2fdcd4bc147",
+              "excerpt": "Attribute Commands / READ_ONLY / Returns the details of the given Building Material attributes.",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "GetBuildingMaterials"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "CreateBuildingMaterials | Create Building Materials",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "37073282afd8bc7eed8d234058ed667266d6b6f986197efd3814552a93e68cd4",
+              "excerpt": "Attribute Commands / CREATE / Creates or overwrites Building Material attributes based on the given parameters.",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "CreateBuildingMaterials"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "CreateWallThicknessDimensions | Create Wall Thickness Dimensions",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "1fd8c20ae49d9ebbe186d7c8f07ae87ea94b6e47a23b101f958fde7074f89f53",
+              "excerpt": "Element Commands / CREATE / Creates associative wall thickness dimensions for the given walls.",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "CreateWallThicknessDimensions"
+            }
+          ],
+          "query_type": "LEXICAL_OR_FTS5",
+          "source_class_filter": null,
+          "diversity_policy": "ONE_BEST_SECTION_PER_DOCUMENT",
+          "ranking": "BM25_HEADING_X9",
+          "source_byte_readback": "MATCH_FOR_RETURNED_HITS",
+          "source_manifest_check": "PATH_SIZE_MTIME_MATCH",
+          "warning": "Exact source blob/edition/readback and applicability must be verified before use"
+        },
+        "schemaAccess": "router.select(command)",
+        "executionPermission": false
+      },
+      {
+        "request": "element classifications",
+        "matches": {
+          "status": "OK",
+          "count": 5,
+          "results": [
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "SetClassificationsOfElements | Set Classifications Of Elements",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "927645c3bd111d84b7e260655d69b519a3547e29c9abbf1762b7a228a97e958a",
+              "excerpt": "Classification Commands / MODIFY / Sets the classifications of elements. In order to set the classification of an element to unclassified, omit the classificationItemId field. It works for subelements of \u2026",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "SetClassificationsOfElements"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "API.SetClassificationsOfElements | API Set Classifications Of Elements",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "e42655a7b6bacf87535f00605f6cd7559bdc70e34fde2a9c4da24eefbc6f145c",
+              "excerpt": "Official JSON API / MODIFY / Sets the classifications of elements. In order to set the classification of an element to unclassified, omit the classificationItemId field.\r \r Args:\r     elementClassifications (:obj:`list \u2026",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "API.SetClassificationsOfElements"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "GetClassificationsOfElements | Get Classifications Of Elements",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "f694248e5b11462cf7f048bf84e39479e90fb2163aa94202e84d21638e396b21",
+              "excerpt": "Classification Commands / READ_ONLY / Returns the classification of the given elements in the given classification systems. It works for subelements of hierarchal elements also.",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "GetClassificationsOfElements"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "API.GetClassificationsOfElements | API Get Classifications Of Elements",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "782e4c6b548e28f8ae310bb94dd6d73f40e60abb89eb6f3df07ca7b546781b2e",
+              "excerpt": "\u2026 A list of element classification identifiers or errors.",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "API.GetClassificationsOfElements"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "API.GetAllClassificationsInSystem | API Get All Classifications In System",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "c7142ddb95036e7619ca2ef1f4285efd4fc9d3cf52b32ad21ee92b80f6ad0833",
+              "excerpt": "Official JSON API / READ_ONLY / Returns the tree of classifications in the given classification system.\r \r Args:\r     classificationSystemId (:obj:`ClassificationSystemId`): The identifier of a classification system.\r \r\u2026",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "API.GetAllClassificationsInSystem"
+            }
+          ],
+          "query_type": "LEXICAL_OR_FTS5",
+          "source_class_filter": null,
+          "diversity_policy": "ONE_BEST_SECTION_PER_DOCUMENT",
+          "ranking": "BM25_HEADING_X9",
+          "source_byte_readback": "MATCH_FOR_RETURNED_HITS",
+          "source_manifest_check": "PATH_SIZE_MTIME_MATCH",
+          "warning": "Exact source blob/edition/readback and applicability must be verified before use"
+        },
+        "schemaAccess": "router.select(command)",
+        "executionPermission": false
+      },
+      {
+        "request": "property values",
+        "matches": {
+          "status": "OK",
+          "count": 5,
+          "results": [
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "SetPropertyValuesOfAttributes | Set Property Values Of Attributes",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "5401b19f60a75c4cc3d07336584a3441964ee1b1514591f7be989cc6ca6b60ac",
+              "excerpt": "Property Commands / MODIFY / Sets the property values of attributes.",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "SetPropertyValuesOfAttributes"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "GetPropertyValuesOfAttributes | Get Property Values Of Attributes",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "ae07ea9f1dc70fb70c18321cdd41f7115e0f3d5537fe68297125f03d7d264e4d",
+              "excerpt": "Property Commands / READ_ONLY / Returns the property values of the attributes for the given property.",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "GetPropertyValuesOfAttributes"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "SetPropertyValuesOfElements | Set Property Values Of Elements",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "7b6012a8cc1a0d724c53c9910820197e442cdb2e969a9fd3f0481a01b803194c",
+              "excerpt": "Property Commands / MODIFY / Sets the property values of elements. It works for subelements of hierarchal elements also.",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "SetPropertyValuesOfElements"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "GetPropertyValuesOfElements | Get Property Values Of Elements",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "042c9e5a31b8663f12b10157d33ef10bf211809f5306de00cfb2ed4abfd9ffd8",
+              "excerpt": "Property Commands / READ_ONLY / Returns the property values of the elements for the given property. It works for subelements of hierarchal elements also.",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "GetPropertyValuesOfElements"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "API.SetPropertyValuesOfElements | API Set Property Values Of Elements",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "9d5bbe0c229d59db311962d96306f3bffa4c495ef23be8126588d704efe30bdc",
+              "excerpt": "Official JSON API / MODIFY / Sets the property values of elements.\r \r Args:\r     elementPropertyValues (:obj:`list` of :obj:`ElementPropertyValue`): A list of element property values.\r \r Returns:\r     :obj:`list` of :ob\u2026",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "API.SetPropertyValuesOfElements"
+            }
+          ],
+          "query_type": "LEXICAL_OR_FTS5",
+          "source_class_filter": null,
+          "diversity_policy": "ONE_BEST_SECTION_PER_DOCUMENT",
+          "ranking": "BM25_HEADING_X9",
+          "source_byte_readback": "MATCH_FOR_RETURNED_HITS",
+          "source_manifest_check": "PATH_SIZE_MTIME_MATCH",
+          "warning": "Exact source blob/edition/readback and applicability must be verified before use"
+        },
+        "schemaAccess": "router.select(command)",
+        "executionPermission": false
+      },
+      {
+        "request": "move copy elements",
+        "matches": {
+          "status": "OK",
+          "count": 5,
+          "results": [
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "MoveElements | Move Elements",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "acddd0f587ffbedb68dca898568dd5af40d73492485d21cb75155bb0f10c3e84",
+              "excerpt": "Element Commands / MODIFY / Moves elements with a given vector.",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "MoveElements"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "MoveElementsToDesignOptions | Move Elements To Design Options",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "cc6d390743d157e92eabe3df72e7f8376068cd95c8b39a59aa8c023c18517949",
+              "excerpt": "Design Options Commands / MODIFY / Moves the given elements into the given design options. Use NULLGuid for design option to remove the element from any design options and move \u2026",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "MoveElementsToDesignOptions"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "MoveNavigatorItem | Move Navigator Item",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "8c967ab1fa03b8950a36a4399d029afedc6a2779615cc6fc099cae513ed1cbfc",
+              "excerpt": "Navigator Commands / MODIFY / Moves a navigator item to a new parent in the navigator tree.",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "MoveNavigatorItem"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "MoveDesignOptionsToAnotherSet | Move Design Options To Another Set",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "bbd7447722133b1f7191240bc8e52c47a3b03cb1675e3b92f56181bd2624a350",
+              "excerpt": "Design Options Commands / MODIFY / Moves the given design options to another sets. Available from Archicad 29.",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "MoveDesignOptionsToAnotherSet"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "API.MoveAttributesAndFolders | API Move Attributes And Folders",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "8f82c4804fb548918a77dd832fd9a45696c7f146f705251b5f4c19f0d677d775",
+              "excerpt": "Official JSON API / MODIFY / Moves attributes and attribute folders.\r \r Args:\r     attributeFolderIds (:obj:`list` of :obj:`AttributeFolderIdWrapperItem`): A list of attribute folder identifiers.\r     attributeIds (:obj\u2026",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "API.MoveAttributesAndFolders"
+            }
+          ],
+          "query_type": "LEXICAL_OR_FTS5",
+          "source_class_filter": null,
+          "diversity_policy": "ONE_BEST_SECTION_PER_DOCUMENT",
+          "ranking": "BM25_HEADING_X9",
+          "source_byte_readback": "MATCH_FOR_RETURNED_HITS",
+          "source_manifest_check": "PATH_SIZE_MTIME_MATCH",
+          "warning": "Exact source blob/edition/readback and applicability must be verified before use"
+        },
+        "schemaAccess": "router.select(command)",
+        "executionPermission": false
+      },
+      {
+        "request": "delete elements",
+        "matches": {
+          "status": "OK",
+          "count": 5,
+          "results": [
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "DeleteElements | Delete Elements",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "603a1fce1da0107f5784bc0136b65fcb024840767ba9db801447b7343b064c01",
+              "excerpt": "Element Commands / DELETE / Deletes elements. Returns an execution result for each input element: an element that could not be deleted (for example because its layer is locked) gets \u2026",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "DeleteElements"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "DeleteFavorites | Delete Favorites",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "9bb311f20ab4feb632a881f2f94205c4cf4c09ed3f592ff2c6812eb2156dbc45",
+              "excerpt": "Favorites Commands / DELETE / Delete existing favorites.",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "DeleteFavorites"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "DeleteAttributes | Delete Attributes",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "62b91d20410412f0848e18c6c9a40d83c8574e5c605339a9ff9a9e4f1726a54c",
+              "excerpt": "Attribute Commands / DELETE / Deletes the given attributes.",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "DeleteAttributes"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "DeleteIssue | Delete Issue",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "2b334745184069411787d7290a6dca610c4b41d46ec0620f449e56f7ea17e0da",
+              "excerpt": "Issue Management Commands / DELETE / Deletes the specified issue.",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "DeleteIssue"
+            },
+            {
+              "path": "PRIVATE_SOURCE_LOCATION_REDACTED",
+              "heading": "DeleteClassificationItems | Delete Classification Items",
+              "line": 1,
+              "source_class": "OTHER_DOCUMENT",
+              "source_sha256": "6f2728d7919e6c70bc06e4017273be144e4e7a6e670a5771dd59d3ced9b00e96",
+              "excerpt": "Classification Commands / DELETE / Deletes the given Classification Items.",
+              "relation": "LEXICAL_RETRIEVAL_NOT_VERIFIED_FACT",
+              "command": "DeleteClassificationItems"
+            }
+          ],
+          "query_type": "LEXICAL_OR_FTS5",
+          "source_class_filter": null,
+          "diversity_policy": "ONE_BEST_SECTION_PER_DOCUMENT",
+          "ranking": "BM25_HEADING_X9",
+          "source_byte_readback": "MATCH_FOR_RETURNED_HITS",
+          "source_manifest_check": "PATH_SIZE_MTIME_MATCH",
+          "warning": "Exact source blob/edition/readback and applicability must be verified before use"
+        },
+        "schemaAccess": "router.select(command)",
+        "executionPermission": false
+      }
+    ],
+    "selected": [
+      "CreateWalls",
+      "CreateWindows",
+      "ModifyWalls",
+      "SetClassificationsOfElements",
+      "SetPropertyValuesOfElements",
+      "MoveElements",
+      "DeleteElements"
+    ],
+    "missing": [],
+    "unchangedSearchEngine": true,
+    "oneCommandSummaryPerDocument": true,
+    "newSearchEngines": 0,
+    "fullSchemasOnlySelected": true,
+    "modelWrites": 0
+  },
+  "journal": {
+    "status": "12_DURABLE_INTENTS_NATIVE_RESULTS_READBACK_PASS",
+    "records": 12,
+    "allStates": "PASS",
+    "oldUnknownRecordsPreserved": 3,
+    "newJournal": false
+  },
+  "callableVerifiedEntirePass": [
+    "API.GetAllClassificationSystems",
+    "API.GetAllClassificationsInSystem",
+    "API.GetAllPropertyNames",
+    "API.GetAttributesByType",
+    "API.GetClassificationsOfElements",
+    "API.GetDetailsOfProperties",
+    "API.GetElementsByType",
+    "API.GetPropertyIds",
+    "API.GetPropertyValuesOfElements",
+    "CreateWalls",
+    "CreateWindows",
+    "DeleteElements",
+    "FilterElements",
+    "GetBuildingMaterials",
+    "GetCollisions",
+    "GetDetailsOfElements",
+    "GetIFCIdsOfElements",
+    "GetMEPElements",
+    "GetStories",
+    "ModifyWalls",
+    "MoveElements",
+    "OpenProject",
+    "SaveProject",
+    "SetClassificationsOfElements",
+    "SetPropertyValuesOfElements"
+  ],
+  "auxiliaryInputQueryEvidence": "Source-reviewed input queries + editableProperty definition + FilterElements; schema/result recordings retained privately. GetElementTrims and Tapir classification failures excluded."
 }

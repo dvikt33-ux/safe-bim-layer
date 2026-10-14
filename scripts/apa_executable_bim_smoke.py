@@ -20,7 +20,7 @@ def run(baseline,inputs,output,journal,effects,authorization,prepare_only=False,
     router=A.native_command_router(b['schemaFile'],ACConnection.connect(b['port']).commands);router.load_policies(effects)
     router.index(out/'selected-tool-index.md',out/'selected-tool-index.sqlite3')
     request='Create a native Wall with a hosted Window in a free test region; edit height, material, surface, classification and ElementID; move and copy; verify IFC/MEP, Save/Open, remove only temporary elements.'
-    selection=A.native_task_tools(router,out/'selected-tool-index.sqlite3','CreateWalls ModifyWalls CreateWindows MoveElements DeleteElements');A.write_json(out/'gpt-tool-selection.json',selection)
+    selection=A.native_task_tools(router,out/'selected-tool-index.sqlite3',request,limit=10);A.write_json(out/'gpt-tool-selection.json',selection)
     selected=['CreateWalls','ModifyWalls','CreateWindows','MoveElements','DeleteElements','SetClassificationsOfElements','SetPropertyValuesOfElements'];A.write_json(out/'selected-schemas.json',{n:router.select(n) for n in selected})
     existing_wall=(reconciled_wall or {}).get('guid','').lower()
     existing_window=(reconciled_window or {}).get('guid','').lower()
