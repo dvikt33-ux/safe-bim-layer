@@ -68,3 +68,11 @@
 - `.github/workflows/apa-mass-parallel-offline.yml`: 8 параллельных Windows шардов + graph + core + static + aggregate.
 
 **GitHub является источником правды**: ссылки на реальные CI run, SHA и коммиты обязательны, локальная работа без публикации не считается законченной. Статус канонической задачи A11.S03 этот QA-проход самостоятельно не изменяет; приёмка результатов производится через существующий реестр.
+
+
+## Верификация публикации следующего коммита Work
+
+Пока выполнялись массовые тесты, Work опубликовал дополнительный head PR #88 `a444d5a6b481bfabd9c48f23c17df05c51ab0ea4`. GitHub compare `07e73f9... → a444d5a...` показывает **ровно один дополнительный коммит, два изменённых файла: `docs/APA_FUNCTIONAL_MODULES.md` и новый `docs/evidence/APA_FUNCTIONAL_MODULE_BUILD.json`**. Никакой Python/C++ исходник или тест не изменён, поэтому результаты массовой проверки кода остаются применимы.
+
+Новый JSON receipt отдельно успешно разобран. Его статус `BUILD_PASS_BINARY_IDENTITY_VERIFIED_NOT_INSTALLED` с 281 source registrations (280 Tapir + 1 DevKit namespace), 5 SDK-контрактами и сохранёнными 12 candidate commands. Однако запись прямо указывает `runtimeRegistration=NOT_VERIFIED` и `liveVerification=NOT_RUN`. Это отчёт о сборке, не доказательство работы с установленным Archicad. На новом SHA также завершился отдельный стандартный Windows CI [#38649371374](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38649371374) со статусом SUCCESS.
+
