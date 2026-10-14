@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 159,
+  "revision": 160,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -1869,6 +1869,60 @@
     "ART-P70-A11-S03-FULL-RECEIPT-20261014": {
       "id": "ART-P70-A11-S03-FULL-RECEIPT-20261014",
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261014-172915Z-full-native-command-roofs.json",
+      "kind": "RECEIPT",
+      "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
+    },
+    "ART-P70-A11-S03-MASS-COUNTS-20261014": {
+      "id": "ART-P70-A11-S03-MASS-COUNTS-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-193327Z-mass-capability-integration/capability-counts.json",
+      "kind": "DATASET",
+      "verification": "363_PREPARED_337_CURRENT_COMPATIBLE_26_SOURCE_ONLY"
+    },
+    "ART-P70-A11-S03-MASS-PROVIDERS-20261014": {
+      "id": "ART-P70-A11-S03-MASS-PROVIDERS-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-193327Z-mass-capability-integration/provider-matrix.json",
+      "kind": "DATASET",
+      "verification": "33_LOADED_APX_32_OTHER_NOT_EXPOSED"
+    },
+    "ART-P70-A11-S03-MASS-HISTORICAL-20261014": {
+      "id": "ART-P70-A11-S03-MASS-HISTORICAL-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-193327Z-mass-capability-integration/historical-providers.json",
+      "kind": "DATASET",
+      "verification": "16_HISTORICAL_PROVIDERS_RECONCILED_ORIGINAL_PRESERVED"
+    },
+    "ART-P70-A11-S03-MASS-WORKFLOW-20261014": {
+      "id": "ART-P70-A11-S03-MASS-WORKFLOW-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-193327Z-mass-capability-integration/connected-workflow.json",
+      "kind": "TEST_RESULT",
+      "verification": "12_STEP_LIVE_15_CALLABLE_4_EFFECTS_258_RETAINED"
+    },
+    "ART-P70-A11-S03-MASS-GAPS-20261014": {
+      "id": "ART-P70-A11-S03-MASS-GAPS-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-193327Z-mass-capability-integration/gap-register.json",
+      "kind": "DATASET",
+      "verification": "S03_PARTIAL_SOURCE_RUNTIME_EFFECTS_VENDOR_CONTRACT_GAPS"
+    },
+    "ART-P70-A11-S03-MASS-CI-20261014": {
+      "id": "ART-P70-A11-S03-MASS-CI-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-193327Z-mass-capability-integration/windows-ci.json",
+      "kind": "TEST_RESULT",
+      "verification": "WINDOWS_CI_PASS_EXACT_HEAD"
+    },
+    "ART-P70-A11-S03-MASS-KG-20261014": {
+      "id": "ART-P70-A11-S03-MASS-KG-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-193327Z-mass-capability-integration/core-knowledge-query.json",
+      "kind": "TEST_RESULT",
+      "verification": "MAIN_ORCHESTRATOR_CURRENT_GITHUB_PLAN_PASS"
+    },
+    "ART-P70-A11-S03-MASS-REPORT-20261014": {
+      "id": "ART-P70-A11-S03-MASS-REPORT-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-14/APA-RUN-20261014-193327Z-mass-capability-integration/REPORT.md",
+      "kind": "REPORT",
+      "verification": "DONE_PUBLISHED_FUNCTIONAL_BLOCK_ONLY"
+    },
+    "ART-P70-A11-S03-MASS-RECEIPT-20261014": {
+      "id": "ART-P70-A11-S03-MASS-RECEIPT-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261014-193327Z-mass-capability-integration.json",
       "kind": "RECEIPT",
       "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
     }
@@ -4446,7 +4500,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -4607,12 +4661,17 @@
         "LIVE geometry/edit/saveOpen: gable2SinglePlaneRoof25to28degrees,hip1MultiPlaneRoof4actualplanes30to35degrees, bothwidth+1m withsameexperimentalGUIDs.1gable3Dridge/solidseam and5hip/ridgejoins,footprinterrorsbelow1e-5m2. SourceBuildingMaterial/thickness/floor/eavedatum preserved. Native3D PASS. Repeatedfinalpitch requests0writes/0duplicates. OriginalsourceRoof+5SEOwalls unchanged; specimensinfreeareas ofsameexistingtestPLN.3newRoofGUIDs,current258,allprevious255geometry/material/story/relationships unchanged afterSave/Open andoriginalAPXindependentread.",
         "OriginalAPXfiles+registrations restoredbyteexact, noTRC/newPLN/main/normative/KGimplementation changes. SourceSurface transfer GableMATCH;HipMultiPlaneoverridesdiffer NOT_VERIFIED, donotinferfromBuildingMaterialPASS. InstalledSetDetailsRoofsurfacesetter absent; nextminimalexistingRoofcontract ispivotPolyEdges/levelEdgeData (APIMemoMask_PivotPolygon), no newSDKengine. NativeBADPOLY/BADPARS andsuccess-withoutpitch outcomes retained; no blindCreate/Modifyreplay.",
         "WindowsCI PASS exact 1c27e7c4b66d5b225724e777719e6a675660494a; local7Roof+3dynamiccritical and15affectedexistingModelFirst tests only. Independentofflineaudit appliesolder3ad9961 snapshot; three historicalYAML parseerrors remain sourceingestionfollowup, notnativeBIMregressions. Publisherreport/evidence/receipt GitHubbyte-readback verified. A11.S03PARTIAL, A11.S10BLOCKED andA07dependencies preserved. Next: exactMultiPlaneSurface transfer, thenadditionalmodel functions viaexistingdynamiccatalog.",
-        "Current user priority: maximum mass capability integration and cross-provider dependency routing first. Roof Surface/Stair/MEP narrow fixes remain registered and deferred unless blocking the common interface. Do not infer native availability or safety from command names or source presence."
+        "Current user priority: maximum mass capability integration and cross-provider dependency routing first. Roof Surface/Stair/MEP narrow fixes remain registered and deferred unless blocking the common interface. Do not infer native availability or safety from command names or source presence.",
+        "PR84 08527c0edde2096cf5d7be534b5e49f5c9038647 atop exact PR82 1c27e7c4b66d5b225724e777719e6a675660494a. MASS capability integration: existing dynamic router now carries provider namespaces, official typed result unions, source snapshots, result-pointer data dependencies compiled by existing BIM Graph and common native facts. No new executor, scheduler, journal, MCP, normative or KnowledgeGraph implementation.",
+        "363unique prepared contracts:264registered originalTapirSDK+73official typed+12candidate-only+14registered DevKit sourceexamples.337current client-compatible; only5official methods called,68not individually runtime-probed.26source-only runtimefalse.15CALLABLE_VERIFIED and4independent LIVE effects thispass; prior16LIVE preserved not recounted.33loadedAPX PE inventory;32other standalone namespaces NOT_EXPOSED.848ACAPI source declarations,7702internalABI exports,2779GDL resources separate fromcommandcount. Alternatives250aliases deduplicated,2fork-only schemas incomplete/runtimeabsent,5MCPbroker tools not new native operations. Historical16provider ledger reconciled, originalsnapshotpreserved; NativeDump andIfcOpenShell stale statuses corrected in derivedledger.",
+        "Actual12step read-only workflow:10Walls GUIDs feed details/bounds/IFC; attributeIDs feed59BuildingMaterials; stories,navigator,MEP,2779libraryObjects queried. Shared NativeDump/IFCBREP/Shapely facts retainGUID,XYZ,stories,materials,relationships. Official9of10Wallboxes differ from actualBREP, bothstored separately; actual resultant nativebody isphysicalauthority, nofalseequality/IFCsemantics. All258accepted signatures unchanged. Existing SceneWriter/SQLite authorizedSaveProject service PASS,0geometrymutations,1journaledservicecall. NoAPXchanges/newPLN/unsafe replay.",
+        "Source-bound effects instead ofname-derived safety:142read,72create,46modify,18delete,7transaction,1service,51UNKNOWNblocked untilreview. Genericwrites require operation-specific preflight and independentreadback, exactidentity/hash, explicitimpact/scope andcompleteaffected/retained inventory. Registrationrechecked atselectedcall, concreteparameters revalidatedafterdataflowbinding. Fullschemas selectedondemand viaexistingKG. Sourceavailability never grantswritepermission.",
+        "WindowsCI PASS exact 08527c0edde2096cf5d7be534b5e49f5c9038647;7localcriticalroutingtests only. Publishedreport/receipt/evidence GitHubbyte-readbackverified. S03PARTIAL; S10/A07dependenciesunchanged. Currentpriority massintegration preserved, narrowRoofSurface/Stair/MEP defects deferred with priorcontext. Next: source-review remaining51UNKNOWN effects and safe category workflows; vendor namespace/MDCLABI/license oraccepted SDKproviders required forremainingexternal gaps."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
-      "owner": "work-mass-capability-integration-20261014",
-      "lease_until": "2026-10-14T22:05:00Z",
-      "claim_ref": "APA-CLAIM-MASS-CAPABILITIES-20261014T180500Z",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
@@ -4772,7 +4831,16 @@
         "ART-P70-A11-S03-FULL-GAPS-20261014",
         "ART-P70-A11-S03-FULL-KG-20261014",
         "ART-P70-A11-S03-FULL-REPORT-20261014",
-        "ART-P70-A11-S03-FULL-RECEIPT-20261014"
+        "ART-P70-A11-S03-FULL-RECEIPT-20261014",
+        "ART-P70-A11-S03-MASS-COUNTS-20261014",
+        "ART-P70-A11-S03-MASS-PROVIDERS-20261014",
+        "ART-P70-A11-S03-MASS-HISTORICAL-20261014",
+        "ART-P70-A11-S03-MASS-WORKFLOW-20261014",
+        "ART-P70-A11-S03-MASS-GAPS-20261014",
+        "ART-P70-A11-S03-MASS-CI-20261014",
+        "ART-P70-A11-S03-MASS-KG-20261014",
+        "ART-P70-A11-S03-MASS-REPORT-20261014",
+        "ART-P70-A11-S03-MASS-RECEIPT-20261014"
       ],
       "blocked_reason": null
     },
@@ -5633,7 +5701,16 @@
         "ART-P70-A11-S03-FULL-GAPS-20261014",
         "ART-P70-A11-S03-FULL-KG-20261014",
         "ART-P70-A11-S03-FULL-REPORT-20261014",
-        "ART-P70-A11-S03-FULL-RECEIPT-20261014"
+        "ART-P70-A11-S03-FULL-RECEIPT-20261014",
+        "ART-P70-A11-S03-MASS-COUNTS-20261014",
+        "ART-P70-A11-S03-MASS-PROVIDERS-20261014",
+        "ART-P70-A11-S03-MASS-HISTORICAL-20261014",
+        "ART-P70-A11-S03-MASS-WORKFLOW-20261014",
+        "ART-P70-A11-S03-MASS-GAPS-20261014",
+        "ART-P70-A11-S03-MASS-CI-20261014",
+        "ART-P70-A11-S03-MASS-KG-20261014",
+        "ART-P70-A11-S03-MASS-REPORT-20261014",
+        "ART-P70-A11-S03-MASS-RECEIPT-20261014"
       ],
       "synthesis_state": "PARTIAL",
       "owner": null

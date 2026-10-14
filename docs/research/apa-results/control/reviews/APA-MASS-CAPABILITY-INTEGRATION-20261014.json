@@ -1,0 +1,20 @@
+{
+  "status": "DONE_PUBLISHED_FUNCTIONAL_BLOCK_S03_PARTIAL",
+  "revision": 160,
+  "codePR": 84,
+  "codeHead": "08527c0edde2096cf5d7be534b5e49f5c9038647",
+  "prepared": 363,
+  "currentCompatible": 337,
+  "tapirRegistered": 264,
+  "officialCalled": 5,
+  "officialUnprobed": 68,
+  "sourceOnly": 26,
+  "callable": 15,
+  "independentLiveEffects": 4,
+  "otherAPXNotExposed": 32,
+  "retained258": true,
+  "geometryWrites": 0,
+  "APXchanged": false,
+  "receiptRun": "APA-RUN-20261014-193327Z-mass-capability-integration",
+  "next": "REVIEW_SOURCE_EFFECTS_AND_COMMON_WORKFLOW_CATEGORY_REPRESENTATIVES"
+}
