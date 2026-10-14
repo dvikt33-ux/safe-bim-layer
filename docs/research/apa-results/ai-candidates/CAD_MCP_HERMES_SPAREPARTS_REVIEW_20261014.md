@@ -1,5 +1,7 @@
 # APA — исследование по скриншоту: Spare Parts 3D, Hermes Agent и CAD MCP
 
+> **Update after independent source review (2026-10-14):** Оценка Boti-Ormandi archicad-mcp понижена с VERY_PROMISING до **PROMISING** для APA: см. [source audit](ARCHICAD_MCP_SOURCE_AUDIT_20261014.md). Этот документ — первичный screening, а не итоговое решение; authoritative rank — `candidates.json`.
+
 **Дата:** 2026-10-14. **Тип:** SOURCE_RESEARCH / proposed candidates. **Статус:** NOT_INSTALLED / NOT_TESTED_WITH_APA. **Источник идеи:** пользовательский скриншот YouTube с надписью SpareParts3D и комментарием «подключил hermes к solidworks через mcp сервер». Заявления автора комментария (6% недельного лимита Claude, «30% быстрее») — **НЕ проверенные независимые измерения, непригодны как benchmark**.
 
 ## 1. Разделить четыре несвязанные вещи
