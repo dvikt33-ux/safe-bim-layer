@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 162,
+  "revision": 163,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -4548,7 +4548,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -4720,12 +4720,13 @@
         "51UNKNOWN boundedsource review:49classified,2remainblocked. GetNativePhysicalGeometry exactimplementation absent;API.ExecuteAddOnCommand arbitraryinnerdispatch remainsUNKNOWN,useproviderqualifiednames.335of337currentstack policies sourceeffectqualified,not335LIVEacceptances. Contracthashes bindexpandedinput/output/provider/version/SDKimplementation yetallowfreshPLNbinding. UI/modal/quit/window/rebuild,externalfiles/printer/notifications/library,Teamwork andcompoundGUIDreplacement sideeffects explicit. Allwrites requireexactscope/identity/hash,operation-specificbefore/after,completepreservation anddurableintent;hostGUIDcannotimplicitlymutateretainedmodel.",
         "LIVEcorrectedcoldscenario17typedgraphsteps/12journaledcalls:8modelmutationrequests+4Save/Openservices.4temporarynativeelements=2Wall+2Window created/copied thenall4deleted. Wall6mx.25m,height2.8to3.1m,Window1.2x1.2m/sill1m;actualnativeMaterial/Surface/classification/ElementID,movement.5m/copy3m,IFCmapping/MEP/collisiondataflow pass. NativeWallroughopening1.35m2 differsfromWindowoverall1.44m2;2holefaces andclosedBREPvolume4.3125m3 agree. Same258original GUID/geometry/material/story/relationships preservedafterSave/Open withtemporarymodel andaftercleanup. NoAPXchange,newPLN/building orengineeringacceptance.",
         "Initial3successfulnativewrites stoppedonreadback/testframework defects;existingWall/Window/classification independentlyreconciled,oldUNKNOWNjournalrecords preservedunchanged,noidenticalCreate/Setreplay. ContinuationsuseprovenGUIDs;thenfreshcorrectedcoldscenario12SQLitePASS. Tapirclassificationoutputschemaflattenswrapper,currentofficialtypedgetterworks. WallGetElementTrims nativeerror-2130313103 remainsNOT_VERIFIED,notpromotedbyreadonlysourceclassification. 25distinctcommandsCALLABLEthispass,16correctedworkflow;9independentwrite/serviceLIVEeffects. Source-only26 andotherAPX32NOT_EXPOSED unchanged;363preparedcontracts preserved.",
-        "Natural-language toolselection verifiedfor7requiredcommands viaexistingKG shortqueries;readablecommandwords/canonicalIDs andonecommanddocument respectexistingdiversitypolicy. Onlyselectedschemas expanded,GPTprovidesgraph,noautonomousNLparser/inventeddimensions. Planpreparation0.186s+0.026s,guardedcycle58.331s,execution35.065s+21.431s,318APIcallsinclcompletepreservationchecks,49.202stransport/22.497sreadverificationtransport. Manualspeedupnotmeasured. WindowsCI PASS exact 45ef6b734e70c0e2c40ea57ed9a0099d70c4a917;localonlycriticalmodifiedtests. Code/report/proof/receipt GitHubbyte-readbackPASS. S03PARTIAL,A07/S10dependenciesunchanged. Next:reusecommonworkflow fornextmodelconstraints andprovideroutputcompatibility throughavailableAPIs;preservenarrowRoofSurface/Stair/MEPdeferredcontext."
+        "Natural-language toolselection verifiedfor7requiredcommands viaexistingKG shortqueries;readablecommandwords/canonicalIDs andonecommanddocument respectexistingdiversitypolicy. Onlyselectedschemas expanded,GPTprovidesgraph,noautonomousNLparser/inventeddimensions. Planpreparation0.186s+0.026s,guardedcycle58.331s,execution35.065s+21.431s,318APIcallsinclcompletepreservationchecks,49.202stransport/22.497sreadverificationtransport. Manualspeedupnotmeasured. WindowsCI PASS exact 45ef6b734e70c0e2c40ea57ed9a0099d70c4a917;localonlycriticalmodifiedtests. Code/report/proof/receipt GitHubbyte-readbackPASS. S03PARTIAL,A07/S10dependenciesunchanged. Next:reusecommonworkflow fornextmodelconstraints andprovideroutputcompatibility throughavailableAPIs;preservenarrowRoofSurface/Stair/MEPdeferredcontext.",
+        "Current user priority: maximum SDK and local module functional expansion and cross-provider dependency routing first. Roof Surface/Stair/MEP narrow fixes remain registered and deferred unless blocking the common interface. Do not infer native availability or safety from command names or source presence."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "work-module-expansion-integration-20261014",
+      "lease_until": "2026-10-15T02:13:58Z",
+      "claim_ref": "APA-CLAIM-SDK-MODULE-EXPANSION-20261014T221358Z",
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
