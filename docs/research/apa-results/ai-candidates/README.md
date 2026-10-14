@@ -21,6 +21,7 @@
 - [CAD_MCP_HERMES_SPAREPARTS_REVIEW_20261014.md](CAD_MCP_HERMES_SPAREPARTS_REVIEW_20261014.md) — Hermes Agent / SolidWorks MCP / новый Archicad MCP и Spare Parts 3D: пригодность, платность, схема native readback и безопасность скриптов.
 - [ARCHICAD_MCP_SOURCE_AUDIT_20261014.md](ARCHICAD_MCP_SOURCE_AUDIT_20261014.md) — статический аудит исходного кода Archicad MCP по commit SHA, риски, проверка перекрытия с APA и план безопасного read-only эксперимента.
 - [FINCH3D_AC29_LICENSE_AND_REUSE_AUDIT_20261015.md](FINCH3D_AC29_LICENSE_AND_REUSE_AUDIT_20261015.md) — официальные цены Finch, бесплатный Free-редактор, Archicad 29 beta plug-in, ограничения AI-генерации и применимость Adaptive Plan Library к APA.
+- [ARCHITECHTURES_OPEN_SOURCE_REUSE_AUDIT_20261015.md](ARCHITECHTURES_OPEN_SOURCE_REUSE_AUDIT_20261015.md) — ARCHITEChTURES (закрытая система, тарифы, генерация/парковки) и 10 исследованных кодовых баз: разрешённое reuse, лицензии, входы/выходы, антидублирование и минимальные критерии проверки.
 - Документы контроля APA: [controller](../control/README.md) и [канонический исследовательский журнал](../README.md).
 
 ## Ограничения пользователя
