@@ -11,6 +11,7 @@ import math
 import random
 import sys
 import unittest
+from jsonschema.exceptions import ValidationError
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -195,7 +196,7 @@ def contract_immutability_case(name,variant):
         if variant==0:mutated["nativeWritePermission"]=True
         elif variant==1:mutated["parameters"]["untrusted"]=123
         elif variant==2:mutated["catalogHash"]="0"*64
-        with self.assertRaises((ValueError,KeyError)):
+        with self.assertRaises((ValueError,KeyError,ValidationError)):
             self.router.validate(mutated)
         self.router.validate(t)
     return test
