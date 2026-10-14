@@ -237,5 +237,81 @@ class IndependentProviderAuditTests(unittest.TestCase):
         Draft202012Validator(schema).validate(r._schema_example(schema))
 
 
+
+    def test_later_provider_registration_invalidates_old_ticket(self):
+        r = self.router()
+        existing = r.prepare("GetSource", {})
+        r.add_provider("Vendor", {"Call": {
+            "version": "1", "category": "Test", "parameters": {"type": "object"},
+            "returns": {"type": "object"}
+        }}, "synthetic registered namespace")
+        with self.assertRaises(ValueError):
+            r.validate(existing)
+
+    def test_nonboolean_runtime_registration_rejected(self):
+        r = self.router()
+        with self.assertRaises(ValueError):
+            r.register_availability("GetSource", 1)
+
+    def test_broken_provider_reference_does_not_prepare(self):
+        r = self.router()
+        r.add_provider("Vendor", {"Call": {
+            "version": "1", "category": "Test", "parameters": {"$ref": "#/Missing"},
+            "returns": {"type": "object"}
+        }}, "synthetic incomplete schema")
+        with self.assertRaises(Exception):
+            r.prepare("AddOn.Vendor.Call", {})
+
+    @unittest.expectedFailure
+    def test_known_gap_failed_duplicate_registration_is_not_atomic(self):
+        r = self.router()
+        def entry():
+            return {"Call": {
+                "version": "1", "category": "Test",
+                "parameters": {"$ref": "#/Payload"}, "returns": {"type": "object"},
+            }}
+        r.add_provider("Vendor", entry(), "source-a", {
+            "Payload": {"type": "object", "properties": {
+                "amount": {"type": "integer"}}, "required": ["amount"]},
+        })
+        before = copy.deepcopy(r.catalog)
+        fingerprint = r.fingerprint
+        with self.assertRaises(ValueError):
+            r.add_provider("Vendor", entry(), "source-b", {
+                "Payload": {"type": "object", "properties": {
+                    "amount": {"type": "string"}}, "required": ["amount"]},
+            })
+        self.assertEqual(r.catalog, before)
+        self.assertEqual(r.fingerprint, fingerprint)
+        r.prepare("AddOn.Vendor.Call", {"amount": 2})
+
+    @unittest.expectedFailure
+    def test_known_gap_ambiguous_schema_namespace_collides(self):
+        r = self.router()
+        def entry(name, reference):
+            return {name: {
+                "version": "1", "category": "Test",
+                "parameters": {"$ref": "#/" + reference},
+                "returns": {"type": "object"},
+            }}
+        r.add_provider("A__B", entry("Call", "C"), "first source", {
+            "C": {"type": "object", "properties": {
+                "amount": {"type": "integer"}}, "required": ["amount"]},
+        })
+        r.prepare("AddOn.A__B.Call", {"amount": 2})
+        r.add_provider("A", entry("Other", "B__C"), "second source", {
+            "B__C": {"type": "object", "properties": {
+                "amount": {"type": "string"}}, "required": ["amount"]},
+        })
+        # Provider A's schema must not silently retype provider A__B's input.
+        r.prepare("AddOn.A__B.Call", {"amount": 2})
+
+    @unittest.expectedFailure
+    def test_known_gap_nonabsolute_schema_pointer_accepted(self):
+        r = self.router()
+        schema = {"type": "object", "properties": {"a": {"type": "integer"}}}
+        with self.assertRaises(ValueError):
+            r._schema_at(schema, "a")
+
 if __name__ == "__main__":
     unittest.main()
