@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 147,
+  "revision": 148,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -4350,11 +4350,12 @@
         "Native Grid parameter script uses degrees input while SDK memo uses radians; Object.angle and AC_Angle are distinct.90degrees readback1.570796327radians. Earlier wrong-unit edit remains UNKNOWN_OUTCOME, reconciled by actual read then separate corrective intent. UI-observed owned-axis placement drift corrected after143preservation proof; causeNOT_VERIFIED. JournalPASS59/UNKNOWN4 preserved; no blind repeats/deletions. Existing BIMGraph/SceneWriter and source bindings retained.",
         "Candidate actual moduleSHA8ad672092aa93e4bf1b4d469cbf7840cb60acd538820183bb68d5d6786ea221d and fresh274schema/263oldcommands/new8 verified. Explicitly authorized temporary installed replacement unblocked loading. OriginalAPX SHA dc99af071d3dbcff9626653ccc37001613cb3fa4a8eff50c6000c1cc70e8d7c7 and originalsingle registryvalue restored byte-exact. Post-restoration test-project opening/readback is PENDING_USER_OPEN. New commands are not claimed permanently installed.",
         "Detached Stair3.3m/22risers/0.15m/0.35m source-compatible probe reset connection and Archicad process disappeared. Exactly1Evaluate,0CreateExact/ModifyStair; saved144 bytes unchanged. FailurecauseNOT_VERIFIED. Native baseline local vs request world; qualified frame absent. NewexactStair writes require pinned detached PASS bound to source/target/savedmodel/retainedgeometry/schema; missing/failed/stale proof and knownterminatingcandidate denied. CompletedverifiedSQLite reuse avoids solver/Create. SOURCE_DIMENSION and ENGINEERING_NOT_VERIFIED.",
-        "707/707host and Windows-onlyCI 38485644027 PASS,10newtests,102upstream/coreMCP PASS. HistoricalLinux results preserved. Mainorchestrator KG read current145 before completion146; implementation unchanged. Report/evidence14files/receipt APA-RUN-20261013-234433Z-true-grid-live-stair-runtime GitHubbyte-readback verified. A11.S03PARTIAL, A07 dependencies/S10BLOCKED and other90tasks preserved. TRC excluded; normative/search/documentation implementation untouched. Next: correctedSDK detached memo/base-plane candidate, build then separateauthorization and detachedqualification beforewrite; Roofcontour/slope independent native contracts follow."
+        "707/707host and Windows-onlyCI 38485644027 PASS,10newtests,102upstream/coreMCP PASS. HistoricalLinux results preserved. Mainorchestrator KG read current145 before completion146; implementation unchanged. Report/evidence14files/receipt APA-RUN-20261013-234433Z-true-grid-live-stair-runtime GitHubbyte-readback verified. A11.S03PARTIAL, A07 dependencies/S10BLOCKED and other90tasks preserved. TRC excluded; normative/search/documentation implementation untouched. Next: correctedSDK detached memo/base-plane candidate, build then separateauthorization and detachedqualification beforewrite; Roofcontour/slope independent native contracts follow.",
+        "Resume same-owner native runtime/source-contour work after resource interruption. No competing claim overwritten; temporary review-limit denial executed no test action. Original APX and saved144 preserved; supplemental post-restoration144native readback completed with0modelwrites. Newcontour/stair candidate writes still require specific separate approval."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
       "owner": "work-universal-native-20261014",
-      "lease_until": "2026-10-14T03:01:21Z",
+      "lease_until": "2026-10-14T09:55:28Z",
       "claim_ref": "APA-CLAIM-UNIVERSAL-NATIVE-20261014T000121Z",
       "requires_approval": false,
       "evidence": [
