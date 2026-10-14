@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 52,
+  "run_count": 53,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -364,6 +364,13 @@
       "phase": "LIVE",
       "report": "runs/2026-10-14/APA-RUN-20261014-215514Z-executable-bim-workflows/REPORT.md",
       "run_id": "APA-RUN-20261014-215514Z-executable-bim-workflows",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "BUILD",
+      "report": "runs/2026-10-14/APA-RUN-20261014-224516Z-sdk-functional-module-expansion/REPORT.md",
+      "run_id": "APA-RUN-20261014-224516Z-sdk-functional-module-expansion",
       "substep_id": "APA-P70.A11.S03"
     }
   ],
