@@ -91,6 +91,14 @@ class DynamicCommands:
         self.fingerprint=A.RUN.digest(self.catalog)
         self.live={};self.registration={}
         self.policies={};self.callable={}
+        self.local_handlers={};self.local_events=[]
+
+    def add_local_provider(self,namespace,contracts,handlers,source,dependencies):
+        if set(contracts)!=set(handlers) or any(not callable(h) for h in handlers.values()):raise ValueError('LOCAL_CODE_OWNED_HANDLERS_REQUIRED')
+        self.add_provider(namespace,contracts,source)
+        for name,handler in handlers.items():
+            key='AddOn.'+namespace+'.'+name;self.catalog['commands'][key].update(api='local-python',availability='LOCAL_DEPENDENCIES_NOT_CHECKED',dependencies=copy.deepcopy(dependencies[name]));self.local_handlers[key]=handler
+        self.fingerprint=self.A.RUN.digest(self.catalog)
 
     def review_policy(self,command,kind,impact,evidence):
         """Effect is reviewed metadata, never a permission inferred from a name."""
@@ -159,6 +167,7 @@ class DynamicCommands:
 
     def select(self,command):
         row=copy.deepcopy(self.catalog['commands'][command]);row.update(effect=self.operation_kind(command),policy=copy.deepcopy(self.policies.get(command)),status='LIVE_VERIFIED' if command in self.live else 'CALLABLE_VERIFIED' if command in self.callable else 'BLOCKED' if self.registration.get(command) is False else 'SCHEMA_VALID',catalogDiscovered=True,routable=True,runtimeRegistered=self.registration.get(command),catalogHash=self.fingerprint)
+        if row.get('api')=='local-python':row.update(runtimeRegistered=None,executionDomain='LOCAL_PYTHON_ANALYTICS_NOT_ARCHICAD',localDependencies=row['dependencies'])
         return row
 
     def index(self,markdown,db,command_documents=True):
@@ -212,6 +221,7 @@ class DynamicCommands:
         row=self.catalog['commands'][command]
         doc=copy.deepcopy(self.catalog);doc['commands'][command]['parameters']=row.get('returns') or dict(type='object')
         CONTRACTS._validator(doc,command).validate(result)
+        if row.get('api')=='local-python':return result
         def errors(v):
             if isinstance(v,dict):return 'error' in v or v.get('success') is False or any(errors(x) for x in v.values())
             if isinstance(v,list):return any(errors(x) for x in v)
@@ -245,6 +255,12 @@ class DynamicCommands:
     def read(self,api,ticket,reviewed_read_only=False):
         self.validate(ticket)
         if not reviewed_read_only or ticket['effect']!='READ_ONLY':raise ValueError('SOURCE_REVIEWED_READ_ONLY_EFFECT_REQUIRED')
+        if self.catalog['commands'][ticket['command']].get('api')=='local-python':
+            import importlib.metadata,time
+            row=self.catalog['commands'][ticket['command']];versions={p:importlib.metadata.version(p) for p in row['dependencies']};start=time.perf_counter()
+            result=self.local_handlers[ticket['command']](**ticket['parameters']);self.validate_result(ticket['command'],result)
+            self.callable[ticket['command']]=dict(kind='LOCAL_ANALYTICAL_RESULT_PASS',resultHash=self.A.RUN.digest(result));self.local_events.append(dict(command=ticket['command'],inputHash=ticket['hash'],resultHash=self.A.RUN.digest(result),versions=versions,elapsedSeconds=time.perf_counter()-start,nativeWrites=0))
+            return result
         self.A.RUN.guarded_project(api)
         self.probe_runtime(api,ticket['command'])
         api.bind_dynamic_commands(self)
@@ -255,6 +271,9 @@ class DynamicCommands:
     def probe_runtime(self,api,command):
         """Reacquire registration for each selected add-on command before call."""
         row=self.catalog['commands'][command]
+        if row.get('api')=='local-python':
+            import importlib.metadata
+            return dict(status='LOCAL_DEPENDENCIES_AVAILABLE_NOT_NATIVE_RUNTIME',versions={p:importlib.metadata.version(p) for p in row['dependencies']})
         if command.startswith('API.'):
             product=api('API.GetProductInfo',{})
             if product.get('version')!=29:raise ValueError('OFFICIAL_API_PRODUCT_VERSION_DRIFT')
@@ -362,7 +381,7 @@ class DynamicCommands:
                     return stopped
                 reply=outcome['nativeResponse']
             results[sid]=reply;trace.append(dict(id=sid,command=step['command'],resultHash=self.A.RUN.digest(reply),status='CALLABLE_VERIFIED'))
-            self.callable[step['command']]=dict(kind='WORKFLOW_SCHEMA_PASS',resultHash=self.A.RUN.digest(reply))
+            self.callable[step['command']]=dict(kind='LOCAL_ANALYTICAL_RESULT_PASS' if self.catalog['commands'][step['command']].get('api')=='local-python' else 'WORKFLOW_SCHEMA_PASS',resultHash=self.A.RUN.digest(reply))
             if checkpoint:checkpoint(dict(status='WORKFLOW_CHECKPOINT',sourcePlanHash=plan['sourcePlanHash'],trace=copy.deepcopy(trace),results=copy.deepcopy(results),automaticRetry=False))
         return dict(status='WORKFLOW_CALLABLE_VERIFIED',sourcePlanHash=plan['sourcePlanHash'],trace=trace,results=results,automaticRetry=False)
 

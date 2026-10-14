@@ -135,13 +135,49 @@ def retrieve_project_knowledge(config, query, mode="research", remote=None, **bo
         remote = KNOWLEDGE.GitHubSource(os.environ.get("APA_GITHUB_READ_TOKEN"))
     return KNOWLEDGE.KnowledgeAccess(config, remote).query(query, mode, **bounds)
 
-def native_command_router(schema_path, official_commands=None):
+def native_command_router(schema_path, official_commands=None, include_functional_modules=True):
     """Core entry point: fresh provider export, existing schemas and KG index."""
     from archicad_dynamic_commands import DynamicCommands
-    return DynamicCommands(catalog_with_provenance(schema_path),official_commands)
+    router=DynamicCommands(catalog_with_provenance(schema_path),official_commands)
+    if include_functional_modules:connect_functional_modules(router)
+    return router
 
 def prepare_native_command(router, command, parameters):
     return router.prepare(command,parameters)
+
+
+def connect_functional_modules(router, manifest_path=None):
+    """Attach source SDK contracts and local analytics to the existing router.
+
+    Attachment is not runtime registration or native execution permission.
+    Only the code-owned local implementation can run without Archicad.
+    """
+    from archicad_local_modules import attach
+    root=Path(__file__).resolve().parents[1]
+    installed=root/'schemas/accelerator/functional-modules.json'
+    path=Path(manifest_path) if manifest_path else installed
+    manifest=json.loads(path.read_text(encoding='utf8'))
+    trusted=json.loads(installed.read_text(encoding='utf8'))
+    if manifest['sdkProviders']!=trusted['sdkProviders'] or manifest['local']['commands']!=trusted['local']['commands'] or manifest['local']['dependencies']!=trusted['local']['dependencies']:
+        raise ValueError('CODE_OWNED_MODULE_CONTRACT_REQUIRED')
+    if manifest['sdkImplementationSHA256']!=hashlib.sha256((root/'archicad-addon/Sources/NativeModuleCommands.cpp').read_bytes()).hexdigest():
+        raise ValueError('SDK_MODULE_SOURCE_DRIFT')
+    for namespace,commands in manifest['sdkProviders'].items():
+        missing={name:row for name,row in commands.items() if 'AddOn.'+namespace+'.'+name not in router.catalog['commands'] and not (namespace=='TapirCommand' and name in router.catalog['commands'])}
+        if missing:router.add_provider(namespace,missing,'NativeModuleCommands.cpp')
+        for name,row in commands.items():
+            key=name if namespace=='TapirCommand' and name in router.catalog['commands'] else 'AddOn.'+namespace+'.'+name
+            current=router.catalog['commands'][key]
+            if current['parameters']!=row['parameters'] or current['returns']!=row['returns']:
+                if namespace!='AddOnCommandTest' or current.get('availability')!='SOURCE_CONTRACT_NOT_RUNTIME_PROBED' or router.registration.get(key):
+                    raise ValueError('SDK_MODULE_CONTRACT_DRIFT:'+key)
+                previous=router.contract_hash(key)
+                current.update(row,previousSourceContractHash=previous,sourceContractUpgrade='EXPLICIT_SDK_BUILD_CONTRACT_NOT_RUNTIME_ACCEPTANCE')
+            current['implementationSHA256']=manifest['sdkImplementationSHA256']
+            router.review_policy(key,'READ_ONLY','READ_ONLY',dict(source='Archicad29 public SDK implementation; model read only',sha256=manifest['sdkImplementationSHA256']))
+    local=attach(router,manifest['local'])
+    router.fingerprint=RUN.digest(router.catalog)
+    return dict(local=local,sdkContracts=sum(len(x) for x in manifest['sdkProviders'].values()),runtimeRegistration='NOT_VERIFIED',nativePermission=False)
 
 def prepare_native_workflow(router, graph):
     return router.prepare_workflow(graph)

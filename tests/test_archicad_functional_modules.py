@@ -1,0 +1,35 @@
+import hashlib,json,sys,tempfile,unittest
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
+import archicad_project_accelerator as A
+from archicad_dynamic_commands import DynamicCommands
+ROOT=Path(__file__).resolve().parents[1]
+def connected():
+    r=DynamicCommands(json.loads((ROOT/'schemas/accelerator/mass-capabilities/commands.json').read_text(encoding='utf8')))
+    A.connect_functional_modules(r);return r
+class FunctionalModules(unittest.TestCase):
+    def test_attachment_drift_idempotence_and_no_native_permission(self):
+        r=connected();before=r.fingerprint;A.connect_functional_modules(r);self.assertEqual(r.fingerprint,before)
+        self.assertEqual(len(r.catalog['commands']),377)
+        manifest=json.loads((ROOT/'schemas/accelerator/functional-modules.json').read_text(encoding='utf8'));manifest['local']['implementationSHA256']='0'*64
+        with tempfile.TemporaryDirectory() as temp:
+            path=Path(temp)/'manifest.json';path.write_text(json.dumps(manifest))
+            with self.assertRaisesRegex(ValueError,'LOCAL_MODULE_SOURCE_DRIFT'):A.connect_functional_modules(r,path)
+        self.assertFalse(r.prepare('AddOn.TapirCommand.GetNativeWorkingUnitsV1',{})['nativeWritePermission'])
+    def test_local_graph_cycle_and_hole_preservation_without_transport(self):
+        r=connected();call=lambda n,p:r.read(None,r.prepare('AddOn.APAAnalysis.'+n,p),True)
+        impact=call('DependencyImpact',dict(nodes=['floor','wall','window'],edges=[['floor','wall'],['wall','window']],changed=['floor']))
+        self.assertEqual(impact['updateOrder'],['floor','wall','window'])
+        cycle=call('DependencyImpact',dict(nodes=['a','b'],edges=[['a','b'],['b','a']],changed=['a']))
+        self.assertFalse(cycle['executionAllowed']);self.assertEqual(cycle['status'],'CYCLIC')
+        facts=call('PolygonRelations',dict(polygons=[dict(id='slab',outline=[[0,0],[6,0],[6,6],[0,6]],holes=[[[2,2],[4,2],[4,4],[2,4]]]),dict(id='inside-hole',outline=[[2.1,2.1],[3.9,2.1],[3.9,3.9],[2.1,3.9]])]))
+        self.assertEqual(facts['polygons'][0]['area'],32);self.assertEqual(facts['relations'],[])
+        self.assertTrue(all(e['nativeWrites']==0 for e in r.local_events))
+    def test_local_schema_validation_dependency_flow_and_cpsat(self):
+        r=connected()
+        with self.assertRaises(Exception):r.prepare('AddOn.APAAnalysis.PolygonRelations',dict(polygons=[],tolerance=-1))
+        answer=r.read(None,r.prepare('AddOn.APAAnalysis.ConstrainedAssignment',dict(tasks=[dict(id='one',costs={'a':1,'b':8}),dict(id='two',costs={'a':2,'b':3})],capacities={'a':1,'b':1})),True)
+        self.assertEqual(answer['status'],'OPTIMAL');self.assertEqual(answer['objective'],4)
+        graph=dict(operations=[dict(id='select',command='AddOn.APAAnalysis.IFCSelect',params=dict(path='explicit-input.ifc',query='IfcWall')),dict(id='geometry',command='AddOn.APAAnalysis.IFCGeometry',params={'path':'explicit-input.ifc','guids':[{'$result':dict(step='select',pointer='/elements/0/ifcId')}]})])
+        plan=r.prepare_workflow(graph);self.assertEqual(plan['executionOrder'],['select','geometry']);self.assertFalse(plan['executionPermission'])
+if __name__=='__main__':unittest.main()
