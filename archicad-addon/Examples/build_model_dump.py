@@ -186,6 +186,10 @@ def main():
         "-DAC_API_DEVKIT_DIR=" + str(Path(args.devkit).resolve())]
     subprocess.run(cmake_args, env=env, check=True)
     subprocess.run([str(cmake), "--build", str(build_root / "build")], env=env, check=True)
+    binary=(build_root/'build/TapirAddOn_AC29_Win.apx').read_bytes()
+    if build_identity.encode() not in binary or revision.encode() not in binary:
+        raise RuntimeError('Built APX identity/revision differs from the source receipt; reject deployment')
+    (build_root/'apa-binary-receipt.json').write_text(json.dumps(dict(status='BUILD_PASS_BINARY_IDENTITY_VERIFIED_NOT_INSTALLED',buildIdentity=build_identity,sourceRevision=revision,apxSHA256=hashlib.sha256(binary).hexdigest(),bytes=len(binary)),indent=2)+'\n',encoding='utf8')
     print(f"Build passed. Overlay sources: {addon_source}; build output: {build_root / 'build'}")
 
 
