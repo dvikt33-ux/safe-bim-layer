@@ -35,7 +35,7 @@ READS = frozenset({"GetProjectInfo", "GetStories", "GetAddOnVersion",
                   "GetSurfaces", "GetAvailableLibraryParts", "GetGDLParametersOfElements", "API.GetProductInfo", 'API.GetPublisherSetNames',
                   'API.GetAllClassificationSystems','API.GetAllClassificationsInSystem','GetClassificationsOfElements','GetMEPPreferenceTables',
                   'API.GetPropertyIds','API.GetAllPropertyNames','API.GetDetailsOfProperties','API.GetPropertyValuesOfElements',
-                  'GetSolidElementLinks','GetPropertyValuesOfElements','GetNativeGridDefaultsV1','GetNativeGridElementsV1','GetNativeStairGeometryV1','EvaluateNativeStairGeometryV1'})
+                  'GetSolidElementLinks','GetPropertyValuesOfElements','GetNativeGridDefaultsV1','GetNativeGridElementsV1','GetNativeStairGeometryV1','EvaluateNativeStairGeometryV1','GetAPARuntimeInfoV1'})
 NATIVE_MUTATIONS = RUN.ALLOWED_WRITES | RUN.EXTENDED_WRITES | frozenset({"ModifySlabs","ModifyMorphs","ModifyBeams",
     'ConnectMEPElements','ModifyMEPRoutingElements','CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks','SetClassificationsOfElements','TrimElements',
     'MoveElements','ModifyWalls','ModifyWindows','ModifyDoors','SetPropertyValuesOfElements','SetStories','CreateStairs',
@@ -136,6 +136,23 @@ def apply_native_axis_grid(writer,recipe,scene_id,retained_signatures,saved_sha2
     from archicad_native_spatial_tools import create_or_reuse_axis
     return create_or_reuse_axis(writer,recipe,scene_id,retained_signatures,saved_sha256,authorization_ref,existing_guid)
 
+
+def verify_native_runtime_identity(api,catalog):
+    """New SDK commands require fresh exported build identity, not Tapir version.
+
+    Legacy stock commands remain available through their existing contracts.
+    Never install/register an APX here or treat a source-only build as loaded.
+    """
+    pinned=catalog.get('_metadata',{}).get('binding',{}).get('apaRuntimeIdentity')
+    if 'GetAPARuntimeInfoV1' not in catalog['commands'] or not isinstance(pinned,dict):
+        raise ValueError('BLOCKED_NATIVE_RUNTIME_BUILD_IDENTITY_NOT_EXPORTED')
+    actual=api('GetAPARuntimeInfoV1',{})
+    if actual!=pinned or actual.get('contract')!='APA_NATIVE_RUNTIME_IDENTITY_V1' or actual.get('sdkMajor')!=29 or actual.get('developerId')!=826567491 or actual.get('localId')!=368333322 or actual.get('nativeModelWrites')!=0:
+        raise ValueError('BLOCKED_NATIVE_RUNTIME_BUILD_IDENTITY_CHANGED')
+    if not re.fullmatch(r'[a-f0-9]{64}',actual.get('buildIdentity','')) or not re.fullmatch(r'[a-f0-9]{40}',actual.get('sourceRevision','')):
+        raise ValueError('BLOCKED_NATIVE_RUNTIME_BUILD_IDENTITY_INVALID')
+    return actual
+
 def apply_exact_native_stair(writer,row,scene_id,retained_signatures,saved_sha256,authorization_ref,source):
     from archicad_native_spatial_tools import create_exact_stair
     return create_exact_stair(writer,row,scene_id,retained_signatures,saved_sha256,authorization_ref,source)
@@ -144,6 +161,11 @@ def apply_exact_native_stair(writer,row,scene_id,retained_signatures,saved_sha25
 def synchronize_native_axis_geometry(writer,guid,recipe,scene_id,retained_signatures,saved_sha256,authorization_ref):
     from archicad_native_spatial_tools import synchronize_grid_geometry
     return synchronize_grid_geometry(writer,guid,recipe,scene_id,retained_signatures,saved_sha256,authorization_ref)
+
+
+def prepare_model_parameter_edit(api,plan,created,intent,schema_path):
+    from archicad_authored_extension import prepare_building_parameter_edit
+    return prepare_building_parameter_edit(api,plan,created,intent,schema_path)
 
 
 def inspect_project_knowledge(config, operation, arguments, remote=None, **bounds):
@@ -214,7 +236,7 @@ def compile_project_spatial_plan(brief, project_pack, authored_layout):
 
 def compile_authored_native_candidate(brief, project_pack, authored_layout,
                                       authored_story_heights, read_api,
-                                      schema_path=RUN.DEFAULT_SCENE_SCHEMA, junction_policy=None):
+                                      schema_path=RUN.DEFAULT_SCENE_SCHEMA, junction_policy=None,floor_plans=None):
     """Read-only existing BIM DAG compiler, no SceneWriter.execute.
 
     Never exposes a native mutation token; no authority to write follows from
@@ -223,7 +245,7 @@ def compile_authored_native_candidate(brief, project_pack, authored_layout,
     catalog_with_provenance(schema_path)
     return AUTHORED_NATIVE.compile_candidate(
         brief,project_pack,authored_layout,authored_story_heights,
-        read_api,schema_path=schema_path,junction_policy=junction_policy)
+        read_api,schema_path=schema_path,junction_policy=junction_policy,floor_plans=floor_plans)
 
 
 def apply_native_story_height_change(writer, change, run_id, saved_sha256, output):
@@ -291,7 +313,7 @@ def compile_authored_intent(intent, schema_path, read_api):
             "schemaVersion", "projectId", "units", "brief", "cseCandidate",
             "layout", "storyHeights"}
     if (not isinstance(intent, dict) or not required <= set(intent)
-            or set(intent)-required-{"wallBasicMaterialName","nativeComponents","nativeGeometryAudit","junctionPolicy","nativeRoofJunctions","structuralFunctions"}
+            or set(intent)-required-{"wallBasicMaterialName","nativeComponents","nativeGeometryAudit","junctionPolicy","nativeRoofJunctions","structuralFunctions","floorPlans"}
             or type(intent.get('nativeGeometryAudit',False)) is not bool
             or type(intent.get('nativeRoofJunctions',False)) is not bool
             or intent["schemaVersion"] != "apa-authored-project/1"
@@ -305,7 +327,7 @@ def compile_authored_intent(intent, schema_path, read_api):
     pack = compile_project_library_pack(intent["brief"], intent["cseCandidate"], read_api)
     candidate = compile_authored_native_candidate(
         intent["brief"], pack, intent["layout"], intent["storyHeights"],
-        read_api, schema_path=schema_path,junction_policy=intent.get('junctionPolicy'))
+        read_api, schema_path=schema_path,junction_policy=intent.get('junctionPolicy'),floor_plans=intent.get('floorPlans'))
     if "wallBasicMaterialName" in intent:
         wall_guid = RUN.resolve_basic_slab_material(read_api,intent["wallBasicMaterialName"])
         for step in candidate["graph"]["operations"]:
@@ -627,6 +649,9 @@ def export_schema(folder, transport):
     if before != after or inventory_guids(api) != guids:
         raise ValueError("PROJECT_OR_INVENTORY_CHANGED_DURING_EXPORT")
     doc = parse_documentation(folder, before)
+    if 'GetAPARuntimeInfoV1' in doc['commands']:
+        doc['_metadata']['binding']['apaRuntimeIdentity']=api('GetAPARuntimeInfoV1',{})
+        verify_native_runtime_identity(api,doc)
     write_json(folder / "tapir-scene-live.json", doc)
     write_json(folder / "tapir-export-evidence.json", {
         "before": before, "after": after, "exportResponse": response,

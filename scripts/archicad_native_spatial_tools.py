@@ -51,6 +51,7 @@ def runtime_catalog(writer,command,parameters,read_command):
     catalog=A.catalog_with_provenance(writer.schema_path)
     if not {command,read_command}<=catalog['commands'].keys():raise ValueError('BLOCKED_INSTALLED_NATIVE_SPATIAL_CONTRACT_MISSING')
     if writer.api('GetAddOnVersion',{}).get('version')!=A.SCENE.GRAPH.CONTRACTS.source_version(catalog):raise ValueError('SDK_SPATIAL_RUNTIME_SCHEMA_VERSION_CHANGED')
+    A.verify_native_runtime_identity(writer.api,catalog)
     A.SCENE.GRAPH.CONTRACTS._validator(catalog,command).validate(parameters)
     return catalog
 
@@ -204,7 +205,8 @@ def verify_exact_stair(api,guid,row):
     if actual.get('nativeType')!='Stair' or actual.get('elementId',{}).get('guid','').lower()!=guid.lower() or actual.get('treadDepthLocked') is not True or actual.get('stepNum')!=row['stepNum'] or actual.get('floorIndex')!=row['floorIndex']:raise ValueError('EXACT_STAIR_NATIVE_IDENTITY_LOCK_COUNT_REQUIRED')
     for key in ['totalHeight','riserHeight','treadDepth','flightWidth']:
         if not RUN.close(actual.get(key),row[key]):raise ValueError('EXACT_STAIR_SOURCE_DIMENSION_MISMATCH:'+key)
-    points=actual.get('baseLinePoints',[])
+    points=actual.get('worldBaseLinePoints',actual.get('baseLinePoints',[]))
+    if actual.get('baseLineCoordinateFrame')=='LOCAL_BASE_PLANE' and 'worldBaseLinePoints' not in actual:raise ValueError('EXACT_STAIR_NATIVE_WORLD_FRAME_REQUIRED')
     if len(points)!=2 or any(not RUN.close(q.get(k),p[k]) for p,q in zip(row['baseLinePoints'],points) for k in ['x','y']):raise ValueError('EXACT_STAIR_SOURCE_BASELINE_MISMATCH')
     return dict(status='NATIVE_EXACT_STAIR_DIMENSION_READBACK_PASS',guid=guid,native=actual,sourceDimensionStatus='SOURCE_DIMENSION_PASS',engineeringAcceptance='NOT_VERIFIED')
 

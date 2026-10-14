@@ -92,6 +92,7 @@ def overlay_registration(addon_source):
     # Preserve all installed documentation endpoints while repairing only build
     # registration. New commands use the same native provider and command groups.
     groups={'elementCommands':[
+        ('GetAPARuntimeInfoV1Command','Read exact APA source/build identity; no model writes.'),
         ('GetCurrent2DDocumentV1Command','Read current native 2D document.'),
         ('GetNativeGridElementsV1Command','Read true Grid variation and parameters.'),
         ('CreateNativeGridElementsV1Command','Create one true native Grid from source defaults.'),
@@ -161,6 +162,15 @@ def main():
     for name in ("NativeGridCommands.cpp", "NativeGridCommands.hpp", "NativeStairCommands.cpp", "NativeStairCommands.hpp"):
         shutil.copy2(addon_overlay / "Sources" / name, addon_source / "Sources" / name)
     overlay_registration(addon_source)
+    # The ID covers the actual copied source/resource snapshot, not Tapir's shared
+    # version string. It changes when any runtime implementation/resource changes.
+    identity_files={p.relative_to(addon_source).as_posix():hashlib.sha256(p.read_bytes()).hexdigest()
+        for p in (addon_source/'Sources').rglob('*') if p.is_file() and p.name!='APABuildIdentity.hpp'}
+    build_identity=hashlib.sha256(json.dumps(identity_files,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+    revision=subprocess.check_output(['git','-C',str(addon_overlay.parent),'rev-parse','HEAD']).decode().strip()
+    header='#pragma once\n#define APA_BUILD_IDENTITY "'+build_identity+'"\n#define APA_SOURCE_REVISION "'+revision+'"\n'
+    (addon_source/'Sources/APABuildIdentity.hpp').write_text(header,encoding='utf8')
+    (build_root/'apa-build-identity.json').write_text(json.dumps(dict(contract='APA_NATIVE_RUNTIME_IDENTITY_V1',buildIdentity=build_identity,sourceRevision=revision,sdkMajor=29,developerId=826567491,localId=368333322,files=identity_files),indent=2)+'\n',encoding='utf8')
 
     vc, sdk_root, sdk_version, cmake = resolve_toolchain(args)
     env = os.environ.copy()

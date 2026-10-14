@@ -200,6 +200,8 @@ def scan_for_existing_geometry(api, anchor_x, anchor_y, envelope=None):
     native_elements = None
     resultant_fallbacks = []
     bodyless_external = []
+    bodyless_stair_parts = []
+    stair_members = {}
     # Batch modestly; do not hold a massive JSON response in memory.
     for i in range(0, len(elements), 100):
         batch = elements[i:i+100]
@@ -260,6 +262,16 @@ def scan_for_existing_geometry(api, anchor_x, anchor_y, envelope=None):
                     bodyless_external.append(guid)
                     nonspatial += 1
                     continue
+                elif (element.get('type') in {'Riser','Tread'} and element.get('nativeTypeId') in {48,49}
+                        and all(b[a+'Min']==1e35 and b[a+'Max']==-1e35 for a in ('x','y'))):
+                    parent=element.get('relationships',{}).get('hostGuid','').lower()
+                    if native_elements.get(parent,{}).get('type')!='Stair':raise ValueError('SPATIAL_SCAN_UNAVAILABLE: stair child owner unverified')
+                    if parent not in stair_members:
+                        parts=api('GetSubelementsOfHierarchicalElements',{'elements':[{'elementId':{'guid':parent}}]})['subelements']
+                        if len(parts)!=1:raise ValueError('SPATIAL_SCAN_UNAVAILABLE: stair membership incomplete')
+                        stair_members[parent]={r.get('elementId',{}).get('guid','').lower() for values in parts[0].values() if isinstance(values,list) for r in values}
+                    if guid not in stair_members[parent]:raise ValueError('SPATIAL_SCAN_UNAVAILABLE: stair child membership mismatch')
+                    bodyless_stair_parts.append(guid);nonspatial+=1;continue
                 else:raise ValueError('SPATIAL_SCAN_UNAVAILABLE: inverted 3D bbox')
             if (b["xMin"] <= highx and b["xMax"] >= lowx
                     and b["yMin"] <= highy and b["yMax"] >= lowy
@@ -276,7 +288,8 @@ def scan_for_existing_geometry(api, anchor_x, anchor_y, envelope=None):
             nonspatial += len(unavailable)
     return {"nativeElementsInspected": checked+nonspatial,
             "volumetricBodiesChecked": checked,
-            "nonSpatialElementsVerified": nonspatial - len(bodyless_external),
+            "nonSpatialElementsVerified": nonspatial - len(bodyless_external)-len(bodyless_stair_parts),
+            "bodylessNativeStairChildren": bodyless_stair_parts,
             "resultantBodyBoundsFallbackGuids": resultant_fallbacks,
             "bodylessExternalGuids": bodyless_external,
             "bodylessExternalSemantics": 'NOT_VERIFIED_NO_TYPE_INFERENCE',
@@ -398,6 +411,15 @@ def verify_readback(command, params, row, owner_guid=None, expected_floor=0,
                         wanted['attributeId']['guid'].casefold()):
                     raise ValueError('WALL_SURFACE_OVERRIDE_READBACK_MISMATCH')
     elif command == "CreateSlabs":
+        if 'holes' in expected:
+            holes=details.get('holes',[])
+            wanted=expected['holes']
+            if len(holes)!=len(wanted):raise ValueError('SLAB_HOLE_READBACK_COUNT_MISMATCH')
+            unused=list(holes)
+            for hole in wanted:
+                match=next((i for i,q in enumerate(unused) if compare_polygon(hole['polygonCoordinates'],q.get('polygonOutline',q.get('polygonCoordinates')))),None)
+                if match is None:raise ValueError('SLAB_HOLE_READBACK_GEOMETRY_MISMATCH')
+                unused.pop(match)
         # CreateSlabs may inherit Composite from the current defaults. Allow an
         # intermediate thickness mismatch ONLY before an explicitly journaled
         # ModifySlabs; still prove story, type, level and polygon first.

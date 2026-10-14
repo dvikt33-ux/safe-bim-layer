@@ -29,6 +29,40 @@ def xy(x, y):
     return {"x": round(x, 6), "y": round(y, 6)}
 
 
+def source_floor_polygon(value):
+    """Validate authored straight contours with existing Shapely; no shape engine.
+
+    Return the same physical footprint with CCW outer/CW hole winding. Reject
+    intersecting/touching holes, self crossings and unsupported arc geometry.
+    """
+    from shapely.geometry import Polygon
+    from shapely.geometry.polygon import orient
+    if not isinstance(value,dict) or set(value)!={'polygonCoordinates','holes'} or not isinstance(value['holes'],list):
+        raise ValueError('SOURCE_FLOOR_CONTOUR_AND_HOLES_REQUIRED')
+    def ring(points):
+        if not isinstance(points,list) or not 3<=len(points)<=256:raise ValueError('SOURCE_POLYGON_VERTEX_COUNT')
+        for p in points:
+            if not isinstance(p,dict) or set(p)!={'x','y'}:raise ValueError('SOURCE_POLYGON_XY_REQUIRED')
+            for k in ('x','y'):
+                if abs(finite(p[k],k))>1e6:raise ValueError('SOURCE_POLYGON_OUT_OF_RANGE')
+        result=[(float(p['x']),float(p['y'])) for p in points]
+        if result[-1]==result[0]:result.pop()
+        if len(result)<3 or len(set(result))!=len(result):raise ValueError('SOURCE_POLYGON_DUPLICATE_VERTICES')
+        shape=Polygon(result)
+        if not shape.is_valid or shape.area<=1e-8:raise ValueError('SOURCE_POLYGON_INVALID')
+        return result,shape
+    outer,footprint=ring(value['polygonCoordinates']);holes=[];shapes=[]
+    for h in value['holes']:
+        if not isinstance(h,dict) or set(h)!={'polygonCoordinates'}:raise ValueError('SOURCE_POLYGON_HOLE_FIELDS')
+        points,hole=ring(h['polygonCoordinates'])
+        if not footprint.contains(hole) or footprint.boundary.intersects(hole.boundary):raise ValueError('SOURCE_HOLE_NOT_STRICTLY_INSIDE')
+        if any(hole.intersects(prior) for prior in shapes):raise ValueError('SOURCE_HOLES_OVERLAP_OR_TOUCH')
+        holes.append(points);shapes.append(hole)
+    shape=orient(Polygon(outer,holes),sign=1.)
+    return {'polygonCoordinates':[dict(x=x,y=y) for x,y in list(shape.exterior.coords)[:-1]],
+        'holes':[{'polygonCoordinates':[dict(x=x,y=y) for x,y in list(h.coords)[:-1]]} for h in shape.interiors]},shape
+
+
 def step(sid, command, payload):
     key = command[6:].lower() + "Data"
     return {"id": sid, "command": command, "params": {key: [payload]}}
@@ -95,6 +129,8 @@ def prepare(part, schema_path=None):
         raise ValueError("INVALID_BUILDING_COMPONENT")
     if part["primitive"] != "building-shell-v1" or not isinstance(part["id"], str) or not ID.fullmatch(part["id"]):
         raise ValueError("UNSUPPORTED_BUILDING_COMPONENT")
+    if isinstance(part['specification'],dict) and 'floorPlans' in part['specification']:
+        return _prepare_source_floorplates(part,schema_path)
     anchor = part["anchor"]
     if not isinstance(anchor, dict) or set(anchor) != {"x", "y"}:
         raise ValueError("INVALID_ANCHOR")
@@ -176,3 +212,31 @@ def prepare(part, schema_path=None):
             "No automatic PLN save, no automatic retry or rollback",
         ],
         "liveWriteAuthorized": False, "plnChanged": False}
+
+
+def _prepare_source_floorplates(part,schema_path):
+    """Explicit source floorplates in the existing primitive and SceneWriter.
+
+    No automatic walls/rooms or extra building are invented. This bounded slice
+    also exercises the same contours consumed by the authored whole-model route.
+    """
+    spec=part['specification'];plans=spec.get('floorPlans');material=spec.get('slabBasicMaterialName')
+    if set(spec)!={'floorPlans','slabBasicMaterialName'} or not isinstance(plans,list) or not 1<=len(plans)<=30 or not isinstance(material,str) or not material.strip():raise ValueError('SOURCE_FLOORPLATE_SPEC_REQUIRED')
+    if set(part['anchor'])!={'x','y'}:raise ValueError('SOURCE_FLOORPLATE_ANCHOR_REQUIRED')
+    ax,ay=finite(part['anchor']['x'],'anchor_x'),finite(part['anchor']['y'],'anchor_y')
+    operations=[];stories=[];areas=[];bounds=[];seen=set()
+    for floor in plans:
+        if not isinstance(floor,dict) or set(floor)!={'id','story','thickness','polygonCoordinates','holes'} or not isinstance(floor['id'],str) or not ID.fullmatch(floor['id']) or floor['id'] in seen:raise ValueError('SOURCE_FLOORPLATE_ID_FIELDS_REQUIRED')
+        seen.add(floor['id']);story=floor['story']
+        if not isinstance(story,dict) or set(story)!={'label','nativeIndex','floorId','level'} or type(story['nativeIndex']) is not int or type(story['floorId']) is not int or not isinstance(story['label'],str):raise ValueError('SOURCE_FLOORPLATE_NATIVE_STORY_REQUIRED')
+        level=finite(story['level'],'story_level');thickness=finite(floor['thickness'],'slab_thickness')
+        if thickness<=0:raise ValueError('SOURCE_FLOORPLATE_THICKNESS_REQUIRED')
+        geometry,shape=source_floor_polygon({k:floor[k] for k in ['polygonCoordinates','holes']})
+        operations.append(step(floor['id'],'CreateSlabs',dict(level=level,floorIndex=story['nativeIndex'],thickness=thickness,referencePlaneLocation='Top',**geometry)))
+        if story not in stories:stories.append(story)
+        bounds.append((*shape.bounds,level-thickness,level));areas.append(shape.area)
+    xmin=min(b[0] for b in bounds);ymin=min(b[1] for b in bounds);xmax=max(b[2] for b in bounds);ymax=max(b[3] for b in bounds);zmin=min(b[4] for b in bounds);zmax=max(b[5] for b in bounds)
+    if abs(ax-xmin)>1e-6 or abs(ay-ymin)>1e-6:raise ValueError('SOURCE_FLOORPLATE_ANCHOR_MISMATCH')
+    schema=Path(schema_path or TAPIR_SCHEMA).resolve();graph={'operations':operations};result=GRAPH.compile_graph(GRAPH.CONTRACTS.load_catalog(schema),graph)
+    if result['status']!='PLAN_VALIDATED_OFFLINE':raise ValueError('SOURCE_FLOORPLATE_GRAPH_INVALID')
+    return dict(status='SCENE_PREVIEW_OFFLINE',sourcePlanHash=result['sourcePlanHash'],graph=graph,executionOrder=result['executionOrder'],schemaVersion=result['schemaVersion'],schemaPath=str(schema),schemaSha256=hashlib.sha256(schema.read_bytes()).hexdigest(),storyBindings=stories,slabBasicMaterialName=material,slabLevelConvention='PROJECT_ABSOLUTE',envelope=dict(xMin=xmin,xMax=xmax,yMin=ymin,yMax=ymax,zMin=zmin-.1,zMax=zmax+.1),metrics=dict(dimensionsMeters=dict(width=xmax-xmin,depth=ymax-ymin,height=zmax-zmin),grossFloorAreaSquareMeters=sum(areas),storeyCount=len(stories),elementCount=len(operations),elementKinds={'Slab':len(operations)},scope='ONLY_EXPLICIT_SOURCE_FLOORPLATES',structuralVerified=False,normativeVerified=False),limitations=['ONLY_REQUESTED_FLOORPLATES_NO_BUILDING_OR_WALLS_INVENTED','SOURCE_DIMENSIONS_ARE_NOT_ENGINEERING_ACCEPTANCE','NO_AUTOMATIC_SAVE_RETRY_ROLLBACK'],liveWriteAuthorized=False,plnChanged=False)

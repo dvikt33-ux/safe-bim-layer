@@ -7,6 +7,24 @@ static void AddPolyline (GS::ObjectState& out, const char* name, const API_Stair
     if (poly.coords == nullptr) return;
     for (Int32 i = 1; i <= poly.polygon.nCoords; ++i) list (Create2DCoordinateObjectState ((*poly.coords)[i]));
 }
+static GS::ObjectState MemoState (const API_StairPolylineData& p) {
+    return GS::ObjectState ("coordinates", p.polygon.nCoords, "contours", p.polygon.nSubPolys, "arcs", p.polygon.nArcs,
+        "coordinateBytes", p.coords ? static_cast<Int32> (BMGetHandleSize (reinterpret_cast<GSHandle> (p.coords))) : 0,
+        "endingBytes", p.pends ? static_cast<Int32> (BMGetHandleSize (reinterpret_cast<GSHandle> (p.pends))) : 0,
+        "edgeBytes", p.edgeData ? static_cast<Int32> (BMGetPtrSize (reinterpret_cast<GSPtr> (p.edgeData))) : 0,
+        "vertexBytes", p.vertexData ? static_cast<Int32> (BMGetPtrSize (reinterpret_cast<GSPtr> (p.vertexData))) : 0);
+}
+static bool SolverPolylineQualified (const API_StairPolylineData& p) {
+    // CreateStairs intentionally drops edge/vertex data for Element_Create to
+    // derive. SolveStair runs BEFORE creation and has no such qualified input.
+    // Never call it on those null/stale buffers. Root crash cause remains open.
+    const Int32 n=p.polygon.nCoords;
+    return n>=2 && n<=10000 && p.polygon.nSubPolys==1 && p.polygon.nArcs==0 && p.coords && p.pends && p.edgeData && p.vertexData &&
+        BMGetHandleSize (reinterpret_cast<GSHandle> (p.coords))>=static_cast<GSSize> ((n+1)*sizeof(API_Coord)) &&
+        BMGetHandleSize (reinterpret_cast<GSHandle> (p.pends))>=static_cast<GSSize> (2*sizeof(Int32)) && (*p.pends)[1]==n &&
+        BMGetPtrSize (reinterpret_cast<GSPtr> (p.edgeData))>=static_cast<GSSize> ((n+1)*sizeof(API_StairPolylineEdgeData)) &&
+        BMGetPtrSize (reinterpret_cast<GSPtr> (p.vertexData))>=static_cast<GSSize> ((n+1)*sizeof(API_StairPolylineVertexData));
+}
 static GS::ObjectState StairState (const API_Element& e, const API_ElementMemo& memo) {
     const auto& s = e.stair; const auto& r = s.rules;
     GS::ObjectState out ("contract", "APA_NATIVE_STAIR_GEOMETRY_V1", "elementId", CreateGuidObjectState (e.header.guid),
@@ -25,6 +43,18 @@ static GS::ObjectState StairState (const API_Element& e, const API_ElementMemo& 
         "riserHeightMinValue", r.riserHeightMinValue, "riserHeightMinApplied", r.riserHeightMinApplied,
         "riserHeightMaxValue", r.riserHeightMaxValue, "riserHeightMaxApplied", r.riserHeightMaxApplied));
     AddPolyline (out, "baseLinePoints", memo.stairBaseLine); AddPolyline (out, "walkingLinePoints", memo.stairWalkingLine);
+    const auto& plane=s.basePlane;
+    out.Add ("basePlane", GS::ObjectState ("basePoint", GS::ObjectState ("x",plane.basePoint.x,"y",plane.basePoint.y,"z",plane.basePoint.z),
+        "axisX",GS::ObjectState ("x",plane.axisX.x,"y",plane.axisX.y,"z",plane.axisX.z),
+        "axisY",GS::ObjectState ("x",plane.axisY.x,"y",plane.axisY.y,"z",plane.axisY.z)));
+    out.Add ("baseLineCoordinateFrame", "LOCAL_BASE_PLANE");
+    const auto& world=out.AddList<GS::ObjectState> ("worldBaseLinePoints");
+    if (memo.stairBaseLine.coords) for (Int32 i=1;i<=memo.stairBaseLine.polygon.nCoords;++i) {
+        const auto& p=(*memo.stairBaseLine.coords)[i];
+        world (GS::ObjectState ("x",plane.basePoint.x+plane.axisX.x*p.x+plane.axisY.x*p.y,
+            "y",plane.basePoint.y+plane.axisX.y*p.x+plane.axisY.y*p.y));
+    }
+    out.Add ("baseLineMemo",MemoState(memo.stairBaseLine)); out.Add ("walkingLineMemo",MemoState(memo.stairWalkingLine));
     out.Add ("engineeringAcceptance", "NOT_VERIFIED"); return out;
 }
 static GSErrCode ReadStair (const API_Guid& guid, API_Element& e, API_ElementMemo& memo) {
@@ -49,6 +79,11 @@ static GS::Optional<GS::ObjectState> ExactSettings (API_Element& e, API_ElementM
         (rules.riserHeightMinApplied && r < rules.riserHeightMinValue-1e-8) || (rules.riserHeightMaxApplied && r > rules.riserHeightMaxValue+1e-8))
         return CreateErrorResponse (APIERR_BADPARS, "SourceFavoriteRiserOrGoingRangeIncompatible_NoRuleOverride_NoCreate");
     e.stair.treadDepthLocked = true; e.stair.totalHeightLocked = true;
+    if (!SolverPolylineQualified(memo.stairBaseLine) || !SolverPolylineQualified(memo.stairWalkingLine)) {
+        auto blocked=CreateErrorResponse(APIERR_BADPARS,"NativeStairMemoUnqualified_NoSolver_NoCreate");
+        blocked.Add("baseLineMemo",MemoState(memo.stairBaseLine)); blocked.Add("walkingLineMemo",MemoState(memo.stairWalkingLine));
+        blocked.Add("solverCalled",false); blocked.Add("nativeModelWrites",0); return blocked;
+    }
     API_StairSolutionID solution = APISS_NotSolved;
     const GSErrCode err = ACAPI_HierarchicalEditing_SolveStair (&e.stair, &memo, &solution);
     if (err != NoError || solution == APISS_NotSolved) return CreateErrorResponse (err != NoError ? err : APIERR_BADPARS, "NativeSolverCannotSatisfyLockedSourceDimensions_NoCreate");
