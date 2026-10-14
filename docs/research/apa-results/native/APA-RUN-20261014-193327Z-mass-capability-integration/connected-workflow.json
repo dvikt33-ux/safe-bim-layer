@@ -1,0 +1,873 @@
+{
+  "status": "LIVE_CONNECTED_COMPONENT_WORKFLOW_PASS_WITH_EXPLICIT_PROVIDER_GEOMETRY_DIFFERENCES",
+  "preparedPlanHash": "47ea12df9d87bf82f355dd0a5c3a4255313d1f26ef726ed43aeaf0d1aaf9e55e",
+  "stepCount": 12,
+  "trace": [
+    {
+      "id": "native-model",
+      "command": "GetModelDumpV1",
+      "resultHash": "937cc3a4aefa45b643cd380e22b2dcee849734c9d2eeb44382ef8fa4705c461f",
+      "status": "CALLABLE_VERIFIED"
+    },
+    {
+      "id": "stories",
+      "command": "GetStories",
+      "resultHash": "d591dc9e4ecbe80244dd0e8e4931051e6bd443d9388dfaef90a65b0ff8440dd8",
+      "status": "CALLABLE_VERIFIED"
+    },
+    {
+      "id": "walls",
+      "command": "API.GetElementsByType",
+      "resultHash": "11acfc91ce49b51193d8c97f93f13795db09bdc5cb4a316546ff767b11df2ea5",
+      "status": "CALLABLE_VERIFIED"
+    },
+    {
+      "id": "material-ids",
+      "command": "API.GetAttributesByType",
+      "resultHash": "7e41e31c0d07712c34f869ca663fa6651723a2cc37f491afa1b43c71cdb067df",
+      "status": "CALLABLE_VERIFIED"
+    },
+    {
+      "id": "library-objects",
+      "command": "GetAvailableLibraryParts",
+      "resultHash": "07833a3e0222fff1e89db8daf79908bfb6ea809bd91016c147b4e02a4c9e7713",
+      "status": "CALLABLE_VERIFIED"
+    },
+    {
+      "id": "navigator",
+      "command": "GetNavigatorItemTree",
+      "resultHash": "5135ed2ad53136d4081ffa8a5860e7e9341b7a610d22e94b42f1c92077f048be",
+      "status": "CALLABLE_VERIFIED"
+    },
+    {
+      "id": "mep-tables",
+      "command": "GetMEPPreferenceTables",
+      "resultHash": "10038e0c3399d8934cde5f18605b3da1d7c38d398898b0616dffbbedfa8b26df",
+      "status": "CALLABLE_VERIFIED"
+    },
+    {
+      "id": "mep-elements",
+      "command": "GetMEPElements",
+      "resultHash": "a91d7cc1eff74cb5a904d6073dd7724daedc69c4d432de62a1630a2e51bf94a6",
+      "status": "CALLABLE_VERIFIED"
+    },
+    {
+      "id": "wall-details",
+      "command": "GetDetailsOfElements",
+      "resultHash": "b246bf7094776ea5f9398a99e7a0d5469c3126b2935af5e2a705c0db33da92b7",
+      "status": "CALLABLE_VERIFIED"
+    },
+    {
+      "id": "wall-bounds",
+      "command": "API.Get3DBoundingBoxes",
+      "resultHash": "4e114ddae982d91ab6952a8aabe1ad459520fc86297db7a54ffe6e05937b3bc7",
+      "status": "CALLABLE_VERIFIED"
+    },
+    {
+      "id": "wall-ifc",
+      "command": "GetIFCIdsOfElements",
+      "resultHash": "d21575a155365267198b6e28f6f24f0ce0a10582c1c7dc12585c3744c6349642",
+      "status": "CALLABLE_VERIFIED"
+    },
+    {
+      "id": "material-facts",
+      "command": "GetBuildingMaterials",
+      "resultHash": "39c5b686dfb401775ade785075a735437b9332a0666ab9ff4e97ba79f702fda6",
+      "status": "CALLABLE_VERIFIED"
+    }
+  ],
+  "callableVerified": [
+    "API.Get3DBoundingBoxes",
+    "API.GetAttributesByType",
+    "API.GetElementsByType",
+    "GetAvailableLibraryParts",
+    "GetBuildingMaterials",
+    "GetDetailsOfElements",
+    "GetIFCIdsOfElements",
+    "GetMEPElements",
+    "GetMEPPreferenceTables",
+    "GetModelDumpV1",
+    "GetNavigatorItemTree",
+    "GetStories"
+  ],
+  "liveVerified": [
+    "API.GetElementsByType",
+    "GetModelDumpV1",
+    "GetIFCIdsOfElements"
+  ],
+  "wallCount": 10,
+  "wallFacts": {
+    "schema": "APA_SHARED_NATIVE_FACTS_V1",
+    "sourcePlanHash": "47ea12df9d87bf82f355dd0a5c3a4255313d1f26ef726ed43aeaf0d1aaf9e55e",
+    "elements": [
+      {
+        "guid": "guid-sha256:60267def43ca6d649d7a7bd24de77ef7fead4b07c1c69e2b048dc49b92ed4f19",
+        "type": "Wall",
+        "homeStory": 0,
+        "materials": {
+          "api": "ACAPI_Element_Get",
+          "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "structureType": 0,
+          "buildingMaterial": {
+            "nativeField": "wall.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "guid-sha256:460ab9cf8caf48c17c0ccc65548f6e30d64471a255f116f194a695aa913be014",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "guid-sha256:547d736d45b5e87181167bca76f454bcb18112a29627427af8b278bffa81a391",
+              "name": "Бетон - 02"
+            }
+          },
+          "refMat": {
+            "nativeField": "wall.refMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "oppMat": {
+            "nativeField": "wall.oppMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "sidMat": {
+            "nativeField": "wall.sidMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          }
+        },
+        "relationships": {},
+        "bounds": {
+          "xMin": 49.85,
+          "xMax": 50.15,
+          "yMin": 39.85,
+          "yMax": 48.15,
+          "zMin": 0,
+          "zMax": 3.1
+        },
+        "geometryAuthority": "ACTUAL_RESULTANT_NATIVE_BREP",
+        "quantities": {
+          "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+          "surfaceAreaSquareMeters": 56.8599999999999,
+          "volumeCubicMeters": 7.286999999999921,
+          "bodyCount": 1,
+          "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+        },
+        "providerBounds": {
+          "xMin": 49.85,
+          "yMin": 40,
+          "zMin": 0,
+          "xMax": 50.15,
+          "yMax": 48,
+          "zMax": 3.1
+        },
+        "providerBoundsDelta": 0.14999999999999858,
+        "providerBoundsInterpretation": "DIFFERS_NOT_PHYSICAL_BODY_AUTHORITY"
+      },
+      {
+        "guid": "guid-sha256:03c665c6313ccb63812a345913931e24a6af4fa676ceaa5ca0908b11f49a94ac",
+        "type": "Wall",
+        "homeStory": 0,
+        "materials": {
+          "api": "ACAPI_Element_Get",
+          "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "structureType": 0,
+          "buildingMaterial": {
+            "nativeField": "wall.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "guid-sha256:460ab9cf8caf48c17c0ccc65548f6e30d64471a255f116f194a695aa913be014",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "guid-sha256:547d736d45b5e87181167bca76f454bcb18112a29627427af8b278bffa81a391",
+              "name": "Бетон - 02"
+            }
+          },
+          "refMat": {
+            "nativeField": "wall.refMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "oppMat": {
+            "nativeField": "wall.oppMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "sidMat": {
+            "nativeField": "wall.sidMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          }
+        },
+        "relationships": {},
+        "bounds": {
+          "xMin": 39.85,
+          "xMax": 49.85,
+          "yMin": 47.85,
+          "yMax": 48.15,
+          "zMin": 0,
+          "zMax": 3.1
+        },
+        "geometryAuthority": "ACTUAL_RESULTANT_NATIVE_BREP",
+        "quantities": {
+          "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+          "surfaceAreaSquareMeters": 69.85999999999993,
+          "volumeCubicMeters": 9.299999999999846,
+          "bodyCount": 1,
+          "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+        },
+        "providerBounds": {
+          "xMin": 40,
+          "yMin": 47.85,
+          "zMin": 0,
+          "xMax": 50,
+          "yMax": 48.15,
+          "zMax": 3.1
+        },
+        "providerBoundsDelta": 0.14999999999999858,
+        "providerBoundsInterpretation": "DIFFERS_NOT_PHYSICAL_BODY_AUTHORITY"
+      },
+      {
+        "guid": "guid-sha256:fff44e9df8962ff08d776a79e2bc7472b89ec3704e798711e565ae0c2d22192c",
+        "type": "Wall",
+        "homeStory": 0,
+        "materials": {
+          "api": "ACAPI_Element_Get",
+          "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "structureType": 0,
+          "buildingMaterial": {
+            "nativeField": "wall.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "guid-sha256:460ab9cf8caf48c17c0ccc65548f6e30d64471a255f116f194a695aa913be014",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "guid-sha256:547d736d45b5e87181167bca76f454bcb18112a29627427af8b278bffa81a391",
+              "name": "Бетон - 02"
+            }
+          },
+          "refMat": {
+            "nativeField": "wall.refMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "oppMat": {
+            "nativeField": "wall.oppMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "sidMat": {
+            "nativeField": "wall.sidMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          }
+        },
+        "relationships": {},
+        "bounds": {
+          "xMin": 39.85,
+          "xMax": 49.85,
+          "yMin": 39.85,
+          "yMax": 40.15,
+          "zMin": 0,
+          "zMax": 3.1
+        },
+        "geometryAuthority": "ACTUAL_RESULTANT_NATIVE_BREP",
+        "quantities": {
+          "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+          "surfaceAreaSquareMeters": 66.9199999999999,
+          "volumeCubicMeters": 8.669999999999902,
+          "bodyCount": 1,
+          "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+        },
+        "providerBounds": {
+          "xMin": 40,
+          "yMin": 39.85,
+          "zMin": 0,
+          "xMax": 50,
+          "yMax": 40.15,
+          "zMax": 3.1
+        },
+        "providerBoundsDelta": 0.14999999999999858,
+        "providerBoundsInterpretation": "DIFFERS_NOT_PHYSICAL_BODY_AUTHORITY"
+      },
+      {
+        "guid": "guid-sha256:4660deb18efe75e3d00113574f9d35b3abd5b088d9bb8c6009c83e5484e07538",
+        "type": "Wall",
+        "homeStory": 0,
+        "materials": {
+          "api": "ACAPI_Element_Get",
+          "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "structureType": 0,
+          "buildingMaterial": {
+            "nativeField": "wall.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "guid-sha256:460ab9cf8caf48c17c0ccc65548f6e30d64471a255f116f194a695aa913be014",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "guid-sha256:547d736d45b5e87181167bca76f454bcb18112a29627427af8b278bffa81a391",
+              "name": "Бетон - 02"
+            }
+          },
+          "refMat": {
+            "nativeField": "wall.refMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "oppMat": {
+            "nativeField": "wall.oppMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "sidMat": {
+            "nativeField": "wall.sidMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          }
+        },
+        "relationships": {},
+        "bounds": {
+          "xMin": 39.85,
+          "xMax": 40.15,
+          "yMin": 40.15,
+          "yMax": 47.85,
+          "zMin": 0,
+          "zMax": 3.1
+        },
+        "geometryAuthority": "ACTUAL_RESULTANT_NATIVE_BREP",
+        "quantities": {
+          "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+          "surfaceAreaSquareMeters": 52.41999999999993,
+          "volumeCubicMeters": 6.656999999999869,
+          "bodyCount": 1,
+          "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+        },
+        "providerBounds": {
+          "xMin": 39.85,
+          "yMin": 40,
+          "zMin": 0,
+          "xMax": 40.15,
+          "yMax": 48,
+          "zMax": 3.1
+        },
+        "providerBoundsDelta": 0.14999999999999858,
+        "providerBoundsInterpretation": "DIFFERS_NOT_PHYSICAL_BODY_AUTHORITY"
+      },
+      {
+        "guid": "guid-sha256:8a2b72a5c8c1e9b9eb9f61053243a1a288f5579e060cbafd2dda7d485bcd4ae2",
+        "type": "Wall",
+        "homeStory": 1,
+        "materials": {
+          "api": "ACAPI_Element_Get",
+          "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "structureType": 0,
+          "buildingMaterial": {
+            "nativeField": "wall.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "guid-sha256:460ab9cf8caf48c17c0ccc65548f6e30d64471a255f116f194a695aa913be014",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "guid-sha256:547d736d45b5e87181167bca76f454bcb18112a29627427af8b278bffa81a391",
+              "name": "Бетон - 02"
+            }
+          },
+          "refMat": {
+            "nativeField": "wall.refMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "oppMat": {
+            "nativeField": "wall.oppMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "sidMat": {
+            "nativeField": "wall.sidMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          }
+        },
+        "relationships": {},
+        "bounds": {
+          "xMin": 49.85,
+          "xMax": 50.15,
+          "yMin": 39.85,
+          "yMax": 48.15,
+          "zMin": 3.3,
+          "zMax": 6.915846388
+        },
+        "geometryAuthority": "ACTUAL_RESULTANT_NATIVE_BREP",
+        "quantities": {
+          "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+          "surfaceAreaSquareMeters": 62.163696479679224,
+          "volumeCubicMeters": 8.054351513264406,
+          "bodyCount": 1,
+          "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+        },
+        "providerBounds": {
+          "xMin": 49.85,
+          "yMin": 40,
+          "zMin": 3.3,
+          "xMax": 50.15,
+          "yMax": 48,
+          "zMax": 7.3
+        },
+        "providerBoundsDelta": 0.38415361199999953,
+        "providerBoundsInterpretation": "DIFFERS_NOT_PHYSICAL_BODY_AUTHORITY"
+      },
+      {
+        "guid": "guid-sha256:6a74257a29bad3f916cc05cff24c251704ea86e2e5d14938524a44913d8c38db",
+        "type": "Wall",
+        "homeStory": 1,
+        "materials": {
+          "api": "ACAPI_Element_Get",
+          "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "structureType": 0,
+          "buildingMaterial": {
+            "nativeField": "wall.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "guid-sha256:460ab9cf8caf48c17c0ccc65548f6e30d64471a255f116f194a695aa913be014",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "guid-sha256:547d736d45b5e87181167bca76f454bcb18112a29627427af8b278bffa81a391",
+              "name": "Бетон - 02"
+            }
+          },
+          "refMat": {
+            "nativeField": "wall.refMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "oppMat": {
+            "nativeField": "wall.oppMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "sidMat": {
+            "nativeField": "wall.sidMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          }
+        },
+        "relationships": {},
+        "bounds": {
+          "xMin": 39.85,
+          "xMax": 49.85,
+          "yMin": 47.85,
+          "yMax": 48.15,
+          "zMin": 3.3,
+          "zMax": 6.915846388
+        },
+        "geometryAuthority": "ACTUAL_RESULTANT_NATIVE_BREP",
+        "quantities": {
+          "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+          "surfaceAreaSquareMeters": 78.89556062916907,
+          "volumeCubicMeters": 10.393020396000452,
+          "bodyCount": 1,
+          "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+        },
+        "providerBounds": {
+          "xMin": 40,
+          "yMin": 47.85,
+          "zMin": 3.3,
+          "xMax": 50,
+          "yMax": 48.15,
+          "zMax": 7.3
+        },
+        "providerBoundsDelta": 0.38415361199999953,
+        "providerBoundsInterpretation": "DIFFERS_NOT_PHYSICAL_BODY_AUTHORITY"
+      },
+      {
+        "guid": "guid-sha256:61c1e3bdd9db1fca807d48931b1ece56e5f0ef9b5deddce0e28dc6480ee6603c",
+        "type": "Wall",
+        "homeStory": 1,
+        "materials": {
+          "api": "ACAPI_Element_Get",
+          "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "structureType": 0,
+          "buildingMaterial": {
+            "nativeField": "wall.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "guid-sha256:460ab9cf8caf48c17c0ccc65548f6e30d64471a255f116f194a695aa913be014",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "guid-sha256:547d736d45b5e87181167bca76f454bcb18112a29627427af8b278bffa81a391",
+              "name": "Бетон - 02"
+            }
+          },
+          "refMat": {
+            "nativeField": "wall.refMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "oppMat": {
+            "nativeField": "wall.oppMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "sidMat": {
+            "nativeField": "wall.sidMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          }
+        },
+        "relationships": {},
+        "bounds": {
+          "xMin": 39.85,
+          "xMax": 49.85,
+          "yMin": 39.85,
+          "yMax": 40.15,
+          "zMin": 3.3,
+          "zMax": 6.515512721
+        },
+        "geometryAuthority": "ACTUAL_RESULTANT_NATIVE_BREP",
+        "quantities": {
+          "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+          "surfaceAreaSquareMeters": 70.64868708896908,
+          "volumeCubicMeters": 9.192019394999363,
+          "bodyCount": 1,
+          "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+        },
+        "providerBounds": {
+          "xMin": 40,
+          "yMin": 39.85,
+          "zMin": 3.3,
+          "xMax": 50,
+          "yMax": 40.15,
+          "zMax": 7.3
+        },
+        "providerBoundsDelta": 0.7844872789999995,
+        "providerBoundsInterpretation": "DIFFERS_NOT_PHYSICAL_BODY_AUTHORITY"
+      },
+      {
+        "guid": "guid-sha256:35fa983232fbf4f9483cbcb2949ff69a82c05f9fd309b9ffbad80b356a3c4edc",
+        "type": "Wall",
+        "homeStory": 1,
+        "materials": {
+          "api": "ACAPI_Element_Get",
+          "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "structureType": 0,
+          "buildingMaterial": {
+            "nativeField": "wall.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "guid-sha256:460ab9cf8caf48c17c0ccc65548f6e30d64471a255f116f194a695aa913be014",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "guid-sha256:547d736d45b5e87181167bca76f454bcb18112a29627427af8b278bffa81a391",
+              "name": "Бетон - 02"
+            }
+          },
+          "refMat": {
+            "nativeField": "wall.refMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "oppMat": {
+            "nativeField": "wall.oppMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "sidMat": {
+            "nativeField": "wall.sidMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          }
+        },
+        "relationships": {},
+        "bounds": {
+          "xMin": 39.85,
+          "xMax": 40.15,
+          "yMin": 40.15,
+          "yMax": 47.85,
+          "zMin": 3.3,
+          "zMax": 6.900833876
+        },
+        "geometryAuthority": "ACTUAL_RESULTANT_NATIVE_BREP",
+        "quantities": {
+          "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+          "surfaceAreaSquareMeters": 57.71366328688112,
+          "volumeCubicMeters": 7.440880319535429,
+          "bodyCount": 1,
+          "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+        },
+        "providerBounds": {
+          "xMin": 39.85,
+          "yMin": 40,
+          "zMin": 3.3,
+          "xMax": 40.15,
+          "yMax": 48,
+          "zMax": 7.3
+        },
+        "providerBoundsDelta": 0.39916612399999973,
+        "providerBoundsInterpretation": "DIFFERS_NOT_PHYSICAL_BODY_AUTHORITY"
+      },
+      {
+        "guid": "guid-sha256:a5cdc2eca4a602c45c84779b8c9486d5d9f7aaeb21c3756b2e03a105e695ba21",
+        "type": "Wall",
+        "homeStory": 0,
+        "materials": {
+          "api": "ACAPI_Element_Get",
+          "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "structureType": 0,
+          "buildingMaterial": {
+            "nativeField": "wall.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "guid-sha256:460ab9cf8caf48c17c0ccc65548f6e30d64471a255f116f194a695aa913be014",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "guid-sha256:547d736d45b5e87181167bca76f454bcb18112a29627427af8b278bffa81a391",
+              "name": "Бетон - 02"
+            }
+          },
+          "refMat": {
+            "nativeField": "wall.refMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "oppMat": {
+            "nativeField": "wall.oppMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "sidMat": {
+            "nativeField": "wall.sidMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          }
+        },
+        "relationships": {},
+        "bounds": {
+          "xMin": 44.95,
+          "xMax": 45.05,
+          "yMin": 40.15,
+          "yMax": 47.85,
+          "zMin": 0,
+          "zMax": 3.1
+        },
+        "geometryAuthority": "ACTUAL_RESULTANT_NATIVE_BREP",
+        "quantities": {
+          "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+          "surfaceAreaSquareMeters": 46.53999999999984,
+          "volumeCubicMeters": 2.197999999999979,
+          "bodyCount": 1,
+          "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+        },
+        "providerBounds": {
+          "xMin": 44.95,
+          "yMin": 40.15,
+          "zMin": 0,
+          "xMax": 45.05,
+          "yMax": 47.85,
+          "zMax": 3.1
+        },
+        "providerBoundsDelta": 0.0,
+        "providerBoundsInterpretation": "MATCH"
+      },
+      {
+        "guid": "guid-sha256:2e8b252964e92edb9c6d737515e6e52185474ae23c892f95fd84c5f877976ae9",
+        "type": "Wall",
+        "homeStory": 1,
+        "materials": {
+          "api": "ACAPI_Element_Get",
+          "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "structureType": 0,
+          "buildingMaterial": {
+            "nativeField": "wall.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "guid-sha256:460ab9cf8caf48c17c0ccc65548f6e30d64471a255f116f194a695aa913be014",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "guid-sha256:547d736d45b5e87181167bca76f454bcb18112a29627427af8b278bffa81a391",
+              "name": "Бетон - 02"
+            }
+          },
+          "refMat": {
+            "nativeField": "wall.refMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "oppMat": {
+            "nativeField": "wall.oppMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "sidMat": {
+            "nativeField": "wall.sidMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          }
+        },
+        "relationships": {},
+        "bounds": {
+          "xMin": 44.95,
+          "xMax": 45.05,
+          "yMin": 40.15,
+          "yMax": 47.85,
+          "zMin": 3.3,
+          "zMax": 6.900833876
+        },
+        "geometryAuthority": "ACTUAL_RESULTANT_NATIVE_BREP",
+        "quantities": {
+          "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+          "surfaceAreaSquareMeters": 54.70846696022696,
+          "volumeCubicMeters": 2.624293439844987,
+          "bodyCount": 1,
+          "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+        },
+        "providerBounds": {
+          "xMin": 44.95,
+          "yMin": 40.15,
+          "zMin": 3.3,
+          "xMax": 45.05,
+          "yMax": 47.85,
+          "zMax": 7.3
+        },
+        "providerBoundsDelta": 0.39916612399999973,
+        "providerBoundsInterpretation": "DIFFERS_NOT_PHYSICAL_BODY_AUTHORITY"
+      }
+    ],
+    "engineering": "NOT_VERIFIED"
+  },
+  "providerBoundsMismatchCount": 9,
+  "materialCount": 59,
+  "libraryObjectCount": 2779,
+  "modelCount": 258,
+  "retained258Unchanged": true,
+  "nativeWrites": 0,
+  "savedSHA256": "3a1164d9ea63d66dae4143f6b21060a564ce126629194ff97ffeed9057be8f59",
+  "replayedWorkflow": false,
+  "engineering": "NOT_VERIFIED",
+  "catalog": {
+    "status": "MASS_CONTRACT_CATALOG_CONNECTED",
+    "currentRuntimeCommandContracts": 337,
+    "allPreparedContracts": 363,
+    "tapirRuntime": 264,
+    "officialSourceContracts": 73,
+    "officialActualCalls": 5,
+    "SDKSourceExamples": 14,
+    "SDKSourceExamplesRegistered": 0,
+    "candidateSourceOnlyCommands": 12,
+    "rawAPXProviders": 33,
+    "sourceOnlyForkContracts": 2,
+    "sourceOnlyCppFunctions": 848,
+    "callableVerified": 15,
+    "liveVerified": 4,
+    "workflow": "LIVE_CONNECTED_COMPONENT_WORKFLOW_PASS_WITH_EXPLICIT_PROVIDER_GEOMETRY_DIFFERENCES",
+    "categories": {
+      "TRANSACTION": 7,
+      "DELETE": 18,
+      "CREATE": 72,
+      "SERVICE": 1,
+      "UNKNOWN": 51,
+      "MODIFY": 46,
+      "READ_ONLY": 142
+    },
+    "nativeWrites": 0,
+    "journaledServiceCalls": 1,
+    "retained258": true,
+    "sourceOnlyPrepared": 26
+  },
+  "sharedWriterSave": {
+    "status": "PASS",
+    "modelMutations": 0,
+    "journaledCalls": 1,
+    "savedSHA256": "fcb80deb400106a09261884e63a4dc8c5726451e4b5709dbd39f5aeed83ff0ea"
+  },
+  "geometryInterpretation": "OFFICIAL_PROVIDER_BOUNDS_DIFFER_FOR9_OF10_WALLS; EXISTING_NATIVE_BREP_QUANTITIES_ARE_PHYSICAL_AUTHORITY",
+  "priorPR82Evidence": "PRESERVED_NOT_RECOUNTED_AS_NEW_PASS"
+}
