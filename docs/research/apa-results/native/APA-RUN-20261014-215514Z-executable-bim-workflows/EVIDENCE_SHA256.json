@@ -1,0 +1,8 @@
+{
+  "core-knowledge-query.json": "d51b9880eec78da85f004225865029e6d06eccf9c1bf9ee2f76bffa6cef8c54b",
+  "effect-review.json": "deb65226254b8fb050ed1f123a33eb57ec0c0b11f5cb32ba1b1abdec08acbad5",
+  "execution-matrix.json": "839c064f1fdce573a08c02c8b682a6665ef18cdc36ba333c5de2fab357565939",
+  "gap-register.json": "3ad206ac6671f0f8e8b74626073c952c7e642965a6f3317b85673b6b33e0ca7c",
+  "native-workflows.json": "8b0b2cd7913e65c0d0ef1ef2afda5824462cfec581aec9895ad555bb26516956",
+  "windows-ci.json": "a22a42915ee32bcfef389b74ce1366a38069b1af439ffddb8f23bb550dbc69e5"
+}
