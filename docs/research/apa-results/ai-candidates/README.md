@@ -18,6 +18,7 @@
 - [candidates.json](candidates.json) — машинно-читаемый каталог, первичные ссылки, аргументы, ограничения, дата проверки. **Единственный источник статусов и рангов**.
 - [TEST_PROTOCOL.md](TEST_PROTOCOL.md) — одинаковый набор испытаний, сбор памяти, времени, качества, регрессионные проверки и требования к доказательствам.
 - [FREE_READY_EXTENSIONS_20261014.md](FREE_READY_EXTENSIONS_20261014.md) — проверенные первоисточники бесплатных расширений Archicad 29 и API-библиотек; отдельные типы (APX/сервис/Python), ограничения и проверки безопасности. Результаты испытаний пока NOT_TESTED.
+- [CAD_MCP_HERMES_SPAREPARTS_REVIEW_20261014.md](CAD_MCP_HERMES_SPAREPARTS_REVIEW_20261014.md) — Hermes Agent / SolidWorks MCP / новый Archicad MCP и Spare Parts 3D: пригодность, платность, схема native readback и безопасность скриптов.
 - Документы контроля APA: [controller](../control/README.md) и [канонический исследовательский журнал](../README.md).
 
 ## Ограничения пользователя
