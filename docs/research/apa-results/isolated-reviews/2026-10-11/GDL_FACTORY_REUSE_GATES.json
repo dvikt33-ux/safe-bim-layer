@@ -1,0 +1,161 @@
+{
+  "schema": "APA_GDL_FACTORY_REUSE_GATES_V1",
+  "project": "Archicad Project Accelerator",
+  "classification": "INDEPENDENT_SOURCE_READONLY_REVIEW",
+  "task_context": [
+    "APA-P00.A02.S03",
+    "APA-P10.A02.S02",
+    "APA-P70.A02.S04",
+    "APA-P50.A02.S02"
+  ],
+  "goal": "Reuse existing GDL/LibraryPart functionality without duplicate native writer or interfering with concurrent Work",
+  "capture": {
+    "historical_branch": "research/archicad29-tapir159-expansion@c651035d",
+    "historical_tapir": "1.5.9",
+    "saved_schema_provider_version": "1.5.10",
+    "saved_schema_origin": "live TapirCommand.GenerateDocumentation in a previously recorded test PLN",
+    "archicad_current_runtime_compared": false,
+    "installed_apx_binary_identity_checked": false,
+    "work_branch_edited": false,
+    "controller_changed": false
+  },
+  "source_refs": {
+    "archive": {
+      "ref": "477ba54a0620ce7c0efc1b835f1d0ad2f1a03ba5",
+      "path": "docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/05_expansion_candidates/PARAMETRIC_GDL_LIBRARY_FACTORY.md",
+      "blob": "d6f4bca6a7680a4dcd42fd0cb6793ad29bd2ec36",
+      "url": "https://github.com/dvikt33-ux/safe-bim-layer/blob/477ba54a0620ce7c0efc1b835f1d0ad2f1a03ba5/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/05_expansion_candidates/PARAMETRIC_GDL_LIBRARY_FACTORY.md"
+    },
+    "tapir": {
+      "ref": "03f94e9bb67e01a0944813b25eaea50b1afa0ead",
+      "path": "schemas/tapir-live-1.5.10/tapir-scene-live.json",
+      "blob": "e8ad53b6ea7c19dc34cbdcb723a79be995639cd7",
+      "url": "https://github.com/dvikt33-ux/safe-bim-layer/blob/03f94e9bb67e01a0944813b25eaea50b1afa0ead/schemas/tapir-live-1.5.10/tapir-scene-live.json"
+    },
+    "libraryPack": {
+      "ref": "83fd72e150e96cb90db75145436d023969365bd3",
+      "path": "scripts/archicad_project_library_pack.py",
+      "blob": "b6053b93d9956bcbfd22a528f4f5750e07e9f5a7",
+      "url": "https://github.com/dvikt33-ux/safe-bim-layer/blob/83fd72e150e96cb90db75145436d023969365bd3/scripts/archicad_project_library_pack.py"
+    },
+    "libraryPackReport": {
+      "ref": "106f8b59bcda05a3641afe9387adc96ae8c144ac",
+      "path": "docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-163145Z-p70-a02-s03-library-pack/REPORT.md",
+      "blob": "80b55c7f404f4241f19c520320a2615d46d9c341",
+      "url": "https://github.com/dvikt33-ux/safe-bim-layer/blob/106f8b59bcda05a3641afe9387adc96ae8c144ac/docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-163145Z-p70-a02-s03-library-pack/REPORT.md"
+    },
+    "diagnostics": {
+      "ref": "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+      "path": "docs/research/patches/tapir-1.5.10-blocker1-readonly-diagnostic.patch",
+      "blob": "3a2dadc733fe693d6c6157b04c3bc2c315fd80cd",
+      "url": "https://github.com/dvikt33-ux/safe-bim-layer/blob/9b75c2fed9d51301a7a620ca94df7a36d5545870/docs/research/patches/tapir-1.5.10-blocker1-readonly-diagnostic.patch"
+    },
+    "policy": {
+      "ref": "03f94e9bb67e01a0944813b25eaea50b1afa0ead",
+      "path": "docs/archicad-template/LIBRARY_MIGRATION_POLICY_v0.1.md",
+      "blob": "6f2e1f74d833cb3de6340914cddaad9ece51e0b0",
+      "url": "https://github.com/dvikt33-ux/safe-bim-layer/blob/03f94e9bb67e01a0944813b25eaea50b1afa0ead/docs/archicad-template/LIBRARY_MIGRATION_POLICY_v0.1.md"
+    },
+    "checkpoint": {
+      "ref": "03f94e9bb67e01a0944813b25eaea50b1afa0ead",
+      "path": "docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md",
+      "blob": "526089d34ce8090e7b9d05afc1c86ca74d509dfd",
+      "url": "https://github.com/dvikt33-ux/safe-bim-layer/blob/03f94e9bb67e01a0944813b25eaea50b1afa0ead/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md"
+    }
+  },
+  "evidence": [
+    {
+      "id": "GDL_ARCHIVE_FACTORY",
+      "status": "HISTORICAL_SOURCE_READ",
+      "finding": "Historic plan proposes HSF/GDL -> LP_XMLConverter -> library catalog -> Tapir load/place/readback. This is not current runtime proof."
+    },
+    {
+      "id": "COMPANION_COMMAND_SCHEMA",
+      "status": "PINNED_SCHEMA_VERIFIED",
+      "finding": "Saved Tapir 1.5.10 export already defines SafeBIMGlobalLibraryPart and CreateLibraryPartFromScripts with Inspect/Register/Compile/Discover plus nonmutating AuditWindows/AuditDoors actions; expectedProjectPath mandatory. Implementation and availability in currently loaded APX NOT_VERIFIED.",
+      "ref": "tapir"
+    },
+    {
+      "id": "OBJECT_LIBRARY_MAIN_ID_READBACK",
+      "status": "PINNED_SCHEMA_VERIFIED",
+      "finding": "ObjectDetails.libPart uses LibPartDetails with name, parentUnID, ownUnID; this supplies a typed post-placement identity readback contract. GetGDLParametersOfElements also exists for typed GDL parameters. Actual runtime behavior NOT_VERIFIED.",
+      "ref": "tapir"
+    },
+    {
+      "id": "CREATEOBJECTS_NAME_GATE",
+      "status": "PINNED_SCHEMA_VERIFIED",
+      "finding": "CreateObjects items require libraryPartName plus coordinates; there is no create-item argument for Main GUID. The write must be gated by same native name resolver identity, not only inventory name match.",
+      "ref": "tapir"
+    },
+    {
+      "id": "LIBRARY_INVENTORY_PARTIAL",
+      "status": "PINNED_SCHEMA_VERIFIED_AND_HISTORICAL_FAILURE_REPORTED",
+      "finding": "GetAvailableLibraryParts returns guid/index/documentName and skippedCount, skippedSample; 92 historical unreadable parts on previous test are not assumed current. Native resolver diagnostic patch exists, but installation/live invocation not demonstrated.",
+      "ref": "diagnostics"
+    },
+    {
+      "id": "LIBRARY_PACK_SCOPE",
+      "status": "PINNED_SOURCE_VERIFIED",
+      "finding": "Existing project library pack compiler is deliberately read-only, resolves one exact BuildingMaterial GUID, sets importedLibraryObjects=[], and does not import GDL/PLA or run AddLibraries.",
+      "ref": "libraryPack"
+    },
+    {
+      "id": "LIBRARY_WRITES_HIGH_RISK",
+      "status": "PINNED_SCHEMA_VERIFIED",
+      "finding": "AddLibraries, SetLibraries, ReloadLibraries, AddFilesToEmbeddedLibrary and SetGDLParametersOfElements are exposed write-capable commands and must not be called by read-only inspection or hidden side effects.",
+      "ref": "tapir"
+    },
+    {
+      "id": "GLOBAL_LIBRARY_POLICY",
+      "status": "DRAFT_POLICY_SOURCE_READ",
+      "finding": "New AC29 projects prefer Global Library and linked reusable SBIM libraries; do not preload legacy monolith catalogs or silently substitute missing library parts.",
+      "ref": "policy"
+    }
+  ],
+  "candidate_paths": [
+    {
+      "name": "reuse existing SafeBIMGlobalLibraryPart",
+      "status": "PREFERRED_TO_AUDIT_FIRST_NOT_EXECUTE",
+      "advantages": [
+        "schema advertises Discover/Inspect/Register/Compile and external storage policy",
+        "potentially avoids reinventing native library compilation"
+      ],
+      "gates": [
+        "read exact implementing C++ and on-disk loaded APX identity",
+        "verify command availability and benign read-only Discover/Inspect with exact project",
+        "prove stable MainID, output/side effects, revision behavior, failure atomicity"
+      ],
+      "no_claims": [
+        "not proven to be currently installed",
+        "Compile may write files or library data and is prohibited in this review"
+      ]
+    },
+    {
+      "name": "external HSF + LP_XMLConverter fallback",
+      "status": "HISTORICAL_ALTERNATIVE_NOT_IMPLEMENTED",
+      "advantages": [
+        "source-controlled HSF",
+        "conversion could be isolated from PLN"
+      ],
+      "gates": [
+        "verify AC29 converter installation/version and invocation under pinned fixed-path wrapper",
+        "Main ID/revision guarantees and safe sandbox",
+        "license, Unicode, reproducibility and packaging"
+      ],
+      "no_claims": [
+        "not the default choice until existing custom command is reviewed"
+      ]
+    }
+  ],
+  "reconciler_gates": [
+    "Exact installed AC29/Tapir/APX and source implementation identity; schema snapshot alone is not a live gate",
+    "Read-only exact project identity and library enumeration before any possible artifact/register/compile step",
+    "Resolve libraryPartName via same native ACAPI_LibraryPart_Search flags used by CreateObjects and prove expected Main GUID; failed/partial inventory must be handled fail-closed",
+    "Separate explicit user approval for external file generation, AddLibraries/ReloadLibraries, and any native create/write. No transparent conversion of read-only into file/PLN mutation",
+    "After single separately approved CreateObjects operation, verify returned element GUID, ObjectDetails.libPart.ownUnID, and GetGDLParametersOfElements actual saved parameters; unknown outcome -> no blind retry",
+    "Only then conditionally extend Project Library Pack with content/version/right records while leaving native Wall/Slab/Roof operations native"
+  ],
+  "status": "SOURCE_GAP_REVIEW_ONLY__NO_BUILD_NO_LIVE",
+  "merge_policy": "DRAFT_PR_ONLY; DO_NOT MERGE UNTIL CONCURRENT WORK HAS STOPPED AND REVALIDATED SOURCE REFS",
+  "snapshot_origin_commit": "106f8b59bcda05a3641afe9387adc96ae8c144ac"
+}
