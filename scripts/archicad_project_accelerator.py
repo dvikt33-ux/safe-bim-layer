@@ -160,7 +160,7 @@ def connect_functional_modules(router, manifest_path=None):
     trusted=json.loads(installed.read_text(encoding='utf8'))
     if manifest['sdkProviders']!=trusted['sdkProviders'] or manifest['local']['commands']!=trusted['local']['commands'] or manifest['local']['dependencies']!=trusted['local']['dependencies']:
         raise ValueError('CODE_OWNED_MODULE_CONTRACT_REQUIRED')
-    if manifest['sdkImplementationSHA256']!=hashlib.sha256((root/'archicad-addon/Sources/NativeModuleCommands.cpp').read_bytes()).hexdigest():
+    if manifest['sdkImplementationSHA256']!=hashlib.sha256((root/'archicad-addon/Sources/NativeModuleCommands.cpp').read_bytes().replace(b'\r\n',b'\n')).hexdigest():
         raise ValueError('SDK_MODULE_SOURCE_DRIFT')
     for namespace,commands in manifest['sdkProviders'].items():
         missing={name:row for name,row in commands.items() if 'AddOn.'+namespace+'.'+name not in router.catalog['commands'] and not (namespace=='TapirCommand' and name in router.catalog['commands'])}

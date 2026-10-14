@@ -12,7 +12,7 @@ def obj(properties,required=None,extra=False):
     return dict(type='object',properties=properties,required=list(properties) if required is None else required,additionalProperties=extra)
 def arr(items,**bounds):return dict(type='array',items=items,**bounds)
 def nullable(schema):return dict(anyOf=[schema,{'type':'null'}])
-def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
+def sha(path):return hashlib.sha256(path.read_bytes().replace(b'\r\n',b'\n')).hexdigest()
 def build():
     cpp=ROOT/'archicad-addon/Sources/NativeModuleCommands.cpp';text=cpp.read_text(encoding='utf8')
     error=obj({'error':obj({'code':I,'message':S})})

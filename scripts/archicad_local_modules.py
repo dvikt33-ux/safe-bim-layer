@@ -87,7 +87,7 @@ def ifc_exchange(path):
 def attach(router,manifest):
     """Only code-owned entry points; catalog input cannot import arbitrary code."""
     import hashlib,importlib.metadata
-    expected=hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+    expected=hashlib.sha256(Path(__file__).read_bytes().replace(b'\r\n',b'\n')).hexdigest()
     if manifest['implementationSHA256']!=expected:raise ValueError('LOCAL_MODULE_SOURCE_DRIFT')
     names={'NormalizeNativeDump':normalize_native,'NativeBodyQuantities':native_quantities,'DependencyImpact':dependency_impact,'PolygonRelations':polygon_relations,'ConstrainedAssignment':constrained_assignment,'IFCSelect':ifc_select,'IFCValidate':ifc_validate,'IFCGeometry':ifc_geometry,'IFCExchangeFacts':ifc_exchange}
     present={'AddOn.APAAnalysis.'+n for n in names}&set(router.catalog['commands'])
