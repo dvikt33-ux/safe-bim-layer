@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 158,
+  "revision": 159,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -4446,7 +4446,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -4606,12 +4606,13 @@
         "Candidate275registeredTapirSDK+73official=348routable; restoredoriginal264registeredTapir+73official=337routable.16distinctcommandsLIVE_VERIFIED acrosspass; all348inputs validated. Officialoutputschemas SDKkeys only, nestedcontract coveragepartial.33loadedAPX;32otherproviders NOT_EXPOSED withoutdiscoverednamespacecontract.12candidateSDKcommands absentafterrestore plusonelegacycommand restored; BLOCKED inoriginalruntime. Preparation isnotprojectwritepermission. Dynamicexactscope, binding/hash, affected/retainedinventory andindependentreadback preserveUNKNOWN no-replay. Explicitnativeoperation previews supportcompositionchanges withoutguessingtoolconversions; MorphLastResort preserved.",
         "LIVE geometry/edit/saveOpen: gable2SinglePlaneRoof25to28degrees,hip1MultiPlaneRoof4actualplanes30to35degrees, bothwidth+1m withsameexperimentalGUIDs.1gable3Dridge/solidseam and5hip/ridgejoins,footprinterrorsbelow1e-5m2. SourceBuildingMaterial/thickness/floor/eavedatum preserved. Native3D PASS. Repeatedfinalpitch requests0writes/0duplicates. OriginalsourceRoof+5SEOwalls unchanged; specimensinfreeareas ofsameexistingtestPLN.3newRoofGUIDs,current258,allprevious255geometry/material/story/relationships unchanged afterSave/Open andoriginalAPXindependentread.",
         "OriginalAPXfiles+registrations restoredbyteexact, noTRC/newPLN/main/normative/KGimplementation changes. SourceSurface transfer GableMATCH;HipMultiPlaneoverridesdiffer NOT_VERIFIED, donotinferfromBuildingMaterialPASS. InstalledSetDetailsRoofsurfacesetter absent; nextminimalexistingRoofcontract ispivotPolyEdges/levelEdgeData (APIMemoMask_PivotPolygon), no newSDKengine. NativeBADPOLY/BADPARS andsuccess-withoutpitch outcomes retained; no blindCreate/Modifyreplay.",
-        "WindowsCI PASS exact 1c27e7c4b66d5b225724e777719e6a675660494a; local7Roof+3dynamiccritical and15affectedexistingModelFirst tests only. Independentofflineaudit appliesolder3ad9961 snapshot; three historicalYAML parseerrors remain sourceingestionfollowup, notnativeBIMregressions. Publisherreport/evidence/receipt GitHubbyte-readback verified. A11.S03PARTIAL, A11.S10BLOCKED andA07dependencies preserved. Next: exactMultiPlaneSurface transfer, thenadditionalmodel functions viaexistingdynamiccatalog."
+        "WindowsCI PASS exact 1c27e7c4b66d5b225724e777719e6a675660494a; local7Roof+3dynamiccritical and15affectedexistingModelFirst tests only. Independentofflineaudit appliesolder3ad9961 snapshot; three historicalYAML parseerrors remain sourceingestionfollowup, notnativeBIMregressions. Publisherreport/evidence/receipt GitHubbyte-readback verified. A11.S03PARTIAL, A11.S10BLOCKED andA07dependencies preserved. Next: exactMultiPlaneSurface transfer, thenadditionalmodel functions viaexistingdynamiccatalog.",
+        "Current user priority: maximum mass capability integration and cross-provider dependency routing first. Roof Surface/Stair/MEP narrow fixes remain registered and deferred unless blocking the common interface. Do not infer native availability or safety from command names or source presence."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "work-mass-capability-integration-20261014",
+      "lease_until": "2026-10-14T22:05:00Z",
+      "claim_ref": "APA-CLAIM-MASS-CAPABILITIES-20261014T180500Z",
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
