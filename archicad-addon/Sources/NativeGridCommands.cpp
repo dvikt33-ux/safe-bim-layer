@@ -11,7 +11,7 @@ GS::Optional<GS::UniString> GetAPARuntimeInfoV1Command::GetRawResponseSchema () 
 GS::ObjectState GetAPARuntimeInfoV1Command::Execute (const GS::ObjectState&, GS::ProcessControl&) const {
     return GS::ObjectState ("contract", "APA_NATIVE_RUNTIME_IDENTITY_V1", "buildIdentity", APA_BUILD_IDENTITY,
         "sourceRevision", APA_SOURCE_REVISION, "sdkMajor", 29, "developerId", 826567491, "localId", 368333322,
-        "stairSolverPolicy", "REQUIRE_COMPLETE_MEMO_NO_NULL_EDGE_VERTEX_DATA", "nativeModelWrites", 0);
+        "stairSolverPolicy", "DETACHED_DIAGNOSTIC_READONLY_NO_SETTER_OR_SOLVER", "nativeModelWrites", 0);
 }
 
 static bool IsGrid (const API_Element& e) {

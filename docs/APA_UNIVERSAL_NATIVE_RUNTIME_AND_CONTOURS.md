@@ -29,7 +29,10 @@ them. It then called `SolveStair` before creation, while the walking-line memo
 still described the old Stair. These are concrete unqualified inputs; they are
 not a proved faulting instruction or a confirmed root cause of the process exit.
 
-The new candidate checks coordinate/ending capacities, contour/arc counts and
+The detached diagnostic now reads the source memo without modifying it or
+calling the setter/solver; it reports BLOCKED until detached preparation and
+ownership are qualified. It is not a repeat of the terminating request.
+The exact create/edit candidate also checks coordinate/ending capacities, contour/arc counts and
 edge/vertex buffers before the solver. Missing buffers return
 `NativeStairMemoUnqualified_NoSolver_NoCreate` with memory-layout diagnostics.
 No arbitrary metadata, walking line, rule override or guessed geometry is

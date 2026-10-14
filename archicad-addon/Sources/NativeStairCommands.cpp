@@ -127,9 +127,15 @@ GS::ObjectState EvaluateNativeStairGeometryV1Command::Execute (const GS::ObjectS
     API_Element e = {}; API_ElementMemo memo = {}; const GS::OnExit guard ([&] () { ACAPI_DisposeElemMemoHdls (&memo); });
     const GSErrCode err = ReadStair (GetGuidFromArrayItem ("elementId", params), e, memo);
     if (err != NoError) return CreateErrorResponse (err, "NativeStairSourceRequired");
-    auto failure = ExactSettings (e, memo, GetStories (), params);
-    if (failure.HasValue ()) return failure.Get ();
-    auto out = StairState (e, memo); out.Add ("status", "DETACHED_NATIVE_SOLVER_PASS_NOT_CREATED"); return out;
+    // Read-only diagnosis must not repurpose the attached Stair's complete memo.
+    // The crashed provider mixed new baseline data with old walking-line/parts.
+    // Until detached preparation/ownership is qualified, report the source frame
+    // and buffer layout WITHOUT calling the setter, solver or model mutation.
+    auto out = StairState (e, memo);
+    out.Add ("status", "BLOCKED_DETACHED_STAIR_PREPARATION_NOT_QUALIFIED");
+    out.Add ("requestedParameters", params); out.Add ("solverCalled", false);
+    out.Add ("diagnostic", "Source memo is unchanged; qualified detached preparation is required before SolveStair.");
+    return out;
 }
 GS::Optional<GS::UniString> ModifyNativeStairGeometryV1Command::GetInputParametersSchema () const { return StairDataSchema (); }
 GS::ObjectState ModifyNativeStairGeometryV1Command::Execute (const GS::ObjectState& params, GS::ProcessControl&) const {

@@ -98,7 +98,7 @@ def overlay_registration(addon_source):
         ('CreateNativeGridElementsV1Command','Create one true native Grid from source defaults.'),
         ('ModifyNativeGridElementsV1Command','Edit one true native Grid with retained GUID.'),
         ('GetNativeStairGeometryV1Command','Read exact native Stair geometry and solver rules.'),
-        ('EvaluateNativeStairGeometryV1Command','Solve a detached Stair without model writes.'),
+        ('EvaluateNativeStairGeometryV1Command','Read Stair source frame/memo without an unqualified setter or solver call.'),
         ('CreateExactStairsV1Command','Create one Stair with locked source dimensions.'),
         ('ModifyNativeStairGeometryV1Command','Edit one owned Stair with locked source dimensions.')],
         'projectCommands':[('SetMasterLayoutContextV1Command','Bind native master layout context.') ]}
