@@ -16,12 +16,13 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 
-def tapir(port: int, command: str, params: dict | None = None, *, timeout: float = 15) -> dict:
+def tapir(port: int, command: str, params: dict | None = None, *, timeout: float = 15, namespace: str = 'TapirCommand') -> dict:
+    if not isinstance(namespace,str) or not namespace or '.' in namespace:raise ValueError('INVALID_ADDON_NAMESPACE')
     request = {
         "command": "API.ExecuteAddOnCommand",
         "parameters": {
             "addOnCommandId": {
-                "commandNamespace": "TapirCommand",
+                "commandNamespace": namespace,
                 "commandName": command,
             },
             "addOnCommandParameters": params or {},

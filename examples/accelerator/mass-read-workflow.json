@@ -1,0 +1,111 @@
+{
+  "operations": [
+    {
+      "id": "native-model",
+      "command": "GetModelDumpV1",
+      "params": {}
+    },
+    {
+      "id": "stories",
+      "command": "GetStories",
+      "params": {}
+    },
+    {
+      "id": "walls",
+      "command": "API.GetElementsByType",
+      "params": {
+        "elementType": "Wall"
+      }
+    },
+    {
+      "id": "wall-details",
+      "command": "GetDetailsOfElements",
+      "params": {
+        "elements": {
+          "$result": {
+            "step": "walls",
+            "pointer": "/elements"
+          }
+        }
+      }
+    },
+    {
+      "id": "wall-bounds",
+      "command": "API.Get3DBoundingBoxes",
+      "params": {
+        "elements": {
+          "$result": {
+            "step": "walls",
+            "pointer": "/elements"
+          }
+        }
+      }
+    },
+    {
+      "id": "wall-ifc",
+      "command": "GetIFCIdsOfElements",
+      "params": {
+        "elements": {
+          "$result": {
+            "step": "walls",
+            "pointer": "/elements"
+          }
+        }
+      }
+    },
+    {
+      "id": "material-ids",
+      "command": "API.GetAttributesByType",
+      "params": {
+        "attributeType": "BuildingMaterial"
+      }
+    },
+    {
+      "id": "material-facts",
+      "command": "GetBuildingMaterials",
+      "params": {
+        "attributeIds": {
+          "$result": {
+            "step": "material-ids",
+            "pointer": "/attributeIds"
+          }
+        },
+        "fields": [
+          "id",
+          "cutSurfaceIndex",
+          "collisionDetection"
+        ]
+      }
+    },
+    {
+      "id": "library-objects",
+      "command": "GetAvailableLibraryParts",
+      "params": {
+        "filterByTypeId": "Object"
+      }
+    },
+    {
+      "id": "navigator",
+      "command": "GetNavigatorItemTree",
+      "params": {
+        "navigatorMapId": "ProjectMap"
+      }
+    },
+    {
+      "id": "mep-tables",
+      "command": "GetMEPPreferenceTables",
+      "params": {
+        "domain": "Ventilation"
+      }
+    },
+    {
+      "id": "mep-elements",
+      "command": "GetMEPElements",
+      "params": {
+        "domains": [
+          "Ventilation"
+        ]
+      }
+    }
+  ]
+}

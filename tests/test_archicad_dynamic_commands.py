@@ -5,11 +5,13 @@ import archicad_project_accelerator as A
 from archicad_dynamic_commands import DynamicCommands
 
 def router():
-    return DynamicCommands(dict(common_schemas={},commands={'NewNativeCommand':dict(name='NewNativeCommand',version='1',category='Test',parameters=dict(type='object',properties={'value':dict(type='integer')},required=['value'],additionalProperties=False),returns=dict(type='object',properties={'success':dict(type='boolean')},required=['success']))}))
+    r=DynamicCommands(dict(common_schemas={},commands={'NewNativeCommand':dict(name='NewNativeCommand',version='1',category='Test',parameters=dict(type='object',properties={'value':dict(type='integer')},required=['value'],additionalProperties=False),returns=dict(type='object',properties={'success':dict(type='boolean')},required=['success']))}))
+    r.review_policy('NewNativeCommand','MODIFY','MODEL',dict(source='synthetic reviewed contract',sha256='1'*64))
+    return r
 
 class DynamicTests(unittest.TestCase):
     def test_new_command_no_name_handler_and_schema_gate(self):
-        r=router();ticket=r.prepare('NewNativeCommand',{'value':2});self.assertEqual(r.select('NewNativeCommand')['status'],'ROUTABLE')
+        r=router();ticket=r.prepare('NewNativeCommand',{'value':2});self.assertEqual(r.select('NewNativeCommand')['status'],'SCHEMA_VALID')
         with self.assertRaises(Exception):r.prepare('NewNativeCommand',{'value':'bad'})
         with self.assertRaises(ValueError):r.read(None,ticket,True)
 

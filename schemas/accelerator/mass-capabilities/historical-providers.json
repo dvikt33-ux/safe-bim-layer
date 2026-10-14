@@ -1,0 +1,178 @@
+{
+  "schema": "APA_HISTORICAL_PROVIDER_RECONCILIATION_V1",
+  "historicalProviderCount": 16,
+  "historicalOriginalPreserved": true,
+  "providers": [
+    {
+      "id": "tapir-modified",
+      "historicalStatus": "CURRENT_LIVE_READ_ONLY_VERIFIED; APX_PRESENT",
+      "historicalDate": "2026-10-09",
+      "countsAddedToNativeCommands": false,
+      "current": "RUNTIME_AVAILABLE",
+      "route": "EXISTING_DYNAMIC_ROUTER",
+      "nativeContracts": 264
+    },
+    {
+      "id": "native-model-dump",
+      "historicalStatus": "SOURCE_AND_HISTORICAL_LIVE; current API registration=false",
+      "historicalDate": "2026-10-09",
+      "countsAddedToNativeCommands": false,
+      "current": "LIVE_VERIFIED_THIS_PASS",
+      "route": "GetModelDumpV1 -> shared native facts",
+      "oldRegistrationStatusStale": true
+    },
+    {
+      "id": "scene-writer",
+      "historicalStatus": "LOCAL_CODE",
+      "historicalDate": "2026-10-09",
+      "countsAddedToNativeCommands": false,
+      "current": "LIVE_VERIFIED_THIS_PASS",
+      "route": "EXISTING_SQLITE_JOURNAL",
+      "newExecutors": 0
+    },
+    {
+      "id": "alesdev88",
+      "historicalStatus": "INSTALLED_UV_RUNTIME",
+      "historicalDate": "2026-10-09",
+      "countsAddedToNativeCommands": false,
+      "current": "SOURCE_RECHECKED_CURRENT_COMMIT_ENDPOINT_UNREACHABLE",
+      "route": "250 contracts alias existing Tapir; no second executor",
+      "duplicateCommandCount": 250
+    },
+    {
+      "id": "lgradisar",
+      "historicalStatus": "NOT_FOUND_IN_INSPECTED_RUNTIME_AND_CONFIG",
+      "historicalDate": "2026-10-09",
+      "countsAddedToNativeCommands": false,
+      "current": "BLOCKED_NOT_INSTALLED_IN_INSPECTED_SCOPE",
+      "route": "EXCLUDED_UNTIL_AVAILABLE_SOURCE_RUNTIME_CONTRACT"
+    },
+    {
+      "id": "huskybim",
+      "historicalStatus": "NOT_FOUND_IN_AC29_APX_SCOPE",
+      "historicalDate": "2026-10-09",
+      "countsAddedToNativeCommands": false,
+      "current": "BLOCKED_NOT_INSTALLED_IN_INSPECTED_SCOPE",
+      "route": "EXCLUDED_UNTIL_AVAILABLE_SOURCE_RUNTIME_CONTRACT"
+    },
+    {
+      "id": "mep-designer",
+      "historicalStatus": "HOST_COMPONENT_OR_SCHEMA_PRESENT; live workflow unverified",
+      "historicalDate": "2026-10-09",
+      "countsAddedToNativeCommands": false,
+      "current": "CALLABLE_VERIFIED_QUERIES_NOT_CONNECTED_NETWORK_ACCEPTANCE",
+      "route": "GetMEPElements/GetMEPPreferenceTables"
+    },
+    {
+      "id": "hotlink",
+      "historicalStatus": "HOST_COMPONENT_OR_SCHEMA_PRESENT; live workflow unverified",
+      "historicalDate": "2026-10-09",
+      "countsAddedToNativeCommands": false,
+      "current": "SCHEMA_ROUTABLE_NOT_LIVE_TESTED",
+      "route": "EXISTING_TAPIR_CONTRACTS",
+      "engineering": "NOT_VERIFIED"
+    },
+    {
+      "id": "favorites",
+      "historicalStatus": "HOST_COMPONENT_OR_SCHEMA_PRESENT; live workflow unverified",
+      "historicalDate": "2026-10-09",
+      "countsAddedToNativeCommands": false,
+      "current": "SCHEMA_ROUTABLE_NOT_LIVE_TESTED",
+      "route": "EXISTING_TAPIR_FAVOURITE_COMMANDS"
+    },
+    {
+      "id": "gdl",
+      "historicalStatus": "HOST_COMPONENT_OR_SCHEMA_PRESENT; live workflow unverified",
+      "historicalDate": "2026-10-09",
+      "countsAddedToNativeCommands": false,
+      "current": "CALLABLE_VERIFIED_RESOURCE_QUERY",
+      "route": "GetAvailableLibraryParts/CreateObjects/GDL parameter contracts",
+      "resourceCount": 2779,
+      "nativeCreation": "NOT_REPEATED"
+    },
+    {
+      "id": "ifc-native",
+      "historicalStatus": "HOST_COMPONENT_OR_SCHEMA_PRESENT; live workflow unverified",
+      "historicalDate": "2026-10-09",
+      "countsAddedToNativeCommands": false,
+      "current": "LIVE_VERIFIED_GUID_MAPPING_ONLY",
+      "route": "GetIFCIdsOfElements + existing IFC adapter",
+      "semanticExchange": "NOT_VERIFIED"
+    },
+    {
+      "id": "ifcopenshell",
+      "historicalStatus": "NOT_INSTALLED_IN_INSPECTED_RUNTIME",
+      "historicalDate": "2026-10-09",
+      "countsAddedToNativeCommands": false,
+      "current": "INSTALLED_DEPENDENCY_EXISTING_ADAPTER_CONNECTED_NOT_LIVE_FILE_EXCHANGE_THIS_PASS",
+      "route": "archicad_connected_ifc.py",
+      "dependency": {
+        "installed": true,
+        "version": "0.8.5",
+        "originSHA256": "b4f7e1224b09e47f52c2748cc9a3d4de6f4558895e0a744170b3f5be55774b6f"
+      },
+      "oldInstallationStatusStale": true
+    },
+    {
+      "id": "normative-sources",
+      "historicalStatus": "LOCAL_RESEARCH_AND_RULE_ARTIFACTS",
+      "historicalDate": "2026-10-09",
+      "countsAddedToNativeCommands": false,
+      "current": "EXCLUDED_FROM_CURRENT_DEVELOPMENT_SCOPE",
+      "route": "UNCHANGED_EXISTING_NORMATIVE_SYSTEM"
+    },
+    {
+      "id": "detail-library",
+      "historicalStatus": "LOCAL_RELEASE_ARTIFACTS",
+      "historicalDate": "2026-10-09",
+      "countsAddedToNativeCommands": false,
+      "current": "EXISTING_DETAILS_ADAPTER_PRESERVED",
+      "route": "archicad_details_context.py + existing CSE/BIM Graph",
+      "records": 73,
+      "engineering": "NOT_REVERIFIED_THIS_PASS"
+    },
+    {
+      "id": "bibimai",
+      "historicalStatus": "APX_PRESENT",
+      "historicalDate": "2026-10-09",
+      "countsAddedToNativeCommands": false,
+      "current": "LOADED_APX_NO_INDEPENDENT_JSON_RPC_ENDPOINT",
+      "route": "LLM_UI_TOOL_RETURN; existing MCP unavailable"
+    },
+    {
+      "id": "other-researched",
+      "historicalStatus": "MIXED_CODE_RESEARCH_CANDIDATES",
+      "historicalDate": "2026-10-09",
+      "countsAddedToNativeCommands": false,
+      "current": "SOURCE_CANDIDATES_NOT_RUNTIME_COMMANDS",
+      "route": "EXISTING_REUSE_REGISTRY; no invented function counts"
+    }
+  ],
+  "pythonDependencies": {
+    "ifcopenshell": {
+      "installed": true,
+      "version": "0.8.5",
+      "originSHA256": "b4f7e1224b09e47f52c2748cc9a3d4de6f4558895e0a744170b3f5be55774b6f"
+    },
+    "networkx": {
+      "installed": true,
+      "version": "3.6.1",
+      "originSHA256": "39537c0bec78e0b81e25629c6fbeeff96c1f315ec462a89e69f92841d9409791"
+    },
+    "shapely": {
+      "installed": true,
+      "version": "2.2.0",
+      "originSHA256": "8bc6b38c1f1be4a67a10c62d86a965adc0ef6a1c53e3b41e12aa033fefa0fa13"
+    },
+    "ortools": {
+      "installed": true,
+      "version": "9.15.6755",
+      "originSHA256": "56f1487f17ab2efbd136b272dd889bb2105bd3613fef3db978869856091cf099"
+    },
+    "mcp": {
+      "installed": true,
+      "version": "2.3.0",
+      "originSHA256": "c989b67127034c5979af20fa4a298f9dbd03b13c522a1954bc8d59aefb084f9a"
+    }
+  }
+}

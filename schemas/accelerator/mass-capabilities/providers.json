@@ -1,0 +1,474 @@
+{
+  "schema": "APA_PROVIDER_COVERAGE_V1",
+  "providers": [
+    {
+      "name": "BibimAI.apx",
+      "sha256": "7d581b845b3a0f1f43344571cca0148c6a3e8333310f6e4502b3c7958264108e",
+      "rawExportCount": 2,
+      "internalOrABIExportCount": 0,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "Existing Bibim native tools are returned to its LLM/UI host, not exposed as independent JSON RPC; existing MCP8001 endpoint unreachable. Router not imported because it starts a scheduler.",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE",
+      "sourceInspected": true
+    },
+    {
+      "name": "SAF In-Out.apx",
+      "sha256": "33f50b3236cfb2b67c695c032424f20b8a6f29a2d008d62986108c0ab294cb4d",
+      "rawExportCount": 47,
+      "internalOrABIExportCount": 45,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "Corner Window.apx",
+      "sha256": "a7f184c5d1586bbb72f8e2447803dd06dd0220dd881058b629284306606c4e7b",
+      "rawExportCount": 2,
+      "internalOrABIExportCount": 0,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "RegisterLightworksFileTypes.apx",
+      "sha256": "e83abdfe69b5b5199b536439c92040f4225b5ea2452f0819d0dbc8a0d1e90f80",
+      "rawExportCount": 2,
+      "internalOrABIExportCount": 0,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "SDAExporter.apx",
+      "sha256": "d4a9472f44f1f3b60557a4c2f11324810ea44d7ae917893fbd6a320aac3aeb8e",
+      "rawExportCount": 2,
+      "internalOrABIExportCount": 0,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "Apartment Stamp.apx",
+      "sha256": "4a88ce166e2f08e93f96a3533e98a11471663fc5ebaf533ee28c00f878b18b9b",
+      "rawExportCount": 2,
+      "internalOrABIExportCount": 0,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "Quick Layers.apx",
+      "sha256": "e2e79b31dba95bce79ad9d25e7563c80eabfc831e3ef900fd124db730449f309",
+      "rawExportCount": 2,
+      "internalOrABIExportCount": 0,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "RFA and RVT Geometry Exchange.apx",
+      "sha256": "4b01b7980c75d98f994f59b5666044eaf6289d611d1c8949d6c07e6ead034814",
+      "rawExportCount": 341,
+      "internalOrABIExportCount": 339,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "KeynoteLegend.apx",
+      "sha256": "ffd54dd51c2834a93a637dcda1b0fda67cb39b95b210d203ee92b37dad2ea7d4",
+      "rawExportCount": 2,
+      "internalOrABIExportCount": 0,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "Element Information.apx",
+      "sha256": "9644043a2dc38996c346eb1f290590f5b9411c739c93d2eecdc0fdb5a602e13a",
+      "rawExportCount": 2,
+      "internalOrABIExportCount": 0,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "INDIRECT_OFFICIAL_API_DEPENDENCY_CALLABLE_VERIFIED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE",
+      "bridgedCommands": [
+        "API.Get3DBoundingBoxes"
+      ],
+      "geometryLimit": "Provider boxes differ from actual resultant BREP for9of10walls; NativeModelDump remains geometry authority"
+    },
+    {
+      "name": "Interactive Schedule.apx",
+      "sha256": "2359d2d0b2509faac41d9065fe45440f46c0cf37e210e9e7bf9b5a00908d0935",
+      "rawExportCount": 482,
+      "internalOrABIExportCount": 480,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "Grid Tool.apx",
+      "sha256": "40ce96f8474b07f00079ccc288ea0eed1ad0fe15b415f3e65d5d2ec46471ce61",
+      "rawExportCount": 46,
+      "internalOrABIExportCount": 44,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Existing APA nativeGrid SDK command bridge;12candidate commands not loaded in original runtime; no line/Object substitute",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "Collada In-Out.apx",
+      "sha256": "d9f78108ff6b37e735e74cf9b0bb3fa4a2f43290c1bcb0148dddff13293ea488",
+      "rawExportCount": 16,
+      "internalOrABIExportCount": 14,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "MeshImport.apx",
+      "sha256": "88f083b736b0f9179f07a924a58858e07073ba560cab0b2d20b92d7c23752d95",
+      "rawExportCount": 2,
+      "internalOrABIExportCount": 0,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "PointCloud_In.apx",
+      "sha256": "aecaef2f615ae33d6b18a0a4dd3f19c84da6abe984c6c4128bfc84951ced2a69",
+      "rawExportCount": 40,
+      "internalOrABIExportCount": 38,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "Active Layer.apx",
+      "sha256": "7d1692c11ca9b596723c014aeac5f173c85e6646dd81e8c62643ee6f2d65a0db",
+      "rawExportCount": 2,
+      "internalOrABIExportCount": 0,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "Selections.apx",
+      "sha256": "6158925f8b7b6687c41c22169b54814033faea9fcb11dcc05eebbae6e9240e38",
+      "rawExportCount": 2,
+      "internalOrABIExportCount": 0,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "GoogleEarthConnectivity.apx",
+      "sha256": "f831096c09c006acc1e950911ece88ba664a83f02718d821b4bc497c747910fb",
+      "rawExportCount": 2,
+      "internalOrABIExportCount": 0,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "Quick Rotate.apx",
+      "sha256": "03fea9af92138c2a755050f826b17482c7dc95d1c19622229ed96e13bb86a9e0",
+      "rawExportCount": 2,
+      "internalOrABIExportCount": 0,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "Profile Database.apx",
+      "sha256": "76c5946351600321494a26ee9e26ea8467d474d9c5f8ff1ead6aed8de45d5fd0",
+      "rawExportCount": 32,
+      "internalOrABIExportCount": 30,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "3Dconnexion Enabler.apx",
+      "sha256": "8583391dceb5e1a502547d7b3b67e73d3529563cb368d2579e97eed0722f1fbb",
+      "rawExportCount": 2,
+      "internalOrABIExportCount": 0,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "Ventilation.apx",
+      "sha256": "d7f4e2350ee28c68a31d4a881495dc9b7353a2a9ee304e59f94c5549e46f113d",
+      "rawExportCount": 2,
+      "internalOrABIExportCount": 0,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "EXISTING_TAPIR_MEP_BRIDGE",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE",
+      "bridgedCommands": [
+        "GetMEPElements",
+        "GetMEPPreferenceTables"
+      ],
+      "ownershipOfHostImplementation": "NOT_VERIFIED_SPECIFIC_MODULE_SERVICE_OWNERSHIP"
+    },
+    {
+      "name": "Rhino_Out.apx",
+      "sha256": "84268676fdf6a150091d29eaf57d958dc7ceb66d5a67a5c180ea2833ea00d868",
+      "rawExportCount": 2,
+      "internalOrABIExportCount": 0,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "Rhino_In.apx",
+      "sha256": "6836a709d86353eeab6f39074b36431a11216460de03eb84e511e599ff59f8ec",
+      "rawExportCount": 176,
+      "internalOrABIExportCount": 174,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "IFC In-Out.apx",
+      "sha256": "79df90c6d3634b2e8ffb0b902daa235be6e96c442c95ac50f83a9417a0d1cc1e",
+      "rawExportCount": 4850,
+      "internalOrABIExportCount": 4848,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "INDIRECT_NATIVE_IFC_BRIDGE_CALLABLE_VERIFIED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE",
+      "bridgedCommands": [
+        "GetIFCIdsOfElements"
+      ],
+      "semanticExchange": "NOT_VERIFIED_ID_READBACK_ONLY"
+    },
+    {
+      "name": "Hydronics.apx",
+      "sha256": "8ba7e4b19d5dd01faa97ed5aca8ede38cbe4dc1d7b9915d57dc3ff4864d1fd08",
+      "rawExportCount": 2,
+      "internalOrABIExportCount": 0,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "EXISTING_TAPIR_MEP_BRIDGE",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE",
+      "bridgedCommands": [
+        "GetMEPElements",
+        "GetMEPPreferenceTables"
+      ],
+      "ownershipOfHostImplementation": "NOT_VERIFIED_SPECIFIC_MODULE_SERVICE_OWNERSHIP"
+    },
+    {
+      "name": "EnergyEvaluation.apx",
+      "sha256": "4cbe6c06d90a6daa8a62cdab91f621a676254f294e936ff7c79891851f37f022",
+      "rawExportCount": 104,
+      "internalOrABIExportCount": 102,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "DXF-DWG In-Out.apx",
+      "sha256": "e800ae0bd99a660bf7f4c687b0a0f464ebdb3f445ef989c10319d81661d5c516",
+      "rawExportCount": 1559,
+      "internalOrABIExportCount": 1557,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "BluebeamConnection.apx",
+      "sha256": "403b8cea7ef800bd06f7c43edfac920d3e387ba4ab867e4020fcb05fc2888de8",
+      "rawExportCount": 19,
+      "internalOrABIExportCount": 17,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "BimplusConnection.apx",
+      "sha256": "165c2a883d198b9f99bfb0d91d178d75dbf538e240449479e374ab1ae564a2ab",
+      "rawExportCount": 16,
+      "internalOrABIExportCount": 14,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "AI Visualizer.apx",
+      "sha256": "795007915e6047afc137a6f92e09e688b2bbf83d21ada8660c9b3da978e6dc04",
+      "rawExportCount": 2,
+      "internalOrABIExportCount": 0,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "AI Assistant.apx",
+      "sha256": "66aa41b3a0a3ca6feeb2519f602ebe07c51559e971c613ae1a2565b304499ff1",
+      "rawExportCount": 2,
+      "internalOrABIExportCount": 0,
+      "jsonUserCommandsDiscovered": 0,
+      "status": "NOT_EXPOSED",
+      "blocker": "NO_DOCUMENTED_JSON_NAMESPACE_OR_MDCL_SERVICE_ID_VERSION_PAYLOAD; exports are framework/internal C++ ABI and not callable tools",
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    },
+    {
+      "name": "TapirAddOn_AC29_Win.apx",
+      "sha256": "8f5a9341bb9d51cb98a0a58bdbc63d3d3623a0c9f74b3cd3f1a4732c06961969",
+      "rawExportCount": 2,
+      "internalOrABIExportCount": 0,
+      "jsonUserCommandsDiscovered": 264,
+      "status": "INTEGRATED",
+      "blocker": null,
+      "legalConnection": "Use existing JSON/SDK bridge or vendor documented SDK/service ABI; new APX requires separate approval",
+      "license": "NOT_VERIFIED_BEYOND_LOADED_MODULE"
+    }
+  ],
+  "sdkPublicFunctionNames": 848,
+  "sdkClassification": "PUBLIC_ACAPI_DECLARATION_NAMES_NOT_JSON_COMMANDS_OR_ALL_CPP_METHODS",
+  "sdkExamplesImported": 14,
+  "sdkExamplesRuntimeAvailable": 0,
+  "candidateSourceOnlyCommands": [
+    "CreateExactStairsV1",
+    "CreateNativeGridElementsV1",
+    "EvaluateNativeStairGeometryV1",
+    "GetAPARuntimeInfoV1",
+    "GetAutoTextsV1",
+    "GetCurrent2DDocumentV1",
+    "GetNativeGridDefaultsV1",
+    "GetNativeGridElementsV1",
+    "GetNativeStairGeometryV1",
+    "ModifyNativeGridElementsV1",
+    "ModifyNativeStairGeometryV1",
+    "SetMasterLayoutContextV1"
+  ],
+  "alternativeSources": [
+    {
+      "repo": "alesdev88/Archicad-MCP",
+      "head": "74d4ecc67581e60b552b6ef7f6ac47d187e0f2a6",
+      "files": [
+        {
+          "path": "manifest.json",
+          "sha256": "16841d9ca074e8f7cd38c4b4b1a2426a94b333e6c3f3c6f3cc4b7f3e93dcaa7d",
+          "blob": "88ad93d5ead1ae23c010f5a8094a77718eb178d4"
+        },
+        {
+          "path": "src/archicad_mcp/gateway/definitions/command_definitions.js",
+          "sha256": "fd070266e9ee9e1bb91e1e79c7ff6e7a539e1a0413b5563ff0e9f1faefb3eaca",
+          "blob": "e1b1a8ba8ffbf4abcc6780178a7a9ba1e140f36b"
+        },
+        {
+          "path": "src/archicad_mcp/gateway/definitions/common_schema_definitions.js",
+          "sha256": "4239cad5ca00d8774b82a425ac59ac1da3a11b8d72ccbefa8d8a83bc80538431",
+          "blob": "e179c09494cde88edf55ff03058a50750463480b"
+        },
+        {
+          "path": "src/archicad_mcp/gateway/definitions/local_commands.json",
+          "sha256": "7c0ae739546d077f49c06f500358ad11f43b7b5b9229b160a6f5ec83b3fc4a29",
+          "blob": "8399acf4e1d98de0347bd101cd5768cfcf68d9ee"
+        }
+      ]
+    },
+    {
+      "repo": "SzamosiMate/tapir-archicad-MCP",
+      "head": "1ecef58acca36b4736ae26edf0f3924b7fd52263",
+      "files": [
+        {
+          "path": "manifest.json",
+          "sha256": "e57e45300fb2af668fd329448a9bd4e307aba462b73197aba1ead034a67de551",
+          "blob": "ddb4b98481f3473935a944b116736ad6c34bc2b6"
+        },
+        {
+          "path": "src/tapir_archicad_mcp/tools/custom/functions.py",
+          "sha256": "467484f6ddc81f9277f20291d8c18fd90394562578a9edb764a3f54faa199067",
+          "blob": "7a20b70e16a95aefedd37d24e8b2f812e62d0729"
+        }
+      ]
+    }
+  ],
+  "alternativeTapirContracts": 250,
+  "alternativeTapirAliasesAlreadyCovered": 250,
+  "forkExtraContracts": [
+    {
+      "name": "GetStairBoundaries",
+      "runtimeAvailable": false,
+      "inputContract": true,
+      "resultContract": false,
+      "status": "BLOCKED_FORK_APX_NOT_LOADED_AND_OUTPUT_CONTRACT_MISSING"
+    },
+    {
+      "name": "CreateRailings",
+      "runtimeAvailable": false,
+      "inputContract": true,
+      "resultContract": false,
+      "status": "BLOCKED_FORK_APX_NOT_LOADED_AND_OUTPUT_CONTRACT_MISSING"
+    }
+  ],
+  "existingMCP": {
+    "endpoint": "EXISTING_LOCAL_MCP_8001",
+    "status": "BLOCKED_EXISTING_SERVER_UNREACHABLE",
+    "reason": "URLError"
+  },
+  "GDLObjects": 2779,
+  "GDLClassification": "LIBRARY_RESOURCES_NOT_CALLABLE_COMMANDS"
+}
