@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 146,
+  "revision": 147,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -4212,7 +4212,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -4353,9 +4353,9 @@
         "707/707host and Windows-onlyCI 38485644027 PASS,10newtests,102upstream/coreMCP PASS. HistoricalLinux results preserved. Mainorchestrator KG read current145 before completion146; implementation unchanged. Report/evidence14files/receipt APA-RUN-20261013-234433Z-true-grid-live-stair-runtime GitHubbyte-readback verified. A11.S03PARTIAL, A07 dependencies/S10BLOCKED and other90tasks preserved. TRC excluded; normative/search/documentation implementation untouched. Next: correctedSDK detached memo/base-plane candidate, build then separateauthorization and detachedqualification beforewrite; Roofcontour/slope independent native contracts follow."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "work-universal-native-20261014",
+      "lease_until": "2026-10-14T03:01:21Z",
+      "claim_ref": "APA-CLAIM-UNIVERSAL-NATIVE-20261014T000121Z",
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
