@@ -1,4 +1,8 @@
-# CHAT-FIRST / WORK-MINIMAL — binding development rule
+# Current execution priority — FULL INTEGRATION / NATIVE VALIDATION
+
+Direct user instruction 2026-10-14 supersedes the historical CHAT-FIRST / WORK-MINIMAL allocation below. Work develops and integrates the existing Archicad/Tapir/SDK contracts, runs native Windows tests and publishes one main draft PR. Broad offline audit runs independently against published commits and Windows CI. Reuse BIM Graph, Knowledge Graph, SceneWriter and SQLite; no parallel executor or search implementation. Native permissions remain explicit per project/scope. This does not authorize production projects. MORPH LAST RESORT, identity, retention, UNKNOWN no-replay and publication gates remain binding.
+
+# Historical CHAT-FIRST / WORK-MINIMAL allocation (superseded where conflicting)
 
 # MORPH LAST RESORT — обязательное постоянное правило APA
 

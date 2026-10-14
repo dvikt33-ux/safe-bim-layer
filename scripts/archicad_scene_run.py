@@ -621,8 +621,15 @@ class SceneWriter:
         documentation=preflight.get('integrationBindings',{}).get('dependencies',{}).get('documentationOperation')
         model_scope=preflight.get('integrationBindings',{}).get('dependencies',{}).get('modelOperation')
         spatial_scope=preflight.get('integrationBindings',{}).get('dependencies',{}).get('spatialOperation')
-        if sum(x is not None for x in (documentation,model_scope,spatial_scope))>1:
+        dynamic_scope=preflight.get('integrationBindings',{}).get('dependencies',{}).get('dynamicOperation')
+        if sum(x is not None for x in (documentation,model_scope,spatial_scope,dynamic_scope))>1:
             raise ValueError('EXACTLY_ONE_BOUNDED_OPERATION_SCOPE_REQUIRED')
+        dynamic_command=dynamic_scope is not None
+        if dynamic_command:
+            router=getattr(self.api,'dynamic_commands',None)
+            if router is None:raise ValueError('DYNAMIC_COMMAND_ROUTER_NOT_BOUND')
+            router.qualify_scope(dynamic_scope,command,parameters,preflight['sourcePlanHash'])
+            if dynamic_scope['binding']!=preflight['binding']:raise ValueError('DYNAMIC_PROJECT_BINDING_DRIFT')
         spatial_command=False
         if spatial_scope is not None:
             from archicad_native_spatial_structure import qualify_spatial_operation
@@ -638,7 +645,7 @@ class SceneWriter:
             from archicad_bim_documentation import qualify_operation, DOCUMENT_COMMANDS
             qualify_operation(documentation,command,parameters,preflight['sourcePlanHash'])
             document_command=command in DOCUMENT_COMMANDS
-        if (not document_command and not model_command and not spatial_command and command not in {'ConnectMEPElements','ModifyMEPRoutingElements',
+        if (not dynamic_command and not document_command and not model_command and not spatial_command and command not in {'ConnectMEPElements','ModifyMEPRoutingElements',
                             'CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks','ModifyMorphs','ModifyBeams','ModifyWalls','SetClassificationsOfElements','TrimElements'}
                 or not _SCENE_ID.fullmatch(scene_id) or not callable(verify_before) or not callable(verify_after)):
             raise ValueError('BOUNDED_OPERATION_ADAPTER_REQUIRED')
@@ -649,8 +656,8 @@ class SceneWriter:
                'CreateOpenings':'openingsData','CreateSolidElementLinks':'solidLinks','RemoveSolidElementLinks':'solidLinks','ModifyMorphs':'morphsWithDetails',
                'SetClassificationsOfElements':'elementClassifications','ModifyBeams':'beamsWithDetails','ModifyWalls':'wallsWithDetails','TrimElements':'elements'}
         rows=parameters.get(slots.get(command))
-        if not document_command and not model_command and not spatial_command and (not isinstance(rows,list) or len(rows)!=1):raise ValueError('BOUNDED_OPERATION_REQUIRES_SINGLE_NATIVE_TARGET')
-        if command=='ModifyWalls' and documentation is None and model_scope is None:
+        if not dynamic_command and not document_command and not model_command and not spatial_command and (not isinstance(rows,list) or len(rows)!=1):raise ValueError('BOUNDED_OPERATION_REQUIRES_SINGLE_NATIVE_TARGET')
+        if not dynamic_command and command=='ModifyWalls' and documentation is None and model_scope is None:
             repair=preflight.get('integrationBindings',{}).get('dependencies',{}).get('wallRoofRepair',{})
             candidates=repair.get('operationCandidates',[])
             if (repair.get('status')!='APPLICABLE_NOT_EXECUTED' or not repair.get('executionAllowed') or
@@ -658,22 +665,25 @@ class SceneWriter:
                     len(candidates)!=2 or parameters!=candidates[0].get('params') or
                     set(parameters)!={'wallsWithDetails'} or set(rows[0])!={'elementId','height'}):
                 raise ValueError('BOUNDED_WALL_HEIGHT_REQUIRES_QUALIFIED_EXACT_JUNCTION_PLAN')
-        if command=='ModifyBeams' and ('CreateBeams' not in self.adapters or set(rows[0])!={'elementId','profileAngle'}):
+        if not dynamic_command and command=='ModifyBeams' and ('CreateBeams' not in self.adapters or set(rows[0])!={'elementId','profileAngle'}):
             raise ValueError('BOUNDED_BEAM_PROFILE_REQUIRES_TYPED_ADAPTER_AND_EXPLICIT_ANGLE')
-        if command=='TrimElements' and ('CreateRoofs' not in self.adapters or
+        if not dynamic_command and command=='TrimElements' and ('CreateRoofs' not in self.adapters or
                 set(parameters)!={'elements','trimmingElement','trimType'} or parameters['trimType']!='KeepInside'):
             raise ValueError('BOUNDED_ROOF_TRIM_REQUIRES_TYPED_ROOF_AND_EXPLICIT_INSIDE')
-        if command=='ModifyMorphs' and ('CreateMorphs' not in self.adapters or
+        if not dynamic_command and command=='ModifyMorphs' and ('CreateMorphs' not in self.adapters or
                 set(rows[0]) not in ({'elementId','xAxis','yAxis','zAxis'},{'elementId','translation'})):
             raise ValueError('BOUNDED_MORPH_PLACEMENT_REQUIRES_TYPED_ADAPTER_AND_EXPLICIT_TRANSFORM')
-        if command=='ModifyMorphs':
+        if command=='ModifyMorphs' or dynamic_command and 'Morph' in command:
             from archicad_native_beam_details import require_morph_last_resort
             require_morph_last_resort(preflight.get('integrationBindings',{}).get('dependencies',{}))
-        if command=='SetClassificationsOfElements' and ('CreateMorphs' not in self.adapters or
+        if not dynamic_command and command=='SetClassificationsOfElements' and ('CreateMorphs' not in self.adapters or
                 set(rows[0])!={'elementId','classificationId'} or
                 set(rows[0].get('classificationId',{}))!={'classificationSystemId','classificationItemId'}):
             raise ValueError('BOUNDED_CLASSIFICATION_REQUIRES_TYPED_NEW_MEMBER_AND_EXPLICIT_ITEM')
-        if document_command and command in {'SaveProject','OpenProject','PublishPublisherSet'}:
+        if dynamic_command:
+            if command=='OpenProject' and parameters!={'projectFilePath':preflight['binding']['path']}:raise ValueError('DYNAMIC_OPEN_FOREIGN_PROJECT_DENIED')
+            router.validate(dynamic_scope['ticket']);checked={'status':'SCHEMA_VALID'}
+        elif document_command and command in {'SaveProject','OpenProject','PublishPublisherSet'}:
             # SPECIAL_REVIEW stays unexecutable in ordinary writer operations;
             # only this explicit, bound documentation persistence opts in.
             if command=='OpenProject' and parameters!={'projectFilePath':preflight['binding']['path']}:
@@ -700,9 +710,13 @@ class SceneWriter:
             db.execute('INSERT INTO steps VALUES(?,?,?,?,?)',(scene_id,'operation','ATTEMPTED',None,canonical({'intent':intent,'before':before})));db.commit()
             try:
                 if self.guarded_binding()!=preflight['binding']:raise ValueError('BOUNDED_OPERATION_TARGET_DRIFT')
-                reply=self.api(command,parameters)
+                if dynamic_command:
+                    with self.api.dynamic_call(dynamic_scope['ticket'],journal_scope=dynamic_scope):reply=self.api(command,parameters)
+                else:reply=self.api(command,parameters)
                 result['nativeResponse']=reply
-                if spatial_command:
+                if dynamic_command:
+                    router.validate_result(command,reply)
+                elif spatial_command:
                     if reply!={'success':True}:raise ValueError('SPATIAL_NATIVE_SUCCESS_NOT_CONFIRMED')
                 elif document_command:
                     from archicad_bim_documentation import native_response
@@ -710,9 +724,13 @@ class SceneWriter:
                     if guid:
                         result['createdGuid']=guid
                         db.execute("UPDATE steps SET state='CREATED_UNVERIFIED',guid=? WHERE scene_id=? AND step_id='operation'",(guid,scene_id));db.commit()
-                elif command in {'CreateStairs','CreateNativeGridElementsV1','CreateExactStairsV1'} and model_command:
+                elif command in {'CreateRoofs','CreateStairs','CreateNativeGridElementsV1','CreateExactStairsV1'} and model_command:
                     result['createdGuid']=created_guid(reply)
                     db.execute("UPDATE steps SET state='CREATED_UNVERIFIED',guid=? WHERE scene_id=? AND step_id='operation'",(result['createdGuid'],scene_id));db.commit()
+                elif command=='ModifyRoofs' and model_command:
+                    rows=reply.get('executionResults')
+                    if not isinstance(rows,list) or len(rows)!=len(parameters['roofsWithDetails']) or any(row!={'success':True} for row in rows):
+                        raise ValueError('BOUNDED_ROOF_BATCH_PARTIAL_OR_UNKNOWN')
                 elif command=='TrimElements':
                     if reply!={'success':True}:raise ValueError('BOUNDED_TRIM_NATIVE_SUCCESS_NOT_CONFIRMED')
                 elif command != 'CreateOpenings':
@@ -722,7 +740,7 @@ class SceneWriter:
                         raise ValueError('BOUNDED_OPERATION_NATIVE_RESPONSE_REJECTED')
                     if command != 'ConnectMEPElements' and rows[0].get('success') is not True:
                         raise ValueError('BOUNDED_OPERATION_NATIVE_SUCCESS_NOT_CONFIRMED')
-                if command=='CreateOpenings':
+                if command=='CreateOpenings' and not dynamic_command:
                     result['createdGuid']=created_guid(reply)
                     db.execute("UPDATE steps SET state='CREATED_UNVERIFIED',guid=? WHERE scene_id=? AND step_id='operation'",(result['createdGuid'],scene_id));db.commit()
                 if self.guarded_binding()!=preflight['binding']:raise ValueError('BOUNDED_OPERATION_AFTER_TARGET_DRIFT')

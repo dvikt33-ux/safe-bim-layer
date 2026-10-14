@@ -1,0 +1,232 @@
+{
+  "status": "DYNAMIC_ROUTER_AND_EXISTING_SCENEWRITER_LIVE_PASS",
+  "discovered": 348,
+  "tapirSDK": 275,
+  "official": 73,
+  "routable": 348,
+  "liveVerified": 16,
+  "liveCommands": [
+    "GetProjectInfo",
+    "GetStories",
+    "OpenProject",
+    "SaveProject",
+    "GetSelectedElements",
+    "GetAllElements",
+    "ChangeSelectionOfElements",
+    "GetDetailsOfElements",
+    "CreateRoofs",
+    "ModifyRoofs",
+    "GetModelDumpV1",
+    "GetAPARuntimeInfoV1",
+    "GetMEPPreferenceTables",
+    "API.GetElementsByType",
+    "API.GetProductInfo",
+    "API.GetPublisherSetNames"
+  ],
+  "allTapirRegistered": true,
+  "allInputSchemasValid": true,
+  "officialOutputSchema": "SDK_KEYS_ONLY_NESTED_TYPED_OUTPUT_NOT_FULL_JSON_SCHEMA",
+  "nativeScope": "AUTHORIZED_TWO_ROOFS_ONLY",
+  "saveOpen": "PASS",
+  "retained255Unchanged": true,
+  "currentInventory": 258,
+  "idempotentRoofWrites": 0,
+  "otherAddOnCommandEnumeration": "NOT_EXPOSED_NO_GLOBAL_NAMESPACE_ENUMERATOR",
+  "UIOnlyAddOns": "NOT_PROGRAMMATICALLY_INTEGRATED",
+  "journal": "EXISTING_SCENEWRITER_SQLITE_UNKNOWN_NO_REPLAY",
+  "engineering": "NOT_VERIFIED",
+  "visualGable": true,
+  "visualHip": true,
+  "originalAPXRestoration": "BYTE_EXACT_FILES_AND_REGISTRATION",
+  "activeRestoredCommandCount": 337,
+  "activeTapirRegistered": 264,
+  "activeOfficial": 73,
+  "candidateCommandsAbsentFromRestoredRuntime": [
+    "CreateExactStairsV1",
+    "CreateNativeGridElementsV1",
+    "EvaluateNativeStairGeometryV1",
+    "GetAPARuntimeInfoV1",
+    "GetAutoTextsV1",
+    "GetCurrent2DDocumentV1",
+    "GetNativeGridDefaultsV1",
+    "GetNativeGridElementsV1",
+    "GetNativeStairGeometryV1",
+    "ModifyNativeGridElementsV1",
+    "ModifyNativeStairGeometryV1",
+    "SetMasterLayoutContextV1"
+  ],
+  "restoredOnlyCommands": [
+    "GetNativePhysicalGeometry"
+  ],
+  "restoredDynamicSave": "LIVE_PASS",
+  "savedSHA256": "3a1164d9ea63d66dae4143f6b21060a564ce126629194ff97ffeed9057be8f59",
+  "loadedAPXProviders": 33,
+  "otherProvidersWithoutDiscoveredNamespaceContract": 32,
+  "loadedProviders": [
+    {
+      "name": "BibimAI.apx",
+      "sha256": "7d581b845b3a0f1f43344571cca0148c6a3e8333310f6e4502b3c7958264108e",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "SAF In-Out.apx",
+      "sha256": "33f50b3236cfb2b67c695c032424f20b8a6f29a2d008d62986108c0ab294cb4d",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "Corner Window.apx",
+      "sha256": "a7f184c5d1586bbb72f8e2447803dd06dd0220dd881058b629284306606c4e7b",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "RegisterLightworksFileTypes.apx",
+      "sha256": "e83abdfe69b5b5199b536439c92040f4225b5ea2452f0819d0dbc8a0d1e90f80",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "SDAExporter.apx",
+      "sha256": "d4a9472f44f1f3b60557a4c2f11324810ea44d7ae917893fbd6a320aac3aeb8e",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "Apartment Stamp.apx",
+      "sha256": "4a88ce166e2f08e93f96a3533e98a11471663fc5ebaf533ee28c00f878b18b9b",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "Quick Layers.apx",
+      "sha256": "e2e79b31dba95bce79ad9d25e7563c80eabfc831e3ef900fd124db730449f309",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "RFA and RVT Geometry Exchange.apx",
+      "sha256": "4b01b7980c75d98f994f59b5666044eaf6289d611d1c8949d6c07e6ead034814",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "KeynoteLegend.apx",
+      "sha256": "ffd54dd51c2834a93a637dcda1b0fda67cb39b95b210d203ee92b37dad2ea7d4",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "Element Information.apx",
+      "sha256": "9644043a2dc38996c346eb1f290590f5b9411c739c93d2eecdc0fdb5a602e13a",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "Interactive Schedule.apx",
+      "sha256": "2359d2d0b2509faac41d9065fe45440f46c0cf37e210e9e7bf9b5a00908d0935",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "Grid Tool.apx",
+      "sha256": "40ce96f8474b07f00079ccc288ea0eed1ad0fe15b415f3e65d5d2ec46471ce61",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "Collada In-Out.apx",
+      "sha256": "d9f78108ff6b37e735e74cf9b0bb3fa4a2f43290c1bcb0148dddff13293ea488",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "MeshImport.apx",
+      "sha256": "88f083b736b0f9179f07a924a58858e07073ba560cab0b2d20b92d7c23752d95",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "PointCloud_In.apx",
+      "sha256": "aecaef2f615ae33d6b18a0a4dd3f19c84da6abe984c6c4128bfc84951ced2a69",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "Active Layer.apx",
+      "sha256": "7d1692c11ca9b596723c014aeac5f173c85e6646dd81e8c62643ee6f2d65a0db",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "Selections.apx",
+      "sha256": "6158925f8b7b6687c41c22169b54814033faea9fcb11dcc05eebbae6e9240e38",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "GoogleEarthConnectivity.apx",
+      "sha256": "f831096c09c006acc1e950911ece88ba664a83f02718d821b4bc497c747910fb",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "Quick Rotate.apx",
+      "sha256": "03fea9af92138c2a755050f826b17482c7dc95d1c19622229ed96e13bb86a9e0",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "Profile Database.apx",
+      "sha256": "76c5946351600321494a26ee9e26ea8467d474d9c5f8ff1ead6aed8de45d5fd0",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "3Dconnexion Enabler.apx",
+      "sha256": "8583391dceb5e1a502547d7b3b67e73d3529563cb368d2579e97eed0722f1fbb",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "Ventilation.apx",
+      "sha256": "d7f4e2350ee28c68a31d4a881495dc9b7353a2a9ee304e59f94c5549e46f113d",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "Rhino_Out.apx",
+      "sha256": "84268676fdf6a150091d29eaf57d958dc7ceb66d5a67a5c180ea2833ea00d868",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "Rhino_In.apx",
+      "sha256": "6836a709d86353eeab6f39074b36431a11216460de03eb84e511e599ff59f8ec",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "IFC In-Out.apx",
+      "sha256": "79df90c6d3634b2e8ffb0b902daa235be6e96c442c95ac50f83a9417a0d1cc1e",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "Hydronics.apx",
+      "sha256": "8ba7e4b19d5dd01faa97ed5aca8ede38cbe4dc1d7b9915d57dc3ff4864d1fd08",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "EnergyEvaluation.apx",
+      "sha256": "4cbe6c06d90a6daa8a62cdab91f621a676254f294e936ff7c79891851f37f022",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "DXF-DWG In-Out.apx",
+      "sha256": "e800ae0bd99a660bf7f4c687b0a0f464ebdb3f445ef989c10319d81661d5c516",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "BluebeamConnection.apx",
+      "sha256": "403b8cea7ef800bd06f7c43edfac920d3e387ba4ab867e4020fcb05fc2888de8",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "BimplusConnection.apx",
+      "sha256": "165c2a883d198b9f99bfb0d91d178d75dbf538e240449479e374ab1ae564a2ab",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "AI Visualizer.apx",
+      "sha256": "795007915e6047afc137a6f92e09e688b2bbf83d21ada8660c9b3da978e6dc04",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "AI Assistant.apx",
+      "sha256": "66aa41b3a0a3ca6feeb2519f602ebe07c51559e971c613ae1a2565b304499ff1",
+      "status": "NOT_EXPOSED_NO_DISCOVERED_PROGRAMMATIC_NAMESPACE_CONTRACT"
+    },
+    {
+      "name": "TapirAddOn_AC29_Win.apx",
+      "sha256": "8f5a9341bb9d51cb98a0a58bdbc63d3d3623a0c9f74b3cd3f1a4732c06961969",
+      "status": "INTEGRATED"
+    }
+  ]
+}

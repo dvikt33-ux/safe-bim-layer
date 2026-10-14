@@ -162,6 +162,8 @@ def main():
     for name in ("NativeGridCommands.cpp", "NativeGridCommands.hpp", "NativeStairCommands.cpp", "NativeStairCommands.hpp"):
         shutil.copy2(addon_overlay / "Sources" / name, addon_source / "Sources" / name)
     overlay_registration(addon_source)
+    from roof_edit_overlay import apply as apply_roof_edit_overlay
+    apply_roof_edit_overlay(addon_source)
     # The ID covers the actual copied source/resource snapshot, not Tapir's shared
     # version string. It changes when any runtime implementation/resource changes.
     identity_files={p.relative_to(addon_source).as_posix():hashlib.sha256(p.read_bytes()).hexdigest()
@@ -170,6 +172,9 @@ def main():
     revision=subprocess.check_output(['git','-C',str(addon_overlay.parent),'rev-parse','HEAD']).decode().strip()
     header='#pragma once\n#define APA_BUILD_IDENTITY "'+build_identity+'"\n#define APA_SOURCE_REVISION "'+revision+'"\n'
     (addon_source/'Sources/APABuildIdentity.hpp').write_text(header,encoding='utf8')
+    # Localized MSVC include diagnostics can leave NMake's header dependency
+    # cache incomplete. Force the identity-bearing unit to compile when stamped.
+    (addon_source/'Sources/NativeGridCommands.cpp').touch()
     (build_root/'apa-build-identity.json').write_text(json.dumps(dict(contract='APA_NATIVE_RUNTIME_IDENTITY_V1',buildIdentity=build_identity,sourceRevision=revision,sdkMajor=29,developerId=826567491,localId=368333322,files=identity_files),indent=2)+'\n',encoding='utf8')
 
     vc, sdk_root, sdk_version, cmake = resolve_toolchain(args)

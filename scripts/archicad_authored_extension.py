@@ -55,7 +55,7 @@ def verify_model(api, plan, created):
 
 
 MODEL_COMMANDS = frozenset({'MoveElements', 'ModifyWalls', 'ModifyWindows', 'ModifyDoors',
-                           'CreateSolidElementLinks','SetPropertyValuesOfElements','CreateStairs','ModifySlabs',
+                           'CreateSolidElementLinks','SetPropertyValuesOfElements','CreateStairs','ModifySlabs','CreateRoofs','ModifyRoofs',
                            'CreateNativeGridElementsV1','ModifyNativeGridElementsV1','CreateExactStairsV1','ModifyNativeStairGeometryV1','SetGDLParametersOfElements'})
 
 
@@ -82,9 +82,13 @@ def qualify_model_operation(scope,command,parameters,source_hash):
                 {k:v for k,v in scope.items() if k!='scopeHash'})):
         raise ValueError('MODEL_OPERATION_SCOPE_MISMATCH')
     owned=set(scope['ownedGuids']);retained=set(scope['retainedGuids'])
-    if ((not owned and command not in {'CreateStairs','CreateNativeGridElementsV1','CreateExactStairsV1'}) or owned&retained or (not retained and
+    if ((not owned and command not in {'CreateStairs','CreateRoofs','CreateNativeGridElementsV1','CreateExactStairsV1'}) or owned&retained or (not retained and
             (scope.get('isolatedInventory')!=sorted(owned)))):
         raise ValueError('MODEL_OWNERSHIP_SCOPE_INVALID')
+    if command in {'CreateRoofs','ModifyRoofs'}:
+        from archicad_native_roof_editing import qualify_operation
+        qualify_operation(command,parameters,owned,retained)
+        return
     if command=='SetGDLParametersOfElements':
         from archicad_native_spatial_tools import qualify_grid_parameter_edit
         qualify_grid_parameter_edit(parameters,owned,retained)
@@ -160,6 +164,16 @@ def _qualify_legacy_stair_hole(row):
 
 def prepare_building_parameter_edit(api,old_plan,created,new_intent,schema_path):
     """Diff the existing authored graph into native edits; never recreate a host."""
+    if new_intent.get('schemaVersion')=='apa-native-operations/1':
+        # Explicit discovered operations support composition changes without
+        # guessing create/modify equivalence or silently regenerating hosts.
+        router=A.native_command_router(schema_path)
+        operations=new_intent.get('operations')
+        if not isinstance(operations,list) or not operations:raise ValueError('EXPLICIT_NATIVE_OPERATIONS_REQUIRED')
+        tickets=[router.prepare(s['command'],s['parameters']) for s in operations]
+        return dict(schema='APA_DYNAMIC_BUILDING_EDIT_PREVIEW_V1',oldPlanHash=old_plan['sourcePlanHash'],
+            tickets=tickets,createdBindings=copy.deepcopy(created),executionPermission=False,
+            dependencyRebinding='CALLER_MUST_SUPPLY_EXPLICIT_BIM_GRAPH_LINEAGE',automaticRetry=False)
     verified=verify_model(api,old_plan,created)
     if set(verified)!=set(s['id'] for s in old_plan['graph']['operations']):
         raise ValueError('MODEL_EDIT_REQUIRES_COMPLETE_AUTHORED_SOURCE')
