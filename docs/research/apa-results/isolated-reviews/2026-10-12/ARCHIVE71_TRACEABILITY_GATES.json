@@ -1,0 +1,518 @@
+{
+  "schema": "APA_ARCHIVE71_ISOLATED_TRACEABILITY_REVIEW_V1",
+  "status": "ISOLATED_DRAFT_RESEARCH_NOT_V2_RECEIPT",
+  "repository": "dvikt33-ux/safe-bim-layer",
+  "pinned_canonical_head": "deb98dee6cb489a628d78bb952cfa76896aa20c0",
+  "source_branch_head": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+  "source_manifest": {
+    "path": "docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/ARCHIVE_MANIFEST_20261011.json",
+    "blob_sha": "ef20b8dfc804289a7f97fed73f3918edb11c8673"
+  },
+  "controller_plan": {
+    "revision": 93,
+    "path": "docs/research/apa-results/control/PROJECT_PLAN.json",
+    "blob_sha": "d90ed1bb91d8a505f3021a1ebeaffb951a456149"
+  },
+  "counts": {
+    "archived_source_files": 71,
+    "files_with_existing_task_links": 70,
+    "files_without_task_links": 1,
+    "files_linked_only_to_two_general_task_ids": 29,
+    "document_candidates_reviewed": 17
+  },
+  "unmapped_source_paths": [
+    "README.md"
+  ],
+  "candidate_links": [
+    {
+      "source_path": "research/archicad29-tapir159/04_safe_bim_semantics/github_execution_job_v0_1.schema.json",
+      "archived_path": "docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/04_safe_bim_semantics/github_execution_job_v0_1.schema.json",
+      "source_blob_sha": "83cd1d8d25b86f18967fdc471f85196eac71a610",
+      "archived_blob_sha": "83cd1d8d25b86f18967fdc471f85196eac71a610",
+      "bytes": 2610,
+      "existing_links": [
+        "APA-P50.A01.S01",
+        "APA-P70.A01.S02"
+      ],
+      "candidate_additional_links": [
+        {
+          "task_id": "APA-P40.A01.S01",
+          "work_key": "always-on-executor-auth",
+          "status_at_plan_rev_93": "BLOCKED"
+        },
+        {
+          "task_id": "APA-P60.A02.S02",
+          "work_key": "publisher-plan-claim-gate",
+          "status_at_plan_rev_93": "DONE_PUBLISHED"
+        }
+      ],
+      "topic": "remote-job-admission",
+      "priority": "HIGH",
+      "rationale": "Historical GitHub execution-job envelope uses projectRootHash/snapshotId; signature is explicitly optional. It must never be interpreted as permission for unattended native write; compare with current publisher-claim gate and still-BLOCKED unattended-runner authorization.",
+      "classification": "SOURCE_SCOPE_TO_TASK_REVIEW_ONLY",
+      "controller_write_authorized": false
+    },
+    {
+      "source_path": "research/archicad29-tapir159/04_safe_bim_semantics/project_context_snapshot_v0_1.schema.json",
+      "archived_path": "docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/04_safe_bim_semantics/project_context_snapshot_v0_1.schema.json",
+      "source_blob_sha": "669b0c633d0b45bc17f0c65f421337a8c8cb756e",
+      "archived_blob_sha": "669b0c633d0b45bc17f0c65f421337a8c8cb756e",
+      "bytes": 3549,
+      "existing_links": [
+        "APA-P50.A01.S01",
+        "APA-P70.A01.S02"
+      ],
+      "candidate_additional_links": [
+        {
+          "task_id": "APA-P70.A01.S02",
+          "work_key": "product-evidence-to-capability-trace",
+          "status_at_plan_rev_93": "READY"
+        },
+        {
+          "task_id": "APA-P50.A03.S01",
+          "work_key": "research-to-mvp-synthesis",
+          "status_at_plan_rev_93": "READY"
+        }
+      ],
+      "topic": "project-context-snapshot",
+      "priority": "MEDIUM",
+      "rationale": "Snapshot contract contains rootHash, instance identity, selected GUIDs and coherent read-state metadata; assess as a historical design against current native readback. Do not declare a current installed context mirror.",
+      "classification": "SOURCE_SCOPE_TO_TASK_REVIEW_ONLY",
+      "controller_write_authorized": false
+    },
+    {
+      "source_path": "research/archicad29-tapir159/06_integration_audits/DIRECT_GITHUB_EXECUTION_PASSES_161_170.md",
+      "archived_path": "docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/06_integration_audits/DIRECT_GITHUB_EXECUTION_PASSES_161_170.md",
+      "source_blob_sha": "3f420ca447336c85bd9d9c3b51301b144b1dc844",
+      "archived_blob_sha": "3f420ca447336c85bd9d9c3b51301b144b1dc844",
+      "bytes": 6021,
+      "existing_links": [
+        "APA-P70.A01.S02",
+        "APA-P50.A01.S01"
+      ],
+      "candidate_additional_links": [
+        {
+          "task_id": "APA-P40.A01.S01",
+          "work_key": "always-on-executor-auth",
+          "status_at_plan_rev_93": "BLOCKED"
+        },
+        {
+          "task_id": "APA-P60.A02.S02",
+          "work_key": "publisher-plan-claim-gate",
+          "status_at_plan_rev_93": "DONE_PUBLISHED"
+        }
+      ],
+      "topic": "remote-job-admission",
+      "priority": "HIGH",
+      "rationale": "Explicit SAFE_RECIPE vs RAW_CODE execution classes, stale model check and credentials isolation; GitHub as transport, not BIM write authority. P40 remains BLOCKED.",
+      "classification": "SOURCE_SCOPE_TO_TASK_REVIEW_ONLY",
+      "controller_write_authorized": false
+    },
+    {
+      "source_path": "research/archicad29-tapir159/06_integration_audits/DIRECT_GITHUB_EXECUTION_PASSES_171_176.md",
+      "archived_path": "docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/06_integration_audits/DIRECT_GITHUB_EXECUTION_PASSES_171_176.md",
+      "source_blob_sha": "93df81f53a6694a492274088e64ac01b002f8108",
+      "archived_blob_sha": "93df81f53a6694a492274088e64ac01b002f8108",
+      "bytes": 3712,
+      "existing_links": [
+        "APA-P70.A01.S02",
+        "APA-P50.A01.S01"
+      ],
+      "candidate_additional_links": [
+        {
+          "task_id": "APA-P40.A01.S01",
+          "work_key": "always-on-executor-auth",
+          "status_at_plan_rev_93": "BLOCKED"
+        },
+        {
+          "task_id": "APA-P50.A03.S01",
+          "work_key": "research-to-mvp-synthesis",
+          "status_at_plan_rev_93": "READY"
+        }
+      ],
+      "topic": "remote-job-admission",
+      "priority": "HIGH",
+      "rationale": "Further transport safety/provenance checks for remote job intake; prior historical research is not a live end-to-end executor.",
+      "classification": "SOURCE_SCOPE_TO_TASK_REVIEW_ONLY",
+      "controller_write_authorized": false
+    },
+    {
+      "source_path": "research/archicad29-tapir159/06_integration_audits/DIRECT_GITHUB_EXECUTION_PASSES_177_180.md",
+      "archived_path": "docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/06_integration_audits/DIRECT_GITHUB_EXECUTION_PASSES_177_180.md",
+      "source_blob_sha": "60b36e310430417462f236c04713ad8ddd4477d4",
+      "archived_blob_sha": "60b36e310430417462f236c04713ad8ddd4477d4",
+      "bytes": 3061,
+      "existing_links": [
+        "APA-P70.A01.S02",
+        "APA-P50.A01.S01"
+      ],
+      "candidate_additional_links": [
+        {
+          "task_id": "APA-P40.A01.S01",
+          "work_key": "always-on-executor-auth",
+          "status_at_plan_rev_93": "BLOCKED"
+        },
+        {
+          "task_id": "APA-P50.A03.S01",
+          "work_key": "research-to-mvp-synthesis",
+          "status_at_plan_rev_93": "READY"
+        }
+      ],
+      "topic": "remote-job-admission",
+      "priority": "HIGH",
+      "rationale": "Final direct-GitHub execution tradeoffs; evaluate as proposed architecture only, never as user authorization for local scripts.",
+      "classification": "SOURCE_SCOPE_TO_TASK_REVIEW_ONLY",
+      "controller_write_authorized": false
+    },
+    {
+      "source_path": "research/archicad29-tapir159/06_integration_audits/INTERMEDIATE_AUDIT_DIRECT_GITHUB_EXECUTION_AFTER_170.md",
+      "archived_path": "docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/06_integration_audits/INTERMEDIATE_AUDIT_DIRECT_GITHUB_EXECUTION_AFTER_170.md",
+      "source_blob_sha": "925e32aa755c31df1f28fc3632cdb0b73de1cd85",
+      "archived_blob_sha": "925e32aa755c31df1f28fc3632cdb0b73de1cd85",
+      "bytes": 2629,
+      "existing_links": [
+        "APA-P70.A01.S02",
+        "APA-P50.A01.S01"
+      ],
+      "candidate_additional_links": [
+        {
+          "task_id": "APA-P40.A01.S01",
+          "work_key": "always-on-executor-auth",
+          "status_at_plan_rev_93": "BLOCKED"
+        },
+        {
+          "task_id": "APA-P60.A02.S02",
+          "work_key": "publisher-plan-claim-gate",
+          "status_at_plan_rev_93": "DONE_PUBLISHED"
+        }
+      ],
+      "topic": "remote-job-admission",
+      "priority": "HIGH",
+      "rationale": "Audit explicitly marks authenticated command envelope, local admission and stale-context gate as pending in historical architecture; distinguish current controller publication PASS from native execution PASS.",
+      "classification": "SOURCE_SCOPE_TO_TASK_REVIEW_ONLY",
+      "controller_write_authorized": false
+    },
+    {
+      "source_path": "research/archicad29-tapir159/09_final_audit/FINAL_DIRECT_GITHUB_EXECUTION_AUDIT_AFTER_180.md",
+      "archived_path": "docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/09_final_audit/FINAL_DIRECT_GITHUB_EXECUTION_AUDIT_AFTER_180.md",
+      "source_blob_sha": "f69d887e1033a99f31fcb4799cd019e8ee42bde4",
+      "archived_blob_sha": "f69d887e1033a99f31fcb4799cd019e8ee42bde4",
+      "bytes": 11177,
+      "existing_links": [
+        "APA-P70.A01.S02",
+        "APA-P10.A02.S01"
+      ],
+      "candidate_additional_links": [
+        {
+          "task_id": "APA-P40.A01.S01",
+          "work_key": "always-on-executor-auth",
+          "status_at_plan_rev_93": "BLOCKED"
+        },
+        {
+          "task_id": "APA-P50.A03.S01",
+          "work_key": "research-to-mvp-synthesis",
+          "status_at_plan_rev_93": "READY"
+        }
+      ],
+      "topic": "remote-job-admission",
+      "priority": "HIGH",
+      "rationale": "Consolidated remote job transport design; needs active code/credential gate verification before a future permit to execute.",
+      "classification": "SOURCE_SCOPE_TO_TASK_REVIEW_ONLY",
+      "controller_write_authorized": false
+    },
+    {
+      "source_path": "research/archicad29-tapir159/06_integration_audits/TRANSPORT_SYNC_PASSES_191_196.md",
+      "archived_path": "docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/06_integration_audits/TRANSPORT_SYNC_PASSES_191_196.md",
+      "source_blob_sha": "410c5583aef4707c82d4559f317fccfa56f7de55",
+      "archived_blob_sha": "410c5583aef4707c82d4559f317fccfa56f7de55",
+      "bytes": 5736,
+      "existing_links": [
+        "APA-P70.A01.S02",
+        "APA-P50.A01.S01"
+      ],
+      "candidate_additional_links": [
+        {
+          "task_id": "APA-P40.A01.S01",
+          "work_key": "always-on-executor-auth",
+          "status_at_plan_rev_93": "BLOCKED"
+        },
+        {
+          "task_id": "APA-P50.A03.S01",
+          "work_key": "research-to-mvp-synthesis",
+          "status_at_plan_rev_93": "READY"
+        }
+      ],
+      "topic": "transport-context",
+      "priority": "MEDIUM",
+      "rationale": "Historical local-versus-GitHub transport proposals; distinguish raw Slack event ledger from authorized GitHub job dispatch.",
+      "classification": "SOURCE_SCOPE_TO_TASK_REVIEW_ONLY",
+      "controller_write_authorized": false
+    },
+    {
+      "source_path": "research/archicad29-tapir159/06_integration_audits/TRANSPORT_SYNC_PASSES_197_200.md",
+      "archived_path": "docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/06_integration_audits/TRANSPORT_SYNC_PASSES_197_200.md",
+      "source_blob_sha": "a13ac15db9476f91cecf346e69621903b8c022f3",
+      "archived_blob_sha": "a13ac15db9476f91cecf346e69621903b8c022f3",
+      "bytes": 4419,
+      "existing_links": [
+        "APA-P70.A01.S02",
+        "APA-P50.A01.S01"
+      ],
+      "candidate_additional_links": [
+        {
+          "task_id": "APA-P40.A01.S01",
+          "work_key": "always-on-executor-auth",
+          "status_at_plan_rev_93": "BLOCKED"
+        },
+        {
+          "task_id": "APA-P50.A03.S01",
+          "work_key": "research-to-mvp-synthesis",
+          "status_at_plan_rev_93": "READY"
+        }
+      ],
+      "topic": "transport-context",
+      "priority": "MEDIUM",
+      "rationale": "Out-of-box transport audit; no native executable or unattended-runner proof follows from proposal text.",
+      "classification": "SOURCE_SCOPE_TO_TASK_REVIEW_ONLY",
+      "controller_write_authorized": false
+    },
+    {
+      "source_path": "research/archicad29-tapir159/09_final_audit/FINAL_TRANSPORT_SYNC_OUT_OF_BOX_AUDIT_AFTER_200.md",
+      "archived_path": "docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/09_final_audit/FINAL_TRANSPORT_SYNC_OUT_OF_BOX_AUDIT_AFTER_200.md",
+      "source_blob_sha": "4f1b24559ca10b55e60f017bb0a4b7eb2895e453",
+      "archived_blob_sha": "4f1b24559ca10b55e60f017bb0a4b7eb2895e453",
+      "bytes": 11285,
+      "existing_links": [
+        "APA-P70.A01.S02",
+        "APA-P10.A02.S01"
+      ],
+      "candidate_additional_links": [
+        {
+          "task_id": "APA-P40.A01.S01",
+          "work_key": "always-on-executor-auth",
+          "status_at_plan_rev_93": "BLOCKED"
+        },
+        {
+          "task_id": "APA-P50.A03.S01",
+          "work_key": "research-to-mvp-synthesis",
+          "status_at_plan_rev_93": "READY"
+        }
+      ],
+      "topic": "transport-context",
+      "priority": "HIGH",
+      "rationale": "Specifies zero-manual-startup user experience and GitHub boundary; current Slack Socket Mode supports event sync, not automatic arbitrary user-chat-to-BIM execution.",
+      "classification": "SOURCE_SCOPE_TO_TASK_REVIEW_ONLY",
+      "controller_write_authorized": false
+    },
+    {
+      "source_path": "research/archicad29-tapir159/06_integration_audits/PROJECT_CONTEXT_BRIDGE_ARCHITECTURE.md",
+      "archived_path": "docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/06_integration_audits/PROJECT_CONTEXT_BRIDGE_ARCHITECTURE.md",
+      "source_blob_sha": "8137225a38a836e4dfaccfaa71d32b2f99839564",
+      "archived_blob_sha": "8137225a38a836e4dfaccfaa71d32b2f99839564",
+      "bytes": 6620,
+      "existing_links": [
+        "APA-P70.A01.S02",
+        "APA-P50.A01.S01"
+      ],
+      "candidate_additional_links": [
+        {
+          "task_id": "APA-P70.A01.S02",
+          "work_key": "product-evidence-to-capability-trace",
+          "status_at_plan_rev_93": "READY"
+        },
+        {
+          "task_id": "APA-P50.A03.S01",
+          "work_key": "research-to-mvp-synthesis",
+          "status_at_plan_rev_93": "READY"
+        }
+      ],
+      "topic": "project-context-snapshot",
+      "priority": "MEDIUM",
+      "rationale": "Project identity/stamp, element index, local SQLite and coherent snapshot are requirements; avoid a second watcher or treating a stale cached context as current.",
+      "classification": "SOURCE_SCOPE_TO_TASK_REVIEW_ONLY",
+      "controller_write_authorized": false
+    },
+    {
+      "source_path": "research/archicad29-tapir159/06_integration_audits/PROJECT_CONTEXT_BRIDGE_PASSES_156_160.md",
+      "archived_path": "docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/06_integration_audits/PROJECT_CONTEXT_BRIDGE_PASSES_156_160.md",
+      "source_blob_sha": "720a269b465495a621af89068ad8116f8efc33e6",
+      "archived_blob_sha": "720a269b465495a621af89068ad8116f8efc33e6",
+      "bytes": 4597,
+      "existing_links": [
+        "APA-P70.A01.S02",
+        "APA-P50.A01.S01"
+      ],
+      "candidate_additional_links": [
+        {
+          "task_id": "APA-P70.A01.S02",
+          "work_key": "product-evidence-to-capability-trace",
+          "status_at_plan_rev_93": "READY"
+        },
+        {
+          "task_id": "APA-P50.A03.S01",
+          "work_key": "research-to-mvp-synthesis",
+          "status_at_plan_rev_93": "READY"
+        }
+      ],
+      "topic": "project-context-snapshot",
+      "priority": "MEDIUM",
+      "rationale": "Historical design of freshness and project identity, not evidence of live native model mirror.",
+      "classification": "SOURCE_SCOPE_TO_TASK_REVIEW_ONLY",
+      "controller_write_authorized": false
+    },
+    {
+      "source_path": "research/archicad29-tapir159/09_final_audit/FINAL_PROJECT_CONTEXT_BRIDGE_AUDIT_AFTER_160.md",
+      "archived_path": "docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/09_final_audit/FINAL_PROJECT_CONTEXT_BRIDGE_AUDIT_AFTER_160.md",
+      "source_blob_sha": "208e807425f698b93838552ef15ed5ba53491ef0",
+      "archived_blob_sha": "208e807425f698b93838552ef15ed5ba53491ef0",
+      "bytes": 16271,
+      "existing_links": [
+        "APA-P70.A01.S02",
+        "APA-P10.A02.S01"
+      ],
+      "candidate_additional_links": [
+        {
+          "task_id": "APA-P70.A01.S02",
+          "work_key": "product-evidence-to-capability-trace",
+          "status_at_plan_rev_93": "READY"
+        },
+        {
+          "task_id": "APA-P50.A03.S01",
+          "work_key": "research-to-mvp-synthesis",
+          "status_at_plan_rev_93": "READY"
+        }
+      ],
+      "topic": "project-context-snapshot",
+      "priority": "MEDIUM",
+      "rationale": "Final contextual snapshot and stale-plan precondition design; do not claim current LIVE context bridge from an archived proposal.",
+      "classification": "SOURCE_SCOPE_TO_TASK_REVIEW_ONLY",
+      "controller_write_authorized": false
+    },
+    {
+      "source_path": "research/archicad29-tapir159/06_integration_audits/AI_RESOURCE_EFFICIENT_ARCHITECTURE.md",
+      "archived_path": "docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/06_integration_audits/AI_RESOURCE_EFFICIENT_ARCHITECTURE.md",
+      "source_blob_sha": "262d2f525851445cc9c4064bc6376e568dc97dc8",
+      "archived_blob_sha": "262d2f525851445cc9c4064bc6376e568dc97dc8",
+      "bytes": 14713,
+      "existing_links": [
+        "APA-P70.A01.S02",
+        "APA-P50.A01.S01"
+      ],
+      "candidate_additional_links": [
+        {
+          "task_id": "APA-P10.A03.S02",
+          "work_key": "architecture-constraints-cost",
+          "status_at_plan_rev_93": "READY"
+        },
+        {
+          "task_id": "APA-P50.A03.S01",
+          "work_key": "research-to-mvp-synthesis",
+          "status_at_plan_rev_93": "READY"
+        }
+      ],
+      "topic": "resource-efficient-ai",
+      "priority": "MEDIUM",
+      "rationale": "Research proposes AI plan-then-unload isolation from Archicad mutation; no local LLM installation, measured resource budget or speedup is established here.",
+      "classification": "SOURCE_SCOPE_TO_TASK_REVIEW_ONLY",
+      "controller_write_authorized": false
+    },
+    {
+      "source_path": "research/archicad29-tapir159/06_integration_audits/INTERMEDIATE_AUDIT_UI_SANDBOX_AFTER_110.md",
+      "archived_path": "docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/06_integration_audits/INTERMEDIATE_AUDIT_UI_SANDBOX_AFTER_110.md",
+      "source_blob_sha": "66bdc57aff059310735a4979f036df0ddd1a0194",
+      "archived_blob_sha": "66bdc57aff059310735a4979f036df0ddd1a0194",
+      "bytes": 6978,
+      "existing_links": [
+        "APA-P70.A01.S02",
+        "APA-P50.A01.S01"
+      ],
+      "candidate_additional_links": [
+        {
+          "task_id": "APA-P50.A03.S01",
+          "work_key": "research-to-mvp-synthesis",
+          "status_at_plan_rev_93": "READY"
+        },
+        {
+          "task_id": "APA-P70.A01.S02",
+          "work_key": "product-evidence-to-capability-trace",
+          "status_at_plan_rev_93": "READY"
+        }
+      ],
+      "topic": "undo-ui-sandbox",
+      "priority": "MEDIUM",
+      "rationale": "Explicitly distinguishes a custom native grouped Undo command from Tapir multi-call operations; does not prove automatic rollback or Photoshop-like history for arbitrary Archicad manual actions.",
+      "classification": "SOURCE_SCOPE_TO_TASK_REVIEW_ONLY",
+      "controller_write_authorized": false
+    },
+    {
+      "source_path": "research/archicad29-tapir159/06_integration_audits/DEVELOPMENT_ACCELERATION_AUDIT.md",
+      "archived_path": "docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/06_integration_audits/DEVELOPMENT_ACCELERATION_AUDIT.md",
+      "source_blob_sha": "6ea02533f60d229dfda9f2ce0c5b0f19b7e74201",
+      "archived_blob_sha": "6ea02533f60d229dfda9f2ce0c5b0f19b7e74201",
+      "bytes": 11713,
+      "existing_links": [
+        "APA-P70.A01.S02",
+        "APA-P50.A01.S01"
+      ],
+      "candidate_additional_links": [
+        {
+          "task_id": "APA-P50.A03.S01",
+          "work_key": "research-to-mvp-synthesis",
+          "status_at_plan_rev_93": "READY"
+        },
+        {
+          "task_id": "APA-P10.A03.S02",
+          "work_key": "architecture-constraints-cost",
+          "status_at_plan_rev_93": "READY"
+        }
+      ],
+      "topic": "development-priorities",
+      "priority": "LOW",
+      "rationale": "Historic testing and software-development acceleration ideas should be reconciled with existing Work code rather than generating a second executor.",
+      "classification": "SOURCE_SCOPE_TO_TASK_REVIEW_ONLY",
+      "controller_write_authorized": false
+    },
+    {
+      "source_path": "research/archicad29-tapir159/06_integration_audits/SAFE_BIM_SYNTHESIS_PASSES_121_130.md",
+      "archived_path": "docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/06_integration_audits/SAFE_BIM_SYNTHESIS_PASSES_121_130.md",
+      "source_blob_sha": "536ba1643378ab19f939bde01c46ba534e9fa7a1",
+      "archived_blob_sha": "536ba1643378ab19f939bde01c46ba534e9fa7a1",
+      "bytes": 10933,
+      "existing_links": [
+        "APA-P70.A01.S02",
+        "APA-P50.A01.S01"
+      ],
+      "candidate_additional_links": [
+        {
+          "task_id": "APA-P50.A03.S01",
+          "work_key": "research-to-mvp-synthesis",
+          "status_at_plan_rev_93": "READY"
+        },
+        {
+          "task_id": "APA-P70.A01.S02",
+          "work_key": "product-evidence-to-capability-trace",
+          "status_at_plan_rev_93": "READY"
+        }
+      ],
+      "topic": "product-synthesis",
+      "priority": "LOW",
+      "rationale": "Synthesis of previous work; route to research-to-MVP evidence without claiming tests or repeating source copies.",
+      "classification": "SOURCE_SCOPE_TO_TASK_REVIEW_ONLY",
+      "controller_write_authorized": false
+    }
+  ],
+  "non_interference": {
+    "edit_only_isolated_branch": true,
+    "no_work_pr_edits": true,
+    "no_canonical_or_controller_changes": true,
+    "no_v2_publisher_inbox": true,
+    "no_archicad_or_slack_or_sqlite_calls": true,
+    "no_merge_during_work": true
+  },
+  "notes": [
+    "Source file byte identity proves archived-content fidelity, not technical validity of source claims.",
+    "Task links are proposals for later audit and are not current controller memberships or status transitions.",
+    "Source technical references are Tapir 1.5.9-era; Work's 1.5.10 and current native LIVE claims must be checked separately.",
+    "Existing PR #49 reviews GDL factory and PR #51 owns native material/library integration; neither is modified here."
+  ]
+}
