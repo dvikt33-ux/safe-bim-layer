@@ -20,6 +20,7 @@
 - [FREE_READY_EXTENSIONS_20261014.md](FREE_READY_EXTENSIONS_20261014.md) — проверенные первоисточники бесплатных расширений Archicad 29 и API-библиотек; отдельные типы (APX/сервис/Python), ограничения и проверки безопасности. Результаты испытаний пока NOT_TESTED.
 - [CAD_MCP_HERMES_SPAREPARTS_REVIEW_20261014.md](CAD_MCP_HERMES_SPAREPARTS_REVIEW_20261014.md) — Hermes Agent / SolidWorks MCP / новый Archicad MCP и Spare Parts 3D: пригодность, платность, схема native readback и безопасность скриптов.
 - [ARCHICAD_MCP_SOURCE_AUDIT_20261014.md](ARCHICAD_MCP_SOURCE_AUDIT_20261014.md) — статический аудит исходного кода Archicad MCP по commit SHA, риски, проверка перекрытия с APA и план безопасного read-only эксперимента.
+- [FINCH3D_AC29_LICENSE_AND_REUSE_AUDIT_20261015.md](FINCH3D_AC29_LICENSE_AND_REUSE_AUDIT_20261015.md) — официальные цены Finch, бесплатный Free-редактор, Archicad 29 beta plug-in, ограничения AI-генерации и применимость Adaptive Plan Library к APA.
 - Документы контроля APA: [controller](../control/README.md) и [канонический исследовательский журнал](../README.md).
 
 ## Ограничения пользователя
