@@ -360,17 +360,21 @@
       "decision": "UNDECIDED",
       "test_status": "NOT_TESTED",
       "workflow_status": "SHORTLISTED",
-      "role": "Генеративные жилые здания",
-      "rationale": "Trial не является бесплатной интеграцией; специализация отличается от основного APA-модуля.",
-      "blockers": "Требуется отдельный платный рабочий доступ.",
+      "role": "Закрытый облачный генератор многоквартирных зданий, часть коммерческих помещений, парковки; DXF/IFC/XLSX",
+      "rationale": "Функциональный ориентир: hard minimum dimensions vs soft target areas, global grids and basement parking, reported areas/variants. Постоянная бесплатная генерация/API не подтверждены.",
+      "blockers": "7 days trial; Pro USD49/month annual billing; proprietary source not published in discovered sources; TРЦ and RU SP unsupported/unverified. No code copying or private API usage.",
       "source_urls": [
-        "https://architechtures.com/en"
+        "https://architechtures.com/en/pricing",
+        "https://architechtures.com/en/blog/posts/t2-overview-of-the-platform",
+        "https://architechtures.com/en/blog/posts/parking-lot-design",
+        "https://architechtures.com/en/blog/posts/t1-what-is-architechtures"
       ],
-      "source_state": "NOT_INDEPENDENTLY_VERIFIED",
+      "source_state": "OFFICIAL_VENDOR_FUNCTIONS_AND_PRICING_CHECKED_2026-10-15",
       "local_benchmark": null,
       "version_or_quantization": null,
       "integrated_in_apa": false,
-      "last_reviewed": "2026-10-14"
+      "last_reviewed": "2026-10-15",
+      "audit_evidence": "docs/research/apa-results/ai-candidates/ARCHITECHTURES_OPEN_SOURCE_REUSE_AUDIT_20261015.md"
     },
     {
       "id": "testfit",
@@ -534,6 +538,226 @@
       "version_or_quantization": null,
       "integrated_in_apa": false,
       "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "parksolver",
+      "name": "ParkSolver",
+      "kind": "open_source_parking_optimizer",
+      "priority": "VERY_PROMISING",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Парковочные схемы ТРЦ с обводкой препятствий и вариантами",
+      "rationale": "Узкий MIT-модуль на Shapely, solver/stripe/score уже имеется и может подать полигоны в APA.",
+      "blockers": "v0.1.0 / 2 upstream commits; нормы РФ и полная корректность не проверены.",
+      "source_urls": [
+        "https://github.com/ucalyptus/ParkSolver"
+      ],
+      "source_state": "UPSTREAM_CODE_AND_LICENSE_READ_2026-10-15",
+      "local_benchmark": null,
+      "version_or_quantization": "73c5dd0bca64636e8e0a36af920a59556b610faa",
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-15",
+      "upstream_license": "MIT",
+      "audit_evidence": "docs/research/apa-results/ai-candidates/ARCHITECHTURES_OPEN_SOURCE_REUSE_AUDIT_20261015.md"
+    },
+    {
+      "id": "archit-app",
+      "name": "archit-app",
+      "kind": "open_source_plan_validation",
+      "priority": "VERY_PROMISING",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Вторичная проверка геометрии планов, дверей, стен, этажей",
+      "rationale": "MIT: исходный код validate.py/topology.py поддерживает structured Findings, adjacency и room safety checks.",
+      "blockers": "Alpha v0.7.0; возможно дублирует часть проверок APA, first gap analysis.",
+      "source_urls": [
+        "https://github.com/archit-app/archit-app"
+      ],
+      "source_state": "UPSTREAM_CODE_AND_LICENSE_READ_2026-10-15",
+      "local_benchmark": null,
+      "version_or_quantization": "e2913370845bfe2523c57862a2ef19badbd84056",
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-15",
+      "upstream_license": "MIT",
+      "audit_evidence": "docs/research/apa-results/ai-candidates/ARCHITECHTURES_OPEN_SOURCE_REUSE_AUDIT_20261015.md"
+    },
+    {
+      "id": "ifc2plan",
+      "name": "ifc2plan",
+      "kind": "open_source_ifc_plan_projection",
+      "priority": "PROMISING",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Независимое извлечение поэтажных WKT/CSV и изображений из IFC",
+      "rationale": "MIT, готовый CLI с IfcOpenShell/Trimesh/Shapely.",
+      "blockers": "IFC не идентичен PLN; конкуренция с действующим native reader; проверить added diagnostic value.",
+      "source_urls": [
+        "https://github.com/datarefinerylab/ifc2plan"
+      ],
+      "source_state": "UPSTREAM_CODE_AND_LICENSE_READ_2026-10-15",
+      "local_benchmark": null,
+      "version_or_quantization": "613f7661947420df76cbe44d05719e6008354551",
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-15",
+      "upstream_license": "MIT",
+      "audit_evidence": "docs/research/apa-results/ai-candidates/ARCHITECHTURES_OPEN_SOURCE_REUSE_AUDIT_20261015.md"
+    },
+    {
+      "id": "harnessbim",
+      "name": "HarnessBIM",
+      "kind": "open_source_text_to_bim_checker",
+      "priority": "PROMISING",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Избирательный reuse egress checker, Effect taxonomy, reports",
+      "rationale": "Apache 2.0, реальный Python checker и BIM backend interface; исследования с детальной документацией.",
+      "blockers": "Early stage 0.0.1; Generative LLM quality not proven. IBC egress defaults not valid RU normative basis.",
+      "source_urls": [
+        "https://github.com/ReverseZoom2151/harnessbim"
+      ],
+      "source_state": "UPSTREAM_CODE_AND_LICENSE_READ_2026-10-15",
+      "local_benchmark": null,
+      "version_or_quantization": "3035021938cbf01128a619146f01eb2c9081d7e5",
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-15",
+      "upstream_license": "Apache-2.0",
+      "audit_evidence": "docs/research/apa-results/ai-candidates/ARCHITECHTURES_OPEN_SOURCE_REUSE_AUDIT_20261015.md"
+    },
+    {
+      "id": "compas-ifc",
+      "name": "COMPAS IFC",
+      "kind": "open_source_ifc_api",
+      "priority": "PROMISING",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Высокоуровневая IFC-модель, spatial tree, object relationships",
+      "rationale": "MIT, interface based on COMPAS with bidirectional IFC operations, Windows support declared.",
+      "blockers": "Potential duplicate of IfcOpenShell; do not integrate until gap confirmed.",
+      "source_urls": [
+        "https://github.com/compas-dev/compas_ifc"
+      ],
+      "source_state": "UPSTREAM_CODE_AND_LICENSE_READ_2026-10-15",
+      "local_benchmark": null,
+      "version_or_quantization": "0daa70547a272302db3d970066b366b569eab106",
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-15",
+      "upstream_license": "MIT",
+      "audit_evidence": "docs/research/apa-results/ai-candidates/ARCHITECHTURES_OPEN_SOURCE_REUSE_AUDIT_20261015.md"
+    },
+    {
+      "id": "topologicpy",
+      "name": "TopologicPy",
+      "kind": "open_source_topology_library",
+      "priority": "PROMISING",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Пространственная топология, графы атриумов, галерей, сложных зон",
+      "rationale": "LGPLv3, AEC topology non-manifold and data-rich graphs.",
+      "blockers": "Additional heavyweight dependencies/licensing obligations; compare existing NetworkX/Shapely functionality.",
+      "source_urls": [
+        "https://github.com/wassimj/topologicpy"
+      ],
+      "source_state": "UPSTREAM_CODE_AND_LICENSE_READ_2026-10-15",
+      "local_benchmark": null,
+      "version_or_quantization": "aef15b4a503014ed63eb487f91d01ad89c95671b",
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-15",
+      "upstream_license": "LGPL-3.0-or-later",
+      "audit_evidence": "docs/research/apa-results/ai-candidates/ARCHITECHTURES_OPEN_SOURCE_REUSE_AUDIT_20261015.md"
+    },
+    {
+      "id": "spox-space-planner",
+      "name": "SPOX Space Planning Optimization eXpert",
+      "kind": "source_reference_unlicensed",
+      "priority": "LOW_PRIORITY",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Референс constraint-based прямоугольных планов на CP-SAT",
+      "rationale": "Параметрические комнаты, смежность, площади и objective — полезный образец постановки.",
+      "blockers": "LICENSE не обнаружен в корне и package metadata не указывает лицензию: НЕ КОПИРОВАТЬ И НЕ РАСПРОСТРАНЯТЬ исходники, пока права не подтверждены.",
+      "source_urls": [
+        "https://github.com/benjaminwfriedman/spox"
+      ],
+      "source_state": "UPSTREAM_CODE_AND_LICENSE_READ_2026-10-15",
+      "local_benchmark": null,
+      "version_or_quantization": "4bb4e14d1d2ad920ba41c6964aa6432e62bc9e6d",
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-15",
+      "upstream_license": "UNKNOWN_NOT_VERIFIED",
+      "audit_evidence": "docs/research/apa-results/ai-candidates/ARCHITECHTURES_OPEN_SOURCE_REUSE_AUDIT_20261015.md"
+    },
+    {
+      "id": "ifc-floorplan-show2instruct",
+      "name": "Show2Instruct ifc-floorplan",
+      "kind": "source_reference_unlicensed",
+      "priority": "LOW_PRIORITY",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Структурированное поэтажное извлечение IFC в JSON/SVG и door connectivity",
+      "rationale": "Хорошо описанная геометрическая топология, атрибуция ошибок и самосверка; применимо как идея.",
+      "blockers": "LICENSE не обнаружен в корне и README, без разрешения нельзя переносить код; авторские тесты не воспроизводились.",
+      "source_urls": [
+        "https://github.com/Show2Instruct/ifc-floorplan"
+      ],
+      "source_state": "UPSTREAM_CODE_AND_LICENSE_READ_2026-10-15",
+      "local_benchmark": null,
+      "version_or_quantization": "ee3fbaccad7b64fccf5d2b54f9549f9680cb740c",
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-15",
+      "upstream_license": "UNKNOWN_NOT_VERIFIED",
+      "audit_evidence": "docs/research/apa-results/ai-candidates/ARCHITECHTURES_OPEN_SOURCE_REUSE_AUDIT_20261015.md"
+    },
+    {
+      "id": "archigen",
+      "name": "ArchiGen",
+      "kind": "open_source_plan_ai_stack",
+      "priority": "LOW_PRIORITY",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Референс NL→JSON→plan→IFC и версионного редактирования",
+      "rationale": "MIT открытый API skeleton и планировочный стек.",
+      "blockers": "Многокомпонентный Docker/Node/CUDA/DB; Canadian code rules; не соответствует quick integration.",
+      "source_urls": [
+        "https://github.com/Dropio12/archigen"
+      ],
+      "source_state": "UPSTREAM_CODE_AND_LICENSE_READ_2026-10-15",
+      "local_benchmark": null,
+      "version_or_quantization": "076d3c039ae8da068828b5bd5508f60e8a0f0d06",
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-15",
+      "upstream_license": "MIT",
+      "audit_evidence": "docs/research/apa-results/ai-candidates/ARCHITECHTURES_OPEN_SOURCE_REUSE_AUDIT_20261015.md"
+    },
+    {
+      "id": "gsdiff-floorplans",
+      "name": "GSDiff floor plan generator",
+      "kind": "research_floorplan_model",
+      "priority": "LOW_PRIORITY",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "AI-генерация 2D векторных жилых планов",
+      "rationale": "Опубликованы исследовательские модели/код для topology/boundary constraints.",
+      "blockers": "GPL-3.0, RPLAN/LIFULL model/data licensing, GPU requirements and housing bias; не готов BIM for TRC.",
+      "source_urls": [
+        "https://github.com/SizheHu/GSDiff"
+      ],
+      "source_state": "UPSTREAM_CODE_AND_LICENSE_READ_2026-10-15",
+      "local_benchmark": null,
+      "version_or_quantization": "a02af021b80eba984228f92f7cf5b6f296cf3725",
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-15",
+      "upstream_license": "GPL-3.0",
+      "audit_evidence": "docs/research/apa-results/ai-candidates/ARCHITECHTURES_OPEN_SOURCE_REUSE_AUDIT_20261015.md"
     }
   ]
 }
