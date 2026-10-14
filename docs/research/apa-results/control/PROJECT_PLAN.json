@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 157,
+  "revision": 158,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -1809,6 +1809,66 @@
     "ART-P70-A11-S03-STAIR350-RECEIPT-20261014": {
       "id": "ART-P70-A11-S03-STAIR350-RECEIPT-20261014",
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261014-121132Z-native-stair-source350.json",
+      "kind": "RECEIPT",
+      "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
+    },
+    "ART-P70-A11-S03-FULL-ROOFS-NATIVE-20261014": {
+      "id": "ART-P70-A11-S03-FULL-ROOFS-NATIVE-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-172915Z-full-native-command-roofs/roof-native.json",
+      "kind": "TEST_RESULT",
+      "verification": "LIVE_NATIVE_GEOMETRY_EDIT_SAVE_OPEN"
+    },
+    "ART-P70-A11-S03-FULL-DYNAMIC-RUNTIME-20261014": {
+      "id": "ART-P70-A11-S03-FULL-DYNAMIC-RUNTIME-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-172915Z-full-native-command-roofs/dynamic-runtime.json",
+      "kind": "DATASET",
+      "verification": "348_CANDIDATE_337_RESTORED_ROUTABLE_16_LIVE_VERIFIED"
+    },
+    "ART-P70-A11-S03-FULL-ROOF-SURFACE-20261014": {
+      "id": "ART-P70-A11-S03-FULL-ROOF-SURFACE-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-172915Z-full-native-command-roofs/roof-surface-transfer.json",
+      "kind": "TEST_RESULT",
+      "verification": "BUILDINGMATERIAL_PASS_GABLE_SURFACES_MATCH_HIP_SURFACE_TRANSFER_NOT_VERIFIED"
+    },
+    "ART-P70-A11-S03-FULL-PRESERVE-20261014": {
+      "id": "ART-P70-A11-S03-FULL-PRESERVE-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-172915Z-full-native-command-roofs/preservation-save-open.json",
+      "kind": "TEST_RESULT",
+      "verification": "LIVE_ALL258_SIGNATURES_ORIGINAL255_UNCHANGED"
+    },
+    "ART-P70-A11-S03-FULL-APX-RESTORE-20261014": {
+      "id": "ART-P70-A11-S03-FULL-APX-RESTORE-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-172915Z-full-native-command-roofs/apx-restoration.json",
+      "kind": "TEST_RESULT",
+      "verification": "BYTE_EXACT_APX_AND_REGISTRATION_RESTORED_ORIGINAL_RUNTIME_READ_PASS"
+    },
+    "ART-P70-A11-S03-FULL-CI-20261014": {
+      "id": "ART-P70-A11-S03-FULL-CI-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-172915Z-full-native-command-roofs/windows-ci.json",
+      "kind": "TEST_RESULT",
+      "verification": "WINDOWS_CI_PASS_EXACT_HEAD"
+    },
+    "ART-P70-A11-S03-FULL-GAPS-20261014": {
+      "id": "ART-P70-A11-S03-FULL-GAPS-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-172915Z-full-native-command-roofs/gap-register.json",
+      "kind": "DATASET",
+      "verification": "S03_PARTIAL_S10_BLOCKED_SDK_RUNTIME_AND_SURFACE_BOUNDARIES_EXPLICIT"
+    },
+    "ART-P70-A11-S03-FULL-KG-20261014": {
+      "id": "ART-P70-A11-S03-FULL-KG-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-172915Z-full-native-command-roofs/core-knowledge-query.json",
+      "kind": "TEST_RESULT",
+      "verification": "EXISTING_MAIN_ORCHESTRATOR_GITHUB_CURRENT_KNOWLEDGE_GRAPH_PASS"
+    },
+    "ART-P70-A11-S03-FULL-REPORT-20261014": {
+      "id": "ART-P70-A11-S03-FULL-REPORT-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-14/APA-RUN-20261014-172915Z-full-native-command-roofs/REPORT.md",
+      "kind": "REPORT",
+      "verification": "DONE_PUBLISHED_FUNCTIONAL_BLOCK_ONLY"
+    },
+    "ART-P70-A11-S03-FULL-RECEIPT-20261014": {
+      "id": "ART-P70-A11-S03-FULL-RECEIPT-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261014-172915Z-full-native-command-roofs.json",
       "kind": "RECEIPT",
       "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
     }
@@ -4386,7 +4446,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -4541,12 +4601,17 @@
         "PR81 3221b8e7a0b775ece1018caf622a32c6ca9cb9dc atop exactPR80 cb73cd578c7cd7577f80397920d9e81b8d09c6e1: existingNativeFavourite/Graph/SceneWriter nowprepare source-hashed explicit nativeStair dimensions compatible with captured nativeconfiguredrules and actualStories. No silent count/rise/going substitution; no secondexecutor/APXchange.",
         "LIVE_PASS andSOURCE_DIMENSION_PASS newdetached nativeStair:22rises150mm,going350mm,width1m,totalHeight3.3m,walkingLine7.7m. Built-in preciseproperties and actualBREP22horizontallevels/20regular350mmpitches/21rises150mm independentlyverified afterSave/Open. Finalstructuraltoptransition0.309807621m separatelyNOT_VERIFIED asdefaultgoing. Notnewbuildingconnection/engineeringacceptance. SurfaceattributeBeton04 readback isnotstructuralBuildingMaterialverification.",
         "Previous145GUIDgeometry/material/story signatures unchanged; all255current inventorysignatures preserved afterSave/Open andindependentread.1Create+45listedmembers+64bodylessObjects,0newcollisionpairs,0deletions/replays.54Objects explicitnativeobject.owner intoStairmembers;10ownerancestriesNOT_VERIFIED despite readableparenttypes. Generic/hierarchy/connectedqueries incomplete. Fullinventoryacceptance NOT_VERIFIED; initialCreate journalPARTIAL_OR_UNKNOWN_OUTCOME kept; factual dimension/persistence proofseparate, neverCreate retry. SavedSHA256 01f47ad21aa5aa6975d824cf9999b56b7e89578ce1baa7e4b594ab49bc22b59e.",
-        "723/723Windows hosttests,5newsource/inventoryregressions andcurrentWindows CI PASS. DraftPR81/fourcodefiles/13published evidence+reportfiles/readbackreceipt verified. Existingnormative/search/KGimplementation/docs/layout/TRC/main/168project/APX preserved. A11.S03 PARTIAL,S10BLOCKED,A07deps unchanged. Next: resolve10supportObject ancestries read-only beforefullinventoryacceptance; independentlynativeSinglePlaneRoofcontour/slope."
+        "723/723Windows hosttests,5newsource/inventoryregressions andcurrentWindows CI PASS. DraftPR81/fourcodefiles/13published evidence+reportfiles/readbackreceipt verified. Existingnormative/search/KGimplementation/docs/layout/TRC/main/168project/APX preserved. A11.S03 PARTIAL,S10BLOCKED,A07deps unchanged. Next: resolve10supportObject ancestries read-only beforefullinventoryacceptance; independentlynativeSinglePlaneRoofcontour/slope.",
+        "PR82 1c27e7c4b66d5b225724e777719e6a675660494a atop exactPR81 3221b8e7a0b775ece1018caf622a32c6ca9cb9dc. Existing BIMGraph/SceneWriter/SQLite/EvidenceAPI now dynamically prepare and execute discovered typed commands without Python name handlers. Core KnowledgeGraph/GitHub freshness and same-owner CAS publication verified. One draftPR; no new executor/journal/search/normative system.",
+        "Candidate275registeredTapirSDK+73official=348routable; restoredoriginal264registeredTapir+73official=337routable.16distinctcommandsLIVE_VERIFIED acrosspass; all348inputs validated. Officialoutputschemas SDKkeys only, nestedcontract coveragepartial.33loadedAPX;32otherproviders NOT_EXPOSED withoutdiscoverednamespacecontract.12candidateSDKcommands absentafterrestore plusonelegacycommand restored; BLOCKED inoriginalruntime. Preparation isnotprojectwritepermission. Dynamicexactscope, binding/hash, affected/retainedinventory andindependentreadback preserveUNKNOWN no-replay. Explicitnativeoperation previews supportcompositionchanges withoutguessingtoolconversions; MorphLastResort preserved.",
+        "LIVE geometry/edit/saveOpen: gable2SinglePlaneRoof25to28degrees,hip1MultiPlaneRoof4actualplanes30to35degrees, bothwidth+1m withsameexperimentalGUIDs.1gable3Dridge/solidseam and5hip/ridgejoins,footprinterrorsbelow1e-5m2. SourceBuildingMaterial/thickness/floor/eavedatum preserved. Native3D PASS. Repeatedfinalpitch requests0writes/0duplicates. OriginalsourceRoof+5SEOwalls unchanged; specimensinfreeareas ofsameexistingtestPLN.3newRoofGUIDs,current258,allprevious255geometry/material/story/relationships unchanged afterSave/Open andoriginalAPXindependentread.",
+        "OriginalAPXfiles+registrations restoredbyteexact, noTRC/newPLN/main/normative/KGimplementation changes. SourceSurface transfer GableMATCH;HipMultiPlaneoverridesdiffer NOT_VERIFIED, donotinferfromBuildingMaterialPASS. InstalledSetDetailsRoofsurfacesetter absent; nextminimalexistingRoofcontract ispivotPolyEdges/levelEdgeData (APIMemoMask_PivotPolygon), no newSDKengine. NativeBADPOLY/BADPARS andsuccess-withoutpitch outcomes retained; no blindCreate/Modifyreplay.",
+        "WindowsCI PASS exact 1c27e7c4b66d5b225724e777719e6a675660494a; local7Roof+3dynamiccritical and15affectedexistingModelFirst tests only. Independentofflineaudit appliesolder3ad9961 snapshot; three historicalYAML parseerrors remain sourceingestionfollowup, notnativeBIMregressions. Publisherreport/evidence/receipt GitHubbyte-readback verified. A11.S03PARTIAL, A11.S10BLOCKED andA07dependencies preserved. Next: exactMultiPlaneSurface transfer, thenadditionalmodel functions viaexistingdynamiccatalog."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
-      "owner": "work-native-roof-edit-20261014",
-      "lease_until": "2026-10-14T20:28:39Z",
-      "claim_ref": "APA-CLAIM-FULL-INTEGRATION-20261014T172839Z",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
@@ -4696,7 +4761,17 @@
         "ART-P70-A11-S03-STAIR350-CI-20261014",
         "ART-P70-A11-S03-STAIR350-GAPS-20261014",
         "ART-P70-A11-S03-STAIR350-REPORT-20261014",
-        "ART-P70-A11-S03-STAIR350-RECEIPT-20261014"
+        "ART-P70-A11-S03-STAIR350-RECEIPT-20261014",
+        "ART-P70-A11-S03-FULL-ROOFS-NATIVE-20261014",
+        "ART-P70-A11-S03-FULL-DYNAMIC-RUNTIME-20261014",
+        "ART-P70-A11-S03-FULL-ROOF-SURFACE-20261014",
+        "ART-P70-A11-S03-FULL-PRESERVE-20261014",
+        "ART-P70-A11-S03-FULL-APX-RESTORE-20261014",
+        "ART-P70-A11-S03-FULL-CI-20261014",
+        "ART-P70-A11-S03-FULL-GAPS-20261014",
+        "ART-P70-A11-S03-FULL-KG-20261014",
+        "ART-P70-A11-S03-FULL-REPORT-20261014",
+        "ART-P70-A11-S03-FULL-RECEIPT-20261014"
       ],
       "blocked_reason": null
     },
@@ -5547,7 +5622,17 @@
         "ART-P70-A11-S03-STAIR350-CI-20261014",
         "ART-P70-A11-S03-STAIR350-GAPS-20261014",
         "ART-P70-A11-S03-STAIR350-REPORT-20261014",
-        "ART-P70-A11-S03-STAIR350-RECEIPT-20261014"
+        "ART-P70-A11-S03-STAIR350-RECEIPT-20261014",
+        "ART-P70-A11-S03-FULL-ROOFS-NATIVE-20261014",
+        "ART-P70-A11-S03-FULL-DYNAMIC-RUNTIME-20261014",
+        "ART-P70-A11-S03-FULL-ROOF-SURFACE-20261014",
+        "ART-P70-A11-S03-FULL-PRESERVE-20261014",
+        "ART-P70-A11-S03-FULL-APX-RESTORE-20261014",
+        "ART-P70-A11-S03-FULL-CI-20261014",
+        "ART-P70-A11-S03-FULL-GAPS-20261014",
+        "ART-P70-A11-S03-FULL-KG-20261014",
+        "ART-P70-A11-S03-FULL-REPORT-20261014",
+        "ART-P70-A11-S03-FULL-RECEIPT-20261014"
       ],
       "synthesis_state": "PARTIAL",
       "owner": null
