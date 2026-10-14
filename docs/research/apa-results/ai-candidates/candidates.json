@@ -295,17 +295,22 @@
       "decision": "UNDECIDED",
       "test_status": "NOT_TESTED",
       "workflow_status": "SHORTLISTED",
-      "role": "Генерация планов",
-      "rationale": "Пока нет подтверждённого постоянно бесплатного доступа к AI-генерации планов через API для APA.",
-      "blockers": "Нужна платная коммерческая интеграция или иные условия; переоценивать при появлении free API.",
+      "role": "Генерация и адаптация unit-plans, нативный перенос стен/дверей/зон в Archicad 29; Free-план — ручной редактор и метрики",
+      "rationale": "Официально есть бесплатный Free-редактор/метрики и готовый beta-плагин AC27–29. Но AI-generation + compliance + custom BIM integrations выделены в Enterprise от €14,500/год; подбор personal plan-library — Basic/Enterprise. Бесплатный программный маршрут AI-планировок в APA не подтверждён. Как функциональный UX-образец Adaptive Plan Library интересен отдельно.",
+      "blockers": "Free не включает заявленную AI floor plan generation; Basic €79/мес, Enterprise от €14,500/год; публичный бесплатный headless API не найден. Установленный Archicad 29.3001 не тестировался; права на импорт на Free не подтверждены.",
       "source_urls": [
-        "https://www.finch3d.com/"
+        "https://www.finch3d.com/get-started",
+        "https://docs.finch3d.com/docs/download-plug-ins",
+        "https://docs.finch3d.com/courses/finch-101/finch-101-generating-floor-plans-in-archicad",
+        "https://docs.finch3d.com/courses/finch-101/finch-101-download-to-archicad",
+        "https://docs.finch3d.com/docs/projects-and-variants/unit-editor/adaptive-plan-library"
       ],
-      "source_state": "NOT_INDEPENDENTLY_VERIFIED",
+      "source_state": "OFFICIAL_VENDOR_PRICING_AND_AC29_PLUGIN_DOCS_CHECKED_2026-10-15",
       "local_benchmark": null,
       "version_or_quantization": null,
       "integrated_in_apa": false,
-      "last_reviewed": "2026-10-14"
+      "last_reviewed": "2026-10-15",
+      "audit_evidence": "docs/research/apa-results/ai-candidates/FINCH3D_AC29_LICENSE_AND_REUSE_AUDIT_20261015.md"
     },
     {
       "id": "snaptrude",
