@@ -444,6 +444,89 @@
       "version_or_quantization": null,
       "integrated_in_apa": false,
       "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "hermes-agent",
+      "name": "Hermes Agent — Nous Research",
+      "kind": "external_ai_agent",
+      "priority": "PROMISING",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Внешний MCP-клиент/локальный агент для изолированных аудитов и инструментов APA",
+      "rationale": "MIT, официальные Windows и MCP, поддержка локальных моделей через OpenAI-compatible API.",
+      "blockers": "Не замена контроллера и проверок APA; безопасность подключённых MCP, лимиты/цена используемой модели и качество решений требуют испытаний.",
+      "source_urls": [
+        "https://github.com/NousResearch/hermes-agent",
+        "https://github.com/NousResearch/hermes-agent/blob/main/website/docs/user-guide/features/mcp.md"
+      ],
+      "source_state": "PRIMARY_PAGE_CHECKED_2026-10-14",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "boti-ormandi-archicad-mcp",
+      "name": "Boti-Ormandi / archicad-mcp",
+      "kind": "archicad_mcp_connector",
+      "priority": "VERY_PROMISING",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Поиск реальных Archicad/Tapir JSON-схем, диагностика и discovery; исследовать интеграцию со схемным ядром APA",
+      "rationale": "MIT, uvx, schemas can be read without Archicad; потенциально минимальные затраты на проверку API.",
+      "blockers": "Критический риск: execute_script исполняет произвольный Python в текущей ОС без песочницы, не разрешать подключение к рабочей модели; точную версию и схему сверить.",
+      "source_urls": [
+        "https://github.com/Boti-Ormandi/archicad-mcp"
+      ],
+      "source_state": "PRIMARY_PAGE_CHECKED_2026-10-14",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "solidworks-mcp-reference",
+      "name": "SolidWorks MCP (hjbaard и HarrierPigeon)",
+      "kind": "reference_integration_pattern",
+      "priority": "LOW_PRIORITY",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Образец workflow CAD: редактируемая геометрия, измерение, readback, параметрические размеры и чертежи",
+      "rationale": "MIT реализации; демонстрируют контролируемое моделирование и сравнение с техническим заданием.",
+      "blockers": "Нельзя напрямую подключить к Archicad; требует отдельно лицензированный SolidWorks; ценность — исследовательская.",
+      "source_urls": [
+        "https://github.com/hjbaard/SolidWorks-MCP",
+        "https://github.com/HarrierPigeon/Solidworks-MCP-Server"
+      ],
+      "source_state": "PRIMARY_PAGE_CHECKED_2026-10-14",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
+    },
+    {
+      "id": "spare-parts-3d-theia",
+      "name": "Spare Parts 3D THEIA 2D→3D",
+      "kind": "hosted_mechanical_cad_service",
+      "priority": "DO_NOT_CONSIDER",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Платная реконструкция механических компонентов из PDF/DXF/сканов, STEP-выход",
+      "rationale": "Заявленный полезный подход AI+engineering validation для механических чертежей, но не для жилых/общественных BIM зданий.",
+      "blockers": "По официальному FAQ pay-per-use, бесплатно постоянно не доступно; отложенная идея PDF→BIM — только в конце roadmap.",
+      "source_urls": [
+        "https://spare-parts-3d.com/",
+        "https://spare-parts-3d.com/faq/"
+      ],
+      "source_state": "PRIMARY_PAGE_CHECKED_2026-10-14",
+      "local_benchmark": null,
+      "version_or_quantization": null,
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-14"
     }
   ]
 }
