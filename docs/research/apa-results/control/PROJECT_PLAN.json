@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 154,
+  "revision": 155,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -1755,6 +1755,60 @@
     "ART-P70-A11-S03-RUNTIME-RECEIPT-20261014": {
       "id": "ART-P70-A11-S03-RUNTIME-RECEIPT-20261014",
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261014-095400Z-runtime-identity-live.json",
+      "kind": "RECEIPT",
+      "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
+    },
+    "ART-P70-A11-S03-STAIR350-SOURCE-20261014": {
+      "id": "ART-P70-A11-S03-STAIR350-SOURCE-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-121132Z-native-stair-source350/source-recipe.json",
+      "kind": "DATASET",
+      "verification": "SOURCE_DIMENSION_PASS_EXPLICIT22RISES150MM_GOING350MM_NO_SILENT_CORRECTION"
+    },
+    "ART-P70-A11-S03-STAIR350-NATIVE-20261014": {
+      "id": "ART-P70-A11-S03-STAIR350-NATIVE-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-121132Z-native-stair-source350/native-dimensions.json",
+      "kind": "TEST_RESULT",
+      "verification": "LIVE_PASS_PROPERTIES_AND20REGULAR_BREP_PITCHES350MM_AFTER_SAVE_OPEN"
+    },
+    "ART-P70-A11-S03-STAIR350-INVENTORY-20261014": {
+      "id": "ART-P70-A11-S03-STAIR350-INVENTORY-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-121132Z-native-stair-source350/inventory-audit.json",
+      "kind": "TEST_RESULT",
+      "verification": "NOT_VERIFIED_TEN_OBJECT_OWNER_ANCESTRIES_54EXPLICITOWNER_REFERENCES"
+    },
+    "ART-P70-A11-S03-STAIR350-PRESERVE-20261014": {
+      "id": "ART-P70-A11-S03-STAIR350-PRESERVE-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-121132Z-native-stair-source350/preservation-save-open.json",
+      "kind": "TEST_RESULT",
+      "verification": "LIVE_PASS_ALL255_SIGNATURES_PREVIOUS145_GEOMETRY_MATERIAL_STORIES_PRESERVED_NO_NEW_COLLISIONS"
+    },
+    "ART-P70-A11-S03-STAIR350-JOURNAL-20261014": {
+      "id": "ART-P70-A11-S03-STAIR350-JOURNAL-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-121132Z-native-stair-source350/journal-reconciliation.json",
+      "kind": "TEST_RESULT",
+      "verification": "ORIGINAL_PARTIAL_OR_UNKNOWN_CREATE_PRESERVED_NO_REPLAY_LATER_SOURCE_DIMENSIONS_AND_PERSISTENCE_PASS"
+    },
+    "ART-P70-A11-S03-STAIR350-CI-20261014": {
+      "id": "ART-P70-A11-S03-STAIR350-CI-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-121132Z-native-stair-source350/windows-ci.json",
+      "kind": "TEST_RESULT",
+      "verification": "WINDOWS_CI_PASS723_HOST_TESTS_FIVE_NEW_REGRESSIONS"
+    },
+    "ART-P70-A11-S03-STAIR350-GAPS-20261014": {
+      "id": "ART-P70-A11-S03-STAIR350-GAPS-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-121132Z-native-stair-source350/gap-register.json",
+      "kind": "DATASET",
+      "verification": "S03_PARTIAL_S10_BLOCKED_EXACTSDK_EDIT_BLOCKED_INVENTORY_PARTIAL"
+    },
+    "ART-P70-A11-S03-STAIR350-REPORT-20261014": {
+      "id": "ART-P70-A11-S03-STAIR350-REPORT-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-14/APA-RUN-20261014-121132Z-native-stair-source350/REPORT.md",
+      "kind": "REPORT",
+      "verification": "DONE_PUBLISHED_NATIVE_SOURCE_DIMENSION_BLOCK_ONLY"
+    },
+    "ART-P70-A11-S03-STAIR350-RECEIPT-20261014": {
+      "id": "ART-P70-A11-S03-STAIR350-RECEIPT-20261014",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261014-121132Z-native-stair-source350.json",
       "kind": "RECEIPT",
       "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
     }
@@ -4332,7 +4386,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -4483,12 +4537,16 @@
         "PR80 runtime continuation LIVE_PASS: actual loadeduserAPX f6f0861ffb76aced7de89922bdfa5f271d9aa371795c3849cbfe6e585003187f, buildIdentity0b929f11a7e892b5cab062a9a6dc7bdc77363cec3a59109245f95e18de770eef/sourcecb73cd578c7cd7577f80397920d9e81b8d09c6e1 and275freshcommands; maincore identity gate invoked with fresh schema PASS. ExistingtrueGrid reread, no repeats/duplicates. NativeStair source local/world frame and memo diagnostics readlive with0setter/solver/modelgeometrywrites.",
         "Deploymentblock resolved through actual userregisteredmodule: original8f5a9341bb9d51cb98a0a58bdbc63d3d3623a0c9f74b3cd3f1a4732c06961969 restoredexact; ProgramFilesdc99af071d3dbcff9626653ccc37001613cb3fa4a8eff50c6000c1cc70e8d7c7 andregistrationunchanged. UAC didnotappear/userreported, ShellExecute canceledwithoutProgramFileswrite. Normaluserfilepermissions, noadmin/securitychange. AutoReviewrefusedrestorewhileArchicadclosing; freshno-processproof then sameauthorizedrestorePASS. AgentSave/Close/Open andindependent145native signatureproofPASS; currentSavedSHA256 5f6766eb2b4d6d5036196036361162cd3ef39fe37e68b585020ed1e215c4bff8. Other168/TRC untouched.",
         "Stair exactcontract remainsBLOCKED_DETACHED_PREPARATION_NOT_QUALIFIED. Current3.3m/20rises/R0.165m withrequestedG0.35 yields2R+G0.68>nativeconfiguredMax0.65, min0.60. Thisisnativepreferredconstraint, notnormativeacceptance. OfficialDefaultGoing0.32 matches18regularBREPfront-edgepitches0.32; finalstructuraltoptransition0.275788383 recordedseparately NOT_VERIFIED. SDKtreadDepth0/lockfalse doesnotoverridephysicalDefaultGoing. SourceNative22rises/R0.15m/G0.35 iscompatible testproposal NOT_EXECUTED. NoacceptedStairchange oroldterminatingcallreplay; crashrootcauseNOT_VERIFIED.",
-        "ProductionheadPR80unchanged,718Windows/102upstream/coreMCP CI reusedwithoutunaffectedtestrepeat. Report/evidence13files andDONE_PUBLISHEDreceipt GitHubbyte-readbackverified. MainorchestratorKGfresh151/CAS152, completion153. Historicaltasks, A07deps/S10blocker preserved. Next: explicit22rise/350mm stocknativeCreateStairs test through existingSceneWriter withlive Favorite/source/freespace/journal/geometry guard, preserving145; thenSinglePlaneRoofcontour/slope."
+        "ProductionheadPR80unchanged,718Windows/102upstream/coreMCP CI reusedwithoutunaffectedtestrepeat. Report/evidence13files andDONE_PUBLISHEDreceipt GitHubbyte-readbackverified. MainorchestratorKGfresh151/CAS152, completion153. Historicaltasks, A07deps/S10blocker preserved. Next: explicit22rise/350mm stocknativeCreateStairs test through existingSceneWriter withlive Favorite/source/freespace/journal/geometry guard, preserving145; thenSinglePlaneRoofcontour/slope.",
+        "PR81 3221b8e7a0b775ece1018caf622a32c6ca9cb9dc atop exactPR80 cb73cd578c7cd7577f80397920d9e81b8d09c6e1: existingNativeFavourite/Graph/SceneWriter nowprepare source-hashed explicit nativeStair dimensions compatible with captured nativeconfiguredrules and actualStories. No silent count/rise/going substitution; no secondexecutor/APXchange.",
+        "LIVE_PASS andSOURCE_DIMENSION_PASS newdetached nativeStair:22rises150mm,going350mm,width1m,totalHeight3.3m,walkingLine7.7m. Built-in preciseproperties and actualBREP22horizontallevels/20regular350mmpitches/21rises150mm independentlyverified afterSave/Open. Finalstructuraltoptransition0.309807621m separatelyNOT_VERIFIED asdefaultgoing. Notnewbuildingconnection/engineeringacceptance. SurfaceattributeBeton04 readback isnotstructuralBuildingMaterialverification.",
+        "Previous145GUIDgeometry/material/story signatures unchanged; all255current inventorysignatures preserved afterSave/Open andindependentread.1Create+45listedmembers+64bodylessObjects,0newcollisionpairs,0deletions/replays.54Objects explicitnativeobject.owner intoStairmembers;10ownerancestriesNOT_VERIFIED despite readableparenttypes. Generic/hierarchy/connectedqueries incomplete. Fullinventoryacceptance NOT_VERIFIED; initialCreate journalPARTIAL_OR_UNKNOWN_OUTCOME kept; factual dimension/persistence proofseparate, neverCreate retry. SavedSHA256 01f47ad21aa5aa6975d824cf9999b56b7e89578ce1baa7e4b594ab49bc22b59e.",
+        "723/723Windows hosttests,5newsource/inventoryregressions andcurrentWindows CI PASS. DraftPR81/fourcodefiles/13published evidence+reportfiles/readbackreceipt verified. Existingnormative/search/KGimplementation/docs/layout/TRC/main/168project/APX preserved. A11.S03 PARTIAL,S10BLOCKED,A07deps unchanged. Next: resolve10supportObject ancestries read-only beforefullinventoryacceptance; independentlynativeSinglePlaneRoofcontour/slope."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
-      "owner": "work-native-stair-source-20261014",
-      "lease_until": "2026-10-14T13:28:13Z",
-      "claim_ref": "APA-CLAIM-NATIVE-STAIR-SOURCE-20261014T102813Z",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
@@ -4629,7 +4687,16 @@
         "ART-P70-A11-S03-RUNTIME-RESTORED145-20261014",
         "ART-P70-A11-S03-RUNTIME-GAPS-20261014",
         "ART-P70-A11-S03-RUNTIME-REPORT-20261014",
-        "ART-P70-A11-S03-RUNTIME-RECEIPT-20261014"
+        "ART-P70-A11-S03-RUNTIME-RECEIPT-20261014",
+        "ART-P70-A11-S03-STAIR350-SOURCE-20261014",
+        "ART-P70-A11-S03-STAIR350-NATIVE-20261014",
+        "ART-P70-A11-S03-STAIR350-INVENTORY-20261014",
+        "ART-P70-A11-S03-STAIR350-PRESERVE-20261014",
+        "ART-P70-A11-S03-STAIR350-JOURNAL-20261014",
+        "ART-P70-A11-S03-STAIR350-CI-20261014",
+        "ART-P70-A11-S03-STAIR350-GAPS-20261014",
+        "ART-P70-A11-S03-STAIR350-REPORT-20261014",
+        "ART-P70-A11-S03-STAIR350-RECEIPT-20261014"
       ],
       "blocked_reason": null
     },
@@ -5471,7 +5538,16 @@
         "ART-P70-A11-S03-RUNTIME-RESTORED145-20261014",
         "ART-P70-A11-S03-RUNTIME-GAPS-20261014",
         "ART-P70-A11-S03-RUNTIME-REPORT-20261014",
-        "ART-P70-A11-S03-RUNTIME-RECEIPT-20261014"
+        "ART-P70-A11-S03-RUNTIME-RECEIPT-20261014",
+        "ART-P70-A11-S03-STAIR350-SOURCE-20261014",
+        "ART-P70-A11-S03-STAIR350-NATIVE-20261014",
+        "ART-P70-A11-S03-STAIR350-INVENTORY-20261014",
+        "ART-P70-A11-S03-STAIR350-PRESERVE-20261014",
+        "ART-P70-A11-S03-STAIR350-JOURNAL-20261014",
+        "ART-P70-A11-S03-STAIR350-CI-20261014",
+        "ART-P70-A11-S03-STAIR350-GAPS-20261014",
+        "ART-P70-A11-S03-STAIR350-REPORT-20261014",
+        "ART-P70-A11-S03-STAIR350-RECEIPT-20261014"
       ],
       "synthesis_state": "PARTIAL",
       "owner": null
