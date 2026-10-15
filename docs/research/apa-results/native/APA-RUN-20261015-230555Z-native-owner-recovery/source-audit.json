@@ -1,0 +1,31 @@
+{
+  "schema": "APA_NATIVE_OWNER_SOURCE_AUDIT_V1",
+  "status": "PUBLIC_ROUTE_PROPOSED_AC29_SUPPORT_NOT_QUALIFIED",
+  "sources": [
+    {
+      "uri": "https://community.graphisoft.com/t5/Archicad-C-API/Writing-GDL-AddPar-values-e-g-material-override-to-Railing-sub/m-p/715108/highlight/true",
+      "finding": "Graphisoft developer reply proposes owner Railing memo subelement GUID then Element_GetMemo AddPars and Element_Change. Not native proof for this installation."
+    },
+    {
+      "uri": "https://community.graphisoft.com/t5/Archicad-C-API/Writing-GDL-AddPar-values-e-g-material-override-to-Railing-sub/m-p/712199",
+      "finding": "AC29 follow-up reports APIERR_BADPARS with proposed path and no demonstrated successful fixing-material recovery."
+    },
+    {
+      "uri": "https://graphisoft.github.io/archicad-api-devkit/struct_a_p_i___sub_element.html",
+      "finding": "Subelement index documentation is insufficient to qualify a concrete Railing ChangeExt owner/component path."
+    }
+  ],
+  "installedSDK": {
+    "version": "29.3000",
+    "ElementChangeMemo": "Polygon-only legacy path; not a demonstrated owner AddPars mechanism",
+    "ElementTestExample": "Railing root default height and native node elevation; no material AddPars example",
+    "LibraryPartGetSection": "Public master and parameter script sections; bounded private read only when explicitly requested; no interpreter or bypass"
+  },
+  "recovery": "BLOCKED_PUBLIC_OWNER_WRITE_NOT_QUALIFIED",
+  "newRuntimeReadsPrepared": [
+    "Object actual owner memo and root rail memo identity/stamps",
+    "selected library part parameter/master scripts if publicly readable"
+  ],
+  "nativeModelWrites": 0,
+  "offlineTestsRun": false
+}

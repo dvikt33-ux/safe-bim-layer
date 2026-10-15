@@ -1,0 +1,184 @@
+{
+  "action_id": "APA-P70.A11",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-OWNER-CURRENT",
+      "evidence_ids": [
+        "EV-0"
+      ],
+      "statement": "Current original runtime read:409signatures and128placedGDLparameters matchPR109. GeneratedObject names actualRailingRail owner distinct from previously edited physicalRail. No native writes,Save/Open or APX changes. Materials remainNOT_RESTORED.",
+      "status": "LIVE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-OWNER-BUILD",
+      "evidence_ids": [
+        "EV-1",
+        "EV-4"
+      ],
+      "statement": "Existing native assembly state gains bounded actual-owner and rootmemo diagnosis, selected library private script reads;CW polygon allocation bounds and class-specificShellfields fullRelease71b8529a buildonly,notinstalled. No material recovery writer qualified or mutation ticket. No new command names.",
+      "status": "BUILD_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-OWNER-ACCEPTANCE",
+      "evidence_ids": [
+        "EV-2",
+        "EV-3"
+      ],
+      "statement": "Existing shared assembly execution requires full geometry,typedmaterials,GDL,ownership,dependency and beforeproof by default;failure/success retains originalintent in existingSQLite. Oldfailedsetter proofmatched,legacy unscopedrowsNOT_VERIFIED. Actualdata graph347nodes474edges,observedRailimpact132;notfuturecausalityorwritepermission.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-OWNER-NO-TEST-PUBLICATION",
+      "evidence_ids": [
+        "EV-5",
+        "EV-9"
+      ],
+      "statement": "Inspected existing workflows unchanged,push/pull_request/manualonly. Allcommits skipCI,direct existingpublisher functions,no normalautomation,dispatch,offline tests or quantitycalls.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-0",
+      "kind": "OTHER",
+      "sha256": "a30a9384940ffccc0ca49f36400a45ff18d20ed0657a91dee06cd223cf58b09a",
+      "source_revision": "14f5381dd971d56f7a693de651f13e572de78d65",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-230555Z-native-owner-recovery/native-current.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-1",
+      "kind": "OTHER",
+      "sha256": "df438ad78584b7b3243f91021598184eba969fffbccc28191736fe82f5b278df",
+      "source_revision": "14f5381dd971d56f7a693de651f13e572de78d65",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-230555Z-native-owner-recovery/SDK-build.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-2",
+      "kind": "OTHER",
+      "sha256": "edf18b684daf2b4f9f7ea8f602449077eaacd4d361eed4d2693a7dfffb49e957",
+      "source_revision": "14f5381dd971d56f7a693de651f13e572de78d65",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-230555Z-native-owner-recovery/preparation-flow.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-3",
+      "kind": "OTHER",
+      "sha256": "dcf544a554af31d3b04e3f7921d5efd36db4fd2776851a39be9390d8da0c0ed8",
+      "source_revision": "14f5381dd971d56f7a693de651f13e572de78d65",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-230555Z-native-owner-recovery/compound-acceptance.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-4",
+      "kind": "OTHER",
+      "sha256": "7f8f2d13eb96b79c2e40ea58658235e26f30ae12a8405aff5f85024b41bc2f25",
+      "source_revision": "14f5381dd971d56f7a693de651f13e572de78d65",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-230555Z-native-owner-recovery/source-audit.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-5",
+      "kind": "OTHER",
+      "sha256": "d8b3a2cdb4657f2901dfed756844950758ee3e20dafebbf64903eda762b80cc7",
+      "source_revision": "14f5381dd971d56f7a693de651f13e572de78d65",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-230555Z-native-owner-recovery/publication-preflight.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-6",
+      "kind": "OTHER",
+      "sha256": "b91b9ade5e76e422296786afb715c350d7cc965ff43b1dc965979c40681c586f",
+      "source_revision": "14f5381dd971d56f7a693de651f13e572de78d65",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-230555Z-native-owner-recovery/gap-register.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-7",
+      "kind": "OTHER",
+      "sha256": "03103ce6341799cffa7d8c242109ec0690aebe5ddcd048c230bfb49c8f6b30d0",
+      "source_revision": "14f5381dd971d56f7a693de651f13e572de78d65",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-230555Z-native-owner-recovery/module-contracts.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-8",
+      "kind": "OTHER",
+      "sha256": "e1926ded32f04e99ab34f9d958ac881c81edb4010f1f58296478dcbba821da08",
+      "source_revision": "14f5381dd971d56f7a693de651f13e572de78d65",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-230555Z-native-owner-recovery/module-coverage.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-9",
+      "kind": "OTHER",
+      "sha256": "bf52001d2790855b162ae1130062bdb1ad2a29fa5b83bb26a744a6855b7477bb",
+      "source_revision": "14f5381dd971d56f7a693de651f13e572de78d65",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-230555Z-native-owner-recovery/publication-actions.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "work-owner-recovery-20261015",
+  "executor_run_id": "APA-CLAIM-OWNER-RECOVERY-20261015T200007Z",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-15T23:05:55Z",
+  "idempotency_key": "sha256:a340ce05e694e0c74795dbb26a17f5afc9e435b102b5665c2896a9f0ea15b9ec",
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "next_substep": "APA-P70.A11.S03",
+  "phase": "LIVE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261015-230555Z-native-owner-recovery",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "Current authorized409copy read-only owner identity; materials not restored,no native writes/APX changes",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "sdk": "Native owner and selected library diagnosis plus CW/Shell fields Release build,not installed",
+    "source_branch": "feature/apa-native-owner-recovery-20261015",
+    "tapir": "Same DynamicCommands SceneWriter SQLite and DependencyImpact; no quantities or new executor"
+  },
+  "source_revisions": [
+    {
+      "revision": "14f5381dd971d56f7a693de651f13e572de78d65",
+      "source_sha": "14f5381dd971d56f7a693de651f13e572de78d65",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/111"
+    }
+  ],
+  "started_at": "2026-10-15T20:00:07Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A11.S03"
+}

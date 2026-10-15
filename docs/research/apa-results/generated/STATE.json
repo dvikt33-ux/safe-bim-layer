@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 60,
+  "run_count": 61,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -420,6 +420,13 @@
       "phase": "LIVE",
       "report": "runs/2026-10-15/APA-RUN-20261015-192322Z-native-memo-modify/REPORT.md",
       "run_id": "APA-RUN-20261015-192322Z-native-memo-modify",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-15/APA-RUN-20261015-230555Z-native-owner-recovery/REPORT.md",
+      "run_id": "APA-RUN-20261015-230555Z-native-owner-recovery",
       "substep_id": "APA-P70.A11.S03"
     }
   ],
