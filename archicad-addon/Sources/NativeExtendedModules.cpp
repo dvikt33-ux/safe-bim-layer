@@ -1,6 +1,7 @@
 #include "NativeExtendedModules.hpp"
 #include "MigrationHelper.hpp"
 #include <algorithm>
+#include "Polygon2D.hpp"
 #include "ACAPI/Element/Opening/Opening.hpp"
 #include "ACAPI/Element/Opening/OpeningGeometry.hpp"
 #include "ACAPI/Element/Opening/OpeningExtrusionParameters.hpp"
@@ -171,7 +172,7 @@ GS::ObjectState GetNativeOpeningConnectionsV1Command::Execute(const GS::ObjectSt
  row.Add("anchor",xyz(geometry.GetAnchorPoint()));row.Add("vectorX",xyz(geometry.GetVectorX()));row.Add("vectorY",xyz(geometry.GetVectorY()));row.Add("extrusionDirection",xyz(geometry.GetExtrusionDirection()));
  const auto extrusion=opening->GetExtrusionParameters();row.Add("shapeTypeId",static_cast<Int32>(extrusion.GetShapeType()));row.Add("limitTypeId",static_cast<Int32>(extrusion.GetLimitType()));row.Add("constraintId",static_cast<Int32>(extrusion.GetConstraint()));
  if(auto v=extrusion.GetWidth())row.Add("widthMetres",*v);if(auto v=extrusion.GetHeight())row.Add("heightMetres",*v);if(auto v=extrusion.GetFiniteBodyLength())row.Add("finiteBodyLengthMetres",*v);if(auto v=extrusion.GetExtrusionStartOffset())row.Add("startOffsetMetres",*v);
- row.Add("linkedStatusId",static_cast<Int32>(extrusion.GetLinkedStatus()));row.Add("anchorTypeId",static_cast<Int32>(extrusion.GetAnchor()));if(auto v=extrusion.GetAnchorAltitude())row.Add("anchorAltitudeMetres",*v);
+ if(auto v=extrusion.GetLinkedStatus())row.Add("linkedStatusId",static_cast<Int32>(*v));row.Add("anchorTypeId",static_cast<Int32>(extrusion.GetAnchor()));if(auto v=extrusion.GetAnchorAltitude())row.Add("anchorAltitudeMetres",*v);
  row.Add("endSurfaceOverridden",extrusion.IsEndSurfaceAttributeOverridden());row.Add("endSurfaceIndex",GetAttributeIndex(extrusion.GetOverriddenEndSurfaceAttributeIndex()));
  row.Add("extrusionSurfaceOverridden",extrusion.IsExtrusionSurfaceAttributeOverridden());row.Add("extrusionSurfaceIndex",GetAttributeIndex(extrusion.GetOverriddenExtrusionSurfaceAttributeIndex()));row.Add("surfaceOverridesLinked",extrusion.AreOverriddenSurfaceAttributesLinked());
  const auto polygon=geometry.GetPolygon();row.Add("polygonPresent",polygon.has_value());
