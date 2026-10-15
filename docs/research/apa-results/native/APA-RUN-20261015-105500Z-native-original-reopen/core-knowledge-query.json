@@ -1,0 +1,12 @@
+{
+  "schema": "APA_COMPACT_RETRIEVAL_V1",
+  "status": "OK",
+  "authority": "VERIFIED_GITHUB_PLAN_SNAPSHOT",
+  "plan_revision": 171,
+  "plan_sha256": "11f3dae44ce5602ba122bf861edd5478b7792c406a2a9c659ef4a25ed192ecd7",
+  "retrieval": "EXACT_TASK",
+  "task_claim": "NEVER_AUTOMATIC",
+  "claimRevision": 172,
+  "claimCASReadback": "BYTE_EXACT_MATCH",
+  "productCodeUnchanged": true
+}
