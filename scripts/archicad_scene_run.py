@@ -698,7 +698,7 @@ class SceneWriter:
         if self.guarded_binding()!=preflight['binding']:raise ValueError('BOUNDED_OPERATION_TARGET_DRIFT')
         self.verify_source_bindings(preflight)
         before=verify_before()
-        result={'status':'BLOCKED','automaticRetry':False,'sceneId':scene_id,'command':command,'operationHash':expected_hash}
+        result={'status':'BLOCKED','automaticRetry':False,'sceneId':scene_id,'command':command,'operationHash':expected_hash,'intent':intent}
         with closing(sqlite3.connect(self.journal_path)) as db:
             db.execute('PRAGMA synchronous=FULL')
             db.execute('CREATE TABLE IF NOT EXISTS scenes (scene_id TEXT PRIMARY KEY, plan_hash TEXT NOT NULL, state TEXT NOT NULL, result TEXT NOT NULL)')

@@ -140,11 +140,11 @@ def execute_assembly_edit(router,writer,preview,*,scene_id,affected,retained_sig
             elif actual!=expected:raise ValueError('ASSEMBLY_PARAMETER_READBACK_MISMATCH:'+name)
         children=members(writer.api)
         if children!=baseline['children']:raise ValueError('ASSEMBLY_UNEXPECTED_CHILD_GUID_CHANGE_RECONCILE_NO_RETRY')
-        geometry=verify_geometry(writer.api,state,current,baseline['children'],children) if verify_geometry is not None else None
-        if geometry is not None and (not isinstance(geometry,dict) or not str(geometry.get('status','')).endswith('PASS')):
+        geometry=verify_geometry(writer.api,state,current,baseline['children'],children)
+        if not isinstance(geometry,dict) or not str(geometry.get('status','')).endswith('_PASS'):
             raise ValueError('ASSEMBLY_RESULTANT_GEOMETRY_NOT_VERIFIED')
-        material_proof=verify_materials(writer.api,state,current) if verify_materials is not None else None
-        if material_proof is not None and (not isinstance(material_proof,dict) or not str(material_proof.get('status','')).endswith('PASS')):
+        material_proof=verify_materials(writer.api,state,current)
+        if not isinstance(material_proof,dict) or not str(material_proof.get('status','')).endswith('_PASS'):
             raise ValueError('ASSEMBLY_TYPED_MATERIAL_RETENTION_NOT_VERIFIED')
         other_proofs={}
         for name,fn in [('gdlParameters',verify_gdl),('nativeOwnership',verify_ownership),('dependentChanges',verify_dependent_changes)]:
@@ -240,20 +240,24 @@ def recovery_journal_status(journal_path,target_guids,reconciliation_proofs):
     A matching proof hash explains an old outcome; it does not grant a write.
     """
     import sqlite3
+    import re
     from pathlib import Path
-    wanted={g.lower() for g in target_guids};blocked=[];reconciled=[]
+    wanted={g.lower() for g in target_guids};blocked=[];reconciled=[];unscoped=[]
     with sqlite3.connect(Path(journal_path).resolve().as_uri()+'?mode=ro',uri=True) as db:
         for sid,state,raw,output in db.execute('SELECT s.scene_id,s.state,s.result,t.output FROM scenes s JOIN steps t ON s.scene_id=t.scene_id WHERE s.state NOT IN (\'PASS\',\'COMPLETE\')'):
-            data=json.loads(output);intent=data.get('intent',data)
-            text=json.dumps(intent.get('parameters',{}),sort_keys=True).lower()
-            if not any(g in text for g in wanted):continue
-            result=json.loads(raw);proof=reconciliation_proofs.get(sid);receipt=result.get('independentReconciliation',{})
+            data=json.loads(output);result=json.loads(raw);intent=result.get('intent',data.get('intent',{}))
+            text=json.dumps(intent.get('parameters',{}),sort_keys=True).lower() if intent else (output+' '+raw).lower()
+            relevant=any(g in text for g in wanted)
+            if not relevant:
+                if not intent and not re.search(r'[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}',text):unscoped.append(sid)
+                continue
+            proof=reconciliation_proofs.get(sid);receipt=result.get('independentReconciliation',{})
             if proof is not None and hashlib.sha256(proof).hexdigest()==receipt.get('proofSHA256'):
                 fact=json.loads(proof)
                 if fact.get('sceneId',fact.get('originalSceneId'))==sid and fact.get('nativeWritesDuringReconciliation')==0 and 'RECONCILED' in fact.get('status','') and 'NO_EFFECT' in fact.get('status',''):
                     reconciled.append(sid);continue
             blocked.append(dict(sceneId=sid,state=state))
-    return dict(status='RECOVERY_TARGET_JOURNAL_'+('BLOCKED' if blocked else 'PASS'),unresolved=blocked,reconciledSceneIds=sorted(set(reconciled)),journalModified=False,executionPermission=False)
+    return dict(status='RECOVERY_TARGET_JOURNAL_'+('BLOCKED' if blocked else 'NOT_VERIFIED' if unscoped else 'PASS'),unresolved=blocked,legacyUnscopedSceneIds=sorted(set(unscoped)),reconciledSceneIds=sorted(set(reconciled)),journalModified=False,executionPermission=False)
 
 
 def prepare_railing_material_recovery(router,*,project_identity,saved_sha256,generated_object_guid,root_guid,owner_guid,placed_parameters,material_attributes,expected_material_guid,baseline_signatures,affected_guids,journal_status,owner_state=None):
@@ -280,7 +284,7 @@ def prepare_railing_material_recovery(router,*,project_identity,saved_sha256,gen
         changes.append(dict(name=name,currentIndex=p['value'],currentAttributeId=current[0]['attributeId'],expectedIndex=attrs[0]['index'],expectedAttributeId=attrs[0]['attributeId'],disabled=gdl_parameter_disabled(p),isLocked=p.get('isLocked'),directWriteAllowed=False))
     reads=[router.prepare(command(router,'GetNativeAssemblyEditStateV1'),dict(elements=[dict(elementId=dict(guid=generated_object_guid))]))]
     missing=['PUBLIC_OWNER_ADD_PARS_WRITE_NOT_QUALIFIED','BMATFIXING_CONTROLLING_RULE_NOT_VERIFIED']
-    if journal_status['status']!='RECOVERY_TARGET_JOURNAL_PASS':missing.append('UNRESOLVED_TARGET_OPERATION')
+    if journal_status['status']!='RECOVERY_TARGET_JOURNAL_PASS':missing.append('RECOVERY_JOURNAL_SCOPE_NOT_FULLY_VERIFIED')
     if owner_state is None:missing.append('CURRENT_OWNER_COMPONENT_MEMO_AND_ROOT_STAMPS_NOT_READ')
     else:
         if owner_state['elementId']['guid'].lower()!=target or owner_state.get('rootElementId',{}).get('guid','').lower()!=root:raise ValueError('RECOVERY_NATIVE_OBJECT_ROOT_MISMATCH')

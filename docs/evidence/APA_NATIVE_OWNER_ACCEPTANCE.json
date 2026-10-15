@@ -1,0 +1,28 @@
+{
+  "schema": "APA_COMPOUND_MODIFY_ACCEPTANCE_V1",
+  "status": "IMPLEMENTED_NOT_LIVE_VERIFIED",
+  "executor": "EXISTING_SCENEWRITER_SQLITE_DYNAMIC_COMMANDS",
+  "requiredBeforeWrite": [
+    "exact project and saved SHA",
+    "native GUID/type/story/modification stamp",
+    "explicit affected root subtree",
+    "fresh child GUID membership",
+    "complete before snapshot callback",
+    "independent resultant BREP verifier",
+    "per-element typed material verifier",
+    "GDL verifier",
+    "native ownership verifier",
+    "dependent-change verifier"
+  ],
+  "missingVerifier": "NOT_VERIFIED_ZERO_WRITES",
+  "emptyVerifierResult": "REJECTED_NOT_ACCEPTED",
+  "unexpectedChildren": "UNKNOWN_RECONCILE_NO_BLIND_RETRY",
+  "journal": "Original intent preserved in both success and failure results for future scope reconciliation; old ledger is read-only and not rewritten",
+  "legacyJournalScope": "RECOVERY_TARGET_JOURNAL_NOT_VERIFIED",
+  "oldFailedMaterialSetterIndependentNoEffectProofMatched": true,
+  "legacyUnscopedRows": "NOT_VERIFIED_NOT_SILENTLY_CLEARED",
+  "recoveryMutationTicket": null,
+  "geometryChanges": false,
+  "nativeModelWrites": 0,
+  "offlineTestsRun": false
+}
