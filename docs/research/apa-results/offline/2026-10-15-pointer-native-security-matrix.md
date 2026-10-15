@@ -1,6 +1,6 @@
 # APA continued parallel offline tests — native request contracts, result pointers, cross-domain graph, Shell C++ source gates
 
-Status: CI_RETRY_RUNNING / PASS_NOT_YET_VERIFIED. Initial [Actions #38736049083](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38736049083) identified 32 rejected-input cases not rejected by the production JSON Pointer planner. Patched the existing planner and runtime resolver to reject relative pointers, invalid RFC 6901 escape sequences and noncanonical array indexes. Full verification requires a new JUnit readback.
+Status: **OFFLINE_PASS / JUNIT_VERIFIED**. Full Windows [Actions #38736451749](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38736451749) completed success at code head `0e57dfd888156b98148b7e6de6623e1e393de37c`: **2338/2338 PASS**, 0 failures/errors/skips, all 12/12 shard manifests and JUnit read back. Initial [Actions #38736049083](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38736049083) identified 32 rejected-input cases not rejected by the production JSON Pointer planner. Patched the existing planner and runtime resolver to reject relative pointers, invalid RFC 6901 escape sequences and noncanonical array indexes. Retained failed attempt #38736049083, 2322 collected, 32 failed, 0 errors/skips, followed by verified corrected full matrix.
 
 Based on draft PR #102 code head `2e93c10925a3c5d9ffc90a2b578cdb4c2f4e43d6`. Separate isolated branch. Existing Windows 12-way x 2-worker runner automatically discovers `tests/test_*.py`.
 
