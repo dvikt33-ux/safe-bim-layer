@@ -1,0 +1,73 @@
+name: APA offline mass parallel — isolated graph and contract verification
+
+on:
+  push:
+    branches:
+      - 'ci/apa-offline-mass-parallel-*'
+    paths:
+      - '.github/workflows/apa-offline-mass-parallel.yml'
+      - 'scripts/apa_parallel_offline.py'
+      - 'tests/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  shard:
+    runs-on: windows-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install reproducible test dependencies
+        shell: pwsh
+        run: |
+          python -m pip install 'pytest>=8,<10' 'pytest-xdist>=3,<4' 'jsonschema>=4,<5'
+          python -m pip install -r scripts/requirements-connected.txt
+          python -m pip install -r scripts/requirements-knowledge.txt
+      - name: Execute isolated offline shard with two workers
+        shell: pwsh
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+          APA_OFFLINE_ONLY: '1'
+        run: python scripts/apa_parallel_offline.py --shard ${{ matrix.shard }} --shards 12 --workers 2
+      - name: Retain actual JUnit and execution manifest even after failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: apa-offline-shard-${{ matrix.shard }}
+          path: offline-artifacts/shard-${{ matrix.shard }}/
+          if-no-files-found: warn
+          retention-days: 14
+
+  verify:
+    needs: shard
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: apa-offline-shard-*
+          path: offline-artifacts
+          merge-multiple: false
+      - name: Verify all 12 shards and aggregate actual case counts
+        run: python scripts/apa_parallel_offline.py --summarize --shards 12 --artifacts offline-artifacts
+      - name: Retain audited aggregate
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: apa-offline-mass-summary
+          path: apa-offline-summary.json
+          if-no-files-found: warn
+          retention-days: 14
