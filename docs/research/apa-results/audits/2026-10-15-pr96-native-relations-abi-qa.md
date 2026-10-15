@@ -46,6 +46,16 @@ aggregation. Any FAIL, ERROR, SKIP, XFAIL or duplicate causes failure.
 
 ## CI result
 
-**PENDING** until all ten Windows shards and independent aggregate finish.
-Record tested exact commit, suite SHA256, counts, failure details and GitHub
-Actions run URL before converting this to PASS.
+**VERIFIED PASS: 192/192 newly discovered and executed unique tests.**
+
+- Exact tested code+workflow SHA: `a20230412f70fb113707eb26d631e0982e717d45`.
+- GitHub Actions run: https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38704588169
+- Ten Windows shard jobs + one independent aggregate: **11/11 SUCCESS**.
+- Test IDs SHA256: `75add587661c614a59ae636720fd6766ba9b32af6478f727f232b0841f6cdeaa`.
+- Aggregator counts: 192 discovered, 192 executed, **0 FAIL / ERROR / SKIP / XFAIL / unexpected success / missing / duplicate IDs**.
+- Shard counts: 12 + 20 + 13 + 25 + 26 + 16 + 14 + 24 + 26 + 16 = 192.
+- Actions accounting log: `APA_PR96_RELATIONS_EXACT_192 True`, `APA_PR96_RELATIONS_SHARDS success`.
+- Windows artifacts contain complete per-ID accounting and aggregate JSON.
+- Later documentation-only commits do not change the tested source or workflow.
+
+Historical independent new offline suites PR #90–#93 + PR #95 = 1594 tests, not rerun. This suite adds 192, yielding **1786 distinct new offline QA IDs passed** across the independently scoped suites.
