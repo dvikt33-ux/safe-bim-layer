@@ -45,7 +45,14 @@
       "contentBoxQueryErrors": [
         -2130313110,
         -2130313110
-      ]
+      ],
+      "independentDrawingTargetMatches": 2,
+      "sourceLinksPresentInCurrentViewMap": 1,
+      "legacyDrawingGuidEqualsSDKSourceLink": [
+        false,
+        false
+      ],
+      "legacyDrawingGuidSourceLinkEquivalence": "NOT_VERIFIED_DISTINCT_NATIVE_FIELDS"
     },
     {
       "command": "AddOn.TapirCommand.GetNativeElementHotspotsV1",
@@ -73,7 +80,7 @@
   "callableVerified": 3,
   "nativeModelWrites": 0,
   "retainedNativeBeforeProbe": 258,
-  "postCrashNativeReadback": "PENDING_REOPEN_ORIGINAL",
+  "postCrashNativeReadback": "ORIGINAL_APX_258_GUID_AND_ALL_SERIALIZED_NATIVE_DETAILS_MATCH",
   "savedFileMatchesPreProbeControlCopy": true,
   "crash": {
     "exception": "C0000005 ACCESS_VIOLATION",
@@ -93,5 +100,6 @@
   },
   "originalAPXRestored": true,
   "physicalBREPComparison": "NOT_RUN",
-  "engineering": "NOT_VERIFIED"
+  "engineering": "NOT_VERIFIED",
+  "registrationRestored": true
 }
