@@ -1,18 +1,18 @@
 {
   "schema": "APA_FUNCTIONAL_MODULE_COVERAGE_V1",
-  "basis": "Reuse PR84-88 inventories plus actual PR88 candidate registration and six scoped SDK calls; four new SDK groups source/build only.",
+  "basis": "PR94 baseline plus exact 4074a1 candidate installed and natively tested after explicit authorization; original APX/config restored. PR95 audit reused.",
   "counters": {
-    "nativeAndOfficialPrepared": 372,
+    "nativeAndOfficialPrepared": 375,
     "localPrepared": 10,
-    "totalPrepared": 382,
+    "totalPrepared": 385,
     "currentNativeCompatible": 337,
-    "newNativeSDKContracts": 9,
-    "sourceOnlyNativeRuntime": 35,
+    "newNativeSDKContracts": 12,
+    "sourceOnlyNativeRuntime": 38,
     "newLocalAnalyticalCapabilities": 7,
     "existingAPALocalUtilitiesNowRoutable": 3,
     "retainedCandidateBuildCommands": 12,
     "existingDevKitBuildCommand": 1,
-    "newSDKBuildCommands": 9,
+    "newSDKBuildCommands": 12,
     "nonTapirProviderContracts": 0,
     "testedPR88CandidateAddOnRegistered": 281,
     "testedPR88CandidateNativeCompatible": 354,
@@ -23,7 +23,14 @@
     "testedExtendedCandidateNativeCompatible": 358,
     "newlyAddedSDKGroupsCallable": 3,
     "quantityRuntimeQuarantined": 1,
-    "latestSafeBinaryInstalled": false
+    "latestSafeBinaryInstalled": false,
+    "newlyPreparedSDKGroupsThisPackage": 3,
+    "newSDKGroupsCallableThisPackage": 3,
+    "latestCandidateRuntime": "RUNTIME_REGISTERED_5_SCOPED_GROUPED_READS_ORIGINAL_RESTORED",
+    "enhancedSDKGroupsCallableThisPackage": 2,
+    "testedComponentCandidateAddOnRegistered": 288,
+    "testedComponentCandidateNativeCompatible": 361,
+    "distinctSDKGroupsCallableAcrossPackages": 12
   },
   "groups": {
     "BIM_element_management": {
@@ -51,7 +58,7 @@
         "GetNativeEnvelopeMemoV1",
         "GetNativeElementHotspotsV1"
       ],
-      "boundary": "Roof/Slab/Shell parameter topology and native hotspots are not resultant BREP. Side materials, edge trims, pivot level overrides and Shell body/axis frames not serialized. No complex memo writer added."
+      "boundary": "Seven Roof/Slab parameter memos: indexed trims and side overrides read; one PolyRoof has five raw pivot memo slots but four unique edge IDs, closing slot preserved. Shell no existing sample. Not resultant BREP or engineering acceptance."
     },
     "attributes_materials": {
       "existing": [
@@ -91,16 +98,21 @@
       ],
       "new": [
         "GetNativeElementDefaultsV1",
-        "GetNativePolygonMemoV1"
+        "GetNativePolygonMemoV1",
+        "GetNativeComponentBindingsV1"
       ],
       "boundary": "Header defaults for complex types; no new Shell/Railing factory or solver acceptance."
     },
     "curtain_wall": {
-      "existing": [],
-      "new": [
-        "GetNativeElementDefaultsV1"
+      "existing": [
+        "GetSubelementsOfHierarchicalElements",
+        "GetConnectedElements",
+        "GetDetailsOfElements"
       ],
-      "boundary": "CurtainWall header defaults only. Creation/component memo contract still missing."
+      "new": [
+        "GetNativeComponentBindingsV1"
+      ],
+      "boundary": "Existing membership and frame/panel geometry reused; new owner/root bindings read for86 Stair children. CW/Railing branches build-only without live samples."
     },
     "MEP": {
       "existing": [
@@ -180,7 +192,9 @@
         "PolygonRelations",
         "ConstrainedAssignment",
         "MemoPolygonInputs",
-        "GetNativeElementQuantitiesV1"
+        "GetNativeElementQuantitiesV1",
+        "GetNativeOpeningConnectionsV1",
+        "GetNativeQuantityPreflightV1"
       ],
       "boundary": "Quantity engine is QUARANTINED after an actual AC29 access violation; contract preparable, dispatch/native execution refused. Captured straight Roof/Slab contours pass into existing Shapely; arcs explicitly unsupported; no native or engineering mutation."
     }
@@ -653,23 +667,30 @@
     "ACAPI_Drawing_CheckDrawingStatus",
     "ACAPI_Drawing_GetFullDrawingContentBox",
     "ACAPI_Element_GetHotspots",
-    "ACAPI_Element_GetQuantities"
+    "ACAPI_Element_GetQuantities",
+    "ACAPI_HierarchicalEditing_GetHierarchicalElementOwner",
+    "ACAPI::Element::Opening::GetConnectedOpenings",
+    "ACAPI::Element::Opening::GetCutElements",
+    "ACAPI::Element::Opening::GetExtrusionParameters"
   ],
   "sdkInventory": "848 previously inventoried public function declarations are not JSON commands or capability count",
   "quarantinedSDKCalls": [
     "ACAPI_Element_GetQuantities"
   ],
-  "DrawingAuxiliaryQueries": "Source links callable; update status and content box returned explicit native errors, not accepted.",
+  "DrawingAuxiliaryQueries": "Four distinct actual Drawing GUIDs queried in explicit owning Layout DB: both status and content box calls NoError, restore NoError. Native updateStatus=-1 for all four: not proof up-to-date. Only one source GUID matched current public ViewMap.",
   "providerMatrix": [
     {
       "provider": "Tapir and APA SDK",
-      "discovered": 285,
-      "prepared": 285,
+      "discovered": 288,
+      "prepared": 288,
       "originalRuntime": 264,
       "testedPR88Runtime": 280,
       "testedExtendedRuntime": 284,
       "callableThisPass": 8,
-      "runtimeQuarantined": 1
+      "runtimeQuarantined": 1,
+      "callableThisPackage": 5,
+      "testedComponentCandidateRuntime": 287,
+      "verificationThisPackage": "86_STAIR_COMPONENTS_7_ENVELOPES_4_DRAWINGS_3_EMPTY_OPENING_HOSTS_1_PRE_ENGINE_IDENTITY"
     },
     {
       "provider": "Official Archicad JSON",
@@ -688,7 +709,8 @@
       "testedPR88Runtime": 1,
       "testedExtendedRuntime": 1,
       "callableThisPass": 1,
-      "sourceOnlyNotIntegrated": 13
+      "sourceOnlyNotIntegrated": 13,
+      "callableThisPackage": 0
     },
     {
       "provider": "Local APA analysis",
@@ -698,7 +720,9 @@
       "testedPR88Runtime": null,
       "callableThisPass": 2,
       "callableUniqueAcrossPriorAndCurrent": 10,
-      "verification": "TEN_LOCAL_CONTRACTS;TWO_STEP_CAPTURED_NATIVE_MEMO_FLOW_VERIFIED;NINE_PRIOR_CALLS_RETAINED"
+      "verification": "TEN_LOCAL_CONTRACTS;TWO_STEP_CAPTURED_NATIVE_MEMO_FLOW_VERIFIED;NINE_PRIOR_CALLS_RETAINED",
+      "callableThisPackage": 1,
+      "verificationThisPackage": "CAPTURED_REAL_STAIR_MEMBERSHIP_88_NODES_86_EDGES_TO_EXISTING_DEPENDENCY_IMPACT"
     },
     {
       "provider": "Other installed APX",
@@ -708,7 +732,7 @@
       "originalRuntime": null,
       "testedPR88Runtime": null,
       "callableThisPass": 0,
-      "verification": "32_PROVIDERS_NOT_32_FUNCTIONS;NO_PUBLIC_INDEPENDENT_CONTRACT_FOUND"
+      "verification": "PR84_94_MATRIX_REUSED_32_PROVIDERS_NO_NEW_PRIVATE_ABI_SEARCH"
     }
   ]
 }

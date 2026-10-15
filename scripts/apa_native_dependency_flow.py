@@ -7,7 +7,7 @@ import hashlib
 import json
 
 
-def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids=()):
+def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids=(), memberships=()):
     nodes, edges, evidence, omitted = set(), set(), [], []
 
     def guid(value):
@@ -21,6 +21,18 @@ def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids
             if pair not in edges:
                 edges.add(pair)
                 evidence.append(dict(source=source, target=target, kind=kind))
+
+    for group in memberships:
+        parent = guid(group.get('parentElementId'))
+        body = group.get('subelements', {})
+        if not parent or 'error' in body:
+            omitted.append('MEMBERSHIP_PARENT_OR_NATIVE_RESULT_MISSING')
+            continue
+        nodes.add(parent)
+        for items in body.values():
+            if isinstance(items, list):
+                for item in items:
+                    edge(parent, guid(item.get('elementId')), 'NATIVE_HIERARCHICAL_MEMBERSHIP')
 
     for row in (components or {}).get('elements', []):
         child = guid(row.get('elementId'))

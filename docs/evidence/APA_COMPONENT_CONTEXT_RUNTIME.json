@@ -1,0 +1,125 @@
+{
+  "schema": "APA_COMPONENT_CONTEXT_RUNTIME_V1",
+  "status": "GROUPED_NATIVE_READS_COMPLETED",
+  "candidateSHA256": "4074a1926ec1b18ab89f2052e8309c62667aa170a836be8e70a2c90b945665e1",
+  "implementationCommit": "0c1c92548339d1389e68ec54ac1d870f7d706a49",
+  "buildIdentity": "f251cd17271b8e31287db17f38f8425957e74a273f98793710ba3dabf19a340b",
+  "preparedTotal": 385,
+  "runtimeAddOnRegistered": 288,
+  "officialCompatibleContracts": 73,
+  "runtimeCompatible": 361,
+  "missing": [
+    "GetNativePhysicalGeometry",
+    "AddOn.AddOnCommandTest.CreateColumnCommand",
+    "AddOn.LibraryManagement_Test.AddLibraryCommand",
+    "AddOn.LibraryManagement_Test.AddLibrariesCommand",
+    "AddOn.LibraryManagement_Test.AddServerLibraryCommand",
+    "AddOn.LibraryManagement_Test.AddServerLibrariesCommand",
+    "AddOn.LibraryManagement_Test.RemoveAllLibrariesCommand",
+    "AddOn.LibraryManagement_Test.RemoveMissingLibrariesCommand",
+    "AddOn.LibraryManagement_Test.DumpLibraryListCommand",
+    "AddOn.LibraryManagement_Test.DumpAllLibPartsCommand",
+    "AddOn.LibraryManagement_Test.DuplicateSelectionToEmbeddedCommand",
+    "AddOn.LibraryManagement_Test.CreateNewObjectFromSelectionCommand",
+    "AddOn.LibraryManagement_Test.UploadLibrariesToServerCommand",
+    "AddOn.LibraryManagement_Test.RemoveLibrariesFromServerCommand"
+  ],
+  "inputSchemasRuntimeExportMatch": [
+    "GetNativeComponentBindingsV1",
+    "GetNativeOpeningConnectionsV1",
+    "GetNativeQuantityPreflightV1",
+    "GetNativeEnvelopeMemoV1",
+    "GetNativeDrawingAssociationsV1"
+  ],
+  "matrix": [
+    {
+      "command": "GetNativeComponentBindingsV1",
+      "targetCount": 32,
+      "successfulRows": 32,
+      "nativeErrors": [],
+      "resultSchemaValid": true,
+      "sha256": "ee89c2284970bf9c37d2b86dd1ff31de334f0470aeace4d361c9b661c9f18f45"
+    },
+    {
+      "command": "GetNativeComponentBindingsV1",
+      "targetCount": 32,
+      "successfulRows": 32,
+      "nativeErrors": [],
+      "resultSchemaValid": true,
+      "sha256": "aef5f5c34cd9da648717c631437ef8605b2160b2e1bb456912a5d122380afea9"
+    },
+    {
+      "command": "GetNativeComponentBindingsV1",
+      "targetCount": 22,
+      "successfulRows": 22,
+      "nativeErrors": [],
+      "resultSchemaValid": true,
+      "sha256": "bf83ae2a37fb5fcb030aa6f05a4693f9bb4cfaa5c1dacb9d1b1633a26b5d5018"
+    },
+    {
+      "command": "GetNativeEnvelopeMemoV1",
+      "targetCount": 7,
+      "successfulRows": 7,
+      "nativeErrors": [],
+      "resultSchemaValid": true,
+      "sha256": "4c461c2cf342293a65c2c34dc0fafd6b9f5b41c1c46dbc6c783f8afa319b312e"
+    },
+    {
+      "command": "GetNativeOpeningConnectionsV1",
+      "targetCount": 3,
+      "successfulRows": 3,
+      "nativeErrors": [],
+      "resultSchemaValid": true,
+      "sha256": "4cc4f620c6d81697bb42896a746353e32e47d96443a5c157cd861f957e5c4196"
+    },
+    {
+      "command": "GetNativeQuantityPreflightV1",
+      "targetCount": 1,
+      "successfulRows": 1,
+      "nativeErrors": [],
+      "resultSchemaValid": true,
+      "sha256": "4e8a006f800da6eaef3c68c3bd4fdfa455151993b43d1a20df733919241a116a"
+    },
+    {
+      "command": "GetNativeDrawingAssociationsV1",
+      "targetCount": 4,
+      "successfulRows": 4,
+      "nativeErrors": [],
+      "resultSchemaValid": true,
+      "sha256": "ee02f8a893d45438ec4bc0cf0ee6c678e544ec909b44d0d7dad61989b9f2d4d5"
+    }
+  ],
+  "nativeGroupedReadsCallable": 5,
+  "retainedGUIDs": 258,
+  "serializedNativeParametersMatch": true,
+  "savedBytesUnchanged": true,
+  "quantityEngineCalled": false,
+  "nativeModelWrites": 0,
+  "openingPositiveCutSample": "NOT_VERIFIED_NO_GENERIC_OPENING_IN_MODEL",
+  "railingCurtainWallShell": "NOT_VERIFIED_NO_EXISTING_SAMPLE",
+  "physicalBREPComparison": "NOT_RUN",
+  "restoration": "ORIGINAL_APX_SHA_AND_REGISTRATION_RESTORED",
+  "componentIndependentOwnerMatches": 86,
+  "componentHomeStoryMatches": 86,
+  "drawingDistinctTargets": 4,
+  "drawingStatusQuerySuccess": 4,
+  "drawingContentBoxQuerySuccess": 4,
+  "drawingDatabaseRestoreSuccess": 4,
+  "drawingNativeUpdateStatus": [
+    -1,
+    -1,
+    -1,
+    -1
+  ],
+  "drawingUpToDate": "NOT_VERIFIED_STATUS_MINUS_ONE",
+  "genericOpeningConnectedCount": 0,
+  "pivotMemoSlots": 5,
+  "pivotUniqueEdgeIds": 4,
+  "memoAuthority": "NATIVE_PARAMETER_GEOMETRY_NOT_RESULTANT_BREP",
+  "originalAPXSHA256": "976a943b8333b12775dfad8d9897c5f816ef4cb458d3b2a21ead77c32e341613",
+  "originalRegistrationMatch": true,
+  "savedFileSHAAfterCloseUnchanged": true,
+  "postRestoreIndependentReadback": "ORIGINAL_RUNTIME_REOPEN_258_GUID_AND_SERIALIZED_PARAMETERS_MATCH",
+  "postRestoreNewCommandAbsent": true,
+  "savedBytesAfterOriginalReopenUnchanged": true
+}

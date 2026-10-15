@@ -35,7 +35,7 @@ class FunctionalModules(unittest.TestCase):
         self.assertEqual(proof['nativeModelWrites'],0)
     def test_attachment_drift_idempotence_and_no_native_permission(self):
         r=connected();before=r.fingerprint;A.connect_functional_modules(r);self.assertEqual(r.fingerprint,before)
-        self.assertEqual(len(r.catalog['commands']),382)
+        self.assertEqual(len(r.catalog['commands']),385)
         manifest=json.loads((ROOT/'schemas/accelerator/functional-modules.json').read_text(encoding='utf8'));manifest['local']['implementationSHA256']='0'*64
         with tempfile.TemporaryDirectory() as temp:
             path=Path(temp)/'manifest.json';path.write_text(json.dumps(manifest))
