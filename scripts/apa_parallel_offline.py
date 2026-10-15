@@ -77,7 +77,7 @@ def summarize(args):
     totals = {"tests": 0, "failures": 0, "errors": 0, "skipped": 0, "time": 0.0}
     rows, missing = [], []
     for shard in range(args.shards):
-        folder = root / ("apa-offline-shard-" + str(shard)) / ("shard-" + str(shard))
+        folder = root / ("apa-offline-shard-" + str(shard))
         report = folder / "junit.xml"
         manifest = folder / "manifest.json"
         if not report.is_file() or not manifest.is_file():
