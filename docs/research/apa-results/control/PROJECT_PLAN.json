@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 170,
+  "revision": 171,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2151,6 +2151,60 @@
     "ART-P70-A11-S03-SDKCOMPONENT-RECEIPT-20261015": {
       "id": "ART-P70-A11-S03-SDKCOMPONENT-RECEIPT-20261015",
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261015-071450Z-sdk-component-context.json",
+      "kind": "RECEIPT",
+      "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
+    },
+    "ART-P70-A11-S03-NATIVEPOSITIVE-COVERAGE-20261015": {
+      "id": "ART-P70-A11-S03-NATIVEPOSITIVE-COVERAGE-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-092957Z-native-positive-modules/module-coverage.json",
+      "kind": "DATASET",
+      "verification": "388_PREPARABLE_378_NATIVE_SOURCE_10_LOCAL_337_ORIGINAL_364_CANDIDATE_COMPATIBLE_INCLUDING_PRIOR_DEVKIT"
+    },
+    "ART-P70-A11-S03-NATIVEPOSITIVE-LIVE-20261015": {
+      "id": "ART-P70-A11-S03-NATIVEPOSITIVE-LIVE-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-092957Z-native-positive-modules/native-runtime.json",
+      "kind": "TEST_RESULT",
+      "verification": "THREE_NATIVE_ROOTS_SAVE_OPEN_409_GUID_POSITIVE_OPENING_GDL_COMPONENTS"
+    },
+    "ART-P70-A11-S03-NATIVEPOSITIVE-BUILD-20261015": {
+      "id": "ART-P70-A11-S03-NATIVEPOSITIVE-BUILD-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-092957Z-native-positive-modules/SDK-build.json",
+      "kind": "TEST_RESULT",
+      "verification": "FULL_RELEASE_EXACT68D028_SOURCE_RUNTIME_IDENTITY_PASS"
+    },
+    "ART-P70-A11-S03-NATIVEPOSITIVE-FLOW-20261015": {
+      "id": "ART-P70-A11-S03-NATIVEPOSITIVE-FLOW-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-092957Z-native-positive-modules/native-connected-dataflow.json",
+      "kind": "TEST_RESULT",
+      "verification": "213_NODES_290_EDGES_EXISTING_BIM_GRAPH_NAMESPACE_GATES"
+    },
+    "ART-P70-A11-S03-NATIVEPOSITIVE-GAPS-20261015": {
+      "id": "ART-P70-A11-S03-NATIVEPOSITIVE-GAPS-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-092957Z-native-positive-modules/gap-register.json",
+      "kind": "DATASET",
+      "verification": "PARTIAL_FINAL_ORIGINAL_RUNTIME_REOPEN_AND_HASH_DRIFT_NOT_VERIFIED"
+    },
+    "ART-P70-A11-S03-NATIVEPOSITIVE-CI-20261015": {
+      "id": "ART-P70-A11-S03-NATIVEPOSITIVE-CI-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-092957Z-native-positive-modules/windows-ci.json",
+      "kind": "TEST_RESULT",
+      "verification": "WINDOWS_CI_PASS_EXACT_HEAD"
+    },
+    "ART-P70-A11-S03-NATIVEPOSITIVE-KG-20261015": {
+      "id": "ART-P70-A11-S03-NATIVEPOSITIVE-KG-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-092957Z-native-positive-modules/core-knowledge-query.json",
+      "kind": "TEST_RESULT",
+      "verification": "MAIN_ORCHESTRATOR_GITHUB_CURRENT_CAS_PASS"
+    },
+    "ART-P70-A11-S03-NATIVEPOSITIVE-REPORT-20261015": {
+      "id": "ART-P70-A11-S03-NATIVEPOSITIVE-REPORT-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-15/APA-RUN-20261015-092957Z-native-positive-modules/REPORT.md",
+      "kind": "REPORT",
+      "verification": "DONE_PUBLISHED_FUNCTIONAL_BLOCK_S03_PARTIAL"
+    },
+    "ART-P70-A11-S03-NATIVEPOSITIVE-RECEIPT-20261015": {
+      "id": "ART-P70-A11-S03-NATIVEPOSITIVE-RECEIPT-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261015-092957Z-native-positive-modules.json",
       "kind": "RECEIPT",
       "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
     }
@@ -4728,7 +4782,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -4921,12 +4975,19 @@
         "Four distinct Drawing elements queried in correct owning Layout DB through existing database helper: CheckDrawingStatus and GetFullDrawingContentBox allNoError, context restored. Native updateStatus=-1 remains not-up-to-date/unclassified, no automatic updater added. One source GUID verified in current public ViewMap, three unresolved source links omitted from dependencies; legacy navigator GUID and SDK link GUID not equated.",
         "Modern Generic Opening connected-host query succeeds on2Wall+1Slab with empty sets. Positive cut/host/extrusion sample NOT_VERIFIED. New quantity pre-engine query reads identity/type only; no quantity engine structures/masks/calls; native/Python quarantine retained. Official SDK API_Quantities constructor initializes all output pointers; missing brace initialization is not established crash cause. Future engine probe requires separately qualified diagnostic environment, not current PLN.",
         "Captured new replies feed existing DependencyImpact through BIM Graph:96nodes/87verified edges,42entries in selected Stair impact set. Original membership-only chain88nodes/86edges. No physical contact inferred. All258GUID/full serialized native parameters match before/after and independently after original-runtime read-only reopen; saved bytes unchanged. Original APX SHA/registration restored. Windows CI exact head, all17code files and immutable report/receipt readback verified. S03PARTIAL, historical DONE/A07/S10 preserved. Next independent gaps: positive existing native samples and Shell memo frames/material relationships, avoid quantity engine replay.",
-        "Current user package after PR96: positive existing Opening/Host; native CW/Railing components where permitted samples exist; complete Shell memo fields, reuse GDL LibraryPart defaults and Drawing provenance. No new sample writes without separate copy permission; quantity engine quarantined. New exact APX permission required."
+        "Current user package after PR96: positive existing Opening/Host; native CW/Railing components where permitted samples exist; complete Shell memo fields, reuse GDL LibraryPart defaults and Drawing provenance. No new sample writes without separate copy permission; quantity engine quarantined. New exact APX permission required.",
+        "PR97 8f134001ca0e3250eda587db61ac01dbd6357326 on exact PR96 76ab55c1c34fa327c2c71b7615e7cde5b090f69c. Three new contracts use existing dynamic router, BIM Graph, SceneWriter and SQLite. Native factories reuse public SDK defaults+Create because existing JSON/Tapir had no exposed equivalent. No second executor, journal, KG, search, normative or quantity engine.",
+        "Exact68d028 APX full Release source identity and native runtime identity match.290Tapir commands exported;1other namespace compiled and prior compatibility retained, not re-probed.73official product-compatible contracts not newly executed.388preparable=378native/source+10local;337original-compatible,41source-only original,364candidate-compatible including priorDevKit.3new command groups called and3existing readers gained positive sample evidence.",
+        "One explicitly authorized copy: true native CurtainWall2x2, Railing2m/height1.1 and ExtrudedShell4x4/reference rise1 created with3journaled native CREATE calls, no retries.409total GUIDs=258retained+3roots+148native assembly/library children. Native types, stories, material defaults and resultant body bounds independently read.23CurtainWall,34Railing and1Shell resultant bodies. Save/Open confirms all409full native signatures; original258signatures and serialized parameters match before copy writes. No visual sample inspection or engineering acceptance.",
+        "150new component headers independently resolve parent/root;50supported specific parameter rows. Nested railing parent differs from root and is not flattened. Detached Railing Stair association NOT_VERIFIED. Positive existing Generic Opening forward/reverse Wall host, cut GUID, native type and story match; no Opening write. Resultant void BREP NOT_VERIFIED. Shell Extruded memo confirms4profile coordinates,5raw body flags,12base transform values and4m extrusion; contour/hole/Revolved/Ruled branches have no positive sample.",
+        "Two actual library parts expose163stored default parameters without placement/context edits using bounded existing Tapir serializers.59building materials and132surfaces read without changes.16known Navigator identities/maps verified.12source-link/map probes:1exact,3identity mismatches excluded,8native errors.4Drawing owning Layout links,1exactView source and3unresolved links. Status-1=Other, freshness NOT_VERIFIED; no updater/rebuild/publisher native call.",
+        "Captured data feeds existing DependencyImpact/BIM Graph:213nodes290edges,56affected for CurtainWall root. Physical element GUIDs, Navigator GUIDs and source references have separate namespaces. Membership/logical dependencies are not physical contact. Quantity engine remains quarantined in Python/native and was not called.",
+        "Original APX SHA and registration values restored. Final restored-runtime reopen NOT_VERIFIED: Windows UI helper timed out after prescribed reset/retry and native endpoint unavailable. Saved-file hashes changed at closing source and Opening models; before/after snapshots preserved, no blind restore. Source258native geometry/details reconciled before any copy write and matched; source bytes unchanged from copy checkpoint onward. Opening bytes matched before/during read; post-close geometry pending. Do not claim unchanged-file or complete final acceptance. Exact Windows CI/code/report/receipt GitHub readback verified. Next: reopen saved409copy and107Opening model under original runtime, reconcile closing hash drift and inspect3native samples visually; do not replay Create or quantities."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
-      "owner": "work-native-positive-20261015",
-      "lease_until": "2026-10-15T11:30:37Z",
-      "claim_ref": "APA-CLAIM-NATIVE-POSITIVE-20261015T073037Z",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
@@ -5133,7 +5194,16 @@
         "ART-P70-A11-S03-SDKCOMPONENT-CI-20261015",
         "ART-P70-A11-S03-SDKCOMPONENT-KG-20261015",
         "ART-P70-A11-S03-SDKCOMPONENT-REPORT-20261015",
-        "ART-P70-A11-S03-SDKCOMPONENT-RECEIPT-20261015"
+        "ART-P70-A11-S03-SDKCOMPONENT-RECEIPT-20261015",
+        "ART-P70-A11-S03-NATIVEPOSITIVE-COVERAGE-20261015",
+        "ART-P70-A11-S03-NATIVEPOSITIVE-LIVE-20261015",
+        "ART-P70-A11-S03-NATIVEPOSITIVE-BUILD-20261015",
+        "ART-P70-A11-S03-NATIVEPOSITIVE-FLOW-20261015",
+        "ART-P70-A11-S03-NATIVEPOSITIVE-GAPS-20261015",
+        "ART-P70-A11-S03-NATIVEPOSITIVE-CI-20261015",
+        "ART-P70-A11-S03-NATIVEPOSITIVE-KG-20261015",
+        "ART-P70-A11-S03-NATIVEPOSITIVE-REPORT-20261015",
+        "ART-P70-A11-S03-NATIVEPOSITIVE-RECEIPT-20261015"
       ],
       "blocked_reason": null
     },
@@ -6041,7 +6111,16 @@
         "ART-P70-A11-S03-SDKCOMPONENT-CI-20261015",
         "ART-P70-A11-S03-SDKCOMPONENT-KG-20261015",
         "ART-P70-A11-S03-SDKCOMPONENT-REPORT-20261015",
-        "ART-P70-A11-S03-SDKCOMPONENT-RECEIPT-20261015"
+        "ART-P70-A11-S03-SDKCOMPONENT-RECEIPT-20261015",
+        "ART-P70-A11-S03-NATIVEPOSITIVE-COVERAGE-20261015",
+        "ART-P70-A11-S03-NATIVEPOSITIVE-LIVE-20261015",
+        "ART-P70-A11-S03-NATIVEPOSITIVE-BUILD-20261015",
+        "ART-P70-A11-S03-NATIVEPOSITIVE-FLOW-20261015",
+        "ART-P70-A11-S03-NATIVEPOSITIVE-GAPS-20261015",
+        "ART-P70-A11-S03-NATIVEPOSITIVE-CI-20261015",
+        "ART-P70-A11-S03-NATIVEPOSITIVE-KG-20261015",
+        "ART-P70-A11-S03-NATIVEPOSITIVE-REPORT-20261015",
+        "ART-P70-A11-S03-NATIVEPOSITIVE-RECEIPT-20261015"
       ],
       "synthesis_state": "PARTIAL",
       "owner": null
