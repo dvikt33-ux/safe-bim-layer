@@ -1,0 +1,27 @@
+// Read the actual generated symbol owner, not a guessed nearby placed Rail.
+// No OpenParameters, Element_Change, script execution, or recovery write here.
+static GS::ObjectState AssemblyMaterialParameters(const API_Guid& guid){
+ API_ElementMemo memo={};const GS::OnExit dispose([&](){ACAPI_DisposeElemMemoHdls(&memo);});
+ const auto err=ACAPI_Element_GetMemo(guid,&memo,APIMemoMask_AddPars);GS::ObjectState out("memoQueryError",static_cast<Int32>(err));const auto& rows=out.AddList<GS::ObjectState>("parameters");if(err!=NoError)return out;
+ const auto bytes=memo.params?BMGetHandleSize(reinterpret_cast<GSHandle>(memo.params)):0;const auto count=bytes/sizeof(API_AddParType);out.Add("parameterCount",static_cast<Int32>(count));
+ if(bytes%sizeof(API_AddParType)!=0||count<0||count>4096){out.Add("boundsStatus","PARAMETER_ALLOCATION_NOT_QUALIFIED");return out;}
+ for(GSIndex i=0;i<count;++i){const auto& p=(*memo.params)[i];if(std::find(std::begin(p.name),std::end(p.name),'\0')==std::end(p.name)){out.Add("boundsStatus","UNTERMINATED_PARAMETER_NAME");return out;}
+  const GS::String name(p.name);if(name!="bmatRail"&&name!="bmatFixing")continue;GS::ObjectState row("name",name,"index",static_cast<Int32>(p.index),"nativeTypeId",static_cast<Int32>(p.typeID),"typeModifier",static_cast<Int32>(p.typeMod),"flags",static_cast<Int32>(p.flags));
+  if(p.typeID==APIParT_BuildingMaterial&&p.typeMod==API_ParSimple&&std::isfinite(p.value.real)&&p.value.real>0&&p.value.real<=1000000&&std::floor(p.value.real)==p.value.real){const auto index=ACAPI_CreateAttributeIndex(static_cast<Int32>(p.value.real));row.Add("valueIndex",GetAttributeIndex(index));row.Add("attributeId",CreateGuidObjectState(AssemblyAttributeGuid(API_BuildingMaterialID,index)));}
+  rows(row);
+ }out.Add("boundsStatus","BOUNDED_NATIVE_MEMO");return out;
+}
+static GS::ObjectState AssemblyGeneratedRailingState(const API_Element& object){
+ if(object.header.type.typeID!=API_ObjectID||object.object.owner==APINULLGuid)return CreateErrorResponse(APIERR_BADID,"Generated Railing Object owner required");
+ API_Element owner={};owner.header.guid=object.object.owner;auto err=ACAPI_Element_Get(&owner);if(err!=NoError||owner.header.type.typeID!=API_RailingRailID)return CreateErrorResponse(APIERR_BADID,"Actual native owner is not a Railing Rail");
+ API_Guid root=APINULLGuid,parent=APINULLGuid;API_HierarchicalOwnerType mode=API_RootHierarchicalOwner;API_HierarchicalElemType hierarchy=API_UnknownElemType;const auto rootErr=ACAPI_HierarchicalEditing_GetHierarchicalElementOwner(&object.header.guid,&mode,&hierarchy,&root);mode=API_ParentHierarchicalOwner;const auto parentErr=ACAPI_HierarchicalEditing_GetHierarchicalElementOwner(&object.header.guid,&mode,&hierarchy,&parent);
+ GS::ObjectState row("elementId",CreateGuidObjectState(object.header.guid),"kind","RailingGeneratedObject","nativeTypeId",static_cast<Int32>(object.header.type.typeID),"homeStory",static_cast<Int32>(object.header.floorInd),"modificationStamp",AssemblyStamp(object),"values",GS::ObjectState{},"attributes",GS::ObjectState{},"associationAuthority","NATIVE_OWNER_NOT_SPATIAL_INFERENCE","rootQueryError",static_cast<Int32>(rootErr));if(rootErr==NoError&&root!=APINULLGuid)row.Add("rootElementId",CreateGuidObjectState(root));
+ GS::ObjectState recovery("ownerComponentId",CreateGuidObjectState(owner.header.guid),"ownerKind","RailingRail","ownerModificationStamp",AssemblyStamp(owner),"ownerDeclaredParentId",CreateGuidObjectState(owner.railingRail.owner),"ownerHeightMetres",owner.railingRail.height,"ownerSymbolLibraryGuid",CreateGuidObjectState(owner.railingRail.symbID),"objectLibraryPartIndex",object.object.libInd,"parentQueryError",static_cast<Int32>(parentErr),"parentMatchesDeclaredOwner",parentErr==NoError&&parent==owner.header.guid,"generatedObjectMaterials",AssemblyMaterialParameters(object.header.guid),"ownerComponentMaterials",AssemblyMaterialParameters(owner.header.guid),"recoveryWriteContractStatus","BLOCKED_PUBLIC_OWNER_WRITE_NOT_QUALIFIED");
+ API_Element rootElement={};rootElement.header.guid=root;const auto rootRead=rootErr==NoError&&root!=APINULLGuid?ACAPI_Element_Get(&rootElement):APIERR_BADID;recovery.Add("rootHeaderQueryError",static_cast<Int32>(rootRead));
+ if(rootRead==NoError&&rootElement.header.type.typeID==API_RailingID){
+  recovery.Add("rootModificationStamp",AssemblyStamp(rootElement));API_ElementMemo memo={};const GS::OnExit dispose([&](){ACAPI_DisposeElemMemoHdls(&memo);});const auto me=ACAPI_Element_GetMemo(root,&memo,APIMemoMask_RailingRail);recovery.Add("rootRailMemoQueryError",static_cast<Int32>(me));
+  const auto bytes=me==NoError&&memo.railingRails?BMGetPtrSize(reinterpret_cast<GSPtr>(memo.railingRails)):0;const auto count=bytes/sizeof(API_RailingRailType);const bool bounded=bytes>=0&&bytes%sizeof(API_RailingRailType)==0&&count<=4096;recovery.Add("rootRailMemoBounded",bounded);bool matched=false;const auto& rails=recovery.AddList<GS::ObjectState>("rootMemoRails");
+  if(me==NoError&&bounded)for(GSIndex i=0;i<count;++i){const auto& r=memo.railingRails[i];const bool target=r.head.guid==owner.header.guid;matched=matched||target;rails(GS::ObjectState("elementId",CreateGuidObjectState(r.head.guid),"declaredOwnerId",CreateGuidObjectState(r.owner),"slot",static_cast<Int32>(i),"isGeneratedObjectOwner",target,"heightMetres",r.height,"symbolLibraryGuid",CreateGuidObjectState(r.symbID)));}
+  recovery.Add("ownerFoundInRootRailMemo",matched);
+ }row.Add("ownerRecovery",recovery);return row;
+}

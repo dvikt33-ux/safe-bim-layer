@@ -8,7 +8,7 @@ static bool APABoundedStrings(GSHandle handle,UInt64 count){
  for(UInt64 i=0;i<count;++i){while(pos<n&&data[pos]!=0)++pos;if(pos>=n)return false;++pos;}return true;
 }
 GS::ObjectState GetNativeLibraryPartDefaultsV1Command::Execute(const GS::ObjectState& p,GS::ProcessControl&) const {
- GS::Array<Int32> indices;p.Get("libraryPartIndices",indices);GS::ObjectState out("nativeModelWrites",0,"authority","LIBRARY_PART_STORED_DEFAULTS_NOT_PLACED_INSTANCE");const auto& rows=out.AddList<GS::ObjectState>("parts");
+ GS::Array<Int32> indices;p.Get("libraryPartIndices",indices);bool scripts=false;p.Get("includeParameterScripts",scripts);GS::ObjectState out("nativeModelWrites",0,"authority","LIBRARY_PART_STORED_DEFAULTS_NOT_PLACED_INSTANCE");const auto& rows=out.AddList<GS::ObjectState>("parts");if(scripts&&indices.GetSize()!=1){rows(CreateErrorResponse(APIERR_BADPARS,"Script query requires exactly one explicitly selected library part"));return out;}
  for(Int32 index:indices){double a=0,b=0;Int32 count=0;API_AddParType** parameters=nullptr;const GS::OnExit cleanup([&](){if(parameters)ACAPI_DisposeAddParHdl(&parameters);});const auto err=ACAPI_LibraryPart_GetParams(index,&a,&b,&count,&parameters);
  if(err!=NoError){rows(CreateErrorResponse(err,"Library part default parameters"));continue;}const auto allocated=parameters?BMGetHandleSize(reinterpret_cast<GSHandle>(parameters))/sizeof(API_AddParType):0;if(count<0||static_cast<GSSize>(count)>allocated||count>4096){rows(CreateErrorResponse(APIERR_BADPARS,"Parameter count exceeds allocated handle or bounded query"));continue;}
  GS::ObjectState row("libraryPartIndex",index,"defaultA",a,"defaultB",b,"parameterCount",count);const auto& list=row.AddList<GS::ObjectState>("parameters");
@@ -24,6 +24,8 @@ GS::ObjectState GetNativeLibraryPartDefaultsV1Command::Execute(const GS::ObjectS
  case APIParT_LightSw:AddValueOnOff(entry,param);break;case APIParT_Boolean:AddValueBool(entry,param);break;case APIParT_CString:case APIParT_Title:AddValueString(entry,param);break;
  default:supported=false;break;}}
  entry.Add("valueStatus",!supported?"UNSUPPORTED_NATIVE_PARAMETER_TYPE":(bounds?"SERIALIZED_REUSING_TAPIR":"OMITTED_ALLOCATION_OR_SIZE_BOUNDARY"));list(entry);
- }rows(row);
+ }
+ if(scripts){const auto& sections=row.AddList<GS::ObjectState>("parameterScripts");for(Int32 slot=0;slot<2;++slot){API_LibPartSection section={};section.sectType=slot==0?API_Sect1DScript:API_SectVLScript;GS::UniString text;const auto se=ACAPI_LibraryPart_GetSection(index,&section,nullptr,&text);GS::ObjectState item("section",slot==0?"MASTER":"PARAMETER","nativeError",static_cast<Int32>(se),"authority","PRIVATE_LIBRARY_SOURCE_NOT_EXECUTED_OR_INTERPRETED");if(se==NoError&&text.GetLength()<=65536){item.Add("status","READABLE");item.Add("text",text);}else item.Add("status",se==NoError?"OMITTED_SIZE_BOUNDARY":"NATIVE_UNAVAILABLE_OR_PROTECTED_NO_BYPASS");sections(item);}}
+ rows(row);
  }return out;
 }

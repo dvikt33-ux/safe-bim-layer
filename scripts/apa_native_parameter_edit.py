@@ -50,7 +50,7 @@ def gdl_parameter_disabled(row):
 
 def prepare_assembly_edit(router,state,changes):
     state,changes=copy.deepcopy(state),copy.deepcopy(changes)
-    applicable=set(state['values'])|set(state['attributes'])|set(state.get('memoEdits',[]))
+    applicable=(set(state['values'])-set(state.get('readOnlyFields',[])))|set(state['attributes'])|set(state.get('memoEdits',[]))
     if state['kind']=='CurtainWall' and 'heightMetres' in changes:
         raise ValueError('CW_SCALAR_HEIGHT_NATIVE_NO_EFFECT_USE_QUALIFIED_CONTOUR_MEMO')
     if state['kind']=='Shell' and 'extrusionXMetres' in state['values']:applicable.add('profileCoordinates')
@@ -62,7 +62,7 @@ def prepare_assembly_edit(router,state,changes):
                 childGUIDPolicy='ROOT_TARGET_RETAINED_COMPONENTS_RECONCILED_INDEPENDENTLY',engineering='NOT_VERIFIED')
 
 
-def execute_assembly_edit(router,writer,preview,*,scene_id,affected,retained_signatures,saved_sha256,authorization,verify_geometry=None,verify_geometry_before=None,verify_materials=None):
+def execute_assembly_edit(router,writer,preview,*,scene_id,affected,retained_signatures,saved_sha256,authorization,verify_geometry=None,verify_geometry_before=None,verify_materials=None,verify_gdl=None,verify_ownership=None,verify_dependent_changes=None,verify_acceptance_before=None):
     """One intent. Fresh state before, independent state/membership after.
 
     Caller authorizes the isolated copy and complete affected root subtree.
@@ -73,6 +73,10 @@ def execute_assembly_edit(router,writer,preview,*,scene_id,affected,retained_sig
     state=preview['state'];ticket=preview['ticket'];router.validate(ticket)
     if digest(state)!=preview['stateHash'] or ticket['parameters']!=dict(elementId=state['elementId'],expectedKind=state['kind'],expectedModificationStamp=state['modificationStamp'],changes=ticket['parameters']['changes']):
         raise ValueError('ASSEMBLY_PREVIEW_STATE_DRIFT')
+    # Preparation remains available; incomplete acceptance cannot start a write.
+    verifiers=dict(resultantGeometry=verify_geometry,typedMaterialBindings=verify_materials,gdlParameters=verify_gdl,nativeOwnership=verify_ownership,dependentChanges=verify_dependent_changes,beforeSnapshot=verify_acceptance_before)
+    missing=[name for name,fn in verifiers.items() if not callable(fn)]
+    if missing:return dict(status='NOT_VERIFIED',reason='COMPOUND_MODIFY_ACCEPTANCE_INCOMPLETE',unverifiedAreas=missing,nativeModelWrites=0,executionPermission=False,automaticRetry=False)
     target=state['elementId']['guid'].lower();affected={x.lower() for x in affected};root=state.get('rootElementId',{}).get('guid')
     if state['kind'] in {'CurtainWall','Railing','Shell'}:root=target
     if not root or root.lower() not in affected or target not in affected:raise ValueError('EXPLICIT_AFFECTED_ASSEMBLY_ROOT_REQUIRED')
@@ -99,6 +103,8 @@ def execute_assembly_edit(router,writer,preview,*,scene_id,affected,retained_sig
         if digest(current)!=preview['stateHash']:raise ValueError('NATIVE_ASSEMBLY_STATE_CHANGED')
         baseline['children']=members(api)
         if not baseline['children']<=affected:raise ValueError('ASSEMBLY_CHILDREN_OUTSIDE_AUTHORIZED_SCOPE')
+        baseline['acceptance']=verify_acceptance_before(api,current,affected)
+        if not isinstance(baseline['acceptance'],dict) or not str(baseline['acceptance'].get('status','')).endswith('_PASS'):raise ValueError('ASSEMBLY_FULL_BEFORE_SNAPSHOT_NOT_VERIFIED')
         if verify_geometry_before is not None:
             proof=verify_geometry_before(api,current)
             if not isinstance(proof,dict) or not str(proof.get('status','')).endswith('PASS'):
@@ -133,15 +139,21 @@ def execute_assembly_edit(router,writer,preview,*,scene_id,affected,retained_sig
                 if not equal(actual,expected):raise ValueError('ASSEMBLY_MEMO_READBACK_MISMATCH:'+name)
             elif actual!=expected:raise ValueError('ASSEMBLY_PARAMETER_READBACK_MISMATCH:'+name)
         children=members(writer.api)
+        if children!=baseline['children']:raise ValueError('ASSEMBLY_UNEXPECTED_CHILD_GUID_CHANGE_RECONCILE_NO_RETRY')
         geometry=verify_geometry(writer.api,state,current,baseline['children'],children) if verify_geometry is not None else None
         if geometry is not None and (not isinstance(geometry,dict) or not str(geometry.get('status','')).endswith('PASS')):
             raise ValueError('ASSEMBLY_RESULTANT_GEOMETRY_NOT_VERIFIED')
         material_proof=verify_materials(writer.api,state,current) if verify_materials is not None else None
         if material_proof is not None and (not isinstance(material_proof,dict) or not str(material_proof.get('status','')).endswith('PASS')):
             raise ValueError('ASSEMBLY_TYPED_MATERIAL_RETENTION_NOT_VERIFIED')
+        other_proofs={}
+        for name,fn in [('gdlParameters',verify_gdl),('nativeOwnership',verify_ownership),('dependentChanges',verify_dependent_changes)]:
+            proof=fn(writer.api,state,current)
+            if not isinstance(proof,dict) or not str(proof.get('status','')).endswith('_PASS'):raise ValueError('ASSEMBLY_ACCEPTANCE_AREA_NOT_VERIFIED:'+name)
+            other_proofs[name]=proof
         return dict(status='NATIVE_ASSEMBLY_PARAMETERS_READBACK_PASS',rootGUID=root,targetGUID=target,
                     addedChildGUIDs=sorted(children-baseline['children']),removedChildGUIDs=sorted(baseline['children']-children),
-                    currentStateSHA256=digest(current),physicalGeometry=geometry or 'REQUIRES_SEPARATE_RESULTANT_BODY_ACCEPTANCE',materialAssignments=material_proof or 'REQUIRES_SEPARATE_TYPED_MATERIAL_ACCEPTANCE',association='NOT_VERIFIED',engineering='NOT_VERIFIED')
+                    currentStateSHA256=digest(current),physicalGeometry=geometry,materialAssignments=material_proof,acceptance=other_proofs,childGUIDs='EXACT_NATIVE_MEMBERSHIP_RETAINED',association='NOT_VERIFIED',engineering='NOT_VERIFIED')
     return router.execute(writer,scene_id,ticket,affected,retained_signatures,saved_sha256,authorization,'MODEL',after,before)
 
 
@@ -219,3 +231,63 @@ def readback_existing_gdl_edit(router,api,preview,phase='after'):
         if after.get('value')!=expected:raise ValueError('GDL_NATIVE_REQUESTED_VALUE_NOT_CONFIRMED:'+name)
     requested_names={p['name'] for p in requested['gdlParameters']};dependent=sorted(name for name in set(old)|set(new) if name not in requested_names and old.get(name)!=new.get(name))
     return dict(status='NATIVE_GDL_PARAMETER_'+phase.upper()+'_READBACK_PASS',elementId=requested['elementId'],requestedParameters=len(requested_names),scriptDependentChangedParameterNames=dependent,currentParametersSHA256=digest(rows),nativeModelWrites=0,automaticDependentWrites=False,engineering='NOT_VERIFIED')
+
+
+def recovery_journal_status(journal_path,target_guids,reconciliation_proofs):
+    """Read the existing ledger; never reopen/retry/reset an UNKNOWN scene.
+
+    Caller supplies independently verified proof bytes for exact scene IDs.
+    A matching proof hash explains an old outcome; it does not grant a write.
+    """
+    import sqlite3
+    from pathlib import Path
+    wanted={g.lower() for g in target_guids};blocked=[];reconciled=[]
+    with sqlite3.connect(Path(journal_path).resolve().as_uri()+'?mode=ro',uri=True) as db:
+        for sid,state,raw,output in db.execute('SELECT s.scene_id,s.state,s.result,t.output FROM scenes s JOIN steps t ON s.scene_id=t.scene_id WHERE s.state NOT IN (\'PASS\',\'COMPLETE\')'):
+            data=json.loads(output);intent=data.get('intent',data)
+            text=json.dumps(intent.get('parameters',{}),sort_keys=True).lower()
+            if not any(g in text for g in wanted):continue
+            result=json.loads(raw);proof=reconciliation_proofs.get(sid);receipt=result.get('independentReconciliation',{})
+            if proof is not None and hashlib.sha256(proof).hexdigest()==receipt.get('proofSHA256'):
+                fact=json.loads(proof)
+                if fact.get('sceneId',fact.get('originalSceneId'))==sid and fact.get('nativeWritesDuringReconciliation')==0 and 'RECONCILED' in fact.get('status','') and 'NO_EFFECT' in fact.get('status',''):
+                    reconciled.append(sid);continue
+            blocked.append(dict(sceneId=sid,state=state))
+    return dict(status='RECOVERY_TARGET_JOURNAL_'+('BLOCKED' if blocked else 'PASS'),unresolved=blocked,reconciledSceneIds=sorted(set(reconciled)),journalModified=False,executionPermission=False)
+
+
+def prepare_railing_material_recovery(router,*,project_identity,saved_sha256,generated_object_guid,root_guid,owner_guid,placed_parameters,material_attributes,expected_material_guid,baseline_signatures,affected_guids,journal_status,owner_state=None):
+    """Exact recovery intent plus lazy native reads, with no mutation ticket.
+
+    The nested Object setter is proven unsupported. The public subelement memo
+    route is documented but unresolved on AC29; do not invent a supported writer
+    from enum names, raw parameter presence, or a Disabled/locked discrepancy.
+    """
+    import re
+    if not isinstance(saved_sha256,str) or not re.fullmatch('[0-9a-f]{64}',saved_sha256):raise ValueError('RECOVERY_CURRENT_SAVED_SHA256_REQUIRED')
+    ids={g.lower() for g in affected_guids};all_ids={g.lower() for g in baseline_signatures};target=generated_object_guid.lower();root=root_guid.lower()
+    if not {target,root}<=ids or not ids<=all_ids:raise ValueError('RECOVERY_EXPLICIT_ROOT_AND_GENERATED_SCOPE_REQUIRED')
+    wanted=expected_material_guid.lower();attrs=[x for x in material_attributes['attributes'] if x['attributeId']['guid'].lower()==wanted]
+    if len(attrs)!=1 or not isinstance(attrs[0]['index'],int) or attrs[0]['index']<=0:raise ValueError('RECOVERY_ORIGINAL_BUILDING_MATERIAL_GUID_NOT_UNIQUE')
+    definitions={p['name']:p for p in placed_parameters}
+    if len(definitions)!=len(placed_parameters):raise ValueError('RECOVERY_AMBIGUOUS_PLACED_PARAMETERS')
+    changes=[]
+    for name in ['bmatRail','bmatFixing']:
+        p=definitions.get(name)
+        if not p or p['type']!='BuildingMaterial' or not isinstance(p.get('value'),int) or isinstance(p['value'],bool):raise ValueError('RECOVERY_TYPED_SCALAR_BUILDING_MATERIAL_REQUIRED')
+        current=[a for a in material_attributes['attributes'] if a['index']==p['value']]
+        if len(current)!=1:raise ValueError('RECOVERY_CURRENT_MATERIAL_IDENTITY_AMBIGUOUS')
+        changes.append(dict(name=name,currentIndex=p['value'],currentAttributeId=current[0]['attributeId'],expectedIndex=attrs[0]['index'],expectedAttributeId=attrs[0]['attributeId'],disabled=gdl_parameter_disabled(p),isLocked=p.get('isLocked'),directWriteAllowed=False))
+    reads=[router.prepare(command(router,'GetNativeAssemblyEditStateV1'),dict(elements=[dict(elementId=dict(guid=generated_object_guid))]))]
+    missing=['PUBLIC_OWNER_ADD_PARS_WRITE_NOT_QUALIFIED','BMATFIXING_CONTROLLING_RULE_NOT_VERIFIED']
+    if journal_status['status']!='RECOVERY_TARGET_JOURNAL_PASS':missing.append('UNRESOLVED_TARGET_OPERATION')
+    if owner_state is None:missing.append('CURRENT_OWNER_COMPONENT_MEMO_AND_ROOT_STAMPS_NOT_READ')
+    else:
+        if owner_state['elementId']['guid'].lower()!=target or owner_state.get('rootElementId',{}).get('guid','').lower()!=root:raise ValueError('RECOVERY_NATIVE_OBJECT_ROOT_MISMATCH')
+        owner=owner_state.get('ownerRecovery',{})
+        if owner.get('ownerComponentId',{}).get('guid','').lower()!=owner_guid.lower():raise ValueError('RECOVERY_NATIVE_OWNER_MISMATCH')
+        if not owner.get('ownerFoundInRootRailMemo') or not owner.get('rootRailMemoBounded'):missing.append('OWNER_NOT_QUALIFIED_IN_ROOT_RAIL_MEMO')
+        if owner.get('objectLibraryPartIndex'):
+            reads.append(router.prepare(command(router,'GetNativeLibraryPartDefaultsV1'),dict(libraryPartIndices=[owner['objectLibraryPartIndex']],includeParameterScripts=True)))
+    result=dict(schema='APA_RAILING_MATERIAL_RECOVERY_PREVIEW_V1',status='BLOCKED',reasons=missing,projectIdentity=copy.deepcopy(project_identity),savedSHA256=saved_sha256,generatedObjectId=dict(guid=generated_object_guid),rootElementId=dict(guid=root_guid),ownerComponentId=dict(guid=owner_guid),ownerStateSHA256=digest(owner_state) if owner_state is not None else None,requestedChanges=changes,placedParametersSHA256=digest(placed_parameters),baselineSignaturesSHA256=digest(baseline_signatures),affectedGUIDs=sorted(ids),retainedGUIDs=sorted(all_ids-ids),journalStatus=copy.deepcopy(journal_status),readTickets=reads,mutationTicket=None,nativeModelWrites=0,executionPermission=False,executor='Existing DynamicCommands / SceneWriter / SQLite only',geometryPolicy='NO_GEOMETRY_EDIT_NO_DELETE_CREATE_NO_UNDO',disabledPolicy='NEVER_WRITE_DISABLED_PARAMETER_WITHOUT_A_SUPPORTED_NATIVE_CONTRACT',propagation='NOT_INFERRED_FROM_PARAMETER_NAME_OR_SAME_VALUE')
+    result['previewHash']=digest(result);return result
