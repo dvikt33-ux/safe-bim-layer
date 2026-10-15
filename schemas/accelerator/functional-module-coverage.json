@@ -1,6 +1,6 @@
 {
   "schema": "APA_FUNCTIONAL_MODULE_COVERAGE_V1",
-  "basis": "PR104 exact base retained. Current package adds shared native parameter MODIFY and missing public MEP topology read; current placed GDL/material/IFC dataflow and three native sample visual checks. No offline tests or APX installation.",
+  "basis": "Exact PR107 native copy cycle: Shell accepted; Railing partial due typed material drift; CW scalar no-effect. New memo/MEP subsets build only. Prior immutable evidence retained.",
   "counters": {
     "nativeAndOfficialPrepared": 381,
     "localPrepared": 10,
@@ -211,8 +211,8 @@
         "ModifyNativeAssemblyV1"
       ],
       "executor": "Existing SceneWriter and SQLite",
-      "availability": "BUILD_PASS_NOT_INSTALLED",
-      "nativeMutation": "NOT_VERIFIED",
+      "availability": "PR107_EXTRUDED_VECTOR_LIVE_PASS_NEW_MEMO_BUILD_ONLY",
+      "nativeMutation": "SHELL_PASS_RAILING_PARTIAL_CW_NO_EFFECT",
       "supportedKinds": 9
     },
     "mep_ownership_topology": {
@@ -765,29 +765,27 @@
     }
   ],
   "currentPackage": {
-    "preparedTotal": 391,
-    "preparedByAPI": {
-      "tapir": 276,
-      "official-json": 73,
-      "addon-json": 32,
-      "local-python": 10
+    "nativeModelGUIDs": 409,
+    "nativeCalls": {
+      "assemblyModify": 3,
+      "materialRecovery": 1
     },
-    "newSDKContracts": 3,
-    "sdkNativeContractsInManifest": 18,
-    "newRuntimeRegistered": 0,
-    "newRuntimeCallable": 0,
-    "assemblyKindsSourceBuild": 9,
-    "placedGDLParametersRead": 49,
-    "nativeIFCPropertiesRead": 7,
-    "currentGraphNodes": 60,
-    "currentGraphEdges": 59,
-    "materialImpactNodes": 11,
-    "visualNativeSamples": 3,
-    "APXInstalled": false,
-    "nativeModelWrites": 0,
-    "offlineTests": "NOT_RUN_USER_INSTRUCTION",
-    "quantityEngine": "QUARANTINED_NOT_CALLED",
-    "IFCExport": "NOT_VERIFIED"
+    "fullyAcceptedNativeModify": [
+      "ExtrudedShellVector"
+    ],
+    "Railing": "GEOMETRY_PASS_MATERIAL_DRIFT_RECOVERY_APIERR_NOTSUPPORTED",
+    "CWScalarHeight": "LIVE_NO_EFFECT_REFUSED_IN_NEW_SOURCE",
+    "newMemoAndMEPExtensions": "BUILD_PASS_NOT_INSTALLED",
+    "newCommandNames": 0,
+    "nativeContracts": 18,
+    "MEPTopologyRoles": 7,
+    "graphNodes": 346,
+    "graphEdges": 472,
+    "materialImpactNodes": 4,
+    "originalAPXAndRegistrationRestored": true,
+    "restoredRuntime409Readback": "PASS",
+    "offlineTests": "NOT_RUN",
+    "quantityEngine": "QUARANTINED_NOT_CALLED"
   },
   "historicalCountersBeforeThisPackage": {
     "nativeAndOfficialPrepared": 378,

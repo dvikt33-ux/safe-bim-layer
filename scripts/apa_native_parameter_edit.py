@@ -18,6 +18,36 @@ def command(router,name):
     return name if name in router.catalog['commands'] else 'AddOn.TapirCommand.'+name
 
 
+def native_material_retention(before_model,after_model,element_ids):
+    """Compare per-element native typed assignments, including GDL materials.
+
+    An unchanged aggregate face-surface set missed real BuildingMaterial drift
+    in the live Railing edit. Require every captured assignment for every scoped
+    GUID; never infer preservation from appearance or a material name.
+    """
+    def snapshot(model):
+        result={}
+        for row in model['elements']:
+            key=row['guid'].lower()
+            if key in result:raise ValueError('AMBIGUOUS_NATIVE_MATERIAL_ELEMENT')
+            result[key]=row.get('materialBindings')
+        return result
+    before,after=snapshot(before_model),snapshot(after_model);ids={g.lower() for g in element_ids}
+    if not ids or not ids<=before.keys() or not ids<=after.keys():raise ValueError('MATERIAL_SCOPE_MISSING_NATIVE_ELEMENT')
+    if any(before[g] is None or after[g] is None for g in ids):raise ValueError('NATIVE_MATERIAL_ASSIGNMENTS_NOT_CAPTURED')
+    changed=sorted(g for g in ids if before[g]!=after[g])
+    return dict(status='NATIVE_TYPED_MATERIAL_RETENTION_'+('FAIL' if changed else 'PASS'),elements=len(ids),changedElementGUIDs=changed,
+                authority='PER_ELEMENT_NATIVE_MATERIAL_BINDINGS_INCLUDING_GDL_ASSIGNMENTS',faceSurfaceEqualityIsInsufficient=True,nativeModelWrites=0)
+
+
+def gdl_parameter_disabled(row):
+    flags=row.get('flags',[])
+    # API_ParFlg_Disabled is 0x40. Fixed/Hidden are different native flags.
+    if isinstance(flags,int) and not isinstance(flags,bool):return bool(flags & 0x40)
+    if isinstance(flags,list):return 'Disabled' in flags
+    raise ValueError('GDL_PARAMETER_FLAGS_NOT_TYPED')
+
+
 def prepare_assembly_edit(router,state,changes):
     state,changes=copy.deepcopy(state),copy.deepcopy(changes)
     applicable=set(state['values'])|set(state['attributes'])|set(state.get('memoEdits',[]))
@@ -32,7 +62,7 @@ def prepare_assembly_edit(router,state,changes):
                 childGUIDPolicy='ROOT_TARGET_RETAINED_COMPONENTS_RECONCILED_INDEPENDENTLY',engineering='NOT_VERIFIED')
 
 
-def execute_assembly_edit(router,writer,preview,*,scene_id,affected,retained_signatures,saved_sha256,authorization,verify_geometry=None,verify_geometry_before=None):
+def execute_assembly_edit(router,writer,preview,*,scene_id,affected,retained_signatures,saved_sha256,authorization,verify_geometry=None,verify_geometry_before=None,verify_materials=None):
     """One intent. Fresh state before, independent state/membership after.
 
     Caller authorizes the isolated copy and complete affected root subtree.
@@ -106,9 +136,12 @@ def execute_assembly_edit(router,writer,preview,*,scene_id,affected,retained_sig
         geometry=verify_geometry(writer.api,state,current,baseline['children'],children) if verify_geometry is not None else None
         if geometry is not None and (not isinstance(geometry,dict) or not str(geometry.get('status','')).endswith('PASS')):
             raise ValueError('ASSEMBLY_RESULTANT_GEOMETRY_NOT_VERIFIED')
+        material_proof=verify_materials(writer.api,state,current) if verify_materials is not None else None
+        if material_proof is not None and (not isinstance(material_proof,dict) or not str(material_proof.get('status','')).endswith('PASS')):
+            raise ValueError('ASSEMBLY_TYPED_MATERIAL_RETENTION_NOT_VERIFIED')
         return dict(status='NATIVE_ASSEMBLY_PARAMETERS_READBACK_PASS',rootGUID=root,targetGUID=target,
                     addedChildGUIDs=sorted(children-baseline['children']),removedChildGUIDs=sorted(baseline['children']-children),
-                    currentStateSHA256=digest(current),physicalGeometry=geometry or 'REQUIRES_SEPARATE_RESULTANT_BODY_ACCEPTANCE',association='NOT_VERIFIED',engineering='NOT_VERIFIED')
+                    currentStateSHA256=digest(current),physicalGeometry=geometry or 'REQUIRES_SEPARATE_RESULTANT_BODY_ACCEPTANCE',materialAssignments=material_proof or 'REQUIRES_SEPARATE_TYPED_MATERIAL_ACCEPTANCE',association='NOT_VERIFIED',engineering='NOT_VERIFIED')
     return router.execute(writer,scene_id,ticket,affected,retained_signatures,saved_sha256,authorization,'MODEL',after,before)
 
 
@@ -126,7 +159,7 @@ def prepare_existing_gdl_edit(router,element_guid,parameter_rows,changes):
     for name,value in changes.items():
         row=rows.get(name)
         if not row or 'value' not in row or row['type'] in {'Dictionary','UNKNOWN','Title','Separator'}:raise ValueError('GDL_PARAMETER_NOT_SUPPORTED_OR_NO_VALUE')
-        if row.get('isLocked') is True or 'Disabled' in row.get('flags',[]):raise ValueError('GDL_PARAMETER_LOCKED_OR_DISABLED')
+        if row.get('isLocked') is True or gdl_parameter_disabled(row):raise ValueError('GDL_PARAMETER_LOCKED_OR_DISABLED')
         old=row['value'];array=isinstance(old,list)
         if array!=isinstance(value,list):raise ValueError('GDL_SCALAR_ARRAY_RANK_CHANGE_NOT_SUPPORTED')
         outgoing=copy.deepcopy(value)
@@ -180,7 +213,7 @@ def readback_existing_gdl_edit(router,api,preview,phase='after'):
     for change in requested['gdlParameters']:
         name=change['name'];before,after=old.get(name),new.get(name)
         if not before or not after or any(before.get(k)!=after.get(k) for k in ['index','type','dimension1','dimension2']):raise ValueError('GDL_NATIVE_TYPE_OR_DIMENSION_CHANGED')
-        if phase=='before' and (after.get('isLocked') is True or 'Disabled' in after.get('flags',[])):raise ValueError('GDL_CURRENT_PARAMETER_LOCKED')
+        if phase=='before' and (after.get('isLocked') is True or gdl_parameter_disabled(after)):raise ValueError('GDL_CURRENT_PARAMETER_LOCKED')
         expected=before['value'] if phase=='before' else change['value']
         if isinstance(expected,list) and expected and all(isinstance(v,list) for v in expected):expected=[v for row in expected for v in row]
         if after.get('value')!=expected:raise ValueError('GDL_NATIVE_REQUESTED_VALUE_NOT_CONFIRMED:'+name)
