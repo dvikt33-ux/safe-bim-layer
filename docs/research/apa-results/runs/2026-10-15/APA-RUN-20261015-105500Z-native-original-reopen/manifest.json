@@ -1,0 +1,118 @@
+{
+  "action_id": "APA-P70.A11",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-RESTORED-COPY-NATIVE-READBACK",
+      "evidence_ids": [
+        "EV-0"
+      ],
+      "statement": "Fresh original-runtime readback matches409GUID/full native geometry/material/home-story/relationship signatures and258original serialized detail rows. Saved bytes unchanged during read; zero native writes. Separate Opening post-close and visual checks remain unverified.",
+      "status": "LIVE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-RESTORED-COPY-UNCHANGED-CODE",
+      "evidence_ids": [
+        "EV-0",
+        "EV-2"
+      ],
+      "statement": "Product code/PR97 head unchanged; existing exact-head Windows CI reused without replay. Candidate-only commands absent; restored APX file SHA matches original.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-0",
+      "kind": "TEST_RESULT",
+      "sha256": "c1b513e30426f84a7e76b1fed3067eaa895029395da62dabc69ffb67dbf9c4eb",
+      "source_revision": "8f134001ca0e3250eda587db61ac01dbd6357326",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-105500Z-native-original-reopen/native-restored-readback.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-1",
+      "kind": "TEST_RESULT",
+      "sha256": "d9dacd781983474a9de23db31e3084bf6e4d18f19813ab1152c744228a4c9ad7",
+      "source_revision": "8f134001ca0e3250eda587db61ac01dbd6357326",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-105500Z-native-original-reopen/gap-register.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-2",
+      "kind": "TEST_RESULT",
+      "sha256": "e8633017e62aa7b4089bb40076c9beac0ef6c51d41c988478688fef450d19de0",
+      "source_revision": "8f134001ca0e3250eda587db61ac01dbd6357326",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-105500Z-native-original-reopen/windows-ci.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-3",
+      "kind": "TEST_RESULT",
+      "sha256": "130d37fbd87736f0cc6d8d808dc4bf523e58d2a66ff9839b3e4e3af32d1f2998",
+      "source_revision": "8f134001ca0e3250eda587db61ac01dbd6357326",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-105500Z-native-original-reopen/core-knowledge-query.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "work-native-reopen-20261015",
+  "executor_run_id": "APA-CLAIM-NATIVE-REOPEN-20261015T105148Z",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-15T10:55:00Z",
+  "idempotency_key": "sha256:dd558e42c96ea3c6eb00a4ec520d1c27d7ac893cbc0ee2a2db73d0f3d23003d1",
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "next_substep": "APA-P70.A11.S03",
+  "phase": "LIVE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261015-105500Z-native-original-reopen",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "Read-only user-reopened authorized409GUID copy, exact identity before reads",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "sdk": "Existing native model dump and GUID/parameter reads only",
+    "source_branch": "feature/apa-native-positive-modules-20261015",
+    "tapir": "Original APX restored; no switch or new native write"
+  },
+  "source_revisions": [
+    {
+      "revision": "8f134001ca0e3250eda587db61ac01dbd6357326",
+      "source_sha": "8f134001ca0e3250eda587db61ac01dbd6357326",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/97"
+    }
+  ],
+  "started_at": "2026-10-15T10:55:00Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A11.S03"
+}
