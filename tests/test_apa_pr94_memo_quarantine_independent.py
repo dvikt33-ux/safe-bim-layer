@@ -301,7 +301,7 @@ def quantity_quarantine_case(seed):
         before_catalog=r.fingerprint
         events=len(r.local_events)
         self.assertFalse(ticket["nativeWritePermission"])
-        self.assertIn("CRASH",r.catalog["commands"][command]["executionBlocker"].upper())
+        self.assertIn("ACCESS_VIOLATION",r.catalog["commands"][command]["executionBlocker"].upper())
         class Bomb:
             def __getattribute__(self,name):
                 raise AssertionError("UNSAFE_ARCHICAD_TRANSPORT_TOUCHED")
