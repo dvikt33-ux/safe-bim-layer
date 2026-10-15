@@ -57,5 +57,6 @@ Generated projection from immutable V2 runs. Legacy reports remain in ARTIFACT_R
 | [APA-RUN-20261014-193327Z-mass-capability-integration](../runs/2026-10-14/APA-RUN-20261014-193327Z-mass-capability-integration/REPORT.md) | APA-P70.A11.S03 | LIVE | EVIDENCE_READY |
 | [APA-RUN-20261014-215514Z-executable-bim-workflows](../runs/2026-10-14/APA-RUN-20261014-215514Z-executable-bim-workflows/REPORT.md) | APA-P70.A11.S03 | LIVE | EVIDENCE_READY |
 | [APA-RUN-20261014-224516Z-sdk-functional-module-expansion](../runs/2026-10-14/APA-RUN-20261014-224516Z-sdk-functional-module-expansion/REPORT.md) | APA-P70.A11.S03 | BUILD | EVIDENCE_READY |
+| [APA-RUN-20261015-011839Z-sdk-runtime-connected-memo](../runs/2026-10-15/APA-RUN-20261015-011839Z-sdk-runtime-connected-memo/REPORT.md) | APA-P70.A11.S03 | LIVE | EVIDENCE_READY |
 
 Publication receipts are in ../receipts/. Evidence status is not publication status.
