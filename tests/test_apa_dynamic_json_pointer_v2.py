@@ -81,3 +81,14 @@ def test_invalid_result_pointer_fails_before_transport(case):
     else: pointer = valid + "/out-of-range"
     with pytest.raises((ValueError, KeyError, IndexError, TypeError)):
         router.prepare_workflow(plan(pointer))
+
+
+@pytest.mark.parametrize("case", range(16))
+def test_runtime_pointer_cannot_bypass_schema_pointer_validation(case):
+    data = {"a/b": {"~": [case]}}
+    assert DynamicCommands._result_at(data, "/a~1b/~0/0") == case
+    invalid = ["/a~1b/~0/00", "/a~1b/~0/-1",
+               "/a~1b/~0/+0", "/a~1b/~0/~2"]
+    for pointer in invalid:
+        with pytest.raises((ValueError, KeyError, IndexError, TypeError)):
+            DynamicCommands._result_at(data, pointer)
