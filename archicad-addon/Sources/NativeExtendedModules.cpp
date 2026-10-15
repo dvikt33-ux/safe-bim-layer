@@ -53,6 +53,6 @@ GS::ObjectState GetNativeElementQuantitiesV1Command::Execute(const GS::ObjectSta
  GS::Array<GS::ObjectState> inputs;p.Get("elements",inputs);double minimum=0;p.Get("minOpeningSize",minimum);
  GS::ObjectState out("nativeModelWrites",0,"authority","QUANTITY_ENGINE_QUARANTINED_AFTER_RUNTIME_CRASH","minOpeningSize",minimum);
  const auto& rows=out.AddList<GS::ObjectState>("elements");
- for(GSIndex i=0;i<inputs.GetSize();++i)rows(CreateErrorResponse(APIERR_REFUSEDCMD,"QUARANTINED_AC29_QUANTITY_CRASH_NO_ENGINE_CALL"));
+ for(GSSize i=0;i<inputs.GetSize();++i)rows(CreateErrorResponse(APIERR_REFUSEDCMD,"QUARANTINED_AC29_QUANTITY_CRASH_NO_ENGINE_CALL"));
  return out;
 }
