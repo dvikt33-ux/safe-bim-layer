@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'ci/apa-offline-mass-parallel-*'
+      - 'ci/apa-offline-parallel-contract-security-*'
     paths:
       - '.github/workflows/apa-offline-mass-parallel.yml'
       - 'scripts/apa_parallel_offline.py'

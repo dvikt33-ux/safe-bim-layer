@@ -303,13 +303,26 @@ class DynamicCommands:
         if not self.registration[command]:raise ValueError('COMMAND_NOT_REGISTERED_IN_CURRENT_RUNTIME')
         return dict(status='RUNTIME_AVAILABLE',namespace=namespace,command=name)
 
+    @staticmethod
+    def _pointer_tokens(pointer):
+        """Validate RFC 6901 path syntax once before schema planning or runtime resolution."""
+        if not isinstance(pointer,str) or (pointer and not pointer.startswith('/')):
+            raise ValueError('RESULT_JSON_POINTER_MUST_BE_ABSOLUTE')
+        if not pointer:
+            return []
+        tokens=[]
+        for raw in pointer[1:].split('/'):
+            if re.search(r'~(?![01])',raw):
+                raise ValueError('RESULT_JSON_POINTER_ESCAPE_INVALID')
+            tokens.append(raw.replace('~1','/').replace('~0','~'))
+        return tokens
+
     def _schema_at(self,schema,pointer):
-        for token in pointer.strip('/').split('/') if pointer else []:
+        for token in self._pointer_tokens(pointer):
             while '$ref' in schema:
                 ref=schema['$ref']
                 if not ref.startswith('#/'):raise ValueError('EXTERNAL_SCHEMA_REFERENCE_NOT_PINNED')
                 schema=self.catalog['common_schemas'][ref[2:]]
-            token=token.replace('~1','/').replace('~0','~')
             alternatives=schema.get('anyOf',schema.get('oneOf'))
             if alternatives:
                 candidates=[]
@@ -320,7 +333,7 @@ class DynamicCommands:
                 schema=candidates[0] if len(candidates)==1 else dict(anyOf=candidates)
                 continue
             if schema.get('type')=='array':
-                if not token.isdigit():raise ValueError('RESULT_POINTER_ARRAY_INDEX_REQUIRED')
+                if not re.fullmatch(r'0|[1-9][0-9]*',token):raise ValueError('RESULT_POINTER_CANONICAL_ARRAY_INDEX_REQUIRED')
                 schema=schema['items']
             else:schema=schema.get('properties',{})[token]
         return schema
@@ -344,10 +357,13 @@ class DynamicCommands:
 
     @staticmethod
     def _result_at(value,pointer):
-        if pointer and not pointer.startswith('/'):raise ValueError('RESULT_JSON_POINTER_MUST_BE_ABSOLUTE')
-        for token in pointer.strip('/').split('/') if pointer else []:
-            token=token.replace('~1','/').replace('~0','~')
-            value=value[int(token)] if isinstance(value,list) else value[token]
+        for token in DynamicCommands._pointer_tokens(pointer):
+            if isinstance(value,list):
+                if not re.fullmatch(r'0|[1-9][0-9]*',token):
+                    raise ValueError('RESULT_POINTER_CANONICAL_ARRAY_INDEX_REQUIRED')
+                value=value[int(token)]
+            else:
+                value=value[token]
         return copy.deepcopy(value)
 
     def prepare_workflow(self,graph):
