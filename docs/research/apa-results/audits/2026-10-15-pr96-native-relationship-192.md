@@ -49,5 +49,20 @@ JSON run artifacts preserve individual failing test IDs and traces.
 
 ## Status
 
-Code, workflow and this report published. Final CI and independent
-GitHub readback **PENDING**. Do not claim PASS until the aggregate job runs.
+### Final independently verified result: **192 / 192 PASS**
+
+- Exact tested QA source/workflow SHA: `4facf8ce7713013bbbd1d0128e453c53fb4eda9b`.
+- Original source being audited: PR96 SHA `76ab55c1c34fa327c2c71b7615e7cde5b090f69c`.
+- CI run: https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38705275566
+- 10/10 Windows test shards **SUCCESS**, independent reconciliation **SUCCESS**, **11/11 jobs**.
+- Sorted unique test ID SHA256: `9629a8a0d8fceadc654ae00c1813804ca9fac11b03e8d903c9c867ddb761901e`.
+- 192 discovered/192 run, **0 FAIL, ERROR, SKIP, XFAIL, unexpected success, duplicate or missing ID**.
+- Shard counts: `20 + 14 + 21 + 25 + 18 + 13 + 23 + 22 + 22 + 14 = 192`.
+- Aggregator log: `APA_PR96_DEPENDENCY_EXACT_192 True`,
+  `APA_PR96_DEPENDENCY_SHARDS success`.
+- The aggregate and each shard publish inspectable JSON Actions artifacts.
+
+These facts apply strictly to the tested QA code SHA. This documentation
+update is report-only and cannot be interpreted as a second runtime test.
+The eight and two older router defects are not automatically reclassified;
+only actual PR94 and PR96 contracts touched by these tests are in scope.
