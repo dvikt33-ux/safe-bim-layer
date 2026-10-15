@@ -50,8 +50,11 @@ differences are retained as omissions, without inventing ownership edges.
 
 All 409 GUIDs and saved bytes stayed unchanged during current native reads.
 There were no Create/Modify/Delete/Save calls, APX switches or quantity-engine
-calls. The accepted three native assemblies were not recreated. Offline tests
-and offline CI are intentionally not run under the user's current instruction.
+calls. The accepted three native assemblies were not recreated. Product offline tests and product CI were not run. The canonical publisher
+automatically ran its infrastructure tests after publication; this unintended
+execution contradicts the user's instruction and is disclosed in
+`docs/evidence/APA_NATIVE_LINKED_CI_ERRATUM.json`. The publisher was cancelled;
+subsequent publication commits skip CI.
 Build results and deployment permission are recorded separately; BUILD_PASS
 must never be presented as LIVE_PASS for the enhanced SDK contracts.
 

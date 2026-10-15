@@ -42,5 +42,7 @@
   "enhancedSDKRuntime": "NOT_VERIFIED_NEW_BINARY_REQUIRES_PERMISSION",
   "offlineCI": "NOT_RUN_USER_INSTRUCTION",
   "engineering": "NOT_VERIFIED",
-  "IFCExportCompatibility": "NOT_VERIFIED"
+  "IFCExportCompatibility": "NOT_VERIFIED",
+  "offlineTestsRunFieldScope": "PRODUCT_AND_MANUAL_ONLY; AUTOMATIC_PUBLISHER_TESTS_DID_RUN_SEE_ERRATUM",
+  "automaticPublisherOfflineTestsRan": true
 }
