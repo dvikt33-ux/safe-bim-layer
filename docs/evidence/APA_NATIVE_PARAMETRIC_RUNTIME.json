@@ -1,0 +1,122 @@
+{
+  "schema": "APA_NATIVE_PARAMETRIC_RUNTIME_V1",
+  "status": "LIVE_READ_AND_VISUAL_PASS_NEW_MODIFY_BUILD_ONLY",
+  "connectedCurrent": {
+    "schema": "APA_CURRENT_NATIVE_PARAMETER_IFC_FLOW_V1",
+    "status": "CURRENT_NATIVE_PARAMETER_ATTRIBUTE_IFC_FLOW_PASS",
+    "placedParameterRows": 49,
+    "nativeIFCIDs": 1,
+    "nativeIFCPropertyRows": 7,
+    "nodes": 60,
+    "edges": 59,
+    "relationshipKinds": {
+      "NATIVE_IFC_IDENTITY_NOT_EXPORT_ACCEPTANCE": 1,
+      "NATIVE_IFC_PROPERTY_ACCESSOR_REFERENCE": 7,
+      "NATIVE_PLACED_PARAMETER_DEPENDENCY": 49,
+      "NATIVE_TYPED_GDL_ATTRIBUTE_PARAMETER": 2
+    },
+    "affectedByMaterialChange": 11,
+    "omitted": {
+      "GDL_LIBRARY_PART_IDENTITY_NOT_CAPTURED_NO_NAME_MATCH": 1
+    },
+    "mepCurrentDistributionSystems": 0,
+    "mepPositiveRuntime": "NOT_VERIFIED_NO_CURRENT_SAMPLE",
+    "newSDKOriginalRuntimeAvailability": {
+      "GetNativeAssemblyEditStateV1": false,
+      "ModifyNativeAssemblyV1": false,
+      "GetNativeMEPTopologyV1": false
+    },
+    "nativeModelWrites": 0,
+    "savedBytesUnchanged": true,
+    "offlineTestsRun": false,
+    "quantityEngineCalled": false,
+    "automaticDependentWrites": false,
+    "IFCExport": "NOT_VERIFIED",
+    "sourceSHA256": "95c7e82b0fb31c817864d3ee12116e0aa96fa8ec0d3469851d89d6dd2858709b"
+  },
+  "placedGDL": {
+    "schema": "APA_PLACED_GDL_PREPARATION_V1",
+    "status": "LIVE_PLACED_PARAMETER_READ_PASS_TYPED_PREVIEW_ONLY",
+    "placedElements": 1,
+    "parameterRows": 49,
+    "parameterTypes": {
+      "Length": 12,
+      "Boolean": 4,
+      "Title": 4,
+      "PenColor": 5,
+      "FillPattern": 1,
+      "LineType": 1,
+      "BuildingMaterial": 1,
+      "Material": 1,
+      "Angle": 1,
+      "Integer": 3,
+      "RealNumber": 2,
+      "String": 14
+    },
+    "arrayParameters": 1,
+    "locked": 0,
+    "preparedCommand": "SetGDLParametersOfElements",
+    "previewUsesCurrentValue": true,
+    "arrayDimensionBindings": [
+      {
+        "name": "AC_ClampVector",
+        "dimension1": 2,
+        "dimension2": 2,
+        "serialization": "ROW_MAJOR_MATRIX",
+        "rankPreserved": true
+      }
+    ],
+    "modificationExecuted": false,
+    "editabilityRuntime": "NOT_VERIFIED",
+    "nativeModelWrites": 0,
+    "savedBytesUnchanged": true,
+    "offlineTestsRun": false
+  },
+  "visual": {
+    "status": "ACTUAL_ARCHICAD_3D_SELECTION_GUID_AND_TARGETED_GEOMETRY_MATCH_PASS",
+    "samples": [
+      {
+        "sample": "shell",
+        "screenshot": "native-parametric-visual/shell.png",
+        "screenshotSHA256": "ab148b097716f543049ccd0421a946acd74015f1aca1ecc5d036586018ea3a34",
+        "nativeGUIDSHA256": "ad4c0f8d344c66949fe23e351ca62219f52fad0a62c3d0ba63bfa59d7482d860",
+        "geometrySignature": "4f8396b953e4853890414989491561c3d9f8c674532d4ff92c087248cca2c09f",
+        "selectedGUIDVerified": true
+      },
+      {
+        "sample": "railing",
+        "screenshot": "native-parametric-visual/railing.png",
+        "screenshotSHA256": "114ede2363d91f7e2230226051d1728e4a62f7fafd9ef65d5710ad85ef1b662b",
+        "nativeGUIDSHA256": "6bd74280cc80c75db81e3082b83d294b21ef88d16588c7b5f3557be22678d396",
+        "geometrySignature": "be2a7607e7d1715807926d82052adeded9d27f1bf9a1655dd16ac90fbfe6331c",
+        "selectedGUIDVerified": true
+      },
+      {
+        "sample": "curtain-wall",
+        "screenshot": "native-parametric-visual/curtain-wall.png",
+        "screenshotSHA256": "5aa39b09d72804c14903010571bb1bfc456c3933f07d298e274b0531978e3371",
+        "nativeGUIDSHA256": "ab2b64f06c0fab1d03aded8f52fbbe11176ccb5271ebda2f6b4ece4a0d8c19fd",
+        "geometrySignature": "ab1bcdc5453350080c89685981ffd9ba30fba5b3da6e8b4fc9a965e43b931c58",
+        "selectedGUIDVerified": true
+      }
+    ],
+    "source": "Native Archicad screenshots; no generated image",
+    "geometryAcceptance": "Three accepted native signatures match; no complete409reinventory this package"
+  },
+  "retention": {
+    "savedSHA256": "ec79ad15f853617b16c19991f8a07d97e169c70d36f779616530b9ea1b4b1abd",
+    "savedBytesUnchanged": true,
+    "prior409Acceptance": "RETAINED_NOT_REPEATED",
+    "sampleSignatures": "THREE_NATIVE_SAMPLE_SIGNATURES_UNCHANGED_AFTER_VISUAL_READ_PASS"
+  },
+  "opening107": "NOT_VERIFIED_OPEN_CANCELLED_AT_CURRENT_PROJECT_SAVE_PROMPT_TO_PRESERVE_UNSAVED_STATE",
+  "enhancedPR104Fields": "BUILD_PASS_EXACT2ed42a_PERMISSION_STILL_PENDING_NOT_REASKED",
+  "nativeModify": "NOT_VERIFIED_NO_INSTALL_NO_SEPARATELY_AUTHORIZED_COPY_WRITE",
+  "mepTopology": "BUILD_PASS_NO_CURRENT_MEP_SAMPLE",
+  "nativeModelWrites": 0,
+  "APXChanged": false,
+  "registrationChanged": false,
+  "offlineTestsRun": false,
+  "quantityEngineCalled": false,
+  "IFCExport": "NOT_VERIFIED"
+}

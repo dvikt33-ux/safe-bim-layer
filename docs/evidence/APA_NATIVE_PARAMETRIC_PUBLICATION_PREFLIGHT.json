@@ -1,0 +1,163 @@
+{
+  "status": "FRESH_ALL_WORKFLOW_HASHES_MATCH_INSPECTED_PUSH_PULL_REQUEST_MANUAL_ONLY",
+  "refs": {
+    "HEAD": "d1c71d82d2e1339903d1941bcb24c82b8cc69b18",
+    "origin/research/apa-verified-results-hub-20261010": "39959ae8df9e46ef376679cdd854c2db78385dc7",
+    "origin/main": "d5695f435a5841d39f0fe69a6424cccc1c8d0a4c"
+  },
+  "workflows": [
+    {
+      "ref": "HEAD",
+      "path": ".github/workflows/archicad-contracts.yml",
+      "sha256": "f1651ded443e5ed44ce6db77b267ebfa495e53bf09d59fd4ad45c31eca75172d",
+      "events": [
+        "push",
+        "pull_request",
+        "workflow_dispatch"
+      ],
+      "testStepsPresent": true
+    },
+    {
+      "ref": "HEAD",
+      "path": ".github/workflows/archicad-template-validate.yml",
+      "sha256": "beda1312efa9ca74eb04268558ec953cde053b194bcf6196f5ece206dcd55caf",
+      "events": [
+        "push",
+        "pull_request"
+      ],
+      "testStepsPresent": false
+    },
+    {
+      "ref": "HEAD",
+      "path": ".github/workflows/build-details-v210-favorit-s7.yml",
+      "sha256": "4a32d6ce5360696a108c247ee3a4032d94fb45796b3d87457cb76fe4f11ab734",
+      "events": [
+        "push"
+      ],
+      "testStepsPresent": false
+    },
+    {
+      "ref": "HEAD",
+      "path": ".github/workflows/build-details-v211-favorit-s8-s9.yml",
+      "sha256": "8cd3ff3bbb1b87ec642f105ec320aceed52a6ba547f66587c11001b240e7083e",
+      "events": [
+        "push"
+      ],
+      "testStepsPresent": false
+    },
+    {
+      "ref": "HEAD",
+      "path": ".github/workflows/build-details-v212-kaiman-exact47.yml",
+      "sha256": "620f633d8972100096928efad37658fb59a0bc23fb17442b75154061c470cd00",
+      "events": [
+        "push"
+      ],
+      "testStepsPresent": false
+    },
+    {
+      "ref": "HEAD",
+      "path": ".github/workflows/build-details-v24-porotherm.yml",
+      "sha256": "153e1e2adf580575db0994c2afe221214db9740c749ee59d3894903838067cb5",
+      "events": [
+        "push"
+      ],
+      "testStepsPresent": false
+    },
+    {
+      "ref": "HEAD",
+      "path": ".github/workflows/build-details-v25-braas.yml",
+      "sha256": "c391317c2ed563be55581a7efc0f6cd057c26b969d6a659225359d97818a88e3",
+      "events": [
+        "push"
+      ],
+      "testStepsPresent": false
+    },
+    {
+      "ref": "HEAD",
+      "path": ".github/workflows/build-details-v26-favorit-s3.yml",
+      "sha256": "edf425d96e9ee0d13bd875a508616bace1743609bcb25033f963bbb3ba275169",
+      "events": [
+        "push"
+      ],
+      "testStepsPresent": false
+    },
+    {
+      "ref": "HEAD",
+      "path": ".github/workflows/build-details-v27-favorit-s4.yml",
+      "sha256": "e006f807b443e0dee058bd6ced7be2cb66a0b18331d6b4a75cca03bf64ad9793",
+      "events": [
+        "push"
+      ],
+      "testStepsPresent": false
+    },
+    {
+      "ref": "HEAD",
+      "path": ".github/workflows/build-details-v28-favorit-s5.yml",
+      "sha256": "2819439ffeca702b2bb088043abd2e2002718659c5dbb9a182a4f81cceb0b7ec",
+      "events": [
+        "push"
+      ],
+      "testStepsPresent": false
+    },
+    {
+      "ref": "HEAD",
+      "path": ".github/workflows/build-details-v29-favorit-s6.yml",
+      "sha256": "f6b239f491afe04a1a97a7a242717dacf34997902542b0d91292ec2e76457a90",
+      "events": [
+        "push"
+      ],
+      "testStepsPresent": false
+    },
+    {
+      "ref": "HEAD",
+      "path": ".github/workflows/index-detail-queue.yml",
+      "sha256": "919d8463353cd5bd8228e5154f2c2aaf034023b8427f205aaaa25d73ea2e6e9f",
+      "events": [
+        "push"
+      ],
+      "testStepsPresent": false
+    },
+    {
+      "ref": "origin/research/apa-verified-results-hub-20261010",
+      "path": ".github/workflows/apa-knowledge-impact-poc-ci.yml",
+      "sha256": "f58e313649ca0f44798d0340388efa9af47b7f4a08afc865a602f63623dff083",
+      "events": [
+        "pull_request",
+        "workflow_dispatch"
+      ],
+      "testStepsPresent": true
+    },
+    {
+      "ref": "origin/research/apa-verified-results-hub-20261010",
+      "path": ".github/workflows/apa-publisher-stage-retry-offline.yml",
+      "sha256": "50d3a44093bb23e701d179b8257201d086325391a445f04955bb08e2c616dee2",
+      "events": [
+        "pull_request",
+        "workflow_dispatch"
+      ],
+      "testStepsPresent": true
+    },
+    {
+      "ref": "origin/research/apa-verified-results-hub-20261010",
+      "path": ".github/workflows/apa-publisher-watchdog.yml",
+      "sha256": "96d75c1a4aa3e488843ce2ca1a7f8b539c2bc6274414da138119bd5d287b0c00",
+      "events": [
+        "pull_request"
+      ],
+      "testStepsPresent": true
+    },
+    {
+      "ref": "origin/research/apa-verified-results-hub-20261010",
+      "path": ".github/workflows/apa-research-publisher.yml",
+      "sha256": "8c52d8b01f4c36451c4a7b31d622e915b18021c6e2b518bc7707b0edf6624ebe",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "testStepsPresent": true
+    }
+  ],
+  "mode": "All commits [skip ci]; direct publisher functions; no workflow dispatch or normal publisher automation",
+  "documentation": "https://docs.github.com/en/actions/how-tos/manage-workflow-runs/skip-workflow-runs",
+  "testsRun": false
+}
