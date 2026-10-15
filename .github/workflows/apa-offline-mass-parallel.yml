@@ -28,6 +28,11 @@ jobs:
         with:
           python-version: '3.11'
           cache: pip
+          cache-dependency-path: |
+            scripts/requirements-connected.txt
+            scripts/requirements-knowledge.txt
+            scripts/requirements-geometry.txt
+            scripts/requirements-materials.txt
       - name: Install reproducible test dependencies
         shell: pwsh
         run: |
