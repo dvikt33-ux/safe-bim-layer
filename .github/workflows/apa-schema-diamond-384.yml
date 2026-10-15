@@ -1,0 +1,74 @@
+name: APA schema limits union diamond safety - 384 fresh QA
+
+on:
+  pull_request:
+    paths:
+      - 'tests/test_archicad_schema_limits_diamond_safety_qa.py'
+      - 'scripts/apa_schema_diamond_qa_shard.py'
+      - '.github/workflows/apa-schema-diamond-384.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  schema-diamond-shards:
+    name: Independent schema-diamond QA shard ${{ matrix.shard }} of 10
+    runs-on: windows-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    env:
+      APA_OFFLINE_ONLY: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+      PYTHONHASHSEED: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install QA dependencies (same as PR90)
+        run: |
+          python -m pip install 'jsonschema>=4,<5'
+          python -m pip install -r scripts/requirements-connected.txt
+          python -m pip install -r scripts/requirements-knowledge.txt
+      - name: Execute this suite only - no earlier 735 or 378 tests
+        run: python scripts/apa_schema_diamond_qa_shard.py --shard ${{ matrix.shard }} --shards 10 --report reports/shard-${{ matrix.shard }}.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: apa-schema-diamond-qa-shard-${{ matrix.shard }}
+          path: reports/shard-${{ matrix.shard }}.json
+          if-no-files-found: warn
+
+  schema-diamond-accounting:
+    name: Cross-shard accounting of exactly 384 unique cases
+    needs: schema-diamond-shards
+    if: always()
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: apa-schema-diamond-qa-shard-*
+          path: reports
+          merge-multiple: true
+      - name: Verify all 10 shards, no gaps and no duplicate IDs
+        run: python scripts/apa_novel_aggregate.py --reports-dir reports --shards 10
+      - name: Demand exact 384 completed cases
+        run: python -c "import json,sys; r=json.load(open('reports/full-offline-aggregate.json',encoding='utf8')); ok=r['discoveredTests']==384 and r['metrics']['testsRun']==384 and all(r['metrics'][k]==0 for k in ('failures','errors','skipped','expectedFailures','unexpectedSuccesses')) and not r['issues']; print('APA_SCHEMA_DIAMOND_EXACT_384',ok,r['metrics']); sys.exit(0 if ok else 1)"
+      - name: Require successful shards, not only generated artifacts
+        env:
+          SHARDS_RESULT: ${{ needs.schema-diamond-shards.result }}
+        run: python -c "import os,sys; s=os.getenv('SHARDS_RESULT');print('APA_SCHEMA_DIAMOND_SHARDS',s);sys.exit(0 if s=='success' else 1)"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: apa-schema-diamond-qa-full-report
+          path: reports/full-offline-aggregate.json
+          if-no-files-found: warn
