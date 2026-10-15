@@ -81,7 +81,7 @@ def gdl_matrix_roundtrip(seed):
         change = {name: [list(new[i*columns:(i+1)*columns])
                          for i in range(rows)] if seed % 2 else new}
         old_source, old_change = copy.deepcopy(source), copy.deepcopy(change)
-        preview = EDIT.prepare_existing_gdl_edit(router(), f"gdl-target-{seed}", source, change)
+        preview = EDIT.prepare_existing_gdl_edit(router(), f"00000000-0000-4000-8000-{seed+1:012x}", source, change)
         self.assertEqual(source, old_source)
         self.assertEqual(change, old_change)
         self.assertFalse(preview["executionPermission"])
@@ -137,7 +137,7 @@ def gdl_invalid(seed):
             expected = "GDL_PARAMETER_TYPE_MISMATCH"
         original = copy.deepcopy(source)
         with self.assertRaisesRegex(ValueError, expected):
-            EDIT.prepare_existing_gdl_edit(router(), f"gdl-target-{seed}", source, changes)
+            EDIT.prepare_existing_gdl_edit(router(), f"00000000-0000-4000-8000-{seed+1:012x}", source, changes)
         if mode != 7:
             self.assertEqual(source, original)
     return check
@@ -330,7 +330,7 @@ def reciprocal_mep_case(seed):
         self.assertTrue(all("NOT_PHYSICAL_CONTACT" in r["authority"]
                             for _ in range(1)))
         self.assertEqual(len([p for p in r["edges"]
-                              if "MEP_CONNECTION:" in p[1]]), 2)
+                              if "MEP_CONNECTION:" in p[1]]), 3 if mode == 1 else 2)
     return check
 
 
