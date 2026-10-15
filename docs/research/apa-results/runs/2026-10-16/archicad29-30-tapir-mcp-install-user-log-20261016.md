@@ -39,3 +39,20 @@
 - `CURRENT_S_ID_CHANGED`: NO; исследовательский отчёт не является controller publisher receipt
 
 Следующий блок работ: безопасная установка Tapir на AC30 (по желанию пользователя), затем MCP-local read-only вызовы GetProductInfo на обоих экземплярах и настройка совместимого MCP host-клиента; установка AC29 MCP на серверной стороне уже проведена.
+
+
+## 6. Дозапись: AC30 Tapir 1.7.0 APX downloaded + SHA256 verified, NOT_INSTALLED
+
+Пользователь представил продолжение PowerShell лога 2026-10-16. Команда `GET https://api.github.com/repos/ENZYME-APD/tapir-archicad-automation/releases/tags/1.7.0` обнаружила ровно один asset `TapirAddOn_AC30_Win.apx`, а `asset.digest` имел формат `sha256:<64 hex>`. Файл был загружен по `asset.browser_download_url`.
+
+Лог вывел:
+- Path: `C:\Users\Admin\AppData\Local\APA\ExternalAddons\AC30\Tapir-1.7.0\TapirAddOn_AC30_Win.apx`
+- Tag: `1.7.0`
+- SHA-256: `21145D75B9EF8895E192B780869B5AB5CBE6094BF9940F2025E71783A9B2B365`
+- `DOWNLOAD AND HASH VERIFICATION: PASS`.
+- Вызов установки/регистрации в Archicad **в пользовательском логе не представлен**. `ARCHICAD_30_ADDON_LOADED: NOT_VERIFIED`, `MCP_AC30_ACTIVE: NOT_VERIFIED`. В отличие от AC29 Tapir 1.5.10, для AC30 следующий шаг — ручное подключение файла через Add-On Manager и повторный MCP discovery.
+- В рамках PowerShell загрузки не было команды записи PLN или изменения установленного Tapir AC29. Никакого независимого двоичного аудита скачанного APX или криптографической проверки подписи Graphisoft не было; SHA256 подтверждает только совпадение с хэшем официального GitHub-asset.
+- Статус USER_REPORTED_HASH_VERIFIED, не SOURCE_VERIFIED_BINARY_SECURITY.
+- После установки необходимо сверить версию отдельно по AC30 портам и выполнить **только read-only** тесты, не менять APA29.
+
+Источник: пользовательский лог в чате, отсутствует независимое управление его ПК. Результаты сохраняются в draft PR, не в main и не как controller receipt.
