@@ -1,6 +1,12 @@
 # APA mass offline validation — 2026-10-15
 
-Status: **RUN_REQUESTED; RESULTS_NOT_YET_VERIFIED**.
+Status: **OFFLINE_PASS; JUNIT_VERIFIED**.
+
+Run: https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38726439729
+Head: `4f3b6e43c7c748f9617d6a38da9be7bd988f4660`
+Result: **1282/1282 PASS; 0 failures, 0 errors, 0 skipped; 12/12 shard PASS**, exactly **512 new** matrix cases plus **770 existing** offline cases. Evidence: GitHub Actions run #38726439729, `verify` job JUnit aggregation + `apa-offline-mass-summary` artifact.
+
+CI bootstrap notes: runs #1 and #2 failed before test collection because `actions/setup-python` could not locate root `requirements.txt` for pip cache. Corrected `cache-dependency-path` in workflow; run #3 **PASS**. No live Archicad assertions.
 
 Execution head: PR #97 source snapshot `8f134001ca0e3250eda587db61ac01dbd6357326`.
 Test mode: isolated GitHub Actions Windows Python 3.11, 12 independent shards, 2 pytest-xdist workers per shard, complete `tests/test_*.py` plus `scripts/test_*.py`. Actual concurrency depends on GitHub runners, not the matrix size.
@@ -15,4 +21,4 @@ Task register additions (proposed pending audit):
 - APA-OFFLINE-251015-03: isolate slow/flaky tests by named fixture and JUnit history, without suppressing failures.
 - APA-OFFLINE-251015-04: add positive Generic Opening/CurtainWall/Railing/Shell dependent graph snapshots into regression fixtures.
 
-After CI, replace RUN_REQUESTED with evidence-linked run counts and outcomes; until then do not claim passing tests.
+Executed proof: the verifier parsed 12 JUnit XML reports and all 12 per-shard manifests, rejected missing shards by construction, and produced aggregate `PASS`. This is only offline validation; native SDK create functions still require separate runtime evaluation.
