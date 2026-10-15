@@ -24,6 +24,7 @@
 - [ARCHITECHTURES_OPEN_SOURCE_REUSE_AUDIT_20261015.md](ARCHITECHTURES_OPEN_SOURCE_REUSE_AUDIT_20261015.md) — ARCHITEChTURES (закрытая система, тарифы, генерация/парковки) и 10 исследованных кодовых баз: разрешённое reuse, лицензии, входы/выходы, антидублирование и минимальные критерии проверки.
 - [WEEKLY_AI_RELEASES_20261008_20261015.md](WEEKLY_AI_RELEASES_20261008_20261015.md) — свежие локальные модели, агенты и оболочки 8–15 октября 2026 (LFM2.5-24B-A2B, ColGrep-Agent-2B, Llama Windows, LightOnOCR-3 и др.), лицензии, ограничения 8GB VRAM/48GB RAM и сравнительные эксперименты APA.
 - [COLIBRI_VS_STRATA_20261015.md](COLIBRI_VS_STRATA_20261015.md) — прямое сопоставление Colibrì и Strata: поддержка 8 ГБ VRAM, CPU/GPU/SSD, реальные upstream измерения без некорректного A/B и исследовательская интеграция в APA.
+- [GLM52_744B_SSD_REQUIREMENTS_20261015.md](GLM52_744B_SSD_REQUIREMENTS_20261015.md) — требования к SSD для Colibrì GLM-5.2 744B: 429GB Q4, 289GB IQ3, random reads, ограничения RAM/VRAM, реальные карточки товаров, риски радиаторов и доставки в Кострому.
 - Документы контроля APA: [controller](../control/README.md) и [канонический исследовательский журнал](../README.md).
 
 ## Ограничения пользователя
