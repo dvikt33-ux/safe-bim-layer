@@ -36,4 +36,27 @@ Ten Windows shards must report 192 unique discovered and executed test IDs with 
 
 ## Evidence state
 
-Source and workflow published to GitHub. CI pending; no PASS claim until 10/10 shards and final aggregate readback.
+**FINAL VERIFIED CI: 192 / 192 PASS**.
+
+- Exact tested QA head `f1ddaf0d5d9046d0a80a7d2ef058dcfeb6c8baeb`.
+- Final Windows Actions: https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38762509508
+- All **10/10 Windows shards** plus independent aggregator **SUCCESS (11/11 jobs)**.
+- 192 independently discovered, 192 run, **0 FAIL, ERROR, SKIP, XFAIL, unexpected success, missing or duplicate IDs**.
+- Sorted test-ID SHA256: `9964621d229e2fc2e4005e81ed4654298c8d0004223c6b79624694b74112f208`.
+- Windows shard counts: `24+15+16+15+14+16+26+23+24+19=192`.
+- GitHub CI log: `APA_PR107_PARAMETRIC_EXACT_192 True`, `APA_PR107_PARAMETRIC_SHARDS success`.
+- All discovered and executed cases are fresh; no prior suites rerun.
+
+**Initial CI incident (retain as evidence):** first run
+https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38762164897
+failed because synthetic GDL element GUID strings did not match the official
+UUID-pattern schema. One MEP test also incorrectly expected two diagnostic
+endpoint edges when a third uncaptured port was referenced one-sidedly.
+Both fixture/oracle errors were corrected *only in QA*. No APA product source
+or native code was changed. The final pass is based exclusively on the new
+entire-suite execution at the exact tested QA SHA; the initial failed run
+is not hidden or counted as a product failure.
+
+Native MODIFY, MEP positive readback, model persistence and body/child-GUID
+reconciliation remain **NOT_VERIFIED**. A green offline CI does not grant
+an APX-install or SceneWriter-write permission.
