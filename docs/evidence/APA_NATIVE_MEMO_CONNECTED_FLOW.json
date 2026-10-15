@@ -1,0 +1,51 @@
+{
+  "schema": "APA_NATIVE_MEMO_CONNECTED_FLOW_V1",
+  "status": "CAPTURED_NATIVE_FACTS_EXISTING_DEPENDENCY_IMPACT_PASS",
+  "nodes": 346,
+  "edges": 472,
+  "relationshipKinds": {
+    "NATIVE_READ_ONLY_DERIVED_PARAMETER_FACT": 1,
+    "NATIVE_EDITABLE_PARAMETER_DEPENDENCY": 17,
+    "NATIVE_APPLICABLE_EDIT_ATTRIBUTE_DEPENDENCY": 1,
+    "NATIVE_HIERARCHICAL_PARENT": 148,
+    "NATIVE_HIERARCHICAL_ROOT": 119,
+    "NATIVE_COMPONENT_BUILDING_MATERIAL": 23,
+    "NATIVE_FRAME_OWN_SURFACE": 17,
+    "NATIVE_IFC_IDENTITY_NOT_EXPORT_ACCEPTANCE": 3,
+    "NATIVE_IFC_PROPERTY_ACCESSOR_REFERENCE": 9,
+    "NATIVE_PLACED_PARAMETER_DEPENDENCY": 128,
+    "NATIVE_TYPED_GDL_ATTRIBUTE_PARAMETER": 6
+  },
+  "affectedByChangedMaterial": 4,
+  "sourceSHA256": "c1f9fb860313809629f92aaee9b0817738c4f9e4d59cdf5774ad837fbe88178d",
+  "sourcePlanHash": "6c2414ff8432fd6e957767bac8feee2127cfaa4bda8a37752bb5f96e49bc1a83",
+  "assemblyStateCapture": "Authorized PR107 runtime; resultant native signatures independently matched after restored-runtime restart. Not SDK availability in original runtime.",
+  "railingMaterialGate": {
+    "status": "NATIVE_TYPED_MATERIAL_RETENTION_FAIL",
+    "elements": 94,
+    "authority": "PER_ELEMENT_NATIVE_MATERIAL_BINDINGS_INCLUDING_GDL_ASSIGNMENTS",
+    "faceSurfaceEqualityIsInsufficient": true,
+    "nativeModelWrites": 0,
+    "changedElements": 1
+  },
+  "shellMaterialGate": {
+    "status": "NATIVE_TYPED_MATERIAL_RETENTION_PASS",
+    "elements": 1,
+    "changedElementGUIDs": [],
+    "authority": "PER_ELEMENT_NATIVE_MATERIAL_BINDINGS_INCLUDING_GDL_ASSIGNMENTS",
+    "faceSurfaceEqualityIsInsufficient": true,
+    "nativeModelWrites": 0
+  },
+  "nativeIFCIdentities": 3,
+  "IFCExport": "NOT_VERIFIED",
+  "omitted": {
+    "DECLARED_OWNER_DIFFERS_FROM_PARENT_NO_INFERRED_EDGE": 24,
+    "GDL_LIBRARY_PART_IDENTITY_NOT_CAPTURED_NO_NAME_MATCH": 1
+  },
+  "changedNativeSignatureGUIDs": 21,
+  "changedBREPGUIDs": 20,
+  "nativeModelWrites": 0,
+  "automaticDependentWrites": false,
+  "offlineTestsRun": false,
+  "quantityEngineCalled": false
+}

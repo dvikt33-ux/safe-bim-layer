@@ -27,14 +27,15 @@ static GSErrCode AssemblyFields(API_Element& e,API_Element& mask,const GS::Objec
 #define ATTR(alias,Struct,obj,member,type) attribute(alias,e.obj.member,type,[&](){ACAPI_ELEMENT_MASK_SET(mask,Struct,member);})
  switch(e.header.type.typeID){
  case API_CurtainWallID:
-  NUM("heightMetres",API_CurtainWallType,curtainWall,height,0.001,1000);NUM("relativeLevelMetres",API_CurtainWallType,curtainWall,storyRelLevel,-1000000,1000000);break;
+  values.Add("heightMetres",e.curtainWall.height);if(changes.Contains("heightMetres"))return APIERR_BADPARS; // Observed NoError/no effect for input-only height mask; use explicit native contour memo.
+  NUM("relativeLevelMetres",API_CurtainWallType,curtainWall,storyRelLevel,-1000000,1000000);NUM("referencePlaneOffsetMetres",API_CurtainWallType,curtainWall,offset,-1000,1000);NUM("nominalWidthMetres",API_CurtainWallType,curtainWall,nominalWidth,0.0001,100);BOOL("flipped",API_CurtainWallType,curtainWall,flipped);break;
  case API_CurtainWallPanelID:
   NUM("thicknessMetres",API_CWPanelType,cwPanel,thickness,0.0001,100);ATTR("buildingMaterialId",API_CWPanelType,cwPanel,buildingMaterial,API_BuildingMaterialID);
   ATTR("outerSurfaceId",API_CWPanelType,cwPanel,outerSurfaceMaterial.value,API_MaterialID);BOOL("outerSurfaceOverridden",API_CWPanelType,cwPanel,outerSurfaceMaterial.hasValue);
   ATTR("innerSurfaceId",API_CWPanelType,cwPanel,innerSurfaceMaterial.value,API_MaterialID);BOOL("innerSurfaceOverridden",API_CWPanelType,cwPanel,innerSurfaceMaterial.hasValue);
   ATTR("cutSurfaceId",API_CWPanelType,cwPanel,cutSurfaceMaterial.value,API_MaterialID);BOOL("cutSurfaceOverridden",API_CWPanelType,cwPanel,cutSurfaceMaterial.hasValue);break;
  case API_CurtainWallFrameID:
-  ATTR("buildingMaterialId",API_CWFrameType,cwFrame,buildingMaterial,API_BuildingMaterialID);ATTR("surfaceId",API_CWFrameType,cwFrame,material,API_MaterialID);BOOL("useOwnMaterial",API_CWFrameType,cwFrame,useOwnMaterial);break;
+  ATTR("buildingMaterialId",API_CWFrameType,cwFrame,buildingMaterial,API_BuildingMaterialID);ATTR("surfaceId",API_CWFrameType,cwFrame,material,API_MaterialID);BOOL("useOwnMaterial",API_CWFrameType,cwFrame,useOwnMaterial);NUM("panelHoleDepthMetres",API_CWFrameType,cwFrame,d,0,100);NUM("panelHoleWidthMetres",API_CWFrameType,cwFrame,w,0,100);break;
  case API_RailingID:
   NUM("defaultSegmentHeightMetres",API_RailingType,railing,defSegment.height,0.001,100);NUM("defaultPostOffsetMetres",API_RailingType,railing,defNode.postOffset,-1000,1000);NUM("relativeLevelMetres",API_RailingType,railing,bottomOffset,-1000000,1000000);break;
  case API_RailingSegmentID:
@@ -55,6 +56,9 @@ static GSErrCode AssemblyFields(API_Element& e,API_Element& mask,const GS::Objec
   if(e.shell.shellClass==API_ExtrudedShellID){
    NUM("extrusionXMetres",API_ShellType,shell,u.extrudedShell.extrusionVector.x,-1000000,1000000);NUM("extrusionYMetres",API_ShellType,shell,u.extrudedShell.extrusionVector.y,-1000000,1000000);NUM("extrusionZMetres",API_ShellType,shell,u.extrudedShell.extrusionVector.z,-1000000,1000000);
    NUM("beginXMetres",API_ShellType,shell,u.extrudedShell.begC.x,-1000000,1000000);NUM("beginYMetres",API_ShellType,shell,u.extrudedShell.begC.y,-1000000,1000000);NUM("beginZMetres",API_ShellType,shell,u.extrudedShell.begC.z,-1000000,1000000);
+   NUM("slantAngleRadians",API_ShellType,shell,u.extrudedShell.slantAngle,-6.283185307179586,6.283185307179586);NUM("shapePlaneTiltRadians",API_ShellType,shell,u.extrudedShell.shapePlaneTilt,-6.283185307179586,6.283185307179586);NUM("beginPlaneTiltRadians",API_ShellType,shell,u.extrudedShell.begPlaneTilt,-6.283185307179586,6.283185307179586);NUM("endPlaneTiltRadians",API_ShellType,shell,u.extrudedShell.endPlaneTilt,-6.283185307179586,6.283185307179586);
+  }else if(e.shell.shellClass==API_RevolvedShellID){
+   NUM("slantAngleRadians",API_ShellType,shell,u.revolvedShell.slantAngle,-6.283185307179586,6.283185307179586);NUM("revolutionAngleRadians",API_ShellType,shell,u.revolvedShell.revolutionAngle,0.000001,6.283185307179586);NUM("distortionAngleRadians",API_ShellType,shell,u.revolvedShell.distortionAngle,-3.141592653589793,3.141592653589793);NUM("beginAngleRadians",API_ShellType,shell,u.revolvedShell.begAngle,-6.283185307179586,6.283185307179586);
   }break;
  default:return APIERR_BADID;
  }
@@ -68,6 +72,7 @@ static GS::ObjectState AssemblyEditState(API_Element e){
  API_Element mask={};GS::ObjectState values,attributes;GS::Array<GS::UniString> ignored;const auto err=AssemblyFields(e,mask,{},values,attributes,ignored);if(err!=NoError)return CreateErrorResponse(err,"Unsupported assembly edit state");
  GS::ObjectState row("elementId",CreateGuidObjectState(e.header.guid),"kind",AssemblyKind(e),"nativeTypeId",static_cast<Int32>(e.header.type.typeID),"homeStory",static_cast<Int32>(e.header.floorInd),"modificationStamp",AssemblyStamp(e),"values",values,"attributes",attributes,"associationAuthority","NOT_VERIFIED_NO_SPATIAL_INFERENCE");
  if(e.header.type.typeID==API_ShellID)row.Add("shellClass",static_cast<Int32>(e.shell.shellClass));
+ AddAssemblyMemo(e,row);
  API_Guid root=APINULLGuid;API_HierarchicalOwnerType mode=API_RootHierarchicalOwner;API_HierarchicalElemType type=API_UnknownElemType;const auto re=ACAPI_HierarchicalEditing_GetHierarchicalElementOwner(&e.header.guid,&mode,&type,&root);row.Add("rootQueryError",static_cast<Int32>(re));if(re==NoError&&root!=APINULLGuid)row.Add("rootElementId",CreateGuidObjectState(root));return row;
 }
 GS::ObjectState GetNativeAssemblyEditStateV1Command::Execute(const GS::ObjectState& p,GS::ProcessControl&) const{
@@ -79,6 +84,7 @@ GS::ObjectState ModifyNativeAssemblyV1Command::Execute(const GS::ObjectState& p,
  if(expectedKind!=AssemblyKind(e)||stamp!=AssemblyStamp(e)||changes==nullptr)return CreateErrorResponse(APIERR_BADPARS,"Assembly type or modification stamp changed; no write");
  API_Element mask={};GS::ObjectState values,attributes;GS::Array<GS::UniString> applied;err=AssemblyFields(e,mask,*changes,values,attributes,applied);if(err!=NoError)return CreateErrorResponse(err,"Invalid field value or attribute identity; no write");
  API_ElementMemo memo={};const GS::OnExit cleanup([&](){ACAPI_DisposeElemMemoHdls(&memo);});UInt64 memoMask=0;
+ err=PrepareAssemblyMemoEdits(e,*changes,memo,memoMask,applied);if(err!=NoError)return CreateErrorResponse(err,"Invalid/unsupported native memo edit; no write");
  if(changes->Contains("profileCoordinates")){
   if(e.header.type.typeID!=API_ShellID||e.shell.shellClass!=API_ExtrudedShellID)return CreateErrorResponse(APIERR_BADPARS,"Profile editing requires ExtrudedShell; no write");
   const auto& shape=e.shell.u.extrudedShell.shellShape;GS::Array<GS::ObjectState> coords;

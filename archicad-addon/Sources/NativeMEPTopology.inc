@@ -6,6 +6,8 @@
 #include "ACAPI/MEPRoutingNode.hpp"
 #include "ACAPI/MEPRigidSegment.hpp"
 #include "ACAPI/MEPTransition.hpp"
+#include "ACAPI/MEPElbow.hpp"
+#include "ACAPI/MEPBranch.hpp"
 static GS::ObjectState MEPIdentity(const ACAPI::MEP::UniqueID& id){return CreateGuidObjectState(GSGuid2APIGuid(id.GetGuid()));}
 static void MEPIds(GS::ObjectState& row,const char* key,const std::vector<ACAPI::MEP::UniqueID>& ids){const auto& list=row.AddList<GS::ObjectState>(key);for(const auto& id:ids)list(MEPIdentity(id));}
 GS::ObjectState GetNativeMEPTopologyV1Command::Execute(const GS::ObjectState& p,GS::ProcessControl&) const{
@@ -31,7 +33,13 @@ GS::ObjectState GetNativeMEPTopologyV1Command::Execute(const GS::ObjectState& p,
    if(auto v=value->GetInsulationThickness())row.Add("insulationThicknessMetres",*v);
   }else if(kind=="Transition"){
    auto value=ACAPI::MEP::Transition::Get(id);if(value.IsErr()){rows(CreateErrorResponse(value.UnwrapErr().kind,"Transition unavailable"));continue;}
-   row.Add("routingNodeId",MEPIdentity(value->GetRoutingNodeId()));row.Add("narrowerPortId",MEPIdentity(value->GetNarrowerPortID()));row.Add("widerPortId",MEPIdentity(value->GetWiderPortID()));row.Add("lengthMetres",value->GetLength());row.Add("angleRadians",value->GetAngle());row.Add("offsetYMetres",value->GetOffsetY());row.Add("offsetZMetres",value->GetOffsetZ());
+   row.Add("routingNodeId",MEPIdentity(value->GetRoutingNodeId()));row.Add("narrowerPortId",MEPIdentity(value->GetNarrowerPortID()));row.Add("widerPortId",MEPIdentity(value->GetWiderPortID()));row.Add("lengthMetres",value->GetLength());row.Add("angleDegrees",value->GetAngle());row.Add("offsetYMetres",value->GetOffsetY());row.Add("offsetZMetres",value->GetOffsetZ());
+  }else if(kind=="Elbow"){
+   auto value=ACAPI::MEP::Elbow::Get(id);if(value.IsErr()){rows(CreateErrorResponse(value.UnwrapErr().kind,"Elbow unavailable"));continue;}
+   row.Add("routingNodeId",MEPIdentity(value->GetRoutingNodeId()));row.Add("domainId",static_cast<Int32>(value->GetDomain()));row.Add("widthMetres",value->GetWidth());row.Add("heightMetres",value->GetHeight());row.Add("shapeId",static_cast<Int32>(value->GetShape()));row.Add("radiusMetres",value->GetRadius());auto factor=value->GetFactorRadius();row.Add("factorRadiusApplicable",factor.IsOk());if(factor.IsOk())row.Add("factorRadius",factor.Unwrap());auto table=value->GetPreferenceTable();row.Add("preferenceTableApplicable",table.IsOk());if(table.IsOk())row.Add("preferenceTableId",MEPIdentity(table.Unwrap()));if(auto v=value->GetInsulationThickness())row.Add("insulationThicknessMetres",*v);
+  }else if(kind=="Branch"){
+   auto value=ACAPI::MEP::Branch::Get(id);if(value.IsErr()){rows(CreateErrorResponse(value.UnwrapErr().kind,"Branch unavailable"));continue;}
+   row.Add("domainId",static_cast<Int32>(value->GetDomain()));row.Add("lengthMetres",value->GetLength());row.Add("branchLengthMetres",value->GetBranchLength());row.Add("branchAngleDegrees",value->GetBranchAngle());row.Add("branchOffsetMetres",value->GetBranchOffset());if(auto v=value->GetInsulationThickness())row.Add("insulationThicknessMetres",*v);
   }else{rows(CreateErrorResponse(APIERR_BADPARS,"Unsupported MEP topology role"));continue;}rows(row);
  }return out;
 }

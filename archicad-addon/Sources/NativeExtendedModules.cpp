@@ -205,5 +205,6 @@ GS::ObjectState GetNativeNavigatorBindingsV1Command::Execute(const GS::ObjectSta
 }
 
 #include "NativeAssemblyCommands.inc"
+#include "NativeAssemblyMemo.inc"
 #include "NativeAssemblyModify.inc"
 #include "NativeMEPTopology.inc"

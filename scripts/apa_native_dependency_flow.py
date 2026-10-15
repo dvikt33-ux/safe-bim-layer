@@ -50,8 +50,8 @@ def capture_mep_facts(api, router, element_ids=(), routing_ids=(), include_syste
     return out
 
 
-def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids=(), memberships=(), navigator_bindings=None, layout_bindings=(), attributes=None, envelopes=None, ifc_ids=None, ifc_properties=None, gdl_parameters=(), mep=None, mep_topology=None):
-    nodes, edges, evidence, omitted, connection_facts, property_facts = set(), set(), [], [], [], []
+def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids=(), memberships=(), navigator_bindings=None, layout_bindings=(), attributes=None, envelopes=None, ifc_ids=None, ifc_properties=None, gdl_parameters=(), mep=None, mep_topology=None, assembly_states=None):
+    nodes, edges, evidence, omitted, connection_facts, property_facts, parameter_facts = set(), set(), [], [], [], [], []
 
     def guid(value):
         value = value.get('guid') if isinstance(value, dict) else None
@@ -115,6 +115,49 @@ def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids
         for field,prefix,relation in [('routingElementId','','NATIVE_MEP_ROUTE_OWNERSHIP'),('routingSegmentId','MEP_SEGMENT:','NATIVE_MEP_RIGID_SEGMENT_OWNER'),('routingNodeId','MEP_NODE:','NATIVE_MEP_FITTING_NODE_OWNER')]:
             owner=guid(row.get(field))
             if owner:edge(prefix+owner,target,relation)
+        sid=guid(row.get('mepSystemId'))
+        if sid:edge('ATTRIBUTE:MEPSYSTEM:'+sid,target,'NATIVE_MEP_TOPOLOGY_SYSTEM_MEMBERSHIP')
+        preference=guid(row.get('preferenceTableId'))
+        if preference:edge('MEP_PREFERENCE_TABLE:'+preference,target,'NATIVE_MEP_PARAMETER_PREFERENCE_DEPENDENCY')
+        for field,prefix,relation in [('routingSegments','MEP_SEGMENT:','NATIVE_MEP_ROUTE_SEGMENT_MEMBERSHIP'),('routingNodes','MEP_NODE:','NATIVE_MEP_ROUTE_NODE_MEMBERSHIP'),('rigidSegments','','NATIVE_MEP_SEGMENT_RIGID_MEMBERSHIP'),('elbows','','NATIVE_MEP_NODE_ELBOW_MEMBERSHIP'),('transitions','','NATIVE_MEP_NODE_TRANSITION_MEMBERSHIP')]:
+            for item in row.get(field,[]):
+                child=guid(item)
+                if child:edge(target,prefix+child,relation)
+        for field in ['logicalBeginPortId','logicalEndPortId']:
+            port=guid(row.get(field))
+            if port:edge(target,'MEP_PORT:'+port,'NATIVE_MEP_ROUTE_LOGICAL_ENDPOINT_NOT_PHYSICAL_CONNECTION')
+        for field in ['narrowerPortId','widerPortId']:
+            port=guid(row.get(field))
+            if port:edge(target,'MEP_PORT:'+port,'NATIVE_MEP_TRANSITION_PORT_MEMBERSHIP')
+        for field in ['beginNodeId','endNodeId']:
+            node=guid(row.get(field))
+            if node:
+                incidence='MEP_INCIDENCE:'+identity+':'+node
+                edge(target,incidence,'NATIVE_MEP_SEGMENT_NODE_INCIDENCE');edge('MEP_NODE:'+node,incidence,'NATIVE_MEP_SEGMENT_NODE_INCIDENCE')
+
+    for row in (assembly_states or {}).get('elements',[]):
+        owner=guid(row.get('elementId'))
+        if not owner or 'error' in row:omitted.append('ASSEMBLY_NATIVE_STATE_IDENTITY_OR_RESULT_MISSING');continue
+        for name,value in row.get('values',{}).items():
+            key='NATIVE_PARAMETER:'+owner+':'+name
+            read_only=row.get('kind')=='CurtainWall' and name=='heightMetres'
+            edge(owner,key,'NATIVE_READ_ONLY_DERIVED_PARAMETER_FACT') if read_only else edge(key,owner,'NATIVE_EDITABLE_PARAMETER_DEPENDENCY')
+            parameter_facts.append(dict(node=key,value=value,editable=not read_only,authority='NATIVE_SDK_FIELD_NOT_PHYSICAL_CONTACT',runtimeWriteAcceptance='NOT_INFERRED_FROM_STATE_READ'))
+        kinds={'buildingMaterialId':'BUILDINGMATERIAL','compositeId':'COMPOSITE','surfaceId':'SURFACE','outerSurfaceId':'SURFACE','innerSurfaceId':'SURFACE','cutSurfaceId':'SURFACE','topSurfaceId':'SURFACE','sideSurfaceId':'SURFACE','bottomSurfaceId':'SURFACE'}
+        for name,item in row.get('attributes',{}).items():
+            identity=guid(item.get('attributeId'));kind=kinds.get(name);flag=name.replace('SurfaceId','SurfaceOverridden')
+            if flag in row.get('values',{}) and row['values'][flag] is not True:continue
+            if name=='surfaceId' and row.get('values',{}).get('useOwnMaterial') is False:continue
+            if identity and kind:edge('ATTRIBUTE:'+kind+':'+identity,owner,'NATIVE_APPLICABLE_EDIT_ATTRIBUTE_DEPENDENCY')
+        memo=row.get('memo',{})
+        if memo and row.get('memoReadError')==0:
+            for name in ['referencePath','primaryPattern','secondaryPattern','curtainWallContours']:
+                if name in memo:
+                    key='NATIVE_PARAMETER:'+owner+':MEMO:'+name;edge(key,owner,'NATIVE_MEMO_PARAMETER_DEPENDENCY');parameter_facts.append(dict(node=key,authority='NATIVE_PARAMETER_MEMO_NOT_RESULTANT_BODY',editable=bool(row.get('memoEdits'))))
+            for segment in memo.get('curtainWallSegments',[]):
+                child=guid(segment.get('elementId'));declared=guid(segment.get('ownerId'))
+                if declared==owner and child:edge(owner,child,'NATIVE_CW_MEMO_DECLARED_SEGMENT_OWNER')
+                else:omitted.append('CW_MEMO_SEGMENT_OWNER_NOT_CONFIRMED')
 
     # Indices are project-local and type-specific. Resolve only a unique native
     # header in this capture; neither names nor positive numbers prove identity.
@@ -269,7 +312,7 @@ def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids
         else:
             omitted.append('DRAWING_SOURCE_NOT_IN_CAPTURED_OR_EXPLICITLY_RESOLVED_NAVIGATOR')
     return dict(nodes=sorted(nodes), edges=[list(e) for e in sorted(edges)],
-                relationshipEvidence=evidence, omitted=omitted, connectionFacts=connection_facts, ifcPropertyFacts=property_facts,
+                relationshipEvidence=evidence, omitted=omitted, connectionFacts=connection_facts, ifcPropertyFacts=property_facts, nativeParameterFacts=parameter_facts,
                 authority='CAPTURED_NATIVE_RELATIONSHIPS_NOT_PHYSICAL_CONTACT')
 
 

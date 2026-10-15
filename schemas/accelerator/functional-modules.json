@@ -3,14 +3,15 @@
   "sdkImplementationSHA256": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72",
   "sdkImplementationFiles": {
     "archicad-addon/Sources/NativeModuleCommands.cpp": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72",
-    "archicad-addon/Sources/NativeExtendedModules.cpp": "593c92cf5fcd43a4a0f071aef3706e6e5bea1711d079e8d17589262957fa8c9d",
+    "archicad-addon/Sources/NativeExtendedModules.cpp": "d9972a9e22d0d06857e62ff715fc6925072d2f76907aa7f5501c953247992331",
     "archicad-addon/Sources/NativeExtendedModules.hpp": "e2536aef489472b34d81ff35a5f6c6750f703aed508ce4917c7176015d48cf05",
-    "archicad-addon/Sources/NativeExtendedSchemas.inc": "77f48b52544aea5950278dd2affd8b4370d93ad174c6f7f0729ab803838ce791",
+    "archicad-addon/Sources/NativeExtendedSchemas.inc": "a62ff44310c0c4e6d1decb0193f872acc373ee2371fa3224bf8541f710e97e31",
     "archicad-addon/Sources/NativeQuantityFields.inc": "470d052f2cc23bc0536efc658e7a1d9840bdcc214d500b0709e598e805f58f53",
     "archicad-addon/Sources/NativeLibraryDefaults.inc": "4afeb0b9e314506740ddd92320ada17ac070fafdc36cc588dc9812221bad3144",
     "archicad-addon/Sources/NativeAssemblyCommands.inc": "34da20beefb90e967533620e750b16915e9ae96bb8405295433d14a97eda39c3",
-    "archicad-addon/Sources/NativeAssemblyModify.inc": "20ae21f61574b8c814536989328408c5e422505c242dd96e4fca38df44b7f566",
-    "archicad-addon/Sources/NativeMEPTopology.inc": "7c3b7e0748f9d8987ddc7a680528fe2dc33ade40b8cea96ab27947b07a177c60"
+    "archicad-addon/Sources/NativeAssemblyModify.inc": "cd038626931ae6903bb7df7d7a0490fb6e6e1976e79ab05d92048c21da056d70",
+    "archicad-addon/Sources/NativeAssemblyMemo.inc": "d01a5c37550bd6790f65e523d6dc40ccbf41ba57f9f63e23c9c6e7f620a0f6fe",
+    "archicad-addon/Sources/NativeMEPTopology.inc": "1cc29c9858287e0437c28bc1503920ea40fb52b25e966ef24d3bbe910e103558"
   },
   "sdkProviders": {
     "TapirCommand": {
@@ -1614,7 +1615,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "593c92cf5fcd43a4a0f071aef3706e6e5bea1711d079e8d17589262957fa8c9d"
+        "implementationSHA256": "d9972a9e22d0d06857e62ff715fc6925072d2f76907aa7f5501c953247992331"
       },
       "GetNativeDrawingAssociationsV1": {
         "version": "29",
@@ -1849,7 +1850,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "593c92cf5fcd43a4a0f071aef3706e6e5bea1711d079e8d17589262957fa8c9d"
+        "implementationSHA256": "d9972a9e22d0d06857e62ff715fc6925072d2f76907aa7f5501c953247992331"
       },
       "GetNativeElementHotspotsV1": {
         "version": "29",
@@ -2004,7 +2005,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "593c92cf5fcd43a4a0f071aef3706e6e5bea1711d079e8d17589262957fa8c9d"
+        "implementationSHA256": "d9972a9e22d0d06857e62ff715fc6925072d2f76907aa7f5501c953247992331"
       },
       "GetNativeElementQuantitiesV1": {
         "version": "29",
@@ -2168,7 +2169,7 @@
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
         "executionBlocker": "AC29_QUANTITY_ENGINE_ACCESS_VIOLATION_ROOT_CAUSE_NOT_VERIFIED_NO_REPLAY",
-        "implementationSHA256": "593c92cf5fcd43a4a0f071aef3706e6e5bea1711d079e8d17589262957fa8c9d"
+        "implementationSHA256": "d9972a9e22d0d06857e62ff715fc6925072d2f76907aa7f5501c953247992331"
       },
       "GetNativeComponentBindingsV1": {
         "version": "29",
@@ -2377,7 +2378,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "593c92cf5fcd43a4a0f071aef3706e6e5bea1711d079e8d17589262957fa8c9d"
+        "implementationSHA256": "d9972a9e22d0d06857e62ff715fc6925072d2f76907aa7f5501c953247992331"
       },
       "GetNativeOpeningConnectionsV1": {
         "version": "29",
@@ -2765,7 +2766,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "593c92cf5fcd43a4a0f071aef3706e6e5bea1711d079e8d17589262957fa8c9d"
+        "implementationSHA256": "d9972a9e22d0d06857e62ff715fc6925072d2f76907aa7f5501c953247992331"
       },
       "GetNativeQuantityPreflightV1": {
         "version": "29",
@@ -2900,7 +2901,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "593c92cf5fcd43a4a0f071aef3706e6e5bea1711d079e8d17589262957fa8c9d"
+        "implementationSHA256": "d9972a9e22d0d06857e62ff715fc6925072d2f76907aa7f5501c953247992331"
       },
       "GetNativeLibraryPartDefaultsV1": {
         "version": "29",
@@ -3280,7 +3281,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "593c92cf5fcd43a4a0f071aef3706e6e5bea1711d079e8d17589262957fa8c9d"
+        "implementationSHA256": "d9972a9e22d0d06857e62ff715fc6925072d2f76907aa7f5501c953247992331"
       },
       "CreateNativeAssemblyV1": {
         "version": "29",
@@ -3591,6 +3592,472 @@
                           "guid"
                         ],
                         "additionalProperties": false
+                      },
+                      "memoEdits": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "memoReadError": {
+                        "type": "integer"
+                      },
+                      "memoBoundsStatus": {
+                        "type": "string"
+                      },
+                      "memoPathWriteBlockedReason": {
+                        "type": "string"
+                      },
+                      "memo": {
+                        "type": "object",
+                        "properties": {
+                          "authority": {
+                            "type": "string"
+                          },
+                          "referencePath": {
+                            "type": "object",
+                            "properties": {
+                              "indexBase": {
+                                "const": 1
+                              },
+                              "coordinateFrame": {
+                                "type": "string"
+                              },
+                              "coordinates": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "index": {
+                                      "type": "integer"
+                                    },
+                                    "x": {
+                                      "type": "number"
+                                    },
+                                    "y": {
+                                      "type": "number"
+                                    }
+                                  },
+                                  "required": [
+                                    "index",
+                                    "x",
+                                    "y"
+                                  ],
+                                  "additionalProperties": false
+                                }
+                              },
+                              "contourEnds": {
+                                "type": "array",
+                                "items": {
+                                  "type": "integer"
+                                }
+                              },
+                              "arcs": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "beginIndex": {
+                                      "type": "integer"
+                                    },
+                                    "endIndex": {
+                                      "type": "integer"
+                                    },
+                                    "angle": {
+                                      "type": "number"
+                                    }
+                                  },
+                                  "required": [
+                                    "beginIndex",
+                                    "endIndex",
+                                    "angle"
+                                  ],
+                                  "additionalProperties": false
+                                }
+                              },
+                              "vertexIds": {
+                                "type": "array",
+                                "items": {
+                                  "type": "integer"
+                                }
+                              },
+                              "edgeIds": {
+                                "type": "array",
+                                "items": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "required": [
+                              "indexBase",
+                              "coordinateFrame",
+                              "coordinates",
+                              "contourEnds",
+                              "arcs",
+                              "vertexIds",
+                              "edgeIds"
+                            ],
+                            "additionalProperties": false
+                          },
+                          "referenceElevationsMetres": {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            }
+                          },
+                          "associationAuthority": {
+                            "type": "string"
+                          },
+                          "primaryPattern": {
+                            "type": "object",
+                            "properties": {
+                              "logicId": {
+                                "type": "integer"
+                              },
+                              "originTypeId": {
+                                "type": "integer"
+                              },
+                              "divisions": {
+                                "type": "integer"
+                              },
+                              "infillPanelClassId": {
+                                "type": "integer"
+                              },
+                              "endWithId": {
+                                "type": "integer"
+                              },
+                              "distances": {
+                                "type": "array",
+                                "items": {
+                                  "type": "number"
+                                }
+                              },
+                              "flexibleIds": {
+                                "type": "array",
+                                "items": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "required": [
+                              "logicId",
+                              "originTypeId",
+                              "divisions",
+                              "infillPanelClassId",
+                              "endWithId",
+                              "distances",
+                              "flexibleIds"
+                            ],
+                            "additionalProperties": false
+                          },
+                          "secondaryPattern": {
+                            "type": "object",
+                            "properties": {
+                              "logicId": {
+                                "type": "integer"
+                              },
+                              "originTypeId": {
+                                "type": "integer"
+                              },
+                              "divisions": {
+                                "type": "integer"
+                              },
+                              "infillPanelClassId": {
+                                "type": "integer"
+                              },
+                              "endWithId": {
+                                "type": "integer"
+                              },
+                              "distances": {
+                                "type": "array",
+                                "items": {
+                                  "type": "number"
+                                }
+                              },
+                              "flexibleIds": {
+                                "type": "array",
+                                "items": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "required": [
+                              "logicId",
+                              "originTypeId",
+                              "divisions",
+                              "infillPanelClassId",
+                              "endWithId",
+                              "distances",
+                              "flexibleIds"
+                            ],
+                            "additionalProperties": false
+                          },
+                          "curtainWallContours": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "slot": {
+                                  "type": "integer"
+                                },
+                                "polygon": {
+                                  "type": "object",
+                                  "properties": {
+                                    "indexBase": {
+                                      "const": 1
+                                    },
+                                    "coordinateFrame": {
+                                      "type": "string"
+                                    },
+                                    "coordinates": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "index": {
+                                            "type": "integer"
+                                          },
+                                          "x": {
+                                            "type": "number"
+                                          },
+                                          "y": {
+                                            "type": "number"
+                                          }
+                                        },
+                                        "required": [
+                                          "index",
+                                          "x",
+                                          "y"
+                                        ],
+                                        "additionalProperties": false
+                                      }
+                                    },
+                                    "contourEnds": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "integer"
+                                      }
+                                    },
+                                    "arcs": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "beginIndex": {
+                                            "type": "integer"
+                                          },
+                                          "endIndex": {
+                                            "type": "integer"
+                                          },
+                                          "angle": {
+                                            "type": "number"
+                                          }
+                                        },
+                                        "required": [
+                                          "beginIndex",
+                                          "endIndex",
+                                          "angle"
+                                        ],
+                                        "additionalProperties": false
+                                      }
+                                    },
+                                    "vertexIds": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "integer"
+                                      }
+                                    },
+                                    "edgeIds": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "integer"
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "indexBase",
+                                    "coordinateFrame",
+                                    "coordinates",
+                                    "contourEnds",
+                                    "arcs",
+                                    "vertexIds",
+                                    "edgeIds"
+                                  ],
+                                  "additionalProperties": false
+                                },
+                                "nativeCoordinateCount": {
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "slot",
+                                "polygon",
+                                "nativeCoordinateCount"
+                              ],
+                              "additionalProperties": false
+                            }
+                          },
+                          "curtainWallSegments": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "elementId": {
+                                  "type": "object",
+                                  "properties": {
+                                    "guid": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    }
+                                  },
+                                  "required": [
+                                    "guid"
+                                  ],
+                                  "additionalProperties": false
+                                },
+                                "ownerId": {
+                                  "type": "object",
+                                  "properties": {
+                                    "guid": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    }
+                                  },
+                                  "required": [
+                                    "guid"
+                                  ],
+                                  "additionalProperties": false
+                                },
+                                "begin": {
+                                  "type": "object",
+                                  "properties": {
+                                    "x": {
+                                      "type": "number"
+                                    },
+                                    "y": {
+                                      "type": "number"
+                                    },
+                                    "z": {
+                                      "type": "number"
+                                    }
+                                  },
+                                  "required": [
+                                    "x",
+                                    "y",
+                                    "z"
+                                  ],
+                                  "additionalProperties": false
+                                },
+                                "end": {
+                                  "type": "object",
+                                  "properties": {
+                                    "x": {
+                                      "type": "number"
+                                    },
+                                    "y": {
+                                      "type": "number"
+                                    },
+                                    "z": {
+                                      "type": "number"
+                                    }
+                                  },
+                                  "required": [
+                                    "x",
+                                    "y",
+                                    "z"
+                                  ],
+                                  "additionalProperties": false
+                                },
+                                "extrusion": {
+                                  "type": "object",
+                                  "properties": {
+                                    "x": {
+                                      "type": "number"
+                                    },
+                                    "y": {
+                                      "type": "number"
+                                    },
+                                    "z": {
+                                      "type": "number"
+                                    }
+                                  },
+                                  "required": [
+                                    "x",
+                                    "y",
+                                    "z"
+                                  ],
+                                  "additionalProperties": false
+                                },
+                                "gridOrigin": {
+                                  "type": "object",
+                                  "properties": {
+                                    "x": {
+                                      "type": "number"
+                                    },
+                                    "y": {
+                                      "type": "number"
+                                    },
+                                    "z": {
+                                      "type": "number"
+                                    }
+                                  },
+                                  "required": [
+                                    "x",
+                                    "y",
+                                    "z"
+                                  ],
+                                  "additionalProperties": false
+                                },
+                                "gridAngleNative": {
+                                  "type": "number"
+                                },
+                                "segmentTypeId": {
+                                  "type": "integer"
+                                },
+                                "patternCellCount": {
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "elementId",
+                                "ownerId",
+                                "begin",
+                                "end",
+                                "extrusion",
+                                "gridOrigin",
+                                "gridAngleNative",
+                                "segmentTypeId",
+                                "patternCellCount"
+                              ],
+                              "additionalProperties": false
+                            }
+                          },
+                          "planeMatrix": {
+                            "type": "object",
+                            "properties": {
+                              "matrix3x4": {
+                                "type": "array",
+                                "items": {
+                                  "type": "number"
+                                },
+                                "minItems": 12,
+                                "maxItems": 12
+                              }
+                            },
+                            "required": [
+                              "matrix3x4"
+                            ],
+                            "additionalProperties": false
+                          },
+                          "planeOffsetMetres": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "authority",
+                          "referencePath"
+                        ],
+                        "additionalProperties": false
                       }
                     },
                     "required": [
@@ -3643,12 +4110,12 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeAssemblyModify.inc",
-        "implementationSHA256": "20ae21f61574b8c814536989328408c5e422505c242dd96e4fca38df44b7f566"
+        "implementationSHA256": "cd038626931ae6903bb7df7d7a0490fb6e6e1976e79ab05d92048c21da056d70"
       },
       "ModifyNativeAssemblyV1": {
         "version": "29",
         "category": "Native SDK assembly edit and MEP adapter",
-        "description": "One scoped native Element_Change using explicit masks, type/stamp preconditions, applicable fields and attribute GUID identities. ExtrudedShell profile edits preserve existing straight single-contour topology. No delete/create or automatic dependent writes.",
+        "description": "One scoped native Element_Change using explicit masks, type/stamp preconditions and typed attribute IDs. Native CW same-cardinality reference/contour and pattern memo edits; scalar CW height is refused after observed NoError/no-effect. Class-specific Extruded/Revolved scalar fields remain separately qualified. No delete/create or automatic dependent writes.",
         "parameters": {
           "type": "object",
           "properties": {
@@ -3766,6 +4233,61 @@
                   "minimum": -1000000,
                   "maximum": 1000000
                 },
+                "referencePlaneOffsetMetres": {
+                  "type": "number",
+                  "minimum": -1000000,
+                  "maximum": 1000000
+                },
+                "nominalWidthMetres": {
+                  "type": "number",
+                  "minimum": -1000000,
+                  "maximum": 1000000
+                },
+                "panelHoleDepthMetres": {
+                  "type": "number",
+                  "minimum": -1000000,
+                  "maximum": 1000000
+                },
+                "panelHoleWidthMetres": {
+                  "type": "number",
+                  "minimum": -1000000,
+                  "maximum": 1000000
+                },
+                "slantAngleRadians": {
+                  "type": "number",
+                  "minimum": -1000000,
+                  "maximum": 1000000
+                },
+                "shapePlaneTiltRadians": {
+                  "type": "number",
+                  "minimum": -1000000,
+                  "maximum": 1000000
+                },
+                "beginPlaneTiltRadians": {
+                  "type": "number",
+                  "minimum": -1000000,
+                  "maximum": 1000000
+                },
+                "endPlaneTiltRadians": {
+                  "type": "number",
+                  "minimum": -1000000,
+                  "maximum": 1000000
+                },
+                "revolutionAngleRadians": {
+                  "type": "number",
+                  "minimum": -1000000,
+                  "maximum": 1000000
+                },
+                "distortionAngleRadians": {
+                  "type": "number",
+                  "minimum": -1000000,
+                  "maximum": 1000000
+                },
+                "beginAngleRadians": {
+                  "type": "number",
+                  "minimum": -1000000,
+                  "maximum": 1000000
+                },
                 "visible": {
                   "type": "boolean"
                 },
@@ -3788,6 +4310,9 @@
                   "type": "boolean"
                 },
                 "bottomSurfaceOverridden": {
+                  "type": "boolean"
+                },
+                "flipped": {
                   "type": "boolean"
                 },
                 "buildingMaterialId": {
@@ -3927,6 +4452,68 @@
                   },
                   "minItems": 3,
                   "maxItems": 4096
+                },
+                "referenceCoordinates": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "x": {
+                        "type": "number"
+                      },
+                      "y": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "x",
+                      "y"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "minItems": 2,
+                  "maxItems": 4096
+                },
+                "curtainWallContourCoordinates": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "x": {
+                        "type": "number"
+                      },
+                      "y": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "x",
+                      "y"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "minItems": 3,
+                  "maxItems": 4096
+                },
+                "primaryPatternDistances": {
+                  "type": "array",
+                  "items": {
+                    "type": "number",
+                    "exclusiveMinimum": 0,
+                    "maximum": 1000000
+                  },
+                  "minItems": 1,
+                  "maxItems": 4096
+                },
+                "secondaryPatternDistances": {
+                  "type": "array",
+                  "items": {
+                    "type": "number",
+                    "exclusiveMinimum": 0,
+                    "maximum": 1000000
+                  },
+                  "minItems": 1,
+                  "maxItems": 4096
                 }
               },
               "required": [],
@@ -4031,7 +4618,7 @@
         "implementationSource": "archicad-addon/Sources/NativeAssemblyModify.inc",
         "operationKind": "MODIFY",
         "impact": "MODEL",
-        "implementationSHA256": "20ae21f61574b8c814536989328408c5e422505c242dd96e4fca38df44b7f566"
+        "implementationSHA256": "cd038626931ae6903bb7df7d7a0490fb6e6e1976e79ab05d92048c21da056d70"
       },
       "GetNativeMEPTopologyV1": {
         "version": "29",
@@ -4065,7 +4652,9 @@
                       "RoutingSegment",
                       "RoutingNode",
                       "RigidSegment",
-                      "Transition"
+                      "Transition",
+                      "Elbow",
+                      "Branch"
                     ]
                   }
                 },
@@ -4120,7 +4709,9 @@
                           "RoutingSegment",
                           "RoutingNode",
                           "RigidSegment",
-                          "Transition"
+                          "Transition",
+                          "Elbow",
+                          "Branch"
                         ]
                       },
                       "headerQueryError": {
@@ -4446,13 +5037,34 @@
                         ],
                         "additionalProperties": false
                       },
-                      "angleRadians": {
+                      "angleDegrees": {
                         "type": "number"
                       },
                       "offsetYMetres": {
                         "type": "number"
                       },
                       "offsetZMetres": {
+                        "type": "number"
+                      },
+                      "radiusMetres": {
+                        "type": "number"
+                      },
+                      "factorRadiusApplicable": {
+                        "type": "boolean"
+                      },
+                      "factorRadius": {
+                        "type": "number"
+                      },
+                      "preferenceTableApplicable": {
+                        "type": "boolean"
+                      },
+                      "branchLengthMetres": {
+                        "type": "number"
+                      },
+                      "branchAngleDegrees": {
+                        "type": "number"
+                      },
+                      "branchOffsetMetres": {
                         "type": "number"
                       }
                     },
@@ -4501,7 +5113,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeMEPTopology.inc",
-        "implementationSHA256": "7c3b7e0748f9d8987ddc7a680528fe2dc33ade40b8cea96ab27947b07a177c60"
+        "implementationSHA256": "1cc29c9858287e0437c28bc1503920ea40fb52b25e966ef24d3bbe910e103558"
       }
     },
     "AddOnCommandTest": {
