@@ -1,6 +1,6 @@
 # APA offline native-domain & dynamic-security matrix (2026-10-15)
 
-Status: **PREPARED / CI_NOT_YET_VERIFIED** until actual job/JUnit readback.
+Status: **OFFLINE_PASS / JUNIT_VERIFIED**. GitHub Actions [#38728924457](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38728924457), code commit `84c40745693aea3a2a2467eadda3e148e755c897`: 1922/1922, 12/12 Windows shards PASS, 0 failure, 0 errors, 0 skipped. Initial run [#38728539689](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38728539689) showed 12 test-oracle failures in Navigator map routing; test oracle corrected without changing production implementation. Research receipt: draft PR in `research/apa-new-offline-domains-20261015`.
 
 Source base: draft PR #100 head 31b4d39b35907ef21fa0fe7dbf13dd1c7c8ed82a, with native-positive code from PR #97. Follow-up isolated branch ci/apa-offline-mass-parallel-new-domains-20261015; no changes to main or the original PR branches.
 
