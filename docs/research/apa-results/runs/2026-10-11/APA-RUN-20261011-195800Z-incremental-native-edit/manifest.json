@@ -1,0 +1,89 @@
+{
+  "action_id": "APA-P70.A03",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-INCREMENTAL-NATIVE-EDIT-RESTORE",
+      "evidence_ids": [
+        "EV-INCREMENTAL-FINAL-AUDIT",
+        "EV-INCREMENTAL-PERSISTENCE"
+      ],
+      "statement": "Captured independent native readback proves existing window edit and explicit restore without GUID/host/story/material drift, followed by save/reopen and original graph restoration.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-INCREMENTAL-CI-289",
+      "evidence_ids": [
+        "EV-INCREMENTAL-CI"
+      ],
+      "statement": "Head976c19c passed289offline tests; independent native results remain separate.",
+      "status": "OFFLINE_PASS"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-INCREMENTAL-FINAL-AUDIT",
+      "kind": "LOCAL_LOG",
+      "sha256": "806c5880453cf099e282d937698e8bca4b3c9cdfe215860916a2b8c13700cfa6",
+      "source_revision": "976c19cecebe3f6bb4352365d9a59051d5b2b61b",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261011-195800Z-incremental-native-edit/core-final-readonly-20261011/result.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-INCREMENTAL-PERSISTENCE",
+      "kind": "LOCAL_LOG",
+      "sha256": "78bc461b870da652aac512d60e97c3775344d1f446cb456613fc295804c914c3",
+      "source_revision": "976c19cecebe3f6bb4352365d9a59051d5b2b61b",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261011-195800Z-incremental-native-edit/persistence-20261011-after-edit-restore/result.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-INCREMENTAL-CI",
+      "kind": "TEST_RESULT",
+      "sha256": null,
+      "source_revision": "976c19cecebe3f6bb4352365d9a59051d5b2b61b",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38170051997",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "codex-apa-core-native-20261011",
+  "executor_run_id": "APA-RUN-20261011-195400Z-incremental-native-edit",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-11T19:58:08Z",
+  "idempotency_key": "sha256:3a82c8dda1d1de74798f625eb128410a91df876b7566f87351f5981de466f57a",
+  "inputs": [
+    "ART-P70-A03-S02-AUTHORED-BUILDING17-SAVED-20261011"
+  ],
+  "next_substep": "APA-P70.A03.S04",
+  "phase": "SOURCE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261011-195800Z-incremental-native-edit",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "29 build5101 RUS (captured evidence)",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "sdk": null,
+    "source_branch": "feature/apa-isolated-authored-native-20261011",
+    "tapir": "1.5.10"
+  },
+  "source_revisions": [
+    {
+      "revision": "976c19cecebe3f6bb4352365d9a59051d5b2b61b",
+      "source_sha": "976c19cecebe3f6bb4352365d9a59051d5b2b61b",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/48"
+    }
+  ],
+  "started_at": "2026-10-11T19:58:08Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A03.S03"
+}

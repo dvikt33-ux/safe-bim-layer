@@ -1,0 +1,181 @@
+{
+  "scope": "observed 40-to-48-GUID isolated test; includes failed preparations and reconciliation",
+  "largerModelSpeedup": "NOT_MEASURED",
+  "commands": {
+    "API.GetProductInfo": {
+      "calls": 6,
+      "minimumSeconds": 0.0019165999838151038,
+      "medianSeconds": 0.002295599988428876,
+      "maximumSeconds": 0.012944300018716604,
+      "errors": 0
+    },
+    "CreateMEPRoutingElements": {
+      "calls": 1,
+      "minimumSeconds": 0.3126514999894425,
+      "medianSeconds": 0.3126514999894425,
+      "maximumSeconds": 0.3126514999894425,
+      "errors": 0
+    },
+    "CreateMorphs": {
+      "calls": 2,
+      "minimumSeconds": 0.054693000041879714,
+      "medianSeconds": 0.08305520002613775,
+      "maximumSeconds": 0.1114174000103958,
+      "errors": 0
+    },
+    "CreateRoofs": {
+      "calls": 1,
+      "minimumSeconds": 0.03826669999398291,
+      "medianSeconds": 0.03826669999398291,
+      "maximumSeconds": 0.03826669999398291,
+      "errors": 0
+    },
+    "GetAddOnVersion": {
+      "calls": 48,
+      "minimumSeconds": 0.0032131000189110637,
+      "medianSeconds": 0.013793349993648008,
+      "maximumSeconds": 0.03413210000144318,
+      "errors": 0
+    },
+    "GetAllElements": {
+      "calls": 44,
+      "minimumSeconds": 0.003930400009267032,
+      "medianSeconds": 0.015324699983466417,
+      "maximumSeconds": 0.037132699973881245,
+      "errors": 0
+    },
+    "GetAttributesByType": {
+      "calls": 5,
+      "minimumSeconds": 0.0046227999846450984,
+      "medianSeconds": 0.012775400013197213,
+      "maximumSeconds": 0.03417769999941811,
+      "errors": 0
+    },
+    "GetCollisions": {
+      "calls": 3,
+      "minimumSeconds": 0.005634200002532452,
+      "medianSeconds": 0.010958499973639846,
+      "maximumSeconds": 0.022744600020814687,
+      "errors": 0
+    },
+    "GetDetailsOfElements": {
+      "calls": 556,
+      "minimumSeconds": 0.0025474000140093267,
+      "medianSeconds": 0.014969500014558434,
+      "maximumSeconds": 0.037045100005343556,
+      "errors": 0
+    },
+    "GetIFCExportTranslators": {
+      "calls": 3,
+      "minimumSeconds": 0.021446599974296987,
+      "medianSeconds": 0.02861450001364574,
+      "maximumSeconds": 0.11035959998844191,
+      "errors": 0
+    },
+    "GetIFCIdsOfElements": {
+      "calls": 17,
+      "minimumSeconds": 0.008897499996237457,
+      "medianSeconds": 0.0176235000253655,
+      "maximumSeconds": 0.09225149999838322,
+      "errors": 0
+    },
+    "GetMEPDistributionSystems": {
+      "calls": 16,
+      "minimumSeconds": 0.008019100001547486,
+      "medianSeconds": 0.014814000023761764,
+      "maximumSeconds": 0.02993289998266846,
+      "errors": 0
+    },
+    "GetMEPElements": {
+      "calls": 1,
+      "minimumSeconds": 0.00783040001988411,
+      "medianSeconds": 0.00783040001988411,
+      "maximumSeconds": 0.00783040001988411,
+      "errors": 0
+    },
+    "GetMEPPorts": {
+      "calls": 16,
+      "minimumSeconds": 0.010049499978777021,
+      "medianSeconds": 0.01624289996107109,
+      "maximumSeconds": 0.02831919997697696,
+      "errors": 0
+    },
+    "GetMEPPreferenceTables": {
+      "calls": 1,
+      "minimumSeconds": 0.026351200009230524,
+      "medianSeconds": 0.026351200009230524,
+      "maximumSeconds": 0.026351200009230524,
+      "errors": 1
+    },
+    "GetMEPRoutingElements": {
+      "calls": 32,
+      "minimumSeconds": 0.002432400011457503,
+      "medianSeconds": 0.015153599990298972,
+      "maximumSeconds": 0.04096020001452416,
+      "errors": 0
+    },
+    "GetMEPSystems": {
+      "calls": 2,
+      "minimumSeconds": 0.012436899996828288,
+      "medianSeconds": 0.02106934998300858,
+      "maximumSeconds": 0.02970179996918887,
+      "errors": 0
+    },
+    "GetModelDumpV1": {
+      "calls": 45,
+      "minimumSeconds": 0.13683679996756837,
+      "medianSeconds": 0.16414160002022982,
+      "maximumSeconds": 1.2990419000270776,
+      "errors": 0
+    },
+    "GetProjectInfo": {
+      "calls": 48,
+      "minimumSeconds": 0.002300499996636063,
+      "medianSeconds": 0.01659474999178201,
+      "maximumSeconds": 0.07007560000056401,
+      "errors": 0
+    },
+    "GetStories": {
+      "calls": 48,
+      "minimumSeconds": 0.0016074000159278512,
+      "medianSeconds": 0.011794049991294742,
+      "maximumSeconds": 0.031127499998547137,
+      "errors": 0
+    },
+    "GetSubelementsOfHierarchicalElements": {
+      "calls": 20,
+      "minimumSeconds": 0.006763500045053661,
+      "medianSeconds": 0.01723465000395663,
+      "maximumSeconds": 0.08920740004396066,
+      "errors": 0
+    },
+    "IFCFileOperation": {
+      "calls": 2,
+      "minimumSeconds": 0.32900860003428534,
+      "medianSeconds": 0.4037185000197496,
+      "maximumSeconds": 0.4784284000052139,
+      "errors": 0
+    },
+    "ModifyMorphs": {
+      "calls": 1,
+      "minimumSeconds": 0.04837340000085533,
+      "medianSeconds": 0.04837340000085533,
+      "maximumSeconds": 0.04837340000085533,
+      "errors": 0
+    },
+    "OpenProject": {
+      "calls": 2,
+      "minimumSeconds": 15.004530999984127,
+      "medianSeconds": 15.384303300001193,
+      "maximumSeconds": 15.76407560001826,
+      "errors": 1
+    },
+    "SaveProject": {
+      "calls": 2,
+      "minimumSeconds": 2.582498100004159,
+      "medianSeconds": 2.619320100027835,
+      "maximumSeconds": 2.656142100051511,
+      "errors": 0
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:31adfe00c227a9e978fee0391d584f7475a958d48e51dcc414ef3492ae3163e3",
+  "index_commit_sha": "a3a79f51913b838c0a6827a3f728c6eda6aab654",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "a3a79f51913b838c0a6827a3f728c6eda6aab654",
+  "report_path": "docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-160327Z-p70-a01-s03-integration-freeze/REPORT.md",
+  "report_sha256": "2fc80fd48ae2d4872e6d234be3a5283201f0b1ffc64b032c0420b8ae2bb72d87",
+  "run_id": "APA-RUN-20261011-160327Z-p70-a01-s03-integration-freeze",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

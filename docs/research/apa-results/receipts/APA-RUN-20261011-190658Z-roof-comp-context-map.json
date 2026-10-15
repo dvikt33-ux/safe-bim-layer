@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:0fb22788217195f2887c3f8e5b9c3911f3ec00bf5e6b24f6ae88fb7658e1e6fc",
+  "index_commit_sha": "83ac0ea285992e97315d3763d443ece649a374d1",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "83ac0ea285992e97315d3763d443ece649a374d1",
+  "report_path": "docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-190658Z-roof-comp-context-map/REPORT.md",
+  "report_sha256": "c3b5b612051fbe6106ba6dba9bf60c22c57c4f65e672a889d837a6abf33df0cb",
+  "run_id": "APA-RUN-20261011-190658Z-roof-comp-context-map",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

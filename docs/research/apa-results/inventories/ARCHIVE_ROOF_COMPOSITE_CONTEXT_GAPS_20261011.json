@@ -1,0 +1,309 @@
+{
+  "schema": "APA_ARCHIVE_TO_CURRENT_CONTRACT_GAP_V1",
+  "classification": "SOURCE_READ_CURRENT_SCHEMA_PLUS_HISTORICAL_RESEARCH_NOT_LIVE_CLAIMS",
+  "repository": "dvikt33-ux/safe-bim-layer",
+  "task_id": "APA-P00.A02.S03",
+  "research_datetime_utc": "2026-10-11T19:04:37.584Z",
+  "historical_source_archive": {
+    "branch_head": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+    "source_archived_byte_exact": true,
+    "archived_blob_count": 71,
+    "historical_target": "Tapir 1.5.9"
+  },
+  "current_checked_git_refs": {
+    "tapir_schema_and_scene_writer": "feature/apa-authored-spatial-clearance-20261011",
+    "highlevel_builder": "feature/apa-highlevel-whole-model-20261011",
+    "installed_tapir_apx_verified_in_this_run": false,
+    "archicad_live_verified_in_this_run": false
+  },
+  "sources": [
+    {
+      "id": "HIST-ROOF-20",
+      "ref": "research/apa-verified-results-hub-20261010",
+      "path": "docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/03_archicad_api_contracts/SINGLE_ELEMENT_GABLE_ROOF_RESEARCH_PASSES_01_20.md",
+      "blob_sha": "b61d2c34a877e7ffba24fff1825f216b7be67513",
+      "url": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/03_archicad_api_contracts/SINGLE_ELEMENT_GABLE_ROOF_RESEARCH_PASSES_01_20.md"
+    },
+    {
+      "id": "HIST-ROOF-ADD",
+      "ref": "research/apa-verified-results-hub-20261010",
+      "path": "docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/09_final_audit/GABLE_ROOF_FINAL_AUDIT_ADDENDUM.md",
+      "blob_sha": "ed7721fbc6e117eb0c62ef6b7bf5aa846bba273d",
+      "url": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/09_final_audit/GABLE_ROOF_FINAL_AUDIT_ADDENDUM.md"
+    },
+    {
+      "id": "HIST-COMP-18",
+      "ref": "research/apa-verified-results-hub-20261010",
+      "path": "docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/03_archicad_api_contracts/COMPOSITE_STRUCTURES_RESEARCH_PASSES_01_18.md",
+      "blob_sha": "b2d681e76e4bc59899a4e08a5b6d74b3a77d1707",
+      "url": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/03_archicad_api_contracts/COMPOSITE_STRUCTURES_RESEARCH_PASSES_01_18.md"
+    },
+    {
+      "id": "HIST-COMP-ADD",
+      "ref": "research/apa-verified-results-hub-20261010",
+      "path": "docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/09_final_audit/ROOF_PARAPET_COMPOSITE_FINAL_AUDIT_ADDENDUM.md",
+      "blob_sha": "128d715baf6f11a1abad5f35d7819f6e06b1e63b",
+      "url": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/09_final_audit/ROOF_PARAPET_COMPOSITE_FINAL_AUDIT_ADDENDUM.md"
+    },
+    {
+      "id": "HIST-CONTEXT-160",
+      "ref": "research/apa-verified-results-hub-20261010",
+      "path": "docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/09_final_audit/FINAL_PROJECT_CONTEXT_BRIDGE_AUDIT_AFTER_160.md",
+      "blob_sha": "208e807425f698b93838552ef15ed5ba53491ef0",
+      "url": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/source-archives/archicad29-tapir159-expansion-c651035d/09_final_audit/FINAL_PROJECT_CONTEXT_BRIDGE_AUDIT_AFTER_160.md"
+    },
+    {
+      "id": "TAPIR-SCHEMA",
+      "ref": "feature/apa-authored-spatial-clearance-20261011",
+      "path": "schemas/tapir-live-1.5.10/tapir-scene-live.json",
+      "blob_sha": "e8ad53b6ea7c19dc34cbdcb723a79be995639cd7",
+      "url": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-spatial-clearance-20261011/schemas/tapir-live-1.5.10/tapir-scene-live.json"
+    },
+    {
+      "id": "HIGHLEVEL-WRITER",
+      "ref": "feature/apa-highlevel-whole-model-20261011",
+      "path": "scripts/archicad_building_shell.py",
+      "blob_sha": "04b08ee0cb8267f8e035158c419d99b15f13c62b",
+      "url": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-highlevel-whole-model-20261011/scripts/archicad_building_shell.py"
+    },
+    {
+      "id": "SCENEWRITER",
+      "ref": "feature/apa-authored-spatial-clearance-20261011",
+      "path": "scripts/archicad_scene_run.py",
+      "blob_sha": "7905cfa237ec989da31b527aa931dd7f4663504e",
+      "url": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-spatial-clearance-20261011/scripts/archicad_scene_run.py"
+    },
+    {
+      "id": "WATCHER",
+      "ref": "feature/apa-authored-spatial-clearance-20261011",
+      "path": "scripts/archicad_change_watch.py",
+      "blob_sha": "dcdb4c4b60eccd5c2d5fadd18fa951e7a1ed77bc",
+      "url": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-spatial-clearance-20261011/scripts/archicad_change_watch.py"
+    },
+    {
+      "id": "WATCHER-CONTEXT",
+      "ref": "feature/apa-authored-spatial-clearance-20261011",
+      "path": "scripts/archicad_watch_context.py",
+      "blob_sha": "0d33ccaba442f0d5416e133a79ba1a9415cfafe5",
+      "url": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-spatial-clearance-20261011/scripts/archicad_watch_context.py"
+    },
+    {
+      "id": "COMPOSITE-BLUEPRINT",
+      "ref": "feature/apa-highlevel-whole-model-20261011",
+      "path": "docs/archicad-template/COMPOSITE_FAMILY_STRATEGY_v0.1.md",
+      "blob_sha": "bfdc64dfc98d6619d2e429ac1308f6fdf9864444",
+      "url": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-highlevel-whole-model-20261011/docs/archicad-template/COMPOSITE_FAMILY_STRATEGY_v0.1.md"
+    },
+    {
+      "id": "COMPOSITE-FAMILY-YAML",
+      "ref": "feature/apa-highlevel-whole-model-20261011",
+      "path": "docs/archicad-template/composite-family-registry-v0.1.yaml",
+      "blob_sha": "e2449fe7c5441adefb065e39634871a6d9ce4120",
+      "url": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-highlevel-whole-model-20261011/docs/archicad-template/composite-family-registry-v0.1.yaml"
+    }
+  ],
+  "topics": [
+    {
+      "id": "ROOF-ONE-GUID-GABLE",
+      "source_claim": "Archived 1.5.9 study proposes one API_PolyRoofID with per-pivot-edge Gable/Sloped types; requires controlled create and native edge readback.",
+      "existing": "Tapir 1.5.10 saved command contract supports generic CreateRoofs and RoofDetails (roofClass MultiPlane/SinglePlane, compositeId), but lacks named per-edge pivotEdgeSettings input and typed per-edge RoofDetails response. Current highlevel builder restricts native commands to Walls/Slabs/Doors/Windows; Roof absent.",
+      "verified_source_facts": [
+        {
+          "field": "CreateRoofs.commandVersion",
+          "value": "1.4.0"
+        },
+        {
+          "field": "CreateRoofs.roofsDataItemPropertyNames",
+          "value": [
+            "level",
+            "floorIndex",
+            "thickness",
+            "polygonCoordinates",
+            "polygonArcs",
+            "holes",
+            "pivotLine",
+            "angle",
+            "eavesOverhang",
+            "levels",
+            "structureType",
+            "buildingMaterialId",
+            "compositeId"
+          ]
+        },
+        {
+          "field": "RoofDetails.fieldNames",
+          "value": [
+            "roofClass",
+            "structureType",
+            "thickness",
+            "level",
+            "zCoordinate",
+            "buildingMaterialId",
+            "compositeId",
+            "angle",
+            "pivotLine",
+            "eavesOverhang",
+            "levels",
+            "pivotPolygonOutline",
+            "polygonOutline",
+            "polygonArcs",
+            "holes"
+          ]
+        },
+        {
+          "field": "CreateRoofs.hasPerPivotEdgeConfiguration",
+          "value": false
+        },
+        {
+          "field": "RoofDetails.hasTypedPerPivotEdgeReadback",
+          "value": false
+        },
+        {
+          "field": "highlevelNativeWriteSet",
+          "value": [
+            "CreateWalls",
+            "CreateSlabs",
+            "CreateDoors",
+            "CreateWindows"
+          ]
+        }
+      ],
+      "status": "CONTRACT_GAP_CONFIRMED_IN_RETAINED_SCHEMA; LIVE_NOT_VERIFIED",
+      "dedup_policy": "KEEP archived precise gable memo/API source; reuse existing roof/Tapir adapter; do not build independent general writer or replace roof with two faces by default.",
+      "target_s_ids": [
+        "APA-P10.A01.S03",
+        "APA-P10.A02.S01",
+        "APA-P70.A03.S02"
+      ],
+      "next_measured_gate": "Offline-only compare Tapir 1.5.10 native source/installed build with 1.5.10 JSON schema; design optional typed per-edge input/readback and negative tests. Require exact one-roof GUID native memory/readback and explicit live approval before any write.",
+      "scope_limits": [
+        "No claim that current native C++ API cannot do gable.",
+        "No live Roof creation executed.",
+        "Absence is in the saved schema, not independently in loaded APX."
+      ]
+    },
+    {
+      "id": "COMPOSITE-ATTRIBUTES",
+      "source_claim": "Archived source prefers existing CreateComposites/GetComposites for ordered BuildingMaterial skins and N+1 separators with exact readback and dependency preflight, not new generic writer.",
+      "existing": "Tapir 1.5.10 saved schema exposes CreateComposites 1.0.2, GetComposites 1.5.4, GetBuildingMaterials 1.5.4. Composite creation has write semantics and overwriteExisting; nested useWith is optional at schema level. Highlevel scene emits Basic Walls and the current SceneWriter resolves one exact BuildingMaterial for Basic slab, not an accepted composite family build.",
+      "verified_source_facts": [
+        {
+          "field": "CreateComposites.commandVersion",
+          "value": "1.0.2"
+        },
+        {
+          "field": "CreateComposites.requestPropertyNames",
+          "value": [
+            "compositeDataArray",
+            "overwriteExisting"
+          ]
+        },
+        {
+          "field": "CreateComposites.requiredDataFields",
+          "value": [
+            "name",
+            "skins",
+            "separators"
+          ]
+        },
+        {
+          "field": "CreateComposites.useWithRequiredBySavedSchema",
+          "value": false
+        },
+        {
+          "field": "CreateComposites.overwriteExistingDefaultAccordingToSavedDescription",
+          "value": false
+        },
+        {
+          "field": "CreateRoofs.compositeIdExists",
+          "value": true
+        },
+        {
+          "field": "GetComposites.commandVersion",
+          "value": "1.5.4"
+        }
+      ],
+      "status": "EXISTING_JSON_CONTRACT_PRESENT; SAFE_ATTRIBUTE_RESOLVER_AND_LIVE_READBACK_NOT_VERIFIED",
+      "dedup_policy": "KEEP historic dependency-resolution fingerprint proposal, reuse current family blueprint and existing attribute commands. Do not auto-overwrite project attributes by name.",
+      "target_s_ids": [
+        "APA-P10.A02.S01",
+        "APA-P70.A04.S02",
+        "APA-P70.A03.S02"
+      ],
+      "next_measured_gate": "Read-only enumerate project BuildingMaterials/Composites with exact GUID, roles/useWith, total skin thickness, separators, then compare to verified per-project assembly blueprint and fail on missing dependencies; separately design attribute write journal/receipt with explicit approval.",
+      "scope_limits": [
+        "Existence of schema is not proof that loaded APX command succeeds.",
+        "Composite attribute writes may affect multiple elements.",
+        "Product/GOST source is not an engineering approval."
+      ]
+    },
+    {
+      "id": "PROJECT-CONTEXT-SNAPSHOT",
+      "source_claim": "Archived 160-pass design proposes a coherent per-project snapshot with native modiStamp/GUID index, atomic publication and stale-context rejection.",
+      "existing": "scripts/archicad_change_watch.py already polls GetProjectInfo/GetStories/GetAllElements/GetDetailsOfElements/Get3DBoundingBoxes, detects GUID/fingerprint differences and project switches; archicad_watch_context.py emits local summary; SceneWriter checks exact project path, story/floorId, Tapir version, preflight geometry and stored plan hash per operation. Saved 1.5.10 schema lacks GetSafeBIMProjectStamp/GetSafeBIMElementStateIndex.",
+      "verified_source_facts": [
+        {
+          "field": "GetSafeBIMProjectStamp.savedSchema",
+          "value": false
+        },
+        {
+          "field": "GetSafeBIMElementStateIndex.savedSchema",
+          "value": false
+        },
+        {
+          "field": "watcherCalls",
+          "value": [
+            "GetProjectInfo",
+            "GetStories",
+            "GetAllElements",
+            "GetDetailsOfElements",
+            "Get3DBoundingBoxes"
+          ]
+        },
+        {
+          "field": "contextConsumer",
+          "value": "local archicad-watch latest/events JSON; no in-run proof of private GitHub project mirror"
+        },
+        {
+          "field": "SceneWriter.checks",
+          "value": [
+            "exact test PLN path/name",
+            "GetStories index/floorId/level",
+            "GetAddOnVersion",
+            "full inventory 3D boxes",
+            "sourcePlanHash",
+            "GUID readback + mutation journal"
+          ]
+        }
+      ],
+      "status": "PARTIALLY_IMPLEMENTED_CURRENT_READONLY_POLLING_AND_WRITE_GATES; NATIVE_MODISTAMP_AND_ATOMIC_PUBLICATION_UNVERIFIED",
+      "dedup_policy": "KEEP historical coherence/epoch concept, reuse current watcher/SceneWriter. No second independent always-on watcher or new SQLite writer without value justification.",
+      "target_s_ids": [
+        "APA-P70.A03.S03",
+        "APA-P70.A01.S02",
+        "APA-P10.A02.S01"
+      ],
+      "next_measured_gate": "Offline adversarial stale-plan tests using current watcher + SceneWriter: project switch, same-path altered model, story/material changes, token/epoch mismatch. Native read-only capability probe for project/element stamp on exact installed APX; atomic coherent snapshot gate before cloud publication.",
+      "scope_limits": [
+        "Old design is research, not installed feature.",
+        "No claim stale-context gate persists across all multi-instance and attribute changes.",
+        "No poll/read/write to local Archicad in this run."
+      ]
+    }
+  ],
+  "nonchanges": {
+    "main": false,
+    "existing_branches": false,
+    "pln": false,
+    "apx": false,
+    "slack": false,
+    "sqlite": false
+  },
+  "acceptance": {
+    "archived_claims_linked_to_current_source": true,
+    "confirmed_saved_schema_roof_edge_gap": true,
+    "existing_composite_command_reused": true,
+    "existing_context_code_reused": true,
+    "live_runtime_status": "NOT_VERIFIED"
+  }
+}

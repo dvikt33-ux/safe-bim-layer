@@ -1,0 +1,22 @@
+{
+  "subelements": [
+    {
+      "columnSegments": [
+        {
+          "elementId": {
+            "guid": "55D1A829-C83C-4FE1-8073-F8B83D102170"
+          }
+        }
+      ]
+    },
+    {
+      "columnSegments": [
+        {
+          "elementId": {
+            "guid": "5988AD8C-DCC4-43FE-9BD5-CF3FCC8FC48A"
+          }
+        }
+      ]
+    }
+  ]
+}

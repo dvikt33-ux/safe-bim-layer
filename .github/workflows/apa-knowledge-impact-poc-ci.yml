@@ -1,0 +1,145 @@
+name: APA knowledge impact read-only POC CI
+
+on:
+  pull_request:
+    branches:
+      - research/apa-verified-results-hub-20261010
+    paths:
+      - 'tools/apa_knowledge_graph/**'
+      - '.github/workflows/apa-knowledge-impact-poc-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  graph-offline-tests:
+    if: github.repository == 'dvikt33-ux/safe-bim-layer'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout pull request (no write token)
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install existing APA YAML dependency
+        run: python -m pip install PyYAML==6.0.3 tiktoken==0.14.0 mcp==2.3.0
+      - name: Run unit, negative and real plan regression tests
+        run: python -m unittest discover -s tools/apa_knowledge_graph/tests -v
+      - name: Bootstrap local read-only cache from actual repo
+        run: |
+          python tools/apa_knowledge_graph/bootstrap.py \
+            --repo-root . --cache-dir "${RUNNER_TEMP}/apa-local-knowledge"
+      - name: Build disposable graph from canonical plan
+        run: |
+          python tools/apa_knowledge_graph/graph.py build \
+            --plan docs/research/apa-results/control/PROJECT_PLAN.json \
+            --out "${RUNNER_TEMP}/apa-knowledge-index.json"
+      - name: Build derived section index without changing source documents
+        run: |
+          python tools/apa_knowledge_graph/sections.py build \
+            --root docs/research/apa-results \
+            --out "${RUNNER_TEMP}/apa-sections.sqlite"
+      - name: Benchmark 100 real documents for self-source lexical recall (diagnostic, not semantic gold)
+        run: |
+          python tools/apa_knowledge_graph/benchmark_retrieval.py \
+            --index "${RUNNER_TEMP}/apa-sections.sqlite" --size 100 --k 5
+      - name: Search real research sections with source SHA readback
+        run: |
+          python tools/apa_knowledge_graph/sections.py search \
+            --index "${RUNNER_TEMP}/apa-sections.sqlite" \
+            --query "кровли" --source-class PROJECT_CONTROL --limit 3 --max-snippet 160
+      - name: Read exact PR68 normative source bytes and build real field-to-task chain
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python tools/apa_knowledge_graph/machine_adapter.py \
+            --index "${RUNNER_TEMP}/apa-knowledge-index.json" \
+            --out "${RUNNER_TEMP}/apa-real-machine-chain.json" \
+            --benchmark-plan docs/research/apa-results/control/PROJECT_PLAN.json \
+            --change-field roof_slope_length_m --before 10 --after 12
+      - name: Verify unified GPT gateway exact and multi-document lookup on actual APA
+        run: |
+          python tools/apa_knowledge_graph/gateway.py \
+            --index "${RUNNER_TEMP}/apa-knowledge-index.json" \
+            --plan docs/research/apa-results/control/PROJECT_PLAN.json \
+            --query "APA-P70.A02.S02" --max-chars 850
+          python tools/apa_knowledge_graph/gateway.py \
+            --index "${RUNNER_TEMP}/apa-knowledge-index.json" \
+            --plan docs/research/apa-results/control/PROJECT_PLAN.json \
+            --query "ART-APA-RU-JUNCTION-NORMS ART-APA-CSE-RESEARCH" \
+            --max-chars 1600
+          python tools/apa_knowledge_graph/gateway.py \
+            --index "${RUNNER_TEMP}/apa-knowledge-index.json" \
+            --plan docs/research/apa-results/control/PROJECT_PLAN.json \
+            --sections "${RUNNER_TEMP}/apa-sections.sqlite" \
+            --repo-root . --query "кровли" --source-class PROJECT_CONTROL \
+            --max-chars 1800 --limit 4
+      - name: Guard against dropping shared cross-document task under token budget
+        run: |
+          python tools/apa_knowledge_graph/gateway.py \
+            --index "${RUNNER_TEMP}/apa-knowledge-index.json" \
+            --plan docs/research/apa-results/control/PROJECT_PLAN.json \
+            --query "ART-APA-RU-JUNCTION-NORMS ART-APA-CSE-RESEARCH" \
+            --max-chars 1600 > "${RUNNER_TEMP}/apa-compact-multidoc.json"
+          python -c 'import os,json; from pathlib import Path; p=Path(os.environ["RUNNER_TEMP"])/"apa-compact-multidoc.json"; r=json.loads(p.read_text()); assert r["status"]=="OK"; assert r["task_refs_all"]==1; assert any(x.get("task_id")=="APA-P70.A02.S02" for x in r["items"]); assert len(p.read_text())<=1601; print("REAL_SHARED_TASK_SURVIVES_BUDGET",len(r["items"]),len(p.read_text()))'
+      - name: Measure prompt-visible real APA multi-document join context proxy
+        run: |
+          python -c 'import os,json,tiktoken; from pathlib import Path; t=tiktoken.get_encoding("o200k_base"); a=Path("docs/research/apa-results/control/PROJECT_PLAN.json").read_text(); b=(Path(os.environ["RUNNER_TEMP"])/"apa-compact-multidoc.json").read_text(); print(json.dumps({"scenario":"EXACT_TWO_ARTIFACT_JOIN","raw_plan_proxy_tokens":len(t.encode(a)),"compact_response_proxy_tokens":len(t.encode(b)),"note":"Not total GPT6 billed tokens, schema cost, routing or quality"}))'
+      - name: Query real APA normative artifact (bounded)
+        run: |
+          python tools/apa_knowledge_graph/graph.py artifact \
+            --index "${RUNNER_TEMP}/apa-knowledge-index.json" \
+            --id ART-APA-RU-JUNCTION-NORMS --limit 5
+      - name: Join two real APA artifacts without full files
+        run: |
+          python tools/apa_knowledge_graph/multidoc.py \
+            --index "${RUNNER_TEMP}/apa-knowledge-index.json" \
+            --artifacts ART-APA-RU-JUNCTION-NORMS ART-APA-CSE-RESEARCH \
+            --max-tasks 5
+  windows-compatibility:
+    if: github.repository == 'dvikt33-ux/safe-bim-layer'
+    runs-on: windows-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout no writable token
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Windows Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install exact optional dependencies
+        run: python -m pip install PyYAML==6.0.3 tiktoken==0.14.0 mcp==2.3.0
+      - name: Run Windows tests
+        run: python -m unittest discover -s tools/apa_knowledge_graph/tests -v
+      - name: Windows one-command bootstrap
+        shell: pwsh
+        run: |
+          $cache=Join-Path $env:RUNNER_TEMP "apa-windows-local-cache"
+          python tools/apa_knowledge_graph/bootstrap.py --repo-root . --cache-dir $cache
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+      - name: Run actual user-facing one-click Windows setup command
+        shell: pwsh
+        run: |
+          cmd /c "tools\\apa_knowledge_graph\\Setup-APA-Knowledge.cmd"
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+      - name: Build and query Windows local indexes
+        shell: pwsh
+        run: |
+          $plan="docs/research/apa-results/control/PROJECT_PLAN.json"
+          $graph=Join-Path $env:RUNNER_TEMP "apa-graph-win.json"
+          $sections=Join-Path $env:RUNNER_TEMP "apa-sections-win.sqlite"
+          python tools/apa_knowledge_graph/graph.py build --plan $plan --out $graph
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+          python tools/apa_knowledge_graph/sections.py build --root docs/research/apa-results --out $sections
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+          python tools/apa_knowledge_graph/gateway.py --plan $plan --index $graph --query "что делать дальше" --mode plan --max-chars 1600
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+          python tools/apa_knowledge_graph/gateway.py --plan $plan --index $graph --sections $sections --repo-root . --query "кровли" --source-class PROJECT_CONTROL --max-chars 1600
+          if ($LASTEXITCODE -ne 0) { exit 1 }

@@ -1,0 +1,193 @@
+{
+  "action_id": "APA-P70.A11",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-COMPONENT-NATIVE-READS",
+      "evidence_ids": [
+        "EV-2"
+      ],
+      "statement": "Five grouped read calls verified:86 native Stair child bindings/parameters,7 envelope memos,4 database-qualified Drawing auxiliary reads,3 empty Opening host lookups and1 pre-engine identity. Positive Opening/CW/Railing/Shell samples not verified.",
+      "status": "LIVE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-COMPONENT-DEPENDENCY-FLOW",
+      "evidence_ids": [
+        "EV-4",
+        "EV-5"
+      ],
+      "statement": "Captured native ownership matches existing membership for86 children; existing BIM Graph and DependencyImpact process96nodes/87edges. One verified ViewMap source link;3 omitted. Relationships are not physical contact.",
+      "status": "OFFLINE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-COMPONENT-BUILD",
+      "evidence_ids": [
+        "EV-3",
+        "EV-2"
+      ],
+      "statement": "Full Release APX source/binary identity,288 registrations and five runtime-exported input schemas bound to tested candidate. Exact candidate explicitly authorized and original restored.",
+      "status": "BUILD_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-COMPONENT-RETENTION",
+      "evidence_ids": [
+        "EV-2"
+      ],
+      "statement": "Original APX SHA/registration restored; independent original runtime reopen matches258 GUIDs/full serialized native parameters and unchanged saved bytes. No physical BREP comparison or engineering acceptance.",
+      "status": "LIVE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-COMPONENT-BOUNDARIES",
+      "evidence_ids": [
+        "EV-0",
+        "EV-6",
+        "EV-7"
+      ],
+      "statement": "385preparable=375native/source+10local;337original/361tested candidate compatible including one quarantined command.38source-only original,14absent candidate,32APX without public contract. Quantity engine root cause unverified; no engine call or replay.",
+      "status": "NOT_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-0",
+      "kind": "TEST_RESULT",
+      "sha256": "a782feaf428b1f50a148204d80946c351dcfb4fc8a6d5facb3e924296e033443",
+      "source_revision": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-071450Z-sdk-component-context/module-coverage.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-1",
+      "kind": "TEST_RESULT",
+      "sha256": "74806d797fb4b6d9e577d565d094799df735dc66aaa9c26dd811ccda6b469782",
+      "source_revision": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-071450Z-sdk-component-context/module-contracts.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-2",
+      "kind": "TEST_RESULT",
+      "sha256": "2b407e7388eea00952419e9e755d1658f4f4c877b461695f83a634a105adf9c5",
+      "source_revision": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-071450Z-sdk-component-context/native-runtime.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-3",
+      "kind": "TEST_RESULT",
+      "sha256": "0e433f09aaf0e559d21a8f6b75c8af08b8e5e5dad37c653ab06058e860a20b4c",
+      "source_revision": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-071450Z-sdk-component-context/SDK-build.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-4",
+      "kind": "TEST_RESULT",
+      "sha256": "8a332047d33bc54969d6a7e94e98fe526ec1ddcbff6bd208b4940ca420ae975c",
+      "source_revision": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-071450Z-sdk-component-context/native-connected-dataflow.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-5",
+      "kind": "TEST_RESULT",
+      "sha256": "6558fe3dac7b44bc8e44bd060a071d92765613653e8b839cf3172d60931ade93",
+      "source_revision": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-071450Z-sdk-component-context/native-membership-dataflow.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-6",
+      "kind": "TEST_RESULT",
+      "sha256": "c22087f27dc866654ed741843387c2a704235af06dc69ebf33e7335171d324b5",
+      "source_revision": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-071450Z-sdk-component-context/quantity-source-preflight.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-7",
+      "kind": "TEST_RESULT",
+      "sha256": "3f84f533f27aea6358fcfdc25757819502f4b6e418e0a2dfb01c52ac16ec8ba1",
+      "source_revision": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-071450Z-sdk-component-context/gap-register.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-8",
+      "kind": "TEST_RESULT",
+      "sha256": "c0bebc63424e2fb682fe250499a751c8f1c2cc990d0336c5d8c54d9ff6013b7a",
+      "source_revision": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-071450Z-sdk-component-context/windows-ci.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-9",
+      "kind": "TEST_RESULT",
+      "sha256": "21c02c944c932ab65436dbbd45402c1ea542b84097d60f1f38dff01f3cd7e3af",
+      "source_revision": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-071450Z-sdk-component-context/core-knowledge-query.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "work-sdk-components-20261015",
+  "executor_run_id": "APA-CLAIM-SDK-COMPONENTS-20261015T020321Z",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-15T07:14:50Z",
+  "idempotency_key": "sha256:b12f8ad536d4afafff03ee168b5666a6856841469e12427752284e093047df36",
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "next_substep": "APA-P70.A11.S03",
+  "phase": "LIVE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261015-071450Z-sdk-component-context",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "Windows11 Archicad29 existing authorized test PLN; scoped grouped reads, no model-write API",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "sdk": "Public component/Opening/memo/Drawing contracts; quantity pre-engine only",
+    "source_branch": "feature/apa-sdk-component-context-20261015",
+    "tapir": "Exact candidate temporarily user-authorized; original APX/config restored"
+  },
+  "source_revisions": [
+    {
+      "revision": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c",
+      "source_sha": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/96"
+    }
+  ],
+  "started_at": "2026-10-15T02:03:21Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A11.S03"
+}

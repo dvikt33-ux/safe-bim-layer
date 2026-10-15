@@ -1,0 +1,93 @@
+{
+  "action_id": "APA-P70.A11",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-FUNCTIONAL-GAPS-V31",
+      "evidence_ids": [
+        "EV-FUNCTIONAL-GAPS-ACCEPTANCE",
+        "EV-FUNCTIONAL-GAPS-BYTES"
+      ],
+      "statement": "Working Details73context adapter, reciprocal native connected MEP and hosted Opening/SEO share accepted native context and SceneWriter. Original48GUID preserved;27primary/59GUID saved/reopened. IFC host/port/material observations are bounded. S03PARTIAL; external data/provider dependencies and engineering NOT_VERIFIED remain explicit. Publication replays captured evidence with no new native calls.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-FUNCTIONAL-GAPS-ACCEPTANCE",
+      "kind": "TEST_RESULT",
+      "sha256": "b8c7320625263df61c86f620fecd28d957377314e7ce05c8bc99ffe3f1449a63",
+      "source_revision": "3191e7ce5071e6de7401f6e520fbd8f3ef2a1ea2",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-075300Z-functional-gaps-v31/acceptance.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-FUNCTIONAL-GAPS-BYTES",
+      "kind": "LOCAL_LOG",
+      "sha256": "8adb2d20cda2a9d1cd4c22fdcde011eed2b27418a166268553af5b95cbdf94af",
+      "source_revision": "3191e7ce5071e6de7401f6e520fbd8f3ef2a1ea2",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-075300Z-functional-gaps-v31/EVIDENCE_SHA256.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "codex-apa-functional-gaps-v31-20261012",
+  "executor_run_id": "APA-RUN-20261012-functional-gaps-v31",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-12T07:59:24Z",
+  "idempotency_key": "sha256:c7b7cab8db987bf8672b67e6f0aed69b41fe55dc934b7853c9f19c6e89f3fada",
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "next_substep": "APA-P70.A11.S03",
+  "phase": "SOURCE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261012-075300Z-functional-gaps-v31",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "29(captured native)",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "source_branch": "feature/apa-connected-gaps-v31-20261012",
+    "tapir": "1.5.10"
+  },
+  "source_revisions": [
+    {
+      "revision": "3191e7ce5071e6de7401f6e520fbd8f3ef2a1ea2",
+      "source_sha": "3191e7ce5071e6de7401f6e520fbd8f3ef2a1ea2",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/55"
+    }
+  ],
+  "started_at": "2026-10-12T07:59:24Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A11.S03"
+}

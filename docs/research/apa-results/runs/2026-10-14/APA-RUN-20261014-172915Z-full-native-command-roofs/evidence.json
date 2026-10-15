@@ -1,0 +1,102 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-DYNAMIC-COMMANDS",
+      "evidence_ids": [
+        "EV-1",
+        "EV-5",
+        "EV-6"
+      ],
+      "statement": "348 candidate and337 restored runtime contracts routable through existing SceneWriter; runtime availability distinct from16live-verified commands.",
+      "status": "LIVE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-TWO-NATIVE-ROOFS",
+      "evidence_ids": [
+        "EV-0",
+        "EV-5",
+        "EV-6"
+      ],
+      "statement": "Two native Roof assemblies have2/4actualplanes, edited slopes/contours, Save/Open, original255unchanged andAPXrestored.",
+      "status": "LIVE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-ROOF-SURFACE-BOUNDARY",
+      "evidence_ids": [
+        "EV-1",
+        "EV-2",
+        "EV-3"
+      ],
+      "statement": "Hip exact Surface transfer remainsNOT_VERIFIED; SDK-only currentruntimecommands blocked, otherAPXcontracts notexposed; S03PARTIAL.",
+      "status": "NOT_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-0",
+      "kind": "TEST_RESULT",
+      "sha256": "02056b3e460e7e477177373ed897d497165953cb343a0765397be7aa3dd1d27a",
+      "source_revision": "1c27e7c4b66d5b225724e777719e6a675660494a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-172915Z-full-native-command-roofs/roof-native.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-1",
+      "kind": "TEST_RESULT",
+      "sha256": "3a4e8fe284574ea2769fb8f6e49af89fd9f38e4995051fa26e563327e8d83fbc",
+      "source_revision": "1c27e7c4b66d5b225724e777719e6a675660494a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-172915Z-full-native-command-roofs/dynamic-runtime.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-2",
+      "kind": "TEST_RESULT",
+      "sha256": "285ec672fa31c78a32abd71dbe4703974d2e2df667c034925a891776b22c3b2e",
+      "source_revision": "1c27e7c4b66d5b225724e777719e6a675660494a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-172915Z-full-native-command-roofs/roof-surface-transfer.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-3",
+      "kind": "TEST_RESULT",
+      "sha256": "ce297478a444d5f2907211a6b6779560c6ff77d21434ae103d4fd7262b3d10cc",
+      "source_revision": "1c27e7c4b66d5b225724e777719e6a675660494a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-172915Z-full-native-command-roofs/gap-register.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-4",
+      "kind": "TEST_RESULT",
+      "sha256": "7a4daf67e0632128d5a67399ebc19a6a1382ebbdb52b490923bb44e57e2d3c4f",
+      "source_revision": "1c27e7c4b66d5b225724e777719e6a675660494a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-172915Z-full-native-command-roofs/windows-ci.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-5",
+      "kind": "TEST_RESULT",
+      "sha256": "02c2454ede1428b176bbb5228539ba987f42c82d2b83f5d82a6e190f1240f4b7",
+      "source_revision": "1c27e7c4b66d5b225724e777719e6a675660494a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-172915Z-full-native-command-roofs/preservation-save-open.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-6",
+      "kind": "TEST_RESULT",
+      "sha256": "37fc0696f0460d46d6a63de764b6ef5df83cbe6452a51c64b68ea04ddafafc90",
+      "source_revision": "1c27e7c4b66d5b225724e777719e6a675660494a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-172915Z-full-native-command-roofs/apx-restoration.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-7",
+      "kind": "TEST_RESULT",
+      "sha256": "9e2f3931cfdf981cc20d7ffd58c8ff196bac0343ad3ef5551a734691e7597a9b",
+      "source_revision": "1c27e7c4b66d5b225724e777719e6a675660494a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-172915Z-full-native-command-roofs/core-knowledge-query.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261014-172915Z-full-native-command-roofs",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

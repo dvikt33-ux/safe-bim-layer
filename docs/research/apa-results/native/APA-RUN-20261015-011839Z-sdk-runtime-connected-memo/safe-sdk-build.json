@@ -1,0 +1,35 @@
+{
+  "schema": "APA_EXTENDED_SDK_BUILD_V1",
+  "status": "FULL_RELEASE_BUILD_PASS_QUANTITY_ENTRY_DISABLED_NOT_INSTALLED",
+  "platform": "Windows x64 Archicad29",
+  "sdk": "29.3000",
+  "implementationCommit": "220fcabda14316037f0f0a4c259092a075880c4c",
+  "sourceBuildIdentity": "345dd7d1b6c626ee95b6fe31c714be66cab4aa770421b7b56ca242f63a590d0f",
+  "apxSHA256": "0bfd13924cf21083783a0384943d80a1d4ee0fce4542a6c1f27178caec22adc0",
+  "bytes": 3232256,
+  "tapirSourceRegistrations": 284,
+  "otherNamespaceSourceRegistrations": 1,
+  "totalSourceRegistrations": 285,
+  "newSDKGroups": [
+    "GetNativeEnvelopeMemoV1",
+    "GetNativeDrawingAssociationsV1",
+    "GetNativeElementHotspotsV1",
+    "GetNativeElementQuantitiesV1"
+  ],
+  "quantityToolTypes": "QUARANTINED_NOT_EXECUTABLE",
+  "stagedUnusedQuantityScalarAccessors": 241,
+  "SDKSourceHashes": {
+    "archicad-addon/Sources/NativeModuleCommands.cpp": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72",
+    "archicad-addon/Sources/NativeExtendedModules.cpp": "99fe0cb9007091c09301be5c922a9ce25a0a59f490b1c9406219ad26b94f1451",
+    "archicad-addon/Sources/NativeExtendedModules.hpp": "3d8d14f393cff31dad5bf808ca973dde324211404dd96c07667909e90a780377",
+    "archicad-addon/Sources/NativeExtendedSchemas.inc": "a08bb0a19328d7adac6685a8ff7c0eed72db8682ef70daef5a9fbdb6f05d7bbd",
+    "archicad-addon/Sources/NativeQuantityFields.inc": "470d052f2cc23bc0536efc658e7a1d9840bdcc214d500b0709e598e805f58f53"
+  },
+  "runtimeRegistration": "NOT_VERIFIED_NEW_BINARY_NOT_INSTALLED",
+  "nativeCallableForNewGroups": 0,
+  "nativeModelWrites": 0,
+  "existingSceneWriterRetained": true,
+  "localMemoFlow": "CAPTURED_NATIVE_FOUR_POLYGONS_TWO_HOLES_CALLABLE",
+  "installationDependency": "Safe rebuild not installed; exact tested d85a2b binary is quarantined after quantity crash, original APX restored",
+  "rawBuildLogSHA256": "547527431a7345373f2d432485e7261da1f6b42fbcc084aed07f75919f33cdd0"
+}

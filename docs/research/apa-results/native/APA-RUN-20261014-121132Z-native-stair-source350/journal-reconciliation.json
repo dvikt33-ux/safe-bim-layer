@@ -1,0 +1,13 @@
+{
+  "status": "INITIAL_CREATE_OUTCOME_PRESERVED_LATER_FACTUAL_DIMENSIONS_AND_PERSISTENCE_VERIFIED",
+  "createScene": "native-stair-source350-create-20261014-01",
+  "operationHash": "7cdf86ea207028361227026b0ac196185f4150e9491f9229b06177877920e94d",
+  "originalCreateStatus": "PARTIAL_OR_UNKNOWN_OUTCOME",
+  "reason": "AssertionError: UNEXPECTED_GUID_DELTA_STOP",
+  "createReservations": 1,
+  "createReplay": false,
+  "historyRewritten": false,
+  "saveOpenJournal": "PASS",
+  "inventoryGate": "NOT_VERIFIED_TEN_OBJECT_ANCESTRIES",
+  "next": "RESOLVE_NATIVE_ANCESTRY_READONLY_BEFORE_FULL_INVENTORY_ACCEPTANCE; NEVER_RETRY_CREATE"
+}

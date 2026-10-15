@@ -1,0 +1,73 @@
+{
+  "action_id": "APA-P70.A02",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-VERIFIED-ROOF-RULES",
+      "evidence_ids": [
+        "EV-JUNCTION-PROOF",
+        "EV-JUNCTION-BYTES"
+      ],
+      "statement": "Existing normative/native adapters execute verified displayed source conditions on actual four Wall/Roof targets, source-linked dependency graph and one shared actual roof measurement.4PASS_DOCUMENTED amendment-reference edges only,8NOT_VERIFIED applicability. User confirmedRU/Central Russia; construction/climate/load data not inferred. SDK planeRoof polygon/ChangeMemo path SOURCE_VERIFIED, exposed runtime edit NOT_VERIFIED. Actual memo vs lower BREP offset29.887626mm; bounded contour candidate only, no design invented or native write.33newtests,546host/Windows+LinuxCI PASS,7exact code blobs. A02.S02/A11.S03PARTIAL, A05.S01 acceptance dependency unsatisfied, S10BLOCKED. All source junctions untouched, saved109baseline/journal and five fresh target signatures unchanged.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-JUNCTION-PROOF",
+      "kind": "TEST_RESULT",
+      "sha256": "b4e1eb42d6ca7cb7ed1f9f3ec38448417d4bad9b8eb1a4ab2d9161fd31f35100",
+      "source_revision": "633c799da125622be6317ea9d09a9b7eb83fb98a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-203851Z-verified-roof-rules/integration.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-JUNCTION-BYTES",
+      "kind": "LOCAL_LOG",
+      "sha256": "1d86bc94f280b0bb9bfabc31a82f8f79a717ab984be43d156e2fd4c4a88d1824",
+      "source_revision": "633c799da125622be6317ea9d09a9b7eb83fb98a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-203851Z-verified-roof-rules/EVIDENCE_SHA256.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "work-verified-normative-rules-20261012",
+  "executor_run_id": "APA-RUN-20261012T201826Z-verified-normative-rules",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-12T20:38:51Z",
+  "idempotency_key": "sha256:6466b7d043a7121085e329ac815bbdd238d8120ed387a9dce1febee1af9eb041",
+  "inputs": [
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-CSE-RESEARCH"
+  ],
+  "next_substep": "APA-P70.A02.S02",
+  "phase": "SOURCE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261012-203851Z-verified-roof-rules",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "29 native evidence captured; publication makes zero native calls",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "source_branch": "feature/apa-verified-roof-rules-20261012",
+    "tapir": "1.5.10"
+  },
+  "source_revisions": [
+    {
+      "revision": "633c799da125622be6317ea9d09a9b7eb83fb98a",
+      "source_sha": "633c799da125622be6317ea9d09a9b7eb83fb98a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/67"
+    }
+  ],
+  "started_at": "2026-10-12T20:18:26Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A02.S02"
+}

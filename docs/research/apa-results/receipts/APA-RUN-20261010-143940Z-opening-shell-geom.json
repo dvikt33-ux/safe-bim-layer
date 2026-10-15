@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:cbd6e8026b106985e4062bc573f0531fd312cf5c471d9fb0d5016c1367a20f94",
+  "index_commit_sha": "bef73201dbc821f61c6291bb434a5493e1ec3c87",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "bef73201dbc821f61c6291bb434a5493e1ec3c87",
+  "report_path": "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md",
+  "report_sha256": "3060f9f113821be7818a764cffa21f2eb5f59a1ed1af2b1cf3210e2a4b992090",
+  "run_id": "APA-RUN-20261010-143940Z-opening-shell-geom",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

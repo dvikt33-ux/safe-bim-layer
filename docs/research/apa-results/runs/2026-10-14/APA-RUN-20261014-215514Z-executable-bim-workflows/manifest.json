@@ -1,0 +1,142 @@
+{
+  "action_id": "APA-P70.A11",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-EXECUTABLE-BIM",
+      "evidence_ids": [
+        "EV-2"
+      ],
+      "statement": "Corrected17stepnativeCRUD/attributes/move/copy/delete/SaveOpen;4temporaryelements removed,258accepted signaturesunchanged,12journalPASS.",
+      "status": "LIVE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-EFFECT-REVIEW",
+      "evidence_ids": [
+        "EV-0",
+        "EV-1"
+      ],
+      "statement": "49of51previousUNKNOWNsourceclassified;2blocked;335effectqualifiedcurrentcontracts separatefrom25CALLABLEand9LIVEeffects.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-EXECUTION-LIMITS",
+      "evidence_ids": [
+        "EV-3"
+      ],
+      "statement": "S03PARTIAL,sourceonly26/otherAPX32 unchanged; nativequeryoutputlimitations exact;nonormative/IFCsemantic/speedup claim.",
+      "status": "NOT_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-0",
+      "kind": "TEST_RESULT",
+      "sha256": "839c064f1fdce573a08c02c8b682a6665ef18cdc36ba333c5de2fab357565939",
+      "source_revision": "45ef6b734e70c0e2c40ea57ed9a0099d70c4a917",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-215514Z-executable-bim-workflows/execution-matrix.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-1",
+      "kind": "TEST_RESULT",
+      "sha256": "deb65226254b8fb050ed1f123a33eb57ec0c0b11f5cb32ba1b1abdec08acbad5",
+      "source_revision": "45ef6b734e70c0e2c40ea57ed9a0099d70c4a917",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-215514Z-executable-bim-workflows/effect-review.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-2",
+      "kind": "TEST_RESULT",
+      "sha256": "8b0b2cd7913e65c0d0ef1ef2afda5824462cfec581aec9895ad555bb26516956",
+      "source_revision": "45ef6b734e70c0e2c40ea57ed9a0099d70c4a917",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-215514Z-executable-bim-workflows/native-workflows.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-3",
+      "kind": "TEST_RESULT",
+      "sha256": "3ad206ac6671f0f8e8b74626073c952c7e642965a6f3317b85673b6b33e0ca7c",
+      "source_revision": "45ef6b734e70c0e2c40ea57ed9a0099d70c4a917",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-215514Z-executable-bim-workflows/gap-register.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-4",
+      "kind": "TEST_RESULT",
+      "sha256": "a22a42915ee32bcfef389b74ce1366a38069b1af439ffddb8f23bb550dbc69e5",
+      "source_revision": "45ef6b734e70c0e2c40ea57ed9a0099d70c4a917",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-215514Z-executable-bim-workflows/windows-ci.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-5",
+      "kind": "TEST_RESULT",
+      "sha256": "d51b9880eec78da85f004225865029e6d06eccf9c1bf9ee2f76bffa6cef8c54b",
+      "source_revision": "45ef6b734e70c0e2c40ea57ed9a0099d70c4a917",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-215514Z-executable-bim-workflows/core-knowledge-query.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "work-executable-bim-integration-20261014",
+  "executor_run_id": "APA-CLAIM-EXECUTABLE-BIM-20261014T211417Z",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-14T21:55:14Z",
+  "idempotency_key": "sha256:a719de78933dcc6072e69a2cf49a3ad602d3d4e687078ec77d7107b002b4db6b",
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "next_substep": "APA-P70.A11.S03",
+  "phase": "LIVE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261014-215514Z-executable-bim-workflows",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "29 Windows11 existingauthorizedtest;temporarynativeCRUD SaveOpen;artifactpublication",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "sdk": "Reuse installedproviders only,noAPXchange",
+    "source_branch": "feature/apa-executable-bim-workflows-20261015",
+    "tapir": "1.5.10 restoredoriginal"
+  },
+  "source_revisions": [
+    {
+      "revision": "45ef6b734e70c0e2c40ea57ed9a0099d70c4a917",
+      "source_sha": "45ef6b734e70c0e2c40ea57ed9a0099d70c4a917",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/85"
+    }
+  ],
+  "started_at": "2026-10-14T21:14:17Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A11.S03"
+}

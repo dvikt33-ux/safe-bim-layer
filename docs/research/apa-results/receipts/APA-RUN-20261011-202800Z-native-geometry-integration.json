@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:2cf4fa0eef870f913be1564489ce91363e07431fe337a960b5b7cca900870283",
+  "index_commit_sha": "4c536fa5b79f25f66ffad01424de844d4104b0ca",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "4c536fa5b79f25f66ffad01424de844d4104b0ca",
+  "report_path": "docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md",
+  "report_sha256": "c2ff79c8d8699495b8044a5099264846008a7e5432a8c2aa957cdb7e1dc06073",
+  "run_id": "APA-RUN-20261011-202800Z-native-geometry-integration",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

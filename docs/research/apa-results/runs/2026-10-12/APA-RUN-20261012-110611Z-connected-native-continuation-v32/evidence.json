@@ -1,0 +1,33 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-CONNECTED-NATIVE-CONTINUATION-V32",
+      "evidence_ids": [
+        "EV-NATIVE32-ACCEPTANCE",
+        "EV-NATIVE32-BYTES"
+      ],
+      "statement": "Native7route graph with tee/elbows and an independent source-bound timber part saved/reopened;95GUID and original48/baseline59 geometry preserved.403Windows/LinuxPASS. ActualIFC37/37bounds and11native/IFCowner-pair multiplicities match. Terminal open; manufacturer/provider/SAM/receiver engineering gaps remain. S03PARTIAL. This publication performs zero native calls.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-NATIVE32-ACCEPTANCE",
+      "kind": "TEST_RESULT",
+      "sha256": "09e68333cd2f112bfa260a3019e02bd560c6772340efc38c967f443278a50270",
+      "source_revision": "3a743a4f96a98acdcbb837946603f0681d9a1f54",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-110611Z-connected-native-continuation-v32/acceptance.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-NATIVE32-BYTES",
+      "kind": "LOCAL_LOG",
+      "sha256": "6c30d8813f39c0cfcee8f5f6f77f564f152560a88a03d6f97859fa553c44a3f8",
+      "source_revision": "3a743a4f96a98acdcbb837946603f0681d9a1f54",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-110611Z-connected-native-continuation-v32/EVIDENCE_SHA256.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261012-110611Z-connected-native-continuation-v32",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

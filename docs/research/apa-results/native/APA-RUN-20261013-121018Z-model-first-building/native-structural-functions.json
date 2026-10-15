@@ -1,0 +1,120 @@
+{
+  "status": "NATIVE_BUILDING_STRUCTURAL_FUNCTIONS_PASS",
+  "roles": {
+    "native-wall-east-level-1": {
+      "role": "LoadBearingElement",
+      "nativeDisplay": "Несущий Элемент",
+      "reused": false
+    },
+    "native-wall-north-level-1": {
+      "role": "LoadBearingElement",
+      "nativeDisplay": "Несущий Элемент",
+      "reused": false
+    },
+    "native-wall-south-level-1": {
+      "role": "LoadBearingElement",
+      "nativeDisplay": "Несущий Элемент",
+      "reused": false
+    },
+    "native-wall-west-level-1": {
+      "role": "LoadBearingElement",
+      "nativeDisplay": "Несущий Элемент",
+      "reused": false
+    },
+    "native-wall-east-level-2": {
+      "role": "LoadBearingElement",
+      "nativeDisplay": "Несущий Элемент",
+      "reused": false
+    },
+    "native-wall-north-level-2": {
+      "role": "LoadBearingElement",
+      "nativeDisplay": "Несущий Элемент",
+      "reused": false
+    },
+    "native-wall-south-level-2": {
+      "role": "LoadBearingElement",
+      "nativeDisplay": "Несущий Элемент",
+      "reused": false
+    },
+    "native-wall-west-level-2": {
+      "role": "LoadBearingElement",
+      "nativeDisplay": "Несущий Элемент",
+      "reused": false
+    },
+    "test-partition-0": {
+      "role": "NonLoadBearingElement",
+      "nativeDisplay": "Ненесущий Элемент",
+      "reused": false
+    },
+    "test-partition-1": {
+      "role": "NonLoadBearingElement",
+      "nativeDisplay": "Ненесущий Элемент",
+      "reused": false
+    }
+  },
+  "definition": {
+    "propertyId": {
+      "guid": "id-sha256:de309cfeaf1db575d7e0"
+    },
+    "displayValues": {
+      "NonLoadBearingElement": "Ненесущий Элемент",
+      "LoadBearingElement": "Несущий Элемент"
+    },
+    "definitionHash": "a15ebcc9fc8c1d53bdd336ae6d448c30a4d4a7cc794d2a8b7791f7d61578d474",
+    "engineeringCapacity": "NOT_VERIFIED"
+  },
+  "afterOpenVerifiedRoles": {
+    "native-wall-east-level-1": {
+      "role": "LoadBearingElement",
+      "nativeDisplay": "Несущий Элемент",
+      "reused": true
+    },
+    "native-wall-north-level-1": {
+      "role": "LoadBearingElement",
+      "nativeDisplay": "Несущий Элемент",
+      "reused": true
+    },
+    "native-wall-south-level-1": {
+      "role": "LoadBearingElement",
+      "nativeDisplay": "Несущий Элемент",
+      "reused": true
+    },
+    "native-wall-west-level-1": {
+      "role": "LoadBearingElement",
+      "nativeDisplay": "Несущий Элемент",
+      "reused": true
+    },
+    "native-wall-east-level-2": {
+      "role": "LoadBearingElement",
+      "nativeDisplay": "Несущий Элемент",
+      "reused": true
+    },
+    "native-wall-north-level-2": {
+      "role": "LoadBearingElement",
+      "nativeDisplay": "Несущий Элемент",
+      "reused": true
+    },
+    "native-wall-south-level-2": {
+      "role": "LoadBearingElement",
+      "nativeDisplay": "Несущий Элемент",
+      "reused": true
+    },
+    "native-wall-west-level-2": {
+      "role": "LoadBearingElement",
+      "nativeDisplay": "Несущий Элемент",
+      "reused": true
+    },
+    "test-partition-0": {
+      "role": "NonLoadBearingElement",
+      "nativeDisplay": "Ненесущий Элемент",
+      "reused": true
+    },
+    "test-partition-1": {
+      "role": "NonLoadBearingElement",
+      "nativeDisplay": "Ненесущий Элемент",
+      "reused": true
+    }
+  },
+  "afterOpenRoleWrites": 0,
+  "engineeringCapacity": "NOT_VERIFIED_EXPLICIT_TEST_ASSIGNMENTS"
+}

@@ -1,0 +1,21 @@
+{
+  "automaticRetry": false,
+  "historicalJournalStates": {
+    "PASS": 52,
+    "UNKNOWN_OUTCOME": 3
+  },
+  "events": [
+    "Fresh template20ground marker/elevation GUIDs were initially misclassified as copied building. Native dump has zero physical bodies and native library references;20preserved. Original168 untouched.",
+    "First setup stopped locally before any native call because journal folder was absent. Explicit local folder preparation preceded the one native setup.",
+    "Private helper default text encoding corrupted ground story label. Distinct exact source-name recovery restored UTF8 label and floor identifiers; helpers corrected. No geometry or element change.",
+    "One SetStories height edit succeeded. First lowerWall correction was refused by the local router before native dispatch. OriginalUNKNOWN row retained; dispatch absence independently proved, then distinct scoped intents corrected5Walls.",
+    "Native global story movement left4upper Window sills at0.7m. Actual readback emitted source-bound ModifyWindows corrections to1.0m, preservingGUID/host. No MoveElements or Create during height edit.",
+    "First41 Open timed out at30s. Exact identity, file hash, signatures and story state independently reconciled; no automatic Open retry.",
+    "Favorite export returned-7003 but wrote main native XML. Scalar dimensions/sourcehash used; complete Favorite/GDL export notPASS.",
+    "One CreateStairs succeeded, then one native Slab-hole modification succeeded. A callback comparing literal polygon lists failed on ring rotation/closure/quantization. Native write never repeated; semantic contour and real BREP/contact independently proved the hole.",
+    "Final new revision143 Save/Open both return native success under120s load timeout and all143signatures are independently unchanged. PreviousUNKNOWN journal rows remain intact.",
+    "Initial Linux CI failed only because a synthetic schema test used POSIX temp path for a Windows semantic project target. Test corrected, final exact-head Windows/LinuxCI pass."
+  ],
+  "nativeEvidence": "ACTUAL_NATIVE_REQUEST_RESPONSE_AND_INDEPENDENT_READBACK_RETAINED_LOCALLY",
+  "wrappedLegacySyntheticLabel": "WRAPPER_LABEL_IS_NOT_USED_AS_LIVE_ACCEPTANCE"
+}

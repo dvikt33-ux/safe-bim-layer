@@ -1,0 +1,353 @@
+{
+  "status": "READY_FOR_EXPLICIT_TEST_RUN",
+  "nativeTargetProjectPath": "C:\\LocalAI\\APA_Isolated_Writer_Test_01.pln",
+  "sourcePlanHash": "aaf54b8e7bed5c47a9c104770bfe30e27479c632a6dddd86cda14848ab4a1129",
+  "graph": {
+    "operations": [
+      {
+        "id": "native-slab-level-1",
+        "command": "CreateSlabs",
+        "params": {
+          "slabsData": [
+            {
+              "level": 0.0,
+              "floorIndex": 0,
+              "thickness": 0.2,
+              "referencePlaneLocation": "Top",
+              "polygonCoordinates": [
+                {
+                  "x": 40.0,
+                  "y": 40.0
+                },
+                {
+                  "x": 50.0,
+                  "y": 40.0
+                },
+                {
+                  "x": 50.0,
+                  "y": 48.0
+                },
+                {
+                  "x": 40.0,
+                  "y": 48.0
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "native-wall-east-level-1",
+        "command": "CreateWalls",
+        "params": {
+          "wallsData": [
+            {
+              "begCoordinate": {
+                "x": 50.0,
+                "y": 40.0
+              },
+              "endCoordinate": {
+                "x": 50.0,
+                "y": 48.0
+              },
+              "floorIndex": 0,
+              "zCoordinate": 0.0,
+              "height": 3.0,
+              "thickness": 0.3,
+              "offset": 0.0,
+              "arcAngle": 0.0,
+              "referenceLineLocation": "Center",
+              "structureType": "Basic"
+            }
+          ]
+        }
+      },
+      {
+        "id": "native-wall-north-level-1",
+        "command": "CreateWalls",
+        "params": {
+          "wallsData": [
+            {
+              "begCoordinate": {
+                "x": 40.0,
+                "y": 48.0
+              },
+              "endCoordinate": {
+                "x": 50.0,
+                "y": 48.0
+              },
+              "floorIndex": 0,
+              "zCoordinate": 0.0,
+              "height": 3.0,
+              "thickness": 0.3,
+              "offset": 0.0,
+              "arcAngle": 0.0,
+              "referenceLineLocation": "Center",
+              "structureType": "Basic"
+            }
+          ]
+        }
+      },
+      {
+        "id": "native-wall-south-level-1",
+        "command": "CreateWalls",
+        "params": {
+          "wallsData": [
+            {
+              "begCoordinate": {
+                "x": 40.0,
+                "y": 40.0
+              },
+              "endCoordinate": {
+                "x": 50.0,
+                "y": 40.0
+              },
+              "floorIndex": 0,
+              "zCoordinate": 0.0,
+              "height": 3.0,
+              "thickness": 0.3,
+              "offset": 0.0,
+              "arcAngle": 0.0,
+              "referenceLineLocation": "Center",
+              "structureType": "Basic"
+            }
+          ]
+        }
+      },
+      {
+        "id": "native-wall-west-level-1",
+        "command": "CreateWalls",
+        "params": {
+          "wallsData": [
+            {
+              "begCoordinate": {
+                "x": 40.0,
+                "y": 40.0
+              },
+              "endCoordinate": {
+                "x": 40.0,
+                "y": 48.0
+              },
+              "floorIndex": 0,
+              "zCoordinate": 0.0,
+              "height": 3.0,
+              "thickness": 0.3,
+              "offset": 0.0,
+              "arcAngle": 0.0,
+              "referenceLineLocation": "Center",
+              "structureType": "Basic"
+            }
+          ]
+        }
+      },
+      {
+        "id": "native-slab-level-2",
+        "command": "CreateSlabs",
+        "params": {
+          "slabsData": [
+            {
+              "level": 0.0,
+              "floorIndex": 1,
+              "thickness": 0.2,
+              "referencePlaneLocation": "Top",
+              "polygonCoordinates": [
+                {
+                  "x": 40.0,
+                  "y": 40.0
+                },
+                {
+                  "x": 50.0,
+                  "y": 40.0
+                },
+                {
+                  "x": 50.0,
+                  "y": 48.0
+                },
+                {
+                  "x": 40.0,
+                  "y": 48.0
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "native-wall-east-level-2",
+        "command": "CreateWalls",
+        "params": {
+          "wallsData": [
+            {
+              "begCoordinate": {
+                "x": 50.0,
+                "y": 40.0
+              },
+              "endCoordinate": {
+                "x": 50.0,
+                "y": 48.0
+              },
+              "floorIndex": 1,
+              "zCoordinate": 0.0,
+              "height": 3.0,
+              "thickness": 0.3,
+              "offset": 0.0,
+              "arcAngle": 0.0,
+              "referenceLineLocation": "Center",
+              "structureType": "Basic"
+            }
+          ]
+        }
+      },
+      {
+        "id": "native-wall-north-level-2",
+        "command": "CreateWalls",
+        "params": {
+          "wallsData": [
+            {
+              "begCoordinate": {
+                "x": 40.0,
+                "y": 48.0
+              },
+              "endCoordinate": {
+                "x": 50.0,
+                "y": 48.0
+              },
+              "floorIndex": 1,
+              "zCoordinate": 0.0,
+              "height": 3.0,
+              "thickness": 0.3,
+              "offset": 0.0,
+              "arcAngle": 0.0,
+              "referenceLineLocation": "Center",
+              "structureType": "Basic"
+            }
+          ]
+        }
+      },
+      {
+        "id": "native-wall-south-level-2",
+        "command": "CreateWalls",
+        "params": {
+          "wallsData": [
+            {
+              "begCoordinate": {
+                "x": 40.0,
+                "y": 40.0
+              },
+              "endCoordinate": {
+                "x": 50.0,
+                "y": 40.0
+              },
+              "floorIndex": 1,
+              "zCoordinate": 0.0,
+              "height": 3.0,
+              "thickness": 0.3,
+              "offset": 0.0,
+              "arcAngle": 0.0,
+              "referenceLineLocation": "Center",
+              "structureType": "Basic"
+            }
+          ]
+        }
+      },
+      {
+        "id": "native-wall-west-level-2",
+        "command": "CreateWalls",
+        "params": {
+          "wallsData": [
+            {
+              "begCoordinate": {
+                "x": 40.0,
+                "y": 40.0
+              },
+              "endCoordinate": {
+                "x": 40.0,
+                "y": 48.0
+              },
+              "floorIndex": 1,
+              "zCoordinate": 0.0,
+              "height": 3.0,
+              "thickness": 0.3,
+              "offset": 0.0,
+              "arcAngle": 0.0,
+              "referenceLineLocation": "Center",
+              "structureType": "Basic"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "executionOrder": [
+    "native-slab-level-1",
+    "native-wall-east-level-1",
+    "native-wall-north-level-1",
+    "native-wall-south-level-1",
+    "native-wall-west-level-1",
+    "native-slab-level-2",
+    "native-wall-east-level-2",
+    "native-wall-north-level-2",
+    "native-wall-south-level-2",
+    "native-wall-west-level-2"
+  ],
+  "schemaVersion": "1.5.10",
+  "schemaPath": "C:\\Users\\Admin\\.codex\\.chatgpt-projects\\g-p-6ac95f266690819191309c97617cd082\\apa-core\\schemas\\tapir-live-1.5.10\\tapir-scene-live.json",
+  "schemaSha256": "b355d2b1311b16d64a62e63c70c6eb5a01b7283a6675cfa2940ef5f247c1fa46",
+  "storyBindings": [
+    {
+      "label": "Первый Этаж",
+      "nativeIndex": 0,
+      "floorId": 1,
+      "level": 0
+    },
+    {
+      "label": "",
+      "nativeIndex": 1,
+      "floorId": 2,
+      "level": 3
+    }
+  ],
+  "slabBasicMaterialName": "Железобетон - Конструкционный",
+  "expectedPreflightSlabMaterialGuid": "63DB2CE9-903D-45C0-B93C-B3C604C77394",
+  "envelope": {
+    "xMax": 50.0,
+    "xMin": 40.0,
+    "yMax": 48.0,
+    "yMin": 40.0,
+    "zMin": -0.3,
+    "zMax": 6.3
+  },
+  "metrics": {
+    "dimensionsMeters": {
+      "width": 10.0,
+      "depth": 8.0,
+      "height": 6.0
+    },
+    "elementCount": 10,
+    "nativeCommands": {
+      "CreateSlabs": 2,
+      "CreateWalls": 8
+    },
+    "authoredRooms": 2,
+    "structuralVerified": false,
+    "normativeVerified": false
+  },
+  "limitations": [
+    "PROVISIONAL_AUTHORED_GEOMETRY_NOT_STRUCTURAL_ACCEPTANCE",
+    "NO_EXECUTION_GRANT_OR_NATIVE_WRITES",
+    "MISSING_PROVEN_WALL_CSE_AND_JUNCTIONS"
+  ],
+  "liveWriteAuthorized": false,
+  "plnChanged": false,
+  "slabBasicMaterialGuid": "63DB2CE9-903D-45C0-B93C-B3C604C77394",
+  "binding": {
+    "path": "C:\\LocalAI\\APA_Isolated_Writer_Test_01.pln",
+    "name": "APA_Isolated_Writer_Test_01",
+    "port": 19724,
+    "tapirVersion": "1.5.10",
+    "storyIndex": 0
+  },
+  "nativeElementsInspected": 20,
+  "volumetricBodiesChecked": 20,
+  "nonSpatialElementsVerified": 0
+}

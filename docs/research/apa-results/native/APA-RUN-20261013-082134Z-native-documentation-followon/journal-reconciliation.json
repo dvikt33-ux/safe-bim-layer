@@ -1,0 +1,14 @@
+{
+  "automaticRetry": false,
+  "unknownLedgerHistory": "RETAINED_UNCHANGED",
+  "events": [
+    "CreateLayout missing master rejected; independent no-effect readback, then different explicit-master intent succeeded.",
+    "CreateViews using ViewMap source rejected; no-effect verified, different ProjectMap-source intent succeeded.",
+    "Successful Drawing creates had callback GUID-domain/field/database mismatches. Native identities independently read back, no Create repeated.",
+    "UpdateDrawings success:true had strict parser mismatch; independent scale readback before the distinct restore100 operation. Clip frame does not resize with scale.",
+    "Layout ShowAllIn3D error requires journalled view-only floor activation. Full signatures checked after recovery; no geometry operation replay.",
+    "Read-only graphics helper initially lacked local command allowlist: no ChangeWindow dispatched. Later successful navigation found absent facade fill contours; independently reconciled as unavailable, not invented.",
+    "User identified partial facade despite9visible owners. Only new marker movedY-5; rebuild/update/readback/render and native roof span prove corrected scope.",
+    "After Open native Drawing fill caches were absent. Known-success updates of only new Drawings restored32plan/34section polygons; facade contour contract still absent."
+  ]
+}

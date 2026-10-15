@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:6466b7d043a7121085e329ac815bbdd238d8120ed387a9dce1febee1af9eb041",
+  "index_commit_sha": "a2939dc13f2cd6d9e876b12a2151c251487f467a",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "a2939dc13f2cd6d9e876b12a2151c251487f467a",
+  "report_path": "docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-203851Z-verified-roof-rules/REPORT.md",
+  "report_sha256": "21ba8cbc9f25d290a55371e6cf6be710a6fb7e6c525d5ffc0a9e23a4158ffe45",
+  "run_id": "APA-RUN-20261012-203851Z-verified-roof-rules",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

@@ -1,0 +1,44 @@
+{
+  "status": "LIVE_PASS_READONLY_DIAGNOSTIC_EXACT_GOING_STILL_NOT_CREATED",
+  "nativeType": "Stair",
+  "floorIndex": 0,
+  "totalHeightMeters": 3.3,
+  "stepNum": 20,
+  "riserHeightMeters": 0.165,
+  "sdkTreadDepthField": 0,
+  "sdkTreadDepthLocked": false,
+  "physicalGoingAuthority": "OFFICIAL_PRECISE_STAIR_DEFAULT_GOING_PLUS_ACTUAL_3D_BREP_EDGE_PITCH_NOT_ZERO_SDK_FIELD",
+  "actualNumericProperties": {
+    "Stair_DefaultGoing": 0.32,
+    "Stair_DefaultRiserHeight": 0.165,
+    "Stair_FlightWidth": 1,
+    "Stair_WalkingLineLength": 6.4
+  },
+  "baseLineCoordinateFrame": "LOCAL_BASE_PLANE",
+  "baseLineMemo": {
+    "coordinates": 2,
+    "contours": 1,
+    "arcs": 0,
+    "coordinateBytes": 48,
+    "endingBytes": 8,
+    "edgeBytes": 96,
+    "vertexBytes": 312
+  },
+  "walkingLineMemo": {
+    "coordinates": 2,
+    "contours": 1,
+    "arcs": 0,
+    "coordinateBytes": 48,
+    "endingBytes": 8,
+    "edgeBytes": 96,
+    "vertexBytes": 312
+  },
+  "localWorldFrameReadback": "LIVE_PASS_NATIVE_BASEPLANE_AND_WORLD_XY",
+  "requestedGoingMeters": 0.35,
+  "detachedPreparationStatus": "BLOCKED_DETACHED_STAIR_PREPARATION_NOT_QUALIFIED",
+  "setterCalled": false,
+  "solverCalled": false,
+  "modelGeometryWrites": 0,
+  "crashRootCause": "NOT_VERIFIED_OLD_TERMINATING_REQUEST_NOT_REPLAYED",
+  "engineeringAcceptance": "NOT_VERIFIED"
+}

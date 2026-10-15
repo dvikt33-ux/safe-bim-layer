@@ -1,0 +1,111 @@
+{
+  "action_id": "APA-P70.A11",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-NATIVE-SPATIAL-LIVE",
+      "evidence_ids": [
+        "EV-NATIVE",
+        "EV-STORIES",
+        "EV-CONNECTION",
+        "EV-CI"
+      ],
+      "statement": "Actual global story insert/edit and source-bound dependency corrections; true native Stair and measured Slab void form connected22primary model. Final143Save/Open signatures and original168preserved. Grid runtime and strictStairgoing remainBLOCKED/NOT_VERIFIED; A11.S03PARTIAL.",
+      "status": "LIVE_PASS"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-NATIVE",
+      "kind": "TEST_RESULT",
+      "sha256": "fba19d27d78881507b599ad8c87eaa0737f3591892a3cb9c3a3f3949eb79b6a4",
+      "source_revision": "8ee3fcd89efa5220dc4d1ceb4fb92a26e0d8c07f",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/native-readback.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-STORIES",
+      "kind": "TEST_RESULT",
+      "sha256": "ddfade25bce69f31bcdfe2cdfd6846e3c0a298f96201e3bbee7c74cd718f471a",
+      "source_revision": "8ee3fcd89efa5220dc4d1ceb4fb92a26e0d8c07f",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/native-stories-and-dependencies.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-CONNECTION",
+      "kind": "TEST_RESULT",
+      "sha256": "877b0a06efbe2e6ac94d36f6f8b5379a79771d876cc07230e43404b947c1fda5",
+      "source_revision": "8ee3fcd89efa5220dc4d1ceb4fb92a26e0d8c07f",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/geometry-and-connections.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-CI",
+      "kind": "TEST_RESULT",
+      "sha256": "158bc2619ef5e3c14d21628f86e1def8cd8307d357e71773db52f36f45f57230",
+      "source_revision": "8ee3fcd89efa5220dc4d1ceb4fb92a26e0d8c07f",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/ci.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "work-native-spatial-20261013",
+  "executor_run_id": "APA-CLAIM-NATIVE-SPATIAL-20261013T123258Z",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-13T16:52:20Z",
+  "idempotency_key": "sha256:44e819b938982ad2955185bdffc182bd90d6fde139705ed2e2a15564ec229f7c",
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "next_substep": "APA-P70.A11.S03",
+  "phase": "LIVE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261013-165220Z-native-spatial",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "29 separately authorized fresh test project saved; publisher makes zero native changes",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "source_branch": "feature/apa-native-stories-grid-stair-20261013",
+    "tapir": "1.5.10"
+  },
+  "source_revisions": [
+    {
+      "revision": "8ee3fcd89efa5220dc4d1ceb4fb92a26e0d8c07f",
+      "source_sha": "8ee3fcd89efa5220dc4d1ceb4fb92a26e0d8c07f",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/75"
+    }
+  ],
+  "started_at": "2026-10-13T12:32:58Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A11.S03"
+}

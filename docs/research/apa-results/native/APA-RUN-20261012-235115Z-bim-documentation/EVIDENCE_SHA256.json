@@ -1,0 +1,9 @@
+{
+  "ci.json": "117ffd7e9a5c61a906995dd077ad120d0b9586d90607c4622ac005799ccc03b6",
+  "code-readback.json": "42198b40784aaa9d48c4a51cb27262a847e92503ec0590e4c2621a13518cdae7",
+  "documentation.json": "e7215e127bf079acec6a1cddce4bd43f7ce33d9b42fc6242248b0350edd1d0a0",
+  "gap-register.json": "bed4aca114440bda2e06f24141cf9d27d7ec4688acbacd1cb7511c14f70b6c8d",
+  "installed-contracts.json": "c7c343df17b9967e2a1776cd76f239e1be1927f13b42141bdd96e853a6a1f662",
+  "native-readback.json": "d120070cec4c89f89df3ce2023de9d718f67ea8f9bce818573c17f676a31e6b0",
+  "synchronization.json": "a848a2fbbeb36a3ad1f8409cffdb9d9853bfeb1c9e5fac15292518a34586da40"
+}

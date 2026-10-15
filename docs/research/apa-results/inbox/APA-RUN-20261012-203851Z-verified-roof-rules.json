@@ -1,0 +1,67 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261012-203851Z-verified-roof-rules",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A02",
+  "substep_id": "APA-P70.A02.S02",
+  "executor": "work-verified-normative-rules-20261012",
+  "executor_run_id": "APA-RUN-20261012T201826Z-verified-normative-rules",
+  "phase": "SOURCE",
+  "started_at": "2026-10-12T20:18:26Z",
+  "finished_at": "2026-10-12T20:38:51Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29 native evidence captured; publication makes zero native calls",
+    "tapir": "1.5.10",
+    "source_branch": "feature/apa-verified-roof-rules-20261012"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/67",
+      "revision": "633c799da125622be6317ea9d09a9b7eb83fb98a",
+      "source_sha": "633c799da125622be6317ea9d09a9b7eb83fb98a"
+    }
+  ],
+  "inputs": [
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-CSE-RESEARCH"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-VERIFIED-ROOF-RULES",
+      "statement": "Existing normative/native adapters execute verified displayed source conditions on actual four Wall/Roof targets, source-linked dependency graph and one shared actual roof measurement.4PASS_DOCUMENTED amendment-reference edges only,8NOT_VERIFIED applicability. User confirmedRU/Central Russia; construction/climate/load data not inferred. SDK planeRoof polygon/ChangeMemo path SOURCE_VERIFIED, exposed runtime edit NOT_VERIFIED. Actual memo vs lower BREP offset29.887626mm; bounded contour candidate only, no design invented or native write.33newtests,546host/Windows+LinuxCI PASS,7exact code blobs. A02.S02/A11.S03PARTIAL, A05.S01 acceptance dependency unsatisfied, S10BLOCKED. All source junctions untouched, saved109baseline/journal and five fresh target signatures unchanged.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-JUNCTION-PROOF",
+        "EV-JUNCTION-BYTES"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-JUNCTION-PROOF",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-203851Z-verified-roof-rules/integration.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "b4e1eb42d6ca7cb7ed1f9f3ec38448417d4bad9b8eb1a4ab2d9161fd31f35100",
+      "source_revision": "633c799da125622be6317ea9d09a9b7eb83fb98a"
+    },
+    {
+      "evidence_id": "EV-JUNCTION-BYTES",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-203851Z-verified-roof-rules/EVIDENCE_SHA256.json",
+      "kind": "LOCAL_LOG",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "1d86bc94f280b0bb9bfabc31a82f8f79a717ab984be43d156e2fd4c4a88d1824",
+      "source_revision": "633c799da125622be6317ea9d09a9b7eb83fb98a"
+    }
+  ],
+  "report_markdown": "# A02.S02 — executable verified source conditions and native contour qualification\n\nThe existing normative adapter now executes three narrowly sourced checks on actual Wall/Roof targets: roofing scope, thermal-envelope scope and the thermal-reference replacement instruction from SP17 amendment5. The latter checks an edition edge in the requirement graph; PASS_DOCUMENTED does not certify thermal performance, roof construction or a junction. Unknown project construction and full technical clauses remain NOT_VERIFIED.\n\nThe user confirmed Russia, Central Russia and federal norms in this chat. This is country/region evidence only. It supplies no city, climatic design values, roof covering/layers, building usage or loads. Existing GitHub checkpoint29 blob3396bfafb8e5bbfe4b539c5184f0ee0bd0c27561 and the existing source/CSE pack are reused. No new normative database or engineering solver is created.\n\nVerified primary text is limited to the public registry's complete displayed scope paragraphs and the displayed amendment instruction. Source URIs and short excerpts are in `verified-roof-source-conditions-20261012.json`. Current SP17 registry lists amendments1–5; amendment5 records effective2025-01-10. Its thermal reference is SP50.13330.2024, effective2024-06-16. No unverified technical slope, parapet, bearing or fastening value is enabled. Full consolidated technical text was not obtained: official ministry/FCS pages failed to fetch; local public-registry retrieval had a TLS failure. Existing research dimensions are not promoted to normative rules.\n\nThe adapter verifies native GUID/body/material/story signatures, then uses existing Native Model Dump principal-face geometry. A shared Roof is analysed once across four junctions. A source-bound selected roofing technology is mandatory; native SinglePlane or concrete material cannot establish a roofing technology. Thermal scope needs sourced building purpose/work, total building area, temperature/humidity regime, explicit exclusions and historic-authority gate. Test slabs and authored room areas do not establish total building area. Complete facts establish applicability only, not compliance.\n\nThe ready native SinglePlane path is source-verified in the installed Archicad29 DevKit polygon example: GetMemo, polygon operation and ChangeMemo with polygon/edge/material/roof-edge masks. The sample can clear edge customizations; it must not be copied blindly. Inspected Tapir ModifyRoofs still rejects SinglePlane. Source/binary correspondence and an exposed runtime edit remain NOT_VERIFIED; APX is unchanged.\n\nThe contour candidate binds memo and actual principal faces, source body/details, materials/story/holes and an explicit design-source proposal. The lower-face footprint may differ from the memo/reference contour. It never dispatches an unsupported command and remains non-executable. Source holes and changed topology require separate qualification. Four original junctions remain untouched; no contour dimensions, overhang or corrected design are invented.\n\nVerification boundaries: focused offline tests qualify source/scope logic, changed-BREP invalidation, exclusions, source edition errors and bounded contour candidates. Fresh read-only actual-model evidence verifies current targets, actual slope and contour offset. No new Create/Modify/Save/Open or IFC export is required or executed. A02.S02 remains PARTIAL until real construction and technical-clause applicability are established; A05.S01 dependency remains unsatisfied. A11.S03 PARTIAL and MEP S10 BLOCKED remain unchanged.\n\nWorking actual read-only result: four targets/one shared Roof,12checks =4PASS_DOCUMENTED source-reference edges +8NOT_VERIFIED scopes. Actual slope8.594366924degrees/15.1135218percent; no normative slope verdict. Memo/actual lower contour centroid offset29.887626mm; SDK candidate non-executable. Five fresh actual target signatures and saved109baseline file/journal unchanged. Zero native writes.546host/Windows+LinuxCI PASS;7code blobs match GitHub.\n\n\nEvidence: [APA-RUN-20261012-203851Z-verified-roof-rules](https://github.com/dvikt33-ux/safe-bim-layer/tree/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-203851Z-verified-roof-rules). Draft PR67, head 633c799da125622be6317ea9d09a9b7eb83fb98a. Stable SHA tokens replace private native identities; raw payloads stay local. Publication makes zero native calls.\n",
+  "next_substep": "APA-P70.A02.S02",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

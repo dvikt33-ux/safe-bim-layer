@@ -1,0 +1,180 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261015-192322Z-native-memo-modify",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A11",
+  "substep_id": "APA-P70.A11.S03",
+  "executor": "work-native-memo-20261015",
+  "executor_run_id": "APA-CLAIM-NATIVE-MEMO-20261015T160958Z",
+  "phase": "LIVE",
+  "started_at": "2026-10-15T16:09:58Z",
+  "finished_at": "2026-10-15T19:23:22Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "Publication only:no native changes. Evidence from explicitly authorized409copy cycle:ShellLIVE,RailingPARTIAL,CWnoeffect;approved material recovery unsupported.",
+    "sdk": "Existing assembly/MEP memo extensions full Release not installed",
+    "tapir": "Same DynamicCommands SceneWriter SQLite and source-reviewed setters; no quantity call",
+    "source_branch": "feature/apa-native-memo-edit-20261015"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/109",
+      "revision": "13139d6cd03340bff7fbde5ccac5735929843b7a",
+      "source_sha": "13139d6cd03340bff7fbde5ccac5735929843b7a"
+    }
+  ],
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-MEMO-NATIVE-SHELL",
+      "statement": "Exact approved PR107 runtime:ExtrudedShell4.0to4.5m native parameter/body/profile/frame/contour/typedmaterial/story/GUID and IFCidentity retention accepted. Save and independent reopened original-runtime409signature readback; source savedPLN untouched, APX/registration restored.",
+      "status": "LIVE_PASS",
+      "evidence_ids": [
+        "EV-0"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-MEMO-NATIVE-LIMITS",
+      "statement": "Railing Rail0.07to0.17m and18 dependent balusters change geometrically, but one nested Object bmatRail/bmatFixing drift37to36. Approved recovery setter returns native APIERR_NOTSUPPORTED;all409signatures/128GDLparams unchanged,no retry. CW scalarheight NoError/noeffect,UNKNOWN reconciled,not PASS. Full Railing/CW acceptance not achieved.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-0",
+        "EV-2"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-MEMO-SDK-BUILD",
+      "statement": "Existing assembly contracts extended with bounded native CW reference/contour/pattern memo; Railing path read/write-association block; class-specific Shell fields. Existing MEP adds public Elbow/Branch and correct Transition degrees. FullRelease848410candidate notinstalled. No new command names;new paths BUILD_ONLY.",
+      "status": "BUILD_PASS",
+      "evidence_ids": [
+        "EV-1",
+        "EV-4",
+        "EV-5"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-MEMO-CONNECTED-FLOW",
+      "statement": "Existing DependencyImpact consumes captured native owner/parameter/material/GDL/IFC facts:346nodes472edges,materialimpact4nodes. Per-element typed material gate identifies real drift missed by aggregate surfaces. No dependent native writes or offline tests.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-2",
+        "EV-3"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-MEMO-PUBLICATION",
+      "statement": "Fresh code/canonical/default workflow hashes unchanged; push/pull_request/manual only. All commits skipCI,direct existing publisher functions,no workflow dispatch or test runner. Publication flags cover this artifact-only action;preceding authorized native copy/APX cycle is explicit in evidence.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-7",
+        "EV-8"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-0",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-192322Z-native-memo-modify/native-runtime.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "efa1fb6d777fb6049d95e35dd5fb0ff7446bac0c2bfe2390bb18bad2ba8b55c7",
+      "source_revision": "13139d6cd03340bff7fbde5ccac5735929843b7a"
+    },
+    {
+      "evidence_id": "EV-1",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-192322Z-native-memo-modify/SDK-build.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "fbca7572920b518cbb0162ec82307e806f0430b41dccdacb143a5a43f19d7ff8",
+      "source_revision": "13139d6cd03340bff7fbde5ccac5735929843b7a"
+    },
+    {
+      "evidence_id": "EV-2",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-192322Z-native-memo-modify/side-effect-audit.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "26bc140174c886be03bf0e88f484bb7a68abf7610e7b6b2cd6b0a36306b03710",
+      "source_revision": "13139d6cd03340bff7fbde5ccac5735929843b7a"
+    },
+    {
+      "evidence_id": "EV-3",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-192322Z-native-memo-modify/connected-flow.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "48d5ffb4e2a78a8e356e3164fecbe071a896c96466ad79273435af83f34157ef",
+      "source_revision": "13139d6cd03340bff7fbde5ccac5735929843b7a"
+    },
+    {
+      "evidence_id": "EV-4",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-192322Z-native-memo-modify/module-contracts.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "5aac4aea9c2f03b5b6b98a85ea23c6f1a4716794b8a1bf04a318b298108e9f4e",
+      "source_revision": "13139d6cd03340bff7fbde5ccac5735929843b7a"
+    },
+    {
+      "evidence_id": "EV-5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-192322Z-native-memo-modify/module-coverage.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "e1926ded32f04e99ab34f9d958ac881c81edb4010f1f58296478dcbba821da08",
+      "source_revision": "13139d6cd03340bff7fbde5ccac5735929843b7a"
+    },
+    {
+      "evidence_id": "EV-6",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-192322Z-native-memo-modify/gap-register.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "383cd1657c227283d55d65990f7a0e29e3732ed5fdd36eb1c6705eccc64bbb32",
+      "source_revision": "13139d6cd03340bff7fbde5ccac5735929843b7a"
+    },
+    {
+      "evidence_id": "EV-7",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-192322Z-native-memo-modify/publication-preflight.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "652bbf62db32d62cf1c7e4e856443cc65bc2b363659d7a04251ec8e6ea4fc0aa",
+      "source_revision": "13139d6cd03340bff7fbde5ccac5735929843b7a"
+    },
+    {
+      "evidence_id": "EV-8",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-192322Z-native-memo-modify/publication-actions.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "7e69bcd4f5d60f7172d17b8998e7fccde8d9fee35e9df7aeced176c4f2884fb9",
+      "source_revision": "13139d6cd03340bff7fbde5ccac5735929843b7a"
+    }
+  ],
+  "report_markdown": "# Native assembly editing: real effects and bounded memo contracts\n\nContinuation of exact PR107 `9a3091638eaa1a9c72f9a08c17d02855d8419edc`. A11.S03 remains **PARTIAL**. No offline tests, test workflow dispatch or quantity-engine calls.\n\nThe approved live cycle used the exact PR107 APX in an explicitly authorized Save As copy. The original saved model was never overwritten. The original APX and registration are restored; the copy was reopened in a new process, and all409 current native signatures independently matched.\n\n| Operation | Actual native result | Acceptance |\n| --- | --- | --- |\n| Extruded Shell vector | Length4.0→4.5m along existing Y vector; unchanged profile, frame, contours, native material assignments, story, GUID and IFC identity | **LIVE_PASS** for this exact supported subset; IFC export and engineering not verified |\n| Railing Rail height |0.07→0.17m; native BREP rises0.10m;18 dependent baluster bottoms rise0.10m while their tops remain1.08m | Geometry confirmed; **PARTIAL**, because two GDL BuildingMaterial assignments on one nested native Object drifted |\n| Curtain Wall scalar height | SDK returned NoError, but actual height stayed2.0m and resultant body did not change | **NO_EFFECT**, no PASS or retry; new preparation and SDK reject this scalar route |\n| Exact material recovery | One approved setter attempt; original material GUID/index37 independently confirmed. Only unlocked bmatRail sent; disabled bmatFixing reserved for dependent readback | `APIERR_NOTSUPPORTED` from native Element_Change/AddPars; all409 signatures and all128 placed parameters unchanged. **Not restored**; owner-aware edit still required |\n\nThe material drift is specifically bmatRail and bmatFixing, index37→36 (stainless→structural steel), on one native-owned Object. Aggregate effective face surfaces were unchanged and were insufficient to prove material preservation. Initial geometry callback wording is explicitly corrected by [the side-effect audit](https://github.com/dvikt33-ux/safe-bim-layer/blob/13139d6cd03340bff7fbde5ccac5735929843b7a/docs/evidence/APA_NATIVE_MODIFY_SIDE_EFFECT_AUDIT.json). Historical raw records remain intact.\n\nThe saved copy has409 GUIDs, with zero additions or removals. Against the pre-edit native baseline,20 resultant BREP signatures and one additional material-only signature differ.314 elements outside the qualified Railing/Shell roots and all prior258 elements retain their signatures. Native body-pool index changes are excluded using the existing geometry-signature implementation.\n\nThe Curtain Wall and recovery scenes retain their original UNKNOWN journal state, supplemented by independent reconciliation hashes. The timed-out Open call was not replayed. Subsequent restart and original-runtime readback independently verified persistence of the saved state, including the material drift. No rollback or dependent repair was fabricated.\n\n## Product changes\n\nThe existing `GetNativeAssemblyEditStateV1` now exposes supported native memo data: Curtain Wall reference polygon, contour, plane/segment information, primary/secondary pattern distances and native IDs; Railing path/Z values; explicit association/write limits. The existing `ModifyNativeAssemblyV1` supports bounded same-topology straight Curtain Wall reference/contour and pattern edits. Coordinates, closure, counts, allocation bounds and IDs are checked before native Element_Change. Scalar Curtain Wall height is refused after its observed no-effect result.\n\nExtruded Shell retains its existing vector/profile path and adds class-specific native tilt fields. Revolved scalar-angle fields are a separate **source/build-only** subset. Ruled profile editing, new Shell holes and Railing association/path writes are not advertised as supported. Railing path data are readable, but changing the path remains blocked until its native association contract is qualified.\n\nNo new command names or second executor were added. Shared preparation and execution stay in `apa_native_parameter_edit.py` and delegate to the existing DynamicCommands → SceneWriter → SQLite path. Optional body and typed-material verifiers are independent. Omitting the material verifier explicitly leaves material acceptance unverified. `native_material_retention` compares every scoped element's native materialBindings, including typed GDL assignments, instead of aggregate face-surface sets. Existing GDL getter/setter preparation preserves scalar/matrix types and now has before/after readback and script-dependent-change diagnostics. It distinguishes native Disabled, Fixed and hidden flags.\n\nThe existing MEP topology command adds public SDK Elbow/Branch ownership, dimensions, domain and applicable preference/insulation facts. `Transition.GetAngle()` is documented in degrees; the new field is `angleDegrees`, correcting the prior `angleRadians` label. This is a schema change requiring consumers to use the new schema. Existing ports, systems and routing commands remain reused. There is no new MEP connection, preference mutation or positive MEP runtime claim.\n\n## One dependency graph\n\nActual native component ownership, applicable materials, assembly states,128 placed GDL parameters, three IFC identities and nine IFC properties pass through the existing dependency adapter. The resulting captured slice has **346nodes/472edges**. A structural-steel material impact reaches four nodes through the existing DependencyImpact. The source hash and relation counts are in [the connected-flow evidence](https://github.com/dvikt33-ux/safe-bim-layer/blob/13139d6cd03340bff7fbde5ccac5735929843b7a/docs/evidence/APA_NATIVE_MEMO_CONNECTED_FLOW.json). This slice is not an additive count against PR104's different captured scope.\n\nRoot, parent and declared-owner identities remain distinct.24 differing declared-owner/parent cases do not generate inferred edges. Missing library-part identity does not produce a name-based relationship. Curtain Wall scalar height is a read-only derived fact, not an editable driving parameter. No dependent native writes are scheduled.\n\n## Build and runtime boundaries\n\nThe newest full Windows/Archicad29 Release artifact is SHA256 `84841037512024d1a2df5832453968422c1046575fd461a3c7555745ed3289ba`, native source revision `bc241f54ba463f305d6e45178427ba79871271f3`. It is **BUILD_PASS_NOT_INSTALLED**. Python-only material acceptance improvements were added after that native source revision.18 existing SDK contracts remain; no command-name inflation.\n\nThe approved and tested PR107 binary is SHA256 `4e6cdf2a59e46c50b78f52558fe2e9f3cd19a51c4b1142898dda29d2bcc3aead`. Its actual documentation exposed293 commands. Its enhanced opening/envelope/component fields are distinct from the still-pending exact PR104 binary authorization. The newest memo/MEP changes have no runtime acceptance yet.\n\nNo new APX permission is inferred. The original runtime is restored and the authorized copy remains open. IFC accessor identity preservation is separate from export verification. Quantity engine stays quarantined. Opening107 post-close comparison, positive MEP topology, three unresolved Drawing sources and complex-class native editing remain open.\n\n## Exact continuation\n\nFirst implement an owner-aware native route for the two Railing material assignments; the direct nested-Object AddPars setter is proven unsupported and must not be replayed. Keep the approved material-only scope and Rail0.17m/Shell4.5m geometry. A changed native implementation requires an exact-binary approval before deployment.\n\nThen obtain separate approval for the reviewable848410 candidate and an explicit same-root contour/pattern trial in the existing copy. Check actual Curtain Wall contour/BREP height, child GUID mapping and per-element typed materials. Do not reuse the failed scalar scene. Positive MEP reads need an existing authorized MEP sample; no recreation or unsafe ConnectLogically call is implied.\n\nPublication uses one new draft PR, all commits `[skip ci]`, direct existing publisher functions and byte/blob GitHub readback. Actual push/pull_request/manual workflow definitions are checked before publication; no workflow settings or protected rules are changed.\n\n\nPublished [draft PR109](https://github.com/dvikt33-ux/safe-bim-layer/pull/109) at `13139d6cd03340bff7fbde5ccac5735929843b7a`. Claim revision178; A11.S03 remainsPARTIAL. This publication action changes only repository artifacts, not PLN/APX/runtime. The preceding explicitly authorized native copy cycle and its material-restoration failure are recorded above.\n",
+  "next_substep": "APA-P70.A11.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

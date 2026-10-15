@@ -1,0 +1,19 @@
+{
+  "nativeWrites": 0,
+  "installedAPXChanged": false,
+  "models": {
+    "143": {
+      "savedFileMatchesLastVerified": true,
+      "expectedSHA256": "7ace6c5bb96e32f993e14e8aece8977b7fb1e65f08193adff8601f243ed931a5",
+      "actualSHA256": "7ace6c5bb96e32f993e14e8aece8977b7fb1e65f08193adff8601f243ed931a5",
+      "nativeWritesThisPackage": 0
+    },
+    "168": {
+      "savedFileMatchesLastVerified": true,
+      "expectedSHA256": "5dabdf89262f2aef0f482687eedcdeff295a99ce92a2f088dca332e2e9dac713",
+      "actualSHA256": "5dabdf89262f2aef0f482687eedcdeff295a99ce92a2f088dca332e2e9dac713",
+      "nativeWritesThisPackage": 0
+    }
+  },
+  "acceptance": "SAVED_BYTE_EXACT_PRESERVATION_NO_NEW_NATIVE_WRITE"
+}

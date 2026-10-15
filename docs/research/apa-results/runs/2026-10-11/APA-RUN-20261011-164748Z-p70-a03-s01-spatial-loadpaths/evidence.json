@@ -1,0 +1,70 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-P70-S01-ROOMS-AXES",
+      "evidence_ids": [
+        "EV-SPATIAL-SOURCE",
+        "EV-SPATIAL-ENTRY",
+        "EV-SPATIAL-TESTS",
+        "EV-SPATIAL-CI"
+      ],
+      "statement": "Authored room envelopes, floor mapping, axes and continuous bearing line candidates are validated without generating synthetic walls or an independent BIM DAG.",
+      "status": "OFFLINE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-S01-GEOMETRIC-LOADLINKS",
+      "evidence_ids": [
+        "EV-SPATIAL-SOURCE",
+        "EV-SPATIAL-TESTS",
+        "EV-SPATIAL-CI"
+      ],
+      "statement": "Adjacent-storey support candidates can be checked for geometric alignment, but actual load transfer and engineering suitability remain unverified.",
+      "status": "OFFLINE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-S01-NO-NATIVE-EMISSION",
+      "evidence_ids": [
+        "EV-SPATIAL-SOURCE",
+        "EV-SPATIAL-ENTRY"
+      ],
+      "statement": "No native BIM elements are emitted or written; S02 needs authoritative story/material/CSE binding and separate live-test approval.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-SPATIAL-SOURCE",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "17f2ba18bb5d0853dee97a6446cdbbf10f25b795",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-spatial-loadpaths-20261011/scripts/archicad_semantic_spatial.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-SPATIAL-ENTRY",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "6e4d20cdc697767528b6b1526bdc616ee0389f4f",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-spatial-loadpaths-20261011/scripts/archicad_project_accelerator.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-SPATIAL-TESTS",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "0d3a67d29f7a4ac2c44853b6cb6891c840937527",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-spatial-loadpaths-20261011/tests/test_archicad_semantic_spatial.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-SPATIAL-CI",
+      "kind": "TEST_RESULT",
+      "sha256": null,
+      "source_revision": "6d336f4e625a3618f1f45136d281c0138561515c",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38156894138",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

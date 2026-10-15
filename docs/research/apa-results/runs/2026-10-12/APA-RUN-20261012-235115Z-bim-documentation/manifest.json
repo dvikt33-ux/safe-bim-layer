@@ -1,0 +1,102 @@
+{
+  "action_id": "APA-P70.A11",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-BIM-DOCUMENTATION",
+      "evidence_ids": [
+        "EV-NATIVE",
+        "EV-SYNC",
+        "EV-CI"
+      ],
+      "statement": "Native plan, Section and limited exterior InteriorElevation projection; shared Wall/Slab specification facts and explicit refresh after new native test Wall change. Save/Open independent readback preserves original109; full facade/vertical coordinates/catalog rows/PDF not accepted.",
+      "status": "LIVE_PASS"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-NATIVE",
+      "kind": "TEST_RESULT",
+      "sha256": "d120070cec4c89f89df3ce2023de9d718f67ea8f9bce818573c17f676a31e6b0",
+      "source_revision": "f5aa4754a0ace251e8541001f17f6fa8eddfe8e5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-235115Z-bim-documentation/native-readback.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-SYNC",
+      "kind": "TEST_RESULT",
+      "sha256": "a848a2fbbeb36a3ad1f8409cffdb9d9853bfeb1c9e5fac15292518a34586da40",
+      "source_revision": "f5aa4754a0ace251e8541001f17f6fa8eddfe8e5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-235115Z-bim-documentation/synchronization.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-CI",
+      "kind": "TEST_RESULT",
+      "sha256": "117ffd7e9a5c61a906995dd077ad120d0b9586d90607c4622ac005799ccc03b6",
+      "source_revision": "f5aa4754a0ace251e8541001f17f6fa8eddfe8e5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-235115Z-bim-documentation/ci.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "work-bim-documentation-20261013",
+  "executor_run_id": "APA-CLAIM-DOCUMENTATION-20261012T230201Z",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-12T23:51:15Z",
+  "idempotency_key": "sha256:6be29c5e48eccb7834fd9c70f45a3d6c08fd9e432ba2529259825cb1b7d5d20e",
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "next_substep": "APA-P70.A11.S03",
+  "phase": "LIVE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261012-235115Z-bim-documentation",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "29 authorized isolated documentation test saved; publisher performs no native operations",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "source_branch": "feature/apa-bim-documentation-20261013",
+    "tapir": "1.5.10"
+  },
+  "source_revisions": [
+    {
+      "revision": "f5aa4754a0ace251e8541001f17f6fa8eddfe8e5",
+      "source_sha": "f5aa4754a0ace251e8541001f17f6fa8eddfe8e5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/70"
+    }
+  ],
+  "started_at": "2026-10-12T23:02:01Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A11.S03"
+}

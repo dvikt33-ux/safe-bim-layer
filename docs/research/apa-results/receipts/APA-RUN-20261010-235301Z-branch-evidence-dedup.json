@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:8c3cf1344a6cffb09ff50bf66ededf25bfd154cca6c9ce1661ab07153fe153e7",
+  "index_commit_sha": "e6fc2475fac39fca249e90871f9862f2730c4f59",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "e6fc2475fac39fca249e90871f9862f2730c4f59",
+  "report_path": "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-235301Z-branch-evidence-dedup/REPORT.md",
+  "report_sha256": "0f6bb06c17ee5b941ed20339a3f86afc73da35842009f494076d20374a0722f9",
+  "run_id": "APA-RUN-20261010-235301Z-branch-evidence-dedup",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

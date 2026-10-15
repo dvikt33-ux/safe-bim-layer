@@ -1,0 +1,7 @@
+{"at":"2026-10-11T19:43:37.877091+00:00","command":"GetProjectInfo","parameters":{}}
+{"at":"2026-10-11T19:43:37.899596+00:00","command":"GetStories","parameters":{}}
+{"at":"2026-10-11T19:43:37.928348+00:00","command":"GetAddOnVersion","parameters":{}}
+{"at":"2026-10-11T19:43:37.946264+00:00","command":"GetAllElements","parameters":{}}
+{"at":"2026-10-11T19:43:37.964567+00:00","command":"GetDetailsOfElements","parameters":{"elements":[{"elementId":{"guid":"55d1a829-c83c-4fe1-8073-f8b83d102170"}}]}}
+{"at":"2026-10-11T19:43:37.978570+00:00","command":"GetDetailsOfElements","parameters":{"elements":[{"elementId":{"guid":"5988ad8c-dcc4-43fe-9bd5-cf3fcc8fc48a"}}]}}
+{"at":"2026-10-11T19:43:37.995237+00:00","command":"Get3DBoundingBoxes","parameters":{"elements":[{"elementId":{"guid":"55d1a829-c83c-4fe1-8073-f8b83d102170"}},{"elementId":{"guid":"5988ad8c-dcc4-43fe-9bd5-cf3fcc8fc48a"}}]}}

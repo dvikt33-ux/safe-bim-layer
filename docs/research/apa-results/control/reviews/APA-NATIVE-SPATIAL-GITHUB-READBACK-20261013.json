@@ -1,0 +1,102 @@
+{
+  "status": "PUBLISHED_NATIVE_SPATIAL_BYTE_READBACK_PASS",
+  "run": "APA-RUN-20261013-165220Z-native-spatial",
+  "head": "b6466684e28ee6f8f0043a44020666d0f23b484d",
+  "files": {
+    "docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/ci.json": {
+      "blob": "48b0b4f6d81449eed25f1b907bfebe616044db29",
+      "sha256": "158bc2619ef5e3c14d21628f86e1def8cd8307d357e71773db52f36f45f57230",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/code-readback.json": {
+      "blob": "e9f185544f9bc157cc636e9446ec429f25b729f5",
+      "sha256": "84c63b4e6a6520a27c5f488ec3813a102155e678b348dcf7d693d86d8ad207cd",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/core-knowledge-query.json": {
+      "blob": "194a4557b3d09793f4d446328ee34736b8566626",
+      "sha256": "41cb64fa883a787cc0e890a28e346e4d346da57b40d10d53d86cd3fc47fdf73c",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/EVIDENCE_SHA256.json": {
+      "blob": "30340ea63c8f2d88c280190c78c179f7d7b83d05",
+      "sha256": "9de7ff40656cfa20deecdf4d18f162d5f67bbac76213f8e238d3e73ce60458d6",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/gap-register.json": {
+      "blob": "5c9a8c427cd7e0e61dfdd9d9be87076ef0317eb4",
+      "sha256": "99c5938767809965676da632d3ecb9aa43389492537ba4175b2472a9250dd2f5",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/geometry-and-connections.json": {
+      "blob": "c7ce48f9c92cd43d977e84618d8f930c913d5a49",
+      "sha256": "877b0a06efbe2e6ac94d36f6f8b5379a79771d876cc07230e43404b947c1fda5",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/journal-reconciliation.json": {
+      "blob": "ab158e7db13807ca6286a19f4ef71544e9f6869c",
+      "sha256": "116a8f0848d9cc78f0c7b3470ccefdfb1a0a5399281029b129ff87e08a1b1c1b",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/native-grid-sdk-build.json": {
+      "blob": "17c9caf408b94600ce2bf8c983e1a7439ffc653a",
+      "sha256": "87984c0f75374609dc57d56876e645b506b5635a0c27cc37778379bef683a89d",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/native-readback.json": {
+      "blob": "31059da3729c78a553acd8f538554dd7cd8d4394",
+      "sha256": "fba19d27d78881507b599ad8c87eaa0737f3591892a3cb9c3a3f3949eb79b6a4",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/native-stair-source-and-readback.json": {
+      "blob": "0ddfad37125e8faf8969c8d9faeee9510f74ed24",
+      "sha256": "f2ed40b44c63c636cbd101dc3b964fdd66383824db022267dd40c2c3ff3bbd87",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/native-stories-and-dependencies.json": {
+      "blob": "7a3f3d71deb4b42ed4c3988338092caebcba007c",
+      "sha256": "ddfade25bce69f31bcdfe2cdfd6846e3c0a298f96201e3bbee7c74cd718f471a",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial/save-open-and-replay.json": {
+      "blob": "ca248b4c01b04288fe60d3d329216dae3806ceb0",
+      "sha256": "90bc8558f0af5dfc05498b4aecc8f67f7a429912f4ee1fd6d7344dab63b56e60",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/inbox/APA-RUN-20261013-165220Z-native-spatial.json": {
+      "blob": "eda5e3b5dcbc340e16a22abc512e617308664041",
+      "sha256": "64af3377faf2453bc461672abf5bee6fa3292865038907f23450ee44f57d6834",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-165220Z-native-spatial/evidence.json": {
+      "blob": "91b5d4a1460dcca8dc25ca7432bb61d1e4a15c61",
+      "sha256": "73aa6fa4e4064d58dee1da975cad39ff58f33332dd7247f217fcec1151108cb8",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-165220Z-native-spatial/manifest.json": {
+      "blob": "56e58fc45b6a5cc51e25b4073c224c0b6781fef0",
+      "sha256": "574ee2dad341997b457ee7373416b53462772b6625c5c006fb5289657ac9a697",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-165220Z-native-spatial/REPORT.md": {
+      "blob": "63c3c823b507b26b4d11685870b170941f6fe13c",
+      "sha256": "78401330535247c83e303fc1100def2705b355b105064468eaefbc9f76f214c7",
+      "readback": "BYTE_EXACT_MATCH"
+    }
+  },
+  "receipt": {
+    "idempotency_key": "sha256:44e819b938982ad2955185bdffc182bd90d6fde139705ed2e2a15564ec229f7c",
+    "index_commit_sha": "5a2a21619e7591d9fde36b462ca93fe087898fee",
+    "index_mode": "AUTOMATIC_V2_PROJECTION",
+    "indexed": true,
+    "readback_verified": true,
+    "report_commit_sha": "5a2a21619e7591d9fde36b462ca93fe087898fee",
+    "report_path": "docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-165220Z-native-spatial/REPORT.md",
+    "report_sha256": "78401330535247c83e303fc1100def2705b355b105064468eaefbc9f76f214c7",
+    "run_id": "APA-RUN-20261013-165220Z-native-spatial",
+    "schema": "APA_PUBLISH_RECEIPT_V1",
+    "status": "DONE_PUBLISHED"
+  },
+  "receiptBlob": "67a771af78c48de7e08c508f2bcea8bc03308d5d",
+  "reportAndReceiptVerified": true
+}

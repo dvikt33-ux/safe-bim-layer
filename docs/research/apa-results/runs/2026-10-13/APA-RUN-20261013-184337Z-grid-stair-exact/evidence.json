@@ -1,0 +1,72 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-GRID-STAIR-BUILD",
+      "evidence_ids": [
+        "EV-BUILD"
+      ],
+      "statement": "Full SDK29ReleaseAPX compiles/links with trueGrid and exactStair native contracts, all263old source command names preserved; not installed.",
+      "status": "BUILD_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-GRID-STAIR-OFFLINE",
+      "evidence_ids": [
+        "EV-CI"
+      ],
+      "statement": "Same existingSceneWriter SQLite Grid create/edit/reuse and exact source gates;689Windows/Linux tests PASS.",
+      "status": "OFFLINE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-GRID-STAIR-SOURCE",
+      "evidence_ids": [
+        "EV-RULES"
+      ],
+      "statement": "ActualFavorite2R+G maximum0.65 conflicts with3.3m/20risers/G0.35; G0.32 reaches0.65. New compatible cases are not native acceptance.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-GRID-STAIR-LIVE",
+      "evidence_ids": [
+        "EV-INTERFACE"
+      ],
+      "statement": "NativeGrid and new0.35mStair runtime/source-dimension acceptance pending separateAPX deployment and isolated test permission.",
+      "status": "NOT_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-BUILD",
+      "kind": "TEST_RESULT",
+      "sha256": "7a1440f431b6053dfa5a676967c8e4ccc397db166635baef015a10edd44c040b",
+      "source_revision": "bc8f8575ed65e308e10c5ac5f573b7d8ad9466a6",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-184337Z-grid-stair-exact/sdk-build.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-CI",
+      "kind": "TEST_RESULT",
+      "sha256": "913b205f5e8e121fbe85ccafe7a2671ee1ca0de8165f746bfae108a28ee98a7c",
+      "source_revision": "bc8f8575ed65e308e10c5ac5f573b7d8ad9466a6",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-184337Z-grid-stair-exact/ci.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-RULES",
+      "kind": "TEST_RESULT",
+      "sha256": "4921a3de2b97e3feaa0ab7d5cc7abeb58ce5247cd5ac9edbc2f7e94e9fb99c00",
+      "source_revision": "bc8f8575ed65e308e10c5ac5f573b7d8ad9466a6",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-184337Z-grid-stair-exact/favorite-source-constraints.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-INTERFACE",
+      "kind": "TEST_RESULT",
+      "sha256": "9f02aa48a632616119b1e9676891084bf5bd4e98312f4edb53bb3bf72a731e6a",
+      "source_revision": "bc8f8575ed65e308e10c5ac5f573b7d8ad9466a6",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-184337Z-grid-stair-exact/interfaces-and-isolated-test.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261013-184337Z-grid-stair-exact",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

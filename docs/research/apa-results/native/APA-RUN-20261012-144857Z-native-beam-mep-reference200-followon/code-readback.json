@@ -1,0 +1,73 @@
+{
+  "status": "ALL13_GITHUB_BLOBS_MATCH_EXACT_COMMITTED_BYTES",
+  "commit": "744e0bd184a11f1de4a1cf16382d21aec6f8cfca",
+  "base": "b1abd584585feb0f286621337986c8a5d3077507",
+  "pr": 59,
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "blob": "1bf56654a835f95e2e55e830092faae69090720b",
+      "isError": false
+    },
+    {
+      "path": "scripts/archicad_connected_components.py",
+      "blob": "c5a99f59a90369ff622807574677cf11ca0a2225",
+      "isError": false
+    },
+    {
+      "path": "scripts/archicad_connected_ifc.py",
+      "blob": "7ae4e676bd6ffacdc5863f85e7bfb1898486512d",
+      "isError": false
+    },
+    {
+      "path": "scripts/archicad_details_context.py",
+      "blob": "5b86f1592c5224e9affc746b9ce5ac223ea911aa",
+      "isError": false
+    },
+    {
+      "path": "scripts/archicad_functional_expansion.py",
+      "blob": "1f6a6db87b4871deefecb3da9f9691debbf38d6c",
+      "isError": false
+    },
+    {
+      "path": "scripts/archicad_native_mep_network.py",
+      "blob": "7c723b4de7b032848776569858d1eaeabb6b747e",
+      "isError": false
+    },
+    {
+      "path": "scripts/archicad_native_operations.py",
+      "blob": "78db36ce20c67a3fca7e30a11236a34203118820",
+      "isError": false
+    },
+    {
+      "path": "scripts/archicad_project_accelerator.py",
+      "blob": "a23e55fb61753a998081b3bc6fd37f455a220852",
+      "isError": false
+    },
+    {
+      "path": "scripts/archicad_scene_run.py",
+      "blob": "dc6ed8d58d9193c9717e849c2a3fecaff54edac8",
+      "isError": false
+    },
+    {
+      "path": "scripts/archicad_native_beam_details.py",
+      "blob": "fc71a78c3940672a15c37ded1fb38f205d958df7",
+      "isError": false
+    },
+    {
+      "path": "tests/test_archicad_connected_components.py",
+      "blob": "29037714db7bb197b06b7dfa37fb5b7e3d368297",
+      "isError": false
+    },
+    {
+      "path": "tests/test_archicad_native_first_followon.py",
+      "blob": "61693af579efbb018f1d501afa0d4d8bebc1f38e",
+      "isError": false
+    },
+    {
+      "path": "docs/research/apa_native_beam_mep_followon_2026-10-12.md",
+      "blob": "bfadde7ddeb46c061140f4eadc4a02629e1abb82",
+      "isError": false
+    }
+  ]
+}

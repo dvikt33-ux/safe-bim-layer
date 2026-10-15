@@ -1,0 +1,1423 @@
+{
+  "schema": "IFC2X3",
+  "ifcLengthUnitScaleToMeters": 0.001,
+  "ifcopenshellVersion": "0.8.5",
+  "elements": [
+    {
+      "stepId": "native-slab-level-1",
+      "nativeKind": "Slab",
+      "ifcId": "id-sha256:4c77658928a8987c6e1b",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcSlab",
+      "ifcBoundsMeters": [
+        [
+          40.0,
+          50.0
+        ],
+        [
+          40.0,
+          48.0
+        ],
+        [
+          -0.1999999999999999,
+          0.0
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          40,
+          50
+        ],
+        [
+          40,
+          48
+        ],
+        [
+          -0.2,
+          0
+        ]
+      ],
+      "boundsDeltaMeters": 1.1102230246251565e-16
+    },
+    {
+      "stepId": "native-wall-east-level-1",
+      "nativeKind": "Wall",
+      "ifcId": "id-sha256:6f9590b60645b92241fb",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcWall",
+      "ifcBoundsMeters": [
+        [
+          49.85,
+          50.15
+        ],
+        [
+          39.85,
+          48.15
+        ],
+        [
+          0.0,
+          3.0
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          49.85,
+          50.15
+        ],
+        [
+          39.85,
+          48.15
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "native-wall-north-level-1",
+      "nativeKind": "Wall",
+      "ifcId": "id-sha256:e31b5a938e5e33c5dbb9",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcWall",
+      "ifcBoundsMeters": [
+        [
+          39.85,
+          49.85
+        ],
+        [
+          47.85,
+          48.15
+        ],
+        [
+          0.0,
+          3.0
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          39.85,
+          49.85
+        ],
+        [
+          47.85,
+          48.15
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "native-wall-south-level-1",
+      "nativeKind": "Wall",
+      "ifcId": "id-sha256:dcbf9fe22158ead8a03c",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcWall",
+      "ifcBoundsMeters": [
+        [
+          39.85,
+          49.85
+        ],
+        [
+          39.85,
+          40.15
+        ],
+        [
+          0.0,
+          3.0
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          39.85,
+          49.85
+        ],
+        [
+          39.85,
+          40.15
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "native-wall-west-level-1",
+      "nativeKind": "Wall",
+      "ifcId": "id-sha256:76e0849175254dc6aedd",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcWall",
+      "ifcBoundsMeters": [
+        [
+          39.85,
+          40.15
+        ],
+        [
+          40.15,
+          47.85
+        ],
+        [
+          0.0,
+          3.0
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          39.85,
+          40.15
+        ],
+        [
+          40.15,
+          47.85
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "native-slab-level-2",
+      "nativeKind": "Slab",
+      "ifcId": "id-sha256:8dadca74cc77b8bfe41f",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcSlab",
+      "ifcBoundsMeters": [
+        [
+          40.0,
+          50.0
+        ],
+        [
+          40.0,
+          48.0
+        ],
+        [
+          2.8,
+          3.0
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          40,
+          50
+        ],
+        [
+          40,
+          48
+        ],
+        [
+          2.8,
+          3
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "native-wall-east-level-2",
+      "nativeKind": "Wall",
+      "ifcId": "id-sha256:d869191b68ec80be1ea0",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcWall",
+      "ifcBoundsMeters": [
+        [
+          49.85,
+          50.15
+        ],
+        [
+          39.85,
+          48.15
+        ],
+        [
+          3.0,
+          6.0
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          49.85,
+          50.15
+        ],
+        [
+          39.85,
+          48.15
+        ],
+        [
+          3,
+          6
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "native-wall-north-level-2",
+      "nativeKind": "Wall",
+      "ifcId": "id-sha256:139bb06ff1a9bcb5e7b7",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcWall",
+      "ifcBoundsMeters": [
+        [
+          39.85,
+          49.85
+        ],
+        [
+          47.85,
+          48.15
+        ],
+        [
+          3.0,
+          6.0
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          39.85,
+          49.85
+        ],
+        [
+          47.85,
+          48.15
+        ],
+        [
+          3,
+          6
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "native-wall-south-level-2",
+      "nativeKind": "Wall",
+      "ifcId": "id-sha256:33f9bc6a700f1b18578a",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcWall",
+      "ifcBoundsMeters": [
+        [
+          39.85,
+          49.85
+        ],
+        [
+          39.85,
+          40.15
+        ],
+        [
+          3.0,
+          6.0
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          39.85,
+          49.85
+        ],
+        [
+          39.85,
+          40.15
+        ],
+        [
+          3,
+          6
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "native-wall-west-level-2",
+      "nativeKind": "Wall",
+      "ifcId": "id-sha256:147f911f46d2a6a2a994",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcWall",
+      "ifcBoundsMeters": [
+        [
+          39.85,
+          40.15
+        ],
+        [
+          40.15,
+          47.85
+        ],
+        [
+          3.0,
+          6.0
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          39.85,
+          40.15
+        ],
+        [
+          40.15,
+          47.85
+        ],
+        [
+          3,
+          6
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "authored-column-1",
+      "nativeKind": "Column",
+      "ifcId": "id-sha256:4b89f1df2316b3b17a75",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcColumn",
+      "ifcBoundsMeters": [
+        [
+          42.85,
+          43.15
+        ],
+        [
+          43.85,
+          44.15
+        ],
+        [
+          0.0,
+          3.0
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          42.85,
+          43.15
+        ],
+        [
+          43.85,
+          44.15
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "authored-column-2",
+      "nativeKind": "Column",
+      "ifcId": "id-sha256:2442c3dc4141a3dd8c8c",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcColumn",
+      "ifcBoundsMeters": [
+        [
+          46.85,
+          47.15
+        ],
+        [
+          43.85,
+          44.15
+        ],
+        [
+          0.0,
+          3.0
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          46.85,
+          47.15
+        ],
+        [
+          43.85,
+          44.15
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "selected-tn-aerator",
+      "nativeKind": "Object",
+      "ifcId": "id-sha256:652271c152628bbd917c",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcFurnishingElement",
+      "ifcBoundsMeters": [
+        [
+          54.865,
+          55.135
+        ],
+        [
+          44.865,
+          45.135
+        ],
+        [
+          0.0,
+          0.31
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          54.865,
+          55.135
+        ],
+        [
+          44.865,
+          45.135
+        ],
+        [
+          0,
+          0.31
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "authored-window-east-1",
+      "nativeKind": "Window",
+      "ifcId": "id-sha256:fbc6c7ae457972452f40",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcWindow",
+      "ifcBoundsMeters": [
+        [
+          50.1,
+          50.175
+        ],
+        [
+          43.4,
+          44.6
+        ],
+        [
+          1.0,
+          2.2
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          50.1,
+          50.175
+        ],
+        [
+          43.4,
+          44.6
+        ],
+        [
+          1,
+          2.2
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "authored-entry-door",
+      "nativeKind": "Door",
+      "ifcId": "id-sha256:9f2db9b83582f526aae0",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcDoor",
+      "ifcBoundsMeters": [
+        [
+          44.463,
+          45.537
+        ],
+        [
+          39.831,
+          40.169000000000004
+        ],
+        [
+          0.0,
+          2.137
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          44.463,
+          45.537
+        ],
+        [
+          39.831,
+          40.169
+        ],
+        [
+          0,
+          2.137
+        ]
+      ],
+      "boundsDeltaMeters": 7.105427357601002e-15
+    },
+    {
+      "stepId": "authored-window-west-1",
+      "nativeKind": "Window",
+      "ifcId": "id-sha256:2fd1894c05c1cc0f4542",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcWindow",
+      "ifcBoundsMeters": [
+        [
+          40.1,
+          40.175
+        ],
+        [
+          43.4,
+          44.6
+        ],
+        [
+          1.0,
+          2.2
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          40.1,
+          40.175
+        ],
+        [
+          43.4,
+          44.6
+        ],
+        [
+          1,
+          2.2
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "authored-window-east-2",
+      "nativeKind": "Window",
+      "ifcId": "id-sha256:3e520a53d6cc6c51aec0",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcWindow",
+      "ifcBoundsMeters": [
+        [
+          50.1,
+          50.175
+        ],
+        [
+          43.4,
+          44.6
+        ],
+        [
+          4.0,
+          5.2
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          50.1,
+          50.175
+        ],
+        [
+          43.4,
+          44.6
+        ],
+        [
+          4,
+          5.2
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "authored-window-west-2",
+      "nativeKind": "Window",
+      "ifcId": "id-sha256:e299bda071ec740ddff4",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcWindow",
+      "ifcBoundsMeters": [
+        [
+          40.1,
+          40.175
+        ],
+        [
+          43.4,
+          44.6
+        ],
+        [
+          4.0,
+          5.2
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          40.1,
+          40.175
+        ],
+        [
+          43.4,
+          44.6
+        ],
+        [
+          4,
+          5.2
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "connected-roof",
+      "nativeKind": "Roof",
+      "ifcId": "id-sha256:dde725e1e382c1d9f08d",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcRoof",
+      "ifcBoundsMeters": [
+        [
+          40.0,
+          50.0
+        ],
+        [
+          40.0,
+          48.02988762649472
+        ],
+        [
+          6.004517072947524,
+          7.4113530330010935
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          40,
+          50
+        ],
+        [
+          40,
+          48.029887626
+        ],
+        [
+          6.004517073,
+          7.411353033
+        ]
+      ],
+      "boundsDeltaMeters": 4.947224852003274e-10
+    },
+    {
+      "stepId": "connected-dimension-specimen",
+      "nativeKind": "Morph",
+      "ifcId": "id-sha256:bb53bd130aa06b8ee173",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcBuildingElementProxy",
+      "ifcBoundsMeters": [
+        [
+          42.0,
+          44.0
+        ],
+        [
+          44.0,
+          44.025
+        ],
+        [
+          6.50454087223318,
+          6.654540872233181
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          42,
+          44
+        ],
+        [
+          44,
+          44.025
+        ],
+        [
+          6.504540872,
+          6.654540872
+        ]
+      ],
+      "boundsDeltaMeters": 2.331805859512315e-10
+    },
+    {
+      "stepId": "connected-ventilation-route",
+      "nativeKind": "MEPRouting",
+      "ifcId": "id-sha256:7dac16dbc09814eb2e53",
+      "status": "IFC_PHYSICAL_ROUTE_WORLD_BOUNDS_MATCH",
+      "aggregateIfcIdNotExported": "id-sha256:7dac16dbc09814eb2e53",
+      "physicalIfcIds": [
+        "id-sha256:13e739b6b5dd3523df1f"
+      ],
+      "physicalNativeGuids": [
+        "id-sha256:60536d193a32708d49dd"
+      ],
+      "mappingScope": "ACTUAL_EXPORTED_PHYSICAL_DUCT_MEMBERS; CONTAINER_IS_NOT_AN_IFC_ROOT",
+      "ifcType": "IfcFlowSegment",
+      "ifcBoundsMeters": [
+        [
+          42.0,
+          48.0
+        ],
+        [
+          45.869,
+          46.131
+        ],
+        [
+          2.394,
+          2.6060000000000003
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          42,
+          48
+        ],
+        [
+          45.869,
+          46.131
+        ],
+        [
+          2.394,
+          2.606
+        ]
+      ],
+      "boundsDeltaMeters": 4.440892098500626e-16
+    },
+    {
+      "stepId": "connected-cli-explicit-solid",
+      "nativeKind": "Morph",
+      "ifcId": "id-sha256:bbfae89d8067d1cbc6b3",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcBuildingElementProxy",
+      "ifcBoundsMeters": [
+        [
+          60.0,
+          60.1
+        ],
+        [
+          60.0,
+          60.1
+        ],
+        [
+          0.0,
+          0.1
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          60,
+          60.1
+        ],
+        [
+          60,
+          60.1
+        ],
+        [
+          0,
+          0.1
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "gap-opening-host",
+      "nativeKind": "Wall",
+      "ifcId": "id-sha256:075cd75340394c29c8ea",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcWall",
+      "ifcBoundsMeters": [
+        [
+          64.0,
+          66.0
+        ],
+        [
+          59.85,
+          60.15
+        ],
+        [
+          0.0,
+          2.0
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          64,
+          66
+        ],
+        [
+          59.85,
+          60.15
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "gap-seo-target",
+      "nativeKind": "Morph",
+      "ifcId": "id-sha256:c057b3a86db731045222",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcBuildingElementProxy",
+      "ifcBoundsMeters": [
+        [
+          70.0,
+          71.0
+        ],
+        [
+          60.0,
+          62.0
+        ],
+        [
+          0.0,
+          2.0
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          70,
+          71
+        ],
+        [
+          60,
+          62
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "gap-seo-operator",
+      "nativeKind": "Morph",
+      "ifcId": "id-sha256:fa68c215793a6bac9544",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcBuildingElementProxy",
+      "ifcBoundsMeters": [
+        [
+          71.0,
+          72.0
+        ],
+        [
+          60.0,
+          62.0
+        ],
+        [
+          0.0,
+          2.0
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          71,
+          72
+        ],
+        [
+          60,
+          62
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "mep-extension-id-sha256:6a716e1074906d9be5c1",
+      "nativeKind": "MEPRouting",
+      "ifcId": "id-sha256:1db9212a211d09971986",
+      "status": "IFC_PHYSICAL_ROUTE_WORLD_BOUNDS_MATCH",
+      "aggregateIfcIdNotExported": "id-sha256:1db9212a211d09971986",
+      "physicalIfcIds": [
+        "id-sha256:1d6a936a1ff91a48932f"
+      ],
+      "physicalNativeGuids": [
+        "id-sha256:4a5e1ec4a141728545dc"
+      ],
+      "mappingScope": "ACTUAL_EXPORTED_PHYSICAL_DUCT_MEMBERS; CONTAINER_IS_NOT_AN_IFC_ROOT",
+      "ifcType": "IfcFlowSegment",
+      "ifcBoundsMeters": [
+        [
+          48.0,
+          49.0
+        ],
+        [
+          45.869,
+          46.131
+        ],
+        [
+          2.394,
+          2.606
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          48,
+          49
+        ],
+        [
+          45.869,
+          46.131
+        ],
+        [
+          2.394,
+          2.606
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "generic-opening",
+      "nativeKind": "Opening",
+      "ifcId": "id-sha256:b56510cf25445782093c",
+      "status": "IFC_OPENING_HOST_CUT_BOUNDS_MATCH",
+      "ifcType": "IfcOpeningElement",
+      "ifcBoundsMeters": [
+        [
+          64.8,
+          65.2
+        ],
+        [
+          59.55000000000001,
+          60.449999999999996
+        ],
+        [
+          1.0,
+          1.6
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          64.8,
+          65.2
+        ],
+        [
+          59.85,
+          60.15
+        ],
+        [
+          1,
+          1.6
+        ]
+      ],
+      "boundsDeltaMeters": 0.29999999999999716,
+      "ifcHostCutBoundsMeters": [
+        [
+          64.8,
+          65.2
+        ],
+        [
+          59.85,
+          60.15
+        ],
+        [
+          1.0,
+          1.6
+        ]
+      ],
+      "hostCutDeltaMeters": 0.0,
+      "geometryScope": "IFC_CUTTER_INTERSECTION_WITH_VERIFIED_HOST_BOUNDS; STANDALONE_CUTTER_EXTENTS_REMAIN_RECORDED"
+    },
+    {
+      "stepId": "mep-id-sha256:3681f77a29a2a203bcc3",
+      "nativeKind": "MEPRouting",
+      "ifcId": "id-sha256:0afb7b2614702db5b268",
+      "status": "IFC_PHYSICAL_ROUTE_WORLD_BOUNDS_MATCH",
+      "aggregateIfcIdNotExported": "id-sha256:0afb7b2614702db5b268",
+      "physicalIfcIds": [
+        "id-sha256:49db503616f82a36b232",
+        "id-sha256:7c27ee0cf38fa79d61e1",
+        "id-sha256:3e0dd64d98e5b5463d66"
+      ],
+      "physicalNativeGuids": [
+        "id-sha256:6f5c8cd1f485e8dfca51",
+        "id-sha256:39a5f0d1373b0229ce67",
+        "id-sha256:600707477b3d39d83401"
+      ],
+      "mappingScope": "ACTUAL_EXPORTED_PHYSICAL_DUCT_MEMBERS; CONTAINER_IS_NOT_AN_IFC_ROOT",
+      "ifcType": "IfcFlowSegment",
+      "ifcBoundsMeters": [
+        [
+          40.869,
+          43.0
+        ],
+        [
+          42.869,
+          46.131
+        ],
+        [
+          2.394,
+          2.6060000000000003
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          40.869,
+          43
+        ],
+        [
+          42.869,
+          46.131
+        ],
+        [
+          2.394,
+          2.606
+        ]
+      ],
+      "boundsDeltaMeters": 4.440892098500626e-16
+    },
+    {
+      "stepId": "mep-id-sha256:af5b7e3e5c20aad91756",
+      "nativeKind": "MEPRouting",
+      "ifcId": "id-sha256:87c99116c4bff5fd48da",
+      "status": "IFC_PHYSICAL_ROUTE_WORLD_BOUNDS_MATCH",
+      "aggregateIfcIdNotExported": "id-sha256:87c99116c4bff5fd48da",
+      "physicalIfcIds": [
+        "id-sha256:166cc56fe95380c5bf47"
+      ],
+      "physicalNativeGuids": [
+        "id-sha256:3bb26ddf3d02f3f38127"
+      ],
+      "mappingScope": "ACTUAL_EXPORTED_PHYSICAL_DUCT_MEMBERS; CONTAINER_IS_NOT_AN_IFC_ROOT",
+      "ifcType": "IfcFlowSegment",
+      "ifcBoundsMeters": [
+        [
+          43.0,
+          43.5
+        ],
+        [
+          42.869,
+          43.131
+        ],
+        [
+          2.394,
+          2.606
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          43,
+          43.5
+        ],
+        [
+          42.869,
+          43.131
+        ],
+        [
+          2.394,
+          2.606
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "mep-id-sha256:bddca15174c4f381c0b1",
+      "nativeKind": "MEPRouting",
+      "ifcId": "id-sha256:75d76ad09d25639e929c",
+      "status": "IFC_PHYSICAL_ROUTE_WORLD_BOUNDS_MATCH",
+      "aggregateIfcIdNotExported": "id-sha256:75d76ad09d25639e929c",
+      "physicalIfcIds": [
+        "id-sha256:09901ef387de835ea1c4"
+      ],
+      "physicalNativeGuids": [
+        "id-sha256:2c88ec3d0c4c09d2e805"
+      ],
+      "mappingScope": "ACTUAL_EXPORTED_PHYSICAL_DUCT_MEMBERS; CONTAINER_IS_NOT_AN_IFC_ROOT",
+      "ifcType": "IfcFlowSegment",
+      "ifcBoundsMeters": [
+        [
+          45.0,
+          46.0
+        ],
+        [
+          42.869,
+          43.131
+        ],
+        [
+          2.394,
+          2.606
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          45,
+          46
+        ],
+        [
+          42.869,
+          43.131
+        ],
+        [
+          2.394,
+          2.606
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "mep-id-sha256:4fa474eed7a78d38a4d7",
+      "nativeKind": "MEPRouting",
+      "ifcId": "id-sha256:339f08fda332823674a4",
+      "status": "IFC_PHYSICAL_ROUTE_WORLD_BOUNDS_MATCH",
+      "aggregateIfcIdNotExported": "id-sha256:339f08fda332823674a4",
+      "physicalIfcIds": [
+        "id-sha256:7890c8cc82c5a21efb4a"
+      ],
+      "physicalNativeGuids": [
+        "id-sha256:7aceefb5dbff9a83d77e"
+      ],
+      "mappingScope": "ACTUAL_EXPORTED_PHYSICAL_DUCT_MEMBERS; CONTAINER_IS_NOT_AN_IFC_ROOT",
+      "ifcType": "IfcFlowSegment",
+      "ifcBoundsMeters": [
+        [
+          43.869,
+          44.131
+        ],
+        [
+          43.251,
+          44.5
+        ],
+        [
+          2.394,
+          2.606
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          43.869,
+          44.131
+        ],
+        [
+          43.251,
+          44.5
+        ],
+        [
+          2.394,
+          2.606
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "mep-id-sha256:e85468403ed51bc18981",
+      "nativeKind": "MEPRouting",
+      "ifcId": "id-sha256:db13a06123de35d95490",
+      "status": "IFC_PHYSICAL_ROUTE_WORLD_BOUNDS_MATCH",
+      "aggregateIfcIdNotExported": "id-sha256:db13a06123de35d95490",
+      "physicalIfcIds": [
+        "id-sha256:8f1e6853631abe6713a8"
+      ],
+      "physicalNativeGuids": [
+        "id-sha256:5d3c6f3e0bf40c432f06"
+      ],
+      "mappingScope": "ACTUAL_EXPORTED_PHYSICAL_DUCT_MEMBERS; CONTAINER_IS_NOT_AN_IFC_ROOT",
+      "ifcType": "IfcFlowSegment",
+      "ifcBoundsMeters": [
+        [
+          43.869,
+          44.131
+        ],
+        [
+          44.5,
+          45.5
+        ],
+        [
+          2.394,
+          2.606
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          43.869,
+          44.131
+        ],
+        [
+          44.5,
+          45.5
+        ],
+        [
+          2.394,
+          2.606
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "mep-physical-id-sha256:b6e42c76b71bc00a7acd",
+      "nativeKind": "MEPComponent",
+      "ifcId": "id-sha256:a1d505bef2b0250ffde6",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcFlowFitting",
+      "ifcBoundsMeters": [
+        [
+          43.5,
+          45.0
+        ],
+        [
+          42.869,
+          43.251
+        ],
+        [
+          2.394,
+          2.606
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          43.5,
+          45
+        ],
+        [
+          42.869,
+          43.251
+        ],
+        [
+          2.394,
+          2.606
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "mep-physical-id-sha256:97690b217421517e82fc",
+      "nativeKind": "MEPComponent",
+      "ifcId": "id-sha256:d4230b696d21ad8f9935",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcFlowFitting",
+      "ifcBoundsMeters": [
+        [
+          40.869,
+          41.2
+        ],
+        [
+          45.8,
+          46.131
+        ],
+        [
+          2.394,
+          2.606
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          40.869,
+          41.2
+        ],
+        [
+          45.8,
+          46.131
+        ],
+        [
+          2.394,
+          2.606
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "mep-physical-id-sha256:140a12084f45fa25a86d",
+      "nativeKind": "MEPComponent",
+      "ifcId": "id-sha256:2acef546f2e341b094cf",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcFlowFitting",
+      "ifcBoundsMeters": [
+        [
+          40.869,
+          41.2
+        ],
+        [
+          42.869,
+          43.2
+        ],
+        [
+          2.394,
+          2.606
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          40.869,
+          41.2
+        ],
+        [
+          42.869,
+          43.2
+        ],
+        [
+          2.394,
+          2.606
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    },
+    {
+      "stepId": "source-section-c4",
+      "nativeKind": "Morph",
+      "ifcId": "id-sha256:dff645ec6929925d6ed1",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcBuildingElementProxy",
+      "ifcBoundsMeters": [
+        [
+          40.0,
+          50.0
+        ],
+        [
+          41.93331407611876,
+          42.08536569112088
+        ],
+        [
+          6.267472567151421,
+          6.314607563962621
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          40,
+          50
+        ],
+        [
+          41.933314076,
+          42.085365691
+        ],
+        [
+          6.267472567,
+          6.314607564
+        ]
+      ],
+      "boundsDeltaMeters": 1.5142020970415615e-10
+    },
+    {
+      "stepId": "expansion32-terminal",
+      "nativeKind": "MEPComponent",
+      "ifcId": "id-sha256:b9f2fa72869f69574862",
+      "status": "IFC_NATIVE_WORLD_BOUNDS_MATCH",
+      "ifcType": "IfcDistributionFlowElement",
+      "ifcBoundsMeters": [
+        [
+          45.675,
+          46.3
+        ],
+        [
+          42.7,
+          43.3
+        ],
+        [
+          2.07,
+          2.505
+        ]
+      ],
+      "nativeBoundsMeters": [
+        [
+          45.675,
+          46.3
+        ],
+        [
+          42.7,
+          43.3
+        ],
+        [
+          2.07,
+          2.505
+        ]
+      ],
+      "boundsDeltaMeters": 0.0
+    }
+  ],
+  "mappedCount": 37,
+  "boundsMatchCount": 37,
+  "openingHostCutMappings": 1,
+  "physicalRouteMappings": 7,
+  "requestedCount": 37,
+  "status": "IFC_COORDINATION_BOUNDS_PASS_WITH_EXPLICIT_PHYSICAL_ROUTE_MAPPING",
+  "scope": "GUID + world bounds; Opening uses native host hole and IFC host-cut intersection; not full face/quantity/engineering equivalence",
+  "structuralAcceptance": "NOT_VERIFIED"
+}

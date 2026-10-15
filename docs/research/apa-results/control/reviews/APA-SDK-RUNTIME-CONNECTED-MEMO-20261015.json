@@ -1,0 +1,22 @@
+{
+  "status": "DONE_PUBLISHED_FUNCTIONAL_BLOCK_S03_PARTIAL",
+  "revision": 166,
+  "codePR": 94,
+  "codeHead": "d758957f97cf1e347262da6f7e7b325ae6609ea4",
+  "nativeSourcePrepared": 372,
+  "localPrepared": 10,
+  "totalPrepared": 382,
+  "restoredOriginalCompatible": 337,
+  "testedPrototypeCompatible": 358,
+  "nativeCallableThisPass": 9,
+  "additionalNewGroupsCallable": 3,
+  "quantity": "BLOCKED_ACCESS_VIOLATION_QUARANTINED_BOTH_LAYERS",
+  "safeBuild": "FULL_RELEASE_PASS_NOT_INSTALLED",
+  "retainedGUIDsAndNativeParameters": 258,
+  "resultantBREPRetention": "NOT_RUN",
+  "originalAPXRestored": true,
+  "registrationRestored": true,
+  "WindowsCI": "PASS_EXACT_HEAD",
+  "receiptRun": "APA-RUN-20261015-011839Z-sdk-runtime-connected-memo",
+  "next": "QUANTITY_DEBUG_WITH_PER_ELEMENT_DIAGNOSTICS_AND_QUALIFIED_SDK_MASK;DRAWING_AUXILIARY_DATABASE_CONTEXT"
+}

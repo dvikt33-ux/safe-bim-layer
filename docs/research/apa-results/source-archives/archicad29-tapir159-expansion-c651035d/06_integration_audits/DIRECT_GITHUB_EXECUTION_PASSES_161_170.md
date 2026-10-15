@@ -1,0 +1,155 @@
+# DIRECT GITHUB EXECUTION — PASSES 161–170
+
+Date: 2026-09-28
+Scope: user writes a natural-language request in ordinary ChatGPT; ChatGPT produces a Safe BIM job and publishes it to GitHub; the local Safe BIM extension/service detects the job and begins validation/execution without manual copy-paste.
+
+## Pass 161 — feasibility
+
+Feasible. Existing infrastructure already proves two important building blocks:
+
+1. ChatGPT can write durable task/result material to GitHub.
+2. A local Windows dispatcher can poll GitHub state and react to a monotonic `turn_id`/status protocol.
+
+The desired flow is therefore an extension of an already-proven transport pattern, not a new class of system.
+
+## Pass 162 — do not auto-run arbitrary pasted Python
+
+The transport should carry a typed Safe BIM job/recipe, not arbitrary trusted code by default.
+
+Preferred execution classes:
+
+- `SAFE_RECIPE`: deterministic, schema validated, capability gated — eligible for automatic intake.
+- `SAFE_SCRIPT`: signed/versioned script executed only through a restricted Safe BIM runner — review/preview required.
+- `RAW_CODE`: stored as proposal only; never auto-executed.
+
+This avoids converting GitHub into a remote-code-execution channel.
+
+## Pass 163 — GitHub as transport, not authority
+
+GitHub may carry the proposed job, but Safe BIM remains the only BIM execution authority.
+
+Before any write, local runtime must re-read:
+
+- logical project identity;
+- current project root/state hash;
+- target GUID state hashes;
+- capability manifest;
+- current active project instance;
+- safety mode/checkpoint/sandbox settings.
+
+A valid GitHub commit is not sufficient authorization to mutate the PLN.
+
+## Pass 164 — queue layout
+
+Recommended private command repository or private command area:
+
+```text
+commands/
+  inbox/
+    <job_id>/manifest.json
+    <job_id>/recipe.json
+    <job_id>/notes.md
+  accepted/
+  running/
+  results/
+    <job_id>/result.json
+    <job_id>/evidence.json
+```
+
+However, moving files between directories on every state transition creates unnecessary write churn. A better v0.1 is immutable job files plus one compact mutable cursor/status file per job.
+
+## Pass 165 — immutable job identity
+
+Each job needs:
+
+- `job_id` UUID;
+- monotonic `sequence` scoped to the project/queue;
+- source snapshot ID and root hash;
+- source ChatGPT conversation metadata only if non-sensitive and useful;
+- creation timestamp;
+- recipe hash;
+- expected Safe BIM capability version;
+- execution policy.
+
+A job ID is processed at most once. Re-fetching the same GitHub commit cannot cause a second physical dispatch.
+
+## Pass 166 — Git transport options
+
+Three options were evaluated.
+
+### A. Poll raw/contents endpoint
+Simple and compatible with current dispatcher style. Suitable for prototype.
+
+### B. Poll a lightweight ref/manifest with HTTP conditional requests
+Better steady-state behavior. The local service can use `ETag` / `If-None-Match`; unchanged state returns no body and reduces rate-limit impact.
+
+### C. GitHub webhook
+Fastest push-style notification, but a local PC behind NAT is not directly reachable. GitHub documentation recommends a public receiver/proxy for local testing. A webhook relay adds an external dependency and new security surface.
+
+Conclusion: use conditional polling first; add optional webhook relay later only if latency measurements justify it.
+
+## Pass 167 — polling interval and load
+
+The current AI dispatcher polls every 5 seconds, demonstrating the operational pattern. For Safe BIM command intake, a 2–5 second idle polling target is reasonable for prototype testing, but must be measured against GitHub limits and local network behavior.
+
+Use conditional GET and exponential backoff:
+
+- active user session: 2–5 s;
+- idle/no Archicad project: 15–60 s;
+- network/API failure: exponential backoff with jitter;
+- after local acknowledgement: immediate one-time refresh.
+
+Do not call deep repository APIs on each poll. Poll one small queue head/ref file only.
+
+## Pass 168 — credential location
+
+Do not embed a GitHub PAT or private key in the `.apx` or HTML/JS UI.
+
+Recommended split:
+
+```text
+Archicad Palette/APX
+   -> localhost IPC
+Local Safe BIM Context/Queue Service
+   -> GitHub API
+Windows credential store / OS-protected secret
+```
+
+GitHub fine-grained tokens should be limited to the one private queue/state repository and minimum `Contents` permissions. A future GitHub App is cleaner for short-lived installation tokens, but increases setup complexity.
+
+## Pass 169 — command authenticity
+
+Repository write permission alone should not be the final execution trust signal.
+
+Job manifest should include a content hash over the immutable recipe/envelope. Locally, Safe BIM should pin:
+
+- repository identity;
+- branch/ref identity;
+- expected authoring protocol version;
+- job hash;
+- source snapshot identity.
+
+Optional later hardening: detached signature/HMAC generated by a trusted broker. Do not require this for the first local prototype if the queue repo is private and tightly permissioned, but design the envelope so a signature field can be added without breaking compatibility.
+
+## Pass 170 — execution acknowledgement
+
+Do not infer execution from branch movement.
+
+The local service should create a durable acknowledgement/result record:
+
+```json
+{
+  "job_id": "...",
+  "received_commit": "...",
+  "local_project_id": "...",
+  "status": "VALIDATING|WAITING_USER|RUNNING|DONE|FAILED|STALE_CONTEXT|UNKNOWN_OUTCOME",
+  "physical_dispatch_count": 0,
+  "result_hash": "..."
+}
+```
+
+A ChatGPT follow-up can then read the result from GitHub instead of asking the user to copy logs.
+
+## Interim result after pass 170
+
+The direct ChatGPT → GitHub → Safe BIM path is feasible and reuses existing proven transport ideas. The safe form is not “ChatGPT pushes Python and Archicad executes it”; it is “ChatGPT publishes an immutable typed job, local Safe BIM validates current local state, then optionally executes it under the existing safety kernel.”

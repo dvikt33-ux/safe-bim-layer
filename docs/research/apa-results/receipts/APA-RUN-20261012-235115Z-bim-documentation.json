@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:6be29c5e48eccb7834fd9c70f45a3d6c08fd9e432ba2529259825cb1b7d5d20e",
+  "index_commit_sha": "49336904f299226321d5bdb1eac6db38aaf9cd85",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "49336904f299226321d5bdb1eac6db38aaf9cd85",
+  "report_path": "docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-235115Z-bim-documentation/REPORT.md",
+  "report_sha256": "ef4ef176ffbaca8c21ea7e0a582f3dea7bc5f835b3985e2e1527531714ecb9ca",
+  "run_id": "APA-RUN-20261012-235115Z-bim-documentation",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

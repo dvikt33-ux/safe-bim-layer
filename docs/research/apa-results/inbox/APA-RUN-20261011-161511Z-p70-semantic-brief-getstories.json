@@ -1,0 +1,114 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261011-161511Z-p70-semantic-brief-getstories",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A02",
+  "substep_id": "APA-P70.A02.S01",
+  "executor": "chatgpt-gpt6-manual",
+  "executor_run_id": "APA-RUN-20261011-1608Z-p70-a02-s01-semantic-brief",
+  "phase": "OFFLINE",
+  "started_at": "2026-10-11T16:08:29Z",
+  "finished_at": "2026-10-11T16:15:11Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29 (target; offline CI only)",
+    "sdk": null,
+    "tapir": "1.5.10 (source baseline only)",
+    "source_branch": "feature/apa-semantic-brief-story-resolution-20261011"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-semantic-brief-story-resolution-20261011/scripts/archicad_semantic_brief.py",
+      "revision": "8e0c98503903f11a5e1f1316965a3d1e66d5a120",
+      "source_sha": "8e0c98503903f11a5e1f1316965a3d1e66d5a120"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-semantic-brief-story-resolution-20261011/scripts/archicad_project_accelerator.py",
+      "revision": "daf4f7bad1b5aea2a48892f5423c0e65bee5a683",
+      "source_sha": "daf4f7bad1b5aea2a48892f5423c0e65bee5a683"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-semantic-brief-story-resolution-20261011/tests/test_archicad_semantic_brief.py",
+      "revision": "dcef428a68ab4727f18d25e15cf6793b88e79173",
+      "source_sha": "dcef428a68ab4727f18d25e15cf6793b88e79173"
+    }
+  ],
+  "inputs": [
+    "ART-APA-FULL-CYCLE",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-P70-A01-S03-INTEGRATION-BOUNDARIES-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-P70-S01-SEMANTIC-BRIEF",
+      "statement": "Semantic brief validation for both project start modes, site/rooms/requirements, first storey named 1 этаж and elevation zero implemented as an offline-only adapter.",
+      "status": "OFFLINE_PASS",
+      "evidence_ids": [
+        "EV-P70-S01-BRIEF",
+        "EV-P70-S01-ENTRY",
+        "EV-P70-S01-TESTS",
+        "EV-P70-S01-CI"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-S01-NATIVE-INDEX",
+      "statement": "Native story IDs are retrieved only by GetStories after checking exact active PLN, with no assumed floorIndex or silent renumbering.",
+      "status": "OFFLINE_PASS",
+      "evidence_ids": [
+        "EV-P70-S01-BRIEF",
+        "EV-P70-S01-TESTS"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-S01-LIVE-BLOCKED",
+      "statement": "No generic actual project creation, room-to-DAG graph, modification, normative approval, or live material selection has been implemented by this stage.",
+      "status": "NOT_VERIFIED",
+      "evidence_ids": [
+        "EV-P70-S01-ENTRY"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-P70-S01-BRIEF",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-semantic-brief-story-resolution-20261011/scripts/archicad_semantic_brief.py",
+      "kind": "SOURCE_CODE",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "8e0c98503903f11a5e1f1316965a3d1e66d5a120"
+    },
+    {
+      "evidence_id": "EV-P70-S01-ENTRY",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-semantic-brief-story-resolution-20261011/scripts/archicad_project_accelerator.py",
+      "kind": "SOURCE_CODE",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "daf4f7bad1b5aea2a48892f5423c0e65bee5a683"
+    },
+    {
+      "evidence_id": "EV-P70-S01-TESTS",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-semantic-brief-story-resolution-20261011/tests/test_archicad_semantic_brief.py",
+      "kind": "SOURCE_CODE",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "dcef428a68ab4727f18d25e15cf6793b88e79173"
+    },
+    {
+      "evidence_id": "EV-P70-S01-CI",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38154611226",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "f0b81b784cb7a84d139d2356b51ff3d9b266f4b5"
+    }
+  ],
+  "report_markdown": "# APA-P70.A02.S01 — семантическое архитектурное задание и GetStories-only разрешение этажей\n\n**Тип результата:** OFFLINE_PASS + SOURCE_VERIFIED · **Дата:** 2026-10-11 · **Task:** APA-P70.A02.S01.  \n**Исходная ветка:** [draft PR #40](https://github.com/dvikt33-ux/safe-bim-layer/pull/40) `feature/apa-semantic-brief-story-resolution-20261011`, основана на проверенном PR #35; `main`, проверенные ветки, PLN, APX не изменены.\n\n## Что реализовано\n\n**Два режима в единственной существующей точке входа:** `scripts/archicad_project_accelerator.py::compile_project_brief` делегирует лёгкому `archicad_semantic_brief.normalize` и (только по желанию клиента) read-only `resolve_stories`. Это *не* второй BIM-компилятор/граф/SceneWriter и не имеет Create/Modify команд.\n\n- `GENERATE_FROM_ZERO`: валидирует intent нового проекта. Без созданного и открытого PLN возвращает `NEEDS_NEW_PROJECT_SETUP`, **не** придумывает этажи и **не** создаёт новый PLN автоматически.\n- `ADAPT_EXISTING`: требует **точный абсолютный путь .pln** единственного активного проекта; чтение `GetProjectInfo` → `GetStories` и bind по уникальным, явно ожидаемым named stories, floorId, levels. Поддерживает реальные native indices **0, 1 или любые другие**. Конфликты/недостающие этажи → `NEEDS_STORY_RESOLUTION`, без скрытого переименования/переключения проекта.\n- Архитектурный первый наземный уровень — **«1 этаж» на ±0,000 м** (проверяется валидатором). Название `0 этаж` отклоняется как неверная трактовка архитектурной нумерации. `floorIndex` не выводится из имени.\n- Семантическая структура: `projectId`, `mode`, `siteId` и `region`, именованные этажи/отметки, комнаты (ID/имя/этаж/minAreaM2), ограничения (ID/текст/evidenceStatus).\n- В этой стадии статус ограничений допускается **только `UNVERIFIED`**. Источники и применимые СП/ГОСТ должны пройти отдельный P70.A02.S02; пользовательская строка `SOURCE_VERIFIED` без проверенного доказательства не создаёт нормативный PASS.\n- `existingNativeLabel` позволяет владельцу явно сопоставить название существующего этажа с архитектурным (например `Первый Этаж` → `1 этаж`), без изменения исходного PLN. Смена projectPath, `.bpn`, относительные Windows пути, повторные floorId/index, дубли/невалидные rooms и ложные normative marks отклоняются.\n\n## Source-backed интерфейс и будущая композиция\n\n| Контракт | Состояние на SHA/PR | Следующий потребитель |\n|---|---|---|\n| `compile_project_brief(brief, read_api=None)` | **Код + tests на PR #40**. Два режима, typed normalization, safe GetStories mapping; никакого access token и native writer | **P70.A02.S02/S03** — verified applicable requirements, Building Material/Composite/Favorite/PLP |\n| `compile_intent` / `run_project` | **Поведение не изменено**; по-прежнему принимает fixed `pavilion-frame-v1` и `building-shell-v1` в одном компоненте, а не произвольную комнатную модель | P70.A03.S01/S02 — связать approved brief/rooms/structural axes → существующий DAG и один SceneWriter |\n| `RUN.SceneWriter` и `GetDetailsOfElements` | **Не изменены и не задействованы** этим S01. Live 25-element scratch success — другое уже опубликованное доказательство | P70.A03.S02/S03 — разрешённый live diff/update с сохранением GUID |\n\nВажно: parser contract не представляет собой готовое создание нового проекта или редактирование существующего. Именно эту границу устанавливал S03, поэтому не объявлять `GENERATE_FROM_ZERO` / `ADAPT_EXISTING` product LIVE_PASS. Не повторять уже пройденный 25-element smoke без регрессии.\n\n## Проверка качества\n\n- [PR #40](https://github.com/dvikt33-ux/safe-bim-layer/pull/40) — **draft, не merge**; исходники и tests в отдельной новой ветке.\n- [CI #38154611226](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38154611226) — **SUCCESS, 219/219 offline unit tests**. Первичный прогон [#38154488040](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38154488040) тоже PASS 219/219, затем затянуты ограничения безопасности.\n- Новые 12 тестов: генерация без ложных native bindings; ADAPT_EXISTING без открытого PLN; произвольные native story indices (0 и 1); явное сопоставление названий; exact path, missing story, invalid first floor level/name, room assignment, normative status, ambiguous story ID; regression старого `compile_intent`.\n- `nativeWriteCalls=0`, Archicad/PLN **не запускались/не открывались** из этого CI. No claim of BUILD/LIVE performance, material coverage, roof, normative engineering readiness.\n\n**Вывод:** S01 source+offline acceptance для *семантического контракта* выполнена, интерфейс S03 сохранён. **Следующий existing S-ID:** `APA-P70.A02.S02` — вернуть требования с версией/применимостью/доказательством и pass/fail/not-verified без самопровозглашённого approval. Затем `P70.A02.S03` — проектные атрибуты и CSE/PLP. Нет оснований создавать новый P/A/S или переписывать BIM pipeline.\n",
+  "next_substep": "APA-P70.A02.S02",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

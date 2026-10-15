@@ -1,0 +1,176 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261010-234200Z-slack-legacy-three-audit",
+  "plan_id": "APA-P00",
+  "action_id": "APA-P00.A02",
+  "substep_id": "APA-P00.A02.S03",
+  "executor": "chatgpt-gpt6-manual-20261011-audit",
+  "executor_run_id": "APA-RUN-20261010-2342Z-slack-legacy-three-audit-01",
+  "phase": "SOURCE",
+  "started_at": "2026-10-10T23:42:00Z",
+  "finished_at": "2026-10-10T23:45:38Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "Archicad 29 — no runtime access",
+    "sdk": null,
+    "tapir": null,
+    "source_branch": "research/apa-verified-results-hub-20261010"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-11/apa-sync-live-sqlite-history-recovery-20261011.md",
+      "revision": "live-recovery-20261011",
+      "source_sha": "d2a1b8f034b806eb0d5a04eed9d0a6ebf766b2b9"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/.github/workflows/apa-research-publisher.yml",
+      "revision": "2026-10-11 readback",
+      "source_sha": "c22b38cd018e5c028e08c87fe5f59cb042627e77"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/deployments/APA_PUBLISHER_DEPLOYMENT_20261010.json",
+      "revision": "2026-10-10 synthetic deployment record",
+      "source_sha": "cb22f3e84e750661eeda893c5b8e549d624c1ce9"
+    }
+  ],
+  "inputs": [
+    "ART-REGISTER",
+    "ART-BRANCHES",
+    "owner Slack #apa-research three malformed messages, sanitized categories"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-SLACK-SMOKE-REPLACED",
+      "statement": "The incomplete original Slack smoke is a malformed test semantically replaced by a verified persisted seq=1 event; no lost research result established.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-SLACK-CHANNEL-20261011",
+        "EV-RECOVERY-LIVE-20261011"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-SLACK-PUBLISHER-DUP",
+      "statement": "The unfenced publisher announcement repeats verified GitHub deployment workflow and synthetic success receipt, and is not a distinct machine event.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-SLACK-CHANNEL-20261011",
+        "EV-PUBLISHER-WORKFLOW",
+        "EV-PUBLISHER-DEPLOY",
+        "EV-PUBLISHER-RECEIPT",
+        "EV-PUBLISHER-CI"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-SLACK-AUDIT-PARTIAL",
+      "statement": "The malformed historical audit reports existing open draft PRs and 18 offline tests, but its former Socket Mode NOT_DEPLOYED claim is now superseded; unsupported phase AUDIT blocks protocol import.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-SLACK-CHANNEL-20261011",
+        "EV-GH-PR16",
+        "EV-GH-PR20",
+        "EV-GH-PR21",
+        "EV-COORDINATOR-CI",
+        "EV-RECOVERY-LIVE-20261011"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-SIX-FILES-NOT-GLOBAL",
+      "statement": "The statement that six unnamed research summary files are absent globally cannot be proven by three historical tree scans; whole-branch inventory and semantic audit remain open.",
+      "status": "NOT_VERIFIED",
+      "evidence_ids": [
+        "EV-SLACK-CHANNEL-20261011"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-SLACK-CHANNEL-20261011",
+      "uri": "https://app.slack.com/client/T0C847UM0A2/C0C886E1PGR",
+      "kind": "OTHER",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "owner Slack read-only connector 2026-10-11"
+    },
+    {
+      "evidence_id": "EV-RECOVERY-LIVE-20261011",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-11/apa-sync-live-sqlite-history-recovery-20261011.md",
+      "kind": "USER_SUPPLIED",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "d2a1b8f034b806eb0d5a04eed9d0a6ebf766b2b9"
+    },
+    {
+      "evidence_id": "EV-PUBLISHER-WORKFLOW",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/.github/workflows/apa-research-publisher.yml",
+      "kind": "SOURCE_CODE",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "c22b38cd018e5c028e08c87fe5f59cb042627e77"
+    },
+    {
+      "evidence_id": "EV-PUBLISHER-DEPLOY",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/deployments/APA_PUBLISHER_DEPLOYMENT_20261010.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "cb22f3e84e750661eeda893c5b8e549d624c1ce9"
+    },
+    {
+      "evidence_id": "EV-PUBLISHER-RECEIPT",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "d1be59eb8d38e85f154cd70bdc2048fa01ca05f4"
+    },
+    {
+      "evidence_id": "EV-PUBLISHER-CI",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38045964668",
+      "kind": "TEST_RESULT",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "github actions publish job SUCCESS"
+    },
+    {
+      "evidence_id": "EV-COORDINATOR-CI",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/37995245127",
+      "kind": "TEST_RESULT",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "github actions unit job 18 tests PASS"
+    },
+    {
+      "evidence_id": "EV-GH-PR16",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/16",
+      "kind": "GITHUB_PR",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd"
+    },
+    {
+      "evidence_id": "EV-GH-PR20",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/20",
+      "kind": "GITHUB_PR",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "9b75c2fed9d51301a7a620ca94df7a36d5545870"
+    },
+    {
+      "evidence_id": "EV-GH-PR21",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/21",
+      "kind": "GITHUB_PR",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123"
+    }
+  ],
+  "report_markdown": "# APA-P00.A02.S03 — аудит трёх отклонённых Slack-сообщений и дедупликация ссылок\n\n**Этап:** APA-P00 — восстановление и централизация результатов.  \n**Действие:** APA-P00.A02 — консолидация GitHub-доказательств.  \n**Подзадача:** APA-P00.A02.S03 — evidence map + семантическая дедупликация.  \n**Run:** APA-RUN-20261010-234200Z-slack-legacy-three-audit  \n**Claim:** APA-RUN-20261010-2342Z-slack-legacy-three-audit-01; owner chatgpt-gpt6-manual-20261011-audit; registry revision at start 36.  \n**Дата:** 2026-10-11 (время пользователя); GitHub canonical branch `research/apa-verified-results-hub-20261010`.  \n**Фаза доказательств:** SOURCE; **статус самой подзадачи:** PARTIAL (полный разбор 72 веток не завершён).  \n**Режим:** Slack read-only, GitHub REST readback, без запуска Archicad и без SQLite/Slack mutations.\n\n## Зачем проводился разбор\n\nРеальный локальный Slack→SQLite координатор восстановил 20 исторических событий и при повторном запуске распознал 21 дубль без новых вставок; независимое HTTP API чтение после перезапуска показало 21 событие, cursor 21, 16 состояний, smoke seq1 сохранён. [Канонический отчёт](../apa-sync-live-sqlite-history-recovery-20261011.md) и [Draft PR #33](https://github.com/dvikt33-ux/safe-bim-layer/pull/33).\n\nНо три устаревших сообщения Slack не соответствуют строгому контракту `APA_EVENT_V1`. Не изменять парсер для чтения произвольного текста и не выдавать такие сообщения за автоматически аттестованные события.\n\n## Карта трёх сообщений (Slack #apa-research, channel C0C886E1PGR)\n\nИсходные номера `Message TS` ниже получены из **подключённого Slack reader**; это отображаемая через connector версия. Независимая пользовательская диагностика raw Slack API установила только суммарные формы (2 без fenced блока, 1 с одним открывающим fence), но не подтвердила индивидуальные сырые байты по каждому TS. Текст сообщений и автора в этот отчёт не копировали.\n\n| Slack message TS | Semantic ID / фактическая проблема | Источник доказательств и S-ID | Решение по восстановлению / дедупликации |\n| --- | --- | --- | --- |\n| `1791666555.695829` | `apa-live-smoke-20261011-001`, `APA-SYNC-SMOKE-01`; один открывающий fence, нет закрывающего | [живой отчёт SQLite](../apa-sync-live-sqlite-history-recovery-20261011.md); задача S03 только для фиксации происхождения | **TEST_MALFORMED / SEMANTICALLY_REPLACED_BY** `apa-live-smoke-20261011-002` (seq1). Это *не* протокольное поле supersedes и не потерянное исследование. Оригинал не переписывать, не импортировать. |\n| `1791629363.289809` | Свободный текст `APA_EVENT_V1 \\| APA-P00.A03.S03`, без JSON/fences и event_id; дайджест publisher | [workflow](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/.github/workflows/apa-research-publisher.yml), [deployment receipt](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/deployments/APA_PUBLISHER_DEPLOYMENT_20261010.json), [V2 publication receipt](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json), [Actions 38045964668](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38045964668), [38046020069](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38046020069) | **SUMMARY_DUPLICATE / SUPERSEDED_BY_CANONICAL_ARTIFACTS**, не новый research run. GitHub workflow и deployment receipt прочитаны, V2 receipt `DONE_PUBLISHED` с `readback_verified=true` подтверждён, оба Actions publish jobs SUCCESS. Только SYNTHETIC publisher E2E, не автономный исследователь 24/7. |\n| `1791624243.296309` | `apa-audit-20261010-reconcile-branch-research-v1`, `APA-AUDIT-RECONCILE-01`; JSON в одинарных backticks без code fence, `phase=AUDIT` вне allowlist (`SOURCE/OFFLINE/SYNTHETIC/BUILD/LIVE`) | [PR #16](https://github.com/dvikt33-ux/safe-bim-layer/pull/16), [PR #20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [PR #21](https://github.com/dvikt33-ux/safe-bim-layer/pull/21), [Actions 37995245127](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/37995245127), [branch inventory](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/inventories/FULL_BRANCH_INVENTORY.md) | **HISTORICAL_REPORTED / NOT_IMPORTABLE_AS_PROTOCOL**. В GitHub проверены открытые draft PR #16/#20/#21 (не merged); Actions coordinator-unit 18/18 OFFLINE tests SUCCESS. Утверждение того сообщения `Socket Mode NOT_DEPLOYED` **SUPERSEDED** реальным LIVE запуском 2026-10-11. Прочие архивные утверждения не повышать до VERIFIED без проверки указанной исходной ревизии. |\n\n## Source verification и границы доказательств\n\n1. Publisher: workflow привязан к canonical GitHub push/inbox и выполняет offline tests, source/manifest/index/receipt GitHub readback. Проверены реальный `APA_PUBLISHER_DEPLOYMENT_V1`, synthetic `APA_PUBLISH_RECEIPT_V1`, Github Actions run IDs 38045964668 и 38046020069, оба success. Никакой 24/7 research runner или Archicad LIVE из этого не следует.\n2. Аудиторский Slack JSON: GitHub API PR метаданные сейчас: #16 head `bcac2e8...`, #20 head `9b75c2f...`, #21 head `1a6c5e6...`, все open/draft/unmerged; тождество текущим HEAD не доказывает, что каждое утверждение старой сводки корректно. CI run 37995245127 имеет 18/18 PASS именно OFFLINE. Исторический `NOT_DEPLOYED` теперь неверен для координатора, но не для Archicad.\n3. Утверждение `ни одного из 6 названий summary нет в трёх деревьях` — только **REPORTED**. В сообщении не перечислены все шесть имён, полные tree listings/проверка всех 72 веток в этом проходе не проводились. Нельзя заключать, что отчёты отсутствуют во всём GitHub или что Deep Research отчёт восстановлен.\n4. Сам факт `accepted=20` в SQLite удостоверяет успешный импорт форматированных claims, а не техническую истинность SOURCE/OFFLINE/BIM findings. Три rejected события не должны автоматически становиться `PASS` при ослаблении схемы.\n\n## Evidence map / superseded_by (строго семантически)\n\n| Исходная сущность | canonical / superseded_by | Verified scope |\n| --- | --- | --- |\n| malformed smoke 001 | `apa-live-smoke-20261011-002` (seq=1) | User-local post-restart API receipt PASS; **semantic replacement only** |\n| publisher narrative digest | immutable [deployment record](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/deployments/APA_PUBLISHER_DEPLOYMENT_20261010.json) + [publisher receipt](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json) | GitHub files readback, Actions jobs success; **duplicate summary** |\n| historical audit about PR #16/#20/#21 | PR head metadata + canonical [branch inventory](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/inventories/FULL_BRANCH_INVENTORY.md), partial | No entire-summary supersession. Only now-obsolete `NOT_DEPLOYED` coordinator claim superseded by [live report](../apa-sync-live-sqlite-history-recovery-20261011.md). 72-branch content audit **OPEN**. |\n\n## Acceptance и дальнейшие действия\n\n**Сделано в этом проходе:** все 3 rejected сообщения классифицированы, найдены source GitHub links, выделены semantic duplicate/replacement vs historical unverified claims, старые события не повреждены. Результат является измеримым вкладом в `APA-P00.A02.S03`.\n\n**Не сделано:** полная дедупликация 72 веток/22 исторических PR, локальные SHA, независимый аудит шести якобы отсутствующих файлов, автоматический импорт трёх невалидных сообщений. Поэтому **S03 не DONE_PUBLISHED**, даже если квитанция этого отчёта `DONE_PUBLISHED`.\n\n**Следующая eligible работа в рамках существующих S-ID:** `APA-P00.A02.S03` — доказательная карта уникальных артефактов и branch ancestry для нужных исторических tree snapshots; параллельный независимый контроль receipt/commit/readback в `APA-P00.A02.S04`. Новая задача не предлагается — аналогичная работа уже зарегистрирована. Аудит трёх сообщений сам по себе не расширяет исполняемый `PROJECT_PLAN.json`.\n\n## Безопасность\n\nNo main/master changes, PLN/APX writes, GitHub merge, Slack message edit or SQLite mutation. Original messages preserved, private Slack user/author fields and tokens intentionally omitted.\n",
+  "next_substep": "APA-P00.A02.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

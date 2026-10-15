@@ -1,0 +1,9 @@
+{
+  "acceptance.json": "b8c7320625263df61c86f620fecd28d957377314e7ce05c8bc99ffe3f1449a63",
+  "details-context.json": "93138b90ba4fbec23f79a264e9346fb4affb796e2aeb79a6436517745dc625b4",
+  "gap-register.json": "55ce8d8827406bcee25ae0e7566d6732b060630b25d24e443dae4986004d6526",
+  "ifc-exchange.json": "cab323b9cf8a24a4c1f22e903c04da5dee0805f26ec7e74186af3ef7d550ff87",
+  "LOCAL_RAW_SHA256.json": "f54a51f8d94c7f5b15c94ce5cb60991918e2e3b2ed09d5638b0bc98a47685f46",
+  "mep-network.json": "a9dc5647a0d37bd7da573758942cb0d1878b856cafa6672d711fe2bfb6fa2326",
+  "native-operations.json": "07a3ea2460cfccdb24ddf82d74e9242f454cbc7ce66a58a4a7f6883d85f5767f"
+}

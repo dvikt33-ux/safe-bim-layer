@@ -1,0 +1,13 @@
+{
+  "schema": "APA_COMPACT_RETRIEVAL_V1",
+  "status": "OK",
+  "authority": "VERIFIED_GITHUB_PLAN_SNAPSHOT",
+  "plan_revision": 139,
+  "plan_sha256": "cbcfc4524aef5e46573a13a3727ca0eba288fa9c3baacf5a78e48fff7a2a8521",
+  "retrieval": "EXACT_TASK",
+  "task_claim": "NEVER_AUTOMATIC",
+  "executor": "Main archicad_project_accelerator.retrieve_project_knowledge",
+  "implementation": "UNCHANGED",
+  "currentBeforeCAS": 139,
+  "claimRevision": 140
+}

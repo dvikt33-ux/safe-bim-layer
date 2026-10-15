@@ -1,0 +1,10 @@
+{
+  "core-knowledge-query.json": "5a8353f7941a308c742b709c2e0ca3885af875cd3261b62b8d8f739aa5f92093",
+  "gap-register.json": "593e5ddc23428ca850947eaac29c978c1cef80e30d794439bad90b0d7705cbac",
+  "inventory-audit.json": "faf782fac6d694f0810d135164ff5dc50881dcb0337370370dee34ae60a20dba",
+  "journal-reconciliation.json": "8efdc20ceb7c62dc511a3a2d602ff5548a2fbb30cb72647aedf5a451fbd6256f",
+  "native-dimensions.json": "dfe0d51844fa18678255bbd9c7a3aa1cb9c9df1338509d9d7f8562bb8d2ac5e9",
+  "preservation-save-open.json": "bef59dd5b71cd26d1a31a26c3747cd27595b10f7ea0dc8749b0233b2f9f5b1d5",
+  "source-recipe.json": "c63423a63290efe81c28631f519eecab93b8e85fd1a1699137b8dad91edead07",
+  "windows-ci.json": "816f38046d59d3f8ca514d2017777a78e340821eb2df0142ea7f07fad828efac"
+}

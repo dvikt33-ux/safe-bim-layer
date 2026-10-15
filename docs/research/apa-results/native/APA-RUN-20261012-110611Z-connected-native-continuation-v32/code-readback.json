@@ -1,0 +1,72 @@
+{
+  "status": "ALL11_GITHUB_COMMITTED_BYTES_EXACT",
+  "head": "3a743a4f96a98acdcbb837946603f0681d9a1f54",
+  "files": [
+    {
+      "path": ".github/workflows/archicad-contracts.yml",
+      "expectedBlob": "f0fa8666c2b95aa01338d809a17a0d1c2d98dbde",
+      "githubBlob": "f0fa8666c2b95aa01338d809a17a0d1c2d98dbde",
+      "match": true
+    },
+    {
+      "path": "docs/research/apa-functional-expansion-v32.md",
+      "expectedBlob": "e1ca62a68b3740ba997e806f968b7a0e92433983",
+      "githubBlob": "e1ca62a68b3740ba997e806f968b7a0e92433983",
+      "match": true
+    },
+    {
+      "path": "scripts/archicad_bim_graph.py",
+      "expectedBlob": "87fc7476c9079a189c8b8e31ae3c6beaf6712dd3",
+      "githubBlob": "87fc7476c9079a189c8b8e31ae3c6beaf6712dd3",
+      "match": true
+    },
+    {
+      "path": "scripts/archicad_connected_components.py",
+      "expectedBlob": "2441f691b35fe6ec14c1e36e92de744edc44528d",
+      "githubBlob": "2441f691b35fe6ec14c1e36e92de744edc44528d",
+      "match": true
+    },
+    {
+      "path": "scripts/archicad_connected_ifc.py",
+      "expectedBlob": "1004d3f80c04fb5ef1f35445bd5d01c4643fd301",
+      "githubBlob": "1004d3f80c04fb5ef1f35445bd5d01c4643fd301",
+      "match": true
+    },
+    {
+      "path": "scripts/archicad_connected_solver.py",
+      "expectedBlob": "b9360ee6a57bd5bc048b1f2fa6c3c6fdc9787395",
+      "githubBlob": "b9360ee6a57bd5bc048b1f2fa6c3c6fdc9787395",
+      "match": true
+    },
+    {
+      "path": "scripts/archicad_details_context.py",
+      "expectedBlob": "b8c0ae334b2b5b3e5cd3c007dddd7e0b519e9a0f",
+      "githubBlob": "b8c0ae334b2b5b3e5cd3c007dddd7e0b519e9a0f",
+      "match": true
+    },
+    {
+      "path": "scripts/archicad_functional_expansion.py",
+      "expectedBlob": "a15da6b7668897a1efbc7cc9fccf9c00ea104a1c",
+      "githubBlob": "a15da6b7668897a1efbc7cc9fccf9c00ea104a1c",
+      "match": true
+    },
+    {
+      "path": "scripts/archicad_native_mep_network.py",
+      "expectedBlob": "ba969c2041db729a59da1906903a9ad6b01eadfe",
+      "githubBlob": "ba969c2041db729a59da1906903a9ad6b01eadfe",
+      "match": true
+    },
+    {
+      "path": "scripts/archicad_scene_run.py",
+      "expectedBlob": "3ea8c555a3bf68973f01efa92edc74739ed3d6af",
+      "githubBlob": "3ea8c555a3bf68973f01efa92edc74739ed3d6af",
+      "match": true
+    },
+    {
+      "path": "tests/test_archicad_functional_expansion.py",
+      "expectedBlob": "c30ade2caa54bd01fa8135e96b2a9f05635a63b2",
+      "githubBlob": "c30ade2caa54bd01fa8135e96b2a9f05635a63b2",
+      "match": true
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "run_id": "APA-RUN-20261010-102800Z-research-os-audit",
+  "previous_receipt": "receipts/APA-RUN-20261010-102800Z-research-os-audit-readback.json",
+  "report_path": "runs/2026-10-10/apa-research-os-audit-user-supplied-20261010.md",
+  "report_commit_sha": "9b076792124d99d67dcc0f01554b4834fc3ed8cb",
+  "report_blob_sha": "94cf8986c22839ce51e3983e7e4aa757a66f7c4a",
+  "readback_verified": true,
+  "indexed": true,
+  "index_mode": "MANUAL_INDEX_UPDATE_WITH_READBACK",
+  "status": "DONE_PUBLISHED",
+  "meaning": "User-supplied normalized report published and indexed, not proof that publisher or 24/7 research runner is deployed",
+  "index_files": [
+    {
+      "file": "ARTIFACT_REGISTER.md",
+      "commit_sha": "83cb7b7301665e1c472ba559c63f4afb2a914031",
+      "verified": true,
+      "current_blob_sha": "24e81e3a08167acf7bc4208b6f175b5e7c5a2ba3"
+    },
+    {
+      "file": "CURRENT_STATUS.md",
+      "commit_sha": "4ad09925e52b122a434c1813f64dc796c21577c2",
+      "verified": true,
+      "current_blob_sha": "43064aa47ecd939824bc9137c5ee46aa8dbf17f5"
+    },
+    {
+      "file": "RESEARCH_QUEUE.md",
+      "commit_sha": "ab2ce40ed18a2322ae857278f3b2ef6746c42bb3",
+      "verified": true,
+      "current_blob_sha": "e3cb92d6ccbb5f84995cd6f4497aa4c128fd98c3"
+    },
+    {
+      "file": "README.md",
+      "commit_sha": "c9dd56c5a99a6bd57d778e0a3cd4d08d75488b0c",
+      "verified": true,
+      "current_blob_sha": "908ec195d03e9ce834ec5236e3395dc2bc0b8e0b"
+    }
+  ],
+  "checked_at": "2026-10-10T10:34:06.922Z",
+  "next_substep": "APA-P00.A01.S03",
+  "runtime_publisher_deployed": false,
+  "runner_24h_verified": false
+}

@@ -1,0 +1,115 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A03",
+  "substep_id": "APA-P70.A03.S02",
+  "executor": "chatgpt-gpt6-manual",
+  "executor_run_id": "APA-RUN-20261011-p70-a03-s02-authored-native-graph",
+  "phase": "OFFLINE",
+  "started_at": "2026-10-11T16:49:00Z",
+  "finished_at": "2026-10-11T16:55:58Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29 source target; no new live runtime",
+    "sdk": null,
+    "tapir": "1.5.10 pinned source; not called",
+    "source_branch": "feature/apa-authored-native-bim-plan-20261011"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-native-bim-plan-20261011/scripts/archicad_authored_native_plan.py",
+      "revision": "92df00e0a3728f71e45514376767af76ba1dffb5",
+      "source_sha": "92df00e0a3728f71e45514376767af76ba1dffb5"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-native-bim-plan-20261011/scripts/archicad_project_accelerator.py",
+      "revision": "74b18e021207de1beaf0a8f63e3718d84540b011",
+      "source_sha": "74b18e021207de1beaf0a8f63e3718d84540b011"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-native-bim-plan-20261011/tests/test_archicad_authored_native_plan.py",
+      "revision": "c383ca5d58f6ff8defe259f073b3cd74ae2c24e0",
+      "source_sha": "c383ca5d58f6ff8defe259f073b3cd74ae2c24e0"
+    }
+  ],
+  "inputs": [
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-P70-A02-S03-PROJECT-LIBRARY-20261011",
+    "ART-APA-HIGHLEVEL-PR34"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-P70-S02-EXISTING-NATIVE-DAG-OFFLINE",
+      "statement": "Authored bearing line/slab geometry and real source-story material bindings compile to the existing native Tapir BIM graph without synthetic non-authored walls.",
+      "status": "OFFLINE_PASS",
+      "evidence_ids": [
+        "EV-P70-S02-NATIVE-ADAPTER",
+        "EV-P70-S02-ENTRY",
+        "EV-P70-S02-TESTS",
+        "EV-P70-S02-CI"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-S02-NO-WRITES",
+      "statement": "The new adapter has no native write commands, journal reservations or auto-execute; source valid does not grant approval.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-P70-S02-NATIVE-ADAPTER",
+        "EV-P70-S02-TESTS"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-S02-LIVE-BLOCKERS",
+      "statement": "Generic durable Basic slab Create->Modify and live test-PLN approval remain open, full S02/native structure NOT_VERIFIED.",
+      "status": "NOT_VERIFIED",
+      "evidence_ids": [
+        "EV-P70-S02-NATIVE-ADAPTER",
+        "EV-P70-S02-CI"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-P70-S02-NATIVE-ADAPTER",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-native-bim-plan-20261011/scripts/archicad_authored_native_plan.py",
+      "kind": "SOURCE_CODE",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "92df00e0a3728f71e45514376767af76ba1dffb5"
+    },
+    {
+      "evidence_id": "EV-P70-S02-ENTRY",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-native-bim-plan-20261011/scripts/archicad_project_accelerator.py",
+      "kind": "SOURCE_CODE",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "74b18e021207de1beaf0a8f63e3718d84540b011"
+    },
+    {
+      "evidence_id": "EV-P70-S02-TESTS",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-authored-native-bim-plan-20261011/tests/test_archicad_authored_native_plan.py",
+      "kind": "SOURCE_CODE",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "c383ca5d58f6ff8defe259f073b3cd74ae2c24e0"
+    },
+    {
+      "evidence_id": "EV-P70-S02-CI",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38157380799",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "cec308f50d14cafc6ea3b895ec91cd16346d90db"
+    }
+  ],
+  "report_markdown": "# APA-P70.A03.S02 — source/offline milestone: authored geometry → SAME native BIM DAG\n\n**Partial delivery, not full S02 acceptance.** [Draft PR #44](https://github.com/dvikt33-ux/safe-bim-layer/pull/44), stacked on spatial [PR #43](https://github.com/dvikt33-ux/safe-bim-layer/pull/43). [GitHub Actions #38157380799](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38157380799): **258/258 offline tests PASS**. Project Controller claimed task S02 in source-only mode because `requires_approval=true`; **no live native Create/Modify is authorized or attempted**.\n\n## What was built\n\nExisting `archicad_project_accelerator.py` now exposes `compile_authored_native_candidate`, a small adapter to `archicad_authored_native_plan.compile_candidate`, which uses existing `archicad_building_shell.wall/step` helpers and the **original** `archicad_bim_graph.compile_graph`. No second graph, no SceneWriter recreation. All source is in PR #44.\n\nFrom authored room boundaries/bearing lines (S01), existing project-scoped slab CSE (S03) and **explicit user-authored story heights**, the adapter:\n1. Obtains **only** `GetProjectInfo`, `GetStories`, `GetAttributesByType` from caller-supplied read-only adapter; exact PLN identity before queries, unique real story indices/floor IDs and levels, pinned story-label mapping and existing `resolve_basic_slab_material` for exactly one name→GUID.\n2. Rejects unknown heights or mismatched story map/material GUID since Project Pack binding. No guess `floorIndex=0`; no silent use of the active floor or a `.bpn` backup.\n3. Emits one `CreateSlabs` source operation per **explicit source footprint** and one continuous `CreateWalls` operation per **authored bearing line** (NOT per arbitrary room boundary; no invented openings/partition walls), with endpoints/sizes copied from source constraints.\n4. Calls the existing `GRAPH.compile_graph` on a single `{operations:[...]}` value with pinned Tapir schema. Returns native sourcePlanHash, topological order, commands and schema SHA. `liveWriteAuthorized=false`, `nativeWriteCalls=0`, `sceneReservationCreated=false`, `plnChanged=false` regardless of schema success.\n\n**Synthetic demonstration** using two authored walls and two slabs resolves first floor with arbitrary native index **1** and second with index **3** (from injected `GetStories`), and compiles **4** native command candidates. This is not a declaration of a four-element building or a universal dwelling generator.\n\n## Acceptance and blockers\n\n- **Source and offline tests: PASS** [CI #38157380799](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38157380799): 258/258 full suite, including 11 new gate tests for plan geometry, real story indices, authored height 3.0m, precise single BM GUID, exact opened PLN identity, stale story/material, CSE nonapproval, no write token, no duplicate writer, no blind roomBays.\n- **Live use: NOT_VERIFIED.** No Archicad localhost calls were made in this milestone, only injected test transport. No PLN/APX/main changes; existing successful 25-step scratch model remains untouched.\n- **Missing wall construction-system approval:** S01 carries unbound wall CSE IDs, unverified load-path forces and real structural junction details. The existing 0.2m slab material is only a past user native test; current `CreateSlabs` schema source operation alone **does not guarantee Basic slab material is applied**, as the historical Composite-vs-Basic repair incident showed. Before any native write, S02 requires a durable Create→ModifySlabs staged plan with full typed BM/absolute Z readback, incident-safe journaling (before each call) and exact test PLN approval.\n- S02 user approval applies to the **specific** scratch test file and operations only. Prior 45-GUID saved copy is not to be modified, and any old scene reservation must never be replayed.\n- Engineering/calculation, roof/stairs/MEP/details/full floor layout and structural realism are still open. **Mark controller S02 PARTIAL**, not DONE. Consequently S03 must remain blocked by dependency until real S02 acceptance.\n\n**Next highest-value work:** generalize a safe one-shot `CreateSlabs` then `ModifySlabs` exact Basic material/story sequence *inside the existing SceneWriter*, and a minimal read-only preflight for the currently open test copy. GitHub CI should run in parallel while source code continues; manual user test is optional/short and must not block offline development.\n",
+  "next_substep": "APA-P70.A03.S02",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

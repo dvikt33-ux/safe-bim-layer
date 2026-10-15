@@ -1,0 +1,50 @@
+{
+  "status": "READY_FOR_EXPLICIT_TEST_RUN",
+  "evidenceKind": "LIVE",
+  "automaticRetry": false,
+  "plnSaved": false,
+  "intentHash": "d5ec817592f092a7ef300ef9763cab045a4fff39c4be66458855ed2e679f23b1",
+  "metrics": {
+    "dimensionsMeters": {
+      "width": 10.0,
+      "depth": 8.0,
+      "height": 6.0
+    },
+    "elementCount": 10,
+    "nativeCommands": {
+      "CreateSlabs": 2,
+      "CreateWalls": 8
+    },
+    "authoredRooms": 2,
+    "structuralVerified": false,
+    "normativeVerified": false
+  },
+  "archicadProduct": {
+    "version": 29,
+    "buildNumber": 5101,
+    "languageCode": "RUS"
+  },
+  "confirmPlanHash": "db9b0329f874784b86b486bfbcb8f4e3497c9ef67bdfc94ff466c5ab96ea4041",
+  "binding": {
+    "path": "C:\\LocalAI\\APA_Isolated_Writer_Test_01.pln",
+    "name": "APA_Isolated_Writer_Test_01",
+    "port": 19724,
+    "tapirVersion": "1.5.10",
+    "storyIndex": 0
+  },
+  "nativeElementsInspected": 20,
+  "addedGuids": [],
+  "removedGuids": [],
+  "inventoryUnchanged": true,
+  "elapsedSeconds": 0.76847,
+  "commandCounts": {
+    "GetProjectInfo": 11,
+    "GetStories": 8,
+    "GetAddOnVersion": 5,
+    "GetAttributesByType": 3,
+    "API.GetProductInfo": 1,
+    "GetAllElements": 3,
+    "Get3DBoundingBoxes": 1
+  },
+  "modelWriteAttempts": 0
+}

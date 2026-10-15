@@ -1,0 +1,19 @@
+{
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "run_id": "APA-RUN-20261010-102800Z-research-os-audit",
+  "source_type": "USER_SUPPLIED_REPORT_NORMALIZED",
+  "legacy_flat_report": true,
+  "repository": "dvikt33-ux/safe-bim-layer",
+  "branch": "research/apa-verified-results-hub-20261010",
+  "report_path": "docs/research/apa-results/runs/2026-10-10/apa-research-os-audit-user-supplied-20261010.md",
+  "report_commit_sha": "9b076792124d99d67dcc0f01554b4834fc3ed8cb",
+  "report_blob_sha": "94cf8986c22839ce51e3983e7e4aa757a66f7c4a",
+  "report_sha256": null,
+  "report_utf8_character_count": 14995,
+  "readback_verified": true,
+  "checked_at": "2026-10-10T10:31:55.666Z",
+  "indexed": false,
+  "index_commit_sha": null,
+  "status": "READBACK_VERIFIED",
+  "notes": "SHA-256 not computed; GitHub blob SHA is verified. Legacy flat run, not RUN_EVENT_V2. Index update is a separate operation."
+}

@@ -1,0 +1,1288 @@
+{
+  "schema": "APA_QUANTIFIED_IFC_EXCHANGE_V1",
+  "ifcSchema": "IFC2X3",
+  "fileSha256": "83972be3f93ee86ea3377b6b39f5cd667848be055b6ca0b7cee014f8abc06b36",
+  "lengthUnitScaleToMeters": 0.001,
+  "elements": [
+    {
+      "ifcId": "id-sha256:bbfae89d8067d1cbc6b3",
+      "ifcType": "IfcBuildingElementProxy",
+      "name": "МОРФ-002",
+      "predefinedType": null,
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Прокси Строительного Элемента",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [
+        {
+          "name": "Железобетон - Конструкционный",
+          "category": null
+        }
+      ],
+      "nativeGuid": "id-sha256:01b05eebb2aa6795d630",
+      "nativeQuantities": {
+        "status": "NATIVE_QUANTITIES_NOT_VERIFIED",
+        "reason": "CURVED_NATIVE_BODY_NOT_QUANTIFIED"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 0.06000000000000115,
+        "closedEdgeIncidence": true,
+        "triangleCount": 12,
+        "dimensionsMeters": [
+          0.10000000000000142,
+          0.10000000000000142,
+          0.1
+        ],
+        "volumeCubicMeters": 0.00099999999997639
+      }
+    },
+    {
+      "ifcId": "id-sha256:c057b3a86db731045222",
+      "ifcType": "IfcBuildingElementProxy",
+      "name": "МОРФ-003",
+      "predefinedType": null,
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Прокси Строительного Элемента",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [
+        {
+          "name": "Железобетон - Конструкционный",
+          "category": null
+        }
+      ],
+      "nativeGuid": "id-sha256:df53ca227a0b386ef451",
+      "nativeQuantities": {
+        "status": "NATIVE_QUANTITIES_NOT_VERIFIED",
+        "reason": "CURVED_NATIVE_BODY_NOT_QUANTIFIED"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 16.0,
+        "closedEdgeIncidence": true,
+        "triangleCount": 12,
+        "dimensionsMeters": [
+          1.0,
+          2.0,
+          2.0
+        ],
+        "volumeCubicMeters": 3.999999999999993
+      }
+    },
+    {
+      "ifcId": "id-sha256:fa68c215793a6bac9544",
+      "ifcType": "IfcBuildingElementProxy",
+      "name": "МОРФ-004",
+      "predefinedType": null,
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Прокси Строительного Элемента",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [
+        {
+          "name": "Железобетон - Конструкционный",
+          "category": null
+        }
+      ],
+      "nativeGuid": "id-sha256:a0739fb99f636d01a87e",
+      "nativeQuantities": {
+        "status": "NATIVE_QUANTITIES_NOT_VERIFIED",
+        "reason": "CURVED_NATIVE_BODY_NOT_QUANTIFIED"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 16.0,
+        "closedEdgeIncidence": true,
+        "triangleCount": 12,
+        "dimensionsMeters": [
+          1.0,
+          2.0,
+          2.0
+        ],
+        "volumeCubicMeters": 3.9999999999999716
+      }
+    },
+    {
+      "ifcId": "id-sha256:bb53bd130aa06b8ee173",
+      "ifcType": "IfcBuildingElementProxy",
+      "name": "МОРФ-001",
+      "predefinedType": null,
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Прокси Строительного Элемента",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [
+        {
+          "name": "Железобетон - Конструкционный",
+          "category": null
+        }
+      ],
+      "nativeGuid": "id-sha256:37e03a097129cc9aa5b9",
+      "nativeQuantities": {
+        "status": "NATIVE_QUANTITIES_NOT_VERIFIED",
+        "reason": "CURVED_NATIVE_BODY_NOT_QUANTIFIED"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 0.7074999999999954,
+        "closedEdgeIncidence": true,
+        "triangleCount": 12,
+        "dimensionsMeters": [
+          2.0,
+          0.02499999999999858,
+          0.15000000000000036
+        ],
+        "volumeCubicMeters": 0.007500000001527951
+      }
+    },
+    {
+      "ifcId": "id-sha256:4b89f1df2316b3b17a75",
+      "ifcType": "IfcColumn",
+      "name": "КОЛ - 001",
+      "predefinedType": "COLUMN",
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Колонна",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [
+        {
+          "name": "Железобетон - Конструкционный",
+          "category": null
+        }
+      ],
+      "nativeGuid": "id-sha256:efd26943ca1678f8c9fd",
+      "nativeQuantities": {
+        "status": "NATIVE_BODY_NOT_AVAILABLE"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 3.779999999999962,
+        "closedEdgeIncidence": true,
+        "triangleCount": 12,
+        "dimensionsMeters": [
+          0.29999999999999716,
+          0.29999999999999716,
+          3.0
+        ],
+        "volumeCubicMeters": 0.2699999999995324
+      }
+    },
+    {
+      "ifcId": "id-sha256:2442c3dc4141a3dd8c8c",
+      "ifcType": "IfcColumn",
+      "name": "КОЛ - 002",
+      "predefinedType": "COLUMN",
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Колонна",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [
+        {
+          "name": "Железобетон - Конструкционный",
+          "category": null
+        }
+      ],
+      "nativeGuid": "id-sha256:6ad65ff5e9324d471f74",
+      "nativeQuantities": {
+        "status": "NATIVE_BODY_NOT_AVAILABLE"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 3.779999999999962,
+        "closedEdgeIncidence": true,
+        "triangleCount": 12,
+        "dimensionsMeters": [
+          0.29999999999999716,
+          0.29999999999999716,
+          3.0
+        ],
+        "volumeCubicMeters": 0.2699999999995306
+      }
+    },
+    {
+      "ifcId": "id-sha256:9f2db9b83582f526aae0",
+      "ifcType": "IfcDoor",
+      "name": "ДВ - 002",
+      "predefinedType": "DOOR",
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Дверь",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [],
+      "nativeGuid": "id-sha256:96904ae0a9a643d0bdd1",
+      "nativeQuantities": {
+        "status": "NATIVE_QUANTITIES_NOT_VERIFIED",
+        "reason": "NATIVE_BODY_NOT_CLOSED"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 9.661744973977882,
+        "closedEdgeIncidence": false,
+        "triangleCount": 252,
+        "dimensionsMeters": [
+          1.073999999999998,
+          0.33800000000000097,
+          2.137
+        ],
+        "volumeStatus": "IFC_MESH_CLOSURE_NOT_PROVEN"
+      }
+    },
+    {
+      "ifcId": "id-sha256:dde725e1e382c1d9f08d",
+      "ifcType": "IfcRoof",
+      "name": "КР - 001",
+      "predefinedType": null,
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Крыша",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [
+        {
+          "name": "Железобетон - Конструкционный",
+          "category": null
+        }
+      ],
+      "nativeGuid": "id-sha256:51fe26b6654ee6ca9854",
+      "nativeQuantities": {
+        "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+        "surfaceAreaSquareMeters": 169.05337145501312,
+        "volumeCubicMeters": 16.181703109680967,
+        "bodyCount": 1,
+        "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 169.05337144434196,
+        "closedEdgeIncidence": true,
+        "triangleCount": 12,
+        "dimensionsMeters": [
+          10.0,
+          8.02988762649472,
+          1.4068359600535691
+        ],
+        "volumeCubicMeters": 16.181703082777254
+      },
+      "nativeComparison": {
+        "areaDeltaSquareMeters": 1.0671158179320628e-08,
+        "volumeDeltaCubicMeters": 2.6903713035153487e-08,
+        "status": "IFC_NATIVE_QUANTITIES_MATCH"
+      }
+    },
+    {
+      "ifcId": "id-sha256:4c77658928a8987c6e1b",
+      "ifcType": "IfcSlab",
+      "name": "ПРК - 001",
+      "predefinedType": "NOTDEFINED",
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Перекрытие",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [
+        {
+          "name": "Железобетон - Конструкционный",
+          "category": null
+        }
+      ],
+      "nativeGuid": "id-sha256:301c85f39127ffe91075",
+      "nativeQuantities": {
+        "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+        "surfaceAreaSquareMeters": 167.2,
+        "volumeCubicMeters": 16.000000000000004,
+        "bodyCount": 1,
+        "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 167.20000000000002,
+        "closedEdgeIncidence": true,
+        "triangleCount": 12,
+        "dimensionsMeters": [
+          10.0,
+          8.0,
+          0.1999999999999999
+        ],
+        "volumeCubicMeters": 15.999999999999993
+      },
+      "nativeComparison": {
+        "areaDeltaSquareMeters": 2.842170943040401e-14,
+        "volumeDeltaCubicMeters": 1.0658141036401503e-14,
+        "status": "IFC_NATIVE_QUANTITIES_MATCH"
+      }
+    },
+    {
+      "ifcId": "id-sha256:8dadca74cc77b8bfe41f",
+      "ifcType": "IfcSlab",
+      "name": "ПРК - 002",
+      "predefinedType": "NOTDEFINED",
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Перекрытие",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [
+        {
+          "name": "Железобетон - Конструкционный",
+          "category": null
+        }
+      ],
+      "nativeGuid": "id-sha256:f5f2c00fc1a32e21c0d6",
+      "nativeQuantities": {
+        "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+        "surfaceAreaSquareMeters": 167.32,
+        "volumeCubicMeters": 15.963999999999999,
+        "bodyCount": 1,
+        "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 167.32000000000002,
+        "closedEdgeIncidence": true,
+        "triangleCount": 52,
+        "dimensionsMeters": [
+          10.0,
+          8.0,
+          0.20000000000000018
+        ],
+        "volumeCubicMeters": 15.963999999998995
+      },
+      "nativeComparison": {
+        "areaDeltaSquareMeters": 2.842170943040401e-14,
+        "volumeDeltaCubicMeters": 1.0036416142611415e-12,
+        "status": "IFC_NATIVE_QUANTITIES_MATCH"
+      }
+    },
+    {
+      "ifcId": "id-sha256:6f9590b60645b92241fb",
+      "ifcType": "IfcWall",
+      "name": "ПЕР - 001",
+      "predefinedType": null,
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Стена",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [
+        {
+          "name": "Железобетон - Конструкционный",
+          "category": null
+        }
+      ],
+      "nativeGuid": "id-sha256:6a94dc736ea218863f63",
+      "nativeQuantities": {
+        "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+        "surfaceAreaSquareMeters": 55.19999999999989,
+        "volumeCubicMeters": 6.797999999999885,
+        "bodyCount": 1,
+        "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 55.199999999999896,
+        "closedEdgeIncidence": true,
+        "triangleCount": 48,
+        "dimensionsMeters": [
+          0.29999999999999716,
+          8.299999999999997,
+          3.0
+        ],
+        "volumeCubicMeters": 6.797999999999412
+      },
+      "nativeComparison": {
+        "areaDeltaSquareMeters": 7.105427357601002e-15,
+        "volumeDeltaCubicMeters": 4.725109192804666e-13,
+        "status": "IFC_NATIVE_QUANTITIES_MATCH"
+      }
+    },
+    {
+      "ifcId": "id-sha256:e31b5a938e5e33c5dbb9",
+      "ifcType": "IfcWall",
+      "name": "ПЕР - 002",
+      "predefinedType": null,
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Стена",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [
+        {
+          "name": "Железобетон - Конструкционный",
+          "category": null
+        }
+      ],
+      "nativeGuid": "id-sha256:1e3ed023078481e26610",
+      "nativeQuantities": {
+        "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+        "surfaceAreaSquareMeters": 67.79999999999993,
+        "volumeCubicMeters": 8.704499999999834,
+        "bodyCount": 1,
+        "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 67.79999999999993,
+        "closedEdgeIncidence": true,
+        "triangleCount": 24,
+        "dimensionsMeters": [
+          10.0,
+          0.29999999999999716,
+          3.0
+        ],
+        "volumeCubicMeters": 8.704500000000813
+      },
+      "nativeComparison": {
+        "areaDeltaSquareMeters": 0.0,
+        "volumeDeltaCubicMeters": 9.78772618509538e-13,
+        "status": "IFC_NATIVE_QUANTITIES_MATCH"
+      }
+    },
+    {
+      "ifcId": "id-sha256:dcbf9fe22158ead8a03c",
+      "ifcType": "IfcWall",
+      "name": "ПЕР - 003",
+      "predefinedType": null,
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Стена",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [
+        {
+          "name": "Железобетон - Конструкционный",
+          "category": null
+        }
+      ],
+      "nativeGuid": "id-sha256:74e13663688cd71e3a87",
+      "nativeQuantities": {
+        "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+        "surfaceAreaSquareMeters": 64.85999999999991,
+        "volumeCubicMeters": 8.074499999999873,
+        "bodyCount": 1,
+        "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 64.85999999999991,
+        "closedEdgeIncidence": true,
+        "triangleCount": 56,
+        "dimensionsMeters": [
+          10.0,
+          0.29999999999999716,
+          3.0
+        ],
+        "volumeCubicMeters": 8.07449999999946
+      },
+      "nativeComparison": {
+        "areaDeltaSquareMeters": 0.0,
+        "volumeDeltaCubicMeters": 4.121147867408581e-13,
+        "status": "IFC_NATIVE_QUANTITIES_MATCH"
+      }
+    },
+    {
+      "ifcId": "id-sha256:76e0849175254dc6aedd",
+      "ifcType": "IfcWall",
+      "name": "ПЕР - 004",
+      "predefinedType": null,
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Стена",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [
+        {
+          "name": "Железобетон - Конструкционный",
+          "category": null
+        }
+      ],
+      "nativeGuid": "id-sha256:f7a694272de27df78773",
+      "nativeQuantities": {
+        "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+        "surfaceAreaSquareMeters": 51.119999999999926,
+        "volumeCubicMeters": 6.266999999999898,
+        "bodyCount": 1,
+        "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 51.11999999999994,
+        "closedEdgeIncidence": true,
+        "triangleCount": 40,
+        "dimensionsMeters": [
+          0.29999999999999716,
+          7.700000000000003,
+          3.0
+        ],
+        "volumeCubicMeters": 6.267000000000159
+      },
+      "nativeComparison": {
+        "areaDeltaSquareMeters": 1.4210854715202004e-14,
+        "volumeDeltaCubicMeters": 2.611244553918368e-13,
+        "status": "IFC_NATIVE_QUANTITIES_MATCH"
+      }
+    },
+    {
+      "ifcId": "id-sha256:075cd75340394c29c8ea",
+      "ifcType": "IfcWall",
+      "name": "ПЕР - 009",
+      "predefinedType": null,
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Стена",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [
+        {
+          "name": "Железобетон - Конструкционный",
+          "category": null
+        }
+      ],
+      "nativeGuid": "id-sha256:43142421afc7d8a55e82",
+      "nativeQuantities": {
+        "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+        "surfaceAreaSquareMeters": 10.519999999999968,
+        "volumeCubicMeters": 1.127999999999986,
+        "bodyCount": 1,
+        "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 10.519999999999968,
+        "closedEdgeIncidence": true,
+        "triangleCount": 32,
+        "dimensionsMeters": [
+          2.0,
+          0.29999999999999716,
+          2.0
+        ],
+        "volumeCubicMeters": 1.1280000000003803
+      },
+      "nativeComparison": {
+        "areaDeltaSquareMeters": 0.0,
+        "volumeDeltaCubicMeters": 3.943512183468556e-13,
+        "status": "IFC_NATIVE_QUANTITIES_MATCH"
+      }
+    },
+    {
+      "ifcId": "id-sha256:d869191b68ec80be1ea0",
+      "ifcType": "IfcWall",
+      "name": "ПЕР - 005",
+      "predefinedType": null,
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Стена",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [
+        {
+          "name": "Железобетон - Конструкционный",
+          "category": null
+        }
+      ],
+      "nativeGuid": "id-sha256:497e0b19b9b41188698e",
+      "nativeQuantities": {
+        "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+        "surfaceAreaSquareMeters": 55.13999999999989,
+        "volumeCubicMeters": 7.038000000000011,
+        "bodyCount": 1,
+        "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 55.1399999999999,
+        "closedEdgeIncidence": true,
+        "triangleCount": 32,
+        "dimensionsMeters": [
+          0.29999999999999716,
+          8.299999999999997,
+          3.0
+        ],
+        "volumeCubicMeters": 7.037999999998652
+      },
+      "nativeComparison": {
+        "areaDeltaSquareMeters": 1.4210854715202004e-14,
+        "volumeDeltaCubicMeters": 1.3589129821411916e-12,
+        "status": "IFC_NATIVE_QUANTITIES_MATCH"
+      }
+    },
+    {
+      "ifcId": "id-sha256:33f9bc6a700f1b18578a",
+      "ifcType": "IfcWall",
+      "name": "ПЕР - 007",
+      "predefinedType": null,
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Стена",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [
+        {
+          "name": "Железобетон - Конструкционный",
+          "category": null
+        }
+      ],
+      "nativeGuid": "id-sha256:0f66b42e488c297215cd",
+      "nativeQuantities": {
+        "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+        "surfaceAreaSquareMeters": 67.79999999999993,
+        "volumeCubicMeters": 8.999999999999943,
+        "bodyCount": 1,
+        "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 67.79999999999993,
+        "closedEdgeIncidence": true,
+        "triangleCount": 12,
+        "dimensionsMeters": [
+          10.0,
+          0.29999999999999716,
+          3.0
+        ],
+        "volumeCubicMeters": 9.0
+      },
+      "nativeComparison": {
+        "areaDeltaSquareMeters": 0.0,
+        "volumeDeltaCubicMeters": 5.684341886080802e-14,
+        "status": "IFC_NATIVE_QUANTITIES_MATCH"
+      }
+    },
+    {
+      "ifcId": "id-sha256:139bb06ff1a9bcb5e7b7",
+      "ifcType": "IfcWall",
+      "name": "ПЕР - 006",
+      "predefinedType": null,
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Стена",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [
+        {
+          "name": "Железобетон - Конструкционный",
+          "category": null
+        }
+      ],
+      "nativeGuid": "id-sha256:4b2c7d00e3d409a9ab32",
+      "nativeQuantities": {
+        "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+        "surfaceAreaSquareMeters": 67.79999999999993,
+        "volumeCubicMeters": 8.999999999999943,
+        "bodyCount": 1,
+        "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 67.79999999999993,
+        "closedEdgeIncidence": true,
+        "triangleCount": 12,
+        "dimensionsMeters": [
+          10.0,
+          0.29999999999999716,
+          3.0
+        ],
+        "volumeCubicMeters": 9.000000000000435
+      },
+      "nativeComparison": {
+        "areaDeltaSquareMeters": 0.0,
+        "volumeDeltaCubicMeters": 4.920508445138694e-13,
+        "status": "IFC_NATIVE_QUANTITIES_MATCH"
+      }
+    },
+    {
+      "ifcId": "id-sha256:147f911f46d2a6a2a994",
+      "ifcType": "IfcWall",
+      "name": "ПЕР - 008",
+      "predefinedType": null,
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Стена",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [
+        {
+          "name": "Железобетон - Конструкционный",
+          "category": null
+        }
+      ],
+      "nativeGuid": "id-sha256:3677c5da2430b7bed34b",
+      "nativeQuantities": {
+        "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+        "surfaceAreaSquareMeters": 51.179999999999936,
+        "volumeCubicMeters": 6.497999999999877,
+        "bodyCount": 1,
+        "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 51.17999999999994,
+        "closedEdgeIncidence": true,
+        "triangleCount": 32,
+        "dimensionsMeters": [
+          0.29999999999999716,
+          7.700000000000003,
+          3.0
+        ],
+        "volumeCubicMeters": 6.498000000000969
+      },
+      "nativeComparison": {
+        "areaDeltaSquareMeters": 7.105427357601002e-15,
+        "volumeDeltaCubicMeters": 1.092459456231154e-12,
+        "status": "IFC_NATIVE_QUANTITIES_MATCH"
+      }
+    },
+    {
+      "ifcId": "id-sha256:fbc6c7ae457972452f40",
+      "ifcType": "IfcWindow",
+      "name": "ОК - 001",
+      "predefinedType": "WINDOW",
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Окно",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [],
+      "nativeGuid": "id-sha256:8ae117c09289712b0e11",
+      "nativeQuantities": {
+        "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+        "surfaceAreaSquareMeters": 4.128999999999967,
+        "volumeCubicMeters": 0.04173749999999658,
+        "bodyCount": 7,
+        "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 4.044999999999982,
+        "closedEdgeIncidence": false,
+        "triangleCount": 180,
+        "dimensionsMeters": [
+          0.07499999999999574,
+          1.2000000000000028,
+          1.2000000000000002
+        ],
+        "volumeStatus": "IFC_MESH_CLOSURE_NOT_PROVEN"
+      }
+    },
+    {
+      "ifcId": "id-sha256:2fd1894c05c1cc0f4542",
+      "ifcType": "IfcWindow",
+      "name": "ОК - 001",
+      "predefinedType": "WINDOW",
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Окно",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [],
+      "nativeGuid": "id-sha256:3940fd04267e7b5d887b",
+      "nativeQuantities": {
+        "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+        "surfaceAreaSquareMeters": 4.128999999999967,
+        "volumeCubicMeters": 0.041737499999994584,
+        "bodyCount": 7,
+        "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 4.044999999999982,
+        "closedEdgeIncidence": false,
+        "triangleCount": 180,
+        "dimensionsMeters": [
+          0.07499999999999574,
+          1.2000000000000028,
+          1.2000000000000002
+        ],
+        "volumeStatus": "IFC_MESH_CLOSURE_NOT_PROVEN"
+      }
+    },
+    {
+      "ifcId": "id-sha256:3e520a53d6cc6c51aec0",
+      "ifcType": "IfcWindow",
+      "name": "ОК - 001",
+      "predefinedType": "WINDOW",
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Окно",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [],
+      "nativeGuid": "id-sha256:d247a6d036a10f9f1ff1",
+      "nativeQuantities": {
+        "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+        "surfaceAreaSquareMeters": 4.128999999999964,
+        "volumeCubicMeters": 0.04173749999999596,
+        "bodyCount": 7,
+        "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 4.04499999999998,
+        "closedEdgeIncidence": false,
+        "triangleCount": 180,
+        "dimensionsMeters": [
+          0.07499999999999574,
+          1.2000000000000028,
+          1.2000000000000002
+        ],
+        "volumeStatus": "IFC_MESH_CLOSURE_NOT_PROVEN"
+      }
+    },
+    {
+      "ifcId": "id-sha256:e299bda071ec740ddff4",
+      "ifcType": "IfcWindow",
+      "name": "ОК - 001",
+      "predefinedType": "WINDOW",
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Окно",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [],
+      "nativeGuid": "id-sha256:b766ca8c720e1b6dd174",
+      "nativeQuantities": {
+        "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+        "surfaceAreaSquareMeters": 4.128999999999964,
+        "volumeCubicMeters": 0.04173749999999801,
+        "bodyCount": 7,
+        "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 4.04499999999998,
+        "closedEdgeIncidence": false,
+        "triangleCount": 180,
+        "dimensionsMeters": [
+          0.07499999999999574,
+          1.2000000000000028,
+          1.2000000000000002
+        ],
+        "volumeStatus": "IFC_MESH_CLOSURE_NOT_PROVEN"
+      }
+    },
+    {
+      "ifcId": "id-sha256:13e739b6b5dd3523df1f",
+      "ifcType": "IfcFlowSegment",
+      "name": "DUCT - 001",
+      "predefinedType": "Duct Segment",
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Сегмент Воздуховода",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [],
+      "nativeGuid": "id-sha256:60536d193a32708d49dd",
+      "nativeQuantities": {
+        "status": "NATIVE_QUANTITIES_NOT_VERIFIED",
+        "reason": "NATIVE_BODY_NOT_CLOSED"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 10.037255999999978,
+        "closedEdgeIncidence": false,
+        "triangleCount": 80,
+        "dimensionsMeters": [
+          6.0,
+          0.26200000000000045,
+          0.2120000000000002
+        ],
+        "volumeStatus": "IFC_MESH_CLOSURE_NOT_PROVEN"
+      }
+    },
+    {
+      "ifcId": "id-sha256:1d6a936a1ff91a48932f",
+      "ifcType": "IfcFlowSegment",
+      "name": "DUCT - 001",
+      "predefinedType": "Duct Segment",
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Сегмент Воздуховода",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [],
+      "nativeGuid": "id-sha256:4a5e1ec4a141728545dc",
+      "nativeQuantities": {
+        "status": "NATIVE_QUANTITIES_NOT_VERIFIED",
+        "reason": "NATIVE_BODY_NOT_CLOSED"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 1.7572559999999937,
+        "closedEdgeIncidence": false,
+        "triangleCount": 80,
+        "dimensionsMeters": [
+          1.0,
+          0.26200000000000045,
+          0.21199999999999974
+        ],
+        "volumeStatus": "IFC_MESH_CLOSURE_NOT_PROVEN"
+      }
+    },
+    {
+      "ifcId": "id-sha256:5140bf70df9320d939bf",
+      "ifcType": "IfcOpeningElement",
+      "name": "ОК - 001",
+      "predefinedType": null,
+      "sourceQuantities": {},
+      "classifications": [],
+      "materials": [],
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 4.3295999999999735,
+        "closedEdgeIncidence": true,
+        "triangleCount": 12,
+        "dimensionsMeters": [
+          0.3019999999999925,
+          1.2000000000000028,
+          1.2000000000000002
+        ],
+        "volumeCubicMeters": 0.43487999999979365
+      }
+    },
+    {
+      "ifcId": "id-sha256:220844c029376a85989c",
+      "ifcType": "IfcOpeningElement",
+      "name": "ДВ - 002",
+      "predefinedType": null,
+      "sourceQuantities": {},
+      "classifications": [],
+      "materials": [],
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 6.853395999999935,
+        "closedEdgeIncidence": true,
+        "triangleCount": 56,
+        "dimensionsMeters": [
+          1.073999999999998,
+          0.3019999999999925,
+          2.137
+        ],
+        "volumeCubicMeters": 0.6345902760017452
+      }
+    },
+    {
+      "ifcId": "id-sha256:afaf97dc8f75a0924a51",
+      "ifcType": "IfcOpeningElement",
+      "name": "ОК - 001",
+      "predefinedType": null,
+      "sourceQuantities": {},
+      "classifications": [],
+      "materials": [],
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 4.3295999999999735,
+        "closedEdgeIncidence": true,
+        "triangleCount": 12,
+        "dimensionsMeters": [
+          0.3019999999999925,
+          1.2000000000000028,
+          1.2000000000000002
+        ],
+        "volumeCubicMeters": 0.4348800000000228
+      }
+    },
+    {
+      "ifcId": "id-sha256:b56510cf25445782093c",
+      "ifcType": "IfcOpeningElement",
+      "name": "ОТВ - 001",
+      "predefinedType": "Empty Opening",
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Пустой Проем",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [],
+      "nativeGuid": "id-sha256:4a4567797321729af159",
+      "nativeQuantities": {
+        "status": "NATIVE_BODY_NOT_AVAILABLE"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 2.279999999999986,
+        "closedEdgeIncidence": true,
+        "triangleCount": 12,
+        "dimensionsMeters": [
+          0.4000000000000057,
+          0.8999999999999844,
+          0.6000000000000001
+        ],
+        "volumeCubicMeters": 0.21600000000095587
+      }
+    },
+    {
+      "ifcId": "id-sha256:093428d1a9a31c474d65",
+      "ifcType": "IfcOpeningElement",
+      "name": "ОК - 001",
+      "predefinedType": null,
+      "sourceQuantities": {},
+      "classifications": [],
+      "materials": [],
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 4.3295999999999735,
+        "closedEdgeIncidence": true,
+        "triangleCount": 12,
+        "dimensionsMeters": [
+          0.3019999999999925,
+          1.2000000000000028,
+          1.2000000000000002
+        ],
+        "volumeCubicMeters": 0.4348800000006996
+      }
+    },
+    {
+      "ifcId": "id-sha256:24f19849160fca86923c",
+      "ifcType": "IfcOpeningElement",
+      "name": "ОК - 001",
+      "predefinedType": null,
+      "sourceQuantities": {},
+      "classifications": [],
+      "materials": [],
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 4.3295999999999735,
+        "closedEdgeIncidence": true,
+        "triangleCount": 12,
+        "dimensionsMeters": [
+          0.3019999999999925,
+          1.2000000000000028,
+          1.2000000000000002
+        ],
+        "volumeCubicMeters": 0.43487999999948634
+      }
+    },
+    {
+      "ifcId": "id-sha256:652271c152628bbd917c",
+      "ifcType": "IfcFurnishingElement",
+      "name": "МЕБ - 001",
+      "predefinedType": null,
+      "sourceQuantities": {},
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Мебель",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "materials": [],
+      "nativeGuid": "id-sha256:9e0883de777aee5a849a",
+      "nativeQuantities": {
+        "status": "NATIVE_QUANTITIES_NOT_VERIFIED",
+        "reason": "CURVED_NATIVE_BODY_NOT_QUANTIFIED"
+      },
+      "geometry": {
+        "status": "ACTUAL_IFC_TRIANGULATED_GEOMETRY",
+        "surfaceAreaSquareMeters": 0.31595498848769915,
+        "closedEdgeIncidence": false,
+        "triangleCount": 1346,
+        "dimensionsMeters": [
+          0.269999999999996,
+          0.269999999999996,
+          0.31
+        ],
+        "volumeStatus": "IFC_MESH_CLOSURE_NOT_PROVEN"
+      }
+    }
+  ],
+  "portOwnership": {
+    "id-sha256:41287c687b9ac7e0ac56": "id-sha256:13e739b6b5dd3523df1f",
+    "id-sha256:c746c7273dc4ef368ac3": "id-sha256:13e739b6b5dd3523df1f",
+    "id-sha256:b9971ad47023d0ce32b5": "id-sha256:1d6a936a1ff91a48932f",
+    "id-sha256:8096b4df8fc3f3bad3d6": "id-sha256:1d6a936a1ff91a48932f"
+  },
+  "portConnections": [
+    {
+      "firstPortIfcId": "id-sha256:8096b4df8fc3f3bad3d6",
+      "secondPortIfcId": "id-sha256:c746c7273dc4ef368ac3",
+      "firstOwnerIfcId": "id-sha256:1d6a936a1ff91a48932f",
+      "secondOwnerIfcId": "id-sha256:13e739b6b5dd3523df1f"
+    }
+  ],
+  "elementConnections": [
+    {
+      "firstIfcId": "id-sha256:e31b5a938e5e33c5dbb9",
+      "secondIfcId": "id-sha256:6f9590b60645b92241fb",
+      "relationType": "IfcRelConnectsPathElements"
+    },
+    {
+      "firstIfcId": "id-sha256:dcbf9fe22158ead8a03c",
+      "secondIfcId": "id-sha256:6f9590b60645b92241fb",
+      "relationType": "IfcRelConnectsPathElements"
+    },
+    {
+      "firstIfcId": "id-sha256:76e0849175254dc6aedd",
+      "secondIfcId": "id-sha256:e31b5a938e5e33c5dbb9",
+      "relationType": "IfcRelConnectsPathElements"
+    },
+    {
+      "firstIfcId": "id-sha256:76e0849175254dc6aedd",
+      "secondIfcId": "id-sha256:dcbf9fe22158ead8a03c",
+      "relationType": "IfcRelConnectsPathElements"
+    },
+    {
+      "firstIfcId": "id-sha256:139bb06ff1a9bcb5e7b7",
+      "secondIfcId": "id-sha256:d869191b68ec80be1ea0",
+      "relationType": "IfcRelConnectsPathElements"
+    },
+    {
+      "firstIfcId": "id-sha256:33f9bc6a700f1b18578a",
+      "secondIfcId": "id-sha256:d869191b68ec80be1ea0",
+      "relationType": "IfcRelConnectsPathElements"
+    },
+    {
+      "firstIfcId": "id-sha256:147f911f46d2a6a2a994",
+      "secondIfcId": "id-sha256:33f9bc6a700f1b18578a",
+      "relationType": "IfcRelConnectsPathElements"
+    },
+    {
+      "firstIfcId": "id-sha256:147f911f46d2a6a2a994",
+      "secondIfcId": "id-sha256:139bb06ff1a9bcb5e7b7",
+      "relationType": "IfcRelConnectsPathElements"
+    }
+  ],
+  "openingHosts": [
+    {
+      "openingIfcId": "id-sha256:5140bf70df9320d939bf",
+      "hostIfcId": "id-sha256:6f9590b60645b92241fb"
+    },
+    {
+      "openingIfcId": "id-sha256:220844c029376a85989c",
+      "hostIfcId": "id-sha256:dcbf9fe22158ead8a03c"
+    },
+    {
+      "openingIfcId": "id-sha256:afaf97dc8f75a0924a51",
+      "hostIfcId": "id-sha256:76e0849175254dc6aedd"
+    },
+    {
+      "openingIfcId": "id-sha256:b56510cf25445782093c",
+      "hostIfcId": "id-sha256:075cd75340394c29c8ea"
+    },
+    {
+      "openingIfcId": "id-sha256:093428d1a9a31c474d65",
+      "hostIfcId": "id-sha256:d869191b68ec80be1ea0"
+    },
+    {
+      "openingIfcId": "id-sha256:24f19849160fca86923c",
+      "hostIfcId": "id-sha256:147f911f46d2a6a2a994"
+    }
+  ],
+  "quantityMatchCount": 12,
+  "quantityMismatchCount": 0,
+  "semanticCompatibility": "NOT_VERIFIED",
+  "engineeringAcceptance": "NOT_VERIFIED",
+  "nativeWrites": 0,
+  "source": "ACTUAL_PRIOR_SAVED_NATIVE_IFC_MATCHED_TO_FRESH59_BASELINE; NO_POST_CRASH_LIVE_CLAIM",
+  "elapsedSeconds": 1.9552973000099882
+}

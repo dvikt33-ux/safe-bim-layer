@@ -1,0 +1,97 @@
+{
+  "schema": "APA_CANONICAL_BLOB_COVERAGE_SNAPSHOT_V1",
+  "repository": "dvikt33-ux/safe-bim-layer",
+  "canonical_branch": "research/apa-verified-results-hub-20261010",
+  "canonical_head_sha": "6a8abe2ac4e5a3e664c94bc9e71f9e15da943e27",
+  "captured_at_utc": "2026-10-11T00:13:12.682Z",
+  "canonical_tree_git_entries": 196,
+  "canonical_blob_count": 157,
+  "source_exclusive_manifest": "docs/research/apa-results/inventories/blob-scan-20261011/BLOB_EXCLUSIVE_20261011.json",
+  "source_baseline": "BRANCH_HEADS_20261010.json",
+  "counts": {
+    "historical_head_exclusive_sha": 278,
+    "matching_git_blobs_in_current_canonical": 7,
+    "non_matching_git_blobs_in_current_canonical": 271,
+    "archicad29_tapir159_source_sha_count": 71,
+    "archicad29_tapir159_matching_in_current_canonical": 0
+  },
+  "matching": [
+    {
+      "source_heads": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "source_paths": [
+        "docs/research/apa-results/2026-10-10-research-register.md"
+      ],
+      "blob_sha": "071620bfce793b49451523363401fe0b0a61152c",
+      "canonical_path": "docs/research/apa-results/2026-10-10-research-register.md"
+    },
+    {
+      "source_heads": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "source_paths": [
+        "docs/research/apa-results/RESEARCH_TEMPLATE.md"
+      ],
+      "blob_sha": "c356b87a56fb1c0854927d475b20d42d2a4dbc36",
+      "canonical_path": "docs/research/apa-results/RESEARCH_TEMPLATE.md"
+    },
+    {
+      "source_heads": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "source_paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-audit-100141Z-event-contract-7c4e.md"
+      ],
+      "blob_sha": "a47ef947c91ddc760b4d77e87c186c277893417f",
+      "canonical_path": "docs/research/apa-results/runs/2026-10-10/apa-audit-100141Z-event-contract-7c4e.md"
+    },
+    {
+      "source_heads": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "source_paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-discovery-20261010-102440-slinktrim-9f2b7.md"
+      ],
+      "blob_sha": "e32d13ffbc5370290bfd42023a5e808fc0947f38",
+      "canonical_path": "docs/research/apa-results/runs/2026-10-10/apa-discovery-20261010-102440-slinktrim-9f2b7.md"
+    },
+    {
+      "source_heads": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "source_paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-research-os-audit-user-supplied-20261010.md"
+      ],
+      "blob_sha": "94cf8986c22839ce51e3983e7e4aa757a66f7c4a",
+      "canonical_path": "docs/research/apa-results/runs/2026-10-10/apa-research-os-audit-user-supplied-20261010.md"
+    },
+    {
+      "source_heads": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "source_paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md"
+      ],
+      "blob_sha": "aa3b419f72f2ae130ab5aa01acfb155b58a3053d",
+      "canonical_path": "docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md"
+    },
+    {
+      "source_heads": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "source_paths": [
+        "docs/research/apa-results/runs/2026-10-10/apa-technical-20261010-094254-publisher-layout-01.md"
+      ],
+      "blob_sha": "19e1e1ad52b968bc27ef8b2293829df57b512cb4",
+      "canonical_path": "docs/research/apa-results/runs/2026-10-10/apa-technical-20261010-094254-publisher-layout-01.md"
+    }
+  ],
+  "qualification": [
+    "This is exact Git blob SHA equality against one pinned canonical commit, NOT a semantic research overlap analysis.",
+    "Absence of exact byte SHA does not establish absence of paraphrased or updated research claims elsewhere.",
+    "Source snapshot is dated 2026-10-10 and may not represent current heads of 72 branches.",
+    "No 71-file bulk archive migration is reported; source pointers are captured in ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json.",
+    "Git LFS pointers and release binaries need separate verification of external content if used."
+  ]
+}

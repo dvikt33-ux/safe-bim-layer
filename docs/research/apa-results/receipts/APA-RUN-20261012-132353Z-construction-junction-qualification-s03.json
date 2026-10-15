@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:fe6886205cbf21f6ecf35261f4738e0643e60fcee9fc77e88d68a66cdecf9b37",
+  "index_commit_sha": "4fdb7585274bd40f8d4b1a7616e74bd550a6f083",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "4fdb7585274bd40f8d4b1a7616e74bd550a6f083",
+  "report_path": "docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-132353Z-construction-junction-qualification-s03/REPORT.md",
+  "report_sha256": "2463811c46e330cf2279157c5bf8bf8e8c65a28906a1c6fae0680693f77707ec",
+  "run_id": "APA-RUN-20261012-132353Z-construction-junction-qualification-s03",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

@@ -1,0 +1,93 @@
+{
+  "action_id": "APA-P70.A11",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-FUNCTIONAL-EXPANSION-V32",
+      "evidence_ids": [
+        "EV-EXPANSION32-ACCEPTANCE",
+        "EV-EXPANSION32-BYTES"
+      ],
+      "statement": "Actual saved IFC quantity/semantic extraction works,73Details contexts feed a source-bound existing writer graph, and dedicated MEP diagnostics expose native fitting defaults/overshoot.397Windows/LinuxPASS. Native new branch is NOT_ACCEPTED and unsaved; source parts/terminal not written. Saved PLN bytes remain prior59GUID baseline. S03PARTIAL, recovery/source/provider/engineering dependencies explicit. Publication adds no native calls.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-EXPANSION32-ACCEPTANCE",
+      "kind": "TEST_RESULT",
+      "sha256": "ab00b8e3e55167af531cae33aae6e9dc331580d56bf827a855d28d6d4080c46a",
+      "source_revision": "1908482fdb3df381c1bf6d04f8c2fa28f41069bd",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-095401Z-functional-expansion-v32/acceptance.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-EXPANSION32-BYTES",
+      "kind": "LOCAL_LOG",
+      "sha256": "c1c27426e90bee3790567f3e3ebae3dd412e88937a342229c9bd08fb36f381db",
+      "source_revision": "1908482fdb3df381c1bf6d04f8c2fa28f41069bd",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-095401Z-functional-expansion-v32/EVIDENCE_SHA256.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "work-functional-expansion-v32",
+  "executor_run_id": "APA-RUN-20261012-095401Z-functional-expansion-v32",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-12T10:28:47Z",
+  "idempotency_key": "sha256:bdad8028795da8d7256a28a26cd1f07333b50870dc351b9052eceec9fc90da9b",
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "next_substep": "APA-P70.A11.S03",
+  "phase": "SOURCE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261012-095401Z-functional-expansion-v32",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "29(captured native; recovery not verified)",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "source_branch": "feature/apa-connected-expansion-v32-20261012",
+    "tapir": "1.5.10"
+  },
+  "source_revisions": [
+    {
+      "revision": "1908482fdb3df381c1bf6d04f8c2fa28f41069bd",
+      "source_sha": "1908482fdb3df381c1bf6d04f8c2fa28f41069bd",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/56"
+    }
+  ],
+  "started_at": "2026-10-12T10:28:47Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A11.S03"
+}

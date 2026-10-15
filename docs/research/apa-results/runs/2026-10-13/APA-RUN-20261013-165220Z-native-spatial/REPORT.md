@@ -1,0 +1,25 @@
+# Native spatial model: global stories and connected Stair
+
+The existing APA authored generator, BIM Graph, Native Model Dump and SceneWriter now edit actual global Archicad stories in the explicitly approved fresh test project. Initial20template Elevation/marker references have zero available physical bodies. Their shared GUIDs are not proof of a copied building and all20are preserved. Original168saved and live signatures are unchanged.
+
+## Working native cycle
+
+Native SetStories inserts one real datum story, preserves floor IDs1/2/3 and createsID4. The existing generator creates21native elements. A global height change3.0→3.3m gives native levels0/3.3/6.3/9.3m (two occupied floors and two datums), moves upper Walls/Slab/Roof through real stories, and preservesGUID/material bindings. Five lowerWalls change2.8→3.1m under the0.2mSlab. Four hosted Window sills unexpectedly became0.7m; exact native ModifyWindows restores authored1.0m and actual hosted geometry. No new elements or MoveElements during the height edit. Five existing real sloped Roof underside contacts remain and SEO links are not recreated.
+
+An installed concrete Stair Favorite supplies test width1m/20risers/preferred going0.35m. Actual native rise3.3m gives explicit test riser0.165m. One CreateStairs produces a true native Stair with20Risers/20Treads/1Structure and60auxiliary Objects. One ModifySlabs creates an opening from measured Stair BREP1×6.4m; outerSlab ring,GUID/material/floor/thickness persist. Real upperSlab contact area0.3342017047m² and native collision query prove physical connection without upperSlab volume intersection. The0.1m lower footing embed is a recorded test support intersection; engineering capacity/headroom/normative acceptance are NOT_VERIFIED.22primary elements form one physical component; no other architectural volume collision is found.
+
+Final Save/Open both return successful native replies and all143identities/signatures survive:20template references,21building elements and102Stair-related identities (one Stair root,41native parts and60auxiliary Objects). Original168model remains unchanged.10auxiliary Object owners are outside the available dump and remain NOT_VERIFIED. Available regenerated native body/view-filter scope is explicit; no visibleUI inspection is claimed.
+
+## Exact partial criteria
+
+The native solver changes preferred going0.35→0.32m. Official precise properties give actual going0.32/riser0.165/width1/line length6.4. Localized rounded strings are not numeric acceptance. Source-dimension acceptance remains NOT_VERIFIED: installed CreateStairs has no going-lock or native Stair baseline/parameter Modify contract. Geometry/connection PASS does not imply complete source or engineering PASS. Favorite export error-7003 produced mainXML scalar data; complete GDL/Favorite export is notverified.
+
+True Grid remains BLOCKED. Generic Objects/lines/text/Morph are not axes. Source-only GetNativeGridDefaultsV1 uses SDK29API_ObjectID+APIVarId_GridElement and compilesC++20 through existing infrastructure; it is not installed and creates no axes. Remaining runtime minimum: truevariation/defaultparameter read, boundnativeCreate, actualinstancevariationreadback and stableGUIDedit. FullAPX linking notclaimed; existing unrelated documentation extended-pen compile gap remains untouched. Semantic BIM Graph axes are retained.
+
+Unknown journal rows remain: a local router refusal, first30sOpen timeout and literal-contour callback failure are independently reconciled without blind native retries. Final new saved revision143 completes120sSave/Open. Code includes exact baseline/source/schema/hash/ownership gates and the existing journal. Replaying the accepted Stair packet fails before any native write. No second executor, Morph, native preferences, installedAPX, normative/search/KG/documentation implementation or main/master changes.
+
+## Publication
+
+[draft PR75](https://github.com/dvikt33-ux/safe-bim-layer/pull/75), final head`8ee3fcd89efa5220dc4d1ceb4fb92a26e0d8c07f`, exact chain basePR74`5a3a9201a715a5528c93bed4a5318e2acb32eea7`.30newtests;668/668Windows host and [Windows/LinuxCI](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38416422147)PASS plus102upstream tests/core-MCPsmoke each.17code blobs independently match GitHub. Actual mainorchestrator used read-onlyKnowledgeGraph at current134 before CASclaim135; its lease is renewed under revision136 after an execution-limit pause. Canonical [processed evidence](https://github.com/dvikt33-ux/safe-bim-layer/tree/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-165220Z-native-spatial) excludesPLN/privatepaths/fulltechnicaldumps. Publisher safety flags describe only publication, which performs no native writes; the separately authorized test project was changed and saved earlier.
+
+A11.S03 staysPARTIAL, A07dependencies/S10BLOCKED and all historicalDONE evidence retained. Next: qualify minimal trueGrid runtime and strictStairgoing edit contracts through the existing SDK overlay; deployment needs separate authorization. Preserve original168and accepted143 and do not replay creations.

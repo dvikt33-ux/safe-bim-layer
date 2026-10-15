@@ -1,0 +1,99 @@
+{
+  "substep": "APA-P70.A11.S03",
+  "status": "PARTIAL",
+  "codePR": "https://github.com/dvikt33-ux/safe-bim-layer/pull/56",
+  "codeHead": "1908482fdb3df381c1bf6d04f8c2fa28f41069bd",
+  "verifiedBasePR55Head": "3191e7ce5071e6de7401f6e520fbd8f3ef2a1ea2",
+  "offline": "OFFLINE_PASS",
+  "newTests": 26,
+  "hostWindows": {
+    "tests": 397,
+    "seconds": 65.531,
+    "status": "PASS"
+  },
+  "CI": {
+    "head": "1908482fdb3df381c1bf6d04f8c2fa28f41069bd",
+    "run": 38235949987,
+    "status": "SUCCESS",
+    "linux": {
+      "job": 114766538749,
+      "tests": 397,
+      "seconds": 21.276,
+      "status": "PASS"
+    },
+    "windows": {
+      "job": 114766538251,
+      "tests": 397,
+      "seconds": 104.706,
+      "status": "PASS"
+    },
+    "contractsAndLauncherSyntax": "PASS"
+  },
+  "ifc": {
+    "processing": "ACTUAL_SAVED_IFC_OFFLINE_PASS",
+    "elements": 32,
+    "materialAssignments": 18,
+    "classifiedElements": 27,
+    "ownedPorts": 4,
+    "portConnections": 1,
+    "openingHosts": 6,
+    "sourceQuantitySets": 0,
+    "nativeQuantityMatches": 12,
+    "verifiedQuantityMismatches": 0
+  },
+  "details": {
+    "contextRecords": 73,
+    "existingTaskRefs": [
+      "APA-P70.A04.S01",
+      "APA-P70.A04.S02",
+      "APA-P70.A04.S03"
+    ],
+    "sourceSectionMeters": {
+      "width": 0.15,
+      "height": 0.025
+    },
+    "measuredRoofSpanMeters": 10,
+    "executor": "Existing BIM Graph / SceneWriter with source/host/story/material/placement gates",
+    "status": "OFFLINE_GRAPH_PREPARED_LIVE_NOT_RUN",
+    "missingAssemblyDimensions": 8,
+    "newPartsCreated": 0
+  },
+  "nativeProbe": {
+    "status": "NOT_ACCEPTED",
+    "createdRoutes": 2,
+    "connectAttempts": 1,
+    "retryAttempts": 0,
+    "capturedRoutesAfterSplit": 5,
+    "capturedPhysicalMembers": 6,
+    "capturedGUIDs": 75,
+    "baseline59GUIDAndGeometryPreservedAtCapture": true,
+    "nativeConnectedNetwork": false,
+    "newTerminalCreated": false,
+    "saveAndReopen": "NOT_RUN_AFTER_NEW_PROBE"
+  },
+  "nativeRecovery": {
+    "status": "NO_VERIFIED_WORKING_WINDOW_OR_API",
+    "isolatedProcessExists": true,
+    "commandTargetsApprovedPLN": true,
+    "secondLaunch": "AUTO_REVIEW_REJECTED_NOT_EXECUTED",
+    "reason": "Duplicate process can conflict with file lock/recovery; explicit recovery approval required"
+  },
+  "persistedPLN": {
+    "status": "FILE_BYTES_MATCH_LAST_ACCEPTED_REVISION; CURRENT_LOADED_STATE_NOT_VERIFIED",
+    "primaryCountAtLastAcceptance": 27,
+    "guidCountAtLastAcceptance": 59,
+    "original48Included": true,
+    "sha256": "da37fa0fe9b1b255f1618a881a79eb9d4ae8b66993a99cb75fdba30cddc69bb4"
+  },
+  "engineering": "ENGINEERING_NOT_VERIFIED",
+  "paidRuntimeUsed": false,
+  "installedAPXChanged": false,
+  "mainChanged": false,
+  "publicationNativeCalls": 0,
+  "timings": {
+    "freshNative59BaselineSeconds": 2.52341330004856,
+    "actualIFCProcessingSeconds": 1.9552973000099882,
+    "detailsGraphPreparationSeconds": 0.2119222999899648,
+    "scope": "Baseline evidence only; no S04 optimization claim"
+  }
+}

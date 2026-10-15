@@ -1,0 +1,26 @@
+{
+  "status": "DONE_PUBLISHED_PACKAGE_S03_PARTIAL",
+  "revision": 182,
+  "codePR": 111,
+  "codeHead": "61f56376e37755cfb4a15db29071970525297904",
+  "materialRecovery": "NOT_RESTORED_BLOCKED_OWNER_WRITE_UNQUALIFIED",
+  "GUIDs": 409,
+  "newSDK": "OWNER_LIBRARY_READ_PASS_OTHER_FIELDS_BUILD_ONLY",
+  "graph": "352NODES482EDGES_OBSERVED_RAIL_IMPACT134",
+  "nativeModelWrites": 0,
+  "APXChanged": false,
+  "APXTemporarilySwitchedAndRestored": true,
+  "savedCopyBytesChanged": true,
+  "savedCopyByteChangeCause": "NOT_VERIFIED",
+  "native409And128GDL": "INDEPENDENT_REOPEN_MATCH",
+  "offlineTests": false,
+  "workflowDispatch": false,
+  "quantityEngine": "QUARANTINED_NOT_CALLED",
+  "receiptRun": "APA-RUN-20261015-233124Z-native-owner-runtime",
+  "publication": "DIRECT_EXISTING_PUBLISHER_BYTE_BLOB_READBACK",
+  "knownActionsRunCounts": {
+    "7f228d6ef3ff35a73d00ac2b0aa7b1cd08686571": 0,
+    "927f2c94745a35b0e6994bf5832a8c08a09a1077": 0
+  },
+  "newTaskIDs": 0
+}

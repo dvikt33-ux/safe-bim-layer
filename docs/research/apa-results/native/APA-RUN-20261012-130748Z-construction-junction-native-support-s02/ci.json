@@ -1,0 +1,21 @@
+{
+  "head": "b17c460e92e794de94149c8405a8fb48d885ab27",
+  "run": 38251796931,
+  "status": "SUCCESS",
+  "jobs": [
+    {
+      "name": "offline-contracts (ubuntu-latest)",
+      "id": 114819714725,
+      "tests": 426,
+      "seconds": 28.731,
+      "status": "SUCCESS"
+    },
+    {
+      "name": "offline-contracts (windows-latest)",
+      "id": 114819715174,
+      "tests": 426,
+      "seconds": 109.882,
+      "status": "SUCCESS"
+    }
+  ]
+}

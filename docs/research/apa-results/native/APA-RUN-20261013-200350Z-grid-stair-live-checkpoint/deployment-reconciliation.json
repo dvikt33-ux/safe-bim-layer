@@ -1,0 +1,32 @@
+{
+  "status": "BLOCKED_PATH_IDENTITY_AMBIGUITY_ORIGINAL_RESTORED",
+  "userTemporarySwitchAuthorization": true,
+  "candidateSHA256": "8ad672092aa93e4bf1b4d469cbf7840cb60acd538820183bb68d5d6786ea221d",
+  "installedSHA256": "dc99af071d3dbcff9626653ccc37001613cb3fa4a8eff50c6000c1cc70e8d7c7",
+  "sameMDID": [
+    826567491,
+    368333322
+  ],
+  "managerObserved": "BOTH_TAPIR_ADDITIONAL_JSON_ENTRIES_SHOW_ORIGINAL_INSTALLED_PATH_AFTER_EXTERNAL_FILE_SELECTED",
+  "automaticApprovalRejection": "APPLY_CONFIGURATION_COULD_LOAD_ORIGINAL_MODULE_INSTEAD_OF_AUTHORIZED_EXTERNAL_CANDIDATE",
+  "candidateActuallyLoaded": false,
+  "installedFileOverwrite": false,
+  "newProjectCreated": false,
+  "otherInstancesReconfigured": false,
+  "originalRestored": true,
+  "freshCommandCount": 263,
+  "newEndpointsMissing": [
+    "GetNativeGridDefaultsV1",
+    "GetNativeGridElementsV1",
+    "CreateNativeGridElementsV1",
+    "ModifyNativeGridElementsV1",
+    "GetNativeStairGeometryV1",
+    "EvaluateNativeStairGeometryV1",
+    "CreateExactStairsV1",
+    "ModifyNativeStairGeometryV1"
+  ],
+  "modelCreateModifyCalls": 0,
+  "uiSaveOpenCycles": 2,
+  "backupBytesVerified": true,
+  "nextGate": "USER_ASSISTED_UNAMBIGUOUS_TEST_INSTANCE_CANDIDATE_LOADING_THEN_MODULE_HASH_AND_FRESH_SCHEMA_VERIFICATION"
+}

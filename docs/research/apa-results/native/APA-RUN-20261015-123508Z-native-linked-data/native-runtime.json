@@ -1,0 +1,46 @@
+{
+  "schema": "APA_NATIVE_LINKED_DATA_V1",
+  "status": "LIVE_IFC_READ_PASS_WITH_CAPTURED_COMPONENT_MATERIAL_FLOW",
+  "schemaCommands": 263,
+  "selectedElements": 13,
+  "ifcIDs": 12,
+  "ifcTypes": {
+    "IfcCurtainWall": 1,
+    "IfcRailing": 2,
+    "IfcSlab": 1,
+    "IfcMember": 7,
+    "IfcPlate": 1,
+    "": 1
+  },
+  "ifcProperties": 61,
+  "attributes": {
+    "BuildingMaterial": 59,
+    "Surface": 132,
+    "Composite": 24
+  },
+  "graphNodes": 196,
+  "graphEdges": 319,
+  "edgeKinds": {
+    "NATIVE_COMPONENT_BUILDING_MATERIAL": 23,
+    "NATIVE_FRAME_OWN_SURFACE": 17,
+    "NATIVE_HIERARCHICAL_PARENT": 148,
+    "NATIVE_HIERARCHICAL_ROOT": 119,
+    "NATIVE_IFC_IDENTITY_NOT_EXPORT_ACCEPTANCE": 12
+  },
+  "affected": 45,
+  "omitted": {
+    "DECLARED_OWNER_DIFFERS_FROM_PARENT_NO_INFERRED_EDGE": 24,
+    "IFC_IDENTITY_MISSING_OR_NATIVE_ERROR": 1
+  },
+  "componentAuthority": "PINNED_PRIOR_NATIVE_READ_NOT_CURRENT_APX",
+  "savedBytesUnchanged": true,
+  "inventory409Unchanged": true,
+  "nativeModelWrites": 0,
+  "quantityEngineCalled": false,
+  "offlineTestsRun": false,
+  "rawIFCBundleSHA256": "e4643e224c7e11e70472157bc22f3fab070abc7644c17b1258a12f078e084e2b",
+  "enhancedSDKRuntime": "NOT_VERIFIED_NEW_BINARY_REQUIRES_PERMISSION",
+  "offlineCI": "NOT_RUN_USER_INSTRUCTION",
+  "engineering": "NOT_VERIFIED",
+  "IFCExportCompatibility": "NOT_VERIFIED"
+}

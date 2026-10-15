@@ -1,0 +1,19 @@
+{
+  "schema": "APA_NATIVE_COMPONENT_DATAFLOW_V1",
+  "status": "CAPTURED_NATIVE_MEMBERSHIP_TO_EXISTING_BIM_GRAPH_PASS",
+  "nativeSourceCommand": "GetSubelementsOfHierarchicalElements",
+  "stairs": 2,
+  "nodes": 88,
+  "edges": 86,
+  "affected": 42,
+  "updateOrderCount": 42,
+  "sourceSHA256": "67c4dd8a7f03a3ed8f0fdd91688279712f9dc488959e97e3cfc31ff65f071abe",
+  "planHash": "6731949d2a7e2b88efb205e2ce8e4e0840156401fd2bbb0c43ce0e18a9d527f4",
+  "localCommand": "APAAnalysis.DependencyImpact",
+  "nativeModelWrites": 0,
+  "geometryAuthority": "MEMBERSHIP_NOT_PHYSICAL_CONTACT",
+  "newComponentSDKRuntime": "NOT_VERIFIED_PENDING_CANDIDATE",
+  "baselineCount": 258,
+  "baselineNativeDetailsSHA256": "e881660392fd3f298e7bc9d10b8758028eeeff67f5c3ea18b71e93e31e1b90fb",
+  "savedSHA256": "aec45a04b5814a02f640c3826f09dd6e5e6e7a4e6a32e4adaf9036f8ce381031"
+}

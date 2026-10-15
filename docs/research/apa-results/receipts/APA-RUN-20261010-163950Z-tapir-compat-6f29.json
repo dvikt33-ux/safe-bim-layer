@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:e857db78a3a4d9a0bb63bcf168187956d804b8f688356b7d8307cce51881f8f2",
+  "index_commit_sha": "c18413a500377be1c2e60191111453aa2da17a63",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "c18413a500377be1c2e60191111453aa2da17a63",
+  "report_path": "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md",
+  "report_sha256": "d6310aa2322a21b4a31b65eabde404ff5e4cffdae8c88200699e521cabd5131d",
+  "run_id": "APA-RUN-20261010-163950Z-tapir-compat-6f29",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

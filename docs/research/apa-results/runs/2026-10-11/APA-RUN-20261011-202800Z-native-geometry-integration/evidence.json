@@ -1,0 +1,33 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-NATIVE-GEOMETRY-INTEGRATED",
+      "evidence_ids": [
+        "EV-GEOMETRY-ACCEPTANCE",
+        "EV-GEOMETRY-RAW-BYTES"
+      ],
+      "statement": "Current source independently replays captured native17element geometry/contact readback; 2D overlap remains separate from native3D collision. Expanded geometry and engineering remain unverified.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-GEOMETRY-ACCEPTANCE",
+      "kind": "TEST_RESULT",
+      "sha256": "aa5edcea313719e66cc2e2bb1c8ec926147e964210d3df852bf07b7cfdfd0ac1",
+      "source_revision": "ec401314c185df4845ccb6ae7b15e57234a46cad",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261011-202800Z-native-geometry-integration/acceptance.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-GEOMETRY-RAW-BYTES",
+      "kind": "LOCAL_LOG",
+      "sha256": "9afab8d09c00ce228753b3a602b8b9f1c58179a23ddb588b26abfed5a13504db",
+      "source_revision": "ec401314c185df4845ccb6ae7b15e57234a46cad",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261011-202800Z-native-geometry-integration/EVIDENCE_SHA256.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261011-202800Z-native-geometry-integration",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

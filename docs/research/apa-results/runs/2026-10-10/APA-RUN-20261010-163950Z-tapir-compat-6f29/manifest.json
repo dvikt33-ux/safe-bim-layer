@@ -1,0 +1,142 @@
+{
+  "action_id": "APA-P10.A02",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-TAPIR-VERSION-MATRIX-6F29",
+      "evidence_ids": [
+        "EV-TAPIR-ADDON-MAIN",
+        "EV-TAPIR-STORIES",
+        "EV-TAPIR-BBOX",
+        "EV-TAPIR-RELEASES"
+      ],
+      "statement": "1.5.9/1.6.0/1.7.0 upstream source registration and fixes differ; 1.6 has Slab bbox/top-story fixes; 1.7 adds SetIFCPropertiesOfElements",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-TAPIR-PYTHON-TRANSPORT-6F29",
+      "evidence_ids": [
+        "EV-TAPIR-ACLIB",
+        "EV-TAPIR-COMMAND-BASE"
+      ],
+      "statement": "aclib uses HTTP JSON API.ExecuteAddOnCommand, default port 19723, no timeout, returns None or prints nested errors; same source text across three upstream tags",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-LOCAL-1510-UNKNOWN-6F29",
+      "evidence_ids": [
+        "EV-TAPIR-VERSION-API"
+      ],
+      "statement": "Installed locally modified Tapir 1.5.10 binary/source SHA and command availability were not independently read in this run",
+      "status": "NOT_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-TAPIR-ADDON-MAIN",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "1.7.0",
+      "uri": "https://github.com/ENZYME-APD/tapir-archicad-automation/blob/02691b5d680b60c73317e8e49b78ab14dfd4c9d8/archicad-addon/Sources/AddOnMain.cpp#L178-L350",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-TAPIR-STORIES",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "1.7.0",
+      "uri": "https://github.com/ENZYME-APD/tapir-archicad-automation/blob/02691b5d680b60c73317e8e49b78ab14dfd4c9d8/archicad-addon/Sources/ProjectCommands.cpp#L748-L790",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-TAPIR-BBOX",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "1.7.0",
+      "uri": "https://github.com/ENZYME-APD/tapir-archicad-automation/blob/02691b5d680b60c73317e8e49b78ab14dfd4c9d8/archicad-addon/Sources/ElementCommands.cpp#L4258-L4305",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-TAPIR-ACLIB",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "1.7.0",
+      "uri": "https://github.com/ENZYME-APD/tapir-archicad-automation/blob/02691b5d680b60c73317e8e49b78ab14dfd4c9d8/archicad-addon/Examples/aclib/__init__.py#L5-L69",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-TAPIR-COMMAND-BASE",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "1.7.0",
+      "uri": "https://github.com/ENZYME-APD/tapir-archicad-automation/blob/02691b5d680b60c73317e8e49b78ab14dfd4c9d8/archicad-addon/Sources/CommandBase.cpp#L7-L64",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-TAPIR-VERSION-API",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "1.7.0",
+      "uri": "https://github.com/ENZYME-APD/tapir-archicad-automation/blob/02691b5d680b60c73317e8e49b78ab14dfd4c9d8/archicad-addon/Sources/ApplicationCommands.cpp#L55-L86",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-TAPIR-RELEASES",
+      "kind": "GITHUB_PR",
+      "sha256": null,
+      "source_revision": "1.6.0",
+      "uri": "https://github.com/ENZYME-APD/tapir-archicad-automation/releases/tag/1.6.0",
+      "verification": "SOURCE_READ"
+    }
+  ],
+  "executor": "chatgpt:apa-technical",
+  "executor_run_id": "APA-RUN-20261010-163950Z-tapir-compat-6f29",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-10T16:42:28Z",
+  "idempotency_key": "sha256:e857db78a3a4d9a0bb63bcf168187956d804b8f688356b7d8307cce51881f8f2",
+  "inputs": [
+    "ART-REGISTER"
+  ],
+  "next_substep": "APA-P10.A02.S02",
+  "phase": "SOURCE",
+  "plan_id": "APA-P10",
+  "run_id": "APA-RUN-20261010-163950Z-tapir-compat-6f29",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "Archicad 29 (target; not invoked)",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "sdk": "29.3100 (target, not built)",
+    "source_branch": "research/apa-verified-results-hub-20261010",
+    "tapir": "upstream 1.5.9/1.6.0/1.7.0; local modified 1.5.10 NOT_VERIFIED"
+  },
+  "source_revisions": [
+    {
+      "revision": "1.5.9",
+      "source_sha": "d0dbb11b13942e014661e1402b07958b70cd9dba",
+      "uri": "https://github.com/ENZYME-APD/tapir-archicad-automation/tree/d0dbb11b13942e014661e1402b07958b70cd9dba"
+    },
+    {
+      "revision": "1.6.0",
+      "source_sha": "e0d4cca231f15c99da0b91cb2e591ab3758ae97a",
+      "uri": "https://github.com/ENZYME-APD/tapir-archicad-automation/tree/e0d4cca231f15c99da0b91cb2e591ab3758ae97a"
+    },
+    {
+      "revision": "1.7.0",
+      "source_sha": "02691b5d680b60c73317e8e49b78ab14dfd4c9d8",
+      "uri": "https://github.com/ENZYME-APD/tapir-archicad-automation/tree/02691b5d680b60c73317e8e49b78ab14dfd4c9d8"
+    }
+  ],
+  "started_at": "2026-10-10T16:39:50Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P10.A02.S01"
+}

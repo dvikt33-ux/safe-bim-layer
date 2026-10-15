@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:b12f8ad536d4afafff03ee168b5666a6856841469e12427752284e093047df36",
+  "index_commit_sha": "bb304562a66b8cf101caea7d92a200572b4ed8f9",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "bb304562a66b8cf101caea7d92a200572b4ed8f9",
+  "report_path": "docs/research/apa-results/runs/2026-10-15/APA-RUN-20261015-071450Z-sdk-component-context/REPORT.md",
+  "report_sha256": "1da8a6729bac77f56510916e78b00cbcae3dc79a73f60a10227cdc18c32d56f7",
+  "run_id": "APA-RUN-20261015-071450Z-sdk-component-context",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

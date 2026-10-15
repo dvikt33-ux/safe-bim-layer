@@ -1,0 +1,416 @@
+{
+  "status": "ACTUAL_CURRENT107_IFC_NATIVE_BEAM_BODY_MATERIAL_QUANTITY_PASS",
+  "ifcFileSha256": "31753cb88f64aebe2d3c487116c4a207538e081d605e5db995a2ea1cacc30f83",
+  "nativeGuidCount": 107,
+  "contextMappings": 43,
+  "boundsMatchCount": 43,
+  "ifcElementCount": 50,
+  "nativeAndClassifiedMorphDistinction": [
+    {
+      "stepId": "native-source-beam-c4",
+      "nativeTool": "Beam",
+      "actualNativeType": "Beam",
+      "actualIfcType": "IfcBeam",
+      "materials": [
+        "Дерево - Конструкционное"
+      ],
+      "sourceSegmentGuids": [
+        "id-sha256:fd9a8ca900b736676d20"
+      ],
+      "nativeComparison": {
+        "areaDeltaSquareMeters": 1.781769398689903e-09,
+        "volumeDeltaCubicMeters": 7.787288869298692e-11,
+        "status": "IFC_NATIVE_QUANTITIES_MATCH"
+      },
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Балка",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "nativeQuantities": {
+        "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+        "surfaceAreaSquareMeters": 3.5074999982182264,
+        "volumeCubicMeters": 0.03750000007823655,
+        "bodyCount": 1,
+        "authority": "Actual resultant planar faces with holes and independently counted closed edges",
+        "sourceSegmentGuids": [
+          "id-sha256:fd9a8ca900b736676d20"
+        ],
+        "ownershipAuthority": "SDK_HOST_GUID_AND_NATIVE_SEGMENT_TYPE"
+      },
+      "ifcBoundsMeters": [
+        [
+          40.0,
+          50.0
+        ],
+        [
+          45.94825788865416,
+          46.10030950365628
+        ],
+        [
+          6.87427197590234,
+          6.92140697271354
+        ]
+      ],
+      "boundsDeltaMeters": 3.4583536034915596e-10
+    },
+    {
+      "stepId": "native-source-beam-c5",
+      "nativeTool": "Beam",
+      "actualNativeType": "Beam",
+      "actualIfcType": "IfcBeam",
+      "materials": [
+        "Дерево - Конструкционное"
+      ],
+      "sourceSegmentGuids": [
+        "id-sha256:6dc4d8041bb04f44a9c2"
+      ],
+      "nativeComparison": {
+        "areaDeltaSquareMeters": 4.319128832364072e-09,
+        "volumeDeltaCubicMeters": 1.0617991902384105e-10,
+        "status": "IFC_NATIVE_QUANTITIES_MATCH"
+      },
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Балка",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "nativeQuantities": {
+        "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+        "surfaceAreaSquareMeters": 1.2010767963063635,
+        "volumeCubicMeters": 0.014950250229727222,
+        "bodyCount": 1,
+        "authority": "Actual resultant planar faces with holes and independently counted closed edges",
+        "sourceSegmentGuids": [
+          "id-sha256:6dc4d8041bb04f44a9c2"
+        ],
+        "ownershipAuthority": "SDK_HOST_GUID_AND_NATIVE_SEGMENT_TYPE"
+      },
+      "ifcBoundsMeters": [
+        [
+          42.475,
+          42.525
+        ],
+        [
+          41.94078598232523,
+          47.85373595332522
+        ],
+        [
+          6.21746937898471,
+          7.161692187633269
+        ]
+      ],
+      "boundsDeltaMeters": 3.667306458510211e-10
+    },
+    {
+      "stepId": "source-section-c4",
+      "nativeTool": "Morph",
+      "actualNativeType": "Morph",
+      "actualIfcType": "IfcBuildingElementProxy",
+      "materials": [
+        "Дерево - Конструкционное"
+      ],
+      "sourceSegmentGuids": [],
+      "nativeComparison": null,
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Прокси Строительного Элемента",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "nativeQuantities": {
+        "status": "NATIVE_QUANTITIES_NOT_VERIFIED",
+        "reason": "CURVED_NATIVE_BODY_NOT_QUANTIFIED"
+      },
+      "ifcBoundsMeters": [
+        [
+          40.0,
+          50.0
+        ],
+        [
+          41.93331407611876,
+          42.08536569112088
+        ],
+        [
+          6.267472567151421,
+          6.314607563962621
+        ]
+      ],
+      "boundsDeltaMeters": 1.5142020970415615e-10
+    },
+    {
+      "stepId": "source-support-counterbatten-c5",
+      "nativeTool": "Morph",
+      "actualNativeType": "Morph",
+      "actualIfcType": "IfcBeam",
+      "materials": [
+        "Дерево - Конструкционное"
+      ],
+      "sourceSegmentGuids": [],
+      "nativeComparison": null,
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Балка",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "nativeQuantities": {
+        "status": "NATIVE_QUANTITIES_NOT_VERIFIED",
+        "reason": "CURVED_NATIVE_BODY_NOT_QUANTIFIED"
+      },
+      "ifcBoundsMeters": [
+        [
+          44.975,
+          45.025
+        ],
+        [
+          41.937050029,
+          47.85747190665046
+        ],
+        [
+          6.2180340131072445,
+          7.161127553510735
+        ]
+      ],
+      "boundsDeltaMeters": 4.892655169896898e-10
+    },
+    {
+      "stepId": "native-trim-specimen-wall",
+      "nativeTool": "Wall",
+      "actualNativeType": "Wall",
+      "actualIfcType": "IfcWall",
+      "materials": [
+        "Железобетон - Конструкционный"
+      ],
+      "sourceSegmentGuids": [],
+      "nativeComparison": {
+        "areaDeltaSquareMeters": 4.288793320483819e-09,
+        "volumeDeltaCubicMeters": 6.188631829218139e-10,
+        "status": "IFC_NATIVE_QUANTITIES_MATCH"
+      },
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Стена",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "nativeQuantities": {
+        "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+        "surfaceAreaSquareMeters": 65.55522795057426,
+        "volumeCubicMeters": 8.793736090754438,
+        "bodyCount": 1,
+        "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+      },
+      "ifcBoundsMeters": [
+        [
+          86.85,
+          87.15
+        ],
+        [
+          40.15,
+          47.85
+        ],
+        [
+          3.0,
+          7.38868275029235
+        ]
+      ],
+      "boundsDeltaMeters": 2.923501440932341e-10
+    },
+    {
+      "stepId": "native-trim-specimen-roof",
+      "nativeTool": "Roof",
+      "actualNativeType": "Roof",
+      "actualIfcType": "IfcRoof",
+      "materials": [
+        "Железобетон - Конструкционный"
+      ],
+      "sourceSegmentGuids": [],
+      "nativeComparison": {
+        "areaDeltaSquareMeters": 2.1557582385867136e-09,
+        "volumeDeltaCubicMeters": 2.746816640808447e-08,
+        "status": "IFC_NATIVE_QUANTITIES_MATCH"
+      },
+      "classifications": [
+        {
+          "type": "IfcClassificationReference",
+          "identifier": "Крыша",
+          "name": null,
+          "source": "Классификация Archicad"
+        }
+      ],
+      "nativeQuantities": {
+        "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+        "surfaceAreaSquareMeters": 167.61724529790098,
+        "volumeCubicMeters": 15.714456433731275,
+        "bodyCount": 1,
+        "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+      },
+      "ifcBoundsMeters": [
+        [
+          82.0,
+          92.0
+        ],
+        [
+          40.0,
+          48.02988762649472
+        ],
+        [
+          6.004517072947524,
+          7.4113530330010935
+        ]
+      ],
+      "boundsDeltaMeters": 4.947224852003274e-10
+    }
+  ],
+  "quantities": {
+    "schema": "APA_QUANTIFIED_IFC_EXCHANGE_V1",
+    "ifcSchema": "IFC2X3",
+    "fileSha256": "31753cb88f64aebe2d3c487116c4a207538e081d605e5db995a2ea1cacc30f83",
+    "lengthUnitScaleToMeters": 0.001,
+    "quantityMatchCount": 18,
+    "quantityMismatchCount": 0,
+    "semanticCompatibility": "NOT_VERIFIED",
+    "engineeringAcceptance": "NOT_VERIFIED",
+    "nativeWrites": 0
+  },
+  "materialAssignmentCount": 24,
+  "nativePortRelationCount": 12,
+  "openingHostCount": 6,
+  "elementConnections": [
+    {
+      "firstIfcId": "ifc-id-sha256:70695bcaa08cbef850e7",
+      "secondIfcId": "ifc-id-sha256:40d9f2ff875037f44232",
+      "relationType": "IfcRelConnectsPathElements"
+    },
+    {
+      "firstIfcId": "ifc-id-sha256:3ce03e3a1c27e3fc41ca",
+      "secondIfcId": "ifc-id-sha256:40d9f2ff875037f44232",
+      "relationType": "IfcRelConnectsPathElements"
+    },
+    {
+      "firstIfcId": "ifc-id-sha256:ae75b572ace92bf62a43",
+      "secondIfcId": "ifc-id-sha256:70695bcaa08cbef850e7",
+      "relationType": "IfcRelConnectsPathElements"
+    },
+    {
+      "firstIfcId": "ifc-id-sha256:ae75b572ace92bf62a43",
+      "secondIfcId": "ifc-id-sha256:3ce03e3a1c27e3fc41ca",
+      "relationType": "IfcRelConnectsPathElements"
+    },
+    {
+      "firstIfcId": "ifc-id-sha256:d8e48a60e808edc2b82e",
+      "secondIfcId": "ifc-id-sha256:6770c81f48b3b966e118",
+      "relationType": "IfcRelConnectsPathElements"
+    },
+    {
+      "firstIfcId": "ifc-id-sha256:f38f48ee9cc9344735a8",
+      "secondIfcId": "ifc-id-sha256:6770c81f48b3b966e118",
+      "relationType": "IfcRelConnectsPathElements"
+    },
+    {
+      "firstIfcId": "ifc-id-sha256:6e8c1ef47be1a405bf28",
+      "secondIfcId": "ifc-id-sha256:d8e48a60e808edc2b82e",
+      "relationType": "IfcRelConnectsPathElements"
+    },
+    {
+      "firstIfcId": "ifc-id-sha256:6e8c1ef47be1a405bf28",
+      "secondIfcId": "ifc-id-sha256:f38f48ee9cc9344735a8",
+      "relationType": "IfcRelConnectsPathElements"
+    }
+  ],
+  "portConnections": [
+    {
+      "firstPortIfcId": "ifc-id-sha256:0e765aa1e3a44313b33c",
+      "secondPortIfcId": "ifc-id-sha256:6cfc4fa5c1f55dad7808",
+      "firstOwnerIfcId": "ifc-id-sha256:ad1443733438359b5595",
+      "secondOwnerIfcId": "ifc-id-sha256:4225239b399b5ebb55db"
+    },
+    {
+      "firstPortIfcId": "ifc-id-sha256:cd35462150af50a6d082",
+      "secondPortIfcId": "ifc-id-sha256:99c28c58743e54279010",
+      "firstOwnerIfcId": "ifc-id-sha256:9f1c7cbd591f67a5ae22",
+      "secondOwnerIfcId": "ifc-id-sha256:4225239b399b5ebb55db"
+    },
+    {
+      "firstPortIfcId": "ifc-id-sha256:0093123bed06d94ed56f",
+      "secondPortIfcId": "ifc-id-sha256:bf78dab6551efe1d65c7",
+      "firstOwnerIfcId": "ifc-id-sha256:11bde787811d27af884d",
+      "secondOwnerIfcId": "ifc-id-sha256:29538bdaede870302729"
+    },
+    {
+      "firstPortIfcId": "ifc-id-sha256:030610263c42521f9a77",
+      "secondPortIfcId": "ifc-id-sha256:b20cbe9ea11187297b9e",
+      "firstOwnerIfcId": "ifc-id-sha256:bd2bc6207c4c0eaaad7b",
+      "secondOwnerIfcId": "ifc-id-sha256:29538bdaede870302729"
+    },
+    {
+      "firstPortIfcId": "ifc-id-sha256:e328923a4f50f91ca98a",
+      "secondPortIfcId": "ifc-id-sha256:5c2ef20494e5dd893cdc",
+      "firstOwnerIfcId": "ifc-id-sha256:11bde787811d27af884d",
+      "secondOwnerIfcId": "ifc-id-sha256:cf480d0daa5237409069"
+    },
+    {
+      "firstPortIfcId": "ifc-id-sha256:17ef89b4fa1ff3bae08a",
+      "secondPortIfcId": "ifc-id-sha256:3ddfb48d2be0b414d433",
+      "firstOwnerIfcId": "ifc-id-sha256:11bde787811d27af884d",
+      "secondOwnerIfcId": "ifc-id-sha256:46007ce2328b34764d7c"
+    },
+    {
+      "firstPortIfcId": "ifc-id-sha256:ec28502c84ff2a68992e",
+      "secondPortIfcId": "ifc-id-sha256:003ef6bf4a7b2ff3025a",
+      "firstOwnerIfcId": "ifc-id-sha256:9f1c7cbd591f67a5ae22",
+      "secondOwnerIfcId": "ifc-id-sha256:4e44abc5e26177e2f23f"
+    },
+    {
+      "firstPortIfcId": "ifc-id-sha256:e281133ce9e41b9188a0",
+      "secondPortIfcId": "ifc-id-sha256:bee3c4cbe13dd87a9ce3",
+      "firstOwnerIfcId": "ifc-id-sha256:af397dd13e0d376b3d4e",
+      "secondOwnerIfcId": "ifc-id-sha256:4e44abc5e26177e2f23f"
+    },
+    {
+      "firstPortIfcId": "ifc-id-sha256:8d525093bd88485e65f1",
+      "secondPortIfcId": "ifc-id-sha256:d4101a09698f1939f3bd",
+      "firstOwnerIfcId": "ifc-id-sha256:bd2bc6207c4c0eaaad7b",
+      "secondOwnerIfcId": "ifc-id-sha256:4cf3e94b60d3093387d3"
+    },
+    {
+      "firstPortIfcId": "ifc-id-sha256:9794016fb731f70e0b2c",
+      "secondPortIfcId": "ifc-id-sha256:0e4c42060ca87dc685eb",
+      "firstOwnerIfcId": "ifc-id-sha256:af397dd13e0d376b3d4e",
+      "secondOwnerIfcId": "ifc-id-sha256:4cf3e94b60d3093387d3"
+    },
+    {
+      "firstPortIfcId": "ifc-id-sha256:353b35710f9724ec0070",
+      "secondPortIfcId": "ifc-id-sha256:6bcd682c8b1764f9372c",
+      "firstOwnerIfcId": "ifc-id-sha256:708b48509c3668e4e4ed",
+      "secondOwnerIfcId": "ifc-id-sha256:46007ce2328b34764d7c"
+    },
+    {
+      "firstPortIfcId": "ifc-id-sha256:f1105b58a4601c4bfc4b",
+      "secondPortIfcId": "ifc-id-sha256:ef7ae6d055053c4b7378",
+      "firstOwnerIfcId": "ifc-id-sha256:047706bb4f451b748ec2",
+      "secondOwnerIfcId": "ifc-id-sha256:c41149413eff95772107"
+    }
+  ],
+  "retained96GuidAndGeometry": "PASS",
+  "all107Geometry": "PASS",
+  "plnSha256Unchanged": "47366e08ecdc7cd5340480c7e0bd455e8ab0aaea64b1321085d9fdbad1a2591c",
+  "modelWriteAttempts": 0,
+  "exportAttempts": 1,
+  "fullSemanticCompatibility": "NOT_VERIFIED",
+  "engineeringAcceptance": "ENGINEERING_NOT_VERIFIED",
+  "scope": "Actual native tool and SDK-owned solids, IFC geometry/material/classification/observed relations; native trim/SEO or structural connection semantics not inferred from bounds"
+}

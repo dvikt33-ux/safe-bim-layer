@@ -1,0 +1,88 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261012-010000Z-compatible-integration-v31",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A11",
+  "substep_id": "APA-P70.A11.S01",
+  "executor": "codex-apa-batch-v31-20261012",
+  "executor_run_id": "APA-RUN-20261012-002200Z-compatible-integration-v31",
+  "phase": "SOURCE",
+  "started_at": "2026-10-12T01:01:28Z",
+  "finished_at": "2026-10-12T01:01:28Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29build5101RUS(capturednative)",
+    "sdk": null,
+    "tapir": "1.5.10",
+    "source_branch": "feature/apa-connected-batch-v31-20261012"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/53",
+      "revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+      "source_sha": "286b1ae8614421b927af95c4c278147c8d55baba"
+    }
+  ],
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-COMPATIBLE-NATIVE-PACKAGE-V31",
+      "statement": "Current code connects native Roof/Morph/one straight MEP route, real selected Details joins, native-context CP-SAT and IFC world-bound verification through retained writer. Final22primary/48GUIDs persist; complete engineering/network/manufacturer assembly is not claimed. Publication replays local captures with no new Archicad calls.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-CONNECTED-ACCEPTANCE",
+        "EV-CONNECTED-BYTES"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-CONNECTED-ACCEPTANCE",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-010000Z-compatible-integration-v31/acceptance.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "c38eb499824e1736dbb5b578f143be014bfdfb55aaed9a5d8e780881e2fdeb0f",
+      "source_revision": "286b1ae8614421b927af95c4c278147c8d55baba"
+    },
+    {
+      "evidence_id": "EV-CONNECTED-BYTES",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-010000Z-compatible-integration-v31/EVIDENCE_SHA256.json",
+      "kind": "LOCAL_LOG",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "64f0e581242ae3521b9e02dbad6c81bf0fb4bf3b8b92fd2300cf09fa601d7df2",
+      "source_revision": "286b1ae8614421b927af95c4c278147c8d55baba"
+    }
+  ],
+  "report_markdown": "# APA-P70.A11.S01 — working connected component package v3.1\n\nThe master v3.1 strategy is implemented as a compatible execution package over\nthe accepted native core. Existing Project Accelerator, authored native typed\nreadback, BIM Graph, SceneWriter/SQLite, Model Dump normalizer/topology, owned\nColumnSegments and Roof/Morph donor geometry helpers are reused. New thin\nadapters share absolute metre XYZ, native GUID/story/material/host facts.\nDonor standalone transports/deletions are never invoked. Optional roof/morph/\nmep switches are independent; the original writer defaults remain unchanged.\n\nFunctional connections: selected Details v2.12 IR/entity/fact joins tied to a\nnative Roof; native Roof/Morph/single Ventilation route creation/readback;\nexplicit Morph body repair; actual physical-duct GUID ownership and port/system\nreadback; IfcOpenShell local IFC parsing/GUID/world-bound comparison; OR-Tools\nCP-SAT candidate selection over actual native obstacles. All model writes use\nthe same durable SceneWriter ledger. No new scheduler, executor, own solid engine\nor own pathfinder. The reusable CLI was tested through preflight and one actual\nCreateMorphs with prior connected prefix retained.\n\n## Native scenario and interaction\n\nAC29 build5101 RUS / installed Tapir1.5.10 on the expressly authorized isolated\nwriter test model. Basic single-plane Roof: source upper-floor footprint\n40..50/40..48m, pivotZ6m, thickness0.2m, slope0.15rad. Source-bound ARMO fact\n25×150mm gives a2m project-length diagnostic Morph, with explicit project\nmaterial/placement. It intentionally overlaps the Roof for positive native\ncollision calibration; it is not an ARMO manufacturer assembly approval.\n\nOne Ventilation route between42,46,2.5 and48,46,2.5m has native nominal section\n0.2×0.15m, pinned current system, one segment/two nodes/one physical duct and two\nmatching endpoint ports. Ports are physically unconnected; no full MEP network\nclaim. Generic GetDetails reports Unknown/nativeType150 and GetMEPElements\nomits these current elements; dedicated native getters, physical BREP and exact\nsystem/endpoint evidence provide bounded readback. Actual duct/flange envelope\nis0.262×0.212m. CP-SAT uses it plus0.05m test clearance, selectsY46 among\nY42/44/46; Y44 is blocked by both native columns. Native selected polyline matches\nthe OPTIMAL candidate. Independent duct-vs18core native collision query returns\nzero rows; Roof/Morph calibration independently returns hasBodyCollision=true.\n\nThe installed CreateMorphs size shortcut produced a5-face open surface despite\neight box vertices. It was refused. Read-only reconciliation kept its GUID,\nthen one distinct journaled ModifyMorphs body supplied the missing bottom face.\nActual BREP became6-face closed with verified edge incidence. The compiler now\nexpands size to explicit6-face body before graph validation/hash; a separate\n0.1m diagnostic cube through the reusable CLI proved native creation of it.\nMemo isClosed=false still disagrees with BREP.closed=true; this remains explicit\nand is not silently promoted. Two diagnostic Morphs are retained as test evidence.\n\nTotal this integration:4nativeCreates and1explicitModifyMorphs, no blind retry,\nplus separately journaled local Save/Open and IFC exports. Final model has\n22primary/48total native GUIDs, while all original40 geometry/material/story/\nhost facts and the previously accepted selected GDL/library identities remain\nintact. The CLI addition independently retained all47previous geometry records.\nFinal SaveProject and OpenProject each returned explicit success and all22\nprimaries/48GUIDs were independently re-read after each. An earlier15s Open\ntimeout was reconciled read-only after identity verification, never retried.\nLatest saved/reopened PLN SHA256 `3164f8ea86c9df4491d4b66c852c6b247d6769faf857a5f3381867e3aa801f2d`; final bound plan\n`b803ed3441168410d8337035b28f01e726c88f45db69d6fae83e82180c515c29`.\n\nFinal local IFC2X3 is parsed by IfcOpenShell0.8.5, length unit millimetres with\nscale0.001. All22coordinated entries match actual native absolute metre world\nbounds within1e-5m, including one explicitly mapped physical duct. The routing\ncontainer IFC identifier is absent from export; its physical IfcFlowSegment is\nmapped by its own independently read native/IFC identity. This is identity and\nworld-bound verification, not full face/quantity/semantic or structural equivalence.\n\nDetails archive source SHA is checked; selected ARMO IR executes real joins\nbetween entities and two parameter facts. Eight required entities still lack\ndimension facts; source commit=false is preserved and blocks whole-assembly\ncompilation. The selected cross-section specimen does not override that gate.\nRelease has1142ordinary IR plus73Porotherm context records; the latter need a\nseparate adapter. Manufacturer assembly engineering remains NOT_VERIFIED.\n\n## Code, tests and evidence\n\n[Draft PR53](https://github.com/dvikt33-ux/safe-bim-layer/pull/53), stacked on draftPR51, head `286b1ae8614421b927af95c4c278147c8d55baba`. Ten allowlisted\ncode/test/workflow/document files; new additions scanned for private paths and\nsecrets. [Linux CI38189925845](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38189925845) passes all340tests,\nschema/graph contracts and PowerShell syntax.24new focused tests and11retained\nSceneWriter tests pass locally. Full Windows discovery ran340tests with28\nhistorical SQLite temporary-directory cleanup errors; Windows full PASS is not\nclaimed. Current model/interface code was replayed against final captured native\nresponses and local IFC; publication action makes zero live Archicad calls or\nPLN writes. Earlier actual native mutations are documented separately above.\n\n[Selected acceptance](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-010000Z-compatible-integration-v31/acceptance.json),\n[scoped native/IFC/Details/solver proof](https://github.com/dvikt33-ux/safe-bim-layer/tree/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-010000Z-compatible-integration-v31),\n[checksums](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-010000Z-compatible-integration-v31/EVIDENCE_SHA256.json).\nFull88raw files stay unchanged in a local archive. Only7selected proof files\nplus manifest are published. No PLN/IFC/GSM/LCF/image, filesystem paths, full\ncatalogs, unrelated baseline payload, original native GUIDs or original IFC IDs\nare exported. Public model identities are consistently SHA-tokenized. This is\na privacy-reduced selected proof, not a complete raw project export. Observed\nsmall-model timings are recorded; no large-model speedup is claimed.\n\n## Remaining gaps and next package\n\nShell creation, generic Opening typed readback and SEO execution were not run.\nSAM/SAF solver handoff remains source-only. Details whole assemblies and73context\nrecords need adapters/explicit missing parameters. One straight route is not a\nconnected/branched MEP network; endpoint ports remain unconnected. Normative\nengineering, visible UI, large-model performance and installer remain unverified.\nEarlier material/GDL/core functions are retained. Source71/current263command\nschema were reused; research-only interfaces are not presented as working code.\n\nThis completes A11.S01's bounded compatible-component package acceptance.\nNext: A11.S02 shared-system acceptance, documenting actual module gaps before\ngap-driven A11.S03 work. Core acceptance is preserved; main/APX/earlier tested\nbranches and original LCF are unchanged. No paid service or delegated agent.\n",
+  "next_substep": "APA-P70.A11.S02",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

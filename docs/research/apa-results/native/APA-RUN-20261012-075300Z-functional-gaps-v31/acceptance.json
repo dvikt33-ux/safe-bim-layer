@@ -1,0 +1,79 @@
+{
+  "substep": "APA-P70.A11.S03",
+  "status": "PARTIAL",
+  "scope": "Working gap package; complete engineering/product acceptance not claimed",
+  "codePR": "https://github.com/dvikt33-ux/safe-bim-layer/pull/55",
+  "codeHead": "3191e7ce5071e6de7401f6e520fbd8f3ef2a1ea2",
+  "basePR54Head": "2b499730ac4c52b70d796f2857fb15d7e3d3d676",
+  "offline": "OFFLINE_PASS",
+  "newTests": 31,
+  "hostWindows": {
+    "tests": 371,
+    "seconds": 53.506,
+    "status": "PASS"
+  },
+  "CI": {
+    "run": 38220178336,
+    "head": "3191e7ce5071e6de7401f6e520fbd8f3ef2a1ea2",
+    "linux": {
+      "job": 114714250590,
+      "tests": 371,
+      "seconds": 22.088,
+      "status": "PASS"
+    },
+    "windows": {
+      "job": 114714250857,
+      "tests": 371,
+      "seconds": 147.326,
+      "status": "PASS"
+    },
+    "retainedSchemaGraphAndLauncherChecks": "PASS"
+  },
+  "native": "LIVE_PASS",
+  "originalGuidCount": 48,
+  "originalGUIDAndGeometryPreserved": true,
+  "primaryCount": 27,
+  "totalGuidCount": 59,
+  "nativeWrites": {
+    "CreateMEPRoutingElements": 1,
+    "CreateWalls": 1,
+    "CreateMorphs": 2,
+    "CreateOpenings": 1,
+    "CreateSolidElementLinks": 1
+  },
+  "saveAndReopen": "EXPLICIT_SUCCESS_PLUS_INDEPENDENT_WHOLE_STATE_READBACK_PASS",
+  "latestPLNSha256": "da37fa0fe9b1b255f1618a881a79eb9d4ae8b66993a99cb75fdba30cddc69bb4",
+  "nativeReceiptHash": "b797cac60102feab0c523ae9f5feb1ba82fda950fdd904bd75064d3dfb46a3f3",
+  "nativePublicationBoundary": "Historical isolated writes documented; publication and captured replay have zero native writes",
+  "details": {
+    "contexts": 73,
+    "hostBindings": 657,
+    "contextGraphNodes": 27,
+    "contextGraphEdges": 49,
+    "sourceApplicability": "RC walls not certified Porotherm; source product/material reasons retained",
+    "incompleteManufacturerDimensionEntities": 8
+  },
+  "network": {
+    "routes": 2,
+    "segments": 2,
+    "nodes": 4,
+    "physicalDucts": 2,
+    "reciprocalPhysicalJoins": 1,
+    "outerOpenPorts": 2,
+    "nativeArchitecturalCollisionRows": 0
+  },
+  "ifc": {
+    "schema": "IFC2X3",
+    "mapped": 27,
+    "worldBoundsMatches": 26,
+    "openingHostCutMatches": 1,
+    "nativePortConnectionsExported": 1,
+    "fullSemanticCompatibility": "NOT_VERIFIED"
+  },
+  "reconciliation": "Three successful writes had stopped verifiers; independently reconciled without retry; original journal states retained and separate readback receipts appended",
+  "knownDiagnosticRoofMorphCollision": "Retained original geometry; not a new network/design fault",
+  "engineering": "ENGINEERING_NOT_VERIFIED",
+  "visibleUI": "NOT_VERIFIED",
+  "mainChanged": false,
+  "installedAPXChanged": false
+}

@@ -1,0 +1,67 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261012-191815Z-normative-bindings",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A02",
+  "substep_id": "APA-P70.A02.S02",
+  "executor": "work-normative-bindings-20261012",
+  "executor_run_id": "APA-RUN-20261012-185922Z-normative-bindings",
+  "phase": "SOURCE",
+  "started_at": "2026-10-12T18:59:22Z",
+  "finished_at": "2026-10-12T19:18:15Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29 native evidence captured; publication makes zero native calls",
+    "tapir": "1.5.10",
+    "source_branch": "feature/apa-normative-bindings-20261012"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/66",
+      "revision": "e43bc6055d648270b72dc573a22c9d52c71a83f8",
+      "source_sha": "e43bc6055d648270b72dc573a22c9d52c71a83f8"
+    }
+  ],
+  "inputs": [
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-CSE-RESEARCH"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-NORMATIVE-BINDINGS",
+      "statement": "Working existing-accelerator normative pack attachment, six conditional requirements from five verified official registry metadata entries. Actual cached109GUID/fourjunction body signatures bind24rows:20NOT_VERIFIED and4familyNOT_APPLICABLE. Native geometry/class cannot certify system or jurisdiction. Fullclauses, project applicability and engineering NOT_VERIFIED; no numericlimits invented/enforced. Existing provisional CSE approval unchanged.18newtests,513host/Windows+LinuxCI PASS;5exact code blobs. Zero nativecalls; A02.S02PARTIAL, A11.S03PARTIAL/S10BLOCKED unchanged.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-JUNCTION-PROOF",
+        "EV-JUNCTION-BYTES"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-JUNCTION-PROOF",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-191815Z-normative-bindings/integration.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "1135798a13e3948bd6581e1e9324c6f4dfccf395aed2e1eb12e8ccab5a127b28",
+      "source_revision": "e43bc6055d648270b72dc573a22c9d52c71a83f8"
+    },
+    {
+      "evidence_id": "EV-JUNCTION-BYTES",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-191815Z-normative-bindings/EVIDENCE_SHA256.json",
+      "kind": "LOCAL_LOG",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "976e6a52fb23c83f628420d04971f6f068082fb8e7b594900ba441889b54721b",
+      "source_revision": "e43bc6055d648270b72dc573a22c9d52c71a83f8"
+    }
+  ],
+  "report_markdown": "# A02.S02 — source and edition bindings on existing project packs\n\nThe existing accelerator can now attach a reproducible normative requirement pack to its CSE/project pack and actual native junctions. It retains all selected CSE candidates and their approval state. There is no new geometric executor, compliance solver, native write or external-file import.\n\n`compile_project_normative_pack` uses the existing semantic brief, project pack and native context. A native binding includes GUID, materials/context and actual body signature; a changed BREP invalidates the attached system evidence even when bounds are unchanged. Attachment verifies both the original project-pack digest and the normative result digest.\n\nThe six source-linked requirements cover envelope/thermal bridges, roofing technology, a specifically conditional bitumen-parapet detail, fire interfaces and window installation layers. Official registry metadata for SP50.13330.2024, SP230.1325800.2015, SP17.13330.2017, SP2.13130.2020 and GOST30971-2012 was checked on 2026-10-12. Metadata is distinct from full clause text and project compliance; see primary registry links in the catalog.\n\nJurisdiction is explicit and source-linked. The brief's region or a PLN filename cannot certify it. Native `SinglePlane` describes geometry rather than a roofing technology. Unknown or stale CSE evidence stays NOT_VERIFIED; only a source/body-bound known different technology excludes a system-specific rule. Research clause locators remain NOT_VERIFIED and all numeric evaluation is disabled. No loads, fire classes, thermal coefficients, parapet dimensions or regulatory engineering approval are invented.\n\nThe working integration reuses the previous fresh read-only 109-GUID evidence and four actual Wall/Roof targets, with the existing provisional authored brief/CSE pack. It emits 24 bindings: 20 NOT_VERIFIED, 4 NOT_APPLICABLE (window-family rule). Its normative digest is attached to the unchanged existing pack. Missing jurisdiction, certified layer/system evidence and full clauses are explicit dependencies. Native calls during this step: zero. This is OFFLINE_PASS with cached actual native input; engineering acceptance remains ENGINEERING_NOT_VERIFIED.\n\n18 new focused checks exercise the end-to-end pack, edition mismatch, unknown jurisdiction, family/system applicability, body/material invalidation, malformed data and digest protection. A02.S02 remains PARTIAL until project-specific source applicability and clauses are qualified. This does not close A11.S03/S10 or claim to repair the four Wall/Roof gaps.\n\nPublished code: [draft PR66](https://github.com/dvikt33-ux/safe-bim-layer/pull/66), exact head e43bc6055d648270b72dc573a22c9d52c71a83f8 on PR64 head b056cb76929a62047c82fd66961b72eb4d9078a8. All5 committed GitHub blobs match exactly;513Windows host/Windows+LinuxCI PASS. No new native calls.\n\n\nEvidence: [APA-RUN-20261012-191815Z-normative-bindings](https://github.com/dvikt33-ux/safe-bim-layer/tree/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-191815Z-normative-bindings). Draft PR66, head e43bc6055d648270b72dc573a22c9d52c71a83f8. Stable SHA tokens replace private native identities; raw payloads stay local. Publication makes zero native calls.\n",
+  "next_substep": "APA-P70.A11.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

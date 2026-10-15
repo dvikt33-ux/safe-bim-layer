@@ -1,0 +1,10 @@
+{
+  "status": "ZERO_WORKFLOW_RUNS_FOR_OWN_PUBLISHED_COMMITS",
+  "commitRunCounts": {
+    "39959ae8df9e46ef376679cdd854c2db78385dc7": 0,
+    "9a3091638eaa1a9c72f9a08c17d02855d8419edc": 0
+  },
+  "workflowDispatch": false,
+  "offlineTestsRun": false,
+  "directPublisher": true
+}

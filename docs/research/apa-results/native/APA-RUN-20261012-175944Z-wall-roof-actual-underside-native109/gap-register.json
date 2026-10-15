@@ -1,0 +1,81 @@
+{
+  "substep": "APA-P70.A11.S03",
+  "status": "PARTIAL",
+  "codeHead": "7966db58ca8830b43938a03cc064bcc3e952a21e",
+  "gaps": [
+    {
+      "id": "G01",
+      "status": "FIXED_VERIFIED_PR54_RETAINED",
+      "evidence": "469Windows host and Windows/Linux CI; existing PR54 SQLite fix retained",
+      "remaining": "469Windows host and Windows/Linux CI; existing PR54 SQLite fix retained"
+    },
+    {
+      "id": "G02",
+      "status": "LIVE73_DETAILS_NATIVE_WALL_ROOF_ACTUAL_UNDERSIDE_PASS",
+      "remaining": "Working lower-face source-bound native recipe; four original gaps and full families/cladding/source/engineering remain open"
+    },
+    {
+      "id": "G03",
+      "status": "REAL_NATIVE_C4_C5_BEAM_SUPPORT_PASS_FULL_ASSEMBLY_BLOCKED",
+      "dependency": "APA-P70.A11.S06",
+      "remaining": "25x150mm and50x50mm real Beams with75cm2contact; c5 vertical native end contact to original Morph batten73.1108100945cm2; eight full-assembly dimensions/source commit=false/grade/fixings/rafter bearing remain"
+    },
+    {
+      "id": "G04",
+      "status": "LIVE_REFERENCE200_DIAMETER_AND_RECIPROCAL_TERMINAL_CONNECTION_PASS_MAIN_BRIDGE_BLOCKED",
+      "dependency": "APA-P70.A11.S10",
+      "remaining": "Ø200pair preserved; no explicit sized transition factory/port setters; exposed routing Place supplies empty segment section maps; destructive ConnectLogically excluded. Two components remain."
+    },
+    {
+      "id": "G05",
+      "status": "LIVE_NATIVE_WALL_ROOF_UNDERSIDE_CONTACT_PASS_SHELL_EDIT_GAPS",
+      "dependency": "APA-P70.A11.S07",
+      "remaining": "Actual lower-face contact2.33623338255613m2 and native SEO relationship verified after Save/Open. Request skipPolygonHoles=true/readbackfalse remains metadata NOT_VERIFIED; previous perimeter specimen retained. CreateShells/ModifyShells/ModifyOpenings still unexposed."
+    },
+    {
+      "id": "G06",
+      "status": "REAL_ANALYTICAL_ADAPTERS_RETAINED_EXTERNAL_SAM_SAF_ENGINE_LOAD_NORM_GATES",
+      "dependency": "APA-P70.A11.S08"
+    },
+    {
+      "id": "G07",
+      "status": "ACTUAL45_IFC_MAPPINGS_52_ELEMENTS_UNDERSIDE_WALL_ROOF_QUANTITIES_PASS",
+      "dependency": "APA-P70.A11.S09",
+      "remaining": "45/45bounds,26materials,12port relations,6opening hosts,20quantitymatches/0mismatch; native SEO/contact export semantics and receiver compatibility unverified"
+    },
+    {
+      "id": "G08",
+      "status": "ACTUAL_NATIVE_LOWER_FACE_AND_SLOPED_GAP_INTERPRETATION_PASS",
+      "remaining": "Shared actual BREP planar-face reader retains holes; actual contact and signed gap from face overlap distinguished from bounds/top/perimeter contact. SEOflag mismatch remains explicit, not forced to PASS."
+    },
+    {
+      "id": "G09",
+      "status": "FUNCTIONAL_WORK_PRIORITIZED_NO_INSTALLER_OR_OPTIMIZATION_CLAIM",
+      "remaining": "A11.S04 waits actual S03 completion; S03 remainsPARTIAL andS10BLOCKED"
+    }
+  ],
+  "baselinePR56GuidCount": 95,
+  "currentGuidCount": 109,
+  "sharedContextRecords": 45,
+  "tests": 469,
+  "nextAction": "Apply the now verified native underside recipe to the required actual building interfaces only after explicit target-change authorization, retaining their GUIDs; qualify exposed route-local per-segment section and non-destructive bridge contracts for S10. Continue existing independent source/Shell/analytical/receiver tasks without full-family or engineering claims.",
+  "baselinePR57GuidCount": 96,
+  "nativeToolPolicy": "NATIVE_PARAMETRIC_FIRST; MORPH_LAST_RESORT; real Beam for source c4/c5; missing APA adapter not exemption",
+  "historicalPR57Junctions": {
+    "interfacePairs": 49,
+    "PASS_GEOMETRY": 34,
+    "PASS_DOCUMENTED": 1,
+    "NOT_VERIFIED": 14,
+    "PASS_ENGINEERING": 0,
+    "completeFamilies": "NOT_VERIFIED"
+  },
+  "currentWorkingNativeFunctions": [
+    "REFERENCE200_CIRCULAR_TERMINAL_PAIR",
+    "REAL_BEAM25X150_BEAM50X50_CONTACT",
+    "NATIVE_WALL_ROOF_PERIMETER_ABUTMENT",
+    "SDK_SEGMENT_OWNERSHIP_IFC_QUANTITIES",
+    "ACTUAL_NATIVE_WALL_ROOF_UNDERSIDE_CONTACT",
+    "ACTUAL_SLOPED_FOUR_GAPS_MEASURED"
+  ],
+  "baselinePR59GuidCount": 107
+}

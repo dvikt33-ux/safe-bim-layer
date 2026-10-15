@@ -1,0 +1,25 @@
+{
+  "runId": 38367671224,
+  "head": "93557ed0cd59c471b0f903a03708ed88c8feb31b",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "offline-contracts (ubuntu-latest)",
+      "id": 115196601764,
+      "conclusion": "success",
+      "tests": 623,
+      "upstreamGraphTests": 102,
+      "coreMCPIntegration": "PASS"
+    },
+    {
+      "name": "offline-contracts (windows-latest)",
+      "id": 115196602183,
+      "conclusion": "success",
+      "tests": 623,
+      "upstreamGraphTests": 102,
+      "coreMCPIntegration": "PASS"
+    }
+  ],
+  "hostTests": 623,
+  "newTests": 17
+}

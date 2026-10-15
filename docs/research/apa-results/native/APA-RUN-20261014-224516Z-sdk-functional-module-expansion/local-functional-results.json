@@ -1,0 +1,302 @@
+{
+  "schema": "APA_FUNCTIONAL_MODULE_LOCAL_PROOF_V1",
+  "status": "LOCAL_CALLABLE_VERIFIED",
+  "nativeWrites": 0,
+  "nativeAPXInstalled": false,
+  "engineering": "NOT_VERIFIED",
+  "catalog": {
+    "total": 377,
+    "nativeOrOfficial": 368,
+    "local": 9,
+    "newNativeSDK": 5,
+    "reusedDevKitBuildCommand": 1,
+    "newAnalyticalCapabilities": 6,
+    "reusedExistingAPAUtilities": 3
+  },
+  "versions": {
+    "ifcopenshell": "0.8.5",
+    "networkx": "3.6.1",
+    "shapely": "2.2.0",
+    "ortools": "9.15.6755"
+  },
+  "commands": [
+    "AddOn.APAAnalysis.NormalizeNativeDump",
+    "AddOn.APAAnalysis.NativeBodyQuantities",
+    "AddOn.APAAnalysis.DependencyImpact",
+    "AddOn.APAAnalysis.PolygonRelations",
+    "AddOn.APAAnalysis.ConstrainedAssignment",
+    "AddOn.APAAnalysis.IFCSelect",
+    "AddOn.APAAnalysis.IFCValidate",
+    "AddOn.APAAnalysis.IFCGeometry",
+    "AddOn.APAAnalysis.IFCExchangeFacts"
+  ],
+  "evidenceDomain": "LOCAL_COMPUTATION_ON_SAVED_NATIVE_DUMP_AND_ARCHICAD_IFC_EXPORT_NOT_NEW_LIVE_READ",
+  "sources": {
+    "nativeDumpSHA256": "9dcea15bda60e94b283dff7f0b092af675c69566abac1e3f1b51d6562e65bd7a",
+    "ifcSHA256": "0b9f79480e426556684c6b39cc1f2efb492bfbadff90b7c5414bd031987be0fc"
+  },
+  "results": {
+    "normalizedElements": 126,
+    "quantityStatuses": {
+      "NATIVE_BODY_NOT_AVAILABLE": 79,
+      "NATIVE_PLANAR_BREP_QUANTITIES": 25,
+      "NATIVE_QUANTITIES_NOT_VERIFIED": 22
+    },
+    "impact": {
+      "status": "DAG",
+      "affected": [
+        "roof",
+        "story",
+        "wall",
+        "window"
+      ],
+      "updateOrder": [
+        "story",
+        "roof",
+        "wall",
+        "window"
+      ],
+      "executionAllowed": false
+    },
+    "cycle": {
+      "status": "CYCLIC",
+      "cycleWitness": [
+        [
+          "a",
+          "b"
+        ],
+        [
+          "b",
+          "a"
+        ]
+      ],
+      "executionAllowed": false
+    },
+    "polygonRelations": {
+      "units": "CALLER_COORDINATE_UNITS",
+      "polygons": [
+        {
+          "id": "slab",
+          "area": 32.0,
+          "perimeter": 32.0
+        },
+        {
+          "id": "opening",
+          "area": 3.2399999999999993,
+          "perimeter": 7.199999999999999
+        },
+        {
+          "id": "touching",
+          "area": 6.0,
+          "perimeter": 14.0
+        }
+      ],
+      "relations": [
+        {
+          "first": "slab",
+          "second": "touching",
+          "intersects": true,
+          "touches": true,
+          "intersectionArea": 0.0,
+          "distance": 0.0
+        }
+      ],
+      "scope": "2D_SOURCE_POLYGONS_NOT_3D_NATIVE_COLLISION",
+      "engineering": "NOT_VERIFIED"
+    },
+    "assignment": {
+      "status": "OPTIMAL",
+      "assignment": {
+        "first": "a",
+        "second": "b"
+      },
+      "scope": "EXPLICIT_INTEGER_COSTS_CAPACITIES_NO_DESIGN_INFERENCE",
+      "engineering": "NOT_VERIFIED",
+      "objective": 4.0
+    },
+    "ifcSelectionCount": 9,
+    "ifcValidationStatus": "IFC_SCHEMA_VALID",
+    "ifcValidationIssueCount": 0,
+    "ifcGeometry": [
+      {
+        "status": "IFC_GEOMETRY_COMPUTED",
+        "bounds": [
+          [
+            49.85,
+            50.15
+          ],
+          [
+            39.85,
+            48.15
+          ],
+          [
+            0.0,
+            3.0
+          ]
+        ],
+        "area": 55.199999999999896,
+        "volume": 6.797999999999412,
+        "source": "IfcOpenShell geometry kernel"
+      },
+      {
+        "status": "IFC_GEOMETRY_COMPUTED",
+        "bounds": [
+          [
+            39.85,
+            49.85
+          ],
+          [
+            47.85,
+            48.15
+          ],
+          [
+            0.0,
+            3.0
+          ]
+        ],
+        "area": 67.79999999999993,
+        "volume": 8.704500000000813,
+        "source": "IfcOpenShell geometry kernel"
+      },
+      {
+        "status": "IFC_GEOMETRY_COMPUTED",
+        "bounds": [
+          [
+            39.85,
+            49.85
+          ],
+          [
+            39.85,
+            40.15
+          ],
+          [
+            0.0,
+            3.0
+          ]
+        ],
+        "area": 64.85999999999991,
+        "volume": 8.07449999999946,
+        "source": "IfcOpenShell geometry kernel"
+      }
+    ],
+    "ifcExchangeCounts": {
+      "voidRelations": 6,
+      "materialAssignments": 19,
+      "analyticalMembers": 0
+    }
+  },
+  "dataflow": {
+    "status": "WORKFLOW_CALLABLE_VERIFIED",
+    "steps": 2,
+    "binding": "NormalizeNativeDump.elements -> NativeBodyQuantities.elements",
+    "executor": "Existing BIM Graph sequential dependency routing; no native mutation",
+    "KGselection": true,
+    "idempotentAttachment": true
+  },
+  "events": [
+    {
+      "command": "AddOn.APAAnalysis.NormalizeNativeDump",
+      "resultHash": "8ac2cd4cb52f28da1477562ae37edc1f5d254d9d20bf5512da9e658c12cefb67",
+      "versions": {},
+      "elapsedSeconds": 0.1202391999977408,
+      "nativeWrites": 0
+    },
+    {
+      "command": "AddOn.APAAnalysis.NativeBodyQuantities",
+      "resultHash": "c7df47f37d1d42070cc6ced0450a0ee7823ceec194574342f68c9eadc9f0618d",
+      "versions": {
+        "shapely": "2.2.0"
+      },
+      "elapsedSeconds": 0.5398831999918912,
+      "nativeWrites": 0
+    },
+    {
+      "command": "AddOn.APAAnalysis.DependencyImpact",
+      "resultHash": "f3ea464451224013289aa4fbe8a9d307a95a818ca00e98f490b07db4a0f4b914",
+      "versions": {
+        "networkx": "3.6.1"
+      },
+      "elapsedSeconds": 0.41771130000415724,
+      "nativeWrites": 0
+    },
+    {
+      "command": "AddOn.APAAnalysis.DependencyImpact",
+      "resultHash": "01529df96fd2999e6a316875dbfb57eabc490a3fda337a02e0fe10470f512854",
+      "versions": {
+        "networkx": "3.6.1"
+      },
+      "elapsedSeconds": 0.02361160000145901,
+      "nativeWrites": 0
+    },
+    {
+      "command": "AddOn.APAAnalysis.PolygonRelations",
+      "resultHash": "f1493a822aa5ba703f6e819577d9446b767a07bfac74240f0993fe7fa1c15343",
+      "versions": {
+        "shapely": "2.2.0"
+      },
+      "elapsedSeconds": 0.022549000001163222,
+      "nativeWrites": 0
+    },
+    {
+      "command": "AddOn.APAAnalysis.ConstrainedAssignment",
+      "resultHash": "f075e0e21ac7fe99c207e6cc93d81f37a18093085213e93c79ab2fb30f59fb80",
+      "versions": {
+        "ortools": "9.15.6755"
+      },
+      "elapsedSeconds": 0.46961120000923984,
+      "nativeWrites": 0
+    },
+    {
+      "command": "AddOn.APAAnalysis.IFCSelect",
+      "resultHash": "a3eba7f333196f1a52d566e800776a9f8585718cf18099093a23052ff03ce9dc",
+      "versions": {
+        "ifcopenshell": "0.8.5"
+      },
+      "elapsedSeconds": 0.43755980000423733,
+      "nativeWrites": 0
+    },
+    {
+      "command": "AddOn.APAAnalysis.IFCValidate",
+      "resultHash": "c906229442e40aabaee47c072721ad6dffee889a589622958776f088a6a4a9ce",
+      "versions": {
+        "ifcopenshell": "0.8.5"
+      },
+      "elapsedSeconds": 0.33970359999511857,
+      "nativeWrites": 0
+    },
+    {
+      "command": "AddOn.APAAnalysis.IFCGeometry",
+      "resultHash": "78a15ce3c2e80a936f508c3c2678bfcba0f42b61dfaeebbd90ac4198eedcaacf",
+      "versions": {
+        "ifcopenshell": "0.8.5"
+      },
+      "elapsedSeconds": 0.11080930000753142,
+      "nativeWrites": 0
+    },
+    {
+      "command": "AddOn.APAAnalysis.IFCExchangeFacts",
+      "resultHash": "a9c96d11c4f19e84e4cbcdef5c0110588d873c198e78f96d39d56825b1914f93",
+      "versions": {
+        "ifcopenshell": "0.8.5"
+      },
+      "elapsedSeconds": 0.08357020000403281,
+      "nativeWrites": 0
+    },
+    {
+      "command": "AddOn.APAAnalysis.NormalizeNativeDump",
+      "resultHash": "8ac2cd4cb52f28da1477562ae37edc1f5d254d9d20bf5512da9e658c12cefb67",
+      "versions": {},
+      "elapsedSeconds": 0.09176599999773316,
+      "nativeWrites": 0
+    },
+    {
+      "command": "AddOn.APAAnalysis.NativeBodyQuantities",
+      "resultHash": "c7df47f37d1d42070cc6ced0450a0ee7823ceec194574342f68c9eadc9f0618d",
+      "versions": {
+        "shapely": "2.2.0"
+      },
+      "elapsedSeconds": 0.03962310000497382,
+      "nativeWrites": 0
+    }
+  ]
+}

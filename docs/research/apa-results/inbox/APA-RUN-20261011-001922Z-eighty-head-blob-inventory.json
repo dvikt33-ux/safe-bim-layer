@@ -1,0 +1,218 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261011-001922Z-eighty-head-blob-inventory",
+  "plan_id": "APA-P00",
+  "action_id": "APA-P00.A02",
+  "substep_id": "APA-P00.A02.S03",
+  "executor": "chatgpt-gpt6-branch-blob-inventory-20261011",
+  "executor_run_id": "APA-RUN-20261011T000452Z-branch-blobs-69",
+  "phase": "SOURCE",
+  "started_at": "2026-10-11T00:04:52Z",
+  "finished_at": "2026-10-11T00:19:22Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "Archicad 29 not contacted",
+    "sdk": null,
+    "tapir": null,
+    "source_branch": "research/apa-verified-results-hub-20261010"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/CURRENT_BRANCH_HEADS_20261011.json",
+      "revision": "2026-10-11T00:14:07.915Z",
+      "source_sha": "88b37fb80091d6784821daa9bf5f5d9737c1e9e8"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/CURRENT_BLOB_AGGREGATE_20261011.json",
+      "revision": "GitHub rest complete trees",
+      "source_sha": "d5b73ee00c8da3455fbc6ae990423d31cda89077"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json",
+      "revision": "source index 71 pinned refs",
+      "source_sha": "74b997204bbc26808baa73b46c09c5f4fe5aa62c"
+    }
+  ],
+  "inputs": [
+    "ART-REGISTER",
+    "ART-BRANCHES",
+    "ART-APA-BRANCH-DEDUP-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-CURRENT-EIGHTY-TREES",
+      "statement": "Complete current 83-branch snapshot contains 80 distinct HEAD SHA. Every HEAD tree was fetched, and each response was non-truncated.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-CENSUS-83",
+        "EV-AGGREGATE-80"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-EXACT-BLOB-COUNT",
+      "statement": "Exactly 14920 file occurrences correspond to 1578 Git blob SHA, 1594 paths, 1748 path-SHA pairs; 422 blob SHA appear in only one HEAD; 44 blob SHA span multiple paths and 91 paths have multiple SHA.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-AGGREGATE-80",
+        "EV-EXCLUSIVE-422",
+        "EV-COLLISIONS"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-ARCHIVE-71-CONTEXT",
+      "statement": "71 MD/JSON source blobs in old archicad29-tapir159 research branch are unique among captured HEADs; exact Git SHA overlap with the pinned canonical revision was zero. Their source URLs/SHA were saved, but raw files were not bulk-migrated.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-SOURCE-71-INDEX",
+        "EV-CANONICAL-COVERAGE",
+        "EV-EXCLUSIVE-422"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-ARCHIVE-PROPOSALS-ONLY",
+      "statement": "Archive findings about deterministic compiler, project context, transport, and optional local AI are historical source proposals; original Tapir 1.5.9 assumptions have not been revalidated against current installed 1.5.10.",
+      "status": "REPORTED",
+      "evidence_ids": [
+        "EV-ARCH-DOC-1",
+        "EV-ARCH-DOC-2",
+        "EV-ARCH-DOC-3",
+        "EV-ARCH-DOC-4",
+        "EV-ARCH-DOC-5"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-NEW-HIGHLEVEL-SOURCE",
+      "statement": "Current highlevel whole-model branch has ten uniquely hashed files in the 80-head census; source docs describe offline/synthetic test evidence and a read-only partial-scene probe; no Archicad live creation was independently certified in this audit.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-EXCLUSIVE-422",
+        "EV-ARCH-DOC-6",
+        "EV-ARCH-DOC-7"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-SEMANTIC-COMPLETENESS-PENDING",
+      "statement": "SHA-level Git audit alone does not establish semantic completeness of historic research, readiness for native BIM production, or safe deletion of any Git branch.",
+      "status": "NOT_VERIFIED",
+      "evidence_ids": [
+        "EV-AGGREGATE-80",
+        "EV-EXCLUSIVE-422"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-CENSUS-83",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/CURRENT_BRANCH_HEADS_20261011.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "88b37fb80091d6784821daa9bf5f5d9737c1e9e8"
+    },
+    {
+      "evidence_id": "EV-AGGREGATE-80",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/CURRENT_BLOB_AGGREGATE_20261011.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "d5b73ee00c8da3455fbc6ae990423d31cda89077"
+    },
+    {
+      "evidence_id": "EV-EXCLUSIVE-422",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/CURRENT_BLOB_EXCLUSIVE_20261011.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "6c014487f0c89ec32e23ab6956b900a4b1d8ec6e"
+    },
+    {
+      "evidence_id": "EV-COLLISIONS",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/CURRENT_BLOB_COLLISIONS_20261011.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "c232da1192221bf89ad9de45b9d3e5810ab5a30d"
+    },
+    {
+      "evidence_id": "EV-SOURCE-71-INDEX",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "74b997204bbc26808baa73b46c09c5f4fe5aa62c"
+    },
+    {
+      "evidence_id": "EV-CANONICAL-COVERAGE",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/CANONICAL_BLOB_COVERAGE_20261011.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "5d7ed7d8fd8132e57cf6524f718238ccbfd6dab9"
+    },
+    {
+      "evidence_id": "EV-ARCH-DOC-1",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Farchicad29-tapir159-expansion/research/archicad29-tapir159/09_final_audit/FINAL_RESEARCH_AUDIT_V2_AFTER_PASS_90.md",
+      "kind": "OTHER",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "6935db635db7f1cba2581ccc87feb3a606b3adb1"
+    },
+    {
+      "evidence_id": "EV-ARCH-DOC-2",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Farchicad29-tapir159-expansion/research/archicad29-tapir159/09_final_audit/FINAL_PROJECT_CONTEXT_BRIDGE_AUDIT_AFTER_160.md",
+      "kind": "OTHER",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "208e807425f698b93838552ef15ed5ba53491ef0"
+    },
+    {
+      "evidence_id": "EV-ARCH-DOC-3",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Farchicad29-tapir159-expansion/research/archicad29-tapir159/09_final_audit/FINAL_TRANSPORT_SYNC_OUT_OF_BOX_AUDIT_AFTER_200.md",
+      "kind": "OTHER",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "4f1b24559ca10b55e60f017bb0a4b7eb2895e453"
+    },
+    {
+      "evidence_id": "EV-ARCH-DOC-4",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Farchicad29-tapir159-expansion/research/archicad29-tapir159/06_integration_audits/INTEGRATION_BACKLOG.md",
+      "kind": "OTHER",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "c85583dd42ed45b4e766f92f50c1981441ff1094"
+    },
+    {
+      "evidence_id": "EV-ARCH-DOC-5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Farchicad29-tapir159-expansion/research/archicad29-tapir159/07_live_probe_backlog/NEXT_CONTROLLED_PROBES.md",
+      "kind": "OTHER",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "dbc6abc9b83549f8dd352683bc407662c50749b4"
+    },
+    {
+      "evidence_id": "EV-ARCH-DOC-6",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature%2Fapa-highlevel-whole-model-20261011/docs/APA_HIGHLEVEL_EXECUTION.md",
+      "kind": "OTHER",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "0ebe4e7b0efd526654a90512d537ce0b9c5cfcfe"
+    },
+    {
+      "evidence_id": "EV-ARCH-DOC-7",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature%2Fapa-highlevel-whole-model-20261011/scripts/diagnose_apa_partial_scene.py",
+      "kind": "SOURCE_CODE",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "82a4408599e12dcf2afbef24b1157c408aed1b21"
+    }
+  ],
+  "report_markdown": "# APA-P00.A02.S03 — полный аудит blob SHA всех 83 текущих веток APA\n\n**Дата:** 2026-10-11. **RUN_ID:** `APA-RUN-20261011-001922Z-eighty-head-blob-inventory`. **Task claim:** `APA-RUN-20261011T000452Z-branch-blobs-69`.  \n**Scope:** SOURCE / GitHub REST, без Archicad, APX, PLN, SQLite или изменений main.  \n**Статус исследований:** Git/tree/byte SHA — VERIFIED; содержание старых инженерных аудитов — REPORTED, LIVE NOT_VERIFIED.  \n**Статус задачи:** PARTIAL после этого опубликованного этапа, до семантической дедупликации файлов.\n\n## 1. Выполнено — охват всех текущих Git HEAD\n\nПервоначальный [снимок 72 веток](https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/BRANCH_HEADS_20261010.json) имел 69 HEAD SHA, но не описывал 11 новых веток. Теперь через GitHub `/branches?per_page=100&page=1` получена [актуальная на момент обхода перепись 83 веток](https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/CURRENT_BRANCH_HEADS_20261011.json), меньше лимита 100. Сравнение: +11 имён, удалённых 0, изменённая историческая SHA у канонической ветки 1; итого **80 разных HEAD**.\n\nПо GitHub REST `/git/trees/<commit-sha>?recursive=1` собраны **80 из 80** полных Git-деревьев, `truncated=false` в каждом случае. Для 68 неизменившихся HEAD использованы семь сохранённых исходных batch files; новые 11 веток и обновлённая canonical HEAD прочитаны и сохранены в `CURRENT_DELTA_BATCH_01.json` и `CURRENT_DELTA_BATCH_02.json`. Всего девять raw batch records в GitHub.\n\n[Машинный полный summary 80 HEAD](https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/CURRENT_BLOB_AGGREGATE_20261011.json), [422 single-head SHA](https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/CURRENT_BLOB_EXCLUSIVE_20261011.json), [44 blob/path / 91 multi-version path](https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/CURRENT_BLOB_COLLISIONS_20261011.json) — readback PASS.\n\n| Сравнимый показатель | Измерено по 83 веткам |\n| --- | ---: |\n| Вхождений файлов across HEAD | **14 920** |\n| Различных git blob SHA | **1 578** |\n| Различных путей файлов | **1 594** |\n| Различных пар path+SHA | **1 748** |\n| Git blob SHA только в одном из 80 HEAD | **422** |\n| Git blob SHA, встречающихся во множестве HEAD | **1 156** |\n| Один и тот же Git SHA по разным путям | **44** |\n| Один путь с разными SHA | **91** |\n\n**Семантика:** Git SHA однозначно свидетельствует о равенстве Git-сохранённых байтов. Однако `422` не означает 422 новых самостоятельных решения, а `44` не даёт права удалять повторяющиеся файлы: разные пути могут быть архивными доказательствами. SHA Git LFS pointer (если есть) — не сам внешний бинарный payload. Этот снимок описывает ветки на момент API-обхода, а не все будущие ветки.\n\n## 2. Обнаружен крупный исходный архив, требующий сохранения\n\nВ `research/archicad29-tapir159-expansion` при точном SHA-сопоставлении находятся **71 текстовый MD/JSON source blob**, все под `research/archicad29-tapir159/`. Их нет как точных SHA ни в другом HEAD исторического снимка, ни в одном из 80 текущих HEAD. [Источниковый индекс 71 файла с pinned Git links и byte SHA](https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json) теперь опубликован в канонической исследовательской ветке и повторно прочитан.\n\nВ отдельном [byte-exact сравнении с конкретной ревизией canonical branch](https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/CANONICAL_BLOB_COVERAGE_20261011.json) `6a8abe2ac4e5a3e664c94bc9e71f9e15da943e27`: среди исторически exclusive 278 blob SHA обнаружено 7 пересечений с канонической, а среди 71 source SHA этого архива — **0**. Это не отрицает возможные пересказы или новый код с другим SHA; только точное совпадение исходных байтов.\n\n**Явный незакрытый риск:** попытка перенести *сами 71 исходных файла* в канонический namespace одним Git commit была заблокирована write-инструментом. После отказа проверены HEAD и отсутствие нового `ARCHIVE_MANIFEST`: копирование **не произошло**. Source index и исходные ветки сохраняют проверяемые пути/SHA, но статус именно `SOURCE_LINKS_VERIFIED_NOT_COPIED`. Публикация исследовательского отчёта не равнозначна физической миграции всех 71 source-файлов.\n\n### Content review — что действительно полезно\n\nПрочитаны следующие исходные документы (исторический research, а не новое внедрение):\n\n1. [Final Audit after pass 90](https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Farchicad29-tapir159-expansion/research/archicad29-tapir159/09_final_audit/FINAL_RESEARCH_AUDIT_V2_AFTER_PASS_90.md) — deterministic recipe compiler и reuse существующих native BIM capabilities; LLM по запросу и отдельно от writer. Уже есть собственный highlevel compiler, поэтому не создавать параллельный новый writer.\n2. [Project Context Bridge after pass 160](https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Farchicad29-tapir159-expansion/research/archicad29-tapir159/09_final_audit/FINAL_PROJECT_CONTEXT_BRIDGE_AUDIT_AFTER_160.md) — свежий context snapshot с project identity/stamp, этажами, выделением GUID и защитой от stale state; требуется проверка точных API и identity/capture gates.\n3. [Transport/Sync audit after pass 200](https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Farchicad29-tapir159-expansion/research/archicad29-tapir159/09_final_audit/FINAL_TRANSPORT_SYNC_OUT_OF_BOX_AUDIT_AFTER_200.md) — локальный guarded service, SQLite/journal и GitHub connector только для пересечения cloud boundary; не считать это уже работающим 24/7 agent.\n4. [Integration backlog](https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Farchicad29-tapir159-expansion/research/archicad29-tapir159/06_integration_audits/INTEGRATION_BACKLOG.md) — grouped Project Profile, Favorites, Hotlink, GDL, roof/mesh QA and documentation re-use; первоначально привязан к Tapir **1.5.9**, нынешнюю **1.5.10** и installed APX нужно проверять отдельно.\n5. [Controlled Probe backlog](https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Farchicad29-tapir159-expansion/research/archicad29-tapir159/07_live_probe_backlog/NEXT_CONTROLLED_PROBES.md) — Roof, Mesh, Morph, SEO, Trim, Hotlink/GDL как кандидаты контролируемых испытаний, но его публикация не разрешает записи в PLN.\n\n**Вывод:** полезные оригинальные исследования существуют, а не «потеряны», однако исходные SHA в canonical до этого не были представлены. До любого внедрения обязательны аудит применимости, сопоставление с уже существующим MVP и повторный контроль installed/source версиями.\n\n## 3. Актуальный продуктовый контур — не перепутать с историческим архивом\n\nНовая [ветка feature/apa-highlevel-whole-model-20261011](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/apa-highlevel-whole-model-20261011) содержит **10 SHA эксклюзивно в одном HEAD**, среди них highlevel building-shell intent и исполнитель, tests, read-only partial-scene diagnostic. Исходный [APA_HIGHLEVEL_EXECUTION.md](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature%2Fapa-highlevel-whole-model-20261011/docs/APA_HIGHLEVEL_EXECUTION.md) сообщает 106/106 offline + synthetic CI PASS, но **Archicad LIVE создание не подтверждено в этом проходе**. Это источник отчёта, а не независимый воспроизведённый тест.\n\n[Read-only recovery diagnostic](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature%2Fapa-highlevel-whole-model-20261011/scripts/diagnose_apa_partial_scene.py) требует совпадения journal scene/hash, оценивает partial Slab и **запрещает слепой повтор Create**. Нельзя переиспользовать `-Execute` без свежих read-only evidence и явного owner acceptance в рабочем PLN. Результаты высокоуровневой сборки относятся к существующей `APA-P70.A03.S02`, не являются отдельной конкурирующей реализацией.\n\n## 4. Дедупликация и границы принятия\n\n- **EXACT_HEAD_ALIAS:** три имени поверх существующих HEAD в 83-branch snapshot, хранить происхождение.\n- **EXACT_CONTENT_EQUALITY:** 44 SHA, встречающихся в разных путях. Архивная копия может быть отдельным доказательством; не удалять.\n- **DIFFERENT_VERSION_SAME_PATH:** 91 файл-путь с разными SHA, не разрешено автоматически выбирать «новейшее».\n- **EXCLUSIVE_BY_HEAD:** 422 SHA требуют content-level source mapping, не 422 внедрённых инструмента.\n- **SOURCE_ARCHIVE_NO_COPY:** 71 pinned original MD/JSON; отдельная задача на корректный перенос исходных байтов остаётся OPEN.\n- **NO_LIVE_CERTIFICATION:** старые source/CI/README и запись Git SHA не заменяют тест на установленной версии Archicad/Tapir и точном проекте.\n\n## 5. Привязка к единому реестру и следующий критерий\n\n**Текущий измеримый результат:** baseline 83 refs, полный обход 80 HEAD, два machine inventories путей/версий, 71 source-index links и обзор ядра архитектурных аудитов сохранены в GitHub. Сам этот research run можно пометить `DONE_PUBLISHED` после receipt/readback; **подзадача APA-P00.A02.S03 остаётся PARTIAL**, поскольку не проведена содержательная классификация всех 1594 путей и все 71 source-файл не скопированы.\n\n**Следующий блок:** в рамках `APA-P00.A02.S03` и `APA-P50.A01.S01` приоритетно выполнить batch-review 422 single-head SHA: сначала 71 text sources/10 highlevel sources, затем уникальные test contracts и library releases. Для `APA-P70.A01.S02` обновить capability→evidence mapping, `APA-P70.A03.S02/.S03` — связь context snapshot/SceneWriter с существующим MVP, `APA-P10.A02.S01` — сверка исторических Tapir 1.5.9 contract proposals с текущей 1.5.10. Отдельное source-copy решение предложить аудитору без создания дублирующей задачи: обязательны сохранение byte SHA, SHA readback и no-main policy.\n\n**Не выполнялось:** изменения main/master, PLN/APX, Archicad, Socket Mode SQLite, source code; нет новой LIVE геометрии или нормативных сертификатов. Никакого Deep Research/платного исследовательского окружения не использовалось.\n",
+  "next_substep": "APA-P00.A02.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

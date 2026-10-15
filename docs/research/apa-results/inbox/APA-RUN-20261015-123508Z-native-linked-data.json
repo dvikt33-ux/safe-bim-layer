@@ -1,0 +1,137 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261015-123508Z-native-linked-data",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A11",
+  "substep_id": "APA-P70.A11.S03",
+  "executor": "work-native-linked-20261015",
+  "executor_run_id": "APA-CLAIM-NATIVE-LINKED-20261015T121617Z",
+  "phase": "LIVE",
+  "started_at": "2026-10-15T12:16:17Z",
+  "finished_at": "2026-10-15T12:35:08Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "Read-only current authorized409GUIDcopy; no model mutations",
+    "sdk": "Enhanced grouped reads built only; no deployment or quantity call",
+    "tapir": "Existing installed IFC/material calls through same router",
+    "source_branch": "feature/apa-native-linked-data-20261015"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/104",
+      "revision": "5b8e3b873b2668a5ab257f28d77bab411c350942",
+      "source_sha": "5b8e3b873b2668a5ab257f28d77bab411c350942"
+    }
+  ],
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-LINKED-NATIVE-IFC",
+      "statement": "Existing native IFC accessor calls through the shared dynamic router:13elements,12nonemptyIFCIDs,61propertyrows.409GUID inventory and saved bytes unchanged; no model writes or quantity call. One empty identity explicitly omitted.",
+      "status": "LIVE_PASS",
+      "evidence_ids": [
+        "EV-0"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-LINKED-SDK-BUILD",
+      "statement": "Enhanced existing Opening Shell Roof CW Railing readers compile and link in full Release; exact new binary is prepared but not installed. No enhanced-reader LIVE_PASS until separate binary authorization and native readback.",
+      "status": "BUILD_PASS",
+      "evidence_ids": [
+        "EV-1",
+        "EV-2"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-LINKED-CAPTURED-FLOW",
+      "statement": "Existing BIM Graph/DependencyImpact consumes pinned prior native components plus current native attributes/IFC:196nodes319edges;23material17surface12IFCidentity edges; selected material reaches45nodes. This mixed captured-dataflow result is not a fresh enhanced-SDK live test; no offline test suite or CI run.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-0",
+        "EV-4"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-0",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-123508Z-native-linked-data/native-runtime.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "68bf33c442909b875ded8609c5d5c7a17c8cb59665cf4d988555fde52af6d9b9",
+      "source_revision": "5b8e3b873b2668a5ab257f28d77bab411c350942"
+    },
+    {
+      "evidence_id": "EV-1",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-123508Z-native-linked-data/SDK-build.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "f58cdb694304ed6ca440b14bcf25877fd63811738b67b4844d9034df7334c9e2",
+      "source_revision": "5b8e3b873b2668a5ab257f28d77bab411c350942"
+    },
+    {
+      "evidence_id": "EV-2",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-123508Z-native-linked-data/module-contracts.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "b4201638bbe7134d6e9279c668afa2193a8af3653cb5d483628972f242f263c7",
+      "source_revision": "5b8e3b873b2668a5ab257f28d77bab411c350942"
+    },
+    {
+      "evidence_id": "EV-3",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-123508Z-native-linked-data/module-coverage.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "fff3fefd4ad7c6e3acb48f201f22e35d7824fe1d511d8ef833f597b3fb751be1",
+      "source_revision": "5b8e3b873b2668a5ab257f28d77bab411c350942"
+    },
+    {
+      "evidence_id": "EV-4",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-123508Z-native-linked-data/gap-register.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "f67a7cc42920471cd6b2b2ba670bb354aa9d06327320ab49377400aeb1fb5b60",
+      "source_revision": "5b8e3b873b2668a5ab257f28d77bab411c350942"
+    },
+    {
+      "evidence_id": "EV-5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-123508Z-native-linked-data/core-knowledge-query.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "706a02f89a78c4183fb2b5bd06858a0fb854e07216bfb8a7ac4d8c5b90cd7f5e",
+      "source_revision": "5b8e3b873b2668a5ab257f28d77bab411c350942"
+    }
+  ],
+  "report_markdown": "# Native component, material and IFC continuation after PR97\n\nThe existing dynamic router now feeds the existing BIM Graph dependency analysis\nwith typed native attribute dependencies and IFC identity references. No second\nexecutor, graph database, IFC engine or journal was introduced. Existing Tapir\nIFC commands are reused rather than implemented again in C++.\n\n`scripts/apa_native_dependency_flow.py` exposes `capture_ifc_facts(api, router,\nelement_ids)` for 1–32 explicit elements. The caller supplies the established\nEvidenceAPI and dynamic router with source-reviewed READ_ONLY policies. Each\ncall retains the router's fresh project identity, runtime registration and\ninput/output schema gates. The returned bundle includes provider replies and a\ncontent hash. IFC properties remain the provider's string representation;\nneither empty property lists nor IFC classification prove export compatibility.\n\n`dependency_inputs` accepts existing component replies plus `attributes` keyed\nby BuildingMaterial/Surface/Composite, optional envelope replies and `ifc_ids`.\nNative attribute index and kind must resolve to one captured attribute GUID.\nNames are never used as identity. Disabled overrides and inapplicable structure\nmaterial fields do not become dependencies. Material → element and native\nelement → IFC identity are distinct from parent/root membership, physical\ncontact and engineering validity. An IFC node uses its own `IFC:` namespace;\nattribute nodes use `ATTRIBUTE:<KIND>:`. Missing or ambiguous inputs stay explicit.\n\nThe existing grouped SDK readers gained additive typed output fields:\n\n- Opening: bounded native Polygon2D contours with directed edge endpoints and\n  arc angles, linked status, anchor parameters and surface override flags/indices.\n  The raw SDK frame stays separate; no normalization or assumed world-coordinate\n  transform is applied. There is no resultant void BREP claim.\n- Shell/Roof: thickness, story-relative level, explicit structure-type material\n  applicability and top/side/bottom surface override flags. Existing Shell class\n  frames, body flags and memo contour data remain intact.\n- CurtainWall/Railing: actual native root parameter counts, height/relative level\n  where defined, and reference offsets. Child parent/root queries remain separate.\n\nThe original-runtime native run read 13 existing sample/component elements:\n12 nonempty IFC IDs, 61 native IFC property rows, and types including\nIfcCurtainWall, IfcRailing, IfcSlab, IfcMember and IfcPlate. One element returned\nan empty IFC ID/type; it was excluded from IFC identity edges. This is native\naccessor evidence, not export or engineering acceptance.\n\nThe current attribute headers contain 59 building materials, 132 surfaces and\n24 composites. Combined with the pinned earlier native component capture, the\nexisting dependency analysis produces 196 nodes/319 edges, including 23 material,\n17 frame surface and 12 IFC identity dependencies. A selected material reaches\n45 dependent nodes. This mixed capture flow is explicitly not a fresh live\nexecution of the enhanced SDK readers. Twenty-four declared-owner/parent\ndifferences are retained as omissions, without inventing ownership edges.\n\nAll 409 GUIDs and saved bytes stayed unchanged during current native reads.\nThere were no Create/Modify/Delete/Save calls, APX switches or quantity-engine\ncalls. The accepted three native assemblies were not recreated. Offline tests\nand offline CI are intentionally not run under the user's current instruction.\nBuild results and deployment permission are recorded separately; BUILD_PASS\nmust never be presented as LIVE_PASS for the enhanced SDK contracts.\n\nReproduction: obtain fresh runtime schemas with the existing exporter, bind the\nexact authorized project, load source-reviewed policies, call\n`capture_ifc_facts`, pass native header/component/envelope replies to\n`dependency_inputs`, and use the existing `run`/DependencyImpact path. Retain raw\nresponses privately. New binary deployment and enhanced-reader acceptance require\nseparate authorization for that exact APX. Shell contours/Revolved/Ruled, custom\nOpening polygon positives, visible inspection and quantity-engine diagnosis\nremain separate acceptance boundaries. A11.S03 remains PARTIAL.\n\n\nPublished [draft PR104](https://github.com/dvikt33-ux/safe-bim-layer/pull/104) at `5b8e3b873b2668a5ab257f28d77bab411c350942`, exact PR97 base `8f134001ca0e3250eda587db61ac01dbd6357326`. Enhanced SDK implementation `657d995a7163c85a17f775fd8a3fd62d23afd552` produced APX `2ed42a0d330df702524216ac6773312ff29aad8642792be35aab18427f7e91cb`. Native IFC/read-only dataflow is working; enhanced SDK fields remain BUILD_PASS, not LIVE_PASS. Offline tests and CI deliberately not run. Current Knowledge Graph snapshot173 plus own byte-verified CAS174; A11.S03 remains PARTIAL. No main, tested branch, PLN or installed APX modifications in this package.\n",
+  "next_substep": "APA-P70.A11.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

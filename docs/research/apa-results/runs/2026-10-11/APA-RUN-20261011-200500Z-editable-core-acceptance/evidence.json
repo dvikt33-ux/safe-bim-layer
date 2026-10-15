@@ -1,0 +1,24 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-EDITABLE-CORE-ACCEPTED",
+      "evidence_ids": [
+        "EV-ACCEPTANCE-MATRIX"
+      ],
+      "statement": "Combined editable native core acceptance passed for the explicit17element example based on independently inspected captured native evidence. Expanded product remains incomplete.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-ACCEPTANCE-MATRIX",
+      "kind": "TEST_RESULT",
+      "sha256": "db27cf2cabe0ca8474600587e26db910d5fbe649cfa78a29aa5348092ec32b12",
+      "source_revision": "976c19cecebe3f6bb4352365d9a59051d5b2b61b",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261011-200500Z-editable-core-acceptance/acceptance.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261011-200500Z-editable-core-acceptance",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

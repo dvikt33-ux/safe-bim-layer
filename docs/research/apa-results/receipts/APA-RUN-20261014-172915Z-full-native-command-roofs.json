@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:fa4c8666179fbd6d4d9bd778fe83032698217640ff495ca999ea04047d9df739",
+  "index_commit_sha": "f68bf3b9b1caec410a0f7cd323cba202e5149b24",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "f68bf3b9b1caec410a0f7cd323cba202e5149b24",
+  "report_path": "docs/research/apa-results/runs/2026-10-14/APA-RUN-20261014-172915Z-full-native-command-roofs/REPORT.md",
+  "report_sha256": "a4d6c9afe9eae77d378b8c5fe66293a70d18fc10dfef96a4a34da51608228653",
+  "run_id": "APA-RUN-20261014-172915Z-full-native-command-roofs",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

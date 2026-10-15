@@ -1,0 +1,68 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261012-123259Z-construction-junctions-s01-openings",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A04",
+  "substep_id": "APA-P70.A04.S01",
+  "executor": "work-construction-junctions-20261012",
+  "executor_run_id": "APA-RUN-20261012T120854Z-construction-junctions-s01",
+  "phase": "SOURCE",
+  "started_at": "2026-10-12T12:08:54Z",
+  "finished_at": "2026-10-12T12:32:59Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29 native evidence captured; publication makes zero native calls",
+    "tapir": "1.5.10",
+    "source_branch": "feature/apa-construction-junctions-20261012"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/57",
+      "revision": "32b9f6f670e0c8bfb723172259436e28d1a2100e",
+      "source_sha": "32b9f6f670e0c8bfb723172259436e28d1a2100e"
+    }
+  ],
+  "inputs": [
+    "ART-APA-CSE-RESEARCH",
+    "ART-APA-DETAILS-V212",
+    "ART-P70-A11-S03-NATIVE95-V32-20261012"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-CONSTRUCTION-JUNCTIONS-S01-OPENINGS",
+      "statement": "S01 complete: all required accepted-model construction interface families, actual Generic Opening wall-hole contours, source/material/story/XYZ conditions and explicit reinforcement/fixing gaps.95GUID/body signatures preserved.414Windows/Linux tests PASS. Existing source batten/counterbatten relation qualifies next bounded native support junction. No native writes; publication zero native calls.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-JUNCTION-PROOF",
+        "EV-JUNCTION-BYTES"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-JUNCTION-PROOF",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-123259Z-construction-junctions-s01-openings/coverage.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "a613f08deca7b408f18f51b8e825041d5eaabb6c522ef5659a473e3e7cd38105",
+      "source_revision": "32b9f6f670e0c8bfb723172259436e28d1a2100e"
+    },
+    {
+      "evidence_id": "EV-JUNCTION-BYTES",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-123259Z-construction-junctions-s01-openings/EVIDENCE_SHA256.json",
+      "kind": "LOCAL_LOG",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "fbaa42ba7da223db4c682dc93de6cbd76b925813e1ce981480da73de0b4fa85c",
+      "source_revision": "32b9f6f670e0c8bfb723172259436e28d1a2100e"
+    }
+  ],
+  "report_markdown": "# A04.S01 — accepted coverage with actual Generic Opening contours\n\nThis completes the previous S01 coverage report without changing its immutable\nevidence. The existing Generic Opening is also included: its0.4x0.6m cut is\nverified through the two actual inner face contours of its native wall host.\nA proxy bounding box does not prove a physical opening. Two further tests\nreject a missing host cut and verify the actual hole bounds. All95accepted\nGUID and body signatures remain unchanged. The earlier47interfaces and34\nactual surface contacts remain intact. No Create/Modify/Save/Open was issued.\n\nThe final code revision and full Windows/Linux CI are captured alongside the\nupdated source/contact coverage. Earlier host412/412PASS and all11new local\ncontact/source/opening tests pass. Full current CI contains414tests per OS.\nThe earlier S01 baseline, source proof and publisher receipt remain valid.\n\nS01 meets accepted-model family/source/condition coverage with explicit open\nengineering, assembly, cladding, reinforcement and fastener gaps. Continue\nto S02: implement the source-confirmed25x150/50x50mm batten/counterbatten\nsupport sub-junction through the retained writer and actual native contact\nreadback. Full manufacturer roof assembly remains unverified.\n\n\nEvidence: [APA-RUN-20261012-123259Z-construction-junctions-s01-openings](https://github.com/dvikt33-ux/safe-bim-layer/tree/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-123259Z-construction-junctions-s01-openings). Draft PR57, head 32b9f6f670e0c8bfb723172259436e28d1a2100e. Stable SHA tokens replace private native identities; raw payloads stay local. Publication makes zero native calls.\n",
+  "next_substep": "APA-P70.A04.S02",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

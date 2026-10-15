@@ -1,0 +1,33 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-FUNCTIONAL-EXPANSION-V32",
+      "evidence_ids": [
+        "EV-EXPANSION32-ACCEPTANCE",
+        "EV-EXPANSION32-BYTES"
+      ],
+      "statement": "Actual saved IFC quantity/semantic extraction works,73Details contexts feed a source-bound existing writer graph, and dedicated MEP diagnostics expose native fitting defaults/overshoot.397Windows/LinuxPASS. Native new branch is NOT_ACCEPTED and unsaved; source parts/terminal not written. Saved PLN bytes remain prior59GUID baseline. S03PARTIAL, recovery/source/provider/engineering dependencies explicit. Publication adds no native calls.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-EXPANSION32-ACCEPTANCE",
+      "kind": "TEST_RESULT",
+      "sha256": "ab00b8e3e55167af531cae33aae6e9dc331580d56bf827a855d28d6d4080c46a",
+      "source_revision": "1908482fdb3df381c1bf6d04f8c2fa28f41069bd",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-095401Z-functional-expansion-v32/acceptance.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-EXPANSION32-BYTES",
+      "kind": "LOCAL_LOG",
+      "sha256": "c1c27426e90bee3790567f3e3ebae3dd412e88937a342229c9bd08fb36f381db",
+      "source_revision": "1908482fdb3df381c1bf6d04f8c2fa28f41069bd",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-095401Z-functional-expansion-v32/EVIDENCE_SHA256.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261012-095401Z-functional-expansion-v32",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

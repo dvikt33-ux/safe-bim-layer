@@ -1,0 +1,37 @@
+{
+  "status": "PUBLISHED_BUILD_OFFLINE_CHECKPOINT_LIVE_PENDING",
+  "revision": 139,
+  "codeHead": "bc8f8575ed65e308e10c5ac5f573b7d8ad9466a6",
+  "fullSDKBuild": "BUILD_PASS",
+  "offlineTests": 689,
+  "newTests": 21,
+  "oldCommandSourceNamesPreserved": 263,
+  "candidateSourceNames": 274,
+  "sourceGoingConflict": "3.3M_20_RISERS_2R_PLUS_0.35_EQUALS0.68_EXCEEDS_FAVORITE0.65",
+  "sourceCompatibleSamples": [
+    "3.0M_20_RISERS_G0.35",
+    "3.3M_22_RISERS_G0.35"
+  ],
+  "nativeWrites": 0,
+  "installedAPXChanged": false,
+  "accepted143And168SavedBytesUnchanged": true,
+  "livePass": "NOT_VERIFIED",
+  "sourceDimensionPass": "NOT_VERIFIED",
+  "engineeringAcceptance": "NOT_VERIFIED",
+  "blocking_dependencies": [
+    {
+      "id": "DEP-APA-GRID-STAIR-APX-LOAD",
+      "status": "WAITING_USER_DEPLOYMENT_PERMISSION",
+      "stage": "LOAD_READY_CANDIDATE_THEN_ISOLATED_NATIVE_TEST",
+      "target_task": "APA-P70.A11.S03"
+    },
+    {
+      "id": "DEP-APA-GRID-LIBRARY-ROLE-MAPPING",
+      "status": "NOT_VERIFIED_PENDING_INSTALLED_SOURCE_READ",
+      "depends_on": [
+        "DEP-APA-GRID-STAIR-APX-LOAD"
+      ]
+    }
+  ],
+  "historicalTasksPreserved": 91
+}

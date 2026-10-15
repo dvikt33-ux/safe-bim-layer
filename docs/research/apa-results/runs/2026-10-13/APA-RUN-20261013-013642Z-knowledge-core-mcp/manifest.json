@@ -1,0 +1,106 @@
+{
+  "action_id": "APA-P70.A11",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-KNOWLEDGE-CORE-MCP",
+      "evidence_ids": [
+        "EV-INTEGRATION",
+        "EV-STALE",
+        "EV-CI"
+      ],
+      "statement": "APA core uses the existing knowledge module on source-verified data; real SDK stdio client passes. Actual ChatGPT registration and engineering acceptance not claimed.",
+      "status": "LIVE_PASS"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-INTEGRATION",
+      "kind": "TEST_RESULT",
+      "sha256": "f2812200bd35319ccfae917edb8f209666454c5db42465f1b83d99d1bfb89381",
+      "source_revision": "88169d358e4c329f8959f557c944300adcec2df9",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-013642Z-knowledge-core-mcp/integration.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-STALE",
+      "kind": "TEST_RESULT",
+      "sha256": "90cd74d3b89630d087bcc4d2f00d4d92b93ba5cca8f51ea0226fc85194444fa3",
+      "source_revision": "88169d358e4c329f8959f557c944300adcec2df9",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-013642Z-knowledge-core-mcp/real-stale-rebuild.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-CI",
+      "kind": "TEST_RESULT",
+      "sha256": "f310fa8f0e3011d71d109ee1d5d585ac8fb3e74e0a3757e32193083a251c989f",
+      "source_revision": "88169d358e4c329f8959f557c944300adcec2df9",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-013642Z-knowledge-core-mcp/ci.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "work-knowledge-integration-20261013",
+  "executor_run_id": "APA-CLAIM-KNOWLEDGE-20261013T011026Z",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-13T01:36:42Z",
+  "idempotency_key": "sha256:b10eee2b122e4fa9886ed953152848d8c352a8096b684f2dc5323e3ae03c468d",
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "next_substep": "APA-P70.A11.S03",
+  "phase": "LIVE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261013-013642Z-knowledge-core-mcp",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "No Archicad calls or model changes; live read-only GitHub/MCP software integration only",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "source_branch": "feature/apa-knowledge-integration-20261013"
+  },
+  "source_revisions": [
+    {
+      "revision": "88169d358e4c329f8959f557c944300adcec2df9",
+      "source_sha": "88169d358e4c329f8959f557c944300adcec2df9",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/71"
+    },
+    {
+      "revision": "64cec581b257b209a097556ae19d498e53631ba1",
+      "source_sha": "64cec581b257b209a097556ae19d498e53631ba1",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/69"
+    }
+  ],
+  "started_at": "2026-10-13T01:10:26Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A11.S03"
+}

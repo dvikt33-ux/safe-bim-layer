@@ -1,0 +1,4090 @@
+{
+  "schema": "APA_CURRENT_BRANCH_BLOB_COLLISIONS_V1",
+  "census": "CURRENT_BRANCH_HEADS_20261011.json",
+  "exact_same_git_blob_multiple_paths": {
+    "count": 44,
+    "entries": [
+      {
+        "git_blob_sha": "0683f3bca5bb031ab399a05be00813393bf663e8",
+        "paths": [
+          "outputs/closed-loop-stage1/GetProjectInfo.response.json",
+          "outputs/closed-loop-stage1/iteration-1/identity-after.response.json",
+          "outputs/closed-loop-stage1/iteration-1/identity-before.response.json",
+          "outputs/closed-loop-stage1/iteration-2/identity-after.response.json",
+          "outputs/closed-loop-stage1/iteration-2/identity-before.response.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/001-GetProjectInfo.response.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/004-GetProjectInfo.response.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/005-GetProjectInfo.response.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/006-GetProjectInfo.response.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/007-GetProjectInfo.response.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/008-GetProjectInfo.response.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/009-GetProjectInfo.response.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/010-GetProjectInfo.response.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/011-GetProjectInfo.response.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/012-GetProjectInfo.response.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/013-GetProjectInfo.response.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/014-GetProjectInfo.response.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/015-GetProjectInfo.response.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/016-GetProjectInfo.response.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/017-GetProjectInfo.response.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/018-GetProjectInfo.response.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/019-GetProjectInfo.response.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/identity/001-GetProjectInfo.response.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/identity/004-GetProjectInfo.response.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/identity/005-GetProjectInfo.response.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/identity/006-GetProjectInfo.response.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/identity/007-GetProjectInfo.response.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/identity/008-GetProjectInfo.response.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/identity/009-GetProjectInfo.response.json"
+        ],
+        "head_count": 8
+      },
+      {
+        "git_blob_sha": "fadb255cbd778291cfc3b49c80f8d9b3f9d97243",
+        "paths": [
+          "outputs/closed-loop-stage1/GetProjectInfo.request.json",
+          "outputs/closed-loop-stage1/iteration-1/identity-after.request.json",
+          "outputs/closed-loop-stage1/iteration-1/identity-before.request.json",
+          "outputs/closed-loop-stage1/iteration-2/identity-after.request.json",
+          "outputs/closed-loop-stage1/iteration-2/identity-before.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/001-GetProjectInfo.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/004-GetProjectInfo.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/005-GetProjectInfo.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/006-GetProjectInfo.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/007-GetProjectInfo.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/008-GetProjectInfo.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/009-GetProjectInfo.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/010-GetProjectInfo.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/011-GetProjectInfo.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/012-GetProjectInfo.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/013-GetProjectInfo.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/014-GetProjectInfo.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/015-GetProjectInfo.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/016-GetProjectInfo.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/017-GetProjectInfo.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/018-GetProjectInfo.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/019-GetProjectInfo.request.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/identity/001-GetProjectInfo.request.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/identity/004-GetProjectInfo.request.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/identity/005-GetProjectInfo.request.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/identity/006-GetProjectInfo.request.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/identity/007-GetProjectInfo.request.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/identity/008-GetProjectInfo.request.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/identity/009-GetProjectInfo.request.json"
+        ],
+        "head_count": 8
+      },
+      {
+        "git_blob_sha": "ffb865d0f63deea1f9c8362c1dd75f4d1b6a7602",
+        "paths": [
+          "outputs/closed-loop-stage1/initial-model-dump.request.json",
+          "outputs/closed-loop-stage1/iteration-1/chat-executor/planner-model-dump.request.json",
+          "outputs/closed-loop-stage1/iteration-1/executor/after-create.request.json",
+          "outputs/closed-loop-stage1/iteration-1/executor/before.request.json",
+          "outputs/closed-loop-stage1/iteration-2/chat-executor/planner-model-dump.request.json",
+          "outputs/closed-loop-stage1/iteration-2/executor/after-create.request.json",
+          "outputs/closed-loop-stage1/iteration-2/executor/before.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/iteration-1/executor/after-create.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/iteration-1/executor/before.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/iteration-2/executor/after-create.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/iteration-2/executor/before.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/observations/001-observe.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/observations/002-stale-check.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/observations/003-read-back.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/observations/004-observe.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/observations/005-stale-check.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/observations/006-read-back.request.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/chat-executor/planner-model-dump.request.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/executor/after-create.request.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/iteration-1/executor/before.request.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/chat-executor/planner-model-dump.request.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/executor/after-create.request.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/iteration-2/executor/before.request.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/observations/001-regression-readback.request.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/observations/002-regression-readback.request.json"
+        ],
+        "head_count": 8
+      },
+      {
+        "git_blob_sha": "2e1c735153ecf56a8caad9e533bba6c748a0c876",
+        "paths": [
+          "outputs/closed-loop-stage1/audit-pack/.gitattributes",
+          "outputs/closed-loop-stage3/run-002/audit-pack/.gitattributes",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-04/audit-pack/.gitattributes",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-05/audit-pack/.gitattributes",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-06-offline/audit-pack/.gitattributes",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-07/audit-pack/.gitattributes",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-08/audit-pack/.gitattributes",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-09/audit-pack/.gitattributes",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-10/audit-pack/.gitattributes"
+        ],
+        "head_count": 4
+      },
+      {
+        "git_blob_sha": "134a2e7437a523f2cc1e88c415b6c1dc21ed71a1",
+        "paths": [
+          "outputs/closed-loop-stage3/run-002/audit-pack/iteration-1-after/model-summary.json",
+          "outputs/closed-loop-stage3/run-002/audit-pack/iteration-1/after-summary.json",
+          "outputs/closed-loop-stage3/run-002/audit-pack/iteration-2-before/model-summary.json",
+          "outputs/closed-loop-stage3/run-002/audit-pack/iteration-2/before-summary.json",
+          "outputs/closed-loop-stage3/run-002/audit-pack/observation-003/model-summary.json",
+          "outputs/closed-loop-stage3/run-002/audit-pack/observation-004/model-summary.json",
+          "outputs/closed-loop-stage3/run-002/audit-pack/observation-005/model-summary.json"
+        ],
+        "head_count": 4
+      },
+      {
+        "git_blob_sha": "30970853d48fa79470a141a5ea8d3e55bc688255",
+        "paths": [
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-04/preflight.json",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-05/preflight.json",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-06-offline/preflight.json",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-07/preflight.json",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-08/preflight.json",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-09/preflight.json",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-10/preflight.json"
+        ],
+        "head_count": 3
+      },
+      {
+        "git_blob_sha": "0637a088a01e8ddab3bf3fa98dbe804cbde1a0dc",
+        "paths": [
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-07/mutation-attempts.json",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-07/reconciliation.json",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-08/mutation-attempts.json",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-08/reconciliation.json",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-09/reconciliation.json",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-10/reconciliation.json"
+        ],
+        "head_count": 3
+      },
+      {
+        "git_blob_sha": "0c07cc1d76eba253c98087eaee090e717c203666",
+        "paths": [
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-04/iterations/001-observation.json",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-04/iterations/002-observation.json",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-05/iterations/001-observation.json",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-06-offline/iterations/001-observation.json",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-09/iterations/001-observation.json",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-10/iterations/001-observation.json"
+        ],
+        "head_count": 3
+      },
+      {
+        "git_blob_sha": "009078562cfd05e070b8115480dcca5eddb4a25f",
+        "paths": [
+          "construction_details/releases/v2.2/source_verify.json",
+          "details/releases/v2.2/source_verify.json",
+          "details/releases/v2.3/source_verify.json",
+          "details/releases/v2.4/source_verify.json",
+          "details/releases/v2.5/source_verify.json"
+        ],
+        "head_count": 24
+      },
+      {
+        "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "paths": [
+          "tests_stage2/__init__.py",
+          "tests_stage3/__init__.py",
+          "tests_stage4_live/__init__.py",
+          "tests_stage5_window/__init__.py",
+          "tests_sync/__init__.py"
+        ],
+        "head_count": 13
+      },
+      {
+        "git_blob_sha": "039ed9405996ac590d7addee81c8acfb883ba281",
+        "paths": [
+          "outputs/closed-loop-stage3/run-002/audit-pack/initial/model-summary.json",
+          "outputs/closed-loop-stage3/run-002/audit-pack/iteration-1-before/model-summary.json",
+          "outputs/closed-loop-stage3/run-002/audit-pack/iteration-1/before-summary.json",
+          "outputs/closed-loop-stage3/run-002/audit-pack/observation-002/model-summary.json"
+        ],
+        "head_count": 4
+      },
+      {
+        "git_blob_sha": "1a5b71e88bd63864d76a4f1325c544530ef85070",
+        "paths": [
+          "construction_details/releases/v2.2/audit.json",
+          "details/machine-db/releases/v2.2/AUDIT_v2.2.json",
+          "details/releases/v2.2/audit.json",
+          "knowledge/detail-machine/releases/v2.2/AUDIT_v2.2.json"
+        ],
+        "head_count": 35
+      },
+      {
+        "git_blob_sha": "885e58cf857fbaadc1bdab1fe184082ce2ba953f",
+        "paths": [
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-04/iterations/002-readback.json",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-04/iterations/003-observation.json",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-06-offline/iterations/001-readback.json",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-06-offline/iterations/002-observation.json"
+        ],
+        "head_count": 3
+      },
+      {
+        "git_blob_sha": "928ee68e3f648fb03813e896379e60f96e213cec",
+        "paths": [
+          "outputs/closed-loop-stage1/audit-pack/iteration-1-after/model-summary.json",
+          "outputs/closed-loop-stage1/audit-pack/iteration-1/after-summary.json",
+          "outputs/closed-loop-stage1/audit-pack/iteration-2-before/model-summary.json",
+          "outputs/closed-loop-stage1/audit-pack/iteration-2/before-summary.json"
+        ],
+        "head_count": 4
+      },
+      {
+        "git_blob_sha": "1001e79b52a3cb4cebf686f5a503320bfce197eb",
+        "paths": [
+          "outputs/closed-loop-stage3/run-002/audit-pack/iteration-2-after/model-summary.json",
+          "outputs/closed-loop-stage3/run-002/audit-pack/iteration-2/after-summary.json",
+          "outputs/closed-loop-stage3/run-002/audit-pack/observation-006/model-summary.json"
+        ],
+        "head_count": 4
+      },
+      {
+        "git_blob_sha": "1104c0ea4fb86acaa61fe0515bfadbfa21dccfd1",
+        "paths": [
+          "outputs/closed-loop-stage1/audit-pack/iteration-1/created-wall.json",
+          "outputs/closed-loop-stage1/audit-pack/iteration-2/source-wall-before.json",
+          "outputs/closed-loop-stage1/audit-pack/iteration-2/source-wall.json"
+        ],
+        "head_count": 4
+      },
+      {
+        "git_blob_sha": "26443183bb4afa82477a73d5d36acd54511065ab",
+        "paths": [
+          "outputs/closed-loop-stage1/API.GetProductInfo.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/002-API.request.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/identity/002-API.request.json"
+        ],
+        "head_count": 8
+      },
+      {
+        "git_blob_sha": "2d60a2f9563d05acb8d31ee89a0fb094940c7e8a",
+        "paths": [
+          "outputs/closed-loop-stage1/audit-pack/initial/model-summary.json",
+          "outputs/closed-loop-stage1/audit-pack/iteration-1-before/model-summary.json",
+          "outputs/closed-loop-stage1/audit-pack/iteration-1/before-summary.json"
+        ],
+        "head_count": 4
+      },
+      {
+        "git_blob_sha": "430a7e3b874f3c9d2e26b4ab4b08c673b44c9358",
+        "paths": [
+          "details/machine-db/releases/v2.2/detail-machine-v2.2-systematized.tar.gz",
+          "details/releases/v2.2/machine-state-v2.2.tar.gz",
+          "knowledge/detail-machine/releases/v2.2/detail-machine-v2.2-systematized.tar.gz"
+        ],
+        "head_count": 34
+      },
+      {
+        "git_blob_sha": "6142cdebf2a010c27d25b1503ec54ddf705ac39f",
+        "paths": [
+          "outputs/closed-loop-stage1/API.GetProductInfo.response.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/002-API.response.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/identity/002-API.response.json"
+        ],
+        "head_count": 8
+      },
+      {
+        "git_blob_sha": "687963ba9e3c0d8c13167316530393f1679a7b1b",
+        "paths": [
+          "outputs/closed-loop-stage3/run-002/audit-pack/iteration-1/created-wall.json",
+          "outputs/closed-loop-stage3/run-002/audit-pack/iteration-2/source-wall-before.json",
+          "outputs/closed-loop-stage3/run-002/audit-pack/iteration-2/source-wall.json"
+        ],
+        "head_count": 4
+      },
+      {
+        "git_blob_sha": "84c20fdce386502329b70041fa9630800701bf21",
+        "paths": [
+          "outputs/closed-loop-stage1/GetAddOnVersion.request.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/003-GetAddOnVersion.request.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/identity/003-GetAddOnVersion.request.json"
+        ],
+        "head_count": 8
+      },
+      {
+        "git_blob_sha": "b0f26d724ac9b0de4346a6d11dfe48784c884037",
+        "paths": [
+          "outputs/closed-loop-stage1/GetAddOnVersion.response.json",
+          "outputs/closed-loop-stage3/run-002/live-job/identity/003-GetAddOnVersion.response.json",
+          "outputs/closed-loop-stage3/run-002/v0-regression/identity/003-GetAddOnVersion.response.json"
+        ],
+        "head_count": 8
+      },
+      {
+        "git_blob_sha": "ec85b23ef9480056e3babf31e6a470595b4f9f63",
+        "paths": [
+          "construction_details/releases/v2.2/manifest.json",
+          "details/machine-db/releases/v2.2/SYSTEMATIZED_MANIFEST.json",
+          "details/releases/v2.2/manifest.json"
+        ],
+        "head_count": 28
+      },
+      {
+        "git_blob_sha": "0c7680123324cbf264bbbf850e2b1780ba71b9ac",
+        "paths": [
+          "details/machine-db/releases/v2.2/PACKAGE_SHA256.txt",
+          "knowledge/detail-machine/releases/v2.2/SYSTEMATIZED_ARCHIVE_SHA256.txt"
+        ],
+        "head_count": 11
+      },
+      {
+        "git_blob_sha": "1aaea4f220d008df900126e824e7f52b4c09c0ff",
+        "paths": [
+          "details/machine-db/releases/v2.2/archicad_detail_machine_db_v2.2_SHA256.txt",
+          "knowledge/detail-machine/releases/v2.2/ORIGINAL_PACKAGE_SHA256.txt"
+        ],
+        "head_count": 11
+      },
+      {
+        "git_blob_sha": "1da37fb79a1ab7e4193c3b228264f308e403c0bc",
+        "paths": [
+          "archive/coordination/bimexec/HANDOFF_ARENA.md",
+          "bimexec/HANDOFF_ARENA.md"
+        ],
+        "head_count": 66
+      },
+      {
+        "git_blob_sha": "26a686e68e3a178c5e37ce5e740243bc0fc9edd6",
+        "paths": [
+          "outputs/closed-loop-stage1/audit-pack/iteration-2-after/model-summary.json",
+          "outputs/closed-loop-stage1/audit-pack/iteration-2/after-summary.json"
+        ],
+        "head_count": 4
+      },
+      {
+        "git_blob_sha": "37607e1fdc05a122230dbc2c8fa61bfacae4a5de",
+        "paths": [
+          "construction_details/index/sources.json",
+          "details/index/sources.json"
+        ],
+        "head_count": 24
+      },
+      {
+        "git_blob_sha": "45efa43dd3a5955477f1cba61f3b665db2f14c47",
+        "paths": [
+          "details/import/kaiman-exact-v2.5/README_KAIMAN_v2.5.md",
+          "details/machine-db/releases/kaiman-v2.5/README_KAIMAN_v2.5.md"
+        ],
+        "head_count": 24
+      },
+      {
+        "git_blob_sha": "45f80903dd9e77f74564e2af6219fcc45edab7d1",
+        "paths": [
+          "ARENA_TASK_ARCHITECTURE_AUDIT.md",
+          "archive/coordination/ARENA_TASK_ARCHITECTURE_AUDIT.md"
+        ],
+        "head_count": 80
+      },
+      {
+        "git_blob_sha": "54ab963bd2650e6ae2850e681310fbbdea1ec6e6",
+        "paths": [
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-04/iterations/003-readback.json",
+          "outputs/closed-loop-stage4/hardening-offline-003/S4-06-offline/iterations/002-readback.json"
+        ],
+        "head_count": 3
+      },
+      {
+        "git_blob_sha": "79005e34a21e915ef2a72ccddef6ffc47ce174b3",
+        "paths": [
+          "archive/legacy-v0.1/safe-bim-v01-schema-test.json",
+          "safe-bim-v01-schema-test.json"
+        ],
+        "head_count": 80
+      },
+      {
+        "git_blob_sha": "96cc4cc007d1b1214e678804d4d8450f99be23cf",
+        "paths": [
+          "details/import/kaiman-exact-v2.5/kaiman-kerakam-exact-v2.5.tar.gz",
+          "details/machine-db/releases/kaiman-v2.5/kaiman-kerakam-exact-v2.5.tar.gz"
+        ],
+        "head_count": 24
+      },
+      {
+        "git_blob_sha": "a38ca0bba19bf03dd429dfefb8b2465a4a7c9fe6",
+        "paths": [
+          "SAFE_BIM_V01_REPORT.md",
+          "archive/legacy-v0.1/SAFE_BIM_V01_REPORT.md"
+        ],
+        "head_count": 80
+      },
+      {
+        "git_blob_sha": "a5d9283eef36d35935d53fdfe063f65bde10539a",
+        "paths": [
+          "details/import/kaiman-exact-v2.5/AUDIT_KAIMAN_v2.5.json",
+          "details/machine-db/releases/kaiman-v2.5/AUDIT_KAIMAN_v2.5.json"
+        ],
+        "head_count": 24
+      },
+      {
+        "git_blob_sha": "a621651c0cfa2213d9fcdd230810ee84728c4e4d",
+        "paths": [
+          "archive/coordination/bimexec/HANDOFF_WORK.md",
+          "bimexec/HANDOFF_WORK.md"
+        ],
+        "head_count": 79
+      },
+      {
+        "git_blob_sha": "aaf33ad4b1f2b2ae53d15a4a26dfe050ea3404dd",
+        "paths": [
+          "outputs/closed-loop-stage3/run-002/audit-pack/iteration-1/source-wall-before.json",
+          "outputs/closed-loop-stage3/run-002/audit-pack/iteration-1/source-wall.json"
+        ],
+        "head_count": 4
+      },
+      {
+        "git_blob_sha": "bbca648f9f036528ddbf5a663715b78fea7a5b00",
+        "paths": [
+          "details/machine-db/releases/v2.2/README_v2.2.md",
+          "knowledge/detail-machine/releases/v2.2/README_v2.2.md"
+        ],
+        "head_count": 11
+      },
+      {
+        "git_blob_sha": "bccdbaefd4253d10361c17402b5ac0c6b4628641",
+        "paths": [
+          "construction_details/releases/v2.2/SHA256SUMS.txt",
+          "details/releases/v2.2/SHA256SUMS.txt"
+        ],
+        "head_count": 24
+      },
+      {
+        "git_blob_sha": "be0032a3f33fc9b0df68509cdd1dda1663160c87",
+        "paths": [
+          "outputs/closed-loop-stage1/initial-plan.json",
+          "outputs/closed-loop-stage1/iteration-1/pre-execution-plan.json"
+        ],
+        "head_count": 8
+      },
+      {
+        "git_blob_sha": "c0df5ee5904afc661df842ea3030a38765d483df",
+        "paths": [
+          "archive/coordination/bimexec/COORDINATION.md",
+          "bimexec/COORDINATION.md"
+        ],
+        "head_count": 66
+      },
+      {
+        "git_blob_sha": "e7dcc41da489b598ffc8a64bf6e43c5acda852f8",
+        "paths": [
+          "outputs/closed-loop-stage1/audit-pack/iteration-1/source-wall-before.json",
+          "outputs/closed-loop-stage1/audit-pack/iteration-1/source-wall.json"
+        ],
+        "head_count": 4
+      },
+      {
+        "git_blob_sha": "fcccfe4fd7ec160837beae660280e9e3848b6d35",
+        "paths": [
+          "construction_details/releases/v2.2/summary.json",
+          "details/releases/v2.2/summary.json"
+        ],
+        "head_count": 24
+      }
+    ]
+  },
+  "same_path_multiple_git_blob_sha": {
+    "count": 91,
+    "entries": [
+      {
+        "path": "tests/test_apa_slack_sync.py",
+        "variants": [
+          {
+            "git_blob_sha": "752d8c6ac524eeae3e8a09290ea15b3586948619",
+            "head_count": 1,
+            "head_shas": [
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123"
+            ]
+          },
+          {
+            "git_blob_sha": "ddbf7cf2fe9f235c1388d530efa028c58fb43ddc",
+            "head_count": 1,
+            "head_shas": [
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c"
+            ]
+          },
+          {
+            "git_blob_sha": "7c22b791cd2e73c35a218a8fa2faf15b2ab44650",
+            "head_count": 1,
+            "head_shas": [
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267"
+            ]
+          },
+          {
+            "git_blob_sha": "286edd26b6f9ec301726f53c85d54370e3351cbb",
+            "head_count": 1,
+            "head_shas": [
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf"
+            ]
+          },
+          {
+            "git_blob_sha": "54eea457a2a04a389fb60328af165ef877c8bcd5",
+            "head_count": 1,
+            "head_shas": [
+              "0ba3cc7408ba777546ae89fad4decd17d6421900"
+            ]
+          },
+          {
+            "git_blob_sha": "af662b0e38544e8a38485ba9a427ee2532f344ed",
+            "head_count": 1,
+            "head_shas": [
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd"
+            ]
+          },
+          {
+            "git_blob_sha": "8fa51e1c5d7da75611a5866b0b63d759940ae31b",
+            "head_count": 1,
+            "head_shas": [
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497"
+            ]
+          },
+          {
+            "git_blob_sha": "0f5a48ed34d254f1765c842f6b5ed722ecff94ac",
+            "head_count": 1,
+            "head_shas": [
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2"
+            ]
+          },
+          {
+            "git_blob_sha": "8c7f37f104bf9ea6e9671ef342e28e23339852ba",
+            "head_count": 1,
+            "head_shas": [
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9"
+            ]
+          },
+          {
+            "git_blob_sha": "acea8aa4804f1c46cdfe36c01602d4887e5386bc",
+            "head_count": 1,
+            "head_shas": [
+              "3bdf572b27b27a27335f24336625777f189fec4d"
+            ]
+          },
+          {
+            "git_blob_sha": "639eca0e741e56be66c3c9b8bf4286b1f68accde",
+            "head_count": 1,
+            "head_shas": [
+              "e2083582485933af83feea802c379f03ad947217"
+            ]
+          }
+        ]
+      },
+      {
+        "path": ".github/workflows/archicad-contracts.yml",
+        "variants": [
+          {
+            "git_blob_sha": "9ebc9f52c6ba3fc549cc6a8858e72ea103f5a5b7",
+            "head_count": 15,
+            "head_shas": [
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267"
+            ]
+          },
+          {
+            "git_blob_sha": "0c9ef2cca22c9cb8cc0058fabb3e470ecf7e4ab0",
+            "head_count": 2,
+            "head_shas": [
+              "1167e6bb1bc025e10855c12be14811e44d7ad42a",
+              "c0223e18370e5e3d5205ca401a68d7603b4be120"
+            ]
+          },
+          {
+            "git_blob_sha": "f0d0956c2ab093e797f3a88540c43a0914cf6236",
+            "head_count": 1,
+            "head_shas": [
+              "751fdfbc1be929f3da601e1094f74fed2f02b322"
+            ]
+          },
+          {
+            "git_blob_sha": "bbf8530c1f97fd8ac744e4408e5af59b5307c60c",
+            "head_count": 1,
+            "head_shas": [
+              "d3c0dd51ba12eb6112822376b3aa05d3077b7afc"
+            ]
+          },
+          {
+            "git_blob_sha": "84b1d8d1a00f1a10ca0239608efe8cccd79234c6",
+            "head_count": 1,
+            "head_shas": [
+              "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1"
+            ]
+          },
+          {
+            "git_blob_sha": "526676ce96d0b6eb72fff943ebe3a6b247f57677",
+            "head_count": 1,
+            "head_shas": [
+              "f02a167eb73cb149713cf5e613911b144fce5be2"
+            ]
+          },
+          {
+            "git_blob_sha": "992477628c1ee75e6d6affd8636ec27b7de3851b",
+            "head_count": 1,
+            "head_shas": [
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "README.md",
+        "variants": [
+          {
+            "git_blob_sha": "d6e3c9eb1aaa81a0a1b369cf4d94d56f8fc31291",
+            "head_count": 27,
+            "head_shas": [
+              "02ed7a8a5a6e199bdfcb7cc7c7836dd7038deacb",
+              "0e7a312d7a7c491d877b6746b275acd0364c97ab",
+              "181ca75229d9fd949797dbfa607c5245b121aaec",
+              "1b3a43479343d65ce1a63d181c5b83f683530050",
+              "2ec5c001544a0eede73daa99c618ba53448f226c",
+              "3cbfc4e379b54d4249badd508fb64c21886ac186",
+              "4559bf13a2b17dd525cf91ed00521cabbdaf5a0c",
+              "4fedb7cb815f9109755a9174bbae709fa18fdab7",
+              "53d6b638b4e638c669ce169196088c3b3a5cdc30",
+              "59239ceac83529c1fb6ad5d97fdf3d74edacc848",
+              "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+              "7281bab2ec012933cf056d81d26822c017951ad6",
+              "743b791504eb92805a18edf78d20b958a6220710",
+              "7bd2f7076933e31cdf6d24855ca703c0c6e67545",
+              "88cf532c70362b3f404aa5bae2c640527fca5616",
+              "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+              "a5eb3eee68817925ecfebb0fb22ab6b8fbe59f03",
+              "b7fa4d304263f6dccc9edc11f607c26942ba695c",
+              "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+              "bdd38ef457ac1c56990f026aefecf14f623de4f8",
+              "bf860e1557b9d54318c022191cdc1cef4a84e2d7",
+              "c55f404829e4e11004ea5c59c8b3aec18b663866",
+              "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+              "d5695f435a5841d39f0fe69a6424cccc1c8d0a4c",
+              "e6962b612938cc399913246bc7e296f59704772e",
+              "ebe46536c85111248234235c8e7ac8cbd2bffac5",
+              "ee3d1a8e7d7d2bd7bd8ee3bc27cdac98c7f8decd"
+            ]
+          },
+          {
+            "git_blob_sha": "c25566be0aa91c8b41de9be686c3f0aa84747347",
+            "head_count": 23,
+            "head_shas": [
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "1167e6bb1bc025e10855c12be14811e44d7ad42a",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "38cfe7feaa756717a9cdb8915f7c701e3d9c4d5f",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "751fdfbc1be929f3da601e1094f74fed2f02b322",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "c0223e18370e5e3d5205ca401a68d7603b4be120",
+              "d3c0dd51ba12eb6112822376b3aa05d3077b7afc",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+              "f02a167eb73cb149713cf5e613911b144fce5be2",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267"
+            ]
+          },
+          {
+            "git_blob_sha": "430e99e9c610756fa47da39af5daaa0d7619743d",
+            "head_count": 11,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "f9b509c1bbc98b36345d3bb6f2039a89b0ed6856",
+            "head_count": 10,
+            "head_shas": [
+              "1d4b66ae36d955588dcf2276a3e7b0ccaf6f74ef",
+              "3eb33b3c248a19088eb6868ddd997a69fab8d4a7",
+              "6901fe69d834f8d571c53d3bbda57f46d2106943",
+              "81344925f06523bb60ee300f48af458ab0288938",
+              "8881c46c222a7adaf6372941c185db4ac67598e1",
+              "8cbbab827ee8a1bdde5e7d44ac3d1b06f5b4cc8b",
+              "99326ff531dfa9cb19c906ee349304fdca92fc52",
+              "c75665feb8029116245dd1ec76733e599ebdc24a",
+              "cc838c0fd0e40be7426ea991af54234a35f22544",
+              "e273edbeb5bfd6337856fccf5e8c9834c0273a5a"
+            ]
+          },
+          {
+            "git_blob_sha": "d5962a2425cfaf9b91ece2680f35e977a965adda",
+            "head_count": 6,
+            "head_shas": [
+              "03c64733bb2b4f59970f5247a3ed89e1236f3090",
+              "06c503a424498a74e19507ae11a4cc48f6dc7c3f",
+              "2674e1ebd7656fbdb306bcff294d8d17174be78a",
+              "27fc10267e71d1cd4f8322fe1d3c334e2cef1b4c",
+              "d6ed3b071c1e7d17b8d819377e1984c80dd9ed33",
+              "f8b82ed3008c4669faf1424958b30f43aa4b5d92"
+            ]
+          },
+          {
+            "git_blob_sha": "e36a91c239c9d1922346209c6c25c1bc71ec2b0e",
+            "head_count": 2,
+            "head_shas": [
+              "06f6e04974bbea23c12cff63f93004048579ff3e",
+              "ad0c0ed127c068d2a7446f3bf03a31f7584decad"
+            ]
+          },
+          {
+            "git_blob_sha": "212e3c5f676a4dc08ea6ae83f35635366fd3c26b",
+            "head_count": 1,
+            "head_shas": [
+              "faf2fd8adcfd3329ae77a137b37f739a9a462225"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "safe_bim_layer.py",
+        "variants": [
+          {
+            "git_blob_sha": "eb8ebadaeb8619f96cbecd8e94043891853ebde2",
+            "head_count": 69,
+            "head_shas": [
+              "02ed7a8a5a6e199bdfcb7cc7c7836dd7038deacb",
+              "03c64733bb2b4f59970f5247a3ed89e1236f3090",
+              "06c503a424498a74e19507ae11a4cc48f6dc7c3f",
+              "06f6e04974bbea23c12cff63f93004048579ff3e",
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "0e7a312d7a7c491d877b6746b275acd0364c97ab",
+              "1167e6bb1bc025e10855c12be14811e44d7ad42a",
+              "181ca75229d9fd949797dbfa607c5245b121aaec",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3a43479343d65ce1a63d181c5b83f683530050",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d4b66ae36d955588dcf2276a3e7b0ccaf6f74ef",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "2674e1ebd7656fbdb306bcff294d8d17174be78a",
+              "27fc10267e71d1cd4f8322fe1d3c334e2cef1b4c",
+              "2ec5c001544a0eede73daa99c618ba53448f226c",
+              "38cfe7feaa756717a9cdb8915f7c701e3d9c4d5f",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "3cbfc4e379b54d4249badd508fb64c21886ac186",
+              "3eb33b3c248a19088eb6868ddd997a69fab8d4a7",
+              "4559bf13a2b17dd525cf91ed00521cabbdaf5a0c",
+              "4fedb7cb815f9109755a9174bbae709fa18fdab7",
+              "53d6b638b4e638c669ce169196088c3b3a5cdc30",
+              "59239ceac83529c1fb6ad5d97fdf3d74edacc848",
+              "6901fe69d834f8d571c53d3bbda57f46d2106943",
+              "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+              "7281bab2ec012933cf056d81d26822c017951ad6",
+              "743b791504eb92805a18edf78d20b958a6220710",
+              "751fdfbc1be929f3da601e1094f74fed2f02b322",
+              "7bd2f7076933e31cdf6d24855ca703c0c6e67545",
+              "81344925f06523bb60ee300f48af458ab0288938",
+              "8881c46c222a7adaf6372941c185db4ac67598e1",
+              "88cf532c70362b3f404aa5bae2c640527fca5616",
+              "8cbbab827ee8a1bdde5e7d44ac3d1b06f5b4cc8b",
+              "99326ff531dfa9cb19c906ee349304fdca92fc52",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+              "a5eb3eee68817925ecfebb0fb22ab6b8fbe59f03",
+              "ad0c0ed127c068d2a7446f3bf03a31f7584decad",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "b7fa4d304263f6dccc9edc11f607c26942ba695c",
+              "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+              "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "bdd38ef457ac1c56990f026aefecf14f623de4f8",
+              "bf860e1557b9d54318c022191cdc1cef4a84e2d7",
+              "c0223e18370e5e3d5205ca401a68d7603b4be120",
+              "c55f404829e4e11004ea5c59c8b3aec18b663866",
+              "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+              "c75665feb8029116245dd1ec76733e599ebdc24a",
+              "cc838c0fd0e40be7426ea991af54234a35f22544",
+              "d3c0dd51ba12eb6112822376b3aa05d3077b7afc",
+              "d5695f435a5841d39f0fe69a6424cccc1c8d0a4c",
+              "d6ed3b071c1e7d17b8d819377e1984c80dd9ed33",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e273edbeb5bfd6337856fccf5e8c9834c0273a5a",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "e6962b612938cc399913246bc7e296f59704772e",
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+              "ebe46536c85111248234235c8e7ac8cbd2bffac5",
+              "ee3d1a8e7d7d2bd7bd8ee3bc27cdac98c7f8decd",
+              "f02a167eb73cb149713cf5e613911b144fce5be2",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267",
+              "f8b82ed3008c4669faf1424958b30f43aa4b5d92",
+              "faf2fd8adcfd3329ae77a137b37f739a9a462225"
+            ]
+          },
+          {
+            "git_blob_sha": "a6fccfafb6faa455d64aa8c25a89893c9018795a",
+            "head_count": 6,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "47316bf4f02534304be1a41c8fda2b0d0bc55a64",
+            "head_count": 3,
+            "head_shas": [
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "ff93e3d18f08c10bd67e75d6c69f5c48961dae66",
+            "head_count": 1,
+            "head_shas": [
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127"
+            ]
+          },
+          {
+            "git_blob_sha": "02c97b3d7d7655a7044e4579df879a0c2e05ffba",
+            "head_count": 1,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "scripts/apa_sync/coordinator.py",
+        "variants": [
+          {
+            "git_blob_sha": "ada6b89255e713b107a922f81ca4f10116a0f836",
+            "head_count": 3,
+            "head_shas": [
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf"
+            ]
+          },
+          {
+            "git_blob_sha": "326e3aefbfb1bb1e9afed6bc782d109056242a7e",
+            "head_count": 3,
+            "head_shas": [
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267"
+            ]
+          },
+          {
+            "git_blob_sha": "e6bdf6702e4f0ecc21b358636012e780748e4127",
+            "head_count": 3,
+            "head_shas": [
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "e2083582485933af83feea802c379f03ad947217"
+            ]
+          },
+          {
+            "git_blob_sha": "55b91ef104523adddb71a0ee34191d653a5dbfae",
+            "head_count": 1,
+            "head_shas": [
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123"
+            ]
+          },
+          {
+            "git_blob_sha": "046e69bccf2581123369c41f63539f1e0bd93cf8",
+            "head_count": 1,
+            "head_shas": [
+              "3bdf572b27b27a27335f24336625777f189fec4d"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "scripts/apa_sync/inspect_raw_envelopes.py",
+        "variants": [
+          {
+            "git_blob_sha": "58f8ed4d9ae1c83456b3cbb276a39d70d6046f0b",
+            "head_count": 2,
+            "head_shas": [
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "3bdf572b27b27a27335f24336625777f189fec4d"
+            ]
+          },
+          {
+            "git_blob_sha": "36daf1c022bc606780c64113d249a264741b6a24",
+            "head_count": 1,
+            "head_shas": [
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c"
+            ]
+          },
+          {
+            "git_blob_sha": "9b0c7e2f6d9617855ae57d0d0debb44289556975",
+            "head_count": 1,
+            "head_shas": [
+              "0ba3cc7408ba777546ae89fad4decd17d6421900"
+            ]
+          },
+          {
+            "git_blob_sha": "e4ddb3396a85f37794e6b4d49780ba8042192a50",
+            "head_count": 1,
+            "head_shas": [
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2"
+            ]
+          },
+          {
+            "git_blob_sha": "ed1ee819cacd9fe5060b6ce899fb02804bcf475b",
+            "head_count": 1,
+            "head_shas": [
+              "e2083582485933af83feea802c379f03ad947217"
+            ]
+          }
+        ]
+      },
+      {
+        "path": ".gitignore",
+        "variants": [
+          {
+            "git_blob_sha": "3068944546f0f7166cf7d3f68252c5750bab1e92",
+            "head_count": 37,
+            "head_shas": [
+              "02ed7a8a5a6e199bdfcb7cc7c7836dd7038deacb",
+              "0e7a312d7a7c491d877b6746b275acd0364c97ab",
+              "181ca75229d9fd949797dbfa607c5245b121aaec",
+              "1b3a43479343d65ce1a63d181c5b83f683530050",
+              "1d4b66ae36d955588dcf2276a3e7b0ccaf6f74ef",
+              "2ec5c001544a0eede73daa99c618ba53448f226c",
+              "3cbfc4e379b54d4249badd508fb64c21886ac186",
+              "3eb33b3c248a19088eb6868ddd997a69fab8d4a7",
+              "4559bf13a2b17dd525cf91ed00521cabbdaf5a0c",
+              "4fedb7cb815f9109755a9174bbae709fa18fdab7",
+              "53d6b638b4e638c669ce169196088c3b3a5cdc30",
+              "59239ceac83529c1fb6ad5d97fdf3d74edacc848",
+              "6901fe69d834f8d571c53d3bbda57f46d2106943",
+              "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+              "7281bab2ec012933cf056d81d26822c017951ad6",
+              "743b791504eb92805a18edf78d20b958a6220710",
+              "7bd2f7076933e31cdf6d24855ca703c0c6e67545",
+              "81344925f06523bb60ee300f48af458ab0288938",
+              "8881c46c222a7adaf6372941c185db4ac67598e1",
+              "88cf532c70362b3f404aa5bae2c640527fca5616",
+              "8cbbab827ee8a1bdde5e7d44ac3d1b06f5b4cc8b",
+              "99326ff531dfa9cb19c906ee349304fdca92fc52",
+              "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+              "a5eb3eee68817925ecfebb0fb22ab6b8fbe59f03",
+              "b7fa4d304263f6dccc9edc11f607c26942ba695c",
+              "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+              "bdd38ef457ac1c56990f026aefecf14f623de4f8",
+              "bf860e1557b9d54318c022191cdc1cef4a84e2d7",
+              "c55f404829e4e11004ea5c59c8b3aec18b663866",
+              "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+              "c75665feb8029116245dd1ec76733e599ebdc24a",
+              "cc838c0fd0e40be7426ea991af54234a35f22544",
+              "d5695f435a5841d39f0fe69a6424cccc1c8d0a4c",
+              "e273edbeb5bfd6337856fccf5e8c9834c0273a5a",
+              "e6962b612938cc399913246bc7e296f59704772e",
+              "ebe46536c85111248234235c8e7ac8cbd2bffac5",
+              "ee3d1a8e7d7d2bd7bd8ee3bc27cdac98c7f8decd"
+            ]
+          },
+          {
+            "git_blob_sha": "8a808588b3241b8c658402ac69f5a7a4d2ffd889",
+            "head_count": 32,
+            "head_shas": [
+              "03c64733bb2b4f59970f5247a3ed89e1236f3090",
+              "06c503a424498a74e19507ae11a4cc48f6dc7c3f",
+              "06f6e04974bbea23c12cff63f93004048579ff3e",
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "1167e6bb1bc025e10855c12be14811e44d7ad42a",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "2674e1ebd7656fbdb306bcff294d8d17174be78a",
+              "27fc10267e71d1cd4f8322fe1d3c334e2cef1b4c",
+              "38cfe7feaa756717a9cdb8915f7c701e3d9c4d5f",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "751fdfbc1be929f3da601e1094f74fed2f02b322",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "ad0c0ed127c068d2a7446f3bf03a31f7584decad",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "c0223e18370e5e3d5205ca401a68d7603b4be120",
+              "d3c0dd51ba12eb6112822376b3aa05d3077b7afc",
+              "d6ed3b071c1e7d17b8d819377e1984c80dd9ed33",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+              "f02a167eb73cb149713cf5e613911b144fce5be2",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267",
+              "f8b82ed3008c4669faf1424958b30f43aa4b5d92",
+              "faf2fd8adcfd3329ae77a137b37f739a9a462225"
+            ]
+          },
+          {
+            "git_blob_sha": "0e69ae40eae0c168d35c2173c6c0c14b7f304a3b",
+            "head_count": 10,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "7b1eddd51c6cd0eb5704400c5aba73332d86d2e9",
+            "head_count": 1,
+            "head_shas": [
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "closed_loop/live_wall.py",
+        "variants": [
+          {
+            "git_blob_sha": "e55dd7d191e88110d6f996d3734af650dddd1b9e",
+            "head_count": 3,
+            "head_shas": [
+              "03c64733bb2b4f59970f5247a3ed89e1236f3090",
+              "06c503a424498a74e19507ae11a4cc48f6dc7c3f",
+              "2674e1ebd7656fbdb306bcff294d8d17174be78a"
+            ]
+          },
+          {
+            "git_blob_sha": "2d2be3e966b40c4944f367d78d5276d428169712",
+            "head_count": 1,
+            "head_shas": [
+              "faf2fd8adcfd3329ae77a137b37f739a9a462225"
+            ]
+          },
+          {
+            "git_blob_sha": "be259da413ff4b7c32912ad5c567217d0a291e73",
+            "head_count": 1,
+            "head_shas": [
+              "ad0c0ed127c068d2a7446f3bf03a31f7584decad"
+            ]
+          },
+          {
+            "git_blob_sha": "0368ad23f0781791523e61190f66e9b5412b6827",
+            "head_count": 1,
+            "head_shas": [
+              "06f6e04974bbea23c12cff63f93004048579ff3e"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "closed_loop/models.py",
+        "variants": [
+          {
+            "git_blob_sha": "f89194c414825ae131f8b21c7bacf0fd62223886",
+            "head_count": 3,
+            "head_shas": [
+              "03c64733bb2b4f59970f5247a3ed89e1236f3090",
+              "06c503a424498a74e19507ae11a4cc48f6dc7c3f",
+              "2674e1ebd7656fbdb306bcff294d8d17174be78a"
+            ]
+          },
+          {
+            "git_blob_sha": "ad707460522a4a98c9cf803dee36886a4723fa52",
+            "head_count": 2,
+            "head_shas": [
+              "ad0c0ed127c068d2a7446f3bf03a31f7584decad",
+              "faf2fd8adcfd3329ae77a137b37f739a9a462225"
+            ]
+          },
+          {
+            "git_blob_sha": "633ccf5b640fa038c400c0f6fe5647104199bfaa",
+            "head_count": 1,
+            "head_shas": [
+              "d6ed3b071c1e7d17b8d819377e1984c80dd9ed33"
+            ]
+          },
+          {
+            "git_blob_sha": "90955908c734ca04d9f6b68604d331c4eed1abea",
+            "head_count": 1,
+            "head_shas": [
+              "06f6e04974bbea23c12cff63f93004048579ff3e"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "docs/OPERATING_MODEL.md",
+        "variants": [
+          {
+            "git_blob_sha": "6405a9eb186ac3b7115d961fd975c72428b6d05b",
+            "head_count": 55,
+            "head_shas": [
+              "02ed7a8a5a6e199bdfcb7cc7c7836dd7038deacb",
+              "03c64733bb2b4f59970f5247a3ed89e1236f3090",
+              "06c503a424498a74e19507ae11a4cc48f6dc7c3f",
+              "06f6e04974bbea23c12cff63f93004048579ff3e",
+              "0e7a312d7a7c491d877b6746b275acd0364c97ab",
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "181ca75229d9fd949797dbfa607c5245b121aaec",
+              "1b3a43479343d65ce1a63d181c5b83f683530050",
+              "1d4b66ae36d955588dcf2276a3e7b0ccaf6f74ef",
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "2674e1ebd7656fbdb306bcff294d8d17174be78a",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "27fc10267e71d1cd4f8322fe1d3c334e2cef1b4c",
+              "2ec5c001544a0eede73daa99c618ba53448f226c",
+              "3cbfc4e379b54d4249badd508fb64c21886ac186",
+              "3eb33b3c248a19088eb6868ddd997a69fab8d4a7",
+              "4559bf13a2b17dd525cf91ed00521cabbdaf5a0c",
+              "4fedb7cb815f9109755a9174bbae709fa18fdab7",
+              "53d6b638b4e638c669ce169196088c3b3a5cdc30",
+              "59239ceac83529c1fb6ad5d97fdf3d74edacc848",
+              "6901fe69d834f8d571c53d3bbda57f46d2106943",
+              "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+              "7281bab2ec012933cf056d81d26822c017951ad6",
+              "743b791504eb92805a18edf78d20b958a6220710",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "7bd2f7076933e31cdf6d24855ca703c0c6e67545",
+              "81344925f06523bb60ee300f48af458ab0288938",
+              "8881c46c222a7adaf6372941c185db4ac67598e1",
+              "8cbbab827ee8a1bdde5e7d44ac3d1b06f5b4cc8b",
+              "99326ff531dfa9cb19c906ee349304fdca92fc52",
+              "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "a5eb3eee68817925ecfebb0fb22ab6b8fbe59f03",
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+              "ad0c0ed127c068d2a7446f3bf03a31f7584decad",
+              "b7fa4d304263f6dccc9edc11f607c26942ba695c",
+              "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+              "bdd38ef457ac1c56990f026aefecf14f623de4f8",
+              "c55f404829e4e11004ea5c59c8b3aec18b663866",
+              "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "c75665feb8029116245dd1ec76733e599ebdc24a",
+              "cc838c0fd0e40be7426ea991af54234a35f22544",
+              "d5695f435a5841d39f0fe69a6424cccc1c8d0a4c",
+              "d6ed3b071c1e7d17b8d819377e1984c80dd9ed33",
+              "e273edbeb5bfd6337856fccf5e8c9834c0273a5a",
+              "e6962b612938cc399913246bc7e296f59704772e",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "ebe46536c85111248234235c8e7ac8cbd2bffac5",
+              "ee3d1a8e7d7d2bd7bd8ee3bc27cdac98c7f8decd",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71",
+              "f8b82ed3008c4669faf1424958b30f43aa4b5d92",
+              "faf2fd8adcfd3329ae77a137b37f739a9a462225"
+            ]
+          },
+          {
+            "git_blob_sha": "09fe8ddb7c6c93930f5703d07d3be2024dddcebe",
+            "head_count": 23,
+            "head_shas": [
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "1167e6bb1bc025e10855c12be14811e44d7ad42a",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "38cfe7feaa756717a9cdb8915f7c701e3d9c4d5f",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "751fdfbc1be929f3da601e1094f74fed2f02b322",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "c0223e18370e5e3d5205ca401a68d7603b4be120",
+              "d3c0dd51ba12eb6112822376b3aa05d3077b7afc",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+              "f02a167eb73cb149713cf5e613911b144fce5be2",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267"
+            ]
+          },
+          {
+            "git_blob_sha": "bd163d28a8b34454206686c6f496eb422ff164f7",
+            "head_count": 1,
+            "head_shas": [
+              "88cf532c70362b3f404aa5bae2c640527fca5616"
+            ]
+          },
+          {
+            "git_blob_sha": "56c70dff50119b58a440142b40d7c946dfaae37e",
+            "head_count": 1,
+            "head_shas": [
+              "bf860e1557b9d54318c022191cdc1cef4a84e2d7"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "safe_bim_operations.py",
+        "variants": [
+          {
+            "git_blob_sha": "bf423d70bff18ee4c9179a39a45f275c33b5fc8f",
+            "head_count": 6,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "4d8d47f5b5ad5973556a62a8cb12cd12647f625f",
+            "head_count": 3,
+            "head_shas": [
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "7979386f0db9fd88bc3596153921631c3c1529ce",
+            "head_count": 1,
+            "head_shas": [
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127"
+            ]
+          },
+          {
+            "git_blob_sha": "85aae22709d53628c1da0a160a0f84a8a6748c92",
+            "head_count": 1,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "scripts/archicad_bim_graph.py",
+        "variants": [
+          {
+            "git_blob_sha": "fc68f82b1d0cf89d5d4576ac03225572a6ffadf2",
+            "head_count": 18,
+            "head_shas": [
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+              "f02a167eb73cb149713cf5e613911b144fce5be2",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267"
+            ]
+          },
+          {
+            "git_blob_sha": "3659c7c1101d6341b7cb15807882f85d28d292a8",
+            "head_count": 2,
+            "head_shas": [
+              "1167e6bb1bc025e10855c12be14811e44d7ad42a",
+              "c0223e18370e5e3d5205ca401a68d7603b4be120"
+            ]
+          },
+          {
+            "git_blob_sha": "a19575e9179c9d604e67c3f10f7afa4dead2a187",
+            "head_count": 1,
+            "head_shas": [
+              "751fdfbc1be929f3da601e1094f74fed2f02b322"
+            ]
+          },
+          {
+            "git_blob_sha": "570456497cf999ec86be7990b47b4a6b2629bfe5",
+            "head_count": 1,
+            "head_shas": [
+              "d3c0dd51ba12eb6112822376b3aa05d3077b7afc"
+            ]
+          }
+        ]
+      },
+      {
+        "path": ".gitattributes",
+        "variants": [
+          {
+            "git_blob_sha": "08a725928d7d4498928c9c47a5f5fc7a61af31d8",
+            "head_count": 16,
+            "head_shas": [
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267"
+            ]
+          },
+          {
+            "git_blob_sha": "9384dbd2c55b0f068719faf74ccf170578b76160",
+            "head_count": 3,
+            "head_shas": [
+              "06f6e04974bbea23c12cff63f93004048579ff3e",
+              "ad0c0ed127c068d2a7446f3bf03a31f7584decad",
+              "faf2fd8adcfd3329ae77a137b37f739a9a462225"
+            ]
+          },
+          {
+            "git_blob_sha": "4b041d58156607f8fa9e3c3fdcacc91f12005901",
+            "head_count": 2,
+            "head_shas": [
+              "03c64733bb2b4f59970f5247a3ed89e1236f3090",
+              "06c503a424498a74e19507ae11a4cc48f6dc7c3f"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "bimexec/probes/backends.py",
+        "variants": [
+          {
+            "git_blob_sha": "80afaf4d5ba1d096205b33da27feb0de63a56851",
+            "head_count": 7,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+              "c55f404829e4e11004ea5c59c8b3aec18b663866",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "d2151bf1e23a0d0037c77c3397d58f66beb3fa7a",
+            "head_count": 5,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "6717f8c582f4675bc6abbaacb3ceb0a2153009b7",
+            "head_count": 1,
+            "head_shas": [
+              "1e87381693ef6467dfacd97374b8a990687881f7"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "bimexec/probes/probe_t2_connections_v13.py",
+        "variants": [
+          {
+            "git_blob_sha": "a8e199659f1eecb343a05957c566dd6a2c0840e4",
+            "head_count": 6,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+              "c55f404829e4e11004ea5c59c8b3aec18b663866",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "38564ef055033667aad0637d6650b16c78cae895",
+            "head_count": 6,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "1ff6f61c68a7326d61879f260a7a157bc424d252",
+            "head_count": 1,
+            "head_shas": [
+              "a2d5dc9f81854bedff29347f9ef9134631263fa5"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "bimexec/probes/probe_t2_live_v13.py",
+        "variants": [
+          {
+            "git_blob_sha": "1e73a94978377b5f86680dfc1fa6cc6558b19f45",
+            "head_count": 6,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+              "c55f404829e4e11004ea5c59c8b3aec18b663866",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "34b507d921495e52da2ee911e7cb6d19e972d88a",
+            "head_count": 6,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "5f23251f8d15b8fd4698011bf38feb8b6ec544ae",
+            "head_count": 1,
+            "head_shas": [
+              "a2d5dc9f81854bedff29347f9ef9134631263fa5"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "bimexec/reference/bimexec/tapir_raw.py",
+        "variants": [
+          {
+            "git_blob_sha": "64fb1c4dd7b2605143709880356779b091d47a1e",
+            "head_count": 6,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+              "c55f404829e4e11004ea5c59c8b3aec18b663866",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "174f56a9962376571040a1c62abe89124b732b99",
+            "head_count": 6,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "b556ce314e7492cf5eb5c884d48339f4a5b0dee2",
+            "head_count": 1,
+            "head_shas": [
+              "a2d5dc9f81854bedff29347f9ef9134631263fa5"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "bimexec/tests/test_all.py",
+        "variants": [
+          {
+            "git_blob_sha": "f536de855ab340e9573ab4b2e5a929171007e14f",
+            "head_count": 7,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+              "c55f404829e4e11004ea5c59c8b3aec18b663866",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "e7fb87f87be90ff93cdc3d788b5a446edb65396f",
+            "head_count": 5,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "ee5b33c1f2797f3f5fed8c5e73895ace3e9897ca",
+            "head_count": 1,
+            "head_shas": [
+              "a2d5dc9f81854bedff29347f9ef9134631263fa5"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "closed_loop/orchestrator.py",
+        "variants": [
+          {
+            "git_blob_sha": "bbbf79b7477a2f35db1c35b779d63d4293809000",
+            "head_count": 3,
+            "head_shas": [
+              "03c64733bb2b4f59970f5247a3ed89e1236f3090",
+              "06c503a424498a74e19507ae11a4cc48f6dc7c3f",
+              "2674e1ebd7656fbdb306bcff294d8d17174be78a"
+            ]
+          },
+          {
+            "git_blob_sha": "81d41ef2690fa63dc979a7bccf1667c6bcc33914",
+            "head_count": 3,
+            "head_shas": [
+              "06f6e04974bbea23c12cff63f93004048579ff3e",
+              "ad0c0ed127c068d2a7446f3bf03a31f7584decad",
+              "faf2fd8adcfd3329ae77a137b37f739a9a462225"
+            ]
+          },
+          {
+            "git_blob_sha": "d4679bfb274838963b7f3df483597535ca0618fc",
+            "head_count": 1,
+            "head_shas": [
+              "d6ed3b071c1e7d17b8d819377e1984c80dd9ed33"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "docs/CURRENT_STATUS.md",
+        "variants": [
+          {
+            "git_blob_sha": "a0815bfbd632986848eb32e35f5a1899b9df4554",
+            "head_count": 1,
+            "head_shas": [
+              "faf2fd8adcfd3329ae77a137b37f739a9a462225"
+            ]
+          },
+          {
+            "git_blob_sha": "2f44fb01ed2a2ac380b8d577e36526f4ec2f3a5f",
+            "head_count": 1,
+            "head_shas": [
+              "ad0c0ed127c068d2a7446f3bf03a31f7584decad"
+            ]
+          },
+          {
+            "git_blob_sha": "67642c0a8ec74a3e4ea97f995dd8fcf0d1c16779",
+            "head_count": 1,
+            "head_shas": [
+              "06f6e04974bbea23c12cff63f93004048579ff3e"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "docs/INDEX.md",
+        "variants": [
+          {
+            "git_blob_sha": "ea7d6e9f03ac2e3f17bedecffc67238edc91b692",
+            "head_count": 1,
+            "head_shas": [
+              "faf2fd8adcfd3329ae77a137b37f739a9a462225"
+            ]
+          },
+          {
+            "git_blob_sha": "1e8633d5fdf3216a92026408f1c0c5439d202d1c",
+            "head_count": 1,
+            "head_shas": [
+              "ad0c0ed127c068d2a7446f3bf03a31f7584decad"
+            ]
+          },
+          {
+            "git_blob_sha": "f49955dbdf6a2c65ba4539fc6033c5a2656224f6",
+            "head_count": 1,
+            "head_shas": [
+              "06f6e04974bbea23c12cff63f93004048579ff3e"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "knowledge/detail-machine/CURRENT",
+        "variants": [
+          {
+            "git_blob_sha": "eb414301e6d638d9ede0fd9fd9445351ebac2055",
+            "head_count": 5,
+            "head_shas": [
+              "1b3a43479343d65ce1a63d181c5b83f683530050",
+              "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+              "bf860e1557b9d54318c022191cdc1cef4a84e2d7",
+              "d5695f435a5841d39f0fe69a6424cccc1c8d0a4c",
+              "ee3d1a8e7d7d2bd7bd8ee3bc27cdac98c7f8decd"
+            ]
+          },
+          {
+            "git_blob_sha": "e70ef1ddd8c33bae64e55d9c396e8c77808a783f",
+            "head_count": 1,
+            "head_shas": [
+              "ebe46536c85111248234235c8e7ac8cbd2bffac5"
+            ]
+          },
+          {
+            "git_blob_sha": "62c36deb2b7dfb0fdb329754b013db5710f3ad2d",
+            "head_count": 1,
+            "head_shas": [
+              "b8de871bce289240e0ee3694c6edb3b8d4c431f7"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "safe_bim_house_primitives.py",
+        "variants": [
+          {
+            "git_blob_sha": "78f168cedc35325aa9bad1ce55fefc3758d3f5ce",
+            "head_count": 6,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "137649a80874b991dcdc80112a1a283a499d7174",
+            "head_count": 1,
+            "head_shas": [
+              "c6ab4749e8784cc65170167d166daa6cc219a931"
+            ]
+          },
+          {
+            "git_blob_sha": "457399a4f87b8f81a06557412d055080574c60d1",
+            "head_count": 1,
+            "head_shas": [
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "safe_bim_runtime.py",
+        "variants": [
+          {
+            "git_blob_sha": "3e817640a0646d13776fa3f46be142e1879307e7",
+            "head_count": 6,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "886e1531cc344bbc4f0a0a9111345b01e25ece2e",
+            "head_count": 4,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "30723e5fbf1688f880913f497c39d1790d7f300a",
+            "head_count": 1,
+            "head_shas": [
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "safe_bim_service.py",
+        "variants": [
+          {
+            "git_blob_sha": "2990b2887f45f4bf76d8fcb69eb539ed4efdadd9",
+            "head_count": 6,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "886771a2a37977a686b8a63aeebd88126ebc65db",
+            "head_count": 4,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "e4328bf8b4a6a6c0eb77d06e9d671173809a290e",
+            "head_count": 1,
+            "head_shas": [
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "scripts/apa_sync/socket_mode.py",
+        "variants": [
+          {
+            "git_blob_sha": "1bcab424c5ef3c93660d8d198c662afc839a52df",
+            "head_count": 8,
+            "head_shas": [
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "e2083582485933af83feea802c379f03ad947217"
+            ]
+          },
+          {
+            "git_blob_sha": "18feecb3c274ae1006a2841e2d3586c58a374c97",
+            "head_count": 2,
+            "head_shas": [
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497"
+            ]
+          },
+          {
+            "git_blob_sha": "d0b5a929ca14ae9bfdd833579d6f204e00dc75c1",
+            "head_count": 1,
+            "head_shas": [
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "scripts/archicad_scene_run.py",
+        "variants": [
+          {
+            "git_blob_sha": "0a519f8ec360e43ad0c639382c2252b07a8a51cd",
+            "head_count": 15,
+            "head_shas": [
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267"
+            ]
+          },
+          {
+            "git_blob_sha": "464c490ba894a1effe304bd2e160969cec5b637c",
+            "head_count": 2,
+            "head_shas": [
+              "751fdfbc1be929f3da601e1094f74fed2f02b322",
+              "f02a167eb73cb149713cf5e613911b144fce5be2"
+            ]
+          },
+          {
+            "git_blob_sha": "322f610b08c5434da0db1897f15f474665a40b8a",
+            "head_count": 1,
+            "head_shas": [
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "sync_bridge/__main__.py",
+        "variants": [
+          {
+            "git_blob_sha": "c049f181066fe528e7bc960fc1a8961b34297aec",
+            "head_count": 4,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d"
+            ]
+          },
+          {
+            "git_blob_sha": "87bef69a04134e75f9e72ae6a8c85740ca71d906",
+            "head_count": 1,
+            "head_shas": [
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "16aa613c320a469f082851d3780d79cde703a052",
+            "head_count": 1,
+            "head_shas": [
+              "1e87381693ef6467dfacd97374b8a990687881f7"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "sync_bridge/host.py",
+        "variants": [
+          {
+            "git_blob_sha": "fd4a7e4477c6a7e70ad8c8a3afac2719668de7eb",
+            "head_count": 3,
+            "head_shas": [
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "3ac1a75a453fe479f5ae1756cd66984ee1bb65e5",
+            "head_count": 1,
+            "head_shas": [
+              "27906e2a1370146a8d740f02384ab02a584ce918"
+            ]
+          },
+          {
+            "git_blob_sha": "544c2f802a33c4ae3cd00132946a75ef23ea47f9",
+            "head_count": 1,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "sync_bridge/store.py",
+        "variants": [
+          {
+            "git_blob_sha": "c246945ca81645ef53ebabbfa49c541018e3db55",
+            "head_count": 4,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "3cd14b5ed5b4dc30d226dc03efa3de962cd1a2b1",
+            "head_count": 1,
+            "head_shas": [
+              "27906e2a1370146a8d740f02384ab02a584ce918"
+            ]
+          },
+          {
+            "git_blob_sha": "db59b54328ab742640bd44c60c287b4061213b1a",
+            "head_count": 1,
+            "head_shas": [
+              "1e87381693ef6467dfacd97374b8a990687881f7"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "test_safe_bim_layer_regressions.py",
+        "variants": [
+          {
+            "git_blob_sha": "d3406cb0593cb8bc3024a8b3ee2c69c40af93c55",
+            "head_count": 6,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "a92cd7e1ee0f7a0c6888b9531a0d55f48ffe0b38",
+            "head_count": 4,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "bcd343462214ec3c09fdb5b70a6fcd98a72a6e3c",
+            "head_count": 1,
+            "head_shas": [
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "tests_house_primitives/test_house_primitives.py",
+        "variants": [
+          {
+            "git_blob_sha": "60d14ff3fc45a45e2d889848eab7f0491cb6aaa2",
+            "head_count": 6,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "50bc663496c89d71ab8467e4a64b65f799301e96",
+            "head_count": 1,
+            "head_shas": [
+              "c6ab4749e8784cc65170167d166daa6cc219a931"
+            ]
+          },
+          {
+            "git_blob_sha": "4184d7846cb355fc6fcdfa5a5b2c1fc0f6afd20e",
+            "head_count": 1,
+            "head_shas": [
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "tests_safety/fake_bim.py",
+        "variants": [
+          {
+            "git_blob_sha": "446e1fd249af974c47e23e26c0a7c97f0779b786",
+            "head_count": 6,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "4b1a0a665f3001bc68e4933efe1eaaa3a1e27834",
+            "head_count": 3,
+            "head_shas": [
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "541b22666a217e03278d6652c7afef49ed50fc7d",
+            "head_count": 1,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "tests/test_archicad_bim_graph.py",
+        "variants": [
+          {
+            "git_blob_sha": "0ce37f79a7619d09ff0768cda085091a8769a3e7",
+            "head_count": 19,
+            "head_shas": [
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "751fdfbc1be929f3da601e1094f74fed2f02b322",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+              "f02a167eb73cb149713cf5e613911b144fce5be2",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267"
+            ]
+          },
+          {
+            "git_blob_sha": "9f69545de4f1a38d47db5f96b4e301aa0a6b2949",
+            "head_count": 2,
+            "head_shas": [
+              "1167e6bb1bc025e10855c12be14811e44d7ad42a",
+              "c0223e18370e5e3d5205ca401a68d7603b4be120"
+            ]
+          },
+          {
+            "git_blob_sha": "b6b54f7bc89fddb2531141264e29c06fbbaae68c",
+            "head_count": 1,
+            "head_shas": [
+              "d3c0dd51ba12eb6112822376b3aa05d3077b7afc"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "tests/test_archicad_mailbox_graph_adapter.py",
+        "variants": [
+          {
+            "git_blob_sha": "e7729882f82d80a836aa956d58db1833a4e7ab37",
+            "head_count": 19,
+            "head_shas": [
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "751fdfbc1be929f3da601e1094f74fed2f02b322",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+              "f02a167eb73cb149713cf5e613911b144fce5be2",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267"
+            ]
+          },
+          {
+            "git_blob_sha": "8975d2326401e71d32e9eef077951e2017c16875",
+            "head_count": 2,
+            "head_shas": [
+              "1167e6bb1bc025e10855c12be14811e44d7ad42a",
+              "c0223e18370e5e3d5205ca401a68d7603b4be120"
+            ]
+          },
+          {
+            "git_blob_sha": "29324c44860c909614e8fcdd399eeb77ebd9f936",
+            "head_count": 1,
+            "head_shas": [
+              "d3c0dd51ba12eb6112822376b3aa05d3077b7afc"
+            ]
+          }
+        ]
+      },
+      {
+        "path": ".github/pull_request_template.md",
+        "variants": [
+          {
+            "git_blob_sha": "1fdbca430b6f7a669074966d6405acd537d6880b",
+            "head_count": 79,
+            "head_shas": [
+              "02ed7a8a5a6e199bdfcb7cc7c7836dd7038deacb",
+              "03c64733bb2b4f59970f5247a3ed89e1236f3090",
+              "06c503a424498a74e19507ae11a4cc48f6dc7c3f",
+              "06f6e04974bbea23c12cff63f93004048579ff3e",
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "0e7a312d7a7c491d877b6746b275acd0364c97ab",
+              "1167e6bb1bc025e10855c12be14811e44d7ad42a",
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "181ca75229d9fd949797dbfa607c5245b121aaec",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3a43479343d65ce1a63d181c5b83f683530050",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d4b66ae36d955588dcf2276a3e7b0ccaf6f74ef",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "2674e1ebd7656fbdb306bcff294d8d17174be78a",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "27fc10267e71d1cd4f8322fe1d3c334e2cef1b4c",
+              "2ec5c001544a0eede73daa99c618ba53448f226c",
+              "38cfe7feaa756717a9cdb8915f7c701e3d9c4d5f",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "3cbfc4e379b54d4249badd508fb64c21886ac186",
+              "3eb33b3c248a19088eb6868ddd997a69fab8d4a7",
+              "4559bf13a2b17dd525cf91ed00521cabbdaf5a0c",
+              "4fedb7cb815f9109755a9174bbae709fa18fdab7",
+              "53d6b638b4e638c669ce169196088c3b3a5cdc30",
+              "59239ceac83529c1fb6ad5d97fdf3d74edacc848",
+              "6901fe69d834f8d571c53d3bbda57f46d2106943",
+              "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+              "7281bab2ec012933cf056d81d26822c017951ad6",
+              "743b791504eb92805a18edf78d20b958a6220710",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "751fdfbc1be929f3da601e1094f74fed2f02b322",
+              "7bd2f7076933e31cdf6d24855ca703c0c6e67545",
+              "81344925f06523bb60ee300f48af458ab0288938",
+              "8881c46c222a7adaf6372941c185db4ac67598e1",
+              "88cf532c70362b3f404aa5bae2c640527fca5616",
+              "8cbbab827ee8a1bdde5e7d44ac3d1b06f5b4cc8b",
+              "99326ff531dfa9cb19c906ee349304fdca92fc52",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "a5eb3eee68817925ecfebb0fb22ab6b8fbe59f03",
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+              "ad0c0ed127c068d2a7446f3bf03a31f7584decad",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "b7fa4d304263f6dccc9edc11f607c26942ba695c",
+              "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+              "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "bdd38ef457ac1c56990f026aefecf14f623de4f8",
+              "c0223e18370e5e3d5205ca401a68d7603b4be120",
+              "c55f404829e4e11004ea5c59c8b3aec18b663866",
+              "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "c75665feb8029116245dd1ec76733e599ebdc24a",
+              "cc838c0fd0e40be7426ea991af54234a35f22544",
+              "d3c0dd51ba12eb6112822376b3aa05d3077b7afc",
+              "d5695f435a5841d39f0fe69a6424cccc1c8d0a4c",
+              "d6ed3b071c1e7d17b8d819377e1984c80dd9ed33",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e273edbeb5bfd6337856fccf5e8c9834c0273a5a",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "e6962b612938cc399913246bc7e296f59704772e",
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "ebe46536c85111248234235c8e7ac8cbd2bffac5",
+              "ee3d1a8e7d7d2bd7bd8ee3bc27cdac98c7f8decd",
+              "f02a167eb73cb149713cf5e613911b144fce5be2",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71",
+              "f8b82ed3008c4669faf1424958b30f43aa4b5d92",
+              "faf2fd8adcfd3329ae77a137b37f739a9a462225"
+            ]
+          },
+          {
+            "git_blob_sha": "133ddd1bff74e6b40e0d033c684059f9ca15e855",
+            "head_count": 1,
+            "head_shas": [
+              "bf860e1557b9d54318c022191cdc1cef4a84e2d7"
+            ]
+          }
+        ]
+      },
+      {
+        "path": ".github/workflows/apa-sync-offline.yml",
+        "variants": [
+          {
+            "git_blob_sha": "9d93fefb1553e3153868a281936816cf3322e71d",
+            "head_count": 10,
+            "head_shas": [
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267"
+            ]
+          },
+          {
+            "git_blob_sha": "a022c86f6932da496d506aba1923fb5d9beaeab2",
+            "head_count": 1,
+            "head_shas": [
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "AGENTS.md",
+        "variants": [
+          {
+            "git_blob_sha": "8c30e6dbd32859792d4cff4fd6f1530fb6915b3a",
+            "head_count": 23,
+            "head_shas": [
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "1167e6bb1bc025e10855c12be14811e44d7ad42a",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "38cfe7feaa756717a9cdb8915f7c701e3d9c4d5f",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "751fdfbc1be929f3da601e1094f74fed2f02b322",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "c0223e18370e5e3d5205ca401a68d7603b4be120",
+              "d3c0dd51ba12eb6112822376b3aa05d3077b7afc",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+              "f02a167eb73cb149713cf5e613911b144fce5be2",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267"
+            ]
+          },
+          {
+            "git_blob_sha": "2800cff55979de1951bfa6778714ad2220bafed1",
+            "head_count": 1,
+            "head_shas": [
+              "ee3d1a8e7d7d2bd7bd8ee3bc27cdac98c7f8decd"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "archicad-addon/Examples/build_model_dump.py",
+        "variants": [
+          {
+            "git_blob_sha": "0c2b2f965c45bd37e7da15a7017b1cda0d26856b",
+            "head_count": 23,
+            "head_shas": [
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "1167e6bb1bc025e10855c12be14811e44d7ad42a",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "38cfe7feaa756717a9cdb8915f7c701e3d9c4d5f",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "751fdfbc1be929f3da601e1094f74fed2f02b322",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "c0223e18370e5e3d5205ca401a68d7603b4be120",
+              "d3c0dd51ba12eb6112822376b3aa05d3077b7afc",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+              "f02a167eb73cb149713cf5e613911b144fce5be2",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267"
+            ]
+          },
+          {
+            "git_blob_sha": "65ccfc51f6238146a3130498f26f689f8c30c96e",
+            "head_count": 9,
+            "head_shas": [
+              "03c64733bb2b4f59970f5247a3ed89e1236f3090",
+              "06c503a424498a74e19507ae11a4cc48f6dc7c3f",
+              "06f6e04974bbea23c12cff63f93004048579ff3e",
+              "2674e1ebd7656fbdb306bcff294d8d17174be78a",
+              "27fc10267e71d1cd4f8322fe1d3c334e2cef1b4c",
+              "ad0c0ed127c068d2a7446f3bf03a31f7584decad",
+              "d6ed3b071c1e7d17b8d819377e1984c80dd9ed33",
+              "f8b82ed3008c4669faf1424958b30f43aa4b5d92",
+              "faf2fd8adcfd3329ae77a137b37f739a9a462225"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "archicad-addon/Sources/ModelDumpCommands.cpp",
+        "variants": [
+          {
+            "git_blob_sha": "573fa2077c843f6a8cfdd054364b7b67e0894970",
+            "head_count": 23,
+            "head_shas": [
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "1167e6bb1bc025e10855c12be14811e44d7ad42a",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "38cfe7feaa756717a9cdb8915f7c701e3d9c4d5f",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "751fdfbc1be929f3da601e1094f74fed2f02b322",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "c0223e18370e5e3d5205ca401a68d7603b4be120",
+              "d3c0dd51ba12eb6112822376b3aa05d3077b7afc",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+              "f02a167eb73cb149713cf5e613911b144fce5be2",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267"
+            ]
+          },
+          {
+            "git_blob_sha": "0d1a1bcf20292ca32c02f9966f748b91a463e47e",
+            "head_count": 9,
+            "head_shas": [
+              "03c64733bb2b4f59970f5247a3ed89e1236f3090",
+              "06c503a424498a74e19507ae11a4cc48f6dc7c3f",
+              "06f6e04974bbea23c12cff63f93004048579ff3e",
+              "2674e1ebd7656fbdb306bcff294d8d17174be78a",
+              "27fc10267e71d1cd4f8322fe1d3c334e2cef1b4c",
+              "ad0c0ed127c068d2a7446f3bf03a31f7584decad",
+              "d6ed3b071c1e7d17b8d819377e1984c80dd9ed33",
+              "f8b82ed3008c4669faf1424958b30f43aa4b5d92",
+              "faf2fd8adcfd3329ae77a137b37f739a9a462225"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "archicad-addon/Sources/ModelDumpCommands.hpp",
+        "variants": [
+          {
+            "git_blob_sha": "1528d9212c6d8237ddd044a4710223d29c408266",
+            "head_count": 23,
+            "head_shas": [
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "1167e6bb1bc025e10855c12be14811e44d7ad42a",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "38cfe7feaa756717a9cdb8915f7c701e3d9c4d5f",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "751fdfbc1be929f3da601e1094f74fed2f02b322",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "c0223e18370e5e3d5205ca401a68d7603b4be120",
+              "d3c0dd51ba12eb6112822376b3aa05d3077b7afc",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+              "f02a167eb73cb149713cf5e613911b144fce5be2",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267"
+            ]
+          },
+          {
+            "git_blob_sha": "d58639eebbe64f493da749e0b75f4ae34cb2ec2b",
+            "head_count": 9,
+            "head_shas": [
+              "03c64733bb2b4f59970f5247a3ed89e1236f3090",
+              "06c503a424498a74e19507ae11a4cc48f6dc7c3f",
+              "06f6e04974bbea23c12cff63f93004048579ff3e",
+              "2674e1ebd7656fbdb306bcff294d8d17174be78a",
+              "27fc10267e71d1cd4f8322fe1d3c334e2cef1b4c",
+              "ad0c0ed127c068d2a7446f3bf03a31f7584decad",
+              "d6ed3b071c1e7d17b8d819377e1984c80dd9ed33",
+              "f8b82ed3008c4669faf1424958b30f43aa4b5d92",
+              "faf2fd8adcfd3329ae77a137b37f739a9a462225"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "audit/arena-full-system-audit-20260928/TAPIR_1.5.9_COMMAND_INVENTORY.md",
+        "variants": [
+          {
+            "git_blob_sha": "239ea0e579bc996db8cf2884c9a4b13c359df3bf",
+            "head_count": 2,
+            "head_shas": [
+              "181ca75229d9fd949797dbfa607c5245b121aaec",
+              "59239ceac83529c1fb6ad5d97fdf3d74edacc848"
+            ]
+          },
+          {
+            "git_blob_sha": "2ad24a6fcfa9a6d62f99b2f8b60bb3397abec277",
+            "head_count": 1,
+            "head_shas": [
+              "53d6b638b4e638c669ce169196088c3b3a5cdc30"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "bim_qa.py",
+        "variants": [
+          {
+            "git_blob_sha": "64d3e894c9fc18a8bcfbba94cd8136699e74c24c",
+            "head_count": 9,
+            "head_shas": [
+              "1d4b66ae36d955588dcf2276a3e7b0ccaf6f74ef",
+              "3eb33b3c248a19088eb6868ddd997a69fab8d4a7",
+              "6901fe69d834f8d571c53d3bbda57f46d2106943",
+              "8881c46c222a7adaf6372941c185db4ac67598e1",
+              "8cbbab827ee8a1bdde5e7d44ac3d1b06f5b4cc8b",
+              "99326ff531dfa9cb19c906ee349304fdca92fc52",
+              "c75665feb8029116245dd1ec76733e599ebdc24a",
+              "cc838c0fd0e40be7426ea991af54234a35f22544",
+              "e273edbeb5bfd6337856fccf5e8c9834c0273a5a"
+            ]
+          },
+          {
+            "git_blob_sha": "f605bbe83378e40d1797ede765afd45108b130de",
+            "head_count": 1,
+            "head_shas": [
+              "81344925f06523bb60ee300f48af458ab0288938"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "bimexec/COORDINATION.md",
+        "variants": [
+          {
+            "git_blob_sha": "c0df5ee5904afc661df842ea3030a38765d483df",
+            "head_count": 63,
+            "head_shas": [
+              "03c64733bb2b4f59970f5247a3ed89e1236f3090",
+              "06c503a424498a74e19507ae11a4cc48f6dc7c3f",
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "0e7a312d7a7c491d877b6746b275acd0364c97ab",
+              "1167e6bb1bc025e10855c12be14811e44d7ad42a",
+              "181ca75229d9fd949797dbfa607c5245b121aaec",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3a43479343d65ce1a63d181c5b83f683530050",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d4b66ae36d955588dcf2276a3e7b0ccaf6f74ef",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "2674e1ebd7656fbdb306bcff294d8d17174be78a",
+              "27fc10267e71d1cd4f8322fe1d3c334e2cef1b4c",
+              "2ec5c001544a0eede73daa99c618ba53448f226c",
+              "38cfe7feaa756717a9cdb8915f7c701e3d9c4d5f",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "3cbfc4e379b54d4249badd508fb64c21886ac186",
+              "3eb33b3c248a19088eb6868ddd997a69fab8d4a7",
+              "4559bf13a2b17dd525cf91ed00521cabbdaf5a0c",
+              "4fedb7cb815f9109755a9174bbae709fa18fdab7",
+              "53d6b638b4e638c669ce169196088c3b3a5cdc30",
+              "59239ceac83529c1fb6ad5d97fdf3d74edacc848",
+              "6901fe69d834f8d571c53d3bbda57f46d2106943",
+              "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+              "7281bab2ec012933cf056d81d26822c017951ad6",
+              "743b791504eb92805a18edf78d20b958a6220710",
+              "751fdfbc1be929f3da601e1094f74fed2f02b322",
+              "7bd2f7076933e31cdf6d24855ca703c0c6e67545",
+              "81344925f06523bb60ee300f48af458ab0288938",
+              "8881c46c222a7adaf6372941c185db4ac67598e1",
+              "88cf532c70362b3f404aa5bae2c640527fca5616",
+              "8cbbab827ee8a1bdde5e7d44ac3d1b06f5b4cc8b",
+              "99326ff531dfa9cb19c906ee349304fdca92fc52",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "a5eb3eee68817925ecfebb0fb22ab6b8fbe59f03",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "b7fa4d304263f6dccc9edc11f607c26942ba695c",
+              "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+              "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "bdd38ef457ac1c56990f026aefecf14f623de4f8",
+              "bf860e1557b9d54318c022191cdc1cef4a84e2d7",
+              "c0223e18370e5e3d5205ca401a68d7603b4be120",
+              "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+              "c75665feb8029116245dd1ec76733e599ebdc24a",
+              "cc838c0fd0e40be7426ea991af54234a35f22544",
+              "d3c0dd51ba12eb6112822376b3aa05d3077b7afc",
+              "d5695f435a5841d39f0fe69a6424cccc1c8d0a4c",
+              "d6ed3b071c1e7d17b8d819377e1984c80dd9ed33",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e273edbeb5bfd6337856fccf5e8c9834c0273a5a",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "e6962b612938cc399913246bc7e296f59704772e",
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+              "ebe46536c85111248234235c8e7ac8cbd2bffac5",
+              "ee3d1a8e7d7d2bd7bd8ee3bc27cdac98c7f8decd",
+              "f02a167eb73cb149713cf5e613911b144fce5be2",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267",
+              "f8b82ed3008c4669faf1424958b30f43aa4b5d92"
+            ]
+          },
+          {
+            "git_blob_sha": "b2077d316fa13acbfa662a16c8e23797ae03fc85",
+            "head_count": 13,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+              "c55f404829e4e11004ea5c59c8b3aec18b663866",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "bimexec/HANDOFF_ARENA.md",
+        "variants": [
+          {
+            "git_blob_sha": "1da37fb79a1ab7e4193c3b228264f308e403c0bc",
+            "head_count": 63,
+            "head_shas": [
+              "03c64733bb2b4f59970f5247a3ed89e1236f3090",
+              "06c503a424498a74e19507ae11a4cc48f6dc7c3f",
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "0e7a312d7a7c491d877b6746b275acd0364c97ab",
+              "1167e6bb1bc025e10855c12be14811e44d7ad42a",
+              "181ca75229d9fd949797dbfa607c5245b121aaec",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3a43479343d65ce1a63d181c5b83f683530050",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d4b66ae36d955588dcf2276a3e7b0ccaf6f74ef",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "2674e1ebd7656fbdb306bcff294d8d17174be78a",
+              "27fc10267e71d1cd4f8322fe1d3c334e2cef1b4c",
+              "2ec5c001544a0eede73daa99c618ba53448f226c",
+              "38cfe7feaa756717a9cdb8915f7c701e3d9c4d5f",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "3cbfc4e379b54d4249badd508fb64c21886ac186",
+              "3eb33b3c248a19088eb6868ddd997a69fab8d4a7",
+              "4559bf13a2b17dd525cf91ed00521cabbdaf5a0c",
+              "4fedb7cb815f9109755a9174bbae709fa18fdab7",
+              "53d6b638b4e638c669ce169196088c3b3a5cdc30",
+              "59239ceac83529c1fb6ad5d97fdf3d74edacc848",
+              "6901fe69d834f8d571c53d3bbda57f46d2106943",
+              "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+              "7281bab2ec012933cf056d81d26822c017951ad6",
+              "743b791504eb92805a18edf78d20b958a6220710",
+              "751fdfbc1be929f3da601e1094f74fed2f02b322",
+              "7bd2f7076933e31cdf6d24855ca703c0c6e67545",
+              "81344925f06523bb60ee300f48af458ab0288938",
+              "8881c46c222a7adaf6372941c185db4ac67598e1",
+              "88cf532c70362b3f404aa5bae2c640527fca5616",
+              "8cbbab827ee8a1bdde5e7d44ac3d1b06f5b4cc8b",
+              "99326ff531dfa9cb19c906ee349304fdca92fc52",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "a5eb3eee68817925ecfebb0fb22ab6b8fbe59f03",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "b7fa4d304263f6dccc9edc11f607c26942ba695c",
+              "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+              "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "bdd38ef457ac1c56990f026aefecf14f623de4f8",
+              "bf860e1557b9d54318c022191cdc1cef4a84e2d7",
+              "c0223e18370e5e3d5205ca401a68d7603b4be120",
+              "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+              "c75665feb8029116245dd1ec76733e599ebdc24a",
+              "cc838c0fd0e40be7426ea991af54234a35f22544",
+              "d3c0dd51ba12eb6112822376b3aa05d3077b7afc",
+              "d5695f435a5841d39f0fe69a6424cccc1c8d0a4c",
+              "d6ed3b071c1e7d17b8d819377e1984c80dd9ed33",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e273edbeb5bfd6337856fccf5e8c9834c0273a5a",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "e6962b612938cc399913246bc7e296f59704772e",
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+              "ebe46536c85111248234235c8e7ac8cbd2bffac5",
+              "ee3d1a8e7d7d2bd7bd8ee3bc27cdac98c7f8decd",
+              "f02a167eb73cb149713cf5e613911b144fce5be2",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267",
+              "f8b82ed3008c4669faf1424958b30f43aa4b5d92"
+            ]
+          },
+          {
+            "git_blob_sha": "14c9b1da309adf2a1d8b6e739efd8a48cf1d0644",
+            "head_count": 13,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+              "c55f404829e4e11004ea5c59c8b3aec18b663866",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "bimexec/probes/backends_v13.py",
+        "variants": [
+          {
+            "git_blob_sha": "8f47f98ae6a90f13c1af533e12c232bbab88a318",
+            "head_count": 12,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+              "c55f404829e4e11004ea5c59c8b3aec18b663866",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "082a8b6dc119f4e868923ef286f5fc04c0e97f52",
+            "head_count": 1,
+            "head_shas": [
+              "a2d5dc9f81854bedff29347f9ef9134631263fa5"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "bimexec/README.md",
+        "variants": [
+          {
+            "git_blob_sha": "c5253bcc705f4db40bb128f96f6580fdf7dab74f",
+            "head_count": 63,
+            "head_shas": [
+              "03c64733bb2b4f59970f5247a3ed89e1236f3090",
+              "06c503a424498a74e19507ae11a4cc48f6dc7c3f",
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "0e7a312d7a7c491d877b6746b275acd0364c97ab",
+              "1167e6bb1bc025e10855c12be14811e44d7ad42a",
+              "181ca75229d9fd949797dbfa607c5245b121aaec",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3a43479343d65ce1a63d181c5b83f683530050",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d4b66ae36d955588dcf2276a3e7b0ccaf6f74ef",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "2674e1ebd7656fbdb306bcff294d8d17174be78a",
+              "27fc10267e71d1cd4f8322fe1d3c334e2cef1b4c",
+              "2ec5c001544a0eede73daa99c618ba53448f226c",
+              "38cfe7feaa756717a9cdb8915f7c701e3d9c4d5f",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "3cbfc4e379b54d4249badd508fb64c21886ac186",
+              "3eb33b3c248a19088eb6868ddd997a69fab8d4a7",
+              "4559bf13a2b17dd525cf91ed00521cabbdaf5a0c",
+              "4fedb7cb815f9109755a9174bbae709fa18fdab7",
+              "53d6b638b4e638c669ce169196088c3b3a5cdc30",
+              "59239ceac83529c1fb6ad5d97fdf3d74edacc848",
+              "6901fe69d834f8d571c53d3bbda57f46d2106943",
+              "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+              "7281bab2ec012933cf056d81d26822c017951ad6",
+              "743b791504eb92805a18edf78d20b958a6220710",
+              "751fdfbc1be929f3da601e1094f74fed2f02b322",
+              "7bd2f7076933e31cdf6d24855ca703c0c6e67545",
+              "81344925f06523bb60ee300f48af458ab0288938",
+              "8881c46c222a7adaf6372941c185db4ac67598e1",
+              "88cf532c70362b3f404aa5bae2c640527fca5616",
+              "8cbbab827ee8a1bdde5e7d44ac3d1b06f5b4cc8b",
+              "99326ff531dfa9cb19c906ee349304fdca92fc52",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "a5eb3eee68817925ecfebb0fb22ab6b8fbe59f03",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "b7fa4d304263f6dccc9edc11f607c26942ba695c",
+              "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+              "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "bdd38ef457ac1c56990f026aefecf14f623de4f8",
+              "bf860e1557b9d54318c022191cdc1cef4a84e2d7",
+              "c0223e18370e5e3d5205ca401a68d7603b4be120",
+              "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+              "c75665feb8029116245dd1ec76733e599ebdc24a",
+              "cc838c0fd0e40be7426ea991af54234a35f22544",
+              "d3c0dd51ba12eb6112822376b3aa05d3077b7afc",
+              "d5695f435a5841d39f0fe69a6424cccc1c8d0a4c",
+              "d6ed3b071c1e7d17b8d819377e1984c80dd9ed33",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e273edbeb5bfd6337856fccf5e8c9834c0273a5a",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "e6962b612938cc399913246bc7e296f59704772e",
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+              "ebe46536c85111248234235c8e7ac8cbd2bffac5",
+              "ee3d1a8e7d7d2bd7bd8ee3bc27cdac98c7f8decd",
+              "f02a167eb73cb149713cf5e613911b144fce5be2",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267",
+              "f8b82ed3008c4669faf1424958b30f43aa4b5d92"
+            ]
+          },
+          {
+            "git_blob_sha": "9fa040a96737b39ef0d1866a7a267c0b20a8f8b8",
+            "head_count": 13,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+              "c55f404829e4e11004ea5c59c8b3aec18b663866",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "bimexec/reference/bimexec/adapters.py",
+        "variants": [
+          {
+            "git_blob_sha": "acbeff5b89f0c5ca47fe52d5b3846d8c53d0da4c",
+            "head_count": 12,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+              "c55f404829e4e11004ea5c59c8b3aec18b663866",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "f8e097ef0db7be56954ae93b9da370e7a582e779",
+            "head_count": 1,
+            "head_shas": [
+              "a2d5dc9f81854bedff29347f9ef9134631263fa5"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "bimexec/reference/README.md",
+        "variants": [
+          {
+            "git_blob_sha": "9455c8217f23b189d457fa18c14497b3d75c446e",
+            "head_count": 12,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+              "c55f404829e4e11004ea5c59c8b3aec18b663866",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "2bbcfd6d3b15d5032f6c54f7b2337e1cc084f727",
+            "head_count": 1,
+            "head_shas": [
+              "a2d5dc9f81854bedff29347f9ef9134631263fa5"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "bimexec/tests/README.md",
+        "variants": [
+          {
+            "git_blob_sha": "abad7439791c843133707d2f1d34cbf3e8d1a5c3",
+            "head_count": 12,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+              "c55f404829e4e11004ea5c59c8b3aec18b663866",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "e288703d9ae51de5bd05fea95c9418ce95a03dfd",
+            "head_count": 1,
+            "head_shas": [
+              "a2d5dc9f81854bedff29347f9ef9134631263fa5"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "bimexec/tests/test_probe_v13.py",
+        "variants": [
+          {
+            "git_blob_sha": "9f02f0be4438ab352ca948f044db9159b2606ca1",
+            "head_count": 12,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+              "c55f404829e4e11004ea5c59c8b3aec18b663866",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "fbba32707a6a160957bfc5ef009c14a0dfafebad",
+            "head_count": 1,
+            "head_shas": [
+              "a2d5dc9f81854bedff29347f9ef9134631263fa5"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "closed_loop/stage4_live_scenario.py",
+        "variants": [
+          {
+            "git_blob_sha": "9a7497ae41ed685a695d85f3e803375b4af3d771",
+            "head_count": 2,
+            "head_shas": [
+              "06f6e04974bbea23c12cff63f93004048579ff3e",
+              "ad0c0ed127c068d2a7446f3bf03a31f7584decad"
+            ]
+          },
+          {
+            "git_blob_sha": "3b0edbc36ad42d3e045898f59ed4c2b836db5206",
+            "head_count": 1,
+            "head_shas": [
+              "faf2fd8adcfd3329ae77a137b37f739a9a462225"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "closed_loop/stage4_offline_evidence.py",
+        "variants": [
+          {
+            "git_blob_sha": "969ecf35ba330a991821f4cd44075c002738094b",
+            "head_count": 2,
+            "head_shas": [
+              "06f6e04974bbea23c12cff63f93004048579ff3e",
+              "ad0c0ed127c068d2a7446f3bf03a31f7584decad"
+            ]
+          },
+          {
+            "git_blob_sha": "c3d98c26ec6c27718021780be3ec525ca959e090",
+            "head_count": 1,
+            "head_shas": [
+              "faf2fd8adcfd3329ae77a137b37f739a9a462225"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "closed_loop/wall_attempts.py",
+        "variants": [
+          {
+            "git_blob_sha": "567ba86663e39813860f34c02186852109203c2b",
+            "head_count": 2,
+            "head_shas": [
+              "ad0c0ed127c068d2a7446f3bf03a31f7584decad",
+              "faf2fd8adcfd3329ae77a137b37f739a9a462225"
+            ]
+          },
+          {
+            "git_blob_sha": "a244045348acb0eabc6cbd4d1741989303c446d8",
+            "head_count": 1,
+            "head_shas": [
+              "06f6e04974bbea23c12cff63f93004048579ff3e"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "continue_test_house.py",
+        "variants": [
+          {
+            "git_blob_sha": "e6113770322bdcf0fb90b92841cc0674b5da312a",
+            "head_count": 6,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "ecae1ac4b32656374ee284c9ddcd375c00635655",
+            "head_count": 5,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "controller/app.py",
+        "variants": [
+          {
+            "git_blob_sha": "74565ea70ad651f243d3939725ee39d572667b44",
+            "head_count": 10,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "ec49447ae039edfbc6c3ca20c170b731265ccab4",
+            "head_count": 1,
+            "head_shas": [
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "controller/client.py",
+        "variants": [
+          {
+            "git_blob_sha": "6570179a234fc9620fd0be856db9ffc4e81e5d44",
+            "head_count": 10,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "c4948d2f9ad75a0e80cc750d4afc0df31858ac68",
+            "head_count": 1,
+            "head_shas": [
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "docs/APA_SLACK_COORDINATOR.md",
+        "variants": [
+          {
+            "git_blob_sha": "229e076b497a5879565a10f509fddfe3edaea009",
+            "head_count": 10,
+            "head_shas": [
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267"
+            ]
+          },
+          {
+            "git_blob_sha": "ac73166dcb6cd24f905b1afbf07c22433fc45a34",
+            "head_count": 1,
+            "head_shas": [
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "docs/BIM_QA_VALIDATION.md",
+        "variants": [
+          {
+            "git_blob_sha": "1e0f0802b38ff3025e026b86da8dd88209ee6cf0",
+            "head_count": 9,
+            "head_shas": [
+              "1d4b66ae36d955588dcf2276a3e7b0ccaf6f74ef",
+              "3eb33b3c248a19088eb6868ddd997a69fab8d4a7",
+              "6901fe69d834f8d571c53d3bbda57f46d2106943",
+              "8881c46c222a7adaf6372941c185db4ac67598e1",
+              "8cbbab827ee8a1bdde5e7d44ac3d1b06f5b4cc8b",
+              "99326ff531dfa9cb19c906ee349304fdca92fc52",
+              "c75665feb8029116245dd1ec76733e599ebdc24a",
+              "cc838c0fd0e40be7426ea991af54234a35f22544",
+              "e273edbeb5bfd6337856fccf5e8c9834c0273a5a"
+            ]
+          },
+          {
+            "git_blob_sha": "9f62576b7a56a1a2628c4cbe39e9be361567460b",
+            "head_count": 1,
+            "head_shas": [
+              "81344925f06523bb60ee300f48af458ab0288938"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "docs/BIM_QA.md",
+        "variants": [
+          {
+            "git_blob_sha": "d72799e1d45338b509fa3bc060e8c9ab3753a77b",
+            "head_count": 9,
+            "head_shas": [
+              "1d4b66ae36d955588dcf2276a3e7b0ccaf6f74ef",
+              "3eb33b3c248a19088eb6868ddd997a69fab8d4a7",
+              "6901fe69d834f8d571c53d3bbda57f46d2106943",
+              "8881c46c222a7adaf6372941c185db4ac67598e1",
+              "8cbbab827ee8a1bdde5e7d44ac3d1b06f5b4cc8b",
+              "99326ff531dfa9cb19c906ee349304fdca92fc52",
+              "c75665feb8029116245dd1ec76733e599ebdc24a",
+              "cc838c0fd0e40be7426ea991af54234a35f22544",
+              "e273edbeb5bfd6337856fccf5e8c9834c0273a5a"
+            ]
+          },
+          {
+            "git_blob_sha": "2d966fd71fb564d9c48b2f07c2dd94eba12b0022",
+            "head_count": 1,
+            "head_shas": [
+              "81344925f06523bb60ee300f48af458ab0288938"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "docs/research/APA_TN-GDL-CREATE-01_BLOCKER1_AUDIT_2026-10-09.md",
+        "variants": [
+          {
+            "git_blob_sha": "b95855fa9fb5ada791dd443252c44c11937734df",
+            "head_count": 1,
+            "head_shas": [
+              "39231a1e63ab91ff05cabe484bf737c176434a44"
+            ]
+          },
+          {
+            "git_blob_sha": "b56c1456438b1c1f901ba14632c1a59da6dc5562",
+            "head_count": 1,
+            "head_shas": [
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "docs/research/APA_TN-GDL-CREATE-01_CHECKPOINT_2026-10-09.md",
+        "variants": [
+          {
+            "git_blob_sha": "8f0559a7c864d0eede88f4c8fb5285a0d62a60fc",
+            "head_count": 2,
+            "head_shas": [
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "39231a1e63ab91ff05cabe484bf737c176434a44"
+            ]
+          },
+          {
+            "git_blob_sha": "9ef3fecf6df5e0419fc752b8879221b6ea2fbea5",
+            "head_count": 1,
+            "head_shas": [
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "launcher.py",
+        "variants": [
+          {
+            "git_blob_sha": "41a63fccc4c11ddbfa4f74c399751432c5553450",
+            "head_count": 10,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "192f6e98418e4e96427d00fec061fa24c7578aa5",
+            "head_count": 1,
+            "head_shas": [
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "palette/RFIX/Safe_BIM_Palette.html",
+        "variants": [
+          {
+            "git_blob_sha": "59fda1088ee14601cbbe52db4acd110a5c1c31d1",
+            "head_count": 10,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "db9c4ab66a3e629daefeffd1aff53d2f9263d101",
+            "head_count": 1,
+            "head_shas": [
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "qwen_safe_bim_integration.py",
+        "variants": [
+          {
+            "git_blob_sha": "837ac4d33b09cdf2a7f61af10aca81453252cfab",
+            "head_count": 74,
+            "head_shas": [
+              "02ed7a8a5a6e199bdfcb7cc7c7836dd7038deacb",
+              "03c64733bb2b4f59970f5247a3ed89e1236f3090",
+              "06c503a424498a74e19507ae11a4cc48f6dc7c3f",
+              "06f6e04974bbea23c12cff63f93004048579ff3e",
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "0e7a312d7a7c491d877b6746b275acd0364c97ab",
+              "1167e6bb1bc025e10855c12be14811e44d7ad42a",
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "181ca75229d9fd949797dbfa607c5245b121aaec",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3a43479343d65ce1a63d181c5b83f683530050",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d4b66ae36d955588dcf2276a3e7b0ccaf6f74ef",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "2674e1ebd7656fbdb306bcff294d8d17174be78a",
+              "27fc10267e71d1cd4f8322fe1d3c334e2cef1b4c",
+              "2ec5c001544a0eede73daa99c618ba53448f226c",
+              "38cfe7feaa756717a9cdb8915f7c701e3d9c4d5f",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "3cbfc4e379b54d4249badd508fb64c21886ac186",
+              "3eb33b3c248a19088eb6868ddd997a69fab8d4a7",
+              "4559bf13a2b17dd525cf91ed00521cabbdaf5a0c",
+              "4fedb7cb815f9109755a9174bbae709fa18fdab7",
+              "53d6b638b4e638c669ce169196088c3b3a5cdc30",
+              "59239ceac83529c1fb6ad5d97fdf3d74edacc848",
+              "6901fe69d834f8d571c53d3bbda57f46d2106943",
+              "72698de9847ebdc6c2872be620be4a0fcbac76ad",
+              "7281bab2ec012933cf056d81d26822c017951ad6",
+              "743b791504eb92805a18edf78d20b958a6220710",
+              "751fdfbc1be929f3da601e1094f74fed2f02b322",
+              "7bd2f7076933e31cdf6d24855ca703c0c6e67545",
+              "81344925f06523bb60ee300f48af458ab0288938",
+              "8881c46c222a7adaf6372941c185db4ac67598e1",
+              "88cf532c70362b3f404aa5bae2c640527fca5616",
+              "8cbbab827ee8a1bdde5e7d44ac3d1b06f5b4cc8b",
+              "99326ff531dfa9cb19c906ee349304fdca92fc52",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+              "a5eb3eee68817925ecfebb0fb22ab6b8fbe59f03",
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+              "ad0c0ed127c068d2a7446f3bf03a31f7584decad",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "b7fa4d304263f6dccc9edc11f607c26942ba695c",
+              "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+              "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "bdd38ef457ac1c56990f026aefecf14f623de4f8",
+              "bf860e1557b9d54318c022191cdc1cef4a84e2d7",
+              "c0223e18370e5e3d5205ca401a68d7603b4be120",
+              "c55f404829e4e11004ea5c59c8b3aec18b663866",
+              "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "c75665feb8029116245dd1ec76733e599ebdc24a",
+              "cc838c0fd0e40be7426ea991af54234a35f22544",
+              "d3c0dd51ba12eb6112822376b3aa05d3077b7afc",
+              "d5695f435a5841d39f0fe69a6424cccc1c8d0a4c",
+              "d6ed3b071c1e7d17b8d819377e1984c80dd9ed33",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e273edbeb5bfd6337856fccf5e8c9834c0273a5a",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "e6962b612938cc399913246bc7e296f59704772e",
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "ebe46536c85111248234235c8e7ac8cbd2bffac5",
+              "ee3d1a8e7d7d2bd7bd8ee3bc27cdac98c7f8decd",
+              "f02a167eb73cb149713cf5e613911b144fce5be2",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71",
+              "f8b82ed3008c4669faf1424958b30f43aa4b5d92",
+              "faf2fd8adcfd3329ae77a137b37f739a9a462225"
+            ]
+          },
+          {
+            "git_blob_sha": "ed5694cfe5a0cc68fcbf83772b6dcc01e5a4c563",
+            "head_count": 6,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "safe_bim_ipc.py",
+        "variants": [
+          {
+            "git_blob_sha": "2cc08600b3a78466095d952388019d1d6bdedf8f",
+            "head_count": 10,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "e977d4ac8c5c1d4cfe30c50d5f4076130d38bbe5",
+            "head_count": 1,
+            "head_shas": [
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "safe_bim_verification.py",
+        "variants": [
+          {
+            "git_blob_sha": "2de599bbd461fbc1942c3ca3f5aa161db092ea6e",
+            "head_count": 9,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "8e61cb3cbb2f823ddae305a674a33e71684832b7",
+            "head_count": 1,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "scripts/archicad_chat_executor.py",
+        "variants": [
+          {
+            "git_blob_sha": "7719462c969b5527cabb7a0242609a1ba5e01f09",
+            "head_count": 23,
+            "head_shas": [
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "1167e6bb1bc025e10855c12be14811e44d7ad42a",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "38cfe7feaa756717a9cdb8915f7c701e3d9c4d5f",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "751fdfbc1be929f3da601e1094f74fed2f02b322",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "c0223e18370e5e3d5205ca401a68d7603b4be120",
+              "d3c0dd51ba12eb6112822376b3aa05d3077b7afc",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+              "f02a167eb73cb149713cf5e613911b144fce5be2",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267"
+            ]
+          },
+          {
+            "git_blob_sha": "b76570f57a85e39a5d0ddaf2d9ab7bc4029d89ca",
+            "head_count": 9,
+            "head_shas": [
+              "03c64733bb2b4f59970f5247a3ed89e1236f3090",
+              "06c503a424498a74e19507ae11a4cc48f6dc7c3f",
+              "06f6e04974bbea23c12cff63f93004048579ff3e",
+              "2674e1ebd7656fbdb306bcff294d8d17174be78a",
+              "27fc10267e71d1cd4f8322fe1d3c334e2cef1b4c",
+              "ad0c0ed127c068d2a7446f3bf03a31f7584decad",
+              "d6ed3b071c1e7d17b8d819377e1984c80dd9ed33",
+              "f8b82ed3008c4669faf1424958b30f43aa4b5d92",
+              "faf2fd8adcfd3329ae77a137b37f739a9a462225"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "scripts/archicad_executor.py",
+        "variants": [
+          {
+            "git_blob_sha": "efbaf139c4a6707226a2e6bbe07a7cc9f5fafa28",
+            "head_count": 31,
+            "head_shas": [
+              "03c64733bb2b4f59970f5247a3ed89e1236f3090",
+              "06c503a424498a74e19507ae11a4cc48f6dc7c3f",
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "1167e6bb1bc025e10855c12be14811e44d7ad42a",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "2674e1ebd7656fbdb306bcff294d8d17174be78a",
+              "27fc10267e71d1cd4f8322fe1d3c334e2cef1b4c",
+              "38cfe7feaa756717a9cdb8915f7c701e3d9c4d5f",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "751fdfbc1be929f3da601e1094f74fed2f02b322",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "ad0c0ed127c068d2a7446f3bf03a31f7584decad",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "c0223e18370e5e3d5205ca401a68d7603b4be120",
+              "d3c0dd51ba12eb6112822376b3aa05d3077b7afc",
+              "d6ed3b071c1e7d17b8d819377e1984c80dd9ed33",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+              "f02a167eb73cb149713cf5e613911b144fce5be2",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267",
+              "f8b82ed3008c4669faf1424958b30f43aa4b5d92",
+              "faf2fd8adcfd3329ae77a137b37f739a9a462225"
+            ]
+          },
+          {
+            "git_blob_sha": "65ccd67096762d6a1a90c022a7a8670cb6bb200f",
+            "head_count": 1,
+            "head_shas": [
+              "06f6e04974bbea23c12cff63f93004048579ff3e"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "scripts/archicad_mailbox_graph_adapter.py",
+        "variants": [
+          {
+            "git_blob_sha": "0f4378a5da1dc3740a1bf43f76f7533f199693da",
+            "head_count": 20,
+            "head_shas": [
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "751fdfbc1be929f3da601e1094f74fed2f02b322",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "d3c0dd51ba12eb6112822376b3aa05d3077b7afc",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+              "f02a167eb73cb149713cf5e613911b144fce5be2",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267"
+            ]
+          },
+          {
+            "git_blob_sha": "1defbac0d1c7dd29f1a4b1a5d3dbead8ed967da0",
+            "head_count": 2,
+            "head_shas": [
+              "1167e6bb1bc025e10855c12be14811e44d7ad42a",
+              "c0223e18370e5e3d5205ca401a68d7603b4be120"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "scripts/archicad_project_accelerator.py",
+        "variants": [
+          {
+            "git_blob_sha": "01cd73e7cb3ca2121425386e8d434ddb4b405b28",
+            "head_count": 15,
+            "head_shas": [
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267"
+            ]
+          },
+          {
+            "git_blob_sha": "2017fbc43a3bebe11d65cd1786b0ae15a94acaea",
+            "head_count": 1,
+            "head_shas": [
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "scripts/archicad_scene_v1.py",
+        "variants": [
+          {
+            "git_blob_sha": "5fd0292c7a9dd00caebe10408f46f26216f9cba6",
+            "head_count": 16,
+            "head_shas": [
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267"
+            ]
+          },
+          {
+            "git_blob_sha": "46297167459d5342a2eb896e20ecf3fc41462e18",
+            "head_count": 2,
+            "head_shas": [
+              "751fdfbc1be929f3da601e1094f74fed2f02b322",
+              "f02a167eb73cb149713cf5e613911b144fce5be2"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "scripts/stage4_audit_pack.py",
+        "variants": [
+          {
+            "git_blob_sha": "c7269ea0a13104834fe812173d211823012257d8",
+            "head_count": 2,
+            "head_shas": [
+              "06f6e04974bbea23c12cff63f93004048579ff3e",
+              "ad0c0ed127c068d2a7446f3bf03a31f7584decad"
+            ]
+          },
+          {
+            "git_blob_sha": "db27db904a2a42b76a7257a19826099aa1acd17f",
+            "head_count": 1,
+            "head_shas": [
+              "faf2fd8adcfd3329ae77a137b37f739a9a462225"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "sync_bridge/archicad_context_provider.py",
+        "variants": [
+          {
+            "git_blob_sha": "59aed7cce1fdb01ee228494835230aff4562e2ac",
+            "head_count": 5,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "a07addaaab68e52107c8d64616bf2749bed4babd",
+            "head_count": 1,
+            "head_shas": [
+              "27906e2a1370146a8d740f02384ab02a584ce918"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "sync_bridge/bridge.py",
+        "variants": [
+          {
+            "git_blob_sha": "176c3d0cb109b8c645a0e41cebee1320929edcea",
+            "head_count": 5,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "fb245931313283e7a02502feabce50bf395bb250",
+            "head_count": 1,
+            "head_shas": [
+              "27906e2a1370146a8d740f02384ab02a584ce918"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "sync_bridge/instance_lock.py",
+        "variants": [
+          {
+            "git_blob_sha": "66aebace06c93aed3a74df7cc055d69e5a705a12",
+            "head_count": 5,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "9f77ea89a6f49552b519f84b12d72fdcb8e26102",
+            "head_count": 1,
+            "head_shas": [
+              "1e87381693ef6467dfacd97374b8a990687881f7"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "test_controller.py",
+        "variants": [
+          {
+            "git_blob_sha": "f0e9a3eb2803f3865a98ba1394a6be3fe8fc0288",
+            "head_count": 10,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "6401fcb34a11effe69aa49a68c2e720214c46b1d",
+            "head_count": 1,
+            "head_shas": [
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "test_house.py",
+        "variants": [
+          {
+            "git_blob_sha": "777561fcae93ce372029e616fbe4e4aff7f55686",
+            "head_count": 6,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "6540c67231f7dc28666f52445398529ca10d7618",
+            "head_count": 5,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "test_resumable_executor.py",
+        "variants": [
+          {
+            "git_blob_sha": "b899ccbf662b697e4c4ee48deafa44bccf94ba3f",
+            "head_count": 10,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          },
+          {
+            "git_blob_sha": "c4c07b7c63ca54790881049951fa9b7a96d641f0",
+            "head_count": 1,
+            "head_shas": [
+              "ac01adfd070e2994ccf7d30dbf0a531c632f3127"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "tests_safety/test_crash_windows.py",
+        "variants": [
+          {
+            "git_blob_sha": "5a357d5e3aa789f13e52bd7329d04cbab84bd1be",
+            "head_count": 6,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "a0ae2bf195ff90da0c569ce48f6c4a0c4f4bf569",
+            "head_count": 4,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "tests_safety/test_runtime_safety.py",
+        "variants": [
+          {
+            "git_blob_sha": "b6720dd05afd40b1231b6c47363a02f4785ad70e",
+            "head_count": 6,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "129cb33d0711d9989024aa91774759a45518473e",
+            "head_count": 4,
+            "head_shas": [
+              "14bc0d2a37a751029381e506809025eb434aa721",
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "tests_safety/test_wall_readback_z.py",
+        "variants": [
+          {
+            "git_blob_sha": "aaff8c0bfadfd696573d46d1b8dfc08fbfea24fe",
+            "head_count": 6,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "1e87381693ef6467dfacd97374b8a990687881f7",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "0e328aa6c4f12dc567cdaddd01bc2dfd6b597f3a",
+            "head_count": 3,
+            "head_shas": [
+              "c6ab4749e8784cc65170167d166daa6cc219a931",
+              "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+              "f7d38af825de57fc57660eeddf1186cc5b21ac71"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "tests_stage4_live/test_audit_integration.py",
+        "variants": [
+          {
+            "git_blob_sha": "0794d5f56a98d631167180b956e9794fb768a975",
+            "head_count": 2,
+            "head_shas": [
+              "06f6e04974bbea23c12cff63f93004048579ff3e",
+              "ad0c0ed127c068d2a7446f3bf03a31f7584decad"
+            ]
+          },
+          {
+            "git_blob_sha": "7dddb59be1a20c2f1940373f0646c0b2a41beda9",
+            "head_count": 1,
+            "head_shas": [
+              "faf2fd8adcfd3329ae77a137b37f739a9a462225"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "tests_sync/closing.py",
+        "variants": [
+          {
+            "git_blob_sha": "5915ac926cfdb4cfce6c7e04cc94f7ce1e1e8041",
+            "head_count": 5,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "cfbdff862a19c449a79032c7a4fadaf2cb12ea4f",
+            "head_count": 1,
+            "head_shas": [
+              "1e87381693ef6467dfacd97374b8a990687881f7"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "tests_sync/test_s1_2_ownership.py",
+        "variants": [
+          {
+            "git_blob_sha": "2da53e1e6f60d530fc054f7615752169c11d8620",
+            "head_count": 5,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "38b316996660bf517b542658bf25bedc1cdabb48",
+            "head_count": 1,
+            "head_shas": [
+              "1e87381693ef6467dfacd97374b8a990687881f7"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "tests_sync/test_s1_3_liveness.py",
+        "variants": [
+          {
+            "git_blob_sha": "e255cd2d0449cdd5de0fef9fc29372502047686d",
+            "head_count": 5,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "ca23b520b82fa70cc65a2d2f8434075d2ef6e24c",
+            "head_count": 1,
+            "head_shas": [
+              "1e87381693ef6467dfacd97374b8a990687881f7"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "tests_sync/test_s2_3_context_roundtrip.py",
+        "variants": [
+          {
+            "git_blob_sha": "aaef8e73814393a810553ce8f85f343efd5e751a",
+            "head_count": 5,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "27906e2a1370146a8d740f02384ab02a584ce918",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "652e1263078589ef16cdeb396486a4df3a8647de",
+            "head_count": 1,
+            "head_shas": [
+              "1e87381693ef6467dfacd97374b8a990687881f7"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "tests_sync/test_s2_5_runtime_bootstrap.py",
+        "variants": [
+          {
+            "git_blob_sha": "21286bf719e97a368799b9ff55e83a195b27709e",
+            "head_count": 4,
+            "head_shas": [
+              "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+              "7469b775f2552e41846c86512e87c13cdb864b6b",
+              "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+              "f5b7823abd7976bec580d3409b88ac418ea1f7a1"
+            ]
+          },
+          {
+            "git_blob_sha": "3bd68b078100c3d040e2993ef537c11452fb22af",
+            "head_count": 1,
+            "head_shas": [
+              "27906e2a1370146a8d740f02384ab02a584ce918"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "tests/test_archicad_scene_run.py",
+        "variants": [
+          {
+            "git_blob_sha": "6366b9fe0f14f2fcb0dc23f10f12d26808517272",
+            "head_count": 16,
+            "head_shas": [
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267"
+            ]
+          },
+          {
+            "git_blob_sha": "8091555ebd96a117b59e346264e256beeb2d09ff",
+            "head_count": 2,
+            "head_shas": [
+              "751fdfbc1be929f3da601e1094f74fed2f02b322",
+              "f02a167eb73cb149713cf5e613911b144fce5be2"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "tests/test_archicad_wall_host_integration.py",
+        "variants": [
+          {
+            "git_blob_sha": "a503b57af54adfa0ee252658fe58b82e1f475508",
+            "head_count": 19,
+            "head_shas": [
+              "0ba3cc7408ba777546ae89fad4decd17d6421900",
+              "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+              "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+              "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+              "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+              "246f6768de552acac4110b86a2d8b62672ee3eae",
+              "39231a1e63ab91ff05cabe484bf737c176434a44",
+              "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+              "3bdf572b27b27a27335f24336625777f189fec4d",
+              "751fdfbc1be929f3da601e1094f74fed2f02b322",
+              "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+              "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+              "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1",
+              "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+              "e2083582485933af83feea802c379f03ad947217",
+              "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+              "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+              "f02a167eb73cb149713cf5e613911b144fce5be2",
+              "f118fb1b11eba20d6e71d4aa48594459de8a4267"
+            ]
+          },
+          {
+            "git_blob_sha": "3a8499db715097e5d7576409d01616719d0dce6c",
+            "head_count": 1,
+            "head_shas": [
+              "d3c0dd51ba12eb6112822376b3aa05d3077b7afc"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "tests/test_bim_qa_policy_v11.py",
+        "variants": [
+          {
+            "git_blob_sha": "7d3a3dd6ca22de7565e7f3c1c0cf0c81996533f8",
+            "head_count": 9,
+            "head_shas": [
+              "1d4b66ae36d955588dcf2276a3e7b0ccaf6f74ef",
+              "3eb33b3c248a19088eb6868ddd997a69fab8d4a7",
+              "6901fe69d834f8d571c53d3bbda57f46d2106943",
+              "8881c46c222a7adaf6372941c185db4ac67598e1",
+              "8cbbab827ee8a1bdde5e7d44ac3d1b06f5b4cc8b",
+              "99326ff531dfa9cb19c906ee349304fdca92fc52",
+              "c75665feb8029116245dd1ec76733e599ebdc24a",
+              "cc838c0fd0e40be7426ea991af54234a35f22544",
+              "e273edbeb5bfd6337856fccf5e8c9834c0273a5a"
+            ]
+          },
+          {
+            "git_blob_sha": "2acd9b4d302fa111a8464ac77303d610a07be8e9",
+            "head_count": 1,
+            "head_shas": [
+              "81344925f06523bb60ee300f48af458ab0288938"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "limit": "Name/path collisions may represent different versions rather than duplicates; DO NOT auto delete"
+}

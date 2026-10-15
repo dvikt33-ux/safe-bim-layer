@@ -1,0 +1,112 @@
+{
+  "status": "NATIVE_SCHEDULE_DEFINITIONS_DISCOVERED",
+  "definitions": [
+    {
+      "navigatorGuid": "id-sha256:47dc518b7009eb1bcf42",
+      "source": {
+        "guid": "id-sha256:be38c9e94fa8e5cf081c"
+      },
+      "name": "Каталог Стен",
+      "nameEncoding": "AVAILABLE"
+    },
+    {
+      "navigatorGuid": "id-sha256:9dc2743f7e907c7cb9a4",
+      "source": {
+        "guid": "id-sha256:75bd0234fedd5e8feee0"
+      },
+      "name": "Каталог Всех Проемов",
+      "nameEncoding": "AVAILABLE"
+    },
+    {
+      "navigatorGuid": "id-sha256:1bce99809c13a0f27a1a",
+      "source": {
+        "guid": "id-sha256:9b5633e3b1bd80f59928"
+      },
+      "name": "Каталог Дверей",
+      "nameEncoding": "AVAILABLE"
+    },
+    {
+      "navigatorGuid": "id-sha256:1ec4bb000ae2869c7f12",
+      "source": {
+        "guid": "id-sha256:84a80558552ee43c2eaa"
+      },
+      "name": "Каталог Окон",
+      "nameEncoding": "AVAILABLE"
+    },
+    {
+      "navigatorGuid": "id-sha256:2db8e246cf920c4c3d11",
+      "source": {
+        "guid": "id-sha256:4864410381fed136210a"
+      },
+      "name": "Каталог Объектов",
+      "nameEncoding": "AVAILABLE"
+    },
+    {
+      "navigatorGuid": "id-sha256:3701a4425a55029df776",
+      "source": {
+        "guid": "id-sha256:4c875b0abacc36d6576e"
+      },
+      "name": "Стандартный Каталог BIMx",
+      "nameEncoding": "AVAILABLE"
+    },
+    {
+      "navigatorGuid": "id-sha256:e6ca6a57776c20a114c3",
+      "source": {
+        "guid": "id-sha256:d477078a95f409a2f5b9"
+      },
+      "name": "Каталог Всех Компонентов",
+      "nameEncoding": "AVAILABLE"
+    },
+    {
+      "navigatorGuid": "id-sha256:6a1aa62072b740eddcd0",
+      "source": {
+        "guid": "id-sha256:74a0e79c3d4ab7fbde7b"
+      },
+      "name": "Компоненты по Элементам",
+      "nameEncoding": "AVAILABLE"
+    },
+    {
+      "navigatorGuid": "id-sha256:0c6580ab4ec926ad3285",
+      "source": {
+        "guid": "id-sha256:e257375d6d41b741e7f6"
+      },
+      "name": "Компоненты по Слоям",
+      "nameEncoding": "AVAILABLE"
+    },
+    {
+      "navigatorGuid": "id-sha256:2e03ae10a294ee5fa5fe",
+      "source": {
+        "guid": "id-sha256:3218061b8e313f90b4bf"
+      },
+      "name": "Компоненты по Типам",
+      "nameEncoding": "AVAILABLE"
+    },
+    {
+      "navigatorGuid": "id-sha256:0789de2922dd7e4eb774",
+      "source": {
+        "guid": "id-sha256:f80cc40b5ba76a15fff7"
+      },
+      "name": "Вся Отделка",
+      "nameEncoding": "AVAILABLE"
+    },
+    {
+      "navigatorGuid": "id-sha256:c15f6fd14481835093a1",
+      "source": {
+        "guid": "id-sha256:2afba5b4c5a0512a57e7"
+      },
+      "name": "Отделка по Элементам",
+      "nameEncoding": "AVAILABLE"
+    },
+    {
+      "navigatorGuid": "id-sha256:0f673256e10bc27dba72",
+      "source": {
+        "guid": "id-sha256:b08ec977660a7b13fcc1"
+      },
+      "name": "Отделка Дверей и Окон",
+      "nameEncoding": "AVAILABLE"
+    }
+  ],
+  "nativeRows": "NOT_VERIFIED_NO_INSTALLED_ROW_CONTRACT",
+  "configureScheme": "UNSUPPORTED_INSTALLED_CONTRACT",
+  "csvSpecifications": "Existing adapter remains the shared fact output; no duplicate schedule engine"
+}

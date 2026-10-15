@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:a340ce05e694e0c74795dbb26a17f5afc9e435b102b5665c2896a9f0ea15b9ec",
+  "index_commit_sha": "be60283cd6575c5ad4d84de5fdceea0e39c9f6ce",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "be60283cd6575c5ad4d84de5fdceea0e39c9f6ce",
+  "report_path": "docs/research/apa-results/runs/2026-10-15/APA-RUN-20261015-230555Z-native-owner-recovery/REPORT.md",
+  "report_sha256": "c10f89013aff2ff51c77f7d5fd5dc6ef9d8e49365022c5330dcdf8204f352f8e",
+  "run_id": "APA-RUN-20261015-230555Z-native-owner-recovery",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

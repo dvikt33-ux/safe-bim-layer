@@ -1,0 +1,29 @@
+{
+  "status": "WINDOWS_HOST_AND_WINDOWS_LINUX_CI_PASS",
+  "head": "744e0bd184a11f1de4a1cf16382d21aec6f8cfca",
+  "runId": 38265044684,
+  "url": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38265044684",
+  "newChecks": 23,
+  "host": {
+    "count": 455,
+    "result": "PASS",
+    "seconds": 60.455
+  },
+  "jobs": [
+    {
+      "id": 114864972142,
+      "name": "ubuntu-latest",
+      "count": 455,
+      "seconds": 30.73,
+      "result": "PASS"
+    },
+    {
+      "id": 114864972311,
+      "name": "windows-latest",
+      "count": 455,
+      "seconds": 120.973,
+      "result": "PASS"
+    }
+  ],
+  "workflowChecks": "all required offline contract, graph and Windows syntax steps completed success"
+}

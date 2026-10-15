@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:0101898e06ab5e3967091f35a7f45d8f9fcc99d1a77d513a91e67b78bb841d8c",
+  "index_commit_sha": "b3fa4c84e7bbaa282d204915fe03c8b099be6a85",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "b3fa4c84e7bbaa282d204915fe03c8b099be6a85",
+  "report_path": "docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-001922Z-eighty-head-blob-inventory/REPORT.md",
+  "report_sha256": "f41a48075b8a8c390f658809d53c0ae0c4b6f83e07d24902a66bbb6baaa3a72d",
+  "run_id": "APA-RUN-20261011-001922Z-eighty-head-blob-inventory",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

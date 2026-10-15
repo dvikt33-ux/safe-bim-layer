@@ -1,0 +1,136 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261014-215514Z-executable-bim-workflows",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A11",
+  "substep_id": "APA-P70.A11.S03",
+  "executor": "work-executable-bim-integration-20261014",
+  "executor_run_id": "APA-CLAIM-EXECUTABLE-BIM-20261014T211417Z",
+  "phase": "LIVE",
+  "started_at": "2026-10-14T21:14:17Z",
+  "finished_at": "2026-10-14T21:55:14Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29 Windows11 existingauthorizedtest;temporarynativeCRUD SaveOpen;artifactpublication",
+    "sdk": "Reuse installedproviders only,noAPXchange",
+    "tapir": "1.5.10 restoredoriginal",
+    "source_branch": "feature/apa-executable-bim-workflows-20261015"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/85",
+      "revision": "45ef6b734e70c0e2c40ea57ed9a0099d70c4a917",
+      "source_sha": "45ef6b734e70c0e2c40ea57ed9a0099d70c4a917"
+    }
+  ],
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-EXECUTABLE-BIM",
+      "statement": "Corrected17stepnativeCRUD/attributes/move/copy/delete/SaveOpen;4temporaryelements removed,258accepted signaturesunchanged,12journalPASS.",
+      "status": "LIVE_PASS",
+      "evidence_ids": [
+        "EV-2"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-EFFECT-REVIEW",
+      "statement": "49of51previousUNKNOWNsourceclassified;2blocked;335effectqualifiedcurrentcontracts separatefrom25CALLABLEand9LIVEeffects.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-0",
+        "EV-1"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-EXECUTION-LIMITS",
+      "statement": "S03PARTIAL,sourceonly26/otherAPX32 unchanged; nativequeryoutputlimitations exact;nonormative/IFCsemantic/speedup claim.",
+      "status": "NOT_VERIFIED",
+      "evidence_ids": [
+        "EV-3"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-0",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-215514Z-executable-bim-workflows/execution-matrix.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "839c064f1fdce573a08c02c8b682a6665ef18cdc36ba333c5de2fab357565939",
+      "source_revision": "45ef6b734e70c0e2c40ea57ed9a0099d70c4a917"
+    },
+    {
+      "evidence_id": "EV-1",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-215514Z-executable-bim-workflows/effect-review.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "deb65226254b8fb050ed1f123a33eb57ec0c0b11f5cb32ba1b1abdec08acbad5",
+      "source_revision": "45ef6b734e70c0e2c40ea57ed9a0099d70c4a917"
+    },
+    {
+      "evidence_id": "EV-2",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-215514Z-executable-bim-workflows/native-workflows.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "8b0b2cd7913e65c0d0ef1ef2afda5824462cfec581aec9895ad555bb26516956",
+      "source_revision": "45ef6b734e70c0e2c40ea57ed9a0099d70c4a917"
+    },
+    {
+      "evidence_id": "EV-3",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-215514Z-executable-bim-workflows/gap-register.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "3ad206ac6671f0f8e8b74626073c952c7e642965a6f3317b85673b6b33e0ca7c",
+      "source_revision": "45ef6b734e70c0e2c40ea57ed9a0099d70c4a917"
+    },
+    {
+      "evidence_id": "EV-4",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-215514Z-executable-bim-workflows/windows-ci.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "a22a42915ee32bcfef389b74ce1366a38069b1af439ffddb8f23bb550dbc69e5",
+      "source_revision": "45ef6b734e70c0e2c40ea57ed9a0099d70c4a917"
+    },
+    {
+      "evidence_id": "EV-5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-215514Z-executable-bim-workflows/core-knowledge-query.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "d51b9880eec78da85f004225865029e6d06eccf9c1bf9ee2f76bffa6cef8c54b",
+      "source_revision": "45ef6b734e70c0e2c40ea57ed9a0099d70c4a917"
+    }
+  ],
+  "report_markdown": "# APA executable BIM workflows — native model management\n\n[Draft PR85](https://github.com/dvikt33-ux/safe-bim-layer/pull/85), head `45ef6b734e70c0e2c40ea57ed9a0099d70c4a917`, exact PR84 base `08527c0edde2096cf5d7be534b5e49f5c9038647`. Existing main orchestrator/KnowledgeGraph verifies canonical revision161, own CAS lease. One feature branch, one BIMGraph, one SceneWriter/SQLite. Normative/KG/search engine/APX/main unchanged.\n\n## Functional result\n\nCorrected cold scenario:17typedgraphsteps,12journalednativecalls,8modelmutationrequests and4Save/Open services. Fourtemporary nativeelements (2Wall+2Window) created,edited/copied anddeleted;all258accepted GUID/geometry/material/story/relationship signatures unchanged after Save/Open withtemporarymodel andaftercleanup. No newbuilding/testproject/APX. Restorecopy was saved beforewrites. Model-native Wall6m x.25m,height2.8→3.1m,hostedWindow1.2x1.2m/sill1m; nativeBuildingMaterial/Surface/classification/ElementID edits,move.5m/copy3m,IFCmapping/MEP/collision dataflow verified. Actual roughopening1.35m2 differs fromoverallWindow1.44m2;real twoholefaces andWallBREPvolume4.3125m3agree. Dimensions are explicit testparameters,engineeringNOT_VERIFIED.\n\nThreeinitialsuccess responses stopped on readback/test assumptions:Wall begThickness/endThickness,Window overall-versus-roughopening,Tapirclassification flat result versus exported wrapper schema. Independent native reads reconciled exactlyknownGUID/effect. Original UNKNOWN journal records remain unchanged and no identicalCreate/Set replay. Continuations used provenGUIDs,then corrected cold scenario passed. SQLite12final intents/results/readback allPASS;zero unintendedduplicates;original258restored. Automatic approval review initiallyrejected broadwrite scope;human then explicitlyconfirmed the exactscenario. No mutation beforethatconfirmation.\n\n## Working universal interface\n\nShared native-task routes from both maincompileentrypoints and authorededit bridge bypass legacy fixed-composition/tool/Roof-level restrictions for explicit typedgraph operations. Dynamic scope factories resolve producer GUIDs andcurrent inventory before eachwrite; success-union result schemas support dependenthosts; checkpoints persist verifiedresults and stopUNKNOWN. Operation-specific preflight/readback,exactidentity/hash,completeaffected/retained scope anddurableintent remainmandatory. Hostedowner GUIDs cannot implicitlymutate retainedelements. No secondexecutor,controller,journal,MCP,scheduler orgeometricengine. Existing NativeDump/IFCBREP/Shapely/attributes/providers reused.\n\nGPT retains ordinaryarchitecturalrequest,uses unchangedKG tosearch command summaries andexpandsselectedschemas. Seven requiredcommands were found from shortnatural-language queries. Onecommand perdocument/readableCamelCase tokens preserveKG diversitywithout hiding allbutone tool. GPTsupplies thechosen graph; no claim ofautonomouslanguageparser orinventeddimensions. Legacyprivate scenarios remaincompatible.\n\n51UNKNOWN reviewed againstboundedexistingimplementations:49classified,2remainUNKNOWN (`GetNativePhysicalGeometry`:exactimplementationabsent; `API.ExecuteAddOnCommand`:arbitraryinnerdispatch, useprovider-qualifiedroute). Effects capture affecteddata,sideeffects,save/confirmation/preflight/readbackneeds. ModelDump isPROJECTservice for3D/rebuild; UI/modal/process,externalpaths/printer/network,libraryregistration andTeamwork are not grantedbygeometrypermission. Completecontract hashes allowfreshPLNbinding butrejectversion/schemadrift. 335currentstack source-effectpolicies arequalified,not335LIVEpasses. OtherAPX32/source-only26 remain asPR84,notre-researched.\n\n363prepared contracts;337currentcompatible=264registeredTapir+73typedofficial.25distinctcommands successfullycalled thispass (16correctedCRUDworkflow plusinputqueries),9distinctwrite/serviceeffects independentlyverified. Tapirclassificationgetter hascurrentoutputschemamismatch;officialtypedgetterworks. WallGetElementTrims returnsnativeerror-2130313103; source-readonlyclassification isnotruntimeacceptance. Failedqueries excludedfromsuccesscounters. Executionmatrixkeeps discovered/runtime/effectqualification/callable/LIVE/sourceblock separate.\n\n## Measured performance and publication\n\nGuarded17stepcycle58.331s;planpreparation0.186s+0.026s;workflowexecution35.065s+21.431s;318APIcalls includingcompletepreservationchecks,49.202stransport,22.497stransportreads/verification. Manualspeedup notmeasured,notclaimed. No scalability ornormativeacceptance claim. WindowsCI [PASS](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38643318495) at exactpublishedhead;localonlycriticalmodifiedtests. Privaterawpaths/PLN/dumps/journal notuploaded;processedproof usesGUIDhashes. A11.S03PARTIAL;A07/S10dependencieshistoryretained. Next:sharedgraph representatives forfurthermodel constraints andprovideroutputcompatibility viaexisting APIs. Publisher safety flags coverartifactpublication only;authorizedtemporarytestwrites documentedabove.\n",
+  "next_substep": "APA-P70.A11.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

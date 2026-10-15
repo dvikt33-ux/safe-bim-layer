@@ -1,0 +1,171 @@
+{
+  "substep": "APA-P70.A11.S03",
+  "status": "PARTIAL",
+  "codeHead": "5a3a9201a715a5528c93bed4a5318e2acb32eea7",
+  "gaps": [
+    {
+      "id": "G01",
+      "status": "FIXED_VERIFIED_PR54_RETAINED",
+      "evidence": "546Windows host/Windows+LinuxCI; accepted PR54 SQLite fix retained",
+      "remaining": "No new SQLite development"
+    },
+    {
+      "id": "G02",
+      "status": "LIVE73_DETAILS_FOUR_ACTUAL_WALL_ROOF_COVERAGE_PLANS_PASS",
+      "remaining": "Four measurements VERIFIED; 39.44-59.06% cap coverage. Direct complete-cap SEO recipes NOT_APPLICABLE; native contour/design/copy authorization required"
+    },
+    {
+      "id": "G03",
+      "status": "REAL_NATIVE_C4_C5_BEAM_SUPPORT_PASS_FULL_ASSEMBLY_BLOCKED",
+      "dependency": "APA-P70.A11.S06",
+      "remaining": "25x150mm and50x50mm real Beams with75cm2contact; c5 vertical native end contact to original Morph batten73.1108100945cm2; eight full-assembly dimensions/source commit=false/grade/fixings/rafter bearing remain"
+    },
+    {
+      "id": "G04",
+      "status": "LIVE_REFERENCE200_DIAMETER_AND_RECIPROCAL_TERMINAL_CONNECTION_PASS_MAIN_BRIDGE_BLOCKED",
+      "dependency": "APA-P70.A11.S10",
+      "remaining": "Ø200pair preserved; no explicit sized transition factory/port setters; exposed routing Place supplies empty segment section maps; destructive ConnectLogically excluded. Two components remain."
+    },
+    {
+      "id": "G05",
+      "status": "SOURCE_VERIFIED_SINGLE_PLANE_SDK_MEMO_PATH_RUNTIME_GATE",
+      "dependency": "APA-P70.A11.S07",
+      "remaining": "Existing SDK GetMemo/ChangeMemo supports plane Roof source; native memo/underside footprint offset29.887626mm verified. Installed callable edit/source-binary correspondence not verified; exact design and separate authorized copy absent. Original4junctions unchanged; no APX change"
+    },
+    {
+      "id": "G06",
+      "status": "REAL_ANALYTICAL_ADAPTERS_RETAINED_EXTERNAL_SAM_SAF_ENGINE_LOAD_NORM_GATES",
+      "dependency": "APA-P70.A11.S08"
+    },
+    {
+      "id": "G07",
+      "status": "ACTUAL45_IFC_MAPPINGS_52_ELEMENTS_UNDERSIDE_WALL_ROOF_QUANTITIES_PASS",
+      "dependency": "APA-P70.A11.S09",
+      "remaining": "Historical PR63 actual IFC remains evidence; no new export because no model change. SEO/contact export and receiver compatibility still unverified"
+    },
+    {
+      "id": "G08",
+      "status": "ACTUAL_LOWER_FACE_FULL_CAP_COVERAGE_AND_RECIPROCAL_FLAG_CHECK_PASS",
+      "remaining": "Coverage/holes actual native geometry and complete/partial contact distinguished; requested true/target+operator readback false flag remains NOT_VERIFIED, no mutation/retry Native memo/reference contour matches upper face; actual lower XY footprint is offset29.887626mm. Both are retained explicitly, not normalized into false equality."
+    },
+    {
+      "id": "G09",
+      "status": "FUNCTIONAL_WORK_PRIORITIZED_NO_INSTALLER_OR_OPTIMIZATION_CLAIM",
+      "remaining": "A11.S04 waits actual S03 completion; S03 remainsPARTIAL andS10BLOCKED"
+    }
+  ],
+  "baselinePR56GuidCount": 95,
+  "currentGuidCount": 168,
+  "sharedContextRecords": 45,
+  "tests": {
+    "host": 638,
+    "windowsCI": 638,
+    "linuxCI": 638,
+    "new": 15,
+    "upstreamEach": 102
+  },
+  "nextAction": "Qualify true native grid variation contract; separately authorized story-isolated create/edit cycle; then broader host/roof edits and verified source staircase. Continue in existing generator/writer. Do not repeat accepted creations or expand cancelled documentation.",
+  "baselinePR57GuidCount": 96,
+  "nativeToolPolicy": "NATIVE_PARAMETRIC_FIRST; MORPH_LAST_RESORT; real Beam for source c4/c5; missing APA adapter not exemption",
+  "historicalPR57Junctions": {
+    "interfacePairs": 49,
+    "PASS_GEOMETRY": 34,
+    "PASS_DOCUMENTED": 1,
+    "NOT_VERIFIED": 14,
+    "PASS_ENGINEERING": 0,
+    "completeFamilies": "NOT_VERIFIED"
+  },
+  "currentWorkingNativeFunctions": [
+    "REFERENCE200_CIRCULAR_TERMINAL_PAIR",
+    "REAL_BEAM25X150_BEAM50X50_CONTACT",
+    "NATIVE_WALL_ROOF_PERIMETER_ABUTMENT",
+    "SDK_SEGMENT_OWNERSHIP_IFC_QUANTITIES",
+    "ACTUAL_NATIVE_WALL_ROOF_UNDERSIDE_CONTACT",
+    "ACTUAL_SLOPED_FOUR_GAPS_MEASURED"
+  ],
+  "baselinePR59GuidCount": 107,
+  "newNativeWrites": 0,
+  "fourActualSourceJunctions": {
+    "measurement": "VERIFIED",
+    "completeCapDirectRecipe": "NOT_APPLICABLE",
+    "counts": {
+      "VERIFIED": 0,
+      "APPLICABLE_NOT_EXECUTED": 0,
+      "NOT_APPLICABLE": 4,
+      "NOT_VERIFIED": 0
+    }
+  },
+  "normative": {
+    "task": "APA-P70.A02.S02",
+    "status": "PARTIAL",
+    "machineSource": "dvikt33-ux/tdk-course-project",
+    "sourceCommit": "67f17d407d14aebb091daaf79f11c10178b87440",
+    "object": "residential.izhs USER_CONFIRMED",
+    "ruleFilesRead": [
+      "01_Normative_Base/_Machine/rules/roofing_2026.yaml"
+    ],
+    "bindings": 36,
+    "rules": 9,
+    "verdict": "NOT_VERIFIED",
+    "sourceTrust": "QUARANTINED_DESIGN_ONLY",
+    "engineering": "ENGINEERING_NOT_VERIFIED",
+    "remaining": [
+      "Actual source-bound roofing technology/layers and purpose",
+      "Rule-specific source/revision/evidence/applicability acceptance",
+      "Existing roof calculators declared but not implemented; do not create duplicate engine",
+      "Audited authoritative release and locality overlay for location-dependent modules"
+    ]
+  },
+  "nativeEvidenceReuse": {
+    "guidCount": 109,
+    "geometryRecomputed": false,
+    "newNativeReads": 0,
+    "newNativeWrites": 0,
+    "verification": "PREVIOUS_ACCEPTED_EVIDENCE_REUSED_NOT_REFRESHED"
+  },
+  "architecturalDocumentation": {
+    "nativeExteriorElevation": "LIVE_PASS_FULL_WEST_FACE_RENDERED_ROOF_SPAN_CHECK",
+    "nativeFloorPlanAndSection": "LIVE_PASS_ON_ONE_NEW_LAYOUT",
+    "associativeSlabDimension": "LIVE_PASS_0.20000006M_NATIVE_WITNESS_COORDINATES",
+    "verticalNativeDrawingFillContours": "PLAN32_SECTION34_ELEVATION_NOT_EXPOSED",
+    "fullLineTextAndOwnerBoundVerticalGraphics": "NOT_VERIFIED",
+    "nativeInteractiveScheduleDefinitions": 13,
+    "nativeInteractiveScheduleRowsAndConfiguration": "UNSUPPORTED_INSTALLED_CONTRACT",
+    "nativePDFPublisher": "LIVE_PASS_ONE_SELECTED_A2_LAYOUT_AFTER_SAVE_OPEN",
+    "sourceLinkMetadata": "NOT_VERIFIED_OPAQUE_PROVIDER_GUID",
+    "sourceScaleBehavior": "LIVE_PASS_100_125_100_CLIP_FRAME_FIXED",
+    "BIMChangeSynchronization": "PR70_HISTORICAL_PROOF_RETAINED_NOT_RERUN",
+    "A07.S01": "NOT_CLOSED_DEPENDENCIES_RETAINED",
+    "A11.S10": "BLOCKED_UNCHANGED",
+    "automaticBackgroundRefresh": "NOT_IMPLEMENTED_EXPLICIT_REFRESH_REUSED"
+  },
+  "modelFirst": {
+    "source": "ONE_AUTHORED_INTENT_EXISTING_BIM_GRAPH_CSE_LIBRARY_SCENEWRITER",
+    "nativeBuildingElements": {
+      "Wall": 10,
+      "Slab": 2,
+      "Window": 6,
+      "Door": 2,
+      "Roof": 1,
+      "Morph": 0
+    },
+    "nativeTestScenarios": 2,
+    "wholeBuildingConnected": "LIVE_PASS_ONE_COMPONENT21",
+    "physicalRoofContact": "LIVE_PASS_FIVE_ACTUAL_SLOPED_UNDERSIDE_CONTACTS",
+    "nativeRoles": "LIVE_PASS_8_BEARING_2_NONBEARING_TEST_ASSIGNMENTS",
+    "roofLevelEdit": "LIVE_PASS_0.2M_FIVE_DEPENDENT_WALL_BREP_CHANGED",
+    "windowWidthEdit": "LIVE_PASS_1.2_TO_1.4M_HOST_BREP_CHANGED",
+    "saveOpen": "LIVE_PASS_ALL168_SIGNATURES",
+    "completionIdempotence": "LIVE_PASS_ZERO_CREATES_ZERO_EDITS",
+    "nativeAxes": "BLOCKED_INSTALLED_CREATEOBJECTS_HAS_NO_GRID_VARIATION_CONTRACT",
+    "storyEditing": "REQUIRES_SEPARATELY_AUTHORIZED_STORY_ISOLATED_PROJECT",
+    "singlePlaneRoofContourAndSlopeEdit": "NOT_VERIFIED_NO_QUALIFIED_CONTRACT",
+    "staircase": "SOURCE_REQUIREMENT_NOT_VERIFIED_NOT_CREATED",
+    "genericOpening": "HISTORICAL_ADAPTER_RETAINED_NO_NEW_GENERIC_OPENING",
+    "roofHoles": "NOT_QUALIFIED_REJECTED_SKIP_FLAG_READBACK_FALSE",
+    "engineeringAndNormativeAcceptance": "NOT_VERIFIED",
+    "A11.S03": "PARTIAL",
+    "A07.S01": "NOT_CLOSED",
+    "A11.S10": "BLOCKED_UNCHANGED"
+  }
+}

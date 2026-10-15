@@ -1,0 +1,49 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-INCREMENTAL-NATIVE-EDIT-RESTORE",
+      "evidence_ids": [
+        "EV-INCREMENTAL-FINAL-AUDIT",
+        "EV-INCREMENTAL-PERSISTENCE"
+      ],
+      "statement": "Captured independent native readback proves existing window edit and explicit restore without GUID/host/story/material drift, followed by save/reopen and original graph restoration.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-INCREMENTAL-CI-289",
+      "evidence_ids": [
+        "EV-INCREMENTAL-CI"
+      ],
+      "statement": "Head976c19c passed289offline tests; independent native results remain separate.",
+      "status": "OFFLINE_PASS"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-INCREMENTAL-FINAL-AUDIT",
+      "kind": "LOCAL_LOG",
+      "sha256": "806c5880453cf099e282d937698e8bca4b3c9cdfe215860916a2b8c13700cfa6",
+      "source_revision": "976c19cecebe3f6bb4352365d9a59051d5b2b61b",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261011-195800Z-incremental-native-edit/core-final-readonly-20261011/result.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-INCREMENTAL-PERSISTENCE",
+      "kind": "LOCAL_LOG",
+      "sha256": "78bc461b870da652aac512d60e97c3775344d1f446cb456613fc295804c914c3",
+      "source_revision": "976c19cecebe3f6bb4352365d9a59051d5b2b61b",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261011-195800Z-incremental-native-edit/persistence-20261011-after-edit-restore/result.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-INCREMENTAL-CI",
+      "kind": "TEST_RESULT",
+      "sha256": null,
+      "source_revision": "976c19cecebe3f6bb4352365d9a59051d5b2b61b",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38170051997",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261011-195800Z-incremental-native-edit",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

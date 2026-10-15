@@ -1,0 +1,24 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-PUBLISHER-SYNTHETIC-20261010",
+      "evidence_ids": [
+        "EV-WORKFLOW-CODE"
+      ],
+      "statement": "Synthetic request tests the automatic GitHub publication pipeline; it is not an Archicad live, build, or geometry test.",
+      "status": "REPORTED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-WORKFLOW-CODE",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "901dd973293f3200749b5f37fd5bbfa7f7da4f21",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/.github/workflows/apa-research-publisher.yml",
+      "verification": "SOURCE_READ"
+    }
+  ],
+  "run_id": "APA-RUN-20261010-104437Z-publisher-integration-smoke",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

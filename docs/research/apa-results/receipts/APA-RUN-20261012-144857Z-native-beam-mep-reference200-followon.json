@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:290bc02c2c207331326fbfecd5cacc22ca9aefb10eab60a623602e39cc435c60",
+  "index_commit_sha": "58822203463a124b1c30e7c2dbefa8de80f5a796",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "58822203463a124b1c30e7c2dbefa8de80f5a796",
+  "report_path": "docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon/REPORT.md",
+  "report_sha256": "a051a233e7fef67a7afb2df0638543e517a98c946c379f970428b419ab0de460",
+  "run_id": "APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

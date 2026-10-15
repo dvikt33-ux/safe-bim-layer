@@ -1,0 +1,68 @@
+{
+  "substep": "APA-P70.A11.S03",
+  "status": "PARTIAL",
+  "codeHead": "b1abd584585feb0f286621337986c8a5d3077507",
+  "gaps": [
+    {
+      "id": "G01",
+      "status": "FIXED_VERIFIED_PR54_RETAINED",
+      "evidence": "PR54 retained;432Windows/Linux tests PASS, no duplicate SQLite implementation"
+    },
+    {
+      "id": "G02",
+      "status": "LIVE73_DETAILS_CONTEXT_AND_SOURCE_BOUND_CONTACT_JUNCTION_PASS",
+      "remaining": "A04 model qualification grades49interfaces; remaining construction assemblies, absent cladding, source-material equivalence and engineering not verified"
+    },
+    {
+      "id": "G03",
+      "status": "NATIVE_C4_C5_SOURCE_SUPPORT_SUBJUNCTION_PASS_FULL_ASSEMBLY_BLOCKED",
+      "dependency": "APA-P70.A11.S06",
+      "remaining": "50x50mm c5 actual roof/rafter-following orientation and75cm2contact verified. Full roof assembly still lacks eight dimensions, timber grade, fastening/rafter-bearing data; source commit=false"
+    },
+    {
+      "id": "G04",
+      "status": "LIVE7_ROUTE_NETWORK_PRESERVED_TERMINAL_OPEN_READY_DIAMETER_SELECTOR_FOUND",
+      "dependency": "APA-P70.A11.S10",
+      "remaining": "Live Ventilation row referenceId200/diameter0.2m and Create crossSectionReferenceId ready; Modify lacks selector. Reference-based creation/transition/terminal reciprocal connection NOT_VERIFIED; no new MEP write"
+    },
+    {
+      "id": "G05",
+      "status": "POST_REOPEN_NATIVE_OPENING_SEO_READBACK_PASS_SHELL_EDIT_UNSUPPORTED",
+      "dependency": "APA-P70.A11.S07"
+    },
+    {
+      "id": "G06",
+      "status": "REAL_ANALYTICAL_ADAPTERS_RETAINED_EXTERNAL_SAM_SAF_ENGINE_LOAD_NORM_GATES",
+      "dependency": "APA-P70.A11.S08"
+    },
+    {
+      "id": "G07",
+      "status": "ACTUAL38_IFC_MAPPINGS_45_ELEMENTS_NEW_TIMBER_IFCBEAM_11_PORT_LINKS_PASS",
+      "dependency": "APA-P70.A11.S09",
+      "remaining": "Current96GUID export:38/38bounds,20material assignments,11port links,6opening hosts,12quantitymatches/0mismatch. Receiver full semantic/engineering compatibility and terminal subtype remain unverified"
+    },
+    {
+      "id": "G08",
+      "status": "DEDICATED_NATIVE_SCOPE_AND_MATRIX_ROW_INTERPRETATION_PASS",
+      "remaining": "Terminal still omitted by generic enumeration; dedicated native ports/body authoritative. Native Morph curved memo prevents quantity qualification; actual planar contact and IFC geometry/class/material independently verified; unknown-type GDL quarantined"
+    },
+    {
+      "id": "G09",
+      "status": "FUNCTIONAL_WORK_PRIORITIZED_NO_INSTALLER_OR_OPTIMIZATION_CLAIM",
+      "remaining": "A11.S04 waits real S03 acceptance"
+    }
+  ],
+  "baselinePR56GuidCount": 95,
+  "currentGuidCount": 96,
+  "sharedContextRecords": 38,
+  "tests": 432,
+  "currentJunctions": {
+    "interfacePairs": 49,
+    "PASS_GEOMETRY": 34,
+    "PASS_DOCUMENTED": 1,
+    "NOT_VERIFIED": 14,
+    "PASS_ENGINEERING": 0,
+    "completeFamilies": "NOT_VERIFIED"
+  },
+  "nextAction": "Use ready CreateMEPRoutingElements crossSectionReferenceId200 for a separately authorized unambiguous terminal/transition probe; source missing sizes/grades/fixings remain existing external dependencies"
+}

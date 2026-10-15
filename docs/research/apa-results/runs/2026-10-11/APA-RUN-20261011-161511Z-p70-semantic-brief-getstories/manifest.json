@@ -1,0 +1,120 @@
+{
+  "action_id": "APA-P70.A02",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-P70-S01-SEMANTIC-BRIEF",
+      "evidence_ids": [
+        "EV-P70-S01-BRIEF",
+        "EV-P70-S01-ENTRY",
+        "EV-P70-S01-TESTS",
+        "EV-P70-S01-CI"
+      ],
+      "statement": "Semantic brief validation for both project start modes, site/rooms/requirements, first storey named 1 этаж and elevation zero implemented as an offline-only adapter.",
+      "status": "OFFLINE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-S01-NATIVE-INDEX",
+      "evidence_ids": [
+        "EV-P70-S01-BRIEF",
+        "EV-P70-S01-TESTS"
+      ],
+      "statement": "Native story IDs are retrieved only by GetStories after checking exact active PLN, with no assumed floorIndex or silent renumbering.",
+      "status": "OFFLINE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-S01-LIVE-BLOCKED",
+      "evidence_ids": [
+        "EV-P70-S01-ENTRY"
+      ],
+      "statement": "No generic actual project creation, room-to-DAG graph, modification, normative approval, or live material selection has been implemented by this stage.",
+      "status": "NOT_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-P70-S01-BRIEF",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "8e0c98503903f11a5e1f1316965a3d1e66d5a120",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-semantic-brief-story-resolution-20261011/scripts/archicad_semantic_brief.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-P70-S01-ENTRY",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "daf4f7bad1b5aea2a48892f5423c0e65bee5a683",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-semantic-brief-story-resolution-20261011/scripts/archicad_project_accelerator.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-P70-S01-TESTS",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "dcef428a68ab4727f18d25e15cf6793b88e79173",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-semantic-brief-story-resolution-20261011/tests/test_archicad_semantic_brief.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-P70-S01-CI",
+      "kind": "TEST_RESULT",
+      "sha256": null,
+      "source_revision": "f0b81b784cb7a84d139d2356b51ff3d9b266f4b5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38154611226",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "chatgpt-gpt6-manual",
+  "executor_run_id": "APA-RUN-20261011-1608Z-p70-a02-s01-semantic-brief",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-11T16:15:11Z",
+  "idempotency_key": "sha256:64c04a8ac153a927724db0af4856733fbea73fca9ed64bcdd4eaa59682390d26",
+  "inputs": [
+    "ART-APA-FULL-CYCLE",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-P70-A01-S03-INTEGRATION-BOUNDARIES-20261011"
+  ],
+  "next_substep": "APA-P70.A02.S02",
+  "phase": "OFFLINE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261011-161511Z-p70-semantic-brief-getstories",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "29 (target; offline CI only)",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "sdk": null,
+    "source_branch": "feature/apa-semantic-brief-story-resolution-20261011",
+    "tapir": "1.5.10 (source baseline only)"
+  },
+  "source_revisions": [
+    {
+      "revision": "8e0c98503903f11a5e1f1316965a3d1e66d5a120",
+      "source_sha": "8e0c98503903f11a5e1f1316965a3d1e66d5a120",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-semantic-brief-story-resolution-20261011/scripts/archicad_semantic_brief.py"
+    },
+    {
+      "revision": "daf4f7bad1b5aea2a48892f5423c0e65bee5a683",
+      "source_sha": "daf4f7bad1b5aea2a48892f5423c0e65bee5a683",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-semantic-brief-story-resolution-20261011/scripts/archicad_project_accelerator.py"
+    },
+    {
+      "revision": "dcef428a68ab4727f18d25e15cf6793b88e79173",
+      "source_sha": "dcef428a68ab4727f18d25e15cf6793b88e79173",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-semantic-brief-story-resolution-20261011/tests/test_archicad_semantic_brief.py"
+    }
+  ],
+  "started_at": "2026-10-11T16:08:29Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A02.S01"
+}

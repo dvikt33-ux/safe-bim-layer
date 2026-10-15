@@ -1,0 +1,96 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261012-235115Z-bim-documentation",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A11",
+  "substep_id": "APA-P70.A11.S03",
+  "executor": "work-bim-documentation-20261013",
+  "executor_run_id": "APA-CLAIM-DOCUMENTATION-20261012T230201Z",
+  "phase": "LIVE",
+  "started_at": "2026-10-12T23:02:01Z",
+  "finished_at": "2026-10-12T23:51:15Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29 authorized isolated documentation test saved; publisher performs no native operations",
+    "tapir": "1.5.10",
+    "source_branch": "feature/apa-bim-documentation-20261013"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/70",
+      "revision": "f5aa4754a0ace251e8541001f17f6fa8eddfe8e5",
+      "source_sha": "f5aa4754a0ace251e8541001f17f6fa8eddfe8e5"
+    }
+  ],
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-BIM-DOCUMENTATION",
+      "statement": "Native plan, Section and limited exterior InteriorElevation projection; shared Wall/Slab specification facts and explicit refresh after new native test Wall change. Save/Open independent readback preserves original109; full facade/vertical coordinates/catalog rows/PDF not accepted.",
+      "status": "LIVE_PASS",
+      "evidence_ids": [
+        "EV-NATIVE",
+        "EV-SYNC",
+        "EV-CI"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-NATIVE",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-235115Z-bim-documentation/native-readback.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "d120070cec4c89f89df3ce2023de9d718f67ea8f9bce818573c17f676a31e6b0",
+      "source_revision": "f5aa4754a0ace251e8541001f17f6fa8eddfe8e5"
+    },
+    {
+      "evidence_id": "EV-SYNC",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-235115Z-bim-documentation/synchronization.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "a848a2fbbeb36a3ad1f8409cffdb9d9853bfeb1c9e5fac15292518a34586da40",
+      "source_revision": "f5aa4754a0ace251e8541001f17f6fa8eddfe8e5"
+    },
+    {
+      "evidence_id": "EV-CI",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-235115Z-bim-documentation/ci.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "117ffd7e9a5c61a906995dd077ad120d0b9586d90607c4622ac005799ccc03b6",
+      "source_revision": "f5aa4754a0ace251e8541001f17f6fa8eddfe8e5"
+    }
+  ],
+  "report_markdown": "# APA native architectural documentation package\n\nWorking end-to-end adapter on the exact PR68 head: existing SceneWriter + SQLite journal + Native Model Dump produce a shared version of native floor-plan data, rebuilt native section/projection databases and six CSV specifications. No second drawing engine or executor. Normative and GitHub-search development excluded.\n\n## Actual live result\n\n- One floor0 native associative saved plan; one newly created native Section; one native InteriorElevation used as an exterior projection, with explicitly limited coverage. Four explicit saved ViewMap entries. Reused true exterior Elevation is empty for the selected building: NOT_VERIFIED as a facade.\n- Selected19 primary elements:9 Walls,2 Slabs,2 Columns,4 Windows,1 Door,1 Roof. Six specifications share one modelVersion. Wall/Slab quantities come from actual resultant planar BREP, not box volumes. Bodyless Column parents and unsupported Door quantities remain unverified.\n- New separate native Wall changed height1.0 to1.2m: actual joined volume0.085 to0.102m3; native plan cut fills15 to16. Existing Column plan join changed while its physical3D signature remained unchanged. Explicit refresh regenerated section/projection and independently read native owner links; this does not prove full vertical drawn coordinates.\n- Save/Open and final independent readback PASS. Original109 GUIDs/geometry/materials/stories unchanged. Full inventory121 includes new Wall, Section/InteriorElevation and9 native subordinate/marker Objects. Persistence protected112 explicit identities, plus ViewMap/database checks. No new Wall volume collision. No Morph created.\n\n## Acceptance boundaries\n\nNative Section contains16 selected owners; exterior InteriorElevation projection contains4 selected owners (Column/Door/Wall/Window). No claim of a complete facade, native interactive schedule rows, vertical2D coordinates, rendered/visible UI acceptance or published PDF. Existing schedule tree/publisher names are discovery only. Refresh is explicit, not a background watcher. Damaged display labels from Native Model Dump are not promoted; numeric stories and attribute identities are retained. Normative/engineering acceptance NOT_EXECUTED.\n\nHistorical ambiguous ledger events are preserved. Initial Section APIERR_BADDATABASE was independently reconciled as no effect; corrected database-bound scenario then succeeded. Successful test Wall modification had a strict readback-field mismatch and was independently reconciled without repeating Modify. Save/Open succeeded and final public adapter refresh ran sequentially after Open.\n\n## Verification and continuation\n\n14 new tests;587/587 Windows host and Windows/Linux CI PASS. Six code blobs match GitHub. New draft PR70 is based on the exact PR68 commit29aa06a6e9bbef0d991bea922e1ad4101ab29bdd. Native identity tokens are hashed; raw requests/responses, model paths and PLN stay local.\n\nA11.S03 remains PARTIAL; A07.S01 not closed and dependencies preserved. A11.S10 remains BLOCKED. Next: qualify true exterior Elevation placement, vertical primitive readback and native schedule row contracts through the same executor; then publisher output with actual file readback. No repeat of the completed normative/geometry work.\n\nPublication safety flags describe only the publisher process (zero native calls). The preceding authorized isolated test PLN was modified and saved; this is explicitly recorded in native-readback.json.\n\nCode: [draft PR70](https://github.com/dvikt33-ux/safe-bim-layer/pull/70), head `f5aa4754a0ace251e8541001f17f6fa8eddfe8e5`. CI: [Windows/Linux](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38323722458). Evidence: [APA-RUN-20261012-235115Z-bim-documentation](https://github.com/dvikt33-ux/safe-bim-layer/tree/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-235115Z-bim-documentation).\n",
+  "next_substep": "APA-P70.A11.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

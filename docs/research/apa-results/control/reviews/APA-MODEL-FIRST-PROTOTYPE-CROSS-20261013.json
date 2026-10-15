@@ -1,0 +1,9 @@
+{
+  "status": "NATIVE_PROTOTYPE_RETAINED_VOLUME_COLLISION_CHECK_PASS",
+  "nativeWrites": 0,
+  "firstBuildingCount": 21,
+  "retainedOriginalCount": 126,
+  "actualNativeVolumeCollisions": [],
+  "engine": "Tapir.GetCollisions",
+  "identityAndSavedHashMatched": true
+}

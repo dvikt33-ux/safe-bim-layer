@@ -1,0 +1,114 @@
+# APA-P20.A02.S03 — первый live-запуск павильона: частичный результат и блокировка slab readback
+
+- **Источник:** текст консольного отчёта, предоставленный владельцем 2026-10-10; локальный JSON: `C:\Users\Admin\Downloads\APA_MVP_Windows11_v1_3_COLUMN_PARENT\APA_MVP_Archicad29\results\execute-20261010T200512Z.json` (локальный путь из пользовательского лога, сам файл JSON не получен). Доказательство ниже — **REPORTED_FROM_USER_LIVE_LOG**, а не независимый LIVE readback по установленному APX.
+- **План:** APA-P20 → APA-P20.A02 → APA-P20.A02.S03. Этот документ **не меняет** статус задачи в PROJECT_PLAN.json; никакого DONE_PUBLISHED/live PASS полной сцены.
+- **Инструмент:** локальный APA MVP v1.3 COLUMN_PARENT с исходниками из PR #16, проверка Git blob 13/13; применённая локальная оболочка v1.3 не сверялась побайтово с GitHub.
+- **Контекст:** Archicad 29; модифицированный Tapir 1.5.10; target TEST MER (название в консоли отображается с заменой кириллицы), порт 19724; `storyIndex=0`; якорь (300,300) м. Test PLN не был автоматически сохранён.
+- **Сценарий:** `sceneId=apa-pavilion-live-02`; `sourcePlanHash=28361d6e066364f5c6193404a0f25e395a183729ad44fb1cbe6cb07d2d6bd7dc`; один пользовательский ввод `EXECUTE TEST`.
+- **Preflight:** `READY_FOR_EXPLICIT_TEST_RUN`, 38 native elements inspected; четыре `ColumnSegment` с inverted bbox были консервативно сопоставлены с bbox их родительских колонн; geometry envelope check PASS на момент preflight.
+- **Execution:** `PARTIAL_OR_UNKNOWN_OUTCOME`, `failedStep=slab`, `reason=ValueError: SLAB_READBACK_MISMATCH`, `manualReconciliationRequired=true`, `plnSaved=false`, `automaticRetry=false`.
+- **Four wall steps reported PASS and independently named by returned GUID in operator log:**
+  - south: `6C6CB42D-8368-4749-81F9-D5FA8748AB20`
+  - east: `BD622995-16E6-4C9B-BF42-4934AD40A931`
+  - north: `1B95F857-025F-457F-A369-E455F33B7861`
+  - west: `79B92DDC-9B38-44F3-9768-0F08CEC0274E`
+- **Slab outcome:** not known. Write may have succeeded before geometry readback raised mismatch. No evidence that Columns/Window/Door mutations ran after slab; complete scene **NOT_VERIFIED**.
+- **Implementation clue, NOT diagnosis:** PR #16 pinned `scripts/archicad_scene_run.py` `verify_readback(CreateSlabs,...)` rejects if any of `thickness`, `level`, `polygonOutline` differ from plan. Without raw slab GUID/readback/SQLite row, exact mismatching field is **UNKNOWN**. v1.3 local modifications are not independently examined.
+- **Safety and next action:** NO retry, NO reused scene ID/hash, NO deletion/undo/save/switch before manual reconciliation. Read-only inspection of currently open PLN plus durable SQLite step journal `slab` row (state and GUID), inspect native slab `GetDetailsOfElements` and 3D bbox; compare thickness/level/polygon to plan. If no trustworthy recovery data, keep BLOCKED/PARTIAL and do not infer 12/12.
+- **Reproducibility limitation:** the supplied console report is a user-authored log transcript; no remote connection to Archicad or direct confirmation of unsaved current model was possible from this chat.
+- **Source reference for reader logic:** https://github.com/dvikt33-ux/safe-bim-layer/blob/bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd/scripts/archicad_scene_run.py
+- **No main/master, existing PR branch, PLN or installed APX modified by this GitHub report commit.**
+
+## Follow-up read-only observation (operator log: inspect-20261010T200754Z)
+
+- **INSPECT_READ_ONLY: PASS** on same reported bound TEST MER PLN and port `19724`, Tapir `1.5.10`, story index `0`.
+- Before live execution preflight inspected **38** elements; after live execution read-only inspect reported `element_count: 43` (**delta +5**).
+- This delta is consistent with 4 verified wall writes and one attempted slab creation, but **does not independently establish identity or validity of the fifth element**. Do not mark slab PASS on count alone.
+- **Evidence:** second user-supplied console transcript, lines 363–377 (reported UI log); path `C:\Users\Admin\Downloads\APA_MVP_Windows11_v1_3_COLUMN_PARENT\APA_MVP_Archicad29\results\inspect-20261010T200754Z.json`; underlying JSON artifact was not provided.
+- **Investigation priority:** read SQLite durable `steps` row for `scene_id=apa-pavilion-live-02`, `step_id=slab`; verify whether recorded `guid` is present and whether `state=CREATED_UNVERIFIED`. Fetch `GetDetailsOfElements` and bbox for that GUID READ-ONLY and compare to `CreateSlabs` intent fields: `thickness`, `level`, `polygonCoordinates` / returned `polygonOutline`. Preserve file/SQLite records. DO NOT replay writes.
+- **No additional automatic or manually initiated writes were performed for this follow-up.**
+
+## Durable SQLite evidence — attached primary artifact
+
+- **Source:** user uploaded actual `scene-v1-attempts(1).sqlite3`; inspected using SQLite **read-only, immutable** connection; `PRAGMA quick_check = ok`; tables `scenes`, `steps`. This is stronger than console transcript evidence, but NOT native Archicad geometry readback.
+- `scenes` contains exactly the targeted `scene_id=apa-pavilion-live-02` with state `PARTIAL_OR_UNKNOWN_OUTCOME` and matching plan SHA `28361d6e066364f5c6193404a0f25e395a183729ad44fb1cbe6cb07d2d6bd7dc`.
+- `steps` has five rows for this scene: four `PASS` walls (GUIDs listed above) and one **`slab` with `state=CREATED_UNVERIFIED`, `guid=7539799C-D432-42F5-9F31-FED10E1047C4`**. Its `output` is a prior committed intent and approval, not the raw `GetDetailsOfElements` readback.
+- **Slab intent:** `CreateSlabs` `floorIndex=0`, `level=0.0`, `thickness=0.2`, `referencePlaneLocation=Top`, vertices `(300,300),(304,300),(304,303),(300,303)`. Exact target path stored in journal is Unicode `C:\\LocalAI\\SafeBIM_Global_Library_Test_Projects\\Тест MER .pln`, port `19724`, Tapir `1.5.10`, story index `0`.
+- **Interpretation:** Archicad/Tapir returned a syntactically valid GUID for the slab, and the writer committed it durably before `verify_readback` failed. This plus element count change 38→43 strongly supports creation of a fifth element, but slab geometry correctness remains **UNVERIFIED**, and we cannot assign which of the three fields mismatch without the actual `GetDetailsOfElements` response.
+- **Next read-only check:** `GetProjectInfo` (exact expected project identity), `GetAddOnVersion` (1.5.10), `GetDetailsOfElements` for slab GUID, `Get3DBoundingBoxes` for slab GUID; compare returned `type`, `floorIndex`, `details.thickness`, `details.level`, `details.polygonOutline`. Do not issue any create/modify/delete/save or replay the full scene, and do not remove the scene journal.
+- **Root-cause status:** `SLAB_READBACK_MISMATCH` confirmed as failure gate; specific offending parameter and whether API-normalization vs true geometry defect is **NOT_YET_VERIFIED**.
+
+## 2026-10-10 READ-ONLY native diagnosis — precise mismatch established
+
+**Evidence:** operator supplied full `APA v1.3 SLAB DIAGNOSTIC — STRICTLY READ ONLY` JSON, report path `C:\Users\Admin\Downloads\APA_Slab_ReadOnly_Diagnostic_v1\slab-readonly-20261010T202944Z.json`. This evidence is an operator-pasted native read-only response; underlying JSON file has not been attached.
+
+- Source GUID: `7539799C-D432-42F5-9F31-FED10E1047C4`; targetStable `true`; `writesExecuted=false`; `plnSaveAttempted=false`; port 19724, exact Cyrillic test PLN path matched, Tapir 1.5.10.
+- Readback: `type=Slab`, `floorIndex=0`, `level=0`, `referencePlaneLocation=Top`, `polygonOutline=[(300,300),(304,300),(304,303),(300,303),(300,300)]`. All PASS, with valid closing vertex.
+- **Only observed mismatch**: expected `thickness=0.2 m`, actual `thickness=0.3 m`; returned bbox `x=[300,304], y=[300,303], z=[-0.300000012,0]`, agrees with ~0.3 m slab.
+- Readback additionally explicitly reports `structureType=Composite`, `compositeId.guid=A8836EE9-5C72-492B-A7F6-30EFED26B3EE`, `offsetFromTop=0`, `zCoordinate=0`. This is a multi-layer/composite slab, not a confirmed Basic slab.
+- **Root-cause mechanism (supported by source contract, but causal attribution to this composite is an inference):** `scripts/archicad_scene_v1.py` sends `CreateSlabs` with `level=0, floorIndex=0, thickness=0.2, referencePlaneLocation=Top, polygonCoordinates` but no `favoriteName` or `structureType`. Tapir schema `schemas/tapir-live-1.5.10/tapir-scene-live.json` `CreateSlabs` has *no* `structureType` field. Actual slab inherits/selects `Composite` and returns 0.3 m despite the submitted thickness. Do not assert the exact underlying preference/attribute-selection algorithm until tested.
+- **Important:** `ModifySlabs` *does* declare `structureType`, `buildingMaterialId`, `compositeId`, `thickness`, `referencePlaneLocation`. This offers a **candidate remediation**, not an authorized mutation. Before any repair, identify whether project composite thickness is fixed and test a guarded, one-shot **ModifySlabs** on this GUID, with verified selected project/element, explicit user authorization, durable journal, readback, no auto-save, no retry. Original scope had only approved Create* commands; do not silently extend allowlist.
+- **Alternative for future CreateSlabs:** use an explicitly verified Basic-Slab Favorite (`favoriteName`) and guarantee default/type/material with immediate readback. Favorite existence and semantics in current PLN remain **NOT_VERIFIED**.
+- **Project safety:** original scene `apa-pavilion-live-02` and plan hash were durably reserved. DO NOT replay menu 5. Existing scene is still **PARTIAL**, not 12/12 PASS. Preserve the 4 confirmed wall GUIDs and created-unverified slab GUID.
+- **Next immediate step:** propose guarded, separate slab-correction write, **only if user authorizes it**; then arrange a new scene **continuation** mechanism driven by existing GUIDs and a read-only plan, not a fresh 12-element Create run. Columns and openings are still uncreated as far as the journal establishes.
+- **Research branch record only:** no change to main/master, no modifying the installed APX or user's PLN through this report.
+
+## 2026-10-10 authorized recovery package v1.4 (OFFLINE-TESTED, NOT LIVE-VERIFIED)
+
+User explicitly authorized changes **only to the existing test PLN**. New standalone package built and delivered inside the ChatGPT conversation as `APA_MVP_Windows11_v1_4_RECOVER_EXISTING_SCENE.zip` (47,530 bytes; SHA-256 `f3623051d7e346c38d962447b0d6b5a003c8c88f40bed1ff4c917993f1a999af`). This repository report preserves the design, checksum, and reproducibility instructions; **the ZIP binary itself is an attachment, not a GitHub-committed artifact**.
+
+- Adds `START_RECOVERY.cmd`, `apa_recovery_entry.py`, `apa_recovery_runner.py`, `test_recovery_safety.py` to the existing v1.3 launcher, keeping pinned PR #16 files byte-unchanged. Offline built-in tests: **51/51 PASS**; includes two simulated end-to-end workflows (all 8 writes and partial stop after slab mismatch). No live execution of v1.4 on the user's Archicad has occurred.
+- Two modes: **1 read-only preflight**; **2 one-shot guarded recovery with separate explicit console confirmation `RECOVER TEST MER`**.
+- Exact project guard (native path/name, single port 19720–19740, non-Teamwork, Tapir 1.5.10, first actual story). Verifies original durable journal scene ID `apa-pavilion-live-02`, fixed plan hash, 4 PASS wall GUIDs, slab `CREATED_UNVERIFIED` GUID, original operation data. Read-only scan requires current count **43** and checks no *unaccounted* geometry in bounding volume. Revalidates all four wall parameters.
+- Slab correction: reads confirmed Composite 0.300 m current slab GUID `7539799C-D432-42F5-9F31-FED10E1047C4`; chooses **a single verified Basic-building-material GUID shared by the 4 approved walls** (MVP placeholder; may be architecturally inappropriate for finished slab), then calls exactly once `ModifySlabs` with `structureType=Basic`, `thickness=0.2`, `referencePlaneLocation=Top`, `buildingMaterialId`. Immediate typed and 3D BBOX readback; requires thickness 0.2, Z [-0.2,0], same polygon and story. If not exact, stops permanently; no automatic retry.
+- Only after slab readback PASS, performs 7 missing native Create operations from the exact previously SHA-verified 12-step PR#16 graph: 4 Columns, 2 hosted Windows, 1 hosted Door. Reuses all four existing wall GUIDs; never calls CreateWalls. Each operation has a separate committed `ATTEMPTED` journal row BEFORE native write, then `NATIVE_SUCCESS_UNVERIFIED` and `PASS` only after typed readback. No save, no delete, no rollback, no automatic retry.
+- The new attempt ledger is separate: `%LOCALAPPDATA%\\APA-MVP\\state\\scene-v1-recovery.sqlite3`. Original `scene-v1-attempts.sqlite3` is only opened read-only. Any existing recovery attempt prevents replay.
+- **Critical honesty:** full 12/12 is NOT VERIFIED until the user's live report returns `COMPLETE_UNSAVED` with eight successful recovery steps. The v1.4 package may BLOCK in user's specific PLN due to inability to find matching material, changed inventory, profile-specific readback, etc.; such blocking is preferable to blindly mutating a different model.
+- **No changes** to repository default/main/master, PR #16 source, installed APX, or actual test PLN were done from this documentation publication. Do not mark task complete on offline-only evidence.
+
+## 2026-10-10 live recovery COMPLETE_UNSAVED — 12/12 reported verified
+
+**Evidence:** user supplied direct console output of v1.4 `START_RECOVERY.cmd`, report path `C:\Users\Admin\Downloads\APA_MVP_Windows11_v1_4_RECOVER_EXISTING_SCENE\APA_MVP_Archicad29\results\recovery-execute-20261010T215858Z.json`. Exact recovery-report JSON file / SQLite recovery journal have **not** been uploaded independently as bytes: evidence class **USER_REPORTED_LIVE_CONSOLE_OUTPUT**, not independent persisted-PLN audit.
+
+- Preflight `READY_RECOVER_EXISTING_SCENE` on exact `C:\LocalAI\SafeBIM_Global_Library_Test_Projects\Тест MER .pln`, verified port `19724`, Tapir `1.5.10`, native story `0`, original 43 elements (38 baseline + four walls + slab); 13/13 pinned blobs integrity PASS.
+- Explicit authorization entered: `RECOVER TEST MER`. Execution result `status=COMPLETE_UNSAVED`, `totalSceneElementsVerified=12`, `createdInRecovery=7`, `modifiedInRecovery=1`, `originalFourWallsReused=true`, `plnSaved=false`, `automaticRetry=false`.
+- Existing 4 walls (reused, GUIDs preserved):
+  - south `6C6CB42D-8368-4749-81F9-D5FA8748AB20`
+  - east `BD622995-16E6-4C9B-BF42-4934AD40A931`
+  - north `1B95F857-025F-457F-A369-E455F33B7861`
+  - west `79B92DDC-9B38-44F3-9768-0F08CEC0274E`.
+- Existing slab modified and read back PASS: `7539799C-D432-42F5-9F31-FED10E1047C4`, `thickness=0.2 m`; material chosen from shared Basic walls for MVP, not necessarily architecturally final.
+- Newly created and per-operation readback PASS:
+  - `column-sw` `44113E51-830B-404F-910B-3AC34B540820`
+  - `column-se` `3BB1F6AD-8BFE-4EEF-9813-C84F58607AED`
+  - `column-ne` `C4B4412C-1A4D-41C1-951C-1222EAC7621E`
+  - `column-nw` `F3E77518-5BFA-4BBB-87EC-EBD29F428DCB`
+  - `door-south` `D0A1D988-7F03-4DA1-AC40-76A3867EDD98`
+  - `window-north-1` `C54E2C77-EDF8-4175-B8FA-12BA30A0C595`
+  - `window-north-2` `B48FEEB6-DC3D-4181-BD6C-ACDAC708FDA7`.
+- Recovery journal: `C:\Users\Admin\AppData\Local\APA-MVP\state\scene-v1-recovery.sqlite3`, a separate once-only journal. DO NOT rerun v1.4 recovery option 2 or earlier APA menu 5; attempt ledger protects against replay.
+- **Completion distinction:** first **LIVE WRITE + NATIVE READBACK 12/12 reported PASS** for fixed pavilion; **PLN disk persistence NOT_VERIFIED** because `COMPLETE_UNSAVED` and `plnSaved=false`; user should `Save As...` a distinct `.pln` copy and later independently inspect reopened copy and confirm all 12 GUIDs, locations, materials, and dimensions. Final architectural/structural design and material correctness are not certified.
+- Suggested task status: scene live-write/readback `DONE_REPORTED_PENDING_INDEPENDENT_REOPEN_AUDIT`; saved-PLN persistence `READY_FOR_VERIFICATION`; extensibility to arbitrary buildings and full APA MVP `NOT_VERIFIED`. No main/master or PR #16 code changed.
+
+## User-supplied screenshots: 3D visual evidence after reported save (2026-10-11)
+
+- **Evidence provenance:** user confirmed they saved the scene and supplied two screenshots. Second screenshot shows Archicad 29 title `APA_Pavilion_MVP_SUCCESS - Archicad 29`, Project Navigator root `APA_Pavilion_MVP_SUCCESS`, active 3D view `Общая Перспектива`. The first screenshot is highly zoomed out, not useful as a geometry/detail audit.
+- **Visible in second screenshot:** rectangular pavilion-like wall enclosure with open top, a visible door on foreground facade (green selection highlighting), corner vertical components and base/floor perimeter. Thus **USER_SCREENSHOT_3D_VISIBLE** for the named project. This is evidence of a displayed model, **not** proof of exact 12 GUIDs or complete/structural correctness.
+- **Not independently established by the screenshots:** both north-wall windows (not visible from this viewpoint), whether all 12 elements persisted in an on-disk PLN and survived a close-and-reopen cycle, actual slab thickness (0.2 m), material correctness, element/story GUID linkage, or absence of duplicate geometry. User says model saved, but exact file path and disk reopen readback were not independently verified.
+- **Next acceptance gate:** use strictly read-only independent inspection of opened saved `APA_Pavilion_MVP_SUCCESS.pln` at the **actual current port and verified project name/path**, avoiding original v1.3/v1.4 write utilities (which guard only `Тест MER .pln`). Check 12 known GUIDs against stored source ledger, read back `type`, story, 3D bbox, slab thickness, opening host GUIDs and level, plus capture second viewpoint showing north wall's two windows. No new writes.
+- **Status:** live creation API and screenshot evidence `PASS_REPORTED`; saved/reopened independent audit `NOT_VERIFIED`; main/master/APX/PLN untouched by this GitHub-only documentation update.
+
+## 2026-10-11 — Second visual audit from additional Archicad 29 screenshots
+
+**Provenance:** Two additional PNG screenshots provided by the user, showing `APA_Pavilion_MVP_SUCCESS - Archicad 29` in the title bar and the `Общая Перспектива` 3D window. These are visual screenshots, not exported model data or re-opened PLN readback. Images were provided in chat; this Markdown records visual observations, not image files stored in GitHub.
+
+**Observable facts:**
+- Interior bird's-eye perspective clearly shows **two window openings with window frames** in the far wall and **one door with visible frame** in the near wall.
+- Rectangular four-sided enclosure with no roof, visible base slab/finished floor, and vertical column-like elements at corners; nominal pavilion envelope previously specified as 4 × 3 × 3 m remains consistent with visible geometry. Screenshot perspective is not a dimensional survey.
+- First screenshot selected slab-like base element; Archicad top toolbar `Низ и Верх` displays **200** and **0** (UI units correspond to millimeters for element dimensions). This **supports** a 200 mm slab thickness, but the screenshot alone cannot prove the selected element's GUID.
+- Second screenshot selected a corner column-like element; toolbar displays section dimensions **250 × 250** and height **3000**; matches the intended 0.25 × 0.25 × 3.0 m column in the prior source graph, subject to selection identity verification.
+- Both screenshots show the named saved-copy project root in Navigator `APA_Pavilion_MVP_SUCCESS`.
+
+**Acceptance decision:** VISUAL_MODEL_PASS_REPORTED (wall enclosure, two windows, door, base slab, columns and visible UI dimensions). Combined with user-supplied APA v1.4 `COMPLETE_UNSAVED` / `12/12` native readback output this supports the fixed-scene MVP. **Persistent PLN reopen with independent GUID/type/story/bbox/material/host verification remains NOT_VERIFIED.** Do not claim that screenshots independently establish storage durability or all 12 element GUIDs.
+
+**Next task / audit proposal:** register or link a test-only follow-up for **saved PLN independent read-only persistence audit**: verify exact copied PLN path/name; retrieve 12 recorded GUIDs; independently query GetDetailsOfElements and Get3DBoundingBoxes, slab 0.2 m, four columns 0.25×0.25×3.0 m, openings hosted in north/south wall and story API index 0; no mutate, no original scene replay. When accepted by controller, update related P20.A02.S03 evidence with its assigned work ID. No modification of existing task states without CAS.

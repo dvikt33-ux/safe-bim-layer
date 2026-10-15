@@ -1,0 +1,74 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261010-153928Z-profile-attribute-readback",
+  "plan_id": "APA-P10",
+  "action_id": "APA-P10.A01",
+  "substep_id": "APA-P10.A01.S02",
+  "executor": "chatgpt:apa-technical",
+  "executor_run_id": "apa-tech-20261010T153651Z-stories-attributes-8c21",
+  "phase": "SOURCE",
+  "started_at": "2026-10-10T15:36:51Z",
+  "finished_at": "2026-10-10T15:39:28Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29",
+    "sdk": "29.3100",
+    "tapir": "1.5.9 and 1.7.0 upstream; installed 1.5.10 NOT_VERIFIED",
+    "source_branch": "research/apa-verified-results-hub-20261010"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/ENZYME-APD/tapir-archicad-automation/blob/02691b5d680b60c73317e8e49b78ab14dfd4c9d8/archicad-addon/Sources/AttributeCommands.cpp#L1827-L1979",
+      "revision": "1.7.0",
+      "source_sha": "02691b5d680b60c73317e8e49b78ab14dfd4c9d8"
+    }
+  ],
+  "inputs": [
+    "ART-REGISTER"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-PROFILE-FIELDS-8C21",
+      "statement": "GetProfiles skinOutlines-only field projection cannot enter skins/geometry branch in pinned source",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-PROFILE-ATTR-17"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-PROFILE-EDGE-MAT-8C21",
+      "statement": "Profile edge material IDs are distinct serialized fields from skin material IDs",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-PROFILE-ATTR-17"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-PROFILE-ATTR-17",
+      "uri": "https://github.com/ENZYME-APD/tapir-archicad-automation/blob/02691b5d680b60c73317e8e49b78ab14dfd4c9d8/archicad-addon/Sources/AttributeCommands.cpp#L1827-L1979",
+      "kind": "SOURCE_CODE",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "02691b5d680b60c73317e8e49b78ab14dfd4c9d8"
+    },
+    {
+      "evidence_id": "EV-FULL-REPORT-8C21",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-10/apa-technical-20261010-153928-profile-fields-edge-material-8c21.md",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "9c9d72b8b18679089379bcaa8b61d30d9b0a41e6"
+    }
+  ],
+  "report_markdown": "# APA-P10.A01.S02 — profile fields and edge materials (V2 publication pointer)\n\nFull **9,492-character technical report** (source matrix, exact SDK29/Tapir versions and source lines, A/B architecture, 7 static + 4 synthetic checks, read-only acceptance, independent auditor questions) is already committed and read back at:\n\nhttps://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-10/apa-technical-20261010-153928-profile-fields-edge-material-8c21.md\n\nTapir 1.5.9 and 1.7.0 `GetProfiles` allow `skinOutlines` in fields but its output is nested under `skins` and the derived-field gate does not include skinOutlines. Use `fields:[\"skins\",\"skinOutlines\"]` or omit fields. Profile edges may carry independent buildingMaterialId. Graphisoft SDK 29.3100 `profile_vectorImageItems` contains more than hatch outlines. SOURCE_VERIFIED only; installed custom 1.5.10, BUILD, LIVE NOT_VERIFIED. Existing composites/stories issues are cross-referenced, not reclassified as new.\n\nTask status expected PARTIAL pending native readback. Proposal for read-only profile parity: APA-CAND-20261010-profile-field-edge-material-8c21 (PENDING_AUDIT). No main/PLN/APX changes.",
+  "next_substep": "APA-P10.A02.S01",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

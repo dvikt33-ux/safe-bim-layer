@@ -1,0 +1,79 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261012-012500Z-gap-windows-sqlite-v31",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A11",
+  "substep_id": "APA-P70.A11.S03",
+  "executor": "codex-apa-gap-v31-20261012",
+  "executor_run_id": "APA-RUN-20261012-012500Z-gap-windows-sqlite-v31",
+  "phase": "OFFLINE",
+  "started_at": "2026-10-12T01:25:53Z",
+  "finished_at": "2026-10-12T01:25:53Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "no native runtime calls in gap repair",
+    "sdk": null,
+    "tapir": "1.5.10 contracts retained",
+    "source_branch": "feature/apa-connected-gap-windows-20261012"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/54",
+      "revision": "2b499730ac4c52b70d796f2857fb15d7e3d3d676",
+      "source_sha": "2b499730ac4c52b70d796f2857fb15d7e3d3d676"
+    }
+  ],
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-G01-WINDOWS-SQLITE-FIX",
+      "statement": "Observed SQLite lifecycle gap fixed;340Windows host and340each Windows/LinuxCI tests pass; S03 remains partial with8other gaps open.",
+      "status": "OFFLINE_PASS",
+      "evidence_ids": [
+        "EV-G01-REGRESSION"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-G01-REGRESSION",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-012500Z-gap-windows-sqlite-v31/acceptance.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "9a48d169d5293faf046a3f728f696d28a02bf30af17822775fbb87cc86ca47b3",
+      "source_revision": "2b499730ac4c52b70d796f2857fb15d7e3d3d676"
+    }
+  ],
+  "report_markdown": "# APA-P70.A11.S03 — G01 Windows SQLite repair; remaining gaps open\n\nObserved system gapG01 is fixed with actual regression behavior. Legacy SQLite\ntransaction contexts did not close handles. Eleven fixture connections across\nfive modules now close after the existing commit/rollback context, and one\nread-only suffix-wall diagnostic connection closes on every exit. No assertion,\nno-replay protection or cleanup error is suppressed; no forced collection is used.\n\nLocal Windows host runs all340tests PASS in57.492seconds, with schema/sample\ngraph contracts PASS. [CI38191624258](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38191624258) independently\nruns all340tests on Ubuntu and all340on Windows, with contracts and PowerShell\nsyntax validation. Two-platform checks PASS. Restricted Windows sandbox runs\nadditionally deny atomic replacement of temporary watcher state (WinError5);\nthese are environmental denials, and the same tests pass on host and CI. The\nearlier partial attempts and complete successful logs stay unchanged locally.\n\n[DraftPR54](https://github.com/dvikt33-ux/safe-bim-layer/pull/54), head `2b499730ac4c52b70d796f2857fb15d7e3d3d676`, contains eight allowlisted files and\nis stacked on accepted integration draftPR53. New diff additions were scanned\nfor private paths/secrets. Previously tested code branches remain unchanged.\nThe repair makes zero native Archicad calls, PLN writes or APX changes. It retains\nthe22primary/48GUID native system acceptance and save/reopen proof.\n\nS03 remains PARTIAL: only the first observed gap is fixed. Eight gap areas stay\nexplicit:73Details context adapters; missing manufacturer dimensions/source\ncommit gate; connected/branched MEP; Shell/Opening/SEO providers; SAM/SAF solver,\nloads and norms; full IFC semantics/MCP/Twinmotion; native metadata discrepancies;\nlarge-model performance and installer. Required unsupported scope still blocks\ncomplete engineering/manufacturer/network acceptance. Optimizer/installer stages\nmust not proceed as if these gaps were complete.\n\n[Selected acceptance](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-012500Z-gap-windows-sqlite-v31/acceptance.json),\n[updated gap register](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-012500Z-gap-windows-sqlite-v31/gap-register.json).\nOnly selected text summaries/hashes are published; full logs remain local. No\nlocal paths, model identities, project catalogs or binary artifacts are uploaded.\nNext work remains A11.S03; there is no invented full-product DONE.\n",
+  "next_substep": "APA-P70.A11.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

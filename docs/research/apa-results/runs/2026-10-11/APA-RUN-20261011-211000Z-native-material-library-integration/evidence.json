@@ -1,0 +1,33 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-SELECTED-NATIVE-MATERIAL-LIBRARY-INTEGRATED",
+      "evidence_ids": [
+        "EV-MATERIAL-ACCEPTANCE",
+        "EV-MATERIAL-RAW-BYTES"
+      ],
+      "statement": "Current code verifies local captured native material apply/restore and exact Unicode/GUID GDL instantiation/persistence; a bounded public proof excludes local paths, complete catalogs and original model GUIDs. Physical body310mm remains separate from parameter340mm. Broad library and engineering remain unverified.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-MATERIAL-ACCEPTANCE",
+      "kind": "TEST_RESULT",
+      "sha256": "6549336f7c18d9e9901d544bb8f0cebb474805bcd9270d2b5d3d55e3765584ac",
+      "source_revision": "9139124176e3114afd8f3b7733cf40f423d0d8e5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261011-211000Z-native-material-library-integration/acceptance.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-MATERIAL-RAW-BYTES",
+      "kind": "LOCAL_LOG",
+      "sha256": "2d6bcb42143d07a7c612f1d87725167b123b14ec10cc62cbeaf4bd6d1771ead7",
+      "source_revision": "9139124176e3114afd8f3b7733cf40f423d0d8e5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261011-211000Z-native-material-library-integration/EVIDENCE_SHA256.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261011-211000Z-native-material-library-integration",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

@@ -1,0 +1,59 @@
+{
+  "status": "ARCHICAD_LIVE_PASS_NATIVE_SLAB_CREATE_CONTOUR_HOLE_EDIT_SAVE_OPEN",
+  "currentInventory": 145,
+  "retained144": "ALL_GEOMETRY_MATERIAL_STORY_SIGNATURES_UNCHANGED",
+  "original143": "PRESERVED_WITHIN_RETAINED144",
+  "newNativeSlab": 1,
+  "sameGuid": true,
+  "newGuidSHA256": "58840a6eb9fbd751f96b296dc762ede20a25e719cc9209bd48ca1499c426bbc4",
+  "sourceParameters": "EXPLICIT_TEST_DIMENSIONS_NOT_DESIGN_VALUES",
+  "initialOuterBounds": {
+    "xMin": 90,
+    "xMax": 100,
+    "yMin": 0,
+    "yMax": 8
+  },
+  "finalOuterBounds": {
+    "xMin": 90,
+    "xMax": 101,
+    "yMin": 0,
+    "yMax": 8
+  },
+  "initialHoleMeters": [
+    2,
+    2
+  ],
+  "finalHoleMeters": [
+    3,
+    2
+  ],
+  "initialNetAreaSquareMeters": 60,
+  "finalNetAreaSquareMeters": 62,
+  "thicknessMeters": 0.2,
+  "nativeStoryIndex": 0,
+  "material": "EXACT_CURRENT_ACCEPTED_SLAB_BUILDING_MATERIAL_GUID",
+  "actualTopFaceAndHoleBREP": "VERIFIED_NOT_BOUNDING_BOX_INFERENCE",
+  "bodyClosed": true,
+  "newNativeCollisions": 0,
+  "deltaOperations": 1,
+  "deltaCreates": 0,
+  "modelWriteCalls": {
+    "CreateSlabs": 1,
+    "ModifySlabs": 2
+  },
+  "persistenceCalls": {
+    "SaveProject": 1,
+    "OpenProject": 1
+  },
+  "save": "PASS",
+  "open": "PASS",
+  "independentReadback": "INDEPENDENT_FINAL_NATIVE145_SAVED_SAME_GUID_READBACK_PASS",
+  "beforeSavedSHA256": "831dada412da9cb905566eb09db99b2bcb81976fbd8d7f852f78dc8b431fa91d",
+  "afterSavedSHA256": "bfbae730dc65a8cd68dad707685406649f6a3e5ea79f4d63140241043b02f689",
+  "signatureSetHash": "7f4294d7268c698d8800a928dbd9e60ded173e57926a71ebb353f17cbb812ebf",
+  "engineering": "NOT_VERIFIED",
+  "journal": {
+    "PASS": 63,
+    "UNKNOWN_OUTCOME": 4
+  }
+}

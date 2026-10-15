@@ -1,0 +1,89 @@
+{
+  "status": "NATIVE_COMPONENT_COMPLETENESS_PASS",
+  "task": "APA-P70.A03.S04",
+  "evidenceKind": "SOURCE_VERIFICATION_OF_CAPTURED_NATIVE_READBACK",
+  "counts": {
+    "Slab": 2,
+    "Wall": 8,
+    "Column": 2,
+    "Window": 4,
+    "Door": 1
+  },
+  "requiredTypes": [
+    "Wall",
+    "Slab",
+    "Column",
+    "Door",
+    "Window"
+  ],
+  "requiredUnsupportedTypes": [],
+  "typedReadbackRecheckedFromRaw": true,
+  "libraryPartsObserved": {
+    "authored-window-east-1": {
+      "name": "Окно",
+      "ownUnID": {
+        "guid": "865AFCE6-2F67-432C-A37E-BC8A27FA0DDB"
+      },
+      "parentUnID": {
+        "guid": "A7D46BBD-204E-428A-8BAB-EB16FF75D711"
+      }
+    },
+    "authored-entry-door": {
+      "name": "Однопольная Дверь",
+      "ownUnID": {
+        "guid": "13D8EFA7-3FEE-4993-B7A5-D826A6830657"
+      },
+      "parentUnID": {
+        "guid": "25D9B554-399C-4C3C-82EF-11B96A6BC4EA"
+      }
+    },
+    "authored-window-west-1": {
+      "name": "Окно",
+      "ownUnID": {
+        "guid": "865AFCE6-2F67-432C-A37E-BC8A27FA0DDB"
+      },
+      "parentUnID": {
+        "guid": "A7D46BBD-204E-428A-8BAB-EB16FF75D711"
+      }
+    },
+    "authored-window-east-2": {
+      "name": "Окно",
+      "ownUnID": {
+        "guid": "865AFCE6-2F67-432C-A37E-BC8A27FA0DDB"
+      },
+      "parentUnID": {
+        "guid": "A7D46BBD-204E-428A-8BAB-EB16FF75D711"
+      }
+    },
+    "authored-window-west-2": {
+      "name": "Окно",
+      "ownUnID": {
+        "guid": "865AFCE6-2F67-432C-A37E-BC8A27FA0DDB"
+      },
+      "parentUnID": {
+        "guid": "A7D46BBD-204E-428A-8BAB-EB16FF75D711"
+      }
+    }
+  },
+  "baselineGuidCount": 20,
+  "primaryCount": 17,
+  "ownedColumnSegments": 2,
+  "totalGuidCount": 39,
+  "exactEditAndRestore": true,
+  "savedAndReopened": true,
+  "modelWriteAttempts": 0,
+  "acceptedDependencies": [
+    "APA-P70.A03.S02"
+  ],
+  "sourceHead": "976c19cecebe3f6bb4352365d9a59051d5b2b61b",
+  "nativeEvidenceRun": "APA-RUN-20261011-195800Z-incremental-native-edit",
+  "limitations": [
+    "VisibleUI_NOT_VERIFIED",
+    "Junctions_NOT_VERIFIED",
+    "Structural_NOT_VERIFIED",
+    "Normative_NOT_VERIFIED",
+    "AutomaticPlanning_NOT_VERIFIED",
+    "Roof_Stair_MEP_NOT_VERIFIED",
+    "Archicad30_NOT_VERIFIED"
+  ]
+}

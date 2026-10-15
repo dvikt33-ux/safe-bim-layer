@@ -1,0 +1,25 @@
+{
+  "status": "DONE_PUBLISHED_PACKAGE_S03_PARTIAL",
+  "revision": 179,
+  "codePR": 109,
+  "codeHead": "13139d6cd03340bff7fbde5ccac5735929843b7a",
+  "Shell": "LIVE_PASS_EXTRUDED_VECTOR_SUBSET",
+  "Railing": "PARTIAL_GEOMETRY_PASS_TYPED_MATERIAL_DRIFT",
+  "RailingRecovery": "APIERR_NOTSUPPORTED_NO_EFFECT_RECONCILED_NO_RETRY",
+  "CW": "SCALAR_NO_EFFECT_NEW_CONTOUR_MEMO_BUILD_ONLY",
+  "newSDK": "BUILD_PASS_NOT_INSTALLED",
+  "graph": "346NODES472EDGES",
+  "GUIDs": 409,
+  "originalSavedPLNUntouched": true,
+  "originalAPXAndRegistrationRestored": true,
+  "offlineTests": false,
+  "workflowDispatch": false,
+  "quantityEngine": "QUARANTINED_NOT_CALLED",
+  "receiptRun": "APA-RUN-20261015-192322Z-native-memo-modify",
+  "publication": "DIRECT_EXISTING_PUBLISHER_BYTE_BLOB_READBACK",
+  "knownActionsRunCounts": {
+    "67ab63d8b939bd441b22510ca5b461778150900e": 0,
+    "63deec0b0f86a09e14d9f3402947a90630816f4c": 0
+  },
+  "newTaskIDs": 0
+}

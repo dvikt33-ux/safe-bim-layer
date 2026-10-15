@@ -1,0 +1,41 @@
+{
+  "pages": 1,
+  "paperMM": [
+    594,
+    420
+  ],
+  "roofHorizontalSpanMeters": 8.029912267902775,
+  "expectedRoofHorizontalSpanMeters": 8.029887626,
+  "selectedSubset": "VERIFIED_ONE_LAYOUT_ONE_PAGE",
+  "source": "Native Archicad Publisher",
+  "layoutAfterSaveOpen": true,
+  "sha256": "80eec0a47e40e2a78e92efe7b9f67ea132794c5abaa5008e0bea1705e51b5fca",
+  "facadeSpan": {
+    "status": "NATIVE_PROJECTION_HORIZONTAL_SPAN_PASS",
+    "expectedSpanMeters": [
+      0,
+      8.029887625999997
+    ],
+    "actualSpanMeters": [
+      0,
+      8.029912267902775
+    ],
+    "toleranceMeters": 0.0001,
+    "completeDrawingAcceptance": "NOT_IMPLIED",
+    "requiresIndependentProjectionAxisAndSourceScope": true,
+    "source": "Native Archicad Publisher PDF roof silhouette at independently verified Drawing scale1:100",
+    "nativeRoofGuid": "id-sha256:51fe26b6654ee6ca9854",
+    "pdfWidthPoints": 227.61956034999992,
+    "nativeRoofYSpanMeters": [
+      40,
+      48.029887626
+    ],
+    "axis": "West Elevation horizontalU=-projectY",
+    "interpretation": "Full roof horizontal projection proved; actual complete facade rendered and inspected separately. Not engineering or per-primitive acceptance."
+  },
+  "visibleScope": "Complete west face with two stories/windows and native sloped roof, rendered inspection performed",
+  "sheet": "New native plan + section + real exterior Elevation at1:100, one A2 page",
+  "normativeSheetAcceptance": "NOT_PERFORMED_PROTOTYPE_LAYOUT",
+  "publisher2Selection": "NOT_VERIFIED_65PAGES_SELECTED_TWO_VIEW_ITEMS",
+  "successfulPublisher": "Existing1-layouts set, selected only the new native Layout; global settings retained"
+}

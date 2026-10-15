@@ -1,0 +1,349 @@
+{
+  "network": {
+    "schema": "APA_NATIVE_MEP_NETWORK_V1",
+    "routes": [
+      {
+        "guid": "id-sha256:5bd1280da374a3ac49cc",
+        "details": {
+          "domain": "Ventilation",
+          "mepSystemId": {
+            "attributeId": {
+              "guid": "id-sha256:fea97c3fd32c996b3844"
+            }
+          },
+          "polyline": [
+            {
+              "x": 42,
+              "y": 46,
+              "z": 2.5
+            },
+            {
+              "x": 48,
+              "y": 46,
+              "z": 2.5
+            }
+          ],
+          "segments": [
+            {
+              "elementId": {
+                "guid": "id-sha256:090d2f258b4e01543c0c"
+              },
+              "crossSectionWidth": 0.2,
+              "crossSectionHeight": 0.15,
+              "crossSectionShape": "Rectangular"
+            }
+          ],
+          "nodes": [
+            {
+              "elementId": {
+                "guid": "id-sha256:4717d5fa594add33be5b"
+              },
+              "position": {
+                "x": 42,
+                "y": 46,
+                "z": 2.5
+              }
+            },
+            {
+              "elementId": {
+                "guid": "id-sha256:9e4d7bba4df1d8e66ec5"
+              },
+              "position": {
+                "x": 48,
+                "y": 46,
+                "z": 2.5
+              }
+            }
+          ]
+        }
+      },
+      {
+        "guid": "id-sha256:6a716e1074906d9be5c1",
+        "details": {
+          "domain": "Ventilation",
+          "mepSystemId": {
+            "attributeId": {
+              "guid": "id-sha256:fea97c3fd32c996b3844"
+            }
+          },
+          "polyline": [
+            {
+              "x": 48,
+              "y": 46,
+              "z": 2.5
+            },
+            {
+              "x": 49,
+              "y": 46,
+              "z": 2.5
+            }
+          ],
+          "segments": [
+            {
+              "elementId": {
+                "guid": "id-sha256:c75bae23adc901c4d287"
+              },
+              "crossSectionWidth": 0.2,
+              "crossSectionHeight": 0.15,
+              "crossSectionShape": "Rectangular"
+            }
+          ],
+          "nodes": [
+            {
+              "elementId": {
+                "guid": "id-sha256:0453524a0d35b76c6ee0"
+              },
+              "position": {
+                "x": 48,
+                "y": 46,
+                "z": 2.5
+              }
+            },
+            {
+              "elementId": {
+                "guid": "id-sha256:6fa92310c3ec2da3952f"
+              },
+              "position": {
+                "x": 49,
+                "y": 46,
+                "z": 2.5
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "routeGuids": [
+      "id-sha256:5bd1280da374a3ac49cc",
+      "id-sha256:6a716e1074906d9be5c1"
+    ],
+    "ownedNodeSegmentGuids": [
+      "id-sha256:9e4d7bba4df1d8e66ec5",
+      "id-sha256:0453524a0d35b76c6ee0",
+      "id-sha256:090d2f258b4e01543c0c",
+      "id-sha256:6fa92310c3ec2da3952f",
+      "id-sha256:c75bae23adc901c4d287",
+      "id-sha256:4717d5fa594add33be5b"
+    ],
+    "physicalGuids": [
+      "id-sha256:60536d193a32708d49dd",
+      "id-sha256:4a5e1ec4a141728545dc"
+    ],
+    "ports": [
+      {
+        "ownerGuid": "id-sha256:60536d193a32708d49dd",
+        "portId": "id-sha256:9da5e61769fc8815415a",
+        "name": "Unnamed port",
+        "position": {
+          "x": 42,
+          "y": 46,
+          "z": 2.5
+        },
+        "direction": {
+          "x": -1,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": false
+      },
+      {
+        "ownerGuid": "id-sha256:60536d193a32708d49dd",
+        "portId": "id-sha256:87c7da425479e93773c4",
+        "name": "Unnamed port",
+        "position": {
+          "x": 48,
+          "y": 46,
+          "z": 2.5
+        },
+        "direction": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": true,
+        "connectedPortId": "id-sha256:160e6ff5042ea8bd73ba",
+        "connectedElementId": {
+          "guid": "id-sha256:4a5e1ec4a141728545dc"
+        }
+      },
+      {
+        "ownerGuid": "id-sha256:4a5e1ec4a141728545dc",
+        "portId": "id-sha256:160e6ff5042ea8bd73ba",
+        "name": "Unnamed port",
+        "position": {
+          "x": 48,
+          "y": 46,
+          "z": 2.5
+        },
+        "direction": {
+          "x": -1,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": true,
+        "connectedPortId": "id-sha256:87c7da425479e93773c4",
+        "connectedElementId": {
+          "guid": "id-sha256:60536d193a32708d49dd"
+        }
+      },
+      {
+        "ownerGuid": "id-sha256:4a5e1ec4a141728545dc",
+        "portId": "id-sha256:e502e4c903aaae797a22",
+        "name": "Unnamed port",
+        "position": {
+          "x": 49,
+          "y": 46,
+          "z": 2.5
+        },
+        "direction": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": false
+      }
+    ],
+    "logicalConnected": true,
+    "physicalConnected": true,
+    "physicalConnectionEdges": 1,
+    "segmentCount": 2,
+    "nodeCount": 4,
+    "openPorts": [
+      {
+        "ownerGuid": "id-sha256:60536d193a32708d49dd",
+        "portId": "id-sha256:9da5e61769fc8815415a",
+        "name": "Unnamed port",
+        "position": {
+          "x": 42,
+          "y": 46,
+          "z": 2.5
+        },
+        "direction": {
+          "x": -1,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": false
+      },
+      {
+        "ownerGuid": "id-sha256:4a5e1ec4a141728545dc",
+        "portId": "id-sha256:e502e4c903aaae797a22",
+        "name": "Unnamed port",
+        "position": {
+          "x": 49,
+          "y": 46,
+          "z": 2.5
+        },
+        "direction": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Rectangular",
+        "width": 0.2,
+        "height": 0.15,
+        "domain": "Ventilation",
+        "mepSystemId": {
+          "attributeId": {
+            "guid": "id-sha256:fea97c3fd32c996b3844"
+          }
+        },
+        "isPhysicallyConnected": false
+      }
+    ],
+    "genericEnumerationCount": 0,
+    "nativeTopologyAuthority": "Dedicated routing + native system membership + physical port flags/section/positions",
+    "engineeringAcceptance": "NOT_VERIFIED"
+  },
+  "CP_SAT": {
+    "status": "OPTIMAL",
+    "provider": "OR-Tools CP-SAT",
+    "candidates": [
+      {
+        "y": 46.0,
+        "blockedBy": [],
+        "envelopeMeters": [
+          [
+            47.95,
+            49.05
+          ],
+          [
+            45.819,
+            46.181
+          ],
+          [
+            2.3440000000000003,
+            2.6559999999999997
+          ]
+        ]
+      }
+    ],
+    "scope": "ONE_EXPLICIT_STRAIGHT_ROUTE_CANDIDATE_SET",
+    "nativeCollisionAcceptance": "NOT_VERIFIED",
+    "engineeringAcceptance": "NOT_VERIFIED",
+    "elapsedSeconds": 0.0020109,
+    "selectedIndex": 0,
+    "nodeCoordinates": [
+      {
+        "x": 48.0,
+        "y": 46.0,
+        "z": 2.5
+      },
+      {
+        "x": 49.0,
+        "y": 46.0,
+        "z": 2.5
+      }
+    ]
+  },
+  "collisionReadback": {
+    "collisions": []
+  },
+  "geometryPreserved": true,
+  "repeatedConnectCommandRequired": false
+}

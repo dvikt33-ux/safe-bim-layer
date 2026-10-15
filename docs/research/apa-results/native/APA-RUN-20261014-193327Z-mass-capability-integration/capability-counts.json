@@ -1,0 +1,30 @@
+{
+  "status": "MASS_CONTRACT_CATALOG_CONNECTED",
+  "currentRuntimeCommandContracts": 337,
+  "allPreparedContracts": 363,
+  "tapirRuntime": 264,
+  "officialSourceContracts": 73,
+  "officialActualCalls": 5,
+  "SDKSourceExamples": 14,
+  "SDKSourceExamplesRegistered": 0,
+  "candidateSourceOnlyCommands": 12,
+  "rawAPXProviders": 33,
+  "sourceOnlyForkContracts": 2,
+  "sourceOnlyCppFunctions": 848,
+  "callableVerified": 15,
+  "liveVerified": 4,
+  "workflow": "LIVE_CONNECTED_COMPONENT_WORKFLOW_PASS_WITH_EXPLICIT_PROVIDER_GEOMETRY_DIFFERENCES",
+  "categories": {
+    "TRANSACTION": 7,
+    "DELETE": 18,
+    "CREATE": 72,
+    "SERVICE": 1,
+    "UNKNOWN": 51,
+    "MODIFY": 46,
+    "READ_ONLY": 142
+  },
+  "nativeWrites": 0,
+  "journaledServiceCalls": 1,
+  "retained258": true,
+  "sourceOnlyPrepared": 26
+}

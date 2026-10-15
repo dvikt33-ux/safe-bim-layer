@@ -1,0 +1,112 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261015-105500Z-native-original-reopen",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A11",
+  "substep_id": "APA-P70.A11.S03",
+  "executor": "work-native-reopen-20261015",
+  "executor_run_id": "APA-CLAIM-NATIVE-REOPEN-20261015T105148Z",
+  "phase": "LIVE",
+  "started_at": "2026-10-15T10:55:00Z",
+  "finished_at": "2026-10-15T10:55:00Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "Read-only user-reopened authorized409GUID copy, exact identity before reads",
+    "sdk": "Existing native model dump and GUID/parameter reads only",
+    "tapir": "Original APX restored; no switch or new native write",
+    "source_branch": "feature/apa-native-positive-modules-20261015"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/97",
+      "revision": "8f134001ca0e3250eda587db61ac01dbd6357326",
+      "source_sha": "8f134001ca0e3250eda587db61ac01dbd6357326"
+    }
+  ],
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-RESTORED-COPY-NATIVE-READBACK",
+      "statement": "Fresh original-runtime readback matches409GUID/full native geometry/material/home-story/relationship signatures and258original serialized detail rows. Saved bytes unchanged during read; zero native writes. Separate Opening post-close and visual checks remain unverified.",
+      "status": "LIVE_PASS",
+      "evidence_ids": [
+        "EV-0"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-RESTORED-COPY-UNCHANGED-CODE",
+      "statement": "Product code/PR97 head unchanged; existing exact-head Windows CI reused without replay. Candidate-only commands absent; restored APX file SHA matches original.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-0",
+        "EV-2"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-0",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-105500Z-native-original-reopen/native-restored-readback.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "c1b513e30426f84a7e76b1fed3067eaa895029395da62dabc69ffb67dbf9c4eb",
+      "source_revision": "8f134001ca0e3250eda587db61ac01dbd6357326"
+    },
+    {
+      "evidence_id": "EV-1",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-105500Z-native-original-reopen/gap-register.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "d9dacd781983474a9de23db31e3084bf6e4d18f19813ab1152c744228a4c9ad7",
+      "source_revision": "8f134001ca0e3250eda587db61ac01dbd6357326"
+    },
+    {
+      "evidence_id": "EV-2",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-105500Z-native-original-reopen/windows-ci.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "e8633017e62aa7b4089bb40076c9beac0ef6c51d41c988478688fef450d19de0",
+      "source_revision": "8f134001ca0e3250eda587db61ac01dbd6357326"
+    },
+    {
+      "evidence_id": "EV-3",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-105500Z-native-original-reopen/core-knowledge-query.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "130d37fbd87736f0cc6d8d808dc4bf523e58d2a66ff9839b3e4e3af32d1f2998",
+      "source_revision": "8f134001ca0e3250eda587db61ac01dbd6357326"
+    }
+  ],
+  "report_markdown": "# Restored-runtime native acceptance supplement\n\nThe user manually reopened the exact authorized positive-sample copy after original APX restoration. A fresh read-only identity gate passed. All409GUIDs and their full native geometry, material, home-story and relationship signatures match the saved candidate checkpoint. All258original serialized native detail rows also match. The3new native CurtainWall/Railing/Shell roots and their generated children survived reopening under the restored provider environment.\n\nThe restored APX file SHA is `8f5a9341bb9d51cb98a0a58bdbc63d3d3623a0c9f74b3cd3f1a4732c06961969`. Archicad29 and Tapir1.5.10 were read; the3candidate-only command contracts are absent. This is independent saved-model readback, not acceptance of a new installed APX. No Create/Modify/Delete/Save, APX switch or quantity-engine call occurred. Saved bytes stayed unchanged throughout the read. The current file hash differs from the earlier saved checkpoint; full409native signatures provide the geometry/material/relationship reconciliation.\n\nThis supplement closes only the previously pending original-runtime reopen of the409-GUID copy. The separate107-GUID Opening model was not opened; its post-close geometry/hash reconciliation and a visual inspection of the3samples remain NOT_VERIFIED. Shell contour/Revolved/Ruled samples, Railing/Stair associations and engineering acceptance are unchanged. A11.S03 remains PARTIAL. Quantity engine remains quarantined and was not called.\n\nProduct code and PR97 head remain `8f134001ca0e3250eda587db61ac01dbd6357326`. [Existing Windows CI PASS](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38712200174) applies to that unchanged code; no offline tests were repeated. [PR97](https://github.com/dvikt33-ux/safe-bim-layer/pull/97) and the prior immutable native report remain in force. The main orchestrator queried the current GitHub plan through the existing Knowledge Graph at171, then acquired and byte-verified its own CAS claim at172. No second executor, journal, graph or search was introduced.\n\nNext: independently reconcile the separate Opening model after closing, then complete sample visual inspection. Do not recreate the successful assemblies or replay the quarantined engine.\n",
+  "next_substep": "APA-P70.A11.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

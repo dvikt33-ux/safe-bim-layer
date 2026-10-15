@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:524f63af2a81dda37d4fe7812000bb90c8b8c2ec69acc98e605210d2cab92b59",
+  "index_commit_sha": "dccf39ade2955f67a8570dbcd14ebd6c41b11655",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "dccf39ade2955f67a8570dbcd14ebd6c41b11655",
+  "report_path": "docs/research/apa-results/runs/2026-10-14/APA-RUN-20261014-095400Z-runtime-identity-live/REPORT.md",
+  "report_sha256": "dd7b6166e1402ba6826396905215e02cc799453ea413250c0f5170afdd24c45c",
+  "run_id": "APA-RUN-20261014-095400Z-runtime-identity-live",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}
