@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 169,
+  "revision": 170,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -4728,7 +4728,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -4920,12 +4920,13 @@
         "86native Stair child parameter records: parent/root/declared owner independently match existing membership and native home story.7Roof/Slab memos expose edge trims, side surface overrides, bounded pivot levels; five raw PolyRoof pivot slots represent four unique edges including closure. Native parameter geometry not resultant BREP. Railing/CurtainWall/Shell code compiled but no current live sample.",
         "Four distinct Drawing elements queried in correct owning Layout DB through existing database helper: CheckDrawingStatus and GetFullDrawingContentBox allNoError, context restored. Native updateStatus=-1 remains not-up-to-date/unclassified, no automatic updater added. One source GUID verified in current public ViewMap, three unresolved source links omitted from dependencies; legacy navigator GUID and SDK link GUID not equated.",
         "Modern Generic Opening connected-host query succeeds on2Wall+1Slab with empty sets. Positive cut/host/extrusion sample NOT_VERIFIED. New quantity pre-engine query reads identity/type only; no quantity engine structures/masks/calls; native/Python quarantine retained. Official SDK API_Quantities constructor initializes all output pointers; missing brace initialization is not established crash cause. Future engine probe requires separately qualified diagnostic environment, not current PLN.",
-        "Captured new replies feed existing DependencyImpact through BIM Graph:96nodes/87verified edges,42entries in selected Stair impact set. Original membership-only chain88nodes/86edges. No physical contact inferred. All258GUID/full serialized native parameters match before/after and independently after original-runtime read-only reopen; saved bytes unchanged. Original APX SHA/registration restored. Windows CI exact head, all17code files and immutable report/receipt readback verified. S03PARTIAL, historical DONE/A07/S10 preserved. Next independent gaps: positive existing native samples and Shell memo frames/material relationships, avoid quantity engine replay."
+        "Captured new replies feed existing DependencyImpact through BIM Graph:96nodes/87verified edges,42entries in selected Stair impact set. Original membership-only chain88nodes/86edges. No physical contact inferred. All258GUID/full serialized native parameters match before/after and independently after original-runtime read-only reopen; saved bytes unchanged. Original APX SHA/registration restored. Windows CI exact head, all17code files and immutable report/receipt readback verified. S03PARTIAL, historical DONE/A07/S10 preserved. Next independent gaps: positive existing native samples and Shell memo frames/material relationships, avoid quantity engine replay.",
+        "Current user package after PR96: positive existing Opening/Host; native CW/Railing components where permitted samples exist; complete Shell memo fields, reuse GDL LibraryPart defaults and Drawing provenance. No new sample writes without separate copy permission; quantity engine quarantined. New exact APX permission required."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "work-native-positive-20261015",
+      "lease_until": "2026-10-15T11:30:37Z",
+      "claim_ref": "APA-CLAIM-NATIVE-POSITIVE-20261015T073037Z",
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
