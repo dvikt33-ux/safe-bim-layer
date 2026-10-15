@@ -5,7 +5,7 @@ on:
     paths:
       - 'tests/test_apa_pr107_parametric_mep_independent.py'
       - 'scripts/apa_pr107_parametric_qa_shard.py'
-      - '.github/workflows/apa-pr96-native-dependency-192.yml'
+      - '.github/workflows/apa-pr107-parametric-mep-192.yml'
 
 permissions:
   contents: read
