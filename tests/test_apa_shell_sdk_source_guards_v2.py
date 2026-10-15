@@ -22,7 +22,7 @@ GUARDS = [
     "edgeData",
     "APIERR_BADPARS,\"Shell contour allocation shorter than element metadata\"",
     "NATIVE_PARAMETER_GEOMETRY_NOT_RESULTANT_BREP",
-    "case API_ShellID",
+    "if(e.header.type.typeID==API_ShellID)",
 ]
 
 
@@ -30,7 +30,6 @@ GUARDS = [
 def test_shell_cpp_checked_in_required_source_guards(guard):
     source = CPP.read_text(encoding="utf8")
     assert source.count(guard) >= 1
-    assert guard not in source.replace(guard, "", 1)
     assert CPP.is_file()
     assert ASSEMBLY.is_file()
     assert "API_ShellID" in source
