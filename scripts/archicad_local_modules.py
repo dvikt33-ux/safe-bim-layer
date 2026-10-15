@@ -9,6 +9,41 @@ def native_quantities(elements):
     from archicad_connected_ifc import native_body_quantities
     return dict(elements=[dict(guid=e['guid'],quantities=native_body_quantities(e)) for e in elements],authority='EXISTING_NATIVE_BREP_ADAPTER',engineering='NOT_VERIFIED')
 
+def memo_polygon_inputs(memo):
+    """Bridge existing native parameter memo to the existing 2D adapter.
+
+    This does not linearize curves or reconstruct resultant bodies. Keep
+    unsupported records explicit, so independent straight polygons still work.
+    """
+    import math
+    polygons=[];bindings=[];omitted=[];seen=set()
+    for index,row in enumerate(memo['elements']):
+        guid=row.get('elementId',{}).get('guid');reason=None
+        try:
+            if not isinstance(guid,str) or not guid:raise ValueError('ELEMENT_GUID_MISSING')
+            if guid in seen:raise ValueError('DUPLICATE_ELEMENT_GUID')
+            seen.add(guid)
+            if row.get('nativeTypeId') not in (8,9):raise ValueError('ONLY_SLAB_ROOF_PARAMETER_FOOTPRINT_SUPPORTED')
+            p=row.get('polygon',row)
+            if p.get('arcs'):raise ValueError('CURVED_EDGES_NOT_LINEARIZED')
+            coords=p['coordinates'];ends=p['contourEnds']
+            if [c['index'] for c in coords]!=list(range(1,len(coords)+1)) or not ends or any(type(n)!=int for n in ends):raise ValueError('CONTOUR_INDEX_INVALID')
+            if sorted(set(ends))!=ends or ends[-1]!=len(coords):raise ValueError('CONTOUR_END_INVALID')
+            contours=[];start=0
+            for end in ends:
+                points=[[float(c['x']),float(c['y'])] for c in coords[start:end]]
+                if len(points)<4 or points[0]!=points[-1] or any(not math.isfinite(v) for point in points for v in point):raise ValueError('CLOSED_FINITE_CONTOUR_REQUIRED')
+                if len({tuple(p) for p in points[:-1]})<3:raise ValueError('CONTOUR_DEGENERATE')
+                contours.append(points);start=end
+            if type(row.get('homeStory'))!=int:raise ValueError('HOME_STORY_MISSING')
+            polygons.append(dict(id=guid,outline=contours[0],holes=contours[1:]))
+            bindings.append(dict(id=guid,homeStory=row['homeStory'],nativeTypeId=row['nativeTypeId']))
+        except (KeyError,TypeError,ValueError,OverflowError) as exc:
+            reason=str(exc);entry=dict(index=index,reason=reason)
+            if isinstance(guid,str):entry['guid']=guid
+            omitted.append(entry)
+    return dict(polygons=polygons,nativeBindings=bindings,omitted=omitted,authority='NATIVE_PARAMETER_POLYGONS_NOT_RESULTANT_BREP',engineering='NOT_VERIFIED')
+
 def dependency_impact(nodes,edges,changed):
     import networkx as nx
     if len(nodes)!=len(set(nodes)) or set(changed)-set(nodes) or any(len(e)!=2 or set(e)-set(nodes) for e in edges):raise ValueError('GRAPH_IDENTITY_OR_EDGE_INVALID')
@@ -89,7 +124,7 @@ def attach(router,manifest):
     import hashlib,importlib.metadata
     expected=hashlib.sha256(Path(__file__).read_bytes().replace(b'\r\n',b'\n')).hexdigest()
     if manifest['implementationSHA256']!=expected:raise ValueError('LOCAL_MODULE_SOURCE_DRIFT')
-    names={'NormalizeNativeDump':normalize_native,'NativeBodyQuantities':native_quantities,'DependencyImpact':dependency_impact,'PolygonRelations':polygon_relations,'ConstrainedAssignment':constrained_assignment,'IFCSelect':ifc_select,'IFCValidate':ifc_validate,'IFCGeometry':ifc_geometry,'IFCExchangeFacts':ifc_exchange}
+    names={'NormalizeNativeDump':normalize_native,'NativeBodyQuantities':native_quantities,'DependencyImpact':dependency_impact,'PolygonRelations':polygon_relations,'ConstrainedAssignment':constrained_assignment,'IFCSelect':ifc_select,'IFCValidate':ifc_validate,'IFCGeometry':ifc_geometry,'IFCExchangeFacts':ifc_exchange,'MemoPolygonInputs':memo_polygon_inputs}
     present={'AddOn.APAAnalysis.'+n for n in names}&set(router.catalog['commands'])
     if present:
         if len(present)!=len(names):raise ValueError('PARTIAL_LOCAL_MODULE_ATTACHMENT')

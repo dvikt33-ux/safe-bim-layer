@@ -95,6 +95,7 @@ class DynamicCommands:
 
     def add_local_provider(self,namespace,contracts,handlers,source,dependencies):
         if set(contracts)!=set(handlers) or any(not callable(h) for h in handlers.values()):raise ValueError('LOCAL_CODE_OWNED_HANDLERS_REQUIRED')
+        if set(dependencies)!=set(handlers) or any(not isinstance(d,list) or any(not isinstance(p,str) or not p for p in d) for d in dependencies.values()):raise ValueError('LOCAL_DEPENDENCY_CONTRACTS_REQUIRED')
         self.add_provider(namespace,contracts,source)
         for name,handler in handlers.items():
             key='AddOn.'+namespace+'.'+name;self.catalog['commands'][key].update(api='local-python',availability='LOCAL_DEPENDENCIES_NOT_CHECKED',dependencies=copy.deepcopy(dependencies[name]));self.local_handlers[key]=handler
@@ -121,7 +122,7 @@ class DynamicCommands:
         def expand(value,seen=()):
             if isinstance(value,dict):
                 if '$ref' in value and value['$ref'].startswith('#/'):
-                    key=value['$ref'][2:]
+                    key=value['$ref'][2:].replace('~1','/').replace('~0','~')
                     if key in seen:return dict(recursiveRef=key)
                     return expand(self.catalog['common_schemas'][key],(*seen,key))
                 return {k:expand(v,seen) for k,v in value.items()}
@@ -135,17 +136,32 @@ class DynamicCommands:
     def add_provider(self,namespace,contracts,source,common_schemas=None):
         if not namespace or '.' in namespace or not source:raise ValueError('PROVIDER_NAMESPACE_AND_SOURCE_REQUIRED')
         common_schemas=common_schemas or {}
+        # Validate the complete batch before changing either commands or schemas.
+        if not isinstance(contracts,dict) or not isinstance(common_schemas,dict):raise ValueError('PROVIDER_CONTRACT_OBJECTS_REQUIRED')
+        for name,row in contracts.items():
+            if not isinstance(name,str) or not name or '.' in name:raise ValueError('PROVIDER_COMMAND_NAME_INVALID')
+            if not isinstance(row,dict):raise ValueError('PROVIDER_COMMAND_CONTRACT_REQUIRED')
+            if 'AddOn.'+namespace+'.'+name in self.catalog['commands']:raise ValueError('PROVIDER_COMMAND_DUPLICATE')
+        staged=copy.deepcopy(self.catalog);aliases={};occupied=set(staged['common_schemas'])
+        for name in common_schemas:
+            if not isinstance(name,str) or not name:raise ValueError('PROVIDER_SCHEMA_NAME_INVALID')
+            preferred=namespace+'__'+name;key=preferred
+            if key in occupied:
+                # Legacy provider IDs stay unchanged. The new schema gets an
+                # injective tuple encoding, even for A__B/C versus A/B__C.
+                encoded='__APA_SCHEMA_V1__'+json.dumps([namespace,name],ensure_ascii=False,separators=(',',':')).encode('utf8').hex();key=encoded;suffix=0
+                while key in occupied:suffix+=1;key=encoded+'_'+str(suffix)
+            occupied.add(key);aliases[name]=key
         def refs(value):
-            if isinstance(value,dict):return {k:('#/'+namespace+'__'+v[2:] if k=='$ref' and isinstance(v,str) and v.startswith('#/') and v[2:] in common_schemas else refs(v)) for k,v in value.items()}
+            if isinstance(value,dict):return {k:('#/'+aliases[v[2:]].replace('~','~0').replace('/','~1') if k=='$ref' and isinstance(v,str) and v.startswith('#/') and v[2:] in aliases else refs(v)) for k,v in value.items()}
             if isinstance(value,list):return [refs(v) for v in value]
             return value
-        for name,value in common_schemas.items():self.catalog['common_schemas'][namespace+'__'+name]=refs(value)
+        for name,value in common_schemas.items():staged['common_schemas'][aliases[name]]=refs(value)
         for name,row in contracts.items():
-            if '.' in name:raise ValueError('PROVIDER_COMMAND_NAME_INVALID')
             key='AddOn.'+namespace+'.'+name
-            if key in self.catalog['commands']:raise ValueError('PROVIDER_COMMAND_DUPLICATE')
-            self.catalog['commands'][key]=dict(refs(copy.deepcopy(row)),name=key,provider=namespace,namespace=namespace,commandName=name,api='addon-json',availability='SOURCE_CONTRACT_NOT_RUNTIME_PROBED',source=source)
-        self.fingerprint=self.A.RUN.digest(self.catalog)
+            staged['commands'][key]=dict(refs(copy.deepcopy(row)),name=key,provider=namespace,namespace=namespace,commandName=name,api='addon-json',availability='SOURCE_CONTRACT_NOT_RUNTIME_PROBED',source=source)
+        fingerprint=self.A.RUN.digest(staged)
+        self.catalog=staged;self.fingerprint=fingerprint
 
     def include_source_snapshot(self,snapshot,label):
         """Keep absent candidate contracts discoverable without claiming loaded."""
@@ -254,6 +270,8 @@ class DynamicCommands:
 
     def read(self,api,ticket,reviewed_read_only=False):
         self.validate(ticket)
+        blocker=self.catalog['commands'][ticket['command']].get('executionBlocker')
+        if blocker:raise ValueError('COMMAND_RUNTIME_QUARANTINED:'+blocker)
         if not reviewed_read_only or ticket['effect']!='READ_ONLY':raise ValueError('SOURCE_REVIEWED_READ_ONLY_EFFECT_REQUIRED')
         if self.catalog['commands'][ticket['command']].get('api')=='local-python':
             import importlib.metadata,time

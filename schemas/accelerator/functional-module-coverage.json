@@ -1,19 +1,29 @@
 {
   "schema": "APA_FUNCTIONAL_MODULE_COVERAGE_V1",
-  "basis": "Bounded reuse of PR84-85 inventories; no new provider binary/ABI research",
+  "basis": "Reuse PR84-88 inventories plus actual PR88 candidate registration and six scoped SDK calls; four new SDK groups source/build only.",
   "counters": {
-    "nativeAndOfficialPrepared": 368,
-    "localPrepared": 9,
-    "totalPrepared": 377,
+    "nativeAndOfficialPrepared": 372,
+    "localPrepared": 10,
+    "totalPrepared": 382,
     "currentNativeCompatible": 337,
-    "newNativeSDKContracts": 5,
-    "sourceOnlyNativeRuntime": 31,
-    "newLocalAnalyticalCapabilities": 6,
+    "newNativeSDKContracts": 9,
+    "sourceOnlyNativeRuntime": 35,
+    "newLocalAnalyticalCapabilities": 7,
     "existingAPALocalUtilitiesNowRoutable": 3,
     "retainedCandidateBuildCommands": 12,
     "existingDevKitBuildCommand": 1,
-    "newSDKBuildCommands": 5,
-    "nonTapirProviderContracts": 0
+    "newSDKBuildCommands": 9,
+    "nonTapirProviderContracts": 0,
+    "testedPR88CandidateAddOnRegistered": 281,
+    "testedPR88CandidateNativeCompatible": 354,
+    "nativeSDKCallableThisPass": 9,
+    "additionalNativeFactsVerified": 4,
+    "newLocalDataflowCallable": 2,
+    "testedExtendedCandidateAddOnRegistered": 285,
+    "testedExtendedCandidateNativeCompatible": 358,
+    "newlyAddedSDKGroupsCallable": 3,
+    "quantityRuntimeQuarantined": 1,
+    "latestSafeBinaryInstalled": false
   },
   "groups": {
     "BIM_element_management": {
@@ -37,9 +47,11 @@
         "ModifyMeshes"
       ],
       "new": [
-        "GetNativePolygonMemoV1"
+        "GetNativePolygonMemoV1",
+        "GetNativeEnvelopeMemoV1",
+        "GetNativeElementHotspotsV1"
       ],
-      "boundary": "Polygon memo and holes/arcs differ from resultant BREP. Shell memo write not integrated."
+      "boundary": "Roof/Slab/Shell parameter topology and native hotspots are not resultant BREP. Side materials, edge trims, pivot level overrides and Shell body/axis frames not serialized. No complex memo writer added."
     },
     "attributes_materials": {
       "existing": [
@@ -112,7 +124,9 @@
         "PublishPublisherSet",
         "GetNavigatorItemTree"
       ],
-      "new": [],
+      "new": [
+        "GetNativeDrawingAssociationsV1"
+      ],
       "boundary": "Schedule rows and full vertical 2D primitive export remain not exposed."
     },
     "IFC_SAF_analytical": {
@@ -164,9 +178,11 @@
       "new": [
         "DependencyImpact",
         "PolygonRelations",
-        "ConstrainedAssignment"
+        "ConstrainedAssignment",
+        "MemoPolygonInputs",
+        "GetNativeElementQuantitiesV1"
       ],
-      "boundary": "Caller facts and constraints; no inferred loads or dimensions."
+      "boundary": "Quantity engine is QUARANTINED after an actual AC29 access violation; contract preparable, dispatch/native execution refused. Captured straight Roof/Slab contours pass into existing Shapely; arcs explicitly unsupported; no native or engineering mutation."
     }
   },
   "providers": [
@@ -618,7 +634,7 @@
     },
     {
       "command": "AddOn.AddOnCommandTest.ProtectionInfoCommand",
-      "status": "BUILD_INTEGRATED_NOT_RUNTIME_REGISTERED",
+      "status": "RUNTIME_REGISTERED_CALLABLE_SCHEMA_VALID_RESPONSE_SUPPRESSED",
       "reuse": "Existing DevKit license flags, same namespace/name; full APX registration uses owned handler."
     }
   ],
@@ -632,7 +648,67 @@
     "ACAPI::Library::GetLibraryManager",
     "LibraryManager.GetLibPartByLibInd",
     "LibraryManager.GetLibraryOfLibPart",
-    "ACAPI_Licensing_GetProtectionMode"
+    "ACAPI_Licensing_GetProtectionMode",
+    "ACAPI_Drawing_GetDrawingLink",
+    "ACAPI_Drawing_CheckDrawingStatus",
+    "ACAPI_Drawing_GetFullDrawingContentBox",
+    "ACAPI_Element_GetHotspots",
+    "ACAPI_Element_GetQuantities"
   ],
-  "sdkInventory": "848 previously inventoried public function declarations are not JSON commands or capability count"
+  "sdkInventory": "848 previously inventoried public function declarations are not JSON commands or capability count",
+  "quarantinedSDKCalls": [
+    "ACAPI_Element_GetQuantities"
+  ],
+  "DrawingAuxiliaryQueries": "Source links callable; update status and content box returned explicit native errors, not accepted.",
+  "providerMatrix": [
+    {
+      "provider": "Tapir and APA SDK",
+      "discovered": 285,
+      "prepared": 285,
+      "originalRuntime": 264,
+      "testedPR88Runtime": 280,
+      "testedExtendedRuntime": 284,
+      "callableThisPass": 8,
+      "runtimeQuarantined": 1
+    },
+    {
+      "provider": "Official Archicad JSON",
+      "discovered": 73,
+      "prepared": 73,
+      "originalRuntime": 73,
+      "testedPR88Runtime": 73,
+      "callableThisPass": null,
+      "verification": "73_COMPATIBLE_CONTRACTS_NOT_73_LIVE_CALLS"
+    },
+    {
+      "provider": "DevKit source examples",
+      "discovered": 14,
+      "prepared": 14,
+      "originalRuntime": 0,
+      "testedPR88Runtime": 1,
+      "testedExtendedRuntime": 1,
+      "callableThisPass": 1,
+      "sourceOnlyNotIntegrated": 13
+    },
+    {
+      "provider": "Local APA analysis",
+      "discovered": 10,
+      "prepared": 10,
+      "originalRuntime": null,
+      "testedPR88Runtime": null,
+      "callableThisPass": 2,
+      "callableUniqueAcrossPriorAndCurrent": 10,
+      "verification": "TEN_LOCAL_CONTRACTS;TWO_STEP_CAPTURED_NATIVE_MEMO_FLOW_VERIFIED;NINE_PRIOR_CALLS_RETAINED"
+    },
+    {
+      "provider": "Other installed APX",
+      "providerCount": 32,
+      "discovered": null,
+      "prepared": 0,
+      "originalRuntime": null,
+      "testedPR88Runtime": null,
+      "callableThisPass": 0,
+      "verification": "32_PROVIDERS_NOT_32_FUNCTIONS;NO_PUBLIC_INDEPENDENT_CONTRACT_FOUND"
+    }
+  ]
 }

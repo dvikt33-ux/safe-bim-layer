@@ -1,6 +1,13 @@
 {
   "schema": "APA_FUNCTIONAL_MODULES_V1",
   "sdkImplementationSHA256": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72",
+  "sdkImplementationFiles": {
+    "archicad-addon/Sources/NativeModuleCommands.cpp": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72",
+    "archicad-addon/Sources/NativeExtendedModules.cpp": "99fe0cb9007091c09301be5c922a9ce25a0a59f490b1c9406219ad26b94f1451",
+    "archicad-addon/Sources/NativeExtendedModules.hpp": "3d8d14f393cff31dad5bf808ca973dde324211404dd96c07667909e90a780377",
+    "archicad-addon/Sources/NativeExtendedSchemas.inc": "a08bb0a19328d7adac6685a8ff7c0eed72db8682ef70daef5a9fbdb6f05d7bbd",
+    "archicad-addon/Sources/NativeQuantityFields.inc": "470d052f2cc23bc0536efc658e7a1d9840bdcc214d500b0709e598e805f58f53"
+  },
   "sdkProviders": {
     "TapirCommand": {
       "GetNativeElementDefaultsV1": {
@@ -133,7 +140,9 @@
           ],
           "additionalProperties": false
         },
-        "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED"
+        "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
+        "implementationSource": "archicad-addon/Sources/NativeModuleCommands.cpp",
+        "implementationSHA256": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72"
       },
       "GetNativePolygonMemoV1": {
         "version": "29",
@@ -311,7 +320,9 @@
           ],
           "additionalProperties": false
         },
-        "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED"
+        "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
+        "implementationSource": "archicad-addon/Sources/NativeModuleCommands.cpp",
+        "implementationSHA256": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72"
       },
       "GetNativeWorkingUnitsV1": {
         "version": "29",
@@ -394,7 +405,9 @@
             }
           ]
         },
-        "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED"
+        "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
+        "implementationSource": "archicad-addon/Sources/NativeModuleCommands.cpp",
+        "implementationSHA256": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72"
       },
       "GetNativeGroupRootsV1": {
         "version": "29",
@@ -527,7 +540,9 @@
           ],
           "additionalProperties": false
         },
-        "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED"
+        "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
+        "implementationSource": "archicad-addon/Sources/NativeModuleCommands.cpp",
+        "implementationSHA256": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72"
       },
       "GetNativeLibraryPartOriginV1": {
         "version": "29",
@@ -646,7 +661,1048 @@
             }
           ]
         },
-        "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED"
+        "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
+        "implementationSource": "archicad-addon/Sources/NativeModuleCommands.cpp",
+        "implementationSHA256": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72"
+      },
+      "GetNativeEnvelopeMemoV1": {
+        "version": "29",
+        "category": "Native SDK grouped read adapter",
+        "description": "Roof/Slab/Shell parameter topology, pivot polygons and shell contours; not resultant BREP or full side material overrides.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "elements": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "elementId": {
+                    "type": "object",
+                    "properties": {
+                      "guid": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "guid"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "elementId"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1,
+              "maxItems": 32
+            }
+          },
+          "required": [
+            "elements"
+          ],
+          "additionalProperties": false
+        },
+        "returns": {
+          "type": "object",
+          "properties": {
+            "nativeModelWrites": {
+              "const": 0
+            },
+            "authority": {
+              "type": "string"
+            },
+            "elements": {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "elementId": {
+                        "type": "object",
+                        "properties": {
+                          "guid": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "required": [
+                          "guid"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "nativeTypeId": {
+                        "type": "integer"
+                      },
+                      "homeStory": {
+                        "type": "integer"
+                      },
+                      "polygon": {
+                        "type": "object",
+                        "properties": {
+                          "indexBase": {
+                            "const": 1
+                          },
+                          "coordinateFrame": {
+                            "type": "string"
+                          },
+                          "coordinates": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "index": {
+                                  "type": "integer"
+                                },
+                                "x": {
+                                  "type": "number"
+                                },
+                                "y": {
+                                  "type": "number"
+                                }
+                              },
+                              "required": [
+                                "index",
+                                "x",
+                                "y"
+                              ],
+                              "additionalProperties": false
+                            }
+                          },
+                          "contourEnds": {
+                            "type": "array",
+                            "items": {
+                              "type": "integer"
+                            }
+                          },
+                          "arcs": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "beginIndex": {
+                                  "type": "integer"
+                                },
+                                "endIndex": {
+                                  "type": "integer"
+                                },
+                                "angle": {
+                                  "type": "number"
+                                }
+                              },
+                              "required": [
+                                "beginIndex",
+                                "endIndex",
+                                "angle"
+                              ],
+                              "additionalProperties": false
+                            }
+                          },
+                          "vertexIds": {
+                            "type": "array",
+                            "items": {
+                              "type": "integer"
+                            }
+                          },
+                          "edgeIds": {
+                            "type": "array",
+                            "items": {
+                              "type": "integer"
+                            }
+                          }
+                        },
+                        "required": [
+                          "indexBase",
+                          "coordinateFrame",
+                          "coordinates",
+                          "contourEnds",
+                          "arcs",
+                          "vertexIds",
+                          "edgeIds"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "roofEdgeTypes": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      },
+                      "roofClass": {
+                        "type": "integer"
+                      },
+                      "roofLevel": {
+                        "type": "number"
+                      },
+                      "pivotPolygon": {
+                        "type": "object",
+                        "properties": {
+                          "indexBase": {
+                            "const": 1
+                          },
+                          "coordinateFrame": {
+                            "type": "string"
+                          },
+                          "coordinates": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "index": {
+                                  "type": "integer"
+                                },
+                                "x": {
+                                  "type": "number"
+                                },
+                                "y": {
+                                  "type": "number"
+                                }
+                              },
+                              "required": [
+                                "index",
+                                "x",
+                                "y"
+                              ],
+                              "additionalProperties": false
+                            }
+                          },
+                          "contourEnds": {
+                            "type": "array",
+                            "items": {
+                              "type": "integer"
+                            }
+                          },
+                          "arcs": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "beginIndex": {
+                                  "type": "integer"
+                                },
+                                "endIndex": {
+                                  "type": "integer"
+                                },
+                                "angle": {
+                                  "type": "number"
+                                }
+                              },
+                              "required": [
+                                "beginIndex",
+                                "endIndex",
+                                "angle"
+                              ],
+                              "additionalProperties": false
+                            }
+                          },
+                          "vertexIds": {
+                            "type": "array",
+                            "items": {
+                              "type": "integer"
+                            }
+                          },
+                          "edgeIds": {
+                            "type": "array",
+                            "items": {
+                              "type": "integer"
+                            }
+                          }
+                        },
+                        "required": [
+                          "indexBase",
+                          "coordinateFrame",
+                          "coordinates",
+                          "contourEnds",
+                          "arcs",
+                          "vertexIds",
+                          "edgeIds"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "shellClass": {
+                        "type": "integer"
+                      },
+                      "shellShapes": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "slot": {
+                              "type": "integer"
+                            },
+                            "polygon": {
+                              "type": "object",
+                              "properties": {
+                                "indexBase": {
+                                  "const": 1
+                                },
+                                "coordinateFrame": {
+                                  "type": "string"
+                                },
+                                "coordinates": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "index": {
+                                        "type": "integer"
+                                      },
+                                      "x": {
+                                        "type": "number"
+                                      },
+                                      "y": {
+                                        "type": "number"
+                                      }
+                                    },
+                                    "required": [
+                                      "index",
+                                      "x",
+                                      "y"
+                                    ],
+                                    "additionalProperties": false
+                                  }
+                                },
+                                "contourEnds": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "integer"
+                                  }
+                                },
+                                "arcs": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "beginIndex": {
+                                        "type": "integer"
+                                      },
+                                      "endIndex": {
+                                        "type": "integer"
+                                      },
+                                      "angle": {
+                                        "type": "number"
+                                      }
+                                    },
+                                    "required": [
+                                      "beginIndex",
+                                      "endIndex",
+                                      "angle"
+                                    ],
+                                    "additionalProperties": false
+                                  }
+                                },
+                                "vertexIds": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "integer"
+                                  }
+                                },
+                                "edgeIds": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "integer"
+                                  }
+                                }
+                              },
+                              "required": [
+                                "indexBase",
+                                "coordinateFrame",
+                                "coordinates",
+                                "contourEnds",
+                                "arcs",
+                                "vertexIds",
+                                "edgeIds"
+                              ],
+                              "additionalProperties": false
+                            }
+                          },
+                          "required": [
+                            "slot",
+                            "polygon"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "shellContours": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "slot": {
+                              "type": "integer"
+                            },
+                            "hole": {
+                              "type": "boolean"
+                            },
+                            "depth": {
+                              "type": "number"
+                            },
+                            "polygon": {
+                              "type": "object",
+                              "properties": {
+                                "indexBase": {
+                                  "const": 1
+                                },
+                                "coordinateFrame": {
+                                  "type": "string"
+                                },
+                                "coordinates": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "index": {
+                                        "type": "integer"
+                                      },
+                                      "x": {
+                                        "type": "number"
+                                      },
+                                      "y": {
+                                        "type": "number"
+                                      }
+                                    },
+                                    "required": [
+                                      "index",
+                                      "x",
+                                      "y"
+                                    ],
+                                    "additionalProperties": false
+                                  }
+                                },
+                                "contourEnds": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "integer"
+                                  }
+                                },
+                                "arcs": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "beginIndex": {
+                                        "type": "integer"
+                                      },
+                                      "endIndex": {
+                                        "type": "integer"
+                                      },
+                                      "angle": {
+                                        "type": "number"
+                                      }
+                                    },
+                                    "required": [
+                                      "beginIndex",
+                                      "endIndex",
+                                      "angle"
+                                    ],
+                                    "additionalProperties": false
+                                  }
+                                },
+                                "vertexIds": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "integer"
+                                  }
+                                },
+                                "edgeIds": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "integer"
+                                  }
+                                }
+                              },
+                              "required": [
+                                "indexBase",
+                                "coordinateFrame",
+                                "coordinates",
+                                "contourEnds",
+                                "arcs",
+                                "vertexIds",
+                                "edgeIds"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "planeTransform": {
+                              "type": "array",
+                              "items": {
+                                "type": "number"
+                              },
+                              "minItems": 12,
+                              "maxItems": 12
+                            }
+                          },
+                          "required": [
+                            "slot",
+                            "hole",
+                            "depth",
+                            "polygon",
+                            "planeTransform"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "shellContourCountExpected": {
+                        "type": "integer"
+                      },
+                      "shellContourCountAllocated": {
+                        "type": "integer"
+                      },
+                      "serializationBoundary": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "elementId",
+                      "nativeTypeId",
+                      "homeStory",
+                      "polygon",
+                      "roofEdgeTypes",
+                      "serializationBoundary"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "integer"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "code",
+                          "message"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "error"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            }
+          },
+          "required": [
+            "nativeModelWrites",
+            "authority",
+            "elements"
+          ],
+          "additionalProperties": false
+        },
+        "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
+        "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
+        "implementationSHA256": "99fe0cb9007091c09301be5c922a9ce25a0a59f490b1c9406219ad26b94f1451"
+      },
+      "GetNativeDrawingAssociationsV1": {
+        "version": "29",
+        "category": "Native SDK grouped read adapter",
+        "description": "Native Drawing source-link GUID, update status and full content box; private external paths suppressed.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "elements": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "elementId": {
+                    "type": "object",
+                    "properties": {
+                      "guid": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "guid"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "elementId"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1,
+              "maxItems": 32
+            }
+          },
+          "required": [
+            "elements"
+          ],
+          "additionalProperties": false
+        },
+        "returns": {
+          "type": "object",
+          "properties": {
+            "nativeModelWrites": {
+              "const": 0
+            },
+            "drawings": {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "elementId": {
+                        "type": "object",
+                        "properties": {
+                          "guid": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "required": [
+                          "guid"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "linkGuid": {
+                        "type": "object",
+                        "properties": {
+                          "guid": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "required": [
+                          "guid"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "linkTypeId": {
+                        "type": "integer"
+                      },
+                      "viewTypeId": {
+                        "type": "integer"
+                      },
+                      "contentTypeId": {
+                        "type": "integer"
+                      },
+                      "viewDeleted": {
+                        "type": "boolean"
+                      },
+                      "externalPathPresent": {
+                        "type": "boolean"
+                      },
+                      "updateStatus": {
+                        "type": "integer"
+                      },
+                      "statusQueryError": {
+                        "type": "integer"
+                      },
+                      "contentBoxQueryError": {
+                        "type": "integer"
+                      },
+                      "fullContentBox": {
+                        "type": "object",
+                        "properties": {
+                          "xMin": {
+                            "type": "number"
+                          },
+                          "yMin": {
+                            "type": "number"
+                          },
+                          "xMax": {
+                            "type": "number"
+                          },
+                          "yMax": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "xMin",
+                          "yMin",
+                          "xMax",
+                          "yMax"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "elementId",
+                      "linkGuid",
+                      "linkTypeId",
+                      "viewTypeId",
+                      "contentTypeId",
+                      "viewDeleted",
+                      "externalPathPresent",
+                      "updateStatus",
+                      "statusQueryError",
+                      "contentBoxQueryError"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "integer"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "code",
+                          "message"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "error"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            }
+          },
+          "required": [
+            "nativeModelWrites",
+            "drawings"
+          ],
+          "additionalProperties": false
+        },
+        "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
+        "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
+        "implementationSHA256": "99fe0cb9007091c09301be5c922a9ce25a0a59f490b1c9406219ad26b94f1451"
+      },
+      "GetNativeElementHotspotsV1": {
+        "version": "29",
+        "category": "Native SDK grouped read adapter",
+        "description": "Native element hotspots and neighbor references with XYZ; not body vertices.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "elements": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "elementId": {
+                    "type": "object",
+                    "properties": {
+                      "guid": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "guid"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "elementId"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1,
+              "maxItems": 32
+            }
+          },
+          "required": [
+            "elements"
+          ],
+          "additionalProperties": false
+        },
+        "returns": {
+          "type": "object",
+          "properties": {
+            "nativeModelWrites": {
+              "const": 0
+            },
+            "authority": {
+              "type": "string"
+            },
+            "elements": {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "elementId": {
+                        "type": "object",
+                        "properties": {
+                          "guid": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "required": [
+                          "guid"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "nativeTypeId": {
+                        "type": "integer"
+                      },
+                      "homeStory": {
+                        "type": "integer"
+                      },
+                      "hotspots": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "neigId": {
+                              "type": "integer"
+                            },
+                            "neigIndex": {
+                              "type": "integer"
+                            },
+                            "x": {
+                              "type": "number"
+                            },
+                            "y": {
+                              "type": "number"
+                            },
+                            "z": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "neigId",
+                            "neigIndex",
+                            "x",
+                            "y",
+                            "z"
+                          ],
+                          "additionalProperties": false
+                        }
+                      }
+                    },
+                    "required": [
+                      "elementId",
+                      "nativeTypeId",
+                      "homeStory",
+                      "hotspots"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "integer"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "code",
+                          "message"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "error"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            }
+          },
+          "required": [
+            "nativeModelWrites",
+            "authority",
+            "elements"
+          ],
+          "additionalProperties": false
+        },
+        "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
+        "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
+        "implementationSHA256": "99fe0cb9007091c09301be5c922a9ce25a0a59f490b1c9406219ad26b94f1451"
+      },
+      "GetNativeElementQuantitiesV1": {
+        "version": "29",
+        "category": "Native SDK grouped read adapter",
+        "description": "QUARANTINED after an actual AC29 quantity query crash. Contract remains discoverable/preparable; APA dispatch and native entry refuse execution until independently diagnosed.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "elements": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "elementId": {
+                    "type": "object",
+                    "properties": {
+                      "guid": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "guid"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "elementId"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1,
+              "maxItems": 32
+            },
+            "minOpeningSize": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "elements",
+            "minOpeningSize"
+          ],
+          "additionalProperties": false
+        },
+        "returns": {
+          "type": "object",
+          "properties": {
+            "nativeModelWrites": {
+              "const": 0
+            },
+            "authority": {
+              "type": "string"
+            },
+            "minOpeningSize": {
+              "type": "number"
+            },
+            "elements": {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "elementId": {
+                        "type": "object",
+                        "properties": {
+                          "guid": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "required": [
+                          "guid"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "nativeTypeId": {
+                        "type": "integer"
+                      },
+                      "homeStory": {
+                        "type": "integer"
+                      },
+                      "metrics": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "number"
+                        }
+                      },
+                      "composites": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "volume": {
+                              "type": "number"
+                            },
+                            "projectedArea": {
+                              "type": "number"
+                            },
+                            "buildingMaterialIndex": {
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "volume",
+                            "projectedArea",
+                            "buildingMaterialIndex"
+                          ],
+                          "additionalProperties": false
+                        }
+                      }
+                    },
+                    "required": [
+                      "elementId",
+                      "nativeTypeId",
+                      "homeStory",
+                      "metrics",
+                      "composites"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "integer"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "code",
+                          "message"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "error"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            }
+          },
+          "required": [
+            "nativeModelWrites",
+            "authority",
+            "minOpeningSize",
+            "elements"
+          ],
+          "additionalProperties": false
+        },
+        "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
+        "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
+        "executionBlocker": "AC29_QUANTITY_ENGINE_ACCESS_VIOLATION_ROOT_CAUSE_NOT_VERIFIED_NO_REPLAY",
+        "implementationSHA256": "99fe0cb9007091c09301be5c922a9ce25a0a59f490b1c9406219ad26b94f1451"
       }
     },
     "AddOnCommandTest": {
@@ -700,12 +1756,14 @@
           ],
           "additionalProperties": false
         },
-        "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED"
+        "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
+        "implementationSource": "archicad-addon/Sources/NativeModuleCommands.cpp",
+        "implementationSHA256": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72"
       }
     }
   },
   "local": {
-    "implementationSHA256": "485d02fa00e7fdc04591e45a286694cd27c0c250b9a58b932c5373cdcb06651e",
+    "implementationSHA256": "b268855a4b268434b0a865a379f1fc85964eb7f8a27f235830319b8d00c4ea1b",
     "commands": {
       "NormalizeNativeDump": {
         "version": "1",
@@ -1462,6 +2520,144 @@
           "additionalProperties": false
         },
         "scope": "LOCAL_READ_OR_ANALYSIS_NO_NATIVE_WRITE"
+      },
+      "MemoPolygonInputs": {
+        "version": "1",
+        "category": "Local analytical module",
+        "description": "Convert captured straight native Roof/Slab memo contours and holes to existing Shapely inputs; arcs and other types remain explicitly unsupported.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "memo": {
+              "type": "object",
+              "properties": {
+                "elements": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              },
+              "required": [
+                "elements"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "memo"
+          ],
+          "additionalProperties": false
+        },
+        "returns": {
+          "type": "object",
+          "properties": {
+            "polygons": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "outline": {
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      },
+                      "minItems": 2,
+                      "maxItems": 2
+                    },
+                    "minItems": 3
+                  },
+                  "holes": {
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2
+                      },
+                      "minItems": 3
+                    }
+                  }
+                },
+                "required": [
+                  "id",
+                  "outline",
+                  "holes"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "nativeBindings": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "homeStory": {
+                    "type": "integer"
+                  },
+                  "nativeTypeId": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "id",
+                  "homeStory",
+                  "nativeTypeId"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "omitted": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "index": {
+                    "type": "integer"
+                  },
+                  "reason": {
+                    "type": "string"
+                  },
+                  "guid": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "index",
+                  "reason"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "authority": {
+              "type": "string"
+            },
+            "engineering": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "polygons",
+            "nativeBindings",
+            "omitted",
+            "authority",
+            "engineering"
+          ],
+          "additionalProperties": false
+        },
+        "scope": "LOCAL_READ_OR_ANALYSIS_NO_NATIVE_WRITE"
       }
     },
     "dependencies": {
@@ -1489,12 +2685,13 @@
       ],
       "IFCExchangeFacts": [
         "ifcopenshell"
-      ]
+      ],
+      "MemoPolygonInputs": []
     }
   },
-  "newNativeContracts": 5,
-  "newLocalCatalogEntries": 9,
-  "newAnalyticalCapabilities": 6,
+  "newNativeContracts": 9,
+  "newLocalCatalogEntries": 10,
+  "newAnalyticalCapabilities": 7,
   "reusedExistingAPALocalUtilities": 3,
   "reusedDevKitCommands": 1
 }
