@@ -1,18 +1,18 @@
 {
   "schema": "APA_FUNCTIONAL_MODULE_COVERAGE_V1",
-  "basis": "PR94 baseline plus exact 4074a1 candidate installed and natively tested after explicit authorization; original APX/config restored. PR95 audit reused.",
+  "basis": "PR96 retained; exact68d028 candidate loaded and identity checked; three authorized native roots created in one copy, Save/Open and409GUID geometry verified. Original APX/config restored; final original-runtime reopen limited by UI helper timeout.",
   "counters": {
-    "nativeAndOfficialPrepared": 375,
+    "nativeAndOfficialPrepared": 378,
     "localPrepared": 10,
-    "totalPrepared": 385,
+    "totalPrepared": 388,
     "currentNativeCompatible": 337,
-    "newNativeSDKContracts": 12,
-    "sourceOnlyNativeRuntime": 38,
+    "newNativeSDKContracts": 15,
+    "sourceOnlyNativeRuntime": 41,
     "newLocalAnalyticalCapabilities": 7,
     "existingAPALocalUtilitiesNowRoutable": 3,
     "retainedCandidateBuildCommands": 12,
     "existingDevKitBuildCommand": 1,
-    "newSDKBuildCommands": 12,
+    "newSDKBuildCommands": 15,
     "nonTapirProviderContracts": 0,
     "testedPR88CandidateAddOnRegistered": 281,
     "testedPR88CandidateNativeCompatible": 354,
@@ -26,11 +26,15 @@
     "latestSafeBinaryInstalled": false,
     "newlyPreparedSDKGroupsThisPackage": 3,
     "newSDKGroupsCallableThisPackage": 3,
-    "latestCandidateRuntime": "RUNTIME_REGISTERED_5_SCOPED_GROUPED_READS_ORIGINAL_RESTORED",
-    "enhancedSDKGroupsCallableThisPackage": 2,
+    "latestCandidateRuntime": "NATIVE_CREATE_READ_SAVE_OPEN_PASS_ORIGINAL_APX_RESTORED_FINAL_REOPEN_NOT_VERIFIED",
+    "enhancedSDKGroupsCallableThisPackage": 3,
     "testedComponentCandidateAddOnRegistered": 288,
     "testedComponentCandidateNativeCompatible": 361,
-    "distinctSDKGroupsCallableAcrossPackages": 12
+    "distinctSDKGroupsCallableAcrossPackages": 15,
+    "testedPositiveCandidateTapirExported": 290,
+    "testedPositiveCandidateAddOnRegisteredIncludingPriorDevKit": 291,
+    "testedPositiveCandidateNativeCompatibleIncludingPriorDevKit": 364,
+    "nativeModelWritesThisPackage": 3
   },
   "groups": {
     "BIM_element_management": {
@@ -58,7 +62,7 @@
         "GetNativeEnvelopeMemoV1",
         "GetNativeElementHotspotsV1"
       ],
-      "boundary": "Seven Roof/Slab parameter memos: indexed trims and side overrides read; one PolyRoof has five raw pivot memo slots but four unique edge IDs, closing slot preserved. Shell no existing sample. Not resultant BREP or engineering acceptance."
+      "boundary": "Positive ExtrudedShell local profile/body flags/base frame and actual native BREP captured. No contour edges or Revolved/Ruled positive sample; source-only branches retained."
     },
     "attributes_materials": {
       "existing": [
@@ -99,9 +103,10 @@
       "new": [
         "GetNativeElementDefaultsV1",
         "GetNativePolygonMemoV1",
-        "GetNativeComponentBindingsV1"
+        "GetNativeComponentBindingsV1",
+        "CreateNativeAssemblyV1"
       ],
-      "boundary": "Header defaults for complex types; no new Shell/Railing factory or solver acceptance."
+      "boundary": "One true native Railing and ExtrudedShell created/read/persisted. Detached railing has no verified Stair association. No engineering acceptance."
     },
     "curtain_wall": {
       "existing": [
@@ -112,7 +117,7 @@
       "new": [
         "GetNativeComponentBindingsV1"
       ],
-      "boundary": "Existing membership and frame/panel geometry reused; new owner/root bindings read for86 Stair children. CW/Railing branches build-only without live samples."
+      "boundary": "True native CurtainWall created/read/persisted;150 new component headers resolve parent/root,50 have supported specific parameters. Existing native tool defaults retained."
     },
     "MEP": {
       "existing": [
@@ -137,9 +142,10 @@
         "GetNavigatorItemTree"
       ],
       "new": [
-        "GetNativeDrawingAssociationsV1"
+        "GetNativeDrawingAssociationsV1",
+        "GetNativeNavigatorBindingsV1"
       ],
-      "boundary": "Schedule rows and full vertical 2D primitive export remain not exposed."
+      "boundary": "16 exact known Navigator items and4 owning Layout links;1 exact source View link,3 unresolved. Source GUID can resolve to a different item; identity/map gates reject it. Status -1 means Other; freshness unverified."
     },
     "IFC_SAF_analytical": {
       "existing": [
@@ -159,7 +165,8 @@
         "CreateLibraryPartFromScripts"
       ],
       "new": [
-        "GetNativeLibraryPartOriginV1"
+        "GetNativeLibraryPartOriginV1",
+        "GetNativeLibraryPartDefaultsV1"
       ]
     },
     "selection_grouping": {
