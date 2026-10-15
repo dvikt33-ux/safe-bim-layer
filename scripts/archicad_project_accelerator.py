@@ -181,7 +181,7 @@ def connect_functional_modules(router, manifest_path=None):
             implementation_hash=row.get('implementationSHA256',manifest['sdkImplementationSHA256'])
             current['implementationSHA256']=implementation_hash
             if row.get('executionBlocker'):current['executionBlocker']=row['executionBlocker']
-            router.review_policy(key,'READ_ONLY','READ_ONLY',dict(source='Archicad29 public SDK implementation; model read only',sha256=implementation_hash))
+            router.review_policy(key,row.get('operationKind','READ_ONLY'),row.get('impact','READ_ONLY'),dict(source='Archicad29 public SDK code-owned operation policy; execution requires existing scope and SceneWriter',sha256=implementation_hash))
     local=attach(router,manifest['local'])
     router.fingerprint=RUN.digest(router.catalog)
     return dict(local=local,sdkContracts=sum(len(x) for x in manifest['sdkProviders'].values()),runtimeRegistration='NOT_VERIFIED',nativePermission=False)

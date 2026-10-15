@@ -60,7 +60,7 @@ def build():
     write_schemas();native.update(contracts())
     sdk_files={p:sha(ROOT/p) for p in ['archicad-addon/Sources/NativeModuleCommands.cpp',
         'archicad-addon/Sources/NativeExtendedModules.cpp','archicad-addon/Sources/NativeExtendedModules.hpp',
-        'archicad-addon/Sources/NativeExtendedSchemas.inc','archicad-addon/Sources/NativeQuantityFields.inc']}
+        'archicad-addon/Sources/NativeExtendedSchemas.inc','archicad-addon/Sources/NativeQuantityFields.inc','archicad-addon/Sources/NativeLibraryDefaults.inc','archicad-addon/Sources/NativeAssemblyCommands.inc']}
     for row in native.values():
         row.setdefault('implementationSource','archicad-addon/Sources/NativeModuleCommands.cpp')
         row['implementationSHA256']=sdk_files[row['implementationSource']]

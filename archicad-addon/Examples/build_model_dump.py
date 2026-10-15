@@ -159,7 +159,7 @@ def main():
         (build_root/'runtime-source-snapshot.json').write_bytes((json.dumps(manifest,sort_keys=True,indent=2)+'\n').encode())
     shutil.copy2(addon_overlay / "Sources" / "ModelDumpCommands.cpp", addon_source / "Sources" / "ModelDumpCommands.cpp")
     shutil.copy2(addon_overlay / "Sources" / "ModelDumpCommands.hpp", addon_source / "Sources" / "ModelDumpCommands.hpp")
-    for name in ("NativeGridCommands.cpp", "NativeGridCommands.hpp", "NativeStairCommands.cpp", "NativeStairCommands.hpp", "NativeModuleCommands.cpp", "NativeModuleCommands.hpp", "NativeExtendedModules.cpp", "NativeExtendedModules.hpp", "NativeExtendedSchemas.inc", "NativeQuantityFields.inc"):
+    for name in ("NativeGridCommands.cpp", "NativeGridCommands.hpp", "NativeStairCommands.cpp", "NativeStairCommands.hpp", "NativeModuleCommands.cpp", "NativeModuleCommands.hpp", "NativeExtendedModules.cpp", "NativeExtendedModules.hpp", "NativeExtendedSchemas.inc", "NativeQuantityFields.inc", "NativeLibraryDefaults.inc", "NativeAssemblyCommands.inc"):
         shutil.copy2(addon_overlay / "Sources" / name, addon_source / "Sources" / name)
     overlay_registration(addon_source)
     from roof_edit_overlay import apply as apply_roof_edit_overlay
@@ -176,7 +176,9 @@ def main():
     (addon_source/'Sources/APABuildIdentity.hpp').write_text(header,encoding='utf8')
     # Localized MSVC include diagnostics can leave NMake's header dependency
     # cache incomplete. Force the identity-bearing unit to compile when stamped.
-    (addon_source/'Sources/NativeGridCommands.cpp').touch()
+
+    for name in ('NativeGridCommands.cpp','NativeExtendedModules.cpp','ElementGDLParameterCommands.cpp','AddOnMain.cpp'):
+        (addon_source/'Sources'/name).touch()
     (build_root/'apa-build-identity.json').write_text(json.dumps(dict(contract='APA_NATIVE_RUNTIME_IDENTITY_V1',buildIdentity=build_identity,sourceRevision=revision,sdkMajor=29,developerId=826567491,localId=368333322,files=identity_files),indent=2)+'\n',encoding='utf8')
 
     vc, sdk_root, sdk_version, cmake = resolve_toolchain(args)
