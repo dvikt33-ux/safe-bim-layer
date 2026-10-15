@@ -91,3 +91,25 @@ MODEL WRITES: 0
 **Безопасный следующий шаг:** из MCP вызвать `app_get_add_on_version` (только чтение) на каждом из двух выбранных портов с предварительной `archicad_get_command_schema`; затем на AC30 тестовом PLN ограниченный `GetAllElements` через MCP. Не менять AC29 Tapir/APX или рабочий PLN.
 
 Источник доказательства — консольный журнал пользователя; не считать независимым тестом on-device со стороны автора отчёта и не закрывать S-ID.
+
+
+## 8. MCP read-only command execution independently targeted at both versions — USER_REPORTED_PASS
+
+Пользователь прислал результат выполнения исправленного тестового Python MCP-клиента после обнаружения ошибки в предыдущем тесте (`CallToolResult.isError` должен был быть `is_error` в `mcp==2.3.0`; прежний тест прерывался **до** отправки команды).
+
+В исправленном прогоне:
+- `discovery_list_active_archicads` → AC30 19725/Tapir 1.7.0/`тестовый файл все типы+30`; AC29 19726/Tapir 1.5.10/`APA_Assembly_Modify_01`.
+- `archicad_get_command_schema("app_get_add_on_version")` → input_schema с обязательным integer `port`, `minimum=19723`, `exclusiveMaximum=19744`, `additionalProperties=false`; схема получена от самого MCP-сервера.
+- `archicad_call_tool(name="app_get_add_on_version", arguments={"port":19726})` → `{"version":"1.5.10"}`, **PASS**.
+- `archicad_call_tool(name="app_get_add_on_version", arguments={"port":19725})` → `{"version":"1.7.0"}`, **PASS**.
+- `MODEL WRITES: 0` по выводу пользователя, команда только читает версию add-on.
+
+**Граница результата:** доказана маршрутизация и реальное выполнение одной команды чтения в двух независимо запущенных версиях через общий локальный MCP stdio. Это **не** тест всех ~191+ объявленных команд, не проверка команд записи, не проверка rollback, не production integration APA и не постоянная регистрация MCP в пользовательском ИИ-клиенте. Port numbers ephemeral. Версия Tapir 1.5.10 для AC29 остаётся неизменной, предупреждение более новой schema 1.7.0 допустимо для подтверждённой команды.
+
+`MCP_COMMAND_EXECUTION_AC29=USER_REPORTED_PASS`
+`MCP_COMMAND_EXECUTION_AC30=USER_REPORTED_PASS`
+`APA29_APX_CHANGE=NOT_PERFORMED`
+`MCP_HOST_CLIENT_CONFIG=NOT_DONE`
+`MODEL_WRITES=0_REPORTED`
+
+Следующая практически полезная работа — настроить MCP в выбранном ИИ-клиенте с контролем записи. При подключении инструмента `archicad_call_tool` клиенту следует обеспечить подтверждение каждой операции изменения модели, поскольку сервер умеет выполнять write/delete/export/Teamwork-команды. Не гонять новые десятки read-only тестов без сформулированной функциональной цели.
