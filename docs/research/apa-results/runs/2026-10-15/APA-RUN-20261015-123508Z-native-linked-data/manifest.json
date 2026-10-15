@@ -1,0 +1,143 @@
+{
+  "action_id": "APA-P70.A11",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-LINKED-NATIVE-IFC",
+      "evidence_ids": [
+        "EV-0"
+      ],
+      "statement": "Existing native IFC accessor calls through the shared dynamic router:13elements,12nonemptyIFCIDs,61propertyrows.409GUID inventory and saved bytes unchanged; no model writes or quantity call. One empty identity explicitly omitted.",
+      "status": "LIVE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-LINKED-SDK-BUILD",
+      "evidence_ids": [
+        "EV-1",
+        "EV-2"
+      ],
+      "statement": "Enhanced existing Opening Shell Roof CW Railing readers compile and link in full Release; exact new binary is prepared but not installed. No enhanced-reader LIVE_PASS until separate binary authorization and native readback.",
+      "status": "BUILD_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-LINKED-CAPTURED-FLOW",
+      "evidence_ids": [
+        "EV-0",
+        "EV-4"
+      ],
+      "statement": "Existing BIM Graph/DependencyImpact consumes pinned prior native components plus current native attributes/IFC:196nodes319edges;23material17surface12IFCidentity edges; selected material reaches45nodes. This mixed captured-dataflow result is not a fresh enhanced-SDK live test; no offline test suite or CI run.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-0",
+      "kind": "TEST_RESULT",
+      "sha256": "68bf33c442909b875ded8609c5d5c7a17c8cb59665cf4d988555fde52af6d9b9",
+      "source_revision": "5b8e3b873b2668a5ab257f28d77bab411c350942",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-123508Z-native-linked-data/native-runtime.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-1",
+      "kind": "TEST_RESULT",
+      "sha256": "f58cdb694304ed6ca440b14bcf25877fd63811738b67b4844d9034df7334c9e2",
+      "source_revision": "5b8e3b873b2668a5ab257f28d77bab411c350942",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-123508Z-native-linked-data/SDK-build.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-2",
+      "kind": "TEST_RESULT",
+      "sha256": "b4201638bbe7134d6e9279c668afa2193a8af3653cb5d483628972f242f263c7",
+      "source_revision": "5b8e3b873b2668a5ab257f28d77bab411c350942",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-123508Z-native-linked-data/module-contracts.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-3",
+      "kind": "TEST_RESULT",
+      "sha256": "fff3fefd4ad7c6e3acb48f201f22e35d7824fe1d511d8ef833f597b3fb751be1",
+      "source_revision": "5b8e3b873b2668a5ab257f28d77bab411c350942",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-123508Z-native-linked-data/module-coverage.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-4",
+      "kind": "TEST_RESULT",
+      "sha256": "f67a7cc42920471cd6b2b2ba670bb354aa9d06327320ab49377400aeb1fb5b60",
+      "source_revision": "5b8e3b873b2668a5ab257f28d77bab411c350942",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-123508Z-native-linked-data/gap-register.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-5",
+      "kind": "TEST_RESULT",
+      "sha256": "706a02f89a78c4183fb2b5bd06858a0fb854e07216bfb8a7ac4d8c5b90cd7f5e",
+      "source_revision": "5b8e3b873b2668a5ab257f28d77bab411c350942",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-123508Z-native-linked-data/core-knowledge-query.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "work-native-linked-20261015",
+  "executor_run_id": "APA-CLAIM-NATIVE-LINKED-20261015T121617Z",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-15T12:35:08Z",
+  "idempotency_key": "sha256:1e3f0f132b15e2b57f3112ba83e2c2ed003e196c0bc8c5991ab458b5ca00597a",
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "next_substep": "APA-P70.A11.S03",
+  "phase": "LIVE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261015-123508Z-native-linked-data",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "Read-only current authorized409GUIDcopy; no model mutations",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "sdk": "Enhanced grouped reads built only; no deployment or quantity call",
+    "source_branch": "feature/apa-native-linked-data-20261015",
+    "tapir": "Existing installed IFC/material calls through same router"
+  },
+  "source_revisions": [
+    {
+      "revision": "5b8e3b873b2668a5ab257f28d77bab411c350942",
+      "source_sha": "5b8e3b873b2668a5ab257f28d77bab411c350942",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/104"
+    }
+  ],
+  "started_at": "2026-10-15T12:16:17Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A11.S03"
+}
