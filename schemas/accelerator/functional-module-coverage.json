@@ -1,6 +1,6 @@
 {
   "schema": "APA_FUNCTIONAL_MODULE_COVERAGE_V1",
-  "basis": "Exact PR107 native copy cycle: Shell accepted; Railing partial due typed material drift; CW scalar no-effect. New memo/MEP subsets build only. Prior immutable evidence retained.",
+  "basis": "PR111 exact71 approved read-only owner/library runtime cycle; originalAPX restored,409signatures/128GDL unchanged; saved-copy byte change remainsPARTIAL. Earlier coverage counters retained historically; currentPackage governs this package.",
   "counters": {
     "nativeAndOfficialPrepared": 381,
     "localPrepared": 10,
@@ -766,24 +766,24 @@
   ],
   "currentPackage": {
     "nativeModelGUIDs": 409,
-    "nativeCalls": {
-      "assemblyModify": 3,
-      "materialRecovery": 1
-    },
-    "fullyAcceptedNativeModify": [
-      "ExtrudedShellVector"
-    ],
-    "Railing": "GEOMETRY_PASS_MATERIAL_DRIFT_RECOVERY_APIERR_NOTSUPPORTED",
-    "CWScalarHeight": "LIVE_NO_EFFECT_REFUSED_IN_NEW_SOURCE",
-    "newMemoAndMEPExtensions": "BUILD_PASS_NOT_INSTALLED",
+    "nativeMutationCommands": 0,
+    "saveAPICommands": 0,
     "newCommandNames": 0,
-    "nativeContracts": 18,
-    "MEPTopologyRoles": 7,
-    "graphNodes": 346,
-    "graphEdges": 472,
-    "materialImpactNodes": 4,
-    "originalAPXAndRegistrationRestored": true,
-    "restoredRuntime409Readback": "PASS",
+    "extendedExistingCommandsCallable": 2,
+    "candidateTapirRegistered": 293,
+    "restoredTapirRegistered": 264,
+    "currentOriginalCompatiblePriorVerified": 337,
+    "ownerState": "LIVE_READ_PASS_NOT_WRITE_QUALIFIED",
+    "libraryParameterScripts": "LIVE_READ_PASS_PRIVATE_TOP_LEVEL_ONLY",
+    "CWBoundsAndNewShellFields": "BUILD_ONLY_NOT_LIVE_VERIFIED",
+    "compoundAcceptance": "DEFAULT_ALL_AREAS_REQUIRED_NOT_LIVE_EXECUTED",
+    "materialRecovery": "NOT_RESTORED_BLOCKED",
+    "savedCopyBytes": "CHANGED_AFTER_UI_EXIT_CAUSE_NOT_VERIFIED",
+    "native409And128GDL": "INDEPENDENT_REOPEN_READBACK_MATCH_PR109",
+    "originalAPXAndRegistration": "RESTORED_BYTE_EXACT",
+    "graphNodes": 352,
+    "graphEdges": 482,
+    "observedRailImpactNodes": 134,
     "offlineTests": "NOT_RUN",
     "quantityEngine": "QUARANTINED_NOT_CALLED"
   },

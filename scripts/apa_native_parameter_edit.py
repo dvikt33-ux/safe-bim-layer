@@ -291,6 +291,17 @@ def prepare_railing_material_recovery(router,*,project_identity,saved_sha256,gen
         owner=owner_state.get('ownerRecovery',{})
         if owner.get('ownerComponentId',{}).get('guid','').lower()!=owner_guid.lower():raise ValueError('RECOVERY_NATIVE_OWNER_MISMATCH')
         if not owner.get('ownerFoundInRootRailMemo') or not owner.get('rootRailMemoBounded'):missing.append('OWNER_NOT_QUALIFIED_IN_ROOT_RAIL_MEMO')
+        # GetMemo stores flags; GetActParameters evaluates scripts and may add
+        # Disabled/Child. A difference does not authorize bypassing active flags.
+        for field in ['generatedObjectMaterials','ownerComponentMaterials']:
+            memo=owner.get(field,{})
+            if memo.get('memoQueryError')!=0 or memo.get('boundsStatus')!='BOUNDED_NATIVE_MEMO':missing.append('OWNER_TYPED_MATERIAL_MEMO_NOT_VERIFIED:'+field)
+            entries={p.get('name'):p for p in memo.get('parameters',[])}
+            for change in changes:
+                entry=entries.get(change['name'],{})
+                if entry.get('valueIndex')!=change['currentIndex'] or entry.get('attributeId',{}).get('guid','').lower()!=change['currentAttributeId']['guid'].lower():missing.append('OWNER_MATERIAL_VALUE_OR_IDENTITY_MISMATCH:'+field+':'+change['name'])
+                change.setdefault('storedMemoFlags',{})[field]=entry.get('flags')
+        missing.append('STORED_MEMO_FLAGS_DO_NOT_OVERRIDE_ACTIVE_SCRIPT_DISABLED_STATE')
         if owner.get('objectLibraryPartIndex'):
             reads.append(router.prepare(command(router,'GetNativeLibraryPartDefaultsV1'),dict(libraryPartIndices=[owner['objectLibraryPartIndex']],includeParameterScripts=True)))
     result=dict(schema='APA_RAILING_MATERIAL_RECOVERY_PREVIEW_V1',status='BLOCKED',reasons=missing,projectIdentity=copy.deepcopy(project_identity),savedSHA256=saved_sha256,generatedObjectId=dict(guid=generated_object_guid),rootElementId=dict(guid=root_guid),ownerComponentId=dict(guid=owner_guid),ownerStateSHA256=digest(owner_state) if owner_state is not None else None,requestedChanges=changes,placedParametersSHA256=digest(placed_parameters),baselineSignaturesSHA256=digest(baseline_signatures),affectedGUIDs=sorted(ids),retainedGUIDs=sorted(all_ids-ids),journalStatus=copy.deepcopy(journal_status),readTickets=reads,mutationTicket=None,nativeModelWrites=0,executionPermission=False,executor='Existing DynamicCommands / SceneWriter / SQLite only',geometryPolicy='NO_GEOMETRY_EDIT_NO_DELETE_CREATE_NO_UNDO',disabledPolicy='NEVER_WRITE_DISABLED_PARAMETER_WITHOUT_A_SUPPORTED_NATIVE_CONTRACT',propagation='NOT_INFERRED_FROM_PARAMETER_NAME_OR_SAME_VALUE')

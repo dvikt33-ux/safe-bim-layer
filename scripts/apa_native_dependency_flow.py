@@ -159,6 +159,25 @@ def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids
     for row in (assembly_states or {}).get('elements',[]):
         owner=guid(row.get('elementId'))
         if not owner or 'error' in row:omitted.append('ASSEMBLY_NATIVE_STATE_IDENTITY_OR_RESULT_MISSING');continue
+        recovery=row.get('ownerRecovery',{})
+        if row.get('kind')=='RailingGeneratedObject' and recovery:
+            settings=guid(recovery.get('ownerComponentId'));root=guid(row.get('rootElementId'));declared=guid(recovery.get('ownerDeclaredParentId'))
+            if settings and recovery.get('parentMatchesDeclaredOwner') is True:edge(settings,owner,'NATIVE_GENERATED_SYMBOL_PARENT_NOT_PHYSICAL_RAIL_MEMBERSHIP')
+            if settings and declared:edge(declared,settings,'NATIVE_SETTINGS_COMPONENT_DECLARED_OWNER_NOT_PHYSICAL_INVENTORY')
+            if root and row.get('rootQueryError')==0:edge(root,owner,'NATIVE_GENERATED_SYMBOL_ROOT')
+            library=guid(recovery.get('ownerSymbolLibraryGuid'))
+            if library and settings:edge('LIBRARY_SYMBOL_GUID:'+library,settings,'NATIVE_SETTINGS_COMPONENT_SYMBOL_REFERENCE')
+            for target,field in [(owner,'generatedObjectMaterials'),(settings,'ownerComponentMaterials')]:
+                memo=recovery.get(field,{})
+                if not target or memo.get('memoQueryError')!=0 or memo.get('boundsStatus')!='BOUNDED_NATIVE_MEMO':
+                    omitted.append('NATIVE_OWNER_MATERIAL_MEMO_NOT_VERIFIED');continue
+                for item in memo.get('parameters',[]):
+                    material=guid(item.get('attributeId'));name=item.get('name')
+                    if item.get('nativeTypeId')!=16 or item.get('typeModifier')!=0 or not material or name not in {'bmatRail','bmatFixing'}:continue
+                    edge('ATTRIBUTE:BUILDINGMATERIAL:'+material,target,'NATIVE_OWNER_STORED_TYPED_GDL_MATERIAL_NOT_WRITABILITY')
+                    key='NATIVE_PARAMETER:'+target+':STORED_GDL:'+name;edge(target,key,'NATIVE_STORED_GDL_PARAMETER_OBSERVATION_NOT_WRITABILITY')
+                    parameter_facts.append(dict(node=key,value=item.get('valueIndex'),storedFlags=item.get('flags'),editable=False,authority='STORED_MEMO_FLAGS_NOT_ACTIVE_SCRIPT_FLAGS_OR_WRITE_PERMISSION'))
+            if recovery.get('ownerFoundInRootRailMemo') is False:omitted.append('GENERATED_SETTINGS_OWNER_ABSENT_FROM_PHYSICAL_ROOT_RAIL_MEMO_NO_IDENTITY_SUBSTITUTION')
         for name,value in row.get('values',{}).items():
             key='NATIVE_PARAMETER:'+owner+':'+name
             read_only=name in row.get('readOnlyFields',[]) or row.get('kind')=='CurtainWall' and name=='heightMetres'
