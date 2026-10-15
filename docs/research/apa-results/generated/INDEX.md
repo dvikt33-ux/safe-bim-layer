@@ -59,5 +59,6 @@ Generated projection from immutable V2 runs. Legacy reports remain in ARTIFACT_R
 | [APA-RUN-20261014-224516Z-sdk-functional-module-expansion](../runs/2026-10-14/APA-RUN-20261014-224516Z-sdk-functional-module-expansion/REPORT.md) | APA-P70.A11.S03 | BUILD | EVIDENCE_READY |
 | [APA-RUN-20261015-011839Z-sdk-runtime-connected-memo](../runs/2026-10-15/APA-RUN-20261015-011839Z-sdk-runtime-connected-memo/REPORT.md) | APA-P70.A11.S03 | LIVE | EVIDENCE_READY |
 | [APA-RUN-20261015-071450Z-sdk-component-context](../runs/2026-10-15/APA-RUN-20261015-071450Z-sdk-component-context/REPORT.md) | APA-P70.A11.S03 | LIVE | EVIDENCE_READY |
+| [APA-RUN-20261015-092957Z-native-positive-modules](../runs/2026-10-15/APA-RUN-20261015-092957Z-native-positive-modules/REPORT.md) | APA-P70.A11.S03 | LIVE | EVIDENCE_READY |
 
 Publication receipts are in ../receipts/. Evidence status is not publication status.
