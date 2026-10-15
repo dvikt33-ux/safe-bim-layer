@@ -7,7 +7,7 @@
     "archicad-addon/Sources/NativeExtendedModules.hpp": "f978eca6f8c4ca4b90fc23b3ac9cfe3650e50e3ff584bdcc9ce132d0e6af4ce8",
     "archicad-addon/Sources/NativeExtendedSchemas.inc": "e08d3c223b257e548f6641c6c0698703c0f8c07b459c1df3268708f5fd53cac9",
     "archicad-addon/Sources/NativeQuantityFields.inc": "470d052f2cc23bc0536efc658e7a1d9840bdcc214d500b0709e598e805f58f53",
-    "archicad-addon/Sources/NativeLibraryDefaults.inc": "81d356c9365a4a9f8d31970646aa076c7d10a627fe812ee53e3023834a8ec7b9",
+    "archicad-addon/Sources/NativeLibraryDefaults.inc": "4a3b4250411856e492cdf7a79d3bf4d47796bb0ecfe490581eed617223884326",
     "archicad-addon/Sources/NativeAssemblyCommands.inc": "34da20beefb90e967533620e750b16915e9ae96bb8405295433d14a97eda39c3"
   },
   "sdkProviders": {
@@ -2904,7 +2904,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeLibraryDefaults.inc",
-        "implementationSHA256": "81d356c9365a4a9f8d31970646aa076c7d10a627fe812ee53e3023834a8ec7b9"
+        "implementationSHA256": "4a3b4250411856e492cdf7a79d3bf4d47796bb0ecfe490581eed617223884326"
       },
       "GetNativeNavigatorBindingsV1": {
         "version": "29",

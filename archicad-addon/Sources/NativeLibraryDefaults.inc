@@ -8,7 +8,7 @@ static bool APABoundedStrings(GSHandle handle,UInt64 count){
  for(UInt64 i=0;i<count;++i){while(pos<n&&data[pos]!=0)++pos;if(pos>=n)return false;++pos;}return true;
 }
 GS::ObjectState GetNativeLibraryPartDefaultsV1Command::Execute(const GS::ObjectState& p,GS::ProcessControl&) const {
- GS::Array<Int32> indices;p.Get("libraryPartIndices",indices);GS::ObjectState out("nativeModelWrites",0,"authority","LIBRARY_PART_DEFAULTS_NOT_PLACED_INSTANCE_OR_EXECUTED_GDL");const auto& rows=out.AddList<GS::ObjectState>("parts");
+ GS::Array<Int32> indices;p.Get("libraryPartIndices",indices);GS::ObjectState out("nativeModelWrites",0,"authority","LIBRARY_PART_STORED_DEFAULTS_NOT_PLACED_INSTANCE");const auto& rows=out.AddList<GS::ObjectState>("parts");
  for(Int32 index:indices){double a=0,b=0;Int32 count=0;API_AddParType** parameters=nullptr;const GS::OnExit cleanup([&](){if(parameters)ACAPI_DisposeAddParHdl(&parameters);});const auto err=ACAPI_LibraryPart_GetParams(index,&a,&b,&count,&parameters);
  if(err!=NoError){rows(CreateErrorResponse(err,"Library part default parameters"));continue;}const auto allocated=parameters?BMGetHandleSize(reinterpret_cast<GSHandle>(parameters))/sizeof(API_AddParType):0;if(count<0||static_cast<GSSize>(count)>allocated||count>4096){rows(CreateErrorResponse(APIERR_BADPARS,"Parameter count exceeds allocated handle or bounded query"));continue;}
  GS::ObjectState row("libraryPartIndex",index,"defaultA",a,"defaultB",b,"parameterCount",count);const auto& list=row.AddList<GS::ObjectState>("parameters");

@@ -1,0 +1,21 @@
+{
+  "schema": "APA_NATIVE_POSITIVE_SCENARIO_V1",
+  "authority": "EXPLICIT_TEST_PARAMETERS_ENGINEERING_NOT_VERIFIED",
+  "authorization": "SEPARATE_COPY_AND_EXACT_APX_PERMISSION_REQUIRED",
+  "sourceProjectRole": "Previously authorized 258 GUID model; immutable source",
+  "targetProjectRole": "One separately authorized copy retaining source GUIDs",
+  "baseline": "Fresh identity, saved SHA, journal and full native retention signatures before write",
+  "operations": [
+    {"id":"positive-cw", "command":"AddOn.TapirCommand.CreateNativeAssemblyV1", "params":{"kind":"CurtainWall","origin":{"x":200,"y":0},"homeStory":0,"relativeLevel":0,"length":2,"height":2}},
+    {"id":"positive-railing", "command":"AddOn.TapirCommand.CreateNativeAssemblyV1", "params":{"kind":"Railing","origin":{"x":210,"y":0},"homeStory":0,"relativeLevel":0,"length":2,"height":1.1}},
+    {"id":"positive-shell", "command":"AddOn.TapirCommand.CreateNativeAssemblyV1", "params":{"kind":"ExtrudedShell","origin":{"x":220,"y":0},"homeStory":0,"relativeLevel":0,"length":4,"height":1,"extrusionDepth":4}}
+  ],
+  "placementGate": "Actual retained native bounds must not intersect target areas; home story must exist",
+  "materialSource": "Existing native tool defaults; independently read actual resulting bindings",
+  "executor": "Existing DynamicCommands.execute -> SceneWriter -> existing SQLite intent-before-write journal",
+  "readback": ["GetDetailsOfElements", "GetSubelementsOfHierarchicalElements", "GetNativeComponentBindingsV1", "GetNativeEnvelopeMemoV1", "GetModelDumpV1"],
+  "persistence": "Existing journaled SaveProject/OpenProject with all original GUID/signature checks",
+  "repeatPolicy": "Reuse completed journal result plus fresh readback, never blind Create repeat",
+  "opening": "Read existing previously recorded Opening from another authorized isolated model; no Opening creation required",
+  "quantityEngine": "QUARANTINED_NO_CALL"
+}
