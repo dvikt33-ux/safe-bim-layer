@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:17f57d75c10fcc1f37a1d98a1e93521376f6fee8d4c01fb4bb9b093afc9b5160",
+  "index_commit_sha": "484f44c7772640d61fb6a0014876d222a8537a0d",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "484f44c7772640d61fb6a0014876d222a8537a0d",
+  "report_path": "docs/research/apa-results/runs/2026-10-15/APA-RUN-20261015-092957Z-native-positive-modules/REPORT.md",
+  "report_sha256": "6d2cb3952b00d1e1e280d39e28ee214daf93cb3fe1b8012fc4878be105570917",
+  "run_id": "APA-RUN-20261015-092957Z-native-positive-modules",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}
