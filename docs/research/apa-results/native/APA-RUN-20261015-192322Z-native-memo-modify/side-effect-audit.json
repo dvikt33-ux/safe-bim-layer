@@ -1,0 +1,17 @@
+{
+  "schema": "APA_NATIVE_MODIFY_SIDE_EFFECT_AUDIT_V1",
+  "basis": "Exact PR107 source, existing SQLite SceneWriter and real native readbacks",
+  "curtainWall": "Input-only scalar height returned NoError but no parameter/BREP effect. Original UNKNOWN remains, no retry. New source rejects scalar and supports explicit bounded same-topology native contour/pattern memo.",
+  "railing": "Rail height0.07 to0.17m;18 native dependent baluster bottoms rise0.10m, tops stay1.08m; zero GUID replacement. One nested native Object unexpectedly changes bmatRail/bmatFixing37 to36. Aggregate face-surface set did not expose typed material drift. Railing remains PARTIAL.",
+  "materialRecovery": "Explicitly approved recovery attempted once through existing setter for unlocked bmatRail; disabled dependent bmatFixing not written directly. Native ACAPI_Element_Change AddPars returns APIERR_NOTSUPPORTED(-2130312313). Independent all409 native signatures and all128 placed GDL definitions/values unchanged. Original UNKNOWN retained with hashed reconciliation. No bypass/retry or false material-restored claim.",
+  "shell": "Extruded Y4.0 to4.5m with same profile,frame,contours,typed native materials,GUID,story,topology counts and native IFC identity. Other408 current-state native signatures preserved. Native LIVE_PASS only this accepted subset.",
+  "retention": "409 total;21 combined native-signature changes comprise20 resultant BREP changes and1 material-only Object change. Native pool body indices ignored by existing geometry_signature.314 outside Railing/Shell and previous258 GUIDs retained.",
+  "newMaterialGate": "Shared adapter compares all per-element native materialBindings including GDL GUID assignments. Optional verifier reports separate unverified material acceptance when omitted; no claim from appearance.",
+  "sdkUndo": "Single existing ACAPI_CallUndoableCommand and masked Element_Change. SDK-error rollback not deliberately tested. Independent reconciliation required; no automatic rollback or delete/create.",
+  "memoLimits": "Same native coordinate count/closure;4096 bound; straight supported contours; pattern counts/native IDs kept. Railing path write blocked until native association contract. No Shell new-hole support; Revolved scalar subset source/build only; Ruled not advertised.",
+  "mep": "Existing topology reader now includes public Elbow/Branch with actual ownership/domain/dimensions. Transition.GetAngle documented degrees; new contract angleDegrees. No positive MEP runtime claim.",
+  "GDL": "Existing getter/setter, native typed scalar/matrix preparation and before/after readback. Disabled flags accept native integer or string list representation; Fixed is distinct. Generated hierarchy-child setter limitation observed.",
+  "nativePermission": "New848410 candidate BUILD_PASS_NOT_INSTALLED; no permission inferred from separately approved PR107 or pending PR104 binary.",
+  "offlineTestsRun": false,
+  "quantityEngineCalled": false
+}

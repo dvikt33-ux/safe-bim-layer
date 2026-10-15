@@ -1,0 +1,186 @@
+{
+  "action_id": "APA-P70.A11",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-MEMO-NATIVE-SHELL",
+      "evidence_ids": [
+        "EV-0"
+      ],
+      "statement": "Exact approved PR107 runtime:ExtrudedShell4.0to4.5m native parameter/body/profile/frame/contour/typedmaterial/story/GUID and IFCidentity retention accepted. Save and independent reopened original-runtime409signature readback; source savedPLN untouched, APX/registration restored.",
+      "status": "LIVE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-MEMO-NATIVE-LIMITS",
+      "evidence_ids": [
+        "EV-0",
+        "EV-2"
+      ],
+      "statement": "Railing Rail0.07to0.17m and18 dependent balusters change geometrically, but one nested Object bmatRail/bmatFixing drift37to36. Approved recovery setter returns native APIERR_NOTSUPPORTED;all409signatures/128GDLparams unchanged,no retry. CW scalarheight NoError/noeffect,UNKNOWN reconciled,not PASS. Full Railing/CW acceptance not achieved.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-MEMO-SDK-BUILD",
+      "evidence_ids": [
+        "EV-1",
+        "EV-4",
+        "EV-5"
+      ],
+      "statement": "Existing assembly contracts extended with bounded native CW reference/contour/pattern memo; Railing path read/write-association block; class-specific Shell fields. Existing MEP adds public Elbow/Branch and correct Transition degrees. FullRelease848410candidate notinstalled. No new command names;new paths BUILD_ONLY.",
+      "status": "BUILD_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-MEMO-CONNECTED-FLOW",
+      "evidence_ids": [
+        "EV-2",
+        "EV-3"
+      ],
+      "statement": "Existing DependencyImpact consumes captured native owner/parameter/material/GDL/IFC facts:346nodes472edges,materialimpact4nodes. Per-element typed material gate identifies real drift missed by aggregate surfaces. No dependent native writes or offline tests.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-MEMO-PUBLICATION",
+      "evidence_ids": [
+        "EV-7",
+        "EV-8"
+      ],
+      "statement": "Fresh code/canonical/default workflow hashes unchanged; push/pull_request/manual only. All commits skipCI,direct existing publisher functions,no workflow dispatch or test runner. Publication flags cover this artifact-only action;preceding authorized native copy/APX cycle is explicit in evidence.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-0",
+      "kind": "OTHER",
+      "sha256": "efa1fb6d777fb6049d95e35dd5fb0ff7446bac0c2bfe2390bb18bad2ba8b55c7",
+      "source_revision": "13139d6cd03340bff7fbde5ccac5735929843b7a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-192322Z-native-memo-modify/native-runtime.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-1",
+      "kind": "OTHER",
+      "sha256": "fbca7572920b518cbb0162ec82307e806f0430b41dccdacb143a5a43f19d7ff8",
+      "source_revision": "13139d6cd03340bff7fbde5ccac5735929843b7a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-192322Z-native-memo-modify/SDK-build.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-2",
+      "kind": "OTHER",
+      "sha256": "26bc140174c886be03bf0e88f484bb7a68abf7610e7b6b2cd6b0a36306b03710",
+      "source_revision": "13139d6cd03340bff7fbde5ccac5735929843b7a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-192322Z-native-memo-modify/side-effect-audit.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-3",
+      "kind": "OTHER",
+      "sha256": "48d5ffb4e2a78a8e356e3164fecbe071a896c96466ad79273435af83f34157ef",
+      "source_revision": "13139d6cd03340bff7fbde5ccac5735929843b7a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-192322Z-native-memo-modify/connected-flow.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-4",
+      "kind": "OTHER",
+      "sha256": "5aac4aea9c2f03b5b6b98a85ea23c6f1a4716794b8a1bf04a318b298108e9f4e",
+      "source_revision": "13139d6cd03340bff7fbde5ccac5735929843b7a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-192322Z-native-memo-modify/module-contracts.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-5",
+      "kind": "OTHER",
+      "sha256": "e1926ded32f04e99ab34f9d958ac881c81edb4010f1f58296478dcbba821da08",
+      "source_revision": "13139d6cd03340bff7fbde5ccac5735929843b7a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-192322Z-native-memo-modify/module-coverage.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-6",
+      "kind": "OTHER",
+      "sha256": "383cd1657c227283d55d65990f7a0e29e3732ed5fdd36eb1c6705eccc64bbb32",
+      "source_revision": "13139d6cd03340bff7fbde5ccac5735929843b7a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-192322Z-native-memo-modify/gap-register.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-7",
+      "kind": "OTHER",
+      "sha256": "652bbf62db32d62cf1c7e4e856443cc65bc2b363659d7a04251ec8e6ea4fc0aa",
+      "source_revision": "13139d6cd03340bff7fbde5ccac5735929843b7a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-192322Z-native-memo-modify/publication-preflight.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-8",
+      "kind": "OTHER",
+      "sha256": "7e69bcd4f5d60f7172d17b8998e7fccde8d9fee35e9df7aeced176c4f2884fb9",
+      "source_revision": "13139d6cd03340bff7fbde5ccac5735929843b7a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-192322Z-native-memo-modify/publication-actions.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "work-native-memo-20261015",
+  "executor_run_id": "APA-CLAIM-NATIVE-MEMO-20261015T160958Z",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-15T19:23:22Z",
+  "idempotency_key": "sha256:3994cb86ade7b90750bcaa070b38930c63f76d00c9099d9dfa197a33a7fcca38",
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "next_substep": "APA-P70.A11.S03",
+  "phase": "LIVE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261015-192322Z-native-memo-modify",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "Publication only:no native changes. Evidence from explicitly authorized409copy cycle:ShellLIVE,RailingPARTIAL,CWnoeffect;approved material recovery unsupported.",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "sdk": "Existing assembly/MEP memo extensions full Release not installed",
+    "source_branch": "feature/apa-native-memo-edit-20261015",
+    "tapir": "Same DynamicCommands SceneWriter SQLite and source-reviewed setters; no quantity call"
+  },
+  "source_revisions": [
+    {
+      "revision": "13139d6cd03340bff7fbde5ccac5735929843b7a",
+      "source_sha": "13139d6cd03340bff7fbde5ccac5735929843b7a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/109"
+    }
+  ],
+  "started_at": "2026-10-15T16:09:58Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A11.S03"
+}

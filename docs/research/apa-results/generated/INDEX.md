@@ -63,5 +63,6 @@ Generated projection from immutable V2 runs. Legacy reports remain in ARTIFACT_R
 | [APA-RUN-20261015-105500Z-native-original-reopen](../runs/2026-10-15/APA-RUN-20261015-105500Z-native-original-reopen/REPORT.md) | APA-P70.A11.S03 | LIVE | EVIDENCE_READY |
 | [APA-RUN-20261015-123508Z-native-linked-data](../runs/2026-10-15/APA-RUN-20261015-123508Z-native-linked-data/REPORT.md) | APA-P70.A11.S03 | LIVE | EVIDENCE_READY |
 | [APA-RUN-20261015-140914Z-native-parametric-mep](../runs/2026-10-15/APA-RUN-20261015-140914Z-native-parametric-mep/REPORT.md) | APA-P70.A11.S03 | LIVE | EVIDENCE_READY |
+| [APA-RUN-20261015-192322Z-native-memo-modify](../runs/2026-10-15/APA-RUN-20261015-192322Z-native-memo-modify/REPORT.md) | APA-P70.A11.S03 | LIVE | EVIDENCE_READY |
 
 Publication receipts are in ../receipts/. Evidence status is not publication status.

@@ -1,0 +1,26 @@
+{
+  "schema": "APA_NATIVE_MEMO_BUILD_V1",
+  "status": "FULL_RELEASE_BUILD_PASS_NOT_INSTALLED",
+  "implementationCommit": "bc241f54ba463f305d6e45178427ba79871271f3",
+  "buildIdentity": "914efbad54e38150456eb516299b0c9b77e4fd7e47f8f08b328deb8124ae5623",
+  "apxSHA256": "84841037512024d1a2df5832453968422c1046575fd461a3c7555745ed3289ba",
+  "apxBytes": 3423744,
+  "buildLogSHA256": "c0ae305fa9cc5d18352cf6610c9dfe7a55f6b546ba4b14b1d6fc2d2e772d4bc9",
+  "initialCompilerAttempt": "SANDBOX_PDB_MANAGER_ERROR;ESCALATED_FULL_RELEASE_PASS",
+  "nativeContracts": 18,
+  "newCommandNames": 0,
+  "installed": false,
+  "offlineTestsRun": false,
+  "sdkImplementationFiles": {
+    "archicad-addon/Sources/NativeModuleCommands.cpp": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72",
+    "archicad-addon/Sources/NativeExtendedModules.cpp": "d9972a9e22d0d06857e62ff715fc6925072d2f76907aa7f5501c953247992331",
+    "archicad-addon/Sources/NativeExtendedModules.hpp": "e2536aef489472b34d81ff35a5f6c6750f703aed508ce4917c7176015d48cf05",
+    "archicad-addon/Sources/NativeExtendedSchemas.inc": "a62ff44310c0c4e6d1decb0193f872acc373ee2371fa3224bf8541f710e97e31",
+    "archicad-addon/Sources/NativeQuantityFields.inc": "470d052f2cc23bc0536efc658e7a1d9840bdcc214d500b0709e598e805f58f53",
+    "archicad-addon/Sources/NativeLibraryDefaults.inc": "4afeb0b9e314506740ddd92320ada17ac070fafdc36cc588dc9812221bad3144",
+    "archicad-addon/Sources/NativeAssemblyCommands.inc": "34da20beefb90e967533620e750b16915e9ae96bb8405295433d14a97eda39c3",
+    "archicad-addon/Sources/NativeAssemblyModify.inc": "cd038626931ae6903bb7df7d7a0490fb6e6e1976e79ab05d92048c21da056d70",
+    "archicad-addon/Sources/NativeAssemblyMemo.inc": "d01a5c37550bd6790f65e523d6dc40ccbf41ba57f9f63e23c9c6e7f620a0f6fe",
+    "archicad-addon/Sources/NativeMEPTopology.inc": "1cc29c9858287e0437c28bc1503920ea40fb52b25e966ef24d3bbe910e103558"
+  }
+}
