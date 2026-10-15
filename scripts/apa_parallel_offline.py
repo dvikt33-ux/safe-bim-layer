@@ -17,11 +17,27 @@ def modules():
 
 
 def weight(path):
-    if path.name.startswith("test_apa_graph_matrix_"):
-        return 128  # Two parametrized functions * 64 distinct topology masks.
+    """Estimate parametrized pytest cases statically for balanced job partitioning."""
     tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
-    return max(1, sum(isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))
-                      and n.name.startswith("test_") for n in ast.walk(tree)))
+    def cases(fn):
+        factor = 1
+        for deco in fn.decorator_list:
+            if not (isinstance(deco, ast.Call) and isinstance(deco.func, ast.Attribute)
+                    and deco.func.attr == "parametrize" and len(deco.args) >= 2):
+                continue
+            arg = deco.args[1]
+            if isinstance(arg, (ast.List, ast.Tuple)):
+                factor *= max(1, len(arg.elts))
+            elif (isinstance(arg, ast.Call) and isinstance(arg.func, ast.Name)
+                  and arg.func.id == "range" and
+                  1 <= len(arg.args) <= 3 and
+                  all(isinstance(x, ast.Constant) and type(x.value) is int for x in arg.args)
+                  and not arg.keywords):
+                factor *= max(1, len(range(*(x.value for x in arg.args))))
+        return factor
+    return max(1, sum(cases(n) for n in ast.walk(tree)
+                      if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))
+                      and n.name.startswith("test_")))
 
 
 def partition(files, shards):
