@@ -1,0 +1,132 @@
+{
+  "schema": "APA_PR59_INTERRUPTED_RECOVERY_PROOF_V1",
+  "provenance": "RECONSTRUCTED_FROM_PUBLISHED_GITHUB; NOT_ORIGINAL_WORK_FILE",
+  "snapshot_date": "2026-10-12",
+  "project": "dvikt33-ux/safe-bim-layer",
+  "source_branch": "feature/apa-native-beam-mep-20261012",
+  "source_head": "744e0bd184a11f1de4a1cf16382d21aec6f8cfca",
+  "source_pr": 59,
+  "source_pr_state_at_snapshot": "OPEN_DRAFT",
+  "source_base_branch": "feature/apa-construction-junctions-20261012",
+  "published_research_branch": "research/apa-verified-results-hub-20261010",
+  "published_research_head_at_snapshot": "47d1b9c80cb2e069432b412d9efb41da2ac8a6e3",
+  "native_evidence_run": "APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon",
+  "published_report": "docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon/REPORT.md",
+  "published_receipt": "docs/research/apa-results/receipts/APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon.json",
+  "published_code_readback": "docs/research/apa-results/native/APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon/code-readback.json",
+  "published_native_acceptance": "docs/research/apa-results/native/APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon/acceptance.json",
+  "commit_with_raw_summary": "47b0158f9a5bfbe63ad76cb4c3bedf084f1bb7b5",
+  "commit_with_publisher_receipt": "586c781c5bf185d4e14c9e0b9ba75ff30f97d363",
+  "publication": {
+    "receipt_status": "DONE_PUBLISHED",
+    "scope": "REPORT_PUBLICATION_ONLY_NOT_CONTROLLER_TASK_COMPLETION",
+    "readback_verified": true,
+    "indexed": true,
+    "publisher_run": {
+      "id": 38265734858,
+      "conclusion": "success"
+    }
+  },
+  "offline_ci": {
+    "workflow": "Offline Archicad schema contracts",
+    "run_id": 38265044684,
+    "url": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38265044684",
+    "head": "744e0bd184a11f1de4a1cf16382d21aec6f8cfca",
+    "conclusion": "success",
+    "linux": {
+      "job_id": 114864972142,
+      "conclusion": "success",
+      "reported_test_count": 455
+    },
+    "windows": {
+      "job_id": 114864972311,
+      "conclusion": "success",
+      "reported_test_count": 455
+    },
+    "local_windows_host_tests": {
+      "reported_test_count": 455,
+      "reported_result": "PASS",
+      "independently_rerun": false
+    }
+  },
+  "live_claims_from_published_executor_evidence_only": {
+    "native_beams": "REPORTED_LIVE_PASS",
+    "beam_contact_cm2": 75,
+    "mep_reference_diameter_m": 0.2,
+    "mep_terminal_connection": "REPORTED_LIVE_PASS",
+    "saved_reopened_guids": 107,
+    "baseline_guids_preserved": 96,
+    "ifc_elements": 50,
+    "bounds_verified": "43/43",
+    "independent_new_live_run_in_recovery": "NOT_RUN",
+    "raw_pln_ifc_and_full_native_trace": "LOCAL_ONLY_NOT_PUBLISHED"
+  },
+  "controller": {
+    "revision_at_snapshot": 113,
+    "task_id": "APA-P70.A11.S03",
+    "status_at_snapshot": "IN_PROGRESS",
+    "owner": "work-native-beam-mep-20261012",
+    "lease_until_utc": "2026-10-12T18:42:35Z",
+    "do_not_override_lease": true
+  },
+  "unrecovered_work_files": [
+    "native-followon-ci-proof.json",
+    "native_followon_package_setup.py",
+    "native_followon_archive_preview.ps1"
+  ],
+  "recovery_policy": "This is a clearly labelled substitute snapshot, not recovery of inaccessible original file bytes. Packaging is code-preview only: no installation, Archicad, PLN, APX or IFC mutations.",
+  "source_blobs": [
+    {
+      "path": "AGENTS.md",
+      "blob": "1bf56654a835f95e2e55e830092faae69090720b"
+    },
+    {
+      "path": "scripts/archicad_connected_components.py",
+      "blob": "c5a99f59a90369ff622807574677cf11ca0a2225"
+    },
+    {
+      "path": "scripts/archicad_connected_ifc.py",
+      "blob": "7ae4e676bd6ffacdc5863f85e7bfb1898486512d"
+    },
+    {
+      "path": "scripts/archicad_details_context.py",
+      "blob": "5b86f1592c5224e9affc746b9ce5ac223ea911aa"
+    },
+    {
+      "path": "scripts/archicad_functional_expansion.py",
+      "blob": "1f6a6db87b4871deefecb3da9f9691debbf38d6"
+    },
+    {
+      "path": "scripts/archicad_native_mep_network.py",
+      "blob": "7c723b4de7b032848776569858d1eaeabb6b747e"
+    },
+    {
+      "path": "scripts/archicad_native_operations.py",
+      "blob": "78db36ce20c67a3fca7e30a11236a34203118820"
+    },
+    {
+      "path": "scripts/archicad_project_accelerator.py",
+      "blob": "a23e55fb61753a998081b3bc6fd37f455a220852"
+    },
+    {
+      "path": "scripts/archicad_scene_run.py",
+      "blob": "dc6ed8d58d9193c9717e849c2a3fecaff54edac8"
+    },
+    {
+      "path": "scripts/archicad_native_beam_details.py",
+      "blob": "fc71a78c3940672a15c37ded1fb38f205d958df7"
+    },
+    {
+      "path": "tests/test_archicad_connected_components.py",
+      "blob": "29037714db7bb197b06b7dfa37fb5b7e3d368297"
+    },
+    {
+      "path": "tests/test_archicad_native_first_followon.py",
+      "blob": "61693af579efbb018f1d501afa0d4d8bebc1f38e"
+    },
+    {
+      "path": "docs/research/apa_native_beam_mep_followon_2026-10-12.md",
+      "blob": "bfadde7ddeb46c061140f4eadc4a02629e1abb82"
+    }
+  ]
+}
