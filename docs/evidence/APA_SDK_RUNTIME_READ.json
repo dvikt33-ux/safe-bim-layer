@@ -69,8 +69,10 @@
       "nativeFactsVerified": true,
       "elapsedSeconds": 0.0031044999923324212,
       "resultSHA256": "d75726ad9a6f361397675f86712e4faeff6b140b2c42f26c0366e8207fc76dec",
-      "scope": "REAL_ROOF_SLAB_POLYGON_COORDINATES_STORY_READBACK_NOT_RESULTANT_BREP",
-      "polygons": 4
+      "scope": "REAL_ROOF_SLAB_COORDINATES_HOLES_STORY_MATCH_EXISTING_NATIVE_DETAILS_NOT_RESULTANT_BREP",
+      "polygons": 4,
+      "independentCoordinateMatch": true,
+      "independentHoleMatch": true
     },
     {
       "command": "AddOn.TapirCommand.GetNativeWorkingUnitsV1",

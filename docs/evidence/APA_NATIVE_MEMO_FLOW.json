@@ -1,0 +1,51 @@
+{
+  "schema": "APA_NATIVE_MEMO_FLOW_V1",
+  "status": "WORKFLOW_CALLABLE_VERIFIED",
+  "sourceMemoSHA256": "d75726ad9a6f361397675f86712e4faeff6b140b2c42f26c0366e8207fc76dec",
+  "preparedCommands": 382,
+  "nativePrepared": 372,
+  "localPrepared": 10,
+  "sourceElements": 4,
+  "convertedElements": 4,
+  "preservedHoles": 2,
+  "omittedReasons": [],
+  "polygonMeasures": [
+    {
+      "area": 85.48999999999995,
+      "perimeter": 37.19999999999999
+    },
+    {
+      "area": 79.08999939189998,
+      "perimeter": 52.000000193999995
+    },
+    {
+      "area": 62.0,
+      "perimeter": 48.0
+    },
+    {
+      "area": 85.48999999999995,
+      "perimeter": 37.19999999999999
+    }
+  ],
+  "spatialRelationCount": 3,
+  "sourcePlanHash": "a728479de8a1dd0c4ec25344d40e7f89c19417432b3afe4f1033d8e0473fc473",
+  "steps": [
+    {
+      "id": "memo",
+      "command": "AddOn.APAAnalysis.MemoPolygonInputs",
+      "resultHash": "2f5372e3b0549c17b8c72ee786c052232689c6d3d247770d91d6889cc621aadb",
+      "status": "CALLABLE_VERIFIED"
+    },
+    {
+      "id": "relations",
+      "command": "AddOn.APAAnalysis.PolygonRelations",
+      "resultHash": "f00f42b5bf6a718472f8d53884e6a0d4cd9b22150583fd9efe79727159cbaca2",
+      "status": "CALLABLE_VERIFIED"
+    }
+  ],
+  "sourceDomain": "CAPTURED_NATIVE_PARAMETER_MEMO",
+  "executor": "Existing BIM Graph and local provider dispatch",
+  "nativeModelWrites": 0,
+  "geometryAuthority": "2D_PARAMETER_FOOTPRINTS_NOT_RESULTANT_BREP_OR_3D_COLLISION",
+  "engineering": "NOT_VERIFIED"
+}

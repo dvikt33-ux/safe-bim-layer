@@ -162,6 +162,11 @@ def connect_functional_modules(router, manifest_path=None):
         raise ValueError('CODE_OWNED_MODULE_CONTRACT_REQUIRED')
     if manifest['sdkImplementationSHA256']!=hashlib.sha256((root/'archicad-addon/Sources/NativeModuleCommands.cpp').read_bytes().replace(b'\r\n',b'\n')).hexdigest():
         raise ValueError('SDK_MODULE_SOURCE_DRIFT')
+    if manifest.get('sdkImplementationFiles',{})!=trusted.get('sdkImplementationFiles',{}):
+        raise ValueError('CODE_OWNED_SDK_FILES_REQUIRED')
+    for source,expected_hash in manifest.get('sdkImplementationFiles',{}).items():
+        if hashlib.sha256((root/source).read_bytes().replace(b'\r\n',b'\n')).hexdigest()!=expected_hash:
+            raise ValueError('SDK_MODULE_SOURCE_DRIFT:'+source)
     for namespace,commands in manifest['sdkProviders'].items():
         missing={name:row for name,row in commands.items() if 'AddOn.'+namespace+'.'+name not in router.catalog['commands'] and not (namespace=='TapirCommand' and name in router.catalog['commands'])}
         if missing:router.add_provider(namespace,missing,'NativeModuleCommands.cpp')
@@ -173,8 +178,9 @@ def connect_functional_modules(router, manifest_path=None):
                     raise ValueError('SDK_MODULE_CONTRACT_DRIFT:'+key)
                 previous=router.contract_hash(key)
                 current.update(row,previousSourceContractHash=previous,sourceContractUpgrade='EXPLICIT_SDK_BUILD_CONTRACT_NOT_RUNTIME_ACCEPTANCE')
-            current['implementationSHA256']=manifest['sdkImplementationSHA256']
-            router.review_policy(key,'READ_ONLY','READ_ONLY',dict(source='Archicad29 public SDK implementation; model read only',sha256=manifest['sdkImplementationSHA256']))
+            implementation_hash=row.get('implementationSHA256',manifest['sdkImplementationSHA256'])
+            current['implementationSHA256']=implementation_hash
+            router.review_policy(key,'READ_ONLY','READ_ONLY',dict(source='Archicad29 public SDK implementation; model read only',sha256=implementation_hash))
     local=attach(router,manifest['local'])
     router.fingerprint=RUN.digest(router.catalog)
     return dict(local=local,sdkContracts=sum(len(x) for x in manifest['sdkProviders'].values()),runtimeRegistration='NOT_VERIFIED',nativePermission=False)

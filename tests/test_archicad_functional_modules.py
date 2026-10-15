@@ -8,9 +8,21 @@ def connected():
     r=DynamicCommands(json.loads((ROOT/'schemas/accelerator/mass-capabilities/commands.json').read_text(encoding='utf8')))
     A.connect_functional_modules(r);return r
 class FunctionalModules(unittest.TestCase):
+    def test_memo_flow_preserves_holes_and_excludes_curves_and_other_tools(self):
+        from apa_native_memo_flow import run
+        points=[[0,0],[6,0],[6,6],[0,6],[0,0],[2,2],[4,2],[4,4],[2,4],[2,2]]
+        row=dict(elementId={'guid':'test-slab'},nativeTypeId=8,homeStory=0,
+            coordinates=[dict(index=i+1,x=p[0],y=p[1]) for i,p in enumerate(points)],contourEnds=[5,10],arcs=[])
+        curved=dict(row,elementId={'guid':'curve'},arcs=[dict(beginIndex=1,endIndex=2,angle=1)])
+        other=dict(row,elementId={'guid':'shell'},nativeTypeId=44)
+        proof=run(dict(elements=[row,curved,other]))
+        self.assertEqual(proof['convertedElements'],1);self.assertEqual(proof['preservedHoles'],1)
+        self.assertEqual(proof['polygonMeasures'][0]['area'],32)
+        self.assertIn('CURVED_EDGES_NOT_LINEARIZED',proof['omittedReasons'])
+        self.assertEqual(proof['nativeModelWrites'],0)
     def test_attachment_drift_idempotence_and_no_native_permission(self):
         r=connected();before=r.fingerprint;A.connect_functional_modules(r);self.assertEqual(r.fingerprint,before)
-        self.assertEqual(len(r.catalog['commands']),377)
+        self.assertEqual(len(r.catalog['commands']),382)
         manifest=json.loads((ROOT/'schemas/accelerator/functional-modules.json').read_text(encoding='utf8'));manifest['local']['implementationSHA256']='0'*64
         with tempfile.TemporaryDirectory() as temp:
             path=Path(temp)/'manifest.json';path.write_text(json.dumps(manifest))

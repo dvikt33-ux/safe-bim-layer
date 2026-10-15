@@ -56,7 +56,22 @@ def build():
     add('IFCValidate',obj({'path':path,'express_rules':B},['path']),obj({'schema':S,'status':S,'issues':arr(dict(type='object',additionalProperties=S)),'scope':S}),['ifcopenshell'],'IfcOpenShell schema/attribute and optional EXPRESS validation; not engineering acceptance.')
     add('IFCGeometry',obj({'path':path,'guids':arr(S,uniqueItems=True)}),obj({'elements':arr(obj({'ifcId':S,'status':S,'bounds':arr(arr(N,minItems=2,maxItems=2),minItems=3,maxItems=3),'area':N,'volume':N,'source':S,'reason':S},['ifcId','status'])),'scope':S,'engineering':S}),['ifcopenshell'],'IfcOpenShell native geometry kernel world-coordinate bounds, surface area and volume; not Archicad readback.')
     add('IFCExchangeFacts',obj({'path':path}),obj({'schema':S,'voidRelations':arr({'type':'object'}),'nativePortRelationsExported':arr({'type':'object'}),'materialAssignments':arr({'type':'object'}),'analyticalMembers':arr({'type':'object'}),'analysisModels':arr({'type':'object'}),'loadGroupCount':I,'analyticalExchangeStatus':S,'safStatus':S,'semanticCompatibility':S,'calculationResults':S}),['ifcopenshell'],'Reuse existing APA IFC exchange facts adapter; no new analytical engine.')
-    manifest=dict(schema='APA_FUNCTIONAL_MODULES_V1',sdkImplementationSHA256=sha(cpp),sdkProviders={'TapirCommand':native,'AddOnCommandTest':{'ProtectionInfoCommand':protection}},local=dict(implementationSHA256=sha(ROOT/'scripts/archicad_local_modules.py'),commands=local,dependencies=deps),newNativeContracts=5,newLocalCatalogEntries=9,newAnalyticalCapabilities=6,reusedExistingAPALocalUtilities=3,reusedDevKitCommands=1)
+    from build_extended_module_contracts import contracts,write_schemas
+    write_schemas();native.update(contracts())
+    sdk_files={p:sha(ROOT/p) for p in ['archicad-addon/Sources/NativeModuleCommands.cpp',
+        'archicad-addon/Sources/NativeExtendedModules.cpp','archicad-addon/Sources/NativeExtendedModules.hpp',
+        'archicad-addon/Sources/NativeExtendedSchemas.inc','archicad-addon/Sources/NativeQuantityFields.inc']}
+    for row in native.values():
+        row.setdefault('implementationSource','archicad-addon/Sources/NativeModuleCommands.cpp')
+        row['implementationSHA256']=sdk_files[row['implementationSource']]
+    protection.update(implementationSource='archicad-addon/Sources/NativeModuleCommands.cpp',implementationSHA256=sha(cpp))
+    add('MemoPolygonInputs',obj({'memo':obj({'elements':arr({'type':'object'})},['elements'],True)}),
+        obj({'polygons':arr(obj({'id':S,'outline':outline,'holes':arr(outline)})),
+             'nativeBindings':arr(obj({'id':S,'homeStory':I,'nativeTypeId':I})),
+             'omitted':arr(obj({'index':I,'reason':S,'guid':S},['index','reason'])),
+             'authority':S,'engineering':S}),[],
+        'Convert captured straight native Roof/Slab memo contours and holes to existing Shapely inputs; arcs and other types remain explicitly unsupported.')
+    manifest=dict(schema='APA_FUNCTIONAL_MODULES_V1',sdkImplementationSHA256=sha(cpp),sdkImplementationFiles=sdk_files,sdkProviders={'TapirCommand':native,'AddOnCommandTest':{'ProtectionInfoCommand':protection}},local=dict(implementationSHA256=sha(ROOT/'scripts/archicad_local_modules.py'),commands=local,dependencies=deps),newNativeContracts=9,newLocalCatalogEntries=10,newAnalyticalCapabilities=7,reusedExistingAPALocalUtilities=3,reusedDevKitCommands=1)
     dest=ROOT/'schemas/accelerator/functional-modules.json';dest.write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
     return manifest
 if __name__=='__main__':build()
