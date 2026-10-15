@@ -50,8 +50,8 @@ def capture_mep_facts(api, router, element_ids=(), routing_ids=(), include_syste
     return out
 
 
-def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids=(), memberships=(), navigator_bindings=None, layout_bindings=(), attributes=None, envelopes=None, ifc_ids=None, mep=None, mep_topology=None):
-    nodes, edges, evidence, omitted, connection_facts = set(), set(), [], [], []
+def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids=(), memberships=(), navigator_bindings=None, layout_bindings=(), attributes=None, envelopes=None, ifc_ids=None, ifc_properties=None, gdl_parameters=(), mep=None, mep_topology=None):
+    nodes, edges, evidence, omitted, connection_facts, property_facts = set(), set(), [], [], [], []
 
     def guid(value):
         value = value.get('guid') if isinstance(value, dict) else None
@@ -120,7 +120,7 @@ def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids
     # header in this capture; neither names nor positive numbers prove identity.
     attribute_index = {}
     for kind, reply in (attributes or {}).items():
-        if kind not in {'BuildingMaterial', 'Surface', 'Composite'}:
+        if kind not in {'BuildingMaterial', 'Surface', 'Composite', 'Profile'}:
             continue
         for item in reply.get('attributes', []):
             identity, index = guid(item.get('attributeId')), item.get('index')
@@ -195,12 +195,43 @@ def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids
             if item.get('overridden') is True:
                 attribute('Surface', item.get('surfaceIndex'), target, 'NATIVE_ENVELOPE_SURFACE_OVERRIDE')
 
+    ifc_by_native={}
     for row in (ifc_ids or {}).get('elementIFCIds', []):
         source, identity = guid(row.get('elementId')), row.get('ifcId')
         if source and isinstance(identity, str) and identity.strip() and 'error' not in row:
+            ifc_by_native.setdefault(source,set()).add(identity)
             edge(source, 'IFC:' + identity, 'NATIVE_IFC_IDENTITY_NOT_EXPORT_ACCEPTANCE')
         else:
             omitted.append('IFC_IDENTITY_MISSING_OR_NATIVE_ERROR')
+
+    for row in (ifc_properties or {}).get('elementIFCProperties',[]):
+        identities=ifc_by_native.get(guid(row.get('elementId')),set())
+        if len(identities)!=1 or 'error' in row:
+            omitted.append('IFC_PROPERTY_NATIVE_IDENTITY_MISSING_OR_AMBIGUOUS');continue
+        identity=next(iter(identities))
+        for item in row.get('ifcProperties',[]):
+            if not all(isinstance(item.get(k),str) for k in ('propertySetName','name','value')):
+                omitted.append('IFC_PROPERTY_PROVIDER_STRING_CONTRACT_MISSING');continue
+            label=json.dumps([item['propertySetName'],item['name']],ensure_ascii=False,separators=(',',':'))
+            key='IFC_PROPERTY:'+identity+':'+hashlib.sha256(label.encode()).hexdigest()
+            edge('IFC:'+identity,key,'NATIVE_IFC_PROPERTY_ACCESSOR_REFERENCE')
+            property_facts.append(dict(node=key,propertySetName=item['propertySetName'],name=item['name'],value=item['value'],authority='PROVIDER_SERIALIZED_STRING_NOT_TYPED_IFC_EXPORT_ACCEPTANCE'))
+    for binding in gdl_parameters:
+        owner=guid(binding.get('elementId'));part=guid(binding.get('libraryPartId'))
+        if not owner:omitted.append('GDL_PLACED_OWNER_IDENTITY_MISSING');continue
+        if not part:omitted.append('GDL_LIBRARY_PART_IDENTITY_NOT_CAPTURED_NO_NAME_MATCH')
+        for parameter in binding.get('parameters',[]):
+            if not isinstance(parameter.get('name'),str) or not isinstance(parameter.get('index'),int):
+                omitted.append('GDL_PARAMETER_IDENTITY_MISSING');continue
+            label=json.dumps([parameter['index'],parameter['name']],ensure_ascii=False,separators=(',',':'))
+            key='GDL_PARAMETER:'+owner+':'+hashlib.sha256(label.encode()).hexdigest()
+            edge(key,owner,'NATIVE_PLACED_PARAMETER_DEPENDENCY')
+            if part:edge('LIBRARY_PART:'+part,key,'NATIVE_LIBRARY_PARAMETER_DEFINITION')
+            attribute_kind={'BuildingMaterial':'BuildingMaterial','Material':'Surface','Profile':'Profile'}.get(parameter.get('type'))
+            if attribute_kind:
+                values=parameter.get('value');values=values if isinstance(values,list) else [values]
+                for value in values:
+                    if isinstance(value,int) and not isinstance(value,bool):attribute(attribute_kind,value,key,'NATIVE_TYPED_GDL_ATTRIBUTE_PARAMETER')
 
     resolved = {}
     for row in (navigator_bindings or {}).get('items', []):
@@ -238,7 +269,7 @@ def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids
         else:
             omitted.append('DRAWING_SOURCE_NOT_IN_CAPTURED_OR_EXPLICITLY_RESOLVED_NAVIGATOR')
     return dict(nodes=sorted(nodes), edges=[list(e) for e in sorted(edges)],
-                relationshipEvidence=evidence, omitted=omitted, connectionFacts=connection_facts,
+                relationshipEvidence=evidence, omitted=omitted, connectionFacts=connection_facts, ifcPropertyFacts=property_facts,
                 authority='CAPTURED_NATIVE_RELATIONSHIPS_NOT_PHYSICAL_CONTACT')
 
 

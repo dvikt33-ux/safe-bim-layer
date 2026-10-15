@@ -1,0 +1,23 @@
+{
+  "schema": "APA_NATIVE_PARAMETRIC_BUILD_V1",
+  "status": "FULL_RELEASE_BUILD_PASS_NOT_INSTALLED",
+  "platform": "Windows11_Archicad29",
+  "implementationCommit": "d1c71d82d2e1339903d1941bcb24c82b8cc69b18",
+  "buildIdentity": "18a238ec1365294d5065b187a6ff552845b6aed0d1cc2e8c8d9f2efaef5b3d23",
+  "apxSHA256": "4e6cdf2a59e46c50b78f52558fe2e9f3cd19a51c4b1142898dda29d2bcc3aead",
+  "apxBytes": 3397632,
+  "buildLogSHA256": "94c046c8228e7d626d23ee1177830e807ba36f2e95208e9b6f738135ddbb96fc",
+  "productSourceSHA256": {
+    "archicad-addon/Sources/NativeAssemblyModify.inc": "20ae21f61574b8c814536989328408c5e422505c242dd96e4fca38df44b7f566",
+    "archicad-addon/Sources/NativeMEPTopology.inc": "7c3b7e0748f9d8987ddc7a680528fe2dc33ade40b8cea96ab27947b07a177c60",
+    "scripts/apa_native_parameter_edit.py": "503c9a49894ba947b1775bb16fdb9a011976ec6b460d3d9ca3e3658be65fd0e7",
+    "scripts/apa_native_dependency_flow.py": "6f3e54ecbbaafbfdb3d2cb285e20d7f667854e5b4eba53ec053d811e1fb9eacf"
+  },
+  "newSDKContracts": 3,
+  "assemblyKinds": 9,
+  "installed": false,
+  "runtimeRegistered": false,
+  "nativeModify": "NOT_VERIFIED",
+  "offlineTestsRun": false,
+  "quantityEngineCalled": false
+}

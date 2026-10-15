@@ -1,13 +1,13 @@
 {
   "schema": "APA_FUNCTIONAL_MODULE_COVERAGE_V1",
-  "basis": "PR97 native positives and restored409GUID readback retained. Current package adds native IFC/material dependency flow and enhanced existing SDK output fields; no new command names or offline tests.",
+  "basis": "PR104 exact base retained. Current package adds shared native parameter MODIFY and missing public MEP topology read; current placed GDL/material/IFC dataflow and three native sample visual checks. No offline tests or APX installation.",
   "counters": {
-    "nativeAndOfficialPrepared": 378,
+    "nativeAndOfficialPrepared": 381,
     "localPrepared": 10,
-    "totalPrepared": 388,
+    "totalPrepared": 391,
     "currentNativeCompatible": 337,
-    "newNativeSDKContracts": 15,
-    "sourceOnlyNativeRuntime": 41,
+    "newNativeSDKContracts": 18,
+    "sourceOnlyNativeRuntime": 44,
     "newLocalAnalyticalCapabilities": 7,
     "existingAPALocalUtilitiesNowRoutable": 3,
     "retainedCandidateBuildCommands": 12,
@@ -25,7 +25,7 @@
     "quantityRuntimeQuarantined": 1,
     "latestSafeBinaryInstalled": false,
     "newlyPreparedSDKGroupsThisPackage": 3,
-    "newSDKGroupsCallableThisPackage": 3,
+    "newSDKGroupsCallableThisPackage": 0,
     "latestCandidateRuntime": "NATIVE_CREATE_READ_SAVE_OPEN_PASS_ORIGINAL_APX_RESTORED_FINAL_REOPEN_NOT_VERIFIED",
     "enhancedSDKGroupsCallableThisPackage": 3,
     "testedComponentCandidateAddOnRegistered": 288,
@@ -34,7 +34,7 @@
     "testedPositiveCandidateTapirExported": 290,
     "testedPositiveCandidateAddOnRegisteredIncludingPriorDevKit": 291,
     "testedPositiveCandidateNativeCompatibleIncludingPriorDevKit": 364,
-    "nativeModelWritesThisPackage": 3
+    "nativeModelWritesThisPackage": 0
   },
   "groups": {
     "BIM_element_management": {
@@ -204,6 +204,28 @@
         "GetNativeQuantityPreflightV1"
       ],
       "boundary": "Quantity engine is QUARANTINED after an actual AC29 access violation; contract preparable, dispatch/native execution refused. Captured straight Roof/Slab contours pass into existing Shapely; arcs explicitly unsupported; no native or engineering mutation."
+    },
+    "parametric_native_edit": {
+      "new": [
+        "GetNativeAssemblyEditStateV1",
+        "ModifyNativeAssemblyV1"
+      ],
+      "executor": "Existing SceneWriter and SQLite",
+      "availability": "BUILD_PASS_NOT_INSTALLED",
+      "nativeMutation": "NOT_VERIFIED",
+      "supportedKinds": 9
+    },
+    "mep_ownership_topology": {
+      "new": [
+        "GetNativeMEPTopologyV1"
+      ],
+      "existing": [
+        "GetMEPPorts",
+        "GetMEPRoutingElements",
+        "GetMEPDistributionSystems"
+      ],
+      "availability": "BUILD_PASS_NOT_INSTALLED",
+      "runtimePositive": "NOT_VERIFIED_NO_CURRENT_SAMPLE"
     }
   },
   "providers": [
@@ -743,20 +765,63 @@
     }
   ],
   "currentPackage": {
-    "nativeIFCCommandsCalled": 3,
-    "nativeElementsRead": 13,
-    "nonemptyIFCIDs": 12,
-    "IFCPropertiesRead": 61,
-    "nativeModelWrites": 0,
-    "enhancedSDKContractsBuilt": 3,
-    "enhancedSDKContractsLiveVerified": 0,
-    "newCommandNames": 0,
+    "preparedTotal": 391,
+    "preparedByAPI": {
+      "tapir": 276,
+      "official-json": 73,
+      "addon-json": 32,
+      "local-python": 10
+    },
+    "newSDKContracts": 3,
+    "sdkNativeContractsInManifest": 18,
+    "newRuntimeRegistered": 0,
+    "newRuntimeCallable": 0,
+    "assemblyKindsSourceBuild": 9,
+    "placedGDLParametersRead": 49,
+    "nativeIFCPropertiesRead": 7,
+    "currentGraphNodes": 60,
+    "currentGraphEdges": 59,
+    "materialImpactNodes": 11,
+    "visualNativeSamples": 3,
     "APXInstalled": false,
+    "nativeModelWrites": 0,
     "offlineTests": "NOT_RUN_USER_INSTRUCTION",
-    "retained409CopyOriginalRuntimeReopen": "LIVE_PASS_PRIOR_ACCEPTANCE",
-    "dataflow": "PINNED_PRIOR_COMPONENTS_PLUS_CURRENT_NATIVE_ATTRIBUTES_IFC",
-    "preparedTotal": 388,
-    "nativeSourcePrepared": 378,
-    "localPrepared": 10
+    "quantityEngine": "QUARANTINED_NOT_CALLED",
+    "IFCExport": "NOT_VERIFIED"
+  },
+  "historicalCountersBeforeThisPackage": {
+    "nativeAndOfficialPrepared": 378,
+    "localPrepared": 10,
+    "totalPrepared": 388,
+    "currentNativeCompatible": 337,
+    "newNativeSDKContracts": 15,
+    "sourceOnlyNativeRuntime": 41,
+    "newLocalAnalyticalCapabilities": 7,
+    "existingAPALocalUtilitiesNowRoutable": 3,
+    "retainedCandidateBuildCommands": 12,
+    "existingDevKitBuildCommand": 1,
+    "newSDKBuildCommands": 15,
+    "nonTapirProviderContracts": 0,
+    "testedPR88CandidateAddOnRegistered": 281,
+    "testedPR88CandidateNativeCompatible": 354,
+    "nativeSDKCallableThisPass": 9,
+    "additionalNativeFactsVerified": 4,
+    "newLocalDataflowCallable": 2,
+    "testedExtendedCandidateAddOnRegistered": 285,
+    "testedExtendedCandidateNativeCompatible": 358,
+    "newlyAddedSDKGroupsCallable": 3,
+    "quantityRuntimeQuarantined": 1,
+    "latestSafeBinaryInstalled": false,
+    "newlyPreparedSDKGroupsThisPackage": 3,
+    "newSDKGroupsCallableThisPackage": 3,
+    "latestCandidateRuntime": "NATIVE_CREATE_READ_SAVE_OPEN_PASS_ORIGINAL_APX_RESTORED_FINAL_REOPEN_NOT_VERIFIED",
+    "enhancedSDKGroupsCallableThisPackage": 3,
+    "testedComponentCandidateAddOnRegistered": 288,
+    "testedComponentCandidateNativeCompatible": 361,
+    "distinctSDKGroupsCallableAcrossPackages": 15,
+    "testedPositiveCandidateTapirExported": 290,
+    "testedPositiveCandidateAddOnRegisteredIncludingPriorDevKit": 291,
+    "testedPositiveCandidateNativeCompatibleIncludingPriorDevKit": 364,
+    "nativeModelWritesThisPackage": 3
   }
 }
