@@ -2,6 +2,8 @@
 // This is a native adapter, never a writer, retry loop or placement engine.
 #include <cmath>
 #include <string>
+#include <algorithm>
+#include <iterator>
 
 static GS::UniString AssemblyStamp(const API_Element& e){return std::to_string(e.header.modiStamp).c_str();}
 static API_Guid AssemblyAttributeGuid(API_AttrTypeID type,API_AttributeIndex index){
@@ -13,10 +15,13 @@ static GS::String AssemblyKind(const API_Element& e){switch(e.header.type.typeID
  case API_RailingID:return "Railing";case API_RailingSegmentID:return "RailingSegment";case API_RailingNodeID:return "RailingNode";
  case API_RailingRailID:return "RailingRail";case API_RailingHandrailID:return "RailingHandrail";case API_ShellID:return "Shell";default:return "UNSUPPORTED";}}
 
+#include "NativeAssemblyOwner.inc"
+
 static GSErrCode AssemblyFields(API_Element& e,API_Element& mask,const GS::ObjectState& changes,GS::ObjectState& values,GS::ObjectState& attributes,GS::Array<GS::UniString>& applied){
  GSErrCode err=NoError;
  const auto number=[&](const char* name,double& field,double low,double high,auto setMask){values.Add(name,field);if(!changes.Contains(name))return;double v=0;if(!changes.Get(name,v)||!std::isfinite(v)||v<low||v>high){err=APIERR_BADPARS;return;}field=v;setMask();applied.Push(name);};
  const auto flag=[&](const char* name,bool& field,auto setMask){values.Add(name,field);if(!changes.Contains(name))return;bool v=false;if(!changes.Get(name,v)){err=APIERR_BADPARS;return;}field=v;setMask();applied.Push(name);};
+ const auto integer=[&](const char* name,Int32& field,auto setMask){values.Add(name,field);if(!changes.Contains(name))return;Int32 v=0;if(!changes.Get(name,v)||v<1||v>4096){err=APIERR_BADPARS;return;}field=v;setMask();applied.Push(name);};
  const auto attribute=[&](const char* name,API_AttributeIndex& field,API_AttrTypeID type,auto setMask){
   attributes.Add(name,GS::ObjectState("index",GetAttributeIndex(field),"attributeId",CreateGuidObjectState(AssemblyAttributeGuid(type,field))));
   if(!changes.Contains(name))return;const auto* value=changes.Get(name);if(!value||!value->Contains("guid")){err=APIERR_BADPARS;return;}const auto guid=GetGuidFromObjectState(*value);const auto header=GetAttributeHeadFromGuid(guid);
@@ -24,6 +29,7 @@ static GSErrCode AssemblyFields(API_Element& e,API_Element& mask,const GS::Objec
  };
 #define NUM(alias,Struct,obj,member,low,high) number(alias,e.obj.member,low,high,[&](){ACAPI_ELEMENT_MASK_SET(mask,Struct,member);})
 #define BOOL(alias,Struct,obj,member) flag(alias,e.obj.member,[&](){ACAPI_ELEMENT_MASK_SET(mask,Struct,member);})
+#define INTEGER(alias,Struct,obj,member) integer(alias,e.obj.member,[&](){ACAPI_ELEMENT_MASK_SET(mask,Struct,member);})
 #define ATTR(alias,Struct,obj,member,type) attribute(alias,e.obj.member,type,[&](){ACAPI_ELEMENT_MASK_SET(mask,Struct,member);})
  switch(e.header.type.typeID){
  case API_CurtainWallID:
@@ -56,21 +62,27 @@ static GSErrCode AssemblyFields(API_Element& e,API_Element& mask,const GS::Objec
   if(e.shell.shellClass==API_ExtrudedShellID){
    NUM("extrusionXMetres",API_ShellType,shell,u.extrudedShell.extrusionVector.x,-1000000,1000000);NUM("extrusionYMetres",API_ShellType,shell,u.extrudedShell.extrusionVector.y,-1000000,1000000);NUM("extrusionZMetres",API_ShellType,shell,u.extrudedShell.extrusionVector.z,-1000000,1000000);
    NUM("beginXMetres",API_ShellType,shell,u.extrudedShell.begC.x,-1000000,1000000);NUM("beginYMetres",API_ShellType,shell,u.extrudedShell.begC.y,-1000000,1000000);NUM("beginZMetres",API_ShellType,shell,u.extrudedShell.begC.z,-1000000,1000000);
+   NUM("shapeDirectionX",API_ShellType,shell,u.extrudedShell.shapeDirection.x,-1000000,1000000);NUM("shapeDirectionY",API_ShellType,shell,u.extrudedShell.shapeDirection.y,-1000000,1000000);
    NUM("slantAngleRadians",API_ShellType,shell,u.extrudedShell.slantAngle,-6.283185307179586,6.283185307179586);NUM("shapePlaneTiltRadians",API_ShellType,shell,u.extrudedShell.shapePlaneTilt,-6.283185307179586,6.283185307179586);NUM("beginPlaneTiltRadians",API_ShellType,shell,u.extrudedShell.begPlaneTilt,-6.283185307179586,6.283185307179586);NUM("endPlaneTiltRadians",API_ShellType,shell,u.extrudedShell.endPlaneTilt,-6.283185307179586,6.283185307179586);
   }else if(e.shell.shellClass==API_RevolvedShellID){
    NUM("slantAngleRadians",API_ShellType,shell,u.revolvedShell.slantAngle,-6.283185307179586,6.283185307179586);NUM("revolutionAngleRadians",API_ShellType,shell,u.revolvedShell.revolutionAngle,0.000001,6.283185307179586);NUM("distortionAngleRadians",API_ShellType,shell,u.revolvedShell.distortionAngle,-3.141592653589793,3.141592653589793);NUM("beginAngleRadians",API_ShellType,shell,u.revolvedShell.begAngle,-6.283185307179586,6.283185307179586);
+   NUM("distortionVectorX",API_ShellType,shell,u.revolvedShell.distortionVector.x,-1000000,1000000);NUM("distortionVectorY",API_ShellType,shell,u.revolvedShell.distortionVector.y,-1000000,1000000);BOOL("segmentedSurfaces",API_ShellType,shell,u.revolvedShell.segmentedSurfaces);INTEGER("segmentsByArc",API_ShellType,shell,u.revolvedShell.segmentsByArc);INTEGER("segmentsByCircle",API_ShellType,shell,u.revolvedShell.segmentsByCircle);
+  }else if(e.shell.shellClass==API_RuledShellID){values.Add("morphingRuleId",static_cast<Int32>(e.shell.u.ruledShell.morphingRule));
   }break;
  default:return APIERR_BADID;
  }
 #undef NUM
 #undef BOOL
+#undef INTEGER
 #undef ATTR
  return err;
 }
 
 static GS::ObjectState AssemblyEditState(API_Element e){
+ if(e.header.type.typeID==API_ObjectID)return AssemblyGeneratedRailingState(e);
  API_Element mask={};GS::ObjectState values,attributes;GS::Array<GS::UniString> ignored;const auto err=AssemblyFields(e,mask,{},values,attributes,ignored);if(err!=NoError)return CreateErrorResponse(err,"Unsupported assembly edit state");
  GS::ObjectState row("elementId",CreateGuidObjectState(e.header.guid),"kind",AssemblyKind(e),"nativeTypeId",static_cast<Int32>(e.header.type.typeID),"homeStory",static_cast<Int32>(e.header.floorInd),"modificationStamp",AssemblyStamp(e),"values",values,"attributes",attributes,"associationAuthority","NOT_VERIFIED_NO_SPATIAL_INFERENCE");
+ GS::Array<GS::UniString> readOnly;if(e.header.type.typeID==API_CurtainWallID)readOnly.Push("heightMetres");if(e.header.type.typeID==API_ShellID&&e.shell.shellClass==API_RuledShellID)readOnly.Push("morphingRuleId");row.Add("readOnlyFields",readOnly);
  if(e.header.type.typeID==API_ShellID)row.Add("shellClass",static_cast<Int32>(e.shell.shellClass));
  AddAssemblyMemo(e,row);
  API_Guid root=APINULLGuid;API_HierarchicalOwnerType mode=API_RootHierarchicalOwner;API_HierarchicalElemType type=API_UnknownElemType;const auto re=ACAPI_HierarchicalEditing_GetHierarchicalElementOwner(&e.header.guid,&mode,&type,&root);row.Add("rootQueryError",static_cast<Int32>(re));if(re==NoError&&root!=APINULLGuid)row.Add("rootElementId",CreateGuidObjectState(root));return row;
@@ -98,6 +110,7 @@ GS::ObjectState ModifyNativeAssemblyV1Command::Execute(const GS::ObjectState& p,
  }
  if(changes->GetFieldCount()==0||changes->GetFieldCount()!=applied.GetSize())return CreateErrorResponse(APIERR_BADPARS,"Field not applicable to this native kind/structure; no write");
  if(e.header.type.typeID==API_ShellID&&e.shell.shellClass==API_ExtrudedShellID){const auto& v=e.shell.u.extrudedShell.extrusionVector;if(v.x*v.x+v.y*v.y+v.z*v.z<1e-12)return CreateErrorResponse(APIERR_BADPARS,"Zero extrusion vector; no write");}
+ if(e.header.type.typeID==API_ShellID&&e.shell.shellClass==API_ExtrudedShellID&&(changes->Contains("shapeDirectionX")||changes->Contains("shapeDirectionY"))){const auto& v=e.shell.u.extrudedShell.shapeDirection;if(v.x*v.x+v.y*v.y<1e-12)return CreateErrorResponse(APIERR_BADPARS,"Zero profile direction; no write");}
  err=ACAPI_CallUndoableCommand("APA parameter edit",[&](){API_Element current={};current.header.guid=e.header.guid;const auto ge=ACAPI_Element_Get(&current);if(ge!=NoError)return ge;if(AssemblyStamp(current)!=stamp)return static_cast<GSErrCode>(APIERR_BADPARS);return ACAPI_Element_Change(&e,&mask,memoMask?&memo:nullptr,memoMask,true);});
  if(err!=NoError)return CreateErrorResponse(err,"Native assembly change failed; reconcile before retry");
  GS::ObjectState out("nativeModelWrites",1,"rootGUIDPreservation","TARGET_GUID_RETAINED_CHILDREN_REQUIRE_INDEPENDENT_READBACK","engineering","NOT_VERIFIED");const auto& modified=out.AddList<GS::ObjectState>("modifiedElements");modified(GS::ObjectState("elementId",CreateGuidObjectState(e.header.guid)));out.Add("appliedFields",applied);return out;

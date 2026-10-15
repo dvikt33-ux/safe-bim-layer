@@ -50,7 +50,7 @@ def capture_mep_facts(api, router, element_ids=(), routing_ids=(), include_syste
     return out
 
 
-def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids=(), memberships=(), navigator_bindings=None, layout_bindings=(), attributes=None, envelopes=None, ifc_ids=None, ifc_properties=None, gdl_parameters=(), mep=None, mep_topology=None, assembly_states=None):
+def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids=(), memberships=(), navigator_bindings=None, layout_bindings=(), attributes=None, envelopes=None, ifc_ids=None, ifc_properties=None, gdl_parameters=(), mep=None, mep_topology=None, assembly_states=None,generated_objects=(),observed_native_changes=()):
     nodes, edges, evidence, omitted, connection_facts, property_facts, parameter_facts = set(), set(), [], [], [], [], []
 
     def guid(value):
@@ -67,6 +67,19 @@ def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids
 
     def system_id(value):
         return guid(value.get('attributeId',value)) if isinstance(value,dict) else None
+
+    generated_owners={}
+    for item in generated_objects:
+        child=guid(item.get('elementId'));native=item.get('native',{});details=native.get('details',{});owner=guid(details.get('ownerElementId'))
+        if item.get('identityAuthority')!='SOURCE_ORDERED_REQUEST' or not child or not owner or native.get('type')!='Object':
+            omitted.append('GENERATED_OBJECT_NATIVE_IDENTITY_OR_OWNER_NOT_VERIFIED');continue
+        generated_owners[child]=owner;edge(owner,child,'NATIVE_GENERATED_OBJECT_DECLARED_OWNER')
+    for change in observed_native_changes:
+        driver=guid(change.get('driverElementId'));child=guid(change.get('affectedElementId'));proof=change.get('evidenceSHA256','')
+        if not driver or child not in generated_owners or len(proof)!=64 or any(c not in '0123456789abcdef' for c in proof):
+            omitted.append('OBSERVED_NATIVE_DEPENDENCY_EVIDENCE_MISSING');continue
+        event='NATIVE_REGENERATION_OBSERVATION:'+proof
+        edge(driver,event,'OBSERVED_NATIVE_COMPOUND_MODIFY_DEPENDENCY');edge(event,child,'OBSERVED_GENERATED_PARAMETER_SIDE_EFFECT_NOT_AUTOMATIC_WRITE')
 
     ports={}
     for group in (mep or {}).get('portGroups',[]):
@@ -119,6 +132,14 @@ def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids
         if sid:edge('ATTRIBUTE:MEPSYSTEM:'+sid,target,'NATIVE_MEP_TOPOLOGY_SYSTEM_MEMBERSHIP')
         preference=guid(row.get('preferenceTableId'))
         if preference:edge('MEP_PREFERENCE_TABLE:'+preference,target,'NATIVE_MEP_PARAMETER_PREFERENCE_DEPENDENCY')
+        units={k:('DEGREES' if k.endswith('Degrees') else 'METRES' if k.endswith('Metres') else 'NATIVE_ENUM' if k.endswith('Id') else 'DIMENSIONLESS') for k in ['domainId','shapeId','widthMetres','heightMetres','lengthMetres','radiusMetres','branchLengthMetres','branchAngleDegrees','branchOffsetMetres','angleDegrees','offsetYMetres','offsetZMetres','insulationThicknessMetres','crossSectionWidthMetres','crossSectionHeightMetres','wallThicknessMetres','crossSectionReferenceId','factorRadius']}
+        for name,unit in units.items():
+            value=row.get(name)
+            if not isinstance(value,(int,float)) or isinstance(value,bool):continue
+            if name=='factorRadius' and row.get('factorRadiusApplicable') is not True:continue
+            if name=='crossSectionReferenceId' and row.get('referenceIdApplicable') is not True:continue
+            key='MEP_PARAMETER:'+identity+':'+name;edge(key,target,'NATIVE_MEP_TYPED_PARAMETER_DEPENDENCY');parameter_facts.append(dict(node=key,value=value,unit=unit,editable=False,authority='PUBLIC_MEP_SDK_READ_NOT_WRITE_OR_PHYSICAL_CONNECTION_PROOF'))
+        if 'angleRadians' in row:omitted.append('LEGACY_MEP_ANGLE_RADIANS_NOT_INTERPRETED_AS_DEGREES')
         for field,prefix,relation in [('routingSegments','MEP_SEGMENT:','NATIVE_MEP_ROUTE_SEGMENT_MEMBERSHIP'),('routingNodes','MEP_NODE:','NATIVE_MEP_ROUTE_NODE_MEMBERSHIP'),('rigidSegments','','NATIVE_MEP_SEGMENT_RIGID_MEMBERSHIP'),('elbows','','NATIVE_MEP_NODE_ELBOW_MEMBERSHIP'),('transitions','','NATIVE_MEP_NODE_TRANSITION_MEMBERSHIP')]:
             for item in row.get(field,[]):
                 child=guid(item)
@@ -138,9 +159,28 @@ def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids
     for row in (assembly_states or {}).get('elements',[]):
         owner=guid(row.get('elementId'))
         if not owner or 'error' in row:omitted.append('ASSEMBLY_NATIVE_STATE_IDENTITY_OR_RESULT_MISSING');continue
+        recovery=row.get('ownerRecovery',{})
+        if row.get('kind')=='RailingGeneratedObject' and recovery:
+            settings=guid(recovery.get('ownerComponentId'));root=guid(row.get('rootElementId'));declared=guid(recovery.get('ownerDeclaredParentId'))
+            if settings and recovery.get('parentMatchesDeclaredOwner') is True:edge(settings,owner,'NATIVE_GENERATED_SYMBOL_PARENT_NOT_PHYSICAL_RAIL_MEMBERSHIP')
+            if settings and declared:edge(declared,settings,'NATIVE_SETTINGS_COMPONENT_DECLARED_OWNER_NOT_PHYSICAL_INVENTORY')
+            if root and row.get('rootQueryError')==0:edge(root,owner,'NATIVE_GENERATED_SYMBOL_ROOT')
+            library=guid(recovery.get('ownerSymbolLibraryGuid'))
+            if library and settings:edge('LIBRARY_SYMBOL_GUID:'+library,settings,'NATIVE_SETTINGS_COMPONENT_SYMBOL_REFERENCE')
+            for target,field in [(owner,'generatedObjectMaterials'),(settings,'ownerComponentMaterials')]:
+                memo=recovery.get(field,{})
+                if not target or memo.get('memoQueryError')!=0 or memo.get('boundsStatus')!='BOUNDED_NATIVE_MEMO':
+                    omitted.append('NATIVE_OWNER_MATERIAL_MEMO_NOT_VERIFIED');continue
+                for item in memo.get('parameters',[]):
+                    material=guid(item.get('attributeId'));name=item.get('name')
+                    if item.get('nativeTypeId')!=16 or item.get('typeModifier')!=0 or not material or name not in {'bmatRail','bmatFixing'}:continue
+                    edge('ATTRIBUTE:BUILDINGMATERIAL:'+material,target,'NATIVE_OWNER_STORED_TYPED_GDL_MATERIAL_NOT_WRITABILITY')
+                    key='NATIVE_PARAMETER:'+target+':STORED_GDL:'+name;edge(target,key,'NATIVE_STORED_GDL_PARAMETER_OBSERVATION_NOT_WRITABILITY')
+                    parameter_facts.append(dict(node=key,value=item.get('valueIndex'),storedFlags=item.get('flags'),editable=False,authority='STORED_MEMO_FLAGS_NOT_ACTIVE_SCRIPT_FLAGS_OR_WRITE_PERMISSION'))
+            if recovery.get('ownerFoundInRootRailMemo') is False:omitted.append('GENERATED_SETTINGS_OWNER_ABSENT_FROM_PHYSICAL_ROOT_RAIL_MEMO_NO_IDENTITY_SUBSTITUTION')
         for name,value in row.get('values',{}).items():
             key='NATIVE_PARAMETER:'+owner+':'+name
-            read_only=row.get('kind')=='CurtainWall' and name=='heightMetres'
+            read_only=name in row.get('readOnlyFields',[]) or row.get('kind')=='CurtainWall' and name=='heightMetres'
             edge(owner,key,'NATIVE_READ_ONLY_DERIVED_PARAMETER_FACT') if read_only else edge(key,owner,'NATIVE_EDITABLE_PARAMETER_DEPENDENCY')
             parameter_facts.append(dict(node=key,value=value,editable=not read_only,authority='NATIVE_SDK_FIELD_NOT_PHYSICAL_CONTACT',runtimeWriteAcceptance='NOT_INFERRED_FROM_STATE_READ'))
         kinds={'buildingMaterialId':'BUILDINGMATERIAL','compositeId':'COMPOSITE','surfaceId':'SURFACE','outerSurfaceId':'SURFACE','innerSurfaceId':'SURFACE','cutSurfaceId':'SURFACE','topSurfaceId':'SURFACE','sideSurfaceId':'SURFACE','bottomSurfaceId':'SURFACE'}
@@ -267,8 +307,9 @@ def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids
             if not isinstance(parameter.get('name'),str) or not isinstance(parameter.get('index'),int):
                 omitted.append('GDL_PARAMETER_IDENTITY_MISSING');continue
             label=json.dumps([parameter['index'],parameter['name']],ensure_ascii=False,separators=(',',':'))
-            key='GDL_PARAMETER:'+owner+':'+hashlib.sha256(label.encode()).hexdigest()
-            edge(key,owner,'NATIVE_PLACED_PARAMETER_DEPENDENCY')
+            generated=owner in generated_owners;key=('GDL_PARAMETER_OBSERVATION:' if generated else 'GDL_PARAMETER:')+owner+':'+hashlib.sha256(label.encode()).hexdigest()
+            if generated:edge(owner,key,'NATIVE_GENERATED_GDL_PARAMETER_OBSERVATION_NOT_WRITABILITY')
+            else:edge(key,owner,'NATIVE_PLACED_PARAMETER_DEPENDENCY')
             if part:edge('LIBRARY_PART:'+part,key,'NATIVE_LIBRARY_PARAMETER_DEFINITION')
             attribute_kind={'BuildingMaterial':'BuildingMaterial','Material':'Surface','Profile':'Profile'}.get(parameter.get('type'))
             if attribute_kind:

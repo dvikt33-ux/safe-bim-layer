@@ -1,0 +1,105 @@
+{
+  "schema": "APA_NATIVE_OWNER_CANDIDATE_READ_V1",
+  "status": "RUNTIME_REGISTERED_CALLABLE_VERIFIED_OWNER_AND_LIBRARY_READ_PASS_PERSISTENCE_PARTIAL",
+  "APXSHA256": "71b8529a8da39a478d5a1bc8a370ea97bf63fdc39e4801e793aa36e214074fa4",
+  "runtimeBuildIdentity": "8bb81311578f39f96ae7cbebfd3ad69e258b0f329f4b079c8c47102643c17b85",
+  "sourceRevision": "106393a46ecb53acfec08855cde215117c23a9ad",
+  "runtimeExported": 293,
+  "actualOwnerType": "RailingRail",
+  "actualOwnerDiffersFromPhysicalRail": true,
+  "parentMatchesDeclaredOwner": true,
+  "rootRailMemoQueryError": 0,
+  "rootRailMemoBounded": true,
+  "ownerFoundInRootRailMemo": false,
+  "rootMemoRailCount": 1,
+  "generatedObjectMaterialMemo": {
+    "memoQueryError": 0,
+    "parameters": [
+      {
+        "name": "bmatRail",
+        "index": 96,
+        "nativeTypeId": 16,
+        "typeModifier": 0,
+        "flags": 1,
+        "valueIndex": 36,
+        "attributeIdentitySHA256": "064bde16b74e1d3a8f4ec41dba25b590a6ed9c739cc049c79818b0a72d0e249c"
+      },
+      {
+        "name": "bmatFixing",
+        "index": 98,
+        "nativeTypeId": 16,
+        "typeModifier": 0,
+        "flags": 1,
+        "valueIndex": 36,
+        "attributeIdentitySHA256": "064bde16b74e1d3a8f4ec41dba25b590a6ed9c739cc049c79818b0a72d0e249c"
+      }
+    ],
+    "parameterCount": 128,
+    "boundsStatus": "BOUNDED_NATIVE_MEMO"
+  },
+  "ownerComponentMaterialMemo": {
+    "memoQueryError": 0,
+    "parameters": [
+      {
+        "name": "bmatRail",
+        "index": 96,
+        "nativeTypeId": 16,
+        "typeModifier": 0,
+        "flags": 1,
+        "valueIndex": 36,
+        "attributeIdentitySHA256": "064bde16b74e1d3a8f4ec41dba25b590a6ed9c739cc049c79818b0a72d0e249c"
+      },
+      {
+        "name": "bmatFixing",
+        "index": 98,
+        "nativeTypeId": 16,
+        "typeModifier": 0,
+        "flags": 1,
+        "valueIndex": 36,
+        "attributeIdentitySHA256": "064bde16b74e1d3a8f4ec41dba25b590a6ed9c739cc049c79818b0a72d0e249c"
+      }
+    ],
+    "parameterCount": 128,
+    "boundsStatus": "BOUNDED_NATIVE_MEMO"
+  },
+  "libraryPartsRead": 1,
+  "privateScriptFacts": [
+    {
+      "section": "MASTER",
+      "status": "READABLE",
+      "nativeError": 0,
+      "characters": 2707,
+      "privateTextSHA256": "54cd7f90d4954a8f6717417fb7a3065594513896fc9ac4f27d06ab5db75434cd",
+      "mentionsRail": 0,
+      "mentionsFixing": 0
+    },
+    {
+      "section": "PARAMETER",
+      "status": "READABLE",
+      "nativeError": 0,
+      "characters": 6311,
+      "privateTextSHA256": "59b9bff9d005b523260063223620cc775fa3ce360e6ce9f9386fdaf299039e6e",
+      "mentionsRail": 0,
+      "mentionsFixing": 0
+    }
+  ],
+  "sourceScriptsPublished": false,
+  "current128GDLUnchanged": true,
+  "savedBytesUnchanged": true,
+  "materialRecovery": "NOT_RESTORED_BLOCKED_PUBLIC_OWNER_WRITE_NOT_QUALIFIED",
+  "nativeModelWrites": 0,
+  "offlineTestsRun": false,
+  "quantityEngineCalled": false,
+  "authorization": "DIRECT_USER_EXACT71_READ_ONLY_CYCLE_APPROVAL",
+  "runtimeExportedCommandCount": 293,
+  "restoredRuntimeExportedCommandCount": 264,
+  "originalAPXAndRegistration": "RESTORED_BYTE_EXACT",
+  "savedCopyPersistence": "PARTIAL_UNEXPECTED_FILE_BYTES_CHANGE_NATIVE409_AND128GDL_RETAINED",
+  "ownerStateWriteContract": "BLOCKED_OWNER_NOT_IN_ROOT_PHYSICAL_RAIL_MEMO",
+  "parameterScripts": "SELECTED_TOP_LEVEL_SCRIPTS_READ_PRIVATELY_DELEGATE_TO_MACROS_FIXING_RULE_NOT_PROVEN",
+  "storedFlagsAndActiveFlags": "STORED_MEMO1_DIFFERS_FROM_EVALUATED_DISABLED_CHILD_FLAGS_DO_NOT_BYPASS",
+  "newSDKMutationCalls": 0,
+  "unknownSavedFileChange": "BEFORE_afcbdaaea880_AFTER_0a9c01419823_NO_BLIND_ROLLBACK",
+  "candidateReadbackSHA256": "a87202ac45ac9e09def3c5c159397df858b9fb5b19b39ef4a17bbde882fc8d39",
+  "next": "Qualify actual editable settings owner and macro-controlled material rule; resolve persistence-side-effect provenance before further mutation"
+}
