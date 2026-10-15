@@ -40,14 +40,22 @@ def test_drawing_navigator_sources_never_become_physical_guids(mask):
         expected.add(("NAVIGATOR_SOURCE_REFERENCE:REF_OTHER_" + str(mask), alternate))
     if mask & 8 and not mask & 64:
         expected.add((drawing, "NAVIGATOR:LAYOUTBOOK:" + layout))
-    unambiguous = bool(mask & 16) or (match and not mask & 32)
-    if mask & 4 and unambiguous:
-        expected.add((primary, drawing))
+    # A single verified OtherViewMap entry may be the only resolved source.
+    # An explicit trusted view ID takes precedence; two inferred maps are ambiguous.
+    resolved_source = None
+    if mask & 16:
+        resolved_source = primary
+    elif match and not mask & 32:
+        resolved_source = primary
+    elif not match and mask & 32:
+        resolved_source = alternate
+    if mask & 4 and resolved_source:
+        expected.add((resolved_source, drawing))
     assert {tuple(edge) for edge in result["edges"]} == expected
     assert len(result["relationshipEvidence"]) == len(expected)
     assert result["omitted"].count(
         "DRAWING_SOURCE_NOT_IN_CAPTURED_OR_EXPLICITLY_RESOLVED_NAVIGATOR"
-    ) == (not bool(mask & 4 and unambiguous))
+    ) == (not bool(mask & 4 and resolved_source))
     assert source not in result["nodes"]     # source reference is namespaced
     assert view not in result["nodes"]       # navigator identity is namespaced
     assert drawing in result["nodes"]
