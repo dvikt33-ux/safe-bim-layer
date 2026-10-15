@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 172,
+  "revision": 173,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2205,6 +2205,36 @@
     "ART-P70-A11-S03-NATIVEPOSITIVE-RECEIPT-20261015": {
       "id": "ART-P70-A11-S03-NATIVEPOSITIVE-RECEIPT-20261015",
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261015-092957Z-native-positive-modules.json",
+      "kind": "RECEIPT",
+      "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
+    },
+    "ART-P70-A11-S03-NATIVEREOPEN-READBACK-20261015": {
+      "id": "ART-P70-A11-S03-NATIVEREOPEN-READBACK-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-105500Z-native-original-reopen/native-restored-readback.json",
+      "kind": "TEST_RESULT",
+      "verification": "LIVE_PASS409GUID_NATIVE_GEOMETRY_MATERIAL_RELATIONSHIPS_AND258DETAIL_ROWS"
+    },
+    "ART-P70-A11-S03-NATIVEREOPEN-GAPS-20261015": {
+      "id": "ART-P70-A11-S03-NATIVEREOPEN-GAPS-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-105500Z-native-original-reopen/gap-register.json",
+      "kind": "DATASET",
+      "verification": "COPY_REOPEN_CLOSED_OPENING_POST_CLOSE_AND_VISUAL_STILL_NOT_VERIFIED"
+    },
+    "ART-P70-A11-S03-NATIVEREOPEN-CI-20261015": {
+      "id": "ART-P70-A11-S03-NATIVEREOPEN-CI-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-105500Z-native-original-reopen/windows-ci.json",
+      "kind": "TEST_RESULT",
+      "verification": "PRIOR_WINDOWS_CI_REUSED_UNCHANGED_PRODUCT_CODE"
+    },
+    "ART-P70-A11-S03-NATIVEREOPEN-REPORT-20261015": {
+      "id": "ART-P70-A11-S03-NATIVEREOPEN-REPORT-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-15/APA-RUN-20261015-105500Z-native-original-reopen/REPORT.md",
+      "kind": "REPORT",
+      "verification": "DONE_PUBLISHED_RESTORED_RUNTIME_SUPPLEMENT"
+    },
+    "ART-P70-A11-S03-NATIVEREOPEN-RECEIPT-20261015": {
+      "id": "ART-P70-A11-S03-NATIVEREOPEN-RECEIPT-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261015-105500Z-native-original-reopen.json",
       "kind": "RECEIPT",
       "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
     }
@@ -4782,7 +4812,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -4983,12 +5013,13 @@
         "Two actual library parts expose163stored default parameters without placement/context edits using bounded existing Tapir serializers.59building materials and132surfaces read without changes.16known Navigator identities/maps verified.12source-link/map probes:1exact,3identity mismatches excluded,8native errors.4Drawing owning Layout links,1exactView source and3unresolved links. Status-1=Other, freshness NOT_VERIFIED; no updater/rebuild/publisher native call.",
         "Captured data feeds existing DependencyImpact/BIM Graph:213nodes290edges,56affected for CurtainWall root. Physical element GUIDs, Navigator GUIDs and source references have separate namespaces. Membership/logical dependencies are not physical contact. Quantity engine remains quarantined in Python/native and was not called.",
         "Original APX SHA and registration values restored. Final restored-runtime reopen NOT_VERIFIED: Windows UI helper timed out after prescribed reset/retry and native endpoint unavailable. Saved-file hashes changed at closing source and Opening models; before/after snapshots preserved, no blind restore. Source258native geometry/details reconciled before any copy write and matched; source bytes unchanged from copy checkpoint onward. Opening bytes matched before/during read; post-close geometry pending. Do not claim unchanged-file or complete final acceptance. Exact Windows CI/code/report/receipt GitHub readback verified. Next: reopen saved409copy and107Opening model under original runtime, reconcile closing hash drift and inspect3native samples visually; do not replay Create or quantities.",
-        "User reopened the saved positive-sample copy. Read-only original-runtime check matches409GUIDs/full native geometry/material/relationship signatures and258original detail rows, zero writes. Publish this narrow acceptance supplement; Opening post-close and sample visual checks remain separate."
+        "User reopened the saved positive-sample copy. Read-only original-runtime check matches409GUIDs/full native geometry/material/relationship signatures and258original detail rows, zero writes. Publish this narrow acceptance supplement; Opening post-close and sample visual checks remain separate.",
+        "PR97 restored-runtime acceptance supplement published after user manually reopened the exact positive sample copy:409GUID/full native geometry, materials, home stories and relationship signatures match the saved candidate checkpoint;258original serialized detail rows match. Current saved bytes unchanged throughout the read. Original APX file SHA matches restored original; Archicad29/Tapir1.5.10 read and3candidate-only commands absent. Zero Create/Modify/Delete/Save/APX-switch/quantity calls. This closes only409copy original-runtime reopen. Separate107Opening post-close geometry/hash reconciliation and3sample visual inspection remain NOT_VERIFIED. Product PR97 head 8f134001ca0e3250eda587db61ac01dbd6357326 unchanged; prior exact-code Windows CI reused, no test replay. Immutable supplement/receipt independently byte-verified; S03 remains PARTIAL, historical statuses and other tasks retained."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
-      "owner": "work-native-reopen-20261015",
-      "lease_until": "2026-10-15T14:51:48Z",
-      "claim_ref": "APA-CLAIM-NATIVE-REOPEN-20261015T105148Z",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
@@ -5204,7 +5235,12 @@
         "ART-P70-A11-S03-NATIVEPOSITIVE-CI-20261015",
         "ART-P70-A11-S03-NATIVEPOSITIVE-KG-20261015",
         "ART-P70-A11-S03-NATIVEPOSITIVE-REPORT-20261015",
-        "ART-P70-A11-S03-NATIVEPOSITIVE-RECEIPT-20261015"
+        "ART-P70-A11-S03-NATIVEPOSITIVE-RECEIPT-20261015",
+        "ART-P70-A11-S03-NATIVEREOPEN-READBACK-20261015",
+        "ART-P70-A11-S03-NATIVEREOPEN-GAPS-20261015",
+        "ART-P70-A11-S03-NATIVEREOPEN-CI-20261015",
+        "ART-P70-A11-S03-NATIVEREOPEN-REPORT-20261015",
+        "ART-P70-A11-S03-NATIVEREOPEN-RECEIPT-20261015"
       ],
       "blocked_reason": null
     },
@@ -6121,7 +6157,12 @@
         "ART-P70-A11-S03-NATIVEPOSITIVE-CI-20261015",
         "ART-P70-A11-S03-NATIVEPOSITIVE-KG-20261015",
         "ART-P70-A11-S03-NATIVEPOSITIVE-REPORT-20261015",
-        "ART-P70-A11-S03-NATIVEPOSITIVE-RECEIPT-20261015"
+        "ART-P70-A11-S03-NATIVEPOSITIVE-RECEIPT-20261015",
+        "ART-P70-A11-S03-NATIVEREOPEN-READBACK-20261015",
+        "ART-P70-A11-S03-NATIVEREOPEN-GAPS-20261015",
+        "ART-P70-A11-S03-NATIVEREOPEN-CI-20261015",
+        "ART-P70-A11-S03-NATIVEREOPEN-REPORT-20261015",
+        "ART-P70-A11-S03-NATIVEREOPEN-RECEIPT-20261015"
       ],
       "synthesis_state": "PARTIAL",
       "owner": null
