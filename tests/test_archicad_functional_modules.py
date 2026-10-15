@@ -13,6 +13,14 @@ class FunctionalModules(unittest.TestCase):
             dict(elements=[{'elementId':{'guid':'diagnostic-only'}}],minOpeningSize=0))
         with self.assertRaisesRegex(ValueError,'COMMAND_RUNTIME_QUARANTINED'):
             r.read(None,ticket,True)
+        # A live export uses the unqualified Tapir command name. Code-owned
+        # quarantine must also apply when the command was already discovered.
+        catalog=json.loads((ROOT/'schemas/accelerator/mass-capabilities/commands.json').read_text())
+        row=json.loads((ROOT/'schemas/accelerator/functional-modules.json').read_text())['sdkProviders']['TapirCommand']['GetNativeElementQuantitiesV1']
+        catalog['commands']['GetNativeElementQuantitiesV1']={k:v for k,v in row.items() if k!='executionBlocker'}
+        r=DynamicCommands(catalog);A.connect_functional_modules(r)
+        with self.assertRaisesRegex(ValueError,'COMMAND_RUNTIME_QUARANTINED'):
+            r.read(None,r.prepare('GetNativeElementQuantitiesV1',ticket['parameters']),True)
     def test_memo_flow_preserves_holes_and_excludes_curves_and_other_tools(self):
         from apa_native_memo_flow import run
         points=[[0,0],[6,0],[6,6],[0,6],[0,0],[2,2],[4,2],[4,4],[2,4],[2,2]]

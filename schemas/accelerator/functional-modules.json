@@ -3,7 +3,7 @@
   "sdkImplementationSHA256": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72",
   "sdkImplementationFiles": {
     "archicad-addon/Sources/NativeModuleCommands.cpp": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72",
-    "archicad-addon/Sources/NativeExtendedModules.cpp": "158873230a027f30e88e74c87dcc95f7d808209d5aa613f412be30b77968d420",
+    "archicad-addon/Sources/NativeExtendedModules.cpp": "99fe0cb9007091c09301be5c922a9ce25a0a59f490b1c9406219ad26b94f1451",
     "archicad-addon/Sources/NativeExtendedModules.hpp": "3d8d14f393cff31dad5bf808ca973dde324211404dd96c07667909e90a780377",
     "archicad-addon/Sources/NativeExtendedSchemas.inc": "a08bb0a19328d7adac6685a8ff7c0eed72db8682ef70daef5a9fbdb6f05d7bbd",
     "archicad-addon/Sources/NativeQuantityFields.inc": "470d052f2cc23bc0536efc658e7a1d9840bdcc214d500b0709e598e805f58f53"
@@ -1202,7 +1202,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "158873230a027f30e88e74c87dcc95f7d808209d5aa613f412be30b77968d420"
+        "implementationSHA256": "99fe0cb9007091c09301be5c922a9ce25a0a59f490b1c9406219ad26b94f1451"
       },
       "GetNativeDrawingAssociationsV1": {
         "version": "29",
@@ -1383,7 +1383,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "158873230a027f30e88e74c87dcc95f7d808209d5aa613f412be30b77968d420"
+        "implementationSHA256": "99fe0cb9007091c09301be5c922a9ce25a0a59f490b1c9406219ad26b94f1451"
       },
       "GetNativeElementHotspotsV1": {
         "version": "29",
@@ -1538,7 +1538,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "158873230a027f30e88e74c87dcc95f7d808209d5aa613f412be30b77968d420"
+        "implementationSHA256": "99fe0cb9007091c09301be5c922a9ce25a0a59f490b1c9406219ad26b94f1451"
       },
       "GetNativeElementQuantitiesV1": {
         "version": "29",
@@ -1702,7 +1702,7 @@
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
         "executionBlocker": "AC29_QUANTITY_ENGINE_ACCESS_VIOLATION_ROOT_CAUSE_NOT_VERIFIED_NO_REPLAY",
-        "implementationSHA256": "158873230a027f30e88e74c87dcc95f7d808209d5aa613f412be30b77968d420"
+        "implementationSHA256": "99fe0cb9007091c09301be5c922a9ce25a0a59f490b1c9406219ad26b94f1451"
       }
     },
     "AddOnCommandTest": {

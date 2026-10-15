@@ -180,6 +180,7 @@ def connect_functional_modules(router, manifest_path=None):
                 current.update(row,previousSourceContractHash=previous,sourceContractUpgrade='EXPLICIT_SDK_BUILD_CONTRACT_NOT_RUNTIME_ACCEPTANCE')
             implementation_hash=row.get('implementationSHA256',manifest['sdkImplementationSHA256'])
             current['implementationSHA256']=implementation_hash
+            if row.get('executionBlocker'):current['executionBlocker']=row['executionBlocker']
             router.review_policy(key,'READ_ONLY','READ_ONLY',dict(source='Archicad29 public SDK implementation; model read only',sha256=implementation_hash))
     local=attach(router,manifest['local'])
     router.fingerprint=RUN.digest(router.catalog)
