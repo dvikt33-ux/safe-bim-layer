@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 174,
+  "revision": 175,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2237,6 +2237,42 @@
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261015-105500Z-native-original-reopen.json",
       "kind": "RECEIPT",
       "verification": "DONE_PUBLISHED_READBACK_VERIFIED"
+    },
+    "ART-P70-A11-S03-NATIVELINKED-NATIVE-20261015": {
+      "id": "ART-P70-A11-S03-NATIVELINKED-NATIVE-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-123508Z-native-linked-data/native-runtime.json",
+      "kind": "TEST_RESULT",
+      "verification": "LIVE_READ_PASS13ELEMENTS12IFCIDS61PROPERTIES;MIXED_CAPTURE_FLOW_EXPLICIT"
+    },
+    "ART-P70-A11-S03-NATIVELINKED-BUILD-20261015": {
+      "id": "ART-P70-A11-S03-NATIVELINKED-BUILD-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-123508Z-native-linked-data/SDK-build.json",
+      "kind": "DATASET",
+      "verification": "BUILD_PASS_NEW_APX_NOT_INSTALLED"
+    },
+    "ART-P70-A11-S03-NATIVELINKED-GAPS-20261015": {
+      "id": "ART-P70-A11-S03-NATIVELINKED-GAPS-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-123508Z-native-linked-data/gap-register-after-ci-erratum.json",
+      "kind": "DATASET",
+      "verification": "S03_PARTIAL_ENHANCED_SDK_NATIVE_ACCEPTANCE_PENDING"
+    },
+    "ART-P70-A11-S03-NATIVELINKED-REPORT-20261015": {
+      "id": "ART-P70-A11-S03-NATIVELINKED-REPORT-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-15/APA-RUN-20261015-123508Z-native-linked-data/REPORT.md",
+      "kind": "REPORT",
+      "verification": "DONE_PUBLISHED_WITH_SEPARATE_CI_ERRATUM"
+    },
+    "ART-P70-A11-S03-NATIVELINKED-RECEIPT-20261015": {
+      "id": "ART-P70-A11-S03-NATIVELINKED-RECEIPT-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/receipts/APA-RUN-20261015-123508Z-native-linked-data.json",
+      "kind": "RECEIPT",
+      "verification": "DONE_PUBLISHED_GITHUB_BYTE_READBACK_VERIFIED"
+    },
+    "ART-P70-A11-S03-NATIVELINKED-CIERRATUM-20261015": {
+      "id": "ART-P70-A11-S03-NATIVELINKED-CIERRATUM-20261015",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-123508Z-native-linked-data/CI_EXECUTION_ERRATUM.json",
+      "kind": "REPORT",
+      "verification": "UNINTENDED_AUTOMATIC_PUBLISHER_OFFLINE_RUNS_DISCLOSED"
     }
   },
   "tasks": {
@@ -4812,7 +4848,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -5015,12 +5051,13 @@
         "Original APX SHA and registration values restored. Final restored-runtime reopen NOT_VERIFIED: Windows UI helper timed out after prescribed reset/retry and native endpoint unavailable. Saved-file hashes changed at closing source and Opening models; before/after snapshots preserved, no blind restore. Source258native geometry/details reconciled before any copy write and matched; source bytes unchanged from copy checkpoint onward. Opening bytes matched before/during read; post-close geometry pending. Do not claim unchanged-file or complete final acceptance. Exact Windows CI/code/report/receipt GitHub readback verified. Next: reopen saved409copy and107Opening model under original runtime, reconcile closing hash drift and inspect3native samples visually; do not replay Create or quantities.",
         "User reopened the saved positive-sample copy. Read-only original-runtime check matches409GUIDs/full native geometry/material/relationship signatures and258original detail rows, zero writes. Publish this narrow acceptance supplement; Opening post-close and sample visual checks remain separate.",
         "PR97 restored-runtime acceptance supplement published after user manually reopened the exact positive sample copy:409GUID/full native geometry, materials, home stories and relationship signatures match the saved candidate checkpoint;258original serialized detail rows match. Current saved bytes unchanged throughout the read. Original APX file SHA matches restored original; Archicad29/Tapir1.5.10 read and3candidate-only commands absent. Zero Create/Modify/Delete/Save/APX-switch/quantity calls. This closes only409copy original-runtime reopen. Separate107Opening post-close geometry/hash reconciliation and3sample visual inspection remain NOT_VERIFIED. Product PR97 head 8f134001ca0e3250eda587db61ac01dbd6357326 unchanged; prior exact-code Windows CI reused, no test replay. Immutable supplement/receipt independently byte-verified; S03 remains PARTIAL, historical statuses and other tasks retained.",
-        "Continue native integration after PR97 without offline tests: expand existing Shell/Opening/component parameter reads and native IFC/material dependency workflow. Preserve409copy/258source; new APX deployment requires exact separate permission. Do not repeat accepted samples or quantity engine."
+        "Continue native integration after PR97 without offline tests: expand existing Shell/Opening/component parameter reads and native IFC/material dependency workflow. Preserve409copy/258source; new APX deployment requires exact separate permission. Do not repeat accepted samples or quantity engine.",
+        "PR104 6ae582b9f2a9666389fc06fd0528bbfff3fde6b4 reuses native IFC accessor commands and existing dynamic router/BIM Graph. Current read:13elements,12nonemptyIFCIDs,61propertyrows,59material132surface24compositeheaders;409GUID inventory/saved bytes unchanged, no model writes/APX switch/quantity call. Pinned prior150componentrows plus current attributes/IFC yield196nodes319edges,23material17surface12IFCidentity edges; material impact45nodes. Enhanced Opening polygon/anchor/surface, Shell/Roof material applicability and CW/Railing root readers compile/link in full Release:exactAPX2ed42a0d330df702524216ac6773312ff29aad8642792be35aab18427f7e91cb;new exact load permission pending, enhanced LIVE_NOT_VERIFIED. Product/manual offline tests and product CI not run. IMPORTANT ERRATUM:canonical push unintentionally triggered publisher infrastructure tests in38735805022/38735805051 and two test steps of38735797914; latter cancelled. Subsequent publication commits skip CI; immutable broad no-test wording superseded by linked CIerratum.11publicationfiles/receipt independently read back from GitHub. Prior results preserved; no recreation of accepted samples, no new executor/journal. S03 remainsPARTIAL; next exactAPXread-only validation/restoration in existing409copy and107Opening model; no quantities or unapproved sample writes."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
-      "owner": "work-native-linked-20261015",
-      "lease_until": "2026-10-15T16:16:17Z",
-      "claim_ref": "APA-CLAIM-NATIVE-LINKED-20261015T121617Z",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
@@ -5241,7 +5278,13 @@
         "ART-P70-A11-S03-NATIVEREOPEN-GAPS-20261015",
         "ART-P70-A11-S03-NATIVEREOPEN-CI-20261015",
         "ART-P70-A11-S03-NATIVEREOPEN-REPORT-20261015",
-        "ART-P70-A11-S03-NATIVEREOPEN-RECEIPT-20261015"
+        "ART-P70-A11-S03-NATIVEREOPEN-RECEIPT-20261015",
+        "ART-P70-A11-S03-NATIVELINKED-NATIVE-20261015",
+        "ART-P70-A11-S03-NATIVELINKED-BUILD-20261015",
+        "ART-P70-A11-S03-NATIVELINKED-GAPS-20261015",
+        "ART-P70-A11-S03-NATIVELINKED-REPORT-20261015",
+        "ART-P70-A11-S03-NATIVELINKED-RECEIPT-20261015",
+        "ART-P70-A11-S03-NATIVELINKED-CIERRATUM-20261015"
       ],
       "blocked_reason": null
     },
@@ -6163,7 +6206,13 @@
         "ART-P70-A11-S03-NATIVEREOPEN-GAPS-20261015",
         "ART-P70-A11-S03-NATIVEREOPEN-CI-20261015",
         "ART-P70-A11-S03-NATIVEREOPEN-REPORT-20261015",
-        "ART-P70-A11-S03-NATIVEREOPEN-RECEIPT-20261015"
+        "ART-P70-A11-S03-NATIVEREOPEN-RECEIPT-20261015",
+        "ART-P70-A11-S03-NATIVELINKED-NATIVE-20261015",
+        "ART-P70-A11-S03-NATIVELINKED-BUILD-20261015",
+        "ART-P70-A11-S03-NATIVELINKED-GAPS-20261015",
+        "ART-P70-A11-S03-NATIVELINKED-REPORT-20261015",
+        "ART-P70-A11-S03-NATIVELINKED-RECEIPT-20261015",
+        "ART-P70-A11-S03-NATIVELINKED-CIERRATUM-20261015"
       ],
       "synthesis_state": "PARTIAL",
       "owner": null
