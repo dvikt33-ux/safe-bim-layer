@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 171,
+  "revision": 172,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -4782,7 +4782,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -4982,12 +4982,13 @@
         "150new component headers independently resolve parent/root;50supported specific parameter rows. Nested railing parent differs from root and is not flattened. Detached Railing Stair association NOT_VERIFIED. Positive existing Generic Opening forward/reverse Wall host, cut GUID, native type and story match; no Opening write. Resultant void BREP NOT_VERIFIED. Shell Extruded memo confirms4profile coordinates,5raw body flags,12base transform values and4m extrusion; contour/hole/Revolved/Ruled branches have no positive sample.",
         "Two actual library parts expose163stored default parameters without placement/context edits using bounded existing Tapir serializers.59building materials and132surfaces read without changes.16known Navigator identities/maps verified.12source-link/map probes:1exact,3identity mismatches excluded,8native errors.4Drawing owning Layout links,1exactView source and3unresolved links. Status-1=Other, freshness NOT_VERIFIED; no updater/rebuild/publisher native call.",
         "Captured data feeds existing DependencyImpact/BIM Graph:213nodes290edges,56affected for CurtainWall root. Physical element GUIDs, Navigator GUIDs and source references have separate namespaces. Membership/logical dependencies are not physical contact. Quantity engine remains quarantined in Python/native and was not called.",
-        "Original APX SHA and registration values restored. Final restored-runtime reopen NOT_VERIFIED: Windows UI helper timed out after prescribed reset/retry and native endpoint unavailable. Saved-file hashes changed at closing source and Opening models; before/after snapshots preserved, no blind restore. Source258native geometry/details reconciled before any copy write and matched; source bytes unchanged from copy checkpoint onward. Opening bytes matched before/during read; post-close geometry pending. Do not claim unchanged-file or complete final acceptance. Exact Windows CI/code/report/receipt GitHub readback verified. Next: reopen saved409copy and107Opening model under original runtime, reconcile closing hash drift and inspect3native samples visually; do not replay Create or quantities."
+        "Original APX SHA and registration values restored. Final restored-runtime reopen NOT_VERIFIED: Windows UI helper timed out after prescribed reset/retry and native endpoint unavailable. Saved-file hashes changed at closing source and Opening models; before/after snapshots preserved, no blind restore. Source258native geometry/details reconciled before any copy write and matched; source bytes unchanged from copy checkpoint onward. Opening bytes matched before/during read; post-close geometry pending. Do not claim unchanged-file or complete final acceptance. Exact Windows CI/code/report/receipt GitHub readback verified. Next: reopen saved409copy and107Opening model under original runtime, reconcile closing hash drift and inspect3native samples visually; do not replay Create or quantities.",
+        "User reopened the saved positive-sample copy. Read-only original-runtime check matches409GUIDs/full native geometry/material/relationship signatures and258original detail rows, zero writes. Publish this narrow acceptance supplement; Opening post-close and sample visual checks remain separate."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "work-native-reopen-20261015",
+      "lease_until": "2026-10-15T14:51:48Z",
+      "claim_ref": "APA-CLAIM-NATIVE-REOPEN-20261015T105148Z",
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
