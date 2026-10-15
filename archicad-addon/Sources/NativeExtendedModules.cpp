@@ -13,6 +13,8 @@ DEF(GetNativeElementQuantitiesV1)
 DEF(GetNativeComponentBindingsV1)
 DEF(GetNativeOpeningConnectionsV1)
 DEF(GetNativeQuantityPreflightV1)
+DEF(GetNativeLibraryPartDefaultsV1)
+DEF(GetNativeNavigatorBindingsV1)
 #undef DEF
 #include "NativeExtendedSchemas.inc"
 
@@ -28,6 +30,19 @@ static GS::ObjectState PolygonMemo(API_Coord** coords,Int32** ends,API_PolyArc**
 static GSErrCode ReadElement(const GS::ObjectState& item,API_Element& e) {
  const auto* id=item.Get("elementId");if(id==nullptr)return APIERR_BADPARS;e.header.guid=GetGuidFromObjectState(*id);return ACAPI_Element_Get(&e);
 }
+
+static GS::ObjectState NativeXYZ(const API_Coord3D& c){return GS::ObjectState("x",c.x,"y",c.y,"z",c.z);}
+static GS::ObjectState Transform(const API_Tranmat& t){GS::ObjectState out;const auto& values=out.AddList<double>("matrix3x4");for(double v:t.tmx)values(v);return out;}
+static GS::ObjectState ShellClassParameters(const API_ShellType& shell){
+ GS::ObjectState out("coordinateFrame","NATIVE_PARAMETER_GEOMETRY_SHELL_LOCAL_FRAME_NOT_RESULTANT_BREP");
+ switch(shell.shellClass){
+ case API_ExtrudedShellID:{const auto& c=shell.u.extrudedShell;out.Add("class","Extruded");out.Add("begin",NativeXYZ(c.begC));out.Add("extrusionVector",NativeXYZ(c.extrusionVector));out.Add("shapeDirection",GS::ObjectState("x",c.shapeDirection.x,"y",c.shapeDirection.y));out.Add("slantAngleRadians",c.slantAngle);out.Add("shapePlaneTiltRadians",c.shapePlaneTilt);out.Add("beginPlaneTiltRadians",c.begPlaneTilt);out.Add("endPlaneTiltRadians",c.endPlaneTilt);break;}
+ case API_RevolvedShellID:{const auto& c=shell.u.revolvedShell;out.Add("class","Revolved");out.Add("axisBase",Transform(c.axisBase));out.Add("slantAngleRadians",c.slantAngle);out.Add("revolutionAngleRadians",c.revolutionAngle);out.Add("distortionAngleRadians",c.distortionAngle);out.Add("beginAngleRadians",c.begAngle);out.Add("distortionVector",GS::ObjectState("x",c.distortionVector.x,"y",c.distortionVector.y));out.Add("segmentTypeId",static_cast<Int32>(c.segmentType));out.Add("segmentsByArc",c.segmentsByArc);out.Add("segmentsByCircle",c.segmentsByCircle);out.Add("segmentedSurfaces",c.segmentedSurfaces);break;}
+ case API_RuledShellID:{const auto& c=shell.u.ruledShell;out.Add("class","Ruled");out.Add("plane1",Transform(c.plane1));out.Add("plane2",Transform(c.plane2));out.Add("morphingRuleId",static_cast<Int32>(c.morphingRule));break;}
+ default:out.Add("class","UNSUPPORTED_SDK_CLASS");break;
+ }return out;
+}
+static GS::ObjectState ContourEdge(const API_ContourEdgeData& edge){return GS::ObjectState("edgeTypeId",static_cast<Int32>(edge.edgeType),"sideTypeId",static_cast<Int32>(edge.edgeTrim.sideType),"sideAngleRadians",edge.edgeTrim.sideAngle,"surfaceOverridden",edge.sideMaterial.hasValue,"surfaceIndex",GetAttributeIndex(edge.sideMaterial.value));}
 GS::ObjectState GetNativeEnvelopeMemoV1Command::Execute(const GS::ObjectState& p,GS::ProcessControl&) const {
  GS::Array<GS::ObjectState> inputs;p.Get("elements",inputs);GS::ObjectState out("nativeModelWrites",0,"authority","NATIVE_ENVELOPE_PARAMETER_MEMO_NOT_RESULTANT_BREP");const auto& rows=out.AddList<GS::ObjectState>("elements");
  for(const auto& item:inputs){API_Element e={};auto err=ReadElement(item,e);if(err!=NoError){rows(CreateErrorResponse(err,"Get envelope element"));continue;}
@@ -36,12 +51,12 @@ GS::ObjectState GetNativeEnvelopeMemoV1Command::Execute(const GS::ObjectState& p
  GS::ObjectState row("elementId",CreateGuidObjectState(e.header.guid),"nativeTypeId",static_cast<Int32>(e.header.type.typeID),"homeStory",static_cast<Int32>(e.header.floorInd),"polygon",PolygonMemo(memo.coords,memo.pends,memo.parcs,memo.vertexIDs,memo.edgeIDs));
  const auto& roofEdges=row.AddList<Int32>("roofEdgeTypes");auto count=memo.roofEdgeTypes?BMGetPtrSize(reinterpret_cast<GSPtr>(memo.roofEdgeTypes))/sizeof(API_RoofEdgeTypeID):0;for(GSIndex i=1;i<count;++i)roofEdges(static_cast<Int32>(memo.roofEdgeTypes[i]));
  if(e.header.type.typeID==API_RoofID){row.Add("roofClass",static_cast<Int32>(e.roof.roofClass));row.Add("pivotPolygon",PolygonMemo(memo.additionalPolyCoords,memo.additionalPolyPends,memo.additionalPolyParcs,memo.additionalPolyVertexIDs,memo.additionalPolyEdgeIDs));row.Add("roofLevel",e.roof.shellBase.level);}
- if(e.header.type.typeID==API_ShellID){row.Add("shellClass",static_cast<Int32>(e.shell.shellClass));const auto& shapes=row.AddList<GS::ObjectState>("shellShapes");for(Int32 i=0;i<2;++i)if(memo.shellShapes[i].coords)shapes(GS::ObjectState("slot",i,"polygon",PolygonMemo(memo.shellShapes[i].coords,memo.shellShapes[i].pends,memo.shellShapes[i].parcs,memo.shellShapes[i].vertexIDs,memo.shellShapes[i].edgeIDs)));
- const auto& contours=row.AddList<GS::ObjectState>("shellContours");const auto n=std::max<Int32>(0,e.shell.numHoles)+(e.shell.hasContour?1:0);
+ if(e.header.type.typeID==API_ShellID){row.Add("shellClass",static_cast<Int32>(e.shell.shellClass));const auto& shapes=row.AddList<GS::ObjectState>("shellShapes");for(Int32 i=0;i<2;++i)if(memo.shellShapes[i].coords){const auto& shape=memo.shellShapes[i];GS::ObjectState entry("slot",i,"polygon",PolygonMemo(shape.coords,shape.pends,shape.parcs,shape.vertexIDs,shape.edgeIDs));const auto& flags=entry.AddList<GS::ObjectState>("bodyFlags");const auto nf=shape.bodyFlags?BMGetHandleSize(reinterpret_cast<GSHandle>(shape.bodyFlags))/sizeof(bool):0;for(GSIndex j=0;j<nf;++j)flags(GS::ObjectState("allocationIndex",static_cast<Int32>(j),"generatesBody",(*shape.bodyFlags)[j]));entry.Add("bodyFlagIndexAuthority","RAW_NATIVE_ALLOCATION_INDEX_NO_REINDEXING");shapes(entry);}row.Add("shellClassParameters",ShellClassParameters(e.shell));
+ const auto& contours=row.AddList<GS::ObjectState>("shellContours");if(e.shell.numHoles>4096){rows(CreateErrorResponse(APIERR_BADPARS,"Shell contour count exceeds bounded serialization"));continue;}const auto n=static_cast<Int32>(e.shell.numHoles)+(e.shell.hasContour?1:0);
  const auto allocated=memo.shellContours?BMGetPtrSize(reinterpret_cast<GSPtr>(memo.shellContours))/sizeof(API_ShellContourData):0;
  row.Add("shellContourCountExpected",n);row.Add("shellContourCountAllocated",static_cast<Int32>(allocated));
  if(static_cast<GSSize>(n)>allocated){rows(CreateErrorResponse(APIERR_BADPARS,"Shell contour allocation shorter than element metadata"));continue;}
- if(memo.shellContours)for(Int32 i=0;i<n;++i){const auto& c=memo.shellContours[i];GS::ObjectState contour("slot",i,"hole",!e.shell.hasContour||i>0,"depth",c.height,"polygon",PolygonMemo(c.coords,c.pends,c.parcs,c.vertexIDs,c.edgeIDs));const auto& transform=contour.AddList<double>("planeTransform");for(double value:c.plane.tmx)transform(value);contours(contour);}}
+ if(memo.shellContours)for(Int32 i=0;i<n;++i){const auto& c=memo.shellContours[i];GS::ObjectState contour("slot",i,"hole",!e.shell.hasContour||i>0,"depth",c.height,"polygon",PolygonMemo(c.coords,c.pends,c.parcs,c.vertexIDs,c.edgeIDs));const auto& transform=contour.AddList<double>("planeTransform");for(double value:c.plane.tmx)transform(value);const auto ne=c.edgeData?BMGetPtrSize(reinterpret_cast<GSPtr>(c.edgeData))/sizeof(API_ContourEdgeData):0;const auto& edgeData=contour.AddList<GS::ObjectState>("edgeData");for(GSIndex j=0;j<ne;++j){GS::ObjectState edge=ContourEdge(c.edgeData[j]);edge.Add("allocationIndex",static_cast<Int32>(j));edgeData(edge);}contours(contour);}}
 
  const auto& trims=row.AddList<GS::ObjectState>("edgeTrims");auto nt=memo.edgeTrims?BMGetHandleSize(reinterpret_cast<GSHandle>(memo.edgeTrims))/sizeof(API_EdgeTrim):0;for(GSIndex i=1;i<nt;++i)trims(GS::ObjectState("memoIndex",static_cast<Int32>(i),"sideTypeId",static_cast<Int32>((*memo.edgeTrims)[i].sideType),"sideAngleRadians",(*memo.edgeTrims)[i].sideAngle));
  const auto& materials=row.AddList<GS::ObjectState>("sideMaterials");auto nm=memo.sideMaterials?BMGetPtrSize(reinterpret_cast<GSPtr>(memo.sideMaterials))/sizeof(API_OverriddenAttribute):0;
@@ -51,7 +66,7 @@ GS::ObjectState GetNativeEnvelopeMemoV1Command::Execute(const GS::ObjectState& p
  for(GSIndex i=1;i<np;++i){const auto& edge=memo.pivotPolyEdges[i];if(edge.nLevelEdgeData<0){rows(CreateErrorResponse(APIERR_BADPARS,"Negative pivot level count"));return out;}auto allocated=edge.levelEdgeData?BMGetPtrSize(reinterpret_cast<GSPtr>(edge.levelEdgeData))/sizeof(API_RoofSegmentData):0;if(static_cast<GSSize>(edge.nLevelEdgeData)>allocated){rows(CreateErrorResponse(APIERR_BADPARS,"Pivot level allocation shorter than count"));return out;}
  GS::ObjectState pivot("memoIndex",static_cast<Int32>(i),"pivotEdgeUniqueId",edge.pivotEdgeUnId,"segmentTypeId",static_cast<Int32>(edge.segmentType));const auto& levels=pivot.AddList<GS::ObjectState>("levels");for(Int32 j=0;j<edge.nLevelEdgeData;++j){const auto& level=edge.levelEdgeData[j];levels(GS::ObjectState("levelIndex",j,"angleRadians",level.angle,"angleTypeId",static_cast<Int32>(level.angleType),"eavesOverhangMetres",level.eavesOverhang,"topSurfaceIndex",GetAttributeIndex(level.topMaterial),"bottomSurfaceIndex",GetAttributeIndex(level.bottomMaterial)));}pivots(pivot);}
  if(e.header.type.typeID==API_ShellID){const auto& plane=row.AddList<double>("shellBasePlaneTransform");for(double v:e.shell.basePlane.tmx)plane(v);}
- row.Add("serializationBoundary","NATIVE_PARAMETER_GEOMETRY_NOT_RESULTANT_BREP; MEMO_INDICES_PRESERVED; SHELL_SHAPE_BODY_FLAGS_AND_CLASS_AXIS_FRAMES_NOT_SERIALIZED");rows(row);}return out;
+ row.Add("serializationBoundary","NATIVE_PARAMETER_GEOMETRY_NOT_RESULTANT_BREP; MEMO_INDICES_PRESERVED; SHELL_BODY_FLAGS_CLASS_FRAMES_AND_CONTOUR_EDGE_DATA_SERIALIZED_RAW_ALLOCATION_INDICES");rows(row);}return out;
 }
 
 static GS::ObjectState DrawingInCurrentDatabase(const GS::ObjectState& item,bool qualified) {
@@ -99,12 +114,17 @@ GS::ObjectState GetNativeComponentBindingsV1Command::Execute(const GS::ObjectSta
  case API_RiserID:{const auto& c=e.stairRiser;owner=c.owner;values.Add("angleRadians",c.angle);values.Add("offsetMetres",c.offset);values.Add("thicknessMetres",c.thickness);values.Add("sequenceNumber",c.sequenceNumber);values.Add("roleId",static_cast<Int32>(c.role));flags.Add("visible",c.visible);row.Add("libraryPartGuid",CreateGuidObjectState(c.libId));break;}
  case API_TreadID:{const auto& c=e.stairTread;owner=c.owner;values.Add("offsetMetres",c.offset);values.Add("thicknessMetres",c.thickness);values.Add("zOffsetMetres",c.zOffset);values.Add("nosingValueMetres",c.nosingValue);values.Add("nosingSlant",c.nosingSlant);values.Add("nosingTypeId",static_cast<Int32>(c.nosingType));values.Add("sequenceNumber",c.sequenceNumber);values.Add("roleId",static_cast<Int32>(c.role));flags.Add("visible",c.visible);flags.Add("isCustom",c.isCustom);row.Add("libraryPartGuid",CreateGuidObjectState(c.libId));break;}
  case API_StairStructureID:{const auto& c=e.stairStructure;owner=c.owner;values.Add("thicknessMetres",c.thickness);values.Add("horizontalThicknessMetres",c.horizontalThickness);values.Add("sequenceNumber",c.sequenceNumber);values.Add("structureTypeId",static_cast<Int32>(c.structType));values.Add("bottomTypeId",static_cast<Int32>(c.bottomType));flags.Add("visible",c.visible);flags.Add("isLanding",c.isLanding);row.Add("libraryPartGuid",CreateGuidObjectState(c.libId));break;}
- case API_CurtainWallPanelID:{const auto& c=e.cwPanel;owner=c.owner;values.Add("thicknessMetres",c.thickness);values.Add("buildingMaterialIndex",GetAttributeIndex(c.buildingMaterial));values.Add("classId",c.classID);values.Add("segmentId",c.segmentID);values.Add("libraryPartIndex",c.libInd);flags.Add("hidden",c.hidden);flags.Add("hasSymbol",c.hasSymbol);break;}
+ case API_CurtainWallPanelID:{const auto& c=e.cwPanel;owner=c.owner;values.Add("thicknessMetres",c.thickness);values.Add("buildingMaterialIndex",GetAttributeIndex(c.buildingMaterial));values.Add("classId",c.classID);values.Add("segmentId",c.segmentID);values.Add("libraryPartIndex",c.libInd);values.Add("outerSurfaceIndex",GetAttributeIndex(c.outerSurfaceMaterial.value));values.Add("innerSurfaceIndex",GetAttributeIndex(c.innerSurfaceMaterial.value));values.Add("cutSurfaceIndex",GetAttributeIndex(c.cutSurfaceMaterial.value));flags.Add("outerSurfaceOverridden",c.outerSurfaceMaterial.hasValue);flags.Add("innerSurfaceOverridden",c.innerSurfaceMaterial.hasValue);flags.Add("cutSurfaceOverridden",c.cutSurfaceMaterial.hasValue);flags.Add("hidden",c.hidden);flags.Add("hasSymbol",c.hasSymbol);break;}
  case API_CurtainWallFrameID:{const auto& c=e.cwFrame;owner=c.owner;values.Add("buildingMaterialIndex",GetAttributeIndex(c.buildingMaterial));values.Add("surfaceIndex",GetAttributeIndex(c.material));values.Add("classId",c.classID);values.Add("segmentId",c.segmentID);values.Add("libraryPartIndex",c.libInd);flags.Add("useOwnMaterial",c.useOwnMaterial);break;}
  case API_RailingSegmentID:{const auto& c=e.railingSegment;owner=c.owner;values.Add("heightMetres",c.height);values.Add("yOffsetMetres",c.yOffset);values.Add("zOffsetMetres",c.zOffset);values.Add("slantAngleRadians",c.slantAngle);values.Add("skewAngleRadians",c.skewAngle);flags.Add("visible",c.visible);break;}
  case API_RailingPostID:{const auto& c=e.railingPost;owner=c.owner;values.Add("bottomRailIndex",c.verticalPosition.bottomRailIndex);values.Add("topRailIndex",c.verticalPosition.topRailIndex);row.Add("libraryPartGuid",CreateGuidObjectState(c.symbID));break;}
  case API_RailingRailID:{const auto& c=e.railingRail;owner=c.owner;values.Add("heightMetres",c.height);values.Add("horizontalOffsetMetres",c.horizontalOffset);flags.Add("visible",c.visible);flags.Add("relative",c.relative);row.Add("libraryPartGuid",CreateGuidObjectState(c.symbID));break;}
  case API_RailingHandrailID:{const auto& c=e.railingHandrail;owner=c.owner;values.Add("heightMetres",c.height);values.Add("horizontalOffsetMetres",c.horizontalOffset);flags.Add("visible",c.visible);flags.Add("doubleHandrail",c.doubleHandrail);row.Add("libraryPartGuid",CreateGuidObjectState(c.symbID));break;}
+
+ case API_RailingNodeID:{const auto& c=e.railingNode;owner=c.owner;values.Add("elevationMetres",c.elevation);values.Add("postOffsetMetres",c.postOffset);flags.Add("visible",c.visible);flags.Add("isStatic",c.isStatic);flags.Add("unifyPatterns",c.unifyPatterns);break;}
+ case API_RailingInnerPostID:{const auto& c=e.railingInnerPost;owner=c.owner;values.Add("doublePostOffsetMetres",c.doublePostOffset);values.Add("postCount",c.postNum);values.Add("bottomRailIndex",c.verticalPosition.bottomRailIndex);values.Add("topRailIndex",c.verticalPosition.topRailIndex);row.Add("libraryPartGuid",CreateGuidObjectState(c.symbID));break;}
+ case API_RailingBalusterID:{const auto& c=e.railingBaluster;owner=c.owner;row.Add("libraryPartGuid",CreateGuidObjectState(c.symbID));break;}
+ case API_RailingPanelID:{const auto& c=e.railingPanel;owner=c.owner;flags.Add("visible",c.visible);row.Add("libraryPartGuid",CreateGuidObjectState(c.symbID));break;}
  case API_RailingToprailID:{const auto& c=e.railingToprail;owner=c.owner;flags.Add("visible",c.visible);row.Add("libraryPartGuid",CreateGuidObjectState(c.symbID));break;}
  default:supported=false;break;
  }
@@ -134,4 +154,15 @@ GS::ObjectState GetNativeQuantityPreflightV1Command::Execute(const GS::ObjectSta
  GS::Array<GS::ObjectState> inputs;p.Get("elements",inputs);GS::ObjectState out("nativeModelWrites",0,"quantityEngineCalled",false,"quarantineRetained",true);const auto& rows=out.AddList<GS::ObjectState>("elements");
  for(const auto& item:inputs){API_Element e={};const auto err=ReadElement(item,e);if(err!=NoError){rows(CreateErrorResponse(err,"PRE_ENGINE_ELEMENT_READ_FAILED"));continue;}
  rows(GS::ObjectState("elementId",CreateGuidObjectState(e.header.guid),"nativeTypeId",static_cast<Int32>(e.header.type.typeID),"homeStory",static_cast<Int32>(e.header.floorInd),"stage","PRE_ENGINE_ELEMENT_IDENTIFIED_NO_QUANTITY_CALL","engineCallAllowed",false));}return out;
+}
+
+// Direct SDK identity resolution complements existing complete Navigator trees.
+// Each map is explicit. A GUID in another map is never silently substituted.
+GS::ObjectState GetNativeNavigatorBindingsV1Command::Execute(const GS::ObjectState& p,GS::ProcessControl&) const {
+ GS::Array<GS::ObjectState> inputs;p.Get("items",inputs);GS::ObjectState out("nativeModelWrites",0);const auto& rows=out.AddList<GS::ObjectState>("items");
+ for(const auto& input:inputs){const auto* id=input.Get("navigatorItemId");if(id==nullptr){rows(CreateErrorResponse(APIERR_BADPARS,"Navigator ID required"));continue;}const auto guid=GetGuidFromObjectState(*id);GS::UniString map;input.Get("navigatorMapId",map);API_NavigatorItem item={};item.mapId=map=="ProjectMap"?API_ProjectMap:(map=="LayoutBook"?API_LayoutMap:API_PublicViewMap);
+ const auto err=ACAPI_Navigator_GetNavigatorItem(&guid,&item);if(err!=NoError){rows(CreateErrorResponse(err,"Navigator identity not resolved in requested map"));continue;}
+ GS::ObjectState row("navigatorItemId",CreateGuidObjectState(item.guid),"requestedMap",map,"actualMapId",static_cast<Int32>(item.mapId),"itemTypeId",static_cast<Int32>(item.itemType),"sourceGuid",CreateGuidObjectState(item.sourceGuid),"databaseTypeId",static_cast<Int32>(item.db.typeID),"databaseId",CreateGuidObjectState(DatabaseIdResolver::Instance().GetIdOfDatabase(item.db)),"homeStory",static_cast<Int32>(item.floorNum),"isIndependent",item.isIndependent,"identityMatchesRequest",item.guid==guid);
+ API_NavigatorItem parent={};parent.mapId=item.mapId;const auto pe=ACAPI_Navigator_GetNavigatorParentItem(&guid,&parent);row.Add("parentQueryError",static_cast<Int32>(pe));if(pe==NoError)row.Add("parentItemId",CreateGuidObjectState(parent.guid));rows(row);
+ }return out;
 }

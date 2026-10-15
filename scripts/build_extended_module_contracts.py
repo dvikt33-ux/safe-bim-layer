@@ -26,14 +26,17 @@ def contracts():
         arcs=arr(obj({'beginIndex':I,'endIndex':I,'angle':N})),vertexIds=arr(I),edgeIds=arr(I)))
     header=dict(elementId=eid,nativeTypeId=I,homeStory=I)
     envelope=obj(dict(header,polygon=polygon,roofEdgeTypes=arr(I),roofClass=I,roofLevel=N,
-        pivotPolygon=polygon,shellClass=I,shellShapes=arr(obj({'slot':I,'polygon':polygon})),
-        shellContours=arr(obj({'slot':I,'hole':B,'depth':N,'polygon':polygon,'planeTransform':arr(N,minItems=12,maxItems=12)})),
+        pivotPolygon=polygon,shellClass=I,shellShapes=arr(obj({'slot':I,'polygon':polygon,'bodyFlags':arr(obj({'allocationIndex':I,'generatesBody':B})),'bodyFlagIndexAuthority':S},['slot','polygon','bodyFlags','bodyFlagIndexAuthority'])),
+        shellContours=arr(obj({'slot':I,'hole':B,'depth':N,'polygon':polygon,'planeTransform':arr(N,minItems=12,maxItems=12),'edgeData':arr(obj({'allocationIndex':I,'edgeTypeId':I,'sideTypeId':I,'sideAngleRadians':N,'surfaceOverridden':B,'surfaceIndex':I}))})),
         shellContourCountExpected=I,shellContourCountAllocated=I,
         edgeTrims=arr(obj({'memoIndex':I,'sideTypeId':I,'sideAngleRadians':N})),
         sideMaterials=arr(obj({'memoIndex':I,'overridden':B,'surfaceIndex':I})),
         pivotEdgeOverrides=arr(obj({'memoIndex':I,'pivotEdgeUniqueId':I,'segmentTypeId':I,
             'levels':arr(obj({'levelIndex':I,'angleRadians':N,'angleTypeId':I,'eavesOverhangMetres':N,'topSurfaceIndex':I,'bottomSurfaceIndex':I}))})),
-        shellBasePlaneTransform=arr(N,minItems=12,maxItems=12),serializationBoundary=S),
+        shellBasePlaneTransform=arr(N,minItems=12,maxItems=12),shellClassParameters=obj({'coordinateFrame':S,'class':S,'begin':obj({'x':N,'y':N,'z':N}),'extrusionVector':obj({'x':N,'y':N,'z':N}),'shapeDirection':obj({'x':N,'y':N}),
+        'axisBase':obj({'matrix3x4':arr(N,minItems=12,maxItems=12)}),'plane1':obj({'matrix3x4':arr(N,minItems=12,maxItems=12)}),'plane2':obj({'matrix3x4':arr(N,minItems=12,maxItems=12)}),
+        'slantAngleRadians':N,'shapePlaneTiltRadians':N,'beginPlaneTiltRadians':N,'endPlaneTiltRadians':N,'revolutionAngleRadians':N,'distortionAngleRadians':N,'beginAngleRadians':N,
+        'distortionVector':obj({'x':N,'y':N}),'segmentTypeId':I,'segmentsByArc':I,'segmentsByCircle':I,'segmentedSurfaces':B,'morphingRuleId':I},['coordinateFrame','class']),serializationBoundary=S),
         list(header)+['polygon','roofEdgeTypes','serializationBoundary'])
     drawings=obj(dict(elementId=eid,navigatorItemId=eid,databaseQualified=B,databaseQueryError=I,databaseTypeId=I,databaseId=eid,databaseRestoreError=I,linkGuid=eid,linkTypeId=I,viewTypeId=I,contentTypeId=I,
         viewDeleted=B,externalPathPresent=B,updateStatus=I,statusQueryError=I,contentBoxQueryError=I,
@@ -69,9 +72,18 @@ def contracts():
       'GetNativeQuantityPreflightV1':(inputs,obj({'nativeModelWrites':{'const':0},'quantityEngineCalled':{'const':False},'quarantineRetained':{'const':True},
         'elements':arr(either(obj(dict(header,stage={'const':'PRE_ENGINE_ELEMENT_IDENTIFIED_NO_QUANTITY_CALL'},engineCallAllowed={'const':False}))))}),
         'Read element identity and type only before the quarantined quantity engine. Does not allocate quantities, construct masks or call engine.')})
+    value=dict(anyOf=[S,N,B,arr(S),arr(N),arr(B)])
+    parameter=obj({'name':S,'displayName':S,'index':I,'type':S,'nativeTypeId':I,'typeModifier':I,'dimension1':I,'dimension2':I,'flags':I,'valueStatus':S,'value':value},['name','displayName','index','type','nativeTypeId','typeModifier','dimension1','dimension2','flags','valueStatus'])
+    nav=obj({'navigatorItemId':eid,'requestedMap':S,'actualMapId':I,'itemTypeId':I,'sourceGuid':eid,'databaseTypeId':I,'databaseId':eid,'homeStory':I,'isIndependent':B,'identityMatchesRequest':B,'parentQueryError':I,'parentItemId':eid},['navigatorItemId','requestedMap','actualMapId','itemTypeId','sourceGuid','databaseTypeId','databaseId','homeStory','isIndependent','identityMatchesRequest','parentQueryError'])
+    defs.update({
+      'GetNativeLibraryPartDefaultsV1':(obj({'libraryPartIndices':arr(dict(I,minimum=1),minItems=1,maxItems=8,uniqueItems=True)}),obj({'nativeModelWrites':{'const':0},'authority':S,'parts':arr(either(obj({'libraryPartIndex':I,'defaultA':N,'defaultB':N,'parameterCount':I,'parameters':arr(parameter)})))}),
+        'Read bounded library-part default parameter definitions without a placed instance or global parameter context. Reuse existing Tapir serializers; dictionary/oversize arrays explicitly omitted; SDK handles disposed.'),
+      'GetNativeNavigatorBindingsV1':(obj({'items':arr(obj({'navigatorItemId':eid,'navigatorMapId':dict(S,enum=['PublicViewMap','ProjectMap','LayoutBook'])}),minItems=1,maxItems=32)}),obj({'nativeModelWrites':{'const':0},'items':arr(either(nav))}),
+        'Resolve exact Navigator GUID in an explicit map, source GUID, database and parent without rebuilding/updating Drawing. Complements existing Navigator tree, no name matching.')})
     rows={name:dict(version='29',category='Native SDK grouped read adapter',description=d,
         parameters=p,returns=r,availability='BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED',
         implementationSource='archicad-addon/Sources/NativeExtendedModules.cpp') for name,(p,r,d) in defs.items()}
+    rows['GetNativeLibraryPartDefaultsV1']['implementationSource']='archicad-addon/Sources/NativeLibraryDefaults.inc'
     rows['GetNativeElementQuantitiesV1'].update(
         executionBlocker='AC29_QUANTITY_ENGINE_ACCESS_VIOLATION_ROOT_CAUSE_NOT_VERIFIED_NO_REPLAY',
         description='QUARANTINED after an actual AC29 quantity query crash. Contract remains discoverable/preparable; APA dispatch and native entry refuse execution until independently diagnosed.')

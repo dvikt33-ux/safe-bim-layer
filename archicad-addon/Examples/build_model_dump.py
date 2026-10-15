@@ -159,7 +159,7 @@ def main():
         (build_root/'runtime-source-snapshot.json').write_bytes((json.dumps(manifest,sort_keys=True,indent=2)+'\n').encode())
     shutil.copy2(addon_overlay / "Sources" / "ModelDumpCommands.cpp", addon_source / "Sources" / "ModelDumpCommands.cpp")
     shutil.copy2(addon_overlay / "Sources" / "ModelDumpCommands.hpp", addon_source / "Sources" / "ModelDumpCommands.hpp")
-    for name in ("NativeGridCommands.cpp", "NativeGridCommands.hpp", "NativeStairCommands.cpp", "NativeStairCommands.hpp", "NativeModuleCommands.cpp", "NativeModuleCommands.hpp", "NativeExtendedModules.cpp", "NativeExtendedModules.hpp", "NativeExtendedSchemas.inc", "NativeQuantityFields.inc"):
+    for name in ("NativeGridCommands.cpp", "NativeGridCommands.hpp", "NativeStairCommands.cpp", "NativeStairCommands.hpp", "NativeModuleCommands.cpp", "NativeModuleCommands.hpp", "NativeExtendedModules.cpp", "NativeExtendedModules.hpp", "NativeExtendedSchemas.inc", "NativeQuantityFields.inc", "NativeLibraryDefaults.inc"):
         shutil.copy2(addon_overlay / "Sources" / name, addon_source / "Sources" / name)
     overlay_registration(addon_source)
     from roof_edit_overlay import apply as apply_roof_edit_overlay

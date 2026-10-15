@@ -35,7 +35,7 @@ class FunctionalModules(unittest.TestCase):
         self.assertEqual(proof['nativeModelWrites'],0)
     def test_attachment_drift_idempotence_and_no_native_permission(self):
         r=connected();before=r.fingerprint;A.connect_functional_modules(r);self.assertEqual(r.fingerprint,before)
-        self.assertEqual(len(r.catalog['commands']),385)
+        self.assertEqual(len(r.catalog['commands']),387)
         manifest=json.loads((ROOT/'schemas/accelerator/functional-modules.json').read_text(encoding='utf8'));manifest['local']['implementationSHA256']='0'*64
         with tempfile.TemporaryDirectory() as temp:
             path=Path(temp)/'manifest.json';path.write_text(json.dumps(manifest))
@@ -80,5 +80,14 @@ class ComponentContextIntegration(unittest.TestCase):
             drawings=dict(drawings=[dict(elementId=dict(guid='drawing'),linkGuid=dict(guid='unknown'),viewDeleted=False)]))
         self.assertEqual(facts['edges'],[])
         self.assertEqual(len(facts['omitted']),2)
+
+class NativePositiveContracts(unittest.TestCase):
+    def test_library_defaults_and_explicit_navigator_map_prepare(self):
+        r=connected()
+        r.prepare('AddOn.TapirCommand.GetNativeLibraryPartDefaultsV1',dict(libraryPartIndices=[1]))
+        with self.assertRaises(Exception):r.prepare('AddOn.TapirCommand.GetNativeLibraryPartDefaultsV1',dict(libraryPartIndices=[0]))
+        r.prepare('AddOn.TapirCommand.GetNativeNavigatorBindingsV1',dict(items=[dict(navigatorItemId=dict(guid='source-only'),navigatorMapId='ProjectMap')]))
+        text=json.dumps(r.catalog['commands']['AddOn.TapirCommand.GetNativeEnvelopeMemoV1']['returns'])
+        self.assertIn('bodyFlags',text);self.assertIn('axisBase',text);self.assertIn('plane2',text)
 
 if __name__=='__main__':unittest.main()
