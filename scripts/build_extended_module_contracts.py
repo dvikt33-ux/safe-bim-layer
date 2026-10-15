@@ -74,15 +74,19 @@ def contracts():
         'Read element identity and type only before the quarantined quantity engine. Does not allocate quantities, construct masks or call engine.')})
     value=dict(anyOf=[S,N,B,arr(S),arr(N),arr(B)])
     parameter=obj({'name':S,'displayName':S,'index':I,'type':S,'nativeTypeId':I,'typeModifier':I,'dimension1':I,'dimension2':I,'flags':I,'valueStatus':S,'value':value},['name','displayName','index','type','nativeTypeId','typeModifier','dimension1','dimension2','flags','valueStatus'])
-    nav=obj({'navigatorItemId':eid,'requestedMap':S,'actualMapId':I,'itemTypeId':I,'sourceGuid':eid,'databaseTypeId':I,'databaseId':eid,'homeStory':I,'isIndependent':B,'identityMatchesRequest':B,'parentQueryError':I,'parentItemId':eid},['navigatorItemId','requestedMap','actualMapId','itemTypeId','sourceGuid','databaseTypeId','databaseId','homeStory','isIndependent','identityMatchesRequest','parentQueryError'])
+    nav=obj({'navigatorItemId':eid,'requestedMap':S,'actualMapId':I,'itemTypeId':I,'sourceGuid':eid,'databaseTypeId':I,'databaseId':eid,'homeStory':I,'isIndependent':B,'identityMatchesRequest':B,'mapMatchesRequest':B,'parentQueryError':I,'parentItemId':eid},['navigatorItemId','requestedMap','actualMapId','itemTypeId','sourceGuid','databaseTypeId','databaseId','homeStory','isIndependent','identityMatchesRequest','mapMatchesRequest','parentQueryError'])
     defs.update({
       'GetNativeLibraryPartDefaultsV1':(obj({'libraryPartIndices':arr(dict(I,minimum=1),minItems=1,maxItems=8,uniqueItems=True)}),obj({'nativeModelWrites':{'const':0},'authority':S,'parts':arr(either(obj({'libraryPartIndex':I,'defaultA':N,'defaultB':N,'parameterCount':I,'parameters':arr(parameter)})))}),
         'Read bounded library-part default parameter definitions without a placed instance or global parameter context. Reuse existing Tapir serializers; dictionary/oversize arrays explicitly omitted; SDK handles disposed.'),
       'GetNativeNavigatorBindingsV1':(obj({'items':arr(obj({'navigatorItemId':eid,'navigatorMapId':dict(S,enum=['PublicViewMap','ProjectMap','LayoutBook'])}),minItems=1,maxItems=32)}),obj({'nativeModelWrites':{'const':0},'items':arr(either(nav))}),
         'Resolve exact Navigator GUID in an explicit map, source GUID, database and parent without rebuilding/updating Drawing. Complements existing Navigator tree, no name matching.')})
+    defs['CreateNativeAssemblyV1']=(obj({'kind':dict(S,enum=['CurtainWall','Railing','ExtrudedShell']),'origin':obj({'x':N,'y':N}),'homeStory':dict(I,minimum=-100,maximum=100),'relativeLevel':N,'length':dict(N,exclusiveMinimum=0,maximum=100),'height':dict(N,exclusiveMinimum=0,maximum=20),'extrusionDepth':dict(N,exclusiveMinimum=0,maximum=100)},['kind','origin','homeStory','relativeLevel','length','height']),
+        either(obj({'nativeModelWrites':{'const':1},'nativeTypeId':I,'homeStory':I,'placementFrame':{'const':'HOME_STORY_RELATIVE_LEVEL'},'engineering':{'const':'NOT_VERIFIED'},'createdElements':arr(obj({'elementId':eid}),minItems=1,maxItems=1)})),
+        'Native SDK defaults+Create for one straight CurtainWall/Railing or triangular-profile ExtrudedShell. Explicit geometry, preserved tool defaults; SceneWriter CREATE authorization/readback required. No Morph, quantity engine or custom geometry kernel.')
     rows={name:dict(version='29',category='Native SDK grouped read adapter',description=d,
         parameters=p,returns=r,availability='BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED',
         implementationSource='archicad-addon/Sources/NativeExtendedModules.cpp') for name,(p,r,d) in defs.items()}
+    rows['CreateNativeAssemblyV1'].update(operationKind='CREATE',impact='MODEL',implementationSource='archicad-addon/Sources/NativeAssemblyCommands.inc')
     rows['GetNativeLibraryPartDefaultsV1']['implementationSource']='archicad-addon/Sources/NativeLibraryDefaults.inc'
     rows['GetNativeElementQuantitiesV1'].update(
         executionBlocker='AC29_QUANTITY_ENGINE_ACCESS_VIOLATION_ROOT_CAUSE_NOT_VERIFIED_NO_REPLAY',

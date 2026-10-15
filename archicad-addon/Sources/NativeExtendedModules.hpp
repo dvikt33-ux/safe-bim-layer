@@ -10,4 +10,5 @@ APA_EXTENDED_COMMAND(GetNativeOpeningConnectionsV1)
 APA_EXTENDED_COMMAND(GetNativeQuantityPreflightV1)
 APA_EXTENDED_COMMAND(GetNativeLibraryPartDefaultsV1)
 APA_EXTENDED_COMMAND(GetNativeNavigatorBindingsV1)
+APA_EXTENDED_COMMAND(CreateNativeAssemblyV1)
 #undef APA_EXTENDED_COMMAND

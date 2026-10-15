@@ -15,6 +15,7 @@ DEF(GetNativeOpeningConnectionsV1)
 DEF(GetNativeQuantityPreflightV1)
 DEF(GetNativeLibraryPartDefaultsV1)
 DEF(GetNativeNavigatorBindingsV1)
+DEF(CreateNativeAssemblyV1)
 #undef DEF
 #include "NativeExtendedSchemas.inc"
 
@@ -161,8 +162,10 @@ GS::ObjectState GetNativeQuantityPreflightV1Command::Execute(const GS::ObjectSta
 GS::ObjectState GetNativeNavigatorBindingsV1Command::Execute(const GS::ObjectState& p,GS::ProcessControl&) const {
  GS::Array<GS::ObjectState> inputs;p.Get("items",inputs);GS::ObjectState out("nativeModelWrites",0);const auto& rows=out.AddList<GS::ObjectState>("items");
  for(const auto& input:inputs){const auto* id=input.Get("navigatorItemId");if(id==nullptr){rows(CreateErrorResponse(APIERR_BADPARS,"Navigator ID required"));continue;}const auto guid=GetGuidFromObjectState(*id);GS::UniString map;input.Get("navigatorMapId",map);API_NavigatorItem item={};item.mapId=map=="ProjectMap"?API_ProjectMap:(map=="LayoutBook"?API_LayoutMap:API_PublicViewMap);
- const auto err=ACAPI_Navigator_GetNavigatorItem(&guid,&item);if(err!=NoError){rows(CreateErrorResponse(err,"Navigator identity not resolved in requested map"));continue;}
- GS::ObjectState row("navigatorItemId",CreateGuidObjectState(item.guid),"requestedMap",map,"actualMapId",static_cast<Int32>(item.mapId),"itemTypeId",static_cast<Int32>(item.itemType),"sourceGuid",CreateGuidObjectState(item.sourceGuid),"databaseTypeId",static_cast<Int32>(item.db.typeID),"databaseId",CreateGuidObjectState(DatabaseIdResolver::Instance().GetIdOfDatabase(item.db)),"homeStory",static_cast<Int32>(item.floorNum),"isIndependent",item.isIndependent,"identityMatchesRequest",item.guid==guid);
+ const auto requestedMap=item.mapId;const auto err=ACAPI_Navigator_GetNavigatorItem(&guid,&item);if(err!=NoError){rows(CreateErrorResponse(err,"Navigator identity not resolved in requested map"));continue;}
+ GS::ObjectState row("navigatorItemId",CreateGuidObjectState(item.guid),"requestedMap",map,"actualMapId",static_cast<Int32>(item.mapId),"itemTypeId",static_cast<Int32>(item.itemType),"sourceGuid",CreateGuidObjectState(item.sourceGuid),"databaseTypeId",static_cast<Int32>(item.db.typeID),"databaseId",CreateGuidObjectState(DatabaseIdResolver::Instance().GetIdOfDatabase(item.db)),"homeStory",static_cast<Int32>(item.floorNum),"isIndependent",item.isIndependent,"identityMatchesRequest",item.guid==guid,"mapMatchesRequest",item.mapId==requestedMap);
  API_NavigatorItem parent={};parent.mapId=item.mapId;const auto pe=ACAPI_Navigator_GetNavigatorParentItem(&guid,&parent);row.Add("parentQueryError",static_cast<Int32>(pe));if(pe==NoError)row.Add("parentItemId",CreateGuidObjectState(parent.guid));rows(row);
  }return out;
 }
+
+#include "NativeAssemblyCommands.inc"

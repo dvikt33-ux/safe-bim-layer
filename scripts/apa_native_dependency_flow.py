@@ -7,12 +7,12 @@ import hashlib
 import json
 
 
-def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids=(), memberships=()):
+def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids=(), memberships=(), navigator_bindings=None, layout_bindings=()):
     nodes, edges, evidence, omitted = set(), set(), [], []
 
     def guid(value):
         value = value.get('guid') if isinstance(value, dict) else None
-        return value.upper() if isinstance(value, str) and value.strip() else None
+        return value.upper() if isinstance(value, str) and value.strip() and value.replace('-','').strip('0') else None
 
     def edge(source, target, kind):
         if source and target and source != target:
@@ -62,6 +62,16 @@ def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids
         for item in row.get('cutElements', []):
             edge(guid(item), current, 'NATIVE_OPENING_CUT_HOST')
 
+    for row in (navigator_bindings or {}).get('items', []):
+        if row.get('identityMatchesRequest') and row.get('mapMatchesRequest'):
+            current = guid(row.get('navigatorItemId'))
+            edge(guid(row.get('sourceGuid')), current, 'NATIVE_NAVIGATOR_SOURCE')
+    layouts = {}
+    for row in layout_bindings:
+        db, layout = guid(row.get('databaseId')), guid(row.get('navigatorItemId'))
+        if db and layout:
+            layouts.setdefault(db, set()).add(layout)
+
     known_views = {v.upper() for v in view_ids}
     for row in (drawings or {}).get('drawings', []):
         drawing = guid(row.get('elementId'))
@@ -69,6 +79,9 @@ def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids
             omitted.append('DRAWING_ERROR_OR_ID_MISSING')
             continue
         nodes.add(drawing)
+        owners = layouts.get(guid(row.get('databaseId')), set())
+        if row.get('databaseQualified') and len(owners) == 1:
+            edge(drawing, next(iter(owners)), 'NATIVE_DRAWING_OWNING_LAYOUT')
         source = guid(row.get('linkGuid'))
         if source in known_views and row.get('viewDeleted') is False:
             edge(source, drawing, 'NATIVE_DRAWING_LINK_VERIFIED_IN_VIEWMAP')

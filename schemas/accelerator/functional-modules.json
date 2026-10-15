@@ -3,11 +3,12 @@
   "sdkImplementationSHA256": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72",
   "sdkImplementationFiles": {
     "archicad-addon/Sources/NativeModuleCommands.cpp": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72",
-    "archicad-addon/Sources/NativeExtendedModules.cpp": "05faa05c9105a1fd03a48eac041c4c4793e46e71ca49f9a9168d809177b613d0",
-    "archicad-addon/Sources/NativeExtendedModules.hpp": "cb6ad4b55fbb813235d72e2f82d869a6e3aac71004aa5d1d929f327a01dd6bb3",
-    "archicad-addon/Sources/NativeExtendedSchemas.inc": "07729638d9aeec541ea69f31fc640a366d381d4265834ac5b7ffd5de8f9e0235",
+    "archicad-addon/Sources/NativeExtendedModules.cpp": "7606122a5f9a2dd4b160fffda49860400ba136eb9684dc616eced70eab97e102",
+    "archicad-addon/Sources/NativeExtendedModules.hpp": "f978eca6f8c4ca4b90fc23b3ac9cfe3650e50e3ff584bdcc9ce132d0e6af4ce8",
+    "archicad-addon/Sources/NativeExtendedSchemas.inc": "e08d3c223b257e548f6641c6c0698703c0f8c07b459c1df3268708f5fd53cac9",
     "archicad-addon/Sources/NativeQuantityFields.inc": "470d052f2cc23bc0536efc658e7a1d9840bdcc214d500b0709e598e805f58f53",
-    "archicad-addon/Sources/NativeLibraryDefaults.inc": "81d356c9365a4a9f8d31970646aa076c7d10a627fe812ee53e3023834a8ec7b9"
+    "archicad-addon/Sources/NativeLibraryDefaults.inc": "81d356c9365a4a9f8d31970646aa076c7d10a627fe812ee53e3023834a8ec7b9",
+    "archicad-addon/Sources/NativeAssemblyCommands.inc": "34da20beefb90e967533620e750b16915e9ae96bb8405295433d14a97eda39c3"
   },
   "sdkProviders": {
     "TapirCommand": {
@@ -1551,7 +1552,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "05faa05c9105a1fd03a48eac041c4c4793e46e71ca49f9a9168d809177b613d0"
+        "implementationSHA256": "7606122a5f9a2dd4b160fffda49860400ba136eb9684dc616eced70eab97e102"
       },
       "GetNativeDrawingAssociationsV1": {
         "version": "29",
@@ -1786,7 +1787,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "05faa05c9105a1fd03a48eac041c4c4793e46e71ca49f9a9168d809177b613d0"
+        "implementationSHA256": "7606122a5f9a2dd4b160fffda49860400ba136eb9684dc616eced70eab97e102"
       },
       "GetNativeElementHotspotsV1": {
         "version": "29",
@@ -1941,7 +1942,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "05faa05c9105a1fd03a48eac041c4c4793e46e71ca49f9a9168d809177b613d0"
+        "implementationSHA256": "7606122a5f9a2dd4b160fffda49860400ba136eb9684dc616eced70eab97e102"
       },
       "GetNativeElementQuantitiesV1": {
         "version": "29",
@@ -2105,7 +2106,7 @@
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
         "executionBlocker": "AC29_QUANTITY_ENGINE_ACCESS_VIOLATION_ROOT_CAUSE_NOT_VERIFIED_NO_REPLAY",
-        "implementationSHA256": "05faa05c9105a1fd03a48eac041c4c4793e46e71ca49f9a9168d809177b613d0"
+        "implementationSHA256": "7606122a5f9a2dd4b160fffda49860400ba136eb9684dc616eced70eab97e102"
       },
       "GetNativeComponentBindingsV1": {
         "version": "29",
@@ -2314,7 +2315,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "05faa05c9105a1fd03a48eac041c4c4793e46e71ca49f9a9168d809177b613d0"
+        "implementationSHA256": "7606122a5f9a2dd4b160fffda49860400ba136eb9684dc616eced70eab97e102"
       },
       "GetNativeOpeningConnectionsV1": {
         "version": "29",
@@ -2585,7 +2586,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "05faa05c9105a1fd03a48eac041c4c4793e46e71ca49f9a9168d809177b613d0"
+        "implementationSHA256": "7606122a5f9a2dd4b160fffda49860400ba136eb9684dc616eced70eab97e102"
       },
       "GetNativeQuantityPreflightV1": {
         "version": "29",
@@ -2720,7 +2721,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "05faa05c9105a1fd03a48eac041c4c4793e46e71ca49f9a9168d809177b613d0"
+        "implementationSHA256": "7606122a5f9a2dd4b160fffda49860400ba136eb9684dc616eced70eab97e102"
       },
       "GetNativeLibraryPartDefaultsV1": {
         "version": "29",
@@ -3027,6 +3028,9 @@
                       "identityMatchesRequest": {
                         "type": "boolean"
                       },
+                      "mapMatchesRequest": {
+                        "type": "boolean"
+                      },
                       "parentQueryError": {
                         "type": "integer"
                       },
@@ -3055,6 +3059,7 @@
                       "homeStory",
                       "isIndependent",
                       "identityMatchesRequest",
+                      "mapMatchesRequest",
                       "parentQueryError"
                     ],
                     "additionalProperties": false
@@ -3096,7 +3101,163 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "05faa05c9105a1fd03a48eac041c4c4793e46e71ca49f9a9168d809177b613d0"
+        "implementationSHA256": "7606122a5f9a2dd4b160fffda49860400ba136eb9684dc616eced70eab97e102"
+      },
+      "CreateNativeAssemblyV1": {
+        "version": "29",
+        "category": "Native SDK grouped read adapter",
+        "description": "Native SDK defaults+Create for one straight CurtainWall/Railing or triangular-profile ExtrudedShell. Explicit geometry, preserved tool defaults; SceneWriter CREATE authorization/readback required. No Morph, quantity engine or custom geometry kernel.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "CurtainWall",
+                "Railing",
+                "ExtrudedShell"
+              ]
+            },
+            "origin": {
+              "type": "object",
+              "properties": {
+                "x": {
+                  "type": "number"
+                },
+                "y": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "x",
+                "y"
+              ],
+              "additionalProperties": false
+            },
+            "homeStory": {
+              "type": "integer",
+              "minimum": -100,
+              "maximum": 100
+            },
+            "relativeLevel": {
+              "type": "number"
+            },
+            "length": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 100
+            },
+            "height": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 20
+            },
+            "extrusionDepth": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 100
+            }
+          },
+          "required": [
+            "kind",
+            "origin",
+            "homeStory",
+            "relativeLevel",
+            "length",
+            "height"
+          ],
+          "additionalProperties": false
+        },
+        "returns": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "nativeModelWrites": {
+                  "const": 1
+                },
+                "nativeTypeId": {
+                  "type": "integer"
+                },
+                "homeStory": {
+                  "type": "integer"
+                },
+                "placementFrame": {
+                  "const": "HOME_STORY_RELATIVE_LEVEL"
+                },
+                "engineering": {
+                  "const": "NOT_VERIFIED"
+                },
+                "createdElements": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "elementId": {
+                        "type": "object",
+                        "properties": {
+                          "guid": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "required": [
+                          "guid"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "elementId"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "nativeModelWrites",
+                "nativeTypeId",
+                "homeStory",
+                "placementFrame",
+                "engineering",
+                "createdElements"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "error"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
+        "implementationSource": "archicad-addon/Sources/NativeAssemblyCommands.inc",
+        "operationKind": "CREATE",
+        "impact": "MODEL",
+        "implementationSHA256": "34da20beefb90e967533620e750b16915e9ae96bb8405295433d14a97eda39c3"
       }
     },
     "AddOnCommandTest": {
@@ -4083,7 +4244,7 @@
       "MemoPolygonInputs": []
     }
   },
-  "newNativeContracts": 14,
+  "newNativeContracts": 15,
   "newLocalCatalogEntries": 10,
   "newAnalyticalCapabilities": 7,
   "reusedExistingAPALocalUtilities": 3,

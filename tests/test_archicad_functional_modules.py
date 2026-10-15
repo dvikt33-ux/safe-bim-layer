@@ -35,7 +35,7 @@ class FunctionalModules(unittest.TestCase):
         self.assertEqual(proof['nativeModelWrites'],0)
     def test_attachment_drift_idempotence_and_no_native_permission(self):
         r=connected();before=r.fingerprint;A.connect_functional_modules(r);self.assertEqual(r.fingerprint,before)
-        self.assertEqual(len(r.catalog['commands']),387)
+        self.assertEqual(len(r.catalog['commands']),388)
         manifest=json.loads((ROOT/'schemas/accelerator/functional-modules.json').read_text(encoding='utf8'));manifest['local']['implementationSHA256']='0'*64
         with tempfile.TemporaryDirectory() as temp:
             path=Path(temp)/'manifest.json';path.write_text(json.dumps(manifest))
@@ -89,5 +89,12 @@ class NativePositiveContracts(unittest.TestCase):
         r.prepare('AddOn.TapirCommand.GetNativeNavigatorBindingsV1',dict(items=[dict(navigatorItemId=dict(guid='source-only'),navigatorMapId='ProjectMap')]))
         text=json.dumps(r.catalog['commands']['AddOn.TapirCommand.GetNativeEnvelopeMemoV1']['returns'])
         self.assertIn('bodyFlags',text);self.assertIn('axisBase',text);self.assertIn('plane2',text)
+
+class NativeAssemblyPolicy(unittest.TestCase):
+    def test_new_native_create_cannot_use_read_dispatch(self):
+        r=connected();p=dict(kind='CurtainWall',origin=dict(x=200,y=0),homeStory=0,relativeLevel=0,length=2,height=2)
+        ticket=r.prepare('AddOn.TapirCommand.CreateNativeAssemblyV1',p)
+        self.assertEqual(ticket['effect'],'CREATE')
+        with self.assertRaisesRegex(ValueError,'SOURCE_REVIEWED_READ_ONLY_EFFECT_REQUIRED'):r.read(None,ticket,True)
 
 if __name__=='__main__':unittest.main()
