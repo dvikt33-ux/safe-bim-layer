@@ -23,6 +23,7 @@
 - [FINCH3D_AC29_LICENSE_AND_REUSE_AUDIT_20261015.md](FINCH3D_AC29_LICENSE_AND_REUSE_AUDIT_20261015.md) — официальные цены Finch, бесплатный Free-редактор, Archicad 29 beta plug-in, ограничения AI-генерации и применимость Adaptive Plan Library к APA.
 - [ARCHITECHTURES_OPEN_SOURCE_REUSE_AUDIT_20261015.md](ARCHITECHTURES_OPEN_SOURCE_REUSE_AUDIT_20261015.md) — ARCHITEChTURES (закрытая система, тарифы, генерация/парковки) и 10 исследованных кодовых баз: разрешённое reuse, лицензии, входы/выходы, антидублирование и минимальные критерии проверки.
 - [WEEKLY_AI_RELEASES_20261008_20261015.md](WEEKLY_AI_RELEASES_20261008_20261015.md) — свежие локальные модели, агенты и оболочки 8–15 октября 2026 (LFM2.5-24B-A2B, ColGrep-Agent-2B, Llama Windows, LightOnOCR-3 и др.), лицензии, ограничения 8GB VRAM/48GB RAM и сравнительные эксперименты APA.
+- [COLIBRI_VS_STRATA_20261015.md](COLIBRI_VS_STRATA_20261015.md) — прямое сопоставление Colibrì и Strata: поддержка 8 ГБ VRAM, CPU/GPU/SSD, реальные upstream измерения без некорректного A/B и исследовательская интеграция в APA.
 - Документы контроля APA: [controller](../control/README.md) и [канонический исследовательский журнал](../README.md).
 
 ## Ограничения пользователя
