@@ -95,17 +95,18 @@
       "test_status": "NOT_TESTED",
       "workflow_status": "SHORTLISTED",
       "role": "Большой MoE для глубокого анализа и ревизии",
-      "rationale": "Потенциально высокий уровень при небольшой доле активных параметров; Strata оптимизирована под потребительские GPU.",
-      "blockers": "У проекта заявлены аппаратные требования выше 8 ГБ VRAM / 48 ГБ RAM; реальная работоспособность не доказана.",
+      "rationale": "Одномодельная оптимизация Qwen3.8-Flash-Next 125B/6B, hot experts VRAM + RAM and n-gram SSD, efficient when RAM fits. Developer reports 79 tok/s IQ2_XS RTX5070 12GB + RAM64GB, NOT hardware-matched to Colibri or APA.",
+      "blockers": "Официально GPU ≥12GB VRAM (RTX4060 Laptop 8GB BELOW MINIMUM). 48GB RAM permits IQ2_XS/Q2_0 only under GPU-supported conditions. GPU8 workaround and runtime speed NOT_VERIFIED.",
       "source_urls": [
         "https://github.com/Niko1221/Strata",
         "https://huggingface.co/Qwen/Qwen3.8-Flash-Next"
       ],
-      "source_state": "PRIMARY_PAGE_CHECKED_2026-10-14",
+      "source_state": "PINNED_OFFICIAL_REPO_READ_2026-10-15",
       "local_benchmark": null,
       "version_or_quantization": null,
       "integrated_in_apa": false,
-      "last_reviewed": "2026-10-14"
+      "last_reviewed": "2026-10-15",
+      "audit_evidence": "docs/research/apa-results/ai-candidates/COLIBRI_VS_STRATA_20261015.md"
     },
     {
       "id": "gemma4-e4b-q4",
@@ -1041,6 +1042,30 @@
       "release_date": "2026-10-13",
       "license_status": "Free open source",
       "audit_evidence": "docs/research/apa-results/ai-candidates/WEEKLY_AI_RELEASES_20261008_20261015.md"
+    },
+    {
+      "id": "colibri-inference-engine",
+      "name": "Colibrì JustVugg — multi-model inference engine (НЕ ColGrep)",
+      "kind": "local_inference_engine",
+      "priority": "PROMISING",
+      "decision": "UNDECIDED",
+      "test_status": "NOT_TESTED",
+      "workflow_status": "SHORTLISTED",
+      "role": "Локальный запуск Qwen3-Coder-30B, Qwen3.6-35B, Qwen3.8 Flash Next, GLM/DeepSeek/Kimi via CPU+VRAM+SSD, OpenAI/Anthropic endpoints",
+      "rationale": "Apache2, Windows11 Vulkan/CPU and some CUDA, published reference speed 30tok/s Qwen3.6-35B on RTX3070 8GB (not same hardware); supports more model families than Strata; feasible smaller MoEs on 48GB RAM.",
+      "blockers": "Large 125B Qwen FP8 requires 186GB download; disk streaming can be slow and wear resources. GLM5.2 744B reports 0.05–0.1tok/s on weak laptops. Quality depends on model/checkpoint, not runtime. Installation/benchmark on Lenovo RTX4060 8GB NOT_TESTED.",
+      "source_urls": [
+        "https://github.com/JustVugg/colibri",
+        "https://github.com/JustVugg/colibri/blob/main/docs/qwen38.md",
+        "https://github.com/JustVugg/colibri/blob/main/CHANGELOG.md"
+      ],
+      "source_state": "PINNED_SOURCE_READ_2026-10-15",
+      "local_benchmark": null,
+      "version_or_quantization": "upstream commit bf2442915d6e3dd4cdfd2eb9c2a3d2aa44a25850; engine v2.0.0 2026-10-06",
+      "integrated_in_apa": false,
+      "last_reviewed": "2026-10-15",
+      "upstream_license": "Apache-2.0 engine; model licenses independent",
+      "audit_evidence": "docs/research/apa-results/ai-candidates/COLIBRI_VS_STRATA_20261015.md"
     }
   ]
 }
