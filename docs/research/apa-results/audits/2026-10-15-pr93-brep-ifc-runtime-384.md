@@ -30,7 +30,16 @@ No tests from earlier 735 + 378 + 288 + 384 suites are rerun.
 
 ## Evidence state
 
-Code committed to GitHub. CI must finish before reporting a PASS.
+**CI result VERIFIED: SUCCESS / 384 of 384 PASS**, run
+https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38660906311
+
+- Verified code+workflow commit: `8028cd5ab37c5d23d311cb897e4dde3d6212bd0d`.
+- 10 of 10 Windows test shards SUCCESS, cross-shard accounting SUCCESS (11/11 jobs).
+- 384 discovered and 384 executed unique test IDs; 0 FAIL, ERROR, SKIP, XFAIL or unexpected success, 0 coverage issues.
+- SHA256 of sorted test IDs: `2ee93d1b002165d63419048b04a03b95e802d4cc8f04fbc5d513ec55ba38ff92`.
+- Test count per shard: 34 + 40 + 33 + 47 + 37 + 40 + 31 + 37 + 44 + 41 = 384.
+- GitHub Actions aggregator printed `APA_BREP_IFC_EXACT_384 True` and `APA_BREP_IFC_SHARDS success`. Logs and shard/aggregate artifacts retained in Actions.
+- This final evidence documentation commit does not change tested executable code. No previous suites were rerun.
 The 8 known router defects remain open (not reclassified by this suite).
 The SDK availability tests use a stub *only* and provide zero evidence of
 installed Archicad APX command registration. IFC assertions are local file
