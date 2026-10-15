@@ -173,3 +173,26 @@
 - Подтверждение из текущего пользовательского лога: модель не изменялась через диагностический скрипт; независимый diff PLN не проводился.
 - **Следующая проверка:** сравнение с AC29 SDK/JSON API на основании текущих проверенных функций и контрактов, только затем минимальные целевые тесты новых возможностей на копии PLN. Не заявлять уникальные функции AC30 без сравнительного исходника/проверки.
 
+
+## 9. Официальный Graphisoft SDK 30: отличия для приоритизации APA (SOURCE_VERIFIED, не LIVE_PASS)
+
+**Первичный источник:** Graphisoft [New API features in Archicad 30](https://graphisoft.github.io/archicad-api-devkit/newfeatures.html), просмотрен 2026-10-16. Этот перечень описывает функции, заявленные **новыми для AC30**. Статус ниже относится к документации, а не к реальной работе функций в установленном AC30.
+
+| Подсистема | Новая возможность/изменение SDK 30 | Значение для APA | Статус |
+|---|---|---|---|
+| 3D изображения | `ACAPI_View_GetCurrentImage`, `API_ImageSource`: текущий 3D или render window в `NewDisplay::NativeImage` | нативный экспорт изображения для проверки видов | SOURCE_VERIFIED / LOCAL_NOT_TESTED |
+| Project Info | `ACAPI_ProjectInfo_GetGroups/GetFields/GetField/CreateField/SetFieldValue` и проч. | машиночитаемые и редактируемые реквизиты документации, зависимость полей | SOURCE_VERIFIED / LOCAL_NOT_TESTED |
+| Атрибуты | `ACAPI_Attribute_GetCreationInfo`, `API_AttributeCreationInfo`, новые параметры `ACAPI_Attribute_Create/CreateExt` | provenance / источник создания атрибута | SOURCE_VERIFIED / LOCAL_NOT_TESTED |
+| 3D события | `API_IView3DSettingsEventHandler` и `NotifyView3DSettingsEvent` | отслеживание смены проекции, фильтров, навигации | SOURCE_VERIFIED / LOCAL_NOT_TESTED |
+| MEP | `GetElemId`, `GetPorts`, port defaults getters | облегчённое чтение MEP-портов и defaults | SOURCE_VERIFIED / LOCAL_NOT_TESTED |
+| Publisher | новые callbacks и `ACAPI_AddOnIntegration_InstallPublisherSaveWithOptionMethod`, `...WithTranslatorMethod` и другие | новые сценарии публикации, но обязательная адаптация | SOURCE_VERIFIED / LOCAL_NOT_TESTED |
+| Размеры | независимые перья/линии выносок и зазоры `API_DimElem` | гибкое оформление документации | SOURCE_VERIFIED / LOCAL_NOT_TESTED |
+| Graphical Overrides | `ACAPI_GraphicalOverride_GetActualOverrideCombination/SetActualOverrideCombination` | проверка и управление актуальной комбинацией отображения | SOURCE_VERIFIED / LOCAL_NOT_TESTED |
+
+**Breaking changes:** удалена `ACAPI_AddOnIntegration_InstallPublisherSaveMethod`; заменены `SaveProc` и `PublishFormatMethods::saveProc`. Кроме того, изменены отдельные сигнатуры, появилось несколько deprecation. Нужен source-level migration review при будущей AC30-компиляции.
+
+**Совместимость:** официальный Graphisoft [API Compatibility](https://graphisoft.github.io/archicad-api-devkit/apicompatibility.html) прямо указывает отсутствие бинарной совместимости между основными версиями Archicad: существующий AC29 APX нельзя считать загружаемым в AC30 без пересборки с подходящим DevKit. И [Getting Started](https://graphisoft.github.io/archicad-api-devkit/) перечисляет для AC29 и AC30 Visual Studio 2022 v143, но разные DevKit versions. Это не означает подтверждённую сборку APA 30.
+
+**Public MCP:** официальный Graphisoft [Manage BIM elements via MCP](https://help.graphisoft.com/AC/30/INT/Topics/001_GettingHelp/AI_Assistant/ManageElementsMCP.html) ограничивает инструменты тарифами Collaborate и Max. Реальный пользовательский `tools/list` вернул только GetArchicadInstances; обход лицензии не исследовался. Штатный JSON API независимо работает.
+
+**Следующий выбор:** сперва сравнить с реальным инвентарём APA AC29, приоритет 3D view-image-export и Project Info; затем, **только после стабилизации AC29 и явного разрешения**, экспериментальная AC30 APX-сборка на отдельной ветке/стенде. Новая функция в документации не равно новая функциональность подключённая к APA.
