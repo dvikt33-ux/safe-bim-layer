@@ -1,0 +1,100 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-PARAMETRIC-NATIVE-FLOW",
+      "evidence_ids": [
+        "EV-0"
+      ],
+      "statement": "Current original runtime reads one placed frame:49GDLparameters,oneIFCidentity,sevenproperties,two typedattributeedges. Existing graph yields60nodes59edges;DependencyImpact11nodes. Actual3D sample selections match3nativeGUIDs and retained geometry signatures. Saved bytes unchanged,no modelwrites.",
+      "status": "LIVE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-PARAMETRIC-SDK-BUILD",
+      "evidence_ids": [
+        "EV-1",
+        "EV-2",
+        "EV-3"
+      ],
+      "statement": "Shared9kind native MODIFY with stamps,masked SDK changes,typed attributes and existing SceneWriter/SQLite readback adapter; public MEP ownership topology read. Full Release build passes. New3contracts absent from original runtime; no MODIFY or topology LIVE_PASS.",
+      "status": "BUILD_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-PARAMETRIC-NO-TEST-PUBLICATION",
+      "evidence_ids": [
+        "EV-0",
+        "EV-6",
+        "EV-7"
+      ],
+      "statement": "Actual code/canonical/default workflow hashes inspected; only push,pull_request and manual events; all commits skipCI; direct existing publisher functions, no dispatch,test runner, quantity engine, APX installation or project saves. Opening107switch cancelled at current save prompt.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-0",
+      "kind": "OTHER",
+      "sha256": "c2269b5ad5b0e271bb2a4f17275596f383a636be6e5e911a752e21f76dcd4247",
+      "source_revision": "9a3091638eaa1a9c72f9a08c17d02855d8419edc",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-140914Z-native-parametric-mep/native-runtime.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-1",
+      "kind": "OTHER",
+      "sha256": "0af3d66025654d19375ce3e39c597ad9f3e3b9628e7dcfcf91ac3f8ea571bc54",
+      "source_revision": "9a3091638eaa1a9c72f9a08c17d02855d8419edc",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-140914Z-native-parametric-mep/SDK-build.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-2",
+      "kind": "OTHER",
+      "sha256": "72b1a74ea540d6096608a42b8a5c8313d485c658c3ac0024b6432268a2d223ac",
+      "source_revision": "9a3091638eaa1a9c72f9a08c17d02855d8419edc",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-140914Z-native-parametric-mep/module-contracts.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-3",
+      "kind": "OTHER",
+      "sha256": "8700c47b80af14a05784593eb3dedeb801e332422f44584e1976a933db3c4873",
+      "source_revision": "9a3091638eaa1a9c72f9a08c17d02855d8419edc",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-140914Z-native-parametric-mep/module-coverage.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-4",
+      "kind": "OTHER",
+      "sha256": "568a83df42ae25afe4935fde6a38234875ab03dfcc6dc6e42f3aa384e16b3f03",
+      "source_revision": "9a3091638eaa1a9c72f9a08c17d02855d8419edc",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-140914Z-native-parametric-mep/gap-register.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-5",
+      "kind": "OTHER",
+      "sha256": "26276b4281b71319d7c22c03a0fd917e40e18a495f57e0d73553793948e99ca7",
+      "source_revision": "9a3091638eaa1a9c72f9a08c17d02855d8419edc",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-140914Z-native-parametric-mep/next-capability-proposals.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-6",
+      "kind": "OTHER",
+      "sha256": "915277d6ede4aa7e4e7eb07b59d15b05a2e8abee3f37b1ecb76e9bdf118fa1b2",
+      "source_revision": "9a3091638eaa1a9c72f9a08c17d02855d8419edc",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-140914Z-native-parametric-mep/publication-preflight.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-7",
+      "kind": "OTHER",
+      "sha256": "0c5cc39a7148ce059342ab088234936cddf0f0b8dda73a93e323ef5215d9ad4d",
+      "source_revision": "9a3091638eaa1a9c72f9a08c17d02855d8419edc",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-140914Z-native-parametric-mep/publication-actions.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261015-140914Z-native-parametric-mep",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

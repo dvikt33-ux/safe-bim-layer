@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 58,
+  "run_count": 59,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -406,6 +406,13 @@
       "phase": "LIVE",
       "report": "runs/2026-10-15/APA-RUN-20261015-123508Z-native-linked-data/REPORT.md",
       "run_id": "APA-RUN-20261015-123508Z-native-linked-data",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-15/APA-RUN-20261015-140914Z-native-parametric-mep/REPORT.md",
+      "run_id": "APA-RUN-20261015-140914Z-native-parametric-mep",
       "substep_id": "APA-P70.A11.S03"
     }
   ],

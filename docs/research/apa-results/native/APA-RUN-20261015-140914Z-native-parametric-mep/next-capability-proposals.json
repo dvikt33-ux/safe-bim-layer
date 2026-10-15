@@ -1,0 +1,72 @@
+{
+  "schema": "APA_CAPABILITY_AUDIT_PROPOSALS_V1",
+  "status": "PROPOSALS_ONLY_NO_NEW_TASK_IDS",
+  "proposals": [
+    {
+      "publicAPI": "ACAPI_Element_Change + API_ElementMemo CurtainWall segment/pattern data",
+      "existing": "CreateNativeAssemblyV1/GetNativeComponentBindingsV1/ModifyNativeAssemblyV1",
+      "missing": "CurtainWall reference/segment pattern editing beyond masked root/component fields",
+      "value": "Change facade scheme preserving root identity",
+      "dependencies": [
+        "Exact new APX authorization",
+        "Isolated-copy write authorization",
+        "Native memo topology ownership"
+      ],
+      "cost": "MEDIUM",
+      "runtimeRequired": true,
+      "nativeRisk": "Child regeneration and panel/frame relationship changes"
+    },
+    {
+      "publicAPI": "ACAPI_Element_Change + API_ElementMemo Railing reference association",
+      "existing": "CreateNativeAssemblyV1 and component parameter masks",
+      "missing": "Reference-path editing and authoritative association update",
+      "value": "Edit railing path without geometry-only Stair inference",
+      "dependencies": [
+        "Native memo association contract",
+        "Isolated-copy write authorization"
+      ],
+      "cost": "MEDIUM",
+      "runtimeRequired": true,
+      "nativeRisk": "Component regeneration/host association"
+    },
+    {
+      "publicAPI": "ACAPI_Element_Change APIMemoMask_Polygon + API_ShellShapeData",
+      "existing": "Extruded same-vertex straight profile and vector editing",
+      "missing": "Shell new contour/hole and Revolved/Ruled parameter mutation",
+      "value": "Native shell editing beyond accepted Extruded subset",
+      "dependencies": [
+        "Positive native class-specific samples",
+        "Native memo ownership and contour validation"
+      ],
+      "cost": "MEDIUM_HIGH",
+      "runtimeRequired": true,
+      "nativeRisk": "Invalid shell topology or unsupported class fields"
+    },
+    {
+      "publicAPI": "ACAPI::MEP::RoutingElement/Segment/Node/RigidSegment/Transition",
+      "existing": "GetMEPPorts and new GetNativeMEPTopologyV1",
+      "missing": "Positive runtime ownership/system/reciprocal-port graph",
+      "value": "Typed MEP connectivity without invented physical connections",
+      "dependencies": [
+        "Exact APX permission",
+        "Existing MEP project accessible without losing unsaved state"
+      ],
+      "cost": "LOW_AFTER_RUNTIME_ACCESS",
+      "runtimeRequired": true,
+      "nativeRisk": "Read only; no preference changes or ConnectLogically"
+    },
+    {
+      "publicAPI": "ACAPI_Drawing_GetDrawingLink and public Navigator database IDs",
+      "existing": "GetNativeNavigatorBindingsV1 explicit Drawing context",
+      "missing": "Three source identities not matched by current public ViewMap",
+      "value": "Exact Model/View/Drawing/Layout edges",
+      "dependencies": [
+        "Exact enhanced APX permission",
+        "Additional public Navigator source contract"
+      ],
+      "cost": "MEDIUM",
+      "runtimeRequired": true,
+      "nativeRisk": "Read only; no Drawing update"
+    }
+  ]
+}
