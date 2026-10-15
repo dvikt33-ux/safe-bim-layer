@@ -5,7 +5,7 @@ on:
     paths:
       - 'tests/test_archicad_brep_ifc_registration_unique_qa.py'
       - 'scripts/apa_brep_ifc_unique_qa_shard.py'
-      - '.github/workflows/apa-brep-ifc-384.yml'
+      - '.github/workflows/apa-brep-ifc-unique-384.yml'
 
 permissions:
   contents: read
