@@ -1,0 +1,186 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261015-011839Z-sdk-runtime-connected-memo",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A11",
+  "substep_id": "APA-P70.A11.S03",
+  "executor": "work-sdk-runtime-integration-20261014",
+  "executor_run_id": "APA-CLAIM-SDK-RUNTIME-20261014T225951Z",
+  "phase": "LIVE",
+  "started_at": "2026-10-14T22:59:51Z",
+  "finished_at": "2026-10-15T01:18:39Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "Archicad29 Windows11; existing authorized test PLN; scoped SDK reads; no model-write API",
+    "sdk": "Public SDK grouped queries and safe native quarantine build",
+    "tapir": "Original APX and registration restored after explicitly authorized candidate reads",
+    "source_branch": "feature/apa-sdk-runtime-expansion-20261015"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/94",
+      "revision": "d758957f97cf1e347262da6f7e7b325ae6609ea4",
+      "source_sha": "d758957f97cf1e347262da6f7e7b325ae6609ea4"
+    }
+  ],
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-SDK-RUNTIME-READS",
+      "statement": "Six PR88 SDK/DevKit reads and three new SDK query groups callable in authorized test PLN; nine distinct queries, scoped native facts and no model-write API. Quantity batch failed and is quarantined.",
+      "status": "LIVE_PASS",
+      "evidence_ids": [
+        "EV-1",
+        "EV-2"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-NATIVE-MEMO-FLOW",
+      "statement": "Seven actual native parameter polygons and two holes passed through existing BIM Graph into Shapely; coordinates/holes/stories match independent native details. No resultant BREP or engineering claim.",
+      "status": "OFFLINE_PASS",
+      "evidence_ids": [
+        "EV-4"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-SDK-SAFE-BUILD",
+      "statement": "Full Release binary identity verified for safe rebuild; native quantity entry refuses before engine call. Safe rebuilt binary not installed; unsafe tested binary explicitly separated.",
+      "status": "BUILD_PASS",
+      "evidence_ids": [
+        "EV-3"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-RESTORED-MODEL",
+      "statement": "Original APX SHA and Include registration restored; saved file matches pre-extended-probe control and all258 GUID/native parameter details match after independent read-only reopen. Earlier lifecycle saved-byte drift cause remains unverified; no BREP comparison.",
+      "status": "LIVE_PASS",
+      "evidence_ids": [
+        "EV-5",
+        "EV-2"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-SDK-LIMITS",
+      "statement": "382preparable=372native/source+10local,337restoredruntime versus358testedprototype compatible. One quantity query blocked,13DevKit source-only,32APX not exposed; Drawing auxiliary fields and Shell live sample not verified. S03PARTIAL.",
+      "status": "NOT_VERIFIED",
+      "evidence_ids": [
+        "EV-0",
+        "EV-6"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-0",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-011839Z-sdk-runtime-connected-memo/module-coverage.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "f9095791ed0d9540e4d4eb4d436b9d8c6d520930ea8c018bf052ff47bb0c11a6",
+      "source_revision": "d758957f97cf1e347262da6f7e7b325ae6609ea4"
+    },
+    {
+      "evidence_id": "EV-1",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-011839Z-sdk-runtime-connected-memo/sdk-six-native-reads.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "6472a992814075e243dd27dc9c85f68a61802c21595bef5d7a4cc6660d9b461e",
+      "source_revision": "d758957f97cf1e347262da6f7e7b325ae6609ea4"
+    },
+    {
+      "evidence_id": "EV-2",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-011839Z-sdk-runtime-connected-memo/extended-sdk-runtime.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "e80db146fb5f0e43a875c9373642d7d3cb4d3a5bb34b943796583bc830c48530",
+      "source_revision": "d758957f97cf1e347262da6f7e7b325ae6609ea4"
+    },
+    {
+      "evidence_id": "EV-3",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-011839Z-sdk-runtime-connected-memo/safe-sdk-build.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "4f149080adda9f3c07c9a17e7643ee18119f80665e552cca95c03093f6753543",
+      "source_revision": "d758957f97cf1e347262da6f7e7b325ae6609ea4"
+    },
+    {
+      "evidence_id": "EV-4",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-011839Z-sdk-runtime-connected-memo/native-memo-dataflow.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "47c1e4060767fbb818bb4459092543d90862194429c9975224c0c2672bf0ce26",
+      "source_revision": "d758957f97cf1e347262da6f7e7b325ae6609ea4"
+    },
+    {
+      "evidence_id": "EV-5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-011839Z-sdk-runtime-connected-memo/runtime-restoration.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "45917a98f61e7f873eada17c62860cf9b240e366fd3db389b12ad698e18c0b9c",
+      "source_revision": "d758957f97cf1e347262da6f7e7b325ae6609ea4"
+    },
+    {
+      "evidence_id": "EV-6",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-011839Z-sdk-runtime-connected-memo/gap-register.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "84dc88b036e119c30472d777b3675298d7f76d1272118a4ff7b937552f6a888a",
+      "source_revision": "d758957f97cf1e347262da6f7e7b325ae6609ea4"
+    },
+    {
+      "evidence_id": "EV-7",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-011839Z-sdk-runtime-connected-memo/module-contracts.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "f273e200b4b0e8517453502cdac3fb488b146574e8c0f129c8c6c71662f03f13",
+      "source_revision": "d758957f97cf1e347262da6f7e7b325ae6609ea4"
+    },
+    {
+      "evidence_id": "EV-8",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-011839Z-sdk-runtime-connected-memo/windows-ci.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "7bc70fd59707ac8c212d8060a1639478ea52e33cb5a855029fcfe18cf5346002",
+      "source_revision": "d758957f97cf1e347262da6f7e7b325ae6609ea4"
+    },
+    {
+      "evidence_id": "EV-9",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-011839Z-sdk-runtime-connected-memo/core-knowledge-query.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "f474443e3483b91e7e966f9fa9662eeb2caaa695a985c82b0037722be98262c4",
+      "source_revision": "d758957f97cf1e347262da6f7e7b325ae6609ea4"
+    }
+  ],
+  "report_markdown": "# APA: verified SDK reads and connected native memo analysis\n\nAPA now reads actual Roof/Slab parameter topology and element hotspots through grouped SDK queries, then passes the captured contours and holes through the existing BIM Graph to the existing Shapely adapter. No second writer, geometry engine, Knowledge Graph or controller was added. The PR is based on exact PR #88 head `a444d5a6b481bfabd9c48f23c17df05c51ab0ea4`.\n\nThe authorized PR #88 candidate was loaded and all six added SDK/DevKit queries were registered, called and checked against typed results. Their scoped evidence covers twelve tool-default headers, four polygon memos, stable project-unit preferences, the ungrouped case, library origin/name and a suppressed eight-boolean license query. Nested group roots, complex default geometry and license identifiers are not accepted by these checks.\n\nFour further SDK contracts were connected using the existing registration overlay and functional manifest:\n\n| Group | Actual native result | Remaining limit |\n| --- | --- | --- |\n| Envelope memo | Seven Roof/Slab polygons match independently read coordinates, holes and stories | No Shell sample; parameter memo is not resultant BREP; side-material/edge-trim/pivot overrides and Shell frames are not serialized |\n| Drawing associations | Two real Drawing links read; both Drawing targets independently found, one linked GUID found in current ViewMap | Both update-status/content-box queries returned native errors; legacy Drawing GUID differs from source-link GUID and is not treated as equivalent |\n| Element hotspots | 179 native hotspots from four walls; both reference-line endpoints independently matched on every wall | Hotspots are not body vertices or a collision proof |\n| Quantities | Registered, but the first Wall/Slab/Roof/Stair batch crashed AC29 | **QUARANTINED** in APA dispatch and the native entry; no replay and no quantity PASS |\n\nThe quantity crash produced `C0000005 ACCESS_VIOLATION` in Archicad. The failing element and root cause remain NOT_VERIFIED. The public proof contains only the crash-report hash and sanitized facts. The unsafe tested binary is identified separately from the safe rebuild. The rebuilt native quantity entry returns a typed refusal before entering the quantity engine; Python blocks execution for both source-added and already exported command names. Generated quantity accessors are staged, unused code rather than a functioning quantity feature.\n\nThe common catalog contains **382 preparable contracts: 372 native/official/source and 10 local**. This includes blocked and source-only contracts. The original restored runtime has 264 add-on registrations plus 73 compatible official contracts, or **337**. The tested PR #88 candidate had 281 add-on registrations; the later tested prototype had 285, or **358** with compatible official contracts. Registration does not prove every command callable. This pass verified **nine distinct SDK/DevKit queries** across the two tested binaries; the quantity query failed. Thirteen DevKit examples remain source-only, the legacy `GetNativePhysicalGeometry` command is missing in the candidate, and all 32 other installed APX still lack independent public command contracts. The provider matrix retains their exact prior blockers without counting SDK declarations as commands.\n\n`MemoPolygonInputs` converts straight Roof/Slab memo contours to the existing `PolygonRelations` input, preserving GUID/story/type bindings separately. Curves are explicitly omitted, not approximated. The existing graph resolves the typed result pointer directly. The actual seven-element memo flow preserved two holes; all seven coordinates/holes also matched the old native read adapter. This is 2D parameter-footprint analysis and grants no native write permission. A reproducible saved-data entry point is `scripts/apa_native_memo_flow.py --memo <captured-result> --output <proof>`.\n\nThe two PR #87 registration defects are fixed: provider batches commit atomically and ambiguous common-schema names receive distinct aliases without rewriting previous contracts. Seven focused checks cover the changed adapter and safety contracts; broad regressions run in Windows GitHub Actions. The independent PR #89 audit is not duplicated locally. New SDK schemas bind code-owned source/include hashes; dependencies and full schemas remain lazy through the existing main orchestrator and Knowledge Graph.\n\nAfter the crash the original APX and registration were restored. The saved file matched the pre-probe control copy. Reopening it read-only independently retained **all 258 GUIDs and serialized native parameters**. No model-write API was invoked. An earlier close/open changed saved-file bytes before SDK calls; that cause remains NOT_VERIFIED. No before/after resultant BREP comparison was performed. The final safe rebuild passes full Release compile/link and embedded binary/source identity checks and has not been installed. Evidence is under `docs/evidence/APA_*SDK*.json` and `APA_*MEMO_FLOW.json`; raw paths, PLN, binary and crash dump remain local.\n\nA11.S03 remains PARTIAL. The next focused block is debugger-backed isolation of the quantity failure with per-element diagnostics, explicit SDK mask/output ownership checks and a separate qualified binary test. Drawing auxiliary queries need their valid database/window context. These blockers do not invalidate the three new callable read groups or the existing native writer. Canonical publication includes fresh main-orchestrator Knowledge Graph/CAS checks, the updated gap register, Windows CI tied to the published SHA, immutable report/receipt and GitHub readback.\n\n\n## Publication evidence\n\n[Draft PR #94](https://github.com/dvikt33-ux/safe-bim-layer/pull/94), head `d758957f97cf1e347262da6f7e7b325ae6609ea4`; exact PR88 base `a444d5a6b481bfabd9c48f23c17df05c51ab0ea4`. Safe compiled implementation `220fcabda14316037f0f0a4c259092a075880c4c`; tested extended prototype `8d78a5fdbd79836b10d3d9d371cda2edca1eb450`. [Windows CI PASS](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38664385982) at exact published head. Main-orchestrator Knowledge Graph verified canonical revision165 and own CAS lease. Code readback: 23 changed files, byte-exact. Native/private artifacts remain local. Temporary user-authorized APX replacements are fully restored; publication safety flags describe the unchanged target branches and restored installed configuration, with zero model-write calls. The earlier saved-byte drift is explicitly unverified and is not claimed as byte preservation. A11.S03 PARTIAL; no prior DONE history or dependencies rewritten.\n",
+  "next_substep": "APA-P70.A11.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

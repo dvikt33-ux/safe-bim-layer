@@ -1,0 +1,12 @@
+{
+  "core-knowledge-query.json": "f474443e3483b91e7e966f9fa9662eeb2caaa695a985c82b0037722be98262c4",
+  "extended-sdk-runtime.json": "e80db146fb5f0e43a875c9373642d7d3cb4d3a5bb34b943796583bc830c48530",
+  "gap-register.json": "84dc88b036e119c30472d777b3675298d7f76d1272118a4ff7b937552f6a888a",
+  "module-contracts.json": "f273e200b4b0e8517453502cdac3fb488b146574e8c0f129c8c6c71662f03f13",
+  "module-coverage.json": "f9095791ed0d9540e4d4eb4d436b9d8c6d520930ea8c018bf052ff47bb0c11a6",
+  "native-memo-dataflow.json": "47c1e4060767fbb818bb4459092543d90862194429c9975224c0c2672bf0ce26",
+  "runtime-restoration.json": "45917a98f61e7f873eada17c62860cf9b240e366fd3db389b12ad698e18c0b9c",
+  "safe-sdk-build.json": "4f149080adda9f3c07c9a17e7643ee18119f80665e552cca95c03093f6753543",
+  "sdk-six-native-reads.json": "6472a992814075e243dd27dc9c85f68a61802c21595bef5d7a4cc6660d9b461e",
+  "windows-ci.json": "7bc70fd59707ac8c212d8060a1639478ea52e33cb5a855029fcfe18cf5346002"
+}

@@ -1,0 +1,105 @@
+{
+  "schema": "APA_EXTENDED_SDK_RUNTIME_V1",
+  "status": "THREE_QUERY_GROUPS_CALLABLE_QUANTITY_QUARANTINED_AFTER_CRASH",
+  "buildIdentity": "0522c4d611442da331af9ac4cfbc03a0b9141509ce9a806611b84218c8197e0a",
+  "implementationCommit": "8d78a5fdbd79836b10d3d9d371cda2edca1eb450",
+  "testedCandidateSHA256": "d85a2bec8f61b93f73747cc9ff09237557efbf4fc722dfb2aba9214537c5384c",
+  "preparedNative": 372,
+  "preparedLocal": 10,
+  "runtimeRegisteredAddOn": 285,
+  "officialTypedCompatible": 73,
+  "nativeRuntimeCompatible": 358,
+  "nativeRuntimeExecutionBlocked": 1,
+  "matrix": [
+    {
+      "command": "AddOn.TapirCommand.GetNativeEnvelopeMemoV1",
+      "runtimeRegistered": true,
+      "callable": true,
+      "nativeModelWrites": 0,
+      "resultSchemaValid": true,
+      "resultSHA256": "04424a1f8d5d009905fb6705fecc2e2b4ac2514b1cf5b5d71609a0af1a6c1267",
+      "elapsedSeconds": 0.0035131999902660027,
+      "targetCount": 7,
+      "successfulRows": 7,
+      "nativeErrors": [],
+      "independentNativeCoordinateMatches": 7,
+      "ShellSample": "NOT_PRESENT_NOT_VERIFIED",
+      "scope": "ROOF_SLAB_PARAMETER_TOPOLOGY_NOT_RESULTANT_BREP"
+    },
+    {
+      "command": "AddOn.TapirCommand.GetNativeDrawingAssociationsV1",
+      "runtimeRegistered": true,
+      "callable": true,
+      "nativeModelWrites": 0,
+      "resultSchemaValid": true,
+      "resultSHA256": "01bab333abe97d9ab738312404edc82fe89dd4ca8ae850e64cf74e5bcdc19d3e",
+      "elapsedSeconds": 0.004062199994223192,
+      "targetCount": 2,
+      "successfulRows": 2,
+      "nativeErrors": [],
+      "scope": "DRAWING_SOURCE_LINK_READ_ONLY;UPDATE_STATUS_CONTENT_BOX_NOT_VERIFIED",
+      "statusQueryErrors": [
+        -2130313110,
+        -2130313110
+      ],
+      "contentBoxQueryErrors": [
+        -2130313110,
+        -2130313110
+      ],
+      "independentDrawingTargetMatches": 2,
+      "sourceLinksPresentInCurrentViewMap": 1,
+      "legacyDrawingGuidEqualsSDKSourceLink": [
+        false,
+        false
+      ],
+      "legacyDrawingGuidSourceLinkEquivalence": "NOT_VERIFIED_DISTINCT_NATIVE_FIELDS"
+    },
+    {
+      "command": "AddOn.TapirCommand.GetNativeElementHotspotsV1",
+      "runtimeRegistered": true,
+      "callable": true,
+      "nativeModelWrites": 0,
+      "resultSchemaValid": true,
+      "resultSHA256": "b14c144e7dc1681890f7178ffe7280681d42b7903eb56f7dfcbfbcfebde9e57c",
+      "elapsedSeconds": 0.00476110000454355,
+      "targetCount": 4,
+      "successfulRows": 4,
+      "nativeErrors": [],
+      "hotspotCount": 179,
+      "independentWallEndpointMatches": 4,
+      "scope": "NATIVE_HOTSPOTS_NOT_BODY_VERTICES"
+    },
+    {
+      "command": "AddOn.TapirCommand.GetNativeElementQuantitiesV1",
+      "runtimeRegistered": true,
+      "callable": false,
+      "nativeModelWrites": 0,
+      "blocker": "CONNECTION_RESET_NATIVE_PROCESS_EXIT_ACCESS_VIOLATION;ROOT_CAUSE_NOT_VERIFIED;NO_REPLAY"
+    }
+  ],
+  "callableVerified": 3,
+  "nativeModelWrites": 0,
+  "retainedNativeBeforeProbe": 258,
+  "postCrashNativeReadback": "ORIGINAL_APX_258_GUID_AND_ALL_SERIALIZED_NATIVE_DETAILS_MATCH",
+  "savedFileMatchesPreProbeControlCopy": true,
+  "crash": {
+    "exception": "C0000005 ACCESS_VIOLATION",
+    "faultingModule": "Archicad",
+    "reportSHA256": "6e9bb679f6f96e6aad6dad6fafa61c34b56af17460868c655eb585bffdcc5840",
+    "triggeringCommand": "GetNativeElementQuantitiesV1",
+    "failedBatchTypes": [
+      "Wall",
+      "Slab",
+      "Roof",
+      "Stair"
+    ],
+    "failingElement": "NOT_VERIFIED_NO_PER_ELEMENT_TELEMETRY",
+    "rootCause": "NOT_VERIFIED",
+    "identicalReplay": false,
+    "mitigation": "APA dispatch and native entry quarantined; no quantity engine invocation in replacement source"
+  },
+  "originalAPXRestored": true,
+  "physicalBREPComparison": "NOT_RUN",
+  "engineering": "NOT_VERIFIED",
+  "registrationRestored": true
+}
