@@ -42,6 +42,17 @@ remain open and must not be misrepresented as fixed:
 8. Non-absolute schema pointer accepted.
 
 ## Evidence status at publication
-Source and workflow committed; Windows CI result **PENDING**.
-After the new PR checks finish, use exact Windows Action artifacts
-and the full SHA before recording any PASS claim.
+## Final confirmed GitHub Actions CI
+
+- Tested commit SHA: `e9c1fec762d642f22c2d386f606fe977f6b88d09`.
+- Workflow run: https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38660116941
+- Final conclusion: **SUCCESS**, 11/11 jobs (10 Windows test shards + accounting).
+- Discovery SHA-256: `2cd230d4a891f9ddd6653eaea828a5974477162521a6b729a30bcb8dde207000`.
+- Exactly **384** discovered and executed unique tests.
+- **0 failures, 0 errors, 0 skipped, 0 XFAIL, 0 unexpected successes, 0 coverage issues**.
+- Individual shard counts: 37 + 43 + 31 + 39 + 31 + 43 + 44 + 33 + 41 + 42 = 384.
+- Full per-test IDs, failures and aggregate JSON were uploaded as workflow artifacts; GitHub Actions accounting log independently confirmed `APA_SCHEMA_DIAMOND_EXACT_384 True`.
+- Earlier 735, 378 and 288 tests are not part of this workflow.
+- Updating this research report creates only a documentation commit; the stated tested SHA remains the code evidence.
+
+Result is restricted to offline imported APA modules, not live Archicad/native SDK/APX.
