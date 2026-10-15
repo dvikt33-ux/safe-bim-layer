@@ -47,10 +47,12 @@ GS::ObjectState GetNativeElementHotspotsV1Command::Execute(const GS::ObjectState
  GS::Array<GS::ObjectState> inputs;p.Get("elements",inputs);GS::ObjectState out("nativeModelWrites",0,"authority","NATIVE_ELEMENT_HOTSPOTS_NOT_BODY_VERTICES");const auto& rows=out.AddList<GS::ObjectState>("elements");for(const auto& item:inputs){API_Element e={};auto err=ReadElement(item,e);if(err!=NoError){rows(CreateErrorResponse(err,"Element required"));continue;}GS::Array<API_ElementHotspot> points;err=ACAPI_Element_GetHotspots(e.header.guid,&points);if(err!=NoError){rows(CreateErrorResponse(err,"Get element hotspots"));continue;}GS::ObjectState row("elementId",CreateGuidObjectState(e.header.guid),"nativeTypeId",static_cast<Int32>(e.header.type.typeID),"homeStory",static_cast<Int32>(e.header.floorInd));const auto& list=row.AddList<GS::ObjectState>("hotspots");for(const auto& point:points)list(GS::ObjectState("neigId",static_cast<Int32>(point.first.neigID),"neigIndex",point.first.inIndex,"x",point.second.x,"y",point.second.y,"z",point.second.z));rows(row);}return out;
 }
 GS::ObjectState GetNativeElementQuantitiesV1Command::Execute(const GS::ObjectState& p,GS::ProcessControl&) const {
- GS::Array<GS::ObjectState> inputs;p.Get("elements",inputs);double minimum=0;p.Get("minOpeningSize",minimum);GS::ObjectState out("nativeModelWrites",0,"authority","ARCHICAD_QUANTITY_ENGINE_NOT_BREP_OR_ENGINEERING_ACCEPTANCE","minOpeningSize",minimum);const auto& rows=out.AddList<GS::ObjectState>("elements");for(const auto& item:inputs){API_Element e={};auto err=ReadElement(item,e);if(err!=NoError){rows(CreateErrorResponse(err,"Element required"));continue;}
- API_ElementQuantity values={};GS::Array<API_CompositeQuantity> composites;API_Quantities quantities;quantities.elements=&values;quantities.composites=&composites;API_QuantityPar params={};params.minOpeningSize=minimum;err=ACAPI_Element_GetQuantities(e.header.guid,&params,&quantities);if(err!=NoError){rows(CreateErrorResponse(err,"Native quantity engine"));continue;}GS::ObjectState row("elementId",CreateGuidObjectState(e.header.guid),"nativeTypeId",static_cast<Int32>(e.header.type.typeID),"homeStory",static_cast<Int32>(e.header.floorInd));GS::ObjectState metrics;bool supported=true;
- switch(e.header.type.typeID){
-#include "NativeQuantityFields.inc"
- default:supported=false;break;}
- if(!supported){rows(CreateErrorResponse(APIERR_BADID,"Quantity type not serialized"));continue;}row.Add("metrics",metrics);const auto& skins=row.AddList<GS::ObjectState>("composites");for(const auto& c:composites)skins(GS::ObjectState("volume",c.volumes,"projectedArea",c.projectedArea,"buildingMaterialIndex",GetAttributeIndex(c.buildMatIndices)));rows(row);}return out;
+ // The first real quantity batch terminated AC29 with ACCESS_VIOLATION.
+ // No same-call replay or speculative mask/solver workaround is accepted.
+ // Preserve the typed contract, but fail before entering the quantity engine.
+ GS::Array<GS::ObjectState> inputs;p.Get("elements",inputs);double minimum=0;p.Get("minOpeningSize",minimum);
+ GS::ObjectState out("nativeModelWrites",0,"authority","QUANTITY_ENGINE_QUARANTINED_AFTER_RUNTIME_CRASH","minOpeningSize",minimum);
+ const auto& rows=out.AddList<GS::ObjectState>("elements");
+ for(GSIndex i=0;i<inputs.GetSize();++i)rows(CreateErrorResponse(APIERR_REFUSEDCMD,"QUARANTINED_AC29_QUANTITY_CRASH_NO_ENGINE_CALL"));
+ return out;
 }

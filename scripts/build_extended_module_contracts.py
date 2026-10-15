@@ -47,9 +47,13 @@ def contracts():
       'GetNativeElementQuantitiesV1':(obj(dict(inputs['properties'],minOpeningSize=dict(N,minimum=0))),
         obj({'nativeModelWrites':{'const':0},'authority':S,'minOpeningSize':N,'elements':arr(either(quantities))}),
         'Native quantity engine scalars and composite material quantities for thirteen tool types. Explicit minOpeningSize; SDK field semantics apply, not engineering acceptance.')}
-    return {name:dict(version='29',category='Native SDK grouped read adapter',description=d,
+    rows={name:dict(version='29',category='Native SDK grouped read adapter',description=d,
         parameters=p,returns=r,availability='BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED',
         implementationSource='archicad-addon/Sources/NativeExtendedModules.cpp') for name,(p,r,d) in defs.items()}
+    rows['GetNativeElementQuantitiesV1'].update(
+        executionBlocker='AC29_QUANTITY_ENGINE_ACCESS_VIOLATION_ROOT_CAUSE_NOT_VERIFIED_NO_REPLAY',
+        description='QUARANTINED after an actual AC29 quantity query crash. Contract remains discoverable/preparable; APA dispatch and native entry refuse execution until independently diagnosed.')
+    return rows
 
 def write_schemas():
     source=ROOT/'archicad-addon/Sources/NativeExtendedSchemas.inc'

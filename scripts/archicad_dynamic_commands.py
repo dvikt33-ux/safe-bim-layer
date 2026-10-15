@@ -270,6 +270,8 @@ class DynamicCommands:
 
     def read(self,api,ticket,reviewed_read_only=False):
         self.validate(ticket)
+        blocker=self.catalog['commands'][ticket['command']].get('executionBlocker')
+        if blocker:raise ValueError('COMMAND_RUNTIME_QUARANTINED:'+blocker)
         if not reviewed_read_only or ticket['effect']!='READ_ONLY':raise ValueError('SOURCE_REVIEWED_READ_ONLY_EFFECT_REQUIRED')
         if self.catalog['commands'][ticket['command']].get('api')=='local-python':
             import importlib.metadata,time

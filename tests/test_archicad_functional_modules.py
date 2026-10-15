@@ -8,6 +8,11 @@ def connected():
     r=DynamicCommands(json.loads((ROOT/'schemas/accelerator/mass-capabilities/commands.json').read_text(encoding='utf8')))
     A.connect_functional_modules(r);return r
 class FunctionalModules(unittest.TestCase):
+    def test_quarantined_quantity_stays_preparable_and_cannot_reach_transport(self):
+        r=connected();ticket=r.prepare('AddOn.TapirCommand.GetNativeElementQuantitiesV1',
+            dict(elements=[{'elementId':{'guid':'diagnostic-only'}}],minOpeningSize=0))
+        with self.assertRaisesRegex(ValueError,'COMMAND_RUNTIME_QUARANTINED'):
+            r.read(None,ticket,True)
     def test_memo_flow_preserves_holes_and_excludes_curves_and_other_tools(self):
         from apa_native_memo_flow import run
         points=[[0,0],[6,0],[6,6],[0,6],[0,0],[2,2],[4,2],[4,4],[2,4],[2,2]]
