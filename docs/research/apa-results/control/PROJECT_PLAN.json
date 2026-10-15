@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 173,
+  "revision": 174,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -4812,7 +4812,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -5014,12 +5014,13 @@
         "Captured data feeds existing DependencyImpact/BIM Graph:213nodes290edges,56affected for CurtainWall root. Physical element GUIDs, Navigator GUIDs and source references have separate namespaces. Membership/logical dependencies are not physical contact. Quantity engine remains quarantined in Python/native and was not called.",
         "Original APX SHA and registration values restored. Final restored-runtime reopen NOT_VERIFIED: Windows UI helper timed out after prescribed reset/retry and native endpoint unavailable. Saved-file hashes changed at closing source and Opening models; before/after snapshots preserved, no blind restore. Source258native geometry/details reconciled before any copy write and matched; source bytes unchanged from copy checkpoint onward. Opening bytes matched before/during read; post-close geometry pending. Do not claim unchanged-file or complete final acceptance. Exact Windows CI/code/report/receipt GitHub readback verified. Next: reopen saved409copy and107Opening model under original runtime, reconcile closing hash drift and inspect3native samples visually; do not replay Create or quantities.",
         "User reopened the saved positive-sample copy. Read-only original-runtime check matches409GUIDs/full native geometry/material/relationship signatures and258original detail rows, zero writes. Publish this narrow acceptance supplement; Opening post-close and sample visual checks remain separate.",
-        "PR97 restored-runtime acceptance supplement published after user manually reopened the exact positive sample copy:409GUID/full native geometry, materials, home stories and relationship signatures match the saved candidate checkpoint;258original serialized detail rows match. Current saved bytes unchanged throughout the read. Original APX file SHA matches restored original; Archicad29/Tapir1.5.10 read and3candidate-only commands absent. Zero Create/Modify/Delete/Save/APX-switch/quantity calls. This closes only409copy original-runtime reopen. Separate107Opening post-close geometry/hash reconciliation and3sample visual inspection remain NOT_VERIFIED. Product PR97 head 8f134001ca0e3250eda587db61ac01dbd6357326 unchanged; prior exact-code Windows CI reused, no test replay. Immutable supplement/receipt independently byte-verified; S03 remains PARTIAL, historical statuses and other tasks retained."
+        "PR97 restored-runtime acceptance supplement published after user manually reopened the exact positive sample copy:409GUID/full native geometry, materials, home stories and relationship signatures match the saved candidate checkpoint;258original serialized detail rows match. Current saved bytes unchanged throughout the read. Original APX file SHA matches restored original; Archicad29/Tapir1.5.10 read and3candidate-only commands absent. Zero Create/Modify/Delete/Save/APX-switch/quantity calls. This closes only409copy original-runtime reopen. Separate107Opening post-close geometry/hash reconciliation and3sample visual inspection remain NOT_VERIFIED. Product PR97 head 8f134001ca0e3250eda587db61ac01dbd6357326 unchanged; prior exact-code Windows CI reused, no test replay. Immutable supplement/receipt independently byte-verified; S03 remains PARTIAL, historical statuses and other tasks retained.",
+        "Continue native integration after PR97 without offline tests: expand existing Shell/Opening/component parameter reads and native IFC/material dependency workflow. Preserve409copy/258source; new APX deployment requires exact separate permission. Do not repeat accepted samples or quantity engine."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "work-native-linked-20261015",
+      "lease_until": "2026-10-15T16:16:17Z",
+      "claim_ref": "APA-CLAIM-NATIVE-LINKED-20261015T121617Z",
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
