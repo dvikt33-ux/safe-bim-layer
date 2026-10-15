@@ -1,5 +1,6 @@
 // Extend the existing edit state/masked Element_Change. Public SDK memo only;
 // native IDs, counts, allocation ownership and pattern topology are retained.
+#include <cmath>
 static GSSize MemoCoordCount(API_Coord** p){return p?BMGetHandleSize(reinterpret_cast<GSHandle>(p))/sizeof(API_Coord)-1:0;}
 static bool MemoPointerBounded(const void* p,USize count,USize size){return count<=4096&&(count==0||(p&&BMGetPtrSize(reinterpret_cast<GSPtr>(const_cast<void*>(p)))>=static_cast<GSSize>(count*size)));}
 static GS::ObjectState NativePattern(const API_CWSegmentPatternData& p){
