@@ -97,4 +97,12 @@ class NativeAssemblyPolicy(unittest.TestCase):
         self.assertEqual(ticket['effect'],'CREATE')
         with self.assertRaisesRegex(ValueError,'SOURCE_REVIEWED_READ_ONLY_EFFECT_REQUIRED'):r.read(None,ticket,True)
 
+class NativeNavigatorNamespace(unittest.TestCase):
+    def test_matching_guid_text_does_not_merge_navigator_and_native_elements(self):
+        from apa_native_dependency_flow import dependency_inputs
+        facts=dependency_inputs(components=dict(elements=[dict(elementId=dict(guid='same'))]),
+            navigator_bindings=dict(items=[dict(navigatorItemId=dict(guid='same'),requestedMap='PublicViewMap',identityMatchesRequest=True,mapMatchesRequest=True,sourceGuid=dict(guid='source'))]))
+        self.assertIn('SAME',facts['nodes']);self.assertIn('NAVIGATOR:PUBLICVIEWMAP:SAME',facts['nodes'])
+        self.assertNotIn(['SOURCE','SAME'],facts['edges'])
+
 if __name__=='__main__':unittest.main()

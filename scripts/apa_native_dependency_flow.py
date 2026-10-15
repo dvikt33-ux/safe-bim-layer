@@ -62,16 +62,23 @@ def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids
         for item in row.get('cutElements', []):
             edge(guid(item), current, 'NATIVE_OPENING_CUT_HOST')
 
+    resolved = {}
     for row in (navigator_bindings or {}).get('items', []):
         if row.get('identityMatchesRequest') and row.get('mapMatchesRequest'):
             current = guid(row.get('navigatorItemId'))
-            edge(guid(row.get('sourceGuid')), current, 'NATIVE_NAVIGATOR_SOURCE')
+            if current:
+                key = 'NAVIGATOR:' + row['requestedMap'].upper() + ':' + current
+                resolved.setdefault(current, set()).add(key)
+                nodes.add(key)
+                source = guid(row.get('sourceGuid'))
+                # SDK sourceGuid is a source reference, not a physical element ID.
+                if source:
+                    edge('NAVIGATOR_SOURCE_REFERENCE:' + source, key, 'NATIVE_NAVIGATOR_SOURCE_REFERENCE')
     layouts = {}
     for row in layout_bindings:
         db, layout = guid(row.get('databaseId')), guid(row.get('navigatorItemId'))
         if db and layout:
-            layouts.setdefault(db, set()).add(layout)
-
+            layouts.setdefault(db, set()).add('NAVIGATOR:LAYOUTBOOK:' + layout)
     known_views = {v.upper() for v in view_ids}
     for row in (drawings or {}).get('drawings', []):
         drawing = guid(row.get('elementId'))
@@ -83,10 +90,13 @@ def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids
         if row.get('databaseQualified') and len(owners) == 1:
             edge(drawing, next(iter(owners)), 'NATIVE_DRAWING_OWNING_LAYOUT')
         source = guid(row.get('linkGuid'))
-        if source in known_views and row.get('viewDeleted') is False:
-            edge(source, drawing, 'NATIVE_DRAWING_LINK_VERIFIED_IN_VIEWMAP')
+        sources = resolved.get(source, set())
+        if source in known_views:
+            sources = {'NAVIGATOR:PUBLICVIEWMAP:' + source}
+        if len(sources) == 1 and row.get('viewDeleted') is False:
+            edge(next(iter(sources)), drawing, 'NATIVE_DRAWING_LINK_VERIFIED_IN_NAVIGATOR')
         else:
-            omitted.append('DRAWING_SOURCE_NOT_IN_CAPTURED_VIEWMAP')
+            omitted.append('DRAWING_SOURCE_NOT_IN_CAPTURED_OR_EXPLICITLY_RESOLVED_NAVIGATOR')
     return dict(nodes=sorted(nodes), edges=[list(e) for e in sorted(edges)],
                 relationshipEvidence=evidence, omitted=omitted,
                 authority='CAPTURED_NATIVE_RELATIONSHIPS_NOT_PHYSICAL_CONTACT')
