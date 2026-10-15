@@ -96,26 +96,32 @@ def contracts():
     rows['CreateNativeAssemblyV1'].update(operationKind='CREATE',impact='MODEL',implementationSource='archicad-addon/Sources/NativeAssemblyCommands.inc')
     # One scalar/memo MODIFY contract, not a separate Python editor per tool.
     kinds=['CurtainWall','CurtainWallFrame','CurtainWallPanel','Railing','RailingSegment','RailingNode','RailingRail','RailingHandrail','Shell']
-    scalar_names=['heightMetres','relativeLevelMetres','thicknessMetres','defaultSegmentHeightMetres','defaultPostOffsetMetres','yOffsetMetres','zOffsetMetres','elevationMetres','postOffsetMetres','horizontalOffsetMetres','extrusionXMetres','extrusionYMetres','extrusionZMetres','beginXMetres','beginYMetres','beginZMetres']
-    flag_names=['visible','useOwnMaterial','outerSurfaceOverridden','innerSurfaceOverridden','cutSurfaceOverridden','topSurfaceOverridden','sideSurfaceOverridden','bottomSurfaceOverridden']
+    scalar_names=['heightMetres','relativeLevelMetres','thicknessMetres','defaultSegmentHeightMetres','defaultPostOffsetMetres','yOffsetMetres','zOffsetMetres','elevationMetres','postOffsetMetres','horizontalOffsetMetres','extrusionXMetres','extrusionYMetres','extrusionZMetres','beginXMetres','beginYMetres','beginZMetres','referencePlaneOffsetMetres','nominalWidthMetres','panelHoleDepthMetres','panelHoleWidthMetres','slantAngleRadians','shapePlaneTiltRadians','beginPlaneTiltRadians','endPlaneTiltRadians','revolutionAngleRadians','distortionAngleRadians','beginAngleRadians']
+    flag_names=['visible','useOwnMaterial','outerSurfaceOverridden','innerSurfaceOverridden','cutSurfaceOverridden','topSurfaceOverridden','sideSurfaceOverridden','bottomSurfaceOverridden','flipped']
     attribute_names=['buildingMaterialId','compositeId','surfaceId','outerSurfaceId','innerSurfaceId','cutSurfaceId','topSurfaceId','sideSurfaceId','bottomSurfaceId']
     changes=obj({**{k:dict(N,minimum=-1000000,maximum=1000000) for k in scalar_names},**{k:B for k in flag_names},**{k:eid for k in attribute_names},'profileCoordinates':arr(obj({'x':N,'y':N}),minItems=3,maxItems=4096)},[]);changes['minProperties']=1
+    changes['properties'].update(referenceCoordinates=arr(obj({'x':N,'y':N}),minItems=2,maxItems=4096),curtainWallContourCoordinates=arr(obj({'x':N,'y':N}),minItems=3,maxItems=4096),primaryPatternDistances=arr(dict(N,exclusiveMinimum=0,maximum=1000000),minItems=1,maxItems=4096),secondaryPatternDistances=arr(dict(N,exclusiveMinimum=0,maximum=1000000),minItems=1,maxItems=4096))
+    pattern=obj({'logicId':I,'originTypeId':I,'divisions':I,'infillPanelClassId':I,'endWithId':I,'distances':arr(N),'flexibleIds':arr(I)})
+    memo=obj({'authority':S,'referencePath':polygon,'referenceElevationsMetres':arr(N),'associationAuthority':S,'primaryPattern':pattern,'secondaryPattern':pattern,
+        'curtainWallContours':arr(obj({'slot':I,'polygon':polygon,'nativeCoordinateCount':I})),
+        'curtainWallSegments':arr(obj({'elementId':eid,'ownerId':eid,'begin':obj({'x':N,'y':N,'z':N}),'end':obj({'x':N,'y':N,'z':N}),'extrusion':obj({'x':N,'y':N,'z':N}),'gridOrigin':obj({'x':N,'y':N,'z':N}),'gridAngleNative':N,'segmentTypeId':I,'patternCellCount':I})),
+        'planeMatrix':obj({'matrix3x4':arr(N,minItems=12,maxItems=12)}),'planeOffsetMetres':N},['authority','referencePath'])
     state=obj({'elementId':eid,'kind':dict(S,enum=kinds),'nativeTypeId':I,'homeStory':I,'modificationStamp':dict(S,pattern='^[0-9]+$'),
         'values':dict(type='object',additionalProperties=dict(anyOf=[N,B])),
         'attributes':dict(type='object',additionalProperties=obj({'index':I,'attributeId':eid})),
-        'associationAuthority':S,'shellClass':I,'rootQueryError':I,'rootElementId':eid},['elementId','kind','nativeTypeId','homeStory','modificationStamp','values','attributes','associationAuthority','rootQueryError'])
+        'associationAuthority':S,'shellClass':I,'rootQueryError':I,'rootElementId':eid,'memoEdits':arr(S),'memoReadError':I,'memoBoundsStatus':S,'memoPathWriteBlockedReason':S,'memo':memo},['elementId','kind','nativeTypeId','homeStory','modificationStamp','values','attributes','associationAuthority','rootQueryError'])
     additions={
       'GetNativeAssemblyEditStateV1':(inputs,obj({'nativeModelWrites':{'const':0},'elements':arr(either(state))}),
         'Shared assembly edit snapshot with decimal UInt64 stamp, applicable scalar fields, typed attribute identities and root query. No inferred Stair association.'),
       'ModifyNativeAssemblyV1':(obj({'elementId':eid,'expectedKind':dict(S,enum=kinds),'expectedModificationStamp':dict(S,pattern='^[0-9]+$'),'changes':changes}),
         either(obj({'nativeModelWrites':{'const':1},'rootGUIDPreservation':S,'engineering':{'const':'NOT_VERIFIED'},'modifiedElements':arr(obj({'elementId':eid}),minItems=1,maxItems=1),'appliedFields':arr(S,minItems=1)})),
-        'One scoped native Element_Change using explicit masks, type/stamp preconditions, applicable fields and attribute GUID identities. ExtrudedShell profile edits preserve existing straight single-contour topology. No delete/create or automatic dependent writes.'),
+        'One scoped native Element_Change using explicit masks, type/stamp preconditions and typed attribute IDs. Native CW same-cardinality reference/contour and pattern memo edits; scalar CW height is refused after observed NoError/no-effect. Class-specific Extruded/Revolved scalar fields remain separately qualified. No delete/create or automatic dependent writes.'),
     }
-    topology=dict(elementId=eid,kind=dict(S,enum=['RoutingElement','RoutingSegment','RoutingNode','RigidSegment','Transition']),headerQueryError=I,homeStory=I,nativeTypeId=I,relativeLevelMetres=N,domainId=I,mepSystemId=eid,
+    topology=dict(elementId=eid,kind=dict(S,enum=['RoutingElement','RoutingSegment','RoutingNode','RigidSegment','Transition','Elbow','Branch']),headerQueryError=I,homeStory=I,nativeTypeId=I,relativeLevelMetres=N,domainId=I,mepSystemId=eid,
         routingSegments=arr(eid),routingNodes=arr(eid),logicalBeginPortId=eid,logicalEndPortId=eid,routingElementId=eid,beginNodeId=eid,endNodeId=eid,rigidSegments=arr(eid),
         crossSectionWidthMetres=N,crossSectionHeightMetres=N,shapeId=I,wallThicknessMetres=N,referenceOffsetXMetres=N,referenceOffsetYMetres=N,anchorId=I,preferenceTableId=eid,referenceIdApplicable=B,crossSectionReferenceId=I,
         position=obj({'x':N,'y':N,'z':N}),elbows=arr(eid),transitions=arr(eid),incomingSegmentId=eid,outgoingSegmentId=eid,routingSegmentId=eid,lengthMetres=N,widthMetres=N,heightMetres=N,insulationThicknessMetres=N,
-        routingNodeId=eid,narrowerPortId=eid,widerPortId=eid,angleRadians=N,offsetYMetres=N,offsetZMetres=N)
+        routingNodeId=eid,narrowerPortId=eid,widerPortId=eid,angleDegrees=N,offsetYMetres=N,offsetZMetres=N,radiusMetres=N,factorRadiusApplicable=B,factorRadius=N,preferenceTableApplicable=B,branchLengthMetres=N,branchAngleDegrees=N,branchOffsetMetres=N)
     additions['GetNativeMEPTopologyV1']=(obj({'elements':arr(obj({'elementId':eid,'kind':topology['kind']}),minItems=1,maxItems=32)}),obj({'nativeModelWrites':{'const':0},'authority':S,'elements':arr(either(obj(topology,['elementId','kind','headerQueryError'])))}),
         'Public MEP route-segment-node/rigid/transition ownership, actual reference IDs and logical endpoint-port IDs. Existing GetMEPPorts supplies physical evidence; no connection, global preference or quantity changes.')
     for name,(params,result,description) in additions.items():
