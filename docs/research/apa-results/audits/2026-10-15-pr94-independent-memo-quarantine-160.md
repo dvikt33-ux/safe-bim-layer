@@ -29,4 +29,18 @@
 
 ## Current status
 
-GitHub source published; Windows CI **PENDING**. This document must not report a PASS until final ten-shard and full-coverage aggregate readback.
+**FINAL RESULT — 160/160 PASS (verified)**.
+
+- Tested suite and workflow commit: `adc5f83acdeb6213c32b48369bbac897d370a395`.
+- Final Windows Actions run: https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38666288641
+- 10/10 Windows shards plus aggregate = **11/11 SUCCESS**.
+- Deterministic SHA256 over all discovered test IDs: `ca88d354a313f212de27eef48f331fd70e551ea3c480ac2105ca5b9d184d8242`.
+- 160 unique tests discovered and executed, **0 failures, 0 errors, 0 skips, 0 expected failures, 0 unexpected successes, 0 missing or duplicate IDs**.
+- Per-shard test counts: 18 + 16 + 16 + 20 + 15 + 17 + 18 + 16 + 13 + 11 = 160.
+- Aggregator logged `APA_PR94_MEMO_EXACT_160 True` and `APA_PR94_MEMO_SHARDS success`.
+
+**Audit trail of initial run:** GitHub Actions run `38666158037` initially failed because QA asserted the quarantine marker contained the literal word `CRASH`, whereas the actual marker is `AC29_QUANTITY_ENGINE_ACCESS_VIOLATION_ROOT_CAUSE_NOT_VERIFIED_NO_REPLAY`. The independent *test oracle* was corrected to require `ACCESS_VIOLATION`; APA product code was **not** modified. The initial failed run has not been hidden or called a product defect. Only the subsequent full rerun at the tested commit earns PASS.
+
+The eight historical router defects require individual re-verification against PR #94, which specifically repairs two registration defects. Those previously repaired issues should not automatically remain classified open on the newer branch. The six remaining historical cases were not retested in this suite.
+
+**Limits:** no Archicad LIVE, no debugger isolation of native quantity access violation, no Drawing status/content-box native success, no resultant BREP readback. Documentation-only amendments after the tested commit do not alter test code.
