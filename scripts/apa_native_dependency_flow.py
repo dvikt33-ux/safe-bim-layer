@@ -7,7 +7,7 @@ import hashlib
 import json
 
 
-def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids=(), memberships=(), navigator_bindings=None, layout_bindings=()):
+def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids=(), memberships=(), navigator_bindings=None, layout_bindings=(), attributes=None, envelopes=None, ifc_ids=None):
     nodes, edges, evidence, omitted = set(), set(), [], []
 
     def guid(value):
@@ -21,6 +21,24 @@ def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids
             if pair not in edges:
                 edges.add(pair)
                 evidence.append(dict(source=source, target=target, kind=kind))
+
+    # Indices are project-local and type-specific. Resolve only a unique native
+    # header in this capture; neither names nor positive numbers prove identity.
+    attribute_index = {}
+    for kind, reply in (attributes or {}).items():
+        if kind not in {'BuildingMaterial', 'Surface', 'Composite'}:
+            continue
+        for item in reply.get('attributes', []):
+            identity, index = guid(item.get('attributeId')), item.get('index')
+            if identity and isinstance(index, int) and not isinstance(index, bool):
+                attribute_index.setdefault((kind, index), set()).add('ATTRIBUTE:' + kind.upper() + ':' + identity)
+
+    def attribute(kind, index, target, relation):
+        candidates = attribute_index.get((kind, index), set())
+        if target and len(candidates) == 1:
+            edge(next(iter(candidates)), target, relation)
+        else:
+            omitted.append('ATTRIBUTE_INDEX_MISSING_OR_AMBIGUOUS:' + kind)
 
     for group in memberships:
         parent = guid(group.get('parentElementId'))
@@ -40,6 +58,17 @@ def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids
             omitted.append('COMPONENT_ERROR_OR_ID_MISSING')
             continue
         nodes.add(child)
+        params, flags = row.get('parameters', {}), row.get('flags', {})
+        # Panel material is explicit. Frame material applies only with the SDK
+        # useOwnMaterial flag. Disabled surface overrides are not dependencies.
+        if row.get('specificParametersSupported'):
+            if 'buildingMaterialIndex' in params and ('useOwnMaterial' not in flags or flags['useOwnMaterial']):
+                attribute('BuildingMaterial', params['buildingMaterialIndex'], child, 'NATIVE_COMPONENT_BUILDING_MATERIAL')
+            for name, flag in [('outerSurfaceIndex','outerSurfaceOverridden'), ('innerSurfaceIndex','innerSurfaceOverridden'), ('cutSurfaceIndex','cutSurfaceOverridden')]:
+                if flags.get(flag) is True and name in params:
+                    attribute('Surface', params[name], child, 'NATIVE_COMPONENT_SURFACE_OVERRIDE')
+            if flags.get('useOwnMaterial') is True and 'surfaceIndex' in params:
+                attribute('Surface', params['surfaceIndex'], child, 'NATIVE_FRAME_OWN_SURFACE')
         if row.get('parentQueryError') == 0:
             edge(guid(row.get('parentElementId')), child, 'NATIVE_HIERARCHICAL_PARENT')
         if row.get('rootQueryError') == 0:
@@ -61,6 +90,23 @@ def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids
         # Cut elements are native affected hosts, not proof of physical contact.
         for item in row.get('cutElements', []):
             edge(guid(item), current, 'NATIVE_OPENING_CUT_HOST')
+
+    for row in (envelopes or {}).get('elements', []):
+        target, base = guid(row.get('elementId')), row.get('shellBaseParameters', {})
+        if base.get('buildingMaterialApplicable') is True:
+            attribute('BuildingMaterial', base.get('buildingMaterialIndex'), target, 'NATIVE_ENVELOPE_BUILDING_MATERIAL')
+        if base.get('compositeApplicable') is True:
+            attribute('Composite', base.get('compositeIndex'), target, 'NATIVE_ENVELOPE_COMPOSITE')
+        for item in base.get('surfaceOverrides', []):
+            if item.get('overridden') is True:
+                attribute('Surface', item.get('surfaceIndex'), target, 'NATIVE_ENVELOPE_SURFACE_OVERRIDE')
+
+    for row in (ifc_ids or {}).get('elementIFCIds', []):
+        source, identity = guid(row.get('elementId')), row.get('ifcId')
+        if source and isinstance(identity, str) and identity.strip() and 'error' not in row:
+            edge(source, 'IFC:' + identity, 'NATIVE_IFC_IDENTITY_NOT_EXPORT_ACCEPTANCE')
+        else:
+            omitted.append('IFC_IDENTITY_MISSING_OR_NATIVE_ERROR')
 
     resolved = {}
     for row in (navigator_bindings or {}).get('items', []):

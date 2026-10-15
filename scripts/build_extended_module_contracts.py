@@ -25,7 +25,11 @@ def contracts():
         coordinates=arr(obj({'index':I,'x':N,'y':N})),contourEnds=arr(I),
         arcs=arr(obj({'beginIndex':I,'endIndex':I,'angle':N})),vertexIds=arr(I),edgeIds=arr(I)))
     header=dict(elementId=eid,nativeTypeId=I,homeStory=I)
-    envelope=obj(dict(header,polygon=polygon,roofEdgeTypes=arr(I),roofClass=I,roofLevel=N,
+    surface_override=obj({'role':S,'overridden':B,'surfaceIndex':I})
+    shell_base=obj({'structureTypeId':I,'relativeLevelMetres':N,'thicknessMetres':N,
+        'buildingMaterialApplicable':B,'compositeApplicable':B,'buildingMaterialIndex':I,
+        'compositeIndex':I,'surfaceOverrides':arr(surface_override)})
+    envelope=obj(dict(header,polygon=polygon,shellBaseParameters=shell_base,roofEdgeTypes=arr(I),roofClass=I,roofLevel=N,
         pivotPolygon=polygon,shellClass=I,shellShapes=arr(obj({'slot':I,'polygon':polygon,'bodyFlags':arr(obj({'allocationIndex':I,'generatesBody':B})),'bodyFlagIndexAuthority':S},['slot','polygon','bodyFlags','bodyFlagIndexAuthority'])),
         shellContours=arr(obj({'slot':I,'hole':B,'depth':N,'polygon':polygon,'planeTransform':arr(N,minItems=12,maxItems=12),'edgeData':arr(obj({'allocationIndex':I,'edgeTypeId':I,'sideTypeId':I,'sideAngleRadians':N,'surfaceOverridden':B,'surfaceIndex':I}))})),
         shellContourCountExpected=I,shellContourCountAllocated=I,
@@ -63,7 +67,10 @@ def contracts():
     opening=obj(dict(elementId=eid,nativeTypeId=I,homeStory=I,hostHeaderQueryError=I,hostNativeTypeId=I,hostHomeStory=I,parentResolved=B,hostElementId=eid,cutElements=arr(eid),
         connectedOpenings=arr(eid),anchor=xyz,vectorX=xyz,vectorY=xyz,extrusionDirection=xyz,
         shapeTypeId=I,limitTypeId=I,constraintId=I,widthMetres=N,heightMetres=N,
-        finiteBodyLengthMetres=N,startOffsetMetres=N,geometryBoundary=S),['elementId','nativeTypeId'])
+        finiteBodyLengthMetres=N,startOffsetMetres=N,linkedStatusId=I,anchorTypeId=I,anchorAltitudeMetres=N,
+        endSurfaceOverridden=B,endSurfaceIndex=I,extrusionSurfaceOverridden=B,extrusionSurfaceIndex=I,
+        surfaceOverridesLinked=B,polygonPresent=B,openingPolygon=obj({'coordinateFrame':S,'contourCount':I,
+            'contours':arr(obj({'edges':arr(obj({'begin':obj({'x':N,'y':N}),'end':obj({'x':N,'y':N}),'arcAngleRadians':N}))}))}),geometryBoundary=S),['elementId','nativeTypeId'])
     defs.update({
       'GetNativeComponentBindingsV1':(inputs,obj({'nativeModelWrites':{'const':0},'authority':S,'elements':arr(either(component))}),
         'Reuse existing membership query; add hierarchical parent/root, Stair child and Railing/CurtainWall component parameters. Supported subset explicit per row.'),

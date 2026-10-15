@@ -33,6 +33,29 @@ static GSErrCode ReadElement(const GS::ObjectState& item,API_Element& e) {
 }
 
 static GS::ObjectState NativeXYZ(const API_Coord3D& c){return GS::ObjectState("x",c.x,"y",c.y,"z",c.z);}
+static GS::ObjectState ShellBaseParameters(const API_ShellBaseType& base){
+ GS::ObjectState out("structureTypeId",static_cast<Int32>(base.modelElemStructureType),"relativeLevelMetres",base.level,"thicknessMetres",base.thickness,
+  "buildingMaterialApplicable",base.modelElemStructureType==API_BasicStructure,"compositeApplicable",base.modelElemStructureType==API_CompositeStructure,
+  "buildingMaterialIndex",GetAttributeIndex(base.buildingMaterial),"compositeIndex",GetAttributeIndex(base.composite));
+ const auto& surfaces=out.AddList<GS::ObjectState>("surfaceOverrides");
+ surfaces(GS::ObjectState("role","top","overridden",base.topMat.hasValue,"surfaceIndex",GetAttributeIndex(base.topMat.value)));
+ surfaces(GS::ObjectState("role","side","overridden",base.sidMat.hasValue,"surfaceIndex",GetAttributeIndex(base.sidMat.value)));
+ surfaces(GS::ObjectState("role","bottom","overridden",base.botMat.hasValue,"surfaceIndex",GetAttributeIndex(base.botMat.value)));
+ return out;
+}
+// Modern polygon accessors avoid legacy Opening memo layout assumptions. The
+// iterators keep contour membership, directed edges and arc angles together.
+static GS::ObjectState OpeningPolygon(const Geometry::Polygon2D& polygon){
+ GS::ObjectState out("coordinateFrame","OPENING_NATIVE_POLYGON_2D_WITH_RAW_FRAME_SEPARATE","contourCount",static_cast<Int32>(polygon.GetContourNum()));
+ const auto& contours=out.AddList<GS::ObjectState>("contours");
+ for(auto c=polygon.BeginContour();c!=polygon.EndContour();++c){
+  GS::ObjectState contour;const auto& edges=contour.AddList<GS::ObjectState>("edges");
+  for(auto e=c->BeginEdge();e!=c->EndEdge();++e){
+   const auto& begin=polygon.GetCoord(polygon.GetBeginVertex(e));const auto& end=polygon.GetCoord(polygon.GetEndVertex(e));
+   edges(GS::ObjectState("begin",GS::ObjectState("x",begin.x,"y",begin.y),"end",GS::ObjectState("x",end.x,"y",end.y),"arcAngleRadians",polygon.GetEdge(e).GetArcAngle()));
+  }contours(contour);
+ }return out;
+}
 static GS::ObjectState Transform(const API_Tranmat& t){GS::ObjectState out;const auto& values=out.AddList<double>("matrix3x4");for(double v:t.tmx)values(v);return out;}
 static GS::ObjectState ShellClassParameters(const API_ShellType& shell){
  GS::ObjectState out("coordinateFrame","NATIVE_PARAMETER_GEOMETRY_SHELL_LOCAL_FRAME_NOT_RESULTANT_BREP");
@@ -50,6 +73,8 @@ GS::ObjectState GetNativeEnvelopeMemoV1Command::Execute(const GS::ObjectState& p
  if(e.header.type.typeID!=API_RoofID&&e.header.type.typeID!=API_SlabID&&e.header.type.typeID!=API_ShellID){rows(CreateErrorResponse(APIERR_BADID,"Roof Slab Shell required"));continue;}
  API_ElementMemo memo={};const GS::OnExit cleanup([&](){ACAPI_DisposeElemMemoHdls(&memo);});err=ACAPI_Element_GetMemo(e.header.guid,&memo,APIMemoMask_All);if(err!=NoError){rows(CreateErrorResponse(err,"Get envelope memo"));continue;}
  GS::ObjectState row("elementId",CreateGuidObjectState(e.header.guid),"nativeTypeId",static_cast<Int32>(e.header.type.typeID),"homeStory",static_cast<Int32>(e.header.floorInd),"polygon",PolygonMemo(memo.coords,memo.pends,memo.parcs,memo.vertexIDs,memo.edgeIDs));
+ if(e.header.type.typeID==API_RoofID)row.Add("shellBaseParameters",ShellBaseParameters(e.roof.shellBase));
+ if(e.header.type.typeID==API_ShellID)row.Add("shellBaseParameters",ShellBaseParameters(e.shell.shellBase));
  const auto& roofEdges=row.AddList<Int32>("roofEdgeTypes");auto count=memo.roofEdgeTypes?BMGetPtrSize(reinterpret_cast<GSPtr>(memo.roofEdgeTypes))/sizeof(API_RoofEdgeTypeID):0;for(GSIndex i=1;i<count;++i)roofEdges(static_cast<Int32>(memo.roofEdgeTypes[i]));
  if(e.header.type.typeID==API_RoofID){row.Add("roofClass",static_cast<Int32>(e.roof.roofClass));row.Add("pivotPolygon",PolygonMemo(memo.additionalPolyCoords,memo.additionalPolyPends,memo.additionalPolyParcs,memo.additionalPolyVertexIDs,memo.additionalPolyEdgeIDs));row.Add("roofLevel",e.roof.shellBase.level);}
  if(e.header.type.typeID==API_ShellID){row.Add("shellClass",static_cast<Int32>(e.shell.shellClass));const auto& shapes=row.AddList<GS::ObjectState>("shellShapes");for(Int32 i=0;i<2;++i)if(memo.shellShapes[i].coords){const auto& shape=memo.shellShapes[i];GS::ObjectState entry("slot",i,"polygon",PolygonMemo(shape.coords,shape.pends,shape.parcs,shape.vertexIDs,shape.edgeIDs));const auto& flags=entry.AddList<GS::ObjectState>("bodyFlags");const auto nf=shape.bodyFlags?BMGetHandleSize(reinterpret_cast<GSHandle>(shape.bodyFlags))/sizeof(bool):0;for(GSIndex j=0;j<nf;++j)flags(GS::ObjectState("allocationIndex",static_cast<Int32>(j),"generatesBody",(*shape.bodyFlags)[j]));entry.Add("bodyFlagIndexAuthority","RAW_NATIVE_ALLOCATION_INDEX_NO_REINDEXING");shapes(entry);}row.Add("shellClassParameters",ShellClassParameters(e.shell));
@@ -112,6 +137,8 @@ GS::ObjectState GetNativeComponentBindingsV1Command::Execute(const GS::ObjectSta
  if(pe==NoError)row.Add("parentElementId",CreateGuidObjectState(parent));mode=API_RootHierarchicalOwner;const auto re=ACAPI_HierarchicalEditing_GetHierarchicalElementOwner(&e.header.guid,&mode,&kind,&root);row.Add("rootQueryError",static_cast<Int32>(re));if(re==NoError)row.Add("rootElementId",CreateGuidObjectState(root));
  GS::ObjectState values,flags;API_Guid owner=APINULLGuid;bool supported=true;
  switch(e.header.type.typeID){
+ case API_CurtainWallID:{const auto& c=e.curtainWall;values.Add("heightMetres",c.height);values.Add("relativeLevelMetres",c.storyRelLevel);values.Add("angleRadians",c.angle);values.Add("nominalWidthMetres",c.nominalWidth);values.Add("segmentCount",c.nSegments);values.Add("frameCount",c.nFrames);values.Add("panelCount",c.nPanels);values.Add("junctionCount",c.nJunctions);values.Add("accessoryCount",c.nAccessories);flags.Add("flipped",c.flipped);break;}
+ case API_RailingID:{const auto& c=e.railing;values.Add("nodeCount",c.nNodes);values.Add("segmentCount",c.nSegments);values.Add("referenceVertexCount",c.nVertices);values.Add("bottomOffsetMetres",c.bottomOffset);break;}
  case API_RiserID:{const auto& c=e.stairRiser;owner=c.owner;values.Add("angleRadians",c.angle);values.Add("offsetMetres",c.offset);values.Add("thicknessMetres",c.thickness);values.Add("sequenceNumber",c.sequenceNumber);values.Add("roleId",static_cast<Int32>(c.role));flags.Add("visible",c.visible);row.Add("libraryPartGuid",CreateGuidObjectState(c.libId));break;}
  case API_TreadID:{const auto& c=e.stairTread;owner=c.owner;values.Add("offsetMetres",c.offset);values.Add("thicknessMetres",c.thickness);values.Add("zOffsetMetres",c.zOffset);values.Add("nosingValueMetres",c.nosingValue);values.Add("nosingSlant",c.nosingSlant);values.Add("nosingTypeId",static_cast<Int32>(c.nosingType));values.Add("sequenceNumber",c.sequenceNumber);values.Add("roleId",static_cast<Int32>(c.role));flags.Add("visible",c.visible);flags.Add("isCustom",c.isCustom);row.Add("libraryPartGuid",CreateGuidObjectState(c.libId));break;}
  case API_StairStructureID:{const auto& c=e.stairStructure;owner=c.owner;values.Add("thicknessMetres",c.thickness);values.Add("horizontalThicknessMetres",c.horizontalThickness);values.Add("sequenceNumber",c.sequenceNumber);values.Add("structureTypeId",static_cast<Int32>(c.structType));values.Add("bottomTypeId",static_cast<Int32>(c.bottomType));flags.Add("visible",c.visible);flags.Add("isLanding",c.isLanding);row.Add("libraryPartGuid",CreateGuidObjectState(c.libId));break;}
@@ -144,7 +171,12 @@ GS::ObjectState GetNativeOpeningConnectionsV1Command::Execute(const GS::ObjectSt
  row.Add("anchor",xyz(geometry.GetAnchorPoint()));row.Add("vectorX",xyz(geometry.GetVectorX()));row.Add("vectorY",xyz(geometry.GetVectorY()));row.Add("extrusionDirection",xyz(geometry.GetExtrusionDirection()));
  const auto extrusion=opening->GetExtrusionParameters();row.Add("shapeTypeId",static_cast<Int32>(extrusion.GetShapeType()));row.Add("limitTypeId",static_cast<Int32>(extrusion.GetLimitType()));row.Add("constraintId",static_cast<Int32>(extrusion.GetConstraint()));
  if(auto v=extrusion.GetWidth())row.Add("widthMetres",*v);if(auto v=extrusion.GetHeight())row.Add("heightMetres",*v);if(auto v=extrusion.GetFiniteBodyLength())row.Add("finiteBodyLengthMetres",*v);if(auto v=extrusion.GetExtrusionStartOffset())row.Add("startOffsetMetres",*v);
- row.Add("geometryBoundary","NATIVE_PARAMETER_GEOMETRY_LOCAL_FRAME_CUSTOM_POLYGON_AND_RESULTANT_BREP_NOT_SERIALIZED");
+ row.Add("linkedStatusId",static_cast<Int32>(extrusion.GetLinkedStatus()));row.Add("anchorTypeId",static_cast<Int32>(extrusion.GetAnchor()));if(auto v=extrusion.GetAnchorAltitude())row.Add("anchorAltitudeMetres",*v);
+ row.Add("endSurfaceOverridden",extrusion.IsEndSurfaceAttributeOverridden());row.Add("endSurfaceIndex",GetAttributeIndex(extrusion.GetOverriddenEndSurfaceAttributeIndex()));
+ row.Add("extrusionSurfaceOverridden",extrusion.IsExtrusionSurfaceAttributeOverridden());row.Add("extrusionSurfaceIndex",GetAttributeIndex(extrusion.GetOverriddenExtrusionSurfaceAttributeIndex()));row.Add("surfaceOverridesLinked",extrusion.AreOverriddenSurfaceAttributesLinked());
+ const auto polygon=geometry.GetPolygon();row.Add("polygonPresent",polygon.has_value());
+ if(polygon){if(polygon->GetVertexNum()>65536||polygon->GetEdgeNum()>65536||polygon->GetContourNum()>4096){rows(CreateErrorResponse(APIERR_BADPARS,"Opening polygon exceeds bounded serialization"));continue;}row.Add("openingPolygon",OpeningPolygon(*polygon));}
+ row.Add("geometryBoundary","NATIVE_PARAMETER_POLYGON_AND_RAW_FRAME_SEPARATE_NO_FRAME_NORMALIZATION_OR_RESULTANT_BREP");
  }else{auto connected=ACAPI::Element::Opening::GetConnectedOpenings(id,ACAPI_GetToken());if(!connected.IsOk()){rows(CreateErrorResponse(APIERR_BADID,"Connected Opening lookup failed for host"));continue;}const auto& openings=row.AddList<GS::ObjectState>("connectedOpenings");for(const auto& opening:*connected)openings(CreateGuidObjectState(GSGuid2APIGuid(opening.GetGuid())));}
  rows(row);
  }return out;
