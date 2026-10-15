@@ -7,6 +7,26 @@ import hashlib
 import json
 
 
+def capture_ifc_facts(api, router, element_ids):
+    """Read current native IFC facts through source-reviewed dynamic contracts.
+
+    Uses the existing IFC implementation. Runtime availability, project identity,
+    schemas and per-command READ_ONLY policies remain enforced by the router.
+    Values are the provider's strings; empty IDs and native errors stay explicit.
+    This is not an IFC export or semantic compatibility acceptance.
+    """
+    ids = list(element_ids)
+    if not 1 <= len(ids) <= 32 or len(set(ids)) != len(ids):
+        raise ValueError('ONE_TO_32_UNIQUE_ELEMENT_IDS_REQUIRED')
+    params = dict(elements=[dict(elementId=dict(guid=value)) for value in ids])
+    result = {}
+    for command in ('GetIFCIdsOfElements', 'GetIFCTypeOfElements', 'GetIFCPropertiesOfElements'):
+        key = command if command in router.catalog['commands'] else 'AddOn.TapirCommand.' + command
+        result[command] = router.read(api, router.prepare(key, params), reviewed_read_only=True)
+    return dict(results=result, sourceSHA256=hashlib.sha256(json.dumps(result, sort_keys=True).encode()).hexdigest(),
+                authority='CURRENT_NATIVE_IFC_ACCESSOR_NOT_EXPORT_ACCEPTANCE', nativeModelWrites=0)
+
+
 def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids=(), memberships=(), navigator_bindings=None, layout_bindings=(), attributes=None, envelopes=None, ifc_ids=None):
     nodes, edges, evidence, omitted = set(), set(), [], []
 
