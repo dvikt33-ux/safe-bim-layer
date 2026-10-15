@@ -56,3 +56,38 @@
 - После установки необходимо сверить версию отдельно по AC30 портам и выполнить **только read-only** тесты, не менять APA29.
 
 Источник: пользовательский лог в чате, отсутствует независимое управление его ПК. Результаты сохраняются в draft PR, не в main и не как controller receipt.
+
+## 7. AC29+AC30 active через один независимый MCP — пользовательский runtime PASS
+
+**Дата:** 2026-10-16. После ручного подключения проверенного Tapir 1.7.0 APX пользователь прислал реальный вывод MCP stdio `initialize`, `tools/list`, `tools/call discovery_list_active_archicads`:
+
+```text
+MCP TOOLS:
+discovery_list_active_archicads
+archicad_list_commands
+archicad_get_command_schema
+archicad_call_tool
+archicad_get_job
+
+ACTIVE ARCHICAD:
+Archicad 30 | Port 19725 | Tapir 1.7.0 | тестовый файл все типы+30
+Archicad 29 | Port 19726 | Tapir 1.5.10 | APA_Assembly_Modify_01
+AC29: PASS
+AC30: PASS
+ACTIVE INSTANCES: 2
+MODEL WRITES: 0
+```
+
+Оба экземпляра обнаружены как **active**, а не только как открытые JSON API порты. Другие два AC30 экземпляра сообщают `missing_tapir`, что не препятствует выбранному тестовому AC30. AC29 Tapir 1.5.10 выдаёт предупреждение: сервер ожидает 1.7.0; ранее установленные расширения APA29 **не обновлялись**.
+
+- `AC29_MCP_DISCOVERY`: USER_REPORTED_PASS.
+- `AC30_MCP_DISCOVERY`: USER_REPORTED_PASS.
+- `MCP_COMMAND_CATALOG_TOOLS`: 5 names exposed (это инструменты MCP, **не** 191 доказанных работающих операций).
+- `MCP_READ_COMMAND_EXECUTION`: NOT_TESTED; `archicad_call_tool` пока не вызывался.
+- `MCP_HOST_REGISTERED`: NOT_TESTED; клиент через временный Python stdio probe, без постоянной регистрации в пользовательском ИИ-клиенте.
+- `MODEL_WRITES`: 0 в представленном скрипте. Independent PLN binary diff NOT_TESTED.
+- Архитектура допускает управление несколькими экземплярами по портам, но соответствие версия→порт нужно перепроверять при перезапуске.
+
+**Безопасный следующий шаг:** из MCP вызвать `app_get_add_on_version` (только чтение) на каждом из двух выбранных портов с предварительной `archicad_get_command_schema`; затем на AC30 тестовом PLN ограниченный `GetAllElements` через MCP. Не менять AC29 Tapir/APX или рабочий PLN.
+
+Источник доказательства — консольный журнал пользователя; не считать независимым тестом on-device со стороны автора отчёта и не закрывать S-ID.
