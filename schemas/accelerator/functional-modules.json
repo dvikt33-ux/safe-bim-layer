@@ -10,7 +10,7 @@
     "archicad-addon/Sources/NativeLibraryDefaults.inc": "4afeb0b9e314506740ddd92320ada17ac070fafdc36cc588dc9812221bad3144",
     "archicad-addon/Sources/NativeAssemblyCommands.inc": "34da20beefb90e967533620e750b16915e9ae96bb8405295433d14a97eda39c3",
     "archicad-addon/Sources/NativeAssemblyModify.inc": "cd038626931ae6903bb7df7d7a0490fb6e6e1976e79ab05d92048c21da056d70",
-    "archicad-addon/Sources/NativeAssemblyMemo.inc": "6026f79a62b7c59cfc090c9b90cc69836ffa60e95b06ec0eece1a668b94caef5",
+    "archicad-addon/Sources/NativeAssemblyMemo.inc": "d01a5c37550bd6790f65e523d6dc40ccbf41ba57f9f63e23c9c6e7f620a0f6fe",
     "archicad-addon/Sources/NativeMEPTopology.inc": "1cc29c9858287e0437c28bc1503920ea40fb52b25e966ef24d3bbe910e103558"
   },
   "sdkProviders": {
