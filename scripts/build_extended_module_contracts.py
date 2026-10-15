@@ -60,7 +60,7 @@ def contracts():
         specificParametersSupported=B,parameters=dict(type='object',additionalProperties=N),flags=dict(type='object',additionalProperties=B)),
         list(header)+['variationId','parentQueryError','rootQueryError','hierarchyKind','specificParametersSupported','parameters','flags'])
     xyz=obj({'x':N,'y':N,'z':N})
-    opening=obj(dict(elementId=eid,nativeTypeId=I,parentResolved=B,hostElementId=eid,cutElements=arr(eid),
+    opening=obj(dict(elementId=eid,nativeTypeId=I,homeStory=I,hostHeaderQueryError=I,hostNativeTypeId=I,hostHomeStory=I,parentResolved=B,hostElementId=eid,cutElements=arr(eid),
         connectedOpenings=arr(eid),anchor=xyz,vectorX=xyz,vectorY=xyz,extrusionDirection=xyz,
         shapeTypeId=I,limitTypeId=I,constraintId=I,widthMetres=N,heightMetres=N,
         finiteBodyLengthMetres=N,startOffsetMetres=N,geometryBoundary=S),['elementId','nativeTypeId'])
