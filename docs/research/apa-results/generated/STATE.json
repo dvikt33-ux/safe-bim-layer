@@ -1,6 +1,6 @@
 {
   "legacy_flat_runs": "preserved and indexed manually",
-  "run_count": 54,
+  "run_count": 55,
   "runs": [
     {
       "evidence_status": "EVIDENCE_READY",
@@ -378,6 +378,13 @@
       "phase": "LIVE",
       "report": "runs/2026-10-15/APA-RUN-20261015-011839Z-sdk-runtime-connected-memo/REPORT.md",
       "run_id": "APA-RUN-20261015-011839Z-sdk-runtime-connected-memo",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-15/APA-RUN-20261015-071450Z-sdk-component-context/REPORT.md",
+      "run_id": "APA-RUN-20261015-071450Z-sdk-component-context",
       "substep_id": "APA-P70.A11.S03"
     }
   ],
