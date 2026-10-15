@@ -1,0 +1,74 @@
+name: APA advanced refs workflows IFC - 288 fresh QA
+
+on:
+  pull_request:
+    paths:
+      - 'tests/test_archicad_advanced_ref_workflow_ifc_qa.py'
+      - 'scripts/apa_advanced_qa_shard.py'
+      - '.github/workflows/apa-advanced-ref-workflow-ifc.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  advanced-shards:
+    name: Independent advanced QA shard ${{ matrix.shard }} of 10
+    runs-on: windows-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    env:
+      APA_OFFLINE_ONLY: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+      PYTHONHASHSEED: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install QA dependencies (same as PR90)
+        run: |
+          python -m pip install 'jsonschema>=4,<5'
+          python -m pip install -r scripts/requirements-connected.txt
+          python -m pip install -r scripts/requirements-knowledge.txt
+      - name: Execute this suite only - no earlier 735 or 378 tests
+        run: python scripts/apa_advanced_qa_shard.py --shard ${{ matrix.shard }} --shards 10 --report reports/shard-${{ matrix.shard }}.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: apa-advanced-qa-shard-${{ matrix.shard }}
+          path: reports/shard-${{ matrix.shard }}.json
+          if-no-files-found: warn
+
+  advanced-accounting:
+    name: Cross-shard accounting of exactly 288 unique cases
+    needs: advanced-shards
+    if: always()
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: apa-advanced-qa-shard-*
+          path: reports
+          merge-multiple: true
+      - name: Verify all 10 shards, no gaps and no duplicate IDs
+        run: python scripts/apa_novel_aggregate.py --reports-dir reports --shards 10
+      - name: Demand exact 288 completed cases
+        run: python -c "import json,sys; r=json.load(open('reports/full-offline-aggregate.json',encoding='utf8')); ok=r['discoveredTests']==288 and r['metrics']['testsRun']==288 and all(r['metrics'][k]==0 for k in ('failures','errors','skipped','expectedFailures','unexpectedSuccesses')) and not r['issues']; print('APA_ADVANCED_EXACT_288',ok,r['metrics']); sys.exit(0 if ok else 1)"
+      - name: Require successful shards, not only generated artifacts
+        env:
+          SHARDS_RESULT: ${{ needs.advanced-shards.result }}
+        run: python -c "import os,sys; s=os.getenv('SHARDS_RESULT');print('APA_ADVANCED_SHARDS',s);sys.exit(0 if s=='success' else 1)"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: apa-advanced-qa-full-report
+          path: reports/full-offline-aggregate.json
+          if-no-files-found: warn
