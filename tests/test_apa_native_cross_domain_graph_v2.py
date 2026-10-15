@@ -45,18 +45,16 @@ def test_cross_domain_multi_capture_cycle_and_namespacing(mask):
     assert (wall, opening_a) in edges
     assert (opening_a, opening_b) in edges
     assert (draw, "NAVIGATOR:LAYOUTBOOK:" + layout) in edges
-    assert (wall, frame) in edges if mask & 8 else (wall, frame) not in edges
-    assert ("NAVIGATOR_SOURCE_REFERENCE:" + wall,
-            "NAVIGATOR:PUBLICVIEWMAP:" + view) in edges if mask & 16 else (
-            "NAVIGATOR_SOURCE_REFERENCE:" + wall,
-            "NAVIGATOR:PUBLICVIEWMAP:" + view) not in edges
+    assert ((wall, frame) in edges) == bool(mask & 8)
+    assert (("NAVIGATOR_SOURCE_REFERENCE:" + wall,
+             "NAVIGATOR:PUBLICVIEWMAP:" + view) in edges) == bool(mask & 16)
     has_link = bool(mask & 16) and not bool(mask & 32)
     assert (("NAVIGATOR:PUBLICVIEWMAP:" + view, draw) in edges) == has_link
     result = dependency_impact(data["nodes"], data["edges"], [wall])
     assert result["executionAllowed"] is False
-    assert result["status"] == ("CYCLIC" if mask & 3 else "DAG")
+    assert result["status"] == ("CYCLIC" if mask & 2 else "DAG")
     if result["status"] == "DAG":
         assert set(result["affected"]) >= {wall, opening_a, opening_b}
     # Navigator IDs must never coalesce with the physical native wall identifier.
-    assert "NAVIGATOR:PUBLICVIEWMAP:" + view in data["nodes"] if mask & 16 else True
-    assert "NAVIGATOR_SOURCE_REFERENCE:" + wall in data["nodes"] if mask & 16 else True
+    assert (("NAVIGATOR:PUBLICVIEWMAP:" + view) in data["nodes"]) == bool(mask & 16)
+    assert (("NAVIGATOR_SOURCE_REFERENCE:" + wall) in data["nodes"]) == bool(mask & 16)
