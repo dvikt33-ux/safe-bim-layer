@@ -28,9 +28,14 @@ def contracts():
     envelope=obj(dict(header,polygon=polygon,roofEdgeTypes=arr(I),roofClass=I,roofLevel=N,
         pivotPolygon=polygon,shellClass=I,shellShapes=arr(obj({'slot':I,'polygon':polygon})),
         shellContours=arr(obj({'slot':I,'hole':B,'depth':N,'polygon':polygon,'planeTransform':arr(N,minItems=12,maxItems=12)})),
-        shellContourCountExpected=I,shellContourCountAllocated=I,serializationBoundary=S),
+        shellContourCountExpected=I,shellContourCountAllocated=I,
+        edgeTrims=arr(obj({'memoIndex':I,'sideTypeId':I,'sideAngleRadians':N})),
+        sideMaterials=arr(obj({'memoIndex':I,'overridden':B,'surfaceIndex':I})),
+        pivotEdgeOverrides=arr(obj({'memoIndex':I,'pivotEdgeUniqueId':I,'segmentTypeId':I,
+            'levels':arr(obj({'levelIndex':I,'angleRadians':N,'angleTypeId':I,'eavesOverhangMetres':N,'topSurfaceIndex':I,'bottomSurfaceIndex':I}))})),
+        shellBasePlaneTransform=arr(N,minItems=12,maxItems=12),serializationBoundary=S),
         list(header)+['polygon','roofEdgeTypes','serializationBoundary'])
-    drawings=obj(dict(elementId=eid,linkGuid=eid,linkTypeId=I,viewTypeId=I,contentTypeId=I,
+    drawings=obj(dict(elementId=eid,navigatorItemId=eid,databaseQualified=B,databaseQueryError=I,databaseTypeId=I,databaseId=eid,databaseRestoreError=I,linkGuid=eid,linkTypeId=I,viewTypeId=I,contentTypeId=I,
         viewDeleted=B,externalPathPresent=B,updateStatus=I,statusQueryError=I,contentBoxQueryError=I,
         fullContentBox=obj({k:N for k in ['xMin','yMin','xMax','yMax']})),
         ['elementId','linkGuid','linkTypeId','viewTypeId','contentTypeId','viewDeleted','externalPathPresent','updateStatus','statusQueryError','contentBoxQueryError'])
@@ -39,14 +44,31 @@ def contracts():
         composites=arr(obj({'volume':N,'projectedArea':N,'buildingMaterialIndex':I}))))
     defs={
       'GetNativeEnvelopeMemoV1':(inputs,obj({'nativeModelWrites':{'const':0},'authority':S,'elements':arr(either(envelope))}),
-        'Roof/Slab/Shell parameter topology, pivot polygons and shell contours; not resultant BREP or full side material overrides.'),
-      'GetNativeDrawingAssociationsV1':(inputs,obj({'nativeModelWrites':{'const':0},'drawings':arr(either(drawings))}),
+        'Roof/Slab/Shell parameter topology, pivot polygons and shell contours; edge trims, side material indices and bounded pivot level overrides; not resultant BREP.'),
+      'GetNativeDrawingAssociationsV1':(obj({'elements':arr(obj({'elementId':eid,'databaseId':eid},['elementId']),minItems=1,maxItems=32)}),obj({'nativeModelWrites':{'const':0},'drawings':arr(either(drawings)),'databaseRestoreError':I},['nativeModelWrites','drawings']),
         'Native Drawing source-link GUID, update status and full content box; private external paths suppressed.'),
       'GetNativeElementHotspotsV1':(inputs,obj({'nativeModelWrites':{'const':0},'authority':S,'elements':arr(either(hotspots))}),
         'Native element hotspots and neighbor references with XYZ; not body vertices.'),
       'GetNativeElementQuantitiesV1':(obj(dict(inputs['properties'],minOpeningSize=dict(N,minimum=0))),
         obj({'nativeModelWrites':{'const':0},'authority':S,'minOpeningSize':N,'elements':arr(either(quantities))}),
         'Native quantity engine scalars and composite material quantities for thirteen tool types. Explicit minOpeningSize; SDK field semantics apply, not engineering acceptance.')}
+    component=obj(dict(header,variationId=I,hierarchyKind=I,parentQueryError=I,rootQueryError=I,
+        parentElementId=eid,rootElementId=eid,declaredOwnerId=eid,libraryPartGuid=eid,
+        specificParametersSupported=B,parameters=dict(type='object',additionalProperties=N),flags=dict(type='object',additionalProperties=B)),
+        list(header)+['variationId','parentQueryError','rootQueryError','hierarchyKind','specificParametersSupported','parameters','flags'])
+    xyz=obj({'x':N,'y':N,'z':N})
+    opening=obj(dict(elementId=eid,nativeTypeId=I,parentResolved=B,hostElementId=eid,cutElements=arr(eid),
+        connectedOpenings=arr(eid),anchor=xyz,vectorX=xyz,vectorY=xyz,extrusionDirection=xyz,
+        shapeTypeId=I,limitTypeId=I,constraintId=I,widthMetres=N,heightMetres=N,
+        finiteBodyLengthMetres=N,startOffsetMetres=N,geometryBoundary=S),['elementId','nativeTypeId'])
+    defs.update({
+      'GetNativeComponentBindingsV1':(inputs,obj({'nativeModelWrites':{'const':0},'authority':S,'elements':arr(either(component))}),
+        'Reuse existing membership query; add hierarchical parent/root, Stair child and Railing/CurtainWall component parameters. Supported subset explicit per row.'),
+      'GetNativeOpeningConnectionsV1':(inputs,obj({'nativeModelWrites':{'const':0},'authority':S,'elements':arr(either(opening))}),
+        'AC29 modern Generic Opening host, cut-element identities, extrusion parameters and local frame; host-to-opening query. No cut-body BREP claim.'),
+      'GetNativeQuantityPreflightV1':(inputs,obj({'nativeModelWrites':{'const':0},'quantityEngineCalled':{'const':False},'quarantineRetained':{'const':True},
+        'elements':arr(either(obj(dict(header,stage={'const':'PRE_ENGINE_ELEMENT_IDENTIFIED_NO_QUANTITY_CALL'},engineCallAllowed={'const':False}))))}),
+        'Read element identity and type only before the quarantined quantity engine. Does not allocate quantities, construct masks or call engine.')})
     rows={name:dict(version='29',category='Native SDK grouped read adapter',description=d,
         parameters=p,returns=r,availability='BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED',
         implementationSource='archicad-addon/Sources/NativeExtendedModules.cpp') for name,(p,r,d) in defs.items()}

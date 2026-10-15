@@ -57,4 +57,28 @@ class FunctionalModules(unittest.TestCase):
         self.assertEqual(answer['status'],'OPTIMAL');self.assertEqual(answer['objective'],4)
         graph=dict(operations=[dict(id='select',command='AddOn.APAAnalysis.IFCSelect',params=dict(path='explicit-input.ifc',query='IfcWall')),dict(id='geometry',command='AddOn.APAAnalysis.IFCGeometry',params={'path':'explicit-input.ifc','guids':[{'$result':dict(step='select',pointer='/elements/0/ifcId')}]})])
         plan=r.prepare_workflow(graph);self.assertEqual(plan['executionOrder'],['select','geometry']);self.assertFalse(plan['executionPermission'])
+class ComponentContextIntegration(unittest.TestCase):
+    def test_new_group_contracts_are_preparable_without_granting_runtime(self):
+        r=connected()
+        for name in ['GetNativeComponentBindingsV1','GetNativeOpeningConnectionsV1','GetNativeQuantityPreflightV1']:
+            ticket=r.prepare('AddOn.TapirCommand.'+name,dict(elements=[dict(elementId=dict(guid='contract-only'))]))
+            self.assertFalse(ticket.get('executionPermission',False))
+        r.prepare('AddOn.TapirCommand.GetNativeDrawingAssociationsV1',dict(elements=[dict(elementId=dict(guid='drawing'),databaseId=dict(guid='layout'))]))
+        schema=r.catalog['commands']['AddOn.TapirCommand.GetNativeEnvelopeMemoV1']['returns']
+        self.assertIn('pivotEdgeOverrides',json.dumps(schema));self.assertIn('sideMaterials',json.dumps(schema))
+
+    def test_native_relationships_feed_existing_dependency_graph_without_self_loops(self):
+        from apa_native_dependency_flow import run
+        components=dict(elements=[dict(elementId=dict(guid='tread'),parentElementId=dict(guid='stair'),rootElementId=dict(guid='stair'),parentQueryError=0,rootQueryError=0)])
+        answer=run(connected(),dict(components=components),['stair'])
+        self.assertEqual(answer['result']['updateOrder'],['STAIR','TREAD'])
+        self.assertFalse(answer['executionPermission']);self.assertEqual(len(answer['inputs']['edges']),1)
+
+    def test_failed_relationships_and_unknown_view_are_not_inferred(self):
+        from apa_native_dependency_flow import dependency_inputs
+        facts=dependency_inputs(components=dict(elements=[dict(elementId=dict(guid='self'),parentElementId=dict(guid='self'),parentQueryError=0),dict(error=dict(code=-1))]),
+            drawings=dict(drawings=[dict(elementId=dict(guid='drawing'),linkGuid=dict(guid='unknown'),viewDeleted=False)]))
+        self.assertEqual(facts['edges'],[])
+        self.assertEqual(len(facts['omitted']),2)
+
 if __name__=='__main__':unittest.main()

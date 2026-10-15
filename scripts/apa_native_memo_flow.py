@@ -20,7 +20,7 @@ def run(memo):
     # Public proof carries counts/scalars and content hashes, not a native dump.
     proof=dict(schema='APA_NATIVE_MEMO_FLOW_V1',status=answer['status'],
         sourceMemoSHA256=hashlib.sha256(json.dumps(memo,sort_keys=True,separators=(',',':')).encode()).hexdigest(),
-        preparedCommands=len(r.catalog['commands']),nativePrepared=372,localPrepared=10,
+        preparedCommands=len(r.catalog['commands']),nativePrepared=sum(v.get('api')!='local-python' for v in r.catalog['commands'].values()),localPrepared=sum(v.get('api')=='local-python' for v in r.catalog['commands'].values()),
         sourceElements=len(memo['elements']),convertedElements=len(converted['polygons']),
         preservedHoles=sum(len(p['holes']) for p in converted['polygons']),
         omittedReasons=[x['reason'] for x in converted['omitted']],

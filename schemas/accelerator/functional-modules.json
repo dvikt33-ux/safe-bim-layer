@@ -3,9 +3,9 @@
   "sdkImplementationSHA256": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72",
   "sdkImplementationFiles": {
     "archicad-addon/Sources/NativeModuleCommands.cpp": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72",
-    "archicad-addon/Sources/NativeExtendedModules.cpp": "99fe0cb9007091c09301be5c922a9ce25a0a59f490b1c9406219ad26b94f1451",
-    "archicad-addon/Sources/NativeExtendedModules.hpp": "3d8d14f393cff31dad5bf808ca973dde324211404dd96c07667909e90a780377",
-    "archicad-addon/Sources/NativeExtendedSchemas.inc": "a08bb0a19328d7adac6685a8ff7c0eed72db8682ef70daef5a9fbdb6f05d7bbd",
+    "archicad-addon/Sources/NativeExtendedModules.cpp": "b84cdcc346f40d56f93bc02ac300fe06cd182dde2fc57550ce0b59c52d4c3541",
+    "archicad-addon/Sources/NativeExtendedModules.hpp": "9e3c9c7588111c7ad399a349f401c09e2833ddeaa4bb665bd50cdce3c51e38ca",
+    "archicad-addon/Sources/NativeExtendedSchemas.inc": "f8bd9f3d32d30267957021388c9ab677178cef3886f1ea15ec5d9877016ed567",
     "archicad-addon/Sources/NativeQuantityFields.inc": "470d052f2cc23bc0536efc658e7a1d9840bdcc214d500b0709e598e805f58f53"
   },
   "sdkProviders": {
@@ -668,7 +668,7 @@
       "GetNativeEnvelopeMemoV1": {
         "version": "29",
         "category": "Native SDK grouped read adapter",
-        "description": "Roof/Slab/Shell parameter topology, pivot polygons and shell contours; not resultant BREP or full side material overrides.",
+        "description": "Roof/Slab/Shell parameter topology, pivot polygons and shell contours; edge trims, side material indices and bounded pivot level overrides; not resultant BREP.",
         "parameters": {
           "type": "object",
           "properties": {
@@ -1150,6 +1150,119 @@
                       "shellContourCountAllocated": {
                         "type": "integer"
                       },
+                      "edgeTrims": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "memoIndex": {
+                              "type": "integer"
+                            },
+                            "sideTypeId": {
+                              "type": "integer"
+                            },
+                            "sideAngleRadians": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "memoIndex",
+                            "sideTypeId",
+                            "sideAngleRadians"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "sideMaterials": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "memoIndex": {
+                              "type": "integer"
+                            },
+                            "overridden": {
+                              "type": "boolean"
+                            },
+                            "surfaceIndex": {
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "memoIndex",
+                            "overridden",
+                            "surfaceIndex"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "pivotEdgeOverrides": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "memoIndex": {
+                              "type": "integer"
+                            },
+                            "pivotEdgeUniqueId": {
+                              "type": "integer"
+                            },
+                            "segmentTypeId": {
+                              "type": "integer"
+                            },
+                            "levels": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "levelIndex": {
+                                    "type": "integer"
+                                  },
+                                  "angleRadians": {
+                                    "type": "number"
+                                  },
+                                  "angleTypeId": {
+                                    "type": "integer"
+                                  },
+                                  "eavesOverhangMetres": {
+                                    "type": "number"
+                                  },
+                                  "topSurfaceIndex": {
+                                    "type": "integer"
+                                  },
+                                  "bottomSurfaceIndex": {
+                                    "type": "integer"
+                                  }
+                                },
+                                "required": [
+                                  "levelIndex",
+                                  "angleRadians",
+                                  "angleTypeId",
+                                  "eavesOverhangMetres",
+                                  "topSurfaceIndex",
+                                  "bottomSurfaceIndex"
+                                ],
+                                "additionalProperties": false
+                              }
+                            }
+                          },
+                          "required": [
+                            "memoIndex",
+                            "pivotEdgeUniqueId",
+                            "segmentTypeId",
+                            "levels"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "shellBasePlaneTransform": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        },
+                        "minItems": 12,
+                        "maxItems": 12
+                      },
                       "serializationBoundary": {
                         "type": "string"
                       }
@@ -1202,7 +1315,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "99fe0cb9007091c09301be5c922a9ce25a0a59f490b1c9406219ad26b94f1451"
+        "implementationSHA256": "b84cdcc346f40d56f93bc02ac300fe06cd182dde2fc57550ce0b59c52d4c3541"
       },
       "GetNativeDrawingAssociationsV1": {
         "version": "29",
@@ -1217,6 +1330,19 @@
                 "type": "object",
                 "properties": {
                   "elementId": {
+                    "type": "object",
+                    "properties": {
+                      "guid": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "guid"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "databaseId": {
                     "type": "object",
                     "properties": {
                       "guid": {
@@ -1269,6 +1395,44 @@
                           "guid"
                         ],
                         "additionalProperties": false
+                      },
+                      "navigatorItemId": {
+                        "type": "object",
+                        "properties": {
+                          "guid": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "required": [
+                          "guid"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "databaseQualified": {
+                        "type": "boolean"
+                      },
+                      "databaseQueryError": {
+                        "type": "integer"
+                      },
+                      "databaseTypeId": {
+                        "type": "integer"
+                      },
+                      "databaseId": {
+                        "type": "object",
+                        "properties": {
+                          "guid": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "required": [
+                          "guid"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "databaseRestoreError": {
+                        "type": "integer"
                       },
                       "linkGuid": {
                         "type": "object",
@@ -1373,6 +1537,9 @@
                   }
                 ]
               }
+            },
+            "databaseRestoreError": {
+              "type": "integer"
             }
           },
           "required": [
@@ -1383,7 +1550,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "99fe0cb9007091c09301be5c922a9ce25a0a59f490b1c9406219ad26b94f1451"
+        "implementationSHA256": "b84cdcc346f40d56f93bc02ac300fe06cd182dde2fc57550ce0b59c52d4c3541"
       },
       "GetNativeElementHotspotsV1": {
         "version": "29",
@@ -1538,7 +1705,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "99fe0cb9007091c09301be5c922a9ce25a0a59f490b1c9406219ad26b94f1451"
+        "implementationSHA256": "b84cdcc346f40d56f93bc02ac300fe06cd182dde2fc57550ce0b59c52d4c3541"
       },
       "GetNativeElementQuantitiesV1": {
         "version": "29",
@@ -1702,7 +1869,622 @@
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
         "executionBlocker": "AC29_QUANTITY_ENGINE_ACCESS_VIOLATION_ROOT_CAUSE_NOT_VERIFIED_NO_REPLAY",
-        "implementationSHA256": "99fe0cb9007091c09301be5c922a9ce25a0a59f490b1c9406219ad26b94f1451"
+        "implementationSHA256": "b84cdcc346f40d56f93bc02ac300fe06cd182dde2fc57550ce0b59c52d4c3541"
+      },
+      "GetNativeComponentBindingsV1": {
+        "version": "29",
+        "category": "Native SDK grouped read adapter",
+        "description": "Reuse existing membership query; add hierarchical parent/root, Stair child and Railing/CurtainWall component parameters. Supported subset explicit per row.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "elements": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "elementId": {
+                    "type": "object",
+                    "properties": {
+                      "guid": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "guid"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "elementId"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1,
+              "maxItems": 32
+            }
+          },
+          "required": [
+            "elements"
+          ],
+          "additionalProperties": false
+        },
+        "returns": {
+          "type": "object",
+          "properties": {
+            "nativeModelWrites": {
+              "const": 0
+            },
+            "authority": {
+              "type": "string"
+            },
+            "elements": {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "elementId": {
+                        "type": "object",
+                        "properties": {
+                          "guid": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "required": [
+                          "guid"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "nativeTypeId": {
+                        "type": "integer"
+                      },
+                      "homeStory": {
+                        "type": "integer"
+                      },
+                      "variationId": {
+                        "type": "integer"
+                      },
+                      "hierarchyKind": {
+                        "type": "integer"
+                      },
+                      "parentQueryError": {
+                        "type": "integer"
+                      },
+                      "rootQueryError": {
+                        "type": "integer"
+                      },
+                      "parentElementId": {
+                        "type": "object",
+                        "properties": {
+                          "guid": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "required": [
+                          "guid"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "rootElementId": {
+                        "type": "object",
+                        "properties": {
+                          "guid": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "required": [
+                          "guid"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "declaredOwnerId": {
+                        "type": "object",
+                        "properties": {
+                          "guid": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "required": [
+                          "guid"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "libraryPartGuid": {
+                        "type": "object",
+                        "properties": {
+                          "guid": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "required": [
+                          "guid"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "specificParametersSupported": {
+                        "type": "boolean"
+                      },
+                      "parameters": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "number"
+                        }
+                      },
+                      "flags": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "boolean"
+                        }
+                      }
+                    },
+                    "required": [
+                      "elementId",
+                      "nativeTypeId",
+                      "homeStory",
+                      "variationId",
+                      "parentQueryError",
+                      "rootQueryError",
+                      "hierarchyKind",
+                      "specificParametersSupported",
+                      "parameters",
+                      "flags"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "integer"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "code",
+                          "message"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "error"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            }
+          },
+          "required": [
+            "nativeModelWrites",
+            "authority",
+            "elements"
+          ],
+          "additionalProperties": false
+        },
+        "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
+        "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
+        "implementationSHA256": "b84cdcc346f40d56f93bc02ac300fe06cd182dde2fc57550ce0b59c52d4c3541"
+      },
+      "GetNativeOpeningConnectionsV1": {
+        "version": "29",
+        "category": "Native SDK grouped read adapter",
+        "description": "AC29 modern Generic Opening host, cut-element identities, extrusion parameters and local frame; host-to-opening query. No cut-body BREP claim.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "elements": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "elementId": {
+                    "type": "object",
+                    "properties": {
+                      "guid": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "guid"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "elementId"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1,
+              "maxItems": 32
+            }
+          },
+          "required": [
+            "elements"
+          ],
+          "additionalProperties": false
+        },
+        "returns": {
+          "type": "object",
+          "properties": {
+            "nativeModelWrites": {
+              "const": 0
+            },
+            "authority": {
+              "type": "string"
+            },
+            "elements": {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "elementId": {
+                        "type": "object",
+                        "properties": {
+                          "guid": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "required": [
+                          "guid"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "nativeTypeId": {
+                        "type": "integer"
+                      },
+                      "parentResolved": {
+                        "type": "boolean"
+                      },
+                      "hostElementId": {
+                        "type": "object",
+                        "properties": {
+                          "guid": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "required": [
+                          "guid"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "cutElements": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "guid": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "required": [
+                            "guid"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "connectedOpenings": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "guid": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "required": [
+                            "guid"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "anchor": {
+                        "type": "object",
+                        "properties": {
+                          "x": {
+                            "type": "number"
+                          },
+                          "y": {
+                            "type": "number"
+                          },
+                          "z": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y",
+                          "z"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "vectorX": {
+                        "type": "object",
+                        "properties": {
+                          "x": {
+                            "type": "number"
+                          },
+                          "y": {
+                            "type": "number"
+                          },
+                          "z": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y",
+                          "z"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "vectorY": {
+                        "type": "object",
+                        "properties": {
+                          "x": {
+                            "type": "number"
+                          },
+                          "y": {
+                            "type": "number"
+                          },
+                          "z": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y",
+                          "z"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "extrusionDirection": {
+                        "type": "object",
+                        "properties": {
+                          "x": {
+                            "type": "number"
+                          },
+                          "y": {
+                            "type": "number"
+                          },
+                          "z": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y",
+                          "z"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "shapeTypeId": {
+                        "type": "integer"
+                      },
+                      "limitTypeId": {
+                        "type": "integer"
+                      },
+                      "constraintId": {
+                        "type": "integer"
+                      },
+                      "widthMetres": {
+                        "type": "number"
+                      },
+                      "heightMetres": {
+                        "type": "number"
+                      },
+                      "finiteBodyLengthMetres": {
+                        "type": "number"
+                      },
+                      "startOffsetMetres": {
+                        "type": "number"
+                      },
+                      "geometryBoundary": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "elementId",
+                      "nativeTypeId"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "integer"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "code",
+                          "message"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "error"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            }
+          },
+          "required": [
+            "nativeModelWrites",
+            "authority",
+            "elements"
+          ],
+          "additionalProperties": false
+        },
+        "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
+        "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
+        "implementationSHA256": "b84cdcc346f40d56f93bc02ac300fe06cd182dde2fc57550ce0b59c52d4c3541"
+      },
+      "GetNativeQuantityPreflightV1": {
+        "version": "29",
+        "category": "Native SDK grouped read adapter",
+        "description": "Read element identity and type only before the quarantined quantity engine. Does not allocate quantities, construct masks or call engine.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "elements": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "elementId": {
+                    "type": "object",
+                    "properties": {
+                      "guid": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "guid"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "elementId"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1,
+              "maxItems": 32
+            }
+          },
+          "required": [
+            "elements"
+          ],
+          "additionalProperties": false
+        },
+        "returns": {
+          "type": "object",
+          "properties": {
+            "nativeModelWrites": {
+              "const": 0
+            },
+            "quantityEngineCalled": {
+              "const": false
+            },
+            "quarantineRetained": {
+              "const": true
+            },
+            "elements": {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "elementId": {
+                        "type": "object",
+                        "properties": {
+                          "guid": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "required": [
+                          "guid"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "nativeTypeId": {
+                        "type": "integer"
+                      },
+                      "homeStory": {
+                        "type": "integer"
+                      },
+                      "stage": {
+                        "const": "PRE_ENGINE_ELEMENT_IDENTIFIED_NO_QUANTITY_CALL"
+                      },
+                      "engineCallAllowed": {
+                        "const": false
+                      }
+                    },
+                    "required": [
+                      "elementId",
+                      "nativeTypeId",
+                      "homeStory",
+                      "stage",
+                      "engineCallAllowed"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "integer"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "code",
+                          "message"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "error"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            }
+          },
+          "required": [
+            "nativeModelWrites",
+            "quantityEngineCalled",
+            "quarantineRetained",
+            "elements"
+          ],
+          "additionalProperties": false
+        },
+        "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
+        "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
+        "implementationSHA256": "b84cdcc346f40d56f93bc02ac300fe06cd182dde2fc57550ce0b59c52d4c3541"
       }
     },
     "AddOnCommandTest": {
@@ -2689,7 +3471,7 @@
       "MemoPolygonInputs": []
     }
   },
-  "newNativeContracts": 9,
+  "newNativeContracts": 12,
   "newLocalCatalogEntries": 10,
   "newAnalyticalCapabilities": 7,
   "reusedExistingAPALocalUtilities": 3,

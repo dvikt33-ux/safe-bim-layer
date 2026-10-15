@@ -71,7 +71,7 @@ def build():
              'omitted':arr(obj({'index':I,'reason':S,'guid':S},['index','reason'])),
              'authority':S,'engineering':S}),[],
         'Convert captured straight native Roof/Slab memo contours and holes to existing Shapely inputs; arcs and other types remain explicitly unsupported.')
-    manifest=dict(schema='APA_FUNCTIONAL_MODULES_V1',sdkImplementationSHA256=sha(cpp),sdkImplementationFiles=sdk_files,sdkProviders={'TapirCommand':native,'AddOnCommandTest':{'ProtectionInfoCommand':protection}},local=dict(implementationSHA256=sha(ROOT/'scripts/archicad_local_modules.py'),commands=local,dependencies=deps),newNativeContracts=9,newLocalCatalogEntries=10,newAnalyticalCapabilities=7,reusedExistingAPALocalUtilities=3,reusedDevKitCommands=1)
+    manifest=dict(schema='APA_FUNCTIONAL_MODULES_V1',sdkImplementationSHA256=sha(cpp),sdkImplementationFiles=sdk_files,sdkProviders={'TapirCommand':native,'AddOnCommandTest':{'ProtectionInfoCommand':protection}},local=dict(implementationSHA256=sha(ROOT/'scripts/archicad_local_modules.py'),commands=local,dependencies=deps),newNativeContracts=len(native),newLocalCatalogEntries=10,newAnalyticalCapabilities=7,reusedExistingAPALocalUtilities=3,reusedDevKitCommands=1)
     dest=ROOT/'schemas/accelerator/functional-modules.json';dest.write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
     return manifest
 if __name__=='__main__':build()
