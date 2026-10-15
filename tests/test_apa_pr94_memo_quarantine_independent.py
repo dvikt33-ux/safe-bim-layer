@@ -250,7 +250,7 @@ def provider_collision_case(seed):
         r.add_provider(b, {"Secondary":contract_b}, "independent-source-b",second)
         name_b = "AddOn."+b+".Secondary"
         self.assertEqual(r.contract_hash(name_a),digest_before)
-        self.assertEqual(r.validate(original_a)["command"],name_a) if False else None
+        self.assertEqual(original_a["parameters"], {"amount":seed})
         r.prepare(name_a, {"amount":seed})
         r.prepare(name_b, {"text":f"value{seed}"})
         with self.assertRaises(Exception):
