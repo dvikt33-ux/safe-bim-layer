@@ -298,7 +298,7 @@ def graph_dispatch_case(seed):
         self.assertEqual(answer["status"], "WORKFLOW_CALLABLE_VERIFIED")
         self.assertEqual(set(answer["result"]["updateOrder"]), {parent, *leaves})
         self.assertEqual(answer["result"]["updateOrder"][0], parent)
-        self.assertTrue(answer["result"]["executionAllowed"])
+        self.assertFalse(answer["result"]["executionAllowed"])
         self.assertEqual(len(router.local_events), earlier + 1)
         self.assertEqual(router.local_events[-1]["nativeWrites"], 0)
         with self.assertRaisesRegex(ValueError, "CHANGED_NODE_NOT_PRESENT"):
