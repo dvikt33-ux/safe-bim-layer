@@ -1,0 +1,31 @@
+{
+  "schema": "APA_COMPONENT_CONTEXT_BUILD_V1",
+  "status": "FULL_RELEASE_BUILD_PASS_NOT_INSTALLED",
+  "implementationCommit": "0c1c92548339d1389e68ec54ac1d870f7d706a49",
+  "sourceBuildIdentity": "f251cd17271b8e31287db17f38f8425957e74a273f98793710ba3dabf19a340b",
+  "apxSHA256": "4074a1926ec1b18ab89f2052e8309c62667aa170a836be8e70a2c90b945665e1",
+  "bytes": 3270656,
+  "tapirRegistrations": 287,
+  "otherNamespaceRegistrations": 1,
+  "totalRegistrations": 288,
+  "newGroupedReadCommands": [
+    "GetNativeComponentBindingsV1",
+    "GetNativeOpeningConnectionsV1",
+    "GetNativeQuantityPreflightV1"
+  ],
+  "enhancedCommands": [
+    "GetNativeEnvelopeMemoV1",
+    "GetNativeDrawingAssociationsV1"
+  ],
+  "SDKSourceHashes": {
+    "archicad-addon/Sources/NativeModuleCommands.cpp": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72",
+    "archicad-addon/Sources/NativeExtendedModules.cpp": "bb5bf69293270d46aba8f9272a42e98e13cdb019b504582a011b77f3e6dc6dae",
+    "archicad-addon/Sources/NativeExtendedModules.hpp": "9e3c9c7588111c7ad399a349f401c09e2833ddeaa4bb665bd50cdce3c51e38ca",
+    "archicad-addon/Sources/NativeExtendedSchemas.inc": "f8bd9f3d32d30267957021388c9ab677178cef3886f1ea15ec5d9877016ed567",
+    "archicad-addon/Sources/NativeQuantityFields.inc": "470d052f2cc23bc0536efc658e7a1d9840bdcc214d500b0709e598e805f58f53"
+  },
+  "rawBuildLogSHA256": "a5f5334cf196fe4b33466d9a5a3c2cdb2fd765947ac3bd31b03d9acc2bfe259b",
+  "runtimeRegistration": "NOT_VERIFIED_NEW_CANDIDATE_PERMISSION_REQUIRED",
+  "nativeModelWrites": 0,
+  "quantityEngineQuarantined": true
+}
