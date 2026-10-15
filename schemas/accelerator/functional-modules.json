@@ -3,9 +3,9 @@
   "sdkImplementationSHA256": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72",
   "sdkImplementationFiles": {
     "archicad-addon/Sources/NativeModuleCommands.cpp": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72",
-    "archicad-addon/Sources/NativeExtendedModules.cpp": "de7b2f7568e88b343e8c3b0bb1762c5b65c431ed1cec1b18a787d2bb607679da",
+    "archicad-addon/Sources/NativeExtendedModules.cpp": "6cdcf8683e503c645e5b8356d5bd15fbfcdae671f98b568ec99ce07b8c1f6339",
     "archicad-addon/Sources/NativeExtendedModules.hpp": "f978eca6f8c4ca4b90fc23b3ac9cfe3650e50e3ff584bdcc9ce132d0e6af4ce8",
-    "archicad-addon/Sources/NativeExtendedSchemas.inc": "01a511d2b6beb9561331c443249566a315fcc513ef5dc183305eae7bcf76c63a",
+    "archicad-addon/Sources/NativeExtendedSchemas.inc": "4fa0dc553b2d684b69ea120628e4ff225d0430702d271793001fdb0b78140c1d",
     "archicad-addon/Sources/NativeQuantityFields.inc": "470d052f2cc23bc0536efc658e7a1d9840bdcc214d500b0709e598e805f58f53",
     "archicad-addon/Sources/NativeLibraryDefaults.inc": "4afeb0b9e314506740ddd92320ada17ac070fafdc36cc588dc9812221bad3144",
     "archicad-addon/Sources/NativeAssemblyCommands.inc": "34da20beefb90e967533620e750b16915e9ae96bb8405295433d14a97eda39c3"
@@ -827,6 +827,66 @@
                         ],
                         "additionalProperties": false
                       },
+                      "shellBaseParameters": {
+                        "type": "object",
+                        "properties": {
+                          "structureTypeId": {
+                            "type": "integer"
+                          },
+                          "relativeLevelMetres": {
+                            "type": "number"
+                          },
+                          "thicknessMetres": {
+                            "type": "number"
+                          },
+                          "buildingMaterialApplicable": {
+                            "type": "boolean"
+                          },
+                          "compositeApplicable": {
+                            "type": "boolean"
+                          },
+                          "buildingMaterialIndex": {
+                            "type": "integer"
+                          },
+                          "compositeIndex": {
+                            "type": "integer"
+                          },
+                          "surfaceOverrides": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "role": {
+                                  "type": "string"
+                                },
+                                "overridden": {
+                                  "type": "boolean"
+                                },
+                                "surfaceIndex": {
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "role",
+                                "overridden",
+                                "surfaceIndex"
+                              ],
+                              "additionalProperties": false
+                            }
+                          }
+                        },
+                        "required": [
+                          "structureTypeId",
+                          "relativeLevelMetres",
+                          "thicknessMetres",
+                          "buildingMaterialApplicable",
+                          "compositeApplicable",
+                          "buildingMaterialIndex",
+                          "compositeIndex",
+                          "surfaceOverrides"
+                        ],
+                        "additionalProperties": false
+                      },
                       "roofEdgeTypes": {
                         "type": "array",
                         "items": {
@@ -1552,7 +1612,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "de7b2f7568e88b343e8c3b0bb1762c5b65c431ed1cec1b18a787d2bb607679da"
+        "implementationSHA256": "6cdcf8683e503c645e5b8356d5bd15fbfcdae671f98b568ec99ce07b8c1f6339"
       },
       "GetNativeDrawingAssociationsV1": {
         "version": "29",
@@ -1787,7 +1847,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "de7b2f7568e88b343e8c3b0bb1762c5b65c431ed1cec1b18a787d2bb607679da"
+        "implementationSHA256": "6cdcf8683e503c645e5b8356d5bd15fbfcdae671f98b568ec99ce07b8c1f6339"
       },
       "GetNativeElementHotspotsV1": {
         "version": "29",
@@ -1942,7 +2002,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "de7b2f7568e88b343e8c3b0bb1762c5b65c431ed1cec1b18a787d2bb607679da"
+        "implementationSHA256": "6cdcf8683e503c645e5b8356d5bd15fbfcdae671f98b568ec99ce07b8c1f6339"
       },
       "GetNativeElementQuantitiesV1": {
         "version": "29",
@@ -2106,7 +2166,7 @@
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
         "executionBlocker": "AC29_QUANTITY_ENGINE_ACCESS_VIOLATION_ROOT_CAUSE_NOT_VERIFIED_NO_REPLAY",
-        "implementationSHA256": "de7b2f7568e88b343e8c3b0bb1762c5b65c431ed1cec1b18a787d2bb607679da"
+        "implementationSHA256": "6cdcf8683e503c645e5b8356d5bd15fbfcdae671f98b568ec99ce07b8c1f6339"
       },
       "GetNativeComponentBindingsV1": {
         "version": "29",
@@ -2315,7 +2375,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "de7b2f7568e88b343e8c3b0bb1762c5b65c431ed1cec1b18a787d2bb607679da"
+        "implementationSHA256": "6cdcf8683e503c645e5b8356d5bd15fbfcdae671f98b568ec99ce07b8c1f6339"
       },
       "GetNativeOpeningConnectionsV1": {
         "version": "29",
@@ -2550,6 +2610,111 @@
                       "startOffsetMetres": {
                         "type": "number"
                       },
+                      "linkedStatusId": {
+                        "type": "integer"
+                      },
+                      "anchorTypeId": {
+                        "type": "integer"
+                      },
+                      "anchorAltitudeMetres": {
+                        "type": "number"
+                      },
+                      "endSurfaceOverridden": {
+                        "type": "boolean"
+                      },
+                      "endSurfaceIndex": {
+                        "type": "integer"
+                      },
+                      "extrusionSurfaceOverridden": {
+                        "type": "boolean"
+                      },
+                      "extrusionSurfaceIndex": {
+                        "type": "integer"
+                      },
+                      "surfaceOverridesLinked": {
+                        "type": "boolean"
+                      },
+                      "polygonPresent": {
+                        "type": "boolean"
+                      },
+                      "openingPolygon": {
+                        "type": "object",
+                        "properties": {
+                          "coordinateFrame": {
+                            "type": "string"
+                          },
+                          "contourCount": {
+                            "type": "integer"
+                          },
+                          "contours": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "edges": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "begin": {
+                                        "type": "object",
+                                        "properties": {
+                                          "x": {
+                                            "type": "number"
+                                          },
+                                          "y": {
+                                            "type": "number"
+                                          }
+                                        },
+                                        "required": [
+                                          "x",
+                                          "y"
+                                        ],
+                                        "additionalProperties": false
+                                      },
+                                      "end": {
+                                        "type": "object",
+                                        "properties": {
+                                          "x": {
+                                            "type": "number"
+                                          },
+                                          "y": {
+                                            "type": "number"
+                                          }
+                                        },
+                                        "required": [
+                                          "x",
+                                          "y"
+                                        ],
+                                        "additionalProperties": false
+                                      },
+                                      "arcAngleRadians": {
+                                        "type": "number"
+                                      }
+                                    },
+                                    "required": [
+                                      "begin",
+                                      "end",
+                                      "arcAngleRadians"
+                                    ],
+                                    "additionalProperties": false
+                                  }
+                                }
+                              },
+                              "required": [
+                                "edges"
+                              ],
+                              "additionalProperties": false
+                            }
+                          }
+                        },
+                        "required": [
+                          "coordinateFrame",
+                          "contourCount",
+                          "contours"
+                        ],
+                        "additionalProperties": false
+                      },
                       "geometryBoundary": {
                         "type": "string"
                       }
@@ -2598,7 +2763,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "de7b2f7568e88b343e8c3b0bb1762c5b65c431ed1cec1b18a787d2bb607679da"
+        "implementationSHA256": "6cdcf8683e503c645e5b8356d5bd15fbfcdae671f98b568ec99ce07b8c1f6339"
       },
       "GetNativeQuantityPreflightV1": {
         "version": "29",
@@ -2733,7 +2898,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "de7b2f7568e88b343e8c3b0bb1762c5b65c431ed1cec1b18a787d2bb607679da"
+        "implementationSHA256": "6cdcf8683e503c645e5b8356d5bd15fbfcdae671f98b568ec99ce07b8c1f6339"
       },
       "GetNativeLibraryPartDefaultsV1": {
         "version": "29",
@@ -3113,7 +3278,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeExtendedModules.cpp",
-        "implementationSHA256": "de7b2f7568e88b343e8c3b0bb1762c5b65c431ed1cec1b18a787d2bb607679da"
+        "implementationSHA256": "6cdcf8683e503c645e5b8356d5bd15fbfcdae671f98b568ec99ce07b8c1f6339"
       },
       "CreateNativeAssemblyV1": {
         "version": "29",

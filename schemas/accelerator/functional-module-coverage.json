@@ -1,6 +1,6 @@
 {
   "schema": "APA_FUNCTIONAL_MODULE_COVERAGE_V1",
-  "basis": "PR96 retained; exact68d028 candidate loaded and identity checked; three authorized native roots created in one copy, Save/Open and409GUID geometry verified. Original APX/config restored; final original-runtime reopen limited by UI helper timeout.",
+  "basis": "PR97 native positives and restored409GUID readback retained. Current package adds native IFC/material dependency flow and enhanced existing SDK output fields; no new command names or offline tests.",
   "counters": {
     "nativeAndOfficialPrepared": 378,
     "localPrepared": 10,
@@ -741,5 +741,22 @@
       "callableThisPass": 0,
       "verification": "PR84_94_MATRIX_REUSED_32_PROVIDERS_NO_NEW_PRIVATE_ABI_SEARCH"
     }
-  ]
+  ],
+  "currentPackage": {
+    "nativeIFCCommandsCalled": 3,
+    "nativeElementsRead": 13,
+    "nonemptyIFCIDs": 12,
+    "IFCPropertiesRead": 61,
+    "nativeModelWrites": 0,
+    "enhancedSDKContractsBuilt": 3,
+    "enhancedSDKContractsLiveVerified": 0,
+    "newCommandNames": 0,
+    "APXInstalled": false,
+    "offlineTests": "NOT_RUN_USER_INSTRUCTION",
+    "retained409CopyOriginalRuntimeReopen": "LIVE_PASS_PRIOR_ACCEPTANCE",
+    "dataflow": "PINNED_PRIOR_COMPONENTS_PLUS_CURRENT_NATIVE_ATTRIBUTES_IFC",
+    "preparedTotal": 388,
+    "nativeSourcePrepared": 378,
+    "localPrepared": 10
+  }
 }
