@@ -4,6 +4,10 @@
 #include <string>
 
 static GS::UniString AssemblyStamp(const API_Element& e){return std::to_string(e.header.modiStamp).c_str();}
+static API_Guid AssemblyAttributeGuid(API_AttrTypeID type,API_AttributeIndex index){
+ API_Attribute value={};value.header.typeID=type;value.header.index=index;const auto err=ACAPI_Attribute_Get(&value);
+ const GS::OnExit cleanup([&](){if(type==API_MaterialID)delete value.material.texture.fileLoc;});return err==NoError?value.header.guid:APINULLGuid;
+}
 static GS::String AssemblyKind(const API_Element& e){switch(e.header.type.typeID){
  case API_CurtainWallID:return "CurtainWall";case API_CurtainWallFrameID:return "CurtainWallFrame";case API_CurtainWallPanelID:return "CurtainWallPanel";
  case API_RailingID:return "Railing";case API_RailingSegmentID:return "RailingSegment";case API_RailingNodeID:return "RailingNode";
@@ -14,9 +18,9 @@ static GSErrCode AssemblyFields(API_Element& e,API_Element& mask,const GS::Objec
  const auto number=[&](const char* name,double& field,double low,double high,auto setMask){values.Add(name,field);if(!changes.Contains(name))return;double v=0;if(!changes.Get(name,v)||!std::isfinite(v)||v<low||v>high){err=APIERR_BADPARS;return;}field=v;setMask();applied.Push(name);};
  const auto flag=[&](const char* name,bool& field,auto setMask){values.Add(name,field);if(!changes.Contains(name))return;bool v=false;if(!changes.Get(name,v)){err=APIERR_BADPARS;return;}field=v;setMask();applied.Push(name);};
  const auto attribute=[&](const char* name,API_AttributeIndex& field,API_AttrTypeID type,auto setMask){
-  attributes.Add(name,GS::ObjectState("index",GetAttributeIndex(field),"attributeId",CreateGuidObjectState(GetAttributeGuidFromIndex(type,field))));
-  if(!changes.Contains(name))return;const auto* value=changes.Get(name);if(!value||!value->Contains("guid")){err=APIERR_BADPARS;return;}const auto guid=GetGuidFromObjectState(*value);auto index=GetAttributeIndexFromGuid(type,guid);
-  if(guid==APINULLGuid||GetAttributeIndex(index)<=0||GetAttributeGuidFromIndex(type,index)!=guid){err=APIERR_BADID;return;}field=index;setMask();applied.Push(name);
+  attributes.Add(name,GS::ObjectState("index",GetAttributeIndex(field),"attributeId",CreateGuidObjectState(AssemblyAttributeGuid(type,field))));
+  if(!changes.Contains(name))return;const auto* value=changes.Get(name);if(!value||!value->Contains("guid")){err=APIERR_BADPARS;return;}const auto guid=GetGuidFromObjectState(*value);const auto header=GetAttributeHeadFromGuid(guid);
+  if(guid==APINULLGuid||header.typeID!=type||GetAttributeIndex(header.index)<=0||header.guid!=guid){err=APIERR_BADID;return;}field=header.index;setMask();applied.Push(name);
  };
 #define NUM(alias,Struct,obj,member,low,high) number(alias,e.obj.member,low,high,[&](){ACAPI_ELEMENT_MASK_SET(mask,Struct,member);})
 #define BOOL(alias,Struct,obj,member) flag(alias,e.obj.member,[&](){ACAPI_ELEMENT_MASK_SET(mask,Struct,member);})

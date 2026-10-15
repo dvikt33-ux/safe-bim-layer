@@ -9,7 +9,7 @@
     "archicad-addon/Sources/NativeQuantityFields.inc": "470d052f2cc23bc0536efc658e7a1d9840bdcc214d500b0709e598e805f58f53",
     "archicad-addon/Sources/NativeLibraryDefaults.inc": "4afeb0b9e314506740ddd92320ada17ac070fafdc36cc588dc9812221bad3144",
     "archicad-addon/Sources/NativeAssemblyCommands.inc": "34da20beefb90e967533620e750b16915e9ae96bb8405295433d14a97eda39c3",
-    "archicad-addon/Sources/NativeAssemblyModify.inc": "7fb028496332f8f21361ccc2cd5b4416c8a462e79afa86c2aafb2bfcc815ffeb",
+    "archicad-addon/Sources/NativeAssemblyModify.inc": "20ae21f61574b8c814536989328408c5e422505c242dd96e4fca38df44b7f566",
     "archicad-addon/Sources/NativeMEPTopology.inc": "7c3b7e0748f9d8987ddc7a680528fe2dc33ade40b8cea96ab27947b07a177c60"
   },
   "sdkProviders": {
@@ -3643,7 +3643,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeAssemblyModify.inc",
-        "implementationSHA256": "7fb028496332f8f21361ccc2cd5b4416c8a462e79afa86c2aafb2bfcc815ffeb"
+        "implementationSHA256": "20ae21f61574b8c814536989328408c5e422505c242dd96e4fca38df44b7f566"
       },
       "ModifyNativeAssemblyV1": {
         "version": "29",
@@ -4031,7 +4031,7 @@
         "implementationSource": "archicad-addon/Sources/NativeAssemblyModify.inc",
         "operationKind": "MODIFY",
         "impact": "MODEL",
-        "implementationSHA256": "7fb028496332f8f21361ccc2cd5b4416c8a462e79afa86c2aafb2bfcc815ffeb"
+        "implementationSHA256": "20ae21f61574b8c814536989328408c5e422505c242dd96e4fca38df44b7f566"
       },
       "GetNativeMEPTopologyV1": {
         "version": "29",

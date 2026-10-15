@@ -27,8 +27,31 @@ def capture_ifc_facts(api, router, element_ids):
                 authority='CURRENT_NATIVE_IFC_ACCESSOR_NOT_EXPORT_ACCEPTANCE', nativeModelWrites=0)
 
 
-def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids=(), memberships=(), navigator_bindings=None, layout_bindings=(), attributes=None, envelopes=None, ifc_ids=None):
-    nodes, edges, evidence, omitted = set(), set(), [], []
+def capture_mep_facts(api, router, element_ids=(), routing_ids=(), include_systems=True):
+    """Reuse registered Tapir MEP reads; no native connection or preference edit."""
+    def read(command, params):
+        key=command if command in router.catalog['commands'] else 'AddOn.TapirCommand.'+command
+        return router.read(api, router.prepare(key, params), reviewed_read_only=True)
+    elements, routes = list(element_ids), list(routing_ids)
+    if len(elements)>32 or len(routes)>32 or len(set(elements))!=len(elements) or len(set(routes))!=len(routes):
+        raise ValueError('BOUNDED_UNIQUE_MEP_IDENTITIES_REQUIRED')
+    out=dict(nativeModelWrites=0, portGroups=[], routingGroups=[], distributionSystems=[], authority='CURRENT_NATIVE_MEP_READ_NOT_GEOMETRIC_INTERSECTION_OR_ENGINEERING_ACCEPTANCE')
+    for command, ids, key, result_key in [('GetMEPPorts',elements,'portGroups','elementPorts'),('GetMEPRoutingElements',routes,'routingGroups','routingElements')]:
+        if not ids:continue
+        reply=read(command,dict(elements=[dict(elementId=dict(guid=g)) for g in ids]))
+        rows=reply[result_key]
+        if len(rows)!=len(ids):raise ValueError('NATIVE_MEP_REQUEST_RESULT_CARDINALITY_MISMATCH')
+        # Existing provider has one row per request in source-defined order.
+        # Bind that order explicitly; never match names or array positions from
+        # a different request. Raw native port IDs remain independent identities.
+        out[key]=[dict(elementId=dict(guid=g),native=row,identityAuthority='SOURCE_ORDERED_REQUEST',requestOrdinal=i) for i,(g,row) in enumerate(zip(ids,rows))]
+    if include_systems:out['distributionSystems']=read('GetMEPDistributionSystems',{})['distributionSystems']
+    out['sourceSHA256']=hashlib.sha256(json.dumps(out,sort_keys=True).encode()).hexdigest()
+    return out
+
+
+def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids=(), memberships=(), navigator_bindings=None, layout_bindings=(), attributes=None, envelopes=None, ifc_ids=None, mep=None, mep_topology=None):
+    nodes, edges, evidence, omitted, connection_facts = set(), set(), [], [], []
 
     def guid(value):
         value = value.get('guid') if isinstance(value, dict) else None
@@ -41,6 +64,57 @@ def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids
             if pair not in edges:
                 edges.add(pair)
                 evidence.append(dict(source=source, target=target, kind=kind))
+
+    def system_id(value):
+        return guid(value.get('attributeId',value)) if isinstance(value,dict) else None
+
+    ports={}
+    for group in (mep or {}).get('portGroups',[]):
+        owner=guid(group.get('elementId'));body=group.get('native',{})
+        if not owner or group.get('identityAuthority')!='SOURCE_ORDERED_REQUEST' or 'error' in body:
+            omitted.append('MEP_PORT_GROUP_IDENTITY_OR_RESULT_MISSING');continue
+        for port in body.get('ports',[]):
+            pid=guid({'guid':port.get('portId')})
+            if not pid:omitted.append('MEP_PORT_ID_MISSING');continue
+            key='MEP_PORT:'+pid
+            if pid in ports and ports[pid]['owner']!=owner:raise ValueError('MEP_PORT_HAS_CONFLICTING_CAPTURED_OWNERS')
+            ports[pid]=dict(owner=owner,native=port)
+            edge(owner,key,'NATIVE_MEP_ELEMENT_PORT_MEMBERSHIP')
+            sid=system_id(port.get('mepSystemId'))
+            if sid:edge('ATTRIBUTE:MEPSYSTEM:'+sid,key,'NATIVE_MEP_PORT_SYSTEM_MEMBERSHIP')
+    seen_connections=set()
+    for pid,value in ports.items():
+        port=value['native'];other=guid({'guid':port.get('connectedPortId')})
+        if not other:continue
+        pair=tuple(sorted((pid,other)))
+        if pair in seen_connections:continue
+        seen_connections.add(pair);peer=ports.get(other);reciprocal=bool(peer and guid({'guid':peer['native'].get('connectedPortId')})==pid)
+        physical=bool(reciprocal and port.get('isPhysicallyConnected') is True and peer['native'].get('isPhysicallyConnected') is True)
+        cid='MEP_CONNECTION:'+':'.join(pair)
+        edge('MEP_PORT:'+pid,cid,'NATIVE_MEP_CONNECTION_ENDPOINT')
+        if peer:edge('MEP_PORT:'+other,cid,'NATIVE_MEP_CONNECTION_ENDPOINT')
+        connection_facts.append(dict(connection=cid,ports=list(pair),reciprocal=reciprocal,peerCaptured=peer is not None,physical=True if physical else None,nativePhysicalFlag=port.get('isPhysicallyConnected'),authority='BILATERAL_NATIVE_PORT_READ' if physical else 'SINGLE_SIDED_OR_LOGICAL_NATIVE_REFERENCE_NOT_PHYSICAL_PASS'))
+    for system in (mep or {}).get('distributionSystems',[]):
+        sid=system_id(system.get('mepSystemId'))
+        if not sid:omitted.append('MEP_DISTRIBUTION_SYSTEM_ATTRIBUTE_MISSING');continue
+        for item in system.get('elements',[]):edge('ATTRIBUTE:MEPSYSTEM:'+sid,guid(item.get('elementId')),'NATIVE_MEP_DISTRIBUTION_SYSTEM_MEMBERSHIP')
+    for group in (mep or {}).get('routingGroups',[]):
+        owner=guid(group.get('elementId'));body=group.get('native',{})
+        if not owner or group.get('identityAuthority')!='SOURCE_ORDERED_REQUEST':continue
+        sid=system_id(body.get('mepSystemId'))
+        if sid:edge('ATTRIBUTE:MEPSYSTEM:'+sid,owner,'NATIVE_MEP_ROUTE_SYSTEM_MEMBERSHIP')
+        for items,prefix,relation in [(body.get('segments',[]),'MEP_SEGMENT:','NATIVE_MEP_ROUTE_SEGMENT_MEMBERSHIP'),(body.get('nodes',[]),'MEP_NODE:','NATIVE_MEP_ROUTE_NODE_MEMBERSHIP')]:
+            for item in items:
+                child=guid(item.get('elementId'))
+                if child:edge(owner,prefix+child,relation)
+                else:omitted.append('MEP_ROUTE_CHILD_IDENTITY_MISSING')
+    for row in (mep_topology or {}).get('elements',[]):
+        identity=guid(row.get('elementId'));kind=row.get('kind')
+        if not identity or 'error' in row:continue
+        target=('MEP_SEGMENT:' if kind=='RoutingSegment' else 'MEP_NODE:' if kind=='RoutingNode' else '')+identity
+        for field,prefix,relation in [('routingElementId','','NATIVE_MEP_ROUTE_OWNERSHIP'),('routingSegmentId','MEP_SEGMENT:','NATIVE_MEP_RIGID_SEGMENT_OWNER'),('routingNodeId','MEP_NODE:','NATIVE_MEP_FITTING_NODE_OWNER')]:
+            owner=guid(row.get(field))
+            if owner:edge(prefix+owner,target,relation)
 
     # Indices are project-local and type-specific. Resolve only a unique native
     # header in this capture; neither names nor positive numbers prove identity.
@@ -164,7 +238,7 @@ def dependency_inputs(*, components=None, openings=None, drawings=None, view_ids
         else:
             omitted.append('DRAWING_SOURCE_NOT_IN_CAPTURED_OR_EXPLICITLY_RESOLVED_NAVIGATOR')
     return dict(nodes=sorted(nodes), edges=[list(e) for e in sorted(edges)],
-                relationshipEvidence=evidence, omitted=omitted,
+                relationshipEvidence=evidence, omitted=omitted, connectionFacts=connection_facts,
                 authority='CAPTURED_NATIVE_RELATIONSHIPS_NOT_PHYSICAL_CONTACT')
 
 
