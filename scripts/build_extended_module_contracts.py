@@ -94,6 +94,33 @@ def contracts():
         parameters=p,returns=r,availability='BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED',
         implementationSource='archicad-addon/Sources/NativeExtendedModules.cpp') for name,(p,r,d) in defs.items()}
     rows['CreateNativeAssemblyV1'].update(operationKind='CREATE',impact='MODEL',implementationSource='archicad-addon/Sources/NativeAssemblyCommands.inc')
+    # One scalar/memo MODIFY contract, not a separate Python editor per tool.
+    kinds=['CurtainWall','CurtainWallFrame','CurtainWallPanel','Railing','RailingSegment','RailingNode','RailingRail','RailingHandrail','Shell']
+    scalar_names=['heightMetres','relativeLevelMetres','thicknessMetres','defaultSegmentHeightMetres','defaultPostOffsetMetres','yOffsetMetres','zOffsetMetres','elevationMetres','postOffsetMetres','horizontalOffsetMetres','extrusionXMetres','extrusionYMetres','extrusionZMetres','beginXMetres','beginYMetres','beginZMetres']
+    flag_names=['visible','useOwnMaterial','outerSurfaceOverridden','innerSurfaceOverridden','cutSurfaceOverridden','topSurfaceOverridden','sideSurfaceOverridden','bottomSurfaceOverridden']
+    attribute_names=['buildingMaterialId','compositeId','surfaceId','outerSurfaceId','innerSurfaceId','cutSurfaceId','topSurfaceId','sideSurfaceId','bottomSurfaceId']
+    changes=obj({**{k:dict(N,minimum=-1000000,maximum=1000000) for k in scalar_names},**{k:B for k in flag_names},**{k:eid for k in attribute_names},'profileCoordinates':arr(obj({'x':N,'y':N}),minItems=3,maxItems=4096)},[]);changes['minProperties']=1
+    state=obj({'elementId':eid,'kind':dict(S,enum=kinds),'nativeTypeId':I,'homeStory':I,'modificationStamp':dict(S,pattern='^[0-9]+$'),
+        'values':dict(type='object',additionalProperties=dict(anyOf=[N,B])),
+        'attributes':dict(type='object',additionalProperties=obj({'index':I,'attributeId':eid})),
+        'associationAuthority':S,'shellClass':I,'rootQueryError':I,'rootElementId':eid},['elementId','kind','nativeTypeId','homeStory','modificationStamp','values','attributes','associationAuthority','rootQueryError'])
+    additions={
+      'GetNativeAssemblyEditStateV1':(inputs,obj({'nativeModelWrites':{'const':0},'elements':arr(either(state))}),
+        'Shared assembly edit snapshot with decimal UInt64 stamp, applicable scalar fields, typed attribute identities and root query. No inferred Stair association.'),
+      'ModifyNativeAssemblyV1':(obj({'elementId':eid,'expectedKind':dict(S,enum=kinds),'expectedModificationStamp':dict(S,pattern='^[0-9]+$'),'changes':changes}),
+        either(obj({'nativeModelWrites':{'const':1},'rootGUIDPreservation':S,'engineering':{'const':'NOT_VERIFIED'},'modifiedElements':arr(obj({'elementId':eid}),minItems=1,maxItems=1),'appliedFields':arr(S,minItems=1)})),
+        'One scoped native Element_Change using explicit masks, type/stamp preconditions, applicable fields and attribute GUID identities. ExtrudedShell profile edits preserve existing straight single-contour topology. No delete/create or automatic dependent writes.'),
+    }
+    topology=dict(elementId=eid,kind=dict(S,enum=['RoutingElement','RoutingSegment','RoutingNode','RigidSegment','Transition']),headerQueryError=I,homeStory=I,nativeTypeId=I,relativeLevelMetres=N,domainId=I,mepSystemId=eid,
+        routingSegments=arr(eid),routingNodes=arr(eid),logicalBeginPortId=eid,logicalEndPortId=eid,routingElementId=eid,beginNodeId=eid,endNodeId=eid,rigidSegments=arr(eid),
+        crossSectionWidthMetres=N,crossSectionHeightMetres=N,shapeId=I,wallThicknessMetres=N,referenceOffsetXMetres=N,referenceOffsetYMetres=N,anchorId=I,preferenceTableId=eid,referenceIdApplicable=B,crossSectionReferenceId=I,
+        position=obj({'x':N,'y':N,'z':N}),elbows=arr(eid),transitions=arr(eid),incomingSegmentId=eid,outgoingSegmentId=eid,routingSegmentId=eid,lengthMetres=N,widthMetres=N,heightMetres=N,insulationThicknessMetres=N,
+        routingNodeId=eid,narrowerPortId=eid,widerPortId=eid,angleRadians=N,offsetYMetres=N,offsetZMetres=N)
+    additions['GetNativeMEPTopologyV1']=(obj({'elements':arr(obj({'elementId':eid,'kind':topology['kind']}),minItems=1,maxItems=32)}),obj({'nativeModelWrites':{'const':0},'authority':S,'elements':arr(either(obj(topology,['elementId','kind','headerQueryError'])))}),
+        'Public MEP route-segment-node/rigid/transition ownership, actual reference IDs and logical endpoint-port IDs. Existing GetMEPPorts supplies physical evidence; no connection, global preference or quantity changes.')
+    for name,(params,result,description) in additions.items():
+        rows[name]=dict(version='29',category='Native SDK assembly edit and MEP adapter',description=description,parameters=params,returns=result,availability='BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED',implementationSource='archicad-addon/Sources/NativeMEPTopology.inc' if name=='GetNativeMEPTopologyV1' else 'archicad-addon/Sources/NativeAssemblyModify.inc')
+    rows['ModifyNativeAssemblyV1'].update(operationKind='MODIFY',impact='MODEL')
     rows['GetNativeLibraryPartDefaultsV1']['implementationSource']='archicad-addon/Sources/NativeLibraryDefaults.inc'
     rows['GetNativeElementQuantitiesV1'].update(
         executionBlocker='AC29_QUANTITY_ENGINE_ACCESS_VIOLATION_ROOT_CAUSE_NOT_VERIFIED_NO_REPLAY',

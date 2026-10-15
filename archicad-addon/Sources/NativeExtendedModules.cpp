@@ -17,6 +17,9 @@ DEF(GetNativeQuantityPreflightV1)
 DEF(GetNativeLibraryPartDefaultsV1)
 DEF(GetNativeNavigatorBindingsV1)
 DEF(CreateNativeAssemblyV1)
+DEF(GetNativeAssemblyEditStateV1)
+DEF(ModifyNativeAssemblyV1)
+DEF(GetNativeMEPTopologyV1)
 #undef DEF
 #include "NativeExtendedSchemas.inc"
 
@@ -202,3 +205,5 @@ GS::ObjectState GetNativeNavigatorBindingsV1Command::Execute(const GS::ObjectSta
 }
 
 #include "NativeAssemblyCommands.inc"
+#include "NativeAssemblyModify.inc"
+#include "NativeMEPTopology.inc"
