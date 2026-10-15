@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 166,
+  "revision": 167,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -4668,7 +4668,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -4853,12 +4853,13 @@
         "Four additional grouped SDK contracts routed. Tested prototype d85a2b:285 actual add-on registrations +73 compatible official contracts=358. Three groups callable: seven Roof/Slab envelope parameter polygons match native details; two real Drawing source links with explicit update-status/content-box native errors;179 native hotspots from four walls match native reference-line endpoints. Shell has no current sample. Legacy GetDetails Drawing navigatorItemId differs from SDK source-link GUID; only one of two source GUIDs found in current ViewMap. Do not infer semantic equivalence, full Drawing update proof, resultant BREP or engineering acceptance.",
         "Native GetNativeElementQuantitiesV1 batch (Wall/Slab/Roof/Stair) terminated AC29 with C0000005 ACCESS_VIOLATION. Failing element/root cause NOT_VERIFIED; identical call not replayed. Unsafe binary quarantined; current Python dispatcher blocks both new and already exported names, native entry returns refusal before calling quantity engine. Full safe rebuild 0bfd13924cf21083783a0384943d80a1d4ee0fce4542a6c1f27178caec22adc0 from 220fcabda14316037f0f0a4c259092a075880c4c compile/link/embedded identity PASS, not installed. Generated quantity field accessors are staged unused code and not functional quantity support. Next bounded debug needs per-element instrumentation and explicit SDK mask/output ownership checks before qualified native retest.",
         "MemoPolygonInputs passes captured native straight contours/holes directly through existing BIM Graph result binding into existing PolygonRelations/Shapely. Actual seven native polygons and two holes computed; GUID/story/type bindings preserved separately; arcs explicitly unsupported rather than linearized.382 preparable contracts=372 native/official/source+10 local, including blocked/source-only. Restored original remains337 compatible;35 source contracts not in original runtime;13 DevKit examples unintegrated;32 other APX no independent public contract. Nine distinct SDK/DevKit reads callable this pass across two tested candidates; quantity failed. Old nine local analytical results retained, new two-step memo flow verified. No second writer or native permissions from local computation.",
-        "Both authorized temporary APX switches restored original raw SHA and Include configuration. Post-crash saved file matches pre-extended-probe control. Independent original-runtime reopen read-only retained all258 GUIDs and full serialized native parameter details. Zero model-write API calls. Earlier close/open changed saved bytes before SDK probes; cause NOT_VERIFIED, not silently called unchanged. No physical BREP before/after comparison. Windows CI PASS exact d758957f97cf1e347262da6f7e7b325ae6609ea4; all23 code files byte-readback; immutable report/receipt readback verified. A11.S03 PARTIAL, all earlier task history/A07/S10 dependencies preserved; quantity and Drawing auxiliary blockers recorded in existing gap registry."
+        "Both authorized temporary APX switches restored original raw SHA and Include configuration. Post-crash saved file matches pre-extended-probe control. Independent original-runtime reopen read-only retained all258 GUIDs and full serialized native parameter details. Zero model-write API calls. Earlier close/open changed saved bytes before SDK probes; cause NOT_VERIFIED, not silently called unchanged. No physical BREP before/after comparison. Windows CI PASS exact d758957f97cf1e347262da6f7e7b325ae6609ea4; all23 code files byte-readback; immutable report/receipt readback verified. A11.S03 PARTIAL, all earlier task history/A07/S10 dependencies preserved; quantity and Drawing auxiliary blockers recorded in existing gap registry.",
+        "Current user package after PR94: reuse existing APIs for hierarchical native components, envelope/host/material memo, Drawing database/window context and dependency chains; bounded quantity preflight diagnostics only, engine remains quarantined. New candidate installation requires explicit authorization. No repeat house/WallWindow/native quantity batch or independent audit suite."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "work-sdk-components-20261015",
+      "lease_until": "2026-10-15T06:03:21Z",
+      "claim_ref": "APA-CLAIM-SDK-COMPONENTS-20261015T020321Z",
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
