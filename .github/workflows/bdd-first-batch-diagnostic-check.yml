@@ -1,0 +1,34 @@
+name: BDD First Batch Diagnostic Syntax & Guard
+on:
+  pull_request:
+    paths:
+      - "scripts/apa_bdd_first_batch_diagnostic.py"
+      - ".github/workflows/bdd-first-batch-diagnostic-check.yml"
+  workflow_dispatch:
+
+jobs:
+  offline-compile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify read-only script compiles
+        run: python -m py_compile scripts/apa_bdd_first_batch_diagnostic.py
+      - name: Check exact read fence
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+          s=Path('scripts/apa_bdd_first_batch_diagnostic.py').read_text(encoding='utf8')
+          x=ast.parse(s)
+          line=next(x for x in x.body if isinstance(x, ast.Assign) and any(isinstance(y, ast.Name) and y.id=='READ_COMMANDS' for y in x.targets))
+          allowed=ast.literal_eval(line.value)
+          assert allowed == {'GetProjectInfo','GetAllElements','GetDetailsOfElements','Get3DBoundingBoxes','GetAddOnVersion'}
+          assert 'SaveProject' not in allowed and 'OpenProject' not in allowed
+          print('READ_ONLY_FENCE_OK',len(allowed))
+          PY
