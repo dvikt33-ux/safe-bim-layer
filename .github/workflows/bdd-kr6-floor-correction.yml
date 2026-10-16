@@ -1,0 +1,23 @@
+name: BDD KR6 Native Floor Correction
+on:
+  pull_request:
+    paths:
+      - "scripts/apa_bdd_native_kr6_floor_repair.py"
+      - "tests/test_bdd_native_kr6_floor_repair.py"
+      - ".github/workflows/bdd-kr6-floor-correction.yml"
+  workflow_dispatch:
+jobs:
+  minimal-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile native correction script
+        run: python -m py_compile scripts/apa_bdd_native_kr6_floor_repair.py
+      - name: Verify read/write guards and KR-6 dimensional readback
+        run: python -m unittest discover -s tests -p test_bdd_native_kr6_floor_repair.py -v
