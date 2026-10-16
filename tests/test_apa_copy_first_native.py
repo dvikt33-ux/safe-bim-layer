@@ -165,6 +165,51 @@ class TestNativeCopy(unittest.TestCase):
                 lambda *_:{"status":"PASS"},lambda *_:{"status":"PASS"})
         obj.execute.assert_not_called()
 
+    def test_copy_first_auto_reuses_two_existing_prototypes(self):
+        from archicad_dynamic_commands import DynamicCommands
+        sig_a="LIVE-NORMALIZED-WOOD-STUD-100x50x2900-v1"
+        sig_b="LIVE-NORMALIZED-WOOD-BEAM-100x200x3000-v1"
+        prototypes=[
+           {"guid":"column-proto", "type":"Column", "familySignature":sig_a,
+            "storyIndex":0,"anchor":{"x":0,"y":0,"z":0},
+            "nativeReadbackVerified":True},
+           {"guid":"beam-proto", "type":"Beam", "familySignature":sig_b,
+            "storyIndex":0,"anchor":{"x":0,"y":10,"z":0},
+            "nativeReadbackVerified":True}
+        ]
+        targets=[
+            {"type":"Column","familySignature":sig_a,"storyIndex":0,
+             "anchor":{"x":.6*i,"y":0,"z":0},"sourceRef":"KR-10"}
+            for i in range(26)]
+        targets += [
+            {"type":"Beam","familySignature":sig_b,"storyIndex":0,
+             "anchor":{"x":i,"y":10,"z":0},"sourceRef":"KR-13"}
+            for i in range(1,11)]
+        targets += [
+            {"type":"Column","familySignature":"NEW-STRUCTURAL-SECTION-200x100x2900",
+             "storyIndex":0,"anchor":{"x":20,"y":0,"z":0},
+             "sourceRef":"KR-15"}]
+        plan=DynamicCommands.plan_reuse_existing(prototypes,targets)
+        self.assertEqual(plan["newCopyCount"],35)
+        self.assertEqual(plan["nativeCopyCallsRequired"],1)
+        self.assertEqual(len(plan["copyGroups"]),2)
+        self.assertEqual(plan["existingElementGuids"],["column-proto"])
+        self.assertEqual(len(plan["unmatchedTargetsPendingPrototype"]),1)
+        self.assertEqual(sum(len(g["displacements"]) for g in plan["copyGroups"]),35)
+
+    def test_copy_first_blocks_duplicate_targets_and_unverified_proto(self):
+        from archicad_dynamic_commands import DynamicCommands
+        prototype={"guid":"X","type":"Column","familySignature":"SOURCE-NORMALIZED-COLUMN-123",
+                   "storyIndex":0,"anchor":{"x":0,"y":0,"z":0},
+                   "nativeReadbackVerified":False}
+        target={"type":"Column","familySignature":prototype["familySignature"],
+                "storyIndex":0,"anchor":{"x":1,"y":0,"z":0},"sourceRef":"KR-10"}
+        with self.assertRaisesRegex(ValueError,"LIVE_EXISTING_PROTOTYPE"):
+            DynamicCommands.plan_reuse_existing([prototype],[target])
+        prototype["nativeReadbackVerified"]=True
+        with self.assertRaisesRegex(ValueError,"TARGET_POSITION_DUPLICATED"):
+            DynamicCommands.plan_reuse_existing([prototype],[target,target])
+
     def test_no_zero_duplicate_or_unknown_host(self):
         obj=router()
         for vectors in ([{"x":0,"y":0,"z":0}],
