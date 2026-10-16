@@ -183,6 +183,7 @@ def main() -> int:
     if args.port != 19727:
         raise RuntimeError("Locked to verified BDD port 19727")
     before = require_target(args.port)
+    print('TARGET VERIFIED; starting read-only inventory on port 19727', flush=True)
     addon = tapir(args.port, "GetAddOnVersion")
     stories = tapir(args.port, "GetStories")
     all_rows = tapir(args.port, "GetAllElements").get("elements")
@@ -202,11 +203,13 @@ def main() -> int:
         details.extend(ds)
         bboxes.extend(bs)
         warnings.extend(es + eb)
+        print('READ PROGRESS: %d/%d GUIDs' % (min(start + len(group), len(guids)), len(guids)), flush=True)
         if start % 240 == 0:
             require_target(args.port)
 
     after = require_target(args.port)
     final_rows = tapir(args.port, "GetAllElements").get("elements")
+    require_target(args.port)
     final_guids = [g for g in (guid_of(x) for x in final_rows) if g]
     if (set(x.casefold() for x in final_guids)
             != set(x.casefold() for x in guids)):
@@ -241,7 +244,7 @@ def main() -> int:
     report = {
         "schema": "apa.bdd.inventory.readonly.v1",
         "status": "PARTIAL" if warnings or any(
-            not e["detailsPresent"] for e in elements) else "PASS",
+            not e["detailsPresent"] or not e["bboxPresent"] for e in elements) else "PASS",
         "capturedAtUTC": now,
         "source": "LIVE_ARCHICAD_29_TAPIR",
         "readOnly": True,
