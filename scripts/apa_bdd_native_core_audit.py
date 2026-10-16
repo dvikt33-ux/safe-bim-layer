@@ -219,4 +219,18 @@ if __name__=='__main__':
     try:sys.exit(main())
     except Exception as exc:
         print('AUDIT BLOCKED:',type(exc).__name__,str(exc),file=sys.stderr)
+        # Even fail-closed identity/read errors are sent to the private mailbox
+        # so no manual console transcription is needed for investigation.
+        if '--publish' in sys.argv:
+            stamp=datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+            failure=pathlib.Path(tempfile.gettempdir())/'APA_BDD_House_Construction'/'geometry_audit'/('blocked-'+stamp+'.json')
+            report_json(failure,{'schema':'apa.bdd.native-geometry-readback.v1',
+                      'status':'BLOCKED_BEFORE_COMPLETED_READBACK','timestampUTC':stamp,
+                      'targetPLN':str(WORKING),'writeToPLN':False,
+                      'errorType':type(exc).__name__,'error':str(exc)[:750]})
+            try:
+                print('PRIVATE GITHUB BLOCKED AUDIT:',publish(failure))
+            except Exception as publish_error:
+                print('REPORT UPLOAD FAILURE:',type(publish_error).__name__,
+                      str(publish_error)[:250],file=sys.stderr)
         sys.exit(2)
