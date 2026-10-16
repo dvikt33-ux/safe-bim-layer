@@ -1,0 +1,412 @@
+{
+  "schema": "apa.bdd-house.baseline-binding.v1",
+  "status": "SOURCE_EVIDENCE_BINDING_NOT_LOCAL_RUNTIME_EXECUTED",
+  "source": "private GitHub native build + KR-6 correction reports 2026-10-16",
+  "references": {
+    "core": "https://github.com/dvikt33-ux/safe-bim-bridge/blob/main/safe-bim-mailbox/gpt-live/results/apa-bdd-native-build-20261016T141451Z-ec01e337.json",
+    "floor": "https://github.com/dvikt33-ux/safe-bim-bridge/blob/main/safe-bim-mailbox/gpt-live/results/apa-bdd-kr6-floor-repair-20261016T152206Z-4016caca.json",
+    "grillage": "https://github.com/dvikt33-ux/safe-bim-bridge/blob/main/safe-bim-mailbox/gpt-live/results/apa-bdd-kr6-grillage-20261016T155302Z-8450ef02.json",
+    "geometryAudit": "https://github.com/dvikt33-ux/safe-bim-bridge/blob/main/safe-bim-mailbox/gpt-live/results/apa-bdd-geometry-audit-20261016T151203Z-f26e440a.json",
+    "pdf": "3_этап_КП_КОМФОРТ_без_замазок.pdf"
+  },
+  "target": {
+    "port": 19727,
+    "archicadMajor": 29,
+    "archicadBuild": 5101,
+    "workingPLN": "C:\\LocalAI\\SafeBIM_Global_Library_Test_Projects\\BDD дом - по чертежам 2022.pln",
+    "sourcePLN": "C:\\LocalAI\\SafeBIM_Global_Library_Test_Projects\\BDD дом .pln",
+    "targetSavedPlnSha256": "REQUIRE_CURRENT_LOCAL_READ_BEFORE_ANY_WRITER_BINDING",
+    "sourceBaselineSha256": "33b96850ad07547a9b12524de8bc46479fd98fbbce6772436d388be679836d66",
+    "unmodifiedSourceAtLastCheck": true
+  },
+  "counts": {
+    "original": 21,
+    "physical": 125,
+    "automaticChildren": 115,
+    "total": 261
+  },
+  "roles": {
+    "parent": [
+      {
+        "phase": "49 bored piles (recovered first 16)",
+        "command": "CreateColumns",
+        "physicalGuids": [
+          "19fab51b-9095-4ff8-b11d-c2aeeeb63c15",
+          "1f795816-fb0e-4a7b-b0bb-6abc0fa312f9",
+          "31951fb1-b938-40ce-ad02-032402f705aa",
+          "379633e4-ea4f-4664-83d6-065a1ddfd697",
+          "4917c196-800e-4cda-8abe-55763858ea52",
+          "49b811ac-1215-4bb7-9804-3d5762a32800",
+          "4c9ac78b-62dc-4466-a241-3a550b6bd493",
+          "569436af-bbab-4583-81f2-06cc3f40d1ec",
+          "a58cc9ba-b5ad-4e2d-9273-caad919a6dfd",
+          "ac946863-93d7-4be6-99c5-7f66cb126733",
+          "af7a6ca7-43c3-4e73-adcd-ccb0e5a96aa0",
+          "b8680229-b547-4dea-9a29-2682a74e93ac",
+          "c5e038ce-5c29-4f89-9e11-5e6d7ca53775",
+          "cfbfc98b-a463-44df-b2af-1340f42ff46e",
+          "dc2376fc-e239-4875-ab88-fdc121f3f01b",
+          "f8da84af-2bef-4008-a0a0-1e0e56987107"
+        ]
+      },
+      {
+        "phase": "49 bored piles (remaining 33)",
+        "command": "CreateColumns",
+        "physicalGuids": [
+          "029013ea-c92b-4729-aba3-1666cf2ef7ae",
+          "07537cfb-9ef5-4b33-87b8-6e8b48ab2d19",
+          "1c3e2c9f-ab6d-48cb-8c71-27f67ba62ef8",
+          "232fd4dd-b93a-4409-9c21-78a98847a9ef",
+          "25180ce5-3c90-4010-9af5-1bc984047460",
+          "32f2dd92-04ec-4220-9ccc-fb75b357ad06",
+          "36e82668-3330-49c5-a036-1a6779ee699b",
+          "60116db7-915c-4c38-96b5-134d5c5f227a",
+          "78c57a22-8543-4a68-856b-11ae4398b2d1",
+          "78e84094-b3f0-41b4-bf6f-4988859b904f",
+          "888d403b-273f-42d5-85a5-49cc1b58b514",
+          "f7ca4b7a-d97c-4e97-93b6-9bcb4f9c2892"
+        ]
+      },
+      {
+        "phase": "49 bored piles (remaining 33)",
+        "command": "CreateColumns",
+        "physicalGuids": [
+          "216f7972-eeb4-45c0-9b4b-ffdc2243a4b0",
+          "2a22831f-0c18-4323-95a2-559890bce68a",
+          "30128659-f4df-4d34-a60f-c847c69da1c4",
+          "3b17e566-79d2-493a-9263-d8b8ab302f16",
+          "3e42fbe3-c561-455c-b0da-7f3535fa8704",
+          "43fb74df-f156-4d72-b0d8-93f9c21327fa",
+          "4efb732a-0911-4ac5-8ac7-674689493d18",
+          "57c67cda-2b71-4321-8db5-63ca46386946",
+          "7664e4c9-ee26-4517-b4f5-c743951dbf37",
+          "a1dccc66-770b-4cf7-ac96-dc5e6c4930fe",
+          "a3239882-4c7a-4f13-94b6-e8aa273f5702",
+          "a596a77e-12f7-493d-bb25-f6961dc9d04d"
+        ]
+      },
+      {
+        "phase": "49 bored piles (remaining 33)",
+        "command": "CreateColumns",
+        "physicalGuids": [
+          "180cbf78-146d-4002-a2d8-1c78b669f9ad",
+          "310a69eb-b9b7-4acb-8d18-70e5bfd165fd",
+          "51f2ac29-b237-4951-9fd3-04f809aafe5d",
+          "6c43e6ea-8d78-4729-9588-ea3dad0f5fd5",
+          "7f9e30bc-3bcc-4dad-9970-91e411af1781",
+          "82ec509a-dee9-4e01-9e37-f276aca83e14",
+          "b40df313-4174-4c35-98c5-8f94ebabe581",
+          "db9a8657-a4ec-4a4a-9eb9-8845173b2ede",
+          "ff3b2a62-d56d-427a-93ed-f085b90def1c"
+        ]
+      },
+      {
+        "phase": "400 mm RC grillage",
+        "command": "CreateBeams",
+        "physicalGuids": [
+          "123d31ee-41fc-4294-a88f-9135312257f0",
+          "274696e9-f920-4d84-9b78-a1a5c86589b9",
+          "40a148f8-e53e-4d61-989d-2fd87994f397",
+          "493cabe0-c798-4841-b6f6-ff14dd688659",
+          "4b6d54d7-f885-4b38-8b5f-02e11788f057",
+          "4f62caf4-8f64-42f9-bf23-ebaca5cb5df3",
+          "6e36d0e0-0a21-410e-b9a6-50778e915dc1",
+          "7c50c1b7-fe58-4263-acb7-0f38e4aca271",
+          "9426b7bc-63b0-4a0b-9ce0-836b2ad1393c",
+          "c111ad6c-8148-4dbf-967d-6e22545ef49d",
+          "ed38905b-a70e-4857-b48f-70c1034a4d6b",
+          "f29316af-f953-400a-85f9-e20e3eb03aa1"
+        ]
+      },
+      {
+        "phase": "400 mm RC grillage",
+        "command": "CreateBeams",
+        "physicalGuids": [
+          "254b5b9f-50fe-424d-b8f3-39c88b28dc7a",
+          "3c340dff-454e-4faf-b33c-519c8ef58bc3",
+          "47792e1f-e82d-4cd0-8f95-55d8b2d63310",
+          "7f7e466d-4433-46fe-803f-f7bc6f6fac17",
+          "de2c425e-afa5-44c4-9c20-87cc252ca6ae",
+          "e137d0bc-38dd-4cdc-a3d2-f6828c127ff4"
+        ]
+      },
+      {
+        "phase": "Outer timber walls",
+        "command": "CreateWalls",
+        "physicalGuids": [
+          "1cd69032-9d8b-481f-af74-19f9e5f8fcfc",
+          "323703e9-2bf2-4488-a24d-0ba20760400d",
+          "5dcada01-8c40-4ecf-95f7-377a868f2f48",
+          "6b90ce7e-4b32-4e9d-b9b8-ce7a5a6452ce",
+          "7b332594-ab82-43b4-bfc2-ab5ad549c2c9",
+          "7cbccbf5-a0f8-4ed9-b9e5-3dc96adeae7b"
+        ]
+      },
+      {
+        "phase": "Timber joists nominal @ 600 mm",
+        "command": "CreateBeams",
+        "physicalGuids": [
+          "073eaad0-fecb-4119-84b4-dee86bf5c7e6",
+          "10a603ec-8077-4eec-b1e9-471228ec4f41",
+          "1838ec95-1b12-4d6d-b6c6-e3521c6c6d39",
+          "1853d03e-f6e4-40c0-9ae5-ff742847f4be",
+          "33e14223-2478-4f1d-9e7f-2640882b49aa",
+          "419ac255-48c5-4a8e-a694-c4e7995d4368",
+          "694343f4-64d2-47ee-8873-631132b79d11",
+          "6ae032ff-ba86-4229-bd7f-30f067db3128",
+          "92a3a79d-5e95-4134-aaa3-c61b44409e3f",
+          "a10c6ab3-4cdf-42db-80b9-4ca5694a5c26",
+          "d7147dd5-a596-4cc5-b471-843c4a6efc36",
+          "e6c82ffb-6887-4889-bf43-ea085edd2ab4"
+        ]
+      },
+      {
+        "phase": "Timber joists nominal @ 600 mm",
+        "command": "CreateBeams",
+        "physicalGuids": [
+          "0fae1739-159d-4612-ae89-dad5603893b9",
+          "1f153caf-8c3e-4d0b-b7e2-4b51ab5a8255",
+          "2182fb84-c489-403a-a82d-d1a95291f2be",
+          "353813af-37b6-4cf7-a6ec-4177158b0677",
+          "51c0caf0-8871-4430-a0dd-c1fe45cc30b0",
+          "62ade6dd-0bb7-464f-bd6c-55182fa2ec74",
+          "7a2d9da2-c9da-4d1e-9ed5-39bd61a8bcc5",
+          "922e8d0c-1f75-408b-8402-e48d0884d2d6",
+          "b9150d1b-a29e-4989-b104-f4e2cc4615ca",
+          "bbfe5e79-ec45-43d8-b347-e235c1f94f9f",
+          "cabc2aac-7a91-42a5-ac30-f529dc22bf9d",
+          "daa94397-c136-4f2a-a402-b1f1f1d219ef"
+        ]
+      },
+      {
+        "phase": "Timber joists nominal @ 600 mm",
+        "command": "CreateBeams",
+        "physicalGuids": [
+          "11387078-0df0-43a9-96b6-cfeb0f8e22fa",
+          "19aaa3c1-3591-4a4e-b91e-ec3b28606337",
+          "266ba513-921f-4ad6-9bf9-06279dc5db77",
+          "2670c439-3096-4cf8-bc81-3ee4787eaed5",
+          "2e3efa0f-5130-43b2-8064-35731cd9c5aa",
+          "34f4b255-232f-482e-9e5f-c8cd321153fc",
+          "3eca21b7-f99a-46e0-9a2d-c29f762e8a99",
+          "7b90ab33-6f04-46af-88f9-b73f1f550ae1",
+          "8bedd514-af1f-47c3-88f5-dda248a9661c",
+          "9e2caf4f-7f66-4379-ae33-ee8550164548",
+          "c980cf3d-a532-47e2-9e81-c059f00b094e",
+          "d536c93c-4f0d-4a35-bcc6-ac45bb862589"
+        ]
+      },
+      {
+        "phase": "Timber joists nominal @ 600 mm",
+        "command": "CreateBeams",
+        "physicalGuids": [
+          "2f0e49b6-106a-4653-ba2a-07d8e2562625",
+          "3023dfc6-feb9-46a2-a04a-e7e450d94560",
+          "4f21e239-e6ae-4a94-8d2f-212e89eb8f70",
+          "629d8119-e1d9-4c03-9ba2-cbfb93e46501",
+          "7a355c91-b361-42c5-9d5b-cc5687366c10",
+          "89c9b03a-3a2d-4dd3-aa08-7f65d083220b",
+          "96709871-4aab-4b2e-8db8-e1f42602c336",
+          "9966e4d4-b285-4926-9ea4-7d64eb53daf8",
+          "af2a6899-c9d6-4284-8a83-d68f6377e84b",
+          "c505ad1e-56f2-4681-8279-c843ef60253f",
+          "d71fc9fa-6889-45aa-8c04-d70739f9cb94",
+          "f29d249d-f34b-4730-a19b-bc8f188fe5cf"
+        ]
+      },
+      {
+        "phase": "Floor sheathing",
+        "command": "CreateSlabs",
+        "physicalGuids": [
+          "8f4b0f65-21d9-4dfd-b2cc-94c7d1aaeb0f"
+        ]
+      },
+      {
+        "phase": "Terrace platforms",
+        "command": "CreateSlabs",
+        "physicalGuids": [
+          "8d4e4017-89e7-45fc-abc6-25d7a0ea4dc9",
+          "f8512c13-b556-45fc-ae7b-d081a51ea882"
+        ]
+      },
+      {
+        "phase": "Roof temporary pitched envelope",
+        "command": "CreateRoofs",
+        "physicalGuids": [
+          "f0d643a1-b236-4dfc-844a-98424a12b9b7"
+        ]
+      }
+    ],
+    "originalGuids": [
+      "26473e08-ac82-4872-8473-0e4d08967ce8",
+      "357b81c4-1151-410a-9a23-0353881a07fd",
+      "366105a8-ccd8-46ac-8cd8-ae0ee857acb7",
+      "46d32ac7-535d-4bd5-a3e8-71264da4ba9e",
+      "47597e9c-0fa8-4f9d-82a1-0ee4430427ea",
+      "50b6be31-4b29-4e70-ac15-795d4b3042f5",
+      "69047a26-0fa0-45cb-b5eb-c83364e3a434",
+      "744a9a2e-985a-434f-b6ea-851a42e6075b",
+      "8a4e299c-ae32-4c66-9059-b4a107a408b4",
+      "9be61b38-50cf-411d-b170-b428a7865a05",
+      "9cbde99a-7cea-45fc-81b8-4eff9934513d",
+      "9ffbbe00-9054-4c4b-a4ef-e3226b97e7b1",
+      "adea480c-03b2-42a7-9bc7-8834bfb6b409",
+      "ae0d573e-85fd-4033-983e-32977fa23c9e",
+      "c4f9ea8f-2fb1-43b9-8ed0-58f090b8dac1",
+      "cf8c6e46-7882-484c-b11a-fe274c6eb504",
+      "d6245153-ab1d-42d0-8cf0-4411a1846d3f",
+      "dc36021e-03bb-4efe-a13c-8d1a5d29645a",
+      "e1d88f7f-695c-41c1-a2bb-80e69fa85e23",
+      "e6b77f2b-f770-436e-b4ca-dae576509f42",
+      "ea4a8b29-9595-46e6-bafd-2201a1acf364"
+    ],
+    "automaticChildGuids": [
+      "06a75ea5-2a39-4a03-a98f-316a618b37d0",
+      "06b2e486-cf8f-4d0c-9398-20d3df666801",
+      "08169799-6607-4f2b-aedf-a4359dcff8f7",
+      "0eba25ad-a743-454f-ac41-98a2a7cafebf",
+      "12af2075-5e13-4305-a709-7ddde0b5b8ce",
+      "13f60ed4-84dd-42fb-b1e5-878fcf4e0676",
+      "155c93ae-4608-471f-b20e-91d65113ca34",
+      "17cdb1b4-e18c-476d-bc11-511931047200",
+      "191357f4-b045-4e31-abbc-dd783761d29e",
+      "19382f72-fc8d-49b7-a80d-2f09c9f84502",
+      "1c2149f6-214c-42f1-bdaf-ba964af6069f",
+      "213aac51-caf1-4989-bf9d-203a263d677b",
+      "22dd7d09-9317-49f4-bf97-6064a625fdcd",
+      "267b9172-5c27-4180-b5a7-2d0717cb8ba5",
+      "26abc308-6145-4e4d-8cb9-aa2c34aceeea",
+      "27372079-87b7-4cc5-986c-6cbfc5aa58fe",
+      "2831629b-6ee2-43a2-80c0-94af50d8d0e1",
+      "2b6a57f0-195a-4ea2-a8ea-e6f9b0ef005b",
+      "2c0f3f24-7603-416c-839f-cf947889a277",
+      "2c82ebb3-7ea8-460e-871b-3d63bad53ba4",
+      "2f099cd5-796b-4465-8346-27f510af8710",
+      "34913b9a-a406-4457-81bb-8c8630c8ac8b",
+      "3bcb3e05-b6b7-4458-adcd-c903d49eeb2a",
+      "3bdad15e-42db-4f88-b290-286415fff5cc",
+      "43094e6d-7628-441e-96fa-076805e743fe",
+      "438842d5-0ac8-4482-99f8-94390d893617",
+      "44309d9a-7850-40b8-81a4-f629156fef1a",
+      "453d7f68-d2dd-4914-892a-e5b70cb3cebd",
+      "464d8d2d-180c-4ac6-9d5c-96e299517a69",
+      "47890aab-4625-4d36-a666-1d695a070d21",
+      "483bc60c-a2d5-4561-8792-5278bc6b51e2",
+      "4a9c03a9-2837-404d-9efa-c4b0872ff3bf",
+      "4bb9b02f-c57e-4db8-9b1c-65489c95b0b8",
+      "4c19c079-2c42-4aa0-b709-321220e3d6b5",
+      "4d15f673-912d-4345-981e-20eb3afbabfb",
+      "4eb79bc2-3dda-4405-8c9d-a855c1db1e5b",
+      "50520087-e175-48fe-9777-fd65b0dfa70e",
+      "54dac42d-cfc5-4f5d-a66c-d63c709b86bf",
+      "54ee7f43-dbdf-49eb-8a93-4bdbb8482024",
+      "57afc26c-91e2-4e77-b8a6-0c4da948435e",
+      "5852e795-b2c6-464f-bc0b-4e501f6ca496",
+      "5a77767e-a6c2-449d-a7c5-eea73c3dd537",
+      "5d1b3885-47f7-42b4-bcc3-e13079a9a89d",
+      "5e86f75d-1a48-4bb9-b8a0-0a8633807aab",
+      "60c67e96-ef93-466c-a8e8-f969d74ae578",
+      "618c8a89-c20d-40e5-8508-fc408833a5cd",
+      "641a7274-c413-4ba4-a302-561eea084937",
+      "6d8d765d-75d4-4043-921a-07dde608dd97",
+      "6e5311dc-f877-44d1-b5e9-764ff8d75bb9",
+      "723a87f1-eca9-4e1b-8cfb-61d90fdd76ce",
+      "7361fc6c-28b0-4188-938e-681e842ccf86",
+      "75da1921-988b-469b-b890-b72911bf9924",
+      "762a2e9c-02f6-438e-8c6c-12921a09f9ea",
+      "77e31369-72a4-4006-8517-dd95d23d4909",
+      "7984665d-2fbb-4c58-8129-00eca7438f53",
+      "7e3fe64d-c6a7-4687-bf01-f944d11737d1",
+      "7fe60d76-9cb1-4c29-9c62-19d2442799ee",
+      "81e0de21-7d64-43be-b409-3635a3b3ff41",
+      "8583526e-38a2-4827-9635-dd0c8ec922c6",
+      "862245f9-f83c-459a-9acf-928e99c1b86f",
+      "89b4025c-f285-4dce-a822-585cfcd1336b",
+      "8f10f365-74d8-497b-b8ee-3d0b7842a30a",
+      "8f54e76f-45ad-4014-8471-711272893f5a",
+      "92cb086a-da3f-4c35-9d9f-db8778012384",
+      "976df31a-544c-4d9b-8e95-337c3fa7501c",
+      "977f3ba0-bd63-4bdb-bd6a-17b21b58991e",
+      "9caef61a-c5db-4011-baa9-0b303638f9cd",
+      "9fb13b4b-dfe4-430a-9b65-6bd4e4dc3368",
+      "a1808cbb-7aa4-46aa-ad46-9cb99237cad6",
+      "a1a5396b-047b-4d0f-8e46-e56331966e95",
+      "a31a3bc0-898a-4abc-a459-17230fcf4408",
+      "a6cf6155-9b8d-41e8-a5df-75e69c4a66c9",
+      "a77fdbfd-f692-4f60-b678-06a419d6fd38",
+      "a9f1d78b-1a82-4c99-aee4-f928f5d17e52",
+      "ad5db918-c4b3-4329-afff-d4f008772d58",
+      "afd0fdd9-e3dd-4103-a216-84bb69ff496a",
+      "b117aa0b-c531-41eb-b4b0-5b2baa711c59",
+      "b4c84812-ebd7-46d1-99b1-393e41b7c9e2",
+      "b8b114fd-d11d-4483-9742-08e1b6486162",
+      "b8baaf76-808c-4b34-8014-1eb9f13e3e87",
+      "bb59da58-22b9-4903-8d4c-a7d51bf524ad",
+      "bf1886e8-379e-4d4e-b75e-06c1dc90b14b",
+      "bfa49910-e3d6-4d1d-82f9-44b8c75d6361",
+      "c350c3ea-5f86-411b-9060-dc7fd901ee39",
+      "c4053109-7299-48be-84f4-88a676d1c65a",
+      "c458ead6-8a43-416b-ad56-56593371f350",
+      "c6d45039-7b78-4a3a-a676-87686a57fc04",
+      "cb7a06e1-5c2b-420e-b879-42e05ff4ac1c",
+      "cbf8c04f-b947-4637-b83a-8d8caafbdd69",
+      "ce95be96-5b17-4152-a7cb-f4741a5ec34e",
+      "d0543857-6004-48c3-977c-fc8c73db3766",
+      "d0a0dae6-3435-42d6-9d32-1e16d0b89693",
+      "d2ba82a4-277f-4c37-bbb0-085a88a44cc6",
+      "d2cbd942-06c7-4978-a797-dd93a5add397",
+      "d3991593-05f4-4cdf-8924-a6edd373f043",
+      "d61063e1-4000-4b67-affc-ffa9266717b0",
+      "d74cc715-4966-4224-bdc1-8013fa794e56",
+      "d8c80f9c-5bbe-4ec1-95d6-cda01ef1d717",
+      "d8f3ff95-0166-4726-afdf-3e28eb9517b1",
+      "db75be78-92e5-4aca-adee-0b6d2a7001b9",
+      "dec46494-f530-4856-a094-930523522386",
+      "e1ffa3b1-6828-49ae-a92f-b80d5d14b3b0",
+      "e5036072-966c-4bc7-862d-1f096a5d9d3b",
+      "e546b68e-c011-46c6-9b33-675da2b20bf8",
+      "e7911aa8-b2ff-4a3f-a404-70ba2e0eac00",
+      "e81d7abd-0036-495e-83d2-c2dd95e9c641",
+      "f02273bd-0771-4d9d-b7ef-264da9422711",
+      "f23c5c22-bfc0-4f3e-a5e9-b48177003cb3",
+      "f5b9e20f-0fb4-40b3-acc7-d5f859668208",
+      "f6229b4d-6399-4d32-8b3f-357c88908029",
+      "f6eda7c6-6503-47d7-b22f-f89f20c1ff9e",
+      "f6fd8a4a-69bc-48eb-962c-6d7293399ad3",
+      "fb511925-2502-4b50-8114-23131e3ebf1e",
+      "fd1cf8fe-a168-468f-a72e-d3fc3a0d48b3",
+      "fdea54bf-b703-43a5-bb66-03a885665189"
+    ]
+  },
+  "lastNativeRepair": {
+    "status": "KR6_GRILLAGE_CONTACT_SAVED__OTHER_HOUSE_WORK_PENDING",
+    "finalGUIDCount": 261,
+    "grillage": {
+      "beamCount": 18,
+      "topZ": -0.3,
+      "bottomZ": -0.6
+    },
+    "joists": {
+      "beamCount": 48,
+      "topZ": -0.1,
+      "bottomZ": -0.3
+    },
+    "floor": {
+      "cspSlabThicknessM": 0.022,
+      "terraceSlabThicknessM": 0.05
+    }
+  },
+  "safety": {
+    "newWritesAllowed": false,
+    "writer": "EXISTING_APA_SCENE_WRITER_ONLY_AFTER_EXPLICIT_EXACT_SAVED_COPY_BINDING",
+    "currentReadAuthorization": "SOURCE_REVIEWED_READ_ONLY_POLICIES_AND_LIVE_COMMAND_REGISTRATION_REQUIRED",
+    "constraints": [
+      "Never replay prior 125 creates",
+      "Never call standalone repair scripts again",
+      "No automatic delete or save in read-only phase",
+      "Do not mix preview with write authorization",
+      "No standalone Tapir writer",
+      "Do not derive openings host GUIDs or offsets from source-only spans"
+    ]
+  }
+}
