@@ -1,0 +1,24 @@
+name: BDD KR6 Grillage Contact Correction
+on:
+  pull_request:
+    paths:
+      - "scripts/apa_bdd_native_kr6_grillage_contact_fix.py"
+      - "tests/test_bdd_native_kr6_grillage_contact_fix.py"
+      - ".github/workflows/bdd-kr6-grillage-contact.yml"
+  workflow_dispatch:
+
+jobs:
+  source-geometry-and-safety:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile standalone contact correction
+        run: python -m py_compile scripts/apa_bdd_native_kr6_grillage_contact_fix.py
+      - name: Check model safety and vertical contact assumptions
+        run: python -m unittest discover -s tests -p test_bdd_native_kr6_grillage_contact_fix.py -v
