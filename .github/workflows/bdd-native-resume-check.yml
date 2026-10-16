@@ -1,0 +1,24 @@
+name: BDD Native Resume Child GUID Regression
+on:
+  pull_request:
+    paths:
+      - "scripts/apa_bdd_house_native_builder.py"
+      - "scripts/apa_bdd_house_safe_resume.py"
+      - "tests/test_bdd_house_resume.py"
+      - ".github/workflows/bdd-native-resume-check.yml"
+  workflow_dispatch:
+jobs:
+  offline-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile builder and resume scripts
+        run: python -m py_compile scripts/apa_bdd_house_native_builder.py scripts/apa_bdd_house_safe_resume.py
+      - name: Run live-GUID-shape mocked regression
+        run: python -m unittest discover -s tests -p test_bdd_house_resume.py -v
