@@ -711,6 +711,99 @@ class DynamicCommands:
             retained_signatures,saved_sha256,authorization,
             verify_before,verify_after)
 
+    def copy_multiple_prototypes(self, writer, scene_id, groups,
+                                 retained_signatures, saved_sha256,
+                                 authorization, verify_before, verify_after):
+        """Bulk replicate DIFFERENT source-verified BIM prototypes in ONE call.
+
+        Example: 3 source-verified timber sizes, each multiplied at its own
+        positions. No CreateColumns loop; one MoveElements(copy=True) request
+        with as many typed source GUID/offset pairs as needed (up to 200).
+        The existing SceneWriter verifies one retained geometry set for the
+        entire transaction and records ONE durable SQLite intent.
+        """
+        if not isinstance(groups,list) or not 1 <= len(groups) <= 200:
+            raise ValueError('MULTI_COPY_REQUIRES_NONEMPTY_SOURCE_GROUPS')
+        if not callable(verify_before) or not callable(verify_after):
+            raise ValueError('MULTI_COPY_NEEDS_INDEPENDENT_PRE_POST_READBACK')
+        if not isinstance(retained_signatures,dict):
+            raise ValueError('MULTI_COPY_RETAINED_BREP_SIGNATURES_REQUIRED')
+        rows=[]
+        prototypes=[]
+        for group in groups:
+            if (not isinstance(group,dict)
+                    or set(group)!={'prototypeGuid','prototypeType',
+                                     'sourceRef','displacements'}):
+                raise ValueError('MULTI_COPY_TYPED_SOURCE_GROUP_REQUIRED')
+            guid=group['prototypeGuid']
+            if (not isinstance(guid,str) or not guid or
+                    group['prototypeType'] not in {'Column','Beam','Object'}
+                    or not isinstance(group['sourceRef'],str) or
+                    not group['sourceRef'].strip()):
+                raise ValueError('MULTI_COPY_EXISTING_PROTO_AND_SOURCE_REQUIRED')
+            if guid.lower() in prototypes:
+                raise ValueError('MULTI_COPY_DUPLICATE_PROTO_GROUP')
+            prototypes.append(guid.lower())
+            offsets=group['displacements']
+            if not isinstance(offsets,list) or len(offsets)==0:
+                raise ValueError('MULTI_COPY_NONEMPTY_OFFSETS_REQUIRED')
+            used=set()
+            for shift in offsets:
+                if (not isinstance(shift,dict)
+                        or set(shift)!={'x','y','z'}
+                        or any(type(shift[k]) not in (int,float)
+                               or not math.isfinite(shift[k])
+                               or abs(shift[k])>10000.0
+                               for k in ('x','y','z'))):
+                    raise ValueError('MULTI_COPY_FINITE_3D_DISPLACEMENT_REQUIRED')
+                pos=tuple(round(shift[k],7) for k in ('x','y','z'))
+                if pos==(0,0,0) or pos in used:
+                    raise ValueError('MULTI_COPY_NO_ZERO_OR_DUPLICATE_OFFSET')
+                used.add(pos)
+                rows.append({'elementId':{'guid':guid},
+                             'moveVector':{k:shift[k] for k in ('x','y','z')},
+                             'copy':True})
+        if len(rows)>200:
+            raise ValueError('MULTI_COPY_MAX_200_TOTAL_NATIVE_COPIES')
+        if set(prototypes)&{g.lower() for g in retained_signatures}:
+            raise ValueError('MULTI_COPY_PROTOTYPES_MUST_BE_AFFECTED')
+        if self.operation_kind('MoveElements')!='CREATE':
+            raise ValueError('MULTI_COPY_MOVE_ELEMENTS_SOURCE_REVIEW_REQUIRED')
+        ticket=self.prepare('MoveElements',{'elementsWithMoveVectors':rows})
+        if ticket['effect']!='CREATE':
+            raise ValueError('MULTI_COPY_EXPECTS_EXPLICIT_COPY_CREATE_POLICY')
+
+        def checked_after(reply,prior):
+            results=reply.get('executionResults') if isinstance(reply,dict) else None
+            if (not isinstance(results,list) or len(results)!=len(rows)
+                    or any(not isinstance(item,dict)
+                           or item.get('success') is not True
+                           for item in results)):
+                raise ValueError('MULTI_COPY_UNKNOWN_NATIVE_RESPONSE')
+            proof=verify_after(reply,prior)
+            if (not isinstance(proof,dict)
+                    or not str(proof.get('status','')).endswith('PASS')
+                    or proof.get('newPhysicalCopyCount')!=len(rows)
+                    or set(g.lower() for g in proof.get('unchangedPrototypeGuids',[]))
+                    !=set(prototypes)):
+                raise ValueError('MULTI_COPY_NATIVE_BREP_AND_PROTO_COUNT_REQUIRED')
+            return dict(proof,nativeCopyCount=len(rows),
+                        prototypeCount=len(prototypes),
+                        nativeMethod='Tapir.MoveElements(copy=true)')
+        began=time.perf_counter()
+        result=self.execute(
+            writer,scene_id,ticket,
+            sorted(prototypes),retained_signatures,
+            saved_sha256,authorization,'MODEL',
+            checked_after,verify_before=verify_before)
+        seconds=time.perf_counter()-began
+        return dict(result,nativeCopyMetrics={
+            'requestedCopyCount':len(rows),'prototypeCount':len(prototypes),
+            'nativeCalls':1,'durationSeconds':round(seconds,4),
+            'copiesPerSecond':round(len(rows)/seconds,3) if seconds>0 else None,
+            'status':result.get('status'),
+        })
+
     def native_facts(self,workflow,model_step,elements_step,boxes_step=None):
         """Reuse existing BREP/IFC quantities; provider boxes remain separate."""
         import archicad_connected_components as C
