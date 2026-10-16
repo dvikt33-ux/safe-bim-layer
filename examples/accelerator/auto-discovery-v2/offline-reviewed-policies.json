@@ -1,0 +1,58 @@
+{
+  "MoveElements": {
+    "kind": "CREATE",
+    "impact": "MODEL",
+    "evidence": {
+      "source": "Pinned contract review FOR OFFLINE TEST ONLY",
+      "sha256": "d90f7a5780b85a9815dff32a8f69145bb7d4d517b8da0a87cf66a52369fb0297"
+    }
+  },
+  "CreateWalls": {
+    "kind": "CREATE",
+    "impact": "MODEL",
+    "evidence": {
+      "source": "Pinned contract review FOR OFFLINE TEST ONLY",
+      "sha256": "09d8fec530b2118224a201cb39dd2d25427cb5a9fe264a2c64bad609f0cda750"
+    }
+  },
+  "CreateSlabs": {
+    "kind": "CREATE",
+    "impact": "MODEL",
+    "evidence": {
+      "source": "Pinned contract review FOR OFFLINE TEST ONLY",
+      "sha256": "71c0535d73dda563d479e13790056a361081ba6167aaff14998cad494cbb24f8"
+    }
+  },
+  "CreateWindows": {
+    "kind": "CREATE",
+    "impact": "MODEL",
+    "evidence": {
+      "source": "Pinned contract review FOR OFFLINE TEST ONLY",
+      "sha256": "79fd0261877d0d6fb27ccfff879a616f12527f155aceb5768b34c8937b6a2074"
+    }
+  },
+  "CreateDoors": {
+    "kind": "CREATE",
+    "impact": "MODEL",
+    "evidence": {
+      "source": "Pinned contract review FOR OFFLINE TEST ONLY",
+      "sha256": "f2bb92573bbdc5a00d1cdce4b8c990673580c94bdb2939642e7f5159238f17d5"
+    }
+  },
+  "ModifyWalls": {
+    "kind": "MODIFY",
+    "impact": "MODEL",
+    "evidence": {
+      "source": "Pinned contract review FOR OFFLINE TEST ONLY",
+      "sha256": "8a71cdf115ccf691ca3dd5e3ebd2650bdcb00840a837b0df8625980cb338786f"
+    }
+  },
+  "ModifySlabs": {
+    "kind": "MODIFY",
+    "impact": "MODEL",
+    "evidence": {
+      "source": "Pinned contract review FOR OFFLINE TEST ONLY",
+      "sha256": "db9196129b4c7d3106c6d7715889e061583a4875b548426220cb62f2abfc1166"
+    }
+  }
+}

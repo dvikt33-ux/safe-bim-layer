@@ -1,0 +1,147 @@
+{
+  "schema": "APA_AUTO_NATIVE_TASK_V1",
+  "status": "ONE_SOURCE_QUALIFIED_STRATEGY_PREPARED",
+  "selectedStrategyId": "native_create_walls_batch",
+  "selectedNativeTaskPreview": {
+    "schema": "APA_NATIVE_TASK_PREVIEW_V1",
+    "request": "SYNTHETIC OFFLINE EXAMPLE ONLY - NOT A BDD DESIGN OR WRITE AUTHORIZATION",
+    "intentHash": "c429eb10b48623e3f4bae2c0b9fa927167845eb55d44f2ae0965792981f29c97",
+    "workflow": {
+      "schema": "APA_DYNAMIC_BIM_WORKFLOW_V1",
+      "graph": {
+        "operations": [
+          {
+            "id": "native_create_walls_batch",
+            "command": "CreateWalls",
+            "params": {
+              "wallsData": [
+                {
+                  "arcAngle": 0.0,
+                  "begCoordinate": {
+                    "x": 0,
+                    "y": 0.0
+                  },
+                  "buildingMaterialId": {
+                    "guid": "22222222-2222-4222-8222-222222222222"
+                  },
+                  "endCoordinate": {
+                    "x": 4.0,
+                    "y": 0.0
+                  },
+                  "floorIndex": 1,
+                  "height": 3.0,
+                  "offset": 0.0,
+                  "referenceLineLocation": "Center",
+                  "structureType": "Basic",
+                  "thickness": 0.2,
+                  "zCoordinate": 0.2
+                },
+                {
+                  "arcAngle": 0.0,
+                  "begCoordinate": {
+                    "x": 5,
+                    "y": 0.0
+                  },
+                  "buildingMaterialId": {
+                    "guid": "22222222-2222-4222-8222-222222222222"
+                  },
+                  "endCoordinate": {
+                    "x": 9.0,
+                    "y": 0.0
+                  },
+                  "floorIndex": 1,
+                  "height": 3.0,
+                  "offset": 0.0,
+                  "referenceLineLocation": "Center",
+                  "structureType": "Basic",
+                  "thickness": 0.2,
+                  "zCoordinate": 0.2
+                }
+              ]
+            },
+            "after": []
+          }
+        ]
+      },
+      "catalogHash": "0e5dd0eb62ea988dbe07118d6d751946c84d609d6e70089450c25c733f92ec79",
+      "policyHash": "2a8b2fcb427e39788affa95a8abbec9e74dcada3c3af54928e765b4b64adba8a",
+      "sourcePlanHash": "3b172200b901efeed8fdd1d5e6c7eda2b274468dd557c9d21aa3244113754d16",
+      "templatePlanHash": "3b172200b901efeed8fdd1d5e6c7eda2b274468dd557c9d21aa3244113754d16",
+      "executionOrder": [
+        "native_create_walls_batch"
+      ],
+      "dependencies": {
+        "native_create_walls_batch": []
+      },
+      "executionPermission": false
+    },
+    "sourcePlanHash": "3b172200b901efeed8fdd1d5e6c7eda2b274468dd557c9d21aa3244113754d16",
+    "executor": "SceneWriter",
+    "executionPermission": false,
+    "toolSelection": "GPT_SELECTED_SCHEMAS_NOT_AUTOMATIC_DIMENSION_INFERENCE"
+  },
+  "selectionMethod": "SOLE_FEASIBLE_TYPED_OPTION_NOT_COST_OPTIMIZATION",
+  "calibrationStatus": "UNCALIBRATED",
+  "discovery": {
+    "schema": "APA_CATALOG_AUTO_DISCOVERY_V1",
+    "status": "CATALOG_SCANNED_AND_TYPED_NATIVE_CANDIDATES_VALIDATED",
+    "catalogCommandCount": 262,
+    "recognizedRecipeCommands": [
+      "CreateBeams",
+      "CreateColumns",
+      "CreateDoors",
+      "CreateSlabs",
+      "CreateWalls",
+      "CreateWindows",
+      "ModifySlabs",
+      "ModifyWalls",
+      "MoveElements"
+    ],
+    "eligibleCommands": [
+      "CreateDoors",
+      "CreateSlabs",
+      "CreateWalls",
+      "CreateWindows",
+      "ModifySlabs",
+      "ModifyWalls",
+      "MoveElements"
+    ],
+    "ineligibleCommands": [
+      {
+        "command": "CreateColumns",
+        "reason": "NO_REVIEWED_OPERATION_POLICY"
+      },
+      {
+        "command": "CreateBeams",
+        "reason": "NO_REVIEWED_OPERATION_POLICY"
+      }
+    ],
+    "copyFirstStatus": "COPY_FIRST_PLAN_SOURCE_VERIFIED_NO_WRITES",
+    "pendingUnmatchedTargets": 2,
+    "alreadyPresent": 0,
+    "qualifiedStrategies": 1,
+    "rejectedStrategies": [
+      {
+        "id": "native_copy_existing_batch",
+        "command": "MoveElements",
+        "reason": "UNMATCHED_FAMILY_OR_NO_APPROVED_COPY_POLICY"
+      }
+    ],
+    "newNativeModelWrites": 0,
+    "automaticNativeExecution": false,
+    "nativeWritePermission": false,
+    "sourceQualification": "CALLER_SUPPLIED_NATIVE_READBACK_AND_DOCUMENT_REF_NOT_REVALIDATED_LIVE",
+    "adapterVersion": 2,
+    "benchmarkWorkloadHash": "b0560892e6ff95c92f578bc75fb3499d65049d5dcd04d5b59c81b70fa51e6ed5",
+    "verificationRequirements": [
+      "EXACT_PROJECT_MODEL_GUID_AND_SAVED_FILE_HASH",
+      "FRESH_OPERATION_SPECIFIC_BASELINE_AND_HOSTS",
+      "COMPLETE_GUID_INVENTORY",
+      "RETAINED_NATIVE_BREP_AND_ATTRIBUTES",
+      "INDEPENDENT_CREATED_OR_MODIFIED_GUID_READBACK",
+      "SOURCE_STORY_MATERIAL_FAVORITE_LIBRARY_AND_GEOMETRY_READBACK"
+    ]
+  },
+  "nativeWritePermission": false,
+  "automaticNativeExecution": false
+}

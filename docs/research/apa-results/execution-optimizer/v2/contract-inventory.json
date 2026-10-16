@@ -1,0 +1,761 @@
+{
+  "schema": "APA_V2_INVENTORY_REPORT_NOT_EXECUTABLE_CATALOG",
+  "baseCommit": "331a8d4f4ca96e031a562406923ac91a28fd4b63",
+  "sources": [
+    {
+      "source": "PINNED_TAPIR_EXPORT",
+      "path": "schemas/tapir-live-1.5.10/tapir-scene-live.json",
+      "sha256": "b355d2b1311b16d64a62e63c70c6eb5a01b7283a6675cfa2940ef5f247c1fa46",
+      "commandCount": 262,
+      "relevantCommands": [
+        {
+          "command": "ChangeWindow",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "d026c148abf792ae59b5635845164ee817c81185ec493891e3f9ac9db78dee67",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateBeams",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "5abad184b7452871e1380dd0baf93aeca506d0c1028cfeeb43d593c1161f22c3",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateColumns",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "d83b0e17ea460c80342df21016527c2705a2aa1c1fc2ede31658781f9904ba85",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateDoors",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "f2bb92573bbdc5a00d1cdce4b8c990673580c94bdb2939642e7f5159238f17d5",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateMorphs",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "7faa097a9a42e566fbe6e728b0e48292a96d35006265342b804df4cd5dd8f0a8",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateOpenings",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "90358c039242de92832684b364fffae3ddcfe4b58eea3abc10b602a25f967179",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateRoofs",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "eb30bce5e8c9f37d577db8b0a900d7c870dbc4cfb3153f4d6872dd5e39198985",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateSlabs",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "71c0535d73dda563d479e13790056a361081ba6167aaff14998cad494cbb24f8",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateStairs",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "397b247911e3211a18d8fc0bc9f900925dac9bc5647fd8cd5783cf42dbe90b7e",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateWallThicknessDimensions",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "f4996ce4fdd80376bccce806e79d7511211d7cd30736f14a1d959f259112b20a",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateWalls",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "09d8fec530b2118224a201cb39dd2d25427cb5a9fe264a2c64bad609f0cda750",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateWindows",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "79fd0261877d0d6fb27ccfff879a616f12527f155aceb5768b34c8937b6a2074",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "FitInWindow",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "92669b5bbbe90cb71a3ced151ab8b9f5cc99fb85b9a2745826660de0de277292",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "GetCurrentWindowType",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "9fc0875e2914bcc969724346f9193f87e333d0284bb5cfbeaf213f0014cc05ef",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifyBeams",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "24cc239fd4641a139e5fb7b901058f9237c5a5bba5f72af0b7d11461322cb51f",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifyColumns",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "f25f5f578468341aca33fae8d389374b9fc6e5c07f877a75ba48761e09558fcd",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifyDoors",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "0b6be93de7c814c1a8a5c54dc8d67b8709a08dc8813e3ff677c69879248cd1bd",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifyMorphs",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "4180a5254723334fb2be01c7911d134a661bded4c1fd81b90ec3ad8cd0dc8636",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifyRoofs",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "4eee9bcadad132e7e27f97eec9b6ef4b224d1dfd08b5f5cfa7315b8da13a7939",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifySlabs",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "db9196129b4c7d3106c6d7715889e061583a4875b548426220cb62f2abfc1166",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifyWalls",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "8a71cdf115ccf691ca3dd5e3ebd2650bdcb00840a837b0df8625980cb338786f",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifyWindows",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "e48540d4ce1658887082c0834faf89e3b0370a79a795342b32ea89be66f046fc",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "MoveElements",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "d90f7a5780b85a9815dff32a8f69145bb7d4d517b8da0a87cf66a52369fb0297",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "MoveElementsToDesignOptions",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "d5e758a362f480de5a760ac626f759a33b151cb16be06e711d0e51fcf661daed",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        }
+      ]
+    },
+    {
+      "source": "PINNED_TAPIR_PLUS_EXISTING_FUNCTIONAL_MODULES",
+      "path": "schemas/tapir-live-1.5.10/tapir-scene-live.json",
+      "sha256": "b355d2b1311b16d64a62e63c70c6eb5a01b7283a6675cfa2940ef5f247c1fa46",
+      "commandCount": 291,
+      "relevantCommands": [
+        {
+          "command": "AddOn.TapirCommand.GetNativeOpeningConnectionsV1",
+          "effectPolicy": "READ_ONLY",
+          "availability": "SOURCE_CONTRACT_NOT_RUNTIME_PROBED",
+          "contractHash": "71e0d6a3268700b8132b1dd6f0e5c72c9b83d323bd5fd486c1f8812626672110",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "ChangeWindow",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "d026c148abf792ae59b5635845164ee817c81185ec493891e3f9ac9db78dee67",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateBeams",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "5abad184b7452871e1380dd0baf93aeca506d0c1028cfeeb43d593c1161f22c3",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateColumns",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "d83b0e17ea460c80342df21016527c2705a2aa1c1fc2ede31658781f9904ba85",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateDoors",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "f2bb92573bbdc5a00d1cdce4b8c990673580c94bdb2939642e7f5159238f17d5",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateMorphs",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "7faa097a9a42e566fbe6e728b0e48292a96d35006265342b804df4cd5dd8f0a8",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateOpenings",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "90358c039242de92832684b364fffae3ddcfe4b58eea3abc10b602a25f967179",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateRoofs",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "eb30bce5e8c9f37d577db8b0a900d7c870dbc4cfb3153f4d6872dd5e39198985",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateSlabs",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "71c0535d73dda563d479e13790056a361081ba6167aaff14998cad494cbb24f8",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateStairs",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "397b247911e3211a18d8fc0bc9f900925dac9bc5647fd8cd5783cf42dbe90b7e",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateWallThicknessDimensions",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "f4996ce4fdd80376bccce806e79d7511211d7cd30736f14a1d959f259112b20a",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateWalls",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "09d8fec530b2118224a201cb39dd2d25427cb5a9fe264a2c64bad609f0cda750",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateWindows",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "79fd0261877d0d6fb27ccfff879a616f12527f155aceb5768b34c8937b6a2074",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "FitInWindow",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "92669b5bbbe90cb71a3ced151ab8b9f5cc99fb85b9a2745826660de0de277292",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "GetCurrentWindowType",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "9fc0875e2914bcc969724346f9193f87e333d0284bb5cfbeaf213f0014cc05ef",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifyBeams",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "24cc239fd4641a139e5fb7b901058f9237c5a5bba5f72af0b7d11461322cb51f",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifyColumns",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "f25f5f578468341aca33fae8d389374b9fc6e5c07f877a75ba48761e09558fcd",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifyDoors",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "0b6be93de7c814c1a8a5c54dc8d67b8709a08dc8813e3ff677c69879248cd1bd",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifyMorphs",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "4180a5254723334fb2be01c7911d134a661bded4c1fd81b90ec3ad8cd0dc8636",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifyRoofs",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "4eee9bcadad132e7e27f97eec9b6ef4b224d1dfd08b5f5cfa7315b8da13a7939",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifySlabs",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "db9196129b4c7d3106c6d7715889e061583a4875b548426220cb62f2abfc1166",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifyWalls",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "8a71cdf115ccf691ca3dd5e3ebd2650bdcb00840a837b0df8625980cb338786f",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifyWindows",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "e48540d4ce1658887082c0834faf89e3b0370a79a795342b32ea89be66f046fc",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "MoveElements",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "d90f7a5780b85a9815dff32a8f69145bb7d4d517b8da0a87cf66a52369fb0297",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "MoveElementsToDesignOptions",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "d5e758a362f480de5a760ac626f759a33b151cb16be06e711d0e51fcf661daed",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        }
+      ]
+    },
+    {
+      "source": "EXISTING_EXTENDED_RUNTIME_SNAPSHOT_NOT_CURRENT_RUNTIME_PROOF",
+      "path": "schemas/accelerator/dynamic-runtime-catalog.json",
+      "sha256": "bc2d37f13720774f3a0a51b8e98b1b1e3723241cfdbcf664f977422d3a8fe071",
+      "commandCount": 348,
+      "relevantCommands": [
+        {
+          "command": "ChangeWindow",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "d026c148abf792ae59b5635845164ee817c81185ec493891e3f9ac9db78dee67",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateBeams",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "5abad184b7452871e1380dd0baf93aeca506d0c1028cfeeb43d593c1161f22c3",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateColumns",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "d83b0e17ea460c80342df21016527c2705a2aa1c1fc2ede31658781f9904ba85",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateDoors",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "f2bb92573bbdc5a00d1cdce4b8c990673580c94bdb2939642e7f5159238f17d5",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateExactStairsV1",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "30a148e4a5fda26e20ed1284240c310f6aa91ed9afb7a3eae664a4ce12d9a492",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateMorphs",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "7faa097a9a42e566fbe6e728b0e48292a96d35006265342b804df4cd5dd8f0a8",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateNativeGridElementsV1",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "626b50d9cf02d039fb052635a26a86007400e3d51bbc8edc8e99c3c014f8609f",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateOpenings",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "90358c039242de92832684b364fffae3ddcfe4b58eea3abc10b602a25f967179",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateRoofs",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "8fa47392d35f3b1047a2e6fa6d49eae3d3d68d75e0b0221d31e773b913798c0e",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateSlabs",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "71c0535d73dda563d479e13790056a361081ba6167aaff14998cad494cbb24f8",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateStairs",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "397b247911e3211a18d8fc0bc9f900925dac9bc5647fd8cd5783cf42dbe90b7e",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateWallThicknessDimensions",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "f4996ce4fdd80376bccce806e79d7511211d7cd30736f14a1d959f259112b20a",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateWalls",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "09d8fec530b2118224a201cb39dd2d25427cb5a9fe264a2c64bad609f0cda750",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "CreateWindows",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "79fd0261877d0d6fb27ccfff879a616f12527f155aceb5768b34c8937b6a2074",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "EvaluateNativeStairGeometryV1",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "2a9abf53af1ecc2b6b8d3ab994159ade03a255dce326167b113228f75b83b3ab",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "FitInWindow",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "92669b5bbbe90cb71a3ced151ab8b9f5cc99fb85b9a2745826660de0de277292",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "GetCurrentWindowType",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "9fc0875e2914bcc969724346f9193f87e333d0284bb5cfbeaf213f0014cc05ef",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "GetNativeGridDefaultsV1",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "0a01a0b139c935ea3358c8c3eecf390d68f1f63f754fbdcb0abf174aee7312f3",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "GetNativeGridElementsV1",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "0cbab50b72603a0a80eb792d486b4102eb0a7973d7ac744525f993cbc736e80d",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "GetNativeStairGeometryV1",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "af6cd9489a230ffef2fc6a9ff50de5b8d3db3a2fe33743959fe35cbe5b1d2526",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifyBeams",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "24cc239fd4641a139e5fb7b901058f9237c5a5bba5f72af0b7d11461322cb51f",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifyColumns",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "f25f5f578468341aca33fae8d389374b9fc6e5c07f877a75ba48761e09558fcd",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifyDoors",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "0b6be93de7c814c1a8a5c54dc8d67b8709a08dc8813e3ff677c69879248cd1bd",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifyMorphs",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "4180a5254723334fb2be01c7911d134a661bded4c1fd81b90ec3ad8cd0dc8636",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifyNativeGridElementsV1",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "c4ee76d7ca6ee779d4ee80c02280eb2f662d301982f58a6998ba5d85f199fbb9",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifyNativeStairGeometryV1",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "38ee43352b83c265b5d40ee16b93c7f7e55a5f4aadd9189af30cf3b4fccd5712",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifyRoofs",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "4f589781f61539605de8ef98e859be0de8a640cf939f7fe926678d9cdf0e6d2d",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifySlabs",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "db9196129b4c7d3106c6d7715889e061583a4875b548426220cb62f2abfc1166",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifyWalls",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "8a71cdf115ccf691ca3dd5e3ebd2650bdcb00840a837b0df8625980cb338786f",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "ModifyWindows",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "e48540d4ce1658887082c0834faf89e3b0370a79a795342b32ea89be66f046fc",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        },
+        {
+          "command": "MoveElements",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "d90f7a5780b85a9815dff32a8f69145bb7d4d517b8da0a87cf66a52369fb0297",
+          "typedDiscoveryAdapter": true,
+          "executionBlocker": null
+        },
+        {
+          "command": "MoveElementsToDesignOptions",
+          "effectPolicy": "UNKNOWN",
+          "availability": "LIVE_EXPORT_REGISTERED",
+          "contractHash": "d5e758a362f480de5a760ac626f759a33b151cb16be06e711d0e51fcf661daed",
+          "typedDiscoveryAdapter": false,
+          "executionBlocker": null
+        }
+      ]
+    }
+  ],
+  "runtimeProbe": "NOT_RUN_NO_ARCHICAD_PROCESS",
+  "nativeWrites": 0,
+  "officialJSON": {
+    "packageVersion": "29.3000",
+    "commandCount": 73,
+    "commands": [
+      "API.CloneProjectMapItemToViewMap",
+      "API.CreateAttributeFolders",
+      "API.CreateLayout",
+      "API.CreateLayoutSubset",
+      "API.CreateViewMapFolder",
+      "API.DeleteAttributeFolders",
+      "API.DeleteAttributes",
+      "API.DeleteNavigatorItems",
+      "API.ExecuteAddOnCommand",
+      "API.Get2DBoundingBoxes",
+      "API.Get3DBoundingBoxes",
+      "API.GetActivePenTables",
+      "API.GetAllClassificationSystems",
+      "API.GetAllClassificationsInSystem",
+      "API.GetAllElements",
+      "API.GetAllPropertyGroupIds",
+      "API.GetAllPropertyIds",
+      "API.GetAllPropertyIdsOfElements",
+      "API.GetAllPropertyNames",
+      "API.GetAttributeFolderStructure",
+      "API.GetAttributeFolders",
+      "API.GetAttributesByType",
+      "API.GetAttributesIndices",
+      "API.GetBuildingMaterialAttributes",
+      "API.GetBuiltInContainerNavigatorItems",
+      "API.GetClassificationItemAvailability",
+      "API.GetClassificationSystemIds",
+      "API.GetClassificationSystems",
+      "API.GetClassificationsOfElements",
+      "API.GetComponentsOfElements",
+      "API.GetCompositeAttributes",
+      "API.GetDetailNavigatorItems",
+      "API.GetDetailsOfClassificationItems",
+      "API.GetDetailsOfProperties",
+      "API.GetDocument3DNavigatorItems",
+      "API.GetElementsByClassification",
+      "API.GetElementsByType",
+      "API.GetElementsRelatedToZones",
+      "API.GetElevationNavigatorItems",
+      "API.GetFillAttributes",
+      "API.GetInteriorElevationNavigatorItems",
+      "API.GetLayerAttributes",
+      "API.GetLayerCombinationAttributes",
+      "API.GetLayoutSettings",
+      "API.GetLineAttributes",
+      "API.GetNavigatorItemTree",
+      "API.GetNavigatorItemsType",
+      "API.GetPenTableAttributes",
+      "API.GetProductInfo",
+      "API.GetProfileAttributePreview",
+      "API.GetProfileAttributes",
+      "API.GetPropertyDefinitionAvailability",
+      "API.GetPropertyGroups",
+      "API.GetPropertyIds",
+      "API.GetPropertyValuesOfElementComponents",
+      "API.GetPropertyValuesOfElements",
+      "API.GetPublisherSetNames",
+      "API.GetSectionNavigatorItems",
+      "API.GetSelectedElements",
+      "API.GetStoryNavigatorItems",
+      "API.GetSurfaceAttributes",
+      "API.GetTypesOfElements",
+      "API.GetWorksheetNavigatorItems",
+      "API.GetZoneCategoryAttributes",
+      "API.IsAddOnCommandAvailable",
+      "API.IsAlive",
+      "API.MoveAttributesAndFolders",
+      "API.MoveNavigatorItem",
+      "API.RenameAttributeFolders",
+      "API.RenameNavigatorItem",
+      "API.SetClassificationsOfElements",
+      "API.SetLayoutSettings",
+      "API.SetPropertyValuesOfElements"
+    ],
+    "source": "INSTALLED_OFFICIAL_SDK_TYPED_CONSTRUCTORS_NO_CONNECTION",
+    "nativeRuntimeAcceptance": "NOT_VERIFIED"
+  }
+}

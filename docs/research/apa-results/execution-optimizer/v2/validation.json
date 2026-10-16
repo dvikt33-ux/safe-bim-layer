@@ -1,0 +1,66 @@
+{
+  "schema": "APA_V2_FOCUSED_OFFLINE_VALIDATION",
+  "suites": [
+    {
+      "suite": "test_apa_strategy_discovery",
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 32.672,
+      "status": "PASS"
+    },
+    {
+      "suite": "test_apa_strategy_discovery_v2",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 2.812,
+      "status": "PASS"
+    },
+    {
+      "suite": "test_apa_copy_first_native",
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.156,
+      "status": "PASS"
+    },
+    {
+      "suite": "test_apa_execution_optimizer",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 34.485,
+      "status": "PASS"
+    },
+    {
+      "suite": "test_apa_install_strategy_discovery",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.203,
+      "status": "PASS"
+    },
+    {
+      "suite": "test_apa_dynamic_bulk_create",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.031,
+      "status": "PASS"
+    }
+  ],
+  "pythonCompilation": "PASS",
+  "nativeArchicadCalls": 0,
+  "nativeWrites": 0,
+  "nativeValidation": "NOT_RUN_NO_ARCHICAD_PROCESS",
+  "benchmarkFixtureNotice": "Solver tests use SYNTHETIC TEST FIXTURES, not production speed evidence",
+  "environment": "Workspace-local TEMP/TMP; geometry dependency added only to host sys.path, not inherited by isolated solver",
+  "initialEnvironmentFailure": "Native solver returned no plan and installer temporary-file replace was denied in Windows sandbox TEMP; affected suites repeated with workspace TEMP"
+}

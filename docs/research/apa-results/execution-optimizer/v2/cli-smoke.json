@@ -1,0 +1,28 @@
+{
+  "status": "OFFLINE_CLI_PREVIEWS_PASS",
+  "fixtures": "SYNTHETIC_NOT_BDD",
+  "nativeCalls": 0,
+  "results": [
+    {
+      "fixture": "walls",
+      "status": "ONE_SOURCE_QUALIFIED_STRATEGY_PREPARED",
+      "command": "CreateWalls",
+      "calibrationStatus": "UNCALIBRATED",
+      "nativeWritePermission": false
+    },
+    {
+      "fixture": "slab",
+      "status": "ONE_SOURCE_QUALIFIED_STRATEGY_PREPARED",
+      "command": "CreateSlabs",
+      "calibrationStatus": "UNCALIBRATED",
+      "nativeWritePermission": false
+    },
+    {
+      "fixture": "windows",
+      "status": "ONE_SOURCE_QUALIFIED_STRATEGY_PREPARED",
+      "command": "CreateWindows",
+      "calibrationStatus": "UNCALIBRATED",
+      "nativeWritePermission": false
+    }
+  ]
+}
