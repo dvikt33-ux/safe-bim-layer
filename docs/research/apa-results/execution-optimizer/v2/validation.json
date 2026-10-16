@@ -14,10 +14,10 @@
       "suite": "test_apa_strategy_discovery_v2",
       "tests": 11,
       "failures": 0,
-      "errors": 1,
+      "errors": 0,
       "skipped": 0,
-      "seconds": 2.094,
-      "status": "FAIL"
+      "seconds": 2.812,
+      "status": "PASS"
     },
     {
       "suite": "test_apa_copy_first_native",

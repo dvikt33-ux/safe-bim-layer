@@ -287,6 +287,15 @@ def _catalog_find(router):
     return discovered, ineligible, len(commands)
 
 
+def _presence_key(row):
+    family = (row["type"], row["familySignature"], row["storyIndex"])
+    key = (family, *(round(row["anchor"][k], 7) for k in ("x", "y", "z")))
+    if row["type"] in {"Window", "Door"}:
+        owner = row.get("ownerWallGuid") or row.get("nativeCreateData", {}).get("ownerWallId", {}).get("guid")
+        key += (owner,)
+    return key
+
+
 def _native_create_targets(targets, present, v2=False):
     """Find complete typed create families WITHOUT inventing profile or stories.
 
@@ -298,9 +307,8 @@ def _native_create_targets(targets, present, v2=False):
     rows = []
     created_types = set()
     for target in targets:
-        f = (target["type"], target["familySignature"], target["storyIndex"])
         a = target["anchor"]
-        key = (f, *(round(a[k], 7) for k in ("x", "y", "z")))
+        key = _presence_key(target)
         if key in present:
             continue
         kind = target["type"]
@@ -471,10 +479,7 @@ def discover_native_execution_plan(router, intent, planner_python=None):
     for source in existing:
         require(source.get("nativeReadbackVerified") is True,
                 "AUTO_DISCOVERY_SOURCE_UNVERIFIED")
-        a = source["anchor"]
-        present.add(((source["type"], source["familySignature"],
-                      source["storyIndex"]),
-                     *(round(a[k], 7) for k in ("x", "y", "z"))))
+        present.add(_presence_key(source))
     if modifying:
         command, field, rows = _v2_modify_targets(targets, existing)
         if command in qualified:
