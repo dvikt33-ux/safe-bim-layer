@@ -47,6 +47,23 @@ class TestNativeCopy(unittest.TestCase):
         self.assertEqual(obj.execute.call_count,1)
         self.assertEqual(result["nativeCopyMetrics"]["requestedCopyCount"],100)
         self.assertEqual(result["readback"]["copyCount"],100)
+    def test_native_rectangular_grid_is_one_copy_batch(self):
+        obj=router()
+        execute_stub(obj,5)
+        result=obj.copy_rectangular_array(
+            object(),"APA_NATIVE_GRID_TEST",MASTER,"Column",2,3,
+            {"x":.6,"y":0,"z":0},{"x":0,"y":1.2,"z":0},
+            {"unmodified":"hash"},"sha","authorization",
+            lambda *_:{"status":"SOURCE_GRID_PASS"},
+            lambda a,b:verify(a,b,5))
+        rows=obj.prepare.call_args.args[1]["elementsWithMoveVectors"]
+        self.assertEqual(len(rows),5)
+        self.assertEqual(obj.execute.call_count,1)
+        self.assertEqual({(v["moveVector"]["x"],v["moveVector"]["y"])
+                          for v in rows},
+                         {(0,1.2),(0,2.4),(.6,0),(.6,1.2),(.6,2.4)})
+        self.assertEqual(result["readback"]["copyCount"],5)
+
     def test_no_zero_duplicate_or_unknown_host(self):
         obj=router()
         for vectors in ([{"x":0,"y":0,"z":0}],
