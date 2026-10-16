@@ -575,6 +575,30 @@ class DynamicCommands:
             'status':outcome.get('status'),
         })
 
+    def copy_linear_series(self, writer, scene_id, prototype_guid,
+                           prototype_type, count, step, retained_signatures,
+                           saved_sha256, authorization, verify_before,
+                           verify_after):
+        """Source-verified linear Multiply: source plus count translated copies.
+
+        count is number of NEW instances, step is metres per interval.
+        Uses a single existing MoveElements(copy=true) native batch instead
+        of count independent CreateColumns/CreateBeams calls.
+        """
+        if type(count) is not int or not 1 <= count <= 200:
+            raise ValueError('NATIVE_MULTIPLY_COUNT_OUT_OF_BOUNDS')
+        if (not isinstance(step, dict) or set(step) != {'x','y','z'}
+                or any(type(step[k]) not in (int,float)
+                       or not math.isfinite(step[k]) for k in step)
+                or not any(abs(step[k]) > 1e-8 for k in step)):
+            raise ValueError('NATIVE_MULTIPLY_NONZERO_FINITE_STEP_REQUIRED')
+        vectors=[{axis: step[axis]*i for axis in ('x','y','z')}
+                 for i in range(1,count+1)]
+        return self.copy_existing_many(
+            writer,scene_id,prototype_guid,prototype_type,vectors,
+            retained_signatures,saved_sha256,authorization,
+            verify_before,verify_after)
+
     def native_facts(self,workflow,model_step,elements_step,boxes_step=None):
         """Reuse existing BREP/IFC quantities; provider boxes remain separate."""
         import archicad_connected_components as C
