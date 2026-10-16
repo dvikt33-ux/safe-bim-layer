@@ -1,0 +1,112 @@
+{
+  "schema": "apa.bdd.2022.kr12.block1p7.north-window-two-source.v1",
+  "status": "PDF_VECTOR_DIMENSION_CHAIN_PLAN_CORRELATED__NATIVE_WRITE_NOT_YET_RUN",
+  "sourcePdf": "3_этап_КП_КОМФОРТ_без_замазок.pdf",
+  "sourceSheets": [
+    "КР-10 PDF page 12 top north wall plan",
+    "КР-12 PDF page 14 1.7 wall block elevation"
+  ],
+  "coordinateReference": {
+    "sourceWallTotalMillimeters": 14380,
+    "nativeWallReferenceLengthMillimeters": 14280,
+    "sourceExcessAtEachEndMillimeters": 50,
+    "sourceDrawingLeft": "West x=0 axis",
+    "nativeWallStart": "East x=14.28, y=9.38",
+    "nativeWallEnd": "West x=0, y=9.38",
+    "worldY": 9.38,
+    "sourceToNativeX_mm": "x_native = source_chain_mm - 50",
+    "nativeOffset_mm": "14280 - x_native"
+  },
+  "nativeHost": {
+    "guid": "7b332594-ab82-43b4-bfc2-ab5ad549c2c9",
+    "type": "Wall",
+    "zBottom": -0.1,
+    "zTop": 2.9,
+    "thickness": 0.25,
+    "begin": {
+      "x": 14.28,
+      "y": 9.38
+    },
+    "end": {
+      "x": 0,
+      "y": 9.38
+    }
+  },
+  "openings": [
+    {
+      "id": "KR12_1p7_WINDOW_WEST_1600",
+      "frameBeginSourceChainMm": 875,
+      "frameEndSourceChainMm": 2575,
+      "frameWidthMm": 1700,
+      "clearWidthMm": 1600,
+      "heightMm": 1500,
+      "sillZMm": 900,
+      "sourceChainCenterMm": 1725,
+      "nativeWorldCenterXmm": 1675,
+      "nativeCenterOffsetMm": 12605,
+      "worldCenter": {
+        "x": 1.675,
+        "y": 9.38
+      },
+      "kind": "Window",
+      "nativeParameters": {
+        "ownerWallId": {
+          "guid": "7b332594-ab82-43b4-bfc2-ab5ad549c2c9"
+        },
+        "centerOffset": 12.605,
+        "sillHeight": 0.9,
+        "width": 1.6,
+        "height": 1.5
+      }
+    },
+    {
+      "id": "KR12_1p7_WINDOW_MIDDLE_800",
+      "frameBeginSourceChainMm": 5820,
+      "frameEndSourceChainMm": 6720,
+      "frameWidthMm": 900,
+      "clearWidthMm": 800,
+      "heightMm": 1500,
+      "sillZMm": 900,
+      "sourceChainCenterMm": 6270,
+      "nativeWorldCenterXmm": 6220,
+      "nativeCenterOffsetMm": 8060,
+      "worldCenter": {
+        "x": 6.22,
+        "y": 9.38
+      },
+      "kind": "Window",
+      "nativeParameters": {
+        "ownerWallId": {
+          "guid": "7b332594-ab82-43b4-bfc2-ab5ad549c2c9"
+        },
+        "centerOffset": 8.06,
+        "sillHeight": 0.9,
+        "width": 0.8,
+        "height": 1.5
+      }
+    }
+  ],
+  "sourceCrosscheck": "North facade openings in KR-10 west-to-east order visually align with the framed intervals from KR-12 (source wall total 14.380m, axes 14.280m). Original PDF includes a 50mm member at each exterior end.",
+  "preexistingWindow": {
+    "guid": "5c63fa89-c4a9-4ec5-811a-d989cf1d8626",
+    "hostGuid": "323703e9-2bf2-4488-a24d-0ba20760400d",
+    "widthM": 1.5,
+    "heightM": 0.9,
+    "sillM": 1.1,
+    "centerOffsetM": 5.01,
+    "mustAlreadyExistInActivePLN": true,
+    "sourceReceipt": "https://github.com/dvikt33-ux/safe-bim-bridge/blob/main/safe-bim-mailbox/gpt-live/results/apa-bdd-scene-writer-window-1p8-20261016T171700Z-03d6f7b.json"
+  },
+  "prerequisites": {
+    "originalGUIDs": 261,
+    "physicalWindowAdded": 1,
+    "totalExpectedBefore": 262,
+    "workingPLNSavedAfterPreviousWindow": true,
+    "requirePriorSceneWriterLedgerPass": true,
+    "requireLocalBackup": true,
+    "rejectPreexistingOutputGuids": true
+  },
+  "unmappedOtherOpenings": "1.7 includes three door-like openings requiring type/handedness confirmation; leave untouched",
+  "warning": "Architectural construction tolerance and jamb linings not specified; source-based opening centreline is derived from timber-frame wall block dimension chain; no custom library-part selection.",
+  "writeAuthorizedForOnlyTheseTwoWindows": true
+}
