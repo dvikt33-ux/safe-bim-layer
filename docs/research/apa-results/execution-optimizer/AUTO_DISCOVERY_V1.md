@@ -22,7 +22,10 @@ how to construct typed native alternatives from **three** operation contracts:
 - `MoveElements(copy=true)`: all target families match verified live native
   prototypes through existing `DynamicCommands.plan_reuse_existing` (Column,
   Beam or Object) and produce <=200 native copies in one batch.
-- `CreateBeams`: the caller supplies complete native start/end points,\n  material, section and elevation for beams on the first story (index 0).\n  This prevents unsupported story-relative Z assumptions.\n- `CreateColumns`: the caller supplies complete per-target
+- `CreateBeams`: the caller supplies complete native start/end points,
+  material, section and elevation for beams on the first story (index 0).
+  This prevents unsupported story-relative Z assumptions.
+- `CreateColumns`: the caller supplies complete per-target
   `nativeCreateData`, matching target anchors/story and with explicit
   material, section and height; the adapter groups all rows in one native
   `CreateColumns` batch. No dimensions/materials/favorites are inferred.
