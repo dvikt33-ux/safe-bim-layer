@@ -64,6 +64,58 @@ class TestNativeCopy(unittest.TestCase):
                          {(0,1.2),(0,2.4),(.6,0),(.6,1.2),(.6,2.4)})
         self.assertEqual(result["readback"]["copyCount"],5)
 
+    def test_equal_distribution_between_extreme_points_uses_one_native_call(self):
+        obj=router()
+        execute_stub(obj,10)
+        result=obj.distribute_evenly_between(
+            object(),"EQUAL_10_STUDS",MASTER,"Column",
+            {"x":6.0,"y":0,"z":0},11,
+            {"unmodified":"hash"},"sha","auth",
+            lambda *_:{"status":"SOURCE_PASS"},
+            lambda a,b:verify(a,b,10))
+        rows=obj.prepare.call_args.args[1]["elementsWithMoveVectors"]
+        self.assertEqual(len(rows),10)
+        self.assertEqual(obj.execute.call_count,1)
+        self.assertEqual([round(row["moveVector"]["x"],3) for row in rows],
+                         [round(.6*i,3) for i in range(1,11)])
+        self.assertEqual(result["nativeCopyMetrics"]["requestedCopyCount"],10)
+
+    def test_polyline_distribution_preserves_source_and_places_uniformly(self):
+        obj=router()
+        execute_stub(obj,5)
+        result=obj.distribute_along_polyline(
+            object(),"POLYLINE_6_STUDS",MASTER,"Column",
+            [{"x":0,"y":0,"z":0},{"x":3,"y":0,"z":0},{"x":3,"y":3,"z":0}],
+            6,{"unmodified":"hash"},"sha","auth",
+            lambda *_:{"status":"SOURCE_PASS"},lambda a,b:verify(a,b,5))
+        rows=obj.prepare.call_args.args[1]["elementsWithMoveVectors"]
+        pos=[(round(x["moveVector"]["x"],3),round(x["moveVector"]["y"],3))
+             for x in rows]
+        self.assertEqual(pos,[(1.2,0),(2.4,0),(3,.6),(3,1.8),(3,3)])
+        self.assertEqual(obj.execute.call_count,1)
+        self.assertEqual(result["nativeCopyMetrics"]["requestedCopyCount"],5)
+
+    def test_source_distribution_rejects_duplicate_or_bad_grid(self):
+        obj=router()
+        with self.assertRaisesRegex(ValueError,"DISTRIBUTE_APPROVED_NONZERO_SPAN"):
+            obj.distribute_evenly_between(
+                object(),"s",MASTER,"Column",{"x":0,"y":0,"z":0},4,
+                {},"sha","auth",lambda *_:{"status":"PASS"},
+                lambda *_:{"status":"PASS"})
+        with self.assertRaisesRegex(ValueError,"ZERO_LENGTH_SEGMENT"):
+            obj.distribute_along_polyline(
+                object(),"s",MASTER,"Column",
+                [{"x":0,"y":0,"z":0},{"x":0,"y":0,"z":0}],
+                4,{},"sha","auth",lambda *_:{"status":"PASS"},
+                lambda *_:{"status":"PASS"})
+        with self.assertRaisesRegex(ValueError,"NATIVE_COPY_NO_DUPLICATE_OR_ZERO_OFFSET"):
+            obj.copy_rectangular_array(
+                object(),"s",MASTER,"Column",2,2,
+                {"x":1,"y":0,"z":0},{"x":2,"y":0,"z":0},
+                {},"sha","auth",lambda *_:{"status":"PASS"},
+                lambda *_:{"status":"PASS"})
+        obj.execute.assert_not_called()
+
     def test_no_zero_duplicate_or_unknown_host(self):
         obj=router()
         for vectors in ([{"x":0,"y":0,"z":0}],
