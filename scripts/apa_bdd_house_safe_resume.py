@@ -252,6 +252,22 @@ if __name__=="__main__":
         sys.exit(run(args))
     except Exception as exc:
         print("RESUME BLOCKED:",type(exc).__name__,str(exc),file=sys.stderr,flush=True)
+        if args.publish and STAGE_FILE.exists():
+            try:
+                state=json.loads(STAGE_FILE.read_text(encoding="utf-8"))
+                state["lastError"]={
+                    "type":type(exc).__name__,
+                    "message":str(exc)[:750],
+                    "atUTC":utcnow(),
+                }
+                state["status"]="BLOCKED_NEEDS_RECONCILIATION"
+                write_checkpoint(state)
+                print("PRIVATE GITHUB FAILURE REPORT:",
+                      B.publish_manifest(STAGE_FILE),flush=True)
+            except Exception as report_exc:
+                print("Failure report upload failed:",
+                      type(report_exc).__name__,str(report_exc)[:240],
+                      file=sys.stderr,flush=True)
         print("Do not rerun: live PLN may contain partially saved elements;"
               " inspect inFlight/lastAttempt journal first.",file=sys.stderr,flush=True)
         sys.exit(2)
