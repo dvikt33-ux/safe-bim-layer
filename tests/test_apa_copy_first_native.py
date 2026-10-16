@@ -116,6 +116,55 @@ class TestNativeCopy(unittest.TestCase):
                 lambda *_:{"status":"PASS"})
         obj.execute.assert_not_called()
 
+    def test_three_prototypes_shared_single_native_copy_transaction(self):
+        obj=router()
+        prototypes=["10000000-0000-4000-8000-000000000001",
+                    "10000000-0000-4000-8000-000000000002",
+                    "10000000-0000-4000-8000-000000000003"]
+        groups=[]
+        for idx,proto in enumerate(prototypes):
+            groups.append({
+              "prototypeGuid":proto,
+              "prototypeType":"Column",
+              "sourceRef":"KR-10 / wall family %s"%idx,
+              "displacements":[{"x":.6*j,"y":idx*3.0,"z":0} for j in range(1,21)]
+            })
+        def after_native(response,prior):
+            return {"status":"ALL_SOURCE_GROUPS_NATIVE_PASS",
+                    "newPhysicalCopyCount":60,
+                    "unchangedPrototypeGuids":prototypes}
+        def call(*args,**kwargs):
+            proof=args[8]({"executionResults":[{"success":True} for _ in range(60)]},{})
+            return {"status":"PASS","readback":proof}
+        obj.execute.side_effect=call
+        out=obj.copy_multiple_prototypes(
+            object(),"APA_NATIVE_MULTI_PROTO",groups,{"other":"hash"},
+            "sha","authorization",lambda *_:{"status":"PREPASS"},
+            after_native)
+        rows=obj.prepare.call_args.args[1]["elementsWithMoveVectors"]
+        self.assertEqual(len(rows),60)
+        self.assertEqual(obj.execute.call_count,1)
+        self.assertTrue(all(x["copy"] for x in rows))
+        self.assertEqual({x["elementId"]["guid"] for x in rows},set(prototypes))
+        self.assertEqual(out["nativeCopyMetrics"]["prototypeCount"],3)
+        self.assertEqual(out["nativeCopyMetrics"]["requestedCopyCount"],60)
+
+    def test_multi_prototype_missing_source_or_invalid_offsets_blocks(self):
+        obj=router()
+        group={"prototypeGuid":MASTER,"prototypeType":"Column",
+               "sourceRef":"","displacements":[{"x":1,"y":0,"z":0}]}
+        with self.assertRaisesRegex(ValueError,"EXISTING_PROTO_AND_SOURCE"):
+            obj.copy_multiple_prototypes(
+                object(),"s",[group],{},"sha","auth",
+                lambda *_:{"status":"PASS"},lambda *_:{"status":"PASS"})
+        group["sourceRef"]="KR-10"
+        group["displacements"]=[{"x":0,"y":0,"z":0}]
+        with self.assertRaisesRegex(ValueError,"NO_ZERO_OR_DUPLICATE"):
+            obj.copy_multiple_prototypes(
+                object(),"s",[group],{},"sha","auth",
+                lambda *_:{"status":"PASS"},lambda *_:{"status":"PASS"})
+        obj.execute.assert_not_called()
+
     def test_no_zero_duplicate_or_unknown_host(self):
         obj=router()
         for vectors in ([{"x":0,"y":0,"z":0}],
