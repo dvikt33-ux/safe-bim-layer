@@ -43,7 +43,7 @@ class CopyDeployment(unittest.TestCase):
 
     def test_upgrades_old_local_prepare_without_replacing_existing_apa(self):
         original=old_apa_fixture()
-        marker="        CONTRACTS._validator(self.catalog,command).validate(parameters)\\n"
+        marker="        CONTRACTS._validator(self.catalog,command).validate(parameters)\n"
         next_stmt="        if command in self.constructors and"
         start=SOURCE.index(marker)+len(marker)
         stop=SOURCE.index(next_stmt,start)
@@ -62,12 +62,12 @@ class CopyDeployment(unittest.TestCase):
 
     def test_policy_patch_rejects_unknown_prepare_customizations(self):
         original=old_apa_fixture()
-        marker="        CONTRACTS._validator(self.catalog,command).validate(parameters)\\n"
+        marker="        CONTRACTS._validator(self.catalog,command).validate(parameters)\n"
         next_stmt="        if command in self.constructors and"
         start=SOURCE.index(marker)+len(marker)
         stop=SOURCE.index(next_stmt,start)
         guard=SOURCE[start:stop]
-        old_apa=original.replace(guard,"        # user customized prepare in local checkout\\n")
+        old_apa=original.replace(guard,"        # user customized prepare in local checkout\n")
         with self.assertRaisesRegex(ValueError,"LOCAL_PREPARE_CUSTOMIZED"):
             I.inject(SOURCE,old_apa)
 
