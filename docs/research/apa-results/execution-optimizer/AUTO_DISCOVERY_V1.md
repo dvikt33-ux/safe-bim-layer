@@ -17,12 +17,12 @@ into APA itself, without inventing a second command catalog or BIM writer.
 
 The adapter scans the **entire existing dynamic command catalog** and policy
 review records. For repetitive source-qualified targets, it currently knows
-how to construct typed native alternatives from **two** operation contracts:
+how to construct typed native alternatives from **three** operation contracts:
 
 - `MoveElements(copy=true)`: all target families match verified live native
   prototypes through existing `DynamicCommands.plan_reuse_existing` (Column,
   Beam or Object) and produce <=200 native copies in one batch.
-- `CreateColumns`: the caller supplies complete per-target
+- `CreateBeams`: the caller supplies complete native start/end points,\n  material, section and elevation for beams on the first story (index 0).\n  This prevents unsupported story-relative Z assumptions.\n- `CreateColumns`: the caller supplies complete per-target
   `nativeCreateData`, matching target anchors/story and with explicit
   material, section and height; the adapter groups all rows in one native
   `CreateColumns` batch. No dimensions/materials/favorites are inferred.
@@ -32,7 +32,7 @@ validates the same native catalog schema, reviewed policy and BIM Graph.
 Unknown/unregistered command effects are rejected.
 
 **Limit:** reviewing the full catalog does NOT mean every command can already
-be compiled into a strategy. Other element types (Beam create, Wall,
+be compiled into a strategy. Other element types (Wall,
 morph, GDL object, IFC, MEP, stairs, drawing/issue commands, axis grids) need
 their own safe recipe adapters, source qualification and measurement.
 
