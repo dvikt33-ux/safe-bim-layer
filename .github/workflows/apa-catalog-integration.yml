@@ -1,0 +1,25 @@
+name: APA Catalog Selection and Additive Integration
+on:
+  pull_request:
+    paths:
+      - scripts/archicad_strategy_discovery.py
+      - scripts/apa_update_strategy_discovery.py
+      - tests/test_apa_catalog_integration.py
+      - tests/test_apa_update_strategy_discovery.py
+      - .github/workflows/apa-catalog-integration.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install 'jsonschema>=4,<5'
+      - run: python -m py_compile scripts/archicad_strategy_discovery.py scripts/apa_update_strategy_discovery.py
+      - run: python -m unittest discover -s tests -p 'test_apa_catalog_integration.py' -v
+      - run: python -m unittest discover -s tests -p 'test_apa_update_strategy_discovery.py' -v

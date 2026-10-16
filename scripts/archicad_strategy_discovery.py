@@ -405,6 +405,8 @@ def discover_native_execution_plan(router, intent, planner_python=None):
     Return either chosen APA_NATIVE_TASK_PREVIEW_V1 (no execution permission)
     or a shortlist requiring real, comparable benchmarks. Never modify PLN.
     """
+    if isinstance(intent, dict) and intent.get("schemaVersion") == "apa-capability-task/1":
+        return discover_catalog_task(router, intent, planner_python)
     require(isinstance(intent, dict) and set(intent) == {
         "schemaVersion", "request", "existing", "targets", "benchmarks"
     } and intent.get("schemaVersion") in {"apa-native-auto/1", "apa-native-auto/2"},
@@ -587,6 +589,7 @@ def discover_native_execution_plan(router, intent, planner_python=None):
 
     missing = [row["command"] for row in measured if "estimatedCostMs" not in row]
     if missing:
+        import archicad_project_accelerator as APA
         return {
             "schema": "APA_AUTO_NATIVE_TASK_V1",
             "status": "COST_COMPARISON_BLOCKED_UNCALIBRATED_ALTERNATIVES",
@@ -600,6 +603,10 @@ def discover_native_execution_plan(router, intent, planner_python=None):
                  "costEvidenceRef": row.get("costEvidenceRef")}
                 for row in measured
             ],
+            "alternatives": [{"id": row["id"], "graph": row["graph"],
+                "executionBlockers": [], "nativeTaskPreview": APA.prepare_native_task(router, {
+                    "schemaVersion": "apa-native-task/1", "request": intent["request"],
+                    "graph": row["graph"]})} for row in measured],
             "discovery": discovery,
             "nativeWritePermission": False,
             "automaticNativeExecution": False,
@@ -628,6 +635,313 @@ def discover_native_execution_plan(router, intent, planner_python=None):
     }
 
 
+def connect_existing_catalog_sources(router):
+    """Reuse shipped snapshots, official SDK extraction and reviewed manifest.
+
+    Missing snapshot entries are attached by the existing source-only API;
+    current contracts and caller policies are never overwritten. Policies are
+    imported only when their existing per-command contract hash matches.
+    """
+    from pathlib import Path
+    from archicad_batch_contracts import load_catalog
+    root = Path(router.A.__file__).resolve().parents[1]
+    attached = []
+    for filename in ("dynamic-runtime-catalog.json", "dynamic-restored-runtime-catalog.json"):
+        path = root/"schemas"/"accelerator"/filename
+        if path.is_file():
+            added = router.include_source_snapshot(load_catalog(path), "discovery_"+filename.split(".")[0].replace("-", "_"))
+            attached.extend(added)
+    official_status = "OFFICIAL_SDK_NOT_INSTALLED"
+    try:
+        import importlib.metadata
+        import archicad
+        if importlib.metadata.version("archicad").split(".")[0] == "29":
+            from archicad_dynamic_commands import official_catalog
+            # Constructor placeholder is introspected, never dispatched.
+            rows, constructors = official_catalog(archicad.Commands(object()))
+            missing = {k: v for k, v in rows.items() if k not in router.catalog["commands"]}
+            # Upgrade only historical source-only placeholders to installed
+            # official typed contracts. Preserve caller-reviewed/current rows.
+            missing.update({k: v for k, v in rows.items()
+                            if router.catalog["commands"].get(k, {}).get("sourceSnapshot")
+                            and k not in router.policies})
+            router.catalog["commands"].update(missing)
+            router.constructors.update({k: constructors[k] for k in missing})
+            router.fingerprint = router.A.RUN.digest(router.catalog)
+            attached.extend(missing)
+            official_status = "OFFICIAL_AC29_TYPED_METADATA_NO_CONNECTION"
+        else:
+            official_status = "OFFICIAL_SDK_VERSION_NOT_AC29_NOT_ATTACHED"
+    except ImportError:
+        pass
+    path = root/"schemas"/"accelerator"/"mass-capabilities"/"operation-effects.json"
+    imported, drift = [], []
+    if path.is_file():
+        manifest = json.loads(path.read_text(encoding="utf-8-sig"))
+        policies = {}
+        for name, policy in manifest["operations"].items():
+            if name not in router.catalog["commands"] or name in router.policies:
+                continue
+            if manifest.get("contractHashes", {}).get(name) == router.contract_hash(name):
+                policies[name] = policy
+            else:
+                drift.append(name)
+        if policies:
+            router.load_policies({"catalogHash": router.fingerprint, "operations": policies})
+            imported = sorted(policies)
+    # Reuse code-owned effect sets for the existing Grid/ExactStair extension.
+    # These commands are absent from the older mass-effect manifest; their
+    # source-only availability still prevents executable selection.
+    import archicad_native_spatial_tools as spatial
+    source_hash = hashlib.sha256(Path(spatial.__file__).read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+    for name in router.catalog["commands"]:
+        bare = name.rsplit(".", 1)[-1]
+        if name not in router.policies and bare in spatial.COMMANDS | spatial.READS:
+            effect = "CREATE" if bare in spatial.CREATES else "MODIFY" if bare in spatial.EDITS else "READ_ONLY"
+            router.review_policy(name, effect, "READ_ONLY" if effect == "READ_ONLY" else "MODEL", {
+                "source": "Existing native spatial code-owned effect sets and semantic qualifier; not runtime acceptance",
+                "sha256": source_hash})
+            imported.append(name)
+    return {"attachedSourceOrOfficialContracts": sorted(attached), "officialSDK": official_status,
+            "importedMatchingExistingPolicies": imported, "policyContractDriftNotImported": drift,
+            "nativeCalls": 0}
+
+
+def catalog_capabilities(router):
+    """A view of ALL existing contracts and policies, never a second catalog.
+
+    Element hints aid discovery only; effect authority comes from the existing
+    reviewed policy. Current runtime registration is reported independently.
+    """
+    import re
+    import archicad_bim_graph as G
+    connect_existing_catalog_sources(router)
+    view = []
+    for name, contract in router.catalog["commands"].items():
+        selected = router.select(name)
+        text = re.sub(r"([a-z])([A-Z])", r"\1 \2", name + " " + contract.get("description", ""))
+        hints = set(contract.get("elementTypes", contract.get("supportedElementTypes", [])))
+        if name in G.CREATES:
+            hints.add(G.CREATES[name])
+        for kind in router.catalog.get("element_types", []):
+            if re.search(r"\b" + re.escape(kind) + r"(?:s|Elements?)?\b", text, re.I):
+                hints.add(kind)
+        # Existing native variation identifiers are discoverable hints too.
+        if "Grid" in name:
+            hints.add("GridElement")
+        view.append({"command": name, "description": contract.get("description", ""),
+            "category": contract.get("category"), "inputSchema": contract.get("parameters"),
+            "outputSchema": contract.get("returns"), "elementTypes": sorted(hints),
+            "elementTypeAuthority": "EXISTING_TYPED_CREATES_OR_CONTRACT_METADATA_OR_IDENTIFIER_HINT",
+            "effect": selected["effect"], "policy": selected.get("policy"),
+            "availability": contract.get("availability"),
+            "runtimeRegistered": selected.get("runtimeRegistered"),
+            "runtimeStatus": "REGISTERED" if selected.get("runtimeRegistered") is True else
+                "UNAVAILABLE" if selected.get("runtimeRegistered") is False else "NOT_PROBED",
+            "executionBlocker": contract.get("executionBlocker"),
+            "sourceOnly": bool(contract.get("sourceSnapshot") or contract.get("availability") in {
+                "SOURCE_CONTRACT_NOT_RUNTIME_PROBED", "SOURCE_SNAPSHOT_NOT_RUNTIME_PROBED"}),
+            "contractHash": router.contract_hash(name)})
+    return view
+
+
+def _catalog_task_links(router, graph, selected):
+    """Reuse typed result pointers; add semantic host checks before dispatch."""
+    import archicad_bim_graph as G
+    by_id = {op["id"]: op for op in graph["operations"]}
+    def walk(value, path, consumer):
+        if isinstance(value, dict) and "$result" in value:
+            ref = value["$result"]
+            require(set(value) == {"$result"} and isinstance(ref, dict)
+                    and set(ref) == {"step", "pointer"} and ref["step"] in by_id,
+                    "AUTO_CATALOG_INVALID_RESULT_BINDING")
+            producer = by_id[ref["step"]]
+            router._schema_at(router.catalog["commands"][producer["command"]]["returns"], ref["pointer"])
+            expected = next((kind for field, kind in G.HOST_REFERENCE_KEYS.items()
+                             if path.endswith("." + field + ".guid")), None)
+            if expected:
+                require(expected in selected[ref["step"]]["elementTypes"]
+                        and selected[ref["step"]]["effect"] == "CREATE"
+                        and ref["pointer"].endswith("/elementId/guid"),
+                        "AUTO_CATALOG_GENERATED_HOST_TYPE_MISMATCH")
+                # The existing host-fit/overlap checks understand $createdGuid.
+                # Use that representation ONLY in the secondary offline check;
+                # executable bindings remain the original $result pointers.
+                require(ref["pointer"] == "/elements/0/elementId/guid"
+                        and len(next(iter(producer["params"].values()))) == 1,
+                        "AUTO_CATALOG_GENERATED_WALL_HOST_REQUIRES_SINGLE_EXACT_RESULT")
+            return {"$createdGuid": ref["step"]} if expected else value
+        if isinstance(value, dict):
+            return {k: walk(v, path+"."+k, consumer) for k, v in value.items()}
+        if isinstance(value, list):
+            return [walk(v, path+"["+str(i)+"]", consumer) for i, v in enumerate(value)]
+        return value
+    checked = immutable(graph)
+    for op in checked["operations"]:
+        op["params"] = walk(op["params"], "$", op)
+    errors = []
+    by_id = {op["id"]: op for op in checked["operations"]}
+    for op in checked["operations"]:
+        errors.extend(G._hosted_fit_errors(op, by_id))
+    errors.extend(str(v) for v in G._hosted_overlap_errors(checked["operations"]).values())
+    require(not errors, "AUTO_CATALOG_HOST_FIT_OR_OVERLAP:" + str(errors)[:300])
+
+
+def _existing_semantic_qualification(step, command):
+    """Connect existing narrow qualifiers; no rewritten BIM algorithms."""
+    from archicad_native_spatial_tools import COMMANDS, qualify_operation
+    bare = command.rsplit(".", 1)[-1]
+    proof = step["sourceVerification"]
+    owned, retained = set(proof.get("ownedGuids", [])), set(proof.get("retainedGuids", []))
+    if bare in COMMANDS:
+        qualify_operation(bare, step["parameters"], owned, retained)
+    elif bare in {"CreateRoofs", "ModifyRoofs"}:
+        from archicad_native_roof_editing import qualify_operation as roof_qualify
+        roof_qualify(bare, step["parameters"], owned, retained)
+    elif bare in {"CreateMorphs", "ModifyMorphs"}:
+        require(proof.get("nativeAlternativesExhausted") is True
+                and isinstance(proof.get("nativeAlternativeEvidence"), str)
+                and len(proof["nativeAlternativeEvidence"].strip()) >= 8,
+                "AUTO_CATALOG_MORPH_LAST_RESORT_EVIDENCE_REQUIRED")
+        if bare == "CreateMorphs":
+            rows = step["parameters"].get("morphsData", [])
+            require(rows and all(("size" in row) != ("body" in row) for row in rows),
+                    "AUTO_CATALOG_MORPH_EXACT_SIZE_OR_BODY_REQUIRED")
+    elif bare == "CreateOpenings":
+        rows = step["parameters"].get("openingsData", [])
+        require(rows and all({"ownerElementId", "basePoint", "width", "height"} <= set(row) for row in rows),
+                "AUTO_CATALOG_OPENING_EXACT_HOST_PLACEMENT_AND_SIZE_REQUIRED")
+
+
+def select_catalog_alternative(auto_preview, strategy_id):
+    """Explicit choice of a prepared candidate, with no fastest/permission claim."""
+    require(auto_preview.get("schema") == "APA_AUTO_NATIVE_TASK_V1"
+            and auto_preview.get("nativeWritePermission") is False
+            and auto_preview.get("automaticNativeExecution") is False,
+            "AUTO_CATALOG_INVALID_ALTERNATIVE_PREVIEW")
+    candidates = auto_preview.get("alternatives", [])
+    candidate = next((c for c in candidates if c["id"] == strategy_id), None)
+    require(candidate is not None and not candidate["executionBlockers"],
+            "AUTO_CATALOG_ALTERNATIVE_UNAVAILABLE_OR_SOURCE_ONLY")
+    result = immutable(auto_preview)
+    result.update(status="ONE_SOURCE_QUALIFIED_STRATEGY_PREPARED",
+                  selectedStrategyId=strategy_id,
+                  selectedNativeTaskPreview=candidate["nativeTaskPreview"],
+                  selectionMethod="EXPLICIT_CANDIDATE_CHOICE_NOT_COST_OPTIMIZATION")
+    return result
+
+
+def discover_catalog_task(router, intent, planner_python=None):
+    """Bind qualified BIM inputs to matching existing schemas, then BIM Graph.
+
+    Steps describe effect, impact, type and prepared parameter data, not command
+    names or manually enumerated alternative workflows. All compatible contract
+    assignments are compiled by the ORIGINAL graph implementation. Source-only
+    and unprobed runtime states remain explicit. No native calls occur here.
+    """
+    from itertools import product
+    import archicad_project_accelerator as APA
+    require(set(intent) == {"schemaVersion", "request", "steps", "measurements"}
+            and isinstance(intent["request"], str) and intent["request"].strip()
+            and isinstance(intent["steps"], list) and 1 <= len(intent["steps"]) <= 100
+            and isinstance(intent["measurements"], dict), "AUTO_CATALOG_TASK_SCHEMA_REQUIRED")
+    steps = immutable(intent["steps"])
+    capabilities = catalog_capabilities(router)
+    matches, reports, ids = [], [], set()
+    for step in steps:
+        require(isinstance(step, dict) and {"id", "effect", "impact", "parameters", "sourceVerification"} <= set(step)
+                <= {"id", "effect", "impact", "parameters", "sourceVerification", "elementType", "outputFields", "after"}
+                and step["id"] not in ids, "AUTO_CATALOG_TYPED_UNIQUE_STEP_REQUIRED")
+        ids.add(step["id"])
+        proof = step["sourceVerification"]
+        require(proof.get("status") == "SOURCE_VERIFIED"
+                and proof.get("dataHash") == source_data_hash(step)
+                and isinstance(proof.get("evidenceRef"), str) and len(proof["evidenceRef"].strip()) >= 8,
+                "AUTO_CATALOG_STEP_SOURCE_QUALIFICATION_REQUIRED")
+        possible = []
+        for cap in capabilities:
+            if (cap["effect"] != step["effect"] or cap["effect"] == "UNKNOWN"
+                    or (cap["policy"] or {}).get("impact") != step["impact"]
+                    or cap["executionBlocker"] or cap["runtimeRegistered"] is False
+                    or cap["availability"] in {"NOT_EXPOSED", "UNAVAILABLE", "NOT_TESTED"}):
+                continue
+            if step.get("elementType") and step["elementType"] not in cap["elementTypes"]:
+                continue
+            schema = cap["inputSchema"] or {}
+            while "$ref" in schema:
+                schema = router.catalog["common_schemas"][schema["$ref"][2:]]
+            # Open object schemas do not establish that arbitrary input fields
+            # have the requested meaning. Require declared contract fields.
+            if not isinstance(step["parameters"], dict) or set(step["parameters"]) - set(schema.get("properties", {})):
+                continue
+            try:
+                for field in step.get("outputFields", []):
+                    router._schema_at(cap["outputSchema"], "/"+field)
+            except (KeyError, TypeError, ValueError):
+                continue
+            possible.append(cap)
+        matches.append(possible)
+        reports.append({"step": step["id"], "matchingCommands": [c["command"] for c in possible]})
+    count = math.prod(len(options) for options in matches)
+    require(count <= 32, "AUTO_CATALOG_AMBIGUOUS_TASK_REFINE_TYPED_REQUIREMENTS_MAX_32")
+    alternatives, rejected = [], []
+    for assignment in product(*matches):
+        graph = {"operations": [{"id": s["id"], "command": cap["command"],
+                  "params": s["parameters"], "after": s.get("after", [])}
+                 for s, cap in zip(steps, assignment)]}
+        try:
+            for step, cap in zip(steps, assignment):
+                _existing_semantic_qualification(step, cap["command"])
+            _catalog_task_links(router, graph, {s["id"]: c for s, c in zip(steps, assignment)})
+            preview = APA.prepare_native_task(router, {"schemaVersion": "apa-native-task/1",
+                                      "request": intent["request"], "graph": graph})
+        except (ValueError, TypeError, KeyError, ValidationError, SchemaError) as exc:
+            rejected.append(str(exc)[:400])
+            continue
+        key = "catalog_" + preview["sourcePlanHash"][:24]
+        alternatives.append({"id": key, "graph": graph, "nativeTaskPreview": preview,
+            "commands": [c["command"] for c in assignment],
+            "nativeCallCount": sum(router.catalog["commands"][c["command"]].get("api") != "local-python" for c in assignment),
+            "executionBlockers": ["SOURCE_CONTRACT_REQUIRES_RUNTIME_QUALIFICATION:"+c["command"] for c in assignment if c["sourceOnly"]],
+            "runtimeRegistration": {c["command"]: c["runtimeStatus"] for c in assignment}})
+    result = {"schema": "APA_AUTO_NATIVE_TASK_V1", "status": "NO_COMPLETE_CATALOG_STRATEGY",
+        "adapterVersion": 3, "catalogCommandCount": len(capabilities), "stepDiscovery": reports,
+        "alternatives": alternatives, "rejectedStrategies": rejected,
+        "nativeWritePermission": False, "automaticNativeExecution": False,
+        "selectedNativeTaskPreview": None, "calibrationStatus": "UNCALIBRATED",
+        "measurementTaskHash": source_data_hash({"request": intent["request"], "steps": steps}),
+        "sourceQualification": "CALLER_SUPPLIED_QUALIFIED_BIM_INPUTS_REVALIDATED_BY_EXISTING_OPERATION_SCOPES"}
+    if not alternatives:
+        return result
+    if len(alternatives) == 1:
+        result["status"] = "SOURCE_CONTRACT_PLAN_REQUIRES_RUNTIME_QUALIFICATION"
+        if not alternatives[0]["executionBlockers"]:
+            result = select_catalog_alternative(result, alternatives[0]["id"])
+            result["selectionMethod"] = "SOLE_SCHEMA_AND_SOURCE_QUALIFIED_CATALOG_ASSIGNMENT"
+        return result
+    result["status"] = "QUALIFIED_CATALOG_ALTERNATIVES_UNCALIBRATED"
+    costed = []
+    for alt in alternatives:
+        measurement = intent["measurements"].get(alt["nativeTaskPreview"]["sourcePlanHash"])
+        if measurement is None or alt["executionBlockers"]:
+            return result
+        expected_hashes = {c: router.contract_hash(c) for c in alt["commands"]}
+        require(set(measurement) == {"endToEndMs", "measurementKind", "evidenceRef", "contractHashes", "taskHash"}
+                and measurement["measurementKind"] == "NATIVE_END_TO_END"
+                and measurement["taskHash"] == result["measurementTaskHash"]
+                and measurement["contractHashes"] == expected_hashes,
+                "AUTO_CATALOG_COMPARABLE_COMPLETE_WORKFLOW_MEASUREMENT_REQUIRED")
+        costed.append({"id": alt["id"], "graph": alt["graph"], "nativeCallCount": alt["nativeCallCount"],
+                       "estimatedCostMs": measurement["endToEndMs"], "costEvidenceRef": measurement["evidenceRef"]})
+    winner = prepare_optimized_native_task(router, intent["request"], costed, planner_python)
+    result.update(status="COST_OPTIMAL_SOURCE_QUALIFIED_STRATEGY_PREPARED",
+                  selectedStrategyId=winner["selectedStrategyId"],
+                  selectedNativeTaskPreview=winner["selectedNativeTaskPreview"],
+                  selectionMethod="EXISTING_FAST_DOWNWARD_COMPLETE_GRAPH_COSTS",
+                  calibrationStatus="MEASURED", compared=winner["compared"])
+    return result
+
+
 def main():
     """Offline preview CLI over the SAME router, policies, graph and APA API."""
     import argparse
@@ -637,16 +951,17 @@ def main():
     parser.add_argument("--intent", required=True)
     parser.add_argument("--schema", required=True,
                         help="Existing pinned provider schema; never queries Archicad")
-    parser.add_argument("--reviewed-policies", required=True,
-                        help="JSON command -> existing reviewed kind/impact/evidence records")
+    parser.add_argument("--reviewed-policies",
+                        help="Optional existing reviewed policies; matching shipped policies are reused otherwise")
     parser.add_argument("--planner-python")
     args = parser.parse_args()
     router = APA.native_command_router(Path(args.schema))
-    policies = json.loads(Path(args.reviewed_policies).read_text(encoding="utf-8-sig"))
+    policies = json.loads(Path(args.reviewed_policies).read_text(encoding="utf-8-sig")) if args.reviewed_policies else {}
     for name, policy in policies.items():
         require(policy["evidence"]["sha256"] == router.contract_hash(name),
                 "AUTO_DISCOVERY_REVIEWED_POLICY_CONTRACT_DRIFT:" + name)
         router.review_policy(name, policy["kind"], policy["impact"], policy["evidence"])
+    connect_existing_catalog_sources(router)
     result = discover_native_execution_plan(router,
         json.loads(Path(args.intent).read_text(encoding="utf-8-sig")), args.planner_python)
     print(json.dumps(result, ensure_ascii=False, indent=2))

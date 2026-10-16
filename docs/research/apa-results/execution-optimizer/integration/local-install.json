@@ -1,0 +1,29 @@
+{
+  "schema": "APA_DISCOVERY_ADDITIVE_UPDATE_V1",
+  "status": "INTEGRATED_DISCOVERY_INSTALLED_ORIGINAL_CORE_PRESERVED",
+  "coreSHA256": "5ce7cbb91c8f799265a541f79922b50455fecf661ed9278a1cc4ffaff766ba4b",
+  "corePreservedByteForByte": true,
+  "dynamicUnchangedPrefixBytes": 53881,
+  "dynamicUnchangedSuffixBytes": 4845,
+  "files": [
+    {
+      "name": "archicad_strategy_discovery.py",
+      "beforeSHA256": "66b81202fcd10c2dda8a5f8c1596de8a57f6a6437ff9cf30e0f5e42654fccd5c",
+      "afterSHA256": "d3af7643edd3d0af8f966d7ae23b58d7d6f0112f283786621c2300ad4dc1d0bb"
+    },
+    {
+      "name": "archicad_dynamic_commands.py",
+      "beforeSHA256": "7db188ca659197197574daf7f6a48d2a29662c3babfb7aee5aadec1ba97bc4e4",
+      "afterSHA256": "8effd2f294197179b4b18b785de80f7f78091649e7f105ee4cf66877dbe0e6f8"
+    }
+  ],
+  "nativeCalls": 0,
+  "nativeWrites": 0,
+  "applied": true,
+  "dependencyAdditions": {
+    "numpy": "2.4.6",
+    "shapely": "2.2.0",
+    "otherPackagesUpdated": false
+  },
+  "actualPriorUpdateRollbackVerified": true
+}

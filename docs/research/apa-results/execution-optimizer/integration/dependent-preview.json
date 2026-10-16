@@ -1,0 +1,280 @@
+{
+  "adapterVersion": 3,
+  "alternatives": [
+    {
+      "commands": [
+        "CreateWindows",
+        "CreateWalls"
+      ],
+      "executionBlockers": [],
+      "graph": {
+        "operations": [
+          {
+            "after": [],
+            "command": "CreateWindows",
+            "id": "window",
+            "params": {
+              "windowsData": [
+                {
+                  "centerOffset": 1.0,
+                  "height": 1.0,
+                  "libraryPartName": "TEST_EXACT_Window",
+                  "oSide": false,
+                  "ownerWallId": {
+                    "guid": {
+                      "$result": {
+                        "pointer": "/elements/0/elementId/guid",
+                        "step": "host"
+                      }
+                    }
+                  },
+                  "refSide": false,
+                  "reflected": false,
+                  "sillHeight": 1.0,
+                  "width": 0.8
+                }
+              ]
+            }
+          },
+          {
+            "after": [],
+            "command": "CreateWalls",
+            "id": "host",
+            "params": {
+              "wallsData": [
+                {
+                  "arcAngle": 0.0,
+                  "begCoordinate": {
+                    "x": 0,
+                    "y": 0.0
+                  },
+                  "buildingMaterialId": {
+                    "guid": "22222222-2222-4222-8222-222222222222"
+                  },
+                  "endCoordinate": {
+                    "x": 4.0,
+                    "y": 0.0
+                  },
+                  "floorIndex": 1,
+                  "height": 3.0,
+                  "offset": 0.0,
+                  "referenceLineLocation": "Center",
+                  "structureType": "Basic",
+                  "thickness": 0.2,
+                  "zCoordinate": 0.2
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "id": "catalog_6f6f9bdc4f103824ae0b43ab",
+      "nativeCallCount": 2,
+      "nativeTaskPreview": {
+        "executionPermission": false,
+        "executor": "SceneWriter",
+        "intentHash": "3c24fea8b837bc2589f04a38ed4f3fc6de263c44595eccf5b71ae10b0f9ec188",
+        "request": "OFFLINE INTEGRATION FIXTURE",
+        "schema": "APA_NATIVE_TASK_PREVIEW_V1",
+        "sourcePlanHash": "6f6f9bdc4f103824ae0b43ab319c2f94c4985cd07c39df3a8cc1136773185896",
+        "toolSelection": "GPT_SELECTED_SCHEMAS_NOT_AUTOMATIC_DIMENSION_INFERENCE",
+        "workflow": {
+          "catalogHash": "630472af0cf50bb98dbb31e5638012ba652ad47a57c0e15046e5095a97de1800",
+          "dependencies": {
+            "host": [],
+            "window": [
+              "host"
+            ]
+          },
+          "executionOrder": [
+            "host",
+            "window"
+          ],
+          "executionPermission": false,
+          "graph": {
+            "operations": [
+              {
+                "after": [],
+                "command": "CreateWindows",
+                "id": "window",
+                "params": {
+                  "windowsData": [
+                    {
+                      "centerOffset": 1.0,
+                      "height": 1.0,
+                      "libraryPartName": "TEST_EXACT_Window",
+                      "oSide": false,
+                      "ownerWallId": {
+                        "guid": {
+                          "$result": {
+                            "pointer": "/elements/0/elementId/guid",
+                            "step": "host"
+                          }
+                        }
+                      },
+                      "refSide": false,
+                      "reflected": false,
+                      "sillHeight": 1.0,
+                      "width": 0.8
+                    }
+                  ]
+                }
+              },
+              {
+                "after": [],
+                "command": "CreateWalls",
+                "id": "host",
+                "params": {
+                  "wallsData": [
+                    {
+                      "arcAngle": 0.0,
+                      "begCoordinate": {
+                        "x": 0,
+                        "y": 0.0
+                      },
+                      "buildingMaterialId": {
+                        "guid": "22222222-2222-4222-8222-222222222222"
+                      },
+                      "endCoordinate": {
+                        "x": 4.0,
+                        "y": 0.0
+                      },
+                      "floorIndex": 1,
+                      "height": 3.0,
+                      "offset": 0.0,
+                      "referenceLineLocation": "Center",
+                      "structureType": "Basic",
+                      "thickness": 0.2,
+                      "zCoordinate": 0.2
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "policyHash": "bacacf2862a1320889b89d137394f1c9cbe3e4e3e7f19c8453e73629cd4c0027",
+          "schema": "APA_DYNAMIC_BIM_WORKFLOW_V1",
+          "sourcePlanHash": "6f6f9bdc4f103824ae0b43ab319c2f94c4985cd07c39df3a8cc1136773185896",
+          "templatePlanHash": "8b20b958c90aa998907d996a0445e04cbba7a801722dd795cb1b87750c28ed67"
+        }
+      },
+      "runtimeRegistration": {
+        "CreateWalls": "NOT_PROBED",
+        "CreateWindows": "NOT_PROBED"
+      }
+    }
+  ],
+  "automaticNativeExecution": false,
+  "calibrationStatus": "UNCALIBRATED",
+  "catalogCommandCount": 378,
+  "measurementTaskHash": "f4f51e6e1979703b6bdb50bbbf7b7f044fbc26397b2a8002175c6a1f6063e732",
+  "nativeWritePermission": false,
+  "rejectedStrategies": [],
+  "schema": "APA_AUTO_NATIVE_TASK_V1",
+  "selectedNativeTaskPreview": {
+    "schema": "APA_NATIVE_TASK_PREVIEW_V1",
+    "request": "OFFLINE INTEGRATION FIXTURE",
+    "intentHash": "3c24fea8b837bc2589f04a38ed4f3fc6de263c44595eccf5b71ae10b0f9ec188",
+    "workflow": {
+      "schema": "APA_DYNAMIC_BIM_WORKFLOW_V1",
+      "graph": {
+        "operations": [
+          {
+            "id": "window",
+            "command": "CreateWindows",
+            "params": {
+              "windowsData": [
+                {
+                  "centerOffset": 1.0,
+                  "height": 1.0,
+                  "libraryPartName": "TEST_EXACT_Window",
+                  "oSide": false,
+                  "ownerWallId": {
+                    "guid": {
+                      "$result": {
+                        "pointer": "/elements/0/elementId/guid",
+                        "step": "host"
+                      }
+                    }
+                  },
+                  "refSide": false,
+                  "reflected": false,
+                  "sillHeight": 1.0,
+                  "width": 0.8
+                }
+              ]
+            },
+            "after": []
+          },
+          {
+            "id": "host",
+            "command": "CreateWalls",
+            "params": {
+              "wallsData": [
+                {
+                  "arcAngle": 0.0,
+                  "begCoordinate": {
+                    "x": 0,
+                    "y": 0.0
+                  },
+                  "buildingMaterialId": {
+                    "guid": "22222222-2222-4222-8222-222222222222"
+                  },
+                  "endCoordinate": {
+                    "x": 4.0,
+                    "y": 0.0
+                  },
+                  "floorIndex": 1,
+                  "height": 3.0,
+                  "offset": 0.0,
+                  "referenceLineLocation": "Center",
+                  "structureType": "Basic",
+                  "thickness": 0.2,
+                  "zCoordinate": 0.2
+                }
+              ]
+            },
+            "after": []
+          }
+        ]
+      },
+      "catalogHash": "630472af0cf50bb98dbb31e5638012ba652ad47a57c0e15046e5095a97de1800",
+      "policyHash": "bacacf2862a1320889b89d137394f1c9cbe3e4e3e7f19c8453e73629cd4c0027",
+      "sourcePlanHash": "6f6f9bdc4f103824ae0b43ab319c2f94c4985cd07c39df3a8cc1136773185896",
+      "templatePlanHash": "8b20b958c90aa998907d996a0445e04cbba7a801722dd795cb1b87750c28ed67",
+      "executionOrder": [
+        "host",
+        "window"
+      ],
+      "dependencies": {
+        "window": [
+          "host"
+        ],
+        "host": []
+      },
+      "executionPermission": false
+    },
+    "sourcePlanHash": "6f6f9bdc4f103824ae0b43ab319c2f94c4985cd07c39df3a8cc1136773185896",
+    "executor": "SceneWriter",
+    "executionPermission": false,
+    "toolSelection": "GPT_SELECTED_SCHEMAS_NOT_AUTOMATIC_DIMENSION_INFERENCE"
+  },
+  "sourceQualification": "CALLER_SUPPLIED_QUALIFIED_BIM_INPUTS_REVALIDATED_BY_EXISTING_OPERATION_SCOPES",
+  "status": "ONE_SOURCE_QUALIFIED_STRATEGY_PREPARED",
+  "stepDiscovery": [
+    {
+      "matchingCommands": [
+        "CreateWindows"
+      ],
+      "step": "window"
+    },
+    {
+      "matchingCommands": [
+        "CreateWalls"
+      ],
+      "step": "host"
+    }
+  ],
+  "selectedStrategyId": "catalog_6f6f9bdc4f103824ae0b43ab",
+  "selectionMethod": "SOLE_SCHEMA_AND_SOURCE_QUALIFIED_CATALOG_ASSIGNMENT"
+}
