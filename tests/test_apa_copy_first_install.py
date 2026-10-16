@@ -54,7 +54,13 @@ class CopyDeployment(unittest.TestCase):
         new, added, already=I.inject(SOURCE,old_apa)
         self.assertIn("NATIVE_MOVE_MIXED_COPY_AND_MUTATE_DENIED",new)
         self.assertEqual(set(added),set(I.METHODS))
-        self.assertEqual(new,original)
+        _, old_methods=I.class_methods(old_apa,expect_existing=True)
+        _, installed=I.class_methods(new,expect_existing=True)
+        _, source_methods=I.class_methods(SOURCE,expect_existing=True)
+        for name, method in old_methods.items():
+            expected=source_methods[name] if name=="prepare" else method
+            self.assertEqual(ast.dump(installed[name],include_attributes=False),
+                             ast.dump(expected,include_attributes=False))
         repeated,new_methods,matching=I.inject(SOURCE,new)
         self.assertEqual(repeated,new)
         self.assertFalse(new_methods)
