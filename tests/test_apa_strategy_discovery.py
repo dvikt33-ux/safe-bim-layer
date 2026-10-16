@@ -10,7 +10,8 @@ import sys
 import unittest
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
 
 from archicad_dynamic_commands import DynamicCommands
 from archicad_strategy_discovery import discover_native_execution_plan as plan
