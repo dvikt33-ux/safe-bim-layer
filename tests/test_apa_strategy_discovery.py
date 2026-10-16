@@ -25,13 +25,14 @@ class FakeExistingRouter:
     catalog = {"commands": {
         "MoveElements": {"availability":"LIVE_EXPORT_REGISTERED"},
         "CreateColumns": {"availability":"LIVE_EXPORT_REGISTERED"},
+        "CreateBeams": {"availability":"LIVE_EXPORT_REGISTERED"},
         "GetAllElements": {"availability":"LIVE_EXPORT_REGISTERED"},
         "UnknownTool": {"availability":"NOT_EXPOSED"},
     }}
     plan_reuse_existing = staticmethod(DynamicCommands.plan_reuse_existing)
 
     def __init__(self, copy="CREATE", create="CREATE"):
-        self.kinds={"MoveElements":copy, "CreateColumns":create}
+        self.kinds={"MoveElements":copy, "CreateColumns":create, "CreateBeams":create}
 
     def operation_kind(self, command):
         return self.kinds.get(command,"UNKNOWN")
@@ -49,6 +50,9 @@ class FakeExistingRouter:
             assert all(row["copy"] is True for row in rows)
         if step["command"]=="CreateColumns":
             rows=step["params"]["columnsData"]
+            assert all("buildingMaterialId" in row for row in rows)
+        if step["command"]=="CreateBeams":
+            rows=step["params"]["beamsData"]
             assert all("buildingMaterialId" in row for row in rows)
         return {"schema": "APA_DYNAMIC_BIM_WORKFLOW_V1",
                 "sourcePlanHash": APA.RUN.digest(graph), "graph": graph,
@@ -104,7 +108,7 @@ class AutoDiscoveryTests(unittest.TestCase):
         output=plan(r,intent(targets(30),prices(r)))
         self.assertEqual(output["status"],"COST_OPTIMAL_SOURCE_QUALIFIED_STRATEGY_PREPARED")
         self.assertEqual(output["selectedStrategyId"],"native_copy_existing_batch")
-        self.assertEqual(output["discovery"]["catalogCommandCount"],4)
+        self.assertEqual(output["discovery"]["catalogCommandCount"],5)
         self.assertEqual(output["discovery"]["qualifiedStrategies"],2)
         self.assertEqual(output["discovery"]["pendingUnmatchedTargets"],0)
         self.assertFalse(output["nativeWritePermission"])
@@ -192,6 +196,57 @@ class AutoDiscoveryTests(unittest.TestCase):
               "sourceRef":"KR-13"}
         with self.assertRaisesRegex(ValueError,"NO_COMPLETE_QUALIFIED_STRATEGY"):
             plan(r,intent([beam]))
+
+    def test_native_beam_batch_is_discovered_only_with_complete_endpoints(self):
+        r=FakeExistingRouter()
+        rows=[]
+        for i in range(5):
+            x=12+i*.8
+            rows.append({
+                "type":"Beam",
+                "familySignature":"BRAND_NEW_BEAM_SECTION_200x100x4000",
+                "storyIndex":0,
+                "anchor":{"x":x,"y":3,"z":2.9},
+                "sourceRef":"KR-13",
+                "nativeCreateData":{
+                    "begCoordinate":{"x":x,"y":3.0},
+                    "endCoordinate":{"x":x+4.0,"y":3.0},
+                    "zCoordinate":2.9,
+                    "floorIndex":0,
+                    "width":.1,
+                    "height":.2,
+                    "buildingMaterialId":{"guid":"22222222-2222-4222-8222-222222222222"},
+                },
+            })
+        out=plan(r,intent(rows))
+        self.assertEqual(out["selectedStrategyId"],"native_create_beams_batch")
+        action=out["selectedNativeTaskPreview"]["workflow"]["graph"]["operations"][0]
+        self.assertEqual(action["command"],"CreateBeams")
+        self.assertEqual(len(action["params"]["beamsData"]),5)
+        rows[0]["nativeCreateData"]["endCoordinate"]=rows[0]["nativeCreateData"]["begCoordinate"]
+        with self.assertRaisesRegex(ValueError,"NO_COMPLETE_QUALIFIED_STRATEGY"):
+            plan(r,intent(rows))
+        rows[0]["nativeCreateData"]["endCoordinate"]={"x":18.0,"y":3.0}
+        rows[0]["storyIndex"]=1
+        rows[0]["nativeCreateData"]["floorIndex"]=1
+        with self.assertRaisesRegex(ValueError,"NO_COMPLETE_QUALIFIED_STRATEGY"):
+            plan(r,intent(rows))
+
+    def test_actual_pinned_tapir_schema_validates_both_batch_candidates(self):
+        from pathlib import Path
+        schema=ROOT/"schemas"/"tapir-live-1.5.10"/"tapir-scene-live.json"
+        native=APA.native_command_router(schema,include_functional_modules=False)
+        for command in ("MoveElements","CreateColumns","CreateBeams"):
+            native.review_policy(command,"CREATE","MODEL",{
+                "source":"exact pinned native command contract under controlled test",
+                "sha256":native.contract_hash(command),
+            })
+        native_result=plan(native,intent(targets(2)))
+        self.assertEqual(native_result["status"],
+                         "COST_COMPARISON_BLOCKED_UNCALIBRATED_ALTERNATIVES")
+        self.assertEqual(native_result["discovery"]["qualifiedStrategies"],2)
+        self.assertEqual(set(native_result["unmeasuredCommands"]),
+                         {"MoveElements","CreateColumns"})
 
     def test_duplicate_destination_and_unverified_existing_source_block(self):
         r=FakeExistingRouter()
