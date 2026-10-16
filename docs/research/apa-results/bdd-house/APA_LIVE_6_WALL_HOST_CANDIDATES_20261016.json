@@ -1,0 +1,359 @@
+{
+  "schema": "apa.bdd.source-native-wall-hosts.v1",
+  "status": "LIVE_NATIVE_WALL_GEOMETRY_VERIFIED__PDF_BLOCK_HOST_LINE_CORRESPONDENCES__OPENING_OFFSETS_UNRESOLVED",
+  "sources": {
+    "modelReport": "https://github.com/dvikt33-ux/safe-bim-bridge/blob/main/safe-bim-mailbox/gpt-live/results/apa-bdd-existing-router-20261016T164211Z-8d7da11a.json",
+    "pdf": "3_этап_КП_КОМФОРТ_без_замазок.pdf",
+    "sourceSheet": "КР-10",
+    "planPDFPage": 12,
+    "elevationPDFPages": [
+      13,
+      14,
+      15,
+      16,
+      17
+    ]
+  },
+  "liveTarget": "C:\\LocalAI\\SafeBIM_Global_Library_Test_Projects\\BDD дом - по чертежам 2022.pln",
+  "liveSavedSha256": "f241d890adf0d150986da8cbda2594a182fea1ad804536fb2975e22d72c6afd9",
+  "archicad": {
+    "path": "C:\\LocalAI\\SafeBIM_Global_Library_Test_Projects\\BDD дом - по чертежам 2022.pln",
+    "name": "BDD дом - по чертежам 2022",
+    "port": 19727,
+    "tapirVersion": "1.5.10",
+    "storyIndex": 0,
+    "activeViewStoryIndex": -1,
+    "storyTopology": [
+      {
+        "index": -1,
+        "floorId": 4,
+        "level": -3,
+        "label": ""
+      },
+      {
+        "index": 0,
+        "floorId": 1,
+        "level": 0,
+        "label": "Первый Этаж"
+      },
+      {
+        "index": 1,
+        "floorId": 2,
+        "level": 3,
+        "label": ""
+      },
+      {
+        "index": 2,
+        "floorId": 3,
+        "level": 6,
+        "label": ""
+      }
+    ]
+  },
+  "modelInventory": {
+    "allGUIDs": 261,
+    "physical": 125,
+    "parentWalls": 6,
+    "apiWriteAttempts": 0
+  },
+  "nativeWalls": [
+    {
+      "guid": "1cd69032-9d8b-481f-af74-19f9e5f8fcfc",
+      "begin": {
+        "x": 14.28,
+        "y": 1.09
+      },
+      "end": {
+        "x": 14.28,
+        "y": 9.38
+      },
+      "lengthM": 8.29,
+      "thicknessM": 0.25,
+      "zBottomM": -0.1,
+      "zTopM": 2.9,
+      "nativeHomeStory": 0,
+      "structureType": "Basic"
+    },
+    {
+      "guid": "323703e9-2bf2-4488-a24d-0ba20760400d",
+      "begin": {
+        "x": 0,
+        "y": 9.38
+      },
+      "end": {
+        "x": 0,
+        "y": 0
+      },
+      "lengthM": 9.38,
+      "thicknessM": 0.25,
+      "zBottomM": -0.1,
+      "zTopM": 2.9,
+      "nativeHomeStory": 0,
+      "structureType": "Basic"
+    },
+    {
+      "guid": "5dcada01-8c40-4ecf-95f7-377a868f2f48",
+      "begin": {
+        "x": 5.34,
+        "y": 0
+      },
+      "end": {
+        "x": 5.34,
+        "y": 1.09
+      },
+      "lengthM": 1.09,
+      "thicknessM": 0.25,
+      "zBottomM": -0.1,
+      "zTopM": 2.9,
+      "nativeHomeStory": 0,
+      "structureType": "Basic"
+    },
+    {
+      "guid": "6b90ce7e-4b32-4e9d-b9b8-ce7a5a6452ce",
+      "begin": {
+        "x": 5.34,
+        "y": 1.09
+      },
+      "end": {
+        "x": 14.28,
+        "y": 1.09
+      },
+      "lengthM": 8.94,
+      "thicknessM": 0.25,
+      "zBottomM": -0.1,
+      "zTopM": 2.9,
+      "nativeHomeStory": 0,
+      "structureType": "Basic"
+    },
+    {
+      "guid": "7b332594-ab82-43b4-bfc2-ab5ad549c2c9",
+      "begin": {
+        "x": 14.28,
+        "y": 9.38
+      },
+      "end": {
+        "x": 0,
+        "y": 9.38
+      },
+      "lengthM": 14.28,
+      "thicknessM": 0.25,
+      "zBottomM": -0.1,
+      "zTopM": 2.9,
+      "nativeHomeStory": 0,
+      "structureType": "Basic"
+    },
+    {
+      "guid": "7cbccbf5-a0f8-4ed9-b9e5-3dc96adeae7b",
+      "begin": {
+        "x": 0,
+        "y": 0
+      },
+      "end": {
+        "x": 5.34,
+        "y": 0
+      },
+      "lengthM": 5.34,
+      "thicknessM": 0.25,
+      "zBottomM": -0.1,
+      "zTopM": 2.9,
+      "nativeHomeStory": 0,
+      "structureType": "Basic"
+    }
+  ],
+  "sourceBlockHostCandidates": [
+    {
+      "sourceBlockIds": "1.1",
+      "sourcePDFPage": 13,
+      "elevationOverallLengthM": 5.44,
+      "nativeWallGuid": "7cbccbf5-a0f8-4ed9-b9e5-3dc96adeae7b",
+      "nativeWallBeg": {
+        "x": 0,
+        "y": 0
+      },
+      "nativeWallEnd": {
+        "x": 5.34,
+        "y": 0
+      },
+      "nativeReferenceLineLengthM": 5.34,
+      "coordinateStatus": "CORRESPONDING_FULL_WALL_LINE_WITH_END_DETAILS_UNRESOLVED",
+      "possibleEndFaceDimensionDifferenceM": 0.1,
+      "confirmedHostGuidForOpeningCreation": false,
+      "sourceToNativeLineDirection": "NOT_VERIFIED_BY_ELEVATION_AND_PLAN",
+      "openingOffsetsM": null,
+      "openingTypesAndOrientation": "SOURCE_HEIGHT_AND_WIDTH_ONLY__NOT_EXECUTION_READY"
+    },
+    {
+      "sourceBlockIds": "1.2-1.4",
+      "sourcePDFPage": 13,
+      "elevationOverallLengthM": null,
+      "nativeWallGuid": "5dcada01-8c40-4ecf-95f7-377a868f2f48",
+      "nativeWallBeg": {
+        "x": 5.34,
+        "y": 0
+      },
+      "nativeWallEnd": {
+        "x": 5.34,
+        "y": 1.09
+      },
+      "nativeReferenceLineLengthM": 1.09,
+      "coordinateStatus": "MULTIPLE_SOURCE_WALL_BLOCKS_ALONG_ONE_NATIVE_WALL__NOT_SPLIT",
+      "possibleEndFaceDimensionDifferenceM": null,
+      "confirmedHostGuidForOpeningCreation": false,
+      "sourceToNativeLineDirection": "NOT_VERIFIED_BY_ELEVATION_AND_PLAN",
+      "openingOffsetsM": null,
+      "openingTypesAndOrientation": "SOURCE_HEIGHT_AND_WIDTH_ONLY__NOT_EXECUTION_READY"
+    },
+    {
+      "sourceBlockIds": "1.5",
+      "sourcePDFPage": 13,
+      "elevationOverallLengthM": 7.255,
+      "nativeWallGuid": "6b90ce7e-4b32-4e9d-b9b8-ce7a5a6452ce",
+      "nativeWallBeg": {
+        "x": 5.34,
+        "y": 1.09
+      },
+      "nativeWallEnd": {
+        "x": 14.28,
+        "y": 1.09
+      },
+      "nativeReferenceLineLengthM": 8.94,
+      "coordinateStatus": "SOURCE_BLOCK_ONLY_PART_OF_LONGER_NATIVE_WALL__NOT_FULL_LINE",
+      "possibleEndFaceDimensionDifferenceM": -1.685,
+      "confirmedHostGuidForOpeningCreation": false,
+      "sourceToNativeLineDirection": "NOT_VERIFIED_BY_ELEVATION_AND_PLAN",
+      "openingOffsetsM": null,
+      "openingTypesAndOrientation": "SOURCE_HEIGHT_AND_WIDTH_ONLY__NOT_EXECUTION_READY"
+    },
+    {
+      "sourceBlockIds": "1.6",
+      "sourcePDFPage": 13,
+      "elevationOverallLengthM": 8.44,
+      "nativeWallGuid": "1cd69032-9d8b-481f-af74-19f9e5f8fcfc",
+      "nativeWallBeg": {
+        "x": 14.28,
+        "y": 1.09
+      },
+      "nativeWallEnd": {
+        "x": 14.28,
+        "y": 9.38
+      },
+      "nativeReferenceLineLengthM": 8.29,
+      "coordinateStatus": "CORRESPONDING_FULL_WALL_LINE_WITH_END_DETAILS_UNRESOLVED",
+      "possibleEndFaceDimensionDifferenceM": 0.15,
+      "confirmedHostGuidForOpeningCreation": false,
+      "sourceToNativeLineDirection": "NOT_VERIFIED_BY_ELEVATION_AND_PLAN",
+      "openingOffsetsM": null,
+      "openingTypesAndOrientation": "SOURCE_HEIGHT_AND_WIDTH_ONLY__NOT_EXECUTION_READY"
+    },
+    {
+      "sourceBlockIds": "1.7",
+      "sourcePDFPage": 14,
+      "elevationOverallLengthM": 14.38,
+      "nativeWallGuid": "7b332594-ab82-43b4-bfc2-ab5ad549c2c9",
+      "nativeWallBeg": {
+        "x": 14.28,
+        "y": 9.38
+      },
+      "nativeWallEnd": {
+        "x": 0,
+        "y": 9.38
+      },
+      "nativeReferenceLineLengthM": 14.28,
+      "coordinateStatus": "CORRESPONDING_FULL_WALL_LINE_WITH_END_DETAILS_UNRESOLVED",
+      "possibleEndFaceDimensionDifferenceM": 0.1,
+      "confirmedHostGuidForOpeningCreation": false,
+      "sourceToNativeLineDirection": "NOT_VERIFIED_BY_ELEVATION_AND_PLAN",
+      "openingOffsetsM": null,
+      "openingTypesAndOrientation": "SOURCE_HEIGHT_AND_WIDTH_ONLY__NOT_EXECUTION_READY"
+    },
+    {
+      "sourceBlockIds": "1.8",
+      "sourcePDFPage": 14,
+      "elevationOverallLengthM": 9.28,
+      "nativeWallGuid": "323703e9-2bf2-4488-a24d-0ba20760400d",
+      "nativeWallBeg": {
+        "x": 0,
+        "y": 9.38
+      },
+      "nativeWallEnd": {
+        "x": 0,
+        "y": 0
+      },
+      "nativeReferenceLineLengthM": 9.38,
+      "coordinateStatus": "CORRESPONDING_FULL_WALL_LINE_WITH_END_DETAILS_UNRESOLVED",
+      "possibleEndFaceDimensionDifferenceM": -0.1,
+      "confirmedHostGuidForOpeningCreation": false,
+      "sourceToNativeLineDirection": "NOT_VERIFIED_BY_ELEVATION_AND_PLAN",
+      "openingOffsetsM": null,
+      "openingTypesAndOrientation": "SOURCE_HEIGHT_AND_WIDTH_ONLY__NOT_EXECUTION_READY"
+    }
+  ],
+  "unmappedInteriorBlocks": [
+    "1.9",
+    "1.10",
+    "1.11",
+    "1.12",
+    "1.13",
+    "1.14",
+    "1.15",
+    "1.16",
+    "1.17",
+    "1.18",
+    "1.19",
+    "1.20",
+    "1.21",
+    "1.22",
+    "1.23"
+  ],
+  "knownSourceOpenings": {
+    "1.7": [
+      {
+        "sequence": 1,
+        "widthM": 1.6,
+        "heightM": 1.5,
+        "sillM": 0.9
+      },
+      {
+        "sequence": 2,
+        "widthM": 0.8,
+        "heightM": 1.5,
+        "sillM": 0.9
+      },
+      {
+        "sequence": 3,
+        "widthM": 1.6,
+        "heightM": 2.4,
+        "sillM": 0
+      },
+      {
+        "sequence": 4,
+        "widthM": 0.8,
+        "heightM": 2.4,
+        "sillM": 0
+      },
+      {
+        "sequence": 5,
+        "widthM": 1,
+        "heightM": 2.4,
+        "sillM": 0
+      }
+    ],
+    "1.8": [
+      {
+        "sequence": 1,
+        "widthM": 1.5,
+        "heightM": 0.9,
+        "sillM": 1.1
+      }
+    ]
+  },
+  "outstandingRisks": [
+    "Wall blocks are shop framing assemblies, not necessarily one-to-one Archicad wall entities.",
+    "All six native Walls are single Basic elements of 0.250m thickness, whereas source framing includes 200mm/100mm studs and separate layers.",
+    "Source dimensional chains have 0.10-0.15m discrepancies relative to native wall reference lines because reference face/edge positions are not resolved.",
+    "The 23-block source floor plan includes interior partitions not created in PLN.",
+    "No opening has an approved lateral centerOffset or definitively interpreted door/window type and handedness.",
+    "Native north Wall begins at x14.28, not x0; opening plan offsets may require reversed orientation."
+  ],
+  "writesAuthorized": false
+}
