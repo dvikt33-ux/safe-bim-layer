@@ -599,6 +599,39 @@ class DynamicCommands:
             retained_signatures,saved_sha256,authorization,
             verify_before,verify_after)
 
+    def copy_rectangular_array(self, writer, scene_id, prototype_guid,
+                               prototype_type, count_x, count_y,
+                               step_x, step_y, retained_signatures,
+                               saved_sha256, authorization,
+                               verify_before, verify_after):
+        """Rectangular native Multiply; one existing element, one native call.
+
+        step_x and step_y are separate 3D vectors for the orthogonal grid
+        directions (they need not align with global X and Y). The source
+        occupies grid (0,0); all other cells become copies. The PDF/plan
+        must separately authorize origin, pitch, count and any missing cells.
+        """
+        if (type(count_x) is not int or type(count_y) is not int
+                or count_x < 1 or count_y < 1
+                or not 2 <= count_x*count_y <= 201):
+            raise ValueError('NATIVE_GRID_TOTAL_CELLS_MUST_BE_2_TO_201')
+        for step in (step_x,step_y):
+            if (not isinstance(step,dict) or set(step)!={'x','y','z'}
+                    or any(type(step[k]) not in (float,int)
+                           or not math.isfinite(step[k]) for k in ('x','y','z'))):
+                raise ValueError('NATIVE_GRID_FINITE_STEP_REQUIRED')
+        offsets=[]
+        for ix in range(count_x):
+            for iy in range(count_y):
+                if ix==0 and iy==0:
+                    continue
+                offsets.append({k: ix*step_x[k]+iy*step_y[k]
+                                for k in ('x','y','z')})
+        return self.copy_existing_many(
+            writer,scene_id,prototype_guid,prototype_type,offsets,
+            retained_signatures,saved_sha256,authorization,
+            verify_before,verify_after)
+
     def native_facts(self,workflow,model_step,elements_step,boxes_step=None):
         """Reuse existing BREP/IFC quantities; provider boxes remain separate."""
         import archicad_connected_components as C
