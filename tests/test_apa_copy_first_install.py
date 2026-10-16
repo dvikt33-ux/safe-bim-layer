@@ -18,7 +18,8 @@ def old_apa_fixture():
     methods=[x for x in cls.body if isinstance(x,ast.FunctionDef)
              and x.name in I.METHODS]
     for fn in sorted(methods,key=lambda x:x.lineno,reverse=True):
-        del lines[fn.lineno-1:fn.end_lineno]
+        start=min([fn.lineno]+[dec.lineno for dec in fn.decorator_list])
+        del lines[start-1:fn.end_lineno]
     return "".join(lines)
 
 class CopyDeployment(unittest.TestCase):
@@ -34,6 +35,7 @@ class CopyDeployment(unittest.TestCase):
             self.assertEqual(ast.dump(original_funcs[name],include_attributes=False),
                              ast.dump(modified_funcs[name],include_attributes=False))
         self.assertEqual(set(I.METHODS)&set(modified_funcs),set(I.METHODS))
+        self.assertEqual([ast.unparse(d) for d in modified_funcs["plan_reuse_existing"].decorator_list],["staticmethod"])
         repeat,new_methods,existing=I.inject(SOURCE,output)
         self.assertEqual(repeat,output)
         self.assertFalse(new_methods)
