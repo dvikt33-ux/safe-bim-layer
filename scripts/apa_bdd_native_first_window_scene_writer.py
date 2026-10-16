@@ -103,10 +103,14 @@ def single_detail(api,guid):
     return res[0]
 
 def pin_story_for_write(api):
-    # Unchanged existing writer guard: user must be on ground floor (story 0).
-    # This is NOT a new permission to write from the 3D window.
-    b=RUN.guarded_project(api)
-    if b.get("storyIndex")!=0:raise ValueError("WRITE_REQUIRES_ACTIVE_STORY_0")
+    # BDD script uses the narrowly opt-in SceneWriter guard allowing 3D
+    # after a SHA-pinned exact-copy authorization. Upper-story views are
+    # still rejected; project topology/first-floor Z remain verified.
+    b=RUN.guarded_project_for_read(api)
+    if b.get("storyIndex")!=0 or b.get("activeViewStoryIndex") not in (0,-1):
+        raise ValueError("WRITE_REQUIRES_PINNED_FIRST_STORY_OR_3D")
+    if not RUN.authorized_authored_target(RUN.EXPECTED_PATH):
+        raise ValueError("WRITER_SAVED_SHA_AUTHORIZATION_NOT_VALID")
     return b
 
 def verify_unchanged_host(row):
@@ -173,8 +177,8 @@ def run(args):
     api=APA.EvidenceAPI(APA.native_transport,evidence,execute=args.apply)
     current=ids(api)
     if set(current)!=baseline:raise ValueError("261_GUID_MODEL_DRIFT_NO_NEW_WRITES")
-    # This project may be displayed in 3D (actStory -1). Native writes remain
-    # gated by the original strict SceneWriter active-floor check, not read guard.
+    # Native writes from 3D are allowed only by the exact-copy opt-in
+    # SceneWriter binding, never by merely omitting the active-story check.
     identity=pin_story_for_write(api)
     host_before=single_detail(api,current[WALL_GUID])
     verify_unchanged_host(host_before)
@@ -228,8 +232,8 @@ def run(args):
     signatures=C.retained_geometry_signatures(native,sorted(retained))
     if set(signatures)!=retained:
         raise ValueError("NATIVE_RETAINED_SIGNATURES_NOT_COMPLETE")
-    # The native dump may activate 3D view; STRICT writer binding must
-    # still match before any write. Never silently move the user to a floor.
+    # The native dump may activate 3D view. The narrowly approved writer
+    # validates the same exact PLN/SHA/story topology without a UI switch.
     pin_story_for_write(api)
     if ids(api)!=current:raise ValueError("MODEL_DRIFT_AFTER_NATIVE_DUMP")
     host_body_before=next((e for e in native["elements"]
@@ -237,7 +241,8 @@ def run(args):
     if not host_body_before or not host_body_before.get("bodies"):
         raise ValueError("HOST_WALL_NATIVE_BODY_UNAVAILABLE")
     host_geom_before=RUN.digest(C.ROOF.geometry_signature(host_body_before))
-    writer=RUN.SceneWriter(api,LEDGER,schema_path=SCHEMA)
+    writer=RUN.SceneWriter(api,LEDGER,schema_path=SCHEMA,
+                           allow_3d_view_for_write=True)
     state={"createdGuid":None}
 
     def before(api_):
