@@ -76,15 +76,37 @@ def inject(source, target):
             insert.append("".join(source_lines[start-1:fn.end_lineno]))
             added.append(method)
 
-    if not insert:
-        return target, added, already
-    # All extra methods must remain inside the existing DynamicCommands
-    # class. Insert just before its native_facts method, NOT at EOF.
-    next_fn = installed.get("native_facts")
-    if next_fn is None:
-        raise ValueError("TARGET_NATIVE_FACTS_INSERT_ANCHOR_NOT_FOUND")
-    n=next_fn.lineno-1
-    new="".join(target_lines[:n])+"\n".join(insert)+"\n"+"".join(target_lines[n:])
+    if insert:
+        # All extra methods must remain inside the existing DynamicCommands
+        # class. Insert just before its native_facts method, NOT at EOF.
+        next_fn = installed.get("native_facts")
+        if next_fn is None:
+            raise ValueError("TARGET_NATIVE_FACTS_INSERT_ANCHOR_NOT_FOUND")
+        n=next_fn.lineno-1
+        new="".join(target_lines[:n])+"\n".join(insert)+"\n"+"".join(target_lines[n:])
+    else:
+        new=target
+
+    # MoveElements is a dual-effect command. The source is authoritative
+    # for the exact safety fence; the target may only have the old adjacent
+    # schema-validator + constructor sequence or an IDENTICAL safety fence.
+    marker="        CONTRACTS._validator(self.catalog,command).validate(parameters)\n"
+    next_statement="        if command in self.constructors and"
+    if source.count(marker)!=1 or source.count(next_statement)!=1:
+        raise ValueError("SOURCE_MOVE_COPY_POLICY_PATCH_ANCHORS_MISSING")
+    start=source.index(marker)+len(marker)
+    stop=source.index(next_statement,start)
+    guard=source[start:stop]
+    if ("NATIVE_MOVE_MIXED_COPY_AND_MUTATE_DENIED" not in guard
+            or "NATIVE_MOVE_RELOCATION_REQUIRES_REVIEWED_MODIFY_POLICY" not in guard):
+        raise ValueError("SOURCE_MOVE_COPY_POLICY_NOT_PROVEN")
+    old_adjacency=marker+next_statement
+    if guard in new:
+        pass
+    elif old_adjacency in new:
+        new=new.replace(old_adjacency,marker+guard+next_statement,1)
+    else:
+        raise ValueError("LOCAL_PREPARE_CUSTOMIZED_REFUSE_UNSAFE_PATCH")
 
     # Source adds math/time imports if the target hasn't got them yet.
     for module in ("math","time"):
