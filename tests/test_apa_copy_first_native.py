@@ -111,7 +111,7 @@ class TestNativeCopy(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,"NATIVE_COPY_NO_DUPLICATE_OR_ZERO_OFFSET"):
             obj.copy_rectangular_array(
                 object(),"s",MASTER,"Column",2,2,
-                {"x":1,"y":0,"z":0},{"x":2,"y":0,"z":0},
+                {"x":1,"y":0,"z":0},{"x":1,"y":0,"z":0},
                 {},"sha","auth",lambda *_:{"status":"PASS"},
                 lambda *_:{"status":"PASS"})
         obj.execute.assert_not_called()
