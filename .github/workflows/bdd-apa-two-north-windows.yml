@@ -1,0 +1,26 @@
+name: BDD APA Native Two North Windows
+on:
+  pull_request:
+    paths:
+      - "scripts/apa_bdd_kr12_two_north_windows.py"
+      - "tests/test_apa_bdd_kr12_two_north_windows.py"
+      - "docs/research/apa-results/bdd-house/KR12_NORTH_TWO_WINDOWS_TYPED_SOURCE_20261016.json"
+      - ".github/workflows/bdd-apa-two-north-windows.yml"
+  workflow_dispatch:
+jobs:
+  source-and-existing-apa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install existing APA schema/graph dependencies
+        run: python -m pip install jsonschema networkx shapely
+      - name: Verify source dimensions, native host and existing APA graph
+        run: |
+          python -m py_compile scripts/apa_bdd_kr12_two_north_windows.py
+          python -m unittest discover -s tests -p test_apa_bdd_kr12_two_north_windows.py -v
