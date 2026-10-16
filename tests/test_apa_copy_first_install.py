@@ -41,6 +41,36 @@ class CopyDeployment(unittest.TestCase):
         self.assertFalse(new_methods)
         self.assertEqual(set(existing),set(I.METHODS))
 
+    def test_upgrades_old_local_prepare_without_replacing_existing_apa(self):
+        original=old_apa_fixture()
+        marker="        CONTRACTS._validator(self.catalog,command).validate(parameters)\\n"
+        next_stmt="        if command in self.constructors and"
+        start=SOURCE.index(marker)+len(marker)
+        stop=SOURCE.index(next_stmt,start)
+        guard=SOURCE[start:stop]
+        self.assertIn("NATIVE_MOVE_MIXED_COPY_AND_MUTATE_DENIED",guard)
+        old_apa=original.replace(guard,"")
+        self.assertNotIn("NATIVE_MOVE_MIXED_COPY_AND_MUTATE_DENIED",old_apa)
+        new, added, already=I.inject(SOURCE,old_apa)
+        self.assertIn("NATIVE_MOVE_MIXED_COPY_AND_MUTATE_DENIED",new)
+        self.assertEqual(set(added),set(I.METHODS))
+        self.assertEqual(new,original)
+        repeated,new_methods,matching=I.inject(SOURCE,new)
+        self.assertEqual(repeated,new)
+        self.assertFalse(new_methods)
+        self.assertEqual(set(matching),set(I.METHODS))
+
+    def test_policy_patch_rejects_unknown_prepare_customizations(self):
+        original=old_apa_fixture()
+        marker="        CONTRACTS._validator(self.catalog,command).validate(parameters)\\n"
+        next_stmt="        if command in self.constructors and"
+        start=SOURCE.index(marker)+len(marker)
+        stop=SOURCE.index(next_stmt,start)
+        guard=SOURCE[start:stop]
+        old_apa=original.replace(guard,"        # user customized prepare in local checkout\\n")
+        with self.assertRaisesRegex(ValueError,"LOCAL_PREPARE_CUSTOMIZED"):
+            I.inject(SOURCE,old_apa)
+
     def test_refuses_clobbering_a_locally_customized_method(self):
         altered=SOURCE.replace("Duplicate ONE existing native element",
                                "Local patched existing method",1)
