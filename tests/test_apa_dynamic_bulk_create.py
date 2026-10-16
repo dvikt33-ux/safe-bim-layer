@@ -22,7 +22,7 @@ def fixture():
     return x
 
 def perform(router,items, proof=None):
-    router.execute.side_effect=lambda *args,**kwargs: args[9](
+    router.execute.side_effect=lambda *args,**kwargs: args[8](
         {"elements":[{"elementId":{"guid":"new-%02d"%i}} for i in range(len(items))]},
         {"modelBefore":"state"})
     return router.execute_batch(
@@ -54,7 +54,7 @@ class BatchRouteTests(unittest.TestCase):
     def test_fail_closed_on_native_return_count_or_duplicate(self):
         router=fixture()
         def broken(*args,**kwargs):
-            return args[9]({"elements":[{"elementId":{"guid":"same"}},
+            return args[8]({"elements":[{"elementId":{"guid":"same"}},
                                          {"elementId":{"guid":"same"}}]}, {})
         router.execute.side_effect=broken
         with self.assertRaisesRegex(ValueError,"DUPLICATE"):
