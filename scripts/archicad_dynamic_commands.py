@@ -804,6 +804,94 @@ class DynamicCommands:
             'status':result.get('status'),
         })
 
+    @staticmethod
+    def plan_reuse_existing(existing, targets):
+        """Copy-first planner: match repeated SOURCE-VERIFIED element families.
+
+        Upstream BIM Graph must provide familySignature computed from
+        translation-normalized geometry AND all construction attributes,
+        profile/library settings, orientation, home story and material.
+        This routine never infers that two differently specified elements
+        may be reused. All reported repeats are routed as one native
+        MoveElements(copy=true) group through copy_multiple_prototypes().
+        Unmatched families remain PENDING and are not blindly Create*'d.
+        """
+        if not isinstance(existing,list) or not isinstance(targets,list):
+            raise ValueError('COPY_FIRST_SOURCE_AND_TARGET_LISTS_REQUIRED')
+        if not targets:
+            raise ValueError('COPY_FIRST_TARGETS_REQUIRED')
+        keys=('type','familySignature','storyIndex')
+        def validate(row, is_existing):
+            if not isinstance(row,dict):
+                raise ValueError('COPY_FIRST_TYPED_GEOMETRY_RECORD_REQUIRED')
+            for field in keys:
+                if field not in row or row[field] is None:
+                    raise ValueError('COPY_FIRST_COMPLETE_FAMILY_SIGNATURE_REQUIRED')
+            if (row['type'] not in {'Column','Beam','Object'}
+                    or not isinstance(row['familySignature'],str)
+                    or len(row['familySignature'])<16
+                    or type(row['storyIndex']) is not int):
+                raise ValueError('COPY_FIRST_UNSUPPORTED_OR_UNVERIFIED_FAMILY')
+            pos=row.get('anchor')
+            if (not isinstance(pos,dict) or set(pos)!={'x','y','z'}
+                    or any(type(pos[k]) not in (int,float)
+                           or not math.isfinite(pos[k]) for k in ('x','y','z'))):
+                raise ValueError('COPY_FIRST_NATIVE_ANCHOR_REQUIRED')
+            if is_existing:
+                if (not isinstance(row.get('guid'),str) or not row['guid']
+                        or row.get('nativeReadbackVerified') is not True):
+                    raise ValueError('COPY_FIRST_LIVE_EXISTING_PROTOTYPE_REQUIRED')
+            elif not isinstance(row.get('sourceRef'),str) or not row['sourceRef'].strip():
+                raise ValueError('COPY_FIRST_SOURCE_DOCUMENT_PROVENANCE_REQUIRED')
+        for row in existing:
+            validate(row,True)
+        for row in targets:
+            validate(row,False)
+        def family(row):
+            return (row['type'],row['familySignature'],row['storyIndex'])
+        families={}
+        for element in existing:
+            families.setdefault(family(element),[]).append(element)
+        patterns={}
+        untouched=[]
+        new_families=[]
+        used_destinations=set()
+        for target in targets:
+            point=target['anchor']
+            destination=(family(target),*(round(point[k],7) for k in ('x','y','z')))
+            if destination in used_destinations:
+                raise ValueError('COPY_FIRST_TARGET_POSITION_DUPLICATED')
+            used_destinations.add(destination)
+            candidates=families.get(family(target),[])
+            if not candidates:
+                new_families.append(target)
+                continue
+            proto=min(candidates,key=lambda e:sum(
+                (point[k]-e['anchor'][k])**2 for k in ('x','y','z')))
+            delta={k:point[k]-proto['anchor'][k] for k in ('x','y','z')}
+            if all(abs(delta[k])<1e-7 for k in ('x','y','z')):
+                untouched.append(proto['guid'].lower())
+                continue
+            guid=proto['guid'].lower()
+            if guid not in patterns:
+                patterns[guid]={'prototypeGuid':proto['guid'],
+                                'prototypeType':proto['type'],
+                                'sourceRef':target['sourceRef'],
+                                'displacements':[]}
+            # Multiple source sheets may authorize the same prototype group.
+            # No new writer is created; the batch source list is retained.
+            if target['sourceRef'] not in patterns[guid]['sourceRef'].split(' | '):
+                patterns[guid]['sourceRef']+=' | '+target['sourceRef']
+            patterns[guid]['displacements'].append(delta)
+        rows=list(patterns.values())
+        if sum(len(x['displacements']) for x in rows)>200:
+            raise ValueError('COPY_FIRST_OVER_200_SPLIT_INTO_AUTHORIZED_SCENES')
+        return {'copyGroups':rows,'existingElementGuids':sorted(set(untouched)),
+                'unmatchedTargetsPendingPrototype':new_families,
+                'newCopyCount':sum(len(x['displacements']) for x in rows),
+                'nativeCopyCallsRequired':int(bool(rows)),
+                'status':'COPY_FIRST_PLAN_SOURCE_VERIFIED_NO_WRITES'}
+
     def native_facts(self,workflow,model_step,elements_step,boxes_step=None):
         """Reuse existing BREP/IFC quantities; provider boxes remain separate."""
         import archicad_connected_components as C
