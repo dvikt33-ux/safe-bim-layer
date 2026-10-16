@@ -1,0 +1,396 @@
+{
+  "schema": "apa.bdd-house.structural-digitization.v1",
+  "source": "3_этап_КП_КОМФОРТ_без_замазок.pdf",
+  "sourcePageNumber": 5,
+  "sourceSheet": "КР-3 Схема свайного поля",
+  "method": "pyMuPDF vector path circles (49 paths with 16 drawing items and 8.50 x 8.50 PDF points bounding box); transform to structural axes",
+  "scale": {
+    "originPdfPts": {
+      "x": 413.85,
+      "y": 497.06
+    },
+    "xMetersPerPdfPoint": 0.035277723881255184,
+    "yMetersPerPdfPoint": 0.035277723881255184
+  },
+  "referenceAxes": {
+    "x_m": {
+      "1": 0,
+      "2": 5.34,
+      "3": 6.77,
+      "4": 14.28,
+      "3prime": 8.7
+    },
+    "y_m": {
+      "А": 0,
+      "Б": 1.09,
+      "В": 9.38
+    }
+  },
+  "dimensionCheck": {
+    "chainX_m": [
+      5.34,
+      1.43,
+      1.93,
+      5.58
+    ],
+    "sumX_m": 14.28,
+    "chainY_m": [
+      1.09,
+      8.29
+    ],
+    "sumY_m": 9.38,
+    "generalDataConflict_m": [
+      14.18,
+      9.28
+    ],
+    "decision": "USE_DIMENSIONED_KR_STRUCTURAL_CHAIN__GENERAL_DATA_PROVISIONAL_TYPO"
+  },
+  "coordinateUncertainty": "Vector center accuracy ~0.005 m (rounded to 0.001 m). Pile labels not mapped to source pile numbers. Z pile location unresolved.",
+  "piles": [
+    {
+      "traceNumber": 1,
+      "x_m": 0,
+      "y_m": 9.38,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 2,
+      "x_m": 0,
+      "y_m": 0,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 3,
+      "x_m": 5.34,
+      "y_m": 0,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 4,
+      "x_m": 5.34,
+      "y_m": 1.54,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 5,
+      "x_m": 6.959,
+      "y_m": 1.315,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 6,
+      "x_m": 14.255,
+      "y_m": 1.09,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 7,
+      "x_m": 14.28,
+      "y_m": 9.38,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 8,
+      "x_m": 1.587,
+      "y_m": 9.38,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 9,
+      "x_m": 3.174,
+      "y_m": 9.38,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 10,
+      "x_m": 4.761,
+      "y_m": 9.38,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 11,
+      "x_m": 6.348,
+      "y_m": 9.38,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 12,
+      "x_m": 7.935,
+      "y_m": 9.38,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 13,
+      "x_m": 9.522,
+      "y_m": 9.38,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 14,
+      "x_m": 11.109,
+      "y_m": 9.38,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 15,
+      "x_m": 12.696,
+      "y_m": 9.38,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 16,
+      "x_m": 14.28,
+      "y_m": 7.722,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 17,
+      "x_m": 14.28,
+      "y_m": 6.064,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 18,
+      "x_m": 14.28,
+      "y_m": 4.406,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 19,
+      "x_m": 14.28,
+      "y_m": 2.748,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 20,
+      "x_m": 12.791,
+      "y_m": 1.09,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 21,
+      "x_m": 11.327,
+      "y_m": 1.09,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 22,
+      "x_m": 9.863,
+      "y_m": 1.09,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 23,
+      "x_m": 8.399,
+      "y_m": 1.09,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 24,
+      "x_m": 4.005,
+      "y_m": 0,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 25,
+      "x_m": 2.67,
+      "y_m": 0,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 26,
+      "x_m": 1.335,
+      "y_m": 0,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 27,
+      "x_m": 0,
+      "y_m": 1.563,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 28,
+      "x_m": 0,
+      "y_m": 3.126,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 29,
+      "x_m": 0,
+      "y_m": 4.689,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 30,
+      "x_m": 0,
+      "y_m": 6.252,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 31,
+      "x_m": 0,
+      "y_m": 7.815,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 32,
+      "x_m": 2.38,
+      "y_m": 5.235,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 33,
+      "x_m": 4.76,
+      "y_m": 5.235,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 34,
+      "x_m": 7.14,
+      "y_m": 5.235,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 35,
+      "x_m": 9.52,
+      "y_m": 5.235,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 36,
+      "x_m": 11.9,
+      "y_m": 5.235,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 37,
+      "x_m": 0,
+      "y_m": 10.58,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 38,
+      "x_m": 3.08,
+      "y_m": 10.58,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 39,
+      "x_m": 0,
+      "y_m": -3,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 40,
+      "x_m": 6.58,
+      "y_m": -3,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 41,
+      "x_m": 6.58,
+      "y_m": -0.91,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 42,
+      "x_m": 8.7,
+      "y_m": -0.91,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 43,
+      "x_m": 8.7,
+      "y_m": -2,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 44,
+      "x_m": 14.28,
+      "y_m": -2,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 45,
+      "x_m": 2.193,
+      "y_m": -3,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 46,
+      "x_m": 4.386,
+      "y_m": -3,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 47,
+      "x_m": 14.28,
+      "y_m": -0.455,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 48,
+      "x_m": 11.49,
+      "y_m": -2,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    },
+    {
+      "traceNumber": 49,
+      "x_m": 0,
+      "y_m": -1.5,
+      "diameter_m": 0.3,
+      "nominalLength_m": 2.4
+    }
+  ],
+  "sourceEvidence": "PDF page 5; pile length and diameter cross-check PDF page 7; 49 pieces explicitly listed in specification",
+  "status": "SOURCE_VECTORS_EXTRACTED_NOT_LIVE_BIM_VERIFIED"
+}
