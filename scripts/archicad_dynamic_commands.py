@@ -9,6 +9,7 @@ import copy
 import inspect
 import json
 import math
+import time
 import textwrap
 import typing
 import hashlib
@@ -478,10 +479,22 @@ class DynamicCommands:
                 raise ValueError('BULK_NATIVE_INDEPENDENT_READBACK_REQUIRED')
             return dict(proof, nativeBatchCount=len(guids),
                         nativeBatchGuids=guids)
-        return self.execute(
+        started = time.perf_counter()
+        outcome = self.execute(
             writer, scene_id, ticket, affected, retained_signatures,
             saved_sha256, authorization, impact,
             validated_after, verify_before=verify_before)
+        seconds = time.perf_counter() - started
+        # Metrics are empirical. Offline single-call packing is not a claim
+        # of 100x actual Archicad wall-clock performance.
+        return dict(outcome, bulkMetrics={
+            'itemCount': len(items),
+            'nativeSceneWriterCalls': 1,
+            'durationSeconds': round(seconds, 4),
+            'itemsPerSecond': round(len(items)/seconds, 3) if seconds > 0 else None,
+            'recordedStatus': outcome.get('status'),
+            'nativeSaved': False,
+        })
 
     def native_facts(self,workflow,model_step,elements_step,boxes_step=None):
         """Reuse existing BREP/IFC quantities; provider boxes remain separate."""
