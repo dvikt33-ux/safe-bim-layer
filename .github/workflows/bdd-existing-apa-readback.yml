@@ -1,0 +1,27 @@
+name: BDD Existing APA Live Readback Preflight
+on:
+  pull_request:
+    paths:
+      - "scripts/apa_bdd_existing_router_readback.py"
+      - "tests/test_apa_bdd_existing_router_readback.py"
+      - "examples/accelerator/bdd-house-20261016-readonly-native-task.json"
+      - ".github/workflows/bdd-existing-apa-readback.yml"
+  workflow_dispatch:
+
+jobs:
+  baseline-and-existing-graph:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile read-only launcher
+        run: python -m py_compile scripts/apa_bdd_existing_router_readback.py
+      - name: Verify native binding and existing BIM Graph
+        run: |
+          python -m pip install jsonschema networkx shapely
+          python -m unittest discover -s tests -p test_apa_bdd_existing_router_readback.py -v
