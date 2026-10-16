@@ -496,6 +496,85 @@ class DynamicCommands:
             'nativeSaved': False,
         })
 
+    def copy_existing_many(self, writer, scene_id, prototype_guid, prototype_type,
+                           displacements, retained_signatures, saved_sha256,
+                           authorization, verify_before, verify_after):
+        """Duplicate ONE existing native element into N positions in ONE Tapir call.
+
+        The already-live Tapir 1.5.10 MoveElements schema explicitly supports
+        elementsWithMoveVectors[].copy=true. This is genuine Archicad native
+        duplication, NOT repeatedly creating an equivalent Column/Beam.
+
+        Existing DynamicCommands.execute() -> SceneWriter SQLite is the only
+        native write path, including unchanged retained BREP signatures and
+        intent-before-write. No automatic fallback to Create* or retries.
+
+        The prototype GUID remains in the affected scope, even though
+        its body/attributes are expected to be unchanged. Only the caller's
+        source-verified native BREP verifier can declare the new copies PASS.
+        """
+        if prototype_type not in {'Column', 'Beam', 'Object'}:
+            raise ValueError('NATIVE_COPY_ONLY_SUPPORTED_STANDALONE_PROTOTYPES')
+        if not isinstance(prototype_guid, str) or not prototype_guid:
+            raise ValueError('NATIVE_COPY_EXISTING_PROTOTYPE_GUID_REQUIRED')
+        if not isinstance(displacements, list) or not 1 <= len(displacements) <= 200:
+            raise ValueError('NATIVE_COPY_REQUIRES_1_TO_200_OFFSETS')
+        if not callable(verify_before) or not callable(verify_after):
+            raise ValueError('NATIVE_COPY_REQUIRES_SOURCE_AND_BODY_READBACK')
+        if (not isinstance(retained_signatures, dict)
+                or prototype_guid.lower() in {k.lower() for k in retained_signatures}):
+            raise ValueError('NATIVE_COPY_PROTOTYPE_MUST_BE_AFFECTED_NOT_RETAINED')
+        rows = []
+        positions = set()
+        for vector in displacements:
+            if (not isinstance(vector, dict) or set(vector) != {'x','y','z'}
+                    or any(type(vector.get(axis)) not in (float,int)
+                           or not math.isfinite(vector[axis]) or
+                           abs(vector[axis]) > 10000.0 for axis in ('x','y','z'))):
+                raise ValueError('NATIVE_COPY_FINITE_3D_VECTOR_REQUIRED')
+            k = tuple(round(vector[axis], 7) for axis in ('x','y','z'))
+            if k in positions or k == (0.0,0.0,0.0):
+                raise ValueError('NATIVE_COPY_NO_DUPLICATE_OR_ZERO_OFFSET')
+            positions.add(k)
+            rows.append({'elementId': {'guid': prototype_guid},
+                         'moveVector': {axis: vector[axis] for axis in ('x','y','z')},
+                         'copy': True})
+        if self.operation_kind('MoveElements') != 'CREATE':
+            raise ValueError('NATIVE_COPY_MOVE_ELEMENTS_MUST_HAVE_EXPLICIT_CREATE_POLICY')
+        ticket = self.prepare('MoveElements', {'elementsWithMoveVectors': rows})
+        if ticket['effect'] != 'CREATE':
+            raise ValueError('NATIVE_COPY_WRONG_REVIEWED_EFFECT')
+        # The existing SceneWriter guarantees no replay if either source or
+        # result becomes ambiguous. Source geometry verification remains
+        # mandatory, including ColumnSegment/BeamSegment auto children.
+        def confirm(reply, prior):
+            data = reply.get('executionResults') if isinstance(reply,dict) else None
+            if (not isinstance(data,list) or len(data)!=len(rows)
+                    or any(not isinstance(x,dict) or x.get('success') is not True
+                           for x in data)):
+                raise ValueError('NATIVE_COPY_BATCH_PARTIAL_OR_UNKNOWN')
+            evidence = verify_after(reply, prior)
+            if (not isinstance(evidence,dict)
+                    or not str(evidence.get('status','')).endswith('PASS')
+                    or evidence.get('newPhysicalCopyCount')!=len(rows)
+                    or evidence.get('prototypeGuidUnchanged') is not True):
+                raise ValueError('NATIVE_COPY_PARENT_COUNT_AND_PROTOTYPE_BREP_REQUIRED')
+            return dict(evidence, copyCount=len(rows),
+                        sourceElementGuid=prototype_guid.lower(),
+                        nativeMethod='Tapir.MoveElements(copy=true)')
+        started=time.perf_counter()
+        outcome = self.execute(writer, scene_id, ticket, [prototype_guid],
+                               retained_signatures, saved_sha256,
+                               authorization, 'MODEL', confirm,
+                               verify_before=verify_before)
+        elapsed=time.perf_counter()-started
+        return dict(outcome, nativeCopyMetrics={
+            'requestedCopyCount':len(rows), 'nativeCommand':'MoveElements',
+            'nativeCalls':1, 'durationSeconds':round(elapsed,4),
+            'copiesPerSecond':round(len(rows)/elapsed,3) if elapsed>0 else None,
+            'status':outcome.get('status'),
+        })
+
     def native_facts(self,workflow,model_step,elements_step,boxes_step=None):
         """Reuse existing BREP/IFC quantities; provider boxes remain separate."""
         import archicad_connected_components as C
