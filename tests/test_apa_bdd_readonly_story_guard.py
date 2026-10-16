@@ -68,7 +68,9 @@ class StoryReadOnlyGuard(TestCase):
         self.assertIn("RUN.guarded_project_for_read(api)",dynamic_source)
         writer_source=inspect.getsource(RUN.SceneWriter.guarded_binding)
         self.assertIn("guarded_project(self.api, self.required_story)",writer_source)
-        self.assertNotIn("guarded_project_for_read",writer_source)
+        self.assertIn("if not self.allow_3d_view_for_write:",writer_source)
+        self.assertIn("3D_WRITER_REQUIRES_EXACT_SAVED_COPY_AUTHORIZATION",writer_source)
+        self.assertIn("guarded_project_for_read",writer_source)
 
 if __name__=="__main__":
     main()

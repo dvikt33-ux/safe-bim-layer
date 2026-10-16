@@ -583,8 +583,13 @@ def resolve_basic_slab_material(api, name):
 
 class SceneWriter:
     def __init__(self, api, journal_path, schema_path=None, preview_factory=None,
-                 adapters=None):
+                 adapters=None, allow_3d_view_for_write=False):
         self.api = api
+        # Explicit opt-in only for an already SHA-authorized saved copy.
+        # The default writer keeps the original active-story=0 guard.
+        if type(allow_3d_view_for_write) is not bool:
+            raise ValueError('3D_NATIVE_WRITE_OPTIN_MUST_BE_BOOLEAN')
+        self.allow_3d_view_for_write = allow_3d_view_for_write
         self.journal_path = Path(journal_path)
         self.schema_path = Path(schema_path) if schema_path is not None else DEFAULT_SCENE_SCHEMA
         self.preview_factory = preview_factory
@@ -646,7 +651,22 @@ class SceneWriter:
         return result
 
     def guarded_binding(self):
-        return guarded_project(self.api, self.required_story)
+        if not self.allow_3d_view_for_write:
+            return guarded_project(self.api, self.required_story)
+        # A native BREP dump regenerates the 3D view (actStory=-1). Under
+        # an EXACTLY hashed, explicitly authorized saved copy, permit only
+        # view 3D or the pinned first floor, not some other active story.
+        # This does not permit arbitrary PLN writes or bypass story topology.
+        if (self.required_story is not None or
+                _SAVED_COPY_AUTHORIZATION is None or
+                not authorized_authored_target(EXPECTED_PATH)):
+            raise ValueError('3D_WRITER_REQUIRES_EXACT_SAVED_COPY_AUTHORIZATION')
+        b = guarded_project_for_read(self.api)
+        if b['activeViewStoryIndex'] not in (0, -1):
+            raise ValueError('3D_WRITER_REQUIRES_3D_OR_STORY_ZERO')
+        return {'path':b['path'], 'name':b['name'],
+                'port':b['port'], 'tapirVersion':b['tapirVersion'],
+                'storyIndex':0}
 
     def verify_source_bindings(self,preflight):
         binding=preflight.get('integrationBindings',{}).get('dependencies',{}).get('sourceRoofTrimBinding')
