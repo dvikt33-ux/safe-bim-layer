@@ -1,0 +1,428 @@
+{
+  "schema": "apa.bdd.kr.wall-block-opening-source.v1",
+  "status": "PDF_SOURCE_MEASUREMENTS__NOT_HOST_WALL_COORDINATES__NOT_CREATED_IN_ARCHICAD",
+  "document": "3_этап_КП_КОМФОРТ_без_замазок.pdf",
+  "year": 2022,
+  "sources": {
+    "layout": "PDF page 12 (KR-10, wall block labels 1.1–1.23)",
+    "elevations": "PDF pages 13–17 (KR-11–KR-15), scale M 1:50"
+  },
+  "basis": "Dimensions read from labeled elevation dimension chains, in millimetres; where sill is 0 opening starts at low tie relative to the wall block, not yet a verified global Archicad sill offset.",
+  "wallBlocks": [
+    {
+      "id": "1.1",
+      "sourcePDFPage": 13,
+      "reportedOverallLengthMm": 5440,
+      "openings": [
+        {
+          "sourceSequenceInBlock": 1,
+          "widthMm": 1800,
+          "heightMm": 2400,
+          "nominalLowLevelMm": 0,
+          "sourceGeometryStatus": "SOURCE_DIMENSIONAL_CANDIDATE",
+          "interpretation": "full-height-or-door-like-opening",
+          "hostWallGuid": null,
+          "centerOffsetMm": null,
+          "requiresSourceReconciliation": true
+        },
+        {
+          "sourceSequenceInBlock": 2,
+          "widthMm": 1800,
+          "heightMm": 2400,
+          "nominalLowLevelMm": 0,
+          "sourceGeometryStatus": "SOURCE_DIMENSIONAL_CANDIDATE",
+          "interpretation": "full-height-or-door-like-opening",
+          "hostWallGuid": null,
+          "centerOffsetMm": null,
+          "requiresSourceReconciliation": true
+        }
+      ]
+    },
+    {
+      "id": "1.2",
+      "sourcePDFPage": 13,
+      "reportedOverallLengthMm": 1450,
+      "openings": [
+        {
+          "sourceSequenceInBlock": 1,
+          "widthMm": 1000,
+          "heightMm": 2400,
+          "nominalLowLevelMm": 0,
+          "sourceGeometryStatus": "SOURCE_DIMENSIONAL_CANDIDATE",
+          "interpretation": "full-height-or-door-like-opening",
+          "hostWallGuid": null,
+          "centerOffsetMm": null,
+          "requiresSourceReconciliation": true
+        }
+      ]
+    },
+    {
+      "id": "1.3",
+      "sourcePDFPage": 13,
+      "reportedOverallLengthMm": 1570,
+      "openings": [
+        {
+          "sourceSequenceInBlock": 1,
+          "widthMm": 1010,
+          "heightMm": 2400,
+          "nominalLowLevelMm": 0,
+          "sourceGeometryStatus": "SOURCE_DIMENSIONAL_CANDIDATE",
+          "interpretation": "full-height-or-door-like-opening",
+          "hostWallGuid": null,
+          "centerOffsetMm": null,
+          "requiresSourceReconciliation": true
+        }
+      ]
+    },
+    {
+      "id": "1.4",
+      "sourcePDFPage": 13,
+      "reportedOverallLengthMm": 250,
+      "openings": []
+    },
+    {
+      "id": "1.5",
+      "sourcePDFPage": 13,
+      "reportedOverallLengthMm": 7225,
+      "openings": [
+        {
+          "sourceSequenceInBlock": 1,
+          "widthMm": 700,
+          "heightMm": 2400,
+          "nominalLowLevelMm": 0,
+          "sourceGeometryStatus": "SOURCE_DIMENSIONAL_CANDIDATE",
+          "interpretation": "full-height-or-door-like-opening",
+          "hostWallGuid": null,
+          "centerOffsetMm": null,
+          "requiresSourceReconciliation": true
+        }
+      ]
+    },
+    {
+      "id": "1.6",
+      "sourcePDFPage": 13,
+      "reportedOverallLengthMm": 8440,
+      "openings": [
+        {
+          "sourceSequenceInBlock": 1,
+          "widthMm": 1600,
+          "heightMm": 2400,
+          "nominalLowLevelMm": 0,
+          "sourceGeometryStatus": "SOURCE_DIMENSIONAL_CANDIDATE",
+          "interpretation": "full-height-or-door-like-opening",
+          "hostWallGuid": null,
+          "centerOffsetMm": null,
+          "requiresSourceReconciliation": true
+        },
+        {
+          "sourceSequenceInBlock": 2,
+          "widthMm": 1200,
+          "heightMm": 1700,
+          "nominalLowLevelMm": 700,
+          "sourceGeometryStatus": "SOURCE_DIMENSIONAL_CANDIDATE",
+          "interpretation": "raised-window-like-opening",
+          "hostWallGuid": null,
+          "centerOffsetMm": null,
+          "requiresSourceReconciliation": true
+        },
+        {
+          "sourceSequenceInBlock": 3,
+          "widthMm": 1600,
+          "heightMm": 2400,
+          "nominalLowLevelMm": 0,
+          "sourceGeometryStatus": "SOURCE_DIMENSIONAL_CANDIDATE",
+          "interpretation": "full-height-or-door-like-opening",
+          "hostWallGuid": null,
+          "centerOffsetMm": null,
+          "requiresSourceReconciliation": true
+        }
+      ]
+    },
+    {
+      "id": "1.7",
+      "sourcePDFPage": 14,
+      "reportedOverallLengthMm": 14380,
+      "openings": [
+        {
+          "sourceSequenceInBlock": 1,
+          "widthMm": 1600,
+          "heightMm": 1500,
+          "nominalLowLevelMm": 900,
+          "sourceGeometryStatus": "SOURCE_DIMENSIONAL_CANDIDATE",
+          "interpretation": "raised-window-like-opening",
+          "hostWallGuid": null,
+          "centerOffsetMm": null,
+          "requiresSourceReconciliation": true
+        },
+        {
+          "sourceSequenceInBlock": 2,
+          "widthMm": 800,
+          "heightMm": 1500,
+          "nominalLowLevelMm": 900,
+          "sourceGeometryStatus": "SOURCE_DIMENSIONAL_CANDIDATE",
+          "interpretation": "raised-window-like-opening",
+          "hostWallGuid": null,
+          "centerOffsetMm": null,
+          "requiresSourceReconciliation": true
+        },
+        {
+          "sourceSequenceInBlock": 3,
+          "widthMm": 1600,
+          "heightMm": 2400,
+          "nominalLowLevelMm": 0,
+          "sourceGeometryStatus": "SOURCE_DIMENSIONAL_CANDIDATE",
+          "interpretation": "full-height-or-door-like-opening",
+          "hostWallGuid": null,
+          "centerOffsetMm": null,
+          "requiresSourceReconciliation": true
+        },
+        {
+          "sourceSequenceInBlock": 4,
+          "widthMm": 800,
+          "heightMm": 2400,
+          "nominalLowLevelMm": 0,
+          "sourceGeometryStatus": "SOURCE_DIMENSIONAL_CANDIDATE",
+          "interpretation": "full-height-or-door-like-opening",
+          "hostWallGuid": null,
+          "centerOffsetMm": null,
+          "requiresSourceReconciliation": true
+        },
+        {
+          "sourceSequenceInBlock": 5,
+          "widthMm": 1000,
+          "heightMm": 2400,
+          "nominalLowLevelMm": 0,
+          "sourceGeometryStatus": "SOURCE_DIMENSIONAL_CANDIDATE",
+          "interpretation": "full-height-or-door-like-opening",
+          "hostWallGuid": null,
+          "centerOffsetMm": null,
+          "requiresSourceReconciliation": true
+        }
+      ]
+    },
+    {
+      "id": "1.8",
+      "sourcePDFPage": 14,
+      "reportedOverallLengthMm": 9280,
+      "openings": [
+        {
+          "sourceSequenceInBlock": 1,
+          "widthMm": 1500,
+          "heightMm": 900,
+          "nominalLowLevelMm": 1100,
+          "sourceGeometryStatus": "SOURCE_DIMENSIONAL_CANDIDATE",
+          "interpretation": "raised-window-like-opening",
+          "hostWallGuid": null,
+          "centerOffsetMm": null,
+          "requiresSourceReconciliation": true
+        }
+      ]
+    },
+    {
+      "id": "1.9",
+      "sourcePDFPage": 15,
+      "reportedOverallLengthMm": 1910,
+      "openings": []
+    },
+    {
+      "id": "1.10",
+      "sourcePDFPage": 15,
+      "reportedOverallLengthMm": 950,
+      "openings": []
+    },
+    {
+      "id": "1.11",
+      "sourcePDFPage": 15,
+      "reportedOverallLengthMm": 12160,
+      "openings": [
+        {
+          "sourceSequenceInBlock": 1,
+          "widthMm": 900,
+          "heightMm": 2100,
+          "nominalLowLevelMm": 0,
+          "sourceGeometryStatus": "SOURCE_DIMENSIONAL_CANDIDATE",
+          "interpretation": "full-height-or-door-like-opening",
+          "hostWallGuid": null,
+          "centerOffsetMm": null,
+          "requiresSourceReconciliation": true
+        },
+        {
+          "sourceSequenceInBlock": 2,
+          "widthMm": 900,
+          "heightMm": 2100,
+          "nominalLowLevelMm": 0,
+          "sourceGeometryStatus": "SOURCE_DIMENSIONAL_CANDIDATE",
+          "interpretation": "full-height-or-door-like-opening",
+          "hostWallGuid": null,
+          "centerOffsetMm": null,
+          "requiresSourceReconciliation": true
+        },
+        {
+          "sourceSequenceInBlock": 3,
+          "widthMm": 800,
+          "heightMm": 2100,
+          "nominalLowLevelMm": 0,
+          "sourceGeometryStatus": "SOURCE_DIMENSIONAL_CANDIDATE",
+          "interpretation": "full-height-or-door-like-opening",
+          "hostWallGuid": null,
+          "centerOffsetMm": null,
+          "requiresSourceReconciliation": true
+        },
+        {
+          "sourceSequenceInBlock": 4,
+          "widthMm": 900,
+          "heightMm": 2100,
+          "nominalLowLevelMm": 0,
+          "sourceGeometryStatus": "SOURCE_DIMENSIONAL_CANDIDATE",
+          "interpretation": "full-height-or-door-like-opening",
+          "hostWallGuid": null,
+          "centerOffsetMm": null,
+          "requiresSourceReconciliation": true
+        }
+      ]
+    },
+    {
+      "id": "1.12",
+      "sourcePDFPage": 15,
+      "reportedOverallLengthMm": 2910,
+      "openings": []
+    },
+    {
+      "id": "1.13",
+      "sourcePDFPage": 15,
+      "reportedOverallLengthMm": 2910,
+      "openings": []
+    },
+    {
+      "id": "1.14",
+      "sourcePDFPage": 15,
+      "reportedOverallLengthMm": 2910,
+      "openings": []
+    },
+    {
+      "id": "1.15",
+      "sourcePDFPage": 15,
+      "reportedOverallLengthMm": 800,
+      "openings": []
+    },
+    {
+      "id": "1.16",
+      "sourcePDFPage": 16,
+      "reportedOverallLengthMm": 1720,
+      "openings": []
+    },
+    {
+      "id": "1.17",
+      "sourcePDFPage": 16,
+      "reportedOverallLengthMm": 7450,
+      "openings": [
+        {
+          "sourceSequenceInBlock": 1,
+          "widthMm": 800,
+          "heightMm": 2100,
+          "nominalLowLevelMm": 0,
+          "sourceGeometryStatus": "SOURCE_DIMENSIONAL_CANDIDATE",
+          "interpretation": "full-height-or-door-like-opening",
+          "hostWallGuid": null,
+          "centerOffsetMm": null,
+          "requiresSourceReconciliation": true
+        },
+        {
+          "sourceSequenceInBlock": 2,
+          "widthMm": 900,
+          "heightMm": 2100,
+          "nominalLowLevelMm": 0,
+          "sourceGeometryStatus": "SOURCE_DIMENSIONAL_CANDIDATE",
+          "interpretation": "full-height-or-door-like-opening",
+          "hostWallGuid": null,
+          "centerOffsetMm": null,
+          "requiresSourceReconciliation": true
+        }
+      ]
+    },
+    {
+      "id": "1.18",
+      "sourcePDFPage": 16,
+      "reportedOverallLengthMm": 2910,
+      "openings": []
+    },
+    {
+      "id": "1.19",
+      "sourcePDFPage": 16,
+      "reportedOverallLengthMm": 2910,
+      "openings": [
+        {
+          "sourceSequenceInBlock": 1,
+          "widthMm": 700,
+          "heightMm": 2100,
+          "nominalLowLevelMm": 0,
+          "sourceGeometryStatus": "SOURCE_DIMENSIONAL_CANDIDATE",
+          "interpretation": "full-height-or-door-like-opening",
+          "hostWallGuid": null,
+          "centerOffsetMm": null,
+          "requiresSourceReconciliation": true
+        },
+        {
+          "sourceSequenceInBlock": 2,
+          "widthMm": 900,
+          "heightMm": 2100,
+          "nominalLowLevelMm": 0,
+          "sourceGeometryStatus": "SOURCE_DIMENSIONAL_CANDIDATE",
+          "interpretation": "full-height-or-door-like-opening",
+          "hostWallGuid": null,
+          "centerOffsetMm": null,
+          "requiresSourceReconciliation": true
+        }
+      ]
+    },
+    {
+      "id": "1.20",
+      "sourcePDFPage": 17,
+      "reportedOverallLengthMm": 1520,
+      "openings": []
+    },
+    {
+      "id": "1.21",
+      "sourcePDFPage": 17,
+      "reportedOverallLengthMm": 3360,
+      "openings": []
+    },
+    {
+      "id": "1.22",
+      "sourcePDFPage": 17,
+      "reportedOverallLengthMm": 3360,
+      "openings": [
+        {
+          "sourceSequenceInBlock": 1,
+          "widthMm": 1500,
+          "heightMm": 2100,
+          "nominalLowLevelMm": 0,
+          "sourceGeometryStatus": "SOURCE_DIMENSIONAL_CANDIDATE",
+          "interpretation": "full-height-or-door-like-opening",
+          "hostWallGuid": null,
+          "centerOffsetMm": null,
+          "requiresSourceReconciliation": true
+        }
+      ]
+    },
+    {
+      "id": "1.23",
+      "sourcePDFPage": 17,
+      "reportedOverallLengthMm": 650,
+      "openings": []
+    }
+  ],
+  "summary": {
+    "blockCount": 23,
+    "totalOpenings": 23,
+    "openingsOnSourcePdfPages": [
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "geometryNotYetMeasured": "Exact opening lateral offsets along each wall block and mapping from blocks 1.1–1.23 to Archicad wall GUIDs"
+  },
+  "prohibition": "Do not call CreateWindows or CreateDoors from this register until each opening's complete lateral coordinate, correct native host wall and orientation have been established from PDF and confirmed in live PLN. Do not use other 2026 architecture project."
+}
