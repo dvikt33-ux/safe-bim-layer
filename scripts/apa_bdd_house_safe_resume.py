@@ -210,9 +210,9 @@ def run(args):
 
     B.project(B.WORKING)
     model=B.guids()
-    roots={x for stage in manifest["stages"]
+    roots={x.lower() for stage in manifest["stages"]
            for x in stage.get("primaryGuids",[])}
-    children={x for stage in manifest["stages"]
+    children={x.lower() for stage in manifest["stages"]
               for x in stage.get("autoChildGuids",[])}
     if len(roots)!=125:
         raise RuntimeError("Expected 125 primary BIM entities; have %d"%len(roots))
