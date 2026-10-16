@@ -219,7 +219,24 @@ def plan():
     # Native roof parameters are a provisional envelope, not exact valleys.
     level=3.33
     angle=math.atan2(6.295-level,9.38/2)
+    # KR-6 floor framing: 100x200 joists at 600 mm nominal spacing.
+    # Exact bay ends remain provisional until every joist is individually traced.
+    floor_joists=[]
+    x=0.15
+    while x<14.2:
+        low_y=0.15 if x<=5.34 else 1.24
+        for a,b in ((low_y,5.235),(5.235,9.23)):
+            if b-a>0.1:
+                floor_joists.append({
+                    'begCoordinate':c2((x,a)),
+                    'endCoordinate':c2((x,b)),
+                    'floorIndex':0,'zCoordinate':-0.30,
+                    'width':0.1,'height':0.2,
+                    'isWidthAndHeightLinked':False,
+                })
+        x+=0.6
     return {
+        "floorJoists":floor_joists,
         "piles":[{"coordinates":c3(x,y,-3.0),"height":2.4,
                   "width":0.30,"depth":0.30,
                   "circleBased":True,"floorIndex":0}
@@ -262,11 +279,23 @@ def plan():
     }
 
 
+def assert_archicad29():
+    from archicad import ACConnection
+    c=ACConnection.connect(PORT)
+    if c is None:
+        raise RuntimeError('Archicad 29 is not reachable on port 19727')
+    product=c.commands.GetProductInfo()
+    if int(product[0])!=29 or int(product[1])!=5101:
+        raise RuntimeError('WRONG ARCHICAD VERSION/BUILD: %r' % (product,))
+    return product
+
+
 def run(args):
     if args.port!=PORT:
         raise RuntimeError("Port must be 19727, no automatic discovery")
     if not ORIGINAL.is_file():
         raise RuntimeError("Source PLN not found: %s" % ORIGINAL)
+    assert_archicad29()
     live=project(ORIGINAL)
     product=api("GetAddOnVersion")
     if not str(product.get("version","")).startswith("1.5."):
@@ -323,6 +352,7 @@ def run(args):
     # opening a project can prompt to save unsaved changes in Archicad.
     api("OpenProject",{"projectFilePath":str(WORKING)})
     project(WORKING)
+    assert_archicad29()
     current=guids()
     if current!=baseline:
         raise RuntimeError("Working PLN baseline differs; stop")
@@ -333,6 +363,7 @@ def run(args):
         ("49 bored piles", "CreateColumns","columnsData",components["piles"]),
         ("400 mm RC grillage preliminary Z", "CreateBeams","beamsData",components["grillage"]),
         ("L-shaped exterior frame envelope","CreateWalls","wallsData",components["exteriorWalls"]),
+        ("100x200 timber floor joists @ 600 mm","CreateBeams","beamsData",components["floorJoists"]),
         ("timber floor sheathing as native slab","CreateSlabs","slabsData",components["floorPanels"]),
         ("terrace timber platforms as native slabs","CreateSlabs","slabsData",components["terracePlatforms"]),
         ("provisional pitched multi-plane roof","CreateRoofs","roofsData",components["roofEnvelope"]),
