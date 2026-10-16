@@ -31,6 +31,7 @@ METHODS = (
     "distribute_evenly_between",
     "distribute_along_polyline",
     "copy_multiple_prototypes",
+    "plan_reuse_existing",
 )
 
 
@@ -70,7 +71,9 @@ def inject(source, target):
                 raise ValueError("EXISTING_LOCAL_METHOD_DIFFERS_REFUSE_REPLACE:"+method)
             already.append(method)
         else:
-            insert.append("".join(source_lines[fn.lineno-1:fn.end_lineno]))
+            # Include decorators: plan_reuse_existing is @staticmethod.
+            start=min([fn.lineno]+[dec.lineno for dec in fn.decorator_list])
+            insert.append("".join(source_lines[start-1:fn.end_lineno]))
             added.append(method)
 
     if not insert:
