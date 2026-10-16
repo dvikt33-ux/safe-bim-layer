@@ -28,6 +28,7 @@ from archicad_execution_optimizer import prepare_optimized_native_task
 
 COPY_NAME = "native_copy_existing_batch"
 CREATE_NAME = "native_create_columns_batch"
+BEAM_CREATE_NAME = "native_create_beams_batch"
 CAPABILITY = {
     "MoveElements": {
         "strategy": COPY_NAME,
@@ -36,6 +37,10 @@ CAPABILITY = {
     "CreateColumns": {
         "strategy": CREATE_NAME,
         "requirements": "source-verified complete target column creation rows",
+    },
+    "CreateBeams": {
+        "strategy": BEAM_CREATE_NAME,
+        "requirements": "source-verified complete target beam creation rows on story zero",
     },
 }
 
@@ -76,32 +81,63 @@ def _catalog_find(router):
 
 
 def _native_create_targets(targets, present):
+    """Find complete typed create families WITHOUT inventing profile or stories.
+
+    V1 prepares exactly one homogeneous family per create alternative.
+    Beams require start and end endpoints, nonzero span, exact source
+    elevation and first-story origin 0. Higher story beams require a separate
+    story-level qualifier and are therefore excluded.
+    """
     rows = []
+    created_types = set()
     for target in targets:
         f = (target["type"], target["familySignature"], target["storyIndex"])
         a = target["anchor"]
         key = (f, *(round(a[k], 7) for k in ("x", "y", "z")))
         if key in present:
             continue
-        if target["type"] != "Column":
+        kind = target["type"]
+        if kind not in {"Column", "Beam"}:
             return None
         native = target.get("nativeCreateData")
         if not isinstance(native, dict):
             return None
         native = immutable(native)
-        # Do not infer missing typed geometry or material from sourceRef.
-        xy = native.get("coordinates")
-        if not isinstance(xy, dict) or set(xy) != {"x", "y", "z"}:
-            return None
-        if any(type(xy[k]) not in (int, float) or not math.isfinite(xy[k])
-               or abs(xy[k]-a[k]) > 1e-7 for k in ("x", "y", "z")):
-            return None
-        if "buildingMaterialId" not in native or "width" not in native or "depth" not in native or "height" not in native:
+        created_types.add(kind)
+        if ("buildingMaterialId" not in native or "width" not in native
+                or "height" not in native):
             return None
         if "floorIndex" not in native or native["floorIndex"] != target["storyIndex"]:
             return None
+        if kind == "Column":
+            xyz = native.get("coordinates")
+            if (not isinstance(xyz, dict) or set(xyz) != {"x", "y", "z"}
+                    or "depth" not in native):
+                return None
+            if any(type(xyz[k]) not in (int, float) or not math.isfinite(xyz[k])
+                   or abs(xyz[k]-a[k]) > 1e-7 for k in ("x", "y", "z")):
+                return None
+        else:
+            begin = native.get("begCoordinate")
+            end = native.get("endCoordinate")
+            if (not isinstance(begin, dict) or set(begin) != {"x", "y"}
+                    or not isinstance(end, dict) or set(end) != {"x", "y"}):
+                return None
+            if (any(type(v) not in (int, float) or not math.isfinite(v)
+                    for v in (*begin.values(), *end.values()))
+                    or not all(abs(begin[k]-a[k]) <= 1e-7 for k in ("x", "y"))
+                    or all(abs(begin[k]-end[k]) < 1e-7 for k in ("x", "y"))):
+                return None
+            if (target["storyIndex"] != 0
+                    or type(native.get("zCoordinate")) not in (int, float)
+                    or not math.isfinite(native["zCoordinate"])
+                    or abs(native["zCoordinate"] - a["z"]) > 1e-7):
+                return None
         rows.append(native)
-    return rows
+    if len(created_types) != 1:
+        return None
+    kind = next(iter(created_types))
+    return ("CreateColumns", rows) if kind == "Column" else ("CreateBeams", rows)
 
 
 def _calibrate(router, command, count, benchmarks):
@@ -211,13 +247,22 @@ def discover_native_execution_plan(router, intent, planner_python=None):
                       source["storyIndex"]),
                      *(round(a[k], 7) for k in ("x", "y", "z"))))
     missing_create = _native_create_targets(targets, present)
-    if ("CreateColumns" in qualified and missing_create):
-        accept(CREATE_NAME, "CreateColumns",
-               {"columnsData": missing_create}, len(missing_create))
-    elif targets and not copy_plan["existingElementGuids"]:
+    if missing_create:
+        create_command, create_rows = missing_create
+        if create_command in qualified:
+            create_name = CREATE_NAME if create_command == "CreateColumns" else BEAM_CREATE_NAME
+            data_field = "columnsData" if create_command == "CreateColumns" else "beamsData"
+            accept(create_name, create_command,
+                   {data_field: create_rows}, len(create_rows))
+        else:
+            rejected.append({
+                "id": create_command, "command": create_command,
+                "reason": "CREATE_POLICY_NOT_REVIEWED_OR_RUNTIME_QUALIFIED",
+            })
+    else:
         rejected.append({
-            "id": CREATE_NAME, "command": "CreateColumns",
-            "reason": "NO_APPROVED_CREATE_POLICY_OR_SOURCE_QUALIFIED_NATIVE_DATA",
+            "id": "native_create_batch", "command": "CreateColumns/CreateBeams",
+            "reason": "NO_COMPLETE_HOMOGENEOUS_SOURCE_QUALIFIED_NATIVE_DATA",
         })
 
     discovery = {
