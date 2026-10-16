@@ -1,0 +1,23 @@
+name: BDD 2022 KR Geometry Readback Offline
+on:
+  pull_request:
+    paths:
+      - "scripts/apa_bdd_native_core_audit.py"
+      - "tests/test_bdd_native_core_audit.py"
+      - ".github/workflows/bdd-native-geometry-audit-check.yml"
+  workflow_dispatch:
+jobs:
+  focused-readonly-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile native read-only audit
+        run: python -m py_compile scripts/apa_bdd_native_core_audit.py
+      - name: Run source and guard checks
+        run: python -m unittest discover -s tests -p test_bdd_native_core_audit.py -v

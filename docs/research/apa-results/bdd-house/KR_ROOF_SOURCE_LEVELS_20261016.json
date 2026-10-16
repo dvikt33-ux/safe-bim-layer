@@ -1,0 +1,67 @@
+{
+  "schema": "apa.bdd.house.roof-source-constraints.v1",
+  "status": "SOURCE_LEVELS_CONFIRMED__COMPLETE_NATIVE_ROOF_GEOMETRY_NOT_YET_RECONSTRUCTED",
+  "source": "3_этап_КП_КОМФОРТ_без_замазок.pdf",
+  "sheets": {
+    "section1_1": {
+      "pdfPage": 21,
+      "roofRidgeZ": 6.295,
+      "roofFasciaZ": 3.03,
+      "roofEaveDetailZ": 3.33,
+      "canopyLevels": [
+        2.45,
+        2.79
+      ],
+      "outboardEaveSpan_m": 0.84
+    },
+    "section2_2": {
+      "pdfPage": 22,
+      "roofRidgeZ": 6.295,
+      "roofEaveLowZ": 3.03,
+      "roofEaveTopZ": 3.33,
+      "mauerlatLowerZ": 3.42,
+      "intermediateFrameLevels": [
+        4.7,
+        5.2,
+        5.58,
+        5.78,
+        5.08,
+        4.88
+      ],
+      "secondaryRoofLineZ": 5.395
+    },
+    "rafterPlan": {
+      "pdfPage": 19,
+      "mainAxesXY_m": [
+        14.28,
+        9.38
+      ],
+      "specialSourceDetail": "Crossing gable/valley region at southern side; multiple rafters, trusses, and ridge/purlin lines",
+      "memberNominal_mm": [
+        50,
+        200
+      ]
+    }
+  },
+  "currentPlnCandidate": {
+    "source": "apa-bdd-native-build-20261016T141451Z-ec01e337.json",
+    "roofElements": 1,
+    "builderLevel_m": 3.33,
+    "builderTargetRidge_m": 6.295,
+    "builderHalfSpan_m": 4.69,
+    "actualNativeRoofBoundingBox": "NOT_YET_READ_IN_FULL_GEOMETRY_AUDIT"
+  },
+  "constructionDecision": "DO_NOT_REPLACE_OR_REBUILD_NATIVELY_FROM_LEVELS_ALONE",
+  "unresolved": [
+    "Precise roof planes and orientation for multiple gables",
+    "Ridge and valley XY lines",
+    "Full outer eave polygon and fascia edge Z per slope",
+    "Rafter geometry and host relationships",
+    "Material assembly thickness, connections to frame"
+  ],
+  "notes": [
+    "Ridge +6.295 m is confirmed by two distinct PDF sections (pages 21,22)",
+    "At least one separate roof region is shown by 2022 KR rafter layout and cross-section",
+    "The existing multi-plane single Roof object is explicitly provisional and must not be claimed complete"
+  ]
+}
