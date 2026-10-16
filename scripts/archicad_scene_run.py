@@ -165,6 +165,54 @@ def guarded_project(api, required_story=None):
             "port": PORT, "tapirVersion": version, "storyIndex": native_index}
 
 
+def guarded_project_for_read(api):
+    """Exactly bound PLN + verified native story topology, independent of UI view.
+
+    READ-ONLY guard for DynamicCommands.read(): the active Archicad view may
+    be 3D (actStory=-1) or a legitimate upper story. It is not an element
+    home-story and must not be a precondition for Get* operations.
+
+    SceneWriter.guarded_binding() continues to call guarded_project() above.
+    Never reuse this relaxed *view* guard as a write authorization.
+    """
+    info = api("GetProjectInfo", {})
+    if (not isinstance(info, dict) or info.get("projectName") != EXPECTED_NAME
+            or info.get("projectPath") != EXPECTED_PATH
+            or info.get("isUntitled") is not False
+            or info.get("isTeamwork") is not False):
+        raise ValueError("WRONG_PROJECT: exact saved PLN required for native read")
+    native = api("GetStories", {})
+    if not isinstance(native, dict) or not isinstance(native.get("stories"), list):
+        raise ValueError("READONLY_NATIVE_STORY_MAP_UNAVAILABLE")
+    stories = native["stories"]
+    indices = [s.get("index") for s in stories if isinstance(s, dict)]
+    if (len(stories) != len(indices) or not all(type(i) is int for i in indices)
+            or len(indices) != len(set(indices))):
+        raise ValueError("READONLY_NATIVE_STORY_MAP_INVALID")
+    first = next((s for s in stories if s["index"] == 0), None)
+    if (not isinstance(first, dict) or first.get("floorId") != 1
+            or not close(first.get("level"), 0.0)):
+        raise ValueError("READONLY_PINNED_FIRST_STORY_MISMATCH")
+    if any(not type(s.get("floorId")) is int or
+           not type(s.get("level")) in (int, float) or
+           not math.isfinite(s["level"]) for s in stories):
+        raise ValueError("READONLY_NATIVE_STORY_TOPOLOGY_INVALID")
+    active = native.get("actStory")
+    if type(active) is not int:
+        raise ValueError("READONLY_ACTIVE_VIEW_INDEX_MISSING")
+    version = api("GetAddOnVersion", {}).get("version")
+    if version != EXPECTED_TAPIR:
+        raise ValueError(f"TAPIR_VERSION_MISMATCH: {version!r} != {EXPECTED_TAPIR}")
+    return {"path": info["projectPath"], "name": info["projectName"],
+            "port": PORT, "tapirVersion": version, "storyIndex": 0,
+            "activeViewStoryIndex": active,
+            "storyTopology": [
+                {"index": s["index"], "floorId": s["floorId"],
+                 "level": s["level"], "label": s.get("name") or s.get("uName") or ""}
+                for s in sorted(stories, key=lambda s: s["index"])
+            ]}
+
+
 def scan_for_existing_geometry(api, anchor_x, anchor_y, envelope=None):
     """Conservatively refuse if an existing 3D body touches the scene envelope.
 
