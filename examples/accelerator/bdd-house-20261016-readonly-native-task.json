@@ -1,0 +1,1389 @@
+{
+  "schemaVersion": "apa-native-task/1",
+  "request": "BDD дом (2022): получить read-only native context всех 125 уже существующих физических элементов для BIM Graph, не создавать и не модифицировать объекты, сохранить 261 GUID; проёмы и кровлю не строить до подтверждения привязок по PDF.",
+  "graph": {
+    "operations": [
+      {
+        "id": "read-binding",
+        "command": "GetProjectInfo",
+        "params": {}
+      },
+      {
+        "id": "read-stories",
+        "command": "GetStories",
+        "params": {},
+        "after": [
+          "read-binding"
+        ]
+      },
+      {
+        "id": "read-model-inventory",
+        "command": "GetAllElements",
+        "params": {},
+        "after": [
+          "read-binding"
+        ]
+      },
+      {
+        "id": "read-physical-details-01",
+        "command": "GetDetailsOfElements",
+        "params": {
+          "elements": [
+            {
+              "elementId": {
+                "guid": "029013ea-c92b-4729-aba3-1666cf2ef7ae"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "073eaad0-fecb-4119-84b4-dee86bf5c7e6"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "07537cfb-9ef5-4b33-87b8-6e8b48ab2d19"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "0fae1739-159d-4612-ae89-dad5603893b9"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "10a603ec-8077-4eec-b1e9-471228ec4f41"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "11387078-0df0-43a9-96b6-cfeb0f8e22fa"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "123d31ee-41fc-4294-a88f-9135312257f0"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "180cbf78-146d-4002-a2d8-1c78b669f9ad"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "1838ec95-1b12-4d6d-b6c6-e3521c6c6d39"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "1853d03e-f6e4-40c0-9ae5-ff742847f4be"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "19aaa3c1-3591-4a4e-b91e-ec3b28606337"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "19fab51b-9095-4ff8-b11d-c2aeeeb63c15"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "1c3e2c9f-ab6d-48cb-8c71-27f67ba62ef8"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "1cd69032-9d8b-481f-af74-19f9e5f8fcfc"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "1f153caf-8c3e-4d0b-b7e2-4b51ab5a8255"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "1f795816-fb0e-4a7b-b0bb-6abc0fa312f9"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "216f7972-eeb4-45c0-9b4b-ffdc2243a4b0"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "2182fb84-c489-403a-a82d-d1a95291f2be"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "232fd4dd-b93a-4409-9c21-78a98847a9ef"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "25180ce5-3c90-4010-9af5-1bc984047460"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "254b5b9f-50fe-424d-b8f3-39c88b28dc7a"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "266ba513-921f-4ad6-9bf9-06279dc5db77"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "2670c439-3096-4cf8-bc81-3ee4787eaed5"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "274696e9-f920-4d84-9b78-a1a5c86589b9"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "2a22831f-0c18-4323-95a2-559890bce68a"
+              }
+            }
+          ]
+        },
+        "after": [
+          "read-model-inventory"
+        ]
+      },
+      {
+        "id": "read-physical-bounds-01",
+        "command": "Get3DBoundingBoxes",
+        "params": {
+          "elements": [
+            {
+              "elementId": {
+                "guid": "029013ea-c92b-4729-aba3-1666cf2ef7ae"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "073eaad0-fecb-4119-84b4-dee86bf5c7e6"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "07537cfb-9ef5-4b33-87b8-6e8b48ab2d19"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "0fae1739-159d-4612-ae89-dad5603893b9"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "10a603ec-8077-4eec-b1e9-471228ec4f41"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "11387078-0df0-43a9-96b6-cfeb0f8e22fa"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "123d31ee-41fc-4294-a88f-9135312257f0"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "180cbf78-146d-4002-a2d8-1c78b669f9ad"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "1838ec95-1b12-4d6d-b6c6-e3521c6c6d39"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "1853d03e-f6e4-40c0-9ae5-ff742847f4be"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "19aaa3c1-3591-4a4e-b91e-ec3b28606337"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "19fab51b-9095-4ff8-b11d-c2aeeeb63c15"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "1c3e2c9f-ab6d-48cb-8c71-27f67ba62ef8"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "1cd69032-9d8b-481f-af74-19f9e5f8fcfc"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "1f153caf-8c3e-4d0b-b7e2-4b51ab5a8255"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "1f795816-fb0e-4a7b-b0bb-6abc0fa312f9"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "216f7972-eeb4-45c0-9b4b-ffdc2243a4b0"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "2182fb84-c489-403a-a82d-d1a95291f2be"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "232fd4dd-b93a-4409-9c21-78a98847a9ef"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "25180ce5-3c90-4010-9af5-1bc984047460"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "254b5b9f-50fe-424d-b8f3-39c88b28dc7a"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "266ba513-921f-4ad6-9bf9-06279dc5db77"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "2670c439-3096-4cf8-bc81-3ee4787eaed5"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "274696e9-f920-4d84-9b78-a1a5c86589b9"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "2a22831f-0c18-4323-95a2-559890bce68a"
+              }
+            }
+          ]
+        },
+        "after": [
+          "read-model-inventory"
+        ]
+      },
+      {
+        "id": "read-physical-details-02",
+        "command": "GetDetailsOfElements",
+        "params": {
+          "elements": [
+            {
+              "elementId": {
+                "guid": "2e3efa0f-5130-43b2-8064-35731cd9c5aa"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "2f0e49b6-106a-4653-ba2a-07d8e2562625"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "30128659-f4df-4d34-a60f-c847c69da1c4"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "3023dfc6-feb9-46a2-a04a-e7e450d94560"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "310a69eb-b9b7-4acb-8d18-70e5bfd165fd"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "31951fb1-b938-40ce-ad02-032402f705aa"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "323703e9-2bf2-4488-a24d-0ba20760400d"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "32f2dd92-04ec-4220-9ccc-fb75b357ad06"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "33e14223-2478-4f1d-9e7f-2640882b49aa"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "34f4b255-232f-482e-9e5f-c8cd321153fc"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "353813af-37b6-4cf7-a6ec-4177158b0677"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "36e82668-3330-49c5-a036-1a6779ee699b"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "379633e4-ea4f-4664-83d6-065a1ddfd697"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "3b17e566-79d2-493a-9263-d8b8ab302f16"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "3c340dff-454e-4faf-b33c-519c8ef58bc3"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "3e42fbe3-c561-455c-b0da-7f3535fa8704"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "3eca21b7-f99a-46e0-9a2d-c29f762e8a99"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "40a148f8-e53e-4d61-989d-2fd87994f397"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "419ac255-48c5-4a8e-a694-c4e7995d4368"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "43fb74df-f156-4d72-b0d8-93f9c21327fa"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "47792e1f-e82d-4cd0-8f95-55d8b2d63310"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "4917c196-800e-4cda-8abe-55763858ea52"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "493cabe0-c798-4841-b6f6-ff14dd688659"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "49b811ac-1215-4bb7-9804-3d5762a32800"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "4b6d54d7-f885-4b38-8b5f-02e11788f057"
+              }
+            }
+          ]
+        },
+        "after": [
+          "read-model-inventory"
+        ]
+      },
+      {
+        "id": "read-physical-bounds-02",
+        "command": "Get3DBoundingBoxes",
+        "params": {
+          "elements": [
+            {
+              "elementId": {
+                "guid": "2e3efa0f-5130-43b2-8064-35731cd9c5aa"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "2f0e49b6-106a-4653-ba2a-07d8e2562625"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "30128659-f4df-4d34-a60f-c847c69da1c4"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "3023dfc6-feb9-46a2-a04a-e7e450d94560"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "310a69eb-b9b7-4acb-8d18-70e5bfd165fd"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "31951fb1-b938-40ce-ad02-032402f705aa"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "323703e9-2bf2-4488-a24d-0ba20760400d"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "32f2dd92-04ec-4220-9ccc-fb75b357ad06"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "33e14223-2478-4f1d-9e7f-2640882b49aa"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "34f4b255-232f-482e-9e5f-c8cd321153fc"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "353813af-37b6-4cf7-a6ec-4177158b0677"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "36e82668-3330-49c5-a036-1a6779ee699b"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "379633e4-ea4f-4664-83d6-065a1ddfd697"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "3b17e566-79d2-493a-9263-d8b8ab302f16"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "3c340dff-454e-4faf-b33c-519c8ef58bc3"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "3e42fbe3-c561-455c-b0da-7f3535fa8704"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "3eca21b7-f99a-46e0-9a2d-c29f762e8a99"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "40a148f8-e53e-4d61-989d-2fd87994f397"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "419ac255-48c5-4a8e-a694-c4e7995d4368"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "43fb74df-f156-4d72-b0d8-93f9c21327fa"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "47792e1f-e82d-4cd0-8f95-55d8b2d63310"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "4917c196-800e-4cda-8abe-55763858ea52"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "493cabe0-c798-4841-b6f6-ff14dd688659"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "49b811ac-1215-4bb7-9804-3d5762a32800"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "4b6d54d7-f885-4b38-8b5f-02e11788f057"
+              }
+            }
+          ]
+        },
+        "after": [
+          "read-model-inventory"
+        ]
+      },
+      {
+        "id": "read-physical-details-03",
+        "command": "GetDetailsOfElements",
+        "params": {
+          "elements": [
+            {
+              "elementId": {
+                "guid": "4c9ac78b-62dc-4466-a241-3a550b6bd493"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "4efb732a-0911-4ac5-8ac7-674689493d18"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "4f21e239-e6ae-4a94-8d2f-212e89eb8f70"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "4f62caf4-8f64-42f9-bf23-ebaca5cb5df3"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "51c0caf0-8871-4430-a0dd-c1fe45cc30b0"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "51f2ac29-b237-4951-9fd3-04f809aafe5d"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "569436af-bbab-4583-81f2-06cc3f40d1ec"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "57c67cda-2b71-4321-8db5-63ca46386946"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "5dcada01-8c40-4ecf-95f7-377a868f2f48"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "60116db7-915c-4c38-96b5-134d5c5f227a"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "629d8119-e1d9-4c03-9ba2-cbfb93e46501"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "62ade6dd-0bb7-464f-bd6c-55182fa2ec74"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "694343f4-64d2-47ee-8873-631132b79d11"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "6ae032ff-ba86-4229-bd7f-30f067db3128"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "6b90ce7e-4b32-4e9d-b9b8-ce7a5a6452ce"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "6c43e6ea-8d78-4729-9588-ea3dad0f5fd5"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "6e36d0e0-0a21-410e-b9a6-50778e915dc1"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "7664e4c9-ee26-4517-b4f5-c743951dbf37"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "78c57a22-8543-4a68-856b-11ae4398b2d1"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "78e84094-b3f0-41b4-bf6f-4988859b904f"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "7a2d9da2-c9da-4d1e-9ed5-39bd61a8bcc5"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "7a355c91-b361-42c5-9d5b-cc5687366c10"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "7b332594-ab82-43b4-bfc2-ab5ad549c2c9"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "7b90ab33-6f04-46af-88f9-b73f1f550ae1"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "7c50c1b7-fe58-4263-acb7-0f38e4aca271"
+              }
+            }
+          ]
+        },
+        "after": [
+          "read-model-inventory"
+        ]
+      },
+      {
+        "id": "read-physical-bounds-03",
+        "command": "Get3DBoundingBoxes",
+        "params": {
+          "elements": [
+            {
+              "elementId": {
+                "guid": "4c9ac78b-62dc-4466-a241-3a550b6bd493"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "4efb732a-0911-4ac5-8ac7-674689493d18"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "4f21e239-e6ae-4a94-8d2f-212e89eb8f70"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "4f62caf4-8f64-42f9-bf23-ebaca5cb5df3"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "51c0caf0-8871-4430-a0dd-c1fe45cc30b0"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "51f2ac29-b237-4951-9fd3-04f809aafe5d"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "569436af-bbab-4583-81f2-06cc3f40d1ec"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "57c67cda-2b71-4321-8db5-63ca46386946"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "5dcada01-8c40-4ecf-95f7-377a868f2f48"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "60116db7-915c-4c38-96b5-134d5c5f227a"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "629d8119-e1d9-4c03-9ba2-cbfb93e46501"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "62ade6dd-0bb7-464f-bd6c-55182fa2ec74"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "694343f4-64d2-47ee-8873-631132b79d11"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "6ae032ff-ba86-4229-bd7f-30f067db3128"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "6b90ce7e-4b32-4e9d-b9b8-ce7a5a6452ce"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "6c43e6ea-8d78-4729-9588-ea3dad0f5fd5"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "6e36d0e0-0a21-410e-b9a6-50778e915dc1"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "7664e4c9-ee26-4517-b4f5-c743951dbf37"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "78c57a22-8543-4a68-856b-11ae4398b2d1"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "78e84094-b3f0-41b4-bf6f-4988859b904f"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "7a2d9da2-c9da-4d1e-9ed5-39bd61a8bcc5"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "7a355c91-b361-42c5-9d5b-cc5687366c10"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "7b332594-ab82-43b4-bfc2-ab5ad549c2c9"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "7b90ab33-6f04-46af-88f9-b73f1f550ae1"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "7c50c1b7-fe58-4263-acb7-0f38e4aca271"
+              }
+            }
+          ]
+        },
+        "after": [
+          "read-model-inventory"
+        ]
+      },
+      {
+        "id": "read-physical-details-04",
+        "command": "GetDetailsOfElements",
+        "params": {
+          "elements": [
+            {
+              "elementId": {
+                "guid": "7cbccbf5-a0f8-4ed9-b9e5-3dc96adeae7b"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "7f7e466d-4433-46fe-803f-f7bc6f6fac17"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "7f9e30bc-3bcc-4dad-9970-91e411af1781"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "82ec509a-dee9-4e01-9e37-f276aca83e14"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "888d403b-273f-42d5-85a5-49cc1b58b514"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "89c9b03a-3a2d-4dd3-aa08-7f65d083220b"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "8bedd514-af1f-47c3-88f5-dda248a9661c"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "8d4e4017-89e7-45fc-abc6-25d7a0ea4dc9"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "8f4b0f65-21d9-4dfd-b2cc-94c7d1aaeb0f"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "922e8d0c-1f75-408b-8402-e48d0884d2d6"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "92a3a79d-5e95-4134-aaa3-c61b44409e3f"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "9426b7bc-63b0-4a0b-9ce0-836b2ad1393c"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "96709871-4aab-4b2e-8db8-e1f42602c336"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "9966e4d4-b285-4926-9ea4-7d64eb53daf8"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "9e2caf4f-7f66-4379-ae33-ee8550164548"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "a10c6ab3-4cdf-42db-80b9-4ca5694a5c26"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "a1dccc66-770b-4cf7-ac96-dc5e6c4930fe"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "a3239882-4c7a-4f13-94b6-e8aa273f5702"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "a58cc9ba-b5ad-4e2d-9273-caad919a6dfd"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "a596a77e-12f7-493d-bb25-f6961dc9d04d"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "ac946863-93d7-4be6-99c5-7f66cb126733"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "af2a6899-c9d6-4284-8a83-d68f6377e84b"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "af7a6ca7-43c3-4e73-adcd-ccb0e5a96aa0"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "b40df313-4174-4c35-98c5-8f94ebabe581"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "b8680229-b547-4dea-9a29-2682a74e93ac"
+              }
+            }
+          ]
+        },
+        "after": [
+          "read-model-inventory"
+        ]
+      },
+      {
+        "id": "read-physical-bounds-04",
+        "command": "Get3DBoundingBoxes",
+        "params": {
+          "elements": [
+            {
+              "elementId": {
+                "guid": "7cbccbf5-a0f8-4ed9-b9e5-3dc96adeae7b"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "7f7e466d-4433-46fe-803f-f7bc6f6fac17"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "7f9e30bc-3bcc-4dad-9970-91e411af1781"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "82ec509a-dee9-4e01-9e37-f276aca83e14"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "888d403b-273f-42d5-85a5-49cc1b58b514"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "89c9b03a-3a2d-4dd3-aa08-7f65d083220b"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "8bedd514-af1f-47c3-88f5-dda248a9661c"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "8d4e4017-89e7-45fc-abc6-25d7a0ea4dc9"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "8f4b0f65-21d9-4dfd-b2cc-94c7d1aaeb0f"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "922e8d0c-1f75-408b-8402-e48d0884d2d6"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "92a3a79d-5e95-4134-aaa3-c61b44409e3f"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "9426b7bc-63b0-4a0b-9ce0-836b2ad1393c"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "96709871-4aab-4b2e-8db8-e1f42602c336"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "9966e4d4-b285-4926-9ea4-7d64eb53daf8"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "9e2caf4f-7f66-4379-ae33-ee8550164548"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "a10c6ab3-4cdf-42db-80b9-4ca5694a5c26"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "a1dccc66-770b-4cf7-ac96-dc5e6c4930fe"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "a3239882-4c7a-4f13-94b6-e8aa273f5702"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "a58cc9ba-b5ad-4e2d-9273-caad919a6dfd"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "a596a77e-12f7-493d-bb25-f6961dc9d04d"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "ac946863-93d7-4be6-99c5-7f66cb126733"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "af2a6899-c9d6-4284-8a83-d68f6377e84b"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "af7a6ca7-43c3-4e73-adcd-ccb0e5a96aa0"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "b40df313-4174-4c35-98c5-8f94ebabe581"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "b8680229-b547-4dea-9a29-2682a74e93ac"
+              }
+            }
+          ]
+        },
+        "after": [
+          "read-model-inventory"
+        ]
+      },
+      {
+        "id": "read-physical-details-05",
+        "command": "GetDetailsOfElements",
+        "params": {
+          "elements": [
+            {
+              "elementId": {
+                "guid": "b9150d1b-a29e-4989-b104-f4e2cc4615ca"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "bbfe5e79-ec45-43d8-b347-e235c1f94f9f"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "c111ad6c-8148-4dbf-967d-6e22545ef49d"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "c505ad1e-56f2-4681-8279-c843ef60253f"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "c5e038ce-5c29-4f89-9e11-5e6d7ca53775"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "c980cf3d-a532-47e2-9e81-c059f00b094e"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "cabc2aac-7a91-42a5-ac30-f529dc22bf9d"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "cfbfc98b-a463-44df-b2af-1340f42ff46e"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "d536c93c-4f0d-4a35-bcc6-ac45bb862589"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "d7147dd5-a596-4cc5-b471-843c4a6efc36"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "d71fc9fa-6889-45aa-8c04-d70739f9cb94"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "daa94397-c136-4f2a-a402-b1f1f1d219ef"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "db9a8657-a4ec-4a4a-9eb9-8845173b2ede"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "dc2376fc-e239-4875-ab88-fdc121f3f01b"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "de2c425e-afa5-44c4-9c20-87cc252ca6ae"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "e137d0bc-38dd-4cdc-a3d2-f6828c127ff4"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "e6c82ffb-6887-4889-bf43-ea085edd2ab4"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "ed38905b-a70e-4857-b48f-70c1034a4d6b"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "f0d643a1-b236-4dfc-844a-98424a12b9b7"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "f29316af-f953-400a-85f9-e20e3eb03aa1"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "f29d249d-f34b-4730-a19b-bc8f188fe5cf"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "f7ca4b7a-d97c-4e97-93b6-9bcb4f9c2892"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "f8512c13-b556-45fc-ae7b-d081a51ea882"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "f8da84af-2bef-4008-a0a0-1e0e56987107"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "ff3b2a62-d56d-427a-93ed-f085b90def1c"
+              }
+            }
+          ]
+        },
+        "after": [
+          "read-model-inventory"
+        ]
+      },
+      {
+        "id": "read-physical-bounds-05",
+        "command": "Get3DBoundingBoxes",
+        "params": {
+          "elements": [
+            {
+              "elementId": {
+                "guid": "b9150d1b-a29e-4989-b104-f4e2cc4615ca"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "bbfe5e79-ec45-43d8-b347-e235c1f94f9f"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "c111ad6c-8148-4dbf-967d-6e22545ef49d"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "c505ad1e-56f2-4681-8279-c843ef60253f"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "c5e038ce-5c29-4f89-9e11-5e6d7ca53775"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "c980cf3d-a532-47e2-9e81-c059f00b094e"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "cabc2aac-7a91-42a5-ac30-f529dc22bf9d"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "cfbfc98b-a463-44df-b2af-1340f42ff46e"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "d536c93c-4f0d-4a35-bcc6-ac45bb862589"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "d7147dd5-a596-4cc5-b471-843c4a6efc36"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "d71fc9fa-6889-45aa-8c04-d70739f9cb94"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "daa94397-c136-4f2a-a402-b1f1f1d219ef"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "db9a8657-a4ec-4a4a-9eb9-8845173b2ede"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "dc2376fc-e239-4875-ab88-fdc121f3f01b"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "de2c425e-afa5-44c4-9c20-87cc252ca6ae"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "e137d0bc-38dd-4cdc-a3d2-f6828c127ff4"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "e6c82ffb-6887-4889-bf43-ea085edd2ab4"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "ed38905b-a70e-4857-b48f-70c1034a4d6b"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "f0d643a1-b236-4dfc-844a-98424a12b9b7"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "f29316af-f953-400a-85f9-e20e3eb03aa1"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "f29d249d-f34b-4730-a19b-bc8f188fe5cf"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "f7ca4b7a-d97c-4e97-93b6-9bcb4f9c2892"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "f8512c13-b556-45fc-ae7b-d081a51ea882"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "f8da84af-2bef-4008-a0a0-1e0e56987107"
+              }
+            },
+            {
+              "elementId": {
+                "guid": "ff3b2a62-d56d-427a-93ed-f085b90def1c"
+              }
+            }
+          ]
+        },
+        "after": [
+          "read-model-inventory"
+        ]
+      }
+    ]
+  }
+}
