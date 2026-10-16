@@ -3,8 +3,10 @@ on:
   pull_request:
     paths:
       - "scripts/archicad_execution_optimizer.py"
+      - "scripts/apa_recover_and_install_planner.py"
       - "scripts/archicad_project_accelerator.py"
       - "tests/test_apa_execution_optimizer.py"
+      - "tests/test_apa_planner_additive_recovery.py"
       - ".github/workflows/apa-execution-optimizer.yml"
   workflow_dispatch:
 
@@ -21,6 +23,7 @@ jobs:
         with:
           python-version: "3.11"
       - run: python -m pip install "jsonschema>=4,<5" "unified-planning[fast-downward]==1.3.0"
-      - run: python -m py_compile scripts/archicad_execution_optimizer.py scripts/archicad_project_accelerator.py tests/test_apa_execution_optimizer.py
+      - run: python -m py_compile scripts/archicad_execution_optimizer.py scripts/archicad_project_accelerator.py scripts/apa_recover_and_install_planner.py tests/test_apa_execution_optimizer.py tests/test_apa_planner_additive_recovery.py
       - run: python -m unittest discover -s tests -p "test_apa_execution_optimizer.py" -v
+      - run: python -m unittest discover -s tests -p "test_apa_planner_additive_recovery.py" -v
       - run: python -m unittest discover -s tests -p "test_apa_copy_first_native.py" -v
