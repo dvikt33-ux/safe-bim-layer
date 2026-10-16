@@ -1,0 +1,89 @@
+{
+  "schema": "apa.bdd.first-native-window/1",
+  "source": "3_этап_КП_КОМФОРТ_без_замазок.pdf",
+  "sheetPlan": "КР-10, PDF page 12",
+  "sheetElevation": "КР-12, PDF page 14, 1.8 Блок",
+  "sourceProject": "2022 / деревня Шебаново",
+  "sourceMeasurementsMillimeters": {
+    "westWallBlockLength": 9280,
+    "firstSevenIntervals": [
+      600,
+      600,
+      443,
+      442,
+      417,
+      418,
+      600
+    ],
+    "jambWidth": 50,
+    "windowFramedLeftFromSouth": 3570,
+    "windowFramedRightFromSouth": 5170,
+    "openingClearWidth": 1500,
+    "openingHeight": 900,
+    "absoluteSillZ": 1100,
+    "absoluteHeadZ": 2000,
+    "openingCenterFromSouth": 4370
+  },
+  "planGeometryCrosscheck": {
+    "westWallNorthSouthAxisLength": 9380,
+    "sourceWindowPosition": "Plan KR-10 shows 1.8 wall west window near midwall, measure directional mapping against page14 elevation",
+    "sourceElevationDirection": "From South (A) to North (В) confirmed by window's placement in KR-10 plan",
+    "nativeElementDirection": "North (В) to South (A), reverse of PDF elevation"
+  },
+  "nativeHost": {
+    "guid": "323703e9-2bf2-4488-a24d-0ba20760400d",
+    "type": "Wall",
+    "referenceLineStart": {
+      "x": 0,
+      "y": 9.38
+    },
+    "referenceLineEnd": {
+      "x": 0,
+      "y": 0
+    },
+    "bottomZ": -0.1,
+    "topZ": 2.9,
+    "thickness": 0.25,
+    "floorIndex": 0,
+    "source": "apa-bdd-existing-router-20261016T164211Z-8d7da11a.json",
+    "ownerExpectedUnchangedUntilWrite": true
+  },
+  "nativeWindowIntent": {
+    "command": "CreateWindows",
+    "element": {
+      "ownerWallId": {
+        "guid": "323703e9-2bf2-4488-a24d-0ba20760400d"
+      },
+      "centerOffset": 5.01,
+      "sillHeight": 1.1,
+      "width": 1.5,
+      "height": 0.9
+    },
+    "worldCenter": {
+      "x": 0,
+      "y": 4.37
+    },
+    "expectedVerticalEdges": {
+      "bottom": 1.1,
+      "top": 2
+    }
+  },
+  "boundingPolicy": {
+    "minimumDistanceFromWallEnds": 1,
+    "windowLengthPlusClearance": 1.7,
+    "noExistingWindowOrDoorBefore": true,
+    "assumedNativeSillConvention": "Z relative to story 0; read back requires 1.1",
+    "sourceToNativeAnchor": "The south end of 9.28m facade block is aligned to native y=0. Source relative 4.37m from south => native Wall centerOffset=9.38m-4.37m=5.01m",
+    "authoritativeSiteOrientation": "UNVERIFIED_NO_GEOGRAPHIC_NORTH"
+  },
+  "writePolicy": {
+    "approvedOnlyThisSingleWindow": true,
+    "sourceOriginalPLNNeverModified": true,
+    "noReplay": true,
+    "writer": "EXISTING_APA_DynamicCommands_execute_and_SceneWriter_SQLite",
+    "requireNoModelDriftAndExact261GUIDs": true,
+    "nativeReadbackMustMatchHostAndDimensions": true,
+    "requireSavedCopyBackup": true
+  },
+  "status": "SOURCE_DIMENSIONS_AND_HOST_ORIENTATION_CROSSCHECKED__PENDING_NATIVE_WRITE"
+}
