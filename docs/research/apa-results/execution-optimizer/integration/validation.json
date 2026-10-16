@@ -1,0 +1,26 @@
+{
+  "suites": [
+    {
+      "suite": "test_apa_catalog_integration",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "status": "PASS",
+      "seconds": 6.344
+    },
+    {
+      "suite": "test_apa_update_strategy_discovery",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "status": "PASS",
+      "seconds": 0.203
+    }
+  ],
+  "interpreter": "Installed APA Python 3.12.13",
+  "scope": "ONLY_NEW_CATALOG_GRAPH_DELEGATION_AND_ADDITIVE_INSTALL_GLUE",
+  "compilation": "PASS",
+  "nativeCalls": 0,
+  "nativeWrites": 0,
+  "solverTest": "Delegation tested; existing Fast Downward tool was not functionally retested"
+}

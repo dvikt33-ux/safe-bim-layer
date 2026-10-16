@@ -1,0 +1,79 @@
+{
+  "status": "INSTALLED_APA_NEW_INTEGRATION_OFFLINE_PASS",
+  "moduleImportedFromInstalledDirectory": true,
+  "originalCoreSHA256": "5ce7cbb91c8f799265a541f79922b50455fecf661ed9278a1cc4ffaff766ba4b",
+  "corePreservedByteForByte": true,
+  "coverage": {
+    "catalogContracts": 378,
+    "contractsWithReviewedEffect": 372,
+    "unknownEffectContracts": 6,
+    "sourceOnlyContracts": 33,
+    "officialTypedConstructors": 73,
+    "runtimeStates": {
+      "NOT_PROBED": 378
+    },
+    "unknownEffectCommands": [
+      "GetAutoTextsV1",
+      "SetMasterLayoutContextV1",
+      "GetCurrent2DDocumentV1",
+      "GetAPARuntimeInfoV1",
+      "API.ExecuteAddOnCommand",
+      "GetNativePhysicalGeometry"
+    ],
+    "relevantCommands": [
+      {
+        "command": "CreateWalls",
+        "effect": "CREATE",
+        "sourceOnly": false,
+        "runtimeStatus": "NOT_PROBED"
+      },
+      {
+        "command": "CreateOpenings",
+        "effect": "CREATE",
+        "sourceOnly": false,
+        "runtimeStatus": "NOT_PROBED"
+      },
+      {
+        "command": "CreateMorphs",
+        "effect": "CREATE",
+        "sourceOnly": false,
+        "runtimeStatus": "NOT_PROBED"
+      },
+      {
+        "command": "CreateRoofs",
+        "effect": "CREATE",
+        "sourceOnly": false,
+        "runtimeStatus": "NOT_PROBED"
+      },
+      {
+        "command": "CreateNativeGridElementsV1",
+        "effect": "CREATE",
+        "sourceOnly": true,
+        "runtimeStatus": "NOT_PROBED"
+      },
+      {
+        "command": "CreateExactStairsV1",
+        "effect": "CREATE",
+        "sourceOnly": true,
+        "runtimeStatus": "NOT_PROBED"
+      }
+    ]
+  },
+  "wallWindow": {
+    "selectedCommands": [
+      "CreateWalls",
+      "CreateWindows"
+    ],
+    "executionOrder": [
+      "host",
+      "window"
+    ],
+    "status": "ONE_SOURCE_QUALIFIED_STRATEGY_PREPARED",
+    "calibration": "UNCALIBRATED",
+    "executor": "SceneWriter"
+  },
+  "existingSlabPreview": "ONE_SOURCE_QUALIFIED_STRATEGY_PREPARED",
+  "nativeCalls": 0,
+  "nativeWrites": 0,
+  "nativeModelValidation": "NOT_RUN"
+}
