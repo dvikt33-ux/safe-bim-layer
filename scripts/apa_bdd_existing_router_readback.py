@@ -193,7 +193,7 @@ def main():
     evidence = WORK / ("dispatch-" + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ"))
     evidence.mkdir(parents=True, exist_ok=False)
     api = APA.EvidenceAPI(APA.native_transport, evidence, execute=False)
-    binding_before = RUN.guarded_project(api)
+    binding_before = RUN.guarded_project_for_read(api)
     inventory_before = exact_model_set(api("GetAllElements", {}), expected)
 
     # Resolve actual provider schema+source file hashes and use the already
@@ -213,7 +213,7 @@ def main():
     summary = summarize(flow, source_task, parents)
 
     inventory_after = exact_model_set(api("GetAllElements", {}), expected)
-    if inventory_before != inventory_after or RUN.guarded_project(api) != binding_before:
+    if inventory_before != inventory_after or RUN.guarded_project_for_read(api) != binding_before:
         raise ValueError("APA_MODEL_OR_PROJECT_CHANGED_DURING_READBACK")
     if sha256(path) != before_disk or sha256(source) != bind["sourceBaselineSha256"]:
         raise ValueError("APA_SAVED_PLN_BYTES_CHANGED")
