@@ -24,7 +24,8 @@ class TestGrillageContact(unittest.TestCase):
         self.assertEqual(m.PORT,19727)
 
     def test_requires_evidence_before_read_or_write(self):
-        with patch.object(m,"target"),patch.object(m.SOURCE,"is_file",return_value=False):
+        with patch.object(m,"target"),patch.object(m,"SOURCE") as src:
+            src.is_file.return_value=False
             with self.assertRaisesRegex(RuntimeError,"Missing source"):
                 m.read_guards()
 
