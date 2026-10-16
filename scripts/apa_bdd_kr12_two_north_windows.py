@@ -163,7 +163,12 @@ def task_for(params):
 
 def main(args):
     if REPORT.exists():
-        raise ValueError("NORTH_WINDOW_JOURNAL_ALREADY_EXISTS_NEVER_RERUN")
+        # A preflight-only failure makes no native calls and is safe to
+        # reassess after the user saves the previous window. NEVER resume
+        # a started SceneWriter write, even if its native result is unknown.
+        previous=json.loads(REPORT.read_text(encoding="utf-8"))
+        if previous.get("status")!="PREFLIGHT_BLOCKED_NO_WRITES_PROVEN" or previous.get("nativeWriteCount",0)!=0:
+            raise ValueError("NORTH_WINDOW_WRITE_OR_OUTCOME_ALREADY_RECORDED_NEVER_RERUN")
     binding=json.loads(BASE.read_text(encoding="utf-8"))
     doc=json.loads(SOURCE.read_text(encoding="utf-8"))
     source_verify(doc)
