@@ -632,6 +632,85 @@ class DynamicCommands:
             retained_signatures,saved_sha256,authorization,
             verify_before,verify_after)
 
+    def distribute_evenly_between(self, writer, scene_id, prototype_guid,
+                                  prototype_type, last_offset, total_count,
+                                  retained_signatures, saved_sha256,
+                                  authorization, verify_before, verify_after):
+        """Native equal-spacing distribution between SOURCE and LAST position.
+
+        The prototype is element #1 at offset 0. `last_offset` is the
+        source-measured offset of the last instance from that prototype.
+        `total_count` includes the prototype; N-1 distinct new copies
+        are sent in ONE MoveElements(copy=True) call to Archicad.
+        """
+        if type(total_count) is not int or not 2 <= total_count <= 201:
+            raise ValueError('DISTRIBUTE_TOTAL_COUNT_2_TO_201_REQUIRED')
+        if (not isinstance(last_offset,dict)
+                or set(last_offset) != {'x','y','z'}
+                or any(type(last_offset[axis]) not in (int,float)
+                       or not math.isfinite(last_offset[axis])
+                       for axis in ('x','y','z'))
+                or all(abs(last_offset[axis]) <= 1e-8
+                       for axis in ('x','y','z'))):
+            raise ValueError('DISTRIBUTE_APPROVED_NONZERO_SPAN_REQUIRED')
+        offsets=[
+            {axis: last_offset[axis] * i/(total_count-1)
+             for axis in ('x','y','z')}
+            for i in range(1,total_count)]
+        return self.copy_existing_many(
+            writer,scene_id,prototype_guid,prototype_type,offsets,
+            retained_signatures,saved_sha256,authorization,
+            verify_before,verify_after)
+
+    def distribute_along_polyline(self, writer, scene_id, prototype_guid,
+                                  prototype_type, vertices, total_count,
+                                  retained_signatures, saved_sha256,
+                                  authorization, verify_before, verify_after):
+        """Equal-distance copies on a source-specified 3D segmented path.
+
+        `vertices[0]` MUST be the existing prototype's native anchor.
+        A native pre-write checker must verify that anchor and the path,
+        including its plan/PDF source. All copies preserve orientation:
+        this operation distributes positions; it does not rotate objects.
+        The first vertex represents the existing prototype and is NOT
+        duplicated. A single native MoveElements(copy=True) call is made.
+        """
+        if type(total_count) is not int or not 2 <= total_count <= 201:
+            raise ValueError('POLYLINE_DISTRIBUTE_COUNT_2_TO_201_REQUIRED')
+        if not isinstance(vertices,list) or len(vertices)<2:
+            raise ValueError('POLYLINE_DISTRIBUTE_TWO_VERTICES_REQUIRED')
+        for vertex in vertices:
+            if (not isinstance(vertex,dict)
+                    or set(vertex)!={'x','y','z'}
+                    or any(type(vertex[k]) not in (int,float)
+                           or not math.isfinite(vertex[k])
+                           or abs(vertex[k])>10000.0 for k in ('x','y','z'))):
+                raise ValueError('POLYLINE_DISTRIBUTE_FINITE_3D_VERTICES_REQUIRED')
+        lengths=[]
+        for a,b in zip(vertices,vertices[1:]):
+            distance=math.sqrt(sum((b[k]-a[k])**2 for k in ('x','y','z')))
+            if distance<=1e-7:
+                raise ValueError('POLYLINE_DISTRIBUTE_ZERO_LENGTH_SEGMENT')
+            lengths.append(distance)
+        total=sum(lengths)
+        first=vertices[0]
+        offsets=[]
+        segment=0
+        cumulative=0.0
+        for i in range(1,total_count):
+            target=total*i/(total_count-1)
+            while segment < len(lengths)-1 and cumulative+lengths[segment]<target-1e-8:
+                cumulative+=lengths[segment]
+                segment+=1
+            frac=min(1.0,max(0.0,(target-cumulative)/lengths[segment]))
+            at={k:vertices[segment][k]+frac*(vertices[segment+1][k]-vertices[segment][k])
+                for k in ('x','y','z')}
+            offsets.append({k:at[k]-first[k] for k in ('x','y','z')})
+        return self.copy_existing_many(
+            writer,scene_id,prototype_guid,prototype_type,offsets,
+            retained_signatures,saved_sha256,authorization,
+            verify_before,verify_after)
+
     def native_facts(self,workflow,model_step,elements_step,boxes_step=None):
         """Reuse existing BREP/IFC quantities; provider boxes remain separate."""
         import archicad_connected_components as C
