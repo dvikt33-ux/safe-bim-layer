@@ -212,6 +212,41 @@ def run_native_task(router, api, preview, writer, scopes, checkpoint=None):
     if preview.get('intentHash')!=RUN.digest(intent) or preview.get('sourcePlanHash')!=preview['workflow']['sourcePlanHash']:raise ValueError('NATIVE_TASK_PREVIEW_DRIFT')
     return router.run_workflow(api,preview['workflow'],writer,scopes,checkpoint)
 
+
+
+def prepare_optimized_native_task(router, intent, planner_python=None):
+    """Choose a measured, source-qualified native workflow with Fast Downward.
+
+    This is a strictly PREVIEW-ONLY optional frontend to the existing
+    prepare_native_task -> run_native_task -> SceneWriter chain.
+    The caller supplies >=2 schema-checked alternative BIM graphs plus
+    transparent end-to-end cost evidence; missing geometry/cost is NOT guessed.
+    """
+    if (not isinstance(intent, dict)
+            or set(intent) != {'schemaVersion', 'request', 'strategies'}
+            or intent['schemaVersion'] != 'apa-native-optimizer/1'):
+        raise ValueError('INVALID_APA_OPTIMIZER_INTENT')
+    from archicad_execution_optimizer import prepare_optimized_native_task as optimize
+    return optimize(router, intent['request'], intent['strategies'], planner_python)
+
+
+def run_optimized_native_task(router, api, optimized_preview, writer, scopes, checkpoint=None):
+    """Explicitly run solver's already-validated choice via ORIGINAL executor.
+
+    Never infer authorization from selection. Does not call any planner during
+    write, does not retry or provide a competing model-write transport.
+    """
+    if (not isinstance(optimized_preview, dict)
+            or optimized_preview.get('schema') != 'APA_FAST_DOWNWARD_OPTIMIZED_NATIVE_TASK_V1'
+            or optimized_preview.get('nativeWritePermission') is not False
+            or optimized_preview.get('automaticNativeExecution') is not False
+            or optimized_preview.get('executor') != 'EXISTING_APA_SCENEWRITER_ONLY'):
+        raise ValueError('INVALID_PREVIEW_OR_SOLVER_WRITE_PERMISSION')
+    chosen = optimized_preview.get('selectedNativeTaskPreview')
+    if not isinstance(chosen, dict) or chosen.get('schema') != 'APA_NATIVE_TASK_PREVIEW_V1':
+        raise ValueError('OPTIMIZED_TASK_MISSING_APA_V1_PREVIEW')
+    return run_native_task(router, api, chosen, writer, scopes, checkpoint)
+
 def apply_native_axis_grid(writer,recipe,scene_id,retained_signatures,saved_sha256,authorization_ref,existing_guid=None):
     from archicad_native_spatial_tools import create_or_reuse_axis
     return create_or_reuse_axis(writer,recipe,scene_id,retained_signatures,saved_sha256,authorization_ref,existing_guid)
