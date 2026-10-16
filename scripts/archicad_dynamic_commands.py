@@ -403,6 +403,85 @@ class DynamicCommands:
             if checkpoint:checkpoint(dict(status='WORKFLOW_CHECKPOINT',sourcePlanHash=plan['sourcePlanHash'],trace=copy.deepcopy(trace),results=copy.deepcopy(results),automaticRetry=False))
         return dict(status='WORKFLOW_CALLABLE_VERIFIED',sourcePlanHash=plan['sourcePlanHash'],trace=trace,results=results,automaticRetry=False)
 
+    def execute_batch(self, writer, scene_id, command, items, affected,
+                      retained_signatures, saved_sha256, authorization,
+                      impact, verify_after, verify_before=None):
+        """ONE native provider call for a source-verified group of BIM creates.
+
+        Reuses prepare() -> execute() -> SceneWriter.execute_bound_operation()
+        and its durable SQLite intent-before-write. It does NOT create another
+        writer, journal, transport or retry loop. Retained BREP is validated
+        once BEFORE and once AFTER the whole group, not per child element.
+
+        The complete response must contain one distinct native GUID per
+        requested item, before the caller's exact host/geometry verification.
+        On an ambiguous/partial result, the same SceneWriter stops the whole
+        scene; NEVER re-send the failed batch.
+        """
+        slots = {
+            'CreateWindows': 'windowsData',
+            'CreateDoors': 'doorsData',
+            'CreateWalls': 'wallsData',
+            'CreateSlabs': 'slabsData',
+            'CreateBeams': 'beamsData',
+            'CreateColumns': 'columnsData',
+        }
+        if command not in slots:
+            raise ValueError('BULK_COMMAND_NOT_SOURCE_QUALIFIED')
+        if not isinstance(items, list) or not 1 <= len(items) <= 200:
+            raise ValueError('BULK_REQUIRES_1_TO_200_NATIVE_ITEMS')
+        if any(not isinstance(item, dict) for item in items):
+            raise ValueError('BULK_NATIVE_ITEMS_MUST_BE_TYPED_OBJECTS')
+        if not callable(verify_after) or not callable(verify_before):
+            raise ValueError('BULK_REQUIRES_INDEPENDENT_PRE_AND_POST_VERIFY')
+        if not isinstance(affected, list) or len(affected) != len(set(affected)):
+            raise ValueError('BULK_UNIQUE_AFFECTED_GUIDS_REQUIRED')
+        if command in ('CreateWindows', 'CreateDoors'):
+            requested = []
+            for item in items:
+                wall = (item.get('ownerWallId') or {}).get('guid')
+                offset, width = item.get('centerOffset'), item.get('width')
+                if (not isinstance(wall, str) or not wall
+                        or not isinstance(offset, (float, int))
+                        or not isinstance(width, (float, int))
+                        or not math.isfinite(offset) or not math.isfinite(width)
+                        or offset <= width / 2 or width <= 0):
+                    raise ValueError('BULK_OPENING_REQUIRES_APPROVED_HOST_AND_CENTRE')
+                if wall.lower() not in {g.lower() for g in affected}:
+                    raise ValueError('BULK_HOST_NOT_IN_AFFECTED_SCOPE')
+                requested.append((wall.lower(), offset - width / 2,
+                                  offset + width / 2))
+            # Overlapping openings on the same Wall must be qualified through
+            # a separate explicit composite opening design, not silently cut.
+            for index, (wall, start, end) in enumerate(requested):
+                for ow, left, right in requested[index + 1:]:
+                    if wall == ow and max(start, left) < min(end, right) - 1e-6:
+                        raise ValueError('BULK_HOST_OPENING_COLLISION')
+        ticket = self.prepare(command, {slots[command]: items})
+        if ticket['effect'] != 'CREATE':
+            raise ValueError('BULK_NATIVE_EFFECT_NOT_CREATE')
+        def validated_after(reply, prior):
+            rows = reply.get('elements') if isinstance(reply, dict) else None
+            if not isinstance(rows, list) or len(rows) != len(items):
+                raise ValueError('BULK_NATIVE_RETURN_COUNT_MISMATCH')
+            guids = []
+            for row in rows:
+                guid = (row.get('elementId') or {}).get('guid') if isinstance(row, dict) else None
+                if not isinstance(guid, str) or not guid or 'error' in row:
+                    raise ValueError('BULK_NATIVE_GUID_OR_RESULT_MISSING')
+                guids.append(guid.lower())
+            if len(set(guids)) != len(guids):
+                raise ValueError('BULK_NATIVE_DUPLICATE_CREATED_GUID')
+            proof = verify_after(reply, prior)
+            if not isinstance(proof, dict) or not str(proof.get('status', '')).endswith('PASS'):
+                raise ValueError('BULK_NATIVE_INDEPENDENT_READBACK_REQUIRED')
+            return dict(proof, nativeBatchCount=len(guids),
+                        nativeBatchGuids=guids)
+        return self.execute(
+            writer, scene_id, ticket, affected, retained_signatures,
+            saved_sha256, authorization, impact,
+            validated_after, verify_before=verify_before)
+
     def native_facts(self,workflow,model_step,elements_step,boxes_step=None):
         """Reuse existing BREP/IFC quantities; provider boxes remain separate."""
         import archicad_connected_components as C
