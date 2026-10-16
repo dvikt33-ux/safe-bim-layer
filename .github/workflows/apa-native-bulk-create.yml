@@ -1,0 +1,23 @@
+name: APA Native Bulk Create Regression
+on:
+  pull_request:
+    paths:
+      - "scripts/archicad_dynamic_commands.py"
+      - "tests/test_apa_dynamic_bulk_create.py"
+      - ".github/workflows/apa-native-bulk-create.yml"
+  workflow_dispatch:
+jobs:
+  focused-bulk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Check compiled existing APA module
+        run: python -m py_compile scripts/archicad_dynamic_commands.py
+      - name: Verify 100-element single-call packing and fail closed
+        run: python -m unittest discover -s tests -p test_apa_dynamic_bulk_create.py -v
