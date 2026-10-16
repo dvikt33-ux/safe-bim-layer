@@ -279,7 +279,7 @@ class DynamicCommands:
             result=self.local_handlers[ticket['command']](**ticket['parameters']);self.validate_result(ticket['command'],result)
             self.callable[ticket['command']]=dict(kind='LOCAL_ANALYTICAL_RESULT_PASS',resultHash=self.A.RUN.digest(result));self.local_events.append(dict(command=ticket['command'],inputHash=ticket['hash'],resultHash=self.A.RUN.digest(result),versions=versions,elapsedSeconds=time.perf_counter()-start,nativeWrites=0))
             return result
-        self.A.RUN.guarded_project(api)
+        self.A.RUN.guarded_project_for_read(api)
         self.probe_runtime(api,ticket['command'])
         api.bind_dynamic_commands(self)
         with api.dynamic_call(ticket):result=api(ticket['command'],ticket['parameters'])
