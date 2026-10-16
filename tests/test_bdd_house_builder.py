@@ -27,7 +27,7 @@ class HousePlanTests(unittest.TestCase):
     def test_plan_geometric_quantities(self):
         p = mod.plan()
         self.assertEqual(len(p["piles"]), 49)
-        self.assertEqual(len(p["grillage"]), 17)
+        self.assertEqual(len(p["grillage"]), 18)
         self.assertEqual(len(p["exteriorWalls"]), 6)
         self.assertEqual(len(p["floorJoists"]), 48)
         self.assertEqual(len(p["floorPanels"]), 1)
