@@ -223,6 +223,24 @@ class DynamicCommands:
         parameters=json.loads(self.A.RUN.canonical(parameters))
         if not isinstance(parameters,dict):raise ValueError('COMMAND_PARAMETERS_OBJECT_REQUIRED')
         CONTRACTS._validator(self.catalog,command).validate(parameters)
+        # Tapir MoveElements is a DUAL-EFFECT command. Its copy=True
+        # operation CREATES native elements, whereas copy=False MUTATES
+        # the existing source. A policy review for creation must never
+        # implicitly authorize destructive source relocation (or vice
+        # versa). Validate the actual per-element mode BEFORE a ticket
+        # reaches SceneWriter's durable intent.
+        if command == 'MoveElements':
+            rows=parameters.get('elementsWithMoveVectors',[])
+            mode=self.operation_kind(command)
+            if not isinstance(rows,list) or not rows:
+                raise ValueError('NATIVE_MOVE_ELEMENTS_NONEMPTY_TYPED_BATCH_REQUIRED')
+            copies=[row.get('copy') is True for row in rows]
+            if any(copies) and not all(copies):
+                raise ValueError('NATIVE_MOVE_MIXED_COPY_AND_MUTATE_DENIED')
+            if all(copies) and mode!='CREATE':
+                raise ValueError('NATIVE_MOVE_COPY_REQUIRES_REVIEWED_CREATE_POLICY')
+            if not any(copies) and mode!='MODIFY':
+                raise ValueError('NATIVE_MOVE_RELOCATION_REQUIRES_REVIEWED_MODIFY_POLICY')
         if command in self.constructors and self.constructors[command] is not None:
             value=self.constructors[command](**parameters)
             if not value.get_classinfo().is_valid_instance(value):raise ValueError('OFFICIAL_SDK_INSTANCE_CONSTRAINT_FAILED')
@@ -495,6 +513,402 @@ class DynamicCommands:
             'recordedStatus': outcome.get('status'),
             'nativeSaved': False,
         })
+
+    def copy_existing_many(self, writer, scene_id, prototype_guid, prototype_type,
+                           displacements, retained_signatures, saved_sha256,
+                           authorization, verify_before, verify_after):
+        """Duplicate ONE existing native element into N positions in ONE Tapir call.
+
+        The already-live Tapir 1.5.10 MoveElements schema explicitly supports
+        elementsWithMoveVectors[].copy=true. This is genuine Archicad native
+        duplication, NOT repeatedly creating an equivalent Column/Beam.
+
+        Existing DynamicCommands.execute() -> SceneWriter SQLite is the only
+        native write path, including unchanged retained BREP signatures and
+        intent-before-write. No automatic fallback to Create* or retries.
+
+        The prototype GUID remains in the affected scope, even though
+        its body/attributes are expected to be unchanged. Only the caller's
+        source-verified native BREP verifier can declare the new copies PASS.
+        """
+        if prototype_type not in {'Column', 'Beam', 'Object'}:
+            raise ValueError('NATIVE_COPY_ONLY_SUPPORTED_STANDALONE_PROTOTYPES')
+        if not isinstance(prototype_guid, str) or not prototype_guid:
+            raise ValueError('NATIVE_COPY_EXISTING_PROTOTYPE_GUID_REQUIRED')
+        if not isinstance(displacements, list) or not 1 <= len(displacements) <= 200:
+            raise ValueError('NATIVE_COPY_REQUIRES_1_TO_200_OFFSETS')
+        if not callable(verify_before) or not callable(verify_after):
+            raise ValueError('NATIVE_COPY_REQUIRES_SOURCE_AND_BODY_READBACK')
+        if (not isinstance(retained_signatures, dict)
+                or prototype_guid.lower() in {k.lower() for k in retained_signatures}):
+            raise ValueError('NATIVE_COPY_PROTOTYPE_MUST_BE_AFFECTED_NOT_RETAINED')
+        rows = []
+        positions = set()
+        for vector in displacements:
+            if (not isinstance(vector, dict) or set(vector) != {'x','y','z'}
+                    or any(type(vector.get(axis)) not in (float,int)
+                           or not math.isfinite(vector[axis]) or
+                           abs(vector[axis]) > 10000.0 for axis in ('x','y','z'))):
+                raise ValueError('NATIVE_COPY_FINITE_3D_VECTOR_REQUIRED')
+            k = tuple(round(vector[axis], 7) for axis in ('x','y','z'))
+            if k in positions or k == (0.0,0.0,0.0):
+                raise ValueError('NATIVE_COPY_NO_DUPLICATE_OR_ZERO_OFFSET')
+            positions.add(k)
+            rows.append({'elementId': {'guid': prototype_guid},
+                         'moveVector': {axis: vector[axis] for axis in ('x','y','z')},
+                         'copy': True})
+        if self.operation_kind('MoveElements') != 'CREATE':
+            raise ValueError('NATIVE_COPY_MOVE_ELEMENTS_MUST_HAVE_EXPLICIT_CREATE_POLICY')
+        ticket = self.prepare('MoveElements', {'elementsWithMoveVectors': rows})
+        if ticket['effect'] != 'CREATE':
+            raise ValueError('NATIVE_COPY_WRONG_REVIEWED_EFFECT')
+        # The existing SceneWriter guarantees no replay if either source or
+        # result becomes ambiguous. Source geometry verification remains
+        # mandatory, including ColumnSegment/BeamSegment auto children.
+        def confirm(reply, prior):
+            data = reply.get('executionResults') if isinstance(reply,dict) else None
+            if (not isinstance(data,list) or len(data)!=len(rows)
+                    or any(not isinstance(x,dict) or x.get('success') is not True
+                           for x in data)):
+                raise ValueError('NATIVE_COPY_BATCH_PARTIAL_OR_UNKNOWN')
+            evidence = verify_after(reply, prior)
+            if (not isinstance(evidence,dict)
+                    or not str(evidence.get('status','')).endswith('PASS')
+                    or evidence.get('newPhysicalCopyCount')!=len(rows)
+                    or evidence.get('prototypeGuidUnchanged') is not True):
+                raise ValueError('NATIVE_COPY_PARENT_COUNT_AND_PROTOTYPE_BREP_REQUIRED')
+            return dict(evidence, copyCount=len(rows),
+                        sourceElementGuid=prototype_guid.lower(),
+                        nativeMethod='Tapir.MoveElements(copy=true)')
+        started=time.perf_counter()
+        outcome = self.execute(writer, scene_id, ticket, [prototype_guid],
+                               retained_signatures, saved_sha256,
+                               authorization, 'MODEL', confirm,
+                               verify_before=verify_before)
+        elapsed=time.perf_counter()-started
+        return dict(outcome, nativeCopyMetrics={
+            'requestedCopyCount':len(rows), 'nativeCommand':'MoveElements',
+            'nativeCalls':1, 'durationSeconds':round(elapsed,4),
+            'copiesPerSecond':round(len(rows)/elapsed,3) if elapsed>0 else None,
+            'status':outcome.get('status'),
+        })
+
+    def copy_linear_series(self, writer, scene_id, prototype_guid,
+                           prototype_type, count, step, retained_signatures,
+                           saved_sha256, authorization, verify_before,
+                           verify_after):
+        """Source-verified linear Multiply: source plus count translated copies.
+
+        count is number of NEW instances, step is metres per interval.
+        Uses a single existing MoveElements(copy=true) native batch instead
+        of count independent CreateColumns/CreateBeams calls.
+        """
+        if type(count) is not int or not 1 <= count <= 200:
+            raise ValueError('NATIVE_MULTIPLY_COUNT_OUT_OF_BOUNDS')
+        if (not isinstance(step, dict) or set(step) != {'x','y','z'}
+                or any(type(step[k]) not in (int,float)
+                       or not math.isfinite(step[k]) for k in step)
+                or not any(abs(step[k]) > 1e-8 for k in step)):
+            raise ValueError('NATIVE_MULTIPLY_NONZERO_FINITE_STEP_REQUIRED')
+        vectors=[{axis: step[axis]*i for axis in ('x','y','z')}
+                 for i in range(1,count+1)]
+        return self.copy_existing_many(
+            writer,scene_id,prototype_guid,prototype_type,vectors,
+            retained_signatures,saved_sha256,authorization,
+            verify_before,verify_after)
+
+    def copy_rectangular_array(self, writer, scene_id, prototype_guid,
+                               prototype_type, count_x, count_y,
+                               step_x, step_y, retained_signatures,
+                               saved_sha256, authorization,
+                               verify_before, verify_after):
+        """Rectangular native Multiply; one existing element, one native call.
+
+        step_x and step_y are separate 3D vectors for the orthogonal grid
+        directions (they need not align with global X and Y). The source
+        occupies grid (0,0); all other cells become copies. The PDF/plan
+        must separately authorize origin, pitch, count and any missing cells.
+        """
+        if (type(count_x) is not int or type(count_y) is not int
+                or count_x < 1 or count_y < 1
+                or not 2 <= count_x*count_y <= 201):
+            raise ValueError('NATIVE_GRID_TOTAL_CELLS_MUST_BE_2_TO_201')
+        for step in (step_x,step_y):
+            if (not isinstance(step,dict) or set(step)!={'x','y','z'}
+                    or any(type(step[k]) not in (float,int)
+                           or not math.isfinite(step[k]) for k in ('x','y','z'))):
+                raise ValueError('NATIVE_GRID_FINITE_STEP_REQUIRED')
+        offsets=[]
+        for ix in range(count_x):
+            for iy in range(count_y):
+                if ix==0 and iy==0:
+                    continue
+                offsets.append({k: ix*step_x[k]+iy*step_y[k]
+                                for k in ('x','y','z')})
+        return self.copy_existing_many(
+            writer,scene_id,prototype_guid,prototype_type,offsets,
+            retained_signatures,saved_sha256,authorization,
+            verify_before,verify_after)
+
+    def distribute_evenly_between(self, writer, scene_id, prototype_guid,
+                                  prototype_type, last_offset, total_count,
+                                  retained_signatures, saved_sha256,
+                                  authorization, verify_before, verify_after):
+        """Native equal-spacing distribution between SOURCE and LAST position.
+
+        The prototype is element #1 at offset 0. `last_offset` is the
+        source-measured offset of the last instance from that prototype.
+        `total_count` includes the prototype; N-1 distinct new copies
+        are sent in ONE MoveElements(copy=True) call to Archicad.
+        """
+        if type(total_count) is not int or not 2 <= total_count <= 201:
+            raise ValueError('DISTRIBUTE_TOTAL_COUNT_2_TO_201_REQUIRED')
+        if (not isinstance(last_offset,dict)
+                or set(last_offset) != {'x','y','z'}
+                or any(type(last_offset[axis]) not in (int,float)
+                       or not math.isfinite(last_offset[axis])
+                       for axis in ('x','y','z'))
+                or all(abs(last_offset[axis]) <= 1e-8
+                       for axis in ('x','y','z'))):
+            raise ValueError('DISTRIBUTE_APPROVED_NONZERO_SPAN_REQUIRED')
+        offsets=[
+            {axis: last_offset[axis] * i/(total_count-1)
+             for axis in ('x','y','z')}
+            for i in range(1,total_count)]
+        return self.copy_existing_many(
+            writer,scene_id,prototype_guid,prototype_type,offsets,
+            retained_signatures,saved_sha256,authorization,
+            verify_before,verify_after)
+
+    def distribute_along_polyline(self, writer, scene_id, prototype_guid,
+                                  prototype_type, vertices, total_count,
+                                  retained_signatures, saved_sha256,
+                                  authorization, verify_before, verify_after):
+        """Equal-distance copies on a source-specified 3D segmented path.
+
+        `vertices[0]` MUST be the existing prototype's native anchor.
+        A native pre-write checker must verify that anchor and the path,
+        including its plan/PDF source. All copies preserve orientation:
+        this operation distributes positions; it does not rotate objects.
+        The first vertex represents the existing prototype and is NOT
+        duplicated. A single native MoveElements(copy=True) call is made.
+        """
+        if type(total_count) is not int or not 2 <= total_count <= 201:
+            raise ValueError('POLYLINE_DISTRIBUTE_COUNT_2_TO_201_REQUIRED')
+        if not isinstance(vertices,list) or len(vertices)<2:
+            raise ValueError('POLYLINE_DISTRIBUTE_TWO_VERTICES_REQUIRED')
+        for vertex in vertices:
+            if (not isinstance(vertex,dict)
+                    or set(vertex)!={'x','y','z'}
+                    or any(type(vertex[k]) not in (int,float)
+                           or not math.isfinite(vertex[k])
+                           or abs(vertex[k])>10000.0 for k in ('x','y','z'))):
+                raise ValueError('POLYLINE_DISTRIBUTE_FINITE_3D_VERTICES_REQUIRED')
+        lengths=[]
+        for a,b in zip(vertices,vertices[1:]):
+            distance=math.sqrt(sum((b[k]-a[k])**2 for k in ('x','y','z')))
+            if distance<=1e-7:
+                raise ValueError('POLYLINE_DISTRIBUTE_ZERO_LENGTH_SEGMENT')
+            lengths.append(distance)
+        total=sum(lengths)
+        first=vertices[0]
+        offsets=[]
+        segment=0
+        cumulative=0.0
+        for i in range(1,total_count):
+            target=total*i/(total_count-1)
+            while segment < len(lengths)-1 and cumulative+lengths[segment]<target-1e-8:
+                cumulative+=lengths[segment]
+                segment+=1
+            frac=min(1.0,max(0.0,(target-cumulative)/lengths[segment]))
+            at={k:vertices[segment][k]+frac*(vertices[segment+1][k]-vertices[segment][k])
+                for k in ('x','y','z')}
+            offsets.append({k:at[k]-first[k] for k in ('x','y','z')})
+        return self.copy_existing_many(
+            writer,scene_id,prototype_guid,prototype_type,offsets,
+            retained_signatures,saved_sha256,authorization,
+            verify_before,verify_after)
+
+    def copy_multiple_prototypes(self, writer, scene_id, groups,
+                                 retained_signatures, saved_sha256,
+                                 authorization, verify_before, verify_after):
+        """Bulk replicate DIFFERENT source-verified BIM prototypes in ONE call.
+
+        Example: 3 source-verified timber sizes, each multiplied at its own
+        positions. No CreateColumns loop; one MoveElements(copy=True) request
+        with as many typed source GUID/offset pairs as needed (up to 200).
+        The existing SceneWriter verifies one retained geometry set for the
+        entire transaction and records ONE durable SQLite intent.
+        """
+        if not isinstance(groups,list) or not 1 <= len(groups) <= 200:
+            raise ValueError('MULTI_COPY_REQUIRES_NONEMPTY_SOURCE_GROUPS')
+        if not callable(verify_before) or not callable(verify_after):
+            raise ValueError('MULTI_COPY_NEEDS_INDEPENDENT_PRE_POST_READBACK')
+        if not isinstance(retained_signatures,dict):
+            raise ValueError('MULTI_COPY_RETAINED_BREP_SIGNATURES_REQUIRED')
+        rows=[]
+        prototypes=[]
+        for group in groups:
+            if (not isinstance(group,dict)
+                    or set(group)!={'prototypeGuid','prototypeType',
+                                     'sourceRef','displacements'}):
+                raise ValueError('MULTI_COPY_TYPED_SOURCE_GROUP_REQUIRED')
+            guid=group['prototypeGuid']
+            if (not isinstance(guid,str) or not guid or
+                    group['prototypeType'] not in {'Column','Beam','Object'}
+                    or not isinstance(group['sourceRef'],str) or
+                    not group['sourceRef'].strip()):
+                raise ValueError('MULTI_COPY_EXISTING_PROTO_AND_SOURCE_REQUIRED')
+            if guid.lower() in prototypes:
+                raise ValueError('MULTI_COPY_DUPLICATE_PROTO_GROUP')
+            prototypes.append(guid.lower())
+            offsets=group['displacements']
+            if not isinstance(offsets,list) or len(offsets)==0:
+                raise ValueError('MULTI_COPY_NONEMPTY_OFFSETS_REQUIRED')
+            used=set()
+            for shift in offsets:
+                if (not isinstance(shift,dict)
+                        or set(shift)!={'x','y','z'}
+                        or any(type(shift[k]) not in (int,float)
+                               or not math.isfinite(shift[k])
+                               or abs(shift[k])>10000.0
+                               for k in ('x','y','z'))):
+                    raise ValueError('MULTI_COPY_FINITE_3D_DISPLACEMENT_REQUIRED')
+                pos=tuple(round(shift[k],7) for k in ('x','y','z'))
+                if pos==(0,0,0) or pos in used:
+                    raise ValueError('MULTI_COPY_NO_ZERO_OR_DUPLICATE_OFFSET')
+                used.add(pos)
+                rows.append({'elementId':{'guid':guid},
+                             'moveVector':{k:shift[k] for k in ('x','y','z')},
+                             'copy':True})
+        if len(rows)>200:
+            raise ValueError('MULTI_COPY_MAX_200_TOTAL_NATIVE_COPIES')
+        if set(prototypes)&{g.lower() for g in retained_signatures}:
+            raise ValueError('MULTI_COPY_PROTOTYPES_MUST_BE_AFFECTED')
+        if self.operation_kind('MoveElements')!='CREATE':
+            raise ValueError('MULTI_COPY_MOVE_ELEMENTS_SOURCE_REVIEW_REQUIRED')
+        ticket=self.prepare('MoveElements',{'elementsWithMoveVectors':rows})
+        if ticket['effect']!='CREATE':
+            raise ValueError('MULTI_COPY_EXPECTS_EXPLICIT_COPY_CREATE_POLICY')
+
+        def checked_after(reply,prior):
+            results=reply.get('executionResults') if isinstance(reply,dict) else None
+            if (not isinstance(results,list) or len(results)!=len(rows)
+                    or any(not isinstance(item,dict)
+                           or item.get('success') is not True
+                           for item in results)):
+                raise ValueError('MULTI_COPY_UNKNOWN_NATIVE_RESPONSE')
+            proof=verify_after(reply,prior)
+            if (not isinstance(proof,dict)
+                    or not str(proof.get('status','')).endswith('PASS')
+                    or proof.get('newPhysicalCopyCount')!=len(rows)
+                    or set(g.lower() for g in proof.get('unchangedPrototypeGuids',[]))
+                    !=set(prototypes)):
+                raise ValueError('MULTI_COPY_NATIVE_BREP_AND_PROTO_COUNT_REQUIRED')
+            return dict(proof,nativeCopyCount=len(rows),
+                        prototypeCount=len(prototypes),
+                        nativeMethod='Tapir.MoveElements(copy=true)')
+        began=time.perf_counter()
+        result=self.execute(
+            writer,scene_id,ticket,
+            sorted(prototypes),retained_signatures,
+            saved_sha256,authorization,'MODEL',
+            checked_after,verify_before=verify_before)
+        seconds=time.perf_counter()-began
+        return dict(result,nativeCopyMetrics={
+            'requestedCopyCount':len(rows),'prototypeCount':len(prototypes),
+            'nativeCalls':1,'durationSeconds':round(seconds,4),
+            'copiesPerSecond':round(len(rows)/seconds,3) if seconds>0 else None,
+            'status':result.get('status'),
+        })
+
+    @staticmethod
+    def plan_reuse_existing(existing, targets):
+        """Copy-first planner: match repeated SOURCE-VERIFIED element families.
+
+        Upstream BIM Graph must provide familySignature computed from
+        translation-normalized geometry AND all construction attributes,
+        profile/library settings, orientation, home story and material.
+        This routine never infers that two differently specified elements
+        may be reused. All reported repeats are routed as one native
+        MoveElements(copy=true) group through copy_multiple_prototypes().
+        Unmatched families remain PENDING and are not blindly Create*'d.
+        """
+        if not isinstance(existing,list) or not isinstance(targets,list):
+            raise ValueError('COPY_FIRST_SOURCE_AND_TARGET_LISTS_REQUIRED')
+        if not targets:
+            raise ValueError('COPY_FIRST_TARGETS_REQUIRED')
+        keys=('type','familySignature','storyIndex')
+        def validate(row, is_existing):
+            if not isinstance(row,dict):
+                raise ValueError('COPY_FIRST_TYPED_GEOMETRY_RECORD_REQUIRED')
+            for field in keys:
+                if field not in row or row[field] is None:
+                    raise ValueError('COPY_FIRST_COMPLETE_FAMILY_SIGNATURE_REQUIRED')
+            if (row['type'] not in {'Column','Beam','Object'}
+                    or not isinstance(row['familySignature'],str)
+                    or len(row['familySignature'])<16
+                    or type(row['storyIndex']) is not int):
+                raise ValueError('COPY_FIRST_UNSUPPORTED_OR_UNVERIFIED_FAMILY')
+            pos=row.get('anchor')
+            if (not isinstance(pos,dict) or set(pos)!={'x','y','z'}
+                    or any(type(pos[k]) not in (int,float)
+                           or not math.isfinite(pos[k]) for k in ('x','y','z'))):
+                raise ValueError('COPY_FIRST_NATIVE_ANCHOR_REQUIRED')
+            if is_existing:
+                if (not isinstance(row.get('guid'),str) or not row['guid']
+                        or row.get('nativeReadbackVerified') is not True):
+                    raise ValueError('COPY_FIRST_LIVE_EXISTING_PROTOTYPE_REQUIRED')
+            elif not isinstance(row.get('sourceRef'),str) or not row['sourceRef'].strip():
+                raise ValueError('COPY_FIRST_SOURCE_DOCUMENT_PROVENANCE_REQUIRED')
+        for row in existing:
+            validate(row,True)
+        for row in targets:
+            validate(row,False)
+        def family(row):
+            return (row['type'],row['familySignature'],row['storyIndex'])
+        families={}
+        for element in existing:
+            families.setdefault(family(element),[]).append(element)
+        patterns={}
+        untouched=[]
+        new_families=[]
+        used_destinations=set()
+        for target in targets:
+            point=target['anchor']
+            destination=(family(target),*(round(point[k],7) for k in ('x','y','z')))
+            if destination in used_destinations:
+                raise ValueError('COPY_FIRST_TARGET_POSITION_DUPLICATED')
+            used_destinations.add(destination)
+            candidates=families.get(family(target),[])
+            if not candidates:
+                new_families.append(target)
+                continue
+            proto=min(candidates,key=lambda e:sum(
+                (point[k]-e['anchor'][k])**2 for k in ('x','y','z')))
+            delta={k:point[k]-proto['anchor'][k] for k in ('x','y','z')}
+            if all(abs(delta[k])<1e-7 for k in ('x','y','z')):
+                untouched.append(proto['guid'].lower())
+                continue
+            guid=proto['guid'].lower()
+            if guid not in patterns:
+                patterns[guid]={'prototypeGuid':proto['guid'],
+                                'prototypeType':proto['type'],
+                                'sourceRef':target['sourceRef'],
+                                'displacements':[]}
+            # Multiple source sheets may authorize the same prototype group.
+            # No new writer is created; the batch source list is retained.
+            if target['sourceRef'] not in patterns[guid]['sourceRef'].split(' | '):
+                patterns[guid]['sourceRef']+=' | '+target['sourceRef']
+            patterns[guid]['displacements'].append(delta)
+        rows=list(patterns.values())
+        if sum(len(x['displacements']) for x in rows)>200:
+            raise ValueError('COPY_FIRST_OVER_200_SPLIT_INTO_AUTHORIZED_SCENES')
+        return {'copyGroups':rows,'existingElementGuids':sorted(set(untouched)),
+                'unmatchedTargetsPendingPrototype':new_families,
+                'newCopyCount':sum(len(x['displacements']) for x in rows),
+                'nativeCopyCallsRequired':int(bool(rows)),
+                'status':'COPY_FIRST_PLAN_SOURCE_VERIFIED_NO_WRITES'}
 
     def native_facts(self,workflow,model_step,elements_step,boxes_step=None):
         """Reuse existing BREP/IFC quantities; provider boxes remain separate."""
