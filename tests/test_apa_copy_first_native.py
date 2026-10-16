@@ -31,6 +31,32 @@ def verify(_reply,_before,n):
             "prototypeGuidUnchanged":True}
 
 class TestNativeCopy(unittest.TestCase):
+    def test_real_router_policy_fences_copy_from_mutating_the_source(self):
+        import archicad_project_accelerator as APA
+        root=Path(__file__).resolve().parents[1]
+        schema=root/"schemas"/"tapir-live-1.5.10"/"tapir-scene-live.json"
+        native=APA.native_command_router(schema,include_functional_modules=False)
+        proof={"source":"Tapir 1.5.10 reviewed dual-effect MoveElements",
+               "sha256":native.contract_hash("MoveElements")}
+        def row(copy):
+            return {"elementId":{"guid":MASTER},
+                    "moveVector":{"x":.6,"y":0,"z":0},
+                    "copy":copy}
+        native.review_policy("MoveElements","CREATE","MODEL",proof)
+        created=native.prepare("MoveElements",
+                              {"elementsWithMoveVectors":[row(True)]})
+        self.assertEqual(created["effect"],"CREATE")
+        with self.assertRaisesRegex(ValueError,"RELOCATION_REQUIRES_REVIEWED_MODIFY"):
+            native.prepare("MoveElements",{"elementsWithMoveVectors":[row(False)]})
+        with self.assertRaisesRegex(ValueError,"MIXED_COPY_AND_MUTATE"):
+            native.prepare("MoveElements",
+                           {"elementsWithMoveVectors":[row(False),row(True)]})
+        native.review_policy("MoveElements","MODIFY","MODEL",proof)
+        moved=native.prepare("MoveElements",{"elementsWithMoveVectors":[row(False)]})
+        self.assertEqual(moved["effect"],"MODIFY")
+        with self.assertRaisesRegex(ValueError,"COPY_REQUIRES_REVIEWED_CREATE"):
+            native.prepare("MoveElements",{"elementsWithMoveVectors":[row(True)]})
+
     def test_native_100_copies_use_one_moveelements_with_copy_true(self):
         obj=router()
         execute_stub(obj,100)
