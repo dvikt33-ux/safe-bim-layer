@@ -1,0 +1,131 @@
+{
+  "schema": "APA_AUTO_NATIVE_TASK_V1",
+  "status": "ONE_SOURCE_QUALIFIED_STRATEGY_PREPARED",
+  "selectedStrategyId": "native_create_windows_batch",
+  "selectedNativeTaskPreview": {
+    "schema": "APA_NATIVE_TASK_PREVIEW_V1",
+    "request": "SYNTHETIC OFFLINE EXAMPLE ONLY - NOT A BDD DESIGN OR WRITE AUTHORIZATION",
+    "intentHash": "6361befaefe34854867fb15468aa6054be379674f4a033d11f7b2e0e36720420",
+    "workflow": {
+      "schema": "APA_DYNAMIC_BIM_WORKFLOW_V1",
+      "graph": {
+        "operations": [
+          {
+            "id": "native_create_windows_batch",
+            "command": "CreateWindows",
+            "params": {
+              "windowsData": [
+                {
+                  "centerOffset": 1.0,
+                  "height": 1.0,
+                  "libraryPartName": "TEST_EXACT_Window",
+                  "oSide": false,
+                  "ownerWallId": {
+                    "guid": "11111111-1111-4111-8111-111111111111"
+                  },
+                  "refSide": false,
+                  "reflected": false,
+                  "sillHeight": 1.0,
+                  "width": 0.8
+                },
+                {
+                  "centerOffset": 3.0,
+                  "height": 1.0,
+                  "libraryPartName": "TEST_EXACT_Window",
+                  "oSide": false,
+                  "ownerWallId": {
+                    "guid": "11111111-1111-4111-8111-111111111111"
+                  },
+                  "refSide": false,
+                  "reflected": false,
+                  "sillHeight": 1.0,
+                  "width": 0.8
+                }
+              ]
+            },
+            "after": []
+          }
+        ]
+      },
+      "catalogHash": "0e5dd0eb62ea988dbe07118d6d751946c84d609d6e70089450c25c733f92ec79",
+      "policyHash": "2a8b2fcb427e39788affa95a8abbec9e74dcada3c3af54928e765b4b64adba8a",
+      "sourcePlanHash": "dd47d7518f54b452262b7d74a5338259b30a2cb3528769cec6565c561a1ebadb",
+      "templatePlanHash": "dd47d7518f54b452262b7d74a5338259b30a2cb3528769cec6565c561a1ebadb",
+      "executionOrder": [
+        "native_create_windows_batch"
+      ],
+      "dependencies": {
+        "native_create_windows_batch": []
+      },
+      "executionPermission": false
+    },
+    "sourcePlanHash": "dd47d7518f54b452262b7d74a5338259b30a2cb3528769cec6565c561a1ebadb",
+    "executor": "SceneWriter",
+    "executionPermission": false,
+    "toolSelection": "GPT_SELECTED_SCHEMAS_NOT_AUTOMATIC_DIMENSION_INFERENCE"
+  },
+  "selectionMethod": "SOLE_FEASIBLE_TYPED_OPTION_NOT_COST_OPTIMIZATION",
+  "calibrationStatus": "UNCALIBRATED",
+  "discovery": {
+    "schema": "APA_CATALOG_AUTO_DISCOVERY_V1",
+    "status": "CATALOG_SCANNED_AND_TYPED_NATIVE_CANDIDATES_VALIDATED",
+    "catalogCommandCount": 262,
+    "recognizedRecipeCommands": [
+      "CreateBeams",
+      "CreateColumns",
+      "CreateDoors",
+      "CreateSlabs",
+      "CreateWalls",
+      "CreateWindows",
+      "ModifySlabs",
+      "ModifyWalls",
+      "MoveElements"
+    ],
+    "eligibleCommands": [
+      "CreateDoors",
+      "CreateSlabs",
+      "CreateWalls",
+      "CreateWindows",
+      "ModifySlabs",
+      "ModifyWalls",
+      "MoveElements"
+    ],
+    "ineligibleCommands": [
+      {
+        "command": "CreateColumns",
+        "reason": "NO_REVIEWED_OPERATION_POLICY"
+      },
+      {
+        "command": "CreateBeams",
+        "reason": "NO_REVIEWED_OPERATION_POLICY"
+      }
+    ],
+    "copyFirstStatus": "COPY_FIRST_PLAN_SOURCE_VERIFIED_NO_WRITES",
+    "pendingUnmatchedTargets": 2,
+    "alreadyPresent": 0,
+    "qualifiedStrategies": 1,
+    "rejectedStrategies": [
+      {
+        "id": "native_copy_existing_batch",
+        "command": "MoveElements",
+        "reason": "UNMATCHED_FAMILY_OR_NO_APPROVED_COPY_POLICY"
+      }
+    ],
+    "newNativeModelWrites": 0,
+    "automaticNativeExecution": false,
+    "nativeWritePermission": false,
+    "sourceQualification": "CALLER_SUPPLIED_NATIVE_READBACK_AND_DOCUMENT_REF_NOT_REVALIDATED_LIVE",
+    "adapterVersion": 2,
+    "benchmarkWorkloadHash": "a6f0213b85163105ab42c840c247665f5294c542d6e9ffa2b98732e8d36817fe",
+    "verificationRequirements": [
+      "EXACT_PROJECT_MODEL_GUID_AND_SAVED_FILE_HASH",
+      "FRESH_OPERATION_SPECIFIC_BASELINE_AND_HOSTS",
+      "COMPLETE_GUID_INVENTORY",
+      "RETAINED_NATIVE_BREP_AND_ATTRIBUTES",
+      "INDEPENDENT_CREATED_OR_MODIFIED_GUID_READBACK",
+      "SOURCE_STORY_MATERIAL_FAVORITE_LIBRARY_AND_GEOMETRY_READBACK"
+    ]
+  },
+  "nativeWritePermission": false,
+  "automaticNativeExecution": false
+}

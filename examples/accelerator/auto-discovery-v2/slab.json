@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "apa-native-auto/2",
+  "request": "SYNTHETIC OFFLINE EXAMPLE ONLY - NOT A BDD DESIGN OR WRITE AUTHORIZATION",
+  "existing": [],
+  "targets": [
+    {
+      "type": "Slab",
+      "familySignature": "TEST_SLAB_MAT_POLYGON_AND_SETTINGS",
+      "storyIndex": 1,
+      "storyElevation": 3.0,
+      "anchor": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 3.0
+      },
+      "sourceRef": "TEST_KR_SLAB_01",
+      "nativeCreateData": {
+        "floorIndex": 1,
+        "level": 3.0,
+        "thickness": 0.2,
+        "referencePlaneLocation": "Top",
+        "polygonCoordinates": [
+          {
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "x": 4.0,
+            "y": 0.0
+          },
+          {
+            "x": 4.0,
+            "y": 4.0
+          },
+          {
+            "x": 0.0,
+            "y": 4.0
+          }
+        ],
+        "polygonArcs": [],
+        "holes": [],
+        "favoriteName": "TEST_SLAB_FAVORITE"
+      },
+      "settingsQualification": {
+        "status": "SOURCE_VERIFIED",
+        "favoriteName": "TEST_SLAB_FAVORITE",
+        "settingsHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "attributesVerified": true,
+        "structureType": "Basic"
+      },
+      "sourceVerification": {
+        "status": "SOURCE_VERIFIED",
+        "evidenceRef": "SYNTHETIC_TEST_DRAWING_AND_READBACK",
+        "dataHash": "3d49a6e0981c5ebf9e897e91b0ec7724c2a548f0f4b12fd98c9f87c2bb4ed18a"
+      }
+    }
+  ],
+  "benchmarks": {}
+}

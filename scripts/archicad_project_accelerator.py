@@ -247,6 +247,30 @@ def run_optimized_native_task(router, api, optimized_preview, writer, scopes, ch
         raise ValueError('OPTIMIZED_TASK_MISSING_APA_V1_PREVIEW')
     return run_native_task(router, api, chosen, writer, scopes, checkpoint)
 
+def prepare_auto_optimized_native_task(router, intent, planner_python=None):
+    """Discover typed V1/V2 strategies through the existing BIM Graph."""
+    from archicad_strategy_discovery import discover_native_execution_plan
+    return discover_native_execution_plan(router, intent, planner_python)
+
+
+def run_auto_optimized_native_task(router, api, auto_preview, writer, scopes, checkpoint=None):
+    """Keep original SceneWriter authorization, identity and readback gates."""
+    if (not isinstance(auto_preview, dict)
+            or auto_preview.get('schema') != 'APA_AUTO_NATIVE_TASK_V1'
+            or auto_preview.get('nativeWritePermission') is not False
+            or auto_preview.get('automaticNativeExecution') is not False
+            or auto_preview.get('status') not in {
+                'ONE_SOURCE_QUALIFIED_STRATEGY_PREPARED',
+                'COST_OPTIMAL_SOURCE_QUALIFIED_STRATEGY_PREPARED'}):
+        raise ValueError('APA_AUTO_DISCOVERY_NOT_READY_FOR_EXPLICIT_EXECUTION')
+    chosen = auto_preview.get('selectedNativeTaskPreview')
+    if (not isinstance(chosen, dict)
+            or chosen.get('schema') != 'APA_NATIVE_TASK_PREVIEW_V1'
+            or chosen.get('executionPermission') is not False):
+        raise ValueError('APA_AUTO_DISCOVERY_INVALID_NATIVE_PREVIEW')
+    return run_native_task(router, api, chosen, writer, scopes, checkpoint)
+
+
 def apply_native_axis_grid(writer,recipe,scene_id,retained_signatures,saved_sha256,authorization_ref,existing_guid=None):
     from archicad_native_spatial_tools import create_or_reuse_axis
     return create_or_reuse_axis(writer,recipe,scene_id,retained_signatures,saved_sha256,authorization_ref,existing_guid)

@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "apa-native-auto/2",
+  "request": "SYNTHETIC OFFLINE EXAMPLE ONLY - NOT A BDD DESIGN OR WRITE AUTHORIZATION",
+  "existing": [],
+  "targets": [
+    {
+      "type": "Wall",
+      "familySignature": "TEST_BASIC_WALL_MAT_AND_GEOMETRY",
+      "storyIndex": 1,
+      "storyElevation": 3.0,
+      "anchor": {
+        "x": 0,
+        "y": 0.0,
+        "z": 3.2
+      },
+      "sourceRef": "TEST_KR_WALL_01",
+      "nativeCreateData": {
+        "begCoordinate": {
+          "x": 0,
+          "y": 0.0
+        },
+        "endCoordinate": {
+          "x": 4.0,
+          "y": 0.0
+        },
+        "floorIndex": 1,
+        "zCoordinate": 0.2,
+        "height": 3.0,
+        "thickness": 0.2,
+        "offset": 0.0,
+        "arcAngle": 0.0,
+        "referenceLineLocation": "Center",
+        "structureType": "Basic",
+        "buildingMaterialId": {
+          "guid": "22222222-2222-4222-8222-222222222222"
+        }
+      },
+      "sourceVerification": {
+        "status": "SOURCE_VERIFIED",
+        "evidenceRef": "SYNTHETIC_TEST_DRAWING_AND_READBACK",
+        "dataHash": "d2eea166f8c173c8481ae9c0b03f8d8fc830d7c601d797c3cda1f490a3aea235"
+      }
+    },
+    {
+      "type": "Wall",
+      "familySignature": "TEST_BASIC_WALL_MAT_AND_GEOMETRY",
+      "storyIndex": 1,
+      "storyElevation": 3.0,
+      "anchor": {
+        "x": 5,
+        "y": 0.0,
+        "z": 3.2
+      },
+      "sourceRef": "TEST_KR_WALL_01",
+      "nativeCreateData": {
+        "begCoordinate": {
+          "x": 5,
+          "y": 0.0
+        },
+        "endCoordinate": {
+          "x": 9.0,
+          "y": 0.0
+        },
+        "floorIndex": 1,
+        "zCoordinate": 0.2,
+        "height": 3.0,
+        "thickness": 0.2,
+        "offset": 0.0,
+        "arcAngle": 0.0,
+        "referenceLineLocation": "Center",
+        "structureType": "Basic",
+        "buildingMaterialId": {
+          "guid": "22222222-2222-4222-8222-222222222222"
+        }
+      },
+      "sourceVerification": {
+        "status": "SOURCE_VERIFIED",
+        "evidenceRef": "SYNTHETIC_TEST_DRAWING_AND_READBACK",
+        "dataHash": "866ec1b17ceb853efe1d84cfcf602081465da803c22cbe3140a6b3e7ff7d9d2c"
+      }
+    }
+  ],
+  "benchmarks": {}
+}

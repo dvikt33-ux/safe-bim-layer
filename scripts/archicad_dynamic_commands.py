@@ -845,7 +845,7 @@ class DynamicCommands:
             for field in keys:
                 if field not in row or row[field] is None:
                     raise ValueError('COPY_FIRST_COMPLETE_FAMILY_SIGNATURE_REQUIRED')
-            if (row['type'] not in {'Column','Beam','Object'}
+            if (row['type'] not in {'Column','Beam','Object','Wall','Slab','Window','Door'}
                     or not isinstance(row['familySignature'],str)
                     or len(row['familySignature'])<16
                     or type(row['storyIndex']) is not int):
@@ -881,6 +881,19 @@ class DynamicCommands:
                 raise ValueError('COPY_FIRST_TARGET_POSITION_DUPLICATED')
             used_destinations.add(destination)
             candidates=families.get(family(target),[])
+            # Hosted elements cannot be translated independently. Walls/slabs
+            # can be reused only with an explicitly complete empty dependency
+            # inventory; copying a host must never silently clone its children.
+            if target['type'] in {'Window','Door'}:
+                candidates=[e for e in candidates if all(
+                    abs(point[k]-e['anchor'][k])<1e-7 for k in ('x','y','z'))
+                    and e.get('ownerWallGuid') == target.get('nativeCreateData',{}).get('ownerWallId',{}).get('guid')
+                    and e.get('ownerWallGuid')]
+            elif target['type'] in {'Wall','Slab'}:
+                candidates=[e for e in candidates if (
+                    all(abs(point[k]-e['anchor'][k])<1e-7 for k in ('x','y','z'))
+                    or (e.get('nativeDependenciesVerified') is True
+                        and e.get('dependentElementGuids') == []))]
             if not candidates:
                 new_families.append(target)
                 continue
