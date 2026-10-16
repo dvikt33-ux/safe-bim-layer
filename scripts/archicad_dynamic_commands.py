@@ -223,6 +223,24 @@ class DynamicCommands:
         parameters=json.loads(self.A.RUN.canonical(parameters))
         if not isinstance(parameters,dict):raise ValueError('COMMAND_PARAMETERS_OBJECT_REQUIRED')
         CONTRACTS._validator(self.catalog,command).validate(parameters)
+        # Tapir MoveElements is a DUAL-EFFECT command. Its copy=True
+        # operation CREATES native elements, whereas copy=False MUTATES
+        # the existing source. A policy review for creation must never
+        # implicitly authorize destructive source relocation (or vice
+        # versa). Validate the actual per-element mode BEFORE a ticket
+        # reaches SceneWriter's durable intent.
+        if command == 'MoveElements':
+            rows=parameters.get('elementsWithMoveVectors',[])
+            mode=self.operation_kind(command)
+            if not isinstance(rows,list) or not rows:
+                raise ValueError('NATIVE_MOVE_ELEMENTS_NONEMPTY_TYPED_BATCH_REQUIRED')
+            copies=[row.get('copy') is True for row in rows]
+            if any(copies) and not all(copies):
+                raise ValueError('NATIVE_MOVE_MIXED_COPY_AND_MUTATE_DENIED')
+            if all(copies) and mode!='CREATE':
+                raise ValueError('NATIVE_MOVE_COPY_REQUIRES_REVIEWED_CREATE_POLICY')
+            if not any(copies) and mode!='MODIFY':
+                raise ValueError('NATIVE_MOVE_RELOCATION_REQUIRES_REVIEWED_MODIFY_POLICY')
         if command in self.constructors and self.constructors[command] is not None:
             value=self.constructors[command](**parameters)
             if not value.get_classinfo().is_valid_instance(value):raise ValueError('OFFICIAL_SDK_INSTANCE_CONSTRAINT_FAILED')
