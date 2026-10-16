@@ -237,11 +237,13 @@ def discover_native_execution_plan(router, intent, planner_python=None):
         "nativeWritePermission": False,
         "sourceQualification": "CALLER_SUPPLIED_NATIVE_READBACK_AND_DOCUMENT_REF_NOT_REVALIDATED_LIVE",
     }
-    require(strategies or not targets, "AUTO_DISCOVERY_NO_COMPLETE_QUALIFIED_STRATEGY")
-    require(strategies or not groups,
-            "AUTO_DISCOVERY_NO_COMPLETE_QUALIFIED_STRATEGY")
     if not strategies:
-        require(not pending, "AUTO_DISCOVERY_UNMATCHED_TARGETS_CANNOT_BE_IGNORED")
+        # Zero-work outcome is valid ONLY when every requested target is
+        # demonstrably already present; missing creation data must not be
+        # interpreted as completed construction.
+        require(not pending and not groups
+                and len(copy_plan["existingElementGuids"]) == len(targets),
+                "AUTO_DISCOVERY_NO_COMPLETE_QUALIFIED_STRATEGY")
         return {
             "schema": "APA_AUTO_NATIVE_TASK_V1",
             "status": "NO_CHANGES_REQUIRED",
