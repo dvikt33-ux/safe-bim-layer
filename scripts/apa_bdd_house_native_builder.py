@@ -11,11 +11,14 @@ Readback + append-only local manifest after each operation.
 from __future__ import annotations
 
 import argparse
+import base64
 import hashlib
 import json
 import math
 from pathlib import Path
 import shutil
+import subprocess
+import uuid
 import sys
 import tempfile
 from datetime import datetime, timezone
@@ -124,7 +127,7 @@ def api(cmd: str, params=None, port: int=PORT) -> dict:
     # The hard-fenced local BIM executor is separate from sync_bridge.
     allowed = {
         "GetProjectInfo","GetAddOnVersion","GetAllElements","GetStories",
-        "GetDetailsOfElements","OpenProject","SaveProject",
+        "GetDetailsOfElements","Get3DBoundingBoxes","OpenProject","SaveProject",
         "CreateColumns","CreateBeams","CreateWalls","CreateSlabs","CreateRoofs",
     }
     if cmd not in allowed:
@@ -291,6 +294,58 @@ def assert_archicad29():
     return product
 
 
+def publish_manifest(path: Path) -> str:
+    stamped=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+    destination=('safe-bim-mailbox/gpt-live/results/'
+                 'apa-bdd-native-build-%s-%s.json' % (stamped,uuid.uuid4().hex[:8]))
+    payload={
+        'message':'Archicad 29 BDD native house build: verified local readback',
+        'branch':'main',
+        'content':base64.b64encode(path.read_bytes()).decode('ascii'),
+    }
+    temp=path.with_suffix('.github-upload.tmp.json')
+    try:
+        atomic_json(temp,payload)
+        response=subprocess.run(
+            ['gh','api','--method','PUT',
+             'repos/dvikt33-ux/safe-bim-bridge/contents/'+destination,
+             '--input',str(temp)],
+            capture_output=True,text=True,timeout=120,check=False)
+        if response.returncode:
+            raise RuntimeError('GitHub report upload failed: '+response.stderr[-500:])
+    finally:
+        temp.unlink(missing_ok=True)
+    return 'https://github.com/dvikt33-ux/safe-bim-bridge/blob/main/'+destination
+
+
+def verify_native_details(created: set[str]) -> dict:
+    # After building, re-read actual native model; GUID presence alone is
+    # insufficient to prove dimensions. Batch read is non-mutating.
+    ids=sorted(created)
+    out={'total':len(ids),'types':{},'missingDetails':[],
+         'missingBoundingBoxes':[],'sampleBboxes':[]}
+    for i in range(0,len(ids),24):
+        group=ids[i:i+24]
+        payload={'elements':[{'elementId':{'guid':g}} for g in group]}
+        d=api('GetDetailsOfElements',payload).get('detailsOfElements',[])
+        b=api('Get3DBoundingBoxes',payload).get('boundingBoxes3D',[])
+        if len(d)!=len(group) or len(b)!=len(group):
+            raise RuntimeError('Native details/bboxes readback misaligned')
+        for j,g in enumerate(group):
+            detail=d[j]
+            bbox=b[j]
+            if not isinstance(detail,dict):
+                out['missingDetails'].append(g)
+            else:
+                typ=detail.get('type','UNKNOWN')
+                out['types'][typ]=out['types'].get(typ,0)+1
+            if not isinstance(bbox,dict) or not isinstance(bbox.get('boundingBox3D'),dict):
+                out['missingBoundingBoxes'].append(g)
+            elif len(out['sampleBboxes'])<12:
+                out['sampleBboxes'].append({'guid':g,'bbox':bbox['boundingBox3D']})
+    return out
+
+
 def run(args):
     if args.port!=PORT:
         raise RuntimeError("Port must be 19727, no automatic discovery")
@@ -379,6 +434,12 @@ def run(args):
     if end-baseline!=all_created:
         raise RuntimeError("Foreign GUID changes detected")
 
+    # Native details and 3D bound readback before saving.
+    manifest["nativeReadback"]=verify_native_details(all_created)
+    if manifest["nativeReadback"]["missingDetails"] or manifest["nativeReadback"]["missingBoundingBoxes"]:
+        raise RuntimeError("Created BIM geometry readback incomplete; not saving automatically")
+    atomic_json(manifest_path,manifest)
+
     # Save the WORKING copy only, never original.
     api("SaveProject",{})
     project(WORKING)
@@ -394,12 +455,20 @@ def run(args):
     print("ORIGINAL PRESERVED:",manifest["originalPLNUnmodifiedOnDisk"],flush=True)
     print("LOCAL MANIFEST:",manifest_path,flush=True)
     print("STATUS:",manifest["status"],flush=True)
+    print("NATIVE READBACK:",json.dumps(manifest["nativeReadback"]["types"],ensure_ascii=True),flush=True)
+    if args.publish:
+        try:
+            url=publish_manifest(manifest_path)
+            print("PRIVATE GITHUB BUILD REPORT:",url,flush=True)
+        except Exception as e:
+            print("REPORT UPLOAD FAILED (PLN already saved):",type(e).__name__,str(e),flush=True)
     return 0
 
 
 if __name__=="__main__":
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--port",type=int,default=PORT)
+    parser.add_argument("--publish",action="store_true",help="Publish readback to private GitHub mailbox")
     parser.add_argument("--apply",action="store_true",
                         help="Create a distinct working PLN and write native BIM elements")
     args=parser.parse_args()
