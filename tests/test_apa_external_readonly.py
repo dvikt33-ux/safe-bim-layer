@@ -45,6 +45,9 @@ class ExternalReadonlyTests(unittest.TestCase):
                 cfg = json.loads(Path(arguments[0]).read_text())
                 self.assertEqual(cfg[0]["a"][0]["file"], str(path.resolve()))
                 self.assertNotIn("b", cfg[0])
+                self.assertEqual(cfg[0]["mode"], "intersection")
+                self.assertEqual(cfg[0]["tolerance"], 0.001)
+                self.assertFalse(cfg[0]["check_all"])
                 return {"ok": True}
             with mock.patch.object(A, "invoke_module", side_effect=inspect):
                 report, files = A.ifc_clash(type("Args", (), {
