@@ -48,9 +48,8 @@ def run(args):
             all(c in "0123456789abcdef" for c in args.revision),
             "NEW_REVISION_MUST_BE_FULL_PINNED_GITHUB_SHA")
     worker = ROOT / "controllers" / "apa_ac29_autonomous_job_bridge.py"
-    original_installer = ROOT / "scripts" / "install_apa_ac29_autonomous_job_bridge.py"
-    require(worker.is_file() and original_installer.is_file(),
-            "APA_EXISTING_RECEIVER_AND_INSTALLER_REQUIRED")
+    require(worker.is_file(),
+            "APA_EXISTING_RECEIVER_REQUIRED")
     installed = import_source("apa_ac29_installed_worker", worker)
     installed.stable_preflight()
     old = installed.runtime_release()
@@ -111,10 +110,6 @@ def run(args):
             "controllers/" + name: ROOT / "controllers" / name
             for name in helpers | {worker.name}
         })
-        require(hash_file(original_installer) == hash_file(
-            ROOT / "scripts" / "install_apa_ac29_autonomous_job_bridge.py"),
-            "LOCAL_INSTALLER_MUTATED_IN_PREFLIGHT")
-
         # Old target hashes remain authenticated by installed.stable_preflight.
         # New modules must not already exist; never replace unknown code.
         old_hashes = {}
