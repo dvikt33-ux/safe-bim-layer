@@ -14,12 +14,18 @@ import hashlib
 import json
 from pathlib import Path
 import sqlite3
+import sys
 import time
 
+ROOT = Path(r"C:\LocalAI\APA_AC29_Stable")
+# Import the user's installed hash-pinned APA modules, never the checkout copy.
+require_installed = ROOT / "scripts"
+if not require_installed.is_dir():
+    raise RuntimeError("INSTALLED_APA_SCRIPTS_MISSING")
+sys.path.insert(0, str(require_installed))
 import archicad_scene_run as RUN
 import archicad_scene_v1 as SCENE
 
-ROOT = Path(r"C:\LocalAI\APA_AC29_Stable")
 PLN = Path(r"C:\LocalAI\APA_Functional_Test_House_01.pln")
 LEDGER = Path(r"C:\LocalAI\APA_Functional_Test_House_01_ledger\scene-v1-attempts.sqlite3")
 SCHEMA = ROOT / "external-tools/apa-readonly-v1/session-factory-v1/tapir-scene-live.json"
