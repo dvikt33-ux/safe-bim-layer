@@ -61,8 +61,8 @@ def native_command_router(schema_path, official_commands=None,
     return router
 
 
-def probe(schema_path):
-    router = native_command_router(schema_path)
+def probe(schema_path, include_functional_modules=False):
+    router = native_command_router(schema_path, include_functional_modules=include_functional_modules)
     keys = sorted(x for x in router.catalog["commands"]
                   if x.startswith("AddOn.APAExternalReadOnly."))
     require(len(keys) == 6, "SESSION_FACTORY_VENDOR_COMMAND_CARDINALITY")
@@ -71,6 +71,7 @@ def probe(schema_path):
             "registered": keys,
             "catalogCommands": len(router.catalog["commands"]),
             "autoRegisteredWithinFactorySessions": True,
+            "functionalModulesIncluded": include_functional_modules,
             "autoRegisteredInExistingRunningProcesses": False,
             "modelWrites": 0, "nativeCalls": 0}
 
@@ -78,12 +79,16 @@ def probe(schema_path):
 def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--schema", type=Path)
+    p.add_argument("--include-functional-modules", action="store_true",
+                   help="Explicitly attach existing optional SDK/functional module contracts")
     args = p.parse_args(argv)
     default = STABLE / "schemas" / "tapir-live-1.5.10" / "tapir-scene-live.json"
-    fallback = Path(__file__).resolve().parents[1] / "schemas" / "tapir-live-1.5.10" / "tapir-scene-live.json"
+    fallback = Path(__file__).resolve().with_name("tapir-scene-live.json")
+    if not fallback.is_file():
+        fallback = Path(__file__).resolve().parents[1] / "schemas" / "tapir-live-1.5.10" / "tapir-scene-live.json"
     schema = args.schema or (default if default.is_file() else fallback)
     require(schema.is_file(), "APPROVED_TAPIR_SCHEMA_NOT_FOUND")
-    print(json.dumps(probe(schema), ensure_ascii=False, indent=2))
+    print(json.dumps(probe(schema, args.include_functional_modules), ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":
