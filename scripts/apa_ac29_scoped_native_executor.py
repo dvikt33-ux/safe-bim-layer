@@ -102,19 +102,47 @@ def execute(bridge,job,folder):
          bridge.sha(bridge.ORIGINAL)==bridge.SOURCE_SHA,
          "SCOPED_NATIVE_SAVED_PLN_DRIFT")
 
-    # The original BDD ledger presently contains two historical UNKNOWNs.
-    # Until separately reconciled from their actual SQLite/RAW logs, no
-    # mutation can be dispatched, even with a valid local grant.
+    # Do not change either old UNKNOWN SQLite row. Compute the two
+    # independent history proofs on the current saved copy, using READS ONLY,
+    # BEFORE constructing the write-enabled EvidenceAPI or arming SaveProject.
     ledger=Path(os.environ["LOCALAPPDATA"])/"APA_BDD_Window1p8"/"apa_scene_writer.sqlite"
     pending=pending_ledger(ledger,[task["sceneId"],task["saveSceneId"]])
-    need(not pending,"SCOPED_NATIVE_PENDING_HISTORY_REQUIRES_INDEPENDENT_RECONCILIATION:"+
-         ",".join(row["sceneId"] for row in pending))
 
     import archicad_project_accelerator as APA
     import archicad_scene_run as RUN
     import archicad_bim_documentation as D
     import archicad_connected_components as C
     import apa_ac29_reusable_native_copy as COPY
+    import apa_ac29_scene_reconciliation as RECON
+    import apa_ac29_dynamic_write_scopes as SCOPES
+    reconciliation=None
+    if pending:
+        hist_raw=Path(os.environ["LOCALAPPDATA"])/"APA_BDD_Bulk150_NearHouse"/"raw"/"raw.jsonl"
+        RUN.bind_authorized_saved_copy(
+            19727,str(bridge.WORKING),bridge.WORKING.stem,
+            task["projectSha256"],task["authorizationRef"]+":HISTORY_READ")
+        hist_dir=folder/"history-read-only"
+        hist_dir.mkdir()
+        historical_api=APA.EvidenceAPI(APA.native_transport,hist_dir,execute=False)
+        need(APA.archicad29(historical_api).get("buildNumber")==5101,
+             "SCOPED_NATIVE_HISTORY_READ_WRONG_ARCHICAD29_BUILD")
+        reconciliation=RECON.reconcile_bdd_paired_history_read_only(
+            ledger,hist_raw,historical_api,
+            current_project_sha=bridge.sha(bridge.WORKING),
+            source_project_sha=bridge.sha(bridge.ORIGINAL),
+            expected_source_sha=bridge.SOURCE_SHA,
+            guid_inventory=APA.inventory_guids,
+            capture_model=D.capture_full_model,
+            geom_signature=C.ROOF.geometry_signature,digest=RUN.digest)
+        need(historical_api.write_attempts==0 and
+             bridge.sha(bridge.WORKING)==task["projectSha256"] and
+             bridge.sha(bridge.ORIGINAL)==bridge.SOURCE_SHA,
+             "SCOPED_NATIVE_HISTORY_RECONCILIATION_MODEL_CHANGED")
+        SCOPES.validate_existing_ledger(
+            ledger,task["sceneId"],reconciliation=reconciliation)
+        need({row["sceneId"] for row in pending}==
+             {row["sceneId"] for row in reconciliation["historicalProofs"]},
+             "SCOPED_NATIVE_HISTORY_UNEXPLAINED_PENDING_SCENES")
 
     effect,verifier_id=SUPPORTED[task["command"]]
     from apa_ac29_dynamic_native_verifiers import installed_verifiers
@@ -187,7 +215,8 @@ def execute(bridge,job,folder):
         router,api,preview,writer,spec,
         approved_project_sha=task["projectSha256"],
         local_authorization=task["authorizationRef"],
-        current_project_sha=lambda:bridge.sha(bridge.WORKING))
+        current_project_sha=lambda:bridge.sha(bridge.WORKING),
+        reconciliation=reconciliation)
     need(result.get("status")=="WORKFLOW_CALLABLE_VERIFIED",
          "SCOPED_NATIVE_UNKNOWN_OUTCOME_NEVER_REPEAT_OR_SAVE")
     ids=sorted(APA.inventory_guids(api))
