@@ -20,10 +20,10 @@ CTRL = ROOT / "controllers"
 STATE = ROOT / "apa-job-bridge-state"
 WORKER = CTRL / "apa_ac29_autonomous_job_bridge.py"
 REPO = "dvikt33-ux/safe-bim-layer"
-SOURCE_COMMIT = "3a44d04e82cca8f0c52f93f7ff72674770680048"
+SOURCE_COMMIT = "9d283fea3c5a5645c21bfa87ccc585186c4dd3e1"
 CURRENT_WORKER_SHA1 = "4bf5f463517b3fa95b5c103a9377c3155acb9b2d"
 FILES = {
-    "apa_ac29_autonomous_job_bridge.py": "71c29d15723c2fda59f169b40ba0f09eddb4ff60",
+    "apa_ac29_autonomous_job_bridge.py": "f3a51cfd3287565c73814830826c990654be8c19",
     "apa_ac29_reusable_native_copy.py": "c16cd5caa2df4b7959bca766dce0e706a7f23dcc",
     "apa_ac29_scene_reconciliation.py": "1ba5d59755f9c96a46d292fe8e282061eb56286a",
 }
