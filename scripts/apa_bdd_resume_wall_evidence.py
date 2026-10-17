@@ -7,26 +7,29 @@ import hashlib
 import json
 from pathlib import Path
 import tempfile
-from urllib.request import urlopen
+import base64
+import subprocess
 
-REPORT_URL = (
-    "https://raw.githubusercontent.com/dvikt33-ux/safe-bim-bridge/main/"
-    "safe-bim-mailbox/gpt-live/results/apa-bdd-selected-tapir-20261017-133000.json"
-)
-TASK_URL = (
-    "https://raw.githubusercontent.com/dvikt33-ux/safe-bim-layer/"
-    "7a8b88275172da3b866648bc6f580ba762fb7f6a/"
-    "examples/accelerator/bdd-house-20261017-auto-selector-source-read.json"
-)
+REPORT_REPO = "dvikt33-ux/safe-bim-bridge"
+REPORT_PATH = "safe-bim-mailbox/gpt-live/results/apa-bdd-selected-tapir-20261017-133000.json"
+TASK_REPO = "dvikt33-ux/safe-bim-layer"
+TASK_PATH = "examples/accelerator/bdd-house-20261017-auto-selector-source-read.json"
+TASK_REF = "7a8b88275172da3b866648bc6f580ba762fb7f6a"
 REPORT_BLOB = "b8961f6b69dc2cc074de0e69474ee79a4ae56a21"
 TASK_BLOB = "a77b3a45b0020c4274f8d11bf33c6c0ccd309e86"
 
 
-def read_pinned_json(url, expected_blob):
-    with urlopen(url, timeout=30) as response:
-        data = response.read()
+def read_pinned_json(repo, path, ref, expected_blob):
+    # Authenticated access via the user's existing gh login. GitHub private
+    # repos deliberately return HTTP 404 to unauthenticated raw URLs.
+    raw = subprocess.check_output(
+        ["gh", "api", f"repos/{repo}/contents/{path}?ref={ref}"],
+        stderr=subprocess.PIPE, timeout=45
+    )
+    response = json.loads(raw.decode("utf-8"))
+    data = base64.b64decode(response["content"])
     sha = hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
-    if sha != expected_blob:
+    if sha != expected_blob or response.get("sha") != expected_blob:
         raise ValueError("GITHUB_EVIDENCE_CHANGED")
     return json.loads(data.decode("utf-8-sig"))
 
@@ -38,8 +41,8 @@ def require(ok, error):
 
 def main():
     try:
-        report = read_pinned_json(REPORT_URL, REPORT_BLOB)
-        task = read_pinned_json(TASK_URL, TASK_BLOB)
+        report = read_pinned_json(REPORT_REPO, REPORT_PATH, "main", REPORT_BLOB)
+        task = read_pinned_json(TASK_REPO, TASK_PATH, TASK_REF, TASK_BLOB)
         steps = task["steps"]
         require(task["schemaVersion"] == "apa-capability-task/1" and len(steps) == 2,
                 "SOURCE_TASK_CHANGED")
@@ -90,8 +93,8 @@ def main():
         package = {
             "schema": "APA_BDD_EXISTING_WALL_EVIDENCE_V1",
             "status": "PREVIOUS_NATIVE_PASS_REUSED",
-            "sourceReport": REPORT_URL,
-            "sourceTask": TASK_URL,
+            "sourceReport": f"https://github.com/{REPORT_REPO}/blob/main/{REPORT_PATH}",
+            "sourceTask": f"https://github.com/{TASK_REPO}/blob/{TASK_REF}/{TASK_PATH}",
             "sourceHostGuids": ids[0],
             "guidToOutputRowAssociation": "NOT_INDEPENDENTLY_VERIFIED",
             "walls": wall_rows,
