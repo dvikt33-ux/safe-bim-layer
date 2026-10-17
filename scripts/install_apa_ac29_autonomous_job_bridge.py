@@ -40,7 +40,7 @@ def processes(worker):
         "@(Get-CimInstance Win32_Process | Where-Object { $_.Name -eq 'python.exe' } | "
         "Select-Object ProcessId,ParentProcessId,CommandLine) | ConvertTo-Json -Compress"],
         timeout=30)
-    rows=json.loads(data.decode('utf8-sig'))
+    rows=json.loads(data.decode('utf-8-sig'))
     rows=rows if isinstance(rows,list) else [rows]
     return [r for r in rows if str(worker).casefold() in (r.get('CommandLine') or '').casefold()]
 
@@ -82,7 +82,7 @@ def update_from_checkout(checkout, manifest_path, apply=False):
         current=sha(target) if target.exists() else None
         require(current==m['oldHashes'][name],'UPDATE_INSTALLED_FILE_DRIFT:'+name)
         data=subprocess.check_output(['git','show',revision+':scripts/'+name],cwd=checkout)
-        compile(data.decode('utf8-sig'),name,'exec');payload[name]=data
+        compile(data.decode('utf-8-sig'),name,'exec');payload[name]=data
     # Immutable Git data, not potentially dirty checkout source files.
     updated_hashes={name:hashlib.sha256(data).hexdigest() for name,data in payload.items()}
     state=ROOT/'apa-job-bridge-state'
