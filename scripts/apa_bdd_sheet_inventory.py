@@ -81,7 +81,7 @@ def main():
     if not pdf.is_file() or pdf.suffix.lower() != ".pdf":
         raise ValueError("SOURCE_NOT_PDF")
     result = inspect(pdf, BDD_HASH if args.bdd_exact_sha else None)
-    print(json.dumps(result, ensure_ascii=False, indent=2))
+    print(json.dumps(result, ensure_ascii=True, indent=2))
 
 
 if __name__ == "__main__":
