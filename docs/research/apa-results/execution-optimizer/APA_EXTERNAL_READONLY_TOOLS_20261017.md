@@ -41,7 +41,7 @@ The installer only creates:
 `C:\LocalAI\APA_AC29_Stable\external-tools\apa-readonly-v1\`
 
 It creates a **new isolated Python 3.12 venv**, uses
-`pip install --only-binary=:all: --no-binary=odfpy` for the exact pins,\nwith source-build allowed **only** for odfpy==1.4.1 (IfcTester dependency); runs `pip check`,
+first downloads **odfpy 1.4.1** and verifies its published PyPI SHA-256; then installs\nthe remaining exact pinned packages using `pip install --only-binary=:all:` and runs `pip check`,
 imports three actual vendor CLIs, then writes `installation.json`.
 It neither upgrades the core APA interpreter nor installs any Archicad Add-On.
 
