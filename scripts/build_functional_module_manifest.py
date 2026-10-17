@@ -65,6 +65,12 @@ def build():
         parameters=clone_params,returns=clone_result,
         availability='BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED',operationKind='CREATE',impact='MODEL',
         implementationSource='archicad-addon/Sources/NativeGroupCommands.inc')
+    native['UngroupNativeGroupV1']=dict(version='29',category='Native SDK group operation',
+        description='Ungroup explicitly selected flat native group with complete GUID readback and original members preserved.',
+        parameters=obj({'groupId':group_id,'sourceRef':dict(S,minLength=8)}),
+        returns=either(obj({'nativeModelWrites':I,'previousGroupId':group_id,'releasedMembers':arr(group_id)})),
+        availability='BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED',operationKind='MODIFY',impact='MODEL',
+        implementationSource='archicad-addon/Sources/NativeGroupCommands.inc')
     protection=dict(version='29',category='SDK DevKit licensing query',description='Existing DevKit ProtectionInfoCommand reused unchanged namespace; license flags only.',parameters=obj({}),returns=obj({k:B for k in ['isSTART','isEDU','isSOLO','isDEMO','isTRIAL','isBTC','isNFR','isNetworkLicense']}),availability='BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED')
     point=arr(N,minItems=2,maxItems=2);outline=arr(point,minItems=3);nativeElement=obj({'guid':S,'type':S,'homeStory':I,'bodies':arr({'type':'object'})},['guid'],True)
     local={};deps={}
