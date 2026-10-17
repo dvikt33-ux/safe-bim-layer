@@ -137,3 +137,45 @@ if ($LASTEXITCODE -ne 0) { throw "Real Dynamic Router activation check failed" }
 - `IFCClash`, `IDSValidate`, `IFCQuantities` registered but live-file semantics are **NOT_VERIFIED**.
 - Registration is **not automatic across unrelated existing APA processes**; this is an opt-in activation entry point, not a core startup hook or a second writer.
 - No PLN/model change, APX change, Dispatcher/Arena change, no retries to the unresolved BDD 1.14 task.
+
+## October 17 — all six vendor families and guarded production sync
+
+### Actual IFC tests
+
+[Windows CI #39055216133](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/39055216133)
+passed on Python 3.11 and 3.12 with temporary **IFC4 walls containing geometry**:
+- IfcClash 0.8.5 actual geometry CLI succeeds after a source-reviewed required `mode="intersection"`, `tolerance=0.001`, `check_all=False` fix. No claim that every source collision is detected, and clashes alone do not certify engineering errors.
+- IfcTester 0.8.5 actual `IDSValidate` CLI succeeded with actual IDS requirement that IFC walls have `Name`.
+- `IFCQuantities` invoked the **existing** `archicad_connected_ifc.inspect_quantified_exchange` on a geometrically represented IFC4 wall, returning one `IfcWall`, not a new QTO computation.
+These are temporary source files generated in CI, not the user's BDD/PLN.
+
+### Existing laptop installation
+
+The user's installed adapter was an earlier, manifest-hash-protected version lacking the required IfcClash source-set mode. **Do not reinstall packages or overwrite the adapter directly**; the installed `apa_external_catalog.py` verifies the adapter SHA against `installation.json` and correctly fails when they disagree.
+
+New `scripts/upgrade_apa_external_readonly_clash.py` performs explicit opt-in `--apply` upgrade of **only** `apa_external_readonly.py` and its corresponding `installation.json`. Before changing anything it checks:
+- every installed adapter/catalog/requirements SHA against manifest;
+- that the new source differs by exactly the reviewed IfcClash mode/tolerance hunk (allow Windows CRLF encoding);
+- target `venv\Scripts\python.exe` exists;
+- `upgrade-ifcclash-intersection-v1` does not yet exist.
+
+It writes untouched backups under `external-tools\apa-readonly-v1\upgrade-ifcclash-intersection-v1`, atomically installs the reviewed source and updated receipt, runs `doctor`, verifies target digest, and attempts recovery on any caught failure. Repeated `--apply` is refused. The native APA core, SDK DLL/APX, original router, Dispatcher and PLN remain unchanged.
+
+After upgrade, `scripts/apa_external_ifc_host_probe.py` creates **temporary IFC4/IDS fixtures**, uses the original installed `DynamicCommands` to register six commands from the installed sidecar and executes three IFC operations via `router.prepare/read`. It reports `REAL_VENDOR_IFC_READ_ONLY_ROUTE_PASS` only after all operations pass. That is a full isolated **host process** test, not an Archicad model mutation or engineering approval.
+
+### Session-scoped auto-attach
+
+`scripts/apa_external_session_factory.py` exports the same
+`native_command_router(schema_path, official_commands=None, include_functional_modules=True)`
+signature as the original APA core. The wrapper calls **the original factory first**, retaining existing SDK/functional providers, then calls the installed reviewed catalog's `register(router)` on **that same router**. Each router created through this wrapper therefore registers the six external commands in the new session. No second router or writer.
+
+**The wrapper is opt-in.** It is not injected into pre-existing processes, does not hook Windows startup or change the original core `native_command_router` import globally. Production caller(s) must explicitly import the wrapper instead of the core factory; that change remains NOT_DEPLOYED until their startup site can be reviewed and validated against stable APA module hashes. Do not claim global auto-registration based on factory unit tests alone.
+
+### Local acceptance statuses
+
+- User laptop isolated 10/10 packages + doctor READY: CONFIRMED.
+- User laptop six DynamicCommands + PDF/DXF real operation: CONFIRMED from user-provided PowerShell JSON.
+- Windows CI three new IFC operations: PASS on CI dummy IFC geometry.
+- User laptop IFCClash upgraded and 3 IFC operations via installed router: **NOT_RUN** until upgrade/probe receipts.
+- Factory startup integration into existing persistent APA processes: **NOT_APPLIED**.
+- Native operations and BDD model: untouched by this package; BDD 1.14 unknown outcome still demands read-only reconcile.
