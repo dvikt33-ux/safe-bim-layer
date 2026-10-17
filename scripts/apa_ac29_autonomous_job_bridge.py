@@ -68,13 +68,16 @@ def runtime_release():
         'workingPlnSha256','expectedGuidCount'}
     basic_modules=set(MODULE_HASHES)|{
         'apa_ac29_dynamic_write_scopes.py','apa_ac29_dynamic_native_verifiers.py'}
+    verified_extension_modules={
+        'apa_ac29_existing_create_verifiers.py',
+        'apa_ac29_existing_modify_verifiers.py'}
     helpers={'apa_ac29_reusable_native_copy.py','apa_ac29_multi_prototype_native_copy.py',
              'apa_ac29_scene_reconciliation.py'}
     require(isinstance(receipt,dict) and set(receipt) in (old_keys,old_keys|{'controllerHashes'}) and
         receipt['schema']=='APA_AC29_RUNTIME_RELEASE_V1' and
         re.fullmatch('[0-9a-f]{40}',receipt['revision']) and
         receipt['workerSHA256']==sha(Path(__file__)) and
-        set(receipt['moduleHashes']) in (basic_modules,basic_modules|helpers) and
+        set(receipt['moduleHashes']) in (basic_modules,basic_modules|helpers, basic_modules|helpers|verified_extension_modules) and
         all(re.fullmatch('[0-9a-f]{64}',value) for value in receipt['moduleHashes'].values()) and
         re.fullmatch('[0-9a-f]{64}',receipt['workingPlnSha256']) and
         type(receipt['expectedGuidCount']) is int and receipt['expectedGuidCount']>0,
@@ -573,8 +576,12 @@ def main():
         import apa_ac29_dynamic_native_verifiers as VERIFIERS
         import apa_ac29_multi_prototype_native_copy as MULTI
         require(callable(APA.run_scoped_native_task),'SCOPED_CORE_ENTRY_POINT_MISSING')
-        require(set(VERIFIERS.installed_verifiers())=={'VerifiedNativeColumns','VerifiedNativeTranslation'} and
-                callable(MULTI.reconcile_existing_multi_task),'SCOPED_RUNTIME_DEPENDENCIES_MISSING')
+        require(set(VERIFIERS.installed_verifiers())=={
+                    'VerifiedNativeColumns','VerifiedNativeTranslation',
+                    'VerifiedNativeBasicBeam','VerifiedNativeBasicWall',
+                    'VerifiedNativeBasicRoof','VerifiedBasicSlabMaterial'} and
+                callable(MULTI.reconcile_existing_multi_task),
+                'SCOPED_RUNTIME_DEPENDENCIES_MISSING')
         print('APA_BRIDGE_HEALTHCHECK_PASS_NO_NATIVE_CALLS',flush=True)
         return
     require(10 <= args.interval_seconds <= 3600, "BAD_POLL_INTERVAL")
