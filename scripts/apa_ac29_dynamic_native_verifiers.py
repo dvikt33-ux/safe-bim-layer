@@ -34,38 +34,37 @@ def checked_column_source(parameters):
     for item in parameters["columnsData"]:
         check(isinstance(item, dict) and
               set(item) == {
-               "coordinates", "width", "depth", "height", "zCoordinate",
+               "coordinates", "width", "depth", "height",
                "floorIndex", "axisRotationAngle", "buildingMaterialId",
-               "coreAnchor", "circleBased", "isSlanted",
+               "coreAnchor", "circleBased",
                "isWidthAndHeightLinked"},
               "APA_NATIVE_COLUMN_COMPLETE_NATIVE_PROFILE_REQUIRED")
         point = item["coordinates"]
         material = item["buildingMaterialId"]
-        check(isinstance(point, dict) and
+        check(isinstance(point, dict) and set(point) == {"x", "y", "z"} and
               all(type(point.get(k)) in (float, int) and
-                  math.isfinite(point[k]) for k in ("x", "y")) and
+                  math.isfinite(point[k]) for k in ("x", "y", "z")) and
               isinstance(material, dict) and
               isinstance(material.get("guid"), str) and
               item["floorIndex"] == 0 and
               item["coreAnchor"] == "Center" and
               item["circleBased"] is False and
-              item["isSlanted"] is False and
               item["isWidthAndHeightLinked"] is False and
               close(item["axisRotationAngle"], 0.0) and
               all(type(item[k]) in (int, float) and
                   0 < item[k] <= 30 and math.isfinite(item[k])
-                  for k in ("width", "depth", "height")) and
-              type(item["zCoordinate"]) in (int, float) and
-              math.isfinite(item["zCoordinate"]),
+                  for k in ("width", "depth", "height")),
               "APA_NATIVE_COLUMN_ONLY_VERIFIED_STRAIGHT_CENTERED_BASIC_PROFILE")
         expected = (
             round(point["x"], 6), round(point["y"], 6),
-            round(item["zCoordinate"], 6)
+            round(point["z"], 6)
         )
         check(expected not in ids,
               "APA_NATIVE_COLUMN_DUPLICATE_AUTHORED_POSITION")
         ids.add(expected)
-        approved.append(item)
+        # The CREATE contract writes coordinates.z; the DETAILS contract
+        # reads zCoordinate. Never send readback-only fields to CreateColumns.
+        approved.append(dict(item, zCoordinate=point["z"]))
     return approved
 
 
@@ -78,6 +77,23 @@ def verify_column_create_before(*, api, command, parameters,
           isinstance(native_before.get("elements"), list) and
           len(native_before["elements"]) > 0,
           "APA_NATIVE_COLUMN_PREWRITE_BREP_MISSING")
+    from apa_ac29_reusable_native_copy import native_aabb_overlaps
+    boxes = [[(p['coordinates']['x']-p['width']/2,
+               p['coordinates']['x']+p['width']/2),
+              (p['coordinates']['y']-p['depth']/2,
+               p['coordinates']['y']+p['depth']/2),
+              (p['zCoordinate'],p['zCoordinate']+p['height'])] for p in items]
+    existing = []
+    for element in native_before['elements']:
+        for body in element.get('bodies', []):
+            vertices=body.get('vertices', [])
+            if vertices:
+                existing.append([(min(v[i] for v in vertices),
+                                  max(v[i] for v in vertices)) for i in range(3)])
+    check(not any(native_aabb_overlaps(box, other)
+                  for index, box in enumerate(boxes)
+                  for other in boxes[index+1:] + existing),
+          'APA_NATIVE_COLUMN_SOURCE_OR_BATCH_SOLIDS_INTERSECT')
     return {"status": "NATIVE_COLUMN_SOURCE_SCOPED_CREATE_PASS",
             "expectedCount": len(items)}
 

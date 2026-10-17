@@ -6,6 +6,8 @@ An installed code-owned pre/post verifier is mandatory. Untrusted GitHub
 tasks may describe native data, but cannot submit executable callbacks.
 """
 from __future__ import annotations
+import copy
+from contextlib import closing
 import re
 import sqlite3
 from pathlib import Path
@@ -113,7 +115,7 @@ def validate_existing_ledger(journal, scene_id, reconciliation=None):
     """No SQL mutations. No automatic replay or quiet UNKNOWN removal."""
     journal = Path(journal)
     need(journal.is_file(), "DYNAMIC_WRITE_ORIGINAL_SCENEWRITER_SQLITE_REQUIRED")
-    with sqlite3.connect(f"file:{journal.as_posix()}?mode=ro", uri=True) as db:
+    with closing(sqlite3.connect(f"file:{journal.as_posix()}?mode=ro", uri=True)) as db:
         old = db.execute("SELECT scene_id,state FROM scenes").fetchall()
     need(scene_id not in {r[0] for r in old},
          "DYNAMIC_WRITE_SCENE_ID_ALREADY_USED_NEVER_RETRY")
@@ -138,11 +140,12 @@ def build_existing_workflow_scopes(*, spec, plan, router, registry,
     DynamicCommands.execute handles native registration, identity, SQLite
     durable intent, full retained BREP and independent verifier callbacks.
     """
+    spec, plan = copy.deepcopy(spec), copy.deepcopy(plan)
     verifier = verify_contract(spec, plan, router, registry,
                                approved_project_sha=approved_project_sha,
                                local_authorization=local_authorization)
-    validate_existing_ledger(writer.journal_path, spec["sceneId"],
-                             reconciliation=reconciliation)
+    unresolved = validate_existing_ledger(
+        writer.journal_path, spec["sceneId"], reconciliation=reconciliation)
     need(current_project_sha() == approved_project_sha,
          "DYNAMIC_WRITE_SAVED_PROJECT_HASH_CHANGED")
 
@@ -199,13 +202,23 @@ def build_existing_workflow_scopes(*, spec, plan, router, registry,
              "DYNAMIC_WRITE_SOURCE_SPECIFIC_PREFLIGHT_NOT_PASS")
 
         def preflight(live_api):
+            validate_existing_ledger(writer.journal_path, spec["sceneId"],
+                                     reconciliation=reconciliation)
             need(current_project_sha() == approved_project_sha and
                  set(guid_inventory(live_api)) == before,
                  "DYNAMIC_WRITE_LIVE_MODEL_CHANGED_BEFORE_DISPATCH")
+            fresh = capture_model(live_api, sorted(before))
+            fresh_nodes = {e["guid"].lower(): e for e in fresh["elements"]}
+            need(set(fresh_nodes) == before and
+                 router.A.RUN.digest({
+                     g: C.ROOF.geometry_signature(fresh_nodes[g])
+                     for g in sorted(before)
+                 }) == spec["expectedBeforeNativeBrepHash"],
+                 "DYNAMIC_WRITE_BREP_CHANGED_BEFORE_DISPATCH")
             return verifier.before(
                 api=live_api, command=ticket["command"],
                 parameters=ticket["parameters"], affected=sorted(affected),
-                native_before=native_before)
+                native_before=fresh)
 
         def postflight(native_reply, _):
             after = set(guid_inventory(api))

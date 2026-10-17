@@ -213,6 +213,30 @@ def run_native_task(router, api, preview, writer, scopes, checkpoint=None):
     return router.run_workflow(api,preview['workflow'],writer,scopes,checkpoint)
 
 
+def run_scoped_native_task(router, api, preview, writer, spec, *,
+                           approved_project_sha, local_authorization,
+                           current_project_sha, reconciliation=None,
+                           checkpoint=None):
+    """Core entry point for installed CREATE/MODIFY verifiers.
+
+    The existing selector supplies a native preview. This binds its one
+    reviewed mutation and delegates to the same workflow/SceneWriter. It
+    never infers local authorization from a task or a selection result.
+    """
+    from apa_ac29_dynamic_native_verifiers import installed_verifiers
+    from apa_ac29_dynamic_write_scopes import build_existing_workflow_scopes
+    from archicad_bim_documentation import capture_full_model
+    scopes = build_existing_workflow_scopes(
+        spec=spec, plan=preview['workflow'], router=router,
+        registry=installed_verifiers(), writer=writer, api=api,
+        capture_model=capture_full_model, guid_inventory=inventory_guids,
+        current_project_sha=current_project_sha,
+        approved_project_sha=approved_project_sha,
+        local_authorization=local_authorization,
+        reconciliation=reconciliation)
+    return run_native_task(router, api, preview, writer, scopes, checkpoint)
+
+
 
 def prepare_optimized_native_task(router, intent, planner_python=None):
     """Choose a measured, source-qualified native workflow with Fast Downward.
