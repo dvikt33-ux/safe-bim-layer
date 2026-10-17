@@ -83,10 +83,13 @@ class SemanticReadOnlyTests(TestCase):
                     "model": str(model), "modelSHA256": W.digest(model)
                 }
             }), encoding="utf-8")
-            self.assertEqual(W.read_verified_ml_model(cfg, "openbim")[2], model.resolve())
-            model.write_bytes(b"changed")
-            with self.assertRaisesRegex(ValueError, "MODEL_HASH_MISMATCH"):
-                W.read_verified_ml_model(cfg, "openbim")
+            with mock.patch.dict(W.OFFICIAL_MODEL_SHA256,
+                                 {"openbim": W.digest(model)}):
+                self.assertEqual(W.read_verified_ml_model(cfg, "openbim")[2],
+                                 model.resolve())
+                model.write_bytes(b"changed")
+                with self.assertRaisesRegex(ValueError, "ML_MODEL_HASH_MISMATCH"):
+                    W.read_verified_ml_model(cfg, "openbim")
 
     def test_new_four_only_registered_to_original_router(self):
         class DummyRouter:
@@ -130,10 +133,12 @@ class SemanticReadOnlyTests(TestCase):
                 with self.assertRaisesRegex(ValueError, "EXPLICIT_TRUST"):
                     M.configure("openbim", exe, vendor, weights, False)
                 self.assertFalse((side / "models.json").exists())
-                report = M.configure("openbim", exe, vendor, weights, True)
-                self.assertEqual(report["configured"], ["openbim"])
-                with self.assertRaisesRegex(ValueError, "ALREADY_EXISTS"):
-                    M.configure("openbim", exe, vendor, weights, True)
+                with mock.patch.dict(M.OFFICIAL_SHA256,
+                                     {"openbim": M.sha(weights)}):
+                    report = M.configure("openbim", exe, vendor, weights, True)
+                    self.assertEqual(report["configured"], ["openbim"])
+                    with self.assertRaisesRegex(ValueError, "ALREADY_EXISTS"):
+                        M.configure("openbim", exe, vendor, weights, True)
 
 
     def test_real_dynamiccommands_register_prepare_read(self):
