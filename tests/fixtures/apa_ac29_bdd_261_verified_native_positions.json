@@ -1,0 +1,1641 @@
+{
+  "schema": "APA_AC29_HISTORICAL_NATIVE_261_POSITION_FIXTURE_V1",
+  "sourceReport": "https://github.com/dvikt33-ux/safe-bim-bridge/blob/main/safe-bim-mailbox/gpt-live/results/apa-bdd-existing-router-20261016T164211Z-8d7da11a.json",
+  "sourceGitBlob": "ce15fd19d2b85f2e306f04af41461e81597807a7",
+  "reportGuidCount": 261,
+  "sourceTimestamp": "2026-10-16T16:42:11.960839+00:00",
+  "notCurrentLive298": true,
+  "piles": [
+    {
+      "guid": "19fab51b-9095-4ff8-b11d-c2aeeeb63c15",
+      "anchor": {
+        "x": 1.587,
+        "y": 9.38,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "1f795816-fb0e-4a7b-b0bb-6abc0fa312f9",
+      "anchor": {
+        "x": 4.761,
+        "y": 9.38,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "31951fb1-b938-40ce-ad02-032402f705aa",
+      "anchor": {
+        "x": 14.28,
+        "y": 9.38,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "379633e4-ea4f-4664-83d6-065a1ddfd697",
+      "anchor": {
+        "x": 5.34,
+        "y": 1.54,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "4917c196-800e-4cda-8abe-55763858ea52",
+      "anchor": {
+        "x": 14.255,
+        "y": 1.09,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "49b811ac-1215-4bb7-9804-3d5762a32800",
+      "anchor": {
+        "x": 6.348,
+        "y": 9.38,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "4c9ac78b-62dc-4466-a241-3a550b6bd493",
+      "anchor": {
+        "x": 12.696,
+        "y": 9.38,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "569436af-bbab-4583-81f2-06cc3f40d1ec",
+      "anchor": {
+        "x": 14.28,
+        "y": 7.722,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "a58cc9ba-b5ad-4e2d-9273-caad919a6dfd",
+      "anchor": {
+        "x": 6.959,
+        "y": 1.315,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "ac946863-93d7-4be6-99c5-7f66cb126733",
+      "anchor": {
+        "x": 0,
+        "y": 9.38,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "af7a6ca7-43c3-4e73-adcd-ccb0e5a96aa0",
+      "anchor": {
+        "x": 11.109,
+        "y": 9.38,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "b8680229-b547-4dea-9a29-2682a74e93ac",
+      "anchor": {
+        "x": 3.174,
+        "y": 9.38,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "c5e038ce-5c29-4f89-9e11-5e6d7ca53775",
+      "anchor": {
+        "x": 9.522,
+        "y": 9.38,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "cfbfc98b-a463-44df-b2af-1340f42ff46e",
+      "anchor": {
+        "x": 5.34,
+        "y": 0,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "dc2376fc-e239-4875-ab88-fdc121f3f01b",
+      "anchor": {
+        "x": 7.935,
+        "y": 9.38,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "f8da84af-2bef-4008-a0a0-1e0e56987107",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "029013ea-c92b-4729-aba3-1666cf2ef7ae",
+      "anchor": {
+        "x": 14.28,
+        "y": 2.748,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "07537cfb-9ef5-4b33-87b8-6e8b48ab2d19",
+      "anchor": {
+        "x": 8.399,
+        "y": 1.09,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "1c3e2c9f-ab6d-48cb-8c71-27f67ba62ef8",
+      "anchor": {
+        "x": 1.335,
+        "y": 0,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "232fd4dd-b93a-4409-9c21-78a98847a9ef",
+      "anchor": {
+        "x": 2.67,
+        "y": 0,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "25180ce5-3c90-4010-9af5-1bc984047460",
+      "anchor": {
+        "x": 0,
+        "y": 1.563,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "32f2dd92-04ec-4220-9ccc-fb75b357ad06",
+      "anchor": {
+        "x": 14.28,
+        "y": 6.064,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "36e82668-3330-49c5-a036-1a6779ee699b",
+      "anchor": {
+        "x": 0,
+        "y": 3.126,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "60116db7-915c-4c38-96b5-134d5c5f227a",
+      "anchor": {
+        "x": 9.863,
+        "y": 1.09,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "78c57a22-8543-4a68-856b-11ae4398b2d1",
+      "anchor": {
+        "x": 4.005,
+        "y": 0,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "78e84094-b3f0-41b4-bf6f-4988859b904f",
+      "anchor": {
+        "x": 12.791,
+        "y": 1.09,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "888d403b-273f-42d5-85a5-49cc1b58b514",
+      "anchor": {
+        "x": 11.327,
+        "y": 1.09,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "f7ca4b7a-d97c-4e97-93b6-9bcb4f9c2892",
+      "anchor": {
+        "x": 14.28,
+        "y": 4.406,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "216f7972-eeb4-45c0-9b4b-ffdc2243a4b0",
+      "anchor": {
+        "x": 0,
+        "y": 10.58,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "2a22831f-0c18-4323-95a2-559890bce68a",
+      "anchor": {
+        "x": 2.38,
+        "y": 5.235,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "30128659-f4df-4d34-a60f-c847c69da1c4",
+      "anchor": {
+        "x": 0,
+        "y": 6.252,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "3b17e566-79d2-493a-9263-d8b8ab302f16",
+      "anchor": {
+        "x": 0,
+        "y": 4.689,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "3e42fbe3-c561-455c-b0da-7f3535fa8704",
+      "anchor": {
+        "x": 11.9,
+        "y": 5.235,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "43fb74df-f156-4d72-b0d8-93f9c21327fa",
+      "anchor": {
+        "x": 0,
+        "y": -3,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "4efb732a-0911-4ac5-8ac7-674689493d18",
+      "anchor": {
+        "x": 4.76,
+        "y": 5.235,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "57c67cda-2b71-4321-8db5-63ca46386946",
+      "anchor": {
+        "x": 7.14,
+        "y": 5.235,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "7664e4c9-ee26-4517-b4f5-c743951dbf37",
+      "anchor": {
+        "x": 3.08,
+        "y": 10.58,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "a1dccc66-770b-4cf7-ac96-dc5e6c4930fe",
+      "anchor": {
+        "x": 9.52,
+        "y": 5.235,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "a3239882-4c7a-4f13-94b6-e8aa273f5702",
+      "anchor": {
+        "x": 6.58,
+        "y": -3,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "a596a77e-12f7-493d-bb25-f6961dc9d04d",
+      "anchor": {
+        "x": 0,
+        "y": 7.815,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "180cbf78-146d-4002-a2d8-1c78b669f9ad",
+      "anchor": {
+        "x": 8.7,
+        "y": -2,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "310a69eb-b9b7-4acb-8d18-70e5bfd165fd",
+      "anchor": {
+        "x": 14.28,
+        "y": -0.455,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "51f2ac29-b237-4951-9fd3-04f809aafe5d",
+      "anchor": {
+        "x": 8.7,
+        "y": -0.91,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "6c43e6ea-8d78-4729-9588-ea3dad0f5fd5",
+      "anchor": {
+        "x": 2.193,
+        "y": -3,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "7f9e30bc-3bcc-4dad-9970-91e411af1781",
+      "anchor": {
+        "x": 0,
+        "y": -1.5,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "82ec509a-dee9-4e01-9e37-f276aca83e14",
+      "anchor": {
+        "x": 6.58,
+        "y": -0.91,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "b40df313-4174-4c35-98c5-8f94ebabe581",
+      "anchor": {
+        "x": 4.386,
+        "y": -3,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "db9a8657-a4ec-4a4a-9eb9-8845173b2ede",
+      "anchor": {
+        "x": 14.28,
+        "y": -2,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "ff3b2a62-d56d-427a-93ed-f085b90def1c",
+      "anchor": {
+        "x": 11.49,
+        "y": -2,
+        "z": -3
+      },
+      "width": 0.3,
+      "depth": 0.3,
+      "height": 2.4,
+      "circleBased": true,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    }
+  ],
+  "floorJoists": [
+    {
+      "guid": "073eaad0-fecb-4119-84b4-dee86bf5c7e6",
+      "start": {
+        "x": 1.35,
+        "y": 0.15
+      },
+      "end": {
+        "x": 1.35,
+        "y": 5.235
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "10a603ec-8077-4eec-b1e9-471228ec4f41",
+      "start": {
+        "x": 2.55,
+        "y": 0.15
+      },
+      "end": {
+        "x": 2.55,
+        "y": 5.235
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "1838ec95-1b12-4d6d-b6c6-e3521c6c6d39",
+      "start": {
+        "x": 2.55,
+        "y": 5.235
+      },
+      "end": {
+        "x": 2.55,
+        "y": 9.23
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "1853d03e-f6e4-40c0-9ae5-ff742847f4be",
+      "start": {
+        "x": 0.75,
+        "y": 5.235
+      },
+      "end": {
+        "x": 0.75,
+        "y": 9.23
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "33e14223-2478-4f1d-9e7f-2640882b49aa",
+      "start": {
+        "x": 0.15,
+        "y": 0.15
+      },
+      "end": {
+        "x": 0.15,
+        "y": 5.235
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "419ac255-48c5-4a8e-a694-c4e7995d4368",
+      "start": {
+        "x": 1.95,
+        "y": 0.15
+      },
+      "end": {
+        "x": 1.95,
+        "y": 5.235
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "694343f4-64d2-47ee-8873-631132b79d11",
+      "start": {
+        "x": 0.75,
+        "y": 0.15
+      },
+      "end": {
+        "x": 0.75,
+        "y": 5.235
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "6ae032ff-ba86-4229-bd7f-30f067db3128",
+      "start": {
+        "x": 1.95,
+        "y": 5.235
+      },
+      "end": {
+        "x": 1.95,
+        "y": 9.23
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "92a3a79d-5e95-4134-aaa3-c61b44409e3f",
+      "start": {
+        "x": 0.15,
+        "y": 5.235
+      },
+      "end": {
+        "x": 0.15,
+        "y": 9.23
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "a10c6ab3-4cdf-42db-80b9-4ca5694a5c26",
+      "start": {
+        "x": 3.15,
+        "y": 5.235
+      },
+      "end": {
+        "x": 3.15,
+        "y": 9.23
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "d7147dd5-a596-4cc5-b471-843c4a6efc36",
+      "start": {
+        "x": 3.15,
+        "y": 0.15
+      },
+      "end": {
+        "x": 3.15,
+        "y": 5.235
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "e6c82ffb-6887-4889-bf43-ea085edd2ab4",
+      "start": {
+        "x": 1.35,
+        "y": 5.235
+      },
+      "end": {
+        "x": 1.35,
+        "y": 9.23
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "0fae1739-159d-4612-ae89-dad5603893b9",
+      "start": {
+        "x": 6.15,
+        "y": 1.24
+      },
+      "end": {
+        "x": 6.15,
+        "y": 5.235
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "1f153caf-8c3e-4d0b-b7e2-4b51ab5a8255",
+      "start": {
+        "x": 4.95,
+        "y": 0.15
+      },
+      "end": {
+        "x": 4.95,
+        "y": 5.235
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "2182fb84-c489-403a-a82d-d1a95291f2be",
+      "start": {
+        "x": 6.75,
+        "y": 5.235
+      },
+      "end": {
+        "x": 6.75,
+        "y": 9.23
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "353813af-37b6-4cf7-a6ec-4177158b0677",
+      "start": {
+        "x": 3.75,
+        "y": 5.235
+      },
+      "end": {
+        "x": 3.75,
+        "y": 9.23
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "51c0caf0-8871-4430-a0dd-c1fe45cc30b0",
+      "start": {
+        "x": 5.55,
+        "y": 5.235
+      },
+      "end": {
+        "x": 5.55,
+        "y": 9.23
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "62ade6dd-0bb7-464f-bd6c-55182fa2ec74",
+      "start": {
+        "x": 4.35,
+        "y": 5.235
+      },
+      "end": {
+        "x": 4.35,
+        "y": 9.23
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "7a2d9da2-c9da-4d1e-9ed5-39bd61a8bcc5",
+      "start": {
+        "x": 5.55,
+        "y": 1.24
+      },
+      "end": {
+        "x": 5.55,
+        "y": 5.235
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "922e8d0c-1f75-408b-8402-e48d0884d2d6",
+      "start": {
+        "x": 6.15,
+        "y": 5.235
+      },
+      "end": {
+        "x": 6.15,
+        "y": 9.23
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "b9150d1b-a29e-4989-b104-f4e2cc4615ca",
+      "start": {
+        "x": 6.75,
+        "y": 1.24
+      },
+      "end": {
+        "x": 6.75,
+        "y": 5.235
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "bbfe5e79-ec45-43d8-b347-e235c1f94f9f",
+      "start": {
+        "x": 4.95,
+        "y": 5.235
+      },
+      "end": {
+        "x": 4.95,
+        "y": 9.23
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "cabc2aac-7a91-42a5-ac30-f529dc22bf9d",
+      "start": {
+        "x": 3.75,
+        "y": 0.15
+      },
+      "end": {
+        "x": 3.75,
+        "y": 5.235
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "daa94397-c136-4f2a-a402-b1f1f1d219ef",
+      "start": {
+        "x": 4.35,
+        "y": 0.15
+      },
+      "end": {
+        "x": 4.35,
+        "y": 5.235
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "11387078-0df0-43a9-96b6-cfeb0f8e22fa",
+      "start": {
+        "x": 8.55,
+        "y": 1.24
+      },
+      "end": {
+        "x": 8.55,
+        "y": 5.235
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "19aaa3c1-3591-4a4e-b91e-ec3b28606337",
+      "start": {
+        "x": 9.75,
+        "y": 1.24
+      },
+      "end": {
+        "x": 9.75,
+        "y": 5.235
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "266ba513-921f-4ad6-9bf9-06279dc5db77",
+      "start": {
+        "x": 8.55,
+        "y": 5.235
+      },
+      "end": {
+        "x": 8.55,
+        "y": 9.23
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "2670c439-3096-4cf8-bc81-3ee4787eaed5",
+      "start": {
+        "x": 7.95,
+        "y": 5.235
+      },
+      "end": {
+        "x": 7.95,
+        "y": 9.23
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "2e3efa0f-5130-43b2-8064-35731cd9c5aa",
+      "start": {
+        "x": 10.35,
+        "y": 1.24
+      },
+      "end": {
+        "x": 10.35,
+        "y": 5.235
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "34f4b255-232f-482e-9e5f-c8cd321153fc",
+      "start": {
+        "x": 9.75,
+        "y": 5.235
+      },
+      "end": {
+        "x": 9.75,
+        "y": 9.23
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "3eca21b7-f99a-46e0-9a2d-c29f762e8a99",
+      "start": {
+        "x": 7.35,
+        "y": 1.24
+      },
+      "end": {
+        "x": 7.35,
+        "y": 5.235
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "7b90ab33-6f04-46af-88f9-b73f1f550ae1",
+      "start": {
+        "x": 9.15,
+        "y": 5.235
+      },
+      "end": {
+        "x": 9.15,
+        "y": 9.23
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "8bedd514-af1f-47c3-88f5-dda248a9661c",
+      "start": {
+        "x": 9.15,
+        "y": 1.24
+      },
+      "end": {
+        "x": 9.15,
+        "y": 5.235
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "9e2caf4f-7f66-4379-ae33-ee8550164548",
+      "start": {
+        "x": 7.35,
+        "y": 5.235
+      },
+      "end": {
+        "x": 7.35,
+        "y": 9.23
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "c980cf3d-a532-47e2-9e81-c059f00b094e",
+      "start": {
+        "x": 10.35,
+        "y": 5.235
+      },
+      "end": {
+        "x": 10.35,
+        "y": 9.23
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "d536c93c-4f0d-4a35-bcc6-ac45bb862589",
+      "start": {
+        "x": 7.95,
+        "y": 1.24
+      },
+      "end": {
+        "x": 7.95,
+        "y": 5.235
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "2f0e49b6-106a-4653-ba2a-07d8e2562625",
+      "start": {
+        "x": 10.95,
+        "y": 5.235
+      },
+      "end": {
+        "x": 10.95,
+        "y": 9.23
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "3023dfc6-feb9-46a2-a04a-e7e450d94560",
+      "start": {
+        "x": 12.75,
+        "y": 1.24
+      },
+      "end": {
+        "x": 12.75,
+        "y": 5.235
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "4f21e239-e6ae-4a94-8d2f-212e89eb8f70",
+      "start": {
+        "x": 13.35,
+        "y": 1.24
+      },
+      "end": {
+        "x": 13.35,
+        "y": 5.235
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "629d8119-e1d9-4c03-9ba2-cbfb93e46501",
+      "start": {
+        "x": 12.15,
+        "y": 1.24
+      },
+      "end": {
+        "x": 12.15,
+        "y": 5.235
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "7a355c91-b361-42c5-9d5b-cc5687366c10",
+      "start": {
+        "x": 13.95,
+        "y": 5.235
+      },
+      "end": {
+        "x": 13.95,
+        "y": 9.23
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "89c9b03a-3a2d-4dd3-aa08-7f65d083220b",
+      "start": {
+        "x": 13.95,
+        "y": 1.24
+      },
+      "end": {
+        "x": 13.95,
+        "y": 5.235
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "96709871-4aab-4b2e-8db8-e1f42602c336",
+      "start": {
+        "x": 10.95,
+        "y": 1.24
+      },
+      "end": {
+        "x": 10.95,
+        "y": 5.235
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "9966e4d4-b285-4926-9ea4-7d64eb53daf8",
+      "start": {
+        "x": 11.55,
+        "y": 1.24
+      },
+      "end": {
+        "x": 11.55,
+        "y": 5.235
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "af2a6899-c9d6-4284-8a83-d68f6377e84b",
+      "start": {
+        "x": 11.55,
+        "y": 5.235
+      },
+      "end": {
+        "x": 11.55,
+        "y": 9.23
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "c505ad1e-56f2-4681-8279-c843ef60253f",
+      "start": {
+        "x": 13.35,
+        "y": 5.235
+      },
+      "end": {
+        "x": 13.35,
+        "y": 9.23
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "d71fc9fa-6889-45aa-8c04-d70739f9cb94",
+      "start": {
+        "x": 12.15,
+        "y": 5.235
+      },
+      "end": {
+        "x": 12.15,
+        "y": 9.23
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "f29d249d-f34b-4730-a19b-bc8f188fe5cf",
+      "start": {
+        "x": 12.75,
+        "y": 5.235
+      },
+      "end": {
+        "x": 12.75,
+        "y": 9.23
+      },
+      "z": -0.1,
+      "width": 0.1,
+      "height": 0.2,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    }
+  ],
+  "grillageBeams": [
+    {
+      "guid": "123d31ee-41fc-4294-a88f-9135312257f0",
+      "start": {
+        "x": 14.28,
+        "y": 9.38
+      },
+      "end": {
+        "x": 14.28,
+        "y": -2
+      },
+      "z": -0.3,
+      "width": 0.4,
+      "height": 0.3,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "274696e9-f920-4d84-9b78-a1a5c86589b9",
+      "start": {
+        "x": 0,
+        "y": 9.38
+      },
+      "end": {
+        "x": 14.28,
+        "y": 9.38
+      },
+      "z": -0.3,
+      "width": 0.4,
+      "height": 0.3,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "40a148f8-e53e-4d61-989d-2fd87994f397",
+      "start": {
+        "x": 0,
+        "y": 10.58
+      },
+      "end": {
+        "x": 3.08,
+        "y": 10.58
+      },
+      "z": -0.3,
+      "width": 0.4,
+      "height": 0.3,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "493cabe0-c798-4841-b6f6-ff14dd688659",
+      "start": {
+        "x": 6.959,
+        "y": 1.54
+      },
+      "end": {
+        "x": 6.959,
+        "y": 1.09
+      },
+      "z": -0.3,
+      "width": 0.4,
+      "height": 0.3,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "4b6d54d7-f885-4b38-8b5f-02e11788f057",
+      "start": {
+        "x": 0,
+        "y": 9.38
+      },
+      "end": {
+        "x": 0,
+        "y": 10.58
+      },
+      "z": -0.3,
+      "width": 0.4,
+      "height": 0.3,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "4f62caf4-8f64-42f9-bf23-ebaca5cb5df3",
+      "start": {
+        "x": 5.34,
+        "y": 1.54
+      },
+      "end": {
+        "x": 6.959,
+        "y": 1.54
+      },
+      "z": -0.3,
+      "width": 0.4,
+      "height": 0.3,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "6e36d0e0-0a21-410e-b9a6-50778e915dc1",
+      "start": {
+        "x": 5.34,
+        "y": 0
+      },
+      "end": {
+        "x": 5.34,
+        "y": 1.54
+      },
+      "z": -0.3,
+      "width": 0.4,
+      "height": 0.3,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "7c50c1b7-fe58-4263-acb7-0f38e4aca271",
+      "start": {
+        "x": 0,
+        "y": 9.38
+      },
+      "end": {
+        "x": 0,
+        "y": 0
+      },
+      "z": -0.3,
+      "width": 0.4,
+      "height": 0.3,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "9426b7bc-63b0-4a0b-9ce0-836b2ad1393c",
+      "start": {
+        "x": 6.959,
+        "y": 1.09
+      },
+      "end": {
+        "x": 14.28,
+        "y": 1.09
+      },
+      "z": -0.3,
+      "width": 0.4,
+      "height": 0.3,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "c111ad6c-8148-4dbf-967d-6e22545ef49d",
+      "start": {
+        "x": 0,
+        "y": 0
+      },
+      "end": {
+        "x": 5.34,
+        "y": 0
+      },
+      "z": -0.3,
+      "width": 0.4,
+      "height": 0.3,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "ed38905b-a70e-4857-b48f-70c1034a4d6b",
+      "start": {
+        "x": 3.08,
+        "y": 10.58
+      },
+      "end": {
+        "x": 3.08,
+        "y": 9.38
+      },
+      "z": -0.3,
+      "width": 0.4,
+      "height": 0.3,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "f29316af-f953-400a-85f9-e20e3eb03aa1",
+      "start": {
+        "x": 0,
+        "y": 5.235
+      },
+      "end": {
+        "x": 14.28,
+        "y": 5.235
+      },
+      "z": -0.3,
+      "width": 0.4,
+      "height": 0.3,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "254b5b9f-50fe-424d-b8f3-39c88b28dc7a",
+      "start": {
+        "x": 6.58,
+        "y": -0.91
+      },
+      "end": {
+        "x": 8.7,
+        "y": -0.91
+      },
+      "z": -0.3,
+      "width": 0.4,
+      "height": 0.3,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "3c340dff-454e-4faf-b33c-519c8ef58bc3",
+      "start": {
+        "x": 8.7,
+        "y": -0.91
+      },
+      "end": {
+        "x": 8.7,
+        "y": -2
+      },
+      "z": -0.3,
+      "width": 0.4,
+      "height": 0.3,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "47792e1f-e82d-4cd0-8f95-55d8b2d63310",
+      "start": {
+        "x": 0,
+        "y": 0
+      },
+      "end": {
+        "x": 0,
+        "y": -3
+      },
+      "z": -0.3,
+      "width": 0.4,
+      "height": 0.3,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "7f7e466d-4433-46fe-803f-f7bc6f6fac17",
+      "start": {
+        "x": 0,
+        "y": -3
+      },
+      "end": {
+        "x": 6.58,
+        "y": -3
+      },
+      "z": -0.3,
+      "width": 0.4,
+      "height": 0.3,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "de2c425e-afa5-44c4-9c20-87cc252ca6ae",
+      "start": {
+        "x": 8.7,
+        "y": -2
+      },
+      "end": {
+        "x": 14.28,
+        "y": -2
+      },
+      "z": -0.3,
+      "width": 0.4,
+      "height": 0.3,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    },
+    {
+      "guid": "e137d0bc-38dd-4cdc-a3d2-f6828c127ff4",
+      "start": {
+        "x": 6.58,
+        "y": -3
+      },
+      "end": {
+        "x": 6.58,
+        "y": -0.91
+      },
+      "z": -0.3,
+      "width": 0.4,
+      "height": 0.3,
+      "materialId": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+    }
+  ]
+}
