@@ -40,7 +40,7 @@ ID = re.compile(r"^[a-z][a-z0-9-]{7,63}$")
 # BREP reads; it does NOT use a second SceneWriter or independent mutation.
 REVIEW = ROOT / "controllers" / "apa_bdd114_native_roof_face_review.py"
 ALLOWED = frozenset({"BDD114_ROOF_FINALIZE", "SOURCE_QUALIFIED_NATIVE_READ",
-                     "APPROVED_NATIVE_COLUMN_COPY"})
+                     "APPROVED_NATIVE_COLUMN_COPY", "CURRENT_MODEL_FINGERPRINT"})
 
 
 def require(ok, reason):
@@ -112,8 +112,8 @@ def validate_job(job, name):
             0 < (expires-created).total_seconds() <= 7*86400,
             "JOB_TIME_WINDOW_INVALID")
     ref = job["sourceTask"]
-    if job["action"] == "BDD114_ROOF_FINALIZE":
-        require(ref is None, "BDD114_ACTION_MUST_USE_ONLY_INSTALLED_REVIEW")
+    if job["action"] in ("BDD114_ROOF_FINALIZE", "CURRENT_MODEL_FINGERPRINT"):
+        require(ref is None, "NATIVE_READ_ONLY_ACTION_MUST_NOT_CONTAIN_SOURCE_TASK")
     else:
         require(isinstance(ref, dict) and set(ref) ==
                 {"repo", "ref", "path", "blobSha1"} and
@@ -203,6 +203,48 @@ def capture_read_task(job, folder):
     }
 
 
+def capture_current_model_fingerprint(job, folder):
+    """One read-only job yields exact live GUID/BREP binding for next native task."""
+    sys.path.insert(0, str(SCRIPTS))
+    import archicad_project_accelerator as APA
+    import archicad_scene_run as RUN
+    import archicad_connected_components as C
+    import archicad_bim_documentation as D
+    RUN.bind_authorized_saved_copy(
+        19727, str(WORKING), WORKING.stem, BASE_SHA,
+        "APA_AC29_READ_ONLY_NATIVE_MODEL_FINGERPRINT_" + job["jobId"])
+    folder_raw = folder / "raw"
+    folder_raw.mkdir()
+    api = APA.EvidenceAPI(APA.native_transport, folder_raw, execute=False)
+    target = RUN.guarded_project_for_read(api)
+    require(target["activeViewStoryIndex"] in (0, -1) and
+            APA.archicad29(api).get("buildNumber") == 5101,
+            "NATIVE_MODEL_FINGERPRINT_WRONG_BDD_INSTANCE")
+    before = sorted(APA.inventory_guids(api))
+    require(len(before) == 290, "NATIVE_MODEL_FINGERPRINT_NOT_APPROVED_BASELINE")
+    dump = D.capture_full_model(api, before)
+    native = C.G.normalize_dump(dump)
+    found = {e["guid"].lower(): e for e in native["elements"]}
+    require(set(found) == set(before),
+            "NATIVE_MODEL_FINGERPRINT_PARTIAL_BREP")
+    geometry = {g: C.ROOF.geometry_signature(found[g]) for g in before}
+    after = sorted(APA.inventory_guids(api))
+    require(after == before and api.write_attempts == 0 and
+            sha(WORKING) == BASE_SHA and sha(ORIGINAL) == SOURCE_SHA,
+            "NATIVE_MODEL_FINGERPRINT_CHANGED_DURING_READ")
+    return {
+        "status": "EXACT_CURRENT_MODEL_GUID_AND_BREP_FINGERPRINT_PASS",
+        "targetWorkingPlnSha256": BASE_SHA,
+        "expectedGuidCount": len(before),
+        "expectedGuidSetHash": RUN.digest(before),
+        "expectedModelSignatureHash": RUN.digest(geometry),
+        "currentPort": 19727,
+        "nativeReadCommands": dict(api.calls),
+        "nativeWriteAttempts": 0,
+        "nativeSaveCalls": 0
+    }
+
+
 def capture_approved_native_column_copy(job, folder):
     """Source-qualified native copy with ORIGINAL DynamicCommands and SceneWriter.
 
@@ -224,6 +266,8 @@ def capture_approved_native_column_copy(job, folder):
 
     BATCH.validate_task(task, expected_project_sha=BASE_SHA,
                         expected_project_path=str(WORKING))
+    require(task["expectedGuidCount"] == 290,
+            "APPROVED_BDD_TARGET_INITIAL_INVENTORY_MUST_BE_290")
     require(task["sourceEvidenceRef"].startswith("https://github.com/") and
             task["authorizationRef"].startswith("USER_APPROVED_"),
             "NATIVE_COPY_USER_APPROVAL_AND_SOURCE_REQUIRED")
@@ -371,6 +415,8 @@ def process_job(name):
     try:
         if job["action"] == "BDD114_ROOF_FINALIZE":
             response = capture_roof_review(job, folder)
+        elif job["action"] == "CURRENT_MODEL_FINGERPRINT":
+            response = capture_current_model_fingerprint(job, folder)
         elif job["action"] == "APPROVED_NATIVE_COLUMN_COPY":
             response = capture_approved_native_column_copy(job, folder)
         else:
