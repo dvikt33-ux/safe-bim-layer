@@ -27,6 +27,13 @@ jobs:
         run: |
           python -m py_compile scripts/apa_semantic_readonly.py scripts/apa_semantic_catalog.py scripts/apa_semantic_entrypoint.py scripts/install_apa_semantic_bridge.py scripts/configure_apa_semantic_models.py tests/test_apa_semantic_integration.py
           if ($LASTEXITCODE -ne 0) { throw "Semantic script compilation failed" }
+      - name: Parse OpenBIM Windows installer without running it
+        shell: pwsh
+        run: |
+          $tokens = $null
+          $errors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile((Resolve-Path 'scripts/install_apa_openbim_v1.ps1').Path, [ref]$tokens, [ref]$errors) | Out-Null
+          if ($errors.Count -ne 0) { throw ($errors | Out-String) }
       - name: Install pinned PyMuPDF vendor
         shell: pwsh
         run: |
