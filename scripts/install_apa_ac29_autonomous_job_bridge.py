@@ -35,14 +35,42 @@ LOG = ROOT / "apa-job-bridge-state" / "bridge.log"
 
 
 def processes(worker):
-    """Exact installed receiver only; wrapper and child are one process tree."""
-    data=subprocess.check_output(['powershell','-NoProfile','-Command',
-        "@(Get-CimInstance Win32_Process | Where-Object { $_.Name -eq 'python.exe' } | "
-        "Select-Object ProcessId,ParentProcessId,CommandLine) | ConvertTo-Json -Compress"],
+    """Find the existing receiver without assuming PowerShell console encoding.
+
+    Windows PowerShell 5.1 may emit OEM/ANSI bytes even with non-ASCII
+    CommandLine values. Send only ASCII Base64, with explicit UTF-16LE JSON
+    payload to preserve Russian PLN paths and refuse undecodable output.
+    """
+    import base64
+    ps = (
+        "$ErrorActionPreference='Stop'; "
+        "$json = @(Get-CimInstance Win32_Process | "
+        "Where-Object { $_.Name -eq 'python.exe' } | "
+        "Select-Object ProcessId,ParentProcessId,CommandLine) | "
+        "ConvertTo-Json -Compress; "
+        "if ([string]::IsNullOrWhiteSpace($json)) { throw 'PROCESS_QUERY_EMPTY' }; "
+        "[Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($json))"
+    )
+    data = subprocess.check_output(
+        ['powershell', '-NoProfile', '-NonInteractive', '-Command', ps],
         timeout=30)
-    rows=json.loads(data.decode('utf-8-sig'))
-    rows=rows if isinstance(rows,list) else [rows]
-    return [r for r in rows if str(worker).casefold() in (r.get('CommandLine') or '').casefold()]
+    encoded = data.strip()
+    require(encoded and len(encoded) < 8_000_000,
+            'RECEIVER_PROCESS_QUERY_EMPTY_OR_TOO_LARGE')
+    payload = base64.b64decode(encoded, validate=True).decode('utf-16le')
+    rows = json.loads(payload)
+    require(isinstance(rows, (dict, list)),
+            'RECEIVER_PROCESS_QUERY_BAD_JSON_SHAPE')
+    rows = rows if isinstance(rows, list) else [rows]
+    require(all(isinstance(row, dict) and
+                type(row.get('ProcessId')) is int and
+                type(row.get('ParentProcessId')) is int and
+                (row.get('CommandLine') is None or
+                 isinstance(row.get('CommandLine'), str))
+                for row in rows),
+            'RECEIVER_PROCESS_QUERY_MALFORMED_ROWS')
+    return [row for row in rows
+            if str(worker).casefold() in (row.get('CommandLine') or '').casefold()]
 
 
 def update_from_checkout(checkout, manifest_path, apply=False):
