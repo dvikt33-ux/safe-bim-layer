@@ -5,6 +5,8 @@ from pathlib import Path
 from unittest import TestCase
 from unittest.mock import patch
 import unittest
+import json
+from tempfile import TemporaryDirectory
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 import apa_ac29_autonomous_job_bridge as bridge
@@ -25,6 +27,57 @@ def sample(action="BDD114_ROOF_FINALIZE", name="bdd114-roof-20261017"):
 
 
 class GateTests(TestCase):
+    def test_model_fingerprint_consumes_existing_normalized_capture_once(self):
+        import archicad_project_accelerator as A
+        import archicad_bim_documentation as D
+        guid='b8d528f0-ab6a-4ece-a62d-74e3a0d7c46c'
+        model={'elements':[{'guid':guid,'type':'Object','homeStory':0,
+                            'bodies':[],'relationships':{},'materialBindings':{}}]}
+        def native(command,parameters):
+            if command=='API.GetProductInfo':return {'version':29,'buildNumber':5101}
+            if command=='GetAllElements':return {'elements':[{'elementId':{'guid':guid}}]}
+            raise AssertionError(command)
+        with TemporaryDirectory() as td, \
+             patch.object(bridge,'sha',side_effect=lambda p:bridge.SOURCE_SHA if p==bridge.ORIGINAL else bridge.BASE_SHA), \
+             patch.object(bridge,'approved_guid_count',return_value=1), \
+             patch.object(A.RUN,'bind_authorized_saved_copy'), \
+             patch.object(A.RUN,'guarded_project_for_read',return_value={'activeViewStoryIndex':0}), \
+             patch.object(A,'native_transport',side_effect=native), \
+             patch.object(D,'capture_full_model',return_value=model):
+            result=bridge.capture_current_model_fingerprint(sample(),Path(td))
+        self.assertEqual(result['expectedGuidCount'],1)
+        self.assertEqual(result['nativeWriteAttempts'],0)
+
+    def test_legacy_fixed_bdd_write_is_retired_at_ingress_and_direct_entry(self):
+        m=sample('BDD114_COPY_SAVE','bdd114-seven-copy-save-20261017')
+        with self.assertRaisesRegex(ValueError,'JOB_ACTION_OR_TARGET_NOT_ALLOWED'):
+            bridge.validate_job(m,m['jobId'])
+        with patch.object(bridge.subprocess,'run',side_effect=AssertionError('WRITE_DISPATCHED')):
+            with self.assertRaisesRegex(ValueError,'LEGACY_BDD_WRITE_RETIRED'):
+                bridge.capture_approved_bdd114_copy(m,Path('unused'))
+
+    def test_both_copy_actions_require_exact_local_blob_bound_grant(self):
+        for action in ('APPROVED_NATIVE_COLUMN_COPY','APPROVED_MULTI_PROTOTYPE_COPY'):
+            with self.subTest(action=action), TemporaryDirectory() as td:
+                root=Path(td);(root/'controller-grants').mkdir()
+                folder=root/'attempt';folder.mkdir()
+                (folder/'attempted.json').write_text(json.dumps({'sourceBlob':'a'*40}),encoding='utf8')
+                job=sample(action)
+                with patch.object(bridge,'ROOT',root):
+                    with self.assertRaisesRegex(ValueError,'LOCAL_EXPLICIT_GRANT_NOT_INSTALLED'):
+                        bridge.require_native_copy_grant(job,folder,'b'*40,'USER_APPROVED_STRING_IN_GITHUB')
+                    grant={'schema':'APA_AC29_LOCAL_NATIVE_COPY_GRANT_V1','jobId':job['jobId'],
+                        'jobBlobSha1':'a'*40,'taskBlobSha1':'b'*40,'projectSha256':bridge.BASE_SHA,
+                        'authorizationRef':'USER_APPROVED_LOCAL'}
+                    path=root/'controller-grants'/(job['jobId']+'.json')
+                    path.write_text(json.dumps(grant),encoding='utf8')
+                    self.assertEqual(bridge.require_native_copy_grant(
+                        job,folder,'b'*40,'USER_APPROVED_LOCAL'),grant)
+                    with self.assertRaisesRegex(ValueError,'NOT_BOUND_TO_JOB_BLOB'):
+                        bridge.require_native_copy_grant(job,folder,'c'*40,'USER_APPROVED_LOCAL')
+                    with self.assertRaisesRegex(ValueError,'NOT_BOUND_TO_JOB_BLOB'):
+                        bridge.require_native_copy_grant(job,folder,'b'*40,'USER_APPROVED_CHANGED')
+
     def test_source_review_only_job_is_accepted(self):
         m = sample()
         self.assertEqual(bridge.validate_job(m, m["jobId"])["action"],
