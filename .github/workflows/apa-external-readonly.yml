@@ -11,6 +11,7 @@ on:
       - scripts/requirements-external-readonly.txt
       - tests/test_apa_external_readonly.py
       - tests/apa_external_real_vendor_smoke.py
+      - tests/apa_external_ifc_vendor_smoke.py
       - .github/workflows/apa-external-readonly.yml
   workflow_dispatch:
 jobs:
@@ -66,3 +67,5 @@ jobs:
           }
       - name: Execute new upstream operations on temporary PDF, DXF and IFC files
         run: .\.vendor-venv\Scripts\python.exe tests/apa_external_real_vendor_smoke.py
+      - name: Execute IFC clashes, IDS criteria and original quantity reader on actual IFC4 wall bodies
+        run: .\.vendor-venv\Scripts\python.exe tests/apa_external_ifc_vendor_smoke.py
