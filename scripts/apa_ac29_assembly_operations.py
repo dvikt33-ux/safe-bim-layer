@@ -49,6 +49,8 @@ def plan_assemblies(existing, assemblies):
         if len(set(shifts)) != len(shifts):
             raise ValueError("ASSEMBLY_DUPLICATE_PLACEMENT")
         verified_group = isinstance(a.get("existingGroupGuid"), str) and bool(a["existingGroupGuid"])
+        from apa_ac29_semantic_operation_selector import topology
+        assembly_arrangement = topology([(0.0, 0.0, 0.0), *shifts])
         ready = a.get("dependenciesVerified") is True and verified_group
         result.append({
             "sourceRef": a["sourceRef"],
@@ -57,6 +59,8 @@ def plan_assemblies(existing, assemblies):
             "groupGuid": a.get("existingGroupGuid") if verified_group else None,
             "memberGuids": guids,
             "relativePlacements": shifts,
+            "assemblyArrangement": assembly_arrangement,
+            "nativeSDKTransformCallsInsideClone": len(shifts),
             "strategy": "NATIVE_GROUP_REPLICATION" if verified_group else "NATIVE_GROUP_THEN_REPLICATION",
             "nativeCommandSequence": ["CloneNativeGroupV1"] if verified_group else ["CreateNativeGroupV1", "CloneNativeGroupV1"],
             "nativeBridgeSource": "archicad-addon/Sources/NativeGroupCommands.inc",
