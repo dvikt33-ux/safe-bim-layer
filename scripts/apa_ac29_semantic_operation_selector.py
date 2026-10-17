@@ -180,7 +180,7 @@ def analyze(existing, targets, *, source_axes=None, distribution_rules=None):
     need(isinstance(existing,list) and isinstance(targets,list) and bool(targets),
          "SEMANTIC_SELECTOR_NONEMPTY_TYPED_TASK_REQUIRED")
     for row in targets:
-        need(isinstance(row,dict) and row.get("type") in CREATABLE and
+        need(isinstance(row,dict) and row.get("type") in (set(CREATABLE)|{"Object"}) and
              isinstance(row.get("sourceRef"),str) and len(row["sourceRef"])>=8 and
              isinstance(row.get("familySignature"),str) and
              len(row["familySignature"])>=16 and
@@ -248,7 +248,7 @@ def analyze(existing, targets, *, source_axes=None, distribution_rules=None):
     for key,rows in sorted(remaining.items()):
         points=[xyz(x) for x in rows]
         rpt=topology(points,distribution_rules.get(key))
-        command=CREATABLE[key[0]]
+        command=CREATABLE.get(key[0])
         # A native creation strategy cannot be authorized from coordinates
         # alone: complete nativeCreateData is mandatory for each element.
         complete=all(isinstance(x.get("nativeCreateData"),dict) and
@@ -258,7 +258,9 @@ def analyze(existing, targets, *, source_axes=None, distribution_rules=None):
                         "method":"NATIVE_CREATE_SINGLE" if len(rows)==1
                             else "NATIVE_CREATE_BATCH",
                         "nativeCommand":command,
-                        "state":("SOURCE_DATA_READY_FOR_NATIVE_SCHEMA_REVIEW"
+                        "state":("BLOCKED_OBJECT_CREATE_REQUIRES_VERIFIED_LIBRARY_PART"
+                                 if command is None else
+                                 "SOURCE_DATA_READY_FOR_NATIVE_SCHEMA_REVIEW"
                                  if complete else "BLOCKED_NATIVE_SOURCE_DATA_MISSING")})
     # Axis definitions are separate construction resources. Do not invent them
     # from a Cartesian array, and do not claim NativeGrid runtime support.
@@ -267,7 +269,8 @@ def analyze(existing, targets, *, source_axes=None, distribution_rules=None):
     copy_calls=int(bool(copy_groups))
     # For create calls, one per command family is a possible packing plan
     # only after each source row has passed the real runtime catalog/schema.
-    create_commands=sorted({x["nativeCommand"] for x in creates})
+    create_commands=sorted({x["nativeCommand"] for x in creates
+                            if x["nativeCommand"] is not None})
     return {
         "schema":SCHEMA,
         "status":"READ_ONLY_SEMANTIC_OPERATION_PLAN_PREPARED",
@@ -275,8 +278,10 @@ def analyze(existing, targets, *, source_axes=None, distribution_rules=None):
         "alreadyPresent":len(plan["existingElementGuids"])+len(fulfilled_other),
         "copies":copy_groups,"creates":creates,
         "copyMethod":("ONE_NATIVE_MULTI_PROTOTYPE_COPY_CALL"
-                      if copy_calls and sum(x["count"] for x in copy_groups)>1
-                      else "ONE_NATIVE_COPY_CALL" if copy_calls else "NONE"),
+                      if len(copy_groups)>1 else
+                      "ONE_NATIVE_BATCH_COPY_CALL"
+                      if copy_calls and copy_groups[0]["count"]>1 else
+                      "ONE_NATIVE_COPY_CALL" if copy_calls else "NONE"),
         "copyNativeCallsIfIndependentlyAuthorized":copy_calls,
         "createCommandFamilies":create_commands,
         "sourceAxes":axis_report,
