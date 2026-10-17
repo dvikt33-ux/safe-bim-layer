@@ -93,7 +93,11 @@ def check():
         capture_output=True, text=True, timeout=60)
     require(ver.returncode == 0 and ver.stdout.strip() == PIN,
             "PINNED_PYMUPDF_VERSION_DRIFT")
-    probe = subprocess.run([str(py),
+    # The already verified original vendor interpreter owns DynamicCommands
+    # and jsonschema; the new venv is reserved for PyMuPDF worker subprocess.
+    original_py = OLD / "venv" / "Scripts" / "python.exe"
+    require(original_py.is_file(), "ORIGINAL_VENDOR_PYTHON_MISSING")
+    probe = subprocess.run([str(original_py),
                             str(DEST / "apa_semantic_entrypoint.py"),
                             "--probe"], capture_output=True, text=True, timeout=120)
     require(probe.returncode == 0,
