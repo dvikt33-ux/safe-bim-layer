@@ -39,7 +39,11 @@ ID = re.compile(r"^[a-z][a-z0-9-]{7,63}$")
 # This pre-reviewed script uses only APA.EvidenceAPI(execute=False) and native
 # BREP reads; it does NOT use a second SceneWriter or independent mutation.
 REVIEW = ROOT / "controllers" / "apa_bdd114_native_roof_face_review.py"
-ALLOWED = frozenset({"BDD114_ROOF_FINALIZE", "SOURCE_QUALIFIED_NATIVE_READ"})
+ALLOWED = frozenset({"BDD114_ROOF_FINALIZE", "SOURCE_QUALIFIED_NATIVE_READ", "BDD114_COPY_SAVE"})
+COPY_ADAPTER = ROOT / "controllers" / "apa_bdd114_native_copy_save_once.py"
+COPY_ADAPTER_BLOB_SHA1 = "eb94a3a3d4feb69bb0f65fa3400599f9f85ece1d"
+COPY_JOB_ID = "bdd114-seven-copy-save-20261017"
+COPY_APPROVAL = "USER_APPROVED_BDD_114_X_9_370_20261017"
 
 
 def require(ok, reason):
@@ -111,8 +115,10 @@ def validate_job(job, name):
             0 < (expires-created).total_seconds() <= 7*86400,
             "JOB_TIME_WINDOW_INVALID")
     ref = job["sourceTask"]
-    if job["action"] == "BDD114_ROOF_FINALIZE":
+    if job["action"] in ("BDD114_ROOF_FINALIZE", "BDD114_COPY_SAVE"):
         require(ref is None, "BDD114_ACTION_MUST_USE_ONLY_INSTALLED_REVIEW")
+        if job["action"] == "BDD114_COPY_SAVE":
+            require(name == COPY_JOB_ID, "BDD114_NATIVE_COPY_FIXED_JOB_ID_REQUIRED")
     else:
         require(isinstance(ref, dict) and set(ref) ==
                 {"repo", "ref", "path", "blobSha1"} and
