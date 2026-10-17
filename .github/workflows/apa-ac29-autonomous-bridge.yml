@@ -12,7 +12,11 @@ on:
 
 jobs:
   focused-bridge-gates:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 6
     steps:
       - uses: actions/checkout@v4
