@@ -40,8 +40,8 @@ ID = re.compile(r"^[a-z][a-z0-9-]{7,63}$")
 # BREP reads; it does NOT use a second SceneWriter or independent mutation.
 REVIEW = ROOT / "controllers" / "apa_bdd114_native_roof_face_review.py"
 ALLOWED = frozenset({"BDD114_ROOF_FINALIZE", "SOURCE_QUALIFIED_NATIVE_READ",
-                     "APPROVED_NATIVE_COLUMN_COPY", "CURRENT_MODEL_FINGERPRINT",
-                     "BDD114_COPY_SAVE"})
+                     "APPROVED_NATIVE_COLUMN_COPY", "APPROVED_MULTI_PROTOTYPE_COPY",
+                     "CURRENT_MODEL_FINGERPRINT", "BDD114_COPY_SAVE"})
 
 
 COPY_ADAPTER = ROOT / "controllers" / "apa_bdd114_native_copy_save_once.py"
@@ -256,7 +256,7 @@ def capture_current_model_fingerprint(job, folder):
     }
 
 
-def capture_approved_native_column_copy(job, folder):
+def capture_approved_native_copy(job, folder):
     """Source-qualified native copy with ORIGINAL DynamicCommands and SceneWriter.
 
     This bridge version remains pinned to its installed, explicitly approved
@@ -273,15 +273,38 @@ def capture_approved_native_column_copy(job, folder):
     import archicad_connected_components as C
     import archicad_bim_documentation as D
     import apa_ac29_reusable_native_copy as BATCH
+    import apa_ac29_multi_prototype_native_copy as MULTI
     import apa_ac29_scene_reconciliation as RECON
+    multi = job["action"] == "APPROVED_MULTI_PROTOTYPE_COPY"
+    require(multi or job["action"] == "APPROVED_NATIVE_COLUMN_COPY",
+            "NATIVE_COPY_UNSUPPORTED_TASK_ACTION")
 
-    BATCH.validate_task(task, expected_project_sha=BASE_SHA,
-                        expected_project_path=str(WORKING))
+    (MULTI if multi else BATCH).validate_task(
+        task, expected_project_sha=BASE_SHA,
+        expected_project_path=str(WORKING))
     require(task["expectedGuidCount"] == 290,
             "APPROVED_BDD_TARGET_INITIAL_INVENTORY_MUST_BE_290")
     require(task["sourceEvidenceRef"].startswith("https://github.com/") and
             task["authorizationRef"].startswith("USER_APPROVED_"),
             "NATIVE_COPY_USER_APPROVAL_AND_SOURCE_REQUIRED")
+    if multi:
+        # GitHub source text is not a user authorization. Multi-prototype
+        # execution additionally requires a LOCAL preapproved job/task receipt.
+        # No grant is installed in this release.
+        grant_path = ROOT / "controller-grants" / (job["jobId"] + ".json")
+        require(grant_path.is_file(), "MULTI_COPY_LOCAL_EXPLICIT_GRANT_NOT_INSTALLED")
+        grant = json.loads(grant_path.read_text(encoding="utf-8"))
+        require(isinstance(grant, dict) and
+                set(grant) == {"schema", "jobId", "jobBlobSha1", "taskBlobSha1",
+                               "projectSha256", "authorizationRef"} and
+                grant["schema"] == "APA_AC29_LOCAL_NATIVE_MULTI_COPY_GRANT_V1" and
+                grant["jobId"] == job["jobId"] and
+                grant["jobBlobSha1"] ==
+                json.loads((folder / "attempted.json").read_text(encoding="utf-8"))["sourceBlob"] and
+                grant["taskBlobSha1"] == blob and
+                grant["projectSha256"] == BASE_SHA and
+                grant["authorizationRef"] == task["authorizationRef"],
+                "MULTI_COPY_EXPLICIT_LOCAL_APPROVAL_NOT_BOUND_TO_JOB_BLOB")
     RUN.bind_authorized_saved_copy(
         19727, str(WORKING), WORKING.stem, BASE_SHA,
         task["authorizationRef"])
@@ -329,20 +352,25 @@ def capture_approved_native_column_copy(job, folder):
     writer = RUN.SceneWriter(
         api, ledger, schema_path=schema, allow_3d_view_for_write=True)
     # ONE single logical operation + native save, no retry or alternate writer.
-    result = BATCH.execute_task(
+    result = (MULTI.execute_multi_task if multi else BATCH.execute_task)(
         task, api=api, writer=writer, router=router, APA=APA, RUN=RUN,
         components=C, capture_native=D.capture_full_model,
         saved_project_sha=BASE_SHA, current_sha=lambda: sha(WORKING),
         save_guard=guard, known_reconciliation=historical)
-    require(result["copiedCount"] == len(task["targets"]) and
-            result["nativeCopyCalls"] == 1 and
-            result["nativeSaveCalls"] == 1 and
-            result["finalGuidCount"] ==
-            len(task["targets"]) * 2 + 290 and
-            result["newSavedProjectSha256"] == sha(WORKING) and
+    total = (sum(len(g["targets"]) for g in task["prototypes"])
+             if multi else len(task["targets"]))
+    expected_new = (sum(MULTI.expected_new_types(task).values())
+                    if multi else len(task["targets"])*2)
+    require(result["copiedCount"] == total and
+            result["finalGuidCount"] == 290 + expected_new and
+            (result["nativeMoveCalls"] if multi else result["nativeCopyCalls"]) == 1 and
+            (result["nativeSaveCalls"] if multi else result["nativeSaveCalls"]) == 1 and
+            (result["newSavedSha256"] if multi else
+             result["newSavedProjectSha256"]) == sha(WORKING) and
             sha(ORIGINAL) == SOURCE_SHA,
             "NATIVE_COPY_WORKER_FULL_MODEL_CONFIRMATION_MISSING")
-    durable_write(folder / "native-column-copy-result.json", result)
+    durable_write(folder / ("native-multi-copy-result.json" if multi
+                           else "native-column-copy-result.json"), result)
     return dict(result,
                 sourceTaskBlob=blob,
                 modelWrites=2,
@@ -462,8 +490,9 @@ def process_job(name):
             response = capture_current_model_fingerprint(job, folder)
         elif job["action"] == "BDD114_COPY_SAVE":
             response = capture_approved_bdd114_copy(job, folder)
-        elif job["action"] == "APPROVED_NATIVE_COLUMN_COPY":
-            response = capture_approved_native_column_copy(job, folder)
+        elif job["action"] in ("APPROVED_NATIVE_COLUMN_COPY",
+                                "APPROVED_MULTI_PROTOTYPE_COPY"):
+            response = capture_approved_native_copy(job, folder)
         else:
             response = capture_read_task(job, folder)
         response["jobStatus"] = "COMPLETE"
@@ -475,7 +504,7 @@ def process_job(name):
                "sourceBlob": source_blob,
                "finishedAt": current_utc().isoformat(),
                "result": response, "automaticRetry": False,
-               "modelWritesAuthorized": job["action"] in {"APPROVED_NATIVE_COLUMN_COPY", "BDD114_COPY_SAVE"}}
+               "modelWritesAuthorized": job["action"] in {"APPROVED_NATIVE_COLUMN_COPY", "APPROVED_MULTI_PROTOTYPE_COPY", "BDD114_COPY_SAVE"}}
     durable_write(folder / "result.json", payload)
     upload_result(name, folder)
 
