@@ -1,0 +1,77 @@
+name: APA External Readonly V1 - Windows 3.11 and 3.12
+on:
+  push:
+    branches:
+      - feature/apa-readonly-tools-isolated-20261017
+    paths:
+      - scripts/apa_external_readonly.py
+      - scripts/apa_external_catalog.py
+      - scripts/apa_external_router_activation.py
+      - scripts/apa_external_session_factory.py
+      - scripts/apa_external_analytics_entrypoint.py
+      - scripts/install_apa_external_analytics_entrypoint.py
+      - scripts/install_apa_external_session_factory.py
+      - scripts/apa_external_ifc_host_probe.py
+      - scripts/upgrade_apa_external_readonly_clash.py
+      - scripts/install_apa_external_readonly.py
+      - scripts/requirements-external-readonly.txt
+      - tests/test_apa_external_readonly.py
+      - tests/apa_external_real_vendor_smoke.py
+      - tests/apa_external_ifc_vendor_smoke.py
+      - .github/workflows/apa-external-readonly.yml
+  workflow_dispatch:
+jobs:
+  isolated-source-verification:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12']
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Compile only added files
+        run: python -m py_compile scripts/apa_external_readonly.py scripts/apa_external_catalog.py scripts/apa_external_router_activation.py scripts/apa_external_session_factory.py scripts/apa_external_analytics_entrypoint.py scripts/install_apa_external_analytics_entrypoint.py scripts/install_apa_external_session_factory.py scripts/apa_external_ifc_host_probe.py scripts/upgrade_apa_external_readonly_clash.py scripts/install_apa_external_readonly.py
+      - name: Install schema validator used by original APA DynamicCommands
+        run: |
+          python -m pip install --disable-pip-version-check --only-binary=:all: jsonschema==4.25.1
+      - name: Focused boundary tests (no vendor install, no Archicad)
+        run: python -m unittest discover -s tests -p test_apa_external_readonly.py -v
+      - name: Install exact vendor pins in isolated Windows venv
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          python -m venv .vendor-venv
+          if ($LASTEXITCODE -ne 0) { throw 'venv failed' }
+          $py = '.\.vendor-venv\Scripts\python.exe'
+          New-Item -ItemType Directory .vendor-src | Out-Null
+          & $py -m pip download --disable-pip-version-check --no-input --no-deps --no-binary=:all: --dest .vendor-src odfpy==1.4.1
+          if ($LASTEXITCODE -ne 0) { throw 'odfpy download failed' }
+          $archive = Join-Path '.vendor-src' 'odfpy-1.4.1.tar.gz'
+          $actual = (Get-FileHash $archive -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($actual -ne 'db766a6e59c5103212f3cc92ec8dd50a0f3a02790233ed0b52148b70d3c438ec') { throw 'odfpy SHA mismatch' }
+          & $py -m pip install --disable-pip-version-check --no-input --no-deps $archive
+          if ($LASTEXITCODE -ne 0) { throw 'odfpy install failed' }
+          & $py -m pip install --disable-pip-version-check --no-input --only-binary=:all: -r scripts/requirements-external-readonly.txt
+          if ($LASTEXITCODE -ne 0) { throw 'wheel install failed' }
+          & $py -m pip check
+          if ($LASTEXITCODE -ne 0) { throw 'pip dependency check failed' }
+      - name: Check real installed vendor command imports
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $py = '.\.vendor-venv\Scripts\python.exe'
+          & $py scripts/apa_external_readonly.py doctor
+          if ($LASTEXITCODE -ne 0) { throw 'doctor blocked' }
+          foreach ($module in @('ifcclash','ifcdiff','ifctester')) {
+            & $py -m $module --help
+            if ($LASTEXITCODE -ne 0) { throw "Vendor CLI blocked: $module" }
+          }
+      - name: Execute new upstream operations on temporary PDF, DXF and IFC files
+        run: .\.vendor-venv\Scripts\python.exe tests/apa_external_real_vendor_smoke.py
+      - name: Execute IFC clashes, IDS criteria and original quantity reader on actual IFC4 wall bodies
+        run: .\.vendor-venv\Scripts\python.exe tests/apa_external_ifc_vendor_smoke.py
