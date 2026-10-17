@@ -189,3 +189,52 @@ GS::ObjectState UngroupNativeGroupV1Command::Execute(const GS::ObjectState& p,GS
  for(const auto& member:members)list(CreateGuidObjectState(member));
  return out;
 }
+
+
+GS::Optional<GS::UniString> MoveNativeGroupV1Command::GetInputParametersSchema() const {
+ return R"APA({"type":"object","additionalProperties":false,"required":["groupId","sourceRef","translation"],"properties":{"groupId":{"type":"object","additionalProperties":false,"required":["guid"],"properties":{"guid":{"type":"string","minLength":10}}},"sourceRef":{"type":"string","minLength":8},"translation":{"type":"object","additionalProperties":false,"required":["dx","dy","dz"],"properties":{"dx":{"type":"number"},"dy":{"type":"number"},"dz":{"type":"number"}}}}})APA";
+}
+GS::Optional<GS::UniString> MoveNativeGroupV1Command::GetRawResponseSchema() const {
+ return R"APA({"type":"object","properties":{"nativeModelWrites":{"type":"integer"},"groupId":{"type":"object"},"movedMembers":{"type":"array","items":{"type":"object"}},"error":{"type":"object"}},"additionalProperties":false})APA";
+}
+GS::ObjectState MoveNativeGroupV1Command::Execute(const GS::ObjectState& p,GS::ProcessControl&) const {
+ const auto* id=p.Get("groupId");const auto* translation=p.Get("translation");GS::UniString source;
+ if(!id||!translation||!p.Get("sourceRef",source)||source.GetLength()<8)
+  return CreateErrorResponse(APIERR_BADPARS,"Source group and translation required");
+ double dx=0,dy=0,dz=0;
+ if(!translation->Get("dx",dx)||!translation->Get("dy",dy)||!translation->Get("dz",dz)||
+    !std::isfinite(dx)||!std::isfinite(dy)||!std::isfinite(dz)||
+    std::abs(dx)>100000||std::abs(dy)>100000||std::abs(dz)>100000||
+    (dx==0&&dy==0&&dz==0))return CreateErrorResponse(APIERR_BADPARS,"Finite nonzero translation required");
+ const auto group=GetGuidFromObjectState(*id);
+ GS::Array<API_Guid> members;auto err=APAGroupMembers(group,members);
+ if(err!=NoError||members.GetSize()<2||members.GetSize()>128)
+  return CreateErrorResponse(APIERR_BADPARS,"Bounded group required");
+ short floor=0;err=APAGroupReadHeaders(members,floor);
+ if(err!=NoError)return CreateErrorResponse(err,"Group membership/stories invalid");
+ GS::Array<API_Neig> neigs;
+ for(const auto& member:members){
+  API_Elem_Head header={};header.guid=member;
+  err=ACAPI_Element_GetHeader(&header);if(err!=NoError)return CreateErrorResponse(err,"Group member unavailable");
+  API_Neig n={};n.guid=member;err=ACAPI_Element_ElemTypeToNeigID(header.type,n.neigID);
+  if(err!=NoError)return CreateErrorResponse(err,"Unsupported group member transform");
+  neigs.Push(n);
+ }
+ err=ACAPI_CallUndoableCommand("APA move native group",[&]()->GSErrCode {
+  API_EditPars edit={};edit.typeID=APIEdit_Drag;edit.withDelete=true;
+  edit.begC={0,0,0};edit.endC={dx,dy,dz};
+  auto result=ACAPI_Element_Edit(&neigs,edit);
+  if(result!=NoError)return result;
+  GS::Array<API_Guid> returned;
+  for(const auto& n:neigs)returned.Push(n.guid);
+  if(!APAGroupContainsExactly(returned,members))return APIERR_BADPARS;
+  GS::Array<API_Guid> post;result=APAGroupMembers(group,post);
+  if(result!=NoError||!APAGroupContainsExactly(post,members))return APIERR_BADPARS;
+  return NoError;
+ });
+ if(err!=NoError)return CreateErrorResponse(err,"Group move/readback failed; undo scope rejected");
+ GS::ObjectState out("nativeModelWrites",static_cast<Int32>(members.GetSize()),"groupId",CreateGuidObjectState(group));
+ const auto& list=out.AddList<GS::ObjectState>("movedMembers");
+ for(const auto& member:members)list(CreateGuidObjectState(member));
+ return out;
+}
