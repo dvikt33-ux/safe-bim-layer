@@ -39,7 +39,16 @@ ID = re.compile(r"^[a-z][a-z0-9-]{7,63}$")
 # This pre-reviewed script uses only APA.EvidenceAPI(execute=False) and native
 # BREP reads; it does NOT use a second SceneWriter or independent mutation.
 REVIEW = ROOT / "controllers" / "apa_bdd114_native_roof_face_review.py"
-ALLOWED = frozenset({"BDD114_ROOF_FINALIZE", "SOURCE_QUALIFIED_NATIVE_READ"})
+ALLOWED = frozenset({"BDD114_ROOF_FINALIZE", "SOURCE_QUALIFIED_NATIVE_READ",
+                     "APPROVED_NATIVE_COLUMN_COPY", "CURRENT_MODEL_FINGERPRINT",
+                     "BDD114_COPY_SAVE"})
+
+
+COPY_ADAPTER = ROOT / "controllers" / "apa_bdd114_native_copy_save_once.py"
+COPY_ADAPTER_BLOB_SHA1 = "eb94a3a3d4feb69bb0f65fa3400599f9f85ece1d"
+COPY_JOB_ID = "bdd114-seven-copy-save-20261017"
+COPY_APPROVAL = "USER_APPROVED_BDD_114_X_9_370_20261017"
+
 
 
 def require(ok, reason):
@@ -111,8 +120,11 @@ def validate_job(job, name):
             0 < (expires-created).total_seconds() <= 7*86400,
             "JOB_TIME_WINDOW_INVALID")
     ref = job["sourceTask"]
-    if job["action"] == "BDD114_ROOF_FINALIZE":
-        require(ref is None, "BDD114_ACTION_MUST_USE_ONLY_INSTALLED_REVIEW")
+    if job["action"] in ("BDD114_ROOF_FINALIZE", "CURRENT_MODEL_FINGERPRINT",
+                         "BDD114_COPY_SAVE"):
+        require(ref is None, "LOCAL_APPROVED_ACTION_MUST_NOT_CONTAIN_SOURCE_TASK")
+        if job["action"] == "BDD114_COPY_SAVE":
+            require(name == COPY_JOB_ID, "ORIGINAL_BDD114_APPROVED_JOB_ID_REQUIRED")
     else:
         require(isinstance(ref, dict) and set(ref) ==
                 {"repo", "ref", "path", "blobSha1"} and
@@ -202,6 +214,145 @@ def capture_read_task(job, folder):
     }
 
 
+def capture_current_model_fingerprint(job, folder):
+    """One read-only job yields exact live GUID/BREP binding for next native task."""
+    sys.path.insert(0, str(SCRIPTS))
+    import archicad_project_accelerator as APA
+    import archicad_scene_run as RUN
+    import archicad_connected_components as C
+    import archicad_bim_documentation as D
+    RUN.bind_authorized_saved_copy(
+        19727, str(WORKING), WORKING.stem, BASE_SHA,
+        "APA_AC29_READ_ONLY_NATIVE_MODEL_FINGERPRINT_" + job["jobId"])
+    folder_raw = folder / "raw"
+    folder_raw.mkdir()
+    api = APA.EvidenceAPI(APA.native_transport, folder_raw, execute=False)
+    target = RUN.guarded_project_for_read(api)
+    require(target["activeViewStoryIndex"] in (0, -1) and
+            APA.archicad29(api).get("buildNumber") == 5101,
+            "NATIVE_MODEL_FINGERPRINT_WRONG_BDD_INSTANCE")
+    before = sorted(APA.inventory_guids(api))
+    require(len(before) == 290, "NATIVE_MODEL_FINGERPRINT_NOT_APPROVED_BASELINE")
+    dump = D.capture_full_model(api, before)
+    native = C.G.normalize_dump(dump)
+    found = {e["guid"].lower(): e for e in native["elements"]}
+    require(set(found) == set(before),
+            "NATIVE_MODEL_FINGERPRINT_PARTIAL_BREP")
+    geometry = {g: C.ROOF.geometry_signature(found[g]) for g in before}
+    after = sorted(APA.inventory_guids(api))
+    require(after == before and api.write_attempts == 0 and
+            sha(WORKING) == BASE_SHA and sha(ORIGINAL) == SOURCE_SHA,
+            "NATIVE_MODEL_FINGERPRINT_CHANGED_DURING_READ")
+    return {
+        "status": "EXACT_CURRENT_MODEL_GUID_AND_BREP_FINGERPRINT_PASS",
+        "targetWorkingPlnSha256": BASE_SHA,
+        "expectedGuidCount": len(before),
+        "expectedGuidSetHash": RUN.digest(before),
+        "expectedModelSignatureHash": RUN.digest(geometry),
+        "currentPort": 19727,
+        "nativeReadCommands": dict(api.calls),
+        "nativeWriteAttempts": 0,
+        "nativeSaveCalls": 0
+    }
+
+
+def capture_approved_native_column_copy(job, folder):
+    """Source-qualified native copy with ORIGINAL DynamicCommands and SceneWriter.
+
+    This bridge version remains pinned to its installed, explicitly approved
+    BDD working PLN. Target positions and source GUID are read from the
+    SOURCE-VERIFIED GitHub task; not hardcoded in the executor/worker.
+    """
+    source = job["sourceTask"]
+    task, blob = remote_json(source["repo"], source["path"],
+                             source["ref"], source["blobSha1"])
+    sys.path.insert(0, str(SCRIPTS))
+    import sqlite3
+    import archicad_project_accelerator as APA
+    import archicad_scene_run as RUN
+    import archicad_connected_components as C
+    import archicad_bim_documentation as D
+    import apa_ac29_reusable_native_copy as BATCH
+    import apa_ac29_scene_reconciliation as RECON
+
+    BATCH.validate_task(task, expected_project_sha=BASE_SHA,
+                        expected_project_path=str(WORKING))
+    require(task["expectedGuidCount"] == 290,
+            "APPROVED_BDD_TARGET_INITIAL_INVENTORY_MUST_BE_290")
+    require(task["sourceEvidenceRef"].startswith("https://github.com/") and
+            task["authorizationRef"].startswith("USER_APPROVED_"),
+            "NATIVE_COPY_USER_APPROVAL_AND_SOURCE_REQUIRED")
+    RUN.bind_authorized_saved_copy(
+        19727, str(WORKING), WORKING.stem, BASE_SHA,
+        task["authorizationRef"])
+    pre_raw = folder / "preflight-raw"
+    pre_raw.mkdir()
+    read_api = APA.EvidenceAPI(APA.native_transport, pre_raw, execute=False)
+    binding = RUN.guarded_project_for_read(read_api)
+    require(binding["activeViewStoryIndex"] in (0, -1) and
+            APA.archicad29(read_api).get("buildNumber") == 5101,
+            "NATIVE_COPY_WRONG_CURRENT_PROJECT_VIEW_OR_BUILD")
+    # Read the ORIGINAL existing SceneWriter journal, do not clear unknowns.
+    ledger = Path(os.environ["LOCALAPPDATA"]) / "APA_BDD_Window1p8" / "apa_scene_writer.sqlite"
+    existing = BATCH.stored_scenes_clear(
+        ledger, (task["sceneId"], task["saveSceneId"]))
+    historical = None
+    if existing:
+        known = "BDD_BULK150_GRID_AND_LINE_20261016"
+        require(len(existing) == 1 and existing[0] ==
+                {"sceneId": known, "state": "PARTIAL_OR_UNKNOWN_OUTCOME"},
+                "UNRELATED_UNRECONCILED_NATIVE_WRITE_STOPPED")
+        raw = Path(os.environ["LOCALAPPDATA"]) / "APA_BDD_Bulk150_NearHouse" / "raw" / "raw.jsonl"
+        historical = RECON.read_only_reconciliation(
+            known, ledger, raw, read_api,
+            normalized=C.G.normalize_dump,
+            geom_signature=C.ROOF.geometry_signature,
+            digest=RUN.digest, expected_project_sha=BASE_SHA,
+            current_project_sha=sha(WORKING))
+        historical_receipt = folder / "historical-reconciliation.json"
+        durable_write(historical_receipt, historical)
+    require(read_api.write_attempts == 0 and
+            sha(WORKING) == BASE_SHA and sha(ORIGINAL) == SOURCE_SHA,
+            "NATIVE_COPY_PREFLIGHT_MUTATED_MODEL_OR_DISK")
+    guard = BATCH.GuardedSaveTransport(
+        APA.native_transport, RUN.bind_authorized_saved_copy,
+        WORKING, ORIGINAL, lambda: sha(WORKING),
+        lambda: sha(ORIGINAL), WORKING.stem, 19727,
+        task["authorizationRef"])
+    write_raw = folder / "execution-raw"
+    write_raw.mkdir()
+    api = APA.EvidenceAPI(guard, write_raw, execute=True)
+    schema = ROOT / "schemas" / "tapir-live-1.5.10" / "tapir-scene-live.json"
+    require(schema.is_file(), "STABLE_AC29_NATIVE_SCHEMA_NOT_FOUND")
+    router = APA.native_command_router(
+        schema, include_functional_modules=False)
+    writer = RUN.SceneWriter(
+        api, ledger, schema_path=schema, allow_3d_view_for_write=True)
+    # ONE single logical operation + native save, no retry or alternate writer.
+    result = BATCH.execute_task(
+        task, api=api, writer=writer, router=router, APA=APA, RUN=RUN,
+        components=C, capture_native=D.capture_full_model,
+        saved_project_sha=BASE_SHA, current_sha=lambda: sha(WORKING),
+        save_guard=guard, known_reconciliation=historical)
+    require(result["copiedCount"] == len(task["targets"]) and
+            result["nativeCopyCalls"] == 1 and
+            result["nativeSaveCalls"] == 1 and
+            result["finalGuidCount"] ==
+            len(task["targets"]) * 2 + 290 and
+            result["newSavedProjectSha256"] == sha(WORKING) and
+            sha(ORIGINAL) == SOURCE_SHA,
+            "NATIVE_COPY_WORKER_FULL_MODEL_CONFIRMATION_MISSING")
+    durable_write(folder / "native-column-copy-result.json", result)
+    return dict(result,
+                sourceTaskBlob=blob,
+                modelWrites=2,
+                workingPlnSaved=True,
+                originalPlnUnchanged=True,
+                historicalReconciliation=(
+                    historical["status"] if historical else None),
+                authorizedNativeExecution=True)
+
+
 def capture_roof_review(job, folder):
     """One existing source-reviewed production preflight; no subprocess writes."""
     require(REVIEW.is_file(), "APPROVED_BDD_ROOF_REVIEW_NOT_INSTALLED")
@@ -223,6 +374,38 @@ def capture_roof_review(job, folder):
             "localLogPath": str(log), "modelWrites": 0,
             "nativeBuildExecuted": False,
             "next": "REVIEW_GEOMETRY_AND_APPROVE_VERIFIED_X_BEFORE_ONE_SCENEWRITER_BATCH"}
+
+
+def capture_approved_bdd114_copy(job, folder):
+    """Only user's fixed seven-stud request; original APA writes and SQLite."""
+    require(job["jobId"] == COPY_JOB_ID and job["action"] == "BDD114_COPY_SAVE",
+            "UNAPPROVED_MODEL_WRITE_TASK")
+    require(COPY_ADAPTER.is_file() and
+            git_sha(COPY_ADAPTER.read_bytes()) == COPY_ADAPTER_BLOB_SHA1,
+            "BDD114_WRITE_ADAPTER_MISSING_OR_CHANGED")
+    require((folder / "attempted.json").is_file(),
+            "NATIVE_WRITE_REQUIRES_DURABLE_RECEIVER_ATTEMPT")
+    cmd = [sys.executable, str(COPY_ADAPTER),
+           "--job-folder", str(folder), "--approval", COPY_APPROVAL]
+    proc = subprocess.run(cmd, capture_output=True, timeout=600,
+                          encoding="utf-8", errors="replace", cwd=ROOT)
+    log = folder / "native-write-output.txt"
+    log.write_text(proc.stdout + "\n" + proc.stderr, encoding="utf-8")
+    detail_path = folder / "native-write-result.json"
+    report = json.loads(detail_path.read_text(encoding="utf-8")) if detail_path.is_file() else {}
+    require(proc.returncode == 0 and
+            report.get("status") == "BDD114_SEVEN_NATIVE_COPIES_AND_SAVE_PASS" and
+            report.get("finalGuidCount") == 304 and
+            report.get("copyCalls") == 1 and report.get("saveCalls") == 1 and
+            report.get("savedSha256") and report["savedSha256"] != BASE_SHA and
+            sha(WORKING) == report["savedSha256"] and sha(ORIGINAL) == SOURCE_SHA,
+            "BDD114_WRITE_OUTCOME_UNKNOWN_DO_NOT_REPLAY_OR_RESAVE")
+    return {"status": report["status"], "guidCount": 304,
+            "newColumnGuids": report["newColumnGuids"],
+            "savedWorkingPlnSha256": report["savedSha256"],
+            "nativeMoveCalls": 1, "nativeSaveCalls": 1,
+            "nativeBuildExecuted": True, "modelWrites": 2,
+            "automaticRetry": False}
 
 
 def durable_write(path, obj):
@@ -275,6 +458,12 @@ def process_job(name):
     try:
         if job["action"] == "BDD114_ROOF_FINALIZE":
             response = capture_roof_review(job, folder)
+        elif job["action"] == "CURRENT_MODEL_FINGERPRINT":
+            response = capture_current_model_fingerprint(job, folder)
+        elif job["action"] == "BDD114_COPY_SAVE":
+            response = capture_approved_bdd114_copy(job, folder)
+        elif job["action"] == "APPROVED_NATIVE_COLUMN_COPY":
+            response = capture_approved_native_column_copy(job, folder)
         else:
             response = capture_read_task(job, folder)
         response["jobStatus"] = "COMPLETE"
@@ -286,7 +475,7 @@ def process_job(name):
                "sourceBlob": source_blob,
                "finishedAt": current_utc().isoformat(),
                "result": response, "automaticRetry": False,
-               "modelWritesAuthorized": False}
+               "modelWritesAuthorized": job["action"] in {"APPROVED_NATIVE_COLUMN_COPY", "BDD114_COPY_SAVE"}}
     durable_write(folder / "result.json", payload)
     upload_result(name, folder)
 
