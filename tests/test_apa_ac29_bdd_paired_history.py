@@ -114,7 +114,7 @@ class PairedBddHistory(TestCase):
         self.root=Path(self.dir.name)
         (self.ledger,self.raw,self.original,
          self.current,self.known)=fixture(self.root)
-        self.first=sorted(row["guid"] for row in self.original)
+        self.first=sorted(row["guid"] for row in self.original["elements"])
         prebrep={g:[] for g in self.first}
         self.patches=[
             patch.object(R,"_BDD_HISTORY",self.known),
