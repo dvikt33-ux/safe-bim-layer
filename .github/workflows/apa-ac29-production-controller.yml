@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - "scripts/apa_ac29_production_controller.py"
+      - "scripts/apa_bdd_block114_existing_stud_read.py"
       - ".github/workflows/apa-ac29-production-controller.yml"
   workflow_dispatch:
 
@@ -17,6 +18,6 @@ jobs:
         with:
           python-version: "3.11"
       - name: Compile new controller only
-        run: python -m py_compile scripts/apa_ac29_production_controller.py
+        run: python -m py_compile scripts/apa_ac29_production_controller.py scripts/apa_bdd_block114_existing_stud_read.py
       - name: Check CLI contract without accessing local PLN or GitHub
         run: python scripts/apa_ac29_production_controller.py --help
