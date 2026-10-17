@@ -76,6 +76,11 @@ def pdf_paths(source, page_no):
         drawings = page.get_drawings()
         # PyMuPDF's stock grouping: bounding rectangles, not BIM entities.
         clusters = page.cluster_drawings(drawings=drawings)
+        # A dense sheet collapsed into one huge bbox is NOT object recognition.
+        page_area = max(float(page.rect.width * page.rect.height), 1.0)
+        page_wide = (len(clusters) == 1 and len(original) > 100
+                     and (clusters[0].width * clusters[0].height)
+                         / page_area >= 0.75)
         serialized = [plain(x) for x in original]
         return {
             "page": page_no,
@@ -93,6 +98,10 @@ def pdf_paths(source, page_no):
             "extraction": "PyMuPDF.Page.get_cdrawings(extended=True)",
             "clustering": "PyMuPDF.Page.cluster_drawings",
             "clustersAreBIMElements": False,
+            "clusteringStatus": ("PAGE_WIDE_CLUSTER_NOT_SEMANTIC"
+                                 if page_wide else
+                                 "GRAPHICAL_GROUPS_NOT_BIM_ELEMENTS"),
+            "semanticRecognitionNeeded": True,
             "scaleConfirmed": False,
             "truncated": False,
         }
