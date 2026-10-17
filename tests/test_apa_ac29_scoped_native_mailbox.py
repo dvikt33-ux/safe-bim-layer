@@ -171,11 +171,20 @@ class TaskScopeTests(TestCase):
                 remote_json=lambda *args:(task,"3"*40),
                 sha=lambda p:("c"*64 if p==root/"original.pln" else SHA)
             )
+            import apa_ac29_scene_reconciliation as RECON
+            import archicad_scene_run as RUN
+            def only_reads(*args,**kwargs):
+                self.assertIs(kwargs.get("execute"),False)
+                return SimpleNamespace(write_attempts=0)
             with patch.dict(os.environ,{"LOCALAPPDATA":str(root)}), \
-                 patch.object(APA,"EvidenceAPI",
-                              side_effect=AssertionError("NATIVE_API_CONSTRUCTED")):
-                with self.assertRaisesRegex(ValueError,"PENDING_HISTORY"):
+                 patch.object(RUN,"bind_authorized_saved_copy"), \
+                 patch.object(APA,"archicad29",return_value={"buildNumber":5101}), \
+                 patch.object(APA,"EvidenceAPI",side_effect=only_reads) as opened, \
+                 patch.object(RECON,"reconcile_bdd_paired_history_read_only",
+                              side_effect=ValueError("BDD_PROOF_MISSING")):
+                with self.assertRaisesRegex(ValueError,"BDD_PROOF_MISSING"):
                     S.execute(stub,job,folder)
+            self.assertEqual(opened.call_count,1)
             with closing(sqlite3.connect(ledger)) as db:
                 rows=db.execute("SELECT state FROM scenes ORDER BY scene_id").fetchall()
             self.assertEqual(rows,[
