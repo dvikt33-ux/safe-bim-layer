@@ -306,5 +306,16 @@ class ExternalReadonlyTests(unittest.TestCase):
                     PersistentFactory.install()
 
 
+    def test_original_apa_router_accepts_pinned_tapir_js_provenance(self):
+        """Verify the real original factory, not just load_catalog(), on exact JS."""
+        source_root = Path(__file__).resolve().parents[1]
+        snapshot = source_root / "schemas/tapir-live-1.5.10/tapir-scene-live.json"
+        with mock.patch.object(Session, "STABLE", source_root):
+            original = Session.original_factory()
+            router = original(snapshot, None, False)
+        self.assertGreaterEqual(len(router.catalog["commands"]), 260)
+        self.assertTrue(router.fingerprint)
+
+
 if __name__ == "__main__":
     unittest.main()
