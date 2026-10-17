@@ -979,6 +979,61 @@ def discover_catalog_task(router, intent, planner_python=None):
 
 
 
+def select_uniquely_registered_read_alternative(router, preview, checked):
+    """Select only a uniquely more strongly registered, typed READ_ONLY graph.
+
+    Registration confidence is NOT an assertion of fastest execution, feature
+    parity beyond schemas, nor a write authorization. Cost-based selection,
+    if available, retains precedence in discover_catalog_task.
+    """
+    if (preview.get("schema") != "APA_AUTO_NATIVE_TASK_V1"
+            or preview.get("status") != "QUALIFIED_CATALOG_ALTERNATIVES_UNCALIBRATED"
+            or preview.get("selectedNativeTaskPreview") is not None
+            or preview.get("nativeWritePermission") is not False
+            or preview.get("automaticNativeExecution") is not False):
+        return preview, "NOT_APPLICABLE"
+    options = preview.get("alternatives", [])
+    eligible = [item for item in options if not item["executionBlockers"]]
+    if len(eligible) < 2:
+        return preview, "NO_MULTIPLE_ELIGIBLE_OPTIONS"
+
+    # Never choose CREATE/MODIFY/DELETE or mixed-impact graphs on mere
+    # availability confidence; their selection needs source/cost evidence.
+    for item in eligible:
+        ops = item["graph"]["operations"]
+        if (not ops or any(router.operation_kind(op["command"]) != "READ_ONLY"
+                           for op in ops)):
+            return preview, "WRITE_OR_UNREVIEWED_EFFECT_NOT_AUTO_SELECTED"
+
+    statuses = {row["command"]: row["status"] for row in checked}
+    confidence = {
+        "RUNTIME_AVAILABLE": 2,
+        "CLIENT_PRODUCT_MATCH_NOT_PER_METHOD_REGISTRATION": 1,
+    }
+    ranked = []
+    for item in eligible:
+        commands = item["commands"]
+        # A command not actually probed in THIS invocation does not count as
+        # currently available merely because it appeared in the catalog.
+        if any(command not in statuses or statuses[command] not in confidence
+               for command in commands):
+            continue
+        values = [confidence[statuses[command]] for command in commands]
+        ranked.append(((min(values), sum(values)), item["id"]))
+    if len(ranked) < 2:
+        return preview, "INSUFFICIENT_TASK_SCOPED_NATIVE_REGISTRATION_EVIDENCE"
+    best = max(score for score, _ in ranked)
+    winners = [key for score, key in ranked if score == best]
+    if len(winners) != 1:
+        return preview, "EQUAL_REGISTRATION_CONFIDENCE_KEEP_ALTERNATIVES"
+    result = select_catalog_alternative(preview, winners[0])
+    result["selectionMethod"] = (
+        "UNIQUE_STRONGEST_CURRENT_RUNTIME_REGISTRATION_READ_ONLY_NOT_COST_OPTIMAL"
+    )
+    result["calibrationStatus"] = "UNCALIBRATED"
+    return result, "AUTO_SELECTED_READ_ONLY_BY_RUNTIME_REGISTRATION"
+
+
 def prepare_current_runtime_catalog_task(writer, intent, planner_python=None):
     """Read-only, task-scoped promotion from HISTORIC schemas to an actual export.
 
@@ -1046,6 +1101,9 @@ def prepare_current_runtime_catalog_task(writer, intent, planner_python=None):
     # Recompile with exactly the newly established availability facts. This
     # preserves the original BIM Graph, solver, plans and SceneWriter route.
     final = discover_catalog_task(router, intent, planner_python)
+    final, automatic_read_selection = select_uniquely_registered_read_alternative(
+        router, final, checked
+    )
     report = {
         "status": "CURRENT_RUNTIME_CATALOG_PREPARED_READ_ONLY",
         "boundProject": binding["name"],
@@ -1053,6 +1111,12 @@ def prepare_current_runtime_catalog_task(writer, intent, planner_python=None):
         "taskScopedAvailabilityChecks": len(candidates),
         "runtimeChecksForTask": checked,
         "notQualifiedForTask": rejected,
+        "automaticReadSelection": automatic_read_selection,
+        "selectedCommands": ([
+            op["command"] for op in final["selectedNativeTaskPreview"]["workflow"]["graph"]["operations"]
+        ] if final.get("selectedNativeTaskPreview") else []),
+        "selectionMethod": final.get("selectionMethod"),
+        "calibrationStatus": final.get("calibrationStatus"),
         "historicalSourceOnlyNotPromoted": [
             alt["commands"] for alt in final["alternatives"]
             if alt["executionBlockers"]
