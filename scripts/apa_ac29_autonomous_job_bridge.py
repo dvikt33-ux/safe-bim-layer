@@ -41,8 +41,8 @@ ID = re.compile(r"^[a-z][a-z0-9-]{7,63}$")
 REVIEW = ROOT / "controllers" / "apa_bdd114_native_roof_face_review.py"
 ALLOWED = frozenset({"BDD114_ROOF_FINALIZE", "SOURCE_QUALIFIED_NATIVE_READ", "BDD114_COPY_SAVE"})
 COPY_ADAPTER = ROOT / "controllers" / "apa_bdd114_native_copy_save_once.py"
-COPY_ADAPTER_BLOB_SHA1 = "eb94a3a3d4feb69bb0f65fa3400599f9f85ece1d"
-COPY_JOB_ID = "bdd114-seven-copy-save-20261017"
+COPY_ADAPTER_BLOB_SHA1 = "c825412223cc280e9447004836c03b67e1130ab3"
+COPY_JOB_ID = "bdd114-seven-copy-save-reconciled-20261017"
 COPY_APPROVAL = "USER_APPROVED_BDD_114_X_9_370_20261017"
 
 
