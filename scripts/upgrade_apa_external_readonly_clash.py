@@ -54,8 +54,8 @@ def review():
         require(p.is_file() and sha(p.read_bytes()) == manifest[key],
                 "INSTALLED_SIDECAR_DRIFT:" + name)
     require(old_bytes != new_bytes, "ALREADY_UPGRADED_RUN_CHECK")
-    new_text = new_bytes.decode("utf-8")
-    old_text = old_bytes.decode("utf-8")
+    new_text = new_bytes.decode("utf-8").replace("\r\n", "\n")
+    old_text = old_bytes.decode("utf-8").replace("\r\n", "\n")
     require(new_text.count(NEW) == 1 and
             new_text.replace(NEW, OLD, 1) == old_text,
             "SOURCE_DIFF_OUTSIDE_REVIEWED_IFCCLASH_FIX")
