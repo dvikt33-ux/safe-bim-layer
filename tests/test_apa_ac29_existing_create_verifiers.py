@@ -81,7 +81,7 @@ class RegistryCoverage(unittest.TestCase):
         self.assertEqual({(row.command,row.effect) for row in available.values()},
                          {("CreateColumns","CREATE"),("MoveElements","MODIFY"),
                           ("CreateBeams","CREATE"),("CreateWalls","CREATE"),
-                          ("CreateRoofs","CREATE")})
+                          ("CreateRoofs","CREATE"),("ModifySlabs","MODIFY")})
 
     def test_strict_basic_source_all_three_families(self):
         for command,params in [
