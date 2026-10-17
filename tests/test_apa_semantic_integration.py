@@ -82,7 +82,7 @@ class SemanticReadOnlyTests(TestCase):
                     "model": str(model), "modelSHA256": W.digest(model)
                 }
             }), encoding="utf-8")
-            self.assertEqual(W.read_verified_ml_model(cfg, "openbim")[2], model)
+            self.assertEqual(W.read_verified_ml_model(cfg, "openbim")[2], model.resolve())
             model.write_bytes(b"changed")
             with self.assertRaisesRegex(ValueError, "MODEL_HASH_MISMATCH"):
                 W.read_verified_ml_model(cfg, "openbim")
