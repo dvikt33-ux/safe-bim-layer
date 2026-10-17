@@ -1,0 +1,22 @@
+name: APA AC29 Dynamic Mutation Scopes
+on:
+  pull_request:
+    paths:
+      - "scripts/apa_ac29_dynamic_write_scopes.py"
+      - "scripts/apa_ac29_dynamic_native_verifiers.py"
+      - "tests/test_apa_ac29_dynamic_write_scopes.py"
+      - ".github/workflows/apa-ac29-dynamic-scopes.yml"
+  workflow_dispatch:
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile only new scoped mutation adapter and verifiers
+        run: python -m py_compile scripts/apa_ac29_dynamic_write_scopes.py scripts/apa_ac29_dynamic_native_verifiers.py tests/test_apa_ac29_dynamic_write_scopes.py
+      - name: Test only new source-qualified scope contracts
+        run: python -m unittest discover -s tests -p 'test_apa_ac29_dynamic_write_scopes.py' -v
