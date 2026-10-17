@@ -26,8 +26,8 @@ EXPECTED_LOCAL_DISCOVERY = "e2afc6fe156dbe0ccbc295d00a447546be3fc90a7c92a20e1030
 EXPECTED_CORE = "5ce7cbb91c8f799265a541f79922b50455fecf661ed9278a1cc4ffaff766ba4b"
 EXPECTED_DYNAMIC = "8effd2f294197179b4b18b785de80f7f78091649e7f105ee4cf66877dbe0e6f8"
 # SHA1 of content retrieved from this exact approved commit
-NEW_DISCOVERY_BLOB = "6b95fff74c4e4797951ee9823371fbdc089e8212"
-SOURCE_REVISION = "70cf488d56b90beff4bb0685c111654c9bb80eea"
+NEW_DISCOVERY_BLOB = "2fa0897bf7ca4fcf16a9c5942e87381bf6bc11d5"
+SOURCE_REVISION = "921ae63e9923a4a7ccc13d76bf09e429c012af12"
 SOURCE_PATH = "scripts/archicad_strategy_discovery.py"
 REPO = "dvikt33-ux/safe-bim-layer"
 REQUIRED_FOLDERS = ("scripts", "schemas", "archicad-addon")
