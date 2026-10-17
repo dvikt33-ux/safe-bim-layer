@@ -16,6 +16,8 @@ SIDE = Path(r"C:\LocalAI\APA_AC29_Stable\external-tools\apa-semantic-v1")
 TARGET = SIDE / "models.json"
 SCHEMA = "APA_SEMANTIC_ML_VENDOR_CONFIG_V1"
 VENDORS = ("openbim", "raster2seq")
+OFFICIAL_SHA256 = {"openbim": "cd7f41460ca1d3cc99bca9c61db8ac83d0381ddec385d55257e3ccb99967ffd7",
+                   "raster2seq": "f7c0ef9379aa8cf11349da8b2179214e0d495af758383984a2361a1309aab3b7"}
 
 
 def require(value, reason):
@@ -64,7 +66,7 @@ def configure(vendor, python, root, model, trust):
             "MODEL_OR_VENDOR_PATH_NOT_FOUND")
     if vendor == "openbim":
         require((rootpath / "inference_api.py").is_file()
-                and weight.suffix.lower() == ".pt",
+                and weight.name == "M2_DA_FT_v2_best.pt",
                 "OPENBIM_VENDOR_SCRIPT_OR_PT_MISSING")
     else:
         require((rootpath / "scripts" / "parse_floorplan.py").is_file()
@@ -72,8 +74,11 @@ def configure(vendor, python, root, model, trust):
                 and weight.parent.name == "cubicasa5k"
                 and weight.parent.parent.name == "raster2seq",
                 "RASTER2SEQ_VENDOR_SCRIPT_OR_CKPT_LAYOUT_MISSING")
+    model_sha = sha(weight)
+    require(model_sha == OFFICIAL_SHA256[vendor],
+            "MODEL_NOT_THE_OFFICIAL_PINNED_UPSTREAM_CHECKPOINT")
     value = {"python": str(exe), "root": str(rootpath),
-             "model": str(weight), "modelSHA256": sha(weight)}
+             "model": str(weight), "modelSHA256": model_sha}
     if TARGET.exists():
         existing = json.loads(TARGET.read_text(encoding="utf-8"))
         require(existing.get("schema") == SCHEMA,
