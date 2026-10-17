@@ -6,6 +6,8 @@ from unittest import TestCase
 from unittest.mock import patch
 import unittest
 import json
+import base64
+import subprocess
 from tempfile import TemporaryDirectory
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
@@ -24,6 +26,51 @@ def sample(action="BDD114_ROOF_FINALIZE", name="bdd114-roof-20261017"):
         "projectSha256": bridge.BASE_SHA,
         "sourceTask": None,
     }
+
+
+class ProcessConsoleEncoding(TestCase):
+    def test_cyrillic_commandline_powershell_stdout_roundtrip(self):
+        """Windows PowerShell may choose OEM/ANSI, but its output is ASCII."""
+        import install_apa_ac29_autonomous_job_bridge as installer
+        worker=Path(r"C:\LocalAI\APA_AC29_Stable\controllers\apa_ac29_autonomous_job_bridge.py")
+        sample={
+            "ProcessId":37752,"ParentProcessId":1,
+            "CommandLine":'python.exe -u "'+str(worker)+
+                          '" --project "C:\\LocalAI\\BDD дом - по чертежам.pln"'
+        }
+        # Simulated PowerShell codepage (cp1251) cannot damage ASCII Base64.
+        ascii_stdout=base64.b64encode(
+            json.dumps(sample,ensure_ascii=False).encode('utf-16le'))+b'\r\n'
+        with patch.object(installer.subprocess,'check_output',
+                          return_value=ascii_stdout) as ps:
+            actual=installer.processes(worker)
+        self.assertEqual(actual,[sample])
+        command=ps.call_args.args[0]
+        self.assertIn('ToBase64String',command[-1])
+        self.assertIn('Encoding]::Unicode',command[-1])
+        self.assertIn('-NonInteractive',command)
+
+    def test_malformed_process_response_cannot_proceed_to_stop(self):
+        import install_apa_ac29_autonomous_job_bridge as installer
+        worker=Path(r"C:\LocalAI\APA_AC29_Stable\controllers\apa_ac29_autonomous_job_bridge.py")
+        with patch.object(installer.subprocess,'check_output',
+                          return_value=b'not-valid-base64'):
+            with self.assertRaises((ValueError,Exception)):
+                installer.processes(worker)
+
+    @unittest.skipUnless(sys.platform=='win32','PowerShell smoke on Windows only')
+    def test_windows_powershell_unicode_serialization_smoke(self):
+        """Real Windows PowerShell 5.1 roundtrip, zero Win32 process mutations."""
+        script=(
+            "$json='{\"message\":\"BDD дом - по чертежам\"}';"
+            "[Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($json))"
+        )
+        payload=subprocess.check_output(
+            ['powershell','-NoProfile','-NonInteractive','-Command',script],
+            timeout=30)
+        decoded=base64.b64decode(payload.strip(),validate=True).decode('utf-16le')
+        self.assertEqual(json.loads(decoded)['message'],
+                         'BDD дом - по чертежам')
 
 
 class SixVerifierRuntimeReceipt(TestCase):
