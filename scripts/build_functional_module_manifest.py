@@ -58,12 +58,12 @@ def build():
     native['CreateNativeGroupV1']=dict(version='29',category='Native SDK group operation',
         description='Create true Archicad group from verified same-story existing elements in one undo scope.',
         parameters=group_params,returns=group_result,
-        availability='BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED',effect='CREATE',
+        availability='BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED',operationKind='CREATE',impact='MODEL',
         implementationSource='archicad-addon/Sources/NativeGroupCommands.inc')
     native['CloneNativeGroupV1']=dict(version='29',category='Native SDK group operation',
         description='Clone a verified whole native group at source-qualified offsets; one high-level bridge request with nested SDK edit calls and rollback on failed group readback.',
         parameters=clone_params,returns=clone_result,
-        availability='BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED',effect='CREATE',
+        availability='BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED',operationKind='CREATE',impact='MODEL',
         implementationSource='archicad-addon/Sources/NativeGroupCommands.inc')
     protection=dict(version='29',category='SDK DevKit licensing query',description='Existing DevKit ProtectionInfoCommand reused unchanged namespace; license flags only.',parameters=obj({}),returns=obj({k:B for k in ['isSTART','isEDU','isSOLO','isDEMO','isTRIAL','isBTC','isNFR','isNetworkLicense']}),availability='BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED')
     point=arr(N,minItems=2,maxItems=2);outline=arr(point,minItems=3);nativeElement=obj({'guid':S,'type':S,'homeStory':I,'bodies':arr({'type':'object'})},['guid'],True)
