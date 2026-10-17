@@ -91,7 +91,7 @@ def install():
     env["PIP_REQUIRE_VIRTUALENV"] = "true"
     env["PIP_DISABLE_PIP_VERSION_CHECK"] = "1"
     subprocess.run([str(py), "-m", "pip", "install", "--no-input",
-                    "--only-binary=:all:", "-r",
+                    "--only-binary=:all:", "--no-binary=odfpy", "-r",
                     str(DEST / REQUIREMENTS.name)],
                    env=env, check=True, timeout=2400)
     subprocess.run([str(py), "-m", "pip", "check"], env=env,
