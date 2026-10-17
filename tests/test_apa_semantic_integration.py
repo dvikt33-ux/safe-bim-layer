@@ -164,5 +164,38 @@ class SemanticReadOnlyTests(TestCase):
         with self.assertRaises(ValueError):
             router.read(None, ticket, reviewed_read_only=False)
 
+
+    def test_real_dynamic_router_vendor_subprocess_pdf_paths(self):
+        import pymupdf
+        from archicad_dynamic_commands import DynamicCommands
+        with tempfile.TemporaryDirectory(prefix="apa-router-semantic-") as d:
+            base = Path(d)
+            pdf = base / "source.pdf"
+            doc = pymupdf.open()
+            page = doc.new_page(width=300, height=200)
+            page.draw_rect(pymupdf.Rect(10, 10, 100, 50))
+            doc.save(str(pdf))
+            doc.close()
+            out = base / "new-report.json"
+            original_sha = W.digest(pdf)
+            router = DynamicCommands({"commands": {}, "common_schemas": {}})
+            with mock.patch.object(C, "installed",
+                                   return_value=(Path(sys.executable),
+                                                 Path(W.__file__).resolve())):
+                C.register(router)
+                ticket = router.prepare("AddOn.APASemantic.PDFPaths",
+                                        {"a": str(pdf), "page": 1,
+                                         "output": str(out)})
+                result = router.read(None, ticket, reviewed_read_only=True)
+            self.assertEqual(result["schema"],
+                             "APA_SEMANTIC_SOURCE_EVIDENCE_V1")
+            self.assertEqual(result["result"]["page"], 1)
+            self.assertGreaterEqual(result["result"]["pathCount"], 1)
+            self.assertFalse(result["result"]["clustersAreBIMElements"])
+            self.assertEqual(result["modelWrites"], 0)
+            self.assertEqual(result["nativeCalls"], 0)
+            self.assertTrue(out.is_file())
+            self.assertEqual(W.digest(pdf), original_sha)
+
 if __name__ == "__main__":
     main()
