@@ -834,7 +834,8 @@ class DynamicCommands:
             raise ValueError('NATIVE_GROUP_MEMBERS_MUST_BE_IN_AFFECTED_SCOPE')
         params=dict(memberIds=[dict(guid=g) for g in member_guids],
                     sourceRef=source_ref)
-        ticket=self.prepare('CreateNativeGroupV1',params)
+        name='CreateNativeGroupV1' if 'CreateNativeGroupV1' in self.catalog['commands'] else 'AddOn.TapirCommand.CreateNativeGroupV1'
+        ticket=self.prepare(name,params)
         return self.execute(writer,scene_id,ticket,affected,retained_signatures,
                             saved_sha256,authorization,impact,verify_after,
                             verify_before=verify_before)
@@ -854,7 +855,8 @@ class DynamicCommands:
             raise ValueError('NATIVE_CLONE_SOURCE_MEMBERS_SCOPE_REQUIRED')
         params=dict(groupId=dict(guid=group_guid),sourceRef=source_ref,
                     translations=translations)
-        ticket=self.prepare('CloneNativeGroupV1',params)
+        name='CloneNativeGroupV1' if 'CloneNativeGroupV1' in self.catalog['commands'] else 'AddOn.TapirCommand.CloneNativeGroupV1'
+        ticket=self.prepare(name,params)
         return self.execute(writer,scene_id,ticket,affected,retained_signatures,
                             saved_sha256,authorization,impact,verify_after,
                             verify_before=verify_before)
