@@ -179,3 +179,34 @@ signature as the original APA core. The wrapper calls **the original factory fir
 - User laptop IFCClash upgraded and 3 IFC operations via installed router: **NOT_RUN** until upgrade/probe receipts.
 - Factory startup integration into existing persistent APA processes: **NOT_APPLIED**.
 - Native operations and BDD model: untouched by this package; BDD 1.14 unknown outcome still demands read-only reconcile.
+
+## Permanent scoped vendor factory — reviewed deployment (18 October update from user logs)
+
+Actual laptop evidence: the user confirmed `EXTERNAL_READONLY_IFCCLASH_ADAPTER_UPGRADED`, adapter SHA-256 `83421ab9a0315d5813bb5e0ce1ade2f616c0be830f5a87f35a6226c74b85a75a`, `doctor READY`, all 10 version pins matched, `REAL_VENDOR_IFC_READ_ONLY_ROUTE_PASS`, 3 vendor operations and 0 native/model calls, and `APA IFC ROUTER: VERIFIED PASS`. The generated example fixtures returned `clashCount=0`: this is neither a claim about a user's actual model nor full collision/geometry acceptance.
+
+**Existing APA has MULTIPLE call sites** using `APA.native_command_router(...)` directly, including BDD readback, windows, native copying, bulk placement, and save operations. Modifying `scripts/archicad_project_accelerator.py` globally would change a hash-protected stable core module and could invalidate approved controllers. A global auto-loader/monkey patch is intentionally **not** installed.
+
+`scripts/install_apa_external_session_factory.py` provides a **separately opt-in, one-time persistent installation** of the safe wrapper into
+`C:\LocalAI\APA_AC29_Stable\external-tools\apa-readonly-v1\session-factory-v1\`.
+It independently reviews the existing installation receipt, exact upgraded adapter SHA, installed catalog SHA, the existence of the original stable core files and all pristine source snapshot files. It copies ONLY:
+- `apa_external_session_factory.py`: a thin wrapper around the existing original `archicad_project_accelerator.native_command_router`, attaching the same six installed READ_ONLY providers to each newly returned router instance.
+- `tapir-scene-live.json` and **both** `command_definitions.js` and `common_schema_definitions.js`, because `catalog_with_provenance` checks original Tapir JS SHA-256 and re-parses the command definitions. Copying JSON alone is insufficient.
+- `session-factory-install.json`: own exact source and installed adapter/catalog SHA values.
+
+The installer makes a new directory only, refuses an existing directory, does not edit existing core modules or any installed package, and immediately executes a **read-only** smoke through the original factory and the installed provider. `--check` revalidates and re-executes an in-memory router creation without an IFC/PLN write.
+
+**Usage in future new processes ONLY:**
+```python
+import sys
+from pathlib import Path
+root = Path(r"C:\LocalAI\APA_AC29_Stable\external-tools\apa-readonly-v1\session-factory-v1")
+sys.path.insert(0, str(root))
+from apa_external_session_factory import native_command_router
+router = native_command_router(root / "tapir-scene-live.json",
+                               include_functional_modules=False)
+# Original DynamicCommands object; six local provider handlers already registered.
+```
+
+The default wrapper signature preserves the core API, including `official_commands` and `include_functional_modules=True`; `--include-functional-modules` is an explicit CLI probe option. The routine installation probe avoids optional native modules. This factory **does not migrate or mutate existing running processes**. Callers importing the old `APA.native_command_router` still create old-style routers, so claim only `autoRegisteredWithinFactorySessions=true`, not global registration.
+
+**Pending after installation:** A specific existing APA startup/controller entrypoint must be chosen and its caller switched to the opt-in factory if its functionality needs the six vendors. This is NOT a live Archicad or BDD write test. No automated edits to signed hash-guarded core, Dispatcher, Active SceneWriter or PLN.
