@@ -49,6 +49,8 @@ def setup():
            "effect":"CREATE","impact":"MODEL",
            "commandContractHash":"c"*64,
            "parametersHash":hashval(graph["operations"][0]["params"]),
+           "expectedBeforeGuidSetHash":"b"*64,
+           "expectedBeforeNativeBrepHash":"d"*64,
            "affectedGuids":[],"retainedGuids":[
                "b8d528f0-ab6a-4ece-a62d-74e3a0d7c46c"],
            "verifierId":"VerifiedNativeColumns"}
