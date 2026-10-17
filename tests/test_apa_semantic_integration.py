@@ -135,5 +135,34 @@ class SemanticReadOnlyTests(TestCase):
                 with self.assertRaisesRegex(ValueError, "ALREADY_EXISTS"):
                     M.configure("openbim", exe, vendor, weights, True)
 
+
+    def test_real_dynamiccommands_register_prepare_read(self):
+        from archicad_dynamic_commands import DynamicCommands
+        router = DynamicCommands({"commands": {}, "common_schemas": {}})
+        with mock.patch.object(C, "installed", return_value=("python", "script")):
+            receipt = C.register(router)
+        self.assertEqual(len(receipt["registered"]), 4)
+        key = "AddOn.APASemantic.PDFPaths"
+        params = {"a": "C:/fixture.pdf", "page": 1,
+                  "output": "C:/new-semantic-report.json"}
+        ticket = router.prepare(key, params)
+        self.assertEqual(ticket["effect"], "READ_ONLY")
+        self.assertFalse(ticket["nativeWritePermission"])
+        fake = {
+            "schema": "APA_SEMANTIC_SOURCE_EVIDENCE_V1",
+            "action": "pdf-paths",
+            "status": "SOURCE_ONLY_NOT_BIM_ACCEPTANCE",
+            "result": {"pathCount": 1},
+            "sources": [],
+            "nativeCalls": 0, "modelWrites": 0,
+            "sourceNotModified": True,
+        }
+        with mock.patch.object(C, "run", return_value=fake) as vendor:
+            actual = router.read(None, ticket, reviewed_read_only=True)
+        self.assertEqual(actual, fake)
+        vendor.assert_called_once_with("pdf-paths", params)
+        with self.assertRaises(ValueError):
+            router.read(None, ticket, reviewed_read_only=False)
+
 if __name__ == "__main__":
     main()
