@@ -47,7 +47,19 @@ def run(folder,approval):
     need(LEDGER.is_file(),"ORIGINAL_SCENE_WRITER_LEDGER_MISSING")
     with sqlite3.connect(f"file:{LEDGER.as_posix()}?mode=ro",uri=True) as db:
         need(not any(db.execute("SELECT 1 FROM scenes WHERE scene_id=?",(sid,)).fetchone() for sid in (COPY,SAVE)),"SCENE_ALREADY_USED_NO_RETRY")
-        need(all(r[0]=="PASS" for r in db.execute("SELECT state FROM scenes")),"UNRECONCILED_SCENE")
+        unresolved=db.execute("SELECT scene_id,state,result FROM scenes WHERE state != 'PASS'").fetchall()
+        # Historical BDD 150-copy scene did dispatch: its native response
+        # preceded a verifier bug (GetAllElements has GUIDs but no type).
+        # Preserve this UNKNOWN journal record, never call the 150-copy again.
+        # Current 290 GUID + exact file SHA and the native BREP preflight below
+        # are mandatory before a separate one-shot BDD 1.14 scene.
+        need(len(unresolved)==1 and unresolved[0][0]=="BDD_BULK150_GRID_AND_LINE_20261016" and
+             unresolved[0][1]=="PARTIAL_OR_UNKNOWN_OUTCOME",
+             "UNRELATED_UNRECONCILED_SCENE")
+        previous=json.loads(unresolved[0][2])
+        need(previous.get("reason")=="ValueError: MASS_COPY_UNEXPECTED_NATIVE_ELEMENT_TYPES" and
+             bool(previous.get("nativeResponse")),
+             "HISTORIC_SCENE_FAILURE_REASON_OR_RESPONSE_DRIFT")
     sys.path.insert(0,str(ROOT/"scripts"))
     import archicad_project_accelerator as APA
     import archicad_scene_run as RUN
