@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "apa-capability-task/1",
+  "request": "BDD House 2022, Archicad 29. Source-qualified read of six EXISTING external Wall host geometries only, prerequisite to incremental source-geometry interior frame modeling. No writes, no assumptions, no additional elements.",
+  "steps": [
+    {
+      "id": "wall_details",
+      "effect": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "parameters": {
+        "elements": [
+          {
+            "elementId": {
+              "guid": "1cd69032-9d8b-481f-af74-19f9e5f8fcfc"
+            }
+          },
+          {
+            "elementId": {
+              "guid": "323703e9-2bf2-4488-a24d-0ba20760400d"
+            }
+          },
+          {
+            "elementId": {
+              "guid": "5dcada01-8c40-4ecf-95f7-377a868f2f48"
+            }
+          },
+          {
+            "elementId": {
+              "guid": "6b90ce7e-4b32-4e9d-b9b8-ce7a5a6452ce"
+            }
+          },
+          {
+            "elementId": {
+              "guid": "7b332594-ab82-43b4-bfc2-ab5ad549c2c9"
+            }
+          },
+          {
+            "elementId": {
+              "guid": "7cbccbf5-a0f8-4ed9-b9e5-3dc96adeae7b"
+            }
+          }
+        ]
+      },
+      "outputFields": [
+        "detailsOfElements"
+      ],
+      "sourceVerification": {
+        "status": "SOURCE_VERIFIED",
+        "evidenceRef": "https://github.com/dvikt33-ux/safe-bim-bridge/blob/main/safe-bim-mailbox/gpt-live/results/apa-bdd-existing-router-20261016T164211Z-8d7da11a.json",
+        "dataHash": "ae5576f8472c9a95121375a70b59bb2ecda6b4fb3b56f5d75c68f3dd25f09e01"
+      }
+    },
+    {
+      "id": "wall_bboxes",
+      "effect": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "parameters": {
+        "elements": [
+          {
+            "elementId": {
+              "guid": "1cd69032-9d8b-481f-af74-19f9e5f8fcfc"
+            }
+          },
+          {
+            "elementId": {
+              "guid": "323703e9-2bf2-4488-a24d-0ba20760400d"
+            }
+          },
+          {
+            "elementId": {
+              "guid": "5dcada01-8c40-4ecf-95f7-377a868f2f48"
+            }
+          },
+          {
+            "elementId": {
+              "guid": "6b90ce7e-4b32-4e9d-b9b8-ce7a5a6452ce"
+            }
+          },
+          {
+            "elementId": {
+              "guid": "7b332594-ab82-43b4-bfc2-ab5ad549c2c9"
+            }
+          },
+          {
+            "elementId": {
+              "guid": "7cbccbf5-a0f8-4ed9-b9e5-3dc96adeae7b"
+            }
+          }
+        ]
+      },
+      "outputFields": [
+        "boundingBoxes3D"
+      ],
+      "after": [
+        "wall_details"
+      ],
+      "sourceVerification": {
+        "status": "SOURCE_VERIFIED",
+        "evidenceRef": "https://github.com/dvikt33-ux/safe-bim-bridge/blob/main/safe-bim-mailbox/gpt-live/results/apa-bdd-existing-router-20261016T164211Z-8d7da11a.json",
+        "dataHash": "2934ca48dd4553caa8029b788e27400b41992f09ac2b93616e4d1f8576a993bc"
+      }
+    }
+  ],
+  "measurements": {}
+}
