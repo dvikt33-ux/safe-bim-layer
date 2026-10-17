@@ -90,9 +90,24 @@ def install():
     env = dict(os.environ)
     env["PIP_REQUIRE_VIRTUALENV"] = "true"
     env["PIP_DISABLE_PIP_VERSION_CHECK"] = "1"
+    # IfcTester needs odfpy 1.4.1; PyPI publishes only a source tarball.
+    # Verify the exact official PyPI SHA-256 before running its build.
+    vendor_dir = DEST / "verified-upstream-src"
+    vendor_dir.mkdir(exist_ok=False)
+    subprocess.run([str(py), "-m", "pip", "download", "--no-deps",
+                    "--no-binary=:all:", "--no-input",
+                    "--dest", str(vendor_dir), "odfpy==1.4.1"],
+                   env=env, check=True, timeout=300)
+    source_tar = vendor_dir / "odfpy-1.4.1.tar.gz"
+    require(source_tar.is_file() and
+            digest(source_tar) ==
+            "db766a6e59c5103212f3cc92ec8dd50a0f3a02790233ed0b52148b70d3c438ec",
+            "ODFPY_PYPI_SOURCE_SHA256_MISMATCH")
     subprocess.run([str(py), "-m", "pip", "install", "--no-input",
-                    "--only-binary=:all:", "--no-binary=odfpy", "-r",
-                    str(DEST / REQUIREMENTS.name)],
+                    "--no-deps", str(source_tar)],
+                   env=env, check=True, timeout=300)
+    subprocess.run([str(py), "-m", "pip", "install", "--no-input",
+                    "--only-binary=:all:", "-r", str(DEST / REQUIREMENTS.name)],
                    env=env, check=True, timeout=2400)
     subprocess.run([str(py), "-m", "pip", "check"], env=env,
                    check=True, timeout=120)
