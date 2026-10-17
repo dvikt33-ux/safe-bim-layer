@@ -51,11 +51,15 @@ def make_pdf(path):
 
 def load_router():
     check(SCRIPTS.is_dir(), "STABLE_APA_SCRIPTS_NOT_FOUND")
-    check(LIVE_SCHEMA.is_file(), "APA_LIVE_SCHEMA_NOT_FOUND_NO_SYNTHETIC_FALLBACK")
+    catalog_source = LIVE_SCHEMA
+    if not catalog_source.is_file():
+        catalog_source = (Path(__file__).resolve().parents[1] / "schemas" /
+                          "tapir-live-1.5.10" / "tapir-scene-live.json")
+    check(catalog_source.is_file(), "QUALIFIED_TAPIR_SCHEMA_NOT_FOUND")
     sys.path.insert(0, str(SCRIPTS))
     from archicad_batch_contracts import load_catalog
     from archicad_dynamic_commands import DynamicCommands
-    catalog = load_catalog(LIVE_SCHEMA)
+    catalog = load_catalog(catalog_source)
     return DynamicCommands(catalog), len(catalog["commands"])
 
 
