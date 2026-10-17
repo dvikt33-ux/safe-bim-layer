@@ -23,9 +23,9 @@
    python scripts/install_apa_semantic_bridge.py
    Это только проверка. Затем единожды:
    python scripts/install_apa_semantic_bridge.py --install
-3. Инсталлятор создаёт только C:\LocalAI\APA_AC29_Stable\external-tools\apa-semantic-v1, ставит PyMuPDF в отдельный venv, записывает контрольные SHA и вызывает --probe к исходному APA Router.
-4. Запускать через новый путь:
-   C:\LocalAI\APA_AC29_Stable\external-tools\apa-semantic-v1\venv\Scripts\python.exe
+3. Инсталлятор создаёт только C:\LocalAI\APA_AC29_Stable\external-tools\apa-semantic-v1, ставит PyMuPDF в отдельный venv, записывает контрольные SHA и вызывает --probe к исходному APA Router через уже работавший vendor-v1 Python.
+4. Для запуска APA Router использовать уже проверенный старый интерпретатор:
+   C:\LocalAI\APA_AC29_Stable\external-tools\apa-readonly-v1\venv\Scripts\python.exe
    совместно с:
    C:\LocalAI\APA_AC29_Stable\external-tools\apa-semantic-v1\apa_semantic_entrypoint.py
 
