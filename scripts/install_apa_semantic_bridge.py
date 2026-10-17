@@ -101,7 +101,7 @@ def check():
             + probe.stdout[-700:] + probe.stderr[-700:])
     result = json.loads(probe.stdout)
     require(result["status"] == "APA_SEMANTIC_ROUTER_REGISTERED"
-            and len(result["semanticCommands"]) == 3
+            and len(result["semanticCommands"]) == 4
             and result["originalSixCommandsPreserved"] is True
             and result["nativeCalls"] == result["modelWrites"] == 0,
             "SEMANTIC_ROUTER_PROBE_FAILED")
