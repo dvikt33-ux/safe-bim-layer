@@ -10,6 +10,7 @@ from unittest import mock
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 import apa_external_readonly as A
 import apa_external_catalog as Catalog
+import apa_external_router_activation as Activation
 
 
 class ExternalReadonlyTests(unittest.TestCase):
@@ -150,6 +151,51 @@ class ExternalReadonlyTests(unittest.TestCase):
         dispatcher.assert_called_once_with("pdf-vectors", params)
         with self.assertRaisesRegex(ValueError, "SOURCE_REVIEWED_READ_ONLY_EFFECT_REQUIRED"):
             router.read(None, ticket, reviewed_read_only=False)
+
+
+    def test_actual_activation_consumes_single_result_envelope(self):
+        """Regression: local router's PDF/DXF evidence has one result key."""
+        import json
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            exe = root / "venv" / "Scripts" / "python.exe"
+            exe.parent.mkdir(parents=True)
+            exe.touch()
+            schema = "APA_EXTERNAL_READONLY_EVIDENCE_V1"
+            def evidence(router, name, params):
+                if name == "DXFVectors":
+                    facts = {"sourceType": "DXF_RAW_MODELSPACE_FACTS_NOT_BIM",
+                             "primitiveCount": 1,
+                             "primitives": [{"type": "LINE"}]}
+                    action = "dxf-vectors"
+                elif name == "PDFVectors":
+                    facts = {"sourceType": "VECTOR_PDF_FACTS_NOT_BIM",
+                             "pages": [{"lineCount": 1}]}
+                    action = "pdf-vectors"
+                else:
+                    raise AssertionError("Unexpected action " + name)
+                return {"schema": schema, "action": action, "result": facts,
+                        "nativeCalls": 0, "modelWrites": 0}
+            with mock.patch.object(Activation, "EXT", root), (
+                 mock.patch.object(Activation, "load_router", return_value=(object(), 21))), (
+                 mock.patch.object(Activation, "register_installed", return_value={
+                     "commands": ["a", "b", "c", "d", "e", "f"]})), (
+                 mock.patch.object(Activation, "run_read", side_effect=evidence)), (
+                 mock.patch.object(Activation.subprocess, "run",
+                                   return_value=type("Done", (), {"returncode": 0})())), (
+                 mock.patch.object(sys, "argv", ["apa_external_router_activation.py"])):
+                output = io.StringIO()
+                with contextlib.redirect_stdout(output):
+                    self.assertEqual(Activation.main(), 0)
+            result = json.loads(output.getvalue())
+            self.assertEqual(result["status"], "READ_ONLY_ROUTE_PROBE_PASS")
+            self.assertEqual(result["registeredCount"], 6)
+            self.assertEqual(
+                result["observedRuns"]["DXFVectors"]["status"],
+                "EXECUTED_REAL_VENDOR_READ_ONLY_PASS")
+            self.assertEqual(
+                result["observedRuns"]["PDFVectors"]["status"],
+                "EXECUTED_REAL_VENDOR_READ_ONLY_PASS")
 
 
 if __name__ == "__main__":
