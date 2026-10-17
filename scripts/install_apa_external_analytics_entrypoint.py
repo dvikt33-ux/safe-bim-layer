@@ -110,7 +110,7 @@ def main(argv=None):
     group.add_argument("--check", action="store_true")
     args = p.parse_args(argv)
     result = install() if args.install else check() if args.check else preflight()
-    print(json.dumps(result, ensure_ascii=False, indent=2))
+    print(json.dumps(result, ensure_ascii=False, indent=2, default=str))
 
 
 if __name__ == "__main__":
