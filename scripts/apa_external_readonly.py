@@ -62,7 +62,7 @@ def check_environment():
             actual = None
         found[name] = {"required": wanted, "installed": actual,
                        "match": actual == wanted}
-    good = (sys.version_info[:2] == (3, 12)
+    good = (sys.version_info[:2] in {(3, 11), (3, 12)}
             and platform.system() == "Windows"
             and all(v["match"] for v in found.values()))
     return {"schema": "APA_EXTERNAL_READONLY_DOCTOR_V1",
