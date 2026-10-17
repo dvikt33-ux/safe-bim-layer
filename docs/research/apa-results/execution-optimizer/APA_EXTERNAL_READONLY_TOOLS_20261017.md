@@ -1,149 +1,89 @@
-# APA AC29 — external read-only tools (isolated V1)
+# APA AC29 — изолированные аналитические инструменты V1
 
-**Source branch:** `feature/apa-readonly-tools-isolated-20261017`, stacked on PR #139,
-**not** on the unsafe/unreconciled PR #140. **Main is unchanged.**
+**Ветка:** `feature/apa-readonly-tools-isolated-20261017`; draft PR #142 поверх ветки PR #139. `main` не изменяется.
 
-## Why
+## Цель и существующий функционал
 
-The existing APA already has `ifcopenshell==0.8.5` in
-`scripts/requirements-connected.txt` and a real
-`archicad_connected_ifc.inspect_quantified_exchange`.
-This package does **not** create a second IFC engine, SceneWriter, task
-executor, native command router, or quantity computation implementation.
+В APA уже есть `archicad_connected_ifc.inspect_quantified_exchange` и `ifcopenshell==0.8.5` в `scripts/requirements-connected.txt`. Второй IFC-движок, SceneWriter, транспорт или механизмы записи в PLN не создаются.
 
-This read-only **sidecar** only integrates the available upstream tools:
+Пакет включает:
+- IfcClash 0.8.5 — проверки коллизий IFC;
+- IfcDiff 0.8.5 — сравнение экспортов IFC;
+- IfcTester 0.8.5 — проверки IFC по явно указанному IDS;
+- Ifc5D 0.8.5 — доступная библиотека для будущего использования, без второго расчётного QTO-движка;
+- pdfplumber 0.11.10 — текст и примитивы в координатах PDF;
+- ezdxf 1.4.5 — примитивы DXF в исходных единицах;
+- IfcOpenShell 0.8.5, networkx 3.6.1, shapely 2.2.0 и необходимые зависимости.
 
-- `ifcclash==0.8.5`: IFC geometry collision report (clashes are NOT errors by default);
-- `ifcdiff==0.8.5`: compare two user-supplied IFC exports;
-- `ifctester==0.8.5`: validate model against an explicitly provided IDS file;
-- `ifc5d==0.8.5`: optional availability in same family; no new QTO computations;
-- `ifcopenshell==0.8.5`: pinned to existing APA version;
-- `pdfplumber==0.11.10`: PDF text, lines, rectangles in PDF points;
-- `ezdxf==1.4.5`: DXF raw modelspace primitives;
-- `networkx==3.6.1` / `shapely==2.2.0`: existing local IFC quantity reader dependencies.
+## Python и изоляция
 
-Official references:
-- https://docs.ifcopenshell.org/ifcclash.html
-- https://docs.ifcopenshell.org/ifcdiff.html
-- https://docs.ifcopenshell.org/ifctester.html
-- https://pypi.org/project/ifcopenshell/0.8.5/
-- https://github.com/jsvine/pdfplumber
-- https://ezdxf.readthedocs.io/en/stable/
+Поддерживаются **Python 3.11.x и 3.12.x, Windows x64**. Системный Python 3.14 пока не поддерживается. Существующий Python APA не обновляется и не заменяется; создаётся только:
 
-## Installation boundary
-
-**Preconditions:** Windows 11 x64, `py -3.12`, verified installed
-`C:\LocalAI\APA_AC29_Stable` with
-`apa-selector-install-receipt.json`. Download to a separate clone.
-No Archicad process, PLN, APX, dispatcher or mailbox update is needed.
-
-The installer only creates:
 `C:\LocalAI\APA_AC29_Stable\external-tools\apa-readonly-v1\`
 
-It creates a **new isolated Python 3.12 venv**, uses
-first downloads **odfpy 1.4.1** and verifies its published PyPI SHA-256; then installs\nthe remaining exact pinned packages using `pip install --only-binary=:all:` and runs `pip check`,
-imports three actual vendor CLIs, then writes `installation.json`.
-It neither upgrades the core APA interpreter nor installs any Archicad Add-On.
+Установщик требует существующий `C:\LocalAI\APA_AC29_Stable` с `apa-selector-install-receipt.json`; проверяет отсутствие папки назначения (повторная установка не выполняется без аудита). Установщик:
+1. создаёт отдельный venv выбранной версии;
+2. загружает `odfpy==1.4.1` (единственный исходный пакет) и проверяет PyPI SHA-256 `db766a6e59c5103212f3cc92ec8dd50a0f3a02790233ed0b52148b70d3c438ec`;
+3. устанавливает только зафиксированные wheel-пакеты, проверяет `pip check`, `doctor` и доступность CLI;
+4. сохраняет `installation.json` с SHA-256 установленных адаптеров.
 
-Execute from PowerShell (only after reviewing this PR):
+Никаких изменений PLN, APX, глобального pip, локального Dispatcher, SQLite-журнала или рабочего SceneWriter не предусмотрено.
+
+## Установка на уже настроенном компьютере пользователя
+
+На машине установлены `C:\Users\Admin\AppData\Local\Programs\Python\Python311\python.exe` версии 3.11.9 x64 и Python 3.14.6. Использовать **3.11.9** напрямую.
+
+Исходная ветка **уже склонирована** в `%TEMP%\APA_ExternalReadonly_20261017`. Не удаляйте её и не скачивайте повторно. Выполните PowerShell-блок **только после получения и сверки нового коммита PR #142**:
 
 ```powershell
 $ErrorActionPreference = 'Stop'
-$repo = 'dvikt33-ux/safe-bim-layer'
-$ref = 'feature/apa-readonly-tools-isolated-20261017'
-$clone = Join-Path $env:TEMP 'APA_ExternalReadonly_20261017'
-if (Test-Path $clone) { throw "Source folder already exists; inspect it before proceeding: $clone" }
-gh repo clone $repo $clone -- --branch $ref --depth 1
-if ($LASTEXITCODE -ne 0) { throw 'GitHub clone failed' }
-& py -3.12 (Join-Path $clone 'scripts\install_apa_external_readonly.py') --install
-if ($LASTEXITCODE -ne 0) { throw 'Isolated installer blocked; do not blindly retry' }
+$checkout = Join-Path $env:TEMP 'APA_ExternalReadonly_20261017'
+$python = 'C:\Users\Admin\AppData\Local\Programs\Python\Python311\python.exe'
+$branch = 'feature/apa-readonly-tools-isolated-20261017'
+
+if (!(Test-Path $checkout) -or !(Test-Path $python)) { throw 'GitHub clone or Python 3.11 not found' }
+if ((git -C $checkout status --porcelain)) { throw 'Local source checkout changed; stop instead of overwrite' }
+git -C $checkout fetch --no-tags origin $branch
+if ($LASTEXITCODE -ne 0) { throw 'GitHub fetch failed' }
+
+# Следующая версия документа фиксирует конкретный проверенный SHA.
+# Обязательна независимая сверка SHA после обновления checkout.
 ```
 
-Verification is read-only:
-
+После установки:
 ```powershell
-$py = 'C:\LocalAI\APA_AC29_Stable\external-tools\apa-readonly-v1\venv\Scripts\python.exe'
-$adapter = 'C:\LocalAI\APA_AC29_Stable\external-tools\apa-readonly-v1\apa_external_readonly.py'
-& $py $adapter doctor
+$root = 'C:\LocalAI\APA_AC29_Stable\external-tools\apa-readonly-v1'
+& "$root\venv\Scripts\python.exe" "$root\apa_external_readonly.py" doctor
 ```
 
-Examples with **your own user-supplied paths**:
+## Подключение к существующему Dynamic Router
 
-```powershell
-& $py $adapter ifc-diff --a 'D:\IFC\before.ifc' --b 'D:\IFC\after.ifc' --output 'D:\IFC\diff-evidence.json'
-& $py $adapter ifc-clash --a 'D:\IFC\architecture.ifc' --b 'D:\IFC\services.ifc' --output 'D:\IFC\clash-evidence.json'
-& $py $adapter ids-validate --a 'D:\IFC\architecture.ifc' --ids 'D:\IFC\criteria.ids' --output 'D:\IFC\ids-evidence.json'
-& $py $adapter ifc-qto --a 'D:\IFC\architecture.ifc' --output 'D:\IFC\qto-existing-apa-evidence.json'
-& $py $adapter pdf-vectors --a 'D:\Drawings\source.pdf' --output 'D:\Drawings\source-vectors.json'
-& $py $adapter dxf-vectors --a 'D:\Drawings\source.dxf' --output 'D:\Drawings\source-dxf-vectors.json'
-```
-
-Every run has an allowlisted action, known upstream module, local source
-SHA256 and **new exclusive** JSON output. No shell string input or arbitrary
-external command execution. Subprocess invocations are fixed and never use
-`shell=True`.
-
-**Important:** a PDF drawing's raw vectors are not metres and are never
-treated as approved BIM coordinates. DXF unit header does not establish
-coordinate system or project origin. IFC clash overlap may be intentional.
-IDS PASS is not Russian building-code or engineering acceptance.
-
-## Integration with APA
-
-The existing `DynamicCommands.add_local_provider` is reused (no change to
-`archicad_dynamic_commands.py`). The installer deploys
-`apa_external_catalog.py` beside the isolated adapter. An existing APA
-router instance can load it with an explicit reviewed call:
+`apa_external_catalog.py` регистрирует шесть локальных команд через штатный `DynamicCommands.add_local_provider`: `IFCDiff`, `IFCClash`, `IDSValidate`, `IFCQuantities`, `PDFVectors`, `DXFVectors`. Для регистрационного вызова используется установленный адаптер в `external-tools`; основной Python импортирует только лёгкий stdlib-адаптер, а все внешние библиотеки запускаются из venv через выделенный процесс.
 
 ```python
-# Run from the EXISTING stable APA Python process after installing tools.
 import importlib.util
 from pathlib import Path
 module = Path(r"C:\LocalAI\APA_AC29_Stable\external-tools\apa-readonly-v1\apa_external_catalog.py")
 spec = importlib.util.spec_from_file_location("apa_external_catalog", module)
 plugin = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(plugin)
-receipt = plugin.register(router)  # existing DynamicCommands instance
-
-# Original DynamicCommands schema / policy guards still apply:
+receipt = plugin.register(router)  # original DynamicCommands instance
 ticket = router.prepare("AddOn.APAExternalReadOnly.IFCDiff", {
-    "a": r"D:\IFC\before.ifc", "b": r"D:\IFC\after.ifc",
-    "output": r"D:\IFC\new-diff-evidence.json"})
+    "a": r"D:\IFC\before.ifc",
+    "b": r"D:\IFC\after.ifc",
+    "output": r"D:\IFC\diff-evidence-new.json"
+})
 result = router.read(None, ticket, reviewed_read_only=True)
 ```
 
-The newly registered commands are IFCDiff, IFCClash, IDSValidate,
-IFCQuantities, PDFVectors and DXFVectors. Each handler invokes only
-the installed isolated interpreter, verifies the JSON evidence and
-returns it to the original router; no Arc​hicad native API call occurs.
-Registration applies only to the router instance on which the call is made.
-**Auto-registration in every future APA session is not yet enabled.**
+Автоматическая регистрация на каждом запуске APA **не внедрена**; регистрация в конкретном экземпляре Router происходит только по явному вызову.
 
+## Приёмка и ограничения
 
+- Windows CI: обязательно отдельно проверить 3.11 и 3.12, включая фактическую установку всех пакетов, `pip check`, `doctor`, импорты vendor CLI и 7 целевых тестов.
+- Ноутбук: `NOT_INSTALLED` до получения `installation.json` и успешного `doctor`.
+- IFC/PDF/DXF реального здания: `NOT_VERIFIED` до реальных аналитических запусков.
+- Векторный PDF не задаёт BIM-масштаб автоматически; DXF не гарантирует верные координаты; столкновения IFC могут быть намеренными; IDS не заменяет строительные нормы РФ.
+- Отдельный незакрытый `BDD 1.14 UNKNOWN_OUTCOME` нельзя повторять или пересохранять до независимой read-only сверки.
 
-V1 connects via a deterministic **read-only evidence file interface**. The
-normal APA process keeps all native operations unchanged. The adapter can be
-started explicitly by a caller with `subprocess` and its resulting
-`APA_EXTERNAL_READONLY_EVIDENCE_V1` JSON can be attached to the existing
-BIM Graph / provenance task. There is **no automatic command-catalog registration
-or autonomous model writer** in this package; that requires a separate
-reviewed integration after installing and verifying the real vendor outputs.
-
-For quantities, `ifc-qto` imports and calls the **existing**
-`archicad_connected_ifc.inspect_quantified_exchange` from the stable APA
-instead of duplicating geometry formulas.
-
-## Acceptance statuses
-
-- Source files on GitHub: `SOURCE_PREPARED`.
-- Stdlib test/compile CI (if successful): `OFFLINE_INTEGRATION_PASS`.
-- Windows isolated installation: `NOT_RUN` until exact install receipt.
-- Actual upstream analysis on real user IFC/PDF/DXF: `NOT_RUN`.
-- Native CREATE/MODIFY/save: **not supported by this sidecar**.
-- The separate BDD 1.14 unknown write outcome must be reconciled before any
-  native write or job retry. Isolated package installation does not reconcile it.
-
-Rollback: uninstalling only the reviewed isolated directory and its venv is
-possible later; the installer intentionally has **no delete command**.
-Do not delete the core APA or user PLN. Do not merge to main, repoint
-Dispatcher, or auto-install an APX as part of this work.
+Исходники: https://github.com/IfcOpenShell/IfcOpenShell · https://github.com/jsvine/pdfplumber · https://ezdxf.readthedocs.io/
