@@ -16,6 +16,8 @@ SOURCE = "b8d528f0-ab6a-4ece-a62d-74e3a0d7c46c"
 def manifest():
     return dict(schemaVersion="apa-ac29-native-column-copy/1",
                 projectSha256="a"*64,projectPath="C:\\Projects\\approved.pln",
+                expectedGuidCount=290,expectedGuidSetHash="b"*64,
+                expectedModelSignatureHash="c"*64,
                 prototypeGuid=SOURCE,prototypeOrigin={"x":1.5,"y":2.5},
                 targets=[{"x":3.5,"y":2.5},{"x":4.5,"y":2.5}],
                 sceneId="COPY_APPROVED_001",saveSceneId="SAVE_APPROVED_001",
