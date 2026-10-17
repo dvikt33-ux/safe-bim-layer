@@ -8,6 +8,11 @@ DEF(GetNativeElementDefaultsV1)
 DEF(GetNativePolygonMemoV1)
 DEF(GetNativeWorkingUnitsV1)
 DEF(GetNativeGroupRootsV1)
+DEF(GetNativeGroupMembersV1)
+DEF(CreateNativeGroupV1)
+DEF(CloneNativeGroupV1)
+DEF(UngroupNativeGroupV1)
+DEF(MoveNativeGroupV1)
 DEF(GetNativeLibraryPartOriginV1)
 #undef DEF
 GS::Optional<GS::UniString> GetNativeElementDefaultsV1Command::GetRawResponseSchema() const {return R"APA({"type":"object","properties":{"nativeModelWrites":{"const":0},"geometryAuthority":{"type":"string"},"defaults":{"type":"array","items":{"anyOf":[{"type":"object","properties":{"type":{"type":"string"},"nativeTypeId":{"type":"integer"},"variationId":{"type":"integer"},"homeStory":{"type":"integer"},"layerIndex":{"type":"integer"},"height":{"type":"number"},"thickness":{"type":"number"},"buildingMaterialIndex":{"type":"integer"},"roofClass":{"type":"integer"},"shellClass":{"type":"integer"},"complexParameters":{"type":"string"}},"required":["type","nativeTypeId","variationId","homeStory","layerIndex"],"additionalProperties":false},{"type":"object","properties":{"error":{"type":"object","properties":{"code":{"type":"integer"},"message":{"type":"string"}},"required":["code","message"],"additionalProperties":false}},"required":["error"],"additionalProperties":false}]}}},"required":["nativeModelWrites","geometryAuthority","defaults"],"additionalProperties":false})APA";}
@@ -54,3 +59,5 @@ GS::Optional<GS::UniString> APAProtectionInfoCommand::GetResponseSchema() const 
 GS::ObjectState APAProtectionInfoCommand::Execute(const GS::ObjectState&,GS::ProcessControl&) const {
  const UInt32 mode=ACAPI_Licensing_GetProtectionMode();return GS::ObjectState("isSTART",(mode&APIPROT_START_MASK)!=0,"isEDU",(mode&(APIPROT_PROTEDU_MASK|APIPROT_EDU_MASK))!=0,"isSOLO",(mode&APIPROT_SOLO_MASK)!=0,"isDEMO",(mode&APIPROT_DEMO_MASK)!=0,"isTRIAL",(mode&APIPROT_TRIAL_MASK)!=0,"isBTC",(mode&APIPROT_BTC_MASK)!=0,"isNFR",(mode&APIPROT_NFR_MASK)!=0,"isNetworkLicense",(mode&APIPROT_NET_MASK)!=0);
 }
+
+#include "NativeGroupCommands.inc"

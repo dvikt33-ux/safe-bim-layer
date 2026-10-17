@@ -35,7 +35,9 @@ READS = frozenset({"GetProjectInfo", "GetStories", "GetAddOnVersion",
                   "GetSurfaces", "GetAvailableLibraryParts", "GetGDLParametersOfElements", "API.GetProductInfo", 'API.GetPublisherSetNames',
                   'API.GetAllClassificationSystems','API.GetAllClassificationsInSystem','GetClassificationsOfElements','GetMEPPreferenceTables',
                   'API.GetPropertyIds','API.GetAllPropertyNames','API.GetDetailsOfProperties','API.GetPropertyValuesOfElements',
-                  'GetSolidElementLinks','GetPropertyValuesOfElements','GetNativeGridDefaultsV1','GetNativeGridElementsV1','GetNativeStairGeometryV1','EvaluateNativeStairGeometryV1','GetAPARuntimeInfoV1'})
+                  'GetSolidElementLinks','GetPropertyValuesOfElements','GetNativeGridDefaultsV1','GetNativeGridElementsV1','GetNativeStairGeometryV1','EvaluateNativeStairGeometryV1','GetAPARuntimeInfoV1',
+                  'GetNativeGroupRootsV1','GetNativeGroupMembersV1',
+                  'AddOn.TapirCommand.GetNativeGroupMembersV1'})
 NATIVE_MUTATIONS = RUN.ALLOWED_WRITES | RUN.EXTENDED_WRITES | frozenset({"ModifySlabs","ModifyMorphs","ModifyBeams",
     'ConnectMEPElements','ModifyMEPRoutingElements','CreateOpenings','CreateSolidElementLinks','RemoveSolidElementLinks','SetClassificationsOfElements','TrimElements',
     'MoveElements','ModifyWalls','ModifyWindows','ModifyDoors','SetPropertyValuesOfElements','SetStories','CreateStairs',

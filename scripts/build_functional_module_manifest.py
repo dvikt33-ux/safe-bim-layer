@@ -26,6 +26,14 @@ def build():
       'GetNativeWorkingUnitsV1':either(obj({k:I for k in ['nativeModelWrites','lengthUnit','areaUnit','volumeUnit','angleUnit','lengthDecimals','areaDecimals','volumeDecimals','angleDecimals']})),
       'GetNativeGroupRootsV1':obj({'nativeModelWrites':{'const':0},'groups':arr(either(obj({'elementId':eid,'groupId':eid,'rootGroupId':eid})))}),
       'GetNativeLibraryPartOriginV1':either(obj({'nativeModelWrites':{'const':0},'parts':arr(either(obj({'index':I,'name':S,'libraryName':S,'originStatus':S},['index'])))}))}
+    group_id=eid
+    group_params=obj({'memberIds':arr(eid,minItems=2,maxItems=128,uniqueItems=True),'sourceRef':dict(S,minLength=8)})
+    clone_params=obj({'groupId':group_id,'sourceRef':dict(S,minLength=8),
+                      'translations':arr(obj({'dx':N,'dy':N,'dz':N}),minItems=1,maxItems=32)})
+    group_result=either(obj({'nativeModelWrites':I,'groupId':group_id,'memberCount':I}))
+    clone_result=either(obj({'nativeModelWrites':I,'sourceGroupId':group_id,
+                             'newGroupIds':arr(group_id),
+                             'createdElements':arr(obj({'elementId':eid}))}))
     # The raw response schemas also feed the existing GenerateDocumentation.
     text=re.sub(r'^#define DEF\(name\).*$', '#define DEF(name) name##Command::name##Command():CommandBase(CommonSchema::NotUsed){} GS::String name##Command::GetName() const {return #name;}',text,count=1,flags=re.M)
     for name,schema in output.items():
@@ -41,6 +49,34 @@ def build():
       'GetNativeWorkingUnitsV1':'Read project working unit enums and decimal preferences without mutation.',
       'GetNativeGroupRootsV1':'Immediate and nested root group membership for element GUIDs.',
       'GetNativeLibraryPartOriginV1':'Modern SDK GDL part name and containing library origin.'}.items()}
+    native['GetNativeGroupMembersV1']=dict(version='29',category='Native SDK group readback',
+        description='Read actual nested native group member GUIDs independently.',
+        parameters=obj({'groupId':group_id}),
+        returns=either(obj({'nativeModelWrites':{'const':0},'groupId':group_id,'memberIds':arr(group_id)})),
+        availability='BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED',
+        implementationSource='archicad-addon/Sources/NativeGroupCommands.inc')
+    native['CreateNativeGroupV1']=dict(version='29',category='Native SDK group operation',
+        description='Create true Archicad group from verified same-story existing elements in one undo scope.',
+        parameters=group_params,returns=group_result,
+        availability='BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED',operationKind='CREATE',impact='MODEL',
+        implementationSource='archicad-addon/Sources/NativeGroupCommands.inc')
+    native['CloneNativeGroupV1']=dict(version='29',category='Native SDK group operation',
+        description='Clone a verified whole native group at source-qualified offsets; one high-level bridge request with nested SDK edit calls and rollback on failed group readback.',
+        parameters=clone_params,returns=clone_result,
+        availability='BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED',operationKind='CREATE',impact='MODEL',
+        implementationSource='archicad-addon/Sources/NativeGroupCommands.inc')
+    native['UngroupNativeGroupV1']=dict(version='29',category='Native SDK group operation',
+        description='Ungroup explicitly selected flat native group with complete GUID readback and original members preserved.',
+        parameters=obj({'groupId':group_id,'sourceRef':dict(S,minLength=8)}),
+        returns=either(obj({'nativeModelWrites':I,'previousGroupId':group_id,'releasedMembers':arr(group_id)})),
+        availability='BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED',operationKind='MODIFY',impact='MODEL',
+        implementationSource='archicad-addon/Sources/NativeGroupCommands.inc')
+    native['MoveNativeGroupV1']=dict(version='29',category='Native SDK group operation',
+        description='Move entire flat native group in one SDK drag preserving GUID membership.',
+        parameters=obj({'groupId':group_id,'sourceRef':dict(S,minLength=8),'translation':obj({'dx':N,'dy':N,'dz':N})}),
+        returns=either(obj({'nativeModelWrites':I,'groupId':group_id,'movedMembers':arr(group_id)})),
+        availability='BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED',operationKind='MODIFY',impact='MODEL',
+        implementationSource='archicad-addon/Sources/NativeGroupCommands.inc')
     protection=dict(version='29',category='SDK DevKit licensing query',description='Existing DevKit ProtectionInfoCommand reused unchanged namespace; license flags only.',parameters=obj({}),returns=obj({k:B for k in ['isSTART','isEDU','isSOLO','isDEMO','isTRIAL','isBTC','isNFR','isNetworkLicense']}),availability='BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED')
     point=arr(N,minItems=2,maxItems=2);outline=arr(point,minItems=3);nativeElement=obj({'guid':S,'type':S,'homeStory':I,'bodies':arr({'type':'object'})},['guid'],True)
     local={};deps={}
@@ -60,7 +96,7 @@ def build():
     write_schemas();native.update(contracts())
     sdk_files={p:sha(ROOT/p) for p in ['archicad-addon/Sources/NativeModuleCommands.cpp',
         'archicad-addon/Sources/NativeExtendedModules.cpp','archicad-addon/Sources/NativeExtendedModules.hpp',
-        'archicad-addon/Sources/NativeExtendedSchemas.inc','archicad-addon/Sources/NativeQuantityFields.inc','archicad-addon/Sources/NativeLibraryDefaults.inc','archicad-addon/Sources/NativeAssemblyCommands.inc','archicad-addon/Sources/NativeAssemblyModify.inc','archicad-addon/Sources/NativeAssemblyMemo.inc','archicad-addon/Sources/NativeAssemblyOwner.inc','archicad-addon/Sources/NativeMEPTopology.inc']}
+        'archicad-addon/Sources/NativeExtendedSchemas.inc','archicad-addon/Sources/NativeQuantityFields.inc','archicad-addon/Sources/NativeLibraryDefaults.inc','archicad-addon/Sources/NativeAssemblyCommands.inc','archicad-addon/Sources/NativeGroupCommands.inc','archicad-addon/Sources/NativeAssemblyModify.inc','archicad-addon/Sources/NativeAssemblyMemo.inc','archicad-addon/Sources/NativeAssemblyOwner.inc','archicad-addon/Sources/NativeMEPTopology.inc']}
     for row in native.values():
         row.setdefault('implementationSource','archicad-addon/Sources/NativeModuleCommands.cpp')
         row['implementationSHA256']=sdk_files[row['implementationSource']]

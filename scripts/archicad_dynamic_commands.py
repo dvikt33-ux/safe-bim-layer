@@ -822,6 +822,72 @@ class DynamicCommands:
             'status':result.get('status'),
         })
 
+    def create_native_group(self, writer, scene_id, *, member_guids, source_ref,
+                            affected, retained_signatures, saved_sha256,
+                            authorization, impact, verify_before, verify_after):
+        """One native group creation, through original SceneWriter and scoped preflight."""
+        if (not isinstance(member_guids, list) or not 2 <= len(member_guids) <= 128
+                or len(set(member_guids)) != len(member_guids)
+                or not isinstance(source_ref,str) or len(source_ref)<8):
+            raise ValueError('NATIVE_GROUP_SOURCE_MEMBERS_REQUIRED')
+        if set(g.lower() for g in member_guids) - set(g.lower() for g in affected):
+            raise ValueError('NATIVE_GROUP_MEMBERS_MUST_BE_IN_AFFECTED_SCOPE')
+        params=dict(memberIds=[dict(guid=g) for g in member_guids],
+                    sourceRef=source_ref)
+        name='CreateNativeGroupV1' if 'CreateNativeGroupV1' in self.catalog['commands'] else 'AddOn.TapirCommand.CreateNativeGroupV1'
+        ticket=self.prepare(name,params)
+        return self.execute(writer,scene_id,ticket,affected,retained_signatures,
+                            saved_sha256,authorization,impact,verify_after,
+                            verify_before=verify_before)
+
+    def clone_native_group(self, writer, scene_id, *, group_guid, translations,
+                           source_ref, affected, retained_signatures,
+                           saved_sha256, authorization, impact,
+                           verify_before, verify_after):
+        """One high-level bridge command: native grouped Drag-a-Copy with rollback."""
+        if not isinstance(group_guid,str) or not group_guid.strip():
+            raise ValueError('NATIVE_CLONE_GROUP_GUID_REQUIRED')
+        if not isinstance(translations,list) or not 1 <= len(translations) <= 32:
+            raise ValueError('NATIVE_CLONE_GROUP_OFFSETS_REQUIRED')
+        if not isinstance(source_ref,str) or len(source_ref)<8:
+            raise ValueError('NATIVE_CLONE_SOURCE_REF_REQUIRED')
+        if not isinstance(affected,list) or len(affected)<2:
+            raise ValueError('NATIVE_CLONE_SOURCE_MEMBERS_SCOPE_REQUIRED')
+        params=dict(groupId=dict(guid=group_guid),sourceRef=source_ref,
+                    translations=translations)
+        name='CloneNativeGroupV1' if 'CloneNativeGroupV1' in self.catalog['commands'] else 'AddOn.TapirCommand.CloneNativeGroupV1'
+        ticket=self.prepare(name,params)
+        return self.execute(writer,scene_id,ticket,affected,retained_signatures,
+                            saved_sha256,authorization,impact,verify_after,
+                            verify_before=verify_before)
+
+    def edit_native_group(self, writer, scene_id, *, operation, group_guid,
+                          source_ref, affected, retained_signatures, saved_sha256,
+                          authorization, impact, verify_before, verify_after,
+                          translation=None):
+        """Move or ungroup source-qualified native assembly through SceneWriter."""
+        if operation not in {'MOVE','UNGROUP'} or not isinstance(group_guid,str) or not group_guid.strip():
+            raise ValueError('NATIVE_GROUP_EDIT_TYPED_OPERATION_REQUIRED')
+        if not isinstance(source_ref,str) or len(source_ref)<8:
+            raise ValueError('NATIVE_GROUP_EDIT_SOURCE_REF_REQUIRED')
+        if not isinstance(affected,list) or len(affected)<2:
+            raise ValueError('NATIVE_GROUP_EDIT_MEMBERS_SCOPE_REQUIRED')
+        if impact!='MODEL':
+            raise ValueError('NATIVE_GROUP_EDIT_MODEL_SCOPE_REQUIRED')
+        name={'MOVE':'MoveNativeGroupV1','UNGROUP':'UngroupNativeGroupV1'}[operation]
+        params=dict(groupId=dict(guid=group_guid),sourceRef=source_ref)
+        if operation=='MOVE':
+            if not isinstance(translation,dict) or set(translation)!={'dx','dy','dz'}:
+                raise ValueError('NATIVE_GROUP_MOVE_EXACT_TRANSLATION_REQUIRED')
+            params['translation']=translation
+        elif translation is not None:
+            raise ValueError('NATIVE_GROUP_UNGROUP_NO_TRANSLATION')
+        command=name if name in self.catalog['commands'] else 'AddOn.TapirCommand.'+name
+        ticket=self.prepare(command,params)
+        return self.execute(writer,scene_id,ticket,affected,retained_signatures,
+                            saved_sha256,authorization,impact,verify_after,
+                            verify_before=verify_before)
+
     @staticmethod
     def plan_reuse_existing(existing, targets):
         """Copy-first planner: match repeated SOURCE-VERIFIED element families.
