@@ -30,7 +30,7 @@ jobs:
       - name: Install pinned PyMuPDF vendor
         shell: pwsh
         run: |
-          python -m pip install --only-binary=:all: pymupdf==1.26.4
+          python -m pip install --only-binary=:all: pymupdf==1.26.4 jsonschema==4.25.1
           if ($LASTEXITCODE -ne 0) { throw "PyMuPDF install failed" }
       - name: Run real PDF vendor and semantic contract tests
         shell: pwsh
