@@ -1,4 +1,4 @@
-name: APA External Readonly V1 - focused checks
+name: APA External Readonly V1 - Windows 3.11 and 3.12
 on:
   push:
     branches:
@@ -14,13 +14,17 @@ on:
 jobs:
   isolated-source-verification:
     runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12']
     permissions:
       contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: ${{ matrix.python }}
       - name: Compile only added files
         run: python -m py_compile scripts/apa_external_readonly.py scripts/apa_external_catalog.py scripts/install_apa_external_readonly.py
       - name: Focused boundary tests (no vendor install, no Archicad)
