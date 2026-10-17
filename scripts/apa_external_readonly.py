@@ -136,7 +136,7 @@ def ifc_qto(args):
 def _pdf_path_ops(path, height):
     """Preserve PDF path commands, with TOP-LEFT point coordinates throughout.
 
-    pdfplumber paths use PDF BOTTOM-LEFT y; line/curve .pts use TOP-LEFT y.
+    pdfplumber path coordinates AND line/curve .pts already use TOP-LEFT y.
     A cubic 'c' keeps all three control/endpoints exactly. Never tessellate.
     """
     rows = []
@@ -148,7 +148,7 @@ def _pdf_path_ops(path, height):
                 or (op == "c" and len(raw_points) == 3),
                 "MALFORMED_PDF_VECTOR_PATH")
         rows.append({"op": op, "pointsPt": [
-            [float(pt[0]), float(height - pt[1])] for pt in raw_points
+            [float(pt[0]), float(pt[1])] for pt in raw_points
         ]})
     return rows
 
