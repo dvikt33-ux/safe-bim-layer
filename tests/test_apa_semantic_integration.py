@@ -126,7 +126,7 @@ class SemanticReadOnlyTests(TestCase):
             vendor = root / "vendor"
             vendor.mkdir()
             (vendor / "inference_api.py").write_text("# vendor", encoding="utf-8")
-            weights = vendor / "weights.pt"
+            weights = vendor / "M2_DA_FT_v2_best.pt"
             weights.write_bytes(b"weights")
             with mock.patch.object(M, "SIDE", side), (
                  mock.patch.object(M, "TARGET", side / "models.json")):
