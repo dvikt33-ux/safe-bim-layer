@@ -150,3 +150,42 @@ GS::ObjectState GetNativeGroupMembersV1Command::Execute(const GS::ObjectState& p
  for(const auto& member:members)list(CreateGuidObjectState(member));
  return out;
 }
+
+
+GS::Optional<GS::UniString> UngroupNativeGroupV1Command::GetInputParametersSchema() const {
+ return R"APA({"type":"object","additionalProperties":false,"required":["groupId","sourceRef"],"properties":{"groupId":{"type":"object","additionalProperties":false,"required":["guid"],"properties":{"guid":{"type":"string","minLength":10}}},"sourceRef":{"type":"string","minLength":8}}})APA";
+}
+GS::Optional<GS::UniString> UngroupNativeGroupV1Command::GetRawResponseSchema() const {
+ return R"APA({"type":"object","properties":{"nativeModelWrites":{"type":"integer"},"previousGroupId":{"type":"object"},"releasedMembers":{"type":"array","items":{"type":"object"}},"error":{"type":"object"}},"additionalProperties":false})APA";
+}
+GS::ObjectState UngroupNativeGroupV1Command::Execute(const GS::ObjectState& p,GS::ProcessControl&) const {
+ const auto* id=p.Get("groupId");GS::UniString source;
+ if(!id||!p.Get("sourceRef",source)||source.GetLength()<8)
+  return CreateErrorResponse(APIERR_BADPARS,"Explicit source group required");
+ const auto group=GetGuidFromObjectState(*id);GS::Array<API_Guid> members;
+ auto err=APAGroupMembers(group,members);
+ if(err!=NoError)return CreateErrorResponse(err,"Group not found");
+ if(members.GetSize()<2||members.GetSize()>128)return CreateErrorResponse(APIERR_BADPARS,"Group outside bounded operation");
+ for(const auto& member:members){
+  API_Guid parent=APINULLGuid;err=ACAPI_Grouping_GetGroup(member,&parent);
+  if(err!=NoError||parent!=group)return CreateErrorResponse(APIERR_BADPARS,"Nested group requires explicitly selected hierarchy level");
+ }
+ short floor=0;err=APAGroupReadHeaders(members,floor);
+ if(err!=NoError)return CreateErrorResponse(err,"Members invalid");
+ err=ACAPI_CallUndoableCommand("APA ungroup native assembly",[&]()->GSErrCode {
+  auto result=ACAPI_Grouping_Tool(members,APITool_Ungroup,nullptr);
+  if(result!=NoError)return result;
+  for(const auto& member:members){
+   API_Guid parent=APINULLGuid;result=ACAPI_Grouping_GetGroup(member,&parent);
+   if(result!=NoError||parent!=APINULLGuid)return APIERR_BADPARS;
+   API_Elem_Head header={};header.guid=member;
+   result=ACAPI_Element_GetHeader(&header);if(result!=NoError)return result;
+  }
+  return NoError;
+ });
+ if(err!=NoError)return CreateErrorResponse(err,"Ungroup native readback failed; undo scope rejected");
+ GS::ObjectState out("nativeModelWrites",1,"previousGroupId",CreateGuidObjectState(group));
+ const auto& list=out.AddList<GS::ObjectState>("releasedMembers");
+ for(const auto& member:members)list(CreateGuidObjectState(member));
+ return out;
+}
