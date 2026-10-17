@@ -55,7 +55,12 @@ def update_from_checkout(checkout, manifest_path, apply=False):
     checkout=Path(checkout).resolve();m=json.loads(Path(manifest_path).read_text(encoding='utf8'))
     helpers={'apa_ac29_reusable_native_copy.py','apa_ac29_multi_prototype_native_copy.py',
              'apa_ac29_scene_reconciliation.py'}
-    modules=set(KNOWN)|{'apa_ac29_dynamic_write_scopes.py','apa_ac29_dynamic_native_verifiers.py'}|helpers
+    modules=(set(KNOWN)|{
+        'apa_ac29_dynamic_write_scopes.py',
+        'apa_ac29_dynamic_native_verifiers.py',
+        'apa_ac29_existing_create_verifiers.py',
+        'apa_ac29_existing_modify_verifiers.py',
+    }|helpers)
     worker=ROOT/'controllers'/'apa_ac29_autonomous_job_bridge.py'
     worker_key='controllers/'+worker.name
     targets={'scripts/'+name:ROOT/'scripts'/name for name in modules}
