@@ -11,6 +11,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 import apa_external_readonly as A
 import apa_external_catalog as Catalog
 import apa_external_router_activation as Activation
+import apa_external_session_factory as Session
+import upgrade_apa_external_readonly_clash as Upgrade
 
 
 class ExternalReadonlyTests(unittest.TestCase):
@@ -199,6 +201,62 @@ class ExternalReadonlyTests(unittest.TestCase):
             self.assertEqual(
                 result["observedRuns"]["PDFVectors"]["status"],
                 "EXECUTED_REAL_VENDOR_READ_ONLY_PASS")
+
+
+    def test_upgrade_only_the_reviewed_clash_configuration(self):
+        import hashlib
+        import json
+        with tempfile.TemporaryDirectory() as td:
+            install = Path(td)
+            (install / "venv" / "Scripts").mkdir(parents=True)
+            (install / "venv" / "Scripts" / "python.exe").touch()
+            latest = Upgrade.SRC.read_text(encoding="utf-8")
+            self.assertIn(Upgrade.NEW, latest)
+            baseline = latest.replace(Upgrade.NEW, Upgrade.OLD)
+            (install / "apa_external_readonly.py").write_text(baseline, encoding="utf-8")
+            (install / "apa_external_catalog.py").write_text("catalog", encoding="utf-8")
+            (install / "requirements-external-readonly.txt").write_text("pins", encoding="utf-8")
+            def sh(p):
+                return hashlib.sha256(p.read_bytes()).hexdigest()
+            receipt = {
+                "schema": "APA_EXTERNAL_READONLY_INSTALL_V1",
+                "status": "EXTERNAL_READONLY_INSTALLED_READY",
+                "adapterSHA256": sh(install / "apa_external_readonly.py"),
+                "catalogSHA256": sh(install / "apa_external_catalog.py"),
+                "requirementsSHA256": sh(install / "requirements-external-readonly.txt")
+            }
+            (install / "installation.json").write_text(json.dumps(receipt))
+            backup = install / "upgrade-ifcclash-intersection-v1"
+            with mock.patch.object(Upgrade, "FOLDER", install), (
+                 mock.patch.object(Upgrade, "BACKUP", backup)), (
+                 mock.patch.object(Upgrade.subprocess, "run", return_value=type(
+                    "Done", (), {"returncode": 0, "stderr": ""})())):
+                result = Upgrade.upgrade()
+                self.assertEqual(result["status"], "EXTERNAL_READONLY_IFCCLASH_ADAPTER_UPGRADED")
+                self.assertEqual((install / "apa_external_readonly.py").read_text(), latest)
+                self.assertEqual((backup / "apa_external_readonly.py.original").read_text(), baseline)
+                updated = json.loads((install / "installation.json").read_text())
+                self.assertEqual(updated["adapterSHA256"], sh(install / "apa_external_readonly.py"))
+                with self.assertRaisesRegex(ValueError, "ALREADY_UPGRADED"):
+                    Upgrade.review()
+
+    def test_session_factory_reuses_original_router_without_second_writer(self):
+        from archicad_dynamic_commands import DynamicCommands
+        router = DynamicCommands({"commands": {}, "common_schemas": {}})
+        def core_factory(schema, official, functional):
+            self.assertEqual(schema, "schema.json")
+            self.assertTrue(functional)
+            return router
+        with mock.patch.object(Session, "original_factory", return_value=core_factory), (
+             mock.patch.object(Catalog, "verified_environment",
+                               return_value=("python", "installed"))), (
+             mock.patch.object(Session, "attach_existing",
+                               side_effect=Catalog.register)):
+            actual = Session.native_command_router("schema.json")
+        self.assertIs(actual, router)
+        self.assertEqual(len(actual.local_handlers), 6)
+        self.assertTrue(all(actual.operation_kind(k) == "READ_ONLY"
+                            for k in actual.local_handlers))
 
 
 if __name__ == "__main__":
