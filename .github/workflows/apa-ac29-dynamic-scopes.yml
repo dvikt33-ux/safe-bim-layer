@@ -6,6 +6,8 @@ on:
       - "scripts/apa_ac29_dynamic_native_verifiers.py"
       - "scripts/archicad_project_accelerator.py"
       - "scripts/apa_ac29_scene_reconciliation.py"
+      - "scripts/apa_ac29_multi_prototype_native_copy.py"
+      - "scripts/apa_ac29_reusable_native_copy.py"
       - "tests/test_apa_ac29_dynamic_write_scopes.py"
       - ".github/workflows/apa-ac29-dynamic-scopes.yml"
   workflow_dispatch:

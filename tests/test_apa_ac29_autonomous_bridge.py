@@ -27,6 +27,11 @@ def sample(action="BDD114_ROOF_FINALIZE", name="bdd114-roof-20261017"):
 
 
 class GateTests(TestCase):
+    def setUp(self):
+        # Unit ingress cases must never consult a real installed deployment.
+        deployment=patch.object(bridge,'runtime_release',return_value=None)
+        deployment.start();self.addCleanup(deployment.stop)
+
     def test_model_fingerprint_consumes_existing_normalized_capture_once(self):
         import archicad_project_accelerator as A
         import archicad_bim_documentation as D
@@ -112,6 +117,30 @@ class GateTests(TestCase):
                     with unittest.mock.patch("pathlib.Path.is_dir", return_value=True):
                         with unittest.mock.patch("pathlib.Path.exists", return_value=False):
                             bridge.process_job("bdd114-roof-20261017")
+
+
+class RuntimeReceiptTests(TestCase):
+    def test_expanded_dependency_receipt_is_local_and_allowlisted(self):
+        helpers={'apa_ac29_reusable_native_copy.py','apa_ac29_multi_prototype_native_copy.py',
+                 'apa_ac29_scene_reconciliation.py'}
+        modules=set(bridge.MODULE_HASHES)|helpers|{
+            'apa_ac29_dynamic_write_scopes.py','apa_ac29_dynamic_native_verifiers.py'}
+        with TemporaryDirectory() as td:
+            root=Path(td);(root/'controllers').mkdir()
+            receipt={'schema':'APA_AC29_RUNTIME_RELEASE_V1','revision':'a'*40,
+                'workerSHA256':bridge.sha(Path(bridge.__file__)),
+                'moduleHashes':{name:'b'*64 for name in modules},
+                'controllerHashes':{name:'b'*64 for name in helpers},
+                'workingPlnSha256':'c'*64,'expectedGuidCount':298}
+            path=root/'controllers/runtime-release.json'
+            path.write_text(json.dumps(receipt),encoding='utf8')
+            with patch.object(bridge,'ROOT',root):
+                self.assertEqual(bridge.approved_guid_count(),298)
+                self.assertEqual(bridge.approved_saved_sha(),'c'*64)
+                receipt['controllerHashes']['../foreign.py']='b'*64
+                path.write_text(json.dumps(receipt),encoding='utf8')
+                with self.assertRaisesRegex(ValueError,'CONTROLLER_RECEIPT_INVALID'):
+                    bridge.runtime_release()
 
 
 if __name__ == "__main__":

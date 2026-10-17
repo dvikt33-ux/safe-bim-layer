@@ -10,6 +10,9 @@ import copy
 import math
 import re
 from pathlib import Path
+import json
+import sqlite3
+from contextlib import closing
 
 import apa_ac29_reusable_native_copy as SINGLE
 
@@ -120,11 +123,13 @@ def safe_native_lineage(row, *, parent=None):
 
 
 def body_fingerprint(element, source_anchor):
-    """Exact translated vertices + native face topology + body attributes.
+    """Translated physical BREP, independent of generated native numbering.
 
-    Lists retain native face/index ordering deliberately: if a provider
-    renumbers or changes source semantics, verification must not guess.
+    Reuse the existing oriented contour comparator. Native owner/body slots,
+    vertex/edge indices and normal-pool order can change during a true copy;
+    coordinates, oriented face loops, resolved normals and attributes cannot.
     """
+    import archicad_connected_components as C
     bodies = element.get("bodies") or []
     require(isinstance(bodies, list) and bodies,
             "MULTI_COPY_SOURCE_NATIVE_BODY_MISSING")
@@ -146,18 +151,49 @@ def body_fingerprint(element, source_anchor):
         faces = body.get("faces")
         require(isinstance(faces, list) and faces,
                 "MULTI_COPY_NO_NATIVE_FACES")
+        canonical_faces=[]
         for face in faces:
             require(isinstance(face, dict) and
-                    isinstance(face.get("contours"), list) and
+                    isinstance(face.get("contours"), list) and face['contours'] and
                     all(isinstance(ids, list) and len(ids) >= 3 and
                         all(type(idx) is int and 0 <= idx < len(vertices)
                             for idx in ids) for ids in face["contours"]),
                     "MULTI_COPY_FACE_CONTOURS_INVALID")
+            contours=face['contours']
+            geometry=C.body_face_keys({
+                'vertices':[dict(zip(COORDS,v)) for v in vnorm],
+                'polygons':[{'vertexIds':contours[0],'holes':contours[1:]}]})[0]
+            properties={k:copy.deepcopy(v) for k,v in face.items() if k not in {
+                'contours','vertices','holes','nativeFaceIndex',
+                'signedLocalNormalIndex','signedNativeEdgeReferences'}}
+            normal=None
+            if 'signedLocalNormalIndex' in face:
+                index=face['signedLocalNormalIndex'];normals=body.get('localNormals',[])
+                require(type(index) is int and index!=0 and 0<abs(index)<=len(normals),
+                        'MULTI_COPY_NATIVE_NORMAL_REFERENCE_INVALID')
+                value=normals[abs(index)-1];sign=1 if index>0 else -1
+                require(set(value)==set(COORDS) and all(type(value[k]) in (int,float)
+                    and math.isfinite(value[k]) for k in COORDS),'MULTI_COPY_NATIVE_NORMAL_INVALID')
+                normal=tuple(round(sign*value[k],7) for k in COORDS)
+            canonical_faces.append({'geometry':geometry,'normal':normal,'properties':properties})
+        canonical_faces.sort(key=lambda row:(row['geometry'],C.RUN.canonical(row['properties'])))
+        canonical_edges=[]
+        for edge in body.get('edges',[]):
+            ids=edge.get('vertices',[])
+            require(len(ids)==2 and all(type(i) is int and 0<=i<len(vnorm) for i in ids),
+                    'MULTI_COPY_NATIVE_EDGE_REFERENCE_INVALID')
+            canonical_edges.append({'endpoints':sorted(vnorm[i] for i in ids),
+                'properties':{k:copy.deepcopy(v) for k,v in edge.items()
+                    if k not in {'vertices','nativeEdgeIndex'}}})
+        canonical_edges.sort(key=lambda row:(row['endpoints'],C.RUN.canonical(row['properties'])))
+        if 'parentGuid' in body:
+            require(body['parentGuid'].lower()==element.get('guid','').lower(),
+                    'MULTI_COPY_NATIVE_BODY_OWNER_MISMATCH')
         other = {k: copy.deepcopy(v) for k, v in body.items()
-                 if k not in ("vertices", "faces")}
-        output.append({"relativeVertices": vnorm,
-                       "faces": copy.deepcopy(faces), "bodyProperties": other})
-    return output
+                 if k not in {'vertices','faces','edges','localNormals','nativeBodyIndex','parentGuid'}}
+        output.append({'relativeVertices':sorted(vnorm),'edges':canonical_edges,
+                       'faces':canonical_faces,'bodyProperties':other})
+    return sorted(output,key=C.RUN.canonical)
 
 
 def solid_fingerprint(root, children, anchor, *, parent_guid):
@@ -381,6 +417,100 @@ def verify_after_copy(task, old, current, baseline, typed_details,
             "unchangedPrototypeGuids": sorted(
                 group["prototypeGuid"] for group in task["prototypes"]),
             "newGuidCount": len(newly), "newTypeCounts": counts}
+
+
+def reconcile_existing_multi_task(task, *, original_snapshot, api, writer, router,
+                                  APA, RUN, components, capture_native, current_sha):
+    """Read-only acceptance of ONE already attempted copy; never re-send it."""
+    validate_task(task,expected_project_sha=current_sha(),expected_project_path=RUN.EXPECTED_PATH)
+    require(api.write_attempts==0,'MULTI_RECONCILE_FRESH_EVIDENCE_API_REQUIRED')
+    old={e['guid'].lower():e for e in original_snapshot['elements']}
+    require(len(old)==len(original_snapshot['elements'])==task['expectedGuidCount'] and
+        RUN.digest(sorted(old))==task['expectedGuidSetHash'] and
+        RUN.digest({g:components.ROOF.geometry_signature(old[g]) for g in sorted(old)})==
+        task['expectedModelSignatureHash'],'MULTI_RECONCILE_ORIGINAL_APPROVED_SNAPSHOT_DRIFT')
+    # Bind the actual previous dispatch to the same task, not just its label.
+    with closing(sqlite3.connect(f'file:{Path(writer.journal_path).as_posix()}?mode=ro',uri=True)) as db:
+        row=db.execute('SELECT state,result FROM scenes WHERE scene_id=?',(task['sceneId'],)).fetchone()
+        require(row is not None and row[0]=='PARTIAL_OR_UNKNOWN_OUTCOME',
+                'MULTI_RECONCILE_REQUIRES_ORIGINAL_UNKNOWN_SCENE')
+        attempted=json.loads(row[1]);prior_hash=RUN.digest(attempted)
+    ids=sorted(APA.inventory_guids(api));post=capture_native(api,ids)
+    current={e['guid'].lower():e for e in post['elements']}
+    require(set(current)==set(ids),'MULTI_RECONCILE_COMPLETE_LIVE_BREP_REQUIRED')
+    new=set(current)-set(old)
+    roots=sorted(g for g in new if current[g]['type'] in TYPES)
+    source_ids=[g['prototypeGuid'] for g in task['prototypes']]
+    typed=SINGLE.column_details(api,source_ids+roots)
+    groups,_=prepare_verified_groups(task,old,typed,router,RUN)
+    parameters={'elementsWithMoveVectors':[
+        {'elementId':{'guid':group['prototypeGuid']},'moveVector':delta,'copy':True}
+        for group in groups for delta in group['displacements']]}
+    require(attempted.get('command')=='MoveElements' and
+        attempted.get('intent',{}).get('parameters')==parameters and
+        attempted.get('nativeResponse',{}).get('executionResults')==
+        [{'success':True}]*sum(len(g['targets']) for g in task['prototypes']),
+        'MULTI_RECONCILE_UNKNOWN_DISPATCH_NOT_BOUND_TO_EXACT_TASK')
+    fingerprints={}
+    for group in task['prototypes']:
+        guid=group['prototypeGuid'];kind=group['prototypeType'];anchor=group['sourceAnchor']
+        fingerprints[guid]={
+            'typed':source_detail_fingerprint(typed[guid],kind,anchor),
+            'BREP':solid_fingerprint(old[guid],owned_children(old,guid,kind),anchor,parent_guid=guid)}
+    proof=verify_after_copy(task,set(old),current,old,typed,fingerprints,RUN)
+    require(components.retained_geometry_signatures(post,sorted(old))==
+        components.retained_geometry_signatures(original_snapshot,sorted(old)),
+        'MULTI_RECONCILE_OLD_MODEL_GEOMETRY_OR_SEMANTICS_CHANGED')
+    require(current_sha()==task['projectSha256'] and api.write_attempts==0,
+            'MULTI_RECONCILE_SAVED_FILE_OR_NATIVE_WRITE_DRIFT')
+    return {'status':'EXISTING_MULTI_COPY_INDEPENDENT_NATIVE_RECONCILIATION_PASS',
+        'originalSceneId':task['sceneId'],'originalSceneStatePreserved':row[0],
+        'originalJournalResultHash':prior_hash,'taskHash':RUN.digest(task),
+        'newRootGuids':roots,'newGuids':sorted(new),'finalGuidCount':len(ids),
+        'nativeReadback':proof,'retainedSignatures':components.retained_geometry_signatures(post,ids),
+        'guidSetHash':RUN.digest(ids),'modelWrites':0,'nativeCopyCalls':0,'automaticRetry':False}
+
+
+def save_reconciled_multi_task(task, *, save_scene_id, original_snapshot, api, writer,
+                               router, APA, RUN, components, capture_native,
+                               current_sha, save_guard):
+    """Fresh independent reads followed by ONE existing journaled SaveProject.
+
+    Keeps the failed copy scene UNKNOWN forever; this is a separate accepted
+    reconciliation/save scene, never a retry of MoveElements or a new writer.
+    """
+    require(save_scene_id not in (task['sceneId'],task['saveSceneId']),
+            'MULTI_RECONCILE_DISTINCT_SAVE_SCENE_REQUIRED')
+    SINGLE.stored_scenes_clear(writer.journal_path,(save_scene_id,))
+    receipt=reconcile_existing_multi_task(task,original_snapshot=original_snapshot,
+        api=api,writer=writer,router=router,APA=APA,RUN=RUN,components=components,
+        capture_native=capture_native,current_sha=current_sha)
+    router.review_policy('SaveProject','TRANSACTION','PROJECT',
+        {'source':task['sourceEvidenceRef'],'sha256':router.contract_hash('SaveProject')})
+    save_guard.enable_after_verified_copy()
+    def before_save(native_api):
+        with closing(sqlite3.connect(f'file:{Path(writer.journal_path).as_posix()}?mode=ro',uri=True)) as db:
+            state,result=db.execute('SELECT state,result FROM scenes WHERE scene_id=?',(task['sceneId'],)).fetchone()
+        require(state=='PARTIAL_OR_UNKNOWN_OUTCOME' and RUN.digest(json.loads(result))==
+            receipt['originalJournalResultHash'] and current_sha()==task['projectSha256'] and
+            RUN.digest(sorted(APA.inventory_guids(native_api)))==receipt['guidSetHash'],
+            'MULTI_RECONCILE_BASELINE_OR_ORIGINAL_JOURNAL_CHANGED')
+        return {'status':'INDEPENDENT_EXISTING_MULTI_COPY_SAVE_READY_PASS',
+                'reconciliationHash':RUN.digest(receipt)}
+    def after_save(reply,_):
+        require(reply=={'success':True} and save_guard.new_saved_sha==current_sha() and
+            RUN.digest(sorted(APA.inventory_guids(api)))==receipt['guidSetHash'],
+            'MULTI_RECONCILE_SAVE_NOT_CONFIRMED_NEVER_RETRY')
+        return {'status':'RECONCILED_EXISTING_MULTI_COPY_SAVED_PASS',
+            'savedSha256':save_guard.new_saved_sha,'originalCopySceneStillUnknown':True,
+            'reconciliationHash':RUN.digest(receipt)}
+    result=router.execute(writer,save_scene_id,router.prepare('SaveProject',{}),[],
+        receipt['retainedSignatures'],task['projectSha256'],task['authorizationRef'],
+        'PROJECT',after_save,verify_before=before_save)
+    require(result.get('status')=='PASS','MULTI_RECONCILE_SAVE_UNKNOWN_NO_RETRY')
+    return {'status':'RECONCILED_EXISTING_MULTI_COPY_AND_SAVE_PASS',
+        'reconciliation':receipt,'save':result,'nativeCopyCalls':0,'nativeSaveCalls':1,
+        'savedSha256':save_guard.new_saved_sha,'automaticRetry':False}
 
 
 def execute_multi_task(task, *, api, writer, router, APA, RUN, components,

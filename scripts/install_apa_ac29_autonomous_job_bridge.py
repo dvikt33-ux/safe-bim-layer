@@ -53,10 +53,13 @@ def update_from_checkout(checkout, manifest_path, apply=False):
     """
     require(sys.platform=='win32','WINDOWS_REQUIRED')
     checkout=Path(checkout).resolve();m=json.loads(Path(manifest_path).read_text(encoding='utf8'))
-    modules=set(KNOWN)|{'apa_ac29_dynamic_write_scopes.py','apa_ac29_dynamic_native_verifiers.py'}
+    helpers={'apa_ac29_reusable_native_copy.py','apa_ac29_multi_prototype_native_copy.py',
+             'apa_ac29_scene_reconciliation.py'}
+    modules=set(KNOWN)|{'apa_ac29_dynamic_write_scopes.py','apa_ac29_dynamic_native_verifiers.py'}|helpers
     worker=ROOT/'controllers'/'apa_ac29_autonomous_job_bridge.py'
-    targets={name:ROOT/'scripts'/name for name in modules}
-    targets[worker.name]=worker
+    worker_key='controllers/'+worker.name
+    targets={'scripts/'+name:ROOT/'scripts'/name for name in modules}
+    targets.update({'controllers/'+name:ROOT/'controllers'/name for name in helpers|{worker.name}})
     require(set(m)=={'schema','revision','oldHashes','workingPath','workingSha256',
                      'protectedPath','protectedSha256','expectedGuidCount'} and
         m['schema']=='APA_AC29_LOCAL_RUNTIME_UPDATE_V1' and
@@ -81,7 +84,7 @@ def update_from_checkout(checkout, manifest_path, apply=False):
     for name,target in targets.items():
         current=sha(target) if target.exists() else None
         require(current==m['oldHashes'][name],'UPDATE_INSTALLED_FILE_DRIFT:'+name)
-        data=subprocess.check_output(['git','show',revision+':scripts/'+name],cwd=checkout)
+        data=subprocess.check_output(['git','show',revision+':scripts/'+target.name],cwd=checkout)
         compile(data.decode('utf-8-sig'),name,'exec');payload[name]=data
     # Immutable Git data, not potentially dirty checkout source files.
     updated_hashes={name:hashlib.sha256(data).hexdigest() for name,data in payload.items()}
@@ -108,7 +111,9 @@ def update_from_checkout(checkout, manifest_path, apply=False):
     backup=ROOT/'runtime-code-backups'/stamp;backup.mkdir(parents=True,exist_ok=False)
     release_path=worker.parent/'runtime-release.json'
     for name,target in targets.items():
-        if target.exists():shutil.copy2(target,backup/name)
+        if target.exists():
+            (backup/name).parent.mkdir(parents=True,exist_ok=True)
+            shutil.copy2(target,backup/name)
     if release_path.exists():shutil.copy2(release_path,backup/'runtime-release.json')
     (backup/'update-manifest.json').write_text(json.dumps(m,indent=2),encoding='utf8')
     # No new worker until the exact old tree is stopped and the same singleton
@@ -133,8 +138,9 @@ def update_from_checkout(checkout, manifest_path, apply=False):
             staged.write_bytes(payload[name]);staged.replace(target)
             require(sha(target)==updated_hashes[name],'UPDATE_FILE_READBACK_FAILED:'+name)
         release={'schema':'APA_AC29_RUNTIME_RELEASE_V1','revision':revision,
-            'workerSHA256':updated_hashes[worker.name],
-            'moduleHashes':{name:updated_hashes[name] for name in modules},
+            'workerSHA256':updated_hashes[worker_key],
+            'moduleHashes':{name:updated_hashes['scripts/'+name] for name in modules},
+            'controllerHashes':{name:updated_hashes['controllers/'+name] for name in helpers},
             'workingPlnSha256':m['workingSha256'],'expectedGuidCount':m['expectedGuidCount']}
         staged=release_path.with_suffix('.writing')
         staged.write_text(json.dumps(release,indent=2),encoding='utf8');staged.replace(release_path)
@@ -163,7 +169,7 @@ def update_from_checkout(checkout, manifest_path, apply=False):
         if marker.exists():
             started=json.loads(marker.read_text(encoding='utf8'))
             live=processes(worker)
-            if (started.get('workerSHA256')==updated_hashes[worker.name] and
+            if (started.get('workerSHA256')==updated_hashes[worker_key] and
                 started.get('pid') in {r['ProcessId'] for r in live}):break
         require(spawned.poll() is None,'UPDATED_RECEIVER_EXITED')
         time.sleep(.25)
