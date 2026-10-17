@@ -25,10 +25,11 @@ REPAIR_TABLE = "apa_functional_house_slab_repair_v1"
 sys.path.insert(0, str(ROOT / "scripts"))
 import archicad_scene_run as RUN
 import archicad_scene_v1 as SCENE
+import archicad_project_accelerator as A
 
 ALLOWED_READS = {
     "GetProjectInfo", "GetAllElements", "GetDetailsOfElements",
-    "GetStories", "GetAddOnVersion"
+    "GetStories", "GetAddOnVersion", "GetSubelementsOfHierarchicalElements"
 }
 
 def read(command, params=None):
@@ -80,8 +81,13 @@ def main():
         die("REPAIRED_ORIGINAL_25_SNAPSHOT_NOT_VERIFIED")
     # Seeded first five elements are represented in the suffix scene result,
     # not duplicated as SQLite steps; only the seven new writes get rows.
-    if len(first) != 5 or len(last) != 7:
-        die("EXPECTED_ORIGINAL_FIVE_AND_SUFFIX_SEVEN_WRITE_ROWS")
+    if (len(first) != 5 or len(last) != 7
+            or [sid for sid,_,_ in first] !=
+            ["wall-south","wall-east","wall-north","wall-west","slab"]
+            or [state for _,state,_ in first] !=
+            ["PASS","PASS","PASS","PASS","CREATED_UNVERIFIED"]
+            or any(state != "PASS" for _,state,_ in last)):
+        die("ORIGINAL_FIVE_AND_SUFFIX_SEVEN_LEDGER_STATES_MISMATCH")
     final_result = json.loads(later[1])
     native = read("GetAllElements").get("elements")
     if not isinstance(native, list):
@@ -130,8 +136,47 @@ def main():
                            "floorIndex": row.get("floorIndex")})
         except Exception as exc:
             extras.append({"guid": guid, "readbackError": str(exc)})
+    # Reuse the existing APA native-hierarchy verifier. Four automatically
+    # created ColumnSegments are physical children, not four extra roots.
+    columns = {sid: {"guid": guid, "kind": "Column"}
+               for sid, guid, state in suffix_new
+               if plan[sid]["command"] == "CreateColumns"}
+    column_children = A.column_subelements(read, columns)
+    owned_segments = sorted(g for children in column_children.values()
+                            for g in children)
+    hierarchy_verified = (
+        len(columns) == 4
+        and len(column_children) == 4
+        and set(column_children) == {v["guid"].lower() for v in columns.values()}
+        and all(len(children) == 1 for children in column_children.values())
+        and len(owned_segments) == len(set(owned_segments)) == 4
+        and owned_segments == extra
+        and all(e.get("type") == "ColumnSegment" and e.get("floorIndex") == 0
+                for e in extras)
+    )
+    accepted = (
+        before[0] == "PARTIAL_OR_UNKNOWN_OUTCOME"
+        and later[0] == "PARTIAL_OR_UNKNOWN_OUTCOME"
+        and final_result.get("failedStep") == "FINAL_READBACK"
+        and repair_row[0] == "READBACK_PASS"
+        and len(original_guids) == 25
+        and len(suffix_new) == 7
+        and len(current) == 36
+        and not missing
+        and hierarchy_verified
+        and len(detail_checks) == 12
+        and all(item["status"] == "PASS" for item in detail_checks)
+        and hashlib.sha256(PLN.read_bytes()).hexdigest() == SHA
+    )
     report = {
-        "status": "READ_ONLY_FINAL_INVENTORY_AUDIT",
+        "status": "NATIVE_12_ELEMENT_SCENE_VERIFIED_UNSAVED"
+                  if accepted else "READ_ONLY_FINAL_INVENTORY_UNRESOLVED",
+        "sourceJournalRetainedPartial": True,
+        "hierarchyOwnershipVerified": hierarchy_verified,
+        "ownedColumnSegments": column_children,
+        "ownedPhysicalSegmentCount": len(owned_segments),
+        "nativeRootSceneCount": 12,
+        "nativeModelWrites": 0,
         "sourceSavedPlnUnchanged": True,
         "project": str(PLN),
         "port": PORT,
@@ -155,7 +200,7 @@ def main():
         "plnWrites": 0,
     }
     print(json.dumps(report, ensure_ascii=False, indent=2))
-    return 0
+    return 0 if accepted else 2
 
 if __name__ == "__main__":
     try:
