@@ -1,0 +1,27 @@
+name: APA AC29 Six-Verifier Release
+on:
+  pull_request:
+    paths:
+      - 'scripts/apa_ac29_autonomous_job_bridge.py'
+      - 'scripts/release_apa_ac29_six_verifiers.py'
+      - 'tests/test_apa_ac29_six_verifier_release.py'
+      - '.github/workflows/apa-ac29-six-verifier-release.yml'
+  workflow_dispatch:
+jobs:
+  offline-release-contracts:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check installed-path bootstrap and unchanged receiver syntax
+        run: python -m py_compile scripts/apa_ac29_autonomous_job_bridge.py scripts/release_apa_ac29_six_verifiers.py
+      - name: Test new six-verifier receipt compatibility without Archicad
+        env:
+          PYTHONUTF8: '1'
+        run: python -m unittest discover -s tests -p 'test_apa_ac29_six_verifier_release.py' -v
