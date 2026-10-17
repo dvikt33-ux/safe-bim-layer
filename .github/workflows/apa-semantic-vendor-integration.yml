@@ -1,0 +1,39 @@
+name: APA Semantic Read Only Vendor Integration
+on:
+  push:
+    branches:
+      - feature/apa-semantic-ready-tools-20261018
+  pull_request:
+    branches:
+      - feature/apa-external-pdf-lossless-20261018
+  workflow_dispatch:
+jobs:
+  pymupdf-real-vendor:
+    name: PyMuPDF Real PDF and semantic contract - Python ${{ matrix.python }}
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Compile semantic worker, adapter, installer, tests
+        shell: pwsh
+        run: |
+          python -m py_compile scripts/apa_semantic_readonly.py scripts/apa_semantic_catalog.py scripts/apa_semantic_entrypoint.py scripts/install_apa_semantic_bridge.py tests/test_apa_semantic_integration.py
+          if ($LASTEXITCODE -ne 0) { throw "Semantic script compilation failed" }
+      - name: Install pinned PyMuPDF vendor
+        shell: pwsh
+        run: |
+          python -m pip install --only-binary=:all: pymupdf==1.26.4
+          if ($LASTEXITCODE -ne 0) { throw "PyMuPDF install failed" }
+      - name: Run real PDF vendor and semantic contract tests
+        shell: pwsh
+        run: |
+          python -m unittest discover -s tests -p test_apa_semantic_integration.py -v
+          if ($LASTEXITCODE -ne 0) { throw "Semantic tests failed" }
