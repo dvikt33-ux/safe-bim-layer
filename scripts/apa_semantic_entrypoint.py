@@ -1,4 +1,4 @@
-"""Production opt-in bridge: original APA Router + six vendors + 3 semantic.
+"""Production opt-in bridge: original APA Router + six vendors + 4 semantic.
 
 No custom dispatcher, no monkey patch, no writer. Existing APA factory is
 loaded with its existing SHA receipts by apa_external_analytics_entrypoint.
@@ -16,6 +16,7 @@ OLD = ROOT / "external-tools" / "apa-readonly-v1"
 SIDE = ROOT / "external-tools" / "apa-semantic-v1"
 EXT = {
     "PDFPaths": {".pdf"},
+    "PDFPageRaster": {".pdf"},
     "OpenBIMSegments": {".png", ".jpg", ".jpeg"},
     "RasterFloorplan": {".png", ".jpg", ".jpeg"},
 }
@@ -50,7 +51,7 @@ def factory_session():
                       SIDE / "apa_semantic_catalog.py")
     receipt = ext.register(router)
     keys = receipt["registered"]
-    require(len(keys) == 3
+    require(len(keys) == 4
             and all(key in router.catalog["commands"]
                     and router.operation_kind(key) == "READ_ONLY"
                     and router.catalog["commands"][key]["api"] == "local-python"
@@ -71,6 +72,7 @@ def run(command=None, a=None, output=None, page=1):
             "originalSixCommandsPreserved": True,
             "modelReadiness": {
                 "PDFPaths": "PYMUPDF_INSTALLED_CHECKED_AT_EXECUTION",
+                "PDFPageRaster": "PYMUPDF_INSTALLED_CHECKED_AT_EXECUTION",
                 "OpenBIMSegments": "REQUIRES_SEPARATE_VERIFIED_MODEL_CONFIG",
                 "RasterFloorplan": "REQUIRES_SEPARATE_VERIFIED_MODEL_CONFIG",
             },
@@ -86,7 +88,7 @@ def run(command=None, a=None, output=None, page=1):
             "SEMANTIC_OUTPUT_NOT_NEW_OR_INSIDE_STABLE_APA")
     key = "AddOn.APASemantic." + command
     params = {"a": str(src), "output": str(out)}
-    if command == "PDFPaths":
+    if command in {"PDFPaths", "PDFPageRaster"}:
         require(page >= 1, "SEMANTIC_PAGE_MUST_BE_POSITIVE")
         params["page"] = page
     ticket = router.prepare(key, params)
