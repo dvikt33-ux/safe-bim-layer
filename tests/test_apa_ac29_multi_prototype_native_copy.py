@@ -55,6 +55,15 @@ def element(kind, vertices=None, *, parent=None):
 
 
 class TaskValidation(unittest.TestCase):
+    def test_reconciliation_cannot_reuse_copy_or_original_save_scene(self):
+        t=task()
+        for scene in (t['sceneId'],t['saveSceneId']):
+            with self.assertRaisesRegex(ValueError,'DISTINCT_SAVE_SCENE_REQUIRED'):
+                multi.save_reconciled_multi_task(t,save_scene_id=scene,
+                    original_snapshot=None,api=None,writer=None,router=None,
+                    APA=None,RUN=None,components=None,capture_native=None,
+                    current_sha=None,save_guard=None)
+
     def check(self, t):
         return multi.validate_task(
             t, expected_project_sha="1"*64,
