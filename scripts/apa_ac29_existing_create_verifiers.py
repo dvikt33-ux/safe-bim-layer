@@ -16,7 +16,7 @@ from apa_ac29_dynamic_write_scopes import NativeVerifier
 SLOTS = {
     "CreateBeams": ("beamsData", "Beam", "BeamSegment"),
     "CreateWalls": ("wallsData", "Wall", None),
-    "CreateSlabs": ("slabsData", "Slab", None),
+    "CreateRoofs": ("roofsData", "Roof", None),
 }
 BEAM_KEYS = frozenset({
     "begCoordinate", "endCoordinate", "zCoordinate", "floorIndex",
@@ -29,9 +29,10 @@ WALL_REQUIRED = frozenset({
     "height", "thickness", "structureType", "buildingMaterialId",
 })
 WALL_ALLOWED = WALL_REQUIRED | {"offset", "arcAngle", "referenceLineLocation"}
-SLAB_REQUIRED = frozenset({
+ROOF_KEYS = frozenset({
     "polygonCoordinates", "level", "thickness", "floorIndex",
-    "structureType", "buildingMaterialId",
+    "structureType", "buildingMaterialId", "pivotLine", "angle",
+    "eavesOverhang",
 })
 
 
@@ -117,26 +118,37 @@ def checked_source(command, parameters):
         z = (source["zCoordinate"]-1e-4,
              source["zCoordinate"]+source["height"]+1e-4)
     else:
-        # Tapir 1.5.10 CreateSlabs has no structureType/buildingMaterialId.
-        # A source-qualified slab needs verified defaults or a separate
-        # ModifySlabs transaction; never send unsupported material keys.
-        need(False, "APA_SCOPED_SLAB_SOURCE_DEFAULTS_NOT_BOUND")
-        need(set(source) == SLAB_REQUIRED and
+        # The existing NativeAdapter can verify a single-plane Basic Roof.
+        # Source must explicitly fix the pivot, angle, eaves and material.
+        need(command == "CreateRoofs" and set(source) == ROOF_KEYS and
              source["structureType"] == "Basic" and
-             finite(source.get("level")) and
-             finite(source.get("thickness")) and
+             all(finite(source.get(k)) for k in
+                 ("level", "thickness", "angle", "eavesOverhang")) and
              0 < source["thickness"] <= 3 and
+             0 < source["angle"] <= 1.0 and
+             same(source["eavesOverhang"], 0) and
              isinstance(source.get("polygonCoordinates"), list) and
-             len(source["polygonCoordinates"]) >= 3,
-             "APA_SCOPED_CREATE_ONLY_EXPLICIT_BASIC_SLAB")
+             len(source["polygonCoordinates"]) >= 3 and
+             isinstance(source.get("pivotLine"), dict) and
+             set(source["pivotLine"]) == {"begCoordinate", "endCoordinate"},
+             "APA_SCOPED_CREATE_EXACT_SINGLE_PLANE_BASIC_ROOF_REQUIRED")
         positions = [point2(p) for p in source["polygonCoordinates"]]
         need(len(set(positions)) >= 3,
-             "APA_SCOPED_CREATE_NONDEGENERATE_SLAB_POLYGON_REQUIRED")
-        xy = [(min(p[i] for p in positions), max(p[i] for p in positions))
-              for i in (0, 1)]
-        # Conservative envelope accommodates both top-reference variants.
-        z = (source["level"]-source["thickness"]-1e-4,
-             source["level"]+source["thickness"]+1e-4)
+             "APA_SCOPED_CREATE_NONDEGENERATE_ROOF_POLYGON_REQUIRED")
+        pivot_a = point2(source["pivotLine"]["begCoordinate"])
+        pivot_b = point2(source["pivotLine"]["endCoordinate"])
+        pivot_length = math.hypot(pivot_b[0]-pivot_a[0],
+                                  pivot_b[1]-pivot_a[1])
+        need(pivot_length > 0.01,
+             "APA_SCOPED_CREATE_NONZERO_ROOF_PIVOT_REQUIRED")
+        dist = max(abs((p[0]-pivot_a[0])*(pivot_b[1]-pivot_a[1]) -
+                       (p[1]-pivot_a[1])*(pivot_b[0]-pivot_a[0])) /
+                   pivot_length for p in positions)
+        pad = source["thickness"] + 1e-3
+        xy = [(min(p[i] for p in positions)-pad,
+               max(p[i] for p in positions)+pad) for i in (0, 1)]
+        rise = math.tan(source["angle"])*dist
+        z = (source["level"]-rise-pad, source["level"]+rise+pad)
     need(all(finite(lo) and finite(hi) and lo < hi and
              abs(lo) <= 10000 and abs(hi) <= 10000
              for lo, hi in [*xy, z]),
@@ -210,20 +222,16 @@ def verify_existing_create_after(*, api, command, parameters, native_response,
     need(set(rows) == after_guids and rows[guid]["type"] == kind,
          "APA_SCOPED_CREATE_NATIVE_ROOT_TYPE_OR_INVENTORY_MISMATCH")
     detail = requested_details(api, guid)
-    if command == "CreateBeams":
-        # Reuse existing native typed geometry/segment/material acceptance.
-        import archicad_connected_components as C
+    if command in ("CreateBeams", "CreateRoofs"):
+        # Strict NativeAdapter readback is reused, not reimplemented.
         adapter = NativeAdapter(command)
-        adapter.resolve({"params": parameters}, {}, {})
+        if command == "CreateBeams":
+            adapter.resolve({"params": parameters}, {}, {})
         adapter.verify(api, guid, parameters, detail, 0, 0.0)
     else:
         verify_readback(
             command, parameters, detail,
-            expected_floor=0, expected_story_level=0.,
-            expected_slab_material_guid=(
-                item["buildingMaterialId"]["guid"]
-                if command == "CreateSlabs" else None),
-            slab_level_is_absolute=command == "CreateSlabs")
+            expected_floor=0, expected_story_level=0.)
     related = [(g, row) for g, row in rows.items() if
                (row.get("relationships", {}).get("hostGuid") or "").lower()
                == guid]
@@ -267,6 +275,11 @@ def extended_verifiers():
         "VerifiedNativeBasicWall": NativeVerifier(
             verifier_id="VerifiedNativeBasicWall",
             command="CreateWalls", effect="CREATE",
+            before=verify_existing_create_before,
+            after=verify_existing_create_after),
+        "VerifiedNativeBasicRoof": NativeVerifier(
+            verifier_id="VerifiedNativeBasicRoof",
+            command="CreateRoofs", effect="CREATE",
             before=verify_existing_create_before,
             after=verify_existing_create_after),
     }
