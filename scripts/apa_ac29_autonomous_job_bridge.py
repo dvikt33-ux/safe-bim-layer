@@ -231,6 +231,38 @@ def capture_roof_review(job, folder):
             "next": "REVIEW_GEOMETRY_AND_APPROVE_VERIFIED_X_BEFORE_ONE_SCENEWRITER_BATCH"}
 
 
+def capture_approved_bdd114_copy(job, folder):
+    """Only user's fixed seven-stud request; original APA writes and SQLite."""
+    require(job["jobId"] == COPY_JOB_ID and job["action"] == "BDD114_COPY_SAVE",
+            "UNAPPROVED_MODEL_WRITE_TASK")
+    require(COPY_ADAPTER.is_file() and
+            git_sha(COPY_ADAPTER.read_bytes()) == COPY_ADAPTER_BLOB_SHA1,
+            "BDD114_WRITE_ADAPTER_MISSING_OR_CHANGED")
+    require((folder / "attempted.json").is_file(),
+            "NATIVE_WRITE_REQUIRES_DURABLE_RECEIVER_ATTEMPT")
+    cmd = [sys.executable, str(COPY_ADAPTER),
+           "--job-folder", str(folder), "--approval", COPY_APPROVAL]
+    proc = subprocess.run(cmd, capture_output=True, timeout=600,
+                          encoding="utf-8", errors="replace", cwd=ROOT)
+    log = folder / "native-write-output.txt"
+    log.write_text(proc.stdout + "\n" + proc.stderr, encoding="utf-8")
+    detail_path = folder / "native-write-result.json"
+    report = json.loads(detail_path.read_text(encoding="utf-8")) if detail_path.is_file() else {}
+    require(proc.returncode == 0 and
+            report.get("status") == "BDD114_SEVEN_NATIVE_COPIES_AND_SAVE_PASS" and
+            report.get("finalGuidCount") == 304 and
+            report.get("copyCalls") == 1 and report.get("saveCalls") == 1 and
+            report.get("savedSha256") and report["savedSha256"] != BASE_SHA and
+            sha(WORKING) == report["savedSha256"] and sha(ORIGINAL) == SOURCE_SHA,
+            "BDD114_WRITE_OUTCOME_UNKNOWN_DO_NOT_REPLAY_OR_RESAVE")
+    return {"status": report["status"], "guidCount": 304,
+            "newColumnGuids": report["newColumnGuids"],
+            "savedWorkingPlnSha256": report["savedSha256"],
+            "nativeMoveCalls": 1, "nativeSaveCalls": 1,
+            "nativeBuildExecuted": True, "modelWrites": 2,
+            "automaticRetry": False}
+
+
 def durable_write(path, obj):
     temp = path.with_suffix(".writing")
     with temp.open("w", encoding="utf-8") as f:
@@ -281,6 +313,8 @@ def process_job(name):
     try:
         if job["action"] == "BDD114_ROOF_FINALIZE":
             response = capture_roof_review(job, folder)
+        elif job["action"] == "BDD114_COPY_SAVE":
+            response = capture_approved_bdd114_copy(job, folder)
         else:
             response = capture_read_task(job, folder)
         response["jobStatus"] = "COMPLETE"
@@ -292,7 +326,7 @@ def process_job(name):
                "sourceBlob": source_blob,
                "finishedAt": current_utc().isoformat(),
                "result": response, "automaticRetry": False,
-               "modelWritesAuthorized": False}
+               "modelWritesAuthorized": job["action"] == "BDD114_COPY_SAVE"}
     durable_write(folder / "result.json", payload)
     upload_result(name, folder)
 
