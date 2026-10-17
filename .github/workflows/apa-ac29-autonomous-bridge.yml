@@ -20,5 +20,5 @@ jobs:
           python-version: "3.11"
       - name: Compile only new bridge/installer
         run: python -m py_compile scripts/apa_ac29_autonomous_job_bridge.py scripts/install_apa_ac29_autonomous_job_bridge.py tests/test_apa_ac29_autonomous_bridge.py
-      - name: Check only five new ingress/deduplication cases
+      - name: Check focused ingress, local grants and no-replay cases
         run: python -m unittest discover -s tests -p "test_apa_ac29_autonomous_bridge.py" -v

@@ -41,14 +41,7 @@ ID = re.compile(r"^[a-z][a-z0-9-]{7,63}$")
 REVIEW = ROOT / "controllers" / "apa_bdd114_native_roof_face_review.py"
 ALLOWED = frozenset({"BDD114_ROOF_FINALIZE", "SOURCE_QUALIFIED_NATIVE_READ",
                      "APPROVED_NATIVE_COLUMN_COPY", "APPROVED_MULTI_PROTOTYPE_COPY",
-                     "CURRENT_MODEL_FINGERPRINT", "BDD114_COPY_SAVE"})
-
-
-COPY_ADAPTER = ROOT / "controllers" / "apa_bdd114_native_copy_save_once.py"
-COPY_ADAPTER_BLOB_SHA1 = "eb94a3a3d4feb69bb0f65fa3400599f9f85ece1d"
-COPY_JOB_ID = "bdd114-seven-copy-save-20261017"
-COPY_APPROVAL = "USER_APPROVED_BDD_114_X_9_370_20261017"
-
+                     "CURRENT_MODEL_FINGERPRINT"})
 
 
 def require(ok, reason):
@@ -62,6 +55,37 @@ def sha(path):
 
 def git_sha(blob):
     return hashlib.sha1(b"blob " + str(len(blob)).encode("ascii") + b"\0" + blob).hexdigest()
+
+
+def runtime_release():
+    """Local updater receipt, never supplied by an inbox task."""
+    path=ROOT/'controllers'/'runtime-release.json'
+    if not path.exists():
+        return None
+    receipt=json.loads(path.read_text(encoding='utf8'))
+    require(isinstance(receipt,dict) and set(receipt)=={
+        'schema','revision','workerSHA256','moduleHashes',
+        'workingPlnSha256','expectedGuidCount'} and
+        receipt['schema']=='APA_AC29_RUNTIME_RELEASE_V1' and
+        re.fullmatch('[0-9a-f]{40}',receipt['revision']) and
+        receipt['workerSHA256']==sha(Path(__file__)) and
+        set(receipt['moduleHashes'])==set(MODULE_HASHES)|{
+            'apa_ac29_dynamic_write_scopes.py','apa_ac29_dynamic_native_verifiers.py'} and
+        all(re.fullmatch('[0-9a-f]{64}',value) for value in receipt['moduleHashes'].values()) and
+        re.fullmatch('[0-9a-f]{64}',receipt['workingPlnSha256']) and
+        type(receipt['expectedGuidCount']) is int and receipt['expectedGuidCount']>0,
+        'LOCAL_RUNTIME_RELEASE_RECEIPT_INVALID')
+    return receipt
+
+
+def approved_saved_sha():
+    receipt=runtime_release()
+    return receipt['workingPlnSha256'] if receipt else BASE_SHA
+
+
+def approved_guid_count():
+    receipt=runtime_release()
+    return receipt['expectedGuidCount'] if receipt else 290
 
 
 def gh_api(path, *, body=None):
@@ -113,18 +137,15 @@ def validate_job(job, name):
             job.get("jobId") == name and ID.fullmatch(name),
             "JOB_ID_NOT_BOUND_TO_FILE")
     require(job["action"] in ALLOWED and
-            job["projectSha256"] == BASE_SHA,
+            job["projectSha256"] == approved_saved_sha(),
             "JOB_ACTION_OR_TARGET_NOT_ALLOWED")
     created, expires, now = date(job["createdAt"]), date(job["expiresAt"]), current_utc()
     require(created <= now and expires > now and
             0 < (expires-created).total_seconds() <= 7*86400,
             "JOB_TIME_WINDOW_INVALID")
     ref = job["sourceTask"]
-    if job["action"] in ("BDD114_ROOF_FINALIZE", "CURRENT_MODEL_FINGERPRINT",
-                         "BDD114_COPY_SAVE"):
+    if job["action"] in ("BDD114_ROOF_FINALIZE", "CURRENT_MODEL_FINGERPRINT"):
         require(ref is None, "LOCAL_APPROVED_ACTION_MUST_NOT_CONTAIN_SOURCE_TASK")
-        if job["action"] == "BDD114_COPY_SAVE":
-            require(name == COPY_JOB_ID, "ORIGINAL_BDD114_APPROVED_JOB_ID_REQUIRED")
     else:
         require(isinstance(ref, dict) and set(ref) ==
                 {"repo", "ref", "path", "blobSha1"} and
@@ -140,10 +161,11 @@ def stable_preflight():
     require(SCRIPTS.is_dir() and
             (ROOT / "apa-selector-install-receipt.json").is_file(),
             "STABLE_APA_DEPLOYMENT_ABSENT")
-    for name, expected in MODULE_HASHES.items():
+    release=runtime_release()
+    for name, expected in (release['moduleHashes'] if release else MODULE_HASHES).items():
         require(sha(SCRIPTS / name) == expected, "STABLE_APA_MODULE_DRIFT:" + name)
     require(WORKING.is_file() and ORIGINAL.is_file() and
-            sha(WORKING) == BASE_SHA and sha(ORIGINAL) == SOURCE_SHA,
+            sha(WORKING) == approved_saved_sha() and sha(ORIGINAL) == SOURCE_SHA,
             "BDD_SAVED_OR_PROTECTED_PLN_CHANGED")
     receipt = json.loads((ROOT / "apa-selector-install-receipt.json").read_text(encoding="utf-8"))
     require(receipt.get("applied") is True and
@@ -166,7 +188,7 @@ def capture_read_task(job, folder):
     import archicad_strategy_discovery as DISC
     import archicad_scene_run as RUN
     RUN.bind_authorized_saved_copy(
-        19727, str(WORKING), WORKING.stem, BASE_SHA,
+        19727, str(WORKING), WORKING.stem, approved_saved_sha(),
         "APA_AC29_GITHUB_JOB_READ_ONLY_" + job["jobId"]
     )
     export = folder / "live-schema"
@@ -175,7 +197,7 @@ def capture_read_task(job, folder):
     raw.mkdir()
     api = APA.EvidenceAPI(APA.native_transport, raw, execute=False)
     guids_before = APA.inventory_guids(api)
-    require(len(guids_before) == 290, "BDD_NATIVE_GUID_COUNT_DRIFT")
+    require(len(guids_before) == approved_guid_count(), "BDD_NATIVE_GUID_COUNT_DRIFT")
     writer = RUN.SceneWriter(api, folder / "read-only-unused.sqlite",
                              schema_path=export / "tapir-scene-live.json",
                              allow_3d_view_for_write=True)
@@ -193,7 +215,7 @@ def capture_read_task(job, folder):
     )
     after = APA.inventory_guids(api)
     require(after == guids_before and api.write_attempts == 0 and
-            sha(WORKING) == BASE_SHA and sha(ORIGINAL) == SOURCE_SHA,
+            sha(WORKING) == approved_saved_sha() and sha(ORIGINAL) == SOURCE_SHA,
             "READ_JOB_MODEL_DRIFT")
     require(result.get("status") == "WORKFLOW_CALLABLE_VERIFIED",
             "READ_WORKFLOW_INCOMPLETE")
@@ -222,7 +244,7 @@ def capture_current_model_fingerprint(job, folder):
     import archicad_connected_components as C
     import archicad_bim_documentation as D
     RUN.bind_authorized_saved_copy(
-        19727, str(WORKING), WORKING.stem, BASE_SHA,
+        19727, str(WORKING), WORKING.stem, approved_saved_sha(),
         "APA_AC29_READ_ONLY_NATIVE_MODEL_FINGERPRINT_" + job["jobId"])
     folder_raw = folder / "raw"
     folder_raw.mkdir()
@@ -232,20 +254,22 @@ def capture_current_model_fingerprint(job, folder):
             APA.archicad29(api).get("buildNumber") == 5101,
             "NATIVE_MODEL_FINGERPRINT_WRONG_BDD_INSTANCE")
     before = sorted(APA.inventory_guids(api))
-    require(len(before) == 290, "NATIVE_MODEL_FINGERPRINT_NOT_APPROVED_BASELINE")
+    require(len(before) == approved_guid_count(), "NATIVE_MODEL_FINGERPRINT_NOT_APPROVED_BASELINE")
     dump = D.capture_full_model(api, before)
-    native = C.G.normalize_dump(dump)
+    # capture_full_model already returns normalized nodes. A second native
+    # normalization consumes bodies as raw provider records and fails.
+    native = dump
     found = {e["guid"].lower(): e for e in native["elements"]}
     require(set(found) == set(before),
             "NATIVE_MODEL_FINGERPRINT_PARTIAL_BREP")
     geometry = {g: C.ROOF.geometry_signature(found[g]) for g in before}
     after = sorted(APA.inventory_guids(api))
     require(after == before and api.write_attempts == 0 and
-            sha(WORKING) == BASE_SHA and sha(ORIGINAL) == SOURCE_SHA,
+            sha(WORKING) == approved_saved_sha() and sha(ORIGINAL) == SOURCE_SHA,
             "NATIVE_MODEL_FINGERPRINT_CHANGED_DURING_READ")
     return {
         "status": "EXACT_CURRENT_MODEL_GUID_AND_BREP_FINGERPRINT_PASS",
-        "targetWorkingPlnSha256": BASE_SHA,
+        "targetWorkingPlnSha256": approved_saved_sha(),
         "expectedGuidCount": len(before),
         "expectedGuidSetHash": RUN.digest(before),
         "expectedModelSignatureHash": RUN.digest(geometry),
@@ -280,33 +304,16 @@ def capture_approved_native_copy(job, folder):
             "NATIVE_COPY_UNSUPPORTED_TASK_ACTION")
 
     (MULTI if multi else BATCH).validate_task(
-        task, expected_project_sha=BASE_SHA,
+        task, expected_project_sha=approved_saved_sha(),
         expected_project_path=str(WORKING))
-    require(task["expectedGuidCount"] == 290,
-            "APPROVED_BDD_TARGET_INITIAL_INVENTORY_MUST_BE_290")
+    require(task["expectedGuidCount"] == approved_guid_count(),
+            "APPROVED_BDD_TARGET_INITIAL_INVENTORY_COUNT_DRIFT")
     require(task["sourceEvidenceRef"].startswith("https://github.com/") and
             task["authorizationRef"].startswith("USER_APPROVED_"),
             "NATIVE_COPY_USER_APPROVAL_AND_SOURCE_REQUIRED")
-    if multi:
-        # GitHub source text is not a user authorization. Multi-prototype
-        # execution additionally requires a LOCAL preapproved job/task receipt.
-        # No grant is installed in this release.
-        grant_path = ROOT / "controller-grants" / (job["jobId"] + ".json")
-        require(grant_path.is_file(), "MULTI_COPY_LOCAL_EXPLICIT_GRANT_NOT_INSTALLED")
-        grant = json.loads(grant_path.read_text(encoding="utf-8"))
-        require(isinstance(grant, dict) and
-                set(grant) == {"schema", "jobId", "jobBlobSha1", "taskBlobSha1",
-                               "projectSha256", "authorizationRef"} and
-                grant["schema"] == "APA_AC29_LOCAL_NATIVE_MULTI_COPY_GRANT_V1" and
-                grant["jobId"] == job["jobId"] and
-                grant["jobBlobSha1"] ==
-                json.loads((folder / "attempted.json").read_text(encoding="utf-8"))["sourceBlob"] and
-                grant["taskBlobSha1"] == blob and
-                grant["projectSha256"] == BASE_SHA and
-                grant["authorizationRef"] == task["authorizationRef"],
-                "MULTI_COPY_EXPLICIT_LOCAL_APPROVAL_NOT_BOUND_TO_JOB_BLOB")
+    require_native_copy_grant(job, folder, blob, task["authorizationRef"])
     RUN.bind_authorized_saved_copy(
-        19727, str(WORKING), WORKING.stem, BASE_SHA,
+        19727, str(WORKING), WORKING.stem, approved_saved_sha(),
         task["authorizationRef"])
     pre_raw = folder / "preflight-raw"
     pre_raw.mkdir()
@@ -330,12 +337,12 @@ def capture_approved_native_copy(job, folder):
             known, ledger, raw, read_api,
             normalized=C.G.normalize_dump,
             geom_signature=C.ROOF.geometry_signature,
-            digest=RUN.digest, expected_project_sha=BASE_SHA,
+            digest=RUN.digest, expected_project_sha=approved_saved_sha(),
             current_project_sha=sha(WORKING))
         historical_receipt = folder / "historical-reconciliation.json"
         durable_write(historical_receipt, historical)
     require(read_api.write_attempts == 0 and
-            sha(WORKING) == BASE_SHA and sha(ORIGINAL) == SOURCE_SHA,
+            sha(WORKING) == approved_saved_sha() and sha(ORIGINAL) == SOURCE_SHA,
             "NATIVE_COPY_PREFLIGHT_MUTATED_MODEL_OR_DISK")
     guard = BATCH.GuardedSaveTransport(
         APA.native_transport, RUN.bind_authorized_saved_copy,
@@ -355,14 +362,14 @@ def capture_approved_native_copy(job, folder):
     result = (MULTI.execute_multi_task if multi else BATCH.execute_task)(
         task, api=api, writer=writer, router=router, APA=APA, RUN=RUN,
         components=C, capture_native=D.capture_full_model,
-        saved_project_sha=BASE_SHA, current_sha=lambda: sha(WORKING),
+        saved_project_sha=approved_saved_sha(), current_sha=lambda: sha(WORKING),
         save_guard=guard, known_reconciliation=historical)
     total = (sum(len(g["targets"]) for g in task["prototypes"])
              if multi else len(task["targets"]))
     expected_new = (sum(MULTI.expected_new_types(task).values())
                     if multi else len(task["targets"])*2)
     require(result["copiedCount"] == total and
-            result["finalGuidCount"] == 290 + expected_new and
+            result["finalGuidCount"] == approved_guid_count() + expected_new and
             (result["nativeMoveCalls"] if multi else result["nativeCopyCalls"]) == 1 and
             (result["nativeSaveCalls"] if multi else result["nativeSaveCalls"]) == 1 and
             (result["newSavedSha256"] if multi else
@@ -406,34 +413,34 @@ def capture_roof_review(job, folder):
 
 def capture_approved_bdd114_copy(job, folder):
     """Only user's fixed seven-stud request; original APA writes and SQLite."""
-    require(job["jobId"] == COPY_JOB_ID and job["action"] == "BDD114_COPY_SAVE",
-            "UNAPPROVED_MODEL_WRITE_TASK")
-    require(COPY_ADAPTER.is_file() and
-            git_sha(COPY_ADAPTER.read_bytes()) == COPY_ADAPTER_BLOB_SHA1,
-            "BDD114_WRITE_ADAPTER_MISSING_OR_CHANGED")
-    require((folder / "attempted.json").is_file(),
-            "NATIVE_WRITE_REQUIRES_DURABLE_RECEIVER_ATTEMPT")
-    cmd = [sys.executable, str(COPY_ADAPTER),
-           "--job-folder", str(folder), "--approval", COPY_APPROVAL]
-    proc = subprocess.run(cmd, capture_output=True, timeout=600,
-                          encoding="utf-8", errors="replace", cwd=ROOT)
-    log = folder / "native-write-output.txt"
-    log.write_text(proc.stdout + "\n" + proc.stderr, encoding="utf-8")
-    detail_path = folder / "native-write-result.json"
-    report = json.loads(detail_path.read_text(encoding="utf-8")) if detail_path.is_file() else {}
-    require(proc.returncode == 0 and
-            report.get("status") == "BDD114_SEVEN_NATIVE_COPIES_AND_SAVE_PASS" and
-            report.get("finalGuidCount") == 304 and
-            report.get("copyCalls") == 1 and report.get("saveCalls") == 1 and
-            report.get("savedSha256") and report["savedSha256"] != BASE_SHA and
-            sha(WORKING) == report["savedSha256"] and sha(ORIGINAL) == SOURCE_SHA,
-            "BDD114_WRITE_OUTCOME_UNKNOWN_DO_NOT_REPLAY_OR_RESAVE")
-    return {"status": report["status"], "guidCount": 304,
-            "newColumnGuids": report["newColumnGuids"],
-            "savedWorkingPlnSha256": report["savedSha256"],
-            "nativeMoveCalls": 1, "nativeSaveCalls": 1,
-            "nativeBuildExecuted": True, "modelWrites": 2,
-            "automaticRetry": False}
+    # Retired entry point: even direct callers cannot revive an old remote
+    # job using a compiled-in approval string. Use the scoped copy contract.
+    raise ValueError("LEGACY_BDD_WRITE_RETIRED_LOCAL_SCOPED_GRANT_REQUIRED")
+
+
+def require_native_copy_grant(job, folder, task_blob, authorization):
+    """Both copy actions require a local grant bound to immutable source blobs."""
+    require(ID.fullmatch(job["jobId"]) and job["action"] in
+            {"APPROVED_NATIVE_COLUMN_COPY", "APPROVED_MULTI_PROTOTYPE_COPY"},
+            "NATIVE_COPY_ACTION_REQUIRES_SCOPED_CONTRACT")
+    grant_path = ROOT / "controller-grants" / (job["jobId"] + ".json")
+    require(grant_path.is_file(), "NATIVE_COPY_LOCAL_EXPLICIT_GRANT_NOT_INSTALLED")
+    grant = json.loads(grant_path.read_text(encoding="utf-8"))
+    accepted_schema = {"APA_AC29_LOCAL_NATIVE_COPY_GRANT_V1"}
+    if job["action"] == "APPROVED_MULTI_PROTOTYPE_COPY":
+        accepted_schema.add("APA_AC29_LOCAL_NATIVE_MULTI_COPY_GRANT_V1")
+    require(isinstance(grant, dict) and
+            set(grant) == {"schema", "jobId", "jobBlobSha1", "taskBlobSha1",
+                           "projectSha256", "authorizationRef"} and
+            grant["schema"] in accepted_schema and
+            grant["jobId"] == job["jobId"] and
+            grant["jobBlobSha1"] ==
+            json.loads((folder / "attempted.json").read_text(encoding="utf-8"))["sourceBlob"] and
+            grant["taskBlobSha1"] == task_blob and
+            grant["projectSha256"] == approved_saved_sha() and
+            grant["authorizationRef"] == authorization,
+            "NATIVE_COPY_EXPLICIT_LOCAL_APPROVAL_NOT_BOUND_TO_JOB_BLOB")
+    return grant
 
 
 def durable_write(path, obj):
@@ -488,8 +495,6 @@ def process_job(name):
             response = capture_roof_review(job, folder)
         elif job["action"] == "CURRENT_MODEL_FINGERPRINT":
             response = capture_current_model_fingerprint(job, folder)
-        elif job["action"] == "BDD114_COPY_SAVE":
-            response = capture_approved_bdd114_copy(job, folder)
         elif job["action"] in ("APPROVED_NATIVE_COLUMN_COPY",
                                 "APPROVED_MULTI_PROTOTYPE_COPY"):
             response = capture_approved_native_copy(job, folder)
@@ -504,7 +509,7 @@ def process_job(name):
                "sourceBlob": source_blob,
                "finishedAt": current_utc().isoformat(),
                "result": response, "automaticRetry": False,
-               "modelWritesAuthorized": job["action"] in {"APPROVED_NATIVE_COLUMN_COPY", "APPROVED_MULTI_PROTOTYPE_COPY", "BDD114_COPY_SAVE"}}
+               "modelWritesAuthorized": response.get("authorizedNativeExecution") is True}
     durable_write(folder / "result.json", payload)
     upload_result(name, folder)
 
@@ -547,12 +552,23 @@ def acquire_singleton():
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--loop", action="store_true", help="Persistent single worker")
+    ap.add_argument('--healthcheck',action='store_true',help='Local integrity/import check; no inbox or Archicad calls')
     ap.add_argument("--interval-seconds", type=int, default=30)
     args = ap.parse_args()
+    if args.healthcheck:
+        stable_preflight()
+        sys.path.insert(0,str(SCRIPTS))
+        import archicad_project_accelerator as APA
+        require(callable(APA.run_scoped_native_task),'SCOPED_CORE_ENTRY_POINT_MISSING')
+        print('APA_BRIDGE_HEALTHCHECK_PASS_NO_NATIVE_CALLS',flush=True)
+        return
     require(10 <= args.interval_seconds <= 3600, "BAD_POLL_INTERVAL")
     STATE.mkdir(parents=True, exist_ok=True)
     handle = acquire_singleton()
     try:
+        durable_write(STATE/'receiver-started.json',{
+            'pid':os.getpid(),'workerSHA256':sha(Path(__file__)),
+            'startedAt':current_utc().isoformat(),'nativeCalls':0})
         while True:
             try:
                 print("APA_BRIDGE_SCAN:", poll_once(), flush=True)
