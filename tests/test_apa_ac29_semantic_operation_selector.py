@@ -228,6 +228,57 @@ class NativeBddSourceEvidence(unittest.TestCase):
         source=row(COLUMN,1,0,family=FAM_A)
         self.assertIsNone(None if "axisSource" not in source else source["axisSource"])
 
+    def test_true_native_49_pile_copy_plan_uses_one_call_without_axes(self):
+        piles=self.fixture["piles"]
+        family="BDD_NATIVE_PILE_300_DIAMETER_2400_HIGH_MATERIAL"
+        first=piles[0]
+        source=prototype("Column",first["guid"],family,
+                         **first["anchor"])
+        targets=[row("Column",r["anchor"]["x"],r["anchor"]["y"],
+                     r["anchor"]["z"],family) for r in piles]
+        result=analyze([source],targets)
+        self.assertEqual(result["alreadyPresent"],1)
+        self.assertEqual(len(result["copies"]),1)
+        self.assertEqual(result["copies"][0]["count"],48)
+        self.assertEqual(result["copies"][0]["layoutTargetCount"],49)
+        self.assertEqual(result["copies"][0]["arrangement"]["pattern"],
+                         "EXPLICIT_POSITIONS")
+        self.assertEqual(result["copyMethod"],"ONE_NATIVE_BATCH_COPY_CALL")
+        self.assertEqual(result["copyNativeCallsIfIndependentlyAuthorized"],1)
+        self.assertEqual(result["sourceAxes"]["status"],
+                         "NO_SOURCE_QUALIFIED_AXIS_GRID_REQUEST")
+        self.assertEqual(result["nativeModelWrites"],0)
+
+    def test_real_48_joists_reuse_two_verified_native_prototypes(self):
+        beams=self.fixture["floorJoists"]
+        def family(beam):
+            d=round(beam["end"]["y"]-beam["start"]["y"],3)
+            return "BDD_NATIVE_JOIST_LEN_" + str(d) + "_SAME_ATTRIBUTES"
+        prototypes={}
+        targets=[]
+        for beam in beams:
+            sig=family(beam)
+            if sig not in prototypes:
+                prototypes[sig]=prototype("Beam",beam["guid"],sig,
+                    beam["start"]["x"],beam["start"]["y"],beam["z"])
+            targets.append(row("Beam",beam["start"]["x"],
+                               beam["start"]["y"],beam["z"],sig))
+        self.assertEqual(len(prototypes),2)
+        result=analyze(list(prototypes.values()),targets)
+        self.assertEqual(result["alreadyPresent"],2)
+        self.assertEqual(sum(g["count"] for g in result["copies"]),46)
+        self.assertEqual(result["copyMethod"],
+                         "ONE_NATIVE_MULTI_PROTOTYPE_COPY_CALL")
+        arrangements={g["arrangement"]["pattern"]:g for g in result["copies"]}
+        self.assertEqual(arrangements["LINEAR_ARRAY"]["layoutTargetCount"],9)
+        self.assertEqual(arrangements["PARALLEL_LINEAR_RUNS"]["layoutTargetCount"],39)
+        self.assertEqual(arrangements["PARALLEL_LINEAR_RUNS"]["arrangement"]["runCount"],2)
+        self.assertEqual(sorted(x["count"] for x in
+                         arrangements["PARALLEL_LINEAR_RUNS"]["arrangement"]["runs"]),
+                         [15,24])
+        self.assertEqual(result["copyNativeCallsIfIndependentlyAuthorized"],1)
+        self.assertEqual(result["nativeModelWrites"],0)
+
     def test_real_48_joists_have_three_600mm_runs_two_native_lengths(self):
         rows=self.fixture["floorJoists"]
         self.assertEqual(len(rows),48)
