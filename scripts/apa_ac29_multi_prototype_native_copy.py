@@ -298,6 +298,17 @@ def prepare_verified_groups(task, model, typed_details, router, RUN):
         require(guid in source_map and
                 chosen_group["prototypeType"] == source_map[guid]["type"],
                 "MULTI_COPY_SELECTOR_SOURCE_FAMILY_DRIFT")
+    declared = {group["prototypeGuid"]: {
+        tuple(round(target[k], 6) for k in COORDS)
+        for target in group["targets"]} for group in task["prototypes"]}
+    for selected in chosen["copyGroups"]:
+        source = selected["prototypeGuid"].lower()
+        anchor = next(g["sourceAnchor"] for g in task["prototypes"]
+                      if g["prototypeGuid"] == source)
+        actual = {tuple(round(anchor[k] + delta[k], 6) for k in COORDS)
+                  for delta in selected["displacements"]}
+        require(actual == declared[source],
+                "MULTI_COPY_SELECTOR_CHANGED_APPROVED_PROTOTYPE_TARGETS")
     return chosen["copyGroups"], source_elements
 
 
@@ -359,3 +370,186 @@ def verify_after_copy(task, old, current, baseline, typed_details,
             "unchangedPrototypeGuids": sorted(
                 group["prototypeGuid"] for group in task["prototypes"]),
             "newGuidCount": len(newly), "newTypeCounts": counts}
+
+
+def execute_multi_task(task, *, api, writer, router, APA, RUN, components,
+                       capture_native, saved_project_sha, current_sha,
+                       save_guard, known_reconciliation=None):
+    """One original native multi-copy transaction and one journaled save.
+
+    The caller binds the existing verified project and uses original
+    EvidenceAPI(execute=True) and SceneWriter. An unresolved old scene must
+    have independent exact-model reconciliation first. Never replay.
+    """
+    validate_task(task, expected_project_sha=saved_project_sha,
+                  expected_project_path=RUN.EXPECTED_PATH)
+    require(api.write_attempts == 0 and
+            current_sha() == saved_project_sha,
+            "MULTI_COPY_FRESH_APPROVED_PROJECT_REQUIRED")
+    unresolved = SINGLE.stored_scenes_clear(
+        writer.journal_path, (task["sceneId"], task["saveSceneId"]))
+    if unresolved:
+        p = known_reconciliation
+        require(isinstance(p, dict) and
+                p.get("status") ==
+                "PREVIOUS_UNKNOWN_EFFECT_ABSENT_FROM_CURRENT_MODEL_PASS" and
+                {r["sceneId"] for r in unresolved} == {p.get("sceneId")} and
+                p.get("savedProjectSHA256") == saved_project_sha and
+                p.get("modelWrites") == 0,
+                "MULTI_COPY_HISTORIC_UNKNOWN_REQUIRES_EXACT_RECONCILIATION")
+    original_guids = set(APA.inventory_guids(api))
+    require(len(original_guids) == task["expectedGuidCount"] and
+            RUN.digest(sorted(original_guids)) == task["expectedGuidSetHash"],
+            "MULTI_COPY_APPROVED_GUID_BASELINE_CHANGED")
+    source_dump = capture_native(api, sorted(original_guids))
+    require(isinstance(source_dump, dict) and
+            isinstance(source_dump.get("elements"), list),
+            "MULTI_COPY_NATIVE_DUMP_MISSING")
+    source_map = {row["guid"].lower(): row
+                  for row in source_dump["elements"]}
+    require(set(source_map) == original_guids,
+            "MULTI_COPY_FULL_NATIVE_BASELINE_REQUIRED")
+    native_signatures = {
+        g: components.ROOF.geometry_signature(source_map[g])
+        for g in sorted(original_guids)
+    }
+    require(RUN.digest(native_signatures) ==
+            task["expectedModelSignatureHash"],
+            "MULTI_COPY_APPROVED_BREP_HASH_CHANGED")
+    if unresolved:
+        require(known_reconciliation["guidSetHash"] ==
+                RUN.digest(sorted(original_guids)) and
+                known_reconciliation["brepSignaturesHash"] ==
+                RUN.digest(native_signatures),
+                "MULTI_COPY_HISTORIC_RECEIPT_NOT_CURRENT")
+    source_ids = [p["prototypeGuid"] for p in task["prototypes"]]
+    donor_details = SINGLE.column_details(api, source_ids)
+    groups, sources = prepare_verified_groups(
+        task, source_map, donor_details, router, RUN)
+    targets = {row["prototypeGuid"]: row["targets"]
+               for row in task["prototypes"]}
+    verify_batch_layout(task["prototypes"], sources, source_map, targets)
+    donor_proofs = {}
+    for group in task["prototypes"]:
+        guid, kind = group["prototypeGuid"], group["prototypeType"]
+        root, children = sources[guid]
+        donor_proofs[guid] = {
+            "typed": source_detail_fingerprint(
+                donor_details[guid], kind, group["sourceAnchor"]),
+            "BREP": solid_fingerprint(
+                root, children, group["sourceAnchor"], parent_guid=guid),
+        }
+    retained = sorted(original_guids - set(source_ids))
+    retained_signatures = components.retained_geometry_signatures(
+        source_dump, retained)
+    require(set(retained_signatures) == set(retained),
+            "MULTI_COPY_RETAINED_BREP_SIGNATURES_NOT_COMPLETE")
+    router.review_policy(
+        "MoveElements", "CREATE", "MODEL",
+        {"source": task["sourceEvidenceRef"],
+         "sha256": router.contract_hash("MoveElements")})
+    router.review_policy(
+        "SaveProject", "TRANSACTION", "PROJECT",
+        {"source": task["sourceEvidenceRef"],
+         "sha256": router.contract_hash("SaveProject")})
+    all_new_guids = [None]
+    successful_post_dump = [None]
+    new_root_ids = [None]
+
+    def preflight(native_api):
+        require(set(APA.inventory_guids(native_api)) == original_guids and
+                current_sha() == saved_project_sha,
+                "MULTI_COPY_PRE_DISPATCH_BASELINE_CHANGED")
+        typed = SINGLE.column_details(native_api, source_ids)
+        for group in task["prototypes"]:
+            key = group["prototypeGuid"]
+            new_fact = source_detail_fingerprint(
+                typed[key], group["prototypeType"], group["sourceAnchor"])
+            require(new_fact == donor_proofs[key]["typed"],
+                    "MULTI_COPY_SOURCE_TYPED_PROPERTIES_DRIFT")
+        return {"status": "MULTI_COPY_COMPLETE_SOURCE_PREFLIGHT_PASS"}
+
+    def postflight(reply, prior):
+        after_ids = set(APA.inventory_guids(api))
+        new_ids = after_ids - original_guids
+        require(original_guids <= after_ids,
+                "MULTI_COPY_PREVIOUS_GUID_LOST")
+        post_dump = capture_native(api, sorted(after_ids))
+        require(isinstance(post_dump, dict) and
+                isinstance(post_dump.get("elements"), list),
+                "MULTI_COPY_POST_NATIVE_DUMP_INVALID")
+        post = {r["guid"].lower(): r for r in post_dump["elements"]}
+        require(set(post) == after_ids,
+                "MULTI_COPY_POST_MODEL_INVENTORY_NOT_COMPLETE")
+        parent_types = set(TYPES)
+        roots = sorted(g for g in new_ids
+                       if post[g]["type"] in parent_types)
+        typed = SINGLE.column_details(api, roots)
+        proof = verify_after_copy(
+            task, original_guids, post, source_map,
+            typed, donor_proofs, RUN)
+        require(proof["newPhysicalCopyCount"] == sum(
+            len(g["targets"]) for g in task["prototypes"]),
+            "MULTI_COPY_NATIVE_POSTFLIGHT_COUNT_INVALID")
+        require(all(
+            components.ROOF.geometry_signature(post[g]) ==
+            components.ROOF.geometry_signature(source_map[g])
+            for g in source_ids),
+            "MULTI_COPY_PROTOTYPE_GEOMETRY_CHANGED")
+        require(current_sha() == saved_project_sha,
+                "MULTI_COPY_UNEXPECTED_EARLY_PROJECT_SAVE")
+        successful_post_dump[0] = post_dump
+        all_new_guids[0] = after_ids
+        new_root_ids[0] = roots
+        return proof
+
+    native = router.copy_multiple_prototypes(
+        writer, task["sceneId"], groups, retained_signatures,
+        saved_project_sha, task["authorizationRef"],
+        preflight, postflight)
+    require(native.get("status") == "PASS" and
+            api.calls["MoveElements"] == 1 and
+            all_new_guids[0] is not None and
+            successful_post_dump[0] is not None,
+            "MULTI_COPY_NATIVE_UNKNOWN_OUTCOME_DO_NOT_REPLAY_OR_SAVE")
+    all_signatures = components.retained_geometry_signatures(
+        successful_post_dump[0], sorted(all_new_guids[0]))
+    require(set(all_signatures) == all_new_guids[0],
+            "MULTI_COPY_BEFORE_SAVE_COMPLETE_BREP_REQUIRED")
+    save_guard.enable_after_verified_copy()
+
+    def before_save(_):
+        require(set(APA.inventory_guids(api)) == all_new_guids[0] and
+                current_sha() == saved_project_sha,
+                "MULTI_COPY_SAVED_BASELINE_DRIFT")
+        return {"status": "MULTI_COPY_INDEPENDENT_POSTFLIGHT_SAVE_READY_PASS"}
+
+    def after_save(reply, _):
+        require(reply == {"success": True} and
+                save_guard.new_saved_sha and
+                current_sha() == save_guard.new_saved_sha and
+                set(APA.inventory_guids(api)) == all_new_guids[0],
+                "MULTI_COPY_SAVE_RESPONSE_OR_NEW_FILE_UNVERIFIED")
+        return {"status": "MULTI_COPY_GUARDED_WORKING_PLN_SAVE_PASS",
+                "newSavedSha256": save_guard.new_saved_sha}
+    saved = router.execute(
+        writer, task["saveSceneId"],
+        router.prepare("SaveProject", {}),
+        [], all_signatures, saved_project_sha,
+        task["authorizationRef"], "PROJECT",
+        after_save, verify_before=before_save)
+    require(saved.get("status") == "PASS" and
+            api.calls["SaveProject"] == 1,
+            "MULTI_COPY_SAVE_UNKNOWN_DO_NOT_RETRY")
+    return {
+        "schema": "APA_AC29_NATIVE_MULTI_COPY_RESULT_V1",
+        "status": "MULTI_PROTOTYPE_NATIVE_COPY_AND_SAVE_PASS",
+        "copiedCount": sum(len(g["targets"]) for g in task["prototypes"]),
+        "sourcePrototypeGuids": source_ids,
+        "newRootGuids": new_root_ids[0],
+        "newGuidCount": len(all_new_guids[0] - original_guids),
+        "finalGuidCount": len(all_new_guids[0]),
+        "newSavedSha256": save_guard.new_saved_sha,
+        "nativeMoveCalls": 1, "nativeSaveCalls": 1,
+        "automaticRetry": False,
+    }
