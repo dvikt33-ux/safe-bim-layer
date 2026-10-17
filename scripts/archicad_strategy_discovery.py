@@ -1072,7 +1072,8 @@ def prepare_current_runtime_catalog_task(writer, intent, planner_python=None):
         for command in option["commands"]
     }
     active_commands = set(live["commands"])
-    spatial_native = candidates & (spatial.COMMANDS | spatial.READS)
+    spatial_native = {name for name in candidates
+                      if name.rsplit(".", 1)[-1] in spatial.COMMANDS | spatial.READS}
     if spatial_native:
         # Source-built Grid/Stair contracts require exact live APX identity in
         # addition to exported schemas and per-command registration.
