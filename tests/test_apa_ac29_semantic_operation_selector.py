@@ -206,5 +206,65 @@ class NativeSelectionDecisions(unittest.TestCase):
         self.assertEqual(result["copyNativeCallsIfIndependentlyAuthorized"],0)
 
 
+
+class NativeBddSourceEvidence(unittest.TestCase):
+    """The actual 261-GUID native read, NOT a claim about 298-GUID LIVE state."""
+    @classmethod
+    def setUpClass(cls):
+        import json
+        cls.fixture=json.loads((Path(__file__).parent/"fixtures"/
+            "apa_ac29_bdd_261_verified_native_positions.json"
+        ).read_text(encoding="utf8"))
+
+    def test_49_real_piles_are_not_a_7_by_7_axis_grid(self):
+        rows=self.fixture["piles"]
+        self.assertEqual(len(rows),49)
+        xyz=[tuple(row["anchor"][k] for k in ("x","y","z")) for row in rows]
+        self.assertEqual(len({p[0] for p in xyz}),31)
+        self.assertEqual(len({p[1] for p in xyz}),21)
+        self.assertEqual(topology(xyz)["pattern"],"EXPLICIT_POSITIONS")
+        # Two separate phenomena: spatial element placement and semantic
+        # native GridElements. The source does not contain named grid axes.
+        source=row(COLUMN,1,0,family=FAM_A)
+        self.assertIsNone(None if "axisSource" not in source else source["axisSource"])
+
+    def test_real_48_joists_have_three_600mm_runs_two_native_lengths(self):
+        rows=self.fixture["floorJoists"]
+        self.assertEqual(len(rows),48)
+        spans={}
+        for item in rows:
+            a,b=item["start"],item["end"]
+            key=(round(a["y"],3),round(b["y"],3),
+                 round(b["y"]-a["y"],3))
+            spans.setdefault(key,[]).append((a["x"],a["y"],item["z"]))
+        self.assertEqual(
+            sorted((len(v), round(k[2],3)) for k,v in spans.items()),
+            [(9,5.085),(15,3.995),(24,3.995)])
+        for coords in spans.values():
+            self.assertEqual(topology(coords)["pattern"],"LINEAR_ARRAY")
+            sorted_x=sorted(v[0] for v in coords)
+            gaps=[round(sorted_x[i+1]-sorted_x[i],3)
+                  for i in range(len(sorted_x)-1)]
+            self.assertEqual(set(gaps),{0.6})
+        by_family={}
+        for (y1,y2,length),arr in spans.items():
+            by_family.setdefault(length,[]).extend(arr)
+        self.assertEqual(topology(by_family[3.995])["pattern"],
+                         "PARALLEL_LINEAR_RUNS")
+        self.assertEqual(topology(by_family[3.995])["runCount"],2)
+
+    def test_real_18_grillage_members_have_many_different_lengths(self):
+        rows=self.fixture["grillageBeams"]
+        self.assertEqual(len(rows),18)
+        import math
+        lengths=[round(math.hypot(r["end"]["x"]-r["start"]["x"],
+                                  r["end"]["y"]-r["start"]["y"]),3)
+                 for r in rows]
+        self.assertGreaterEqual(len(set(lengths)),10)
+        # Shared material and cross section are insufficient for safe copy:
+        # a beam prototype must preserve its verified native length.
+        self.assertEqual({(x["width"],x["height"]) for x in rows},{(0.4,0.3)})
+        self.assertEqual(len({x["materialId"] for x in rows}),1)
+
 if __name__=="__main__":
     unittest.main()
