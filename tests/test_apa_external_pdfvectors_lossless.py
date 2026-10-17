@@ -33,8 +33,8 @@ class PDFLosslessTests(unittest.TestCase):
         ]
         ops = A._pdf_path_ops(path, 100.)
         self.assertEqual(ops, [
-            {"op": "m", "pointsPt": [[10., 80.]]},
-            {"op": "c", "pointsPt": [[20., 70.], [40., 55.], [50., 40.]]},
+            {"op": "m", "pointsPt": [[10., 20.]]},
+            {"op": "c", "pointsPt": [[20., 30.], [40., 45.], [50., 60.]]},
             {"op": "h", "pointsPt": []},
         ])
         with self.assertRaisesRegex(ValueError, "UNSUPPORTED_PDF_VECTOR"):
