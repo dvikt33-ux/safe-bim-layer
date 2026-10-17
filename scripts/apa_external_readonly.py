@@ -27,6 +27,7 @@ VERSIONS = {
     "ezdxf": "1.4.5",
     "networkx": "3.6.1",
     "shapely": "2.2.0",
+    "odfpy": "1.4.1",
 }
 EXT = {"ifc": ".ifc", "ids": ".ids", "pdf": ".pdf", "dxf": ".dxf"}
 
@@ -176,7 +177,7 @@ def dxf_vectors(args):
         elif typ == "LWPOLYLINE":
             data = {"type": typ, "pointsXY": [list(xy) for xy in ent.get_points("xy")],
                     "closed": bool(ent.closed),
-                    "ocsElevation": float(ent.dxf.elevation)}
+                    "ocsElevation": float(ent.dxf.get("elevation", 0))}
         elif typ in ("CIRCLE", "ARC"):
             data = {"type": typ, "center": list(ent.dxf.center),
                     "radius": float(ent.dxf.radius)}
