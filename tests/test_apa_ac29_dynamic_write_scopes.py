@@ -119,9 +119,9 @@ class ScopeContracts(unittest.TestCase):
         with TemporaryDirectory() as td:
             path=Path(td)/"ledger.sqlite"
             with database(path) as db:
-                db.execute("CREATE TABLE scenes(scene_id TEXT,state TEXT)")
-                db.execute("INSERT INTO scenes VALUES(?,?)",
-                           ("HistoricCopy","PARTIAL_OR_UNKNOWN_OUTCOME"))
+                db.execute("CREATE TABLE scenes(scene_id TEXT,state TEXT,result TEXT)")
+                db.execute("INSERT INTO scenes VALUES(?,?,?)",
+                           ("HistoricCopy","PARTIAL_OR_UNKNOWN_OUTCOME","{}"))
             with self.assertRaisesRegex(ValueError,"UNRECONCILED"):
                 S.validate_existing_ledger(path,"ApprovedColumnCreate01")
             proof={"status":"PREVIOUS_UNKNOWN_EFFECT_ABSENT_FROM_CURRENT_MODEL_PASS",
@@ -137,9 +137,9 @@ class ScopeContracts(unittest.TestCase):
         with TemporaryDirectory() as td:
             path=Path(td)/"ledger.sqlite"
             with database(path) as db:
-                db.execute("CREATE TABLE scenes(scene_id TEXT,state TEXT)")
-                db.execute("INSERT INTO scenes VALUES(?,?)",
-                           ("ApprovedColumnCreate01","UNKNOWN_OUTCOME"))
+                db.execute("CREATE TABLE scenes(scene_id TEXT,state TEXT,result TEXT)")
+                db.execute("INSERT INTO scenes VALUES(?,?,?)",
+                           ("ApprovedColumnCreate01","UNKNOWN_OUTCOME","{}"))
             with self.assertRaisesRegex(ValueError,"ALREADY_USED_NEVER_RETRY"):
                 S.validate_existing_ledger(path,"ApprovedColumnCreate01")
 
