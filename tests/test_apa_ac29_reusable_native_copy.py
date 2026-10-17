@@ -60,6 +60,16 @@ class NativeCopyContracts(unittest.TestCase):
         second=COPY.translated_vertices(moved,{"x":9,"y":8})
         self.assertEqual(first,second)
 
+    def test_targets_with_distinct_centres_can_still_intersect(self):
+        first=[(0.0,0.1),(1.0,1.05),(0.0,2.9)]
+        too_close=[(0.08,0.18),(1.0,1.05),(0.0,2.9)]
+        self.assertTrue(COPY.native_aabb_overlaps(first,too_close))
+
+    def test_adjacent_faces_touch_without_volumetric_collision(self):
+        first=[(0.0,0.1),(1.0,1.05),(0.0,2.9)]
+        adjacent=[(0.1,0.2),(1.0,1.05),(0.0,2.9)]
+        self.assertFalse(COPY.native_aabb_overlaps(first,adjacent))
+
     def test_guid_roots_are_classified_from_brep_not_get_all_elements(self):
         result={"elements":[{"guid":SOURCE,"type":"Column","bodies":[]}]}
         mapping=COPY.native_map(result,lambda m:m)
