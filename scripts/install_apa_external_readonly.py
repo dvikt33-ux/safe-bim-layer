@@ -65,7 +65,7 @@ def check():
 def install():
     require(sys.platform == "win32" and platform.machine().lower() in
             {"amd64", "x86_64"}, "WINDOWS_X64_REQUIRED")
-    require(sys.version_info[:2] == (3, 12), "INSTALL_USING_PYTHON_3_12_REQUIRED")
+    require(sys.version_info[:2] in {(3, 11), (3, 12)}, "INSTALL_USING_PYTHON_3_11_OR_3_12_REQUIRED")
     require(ROOT.is_dir() and (ROOT / "scripts" /
             "archicad_project_accelerator.py").is_file()
             and (ROOT / "scripts" /
@@ -142,7 +142,7 @@ def install():
 def main(argv=None):
     p = argparse.ArgumentParser(description="APA AC29 external tools isolated installer")
     p.add_argument("--install", action="store_true",
-                   help="explicitly create and pip-install a separate Python 3.12 venv")
+                   help="explicitly create and pip-install a separate Python 3.11/3.12 venv")
     p.add_argument("--check", action="store_true",
                    help="verify existing isolated install without mutations")
     args = p.parse_args(argv)
