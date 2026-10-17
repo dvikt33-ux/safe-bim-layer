@@ -16,8 +16,8 @@ import subprocess
 import sys
 
 REPO = "https://github.com/dvikt33-ux/safe-bim-layer.git"
-BRANCH = "feature/apa-ac29-scoped-native-mailbox-20261017"
-BASE_REVISION = "6d4487d6b4ef34a0573de694c179335827d3b1fc"
+BRANCH = "fix/apa-ac29-bdd-paired-history-reconciliation-20261018"
+BASE_REVISION = "65eb58068f15fb2646e4a5a0464017741441bf6d"
 BASE_WORKING_SHA = "9293c799cf4a87792016cc76ca5f2c1d8e569f85d6cbab0b529f82d10a303a34"
 BASE_SOURCE_SHA = "33b96850ad07547a9b12524de8bc46479fd98fbbce6772436d388be679836d66"
 BASE_GUIDS = 298
@@ -127,9 +127,10 @@ def run(args):
                  "apa_ac29_existing_modify_verifiers.py"} <=
                 set(old["moduleHashes"]),
                 "SCOPED_BASE_MUST_HAVE_VERIFIED_SIX_CONTRACT_RELEASE")
-        require(not (ROOT / "scripts" /
-                     "apa_ac29_scoped_native_executor.py").exists(),
-                "SCOPED_MAILBOX_EXECUTOR_ALREADY_INSTALLED_UNREVIEWED")
+        require("apa_ac29_scoped_native_executor.py" in old["moduleHashes"] and
+                "apa_ac29_scene_reconciliation.py" in old["moduleHashes"] and
+                "apa_ac29_dynamic_write_scopes.py" in old["moduleHashes"],
+                "PAIRED_HISTORY_REQUIRES_INSTALLED_SCOPED_EXECUTOR_RELEASE")
 
         manifest = {
             "schema": "APA_AC29_LOCAL_RUNTIME_UPDATE_V1",

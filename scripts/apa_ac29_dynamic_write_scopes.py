@@ -116,17 +116,46 @@ def validate_existing_ledger(journal, scene_id, reconciliation=None):
     journal = Path(journal)
     need(journal.is_file(), "DYNAMIC_WRITE_ORIGINAL_SCENEWRITER_SQLITE_REQUIRED")
     with closing(sqlite3.connect(f"file:{journal.as_posix()}?mode=ro", uri=True)) as db:
-        old = db.execute("SELECT scene_id,state FROM scenes").fetchall()
+        old = db.execute("SELECT scene_id,state,result FROM scenes").fetchall()
     need(scene_id not in {r[0] for r in old},
          "DYNAMIC_WRITE_SCENE_ID_ALREADY_USED_NEVER_RETRY")
-    pending = [(name, status) for name, status in old if status != "PASS"]
+    pending = [(name, status, raw) for name, status, raw in old if status != "PASS"]
     if pending:
-        need(isinstance(reconciliation, dict) and
-             reconciliation.get("status") ==
-             "PREVIOUS_UNKNOWN_EFFECT_ABSENT_FROM_CURRENT_MODEL_PASS" and
-             {r[0] for r in pending} == {reconciliation.get("sceneId")},
-             "DYNAMIC_WRITE_UNRECONCILED_PREVIOUS_NATIVE_OPERATION")
-    return pending
+        import hashlib
+        paired = (isinstance(reconciliation, dict) and
+                  reconciliation.get("schema") ==
+                  "APA_AC29_BDD_PAIRED_HISTORY_RECONCILIATION_V1")
+        if paired:
+            proofs = reconciliation.get("historicalProofs")
+            need(reconciliation.get("status") ==
+                 "BDD_PAIRED_HISTORY_CURRENT_MODEL_RECONCILED_PASS" and
+                 reconciliation.get("originalUnknownRowsPreserved") is True and
+                 reconciliation.get("source290BrepRetained") is True and
+                 reconciliation.get("addedGuidCount") == 8 and
+                 reconciliation.get("modelWrites") == 0 and
+                 reconciliation.get("nativeSaveCalls") == 0 and
+                 isinstance(proofs, list) and len(proofs) == len(pending) == 2 and
+                 all(isinstance(row, dict) and set(row) == {
+                     "sceneId", "originalSceneState", "originalResultSHA256",
+                     "nativeSuccessCount", "originalUnknownPreserved"}
+                     for row in proofs),
+                 "DYNAMIC_WRITE_PAIRED_HISTORY_PROOF_INCOMPLETE")
+            provided = {row["sceneId"]: row for row in proofs}
+            need(len(provided) == 2 and
+                 set(provided) == {name for name, _, _ in pending} and
+                 all(provided[name]["originalSceneState"] == state and
+                     provided[name]["originalResultSHA256"] ==
+                     hashlib.sha256(raw.encode()).hexdigest() and
+                     provided[name]["originalUnknownPreserved"] is True
+                     for name, state, raw in pending),
+                 "DYNAMIC_WRITE_PAIRED_HISTORY_ORIGINAL_SQLITE_CHANGED")
+        else:
+            need(isinstance(reconciliation, dict) and
+                 reconciliation.get("status") ==
+                 "PREVIOUS_UNKNOWN_EFFECT_ABSENT_FROM_CURRENT_MODEL_PASS" and
+                 {r[0] for r in pending} == {reconciliation.get("sceneId")},
+                 "DYNAMIC_WRITE_UNRECONCILED_PREVIOUS_NATIVE_OPERATION")
+    return [(name, state) for name, state, _ in pending]
 
 
 def build_existing_workflow_scopes(*, spec, plan, router, registry,

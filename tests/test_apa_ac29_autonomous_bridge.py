@@ -117,6 +117,78 @@ class SixVerifierRuntimeReceipt(TestCase):
                     bridge.runtime_release()
 
 
+class BddPairedLiveReadOnlyPreflight(TestCase):
+    def test_real_bridge_action_reports_local_paired_proof_without_write(self):
+        import os
+        import sqlite3
+        from contextlib import closing
+        from types import SimpleNamespace
+        import archicad_project_accelerator as APA
+        import archicad_bim_documentation as D
+        import archicad_scene_run as RUN
+        import apa_ac29_scene_reconciliation as RECON
+
+        with TemporaryDirectory() as td:
+            root=Path(td)
+            schema=root/"schemas/tapir-live-1.5.10/tapir-scene-live.json"
+            schema.parent.mkdir(parents=True)
+            schema.write_text("{}",encoding="utf8")
+            journal=root/"APA_BDD_Window1p8/apa_scene_writer.sqlite"
+            journal.parent.mkdir()
+            with closing(sqlite3.connect(journal)) as db:
+                db.execute("CREATE TABLE scenes(scene_id TEXT,state TEXT)")
+                db.executemany("INSERT INTO scenes VALUES(?,?)",[
+                    ("BDD_BULK150_GRID_AND_LINE_20261016","PARTIAL_OR_UNKNOWN_OUTCOME"),
+                    ("APA_AC29_REMOTE_COLUMN_BEAM_MULTI_COPY_20261017",
+                     "PARTIAL_OR_UNKNOWN_OUTCOME")])
+                db.commit()
+            folder=root/"proof"
+            folder.mkdir()
+            guid="b8d528f0-ab6a-4ece-a62d-74e3a0d7c46c"
+            model={"elements":[{
+                "guid":guid,"type":"Object","homeStory":0,
+                "relationships":{},"materialBindings":{},"bodies":[]}]}
+            class ReadOnlyAPI:
+                write_attempts=0
+                def __call__(self,cmd,params):
+                    if cmd=="GetAllElements":
+                        return {"elements":[{"elementId":{"guid":guid}}]}
+                    raise AssertionError("unexpected command: "+cmd)
+            api=ReadOnlyAPI()
+            working=root/"working.pln"
+            original=root/"source.pln"
+            with patch.dict(os.environ,{"LOCALAPPDATA":str(root)}), \
+                 patch.object(bridge,"ROOT",root), \
+                 patch.object(bridge,"WORKING",working), \
+                 patch.object(bridge,"ORIGINAL",original), \
+                 patch.object(bridge,"SOURCE_SHA","s"*64), \
+                 patch.object(bridge,"sha",side_effect=lambda p:
+                              "s"*64 if p==original else "w"*64), \
+                 patch.object(bridge,"approved_saved_sha",return_value="w"*64), \
+                 patch.object(bridge,"approved_guid_count",return_value=1), \
+                 patch.object(APA,"archicad29",return_value={"buildNumber":5101}), \
+                 patch.object(APA,"EvidenceAPI",return_value=api) as opened, \
+                 patch.object(APA,"native_command_router",
+                              return_value=SimpleNamespace(
+                                  contract_hash=lambda x:"c"*64)), \
+                 patch.object(D,"capture_full_model",return_value=model), \
+                 patch.object(RUN,"bind_authorized_saved_copy"), \
+                 patch.object(RECON,"reconcile_bdd_paired_history_read_only",
+                              return_value={"status":
+                                  "BDD_PAIRED_HISTORY_CURRENT_MODEL_RECONCILED_PASS",
+                                  "modelWrites":0}) as recon:
+                result=bridge.capture_scoped_registry_preflight(
+                    sample(),folder)
+            self.assertEqual(result["status"],
+                "SCOPED_REGISTRY_PAIRED_HISTORY_READ_ONLY_PASS")
+            self.assertEqual(result["modelWrites"],0)
+            self.assertEqual(result["nativeSaveCalls"],0)
+            self.assertEqual(len(result["unresolvedScenes"]),2)
+            self.assertFalse(result["requiresIndependentReconciliationPerScene"])
+            self.assertIs(opened.call_args.kwargs["execute"],False)
+            self.assertEqual(recon.call_count,1)
+
+
 class GateTests(TestCase):
     def setUp(self):
         # Unit ingress cases must never consult a real installed deployment.

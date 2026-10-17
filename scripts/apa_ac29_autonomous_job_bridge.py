@@ -360,8 +360,32 @@ def capture_scoped_registry_preflight(job, folder):
             "ORDER BY scene_id").fetchall()
     require(len(rows) <= 100, "SCOPED_PREFLIGHT_TOO_MANY_PENDING_SCENES")
     pending = [dict(sceneId=n, state=state) for n, state in rows]
+    history = None
+    history_error = None
+    if pending:
+        # READ-ONLY historical reconciliation is independent of any GitHub
+        # task/grant. It neither changes SceneWriter rows nor permits a write.
+        import apa_ac29_scene_reconciliation as RECON
+        history_raw = (Path(os.environ["LOCALAPPDATA"]) /
+                       "APA_BDD_Bulk150_NearHouse" / "raw" / "raw.jsonl")
+        try:
+            history = RECON.reconcile_bdd_paired_history_read_only(
+                journal, history_raw, api,
+                current_project_sha=sha(WORKING),
+                source_project_sha=sha(ORIGINAL),
+                expected_source_sha=SOURCE_SHA,
+                guid_inventory=APA.inventory_guids,
+                capture_model=D.capture_full_model,
+                geom_signature=C.ROOF.geometry_signature, digest=RUN.digest)
+        except (ValueError, OSError, KeyError, TypeError) as exc:
+            history_error = type(exc).__name__ + ": " + str(exc)[:250]
+    require(api.write_attempts == 0 and
+            sha(WORKING) == approved_saved_sha() and sha(ORIGINAL) == SOURCE_SHA,
+            "SCOPED_PREFLIGHT_HISTORICAL_READ_CHANGED_PROJECT")
     return {
-        "status": ("SCOPED_REGISTRY_READY_BUT_NATIVE_WRITES_BLOCKED_BY_HISTORY"
+        "status": ("SCOPED_REGISTRY_PAIRED_HISTORY_READ_ONLY_PASS"
+                   if history is not None else
+                   "SCOPED_REGISTRY_READY_BUT_NATIVE_WRITES_BLOCKED_BY_HISTORY"
                    if pending else "SCOPED_REGISTRY_NATIVE_READ_ONLY_PREFLIGHT_PASS"),
         "archicadBuild": 5101,
         "currentGuidCount": len(current),
@@ -369,7 +393,10 @@ def capture_scoped_registry_preflight(job, folder):
         "currentBrepHash": native_hash,
         "registeredCodeOwnedCommands": commands,
         "unresolvedScenes": pending,
-        "requiresIndependentReconciliationPerScene": bool(pending),
+        "historicalReadOnlyProof": history,
+        "historicalProofError": history_error,
+        "requiresIndependentReconciliationPerScene": bool(pending) and
+            history is None,
         "modelWrites": 0, "nativeSaveCalls": 0, "writeGrantsInstalled": 0,
         "automaticRetry": False
     }
