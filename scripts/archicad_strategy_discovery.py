@@ -978,6 +978,90 @@ def discover_catalog_task(router, intent, planner_python=None):
     return result
 
 
+
+def prepare_current_runtime_catalog_task(writer, intent, planner_python=None):
+    """Read-only, task-scoped promotion from HISTORIC schemas to an actual export.
+
+    The caller must retain and use the returned SAME DynamicCommands router for
+    APA.run_auto_optimized_native_task. No dispatch, journal, save or model edit
+    occurs here. Existing SceneWriter scope/authorization stays mandatory.
+    """
+    import archicad_project_accelerator as APA
+    import archicad_native_spatial_tools as spatial
+
+    # The existing export verifier checks the live JS sources, provider version
+    # and bound metadata. Compare that binding with the actual current project.
+    live = APA.catalog_with_provenance(writer.schema_path)
+    binding = writer.guarded_binding()
+    expected = live.get("_metadata", {}).get("binding", {})
+    fields = ("path", "name", "port", "tapirVersion", "storyIndex")
+    require(all(field in expected and field in binding
+                and expected[field] == binding[field] for field in fields),
+            "AUTO_CATALOG_CURRENT_RUNTIME_PROJECT_OR_SCHEMA_DRIFT")
+    APA.archicad29(writer.api)
+    require(writer.api("GetAddOnVersion", {}).get("version") ==
+            APA.SCENE.GRAPH.CONTRACTS.source_version(live),
+            "AUTO_CATALOG_CURRENT_RUNTIME_TAPIR_VERSION_DRIFT")
+
+    # Reconstruct the EXISTING router from the current exported contract.
+    # Commands absent from this actual export may be attached by the existing
+    # snapshot loader but remain explicitly SOURCE_ONLY and nonexecutable.
+    router = APA.native_command_router(writer.schema_path)
+    connect_existing_catalog_sources(router)
+    preview_intent = immutable(intent)
+    preview_intent["measurements"] = {}
+    initial = discover_catalog_task(router, preview_intent)
+    candidates = {
+        command for option in initial["alternatives"]
+        if not option["executionBlockers"]
+        for command in option["commands"]
+    }
+    active_commands = set(live["commands"])
+    spatial_native = candidates & (spatial.COMMANDS | spatial.READS)
+    if spatial_native:
+        # Source-built Grid/Stair contracts require exact live APX identity in
+        # addition to exported schemas and per-command registration.
+        APA.verify_native_runtime_identity(writer.api, live)
+
+    registered, rejected = [], {}
+    for command in sorted(candidates):
+        if command not in active_commands and not command.startswith("API."):
+            # The existing source-only blocker must not be removed by an
+            # availability-only probe against a historical contract.
+            rejected[command] = "NO_CURRENT_LIVE_EXPORT_CONTRACT"
+            router.register_availability(command, False)
+            continue
+        try:
+            router.probe_runtime(writer.api, command)
+        except (ValueError, KeyError, TypeError) as exc:
+            # Fail closed for THIS task, never describe a failed probe as a
+            # proven permanently unavailable command.
+            router.register_availability(command, False)
+            rejected[command] = "RUNTIME_PROBE_FAILED:" + str(exc)[:180]
+        else:
+            registered.append(command)
+
+    # Recompile with exactly the newly established availability facts. This
+    # preserves the original BIM Graph, solver, plans and SceneWriter route.
+    final = discover_catalog_task(router, intent, planner_python)
+    report = {
+        "status": "CURRENT_RUNTIME_CATALOG_PREPARED_READ_ONLY",
+        "boundProject": binding["name"],
+        "currentExportContractCount": len(active_commands),
+        "selectedTaskRegistrationProbes": len(candidates),
+        "registeredForTask": registered,
+        "notQualifiedForTask": rejected,
+        "historicalSourceOnlyNotPromoted": [
+            alt["commands"] for alt in final["alternatives"]
+            if alt["executionBlockers"]
+        ],
+        "modelWrites": 0,
+        "nativeCommandExecution": 0,
+        "executor": "UNCHANGED_SCENE_WRITER"
+    }
+    return router, final, report
+
+
 def main():
     """Offline preview CLI over the SAME router, policies, graph and APA API."""
     import argparse
