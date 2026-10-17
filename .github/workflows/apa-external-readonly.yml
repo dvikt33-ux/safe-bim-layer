@@ -24,14 +24,33 @@ jobs:
         run: python -m py_compile scripts/apa_external_readonly.py scripts/install_apa_external_readonly.py
       - name: Focused boundary tests (no vendor install, no Archicad)
         run: python -m unittest discover -s tests -p test_apa_external_readonly.py -v
-      - name: Install only exact vendor pins in isolated Windows venv
+      - name: Install exact vendor pins in isolated Windows venv
+        shell: pwsh
         run: |
+          $ErrorActionPreference = 'Stop'
           python -m venv .vendor-venv
-          .\.vendor-venv\Scripts\python.exe -m pip install --disable-pip-version-check --no-input --only-binary=:all: --no-binary=odfpy -r scripts/requirements-external-readonly.txt
-          .\.vendor-venv\Scripts\python.exe -m pip check
+          if ($LASTEXITCODE -ne 0) { throw 'venv failed' }
+          $py = '.\.vendor-venv\Scripts\python.exe'
+          New-Item -ItemType Directory .vendor-src | Out-Null
+          & $py -m pip download --disable-pip-version-check --no-input --no-deps --no-binary=:all: --dest .vendor-src odfpy==1.4.1
+          if ($LASTEXITCODE -ne 0) { throw 'odfpy download failed' }
+          $archive = Join-Path '.vendor-src' 'odfpy-1.4.1.tar.gz'
+          $actual = (Get-FileHash $archive -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($actual -ne 'db766a6e59c5103212f3cc92ec8dd50a0f3a02790233ed0b52148b70d3c438ec') { throw 'odfpy SHA mismatch' }
+          & $py -m pip install --disable-pip-version-check --no-input --no-deps $archive
+          if ($LASTEXITCODE -ne 0) { throw 'odfpy install failed' }
+          & $py -m pip install --disable-pip-version-check --no-input --only-binary=:all: -r scripts/requirements-external-readonly.txt
+          if ($LASTEXITCODE -ne 0) { throw 'wheel install failed' }
+          & $py -m pip check
+          if ($LASTEXITCODE -ne 0) { throw 'pip dependency check failed' }
       - name: Check real installed vendor command imports
+        shell: pwsh
         run: |
-          .\.vendor-venv\Scripts\python.exe scripts/apa_external_readonly.py doctor
-          .\.vendor-venv\Scripts\python.exe -m ifcclash --help
-          .\.vendor-venv\Scripts\python.exe -m ifcdiff --help
-          .\.vendor-venv\Scripts\python.exe -m ifctester --help
+          $ErrorActionPreference = 'Stop'
+          $py = '.\.vendor-venv\Scripts\python.exe'
+          & $py scripts/apa_external_readonly.py doctor
+          if ($LASTEXITCODE -ne 0) { throw 'doctor blocked' }
+          foreach ($module in @('ifcclash','ifcdiff','ifctester')) {
+            & $py -m $module --help
+            if ($LASTEXITCODE -ne 0) { throw "Vendor CLI blocked: $module" }
+          }
