@@ -143,6 +143,7 @@ class BddPairedLiveReadOnlyPreflight(TestCase):
                      "PARTIAL_OR_UNKNOWN_OUTCOME")])
                 db.commit()
             folder=root/"proof"
+            folder.mkdir()
             guid="b8d528f0-ab6a-4ece-a62d-74e3a0d7c46c"
             model={"elements":[{
                 "guid":guid,"type":"Object","homeStory":0,
