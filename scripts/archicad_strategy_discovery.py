@@ -1025,7 +1025,9 @@ def prepare_current_runtime_catalog_task(writer, intent, planner_python=None):
 
     registered, rejected = [], {}
     for command in sorted(candidates):
-        if command not in active_commands and not command.startswith("API."):
+        contract = router.catalog["commands"][command]
+        if (command not in active_commands and not command.startswith("API.")
+                and contract.get("api") != "local-python"):
             # The existing source-only blocker must not be removed by an
             # availability-only probe against a historical contract.
             rejected[command] = "NO_CURRENT_LIVE_EXPORT_CONTRACT"
@@ -1056,7 +1058,7 @@ def prepare_current_runtime_catalog_task(writer, intent, planner_python=None):
             if alt["executionBlockers"]
         ],
         "modelWrites": 0,
-        "nativeCommandExecution": 0,
+        "modelMutationCalls": 0,
         "executor": "UNCHANGED_SCENE_WRITER"
     }
     return router, final, report
