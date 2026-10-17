@@ -49,6 +49,12 @@ def build():
       'GetNativeWorkingUnitsV1':'Read project working unit enums and decimal preferences without mutation.',
       'GetNativeGroupRootsV1':'Immediate and nested root group membership for element GUIDs.',
       'GetNativeLibraryPartOriginV1':'Modern SDK GDL part name and containing library origin.'}.items()}
+    native['GetNativeGroupMembersV1']=dict(version='29',category='Native SDK group readback',
+        description='Read actual nested native group member GUIDs independently.',
+        parameters=obj({'groupId':group_id}),
+        returns=either(obj({'nativeModelWrites':{'const':0},'groupId':group_id,'memberIds':arr(group_id)})),
+        availability='BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED',
+        implementationSource='archicad-addon/Sources/NativeGroupCommands.inc')
     native['CreateNativeGroupV1']=dict(version='29',category='Native SDK group operation',
         description='Create true Archicad group from verified same-story existing elements in one undo scope.',
         parameters=group_params,returns=group_result,
