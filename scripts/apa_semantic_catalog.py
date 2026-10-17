@@ -14,6 +14,7 @@ SIDE = ROOT / "external-tools" / "apa-semantic-v1"
 NAMESPACE = "APASemantic"
 COMMANDS = {
     "PDFPaths": ("pdf-paths", ("a", "page", "output")),
+    "PDFPageRaster": ("pdf-raster", ("a", "page", "output")),
     "OpenBIMSegments": ("openbim", ("a", "output")),
     "RasterFloorplan": ("raster2seq", ("a", "output")),
 }
@@ -54,7 +55,7 @@ def run(action, params):
             "SEMANTIC_OUTPUT_NOT_NEW_OUTSIDE_APA")
     cmd = [str(py), str(worker), action,
            "--a", params["a"], "--output", params["output"]]
-    if action == "pdf-paths":
+    if action in {"pdf-paths", "pdf-raster"}:
         cmd += ["--page", str(params["page"])]
     else:
         config = SIDE / "models.json"
@@ -78,7 +79,7 @@ def register(router):
     for name, (action, required) in COMMANDS.items():
         props = {"a": {"type": "string", "minLength": 1},
                  "output": {"type": "string", "minLength": 1}}
-        if name == "PDFPaths":
+        if name in {"PDFPaths", "PDFPageRaster"}:
             props["page"] = {"type": "integer", "minimum": 1}
         contracts[name] = {
             "name": name, "version": "1",
