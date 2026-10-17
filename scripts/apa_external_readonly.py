@@ -107,7 +107,8 @@ def ifc_clash(args):
     with tempfile.TemporaryDirectory(prefix="apa-clash-spec-") as t:
         config = Path(t) / "clashsets.json"
         spec = [{"name": "APA_SOURCE_QUALIFIED_CLASH_SET",
-                 "a": [{"file": str(a)}]}]
+                 "mode": "intersection", "tolerance": 0.001,
+                 "check_all": False, "a": [{"file": str(a)}]}]
         if b:
             spec[0]["b"] = [{"file": str(b)}]
         config.write_text(json.dumps(spec), encoding="utf-8")
