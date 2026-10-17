@@ -1,9 +1,9 @@
 {
   "schema": "APA_FUNCTIONAL_MODULES_V1",
-  "sdkImplementationSHA256": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72",
+  "sdkImplementationSHA256": "c90d4b2fc69957769a7326172280593f4d3677370c23567c77335737924d4366",
   "sdkImplementationFiles": {
-    "archicad-addon/Sources/NativeModuleCommands.cpp": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72",
     "archicad-addon/Sources/NativeExtendedModules.cpp": "d9972a9e22d0d06857e62ff715fc6925072d2f76907aa7f5501c953247992331",
+    "archicad-addon/Sources/NativeModuleCommands.cpp": "c90d4b2fc69957769a7326172280593f4d3677370c23567c77335737924d4366",
     "archicad-addon/Sources/NativeExtendedModules.hpp": "e2536aef489472b34d81ff35a5f6c6750f703aed508ce4917c7176015d48cf05",
     "archicad-addon/Sources/NativeExtendedSchemas.inc": "f3eda95b89d9acab357fb461b1755bd4edf3fb6956655f7d2d037cca1ef4566e",
     "archicad-addon/Sources/NativeQuantityFields.inc": "470d052f2cc23bc0536efc658e7a1d9840bdcc214d500b0709e598e805f58f53",
@@ -12,7 +12,8 @@
     "archicad-addon/Sources/NativeAssemblyModify.inc": "38dac4b42584d23dad52112c3e1bd7a582099a06efbad85a9d674722140dffbf",
     "archicad-addon/Sources/NativeAssemblyMemo.inc": "175f6bbcf16bb5762823730670a4bb170055966b3f71993126d7d22891a66e23",
     "archicad-addon/Sources/NativeAssemblyOwner.inc": "ec59fc75204751d4da83aebd54e67949385f7dd0631d49cb7dcd17bd82e93c76",
-    "archicad-addon/Sources/NativeMEPTopology.inc": "1cc29c9858287e0437c28bc1503920ea40fb52b25e966ef24d3bbe910e103558"
+    "archicad-addon/Sources/NativeMEPTopology.inc": "1cc29c9858287e0437c28bc1503920ea40fb52b25e966ef24d3bbe910e103558",
+    "archicad-addon/Sources/NativeGroupCommands.inc": "f18746ade54cf543fb391e68b2036f3d53e179d9dff96866372868d47303db13"
   },
   "sdkProviders": {
     "TapirCommand": {
@@ -148,7 +149,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeModuleCommands.cpp",
-        "implementationSHA256": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72"
+        "implementationSHA256": "c90d4b2fc69957769a7326172280593f4d3677370c23567c77335737924d4366"
       },
       "GetNativePolygonMemoV1": {
         "version": "29",
@@ -328,7 +329,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeModuleCommands.cpp",
-        "implementationSHA256": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72"
+        "implementationSHA256": "c90d4b2fc69957769a7326172280593f4d3677370c23567c77335737924d4366"
       },
       "GetNativeWorkingUnitsV1": {
         "version": "29",
@@ -413,7 +414,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeModuleCommands.cpp",
-        "implementationSHA256": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72"
+        "implementationSHA256": "c90d4b2fc69957769a7326172280593f4d3677370c23567c77335737924d4366"
       },
       "GetNativeGroupRootsV1": {
         "version": "29",
@@ -548,7 +549,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeModuleCommands.cpp",
-        "implementationSHA256": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72"
+        "implementationSHA256": "c90d4b2fc69957769a7326172280593f4d3677370c23567c77335737924d4366"
       },
       "GetNativeLibraryPartOriginV1": {
         "version": "29",
@@ -669,7 +670,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeModuleCommands.cpp",
-        "implementationSHA256": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72"
+        "implementationSHA256": "c90d4b2fc69957769a7326172280593f4d3677370c23567c77335737924d4366"
       },
       "GetNativeEnvelopeMemoV1": {
         "version": "29",
@@ -5493,6 +5494,362 @@
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeMEPTopology.inc",
         "implementationSHA256": "1cc29c9858287e0437c28bc1503920ea40fb52b25e966ef24d3bbe910e103558"
+      },
+      "GetNativeGroupMembersV1": {
+        "version": "29",
+        "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
+        "implementationSource": "archicad-addon/Sources/NativeGroupCommands.inc",
+        "implementationSHA256": "f18746ade54cf543fb391e68b2036f3d53e179d9dff96866372868d47303db13",
+        "category": "Native SDK group readback",
+        "description": "Read actual nested native group member GUIDs independently.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "groupId": {
+              "type": "object",
+              "properties": {
+                "guid": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "guid"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "groupId"
+          ],
+          "additionalProperties": false
+        },
+        "returns": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "nativeModelWrites": {
+                  "const": 0
+                },
+                "groupId": {
+                  "type": "object",
+                  "properties": {
+                    "guid": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "guid"
+                  ],
+                  "additionalProperties": false
+                },
+                "memberIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "guid": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "guid"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "nativeModelWrites",
+                "groupId",
+                "memberIds"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "error"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "CreateNativeGroupV1": {
+        "version": "29",
+        "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
+        "implementationSource": "archicad-addon/Sources/NativeGroupCommands.inc",
+        "implementationSHA256": "f18746ade54cf543fb391e68b2036f3d53e179d9dff96866372868d47303db13",
+        "category": "Native SDK group operation",
+        "description": "Create true Archicad group from verified same-story existing elements in one undo scope.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "memberIds": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "guid": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "guid"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 2,
+              "maxItems": 128,
+              "uniqueItems": true
+            },
+            "sourceRef": {
+              "type": "string",
+              "minLength": 8
+            }
+          },
+          "required": [
+            "memberIds",
+            "sourceRef"
+          ],
+          "additionalProperties": false
+        },
+        "returns": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "nativeModelWrites": {
+                  "type": "integer"
+                },
+                "groupId": {
+                  "type": "object",
+                  "properties": {
+                    "guid": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "guid"
+                  ],
+                  "additionalProperties": false
+                },
+                "memberCount": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "nativeModelWrites",
+                "groupId",
+                "memberCount"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "error"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "operationKind": "CREATE",
+        "impact": "MODEL"
+      },
+      "CloneNativeGroupV1": {
+        "version": "29",
+        "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
+        "implementationSource": "archicad-addon/Sources/NativeGroupCommands.inc",
+        "implementationSHA256": "f18746ade54cf543fb391e68b2036f3d53e179d9dff96866372868d47303db13",
+        "category": "Native SDK group operation",
+        "description": "Clone a verified whole native group at source-qualified offsets; one high-level bridge request with nested SDK edit calls and rollback on failed group readback.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "groupId": {
+              "type": "object",
+              "properties": {
+                "guid": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "guid"
+              ],
+              "additionalProperties": false
+            },
+            "sourceRef": {
+              "type": "string",
+              "minLength": 8
+            },
+            "translations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "dx": {
+                    "type": "number"
+                  },
+                  "dy": {
+                    "type": "number"
+                  },
+                  "dz": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "dx",
+                  "dy",
+                  "dz"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1,
+              "maxItems": 32
+            }
+          },
+          "required": [
+            "groupId",
+            "sourceRef",
+            "translations"
+          ],
+          "additionalProperties": false
+        },
+        "returns": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "nativeModelWrites": {
+                  "type": "integer"
+                },
+                "sourceGroupId": {
+                  "type": "object",
+                  "properties": {
+                    "guid": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "guid"
+                  ],
+                  "additionalProperties": false
+                },
+                "newGroupIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "guid": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "guid"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "createdElements": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "elementId": {
+                        "type": "object",
+                        "properties": {
+                          "guid": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "guid"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "elementId"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "nativeModelWrites",
+                "sourceGroupId",
+                "newGroupIds",
+                "createdElements"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "error"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "operationKind": "CREATE",
+        "impact": "MODEL"
       }
     },
     "AddOnCommandTest": {
@@ -5548,7 +5905,7 @@
         },
         "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
         "implementationSource": "archicad-addon/Sources/NativeModuleCommands.cpp",
-        "implementationSHA256": "08556283419a87ad0d530f86003163b2d5735963594577dd14e6daf0386edb72"
+        "implementationSHA256": "c90d4b2fc69957769a7326172280593f4d3677370c23567c77335737924d4366"
       }
     }
   },
@@ -6479,7 +6836,7 @@
       "MemoPolygonInputs": []
     }
   },
-  "newNativeContracts": 18,
+  "newNativeContracts": 21,
   "newLocalCatalogEntries": 10,
   "newAnalyticalCapabilities": 7,
   "reusedExistingAPALocalUtilities": 3,
