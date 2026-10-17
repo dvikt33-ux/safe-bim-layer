@@ -244,10 +244,14 @@ def main():
             stats["calls"] += 1
             begin = time.perf_counter()
             try:
-                return APA.native_transport(command, params)
+                # Use the exact established Tapir transport with a longer
+                # timeout for large native batch requests. No fallback/retry.
+                return RUN.tapir(PORT, command, params, timeout=120)
             finally:
                 stats["times"].append(round(time.perf_counter() - begin, 6))
-        return APA.native_transport(command, params)
+        if command.startswith("API."):
+            return APA.native_transport(command, params)
+        return RUN.tapir(PORT, command, params, timeout=120)
 
     api = APA.EvidenceAPI(measured, OUT / "native", execute=True)
     router = APA.native_command_router(SCHEMA, include_functional_modules=False)
