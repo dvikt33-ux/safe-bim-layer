@@ -21,7 +21,7 @@ def source():
     return {
         "schema":"APA_AC29_SCOPED_NATIVE_TASK_V1",
         "projectSha256":SHA,
-        "projectPath":"C:/BDD.pln",
+        "projectPath":str(Path("C:/BDD.pln")),
         "command":"CreateWalls",
         "parameters":{"wallsData":[{"height":3}]},
         "sourcePlanHash":SHA,
@@ -107,7 +107,8 @@ class TaskScopeTests(TestCase):
     def test_historical_unknown_pair_blocks_without_mutating_sqlite(self):
         with TemporaryDirectory() as temp:
             p=Path(temp)/"journal.sqlite"
-            with sqlite3.connect(p) as db:
+            from contextlib import closing
+            with closing(sqlite3.connect(p)) as db:
                 db.execute("CREATE TABLE scenes(scene_id TEXT PRIMARY KEY,state TEXT)")
                 db.executemany("INSERT INTO scenes VALUES(?,?)",[
                     ("BDD_BULK150_GRID_AND_LINE_20261016","PARTIAL_OR_UNKNOWN_OUTCOME"),
