@@ -127,5 +127,30 @@ class ExternalReadonlyTests(unittest.TestCase):
             self.assertEqual(dispatch.call_args.args[0][2], "ifc-diff")
 
 
+    def test_actual_apa_dynamic_commands_prepare_and_read(self):
+        """Use original router implementation, not a test double for its guards."""
+        from archicad_dynamic_commands import DynamicCommands
+        router = DynamicCommands(dict(commands={}, common_schemas={}))
+        with mock.patch.object(Catalog, "verified_environment",
+                               return_value=("existing-python", "installed-adapter")):
+            receipt = Catalog.register(router)
+        command = "AddOn.APAExternalReadOnly.PDFVectors"
+        params = {"a": "C:/fixture.pdf", "output": "C:/new-evidence.json"}
+        ticket = router.prepare(command, params)
+        self.assertEqual(ticket["effect"], "READ_ONLY")
+        self.assertFalse(ticket["nativeWritePermission"])
+        self.assertEqual(len(receipt["commands"]), 6)
+        proof = {"schema": "APA_EXTERNAL_READONLY_EVIDENCE_V1",
+                 "status": "SOURCE_ANALYSIS_ONLY_NOT_ENGINEERING_ACCEPTANCE",
+                 "action": "pdf-vectors", "sources": [], "result": {},
+                 "modelWrites": 0, "nativeCalls": 0}
+        with mock.patch.object(Catalog, "call", return_value=proof) as dispatcher:
+            response = router.read(None, ticket, reviewed_read_only=True)
+        self.assertEqual(response, proof)
+        dispatcher.assert_called_once_with("pdf-vectors", params)
+        with self.assertRaisesRegex(ValueError, "SOURCE_REVIEWED_READ_ONLY_EFFECT_REQUIRED"):
+            router.read(None, ticket, reviewed_read_only=False)
+
+
 if __name__ == "__main__":
     unittest.main()
