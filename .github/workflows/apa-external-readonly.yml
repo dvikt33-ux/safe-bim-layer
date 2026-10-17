@@ -24,3 +24,14 @@ jobs:
         run: python -m py_compile scripts/apa_external_readonly.py scripts/install_apa_external_readonly.py
       - name: Focused boundary tests (no vendor install, no Archicad)
         run: python -m unittest discover -s tests -p test_apa_external_readonly.py -v
+      - name: Install only exact vendor pins in isolated Windows venv
+        run: |
+          python -m venv .vendor-venv
+          .\.vendor-venv\Scripts\python.exe -m pip install --disable-pip-version-check --no-input --only-binary=:all: -r scripts/requirements-external-readonly.txt
+          .\.vendor-venv\Scripts\python.exe -m pip check
+      - name: Check real installed vendor command imports
+        run: |
+          .\.vendor-venv\Scripts\python.exe scripts/apa_external_readonly.py doctor
+          .\.vendor-venv\Scripts\python.exe -m ifcclash --help
+          .\.vendor-venv\Scripts\python.exe -m ifcdiff --help
+          .\.vendor-venv\Scripts\python.exe -m ifctester --help
