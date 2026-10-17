@@ -1023,7 +1023,7 @@ def prepare_current_runtime_catalog_task(writer, intent, planner_python=None):
         # addition to exported schemas and per-command registration.
         APA.verify_native_runtime_identity(writer.api, live)
 
-    registered, rejected = [], {}
+    checked, rejected = [], {}
     for command in sorted(candidates):
         contract = router.catalog["commands"][command]
         if (command not in active_commands and not command.startswith("API.")
@@ -1034,14 +1034,14 @@ def prepare_current_runtime_catalog_task(writer, intent, planner_python=None):
             router.register_availability(command, False)
             continue
         try:
-            router.probe_runtime(writer.api, command)
+            status = router.probe_runtime(writer.api, command)
         except (ValueError, KeyError, TypeError) as exc:
             # Fail closed for THIS task, never describe a failed probe as a
             # proven permanently unavailable command.
             router.register_availability(command, False)
             rejected[command] = "RUNTIME_PROBE_FAILED:" + str(exc)[:180]
         else:
-            registered.append(command)
+            checked.append({"command": command, "status": status["status"]})
 
     # Recompile with exactly the newly established availability facts. This
     # preserves the original BIM Graph, solver, plans and SceneWriter route.
@@ -1050,8 +1050,8 @@ def prepare_current_runtime_catalog_task(writer, intent, planner_python=None):
         "status": "CURRENT_RUNTIME_CATALOG_PREPARED_READ_ONLY",
         "boundProject": binding["name"],
         "currentExportContractCount": len(active_commands),
-        "selectedTaskRegistrationProbes": len(candidates),
-        "registeredForTask": registered,
+        "taskScopedAvailabilityChecks": len(candidates),
+        "runtimeChecksForTask": checked,
         "notQualifiedForTask": rejected,
         "historicalSourceOnlyNotPromoted": [
             alt["commands"] for alt in final["alternatives"]
