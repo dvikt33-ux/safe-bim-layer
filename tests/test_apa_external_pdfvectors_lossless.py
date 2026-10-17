@@ -56,7 +56,7 @@ class PDFLosslessTests(unittest.TestCase):
         line = {
             "x0": 0., "x1": 1., "top": 10., "bottom": 10.,
             "pts": ((0., 10.), (1., 10.)),
-            "path": [("m", (0., 90.)), ("l", (1., 90.))],
+            "path": [("m", (0., 10.)), ("l", (1., 10.))],
             "linewidth": .1, "stroke": True,
             "fill": False, "evenodd": False,
         }
@@ -88,6 +88,8 @@ class PDFLosslessTests(unittest.TestCase):
         self.assertEqual(result["pages"][0]["text"],
                          "Схема стропильной системы")
         self.assertEqual(result["pages"][0]["curves"][0]["path"][1]["op"], "c")
+        self.assertEqual(result["pages"][0]["lines"][0]["startPt"],
+                         result["pages"][0]["lines"][0]["path"][0]["pointsPt"][0])
 
 
 if __name__ == "__main__":
