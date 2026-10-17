@@ -1,0 +1,26 @@
+name: APA External Readonly V1 - focused checks
+on:
+  push:
+    branches:
+      - feature/apa-readonly-tools-isolated-20261017
+    paths:
+      - scripts/apa_external_readonly.py
+      - scripts/install_apa_external_readonly.py
+      - scripts/requirements-external-readonly.txt
+      - tests/test_apa_external_readonly.py
+      - .github/workflows/apa-external-readonly.yml
+  workflow_dispatch:
+jobs:
+  isolated-source-verification:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile only added files
+        run: python -m py_compile scripts/apa_external_readonly.py scripts/install_apa_external_readonly.py
+      - name: Focused boundary tests (no vendor install, no Archicad)
+        run: python -m unittest discover -s tests -p test_apa_external_readonly.py -v
