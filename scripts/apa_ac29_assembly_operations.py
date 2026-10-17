@@ -62,7 +62,7 @@ def plan_assemblies(existing, assemblies):
             "nativeBridgeSource": "archicad-addon/Sources/NativeGroupCommands.inc",
             "nativeReadbackCommand": "GetNativeGroupMembersV1",
             "bridgeRequestsIfIndependentlyAuthorized": 1 if verified_group else 2,
-            "groupCreationSDK": None if verified_group else "ACAPI_Grouping_Create",
+            "groupCreationSDK": None if verified_group else "ACAPI_Grouping_CreateGroup",
             "groupReadbackSDK": "ACAPI_Grouping_GetAllGroupedElems",
             "status": "SOURCE_INTEGRATED_REQUIRES_COMPILED_RUNTIME_REGISTRATION_AND_SCOPE" if ready
                       else "BLOCKED_VERIFY_GROUP_DEPENDENCIES_AND_RUNTIME",
