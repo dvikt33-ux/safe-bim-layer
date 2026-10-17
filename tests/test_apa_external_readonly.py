@@ -13,6 +13,7 @@ import apa_external_catalog as Catalog
 import apa_external_router_activation as Activation
 import apa_external_session_factory as Session
 import upgrade_apa_external_readonly_clash as Upgrade
+import install_apa_external_session_factory as PersistentFactory
 
 
 class ExternalReadonlyTests(unittest.TestCase):
@@ -257,6 +258,52 @@ class ExternalReadonlyTests(unittest.TestCase):
         self.assertEqual(len(actual.local_handlers), 6)
         self.assertTrue(all(actual.operation_kind(k) == "READ_ONLY"
                             for k in actual.local_handlers))
+
+
+    def test_persistent_session_factory_installer_only_adds_isolated_files(self):
+        """Original core and existing sidecar untouched, source JS provenance copied."""
+        import json
+        with tempfile.TemporaryDirectory() as td:
+            folder = Path(td)
+            destination = folder / "session-factory-v1"
+            state = {
+                "python": Path("C:/isolated/venv/Scripts/python.exe"),
+                "schemaSHA256": PersistentFactory.sha(PersistentFactory.SCHEMA),
+                "factorySHA256": PersistentFactory.sha(PersistentFactory.SOURCE),
+                "provenanceSHA256": {
+                    n: PersistentFactory.sha(PersistentFactory.SCHEMA_DIR / n)
+                    for n in PersistentFactory.PROVENANCE
+                },
+                "adapterSHA256": PersistentFactory.EXPECTED_ADAPTER_SHA256,
+                "catalogSHA256": "1" * 64,
+            }
+            probe = {
+                "status": "FACTORY_SESSION_READ_ONLY_REGISTERED",
+                "registered": ["AddOn.APAExternalReadOnly." + str(i) for i in range(6)],
+                "nativeCalls": 0,
+                "modelWrites": 0,
+                "autoRegisteredWithinFactorySessions": True,
+            }
+            done = type("Done", (), {
+                "returncode": 0, "stdout": json.dumps(probe), "stderr": ""
+            })()
+            with mock.patch.object(PersistentFactory, "DEST", destination), (
+                 mock.patch.object(PersistentFactory, "preflight", return_value=state)), (
+                 mock.patch.object(PersistentFactory.subprocess, "run", return_value=done)):
+                result = PersistentFactory.install()
+                self.assertEqual(result["status"], "SESSION_FACTORY_INSTALLED_READY")
+                self.assertFalse(result["originalCorePatched"])
+                self.assertFalse(result["existingProcessesModified"])
+                self.assertEqual((destination / "tapir-scene-live.json").read_bytes(),
+                                 PersistentFactory.SCHEMA.read_bytes())
+                for file in PersistentFactory.PROVENANCE:
+                    self.assertEqual((destination / file).read_bytes(),
+                                     (PersistentFactory.SCHEMA_DIR / file).read_bytes())
+                receipt = json.loads(
+                    (destination / "session-factory-install.json").read_text())
+                self.assertEqual(receipt["provenanceSHA256"], state["provenanceSHA256"])
+                with self.assertRaisesRegex(ValueError, "SESSION_FACTORY_EXISTS"):
+                    PersistentFactory.install()
 
 
 if __name__ == "__main__":
