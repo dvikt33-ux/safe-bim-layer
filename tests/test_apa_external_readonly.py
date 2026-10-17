@@ -9,6 +9,7 @@ from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 import apa_external_readonly as A
+import apa_external_catalog as Catalog
 
 
 class ExternalReadonlyTests(unittest.TestCase):
@@ -80,6 +81,50 @@ class ExternalReadonlyTests(unittest.TestCase):
             self.assertEqual(proof["modelWrites"], 0)
             self.assertEqual(proof["sources"][0]["sha256"], A.sha256(inp))
             self.assertEqual(proof["action"], "dxf-vectors")
+
+
+    def test_existing_dynamic_router_local_provider_registration(self):
+        class Router:
+            def add_local_provider(self, namespace, contracts, handlers, source, dependencies):
+                self.namespace = namespace
+                self.contracts = contracts
+                self.handlers = handlers
+                self.dependencies = dependencies
+            def contract_hash(self, key):
+                return "exact-local-contract-sha"
+            def review_policy(self, key, kind, impact, evidence):
+                self.policies.append((key, kind, impact, evidence))
+        router = Router()
+        router.policies = []
+        with mock.patch.object(Catalog, "verified_environment", return_value=("python", "script")):
+            result = Catalog.register(router)
+        self.assertEqual(router.namespace, "APAExternalReadOnly")
+        self.assertEqual(len(router.contracts), 6)
+        self.assertEqual(set(router.contracts), set(router.handlers))
+        self.assertEqual(len(router.policies), 6)
+        self.assertTrue(all(kind == impact == "READ_ONLY"
+                            for _, kind, impact, _ in router.policies))
+        self.assertEqual(result["modelWrites"], 0)
+
+    def test_local_provider_dispatches_only_pinned_program_with_no_shell(self):
+        import json
+        with tempfile.TemporaryDirectory() as td:
+            output = Path(td) / "evidence.json"
+            result = {"schema": "APA_EXTERNAL_READONLY_EVIDENCE_V1",
+                      "action": "ifc-diff", "modelWrites": 0, "nativeCalls": 0}
+            output.write_text(json.dumps(result))
+            with mock.patch.object(Catalog, "verified_environment",
+                                   return_value=(Path("C:/venv/python.exe"), Path("C:/tools/adapter.py"))):
+                with mock.patch.object(Catalog.subprocess, "run",
+                                       return_value=type("Done", (), {
+                                           "returncode": 0, "stdout": "", "stderr": ""
+                                       })()) as dispatch:
+                    actual = Catalog.call("ifc-diff",
+                                          {"a": "before.ifc", "b": "after.ifc",
+                                           "output": str(output)})
+            self.assertEqual(actual["action"], "ifc-diff")
+            self.assertFalse(dispatch.call_args.kwargs.get("shell", False))
+            self.assertEqual(dispatch.call_args.args[0][2], "ifc-diff")
 
 
 if __name__ == "__main__":
