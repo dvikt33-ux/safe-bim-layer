@@ -14,6 +14,8 @@ import apa_external_router_activation as Activation
 import apa_external_session_factory as Session
 import upgrade_apa_external_readonly_clash as Upgrade
 import install_apa_external_session_factory as PersistentFactory
+import apa_external_analytics_entrypoint as Analytics
+import install_apa_external_analytics_entrypoint as AnalyticsInstaller
 
 
 class ExternalReadonlyTests(unittest.TestCase):
@@ -315,6 +317,56 @@ class ExternalReadonlyTests(unittest.TestCase):
             router = original(snapshot, None, False)
         self.assertGreaterEqual(len(router.catalog["commands"]), 260)
         self.assertTrue(router.fingerprint)
+
+
+    def test_production_file_route_dispatches_through_original_router(self):
+        """Exactly one original DynamicCommands, source/report and zero PLN writes."""
+        import json
+        from types import SimpleNamespace
+        from archicad_dynamic_commands import DynamicCommands
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            drawing = root / "input.dxf"
+            output = root / "new-evidence.json"
+            drawing.write_text("DXF-input", encoding="utf-8")
+            router = DynamicCommands(dict(commands={}, common_schemas={}))
+            def handle(action, params):
+                self.assertEqual(action, "dxf-vectors")
+                self.assertFalse(output.exists())
+                report = {
+                    "schema": "APA_EXTERNAL_READONLY_EVIDENCE_V1",
+                    "status": "SOURCE_ANALYSIS_ONLY_NOT_ENGINEERING_ACCEPTANCE",
+                    "action": action, "sources": [], "result": {"primitiveCount": 1},
+                    "nativeCalls": 0, "modelWrites": 0}
+                output.write_text(json.dumps(report), encoding="utf-8")
+                return report
+            with mock.patch.object(Catalog, "verified_environment",
+                                   return_value=("py", "adapter")):
+                Catalog.register(router)
+            factory = SimpleNamespace(native_command_router=lambda schema,
+                        include_functional_modules: router)
+            with mock.patch.object(Analytics, "verified_session",
+                                   return_value=(factory, "schema")), (
+                 mock.patch.object(Analytics, "ROOT", root / "protected")), (
+                 mock.patch.object(Catalog, "call", side_effect=handle)):
+                result = Analytics.route_once("DXFVectors", str(drawing), str(output))
+            self.assertEqual(result["status"], "APA_EXTERNAL_ROUTED_READ_ONLY_PASS")
+            self.assertEqual(result["nativeCalls"], result["plnWrites"])
+            self.assertEqual(result["nativeCalls"], 0)
+            self.assertTrue(output.exists())
+
+    def test_production_analytics_denies_output_inside_original_apa(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            (root / "scripts").mkdir()
+            source = root / "source.pdf"
+            source.write_text("%PDF-1.4")
+            forbidden = root / "scripts" / "evidence.json"
+            with mock.patch.object(Analytics, "ROOT", root):
+                with self.assertRaisesRegex(ValueError,
+                                            "OUTPUT_INSIDE_STABLE_APA_FORBIDDEN"):
+                    Analytics.route_once("PDFVectors", str(source), str(forbidden))
+            self.assertFalse(forbidden.exists())
 
 
 if __name__ == "__main__":
