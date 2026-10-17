@@ -1,0 +1,26 @@
+name: APA AC29 Runtime Selection Policy
+
+on:
+  pull_request:
+    paths:
+      - "scripts/archicad_strategy_discovery.py"
+      - "scripts/apa_ac29_stable_selector_install.py"
+      - "scripts/apa_ac29_live_selector_qualification.py"
+      - "tests/test_apa_ac29_runtime_selection_policy.py"
+      - ".github/workflows/apa-ac29-runtime-selection-policy.yml"
+  workflow_dispatch:
+
+jobs:
+  focused-policy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install "jsonschema>=4,<5"
+      - name: Compile only changed selection/release modules
+        run: python -m py_compile scripts/archicad_strategy_discovery.py scripts/apa_ac29_stable_selector_install.py scripts/apa_ac29_live_selector_qualification.py tests/test_apa_ac29_runtime_selection_policy.py
+      - name: Five new read-only selection gates
+        run: python -m unittest discover -s tests -p "test_apa_ac29_runtime_selection_policy.py" -v
