@@ -10,6 +10,7 @@ on:
       - scripts/install_apa_external_readonly.py
       - scripts/requirements-external-readonly.txt
       - tests/test_apa_external_readonly.py
+      - tests/apa_external_real_vendor_smoke.py
       - .github/workflows/apa-external-readonly.yml
   workflow_dispatch:
 jobs:
@@ -63,3 +64,5 @@ jobs:
             & $py -m $module --help
             if ($LASTEXITCODE -ne 0) { throw "Vendor CLI blocked: $module" }
           }
+      - name: Execute new upstream operations on temporary PDF, DXF and IFC files
+        run: .\.vendor-venv\Scripts\python.exe tests/apa_external_real_vendor_smoke.py
