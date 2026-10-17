@@ -124,6 +124,64 @@ class TaskScopeTests(TestCase):
                 S.pending_ledger(p,["BDD_BULK150_GRID_AND_LINE_20261016",
                                    "NextSave001"])
 
+    def test_approved_mutation_never_calls_archicad_with_two_unknown_scenes(self):
+        import os
+        from contextlib import closing
+        from types import SimpleNamespace
+        import archicad_project_accelerator as APA
+        with TemporaryDirectory() as temp:
+            root=Path(temp)
+            folder=root/"attempt"
+            folder.mkdir()
+            (folder/"attempted.json").write_text(
+                json.dumps({"sourceBlob":"1"*40}),encoding="utf8")
+            task=source()
+            job={"jobId":"ac29-secure-scoped-mutation",
+                 "sourceTask":{"repo":"dvikt33-ux/safe-bim-layer",
+                               "ref":"2"*40,"path":"examples/accelerator/test.json",
+                               "blobSha1":"3"*40}}
+            grant={
+                "schema":"APA_AC29_LOCAL_SCOPED_NATIVE_GRANT_V1",
+                "jobId":job["jobId"],"jobBlobSha1":"1"*40,
+                "taskBlobSha1":"3"*40,"projectSha256":SHA,
+                "authorizationRef":task["authorizationRef"],
+                "command":task["command"],
+                "sourcePlanHash":task["sourcePlanHash"],
+                "expectedBeforeGuidSetHash":task["expectedBeforeGuidSetHash"],
+                "expectedBeforeNativeBrepHash":task["expectedBeforeNativeBrepHash"]
+            }
+            (root/"controller-grants").mkdir()
+            (root/"controller-grants"/(job["jobId"]+".json")).write_text(
+                json.dumps(grant),encoding="utf8")
+            ledger=root/"APA_BDD_Window1p8"/"apa_scene_writer.sqlite"
+            ledger.parent.mkdir()
+            with closing(sqlite3.connect(ledger)) as db:
+                db.execute("CREATE TABLE scenes(scene_id TEXT PRIMARY KEY,state TEXT)")
+                db.executemany("INSERT INTO scenes VALUES(?,?)",[
+                    ("BDD_BULK150_GRID_AND_LINE_20261016",
+                     "PARTIAL_OR_UNKNOWN_OUTCOME"),
+                    ("FailedNativeMultiCopy20261017","PARTIAL_OR_UNKNOWN_OUTCOME")
+                ])
+                db.commit()
+            stub=SimpleNamespace(
+                ROOT=root,WORKING=Path(task["projectPath"]),ORIGINAL=root/"original.pln",
+                SOURCE_SHA="c"*64,
+                approved_saved_sha=lambda:SHA,
+                approved_guid_count=lambda:298,
+                remote_json=lambda *args:(task,"3"*40),
+                sha=lambda p:("c"*64 if p==root/"original.pln" else SHA)
+            )
+            with patch.dict(os.environ,{"LOCALAPPDATA":str(root)}), \
+                 patch.object(APA,"EvidenceAPI",
+                              side_effect=AssertionError("NATIVE_API_CONSTRUCTED")):
+                with self.assertRaisesRegex(ValueError,"PENDING_HISTORY"):
+                    S.execute(stub,job,folder)
+            with closing(sqlite3.connect(ledger)) as db:
+                rows=db.execute("SELECT state FROM scenes ORDER BY scene_id").fetchall()
+            self.assertEqual(rows,[
+                ("PARTIAL_OR_UNKNOWN_OUTCOME",),
+                ("PARTIAL_OR_UNKNOWN_OUTCOME",)])
+
     def test_bridge_ingress_accepts_native_preview_but_not_unpinned_mutation(self):
         now=datetime.now(timezone.utc)
         dates=lambda t:t.strftime("%Y-%m-%dT%H:%M:%SZ")
