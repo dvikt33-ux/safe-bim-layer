@@ -861,6 +861,33 @@ class DynamicCommands:
                             saved_sha256,authorization,impact,verify_after,
                             verify_before=verify_before)
 
+    def edit_native_group(self, writer, scene_id, *, operation, group_guid,
+                          source_ref, affected, retained_signatures, saved_sha256,
+                          authorization, impact, verify_before, verify_after,
+                          translation=None):
+        """Move or ungroup source-qualified native assembly through SceneWriter."""
+        if operation not in {'MOVE','UNGROUP'} or not isinstance(group_guid,str) or not group_guid.strip():
+            raise ValueError('NATIVE_GROUP_EDIT_TYPED_OPERATION_REQUIRED')
+        if not isinstance(source_ref,str) or len(source_ref)<8:
+            raise ValueError('NATIVE_GROUP_EDIT_SOURCE_REF_REQUIRED')
+        if not isinstance(affected,list) or len(affected)<2:
+            raise ValueError('NATIVE_GROUP_EDIT_MEMBERS_SCOPE_REQUIRED')
+        if impact!='MODEL':
+            raise ValueError('NATIVE_GROUP_EDIT_MODEL_SCOPE_REQUIRED')
+        name={'MOVE':'MoveNativeGroupV1','UNGROUP':'UngroupNativeGroupV1'}[operation]
+        params=dict(groupId=dict(guid=group_guid),sourceRef=source_ref)
+        if operation=='MOVE':
+            if not isinstance(translation,dict) or set(translation)!={'dx','dy','dz'}:
+                raise ValueError('NATIVE_GROUP_MOVE_EXACT_TRANSLATION_REQUIRED')
+            params['translation']=translation
+        elif translation is not None:
+            raise ValueError('NATIVE_GROUP_UNGROUP_NO_TRANSLATION')
+        command=name if name in self.catalog['commands'] else 'AddOn.TapirCommand.'+name
+        ticket=self.prepare(command,params)
+        return self.execute(writer,scene_id,ticket,affected,retained_signatures,
+                            saved_sha256,authorization,impact,verify_after,
+                            verify_before=verify_before)
+
     @staticmethod
     def plan_reuse_existing(existing, targets):
         """Copy-first planner: match repeated SOURCE-VERIFIED element families.
