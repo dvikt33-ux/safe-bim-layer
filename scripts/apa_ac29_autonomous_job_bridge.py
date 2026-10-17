@@ -39,7 +39,8 @@ ID = re.compile(r"^[a-z][a-z0-9-]{7,63}$")
 # This pre-reviewed script uses only APA.EvidenceAPI(execute=False) and native
 # BREP reads; it does NOT use a second SceneWriter or independent mutation.
 REVIEW = ROOT / "controllers" / "apa_bdd114_native_roof_face_review.py"
-ALLOWED = frozenset({"BDD114_ROOF_FINALIZE", "SOURCE_QUALIFIED_NATIVE_READ"})
+ALLOWED = frozenset({"BDD114_ROOF_FINALIZE", "SOURCE_QUALIFIED_NATIVE_READ",
+                     "APPROVED_NATIVE_COLUMN_COPY"})
 
 
 def require(ok, reason):
@@ -202,6 +203,101 @@ def capture_read_task(job, folder):
     }
 
 
+def capture_approved_native_column_copy(job, folder):
+    """Source-qualified native copy with ORIGINAL DynamicCommands and SceneWriter.
+
+    This bridge version remains pinned to its installed, explicitly approved
+    BDD working PLN. Target positions and source GUID are read from the
+    SOURCE-VERIFIED GitHub task; not hardcoded in the executor/worker.
+    """
+    source = job["sourceTask"]
+    task, blob = remote_json(source["repo"], source["path"],
+                             source["ref"], source["blobSha1"])
+    sys.path.insert(0, str(SCRIPTS))
+    import sqlite3
+    import archicad_project_accelerator as APA
+    import archicad_scene_run as RUN
+    import archicad_connected_components as C
+    import archicad_bim_documentation as D
+    import apa_ac29_reusable_native_copy as BATCH
+    import apa_ac29_scene_reconciliation as RECON
+
+    BATCH.validate_task(task, expected_project_sha=BASE_SHA,
+                        expected_project_path=str(WORKING))
+    require(task["sourceEvidenceRef"].startswith("https://github.com/") and
+            task["authorizationRef"].startswith("USER_APPROVED_"),
+            "NATIVE_COPY_USER_APPROVAL_AND_SOURCE_REQUIRED")
+    RUN.bind_authorized_saved_copy(
+        19727, str(WORKING), WORKING.stem, BASE_SHA,
+        task["authorizationRef"])
+    pre_raw = folder / "preflight-raw"
+    pre_raw.mkdir()
+    read_api = APA.EvidenceAPI(APA.native_transport, pre_raw, execute=False)
+    binding = RUN.guarded_project_for_read(read_api)
+    require(binding["activeViewStoryIndex"] in (0, -1) and
+            APA.archicad29(read_api).get("buildNumber") == 5101,
+            "NATIVE_COPY_WRONG_CURRENT_PROJECT_VIEW_OR_BUILD")
+    # Read the ORIGINAL existing SceneWriter journal, do not clear unknowns.
+    ledger = Path(os.environ["LOCALAPPDATA"]) / "APA_BDD_Window1p8" / "apa_scene_writer.sqlite"
+    existing = BATCH.stored_scenes_clear(
+        ledger, (task["sceneId"], task["saveSceneId"]))
+    historical = None
+    if existing:
+        known = "BDD_BULK150_GRID_AND_LINE_20261016"
+        require(len(existing) == 1 and existing[0] ==
+                {"sceneId": known, "state": "PARTIAL_OR_UNKNOWN_OUTCOME"},
+                "UNRELATED_UNRECONCILED_NATIVE_WRITE_STOPPED")
+        raw = Path(os.environ["LOCALAPPDATA"]) / "APA_BDD_Bulk150_NearHouse" / "raw" / "raw.jsonl"
+        historical = RECON.read_only_reconciliation(
+            known, ledger, raw, read_api,
+            normalized=C.G.normalize_dump,
+            geom_signature=C.ROOF.geometry_signature,
+            digest=RUN.digest, expected_project_sha=BASE_SHA,
+            current_project_sha=sha(WORKING))
+        historical_receipt = folder / "historical-reconciliation.json"
+        durable_write(historical_receipt, historical)
+    require(read_api.write_attempts == 0 and
+            sha(WORKING) == BASE_SHA and sha(ORIGINAL) == SOURCE_SHA,
+            "NATIVE_COPY_PREFLIGHT_MUTATED_MODEL_OR_DISK")
+    guard = BATCH.GuardedSaveTransport(
+        APA.native_transport, RUN.bind_authorized_saved_copy,
+        WORKING, ORIGINAL, lambda: sha(WORKING),
+        lambda: sha(ORIGINAL), WORKING.stem, 19727,
+        task["authorizationRef"])
+    write_raw = folder / "execution-raw"
+    write_raw.mkdir()
+    api = APA.EvidenceAPI(guard, write_raw, execute=True)
+    schema = ROOT / "schemas" / "tapir-live-1.5.10" / "tapir-scene-live.json"
+    require(schema.is_file(), "STABLE_AC29_NATIVE_SCHEMA_NOT_FOUND")
+    router = APA.native_command_router(
+        schema, include_functional_modules=False)
+    writer = RUN.SceneWriter(
+        api, ledger, schema_path=schema, allow_3d_view_for_write=True)
+    # ONE single logical operation + native save, no retry or alternate writer.
+    result = BATCH.execute_task(
+        task, api=api, writer=writer, router=router, APA=APA, RUN=RUN,
+        components=C, capture_native=D.capture_full_model,
+        saved_project_sha=BASE_SHA, current_sha=lambda: sha(WORKING),
+        save_guard=guard, known_reconciliation=historical)
+    require(result["copiedCount"] == len(task["targets"]) and
+            result["nativeCopyCalls"] == 1 and
+            result["nativeSaveCalls"] == 1 and
+            result["finalGuidCount"] ==
+            len(task["targets"]) * 2 + 290 and
+            result["newSavedProjectSha256"] == sha(WORKING) and
+            sha(ORIGINAL) == SOURCE_SHA,
+            "NATIVE_COPY_WORKER_FULL_MODEL_CONFIRMATION_MISSING")
+    durable_write(folder / "native-column-copy-result.json", result)
+    return dict(result,
+                sourceTaskBlob=blob,
+                modelWrites=2,
+                workingPlnSaved=True,
+                originalPlnUnchanged=True,
+                historicalReconciliation=(
+                    historical["status"] if historical else None),
+                authorizedNativeExecution=True)
+
+
 def capture_roof_review(job, folder):
     """One existing source-reviewed production preflight; no subprocess writes."""
     require(REVIEW.is_file(), "APPROVED_BDD_ROOF_REVIEW_NOT_INSTALLED")
@@ -275,6 +371,8 @@ def process_job(name):
     try:
         if job["action"] == "BDD114_ROOF_FINALIZE":
             response = capture_roof_review(job, folder)
+        elif job["action"] == "APPROVED_NATIVE_COLUMN_COPY":
+            response = capture_approved_native_column_copy(job, folder)
         else:
             response = capture_read_task(job, folder)
         response["jobStatus"] = "COMPLETE"
@@ -286,7 +384,7 @@ def process_job(name):
                "sourceBlob": source_blob,
                "finishedAt": current_utc().isoformat(),
                "result": response, "automaticRetry": False,
-               "modelWritesAuthorized": False}
+               "modelWritesAuthorized": job["action"] == "APPROVED_NATIVE_COLUMN_COPY"}
     durable_write(folder / "result.json", payload)
     upload_result(name, folder)
 
