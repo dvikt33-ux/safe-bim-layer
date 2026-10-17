@@ -33,10 +33,11 @@ def checked_column_source(parameters):
     ids = set()
     for item in parameters["columnsData"]:
         check(isinstance(item, dict) and
-              {"coordinates", "width", "depth", "height", "zCoordinate",
+              set(item) == {
+               "coordinates", "width", "depth", "height", "zCoordinate",
                "floorIndex", "axisRotationAngle", "buildingMaterialId",
                "coreAnchor", "circleBased", "isSlanted",
-               "isWidthAndHeightLinked"} <= set(item),
+               "isWidthAndHeightLinked"},
               "APA_NATIVE_COLUMN_COMPLETE_NATIVE_PROFILE_REQUIRED")
         point = item["coordinates"]
         material = item["buildingMaterialId"]
@@ -104,7 +105,10 @@ def verify_column_create_after(*, api, command, parameters,
     new = after_guids - before_guids
     check(before_guids <= after_guids and len(new) == 2*len(roots),
           "APA_NATIVE_COLUMN_NEW_ROOT_SEGMENT_GUID_DELTA_INVALID")
-    physical = C.G.normalize_dump(native_after)
+    physical = native_after if (isinstance(native_after, dict) and
+        isinstance(native_after.get("elements"), list) and
+        all(isinstance(r, dict) and "guid" in r and "type" in r
+            for r in native_after["elements"])) else C.G.normalize_dump(native_after)
     current = {element["guid"].lower(): element for element in physical["elements"]}
     check(set(current) == after_guids, "APA_NATIVE_COLUMN_COMPLETE_BREP_REQUIRED")
     details = api("GetDetailsOfElements", {
