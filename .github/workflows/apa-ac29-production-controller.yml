@@ -1,0 +1,25 @@
+name: APA AC29 Production Controller
+
+on:
+  pull_request:
+    paths:
+      - "scripts/apa_ac29_production_controller.py"
+      - "scripts/apa_bdd_block114_existing_stud_read.py"
+      - "scripts/apa_bdd_block114_native_spatial_preflight.py"
+      - "scripts/apa_bdd114_native_roof_face_review.py"
+      - ".github/workflows/apa-ac29-production-controller.yml"
+  workflow_dispatch:
+
+jobs:
+  focused-controller:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile new controller only
+        run: python -m py_compile scripts/apa_ac29_production_controller.py scripts/apa_bdd_block114_existing_stud_read.py scripts/apa_bdd_block114_native_spatial_preflight.py scripts/apa_bdd114_native_roof_face_review.py
+      - name: Check CLI contract without accessing local PLN or GitHub
+        run: python scripts/apa_ac29_production_controller.py --help

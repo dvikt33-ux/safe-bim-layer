@@ -1,0 +1,185 @@
+{
+  "schema": "APA_BDD_2022_BLOCK114_VECTOR_CALIBRATED_PLACEMENT_V1",
+  "status": "CANDIDATE_FOR_CURRENT_NATIVE_CLASH_PREFLIGHT_NO_WRITE_AUTHORIZATION",
+  "sourceDocument": "3_этап_КП_КОМФОРТ_без_замазок.pdf",
+  "pdfPage": 12,
+  "elevationPage": 15,
+  "units": "m",
+  "axisTransform": {
+    "anchors": [
+      {
+        "block": "1.12",
+        "sourcePdfVectorX_pt": 464.1,
+        "liveNativeColumnX_m": 3.53
+      },
+      {
+        "block": "1.13",
+        "sourcePdfVectorX_pt": 566.71,
+        "liveNativeColumnX_m": 7.15
+      }
+    ],
+    "target": {
+      "block": "1.14",
+      "sourcePdfVectorX_pt": 629.64
+    },
+    "formula": "X114 = 7.15 + (629.64-566.71)*(7.15-3.53)/(566.71-464.10)",
+    "estimatedTargetXM": 9.370120845921448,
+    "roundedForPreviewOnly": 9.37,
+    "calibration": "PDF_VECTORS_2_LIVE_ACCEPTED_STUD_GROUPS",
+    "dimensionalStatus": "NO_EXPLICIT_X_DIMENSION_PRINTED; graphics calibrated to two native models",
+    "uncertainty": "UNQUANTIFIED_VECTOR_ANNOTATION_AND_AXIS_REFERENT",
+    "acceptedForAutomaticNativeWrite": false
+  },
+  "yAnchors": {
+    "northFirstStudY": 9.255,
+    "southLastStudY": 6.395,
+    "existingBlock112And113BothVerified": true,
+    "studPitchesMm": [
+      417,
+      418,
+      412,
+      413,
+      600,
+      600
+    ],
+    "direction": "descending Y, from north towards south following 1.14 elevation view-arrow orientation"
+  },
+  "members": [
+    {
+      "index": 1,
+      "center": {
+        "x": 9.37,
+        "y": 9.255
+      },
+      "centerlineTarget": {
+        "x": "GRAPHICALLY_CALIBRATED",
+        "y": "SOURCE_ANCHORED"
+      },
+      "heightM": 2.9,
+      "widthM": 0.1,
+      "depthM": 0.05,
+      "zM": 0,
+      "rotationRad": 0,
+      "copyExistingGUID": "b8d528f0-ab6a-4ece-a62d-74e3a0d7c46c"
+    },
+    {
+      "index": 2,
+      "center": {
+        "x": 9.37,
+        "y": 8.838
+      },
+      "centerlineTarget": {
+        "x": "GRAPHICALLY_CALIBRATED",
+        "y": "SOURCE_ANCHORED"
+      },
+      "heightM": 2.9,
+      "widthM": 0.1,
+      "depthM": 0.05,
+      "zM": 0,
+      "rotationRad": 0,
+      "copyExistingGUID": "b8d528f0-ab6a-4ece-a62d-74e3a0d7c46c"
+    },
+    {
+      "index": 3,
+      "center": {
+        "x": 9.37,
+        "y": 8.42
+      },
+      "centerlineTarget": {
+        "x": "GRAPHICALLY_CALIBRATED",
+        "y": "SOURCE_ANCHORED"
+      },
+      "heightM": 2.9,
+      "widthM": 0.1,
+      "depthM": 0.05,
+      "zM": 0,
+      "rotationRad": 0,
+      "copyExistingGUID": "b8d528f0-ab6a-4ece-a62d-74e3a0d7c46c"
+    },
+    {
+      "index": 4,
+      "center": {
+        "x": 9.37,
+        "y": 8.008
+      },
+      "centerlineTarget": {
+        "x": "GRAPHICALLY_CALIBRATED",
+        "y": "SOURCE_ANCHORED"
+      },
+      "heightM": 2.9,
+      "widthM": 0.1,
+      "depthM": 0.05,
+      "zM": 0,
+      "rotationRad": 0,
+      "copyExistingGUID": "b8d528f0-ab6a-4ece-a62d-74e3a0d7c46c"
+    },
+    {
+      "index": 5,
+      "center": {
+        "x": 9.37,
+        "y": 7.595
+      },
+      "centerlineTarget": {
+        "x": "GRAPHICALLY_CALIBRATED",
+        "y": "SOURCE_ANCHORED"
+      },
+      "heightM": 2.9,
+      "widthM": 0.1,
+      "depthM": 0.05,
+      "zM": 0,
+      "rotationRad": 0,
+      "copyExistingGUID": "b8d528f0-ab6a-4ece-a62d-74e3a0d7c46c"
+    },
+    {
+      "index": 6,
+      "center": {
+        "x": 9.37,
+        "y": 6.995
+      },
+      "centerlineTarget": {
+        "x": "GRAPHICALLY_CALIBRATED",
+        "y": "SOURCE_ANCHORED"
+      },
+      "heightM": 2.9,
+      "widthM": 0.1,
+      "depthM": 0.05,
+      "zM": 0,
+      "rotationRad": 0,
+      "copyExistingGUID": "b8d528f0-ab6a-4ece-a62d-74e3a0d7c46c"
+    },
+    {
+      "index": 7,
+      "center": {
+        "x": 9.37,
+        "y": 6.395
+      },
+      "centerlineTarget": {
+        "x": "GRAPHICALLY_CALIBRATED",
+        "y": "SOURCE_ANCHORED"
+      },
+      "heightM": 2.9,
+      "widthM": 0.1,
+      "depthM": 0.05,
+      "zM": 0,
+      "rotationRad": 0,
+      "copyExistingGUID": "b8d528f0-ab6a-4ece-a62d-74e3a0d7c46c"
+    }
+  ],
+  "expectedExistingGuidCount": 290,
+  "expectedSourceBaselineSHA256": "e91d5670f20202c269d442bafc6e66a4cb13d223344122243b7237047a9ff3aa",
+  "knownNativePrototype": {
+    "parentGuid": "b8d528f0-ab6a-4ece-a62d-74e3a0d7c46c",
+    "childGuid": "4e6980a4-4d96-4aa8-b66e-afb5599c2736",
+    "materialGuid": "e7ef3819-b3e8-419f-b313-5172e6b0412c",
+    "lastLiveRead": "https://github.com/dvikt33-ux/safe-bim-bridge/blob/main/safe-bim-mailbox/gpt-live/results/apa-bdd-block114-prototype-20261017T134411Z-af25d6b0.json"
+  },
+  "riskNotes": [
+    "Top member at y=9.255 interfaces with existing north Wall spanning y=9.255..9.505 in older native BREP: intentional junction MAY be expected, verify exact present roof/wall and copies before dispatch.",
+    "Historic roof 3D bounding box overlaps height of target studs; bounding boxes alone are insufficient to prove solid contact or no contact.",
+    "Existing windows and ColumnSegment ownership must be checked against current 290-GUID live model, not older 261-GUID snapshot.",
+    "No native write until current physical clash and host join checks are resolved using existing APA SceneWriter and the user-approved graphical placement condition."
+  ],
+  "nativeCommandsExecutedThisPreparation": 0,
+  "modelWrites": 0,
+  "saveProject": false
+}
