@@ -1,0 +1,48 @@
+name: APA Raster2Seq Windows Vendor Import Probe
+on:
+  push:
+    branches: [feature/apa-semantic-ready-tools-20261018]
+    paths:
+      - '.github/workflows/apa-raster2seq-windows-probe.yml'
+      - 'scripts/install_apa_raster2seq_v1.ps1'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  vendor-import:
+    runs-on: windows-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate Raster2Seq installer and BDD sheet inventory syntax
+        shell: pwsh
+        run: |
+          $tokens = $null
+          $parseErrors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile((Resolve-Path "scripts/install_apa_raster2seq_v1.ps1").Path, [ref]$tokens, [ref]$parseErrors) | Out-Null
+          if ($parseErrors.Count -ne 0) { throw ($parseErrors | Out-String) }
+          python -m py_compile scripts/apa_bdd_sheet_inventory.py
+          if ($LASTEXITCODE -ne 0) { throw "PDF_INDEX_SYNTAX_FAILED" }
+      - name: Fetch immutable source
+        shell: pwsh
+        run: |
+          git clone --depth 1 https://github.com/Takheer/floorplan-back.git "$env:RUNNER_TEMP\floorplan-back"
+          if ($LASTEXITCODE -ne 0) { throw "VENDOR_CLONE_FAILED" }
+          $rev = (git -C "$env:RUNNER_TEMP\floorplan-back" rev-parse HEAD).Trim()
+          if ($rev -ne "5c8245b4b62971cae212d64f503a469c722523d7") { throw "VENDOR_SOURCE_REVISION_MISMATCH" }
+      - name: Install upstream dependencies in disposable CI
+        shell: pwsh
+        run: |
+          python -m pip install --disable-pip-version-check -e "$env:RUNNER_TEMP\floorplan-back"
+          if ($LASTEXITCODE -ne 0) { throw "VENDOR_DEPENDENCIES_UNAVAILABLE_ON_WINDOWS" }
+          python -m pip check
+          if ($LASTEXITCODE -ne 0) { throw "VENDOR_DEPENDENCIES_CONFLICT" }
+      - name: Exercise actual vendor imports without checkpoint
+        shell: pwsh
+        working-directory: ${{ runner.temp }}\floorplan-back
+        run: |
+          python -c "from app.inference.raster2seq import Raster2SeqModel; from app.settings import Settings; obj=Raster2SeqModel(Settings(model_device='cpu')); print('RASTER2SEQ_WINDOWS_VENDOR_IMPORT_PASS',obj.device)"
+          if ($LASTEXITCODE -ne 0) { throw "VENDOR_IMPORT_FAILED" }
