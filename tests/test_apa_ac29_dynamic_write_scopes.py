@@ -291,5 +291,107 @@ class WorkflowExecution(unittest.TestCase):
         V.checked_column_source(parameters)
 
 
+class TranslationVerification(unittest.TestCase):
+    def fixture(self):
+        root='08d528f0-ab6a-4ece-a62d-74e3a0d7c46c'
+        child='18d528f0-ab6a-4ece-a62d-74e3a0d7c46c'
+        vertices=[[x,y,z] for x in (0.,.1) for y in (0.,.05) for z in (0.,2.9)]
+        body={'closed':True,'vertices':vertices,'faces':[{'contours':[[0,1,2]]}]}
+        model={'elements':[
+            {'guid':root,'type':'Column','homeStory':0,'relationships':{},
+             'materialBindings':{},'bodies':[]},
+            {'guid':child,'type':'ColumnSegment','homeStory':0,
+             'relationships':{'hostGuid':root},'materialBindings':{},'bodies':[body]}]}
+        details={'type':'Column','floorIndex':0,'layerIndex':1,
+                 'details':{'origin':{'x':0.,'y':0.},'zCoordinate':0.,'height':2.9}}
+        params={'elementsWithMoveVectors':[{'elementId':{'guid':root},
+                   'moveVector':{'x':5.,'y':0.,'z':0.},'copy':False}]}
+        return root,child,model,details,params
+
+    def test_translation_reuses_solid_and_details_fingerprints_and_retains_guids(self):
+        root,child,before,details,params=self.fixture()
+        api=lambda *_:{'detailsOfElements':[copy.deepcopy(details)]}
+        proof=V.verify_translation_before(api=api,command='MoveElements',
+            parameters=params,affected=[root,child],native_before=before)
+        after=copy.deepcopy(before)
+        for v in after['elements'][1]['bodies'][0]['vertices']:v[0]+=5.
+        moved=copy.deepcopy(details);moved['details']['origin']['x']=5.
+        kwargs=dict(api=lambda *_:{'detailsOfElements':[moved]},command='MoveElements',
+            parameters=params,native_response={'executionResults':[{'success':True}]},
+            before_guids={root,child},after_guids={root,child},affected=[root,child],
+            native_before=before,native_after=after,source_proof=proof)
+        result=V.verify_translation_after(**kwargs)
+        self.assertTrue(result['allExistingGuidsRetained'])
+        after['elements'][1]['materialBindings']={'unexpected':'material change'}
+        with self.assertRaisesRegex(ValueError,'SOLID_MISMATCH'):
+            V.verify_translation_after(**kwargs)
+        after['elements'][1]['materialBindings']={}
+        kwargs['after_guids'].remove(child)
+        with self.assertRaisesRegex(ValueError,'RETAIN_ALL'):
+            V.verify_translation_after(**kwargs)
+
+    def test_copy_mode_or_vertical_move_is_not_silently_modified(self):
+        _,_,_,_,params=self.fixture();params['elementsWithMoveVectors'][0]['copy']=True
+        with self.assertRaisesRegex(ValueError,'MODIFY_EXACT_EXISTING'):
+            V.translation_rows(params)
+        params['elementsWithMoveVectors'][0]['copy']=False
+        params['elementsWithMoveVectors'][0]['moveVector']['z']=1.
+        with self.assertRaisesRegex(ValueError,'HORIZONTAL_VECTOR'):
+            V.translation_rows(params)
+
+    def test_ownership_or_hosted_root_blocks_before_native_write(self):
+        root,child,model,details,params=self.fixture()
+        api=lambda *_:{'detailsOfElements':[details]}
+        with self.assertRaisesRegex(ValueError,'COMPLETE_OWNED_SUBTREE'):
+            V.verify_translation_before(api=api,command='MoveElements',parameters=params,
+                affected=[root],native_before=model)
+        model['elements'][0]['relationships']={'ownerGuid':'other'}
+        with self.assertRaisesRegex(ValueError,'NOT_STANDALONE'):
+            V.verify_translation_before(api=api,command='MoveElements',parameters=params,
+                affected=[root,child],native_before=model)
+
+    def test_source_and_destination_collision_blocks_move(self):
+        root,child,model,details,params=self.fixture()
+        blocker=copy.deepcopy(model['elements'][1]);blocker['guid']='other';blocker['relationships']={}
+        for v in blocker['bodies'][0]['vertices']:v[0]+=5.
+        model['elements'].append(blocker)
+        with self.assertRaisesRegex(ValueError,'CONTACT_REQUIRES_VERIFIED_JUNCTION'):
+            V.verify_translation_before(api=lambda *_:{'detailsOfElements':[details]},
+                command='MoveElements',parameters=params,affected=[root,child],native_before=model)
+
+
+class VerifiedAdditionCheckpoint(unittest.TestCase):
+    def test_checkpoint_requires_exact_saved_pass_scene_and_explained_guid_delta(self):
+        import apa_ac29_scene_reconciliation as R
+        root,child,model,_,_=TranslationVerification().fixture()
+        prior='b8d528f0-ab6a-4ece-a62d-74e3a0d7c46c'
+        model['elements'].append({'guid':prior,'type':'Object','bodies':[]})
+        checkpoint={'sceneId':'AcceptedColumns','saveSceneId':'AcceptedSave','nativeSnapshot':model}
+        created={'status':'PASS','command':'CreateColumns',
+            'nativeResponse':{'elements':[{'elementId':{'guid':root}}]},
+            'readback':{'status':'NATIVE_COLUMN_CREATE_TYPED_AND_BREP_READBACK_PASS',
+                'newRootGuids':[root],'newRootCount':1,'newSegmentCount':1,'nativeModelElementCount':3}}
+        saved={'status':'PASS','command':'SaveProject','readback':{'savedSha256':'current'}}
+        with TemporaryDirectory() as td:
+            journal=Path(td)/'ledger.sqlite'
+            with database(journal) as db:
+                db.execute('CREATE TABLE scenes(scene_id TEXT,state TEXT,result TEXT)')
+                db.executemany('INSERT INTO scenes VALUES(?,?,?)',[
+                    ('HistoricUnknown','PARTIAL_OR_UNKNOWN_OUTCOME','{}'),
+                    ('AcceptedColumns','PASS',json.dumps(created)),
+                    ('AcceptedSave','PASS',json.dumps(saved))])
+            original_hash=hashlib.sha256(journal.read_bytes()).hexdigest()
+            call=lambda:R.verified_addition_checkpoint(journal,checkpoint,{prior},
+                {prior:[]},lambda row:row['bodies'],'current')
+            self.assertEqual(set(call()),{prior,root,child})
+            model['elements'].append({'guid':'unexpected','type':'Object','bodies':[]})
+            with self.assertRaisesRegex(ValueError,'UNEXPLAINED_ADDITION'):
+                call()
+            model['elements'].pop();checkpoint['saveSceneId']='HistoricUnknown'
+            with self.assertRaisesRegex(ValueError,'SCENE_NOT_PASS'):
+                call()
+            self.assertEqual(hashlib.sha256(journal.read_bytes()).hexdigest(),original_hash)
+
+
 if __name__=="__main__":
     unittest.main()
