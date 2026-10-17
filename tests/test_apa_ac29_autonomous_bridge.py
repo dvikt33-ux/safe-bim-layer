@@ -107,6 +107,9 @@ class SixVerifierRuntimeReceipt(TestCase):
             with patch.object(bridge,"ROOT",root), \
                  patch.object(bridge,"sha",return_value="a"*64):
                 self.assertEqual(bridge.runtime_release()["expectedGuidCount"],298)
+                receipt["moduleHashes"]["apa_ac29_scoped_native_executor.py"]="c"*64
+                path.write_text(json.dumps(receipt),encoding="utf8")
+                self.assertEqual(bridge.runtime_release()["expectedGuidCount"],298)
                 receipt["moduleHashes"]["unknown_new_native_module.py"]="f"*64
                 path.write_text(json.dumps(receipt),encoding="utf8")
                 with self.assertRaisesRegex(ValueError,

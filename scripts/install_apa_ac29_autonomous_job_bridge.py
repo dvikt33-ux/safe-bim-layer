@@ -88,6 +88,7 @@ def update_from_checkout(checkout, manifest_path, apply=False):
         'apa_ac29_dynamic_native_verifiers.py',
         'apa_ac29_existing_create_verifiers.py',
         'apa_ac29_existing_modify_verifiers.py',
+        'apa_ac29_scoped_native_executor.py',
     }|helpers)
     worker=ROOT/'controllers'/'apa_ac29_autonomous_job_bridge.py'
     worker_key='controllers/'+worker.name

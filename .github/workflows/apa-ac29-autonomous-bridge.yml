@@ -6,6 +6,8 @@ on:
       - "scripts/apa_ac29_autonomous_job_bridge.py"
       - "scripts/install_apa_ac29_autonomous_job_bridge.py"
       - "scripts/apa_ac29_pinned_registry_upgrade.py"
+      - "scripts/apa_ac29_scoped_native_executor.py"
+      - "tests/test_apa_ac29_scoped_native_mailbox.py"
       - "tests/test_apa_ac29_autonomous_bridge.py"
       - ".github/workflows/apa-ac29-autonomous-bridge.yml"
   workflow_dispatch:
@@ -24,6 +26,8 @@ jobs:
         with:
           python-version: "3.11"
       - name: Compile only new bridge/installer
-        run: python -m py_compile scripts/apa_ac29_autonomous_job_bridge.py scripts/install_apa_ac29_autonomous_job_bridge.py scripts/apa_ac29_pinned_registry_upgrade.py tests/test_apa_ac29_autonomous_bridge.py
+        run: python -m py_compile scripts/apa_ac29_autonomous_job_bridge.py scripts/install_apa_ac29_autonomous_job_bridge.py scripts/apa_ac29_pinned_registry_upgrade.py scripts/apa_ac29_scoped_native_executor.py tests/test_apa_ac29_autonomous_bridge.py tests/test_apa_ac29_scoped_native_mailbox.py
       - name: Check focused ingress, local grants and no-replay cases
         run: python -m unittest discover -s tests -p "test_apa_ac29_autonomous_bridge.py" -v
+      - name: Verify source-pinned CREATE MODIFY ingress and two-UNKNOWN no-write gate
+        run: python -m unittest discover -s tests -p "test_apa_ac29_scoped_native_mailbox.py" -v
