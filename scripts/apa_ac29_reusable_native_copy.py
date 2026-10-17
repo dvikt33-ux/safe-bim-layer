@@ -302,6 +302,7 @@ def execute_task(task, *, api, writer, router, APA, RUN, components,
                                       max(v[i] for v in vertices))
                                      for i in range(3)]))
     local_shape = translated_vertices(source_child, source_xy)
+    candidates = []
     for target in task["targets"]:
         # This bounding box is derived from every SOURCE BREP vertex,
         # translated to the requested target, not a guessed section size.
@@ -311,6 +312,14 @@ def execute_task(task, *, api, writer, router, APA, RUN, components,
                 expanded.append((x + target["x"], y + target["y"], z))
         candidate = [(min(v[i] for v in expanded), max(v[i] for v in expanded))
                      for i in range(3)]
+        # Different approved coordinates can still make physical solids overlap.
+        # Reject this BEFORE the single native batch is dispatched.
+        for prior in candidates:
+            require(not all(candidate[i][0] < prior[i][1] - 1e-7 and
+                            prior[i][0] < candidate[i][1] - 1e-7
+                            for i in range(3)),
+                    "NATIVE_COPY_TARGETS_INTERSECT_EACH_OTHER")
+        candidates.append(candidate)
         for guid, existing in bounds:
             require(not all(candidate[i][0] < existing[i][1] - 1e-7 and
                             existing[i][0] < candidate[i][1] - 1e-7
