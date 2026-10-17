@@ -28,7 +28,7 @@ WALL_REQUIRED = frozenset({
     "begCoordinate", "endCoordinate", "zCoordinate", "floorIndex",
     "height", "thickness", "structureType", "buildingMaterialId",
 })
-WALL_ALLOWED = WALL_REQUIRED | {"offset", "arcAngle"}
+WALL_ALLOWED = WALL_REQUIRED | {"offset", "arcAngle", "referenceLineLocation"}
 SLAB_REQUIRED = frozenset({
     "polygonCoordinates", "level", "thickness", "floorIndex",
     "structureType", "buildingMaterialId",
@@ -100,6 +100,7 @@ def checked_source(command, parameters):
     elif command == "CreateWalls":
         need(WALL_REQUIRED <= set(source) <= WALL_ALLOWED and
              source["structureType"] == "Basic" and
+             source.get("referenceLineLocation") == "Center" and
              all(finite(source.get(k)) for k in (
                  "height", "thickness", "zCoordinate")) and
              0 < source["height"] <= 30 and 0 < source["thickness"] <= 5 and
@@ -116,6 +117,10 @@ def checked_source(command, parameters):
         z = (source["zCoordinate"]-1e-4,
              source["zCoordinate"]+source["height"]+1e-4)
     else:
+        # Tapir 1.5.10 CreateSlabs has no structureType/buildingMaterialId.
+        # A source-qualified slab needs verified defaults or a separate
+        # ModifySlabs transaction; never send unsupported material keys.
+        need(False, "APA_SCOPED_SLAB_SOURCE_DEFAULTS_NOT_BOUND")
         need(set(source) == SLAB_REQUIRED and
              source["structureType"] == "Basic" and
              finite(source.get("level")) and
@@ -262,11 +267,6 @@ def extended_verifiers():
         "VerifiedNativeBasicWall": NativeVerifier(
             verifier_id="VerifiedNativeBasicWall",
             command="CreateWalls", effect="CREATE",
-            before=verify_existing_create_before,
-            after=verify_existing_create_after),
-        "VerifiedNativeBasicSlab": NativeVerifier(
-            verifier_id="VerifiedNativeBasicSlab",
-            command="CreateSlabs", effect="CREATE",
             before=verify_existing_create_before,
             after=verify_existing_create_after),
     }
