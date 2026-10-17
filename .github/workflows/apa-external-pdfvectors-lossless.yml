@@ -8,6 +8,9 @@ on:
       - scripts/upgrade_apa_external_pdfvectors_lossless.py
       - tests/test_apa_external_pdfvectors_lossless.py
       - .github/workflows/apa-external-pdfvectors-lossless.yml
+  pull_request:
+    branches:
+      - feature/apa-readonly-tools-isolated-20261017
   workflow_dispatch:
 jobs:
   pdfvectors-source-and-real-vendor:
