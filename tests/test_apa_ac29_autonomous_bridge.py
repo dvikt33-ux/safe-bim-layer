@@ -26,6 +26,47 @@ def sample(action="BDD114_ROOF_FINALIZE", name="bdd114-roof-20261017"):
     }
 
 
+class SixVerifierRuntimeReceipt(TestCase):
+    def test_six_verified_modules_are_an_explicit_release_shape(self):
+        with TemporaryDirectory() as temp:
+            root=Path(temp)
+            controllers=root/"controllers"
+            controllers.mkdir()
+            base=set(bridge.MODULE_HASHES)|{
+                "apa_ac29_dynamic_write_scopes.py",
+                "apa_ac29_dynamic_native_verifiers.py",
+                "apa_ac29_reusable_native_copy.py",
+                "apa_ac29_multi_prototype_native_copy.py",
+                "apa_ac29_scene_reconciliation.py",
+                "apa_ac29_existing_create_verifiers.py",
+                "apa_ac29_existing_modify_verifiers.py",
+            }
+            helpers={
+                "apa_ac29_reusable_native_copy.py",
+                "apa_ac29_multi_prototype_native_copy.py",
+                "apa_ac29_scene_reconciliation.py",
+            }
+            receipt={
+                "schema":"APA_AC29_RUNTIME_RELEASE_V1",
+                "revision":"d"*40,
+                "workerSHA256":"a"*64,
+                "workingPlnSha256":"b"*64,
+                "expectedGuidCount":298,
+                "moduleHashes":{name:"c"*64 for name in base},
+                "controllerHashes":{name:"e"*64 for name in helpers},
+            }
+            path=controllers/"runtime-release.json"
+            path.write_text(json.dumps(receipt),encoding="utf8")
+            with patch.object(bridge,"ROOT",root), \
+                 patch.object(bridge,"sha",return_value="a"*64):
+                self.assertEqual(bridge.runtime_release()["expectedGuidCount"],298)
+                receipt["moduleHashes"]["unknown_new_native_module.py"]="f"*64
+                path.write_text(json.dumps(receipt),encoding="utf8")
+                with self.assertRaisesRegex(ValueError,
+                                            "LOCAL_RUNTIME_RELEASE_RECEIPT_INVALID"):
+                    bridge.runtime_release()
+
+
 class GateTests(TestCase):
     def setUp(self):
         # Unit ingress cases must never consult a real installed deployment.
