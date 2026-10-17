@@ -83,9 +83,19 @@ def run():
             "UNEXPECTED_MODEL_MUTATION_OR_INVENTORY_DRIFT")
     require(sha(WORKING_PLN) == saved_sha and sha(PROTECTED_PLN) == protected_sha,
             "WORKING_OR_PROTECTED_SAVED_PLN_CHANGED")
+    automatically_selected = (
+        preview.get("selectedNativeTaskPreview") is not None
+        and runtime.get("automaticReadSelection") ==
+            "AUTO_SELECTED_READ_ONLY_BY_RUNTIME_REGISTRATION"
+    )
+    selection_status = (
+        "LIVE_AUTO_SELECTION_PREPARED_NO_NATIVE_WORKFLOW_DISPATCH"
+        if automatically_selected
+        else "PARTIAL_RUNTIME_SELECTION_UNRESOLVED_NO_MODEL_WRITES"
+    )
     report = {
         "schema": "APA_AC29_CURRENT_RUNTIME_AUTO_SELECTOR_READ_ONLY_V1",
-        "status": "LIVE_SELECTION_PREPARED_NO_NATIVE_WORKFLOW_DISPATCH",
+        "status": selection_status,
         "project": str(WORKING_PLN),
         "workingPLNSHA256": saved_sha,
         "originalPLNSHA256": protected_sha,
@@ -96,12 +106,13 @@ def run():
         "selectionMethod": preview.get("selectionMethod"),
         "selectedCommands": runtime["selectedCommands"],
         "currentRuntimeExport": export_result,
-        "currentNativeReadCalls": 0,
-        "currentNativeWriteCalls": 0,
+        "selectorTaskOperationDispatchCalls": 0,
+        "runtimeVerificationAPICalls": dict(api.calls),
+        "schemaExportReadCalls": "RECORDED_IN_CURRENT_RUNTIME_EXPORT_LOGS",
+        "modelWriteAttempts": api.write_attempts,
         "modelWrites": api.write_attempts,
         "savedPLNUnchanged": True,
-        "autoSelected": runtime.get("automaticReadSelection") ==
-                         "AUTO_SELECTED_READ_ONLY_BY_RUNTIME_REGISTRATION",
+        "autoSelected": automatically_selected,
         "sidecar": str(STABLE_SCRIPTS / "archicad_strategy_discovery.py"),
         "noExecutionGrant": True,
     }
@@ -138,7 +149,7 @@ def run():
     require(uploaded.returncode == 0,
             "LIVE_REPORT_LOCAL_PASS_GITHUB_UPLOAD_FAILED:" + uploaded.stderr[-350:])
     print("PUBLISHED:", uploaded.stdout.strip())
-    return 0
+    return 0 if automatically_selected else 2
 
 
 if __name__ == "__main__":
