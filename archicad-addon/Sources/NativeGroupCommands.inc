@@ -131,3 +131,22 @@ GS::ObjectState CloneNativeGroupV1Command::Execute(const GS::ObjectState& p,GS::
  const auto& elems=out.AddList<GS::ObjectState>("createdElements");for(const auto& g:created)elems(GS::ObjectState("elementId",CreateGuidObjectState(g)));
  return out;
 }
+
+
+GS::Optional<GS::UniString> GetNativeGroupMembersV1Command::GetInputParametersSchema() const {
+ return R"APA({"type":"object","additionalProperties":false,"required":["groupId"],"properties":{"groupId":{"type":"object","additionalProperties":false,"required":["guid"],"properties":{"guid":{"type":"string","minLength":10}}}}})APA";
+}
+GS::Optional<GS::UniString> GetNativeGroupMembersV1Command::GetRawResponseSchema() const {
+ return R"APA({"type":"object","properties":{"nativeModelWrites":{"const":0},"groupId":{"type":"object"},"memberIds":{"type":"array","items":{"type":"object"}},"error":{"type":"object"}},"additionalProperties":false})APA";
+}
+GS::ObjectState GetNativeGroupMembersV1Command::Execute(const GS::ObjectState& p,GS::ProcessControl&) const {
+ const auto* id=p.Get("groupId");
+ if(!id)return CreateErrorResponse(APIERR_BADPARS,"groupId required");
+ const API_Guid guid=GetGuidFromObjectState(*id);
+ GS::Array<API_Guid> members;const auto err=APAGroupMembers(guid,members);
+ if(err!=NoError)return CreateErrorResponse(err,"Native group members unavailable");
+ GS::ObjectState out("nativeModelWrites",0,"groupId",CreateGuidObjectState(guid));
+ const auto& list=out.AddList<GS::ObjectState>("memberIds");
+ for(const auto& member:members)list(CreateGuidObjectState(member));
+ return out;
+}
