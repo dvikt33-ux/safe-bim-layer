@@ -46,6 +46,7 @@ def verify_contract(spec, plan, router, registry, *,
         "authorizationRef", "sourceEvidenceRef", "sceneId",
         "stepId", "command", "effect", "impact",
         "commandContractHash", "parametersHash",
+        "expectedBeforeGuidSetHash", "expectedBeforeNativeBrepHash",
         "affectedGuids", "retainedGuids", "verifierId"},
         "DYNAMIC_WRITE_EXACT_SCOPE_SCHEMA")
     need(spec["schemaVersion"] == "apa-ac29-dynamic-mutation-scope/1" and
@@ -86,6 +87,10 @@ def verify_contract(spec, plan, router, registry, *,
     need(all(router.operation_kind(row["command"]) == "READ_ONLY"
              for row in operations if row["id"] != spec["stepId"]),
          "DYNAMIC_WRITE_UNREVIEWED_SECOND_MUTATION")
+    need(all(isinstance(spec[key], str) and _HASH.fullmatch(spec[key])
+             for key in ("expectedBeforeGuidSetHash",
+                         "expectedBeforeNativeBrepHash")),
+         "DYNAMIC_WRITE_LIVE_MODEL_FINGERPRINT_REQUIRED")
     affected, retained = spec["affectedGuids"], spec["retainedGuids"]
     need(isinstance(affected, list) and isinstance(retained, list) and
          all(isinstance(g, str) and _GUID.fullmatch(g) and g == g.lower()
@@ -158,12 +163,29 @@ def build_existing_workflow_scopes(*, spec, plan, router, registry,
              "DYNAMIC_WRITE_WORKING_PLN_CHANGED")
         before = set(guid_inventory(api))
         affected, retained = set(spec["affectedGuids"]), set(spec["retainedGuids"])
-        need(before == affected | retained,
+        need(before == affected | retained and
+             router.A.RUN.digest(sorted(before)) ==
+             spec["expectedBeforeGuidSetHash"],
              "DYNAMIC_WRITE_CURRENT_GUID_INVENTORY_SCOPE_DRIFT")
         # Source BREP is read by the retained documentation system, not
         # inferred from GetAllElements which has no native type field.
         native_before = capture_model(api, sorted(before))
         import archicad_connected_components as C
+        nodes = {e["guid"].lower():e for e in native_before["elements"]}
+        need(set(nodes) == before and
+             router.A.RUN.digest({
+                 g: C.ROOF.geometry_signature(nodes[g]) for g in sorted(before)
+             }) == spec["expectedBeforeNativeBrepHash"],
+             "DYNAMIC_WRITE_COMPLETE_APPROVED_BREP_BASELINE_DRIFT")
+        if unresolved:
+            need(reconciliation["savedProjectSHA256"] ==
+                 approved_project_sha and
+                 reconciliation["guidSetHash"] ==
+                 spec["expectedBeforeGuidSetHash"] and
+                 reconciliation["brepSignaturesHash"] ==
+                 spec["expectedBeforeNativeBrepHash"] and
+                 reconciliation.get("modelWrites") == 0,
+                 "DYNAMIC_WRITE_HISTORIC_RECONCILIATION_NOT_CURRENT")
         retained_brep = C.retained_geometry_signatures(
             native_before, sorted(retained))
         need(set(retained_brep) == retained,
