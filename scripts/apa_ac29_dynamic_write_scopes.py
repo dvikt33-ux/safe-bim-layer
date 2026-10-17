@@ -215,10 +215,13 @@ def build_existing_workflow_scopes(*, spec, plan, router, registry,
                      for g in sorted(before)
                  }) == spec["expectedBeforeNativeBrepHash"],
                  "DYNAMIC_WRITE_BREP_CHANGED_BEFORE_DISPATCH")
-            return verifier.before(
+            fresh_proof = verifier.before(
                 api=live_api, command=ticket["command"],
                 parameters=ticket["parameters"], affected=sorted(affected),
                 native_before=fresh)
+            need(fresh_proof == source_proof,
+                 'DYNAMIC_WRITE_TYPED_SOURCE_CHANGED_BEFORE_DISPATCH')
+            return fresh_proof
 
         def postflight(native_reply, _):
             after = set(guid_inventory(api))
@@ -234,7 +237,14 @@ def build_existing_workflow_scopes(*, spec, plan, router, registry,
             need(isinstance(evidence, dict) and
                  str(evidence.get("status", "")).endswith("PASS"),
                  "DYNAMIC_WRITE_SOURCE_SPECIFIC_NATIVE_READBACK_NOT_PASS")
-            return evidence
+            after_nodes={e['guid'].lower():e for e in native_after['elements']}
+            need(set(after_nodes)==after,'DYNAMIC_WRITE_POST_NATIVE_INVENTORY_INCOMPLETE')
+            return dict(evidence,
+                createdGuids=sorted(after-before),removedGuids=sorted(before-after),
+                affectedGuids=sorted(affected),
+                afterGuidSetHash=router.A.RUN.digest(sorted(after)),
+                afterNativeBrepHash=router.A.RUN.digest({
+                    g:C.ROOF.geometry_signature(after_nodes[g]) for g in sorted(after)}))
 
         return {
             "scene_id": spec["sceneId"],

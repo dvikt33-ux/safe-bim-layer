@@ -5,6 +5,7 @@ on:
       - "scripts/apa_ac29_dynamic_write_scopes.py"
       - "scripts/apa_ac29_dynamic_native_verifiers.py"
       - "scripts/archicad_project_accelerator.py"
+      - "scripts/apa_ac29_scene_reconciliation.py"
       - "tests/test_apa_ac29_dynamic_write_scopes.py"
       - ".github/workflows/apa-ac29-dynamic-scopes.yml"
   workflow_dispatch:
