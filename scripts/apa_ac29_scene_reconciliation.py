@@ -268,10 +268,13 @@ def reconcile_bdd_paired_history_read_only(
                if line.strip()]
     inv, dump, mutation_index = snapshot_before_dispatch(records)
     prior = inventory_guid_set(inv)
-    prior_brep = signatures(dump, normalized=__import__(
-        "archicad_connected_components").G.normalize_dump,
-        geom_signature=geom_signature)
-    require(len(prior) == len(prior_brep) == 290 and
+    normalized_before = __import__(
+        "archicad_connected_components").G.normalize_dump(dump)
+    before_rows = {row["guid"].lower():row
+                   for row in normalized_before["elements"]}
+    prior_brep = {g:geom_signature(row) for g,row in before_rows.items()}
+    require(len(before_rows)==len(normalized_before["elements"]) and
+            len(prior) == len(prior_brep) == 290 and
             digest(sorted(prior)) == _BDD_PREWRITE_GUID_HASH and
             digest({g: prior_brep[g] for g in sorted(prior)}) ==
             _BDD_PREWRITE_BREP_HASH,
@@ -350,8 +353,15 @@ def reconcile_bdd_paired_history_read_only(
     nodes = {e["guid"].lower(): e for e in full["elements"]}
     require(len(nodes) == len(full["elements"]) == len(live) and
             set(nodes) == set(live) and
-            all(geom_signature(nodes[g]) == prior_brep[g] for g in prior),
-            "BDD_PAIRED_HISTORY_ORIGINAL_290_BREP_CHANGED")
+            all(geom_signature(nodes[g]) == prior_brep[g] and
+                nodes[g].get("type") == before_rows[g].get("type") and
+                nodes[g].get("homeStory") == before_rows[g].get("homeStory") and
+                nodes[g].get("relationships",{}) ==
+                    before_rows[g].get("relationships",{}) and
+                nodes[g].get("materialBindings",{}) ==
+                    before_rows[g].get("materialBindings",{})
+                for g in prior),
+            "BDD_PAIRED_HISTORY_ORIGINAL_290_TYPED_BREP_OR_MATERIAL_CHANGED")
     added = set(live) - prior
     kinds = Counter(nodes[g]["type"] for g in added)
     require(kinds == {
