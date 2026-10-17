@@ -279,8 +279,6 @@ def execute_task(task, *, api, writer, router, APA, RUN, components,
     # fail closed pending independent source-qualified geometry adapters.
     bounds = []
     for guid, row in native_before.items():
-        if guid == source or guid == original_child_guid:
-            continue
         for body in row.get("bodies", []):
             vertices = body.get("vertices") or []
             if vertices:
@@ -309,11 +307,31 @@ def execute_task(task, *, api, writer, router, APA, RUN, components,
     require(set(signatures) == set(retained),
             "NATIVE_COPY_RETAINED_BASELINE_BREP_INCOMPLETE")
     expected = task["targets"]
-    vectors = [{
-        "x": round(item["x"] - source_xy["x"], 6),
-        "y": round(item["y"] - source_xy["y"], 6),
-        "z": 0.
-    } for item in expected]
+    # Use the EXISTING copy-first selector, not a manually chosen native
+    # command or bespoke prototype grouping.
+    family_signature = RUN.digest({
+        "type": "Column", "profile": source_profile,
+        "childMaterialAndBREP": original_segment, "storyIndex": 0,
+    })
+    selected = router.plan_reuse_existing([{
+        "type": "Column", "familySignature": family_signature,
+        "storyIndex": 0, "anchor": {
+            "x": source_xy["x"], "y": source_xy["y"], "z": 0.0
+        }, "guid": source, "nativeReadbackVerified": True,
+    }], [{
+        "type": "Column", "familySignature": family_signature,
+        "storyIndex": 0, "anchor": {
+            "x": item["x"], "y": item["y"], "z": 0.0
+        }, "sourceRef": task["sourceEvidenceRef"],
+    } for item in expected])
+    require(selected["status"] == "COPY_FIRST_PLAN_SOURCE_VERIFIED_NO_WRITES"
+            and not selected["unmatchedTargetsPendingPrototype"]
+            and selected["newCopyCount"] == len(expected)
+            and selected["nativeCopyCallsRequired"] == 1
+            and len(selected["copyGroups"]) == 1
+            and selected["copyGroups"][0]["prototypeGuid"].lower() == source,
+            "NATIVE_COPY_SELECTOR_DID_NOT_CONFIRM_REUSE")
+    vectors = selected["copyGroups"][0]["displacements"]
     router.review_policy(
         "MoveElements", "CREATE", "MODEL",
         {"source": task["sourceEvidenceRef"],
