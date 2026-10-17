@@ -1,4 +1,4 @@
-"""Update ONLY the already-installed Unified Discovery sidecar (PR #132 -> roof bridge).
+"""Incrementally update ONLY the installed Unified Discovery sidecar (roof bridge -> live binding).
 
 No native calls, no PLN access, no DynamicCommands/core replacement.
 Pinned source blob, expected local file SHA, backup, rollback, import smoke.
@@ -14,11 +14,11 @@ import tempfile
 from datetime import datetime, timezone
 from uuid import uuid4
 
-OLD_MODULE_SHA256 = "d3af7643edd3d0af8f966d7ae23b58d7d6f0112f283786621c2300ad4dc1d0bb"
+OLD_MODULE_SHA256 = "54f25c0f24bd65d929d51ffb73e1efecaaf3a44031e704849b8275b516a32812"
 CORE_SHA256 = "5ce7cbb91c8f799265a541f79922b50455fecf661ed9278a1cc4ffaff766ba4b"
 DYNAMIC_SHA256 = "8effd2f294197179b4b18b785de80f7f78091649e7f105ee4cf66877dbe0e6f8"
-NEW_GITHUB_BLOB_SHA1 = "2fee289b0be28de5539eeb7a4ae89243058764eb"
-SCHEMA = "APA_UNIFIED_DISCOVERY_ROOF_BRIDGE_UPDATE_V1"
+NEW_GITHUB_BLOB_SHA1 = "3964c0fe7ce8bd7b1240ad679d62900f8523fdb3"
+SCHEMA = "APA_UNIFIED_DISCOVERY_LIVE_CATALOG_UPDATE_V1"
 
 
 def require(ok, message):
@@ -76,8 +76,9 @@ def install(root, source, apply=False):
     require(sha(core.read_bytes()) == CORE_SHA256, "LOCAL_APA_CORE_HASH_CHANGED")
     require(sha(dynamic.read_bytes()) == DYNAMIC_SHA256, "LOCAL_DYNAMIC_COMMANDS_HASH_CHANGED")
     require(git_blob_sha(new) == NEW_GITHUB_BLOB_SHA1, "UPDATE_SOURCE_NOT_PINNED_GITHUB_BLOB")
-    require(b"AUTO_CATALOG_ROOF_VERIFIED_SOURCE_BINDING_REQUIRED" in new,
-            "ROOF_BRIDGE_NOT_PRESENT")
+    require(b"AUTO_CATALOG_ROOF_VERIFIED_SOURCE_BINDING_REQUIRED" in new and
+            b"def prepare_current_runtime_catalog_task(" in new,
+            "INTEGRATED_ROOF_AND_LIVE_CATALOG_BRIDGES_REQUIRED")
     compile(new, str(target), "exec")
     report = dict(schema=SCHEMA, status="PREFLIGHT_PASS", applied=False,
                   beforeSHA256=sha(old), afterSHA256=sha(new),
@@ -108,7 +109,7 @@ def install(root, source, apply=False):
         require(sha(target.read_bytes()) == sha(new), "UPDATE_AMBIGUOUS_NO_BLIND_ROLLBACK")
         atomic(target, old)
         raise
-    report.update(status="ROOF_DISCOVERY_BRIDGE_INSTALLED_ORIGINAL_APA_PRESERVED", applied=True)
+    report.update(status="LIVE_CATALOG_DISCOVERY_INSTALLED_ORIGINAL_APA_PRESERVED", applied=True)
     atomic(receipt, (json.dumps(report, ensure_ascii=False, indent=2) + "\n").encode())
     return report
 
