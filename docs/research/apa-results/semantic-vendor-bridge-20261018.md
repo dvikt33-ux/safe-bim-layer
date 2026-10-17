@@ -87,3 +87,15 @@ PDF содержит 24 страницы; doc.get_ocgs() вернул пусто
   https://huggingface.co/haopt/Raster2Seq/blob/c9a9c439ba66594dab701b77b7df52a5f75a5fce/cubicasa5k/checkpoint.pth
 
 Эти хеши не доказывают безопасность Python pickle. Загрузка моделей допустима только после явного пользовательского решения о доверии к источнику; процессы запускаются в отдельных изолированных окружениях.
+
+## Подтверждение пользователя: LIVE на Windows, 18.10.2026
+
+Из пользовательского локального журнала:
+- APA_SEMANTIC_INSTALLED_AND_ROUTER_REGISTERED: 4 новые команды зарегистрированы, прежние 6 сохранены, nativeCalls=0, plnWrites=0.
+- PDFPaths и PDFPageRaster: APA_SEMANTIC_ROUTED_SOURCE_ONLY_PASS на исходном BDD PDF, тестировалась страница 19.
+- OpenBIMSegments: APA OPENBIM: REAL ROUTED INFERENCE PASS; журнал C:\Users\Admin\AppData\Local\Temp\APA_OpenBIM_20261018-021233.json.
+- Попиксельная классификация OpenBIM M2-DA: background 3 984 123; wall 21 437; window 5 728; door 0.
+- Важно: страница 19 названа «Схема стропильной системы». Результат НЕ является испытанием качества распознавания внутренних помещений и дверей. Ошибки и полнота распознавания не оценивались; BIM/IFC не созданы.
+- Успешный запуск подтвердил работу установленного OpenBIM, а не Raster2Seq. Raster2Seq отсутствует в локальной конфигурации до отдельной установки и реального выполнения.
+
+Дальнейшее действие: определить страницу с планом этажа через scripts/apa_bdd_sheet_inventory.py; повторить OpenBIM и сравнить с Raster2Seq на одном и том же изображении, отдельно оценить топологию стен/проёмов.
