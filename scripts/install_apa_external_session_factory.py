@@ -18,7 +18,9 @@ STABLE = Path(r"C:\LocalAI\APA_AC29_Stable")
 EXT = STABLE / "external-tools" / "apa-readonly-v1"
 DEST = EXT / "session-factory-v1"
 SOURCE = Path(__file__).resolve().with_name("apa_external_session_factory.py")
-SCHEMA = Path(__file__).resolve().parents[1] / "schemas" / "tapir-live-1.5.10" / "tapir-scene-live.json"
+SCHEMA_DIR = Path(__file__).resolve().parents[1] / "schemas" / "tapir-live-1.5.10"
+SCHEMA = SCHEMA_DIR / "tapir-scene-live.json"
+PROVENANCE = ("command_definitions.js", "common_schema_definitions.js")
 EXPECTED_ADAPTER_SHA256 = "83421ab9a0315d5813bb5e0ce1ade2f616c0be830f5a87f35a6226c74b85a75a"
 
 
@@ -32,7 +34,9 @@ def sha(path):
 
 
 def preflight():
-    require(SOURCE.is_file() and SCHEMA.is_file(), "SOURCE_FACTORY_OR_TAPIR_SCHEMA_MISSING")
+    require(SOURCE.is_file() and SCHEMA.is_file() and
+            all((SCHEMA_DIR / n).is_file() for n in PROVENANCE),
+            "SOURCE_FACTORY_OR_VERIFIED_TAPIR_DOCUMENTATION_MISSING")
     py = EXT / "venv" / "Scripts" / "python.exe"
     require(py.is_file(), "INSTALLED_VENDOR_VENV_PYTHON_MISSING")
     receipt = EXT / "installation.json"
@@ -53,6 +57,7 @@ def preflight():
             "ORIGINAL_STABLE_APA_ROUTER_MISSING")
     return {"python": py,
             "schemaSHA256": sha(SCHEMA),
+            "provenanceSHA256": {n: sha(SCHEMA_DIR / n) for n in PROVENANCE},
             "factorySHA256": sha(SOURCE),
             "adapterSHA256": sha(adapter),
             "catalogSHA256": sha(catalog)}
@@ -63,13 +68,16 @@ def verify_install():
     receipt = DEST / "session-factory-install.json"
     factory = DEST / SOURCE.name
     schema = DEST / "tapir-scene-live.json"
-    require(receipt.is_file() and factory.is_file() and schema.is_file(),
+    require(receipt.is_file() and factory.is_file() and schema.is_file() and
+            all((DEST / n).is_file() for n in PROVENANCE),
             "SESSION_FACTORY_INSTALL_NOT_COMPLETE")
     data = json.loads(receipt.read_text(encoding="utf-8"))
     require(data.get("schema") == "APA_AC29_READONLY_SESSION_FACTORY_INSTALL_V1" and
             data.get("status") == "SESSION_FACTORY_INSTALLED_READY" and
             data.get("factorySHA256") == sha(factory) == state["factorySHA256"] and
             data.get("schemaSHA256") == sha(schema) == state["schemaSHA256"] and
+            data.get("provenanceSHA256") == state["provenanceSHA256"] and
+            all(sha(DEST / n) == state["provenanceSHA256"][n] for n in PROVENANCE) and
             data.get("adapterSHA256") == state["adapterSHA256"] and
             data.get("catalogSHA256") == state["catalogSHA256"],
             "SESSION_FACTORY_OR_SOURCE_HASH_DRIFT")
@@ -102,6 +110,9 @@ def install():
         fd.write(SOURCE.read_bytes())
     with schema.open("xb") as fd:
         fd.write(SCHEMA.read_bytes())
+    for name in PROVENANCE:
+        with (DEST / name).open("xb") as fd:
+            fd.write((SCHEMA_DIR / name).read_bytes())
     test = subprocess.run([str(state["python"]), str(factory), "--schema", str(schema)],
                           capture_output=True, text=True, timeout=120)
     require(test.returncode == 0,
@@ -116,6 +127,7 @@ def install():
         "status": "SESSION_FACTORY_INSTALLED_READY",
         "factorySHA256": sha(factory),
         "schemaSHA256": sha(schema),
+        "provenanceSHA256": {n: sha(DEST / n) for n in PROVENANCE},
         "adapterSHA256": state["adapterSHA256"],
         "catalogSHA256": state["catalogSHA256"],
         "originalCorePatched": False,
