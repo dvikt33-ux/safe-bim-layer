@@ -162,6 +162,18 @@ def segment_profile(segment, xy):
     }
 
 
+def native_aabb_overlaps(a, b, tolerance=1e-7):
+    """Volumetric AABB overlap only; touching faces are not penetration."""
+    require(all(len(bounds) == 3 and
+                all(len(span) == 2 and
+                    all(type(v) in (int,float) and math.isfinite(v) for v in span) and
+                    span[0] <= span[1] for span in bounds)
+                for bounds in (a,b)), "NATIVE_COPY_AABB_INVALID")
+    return all(a[i][0] < b[i][1] - tolerance and
+               b[i][0] < a[i][1] - tolerance
+               for i in range(3))
+
+
 def stored_scenes_clear(journal, ids):
     require(Path(journal).is_file(), "NATIVE_COPY_EXISTING_SCENEWRITER_REQUIRED")
     with sqlite3.connect(f"file:{Path(journal).as_posix()}?mode=ro", uri=True) as db:
@@ -315,15 +327,11 @@ def execute_task(task, *, api, writer, router, APA, RUN, components,
         # Different approved coordinates can still make physical solids overlap.
         # Reject this BEFORE the single native batch is dispatched.
         for prior in candidates:
-            require(not all(candidate[i][0] < prior[i][1] - 1e-7 and
-                            prior[i][0] < candidate[i][1] - 1e-7
-                            for i in range(3)),
+            require(not native_aabb_overlaps(candidate, prior),
                     "NATIVE_COPY_TARGETS_INTERSECT_EACH_OTHER")
         candidates.append(candidate)
         for guid, existing in bounds:
-            require(not all(candidate[i][0] < existing[i][1] - 1e-7 and
-                            existing[i][0] < candidate[i][1] - 1e-7
-                            for i in range(3)),
+            require(not native_aabb_overlaps(candidate, existing),
                     "NATIVE_COPY_EXISTING_BREP_CONTACT_REQUIRES_VERIFIED_JUNCTION:"
                     + guid)
     retained = sorted(original - {source})
