@@ -78,6 +78,8 @@ def validate_task(task, *, expected_project_sha, expected_project_path):
         total += len(targets)
         for target in targets:
             point = vector(target)
+            require(SINGLE.almost(point["z"], anchor["z"]),
+                    "MULTI_COPY_VERTICAL_OFFSET_NEEDS_SEPARATE_TYPED_READBACK")
             dest = tuple(round(point[k], 6) for k in COORDS)
             require(dest not in points and
                     any(not SINGLE.almost(point[k], anchor[k])
@@ -246,8 +248,9 @@ def verify_batch_layout(prototypes, source_elements, full_model, targets):
         group = targets[source["prototypeGuid"]]
         root, children = source_elements[source["prototypeGuid"]]
         for target in group:
-            for box in destination_boxes(root, children,
-                                         source["sourceAnchor"], target):
+            candidate_boxes = destination_boxes(root, children,
+                                                source["sourceAnchor"], target)
+            for box in candidate_boxes:
                 for old_guid, previous in external:
                     require(not SINGLE.native_aabb_overlaps(box, previous),
                             "MULTI_COPY_EXISTING_BREP_CONTACT_REQUIRES_VERIFIED_JUNCTION:"
@@ -255,7 +258,9 @@ def verify_batch_layout(prototypes, source_elements, full_model, targets):
                 for prior in incoming:
                     require(not SINGLE.native_aabb_overlaps(box, prior),
                             "MULTI_COPY_NEW_SOLIDS_INTERSECT")
-                incoming.append(box)
+            # A root and its owned BeamSegment may share their entire volume:
+            # they are ONE destination, not two separate colliding copies.
+            incoming.extend(candidate_boxes)
     return {"status": "MULTI_COPY_ALL_NATIVE_BREP_AABB_CLEAR_PASS",
             "evaluatedSolidBoxes": len(incoming)}
 
@@ -338,6 +343,7 @@ def verify_after_copy(task, old, current, baseline, typed_details,
         kind = current[guid].get("type")
         actual[kind] = actual.get(kind, 0) + 1
     require(actual == counts, "MULTI_COPY_NATIVE_TYPE_COUNTS_NOT_PROVEN")
+    proven_new_roots = set()
     for group in task["prototypes"]:
         guid = group["prototypeGuid"]
         kind = group["prototypeType"]
@@ -362,8 +368,13 @@ def verify_after_copy(task, old, current, baseline, typed_details,
                         row, owned, target, parent_guid=candidate)
                     if actual_fp == origin_fp["BREP"]:
                         matches.append(candidate)
-            require(len(matches) == 1,
+            require(len(matches) == 1 and matches[0] not in proven_new_roots,
                     "MULTI_COPY_NATIVE_ROOT_DETAILS_BREP_NOT_UNIQUE")
+            proven_new_roots.add(matches[0])
+    expected_root_count = sum(len(g["targets"]) for g in task["prototypes"])
+    require(len(proven_new_roots) == expected_root_count and
+            proven_new_roots == {g for g in newly if current[g]["type"] in TYPES},
+            "MULTI_COPY_ALL_NEW_ROOTS_NOT_ACCOUNTED_FOR")
     return {"status": "MULTI_COPY_TYPED_NATIVE_BREP_READBACK_PASS",
             "newPhysicalCopyCount": sum(
                 len(group["targets"]) for group in task["prototypes"]),
