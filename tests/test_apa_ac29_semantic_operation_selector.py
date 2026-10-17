@@ -141,6 +141,20 @@ class NativeSelectionDecisions(unittest.TestCase):
                          "ONE_NATIVE_MULTI_PROTOTYPE_COPY_CALL")
         self.assertEqual(result["copyNativeCallsIfIndependentlyAuthorized"],1)
 
+    def test_verified_object_copy_single_and_batched_not_unqualified_create(self):
+        obj="LIBPART_OBJECT_IDENTICAL_LIBRARY_PARAMETERS"
+        prototype_obj=prototype("Object",GUID_C,family=obj)
+        one=analyze([prototype_obj],[row("Object",3,2,family=obj)])
+        self.assertEqual(one["copies"][0]["method"],"NATIVE_COPY_SINGLE")
+        self.assertEqual(one["copyMethod"],"ONE_NATIVE_COPY_CALL")
+        several=analyze([prototype_obj],[
+            row("Object",3,2,family=obj),row("Object",6,2,family=obj)])
+        self.assertEqual(several["copyMethod"],"ONE_NATIVE_BATCH_COPY_CALL")
+        no_verified_prototype=analyze([],[row("Object",3,2,family=obj)])
+        self.assertEqual(no_verified_prototype["creates"][0]["state"],
+                         "BLOCKED_OBJECT_CREATE_REQUIRES_VERIFIED_LIBRARY_PART")
+        self.assertIsNone(no_verified_prototype["creates"][0]["nativeCommand"])
+
     def test_hosted_windows_batch_creates_not_free_floating_copy(self):
         e=[prototype("Window",GUID_C)]
         targets=[row("Window",x,0,
