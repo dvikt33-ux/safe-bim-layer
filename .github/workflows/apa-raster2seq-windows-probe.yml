@@ -17,6 +17,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Validate Raster2Seq installer and BDD sheet inventory syntax
+        shell: pwsh
+        run: |
+          $tokens = $null
+          $parseErrors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile((Resolve-Path "scripts/install_apa_raster2seq_v1.ps1").Path, [ref]$tokens, [ref]$parseErrors) | Out-Null
+          if ($parseErrors.Count -ne 0) { throw ($parseErrors | Out-String) }
+          python -m py_compile scripts/apa_bdd_sheet_inventory.py
+          if ($LASTEXITCODE -ne 0) { throw "PDF_INDEX_SYNTAX_FAILED" }
       - name: Fetch immutable source
         shell: pwsh
         run: |
