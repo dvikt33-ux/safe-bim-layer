@@ -214,3 +214,190 @@ def read_only_reconciliation(scene_id, journal_path, raw_path, read_api,
     require(read_api.write_attempts == 0,
             "RECONCILE_EVIDENCE_API_REPORTED_NATIVE_WRITE")
     return evidence
+
+
+# Historical BDD-only provenance pins: the two original UNKNOWN rows are NEVER
+# changed. These digests were calculated directly from the original SQLite/raw
+# files and separately match the accepted 298-GUID saved-copy receipt.
+_BDD_HISTORY = {
+    "BDD_BULK150_GRID_AND_LINE_20261016": (
+        "ff51e3c205c99d6d134667cd95f53294f13eed8d4154b5a3c823728c90459c50",
+        "MASS_COPY_UNEXPECTED_NATIVE_ELEMENT_TYPES", 150),
+    "APA_AC29_REMOTE_COLUMN_BEAM_MULTI_COPY_20261017": (
+        "1f84da89fb0387df3f707119bbb92d039cb89e874ddd98179a0202015092402c",
+        "MULTI_COPY_NATIVE_ROOT_DETAILS_BREP_NOT_UNIQUE", 2),
+}
+_BDD_BULK_RAW_SHA = "96aaf47bd9f1b96e1b0b70af8708753cae16a6b1e0a0b447689fbb5905bac2b9"
+_BDD_PREWRITE_GUID_HASH = "8d26a1e44fea2815743ca4998f091606ddc07a33942b4fa15076e95d37804b22"
+_BDD_PREWRITE_BREP_HASH = "01b17d7f0be094e2c1e40709b621b8cb09e96054bcb083db0672b4007a3545bc"
+_BDD_SAVED_298_SHA = "9293c799cf4a87792016cc76ca5f2c1d8e569f85d6cbab0b529f82d10a303a34"
+_BDD_SAVES = {
+    "BDD_KR13_1P12_1P13_AFTER_BATCH_SAVE_20261016":
+        "e91d5670f20202c269d442bafc6e66a4cb13d223344122243b7237047a9ff3aa",
+    "APA_AC29_REMOTE_COLUMNS_SAVE_20261017":
+        "e43ac59f40dd04e00be3cfb3099d7944c4a63287aced6ffb50e0d6b4f708b311",
+    "APA_AC29_REMOTE_TRANSLATION_SAVE_20261017":
+        "72fcd891c8b43346a6dd871b2c9d89f3161199c50386e2fc498a00384a375d09",
+    "APA_AC29_MULTI_RECONCILED_SAVE_20261017": _BDD_SAVED_298_SHA,
+}
+
+
+def reconcile_bdd_paired_history_read_only(
+        journal_path, raw_path, read_api, *,
+        current_project_sha, source_project_sha, expected_source_sha,
+        guid_inventory, capture_model, geom_signature, digest):
+    """Independently explain BOTH old UNKNOWNs using the saved 298-GUID model.
+
+    Checks original raw input, SQLite result bytes, native dispatch outcomes,
+    verified save sequence and a complete LIVE original-BREP preservation plus
+    exact typed eight-GUID addition. Evidence is computed locally from READS,
+    never sourced from GitHub task fields. A matching model does not rewrite
+    any journal rows or retrospectively mark either native call PASS.
+    """
+    from collections import Counter
+    journal_path, raw_path = Path(journal_path), Path(raw_path)
+    require(current_project_sha == _BDD_SAVED_298_SHA and
+            source_project_sha == expected_source_sha and
+            journal_path.is_file() and raw_path.is_file(),
+            "BDD_PAIRED_HISTORY_EXACT_SAVED_FILES_AND_LOGS_REQUIRED")
+    require(hashlib.sha256(raw_path.read_bytes()).hexdigest() == _BDD_BULK_RAW_SHA,
+            "BDD_PAIRED_HISTORY_ORIGINAL_BULK_RAW_SHA_DRIFT")
+    # Snapshot-before-write is from the actual old 150-copy attempt.
+    records = [json.loads(line) for line in
+               raw_path.read_text(encoding="utf-8-sig").splitlines()
+               if line.strip()]
+    inv, dump, mutation_index = snapshot_before_dispatch(records)
+    prior = inventory_guid_set(inv)
+    prior_brep = signatures(dump, normalized=__import__(
+        "archicad_connected_components").G.normalize_dump,
+        geom_signature=geom_signature)
+    require(len(prior) == len(prior_brep) == 290 and
+            digest(sorted(prior)) == _BDD_PREWRITE_GUID_HASH and
+            digest({g: prior_brep[g] for g in sorted(prior)}) ==
+            _BDD_PREWRITE_BREP_HASH,
+            "BDD_PAIRED_HISTORY_ORIGINAL_290_GUID_BREP_NOT_EXACT")
+
+    old_rows = {}
+    with closing(sqlite3.connect(
+            f"file:{journal_path.as_posix()}?mode=ro", uri=True)) as db:
+        rows = db.execute(
+            "SELECT scene_id,state,result FROM scenes").fetchall()
+        for scene_id, state, raw_result in rows:
+            old_rows[scene_id] = (state, raw_result, json.loads(raw_result))
+        unresolved = {
+            name for name, state, _ in rows if state != "PASS"}
+        require(unresolved == set(_BDD_HISTORY),
+                "BDD_PAIRED_HISTORY_UNEXPECTED_UNRESOLVED_SCENES")
+        history = []
+        for scene_id, (expected_hash, reason, expected_count) in _BDD_HISTORY.items():
+            require(scene_id in old_rows,
+                    "BDD_PAIRED_HISTORY_MISSING_ORIGINAL_UNKNOWN")
+            state, raw_result, result = old_rows[scene_id]
+            step_states = db.execute(
+                "SELECT state FROM steps WHERE scene_id=?",
+                (scene_id,)).fetchall()
+            native_rows = (result.get("nativeResponse") or {}).get(
+                "executionResults")
+            require(state == "PARTIAL_OR_UNKNOWN_OUTCOME" and
+                    any(s[0] == "UNKNOWN_OUTCOME" for s in step_states) and
+                    hashlib.sha256(raw_result.encode()).hexdigest() ==
+                    expected_hash and result.get("command") == "MoveElements" and
+                    reason in result.get("reason", "") and
+                    isinstance(native_rows, list) and
+                    len(native_rows) == expected_count and
+                    all(row.get("success") is True for row in native_rows),
+                    "BDD_PAIRED_HISTORY_UNKNOWN_ROW_OR_NATIVE_RESULT_DRIFT:" +
+                    scene_id)
+            history.append({
+                "sceneId": scene_id, "originalSceneState": state,
+                "originalResultSHA256": expected_hash,
+                "nativeSuccessCount": expected_count,
+                "originalUnknownPreserved": True
+            })
+        for save_scene, expected_sha in _BDD_SAVES.items():
+            require(save_scene in old_rows,
+                    "BDD_PAIRED_HISTORY_MISSING_VERIFIED_SAVE:" + save_scene)
+            state, _, result = old_rows[save_scene]
+            require(state == "PASS" and
+                    result.get("command") == "SaveProject" and
+                    (result.get("readback") or {}).get("savedSha256") ==
+                    expected_sha,
+                    "BDD_PAIRED_HISTORY_SAVE_CHAIN_NOT_VERIFIED:" + save_scene)
+        # The only two standalone Column CREATE roots must have a code-owned
+        # typed+BREP PASS in an original durable SceneWriter record.
+        created_roots = []
+        for name, (state, _, result) in old_rows.items():
+            proof = result.get("readback") or {}
+            if state == "PASS" and result.get("command") == "CreateColumns" and (
+                    proof.get("status") ==
+                    "NATIVE_COLUMN_CREATE_TYPED_AND_BREP_READBACK_PASS"):
+                roots = proof.get("newRootGuids")
+                require(isinstance(roots, list) and len(roots) == 2 and
+                        proof.get("newRootCount") == 2 and
+                        proof.get("newSegmentCount") == 2 and
+                        all(isinstance(root, str) for root in roots),
+                        "BDD_PAIRED_HISTORY_TWO_ORIGINAL_COLUMNS_NOT_PROVED")
+                created_roots.extend(root.lower() for root in roots)
+        require(len(created_roots) == len(set(created_roots)) == 2,
+                "BDD_PAIRED_HISTORY_ORIGINAL_TWO_COLUMN_CREATES_ABSENT")
+
+    live = sorted(g.lower() for g in guid_inventory(read_api))
+    require(len(live) == len(set(live)) == 298 and
+            prior.issubset(set(live)) and
+            len(set(live) - prior) == 8,
+            "BDD_PAIRED_HISTORY_298_LIVE_GUID_SET_NOT_EXPLAINED")
+    full = capture_model(read_api, live)
+    nodes = {e["guid"].lower(): e for e in full["elements"]}
+    require(len(nodes) == len(full["elements"]) == len(live) and
+            set(nodes) == set(live) and
+            all(geom_signature(nodes[g]) == prior_brep[g] for g in prior),
+            "BDD_PAIRED_HISTORY_ORIGINAL_290_BREP_CHANGED")
+    added = set(live) - prior
+    kinds = Counter(nodes[g]["type"] for g in added)
+    require(kinds == {
+        "Column": 3, "ColumnSegment": 3,
+        "Beam": 1, "BeamSegment": 1
+    }, "BDD_PAIRED_HISTORY_ADDED_NATIVE_FAMILIES_UNEXPLAINED")
+    parents = {g for g in added if nodes[g]["type"] in {"Column","Beam"}}
+    children = added - parents
+    require(set(created_roots) <= parents and
+            all(nodes[g]["type"] == "Column" for g in created_roots) and
+            len(parents - set(created_roots)) == 2 and
+            {nodes[g]["type"] for g in parents - set(created_roots)} ==
+            {"Column","Beam"},
+            "BDD_PAIRED_HISTORY_VERIFIED_CREATES_AND_COPIES_NOT_EXACT")
+    for parent in parents:
+        child_kind = nodes[parent]["type"] + "Segment"
+        owned = [g for g in children if
+                 (nodes[g].get("relationships",{}).get("hostGuid") or "").lower()
+                 == parent]
+        require(len(owned) == 1 and nodes[owned[0]]["type"] == child_kind,
+                "BDD_PAIRED_HISTORY_UNEXPLAINED_NATIVE_CHILD_OWNERSHIP")
+        vertices = [v for b in nodes[owned[0]].get("bodies",[])
+                    for v in b.get("vertices", [])]
+        require(vertices and all(100 < v[0] < 220 and 100 < v[1] < 200
+                                 for v in vertices),
+                "BDD_PAIRED_HISTORY_COPY_TARGET_NOT_IN_REVIEWED_EAST_ISOLATION")
+    require(getattr(read_api, "write_attempts", None) == 0,
+            "BDD_PAIRED_HISTORY_NATIVE_WRITE_ATTEMPT")
+    brep_hash = digest({
+        g: geom_signature(nodes[g]) for g in sorted(live)})
+    return {
+        "schema": "APA_AC29_BDD_PAIRED_HISTORY_RECONCILIATION_V1",
+        "status": "BDD_PAIRED_HISTORY_CURRENT_MODEL_RECONCILED_PASS",
+        "originalUnknownRowsPreserved": True,
+        "savedProjectSHA256": current_project_sha,
+        "guidSetHash": digest(live),
+        "brepSignaturesHash": brep_hash,
+        "source290BrepRetained": True,
+        "addedGuidCount": 8,
+        "verifiedColumnCreateRoots": sorted(created_roots),
+        "newRootTypes": dict(kinds),
+        "historicalProofs": history,
+        "bulkRawSHA256": _BDD_BULK_RAW_SHA,
+        "recordedBulkMutationIndex": mutation_index,
+        "verifiedSaveScene": "APA_AC29_MULTI_RECONCILED_SAVE_20261017",
+        "modelWrites": 0,
+        "nativeSaveCalls": 0,
+        "automaticRetry": False
+    }
