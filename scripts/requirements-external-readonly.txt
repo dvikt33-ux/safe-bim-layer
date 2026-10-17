@@ -10,3 +10,5 @@ pdfplumber==0.11.10
 ezdxf==1.4.5
 networkx==3.6.1
 shapely==2.2.0
+# IfcTester dependency: PyPI ships odfpy 1.4.1 as source only.
+odfpy==1.4.1
