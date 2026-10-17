@@ -101,7 +101,9 @@ class ScopeContracts(unittest.TestCase):
             id="create_again",command="CreateColumns",
             params=p["graph"]["operations"][0]["params"]))
         with self.assertRaisesRegex(ValueError,"SINGLE_REVIEWED"):
-            self.reviewed(m)
+            S.verify_contract(m,p,r,V.installed_verifiers(),
+                approved_project_sha="a"*64,
+                local_authorization="USER_APPROVED_SAFE_NATIVE_COLUMNS")
 
     def test_duplicate_scene_and_unknown_are_not_deleted(self):
         with TemporaryDirectory() as td:
