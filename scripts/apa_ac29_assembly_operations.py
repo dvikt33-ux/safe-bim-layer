@@ -58,9 +58,13 @@ def plan_assemblies(existing, assemblies):
             "memberGuids": guids,
             "relativePlacements": shifts,
             "strategy": "NATIVE_GROUP_REPLICATION" if verified_group else "NATIVE_GROUP_THEN_REPLICATION",
-            "groupCreationSDK": None if verified_group else "ACAPI_ElementGroup_Create",
-            "groupReadbackSDK": "ACAPI_ElementGroup_GetAllGroupedElems",
-            "status": "REQUIRES_NATIVE_GROUP_AND_COPY_RUNTIME_BINDING" if ready
+            "nativeCommandSequence": ["CloneNativeGroupV1"] if verified_group else ["CreateNativeGroupV1", "CloneNativeGroupV1"],
+            "nativeBridgeSource": "archicad-addon/Sources/NativeGroupCommands.inc",
+            "nativeReadbackCommand": "GetNativeGroupMembersV1",
+            "bridgeRequestsIfIndependentlyAuthorized": 1 if verified_group else 2,
+            "groupCreationSDK": None if verified_group else "ACAPI_Grouping_Create",
+            "groupReadbackSDK": "ACAPI_Grouping_GetAllGroupedElems",
+            "status": "SOURCE_INTEGRATED_REQUIRES_COMPILED_RUNTIME_REGISTRATION_AND_SCOPE" if ready
                       else "BLOCKED_VERIFY_GROUP_DEPENDENCIES_AND_RUNTIME",
             "nativeModelWrites": 0,
             "estimatedCalls": None,
