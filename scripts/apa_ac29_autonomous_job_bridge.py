@@ -71,6 +71,7 @@ def runtime_release():
         'apa_ac29_dynamic_write_scopes.py','apa_ac29_dynamic_native_verifiers.py'}
     scoped_modules={'apa_ac29_existing_create_verifiers.py',
                     'apa_ac29_existing_modify_verifiers.py'}
+    mailbox_modules={'apa_ac29_scoped_native_executor.py'}
     helpers={'apa_ac29_reusable_native_copy.py','apa_ac29_multi_prototype_native_copy.py',
              'apa_ac29_scene_reconciliation.py'}
     require(isinstance(receipt,dict) and set(receipt) in (old_keys,old_keys|{'controllerHashes'}) and
@@ -79,7 +80,8 @@ def runtime_release():
         receipt['workerSHA256']==sha(Path(__file__)) and
         set(receipt['moduleHashes']) in (
             basic_modules,basic_modules|helpers,
-            basic_modules|helpers|scoped_modules) and
+            basic_modules|helpers|scoped_modules,
+            basic_modules|helpers|scoped_modules|mailbox_modules) and
         all(re.fullmatch('[0-9a-f]{64}',value) for value in receipt['moduleHashes'].values()) and
         re.fullmatch('[0-9a-f]{64}',receipt['workingPlnSha256']) and
         type(receipt['expectedGuidCount']) is int and receipt['expectedGuidCount']>0,
@@ -675,6 +677,14 @@ def main():
         require(set(VERIFIERS.installed_verifiers())==expected and
                 callable(MULTI.reconcile_existing_multi_task),
                 'SCOPED_RUNTIME_DEPENDENCIES_MISSING')
+        if 'apa_ac29_scoped_native_executor.py' in (
+                runtime_release() or {}).get('moduleHashes',{}):
+            import apa_ac29_scoped_native_executor as SCOPED
+            require(callable(SCOPED.execute) and
+                    len(SCOPED.SUPPORTED)==6 and
+                    SCOPED.SUPPORTED['CreateRoofs']==(
+                        'CREATE','VerifiedNativeBasicRoof'),
+                    'SCOPED_NATIVE_MAILBOX_EXECUTOR_NOT_INSTALLED')
         print('APA_BRIDGE_HEALTHCHECK_PASS_NO_NATIVE_CALLS',flush=True)
         return
     require(10 <= args.interval_seconds <= 3600, "BAD_POLL_INTERVAL")
