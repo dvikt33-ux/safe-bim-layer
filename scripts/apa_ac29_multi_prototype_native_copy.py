@@ -120,11 +120,13 @@ def safe_native_lineage(row, *, parent=None):
 
 
 def body_fingerprint(element, source_anchor):
-    """Exact translated vertices + native face topology + body attributes.
+    """Translated physical BREP, independent of generated native numbering.
 
-    Lists retain native face/index ordering deliberately: if a provider
-    renumbers or changes source semantics, verification must not guess.
+    Reuse the existing oriented contour comparator. Native owner/body slots,
+    vertex/edge indices and normal-pool order can change during a true copy;
+    coordinates, oriented face loops, resolved normals and attributes cannot.
     """
+    import archicad_connected_components as C
     bodies = element.get("bodies") or []
     require(isinstance(bodies, list) and bodies,
             "MULTI_COPY_SOURCE_NATIVE_BODY_MISSING")
@@ -146,18 +148,49 @@ def body_fingerprint(element, source_anchor):
         faces = body.get("faces")
         require(isinstance(faces, list) and faces,
                 "MULTI_COPY_NO_NATIVE_FACES")
+        canonical_faces=[]
         for face in faces:
             require(isinstance(face, dict) and
-                    isinstance(face.get("contours"), list) and
+                    isinstance(face.get("contours"), list) and face['contours'] and
                     all(isinstance(ids, list) and len(ids) >= 3 and
                         all(type(idx) is int and 0 <= idx < len(vertices)
                             for idx in ids) for ids in face["contours"]),
                     "MULTI_COPY_FACE_CONTOURS_INVALID")
+            contours=face['contours']
+            geometry=C.body_face_keys({
+                'vertices':[dict(zip(COORDS,v)) for v in vnorm],
+                'polygons':[{'vertexIds':contours[0],'holes':contours[1:]}]})[0]
+            properties={k:copy.deepcopy(v) for k,v in face.items() if k not in {
+                'contours','vertices','holes','nativeFaceIndex',
+                'signedLocalNormalIndex','signedNativeEdgeReferences'}}
+            normal=None
+            if 'signedLocalNormalIndex' in face:
+                index=face['signedLocalNormalIndex'];normals=body.get('localNormals',[])
+                require(type(index) is int and index!=0 and 0<abs(index)<=len(normals),
+                        'MULTI_COPY_NATIVE_NORMAL_REFERENCE_INVALID')
+                value=normals[abs(index)-1];sign=1 if index>0 else -1
+                require(set(value)==set(COORDS) and all(type(value[k]) in (int,float)
+                    and math.isfinite(value[k]) for k in COORDS),'MULTI_COPY_NATIVE_NORMAL_INVALID')
+                normal=tuple(round(sign*value[k],7) for k in COORDS)
+            canonical_faces.append({'geometry':geometry,'normal':normal,'properties':properties})
+        canonical_faces.sort(key=lambda row:(row['geometry'],C.RUN.canonical(row['properties'])))
+        canonical_edges=[]
+        for edge in body.get('edges',[]):
+            ids=edge.get('vertices',[])
+            require(len(ids)==2 and all(type(i) is int and 0<=i<len(vnorm) for i in ids),
+                    'MULTI_COPY_NATIVE_EDGE_REFERENCE_INVALID')
+            canonical_edges.append({'endpoints':sorted(vnorm[i] for i in ids),
+                'properties':{k:copy.deepcopy(v) for k,v in edge.items()
+                    if k not in {'vertices','nativeEdgeIndex'}}})
+        canonical_edges.sort(key=lambda row:(row['endpoints'],C.RUN.canonical(row['properties'])))
+        if 'parentGuid' in body:
+            require(body['parentGuid'].lower()==element.get('guid','').lower(),
+                    'MULTI_COPY_NATIVE_BODY_OWNER_MISMATCH')
         other = {k: copy.deepcopy(v) for k, v in body.items()
-                 if k not in ("vertices", "faces")}
-        output.append({"relativeVertices": vnorm,
-                       "faces": copy.deepcopy(faces), "bodyProperties": other})
-    return output
+                 if k not in {'vertices','faces','edges','localNormals','nativeBodyIndex','parentGuid'}}
+        output.append({'relativeVertices':sorted(vnorm),'edges':canonical_edges,
+                       'faces':canonical_faces,'bodyProperties':other})
+    return sorted(output,key=C.RUN.canonical)
 
 
 def solid_fingerprint(root, children, anchor, *, parent_guid):

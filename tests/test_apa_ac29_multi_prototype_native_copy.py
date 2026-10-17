@@ -99,6 +99,52 @@ class TaskValidation(unittest.TestCase):
 
 
 class NativeVerification(unittest.TestCase):
+    def test_regenerated_native_numbering_preserves_physical_oriented_brep(self):
+        import archicad_connected_components as C
+        box=C.explicit_box_body({'x':.1,'y':.2,'z':2.9})
+        vertices=[[p[k] for k in 'xyz'] for p in box['vertices']]
+        faces=[{'contours':[p['vertexIds']], 'materialId':1,'nativeFaceIndex':i+1}
+               for i,p in enumerate(box['polygons'])]
+        edges={tuple(sorted((loop[i-1],loop[i])))
+               for p in box['polygons'] for loop in [p['vertexIds']] for i in range(len(loop))}
+        source=element('Object',vertices);source['guid']=OBJECT
+        source['bodies'][0].update(faces=faces,edges=[{'vertices':list(e),'nativeStatus':0} for e in sorted(edges)],
+            nativeBodyIndex=10,parentGuid=OBJECT)
+        copied=copy.deepcopy(source);copied['guid']=COLUMN
+        body=copied['bodies'][0];body.update(nativeBodyIndex=99,parentGuid=COLUMN)
+        order=list(reversed(range(8)));mapping={old:new for new,old in enumerate(order)}
+        body['vertices']=[[vertices[i][0]+10.,vertices[i][1],vertices[i][2]] for i in order]
+        for face in body['faces']:
+            loop=[mapping[i] for i in face['contours'][0]]
+            face['contours']=[loop[2:]+loop[:2]]
+            face['nativeFaceIndex']+=50
+        body['faces'].reverse()
+        for edge in body['edges']:edge['vertices']=[mapping[i] for i in reversed(edge['vertices'])]
+        body['edges'].reverse()
+        src={'x':0.,'y':0.,'z':0.};dst={'x':10.,'y':0.,'z':0.}
+        expected=multi.body_fingerprint(source,src)
+        self.assertEqual(expected,multi.body_fingerprint(copied,dst))
+        body['faces'][0]['materialId']=2
+        self.assertNotEqual(expected,multi.body_fingerprint(copied,dst))
+        body['faces'][0]['materialId']=1
+        body['faces'][0]['contours'][0].reverse()
+        self.assertNotEqual(expected,multi.body_fingerprint(copied,dst))
+        body['parentGuid']=OBJECT
+        with self.assertRaisesRegex(ValueError,'BODY_OWNER_MISMATCH'):
+            multi.body_fingerprint(copied,dst)
+
+    def test_native_normal_pool_reindexing_resolves_actual_oriented_normal(self):
+        src=element('Object');src['bodies'][0].update(
+            localNormals=[{'x':0.,'y':0.,'z':1.},{'x':1.,'y':0.,'z':0.}])
+        src['bodies'][0]['faces'][0]['signedLocalNormalIndex']=1
+        copied=copy.deepcopy(src)
+        copied['bodies'][0]['localNormals'].reverse()
+        copied['bodies'][0]['faces'][0]['signedLocalNormalIndex']=2
+        anchor={'x':0.,'y':0.,'z':0.}
+        self.assertEqual(multi.body_fingerprint(src,anchor),multi.body_fingerprint(copied,anchor))
+        copied['bodies'][0]['faces'][0]['signedLocalNormalIndex']=-2
+        self.assertNotEqual(multi.body_fingerprint(src,anchor),multi.body_fingerprint(copied,anchor))
+
     def test_one_beam_segment_owner_required(self):
         root=element("Beam")
         child=element("BeamSegment",parent=BEAM)
