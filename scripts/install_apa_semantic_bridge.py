@@ -1,6 +1,6 @@
 """One-time opt-in, isolated APA Semantic bridge install on Windows.
 
-Only creates C:\LocalAI\APA_AC29_Stable\external-tools\apa-semantic-v1.
+Only creates an isolated semantic folder under the existing APA external-tools.
 Never patches, overwrites, or restarts the existing APA 29/6-vendor stack.
 PyMuPDF installed in its OWN venv. Model weights are NOT downloaded.
 """
