@@ -45,7 +45,7 @@ GS::ObjectState CreateNativeGroupV1Command::Execute(const GS::ObjectState& p,GS:
  if(err!=NoError)return CreateErrorResponse(err,"Members must exist on one story");
  API_Guid created=APINULLGuid;
  err=ACAPI_CallUndoableCommand("APA create native group",[&]()->GSErrCode {
-  auto status=ACAPI_Grouping_Create(ids,&created);
+  auto status=ACAPI_Grouping_CreateGroup(ids,&created);
   if(status!=NoError)return status;
   GS::Array<API_Guid> actual;status=APAGroupMembers(created,actual);
   if(status!=NoError)return status;
@@ -116,7 +116,7 @@ GS::ObjectState CloneNativeGroupV1Command::Execute(const GS::ObjectState& p,GS::
    API_Guid copiedGroup=APINULLGuid;
    step=ACAPI_Grouping_GetGroup(added[0],&copiedGroup);
    if(step!=NoError)return step;
-   if(copiedGroup==APINULLGuid)step=ACAPI_Grouping_Create(added,&copiedGroup);
+   if(copiedGroup==APINULLGuid)step=ACAPI_Grouping_CreateGroup(added,&copiedGroup);
    if(step!=NoError)return step;
    GS::Array<API_Guid> actual;step=APAGroupMembers(copiedGroup,actual);
    if(step!=NoError||!APAGroupContainsExactly(actual,added))return APIERR_BADPARS;
