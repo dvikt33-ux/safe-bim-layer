@@ -167,6 +167,60 @@ def stored_scenes_clear(journal, ids):
                     "SELECT scene_id,state FROM scenes WHERE state != 'PASS'")]
 
 
+class GuardedSaveTransport:
+    """Wrap the ORIGINAL APA.native_transport; guard only a single SaveProject.
+
+    The wrapper does not implement network transport. Exact saved-copy hash
+    and protected source are checked before and after the ONLY allowed save.
+    """
+
+    def __init__(self, native_transport, bind_saved_copy, project_path,
+                 original_path, current_sha, source_sha, project_name,
+                 port, authorization_ref):
+        self._native_transport = native_transport
+        self._bind = bind_saved_copy
+        self._project = Path(project_path)
+        self._original = Path(original_path)
+        self._current = current_sha
+        self._source = source_sha
+        self._name = project_name
+        self._port = port
+        self._auth = authorization_ref
+        self._may_save = False
+        self._save_attempted = False
+        self.new_saved_sha = None
+        require(current_sha() and self._source() and
+                self._project.is_file() and self._original.is_file(),
+                "NATIVE_COPY_PROJECT_PROTECTION_INCOMPLETE")
+
+    def enable_after_verified_copy(self):
+        require(not self._may_save and not self._save_attempted and
+                self.new_saved_sha is None,
+                "NATIVE_COPY_SAVE_ALREADY_ARMED_OR_ATTEMPTED")
+        self._may_save = True
+
+    def __call__(self, command, parameters):
+        if command != "SaveProject":
+            return self._native_transport(command, parameters)
+        require(self._may_save and not self._save_attempted and
+                parameters == {},
+                "NATIVE_COPY_SAVE_ONLY_AFTER_COMPLETE_READBACK")
+        self._save_attempted = True
+        old_project = self._current()
+        old_original = self._source()
+        reply = self._native_transport(command, parameters)
+        require(reply == {"success": True},
+                "NATIVE_COPY_NATIVE_SAVE_NOT_CONFIRMED")
+        new_project = self._current()
+        require(new_project != old_project and
+                self._source() == old_original,
+                "NATIVE_COPY_SAVED_FILE_OR_PROTECTED_SOURCE_DRIFT")
+        self._bind(self._port, str(self._project), self._name,
+                   new_project, self._auth + ":SAVED")
+        self.new_saved_sha = new_project
+        return reply
+
+
 def execute_task(task, *, api, writer, router, APA, RUN, components,
                  capture_native, saved_project_sha, current_sha,
                  save_guard, known_reconciliation=None):
@@ -200,6 +254,13 @@ def execute_task(task, *, api, writer, router, APA, RUN, components,
     native_before = native_map(model_before, components.G.normalize_dump)
     require(set(native_before) == original,
             "NATIVE_COPY_COMPLETE_BASELINE_MODEL_REQUIRED")
+    if unresolved:
+        require(known_reconciliation["guidSetHash"] ==
+                RUN.digest(sorted(original)) and
+                known_reconciliation["brepSignaturesHash"] == RUN.digest({
+                    guid: components.ROOF.geometry_signature(native_before[guid])
+                    for guid in sorted(original)
+                }), "NATIVE_COPY_HISTORICAL_RECONCILIATION_IS_STALE")
     source = task["prototypeGuid"]
     require(source in original and native_before[source]["type"] == "Column",
             "NATIVE_COPY_SOURCE_ROOT_NOT_A_COLUMN")
