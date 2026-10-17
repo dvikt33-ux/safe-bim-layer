@@ -22,6 +22,8 @@ import tempfile
 
 SCHEMA = "APA_SEMANTIC_SOURCE_EVIDENCE_V1"
 OPERATIONS = {"pdf-paths", "pdf-raster", "openbim", "raster2seq"}
+OFFICIAL_MODEL_SHA256 = {"openbim": "cd7f41460ca1d3cc99bca9c61db8ac83d0381ddec385d55257e3ccb99967ffd7",
+                         "raster2seq": "f7c0ef9379aa8cf11349da8b2179214e0d495af758383984a2361a1309aab3b7"}
 KINDS = {"pdf-paths": {".pdf"}, "pdf-raster": {".pdf"},
          "openbim": {".png", ".jpg", ".jpeg"},
          "raster2seq": {".png", ".jpg", ".jpeg"}}
@@ -151,8 +153,9 @@ def read_verified_ml_model(config_file, vendor):
     model = Path(item["model"]).resolve(strict=True)
     require(exe.is_file() and root.is_dir() and model.is_file(),
             "ML_VENDOR_PATH_INVALID")
-    require(digest(model) == item.get("modelSHA256"),
-            "ML_MODEL_HASH_MISMATCH")
+    require(digest(model) == item.get("modelSHA256")
+            == OFFICIAL_MODEL_SHA256[vendor],
+            "ML_MODEL_HASH_MISMATCH_OR_NOT_OFFICIAL_CHECKPOINT")
     require(len(str(exe)) < 1024 and len(str(root)) < 1024,
             "ML_VENDOR_PATH_TOO_LONG")
     return exe, root, model
