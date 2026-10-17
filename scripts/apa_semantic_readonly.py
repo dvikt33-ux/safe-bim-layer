@@ -2,6 +2,7 @@
 
 Operational commands:
   pdf-paths: PyMuPDF native paths/layers/clips/groups + graphic clusters.
+  pdf-raster: render one PDF page to a new PNG with known pixel-point scale.
   openbim: official OpenBIM FloorPlan AI inference_api.FloorplanSegmenter.
   raster2seq: floorplan-back's official parse_floorplan.py CLI.
 
@@ -20,8 +21,9 @@ import sys
 import tempfile
 
 SCHEMA = "APA_SEMANTIC_SOURCE_EVIDENCE_V1"
-OPERATIONS = {"pdf-paths", "openbim", "raster2seq"}
-KINDS = {"pdf-paths": {".pdf"}, "openbim": {".png", ".jpg", ".jpeg"},
+OPERATIONS = {"pdf-paths", "pdf-raster", "openbim", "raster2seq"}
+KINDS = {"pdf-paths": {".pdf"}, "pdf-raster": {".pdf"},
+         "openbim": {".png", ".jpg", ".jpeg"},
          "raster2seq": {".png", ".jpg", ".jpeg"}}
 
 
@@ -94,6 +96,37 @@ def pdf_paths(source, page_no):
             "scaleConfirmed": False,
             "truncated": False,
         }
+
+
+
+def pdf_raster(source, page_no, output):
+    import pymupdf
+    require(page_no >= 1, "PDF_PAGE_MUST_BE_ONE_BASED")
+    png = output.with_suffix(".png")
+    require(not png.exists() and png != source
+            and png.parent == output.parent,
+            "PDF_RASTER_DESTINATION_ALREADY_EXISTS")
+    with pymupdf.open(str(source)) as doc:
+        require(page_no <= len(doc), "PDF_PAGE_NOT_FOUND")
+        page = doc[page_no - 1]
+        scale = 2.0  # 144 DPI for nominal 72-pt PDF space.
+        width = int(math.ceil(page.rect.width * scale))
+        height = int(math.ceil(page.rect.height * scale))
+        require(width > 0 and height > 0
+                and width * height <= 30_000_000,
+                "PDF_RASTER_TOO_LARGE_SELECT_A_SMALLER_SOURCE")
+        pix = page.get_pixmap(matrix=pymupdf.Matrix(scale, scale),
+                              colorspace=pymupdf.csRGB, alpha=False)
+        # New file only; no source modification.
+        with png.open("xb") as fd:
+            fd.write(pix.tobytes("png"))
+        return {"page": page_no, "pageCount": len(doc),
+                "imageFile": str(png), "imageSHA256": digest(png),
+                "imageSizePx": [pix.width, pix.height],
+                "pointsToPixels": scale,
+                "sourceCoordinates": "PDF_POINTS_TOP_LEFT",
+                "rasterCoordinates": "IMAGE_PIXELS_TOP_LEFT",
+                "modelRealWorldScale": "NOT_VERIFIED"}
 
 
 def read_verified_ml_model(config_file, vendor):
@@ -247,6 +280,8 @@ def main(argv=None):
     require(src.stat().st_size <= 1024**3, "SEMANTIC_SOURCE_OVER_1GB")
     if args.action == "pdf-paths":
         result = pdf_paths(src, args.page)
+    elif args.action == "pdf-raster":
+        result = pdf_raster(src, args.page, dest)
     elif args.action == "openbim":
         result = openbim_infer(src, args.ml_config, dest)
     else:
