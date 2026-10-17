@@ -270,10 +270,20 @@ def analyze(existing, targets, *, source_axes=None, distribution_rules=None):
         copied=[tuple(q(parent["anchor"][k]+shift[k])
                       for k in ("x","y","z")) for shift in group["displacements"]]
         key=(parent["type"],parent["familySignature"],parent["storyIndex"])
-        report=topology(copied,distribution_rules.get(key))
+        # When the source prototype itself occupies an approved target,
+        # it counts for pattern inference (but must NEVER be copied again).
+        source_point=xyz(parent)
+        source_is_target=any(
+            (r["type"],r["familySignature"],r["storyIndex"])==key and
+            xyz(r)==source_point for r in targets)
+        layout=copied+([source_point] if source_is_target else [])
+        report=topology(layout,distribution_rules.get(key))
         copy_groups.append({"prototypeGuid":group["prototypeGuid"],
                             "familyType":group["prototypeType"],
-                            "count":len(copied), "arrangement":report,
+                            "count":len(copied),
+                            "layoutTargetCount":len(layout),
+                            "prototypeAlreadyOccupiesTarget":source_is_target,
+                            "arrangement":report,
                             "method":"NATIVE_COPY_SINGLE" if len(copied)==1
                                 else "NATIVE_COPY_BULK",
                             "nativeCommand":"MoveElements",
