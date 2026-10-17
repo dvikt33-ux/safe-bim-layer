@@ -133,32 +133,135 @@ def ifc_qto(args):
             "result": result}, [model]
 
 
+def _pdf_path_ops(path, height):
+    """Preserve PDF path commands, with TOP-LEFT point coordinates throughout.
+
+    pdfplumber paths use PDF BOTTOM-LEFT y; line/curve .pts use TOP-LEFT y.
+    A cubic 'c' keeps all three control/endpoints exactly. Never tessellate.
+    """
+    rows = []
+    for instruction in path:
+        op, *raw_points = instruction
+        require(op in {"m", "l", "c", "h"}, "UNSUPPORTED_PDF_VECTOR_PATH_OPERATION:" + op)
+        require((op == "h" and not raw_points)
+                or (op in {"m", "l"} and len(raw_points) == 1)
+                or (op == "c" and len(raw_points) == 3),
+                "MALFORMED_PDF_VECTOR_PATH")
+        rows.append({"op": op, "pointsPt": [
+            [float(pt[0]), float(height - pt[1])] for pt in raw_points
+        ]})
+    return rows
+
+
+def _pdf_style(obj):
+    return {key: obj.get(key) for key in (
+        "linewidth", "stroke", "fill", "evenodd",
+        "stroking_color", "non_stroking_color", "dash"
+    )}
+
+
+def _pdf_rect(obj):
+    return {
+        "x0": obj["x0"], "x1": obj["x1"],
+        "top": obj["top"], "bottom": obj["bottom"],
+        "cornersPt": [list(p) for p in obj.get("pts", ())],
+        "style": _pdf_style(obj),
+    }
+
+
+def _pdf_line(obj, height):
+    pts = obj.get("pts", ())
+    require(len(pts) == 2, "PDF_LINE_NOT_EXACT_TWO_ENDPOINTS")
+    return {
+        "x0": obj["x0"], "x1": obj["x1"],
+        "top": obj["top"], "bottom": obj["bottom"],
+        "startPt": list(pts[0]), "endPt": list(pts[1]),
+        "path": _pdf_path_ops(obj.get("path", ()), height),
+        "style": _pdf_style(obj),
+    }
+
+
+def _pdf_curve(obj, height):
+    return {
+        "x0": obj["x0"], "x1": obj["x1"],
+        "top": obj["top"], "bottom": obj["bottom"],
+        "pointsPt": [list(p) for p in obj.get("pts", ())],
+        "path": _pdf_path_ops(obj.get("path", ()), height),
+        "style": _pdf_style(obj),
+    }
+
+
+def _pdf_recover_cyrillic(raw):
+    """Repair the tested ARCHICAD Latin-1 displayed Windows-1251 text.
+
+    Only apply whole-page reversible byte mapping if it produces substantial
+    Cyrillic, and raw input had no genuine Cyrillic. Always retain raw text.
+    Other encodings remain untouched; never use replacement characters.
+    """
+    if not raw:
+        return raw, "EMPTY"
+    if any("\u0400" <= c <= "\u052f" for c in raw):
+        return raw, "ALREADY_UNICODE"
+    try:
+        recovered = raw.encode("latin-1").decode("cp1251")
+    except (UnicodeEncodeError, UnicodeDecodeError):
+        return raw, "UNSUPPORTED_OR_MIXED_ENCODING_RAW_PRESERVED"
+    cyrillic_count = sum("\u0400" <= c <= "\u052f" for c in recovered)
+    if cyrillic_count >= 3 and cyrillic_count >= len(raw) * 0.06:
+        return recovered, "LATIN1_CP1251_REVERSIBLE_RECOVERY"
+    return raw, "RAW_PRESERVED_NO_CYRILLIC_EVIDENCE"
+
+
 def pdf_vectors(args):
+    """Complete vector primitive extraction, WITHOUT per-page truncation.
+
+    Paths, cubic Bezier control points and line endpoints are PDF points in a
+    single top-left coordinate frame. This is *not* BIM/world calibration.
+    The report can be large: callers must choose a destination with disk space.
+    """
     import pdfplumber
     doc = source(args.a, "pdf")
     rows = []
+    totals = {"lines": 0, "rectangles": 0, "curves": 0, "textCharacters": 0}
     with pdfplumber.open(str(doc)) as pdf:
         require(len(pdf.pages) <= 500, "PDF_OVER_500_PAGES_REQUIRES_BATCHING")
         for i, page in enumerate(pdf.pages, start=1):
-            lines = [{"x0": l.get("x0"), "x1": l.get("x1"),
-                      "top": l.get("top"), "bottom": l.get("bottom")}
-                     for l in page.lines[:20000]]
-            rects = [{"x0": x.get("x0"), "x1": x.get("x1"),
-                      "top": x.get("top"), "bottom": x.get("bottom")}
-                     for x in page.rects[:20000]]
-            rows.append({"page": i, "widthPt": page.width,
-                         "heightPt": page.height,
-                         "sourceCoordSystem": "PDF_TOP_LEFT_POINTS",
-                         "lines": lines, "rectangles": rects,
-                         "lineCount": len(page.lines),
-                         "rectangleCount": len(page.rects),
-                         "curveCountNotExtracted": len(page.curves),
-                         "truncated": len(page.lines) > len(lines)
-                                      or len(page.rects) > len(rects),
-                         "textPreview": (page.extract_text() or "")[:12000]})
-    return {"sourceType": "VECTOR_PDF_FACTS_NOT_BIM",
-            "pages": rows, "scaleConfirmed": False,
-            "coordinateCalibration": "NOT_VERIFIED"}, [doc]
+            lines = [_pdf_line(item, page.height) for item in page.lines]
+            rects = [_pdf_rect(item) for item in page.rects]
+            curves = [_pdf_curve(item, page.height) for item in page.curves]
+            raw_text = page.extract_text() or ""
+            text, encoding = _pdf_recover_cyrillic(raw_text)
+            require(len(lines) == len(page.lines) and
+                    len(rects) == len(page.rects) and
+                    len(curves) == len(page.curves),
+                    "PDF_VECTOR_PRIMITIVE_COVERAGE_MISMATCH")
+            totals["lines"] += len(lines)
+            totals["rectangles"] += len(rects)
+            totals["curves"] += len(curves)
+            totals["textCharacters"] += len(text)
+            rows.append({
+                "page": i, "widthPt": page.width, "heightPt": page.height,
+                "sourceCoordSystem": "PDF_TOP_LEFT_POINTS",
+                "lines": lines, "rectangles": rects, "curves": curves,
+                "lineCount": len(lines), "rectangleCount": len(rects),
+                "curveCount": len(curves),
+                "curveCountNotExtracted": 0,
+                "truncated": False,
+                "text": text, "textRaw": raw_text,
+                "textEncodingStatus": encoding,
+                "textPreview": text[:12000],
+                "embeddedImageCount": len(page.images),
+            })
+    return {
+        "sourceType": "VECTOR_PDF_FACTS_NOT_BIM",
+        "pages": rows, "totals": totals,
+        "truncated": False,
+        "vectorGeometryComplete": True,
+        "curveCoordinates": "CUBIC_BEZIER_CONTROL_POINTS_NOT_TESSELLATED",
+        "textRecovery": "PRESERVES_ORIGINAL_AND_RECOVERED_TEXT",
+        "scaleConfirmed": False,
+        "coordinateCalibration": "NOT_VERIFIED",
+    }, [doc]
 
 
 def dxf_vectors(args):
