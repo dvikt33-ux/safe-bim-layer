@@ -268,7 +268,8 @@ def verify_translation_after(*,api,command,parameters,native_response,
 
 def installed_verifiers():
     """Conservative source-owned registry. No blanket Create/Modify grant."""
-    return {
+    from apa_ac29_existing_create_verifiers import extended_verifiers
+    checked = {
         "VerifiedNativeColumns": NativeVerifier(
             verifier_id="VerifiedNativeColumns", command="CreateColumns",
             effect="CREATE", before=verify_column_create_before,
@@ -277,3 +278,8 @@ def installed_verifiers():
             verifier_id='VerifiedNativeTranslation',command='MoveElements',effect='MODIFY',
             before=verify_translation_before,after=verify_translation_after)
     }
+    extra = extended_verifiers()
+    check(not set(checked).intersection(extra),
+          "APA_NATIVE_REGISTRY_VERIFIER_ID_COLLISION")
+    checked.update(extra)
+    return checked
