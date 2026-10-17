@@ -1,4 +1,4 @@
-"""Focused new integration checks for reusing AC29 Beam/Wall/Slab readers."""
+"""Focused reuse of AC29 Beam/Wall/Roof native readback contracts."""
 import copy
 from pathlib import Path
 import sys
@@ -38,7 +38,8 @@ def wall():
         "endCoordinate":{"x":12.,"y":10.},
         "zCoordinate":0.,"floorIndex":0,"height":2.9,
         "thickness":.2,"structureType":"Basic",
-        "buildingMaterialId":material()
+        "buildingMaterialId":material(),
+        "referenceLineLocation":"Center"
     }]}
 
 
@@ -47,6 +48,18 @@ def slab():
         "polygonCoordinates":[{"x":10.,"y":10.},{"x":12.,"y":10.},
                               {"x":12.,"y":12.},{"x":10.,"y":12.}],
         "level":0.,"thickness":.2,"floorIndex":0,
+        "structureType":"Basic","buildingMaterialId":material()
+    }]}
+
+
+def roof():
+    return {"roofsData":[{
+        "polygonCoordinates":[{"x":10.,"y":10.},{"x":12.,"y":10.},
+                              {"x":12.,"y":12.},{"x":10.,"y":12.}],
+        "pivotLine":{"begCoordinate":{"x":10.,"y":10.},
+                     "endCoordinate":{"x":12.,"y":10.}},
+        "level":0.,"angle":.2,"eavesOverhang":0.,
+        "thickness":.2,"floorIndex":0,
         "structureType":"Basic","buildingMaterialId":material()
     }]}
 
@@ -68,16 +81,32 @@ class RegistryCoverage(unittest.TestCase):
         self.assertEqual({(row.command,row.effect) for row in available.values()},
                          {("CreateColumns","CREATE"),("MoveElements","MODIFY"),
                           ("CreateBeams","CREATE"),("CreateWalls","CREATE"),
-                          ("CreateSlabs","CREATE")})
+                          ("CreateRoofs","CREATE")})
 
     def test_strict_basic_source_all_three_families(self):
         for command,params in [
             ("CreateBeams",beam()),("CreateWalls",wall()),
-            ("CreateSlabs",slab())]:
+            ("CreateRoofs",roof())]:
             with self.subTest(command=command):
                 row, box=X.checked_source(command,params)
                 self.assertEqual(row["floorIndex"],0)
                 self.assertEqual(len(box),3)
+
+    def test_source_keys_match_real_1_5_10_live_export(self):
+        import json
+        root=Path(__file__).resolve().parents[1]
+        catalog=json.loads((root/"schemas/tapir-live-1.5.10/tapir-scene-live.json").read_text())
+        for command,params in (("CreateBeams",beam()),
+                               ("CreateWalls",wall()),
+                               ("CreateRoofs",roof())):
+            slot=next(iter(params))
+            props=catalog["commands"][command]["parameters"]["properties"][slot]["items"]["properties"]
+            self.assertLessEqual(set(params[slot][0]),set(props),
+                                 "Native source must use current Tapir export only")
+
+        slab_props=catalog["commands"]["CreateSlabs"]["parameters"]["properties"]["slabsData"]["items"]["properties"]
+        self.assertNotIn("buildingMaterialId",slab_props)
+        self.assertNotIn("structureType",slab_props)
 
     def test_beam_native_profile_is_checked_using_existing_adapter_contract(self):
         bad=beam()
@@ -89,10 +118,21 @@ class RegistryCoverage(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,"BASIC_HORIZONTAL_BEAM"):
             X.checked_source("CreateBeams",bad)
 
-    def test_reject_slab_composite_without_source_verified_defaults(self):
-        p=slab();p["slabsData"][0]["structureType"]="Composite"
-        with self.assertRaisesRegex(ValueError,"EXPLICIT_BASIC_SLAB"):
+    def test_slab_remains_blocked_when_native_create_cannot_set_material(self):
+        p=slab()
+        with self.assertRaisesRegex(ValueError,"UNSUPPORTED_COMMAND"):
             X.checked_source("CreateSlabs",p)
+
+    def test_roof_needs_exact_single_plane_pivot_and_eaves(self):
+        p=roof()
+        p["roofsData"][0].pop("eavesOverhang")
+        with self.assertRaisesRegex(ValueError,"SINGLE_PLANE_BASIC_ROOF"):
+            X.checked_source("CreateRoofs",p)
+        p=roof()
+        p["roofsData"][0]["angle"]=0
+        with self.assertRaisesRegex(ValueError,"SINGLE_PLANE_BASIC_ROOF"):
+            X.checked_source("CreateRoofs",p)
+
 
     def test_reject_wall_nonlinear_or_nonzero_story(self):
         p=wall();p["wallsData"][0]["arcAngle"]=.3
@@ -149,6 +189,29 @@ class RegistryCoverage(unittest.TestCase):
                     {"guid":OLD,"type":"Object","bodies":[]},wall_brep]},
                 source_proof=proof)
         self.assertTrue(result["status"].endswith("PASS"))
+
+    def test_roof_reuses_existing_native_adapter_readback(self):
+        p=roof()
+        proof=X.verify_existing_create_before(
+            api=None,command="CreateRoofs",parameters=p,
+            affected=[],native_before={"elements":[{
+                "guid":OLD,"type":"Object","bodies":[]}]})
+        roof_body=brep("Roof",[[10.,10.,0.],[12.,10.,0.],
+                                [12.,12.,.4],[10.,12.,.4]])
+        with patch("archicad_scene_run.requested_details",
+                   return_value={"type":"Roof","floorIndex":0,"details":{}}), \
+             patch("archicad_connected_components.NativeAdapter.verify",
+                   return_value="Roof") as native_verify:
+            result=X.verify_existing_create_after(
+                api=None,command="CreateRoofs",parameters=p,
+                native_response={"elements":[{"elementId":{"guid":NEW}}]},
+                before_guids={OLD},after_guids={OLD,NEW},
+                affected=[],native_before={"elements":[]},
+                native_after={"elements":[{"guid":OLD,"type":"Object","bodies":[]},
+                                          roof_body]},
+                source_proof=proof)
+        self.assertEqual(native_verify.call_count,1)
+        self.assertEqual(result["rootGuid"],NEW)
 
     def test_unexpected_native_guid_delta_never_accepted(self):
         with self.assertRaisesRegex(ValueError,"GUID_DELTA_INVALID"):
