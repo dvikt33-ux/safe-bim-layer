@@ -192,7 +192,38 @@ def analyze(existing, targets, *, source_axes=None, distribution_rules=None):
     need(set(distribution_rules)<={
         (r["type"],r["familySignature"],r["storyIndex"]) for r in targets},
          "SEMANTIC_SELECTOR_UNUSED_DISTRIBUTION_RULE")
-    plan=DynamicCommands.plan_reuse_existing(existing,targets)
+    # The original copy-first planner supports native Column/Beam/Object
+    # prototypes. Roofs and hosted/structural dependent families are still
+    # accounted for, but must not be fed into unsupported copy recipes.
+    safe_existing=[row for row in existing if row.get("type") in COPYABLE]
+    safe_targets=[row for row in targets if row["type"] in COPYABLE]
+    plan=(DynamicCommands.plan_reuse_existing(safe_existing,safe_targets)
+          if safe_targets else {
+              "copyGroups":[],"unmatchedTargetsPendingPrototype":[],
+              "existingElementGuids":[]})
+    # Independent existing elements of non-copyable kinds can satisfy an exact
+    # identity/location, but cannot be translated as detached copies.
+    fulfilled_other=[]
+    create_other=[]
+    for target in targets:
+        if target["type"] in COPYABLE:
+            continue
+        matching=[src for src in existing
+            if src.get("nativeReadbackVerified") is True and
+               src.get("type")==target["type"] and
+               src.get("familySignature")==target["familySignature"] and
+               src.get("storyIndex")==target["storyIndex"] and
+               isinstance(src.get("anchor"),dict) and
+               xyz(src)==xyz(target) and
+               (target["type"] not in HOSTED or
+                (src.get("ownerWallGuid") and
+                 src.get("ownerWallGuid")==
+                 target.get("nativeCreateData",{}).get(
+                     "ownerWallId",{}).get("guid")))]
+        if matching:
+            fulfilled_other.append(matching[0].get("guid"))
+        else:
+            create_other.append(target)
     copy_groups=[]
     planned_guids={x["guid"].lower():x for x in existing}
     for group in plan["copyGroups"]:
@@ -211,7 +242,7 @@ def analyze(existing, targets, *, source_axes=None, distribution_rules=None):
                             "nativeCommand":"MoveElements",
                             "sourceRef":group["sourceRef"]})
     remaining=defaultdict(list)
-    for row in plan["unmatchedTargetsPendingPrototype"]:
+    for row in [*plan["unmatchedTargetsPendingPrototype"],*create_other]:
         remaining[(row["type"],row["familySignature"],row["storyIndex"])].append(row)
     creates=[]
     for key,rows in sorted(remaining.items()):
@@ -241,7 +272,7 @@ def analyze(existing, targets, *, source_axes=None, distribution_rules=None):
         "schema":SCHEMA,
         "status":"READ_ONLY_SEMANTIC_OPERATION_PLAN_PREPARED",
         "requestedTargets":len(targets),
-        "alreadyPresent":len(plan["existingElementGuids"]),
+        "alreadyPresent":len(plan["existingElementGuids"])+len(fulfilled_other),
         "copies":copy_groups,"creates":creates,
         "copyMethod":("ONE_NATIVE_MULTI_PROTOTYPE_COPY_CALL"
                       if copy_calls and sum(x["count"] for x in copy_groups)>1
