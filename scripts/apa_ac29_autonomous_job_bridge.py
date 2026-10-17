@@ -63,18 +63,26 @@ def runtime_release():
     if not path.exists():
         return None
     receipt=json.loads(path.read_text(encoding='utf8'))
-    require(isinstance(receipt,dict) and set(receipt)=={
+    old_keys={
         'schema','revision','workerSHA256','moduleHashes',
-        'workingPlnSha256','expectedGuidCount'} and
+        'workingPlnSha256','expectedGuidCount'}
+    basic_modules=set(MODULE_HASHES)|{
+        'apa_ac29_dynamic_write_scopes.py','apa_ac29_dynamic_native_verifiers.py'}
+    helpers={'apa_ac29_reusable_native_copy.py','apa_ac29_multi_prototype_native_copy.py',
+             'apa_ac29_scene_reconciliation.py'}
+    require(isinstance(receipt,dict) and set(receipt) in (old_keys,old_keys|{'controllerHashes'}) and
         receipt['schema']=='APA_AC29_RUNTIME_RELEASE_V1' and
         re.fullmatch('[0-9a-f]{40}',receipt['revision']) and
         receipt['workerSHA256']==sha(Path(__file__)) and
-        set(receipt['moduleHashes'])==set(MODULE_HASHES)|{
-            'apa_ac29_dynamic_write_scopes.py','apa_ac29_dynamic_native_verifiers.py'} and
+        set(receipt['moduleHashes']) in (basic_modules,basic_modules|helpers) and
         all(re.fullmatch('[0-9a-f]{64}',value) for value in receipt['moduleHashes'].values()) and
         re.fullmatch('[0-9a-f]{64}',receipt['workingPlnSha256']) and
         type(receipt['expectedGuidCount']) is int and receipt['expectedGuidCount']>0,
         'LOCAL_RUNTIME_RELEASE_RECEIPT_INVALID')
+    if 'controllerHashes' in receipt:
+        require(set(receipt['controllerHashes'])==helpers and all(
+            re.fullmatch('[0-9a-f]{64}',value) for value in receipt['controllerHashes'].values()),
+            'LOCAL_RUNTIME_CONTROLLER_RECEIPT_INVALID')
     return receipt
 
 
@@ -164,6 +172,9 @@ def stable_preflight():
     release=runtime_release()
     for name, expected in (release['moduleHashes'] if release else MODULE_HASHES).items():
         require(sha(SCRIPTS / name) == expected, "STABLE_APA_MODULE_DRIFT:" + name)
+    if release:
+        for name,expected in release.get('controllerHashes',{}).items():
+            require(sha(ROOT/'controllers'/name)==expected,'STABLE_APA_CONTROLLER_DRIFT:'+name)
     require(WORKING.is_file() and ORIGINAL.is_file() and
             sha(WORKING) == approved_saved_sha() and sha(ORIGINAL) == SOURCE_SHA,
             "BDD_SAVED_OR_PROTECTED_PLN_CHANGED")
@@ -559,7 +570,11 @@ def main():
         stable_preflight()
         sys.path.insert(0,str(SCRIPTS))
         import archicad_project_accelerator as APA
+        import apa_ac29_dynamic_native_verifiers as VERIFIERS
+        import apa_ac29_multi_prototype_native_copy as MULTI
         require(callable(APA.run_scoped_native_task),'SCOPED_CORE_ENTRY_POINT_MISSING')
+        require(set(VERIFIERS.installed_verifiers())=={'VerifiedNativeColumns','VerifiedNativeTranslation'} and
+                callable(MULTI.reconcile_existing_multi_task),'SCOPED_RUNTIME_DEPENDENCIES_MISSING')
         print('APA_BRIDGE_HEALTHCHECK_PASS_NO_NATIVE_CALLS',flush=True)
         return
     require(10 <= args.interval_seconds <= 3600, "BAD_POLL_INTERVAL")
