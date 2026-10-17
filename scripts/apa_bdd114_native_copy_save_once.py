@@ -77,6 +77,38 @@ def run(folder,approval):
     dump=D.capture_full_model(api,sorted(before))
     old={e["guid"].lower():e for e in C.G.normalize_dump(dump)["elements"]}
     need(set(old)==before,"MODEL_DUMP_INCOMPLETE")
+    # Fresh sloped-roof assessment on the live model; old AABB evidence is not enough.
+    import importlib.util
+    from shapely.geometry import box
+    review_path=ROOT/"controllers"/"apa_bdd114_native_roof_face_review.py"
+    need(review_path.is_file(),"REVIEWED_NATIVE_ROOF_CHECKER_MISSING")
+    review_bytes=review_path.read_bytes()
+    review_blob=hashlib.sha1(b"blob "+str(len(review_bytes)).encode()+bytes([0])+review_bytes).hexdigest()
+    need(review_blob=="35a7bd794317ba91056334aff6801cd0ec71f220","NATIVE_ROOF_CHECKER_SOURCE_DRIFT")
+    spec=importlib.util.spec_from_file_location("bdd114_approved_roof",review_path)
+    roofcheck=importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(roofcheck)
+    roof=old["f0d643a1-b236-4dfc-844a-98424a12b9b7"]
+    north=old["7b332594-ab82-43b4-bfc2-ab5ad549c2c9"]
+    need(roof["type"]=="Roof" and north["type"]=="Wall","NATIVE_STRUCTURE_DRIFT")
+    north_box=physical(north)
+    need(north_box is not None,"NORTH_WALL_BREP_MISSING")
+    for index,(x,y) in enumerate(XY):
+        candidate=box(x-.05,y-.025,x+.05,y+.025)
+        lowest,face_count=roofcheck.minimum_native_roof_height_over_footprint(roof,C.G,candidate)
+        need(face_count>=1 and lowest>2.902,"NATIVE_ROOF_FACE_CLEARANCE_FAILED:"+str(index+1))
+        block=[(x-.05,x+.05),(y-.025,y+.025),(0,2.9)]
+        joint=all(block[k][0]<north_box[k][1]-1e-8 and north_box[k][0]<block[k][1]-1e-8 for k in range(3))
+        need(joint==(index==0),"NORTH_WALL_STUD_JUNCTION_DRIFT:"+str(index+1))
+        for guid,element in old.items():
+            if guid in (roof["guid"].lower(),north["guid"].lower()):continue
+            if element["type"]=="ColumnSegment":continue
+            for body in element.get("bodies",[]):
+                vertices=body.get("vertices",[])
+                if not vertices:continue
+                bounds=[(min(p[k] for p in vertices),max(p[k] for p in vertices)) for k in range(3)]
+                need(not all(block[k][0]<bounds[k][1]-1e-8 and bounds[k][0]<block[k][1]-1e-8 for k in range(3)),
+                     "OTHER_NATIVE_BREP_ENVELOPE_INTERSECTION:"+guid)
     original=info(api,[SRC])[SRC];sg,seg=child(old,SRC)
     verify_stud(original,seg,(3.53,9.255))
     # Avoid any existing physical column at intended locations.
