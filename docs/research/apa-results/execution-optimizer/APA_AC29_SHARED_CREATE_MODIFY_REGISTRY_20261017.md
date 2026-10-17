@@ -27,7 +27,7 @@ The current, committed `schemas/tapir-live-1.5.10/tapir-scene-live.json` shows t
 
 - Focused original dynamic scope tests and only new source/registry/material verification tests in Linux and Windows CI.
 - Check real Tapir export property keys directly in tests, not guessed schema.
-- **No live model writes, no new approval/grant, no installation** in this PR. The installed release remains `9cfe84c` as last reported, with 298 GUID in the BDD working project. Do not replay previous UNKNOWN copy/150 batch scenes.
+- The existing `install_apa_ac29_autonomous_job_bridge.update_from_checkout` now includes both verifier modules alongside all pinned APA scripts, with the previous hash, backup, singleton, queue/SQLite and PLN protections. **No live model writes, no new approval/grant, no installation** occurred in this PR. The installed release remains `9cfe84c` as last reported, with 298 GUID in the BDD working project. Do not replay previous UNKNOWN copy/150 batch scenes.
 - No main change, no Archicad 30, no Arena or separate service.
 
 ## Next acceptance
