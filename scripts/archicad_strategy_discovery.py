@@ -792,12 +792,48 @@ def _existing_semantic_qualification(step, command):
     from archicad_native_spatial_tools import COMMANDS, qualify_operation
     bare = command.rsplit(".", 1)[-1]
     proof = step["sourceVerification"]
-    owned, retained = set(proof.get("ownedGuids", [])), set(proof.get("retainedGuids", []))
+    owned = {g.lower() for g in proof.get("ownedGuids", [])}
+    retained = {g.lower() for g in proof.get("retainedGuids", [])}
+    require("roofSource" not in step or bare == "CreateRoofs",
+            "AUTO_CATALOG_ROOF_SOURCE_IS_CREATE_ONLY")
     if bare in COMMANDS:
         qualify_operation(bare, step["parameters"], owned, retained)
     elif bare in {"CreateRoofs", "ModifyRoofs"}:
         from archicad_native_roof_editing import qualify_operation as roof_qualify
-        roof_qualify(bare, step["parameters"], owned, retained)
+        if bare == "CreateRoofs":
+            # sourceRoofId belongs to APA provenance, NOT to Tapir CreateRoofs.
+            # Validate a temporary qualifier view; the native graph remains
+            # byte-for-byte schema compatible and contains no synthetic field.
+            source = step.get("roofSource")
+            require(isinstance(source, dict)
+                    and set(source) == {"guid", "nativeReadbackVerified", "nativeSignatureSHA256"}
+                    and isinstance(source.get("guid"), str)
+                    and len(source["guid"].strip()) >= 32
+                    and source.get("nativeReadbackVerified") is True
+                    and isinstance(source.get("nativeSignatureSHA256"), str)
+                    and len(source["nativeSignatureSHA256"]) == 64
+                    and all(c in "0123456789abcdef" for c in source["nativeSignatureSHA256"].lower()),
+                    "AUTO_CATALOG_ROOF_VERIFIED_SOURCE_BINDING_REQUIRED")
+            require(source["guid"].lower() in owned | retained,
+                    "AUTO_CATALOG_ROOF_SOURCE_OUTSIDE_VERIFIED_SCOPE")
+            import copy
+            qualified = copy.deepcopy(step["parameters"])
+            rows = qualified.get("roofsData", [])
+            require(isinstance(rows, list) and rows and all(isinstance(row, dict) for row in rows),
+                    "AUTO_CATALOG_ROOF_NATIVE_ROWS_REQUIRED")
+            for row in rows:
+                require("sourceRoofId" not in row,
+                        "AUTO_CATALOG_ROOF_SOURCE_ID_IS_NOT_A_NATIVE_FIELD")
+                require({"floorIndex", "thickness", "structureType", "holes"} <= set(row)
+                        and ((row["structureType"] == "Basic"
+                              and "buildingMaterialId" in row and "compositeId" not in row)
+                             or (row["structureType"] == "Composite"
+                                 and "compositeId" in row and "buildingMaterialId" not in row)),
+                        "AUTO_CATALOG_ROOF_EXPLICIT_SOURCE_ATTRIBUTES_REQUIRED")
+                row["sourceRoofId"] = {"guid": source["guid"]}
+            roof_qualify(bare, qualified, owned, retained)
+        else:
+            roof_qualify(bare, step["parameters"], owned, retained)
     elif bare in {"CreateMorphs", "ModifyMorphs"}:
         require(proof.get("nativeAlternativesExhausted") is True
                 and isinstance(proof.get("nativeAlternativeEvidence"), str)
@@ -850,7 +886,7 @@ def discover_catalog_task(router, intent, planner_python=None):
     matches, reports, ids = [], [], set()
     for step in steps:
         require(isinstance(step, dict) and {"id", "effect", "impact", "parameters", "sourceVerification"} <= set(step)
-                <= {"id", "effect", "impact", "parameters", "sourceVerification", "elementType", "outputFields", "after"}
+                <= {"id", "effect", "impact", "parameters", "sourceVerification", "elementType", "outputFields", "after", "roofSource"}
                 and step["id"] not in ids, "AUTO_CATALOG_TYPED_UNIQUE_STEP_REQUIRED")
         ids.add(step["id"])
         proof = step["sourceVerification"]
