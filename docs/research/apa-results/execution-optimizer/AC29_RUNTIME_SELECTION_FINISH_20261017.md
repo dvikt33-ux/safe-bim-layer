@@ -18,6 +18,15 @@ Scope: close the specific remaining gap after PR #135 **without** changing exist
 
 The earlier BDD report \`safe-bim-bridge/safe-bim-mailbox/gpt-live/results/apa-bdd-selected-tapir-20261017-133000.json\` already proves six live walls read, 290 GUID retained, zero native writes, and an explicitly chosen Tapir alternative. It did **not** independently prove this new task-scoped runtime registration selection or a permanent deployment.
 
+## Recorded live result (2026-10-17, verified against published evidence)
+
+- **Permanent local copy installed**: \`C:\LocalAI\APA_AC29_Stable\`, receipt status \`STABLE_SELECTOR_DEPLOYED_IMPORT_VERIFIED_NO_NATIVE_CALLS\`, original APA core and DynamicCommands preserved; local discovery SHA256 \`32b7f1c161c545695b6db20aa87003d08cbd86916bc880f9eba1434f3a0801ce\`. Previous temp working copy unchanged.
+- **Live task-scoped automatic selection PASS**: source [safe-bim-bridge result](https://github.com/dvikt33-ux/safe-bim-bridge/blob/main/safe-bim-mailbox/gpt-live/results/apa-ac29-selector-final-20261017T125239Z-13d46d77.json), blob \`6087733b206d54024e2280075b9e1bdc4ba3d39b\`, status \`LIVE_AUTO_SELECTION_PREPARED_NO_NATIVE_WORKFLOW_DISPATCH\`.
+- Working saved BDD House \`BDD дом - по чертежам 2022.pln\`: **290 GUID**, six source Wall hosts, saved SHA256 \`e91d5670f20202c269d442bafc6e66a4cb13d223344122243b7237047a9ff3aa\` unchanged. **0 model writes**, no native geometry workflow dispatched, \`noExecutionGrant=true\`.
+- The current Tapir live export has **263 contracts**. Exactly **three task-scoped runtime checks**: \`GetDetailsOfElements=RUNTIME_AVAILABLE\`, \`Get3DBoundingBoxes=RUNTIME_AVAILABLE\`, \`API.Get3DBoundingBoxes=CLIENT_PRODUCT_MATCH_NOT_PER_METHOD_REGISTRATION\`. Selected **\`GetDetailsOfElements\` + \`Get3DBoundingBoxes\`** without explicit manual choice. Result \`automaticReadSelection=AUTO_SELECTED_READ_ONLY_BY_RUNTIME_REGISTRATION\` and \`selectionMethod=UNIQUE_STRONGEST_CURRENT_RUNTIME_REGISTRATION_READ_ONLY_NOT_COST_OPTIMAL\`.
+- **Acceptance interpretation**: integrated AC29 tool discovery + task-scoped native registration + automatic **READ_ONLY** selection is now **LIVE_PASS**, using verified current runtime schema. This does **NOT** establish native writes, fully automatic building planning, guaranteed faster execution, all 378 historical catalog contracts being loaded, or that the user's local Dispatcher/launcher now points at the stable copy.
+- Earlier working BDD native read PASS remains valid and was **not replayed**. Source-only/UNKNOWN contracts stay excluded. No further repetition of working commands is necessary.
+
 ## Final acceptance
 
 Report must contain \`STABLE_SELECTOR_DEPLOYED_IMPORT_VERIFIED_NO_NATIVE_CALLS\` from step 1, and step 2 must publish real runtime \`RUNTIME_AVAILABLE\` evidence plus \`AUTO_SELECTED_READ_ONLY_BY_RUNTIME_REGISTRATION\` and \`selectedCommands\` with no model writes. Otherwise status is \`PARTIAL\` with the exact blocking reason. Even after that, unexported add-ons, 33 historical source-only contracts and six UNKNOWN effects are **not** all live-enabled and must remain excluded.
