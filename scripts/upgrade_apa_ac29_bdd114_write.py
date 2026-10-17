@@ -56,16 +56,23 @@ def source(path,expected):
 
 
 def exact_processes():
-    # Filter source executable by actual WMI command line, not mere python.exe.
+    """Return only exact receiver Python processes; not other AI Dispatchers.
+
+    On Windows a managed Python launcher may leave both a Python wrapper and
+    a Python child with identical script command lines. Process count is not
+    necessarily the number of logical receivers. Both must be stopped prior
+    to replacing the script, after confirming that no jobs are in flight.
+    """
     script=(
         "$ErrorActionPreference='Stop';"
         "Get-CimInstance Win32_Process | "
         "Where-Object {$_.Name -in @('python.exe','pythonw.exe') -and "
         "$_.CommandLine -match 'apa_ac29_autonomous_job_bridge[.]py'} | "
-        "Select-Object ProcessId,CommandLine | ConvertTo-Json -Compress"
+        "Select-Object ProcessId,ParentProcessId,CreationDate,CommandLine | "
+        "ConvertTo-Json -Compress"
     )
-    p=subprocess.run(["powershell.exe","-NoProfile","-NonInteractive","-Command",script],
-                     capture_output=True,timeout=25)
+    p=subprocess.run(["powershell.exe","-NoProfile","-NonInteractive",
+                      "-Command",script],capture_output=True,timeout=25)
     require(p.returncode==0,"WINDOWS_PROCESS_INSPECTION_FAILED")
     value=p.stdout.decode("utf-8-sig",errors="replace").strip()
     if not value:return []
@@ -74,14 +81,46 @@ def exact_processes():
     require(isinstance(rows,list),"WMI_PROCESS_INSPECTION_INVALID")
     verified=[]
     for row in rows:
-        cmd=row.get("CommandLine","").lower()
+        cmd=(row.get("CommandLine") or "").lower()
         require(str(WORKER).lower() in cmd and "--loop" in cmd,
                 "FOREIGN_OR_UNVERIFIED_RECEIVER_PROCESS_FOUND")
         pid=row.get("ProcessId")
-        require(type(pid)==int and pid>0,"RECEIVER_PROCESS_ID_INVALID")
-        verified.append(pid)
-    require(len(verified)<=1,"TWO_ACTIVE_RECEIVERS_REFUSING_UPGRADE")
+        parent=row.get("ParentProcessId")
+        require(type(pid)==int and pid>0 and type(parent)==int,
+                "RECEIVER_PROCESS_IDENTIFIERS_INVALID")
+        verified.append({"pid":pid,"parentPid":parent,"command":cmd})
+    require(len(verified)<=4,"TOO_MANY_RECEIVER_PROCESSES_MANUAL_INSPECTION_REQUIRED")
+    require(len({p["pid"] for p in verified})==len(verified),
+            "DUPLICATE_RECEIVER_PIDS_REPORTED")
     return verified
+
+
+def stop_verified_receivers():
+    """Stop only verified receiver processes, child first, never another tool."""
+    initial=exact_processes()
+    print("EXISTING_RECEIVER_PIDS:",[p["pid"] for p in initial],flush=True)
+    previous_jobs_complete()
+    # Order children before their parents; each PID must still belong to the
+    # same exact script immediately before termination. Do not stop an
+    # unrecognized process even if the PID has been recycled.
+    ids={p["pid"] for p in initial}
+    remaining=set(ids)
+    for entry in sorted(initial,key=lambda p:(p["parentPid"] not in ids,p["pid"])):
+        current={p["pid"]:p for p in exact_processes()}
+        pid=entry["pid"]
+        if pid not in current:
+            remaining.discard(pid)
+            continue
+        require(current[pid]["command"]==entry["command"] and
+                current[pid]["parentPid"]==entry["parentPid"],
+                "RECEIVER_PID_REUSED_STOP_REFUSED")
+        previous_jobs_complete()
+        os.kill(pid,signal.SIGTERM)
+        remaining.discard(pid)
+    for _ in range(40):
+        time.sleep(.2)
+        if not exact_processes():return [p["pid"] for p in initial]
+    raise ValueError("OLD_RECEIVERS_NOT_ALL_STOPPED_NO_UPGRADE")
 
 
 def previous_jobs_complete():
@@ -120,24 +159,25 @@ def install():
     staged_worker=CTRL/"apa_ac29_autonomous_job_bridge.py.new"
     staged_adapter=CTRL/"apa_bdd114_native_copy_save_once.py.new"
     backup=CTRL/"apa_ac29_autonomous_job_bridge.py.v1.bak"
-    require(not any(p.exists() for p in (staged_worker,staged_adapter,backup)),
-            "UPGRADE_ARTIFACTS_ALREADY_EXIST_REFUSE_OVERWRITE")
-    staged_worker.write_bytes(receiver_bytes)
-    staged_adapter.write_bytes(adapter_bytes)
-    # Validate the new worker CLI BEFORE stopping original receiver.
+    # A blocked previous upgrade can have produced ONLY pinned .new files.
+    # Reuse those exact files instead of deleting anything unrecognized.
+    for path,expected in ((staged_worker,receiver_bytes),
+                          (staged_adapter,adapter_bytes)):
+        if path.exists():
+            require(path.read_bytes()==expected,
+                    "OLD_STAGED_FILE_DRIFT_REFUSE_OVERWRITE:"+path.name)
+        else:
+            path.write_bytes(expected)
     ready=subprocess.run([sys.executable,str(staged_worker),"--help"],
                          capture_output=True,timeout=25)
     require(ready.returncode==0,"UPDATED_WORKER_CLI_NOT_IMPORTABLE")
-    running=exact_processes()
-    if running:
-        previous_jobs_complete()
-        os.kill(running[0],signal.SIGTERM)
-        for _ in range(30):
-            time.sleep(.2)
-            if not exact_processes():break
-        require(not exact_processes(),"OLD_RECEIVER_DID_NOT_STOP")
-    # Backup allows manual recovery, without changing source PLN or SQL ledger.
-    backup.write_bytes(WORKER.read_bytes())
+    previous_jobs_complete()
+    previous_pids=stop_verified_receivers()
+    if backup.exists():
+        require(blobhash(backup.read_bytes())==PREVIOUS_WORKER_BLOB,
+                "UNVERIFIED_EXISTING_WORKER_BACKUP")
+    else:
+        backup.write_bytes(WORKER.read_bytes())
     os.replace(staged_adapter,ADAPTER)
     os.replace(staged_worker,WORKER)
     log=STATE/"bridge.log"
@@ -150,7 +190,7 @@ def install():
     time.sleep(2)
     require(new.poll() is None,"UPDATED_RECEIVER_EXITED_IMMEDIATELY")
     receipt={"status":"APA_BDD114_WRITE_ADAPTER_DEPLOYED_RECEIVER_RESTARTED",
-             "previousPid":running[0] if running else None,
+             "previousPids":previous_pids,
              "newPid":new.pid,"previousWorkerBlob":PREVIOUS_WORKER_BLOB,
              "newWorkerBlob":NEW_WORKER_BLOB,"writeAdapterBlob":NEW_ADAPTER_BLOB,
              "inboxStatePreserved":True,"originalPLNUnchanged":True,
