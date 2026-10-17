@@ -71,6 +71,12 @@ def build():
         returns=either(obj({'nativeModelWrites':I,'previousGroupId':group_id,'releasedMembers':arr(group_id)})),
         availability='BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED',operationKind='MODIFY',impact='MODEL',
         implementationSource='archicad-addon/Sources/NativeGroupCommands.inc')
+    native['MoveNativeGroupV1']=dict(version='29',category='Native SDK group operation',
+        description='Move entire flat native group in one SDK drag preserving GUID membership.',
+        parameters=obj({'groupId':group_id,'sourceRef':dict(S,minLength=8),'translation':obj({'dx':N,'dy':N,'dz':N})}),
+        returns=either(obj({'nativeModelWrites':I,'groupId':group_id,'movedMembers':arr(group_id)})),
+        availability='BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED',operationKind='MODIFY',impact='MODEL',
+        implementationSource='archicad-addon/Sources/NativeGroupCommands.inc')
     protection=dict(version='29',category='SDK DevKit licensing query',description='Existing DevKit ProtectionInfoCommand reused unchanged namespace; license flags only.',parameters=obj({}),returns=obj({k:B for k in ['isSTART','isEDU','isSOLO','isDEMO','isTRIAL','isBTC','isNFR','isNetworkLicense']}),availability='BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED')
     point=arr(N,minItems=2,maxItems=2);outline=arr(point,minItems=3);nativeElement=obj({'guid':S,'type':S,'homeStory':I,'bodies':arr({'type':'object'})},['guid'],True)
     local={};deps={}
