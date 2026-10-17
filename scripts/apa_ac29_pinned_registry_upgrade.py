@@ -16,8 +16,8 @@ import subprocess
 import sys
 
 REPO = "https://github.com/dvikt33-ux/safe-bim-layer.git"
-BRANCH = "feature/apa-ac29-six-verifier-live-upgrade-20261017"
-BASE_REVISION = "9cfe84c42db485a5ad536a38369de0b667e066f0"
+BRANCH = "feature/apa-ac29-scoped-native-mailbox-20261017"
+BASE_REVISION = "6d4487d6b4ef34a0573de694c179335827d3b1fc"
 BASE_WORKING_SHA = "9293c799cf4a87792016cc76ca5f2c1d8e569f85d6cbab0b529f82d10a303a34"
 BASE_SOURCE_SHA = "33b96850ad07547a9b12524de8bc46479fd98fbbce6772436d388be679836d66"
 BASE_GUIDS = 298
@@ -101,6 +101,7 @@ def run(args):
             "apa_ac29_dynamic_native_verifiers.py",
             "apa_ac29_existing_create_verifiers.py",
             "apa_ac29_existing_modify_verifiers.py",
+            "apa_ac29_scoped_native_executor.py",
         } | helpers
         existing_paths = {
             "scripts/" + name: from_local / name
@@ -122,10 +123,13 @@ def run(args):
                         dest.name == worker.name)))),
                     "UNKNOWN_LOCAL_MODULE_REFUSE_OVERWRITE:" + label)
             old_hashes[label] = hash_file(dest) if dest.exists() else None
-        require(all(not (ROOT / "scripts" / name).exists()
-                    for name in ("apa_ac29_existing_create_verifiers.py",
-                                 "apa_ac29_existing_modify_verifiers.py")),
-                "NEW_MODULES_ALREADY_PRESENT_NO_UNQUALIFIED_OVERWRITE")
+        require({"apa_ac29_existing_create_verifiers.py",
+                 "apa_ac29_existing_modify_verifiers.py"} <=
+                set(old["moduleHashes"]),
+                "SCOPED_BASE_MUST_HAVE_VERIFIED_SIX_CONTRACT_RELEASE")
+        require(not (ROOT / "scripts" /
+                     "apa_ac29_scoped_native_executor.py").exists(),
+                "SCOPED_MAILBOX_EXECUTOR_ALREADY_INSTALLED_UNREVIEWED")
 
         manifest = {
             "schema": "APA_AC29_LOCAL_RUNTIME_UPDATE_V1",
