@@ -19,6 +19,7 @@ ROOT = Path(r"C:\LocalAI\APA_AC29_Stable")
 DEST = ROOT / "external-tools" / "apa-readonly-v1"
 SOURCE_DIR = Path(__file__).resolve().parent
 ADAPTER = SOURCE_DIR / "apa_external_readonly.py"
+CATALOG = SOURCE_DIR / "apa_external_catalog.py"
 REQUIREMENTS = SOURCE_DIR / "requirements-external-readonly.txt"
 
 
@@ -42,8 +43,10 @@ def check():
     require(m.get("schema") == "APA_EXTERNAL_READONLY_INSTALL_V1",
             "INSTALL_MANIFEST_INVALID")
     a = DEST / "apa_external_readonly.py"
+    catalog = DEST / "apa_external_catalog.py"
     r = DEST / "requirements-external-readonly.txt"
-    require(a.is_file() and r.is_file()
+    require(a.is_file() and catalog.is_file()
+            and digest(catalog) == m["catalogSHA256"] and r.is_file()
             and digest(a) == m["adapterSHA256"]
             and digest(r) == m["requirementsSHA256"],
             "INSTALLED_ADAPTER_DRIFT")
@@ -68,7 +71,7 @@ def install():
             and (ROOT / "scripts" /
             "archicad_connected_ifc.py").is_file(),
             "EXISTING_STABLE_APA_INSTALL_NOT_FOUND")
-    require(ADAPTER.is_file() and REQUIREMENTS.is_file(),
+    require(ADAPTER.is_file() and CATALOG.is_file() and REQUIREMENTS.is_file(),
             "SOURCE_CHECKOUT_MISSING_INSTALL_FILES")
     require(not DEST.exists(),
             "EXTERNAL_READONLY_TARGET_ALREADY_EXISTS_RUN_CHECK_OR_AUDIT")
@@ -82,6 +85,7 @@ def install():
     DEST.mkdir(parents=True, exist_ok=False)
     import shutil
     shutil.copyfile(ADAPTER, DEST / ADAPTER.name)
+    shutil.copyfile(CATALOG, DEST / CATALOG.name)
     shutil.copyfile(REQUIREMENTS, DEST / REQUIREMENTS.name)
     venv.EnvBuilder(with_pip=True, clear=False,
                     symlinks=False).create(str(DEST / "venv"))
@@ -123,6 +127,7 @@ def install():
     receipt = {"schema": "APA_EXTERNAL_READONLY_INSTALL_V1",
                "status": "EXTERNAL_READONLY_INSTALLED_READY",
                "adapterSHA256": digest(DEST / ADAPTER.name),
+               "catalogSHA256": digest(DEST / CATALOG.name),
                "requirementsSHA256": digest(DEST / REQUIREMENTS.name),
                "python": str(py), "scriptsModified": False,
                "coreModified": False, "addonsModified": False,
