@@ -6,6 +6,7 @@ on:
       - "scripts/apa_ac29_dynamic_native_verifiers.py"
       - "scripts/apa_ac29_existing_create_verifiers.py"
       - "scripts/apa_ac29_existing_modify_verifiers.py"
+      - "scripts/install_apa_ac29_autonomous_job_bridge.py"
       - "scripts/archicad_project_accelerator.py"
       - "scripts/apa_ac29_scene_reconciliation.py"
       - "scripts/apa_ac29_multi_prototype_native_copy.py"
@@ -30,7 +31,7 @@ jobs:
       - name: Install schema validator
         run: python -m pip install jsonschema
       - name: Compile only new scoped mutation adapter and verifiers
-        run: python -m py_compile scripts/apa_ac29_dynamic_write_scopes.py scripts/apa_ac29_dynamic_native_verifiers.py scripts/apa_ac29_existing_create_verifiers.py scripts/apa_ac29_existing_modify_verifiers.py tests/test_apa_ac29_dynamic_write_scopes.py tests/test_apa_ac29_existing_create_verifiers.py tests/test_apa_ac29_existing_modify_verifiers.py
+        run: python -m py_compile scripts/apa_ac29_dynamic_write_scopes.py scripts/apa_ac29_dynamic_native_verifiers.py scripts/apa_ac29_existing_create_verifiers.py scripts/apa_ac29_existing_modify_verifiers.py scripts/install_apa_ac29_autonomous_job_bridge.py tests/test_apa_ac29_dynamic_write_scopes.py tests/test_apa_ac29_existing_create_verifiers.py tests/test_apa_ac29_existing_modify_verifiers.py
       - name: Test only new source-qualified scope contracts
         env:
           PYTHONUTF8: "1"
