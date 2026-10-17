@@ -111,7 +111,10 @@ def main():
                                 ("PDFVectors", pdf, "pdf-vectors")]:
             output = temp / (name + ".json")
             report = run_read(router, name, {"a": str(source), "output": str(output)})
-            facts = report["result"]["result"]
+            # The evidence envelope has a single `result` member:
+            # PDF/DXF facts are stored directly in report["result"].
+            facts = report["result"]
+            check(isinstance(facts, dict), "EXTERNAL_VECTOR_FACTS_NOT_OBJECT")
             if name == "DXFVectors":
                 check(facts["primitiveCount"] >= 1 and
                       facts["primitives"][0]["type"] == "LINE",
