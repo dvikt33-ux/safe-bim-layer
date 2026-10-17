@@ -1,0 +1,29 @@
+name: APA AC29 Semantic Operation Choice
+
+on:
+  pull_request:
+    paths:
+      - "scripts/apa_ac29_semantic_operation_selector.py"
+      - "tests/test_apa_ac29_semantic_operation_selector.py"
+      - ".github/workflows/apa-ac29-semantic-operation-choice.yml"
+  workflow_dispatch:
+
+jobs:
+  semantic-decision-matrix:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install the existing BIM graph schema dependency
+        run: python -m pip install jsonschema
+      - name: Compile only semantic selector and focused tests
+        run: python -m py_compile scripts/apa_ac29_semantic_operation_selector.py tests/test_apa_ac29_semantic_operation_selector.py
+      - name: Test the real copy-first match and native operation choice without model writes
+        run: python -m unittest discover -s tests -p "test_apa_ac29_semantic_operation_selector.py" -v
