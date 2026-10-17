@@ -90,6 +90,37 @@ IDS PASS is not Russian building-code or engineering acceptance.
 
 ## Integration with APA
 
+The existing `DynamicCommands.add_local_provider` is reused (no change to
+`archicad_dynamic_commands.py`). The installer deploys
+`apa_external_catalog.py` beside the isolated adapter. An existing APA
+router instance can load it with an explicit reviewed call:
+
+```python
+# Run from the EXISTING stable APA Python process after installing tools.
+import importlib.util
+from pathlib import Path
+module = Path(r"C:\LocalAI\APA_AC29_Stable\external-tools\apa-readonly-v1\apa_external_catalog.py")
+spec = importlib.util.spec_from_file_location("apa_external_catalog", module)
+plugin = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(plugin)
+receipt = plugin.register(router)  # existing DynamicCommands instance
+
+# Original DynamicCommands schema / policy guards still apply:
+ticket = router.prepare("AddOn.APAExternalReadOnly.IFCDiff", {
+    "a": r"D:\IFC\before.ifc", "b": r"D:\IFC\after.ifc",
+    "output": r"D:\IFC\new-diff-evidence.json"})
+result = router.read(None, ticket, reviewed_read_only=True)
+```
+
+The newly registered commands are IFCDiff, IFCClash, IDSValidate,
+IFCQuantities, PDFVectors and DXFVectors. Each handler invokes only
+the installed isolated interpreter, verifies the JSON evidence and
+returns it to the original router; no Arc​hicad native API call occurs.
+Registration applies only to the router instance on which the call is made.
+**Auto-registration in every future APA session is not yet enabled.**
+
+
+
 V1 connects via a deterministic **read-only evidence file interface**. The
 normal APA process keeps all native operations unchanged. The adapter can be
 started explicitly by a caller with `subprocess` and its resulting
