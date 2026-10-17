@@ -72,7 +72,7 @@ def signatures(raw, normalized, geom_signature):
 
 
 def read_only_reconciliation(scene_id, journal_path, raw_path, read_api,
-                             *, normalized, geom_signature, expected_project_sha,
+                             *, normalized, geom_signature, digest, expected_project_sha,
                              current_project_sha):
     """Compare recorded before-write snapshot to LIVE model; no native writes.
 
@@ -114,7 +114,6 @@ def read_only_reconciliation(scene_id, journal_path, raw_path, read_api,
             "RECONCILE_LIVE_BREP_NOT_EQUAL_TO_PREWRITE")
     # An UNKNOWN operation is not rewritten as PASS. The receipt means only
     # its effect is absent from CURRENT LIVE model, not that it never ran.
-    from archicad_scene_run import digest
     evidence = {
         "schema": "APA_AC29_HISTORICAL_SCENE_RECONCILIATION_V1",
         "status": "PREVIOUS_UNKNOWN_EFFECT_ABSENT_FROM_CURRENT_MODEL_PASS",
