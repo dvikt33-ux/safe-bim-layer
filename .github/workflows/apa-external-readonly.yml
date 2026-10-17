@@ -27,7 +27,7 @@ jobs:
       - name: Install only exact vendor pins in isolated Windows venv
         run: |
           python -m venv .vendor-venv
-          .\.vendor-venv\Scripts\python.exe -m pip install --disable-pip-version-check --no-input --only-binary=:all: -r scripts/requirements-external-readonly.txt
+          .\.vendor-venv\Scripts\python.exe -m pip install --disable-pip-version-check --no-input --only-binary=:all: --no-binary=odfpy -r scripts/requirements-external-readonly.txt
           .\.vendor-venv\Scripts\python.exe -m pip check
       - name: Check real installed vendor command imports
         run: |
