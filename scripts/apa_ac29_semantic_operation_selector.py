@@ -47,6 +47,39 @@ def _regular(values):
     )
 
 
+def _parallel_linear_runs(points):
+    """Find complete, equidistant parallel rows without filling gaps.
+
+    Returns run decomposition only if EVERY exact target belongs to a
+    homogeneous row with >=3 items and verified constant pitch. A Cartesian
+    complete rectangle is classified earlier as RECTANGULAR_ARRAY.
+    """
+    for direction in ("X","Y"):
+        by_line=defaultdict(list)
+        for x,y,z in points:
+            line=(q(y),q(z)) if direction=="X" else (q(x),q(z))
+            by_line[line].append(x if direction=="X" else y)
+        if len(by_line)<2:
+            continue
+        parts=[]
+        valid=True
+        for (fixed,z),values in sorted(by_line.items()):
+            coords=sorted(values)
+            if len(coords)<3 or not _regular(coords) or abs(coords[-1]-coords[0])<=TOL:
+                valid=False
+                break
+            step=coords[1]-coords[0]
+            if step<=TOL:
+                valid=False
+                break
+            parts.append({"direction":direction,"fixedCoordinate":fixed,
+                          "z":z,"count":len(coords),"start":coords[0],
+                          "step":round(step,6)})
+        if valid:
+            return parts
+    return None
+
+
 def _on_segment(p, a, b):
     v = tuple(b[i]-a[i] for i in range(3))
     v2 = sum(x*x for x in v)
@@ -118,6 +151,10 @@ def topology(points, rule=None):
         return {"pattern":"RECTANGULAR_ARRAY","count":len(p),
                 "gridShape":[len(xs),len(ys)],
                 "step":[round(xs[1]-xs[0],6),round(ys[1]-ys[0],6)]}
+    runs=_parallel_linear_runs(p)
+    if runs:
+        return {"pattern":"PARALLEL_LINEAR_RUNS","count":len(p),
+                "runCount":len(runs),"runs":runs}
     origin=p[0]
     vector=tuple(p[-1][i]-origin[i] for i in range(3))
     span=sum(v*v for v in vector)
