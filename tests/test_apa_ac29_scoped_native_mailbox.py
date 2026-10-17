@@ -118,7 +118,7 @@ class TaskScopeTests(TestCase):
             unresolved=S.pending_ledger(p,["NextCreate001","NextSave001"])
             self.assertEqual(len(unresolved),2)
             self.assertEqual(p.read_bytes(),data)
-            with self.assertRaisesRegex(ValueError,"NEVER_REPLAY"):
+            with self.assertRaisesRegex(ValueError,"NO_RETRY"):
                 S.pending_ledger(p,["BDD_BULK150_GRID_AND_LINE_20261016",
                                    "NextSave001"])
 
