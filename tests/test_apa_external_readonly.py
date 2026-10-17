@@ -29,7 +29,7 @@ class ExternalReadonlyTests(unittest.TestCase):
                     "a": str(left), "b": str(right), "output": str(p / "result.json")
                 })())
             self.assertEqual(result, {"ok": True})
-            self.assertEqual(paths, [left, right])
+            self.assertEqual(paths, [left.resolve(), right.resolve()])
             self.assertEqual(invoke.call_args.args[0], "ifcdiff")
             self.assertEqual(invoke.call_args.args[1][2], "-r")
 
@@ -41,14 +41,14 @@ class ExternalReadonlyTests(unittest.TestCase):
                 self.assertEqual(module, "ifcclash")
                 import json
                 cfg = json.loads(Path(arguments[0]).read_text())
-                self.assertEqual(cfg[0]["a"][0]["file"], str(path))
+                self.assertEqual(cfg[0]["a"][0]["file"], str(path.resolve()))
                 self.assertNotIn("b", cfg[0])
                 return {"ok": True}
             with mock.patch.object(A, "invoke_module", side_effect=inspect):
                 report, files = A.ifc_clash(type("Args", (), {
                     "a": str(path), "b": None, "output": str(path.parent / "out.json")
                 })())
-            self.assertEqual(files, [path])
+            self.assertEqual(files, [path.resolve()])
             self.assertEqual(report["ok"], True)
 
     def test_output_already_exists_is_never_overwritten(self):
