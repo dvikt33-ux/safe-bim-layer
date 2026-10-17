@@ -9,6 +9,7 @@ from unittest import TestCase, main, mock
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 import apa_semantic_readonly as W
 import apa_semantic_catalog as C
+import configure_apa_semantic_models as M
 
 class SemanticReadOnlyTests(TestCase):
     def test_pdf_groups_layers_and_one_page_raster_without_bim_guessing(self):
@@ -109,6 +110,30 @@ class SemanticReadOnlyTests(TestCase):
                          ["properties"]["page"]["type"], "integer")
         self.assertTrue(all(p[1:3] == ("READ_ONLY", "READ_ONLY")
                             for p in router.policies))
+
+
+    def test_ml_config_append_requires_explicit_owner_trust_and_sha(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            side = root / "semantic"
+            side.mkdir()
+            (side / "installation.json").write_text("{}", encoding="utf-8")
+            exe = root / "python.exe"
+            exe.write_bytes(b"python")
+            vendor = root / "vendor"
+            vendor.mkdir()
+            (vendor / "inference_api.py").write_text("# vendor", encoding="utf-8")
+            weights = vendor / "weights.pt"
+            weights.write_bytes(b"weights")
+            with mock.patch.object(M, "SIDE", side), (
+                 mock.patch.object(M, "TARGET", side / "models.json")):
+                with self.assertRaisesRegex(ValueError, "EXPLICIT_TRUST"):
+                    M.configure("openbim", exe, vendor, weights, False)
+                self.assertFalse((side / "models.json").exists())
+                report = M.configure("openbim", exe, vendor, weights, True)
+                self.assertEqual(report["configured"], ["openbim"])
+                with self.assertRaisesRegex(ValueError, "ALREADY_EXISTS"):
+                    M.configure("openbim", exe, vendor, weights, True)
 
 if __name__ == "__main__":
     main()
