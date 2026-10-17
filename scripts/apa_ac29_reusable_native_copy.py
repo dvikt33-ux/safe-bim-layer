@@ -29,6 +29,7 @@ def almost(a, b, tolerance=0.0004):
 
 def validate_task(task, *, expected_project_sha, expected_project_path):
     keys = {"schemaVersion", "projectSha256", "projectPath",
+            "expectedGuidCount", "expectedGuidSetHash", "expectedModelSignatureHash",
             "prototypeGuid", "prototypeOrigin", "targets", "sceneId",
             "saveSceneId", "authorizationRef", "sourceEvidenceRef", "save"}
     require(isinstance(task, dict) and set(task) == keys and
@@ -37,6 +38,12 @@ def validate_task(task, *, expected_project_sha, expected_project_path):
     require(task["projectSha256"] == expected_project_sha and
             task["projectPath"] == expected_project_path,
             "NATIVE_COPY_EXACT_APPROVED_PLN_REQUIRED")
+    require(type(task["expectedGuidCount"]) is int and
+            task["expectedGuidCount"] > 0 and
+            all(isinstance(task[k], str) and
+                re.fullmatch(r"[0-9a-f]{64}", task[k]) for k in
+                ("expectedGuidSetHash", "expectedModelSignatureHash")),
+            "NATIVE_COPY_SOURCE_BASELINE_FINGERPRINT_REQUIRED")
     require(task["save"] is True and
             isinstance(task["authorizationRef"], str) and
             task["authorizationRef"].startswith("USER_APPROVED_") and
@@ -250,10 +257,19 @@ def execute_task(task, *, api, writer, router, APA, RUN, components,
                 receipt.get("modelWrites") == 0,
                 "NATIVE_COPY_UNRECONCILED_HISTORY_NOT_VERIFIED")
     original = set(APA.inventory_guids(api))
+    require(len(original) == task["expectedGuidCount"] and
+            RUN.digest(sorted(original)) == task["expectedGuidSetHash"],
+            "NATIVE_COPY_SOURCE_INVENTORY_DRIFT")
     model_before = capture_native(api, sorted(original))
     native_before = native_map(model_before, components.G.normalize_dump)
     require(set(native_before) == original,
             "NATIVE_COPY_COMPLETE_BASELINE_MODEL_REQUIRED")
+    signatures_before = {
+        guid: components.ROOF.geometry_signature(native_before[guid])
+        for guid in sorted(original)
+    }
+    require(RUN.digest(signatures_before) == task["expectedModelSignatureHash"],
+            "NATIVE_COPY_SOURCE_BREP_FINGERPRINT_DRIFT")
     if unresolved:
         require(known_reconciliation["guidSetHash"] ==
                 RUN.digest(sorted(original)) and
