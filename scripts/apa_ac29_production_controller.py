@@ -26,6 +26,7 @@ CORE_SHA256 = "5ce7cbb91c8f799265a541f79922b50455fecf661ed9278a1cc4ffaff766ba4b"
 DYNAMIC_SHA256 = "8effd2f294197179b4b18b785de80f7f78091649e7f105ee4cf66877dbe0e6f8"
 SELECTOR_SHA256 = "32b7f1c161c545695b6db20aa87003d08cbd86916bc880f9eba1434f3a0801ce"
 BDD_BASELINE_SHA256 = "e91d5670f20202c269d442bafc6e66a4cb13d223344122243b7237047a9ff3aa"
+ORIGINAL_BASELINE_SHA256 = "33b96850ad07547a9b12524de8bc46479fd98fbbce6772436d388be679836d66"
 BLOCK_REPO = "dvikt33-ux/safe-bim-layer"
 BLOCK_REF = "8b3bf90d676d6b837312e544d22f289e8dc17991"
 BLOCK_PATH = "examples/accelerator/bdd-house-block-114-local-stud-layout.json"
@@ -72,6 +73,8 @@ def preflight():
             "APA_STABLE_INSTALL_NOT_CONFIRMED")
     require(MODEL.is_file() and PROTECTED.is_file(), "BDD_WORKING_OR_SOURCE_PLN_MISSING")
     current_sha = sha_file(MODEL)
+    require(sha_file(PROTECTED) == ORIGINAL_BASELINE_SHA256,
+            "PROTECTED_BDD_SOURCE_CHANGED_NO_AUTOMATION")
     base_matches = current_sha == BDD_BASELINE_SHA256
     # Check installed modules resolve from this stable release, not a temporary
     # checkout. Imports are read-only; no native Archicad connection.
@@ -115,6 +118,8 @@ def preflight():
 
 
 def prepare_block114(status):
+    require(status["expectedSavedBaselineMatched"],
+            "BDD_SAVED_WORKING_PLN_CHANGED_RECONCILE_BEFORE_PREPARING_NEW_ELEMENTS")
     block = gh_pinned(BLOCK_REPO, BLOCK_REF, BLOCK_PATH, BLOCK_BLOB_SHA1)
     frame = block["localFrame"]
     positions = frame["centerOffsetsFromLeftEndMm"]
