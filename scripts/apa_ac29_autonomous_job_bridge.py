@@ -41,7 +41,8 @@ ID = re.compile(r"^[a-z][a-z0-9-]{7,63}$")
 REVIEW = ROOT / "controllers" / "apa_bdd114_native_roof_face_review.py"
 ALLOWED = frozenset({"BDD114_ROOF_FINALIZE", "SOURCE_QUALIFIED_NATIVE_READ",
                      "APPROVED_NATIVE_COLUMN_COPY", "APPROVED_MULTI_PROTOTYPE_COPY",
-                     "CURRENT_MODEL_FINGERPRINT", "SCOPED_NATIVE_REGISTRY_PREFLIGHT"})
+                     "CURRENT_MODEL_FINGERPRINT", "SCOPED_NATIVE_REGISTRY_PREFLIGHT",
+                     "APPROVED_SCOPED_NATIVE_MUTATION"})
 
 
 def require(ok, reason):
@@ -372,6 +373,13 @@ def capture_scoped_registry_preflight(job, folder):
     }
 
 
+def capture_approved_scoped_native_mutation(job, folder):
+    """Delegate to existing APA DynamicCommands and SceneWriter only."""
+    sys.path.insert(0,str(SCRIPTS))
+    from apa_ac29_scoped_native_executor import execute
+    return execute(sys.modules[__name__],job,folder)
+
+
 def capture_approved_native_copy(job, folder):
     """Source-qualified native copy with ORIGINAL DynamicCommands and SceneWriter.
 
@@ -589,6 +597,8 @@ def process_job(name):
             response = capture_current_model_fingerprint(job, folder)
         elif job["action"] == "SCOPED_NATIVE_REGISTRY_PREFLIGHT":
             response = capture_scoped_registry_preflight(job, folder)
+        elif job["action"] == "APPROVED_SCOPED_NATIVE_MUTATION":
+            response = capture_approved_scoped_native_mutation(job, folder)
         elif job["action"] in ("APPROVED_NATIVE_COLUMN_COPY",
                                 "APPROVED_MULTI_PROTOTYPE_COPY"):
             response = capture_approved_native_copy(job, folder)
