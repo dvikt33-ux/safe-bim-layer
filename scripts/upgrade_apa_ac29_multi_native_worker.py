@@ -144,7 +144,7 @@ def install():
             (CTRL / name).is_file() and
             blob((CTRL / name).read_bytes()) == digest
             for name, digest in FILES.items()):
-        print("APA_STATUS: REUSABLE_NATIVE_WORKER_ALREADY_INSTALLED")
+        print("APA_STATUS: APA_MULTI_PROTOTYPE_EXECUTOR_ALREADY_INSTALLED")
         return
     require(exact == CURRENT_WORKER_SHA1,
             "INSTALLED_RECEIVER_NOT_RECOGNIZED_REFUSE_OVERWRITE")
@@ -182,7 +182,7 @@ def install():
                for name, digest in FILES.items()}
     stages = {}
     for name, raw in sources.items():
-        stage = CTRL / (name + ".reusable-v1.new")
+        stage = CTRL / (name + ".multi-v1.new")
         require(not stage.exists(), "EXISTING_UPGRADE_STAGE_NOT_SAFE_TO_REPLACE")
         stage.write_bytes(raw)
         stages[name] = stage
@@ -211,6 +211,7 @@ def install():
         "sourceCommit": SOURCE_COMMIT,
         "installedBlobs": FILES,
         "previousWorkerBackup": str(BACKUP),
+        "previousColumnAdapterBackup": str(BACKUP_COLUMN),
         "existingJobQueuePreserved": True,
         "originalSceneWriterLedgerUnchanged": True,
         "originalPlnUnchanged": True,
