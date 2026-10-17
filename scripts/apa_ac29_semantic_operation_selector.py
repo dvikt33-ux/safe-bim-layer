@@ -11,6 +11,7 @@ from collections import defaultdict
 import math
 
 from archicad_dynamic_commands import DynamicCommands
+from apa_ac29_assembly_operations import plan_assemblies
 
 TOL = 1e-6
 COPYABLE = frozenset({"Column", "Beam", "Object"})
@@ -203,7 +204,7 @@ def axes_review(axes, points):
             "sourceRef":axes["sourceRef"],"nativeAxisCallsAuthorized":False}
 
 
-def analyze(existing, targets, *, source_axes=None, distribution_rules=None):
+def analyze(existing, targets, *, source_axes=None, distribution_rules=None, assembly_groups=None):
     """Read-only answer on exact supplied construction/placements.
 
     Source-qualified rows must have real familySignature, typed coordinates
@@ -324,6 +325,7 @@ def analyze(existing, targets, *, source_axes=None, distribution_rules=None):
         "requestedTargets":len(targets),
         "alreadyPresent":len(plan["existingElementGuids"])+len(fulfilled_other),
         "copies":copy_groups,"creates":creates,
+        "assemblies":plan_assemblies(existing, assembly_groups),
         "copyMethod":("ONE_NATIVE_MULTI_PROTOTYPE_COPY_CALL"
                       if len(copy_groups)>1 else
                       "ONE_NATIVE_BATCH_COPY_CALL"
