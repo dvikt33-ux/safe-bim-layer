@@ -115,6 +115,7 @@ class TaskScopeTests(TestCase):
                     ("MultiCopyFailed001","PARTIAL_OR_UNKNOWN_OUTCOME"),
                     ("CreatedAndSavedOne","PASS"),
                 ])
+                db.commit()
             data=p.read_bytes()
             unresolved=S.pending_ledger(p,["NextCreate001","NextSave001"])
             self.assertEqual(len(unresolved),2)
