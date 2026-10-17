@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - "scripts/apa_bdd114_native_copy_save_once.py"
+      - "scripts/apa_ac29_autonomous_job_bridge.py"
+      - "scripts/upgrade_apa_ac29_bdd114_write.py"
       - ".github/workflows/apa-bdd114-once-writer.yml"
   workflow_dispatch:
 
@@ -17,6 +19,6 @@ jobs:
         with:
           python-version: "3.11"
       - name: Compile only new BDD114 native adapter
-        run: python -m py_compile scripts/apa_bdd114_native_copy_save_once.py
+        run: python -m py_compile scripts/apa_bdd114_native_copy_save_once.py scripts/apa_ac29_autonomous_job_bridge.py scripts/upgrade_apa_ac29_bdd114_write.py
       - name: Check CLI without project access
         run: python scripts/apa_bdd114_native_copy_save_once.py --help
