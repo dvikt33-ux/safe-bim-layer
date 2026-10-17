@@ -1,0 +1,12 @@
+# APA AC29: ISOLATED READ-ONLY ANALYSIS V1.
+# This is not requirements-connected.txt and MUST NOT be installed into
+# the existing live APA interpreter or Graphisoft Python environment.
+ifcopenshell==0.8.5
+ifcclash==0.8.5
+ifcdiff==0.8.5
+ifctester==0.8.5
+ifc5d==0.8.5
+pdfplumber==0.11.10
+ezdxf==1.4.5
+networkx==3.6.1
+shapely==2.2.0
