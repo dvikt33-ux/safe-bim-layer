@@ -78,8 +78,10 @@ def main():
     if (len(original_guids) != 25 or len(set(original_guids)) != 25
             or repair_row[0] != "READBACK_PASS"):
         die("REPAIRED_ORIGINAL_25_SNAPSHOT_NOT_VERIFIED")
-    if len(first) != 5 or len(last) != 12:
-        die("EXPECTED_ORIGINAL_FIVE_AND_SUFFIX_TWELVE_ROWS")
+    # Seeded first five elements are represented in the suffix scene result,
+    # not duplicated as SQLite steps; only the seven new writes get rows.
+    if len(first) != 5 or len(last) != 7:
+        die("EXPECTED_ORIGINAL_FIVE_AND_SUFFIX_SEVEN_WRITE_ROWS")
     final_result = json.loads(later[1])
     native = read("GetAllElements").get("elements")
     if not isinstance(native, list):
