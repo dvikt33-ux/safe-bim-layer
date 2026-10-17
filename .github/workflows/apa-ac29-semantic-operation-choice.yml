@@ -5,6 +5,7 @@ on:
     paths:
       - "scripts/apa_ac29_semantic_operation_selector.py"
       - "tests/test_apa_ac29_semantic_operation_selector.py"
+      - "tests/fixtures/apa_ac29_bdd_261_verified_native_positions.json"
       - ".github/workflows/apa-ac29-semantic-operation-choice.yml"
   workflow_dispatch:
 
