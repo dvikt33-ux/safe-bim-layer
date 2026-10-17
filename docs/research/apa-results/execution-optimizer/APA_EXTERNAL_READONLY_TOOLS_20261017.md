@@ -210,3 +210,28 @@ router = native_command_router(root / "tapir-scene-live.json",
 The default wrapper signature preserves the core API, including `official_commands` and `include_functional_modules=True`; `--include-functional-modules` is an explicit CLI probe option. The routine installation probe avoids optional native modules. This factory **does not migrate or mutate existing running processes**. Callers importing the old `APA.native_command_router` still create old-style routers, so claim only `autoRegisteredWithinFactorySessions=true`, not global registration.
 
 **Pending after installation:** A specific existing APA startup/controller entrypoint must be chosen and its caller switched to the opt-in factory if its functionality needs the six vendors. This is NOT a live Archicad or BDD write test. No automated edits to signed hash-guarded core, Dispatcher, Active SceneWriter or PLN.
+
+## Production read-only analytics entrypoint — opt-in original router (2026-10-17)
+
+The laptop successfully installed and checked `session-factory-v1` (user-visible `APA SESSION FACTORY: VERIFIED PASS`). Subsequent read-only inventory of all stable `scripts/*.py` shows **multiple independent** `APA.native_command_router(...)` call sites: `apa_bdd_existing_router_readback.py`, `apa_bdd_kr12_two_north_windows.py`, `apa_reconcile_source_batch_save.py`, `apa_source_qualified_native_batch.py`, `archicad_authored_extension.py`, and `archicad_strategy_discovery.py` at 1064 and 1145. These include native WRITE workflows and SHA-bound core modules. Rewriting or monkey-patching them globally just to add external file analysis is unsafe.
+
+The new `scripts/apa_external_analytics_entrypoint.py` is a **practical explicit production launcher**, not a simulated registration check:
+- loads the **installed** `session-factory-v1/apa_external_session_factory.py`, validating its own receipt, immutable source JS provenance, registered vendor catalog and reviewed adapter hashes;
+- creates the **original DynamicCommands** object using the official original factory and `include_functional_modules=False`; adds six READ_ONLY vendor commands automatically via the installed factory, not via a second Python router;
+- dispatches the selected `--command` through original `router.prepare` + `router.read(None, ticket, reviewed_read_only=True)`;
+- input files are existing IFC/PDF/DXF/IDS, and `--output` must be an **absent JSON file** in an existing directory **outside** `APA_AC29_Stable`. Incomplete or drifting receipts block execution;
+- prints only minimal source-backed proof, output path and output SHA-256, so large quantity/vector reports are not injected into chat; native calls and PLN writes always zero.
+
+Supported `--command` values: `IFCDiff` (`--a` and `--b` IFC); `IFCClash` (one or two IFCs); `IDSValidate` (`--a` IFC + `--ids`); `IFCQuantities` (`--a` IFC); `PDFVectors` (`--a` PDF); `DXFVectors` (`--a` DXF). No automatic selection based solely on vague natural language; the source kind and user command must be explicit.
+
+The new `scripts/install_apa_external_analytics_entrypoint.py` is a **one-time opt-in** installer for exactly this read-only launcher and a new `analytics-entrypoint-install.json` receipt under the already verified `session-factory-v1` directory. It does **not** reinstall vendor packages or mutate the existing session factory receipt. On a repeated install the new-file-only guard refuses overwrites; `--check` validates the installed script SHA against the published source and receipt.
+
+Example (after explicit installation and source checkout SHA match):
+
+```powershell
+$py = 'C:\LocalAI\APA_AC29_Stable\external-tools\apa-readonly-v1\venv\Scripts\python.exe'
+$runner = 'C:\LocalAI\APA_AC29_Stable\external-tools\apa-readonly-v1\session-factory-v1\apa_external_analytics_entrypoint.py'
+& $py $runner --command IFCQuantities --a 'D:\IFC\actual-export.ifc' --output 'D:\IFC\quantities-new.json'
+```
+
+**Qualification:** the CI fixture tests exercise the real original router and mock the downstream vendor call for this new CLI; the vendor operations themselves have already passed separately on actual temporary IFC/PDF/DXF structures and on the user's laptop. This CLI is **not yet installed or executed on the user's actual IFC**. The existing BDD export is not touched. `archicad_strategy_discovery.py` and every other original callsite remain unchanged. The installed session factory still automatically registers vendors **only for new sessions created through the factory**, not all running processes.
