@@ -169,7 +169,11 @@ def check_repair(ctx):
     RUN.verify_readback("CreateSlabs", ctx["steps"]["slab"]["params"],
                         ctx["slab"], expected_floor=0,
                         expected_slab_material_guid=ctx["material"])
-    require(json.loads(result).get("status") == "SLAB_REPAIR_VERIFIED_UNSAVED",
+    stored_result = json.loads(result)
+    require(stored_result.get("status") == "SLAB_REPAIR_VERIFIED_UNSAVED"
+            and stored_result.get("modifyCalls") == 1
+            and stored_result.get("createCalls") == 0
+            and stored_result.get("plnSaved") is False,
             "REPAIR_RESULT_INCOMPLETE")
     return "READBACK_PASS"
 
