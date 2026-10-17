@@ -10,6 +10,7 @@ APA_MODULE_COMMAND(GetNativeGroupMembersV1)
 APA_MODULE_COMMAND(CreateNativeGroupV1)
 APA_MODULE_COMMAND(CloneNativeGroupV1)
 APA_MODULE_COMMAND(UngroupNativeGroupV1)
+APA_MODULE_COMMAND(MoveNativeGroupV1)
 APA_MODULE_COMMAND(GetNativeLibraryPartOriginV1)
 #undef APA_MODULE_COMMAND
 
