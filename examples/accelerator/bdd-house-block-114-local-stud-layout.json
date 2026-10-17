@@ -1,0 +1,79 @@
+{
+  "schema": "APA_BDD_2022_FRAME_BLOCK_114_LOCAL_LAYOUT_V1",
+  "status": "SOURCE_VERIFIED_LOCAL_LAYOUT_ABSOLUTE_XY_UNRESOLVED_NO_MODEL_WRITES",
+  "source": {
+    "filename": "3_этап_КП_КОМФОРТ_без_замазок.pdf",
+    "projectYear": 2022,
+    "floorPlanPDFPage": 12,
+    "elevationPDFPage": 15,
+    "blockId": "1.14",
+    "elevationTitle": "1.14 Блок (М 1:50)",
+    "orientationAuthority": "Plan block direction and elevation view, no numeric absolute origin x"
+  },
+  "project": "BDD дом - по чертежам 2022.pln",
+  "evidenceReuse": {
+    "nativeReport": "https://github.com/dvikt33-ux/safe-bim-bridge/blob/main/safe-bim-mailbox/gpt-live/results/apa-bdd-selected-tapir-20261017-133000.json",
+    "status": "LIVE_AUTO_SELECTOR_TAPIR_READ_PASS",
+    "inventoryGuidCount": 290,
+    "savedPlnSha256": "e91d5670f20202c269d442bafc6e66a4cb13d223344122243b7237047a9ff3aa",
+    "workingPlnProtected": true
+  },
+  "localFrame": {
+    "lengthOverallMm": 2910,
+    "studSectionMm": [
+      100,
+      50
+    ],
+    "studHeightMm": 2900,
+    "studCount": 7,
+    "edgeCenterOffsetMm": 25,
+    "studAxisPitchesMm": [
+      417,
+      418,
+      412,
+      413,
+      600,
+      600
+    ],
+    "centerOffsetsFromLeftEndMm": [
+      25,
+      442,
+      860,
+      1272,
+      1685,
+      2285,
+      2885
+    ],
+    "centerSpanMm": 2860,
+    "sumCheckMm": 2910,
+    "topPlateThicknessMm": 50,
+    "bottomPlateThicknessMm": 50,
+    "framingSource": "KR elevation shows x100 x50 x2900 studs and +2.900/+2.950, -0.050/-0.100 horizontal binding",
+    "plateCreationRequested": false,
+    "platesExistingStatus": "NOT_CHECKED"
+  },
+  "plan": {
+    "schematicOrientation": "vertical segment on top/north side extending down toward 1.11, see source PDF p12",
+    "exactStartXY": "NOT_NUMERICALLY_DIMENSIONED",
+    "exactEndXY": "NOT_NUMERICALLY_DIMENSIONED",
+    "inferredButNotAuthorized": "Approximate XY may be estimated from printed diagram; never use estimates as native placement"
+  },
+  "execution": {
+    "eligibleForNativeWrite": false,
+    "modelWrites": 0,
+    "nativeCalls": 0,
+    "proposedExistingPath": "Existing APA DynamicCommands MoveElements copy=True or existing execute_batch(CreateColumns), only after native prototype identity, host dependencies and full saved PLN inventory are source validated",
+    "doNotCreateAgain": [
+      "1.12",
+      "1.13"
+    ],
+    "requiredBeforeCreate": [
+      "Exact global starting XY and orientation from 2022 source or user-approved independently checked dimension",
+      "Verify exact existing 1.12/1.13 Column source prototypes, building material, section and Z",
+      "Read current saved PLN GUID inventory; identify existing physical Columns and ColumnSegments; avoid duplicates",
+      "Verify collision/host/junction effects; source-window host dependencies",
+      "Use ONE original APA SceneWriter guarded native batch, zero retry, one save only after PASS"
+    ]
+  },
+  "geometrySafety": "No invented X/Y or uniform stud pitch, no replays, no creation without complete native effect review"
+}

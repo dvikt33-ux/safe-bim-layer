@@ -1,0 +1,179 @@
+{
+  "schema": "APA_BDD_2022_KR_FRAME_BLOCK_DIMENSIONS_V1",
+  "status": "SOURCE_DIMENSIONS_TRANSCRIBED_NOT_AUTHORIZED_FOR_MODEL_WRITE",
+  "sourceDocument": "3_этап_КП_КОМФОРТ_без_замазок.pdf",
+  "sourcePages": {
+    "floorPlan": 12,
+    "elevations": [
+      15,
+      16,
+      17
+    ]
+  },
+  "units": "mm",
+  "model": "BDD дом - по чертежам 2022.pln",
+  "boundsSource": "Six external Wall geometry already read at native PASS in safe-bim-bridge/gpt-live/results/apa-bdd-selected-tapir-20261017-133000.json",
+  "construction": {
+    "framing": "timber",
+    "studCrossSectionMm": [
+      100,
+      50
+    ],
+    "studNetHeightMm": 2900,
+    "assemblyZStudBottomMm": -50,
+    "assemblyZStudTopMm": 2900,
+    "topOfUpperPlateMm": 2950,
+    "sourceElevationsPages": [
+      15,
+      16,
+      17
+    ],
+    "notes": "The elevation drawings distinguish 50-mm upper/lower plates and 2900-mm between-plate studs; do not conflate total assembly with net stud height."
+  },
+  "blockDimensions": [
+    {
+      "block": "1.9",
+      "widthMm": 1910,
+      "sourcePdfPage": 15,
+      "planPositionIsDimensioned": false,
+      "xyStatus": "UNVERIFIED",
+      "physicalStatus": "CHECK_EXISTING_MODEL_BEFORE_CREATING"
+    },
+    {
+      "block": "1.10",
+      "widthMm": 950,
+      "sourcePdfPage": 15,
+      "planPositionIsDimensioned": false,
+      "xyStatus": "UNVERIFIED",
+      "physicalStatus": "CHECK_EXISTING_MODEL_BEFORE_CREATING"
+    },
+    {
+      "block": "1.11",
+      "widthMm": 12160,
+      "sourcePdfPage": 15,
+      "planPositionIsDimensioned": false,
+      "xyStatus": "UNVERIFIED",
+      "physicalStatus": "CHECK_EXISTING_MODEL_BEFORE_CREATING"
+    },
+    {
+      "block": "1.12",
+      "widthMm": 2910,
+      "sourcePdfPage": 15,
+      "planPositionIsDimensioned": false,
+      "xyStatus": "UNVERIFIED",
+      "physicalStatus": "13_STUDS_CREATED_ACROSS_1_12_AND_1_13_NOT_REPLAY"
+    },
+    {
+      "block": "1.13",
+      "widthMm": 2910,
+      "sourcePdfPage": 15,
+      "planPositionIsDimensioned": false,
+      "xyStatus": "UNVERIFIED",
+      "physicalStatus": "13_STUDS_CREATED_ACROSS_1_12_AND_1_13_NOT_REPLAY"
+    },
+    {
+      "block": "1.14",
+      "widthMm": 2910,
+      "sourcePdfPage": 15,
+      "planPositionIsDimensioned": false,
+      "xyStatus": "UNVERIFIED",
+      "physicalStatus": "CHECK_EXISTING_MODEL_BEFORE_CREATING"
+    },
+    {
+      "block": "1.15",
+      "widthMm": 800,
+      "sourcePdfPage": 15,
+      "planPositionIsDimensioned": false,
+      "xyStatus": "UNVERIFIED",
+      "physicalStatus": "CHECK_EXISTING_MODEL_BEFORE_CREATING"
+    },
+    {
+      "block": "1.16",
+      "widthMm": 1720,
+      "sourcePdfPage": 16,
+      "planPositionIsDimensioned": false,
+      "xyStatus": "UNVERIFIED",
+      "physicalStatus": "CHECK_EXISTING_MODEL_BEFORE_CREATING"
+    },
+    {
+      "block": "1.17",
+      "widthMm": 7450,
+      "sourcePdfPage": 16,
+      "planPositionIsDimensioned": false,
+      "xyStatus": "UNVERIFIED",
+      "physicalStatus": "CHECK_EXISTING_MODEL_BEFORE_CREATING"
+    },
+    {
+      "block": "1.18",
+      "widthMm": 2910,
+      "sourcePdfPage": 16,
+      "planPositionIsDimensioned": false,
+      "xyStatus": "UNVERIFIED",
+      "physicalStatus": "CHECK_EXISTING_MODEL_BEFORE_CREATING"
+    },
+    {
+      "block": "1.19",
+      "widthMm": 2910,
+      "sourcePdfPage": 16,
+      "planPositionIsDimensioned": false,
+      "xyStatus": "UNVERIFIED",
+      "physicalStatus": "CHECK_EXISTING_MODEL_BEFORE_CREATING"
+    },
+    {
+      "block": "1.20",
+      "widthMm": 1520,
+      "sourcePdfPage": 17,
+      "planPositionIsDimensioned": false,
+      "xyStatus": "UNVERIFIED",
+      "physicalStatus": "CHECK_EXISTING_MODEL_BEFORE_CREATING"
+    },
+    {
+      "block": "1.21",
+      "widthMm": 3360,
+      "sourcePdfPage": 17,
+      "planPositionIsDimensioned": false,
+      "xyStatus": "UNVERIFIED",
+      "physicalStatus": "CHECK_EXISTING_MODEL_BEFORE_CREATING"
+    },
+    {
+      "block": "1.22",
+      "widthMm": 3360,
+      "sourcePdfPage": 17,
+      "planPositionIsDimensioned": false,
+      "xyStatus": "UNVERIFIED",
+      "physicalStatus": "CHECK_EXISTING_MODEL_BEFORE_CREATING"
+    },
+    {
+      "block": "1.23",
+      "widthMm": 650,
+      "sourcePdfPage": 17,
+      "planPositionIsDimensioned": false,
+      "xyStatus": "UNVERIFIED",
+      "physicalStatus": "CHECK_EXISTING_MODEL_BEFORE_CREATING"
+    }
+  ],
+  "knownAxesMeters": {
+    "X": [
+      0,
+      5.34,
+      6.77,
+      8.7,
+      14.28
+    ],
+    "Y": [
+      0,
+      1.09,
+      9.38
+    ]
+  },
+  "safetyGates": [
+    "No new geometry until block endpoint XYZ positions resolved from source plan and verified against live saved working PLN and nearby geometry.",
+    "Existing roof, slabs, exterior walls, three Windows and 13 studs must not be recreated.",
+    "Before copying existing native Columns/Beams, confirm exact prototypes, host/dependencies, orientation and collision footprints.",
+    "No implicit equidistant 600 mm spacing: source elevation dimension chains include many nonstandard intervals.",
+    "Do not use source document 2_этап_АП_КОМФОРТ.pdf (different project)."
+  ],
+  "nativeCalls": 0,
+  "modelWrites": 0,
+  "sourceLimitations": "Plan sheet 12 labels blocks and grid axes but does not provide complete explicit absolute XY coordinates for each internal junction. Need precise geometry reconciliation before native CREATE."
+}
