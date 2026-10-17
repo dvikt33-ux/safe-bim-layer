@@ -41,7 +41,7 @@ ID = re.compile(r"^[a-z][a-z0-9-]{7,63}$")
 REVIEW = ROOT / "controllers" / "apa_bdd114_native_roof_face_review.py"
 ALLOWED = frozenset({"BDD114_ROOF_FINALIZE", "SOURCE_QUALIFIED_NATIVE_READ",
                      "APPROVED_NATIVE_COLUMN_COPY", "APPROVED_MULTI_PROTOTYPE_COPY",
-                     "CURRENT_MODEL_FINGERPRINT"})
+                     "CURRENT_MODEL_FINGERPRINT", "SCOPED_NATIVE_REGISTRY_PREFLIGHT"})
 
 
 def require(ok, reason):
@@ -156,7 +156,8 @@ def validate_job(job, name):
             0 < (expires-created).total_seconds() <= 7*86400,
             "JOB_TIME_WINDOW_INVALID")
     ref = job["sourceTask"]
-    if job["action"] in ("BDD114_ROOF_FINALIZE", "CURRENT_MODEL_FINGERPRINT"):
+    if job["action"] in ("BDD114_ROOF_FINALIZE", "CURRENT_MODEL_FINGERPRINT",
+                         "SCOPED_NATIVE_REGISTRY_PREFLIGHT"):
         require(ref is None, "LOCAL_APPROVED_ACTION_MUST_NOT_CONTAIN_SOURCE_TASK")
     else:
         require(isinstance(ref, dict) and set(ref) ==
@@ -292,6 +293,82 @@ def capture_current_model_fingerprint(job, folder):
         "nativeReadCommands": dict(api.calls),
         "nativeWriteAttempts": 0,
         "nativeSaveCalls": 0
+    }
+
+
+def capture_scoped_registry_preflight(job, folder):
+    """Native READ ONLY audit of installed six code-owned verifiers and ledger.
+
+    This is deliberately NOT a permission to execute model mutations.
+    Two historical UNKNOWN scenes still require individual reconciliation
+    before unattended CREATE/MODIFY can safely begin.
+    """
+    from contextlib import closing
+    import sqlite3
+    sys.path.insert(0, str(SCRIPTS))
+    import archicad_project_accelerator as APA
+    import apa_ac29_dynamic_native_verifiers as V
+    import archicad_connected_components as C
+    import archicad_bim_documentation as D
+    import archicad_scene_run as RUN
+
+    RUN.bind_authorized_saved_copy(
+        19727, str(WORKING), WORKING.stem, approved_saved_sha(),
+        "APA_AC29_SCOPED_REGISTRY_READ_ONLY_" + job["jobId"])
+    evidence = folder / "scoped-native-preflight"
+    evidence.mkdir()
+    api = APA.EvidenceAPI(APA.native_transport, evidence, execute=False)
+    require(APA.archicad29(api).get("buildNumber") == 5101,
+            "SCOPED_PREFLIGHT_ARCHICAD29_BUILD_DRIFT")
+    first = sorted(APA.inventory_guids(api))
+    require(len(first) == approved_guid_count(),
+            "SCOPED_PREFLIGHT_CURRENT_GUID_COUNT_CHANGED")
+    native = D.capture_full_model(api, first)
+    nodes = {r["guid"].lower(): r for r in native["elements"]}
+    require(set(nodes) == set(first) and len(nodes) == len(native["elements"]),
+            "SCOPED_PREFLIGHT_INCOMPLETE_TYPED_NATIVE_BREP")
+    native_hash = RUN.digest({
+        g: C.ROOF.geometry_signature(nodes[g]) for g in first})
+    current = sorted(APA.inventory_guids(api))
+    require(current == first and api.write_attempts == 0 and
+            sha(WORKING) == approved_saved_sha() and sha(ORIGINAL) == SOURCE_SHA,
+            "SCOPED_PREFLIGHT_MODEL_CHANGED_DURING_READ")
+
+    registry = V.installed_verifiers()
+    require(len(registry) == 6 and
+            {(v.command, v.effect) for v in registry.values()} == {
+                ("CreateColumns", "CREATE"), ("MoveElements", "MODIFY"),
+                ("CreateBeams", "CREATE"), ("CreateWalls", "CREATE"),
+                ("CreateRoofs", "CREATE"), ("ModifySlabs", "MODIFY")},
+            "SCOPED_PREFLIGHT_INSTALLED_VERIFIER_SET_UNEXPECTED")
+    schema_path = ROOT / "schemas/tapir-live-1.5.10/tapir-scene-live.json"
+    require(schema_path.is_file(), "SCOPED_PREFLIGHT_INSTALLED_TAPIR_SCHEMA_MISSING")
+    router = APA.native_command_router(schema_path, include_functional_modules=False)
+    commands = {v.command: {
+        "effect": v.effect,
+        "verifierId": v.verifier_id,
+        "commandContractHash": router.contract_hash(v.command)
+    } for v in registry.values()}
+    journal = Path(os.environ["LOCALAPPDATA"]) / "APA_BDD_Window1p8/apa_scene_writer.sqlite"
+    require(journal.is_file(), "SCOPED_PREFLIGHT_EXISTING_SCENEWRITER_SQLITE_MISSING")
+    with closing(sqlite3.connect(f"file:{journal.as_posix()}?mode=ro", uri=True)) as db:
+        rows = db.execute(
+            "SELECT scene_id,state FROM scenes WHERE state!='PASS' "
+            "ORDER BY scene_id").fetchall()
+    require(len(rows) <= 100, "SCOPED_PREFLIGHT_TOO_MANY_PENDING_SCENES")
+    pending = [dict(sceneId=n, state=state) for n, state in rows]
+    return {
+        "status": ("SCOPED_REGISTRY_READY_BUT_NATIVE_WRITES_BLOCKED_BY_HISTORY"
+                   if pending else "SCOPED_REGISTRY_NATIVE_READ_ONLY_PREFLIGHT_PASS"),
+        "archicadBuild": 5101,
+        "currentGuidCount": len(current),
+        "currentGuidSetHash": RUN.digest(current),
+        "currentBrepHash": native_hash,
+        "registeredCodeOwnedCommands": commands,
+        "unresolvedScenes": pending,
+        "requiresIndependentReconciliationPerScene": bool(pending),
+        "modelWrites": 0, "nativeSaveCalls": 0, "writeGrantsInstalled": 0,
+        "automaticRetry": False
     }
 
 
@@ -510,6 +587,8 @@ def process_job(name):
             response = capture_roof_review(job, folder)
         elif job["action"] == "CURRENT_MODEL_FINGERPRINT":
             response = capture_current_model_fingerprint(job, folder)
+        elif job["action"] == "SCOPED_NATIVE_REGISTRY_PREFLIGHT":
+            response = capture_scoped_registry_preflight(job, folder)
         elif job["action"] in ("APPROVED_NATIVE_COLUMN_COPY",
                                 "APPROVED_MULTI_PROTOTYPE_COPY"):
             response = capture_approved_native_copy(job, folder)
