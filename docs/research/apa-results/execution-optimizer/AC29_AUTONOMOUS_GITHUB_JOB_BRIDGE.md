@@ -35,3 +35,13 @@ The user runs a **single installer once**. This stores the receiver in `C:\Local
 - No automatic re-attempt after unknown native result.
 - Missing or changed installed module, unsaved PLN drift or wrong active project results in a blocked status.
 - The Windows task is a user-login Startup entry, not a system background service; it stops at logout. GitHub `gh` authentication and Archicad must remain available for live execution.
+
+
+## First real autonomous task: BDD 1.14 (LIVE PASS, 2026-10-17)
+
+- User installed the pinned worker with `BRIDGE_AUTOSTART_INSTALLED_PROCESS_LAUNCHED` (process PID 91336); current-user startup entry `APA-AC29-GPT-Bridge.vbs`. This is evidence from the user's PowerShell output, not an independent process-survival audit.
+- Agent submitted job `bdd114-roof-auto-20261017` to `safe-bim-bridge/main/safe-bim-mailbox/apa-ac29/jobs/`. Local worker picked it up **without another manual operation**.
+- [Durable machine result](https://github.com/dvikt33-ux/safe-bim-bridge/blob/main/safe-bim-mailbox/apa-ac29/results/bdd114-roof-auto-20261017.json) (blob `b4f9aaa01a3ba0e6c95efc0021e4cbc1373cdee6`): `jobStatus=COMPLETE`; `geometryStatus=ROOF_NATIVE_FACE_CLEAR_NORTH_JUNCTION_MATCHES_EXISTING`; `modelWrites=0`; `nativeBuildExecuted=false`; `automaticRetry=false`; `modelWritesAuthorized=false`.
+- [Detailed live native BREP report](https://github.com/dvikt33-ux/safe-bim-bridge/blob/main/safe-bim-mailbox/gpt-live/results/apa-bdd114-native-roof-20261017T143031Z-2bc6fa9d.json) (blob `4c2aa7ae1b1d37319e145ad6706bc86635860755`): all seven positions at X=9.370m show roof face clearance above top Z=2.900m of, in order, `0.4932, 0.7568, 1.0211, 1.2816, 1.5427, 1.9220, 2.3013` meters; roof face scan reported `roofClearAtAllSevenMembers=true`. North-wall contact was compared to the **existing AABB precedent** of studs at X=3.53m and 7.15m; an AABB comparison does not prove load-bearing joint engineering acceptance.
+- Source X=9.370m remains **calibrated from vectors**, not printed dimension; the user has not explicitly approved use of that graphical estimate for a model-writing operation. Thus BDD CREATE/COPY still requires a fresh explicit source/placement approval and an original SceneWriter-scoped, collision-checked, single native operation.
+- **Acceptance**: real end-to-end automatic GitHub inbox → locally running stable APA native read/geometry preflight → GitHub report is now `LIVE_PASS` for this reviewed **read-only BDD task**. It is **not** a general autonomous Archicad CREATE/MODIFY `LIVE_PASS`.
