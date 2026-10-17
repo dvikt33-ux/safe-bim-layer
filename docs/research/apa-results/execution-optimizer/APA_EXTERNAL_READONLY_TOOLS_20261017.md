@@ -87,3 +87,53 @@ result = router.read(None, ticket, reviewed_read_only=True)
 - Отдельный незакрытый `BDD 1.14 UNKNOWN_OUTCOME` нельзя повторять или пересохранять до независимой read-only сверки.
 
 Исходники: https://github.com/IfcOpenShell/IfcOpenShell · https://github.com/jsvine/pdfplumber · https://ezdxf.readthedocs.io/
+
+## Explicit Dynamic Router activation on already-installed laptop (2026-10-17)
+
+The user confirmed an installed isolated sidecar at
+`C:\LocalAI\APA_AC29_Stable\external-tools\apa-readonly-v1`
+with `doctor: READY` and Python 3.11.9. **Never rerun the installer**.
+This extension is activated in a NEW read-only process by
+`scripts/apa_external_router_activation.py` in this branch. It imports the
+ORIGINAL installed `archicad_dynamic_commands.DynamicCommands`, reads the
+pinned Tapir 1.5.10 schema (prefer stable installed, then repository checkout),
+calls `apa_external_catalog.register(router)` and validates six reviewed
+`READ_ONLY` handlers. Then two ephemeral documents (PDF/DXF) are generated
+under Python's temporary directory, dispatched using
+`router.prepare(...)` and `router.read(None, ..., reviewed_read_only=True)`
+and checked for actual extracted line primitives.
+
+The original router needs JSON Schema validation. Install only
+`jsonschema==4.25.1` **in the already isolated external-tools venv**;
+do not modify any globally installed Python or core APA packages.
+CI uses this exact version on both Windows Python 3.11 and 3.12.
+
+```powershell
+$ErrorActionPreference = "Stop"
+$checkout = Join-Path $env:TEMP "APA_ExternalReadonly_20261017"
+$root = "C:\LocalAI\APA_AC29_Stable\external-tools\apa-readonly-v1"
+$py = Join-Path $root "venv\Scripts\python.exe"
+$branch = "feature/apa-readonly-tools-isolated-20261017"
+if (!(Test-Path $checkout) -or !(Test-Path $py)) { throw "Existing source or isolated venv not found" }
+if (git -C $checkout status --porcelain) { throw "Source checkout locally modified" }
+git -C $checkout fetch --depth 1 --no-tags origin "refs/heads/$branch"
+if ($LASTEXITCODE -ne 0) { throw "Fetch failed" }
+# Check against the SHA pinned in the accompanying user instruction.
+git -C $checkout checkout --detach FETCH_HEAD
+if ($LASTEXITCODE -ne 0) { throw "Checkout failed" }
+& $py -m pip install --no-input --only-binary=:all: jsonschema==4.25.1
+if ($LASTEXITCODE -ne 0) { throw "Local schema validator install failed" }
+& $py -m pip check
+if ($LASTEXITCODE -ne 0) { throw "Dependency check failed" }
+& $py "$checkout\scripts\apa_external_router_activation.py"
+if ($LASTEXITCODE -ne 0) { throw "Real Dynamic Router activation check failed" }
+```
+
+**Acceptance:**
+- [Windows CI #39052634257](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/39052634257): Python 3.11 and Python 3.12 **PASS**, 8 focused tests per version.
+- Original unmodified `DynamicCommands.prepare/read` plus six registered read-only policies is exercised in CI (vendor execution mocked only at this unit-test boundary).
+- Actual upstream execution on disposable IFC/PDF/DXF: `IFCDiff`, `PDFVectors`, `DXFVectors` **PASS** in both Windows environments, no Archicad process.
+- Local user's installed APA integration probe: **NOT_RUN** until user executes and returns output; it will test real router plus PDF/DXF.
+- `IFCClash`, `IDSValidate`, `IFCQuantities` registered but live-file semantics are **NOT_VERIFIED**.
+- Registration is **not automatic across unrelated existing APA processes**; this is an opt-in activation entry point, not a core startup hook or a second writer.
+- No PLN/model change, APX change, Dispatcher/Arena change, no retries to the unresolved BDD 1.14 task.
