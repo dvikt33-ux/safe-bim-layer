@@ -1,0 +1,29 @@
+name: APA IFC artifacts B2 real vendors
+on:
+  pull_request:
+    paths:
+      - scripts/apa_ifc_artifacts_b2.py
+      - scripts/apa_ifc_artifacts_factory_b2.py
+      - scripts/install_apa_ifc_artifacts_b2.py
+      - scripts/requirements-ifc-artifacts-b2-lock.txt
+      - tests/test_apa_ifc_artifacts_b2.py
+      - tests/apa_ifc_artifacts_installed_smoke_b2.py
+      - .github/workflows/apa-ifc-artifacts-b2.yml
+permissions:
+  contents: read
+jobs:
+  real-vendors:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install -r scripts/requirements-ifc-artifacts-b2-lock.txt
+      - run: python -m py_compile scripts/apa_ifc_artifacts_factory_b2.py scripts/install_apa_ifc_artifacts_b2.py tests/apa_ifc_artifacts_installed_smoke_b2.py
+      - run: python -m unittest discover -s tests -p "test_apa_ifc_*.py" -v
+      - run: python -m unittest discover -s tests -p "test_apa_high_density*.py" -v
