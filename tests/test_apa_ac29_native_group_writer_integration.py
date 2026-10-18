@@ -225,5 +225,38 @@ class GroupWriterScope(unittest.TestCase):
 
 
 
+    def test_v2_one_shot_isolated_identity_and_no_old_replay(self):
+        import apa_ac29_group_scenewriter_v2 as V2
+        import apa_ac29_group_scenewriter_live as V1
+        self.assertNotEqual(V2.ORIGINAL_SCENE, V2.V2_SCENE)
+        self.assertNotEqual(V2.ORIGINAL_STATE, V2.V2_STATE)
+        self.assertNotEqual(V2.ORIGINAL_SCRATCH, V2.V2_SCRATCH)
+        self.assertNotEqual(V2.ORIGINAL_REMOTE, V2.V2_REMOTE)
+        self.assertEqual(V2.ORIGINAL_SCENE, V1.SCENE)
+        self.assertIn("scene-writer-20261018-02", str(V2.V2_STATE))
+        self.assertIn("scene-writer-20261018-02.pln", str(V2.V2_SCRATCH))
+        self.assertTrue(V2.V2_AUTHORIZATION.startswith("USER_APPROVED_"))
+
+    def test_v2_requires_github_forensic_and_full_readonly_brep_before_copy(self):
+        import inspect
+        import apa_ac29_group_scenewriter_v2 as V2
+        source = inspect.getsource(V2.main)
+        self.assertLess(source.index("prove_prior_no_write()"),
+                        source.index("verify_complete_native_preflight_against_old_scratch()"))
+        self.assertLess(source.index("verify_complete_native_preflight_against_old_scratch()"),
+                        source.index("configure_original_one_shot_to_new_scope()"))
+        self.assertIn("ORIGINAL.main()", source)
+        evidence = inspect.getsource(V2.prove_prior_no_write)
+        self.assertIn("MAILBOX.read_file(FORENSIC.REMOTE)", evidence)
+        self.assertIn("remote == local", evidence)
+        self.assertIn("not V2_SCRATCH.exists()", evidence)
+        self.assertIn("before == after", evidence)
+        check = inspect.getsource(V2.verify_complete_native_preflight_against_old_scratch)
+        self.assertIn("VERIFIER.verify_before(", check)
+        self.assertIn("APA.prepare_current_runtime_group_native_task(", check)
+        self.assertIn("GROUP_V2_PREFLIGHT_FORBIDS_NATIVE_MUTATION", check)
+        self.assertIn("GROUP_CLONE_SOURCE_OWNED_NATIVE_BREP_AND_LAYOUT_PASS", check)
+
+
 if __name__ == "__main__":
     unittest.main()
