@@ -39,6 +39,8 @@ class GeometryTests(unittest.TestCase):
         result = self.route("IFCGeometryOBJ")
         self.assertGreater(result["artifact"]["faces"], 0)
         self.assertTrue((self.root / "out/model.mtl").is_file())
+        self.assertEqual(result["artifact"]["materialLibrary"], "model.mtl")
+        self.assertTrue((self.root / "out/model.obj").read_text().startswith("mtllib model.mtl\n"))
 
     def test_glb_binary_header_and_mesh(self):
         result = self.route("IFCGeometryGLB")

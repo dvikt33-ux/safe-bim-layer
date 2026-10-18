@@ -44,6 +44,7 @@ def main():
     receipt = {"schema": "APA_B3_INSTALLED_SMOKE", "commands": records, "passed": 3,
                "readOnlyCatalogCommands": keys, "catalogCount": 30, "sourceUnchanged": True,
                "fixtureKind": "SYNTHETIC_IFC4", "installedFactorySHA256": V2.digest(factory),
+               "installedAdapterSHA256": V2.digest(factory.with_name("apa_ifc_geometry_b3.py")),
                "nativeCalls": 0, "plnWrites": 0}
     (root / "receipt.json").write_text(json.dumps(receipt, indent=2), encoding="utf8")
     print(json.dumps(receipt, indent=2))

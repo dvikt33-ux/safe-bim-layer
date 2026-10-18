@@ -4,20 +4,20 @@
     {
       "command": "AddOn.APAIFCGeometryB3.IFCGeometryOBJ",
       "status": "PASS",
-      "reportSHA256": "55a82bdde888cea498fc018edc5af2540aa5070e1e7fce63f0d30ba6e27e3f0a",
-      "artifactSHA256": "8e9a7e3832d92a3436dc10eeee3d50873a29c2e161a70303011567a991986ca3"
+      "reportSHA256": "a2ee778648a3f9c984bbf915ff66dc6950a9f8c5ca097a2b0d82e96ed387777b",
+      "artifactSHA256": "59d6e80f57117d90e60b6fe315a30892b1d162fef12f3f643069867f51325806"
     },
     {
       "command": "AddOn.APAIFCGeometryB3.IFCGeometryGLB",
       "status": "PASS",
-      "reportSHA256": "2feaa12f1cb93a1732d2d4f30b8c0250cd313732862951b7e954f6eb88b0dfb0",
-      "artifactSHA256": "c274e6ab4717e19c0deb4698842fdd57cc7377fe49019a157a21d343f1fe9d28"
+      "reportSHA256": "68de8fedce6f6eaf8e2cf19ad58338531812b2452baeb1f5eff7ed3d86ebee5f",
+      "artifactSHA256": "4e4d5f9e68c0be7a3cef954c47e4e60980e7ffd4099ee1e0f58d995faaffb588"
     },
     {
       "command": "AddOn.APAIFCGeometryB3.IFCGeometryBounds",
       "status": "PASS",
-      "reportSHA256": "43d3f0bca199ffa85d9cf266bf26cf97803cf7bff83af8c86709d550771d9988",
-      "artifactSHA256": "27238a8a040e49133d579c6b5b96464852854e52eed6b3de903f17246cc9dd34"
+      "reportSHA256": "cd9fc56c3219ac3ce1c7755588bf0987a8d6b4eb9c0a6db24caee83bc3a293dc",
+      "artifactSHA256": "7c556e8b6d826a229eee90070dcfdcee582205965d35314df892a58762da6f9c"
     }
   ],
   "passed": 3,
@@ -58,5 +58,6 @@
   "fixtureKind": "SYNTHETIC_IFC4",
   "installedFactorySHA256": "cc8cf53797d0229362ca47b8c2558ac8208f76524db1a15e95e14a914b9ae144",
   "nativeCalls": 0,
-  "plnWrites": 0
+  "plnWrites": 0,
+  "installedAdapterSHA256": "74c5eebc0cebcdb4d0c8a6ead4eaf5a7ba390fdc1a5be7213c2a57eb197d705f"
 }

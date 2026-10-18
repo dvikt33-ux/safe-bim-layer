@@ -31,6 +31,8 @@ Typed readers count OBJ vertices/faces, hash the accompanying MTL, validate the
 GLB v2 header/length and parse only its explicitly typed JSON chunk (binary mesh
 bytes never enter a JSON parser). Parent process checks source/adapter/artifact
 SHA and report disk readback. New output directories are exclusive.
+The 0.8.5 Python OBJ serializer omits the mtllib reference, so the adapter adds
+the fixed local `mtllib model.mtl` header and independently checks that link.
 
 Eight real-vendor tests PASS: OBJ mesh/material output, binary GLB mesh,
 measured 5 x 0.2 x 3 m wall bounds, translated world placement, non-geometric

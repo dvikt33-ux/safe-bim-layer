@@ -20,14 +20,19 @@ def readback(path, action):
     V2.require(path.is_file() and path.stat().st_size < 200 * 1024**2, "B3_ARTIFACT_INVALID")
     if action == "obj":
         vertices = faces = 0
+        material_libraries = []
         with path.open(encoding="utf8") as stream:
             for line in stream:
                 vertices += line.startswith("v ")
                 faces += line.startswith("f ")
+                if line.startswith("mtllib "):
+                    material_libraries.append(line.strip().split(maxsplit=1)[1])
         V2.require(vertices > 0 and faces > 0, "B3_OBJ_EMPTY")
         mtl = path.with_suffix(".mtl")
         V2.require(mtl.is_file(), "B3_MTL_MISSING")
-        details = {"vertices": vertices, "faces": faces, "mtlSHA256": V2.digest(mtl)}
+        V2.require(material_libraries == [mtl.name], "B3_OBJ_MTL_LINK_INVALID")
+        details = {"vertices": vertices, "faces": faces, "materialLibrary": mtl.name,
+                   "mtlSHA256": V2.digest(mtl)}
     elif action == "glb":
         with path.open("rb") as stream:
             magic, version, length = struct.unpack("<4sII", stream.read(12))
@@ -95,6 +100,15 @@ def execute(action, params):
         if serializer:
             serializer.finalize()
             del serializer
+            if action == "obj":
+                # The 0.8.5 Python serializer writes usemtl and a separate MTL,
+                # but omits the OBJ's reference to that file. Bind only the
+                # fixed local artifact basename, preserving vendor geometry.
+                linked = Path(temporary) / "linked.obj"
+                with linked.open("xb") as destination, artifact.open("rb") as original:
+                    destination.write(b"mtllib model.mtl\n")
+                    shutil.copyfileobj(original, destination)
+                linked.replace(artifact)
         V2.require(processed == {x.id() for x in selected}, "B3_PARTIAL_GEOMETRY_CONVERSION")
         if action == "bounds":
             artifact.write_text(json.dumps({"coordinateFrame": "IFC_WORLD_SI_METRES",
