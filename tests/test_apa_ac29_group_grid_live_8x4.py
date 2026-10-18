@@ -51,29 +51,78 @@ class NativeGridOneShot(unittest.TestCase):
                                             "GRID_STAGE_ALREADY_EXISTS_NO_OVERWRITE"):
                     LIVE.stage()
 
-    def test_port_discovery_never_calls_archicad_on_protected_ports(self):
+    def test_observed_19726_grid_allowed_but_19727_hotlink_never_selected(self):
         old_port = LIVE.LIVE.PORT
         calls = []
         def response(command, data, *, addon, timeout):
-            calls.append(LIVE.LIVE.PORT)
+            port = LIVE.LIVE.PORT
+            calls.append(port)
             self.assertEqual(command, "GetProjectInfo")
             self.assertTrue(addon)
             self.assertLessEqual(timeout, 2)
-            if LIVE.LIVE.PORT == 19727:
+            if port == 19726:
                 return {
                     "isUntitled": False, "isTeamwork": False,
                     "projectPath": str(LIVE.SCRATCH)
+                }
+            if port == 19727:
+                return {
+                    "isUntitled": False, "isTeamwork": False,
+                    "projectPath": r"C:\Users\Admin\Documents\hotlink-batch-live02-guarded-snapshot.pln"
                 }
             raise OSError("other program/port unavailable")
         try:
             with patch.object(LIVE.LIVE, "request", side_effect=response):
                 chosen, info = LIVE.discover_dedicated_instance()
-            self.assertEqual(chosen, 19727)
+            self.assertEqual(chosen, 19726)
             self.assertEqual(info["projectPath"], str(LIVE.SCRATCH))
             self.assertEqual(sorted(set(calls)), list(LIVE.PORT_RANGE))
-            self.assertTrue(all(i >= 19727 for i in calls))
+            self.assertTrue(all(i >= 19726 for i in calls))
+            self.assertTrue(all(i not in (19723, 19724, 19725) for i in calls))
         finally:
             LIVE.LIVE.PORT = old_port
+
+    def test_wrong_project_on_19726_is_never_accepted_for_native_copy(self):
+        old_port = LIVE.LIVE.PORT
+        try:
+            def response(command, data, *, addon, timeout):
+                if LIVE.LIVE.PORT == 19726:
+                    return {"isUntitled": False, "isTeamwork": False,
+                            "projectPath": r"C:\LocalAI\APA_Group_Acceptance\some-other-test.pln"}
+                raise ConnectionRefusedError("not grid")
+            with patch.object(LIVE.LIVE, "request", side_effect=response):
+                with self.assertRaisesRegex(RuntimeError, "EXACTLY_ONE_DEDICATED_INSTANCE"):
+                    LIVE.discover_dedicated_instance()
+            self.assertEqual(LIVE.LIVE.PORT, old_port)
+        finally:
+            LIVE.LIVE.PORT = old_port
+
+    def test_two_matching_ports_are_ambiguous_and_fail_closed(self):
+        old_port = LIVE.LIVE.PORT
+        try:
+            def response(command, data, *, addon, timeout):
+                if LIVE.LIVE.PORT in (19726, 19727):
+                    return {"isUntitled": False, "isTeamwork": False,
+                            "projectPath": str(LIVE.SCRATCH)}
+                raise OSError("not connected")
+            with patch.object(LIVE.LIVE, "request", side_effect=response):
+                with self.assertRaisesRegex(RuntimeError,
+                                            "EXACTLY_ONE_DEDICATED_INSTANCE_MUST_OPEN_STAGED_PLN:2"):
+                    LIVE.discover_dedicated_instance()
+            self.assertEqual(LIVE.LIVE.PORT, old_port)
+        finally:
+            LIVE.LIVE.PORT = old_port
+
+    def test_stage_origin_revision_bound_separately_from_current_runtime(self):
+        source = inspect.getsource(LIVE.staged)
+        self.assertIn("INITIAL_ACCEPTED_STAGE_REVISION", source)
+        self.assertIn("GRID_STAGE_REVISION_NOT_FROM_ACCEPTED_OR_CURRENT_BRANCH", source)
+        preflight = inspect.getsource(LIVE.read_only_check)
+        self.assertIn('"sourceRevision": current_revision', preflight)
+        self.assertIn('"stageSourceRevision": stage_receipt["sourceRevision"]', preflight)
+        execution = inspect.getsource(LIVE.execute)
+        self.assertIn('pinned.get("sourceRevision") == revision', execution)
+        self.assertIn('live == pinned', execution)
 
     def test_missing_new_instance_does_not_rebind_existing_users(self):
         before = LIVE.LIVE.PORT
