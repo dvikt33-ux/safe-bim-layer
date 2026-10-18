@@ -51,6 +51,14 @@ def route_once(command, a, output):
                  evidence.get("modelWrites") == 0 and
                  evidence.get("nativeCalls") == 0 and dest.is_file(),
                  "V2_ROUTER_EVIDENCE_INCOMPLETE")
+    # An in-memory router response is not proof of what actually reached disk.
+    # Re-read the new report and independently bind both source and adapter.
+    actual = json.loads(dest.read_text(encoding="utf-8-sig"))
+    Pack.require(actual == evidence and
+                 actual.get("sources") == [
+                     {"name": src.name, "sha256": Pack.digest(src)}] and
+                 actual.get("adapterSha256") == Pack.digest(Pack.__file__),
+                 "V2_ROUTER_EVIDENCE_SHA_OR_READBACK_MISMATCH")
     return {"schema": "APA_AC29_HIGH_DENSITY_ROUTED_V2",
             "status": "READ_ONLY_REPORT_CREATED_NOT_BIM_ACCEPTED",
             "command": key, "output": str(dest),
