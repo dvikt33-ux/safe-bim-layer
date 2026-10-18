@@ -245,7 +245,7 @@ class GroupWriterScope(unittest.TestCase):
                         source.index("verify_complete_native_preflight_against_old_scratch()"))
         self.assertLess(source.index("verify_complete_native_preflight_against_old_scratch()"),
                         source.index("configure_original_one_shot_to_new_scope()"))
-        self.assertIn("ORIGINAL.main()", source)
+        self.assertIn("ORIGINAL.main(verified_active_baseline=ORIGINAL_SCRATCH)", source)
         evidence = inspect.getsource(V2.prove_prior_no_write)
         self.assertIn("MAILBOX.read_file(FORENSIC.REMOTE)", evidence)
         self.assertIn("remote == local", evidence)
@@ -256,6 +256,74 @@ class GroupWriterScope(unittest.TestCase):
         self.assertIn("APA.prepare_current_runtime_group_native_task(", check)
         self.assertIn("GROUP_V2_PREFLIGHT_FORBIDS_NATIVE_MUTATION", check)
         self.assertIn("GROUP_CLONE_SOURCE_OWNED_NATIVE_BREP_AND_LAYOUT_PASS", check)
+
+
+    def test_v2_active_failed_scratch_is_exactly_pinned_and_byte_identical(self):
+        import hashlib
+        import tempfile
+        from unittest.mock import patch
+        import apa_ac29_group_scenewriter_live as V1
+        from apa_ac29_group_scenewriter_v2 import ORIGINAL_SCRATCH
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            saved = root / "group-ac29-assembly-20261018-04.pln"
+            reconciled = root / "group-ac29-scene-writer-20261018-01.pln"
+            functional = root / "APA_Functional_Test_House_01.pln"
+            contents = b"exact preserved grouped source PLN"
+            saved.write_bytes(contents)
+            reconciled.write_bytes(contents)
+            functional.write_bytes(b"the never-mutated original functional test")
+            original_hash = hashlib.sha256(functional.read_bytes()).hexdigest()
+            completed = {
+                "result": {
+                    "status": "LIVE_GROUP_CHAIN_COMPLETED_AFTER_READONLY_RECONCILIATION",
+                    "saveConfirmed": True, "originalSourceSha256Unchanged": True,
+                    "scratchProject": str(saved)
+                }
+            }
+            selector = {
+                "status": "LIVE_READONLY_GROUP_STRATEGY_SELECTED_PASS",
+                "sourcePlnUnchanged": True,
+                "scratchSavedPlnUnchanged": True,
+                "modelWrites": 0, "saveCalls": 0,
+                "selectedCommand": "AddOn.TapirCommand.CloneNativeGroupV1",
+                "selectedOffsets": list(V1.OFFSET),
+                "modelGuidCount": 44
+            }
+            def receipts(path):
+                if path.name == "resume-v2-result.json":
+                    return completed
+                if path.name == "group-autoselect-real-model-readonly-20261018-01.json":
+                    return selector
+                if path.name == "preflight.json":
+                    return {"sourceSha256": original_hash}
+                raise AssertionError("Unqualified proof: " + str(path))
+            hash_file = lambda file: hashlib.sha256(Path(file).read_bytes()).hexdigest()
+            with (
+                patch.object(V1, "SOURCE", saved),
+                patch.object(V1, "HISTORY", root),
+                patch.object(V1, "read_json", side_effect=receipts),
+                patch.object(V1.LIVE, "SOURCE_PATH", functional),
+                patch.object(V1.LIVE, "digest", side_effect=hash_file),
+                patch.object(V1.LIVE, "guard") as guard
+            ):
+                result = V1.verify_previous(verified_active_baseline=reconciled)
+                self.assertEqual(result[1], original_hash)
+                guard.assert_called_once_with(reconciled, original_hash)
+                guard.reset_mock()
+                result = V1.verify_previous()
+                self.assertEqual(result[1], original_hash)
+                guard.assert_called_once_with(saved, original_hash)
+                guard.reset_mock()
+                with self.assertRaisesRegex(ValueError, "UNAUTHORIZED_ALTERNATE_ACTIVE_BASELINE"):
+                    V1.verify_previous(verified_active_baseline=root / "arbitrary.pln")
+                guard.assert_not_called()
+                reconciled.write_bytes(b"different or unsaved native model")
+                with self.assertRaisesRegex(ValueError, "RECONCILED_ACTIVE_TEST_NOT_IDENTICAL_TO_SOURCE"):
+                    V1.verify_previous(verified_active_baseline=reconciled)
+                guard.assert_not_called()
+
 
 
 if __name__ == "__main__":
