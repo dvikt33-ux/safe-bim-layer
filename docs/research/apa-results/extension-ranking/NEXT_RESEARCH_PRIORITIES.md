@@ -1,3 +1,8 @@
+# APA AC29 — очередь 20Z
+Аудит: hourly/audit-2026-10-18-20.md (30 SOURCE проверок, 2 контрааудита); поручения №1: hourly/audit-2026-10-18-20-tasks-1A.md и -1B.md; №2: -2A.md и -2B.md. MINSERT в ezdxf recursive_decompose уже раскрывается; PR164 #02 LIVE_UNSAVED, PR171 single Hotlink LIVE, PR173 batch не LIVE. Новых ACCEPTED нет. MODEL_MODE_NOT_VERIFIABLE.
+
+---
+
 # APA AC29 — очередь 19Z, 18.10.2026
 
 [Аудит №3: 30 SOURCE-проверок](hourly/audit-2026-10-18-19.md), [два контрааудита](hourly/audit-2026-10-18-19-crossaudits.md), [8 задач №1](hourly/audit-2026-10-18-19-tasks-1.md), [8 задач №2](hourly/audit-2026-10-18-19-tasks-2.md). Исследователь №1 ищет НОВЫЕ ГОТОВЫЕ РЕШЕНИЯ; №2 — ГОТОВЫЕ СПОСОБЫ ПОДКЛЮЧЕНИЯ. PR164 forensic RECOVERED 19:09Z (44 GUID/BREP, zero dispatch), но drift 1.5.8→1.5.10 и otherActorsNotCovered; Clone не повторять. PR167 B1+B2, PR168 C1, PR170 B3 synthetic INSTALLED receipts существуют, не native LIVE; 30 read-only routes в B3. MINSERT — пробел существующего C1, не новый DXF writer. Новых ACCEPTED нет. MODEL_MODE_NOT_VERIFIABLE.
