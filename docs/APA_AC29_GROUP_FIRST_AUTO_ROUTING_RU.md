@@ -88,6 +88,72 @@ live = APA.prepare_current_runtime_group_native_task(router, writer, intent)
 Пример содержит **местозаполнители**, а не реальные GUID или команду,
 разрешённую к выполнению на BDD.
 
+## Одна живая проверка планировщика на сохранённой тестовой копии (без записи)
+
+Исходный успешный групповой тест PR №159 завершён и сохранён в файле
+\`C:\LocalAI\APA_Group_Acceptance\group-ac29-assembly-20261018-04.pln\`
+на порту \`19724\`. Он содержит 44 GUID. **Исходный BDD на \`19723\`
+не трогать.**
+
+Локальный сценарий \`scripts/apa_ac29_live_group_autoselect_readonly.py\`:
+
+1. Проверяет, что открыт именно сохранённый тестовый PLN и исторические
+   квитанции группы/копирования/перемещения/разгруппирования действительны.
+2. Считывает настоящую нативную группу и 2 стойки, сегменты, этаж, действующие
+   GUID и 3D-габариты. Геометрия не придумывается.
+3. Находит свободные места для **предварительного плана**, используя
+   уже существующий консервативный механизм коллизий. Создания копий нет.
+4. Собирает **точные исходные подписи по конкретным GUID копируемых стоек**.
+   Это подтверждённое копирование идентичного исходного элемента, **не**
+   эквивалентность произвольных стоек по материалам/профилям.
+5. Подключает кодовый каталог Tapir и уже существующие схемы
+   \`connect_functional_modules\`. Вызывает штатный
+   \`APA.prepare_current_runtime_group_native_task\` на ограниченном
+   **только читающем** адаптере. Этот адаптер не содержит
+   \`execute_bound_operation\`, не реализует SceneWriter и не может писать.
+6. Проверяет результат: выбрана **одна** \`CloneNativeGroupV1\` на две
+   позиции, а поэлементные копирования отсутствуют; команда действительно
+   зарегистрирована в текущем Archicad. Сравнивает SHA сохранённого
+   тестового и исходного PLN до/после.
+7. Публикует однократную квитанцию в
+   \`safe-bim-bridge\`, ветка
+   \`feature/apa-ac29-apx-build-mailbox-20261018\`, путь
+   \`safe-bim-mailbox/apa-ac29-group-acceptance/results/group-autoselect-real-model-readonly-20261018-01.json\`.
+
+**Одно безопасное обновление и один запуск** (из PowerShell):
+
+\`\`\`powershell
+$src = "C:\LocalAI\APA_AC29_Build_Source"
+$branch = "feature/apa-ac29-automatic-group-routing-20261018"
+$changes = git -C $src status --porcelain
+if ($LASTEXITCODE -ne 0 -or $changes) {
+    throw "Локальный репозиторий имеет несохранённые изменения. Остановлено."
+}
+git -C $src fetch origin $branch
+if ($LASTEXITCODE -ne 0) { throw "Не удалось получить ветку APA" }
+$found = git -C $src show-ref --verify "refs/heads/$branch"
+if ($LASTEXITCODE -eq 0) {
+    git -C $src switch $branch
+} else {
+    git -C $src switch --track "origin/$branch"
+}
+if ($LASTEXITCODE -ne 0) { throw "Не удалось переключить ветку APA" }
+git -C $src pull --ff-only
+if ($LASTEXITCODE -ne 0) { throw "Не удалось обновить ветку" }
+python "$src\scripts\apa_ac29_live_group_autoselect_readonly.py"
+\`\`\`
+
+Не закрывать и не переключать второй экземпляр Archicad до завершения
+читающего теста. Запуск **не копирует ничего**. Статус успеха:
+\`LIVE_READONLY_GROUP_STRATEGY_SELECTED_PASS\`.
+Не запускать повторно ради получения статуса: опубликованный результат
+проверять напрямую в GitHub.
+
+**Это не тест записи через SceneWriter и не разрешение на изменение BDD.**
+Для производственной операции требуются отдельная привязка рабочего проекта,
+пооперационные области изменения, журнал, точные исходные данные и
+независимый полный readback, как и раньше.
+
 ## Проверки и пределы результата
 
 В `tests/test_apa_ac29_group_strategy_integration.py` отдельно
