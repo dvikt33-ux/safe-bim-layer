@@ -1,9 +1,12 @@
-"""APA AC29: source-qualified repeat *candidates* from one PDF floorplan.
+"""APA AC29: source-qualified hosted-opening *candidates* from PDF.
 
 No geometric reconstruction, no BIM element creation, no PLN access.
 Consumes the architectural PDF plus the real APA PDF crop/OpenBIM receipts.
-Repeated opening marks are NOT automatically geometry-equivalent prototypes:
-host wall, type, story, dimensions, flip/orientation must be independently read.
+Repeated opening marks are NOT geometric points or copy-ready BIM prototypes.
+Host wall, type, story, dimensions and flip/orientation must be independently read.
+Existing APA V2 only allows typed hosted batch CREATE for windows/doors
+until exact native host ownership and source-qualified reuse are independently
+established; this worker NEVER authorizes their stand-alone MoveElements(copy).
 """
 from __future__ import annotations
 
@@ -146,10 +149,13 @@ def inspect(pdf, crop_receipt, model_report=None, *, page=AP2_PAGE,
             "family": family(mark),
             "placements": n,
             "documentedType": "MARK_ONLY_NOT_VALIDATED_LIBPART",
-            "candidateStrategy": ("DUPLICATE_OR_BATCH_CREATE_IF_QUALIFIED"
+            "notQualifiedForNativeCopy": True,
+            "hostedCreateRequiresVerifiedWallGUID": True,
+            "candidateStrategy": ("HOSTED_BATCH_CREATE_IF_QUALIFIED"
                                   if n > 1 else
-                                  "SINGLE_CREATE_IF_QUALIFIED"),
-            "positionsPt": [r["midpointPt"] for r in items],
+                                  "HOSTED_SINGLE_CREATE_IF_QUALIFIED"),
+            "textLabelPositionsPt_NOT_OPENING_ANCHORS": [
+                r["midpointPt"] for r in items],
             "sourceBoundsPt": [r["bboxPt"] for r in items],
             "nativeOperationChosen": None,
             "referenceGUID": None,
@@ -177,7 +183,7 @@ def inspect(pdf, crop_receipt, model_report=None, *, page=AP2_PAGE,
         "repeatPlacementCount": sum(b["placements"] for b in batches
                                     if b["placements"] > 1),
         "candidateBatches": batches,
-        "plannerMode": "QUALIFY_EXISTING_APA_AUTO_DISCOVERY_AFTER_BIM_READBACK",
+        "plannerMode": "EXISTING_APA_V2_HOSTED_BATCH_CREATE_REQUIRES_VERIFIED_WALLS",
         "copiedGroupsConfirmed": 0,
         "modelWrites": 0, "nativeCalls": 0,
         "permissionForPLNWrite": False,
