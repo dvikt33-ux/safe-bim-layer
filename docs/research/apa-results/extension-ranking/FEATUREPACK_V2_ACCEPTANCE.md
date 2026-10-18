@@ -1,5 +1,27 @@
 # APA 29 / FeaturePack V2 — 12 read-only IFC/DXF functions (DRAFT)
 
+## Local installation update — 2026-10-18
+
+The user-approved autonomous integration policy now authorizes isolated installs
+and safe APA updates. The original V2 provider/factory bytes have been installed
+side-by-side after preflight and backup of six V1 source/receipt files. Archicad
+executable metadata confirms major 29, build 5101. V1 baseline hashes remained
+unchanged. No existing service or running session was modified or restarted.
+
+**INSTALLED: PASS, opt-in sidecar only.** The installed composed factory executed
+all **12/12** commands through the original installed DynamicCommands router and
+real IfcOpenShell 0.8.5 / ezdxf 1.4.5 subprocesses on synthetic IFC4/DXF. Reports
+were independently read back and source hashes stayed unchanged. Afterwards all
+**6/6** original V1 routes passed real-vendor regression on synthetic PDF/DXF/IFC/IDS.
+The reproducible smoke is `tests/apa_high_density_installed_smoke_v2.py`; the
+sanitized receipt is `V2_INSTALLED_SMOKE_RECEIPT_20261018.json` beside this document.
+
+**SOURCE: VERIFIED; OFFLINE: PASS; BUILD: Python; INSTALLED: PASS (opt-in);
+LIVE: NOT RUN; ACCEPTED: file-sidecar smoke only, not native BIM acceptance.**
+Original PLN/APX and core remain untouched. Installation does not automatically
+attach the provider to existing processes. The older source-stage notes below
+are retained as historical evidence and superseded only by this dated update.
+
 **State: SOURCE verified + OFFLINE CI PASS (21/21 on Windows Python 3.11 and 3.12).** The compiled source and stdlib unit contracts passed on commit `2e355dd85fd40ee1e5fec4d4d9c11ba78fe2e3ee` (GitHub run [39150691598](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/39150691598)). **No vendored IFC/DXF package was installed or executed in this V2 CI; no local Windows install, Archicad run, LIVE or ACCEPTED evidence.**
 
 ## Changes relative to its base PR #154
