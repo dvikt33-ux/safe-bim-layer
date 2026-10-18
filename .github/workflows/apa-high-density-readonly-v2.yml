@@ -9,6 +9,9 @@ on:
       - scripts/install_apa_high_density_readonly_v2.py
       - tests/test_apa_high_density_readonly_v2.py
       - tests/test_apa_high_density_v2_install_factory.py
+      - tests/apa_high_density_installed_smoke_v2.py
+      - docs/research/apa-results/extension-ranking/FEATUREPACK_V2_ACCEPTANCE.md
+      - docs/research/apa-results/extension-ranking/V2_INSTALLED_SMOKE_RECEIPT_20261018.json
       - .github/workflows/apa-high-density-readonly-v2.yml
 
 permissions:
@@ -35,6 +38,7 @@ jobs:
           scripts/install_apa_high_density_readonly_v2.py
           tests/test_apa_high_density_readonly_v2.py
           tests/test_apa_high_density_v2_install_factory.py
+          tests/apa_high_density_installed_smoke_v2.py
       - name: Offline source-contract unit tests (no vendor installations)
         run: >
           python -m unittest discover -s tests
