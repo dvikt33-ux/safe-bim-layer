@@ -1,6 +1,7 @@
 """Strict no-Archicad unit coverage for the V2 SQLite forensic checker."""
 from pathlib import Path
 import json
+from contextlib import closing
 import sys
 import tempfile
 import unittest
@@ -142,7 +143,7 @@ class SQLiteGroupForensic(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             db = Path(d) / "test.sqlite"
             import sqlite3
-            with sqlite3.connect(db) as sql:
+            with closing(sqlite3.connect(db)) as sql:
                 sql.execute("CREATE TABLE scenes (scene_id,plan_hash,state,result)")
                 sql.execute("CREATE TABLE steps (scene_id,step_id,state,guid,output)")
                 sql.commit()
