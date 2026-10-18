@@ -119,6 +119,19 @@ class NativeGridOneShot(unittest.TestCase):
         self.assertNotIn("SaveProject(", execution)
         self.assertIn("GRID_PREVIOUS_MUTATION_ATTEMPT_NEVER_REPLAY", execution)
 
+    def test_checks_all_44_previous_accepted_native_brep_not_only_group(self):
+        code = inspect.getsource(LIVE.read_only_check)
+        self.assertIn("HISTORICAL.records(", code)
+        self.assertIn('row["command"] == "GetModelDumpV1"', code)
+        self.assertIn("HISTORICAL.native_signatures(", code)
+        self.assertIn("historical_signature == current_signature", code)
+        self.assertLess(code.index("historical_signature == current_signature"),
+                        code.index("VERIFIER.verify_before("))
+        self.assertLess(code.index("VERIFIER.verify_before("),
+                        code.index('return {'))
+        self.assertNotIn("SaveProject(", code)
+        self.assertNotIn("OpenProject(", code)
+
     def test_old_accepted_entry_defaults_to_original_transport_and_two_groups(self):
         source = inspect.getsource(ORIGINAL.execute_once)
         self.assertIn("native_transport or APA.native_transport", source)
