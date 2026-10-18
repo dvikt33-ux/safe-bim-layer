@@ -1,3 +1,9 @@
+# APA AC29 — обновление очереди 18.10.2026 17Z
+
+Независимый аудит: [30 проверок и 2 контрааудита](hourly/audit-2026-10-18-17.md). Новые задачи №1: tasks-1A/1B/1C (9); №2: tasks-2A/2B/2C (10), все с префиксом audit-2026-10-18-17-. PR165 OFFLINE 21/21 Windows 3.11/3.12, INSTALLED не подтверждено. PR164 SceneWriter STOPPED: read-only reconcile до повторов. Нет новых ACCEPTED. Ниже сохранена очередь 16Z без потерь.
+
+---
+
 # APA AC29 — действующая очередь, 18.10.2026 16Z
 
 **Штаб:** [независимый аудит 16Z](hourly/review-20261018T16Z.md), 30 предметных проверок и два контрааудита. Детали: [01–10](hourly/audit-20261018T16Z-appendix-A.md), [11–20](hourly/audit-20261018T16Z-appendix-B.md), [21–30](hourly/audit-20261018T16Z-appendix-C.md).
