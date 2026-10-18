@@ -30,6 +30,7 @@ import archicad_bim_documentation as DOC
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ORIGINAL.SOURCE
+PRIOR_SCRATCH = ORIGINAL.SCRATCH
 SCRATCH = Path(r"C:\LocalAI\APA_Group_Acceptance\group-ac29-grid-8x4-20261018-01.pln")
 STATE = Path(r"C:\LocalAI\APA_AC29_Group_Grid_State\group-grid-8x4-20261018-01")
 BRANCH = "feature/apa-ac29-group-grid-live-20261018"
@@ -88,7 +89,7 @@ def previous_proof():
     source_sha = LIVE.digest(SOURCE)
     require(LIVE.digest(LIVE.SOURCE_PATH) == functional_sha,
             "GROUP_GRID_PROTECTED_BDD_ORIGINAL_CHANGED")
-    require(LIVE.digest(ORIGINAL.SCRATCH) == source_sha,
+    require(LIVE.digest(PRIOR_SCRATCH) == source_sha,
             "GROUP_GRID_PREVIOUS_WRITER_SAVED_SOURCE_DRIFT")
     # ORIGINAL.SCRATCH on importing V1 points to #01, saved and unchanged.
     require(len(source_sha) == 64, "GROUP_GRID_SOURCE_SHA_INVALID")
