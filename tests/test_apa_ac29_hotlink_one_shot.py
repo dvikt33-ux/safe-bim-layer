@@ -56,6 +56,26 @@ class HotlinkTests(unittest.TestCase):
         self.assertEqual(doc["commands"]["CreateHotlinkInstances"]["parameters"]
                          ["required"], ["hotlinkInstances"])
 
+    def test_exact_bim_graph_compiles_two_one_write_hotlink_tasks(self):
+        router = H.APA.native_command_router(
+            H.SCHEMA_PATH, include_functional_modules=False)
+        for command, params in (
+            (V.NODE, V.node_parameters(self.module)),
+            (V.INSTANCE, V.instance_parameters(uid(2), self.origin)),
+        ):
+            router.review_policy(command, "CREATE", "MODEL", {
+                "source": H.SOURCE_REF,
+                "sha256": router.contract_hash(command)})
+            preview = H.APA.prepare_native_task(router, {
+                "schemaVersion": "apa-native-task/1",
+                "request": "Exactly one reviewed disposable Hotlink call",
+                "graph": {"operations": [{"id": "OneHotlinkStep",
+                        "command": command, "params": params, "after": []}]}
+            })
+            self.assertFalse(preview["workflow"]["executionPermission"])
+            self.assertEqual(len(preview["workflow"]["graph"]["operations"]), 1)
+            self.assertEqual(preview["workflow"]["executionOrder"], ["OneHotlinkStep"])
+
     def test_staging_copies_only_disposable_pln_and_binds_hashes(self):
         s = self.stage()
         self.assertEqual(s["status"], "STAGED_NOT_EXECUTED")
