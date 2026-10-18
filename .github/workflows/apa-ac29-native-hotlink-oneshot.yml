@@ -5,6 +5,7 @@ on:
       - "scripts/apa_ac29_hotlink_native_verifiers.py"
       - "scripts/apa_ac29_hotlink_oneshot.py"
       - "tests/test_apa_ac29_hotlink_one_shot.py"
+      - "docs/APA_AC29_HOTLINK_ONESHOT_INTEGRATION_RU.md"
       - ".github/workflows/apa-ac29-native-hotlink-oneshot.yml"
 permissions:
   contents: read
