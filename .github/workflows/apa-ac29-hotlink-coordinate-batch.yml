@@ -8,6 +8,7 @@ on:
       - 'tests/test_apa_ac29_hotlink_batch_geometry.py'
       - 'tests/test_apa_ac29_hotlink_batch_writer.py'
       - 'docs/APA_AC29_HOTLINK_BATCH_NATIVE_RU.md'
+      - 'docs/evidence/apa-ac29-hotlink-batch-20261018/coordinate-proof.json'
       - '.github/workflows/apa-ac29-hotlink-coordinate-batch.yml'
 permissions:
   contents: read
