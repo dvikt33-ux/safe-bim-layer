@@ -15,6 +15,8 @@ class TestAP2MassOps(unittest.TestCase):
         import pymupdf
         pdf = root / "stage2.pdf"
         doc = pymupdf.open()
+        for _ in range(15):
+            doc.new_page(width=1190, height=842)
         page = doc.new_page(width=1190, height=842)
         # Two model marks, one unique. Legend outside selected floorplan clip.
         page.insert_text((200, 200), "OK-3", fontsize=9)
