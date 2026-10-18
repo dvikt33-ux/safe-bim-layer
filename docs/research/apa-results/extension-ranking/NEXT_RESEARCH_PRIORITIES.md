@@ -1,3 +1,9 @@
+# APA AC29 — очередь 18Z
+
+Аудит №3: [28 проверок и 2 контрааудита](hourly/audit-2026-10-18-18.md); [8 задач №1 и 8 задач №2](hourly/audit-2026-10-18-18-tasks.md). PR164: forensic receipt отсутствует, Clone не повторять. PR165: synthetic 12/12, не LIVE. №2: 18Z main неполный, индекс и доказательства существуют. Новых ACCEPTED нет. MODEL_MODE_NOT_VERIFIABLE.
+
+---
+
 # APA AC29 — обновление очереди 18.10.2026 17Z
 
 Независимый аудит: [30 проверок и 2 контрааудита](hourly/audit-2026-10-18-17.md). Новые задачи №1: tasks-1A/1B/1C (9); №2: tasks-2A/2B/2C (10), все с префиксом audit-2026-10-18-17-. PR165 OFFLINE 21/21 Windows 3.11/3.12, INSTALLED не подтверждено. PR164 SceneWriter STOPPED: read-only reconcile до повторов. Нет новых ACCEPTED. Ниже сохранена очередь 16Z без потерь.
