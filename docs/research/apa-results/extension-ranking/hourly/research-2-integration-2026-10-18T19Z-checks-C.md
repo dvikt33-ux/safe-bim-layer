@@ -1,0 +1,12 @@
+# Checks 21–30: units, translator, ODS, BCF, geolocation
+
+21. DXF units? ezdxf 1.4.5: $INSUNITS=4 mm, 6 m, 0 unitless; units.conversion_factor; block units not automatic. https://ezdxf.readthedocs.io/en/stable/concepts/units.html. Verdict 0 blocks unit inference; next IFC.
+22. Translator availability? Tapir 1.5.9 IFCCommands.cpp lacks GetIFCExportTranslators; tag 1.6.0 L630–693 has it. Verdict local 1.5.10 backport unverified; next fields.
+23. Translator schema? 1.6.0 L640–693 returns translators:[{name,preview}] only. https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.6.0/archicad-addon/Sources/IFCCommands.cpp#L640-L693. Verdict no preset detail; next AC29.
+24. AC29 settings? Six presets: Model Filter, Type Mapping, Geometry Conversion, Property Mapping, Data Conversion, Unit Conversion; IFC2x3/4/4.3. https://help.graphisoft.com/AC/29/INT/_AC29_Help/121_IFC/121_IFC-33.htm. Verdict full API NOT_FOUND; next openings.
+25. Missing openings? AC29 gross geometry/holes separately and IfcOpeningElement model filter; BREP vs extrusion. https://help.graphisoft.com/AC/29/INT/_AC29_Help/121_IFC/121_IFC-37.htm. Verdict IFC absence ≠ PLN absence; next ODS.
+26. Existing ODS? PR166 B1 L59–68 ZIP CRC/mimetype/content.xml; L93 express_rules=false, geometryChecked=false. https://github.com/dvikt33-ux/safe-bim-layer/blob/357d920d59ed129b1143751fa96b27e4b3bc326a/scripts/apa_ifc_reports_b1.py#L59-L105. Verdict schema gap; next validator.
+27. Ready validator? TDF ODF 0.13.0 JRE11+ CLI java -jar odfvalidator-<VERSION>-jar-with-dependencies.jar -o output file. https://odftoolkit.org/conformance/ODFValidator.html. Verdict ready CLI, local jar unverified; next BCF.
+28. Native BCF? Tapir 1.5.9 IssueCommands.cpp L720–790 requires exportPath/useExternalId/alignBySurveyPoint; empty issues=ALL. https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.5.9/archicad-addon/Sources/IssueCommands.cpp#L720-L790. Verdict whitelist; next schema.
+29. BCF2.1? buildingSMART release_2_1 markup.xsd Viewpoints/Snapshot, visinfo.xsd IfcGuid, version.xsd VersionId; bcf.bcfxml.load b139fe1c supports 2.1. LICENSE file 404: NOT_VERIFIED. Verdict schema/link gate; next georef.
+30. Geolocation? PR165 L221–238 worldCoordinateCalibrationVerified=false; IfcOpenShell b139fe1c util.geolocation L147–211 auto_xyz2enh/auto_enh2xyz. Exact installed 0.8.5 source not verified. Verdict defer; next wheel hash.
