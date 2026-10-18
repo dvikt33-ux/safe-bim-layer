@@ -207,6 +207,33 @@ class NativeBatchTests(unittest.TestCase):
         self.assertEqual(res["nativeBatchWrites"],1)
         self.assertEqual(res["newGuidCount"],6)
 
+    def test_native_recreated_root_flags_must_match_source(self):
+        v = V.installed_batch_verifier(
+            self.module, B.digest(self.module), self.mock.node,
+            self.mock.root, self.mock.origin, 2, 10, self.plan
+        )["VerifiedHotlinkBatchReuseV1"]
+        before = v.before(api=self.mock.api, command="CreateHotlinkInstances",
+                          parameters=self.parameters, affected=[],
+                          native_before=self.mock.old)
+        model = self.mock.add_batch(self.plan)
+        actual = self.mock.api
+        def tampered(command, params):
+            response = actual(command, params)
+            elements = params.get("elements", []) if isinstance(params, dict) else []
+            if (command == "GetDetailsOfElements" and len(elements) == 1
+                    and elements[0]["elementId"]["guid"].lower() in self.mock.new_roots):
+                response["detailsOfElements"][0]["details"]["floorDifference"] = 1
+            return response
+        with self.assertRaisesRegex(ValueError, "PLACEMENT_FLAGS_DRIFT"):
+            v.after(api=tampered, command="CreateHotlinkInstances",
+                    parameters=self.parameters,
+                    native_response={"elements": [
+                        {"elementId": {"guid": g}} for g in self.mock.new_roots]},
+                    before_guids=set(self.proof["allBoxes"]),
+                    after_guids={x["guid"] for x in model["elements"]},
+                    affected=[], native_before=self.mock.old,
+                    native_after=model, source_proof=before)
+
     def test_wrong_owner_is_rejected(self):
         v=V.installed_batch_verifier(self.module,B.digest(self.module),
              self.mock.node,self.mock.root,self.mock.origin,2,10,self.plan
