@@ -291,9 +291,14 @@ def publish_result():
 if __name__ == "__main__":
     try:
         if REPORT.exists():
+            previous = json.loads(REPORT.read_text(encoding="utf8"))
             publish_result()
-            print("APA_AC29_GROUP_RESUME_PREVIOUS_RESULT_REPUBLISHED", flush=True)
-            raise SystemExit(0)
+            print("APA_AC29_GROUP_RESUME_PREVIOUS_RESULT_REPUBLISHED:",
+                  previous["result"]["status"], flush=True)
+            raise SystemExit(
+                0 if previous["result"]["status"] ==
+                "LIVE_GROUP_CHAIN_COMPLETED_AFTER_READONLY_RECONCILIATION"
+                else 2)
         try:
             status = run()
         except Exception as exc:
@@ -311,6 +316,8 @@ if __name__ == "__main__":
         })
         publish_result()
         print("APA_AC29_GROUP_RESUME:", status["status"], flush=True)
+        if status["status"] != "LIVE_GROUP_CHAIN_COMPLETED_AFTER_READONLY_RECONCILIATION":
+            raise SystemExit(2)
     except Exception as exc:
         print("APA_AC29_GROUP_RESUME_FATAL:",
               type(exc).__name__, str(exc), flush=True)
