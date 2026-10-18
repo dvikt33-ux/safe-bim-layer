@@ -83,7 +83,7 @@ def request(command, params, *, addon=False, timeout=30):
     if addon:
         value = value.get("addOnCommandResponse")
     need(isinstance(value, dict), "ARCHICAD_RESPONSE_NOT_OBJECT:" + command)
-    need("error" not in value, "NATIVE_COMMAND_FAILED:" + command + ":" + repr(value["error"]))
+    need("error" not in value, "NATIVE_COMMAND_FAILED:" + command + ":" + repr(value.get("error")))
     return value
 
 
