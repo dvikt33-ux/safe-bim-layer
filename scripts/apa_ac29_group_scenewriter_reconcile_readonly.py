@@ -125,8 +125,9 @@ def run():
                       and isinstance(row.get("response"), dict)
                       and "error" not in row["response"]]
     need(bool(expected_reads), "PREWRITE_MODEL_DUMP_EVIDENCE_NOT_RECORDED")
-    inventory = APA.inventory_guids(lambda name, params: LIVE.request(name, params,
-                    addon=(name == "GetModelDumpV1")))
+    # GetAllElements is a Tapir add-on command, not an Archicad API method.
+    # Reuse the already LIVE-verified, strict native inventory reader.
+    inventory = sorted(guid.lower() for guid in LIVE.read_elements())
     need(len(inventory) == 44,
          "SAVED_SCRATCH_LIVE_GUID_COUNT_DIFFERS_FROM_ACCEPTED_44")
     last_capture = expected_reads[-1]["response"]
@@ -143,7 +144,7 @@ def run():
                        PREVIOUS.read_json(PREVIOUS.HISTORY / "preflight.json")["sourceColumnGuids"]}
     need(members == require_members and len(members) == 2,
          "ACCEPTED_GROUP_MEMBERSHIP_DRIFT")
-    version = LIVE.request("GetAddOnVersion", {}).get("version")
+    version = LIVE.request("GetAddOnVersion", {}, addon=True).get("version")
     old_catalog = CONTRACTS.load_catalog(
         PREVIOUS.ROOT / "tapir-1.5.8.json")
     need(version == RUN.EXPECTED_TAPIR == "1.5.10"
