@@ -19,12 +19,15 @@ import subprocess
 import sys
 import tempfile
 import time
+import urllib.request
 
 ROOT = Path(r"C:\LocalAI\APA_AC29_Stable")
 SCRIPTS = ROOT / "scripts"
 STATE = ROOT / "apa-job-bridge-state"
 WORKING = Path(r"C:\LocalAI\SafeBIM_Global_Library_Test_Projects\BDD дом - по чертежам 2022.pln")
 ORIGINAL = Path(r"C:\LocalAI\SafeBIM_Global_Library_Test_Projects\BDD дом .pln")
+AP2_PROJECT = Path(r"C:\Users\Admin\Documents\APA_AC29_Projects\AP2_Amur_Test\APA_AP2_Amur_Test_AC29.pln")
+AP2_PORT = 19725
 SOURCE_SHA = "33b96850ad07547a9b12524de8bc46479fd98fbbce6772436d388be679836d66"
 BASE_SHA = "e91d5670f20202c269d442bafc6e66a4cb13d223344122243b7237047a9ff3aa"
 MODULE_HASHES = {
@@ -42,6 +45,7 @@ REVIEW = ROOT / "controllers" / "apa_bdd114_native_roof_face_review.py"
 ALLOWED = frozenset({"BDD114_ROOF_FINALIZE", "SOURCE_QUALIFIED_NATIVE_READ",
                      "APPROVED_NATIVE_COLUMN_COPY", "APPROVED_MULTI_PROTOTYPE_COPY",
                      "CURRENT_MODEL_FINGERPRINT", "SCOPED_NATIVE_REGISTRY_PREFLIGHT",
+                     "AP2_READONLY_PROJECT_INVENTORY",
                      "APPROVED_SCOPED_NATIVE_MUTATION"})
 
 
@@ -152,7 +156,8 @@ def validate_job(job, name):
             job.get("jobId") == name and ID.fullmatch(name),
             "JOB_ID_NOT_BOUND_TO_FILE")
     require(job["action"] in ALLOWED and
-            job["projectSha256"] == approved_saved_sha(),
+            job["projectSha256"] == (sha(AP2_PROJECT) if job.get("action") == "AP2_READONLY_PROJECT_INVENTORY"
+                                         and AP2_PROJECT.is_file() else approved_saved_sha()),
             "JOB_ACTION_OR_TARGET_NOT_ALLOWED")
     created, expires, now = date(job["createdAt"]), date(job["expiresAt"]), current_utc()
     require(created <= now and expires > now and
@@ -160,7 +165,7 @@ def validate_job(job, name):
             "JOB_TIME_WINDOW_INVALID")
     ref = job["sourceTask"]
     if job["action"] in ("BDD114_ROOF_FINALIZE", "CURRENT_MODEL_FINGERPRINT",
-                         "SCOPED_NATIVE_REGISTRY_PREFLIGHT"):
+                         "SCOPED_NATIVE_REGISTRY_PREFLIGHT", "AP2_READONLY_PROJECT_INVENTORY"):
         require(ref is None, "LOCAL_APPROVED_ACTION_MUST_NOT_CONTAIN_SOURCE_TASK")
     else:
         require(isinstance(ref, dict) and set(ref) ==
@@ -190,6 +195,107 @@ def stable_preflight():
     require(receipt.get("applied") is True and
             receipt.get("status") == "STABLE_SELECTOR_DEPLOYED_IMPORT_VERIFIED_NO_NATIVE_CALLS",
             "STABLE_INSTALL_RECEIPT_NOT_PASS")
+
+
+def ap2_preflight():
+    """Read-only AP2-specific project gate; BDD route and PLN are untouched."""
+    require(SCRIPTS.is_dir() and
+            (ROOT / "apa-selector-install-receipt.json").is_file(),
+            "STABLE_APA_DEPLOYMENT_ABSENT")
+    release = runtime_release()
+    for filename, expected_hash in (release["moduleHashes"] if release else MODULE_HASHES).items():
+        require(sha(SCRIPTS / filename) == expected_hash,
+                "STABLE_APA_MODULE_DRIFT:" + filename)
+    require(AP2_PROJECT.is_file() and
+            AP2_PROJECT.suffix.lower() == ".pln",
+            "AP2_PINNED_PLN_NOT_PRESENT")
+    require(AP2_PROJECT.stat().st_size > 100000,
+            "AP2_PLN_TOO_SMALL_OR_NOT_SAVED")
+
+
+def ap2_tapir_read(command, parameters=None):
+    """Only exact approved Tapir READ commands via local AC29 port 19725."""
+    require(command in {"GetProjectInfo", "GetAllElements", "GetStories"},
+            "AP2_UNAPPROVED_NATIVE_COMMAND")
+    body = {
+        "command": "API.ExecuteAddOnCommand",
+        "parameters": {
+            "addOnCommandId": {
+                "commandNamespace": "TapirCommand",
+                "commandName": command,
+            },
+            "addOnCommandParameters": parameters or {},
+        },
+    }
+    request = urllib.request.Request(
+        f"http://127.0.0.1:{AP2_PORT}",
+        data=json.dumps(body, ensure_ascii=False).encode("utf-8"),
+        headers={"Content-Type": "application/json; charset=utf-8"},
+        method="POST",
+    )
+    with urllib.request.urlopen(request, timeout=30) as response:
+        answer = json.loads(response.read().decode("utf-8"))
+    require(answer.get("succeeded") is True,
+            "AP2_READ_FAILED:" + command)
+    result = answer.get("result", {}).get("addOnCommandResponse")
+    require(isinstance(result, dict) and "error" not in result,
+            "AP2_READ_RESPONSE_INVALID:" + command)
+    return result
+
+
+def capture_ap2_inventory(job, folder):
+    """Exact locally approved AP2 PLN readback; never invokes SceneWriter."""
+    require(job["action"] == "AP2_READONLY_PROJECT_INVENTORY" and
+            job["sourceTask"] is None,
+            "AP2_ONLY_LOCAL_READ_ACTION")
+    original_hash = sha(AP2_PROJECT)
+    require(original_hash == job["projectSha256"],
+            "AP2_DISK_SHA_MISMATCH_BEFORE_READ")
+    details = ap2_tapir_read("GetProjectInfo")
+    require(details.get("isUntitled") is False and
+            details.get("isTeamwork") is False and
+            os.path.normcase(os.path.abspath(details.get("projectPath", ""))) ==
+            os.path.normcase(os.path.abspath(str(AP2_PROJECT))),
+            "AP2_ACTIVE_PROJECT_PATH_OR_MODE_MISMATCH")
+    elements = ap2_tapir_read("GetAllElements")
+    rows = elements.get("elements")
+    require(isinstance(rows, list) and 0 <= len(rows) <= 10000,
+            "AP2_ELEMENT_INVENTORY_INVALID")
+    ids = [r.get("elementId", {}).get("guid") for r in rows]
+    require(all(isinstance(g, str) and re.fullmatch(
+        r"[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}", g)
+        for g in ids) and len(set(x.lower() for x in ids)) == len(ids),
+        "AP2_INVALID_OR_DUPLICATE_GUID")
+    levels = ap2_tapir_read("GetStories")
+    stories = levels.get("stories")
+    require(isinstance(stories, list) and 1 <= len(stories) <= 30 and
+            all(type(s.get("index")) is int and
+                type(s.get("level")) in (int, float) and
+                type(s.get("height")) in (int, float)
+                for s in stories),
+            "AP2_STORY_READBACK_INVALID")
+    second = ap2_tapir_read("GetProjectInfo")
+    require(second.get("projectPath") == details.get("projectPath") and
+            sha(AP2_PROJECT) == original_hash,
+            "AP2_PROJECT_SWITCH_OR_DISK_MUTATION")
+    return {
+        "status": "AP2_READONLY_PROJECT_IDENTITY_PASS",
+        "projectPath": str(AP2_PROJECT),
+        "port": AP2_PORT,
+        "savedPlnSHA256": original_hash,
+        "nativeElementCount": len(rows),
+        "stories": [
+            {"index": x["index"], "level": x["level"], "height": x["height"]}
+            for x in stories
+        ],
+        "projectIdentityCheckedBeforeAndAfter": True,
+        "nativeCalls": 3 + 1,
+        "nativeReadOnlyCalls": 4,
+        "nativeWrites": 0,
+        "modelWrites": 0,
+        "plnSaved": False,
+        "readyForConstructionWrite": False,
+    }
 
 
 def capture_read_task(job, folder):
@@ -611,16 +717,20 @@ def process_job(name):
         return
     job, source_blob = remote_json(BRIDGE, f"{INBOX}/{name}.json", "main")
     validate_job(job, name)
-    stable_preflight()
+    (ap2_preflight() if job['action'] == 'AP2_READONLY_PROJECT_INVENTORY'
+     else stable_preflight())
     folder.mkdir(parents=False, exist_ok=False)
     # Persistent intent before ANY Archicad command. Unknown outcome never
     # replays automatically, even if process dies during execution.
     durable_write(folder / "attempted.json", {
         "job": name, "sourceBlob": source_blob,
         "startedAt": current_utc().isoformat(), "action": job["action"],
-        "automaticRetry": False, "currentProject": str(WORKING)})
+        "automaticRetry": False,
+        "currentProject": str(AP2_PROJECT if job['action'] == 'AP2_READONLY_PROJECT_INVENTORY' else WORKING)})
     try:
-        if job["action"] == "BDD114_ROOF_FINALIZE":
+        if job["action"] == "AP2_READONLY_PROJECT_INVENTORY":
+            response = capture_ap2_inventory(job, folder)
+        elif job["action"] == "BDD114_ROOF_FINALIZE":
             response = capture_roof_review(job, folder)
         elif job["action"] == "CURRENT_MODEL_FINGERPRINT":
             response = capture_current_model_fingerprint(job, folder)
