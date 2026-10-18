@@ -1,0 +1,36 @@
+name: APA AC29 Native Group SceneWriter Scoped Integration
+on:
+  push:
+    branches:
+      - feature/apa-ac29-group-scenewriter-live-20261018
+    paths:
+      - 'scripts/apa_ac29_native_group_clone_verifier.py'
+      - 'scripts/apa_ac29_group_scenewriter_live.py'
+      - 'scripts/apa_ac29_dynamic_native_verifiers.py'
+      - 'tests/test_apa_ac29_native_group_writer_integration.py'
+      - '.github/workflows/apa-ac29-native-group-scenewriter.yml'
+  pull_request:
+    paths:
+      - 'scripts/apa_ac29_native_group_clone_verifier.py'
+      - 'scripts/apa_ac29_group_scenewriter_live.py'
+      - 'scripts/apa_ac29_dynamic_native_verifiers.py'
+      - 'tests/test_apa_ac29_native_group_writer_integration.py'
+      - '.github/workflows/apa-ac29-native-group-scenewriter.yml'
+permissions:
+  contents: read
+jobs:
+  group-writer:
+    runs-on: windows-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install installed APA JSON schema validator
+        shell: pwsh
+        run: python -m pip install 'jsonschema>=4,<5'
+      - name: Check new source files compile
+        run: python -m py_compile scripts/apa_ac29_native_group_clone_verifier.py scripts/apa_ac29_group_scenewriter_live.py
+      - name: Check only new group clone SceneWriter verifier and safeguards
+        run: python -m unittest discover -s tests -p 'test_apa_ac29_native_group_writer_integration.py' -v
