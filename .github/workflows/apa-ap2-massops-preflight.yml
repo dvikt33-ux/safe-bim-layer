@@ -1,0 +1,42 @@
+name: APA Stage 2 Mark to Mass Operation Preflight
+on:
+  push:
+    branches:
+      - feature/apa-ap2-massops-preflight-20261018
+  pull_request:
+    branches:
+      - feature/apa-semantic-ready-tools-20261018
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  floorplan-mark-provenance:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        py: ['3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.py }}
+      - name: Install pinned PyMuPDF
+        shell: pwsh
+        run: |
+          python -m pip install --only-binary=:all: pymupdf==1.26.4
+          if ($LASTEXITCODE -ne 0) { throw "PYMUPDF_FAILED" }
+      - name: Validate one-shot APA Windows workflow PowerShell syntax
+        shell: pwsh
+        run: |
+          $tokens = $null
+          $errors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile((Resolve-Path "scripts/run_apa_ap2_massops_preflight.ps1").Path, [ref]$tokens, [ref]$errors) | Out-Null
+          if ($errors.Count -ne 0) { throw ($errors | Out-String) }
+      - name: Syntax and no-write source tests
+        shell: pwsh
+        run: |
+          python -m py_compile scripts/apa_ap2_massops_preflight.py tests/test_apa_ap2_massops_preflight.py
+          if ($LASTEXITCODE -ne 0) { throw "COMPILE_FAILED" }
+          python -m unittest discover -s tests -p test_apa_ap2_massops_preflight.py -v
+          if ($LASTEXITCODE -ne 0) { throw "AP2_MASSOPS_PREFLIGHT_FAILED" }
