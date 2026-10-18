@@ -167,7 +167,7 @@ def create_and_open_copy(source_sha, original_sha):
 
 
 def native_intent(api, router, group, source_sha):
-    members = LIVE.elements_of_group(group)
+    members = [g.lower() for g in LIVE.elements_of_group(group)]
     need(len(members) == 2 and len(set(g.lower() for g in members)) == 2,
          "GROUP_WRITER_SOURCE_NATIVE_GROUP_CHANGED")
     ids = APA.inventory_guids(api)
