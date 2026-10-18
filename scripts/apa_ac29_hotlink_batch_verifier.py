@@ -17,15 +17,23 @@ from apa_ac29_hotlink_native_verifiers import (
 )
 
 
-def batch_parameters(node_guid, origins):
+def batch_parameters(node_guid, origins, native_settings):
     need(isinstance(origins, list) and 1 <= len(origins) <= G.MAX_INSTANCES,
          "HOTLINK_BATCH_BOUNDED_INSTANCE_COUNT_REQUIRED")
+    flags = {"skipNested", "suspendFixAngle", "ignoreTopFloorLinks",
+             "relinkWallOpenings", "adjustLevelDiffs"}
+    need(isinstance(native_settings, dict) and
+         set(native_settings) == flags | {"floorDifference"} and
+         native_settings["floorDifference"] == 0 and
+         all(type(native_settings[k]) is bool for k in flags),
+         "HOTLINK_BATCH_EXACT_PROTOTYPE_MODULE_SETTINGS_REQUIRED")
     return {"hotlinkInstances": [{
         "hotlinkNodeId": {"guid": node_guid.lower()},
         "origin": dict(origin),
         "rotationAngle": 0.0,
         "mirrored": False,
         "floorIndex": 0,
+        **native_settings,
     } for origin in origins]}
 
 
@@ -54,7 +62,8 @@ def installed_batch_verifier(module_path, module_sha, node_guid,
     location = canonical_location(str(module))
     node_guid, prototype_guid = node_guid.lower(), prototype_guid.lower()
     origins = approved_plan.get("origins")
-    expected_params = batch_parameters(node_guid, origins)
+    expected_params = batch_parameters(node_guid, origins,
+                                       approved_plan["prototypeSettings"])
     need(approved_plan.get("nodeGuid") == node_guid and
          approved_plan.get("prototypeGuid") == prototype_guid and
          approved_plan.get("count") == count and
@@ -127,7 +136,13 @@ def installed_batch_verifier(module_path, module_sha, node_guid,
             need(len(groups[root]) == per_instance and
                  dict(kinds[root]) == source_proof["sourceTypeHistogram"],
                  "HOTLINK_BATCH_INSTANCE_MEMBER_COUNT_OR_TYPES_DRIFT")
-            verify_instance_root(api, node_guid, root, expected["origins"][index])
+            native_root = verify_instance_root(
+                api, node_guid, root, expected["origins"][index])
+            root_settings = native_root["details"]
+            need(all(root_settings.get(k) == v and
+                     type(root_settings.get(k)) is type(v)
+                     for k, v in expected["prototypeSettings"].items()),
+                 "HOTLINK_BATCH_NATIVE_INSTANCE_PLACEMENT_FLAGS_DRIFT")
             child_boxes = G.world_boxes({"elements":
                                           [nodes[g] for g in groups[root]]})
             actual = G.union(list(child_boxes.values()))
