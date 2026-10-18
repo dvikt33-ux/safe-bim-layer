@@ -57,11 +57,13 @@ class GroupWriterScope(unittest.TestCase):
     def test_rejects_unapproved_shift_without_api_call(self):
         gid = "0a17fb15-3639-4dfa-ab01-cd910ae112b0"
         bad = [
-            [{"dx": 25, "dy": 0, "dz": 0}],
+            [],
+            [{"dx": 25, "dy": 0, "dz": 0}] * 33,
             [{"dx": 25, "dy": 0, "dz": 0}] * 2,
             [{"dx": 25, "dy": 0, "dz": 1}, {"dx": 50, "dy": 0, "dz": 0}],
-            [{"dx": 25, "dy": 5, "dz": 0}, {"dx": 50, "dy": 0, "dz": 0}],
-            [{"dx": -25, "dy": 0, "dz": 0}, {"dx": 50, "dy": 0, "dz": 0}],
+            [{"dx": 0, "dy": 0, "dz": 0}, {"dx": 50, "dy": 0, "dz": 0}],
+            [{"dx": 10001, "dy": 0, "dz": 0}],
+            [{"dx": float("nan"), "dy": 0, "dz": 0}],
         ]
         for shifts in bad:
             api = NoApiWrites()
