@@ -21,6 +21,7 @@ import time
 import apa_ac29_group_acceptance_mailbox as LIVE
 import apa_ac29_apx_build_mailbox as MAILBOX
 import apa_ac29_group_scenewriter_live as ORIGINAL
+import apa_ac29_group_scenewriter_reconcile_readonly as HISTORICAL
 import apa_ac29_native_group_grid as GRID
 import apa_ac29_native_group_clone_verifier as VERIFIER
 import archicad_scene_run as RUN
@@ -255,6 +256,24 @@ def read_only_check(*, require_new=True):
         api, router, selected["verifiedSourceGroupId"],
         stage_receipt["sourceSavedSha256"])
     require(len(original_guids) == 44, "GRID_NATIVE_44_GUID_BASELINE_DRIFT")
+    # Compare EVERY native source solid/relationship to the earlier audited
+    # pre-dispatch model, not merely count the 44 GUIDs. This detects
+    # unsaved manual edits in the newly opened staged PLN before ANY write.
+    old_trace = HISTORICAL.records(
+        Path(r"C:\LocalAI\APA_AC29_Group_SceneWriter_State"
+             r"\scene-writer-20261018-01\trace\raw.jsonl"))
+    old_dumps = [row["response"] for row in old_trace
+                 if row["command"] == "GetModelDumpV1"
+                 and isinstance(row.get("response"), dict)
+                 and "error" not in row["response"]]
+    require(bool(old_dumps),
+            "GRID_HISTORICAL_FULL_NATIVE_BREP_EVIDENCE_MISSING")
+    historical_signature = HISTORICAL.native_signatures(
+        old_dumps[-1], original_guids)
+    current_signature = HISTORICAL.native_signatures(
+        native, original_guids)
+    require(historical_signature == current_signature,
+            "GRID_ALL_44_PREVIOUSLY_ACCEPTED_NATIVE_BREP_DRIFT")
     intent = intent_factory(native_intent)
     checked = APA.prepare_current_runtime_group_native_task(
         router, writer, intent)
