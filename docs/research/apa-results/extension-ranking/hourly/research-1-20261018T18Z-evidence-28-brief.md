@@ -1,0 +1,2 @@
+# APA check 28 — BCF versioned schemas
+The official BCF-XML v2.1 release has four XSD files: markup, project, version and visinfo. A separate JavaScript parser has version 0.3.2 with MPL-2.0 licensing and a BCF 2.1 entry point, but its repository is archived. Neither fact proves full ZIP/viewpoint validation. Primary evidence: buildingSMART/BCF-XML tag v2.1 and parametricos/BCF.js package.json on GitHub.
