@@ -1,0 +1,41 @@
+{
+  "schema": "APA_B1_B2_INSTALLED_SMOKE",
+  "commands": [
+    {
+      "command": "AddOn.APAIFCReportsB1.IFCSelect",
+      "status": "PASS",
+      "reportSHA256": "ed34a2cf358b158d4e6c26f684cb53c8f35151cf8f286fd8f4c5ce7260f8abbe"
+    },
+    {
+      "command": "AddOn.APAIFCReportsB1.IFCSchemaValidate",
+      "status": "PASS",
+      "reportSHA256": "818e1b70a2cfb499c6b2b154afcd1b2349689cc282738f297ab97c395d8e685c"
+    },
+    {
+      "command": "AddOn.APAIFCReportsB1.IDSReportODS",
+      "status": "PASS",
+      "reportSHA256": "1fa25e375756d51225e3b9bca435e82fbaf13536840faa6c2d9f2327e249fb47"
+    },
+    {
+      "command": "AddOn.APAIFCArtifactsB2.IFCCSVExport",
+      "status": "PASS",
+      "reportSHA256": "56cfa8a8fdb2635ea051a5003f9a3365e1d0b1934d54f97b7c21f9be33791bc0"
+    },
+    {
+      "command": "AddOn.APAIFCArtifactsB2.IFCExtractElements",
+      "status": "PASS",
+      "reportSHA256": "44a6f7384da68a014c927d6384c5091ae1501983729ae0a9d29cedf5f9d5ad1f"
+    },
+    {
+      "command": "AddOn.APAIFCArtifactsB2.IFCBCFIssues",
+      "status": "PASS",
+      "reportSHA256": "1b7d46e182f3c3be9ff3c011171952ecba5cf68e229d07a601319ddbe5289d55"
+    }
+  ],
+  "passed": 6,
+  "sourceUnchanged": true,
+  "fixtureKind": "SYNTHETIC_IFC4_IDS",
+  "installedFactorySHA256": "c6e73f4fd522aaef463f42008ff129527208a54fc51d5ce0a9ad34e9165dd618",
+  "nativeCalls": 0,
+  "plnWrites": 0
+}

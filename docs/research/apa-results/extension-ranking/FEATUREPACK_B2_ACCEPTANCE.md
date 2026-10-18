@@ -51,3 +51,23 @@ leave an incomplete output directory; diagnose and select a new output path.
 Base: package B1 branch/PR #166. No main merge or project-plan #182 changes.
 Remaining package B: IfcConvert binary/format verification; existing V1 IFCDiff
 and IDS JSON operations are reused and are not counted as new.
+
+## Installed acceptance update — 2026-10-18
+
+B1 and B2 are installed in a new opt-in sidecar with a separate pinned vendor
+runtime. The verified installed V2 factory remains the source of the existing
+18 routes; this extension registers six more on that same router. No existing
+process is rebound. Preflight records prove the target was absent; rollback
+quarantines only the newly created sidecar. V1 baseline source/receipt SHA stayed
+unchanged. The installed six-command smoke passed 6/6 with disk readback and
+source IFC/IDS SHA preservation. Receipt: B1_B2_INSTALLED_SMOKE_RECEIPT_20261018.json.
+Reproduce with tests/apa_ifc_artifacts_installed_smoke_b2.py and a new output dir.
+
+CI https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/39154115515 passed on
+Windows Python 3.11 and 3.12, 25 real-vendor/source tests plus 21 V2 tests each.
+The first 3.11 lock attempt failed because NumPy 2.5 requires Python 3.12; the
+committed lock now selects exact NumPy 2.4.6 for 3.11 and 2.5.4 for 3.12.
+
+SOURCE VERIFIED / OFFLINE PASS / BUILD Python / INSTALLED PASS (opt-in) /
+LIVE NOT RUN / ACCEPTED file-sidecar smoke only. No Archicad process was present
+at the read-only process inventory; native BIM acceptance remains separate.
