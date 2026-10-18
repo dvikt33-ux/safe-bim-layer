@@ -37,6 +37,29 @@ class BatchCoordinateTests(unittest.TestCase):
         self.assertNotAlmostEqual(proof["forTenMeterGapOriginX"], 346.475,
                                   delta=1)
 
+    def test_published_coordinate_proof_matches_live_readback_arithmetic(self):
+        import json
+        fixture = json.loads((Path(__file__).resolve().parents[1] /
+            "docs/evidence/apa-ac29-hotlink-batch-20261018/coordinate-proof.json"
+        ).read_text(encoding="utf8"))
+        expected = G.published_one_shot_coordinate_proof()
+        self.assertEqual(fixture["nativeModelWrites"], 0)
+        self.assertEqual(fixture["status"],
+                         "READ_ONLY_PUBLISHED_EVIDENCE_REPRODUCED_BATCH_NOT_LIVE")
+        self.assertAlmostEqual(fixture["derived"]["moduleLocalMinX"],
+                               expected["sourceLocalMinX"], places=8)
+        self.assertAlmostEqual(fixture["derived"]["hostMaxX"],
+                               expected["hostMaxX"], places=8)
+        self.assertAlmostEqual(
+            fixture["correctedOriginalHost"]["targetOriginX"],
+            expected["forTenMeterGapOriginX"], places=8)
+        self.assertAlmostEqual(
+            fixture["newBatchAfterAcceptedInstance"]["predictedGapMeters"], 10,
+            places=8)
+        self.assertGreater(
+            fixture["newBatchAfterAcceptedInstance"]["firstOriginX"],
+            fixture["correctedOriginalHost"]["targetOriginX"])
+
     def test_batch_spacing_uses_module_local_min_not_its_width(self):
         local = {"x": [300, 330.475], "y": [0, 18.595],
                  "z": [-0.2, 3]}
