@@ -221,9 +221,12 @@ def main():
     print("APA_GROUP_SCENEWRITER_V2_GUARD:", proof["previousReconciliationStatus"],
           "44 GUID, 0 PRIOR WRITES", flush=True)
     configure_original_one_shot_to_new_scope()
-    # The original code creates STATE via mkdir(exist_ok=False) and refuses
-    # any existing receipt or scratch file; it cannot replay this attempt.
-    return ORIGINAL.main()
+    # The original SceneWriter code still guards SOURCE and its disk SHA.
+    # Because V2 already independently reconciled the open scratch #01,
+    # pass only that EXACT pinned, byte-identical active baseline. This
+    # avoids switching the UI back to source #04 before opening new #02.
+    # Original V1 CLI behavior remains unchanged; no generic path override.
+    return ORIGINAL.main(verified_active_baseline=ORIGINAL_SCRATCH)
 
 
 if __name__ == "__main__":
