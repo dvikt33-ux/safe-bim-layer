@@ -98,5 +98,90 @@ class GroupWriterScope(unittest.TestCase):
         self.assertNotIn('LIVE.request("SaveProject"', source)
 
 
+    def test_real_apa_bim_graph_routes_one_group_step_to_original_writer(self):
+        from unittest.mock import patch
+        from archicad_dynamic_commands import DynamicCommands
+        from archicad_batch_contracts import load_catalog
+        import archicad_project_accelerator as APA
+        from test_apa_ac29_group_strategy_integration import inputs, assembly
+        root = Path(__file__).resolve().parents[1]
+        router = DynamicCommands(load_catalog(root / "tapir-1.5.8.json"))
+        APA.connect_functional_modules(router)
+        router.register_availability(CMD, True)
+        existing, targets = inputs()
+        intent = dict(schemaVersion="apa-native-group-auto/1",
+                      request="One group clone through original BIM graph",
+                      existing=existing, targets=targets,
+                      assemblyGroups=[assembly()])
+        preview = APA.prepare_auto_optimized_native_task(router, intent)
+        self.assertEqual(preview["status"], "ONE_SOURCE_QUALIFIED_STRATEGY_PREPARED")
+        calls = []
+        def original_scene_writer_dispatch(writer, scene_id, ticket,
+                                           affected, retained_signatures,
+                                           saved_sha256, authorization, impact,
+                                           verify_after, verify_before=None):
+            calls.append({"scene": scene_id, "command": ticket["command"],
+                          "effect": ticket["effect"],
+                          "approved": authorization, "impact": impact})
+            self.assertIsNotNone(writer)
+            self.assertEqual(ticket["parameters"]["translations"], list(OFFSET))
+            return {"status": "PASS", "nativeResponse": {
+                "nativeModelWrites": 4,
+                "sourceGroupId": ticket["parameters"]["groupId"],
+                "newGroupIds": [{"guid": "00000000-0000-4000-8000-000000000101"},
+                                {"guid": "00000000-0000-4000-8000-000000000102"}],
+                "createdElements": [
+                    {"elementId": {"guid": f"00000000-0000-4000-8000-{i:012d}"}}
+                    for i in range(1, 5)]
+            }}
+        def scope(step, ticket, previous):
+            self.assertEqual(previous, {})
+            return dict(scene_id=SCENE, affected=[], retained_signatures={},
+                        saved_sha256="0" * 64, authorization=AUTH_REF,
+                        impact="MODEL", verify_after=lambda *args: None,
+                        verify_before=lambda *args: None)
+        with patch.object(router, "execute", side_effect=original_scene_writer_dispatch):
+            result = APA.run_auto_optimized_native_task(router, object(), preview,
+                                                       object(), scope)
+        self.assertEqual(result["status"], "WORKFLOW_CALLABLE_VERIFIED")
+        self.assertEqual(len(result["trace"]), 1)
+        self.assertEqual(calls, [{"scene": SCENE, "command": CMD,
+                                  "effect": "CREATE", "approved": AUTH_REF,
+                                  "impact": "MODEL"}])
+        self.assertEqual(result["trace"][0]["command"], CMD)
+
+    def test_graph_unknown_outcome_never_dispatches_second_group_clone(self):
+        from unittest.mock import patch
+        from archicad_dynamic_commands import DynamicCommands
+        from archicad_batch_contracts import load_catalog
+        import archicad_project_accelerator as APA
+        from test_apa_ac29_group_strategy_integration import inputs, assembly
+        root = Path(__file__).resolve().parents[1]
+        router = DynamicCommands(load_catalog(root / "tapir-1.5.8.json"))
+        APA.connect_functional_modules(router)
+        router.register_availability(CMD, True)
+        existing, targets = inputs()
+        intent = dict(schemaVersion="apa-native-group-auto/1",
+                      request="Reject replay when group native outcome unknown",
+                      existing=existing, targets=targets,
+                      assemblyGroups=[assembly()])
+        preview = APA.prepare_auto_optimized_native_task(router, intent)
+        def scope(step, ticket, previous):
+            return dict(scene_id=SCENE, affected=[], retained_signatures={},
+                        saved_sha256="0" * 64, authorization=AUTH_REF,
+                        impact="MODEL", verify_after=lambda *args: None,
+                        verify_before=lambda *args: None)
+        with patch.object(router, "execute",
+                          return_value={"status": "PARTIAL_OR_UNKNOWN_OUTCOME",
+                                        "manualReconciliationRequired": True}) as dispatched:
+            report = APA.run_auto_optimized_native_task(router, object(), preview,
+                                                       object(), scope)
+        self.assertEqual(dispatched.call_count, 1)
+        self.assertEqual(report["status"], "STOPPED_UNKNOWN_OUTCOME")
+        self.assertEqual(report["stoppedAt"], "assembly_0_clone")
+        self.assertFalse(report["automaticRetry"])
+        self.assertEqual(report["completedSteps"], [])
+
+
 if __name__ == "__main__":
     unittest.main()
