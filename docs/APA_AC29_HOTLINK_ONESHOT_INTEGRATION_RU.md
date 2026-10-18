@@ -2,7 +2,9 @@
 
 ## Статус 18.10.2026
 
-**SOURCE PREPARED; OFFLINE CI в работе; INSTALLED NOT VERIFIED; LIVE NOT RUN.**
+**SOURCE VERIFIED; OFFLINE PASS (12/12 на Windows Python 3.11 и 3.12); INSTALLED NOT VERIFIED; LIVE NOT RUN.**
+
+Проверка: https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/39158905922. Включает реальную офлайн-компиляцию одного шага CreateHotlinkNodes и одного шага CreateHotlinkInstances через существующий BIM Graph; никакого Archicad-run CI не выполняет.
 
 Эта отдельная ветка основана на PR #164, переиспользует реальный DynamicCommands → штатный BIM Graph → штатный SceneWriter, запись SQLite и кодовые проверяющие модули. Нового нативного обработчика APX, второго маршрутизатора или второго BIM-движка нет.
 
