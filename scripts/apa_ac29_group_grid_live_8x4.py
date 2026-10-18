@@ -2,11 +2,11 @@
 
 STAGE: disk-only creates a never-before-used saved copy of accepted 44-GUID PLN.
 CHECK: READ-ONLY preview and full native BREP collision preflight in a NEW,
-       separately opened Archicad 29 instance (auto-find ONLY ports 19727..35).
+       separately opened Archicad 29 instance (auto-find only 19726..35; exact saved PLN identity required).
 EXECUTE: only after CHECK, current project/port/source hashes pinned, one
          CloneNativeGroupV1 through ORIGINAL APA/DynamicCommands/SceneWriter.
 No project switching or SaveProject in ANY phase. Never touch the unsaved
-previous #02 on 19724, hotlink work on 19726, BDD or main. No auto-retry.
+previous #02 on 19724, AP2/BDD on 19725/19723, or Hotlink on 19727. No auto-retry.
 """
 from __future__ import annotations
 
@@ -45,7 +45,10 @@ PRIOR_REMOTE = ("safe-bim-mailbox/apa-ac29-group-acceptance/results/"
 GRID_RECIPE = dict(schema=GRID.SCHEMA, columns=8, rows=4, stepX=25,
                    stepY=8, startDx=25, startDy=0)
 SHIFTS = GRID.grid_offsets(GRID_RECIPE)
-PORT_RANGE = tuple(range(19727, 19736))
+PORT_RANGE = tuple(range(19726, 19736))
+# This PLN was staged while the previous safe CI head was active. Updating
+# only the port-matching code must NEVER force rerunning or overwriting STAGE.
+INITIAL_ACCEPTED_STAGE_REVISION = "8be407688301ede674e4e2e263c9dfd57b37fda2"
 OLD_VERIFIED_GROUP = "40D5303F-18CA-4117-9DE0-E06BFD8E64B9"
 EXPECTED_BASE_GUIDS = 44
 EXPECTED_POST_GUIDS = 172
@@ -146,7 +149,7 @@ def stage():
         raise
     print("APA_GRID_STAGE: SAVED_COPY_ONLY_PASS", flush=True)
     print("OPEN_IN_NEW_ARCHICAD29_INSTANCE:", SCRATCH, flush=True)
-    print("PROTECTED_PORTS: 19723..19726 (never used)", flush=True)
+    print("PROTECTED_PORTS: 19723..19725 (never queried); 19727 Hotlink (identity-only)", flush=True)
     print("NEXT: --check (read-only) after opening staged PLN", flush=True)
 
 
@@ -154,6 +157,10 @@ def staged():
     require(STATE.is_dir() and SCRATCH.is_file(),
             "GROUP_GRID_STAGE_REQUIRED_BEFORE_EXECUTION")
     stage_receipt = read(STATE / "stage.json")
+    current_revision = ORIGINAL.require_local_branch()
+    require(stage_receipt.get("sourceRevision") in
+            {INITIAL_ACCEPTED_STAGE_REVISION, current_revision},
+            "GRID_STAGE_REVISION_NOT_FROM_ACCEPTED_OR_CURRENT_BRANCH")
     require(stage_receipt.get("schema") == "APA_AC29_GROUP_GRID_STAGE_V1"
             and stage_receipt.get("status") ==
             "STAGED_SAVED_COPY_ONLY_NO_ARCHICAD_CALLS"
@@ -174,7 +181,12 @@ def staged():
 
 
 def discover_dedicated_instance():
-    """Only read identity; NEVER OpenProject or touch protected 19723–19726."""
+    """GetProjectInfo only for 19726..35; never contact protected 19723-25.
+
+    19726 currently owns the exact staged PLN (process 80140); 19727 owns
+    an unrelated Hotlink test. Never identify a port by its number alone.
+    A wrong PLN is NEVER accepted even when the port is in the allowed set.
+    """
     found = []
     original_port = LIVE.PORT
     try:
@@ -194,7 +206,7 @@ def discover_dedicated_instance():
                 "GRID_EXACTLY_ONE_DEDICATED_INSTANCE_MUST_OPEN_STAGED_PLN:"
                 + str(len(found)))
         port, info = found[0]
-        require(port not in (19723, 19724, 19725, 19726),
+        require(port not in (19723, 19724, 19725),
                 "GRID_PROTECTED_ARCHICAD_INSTANCE_DENIED")
         LIVE.PORT = port
         return port, info
@@ -221,6 +233,9 @@ def intent_factory(native_intent):
 
 
 def read_only_check(*, require_new=True):
+    # The stage was created by an earlier clean commit. Bind THIS verified
+    # runtime version to --check and --execute without rewriting stage.json.
+    current_revision = ORIGINAL.require_local_branch()
     stage_receipt = staged()
     port, info = discover_dedicated_instance()
     prior_functional_hash = stage_receipt["functionalSha256"]
@@ -306,7 +321,8 @@ def read_only_check(*, require_new=True):
     return {
         "schema": "APA_AC29_GROUP_GRID_PREFLIGHT_V1",
         "status": "GRID_8X4_NATIVE_BREP_AND_RUNTIME_PREFLIGHT_PASS",
-        "sourceRevision": stage_receipt["sourceRevision"],
+        "sourceRevision": current_revision,
+        "stageSourceRevision": stage_receipt["sourceRevision"],
         "scene": SCENE,
         "scratchPath": str(SCRATCH), "port": port,
         "originalSourceGuidCount": 44,
