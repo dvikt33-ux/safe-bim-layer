@@ -215,6 +215,10 @@ def execute(state):
     old_ids, old_brep_hash = native_baseline(api)
     sha = manifest["scratchInitialSHA256"]
     need(digest(scratch) == sha, "HOTLINK_SCRATCH_SAVED_BYTES_DRIFT")
+    # Immutable, complete saved-copy baseline is essential for reopen proof.
+    write_new(state / "baseline.json", {"baselineGuids": old_ids,
+             "baselineBrepSHA256": old_brep_hash,
+             "scratchInitialSHA256": sha})
     write_new(state / "attempted.json", {
         "status": "ATTEMPT_RESERVED_NO_REPLAY", "at": utc(),
         "scratchSHA256": sha, "sourceSHA256": manifest["sourceSHA256"],
@@ -369,15 +373,17 @@ def main():
     parser.add_argument("--state-dir", required=True)
     parser.add_argument("--port", type=int, default=19724)
     parser.add_argument("--origin", nargs=3, type=float,
-                        metavar=("X", "Y", "Z"), default=[100.0, 0.0, 0.0])
+                        metavar=("X", "Y", "Z"), default=None)
     args = parser.parse_args()
     if args.stage:
-        need(all((args.source_pln, args.module_pln, args.scratch_pln)),
-             "HOTLINK_STAGE_NEEDS_SOURCE_MODULE_AND_SCRATCH_PLN")
+        need(all((args.source_pln, args.module_pln, args.scratch_pln))
+             and args.origin is not None,
+             "HOTLINK_STAGE_NEEDS_SOURCE_MODULE_SCRATCH_AND_EXPLICIT_ORIGIN")
         value = stage(args.source_pln, args.module_pln, args.scratch_pln,
                       args.state_dir, dict(zip("xyz", args.origin)), args.port)
     else:
-        need(not any((args.source_pln, args.module_pln, args.scratch_pln)),
+        need(not any((args.source_pln, args.module_pln, args.scratch_pln))
+             and args.origin is None,
              "HOTLINK_EXECUTION_USES_ONLY_PINNED_STAGE_MANIFEST")
         value = execute(args.state_dir) if args.execute else verify_reopen(args.state_dir)
     print(json.dumps(value, ensure_ascii=False, indent=2))
