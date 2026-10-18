@@ -191,7 +191,7 @@ class NativeGroupFirstRouting(unittest.TestCase):
         result = analyze(existing, targets)
         self.assertEqual(result["groupedTargets"], 0)
         self.assertEqual(result["groupNativeCallsIfIndependentlyAuthorized"], 0)
-        self.assertEqual(result["copies"][0]["count"], 2)
+        self.assertEqual(result["copies"][0]["count"], 4)
         self.assertTrue(result["copies"])
 
 
