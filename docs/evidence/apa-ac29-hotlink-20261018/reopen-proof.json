@@ -1,0 +1,71 @@
+{
+  "closed": {
+    "at": "2026-10-18T19:56:54.785647+00:00",
+    "project": {
+      "error": "GetProjectInfo failed: {'code': 4001, 'message': 'Invalid program status (no open project)'}",
+      "noOpenProjectConfirmed": true
+    },
+    "lockExists": false,
+    "sha256": "98ad2144792309c208818bfdb2a5aba407c9de1f266c34abda5b00b564343acc",
+    "closedWindowScreenshot": "closed-project.jpg"
+  },
+  "reopenMethod": "Archicad File > Open > recent hotlink-native-test.pln",
+  "reopenedAt": "2026-10-18T19:57:33.852283+00:00",
+  "reopenVerified": true,
+  "savedFileSHA256": "98ad2144792309c208818bfdb2a5aba407c9de1f266c34abda5b00b564343acc",
+  "root": {
+    "type": "Hotlink",
+    "floorIndex": 0,
+    "layerIndex": 46,
+    "drawIndex": 0,
+    "id": "",
+    "details": {
+      "hotlinkType": "Module",
+      "hotlinkNodeId": {
+        "guid": "E06D3A5B-9797-AFF7-49E3-87741C205118"
+      },
+      "origin": {
+        "x": 346.475,
+        "y": 0,
+        "z": 0
+      },
+      "rotationAngle": 0,
+      "mirrored": false,
+      "floorDifference": 0,
+      "skipNested": false,
+      "suspendFixAngle": false,
+      "ignoreTopFloorLinks": true,
+      "relinkWallOpenings": true,
+      "adjustLevelDiffs": true
+    }
+  },
+  "retainedBrepSHA256": "824313d67f4cc4e8265d0c81763b6751ffada1e28abb556b9376e71947ba271e",
+  "retainedBrepUnchanged": true,
+  "importedBounds": {
+    "xMin": 646.474975586,
+    "xMax": 676.95,
+    "yMin": 299.18,
+    "yMax": 317.775,
+    "zMin": -0.200000003,
+    "zMax": 3
+  },
+  "actualXClearanceMeters": 315.999975586,
+  "originalsUnchanged": true,
+  "otherSessions": [
+    {
+      "port": 19723,
+      "projectIdentityUnchanged": true
+    },
+    {
+      "port": 19724,
+      "projectIdentityUnchanged": true
+    },
+    {
+      "port": 19725,
+      "projectIdentityUnchanged": true
+    }
+  ],
+  "closeCommandObservation": "Tapir CloseProject returned success but project remained open; actual close used File > Close Project, then no open project was independently confirmed.",
+  "openCommandObservation": "Tapir OpenProject returned code 4001 with no project open; actual reopen used the native GUI.",
+  "additionalSaveDuringClose": false
+}

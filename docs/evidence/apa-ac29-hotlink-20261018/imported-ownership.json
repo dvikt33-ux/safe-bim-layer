@@ -1,0 +1,126 @@
+{
+  "instanceGuid": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae",
+  "nodeGuid": "e06d3a5b-9797-aff7-49e3-87741c205118",
+  "elements": [
+    {
+      "guid": "01823404-1df6-73e9-85f9-cabe09235f08",
+      "type": "ColumnSegment",
+      "hotlinkId": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae"
+    },
+    {
+      "guid": "0228fc36-42a9-10ae-1c3f-0158b7988405",
+      "type": "Column",
+      "hotlinkId": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae"
+    },
+    {
+      "guid": "061baafb-d066-b5a0-513f-d8ea35f3fa87",
+      "type": "ColumnSegment",
+      "hotlinkId": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae"
+    },
+    {
+      "guid": "090d4e98-ee4c-4e30-ff05-42eff9bf3c90",
+      "type": "ColumnSegment",
+      "hotlinkId": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae"
+    },
+    {
+      "guid": "0c35bf7e-854c-ec64-c3b7-09c0c0cd74c5",
+      "type": "ColumnSegment",
+      "hotlinkId": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae"
+    },
+    {
+      "guid": "16c58916-8eb9-ceea-87d1-a323ad3e398e",
+      "type": "ColumnSegment",
+      "hotlinkId": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae"
+    },
+    {
+      "guid": "46f82304-729c-918a-39e0-5d26d72a6559",
+      "type": "Column",
+      "hotlinkId": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae"
+    },
+    {
+      "guid": "76ef9d39-b003-097f-52ed-792a59ad9530",
+      "type": "Column",
+      "hotlinkId": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae"
+    },
+    {
+      "guid": "794133b7-e4f9-a1a9-d494-0c798ddb3990",
+      "type": "ColumnSegment",
+      "hotlinkId": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae"
+    },
+    {
+      "guid": "7abad59d-49bd-5a0c-0793-d92cc1dfe7e4",
+      "type": "Column",
+      "hotlinkId": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae"
+    },
+    {
+      "guid": "7fc29e57-4f05-acf4-8ef8-1c1a2434a535",
+      "type": "Door",
+      "hotlinkId": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae"
+    },
+    {
+      "guid": "89e9ac67-b308-8481-528b-bf4e08a58ca0",
+      "type": "Column",
+      "hotlinkId": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae"
+    },
+    {
+      "guid": "8de7641c-e42d-bac0-666a-13796f3487ba",
+      "type": "Column",
+      "hotlinkId": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae"
+    },
+    {
+      "guid": "91072288-12ac-1453-7e28-09d8e47e3cd9",
+      "type": "ColumnSegment",
+      "hotlinkId": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae"
+    },
+    {
+      "guid": "99f7cc71-d278-a70d-b6da-316987b5bec9",
+      "type": "Slab",
+      "hotlinkId": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae"
+    },
+    {
+      "guid": "9b145190-ae51-e3cd-c43d-68d654c1fd63",
+      "type": "Wall",
+      "hotlinkId": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae"
+    },
+    {
+      "guid": "a1863e73-3e2a-7c79-fc57-a8b05a290e7b",
+      "type": "Wall",
+      "hotlinkId": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae"
+    },
+    {
+      "guid": "a2bb7608-04dc-324d-90f8-c42c6df92c21",
+      "type": "ColumnSegment",
+      "hotlinkId": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae"
+    },
+    {
+      "guid": "a9eda929-1af2-d0b5-9f8c-a645f5a0c325",
+      "type": "Column",
+      "hotlinkId": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae"
+    },
+    {
+      "guid": "aec30956-081a-3b51-5655-60991e19cfa8",
+      "type": "Wall",
+      "hotlinkId": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae"
+    },
+    {
+      "guid": "afe762c7-c966-f724-a8a1-b9fb5b895b31",
+      "type": "Column",
+      "hotlinkId": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae"
+    },
+    {
+      "guid": "dfcaa124-c31e-0a98-ace0-fc6e15063df5",
+      "type": "Window",
+      "hotlinkId": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae"
+    },
+    {
+      "guid": "ed899440-fa86-4b64-d346-027b4b068cab",
+      "type": "Window",
+      "hotlinkId": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae"
+    },
+    {
+      "guid": "ff1c462a-8733-e03f-1c6e-8689b07dd271",
+      "type": "Wall",
+      "hotlinkId": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae"
+    }
+  ]
+}
