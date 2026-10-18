@@ -303,6 +303,40 @@ def prepare_auto_optimized_native_task(router, intent, planner_python=None):
     return discover_native_execution_plan(router, intent, planner_python)
 
 
+def prepare_current_runtime_group_native_task(router, writer, intent):
+    """Auto-discover native groups against current Archicad 29 registration.
+
+    READ-ONLY preflight: bind the exact saved PLN with the existing writer
+    identity guard, check Archicad 29, and probe ONLY native commands chosen
+    by the source-verified group-first strategy. Does not save or mutate.
+    The result is still unpermitted and must use run_auto_optimized_native_task
+    with original per-step SceneWriter scopes and independent readback.
+    """
+    if (not isinstance(intent, dict)
+            or intent.get('schemaVersion') != 'apa-native-group-auto/1'):
+        raise ValueError('APA_GROUP_RUNTIME_REQUIRES_VERIFIED_GROUP_TASK')
+    binding = writer.guarded_binding()
+    archicad29(writer.api)
+    candidate = prepare_auto_optimized_native_task(router, intent)
+    requested = candidate['requiredRuntimeCommands']
+    checked = []
+    for command in requested:
+        proof = router.probe_runtime(writer.api, command)
+        if proof.get('status') != 'RUNTIME_AVAILABLE':
+            raise ValueError('APA_GROUP_NATIVE_COMMAND_NOT_RUNTIME_REGISTERED:'+command)
+        checked.append(command)
+    final = prepare_auto_optimized_native_task(router, intent)
+    if (final.get('status') != 'ONE_SOURCE_QUALIFIED_STRATEGY_PREPARED'
+            or final.get('selectedNativeTaskPreview') is None
+            or final.get('nativeWritePermission') is not False):
+        raise ValueError('APA_GROUP_EXECUTION_PREVIEW_NOT_PREPARED')
+    return dict(preview=final, projectBinding=binding,
+                runtimeRegisteredCommands=checked,
+                nativeModelWrites=0, nativeSaveCalls=0,
+                executionPermission=False,
+                executor='EXISTING_APA_SCENEWRITER_ONLY')
+
+
 def run_auto_optimized_native_task(router, api, auto_preview, writer, scopes, checkpoint=None):
     """Keep original SceneWriter authorization, identity and readback gates."""
     if (not isinstance(auto_preview, dict)
