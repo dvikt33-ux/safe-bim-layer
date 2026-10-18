@@ -1,0 +1,497 @@
+"""One high-level AC29 native-group acceptance job, using the existing Tapir commands.
+
+Never modify the source PLN/BDD. Copy a pinned local test PLN, OpenProject on
+the approved Archicad instance, choose 2 ungrouped columns, group/clone/move/
+ungroup with independent GUID and geometry readback, save only the scratch PLN.
+No remote shell commands; no auto-retries after a partially attempted job.
+"""
+from __future__ import annotations
+
+import argparse
+from collections import Counter
+from datetime import datetime, timedelta, timezone
+import hashlib
+import json
+import math
+import msvcrt
+import os
+from pathlib import Path
+import re
+import shutil
+import subprocess
+import time
+import urllib.request
+
+import apa_ac29_apx_build_mailbox as mailbox
+
+BRIDGE = "dvikt33-ux/safe-bim-bridge"
+MAILBOX_BRANCH = "feature/apa-ac29-apx-build-mailbox-20261018"
+INBOX = "safe-bim-mailbox/apa-ac29-group-acceptance/jobs"
+OUTBOX = "safe-bim-mailbox/apa-ac29-group-acceptance/results"
+SOURCE_REPO = "dvikt33-ux/safe-bim-layer"
+SOURCE_PATH = Path(r"C:\LocalAI\APA_Functional_Test_House_01.pln")
+PORT = 19724
+SCHEMA = "APA_AC29_GROUP_ACCEPTANCE_V1"
+JOB_ID = re.compile(r"^group-[a-z0-9-]{8,55}$")
+HEX = re.compile(r"^[a-f0-9]{40}$")
+GUID = re.compile(r"^[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$")
+COORDS = ("xMin", "xMax", "yMin", "yMax", "zMin", "zMax")
+
+
+def need(condition, reason):
+    if not condition:
+        raise RuntimeError(reason)
+
+
+def digest(path):
+    h = hashlib.sha256()
+    with path.open("rb") as file:
+        for block in iter(lambda: file.read(1048576), b""):
+            h.update(block)
+    return h.hexdigest()
+
+
+def canonical_path(path):
+    return os.path.normcase(os.path.abspath(str(path)))
+
+
+def request(command, params, *, addon=False, timeout=30):
+    if addon:
+        payload = {
+            "command": "API.ExecuteAddOnCommand",
+            "parameters": {
+                "addOnCommandId": {
+                    "commandNamespace": "TapirCommand",
+                    "commandName": command
+                },
+                "addOnCommandParameters": params
+            }
+        }
+    else:
+        payload = {"command": command, "parameters": params}
+    query = urllib.request.Request(
+        f"http://127.0.0.1:{PORT}",
+        data=json.dumps(payload, ensure_ascii=False).encode("utf8"),
+        headers={"Content-Type": "application/json"},
+        method="POST"
+    )
+    with urllib.request.urlopen(query, timeout=timeout) as response:
+        reply = json.loads(response.read().decode("utf8"))
+    need(reply.get("succeeded") is True, f"ARCHICAD_CALL_FAILED:{command}:"
+         + repr(reply.get("error"))[:400])
+    value = reply.get("result", {})
+    if addon:
+        value = value.get("addOnCommandResponse")
+    need(isinstance(value, dict), "ARCHICAD_RESPONSE_NOT_OBJECT:" + command)
+    need("error" not in value, "NATIVE_COMMAND_FAILED:" + command + ":" + repr(value["error"]))
+    return value
+
+
+def project():
+    return request("GetProjectInfo", {}, addon=True)
+
+
+def guard(expected, original_hash):
+    info = project()
+    need(info.get("isUntitled") is False and info.get("isTeamwork") is False,
+         "UNSAVED_OR_TEAMWORK_PROJECT_BLOCKED")
+    need(canonical_path(info.get("projectPath", "")) == canonical_path(expected),
+         "PROJECT_SWITCH_DETECTED:" + repr(info.get("projectPath")))
+    need(SOURCE_PATH.is_file() and digest(SOURCE_PATH) == original_hash,
+         "ORIGINAL_TEST_PLN_DISK_CHANGED")
+    return info
+
+
+def read_elements():
+    data = request("GetAllElements", {}, addon=True)
+    rows = data.get("elements", [])
+    need(isinstance(rows, list) and 6 <= len(rows) <= 5000, "UNEXPECTED_INVENTORY_SIZE")
+    ids = [row.get("elementId", {}).get("guid", "") for row in rows]
+    need(all(GUID.fullmatch(x) for x in ids) and len(set(ids)) == len(ids),
+         "INVALID_OR_DUPLICATE_INVENTORY_GUIDS")
+    return ids
+
+
+def batched(command, guids, key, size=40):
+    result = []
+    for i in range(0, len(guids), size):
+        batch = [{"elementId": {"guid": x}} for x in guids[i:i + size]]
+        received = request(command, {"elements": batch}, addon=True).get(key, [])
+        need(isinstance(received, list) and len(received) == len(batch),
+             command + "_INCOMPLETE_READBACK")
+        result.extend(received)
+    return result
+
+
+def boxes(guids):
+    rows = batched("Get3DBoundingBoxes", guids, "boundingBoxes3D")
+    converted = []
+    for row in rows:
+        box = row.get("boundingBox3D") if isinstance(row, dict) else None
+        if isinstance(box, dict) and all(
+            type(box.get(k)) in (int, float) and math.isfinite(box[k]) for k in COORDS
+        ) and all(box[a] <= box[b] for a, b in [("xMin", "xMax"), ("yMin", "yMax"), ("zMin", "zMax")]):
+            converted.append(box)
+        else:
+            converted.append(None)
+    return converted
+
+
+def group_roots(guids):
+    return batched("GetNativeGroupRootsV1", guids, "groups")
+
+
+def null_group(value):
+    guid = (value or {}).get("guid", "") if isinstance(value, dict) else ""
+    return isinstance(guid, str) and guid.replace("-", "").strip("0") == ""
+
+
+def elements_of_group(group_id):
+    result = request("GetNativeGroupMembersV1", {"groupId": {"guid": group_id}}, addon=True)
+    need(result.get("nativeModelWrites") == 0, "GROUP_READ_UNEXPECTED_WRITE")
+    elements = [v.get("guid", "") for v in result.get("memberIds", [])]
+    need(all(GUID.fullmatch(v) for v in elements), "INVALID_GROUP_MEMBER_GUID")
+    return elements
+
+
+def choose_pair(guids):
+    details = batched("GetDetailsOfElements", guids, "detailsOfElements")
+    columns = [guid for guid, row in zip(guids, details)
+               if isinstance(row, dict) and row.get("type") == "Column"]
+    need(len(columns) >= 2, "AT_LEAST_TWO_COLUMNS_REQUIRED")
+    candidates = columns[:40]
+    roots = group_roots(candidates)
+    col_boxes = boxes(candidates)
+    available = [(guid, bbox) for guid, root, bbox in zip(candidates, roots, col_boxes)
+                 if isinstance(root, dict) and "error" not in root
+                 and null_group(root.get("groupId"))
+                 and null_group(root.get("rootGroupId"))
+                 and bbox is not None]
+    need(len(available) >= 2, "TWO_INDEPENDENT_UNGROUPED_COLUMNS_REQUIRED")
+    pairs = []
+    for i, (a, x) in enumerate(available):
+        for b, y in available[i + 1:]:
+            same_height = abs(x["zMin"] - y["zMin"]) < 0.002 and abs(x["zMax"] - y["zMax"]) < 0.002
+            distance = abs(x["xMin"] - y["xMin"]) + abs(x["yMin"] - y["yMin"])
+            if same_height and 0.2 < distance < 12:
+                pairs.append((round(distance, 5), a, b))
+    need(pairs, "NO_SAFE_SAME_STORY_COLUMN_PAIR")
+    _, left, right = sorted(pairs)[0]
+    return [left, right]
+
+
+def intersects(a, b):
+    return all(a[lo] < b[hi] - 0.001 and a[hi] > b[lo] + 0.001
+               for lo, hi in (("xMin", "xMax"), ("yMin", "yMax"), ("zMin", "zMax")))
+
+
+def shift(box, dx=0.0, dy=0.0, dz=0.0):
+    return {k: round(box[k] + {"x": dx, "y": dy, "z": dz}[k[0]], 6) for k in COORDS}
+
+
+def signatures(bbox_list):
+    return Counter(tuple(round(b[k], 4) for k in COORDS) for b in bbox_list)
+
+
+def offsets_for_pair(chosen_boxes, existing):
+    # Prefer two destinations, each containing the whole verified assembly.
+    # Reject any placement intersecting known saved geometry or each other.
+    need(all(b is not None for b in existing), "INCOMPLETE_MODEL_BBOX_COLLISION_PREFLIGHT")
+    for delta in (15.0, 25.0, 40.0, 70.0, 110.0, 180.0):
+        translations = [{"dx": delta, "dy": 0.0, "dz": 0.0},
+                        {"dx": 2 * delta, "dy": 0.0, "dz": 0.0}]
+        moved = [shift(b, t["dx"]) for t in translations for b in chosen_boxes]
+        if any(intersects(a, b) for a in moved for b in existing):
+            continue
+        if any(intersects(a, b) for i, a in enumerate(moved) for b in moved[i + 1:]):
+            continue
+        after_move = [shift(b, delta, delta) for b in chosen_boxes]
+        if any(intersects(a, b) for a in after_move for b in existing + moved[2:]):
+            continue
+        return translations, {"dx": 0.0, "dy": delta, "dz": 0.0}
+    raise RuntimeError("NO_COLLISION_FREE_TEST_PLACEMENTS")
+
+
+def exact_bbox(guids, expected):
+    current = boxes(guids)
+    need(all(b is not None for b in current)
+         and signatures(current) == signatures(expected), "BBOX_READBACK_DIFF")
+    return True
+
+
+def run_acceptance(name, folder):
+    need(SOURCE_PATH.is_file() and SOURCE_PATH.suffix.lower() == ".pln",
+         "TEST_PLN_NOT_FOUND")
+    source_hash = digest(SOURCE_PATH)
+    need(request("API.GetProductInfo", {}).get("version") == 29, "NOT_ARCHICAD29")
+    guard(SOURCE_PATH, source_hash)
+    native_commands = ("GetNativeGroupMembersV1", "CreateNativeGroupV1",
+                       "CloneNativeGroupV1", "MoveNativeGroupV1", "UngroupNativeGroupV1")
+    for command in native_commands:
+        check = request("API.IsAddOnCommandAvailable", {
+            "addOnCommandId": {
+                "commandNamespace": "TapirCommand", "commandName": command
+            }
+        })
+        need(check.get("available") is True, "NATIVE_GROUP_COMMAND_MISSING:" + command)
+
+    existing = read_elements()
+    pair = choose_pair(existing)
+    existing_boxes = boxes(existing)
+    chosen_boxes = [existing_boxes[existing.index(g)] for g in pair]
+    need(all(b is not None for b in chosen_boxes), "SOURCE_COLUMNS_MISSING_GEOMETRY")
+    translations, move = offsets_for_pair(chosen_boxes, existing_boxes)
+    scratch = Path(r"C:\LocalAI\APA_Group_Acceptance") / (name + ".pln")
+    need(not scratch.exists(), "SCRATCH_PLN_ALREADY_EXISTS")
+    scratch.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(SOURCE_PATH, scratch)
+    need(digest(scratch) == source_hash, "SCRATCH_COPY_NOT_IDENTICAL")
+    mailbox.save(folder / "preflight.json", {
+        "sourcePath": str(SOURCE_PATH), "sourceSha256": source_hash,
+        "scratchPath": str(scratch), "sourceColumnGuids": pair,
+        "translations": translations, "moveTranslation": move,
+        "baselineGuids": len(existing), "status": "SOURCE_READBACK_AND_SNAPSHOT_PASS"
+    })
+
+    # OpenProject may prompt on unsaved local edits. In that case stop: NEVER
+    # fall through to native mutations on the original/open wrong project.
+    try:
+        response = request("OpenProject", {"projectFilePath": str(scratch)},
+                           addon=True, timeout=90)
+        need(response.get("success") is True, "ARCHICAD_OPEN_SCRATCH_REJECTED")
+    except Exception:
+        # Transport may close while changing PLN; only exact new path is trusted.
+        pass
+    deadline = time.monotonic() + 90
+    while True:
+        try:
+            guard(scratch, source_hash)
+            break
+        except Exception:
+            if time.monotonic() > deadline:
+                raise RuntimeError("OPEN_SCRATCH_DID_NOT_CONFIRM_EXACT_NEW_PROJECT")
+            time.sleep(2)
+    need(set(read_elements()) == set(existing), "COPIED_PROJECT_GUID_SET_DRIFT")
+    exact_bbox(pair, chosen_boxes)
+
+    source_ref = "APA_GROUP_ACCEPTANCE:" + source_hash[:24]
+    def mutating(command, params, stage):
+        guard(scratch, source_hash)
+        mailbox.save(folder / ("before-" + stage + ".json"), {
+            "command": command, "parameters": params,
+            "status": "DURABLE_INTENT_NO_RETRY", "at": datetime.now(timezone.utc).isoformat()
+        })
+        result = request(command, params, addon=True, timeout=90)
+        mailbox.save(folder / ("after-" + stage + ".json"), result)
+        return result
+
+    created = mutating("CreateNativeGroupV1", {
+        "memberIds": [{"guid": g} for g in pair], "sourceRef": source_ref
+    }, "create")
+    source_group = created.get("groupId", {}).get("guid")
+    need(GUID.fullmatch(source_group or "") and created.get("memberCount") == 2,
+         "GROUP_CREATE_MALFORMED_RESPONSE")
+    need(set(elements_of_group(source_group)) == set(pair), "SOURCE_GROUP_READBACK_FAILED")
+    need(set(read_elements()) == set(existing), "GROUP_CREATE_CHANGED_INVENTORY")
+    exact_bbox(pair, chosen_boxes)
+
+    cloned = mutating("CloneNativeGroupV1", {
+        "groupId": {"guid": source_group}, "sourceRef": source_ref,
+        "translations": translations
+    }, "clone")
+    new_groups = [x.get("guid") for x in cloned.get("newGroupIds", [])]
+    new_ids = [v.get("elementId", {}).get("guid") for v in cloned.get("createdElements", [])]
+    need(len(new_groups) == 2 and len(set(new_groups)) == 2
+         and all(GUID.fullmatch(v or "") for v in new_groups)
+         and len(new_ids) == 4 and len(set(new_ids)) == 4
+         and not (set(new_ids) & set(existing)), "NATIVE_GROUP_CLONE_GUIDS_INVALID")
+    need(set(read_elements()) == set(existing) | set(new_ids),
+         "GROUP_CLONE_INVENTORY_DIFF")
+    for group_id, translation in zip(new_groups, translations):
+        member_ids = elements_of_group(group_id)
+        need(len(member_ids) == 2 and set(member_ids) <= set(new_ids),
+             "COPIED_GROUP_MEMBERSHIP_MISMATCH")
+        exact_bbox(member_ids, [shift(b, translation["dx"],
+                                      translation["dy"], translation["dz"]) for b in chosen_boxes])
+    exact_bbox(pair, chosen_boxes)
+
+    moved_group = new_groups[0]
+    moved_ids = elements_of_group(moved_group)
+    moved_boxes = boxes(moved_ids)
+    moved = mutating("MoveNativeGroupV1", {
+        "groupId": {"guid": moved_group}, "sourceRef": source_ref, "translation": move
+    }, "move")
+    need(set(x.get("guid") for x in moved.get("movedMembers", [])) == set(moved_ids),
+         "MOVE_RESULT_MEMBERS_DIFF")
+    need(set(elements_of_group(moved_group)) == set(moved_ids), "MOVE_CHANGED_GROUP_GUIDS")
+    exact_bbox(moved_ids, [shift(b, move["dx"], move["dy"], move["dz"]) for b in moved_boxes])
+    exact_bbox(pair, chosen_boxes)
+
+    released = mutating("UngroupNativeGroupV1", {
+        "groupId": {"guid": moved_group}, "sourceRef": source_ref
+    }, "ungroup")
+    need(set(x.get("guid") for x in released.get("releasedMembers", [])) == set(moved_ids),
+         "UNGROUP_MEMBER_SET_DIFF")
+    roots = group_roots(moved_ids)
+    need(all(null_group(x.get("groupId")) and null_group(x.get("rootGroupId"))
+             for x in roots), "UNGROUP_READBACK_STILL_GROUPED")
+    need(set(read_elements()) == set(existing) | set(new_ids),
+         "FINAL_GUID_INVENTORY_CHANGED")
+    exact_bbox(moved_ids, [shift(b, move["dx"], move["dy"], move["dz"]) for b in moved_boxes])
+    exact_bbox(pair, chosen_boxes)
+
+    # Save only the scratch project. Original test PLN remains byte-identical.
+    guard(scratch, source_hash)
+    saved = request("SaveProject", {}, addon=True, timeout=90)
+    need(saved.get("success") is True, "SCRATCH_SAVE_NOT_CONFIRMED")
+    need(digest(SOURCE_PATH) == source_hash, "ORIGINAL_CHANGED_AFTER_TEST")
+    return {
+        "status": "LIVE_GROUP_FULL_CHAIN_PASS", "port": PORT,
+        "scratchPln": str(scratch), "scratchSaved": True,
+        "sourcePlnUnchanged": True, "sourceSha256": source_hash,
+        "sourceGroupId": source_group, "newGroupIds": new_groups,
+        "sourceMembers": pair, "createdElementGuids": new_ids,
+        "operations": ["CreateNativeGroupV1", "CloneNativeGroupV1",
+                       "MoveNativeGroupV1", "UngroupNativeGroupV1"],
+        "readback": "EXACT_GUID_AND_3D_BOUNDING_BOX_MATCH",
+        "modelWrites": "ONLY_IN_SEPARATE_TEST_PLN", "bddUntouched": True
+    }
+
+
+def validate_job(job, name, approved_sha):
+    need(isinstance(job, dict) and set(job) ==
+         {"schema", "jobId", "action", "repo", "commit", "port",
+          "projectPath", "createdAt", "expiresAt"}, "UNEXPECTED_JOB_FIELDS")
+    need(job["schema"] == SCHEMA and job["jobId"] == name
+         and JOB_ID.fullmatch(name), "BAD_JOB_SCHEMA")
+    need(job["action"] == "RUN_GROUP_ACCEPTANCE_ONLY"
+         and job["repo"] == SOURCE_REPO
+         and job["port"] == PORT
+         and canonical_path(job["projectPath"]) == canonical_path(SOURCE_PATH)
+         and job["commit"] == approved_sha and HEX.fullmatch(approved_sha),
+         "JOB_NOT_EXACT_LOCALLY_APPROVED_SCOPE")
+    created, expires = mailbox.utc(job["createdAt"]), mailbox.utc(job["expiresAt"])
+    now = datetime.now(timezone.utc)
+    need(created <= now < expires <= created + timedelta(days=2),
+         "JOB_TIMESTAMP_OUT_OF_RANGE")
+
+
+def publish(name, folder):
+    marker = folder / "published.json"
+    if marker.is_file():
+        return
+    data = (folder / "result.json").read_bytes()
+    remote_path = f"{OUTBOX}/{name}.json"
+    # Refuse overwrite; a published result is immutable.
+    try:
+        old, _ = mailbox.read_file(remote_path)
+    except Exception as error:
+        if "404" not in str(error) and "Not Found" not in str(error):
+            raise
+    else:
+        need(old == json.loads(data), "REMOTE_RESULT_COLLISION")
+        mailbox.save(marker, {"status": "IDENTICAL_REMOTE_RESULT_ALREADY_EXISTS"})
+        return
+    answer = mailbox.gh(f"repos/{BRIDGE}/contents/{remote_path}", put={
+        "message": "APA AC29 live group acceptance receipt " + name,
+        "branch": MAILBOX_BRANCH,
+        "content": __import__("base64").b64encode(data).decode("ascii")
+    })
+    need(answer.get("content", {}).get("sha") == mailbox.git_blob(data),
+         "RESULT_PUBLICATION_VERIFY_FAILED")
+    mailbox.save(marker, {"status": "PUBLISHED"})
+
+
+def run_job(name, state, approved_sha):
+    folder = state / name
+    if (folder / "result.json").exists():
+        publish(name, folder)
+        return "EXISTING_RESULT"
+    if folder.exists():
+        return "PREVIOUS_ATTEMPT_MANUAL_RECONCILIATION_REQUIRED"
+    payload, blob_sha = mailbox.read_file(f"{INBOX}/{name}.json")
+    validate_job(payload, name, approved_sha)
+    folder.mkdir(parents=True, exist_ok=False)
+    mailbox.save(folder / "attempted.json", {
+        "jobId": name, "commit": approved_sha, "sourceBlob": blob_sha,
+        "automaticRetry": False, "at": datetime.now(timezone.utc).isoformat()
+    })
+    try:
+        result = run_acceptance(name, folder)
+    except Exception as error:
+        result = {
+            "status": "STOPPED_REQUIRES_MANUAL_RECONCILIATION_NO_AUTORETRY",
+            "error": type(error).__name__ + ": " + str(error)[-1200:],
+            "scratchMayContainUnsavedChanges": (folder / "before-create.json").exists(),
+            "originalSourcePlnSaveNotRequested": True,
+            "modelWritesToBDD": False
+        }
+    mailbox.save(folder / "result.json", {
+        "schema": "APA_AC29_GROUP_ACCEPTANCE_RESULT_V1",
+        "jobId": name, "sourceBlob": blob_sha, "approvedRevision": approved_sha,
+        "automaticRetry": False, "result": result
+    })
+    publish(name, folder)
+    return result["status"]
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--source-repo", type=Path,
+                        default=Path(r"C:\LocalAI\APA_AC29_Build_Source"))
+    parser.add_argument("--approved-sha", required=True)
+    parser.add_argument("--state", type=Path,
+                        default=Path(r"C:\LocalAI\APA_AC29_Group_Acceptance_State"))
+    parser.add_argument("--loop", action="store_true")
+    parser.add_argument("--interval", type=int, default=30)
+    parser.add_argument("--healthcheck", action="store_true")
+    args = parser.parse_args()
+    need(HEX.fullmatch(args.approved_sha or ""), "APPROVED_SHA_REQUIRED")
+    need(10 <= args.interval <= 3600, "BAD_POLL_INTERVAL")
+    mailbox.approve_repository(args.source_repo)
+    observed = subprocess.run(
+        ["git", "-C", str(args.source_repo), "rev-parse", "HEAD"],
+        check=True, capture_output=True, text=True
+    ).stdout.strip()
+    need(observed == args.approved_sha, "LOCAL_EXECUTOR_COMMIT_NOT_PINNED")
+    mailbox.call(["gh", "auth", "status"])
+    if args.healthcheck:
+        need(SOURCE_PATH.is_file(), "LOCAL_TEST_PLN_NOT_FOUND")
+        need(request("API.GetProductInfo", {}).get("version") == 29,
+             "ARCHICAD29_NOT_AVAILABLE_ON_APPROVED_PORT")
+        info = project()
+        need(canonical_path(info.get("projectPath", "")) == canonical_path(SOURCE_PATH),
+             "WRONG_OPEN_PROJECT_FOR_TEST")
+        print("APA_GROUP_MAILBOX_HEALTHCHECK_PASS_NO_NATIVE_MODEL_WRITES", flush=True)
+        return
+    args.state.mkdir(parents=True, exist_ok=True)
+    lock = (args.state / ".single-instance.lock").open("a+b")
+    lock.seek(0)
+    lock.write(b"\0")
+    lock.flush()
+    lock.seek(0)
+    msvcrt.locking(lock.fileno(), msvcrt.LK_NBLCK, 1)
+    try:
+        while True:
+            items = mailbox.gh(
+                f"repos/{BRIDGE}/contents/{INBOX}?ref={MAILBOX_BRANCH}"
+            )
+            need(isinstance(items, list) and len(items) <= 100,
+                 "GROUP_MAILBOX_NOT_BOUNDED")
+            ids = sorted(v["name"][:-5] for v in items if v.get("type") == "file"
+                         and v["name"].endswith(".json")
+                         and JOB_ID.fullmatch(v["name"][:-5]))
+            for name in ids:
+                try:
+                    print(name, run_job(name, args.state, args.approved_sha), flush=True)
+                except Exception as error:
+                    print(name, "DENIED", type(error).__name__, str(error)[-500:], flush=True)
+            if not args.loop:
+                break
+            time.sleep(args.interval)
+    finally:
+        lock.close()
+
+
+if __name__ == "__main__":
+    main()
