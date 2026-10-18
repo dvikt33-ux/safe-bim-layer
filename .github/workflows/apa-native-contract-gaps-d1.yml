@@ -1,0 +1,21 @@
+name: APA AC29 native contract preparation D1
+on:
+  pull_request:
+    paths:
+      - scripts/apa_ac29_native_contract_gap_report_d1.py
+      - tests/test_apa_ac29_native_contract_gap_report_d1.py
+      - .github/workflows/apa-native-contract-gaps-d1.yml
+permissions:
+  contents: read
+jobs:
+  source-contracts:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        python: ['3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m unittest discover -s tests -p "test_apa_ac29_native_contract_gap_report_d1.py" -v

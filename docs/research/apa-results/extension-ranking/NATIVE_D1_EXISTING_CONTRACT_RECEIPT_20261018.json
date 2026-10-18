@@ -1,0 +1,488 @@
+{
+  "schema": "APA_AC29_NATIVE_CONTRACT_GAPS_D1",
+  "areas": {
+    "groups": {
+      "existingContractCount": 6,
+      "contracts": [
+        {
+          "command": "CreateGroups",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "elementGroups"
+          ],
+          "inputProperties": [
+            "elementGroups"
+          ],
+          "contractSHA256": "a219a5052535a2ec908b1195204cd4c1c74fead44492627eb43b25faf12f4478"
+        },
+        {
+          "command": "GetGroupsOfElements",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "elements"
+          ],
+          "inputProperties": [
+            "elements"
+          ],
+          "contractSHA256": "0bd733e0715c533db6b44c706f4c4141006a5da2966a3b53968b7a0f0119c629"
+        },
+        {
+          "command": "GetElementsOfGroups",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "groups"
+          ],
+          "inputProperties": [
+            "groups"
+          ],
+          "contractSHA256": "b65813c195d58574b985f464682f1b650c7ee5789e0c43321aa33ad0425118ee"
+        },
+        {
+          "command": "GetSuspendGroupsMode",
+          "source": "existingTapirCatalog",
+          "inputRequired": [],
+          "inputProperties": [],
+          "contractSHA256": "c4dbdef78e2f0545eedface034f25cc39189c3d4d2dfbb2f1e813b512d56bd14"
+        },
+        {
+          "command": "SetSuspendGroupsMode",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "suspendGroups"
+          ],
+          "inputProperties": [
+            "suspendGroups"
+          ],
+          "contractSHA256": "b130cde2879038c68f3f1396413a9868d75e4e6b01f8a05c9c5b39c59eaf372c"
+        },
+        {
+          "command": "AddOn.TapirCommand.GetNativeGroupRootsV1",
+          "source": "existingSdkManifest",
+          "inputRequired": [
+            "elements"
+          ],
+          "inputProperties": [
+            "elements"
+          ],
+          "contractSHA256": "27cf135d2065d656fd365cdeb56b55adf343f869c49548400889a0b3cbd50194"
+        }
+      ],
+      "liveRegistration": "NOT_PROBED",
+      "nativeAcceptance": "NOT_RUN",
+      "gap": "REUSE_EXISTING_CONTRACTS_VERIFY_NATIVE_GATE"
+    },
+    "hotlinks": {
+      "existingContractCount": 4,
+      "contracts": [
+        {
+          "command": "GetHotlinks",
+          "source": "existingTapirCatalog",
+          "inputRequired": [],
+          "inputProperties": [],
+          "contractSHA256": "3637f9b76d11f6640d68f9726fd7c8f914d2894ee8275edac06ad0d3cc716885"
+        },
+        {
+          "command": "CreateHotlinkNodes",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "hotlinkNodes"
+          ],
+          "inputProperties": [
+            "hotlinkNodes"
+          ],
+          "contractSHA256": "bd7420b7a8c9fce994b2983f06c640a9cf2c3f1da024021999b0e6f64fc8e0b3"
+        },
+        {
+          "command": "CreateHotlinkInstances",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "hotlinkInstances"
+          ],
+          "inputProperties": [
+            "hotlinkInstances"
+          ],
+          "contractSHA256": "ff8353e0b59bb12a2b929dd3d55ca83c47cca38f46086a407103be55fc064182"
+        },
+        {
+          "command": "ChangeHotlinkInstances",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "hotlinkInstances"
+          ],
+          "inputProperties": [
+            "hotlinkInstances"
+          ],
+          "contractSHA256": "1a5e4e6684fb51d2d1ae7127ba0a26e40ffca46d1229e770d551a201cec9c082"
+        }
+      ],
+      "liveRegistration": "NOT_PROBED",
+      "nativeAcceptance": "NOT_RUN",
+      "gap": "REUSE_EXISTING_CONTRACTS_VERIFY_NATIVE_GATE"
+    },
+    "publisher": {
+      "existingContractCount": 1,
+      "contracts": [
+        {
+          "command": "PublishPublisherSet",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "publisherSetName"
+          ],
+          "inputProperties": [
+            "outputPath",
+            "publisherSetName",
+            "selectedNavigatorItemIds"
+          ],
+          "contractSHA256": "6837f4e0dd58b865d133350d2b78ef37990142fca3c2b47818f848583a97a0cd"
+        }
+      ],
+      "liveRegistration": "NOT_PROBED",
+      "nativeAcceptance": "NOT_RUN",
+      "gap": "REUSE_EXISTING_CONTRACTS_VERIFY_NATIVE_GATE"
+    },
+    "grid_axes": {
+      "existingContractCount": 0,
+      "contracts": [],
+      "liveRegistration": "NOT_PROBED",
+      "nativeAcceptance": "NOT_RUN",
+      "gap": "NO_MATCHING_CONTRACT"
+    },
+    "properties": {
+      "existingContractCount": 14,
+      "contracts": [
+        {
+          "command": "GetAllProperties",
+          "source": "existingTapirCatalog",
+          "inputRequired": [],
+          "inputProperties": [],
+          "contractSHA256": "16dd4c0c3988a1930d5d642b85717afabbff986d50f48a6f228e78e6e17c0342"
+        },
+        {
+          "command": "GetPropertyValuesOfElements",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "elements",
+            "properties"
+          ],
+          "inputProperties": [
+            "elements",
+            "properties"
+          ],
+          "contractSHA256": "7f04a87f49658f135ff3c2679f2d0060dda65dac89c0c700dcfdec2e213e5726"
+        },
+        {
+          "command": "SetPropertyValuesOfElements",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "elementPropertyValues"
+          ],
+          "inputProperties": [
+            "elementPropertyValues"
+          ],
+          "contractSHA256": "5f9c1fe85da5ecfade20c840824fdb4ca34224c766764671d63c9cd8294fdb1f"
+        },
+        {
+          "command": "GetPropertyValuesOfAttributes",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "attributeIds",
+            "properties"
+          ],
+          "inputProperties": [
+            "attributeIds",
+            "properties"
+          ],
+          "contractSHA256": "d848fc77b6399bf55cda98fec5d6ab9984b9ea3ab5f6ef1217419a057dea41e3"
+        },
+        {
+          "command": "SetPropertyValuesOfAttributes",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "attributePropertyValues"
+          ],
+          "inputProperties": [
+            "attributePropertyValues"
+          ],
+          "contractSHA256": "55d0017379423aa1c6ae2430951fc0ac8cbc7db305a597b45d1090e22ed8eb77"
+        },
+        {
+          "command": "CreatePropertyGroups",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "propertyGroups"
+          ],
+          "inputProperties": [
+            "propertyGroups"
+          ],
+          "contractSHA256": "51a3d4343b5abe73386cd886cfd8051d6618dc2ce87735a6a970fb04b014cf59"
+        },
+        {
+          "command": "DeletePropertyGroups",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "propertyGroupIds"
+          ],
+          "inputProperties": [
+            "propertyGroupIds"
+          ],
+          "contractSHA256": "64c2ad5ebcd503d89314b1aa95e12fa28eccf152ab5c1371e0d76d454c7630a4"
+        },
+        {
+          "command": "CreatePropertyDefinitions",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "propertyDefinitions"
+          ],
+          "inputProperties": [
+            "propertyDefinitions"
+          ],
+          "contractSHA256": "8f80d11463db666ad9b4f53e6387155878fe517768b1e6e06f08008ee2016908"
+        },
+        {
+          "command": "DeletePropertyDefinitions",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "propertyIds"
+          ],
+          "inputProperties": [
+            "propertyIds"
+          ],
+          "contractSHA256": "d8dd5f7af620583e1830fa91334ad618d2497d0b44a2b60ae15f96c41eb9aabf"
+        },
+        {
+          "command": "UpdatePropertyDefinitions",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "propertyDefinitions"
+          ],
+          "inputProperties": [
+            "propertyDefinitions"
+          ],
+          "contractSHA256": "ff9903a9dd302a05c1c47385bbdeb4e74458f40fa95c4cc84a5c64fcd60bf25c"
+        },
+        {
+          "command": "UpdatePropertyGroups",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "propertyGroups"
+          ],
+          "inputProperties": [
+            "propertyGroups"
+          ],
+          "contractSHA256": "fa023ed75ceae9a2790f2df39ac097a3673f0a9ad9c78675b2a718d228c253d5"
+        },
+        {
+          "command": "ImportPropertiesXml",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "xml",
+            "conflictPolicy"
+          ],
+          "inputProperties": [
+            "conflictPolicy",
+            "xml"
+          ],
+          "contractSHA256": "423388f80b4121d2a0007ec5285ce83661900f277aa764c849ca19a220979d0f"
+        },
+        {
+          "command": "GetBuildingMaterialPhysicalProperties",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "attributeIds"
+          ],
+          "inputProperties": [
+            "attributeIds"
+          ],
+          "contractSHA256": "922e128851cf8132bb07b1e19b9e4748d1c4dbddb07cfa9aebec4664cd0c9223"
+        },
+        {
+          "command": "GetIFCPropertiesOfElements",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "elements"
+          ],
+          "inputProperties": [
+            "elements"
+          ],
+          "contractSHA256": "cafa7a50cafd99bd3b01aac9588268a976da397e94cd4510b61b1d32d2cf2671"
+        }
+      ],
+      "liveRegistration": "NOT_PROBED",
+      "nativeAcceptance": "NOT_RUN",
+      "gap": "REUSE_EXISTING_CONTRACTS_VERIFY_NATIVE_GATE"
+    },
+    "attributes": {
+      "existingContractCount": 12,
+      "contracts": [
+        {
+          "command": "GetPropertyValuesOfAttributes",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "attributeIds",
+            "properties"
+          ],
+          "inputProperties": [
+            "attributeIds",
+            "properties"
+          ],
+          "contractSHA256": "d848fc77b6399bf55cda98fec5d6ab9984b9ea3ab5f6ef1217419a057dea41e3"
+        },
+        {
+          "command": "SetPropertyValuesOfAttributes",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "attributePropertyValues"
+          ],
+          "inputProperties": [
+            "attributePropertyValues"
+          ],
+          "contractSHA256": "55d0017379423aa1c6ae2430951fc0ac8cbc7db305a597b45d1090e22ed8eb77"
+        },
+        {
+          "command": "GetAttributesByType",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "attributeType"
+          ],
+          "inputProperties": [
+            "attributeType"
+          ],
+          "contractSHA256": "f8134a759ccc460cf8d6962e5469983e7d4eb41de012103493c1fb512c1fb3fd"
+        },
+        {
+          "command": "DeleteAttributes",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "attributesToDelete"
+          ],
+          "inputProperties": [
+            "attributesToDelete"
+          ],
+          "contractSHA256": "e0aef41bfd190e5746fe539db9fdf6eed99a0f34afae494fe00c89a9fe77a0d0"
+        },
+        {
+          "command": "CreateLayers",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "layerDataArray"
+          ],
+          "inputProperties": [
+            "layerDataArray",
+            "overwriteExisting"
+          ],
+          "contractSHA256": "732c8df3fab88eef4f7cc29284bd27a14cd423a979f69b725db246fc65e8c5d7"
+        },
+        {
+          "command": "CreateLayerCombinations",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "layerCombinationDataArray"
+          ],
+          "inputProperties": [
+            "layerCombinationDataArray",
+            "overwriteExisting"
+          ],
+          "contractSHA256": "b9f23c25cb3d9dbadd4e8a9d28cc73e965811b3521be7d65f2222c7cff1079ca"
+        },
+        {
+          "command": "CreateBuildingMaterials",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "buildingMaterialDataArray"
+          ],
+          "inputProperties": [
+            "buildingMaterialDataArray",
+            "overwriteExisting"
+          ],
+          "contractSHA256": "dacfd67f3479f928d4dbec82ac774ca0d0a4d7bd4a4af43606bfd687b6257bdb"
+        },
+        {
+          "command": "GetBuildingMaterialPhysicalProperties",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "attributeIds"
+          ],
+          "inputProperties": [
+            "attributeIds"
+          ],
+          "contractSHA256": "922e128851cf8132bb07b1e19b9e4748d1c4dbddb07cfa9aebec4664cd0c9223"
+        },
+        {
+          "command": "GetLayerCombinations",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "attributes"
+          ],
+          "inputProperties": [
+            "attributes"
+          ],
+          "contractSHA256": "bed45e0613b2409fe78b043661976a727c4c18c318098154c6cf2eb5b51db5ee"
+        },
+        {
+          "command": "GetLayers",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "attributeIds"
+          ],
+          "inputProperties": [
+            "attributeIds",
+            "fields"
+          ],
+          "contractSHA256": "2ea69307ad723a840dcfabbb01cb425626c28172b5292e8335eaba8a91fafb02"
+        },
+        {
+          "command": "GetBuildingMaterials",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "attributeIds"
+          ],
+          "inputProperties": [
+            "attributeIds",
+            "fields"
+          ],
+          "contractSHA256": "63886662122a3ab2e53967f0dc9855751d89be8826bb0619caf42a1ca6af41e3"
+        },
+        {
+          "command": "SafeBIMAttributeCatalog",
+          "source": "existingTapirCatalog",
+          "inputRequired": [
+            "action",
+            "expectedProjectPath"
+          ],
+          "inputProperties": [
+            "action",
+            "compositeGuid",
+            "definition",
+            "elementType",
+            "expectedProjectPath",
+            "floor",
+            "guid",
+            "kind",
+            "name",
+            "token",
+            "x",
+            "y"
+          ],
+          "contractSHA256": "82cd72ec3d127fe1ffdca4253339cd637c368d10b1aace2b8a9fe01e39bd86ee"
+        }
+      ],
+      "liveRegistration": "NOT_PROBED",
+      "nativeAcceptance": "NOT_RUN",
+      "gap": "REUSE_EXISTING_CONTRACTS_VERIFY_NATIVE_GATE"
+    }
+  },
+  "tapirSchemaSHA256": "b355d2b1311b16d64a62e63c70c6eb5a01b7283a6675cfa2940ef5f247c1fa46",
+  "sdkManifestSHA256": "c9d647c23813b623832accfd1329189d473179e3265d3e2466e02385353eba3a",
+  "provenance": "INSTALLED_RECEIPT_HASH_MATCH_NOT_FRESH_RUNTIME",
+  "snapshotVersionLabel": "1.5.10_NOT_REACQUIRED",
+  "newCallableNativeCommands": 0,
+  "catalogMutations": 0,
+  "nativeCalls": 0,
+  "plnWrites": 0,
+  "route": [
+    "DynamicCommands",
+    "BIM Graph",
+    "SceneWriter",
+    "existing native bridge"
+  ]
+}
