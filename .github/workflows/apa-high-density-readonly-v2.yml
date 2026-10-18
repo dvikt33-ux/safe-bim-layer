@@ -1,17 +1,6 @@
 name: APA AC29 High Density Read Only V2 - Source Gates
 
 on:
-  push:
-    branches:
-      - feature/apa-ac29-high-density-readonly-v2-20261018
-    paths:
-      - scripts/apa_high_density_readonly_v2.py
-      - scripts/apa_high_density_entrypoint_v2.py
-      - scripts/apa_high_density_session_factory_v2.py
-      - scripts/install_apa_high_density_readonly_v2.py
-      - tests/test_apa_high_density_readonly_v2.py
-      - tests/test_apa_high_density_v2_install_factory.py
-      - .github/workflows/apa-high-density-readonly-v2.yml
   pull_request:
     paths:
       - scripts/apa_high_density_readonly_v2.py
