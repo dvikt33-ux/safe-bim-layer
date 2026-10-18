@@ -37,7 +37,7 @@ import apa_ac29_hotlink_oneshot as HOTLINK
 
 SCHEMA = "APA_AC29_HOTLINK_BATCH_V1"
 AUTH = "USER_APPROVED_AC29_HOTLINK_BATCH_DISPOSABLE_20261018"
-SOURCE_REF = "https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/apa-ac29-hotlink-coordinate-batch-20261018"
+SOURCE_REF = "https://github.com/dvikt33-ux/safe-bim-layer/pull/173"
 SCHEMA_PATH = HOTLINK.SCHEMA_PATH
 CREATE_SCENE = "HotlinkBatchCreate20261018V1"
 SAVE_SCENE = "HotlinkBatchSave20261018V1"
