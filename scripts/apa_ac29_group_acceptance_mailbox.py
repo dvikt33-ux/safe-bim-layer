@@ -164,6 +164,58 @@ def elements_of_group(group_id):
     return elements
 
 
+def native_owned_children(parent_ids, preexisting_ids):
+    """Read complete typed child inventory for explicitly copied native parents.
+
+    A Column/Beam created by ACAPI_Element_Edit can own newly created
+    ColumnSegment/BeamSegment GUIDs that GetAllElements reports independently.
+    Never accept the extra GUIDs by arithmetic alone; obtain each parent-child
+    relation from the existing native hierarchical subelement API.
+    """
+    need(len(parent_ids) == len(set(g.lower() for g in parent_ids)),
+         "DUPLICATE_COPIED_PARENT_IDS")
+    need(all(GUID.fullmatch(x or "") for x in parent_ids),
+         "INVALID_COPIED_PARENT_ID")
+    details = batched("GetDetailsOfElements", parent_ids, "detailsOfElements")
+    response = batched(
+        "GetSubelementsOfHierarchicalElements", parent_ids, "subelements"
+    )
+    seen = set()
+    by_parent = {}
+    pairs = []
+    for parent, detail, row in zip(parent_ids, details, response):
+        kind = detail.get("type") if isinstance(detail, dict) else None
+        slot, child_type = {
+            "Column": ("columnSegments", "ColumnSegment"),
+            "Beam": ("beamSegments", "BeamSegment"),
+        }.get(kind, (None, None))
+        need(slot is not None and isinstance(row, dict),
+             "COPIED_PARENT_NOT_SUPPORTED_STRUCTURAL_TYPE:" + str(kind))
+        children = row.get(slot)
+        need(isinstance(children, list) and len(children) > 0
+             and set(row.keys()) == {slot},
+             "COPIED_PARENT_NATIVE_SEGMENT_HIERARCHY_UNVERIFIED:" + parent)
+        ids = []
+        for child in children:
+            value = child.get("elementId", {}).get("guid") if isinstance(child, dict) else None
+            need(isinstance(value, str) and GUID.fullmatch(value),
+                 "COPIED_CHILD_GUID_INVALID:" + parent)
+            value = value.lower()
+            need(value not in seen and value not in preexisting_ids
+                 and value not in {x.lower() for x in parent_ids},
+                 "COPIED_CHILD_ID_COLLIDES_WITH_OTHER_ELEMENT:" + value)
+            seen.add(value)
+            ids.append(value)
+            pairs.append((value, child_type))
+        by_parent[parent.lower()] = ids
+    types = batched("GetDetailsOfElements",
+                    [value for value, _ in pairs], "detailsOfElements")
+    for (value, expected), row in zip(pairs, types):
+        need(isinstance(row, dict) and row.get("type") == expected,
+             "COPIED_CHILD_NATIVE_TYPE_MISMATCH:" + value)
+    return by_parent, seen
+
+
 def choose_pair(guids):
     details = batched("GetDetailsOfElements", guids, "detailsOfElements")
     columns = [guid for guid, row in zip(guids, details)
@@ -455,7 +507,12 @@ def run_acceptance(name, folder):
          and all(GUID.fullmatch(v or "") for v in new_groups)
          and len(new_ids) == 4 and len(set(new_ids)) == 4
          and not (set(new_ids) & set(existing)), "NATIVE_GROUP_CLONE_GUIDS_INVALID")
-    need(set(read_elements()) == set(existing) | set(new_ids),
+    existing_set = {x.lower() for x in existing}
+    copied_parents = {x.lower() for x in new_ids}
+    cloned_hierarchy, cloned_child_ids = native_owned_children(
+        new_ids, existing_set)
+    expected_after_clone = existing_set | copied_parents | cloned_child_ids
+    need({x.lower() for x in read_elements()} == expected_after_clone,
          "GROUP_CLONE_INVENTORY_DIFF")
     for group_id, translation in zip(new_groups, translations):
         member_ids = elements_of_group(group_id)
@@ -485,7 +542,12 @@ def run_acceptance(name, folder):
     roots = group_roots(moved_ids)
     need(all(null_group(x.get("groupId")) and null_group(x.get("rootGroupId"))
              for x in roots), "UNGROUP_READBACK_STILL_GROUPED")
-    need(set(read_elements()) == set(existing) | set(new_ids),
+    current_hierarchy, current_children = native_owned_children(
+        new_ids, existing_set)
+    need(current_hierarchy == cloned_hierarchy and
+         current_children == cloned_child_ids,
+         "NATIVE_CHILD_HIERARCHY_CHANGED_DURING_MOVE_OR_UNGROUP")
+    need({x.lower() for x in read_elements()} == expected_after_clone,
          "FINAL_GUID_INVENTORY_CHANGED")
     exact_bbox(moved_ids, [shift(b, move["dx"], move["dy"], move["dz"]) for b in moved_boxes])
     exact_bbox(pair, chosen_boxes)
@@ -501,6 +563,8 @@ def run_acceptance(name, folder):
         "sourcePlnUnchanged": True, "sourceSha256": source_hash,
         "sourceGroupId": source_group, "newGroupIds": new_groups,
         "sourceMembers": pair, "createdElementGuids": new_ids,
+        "createdNativeChildGuids": sorted(cloned_child_ids),
+        "createdNativeChildrenByParent": cloned_hierarchy,
         "operations": ["CreateNativeGroupV1", "CloneNativeGroupV1",
                        "MoveNativeGroupV1", "UngroupNativeGroupV1"],
         "readback": "EXACT_GUID_AND_3D_BOUNDING_BOX_MATCH",
