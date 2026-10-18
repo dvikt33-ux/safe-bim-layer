@@ -6,6 +6,7 @@ not claim native LIVE acceptance or any benchmark.
 from __future__ import annotations
 
 from pathlib import Path
+import json
 import sys
 import tempfile
 from types import SimpleNamespace as N
@@ -216,6 +217,62 @@ class FeaturePackTests(unittest.TestCase):
                                             "EVIDENCE_INCOMPLETE"):
                     E.route_once("IFCGlobalIdAudit", str(src),
                                  str(Path(td) / "new.json"))
+
+
+    def test_router_rejects_forged_source_sha_despite_success_json(self):
+        router = FakeRouter()
+        with tempfile.TemporaryDirectory() as td:
+            source = Path(td) / "model.ifc"
+            source.write_text("source")
+            destination = Path(td) / "evidence.json"
+            forged = {"schema": "APA_HIGH_DENSITY_READONLY_V2",
+                      "action": "ifc-globalids", "modelWrites": 0,
+                      "nativeCalls": 0,
+                      "adapterSha256": P.digest(P.__file__),
+                      "sources": [{"name": "model.ifc",
+                                   "sha256": "0" * 64}]}
+            def fake_read(*args, **kwargs):
+                destination.write_text(json.dumps(forged))
+                return forged
+            with (mock.patch.object(E.V1, "verified_session",
+                                    return_value=(N(native_command_router=
+                                                    lambda *args, **kwargs: router),
+                                                  "schema")),
+                  mock.patch.object(E.Pack, "verified_python",
+                                    return_value=Path("C:/py.exe")),
+                  mock.patch.object(router, "read", side_effect=fake_read)):
+                with self.assertRaisesRegex(ValueError,
+                                            "V2_ROUTER_EVIDENCE_SHA_OR_READBACK_MISMATCH"):
+                    E.route_once("IFCGlobalIdAudit", str(source), str(destination))
+
+    def test_router_accepts_exact_source_adapter_and_json_disk_readback(self):
+        router = FakeRouter()
+        with tempfile.TemporaryDirectory() as td:
+            source = Path(td) / "model.ifc"
+            source.write_text("source")
+            destination = Path(td) / "evidence.json"
+            expected = {"schema": "APA_HIGH_DENSITY_READONLY_V2",
+                        "action": "ifc-globalids", "modelWrites": 0,
+                        "nativeCalls": 0,
+                        "adapterSha256": P.digest(P.__file__),
+                        "sources": [{"name": "model.ifc",
+                                     "sha256": P.digest(source)}]}
+            def fake_read(*args, **kwargs):
+                destination.write_text(json.dumps(expected))
+                return expected
+            with (mock.patch.object(E.V1, "verified_session",
+                                    return_value=(N(native_command_router=
+                                                    lambda *args, **kwargs: router),
+                                                  "schema")),
+                  mock.patch.object(E.Pack, "verified_python",
+                                    return_value=Path("C:/py.exe")),
+                  mock.patch.object(router, "read", side_effect=fake_read)):
+                result = E.route_once(
+                    "IFCGlobalIdAudit", str(source), str(destination))
+            self.assertEqual(result["status"],
+                             "READ_ONLY_REPORT_CREATED_NOT_BIM_ACCEPTED")
+            self.assertEqual(result["evidenceSha256"], P.digest(destination))
+            self.assertEqual(result["newReadOnlyCommandsRegistered"], 12)
 
 
 if __name__ == "__main__":
