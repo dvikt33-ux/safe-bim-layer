@@ -78,10 +78,15 @@ def brep(kind,verts,owner=None):
 class RegistryCoverage(unittest.TestCase):
     def test_existing_registry_retained_and_three_new_commands(self):
         available=REG.installed_verifiers()
-        self.assertEqual({(row.command,row.effect) for row in available.values()},
-                         {("CreateColumns","CREATE"),("MoveElements","MODIFY"),
-                          ("CreateBeams","CREATE"),("CreateWalls","CREATE"),
-                          ("CreateRoofs","CREATE"),("ModifySlabs","MODIFY")})
+        existing={("CreateColumns","CREATE"),("MoveElements","MODIFY"),
+                  ("CreateBeams","CREATE"),("CreateWalls","CREATE"),
+                  ("CreateRoofs","CREATE"),("ModifySlabs","MODIFY")}
+        actual={(row.command,row.effect) for row in available.values()}
+        self.assertTrue(existing <= actual, "Previously verified native handlers must remain installed")
+        self.assertEqual(actual-existing,
+                         {("AddOn.TapirCommand.CloneNativeGroupV1","CREATE")},
+                         "Only the newly reviewed group-clone verifier may extend the registry")
+        self.assertIn("VerifiedNativeGroupClone", available)
 
     def test_strict_basic_source_all_three_families(self):
         for command,params in [
