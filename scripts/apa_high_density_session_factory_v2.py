@@ -17,6 +17,7 @@ V1_FACTORY = (STABLE / "external-tools" / "apa-readonly-v1" /
 V1_RECEIPT = V1_FACTORY.with_name("session-factory-install.json")
 V2_DIR = STABLE / "external-tools" / "apa-readonly-v2"
 V2_SOURCE = V2_DIR / "apa_high_density_readonly_v2.py"
+V2_FACTORY = V2_DIR / "apa_high_density_session_factory_v2.py"
 V2_RECEIPT = V2_DIR / "installation-v2.json"
 V1_PREFIX = "AddOn.APAExternalReadOnly."
 V2_PREFIX = "AddOn.APAHighDensityReadOnlyV2."
@@ -43,7 +44,7 @@ def load(path, name):
 def verified_modules():
     """Fail closed on both sidecar manifests without modifying either one."""
     require(all(p.is_file() for p in
-                (V1_FACTORY, V1_RECEIPT, V2_SOURCE, V2_RECEIPT)),
+                (V1_FACTORY, V1_RECEIPT, V2_SOURCE, V2_FACTORY, V2_RECEIPT)),
             "V1_OR_V2_INSTALL_RECEIPT_MISSING")
     v1 = json.loads(V1_RECEIPT.read_text(encoding="utf-8"))
     v2 = json.loads(V2_RECEIPT.read_text(encoding="utf-8"))
@@ -52,6 +53,7 @@ def verified_modules():
             "V1_FACTORY_MANIFEST_OR_HASH_DRIFT")
     require(v2.get("schema") == "APA_AC29_HIGH_DENSITY_READONLY_INSTALL_V2"
             and v2.get("v2SourceSHA256") == sha256(V2_SOURCE)
+            and v2.get("v2FactorySHA256") == sha256(V2_FACTORY)
             and v2.get("v1FactorySHA256") == sha256(V1_FACTORY),
             "V2_INSTALL_MANIFEST_OR_HASH_DRIFT")
     return load(V1_FACTORY, "apa_source_verified_v1_factory"), load(
