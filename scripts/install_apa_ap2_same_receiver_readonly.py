@@ -162,6 +162,45 @@ def stop_receiver_tree(installer, before):
         time.sleep(.25)
     raise RuntimeError("OLD_RECEIVER_TREE_STILL_RUNNING")
 
+def verified_launched_receiver(installer, launcher_pid, expected_hash, marker):
+    """A venv python.exe may launch the actual worker as a child Python PID.
+
+    Confirm the fresh marker belongs to exactly one observed receiver tree
+    descended from our Popen PID. Do not compare marker PID to Popen PID.
+    """
+    rows = worker_processes(installer)
+    require(bool(rows), "RECEIVER_LAUNCH_NO_PROCESS")
+    by_pid = {r["ProcessId"]: r for r in rows}
+    roots = [r for r in rows if r["ParentProcessId"] not in by_pid]
+    require(len(roots) == 1 and (
+        roots[0]["ProcessId"] == launcher_pid or
+        roots[0]["ParentProcessId"] == launcher_pid),
+        "RECEIVER_STARTED_TREE_IS_NOT_OUR_LAUNCH")
+    require(marker.is_file(), "RECEIVER_STARTED_MARKER_ABSENT")
+    receipt = json.loads(marker.read_text(encoding="utf-8"))
+    actual_pid = receipt.get("pid")
+    require(receipt.get("workerSHA256") == expected_hash and
+            type(actual_pid) is int and actual_pid in by_pid,
+            "RECEIVER_STARTED_MARKER_DOES_NOT_MATCH_LIVE_WORKER")
+    return actual_pid
+
+
+def receiver_holds_singleton():
+    """Require the actual worker to hold its single-instance Windows lock."""
+    import msvcrt
+    lock_path = STATE / ".single-instance.lock"
+    require(lock_path.is_file(), "RECEIVER_SINGLETON_FILE_ABSENT")
+    with lock_path.open("r+b") as lock:
+        lock.seek(0)
+        try:
+            msvcrt.locking(lock.fileno(), msvcrt.LK_NBLCK, 1)
+        except OSError:
+            return True
+        else:
+            msvcrt.locking(lock.fileno(), msvcrt.LK_UNLCK, 1)
+            raise RuntimeError("RECEIVER_SINGLETON_NOT_HELD")
+
+
 def create_controller_backup(data,release):
     backup=CONTROLLERS/("backups-ap2-readonly-"+datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ"))
     backup.mkdir(parents=False,exist_ok=False)
@@ -191,6 +230,14 @@ def run():
     pending_readonly_jobs_are_idle()
     installer=import_installer()
     before=worker_processes(installer)
+    if before:
+        started=STATE/"receiver-started.json"
+        require(started.is_file(), "PREVIOUS_RECEIVER_STARTED_MARKER_MISSING")
+        state=json.loads(started.read_text(encoding="utf-8"))
+        require(state.get("workerSHA256")==receipt["workerSHA256"] and
+                state.get("pid") in {r["ProcessId"] for r in before},
+                "EXISTING_WORKER_MARKER_OR_RUNNING_CODE_INCONSISTENT")
+        receiver_holds_singleton()
     py=python_from_launcher()
     saved_target_sha=sha(TARGET)
     check=subprocess.run([str(py),"-m","py_compile",str(SOURCE)],
@@ -222,40 +269,66 @@ def run():
                   stdin=subprocess.DEVNULL,stdout=fd,stderr=fd,
                   cwd=ROOT,creationflags=subprocess.CREATE_NO_WINDOW,close_fds=True)
         marker=STATE/"receiver-started.json"
-        for _ in range(60):
-            if spawned.poll() is not None:break
-            if marker.is_file():
-                evidence=json.loads(marker.read_text(encoding="utf-8"))
-                if evidence.get("workerSHA256")==payload["workerSHA256"] and \
-                    evidence.get("pid")==spawned.pid and \
-                    any(x["ProcessId"]==spawned.pid for x in worker_processes(installer)):
-                    break
+        verified_pid=None
+        launch_debug=None
+        for _ in range(80):
+            try:
+                verified_pid=verified_launched_receiver(
+                    installer,spawned.pid,payload["workerSHA256"],marker)
+                receiver_holds_singleton()
+                break
+            except (RuntimeError,ValueError,OSError,KeyError) as exc:
+                launch_debug=type(exc).__name__+":"+str(exc)
+            # A venv shim may exit after spawning the real interpreter.
+            # The actual worker is identified by live tree and marker,
+            # not by whether Popen.pid remains alive.
             time.sleep(.25)
-        else:raise RuntimeError("AP2_RECEIVER_START_NOT_CONFIRMED")
-        require(spawned.poll() is None and marker.is_file()
-                and json.loads(marker.read_text(encoding="utf-8")).get("pid")==spawned.pid,
-                "AP2_RECEIVER_FAILED_TO_START")
+        require(verified_pid is not None,
+                "AP2_RECEIVER_START_NOT_CONFIRMED:"+str(launch_debug))
         require(sha(TARGET)==saved_target_sha,"AP2_PLN_CHANGED_AFTER_UPGRADE")
     except Exception:
-        if spawned is not None and spawned.poll() is None:
-            subprocess.run(["taskkill","/PID",str(spawned.pid),"/F"],
-                           capture_output=True,timeout=20)
-            for _ in range(20):
-                if not worker_processes(installer):break
-                time.sleep(.2)
+        # Never restore worker bytes while a child process may still be
+        # executing the replacement. A venv shim may have already exited.
+        if spawned is not None:
+            live=worker_processes(installer)
+            if live:
+                by_pid={r["ProcessId"]:r for r in live}
+                roots=[r for r in live if r["ParentProcessId"] not in by_pid]
+                require(len(roots)==1 and (
+                    roots[0]["ProcessId"]==spawned.pid or
+                    roots[0]["ParentProcessId"]==spawned.pid),
+                    "ROLLBACK_BLOCKED_UNRECOGNIZED_LIVE_RECEIVER")
+                stop_receiver_tree(installer,live)
+        require(not worker_processes(installer),
+                "ROLLBACK_BLOCKED_LIVE_RECEIVER_STILL_RUNNING")
         shutil.copy2(backup/WORKER.name,WORKER)
         shutil.copy2(backup/RELEASE.name,RELEASE)
-        # Start original worker only if it existed before.
-        if before and not worker_processes(installer):
+        # Restore the former worker only after exact code and receipt restore.
+        if before:
             with LOG.open("ab") as fd:
-                subprocess.Popen([str(py),"-u",str(WORKER),"--loop"],
+                prior=subprocess.Popen([str(py),"-u",str(WORKER),"--loop"],
                         stdin=subprocess.DEVNULL,stdout=fd,stderr=fd,
                         cwd=ROOT,creationflags=subprocess.CREATE_NO_WINDOW,close_fds=True)
+            prior_marker=STATE/"receiver-started.json"
+            prior_verified=False
+            for _ in range(80):
+                try:
+                    verified_launched_receiver(installer,prior.pid,
+                                              receipt["workerSHA256"],prior_marker)
+                    receiver_holds_singleton()
+                    prior_verified=True
+                    break
+                except (RuntimeError,ValueError,OSError,KeyError):
+                    time.sleep(.25)
+            require(prior_verified,
+                    "ROLLBACK_RESTORED_BYTES_BUT_PRIOR_RECEIVER_NOT_CONFIRMED")
         raise
     report={"status":"AP2_SAME_RECEIVER_UPDATED_LIVE",
             "sourceWorkerSHA256":payload["workerSHA256"],
             "previousWorkerSHA256":receipt["workerSHA256"],
-            "localReceiverPID":spawned.pid,
+            "localReceiverPID":verified_pid,
+            "launchShimPID":spawned.pid,
+            "singletonHeld":True,
             "targetPort":19725,
             "targetSavedPLNSHA256":saved_target_sha,
             "otherProjectsPreserved":True,
