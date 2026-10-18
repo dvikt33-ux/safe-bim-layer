@@ -96,7 +96,12 @@ class BatchCoordinateTests(unittest.TestCase):
                     "details": {"hotlinkType": "Module",
                                 "hotlinkNodeId": {"guid": node},
                                 "origin": {"x": 346.475, "y": 0, "z": 0},
-                                "rotationAngle": 0, "mirrored": False}}]}
+                                "rotationAngle": 0, "mirrored": False,
+                                "floorDifference": 0, "skipNested": False,
+                                "suspendFixAngle": False,
+                                "ignoreTopFloorLinks": True,
+                                "relinkWallOpenings": True,
+                                "adjustLevelDiffs": True}}]}
             result = []
             for id_ in ids:
                 typ = {"1": "Wall", "12": "Wall", "13": "Slab"}
