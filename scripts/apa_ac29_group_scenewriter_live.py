@@ -252,7 +252,7 @@ def native_intent(api, router, group, source_sha):
     return intent, native, ids
 
 
-def execute_once(revision, selected, original_sha):
+def execute_once(revision, selected, original_sha, *, native_transport=None):
     import hashlib
     need(LIVE.canonical_path(LIVE.project()["projectPath"]) ==
          LIVE.canonical_path(SCRATCH), "SCRATCH_SWITCHED_BEFORE_WRITE")
@@ -262,7 +262,7 @@ def execute_once(revision, selected, original_sha):
     )
     folder = STATE / "trace"
     folder.mkdir(exist_ok=True, parents=True)
-    api = APA.EvidenceAPI(APA.native_transport, folder, execute=False)
+    api = APA.EvidenceAPI(native_transport or APA.native_transport, folder, execute=False)
     writer = RUN.SceneWriter(
         api, journal_path=STATE / "original-scenewriter.sqlite",
         allow_3d_view_for_write=True
@@ -287,7 +287,7 @@ def execute_once(revision, selected, original_sha):
          and commands[0]["params"]["groupId"]["guid"].lower() ==
          selected["verifiedSourceGroupId"].lower()
          and len(ids) == 44
-         and preview["groupedTargetCount"] == 4
+         and preview["groupedTargetCount"] == 2 * len(OFFSET)
          and preview["individuallyRoutedTargetCount"] == 0,
          "APA_SOURCE_QUALIFIED_AUTO_GROUP_PLAN_DRIFT")
     registry = installed_verifiers()
@@ -370,8 +370,8 @@ def execute_once(revision, selected, original_sha):
          and len(result.get("trace", [])) == 1,
          "SCENEWRITER_GROUP_WORKFLOW_NOT_FULLY_VERIFIED")
     entry = result["results"][commands[0]["id"]]
-    need(len(entry["newGroupIds"]) == 2
-         and len(entry["createdElements"]) == 4,
+    need(len(entry["newGroupIds"]) == len(OFFSET)
+         and len(entry["createdElements"]) == 2 * len(OFFSET),
          "SCENEWRITER_GROUP_NATIVE_RESPONSE_NOT_EXACT")
     need(LIVE.digest(SCRATCH) == source_sha,
          "SAVED_SCRATCH_DISK_CHANGED_DURING_UNSAVED_NATIVE_CLONE")
@@ -380,14 +380,15 @@ def execute_once(revision, selected, original_sha):
     need(LIVE.digest(LIVE.SOURCE_PATH) == original_sha,
          "PROTECTED_FUNCTIONAL_TEST_SOURCE_DISK_CHANGED")
     ids_after = APA.inventory_guids(api)
-    need(len(ids_after) == 52, "GROUP_SCENEWRITER_44_PLUS_EIGHT_INVENTORY_REQUIRED")
+    need(len(ids_after) == 44 + 4 * len(OFFSET),
+         "GROUP_SCENEWRITER_ALL_GROUP_ROOT_SEGMENT_GUIDS_REQUIRED")
     need(api.write_attempts == 1,
          "GROUP_WRITER_EXPECTED_EXACTLY_ONE_NATIVE_MUTATION")
     return {
         "status": "LIVE_SCENEWRITER_NATIVE_GROUP_CLONE_PASS",
         "sourceRevision": revision,
         "port": LIVE.PORT, "scratchProject": str(SCRATCH),
-        "baseGuidCount": 44, "postGuidCount": 52,
+        "baseGuidCount": 44, "postGuidCount": len(ids_after),
         "nativeMutationCalls": api.write_attempts,
         "nativeModelWritesFromAddOn": entry.get("nativeModelWrites"),
         "saveCalls": 0,
