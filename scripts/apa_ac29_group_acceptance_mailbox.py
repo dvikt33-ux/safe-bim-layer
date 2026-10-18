@@ -204,16 +204,117 @@ def signatures(bbox_list):
 
 
 
-def classify_collision_obstacles(guids, values):
-    """Return proven 3D obstacles; ignore only typed, bodyless 2D annotations.
+def native_model_bounds_for_unresolved(all_guids, universal_bounds, structural):
+    """Reuse the existing GetModelDumpV1 native BREP: no synthetic coordinates.
 
-    Unknown/real 3D elements with invalid bounds block changes. In particular,
-    empty sentinel bounds of beams/columns cannot be silently ignored.
+    Some hierarchical ColumnSegment / BeamSegment elements have unusable generic
+    Get3DBoundingBoxes but geometry is owned by their parent. In that case
+    require native owner GUID, matching parent type, explicit Tapir hierarchy
+    membership AND parent-owned actual BREP vertices; overbound with the parent
+    universal bounds rather than treating segments as invisible 2D members.
+    """
+    native = request("GetModelDumpV1", {}, addon=True, timeout=180)
+    slots = native.get("nativeBodySlots")
+    bodies = native.get("bodies")
+    deleted = native.get("deletedBodySlots")
+    need(type(slots) is int and slots > 0
+         and native.get("regenerated3D") is True
+         and native.get("coordinateSystem") == "ABSOLUTE_PROJECT_XYZ"
+         and isinstance(bodies, list) and isinstance(deleted, list),
+         "NATIVE_BREP_NOT_ABSOLUTE_OR_COMPLETE")
+    indices = [b.get("nativeBodyIndex") for b in bodies]
+    need(all(type(i) is int for i in indices + deleted)
+         and len(set(indices + deleted)) == len(indices) + len(deleted)
+         and set(indices + deleted) == set(range(1, slots + 1)),
+         "NATIVE_BREP_SLOTS_NOT_COMPLETE")
+    native_rows = native.get("elements")
+    need(isinstance(native_rows, list), "NATIVE_BREP_ELEMENTS_MISSING")
+    elems = {}
+    for e in native_rows:
+        k = e.get("guid", "").lower() if isinstance(e, dict) else ""
+        need(bool(GUID.fullmatch(k)) and k not in elems,
+             "NATIVE_BREP_ELEMENT_IDENTITY_INVALID")
+        elems[k] = e
+    bodypoints = {}
+    for body in bodies:
+        owner = body.get("parentGuid", "").lower()
+        need(owner in elems, "NATIVE_BREP_UNKNOWN_BODY_OWNER")
+        vertices = body.get("vertices", [])
+        need(isinstance(vertices, list), "NATIVE_BREP_INVALID_VERTICES")
+        for vertex in vertices:
+            need(isinstance(vertex, dict)
+                 and all(type(vertex.get(k)) in (int, float)
+                         and math.isfinite(vertex[k]) for k in ("x", "y", "z")),
+                 "NATIVE_BREP_NONFINITE_VERTEX")
+            bodypoints.setdefault(owner, []).append(vertex)
+    by_guid = {guid.lower(): bbox for guid, bbox in zip(all_guids, universal_bounds)}
+    def bounds(points):
+        return {axis + bound: fn(p[axis] for p in points)
+                for axis in ("x", "y", "z")
+                for bound, fn in (("Min", min), ("Max", max))}
+    hierarchy = {}
+    output = []
+    for guid, kind in structural:
+        node = elems.get(guid.lower())
+        need(isinstance(node, dict) and node.get("type") == kind,
+             "NATIVE_BREP_GUID_OR_TYPE_MISMATCH:" + guid)
+        points = bodypoints.get(guid.lower(), [])
+        if points:
+            output.append({"guid": guid, "type": kind, "bounds": bounds(points),
+                           "authority": "EXACT_NATIVE_BREP_MEMBER_VERTICES"})
+            continue
+        parent_type = {"ColumnSegment": "Column", "BeamSegment": "Beam"}.get(kind)
+        need(parent_type is not None,
+             "MISSING_SPATIAL_BREP_NOT_HIERARCHICAL:" + guid + ":" + kind)
+        parent = node.get("relationships", {}).get("hostGuid", "").lower()
+        owner = elems.get(parent)
+        need(bool(GUID.fullmatch(parent)) and isinstance(owner, dict)
+             and owner.get("type") == parent_type,
+             "NATIVE_SEGMENT_PARENT_NOT_VERIFIED:" + guid)
+        need(parent in by_guid and isinstance(by_guid[parent], dict),
+             "NATIVE_SEGMENT_PARENT_UNBOUNDED:" + guid)
+        need(bodypoints.get(parent),
+             "NATIVE_SEGMENT_PARENT_BREP_MISSING:" + guid)
+        if parent not in hierarchy:
+            response = request("GetSubelementsOfHierarchicalElements", {
+                "elements": [{"elementId": {"guid": parent}}]
+            }, addon=True).get("subelements")
+            need(isinstance(response, list) and len(response) == 1
+                 and isinstance(response[0], dict),
+                 "NATIVE_SEGMENT_HIERARCHY_NOT_AVAILABLE:" + parent)
+            slot = "columnSegments" if kind == "ColumnSegment" else "beamSegments"
+            children = response[0].get(slot)
+            need(isinstance(children, list) and children,
+                 "NATIVE_SEGMENT_HIERARCHY_EMPTY:" + parent)
+            ids = [x.get("elementId", {}).get("guid", "").lower()
+                   for x in children if isinstance(x, dict)]
+            need(len(ids) == len(children) and all(GUID.fullmatch(x) for x in ids)
+                 and len(set(ids)) == len(ids),
+                 "NATIVE_SEGMENT_HIERARCHY_BAD_IDS:" + parent)
+            hierarchy[parent] = set(ids)
+        need(guid.lower() in hierarchy[parent],
+             "NATIVE_SEGMENT_NOT_IN_PARENT_HIERARCHY:" + guid)
+        parent_box = by_guid[parent]
+        source_box = bounds(bodypoints[parent])
+        upper = {k: (min(parent_box[k], source_box[k])
+                     if k.endswith("Min")
+                     else max(parent_box[k], source_box[k])) for k in COORDS}
+        output.append({"guid": guid, "type": kind, "bounds": upper,
+                       "authority": "PROVEN_HIERARCHICAL_PARENT_BREP_ENVELOPE",
+                       "parentGuid": parent})
+    return output
+
+
+def classify_collision_obstacles(guids, values):
+    """Use existing native BREP for structural elements with unusable bounds.
+
+    Fail closed for unknown 3D geometry. Only verified bodyless annotations
+    may be excluded. Never silently skip column / beam segments.
     """
     need(len(guids) == len(values), "COLLISION_INVENTORY_ALIGNMENT_FAILED")
     unresolved = [(guid, i) for i, (guid, value) in enumerate(zip(guids, values))
                   if value is None]
-    verified_2d = []
+    verified_2d, structural = [], []
     if unresolved:
         descriptions = batched("GetDetailsOfElements",
                                [guid for guid, _ in unresolved],
@@ -222,14 +323,17 @@ def classify_collision_obstacles(guids, values):
             kind = row.get("type") if isinstance(row, dict) else None
             if kind in NONSPATIAL_TYPES:
                 verified_2d.append({"guid": guid, "type": kind})
-                continue
-            raise RuntimeError("UNBOUNDED_SPATIAL_MEMBER_BLOCKED:guid="
-                               + guid + " type=" + repr(kind)
-                               + " (native geometry bounds unavailable)")
-    obstacles = [v for v in values if v is not None]
+            else:
+                need(kind in {"ColumnSegment", "BeamSegment"},
+                     "UNBOUNDED_SPATIAL_MEMBER_BLOCKED:guid=" + guid
+                     + " type=" + repr(kind))
+                structural.append((guid, kind))
+    restored = native_model_bounds_for_unresolved(guids, values, structural) if structural else []
+    obstacles = [v for v in values if v is not None] + [r["bounds"] for r in restored]
     need(len(obstacles) + len(verified_2d) == len(guids),
          "INCOMPLETE_COLLISION_CLASSIFICATION")
-    return obstacles, verified_2d
+    return obstacles, verified_2d, [{k: v for k, v in r.items() if k != "bounds"}
+                                   for r in restored]
 
 
 def offsets_for_pair(chosen_boxes, existing):
@@ -280,8 +384,8 @@ def run_acceptance(name, folder):
     existing_boxes = boxes(existing)
     chosen_boxes = [existing_boxes[existing.index(g)] for g in pair]
     need(all(b is not None for b in chosen_boxes), "SOURCE_COLUMNS_MISSING_GEOMETRY")
-    collision_obstacles, excluded_annotations = classify_collision_obstacles(
-        existing, existing_boxes)
+    collision_obstacles, excluded_annotations, native_reconstructed = (
+        classify_collision_obstacles(existing, existing_boxes))
     translations, move = offsets_for_pair(chosen_boxes, collision_obstacles)
     scratch = Path(r"C:\LocalAI\APA_Group_Acceptance") / (name + ".pln")
     need(not scratch.exists(), "SCRATCH_PLN_ALREADY_EXISTS")
@@ -295,6 +399,7 @@ def run_acceptance(name, folder):
         "baselineGuids": len(existing),
         "collisionObstacles3D": len(collision_obstacles),
         "excludedTypedNonspatialAnnotations": excluded_annotations,
+        "nativeBoundsReconstructed": native_reconstructed,
         "status": "SOURCE_READBACK_AND_SNAPSHOT_PASS"
     })
 
