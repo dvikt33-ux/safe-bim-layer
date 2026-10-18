@@ -79,8 +79,7 @@ def pending_readonly_jobs_are_idle():
             if not folder.is_dir():continue
             attempt=folder/"attempted.json"
             result=folder/"result.json"
-            if attempt.exists() and not result.exists() and \
-                    now-attempt.stat().st_mtime < 3600:
+            if attempt.exists() and not result.exists():
                 raise RuntimeError("POSSIBLY_ACTIVE_EXISTING_APA_JOB:"+folder.name)
 
 def python_from_launcher():
@@ -98,9 +97,70 @@ def python_from_launcher():
     return py
 
 def worker_processes(installer):
+    """One receiver may have a parent and child Python process on Windows.
+
+    The EXISTING APA updater already permits exactly one process tree.
+    Reject independent roots, broken parent chains, or unrecognized commands.
+    Return every member, never pick one PID arbitrarily.
+    """
     rows=installer.processes(WORKER)
-    require(len(rows)<=1,"MULTIPLE_APA_RECEIVERS_FOUND_REFUSE_UPDATE")
+    if not rows:
+        return []
+    ids=[r["ProcessId"] for r in rows]
+    require(len(ids)==len(set(ids)),"APA_RECEIVER_DUPLICATE_PROCESS_ID")
+    by_pid={r["ProcessId"]:r for r in rows}
+    for row in rows:
+        line=row.get("CommandLine") or ""
+        require(str(WORKER).casefold() in line.casefold()
+                and "--loop" in line.split(),
+                "APA_RECEIVER_UNEXPECTED_COMMAND_LINE")
+    roots=[row for row in rows if row["ParentProcessId"] not in by_pid]
+    require(len(roots)==1,"MULTIPLE_APA_RECEIVERS_FOUND_REFUSE_UPDATE")
+    root_pid=roots[0]["ProcessId"]
+    for row in rows:
+        current=row["ProcessId"]
+        traversed=set()
+        while by_pid[current]["ParentProcessId"] in by_pid:
+            require(current not in traversed,
+                    "APA_RECEIVER_CYCLIC_PARENT_PROCESS_CHAIN")
+            traversed.add(current)
+            current=by_pid[current]["ParentProcessId"]
+        require(current==root_pid,
+                "MULTIPLE_APA_RECEIVERS_FOUND_REFUSE_UPDATE")
     return rows
+
+
+def stop_receiver_tree(installer, before):
+    """Stop only verified tree members, descendants before parent.
+
+    No taskkill /T: unrelated children must never be terminated.
+    """
+    require(before and set(r["ProcessId"] for r in before) ==
+            set(r["ProcessId"] for r in worker_processes(installer)),
+            "RECEIVER_PROCESS_TREE_CHANGED_BEFORE_STOP")
+    by_pid={r["ProcessId"]:r for r in before}
+    def depth(row):
+        n=0
+        parent=row["ParentProcessId"]
+        while parent in by_pid:
+            n+=1
+            parent=by_pid[parent]["ParentProcessId"]
+        return n
+    for row in sorted(before,key=depth,reverse=True):
+        pid=row["ProcessId"]
+        current={r["ProcessId"] for r in worker_processes(installer)}
+        if pid not in current:
+            continue
+        stopped=subprocess.run(["taskkill","/PID",str(pid),"/F"],
+                               capture_output=True,timeout=20)
+        require(stopped.returncode==0 or
+                pid not in {r["ProcessId"] for r in worker_processes(installer)},
+                "OLD_RECEIVER_PROCESS_COULD_NOT_STOP:"+str(pid))
+    for _ in range(30):
+        if not worker_processes(installer):
+            return
+        time.sleep(.25)
+    raise RuntimeError("OLD_RECEIVER_TREE_STILL_RUNNING")
 
 def create_controller_backup(data,release):
     backup=CONTROLLERS/("backups-ap2-readonly-"+datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ"))
@@ -139,18 +199,9 @@ def run():
     # source file and local PLN are not modified by this preflight
     require(sha(TARGET)==saved_target_sha,"AP2_SOURCE_DISK_CHANGED_PREUPDATE")
     backup=create_controller_backup(installed,release_bytes)
-    if not before:
-        # No running receiver: patch and launch exactly one.
-        pass
-    else:
-        pid=before[0]["ProcessId"]
-        stopped=subprocess.run(["taskkill","/PID",str(pid),"/F"],
-                               capture_output=True,timeout=20)
-        require(stopped.returncode==0,"OLD_RECEIVER_COULD_NOT_STOP")
-        for _ in range(30):
-            if not worker_processes(installer):break
-            time.sleep(.25)
-        require(not worker_processes(installer),"OLD_RECEIVER_STILL_RUNNING")
+    if before:
+        stop_receiver_tree(installer,before)
+    # Otherwise no running receiver was present; start exactly one after swap.
     replacement=WORKER.with_name(WORKER.name+".ap2-swap")
     payload=dict(receipt)
     payload["workerSHA256"]=sha(SOURCE)
