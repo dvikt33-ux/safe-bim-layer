@@ -47,3 +47,18 @@ CI runs these eight plus 25 B1/B2 and 21 V2 tests on Windows Python 3.11/3.12.
 SOURCE VERIFIED / OFFLINE PASS / BUILD Python. INSTALLED/LIVE/ACCEPTED need their
 own receipts. No source DXF, original PLN/APX, installed core or main edits.
 PDF lossless extraction from PR #154 is reused; this package adds DXF operations.
+
+## Installed acceptance update — 2026-10-18
+
+C1 source-only sidecar is installed with a verified hash receipt. It extends the
+existing installed B1+B2 factory and reuses V1 ezdxf; no new vendor environment
+or process restart was required. Preflight captured absence of the new target
+and the base factory SHA. All three installed commands passed an actual-router
+subprocess smoke on a generated DXF containing two translated closed block
+assemblies. Paths/contours count=2 and repeated geometry group count=1 were
+independently checked; source SHA remained unchanged. Reproduce with
+`tests/apa_dxf_geometry_installed_smoke_c1.py --output-dir NEW_DIRECTORY`.
+Receipt: C1_INSTALLED_SMOKE_RECEIPT_20261018.json beside this document.
+
+SOURCE VERIFIED / OFFLINE PASS / BUILD Python / INSTALLED PASS (opt-in) /
+LIVE NOT RUN / ACCEPTED file-sidecar smoke only. No native BIM acceptance claim.
