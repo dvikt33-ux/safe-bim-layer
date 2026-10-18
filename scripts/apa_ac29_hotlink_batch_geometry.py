@@ -139,7 +139,17 @@ def placed_prototype(api, native, node_guid, prototype_guid, actual_origin):
     nodes = {row["guid"].lower(): row for row in native["elements"]}
     need(prototype_guid in nodes and nodes[prototype_guid]["type"] == "Hotlink",
          "HOTLINK_EXISTING_NATIVE_ROOT_REQUIRED")
-    verify_instance_root(api, node_guid, prototype_guid, actual_origin)
+    root_readback = verify_instance_root(api, node_guid, prototype_guid, actual_origin)
+    details = root_readback.get("details") or {}
+    # Copy native placement semantics, not only its origin. A changed story
+    # offset or nested/top-linked behavior can alter linked BIM geometry.
+    flag_names = ("skipNested", "suspendFixAngle", "ignoreTopFloorLinks",
+                  "relinkWallOpenings", "adjustLevelDiffs")
+    need(details.get("floorDifference") == 0 and
+         all(type(details.get(key)) is bool for key in flag_names),
+         "HOTLINK_BATCH_PROTOTYPE_NATIVE_STORY_AND_FLAGS_REQUIRED")
+    native_settings = {"floorDifference": 0, **{key: details[key]
+                      for key in flag_names}}
     guids = sorted(g for g in nodes if g != prototype_guid)
     rows = api("GetDetailsOfElements", {
         "elements": [{"elementId": {"guid": g}} for g in guids],
@@ -165,7 +175,8 @@ def placed_prototype(api, native, node_guid, prototype_guid, actual_origin):
     need(box_close(translate(local, actual_origin), placed),
          "HOTLINK_NATIVE_WORLD_LOCAL_TRANSFORM_DRIFT")
     return {"nodeGuid": node_guid, "prototypeGuid": prototype_guid,
-            "prototypeOrigin": actual_origin, "ownedGuids": owned,
+            "prototypeOrigin": actual_origin, "prototypeSettings": native_settings,
+            "ownedGuids": owned,
             "ownedCount": len(owned), "typeHistogram": dict(types),
             "sourceLocalBounds": local, "existingWorldBounds": placed,
             "allBoxes": boxes}
@@ -182,6 +193,7 @@ def planned_batch(prototype, count, gap):
             "prototypeGuid": prototype["prototypeGuid"],
             "sourceLocalBounds": prototype["sourceLocalBounds"],
             "prototypeOrigin": prototype["prototypeOrigin"],
+            "prototypeSettings": prototype["prototypeSettings"],
             "sourceOwnedCount": prototype["ownedCount"],
             "sourceTypeHistogram": prototype["typeHistogram"],
             "count": count, "gapMeters": gap,
