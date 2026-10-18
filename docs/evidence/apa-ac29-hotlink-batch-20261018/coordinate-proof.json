@@ -1,0 +1,40 @@
+{
+  "schema": "APA_AC29_HOTLINK_COORDINATE_PROOF_V1",
+  "status": "READ_ONLY_PUBLISHED_EVIDENCE_REPRODUCED_BATCH_NOT_LIVE",
+  "evidenceRef": "https://github.com/dvikt33-ux/safe-bim-layer/blob/b3a373243e10a4a6752b0b379c9b51005a663f73/docs/evidence/apa-ac29-hotlink-20261018/reopen-proof.json",
+  "oneShotCommit": "b3a373243e10a4a6752b0b379c9b51005a663f73",
+  "old": {
+    "originX": 346.475,
+    "importedWorldMinX": 646.474975586,
+    "importedWorldMaxX": 676.95,
+    "actualClearanceMeters": 315.999975586
+  },
+  "derived": {
+    "hostMaxX": 330.475,
+    "moduleLocalMinX": 299.999975586,
+    "moduleLocalMaxX": 330.475,
+    "moduleLocalWidthX": 30.475024414000018
+  },
+  "correctedOriginalHost": {
+    "desiredGapMeters": 10,
+    "targetOriginX": 40.47502441400002,
+    "predictedImportedMinX": 340.475,
+    "predictedClearanceMeters": 10
+  },
+  "newBatchAfterAcceptedInstance": {
+    "desiredGapMeters": 10,
+    "rightmostBeforeBatchWorldX": 676.95,
+    "firstOriginX": 386.95002441400004,
+    "firstPredictedWorldMinX": 686.95,
+    "firstPredictedWorldMaxX": 717.4250244140001,
+    "predictedGapMeters": 10,
+    "secondOriginX": 427.42504882800006
+  },
+  "constraints": [
+    "Source world bbox is based on the accepted single Hotlink and is a regression fixture, NOT a new Windows LIVE geometry query",
+    "Native runtime batch planner must reread authoritative GetModelDumpV1 world BREP and native ownership/transform from the new scratch model",
+    "No 3D rotation, no mirroring, same floor, +X placement only",
+    "Do not infer all module geometry from its filename or from footprint dimensions"
+  ],
+  "nativeModelWrites": 0
+}
