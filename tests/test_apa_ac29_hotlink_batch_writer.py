@@ -59,7 +59,13 @@ class MockNative:
                                  "details":{"hotlinkNodeId":{"guid":self.node},
                                             "hotlinkType":"Module",
                                             "origin":self.roots[guid_],
-                                            "rotationAngle":0,"mirrored":False}})
+                                            "rotationAngle":0,"mirrored":False,
+                                            "floorDifference":0,
+                                            "skipNested":False,
+                                            "suspendFixAngle":False,
+                                            "ignoreTopFloorLinks":True,
+                                            "relinkWallOpenings":True,
+                                            "adjustLevelDiffs":True}})
                 else:
                     rows.append({"type":self.kind[guid_],"floorIndex":0,
                                  "hotlinkId":{"guid":self.owners[guid_]}
@@ -104,7 +110,8 @@ class NativeBatchTests(unittest.TestCase):
             self.mock.api,self.mock.old,self.mock.node,self.mock.root,
             self.mock.origin)
         self.plan=G.planned_batch(self.proof,2,10)
-        self.parameters=V.batch_parameters(self.mock.node,self.plan["origins"])
+        self.parameters=V.batch_parameters(self.mock.node,self.plan["origins"],
+                                            self.plan["prototypeSettings"])
 
     def test_batch_compiles_in_original_source_qualified_bim_graph(self):
         router = B.APA.native_command_router(
