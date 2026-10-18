@@ -15,6 +15,9 @@ import apa_ac29_group_scenewriter_live as ORIGINAL
 import apa_ac29_group_scenewriter_reconcile_readonly as FORENSIC
 import apa_ac29_group_acceptance_mailbox as LIVE
 import apa_ac29_apx_build_mailbox as MAILBOX
+import archicad_project_accelerator as APA
+import archicad_dynamic_commands as DYNAMIC
+import apa_ac29_native_group_clone_verifier as VERIFIER
 
 ORIGINAL_SCENE = ORIGINAL.SCENE
 ORIGINAL_STATE = ORIGINAL.STATE
@@ -116,6 +119,86 @@ def prove_prior_no_write():
     }
 
 
+def verify_complete_native_preflight_against_old_scratch():
+    """Run the entire group-specific BREP/collision preflight read-only.
+
+    This is deliberately BEFORE opening a new scratch PLN or creating its
+    one-shot state. All command calls are hard-denied unless read-only.
+    """
+    class ReadOnlyApi:
+        allowed = {"API.GetProductInfo", "API.IsAddOnCommandAvailable",
+                   "GetAllElements", "GetDetailsOfElements",
+                   "GetModelDumpV1", "GetAddOnVersion", "GetProjectInfo",
+                   "GetStories", "GetNativeGroupMembersV1"}
+
+        def __call__(self, command, params):
+            require(command in self.allowed,
+                    "GROUP_V2_PREFLIGHT_FORBIDS_NATIVE_MUTATION:" + command)
+            return LIVE.request(command, params,
+                                addon=not command.startswith("API."),
+                                timeout=180)
+
+    api = ReadOnlyApi()
+    source_sha = LIVE.digest(ORIGINAL.SOURCE)
+    original_sha = ORIGINAL.read_json(
+        ORIGINAL.HISTORY / "preflight.json")["sourceSha256"]
+    router = DYNAMIC.DynamicCommands(APA.catalog_with_provenance(
+        ORIGINAL.ROOT / "schemas/tapir-live-1.5.10/tapir-scene-live.json"))
+    APA.connect_functional_modules(router)
+    group = ORIGINAL.read_json(
+        ORIGINAL.HISTORY /
+        "group-autoselect-real-model-readonly-20261018-01.json"
+    )["verifiedSourceGroupId"]
+    intent, native, before_ids = ORIGINAL.native_intent(
+        api, router, group, source_sha)
+    require(len(before_ids) == 44, "V2_FULL_NATIVE_SOURCE_COUNT_CHANGED")
+    class GuardedReadOnlyBinding:
+        def __init__(self):
+            self.api = api
+
+        def guarded_binding(self):
+            info = LIVE.guard(ORIGINAL_SCRATCH, original_sha)
+            require(api("GetAddOnVersion", {}).get("version") == "1.5.10",
+                    "V2_RUNTIME_TAPIR_VERSION_CHANGED")
+            return {"path": info["projectPath"],
+                    "name": info["projectName"],
+                    "port": LIVE.PORT,
+                    "tapirVersion": "1.5.10",
+                    "storyIndex": 0}
+    prepared = APA.prepare_current_runtime_group_native_task(
+        router, GuardedReadOnlyBinding(), intent)
+    plan = prepared["preview"]
+    require(plan.get("status") == "ONE_SOURCE_QUALIFIED_STRATEGY_PREPARED"
+            and plan.get("groupedTargetCount") == 4
+            and plan.get("individuallyRoutedTargetCount") == 0
+            and plan.get("nativeWritePermission") is False,
+            "V2_NATIVE_GROUP_AUTOMATIC_PLAN_NOT_VERIFIED")
+    steps = plan["selectedNativeTaskPreview"]["workflow"]["graph"]["operations"]
+    require(len(steps) == 1 and
+            steps[0]["command"] == VERIFIER.CMD and
+            steps[0]["params"]["groupId"]["guid"].lower() == group.lower() and
+            steps[0]["params"]["translations"] == list(ORIGINAL.OFFSET),
+            "V2_GROUP_PLAN_COMMAND_OR_OFFSETS_CHANGED")
+    proof = VERIFIER.verify_before(
+        api=api, command=steps[0]["command"],
+        parameters=steps[0]["params"],
+        affected=[], native_before=native)
+    require(proof.get("status") ==
+            "GROUP_CLONE_SOURCE_OWNED_NATIVE_BREP_AND_LAYOUT_PASS",
+            "V2_SOURCE_SPECIFIC_FULL_BREP_COLLISION_PREFLIGHT_NOT_PASS")
+    require(LIVE.digest(ORIGINAL_SCRATCH) == source_sha and
+            LIVE.digest(ORIGINAL.SOURCE) == source_sha and
+            LIVE.digest(LIVE.SOURCE_PATH) == original_sha,
+            "V2_PREVIEW_CHANGED_ANY_SAVED_SOURCE")
+    return {"nativeGuidCount": len(before_ids),
+            "sourceGroup": group,
+            "liveNativeCommand": steps[0]["command"],
+            "cloneTranslations": steps[0]["params"]["translations"],
+            "sourceReadback": proof["status"],
+            "nativeWrites": 0,
+            "sourcePlnUnchanged": True}
+
+
 def configure_original_one_shot_to_new_scope():
     """Only reuse the established code-owned original SceneWriter ROUTE."""
     ORIGINAL.SCENE = V2_SCENE
@@ -132,6 +215,9 @@ def main():
     require(args.execute, "V2_REQUIRES_SEPARATE_EXPLICIT_EXECUTE")
     ORIGINAL.require_local_branch()
     proof = prove_prior_no_write()
+    verified = verify_complete_native_preflight_against_old_scratch()
+    print("APA_GROUP_SCENEWRITER_V2_SOURCE_PREFLIGHT:",
+          verified["sourceReadback"], "0 NATIVE WRITES", flush=True)
     print("APA_GROUP_SCENEWRITER_V2_GUARD:", proof["previousReconciliationStatus"],
           "44 GUID, 0 PRIOR WRITES", flush=True)
     configure_original_one_shot_to_new_scope()
