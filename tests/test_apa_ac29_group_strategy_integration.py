@@ -195,5 +195,60 @@ class NativeGroupFirstRouting(unittest.TestCase):
         self.assertTrue(result["copies"])
 
 
+    def test_real_apa_catalog_and_bim_graph_compile_native_group_clone(self):
+        from archicad_dynamic_commands import DynamicCommands
+        from archicad_batch_contracts import load_catalog
+        import archicad_project_accelerator as APA
+        root = Path(__file__).resolve().parents[1]
+        router = DynamicCommands(load_catalog(root / "tapir-1.5.8.json"))
+        APA.connect_functional_modules(router)
+        existing, targets = inputs()
+        intent = dict(schemaVersion="apa-native-group-auto/1",
+                      request="Read only: choose native grouping",
+                      existing=existing, targets=targets,
+                      assemblyGroups=[assembly()])
+        preview = APA.prepare_auto_optimized_native_task(router, intent)
+        self.assertEqual(preview["schema"], "APA_AUTO_NATIVE_TASK_V1")
+        self.assertEqual(preview["candidateNativeTaskPreview"]["schema"],
+                         "APA_NATIVE_TASK_PREVIEW_V1")
+        self.assertEqual(preview["requiredRuntimeCommands"],
+                         ["AddOn.TapirCommand.CloneNativeGroupV1"])
+        self.assertEqual(preview["status"],
+                         "GROUP_WORKFLOW_REQUIRES_FRESH_RUNTIME_REGISTRATION")
+        self.assertEqual(preview["nativeModelWrites"], 0)
+        self.assertIsNone(preview["selectedNativeTaskPreview"])
+        router.register_availability("AddOn.TapirCommand.CloneNativeGroupV1", True)
+        registered = APA.prepare_auto_optimized_native_task(router, intent)
+        self.assertEqual(registered["status"], "ONE_SOURCE_QUALIFIED_STRATEGY_PREPARED")
+        self.assertEqual(registered["selectedNativeTaskPreview"]["workflow"]["executionOrder"],
+                         ["assembly_0_clone"])
+        self.assertFalse(registered["nativeWritePermission"])
+
+    def test_real_apa_catalog_compiles_group_create_then_clone_result_binding(self):
+        from archicad_dynamic_commands import DynamicCommands
+        from archicad_batch_contracts import load_catalog
+        import archicad_project_accelerator as APA
+        root = Path(__file__).resolve().parents[1]
+        router = DynamicCommands(load_catalog(root / "tapir-1.5.8.json"))
+        APA.connect_functional_modules(router)
+        router.register_availability("AddOn.TapirCommand.CreateNativeGroupV1", True)
+        router.register_availability("AddOn.TapirCommand.CloneNativeGroupV1", True)
+        existing, targets = inputs()
+        intent = dict(schemaVersion="apa-native-group-auto/1",
+                      request="Read only: group then clone",
+                      existing=existing, targets=targets,
+                      assemblyGroups=[assembly(existingGroupGuid=None,
+                                               groupReadbackVerified=False,
+                                               ungroupedReadbackVerified=True)])
+        preview = APA.prepare_auto_optimized_native_task(router, intent)
+        graph = preview["selectedNativeTaskPreview"]["workflow"]["graph"]["operations"]
+        self.assertEqual(len(graph), 2)
+        self.assertEqual(graph[1]["params"]["groupId"],
+                         {"$result": {"step": graph[0]["id"], "pointer": "/groupId"}})
+        self.assertEqual(preview["selectedNativeTaskPreview"]["workflow"]["executionOrder"],
+                         ["assembly_0_group", "assembly_0_clone"])
+        self.assertFalse(preview["nativeWritePermission"])
+
+
 if __name__ == "__main__":
     unittest.main()
