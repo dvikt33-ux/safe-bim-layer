@@ -242,7 +242,7 @@ def execute_once(revision, selected, original_sha):
         allow_3d_view_for_write=True
     )
     router = DYNAMIC.DynamicCommands(
-        CONTRACTS.load_catalog(ROOT / "tapir-1.5.8.json"))
+        APA.catalog_with_provenance(ROOT / "schemas/tapir-live-1.5.10/tapir-scene-live.json"))
     APA.connect_functional_modules(router)
     binding = writer.guarded_binding()
     need(LIVE.canonical_path(binding["path"]) ==
