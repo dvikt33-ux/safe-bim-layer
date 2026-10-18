@@ -1,0 +1,76 @@
+{
+  "afterBrepSHA256": "b784a847c9177d625f72254fcfd5853e0d01a19bfea1d3c889b972222ec2c435",
+  "afterGuidCount": 119,
+  "afterGuidSetSHA256": "9aaa7f27c129e8714f9e03f6a0ea94cd978c56c41c3899a206b8e37578f6991e",
+  "at": "2026-10-18T20:58:48.062954+00:00",
+  "automaticReplay": false,
+  "batchCount": 2,
+  "beforeGuidCount": 69,
+  "expectedOrigins": [
+    {
+      "x": 386.95,
+      "y": 0,
+      "z": 0
+    },
+    {
+      "x": 427.425,
+      "y": 0,
+      "z": 0
+    }
+  ],
+  "instanceGuids": [
+    "ce4c1a13-21c0-48c4-894d-f0413328b859",
+    "0b15cc38-1ce5-4c33-b4a5-c8a1b1e34d97"
+  ],
+  "moduleSHA256": "3a74d7cb17e460378eacfa8f933aeae29a5ca39fbf2bc73633115c9fee728750",
+  "nativeBatchCalls": 1,
+  "nodeGuid": "e06d3a5b-9797-aff7-49e3-87741c205118",
+  "originalFileSHA256Unchanged": true,
+  "prototypeGuid": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae",
+  "reopenVerified": true,
+  "saveCalls": 1,
+  "savedSHA256": "bca84b159ae614bb8687fb37c651c2c42d818167be4a9a6261ddb748c6b1a9cd",
+  "schema": "APA_AC29_HOTLINK_BATCH_V1",
+  "sourceOwnedCount": 24,
+  "sourceSHA256": "98ad2144792309c208818bfdb2a5aba407c9de1f266c34abda5b00b564343acc",
+  "sourceTypeHistogram": {
+    "Column": 8,
+    "ColumnSegment": 8,
+    "Door": 1,
+    "Slab": 1,
+    "Wall": 4,
+    "Window": 2
+  },
+  "status": "LIVE_NATIVE_HOTLINK_BATCH_SAVED_REOPENED_PASS",
+  "verifiedAt": "2026-10-18T21:09:52.918198+00:00",
+  "verifiedOwners": 48,
+  "executedCodeSHA": "77c21f0acbf860ff625f35dc015817b6f62bdd25",
+  "executionRuntime": {
+    "version": 29,
+    "build": 5101,
+    "tapir": "1.5.10",
+    "port": 19726,
+    "pid": 40092
+  },
+  "reopenRuntime": {
+    "version": 29,
+    "build": 5101,
+    "tapir": "1.5.10",
+    "port": 19727,
+    "pid": 93960
+  },
+  "verifiedFileRole": "BYTE_EXACT_SNAPSHOT_OF_SINGLE_GUARDED_SAVE",
+  "originalBatchScratchAccepted": false,
+  "originalBatchScratchDriftPreserved": true,
+  "snapshotProvenance": "persistence-provenance.json",
+  "originalSavedReceiptSHA256": "ff459e1c91f0bc86dc742a75f94abd913ac95d4700da40cf75d836a7ca45f397",
+  "originalLedgerSHA256": "fbe7a74959d987cd779c1f596bcb46bc3bd2afce34157108466489198bd66129",
+  "retainedGuidCount": 69,
+  "retainedBrepUnchanged": true,
+  "aabbCollisions": 0,
+  "actualGapsMeters": [
+    10.0,
+    10.0
+  ],
+  "createdHotlinkNodes": 0
+}

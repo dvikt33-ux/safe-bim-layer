@@ -1,0 +1,81 @@
+{
+  "dispatchCounts": {
+    "CreateHotlinkNodes": 0,
+    "CreateHotlinkInstances": 1,
+    "SaveProject": 1
+  },
+  "batchArrayLength": 2,
+  "nativeResponses": [
+    {
+      "at": "2026-10-18T20:58:43.020114+00:00",
+      "command": "CreateHotlinkInstances",
+      "elapsedSeconds": 0.4381011999794282,
+      "parameters": {
+        "hotlinkInstances": [
+          {
+            "adjustLevelDiffs": true,
+            "floorDifference": 0,
+            "floorIndex": 0,
+            "hotlinkNodeId": {
+              "guid": "e06d3a5b-9797-aff7-49e3-87741c205118"
+            },
+            "ignoreTopFloorLinks": true,
+            "mirrored": false,
+            "origin": {
+              "x": 386.95,
+              "y": 0,
+              "z": 0
+            },
+            "relinkWallOpenings": true,
+            "rotationAngle": 0.0,
+            "skipNested": false,
+            "suspendFixAngle": false
+          },
+          {
+            "adjustLevelDiffs": true,
+            "floorDifference": 0,
+            "floorIndex": 0,
+            "hotlinkNodeId": {
+              "guid": "e06d3a5b-9797-aff7-49e3-87741c205118"
+            },
+            "ignoreTopFloorLinks": true,
+            "mirrored": false,
+            "origin": {
+              "x": 427.425,
+              "y": 0,
+              "z": 0
+            },
+            "relinkWallOpenings": true,
+            "rotationAngle": 0.0,
+            "skipNested": false,
+            "suspendFixAngle": false
+          }
+        ]
+      },
+      "response": {
+        "elements": [
+          {
+            "elementId": {
+              "guid": "CE4C1A13-21C0-48C4-894D-F0413328B859"
+            }
+          },
+          {
+            "elementId": {
+              "guid": "0B15CC38-1CE5-4C33-B4A5-C8A1B1E34D97"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "at": "2026-10-18T20:58:45.177990+00:00",
+      "command": "SaveProject",
+      "elapsedSeconds": 2.3019965999992564,
+      "parameters": {},
+      "response": {
+        "success": true
+      }
+    }
+  ],
+  "automaticRetry": false
+}
