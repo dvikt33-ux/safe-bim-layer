@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from collections import Counter
 from pathlib import Path
+import re
 
 import apa_ac29_hotlink_batch_geometry as G
 from apa_ac29_dynamic_write_scopes import NativeVerifier
@@ -36,7 +37,8 @@ def parse_batch_response(response, count, previous):
     for item in rows:
         node = (item.get("elementId") or {}) if isinstance(item, dict) else {}
         guid = node.get("guid")
-        need(isinstance(guid, str) and len(guid) == 36 and
+        need(isinstance(guid, str) and
+             re.fullmatch(r"[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}", guid) and
              guid.lower() not in previous and guid.lower() not in result,
              "HOTLINK_BATCH_NEW_NATIVE_ROOT_IDS_REQUIRED")
         result.append(guid.lower())
