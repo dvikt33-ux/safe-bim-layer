@@ -1,0 +1,63 @@
+name: APA AC29 High Density Read Only V2 - Source Gates
+
+on:
+  pull_request:
+    paths:
+      - scripts/apa_high_density_readonly_v2.py
+      - scripts/apa_high_density_entrypoint_v2.py
+      - scripts/apa_high_density_session_factory_v2.py
+      - scripts/install_apa_high_density_readonly_v2.py
+      - tests/test_apa_high_density_readonly_v2.py
+      - tests/test_apa_high_density_v2_install_factory.py
+      - tests/apa_high_density_installed_smoke_v2.py
+      - docs/research/apa-results/extension-ranking/FEATUREPACK_V2_ACCEPTANCE.md
+      - docs/research/apa-results/extension-ranking/V2_INSTALLED_SMOKE_RECEIPT_20261018.json
+      - .github/workflows/apa-high-density-readonly-v2.yml
+
+permissions:
+  contents: read
+
+jobs:
+  offline-contracts:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Compile only V2 source and tests
+        run: >
+          python -m py_compile
+          scripts/apa_high_density_readonly_v2.py
+          scripts/apa_high_density_entrypoint_v2.py
+          scripts/apa_high_density_session_factory_v2.py
+          scripts/install_apa_high_density_readonly_v2.py
+          tests/test_apa_high_density_readonly_v2.py
+          tests/test_apa_high_density_v2_install_factory.py
+          tests/apa_high_density_installed_smoke_v2.py
+      - name: Offline source-contract unit tests (no vendor installations)
+        run: >
+          python -m unittest discover -s tests
+          -p "test_apa_high_density*.py" -v
+      - name: Confirm original V1 six commands remain unchanged
+        shell: python
+        run: |
+          from pathlib import Path
+          import ast
+          v1 = ast.parse(Path("scripts/apa_external_catalog.py").read_text(encoding="utf-8"))
+          names = []
+          for item in v1.body:
+              if isinstance(item, ast.Assign) and any(isinstance(t, ast.Name) and t.id=="COMMANDS" for t in item.targets):
+                  names = list(ast.literal_eval(item.value))
+          assert len(names)==6, f"V1 catalog cardinality drift: {len(names)}"
+          v2 = ast.parse(Path("scripts/apa_high_density_readonly_v2.py").read_text(encoding="utf-8"))
+          new = []
+          for item in v2.body:
+              if isinstance(item, ast.Assign) and any(isinstance(t, ast.Name) and t.id=="COMMANDS" for t in item.targets):
+                  new = list(ast.literal_eval(item.value))
+          assert len(new)==12 and not set(names).intersection(new), "V2 collision or incorrect cardinality"
+          print(f"PASS: {len(names)} original + {len(new)} new = {len(names)+len(new)} read-only contracts")

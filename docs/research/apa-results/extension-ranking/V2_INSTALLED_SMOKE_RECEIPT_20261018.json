@@ -1,0 +1,73 @@
+{
+  "schema": "APA_V2_INSTALLED_VENDOR_SMOKE",
+  "commands": [
+    {
+      "command": "AddOn.APAHighDensityReadOnlyV2.IFCSchemaInventory",
+      "reportSHA256": "3b27c3636df619ede12d9448ba9a78e31425218d8562c749226baf403b08b501",
+      "status": "PASS"
+    },
+    {
+      "command": "AddOn.APAHighDensityReadOnlyV2.IFCGlobalIdAudit",
+      "reportSHA256": "eb3ad83f4a46b86812908b31ac8f4462a9f21a8a686a60f5fc94ab99f5ab783b",
+      "status": "PASS"
+    },
+    {
+      "command": "AddOn.APAHighDensityReadOnlyV2.IFCSpatialRelations",
+      "reportSHA256": "b646a63895626d7097c914cbeb35129e1c359d582daaebaa089e31d409b9d85c",
+      "status": "PASS"
+    },
+    {
+      "command": "AddOn.APAHighDensityReadOnlyV2.IFCOpeningRelations",
+      "reportSHA256": "51af1fbb75b80da7d7f3d926007ff01ea0c9ef162b4629afc4d3be0b15a354ce",
+      "status": "PASS"
+    },
+    {
+      "command": "AddOn.APAHighDensityReadOnlyV2.IFCPortRelations",
+      "reportSHA256": "60c396bce4d80a4f5e7cd6ae8bf8695be20b97d42fb28fac064c2b1f5c1f7774",
+      "status": "PASS"
+    },
+    {
+      "command": "AddOn.APAHighDensityReadOnlyV2.IFCPropertySetCoverage",
+      "reportSHA256": "9b5d34aa81f4c550cbbece48dc85952e345080391d5bf97706fd6e1c85dd0b59",
+      "status": "PASS"
+    },
+    {
+      "command": "AddOn.APAHighDensityReadOnlyV2.IFCClassificationCoverage",
+      "reportSHA256": "ac534e8560cf13b32be0c04a566b2cabfc266968810a242f4519ee4cfa2ed327",
+      "status": "PASS"
+    },
+    {
+      "command": "AddOn.APAHighDensityReadOnlyV2.IFCGeoReferenceAudit",
+      "reportSHA256": "e3e5ddccef5161d8196473098149f1bab1a23e2e078d5c911344864dbfe4c6dd",
+      "status": "PASS"
+    },
+    {
+      "command": "AddOn.APAHighDensityReadOnlyV2.DXFLayerInventory",
+      "reportSHA256": "b4437b252fcee3254497e6e4a45523bd4940fc1d20726015d1972e70af55f527",
+      "status": "PASS"
+    },
+    {
+      "command": "AddOn.APAHighDensityReadOnlyV2.DXFBlockInsertions",
+      "reportSHA256": "6fa39882c39aee9d69bc3c49a940b30a044559b6e618427efd3b06fe1ab61191",
+      "status": "PASS"
+    },
+    {
+      "command": "AddOn.APAHighDensityReadOnlyV2.DXFTextAnnotations",
+      "reportSHA256": "b56c41255c33eb9510f805b695ada78b3e17b69848cdd579400ab0aefbebd4d3",
+      "status": "PASS"
+    },
+    {
+      "command": "AddOn.APAHighDensityReadOnlyV2.DXFDimensionEntities",
+      "reportSHA256": "bd2a907b73d8023ef95a16b23236d942ee0d23b0af297d812954e66fa7473256",
+      "status": "PASS"
+    }
+  ],
+  "count": 12,
+  "originalV1Contracts": 6,
+  "sourceUnchanged": true,
+  "fixtureKind": "SYNTHETIC_IFC4_DXF",
+  "nativeCalls": 0,
+  "plnWrites": 0,
+  "installedAdapterSHA256": "c94cc5f9c3024ca5c20a312aa3591d79970a2370915493ed018b47b711b47ec0",
+  "installedFactorySHA256": "45b06fd651ed629c5028874d67745a2b50ebf6fc6a76ba72d95c245a5c26bd4d"
+}
