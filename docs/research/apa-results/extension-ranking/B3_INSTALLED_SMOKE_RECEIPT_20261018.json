@@ -1,0 +1,63 @@
+{
+  "schema": "APA_B3_INSTALLED_SMOKE",
+  "commands": [
+    {
+      "command": "AddOn.APAIFCGeometryB3.IFCGeometryOBJ",
+      "status": "PASS",
+      "reportSHA256": "a2ee778648a3f9c984bbf915ff66dc6950a9f8c5ca097a2b0d82e96ed387777b",
+      "artifactSHA256": "59d6e80f57117d90e60b6fe315a30892b1d162fef12f3f643069867f51325806"
+    },
+    {
+      "command": "AddOn.APAIFCGeometryB3.IFCGeometryGLB",
+      "status": "PASS",
+      "reportSHA256": "68de8fedce6f6eaf8e2cf19ad58338531812b2452baeb1f5eff7ed3d86ebee5f",
+      "artifactSHA256": "4e4d5f9e68c0be7a3cef954c47e4e60980e7ffd4099ee1e0f58d995faaffb588"
+    },
+    {
+      "command": "AddOn.APAIFCGeometryB3.IFCGeometryBounds",
+      "status": "PASS",
+      "reportSHA256": "cd9fc56c3219ac3ce1c7755588bf0987a8d6b4eb9c0a6db24caee83bc3a293dc",
+      "artifactSHA256": "7c556e8b6d826a229eee90070dcfdcee582205965d35314df892a58762da6f9c"
+    }
+  ],
+  "passed": 3,
+  "readOnlyCatalogCommands": [
+    "AddOn.APADXFGeometryC1.DXFClosedContours",
+    "AddOn.APADXFGeometryC1.DXFRepeatedAssemblies",
+    "AddOn.APADXFGeometryC1.DXFWorldPaths",
+    "AddOn.APAExternalReadOnly.DXFVectors",
+    "AddOn.APAExternalReadOnly.IDSValidate",
+    "AddOn.APAExternalReadOnly.IFCClash",
+    "AddOn.APAExternalReadOnly.IFCDiff",
+    "AddOn.APAExternalReadOnly.IFCQuantities",
+    "AddOn.APAExternalReadOnly.PDFVectors",
+    "AddOn.APAHighDensityReadOnlyV2.DXFBlockInsertions",
+    "AddOn.APAHighDensityReadOnlyV2.DXFDimensionEntities",
+    "AddOn.APAHighDensityReadOnlyV2.DXFLayerInventory",
+    "AddOn.APAHighDensityReadOnlyV2.DXFTextAnnotations",
+    "AddOn.APAHighDensityReadOnlyV2.IFCClassificationCoverage",
+    "AddOn.APAHighDensityReadOnlyV2.IFCGeoReferenceAudit",
+    "AddOn.APAHighDensityReadOnlyV2.IFCGlobalIdAudit",
+    "AddOn.APAHighDensityReadOnlyV2.IFCOpeningRelations",
+    "AddOn.APAHighDensityReadOnlyV2.IFCPortRelations",
+    "AddOn.APAHighDensityReadOnlyV2.IFCPropertySetCoverage",
+    "AddOn.APAHighDensityReadOnlyV2.IFCSchemaInventory",
+    "AddOn.APAHighDensityReadOnlyV2.IFCSpatialRelations",
+    "AddOn.APAIFCArtifactsB2.IFCBCFIssues",
+    "AddOn.APAIFCArtifactsB2.IFCCSVExport",
+    "AddOn.APAIFCArtifactsB2.IFCExtractElements",
+    "AddOn.APAIFCGeometryB3.IFCGeometryBounds",
+    "AddOn.APAIFCGeometryB3.IFCGeometryGLB",
+    "AddOn.APAIFCGeometryB3.IFCGeometryOBJ",
+    "AddOn.APAIFCReportsB1.IDSReportODS",
+    "AddOn.APAIFCReportsB1.IFCSchemaValidate",
+    "AddOn.APAIFCReportsB1.IFCSelect"
+  ],
+  "catalogCount": 30,
+  "sourceUnchanged": true,
+  "fixtureKind": "SYNTHETIC_IFC4",
+  "installedFactorySHA256": "cc8cf53797d0229362ca47b8c2558ac8208f76524db1a15e95e14a914b9ae144",
+  "nativeCalls": 0,
+  "plnWrites": 0,
+  "installedAdapterSHA256": "74c5eebc0cebcdb4d0c8a6ead4eaf5a7ba390fdc1a5be7213c2a57eb197d705f"
+}
