@@ -95,7 +95,16 @@ def publish_existing():
     return "PUBLISHED"
 
 
-def verify_previous():
+def verify_previous(*, verified_active_baseline=None):
+    """Guard source receipts and the currently open, byte-identical baseline.
+
+    V1 requires the original saved acceptance PLN to be active. After a
+    separately published zero-write forensic reconciliation, V2 may keep the
+    already open failed-test scratch #01 instead: it is an exact saved copy
+    of the source, with unchanged model and verified group readback. The
+    explicit exceptional path is pinned, not an arbitrary project override.
+    """
+
     completion = read_json(HISTORY / "resume-v2-result.json").get("result", {})
     success = "LIVE_GROUP_CHAIN_COMPLETED_AFTER_READONLY_RECONCILIATION"
     need(completion.get("status") == success
@@ -114,10 +123,27 @@ def verify_previous():
          and selected.get("modelGuidCount") == 44,
          "PREVIOUS_AUTOSELECT_NATIVE_ACCEPTANCE_MISSING")
     original_sha = read_json(HISTORY / "preflight.json")["sourceSha256"]
-    LIVE.guard(SOURCE, original_sha)
+    protected_saved_sha = LIVE.digest(SOURCE)
+    need(SOURCE.is_file() and protected_saved_sha,
+         "PROTECTED_SAVED_ACCEPTED_SCRATCH_MISSING")
+    if verified_active_baseline is None:
+        active_baseline = SOURCE
+    else:
+        # V2 ONLY: the exact, independently reconciled earlier writer test.
+        pinned_reconciled_pln = SOURCE.parent / "group-ac29-scene-writer-20261018-01.pln"
+        need(isinstance(verified_active_baseline, Path)
+             and verified_active_baseline == pinned_reconciled_pln,
+             "UNAUTHORIZED_ALTERNATE_ACTIVE_BASELINE")
+        need(active_baseline_sha := LIVE.digest(verified_active_baseline),
+             "RECONCILED_ACTIVE_TEST_PLN_MISSING")
+        need(active_baseline_sha == protected_saved_sha,
+             "RECONCILED_ACTIVE_TEST_NOT_IDENTICAL_TO_SOURCE")
+        active_baseline = verified_active_baseline
+    LIVE.guard(active_baseline, original_sha)
     need(LIVE.digest(LIVE.SOURCE_PATH) == original_sha,
          "PROTECTED_TEST_ORIGINAL_HASH_CHANGED")
-    need(LIVE.digest(SOURCE), "PROTECTED_SAVED_ACCEPTED_SCRATCH_MISSING")
+    need(LIVE.digest(SOURCE) == protected_saved_sha,
+         "PROTECTED_SAVED_SOURCE_CHANGED_DURING_PREWRITE_GUARD")
     return selected, original_sha
 
 
@@ -381,7 +407,7 @@ def execute_once(revision, selected, original_sha):
     }
 
 
-def main():
+def main(*, verified_active_baseline=None):
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--execute", action="store_true")
     args = p.parse_args()
@@ -392,7 +418,7 @@ def main():
         need(False, "PREVIOUS_RESULT_ALREADY_EXISTS_NO_MODEL_RETRY")
     need(not STATE.exists() and not SCRATCH.exists(),
          "PREVIOUS_ATTEMPT_OR_DISPOSABLE_PLN_ALREADY_EXISTS_NO_RETRY")
-    _, original_sha = verify_previous()
+    _, original_sha = verify_previous(verified_active_baseline=verified_active_baseline)
     source_sha = LIVE.digest(SOURCE)
     STATE.mkdir(parents=True, exist_ok=False)
     MAILBOX.save(STATE / "attempted.json", {
