@@ -124,7 +124,7 @@ class GroupWriterScope(unittest.TestCase):
                           "effect": ticket["effect"],
                           "approved": authorization, "impact": impact})
             self.assertIsNotNone(writer)
-            self.assertEqual(ticket["parameters"]["translations"], list(OFFSET))
+            self.assertEqual(ticket["parameters"]["translations"], [dict(dx=10,dy=0,dz=0), dict(dx=20,dy=0,dz=0)])
             return {"status": "PASS", "nativeResponse": {
                 "nativeModelWrites": 4,
                 "sourceGroupId": ticket["parameters"]["groupId"],
