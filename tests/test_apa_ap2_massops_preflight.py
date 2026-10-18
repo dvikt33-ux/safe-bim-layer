@@ -53,6 +53,16 @@ class TestAP2MassOps(unittest.TestCase):
             self.assertEqual(report["repeatPlacementCount"], 2)
             self.assertIsNone(report["candidateBatches"][1]
                               ["nativeOperationChosen"])
+            self.assertTrue(all(x["notQualifiedForNativeCopy"]
+                                for x in report["candidateBatches"]))
+            self.assertTrue(all(
+                x["candidateStrategy"] in (
+                    "HOSTED_BATCH_CREATE_IF_QUALIFIED",
+                    "HOSTED_SINGLE_CREATE_IF_QUALIFIED")
+                for x in report["candidateBatches"]))
+            self.assertTrue(all(
+                "textLabelPositionsPt_NOT_OPENING_ANCHORS" in x
+                and "positionsPt" not in x for x in report["candidateBatches"]))
             self.assertFalse(report["readyForModelWrite"])
             self.assertEqual(report["nativeCalls"], 0)
             self.assertEqual(report["modelWrites"], 0)
