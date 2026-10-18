@@ -152,13 +152,12 @@ def placed_prototype(api, native, node_guid, prototype_guid, actual_origin):
         need(isinstance(row, dict), "HOTLINK_INVALID_NATIVE_DETAIL")
         owner = (row.get("hotlinkId") or {}).get("guid", "").lower()
         if owner == prototype_guid:
-            need(row.get("type") != "Hotlink" and row.get("floorIndex") == 0,
-                 "HOTLINK_NESTED_OR_OTHER_STORY_NOT_APPROVED")
+            need(row.get("type") != "Hotlink" and row.get("floorIndex") == 0 and
+                 nodes[guid].get("type") == row.get("type"),
+                 "HOTLINK_NESTED_STORY_OR_NATIVE_TYPE_MISMATCH")
             owned.append(guid)
             types[row["type"]] += 1
-    need(1 <= len(owned) <= 500 and owned and
-         all(nodes[g].get("type") == kind
-             for g, kind in zip(owned, [nodes[g].get("type") for g in owned])),
+    need(1 <= len(owned) <= 500 and sum(types.values()) == len(owned),
          "HOTLINK_EXISTING_OWNED_ELEMENTS_MISSING")
     boxes = world_boxes(native)
     placed = union([boxes[g] for g in owned if boxes[g] is not None])
