@@ -3,6 +3,8 @@ from __future__ import annotations
 import importlib.util
 from pathlib import Path
 from types import SimpleNamespace
+import json
+import tempfile
 from unittest.mock import patch
 import unittest
 
@@ -81,6 +83,67 @@ class TestSafeUpgrade(unittest.TestCase):
                                         "RECEIVER_PROCESS_TREE_CHANGED_BEFORE_STOP"):
                 I.stop_receiver_tree(fake,before)
             stop.assert_not_called()
+
+    def test_venv_actual_worker_child_pid_is_accepted(self):
+        # Popen tracks the launcher while worker main() runs in its child.
+        rows=[self.process(2200, 88), self.process(2244, 2200)]
+        fake=SimpleNamespace(processes=lambda worker: list(rows))
+        with tempfile.TemporaryDirectory() as td:
+            marker=Path(td)/"receiver-started.json"
+            marker.write_text(json.dumps({
+                "workerSHA256":"b"*64,"pid":2244}),encoding="utf8")
+            self.assertEqual(I.verified_launched_receiver(
+                fake,2200,"b"*64,marker),2244)
+
+    def test_venv_shim_exits_but_child_identity_remains(self):
+        # Python virtualenv redirector can exit and leave only the child.
+        rows=[self.process(2244, 2200)]
+        fake=SimpleNamespace(processes=lambda worker: list(rows))
+        with tempfile.TemporaryDirectory() as td:
+            marker=Path(td)/"receiver-started.json"
+            marker.write_text(json.dumps({
+                "workerSHA256":"b"*64,"pid":2244}),encoding="utf8")
+            self.assertEqual(I.verified_launched_receiver(
+                fake,2200,"b"*64,marker),2244)
+
+    def test_marker_from_old_receiver_rejected(self):
+        rows=[self.process(2200, 88),self.process(2244, 2200)]
+        fake=SimpleNamespace(processes=lambda worker: list(rows))
+        with tempfile.TemporaryDirectory() as td:
+            marker=Path(td)/"receiver-started.json"
+            marker.write_text(json.dumps({
+                "workerSHA256":"a"*64,"pid":2244}),encoding="utf8")
+            with self.assertRaisesRegex(RuntimeError,
+                                        "RECEIVER_STARTED_MARKER_DOES_NOT_MATCH"):
+                I.verified_launched_receiver(fake,2200,"b"*64,marker)
+
+    def test_marker_from_unrelated_process_is_rejected(self):
+        rows=[self.process(2200, 88),self.process(2244, 2200)]
+        fake=SimpleNamespace(processes=lambda worker: list(rows))
+        with tempfile.TemporaryDirectory() as td:
+            marker=Path(td)/"receiver-started.json"
+            marker.write_text(json.dumps({
+                "workerSHA256":"b"*64,"pid":9999}),encoding="utf8")
+            with self.assertRaisesRegex(RuntimeError,
+                                        "RECEIVER_STARTED_MARKER_DOES_NOT_MATCH"):
+                I.verified_launched_receiver(fake,2200,"b"*64,marker)
+
+    def test_rogue_unrelated_receiver_fails_confirmation(self):
+        rows=[self.process(2200, 45)]
+        fake=SimpleNamespace(processes=lambda worker: list(rows))
+        with tempfile.TemporaryDirectory() as td:
+            marker=Path(td)/"receiver-started.json"
+            marker.write_text(json.dumps({
+                "workerSHA256":"b"*64,"pid":2200}),encoding="utf8")
+            with self.assertRaisesRegex(RuntimeError,
+                                        "RECEIVER_STARTED_TREE_IS_NOT_OUR_LAUNCH"):
+                I.verified_launched_receiver(fake,7777,"b"*64,marker)
+
+    def test_installer_success_requires_singleton_proof(self):
+        src=TARGET.read_text(encoding="utf8")
+        self.assertIn("receiver_holds_singleton()",src)
+        self.assertIn("STOP",I.stop_receiver_tree.__name__.upper())
+        self.assertIn("ROLLBACK_BLOCKED_LIVE_RECEIVER_STILL_RUNNING",src)
 
     def test_no_pln_or_core_mutation_apis(self):
         src=TARGET.read_text(encoding="utf8")
