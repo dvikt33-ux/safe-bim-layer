@@ -8,6 +8,7 @@ Publishes ONLY an audit JSON on its own fresh GitHub mailbox path.
 from __future__ import annotations
 
 from datetime import datetime, timezone
+from contextlib import closing
 import base64
 import hashlib
 import json
@@ -79,7 +80,7 @@ def sqlite_rows(path):
     require(path.is_file(), "AUDIT_ORIGINAL_SCENEWRITER_SQLITE_MISSING")
     # URI mode=ro: independent readers never create, delete or alter the
     # existing SQLite schema, rows, WAL or transaction state.
-    with sqlite3.connect(f"file:{path.as_posix()}?mode=ro", uri=True) as db:
+    with closing(sqlite3.connect(f"file:{path.as_posix()}?mode=ro", uri=True)) as db:
         db.execute("PRAGMA query_only = ON")
         require(db.execute("PRAGMA quick_check").fetchone()[0] == "ok",
                 "AUDIT_SQLITE_INTEGRITY_FAILED")
