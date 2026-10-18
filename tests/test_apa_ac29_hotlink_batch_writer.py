@@ -136,11 +136,11 @@ class NativeBatchTests(unittest.TestCase):
             self.mock.root, self.mock.origin, 2, 10, self.plan
         )["VerifiedHotlinkBatchReuseV1"]
         modified = {"elements": [dict(r) for r in self.mock.old["elements"]]}
-        body = modified["elements"][0]["bodies"]
-        modified["elements"][0]["bodies"] = [
+        body = modified["elements"][2]["bodies"]
+        modified["elements"][2]["bodies"] = [
             {"vertices": [[coord[0]+1, coord[1], coord[2]]
                           for coord in body[0]["vertices"]]}]
-        # BREP model drift changes the rightmost bounding placement plan.
+        # Drift in prototype-owned BREP changes source local xMin and origin.
         with self.assertRaisesRegex(ValueError,
                                     "RECOMPUTED_NATIVE_BREP_PLAN_CHANGED"):
             v.before(api=self.mock.api, command="CreateHotlinkInstances",
