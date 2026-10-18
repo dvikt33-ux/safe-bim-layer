@@ -316,11 +316,11 @@ class GroupWriterScope(unittest.TestCase):
                 self.assertEqual(result[1], original_hash)
                 guard.assert_called_once_with(saved, original_hash)
                 guard.reset_mock()
-                with self.assertRaisesRegex(ValueError, "UNAUTHORIZED_ALTERNATE_ACTIVE_BASELINE"):
+                with self.assertRaisesRegex(RuntimeError, "UNAUTHORIZED_ALTERNATE_ACTIVE_BASELINE"):
                     V1.verify_previous(verified_active_baseline=root / "arbitrary.pln")
                 guard.assert_not_called()
                 reconciled.write_bytes(b"different or unsaved native model")
-                with self.assertRaisesRegex(ValueError, "RECONCILED_ACTIVE_TEST_NOT_IDENTICAL_TO_SOURCE"):
+                with self.assertRaisesRegex(RuntimeError, "RECONCILED_ACTIVE_TEST_NOT_IDENTICAL_TO_SOURCE"):
                     V1.verify_previous(verified_active_baseline=reconciled)
                 guard.assert_not_called()
 
