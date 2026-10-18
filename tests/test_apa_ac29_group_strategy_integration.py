@@ -250,5 +250,22 @@ class NativeGroupFirstRouting(unittest.TestCase):
         self.assertFalse(preview["nativeWritePermission"])
 
 
+    def test_live_readonly_transport_denies_native_writes_before_any_call(self):
+        from apa_ac29_live_group_autoselect_readonly import ReadOnlyApi
+        api = ReadOnlyApi()
+        for command in ["CloneNativeGroupV1", "CreateNativeGroupV1",
+                        "MoveNativeGroupV1", "UngroupNativeGroupV1",
+                        "SaveProject", "OpenProject", "API.ExecuteAddOnCommand"]:
+            with self.subTest(command=command), self.assertRaises(RuntimeError):
+                api(command, {})
+        self.assertEqual(api.calls, [])
+
+    def test_live_preview_binding_is_not_a_model_writer(self):
+        from apa_ac29_live_group_autoselect_readonly import ReadOnlyBinding, ReadOnlyApi
+        binder = ReadOnlyBinding(ReadOnlyApi(), "0" * 64)
+        self.assertFalse(hasattr(binder, "execute_bound_operation"))
+        self.assertFalse(hasattr(binder, "run_workflow"))
+
+
 if __name__ == "__main__":
     unittest.main()
