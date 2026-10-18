@@ -252,7 +252,7 @@ def native_intent(api, router, group, source_sha):
     return intent, native, ids
 
 
-def execute_once(revision, selected, original_sha):
+def execute_once(revision, selected, original_sha, *, native_transport=None):
     import hashlib
     need(LIVE.canonical_path(LIVE.project()["projectPath"]) ==
          LIVE.canonical_path(SCRATCH), "SCRATCH_SWITCHED_BEFORE_WRITE")
@@ -262,7 +262,7 @@ def execute_once(revision, selected, original_sha):
     )
     folder = STATE / "trace"
     folder.mkdir(exist_ok=True, parents=True)
-    api = APA.EvidenceAPI(APA.native_transport, folder, execute=False)
+    api = APA.EvidenceAPI(native_transport or APA.native_transport, folder, execute=False)
     writer = RUN.SceneWriter(
         api, journal_path=STATE / "original-scenewriter.sqlite",
         allow_3d_view_for_write=True
