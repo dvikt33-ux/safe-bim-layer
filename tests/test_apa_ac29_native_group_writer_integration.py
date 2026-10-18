@@ -183,5 +183,33 @@ class GroupWriterScope(unittest.TestCase):
         self.assertEqual(report["completedSteps"], [])
 
 
+    def test_live_1510_catalog_provenance_used_for_scenewriter(self):
+        import archicad_project_accelerator as APA
+        import archicad_batch_contracts as CONTRACTS
+        from archicad_dynamic_commands import DynamicCommands
+        root = Path(__file__).resolve().parents[1]
+        export = root / "schemas" / "tapir-live-1.5.10" / "tapir-scene-live.json"
+        catalog = APA.catalog_with_provenance(export)
+        self.assertEqual(CONTRACTS.source_version(catalog), "1.5.10")
+        self.assertEqual(APA.RUN.EXPECTED_TAPIR, "1.5.10")
+        router = DynamicCommands(catalog)
+        APA.connect_functional_modules(router)
+        self.assertEqual(CONTRACTS.source_version(router.catalog), "1.5.10")
+        self.assertIn(CMD, router.catalog["commands"])
+        local = (root / "scripts" / "apa_ac29_group_scenewriter_live.py").read_text(encoding="utf8")
+        self.assertIn("APA.catalog_with_provenance(", local)
+        self.assertNotIn('CONTRACTS.load_catalog(ROOT / "tapir-1.5.8.json")', local)
+
+    def test_failed_scenewriter_forensic_has_only_read_or_publish_actions(self):
+        from apa_ac29_group_scenewriter_reconcile_readonly import run
+        import inspect
+        source = inspect.getsource(run)
+        self.assertNotIn("OpenProject", source)
+        self.assertNotIn("SaveProject", source)
+        self.assertNotIn("CloneNativeGroupV1", source)
+        self.assertNotIn("create_and_open_copy", source)
+        self.assertIn("WRITER_PRE_DISPATCH_STOP_AND_LIVE_NATIVE_BASELINE_PASS", source)
+
+
 if __name__ == "__main__":
     unittest.main()
