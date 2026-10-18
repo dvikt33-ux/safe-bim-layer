@@ -4,7 +4,10 @@ on:
     paths:
       - "scripts/apa_ac29_hotlink_native_verifiers.py"
       - "scripts/apa_ac29_hotlink_oneshot.py"
+      - "scripts/apa_ac29_dynamic_write_scopes.py"
       - "tests/test_apa_ac29_hotlink_one_shot.py"
+      - "tests/test_apa_ac29_dynamic_write_scopes.py"
+      - "docs/evidence/apa-ac29-hotlink-20261018/**"
       - "docs/APA_AC29_HOTLINK_ONESHOT_INTEGRATION_RU.md"
       - ".github/workflows/apa-ac29-native-hotlink-oneshot.yml"
 permissions:
@@ -26,8 +29,9 @@ jobs:
         run: python -m pip install "jsonschema>=4,<5"
       - name: Python syntax and source tests
         run: |
-          python -m py_compile scripts/apa_ac29_hotlink_native_verifiers.py scripts/apa_ac29_hotlink_oneshot.py tests/test_apa_ac29_hotlink_one_shot.py
+          python -m py_compile scripts/apa_ac29_hotlink_native_verifiers.py scripts/apa_ac29_hotlink_oneshot.py scripts/apa_ac29_dynamic_write_scopes.py tests/test_apa_ac29_hotlink_one_shot.py
           python -m unittest discover -s tests -p "test_apa_ac29_hotlink_one_shot.py" -v
+          python -m unittest discover -s tests -p "test_apa_ac29_dynamic_write_scopes.py" -v
       - name: Native gate stays disabled in CI
         run: |
           python -c "from pathlib import Path; p=Path('scripts/apa_ac29_hotlink_oneshot.py').read_text(); assert '--execute' in p and 'guard_manifest(state)' in p and 'LIVE_SAVED_PENDING_REOPEN' in p; print('SOURCE_ONLY: no Archicad process or native write in CI')"

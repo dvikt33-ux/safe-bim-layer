@@ -103,8 +103,26 @@ def parse_instance_reply(response):
     return ident.lower()
 
 
+def verify_instance_root(api, node, instance, origin):
+    rows = api("GetDetailsOfElements", {
+        "elements": [{"elementId": {"guid": instance}}]}).get("detailsOfElements")
+    need(isinstance(rows, list) and len(rows) == 1 and isinstance(rows[0], dict),
+         "HOTLINK_INSTANCE_ROOT_READBACK_MISSING")
+    row = rows[0]
+    details = row.get("details") or {}
+    actual = details.get("origin") or {}
+    need(row.get("type") == "Hotlink" and row.get("floorIndex") == 0 and
+         (details.get("hotlinkNodeId") or {}).get("guid", "").lower() == node and
+         details.get("hotlinkType") == "Module" and details.get("rotationAngle") == 0 and
+         details.get("mirrored") is False and set(actual) == set(origin) and
+         all(type(actual[k]) in (int, float) and math.isfinite(actual[k]) and
+             abs(actual[k] - origin[k]) <= 1e-8 for k in origin),
+         "HOTLINK_INSTANCE_ROOT_NODE_OR_TRANSFORM_MISMATCH")
+    return row
+
+
 def installed_hotlink_verifiers(module_path, expected_sha, exact_origin,
-                                verified_node_guid=None):
+                                verified_node_guid=None, unplaced_node_response=None):
     """Explicit local closures bound to a SHA-verified source module.
 
     The registry is passed to the EXISTING build_existing_workflow_scopes().
@@ -116,6 +134,9 @@ def installed_hotlink_verifiers(module_path, expected_sha, exact_origin,
     source_location = canonical_location(str(module))
     node_params = node_parameters(module)
     selected_node = (verified_node_guid or "").lower()
+    if unplaced_node_response is not None:
+        need(parse_node_reply(unplaced_node_response) == selected_node,
+             "HOTLINK_UNPLACED_NODE_RESPONSE_MISMATCH")
 
     def read_nodes(api):
         return flatten_hotlinks(api("GetHotlinks", {}))
@@ -142,6 +163,14 @@ def installed_hotlink_verifiers(module_path, expected_sha, exact_origin,
         node = parse_node_reply(native_response)
         before = source_proof["existing"]
         after = read_nodes(api)
+        if sorted(after) == sorted(before):
+            # Tapir 1.5.10 enumerates the PLACED node tree. Its own native
+            # example uses the returned node GUID for the first placement.
+            # This is explicitly pending, never independent node acceptance.
+            return {"status": "HOTLINK_UNPLACED_NODE_RESPONSE_ONLY_PASS",
+                    "nodeGuid": node, "moduleSHA256": expected_sha,
+                    "independentReadbackVerified": False,
+                    "requiresFirstInstanceReadback": True}
         need(sorted(after) == sorted(before + [(source_location, node)]),
              "HOTLINK_NODE_INDEPENDENT_READBACK_DIFFERENT")
         return {"status": "HOTLINK_NODE_NATIVE_READBACK_PASS", "nodeGuid": node,
@@ -153,7 +182,8 @@ def installed_hotlink_verifiers(module_path, expected_sha, exact_origin,
              parameters == instance_parameters(selected_node, exact_origin),
              "HOTLINK_INSTANCE_ONE_EXACT_PLACEMENT_REQUIRED")
         pairs = read_nodes(api)
-        need(pairs.count((source_location, selected_node)) == 1,
+        need(pairs.count((source_location, selected_node)) == 1 or
+             (unplaced_node_response is not None and not pairs),
              "HOTLINK_INSTANCE_VERIFIED_NODE_NOT_FOUND")
         need(native_before.get("elements"), "HOTLINK_INSTANCE_NATIVE_BASELINE_MISSING")
         return {"status": "HOTLINK_INSTANCE_NODE_AND_MODULE_PASS",
@@ -170,6 +200,7 @@ def installed_hotlink_verifiers(module_path, expected_sha, exact_origin,
              "HOTLINK_INSTANCE_NEW_MODEL_ELEMENTS_NOT_READ_BACK")
         need((source_location, selected_node) in read_nodes(api),
              "HOTLINK_INSTANCE_NODE_RELATION_LOST")
+        verify_instance_root(api, selected_node, instance, exact_origin)
         # Require at least one real element owned by the placed instance.
         # The native instance GUID itself may or may not appear as a model
         # element; require explicit hotlinkId for every imported child.

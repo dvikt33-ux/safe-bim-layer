@@ -1,0 +1,227 @@
+{
+  "scenes": [
+    {
+      "sceneId": "HotlinkNode20261018V1",
+      "state": "PARTIAL_OR_UNKNOWN_OUTCOME",
+      "originalResultSHA256": "a46c1194ce63402d4a0d133093a2676d843c10778435af5c35be60310be549a6",
+      "result": {
+        "automaticRetry": false,
+        "command": "CreateHotlinkNodes",
+        "intent": {
+          "command": "CreateHotlinkNodes",
+          "parameters": {
+            "hotlinkNodes": [
+              {
+                "name": "APA_Hotlink_OneShot",
+                "sourceLocation": "[MODULE_PLN]",
+                "storyRangeType": "AllStories"
+              }
+            ]
+          },
+          "sceneId": "HotlinkNode20261018V1",
+          "sourcePlanHash": "c0d10bcfee5d24be98e061e9401fe2beca90c1b157c9ae00415d48c3049f693d",
+          "target": {
+            "name": "hotlink-native-test",
+            "path": "[SCRATCH_PLN]",
+            "port": 19726,
+            "storyIndex": 0,
+            "tapirVersion": "1.5.10"
+          }
+        },
+        "manualReconciliationRequired": true,
+        "nativeResponse": {
+          "hotlinkNodes": [
+            {
+              "existing": false,
+              "hotlinkNodeId": {
+                "guid": "E06D3A5B-9797-AFF7-49E3-87741C205118"
+              }
+            }
+          ]
+        },
+        "operationHash": "a5a48f38cc0c5f10d74c6299ad8ef4a079e0385a04144a92be187dfc3cf23b06",
+        "reason": "ValueError: HOTLINK_NODE_INDEPENDENT_READBACK_DIFFERENT",
+        "sceneId": "HotlinkNode20261018V1",
+        "status": "PARTIAL_OR_UNKNOWN_OUTCOME"
+      }
+    },
+    {
+      "sceneId": "HotlinkInstance20261018V1",
+      "state": "PASS",
+      "originalResultSHA256": "95cdc1aa652138e9c8903b8a459d15ce624416f7c24666aefd8c27b728c20cbc",
+      "result": {
+        "automaticRetry": false,
+        "command": "CreateHotlinkInstances",
+        "intent": {
+          "command": "CreateHotlinkInstances",
+          "parameters": {
+            "hotlinkInstances": [
+              {
+                "floorIndex": 0,
+                "hotlinkNodeId": {
+                  "guid": "e06d3a5b-9797-aff7-49e3-87741c205118"
+                },
+                "mirrored": false,
+                "origin": {
+                  "x": 346.475,
+                  "y": 0.0,
+                  "z": 0.0
+                },
+                "rotationAngle": 0.0
+              }
+            ]
+          },
+          "sceneId": "HotlinkInstance20261018V1",
+          "sourcePlanHash": "2147c1c284c777787b216b8e41045a5f148572abc31d1ee69cae55c7813b31b9",
+          "target": {
+            "name": "hotlink-native-test",
+            "path": "[SCRATCH_PLN]",
+            "port": 19726,
+            "storyIndex": 0,
+            "tapirVersion": "1.5.10"
+          }
+        },
+        "nativeResponse": {
+          "elements": [
+            {
+              "elementId": {
+                "guid": "2A4D7D8F-06DC-4C79-97F1-34E7DC91B7AE"
+              }
+            }
+          ]
+        },
+        "operationHash": "849c815b4d459904e7f06d283ee0326a63981c10602d04f28e2b2620bb14f1a7",
+        "readback": {
+          "affectedGuids": [],
+          "afterGuidSetHash": "26392e9123334de2657a3f3ca29e6cc8fbcad6eb567729cf3d6b5e020babf8d0",
+          "afterNativeBrepHash": "c46b8ea97613ae94758e2b98f26532043f6a1e3637d20d9f26d67da355daaf85",
+          "createdGuids": [
+            "01823404-1df6-73e9-85f9-cabe09235f08",
+            "0228fc36-42a9-10ae-1c3f-0158b7988405",
+            "061baafb-d066-b5a0-513f-d8ea35f3fa87",
+            "090d4e98-ee4c-4e30-ff05-42eff9bf3c90",
+            "0c35bf7e-854c-ec64-c3b7-09c0c0cd74c5",
+            "16c58916-8eb9-ceea-87d1-a323ad3e398e",
+            "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae",
+            "46f82304-729c-918a-39e0-5d26d72a6559",
+            "76ef9d39-b003-097f-52ed-792a59ad9530",
+            "794133b7-e4f9-a1a9-d494-0c798ddb3990",
+            "7abad59d-49bd-5a0c-0793-d92cc1dfe7e4",
+            "7fc29e57-4f05-acf4-8ef8-1c1a2434a535",
+            "89e9ac67-b308-8481-528b-bf4e08a58ca0",
+            "8de7641c-e42d-bac0-666a-13796f3487ba",
+            "91072288-12ac-1453-7e28-09d8e47e3cd9",
+            "99f7cc71-d278-a70d-b6da-316987b5bec9",
+            "9b145190-ae51-e3cd-c43d-68d654c1fd63",
+            "a1863e73-3e2a-7c79-fc57-a8b05a290e7b",
+            "a2bb7608-04dc-324d-90f8-c42c6df92c21",
+            "a9eda929-1af2-d0b5-9f8c-a645f5a0c325",
+            "aec30956-081a-3b51-5655-60991e19cfa8",
+            "afe762c7-c966-f724-a8a1-b9fb5b895b31",
+            "dfcaa124-c31e-0a98-ace0-fc6e15063df5",
+            "ed899440-fa86-4b64-d346-027b4b068cab",
+            "ff1c462a-8733-e03f-1c6e-8689b07dd271"
+          ],
+          "importedElementCount": 24,
+          "importedGuids": [
+            "01823404-1df6-73e9-85f9-cabe09235f08",
+            "0228fc36-42a9-10ae-1c3f-0158b7988405",
+            "061baafb-d066-b5a0-513f-d8ea35f3fa87",
+            "090d4e98-ee4c-4e30-ff05-42eff9bf3c90",
+            "0c35bf7e-854c-ec64-c3b7-09c0c0cd74c5",
+            "16c58916-8eb9-ceea-87d1-a323ad3e398e",
+            "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae",
+            "46f82304-729c-918a-39e0-5d26d72a6559",
+            "76ef9d39-b003-097f-52ed-792a59ad9530",
+            "794133b7-e4f9-a1a9-d494-0c798ddb3990",
+            "7abad59d-49bd-5a0c-0793-d92cc1dfe7e4",
+            "7fc29e57-4f05-acf4-8ef8-1c1a2434a535",
+            "89e9ac67-b308-8481-528b-bf4e08a58ca0",
+            "8de7641c-e42d-bac0-666a-13796f3487ba",
+            "91072288-12ac-1453-7e28-09d8e47e3cd9",
+            "99f7cc71-d278-a70d-b6da-316987b5bec9",
+            "9b145190-ae51-e3cd-c43d-68d654c1fd63",
+            "a1863e73-3e2a-7c79-fc57-a8b05a290e7b",
+            "a2bb7608-04dc-324d-90f8-c42c6df92c21",
+            "a9eda929-1af2-d0b5-9f8c-a645f5a0c325",
+            "aec30956-081a-3b51-5655-60991e19cfa8",
+            "afe762c7-c966-f724-a8a1-b9fb5b895b31",
+            "dfcaa124-c31e-0a98-ace0-fc6e15063df5",
+            "ed899440-fa86-4b64-d346-027b4b068cab",
+            "ff1c462a-8733-e03f-1c6e-8689b07dd271"
+          ],
+          "instanceGuid": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae",
+          "moduleSHA256": "3a74d7cb17e460378eacfa8f933aeae29a5ca39fbf2bc73633115c9fee728750",
+          "nodeGuid": "e06d3a5b-9797-aff7-49e3-87741c205118",
+          "removedGuids": [],
+          "status": "HOTLINK_INSTANCE_NATIVE_OWNERSHIP_READBACK_PASS"
+        },
+        "sceneId": "HotlinkInstance20261018V1",
+        "status": "PASS"
+      }
+    },
+    {
+      "sceneId": "HotlinkSave20261018V1",
+      "state": "PASS",
+      "originalResultSHA256": "4b56a433c16468d0847697bbd553a2e9f7b55fe6cf775d329c364590ebe97aeb",
+      "result": {
+        "automaticRetry": false,
+        "command": "SaveProject",
+        "intent": {
+          "command": "SaveProject",
+          "parameters": {},
+          "sceneId": "HotlinkSave20261018V1",
+          "sourcePlanHash": "07a17583a5e0728717854bd21cfbd5a7ae0638c73653c82cd4149222b71846ed",
+          "target": {
+            "name": "hotlink-native-test",
+            "path": "[SCRATCH_PLN]",
+            "port": 19726,
+            "storyIndex": 0,
+            "tapirVersion": "1.5.10"
+          }
+        },
+        "nativeResponse": {
+          "success": true
+        },
+        "operationHash": "2d2ff77625451cbe67792bed4d9d0cd43f3cc7e5386175c125722f23f60f455a",
+        "readback": {
+          "savedSHA256": "98ad2144792309c208818bfdb2a5aba407c9de1f266c34abda5b00b564343acc",
+          "status": "HOTLINK_GUARDED_SAVE_PASS"
+        },
+        "sceneId": "HotlinkSave20261018V1",
+        "status": "PASS"
+      }
+    }
+  ],
+  "steps": [
+    {
+      "sceneId": "HotlinkNode20261018V1",
+      "stepId": "operation",
+      "state": "UNKNOWN_OUTCOME",
+      "guid": null
+    },
+    {
+      "sceneId": "HotlinkInstance20261018V1",
+      "stepId": "operation",
+      "state": "PASS",
+      "guid": null
+    },
+    {
+      "sceneId": "HotlinkSave20261018V1",
+      "stepId": "operation",
+      "state": "PASS",
+      "guid": null
+    }
+  ],
+  "nodeReconciliation": {
+    "status": "NODE_RECONCILED_BY_FIRST_INSTANCE_AND_GET_HOTLINKS",
+    "at": "2026-10-18T19:54:27.641596+00:00",
+    "nodeGuid": "e06d3a5b-9797-aff7-49e3-87741c205118",
+    "instanceGuid": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae",
+    "nodeReplayCount": 0,
+    "originalUnknownScenePreserved": true,
+    "savedReceiptSHA256": "6b2a583083740f1e1a73b832140f575ebc1f6d87094a52b629a0743f1ce256f5"
+  },
+  "originalUnknownPreserved": true,
+  "sqliteSHA256": "90599f52bf8e854e1c08aa4225e2a7a56986f7f0a8cd7418f982f8d0068bf765"
+}

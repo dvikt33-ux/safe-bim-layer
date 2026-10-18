@@ -2,7 +2,9 @@
 from __future__ import annotations
 
 import hashlib
+from contextlib import closing
 import json
+import sqlite3
 from pathlib import Path
 import sys
 import tempfile
@@ -168,6 +170,8 @@ class HotlinkTests(unittest.TestCase):
                         "hotlinkNodeId": {"guid": node}}]}
             if command == "GetDetailsOfElements":
                 self.assertEqual(len(params["elements"]), 1)
+                if params["elements"][0]["elementId"]["guid"] == instance:
+                    return {"detailsOfElements": [self.instance_root(node)]}
                 return {"detailsOfElements": [{"hotlinkId": {
                     "guid": uid(8) if state["wrong"] else instance
                 }}]}
@@ -205,6 +209,121 @@ class HotlinkTests(unittest.TestCase):
         self.stage()
         with self.assertRaises(FileNotFoundError):
             H.verify_reopen(self.state)
+
+    def node_reply(self):
+        return {"hotlinkNodes": [{"existing": False, "hotlinkNodeId": {"guid": uid(2)}}]}
+
+    def instance_root(self, node):
+        return {"type":"Hotlink", "floorIndex":0, "details": {
+            "hotlinkType":"Module", "hotlinkNodeId":{"guid":node},
+            "origin":dict(self.origin), "rotationAngle":0, "mirrored":False}}
+
+    def test_root_requires_exact_native_node_and_transform(self):
+        row = self.instance_root(uid(2))
+        api = Mock(return_value={"detailsOfElements":[row]})
+        self.assertEqual(V.verify_instance_root(api,uid(2),uid(3),self.origin),row)
+        row['details']['hotlinkNodeId']['guid'] = uid(8)
+        with self.assertRaisesRegex(ValueError, 'NODE_OR_TRANSFORM'):
+            V.verify_instance_root(api,uid(2),uid(3),self.origin)
+        row['details']['hotlinkNodeId']['guid'] = uid(2)
+        row['details']['origin']['x'] += 1
+        with self.assertRaisesRegex(ValueError, 'NODE_OR_TRANSFORM'):
+            V.verify_instance_root(api,uid(2),uid(3),self.origin)
+
+    def test_unplaced_node_is_pending_and_first_instance_still_requires_readback(self):
+        registry = V.installed_hotlink_verifiers(self.module, V.digest(self.module), self.origin)
+        v = registry["VerifiedHotlinkNodeOneShot"]
+        pending = v.after(api=Mock(return_value={"hotlinks": []}), command=V.NODE,
+                          parameters=V.node_parameters(self.module), native_response=self.node_reply(),
+                          before_guids={uid(5)}, after_guids={uid(5)}, affected=[],
+                          native_before={}, native_after={}, source_proof={"existing": []})
+        self.assertEqual(pending["status"], "HOTLINK_UNPLACED_NODE_RESPONSE_ONLY_PASS")
+        self.assertFalse(pending["independentReadbackVerified"])
+        v = V.installed_hotlink_verifiers(self.module, V.digest(self.module), self.origin,
+                    verified_node_guid=uid(2), unplaced_node_response=self.node_reply())[
+                    "VerifiedHotlinkInstanceOneShot"]
+        api = Mock(return_value={"hotlinks": []})
+        before = v.before(api=api, command=V.INSTANCE,
+                    parameters=V.instance_parameters(uid(2), self.origin), affected=[],
+                    native_before={"elements": [{"guid": uid(5)}]})
+        with self.assertRaisesRegex(ValueError, "NODE_RELATION_LOST"):
+            v.after(api=api, command=V.INSTANCE, parameters={}, native_response={
+                    "elements": [{"elementId": {"guid": uid(3)}}]},
+                    before_guids={uid(5)}, after_guids={uid(5),uid(6)}, affected=[],
+                    native_before={}, native_after={}, source_proof=before)
+        with self.assertRaisesRegex(ValueError, "RESPONSE_MISMATCH"):
+            V.installed_hotlink_verifiers(self.module, V.digest(self.module), self.origin,
+                    verified_node_guid=uid(8), unplaced_node_response=self.node_reply())
+
+    def recovery_fixture(self):
+        m = self.stage()
+        H.write_new(self.state / 'attempted.json', {'scratchSHA256': m['scratchInitialSHA256']})
+        H.write_new(self.state / 'failed.json', {'status': 'STOPPED_NO_REPLAY_RECONCILIATION_REQUIRED'})
+        outcome = {'reason': 'ValueError: HOTLINK_NODE_INDEPENDENT_READBACK_DIFFERENT',
+                   'command':'CreateHotlinkNodes', 'nativeResponse': self.node_reply(),
+                   'intent': {'parameters': V.node_parameters(self.module),
+                              'target': {'port':19724, 'path':str(self.scratch)}}}
+        with closing(sqlite3.connect(self.state / 'scenewriter.sqlite')) as db, db:
+            db.execute('CREATE TABLE scenes(scene_id TEXT,state TEXT,result TEXT)')
+            db.execute('CREATE TABLE steps(scene_id TEXT,state TEXT)')
+            db.execute('INSERT INTO scenes VALUES(?,?,?)',
+                       (H.SCENES[0], 'PARTIAL_OR_UNKNOWN_OUTCOME', json.dumps(outcome)))
+            db.execute('INSERT INTO steps VALUES(?,?)', (H.SCENES[0], 'UNKNOWN_OUTCOME'))
+        trace = self.state / 'trace-live'
+        trace.mkdir()
+        raw = [{'command': 'CreateHotlinkNodes', 'parameters': V.node_parameters(self.module),
+                'response': self.node_reply()}, {'command':'GetHotlinks', 'response':{'hotlinks':[]}}]
+        (trace / 'raw.jsonl').write_text('\n'.join(json.dumps(r) for r in raw), encoding='utf8')
+        return m, outcome
+
+    def test_recovery_pins_original_response_and_never_replays_node(self):
+        m, _ = self.recovery_fixture()
+        self.assertEqual(H.unplaced_node_evidence(self.state,m), self.node_reply())
+        H.write_new(self.state / 'resume-attempted.json', {'reserved': True})
+        with self.assertRaisesRegex(ValueError, 'RESUME_ONCE_ONLY'):
+            H.unplaced_node_evidence(self.state,m)
+        with self.assertRaisesRegex(ValueError, 'ONCE_ONLY'):
+            H.guard_manifest(self.state)
+
+    def test_recovery_rejects_timeout_or_different_native_target(self):
+        m, outcome = self.recovery_fixture()
+        for field, value in [('reason','TimeoutError: unknown'), ('target','C:/foreign.pln')]:
+            mutated = json.loads(json.dumps(outcome))
+            if field == 'reason': mutated['reason'] = value
+            else: mutated['intent']['target']['path'] = value
+            with closing(sqlite3.connect(self.state / 'scenewriter.sqlite')) as db, db:
+                db.execute('UPDATE scenes SET result=?', (json.dumps(mutated),))
+            with self.assertRaises(ValueError):
+                H.unplaced_node_evidence(self.state,m)
+
+    def test_recovery_rejects_any_prior_instance_dispatch(self):
+        m, _ = self.recovery_fixture()
+        p = self.state / 'trace-live/raw.jsonl'
+        with p.open('a', encoding='utf8') as f:
+            f.write('\n' + json.dumps({'command':'CreateHotlinkInstances','parameters':{},'response':{}}))
+        with self.assertRaisesRegex(ValueError, 'COMPLETE_NATIVE_RESPONSE'):
+            H.unplaced_node_evidence(self.state,m)
+
+    def test_pending_ledger_proof_is_hash_bound_and_preserves_unknown(self):
+        m, outcome = self.recovery_fixture()
+        from apa_ac29_dynamic_write_scopes import validate_existing_ledger
+        raw = json.dumps(outcome)
+        proof = {'schema':'APA_AC29_UNPLACED_HOTLINK_RECONCILIATION_V1',
+                 'status':'NODE_RESPONSE_PINNED_FIRST_INSTANCE_READBACK_PENDING',
+                 'sceneId':H.SCENES[0], 'originalResultSHA256':hashlib.sha256(raw.encode()).hexdigest(),
+                 'originalUnknownPreserved':True, 'modelWrites':0, 'nativeNodeGuid':uid(2)}
+        path = self.state/'scenewriter.sqlite'
+        self.assertEqual(validate_existing_ledger(path,H.SCENES[1],proof),
+                         [(H.SCENES[0],'PARTIAL_OR_UNKNOWN_OUTCOME')])
+        for key,value in [('originalResultSHA256','0'*64),('nativeNodeGuid',uid(8)),
+                          ('modelWrites',1),('originalUnknownPreserved',False)]:
+            with self.assertRaises(ValueError):
+                validate_existing_ledger(path,H.SCENES[1],{**proof,key:value})
+        with self.assertRaisesRegex(ValueError,'ALREADY_USED_NEVER_RETRY'):
+            validate_existing_ledger(path,H.SCENES[0],proof)
+        with closing(sqlite3.connect(path)) as db:
+            self.assertEqual(db.execute('SELECT state FROM scenes').fetchone()[0],
+                             'PARTIAL_OR_UNKNOWN_OUTCOME')
 
 
 if __name__ == "__main__":

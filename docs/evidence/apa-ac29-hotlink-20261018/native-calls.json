@@ -1,0 +1,89 @@
+{
+  "dispatchCounts": {
+    "CreateHotlinkNodes": 1,
+    "CreateHotlinkInstances": 1,
+    "SaveProject": 1
+  },
+  "automaticReplay": false,
+  "nativeResponses": [
+    {
+      "at": "2026-10-18T19:48:12.865564+00:00",
+      "command": "CreateHotlinkNodes",
+      "elapsedSeconds": 1.269603900029324,
+      "parameters": {
+        "hotlinkNodes": [
+          {
+            "name": "APA_Hotlink_OneShot",
+            "sourceLocation": "[MODULE_PLN]",
+            "storyRangeType": "AllStories"
+          }
+        ]
+      },
+      "response": {
+        "hotlinkNodes": [
+          {
+            "existing": false,
+            "hotlinkNodeId": {
+              "guid": "E06D3A5B-9797-AFF7-49E3-87741C205118"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "at": "2026-10-18T19:54:23.055731+00:00",
+      "command": "CreateHotlinkInstances",
+      "elapsedSeconds": 0.34498290001647547,
+      "parameters": {
+        "hotlinkInstances": [
+          {
+            "floorIndex": 0,
+            "hotlinkNodeId": {
+              "guid": "e06d3a5b-9797-aff7-49e3-87741c205118"
+            },
+            "mirrored": false,
+            "origin": {
+              "x": 346.475,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rotationAngle": 0.0
+          }
+        ]
+      },
+      "response": {
+        "elements": [
+          {
+            "elementId": {
+              "guid": "2A4D7D8F-06DC-4C79-97F1-34E7DC91B7AE"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "at": "2026-10-18T19:54:25.003518+00:00",
+      "command": "SaveProject",
+      "elapsedSeconds": 2.3500337000004947,
+      "parameters": {},
+      "response": {
+        "success": true
+      }
+    }
+  ],
+  "nodeTreeBeforePlacement": {
+    "hotlinks": []
+  },
+  "nodeTreeAfterPlacement": {
+    "hotlinks": [
+      {
+        "hotlinkNodeId": {
+          "guid": "E06D3A5B-9797-AFF7-49E3-87741C205118"
+        },
+        "location": "[MODULE_PLN]",
+        "name": "group-ac29-scene-writer-20261018-01.pln",
+        "type": "Module"
+      }
+    ]
+  }
+}

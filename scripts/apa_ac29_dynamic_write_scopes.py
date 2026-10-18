@@ -7,6 +7,7 @@ tasks may describe native data, but cannot submit executable callbacks.
 """
 from __future__ import annotations
 import copy
+import json
 from contextlib import closing
 import re
 import sqlite3
@@ -125,7 +126,23 @@ def validate_existing_ledger(journal, scene_id, reconciliation=None):
         paired = (isinstance(reconciliation, dict) and
                   reconciliation.get("schema") ==
                   "APA_AC29_BDD_PAIRED_HISTORY_RECONCILIATION_V1")
-        if paired:
+        unplaced = (isinstance(reconciliation, dict) and
+                    reconciliation.get("schema") == "APA_AC29_UNPLACED_HOTLINK_RECONCILIATION_V1")
+        if unplaced:
+            need(len(pending) == 1 and
+                 reconciliation.get("status") == "NODE_RESPONSE_PINNED_FIRST_INSTANCE_READBACK_PENDING" and
+                 reconciliation.get("sceneId") == pending[0][0] and
+                 reconciliation.get("originalResultSHA256") == hashlib.sha256(pending[0][2].encode()).hexdigest() and
+                 reconciliation.get("originalUnknownPreserved") is True and
+                 reconciliation.get("modelWrites") == 0,
+                 "DYNAMIC_WRITE_UNPLACED_NODE_RECONCILIATION_INVALID")
+            outcome = json.loads(pending[0][2])
+            need(outcome.get("command") == "CreateHotlinkNodes" and
+                 outcome.get("reason") == "ValueError: HOTLINK_NODE_INDEPENDENT_READBACK_DIFFERENT" and
+                 outcome["nativeResponse"]["hotlinkNodes"] == [{"existing": False,
+                     "hotlinkNodeId": {"guid": reconciliation["nativeNodeGuid"]}}],
+                 "DYNAMIC_WRITE_UNPLACED_NODE_NATIVE_RESPONSE_CHANGED")
+        elif paired:
             proofs = reconciliation.get("historicalProofs")
             need(reconciliation.get("status") ==
                  "BDD_PAIRED_HISTORY_CURRENT_MODEL_RECONCILED_PASS" and
@@ -175,6 +192,12 @@ def build_existing_workflow_scopes(*, spec, plan, router, registry,
                                local_authorization=local_authorization)
     unresolved = validate_existing_ledger(
         writer.journal_path, spec["sceneId"], reconciliation=reconciliation)
+    if reconciliation and reconciliation.get("schema") == "APA_AC29_UNPLACED_HOTLINK_RECONCILIATION_V1":
+        operation = plan["graph"]["operations"][0]
+        need(spec["command"] == "CreateHotlinkInstances" and
+             operation["params"]["hotlinkInstances"][0]["hotlinkNodeId"]["guid"].lower() ==
+             reconciliation["nativeNodeGuid"].lower(),
+             "DYNAMIC_WRITE_UNPLACED_NODE_ONLY_FIRST_INSTANCE_ALLOWED")
     need(current_project_sha() == approved_project_sha,
          "DYNAMIC_WRITE_SAVED_PROJECT_HASH_CHANGED")
 

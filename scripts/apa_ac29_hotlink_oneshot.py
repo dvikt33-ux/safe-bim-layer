@@ -10,6 +10,7 @@ No main, original PLN, BDD or running project is changed by --stage.
 from __future__ import annotations
 
 import argparse
+from contextlib import closing
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -27,6 +28,7 @@ from apa_ac29_hotlink_native_verifiers import (
     need, digest, flatten_hotlinks, node_parameters, instance_parameters,
     parse_node_reply, parse_instance_reply, installed_hotlink_verifiers,
     canonical_location,
+    verify_instance_root,
 )
 from apa_ac29_reusable_native_copy import GuardedSaveTransport
 
@@ -147,7 +149,8 @@ def native_baseline(api):
     return ids, RUN.digest(signatures)
 
 
-def run_one(router, writer, api, command, params, verifier_id, registry, scene, sha):
+def run_one(router, writer, api, command, params, verifier_id, registry, scene, sha,
+            reconciliation=None):
     ids, brep_hash = native_baseline(api)
     step_id = "OneHotlinkStep"
     preview = APA.prepare_native_task(router, {
@@ -178,7 +181,7 @@ def run_one(router, writer, api, command, params, verifier_id, registry, scene, 
         registry=registry, writer=writer, api=api,
         capture_model=DOC.capture_full_model, guid_inventory=APA.inventory_guids,
         current_project_sha=lambda: digest(Path(RUN.EXPECTED_PATH)),
-        approved_project_sha=sha, local_authorization=AUTH)
+        approved_project_sha=sha, local_authorization=AUTH, reconciliation=reconciliation)
     result = APA.run_native_task(router, api, preview, writer, scopes)
     need(result.get("status") == "WORKFLOW_CALLABLE_VERIFIED" and
          len(result.get("trace", [])) == 1, "HOTLINK_NATIVE_RESULT_NOT_CONFIRMED_NO_REPLAY")
@@ -244,63 +247,10 @@ def execute(state):
         node = parse_node_reply(reply_node)
         need(digest(scratch) == sha and digest(manifest["source"]) == manifest["sourceSHA256"],
              "HOTLINK_FILES_CHANGED_AFTER_NODE")
-        registry = installed_hotlink_verifiers(
-            manifest["module"], manifest["moduleSHA256"], manifest["origin"],
-            verified_node_guid=node)
-        reply_inst = run_one(router, writer, api, "CreateHotlinkInstances",
-                             instance_parameters(node, manifest["origin"]),
-                             "VerifiedHotlinkInstanceOneShot", registry, SCENES[1], sha)
-        instance = parse_instance_reply(reply_inst)
-        saved_ids, saved_brep_hash = native_baseline(api)
-        need(saved_ids != old_ids and digest(scratch) == sha and
-             digest(manifest["source"]) == manifest["sourceSHA256"],
-             "HOTLINK_NEW_ELEMENTS_OR_SCRATCH_UNSAVED_STATE_INVALID")
-        source_path = canonical_location(manifest["module"])
-        need((source_path, node) in flatten_hotlinks(api("GetHotlinks", {})),
-             "HOTLINK_SOURCE_NODE_CHANGED_BEFORE_SAVE")
-        # Persistence is a THIRD, separate original SceneWriter scene, only
-        # after both native readback verifiers have completed with PASS.
-        save_guard.enable_after_verified_copy()
-        retained = DOC.capture_full_model(api, saved_ids)
-        signatures = C.retained_geometry_signatures(retained, saved_ids)
-        need(set(signatures) == set(saved_ids), "HOTLINK_PRE_SAVE_BREP_INCOMPLETE")
-        def before_save(live):
-            current_project(live, scratch)
-            need(digest(scratch) == sha and
-                 sorted(APA.inventory_guids(live)) == saved_ids and
-                 digest(manifest["module"]) == manifest["moduleSHA256"] and
-                 (source_path, node) in flatten_hotlinks(live("GetHotlinks", {})),
-                 "HOTLINK_SAVE_PRECONDITIONS_CHANGED")
-            return {"status": "HOTLINK_BEFORE_SAVE_PASS"}
-        def after_save(reply, previous):
-            need(reply == {"success": True} and save_guard.new_saved_sha and
-                 digest(scratch) == save_guard.new_saved_sha and
-                 digest(manifest["source"]) == manifest["sourceSHA256"] and
-                 digest(manifest["module"]) == manifest["moduleSHA256"],
-                 "HOTLINK_SAVE_NOT_VERIFIED")
-            return {"status": "HOTLINK_GUARDED_SAVE_PASS",
-                    "savedSHA256": save_guard.new_saved_sha}
-        ticket = router.prepare("SaveProject", {})
-        save_result = router.execute(
-            writer, SCENES[2], ticket, [], signatures, sha,
-            AUTH, "PROJECT", after_save, verify_before=before_save)
-        need(save_result.get("status") == "PASS" and
-             api.write_attempts == 3 and api.calls["SaveProject"] == 1,
-             "HOTLINK_THREE_JOURNALED_OPERATIONS_REQUIRED")
-        receipt = {
-            "schema": SCHEMA, "status": "LIVE_SAVED_PENDING_REOPEN",
-            "at": utc(), "nodeGuid": node, "instanceGuid": instance,
-            "moduleSHA256": manifest["moduleSHA256"],
-            "sourceSHA256": manifest["sourceSHA256"],
-            "savedSHA256": save_guard.new_saved_sha,
-            "guidCountBefore": len(old_ids), "guidCountAfter": len(saved_ids),
-            "beforeBrepSHA256": old_brep_hash, "afterBrepSHA256": saved_brep_hash,
-            "afterGuidSetSHA256": RUN.digest(saved_ids),
-            "nativeCalls": 2, "saveCalls": 1, "automaticRetry": False,
-            "reopenVerified": False, "scratch": str(scratch)
-        }
-        write_new(state / "saved.json", receipt)
-        return receipt
+        return finish_instance_and_save(
+            state, manifest, api, save_guard, router, writer,
+            old_ids, old_brep_hash, reply_node)
+
     except Exception as exc:
         # A SceneWriter scene might have reached Archicad even if transport
         # timed out. Never remove or retry the task. Reconcile read-only.
@@ -310,6 +260,171 @@ def execute(state):
             "modelWritesMayHaveOccurred": True, "automaticRetry": False,
             "scratch": str(scratch), "ledger": str(ledger)
         })
+        raise
+
+
+def finish_instance_and_save(state, manifest, api, save_guard, router, writer,
+                             old_ids, old_brep_hash, reply_node, *, prior_node_calls=0,
+                             reconciliation=None):
+    scratch = Path(manifest["scratch"])
+    sha = manifest["scratchInitialSHA256"]
+    node = parse_node_reply(reply_node)
+    registry = installed_hotlink_verifiers(
+        manifest["module"], manifest["moduleSHA256"], manifest["origin"],
+        verified_node_guid=node, unplaced_node_response=reply_node)
+    reply_inst = run_one(router, writer, api, "CreateHotlinkInstances",
+                         instance_parameters(node, manifest["origin"]),
+                         "VerifiedHotlinkInstanceOneShot", registry, SCENES[1], sha,
+                         reconciliation=reconciliation)
+    instance = parse_instance_reply(reply_inst)
+    saved_ids, saved_brep_hash = native_baseline(api)
+    need(saved_ids != old_ids and digest(scratch) == sha and
+         digest(manifest["source"]) == manifest["sourceSHA256"],
+         "HOTLINK_NEW_ELEMENTS_OR_SCRATCH_UNSAVED_STATE_INVALID")
+    source_path = canonical_location(manifest["module"])
+    need((source_path, node) in flatten_hotlinks(api("GetHotlinks", {})),
+         "HOTLINK_SOURCE_NODE_CHANGED_BEFORE_SAVE")
+    # Persistence is a THIRD, separate original SceneWriter scene, only
+    # after both native readback verifiers have completed with PASS.
+    save_guard.enable_after_verified_copy()
+    retained = DOC.capture_full_model(api, saved_ids)
+    signatures = C.retained_geometry_signatures(retained, saved_ids)
+    need(set(signatures) == set(saved_ids), "HOTLINK_PRE_SAVE_BREP_INCOMPLETE")
+    def before_save(live):
+        current_project(live, scratch)
+        need(digest(scratch) == sha and
+             sorted(APA.inventory_guids(live)) == saved_ids and
+             digest(manifest["module"]) == manifest["moduleSHA256"] and
+             (source_path, node) in flatten_hotlinks(live("GetHotlinks", {})),
+             "HOTLINK_SAVE_PRECONDITIONS_CHANGED")
+        return {"status": "HOTLINK_BEFORE_SAVE_PASS"}
+    def after_save(reply, previous):
+        need(reply == {"success": True} and save_guard.new_saved_sha and
+             digest(scratch) == save_guard.new_saved_sha and
+             digest(manifest["source"]) == manifest["sourceSHA256"] and
+             digest(manifest["module"]) == manifest["moduleSHA256"],
+             "HOTLINK_SAVE_NOT_VERIFIED")
+        return {"status": "HOTLINK_GUARDED_SAVE_PASS",
+                "savedSHA256": save_guard.new_saved_sha}
+    ticket = router.prepare("SaveProject", {})
+    save_result = router.execute(
+        writer, SCENES[2], ticket, [], signatures, sha,
+        AUTH, "PROJECT", after_save, verify_before=before_save)
+    need(save_result.get("status") == "PASS" and
+         api.write_attempts == 3 - prior_node_calls and api.calls["SaveProject"] == 1,
+         "HOTLINK_THREE_JOURNALED_OPERATIONS_REQUIRED")
+    receipt = {
+        "schema": SCHEMA, "status": "LIVE_SAVED_PENDING_REOPEN",
+        "at": utc(), "nodeGuid": node, "instanceGuid": instance,
+        "moduleSHA256": manifest["moduleSHA256"],
+        "sourceSHA256": manifest["sourceSHA256"],
+        "savedSHA256": save_guard.new_saved_sha,
+        "guidCountBefore": len(old_ids), "guidCountAfter": len(saved_ids),
+        "beforeBrepSHA256": old_brep_hash, "afterBrepSHA256": saved_brep_hash,
+        "afterGuidSetSHA256": RUN.digest(saved_ids),
+        "nativeCalls": 2, "saveCalls": 1, "automaticRetry": False,
+        "reopenVerified": False, "scratch": str(scratch)
+    }
+    write_new(state / "saved.json", receipt)
+    return receipt
+
+
+def unplaced_node_evidence(state, manifest):
+    """Accept only the measured placed-tree mismatch, never a timeout/replay.
+
+    Preserve the original UNKNOWN SQLite scene. A separate reconciliation
+    receipt will confirm its node after the FIRST instance is read back.
+    """
+    need(not any((state / name).exists() for name in
+                 ("resume-dispatch-reserved.json", "saved.json", "reopened.json")),
+         "HOTLINK_RESUME_ONCE_ONLY")
+    if (state / "resume-attempted.json").exists():
+        need((state / "resume-failed.json").is_file() and
+             read(state / "resume-failed.json").get("error") ==
+             "ValueError: DYNAMIC_WRITE_UNRECONCILED_PREVIOUS_NATIVE_OPERATION",
+             "HOTLINK_RESUME_ONCE_ONLY")
+    need(read(state / "failed.json")["status"] ==
+         "STOPPED_NO_REPLAY_RECONCILIATION_REQUIRED" and
+         read(state / "attempted.json")["scratchSHA256"] == manifest["scratchInitialSHA256"],
+         "HOTLINK_RESUME_REQUIRES_ORIGINAL_ATTEMPT")
+    with closing(sqlite3.connect(state / "scenewriter.sqlite")) as db:
+        scenes = db.execute("SELECT scene_id,state,result FROM scenes").fetchall()
+        steps = db.execute("SELECT scene_id,state FROM steps").fetchall()
+    need(len(scenes) == len(steps) == 1 and scenes[0][:2] ==
+         (SCENES[0], "PARTIAL_OR_UNKNOWN_OUTCOME") and
+         steps[0] == (SCENES[0], "UNKNOWN_OUTCOME"),
+         "HOTLINK_RESUME_ONLY_BEFORE_FIRST_INSTANCE")
+    outcome = json.loads(scenes[0][2])
+    need(outcome.get("reason") == "ValueError: HOTLINK_NODE_INDEPENDENT_READBACK_DIFFERENT" and
+         outcome.get("command") == "CreateHotlinkNodes" and
+         outcome["intent"]["parameters"] == node_parameters(manifest["module"]),
+         "HOTLINK_RESUME_ONLY_KNOWN_PLACED_TREE_MISMATCH")
+    target = outcome["intent"]["target"]
+    need(target["port"] == manifest["port"] and win(target["path"]) == win(manifest["scratch"]),
+         "HOTLINK_RESUME_LEDGER_TARGET_MISMATCH")
+    raw = [json.loads(line) for line in
+           (state / "trace-live/raw.jsonl").read_text(encoding="utf8").splitlines()]
+    writes = [r for r in raw if r["command"] not in APA.READS and
+              r["command"] not in {"GetHotlinks", "API.IsAddOnCommandAvailable"}]
+    last_node_read = next((r for r in reversed(raw) if r["command"] == "GetHotlinks"), {})
+    need(len(writes) == 1 and writes[0]["command"] == "CreateHotlinkNodes" and
+         writes[0]["parameters"] == outcome["intent"]["parameters"] and
+         writes[0]["response"] == outcome["nativeResponse"] and
+         last_node_read.get("response") == {"hotlinks": []},
+         "HOTLINK_RESUME_COMPLETE_NATIVE_RESPONSE_REQUIRED")
+    parse_node_reply(outcome["nativeResponse"])
+    return outcome["nativeResponse"]
+
+
+def resume_unplaced_node(state):
+    state = Path(state).resolve()
+    manifest = read(state / "manifest.json")
+    need(manifest.get("schema") == SCHEMA and
+         digest(manifest["source"]) == manifest["sourceSHA256"] and
+         digest(manifest["module"]) == manifest["moduleSHA256"] and
+         digest(manifest["scratch"]) == manifest["scratchInitialSHA256"],
+         "HOTLINK_RESUME_PROTECTED_FILE_DRIFT")
+    reply_node = unplaced_node_evidence(state, manifest)
+    api, save_guard = prepare_api(manifest, state, for_write=True)
+    current_project(api, manifest["scratch"])
+    router = router_for_runtime(api)
+    ids, brep_hash = native_baseline(api)
+    baseline = read(state / "baseline.json")
+    need(ids == baseline["baselineGuids"] and
+         brep_hash == baseline["baselineBrepSHA256"] and
+         api("GetHotlinks", {}) == {"hotlinks": []},
+         "HOTLINK_RESUME_NATIVE_BASELINE_CHANGED")
+    with closing(sqlite3.connect(state / "scenewriter.sqlite")) as db:
+        original_result = db.execute("SELECT result FROM scenes WHERE scene_id=?", (SCENES[0],)).fetchone()[0]
+    reconciliation = {
+        "schema": "APA_AC29_UNPLACED_HOTLINK_RECONCILIATION_V1",
+        "status": "NODE_RESPONSE_PINNED_FIRST_INSTANCE_READBACK_PENDING",
+        "sceneId": SCENES[0], "nativeNodeGuid": reply_node["hotlinkNodes"][0]["hotlinkNodeId"]["guid"],
+        "originalResultSHA256": hashlib.sha256(original_result.encode()).hexdigest(),
+        "originalUnknownPreserved": True, "savedProjectSHA256": manifest["scratchInitialSHA256"],
+        "guidSetHash": RUN.digest(ids), "brepSignaturesHash": brep_hash, "modelWrites": 0}
+    write_new(state / "resume-dispatch-reserved.json", {
+        "status": "FIRST_INSTANCE_RESERVED_NODE_NOT_REPLAYED", "at": utc(),
+        "nodeGuid": parse_node_reply(reply_node), "nodeResponse": reply_node,
+        "baselineBrepSHA256": brep_hash, "reconciliation": reconciliation, "automaticRetry": False})
+    writer = RUN.SceneWriter(api, journal_path=state / "scenewriter.sqlite",
+                             schema_path=SCHEMA_PATH, allow_3d_view_for_write=True)
+    try:
+        receipt = finish_instance_and_save(
+            state, manifest, api, save_guard, router, writer,
+            ids, brep_hash, reply_node, prior_node_calls=1, reconciliation=reconciliation)
+        write_new(state / "node-reconciled.json", {
+            "status": "NODE_RECONCILED_BY_FIRST_INSTANCE_AND_GET_HOTLINKS",
+            "at": utc(), "nodeGuid": receipt["nodeGuid"],
+            "instanceGuid": receipt["instanceGuid"], "nodeReplayCount": 0,
+            "originalUnknownScenePreserved": True,
+            "savedReceiptSHA256": digest(state / "saved.json")})
+        return receipt
+    except Exception as exc:
+        write_new(state / "continuation-failed.json", {
+            "status": "STOPPED_NO_REPLAY_RECONCILIATION_REQUIRED", "at": utc(),
+            "error": type(exc).__name__ + ": " + str(exc)[-1600:],
+            "automaticRetry": False})
         raise
 
 
@@ -336,6 +451,7 @@ def verify_reopen(state):
     need((canonical_location(manifest["module"]), node) in
          flatten_hotlinks(api("GetHotlinks", {})),
          "HOTLINK_REOPENED_NODE_MISSING")
+    verify_instance_root(api, node, receipt["instanceGuid"], manifest["origin"])
     ids, brep_hash = native_baseline(api)
     need(RUN.digest(ids) == receipt["afterGuidSetSHA256"] and
          brep_hash == receipt["afterBrepSHA256"] and
@@ -366,6 +482,7 @@ def main():
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--stage", action="store_true")
     mode.add_argument("--execute", action="store_true")
+    mode.add_argument("--resume-unplaced-node", action="store_true")
     mode.add_argument("--verify-reopen", action="store_true")
     parser.add_argument("--source-pln")
     parser.add_argument("--module-pln")
@@ -385,7 +502,12 @@ def main():
         need(not any((args.source_pln, args.module_pln, args.scratch_pln))
              and args.origin is None,
              "HOTLINK_EXECUTION_USES_ONLY_PINNED_STAGE_MANIFEST")
-        value = execute(args.state_dir) if args.execute else verify_reopen(args.state_dir)
+        if args.execute:
+            value = execute(args.state_dir)
+        elif args.resume_unplaced_node:
+            value = resume_unplaced_node(args.state_dir)
+        else:
+            value = verify_reopen(args.state_dir)
     print(json.dumps(value, ensure_ascii=False, indent=2))
 
 
