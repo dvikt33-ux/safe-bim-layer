@@ -1,0 +1,213 @@
+{
+  "at": "2026-10-18T20:58:27.525516+00:00",
+  "automaticReplay": false,
+  "baselineGuids": [
+    "01823404-1df6-73e9-85f9-cabe09235f08",
+    "0228fc36-42a9-10ae-1c3f-0158b7988405",
+    "061baafb-d066-b5a0-513f-d8ea35f3fa87",
+    "090d4e98-ee4c-4e30-ff05-42eff9bf3c90",
+    "0a17fb15-3639-4dfa-ab01-cd910ae112b0",
+    "0c35bf7e-854c-ec64-c3b7-09c0c0cd74c5",
+    "0d6f729b-43e1-442e-9cae-cf124eb5f2ac",
+    "16c58916-8eb9-ceea-87d1-a323ad3e398e",
+    "26473e08-ac82-4872-8473-0e4d08967ce8",
+    "293d0f57-7b5f-488c-bbd9-9216b318cbc5",
+    "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae",
+    "2a50acd3-1eb9-4cd9-a584-e96a2f3343f7",
+    "30dcb552-c241-4bb6-9e34-503141ec6081",
+    "357b81c4-1151-410a-9a23-0353881a07fd",
+    "366105a8-ccd8-46ac-8cd8-ae0ee857acb7",
+    "37953bef-b093-4694-a546-adcbf776d79f",
+    "3b252f67-f24b-40d2-b893-65ae038ff1e1",
+    "3d1a324c-c339-4e6c-8133-67b9da02f597",
+    "3e3d3eac-3f06-42b0-963e-2a762c9876df",
+    "442bbbec-53f1-432b-a461-93e3edbc3dc0",
+    "462bc642-a5fa-431f-b728-f5a25ecbfa64",
+    "46d32ac7-535d-4bd5-a3e8-71264da4ba9e",
+    "46f82304-729c-918a-39e0-5d26d72a6559",
+    "47597e9c-0fa8-4f9d-82a1-0ee4430427ea",
+    "48dc9ed3-af9a-40f0-bbdb-812b761d82e1",
+    "50b6be31-4b29-4e70-ac15-795d4b3042f5",
+    "69047a26-0fa0-45cb-b5eb-c83364e3a434",
+    "6c6eae50-7888-429d-94f3-c6d60f981e2e",
+    "6e3d88d3-89f4-42e5-aa84-5ad9b3ce0239",
+    "76ef9d39-b003-097f-52ed-792a59ad9530",
+    "794133b7-e4f9-a1a9-d494-0c798ddb3990",
+    "7abad59d-49bd-5a0c-0793-d92cc1dfe7e4",
+    "7fc29e57-4f05-acf4-8ef8-1c1a2434a535",
+    "81cb199c-ed4f-451b-85b0-2d0fdf19d909",
+    "8513e799-460a-4830-88d1-7197a30893e4",
+    "87ef73bd-e084-4944-a465-61b09489bac0",
+    "89e9ac67-b308-8481-528b-bf4e08a58ca0",
+    "8a4e299c-ae32-4c66-9059-b4a107a408b4",
+    "8bcc2a69-43d7-472a-ba2b-97bd9599d25e",
+    "8de7641c-e42d-bac0-666a-13796f3487ba",
+    "91072288-12ac-1453-7e28-09d8e47e3cd9",
+    "9918ac62-5a25-47f9-bec2-46b16d2718cf",
+    "99f7cc71-d278-a70d-b6da-316987b5bec9",
+    "9b145190-ae51-e3cd-c43d-68d654c1fd63",
+    "9be61b38-50cf-411d-b170-b428a7865a05",
+    "9cbde99a-7cea-45fc-81b8-4eff9934513d",
+    "9ffbbe00-9054-4c4b-a4ef-e3226b97e7b1",
+    "a1863e73-3e2a-7c79-fc57-a8b05a290e7b",
+    "a2bb7608-04dc-324d-90f8-c42c6df92c21",
+    "a457ec9e-e034-4abe-af5c-a7d2ecb689dc",
+    "a9eda929-1af2-d0b5-9f8c-a645f5a0c325",
+    "adea480c-03b2-42a7-9bc7-8834bfb6b409",
+    "ae0d573e-85fd-4033-983e-32977fa23c9e",
+    "aec30956-081a-3b51-5655-60991e19cfa8",
+    "afe762c7-c966-f724-a8a1-b9fb5b895b31",
+    "c4f9ea8f-2fb1-43b9-8ed0-58f090b8dac1",
+    "c7e72514-3c33-4cb2-8cc2-310d59430437",
+    "ccc099ea-da0f-4a5d-aec4-75ea5b792c3c",
+    "cf1853a5-d3cf-40d5-9e06-00bed7219e6e",
+    "cf8c6e46-7882-484c-b11a-fe274c6eb504",
+    "d595303f-e259-4ce5-a1d6-fef52a9ae23e",
+    "d6245153-ab1d-42d0-8cf0-4411a1846d3f",
+    "dc36021e-03bb-4efe-a13c-8d1a5d29645a",
+    "dfcaa124-c31e-0a98-ace0-fc6e15063df5",
+    "e1d88f7f-695c-41c1-a2bb-80e69fa85e23",
+    "e6b77f2b-f770-436e-b4ca-dae576509f42",
+    "ea4a8b29-9595-46e6-bafd-2201a1acf364",
+    "ed899440-fa86-4b64-d346-027b4b068cab",
+    "ff1c462a-8733-e03f-1c6e-8689b07dd271"
+  ],
+  "batchParameters": {
+    "hotlinkInstances": [
+      {
+        "adjustLevelDiffs": true,
+        "floorDifference": 0,
+        "floorIndex": 0,
+        "hotlinkNodeId": {
+          "guid": "e06d3a5b-9797-aff7-49e3-87741c205118"
+        },
+        "ignoreTopFloorLinks": true,
+        "mirrored": false,
+        "origin": {
+          "x": 386.95,
+          "y": 0,
+          "z": 0
+        },
+        "relinkWallOpenings": true,
+        "rotationAngle": 0.0,
+        "skipNested": false,
+        "suspendFixAngle": false
+      },
+      {
+        "adjustLevelDiffs": true,
+        "floorDifference": 0,
+        "floorIndex": 0,
+        "hotlinkNodeId": {
+          "guid": "e06d3a5b-9797-aff7-49e3-87741c205118"
+        },
+        "ignoreTopFloorLinks": true,
+        "mirrored": false,
+        "origin": {
+          "x": 427.425,
+          "y": 0,
+          "z": 0
+        },
+        "relinkWallOpenings": true,
+        "rotationAngle": 0.0,
+        "skipNested": false,
+        "suspendFixAngle": false
+      }
+    ]
+  },
+  "beforeBrepSHA256": "c46b8ea97613ae94758e2b98f26532043f6a1e3637d20d9f26d67da355daaf85",
+  "beforeGuidSetSHA256": "26392e9123334de2657a3f3ca29e6cc8fbcad6eb567729cf3d6b5e020babf8d0",
+  "contractSHA256": "2774fe09377c8bc5b485d73d361a0d1dddadb78cfdeec92888fc0a0514d76b85",
+  "geometry": {
+    "count": 2,
+    "expectedBounds": [
+      {
+        "x": [
+          686.95,
+          717.425
+        ],
+        "y": [
+          299.981,
+          317.775
+        ],
+        "z": [
+          -0.2,
+          3
+        ]
+      },
+      {
+        "x": [
+          727.425,
+          757.9000000000001
+        ],
+        "y": [
+          299.981,
+          317.775
+        ],
+        "z": [
+          -0.2,
+          3
+        ]
+      }
+    ],
+    "gapMeters": 10.0,
+    "modelWrites": 0,
+    "nodeGuid": "e06d3a5b-9797-aff7-49e3-87741c205118",
+    "origins": [
+      {
+        "x": 386.95,
+        "y": 0,
+        "z": 0
+      },
+      {
+        "x": 427.425,
+        "y": 0,
+        "z": 0
+      }
+    ],
+    "prototypeGuid": "2a4d7d8f-06dc-4c79-97f1-34e7dc91b7ae",
+    "prototypeOrigin": {
+      "x": 346.475,
+      "y": 0,
+      "z": 0
+    },
+    "prototypeSettings": {
+      "adjustLevelDiffs": true,
+      "floorDifference": 0,
+      "ignoreTopFloorLinks": true,
+      "relinkWallOpenings": true,
+      "skipNested": false,
+      "suspendFixAngle": false
+    },
+    "schema": "APA_HOTLINK_BATCH_GEOMETRY_V1",
+    "singleBatchCall": true,
+    "sourceLocalBounds": {
+      "x": [
+        300.0,
+        330.475
+      ],
+      "y": [
+        299.981,
+        317.775
+      ],
+      "z": [
+        -0.2,
+        3
+      ]
+    },
+    "sourceOwnedCount": 24,
+    "sourceTypeHistogram": {
+      "Column": 8,
+      "ColumnSegment": 8,
+      "Door": 1,
+      "Slab": 1,
+      "Wall": 4,
+      "Window": 2
+    },
+    "status": "SOURCE_BREP_COORDINATE_PLAN_PASS_NO_WRITES"
+  },
+  "moduleSHA256": "3a74d7cb17e460378eacfa8f933aeae29a5ca39fbf2bc73633115c9fee728750",
+  "nativeCalls": 0,
+  "savedSourceSHA256": "98ad2144792309c208818bfdb2a5aba407c9de1f266c34abda5b00b564343acc",
+  "schema": "APA_AC29_HOTLINK_BATCH_V1",
+  "status": "READ_ONLY_BREP_PLAN_READY"
+}
