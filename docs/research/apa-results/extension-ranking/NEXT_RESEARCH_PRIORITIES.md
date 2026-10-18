@@ -1,3 +1,9 @@
+# APA AC29 — очередь 19Z, 18.10.2026
+
+[Аудит №3: 30 SOURCE-проверок](hourly/audit-2026-10-18-19.md), [два контрааудита](hourly/audit-2026-10-18-19-crossaudits.md), [8 задач №1](hourly/audit-2026-10-18-19-tasks-1.md), [8 задач №2](hourly/audit-2026-10-18-19-tasks-2.md). Исследователь №1 ищет НОВЫЕ ГОТОВЫЕ РЕШЕНИЯ; №2 — ГОТОВЫЕ СПОСОБЫ ПОДКЛЮЧЕНИЯ. PR164 forensic RECOVERED 19:09Z (44 GUID/BREP, zero dispatch), но drift 1.5.8→1.5.10 и otherActorsNotCovered; Clone не повторять. PR167 B1+B2, PR168 C1, PR170 B3 synthetic INSTALLED receipts существуют, не native LIVE; 30 read-only routes в B3. MINSERT — пробел существующего C1, не новый DXF writer. Новых ACCEPTED нет. MODEL_MODE_NOT_VERIFIABLE.
+
+---
+
 # APA AC29 — очередь 18Z
 
 Аудит №3: [28 проверок и 2 контрааудита](hourly/audit-2026-10-18-18.md); [8 задач №1 и 8 задач №2](hourly/audit-2026-10-18-18-tasks.md). PR164: forensic receipt отсутствует, Clone не повторять. PR165: synthetic 12/12, не LIVE. №2: 18Z main неполный, индекс и доказательства существуют. Новых ACCEPTED нет. MODEL_MODE_NOT_VERIFIABLE.
