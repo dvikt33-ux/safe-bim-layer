@@ -28,7 +28,13 @@ def digest(path):
 
 def canonical_location(value):
     need(isinstance(value, str) and bool(value), "HOTLINK_SOURCE_LOCATION_REQUIRED")
-    return PureWindowsPath(value).as_posix().casefold()
+    # Windows TemporaryDirectory may expose an 8.3 short path; compare the
+    # resolved filesystem identity, not two different spellings of one file.
+    try:
+        normalized = str(Path(value).resolve(strict=False))
+    except (OSError, ValueError):
+        normalized = value
+    return PureWindowsPath(normalized).as_posix().casefold()
 
 
 def flatten_hotlinks(response):
