@@ -22,3 +22,18 @@
 - Обновлять **отдельно** нужность 0–5, сложность 0–5, доказательства и итоговый приоритет. Не повышать баллы из-за числа звёзд или красочного описания.
 - Сохранить независимый аудиторский отчёт в hourly; затем безопасно обновить **только этот файл поручений**, указав ссылки на отчёты исследователей и следующий набор новых вопросов. При конфликте версий файл перечитать.
 - Не изменять оригинальный PLN, main, код дополнений, установку, официальный план №182 и статусы приёмки.
+
+<!-- audit-20261018T03Z-r1 -->
+## Новые поручения аудитора — 18.10.2026, 03:00 UTC
+
+**Основание:** [независимый отчёт](hourly/audit-20261018T03Z.md), [план №182 — только чтение](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/control/PROJECT_PLAN.json). В начале проверки свежих отчётов №1 и №2 в `hourly/` не было. Стартовые поручения выше сохраняются как история; новые вопросы ниже их уточняют. Только исследование, без установки и записи в PLN/APX.
+
+### Исследователь №1 — геометрия, группы, PDF/DXF, PDF→BIM
+
+**R1-01 — П0.** Какие точные входы/выходы `CreateGroups` и `GetGroupsOfElements` есть в [Tapir 1.5.9](https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.5.9/archicad-addon/Sources/ElementGroupingCommands.cpp), что подтверждено для установленной 1.5.10 и чего нет в [PR #159](https://github.com/dvikt33-ux/safe-bim-layer/pull/159)/[#162](https://github.com/dvikt33-ux/safe-bim-layer/pull/162)? Есть ли **в SDK29** программный аналог [Multiply](https://help.graphisoft.com/AC/29/INT/_AC29_Help/030_Interaction/030_Interaction-96.htm)? **Проблема:** `A11.S03 PARTIAL`, риск второго исполнителя. **ГОТОВО:** таблица контракт/версия/API29/APA, подтверждённая ссылка либо NOT_FOUND, локальный 1.5.10 без доступа = NOT_VERIFIED.
+
+**R1-02 — П0.** Где физические координаты стен, окон и дверей в АР/КР, а где лишь текстовые метки? **Проблема:** [PR #154](https://github.com/dvikt33-ux/safe-bim-layer/pull/154), [PR #160](https://github.com/dvikt33-ux/safe-bim-layer/pull/160), [pdfplumber](https://github.com/jsvine/pdfplumber), [ezdxf](https://github.com/mozman/ezdxf). **ГОТОВО:** ≥3 размерных якоря с листами-источниками, PDF/DXF→метры, численная невязка и таблица достоверности проёмов. Никакой записи в PLN.
+
+**R1-03 — П1.** Существует ли документированный запуск [Raster2Seq](https://github.com/Cornell-VAILab/Raster2Seq) на Windows 11, RTX4060 Laptop 8 ГБ VRAM и 48 ГБ RAM? **Проблема:** README проверяет Linux/Python3.10.13/PyTorch2.3.1/CUDA11.8, не Windows и реальные BDD PDF. **ГОТОВО:** версии, лицензии/хеши весов, формат координат, измеренный VRAM либо NOT_VERIFIED, Windows-путь или BLOCKED; не скачивать и не устанавливать.
+
+**R1-04 — П1.** Каков готовый контракт `CreateHotlinkInstances` и сохраняются ли node/instance GUID при повторных модулях? **Проблема:** [Tapir 1.5.9 ProjectCommands.cpp](https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.5.9/archicad-addon/Sources/ProjectCommands.cpp), [PR #162](https://github.com/dvikt33-ux/safe-bim-layer/pull/162). **ГОТОВО:** поля, версия, SDK29, сравнение с текущим APA и только реально отсутствующие операции; без нового writer.
