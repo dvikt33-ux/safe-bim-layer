@@ -33,7 +33,7 @@ class TestSafeUpgrade(unittest.TestCase):
         self.assertNotIn("CreateColumns",src)
         self.assertNotIn("ModifyWalls",src)
         self.assertNotIn(".unlink()",src)
-        self.assertIn("EXISTING_APA_RECEIVERS",src.replace("RECEIVER","RECEIVERS") if "EXISTING_APA_RECEIVER" in src else "EXISTING_APA_RECEIVERS")
+        self.assertIn("MULTIPLE_APA_RECEIVERS_FOUND_REFUSE_UPDATE",src)
         self.assertIn("RECEIVER_NEW_BYTES_READBACK_FAILED",src)
 
 if __name__=="__main__":
