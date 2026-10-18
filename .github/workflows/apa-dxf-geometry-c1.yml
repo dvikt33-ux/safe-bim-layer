@@ -1,0 +1,28 @@
+name: APA DXF geometry C1 real vendors
+on:
+  pull_request:
+    paths:
+      - scripts/apa_dxf_geometry_c1.py
+      - scripts/apa_dxf_geometry_factory_c1.py
+      - scripts/install_apa_dxf_geometry_c1.py
+      - tests/test_apa_dxf_geometry_c1.py
+      - tests/apa_dxf_geometry_installed_smoke_c1.py
+      - .github/workflows/apa-dxf-geometry-c1.yml
+permissions:
+  contents: read
+jobs:
+  real-dxf:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        python: ['3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install -r scripts/requirements-ifc-artifacts-b2-lock.txt
+      - run: python -m py_compile scripts/apa_dxf_geometry_factory_c1.py scripts/install_apa_dxf_geometry_c1.py tests/apa_dxf_geometry_installed_smoke_c1.py
+      - run: python -m unittest discover -s tests -p "test_apa_dxf_geometry_c1.py" -v
+      - run: python -m unittest discover -s tests -p "test_apa_ifc_*.py" -v
+      - run: python -m unittest discover -s tests -p "test_apa_high_density*.py" -v
