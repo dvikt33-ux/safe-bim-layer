@@ -1,0 +1,10 @@
+# APA №1 21Z — карточки F21-01—04
+Оценки экспертные, не измерение ускорения. Новые тесты не запускались.
+
+**F21-01 / 96/100 / БЫСТРО — ezdxf 1.4.5 MINSERT.** Готово: `recursive_decompose` вызывает `multi_insert`; при zero-spacing совпадающие offsets схлопываются. Источник https://github.com/mozman/ezdxf/blob/v1.4.5/src/ezdxf/disassemble.py#L542-L575 и insert.py L662–706; MIT, Win Python>=3.11. Недублирование: PR168 C1 уже provider, новый writer не нужен. №2: 2×3, zero-spacing, nested, OCS. ГОТОВО: уникальные координаты/handles/count без silent skip.
+
+**F21-02 / 89/100 / АДАПТАЦИЯ — ezdxf XCLIP.** Готовы XClip.has_clipping_path, is_clipping_enabled, is_inverted_clip, get_block_clipping_path; `recursive_decompose` XCLIP не применяет. Источник https://github.com/mozman/ezdxf/blob/v1.4.5/src/ezdxf/xclip.py#L67-L148 ; MIT, 2D-only. Недублирование: защита существующего DXF→BIM. №2: enabled/inverted fixture, fail-closed. ГОТОВО: UNCERTAIN_CLIP вместо ложной видимой геометрии.
+
+**F21-03 / 92/100 / АДАПТАЦИЯ — IfcOpenShell pinned 0.8.5 mapped.** Источник https://github.com/IfcOpenShell/IfcOpenShell/blob/ifcopenshell-python-0.8.5/src/ifcopenshell-python/ifcopenshell/util/placement.py#L128-L184 ; commit 16723d11, LGPL, PyPI Win3.11/3.12 wheel hashes, installed NOT_VERIFIED. Axis2 mirror, Scale2/Scale3, `TODO 2d`; util.representation.resolve_items nested. Недублирование: PR170 world bounds ≠ матричная QA. №2: mirror/nonuniform/nested/2D fixtures. ГОТОВО: determinant, units, world XYZ, GUID, 2D fail-closed.
+
+**F21-04 / 90/100 / АДАПТАЦИЯ — PDF page→IFC provenance.** Готово: PyMuPDF Page.get_label и IfcOpenShell 0.8.5 api.document.assign_document → IfcRelAssociatesDocument. Источники https://pymupdf.readthedocs.io/en/latest/page.html и https://github.com/IfcOpenShell/IfcOpenShell/blob/ifcopenshell-python-0.8.5/src/ifcopenshell-python/ifcopenshell/api/document/assign_document.py#L27-L103 . PyMuPDF AGPL/commercial, IFC LGPL. Недублирование: PR154 уже PDFVectors, но не document association. №2: предпочесть existing pdfplumber, stamp revision отдельно. ГОТОВО: 2 GlobalId + page/sheet/revision/SHA, исходный PDF неизменен.
