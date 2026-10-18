@@ -38,7 +38,7 @@ def bounds(points):
 
 def body_vertices(element):
     points = []
-    for body in element.get("bodies", []):
+    for body in element.get("bodies") or []:
         need(isinstance(body, dict) and isinstance(body.get("vertices"), list),
              "HOTLINK_NATIVE_BREP_INVALID_BODY")
         points += body["vertices"]
@@ -51,7 +51,7 @@ def world_boxes(native):
     result = {}
     for row in native["elements"]:
         guid = row.get("guid", "").lower()
-        need(guid and guid not in result and isinstance(row.get("bodies"), list),
+        need(guid and guid not in result and isinstance(row.get("bodies", []), list),
              "HOTLINK_NATIVE_BREP_GUID_OR_BODY_INVALID")
         points = body_vertices(row)
         result[guid] = bounds(points) if points else None
