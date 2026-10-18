@@ -1,0 +1,33 @@
+name: APA AC29 Verified Native Group-First Routing
+on:
+  push:
+    branches:
+      - feature/apa-ac29-automatic-group-routing-20261018
+    paths:
+      - 'scripts/apa_ac29_group_strategy.py'
+      - 'scripts/apa_ac29_semantic_operation_selector.py'
+      - 'scripts/archicad_project_accelerator.py'
+      - 'tests/test_apa_ac29_group_strategy_integration.py'
+      - '.github/workflows/apa-ac29-group-first-routing.yml'
+  pull_request:
+    paths:
+      - 'scripts/apa_ac29_group_strategy.py'
+      - 'scripts/apa_ac29_semantic_operation_selector.py'
+      - 'scripts/archicad_project_accelerator.py'
+      - 'tests/test_apa_ac29_group_strategy_integration.py'
+      - '.github/workflows/apa-ac29-group-first-routing.yml'
+permissions:
+  contents: read
+jobs:
+  focused-group-first:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install existing APA graph schema validator
+        run: python -m pip install 'jsonschema>=4,<5'
+      - name: Check only new group-first decision and routing cases
+        run: python -m unittest discover -s tests -p 'test_apa_ac29_group_strategy_integration.py' -v

@@ -274,9 +274,67 @@ def run_optimized_native_task(router, api, optimized_preview, writer, scopes, ch
     return run_native_task(router, api, chosen, writer, scopes, checkpoint)
 
 def prepare_auto_optimized_native_task(router, intent, planner_python=None):
-    """Discover typed V1/V2 strategies through the existing BIM Graph."""
+    """Auto-select native operations: source-proven groups take precedence.
+
+    Existing V1/V2 catalog behavior is unchanged. The explicit AC29 grouped
+    intent uses the same DynamicCommands and SceneWriter native-task graph.
+    No live model reads, native writes or runtime registration inference.
+    """
+    if isinstance(intent, dict) and intent.get('schemaVersion') == 'apa-native-group-auto/1':
+        if (set(intent) != {'schemaVersion','request','existing','targets','assemblyGroups'}
+                or not isinstance(intent['existing'], list)
+                or not isinstance(intent['targets'], list)
+                or not isinstance(intent['assemblyGroups'], list)
+                or not isinstance(intent['request'], str)
+                or not intent['request'].strip()):
+            raise ValueError('APA_GROUP_AUTO_EXACT_SOURCE_QUALIFIED_INTENT_REQUIRED')
+        from apa_ac29_group_strategy import route, workflow_for_selected
+        import apa_ac29_semantic_operation_selector as semantic
+        selected = route(intent['existing'],intent['targets'],intent['assemblyGroups'])
+        # Run the actual existing semantic chooser as well: it will reuse
+        # individual-copy routing only for targets not covered by assemblies.
+        semantic.analyze(intent['existing'],intent['targets'],
+                         assembly_groups=intent['assemblyGroups'])
+        prepared=workflow_for_selected(router,intent['request'],
+                                       intent['existing'],intent['targets'],selected)
+        prepared['groupStrategyEvidence']=selected
+        return prepared
     from archicad_strategy_discovery import discover_native_execution_plan
     return discover_native_execution_plan(router, intent, planner_python)
+
+
+def prepare_current_runtime_group_native_task(router, writer, intent):
+    """Auto-discover native groups against current Archicad 29 registration.
+
+    READ-ONLY preflight: bind the exact saved PLN with the existing writer
+    identity guard, check Archicad 29, and probe ONLY native commands chosen
+    by the source-verified group-first strategy. Does not save or mutate.
+    The result is still unpermitted and must use run_auto_optimized_native_task
+    with original per-step SceneWriter scopes and independent readback.
+    """
+    if (not isinstance(intent, dict)
+            or intent.get('schemaVersion') != 'apa-native-group-auto/1'):
+        raise ValueError('APA_GROUP_RUNTIME_REQUIRES_VERIFIED_GROUP_TASK')
+    binding = writer.guarded_binding()
+    archicad29(writer.api)
+    candidate = prepare_auto_optimized_native_task(router, intent)
+    requested = candidate['requiredRuntimeCommands']
+    checked = []
+    for command in requested:
+        proof = router.probe_runtime(writer.api, command)
+        if proof.get('status') != 'RUNTIME_AVAILABLE':
+            raise ValueError('APA_GROUP_NATIVE_COMMAND_NOT_RUNTIME_REGISTERED:'+command)
+        checked.append(command)
+    final = prepare_auto_optimized_native_task(router, intent)
+    if (final.get('status') != 'ONE_SOURCE_QUALIFIED_STRATEGY_PREPARED'
+            or final.get('selectedNativeTaskPreview') is None
+            or final.get('nativeWritePermission') is not False):
+        raise ValueError('APA_GROUP_EXECUTION_PREVIEW_NOT_PREPARED')
+    return dict(preview=final, projectBinding=binding,
+                runtimeRegisteredCommands=checked,
+                nativeModelWrites=0, nativeSaveCalls=0,
+                executionPermission=False,
+                executor='EXISTING_APA_SCENEWRITER_ONLY')
 
 
 def run_auto_optimized_native_task(router, api, auto_preview, writer, scopes, checkpoint=None):

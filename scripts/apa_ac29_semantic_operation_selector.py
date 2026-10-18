@@ -11,7 +11,7 @@ from collections import defaultdict
 import math
 
 from archicad_dynamic_commands import DynamicCommands
-from apa_ac29_assembly_operations import plan_assemblies
+from apa_ac29_group_strategy import route as route_verified_assemblies
 
 TOL = 1e-6
 COPYABLE = frozenset({"Column", "Beam", "Object"})
@@ -230,11 +230,15 @@ def analyze(existing, targets, *, source_axes=None, distribution_rules=None, ass
     need(set(distribution_rules)<={
         (r["type"],r["familySignature"],r["storyIndex"]) for r in targets},
          "SEMANTIC_SELECTOR_UNUSED_DISTRIBUTION_RULE")
-    # The original copy-first planner supports native Column/Beam/Object
-    # prototypes. Roofs and hosted/structural dependent families are still
-    # accounted for, but must not be fed into unsupported copy recipes.
+    # An exact, independently verified native group takes precedence over
+    # per-element copy. A group may cover targets only as a WHOLE. Uncovered
+    # targets retain the original individual copy/create strategy.
+    group_choice = route_verified_assemblies(existing, targets, assembly_groups)
+    group_covered = set(group_choice["coveredTargetIndices"])
+    ordinary_targets = [row for i, row in enumerate(targets)
+                        if i not in group_covered]
     safe_existing=[row for row in existing if row.get("type") in COPYABLE]
-    safe_targets=[row for row in targets if row["type"] in COPYABLE]
+    safe_targets=[row for row in ordinary_targets if row["type"] in COPYABLE]
     plan=(DynamicCommands.plan_reuse_existing(safe_existing,safe_targets)
           if safe_targets else {
               "copyGroups":[],"unmatchedTargetsPendingPrototype":[],
@@ -243,7 +247,7 @@ def analyze(existing, targets, *, source_axes=None, distribution_rules=None, ass
     # identity/location, but cannot be translated as detached copies.
     fulfilled_other=[]
     create_other=[]
-    for target in targets:
+    for target in ordinary_targets:
         if target["type"] in COPYABLE:
             continue
         matching=[src for src in existing
@@ -325,8 +329,13 @@ def analyze(existing, targets, *, source_axes=None, distribution_rules=None, ass
         "requestedTargets":len(targets),
         "alreadyPresent":len(plan["existingElementGuids"])+len(fulfilled_other),
         "copies":copy_groups,"creates":creates,
-        "assemblies":plan_assemblies(existing, assembly_groups),
-        "copyMethod":("ONE_NATIVE_MULTI_PROTOTYPE_COPY_CALL"
+        "assemblies":group_choice["assemblies"],
+        "groupedTargets":len(group_covered),
+        "ungroupedTargets":len(ordinary_targets),
+        "groupNativeCallsIfIndependentlyAuthorized":group_choice["nativeCallsIfAuthorized"],
+        "strategyPriority":"VERIFIED_NATIVE_GROUP_THEN_EXACT_INDIVIDUAL_COPY_OR_CREATE",
+        "copyMethod":("NATIVE_GROUP_FIRST_THEN_INDIVIDUALS" if group_covered else
+                      "ONE_NATIVE_MULTI_PROTOTYPE_COPY_CALL"
                       if len(copy_groups)>1 else
                       "ONE_NATIVE_BATCH_COPY_CALL"
                       if copy_calls and copy_groups[0]["count"]>1 else
