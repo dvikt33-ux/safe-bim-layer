@@ -1,0 +1,5 @@
+# APA 12Z — independent audit B: API, side effects, licenses
+
+Tapir tag1.5.9 AddOnMain.cpp: SaveAsModuleFile, CreateHotlinkNodes, CreateHotlinkInstances, ChangeHotlinkInstances all registered at 1.5.9; GetDetailsOfElements at 1.5.7. ProjectCommands.cpp: SaveAsModuleFile overwrites existing .mod; CreateHotlinkNodes identifies nodes by case-insensitive file path, not content hash; CreateHotlinkInstances loops one ACAPI_Element_Create per instance. ChangeHotlinkInstances origin-only preserves full transform; rotation/mirror rebuilds planar transform and discards scale/skew/non-planar parts. Generic MoveElements can return NoError with no hotlink movement. Verify instance+child GUID readback.
+
+PR128/154/159/160/162 OPEN, not merged main. PR162 is preview-only (nativeModelWrites=0), Column/Beam/Object only. Tapir installed 1.5.10 NOT_VERIFIED. MIT licenses verified: Tapir blob 1cdb2cb9, pdfplumber 3300ee1e, ezdxf 33a77673, Raster2Seq d40e4426. Raster2Seq README Linux/Python3.10.13/PyTorch2.3.1/CUDA11.8 and compiled ops; Windows/8GB VRAM NOT_VERIFIED. No BUILD/LIVE.
