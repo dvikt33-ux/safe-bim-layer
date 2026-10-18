@@ -1,0 +1,39 @@
+name: APA AC29 Hotlink Native BREP Coordinates and Batch
+on:
+  pull_request:
+    paths:
+      - 'scripts/apa_ac29_hotlink_batch_geometry.py'
+      - 'scripts/apa_ac29_hotlink_batch_verifier.py'
+      - 'scripts/apa_ac29_hotlink_batch_oneshot.py'
+      - 'tests/test_apa_ac29_hotlink_batch_geometry.py'
+      - 'tests/test_apa_ac29_hotlink_batch_writer.py'
+      - 'docs/APA_AC29_HOTLINK_BATCH_NATIVE_RU.md'
+      - '.github/workflows/apa-ac29-hotlink-coordinate-batch.yml'
+permissions:
+  contents: read
+jobs:
+  batch-native-source-contracts:
+    runs-on: windows-latest
+    timeout-minutes: 12
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install existing APA contract validator
+        run: python -m pip install "jsonschema>=4,<5"
+      - name: Compile only new native-batch adapter and tests
+        run: |
+          python -m py_compile scripts/apa_ac29_hotlink_batch_geometry.py scripts/apa_ac29_hotlink_batch_verifier.py scripts/apa_ac29_hotlink_batch_oneshot.py
+          python -m py_compile tests/test_apa_ac29_hotlink_batch_geometry.py tests/test_apa_ac29_hotlink_batch_writer.py
+      - name: Verify corrected world/local coordinates and collision gates
+        run: python -m unittest discover -s tests -p 'test_apa_ac29_hotlink_batch_geometry.py' -v
+      - name: Verify code-owned batched SceneWriter readback contracts
+        run: python -m unittest discover -s tests -p 'test_apa_ac29_hotlink_batch_writer.py' -v
+      - name: Never invoke AC29 or write PLN from GitHub CI
+        run: |
+          python -c "from pathlib import Path; p=Path('scripts/apa_ac29_hotlink_batch_oneshot.py').read_text(); assert '--stage' in p and '--plan' in p and '--execute' in p and '--check-closed' in p and '--verify-reopen' in p; print('SOURCE_ONLY: native write requires separate explicit local stage and LIVE AC29')"
