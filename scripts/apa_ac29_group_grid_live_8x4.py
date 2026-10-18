@@ -356,8 +356,18 @@ def execute():
     try:
         selected = read(ORIGINAL.HISTORY /
                         "group-autoselect-real-model-readonly-20261018-01.json")
+        # The original transport's 15s HTTP limit was designed for small
+        # operations; 32 SDK edits may legitimately take longer. This
+        # strictly scoped 120s timeout still calls the ORIGINAL executor
+        # and only changes transport waiting, never retry behavior.
+        def bounded_native_transport(command, params):
+            if command == VERIFIER.CMD:
+                return RUN.tapir(RUN.PORT, "CloneNativeGroupV1", params,
+                                 timeout=120, namespace="TapirCommand")
+            return APA.native_transport(command, params)
         report = ORIGINAL.execute_once(
-            revision, selected, stage_receipt["functionalSha256"])
+            revision, selected, stage_receipt["functionalSha256"],
+            native_transport=bounded_native_transport)
         report["fullWorkflowElapsedSeconds"] = round(time.perf_counter()-timer, 6)
         report["grid"] = GRID_RECIPE
         report["expectedGridPositions"] = 32
