@@ -23,3 +23,5 @@ jobs:
         run: python -m py_compile scripts/apa_ac29_autonomous_job_bridge.py scripts/install_apa_ap2_same_receiver_readonly.py tests/test_apa_ap2_same_receiver.py
       - name: Validate strict no-write AP2 read-only target
         run: python -m unittest discover -s tests -p test_apa_ap2_same_receiver.py -v
+      - name: Validate controller-only installer refusal and rollback safety guards
+        run: python -m unittest discover -s tests -p test_apa_ap2_same_receiver_installer.py -v
