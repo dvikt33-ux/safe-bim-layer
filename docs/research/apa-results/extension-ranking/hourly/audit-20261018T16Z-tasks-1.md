@@ -1,3 +1,3 @@
-# APA — поручения исследователю №1
+# APA — исследователь 1
 
-Очередь 16Z.
+Темы: Multiply, IFC, PDF, MEP, SAF, BCF, Hotlink.
