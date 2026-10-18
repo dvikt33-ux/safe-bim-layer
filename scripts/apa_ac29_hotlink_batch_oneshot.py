@@ -186,7 +186,8 @@ def plan_readonly(state):
     api, _ = prepare_api(manifest, state, for_write=False)
     router = router_for(api)
     guids, fingerprint, geometry, native = probe_native(manifest, api)
-    params = batch_parameters(manifest["nodeGuid"], geometry["origins"])
+    params = batch_parameters(manifest["nodeGuid"], geometry["origins"],
+                              geometry["prototypeSettings"])
     ticket = router.prepare("CreateHotlinkInstances", params)
     need(ticket["effect"] == "CREATE" and len(params["hotlinkInstances"]) ==
          manifest["count"] and api.write_attempts == 0,
@@ -220,7 +221,8 @@ def execute(state):
          baseline_brep == planned["beforeBrepSHA256"] and
          computed == planned["geometry"] and
          router.contract_hash("CreateHotlinkInstances") == planned["contractSHA256"] and
-         batch_parameters(manifest["nodeGuid"], computed["origins"]) ==
+         batch_parameters(manifest["nodeGuid"], computed["origins"],
+                          computed["prototypeSettings"]) ==
              planned["batchParameters"],
          "HOTLINK_BATCH_NATIVE_BREP_OR_PLAN_CHANGED_BEFORE_DISPATCH")
     # Durable one-shot intent exists BEFORE any native model write. A timeout
@@ -425,8 +427,12 @@ def verify_reopen(state):
         kinds[root][kind] = kinds[root].get(kind, 0) + 1
     plan = read(state / "plan.json")["geometry"]
     for index, root in enumerate(roots):
-        verify_instance_root(api, manifest["nodeGuid"], root,
-                             receipt["expectedOrigins"][index])
+        native_root = verify_instance_root(
+            api, manifest["nodeGuid"], root, receipt["expectedOrigins"][index])
+        need(all(native_root["details"].get(k) == v and
+                 type(native_root["details"].get(k)) is type(v)
+                 for k, v in plan["prototypeSettings"].items()),
+             "HOTLINK_BATCH_REOPENED_INSTANCE_FLAGS_CHANGED")
         need(len(owned[root]) == receipt["sourceOwnedCount"] and
              kinds[root] == receipt["sourceTypeHistogram"],
              "HOTLINK_BATCH_REOPENED_OWNER_HISTOGRAM_CHANGED")
