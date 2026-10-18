@@ -36,6 +36,16 @@ JOB_ID = re.compile(r"^group-[a-z0-9-]{8,55}$")
 HEX = re.compile(r"^[a-f0-9]{40}$")
 GUID = re.compile(r"^[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$")
 COORDS = ("xMin", "xMax", "yMin", "yMax", "zMin", "zMax")
+# Reuse the conservative typed nonspatial classification from the existing
+# SceneWriter collision preflight; never ignore an unknown 3D member.
+NONSPATIAL_TYPES = frozenset({
+    "Dimension", "RadialDimension", "LevelDimension", "AngleDimension",
+    "Text", "Label", "Hatch", "Line", "PolyLine", "Arc", "Circle",
+    "Spline", "Hotspot", "CutPlane", "Camera", "CamSet", "Group",
+    "SectElem", "Drawing", "Picture", "Detail", "Elevation",
+    "InteriorElevation", "Worksheet", "ChangeMarker",
+})
+
 
 
 def need(condition, reason):
@@ -193,10 +203,40 @@ def signatures(bbox_list):
     return Counter(tuple(round(b[k], 4) for k in COORDS) for b in bbox_list)
 
 
+
+def classify_collision_obstacles(guids, values):
+    """Return proven 3D obstacles; ignore only typed, bodyless 2D annotations.
+
+    Unknown/real 3D elements with invalid bounds block changes. In particular,
+    empty sentinel bounds of beams/columns cannot be silently ignored.
+    """
+    need(len(guids) == len(values), "COLLISION_INVENTORY_ALIGNMENT_FAILED")
+    unresolved = [(guid, i) for i, (guid, value) in enumerate(zip(guids, values))
+                  if value is None]
+    verified_2d = []
+    if unresolved:
+        descriptions = batched("GetDetailsOfElements",
+                               [guid for guid, _ in unresolved],
+                               "detailsOfElements")
+        for (guid, _), row in zip(unresolved, descriptions):
+            kind = row.get("type") if isinstance(row, dict) else None
+            if kind in NONSPATIAL_TYPES:
+                verified_2d.append({"guid": guid, "type": kind})
+                continue
+            raise RuntimeError("UNBOUNDED_SPATIAL_MEMBER_BLOCKED:guid="
+                               + guid + " type=" + repr(kind)
+                               + " (native geometry bounds unavailable)")
+    obstacles = [v for v in values if v is not None]
+    need(len(obstacles) + len(verified_2d) == len(guids),
+         "INCOMPLETE_COLLISION_CLASSIFICATION")
+    return obstacles, verified_2d
+
+
 def offsets_for_pair(chosen_boxes, existing):
     # Prefer two destinations, each containing the whole verified assembly.
     # Reject any placement intersecting known saved geometry or each other.
-    need(all(b is not None for b in existing), "INCOMPLETE_MODEL_BBOX_COLLISION_PREFLIGHT")
+    need(all(isinstance(b, dict) for b in existing),
+         "COLLISION_OBSTACLES_NOT_CLASSIFIED")
     for delta in (15.0, 25.0, 40.0, 70.0, 110.0, 180.0):
         translations = [{"dx": delta, "dy": 0.0, "dz": 0.0},
                         {"dx": 2 * delta, "dy": 0.0, "dz": 0.0}]
@@ -240,7 +280,9 @@ def run_acceptance(name, folder):
     existing_boxes = boxes(existing)
     chosen_boxes = [existing_boxes[existing.index(g)] for g in pair]
     need(all(b is not None for b in chosen_boxes), "SOURCE_COLUMNS_MISSING_GEOMETRY")
-    translations, move = offsets_for_pair(chosen_boxes, existing_boxes)
+    collision_obstacles, excluded_annotations = classify_collision_obstacles(
+        existing, existing_boxes)
+    translations, move = offsets_for_pair(chosen_boxes, collision_obstacles)
     scratch = Path(r"C:\LocalAI\APA_Group_Acceptance") / (name + ".pln")
     need(not scratch.exists(), "SCRATCH_PLN_ALREADY_EXISTS")
     scratch.parent.mkdir(parents=True, exist_ok=True)
@@ -250,7 +292,10 @@ def run_acceptance(name, folder):
         "sourcePath": str(SOURCE_PATH), "sourceSha256": source_hash,
         "scratchPath": str(scratch), "sourceColumnGuids": pair,
         "translations": translations, "moveTranslation": move,
-        "baselineGuids": len(existing), "status": "SOURCE_READBACK_AND_SNAPSHOT_PASS"
+        "baselineGuids": len(existing),
+        "collisionObstacles3D": len(collision_obstacles),
+        "excludedTypedNonspatialAnnotations": excluded_annotations,
+        "status": "SOURCE_READBACK_AND_SNAPSHOT_PASS"
     })
 
     # OpenProject may prompt on unsaved local edits. In that case stop: NEVER
