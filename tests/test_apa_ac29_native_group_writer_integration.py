@@ -212,5 +212,18 @@ class GroupWriterScope(unittest.TestCase):
         self.assertIn("WRITER_PRE_DISPATCH_STOP_AND_LIVE_NATIVE_BASELINE_PASS", source)
 
 
+    def test_forensic_tapir_inventory_and_version_route_are_addon_only(self):
+        import inspect
+        import apa_ac29_group_scenewriter_reconcile_readonly as forensic
+        from apa_ac29_group_acceptance_mailbox import read_elements
+        run_source = inspect.getsource(forensic.run)
+        inventory_source = inspect.getsource(read_elements)
+        self.assertIn("inventory = sorted(guid.lower() for guid in LIVE.read_elements())", run_source)
+        self.assertIn('request("GetAllElements", {}, addon=True)', inventory_source)
+        self.assertIn('LIVE.request("GetAddOnVersion", {}, addon=True)', run_source)
+        self.assertNotIn('APA.inventory_guids(lambda name, params:', run_source)
+
+
+
 if __name__ == "__main__":
     unittest.main()
