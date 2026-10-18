@@ -30,7 +30,7 @@ from apa_ac29_hotlink_native_verifiers import (
 )
 from apa_ac29_reusable_native_copy import GuardedSaveTransport
 
-SOURCE_REF = "https://github.com/dvikt33-ux/safe-bim-layer/pull/169"
+SOURCE_REF = "https://github.com/dvikt33-ux/safe-bim-layer/pull/171"
 AUTH = "USER_APPROVED_AC29_HOTLINK_DISPOSABLE_20261018"
 SCHEMA = "APA_AC29_HOTLINK_ONESHOT_V1"
 SCHEMA_PATH = Path(__file__).resolve().parents[1] / "schemas/tapir-live-1.5.10/tapir-scene-live.json"
