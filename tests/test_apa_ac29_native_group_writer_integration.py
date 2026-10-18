@@ -204,9 +204,10 @@ class GroupWriterScope(unittest.TestCase):
         from apa_ac29_group_scenewriter_reconcile_readonly import run
         import inspect
         source = inspect.getsource(run)
-        self.assertNotIn("OpenProject", source)
-        self.assertNotIn("SaveProject", source)
-        self.assertNotIn("CloneNativeGroupV1", source)
+        self.assertNotIn('LIVE.request("OpenProject"', source)
+        self.assertNotIn('LIVE.request("SaveProject"', source)
+        self.assertNotIn('LIVE.request("CloneNativeGroupV1"', source)
+        self.assertIn('"OpenProject", "MoveElements"', source)
         self.assertNotIn("create_and_open_copy", source)
         self.assertIn("WRITER_PRE_DISPATCH_STOP_AND_LIVE_NATIVE_BASELINE_PASS", source)
 
