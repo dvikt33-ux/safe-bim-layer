@@ -1,67 +1,39 @@
-# Следующие исследовательские поручения APA — стартовый цикл 18 октября 2026
+# APA — текущая очередь исследований, 18 октября 2026, 14Z
 
-**Источник распределения:** [матрица важности и сложности](NEED_EFFORT_AUDIT_20261018.md), [проверка истории Tapir](TAPIR_VERSION_COMPATIBILITY_AUDIT_20261018.md), [перечень всех решений](priority_matrix_20261018.json). После первой почасовой проверки аудитор должен заменить этот стартовый перечень новым с указанием выполненных отчётов. **Это поручения на изучение, не на установку.**
+**Штаб:** [аудит 14Z](hourly/audit-20261018T14Z.md), blob `35581c923b2c7ea10f49c0f9f4b51dad6adc9823`, commit `afe9cec33a9c07a83eebdbca4e986c410fb15b03`. Прочитаны: [№1 14Z](hourly/research-1-20261018T14Z.md) blob `b82c8d683fe24d321fe75c1101aa4287c647872a`; [№2 12Z](hourly/research-2-2026-10-18T12Z.md) blob `09c86e212b6caf96fc9066b1d989a1028574c7aa`. Нового `research-2-integration-*` пока нет. №2 12Z — прежнее тематическое исследование, не доказательство исполнения новой роли.
 
-## Исследователь №1 — геометрия, группы, CAD/PDF
+**Канон:** PROJECT_PLAN.json revision 182 — только чтение; A11.S03 PARTIAL, A11.S08/A11.S10 BLOCKED, A07.S03 READY. Приоритет 61 кандидата из [матрицы](priority_matrix_20261018.json) не означает LIVE или разрешение установки. Не трогать main, код, PLN/APX, план №182.
 
-1. **П0: Версии и параметры CreateGroups, GetGroupsOfElements, CreateHotlinkInstances.** Найди конкретные определения команд в исходном коде официальных выпусков Tapir и отличия от существующих PR №159/№162. Критерий «ГОТОВО»: таблица команда → вход/выход → первая подтверждённая версия → источник → повторяет ли уже принятый код APA. Не предполагать локальную доступность 1.5.10 без проверки.
-2. **П0: Готовый вызов массивов.** Установи, существует ли публичный программный вызов полноценного линейного/радиального/сеточного Multiply для групп именно Archicad 29. Критерий «ГОТОВО»: рабочая ссылка на контракт из SDK29, либо явно документированный «не найден» с перечислением проверенных путей.
-3. **П1: PDF→BIM только на реальных данных АР/КР.** Проверить, какие части физических координат дверей/окон можно извлечь как векторные примитивы, а какие являются текстовыми метками. Критерий «ГОТОВО»: подробный план доказательной сверки масштаба, координат, привязки стен, материалов, без записи PLN.
-4. **П1: Raster2Seq на Windows 11/8 ГБ VRAM.** Сопоставить официальные зависимости, модельные веса, требования и бинарные сборки, не скачивая и не устанавливая. Критерий «ГОТОВО»: поддерживаемый готовый путь запуска либо чёткий технический блокер.
+## Исследователь №1 — искать ГОТОВЫЕ решения
 
-## Исследователь №2 — инженерные сети, расчёты, документация
+| ID | Приоритет и конкретная задача | Первоисточник для старта | ГОТОВО |
+|---|---|---|---|
+| F01 | П0: независимый LIVE receipt групп PR159/162; тексты PR противоречат | [PR159](https://github.com/dvikt33-ux/safe-bim-layer/pull/159), [PR162](https://github.com/dvikt33-ux/safe-bim-layer/pull/162) | точный SHA/GUID/PLN/readback или NOT_FOUND |
+| F02 | П0: штатный API29 линейного/радиального/сеточного Multiply групп | [AC29 Multiply](https://help.graphisoft.com/AC/29/INT/_AC29_Help/030_Interaction/030_Interaction-96.htm), [DevKit29](https://github.com/GRAPHISOFT/archicad-api-devkit/releases/tag/29.3100) | API29 signature или перечень проверенных отрицательных путей |
+| F03 | П0: PDF→BIM physical anchors окон/дверей, не текстовые центры | [PR154](https://github.com/dvikt33-ux/safe-bim-layer/pull/154), [PR160](https://github.com/dvikt33-ux/safe-bim-layer/pull/160), [PDF provenance](hourly/research-1-20261018T12Z-audit-A.md) | 3 точки, масштаб/невязка, разделение АП Амур и КР Московская область |
+| F04 | П1: независимый IFC QA сверх Native Model Dump | [IfcQuery](https://docs.ifcopenshell.org/ifcquery.html), [IfcTester](https://docs.ifcopenshell.org/ifctester.html) | ≥3 новых проверки с source/version/license и anti-duplication |
+| F05 | П1: готовые локальные BCF XML 2.1/3.0 инструменты | [BCF](https://docs.ifcopenshell.org/bcf.html) | готовый GUID/viewpoint sample, версия и лицензия |
+| F06 | П1: готовый SDK29 MEP per-segment/transition wrapper | [Tapir1.7.1 MEP](https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.7.1/archicad-addon/Sources/MEPCommands.cpp), DevKit29 | tagged code+exact contract или NOT_FOUND |
+| F07 | П1: готовый SAF→PyNite коннектор | [SAF SDK](https://www.saf.guide/en/stable/SDK/StructuralAnalysisFormat.html), [PyNite](https://github.com/JWock82/Pynite) | готовая цепочка/6DOF/LCS/loads или NOT_FOUND |
+| F08 | П2: Qto/CRS готовые валидаторы | [IfcPatch](https://docs.ifcopenshell.org/ifcpatch.html) | template/units/3 CRS anchors, не применять без дефекта |
 
-1. **П0: PublishPublisherSet и SaveProject в Tapir.** Проверить точные параметры, версию появления и изменения до 1.7.1. Критерий «ГОТОВО»: список JSON-параметров, ограничения и безопасная схема публикации копии без выполнения самой команды.
-2. **П0: GetMEPPorts и CreateMEPRoutingElements.** Сопоставить доступные готовые поля портов/профиля/диаметра, новые схемы 1.7.1 и блокировку А11.С10. Критерий «ГОТОВО»: поддерживаемые типы сечения/связей и явно перечисленные нераскрытые поля, без ложного вывода о завершённой MEP-системе.
-3. **П1: SAF из Archicad 29.** Прочитать встроенные трансляторы, экспорт, импорт и Model Compare, проверить существование готового обмена с PyNite/CalculiX без написания нового формата. Критерий «ГОТОВО»: таблица интерфейсов обмена и оставшихся преобразований.
-4. **П1: Готовые нормативные проверки.** Исследовать официальные и свободные пакеты правил РФ для IDS/IfcTester, нормативные источники СП, лицензию и алгоритм подтверждения. Критерий «ГОТОВО»: конкретные готовые правила с источниками либо честный список неавтоматизируемых проверок.
+Выход: `hourly/research-1-<UTC-час>.md`; 20–30 фактических проходов, два собственных аудита. Если готовый способ не найден — независимые альтернативы и честный NOT_FOUND.
 
-## Аудитор — после двух отчётов
+## Исследователь №2 — искать СПОСОБЫ ПОДКЛЮЧЕНИЯ
 
-- Проверить первичные страницы, точные версии, лицензию, наличие команд в локальной **1.5.10** (не заменять догадками из новой версии).
-- Обновлять **отдельно** нужность 0–5, сложность 0–5, доказательства и итоговый приоритет. Не повышать баллы из-за числа звёзд или красочного описания.
-- Сохранить независимый аудиторский отчёт в hourly; затем безопасно обновить **только этот файл поручений**, указав ссылки на отчёты исследователей и следующий набор новых вопросов. При конфликте версий файл перечитать.
-- Не изменять оригинальный PLN, main, код дополнений, установку, официальный план №182 и статусы приёмки.
+| ID | Приоритет и интеграционная цепочка | Первоисточник для старта | ГОТОВО |
+|---|---|---|---|
+| I01 | П0: APA IFC exporter→ExtractElements через existing IfcOpenShell или CLI | [ExtractElements](https://docs.ifcopenshell.org/autoapi/ifcpatch/recipes/ExtractElements/index.html) | two-path comparison, GlobalId/relations, output copy |
+| I02 | П0: SplitByBuildingStorey vs native Archicad per-storey export | [SplitByBuildingStorey](https://docs.ifcopenshell.org/autoapi/ifcpatch/recipes/SplitByBuildingStorey/index.html) | spanning wall/stair GUID coverage |
+| I03 | П0: Publisher Tapir vs SDK29; безопасная публикация | [Tapir Navigator1.7.1](https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.7.1/archicad-addon/Sources/NavigatorCommands.cpp) | unique set GUID, непустой whitelist, isolated output, manifest, без запуска |
+| I04 | П0: Hotlink/groups reuse CloneNativeGroupV1 | [Tapir Project1.5.9](https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.5.9/archicad-addon/Sources/ProjectCommands.cpp) | node/instance/child GUID, local 1.5.10 discovery, no second writer |
+| I05 | П1: offline BCF→existing QA JSON | [BCF](https://docs.ifcopenshell.org/bcf.html) | viewpoint camera/GlobalId roundtrip, license |
+| I06 | П1: IfcQuery/iterator vs Native Model Dump | [IfcQuery](https://docs.ifcopenshell.org/ifcquery.html), [iterator](https://docs.ifcopenshell.org/ifcopenshell/geometry_iterator.html) | 3 independent checks or REJECT |
+| I07 | П1: SDK29 per-segment Place maps/transition→existing APA Router | [Tapir MEP1.7.1](https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.7.1/archicad-addon/Sources/MEPCommands.cpp) | referenceId≠diameter, physical reciprocal ports, rollback; A11.S10 BLOCKED |
+| I08 | П1: SAF SDK1.7.3 vs direct XLSX→PyNite | [SAF SDK](https://www.saf.guide/en/stable/SDK/StructuralAnalysisFormat.html) | 2 пути, license, 6DOF/LCS/loads loss table или NOT_FOUND |
 
-<!-- audit-20261018T03Z-r1 -->
-## Новые поручения аудитора — 18.10.2026, 03:00 UTC
+Выход: `hourly/research-2-integration-<UTC-час>.md`. Для каждой функции: existing APA → готовый интерфейс → готовый адаптер → инструмент → readback; максимум 3 внешних звена. При отсутствии связующего ищи готовый wrapper/bridge/middleware/SDK sample, затем честно NOT_FOUND и минимальный gap. Только исследование, никаких установок.
 
-**Основание:** [независимый отчёт](hourly/audit-20261018T03Z.md), [план №182 — только чтение](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/control/PROJECT_PLAN.json). В начале проверки свежих отчётов №1 и №2 в `hourly/` не было. Стартовые поручения выше сохраняются как история; новые вопросы ниже их уточняют. Только исследование, без установки и записи в PLN/APX.
+## Аудит и архив
 
-### Исследователь №1 — геометрия, группы, PDF/DXF, PDF→BIM
-
-**R1-01 — П0.** Какие точные входы/выходы `CreateGroups` и `GetGroupsOfElements` есть в [Tapir 1.5.9](https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.5.9/archicad-addon/Sources/ElementGroupingCommands.cpp), что подтверждено для установленной 1.5.10 и чего нет в [PR #159](https://github.com/dvikt33-ux/safe-bim-layer/pull/159)/[#162](https://github.com/dvikt33-ux/safe-bim-layer/pull/162)? Есть ли **в SDK29** программный аналог [Multiply](https://help.graphisoft.com/AC/29/INT/_AC29_Help/030_Interaction/030_Interaction-96.htm)? **Проблема:** `A11.S03 PARTIAL`, риск второго исполнителя. **ГОТОВО:** таблица контракт/версия/API29/APA, подтверждённая ссылка либо NOT_FOUND, локальный 1.5.10 без доступа = NOT_VERIFIED.
-
-**R1-02 — П0.** Где физические координаты стен, окон и дверей в АР/КР, а где лишь текстовые метки? **Проблема:** [PR #154](https://github.com/dvikt33-ux/safe-bim-layer/pull/154), [PR #160](https://github.com/dvikt33-ux/safe-bim-layer/pull/160), [pdfplumber](https://github.com/jsvine/pdfplumber), [ezdxf](https://github.com/mozman/ezdxf). **ГОТОВО:** ≥3 размерных якоря с листами-источниками, PDF/DXF→метры, численная невязка и таблица достоверности проёмов. Никакой записи в PLN.
-
-**R1-03 — П1.** Существует ли документированный запуск [Raster2Seq](https://github.com/Cornell-VAILab/Raster2Seq) на Windows 11, RTX4060 Laptop 8 ГБ VRAM и 48 ГБ RAM? **Проблема:** README проверяет Linux/Python3.10.13/PyTorch2.3.1/CUDA11.8, не Windows и реальные BDD PDF. **ГОТОВО:** версии, лицензии/хеши весов, формат координат, измеренный VRAM либо NOT_VERIFIED, Windows-путь или BLOCKED; не скачивать и не устанавливать.
-
-**R1-04 — П1.** Каков готовый контракт `CreateHotlinkInstances` и сохраняются ли node/instance GUID при повторных модулях? **Проблема:** [Tapir 1.5.9 ProjectCommands.cpp](https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.5.9/archicad-addon/Sources/ProjectCommands.cpp), [PR #162](https://github.com/dvikt33-ux/safe-bim-layer/pull/162). **ГОТОВО:** поля, версия, SDK29, сравнение с текущим APA и только реально отсутствующие операции; без нового writer.
-
-### Исследователь №2 — поручения аудита 03Z
-
-- **П0 / R2-01:** MEP: доказать API круглого/прямоугольного перехода и портов; критерий — таблица полей, версий и лицензии; проблема A11.S10.
-- **П0 / R2-02:** документы: проверить программную публикацию и сохранение; критерий — схемы, версии и безопасный сценарий без записи; проблема P00.A03.S03.
-- **П1 / R2-03:** SAF и расчёт: проверить готовый обмен с PyNite; критерий — матрица типов/нагрузок и источников либо NO_READY_BRIDGE; проблема A11.S08.
-- **П1 / R2-04:** СП/ГОСТ: собрать применимые редакции и правила; критерий — пункт, входные данные, формула, проверяющий и NOT_VERIFIED; проблема P70.A02.S02.
-
-Источники и обоснования R2-01…R2-04: [независимый аудит 03Z](hourly/audit-20261018T03Z.md), разделы 2, 5 и 6; [план №182](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/control/PROJECT_PLAN.json).
-
-
-## Аудит 2026-10-18 08 UTC — уточнённые поручения
-
-Источник: [опубликованный аудит](hourly/audit-20261018T08Z.md). Отчёт исследователя №1 [08Z](hourly/research-1-20261018T08Z.md) является восстановленной сводкой, не полной проверкой; отчёт №2 за 08Z не подтверждён.
-
-**Исследователь №1:**
-1. **P0 — группы Tapir.** Какие сигнатуры и минимальные версии `CreateGroups`/`GetGroupsOfElements`, что уже реализовано в PR #159/#162? **ГОТОВО:** сравнительная таблица по первоисточникам с явными дубликатами.
-2. **P0 — Multiply SDK29.** Есть ли публичный API линейного, радиального и сеточного тиражирования группы? **ГОТОВО:** ссылка на SDK29 и контракт либо перечень проверенных интерфейсов с `NOT_FOUND`.
-3. **P0 — PDF/DXF→BIM.** Какова ошибка масштаба и координат на реальном чертеже? **ГОТОВО:** три опорные точки, единицы измерения, невязка, перечень нераспознанной семантики.
-4. **P1 — Raster2Seq.** Подтверждена ли работа на Windows 11 с 8 ГБ VRAM без конкуренции Twinmotion? **ГОТОВО:** воспроизводимые требования и статус `NOT_VERIFIED`, если доказательств нет.
-
-**Исследователь №2:**
-1. **P0 — MEP.** Существует ли доступный setter SDK29 для двухпортового перехода? **ГОТОВО:** сигнатура/версия или `NOT_FOUND`.
-2. **P0 — Publisher.** Как публиковать Publisher Set без сохранения поверх исходного PLN? **ГОТОВО:** контракт, побочные эффекты, безопасный сценарий.
-3. **P1 — SAF/PyNite.** Какие потери при передаче геометрии, единиц, опор и нагрузок? **ГОТОВО:** карта данных и недостающие преобразования.
-4. **P1 — СП/ГОСТ.** Какие два конкретных нормативных правила можно проверить на измеримых данных? **ГОТОВО:** пункты действующих документов, входные параметры, ожидаемые проверки, без утверждения о соответствии по одному IFC/IDS.
-
-При ошибке записи отчёты продолжать готовить; публикацию помечать `WRITE_BLOCKED`, задачи не отключать.
+Аудитор проверяет реальную первичность, API29, версии Tapir, лицензии, отсутствие дубликатов и SOURCE/OFFLINE/BUILD/INSTALLED/LIVE/ACCEPTED. Не утверждать 100× без benchmark. Полные 25 проверок, два контрааудита и рейтинги — [аудит 14Z](hourly/audit-20261018T14Z.md). История предыдущих очередей сохранена в Git history предыдущего blob `95d74be79d3f37dad2db92d6ecb2dc45d64e8652` и отчётах [03Z](hourly/audit-20261018T03Z.md), [08Z](hourly/audit-20261018T08Z.md). Текущий файл заменяет накопленный журнал компактной действующей очередью, без потери Git history.
