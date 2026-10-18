@@ -1,3 +1,29 @@
+## Финальная независимая проверка SQLite — V2 (чтение, без Archicad)
+
+После опубликованной квитанции `LIVE_SCENEWRITER_NATIVE_GROUP_CLONE_PASS` для V2 исходная нативная групповая операция НЕ повторяется. Пользователь не должен сохранять либо закрывать `group-ac29-scene-writer-20261018-02.pln` до решения по несохранённой модели.
+
+Файл `scripts/apa_ac29_group_scenewriter_sqlite_audit_readonly.py` читает:
+- локальную квитанцию `scene-writer-20261018-02/result.json` и совпадающую квитанцию в GitHub;
+- неизменные хэши трёх сохранённых PLN (принятый источник, новая копия, оригинальный функциональный тест);
+- штатный `original-scenewriter.sqlite` через `mode=ro` и `query_only`, строго одну строку сцены и одну строку операции со статусами `PASS`;
+- журнал `trace/dispatch.jsonl` и `trace/raw.jsonl` (единственный `AddOn.TapirCommand.CloneNativeGroupV1`, один ответ);
+- дословное совпадение оригинального SQLite-ответа с фактическим результатом транспорта и опубликованной квитанцией: 44 → 52 GUID, 2 группы, 4 Column, 4 ColumnSegment, точные 2 смещения, нулевое сохранение.
+
+Работает **без подключения к Archicad**, не вызывает Create/Clone/Move/Save/Open, не изменяет SQL или PLN. При успешной проверке публикует `SCENEWRITER_SQLITE_INDEPENDENT_AUDIT_PASS` в `safe-bim-bridge`, путь `safe-bim-mailbox/apa-ac29-group-acceptance/results/group-scenewriter-native-clone-20261018-02-sqlite-audit.json`.
+
+Одна команда:
+
+```powershell
+& {
+    $src = 'C:\LocalAI\APA_AC29_Build_Source'
+    git -C $src pull --ff-only
+    if ($LASTEXITCODE -ne 0) { throw 'Ошибка обновления' }
+    python "$src\scripts\apa_ac29_group_scenewriter_sqlite_audit_readonly.py"
+}
+```
+
+Этот аудит является финальной самостоятельной проверкой журнала; его PASS не заменяет отдельные эксплуатационные испытания производительности и сохранения модели.
+
 ## V2: исправлена проверка активной исходной копии
 
 Первый старт V2 успешно выполнил проверку `GROUP_CLONE_SOURCE_OWNED_NATIVE_BREP_AND_LAYOUT_PASS` и подтвердил прошлую независимую сверку `44 GUID, 0 prior writes`, но остановился с `PROJECT_SWITCH_DETECTED`, поскольку прежний `verify_previous()` требовал активный `group-ac29-assembly-20261018-04.pln`, тогда как после сверки был открыт `group-ac29-scene-writer-20261018-01.pln`.
