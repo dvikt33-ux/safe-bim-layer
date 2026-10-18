@@ -1,10 +1,10 @@
 {
-  "schema": "APA_EXTENSION_RANKING_V1",
+  "schema": "APA_EXTENSION_RANKING_V2",
   "date": "2026-10-18",
   "repository": "dvikt33-ux/safe-bim-layer",
   "branch": "research/apa-extension-ranking-20261018",
   "scope": "исследование; без установки, без изменения PLN/APX и main",
-  "total": 38,
+  "total": 57,
   "score_explanation": "Предварительная экспертная оценка ПРИГОДНОСТИ ДЛЯ APA по шкале 0–100, не результат производительного или функционального теста. Ориентиры: функциональное покрытие (30), доступность из AC29/APA (25), стоимость/лицензия (15), безопасность и риск (15), зрелость/поддержка (15). Непроверенные свойства снижают оценку. Цифры — исходный приоритет, не гарантия.",
   "categories": [
     "A 90–100 первоочередно",
@@ -17,7 +17,7 @@
   ],
   "hardware": "Windows 11, Archicad 29, RTX 4060 Laptop 8 ГБ, 48 ГБ ОЗУ",
   "cost_policy": "без обязательной подписки, коммерческие/учебные ограничения учитывать отдельно",
-  "source_policy": "Первоисточники просмотрены через Opera в предшествующем проходе; при повторном запросе Opera Connector 2026-10-18 отключён. Отдельные записи основаны на ранее опубликованном аудите APA (2026-10-14/15) и помечены HISTORIC. Не считать все ссылки свежепроверенными.",
+  "source_policy": "Opera Connector вновь подключён 2026-10-18. Для кандидатов SOURCE_CONFIRMED_OPERA просмотрены первичные страницы в текущем проходе, для HISTORIC_* сохранена ссылка и исторический статус. Ни один свежедобавленный кандидат не испытан локально в APA. Полный реестр — предварительные экспертные оценки.",
   "hard_gates": [
     "версия и сборка AC29",
     "локально разрешённая лицензия",
@@ -113,6 +113,23 @@
       "benchmark": null
     },
     {
+      "id": "EZDXF",
+      "name": "ezdxf",
+      "domain": "Геометрия DXF",
+      "score": 87,
+      "tier": "B_80_89_ОЧЕНЬ_ПЕРСПЕКТИВНО",
+      "license": "MIT",
+      "status": "SOURCE_CONFIRMED_OPERA",
+      "source": "https://github.com/mozman/ezdxf",
+      "note": "Чтение блоков, примитивов, атрибутов и проверка геометрии DXF; дополняет PDF без второго движка Archicad",
+      "blockers": "Разбор DXF не доказывает BIM-семантику и единицы листа.",
+      "integrated_confirmed": false,
+      "live_accepted": false,
+      "benchmark": null,
+      "test_status": "NOT_TESTED_IN_APA",
+      "last_reviewed": "2026-10-18"
+    },
+    {
       "id": "IFCCLASH",
       "name": "IfcClash",
       "domain": "Геометрический контроль",
@@ -139,6 +156,23 @@
       "integrated_confirmed": false,
       "live_accepted": false,
       "benchmark": null
+    },
+    {
+      "id": "IFCCONVERT",
+      "name": "IfcConvert",
+      "domain": "Контроль IFC/геометрии",
+      "score": 86,
+      "tier": "B_80_89_ОЧЕНЬ_ПЕРСПЕКТИВНО",
+      "license": "КОМПОНЕНТ_IFCOPENSHELL",
+      "status": "SOURCE_CONFIRMED_OPERA",
+      "source": "https://docs.ifcopenshell.org/ifcconvert.html",
+      "note": "Готовое командное преобразование IFC в проверочные геометрические форматы",
+      "blockers": "Не создавать отдельный транслятор, использовать установленный IfcOpenShell.",
+      "integrated_confirmed": false,
+      "live_accepted": false,
+      "benchmark": null,
+      "test_status": "NOT_TESTED_IN_APA",
+      "last_reviewed": "2026-10-18"
     },
     {
       "id": "IFCDIFF",
@@ -211,18 +245,38 @@
       "benchmark": null
     },
     {
-      "id": "IFC2PLAN",
-      "name": "ifc2plan",
-      "domain": "Контроль планов и разрезов",
-      "score": 78,
-      "tier": "C_70_79_ПЕРСПЕКТИВНО",
+      "id": "PYNITE",
+      "name": "PyNite",
+      "domain": "Конструктивный расчёт",
+      "score": 81,
+      "tier": "B_80_89_ОЧЕНЬ_ПЕРСПЕКТИВНО",
       "license": "MIT",
-      "status": "HISTORIC_SOURCE_AUDIT",
-      "source": "https://github.com/datarefinerylab/ifc2plan",
-      "note": "Независимые планы из IFC для сравнения, не подмена подлинных видов Archicad.",
+      "status": "SOURCE_CONFIRMED_OPERA",
+      "source": "https://github.com/JWock82/Pynite",
+      "note": "Готовая Python-библиотека расчёта пространственных линейных конструкций, нагрузок и деформаций",
+      "blockers": "Не имеет принятого источника нагрузок/сочетаний СП из APA и не заменяет инженера; проверить поведение на эталонной расчётной схеме.",
       "integrated_confirmed": false,
       "live_accepted": false,
-      "benchmark": null
+      "benchmark": null,
+      "test_status": "NOT_TESTED_IN_APA",
+      "last_reviewed": "2026-10-18"
+    },
+    {
+      "id": "ENERGYPLUS",
+      "name": "EnergyPlus",
+      "domain": "Энергетическое моделирование",
+      "score": 79,
+      "tier": "C_70_79_ПЕРСПЕКТИВНО",
+      "license": "ОТКРЫТЫЙ_КОД",
+      "status": "SOURCE_CONFIRMED_OPERA",
+      "source": "https://energyplus.net/",
+      "note": "Зрелый бесплатный движок тепловых и энергетических расчётов здания; выпуск 26.2.0 от 30 сентября 2026",
+      "blockers": "Не заменяет СП по инсоляции, теплотехнике и нативное MEP; необходима корректная тепловая модель.",
+      "integrated_confirmed": false,
+      "live_accepted": false,
+      "benchmark": null,
+      "test_status": "NOT_TESTED_IN_APA",
+      "last_reviewed": "2026-10-18"
     },
     {
       "id": "BIMQUANTS",
@@ -234,6 +288,20 @@
       "status": "HISTORIC_SOURCE_AUDIT",
       "source": "https://www.bimquants.com/lite/index.html",
       "note": "Готовые расчёты объёмов и ведомости; программное управление из APA не подтверждено.",
+      "integrated_confirmed": false,
+      "live_accepted": false,
+      "benchmark": null
+    },
+    {
+      "id": "IFC2PLAN",
+      "name": "ifc2plan",
+      "domain": "Контроль планов и разрезов",
+      "score": 78,
+      "tier": "C_70_79_ПЕРСПЕКТИВНО",
+      "license": "MIT",
+      "status": "HISTORIC_SOURCE_AUDIT",
+      "source": "https://github.com/datarefinerylab/ifc2plan",
+      "note": "Независимые планы из IFC для сравнения, не подмена подлинных видов Archicad.",
       "integrated_confirmed": false,
       "live_accepted": false,
       "benchmark": null
@@ -265,6 +333,40 @@
       "integrated_confirmed": false,
       "live_accepted": false,
       "benchmark": null
+    },
+    {
+      "id": "OPENSTUDIO",
+      "name": "OpenStudio",
+      "domain": "Энергетическое моделирование",
+      "score": 76,
+      "tier": "C_70_79_ПЕРСПЕКТИВНО",
+      "license": "ОТКРЫТЫЙ_КОД",
+      "status": "SOURCE_CONFIRMED_OPERA",
+      "source": "https://github.com/NatLabRockies/OpenStudio",
+      "note": "Готовые программные интерфейсы Python/C++/Ruby/C# к EnergyPlus и исследованиям освещённости",
+      "blockers": "Внешняя энергетическая модель, не редактирует исходный PLN напрямую; требует геометрической сверки.",
+      "integrated_confirmed": false,
+      "live_accepted": false,
+      "benchmark": null,
+      "test_status": "NOT_TESTED_IN_APA",
+      "last_reviewed": "2026-10-18"
+    },
+    {
+      "id": "CALCULIX",
+      "name": "CalculiX",
+      "domain": "Конструктивный расчёт",
+      "score": 75,
+      "tier": "C_70_79_ПЕРСПЕКТИВНО",
+      "license": "GPL_2_ИЛИ_НОВЕЕ",
+      "status": "SOURCE_CONFIRMED_OPERA",
+      "source": "https://www.calculix.de/",
+      "note": "Бесплатный конечно-элементный расчёт статических, динамических и тепловых задач, доступен на Windows",
+      "blockers": "Не является готовым мостом Archicad→расчёт; самостоятельная подготовка сетки и нагрузок критична.",
+      "integrated_confirmed": false,
+      "live_accepted": false,
+      "benchmark": null,
+      "test_status": "NOT_TESTED_IN_APA",
+      "last_reviewed": "2026-10-18"
     },
     {
       "id": "RASTER2SEQ",
@@ -309,6 +411,23 @@
       "benchmark": null
     },
     {
+      "id": "QGIS",
+      "name": "QGIS",
+      "domain": "Генплан и ГИС",
+      "score": 73,
+      "tier": "C_70_79_ПЕРСПЕКТИВНО",
+      "license": "GPLv2+",
+      "status": "SOURCE_CONFIRMED_OPERA",
+      "source": "https://qgis.org/",
+      "note": "Полноценная свободная геоинформационная система, CAD-подобные операции, координаты, обработка пространственных данных",
+      "blockers": "Не подтверждает кадастровые границы и не заменяет Archicad-модель.",
+      "integrated_confirmed": false,
+      "live_accepted": false,
+      "benchmark": null,
+      "test_status": "NOT_TESTED_IN_APA",
+      "last_reviewed": "2026-10-18"
+    },
+    {
       "id": "TOPLOGICPY",
       "name": "TopologicPy",
       "domain": "Пространственная топология",
@@ -335,6 +454,23 @@
       "integrated_confirmed": false,
       "live_accepted": false,
       "benchmark": null
+    },
+    {
+      "id": "HONEYBEE-ENERGY",
+      "name": "Honeybee Energy",
+      "domain": "Энергетическое моделирование",
+      "score": 69,
+      "tier": "D_60_69_УСЛОВНО",
+      "license": "AGPL_3",
+      "status": "SOURCE_CONFIRMED_OPERA",
+      "source": "https://github.com/ladybug-tools/honeybee-energy",
+      "note": "Готовые описания энергетических свойств и трансляция к OpenStudio",
+      "blockers": "Лицензия AGPL и зависимость от внешней геометрической модели; нормативная приёмка не обеспечивается.",
+      "integrated_confirmed": false,
+      "live_accepted": false,
+      "benchmark": null,
+      "test_status": "NOT_TESTED_IN_APA",
+      "last_reviewed": "2026-10-18"
     },
     {
       "id": "SPECKLE29",
@@ -365,6 +501,23 @@
       "benchmark": null
     },
     {
+      "id": "HONEYBEE-RADIANCE",
+      "name": "Honeybee Radiance",
+      "domain": "Освещение и дневной свет",
+      "score": 66,
+      "tier": "D_60_69_УСЛОВНО",
+      "license": "AGPL_3",
+      "status": "SOURCE_CONFIRMED_OPERA",
+      "source": "https://github.com/ladybug-tools/honeybee-radiance",
+      "note": "Готовое расширение расчёта освещённости с Radiance",
+      "blockers": "AGPL; построение корректных окон/поверхностей и верификация требований выполняются отдельно.",
+      "integrated_confirmed": false,
+      "live_accepted": false,
+      "benchmark": null,
+      "test_status": "NOT_TESTED_IN_APA",
+      "last_reviewed": "2026-10-18"
+    },
+    {
       "id": "PVGIS",
       "name": "PVGIS",
       "domain": "Предпроектная солнечная оценка",
@@ -379,6 +532,23 @@
       "benchmark": null
     },
     {
+      "id": "OPENSEES",
+      "name": "OpenSees",
+      "domain": "Конструктивный расчёт",
+      "score": 64,
+      "tier": "D_60_69_УСЛОВНО",
+      "license": "УСЛОВИЯ_ПРОВЕРИТЬ",
+      "status": "SOURCE_CONFIRMED_OPERA",
+      "source": "https://opensees.berkeley.edu/",
+      "note": "Движок моделирования сейсмической работы конструкций, версия 3.8.0 указана в феврале 2026",
+      "blockers": "Специализированный исследовательский контур, нет готового прямого моста к APA/SAF.",
+      "integrated_confirmed": false,
+      "live_accepted": false,
+      "benchmark": null,
+      "test_status": "NOT_TESTED_IN_APA",
+      "last_reviewed": "2026-10-18"
+    },
+    {
       "id": "PARKSOLVER",
       "name": "ParkSolver",
       "domain": "Парковочные пространства",
@@ -391,6 +561,23 @@
       "integrated_confirmed": false,
       "live_accepted": false,
       "benchmark": null
+    },
+    {
+      "id": "OPENTAKEOFF",
+      "name": "OpenTakeoff",
+      "domain": "Ведомости и обмеры PDF",
+      "score": 63,
+      "tier": "D_60_69_УСЛОВНО",
+      "license": "AGPL_3",
+      "status": "SOURCE_CONFIRMED_OPERA",
+      "source": "https://github.com/Kentucky-ai/opentakeoff",
+      "note": "Готовые геометрические обмеры с калибровкой масштаба и журналом происхождения",
+      "blockers": "Измерение на чертеже не является распознаванием нативных конструкций; лицензионные требования AGPL.",
+      "integrated_confirmed": false,
+      "live_accepted": false,
+      "benchmark": null,
+      "test_status": "NOT_TESTED_IN_APA",
+      "last_reviewed": "2026-10-18"
     },
     {
       "id": "OSM-OVERPASS",
@@ -435,6 +622,23 @@
       "benchmark": null
     },
     {
+      "id": "FREECAD",
+      "name": "FreeCAD",
+      "domain": "Внешняя CAD/BIM-среда",
+      "score": 56,
+      "tier": "E_45_59_НИЗКИЙ_ПРИОРИТЕТ",
+      "license": "LGPL_2_1",
+      "status": "SOURCE_CONFIRMED_OPERA",
+      "source": "https://github.com/FreeCAD/FreeCAD",
+      "note": "Свободная параметрическая САПР на Windows с большим Python API",
+      "blockers": "Отдельный редактор с собственной моделью, не заменять единый Archicad SceneWriter.",
+      "integrated_confirmed": false,
+      "live_accepted": false,
+      "benchmark": null,
+      "test_status": "NOT_TESTED_IN_APA",
+      "last_reviewed": "2026-10-18"
+    },
+    {
       "id": "IFCMCP",
       "name": "IfcMCP",
       "domain": "Управление IFC через ИИ",
@@ -447,6 +651,40 @@
       "integrated_confirmed": false,
       "live_accepted": false,
       "benchmark": null
+    },
+    {
+      "id": "PYTORCH-DEEPFLOORPLAN",
+      "name": "PyTorch-DeepFloorplan",
+      "domain": "Распознавание планов",
+      "score": 52,
+      "tier": "E_45_59_НИЗКИЙ_ПРИОРИТЕТ",
+      "license": "MIT",
+      "status": "SOURCE_CONFIRMED_OPERA",
+      "source": "https://github.com/zcemycl/PyTorch-DeepFloorplan",
+      "note": "Готовая воспроизводящая реализация нейросети обработки планов",
+      "blockers": "Перед внедрением требуются проверенные веса и работа на фактическом BDD PDF; восстановление BIM не доказано.",
+      "integrated_confirmed": false,
+      "live_accepted": false,
+      "benchmark": null,
+      "test_status": "NOT_TESTED_IN_APA",
+      "last_reviewed": "2026-10-18"
+    },
+    {
+      "id": "WEB-IFC",
+      "name": "ThatOpen web-ifc",
+      "domain": "Веб-просмотр и работа с IFC",
+      "score": 49,
+      "tier": "E_45_59_НИЗКИЙ_ПРИОРИТЕТ",
+      "license": "MPL_2",
+      "status": "SOURCE_CONFIRMED_OPERA",
+      "source": "https://github.com/ThatOpen/engine_web-ifc",
+      "note": "Готовое JavaScript/WebAssembly чтение/запись IFC",
+      "blockers": "Преимущественно дублирует IfcOpenShell; добавлять лишь для действительно нужной браузерной визуализации.",
+      "integrated_confirmed": false,
+      "live_accepted": false,
+      "benchmark": null,
+      "test_status": "NOT_TESTED_IN_APA",
+      "last_reviewed": "2026-10-18"
     },
     {
       "id": "LGRADISAR-MCP",
@@ -477,6 +715,23 @@
       "benchmark": null
     },
     {
+      "id": "ROOMFORMER",
+      "name": "RoomFormer",
+      "domain": "Распознавание планов",
+      "score": 42,
+      "tier": "F_25_44_НЕ_РЕКОМЕНДОВАТЬ_СЕЙЧАС",
+      "license": "MIT",
+      "status": "SOURCE_CONFIRMED_OPERA",
+      "source": "https://github.com/ywyue/roomformer",
+      "note": "Генерация полигонов комнат из проекций трёхмерного сканирования",
+      "blockers": "Исходные данные — 3D-сканы/плотности, а не PDF архитектурных листов; Python 3.8, PyTorch 1.9, Linux.",
+      "integrated_confirmed": false,
+      "live_accepted": false,
+      "benchmark": null,
+      "test_status": "NOT_TESTED_IN_APA",
+      "last_reviewed": "2026-10-18"
+    },
+    {
       "id": "GRASSHOPPER",
       "name": "Rhino–Grasshopper–Archicad 29",
       "domain": "Параметрическая геометрия",
@@ -505,6 +760,23 @@
       "benchmark": null
     },
     {
+      "id": "CUBICASA5K",
+      "name": "CubiCasa5k старый код",
+      "domain": "Распознавание планов",
+      "score": 32,
+      "tier": "F_25_44_НЕ_РЕКОМЕНДОВАТЬ_СЕЙЧАС",
+      "license": "ЛИЦЕНЗИЮ_ПРОВЕРИТЬ",
+      "status": "SOURCE_CONFIRMED_OPERA",
+      "source": "https://github.com/CubiCasa/CubiCasa5k",
+      "note": "Классическая реализация распознавания планов",
+      "blockers": "Указаны Python 3.6.5, PyTorch 1.0; не подходит как быстрая интеграция под нынешнюю Windows.",
+      "integrated_confirmed": false,
+      "live_accepted": false,
+      "benchmark": null,
+      "test_status": "NOT_TESTED_IN_APA",
+      "last_reviewed": "2026-10-18"
+    },
+    {
       "id": "SOLIBRI",
       "name": "Solibri Connection 29",
       "domain": "Проверка BIM",
@@ -519,6 +791,23 @@
       "benchmark": null
     },
     {
+      "id": "DEEPFLOORPLAN",
+      "name": "DeepFloorplan оригинальный",
+      "domain": "Распознавание планов",
+      "score": 28,
+      "tier": "F_25_44_НЕ_РЕКОМЕНДОВАТЬ_СЕЙЧАС",
+      "license": "GPL_3",
+      "status": "SOURCE_CONFIRMED_OPERA",
+      "source": "https://github.com/zlzeng/DeepFloorplan",
+      "note": "Историческая модель распознавания помещений и контуров",
+      "blockers": "Требует Python 2.7; несовместимость современного контура и недоказанная точность на BDD.",
+      "integrated_confirmed": false,
+      "live_accepted": false,
+      "benchmark": null,
+      "test_status": "NOT_TESTED_IN_APA",
+      "last_reviewed": "2026-10-18"
+    },
+    {
       "id": "FINCH3D",
       "name": "Finch3D",
       "domain": "Планировочная генерация",
@@ -531,6 +820,40 @@
       "integrated_confirmed": false,
       "live_accepted": false,
       "benchmark": null
+    },
+    {
+      "id": "FLOORPLANCAD",
+      "name": "FloorPlanCAD dataset",
+      "domain": "Обучающие данные CAD",
+      "score": 18,
+      "tier": "G_0_24_ИСКЛЮЧИТЬ",
+      "license": "CC_BY_NC_4_0",
+      "status": "SOURCE_CONFIRMED_OPERA",
+      "source": "https://floorplancad.github.io/",
+      "note": "Набор более 15000 размеченных CAD-планов для распознавания символов",
+      "blockers": "Это НАБОР ДАННЫХ, не готовый исполнитель; некоммерческое ограничение препятствует свободному переиспользованию.",
+      "integrated_confirmed": false,
+      "live_accepted": false,
+      "benchmark": null,
+      "test_status": "NOT_TESTED_IN_APA",
+      "last_reviewed": "2026-10-18"
+    },
+    {
+      "id": "GAT-CADNET",
+      "name": "GAT-CADNet воспроизведение",
+      "domain": "Распознавание CAD-символов",
+      "score": 16,
+      "tier": "G_0_24_ИСКЛЮЧИТЬ",
+      "license": "ЛИЦЕНЗИЯ_НЕ_ПОДТВЕРЖДЕНА",
+      "status": "SOURCE_CONFIRMED_OPERA",
+      "source": "https://github.com/Liberation-happy/GAT-CADNet",
+      "note": "Исследовательское воспроизведение модели обнаружения обозначений на CAD-чертежах",
+      "blockers": "Исходный автор статьи не выпустил официальный код; модель требует обучения и данные CC BY-NC.",
+      "integrated_confirmed": false,
+      "live_accepted": false,
+      "benchmark": null,
+      "test_status": "NOT_TESTED_IN_APA",
+      "last_reviewed": "2026-10-18"
     },
     {
       "id": "ARCHITECHTURES",
@@ -560,5 +883,6 @@
       "live_accepted": false,
       "benchmark": null
     }
-  ]
+  ],
+  "audit_cycles": "2026-10-18_Opera_primary_research"
 }
