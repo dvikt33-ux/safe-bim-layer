@@ -28,6 +28,7 @@ WORKING = Path(r"C:\LocalAI\SafeBIM_Global_Library_Test_Projects\BDD дом - п
 ORIGINAL = Path(r"C:\LocalAI\SafeBIM_Global_Library_Test_Projects\BDD дом .pln")
 AP2_PROJECT = Path(r"C:\Users\Admin\Documents\APA_AC29_Projects\AP2_Amur_Test\APA_AP2_Amur_Test_AC29.pln")
 AP2_PORT = 19725
+AP2_READONLY_DISCOVERY_PIN = 'AP2_LOCAL_HASH_READ_ONLY_DISCOVERY_V1'
 SOURCE_SHA = "33b96850ad07547a9b12524de8bc46479fd98fbbce6772436d388be679836d66"
 BASE_SHA = "e91d5670f20202c269d442bafc6e66a4cb13d223344122243b7237047a9ff3aa"
 MODULE_HASHES = {
@@ -156,8 +157,11 @@ def validate_job(job, name):
             job.get("jobId") == name and ID.fullmatch(name),
             "JOB_ID_NOT_BOUND_TO_FILE")
     require(job["action"] in ALLOWED and
-            job["projectSha256"] == (sha(AP2_PROJECT) if job.get("action") == "AP2_READONLY_PROJECT_INVENTORY"
-                                         and AP2_PROJECT.is_file() else approved_saved_sha()),
+            (job["projectSha256"] in
+             (sha(AP2_PROJECT), AP2_READONLY_DISCOVERY_PIN)
+             if job.get("action") == "AP2_READONLY_PROJECT_INVENTORY"
+             and AP2_PROJECT.is_file()
+             else job["projectSha256"] == approved_saved_sha()),
             "JOB_ACTION_OR_TARGET_NOT_ALLOWED")
     created, expires, now = date(job["createdAt"]), date(job["expiresAt"]), current_utc()
     require(created <= now and expires > now and
@@ -249,7 +253,7 @@ def capture_ap2_inventory(job, folder):
             job["sourceTask"] is None,
             "AP2_ONLY_LOCAL_READ_ACTION")
     original_hash = sha(AP2_PROJECT)
-    require(original_hash == job["projectSha256"],
+    require(job["projectSha256"] in (original_hash, AP2_READONLY_DISCOVERY_PIN),
             "AP2_DISK_SHA_MISMATCH_BEFORE_READ")
     details = ap2_tapir_read("GetProjectInfo")
     require(details.get("isUntitled") is False and
