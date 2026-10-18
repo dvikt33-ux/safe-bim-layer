@@ -176,7 +176,7 @@ def run():
         for box in before_boxes
     ]
     require_unchanged_inventory(state)
-    ACCEPTANCE.need(set(ACCEPTANCE.elements_of_group(state["target"])) ==
+    ACCEPTANCE.need(clean_ids(ACCEPTANCE.elements_of_group(state["target"])) ==
                     state["target_members"],
                     "TARGET_GROUP_CHANGED_IMMEDIATELY_BEFORE_WRITE")
     MAILBOX.save(STARTED, {
@@ -198,12 +198,12 @@ def run():
         v.get("guid", "") for v in moved.get("movedMembers", []))
     ACCEPTANCE.need(moved_members == state["target_members"],
                     "NATIVE_MOVE_RESULT_MEMBER_GUIDS_MISMATCH")
-    ACCEPTANCE.need(set(ACCEPTANCE.elements_of_group(state["target"])) ==
+    ACCEPTANCE.need(clean_ids(ACCEPTANCE.elements_of_group(state["target"])) ==
                     state["target_members"], "NATIVE_MOVE_GROUP_CHANGED")
     ACCEPTANCE.exact_bbox(parent_members, expected_after)
     require_unchanged_inventory(state)
     ACCEPTANCE.need(
-        set(ACCEPTANCE.elements_of_group(state["other"])) ==
+        clean_ids(ACCEPTANCE.elements_of_group(state["other"])) ==
         clean_ids(state["copied"][1]["members"]),
         "NATIVE_MOVE_DAMAGED_OTHER_GROUP"
     )
@@ -225,12 +225,12 @@ def run():
     ACCEPTANCE.exact_bbox(parent_members, expected_after)
     require_unchanged_inventory(state)
     ACCEPTANCE.need(
-        set(ACCEPTANCE.elements_of_group(state["other"])) ==
+        clean_ids(ACCEPTANCE.elements_of_group(state["other"])) ==
         clean_ids(state["copied"][1]["members"]),
         "NATIVE_UNGROUP_DAMAGED_OTHER_GROUP"
     )
     ACCEPTANCE.need(
-        set(ACCEPTANCE.elements_of_group(state["source"]["group"])) ==
+        clean_ids(ACCEPTANCE.elements_of_group(state["source"]["group"])) ==
         clean_ids(state["source"]["members"]),
         "NATIVE_UNGROUP_DAMAGED_SOURCE_GROUP"
     )
