@@ -305,6 +305,7 @@ def read_only_check(*, require_new=True):
 
 
 def check():
+    ORIGINAL.require_local_branch()
     require(not (STATE / "preflight.json").exists(),
             "GRID_PREFLIGHT_ALREADY_RECORDED")
     report = read_only_check()
@@ -363,6 +364,13 @@ def execute():
         def bounded_native_transport(command, params):
             if command == VERIFIER.CMD:
                 return RUN.tapir(RUN.PORT, "CloneNativeGroupV1", params,
+                                 timeout=120, namespace="TapirCommand")
+            if command in {"GetModelDumpV1", "GetAllElements",
+                           "GetDetailsOfElements",
+                           "GetSubelementsOfHierarchicalElements"}:
+                # Full native BREP/ownership reads after 128 new GUIDs can
+                # take longer than the historical 15s small-model timeout.
+                return RUN.tapir(RUN.PORT, command, params,
                                  timeout=120, namespace="TapirCommand")
             return APA.native_transport(command, params)
         report = ORIGINAL.execute_once(
