@@ -106,6 +106,47 @@ class NativeBatchTests(unittest.TestCase):
         self.plan=G.planned_batch(self.proof,2,10)
         self.parameters=V.batch_parameters(self.mock.node,self.plan["origins"])
 
+    def test_batch_compiles_in_original_source_qualified_bim_graph(self):
+        router = B.APA.native_command_router(
+            B.SCHEMA_PATH, include_functional_modules=False)
+        command = "CreateHotlinkInstances"
+        router.review_policy(command, "CREATE", "MODEL",
+                             {"source": B.SOURCE_REF,
+                              "sha256": router.contract_hash(command)})
+        preview = B.APA.prepare_native_task(router, {
+            "schemaVersion": "apa-native-task/1",
+            "request": "One existing Hotlink node with two target instances",
+            "graph": {"operations": [{
+                "id": "HotlinkBatchStep",
+                "command": command, "params": self.parameters, "after": []
+            }]}
+        })
+        self.assertEqual(preview["workflow"]["executionOrder"],
+                         ["HotlinkBatchStep"])
+        self.assertFalse(preview["workflow"]["executionPermission"])
+        self.assertEqual(
+            len(preview["workflow"]["graph"]["operations"]), 1)
+        self.assertEqual(
+            len(preview["workflow"]["graph"]["operations"][0]["params"]
+                ["hotlinkInstances"]), 2)
+
+    def test_before_write_rejects_native_model_geometry_drift(self):
+        v = V.installed_batch_verifier(
+            self.module, B.digest(self.module), self.mock.node,
+            self.mock.root, self.mock.origin, 2, 10, self.plan
+        )["VerifiedHotlinkBatchReuseV1"]
+        modified = {"elements": [dict(r) for r in self.mock.old["elements"]]}
+        body = modified["elements"][0]["bodies"]
+        modified["elements"][0]["bodies"] = [
+            {"vertices": [[coord[0]+1, coord[1], coord[2]]
+                          for coord in body[0]["vertices"]]}]
+        # BREP model drift changes the rightmost bounding placement plan.
+        with self.assertRaisesRegex(ValueError,
+                                    "RECOMPUTED_NATIVE_BREP_PLAN_CHANGED"):
+            v.before(api=self.mock.api, command="CreateHotlinkInstances",
+                     parameters=self.parameters, affected=[],
+                     native_before=modified)
+
     def test_stage_preserves_original_and_creates_disposable_only(self):
         m=B.unique_stage(self.source,self.module,self.scratch,self.state,
                          self.mock.node,self.mock.root,2,10,19726)
