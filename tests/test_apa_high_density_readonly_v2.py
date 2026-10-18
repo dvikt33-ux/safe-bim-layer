@@ -87,7 +87,7 @@ class FeaturePackTests(unittest.TestCase):
             root = Path(td)
             good = root / "a.ifc"
             good.write_bytes(b"fixture")
-            self.assertEqual(P.input_file(str(good), ".ifc"), good)
+            self.assertEqual(P.input_file(str(good), ".ifc"), good.resolve())
             with self.assertRaisesRegex(ValueError, "SOURCE_EXTENSION"):
                 P.input_file(str(good), ".dxf")
             destination = root / "out.json"
@@ -171,8 +171,8 @@ class FeaturePackTests(unittest.TestCase):
             def get(self, name, default=None):
                 return self.fields.get(name, default)
 
-        def ent(name, **fields):
-            return N(dxftype=lambda: name, dxf=DXF(**fields),
+        def ent(kind, **fields):
+            return N(dxftype=lambda: kind, dxf=DXF(**fields),
                      attribs=[], text=fields.get("text", ""))
         modelspace = [
             ent("INSERT", name="DOOR_BLOCK", layer="WALL", insert=(1, 2, 0)),
