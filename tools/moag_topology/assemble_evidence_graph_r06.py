@@ -331,6 +331,20 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
         })
     component_members = uf.groups()
     after_physical_components = len({uf.root(node) for node in kinds})
+    # Referential overlay: an old concept may denote the same modeled subject
+    # as an R03 object, but the pairing does not prove an access route or same room.
+    context = Components(ids, kinds)
+    for edge in edges:
+        if edge["connects_evidence_graph"]:
+            context.union(edge["from"], edge["to"])
+    context_promotions_joined = 0
+    for rec in reference_promotions:
+        if context.union(rec["source_concept_id"], rec["new_physical_id"]):
+            context_promotions_joined += 1
+    context_members = context.groups()
+    context_physical_components = len({context.root(node) for node in kinds})
+    if context_physical_components > after_physical_components:
+        raise ValueError("CONTEXT_OVERLAY_BROKE_SPATIAL_GRAPH")
     physical_only = [sorted(n for n in members if n in kinds) for members in component_members]
     all_kinds = defaultdict(int)
     for e in edges:
@@ -354,6 +368,8 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
             "r06_explicit_link_component_reductions": after_r05_physical_components - after_explicit_physical_components,
             "reference_promotion_crosswalks": len(reference_promotions),
             "promotions_needing_identity_review": len(review_promotions),
+            "context_component_promotions_joined": context_promotions_joined,
+            "context_affiliation_components_with_physical_indices": context_physical_components,
             "after_routes_components": len(component_members),
             "before_routes_physical_components": before_physical_components,
             "after_routes_physical_components": after_physical_components,
@@ -380,6 +396,18 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
              "coordinates_proven": False, "walkable_subgraph_proven": False}
             for i, (members, p) in enumerate(zip(component_members, physical_only))
         ],
+        "referential_context_overlay": {
+            "status": "CONCEPT_TO_R03_REFERENT_ASSOCIATION_ONLY",
+            "not_a_travel_graph": True,
+            "not_physical_room_unification": True,
+            "source_backed_affiliation_groups": [
+                {"id": "CTX-%03d" % (i + 1),
+                 "member_ids": members,
+                 "physical_index_ids": sorted(x for x in members if x in kinds),
+                 "metric_layout_proven": False}
+                for i, members in enumerate(context_members)
+            ]
+        },
         "bridge_events": bridges,
         "physical_fragment_bridge_events": physical_bridges,
         "route_location_review": conflicts,
