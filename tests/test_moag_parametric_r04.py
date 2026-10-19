@@ -59,6 +59,23 @@ class MOAGParametricR04(unittest.TestCase):
         bad={x["id"] for x in result["rules"] if x["status"]=="FAIL"}
         self.assertIn("R011",bad)
 
+    def test_upper_cruiser_berth_and_local_time_guards(self):
+        demo=dict(self.demo)
+        self.assertEqual(MOD.evaluate(self.graph,demo)["counts"]["failed"],0)
+        demo["upper_cargo_hangar_clear_width_m"]=10
+        failed={x["id"] for x in MOD.evaluate(self.graph,demo)["rules"] if x["status"]=="FAIL"}
+        self.assertIn("R015",failed)
+        demo=dict(self.demo)
+        demo["children_gallery_above_plaza_m"]=20
+        failed={x["id"] for x in MOD.evaluate(self.graph,demo)["rules"] if x["status"]=="FAIL"}
+        self.assertIn("R019",failed)
+        demo=dict(self.demo)
+        demo["children_to_upper_lift_vertical_delta_m"]=200
+        failed={x["id"] for x in MOD.evaluate(self.graph,demo)["rules"] if x["status"]=="FAIL"}
+        self.assertIn("R020",failed)
+        with self.assertRaisesRegex(ValueError,"CRUISER_COUNT_POSITIVE_INTEGER_REQUIRED"):
+            MOD.evaluate(self.graph,{"upper_cruisers_simultaneous_in_hangar_count":1.5})
+
     def test_size_order_violation_fails(self):
         demo=dict(self.demo)
         demo["upper_level_diameter_m"]=2000
