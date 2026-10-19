@@ -5615,6 +5615,219 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-342",
+      "page_id": "B2-009",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=9",
+      "station_id": "MOAG",
+      "narrative_mode": "SHIELDING",
+      "locator_hint": "станция выдерживает лазерные удары благодаря силовому полю",
+      "spatial_assertion": "Станция обладает силовым защитным полем, которое принимает удар; энергозатраты в период обороны выше штатных.",
+      "feature_refs": [
+        "CORE-ENERGY"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-343",
+      "page_id": "B2-009",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=9",
+      "station_id": "MOAG",
+      "narrative_mode": "ENERGY_HISTORY",
+      "locator_hint": "старый генератор, позже энергомодуль",
+      "spatial_assertion": "Мартин сообщает историческую замену исходного ограниченного генератора более мощным энергомодулем после ввоза новых роботов; физическое место модуля пока не установлено.",
+      "feature_refs": [
+        "CORE-ENERGY"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-344",
+      "page_id": "B2-009",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=9",
+      "station_id": "MOAG",
+      "narrative_mode": "LOWER_BOAT_ZONE",
+      "locator_hint": "боевые катера на Нижнем за закрытой частью",
+      "spatial_assertion": "По сообщению Мартина боевые катера находятся на Нижнем в закрытых ангарных объёмах, к которым у него нет доступа; фактическая пригодность техники ещё не проверена.",
+      "feature_refs": [
+        "L1-ANGAR",
+        "L1-SEALED"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-345",
+      "page_id": "B2-009",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=9",
+      "station_id": "MOAG",
+      "narrative_mode": "COMMAND_ALARM",
+      "locator_hint": "оповещение в рубку о прибытии крейсеров",
+      "spatial_assertion": "Пультовая система рубки регистрирует приближение кораблей и отображает голографическую внешнюю проекцию; модель корабля на дисплее не масштабный чертёж.",
+      "feature_refs": [
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-346",
+      "page_id": "B2-010",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=10",
+      "station_id": "MOAG",
+      "narrative_mode": "ARSENAL_ACCESS",
+      "locator_hint": "готовят снаряжение перед спуском",
+      "spatial_assertion": "Отряд получает оружие из шкафов на Третьем перед запланированным спуском в нижний сектор; точная связь шкафа с рубкой неизвестна.",
+      "feature_refs": [
+        "L3-CREW"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-347",
+      "page_id": "B2-010",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=10",
+      "station_id": "MOAG",
+      "narrative_mode": "PLANNED_BOAT_ACCESS",
+      "locator_hint": "если катера работают — обеспечить коридор",
+      "spatial_assertion": "Безопасный постоянный проход к катерам только планируется; это не подтверждение готовой изолированной трассы.",
+      "feature_refs": [
+        "L1-ANGAR",
+        "L1-SEALED"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-348",
+      "page_id": "B2-011",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=11",
+      "station_id": "MOAG",
+      "narrative_mode": "REPAIRED_SECTOR_APPROACH",
+      "locator_hint": "теперь широкий длинный коридор к прежним дверям",
+      "spatial_assertion": "После восстановления прохода к закрытой части Нижнего можно попасть по широкому длинному коридору, не через прежнюю узкую трубу.",
+      "feature_refs": [
+        "L1-SEALED",
+        "L1"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-349",
+      "page_id": "B2-011",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=11",
+      "station_id": "MOAG",
+      "narrative_mode": "REFURBISHED_L1_CORRIDOR",
+      "locator_hint": "серый быстротвердеющий пластик и резиновый пол",
+      "spatial_assertion": "В фазе после смены управления нижний коридор отремонтирован: стены имеют новое серое полимерное покрытие, пол — резиновое покрытие с коротким ворсом, освещение исправлено.",
+      "feature_refs": [
+        "L1"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-350",
+      "page_id": "B2-011",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=11",
+      "station_id": "MOAG",
+      "narrative_mode": "LIFT_OPERATION",
+      "locator_hint": "лифты работали исправно",
+      "spatial_assertion": "Во время нового рейда лифты между обитаемыми зонами и Нижним исправны; конкретная шахта в этом фрагменте не названа.",
+      "feature_refs": [
+        "L1",
+        "L2",
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-351",
+      "page_id": "B2-011",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=11",
+      "station_id": "MOAG",
+      "narrative_mode": "DIMMED_LIGHTS",
+      "locator_hint": "лампы на всех уровнях тусклее",
+      "spatial_assertion": "Во время обороны внешний обстрел приводит к понижению освещённости на всех уровнях; это временное состояние электроснабжения.",
+      "feature_refs": [
+        "CORE-ENERGY"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-352",
+      "page_id": "B2-012",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=12",
+      "station_id": "MOAG",
+      "narrative_mode": "NEW_ELECTRONIC_LOCK",
+      "locator_hint": "новый замковый разъём и цифровой ключ Фёдора",
+      "spatial_assertion": "На входной двери закрытого Нижнего установлен новый кодовый замок; после ремонта стеновая зона облицована серым пластиком. Состояние дверного замка относится к фазе SURVIVORS.",
+      "feature_refs": [
+        "L1-SEALED"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-353",
+      "page_id": "B2-012",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=12",
+      "station_id": "MOAG",
+      "narrative_mode": "SOUND_DISPLACEMENT",
+      "locator_hint": "звук тревоги перед дверью",
+      "spatial_assertion": "Звуковой сигнал отпугивания запускают у закрытой двери, пытаясь освободить безопасный проход к ангарам; это операция, не подтверждение открытой трассы.",
+      "feature_refs": [
+        "L1-SEALED"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-354",
+      "page_id": "B2-012",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=12",
+      "station_id": "MOAG",
+      "narrative_mode": "APPROACH_ENTRY",
+      "locator_hint": "дети достигли знакомой закрытой двери",
+      "spatial_assertion": "Отряд физически достигает ранее известной двери нижних ангаров через восстановленный коридор; внутрь на этой странице ещё не вошёл.",
+      "feature_refs": [
+        "L1-SEALED"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
