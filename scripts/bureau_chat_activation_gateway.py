@@ -125,6 +125,7 @@ def database(path):
           event_type TEXT NOT NULL,
           blob_sha TEXT NOT NULL,
           created_at TEXT NOT NULL,
+          expires_at TEXT NOT NULL,
           status TEXT NOT NULL,
           proof TEXT,
           changed_at TEXT NOT NULL
@@ -172,10 +173,11 @@ def ingest(db, event, sha, targets, now=None):
             return "DUPLICATE_IGNORED"
         db.execute(
             """INSERT INTO jobs
-               (job_id,target,event_type,blob_sha,created_at,status,changed_at)
-               VALUES(?,?,?,?,?,'QUEUED',?)""",
+               (job_id,target,event_type,blob_sha,created_at,expires_at,status,changed_at)
+               VALUES(?,?,?,?,?,?,'QUEUED',?)""",
             (job_id, event["targetChat"], event["eventType"],
-             sha, event["createdAt"], utc_now().isoformat())
+             sha, iso(event["createdAt"]).isoformat(),
+             iso(event["expiresAt"]).isoformat(), utc_now().isoformat())
         )
         transition(db, job_id, "QUEUED", "GITHUB_BLOB_VERIFIED")
         db.execute("COMMIT")
@@ -189,6 +191,12 @@ def claim(db):
     """Атомарно выдаёт одно UI-переключение за раз, не прерывая другие исследования."""
     db.execute("BEGIN IMMEDIATE")
     try:
+        now = utc_now().isoformat()
+        for (expired_id,) in db.execute(
+            "SELECT job_id FROM jobs WHERE status='QUEUED' AND expires_at <= ?",
+            (now,)
+        ).fetchall():
+            transition(db, expired_id, "EXPIRED", "NOT_LAUNCHED_AFTER_EXPIRY")
         row = db.execute(
             """SELECT job_id,target FROM jobs AS j
                WHERE status='QUEUED' AND NOT EXISTS (
@@ -277,6 +285,24 @@ def confirm_tab(db, job_id, proof):
         raise
 
 
+def cancel_blocked(db, job_id, proof):
+    """После ручной сверки разблокировать неизвестный результат без повтора."""
+    if not proof or len(proof) > 300:
+        raise ValueError("NONEMPTY_SHORT_PROOF_REQUIRED")
+    db.execute("BEGIN IMMEDIATE")
+    try:
+        row = db.execute(
+            "SELECT status FROM jobs WHERE job_id=?", (job_id,)
+        ).fetchone()
+        if not row or row[0] not in ("LAUNCHING", "BLOCKED_NEEDS_RECONCILE"):
+            raise ValueError("JOB_NOT_BLOCKED_FOR_REVIEW")
+        transition(db, job_id, "CANCELLED_AFTER_REVIEW", proof)
+        db.execute("COMMIT")
+    except Exception:
+        db.execute("ROLLBACK")
+        raise
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--db", required=True)
@@ -290,6 +316,9 @@ def main(argv=None):
     ack = sub.add_parser("confirm-tab")
     ack.add_argument("job_id")
     ack.add_argument("--proof", required=True)
+    cancel = sub.add_parser("cancel-blocked")
+    cancel.add_argument("job_id")
+    cancel.add_argument("--proof", required=True)
     args = parser.parse_args(argv)
     config = load_config(args.config)
     db = database(args.db)
@@ -317,6 +346,9 @@ def main(argv=None):
         elif args.command == "confirm-tab":
             confirm_tab(db, args.job_id, args.proof)
             print("TAB_SELECTED_CONFIRMED", args.job_id)
+        elif args.command == "cancel-blocked":
+            cancel_blocked(db, args.job_id, args.proof)
+            print("CANCELLED_AFTER_REVIEW", args.job_id)
         else:
             for row in db.execute(
                 "SELECT job_id,target,event_type,status FROM jobs ORDER BY created_at,job_id"
