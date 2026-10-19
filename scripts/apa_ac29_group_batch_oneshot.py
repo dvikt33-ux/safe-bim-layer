@@ -286,6 +286,8 @@ def save_verified_batch(state, m, planned, api, guard, router, lease, response):
     """Save only after a fresh complete readback; never clones or replays."""
     baseline = read(state / "baseline-native.json")
     writes_before = api.write_attempts
+    writer = R.SceneWriter(api, journal_path=state / "batch-scenewriter.sqlite",
+                           schema_path=SCHEMA_PATH, allow_3d_view_for_write=True)
     ids, native, proof = verify_group_model(m, api, planned, response, baseline)
     after_hash = fingerprint(native)
     signatures = C.retained_geometry_signatures(native, ids)
