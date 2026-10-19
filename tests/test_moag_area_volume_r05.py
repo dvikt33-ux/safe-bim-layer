@@ -44,6 +44,18 @@ class AreaVolumeR05(unittest.TestCase):
         self.assertEqual(r["per_index"]["M-STA-CORE-001"]["role"],"VERTICAL_CORE_SECTION")
         self.assertFalse(r["gates"]["ship_turning_verified"])
 
+    def test_local_mezzanine_floor_area_is_not_new_global_deck(self):
+        r=MOD.solve(self.bounds,self.graph)
+        ring=r["per_index"]["M-L2-RES-001"]
+        self.assertEqual(ring["local_story_factor_range"],[1,2])
+        self.assertEqual(ring["usable_floor_area_range_m2"][0],ring["min_area_m2"])
+        self.assertEqual(ring["usable_floor_area_range_m2"][1],ring["max_area_m2"]*2)
+        hall=r["per_index"]["M-L1-CH-001"]
+        self.assertEqual(hall["local_story_factor_range"],[1,1.25])
+        self.assertIsNone(r["per_index"]["M-STA-L1-001"]["usable_floor_area_range_m2"])
+        self.assertIsNone(r["per_index"]["M-STA-CORE-001"]["usable_floor_area_range_m2"])
+        self.assertFalse(r["gates"]["geometry_unique"])
+
     def test_r04_shared_parameters_feed_levels_hangars_and_volume(self):
         r=MOD.solve(self.bounds,self.graph,self.demo)
         self.assertEqual(r["counts"]["fails"],0,
