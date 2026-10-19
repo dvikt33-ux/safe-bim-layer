@@ -10466,6 +10466,34 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-666",
+      "page_id": "B3-004",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=4",
+      "station_id": "MOAG",
+      "narrative_mode": "REMOTE_ENGINEERING_EVIDENCE",
+      "locator_hint": "Упоминание энергомодуля МОАГа в объяснении на борту «Дракона».",
+      "spatial_assertion": "В энергомодуле станции содержится живой металл/плазма, из которой возникают крошечные роботы-каракатицы. Название модуля подтверждено, его расположение и сопряжённые помещения неизвестны.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-667",
+      "page_id": "B3-004",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=4",
+      "station_id": "MOAG",
+      "narrative_mode": "DIALOGUE_CONFIRMED_ENGINEERING",
+      "locator_hint": "Жак объясняет принцип структурирования живого металла зернами чипов.",
+      "spatial_assertion": "По достоверному объяснению Жака, при внесении зерен чипов живой металл структурируется и выполняет записанные программы; на странице это связано с энергетической плазмой МОАГа, но не задаёт пространственную конфигурацию.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
