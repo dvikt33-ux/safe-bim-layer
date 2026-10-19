@@ -26,6 +26,18 @@ class NoApiWrites:
 
 
 class GroupWriterScope(unittest.TestCase):
+    def test_persisted_native_geometry_retains_all_tuple_values(self):
+        import json
+        from apa_ac29_native_group_clone_verifier import same_native_fact
+        fact=dict(children=[dict(BREP=[dict(vertices=[(1.5,2.0,3.0)])])])
+        self.assertTrue(same_native_fact(fact,json.loads(json.dumps(fact))))
+
+    def test_persisted_native_geometry_changed_coordinate_is_rejected(self):
+        from apa_ac29_native_group_clone_verifier import same_native_fact
+        self.assertFalse(same_native_fact(dict(vertices=[(1.5,2.0,3.0)]),
+                                         dict(vertices=[[1.5,2.0,3.001]])))
+        self.assertFalse(same_native_fact(dict(material='A'),dict(material='B')))
+
     def test_installed_verifier_registered_and_reviewed_effect(self):
         registry = installed_verifiers()
         self.assertIn("VerifiedNativeGroupClone", registry)

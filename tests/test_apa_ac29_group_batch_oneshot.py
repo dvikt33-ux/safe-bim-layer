@@ -67,6 +67,28 @@ class GroupBatchGates(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'SAFE01_PROOF_DRIFT'):G.execute(self.state)
             api.assert_not_called()
 
+    def test_unknown_clone_cannot_enter_save_only_reconciliation(self):
+        write_new_json(self.state/'failed.json',dict(error='native timeout'))
+        with patch.object(G,'prepare_api') as api:
+            with self.assertRaisesRegex(ValueError,'ONLY_COMPLETED_UNSAVED'):
+                G.reconcile_completed_clone(self.state)
+            api.assert_not_called()
+
+    def test_changed_reconciliation_cannot_reserve_or_save(self):
+        write_new_json(self.state/'completed-clone-reconciliation.json',dict(hash='old'))
+        with patch.object(G,'reconcile_completed_clone',return_value=dict(hash='new')), \
+             patch.object(G,'prepare_api') as api:
+            with self.assertRaisesRegex(ValueError,'PROOF_DRIFT'):G.save_reconciled_clone(self.state)
+            api.assert_not_called()
+        self.assertFalse((self.state/'reconciled-save-attempted.json').exists())
+
+    def test_reconciled_save_has_no_clone_or_workflow_dispatch(self):
+        import inspect
+        for fn in (G.save_reconciled_clone,G.save_verified_batch):
+            code=inspect.getsource(fn)
+            self.assertNotIn('run_auto_optimized_native_task',code)
+            self.assertNotIn('router.prepare(V.CMD',code)
+
     def test_missing_instance_command_stops_before_model_or_group_reads(self):
         with patch.object(G,'prepare_api',return_value=(object(),None)), \
              patch.object(G,'router_for',side_effect=ValueError('COMMAND_NOT_REGISTERED')), \

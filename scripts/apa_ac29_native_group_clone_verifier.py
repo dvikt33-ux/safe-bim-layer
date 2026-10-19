@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import math
 import re
+import json
 
 import apa_ac29_multi_prototype_native_copy as M
 from apa_ac29_dynamic_write_scopes import NativeVerifier
@@ -22,6 +23,14 @@ GROUP_GUID = re.compile(r"^[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}$
 def require(ok, msg):
     if not ok:
         raise ValueError(msg)
+
+
+def same_native_fact(current, pinned):
+    """Exact JSON-contract comparison, including persisted tuple geometry."""
+    def canonical(value):
+        return json.dumps(value, sort_keys=True, ensure_ascii=False,
+                          separators=(",", ":"), allow_nan=False)
+    return canonical(current) == canonical(pinned)
 
 
 def group_member_ids(api, group_id):
@@ -212,8 +221,8 @@ def verify_after(*, api, command, parameters, native_response, before_guids,
                 guid for guid in members
                 if all(M.SINGLE.almost(current[guid]["anchor"][k], point[k])
                        for k in ("x", "y", "z"))
-                and current[guid]["typed"] == source["typed"]
-                and current[guid]["solid"] == source["solid"]
+                and same_native_fact(current[guid]["typed"], source["typed"])
+                and same_native_fact(current[guid]["solid"], source["solid"])
             ]
             require(len(candidates) == 1 and candidates[0] not in matched,
                     "GROUP_WRITER_TRANSLATED_BREP_OR_ATTRIBUTES_MISMATCH")

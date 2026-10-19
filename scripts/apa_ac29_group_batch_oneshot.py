@@ -274,43 +274,126 @@ def execute(state):
         need(result["status"] == "WORKFLOW_CALLABLE_VERIFIED" and api.calls[V.CMD] == 1,
              "GROUP_BATCH_ONE_VERIFIED_SCENEWRITER_CLONE_REQUIRED")
         response = result["results"][op["id"]]
-        ids, native, proof = verify_group_model(m, api, planned, response, baseline)
-        after_hash = fingerprint(native)
-        signatures = C.retained_geometry_signatures(native, ids)
-        router.review_policy("SaveProject", "TRANSACTION", "PROJECT",
-            dict(source=SOURCE_REF, sha256=router.contract_hash("SaveProject")))
-        guard.enable_after_verified_copy()
-        def before_save(live):
-            fresh_ids, fresh_model, _ = verify_group_model(m, live, planned, response, baseline)
-            need(lease.verify() and fresh_ids == ids and fingerprint(fresh_model) == after_hash
-                 and sha256(m["scratch"]) == m["scratchInitialSHA256"], "GROUP_BATCH_PRE_SAVE_DRIFT")
-            return dict(status="GROUP_BATCH_PRE_SAVE_READBACK_PASS")
-        def after_save(reply, _):
-            need(reply == {"success":True} and guard.new_saved_sha and lease.verify(),
-                 "GROUP_BATCH_SAVE_NOT_CONFIRMED")
-            snap = preserve_guarded_save(m["scratch"], state / "guarded-save.snapshot",
-                guard.new_saved_sha, {m["source"]:m["sourceSHA256"]})
-            write_new_json(state / "guarded-snapshot.json", snap)
-            return dict(status="GROUP_BATCH_SAVED_SNAPSHOT_PASS", savedSHA256=guard.new_saved_sha)
-        saved = router.execute(writer, SAVE_SCENE, router.prepare("SaveProject", {}), [],
-            signatures, m["scratchInitialSHA256"], AUTH, "PROJECT", after_save, verify_before=before_save)
-        need(saved["status"] == "PASS" and api.calls["SaveProject"] == 1
-             and api.write_attempts == 2 and sha256(m["scratch"]) == guard.new_saved_sha,
-             "GROUP_BATCH_EXACT_ONE_CLONE_ONE_SAVE_REQUIRED")
-        receipt = dict(schema=SCHEMA, status="GROUP_BATCH_SAVED_PENDING_REAL_REOPEN",
-            sourceSHA256=m["sourceSHA256"], savedSHA256=guard.new_saved_sha,
-            snapshotReceiptSHA256=sha256(state / "guarded-snapshot.json"),
-            cooperativeLeaseSHA256=lease.lock_sha, nativeResponse=response, nativeReadback=proof,
-            baselineGuidCount=len(planned["baselineGuids"]), finalGuidCount=len(ids),
-            finalGuidSetSHA256=R.digest(ids), finalBrepSHA256=after_hash, groupCount=m["groupCount"],
-            nativeCloneCalls=1, saveCalls=1, automaticReplay=False, reopenVerified=False)
-        write_new_json(state / "saved.json", receipt)
-        return receipt
+        return save_verified_batch(state, m, planned, api, guard, router, lease, response)
     except Exception as exc:
         write_new_json(state / "failed.json", dict(schema=SCHEMA,
             status="UNKNOWN_NO_REPLAY_READONLY_RECONCILIATION_REQUIRED", error=str(exc),
             nativeMutationMayHaveOccurred=True, automaticReplay=False))
         raise
+
+
+def save_verified_batch(state, m, planned, api, guard, router, lease, response):
+    """Save only after a fresh complete readback; never clones or replays."""
+    baseline = read(state / "baseline-native.json")
+    writes_before = api.write_attempts
+    ids, native, proof = verify_group_model(m, api, planned, response, baseline)
+    after_hash = fingerprint(native)
+    signatures = C.retained_geometry_signatures(native, ids)
+    router.review_policy("SaveProject", "TRANSACTION", "PROJECT",
+        dict(source=SOURCE_REF, sha256=router.contract_hash("SaveProject")))
+    guard.enable_after_verified_copy()
+    def before_save(live):
+        fresh_ids, fresh_model, _ = verify_group_model(m, live, planned, response, baseline)
+        need(lease.verify() and fresh_ids == ids and fingerprint(fresh_model) == after_hash
+             and sha256(m["scratch"]) == m["scratchInitialSHA256"], "GROUP_BATCH_PRE_SAVE_DRIFT")
+        return dict(status="GROUP_BATCH_PRE_SAVE_READBACK_PASS")
+    def after_save(reply, _):
+        need(reply == {"success":True} and guard.new_saved_sha and lease.verify(),
+             "GROUP_BATCH_SAVE_NOT_CONFIRMED")
+        snap = preserve_guarded_save(m["scratch"], state / "guarded-save.snapshot",
+            guard.new_saved_sha, {m["source"]:m["sourceSHA256"]})
+        write_new_json(state / "guarded-snapshot.json", snap)
+        return dict(status="GROUP_BATCH_SAVED_SNAPSHOT_PASS", savedSHA256=guard.new_saved_sha)
+    saved = router.execute(writer, SAVE_SCENE, router.prepare("SaveProject", {}), [],
+        signatures, m["scratchInitialSHA256"], AUTH, "PROJECT", after_save, verify_before=before_save)
+    need(saved["status"] == "PASS" and api.calls["SaveProject"] == 1
+         and api.write_attempts == writes_before + 1 and sha256(m["scratch"]) == guard.new_saved_sha,
+         "GROUP_BATCH_EXACT_ONE_CLONE_ONE_SAVE_REQUIRED")
+    receipt = dict(schema=SCHEMA, status="GROUP_BATCH_SAVED_PENDING_REAL_REOPEN",
+        sourceSHA256=m["sourceSHA256"], savedSHA256=guard.new_saved_sha,
+        snapshotReceiptSHA256=sha256(state / "guarded-snapshot.json"),
+        cooperativeLeaseSHA256=lease.lock_sha, nativeResponse=response, nativeReadback=proof,
+        baselineGuidCount=len(planned["baselineGuids"]), finalGuidCount=len(ids),
+        finalGuidSetSHA256=R.digest(ids), finalBrepSHA256=after_hash, groupCount=m["groupCount"],
+        nativeCloneCalls=1, saveCalls=1, automaticReplay=False, reopenVerified=False)
+    write_new_json(state / "saved.json", receipt)
+    return receipt
+
+
+def reconcile_completed_clone(state):
+    """Read-only reconciliation of the specific post-JSON comparison stop.
+
+    Requires an already PASS native SceneWriter scene, never an unknown clone.
+    Leaves every original attempted/failed record and the lease unchanged.
+    """
+    state = Path(state).resolve()
+    m = manifest_for(state)
+    failure = read(state / "failed.json")
+    need(failure.get("error") == "GROUP_WRITER_TRANSLATED_BREP_OR_ATTRIBUTES_MISMATCH"
+         and not any((state / n).exists() for n in
+                     ("saved.json", "reconciled-save-attempted.json"))
+         and sha256(m["scratch"]) == m["scratchInitialSHA256"],
+         "GROUP_BATCH_ONLY_COMPLETED_UNSAVED_CLONE_CAN_BE_RECONCILED")
+    planned = read(state / "plan.json")
+    need(read(state / "attempted.json")["planSHA256"] == sha256(state / "plan.json"),
+         "GROUP_BATCH_ORIGINAL_ATTEMPT_PLAN_DRIFT")
+    trace_path = state / "trace-write" / "raw.jsonl"
+    rows = [json.loads(r) for r in trace_path.read_text(encoding="utf8").splitlines()]
+    clones = [r for r in rows if r["command"] == V.CMD]
+    need(len(clones) == 1 and not any(r["command"] == "SaveProject" for r in rows)
+         and clones[0]["parameters"] == planned["params"],
+         "GROUP_BATCH_RECONCILIATION_EXACTLY_ONE_CLONE_NO_SAVE_REQUIRED")
+    with sqlite3.connect(f"file:{(state / 'batch-scenewriter.sqlite').as_posix()}?mode=ro", uri=True) as db:
+        scenes = db.execute("SELECT scene_id,state,result FROM scenes").fetchall()
+        steps = db.execute("SELECT scene_id,state,output FROM steps").fetchall()
+    need(len(scenes) == len(steps) == 1 and scenes[0][:2] == steps[0][:2] == (CREATE_SCENE,"PASS"),
+         "GROUP_BATCH_RECONCILIATION_NATIVE_SCENE_MUST_ALREADY_BE_PASS")
+    result, step = json.loads(scenes[0][2]), json.loads(steps[0][2])
+    response = clones[0]["response"]
+    need(result == step and result.get("status") == "PASS"
+         and result.get("nativeResponse") == response
+         and result.get("intent", {}).get("parameters") == planned["params"],
+         "GROUP_BATCH_RECONCILIATION_TRACE_SQLITE_DISAGREE")
+    lease = ScratchWriteLease(m["scratch"],state,m["scratchInitialSHA256"])
+    record = read(lease.lock)
+    need(record.get("state") == str(state) and record.get("scratch") == m["scratch"]
+         and record.get("expectedInitialSHA256") == m["scratchInitialSHA256"],
+         "GROUP_BATCH_RECONCILIATION_ORIGINAL_LEASE_REQUIRED")
+    api, _ = prepare_api(m,state,execute=False)
+    _, runtime = router_for(api)
+    need(runtime == planned["runtimeIdentity"], "GROUP_BATCH_RECONCILIATION_RUNTIME_DRIFT")
+    ids, native, proof = verify_group_model(m,api,planned,response,read(state / "baseline-native.json"))
+    need(api.write_attempts == 0, "GROUP_BATCH_RECONCILIATION_READ_ONLY_REQUIRED")
+    evidence = dict(status="COMPLETED_CLONE_FULL_NATIVE_READONLY_RECONCILED",
+        sourceSHA256=m["sourceSHA256"], planSHA256=sha256(state / "plan.json"),
+        originalFailureSHA256=sha256(state / "failed.json"),
+        originalAttemptSHA256=sha256(state / "attempted.json"),
+        traceSHA256=sha256(trace_path), sqliteSHA256=sha256(state / "batch-scenewriter.sqlite"),
+        originalLeaseSHA256=sha256(lease.lock), finalGuidSetSHA256=R.digest(ids),
+        finalBrepSHA256=fingerprint(native), nativeReadback=proof,
+        nativeResponse=response, nativeWrites=0, automaticReplay=False)
+    return evidence
+
+
+def save_reconciled_clone(state):
+    """Explicit continuation after independent reconciliation; SAVE only once."""
+    state = Path(state).resolve()
+    evidence = read(state / "completed-clone-reconciliation.json")
+    need(reconcile_completed_clone(state) == evidence,
+         "GROUP_BATCH_RECONCILIATION_PROOF_DRIFT")
+    m = manifest_for(state)
+    lease = ScratchWriteLease(m["scratch"],state,m["scratchInitialSHA256"])
+    lease.lock_sha = evidence["originalLeaseSHA256"]
+    lease.verify()
+    write_new_json(state / "reconciled-save-attempted.json",dict(
+        status="SAVE_ONLY_AFTER_COMPLETED_CLONE_RECONCILIATION",
+        reconciliationSHA256=sha256(state / "completed-clone-reconciliation.json"),
+        nativeCloneAllowed=False, automaticReplay=False))
+    api, guard = prepare_api(m,state,execute=True)
+    router, runtime = router_for(api)
+    planned = read(state / "plan.json")
+    need(runtime == planned["runtimeIdentity"], "GROUP_BATCH_RECONCILED_SAVE_RUNTIME_DRIFT")
+    return save_verified_batch(state,m,planned,api,guard,router,lease,evidence["nativeResponse"])
 
 
 def saved_state(state):
