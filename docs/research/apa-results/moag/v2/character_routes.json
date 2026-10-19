@@ -2436,6 +2436,214 @@
       ],
       "identity_hypotheses": [],
       "notes": "Грузовой лифт нельзя автоматически отождествлять с пассажирским ДНК-лифтом RT-016. Количество и длина шахт без метрических доказательств не определены."
+    },
+    {
+      "id": "RT-021",
+      "title": "Ночной переход через Третий и мусоропереработку на Нижний",
+      "participants": [
+        "Таис",
+        "Фёдор",
+        "Егор"
+      ],
+      "book": "B1",
+      "site_pages": [
+        "B1-097",
+        "B1-098"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT021-A",
+          "label": "Исходный Второй уровень; дальнейший способ подъема неизвестен",
+          "global_level": 2,
+          "local_stratum": "confirmed-or-gap-transit",
+          "source_page_id": "B1-097",
+          "movement_method": "WALK",
+          "observed_constraint": "Исходный Второй уровень; дальнейший способ подъема неизвестен",
+          "existing_graph_node": "L2",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT021-B",
+          "label": "Пропуск описания перехода на Третий",
+          "global_level": null,
+          "local_stratum": "confirmed-or-gap-transit",
+          "source_page_id": "B1-098",
+          "movement_method": "NARRATIVE_GAP",
+          "observed_constraint": "Пропуск описания перехода на Третий",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT021-C",
+          "label": "Технические коридоры Третьего",
+          "global_level": 3,
+          "local_stratum": "confirmed-or-gap-transit",
+          "source_page_id": "B1-098",
+          "movement_method": "WALK",
+          "observed_constraint": "Технические коридоры Третьего",
+          "existing_graph_node": "L3",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT021-D",
+          "label": "Переход между Третьим и Нижним без уточненной в этой сцене лестницы",
+          "global_level": null,
+          "local_stratum": "confirmed-or-gap-transit",
+          "source_page_id": "B1-098",
+          "movement_method": "NARRATIVE_GAP",
+          "observed_constraint": "Переход между Третьим и Нижним без уточненной в этой сцене лестницы",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT021-E",
+          "label": "Цех переработки отходов Нижнего",
+          "global_level": 1,
+          "local_stratum": "confirmed-or-gap-transit",
+          "source_page_id": "B1-098",
+          "movement_method": "WALK",
+          "observed_constraint": "Цех переработки отходов Нижнего",
+          "existing_graph_node": "L1-RECYCLING",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT021-F",
+          "label": "Подход к Темной базе",
+          "global_level": 1,
+          "local_stratum": "confirmed-or-gap-transit",
+          "source_page_id": "B1-098",
+          "movement_method": "WALK",
+          "observed_constraint": "Подход к Темной базе",
+          "existing_graph_node": "L1-TEMNAYA",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT021-G",
+          "label": "Локальная лестница к верхним спальным местам базы",
+          "global_level": 1,
+          "local_stratum": "confirmed-or-gap-transit",
+          "source_page_id": "B1-098",
+          "movement_method": "CLIMB_UP",
+          "observed_constraint": "Локальная лестница к верхним спальным местам базы",
+          "existing_graph_node": "L1-BASE-SLEEP",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [],
+      "identity_hypotheses": [],
+      "notes": "Пройденное перемещение без вымышленных координат и способов перехода, не описанных на этих страницах."
+    },
+    {
+      "id": "RT-022",
+      "title": "Маршрут через доступный нижний проход и дугообразную сеть старого грузового сектора",
+      "participants": [
+        "Таис",
+        "Фёдор",
+        "Егор"
+      ],
+      "book": "B1",
+      "site_pages": [
+        "B1-099",
+        "B1-100"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT022-A",
+          "label": "Второй уровень: начало перемещения",
+          "global_level": 2,
+          "local_stratum": "confirmed-or-gap-transit",
+          "source_page_id": "B1-099",
+          "movement_method": "MAGNETIC_BOARD",
+          "observed_constraint": "Второй уровень: начало перемещения",
+          "existing_graph_node": "L2",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT022-B",
+          "label": "Открываемые проходы и лестничный спуск к мусорному сектору",
+          "global_level": null,
+          "local_stratum": "confirmed-or-gap-transit",
+          "source_page_id": "B1-099",
+          "movement_method": "CLIMB_DOWN",
+          "observed_constraint": "Открываемые проходы и лестничный спуск к мусорному сектору",
+          "existing_graph_node": "L1-RECYCLING",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT022-C",
+          "label": "Узкие нижние коридоры",
+          "global_level": 1,
+          "local_stratum": "confirmed-or-gap-transit",
+          "source_page_id": "B1-099",
+          "movement_method": "MAGNETIC_BOARD",
+          "observed_constraint": "Узкие нижние коридоры",
+          "existing_graph_node": "L1",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT022-D",
+          "label": "Проходимый на этот момент ранее закрытый переход",
+          "global_level": 1,
+          "local_stratum": "confirmed-or-gap-transit",
+          "source_page_id": "B1-100",
+          "movement_method": "MAGNETIC_BOARD",
+          "observed_constraint": "Проходимый на этот момент ранее закрытый переход",
+          "existing_graph_node": "L1-SEALED",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT022-E",
+          "label": "Широкий дугообразный коридор старых ангаров",
+          "global_level": 1,
+          "local_stratum": "confirmed-or-gap-transit",
+          "source_page_id": "B1-100",
+          "movement_method": "MAGNETIC_BOARD",
+          "observed_constraint": "Широкий дугообразный коридор старых ангаров",
+          "existing_graph_node": "L1-OLD-FREIGHT-HANGAR",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT022-F",
+          "label": "Повторное приближение к выходу",
+          "global_level": 1,
+          "local_stratum": "confirmed-or-gap-transit",
+          "source_page_id": "B1-100",
+          "movement_method": "MAGNETIC_BOARD",
+          "observed_constraint": "Повторное приближение к выходу",
+          "existing_graph_node": "L1-OLD-FREIGHT-HANGAR",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT022-G",
+          "label": "Выход, который пересекли Таис и Егор, но не Фёдор",
+          "global_level": 1,
+          "local_stratum": "confirmed-or-gap-transit",
+          "source_page_id": "B1-100",
+          "movement_method": "DOOR",
+          "observed_constraint": "Выход, который пересекли Таис и Егор, но не Фёдор",
+          "existing_graph_node": "L1-SEALED",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [],
+      "identity_hypotheses": [],
+      "notes": "Маршрут разветвляется по персонажам в финальной точке: Фёдор внутри, Таис и Егор снаружи. Открытие прохода и последующая блокировка — разные временные состояния."
     }
   ]
 }
