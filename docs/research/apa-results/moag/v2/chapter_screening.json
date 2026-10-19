@@ -80,7 +80,8 @@
       "B3-015",
       "B3-016",
       "B3-017",
-      "B3-018"
+      "B3-018",
+      "B3-022"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -128,13 +129,14 @@
       "B3-011",
       "B3-015",
       "B3-016",
-      "B3-017"
+      "B3-017",
+      "B3-022"
     ],
     "uncertain_page_ids": [],
     "metrics": {
-      "as_of_page_id": "B3-018",
-      "context_reviewed_page_count": 77,
-      "full_evidence_page_count": 239,
+      "as_of_page_id": "B3-022",
+      "context_reviewed_page_count": 78,
+      "full_evidence_page_count": 240,
       "external_excluded_page_count": 24,
       "unresolved_classification_page_count": 0,
       "justified_reopened_page_count": 4,
@@ -1586,6 +1588,41 @@
         }
       ],
       "chapter_end_confirmed": true
+    },
+    {
+      "id": "B3-PART1-CH8",
+      "book_id": "B3",
+      "part_number": 1,
+      "chapter_number": 8,
+      "title": "Эмма. Много глюченых роботов",
+      "page_span": {
+        "start": 21,
+        "end": 23
+      },
+      "chapter_classification": "REMOTE_EVIDENCE",
+      "screening_status": "ONE_PASS_IN_PROGRESS",
+      "screened_pages": [
+        "B3-022"
+      ],
+      "scenes": [
+        {
+          "id": "B3P1C8-S1",
+          "page_fragments": [
+            {
+              "page_id": "B3-022",
+              "fragment": "На другой станции Эмма сопоставляет покрытие полов и плановую структуру с МОАГом: МОАГ имеет главные круговые коридоры на каждом уровне, от них отходят туннели к жилым и техническим помещениям; совпадает резиновое покрытие пола."
+            }
+          ],
+          "classification": "REMOTE_EVIDENCE",
+          "physical_location": "Другая станция; сравнение с известной Эмме схемой МОАГа.",
+          "characters": [
+            "Эмма",
+            "Ник",
+            "Жак"
+          ],
+          "station_relevance": "Прямое свидетельство о кольцевых коридорах каждого уровня МОАГа и общих свойствах пола; прямые коридоры целевого объекта к МОАГу не относятся."
+        }
+      ]
     }
   ],
   "character_location_events": [
