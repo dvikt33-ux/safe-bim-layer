@@ -140,5 +140,35 @@ class GatewayTests(unittest.TestCase):
                 list(gateway.fetch_events(known))
 
 
+    def test_expired_event_cannot_launch_after_waiting_in_queue(self):
+        self.push("activation-12")
+        after_expiry = datetime.now(timezone.utc) + timedelta(days=2)
+        with patch.object(gateway, "utc_now", return_value=after_expiry):
+            self.assertEqual(gateway.claim(self.db), None)
+        self.assertEqual(
+            self.db.execute(
+                "SELECT status FROM jobs WHERE job_id='activation-12'"
+            ).fetchone()[0],
+            "EXPIRED"
+        )
+
+    def test_blocked_launch_needs_explicit_reconciliation(self):
+        self.push("activation-13")
+        self.push("activation-14")
+        def fail(exe, url):
+            raise OSError("Cannot open Opera")
+        self.assertEqual(gateway.dispatch_one(self.db, self.config, fail),
+                         "BLOCKED_NEEDS_RECONCILE:activation-13")
+        with self.assertRaisesRegex(ValueError, "JOB_NOT_WAITING"):
+            gateway.confirm_tab(self.db, "activation-13", "No tab was opened")
+        self.assertEqual(gateway.dispatch_one(
+            self.db, self.config, lambda exe, url: None), "NO_ELIGIBLE_JOBS")
+        gateway.cancel_blocked(self.db, "activation-13",
+                               "Inspected Opera and confirmed no pending job")
+        self.assertEqual(gateway.dispatch_one(
+            self.db, self.config, lambda exe, url: None),
+            "AWAIT_TAB_PROOF:activation-14")
+
+
 if __name__ == "__main__":
     unittest.main()
