@@ -6655,6 +6655,38 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-405",
+      "page_id": "B2-028",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=28",
+      "station_id": "MOAG",
+      "narrative_mode": "THIRD_TO_SECOND_LIFT",
+      "locator_hint": "Женя уезжает в лифте на Второй",
+      "spatial_assertion": "Эмма провожает Женю к лифту Третьего и отправляет на Второй, сама возвращается в рубку. Идентичность лифта по номеру шахты не установлена.",
+      "feature_refs": [
+        "L2",
+        "L3",
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-406",
+      "page_id": "B2-028",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=28",
+      "station_id": "UNRESOLVED_OBJECT",
+      "narrative_mode": "FOREIGN_CRUISER_EXCLUSION",
+      "locator_hint": "белые ходы чужого крейсера, стены с платами",
+      "spatial_assertion": "Узкие белые коридоры, прямоугольные развилки и серверные стеновые панели относятся к вражескому крейсеру Гильдии, не к МОАГу; их нельзя включать в топологию станции.",
+      "feature_refs": [],
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
