@@ -169,6 +169,16 @@ class EvidenceGraphR06Tests(unittest.TestCase):
         self.assertEqual(stages[2] - stages[3],
                          counts["r06_explicit_link_component_reductions"])
 
+    def test_isolated_index_research_queue_preserves_unconnected_status(self):
+        result = self.result
+        queue = result["unconnected_index_source_review_queue"]
+        self.assertEqual(len(queue), result["counts"]["isolated_physical_indices"])
+        self.assertEqual(len(queue), result["counts"]["unconnected_index_research_tasks"])
+        self.assertEqual(len({q["physical_index_id"] for q in queue}), len(queue))
+        self.assertTrue(all(q["status"] ==
+                            "SOURCE_LOOKUP_REQUIRED_NOT_AUTO_CONNECTED" for q in queue))
+        self.assertTrue(all(q["priority"].startswith(("P1_", "P2_", "P3_"))
+                            for q in queue))
     def test_narrative_gap_is_not_connected_across_unseen_route(self):
         r = self.result
         self.assertGreater(r["counts"]["narrative_gaps"], 0)
