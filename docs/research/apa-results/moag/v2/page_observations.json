@@ -8674,6 +8674,48 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-537",
+      "page_id": "B2-093",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=93",
+      "station_id": "MOAG",
+      "narrative_mode": "LIBRARY_OPERATIONS_AND_POPULATION_STATE",
+      "locator_hint": "Встреча в библиотеке; погасшие мониторы, разговор о Втором уровне и зависимости от дон/лон систем ухода",
+      "spatial_assertion": "В малой библиотеке упоминаются стол, полки с книгами, погасшие мониторы и проход между шкафами. Внутренний монолог Эммы связывает хаос Второго уровня с отсутствием донов и лонов. Это описание состояния и зависимости бытовой инфраструктуры в данный период, а не новая постоянная планировка.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT_AND_CHARACTER_CONTEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-538",
+      "page_id": "B2-093",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=93",
+      "station_id": "MOAG",
+      "narrative_mode": "GATE_TUNNEL_AND_MOVEMENT",
+      "locator_hint": "Туннель №8: проход на Оранжевую магистраль у границы внутреннего круга",
+      "spatial_assertion": "После просьбы открыть доступ к туннелю №8 Колька с Егором уходят на Зелёную магистраль. В последующем фрагменте проход открыт: у решётки на Оранжевой магистрали пауки стоят ровной линией и не нападают, когда через проход выходят Рита с группой. Вооружённые жители остаются у границы внутреннего круга. Связь сцены указывает на проход между внутренним кругом и Оранжевой магистралью через туннель №8; не отождествлять с туннелем №2 и не выводить длину, ширину или вертикальную отметку.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-539",
+      "page_id": "B2-093",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=93",
+      "station_id": "MOAG",
+      "narrative_mode": "REPORTED_STATION_CONTROL_AND_PRODUCTION",
+      "locator_hint": "Утверждения девочек-биороботов о главном сервере, перепрограммировании станции и продолжающемся производстве",
+      "spatial_assertion": "Девочки-биороботы утверждают, что станция захвачена, главный сервер перепрограммирован, производство продолжается, а их задача — изменить программирование станции и остановить производство людей. Это атрибутированные заявления персонажей и описание операционного состояния/намерения; сервер не локализован, взаимосвязь с ранее описанными серверными зонами не установлена.",
+      "feature_refs": [],
+      "evidence_class": "CHARACTER_REPORT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
