@@ -106,7 +106,7 @@ def fetch_events(known=None):
                 raise ValueError("IMMUTABLE_EVENT_REWRITTEN")
             continue
         obj = gh_api(f"repos/{REPOSITORY}/contents/{INBOX}/{name}.json?ref=main")
-        raw = base64.b64decode(obj["content"], validate=True)
+        raw = base64.b64decode("".join(obj["content"].split()), validate=True)
         sha = git_blob_sha(raw)
         if sha != obj["sha"] or sha != item["sha"]:
             raise ValueError("GITHUB_CONTENT_SHA_MISMATCH")
