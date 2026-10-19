@@ -82,6 +82,27 @@ class AreaVolumeR05(unittest.TestCase):
         self.assertTrue(by["valid_area_not_geometry"]["admissible_by_area"])
         self.assertFalse(by["valid_area_not_geometry"]["geometry_proven"])
 
+    def test_multiple_individually_fitting_halls_can_overfill_one_level(self):
+        demo=dict(self.demo)
+        demo["lower_level_diameter_m"]=700
+        demo["children_level_diameter_m"]=600
+        # Upper remains 530: global order is valid.
+        r=MOD.solve(self.bounds,self.graph,demo,area_overrides={
+            "M-L1-WASTE-001":{"chosen_area_m2":200000}})
+        checks={x["id"]:x for x in r["checks"]}
+        self.assertEqual(checks["BLOCK_FOOTPRINT_ORDER_1"]["status"],"PASS")
+        self.assertEqual(checks["BLOCK_FOOTPRINT_ORDER_2"]["status"],"PASS")
+        self.assertEqual(checks["LEVEL_FOOTPRINT_BUDGET_L1-DISJOINT-01"]["status"],"FAIL")
+        self.assertEqual(checks["LEVEL_VOLUME_BUDGET_L1-DISJOINT-01"]["status"],"PASS")
+
+    def test_upper_hall_can_fit_by_area_but_break_vertical_volume_budget(self):
+        r=MOD.solve(self.bounds,self.graph,self.demo,area_overrides={
+            "M-L3-PRODUCTION-ROUND-001":{"chosen_area_m2":85000,"chosen_height_m":170}})
+        checks={x["id"]:x for x in r["checks"]}
+        self.assertEqual(checks["LEVEL_FOOTPRINT_BUDGET_L3-DISJOINT-01"]["status"],"PASS")
+        self.assertEqual(checks["LEVEL_VOLUME_BUDGET_L3-DISJOINT-01"]["status"],"FAIL")
+        self.assertFalse(r["gates"]["geometry_unique"])
+
     def test_editing_single_space_and_invalid_overrides(self):
         r=MOD.solve(self.bounds,self.graph,area_overrides={
             "M-L2-DINING-001":{"min_area_m2":45,"max_area_m2":500,
