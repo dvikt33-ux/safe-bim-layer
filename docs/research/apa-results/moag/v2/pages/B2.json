@@ -276,12 +276,12 @@
       "id": "B2-025",
       "page_number": 25,
       "url": "https://loveread.ec/read_book.php?id=53370&p=25",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 5,
+      "notes": "Эмма, Коля и Соня едут лифтом со Второго на Третий, выходят в тихий светлый коридор и достигают капитанской рубки с овальным рабочим столом-монитором и голограммой. Отказ роботов-уборщиков в сюжете связан с электронным заражением. Историческое ограничение доступа детей к Третьему снято; это изменение режима эксплуатации без изменения конструктивной геометрии.",
+      "verification_method": "Full LoveRead primary narrative read, separate real corridor movement, equipment fault and earlier access restrictions",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-026",
