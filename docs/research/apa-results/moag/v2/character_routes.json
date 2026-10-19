@@ -3147,6 +3147,83 @@
       "constraints": [],
       "identity_hypotheses": [],
       "notes": "Текст подтверждает именно полный цикл по Оранжевой магистрали; центр, радиус и абсолютный азимут не установлены. Локальный спуск не считать отдельным глобальным этажом."
+    },
+    {
+      "id": "RT-028",
+      "title": "Таис: взрослая каюта Третьего → круглый зал отдыха → командная рубка",
+      "participants": [
+        "Таис"
+      ],
+      "book": "B2",
+      "site_pages": [
+        "B2-008"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT028-A",
+          "label": "Исходная взрослая каюта",
+          "global_level": 3,
+          "local_stratum": "third-command-access",
+          "source_page_id": "B2-008",
+          "movement_method": "WALK",
+          "observed_constraint": "Исходная взрослая каюта",
+          "existing_graph_node": "L3-ADULT-RETREAT-SUITE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT028-B",
+          "label": "Большой круглый зал отдыха",
+          "global_level": 3,
+          "local_stratum": "third-command-access",
+          "source_page_id": "B2-008",
+          "movement_method": "WALK",
+          "observed_constraint": "Большой круглый зал отдыха",
+          "existing_graph_node": "L3-REST",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT028-C",
+          "label": "Короткий переход из жилого сектора к рубке",
+          "global_level": 3,
+          "local_stratum": "third-command-access",
+          "source_page_id": "B2-008",
+          "movement_method": "WALK",
+          "observed_constraint": "Короткий переход из жилого сектора к рубке",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT028-D",
+          "label": "Двойные полупрозрачные двери рубки",
+          "global_level": 3,
+          "local_stratum": "third-command-access",
+          "source_page_id": "B2-008",
+          "movement_method": "DOOR",
+          "observed_constraint": "Двойные полупрозрачные двери рубки",
+          "existing_graph_node": "L3-BRIDGE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT028-E",
+          "label": "Центральный стол и серверная стена рубки",
+          "global_level": 3,
+          "local_stratum": "third-command-access",
+          "source_page_id": "B2-008",
+          "movement_method": "WALK",
+          "observed_constraint": "Центральный стол и серверная стена рубки",
+          "existing_graph_node": "L3-BRIDGE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [],
+      "identity_hypotheses": [],
+      "notes": "Реальная последовательность подтверждена, размеры и направление перехода не установлены; состояние открытости двери зависит от фазы."
     }
   ]
 }
