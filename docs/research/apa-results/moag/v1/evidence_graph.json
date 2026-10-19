@@ -1233,6 +1233,101 @@
       },
       "geometry_gate": "NOT_AUTHORIZED",
       "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-CIRCULAR-UPPER-WALK",
+      "label": "Верхний металлический мостик круглого зала",
+      "level": 1,
+      "type": "circulation",
+      "source_ids": [
+        "B1-17"
+      ],
+      "text_basis": "Под потолком проходит полукруглый мостик вдоль половины зала, с проёмом и дверью; с нижним полом ранее соединяла лестница, остались её обломки.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-CIRCULAR-STAIRS",
+      "label": "Повреждённая лестница к верхнему мостику",
+      "level": 1,
+      "type": "vertical_route",
+      "source_ids": [
+        "B1-17"
+      ],
+      "text_basis": "Лестничный подход с основного пола на верхний мостик разрушен, сохранился подвижный короткий фрагмент.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-CIRCULAR-CONTROL",
+      "label": "Помещение ручного управления шлюзами за мостиком",
+      "level": 1,
+      "type": "space",
+      "source_ids": [
+        "B1-17"
+      ],
+      "text_basis": "После перехода по верхнему мостику через дверь найдена отдельная комната с пультами ручного управления шлюзами.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-CIRCULAR-QUARTERS",
+      "label": "Жилая комната за операторской",
+      "level": 1,
+      "type": "space",
+      "source_ids": [
+        "B1-17"
+      ],
+      "text_basis": "За следующей дверью комната с несколькими дверями, нержавеющей раковиной в столе, лучевой печью, оборудованием и кожаным диваном.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-LOWER-BLOCK-STRATA",
+      "label": "Локальные высотные ярусы Нижнего блока",
+      "level": 1,
+      "type": "spatial_constraint",
+      "source_ids": [
+        "B1-17"
+      ],
+      "text_basis": "Доказаны дополнительные помещения ниже обычного Нижнего уровня, верхний мостик, операторские антресоли и лестничные перепады. НЕ доказаны 2 или 4 сплошные межэтажные плиты.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
     }
   ],
   "edges": [
@@ -2018,6 +2113,102 @@
       "claim": "Заброшенные каюты исследованы в закрытом секторе.",
       "state": "TEXT_DIRECT",
       "metric": null
+    },
+    {
+      "id": "E66",
+      "from": "L1-CIRCULAR-HALL",
+      "to": "L1-CIRCULAR-UPPER-WALK",
+      "type": "contains",
+      "source_ids": [
+        "B1-17"
+      ],
+      "claim": "Мостик расположен в верхней части круглого зала, идет полукругом по половине периметра.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E67",
+      "from": "L1-CIRCULAR-HALL",
+      "to": "L1-CIRCULAR-STAIRS",
+      "type": "contains",
+      "source_ids": [
+        "B1-17"
+      ],
+      "claim": "Остатки лестницы, ведущей наверх к мостику.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E68",
+      "from": "L1-CIRCULAR-STAIRS",
+      "to": "L1-CIRCULAR-UPPER-WALK",
+      "type": "vertical_access",
+      "source_ids": [
+        "B1-17"
+      ],
+      "claim": "Лестница повреждена; до мостика добираются по обломку.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E69",
+      "from": "L1-CIRCULAR-UPPER-WALK",
+      "to": "L1-CIRCULAR-CONTROL",
+      "type": "door_to",
+      "source_ids": [
+        "B1-17"
+      ],
+      "claim": "На верхнем мостике дверь ведёт в помещение с пультами управления шлюзами.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E70",
+      "from": "L1-CIRCULAR-CONTROL",
+      "to": "L1-CIRCULAR-QUARTERS",
+      "type": "door_to",
+      "source_ids": [
+        "B1-17"
+      ],
+      "claim": "За операторской после следующей закрытой двери находится жилое помещение.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E71",
+      "from": "L1-CIRCULAR-UPPER-WALK",
+      "to": "L1-CIRCULAR-HALL",
+      "type": "above",
+      "source_ids": [
+        "B1-17"
+      ],
+      "claim": "Мостик расположен почти под потолком выше пола зала.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E72",
+      "from": "L1-LOWER-BLOCK-STRATA",
+      "to": "L1-CIRCULAR-UPPER-WALK",
+      "type": "includes",
+      "source_ids": [
+        "B1-17"
+      ],
+      "claim": "Один из локальных подтверждённых верхних ярусов Нижнего блока.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E73",
+      "from": "L1-LOWER-BLOCK-STRATA",
+      "to": "L1-OPERATORS",
+      "type": "includes",
+      "source_ids": [
+        "B1-17"
+      ],
+      "claim": "Подпотолочные операторские кабины ангаров — другой локальный верхний ярус.",
+      "state": "TOPOLOGY_INFERRED",
+      "metric": null
     }
   ],
   "questions": [
@@ -2065,6 +2256,16 @@
       "id": "Q09",
       "priority": "BLOCKER",
       "text": "Проверить гипотезу двух палуб внутри Первого уровня и дополнительного двухъярусного нижнего этажа. Книжный факт: под известным Нижним есть помещения; НЕ доказано наличие четырёх сплошных перекрытий. Сравнить размеры и z-связи баз, старых грузовых ангаров, катеров, высоких залов, энергетического ядра и операторских."
+    },
+    {
+      "id": "Q10",
+      "priority": "BLOCKER",
+      "text": "Отделить вложенные палубы Нижнего блока от глобальных трёх уровней. Найти в книгах точную формулировку числа полноценных этажей, их протяженности, на каких отметках находятся базы и ангары, и как связаны частичные антресоли."
+    },
+    {
+      "id": "Q11",
+      "priority": "HIGH",
+      "text": "Проверить конструкцию мостика круглого зала: верхняя полукруглая галерея → дверь → операторская ручных шлюзов → жилая комната. Установить обратный проход и доступ с уровня пола."
     }
   ]
 }
