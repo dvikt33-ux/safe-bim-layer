@@ -8548,6 +8548,20 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-528",
+      "page_id": "B2-087",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=87",
+      "station_id": "MOAG",
+      "narrative_mode": "REMOTE_STATION_POPULATION_AND_REPRODUCTION",
+      "locator_hint": "Таис сообщает Вару о новорождённых и годовалых детях на станции и работе технологии рождения",
+      "spatial_assertion": "В земной сцене Таис сообщает, что на станции недавно родились четверо детей (две девочки и два мальчика), в ближайшие месяцы ожидаются новые рождения, и там много годовалых детей; она говорит, что технология производства детей работает. Это прямое свидетельство персонажа о численности/функции, без размещения, планировки или геометрии.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }

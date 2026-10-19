@@ -39,7 +39,8 @@
       "B2-083",
       "B2-084",
       "B2-085",
-      "B2-086"
+      "B2-086",
+      "B2-087"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -68,15 +69,18 @@
       "B2-071",
       "B2-079",
       "B2-085",
-      "B2-086"
+      "B2-086",
+      "B2-087"
     ],
-    "uncertain_page_ids": [],
+    "uncertain_page_ids": [
+      "B2-087"
+    ],
     "metrics": {
-      "as_of_page_id": "B2-086",
-      "context_reviewed_page_count": 36,
-      "full_evidence_page_count": 202,
+      "as_of_page_id": "B2-087",
+      "context_reviewed_page_count": 37,
+      "full_evidence_page_count": 203,
       "external_excluded_page_count": 17,
-      "unresolved_classification_page_count": 0,
+      "unresolved_classification_page_count": 1,
       "justified_reopened_page_count": 3,
       "justified_reopen_event_count": 4,
       "justified_reopened_page_ids": [
@@ -722,14 +726,15 @@
       "title": "Таис. Все, что рассказывал Вар",
       "page_span": {
         "start": 85,
-        "end": 86
+        "end": 87
       },
       "chapter_end_confirmed": false,
-      "chapter_classification": "REMOTE_EVIDENCE",
+      "chapter_classification": "MIXED",
       "screening_status": "ONE_PASS_IN_PROGRESS",
       "screened_pages": [
         "B2-085",
-        "B2-086"
+        "B2-086",
+        "B2-087"
       ],
       "scenes": [
         {
@@ -742,6 +747,10 @@
             {
               "page_id": "B2-086",
               "fragment": "продолжение рассказа Вара: общая история производственных станций и голографические записи земных мест"
+            },
+            {
+              "page_id": "B2-087",
+              "fragment": "земная сцена в доме Найды; Таис передаёт дистанционные сведения о детях и технологии рождения на станции"
             }
           ],
           "classification": "REMOTE_EVIDENCE",
@@ -751,10 +760,25 @@
             "Фёдор",
             "Вар"
           ],
-          "station_relevance": "легенда и общий исторический рассказ упоминают станции, их назначение и технологии; конкретное устройство МОАГа, его план и геометрия не описаны"
+          "station_relevance": "Таис сообщает о новорождённых, годовалых детях и работающей технологии рождения на станции; геометрии и размещения помещений нет."
+        },
+        {
+          "id": "B2P2C11-S2",
+          "page_fragments": [
+            {
+              "page_id": "B2-087",
+              "fragment": "после того как Таис и Фёдор ложатся спать: нападение шестиногих и реакция Таис на огромное небо"
+            }
+          ],
+          "classification": "UNCERTAIN",
+          "physical_location": "возможно дом Найды/земной остров Саб; сцена сна или видения не подтверждена",
+          "characters": [
+            "Таис"
+          ],
+          "station_relevance": "станция не является установленным местом; fragment preserved pending contextual clarification"
         }
       ],
-      "screening_caveat": "Глава 11 открыта на p85 и продолжается на p86; конец главы не установлен.",
+      "screening_caveat": "Глава 11 продолжается на p85–87; p87 содержит дистанционное свидетельство о станции и отдельный неразрешённый ночной фрагмент после засыпания.",
       "station_relevance": "упоминание владения частью производственных станций относится к общей истории/легенде, не подтверждает конфигурацию МОАГа; голографические изображения относятся к Земле"
     }
   ],
