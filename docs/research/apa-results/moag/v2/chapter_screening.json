@@ -75,7 +75,8 @@
       "B3-004",
       "B3-005",
       "B3-006",
-      "B3-010"
+      "B3-010",
+      "B3-011"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -118,13 +119,14 @@
       "B2-141",
       "B2-144",
       "B3-004",
-      "B3-006"
+      "B3-006",
+      "B3-011"
     ],
     "uncertain_page_ids": [],
     "metrics": {
-      "as_of_page_id": "B3-010",
-      "context_reviewed_page_count": 72,
-      "full_evidence_page_count": 235,
+      "as_of_page_id": "B3-011",
+      "context_reviewed_page_count": 73,
+      "full_evidence_page_count": 236,
       "external_excluded_page_count": 23,
       "unresolved_classification_page_count": 0,
       "justified_reopened_page_count": 4,
@@ -1484,9 +1486,10 @@
         "end": 12
       },
       "chapter_classification": "REMOTE_EVIDENCE",
-      "screening_status": "ONE_PASS_IN_PROGRESS",
+      "screening_status": "ONE_PASS_COMPLETE",
       "screened_pages": [
-        "B3-010"
+        "B3-010",
+        "B3-011"
       ],
       "scenes": [
         {
@@ -1495,6 +1498,10 @@
             {
               "page_id": "B3-010",
               "fragment": "После заголовка главы 4 на крейсере выявлен запрос о помощи от другой станции; Ник прямо уточняет, что это ещё одна станция."
+            },
+            {
+              "page_id": "B3-011",
+              "fragment": "Другая станция активируется и захватывает катер Люка; описание капсулы живого металла относится только к этой станции, не к МОАГу."
             }
           ],
           "classification": "REMOTE_EVIDENCE",
@@ -1506,7 +1513,8 @@
           ],
           "station_relevance": "Таргетный объект отличён от МОАГа; архитектура/идентичность внешней станции не переносится."
         }
-      ]
+      ],
+      "chapter_end_confirmed": true
     }
   ],
   "character_location_events": [
