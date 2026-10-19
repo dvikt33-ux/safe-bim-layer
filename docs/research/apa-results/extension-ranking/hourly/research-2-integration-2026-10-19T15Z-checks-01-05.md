@@ -1,0 +1,6 @@
+# APA №2 — SOURCE проверки 01–05 (15Z)
+01. Релизный AC29 APX? Tapir 1.7.2 release от 2026-10-19 11:49:43Z: Win APX 5 914 112 B, SHA256 4714fcbfadb47307b0b3cecf578fe18ff326f3c06ee0b8e7db5a31a979a01bf7. Блокер local 1.5.10 unknown. SOURCE; далее hash. https://github.com/ENZYME-APD/tapir-archicad-automation/releases/tag/1.7.2
+02. Лицензии? Tapir MIT, SDK29 отдельное Graphisoft license. Блокер локальные права. SOURCE; далее license review. https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.7.2/LICENSE
+03. Готовый мост? Graphisoft AC29 JSON: IsAddOnCommandAvailable + ExecuteAddOnCommand, namespace/name. Блокер availability не PASS. REUSE; далее read-only discovery. https://archicadapi.graphisoft.com/archicadPythonPackage/archicad.releases.ac29.html
+04. GetViewSettings старый? Tapir tag 1.5.9 AddOnMain.cpp L965–970 зарегистрирован since 1.1.4. Блокер local 1.5.10 неизвестен. REUSE; далее capability. https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.5.9/archicad-addon/Sources/AddOnMain.cpp#L965-L970
+05. Поэлементные ошибки вида? Tapir 1.7.2 NavigatorCommands.cpp L360–384: navigatorItemIds[]→viewSettings[] или error. Блокер HTTP success не N=N. ADAPTER; далее count/error. https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.7.2/archicad-addon/Sources/NavigatorCommands.cpp#L360-L384
