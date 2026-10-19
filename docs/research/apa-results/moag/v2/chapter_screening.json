@@ -51,7 +51,8 @@
       "B2-095",
       "B2-099",
       "B2-100",
-      "B2-101"
+      "B2-101",
+      "B2-105"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -90,9 +91,9 @@
     ],
     "uncertain_page_ids": [],
     "metrics": {
-      "as_of_page_id": "B2-101",
-      "context_reviewed_page_count": 48,
-      "full_evidence_page_count": 214,
+      "as_of_page_id": "B2-105",
+      "context_reviewed_page_count": 49,
+      "full_evidence_page_count": 215,
       "external_excluded_page_count": 20,
       "unresolved_classification_page_count": 0,
       "justified_reopened_page_count": 4,
@@ -1048,6 +1049,47 @@
       ],
       "screening_caveat": "Страница 101 совмещает конец главы 14 части 2 и начало главы 1 части 3. В записи B2-101 сохранён только предшествующий станционный фрагмент.",
       "station_relevance": "Нет сведений для текущего графа; внешняя часть страницы пропущена."
+    },
+    {
+      "id": "B2-PART3-CH02",
+      "book_id": "B2",
+      "part_number": 3,
+      "chapter_number": 2,
+      "title": "Эмма. Новые хозяева третьего уровня",
+      "page_span": {
+        "start": 105,
+        "end": 105
+      },
+      "chapter_end_confirmed": false,
+      "chapter_classification": "STATION",
+      "screening_status": "ONE_PASS_IN_PROGRESS",
+      "screened_pages": [
+        "B2-105"
+      ],
+      "scenes": [
+        {
+          "id": "B2P3C02-S1",
+          "page_fragments": [
+            {
+              "page_id": "B2-105",
+              "fragment": "После заголовка главы 2: станционная сцена на Втором уровне; Эмма и Колька планируют разведку на Третий, группа подходит к решётке."
+            }
+          ],
+          "classification": "STATION",
+          "physical_location": "МОАГ: Второй уровень; решётка с неустановленной идентичностью; целевая разведка Третьего уровня пока только запланирована.",
+          "characters": [
+            "Эмма",
+            "Колька",
+            "Дина",
+            "Егор",
+            "Тоша",
+            "Гоша"
+          ],
+          "station_relevance": "Факт планирования доступа на Третий уровень; Егор открывает/закрывает решётку. Исходная трасса и связь решётки с ранее описанными узлами неизвестны. Дина остаётся с детьми по решению группы; это ситуативное распределение ухода."
+        }
+      ],
+      "screening_caveat": "B2 p105 совмещает конец внешней главы 1 части 3 и начало станционной главы 2; внешний фрагмент не анализировался.",
+      "station_relevance": "Станционный фрагмент начинается после заголовка главы 2."
     }
   ],
   "character_location_events": [
