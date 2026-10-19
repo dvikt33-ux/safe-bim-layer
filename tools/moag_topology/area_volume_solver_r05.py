@@ -185,6 +185,42 @@ def solve(bounds,graph,parameter_changes=None,area_overrides=None,candidates=Non
               child["chosen_area_m2"]<=parent["chosen_area_m2"]+EPS),
              "Child footprint cannot exceed block envelope; does NOT prove location",
              "LEVEL_MEMBERSHIP_SOURCE")
+    # Hypothetical independent major-space allocations: check BOTH total
+    # footprint and spatial prism budget; never sum every R04/R05 node,
+    # because container zones and their child rooms otherwise double count.
+    allocation_budgets=[]
+    for group in bounds.get("assumed_disjoint_level_budgets",[]):
+        parent=effective[group["parent"]]
+        members=[effective[id] for id in group["members"]]
+        if "min_area_m2" not in parent or any("min_area_m2" not in e for e in members):
+            raise ValueError("NON_AREA_MEMBER_IN_DISJOINT_BUDGET")
+        member_min=sum(e["min_area_m2"] for e in members)
+        allocated=sum(e["chosen_area_m2"] if e["chosen_area_m2"] is not None else e["min_area_m2"]
+                      for e in members)
+        host_ceiling=parent["chosen_area_m2"] if parent["chosen_area_m2"] is not None else parent["max_area_m2"]
+        volume_min=sum(
+            (e["chosen_area_m2"] if e["chosen_area_m2"] is not None else e["min_area_m2"]) *
+            (e["chosen_height_m"] if e["chosen_height_m"] is not None else e["min_height_m"])
+            for e in members)
+        host_volume_ceiling=(
+            (parent["chosen_area_m2"] if parent["chosen_area_m2"] is not None else parent["max_area_m2"]) *
+            (parent["chosen_height_m"] if parent["chosen_height_m"] is not None else parent["max_height_m"]))
+        footprint_ok=allocated<=host_ceiling+EPS
+        volume_ok=volume_min<=host_volume_ceiling+EPS
+        note("LEVEL_FOOTPRINT_BUDGET_"+group["id"],footprint_ok,
+             f"assigned-or-min footprint {allocated:.2f} m2 / available {host_ceiling:.2f} m2",
+             group["status"])
+        note("LEVEL_VOLUME_BUDGET_"+group["id"],volume_ok,
+             f"assigned-or-min bounding volumes {volume_min:.2f} m3 / host {host_volume_ceiling:.2f} m3",
+             group["status"])
+        allocation_budgets.append({"id":group["id"],"parent_id":group["parent"],
+             "member_ids":group["members"],"scenario_not_text_proven":True,
+             "min_member_footprints_m2":member_min,"allocated_floor_plan_m2":allocated,
+             "host_footprint_capacity_m2":host_ceiling,
+             "min_allocated_prism_volume_m3":volume_min,
+             "host_prism_volume_capacity_m3":host_volume_ceiling,
+             "footprint_ok":footprint_ok,"volume_ok":volume_ok,
+             "do_not_double_count_nested_rooms":True})
     lv=[effective[x] for x in bounds["global_accounting"]["level_envelopes"]]
     for j,(a,b) in enumerate(zip(lv,lv[1:]),1):
         aA,bA=a["chosen_area_m2"],b["chosen_area_m2"]
@@ -243,7 +279,8 @@ def solve(bounds,graph,parameter_changes=None,area_overrides=None,candidates=Non
            "not_area":sum("min_area_m2" not in x for x in effective.values()),
            "tests":len(checks),"fails":len(errors),
            "unresolved_relative_level_area_orders":possible_level_orders},
-        "per_index":effective,"checks":checks,"placement_variant_comparisons":ranked,
+        "per_index":effective,"checks":checks,"level_allocation_budgets":allocation_budgets,
+        "placement_variant_comparisons":ranked,
         "gates":{"metric_locations_approved":False,"geometry_unique":False,
                  "ship_turning_verified":False,"all_areas_book_facts":False,
                  "APA_Archicad_called":False,"main_changed":False}}
