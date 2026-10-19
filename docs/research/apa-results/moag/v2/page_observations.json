@@ -6520,6 +6520,141 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-397",
+      "page_id": "B2-026",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=26",
+      "station_id": "MOAG",
+      "narrative_mode": "ADJACENT_CHILD_BLOCK",
+      "locator_hint": "около жилых кают взрослого района детский отсек",
+      "spatial_assertion": "На Третьем недалеко от кают взрослого сектора расположен блок искусственного выращивания детей, отделённый от публичных коридоров; абсолютное расстояние и ориентация неизвестны.",
+      "feature_refs": [
+        "L3-CHILD-LAB",
+        "L3-CREW"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-398",
+      "page_id": "B2-026",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=26",
+      "station_id": "MOAG",
+      "narrative_mode": "ENERGY_INTERRUPTION",
+      "locator_hint": "Мартин сообщает о перегрузке энергомодуля",
+      "spatial_assertion": "При повторном включении энергетического модуля штатное освещение общественных коридоров Третьего отключается на короткий период; это временный режим инженерных систем, не отсутствие светильников.",
+      "feature_refs": [
+        "L3",
+        "CORE-ENERGY"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-399",
+      "page_id": "B2-026",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=26",
+      "station_id": "MOAG",
+      "narrative_mode": "BRIDGE_EMERGENCY_LIGHTS",
+      "locator_hint": "при отключении основного питания в рубке круглые настенные лампы",
+      "spatial_assertion": "В капитанской рубке Третьего при аварийном отключении загораются отдельные небольшие круглые встроенные в стены светильники резервного освещения.",
+      "feature_refs": [
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-400",
+      "page_id": "B2-026",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=26",
+      "station_id": "MOAG",
+      "narrative_mode": "UPPER_SEARCH_ENTRY",
+      "locator_hint": "девочка в сторону больших дверей",
+      "spatial_assertion": "Эмма выходит из рубки в затемнённые коридоры Третьего искать девочку возле направления к крупным закрытым производственным дверям; точная развилка пока не установлена.",
+      "feature_refs": [
+        "L3-BRIDGE",
+        "L3-PRODUCTION"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-401",
+      "page_id": "B2-027",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=27",
+      "station_id": "MOAG",
+      "narrative_mode": "ROUTE_TURNS",
+      "locator_hint": "два поворота, широкий коридор к главным лифтам",
+      "spatial_assertion": "После выхода из капитанской рубки Эмма проходит два последовательных поворота до широкого коридора с мягким полом, направленного к главным лифтам Третьего.",
+      "feature_refs": [
+        "L3-BRIDGE",
+        "L3-FREIGHT-LIFTS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-402",
+      "page_id": "B2-027",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=27",
+      "station_id": "MOAG",
+      "narrative_mode": "TO_PRODUCTION_DOORS",
+      "locator_hint": "широкий коридор заканчивается закрытыми дверями цеха",
+      "spatial_assertion": "Из широкой коридорной зоны у главных лифтов можно дойти до закрытого входа в производственный цех Третьего; между ними промежуточные повороты не измерены.",
+      "feature_refs": [
+        "L3-FREIGHT-LIFTS",
+        "L3-PRODUCTION"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-403",
+      "page_id": "B2-027",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=27",
+      "station_id": "MOAG",
+      "narrative_mode": "RETURN_FROM_DOOR",
+      "locator_hint": "Эмма с найденной девочкой возвращается в рубку",
+      "spatial_assertion": "После встречи с ребёнком у закрытого цеха Эмма по коридорам возвращается в капитанскую рубку Третьего; путь реально пройден, но точная взаимная ориентация не дана.",
+      "feature_refs": [
+        "L3-PRODUCTION",
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-404",
+      "page_id": "B2-027",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=27",
+      "station_id": "MOAG",
+      "narrative_mode": "LIGHTING_RESTORED",
+      "locator_hint": "по завершении перезагрузки свет восстановлен",
+      "spatial_assertion": "После кратковременной перезагрузки энергетической системы штатное освещение коридоров Третьего вновь начинает работать.",
+      "feature_refs": [
+        "L3",
+        "CORE-ENERGY"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
