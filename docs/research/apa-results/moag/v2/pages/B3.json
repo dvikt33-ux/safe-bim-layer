@@ -375,23 +375,23 @@
       "id": "B3-034",
       "page_number": 34,
       "url": "https://loveread.ec/read_book.php?id=58610&p=34",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "OTHER_STATION_NOT_MOAG",
+      "recorded_spatial_hints": 0,
+      "notes": "Земной фрагмент части II, главы 1, перед заголовком главы 4 пропущен. После заголовка главы Эммы начинается сцена на станции «Инкогнито»: круглый цех и люк в полу относятся к ней; прямых сведений о МОАГе на странице нет.",
+      "verification_method": "После заголовка главы просмотрен только станционный фрагмент; земной текст до границы не анализировался.",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B3-035",
       "page_number": 35,
       "url": "https://loveread.ec/read_book.php?id=58610&p=35",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG_REMOTE_EVIDENCE",
+      "recorded_spatial_hints": 1,
+      "notes": "Продолжение главы Эммы на «Инкогнито». Эмма узнаёт на нижнем уровне знакомое прорезиненное покрытие пола — повторное подтверждение свойства МОАГа, уже зафиксированного в P-677; точное помещение МОАГа не локализуется. Люк, непрерывная труба до Нижнего, воздушный поток, карта и маршрут относятся только к «Инкогнито».",
+      "verification_method": "Одна страница прочитана один раз через Opera; сравнение знакомого покрытия отделено от чужих помещений и маршрута.",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B3-036",
