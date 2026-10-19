@@ -4,6 +4,7 @@
   "scope": {
     "total_pages": 412,
     "screened_page_ids": [
+      "B3-004",
       "B2-051",
       "B2-052",
       "B2-053",
@@ -110,13 +111,14 @@
       "B2-088",
       "B2-089",
       "B2-141",
-      "B2-144"
+      "B2-144",
+      "B3-004"
     ],
     "uncertain_page_ids": [],
     "metrics": {
-      "as_of_page_id": "B2-144",
-      "context_reviewed_page_count": 68,
-      "full_evidence_page_count": 232,
+      "as_of_page_id": "B3-004",
+      "context_reviewed_page_count": 69,
+      "full_evidence_page_count": 233,
       "external_excluded_page_count": 22,
       "unresolved_classification_page_count": 0,
       "justified_reopened_page_count": 4,
@@ -1406,6 +1408,53 @@
         }
       ],
       "chapter_end_confirmed": true
+    },
+    {
+      "id": "B3-PART1-CH2",
+      "book_id": "B3",
+      "part_number": 1,
+      "chapter_number": 2,
+      "title": "Эмма. Ремонт катеров и игра в шарики",
+      "page_span": {
+        "start": 4,
+        "end": 7
+      },
+      "chapter_classification": "REMOTE_EVIDENCE",
+      "screening_status": "ONE_PASS_IN_PROGRESS",
+      "screened_pages": [
+        "B3-004"
+      ],
+      "scenes": [
+        {
+          "id": "B3P1C2-S1",
+          "page_fragments": [
+            {
+              "page_id": "B3-004",
+              "fragment": "После заголовка главы 2: в разговоре на крейсере сообщается, что в энергомодуле станции есть плазма живого металла, из которой возникают роботы-каракатицы; Жак объясняет программирование плазмы чипами."
+            }
+          ],
+          "classification": "REMOTE_EVIDENCE",
+          "physical_location": "Крейсер «Дракон»; сведения о станции передаются в диалоге.",
+          "characters": [
+            "Эмма",
+            "Ник",
+            "Жак"
+          ],
+          "station_relevance": "Функция энергомодуля и принцип работы живого металла; пространственное положение модуля не дано."
+        },
+        {
+          "id": "B3P1C2-S2",
+          "page_fragments": [
+            {
+              "page_id": "B3-004",
+              "fragment": "Остальной фрагмент главы описывает катер, корабль и чужую планету."
+            }
+          ],
+          "classification": "EXTERNAL",
+          "physical_location": "Крейсер «Дракон» и его обитатели.",
+          "screened_out_material": "Устройство чужого корабля и его катеров не включается в модель МОАГа."
+        }
+      ]
     }
   ],
   "character_location_events": [
