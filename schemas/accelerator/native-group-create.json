@@ -1,0 +1,100 @@
+{
+  "version": "29",
+  "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
+  "implementationSource": "archicad-addon/Sources/NativeGroupCommands.inc",
+  "implementationSHA256": "f915d0a2f6127e489eacebd242f72fcab3c409ce07ea7290efa3fb38175d0528",
+  "category": "Native SDK group operation",
+  "description": "Create true Archicad group from verified same-story existing elements in one undo scope.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "memberIds": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "guid": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "guid"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 2,
+        "maxItems": 128,
+        "uniqueItems": true
+      },
+      "sourceRef": {
+        "type": "string",
+        "minLength": 8
+      }
+    },
+    "required": [
+      "memberIds",
+      "sourceRef"
+    ],
+    "additionalProperties": false
+  },
+  "returns": {
+    "anyOf": [
+      {
+        "type": "object",
+        "properties": {
+          "nativeModelWrites": {
+            "type": "integer"
+          },
+          "groupId": {
+            "type": "object",
+            "properties": {
+              "guid": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "guid"
+            ],
+            "additionalProperties": false
+          },
+          "memberCount": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "nativeModelWrites",
+          "groupId",
+          "memberCount"
+        ],
+        "additionalProperties": false
+      },
+      {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "integer"
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "code",
+              "message"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "error"
+        ],
+        "additionalProperties": false
+      }
+    ]
+  },
+  "operationKind": "CREATE",
+  "impact": "MODEL"
+}
