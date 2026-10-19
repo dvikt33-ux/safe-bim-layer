@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 189,
+  "revision": 190,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2481,6 +2481,20 @@
       "kind": "REVIEW",
       "verification": "AUDIT_READBACK_VERIFIED",
       "scope": "Installed shared native batch copy; accepted Column LINEAR2, 172->176GUID, exact source/BREP/materials/groups, oneSave snapshot and real reopen. Beam/Object LIVE not claimed. CI8success atf094d8a9; no repeatacceptedLIVE."
+    },
+    "ART-P70-A11-S15-LINE-RECEIPT-20261020": {
+      "id": "ART-P70-A11-S15-LINE-RECEIPT-20261020",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/c3d2c9767bab54f4d7ec763e6af3ed0f736c452c/docs/evidence/apa-ac29-finite-line-distribution-20261020/README_RU.md",
+      "kind": "RECEIPT",
+      "verification": "INSTALLED_FINITE_LINE_SAVED_REOPENED_PASS",
+      "scope": "New finite diagonal line: exact endpoints/count3, existing selector/registry/SceneWriter, oneMoveElements batch,176->182GUID, original geometry/materials retained, save/snapshot/nativeclose/reopen. CI2SUCCESS. Acceptedoldgrid/copy not repeated."
+    },
+    "ART-P70-A11-S15-LINE-AUDIT-20261020": {
+      "id": "ART-P70-A11-S15-LINE-AUDIT-20261020",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/c3d2c9767bab54f4d7ec763e6af3ed0f736c452c/docs/evidence/apa-ac29-finite-line-distribution-20261020/independent-audit.json",
+      "kind": "REVIEW",
+      "verification": "AUDIT_READBACK_VERIFIED",
+      "scope": "New finite diagonal line: exact endpoints/count3, existing selector/registry/SceneWriter, oneMoveElements batch,176->182GUID, original geometry/materials retained, save/snapshot/nativeclose/reopen. CI2SUCCESS. Acceptedoldgrid/copy not repeated."
     }
   },
   "tasks": {
@@ -5074,7 +5088,8 @@
         "APA-P70.A11.S12",
         "APA-P70.A11.S13",
         "APA-P70.A11.S14",
-        "APA-P70.A11.S15"
+        "APA-P70.A11.S15",
+        "APA-P70.A11.S16"
       ],
       "inputs": [
         "ART-APA-HIGHLEVEL-PR34",
@@ -5276,7 +5291,8 @@
         "PR111 61f56376e37755cfb4a15db29071970525297904 exactPR109base. Initial preapproval checkpoint retained separately; userthenapproved exact71b8529a8da39a478d5a1bc8a370ea97bf63fdc39e4801e793aa36e214074fa4 read-onlycycle. Candidateidentity/source106393a verified,runtime293commands,2extendedexistingcommands CALLABLE_VERIFIED:actualgeneratedObject RailingRailowner,parent/root,Objectandowner128AddPars,rootRailmemo,selectedlibrarymaster/parameterscriptsprivate. ActualsettingsownerabsentfromphysicalrootRailmemo;storedmemo flags1donotoverrideevaluatedDisabled/Child. Top-levelscriptsdelegate tomacros,no fixingruleproof. Bothmaterials36,expectedGUID37;NOT_RESTORED,BLOCKED,no setterretryorDisabledwrite. Newtypedownerfacts inexistingDependencyImpact:352nodes482edges,134observedRailimpacts. DefaultcompoundMODIFYfull BREP/material/GDL/ownership/dependent/beforeproofs;existingSQLiteintentretained,oldtargetfailureproofmatched,legacyunscopedscopeNOT_VERIFIED. OriginalAPX restored8f5a9341and77registrationvaluesbyteexact,newprocessoriginalruntime264commands. Unexpectedtestcopy savedbytechangeafterUIexit afcbdaaea880to0a9c01419823,causeNOT_VERIFIED,noexplicitSaveAPI/nativeMutationcommand. Independentoriginalruntime409signatures/128GDLmatchPR109;bothfilecheckpointsprivate,noblindrollback,sourcePLNunchanged. OverallpersistencePARTIAL; qualifyclosebehaviorbefore anynextnativewrite. Nooffline tests/workflowdispatch/quantitycall/newexecutor/graph/commandnames. CWbounds,newExtruded/RevolvedfieldsBUILDonly;publicmaterialrecoveryroute notAC29qualified. ExactPR104approvalseparatependingnotreasked. Nextsaved-fileprovenance,publicsettingsowner/macrodiagnosis,thenseparatelyapproved2materialrecovery. A11.S03PARTIAL;historicalDONE/evidenceretained.",
         "2026-10-19 PR179 published LIVE32native groups,44->172GUID,oneClone/oneSave,realGUIreopen; source44semanticBREP/materials preserved; corrected JSON tuple equality and dump-local material pools. S12 accepted, S13 installed APA integration pending; overall S03 remainsPARTIAL.",
         "2026-10-19 S13/PR180 installed accepted mass selector into current APA, preserved296contracts and30+4reads, combinedcatalog298; existingRouter/SceneWriter/registry retained. Native group32 LIVE receipt179 reused; individual MoveElements(copy=true) shared registry remains next S14.",
-        "2026-10-19 S14/PR181 installed nativeindividualColumnLINEARcopy accepted and published; CI8success; no repeatLIVE. S15 finite diagonal line endpoints/count is next newcapability."
+        "2026-10-19 S14/PR181 installed nativeindividualColumnLINEARcopy accepted and published; CI8success; no repeatLIVE. S15 finite diagonal line endpoints/count is next newcapability.",
+        "2026-10-20 S15/PR183 installed finite diagonal line accepted/published. S16 selectednamedaxes with irregularpitch is next newfunction; oldcopy/grid not repeated."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
       "owner": null,
@@ -6058,7 +6074,7 @@
       "action_id": "APA-P70.A11",
       "title": "Распределение нативных копий по конечной линии с явными концами и числом позиций",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "DONE_PUBLISHED",
       "priority": 0,
       "work_key": "ac29-mass-finite-line-segment-native-copy",
       "depends_on": [
@@ -6071,11 +6087,44 @@
         "ART-P70-A11-S14-COPY-RECEIPT-20261019",
         "ART-P70-A11-S14-COPY-AUDIT-20261019"
       ],
-      "outputs": [],
+      "outputs": [
+        "PR183 finite LINE_SEGMENT installed and LIVE accepted: 3nativeColumn endpoints/midpoint,182GUID, SHAa72d5451; existing contracts296 preserved. Publishedc3d2c976. Priorworkingcopydrift stoppedbeforenative; usedaccepted immutable snapshot, no restoration/replay."
+      ],
       "acceptance": "Explicit SI start/end/count and verified prototype anchor -> existing mass selector -> oneMoveElements(copy=true) batch through existing registry/SceneWriter. Preserve source geometry and all existing groups; automatic newcontract tests and one meaningful diagonal-line LIVE in a new saved copy, exact targets/GUID/readback, guardedSave/snapshot/reopen. Never rerun acceptedgroup8x4/individualLINEAR proof.",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [
+        "ART-P70-A11-S15-LINE-RECEIPT-20261020",
+        "ART-P70-A11-S15-LINE-AUDIT-20261020"
+      ],
+      "blocked_reason": null
+    },
+    "APA-P70.A11.S16": {
+      "id": "APA-P70.A11.S16",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A11",
+      "title": "Размещение по выбранным пересечениям именованных осей с нерегулярными шагами",
+      "kind": "INTEGRATION",
+      "status": "IN_PROGRESS",
+      "priority": 0,
+      "work_key": "ac29-mass-selected-axis-intersections",
+      "depends_on": [
+        "APA-P70.A11.S15"
+      ],
+      "related": [
+        "APA-P70.A11.S03"
+      ],
+      "inputs": [
+        "ART-P70-A11-S15-LINE-RECEIPT-20261020",
+        "ART-P70-A11-S15-LINE-AUDIT-20261020"
+      ],
+      "outputs": [],
+      "acceptance": "Explicit authoritative orthogonalaxis labels/coordinates and selectedpairs -> existing massselector/capability discovery -> one existing nativebatch; exact placement provenance labels retained. No nativeaxis object creation or inferredcoordinates. Automatic contract checks, one new meaningful sparse nonuniformaxis LIVE in safecopy with GUID/BREP/material/readback/guardedsave/reopen; publish and install without redoingacceptedLINEAR/grid8x4.",
       "owner": "apa-mass-integration-20261019",
-      "lease_until": "2026-10-20T03:07:26Z",
-      "claim_ref": "APA-RUN-20261019-FINITE-LINE",
+      "lease_until": "2026-10-20T03:14:54Z",
+      "claim_ref": "APA-RUN-20261020-SELECTED-AXES",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
@@ -6373,7 +6422,8 @@
         "APA-P70.A11.S12",
         "APA-P70.A11.S13",
         "APA-P70.A11.S14",
-        "APA-P70.A11.S15"
+        "APA-P70.A11.S15",
+        "APA-P70.A11.S16"
       ],
       "artifact_ids": [
         "ART-APA-FULL-CYCLE",
@@ -7123,9 +7173,21 @@
         "APA-P10.A01.S03",
         "APA-P50.A02.S01"
       ],
+      "readiness": "SUFFICIENT",
+      "readiness_evidence_ids": [
+        "ART-P70-A11-S15-LINE-AUDIT-20261020"
+      ],
+      "note": "New finite-line capability installed/published with one native acceptance and exact saved reopen. No oldoperation repeat."
+    },
+    "APA-P70.A11.S16": {
+      "research_task_ids": [
+        "APA-P10.A02.S02",
+        "APA-P10.A01.S03",
+        "APA-P50.A02.S01"
+      ],
       "readiness": "GAP",
       "readiness_evidence_ids": [],
-      "note": "Implementation using existing proven nativebatch; no newresearch, no dependency or APX changes. One new diagonal finite-line acceptance."
+      "note": "Extendexisting axisplacement and nativecopy path; no newresearch,APX,dependencies. Onlyexplicitcoordinates, no claimnativeaxiscreation."
     }
   },
   "component_catalog": {
