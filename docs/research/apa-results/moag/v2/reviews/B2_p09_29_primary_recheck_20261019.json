@@ -1,0 +1,324 @@
+{
+  "schema": "APA-MOAG-PRIMARY-RECHECK/1",
+  "date": "2026-10-19",
+  "work_id": "APA-MOAG-01",
+  "status": "PRIMARY_SOURCE_RECHECK_PUBLISHED_NOT_MERGED_WITH_CANONICAL_LEDGER",
+  "reason": "Canonical JSON files are being updated concurrently; this immutable source-linked audit avoids overwriting any newer results.",
+  "physical_station_id": "SHIP-MLP-MOAG-001",
+  "book_id": "B2",
+  "source_name": "LoveRead",
+  "source_site_page_range": [
+    9,
+    29
+  ],
+  "page_count": 21,
+  "primary_text_scope": "Full text-bearing narrative portion of each named web page; site navigation excluded.",
+  "source_page_is_not_print_page": true,
+  "assertions_are_paraphrases": true,
+  "geometry_authorized": false,
+  "archicad_native_write": false,
+  "pages": [
+    {
+      "page_id": "B2-009",
+      "source_url": "https://loveread.ec/read_book.php?id=53370&p=9",
+      "page_review_status": "SOURCE_READ",
+      "object_class": "MOAG",
+      "key_findings": "Прежний генератор позднее заменён энергомодулем; катера хранятся в закрытых ангарах Нижнего; щит энергозатратен.",
+      "evidence_class": "DIRECT_TEXT",
+      "metric_geometry_verified": false
+    },
+    {
+      "page_id": "B2-010",
+      "source_url": "https://loveread.ec/read_book.php?id=53370&p=10",
+      "page_review_status": "SOURCE_READ",
+      "object_class": "MOAG",
+      "key_findings": "Герои готовятся к походу в старые ангары через командную рубку; детские ясли действуют на Втором. Запланированный маршрут не равен осуществлённому.",
+      "evidence_class": "DIRECT_TEXT",
+      "metric_geometry_verified": false
+    },
+    {
+      "page_id": "B2-011",
+      "source_url": "https://loveread.ec/read_book.php?id=53370&p=11",
+      "page_review_status": "SOURCE_READ",
+      "object_class": "MOAG",
+      "key_findings": "Широкий восстановленный проход к Нижнему: новые серые пластиковые стены, резиновое ворсистое покрытие, ремонт освещения; рабочие лифты.",
+      "evidence_class": "DIRECT_TEXT",
+      "metric_geometry_verified": false
+    },
+    {
+      "page_id": "B2-012",
+      "source_url": "https://loveread.ec/read_book.php?id=53370&p=12",
+      "page_review_status": "SOURCE_READ",
+      "object_class": "MOAG",
+      "key_findings": "Переход в закрытый Нижний через двери с новым цифровым замком. Защита доступа меняется во времени, геометрия дверного проёма остаётся прежней.",
+      "evidence_class": "DIRECT_TEXT",
+      "metric_geometry_verified": false
+    },
+    {
+      "page_id": "B2-013",
+      "source_url": "https://loveread.ec/read_book.php?id=53370&p=13",
+      "page_review_status": "SOURCE_READ",
+      "object_class": "MOAG",
+      "key_findings": "Закрытая дверь Нижнего захлопывается за отрядом. Отдельный путь Эммы на Третьем: грузовые лифты — широкий проход — грузовой зал — цеховые двери, рядом помещение со скафандрами.",
+      "evidence_class": "DIRECT_TEXT",
+      "metric_geometry_verified": false
+    },
+    {
+      "page_id": "B2-014",
+      "source_url": "https://loveread.ec/read_book.php?id=53370&p=14",
+      "page_review_status": "SOURCE_READ",
+      "object_class": "MOAG",
+      "key_findings": "Закрытый Нижний: витые потолочные кабели, открытые трубопроводы; короткая правая ветвь от развилки к широкому сводчатому проходу, биометрические двери; два одноместных катера в первом ангаре, верхние кабины операторов с лестницей.",
+      "evidence_class": "DIRECT_TEXT",
+      "metric_geometry_verified": false
+    },
+    {
+      "page_id": "B2-015",
+      "source_url": "https://loveread.ec/read_book.php?id=53370&p=15",
+      "page_review_status": "SOURCE_READ",
+      "object_class": "MOAG",
+      "key_findings": "Операторы соседних ангаров соединены прямым проходом. Во втором ангаре три повреждённых катера, в следующем приблизительно 4–5. Катер проходит на малой скорости через узкий для него коридор в действующий ангар.",
+      "evidence_class": "DIRECT_TEXT",
+      "metric_geometry_verified": false
+    },
+    {
+      "page_id": "B2-016",
+      "source_url": "https://loveread.ec/read_book.php?id=53370&p=16",
+      "page_review_status": "SOURCE_READ",
+      "object_class": "MOAG",
+      "key_findings": "В рубке: овальный мониторный стол, голограмма и обслуживание роботами. Щит временно открывают при вылете, часть коридоров обесточена ориентировочно на 10 минут; четыре катера снаружи видны опосредованно на экране.",
+      "evidence_class": "DIRECT_TEXT_PLUS_MEDIATED_IMAGE",
+      "metric_geometry_verified": false
+    },
+    {
+      "page_id": "B2-017",
+      "source_url": "https://loveread.ec/read_book.php?id=53370&p=17",
+      "page_review_status": "SOURCE_READ",
+      "object_class": "MOAG",
+      "key_findings": "Из рубки Третьего Эмма и Коля спускаются лифтом к закрытой двери Нижнего, открывают цифровым ключом и проходят через широкий ангарный коридор.",
+      "evidence_class": "DIRECT_TEXT",
+      "metric_geometry_verified": false
+    },
+    {
+      "page_id": "B2-018",
+      "source_url": "https://loveread.ec/read_book.php?id=53370&p=18",
+      "page_review_status": "SOURCE_READ",
+      "object_class": "MOAG",
+      "key_findings": "Нижний ангар: возвращённые катера; верхняя операторская кабина со спуском по железной лестнице; осмотр пола, стен, проёмов и техники.",
+      "evidence_class": "DIRECT_TEXT",
+      "metric_geometry_verified": false
+    },
+    {
+      "page_id": "B2-019",
+      "source_url": "https://loveread.ec/read_book.php?id=53370&p=19",
+      "page_review_status": "SOURCE_READ",
+      "object_class": "MOAG",
+      "key_findings": "Взрослая каюта Третьего включает спальню и соседнюю комнату с диваном; на Втором есть спальня Коли у жилого коридора. Новая изоляция дальних коридоров пока лишь план.",
+      "evidence_class": "DIRECT_TEXT_AND_PLAN",
+      "metric_geometry_verified": false
+    },
+    {
+      "page_id": "B2-020",
+      "source_url": "https://loveread.ec/read_book.php?id=53370&p=20",
+      "page_review_status": "SOURCE_READ",
+      "object_class": "MOAG",
+      "key_findings": "Кабина одноместного катера в ангаре и его подъем над полом при испытании; высота зависания не определяет высоту помещения.",
+      "evidence_class": "DIRECT_TEXT",
+      "metric_geometry_verified": false
+    },
+    {
+      "page_id": "B2-021",
+      "source_url": "https://loveread.ec/read_book.php?id=53370&p=21",
+      "page_review_status": "SOURCE_READ",
+      "object_class": "MOAG",
+      "key_findings": "Шлюзовая камера нижнего ангара приблизительно сравнима с самим ангаром по пространству; герметичные двери, откачка воздуха, круглый наружный проём с треугольными створками.",
+      "evidence_class": "DIRECT_TEXT",
+      "metric_geometry_verified": false
+    },
+    {
+      "page_id": "B2-022",
+      "source_url": "https://loveread.ec/read_book.php?id=53370&p=22",
+      "page_review_status": "SOURCE_READ",
+      "object_class": "MOAG_EXTERIOR",
+      "key_findings": "Бой катеров снаружи. Новых физических комнат станции не осмотрено; внешняя траектория не задаёт план помещений.",
+      "evidence_class": "EXTERIOR_ONLY",
+      "metric_geometry_verified": false
+    },
+    {
+      "page_id": "B2-023",
+      "source_url": "https://loveread.ec/read_book.php?id=53370&p=23",
+      "page_review_status": "SOURCE_READ",
+      "object_class": "OTHER_VESSEL_NOT_MOAG",
+      "key_findings": "Белый шлюз, ангар и узкие коридоры — интерьер чужого крейсера Гильдии; категорически исключить из геометрии МОАГа.",
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "metric_geometry_verified": false
+    },
+    {
+      "page_id": "B2-024",
+      "source_url": "https://loveread.ec/read_book.php?id=53370&p=24",
+      "page_review_status": "SOURCE_READ",
+      "object_class": "MOAG",
+      "key_findings": "Жилая группа Второго: спальня, коридор, кухня, раздвижная дверь. Существуют средства реставрации и переплёта бумажных книг; размещение оборудования неизвестно.",
+      "evidence_class": "DIRECT_TEXT",
+      "metric_geometry_verified": false
+    },
+    {
+      "page_id": "B2-025",
+      "source_url": "https://loveread.ec/read_book.php?id=53370&p=25",
+      "page_review_status": "SOURCE_READ",
+      "object_class": "MOAG",
+      "key_findings": "Эмма, Коля и Соня физически переходят лифтом со Второго на Третий и в командную рубку; историческое ограничение доступа снято, уборщики Третьего технически неисправны.",
+      "evidence_class": "DIRECT_TEXT",
+      "metric_geometry_verified": false
+    },
+    {
+      "page_id": "B2-026",
+      "source_url": "https://loveread.ec/read_book.php?id=53370&p=26",
+      "page_review_status": "SOURCE_READ",
+      "object_class": "MOAG",
+      "key_findings": "Рядом с каютами Третьего — Детский блок с кувезами. Во время перезагрузки энергомодуля общие коридоры на 7 минут остаются без света, рубка освещается отдельными маленькими круглыми настенными лампами.",
+      "evidence_class": "DIRECT_TEXT",
+      "metric_geometry_verified": false
+    },
+    {
+      "page_id": "B2-027",
+      "source_url": "https://loveread.ec/read_book.php?id=53370&p=27",
+      "page_review_status": "SOURCE_READ",
+      "object_class": "MOAG",
+      "key_findings": "От рубки после двух поворотов — широкий коридор к главным лифтам, затем путь к закрытым дверям производственного цеха; Эмма находит там Женю и возвращается.",
+      "evidence_class": "DIRECT_TEXT",
+      "metric_geometry_verified": false
+    },
+    {
+      "page_id": "B2-028",
+      "source_url": "https://loveread.ec/read_book.php?id=53370&p=28",
+      "page_review_status": "SOURCE_READ",
+      "object_class": "MIXED_MOAG_OTHER_VESSEL",
+      "key_findings": "Эмма ведет Женю на лифт Третьего, отправляет на Второй и возвращается в рубку. После смены главы герои находятся внутри чужого крейсера; его белые коридоры и серверные стены исключить.",
+      "evidence_class": "DIRECT_TEXT_PLUS_EXCLUSION",
+      "metric_geometry_verified": false
+    },
+    {
+      "page_id": "B2-029",
+      "source_url": "https://loveread.ec/read_book.php?id=53370&p=29",
+      "page_review_status": "SOURCE_READ",
+      "object_class": "OTHER_VESSEL_NOT_MOAG",
+      "key_findings": "Ангары, конвейеры, цеха и серверные ниши относятся к крейсеру Гильдии. Логотип МОАГа на грузовых контейнерах указывает на происхождение продукции, но не на тождество помещений.",
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "metric_geometry_verified": false
+    }
+  ],
+  "cross_page_constraints": [
+    {
+      "id": "RCHK-G1",
+      "pages": [
+        "B2-014",
+        "B2-015"
+      ],
+      "claim": "First and adjacent operator cabins are linked, separate from the floor passage between hangars.",
+      "status": "DIRECT_TEXT"
+    },
+    {
+      "id": "RCHK-G2",
+      "pages": [
+        "B2-014",
+        "B2-015"
+      ],
+      "claim": "A small craft physically traverses a narrow-for-craft corridor into an operational hangar; dimensions unknown.",
+      "status": "DIRECT_TEXT"
+    },
+    {
+      "id": "RCHK-Z1",
+      "pages": [
+        "B2-014",
+        "B2-018"
+      ],
+      "claim": "Operator booths in the Lower hangars sit above the main hangar floor and are reached via metal ladders; not an entire fourth global story.",
+      "status": "DIRECT_TEXT"
+    },
+    {
+      "id": "RCHK-LOCK1",
+      "pages": [
+        "B2-011",
+        "B2-012",
+        "B2-017"
+      ],
+      "claim": "Previously welded approach is repaired and its digital lock changes state; the physical aperture is the same.",
+      "status": "TEMPORAL_OPERATION"
+    },
+    {
+      "id": "RCHK-SHIELD",
+      "pages": [
+        "B2-016",
+        "B2-021",
+        "B2-026"
+      ],
+      "claim": "Shield apertures, airlock venting, ordinary corridor blackout and bridge emergency lighting are distinct engineering states.",
+      "status": "TEMPORAL_OPERATION"
+    },
+    {
+      "id": "RCHK-NONMOAG",
+      "pages": [
+        "B2-023",
+        "B2-028",
+        "B2-029"
+      ],
+      "claim": "Foreign cruiser's internal spaces are excluded even if MOAG cargo markings occur.",
+      "status": "EXCLUSION_EVIDENCE"
+    }
+  ],
+  "routes_for_canonical_review": [
+    {
+      "id": "RCHK-ROUTE-1",
+      "pages": [
+        "B2-014",
+        "B2-015"
+      ],
+      "sequence": [
+        "sealed Lower entrance",
+        "short branch at fork",
+        "wide vaulted passage",
+        "first hangar",
+        "upper operator booth",
+        "adjoining booth/angars",
+        "craft-width technical passage",
+        "first hangar"
+      ],
+      "remarks": "Do not assign compass directions or numeric width."
+    },
+    {
+      "id": "RCHK-ROUTE-2",
+      "pages": [
+        "B2-017",
+        "B2-018"
+      ],
+      "sequence": [
+        "Third bridge",
+        "lift down",
+        "Lower sealed entrance",
+        "old hangar access corridor",
+        "operational hangar and booth ladder"
+      ],
+      "remarks": "Lift shaft identity unknown."
+    },
+    {
+      "id": "RCHK-ROUTE-3",
+      "pages": [
+        "B2-026",
+        "B2-027",
+        "B2-028"
+      ],
+      "sequence": [
+        "Third bridge",
+        "two turns",
+        "wide corridor of main lifts",
+        "production doors",
+        "return toward bridge",
+        "lift down to Second"
+      ],
+      "remarks": "Do not cross production door; foreign cruiser after chapter transition is excluded."
+    }
+  ],
+  "next_site_page": "B2-030",
+  "merge_rule": "Recheck latest canonical page ledger, observation IDs, routes and node refs before merging, to avoid duplicating concurrently published findings."
+}
