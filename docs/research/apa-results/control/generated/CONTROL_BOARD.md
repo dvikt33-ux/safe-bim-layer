@@ -11,7 +11,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | --- | ---: |
 | BLOCKED | 13 |
 | CLAIMED | 0 |
-| DONE_PUBLISHED | 31 |
+| DONE_PUBLISHED | 32 |
 | IN_PROGRESS | 1 |
 | PARTIAL | 17 |
 | READY | 34 |
@@ -30,7 +30,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| APA-P70.A11.S15 | apa-mass-integration-20261019 | 2026-10-20T03:07:26Z | ac29-mass-finite-line-segment-native-copy |
+| APA-P70.A11.S16 | apa-mass-integration-20261019 | 2026-10-20T03:14:54Z | ac29-mass-selected-axis-intersections |
 
 ## CONTROL — 0 ready
 

@@ -8,8 +8,8 @@ requires_approval tasks are not dispatchable until separate owner approval is re
 ## Краткая сводка
 
 - План: APA-P70 — Разработка APA — полный цикл проектирования и выпуска
-- Статус: **IN_PROGRESS**; завершено 20/44 подзадач.
-- Сейчас: APA-P70.A11.S15
+- Статус: **IN_PROGRESS**; завершено 21/45 подзадач.
+- Сейчас: APA-P70.A11.S16
 - Следующая доступная: APA-P70.A02.S02 — Связать проектные требования с версиями нормативов и проверяемыми правилами
 
 ## Этапы → задачи
@@ -26,7 +26,7 @@ requires_approval tasks are not dispatchable until separate owner approval is re
 | APA-P70.A08 — Сквозная приёмка и расширение без переписывания ядра | PARTIAL | 1/5 |
 | APA-P70.A09 — Геометрия и точность после приёмки ядра | DONE_PUBLISHED | 1/1 |
 | APA-P70.A10 — Измеримое ускорение стабильных операций | WAITING | 0/1 |
-| APA-P70.A11 — v3.1: пакетная интеграция, взаимодействие и системные проверки | IN_PROGRESS | 6/15 |
+| APA-P70.A11 — v3.1: пакетная интеграция, взаимодействие и системные проверки | IN_PROGRESS | 7/16 |
 
 ## Подзадачи и следующий шаг
 
@@ -148,5 +148,7 @@ requires_approval tasks are not dispatchable until separate owner approval is re
   - Источники/ветки: [ART-P70-A11-S12-GROUP32-LIVE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/0041bdb3e9ef3a82763083c70689a52f0c36d9e1/docs/evidence/apa-ac29-native-massops-integration-20261019/live03/README_RU.md), [ART-P70-A11-S11-SAFE01-LIVE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/d2d63d8045974bf5d6c49a77da1e013d4f9f7725/docs/evidence/apa-ac29-safe01-integration-20261019/live01/README_RU.md)
 - **APA-P70.A11.S14 [DONE_PUBLISHED]** Довести индивидуальное native пакетное копирование через общий selector/registry и сохранённую копию; исследования: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
   - Источники/ветки: [ART-P70-A11-S13-INSTALLED-SELECTOR-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/14a8922b2f0affd84205908ea8d7503d984348c1/docs/evidence/apa-ac29-installed-mass-selector-20261019/README_RU.md), [ART-P70-A11-S14-MULTICOPY-SOURCE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/pull/143)
-- **APA-P70.A11.S15 [IN_PROGRESS]** Распределение нативных копий по конечной линии с явными концами и числом позиций; исследования: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- **APA-P70.A11.S15 [DONE_PUBLISHED]** Распределение нативных копий по конечной линии с явными концами и числом позиций; исследования: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
   - Источники/ветки: [ART-P70-A11-S14-COPY-RECEIPT-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/c1338d2f659340bce7aa44fbb7d34165b8ac5fc9/docs/evidence/apa-ac29-native-copy-registry-20261019/README_RU.md), [ART-P70-A11-S14-COPY-AUDIT-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/c1338d2f659340bce7aa44fbb7d34165b8ac5fc9/docs/evidence/apa-ac29-native-copy-registry-20261019/independent-audit.json)
+- **APA-P70.A11.S16 [IN_PROGRESS]** Размещение по выбранным пересечениям именованных осей с нерегулярными шагами; исследования: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+  - Источники/ветки: [ART-P70-A11-S15-LINE-RECEIPT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/c3d2c9767bab54f4d7ec763e6af3ed0f736c452c/docs/evidence/apa-ac29-finite-line-distribution-20261020/README_RU.md), [ART-P70-A11-S15-LINE-AUDIT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/c3d2c9767bab54f4d7ec763e6af3ed0f736c452c/docs/evidence/apa-ac29-finite-line-distribution-20261020/independent-audit.json)
