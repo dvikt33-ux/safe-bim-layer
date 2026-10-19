@@ -1,6 +1,6 @@
 {
   "schema": "APA-MOAG-TOPOLOGY-SNAPSHOT/0.1",
-  "source_blob_sha": "d14592073528435ceadf5282d96450acd2dbe694",
+  "source_blob_sha": "15c176b3bae9289808b3d66a5ed9487a3bc62a33",
   "derived_from": "docs/research/apa-results/moag/v1/evidence_graph.json",
   "status": "GRAPH_ONLY_NO_COORDINATES",
   "space_refs": [
@@ -418,6 +418,61 @@
       "id": "L1-DARK-ENTRY-DOOR",
       "label": "Двухстворчатая стальная дверь внешней границы Темной базы",
       "level": 1
+    },
+    {
+      "id": "L2-RESIDENTIAL-RING",
+      "label": "Кольцевой двухэтажный жилой блок Второго",
+      "level": 2
+    },
+    {
+      "id": "L2-RESIDENTIAL-UPPER",
+      "label": "Верхний этаж кают внутри жилого кольца",
+      "level": 2
+    },
+    {
+      "id": "L2-RESIDENTIAL-LOWER",
+      "label": "Нижний торгово-игровой этаж жилого кольца",
+      "level": 2
+    },
+    {
+      "id": "L1-BASE-COMMON-COOK-TABLE",
+      "label": "Стол приготовления пищи на Темной базе",
+      "level": 1
+    },
+    {
+      "id": "L1-BASE-COMMON-DINE-TABLE",
+      "label": "Стол приёма пищи на Темной базе",
+      "level": 1
+    },
+    {
+      "id": "L1-BASE-OUTER-GATE",
+      "label": "Внешняя тяжёлая створчатая дверь к коридору баз",
+      "level": 1
+    },
+    {
+      "id": "L1-BASE-INNER-GATE",
+      "label": "Внутренняя дверь собственно Темной базы",
+      "level": 1
+    },
+    {
+      "id": "L1-BASE-CORRIDOR-STORES",
+      "label": "Малые кладовые в дальнем конце коридора баз",
+      "level": 1
+    },
+    {
+      "id": "L3-INNER-SECTOR-GATE",
+      "label": "Опускающаяся вниз дверь внутреннего круга Третьего",
+      "level": 3
+    },
+    {
+      "id": "L3-CHILD-LAB-ENTRANCE",
+      "label": "Двойные двери и арочный проход к детскому блоку",
+      "level": 3
+    },
+    {
+      "id": "L3-UP-ACCESS-LOBBY",
+      "label": "Тёмный служебный переход после люка с Нижнего",
+      "level": 3
     }
   ],
   "relationships": [
@@ -1412,6 +1467,196 @@
       "state": "RECHECK_REQUIRED",
       "source_ids": [
         "LR-B1-044"
+      ]
+    },
+    {
+      "id": "E100",
+      "from": "L2",
+      "to": "L2-RESIDENTIAL-RING",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-056"
+      ]
+    },
+    {
+      "id": "E101",
+      "from": "L2-RESIDENTIAL-RING",
+      "to": "L2-RESIDENTIAL-UPPER",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-056"
+      ]
+    },
+    {
+      "id": "E102",
+      "from": "L2-RESIDENTIAL-RING",
+      "to": "L2-RESIDENTIAL-LOWER",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-056"
+      ]
+    },
+    {
+      "id": "E103",
+      "from": "L2-RESIDENTIAL-UPPER",
+      "to": "L2-RESIDENTIAL-LOWER",
+      "relation": "above",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-056"
+      ]
+    },
+    {
+      "id": "E104",
+      "from": "L2-RESIDENTIAL-RING",
+      "to": "L2-GREEN",
+      "relation": "encircles",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-056"
+      ]
+    },
+    {
+      "id": "E105",
+      "from": "L2-RESIDENTIAL-UPPER",
+      "to": "L2-CABINS",
+      "relation": "includes",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-056"
+      ]
+    },
+    {
+      "id": "E106",
+      "from": "L2-RESIDENTIAL-LOWER",
+      "to": "L2-ORANGE",
+      "relation": "tunnels_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-056"
+      ]
+    },
+    {
+      "id": "E107",
+      "from": "L1-BASE-COMMON",
+      "to": "L1-BASE-COMMON-COOK-TABLE",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-052"
+      ]
+    },
+    {
+      "id": "E108",
+      "from": "L1-BASE-COMMON",
+      "to": "L1-BASE-COMMON-DINE-TABLE",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-052"
+      ]
+    },
+    {
+      "id": "E109",
+      "from": "L1-BASES",
+      "to": "L1-BASE-OUTER-GATE",
+      "relation": "access_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-055"
+      ]
+    },
+    {
+      "id": "E110",
+      "from": "L1-BASE-OUTER-GATE",
+      "to": "L1-BASE-INNER-GATE",
+      "relation": "sequential_security_barrier",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-055"
+      ]
+    },
+    {
+      "id": "E111",
+      "from": "L1-BASES",
+      "to": "L1-BASE-CORRIDOR-STORES",
+      "relation": "includes",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-055"
+      ]
+    },
+    {
+      "id": "E112",
+      "from": "L3-INNER",
+      "to": "L3-INNER-SECTOR-GATE",
+      "relation": "access_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-060"
+      ]
+    },
+    {
+      "id": "E113",
+      "from": "L3-INNER-SECTOR-GATE",
+      "to": "L3-CHILD-LAB-ENTRANCE",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-060"
+      ]
+    },
+    {
+      "id": "E114",
+      "from": "L3-CHILD-LAB-ENTRANCE",
+      "to": "L3-CHILD-LAB",
+      "relation": "door_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-060"
+      ]
+    },
+    {
+      "id": "E115",
+      "from": "L1-STAIR-UP",
+      "to": "L3-UP-ACCESS-LOBBY",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-059"
+      ]
+    },
+    {
+      "id": "E116",
+      "from": "L3-UP-ACCESS-LOBBY",
+      "to": "L3-INNER",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-059"
+      ]
+    },
+    {
+      "id": "E117",
+      "from": "L3-INNER",
+      "to": "L3-OUTER",
+      "relation": "corridor_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-059"
+      ]
+    },
+    {
+      "id": "E118",
+      "from": "L3-OUTER",
+      "to": "L3-DOCK",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-059"
       ]
     }
   ],
