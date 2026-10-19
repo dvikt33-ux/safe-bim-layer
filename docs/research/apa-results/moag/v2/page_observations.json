@@ -10088,6 +10088,76 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-639",
+      "page_id": "B2-128",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=128",
+      "station_id": "MOAG",
+      "narrative_mode": "DIRECT_TEXT",
+      "locator_hint": "Эмма с Ником и Жаком движется со Второго на Третий уровень; способ вертикального перехода/коридорный маршрут не описан.",
+      "spatial_assertion": "Переход уровней подтверждён, но средства и точная трасса — пробел; не приписывать конкретному лифту.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-640",
+      "page_id": "B2-128",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=128",
+      "station_id": "MOAG",
+      "narrative_mode": "DIRECT_TEXT",
+      "locator_hint": "Приходят к тем же грузовым ангарам, где несколькими часами ранее грузили роботов.",
+      "spatial_assertion": "Прямая временная и пространственная идентификация с описанным ранее грузовым ангарным узлом.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-641",
+      "page_id": "B2-128",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=128",
+      "station_id": "MOAG",
+      "narrative_mode": "SITUATION_RENDER_STATE",
+      "locator_hint": "У грузовых ангаров разрушены контейнеры, двери и настенная обшивка; видны чёрные следы взрывов.",
+      "spatial_assertion": "Состояние боя для соответствующего рендера; не постоянная конструкция.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-642",
+      "page_id": "B2-128",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=128",
+      "station_id": "MOAG",
+      "narrative_mode": "DIRECT_TEXT",
+      "locator_hint": "Зачищаемый коридор выводит к знакомым дверям капитанской рубки.",
+      "spatial_assertion": "Фактическая связь коридора с дверями рубки подтверждена; промежуточная длина и повороты неизвестны.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-643",
+      "page_id": "B2-128",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=128",
+      "station_id": "MOAG",
+      "narrative_mode": "DIRECT_TEXT",
+      "locator_hint": "Стеклянные двери капитанской рубки открыты; у дверей герои встречают Инессу и Женю.",
+      "spatial_assertion": "Подтверждение стеклянного входа и его открытого состояния в сцене; статус дверей временный.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
