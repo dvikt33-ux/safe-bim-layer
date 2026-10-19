@@ -1,0 +1,130 @@
+{
+  "schema": "APA-MOAG-EXPLICIT-SPATIAL-BRIDGES-R06/0.1",
+  "status": "REVIEWED_OBSERVATION_DERIVED_RELATIONS_NOT_APPROVED_METRIC_GEOMETRY",
+  "description": "Only explicit reviewed station observations; source IDs validate against R04 audit. Each edge is distinct-place qualitative relation; never SAME_IDENTITY.",
+  "typed_edges": [
+    {
+      "id": "S06-001",
+      "from": "M-L1-CH-GAL-001",
+      "to": "M-L1-CH-ST-001",
+      "relation": "LOCAL_STAIR_ACCESS",
+      "source_ids": [
+        "P-220"
+      ],
+      "explanation": "Лестница ведёт к внутреннему мостику круглого зала",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    },
+    {
+      "id": "S06-002",
+      "from": "M-L1-FH-001",
+      "to": "M-L1-FH-001-ST",
+      "relation": "LOCAL_STAIR_IN_HANGAR",
+      "source_ids": [
+        "P-365"
+      ],
+      "explanation": "Операторская первого ангара находится над полом; доступ по лестнице",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    },
+    {
+      "id": "S06-003",
+      "from": "M-L1-FH-002",
+      "to": "M-L1-FH-002-ST",
+      "relation": "LOCAL_STAIR_IN_HANGAR",
+      "source_ids": [
+        "P-369"
+      ],
+      "explanation": "В соседнем ангаре лестница ведёт к высокой операторской",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    },
+    {
+      "id": "S06-004",
+      "from": "M-L1-WASTE-001",
+      "to": "M-L1-WASTE-FURNACE-001",
+      "relation": "EQUIPMENT_INSIDE_WORKSHOP",
+      "source_ids": [
+        "P-108"
+      ],
+      "explanation": "Печь в дальнем конце перерабатывающего цеха; оборудование не отдельное помещение",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    },
+    {
+      "id": "S06-005",
+      "from": "M-L2-RES-GAL-001",
+      "to": "M-L2-PLAZA-ST-001",
+      "relation": "LOCAL_STAIR_FROM_GALLERY",
+      "source_ids": [
+        "P-486"
+      ],
+      "explanation": "Спуск с галереи на площадь по лестнице",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    },
+    {
+      "id": "S06-006",
+      "from": "M-L2-RES-001",
+      "to": "M-L2-ORANGE-001",
+      "relation": "ROUTE_VIA_UNMODELED_TUNNEL",
+      "source_ids": [
+        "P-193"
+      ],
+      "explanation": "Из нижнего яруса жилого кольца выход к Оранжевой через не локализованные туннели",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    }
+  ],
+  "deferred_hypotheses": [
+    {
+      "id": "H06-001",
+      "from": "M-L1-FH-001",
+      "to": "M-L1-FH-LOCK-001",
+      "source_ids": [
+        "P-385"
+      ],
+      "reason": "Шлюзовые двери есть, но без адресной проверки нельзя выбрать, к какому именно ангару относятся",
+      "approved_as_connection": false
+    },
+    {
+      "id": "H06-002",
+      "from": "M-L3-SMALL-STORES-ARC-001",
+      "to": "M-L3-LOG-001",
+      "source_ids": [
+        "P-570"
+      ],
+      "reason": "Не подтверждено тождество описанного коридора грузовому",
+      "approved_as_connection": false
+    },
+    {
+      "id": "H06-003",
+      "from": "M-L3-OLD-ISOLATION-ROOM-001",
+      "to": "MOAG-G-0030",
+      "source_ids": [
+        "P-571",
+        "P-572"
+      ],
+      "reason": "Без дополнительной проверки нельзя объединять старую и вновь описанную изоляцию",
+      "approved_as_connection": false
+    }
+  ]
+}
