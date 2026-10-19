@@ -657,6 +657,267 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-041",
+      "page_id": "B1-006",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=6",
+      "station_id": "MOAG",
+      "narrative_mode": "ROOM_ADJACENCY",
+      "locator_hint": "бывшая спальня Коли в самом конце коридора около кухни",
+      "spatial_assertion": "В жилой группе Второго уровня комната Коли находится в конце коридора рядом с кухней; это локальное отношение между помещениями, не координаты.",
+      "feature_refs": [
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-042",
+      "page_id": "B1-006",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=6",
+      "station_id": "MOAG",
+      "narrative_mode": "INTERIOR",
+      "locator_hint": "зеркало с овальной полочкой, комод, обувь и шкаф",
+      "spatial_assertion": "Каюты Второго имеют комоды, зеркало с полкой и шкафы с систематизированным хранением вещей и обуви.",
+      "feature_refs": [
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-043",
+      "page_id": "B1-006",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=6",
+      "station_id": "MOAG",
+      "narrative_mode": "ROOM_INTERIOR",
+      "locator_hint": "спальня Сони, широкая кровать с узорной деревянной спинкой",
+      "spatial_assertion": "У Сони отдельная спальня, в ней широкая кровать с декоративными деревянными спинками; тип жилого оснащения не унифицирован полностью.",
+      "feature_refs": [
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-044",
+      "page_id": "B1-007",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=7",
+      "station_id": "MOAG",
+      "narrative_mode": "SECTION_AND_BALCONY",
+      "locator_hint": "галерея второго этажа с ограждением, Главная площадь под ней",
+      "spatial_assertion": "Галерея/верхний проход жилого сектора выходит внутрь площади, откуда видны Главная площадь и сад ниже; это частная многоярусность, не непрерывный этаж.",
+      "feature_refs": [
+        "L2-GALLERY",
+        "L2-PLAZA"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-045",
+      "page_id": "B1-007",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=7",
+      "station_id": "MOAG",
+      "narrative_mode": "STAIR_MATERIAL",
+      "locator_hint": "ступени лестницы покрыты ковром",
+      "spatial_assertion": "С верхней жилой галереи к общественной части ведёт лестница с ковровым покрытием ступеней.",
+      "feature_refs": [
+        "L2-GALLERY",
+        "L2-PLAZA"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-046",
+      "page_id": "B1-007",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=7",
+      "station_id": "MOAG",
+      "narrative_mode": "PUBLIC_SPATIAL_RELATION",
+      "locator_hint": "Зелёная магистраль окружает Главную площадь",
+      "spatial_assertion": "Зелёная магистраль кольцом окаймляет площадь с садом; на маршруте видны деревья и обслуживание роботами.",
+      "feature_refs": [
+        "L2-GREEN",
+        "L2-PLAZA"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-047",
+      "page_id": "B1-007",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=7",
+      "station_id": "MOAG",
+      "narrative_mode": "CIRCULATION",
+      "locator_hint": "длинный туннель между Зелёной и Оранжевой магистралями",
+      "spatial_assertion": "Для перемещения между Зелёным и Оранжевым кольцами используется длинный соединительный туннель.",
+      "feature_refs": [
+        "L2-GREEN",
+        "L2-ORANGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-048",
+      "page_id": "B1-007",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=7",
+      "station_id": "MOAG",
+      "narrative_mode": "PUBLIC_FINISH",
+      "locator_hint": "Оранжевая магистраль, резиновое покрытие, витрины",
+      "spatial_assertion": "Оранжевая — транспортно-торговая зона с резиновым покрытием и оформленными витринами.",
+      "feature_refs": [
+        "L2-ORANGE",
+        "L2-CAFE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-049",
+      "page_id": "B1-007",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=7",
+      "station_id": "MOAG",
+      "narrative_mode": "SCHOOL_ACCESS",
+      "locator_hint": "между магистралью и школой, двери со стеклом",
+      "spatial_assertion": "Проход из района Оранжевой магистрали приводит к учебному блоку и через стеклянные двери — в широкий освещённый холл.",
+      "feature_refs": [
+        "L2-SCHOOL",
+        "L2-ORANGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-050",
+      "page_id": "B1-007",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=7",
+      "station_id": "MOAG",
+      "narrative_mode": "EXAM_LOBBY",
+      "locator_hint": "холл со стульями вдоль стен и чёрным резиновым полом",
+      "spatial_assertion": "Перед экзаменационными кабинами предусмотрен светлый просторный холл с сиденьями и резиновой отделкой пола.",
+      "feature_refs": [
+        "L2-SCHOOL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-051",
+      "page_id": "B1-008",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=8",
+      "station_id": "MOAG",
+      "narrative_mode": "EXAM_ROOMS",
+      "locator_hint": "индивидуальные экзаменационные кабинки, вмонтированные планшеты",
+      "spatial_assertion": "Экзаменационный блок содержит раздельные персональные кабины с рабочими поверхностями и встроенными экранами.",
+      "feature_refs": [
+        "L2-SCHOOL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-052",
+      "page_id": "B1-008",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=8",
+      "station_id": "MOAG",
+      "narrative_mode": "PUBLIC_EQUIPMENT",
+      "locator_hint": "торговые автоматы на маршруте",
+      "spatial_assertion": "Вблизи магистрали установлены автоматы, связанные с системой распределения товаров и бонусов.",
+      "feature_refs": [
+        "L2-ORANGE",
+        "L2-CAFE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-053",
+      "page_id": "B1-008",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=8",
+      "station_id": "MOAG",
+      "narrative_mode": "MEDIATED_VISUAL",
+      "locator_hint": "модель рубки и экран экзамена",
+      "spatial_assertion": "Изображение рубки показывается на экране как учебная визуализация: это не непосредственный осмотр действительной рубки и не метрическое доказательство.",
+      "feature_refs": [
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "MEDIATED_IMAGE_UNVERIFIED",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-054",
+      "page_id": "B1-009",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=9",
+      "station_id": "UNRESOLVED_OBJECT",
+      "narrative_mode": "DREAM",
+      "locator_hint": "тёмный, разрушенный коридор в кошмаре Таис",
+      "spatial_assertion": "Описание разрушенного коридора, повреждённых светильников и подтёков встречается в сцене сна. Его нельзя включать в физическую модель как наблюдённое состояние.",
+      "feature_refs": [],
+      "evidence_class": "DREAM_NONFACT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-055",
+      "page_id": "B1-009",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=9",
+      "station_id": "MOAG",
+      "narrative_mode": "INTERIOR",
+      "locator_hint": "старый матрас на полу возле койки",
+      "spatial_assertion": "В реальной спальной зоне Нижнего уровня кроме старой койки используется матрас на полу; рядом металлическая полка.",
+      "feature_refs": [
+        "L1-BASE-SLEEP"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-056",
+      "page_id": "B1-009",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=9",
+      "station_id": "MOAG",
+      "narrative_mode": "PUBLIC_ROOM_INTERIOR",
+      "locator_hint": "кухня жилого сектора, холодильник",
+      "spatial_assertion": "Бытовой маршрут на Втором уровне приводит к кухне со стандартным холодильником, обслуживающей жилой сектор.",
+      "feature_refs": [
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
