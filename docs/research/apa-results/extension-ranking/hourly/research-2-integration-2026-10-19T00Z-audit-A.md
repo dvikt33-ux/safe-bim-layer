@@ -1,0 +1,3 @@
+# APA №2 — аудит А: доказательства, версии, лицензии
+
+Повторно сверены 30 контрактов по исходникам. Graphisoft SDK29 tag 29.3100 лицензируется Graphisoft EULA, не открытой лицензией. Локальный Tapir 1.5.10 и ABI build5101 не удостоверены бинарным SHA. IfcOpenShell 0.8.5 Ifc2Sql: full_schema=True, geometry=True, expand=False; повторное использование базы приводит к предупреждению, а не отказу. Лицензия исходника LGPL-3.0-or-later. buildingSMART ids-tool.CommandLine 1.0.124: MIT, .NET8; опция omitContent отключает семантический аудит. В APA B2 геометрическая эквивалентность при ExtractElements не доказана; B3 различает локальную и мировую геометрию. Native SDK29 методы не равны доступным JSON-командам. Результат SOURCE; новых OFFLINE/BUILD/INSTALLED/LIVE/ACCEPTED нет.
