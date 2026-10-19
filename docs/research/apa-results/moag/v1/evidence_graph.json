@@ -133,6 +133,48 @@
       "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=18",
       "medium": "literary_text",
       "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-022",
+      "section": "Книга I, электронная веб-страница 22 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=22",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-023",
+      "section": "Книга I, электронная веб-страница 23 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=23",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-024",
+      "section": "Книга I, электронная веб-страница 24 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=24",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-025",
+      "section": "Книга I, электронная веб-страница 25 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=25",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-026",
+      "section": "Книга I, электронная веб-страница 26 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=26",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-027",
+      "section": "Книга I, электронная веб-страница 27 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=27",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
     }
   ],
   "nodes": [
@@ -1328,6 +1370,196 @@
       },
       "geometry_gate": "NOT_AUTHORIZED",
       "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-ISOLATION-TRIDENT",
+      "label": "Трёхлучевая развилка у внешнего круга",
+      "level": 3,
+      "type": "circulation",
+      "source_ids": [
+        "LR-B1-022"
+      ],
+      "text_basis": "Персонажи входят в развилку с тремя коридорами в секторе внешнего круга Третьего уровня; проход по центральному коридору.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-ISOLATION-CELL",
+      "label": "Помещение изоляции перед освобождением детей",
+      "level": 3,
+      "type": "space",
+      "source_ids": [
+        "LR-B1-022"
+      ],
+      "text_basis": "Из центрального коридора через дверь со слотом для флешки вход в отдельную запираемую комнату.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-LIFT-PLATFORM",
+      "label": "Круглая грузовая площадка у лифта",
+      "level": 3,
+      "type": "space",
+      "source_ids": [
+        "LR-B1-022"
+      ],
+      "text_basis": "Небольшая круглая площадка со штабелями контейнеров, соединена с коридорами погрузчиков и грузовым/служебным лифтом.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "LINK-LIFT-SHAFT",
+      "label": "Лифтовая шахта с аварийным выходом на Нижний",
+      "level": null,
+      "type": "vertical_route",
+      "source_ids": [
+        "LR-B1-023"
+      ],
+      "text_basis": "Из остановленной кабины через квадратный потолочный люк выходят на крышу, далее верёвочной лестницей до бокового отверстия в стене шахты.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-LIFT-SHAFT-EXIT",
+      "label": "Тёмный проём шахты у мусоропереработки",
+      "level": 1,
+      "type": "portal",
+      "source_ids": [
+        "LR-B1-023"
+      ],
+      "text_basis": "Боковое квадратное отверстие в стене вертикальной шахты, переход к коридору Нижнего уровня поблизости от мусорки.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2-WET-LAUNDRY",
+      "label": "Ванная и встроенная прачечная жилой каюты",
+      "level": 2,
+      "type": "space",
+      "source_ids": [
+        "LR-B1-024"
+      ],
+      "text_basis": "Душ с влагостойким настенным пультом регулирования температуры, встроенные в стену стиральные машины; три на штатную каюту.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2-NURSERY",
+      "label": "Детский сад Второго уровня",
+      "level": 2,
+      "type": "zone",
+      "source_ids": [
+        "LR-B1-025"
+      ],
+      "text_basis": "Детский сад организован по отделениям; Мартин отвечает за младшее, предусмотрены игровые и санитарные комнаты.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2-INFANT-PLAY",
+      "label": "Игровая младшего отделения",
+      "level": 2,
+      "type": "space",
+      "source_ids": [
+        "LR-B1-025"
+      ],
+      "text_basis": "Большой ковёр, детские кубики, шкаф, планшет, роботы-помощники; рядом санитарное обслуживание.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2-INFANT-YARD",
+      "label": "Прогулочная площадка младшего отделения",
+      "level": 2,
+      "type": "space",
+      "source_ids": [
+        "LR-B1-026"
+      ],
+      "text_basis": "Площадка сразу за дверью; резиновое покрытие, песочница, низкие горки, качалки, невысокая ограда с кадками.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2-INFANT-NEW",
+      "label": "Комнаты для новорождённых",
+      "level": 2,
+      "type": "space_group",
+      "source_ids": [
+        "LR-B1-026"
+      ],
+      "text_basis": "Две отдельные комнаты для четырех малышей после доставки в прозрачных кувезах на лифте; игрушки и манежи.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
     }
   ],
   "edges": [
@@ -2209,6 +2441,150 @@
       "claim": "Подпотолочные операторские кабины ангаров — другой локальный верхний ярус.",
       "state": "TOPOLOGY_INFERRED",
       "metric": null
+    },
+    {
+      "id": "E74",
+      "from": "L3-OUTER",
+      "to": "L3-ISOLATION-TRIDENT",
+      "type": "route_to",
+      "source_ids": [
+        "LR-B1-022"
+      ],
+      "claim": "Трёхлучевая развилка расположена около внешнего круга Третьего.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E75",
+      "from": "L3-ISOLATION-TRIDENT",
+      "to": "L3-STORE",
+      "type": "route_to",
+      "source_ids": [
+        "LR-B1-022"
+      ],
+      "claim": "По среднему проходу достигается склад с полками постельных вещей.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E76",
+      "from": "L3-ISOLATION-TRIDENT",
+      "to": "L3-ISOLATION-CELL",
+      "type": "route_to",
+      "source_ids": [
+        "LR-B1-022"
+      ],
+      "claim": "Через поворот и центральный коридор герои достигают запертой камеры изоляции.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E77",
+      "from": "L3-ISOLATION-CELL",
+      "to": "L3-LIFT-PLATFORM",
+      "type": "escape_route_to",
+      "source_ids": [
+        "LR-B1-022"
+      ],
+      "claim": "После освобождения путь ведёт запасным коридором на круглую контейнерную площадку у лифта.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E78",
+      "from": "L3-LIFT-PLATFORM",
+      "to": "LINK-LIFT-SHAFT",
+      "type": "access_to",
+      "source_ids": [
+        "LR-B1-023"
+      ],
+      "claim": "Ожидание у лифта, затем лифтовая кабина с возможностью остановки вручную.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E79",
+      "from": "LINK-LIFT-SHAFT",
+      "to": "L1-LIFT-SHAFT-EXIT",
+      "type": "emergency_vertical_exit",
+      "source_ids": [
+        "LR-B1-023"
+      ],
+      "claim": "Через потолочный люк кабины, крышу, веревочную лестницу и боковой проём в стене шахты.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E80",
+      "from": "L1-LIFT-SHAFT-EXIT",
+      "to": "L1-RECYCLING",
+      "type": "near_route_to",
+      "source_ids": [
+        "LR-B1-023"
+      ],
+      "claim": "На Нижнем слышен шум мусорки и чувствуется запах; не установлен контакт проёма непосредственно с цехом.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E81",
+      "from": "L2-CABINS",
+      "to": "L2-WET-LAUNDRY",
+      "type": "includes",
+      "source_ids": [
+        "LR-B1-024"
+      ],
+      "claim": "Типичная жилая каюта включает ванную со встроенными стиральными машинами.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E82",
+      "from": "L2",
+      "to": "L2-NURSERY",
+      "type": "contains",
+      "source_ids": [
+        "LR-B1-025"
+      ],
+      "claim": "Детский сад с отделениями на Втором уровне.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E83",
+      "from": "L2-NURSERY",
+      "to": "L2-INFANT-PLAY",
+      "type": "includes",
+      "source_ids": [
+        "LR-B1-025"
+      ],
+      "claim": "Игровая младшего отделения.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E84",
+      "from": "L2-INFANT-PLAY",
+      "to": "L2-INFANT-YARD",
+      "type": "door_to",
+      "source_ids": [
+        "LR-B1-026"
+      ],
+      "claim": "Прогулочная площадка находится сразу за дверью младшего отделения.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E85",
+      "from": "L2-NURSERY",
+      "to": "L2-INFANT-NEW",
+      "type": "includes",
+      "source_ids": [
+        "LR-B1-026"
+      ],
+      "claim": "В детском саду две отдельные комнаты новорождённых.",
+      "state": "TEXT_DIRECT",
+      "metric": null
     }
   ],
   "questions": [
@@ -2266,6 +2642,11 @@
       "id": "Q11",
       "priority": "HIGH",
       "text": "Проверить конструкцию мостика круглого зала: верхняя полукруглая галерея → дверь → операторская ручных шлюзов → жилая комната. Установить обратный проход и доступ с уровня пола."
+    },
+    {
+      "id": "Q12",
+      "priority": "HIGH",
+      "text": "Где размещена лифтовая шахта Третий→Нижний относительно производственных коридоров, станции энергомодуля и кольцевой сети? Доказан маршрут, не XY-координаты."
     }
   ]
 }
