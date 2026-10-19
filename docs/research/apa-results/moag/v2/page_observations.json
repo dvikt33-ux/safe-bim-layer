@@ -918,6 +918,583 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-057",
+      "page_id": "B1-010",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=10",
+      "station_id": "MOAG",
+      "narrative_mode": "TECHNICAL_SECTION",
+      "locator_hint": "низкий полукруглый свод туннелей",
+      "spatial_assertion": "Первый уровень: узкие холодные туннели имеют низкий полукруглый потолок, редкие светильники и ровные стены; это второе независимое описание.",
+      "feature_refs": [
+        "L1"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-058",
+      "page_id": "B1-010",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=10",
+      "station_id": "MOAG",
+      "narrative_mode": "SENSORS",
+      "locator_hint": "на Нижнем нет тепловых датчиков",
+      "spatial_assertion": "По реплике Фёдора, в конкретном техническом секторе Нижнего отсутствуют тепловые датчики, но имеется отопление. Нельзя распространять на все помещения и периоды.",
+      "feature_refs": [
+        "L1"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-059",
+      "page_id": "B1-010",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=10",
+      "station_id": "MOAG",
+      "narrative_mode": "VERTICAL_ENGINEERING_ROUTE",
+      "locator_hint": "по квадратным скобам в отверстие, поворот горизонтального участка",
+      "spatial_assertion": "Подъём из технической зоны Нижнего к вентиляционному отделению Второго начинается у мусорных пакетов: за край отверстия и по скобам к горизонтальному повороту.",
+      "feature_refs": [
+        "L1-VENT",
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-060",
+      "page_id": "B1-010",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=10",
+      "station_id": "MOAG",
+      "narrative_mode": "WAREHOUSE_RESTRICTION",
+      "locator_hint": "на складах есть охранные роботы",
+      "spatial_assertion": "В отдельных складах станции действует более строгий охранный режим с боевыми роботами; их точное расположение на уровне не установлено.",
+      "feature_refs": [
+        "L3-STORE"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-061",
+      "page_id": "B1-011",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=11",
+      "station_id": "MOAG",
+      "narrative_mode": "CIRCULATION_FINISH",
+      "locator_hint": "тепло, резиновое покрытие, гладкий пластик",
+      "spatial_assertion": "Магистраль Второго: пружинящий резиновый пол, гладкие пластиковые панели, ровные лампы, тёплый воздух.",
+      "feature_refs": [
+        "L2-ORANGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-062",
+      "page_id": "B1-011",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=11",
+      "station_id": "MOAG",
+      "narrative_mode": "LIGHTING",
+      "locator_hint": "витрины ярче, туннели бежевые с оранжевой подсветкой",
+      "spatial_assertion": "Торговые витрины светят ярче окружающего приглушённого освещения и бежевых стен; контраст должен сохраняться при моделировании.",
+      "feature_refs": [
+        "L2-ORANGE",
+        "L2-CAFE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-063",
+      "page_id": "B1-011",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=11",
+      "station_id": "MOAG",
+      "narrative_mode": "ROUTE",
+      "locator_hint": "пересекла Оранжевую, скрылась в туннеле к внутренней Зелёной",
+      "spatial_assertion": "Маршрут соединяет внешний транспортный круг со внутренней озеленённой магистралью через поперечный тоннель.",
+      "feature_refs": [
+        "L2-ORANGE",
+        "L2-GREEN"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-064",
+      "page_id": "B1-011",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=11",
+      "station_id": "MOAG",
+      "narrative_mode": "PUBLIC_DECOR",
+      "locator_hint": "тёмная панель с золотистыми буквами над Главной площадью",
+      "spatial_assertion": "Система Закона размещена на большой тёмной информационной панели с золотистыми буквами над Главной площадью.",
+      "feature_refs": [
+        "L2-PLAZA"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-065",
+      "page_id": "B1-011",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=11",
+      "station_id": "MOAG",
+      "narrative_mode": "SERVICE_LOGISTICS",
+      "locator_hint": "роботы-разгрузчики, просторный служебный вход кафе",
+      "spatial_assertion": "Кафе снабжаются в контейнерах, у них имеются раздвижные служебные входы, достаточные для движения грузового робота.",
+      "feature_refs": [
+        "L2-CAFE",
+        "L2-ORANGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-066",
+      "page_id": "B1-011",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=11",
+      "station_id": "MOAG",
+      "narrative_mode": "FOOD_PRODUCTION",
+      "locator_hint": "промышленные хлебопечки и роботы-пекари за входом",
+      "spatial_assertion": "За витриной кафе находится кухня хлебопроизводства: большие хлебопечи, роботизированное замешивание, контейнеры с ингредиентами, стулья.",
+      "feature_refs": [
+        "L2-CAFE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-067",
+      "page_id": "B1-012",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=12",
+      "station_id": "MOAG",
+      "narrative_mode": "TRANSPORT_LINK",
+      "locator_hint": "Оранжевая→Зелёная→Главная площадь→шестые туннели",
+      "spatial_assertion": "Во время погони используется короткий ход с Оранжевой на Зелёную, пересечение площади и выход к туннелям №6.",
+      "feature_refs": [
+        "L2-ORANGE",
+        "L2-GREEN",
+        "L2-PLAZA",
+        "L2-T06"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-068",
+      "page_id": "B1-012",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=12",
+      "station_id": "MOAG",
+      "narrative_mode": "LANDSCAPING",
+      "locator_hint": "кадки с апельсинами, лимонами; роботы-садовники",
+      "spatial_assertion": "На Зелёной магистрали растения в больших кадках, в том числе цитрусовые; роботы-садовники временно создают помехи на маршруте.",
+      "feature_refs": [
+        "L2-GREEN"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-069",
+      "page_id": "B1-012",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=12",
+      "station_id": "MOAG",
+      "narrative_mode": "PLAYGROUND",
+      "locator_hint": "горки, качели, трубы и сухие бассейны",
+      "spatial_assertion": "Перед шестыми туннелями расположены детские площадки с горками, качелями, разноцветными трубами и бассейнами с пластиковыми шариками.",
+      "feature_refs": [
+        "L2-T06"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-070",
+      "page_id": "B1-012",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=12",
+      "station_id": "MOAG",
+      "narrative_mode": "TUNNEL_CROSS_SECTION",
+      "locator_hint": "шестые туннели — полукруглые своды",
+      "spatial_assertion": "Основные туннели №6 имеют полукруглые своды; из них существует короткий выход к магазинам.",
+      "feature_refs": [
+        "L2-T06",
+        "L2-CAFE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-071",
+      "page_id": "B1-012",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=12",
+      "station_id": "MOAG",
+      "narrative_mode": "PUBLIC_FURNISHINGS",
+      "locator_hint": "у магазинчиков растения, скамейки, качели, треугольник скамеек",
+      "spatial_assertion": "У магазинов есть озеленённая зона с лавками; место встречи организовано треугольником из деревянных скамеек.",
+      "feature_refs": [
+        "L2-CAFE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-072",
+      "page_id": "B1-012",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=12",
+      "station_id": "MOAG",
+      "narrative_mode": "MAINTENANCE",
+      "locator_hint": "решётки грузовых лифтов и лестницы, упирающиеся в стену",
+      "spatial_assertion": "На скрытом пути к шахте мимо роботов-доставщиков встречаются решётки возможных грузовых лифтов и ступени, оканчивающиеся у стены. Назначение решёток пока косвенное.",
+      "feature_refs": [
+        "L2",
+        "L1-LOWER-SHAFT"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-073",
+      "page_id": "B1-012",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=12",
+      "station_id": "MOAG",
+      "narrative_mode": "VERTICAL_SHAFT",
+      "locator_hint": "круглый вертикальный ход с боковым круглым ответвлением",
+      "spatial_assertion": "Круглая металлическая труба у пола позволяет вертикальный спуск; промежуточное боковое отверстие выводит на обитаемый Нижний уровень, глубже расположен закрытый колодец.",
+      "feature_refs": [
+        "L1-LOWER-SHAFT",
+        "SUB-LOWER-WELL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-074",
+      "page_id": "B1-012",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=12",
+      "station_id": "MOAG",
+      "narrative_mode": "UNKNOWN_LOWER_ROOM",
+      "locator_hint": "двойная дверь, квадратный колодец, запаянная стенка",
+      "spatial_assertion": "Под Нижним есть квадратный закрытый объём с большой двухстворчатой дверью, гнездом для ключа и заделанным проходом напротив.",
+      "feature_refs": [
+        "SUB-LOWER-WELL",
+        "SUB-SEALED-DOOR",
+        "SUB-WELDED-WALL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-075",
+      "page_id": "B1-013",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=13",
+      "station_id": "MOAG",
+      "narrative_mode": "ACCESS_CONTROL",
+      "locator_hint": "флешка перегорает в двери с эмблемой МОАГа",
+      "spatial_assertion": "Замок нижней двери не принимает известный ключ от баз, после попытки электронный носитель разрушается. Функция помещения не установлена.",
+      "feature_refs": [
+        "SUB-SEALED-DOOR"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-076",
+      "page_id": "B1-013",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=13",
+      "station_id": "MOAG",
+      "narrative_mode": "SHAFT_DIMENSIONS_RELATIVE",
+      "locator_hint": "основная труба шире обычных вентиляционных шахт",
+      "spatial_assertion": "Вертикальная железная труба, ведущая к нижнему колодцу, имеет больший проходной размер, чем обычные вентиляционные каналы (без численной величины).",
+      "feature_refs": [
+        "L1-LOWER-SHAFT"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-077",
+      "page_id": "B1-013",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=13",
+      "station_id": "MOAG",
+      "narrative_mode": "SHAFT_RETURN",
+      "locator_hint": "возврат по скобам к боковому повороту",
+      "spatial_assertion": "На обратном подъёме герои достигают бокового ответвления с зацепами/скобами и переходят в горизонтальный лаз.",
+      "feature_refs": [
+        "L1-LOWER-SHAFT"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-078",
+      "page_id": "B1-013",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=13",
+      "station_id": "MOAG",
+      "narrative_mode": "CIRCULATION_ENDPOINT",
+      "locator_hint": "выход к мусоропрессовщику под потолком",
+      "spatial_assertion": "Горизонтальный лаз оканчивается почти под потолком у мусоропрессовщика; из него приходится прыгать на пол, что устанавливает местный перепад высот.",
+      "feature_refs": [
+        "L1-VENT",
+        "L1-RECYCLING"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-079",
+      "page_id": "B1-013",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=13",
+      "station_id": "MOAG",
+      "narrative_mode": "NEIGHBOURHOOD",
+      "locator_hint": "коридор у мусоропрессовщика пересекается с маршрутом диких",
+      "spatial_assertion": "От выхода вентиляции возле мусоропрессовщика через поворот герои встречают детей из другой базы. Это доказывает близкий доступ к дикой зоне, но не саму дверь базы.",
+      "feature_refs": [
+        "L1-WILD",
+        "L1-RECYCLING"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-080",
+      "page_id": "B1-014",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=14",
+      "station_id": "MOAG",
+      "narrative_mode": "DIGITAL_MAP",
+      "locator_hint": "лон проецирует планы Второго и Третьего на экран",
+      "spatial_assertion": "Перепрограммированный лон выдаёт цифровое представление Второго и Третьего уровней; найденный фрагмент не содержит карту Первого.",
+      "feature_refs": [
+        "L2",
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-081",
+      "page_id": "B1-014",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=14",
+      "station_id": "MOAG",
+      "narrative_mode": "ISOLATION_SEARCH",
+      "locator_hint": "герой ищет помещения Изоляции по карте",
+      "spatial_assertion": "Изоляция — функциональный сектор с принудительным удержанием детей. Положение на уровне не установлено напрямую из реплики.",
+      "feature_refs": [
+        "L3"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-082",
+      "page_id": "B1-015",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=15",
+      "station_id": "MOAG",
+      "narrative_mode": "SENSOR_PERMISSION",
+      "locator_hint": "рубка и производство не видны лону на карте",
+      "spatial_assertion": "Капитанская рубка и механизированное производство не доступны датчикам и картам лона по уровню прав доступа; 'не видно' не означает отсутствия здания.",
+      "feature_refs": [
+        "L3-BRIDGE",
+        "L3-PRODUCTION"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-083",
+      "page_id": "B1-015",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=15",
+      "station_id": "MOAG",
+      "narrative_mode": "SERVICE_DELIVERY",
+      "locator_hint": "контейнеры движутся между уровнями с продуктами и упаковкой",
+      "spatial_assertion": "Роботы принимают продукты с контейнерами и возвращают тару, вероятный межуровневый служебный цикл; маршруты и конкретные шахты не известны.",
+      "feature_refs": [
+        "L2-CAFE",
+        "L3-SERVICE"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-084",
+      "page_id": "B1-015",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=15",
+      "station_id": "MOAG",
+      "narrative_mode": "RESIDENTIAL_PROGRAM",
+      "locator_hint": "кухня отдельна от гостиной",
+      "spatial_assertion": "На Втором уровне у Эммы есть кухня с полками, холодильником и столом и отдельная гостиная с диваном и экраном.",
+      "feature_refs": [
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-085",
+      "page_id": "B1-016",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=16",
+      "station_id": "MOAG",
+      "narrative_mode": "RESIDENTIAL_INTERIOR",
+      "locator_hint": "овальный журнальный столик, диван, ковёр",
+      "spatial_assertion": "В гостиной жилой группы на Втором мягкий ковёр и диван с овальным столиком; голографический монитор, управляемый планшетом.",
+      "feature_refs": [
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-086",
+      "page_id": "B1-016",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=16",
+      "station_id": "MOAG",
+      "narrative_mode": "SANITARY_ACCESS",
+      "locator_hint": "Соня идёт в ванную помыть руки",
+      "spatial_assertion": "Из гостиной и жилой группы доступна ванная с текущей водой, без подтверждённого направления двери.",
+      "feature_refs": [
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-087",
+      "page_id": "B1-016",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=16",
+      "station_id": "MOAG",
+      "narrative_mode": "DAY_NIGHT_LIGHTING",
+      "locator_hint": "верхний свет гасится в 22:00",
+      "spatial_assertion": "Во Втором уровне регулируется режим общего верхнего освещения по распорядку; это характеристика электроосвещения, не сводимый к естественному свету.",
+      "feature_refs": [
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-088",
+      "page_id": "B1-017",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=17",
+      "station_id": "UNRESOLVED_OBJECT",
+      "narrative_mode": "DREAM",
+      "locator_hint": "робот-садовник преследует Эмму, пробуждение",
+      "spatial_assertion": "Сцена с неисправным роботом-садовником прямо завершается пробуждением: это сон, нельзя привязывать маршрут к реальным помещениям.",
+      "feature_refs": [],
+      "evidence_class": "DREAM_NONFACT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-089",
+      "page_id": "B1-017",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=17",
+      "station_id": "MOAG",
+      "narrative_mode": "GALLERY_LINK",
+      "locator_hint": "от Эммы до Ильи вдоль галереи второго этажа",
+      "spatial_assertion": "Каюта Ильи достигается из каюты Эммы коротким проходом по кольцевой галерее верхней отметки жилой зоны.",
+      "feature_refs": [
+        "L2-GALLERY",
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-090",
+      "page_id": "B1-017",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=17",
+      "station_id": "MOAG",
+      "narrative_mode": "STAIRS_CONNECTION",
+      "locator_hint": "с верхней галереи спускается на Зеленую магистраль",
+      "spatial_assertion": "Внутренняя кольцевая галерея имеет лестницу вниз к Зелёной магистрали и ближайшему туннелю.",
+      "feature_refs": [
+        "L2-GALLERY",
+        "L2-GREEN"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-091",
+      "page_id": "B1-017",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=17",
+      "station_id": "MOAG",
+      "narrative_mode": "WINDOWS",
+      "locator_hint": "в окнах спален задернуты шторы",
+      "spatial_assertion": "В жилом секторе с галереей есть окна отдельных спален и шторы. Наружные ли эти окна — нельзя определить по контексту.",
+      "feature_refs": [
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
