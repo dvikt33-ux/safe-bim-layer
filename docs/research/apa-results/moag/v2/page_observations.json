@@ -4347,6 +4347,335 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-265",
+      "page_id": "B1-091",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=91",
+      "station_id": "MOAG",
+      "narrative_mode": "HISTORIC_SHIPMENTS",
+      "locator_hint": "небольшие автоматические челноки в заброшенных ангарах",
+      "spatial_assertion": "Архивная переписка описывает подвоз пищи и лекарств малыми челноками-автопилотами в старый нижний ангарный комплекс после его вывода из основных грузовых операций.",
+      "feature_refs": [
+        "L1-OLD-FREIGHT-HANGAR"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-266",
+      "page_id": "B1-091",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=91",
+      "station_id": "MOAG",
+      "narrative_mode": "HISTORIC_SECURITY",
+      "locator_hint": "заперли заражённых в нижнем секторе",
+      "spatial_assertion": "По дневникам, закрытая часть Нижнего включала помещения, в которых остались зараженные и запертый профессор; доступ между отсеками менялся.",
+      "feature_refs": [
+        "L1-SEALED",
+        "L1-OLD-FREIGHT-HANGAR"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-267",
+      "page_id": "B1-091",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=91",
+      "station_id": "MOAG",
+      "narrative_mode": "UNCONFIRMED_ROUTE",
+      "locator_hint": "звери наверняка поднялись через трубу",
+      "spatial_assertion": "Эмма делает вывод, что заражённые прошли через трубу на Второй; прямого наблюдения в этой сцене нет.",
+      "feature_refs": [
+        "L1-SEALED",
+        "L2"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-268",
+      "page_id": "B1-092",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=92",
+      "station_id": "MOAG",
+      "narrative_mode": "LOWER_BATH",
+      "locator_hint": "горячая вода и тёплая плитка",
+      "spatial_assertion": "Нижняя жилая группа имеет работающий душ, раковину, зеркало и плиточное покрытие, нагревающееся от воды.",
+      "feature_refs": [
+        "L1-CIRCULAR-QUARTERS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-269",
+      "page_id": "B1-092",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=92",
+      "station_id": "MOAG",
+      "narrative_mode": "LAB_ACCESS",
+      "locator_hint": "стеклянная самораздвижная дверь",
+      "spatial_assertion": "Эмма выходит из жилой комнаты в смежное бывшее помещение персонала через стеклянную автоматически раздвижную дверь.",
+      "feature_refs": [
+        "L1-CIRCULAR-QUARTERS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-270",
+      "page_id": "B1-093",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=93",
+      "station_id": "MOAG",
+      "narrative_mode": "HISTORIC_ROOM_CHANGE",
+      "locator_hint": "лаборатория оказалась комнатой отдыха",
+      "spatial_assertion": "Помещение рядом с нижней пультовой первоначально могло быть столовой или комнатой отдыха персонала; лабораторное оборудование разместил там профессор позднее. Первичное назначение сформулировано как вывод Эммы по интерьеру.",
+      "feature_refs": [
+        "L1-CIRCULAR-QUARTERS"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-271",
+      "page_id": "B1-093",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=93",
+      "station_id": "MOAG",
+      "narrative_mode": "STAFF_LOUNGE",
+      "locator_hint": "столы, диваны, экраны, планшеты",
+      "spatial_assertion": "При личном осмотре Эмма видит столы, стулья, диваны, погасшие настенные экраны, портативные планшеты и наушники.",
+      "feature_refs": [
+        "L1-CIRCULAR-QUARTERS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-272",
+      "page_id": "B1-093",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=93",
+      "station_id": "MOAG",
+      "narrative_mode": "RESEARCH_EQUIPMENT",
+      "locator_hint": "большой планшет, электронные микроскопы",
+      "spatial_assertion": "На самом большом столе соседней комнаты профессор установил планшет и несколько электронных микроскопов; функциональная перепланировка не подтверждает изменение несущей геометрии.",
+      "feature_refs": [
+        "L1-CIRCULAR-QUARTERS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-273",
+      "page_id": "B1-093",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=93",
+      "station_id": "MOAG",
+      "narrative_mode": "HISTORICAL_CORRIDOR_NUMBERS",
+      "locator_hint": "коридоры номер четыре-С и пять-С",
+      "spatial_assertion": "В дневнике профессора названы технические коридоры 4-С и 5-С закрытой части станции, где он ориентируется при повреждённом освещении; положение этих коридоров пока неизвестно.",
+      "feature_refs": [
+        "L1-OUTER"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-274",
+      "page_id": "B1-093",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=93",
+      "station_id": "MOAG",
+      "narrative_mode": "HISTORICAL_VENT_ROUTE",
+      "locator_hint": "поднимался до Верхнего по вентиляционным люкам",
+      "spatial_assertion": "Профессор в дневнике сообщает, что добирался из нижнего закрытого сектора на Третий через вентиляционные люки; это архивный маршрут взрослого, а не наблюдённый детьми переход.",
+      "feature_refs": [
+        "L1-VENT",
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-275",
+      "page_id": "B1-094",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=94",
+      "station_id": "MOAG",
+      "narrative_mode": "SCHOOL_BOARD_STORAGE",
+      "locator_hint": "раздевалка с рядами магнитных досок",
+      "spatial_assertion": "При школьных классах есть небольшое помещение с рядами общих магнитных досок, маркированных номерами коридоров и названием туннелей.",
+      "feature_refs": [
+        "L2-SCHOOL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-276",
+      "page_id": "B1-094",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=94",
+      "station_id": "MOAG",
+      "narrative_mode": "DECOY_ROUTE",
+      "locator_hint": "повороты от школы мимо пекарни",
+      "spatial_assertion": "Таис реально едет на магнитной доске из школьного сектора через последовательные повороты Второго, мимо пекарни, где выходят роботы.",
+      "feature_refs": [
+        "L2-SCHOOL",
+        "L2-ORANGE",
+        "L2-CAFE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-277",
+      "page_id": "B1-094",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=94",
+      "station_id": "MOAG",
+      "narrative_mode": "ROBOT_OPERATIONS",
+      "locator_hint": "из дверей пекарни вышли пекари",
+      "spatial_assertion": "Доступ из туннеля к автоматизированной пекарне оснащён открывающимися дверями, через которые выходят роботы для заграждения пути зараженным.",
+      "feature_refs": [
+        "L2-CAFE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-278",
+      "page_id": "B1-095",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=95",
+      "station_id": "MOAG",
+      "narrative_mode": "DECOY_TURN_SEQUENCE",
+      "locator_hint": "два поворота направо, Оранжевая",
+      "spatial_assertion": "Таис выполняет на Втором последовательность поворотов, дважды направо по команде Мартина, затем пересекает Оранжевую и въезжает через открытую энергорешётку.",
+      "feature_refs": [
+        "L2-ORANGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-279",
+      "page_id": "B1-095",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=95",
+      "station_id": "MOAG",
+      "narrative_mode": "BENCHES_INSIDE",
+      "locator_hint": "после поднятой решетки ряд скамеек",
+      "spatial_assertion": "Сразу за открытой решёткой защищённого туннеля расположен ряд скамеек, на который наталкивается магнитная доска.",
+      "feature_refs": [
+        "L2-ORANGE",
+        "L2-RESIDENTIAL-RING"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-280",
+      "page_id": "B1-095",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=95",
+      "station_id": "MOAG",
+      "narrative_mode": "NOT_YET_PERFORMED",
+      "locator_hint": "решили заманить заражённых обратно на Нижний",
+      "spatial_assertion": "План повторной изоляции животных на Нижнем обсуждается после спасения школьников; путь пока не пройден и не может подтверждать связность коридоров.",
+      "feature_refs": [
+        "L1-SEALED",
+        "L2"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-281",
+      "page_id": "B1-096",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=96",
+      "station_id": "MOAG",
+      "narrative_mode": "FREIGHT_ELEVATOR",
+      "locator_hint": "узкий лифт доставки продуктов Второй-Третий",
+      "spatial_assertion": "В секторе детского сада функционирует отдельный грузовой лифт для продовольствия, которым трое героев поднимаются на Третий и возвращаются на Второй вместе с отключённым роботом.",
+      "feature_refs": [
+        "L2",
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-282",
+      "page_id": "B1-096",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=96",
+      "station_id": "MOAG",
+      "narrative_mode": "UPPER_FREIGHT_LOBBY",
+      "locator_hint": "белый коридор и левый поворот",
+      "spatial_assertion": "После подъёма грузовым лифтом на Третий герои выходят в белый коридор и сталкиваются с охранным роботом у левого поворота.",
+      "feature_refs": [
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-283",
+      "page_id": "B1-096",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=96",
+      "station_id": "MOAG",
+      "narrative_mode": "SECOND_CABIN_WASHING",
+      "locator_hint": "в ванной при каюте стиральная машина",
+      "spatial_assertion": "В жилой каюте Второго, предоставленной героям, санузел совмещает душевую часть и стиральную машину.",
+      "feature_refs": [
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-284",
+      "page_id": "B1-096",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=96",
+      "station_id": "MOAG",
+      "narrative_mode": "LIFT_IDENTITY_UNVERIFIED",
+      "locator_hint": "грузовой лифт и ДНК-пассажирский пока раздельные",
+      "spatial_assertion": "Грузовой лифт для продуктов со Второго и пассажирский ДНК-лифт возле Детского блока Третьего выполняют разные функции; их тождество или общая шахта не подтверждены.",
+      "feature_refs": [
+        "L2",
+        "L3"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
