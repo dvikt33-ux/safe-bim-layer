@@ -98,6 +98,27 @@
       "url": "https://loveread.ec/read_book.php?id=53370&p=14",
       "medium": "literary_text",
       "quality": "TEXT_READ"
+    },
+    {
+      "id": "B2-13",
+      "section": "Книга II, глава 4 → начало главы 5, интернет-страница 13",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=13",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "B2-15",
+      "section": "Книга II, гл. 5 «Ангары и катера», интернет-страница 15",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=15",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "B2-17",
+      "section": "Книга II, эпизод возвращения в ангары, интернет-страница 17",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=17",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
     }
   ],
   "nodes": [
@@ -893,6 +914,139 @@
       },
       "geometry_gate": "NOT_AUTHORIZED",
       "state": "RECHECK_REQUIRED"
+    },
+    {
+      "id": "L1-ANGAR-ADJ",
+      "label": "Соседний ангар Нижнего уровня",
+      "level": 1,
+      "type": "space",
+      "source_ids": [
+        "B2-15"
+      ],
+      "text_basis": "Гоша открывает смежный ангар; там еще три катера, свет не работает.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-OPERATORS-ADJ",
+      "label": "Диспетчерская соседнего ангара",
+      "level": 1,
+      "type": "space",
+      "source_ids": [
+        "B2-15"
+      ],
+      "text_basis": "Имеется прямое сообщение между операторскими двух соседних ангаров.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-ANGAR-OTHER",
+      "label": "Дополнительные заброшенные ангары",
+      "level": 1,
+      "type": "space_group",
+      "source_ids": [
+        "B2-15"
+      ],
+      "text_basis": "На маршруте встречены другие ангары с поврежденными катерами; точное число помещений не доказано.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-FREIGHT-LIFTS",
+      "label": "Грузовые лифты Третьего уровня",
+      "level": 3,
+      "type": "vertical_route",
+      "source_ids": [
+        "B2-13"
+      ],
+      "text_basis": "От них есть поворот в коридор к рубке.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-CARGO-HALL",
+      "label": "Просторный грузовой зал у производства",
+      "level": 3,
+      "type": "space",
+      "source_ids": [
+        "B2-13"
+      ],
+      "text_basis": "Грузовой зал перед белыми дверями цеха.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-SUIT-ALCOVE",
+      "label": "Отсек со скафандрами",
+      "level": 3,
+      "type": "space",
+      "source_ids": [
+        "B2-13"
+      ],
+      "text_basis": "Небольшой отсек за поворотом на подходе к грузовому залу.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-WORKSHOP-DOOR",
+      "label": "Белые двери производственного цеха",
+      "level": 3,
+      "type": "portal",
+      "source_ids": [
+        "B2-13"
+      ],
+      "text_basis": "Закрытые двери цеха, ведущие из грузового зала.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
     }
   ],
   "edges": [
@@ -1425,6 +1579,126 @@
       ],
       "state": "TEXT_DIRECT",
       "claim": "Фёдор сравнивает кольца; НЕ равенство радиусов",
+      "metric": null
+    },
+    {
+      "id": "E45",
+      "from": "L1-HANGAR-ZONE",
+      "to": "L1-ANGAR-ADJ",
+      "type": "contains",
+      "source_ids": [
+        "B2-15"
+      ],
+      "claim": "Соседний ангар в секторе",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E46",
+      "from": "L1-ANGAR-HALL",
+      "to": "L1-ANGAR-ADJ",
+      "type": "access_to",
+      "source_ids": [
+        "B2-15"
+      ],
+      "claim": "Проход между рабочим и соседним ангарами",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E47",
+      "from": "L1-ANGAR-ADJ",
+      "to": "L1-OPERATORS-ADJ",
+      "type": "contains",
+      "source_ids": [
+        "B2-15"
+      ],
+      "claim": "Диспетчерская соседнего ангара",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E48",
+      "from": "L1-OPERATORS",
+      "to": "L1-OPERATORS-ADJ",
+      "type": "internally_connected",
+      "source_ids": [
+        "B2-15"
+      ],
+      "claim": "Диспетчерские смежных ангаров соединены",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E49",
+      "from": "L1-ANGAR-ADJ",
+      "to": "L1-ANGAR",
+      "type": "craft_movement_via_hall",
+      "source_ids": [
+        "B2-15"
+      ],
+      "claim": "Катер проходит через коридор в рабочий ангар; габариты неизвестны",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E50",
+      "from": "L1-HANGAR-ZONE",
+      "to": "L1-ANGAR-OTHER",
+      "type": "contains",
+      "source_ids": [
+        "B2-15"
+      ],
+      "claim": "Дополнительные ангары с поврежденными катерами",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E51",
+      "from": "L3-FREIGHT-LIFTS",
+      "to": "L3-BRIDGE",
+      "type": "corridor_near",
+      "source_ids": [
+        "B2-13"
+      ],
+      "claim": "От грузовых лифтов ход к коридору капитанской рубки",
+      "state": "TOPOLOGY_INFERRED",
+      "metric": null
+    },
+    {
+      "id": "E52",
+      "from": "L3-CARGO-HALL",
+      "to": "L3-WORKSHOP-DOOR",
+      "type": "adjoins",
+      "source_ids": [
+        "B2-13"
+      ],
+      "claim": "Грузовой зал перед дверями производства",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E53",
+      "from": "L3-WORKSHOP-DOOR",
+      "to": "L3-PRODUCTION",
+      "type": "access_to",
+      "source_ids": [
+        "B2-13"
+      ],
+      "claim": "Двери цеха связаны с производственными отсеками",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E54",
+      "from": "L3-CARGO-HALL",
+      "to": "L3-SUIT-ALCOVE",
+      "type": "near",
+      "source_ids": [
+        "B2-13"
+      ],
+      "claim": "Отсек со скафандрами за поворотом рядом с грузовым залом",
+      "state": "TOPOLOGY_INFERRED",
       "metric": null
     }
   ],
