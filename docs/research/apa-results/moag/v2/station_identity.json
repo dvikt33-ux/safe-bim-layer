@@ -1,0 +1,49 @@
+{
+  "schema": "APA-MOAG-STATION-IDENTITY/1",
+  "canonical_station_id": "MOAG",
+  "physical_object_id": "SHIP-MLP-MOAG-001",
+  "names": [
+    {
+      "value": "Млечный Путь",
+      "role": "original_name",
+      "canonical_station_id": "MOAG",
+      "period": "BEFORE_ROBOT_CAPTURE"
+    },
+    {
+      "value": "МОАГ",
+      "role": "later_name",
+      "canonical_station_id": "MOAG",
+      "period": "AFTER_ROBOT_CAPTURE"
+    }
+  ],
+  "identity_claim": "Млечный Путь и МОАГ — один и тот же физический космический корабль/станция; позднее название связано с захватом роботами.",
+  "claim_provenance": {
+    "type": "USER_CLARIFICATION",
+    "date": "2026-10-19",
+    "text_page_locator": null,
+    "validation_status": "PENDING_INDEPENDENT_PAGE_REFERENCE"
+  },
+  "separate_entities": [
+    {
+      "station_id": "THIRD_STATION_NOT_MOAG",
+      "description": "Другая станция в последующих книгах. Не сливать с Млечным Путём/МОАГом."
+    }
+  ],
+  "modeling": {
+    "shared_space_graph": true,
+    "keep_space_ids_across_periods": true,
+    "use_story_phase_for_access_and_function_changes": true,
+    "phases": [
+      {
+        "id": "BEFORE_ROBOT_CAPTURE",
+        "station_id": "MOAG"
+      },
+      {
+        "id": "AFTER_ROBOT_CAPTURE",
+        "station_id": "MOAG"
+      }
+    ],
+    "name_change_must_not_create_new_floor_graph": true,
+    "unverified_reconstructions_stay_hypotheses": true
+  }
+}
