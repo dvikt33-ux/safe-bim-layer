@@ -1600,7 +1600,7 @@
           "global_level": null,
           "local_stratum": "between-2-and-1",
           "source_page_id": "B1-065",
-          "movement_method": "WALK",
+          "movement_method": "NARRATIVE_GAP",
           "observed_constraint": "Между сценой на Втором и началом следующей части на Нижнем произошёл неописанный переход: механизм смены уровня неизвестен.",
           "existing_graph_node": null,
           "relative_xy": null,
