@@ -63,6 +63,9 @@ class SaveIsolationTests(unittest.TestCase):
         receipt = {"schema": B.SCHEMA,
                    "status": "BATCH_NATIVE_SAVED_PENDING_REAL_REOPEN",
                    "savedSHA256": self.saved_sha,
+                   "guardedSnapshotSHA256": self.saved_sha,
+                   "guardedSnapshotReceiptSHA256":
+                       S.sha256(self.parent / "guarded-snapshot.json"),
                    "sourceSHA256": self.source_sha,
                    "moduleSHA256": self.module_sha,
                    "batchCount": 2, "afterGuidCount": 119,
@@ -181,6 +184,32 @@ class SaveIsolationTests(unittest.TestCase):
         self.assertTrue((target_state / "batch-scenewriter.sqlite").is_file())
         with self.assertRaisesRegex(ValueError, "IMMUTABLE_SOURCE_DRIFT"):
             B.validate_stage(target_state, allow_plan=True)
+
+    def test_each_reopen_must_recheck_original_sealed_snapshot_chain(self):
+        _, receipt, _ = self._saved_parent()
+        self.assertEqual(
+            B.verify_guarded_snapshot_chain(self.parent, receipt)["status"],
+            "GUARDED_SAVE_SNAPSHOT_SHA_RECHECK_PASS")
+        self.scratch.write_bytes(b"parallel change after successful save")
+        self.assertEqual(
+            B.verify_guarded_snapshot_chain(self.parent, receipt)["status"],
+            "GUARDED_SAVE_SNAPSHOT_SHA_RECHECK_PASS")
+        # The scratch drift doesn't poison the saved exact snapshot; but
+        # changing the actual proof is always rejected.
+        self.module.write_bytes(b"later module change")
+        snapshot_record = json.loads(
+            (self.parent / "guarded-snapshot.json").read_text(encoding="utf8"))
+        snapshot_record["savedSHA256"] = "0" * 64
+        (self.parent / "guarded-snapshot.json").write_text(
+            json.dumps(snapshot_record))
+        with self.assertRaisesRegex(ValueError, "EVIDENCE_OR_BYTES_CHANGED"):
+            B.verify_guarded_snapshot_chain(self.parent, receipt)
+
+    def test_reopen_rejects_removed_guarded_snapshot_bytes(self):
+        _, receipt, _ = self._saved_parent()
+        (self.parent / "guarded-save.snapshot").unlink()
+        with self.assertRaises(FileNotFoundError):
+            B.verify_guarded_snapshot_chain(self.parent, receipt)
 
     def test_derivation_fails_if_snapshot_hash_or_parent_evidence_changed(self):
         self._saved_parent()
