@@ -5828,6 +5828,290 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-355",
+      "page_id": "B2-013",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=13",
+      "station_id": "MOAG",
+      "narrative_mode": "SEALED_DOOR_OPERATION",
+      "locator_hint": "отряд прошёл, после чего створки закрылись",
+      "spatial_assertion": "Вход закрытой части Нижнего автоматически закрывается за физически вошедшим отрядом; Эмма остаётся снаружи, изменение доступа относится к операции.",
+      "feature_refs": [
+        "L1-SEALED"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-356",
+      "page_id": "B2-013",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=13",
+      "station_id": "MOAG",
+      "narrative_mode": "THIRD_FREIGHT_APPROACH",
+      "locator_hint": "из-за грузовых лифтов в большой грузовой зал",
+      "spatial_assertion": "На Третьем от грузовых лифтов через широкий переход имеется вход в грузовой зал перед производственными дверями.",
+      "feature_refs": [
+        "L3-FREIGHT-LIFTS",
+        "L3-CARGO-HALL",
+        "L3-PRODUCTION"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-357",
+      "page_id": "B2-013",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=13",
+      "station_id": "MOAG",
+      "narrative_mode": "SPACESUIT_NICHE",
+      "locator_hint": "пятнадцатые стояли в отсеке скафандров",
+      "spatial_assertion": "При грузовом зале Третьего около производственной зоны есть отдельная небольшая ниша или отсек хранения скафандров.",
+      "feature_refs": [
+        "L3-SUIT-ALCOVE",
+        "L3-CARGO-HALL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-358",
+      "page_id": "B2-013",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=13",
+      "station_id": "MOAG",
+      "narrative_mode": "PRODUCTION_LOCK",
+      "locator_hint": "белые двери производственного цеха",
+      "spatial_assertion": "В грузовой зоне напротив подхода возвышаются закрытые производственные двери; внутреннее пространство цеха не было осмотрено.",
+      "feature_refs": [
+        "L3-PRODUCTION"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-359",
+      "page_id": "B2-014",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=14",
+      "station_id": "MOAG",
+      "narrative_mode": "BARE_LOWER_CABLES",
+      "locator_hint": "длинные витые кабели на потолке, грязные трубы",
+      "spatial_assertion": "В закрытой части Нижнего по потолку идут витые кабели, а у стен проложены открытые крупные инженерные трубы без защитной облицовки.",
+      "feature_refs": [
+        "L1-ENG-CABLE-NICHES"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-360",
+      "page_id": "B2-014",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=14",
+      "station_id": "MOAG",
+      "narrative_mode": "MATERIAL_DIFFERENCE",
+      "locator_hint": "на Втором и Третьем трубы с защитным пластиком",
+      "spatial_assertion": "Автор различает открытые трубопроводы Нижнего и более обработанные поверхности Второго и Третьего, покрываемые защитным полимером. Состав сплава/толщина неизвестны.",
+      "feature_refs": [
+        "L1",
+        "L2",
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-361",
+      "page_id": "B2-014",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=14",
+      "station_id": "MOAG",
+      "narrative_mode": "HANGAR_FORK",
+      "locator_hint": "развилка направо и короткий коридор",
+      "spatial_assertion": "В закрытом Нижнем физически пройдена развилка, от которой короткий боковой коридор приводит в широкий продольный ангарный проход; направление «направо» относительно движения.",
+      "feature_refs": [
+        "L1-OLD-FREIGHT-HANGAR"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-362",
+      "page_id": "B2-014",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=14",
+      "station_id": "MOAG",
+      "narrative_mode": "HANGAR_CEILING",
+      "locator_hint": "широкий проход с полукруглым сводом",
+      "spatial_assertion": "Ангарный коридор имеет полукруглый свод, сохранённую пару светильников и выход к ангарным дверям.",
+      "feature_refs": [
+        "L1-ANGAR-HALL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-363",
+      "page_id": "B2-014",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=14",
+      "station_id": "MOAG",
+      "narrative_mode": "HANGAR_BIOMETRICS",
+      "locator_hint": "отпечатки пальцев в замковом разъёме",
+      "spatial_assertion": "Вход в один из ангаров имеет замок по отпечаткам пальцев, после вмешательства в плату створки открываются в стороны.",
+      "feature_refs": [
+        "L1-ANGAR"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-364",
+      "page_id": "B2-014",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=14",
+      "station_id": "MOAG",
+      "narrative_mode": "TWO_BOATS",
+      "locator_hint": "два катера стоят перед выходом к шлюзу",
+      "spatial_assertion": "В первом открытом ангаре стоят два малых одноместных катера перед выходом к шлюзу; у каждого кабина пилота с люком.",
+      "feature_refs": [
+        "L1-ANGAR",
+        "L1-BOAT-LOCK"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-365",
+      "page_id": "B2-014",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=14",
+      "station_id": "MOAG",
+      "narrative_mode": "OVERHEAD_OPERATOR_CABS",
+      "locator_hint": "кабины операторов закреплены почти под потолком",
+      "spatial_assertion": "В первом ангаре операторские кабины расположены в верхней зоне объёма, доступ по шаткой металлической лестнице.",
+      "feature_refs": [
+        "L1-OPERATORS",
+        "L1-ANGAR"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-366",
+      "page_id": "B2-015",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=15",
+      "station_id": "MOAG",
+      "narrative_mode": "WORKING_FIRST_CAB",
+      "locator_hint": "оба катера, пультовая исправна",
+      "spatial_assertion": "В первом ангаре оба катера проверены как исправные на момент сцены; компьютеры операторской работают.",
+      "feature_refs": [
+        "L1-ANGAR",
+        "L1-OPERATORS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-367",
+      "page_id": "B2-015",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=15",
+      "station_id": "MOAG",
+      "narrative_mode": "OPERATORS_LINK",
+      "locator_hint": "диспетчерские соединены между собой",
+      "spatial_assertion": "Операторская первого ангара непосредственно соединена с операторской соседнего, подтверждено физическим прохождением одного из близнецов.",
+      "feature_refs": [
+        "L1-OPERATORS",
+        "L1-OPERATORS-ADJ"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-368",
+      "page_id": "B2-015",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=15",
+      "station_id": "MOAG",
+      "narrative_mode": "DARK_ADJACENT_HANGAR",
+      "locator_hint": "в соседнем ангаре три катера, нет освещения",
+      "spatial_assertion": "В соседнем ангаре находятся три катера и повреждённое оборудование; освещение отключено. Степень пригодности каждого катера не установлена.",
+      "feature_refs": [
+        "L1-ANGAR-ADJ"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-369",
+      "page_id": "B2-015",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=15",
+      "station_id": "MOAG",
+      "narrative_mode": "ADJACENT_OPERATOR_STAIRS",
+      "locator_hint": "ступени к диспетчерской соседнего ангара",
+      "spatial_assertion": "В соседнем ангаре есть лестничный подход к высокой операторской зоне, но геометрическая отметка не указана.",
+      "feature_refs": [
+        "L1-OPERATORS-ADJ"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-370",
+      "page_id": "B2-016",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=16",
+      "station_id": "MOAG",
+      "narrative_mode": "FIELD_TEMPORARY_OPENING",
+      "locator_hint": "в силовом поле краткая щель, перебои питания",
+      "spatial_assertion": "Во время выхода катеров защитное поле временно открывают, от чего часть освещения Второго и Третьего отключается примерно на десять минут; это эксплуатационная фаза.",
+      "feature_refs": [
+        "CORE-ENERGY",
+        "L2",
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-371",
+      "page_id": "B2-016",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=16",
+      "station_id": "MOAG",
+      "narrative_mode": "FOUR_LAUNCHED_CRAFT",
+      "locator_hint": "на дисплее четыре катера вне станции",
+      "spatial_assertion": "Командная рубка получает изображение четырёх малых катеров уже вне станции; голограмма подтверждает событие, не физические размеры катеров или шлюзов.",
+      "feature_refs": [
+        "L3-BRIDGE",
+        "L1-BOAT-LOCK"
+      ],
+      "evidence_class": "MEDIATED_IMAGE_UNVERIFIED",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
