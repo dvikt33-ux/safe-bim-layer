@@ -33,7 +33,7 @@ def evaluate(graph, changes, authored_rectangles=None):
         values[k] = value
     for k, v in values.items():
         if v is not None:
-            if k == "cargo_cruisers_simultaneous_in_hangar":
+            if k in {"cargo_cruisers_simultaneous_in_hangar","upper_cruisers_simultaneous_in_hangar_count"}:
                 if type(v) is not int or v < 1:
                     raise ValueError("CRUISER_COUNT_POSITIVE_INTEGER_REQUIRED")
             else:
