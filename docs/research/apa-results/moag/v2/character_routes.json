@@ -5623,7 +5623,7 @@
           "local_stratum": "second-level-battle-corridor-dead-end",
           "source_page_id": "B2-127",
           "movement_method": "WALK",
-          "observed_constraint": "В тупике укрываются за опрокинутыми пекарями; точная позиция относительно лифта не описана.",
+          "observed_constraint": "Небольшой тупик в коридоре — постоянное пространственное свидетельство; баррикада из опрокинутых пекарей относится только к рендеру боевого эпизода. Позиция относительно лифта не описана.",
           "existing_graph_node": null,
           "relative_xy": null,
           "absolute_z_m": null
