@@ -74,7 +74,8 @@
       "B2-144",
       "B3-004",
       "B3-005",
-      "B3-006"
+      "B3-006",
+      "B3-010"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -99,7 +100,8 @@
       "B2-095",
       "B2-142",
       "B2-143",
-      "B3-005"
+      "B3-005",
+      "B3-010"
     ],
     "remote_evidence_page_ids": [
       "B2-052",
@@ -120,9 +122,9 @@
     ],
     "uncertain_page_ids": [],
     "metrics": {
-      "as_of_page_id": "B3-006",
-      "context_reviewed_page_count": 71,
-      "full_evidence_page_count": 234,
+      "as_of_page_id": "B3-010",
+      "context_reviewed_page_count": 72,
+      "full_evidence_page_count": 235,
       "external_excluded_page_count": 23,
       "unresolved_classification_page_count": 0,
       "justified_reopened_page_count": 4,
@@ -1470,6 +1472,41 @@
         }
       ],
       "chapter_end_confirmed": true
+    },
+    {
+      "id": "B3-PART1-CH4",
+      "book_id": "B3",
+      "part_number": 1,
+      "chapter_number": 4,
+      "title": "Эмма. Гость незваный",
+      "page_span": {
+        "start": 10,
+        "end": 12
+      },
+      "chapter_classification": "REMOTE_EVIDENCE",
+      "screening_status": "ONE_PASS_IN_PROGRESS",
+      "screened_pages": [
+        "B3-010"
+      ],
+      "scenes": [
+        {
+          "id": "B3P1C4-S1",
+          "page_fragments": [
+            {
+              "page_id": "B3-010",
+              "fragment": "После заголовка главы 4 на крейсере выявлен запрос о помощи от другой станции; Ник прямо уточняет, что это ещё одна станция."
+            }
+          ],
+          "classification": "REMOTE_EVIDENCE",
+          "physical_location": "Крейсер «Дракон»; другая станция видна только на объёмном экране.",
+          "characters": [
+            "Эмма",
+            "Ник",
+            "Люк"
+          ],
+          "station_relevance": "Таргетный объект отличён от МОАГа; архитектура/идентичность внешней станции не переносится."
+        }
+      ]
     }
   ],
   "character_location_events": [
