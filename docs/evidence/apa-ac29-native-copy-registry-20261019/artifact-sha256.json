@@ -1,0 +1,12 @@
+{
+  "ci-checks.json": "859f6fbafe1695931f037eba43908878de7a1750cfffb56018acd3f8ad97cd48",
+  "deployment.json": "7d23bd0b71a97952ebba0cfbeb3f697da699997366e66c5ee03c7d6e2fbdfc8a",
+  "independent-audit.json": "94a8ea908979ffefc05906d515c30cc84f07fff5b8f561c6d12887d19501c0b9",
+  "installed-readonly-qualification.json": "c39994cc8a5c99c1c8e2d627799f3bf11130710b1f5fe8173272083732b5fa9f",
+  "local-tests.json": "62efc9d9d56bb8a006b6eb2ba02ee106a0daaf89a03167d0922b38573e65762a",
+  "native-calls.json": "95bb277b2028e9643b9b52f718378e730c0d05ea17ffd15d9f1b52aa8eb58643",
+  "original-evidence-hashes.json": "03d5a56794af897b2f58acf2331d242546c839a914ce6d8addf7d3e69f0c1712",
+  "pre-native-trial01-stop.json": "ca4e660e6022fae685be09665aaa218cfe39f8ee3262ac705e672649fe664cbe",
+  "README_RU.md": "1dcf4139aea7f8e23525a4ae9c10b68d2a08654aa154a80a335010b0ca9c7efc",
+  "receipt.json": "4a20e6fa4a0f6bb7d19cdc05a7d3ba18d12a3fa2f3ea1460cf14ec28c36e6d56"
+}

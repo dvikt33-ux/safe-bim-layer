@@ -1,0 +1,19 @@
+{
+  "attemptSHA256": "c2812bd2ec91fc0decfcf08f9c8586ef3087eb0209aea3abfa1974387cf13330",
+  "automaticReplay": false,
+  "currentGuidCount": 172,
+  "currentGuidSetSHA256": "3c9efe184b2f5ac9518cd3e57b0f2af0994e477fae64de2c255dfa1b12750310",
+  "currentSemanticSHA256": "f8b9ee513ceb0b45cbe6c57faad16f214802b7894522d9f6acc1b520b108a4c6",
+  "failureSHA256": "754e220ef6294034d6610df51e62350cb6377a4124c476001b78df0e215398d6",
+  "nativeCopyCalls": 0,
+  "nativeWrites": 0,
+  "originalProtectedSHA256": "3a74d7cb17e460378eacfa8f933aeae29a5ca39fbf2bc73633115c9fee728750",
+  "protectedSourceSHA256": "b6b44dc1a811ec4e77864177f3cef57e701e1f63126c16bc64b6a5d82a89c478",
+  "saveCalls": 0,
+  "scratchSHA256": "b6b44dc1a811ec4e77864177f3cef57e701e1f63126c16bc64b6a5d82a89c478",
+  "sqliteSHA256": "1c673d1d020014b2c72a063829e73e1e481c55da36629aebfb3e574fc35b9990",
+  "sqliteScenes": 0,
+  "sqliteSteps": 0,
+  "status": "PRE_NATIVE_SCOPE_STOP_AND_ZERO_EFFECT_CONFIRMED",
+  "writeTraceSHA256": "56db807abb80c56f99e3250c0ab54654af33b1eb61e057b7c6b04aa60877d2fd"
+}

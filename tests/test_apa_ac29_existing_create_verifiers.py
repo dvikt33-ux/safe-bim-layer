@@ -84,9 +84,11 @@ class RegistryCoverage(unittest.TestCase):
         actual={(row.command,row.effect) for row in available.values()}
         self.assertTrue(existing <= actual, "Previously verified native handlers must remain installed")
         self.assertEqual(actual-existing,
-                         {("AddOn.TapirCommand.CloneNativeGroupV1","CREATE")},
-                         "Only the newly reviewed group-clone verifier may extend the registry")
+                         {("AddOn.TapirCommand.CloneNativeGroupV1","CREATE"),
+                          ("MoveElements","CREATE")},
+                         "Only reviewed group-clone and standalone batch-copy verifiers may extend the registry")
         self.assertIn("VerifiedNativeGroupClone", available)
+        self.assertIn("VerifiedNativeBatchCopy", available)
 
     def test_strict_basic_source_all_three_families(self):
         for command,params in [
@@ -100,7 +102,7 @@ class RegistryCoverage(unittest.TestCase):
     def test_source_keys_match_real_1_5_10_live_export(self):
         import json
         root=Path(__file__).resolve().parents[1]
-        catalog=json.loads((root/"schemas/tapir-live-1.5.10/tapir-scene-live.json").read_text())
+        catalog=json.loads((root/"schemas/tapir-live-1.5.10/tapir-scene-live.json").read_text(encoding="utf8"))
         for command,params in (("CreateBeams",beam()),
                                ("CreateWalls",wall()),
                                ("CreateRoofs",roof())):

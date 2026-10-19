@@ -1,0 +1,115 @@
+{
+  "automaticReplay": false,
+  "finalBrepSHA256": "6c28445694087be0ccb4602d36aabca530843ee49b4d885c7ee346eb6c814850",
+  "finalGuidCount": 176,
+  "finalGuidSetSHA256": "e5b683f3d6c89d0727131034bfd36488f16eef1b58122f740356a58e8892f23a",
+  "finalSemanticSHA256": "dc01b8fa276213958caa6bad4200bd5a4f190007efdb3ba806f3ad1c76c2626a",
+  "nativeCopyCalls": 1,
+  "nativeReadback": {
+    "allOriginalGeometryAndFaceMaterialsPreserved": true,
+    "allSelectedSourcesUngrouped": true,
+    "finalGuidCount": 176,
+    "mapping": [
+      {
+        "newChildGuids": [
+          "e4bc6b6f-e8ab-4af8-b1ba-e735cbce98f6"
+        ],
+        "newRootGuid": "6dd5d8c9-6299-4193-92b8-3c7e4238f7a0",
+        "sourceGuid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0",
+        "target": {
+          "x": 1315.35,
+          "y": 315.35,
+          "z": 0
+        }
+      },
+      {
+        "newChildGuids": [
+          "0c83de26-ef3a-4cbc-88ec-135171758d8c"
+        ],
+        "newRootGuid": "7ecf8d87-1d83-496d-9b27-841611de747b",
+        "sourceGuid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0",
+        "target": {
+          "x": 1340.35,
+          "y": 315.35,
+          "z": 0
+        }
+      }
+    ],
+    "newChildGuids": [
+      "0c83de26-ef3a-4cbc-88ec-135171758d8c",
+      "e4bc6b6f-e8ab-4af8-b1ba-e735cbce98f6"
+    ],
+    "newPhysicalCopyCount": 2,
+    "newRootGuids": [
+      "6dd5d8c9-6299-4193-92b8-3c7e4238f7a0",
+      "7ecf8d87-1d83-496d-9b27-841611de747b"
+    ],
+    "status": "MASS_COPY_SHARED_REGISTRY_NATIVE_GUID_BREP_READBACK_PASS",
+    "unchangedPrototypeGuids": [
+      "0a17fb15-3639-4dfa-ab01-cd910ae112b0"
+    ]
+  },
+  "nativeResponse": {
+    "executionResults": [
+      {
+        "success": true
+      },
+      {
+        "success": true
+      }
+    ]
+  },
+  "reopenVerified": true,
+  "reopenedReadback": {
+    "allOriginalGeometryAndFaceMaterialsPreserved": true,
+    "allSelectedSourcesUngrouped": true,
+    "finalGuidCount": 176,
+    "mapping": [
+      {
+        "newChildGuids": [
+          "e4bc6b6f-e8ab-4af8-b1ba-e735cbce98f6"
+        ],
+        "newRootGuid": "6dd5d8c9-6299-4193-92b8-3c7e4238f7a0",
+        "sourceGuid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0",
+        "target": {
+          "x": 1315.35,
+          "y": 315.35,
+          "z": 0
+        }
+      },
+      {
+        "newChildGuids": [
+          "0c83de26-ef3a-4cbc-88ec-135171758d8c"
+        ],
+        "newRootGuid": "7ecf8d87-1d83-496d-9b27-841611de747b",
+        "sourceGuid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0",
+        "target": {
+          "x": 1340.35,
+          "y": 315.35,
+          "z": 0
+        }
+      }
+    ],
+    "newChildGuids": [
+      "0c83de26-ef3a-4cbc-88ec-135171758d8c",
+      "e4bc6b6f-e8ab-4af8-b1ba-e735cbce98f6"
+    ],
+    "newPhysicalCopyCount": 2,
+    "newRootGuids": [
+      "6dd5d8c9-6299-4193-92b8-3c7e4238f7a0",
+      "7ecf8d87-1d83-496d-9b27-841611de747b"
+    ],
+    "status": "MASS_COPY_SHARED_REGISTRY_NATIVE_GUID_BREP_READBACK_PASS",
+    "unchangedPrototypeGuids": [
+      "0a17fb15-3639-4dfa-ab01-cd910ae112b0"
+    ]
+  },
+  "saveCalls": 1,
+  "savedSHA256": "f9f172004cb6abaed832445b9373083f39bc5deb71b2e3fd6ff601477663269f",
+  "schema": "APA_AC29_SHARED_NATIVE_COPY_BATCH_V1",
+  "snapshotReceiptSHA256": "bc497dc6733636e2fc03b462cfc7f56de019e74876df0eeefe536594666b5cfe",
+  "sourceSHA256": "b6b44dc1a811ec4e77864177f3cef57e701e1f63126c16bc64b6a5d82a89c478",
+  "sourceUnchanged": true,
+  "status": "LIVE_SHARED_NATIVE_COPY_BATCH_SAVED_REOPENED_PASS",
+  "verificationNativeWrites": 0
+}

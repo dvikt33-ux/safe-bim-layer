@@ -1,0 +1,26 @@
+{
+  "errors": 0,
+  "failures": 0,
+  "kind": "OFFLINE_CONTRACT_TESTS",
+  "status": "PASS",
+  "suites": [
+    "save_isolation",
+    "hotlink_batch_geometry",
+    "hotlink_batch_writer",
+    "native_group_grid",
+    "native_group_writer_integration",
+    "group_grid_live_8x4",
+    "group_scenewriter_sqlite_audit",
+    "group_strategy_integration",
+    "mass_request",
+    "group_batch_oneshot",
+    "installed_mass_selector",
+    "native_copy_verifier",
+    "copy_batch_oneshot",
+    "multi_prototype_native_copy",
+    "copy_registry_update",
+    "existing_create_verifiers",
+    "archicad_dynamic_commands"
+  ],
+  "tests": 190
+}
