@@ -313,6 +313,350 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-020",
+      "page_id": "B1-002",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=2",
+      "station_id": "MOAG",
+      "narrative_mode": "VERTICAL_MOVEMENT",
+      "locator_hint": "по вентиляционной шахте ногами вперед, прыгает на мешки с отходами",
+      "spatial_assertion": "Вертикальная шахта от Второго уровня к нижней технической зоне; внизу складированы мешки с отходами, есть место для приземления.",
+      "feature_refs": [
+        "L1-VENT",
+        "L1"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-021",
+      "page_id": "B1-002",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=2",
+      "station_id": "MOAG",
+      "narrative_mode": "TECHNICAL_INTERIOR",
+      "locator_hint": "две длинные и узкие лампы ... холодные стены",
+      "spatial_assertion": "Техкоридоры без пластиковой облицовки, металлические поверхности и две продолговатые лампы слабой яркости; температура 10–15 °C.",
+      "feature_refs": [
+        "L1"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-022",
+      "page_id": "B1-002",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=2",
+      "station_id": "MOAG",
+      "narrative_mode": "CONTROL_SYSTEM",
+      "locator_hint": "Фёдор включает датчики, перекрывает путь",
+      "spatial_assertion": "Тепловые датчики в вентиляционной сети могут быть переключены дистанционно, таким образом меняется открытость маршрута.",
+      "feature_refs": [
+        "L1-VENT"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-023",
+      "page_id": "B1-003",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=3",
+      "station_id": "MOAG",
+      "narrative_mode": "PORTAL",
+      "locator_hint": "двойная металлическая дверь с эмблемой Млечного Пути",
+      "spatial_assertion": "Вход в район баз: тяжёлые двойные металлические створки с рифлёной эмблемой и электронным разъёмом доступа.",
+      "feature_refs": [
+        "L1-BASES"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-024",
+      "page_id": "B1-003",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=3",
+      "station_id": "MOAG",
+      "narrative_mode": "ROUTE",
+      "locator_hint": "большая круглая труба справа к Овальной",
+      "spatial_assertion": "После двойных дверей вправо ведёт большая круглая труба к Овальной базе; группа идёт к Темной в противоположную сторону. Азимут зависит от направления движения.",
+      "feature_refs": [
+        "L1-OVAL",
+        "L1-TEMNAYA",
+        "L1-BASES"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-025",
+      "page_id": "B1-003",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=3",
+      "station_id": "MOAG",
+      "narrative_mode": "HISTORICAL_USE",
+      "locator_hint": "три базы, Темная, Овальная и диких",
+      "spatial_assertion": "В начальном состоянии повествования названы три обитаемые детские базы; будущие/промежуточные базы не следует автоматически дорисовывать.",
+      "feature_refs": [
+        "L1-TEMNAYA",
+        "L1-OVAL",
+        "L1-WILD"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-026",
+      "page_id": "B1-003",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=3",
+      "station_id": "MOAG",
+      "narrative_mode": "VERTICAL_MOVEMENT",
+      "locator_hint": "три железные перекладины перед входом",
+      "spatial_assertion": "Перед входом на Темную есть локальный подъём по трём трубчатым перекладинам и металлическим поручням; это не полный этаж.",
+      "feature_refs": [
+        "L1-TEMNAYA"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-027",
+      "page_id": "B1-003",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=3",
+      "station_id": "MOAG",
+      "narrative_mode": "INTERIOR_AND_PORTAL",
+      "locator_hint": "сдвижная дверь, высокий порог, овальный проход",
+      "spatial_assertion": "Тяжёлая односторонняя сдвижная створка открывает маленький овальный проход с высоким порогом.",
+      "feature_refs": [
+        "L1-TEMNAYA"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-028",
+      "page_id": "B1-003",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=3",
+      "station_id": "MOAG",
+      "narrative_mode": "ROOM_SHAPE",
+      "locator_hint": "посреди небольшого овального помещения низкий стол",
+      "spatial_assertion": "Общий зал Темной базы имеет овальную форму; низкий стол находится ближе к центру, рядом автономный прямоугольный обогреватель.",
+      "feature_refs": [
+        "L1-BASE-COMMON"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-029",
+      "page_id": "B1-003",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=3",
+      "station_id": "MOAG",
+      "narrative_mode": "EQUIPMENT",
+      "locator_hint": "нижнее отверстие обогревателя, верхний экран с огнём",
+      "spatial_assertion": "Отопитель имеет нижний выход тёплого воздуха, верхний плоский экран с имитацией пламени; не путать с камином или печью на топливе.",
+      "feature_refs": [
+        "L1-BASE-COMMON"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-030",
+      "page_id": "B1-004",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=4",
+      "station_id": "MOAG",
+      "narrative_mode": "VERTICAL_MOVEMENT",
+      "locator_hint": "узкая лесенка ведёт в крошечную спальню",
+      "spatial_assertion": "Из общей зоны Темной базы имеется лестничный проход в маленькую спальню, но её абсолютная высота не задана.",
+      "feature_refs": [
+        "L1-BASE-COMMON",
+        "L1-BASE-SLEEP"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-031",
+      "page_id": "B1-004",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=4",
+      "station_id": "MOAG",
+      "narrative_mode": "HOT_WATER",
+      "locator_hint": "бойлер старый, бак с тэном, знак Млечного пути",
+      "spatial_assertion": "Горячая вода Темной базы производится локальным электрическим нагревателем с накопительным баком, расход ограничен.",
+      "feature_refs": [
+        "L1-BASE-WET"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-032",
+      "page_id": "B1-004",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=4",
+      "station_id": "MOAG",
+      "narrative_mode": "ROOM_INTERIOR",
+      "locator_hint": "широкая ванная покрытая гладкой плиткой",
+      "spatial_assertion": "Санитарный блок Темной базы просторен, отделан гладкой плиткой, холоден, со строгой утилитарной обстановкой.",
+      "feature_refs": [
+        "L1-BASE-WET"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-033",
+      "page_id": "B1-004",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=4",
+      "station_id": "MOAG",
+      "narrative_mode": "SANITARY_EQUIPMENT",
+      "locator_hint": "тесная душевая кабинка, поддон и верёвка",
+      "spatial_assertion": "В крупной санитарной комнате есть компактная душевая кабина/поддон, место для ручной стирки, верёвка для сушки одежды.",
+      "feature_refs": [
+        "L1-BASE-WET"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-034",
+      "page_id": "B1-004",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=4",
+      "station_id": "MOAG",
+      "narrative_mode": "LIVING_FINISHES",
+      "locator_hint": "койка скрипит металлическими пружинами",
+      "spatial_assertion": "Крошечная спальня имеет старую металлическую койку с пружинным каркасом, шерстяное одеяло, табурет и металлопосуду.",
+      "feature_refs": [
+        "L1-BASE-SLEEP"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-035",
+      "page_id": "B1-004",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=4",
+      "station_id": "MOAG",
+      "narrative_mode": "COMPARATIVE_BUILDING_SERVICES",
+      "locator_hint": "второй уровень тёплый пол, воздух и вентиляция",
+      "spatial_assertion": "Каюты Второго уровня имеют тёплые полы, подачу подогретого воздуха кондиционерами и отдельные воздухоочистители; бытовая система централизованнее, чем на Темной.",
+      "feature_refs": [
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-036",
+      "page_id": "B1-005",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=5",
+      "station_id": "MOAG",
+      "narrative_mode": "DIGITAL_MAP",
+      "locator_hint": "карта второго уровня в 3Д голограмме",
+      "spatial_assertion": "На планшете хранится детальная пространственная карта Второго уровня с обозначением лестниц, тепловых датчиков, вентиляционных ходов; в сюжете она служит инженерным справочником.",
+      "feature_refs": [
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-037",
+      "page_id": "B1-005",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=5",
+      "station_id": "MOAG",
+      "narrative_mode": "MAINTENANCE_ACCESS",
+      "locator_hint": "флешка спрятана в техническом отсеке второго уровня",
+      "spatial_assertion": "В техотсеке Второго уровня существует скрытая точка подключения к системе датчиков; доступ к вентиляционной сети управляется программно.",
+      "feature_refs": [
+        "L2",
+        "L1-VENT"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-038",
+      "page_id": "B1-005",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=5",
+      "station_id": "MOAG",
+      "narrative_mode": "INTERIOR_TEXTILE",
+      "locator_hint": "одеяло и наволочка с эмблемой Млечного Пути",
+      "spatial_assertion": "В старой спальне используются коричневые шерстяные одеяла и наволочки с прежней корабельной эмблемой.",
+      "feature_refs": [
+        "L1-BASE-SLEEP"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-039",
+      "page_id": "B1-005",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=5",
+      "station_id": "MOAG",
+      "narrative_mode": "THERMAL_RELATION",
+      "locator_hint": "открытая дверь пропускает немного тепла в спальню",
+      "spatial_assertion": "Спальни Темной базы получают часть тепла от отопителя в общем помещении через открытые двери; двери обычно оставляют открытыми.",
+      "feature_refs": [
+        "L1-BASE-COMMON",
+        "L1-BASE-SLEEP"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-040",
+      "page_id": "B1-005",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=5",
+      "station_id": "MOAG",
+      "narrative_mode": "DOMESTIC_SPACE",
+      "locator_hint": "кухня и комод у спальни Эммы",
+      "spatial_assertion": "Каюта Эммы: рядом кухня и коридорный выход; домашний лон движется из кухни в комнату с комодом и зеркалом.",
+      "feature_refs": [
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
