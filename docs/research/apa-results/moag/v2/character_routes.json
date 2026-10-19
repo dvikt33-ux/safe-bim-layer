@@ -4020,6 +4020,109 @@
       ],
       "identity_hypotheses": [],
       "notes": "Не утверждать, что лифт идентичен прозрачной ДНК-кабине p79 B1 либо продуктовому лифту p96 B1. Блокировка после прибытия — сюжетное состояние."
+    },
+    {
+      "id": "RT-037",
+      "title": "Совет старших: библиотека Второго → подъём тем же пассажирским лифтом → рубка с белым сервером Мартина",
+      "participants": [
+        "Эмма",
+        "Коля",
+        "Егор",
+        "близнецы",
+        "другие старшие"
+      ],
+      "book": "B2",
+      "site_pages": [
+        "B2-048",
+        "B2-049",
+        "B2-050"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT037-A",
+          "label": "Общее собрание в библиотеке Второго",
+          "global_level": 2,
+          "local_stratum": "public-to-command",
+          "source_page_id": "B2-048",
+          "movement_method": "WALK",
+          "observed_constraint": "Общее собрание в библиотеке Второго",
+          "existing_graph_node": "L2",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT037-B",
+          "label": "Выход с совета, переход к лифту: подробный путь пропущен",
+          "global_level": null,
+          "local_stratum": "vertical-lift",
+          "source_page_id": "B2-049",
+          "movement_method": "NARRATIVE_GAP",
+          "observed_constraint": "Выход с совета, переход к лифту: подробный путь пропущен",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT037-C",
+          "label": "Подъём со Второго на Третий в ранее использованной кабине",
+          "global_level": null,
+          "local_stratum": "vertical-lift",
+          "source_page_id": "B2-050",
+          "movement_method": "ELEVATOR_UP",
+          "observed_constraint": "Подъём со Второго на Третий в ранее использованной кабине",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT037-D",
+          "label": "Путь через общий коридор Третьего к рубке",
+          "global_level": 3,
+          "local_stratum": "public-to-command",
+          "source_page_id": "B2-050",
+          "movement_method": "WALK",
+          "observed_constraint": "Путь через общий коридор Третьего к рубке",
+          "existing_graph_node": "L3",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT037-E",
+          "label": "Сенсорная дверь капитанской рубки",
+          "global_level": 3,
+          "local_stratum": "public-to-command",
+          "source_page_id": "B2-050",
+          "movement_method": "DOOR",
+          "observed_constraint": "Сенсорная дверь капитанской рубки",
+          "existing_graph_node": "L3-BRIDGE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT037-F",
+          "label": "Овальный мониторный стол и белый сервер Мартина",
+          "global_level": 3,
+          "local_stratum": "public-to-command",
+          "source_page_id": "B2-050",
+          "movement_method": "WALK",
+          "observed_constraint": "Овальный мониторный стол и белый сервер Мартина",
+          "existing_graph_node": "L3-BRIDGE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT037-E",
+          "lower": "RT037-A",
+          "source_page_id": "B2-050",
+          "claim": "Общая группа поднимается со Второго на Третий; метры высоты и положение лифта не измерены."
+        }
+      ],
+      "identity_hypotheses": [],
+      "notes": "Подробный путь из библиотеки в лифтовой вестибюль не указан; сегмент NARRATIVE_GAP не подтверждает расположение лифта непосредственно у библиотеки. Белый сервер у рубки отличен от центра энергомодуля."
     }
   ]
 }
