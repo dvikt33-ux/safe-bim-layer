@@ -1046,12 +1046,12 @@
       "id": "B2-095",
       "page_number": 95,
       "url": "https://loveread.ec/read_book.php?id=53370&p=95",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "REMOTE_EVIDENCE",
+      "recorded_spatial_hints": 1,
+      "notes": "Глава 13, земная сцена рыбалки на острове Саб. Причалы, лодки, жилеты, сети, берег и сарай относятся к Земле и исключены из геометрии МОАГа. В диалоге Таис упоминает, что на станции детей воспитывали роботы, электронные няни и учителя; отдельно вспоминает трудное получение еды, когда они жили на Первом уровне. Это дистанционные сведения об уходе за детьми и образе жизни, без планировки/размеров.",
+      "verification_method": "Single full-page primary-source read in Opera; external Earth fishing scene screened while station upbringing/First-level memory retained as remote evidence",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-096",
