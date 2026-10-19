@@ -1115,6 +1115,299 @@
       ],
       "identity_hypotheses": [],
       "notes": "Привязка короткой лестницы ванной к единой оси галереи требует уточнения: верхняя галерея подтверждена, но точный узел выхода не назван."
+    },
+    {
+      "id": "RT-011",
+      "title": "Эмма возвращается за лекарствами через кольцо Второго и вентиляцию на Нижний",
+      "participants": [
+        "Эмма",
+        "Колька"
+      ],
+      "book": "B1",
+      "site_pages": [
+        "B1-056",
+        "B1-057"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT011-A",
+          "label": "Каюта и двухэтажный жилой блок",
+          "global_level": 2,
+          "local_stratum": "residential-upper-ring",
+          "source_page_id": "B1-056",
+          "movement_method": "WALK",
+          "observed_constraint": "Эмма приходит к Лону за лекарствами из жилой каюты, расположенной на втором этаже блока.",
+          "existing_graph_node": "L2-RESIDENTIAL-UPPER",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT011-B",
+          "label": "Туннель нижней части жилого блока",
+          "global_level": 2,
+          "local_stratum": "residential-ring-tunnel",
+          "source_page_id": "B1-056",
+          "movement_method": "WALK",
+          "observed_constraint": "Героиня минует один из многочисленных туннелей нижнего этажа кольца.",
+          "existing_graph_node": "L2-RESIDENTIAL-LOWER",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT011-C",
+          "label": "Оранжевая магистраль",
+          "global_level": 2,
+          "local_stratum": "orange-promenade",
+          "source_page_id": "B1-056",
+          "movement_method": "WALK",
+          "observed_constraint": "Пересекает Оранжевую магистраль и сворачивает в нужный коридор.",
+          "existing_graph_node": "L2-ORANGE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT011-D",
+          "label": "Вентиляционный лаз у встречи с Колей",
+          "global_level": 2,
+          "local_stratum": "ventilation-inlet",
+          "source_page_id": "B1-056",
+          "movement_method": "CRAWL",
+          "observed_constraint": "Коля ждёт Эмму около технического лаза в вентиляцию.",
+          "existing_graph_node": "L1-VENT",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT011-E",
+          "label": "Вертикальная часть шахты",
+          "global_level": null,
+          "local_stratum": "between-2-and-1",
+          "source_page_id": "B1-057",
+          "movement_method": "CLIMB_DOWN",
+          "observed_constraint": "Эмма спускается ногами вперёд, Коля ползёт за ней.",
+          "existing_graph_node": "L1-VENT",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT011-F",
+          "label": "Технический коридор Нижнего",
+          "global_level": 1,
+          "local_stratum": "inhabited-lower-corridor",
+          "source_page_id": "B1-057",
+          "movement_method": "WALK",
+          "observed_constraint": "Достигнув Нижнего, дети возвращаются к базе.",
+          "existing_graph_node": "L1-BASES",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT011-G",
+          "label": "Общая комната Темной базы",
+          "global_level": 1,
+          "local_stratum": "dark-base-common",
+          "source_page_id": "B1-057",
+          "movement_method": "WALK",
+          "observed_constraint": "В общем зале Маша с младшими детьми за столом.",
+          "existing_graph_node": "L1-BASE-COMMON",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT011-A",
+          "lower": "RT011-B",
+          "source_page_id": "B1-056",
+          "claim": "Второй этаж кают выше магазинов первого этажа жилого кольцевого блока"
+        },
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT011-D",
+          "lower": "RT011-F",
+          "source_page_id": "B1-057",
+          "claim": "Эмма спускается из вентиляции Второго в коридоры Нижнего"
+        }
+      ],
+      "identity_hypotheses": [],
+      "notes": "Важна смена этажа внутри Второго, а затем глобального уровня через вентиляцию. Точные лестницы перехода с уровня кают к наземному туннелю не локализованы."
+    },
+    {
+      "id": "RT-012",
+      "title": "Таис, Фёдор, Илья, Эмма, Коля: мусорка Нижнего → Третий → внутренний детский блок",
+      "participants": [
+        "Таис",
+        "Фёдор",
+        "Илья",
+        "Колька",
+        "Эмма"
+      ],
+      "book": "B1",
+      "site_pages": [
+        "B1-058",
+        "B1-059",
+        "B1-060"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT012-A",
+          "label": "Мусороперерабатывающий цех у горячей печи",
+          "global_level": 1,
+          "local_stratum": "waste-recycling",
+          "source_page_id": "B1-058",
+          "movement_method": "WALK",
+          "observed_constraint": "Перед стартом группа собирает детали и проходит вдоль ленты у лучевой печи.",
+          "existing_graph_node": "L1-RECYCLING",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT012-B",
+          "label": "Вертикальная служебная лестница",
+          "global_level": null,
+          "local_stratum": "between-1-and-3",
+          "source_page_id": "B1-059",
+          "movement_method": "LADDER_UP",
+          "observed_constraint": "После мусорки лестница ведёт к железному люку.",
+          "existing_graph_node": "L1-STAIR-UP",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT012-C",
+          "label": "Железный люк Третьего",
+          "global_level": 3,
+          "local_stratum": "upper-hatch-landing",
+          "source_page_id": "B1-059",
+          "movement_method": "HATCH_CLIMB",
+          "observed_constraint": "Люком попадают в маленький тёмный переход.",
+          "existing_graph_node": "L3-UP-ACCESS-LOBBY",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT012-D",
+          "label": "Малая кодовая дверь выхода в коридор Третьего",
+          "global_level": 3,
+          "local_stratum": "upper-service-gate",
+          "source_page_id": "B1-059",
+          "movement_method": "DOOR",
+          "observed_constraint": "Через служебную кодовую дверь попадают в белую освещённую часть Третьего.",
+          "existing_graph_node": "L3-UP-ACCESS-LOBBY",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT012-E",
+          "label": "Белый коридор у внутреннего круга",
+          "global_level": 3,
+          "local_stratum": "inner-ring",
+          "source_page_id": "B1-059",
+          "movement_method": "WALK",
+          "observed_constraint": "Выход происходит у внутреннего круга, где по предположению персонажей рубка; путь начинается здесь.",
+          "existing_graph_node": "L3-INNER",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT012-F",
+          "label": "Разветвление пути к внешнему кругу",
+          "global_level": 3,
+          "local_stratum": "inter-ring-passage",
+          "source_page_id": "B1-059",
+          "movement_method": "WALK",
+          "observed_constraint": "Белый коридор от внутреннего ведёт к внешнему, расширяется для роботов-погрузчиков; справа ангары и шлюзы.",
+          "existing_graph_node": "L3-SERVICE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT012-G",
+          "label": "Склад белья с полками",
+          "global_level": 3,
+          "local_stratum": "storage-zone",
+          "source_page_id": "B1-059",
+          "movement_method": "DOOR",
+          "observed_constraint": "После двух криволинейных переходов заходят на склад белья.",
+          "existing_graph_node": "L3-STORE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT012-H",
+          "label": "Соседний склад одежды и продовольствия",
+          "global_level": 3,
+          "local_stratum": "storage-zone",
+          "source_page_id": "B1-060",
+          "movement_method": "WALK",
+          "observed_constraint": "Рядом обнаруживаются другие склады одежды/продуктов, идут дальше.",
+          "existing_graph_node": "L3-STORE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT012-I",
+          "label": "Внутренняя криволинейная стена и одинарная широкая дверь",
+          "global_level": 3,
+          "local_stratum": "inner-circular-gate",
+          "source_page_id": "B1-060",
+          "movement_method": "DOOR",
+          "observed_constraint": "Дверь опускается вниз; белый пластик и знак из соединённых треугольников.",
+          "existing_graph_node": "L3-INNER-SECTOR-GATE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT012-J",
+          "label": "Коридор указателя Детский блок",
+          "global_level": 3,
+          "local_stratum": "inner-secure-corridor",
+          "source_page_id": "B1-060",
+          "movement_method": "WALK",
+          "observed_constraint": "Указатель детского блока справа, издалека слышно приближение робота.",
+          "existing_graph_node": "L3-CHILD-LAB-ENTRANCE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT012-K",
+          "label": "Широкие двойные створки к полутемной зоне",
+          "global_level": 3,
+          "local_stratum": "child-lab-gate",
+          "source_page_id": "B1-060",
+          "movement_method": "DOOR",
+          "observed_constraint": "За дверьми узкий проход под аркой в крупный зал.",
+          "existing_graph_node": "L3-CHILD-LAB-ENTRANCE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT012-L",
+          "label": "Высокий зал кувезов",
+          "global_level": 3,
+          "local_stratum": "child-laboratory",
+          "source_page_id": "B1-060",
+          "movement_method": "WALK",
+          "observed_constraint": "Высокое полутёмное помещение с цилиндрическими кувезами, трубками, проводкой и голограммами.",
+          "existing_graph_node": "L3-CHILD-LAB",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT012-C",
+          "lower": "RT012-A",
+          "source_page_id": "B1-059",
+          "claim": "Лестница из мусоропереработки приводит к тёмному переходу Верхнего уровня"
+        }
+      ],
+      "identity_hypotheses": [],
+      "notes": "Кувезный зал лежит ЗА ВНУТРЕННЕЙ КРУГОВОЙ СТЕНОЙ и последовательными дверями. Факт строгого совпадения с геометрическим центром станции не доказан. Правая сторона определяется движением из внутреннего кольца к наружному."
     }
   ]
 }
