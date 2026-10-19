@@ -4545,5 +4545,44 @@
     "level_local_galleries": "additional usable floor within same vertical block, not additional global storeys",
     "voids": "vertical core void subtract from usable floor where cut, not from all envelope projections",
     "no_auto_sum_of_groups": "groups represent containers and overlap child rooms; sum only explicitly disjoint interiors"
-  }
+  },
+  "assumed_disjoint_level_budgets": [
+    {
+      "id": "L1-DISJOINT-01",
+      "parent": "M-STA-L1-001",
+      "members": [
+        "M-L1-CG-001",
+        "M-L1-FH-001",
+        "M-L1-FH-002",
+        "M-L1-WASTE-001"
+      ],
+      "status": "ADJUSTABLE_PROJECT_HYPOTHESIS_NOT_BOOK_CERTAINTY",
+      "purpose": "Prevent industrial envelope and distinct small-craft docks exceeding Lower footprint and structural volume",
+      "treat_as_same_host_vertical_block": true
+    },
+    {
+      "id": "L2-DISJOINT-01",
+      "parent": "M-STA-L2-001",
+      "members": [
+        "M-L2-RES-001",
+        "M-L2-PLAZA-001",
+        "M-L2-PLAY-OUT-001"
+      ],
+      "status": "ADJUSTABLE_PROJECT_HYPOTHESIS_NOT_BOOK_CERTAINTY",
+      "purpose": "Prevent ring, plaza and farther play fields exceeding Children projected area; do not double count interior cabins",
+      "treat_as_same_host_vertical_block": true
+    },
+    {
+      "id": "L3-DISJOINT-01",
+      "parent": "M-STA-L3-001",
+      "members": [
+        "M-L3-CG-001",
+        "M-L3-PRODUCTION-ROUND-001"
+      ],
+      "status": "ADJUSTABLE_PROJECT_HYPOTHESIS_NOT_BOOK_CERTAINTY",
+      "purpose": "Upper cruiser complex and productive hall must fit Upper block without double counting their internal rooms",
+      "treat_as_same_host_vertical_block": true
+    }
+  ],
+  "level_area_budget_interpretation": "Selected listed major compartments are treated as independent allocation zones solely for this explicit hypothesis. Disable/edit groups when book identity or overlap is uncertain. Never blindly sum every concept or child room."
 }
