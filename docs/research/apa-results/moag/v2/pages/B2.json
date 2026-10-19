@@ -1266,12 +1266,12 @@
       "id": "B2-115",
       "page_number": 115,
       "url": "https://loveread.ec/read_book.php?id=53370&p=115",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 5,
+      "notes": "Страница смешанная и разделена по заголовку. До заголовка главы 5 завершается станционная сцена: Колючий прикрывает Эмму огнём; она пробегает короткий коридор и проход к знакомой площадке, вставляет кодовую флешку в паз, двери расходятся в стороны, и она входит в тёмные ангары, где спит стая. Текст после заголовка главы 5 относится к Земле; эта часть не анализировалась и в доказательства не включалась.",
+      "verification_method": "Одно чтение смешанной страницы через Opera; извлечён только станционный фрагмент до заголовка главы 5, земной фрагмент исключён.",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-116",
