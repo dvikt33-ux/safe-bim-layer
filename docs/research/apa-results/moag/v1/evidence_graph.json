@@ -413,6 +413,34 @@
       "url": "https://loveread.ec/read_book.php?id=48197&p=70",
       "medium": "literary_text",
       "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B2-017",
+      "section": "Книга II, полное чтение LoveRead, веб-страница 17",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=17",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B2-021",
+      "section": "Книга II, полное чтение LoveRead, веб-страница 21",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=21",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B2-026",
+      "section": "Книга II, полное чтение LoveRead, веб-страница 26",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=26",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B2-027",
+      "section": "Книга II, полное чтение LoveRead, веб-страница 27",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=27",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
     }
   ],
   "nodes": [
@@ -2482,6 +2510,44 @@
       },
       "geometry_gate": "NOT_AUTHORIZED",
       "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-BOAT-LOCK-OUTER-HATCH",
+      "label": "Наружный круглый выход нижней шлюзовой камеры с треугольными створками",
+      "level": 1,
+      "type": "opening",
+      "source_ids": [
+        "LR-B2-021"
+      ],
+      "text_basis": "На нижнем боевом шлюзе круглое наружное отверстие с разъезжающимися треугольными створками; размер и ориентация неизвестны",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-MAIN-LIFTS-HALL",
+      "label": "Широкий коридор главных лифтов Третьего",
+      "level": 3,
+      "type": "corridor",
+      "source_ids": [
+        "LR-B2-027"
+      ],
+      "text_basis": "От капитанской рубки после двух поворотов Эмма достигает широкого коридора, ведущего к главным лифтам; через него проходит к дверям производственного цеха",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
     }
   ],
   "edges": [
@@ -4129,6 +4195,90 @@
         "LR-B1-069"
       ],
       "claim": "Событие воспроизведения записи в жилой комнате",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E138",
+      "from": "L1-BOAT-LOCK",
+      "to": "L1-BOAT-LOCK-OUTER-HATCH",
+      "type": "contains",
+      "source_ids": [
+        "LR-B2-021"
+      ],
+      "claim": "Шлюзовая камера включает наружный круглый проём с раздвижными треугольными створками.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E139",
+      "from": "L1-ANGAR",
+      "to": "L1-BOAT-LOCK",
+      "type": "pressure_sealed_access_to",
+      "source_ids": [
+        "LR-B2-021"
+      ],
+      "claim": "При выходе катера из ангара в шлюз со стороны ангара герметично закрывается дверь и откачивается воздух. Ангар и шлюз — разные объёмы.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E140",
+      "from": "L1-BOAT-LOCK",
+      "to": "L1-ANGAR",
+      "type": "comparable_spatial_volume_nonmetric",
+      "source_ids": [
+        "LR-B2-021"
+      ],
+      "claim": "Шлюз описан почти столь же просторным, как ангар. Только качественное соотношение габаритов, точные размеры неизвестны.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E141",
+      "from": "L3-BRIDGE",
+      "to": "L3-MAIN-LIFTS-HALL",
+      "type": "route_via_two_turns",
+      "source_ids": [
+        "LR-B2-027"
+      ],
+      "claim": "Эмма после двух поворотов от командной рубки достигает широкого коридора к главным лифтам; это маршрут, не непосредственная смежная дверь.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E142",
+      "from": "L3-MAIN-LIFTS-HALL",
+      "to": "L3-WORKSHOP-DOOR",
+      "type": "route_to_production_gate",
+      "source_ids": [
+        "LR-B2-027"
+      ],
+      "claim": "Широкий коридор Третьего доводит к закрытым дверям производственного цеха.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E143",
+      "from": "L3-CREW",
+      "to": "L3-CHILD-LAB",
+      "type": "near_not_direct_door",
+      "source_ids": [
+        "LR-B2-026"
+      ],
+      "claim": "Детский блок с кувезами расположен рядом с жилыми каютами взрослого сектора, общая дверь не доказана.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E144",
+      "from": "L1-SEALED",
+      "to": "L1-ANGAR-HALL",
+      "type": "access_route_by_old_corridor",
+      "source_ids": [
+        "LR-B2-017"
+      ],
+      "claim": "Эмма и Коля проходят от старой запечатанной двери через просторный коридор к ангарному проёму, промежуточные узлы и длина неизвестны.",
       "state": "TEXT_DIRECT",
       "metric": null
     }
