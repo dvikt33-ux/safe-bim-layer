@@ -78,7 +78,8 @@
       "B3-010",
       "B3-011",
       "B3-015",
-      "B3-016"
+      "B3-016",
+      "B3-017"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -124,13 +125,14 @@
       "B3-006",
       "B3-011",
       "B3-015",
-      "B3-016"
+      "B3-016",
+      "B3-017"
     ],
     "uncertain_page_ids": [],
     "metrics": {
-      "as_of_page_id": "B3-016",
-      "context_reviewed_page_count": 75,
-      "full_evidence_page_count": 238,
+      "as_of_page_id": "B3-017",
+      "context_reviewed_page_count": 76,
+      "full_evidence_page_count": 239,
       "external_excluded_page_count": 23,
       "unresolved_classification_page_count": 0,
       "justified_reopened_page_count": 4,
@@ -1534,7 +1536,8 @@
       "screening_status": "ONE_PASS_IN_PROGRESS",
       "screened_pages": [
         "B3-015",
-        "B3-016"
+        "B3-016",
+        "B3-017"
       ],
       "scenes": [
         {
@@ -1564,6 +1567,10 @@
             {
               "page_id": "B3-016",
               "fragment": "Внешняя поверхность темного дисковидного объекта, к которому летят катера, принадлежит другой станции и исключена."
+            },
+            {
+              "page_id": "B3-017",
+              "fragment": "На другой станции фактически пройдены наружные скобы, круглый люк, малый шлюз, узкий коридор и проход за кабельной панелью; эти элементы не относятся к МОАГу."
             }
           ],
           "classification": "EXTERNAL",
