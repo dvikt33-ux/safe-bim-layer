@@ -77,7 +77,8 @@
       "B3-006",
       "B3-010",
       "B3-011",
-      "B3-015"
+      "B3-015",
+      "B3-016"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -122,13 +123,14 @@
       "B3-004",
       "B3-006",
       "B3-011",
-      "B3-015"
+      "B3-015",
+      "B3-016"
     ],
     "uncertain_page_ids": [],
     "metrics": {
-      "as_of_page_id": "B3-015",
-      "context_reviewed_page_count": 74,
-      "full_evidence_page_count": 237,
+      "as_of_page_id": "B3-016",
+      "context_reviewed_page_count": 75,
+      "full_evidence_page_count": 238,
       "external_excluded_page_count": 23,
       "unresolved_classification_page_count": 0,
       "justified_reopened_page_count": 4,
@@ -1528,10 +1530,11 @@
         "start": 15,
         "end": 18
       },
-      "chapter_classification": "REMOTE_EVIDENCE",
+      "chapter_classification": "MIXED",
       "screening_status": "ONE_PASS_IN_PROGRESS",
       "screened_pages": [
-        "B3-015"
+        "B3-015",
+        "B3-016"
       ],
       "scenes": [
         {
@@ -1540,6 +1543,10 @@
             {
               "page_id": "B3-015",
               "fragment": "После заголовка главы 6 Эмма достоверно описывает известную ей схему МОАГа: верхние люки, узкие коридоры к кабельным каналам, нижние люки с неудобным/опасным выходом."
+            },
+            {
+              "page_id": "B3-016",
+              "fragment": "Эмма вспоминает трёхмерную схему знакомого ей МОАГа и люки внешней связи; внешний дисковидный объект на пути к ней — другая станция."
             }
           ],
           "classification": "REMOTE_EVIDENCE",
@@ -1550,6 +1557,18 @@
             "Жак"
           ],
           "station_relevance": "Прямое свидетельство о доступе к кабельным каналам на МОАГе; будущий рейд не считается пройденным."
+        },
+        {
+          "id": "B3P1C6-S2",
+          "page_fragments": [
+            {
+              "page_id": "B3-016",
+              "fragment": "Внешняя поверхность темного дисковидного объекта, к которому летят катера, принадлежит другой станции и исключена."
+            }
+          ],
+          "classification": "EXTERNAL",
+          "physical_location": "Другая станция, цель экспедиции.",
+          "screened_out_material": "Внешняя форма корпуса не переносится на МОАГ."
         }
       ]
     }
