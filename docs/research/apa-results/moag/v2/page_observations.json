@@ -7916,6 +7916,134 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-484",
+      "page_id": "B2-066",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=66",
+      "station_id": "MOAG",
+      "narrative_mode": "SECOND_LEVEL_TWO_STOREY_CABIN_RING",
+      "locator_hint": "двухэтажный круглый корпус кают вокруг Главной площади и парка",
+      "spatial_assertion": "Каютный корпус Второго описан как двухэтажный и круглый; его галерея обходит Главную площадь и парк. Это подтверждает локальную двухэтажную структуру на Втором, не дополнительный глобальный уровень и не полную форму станции.",
+      "feature_refs": [
+        "L2-CABINS",
+        "L2-GALLERY",
+        "L2-PLAZA"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-485",
+      "page_id": "B2-066",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=66",
+      "station_id": "MOAG",
+      "narrative_mode": "SECOND_LEVEL_CHILDCARE_ON_FIRST_LOCAL_FLOOR",
+      "locator_hint": "детский сад внутри круглого корпуса, на первом этаже",
+      "spatial_assertion": "Детский сад находится внутри круглого корпуса с каютами и галереей, на его первом этаже; от каюты Эммы и Коли он описан как довольно далёкий. Трасса и расстояние не заданы.",
+      "feature_refs": [
+        "L2-NURSERY",
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-486",
+      "page_id": "B2-066",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=66",
+      "station_id": "MOAG",
+      "narrative_mode": "GALLERY_TO_PLAZA_STAIRS",
+      "locator_hint": "лестница от галереи к девочкам у площади",
+      "spatial_assertion": "Эмма кричит с галереи в сторону Главной площади, а Коля спускается по лестнице и примерно через полминуты оказывается у девочек на площади. Подтверждён вертикальный переход галерея → площадь без высоты или длины лестницы.",
+      "feature_refs": [
+        "L2-GALLERY",
+        "L2-PLAZA"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-487",
+      "page_id": "B2-067",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=67",
+      "station_id": "MOAG",
+      "narrative_mode": "SECOND_LEVEL_TUNNEL_08_HAZARD",
+      "locator_hint": "вход в туннель, электрическая решётка и обстрел",
+      "spatial_assertion": "Участок у входа в туннель Второго простреливается прозрачным шестиногим роботом с лучевым оружием в ногах. Электрическая решётка блокирует проход для робота, но не устраняет обстрел с его стороны. Не указаны размеры туннеля или решётки.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-488",
+      "page_id": "B2-068",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=68",
+      "station_id": "MOAG",
+      "narrative_mode": "LIBRARY_WINDOW_AND_LEVEL_MODEL",
+      "locator_hint": "большое овальное окно и макет Второго в библиотеке",
+      "spatial_assertion": "В библиотеке на Втором описано большое овальное окно, через которое видны крейсеры у станции; там же находится выпуклый красивый макет Второго, изготовленный выпускниками несколько лет назад. Форма окна зафиксирована как словесное описание, без размеров; модель уровня является представлением, точность/масштаб не подтверждены.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-489",
+      "page_id": "B2-068",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=68",
+      "station_id": "MOAG",
+      "narrative_mode": "SECOND_LEVEL_MODEL_ROUTING_EVIDENCE",
+      "locator_hint": "выпуклый макет плана Второго уровня",
+      "spatial_assertion": "Персонажи используют в библиотеке макет всего Второго уровня для выбора пути через короткие коридоры и туннель №8. Макет доказывает наличие навигационного представления уровня в сцене, но не позволяет извлечь точные координаты или масштаб.",
+      "feature_refs": [],
+      "evidence_class": "MEDIATED_IMAGE_UNVERIFIED",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-490",
+      "page_id": "B2-068",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=68",
+      "station_id": "MOAG",
+      "narrative_mode": "SECOND_LEVEL_CAFE_AND_FREIGHT_LIFT_ROUTE",
+      "locator_hint": "кафе, подсобные/грузовые двери, коридор и лифт продуктов",
+      "spatial_assertion": "В плане разведки отмечены короткие коридоры, кафе со сквозными маршрутами между главной дверью и подсобным грузовым входом, а также маленькие грузовые лифты для доставки еды. Фактически описан путь по Оранжевой магистрали, мимо конференц-зала и задних дверей кафе к продуктовому грузовому лифту, который связывает уровни; на момент сцены он не работает.",
+      "feature_refs": [
+        "L2-ORANGE",
+        "L2-CAFE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-491",
+      "page_id": "B2-069",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=69",
+      "station_id": "MOAG",
+      "narrative_mode": "CAFE_AMBUSH_INTERIOR",
+      "locator_hint": "кафе, полустеклянная дверь, подсобка и шкаф продуктов",
+      "spatial_assertion": "Эмма и Коля входят в кафе с Оранжевой магистрали, оказываются в подсобке за полустеклянной дверью к основному залу, прячутся у бокового продуктового шкафа; выходят обратно через раздвижные створки. Выстрел повреждает обшивку открытой двери и полки. Точный план кафе не задан.",
+      "feature_refs": [
+        "L2-CAFE",
+        "L2-ORANGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }

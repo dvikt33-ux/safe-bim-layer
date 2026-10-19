@@ -18,7 +18,11 @@
       "B2-062",
       "B2-063",
       "B2-064",
-      "B2-065"
+      "B2-065",
+      "B2-066",
+      "B2-067",
+      "B2-068",
+      "B2-069"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -28,7 +32,9 @@
       "B2-059",
       "B2-063",
       "B2-064",
-      "B2-065"
+      "B2-065",
+      "B2-066",
+      "B2-069"
     ],
     "remote_evidence_page_ids": [
       "B2-052",
@@ -286,14 +292,15 @@
       "title": "Таис. Космодром",
       "page_span": {
         "start": 63,
-        "end": 65
+        "end": 66
       },
       "chapter_classification": "MIXED",
       "screening_status": "CONTEXT_SCREENED_BEFORE_STRUCTURED_EXTRACTION",
       "screened_pages": [
         "B2-063",
         "B2-064",
-        "B2-065"
+        "B2-065",
+        "B2-066"
       ],
       "scenes": [
         {
@@ -326,6 +333,10 @@
             {
               "page_id": "B2-065",
               "fragment": "вся текущая сцена на земном космодроме"
+            },
+            {
+              "page_id": "B2-066",
+              "fragment": "внешняя сцена Земли до заголовка главы 6"
             }
           ],
           "classification": "EXTERNAL",
@@ -338,6 +349,57 @@
         }
       ],
       "screening_caveat": "Chapter 5 begins on p63 after the final station fragment of chapter 4; p64 contains a short memory of MOAG's First-level cabin, retained as REMOTE_EVIDENCE amid the external Earth scene."
+    },
+    {
+      "id": "B2-PART2-CH6",
+      "book_id": "B2",
+      "part_number": 2,
+      "chapter_number": 6,
+      "title": "Эмма. Пауки-роботы",
+      "page_span": {
+        "start": 66,
+        "end": 69
+      },
+      "chapter_classification": "STATION",
+      "screening_status": "CONTEXT_SCREENED_BEFORE_STRUCTURED_EXTRACTION",
+      "screened_pages": [
+        "B2-066",
+        "B2-067",
+        "B2-068",
+        "B2-069"
+      ],
+      "scenes": [
+        {
+          "id": "B2P2C6-S1",
+          "page_fragments": [
+            {
+              "page_id": "B2-066",
+              "fragment": "станционная часть после окончания главы 5"
+            },
+            {
+              "page_id": "B2-067",
+              "fragment": "глава 6, станционный эпизод у туннеля и библиотека"
+            },
+            {
+              "page_id": "B2-068",
+              "fragment": "глава 6, макет Второго и план разведки"
+            },
+            {
+              "page_id": "B2-069",
+              "fragment": "станционная часть до начала главы 7"
+            }
+          ],
+          "classification": "STATION",
+          "physical_location": "МОАГ, Второй уровень: галерея, Главная площадь, Зелёная/Оранжевая магистрали, туннель №8, библиотека, кафе и грузовой лифт",
+          "characters": [
+            "Эмма",
+            "Коля",
+            "Егор"
+          ],
+          "station_relevance": "вертикальная структура корпуса Второго, галерея и лестница, план-макет уровня, туннельная решётка, маршрут через кафе и пищевой грузовой лифт"
+        }
+      ],
+      "screening_caveat": "Pages 66 and 69 split chapter boundaries: p66 starts with the end of Taïs and Fedor's Earth scene before chapter 6; p69 ends chapter 6 before chapter 7 begins on the Earth scrapyard."
     }
   ],
   "character_location_events": [
@@ -644,6 +706,45 @@
         "B2-063",
         "B2-064",
         "B2-065"
+      ],
+      "confidence": "DIRECT_TEXT"
+    },
+    {
+      "character_id": "Эмма",
+      "story_time": "B2, часть 2, глава 6, p66–69",
+      "current_location": "МОАГ, Второй уровень: каюта/галерея, площадь и магистрали, туннель №8, библиотека и кафе",
+      "departure_event": "выходит из каюты, затем движется с Колей по Второму и через туннель №8",
+      "arrival_event": "укрывается в кафе и выходит обратно на Оранжевую магистраль после столкновения с роботами",
+      "source": [
+        "B2-066",
+        "B2-067",
+        "B2-068",
+        "B2-069"
+      ],
+      "confidence": "DIRECT_TEXT"
+    },
+    {
+      "character_id": "Коля",
+      "story_time": "B2, часть 2, глава 6, p66–69",
+      "current_location": "МОАГ, Второй уровень: галерея, площадь, туннель №8, библиотека, кафе и грузовой лифт",
+      "departure_event": "выходит из каюты с Эммой, спускается по лестнице к площади и следует по маршруту разведки",
+      "arrival_event": "вместе с Эммой попадает в кафе и возвращается на Оранжевую магистраль",
+      "source": [
+        "B2-066",
+        "B2-067",
+        "B2-068",
+        "B2-069"
+      ],
+      "confidence": "DIRECT_TEXT"
+    },
+    {
+      "character_id": "Егор",
+      "story_time": "B2, часть 2, глава 6, p67",
+      "current_location": "МОАГ, Второй уровень: пост у простреливаемого входа в туннель",
+      "departure_event": "остаётся у входа после разгона детей с опасного участка",
+      "arrival_event": "следит, чтобы дети не входили в зону обстрела",
+      "source": [
+        "B2-067"
       ],
       "confidence": "DIRECT_TEXT"
     }

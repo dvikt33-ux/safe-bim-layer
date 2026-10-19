@@ -4315,6 +4315,123 @@
       "constraints": [],
       "identity_hypotheses": [],
       "notes": "Прямой переход с p60. Не выводить из этой сцены точные координаты, размеры, число комнат или непрерывность детской дорожки."
+    },
+    {
+      "id": "RT-040",
+      "title": "Эмма и Коля: каюта Второго → галерея/Главная площадь → разведка через туннель 8, кафе и грузовой лифт",
+      "participants": [
+        "Эмма",
+        "Коля"
+      ],
+      "book": "B2",
+      "site_pages": [
+        "B2-066",
+        "B2-067",
+        "B2-068",
+        "B2-069"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT040-A",
+          "label": "Каюта во круглом двухэтажном корпусе Второго",
+          "global_level": 2,
+          "local_stratum": "residential-cabin-ring",
+          "source_page_id": "B2-066",
+          "movement_method": "DOOR",
+          "observed_constraint": "Коля входит к Эмме в каюту; корпус кают круглый, двухэтажный и огибает площадь/парк галереей.",
+          "existing_graph_node": "L2-CABINS",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT040-B",
+          "label": "Галерея вокруг кают с видом на Главную площадь",
+          "global_level": 2,
+          "local_stratum": "gallery",
+          "source_page_id": "B2-066",
+          "movement_method": "WALK",
+          "observed_constraint": "Эмма выходит на галерею; перила отделяют её от пространства площади.",
+          "existing_graph_node": "L2-GALLERY",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT040-C",
+          "label": "Лестница вниз к Главной площади",
+          "global_level": 2,
+          "local_stratum": "local-stair",
+          "source_page_id": "B2-066",
+          "movement_method": "STAIRS",
+          "observed_constraint": "Коля спускается по лестнице и оказывается у девочек на площади; высота и точное положение лестницы неизвестны.",
+          "existing_graph_node": "L2-PLAZA",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT040-D",
+          "label": "Зелёная магистраль и переход к туннелю №8",
+          "global_level": 2,
+          "local_stratum": "green-route-to-tunnel",
+          "source_page_id": "B2-066",
+          "movement_method": "WALK",
+          "observed_constraint": "Группа следует по Зелёной магистрали к туннелю; конкретный плановый отрезок до входа не измерен.",
+          "existing_graph_node": "L2-GREEN",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT040-E",
+          "label": "Вход/решётка туннеля №8",
+          "global_level": 2,
+          "local_stratum": "tunnel-08-threshold",
+          "source_page_id": "B2-067",
+          "movement_method": "WALK",
+          "observed_constraint": "Туннельный проход блокируется электрической решёткой и простреливается роботом; безопасный проход не подразумевается.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT040-F",
+          "label": "Оранжевая магистраль и короткие поворотные коридоры",
+          "global_level": 2,
+          "local_stratum": "orange-ring",
+          "source_page_id": "B2-068",
+          "movement_method": "MAGNETIC_BOARD",
+          "observed_constraint": "Для разведки выбирают движение на магнитных досках через короткие коридоры и повороты.",
+          "existing_graph_node": "L2-ORANGE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT040-G",
+          "label": "Кафе с главной и задней дверями, подсобка",
+          "global_level": 2,
+          "local_stratum": "cafe-service-room",
+          "source_page_id": "B2-069",
+          "movement_method": "DOOR",
+          "observed_constraint": "При обстреле персонажи заходят в кафе с Оранжевой магистрали, скрываются в подсобке за полустеклянной дверью и выходят обратно через раздвижные створки.",
+          "existing_graph_node": "L2-CAFE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT040-H",
+          "label": "Продуктовый грузовой лифт между уровнями",
+          "global_level": null,
+          "local_stratum": "interlevel-freight-lift",
+          "source_page_id": "B2-068",
+          "movement_method": "WALK",
+          "observed_constraint": "Лифт доставляет продукты и служит связью между уровнями; в момент сцены он не работает. Личность шахты не сопоставлена.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [],
+      "identity_hypotheses": [],
+      "notes": "Это маршрут эпизода разведки и укрытия на Втором уровне, содержащий элементы, запланированные по макету, и фактически пройденные участки; плановая часть и реальное движение различены в observed_constraint. Координаты и размеры отсутствуют."
     }
   ]
 }
