@@ -279,8 +279,19 @@ class DynamicCommands:
                 for item in v.values():yield from target_ids(item)
             elif isinstance(v,list):
                 for item in v:yield from target_ids(item)
-        if impact=='MODEL' and ticket['effect']!='READ_ONLY' and not set(target_ids(ticket['parameters']))<=set(affected):raise ValueError('DYNAMIC_ELEMENT_TARGET_OUTSIDE_AUTHORIZED_SCOPE')
+        allowed_targets=set(affected)
+        copy_sources=set()
+        if ticket['command']=='MoveElements' and ticket['effect']=='CREATE':
+            # prepare/validate already enforce an entirely copy=True batch.
+            # These elementIds are retained input prototypes, not modified IDs.
+            rows=ticket['parameters']['elementsWithMoveVectors']
+            if any(row.get('copy') is not True for row in rows):raise ValueError('DYNAMIC_COPY_SOURCE_REQUIRES_COPY_TRUE_ONLY')
+            copy_sources={row['elementId']['guid'].lower() for row in rows}
+            if not copy_sources<=set(affected)|set(retained):raise ValueError('DYNAMIC_COPY_SOURCE_OUTSIDE_AUTHORIZED_BASELINE')
+            allowed_targets|=copy_sources
+        if impact=='MODEL' and ticket['effect']!='READ_ONLY' and not set(target_ids(ticket['parameters']))<=allowed_targets:raise ValueError('DYNAMIC_ELEMENT_TARGET_OUTSIDE_AUTHORIZED_SCOPE')
         value=dict(schema='APA_DYNAMIC_OPERATION_V1',ticket=ticket,binding=binding,affectedGuids=affected,retainedGuids=retained,authorizationRef=authorization,impact=impact)
+        if copy_sources:value['copySourceGuids']=sorted(copy_sources)
         value['hash']=self.A.RUN.digest(value);return value
 
     def qualify_scope(self,scope,command,parameters,source_hash):

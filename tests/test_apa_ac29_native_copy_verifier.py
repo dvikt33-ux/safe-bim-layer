@@ -42,6 +42,33 @@ class ReadOnlyApi:
         raise AssertionError('unexpected native command:'+name)
 
 class SharedCopy(unittest.TestCase):
+    def copy_router(self,kind='CREATE'):
+        from archicad_dynamic_commands import DynamicCommands
+        import archicad_project_accelerator as A
+        r=DynamicCommands(A.catalog_with_provenance(Path(__file__).resolve().parents[1]/'schemas/tapir-live-1.5.10/tapir-scene-live.json'))
+        r.review_policy('MoveElements',kind,'MODEL',dict(source='PR143 source copy branch',sha256=r.contract_hash('MoveElements')))
+        return r
+
+    def test_shared_create_scope_accepts_only_retained_copy_prototypes(self):
+        r=self.copy_router();ticket=r.prepare('MoveElements',params())
+        s=r.scope(ticket,{},[],[gid(1)],'USER_APPROVED_SYNTHETIC_COPY','MODEL')
+        self.assertEqual(s['affectedGuids'],[])
+        self.assertEqual(s['retainedGuids'],[gid(1)])
+        self.assertEqual(s['copySourceGuids'],[gid(1)])
+        r.qualify_scope(s,'MoveElements',params(),ticket['hash'])
+
+    def test_copy_scope_cannot_import_source_from_outside_baseline(self):
+        r=self.copy_router();ticket=r.prepare('MoveElements',params())
+        with self.assertRaisesRegex(ValueError,'SOURCE_OUTSIDE_AUTHORIZED_BASELINE'):
+            r.scope(ticket,{},[],[gid(99)],'USER_APPROVED_SYNTHETIC_COPY','MODEL')
+
+    def test_real_relocation_cannot_modify_retained_source(self):
+        r=self.copy_router('MODIFY');p=params()
+        for row in p['elementsWithMoveVectors']:row['copy']=False
+        ticket=r.prepare('MoveElements',p)
+        with self.assertRaisesRegex(ValueError,'TARGET_OUTSIDE_AUTHORIZED_SCOPE'):
+            r.scope(ticket,{},[],[gid(1)],'USER_APPROVED_SYNTHETIC_MODIFY','MODEL')
+
     def pre(self,b=None,p=None,api=None):
         return V.verify_before(api=api or ReadOnlyApi(),command=V.CMD,parameters=p or params(),affected=[],native_before=b or models()[0])
     def post(self,b,a,proof,reply=None):
