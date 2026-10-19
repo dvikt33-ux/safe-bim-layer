@@ -9542,6 +9542,76 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-600",
+      "page_id": "B2-115",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=115",
+      "station_id": "MOAG",
+      "narrative_mode": "DIRECT_TEXT",
+      "locator_hint": "Короткий коридор и проход выводят к знакомой площадке; оттуда Эмма добегает до дверей помещений со спящими существами.",
+      "spatial_assertion": "Пройденный маршрут станционного фрагмента до заголовка новой главы; геометрия площадки и её стыковки не уточнена.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-601",
+      "page_id": "B2-115",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=115",
+      "station_id": "MOAG",
+      "narrative_mode": "DIRECT_TEXT",
+      "locator_hint": "Кодовая флешка вставляется в паз; двери расходятся в стороны и открываются медленно.",
+      "spatial_assertion": "Фактический способ доступа к дверям; не задано число створок и их размеры.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-602",
+      "page_id": "B2-115",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=115",
+      "station_id": "MOAG",
+      "narrative_mode": "DIRECT_TEXT",
+      "locator_hint": "За открытыми дверями начинается тёмное пространство ангаров, где спит стая.",
+      "spatial_assertion": "Подтверждена связь дверей и ангаров со стаей; конкретная позиция/номер ангара не указан.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-603",
+      "page_id": "B2-115",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=115",
+      "station_id": "MOAG",
+      "narrative_mode": "DIRECT_TEXT",
+      "locator_hint": "Эмма проходит в темноте без планшета и находит путь к ангару со стаей.",
+      "spatial_assertion": "Факт её прохождения и ориентации; не использовать как метрическую трассу или точный план внутренней сети.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-604",
+      "page_id": "B2-115",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=115",
+      "station_id": "MOAG",
+      "narrative_mode": "SITUATION_RENDER_STATE",
+      "locator_hint": "В ангарах стая спит; холод замедляет жизненные процессы, запах животных знаком героям.",
+      "spatial_assertion": "Состояние/атмосфера эпизода для рендера; не выводить из него постоянный температурный режим всей станции.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
