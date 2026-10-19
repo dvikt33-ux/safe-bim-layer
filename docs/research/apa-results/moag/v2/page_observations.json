@@ -8884,6 +8884,48 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-553",
+      "page_id": "B2-101",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=101",
+      "station_id": "MOAG",
+      "narrative_mode": "DIALOGUE_CONFIRMED_DECISION",
+      "locator_hint": "После собрания в библиотеке повествование прямо подтверждает, что решения приняты и правила установлены; Дина обсуждала, где устроить изоляционные комнаты.",
+      "spatial_assertion": "Факт по повествованию и достоверному диалогу: правила и решения группы приняты. Дальнейшее обсуждение касается размещения/устройства изоляционных комнат, но их расположение и фактическое переоборудование не описаны. Не назначать им помещение или геометрию.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-554",
+      "page_id": "B2-101",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=101",
+      "station_id": "MOAG",
+      "narrative_mode": "SITUATION_RENDER_STATE",
+      "locator_hint": "После собрания Эмма возвращается к своей каюте; галерея уже убрана. На следующий день она собирается снова заниматься уборкой.",
+      "spatial_assertion": "Использовать убранную галерею и распорядок уборки для конкретной сцены/рендера. Временную чистоту и намерение Эммы убирать не переносить в постоянный дизайн или граф.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-555",
+      "page_id": "B2-101",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=101",
+      "station_id": "MOAG",
+      "narrative_mode": "DIRECT_TEXT",
+      "locator_hint": "В жилой каюте Эмма ухаживает за детьми; младенцы лежат на одеяльце на полу. На ночь Колька устраивается в зале, Дину размещают в комнате Колючего, на его кровати; указывается шкафчик Дины.",
+      "spatial_assertion": "Подтверждены жилые помещения и их использование: каюта, зал, отдельная комната Колючего, кровать и шкафчик. Точная связь комнат внутри каюты и уровень не заданы. Размещение детей и взрослых в эту ночь — состояние сцены, а не постоянная функция комнат.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
