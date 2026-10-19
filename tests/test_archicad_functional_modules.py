@@ -35,7 +35,14 @@ class FunctionalModules(unittest.TestCase):
         self.assertEqual(proof['nativeModelWrites'],0)
     def test_attachment_drift_idempotence_and_no_native_permission(self):
         r=connected();before=r.fingerprint;A.connect_functional_modules(r);self.assertEqual(r.fingerprint,before)
-        self.assertEqual(len(r.catalog['commands']),388)
+        base=json.loads((ROOT/'schemas/accelerator/mass-capabilities/commands.json').read_text(encoding='utf8'))
+        declared=json.loads((ROOT/'schemas/accelerator/functional-modules.json').read_text(encoding='utf8'))
+        expected=set(base['commands'])
+        for namespace,commands in declared['sdkProviders'].items():
+            expected.update(name if namespace=='TapirCommand' and name in base['commands']
+                            else 'AddOn.'+namespace+'.'+name for name in commands)
+        expected.update('AddOn.APAAnalysis.'+name for name in declared['local']['commands'])
+        self.assertEqual(set(r.catalog['commands']),expected)
         manifest=json.loads((ROOT/'schemas/accelerator/functional-modules.json').read_text(encoding='utf8'));manifest['local']['implementationSHA256']='0'*64
         with tempfile.TemporaryDirectory() as temp:
             path=Path(temp)/'manifest.json';path.write_text(json.dumps(manifest))

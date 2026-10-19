@@ -64,7 +64,7 @@ def stage(source, scratch, state, baseline_trace, safe01, group, placements, por
          and source != scratch and scratch.parent.is_dir() and state.parent.is_dir()
          and not state.exists() and type(port) is int
          and ((prior_stage is None and not scratch.exists() and 19727 <= port <= 19735)
-              or (prior_stage is not None and port == 19726 and scratch == PRIOR174_SCRATCH))
+              or (prior_stage is not None and port == 19726 and scratch == PRIOR174_SCRATCH.resolve()))
          and V.GROUP_GUID.fullmatch(group or "")
          and 1 <= len(shifts) <= 32 and all(r["dz"] == 0 for r in shifts),
          "GROUP_BATCH_NEW_ISOLATED_PLN_AND_VALID_GROUP_REQUIRED")
