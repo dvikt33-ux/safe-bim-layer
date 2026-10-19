@@ -1,0 +1,36 @@
+{
+  "affectedGuids": [],
+  "all296OriginalContractsPreserved": true,
+  "callerModuleImported": true,
+  "catalogCommands": 298,
+  "codeOrigin": "ACTUAL_INSTALLED_APA",
+  "collisionProof": {
+    "evaluatedSolidBoxes": 2,
+    "status": "MULTI_COPY_ALL_NATIVE_BREP_AABB_CLEAR_PASS"
+  },
+  "currentGuidCount": 176,
+  "currentRuntimeIdentity": {
+    "buildIdentity": "6a9ebc59bf9b03c6243f8609ed9a58ffe0ad0bf38389cdfd42dd3f6540c711dc",
+    "contract": "APA_NATIVE_RUNTIME_IDENTITY_V1",
+    "developerId": 826567491,
+    "localId": 368333322,
+    "nativeModelWrites": 0,
+    "sdkMajor": 29,
+    "sourceRevision": "a6b8cea99adcd04b18737f6596d5a294306164b2",
+    "stairSolverPolicy": "DETACHED_DIAGNOSTIC_READONLY_NO_SETTER_OR_SOLVER"
+  },
+  "currentSavedSHA256": "f9f172004cb6abaed832445b9373083f39bc5deb71b2e3fd6ff601477663269f",
+  "fileCommands": 30,
+  "nativeCopyCalls": 0,
+  "nativeWrites": 0,
+  "preparedNativeCommand": "MoveElements",
+  "registryVerifier": "VerifiedNativeBatchCopy",
+  "retainedGuidCount": 176,
+  "saveCalls": 0,
+  "scopeCopySources": [
+    "0a17fb15-3639-4dfa-ab01-cd910ae112b0"
+  ],
+  "semanticCommands": 4,
+  "sourceGuid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0",
+  "status": "INSTALLED_SHARED_COPY_SCOPE_NATIVE_READONLY_PASS"
+}
