@@ -77,6 +77,12 @@ class MOAGStructuralProjections(unittest.TestCase):
         self.assertIsNone(env["usable_floor_area_range_m2"])
         self.assertTrue(env["not_additive_by_default"])
         self.assertTrue(hall["scenario_not_text_measurement"])
+        self.assertIsNone(hall["book_derived_numeric_limits"]["footprint_area_m2"])
+        self.assertEqual(
+            hall["editable_project_bounds"]["footprint_area_m2"],
+            hall["footprint_range_m2"])
+        self.assertTrue(all(x["book_derived_numeric_limits"]["clear_volume_m3"] is None
+                            for x in self.structure["spatial_area_volume_profiles"]))
         self.assertEqual(self.structure["area_and_volume_accounting"]["area_bearing"], 157)
 
 
