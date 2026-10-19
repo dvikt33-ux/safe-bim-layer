@@ -76,7 +76,8 @@
       "B3-005",
       "B3-006",
       "B3-010",
-      "B3-011"
+      "B3-011",
+      "B3-015"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -120,13 +121,14 @@
       "B2-144",
       "B3-004",
       "B3-006",
-      "B3-011"
+      "B3-011",
+      "B3-015"
     ],
     "uncertain_page_ids": [],
     "metrics": {
-      "as_of_page_id": "B3-011",
-      "context_reviewed_page_count": 73,
-      "full_evidence_page_count": 236,
+      "as_of_page_id": "B3-015",
+      "context_reviewed_page_count": 74,
+      "full_evidence_page_count": 237,
       "external_excluded_page_count": 23,
       "unresolved_classification_page_count": 0,
       "justified_reopened_page_count": 4,
@@ -1515,6 +1517,41 @@
         }
       ],
       "chapter_end_confirmed": true
+    },
+    {
+      "id": "B3-PART1-CH6",
+      "book_id": "B3",
+      "part_number": 1,
+      "chapter_number": 6,
+      "title": "Эмма. Коридоры, роботы и глюки",
+      "page_span": {
+        "start": 15,
+        "end": 18
+      },
+      "chapter_classification": "REMOTE_EVIDENCE",
+      "screening_status": "ONE_PASS_IN_PROGRESS",
+      "screened_pages": [
+        "B3-015"
+      ],
+      "scenes": [
+        {
+          "id": "B3P1C6-S1",
+          "page_fragments": [
+            {
+              "page_id": "B3-015",
+              "fragment": "После заголовка главы 6 Эмма достоверно описывает известную ей схему МОАГа: верхние люки, узкие коридоры к кабельным каналам, нижние люки с неудобным/опасным выходом."
+            }
+          ],
+          "classification": "REMOTE_EVIDENCE",
+          "physical_location": "Крейсер и путь к другой станции; геометрия МОАГа сообщается Эммой по памяти/опыту.",
+          "characters": [
+            "Эмма",
+            "Ник",
+            "Жак"
+          ],
+          "station_relevance": "Прямое свидетельство о доступе к кабельным каналам на МОАГе; будущий рейд не считается пройденным."
+        }
+      ]
     }
   ],
   "character_location_events": [
