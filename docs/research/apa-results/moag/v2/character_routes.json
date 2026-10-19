@@ -5052,7 +5052,8 @@
       "book": "B2",
       "site_pages": [
         "B2-105",
-        "B2-106"
+        "B2-106",
+        "B2-107"
       ],
       "route_kind": "OBSERVED_CHARACTER_ROUTE",
       "nodes": [
@@ -5163,11 +5164,95 @@
           "existing_graph_node": null,
           "relative_xy": null,
           "absolute_z_m": null
+        },
+        {
+          "id": "RT048-J",
+          "label": "Коридор у небольшого блока освещения",
+          "global_level": 3,
+          "local_stratum": "third-level-lighting-control-corridor",
+          "source_page_id": "B2-107",
+          "movement_method": "CRAWL",
+          "observed_constraint": "После наблюдения у рубки герои отползают в коридор; там рабочий блок освещения и два робота.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT048-K",
+          "label": "Первый лифтовый участок с пауками и полукруглым рядом кладовок",
+          "global_level": 3,
+          "local_stratum": "third-level-lift-and-small-lockers",
+          "source_page_id": "B2-107",
+          "movement_method": "WALK",
+          "observed_constraint": "У лифта дежурят пауки; герои сворачивают к полукруглому ряду малых кладовок. Тождество лифта с дверями из p106 не подтверждено.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT048-L",
+          "label": "Ответвление коридора к дверям цеха",
+          "global_level": 3,
+          "local_stratum": "factory-door-branch-unresolved",
+          "source_page_id": "B2-107",
+          "movement_method": "WALK",
+          "observed_constraint": "Один поворот коридора выводит к необычным дверям цеха; автор/персонаж допускает, что роботы стоят там ради охраны цеха.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT048-M",
+          "label": "Длинный коридор к бывшей зоне изоляции",
+          "global_level": 3,
+          "local_stratum": "former-isolation-corridor",
+          "source_page_id": "B2-107",
+          "movement_method": "WALK",
+          "observed_constraint": "Длинный коридор ведёт к закрытым белым дверям старых изоляционных помещений.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT048-N",
+          "label": "Помещение бывшей изоляции, используемое для сортировки деталей",
+          "global_level": 3,
+          "local_stratum": "former-isolation-room-parts-sorting",
+          "source_page_id": "B2-107",
+          "movement_method": "DOOR",
+          "observed_constraint": "Старая кодовая дверь отъезжает в сторону; внутри жители сортируют детали и разобранные уборщики.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT048-O",
+          "label": "Широкая площадка с лифтами и грузами",
+          "global_level": 3,
+          "local_stratum": "third-level-cargo-lift-platform-unresolved",
+          "source_page_id": "B2-107",
+          "movement_method": "WALK",
+          "observed_constraint": "Герои пропускают нужный поворот и оказываются на площадке с лифтами и грузами.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT048-P",
+          "label": "Широкий открытый грузовой ангар",
+          "global_level": 3,
+          "local_stratum": "third-level-open-cargo-hangar",
+          "source_page_id": "B2-107",
+          "movement_method": "WALK",
+          "observed_constraint": "В ангар на электронных тележках завозят длинные ящики с искусственными людьми.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
         }
       ],
       "constraints": [],
       "identity_hypotheses": [],
-      "notes": "Фактически пройденный маршрут после подхода к решётке. Идентичность туннеля не связана с №8; промежуточная трасса от отправной точки на Втором не описана. Третий уровень подтверждён текстом. Не назначать размеры или координаты."
+      "notes": "Фактически пройденный маршрут после подхода к решётке. Идентичность туннеля не связана с №8; промежуточная трасса от отправной точки на Втором не описана. Третий уровень подтверждён текстом. Не назначать размеры или координаты. p107 продолжает вылазку от дверей рубки к блоку освещения, лифтовой зоне, старым изоляционным помещениям и грузовой площадке. На странице герои проходят эту зону; соседства лифтов с теми, что были описаны на p106, не утверждается."
     }
   ],
   "notes": "undefined Дополнен RT-043 по B2 p90: наблюдаемая бытовая последовательность внутри жилого помещения; точный уровень и идентичность с RT-042 не установлены. Добавлен RT-044 по p91 с эпизодическим отклонением в детскую каюту; геометрия переходов и уровень не установлены. Добавлен RT-045 для переговоров и ухода через туннель №8; точные уровни, трасса от библиотеки и судьба Дины не выводятся. Добавлен RT-046 по p94: Дина возвращается, а группа поднимается в жилую каюту; вертикальная трасса и уровень неизвестны."
