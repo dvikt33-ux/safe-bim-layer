@@ -3295,6 +3295,145 @@
       "constraints": [],
       "identity_hypotheses": [],
       "notes": "Маршрут действительно пройден только до двери; безопасная постоянная трасса в ангары с катерами пока не существует как доказанный факт. Отделка и электронный замок — изменения после событий первой книги."
+    },
+    {
+      "id": "RT-030",
+      "title": "Закрытый Нижний: входная дверь → развилка → короткий проход → первый ангар → верхние операторские → соседний ангар",
+      "participants": [
+        "Таис",
+        "Фёдор",
+        "Егор",
+        "Гоша",
+        "Тоша"
+      ],
+      "book": "B2",
+      "site_pages": [
+        "B2-013",
+        "B2-014",
+        "B2-015"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT030-A",
+          "label": "Вход в закрытый Нижний через автоматическую дверь",
+          "global_level": 1,
+          "local_stratum": "sealed-lower-angar-sector",
+          "source_page_id": "B2-013",
+          "movement_method": "DOOR",
+          "observed_constraint": "Вход в закрытый Нижний через автоматическую дверь",
+          "existing_graph_node": "L1-SEALED",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT030-B",
+          "label": "Развилка в технической сети под голыми коммуникациями",
+          "global_level": 1,
+          "local_stratum": "sealed-lower-angar-sector",
+          "source_page_id": "B2-014",
+          "movement_method": "WALK",
+          "observed_constraint": "Развилка в технической сети под голыми коммуникациями",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT030-C",
+          "label": "Короткий правый боковой коридор",
+          "global_level": 1,
+          "local_stratum": "sealed-lower-angar-sector",
+          "source_page_id": "B2-014",
+          "movement_method": "WALK",
+          "observed_constraint": "Короткий правый боковой коридор",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT030-D",
+          "label": "Широкий длинный ангарный подход с полукруглым сводом",
+          "global_level": 1,
+          "local_stratum": "sealed-lower-angar-sector",
+          "source_page_id": "B2-014",
+          "movement_method": "WALK",
+          "observed_constraint": "Широкий длинный ангарный подход с полукруглым сводом",
+          "existing_graph_node": "L1-ANGAR-HALL",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT030-E",
+          "label": "Биометрическая двустворчатая дверь первого ангара",
+          "global_level": 1,
+          "local_stratum": "sealed-lower-angar-sector",
+          "source_page_id": "B2-014",
+          "movement_method": "DOOR",
+          "observed_constraint": "Биометрическая двустворчатая дверь первого ангара",
+          "existing_graph_node": "L1-ANGAR",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT030-F",
+          "label": "Два боевых катера перед шлюзом",
+          "global_level": 1,
+          "local_stratum": "sealed-lower-angar-sector",
+          "source_page_id": "B2-014",
+          "movement_method": "WALK",
+          "observed_constraint": "Два боевых катера перед шлюзом",
+          "existing_graph_node": "L1-BOAT-LOCK",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT030-G",
+          "label": "Лестница к верхней операторской",
+          "global_level": 1,
+          "local_stratum": "sealed-lower-angar-sector",
+          "source_page_id": "B2-014",
+          "movement_method": "CLIMB_UP",
+          "observed_constraint": "Лестница к верхней операторской",
+          "existing_graph_node": "L1-OPERATORS",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT030-H",
+          "label": "Смежная операторская следующего ангара",
+          "global_level": 1,
+          "local_stratum": "sealed-lower-angar-sector",
+          "source_page_id": "B2-015",
+          "movement_method": "WALK",
+          "observed_constraint": "Смежная операторская следующего ангара",
+          "existing_graph_node": "L1-OPERATORS-ADJ",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT030-I",
+          "label": "Соседний ангар с повреждёнными катерами",
+          "global_level": 1,
+          "local_stratum": "sealed-lower-angar-sector",
+          "source_page_id": "B2-015",
+          "movement_method": "DOOR",
+          "observed_constraint": "Соседний ангар с повреждёнными катерами",
+          "existing_graph_node": "L1-ANGAR-ADJ",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT030-G",
+          "lower": "RT030-F",
+          "source_page_id": "B2-014",
+          "claim": "Операторская находится выше пола ангара почти у потолка; точная высота неизвестна."
+        }
+      ],
+      "identity_hypotheses": [],
+      "notes": "Число катеров связано с конкретными двумя ангарами. Ни ширина ангаров, ни положение вдоль станции не определены; режим освещения и готовность катеров привязаны ко времени сцены."
     }
   ]
 }
