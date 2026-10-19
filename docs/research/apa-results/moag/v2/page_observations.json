@@ -10606,6 +10606,34 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-676",
+      "page_id": "B3-022",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=22",
+      "station_id": "MOAG",
+      "narrative_mode": "DIALOGUE_CONFIRMED_LAYOUT",
+      "locator_hint": "Эмма описывает главные кольцевые коридоры уровней и отходящие от них туннели.",
+      "spatial_assertion": "По прямому знанию Эммы, на каждом уровне МОАГа есть главные круговые коридоры, опоясывающие станцию; от них расходятся туннели к жилым помещениям и техническим отсекам. Точное число/диаметр колец не названы.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-677",
+      "page_id": "B3-022",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=22",
+      "station_id": "MOAG",
+      "narrative_mode": "MATERIAL_AND_FUNCTION",
+      "locator_hint": "Прорезиненное напольное покрытие, сравнимое на двух станциях.",
+      "spatial_assertion": "Эмма отмечает, что специальное прорезиненное покрытие пола на целевой станции было таким же, как на МОАГе; функция покрытия — смягчать шаги и сохранять тепло. Это подтверждает материал/функцию покрытия МОАГа без локализации по конкретному помещению.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
