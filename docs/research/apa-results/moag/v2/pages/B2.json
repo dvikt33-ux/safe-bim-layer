@@ -364,12 +364,12 @@
       "id": "B2-033",
       "page_number": 33,
       "url": "https://loveread.ec/read_book.php?id=53370&p=33",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 5,
+      "notes": "На Третьем обследованы доступные коридоры, возле производства осмотрена кладовка с роботами. Затем дети возвращаются в рубку с креслами и стеклянными дверями. Энергомодуль, Детский блок и цех не обследованы; герои лишь предполагают наличие угрозы там. Во время следующего отключения на 10 минут общий свет коридоров гаснет, герои планируют осмотреть энергомодуль.",
+      "verification_method": "Full original book page body read via LoveRead, observations and negative coverage classified",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-034",
