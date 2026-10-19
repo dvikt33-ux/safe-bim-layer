@@ -4676,6 +4676,206 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-285",
+      "page_id": "B1-097",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=97",
+      "station_id": "MOAG",
+      "narrative_mode": "GREEN_ACCESS",
+      "locator_hint": "Второй: Зеленая магистраль и защитный проход",
+      "spatial_assertion": "Второй: Зеленая магистраль и защитный проход",
+      "feature_refs": [
+        "L2-GREEN"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-286",
+      "page_id": "B1-098",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=98",
+      "station_id": "MOAG",
+      "narrative_mode": "LOWER_APPROACH",
+      "locator_hint": "Персонажи проходят через Третий к переработке отходов Н",
+      "spatial_assertion": "Персонажи проходят через Третий к переработке отходов Нижнего и жилым базам",
+      "feature_refs": [
+        "L3",
+        "L1-RECYCLING",
+        "L1-TEMNAYA"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-287",
+      "page_id": "B1-098",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=98",
+      "station_id": "MOAG",
+      "narrative_mode": "LOCAL_STRATUM",
+      "locator_hint": "Внутренние лестницы и узкие галереи Темной базы",
+      "spatial_assertion": "Внутренние лестницы и узкие галереи Темной базы",
+      "feature_refs": [
+        "L1-BASE-SLEEP",
+        "L1-BASE-COMMON"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-288",
+      "page_id": "B1-098",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=98",
+      "station_id": "MOAG",
+      "narrative_mode": "HISTORIC_MARK",
+      "locator_hint": "Старый знак Млечного Пути нанесен на дверь той же станц",
+      "spatial_assertion": "Старый знак Млечного Пути нанесен на дверь той же станции",
+      "feature_refs": [
+        "L1-TEMNAYA"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-289",
+      "page_id": "B1-099",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=99",
+      "station_id": "MOAG",
+      "narrative_mode": "MISSING_MAP",
+      "locator_hint": "Недоступность карт Нижнего для робота не является отсут",
+      "spatial_assertion": "Недоступность карт Нижнего для робота не является отсутствием самого уровня",
+      "feature_refs": [
+        "L1"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-290",
+      "page_id": "B1-099",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=99",
+      "station_id": "MOAG",
+      "narrative_mode": "LEVEL_TRANSIT",
+      "locator_hint": "С Второго к Нижнему проходят через открываемые двери и ",
+      "spatial_assertion": "С Второго к Нижнему проходят через открываемые двери и лестничный доступ у мусорного сектора",
+      "feature_refs": [
+        "L2",
+        "L1-RECYCLING"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-291",
+      "page_id": "B1-100",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=100",
+      "station_id": "MOAG",
+      "narrative_mode": "ACCESS_PHASE",
+      "locator_hint": "Ранее закрытый проход в нижний ангарный сектор открыт, ",
+      "spatial_assertion": "Ранее закрытый проход в нижний ангарный сектор открыт, позднее вновь заблокирован",
+      "feature_refs": [
+        "L1-SEALED",
+        "L1-OLD-FREIGHT-HANGAR"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-292",
+      "page_id": "B1-100",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=100",
+      "station_id": "MOAG",
+      "narrative_mode": "CURVED_PASSAGE",
+      "locator_hint": "В закрытой части Нижнего описан широкий дугообразный ко",
+      "spatial_assertion": "В закрытой части Нижнего описан широкий дугообразный коридор с открытой инженерной разводкой и множеством дверей",
+      "feature_refs": [
+        "L1-OLD-FREIGHT-HANGAR",
+        "L1-OUTER"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-293",
+      "page_id": "B1-100",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=100",
+      "station_id": "MOAG",
+      "narrative_mode": "LOCAL_ADJACENCY",
+      "locator_hint": "Регулируемое диспетчерское кресло перемещают между смеж",
+      "spatial_assertion": "Регулируемое диспетчерское кресло перемещают между смежными помещениями",
+      "feature_refs": [
+        "L1-CIRCULAR-CONTROL",
+        "L1-CIRCULAR-QUARTERS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-294",
+      "page_id": "B1-101",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=101",
+      "station_id": "MOAG",
+      "narrative_mode": "STAFF_ROOMS",
+      "locator_hint": "Архив описывает двухкомнатное укрытие старого нижнего с",
+      "spatial_assertion": "Архив описывает двухкомнатное укрытие старого нижнего служебного сектора и приборы",
+      "feature_refs": [
+        "L1-CIRCULAR-QUARTERS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-295",
+      "page_id": "B1-101",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=101",
+      "station_id": "MOAG",
+      "narrative_mode": "EARLY_CHILD_VISITS",
+      "locator_hint": "Историческая эксплуатация Второго как жилой зоны детей ",
+      "spatial_assertion": "Историческая эксплуатация Второго как жилой зоны детей с ограниченным доступом родителей",
+      "feature_refs": [
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-296",
+      "page_id": "B1-102",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=102",
+      "station_id": "MOAG",
+      "narrative_mode": "HISTORIC_PROGRAM",
+      "locator_hint": "Ранний Второй обслуживает детей, Третий используется вз",
+      "spatial_assertion": "Ранний Второй обслуживает детей, Третий используется взрослым персоналом",
+      "feature_refs": [
+        "L2-CABINS",
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
