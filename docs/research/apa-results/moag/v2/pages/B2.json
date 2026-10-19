@@ -980,12 +980,12 @@
       "id": "B2-089",
       "page_number": 89,
       "url": "https://loveread.ec/read_book.php?id=53370&p=89",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "REMOTE_EVIDENCE",
+      "recorded_spatial_hints": 1,
+      "notes": "Глава 11, земная сцена на острове Саб: разговор о рыбалке, уходе за роботами-«детьми» и быте. Таис сравнивает земную опасность с защитой на МОАГе: на Втором уровне можно укрыться, роботы станции обеспечивали защиту; на станции было тепло, еда и вода. Это дистанционное функциональное сравнение, без описания геометрии, размеров или внешнего вида станции.",
+      "verification_method": "Single full-page primary-source read in Opera; external Earth activity and remote MOAG protection/supply reference classified inline",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-090",
