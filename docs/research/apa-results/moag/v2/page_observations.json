@@ -10550,6 +10550,48 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-672",
+      "page_id": "B3-016",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=16",
+      "station_id": "MOAG",
+      "narrative_mode": "CHARACTER_KNOWN_STATION_LAYOUT",
+      "locator_hint": "Эмма вспоминает объёмную схему станции и расположение Верхнего уровня.",
+      "spatial_assertion": "Эмма хорошо знает схему МОАГа: на ней обозначены переходы, лестницы, лифты, каюты и детский парк; Верхний уровень содержит жилые отсеки и капитанскую рубку. Это достоверное свидетельство персонажа о знакомой станции, без метрических размеров.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-673",
+      "page_id": "B3-016",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=16",
+      "station_id": "OTHER_STATION_NOT_MOAG",
+      "narrative_mode": "OTHER_STATION_EXTERNAL_EXCLUSION",
+      "locator_hint": "С экранов виден тёмный дисковидный объект цели экспедиции, сегменты уровней и немногочисленные окна.",
+      "spatial_assertion": "Внешний диск с отдельными сегментами уровней, погашенными иллюминаторами и заклёпками принадлежит другой станции, к которой летит экспедиция. Не переносить эти признаки корпуса на МОАГ.",
+      "feature_refs": [],
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-674",
+      "page_id": "B3-016",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=16",
+      "station_id": "MOAG",
+      "narrative_mode": "CHARACTER_KNOWN_STATION_LAYOUT",
+      "locator_hint": "Люки для ремонта внешней связи на верхней обшивке.",
+      "spatial_assertion": "Эмма знает, что для ремонта внешних точек связи предусмотрены специальные люки, выходящие на внешнюю поверхность верхнего уровня МОАГа. Факт локализует доступ на внешнюю обшивку, но не задаёт точное число/координаты этих ремонтных люков.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
