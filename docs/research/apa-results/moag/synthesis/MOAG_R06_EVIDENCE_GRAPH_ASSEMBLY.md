@@ -34,7 +34,7 @@ python tools/moag_topology/assemble_evidence_graph_r06.py \
   --out moag-r06-demo-NONCANON.json
 ```
 
-Формат результата: `nodes`, `typed_evidence_edges`, `connected_evidence_components`, `bridge_events`, `physical_fragment_bridge_events`, `route_location_review`, `narrative_gaps`, `vertical_partial_order`, `new_level_candidates`, `area_volume` и `gates`. Поля `metric_xy_known`, `metric_z_known`, `geometry_approved` и `archicad_write` должны оставаться `false`.
+Дополнительно рассчитываются число компонентов только по физическим индексам **до и после** включения маршрутов, количество реально объединённых физических островов, не привязанные индексы и компоненты только из маршрутных наблюдений. Число технически добавленных шагов не подменяет число соединённых помещений.\n\nДля просмотра доказательной цепочки между двумя индексами:\n\n```bash\npython tools/moag_topology/assemble_evidence_graph_r06.py \\\n  --between M-L2-EMMA-SUITE-001 M-L2-EMMA-KITCHEN-001 \\\n  --out moag-r06-trace.json\n```\n\n`requested_evidence_trace.edge_chain` перечисляет использованные связи и страницы. Это **цепочка свидетельств**, не маршрут человека и не доказанная геометрия.\n\nФормат результата: `nodes`, `typed_evidence_edges`, `connected_evidence_components`, `bridge_events`, `physical_fragment_bridge_events`, `route_location_review`, `narrative_gaps`, `vertical_partial_order`, `new_level_candidates`, `area_volume` и `gates`. Поля `metric_xy_known`, `metric_z_known`, `geometry_approved` и `archicad_write` должны оставаться `false`.
 
 ## Критерии готовности следующей фазы
 
