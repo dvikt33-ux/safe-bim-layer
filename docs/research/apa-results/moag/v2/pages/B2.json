@@ -1574,12 +1574,12 @@
       "id": "B2-143",
       "page_number": 143,
       "url": "https://loveread.ec/read_book.php?id=53370&p=143",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "OTHER_SHIP_NOT_MOAG",
+      "recorded_spatial_hints": 0,
+      "notes": "Глава 12 на крейсере «Дракон»: разговор о политике и событиях Земли, детях на других станциях и планах миротворцев. Новых сведений о планировке или состоянии МОАГа нет; сведения о других станциях и Земле в модель МОАГа не переносятся.",
+      "verification_method": "Однократно прочитана через Opera для контекстной проверки главы; новых свидетельств о МОАГе нет.",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-144",
