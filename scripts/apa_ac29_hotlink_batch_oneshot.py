@@ -388,6 +388,24 @@ def execute(state):
         raise
 
 
+def verify_guarded_snapshot_chain(state, receipt):
+    """Verify snapshot bytes and receipt independently of the active PLN."""
+    if "guardedSnapshotSHA256" not in receipt:
+        # Backward compatibility with the already accepted PR #173 receipts.
+        return {"status": "LEGACY_SAVE_WITHOUT_PINNED_SNAPSHOT"}
+    state = Path(state).resolve()
+    proof = read(state / "guarded-snapshot.json")
+    need(proof.get("status") == "BYTE_EXACT_GUARDED_SAVE_SNAPSHOT_CAPTURED" and
+         proof.get("savedSHA256") == proof.get("snapshotSHA256") ==
+             receipt["savedSHA256"] == receipt["guardedSnapshotSHA256"] and
+         file_sha(state / "guarded-snapshot.json") ==
+             receipt["guardedSnapshotReceiptSHA256"] and
+         file_sha(Path(proof["snapshot"])) == receipt["savedSHA256"],
+         "HOTLINK_BATCH_GUARDED_SNAPSHOT_EVIDENCE_OR_BYTES_CHANGED")
+    return {"status": "GUARDED_SAVE_SNAPSHOT_SHA_RECHECK_PASS",
+            "savedSHA256": receipt["savedSHA256"]}
+
+
 def confirm_open_snapshot(state):
     """First prove the snapshot was actually opened, BEFORE GUI close."""
     state = Path(state).resolve()
@@ -398,6 +416,7 @@ def confirm_open_snapshot(state):
          file_sha(manifest["source"]) == receipt["sourceSHA256"] and
          file_sha(manifest["module"]) == receipt["moduleSHA256"],
          "HOTLINK_SNAPSHOT_FIRST_OPEN_IMMUTABLE_BYTES_REQUIRED")
+    verify_guarded_snapshot_chain(state, receipt)
     api, _ = prepare_api(manifest, state, for_write=False,
                          saved_sha=receipt["savedSHA256"])
     guids, fingerprint, _, _ = probe_native(manifest, api)
@@ -428,6 +447,7 @@ def check_closed(state):
          not (state / "closed.json").exists() and
          digest(manifest["scratch"]) == receipt["savedSHA256"],
          "HOTLINK_BATCH_PERSISTED_SCRATCH_REQUIRED_BEFORE_GUI_CLOSE")
+    verify_guarded_snapshot_chain(state, receipt)
     api, _ = prepare_api(manifest, state, for_write=False,
                          saved_sha=receipt["savedSHA256"])
     try:
@@ -467,6 +487,7 @@ def verify_reopen(state):
          digest(manifest["source"]) == manifest["sourceSHA256"] and
          digest(manifest["module"]) == manifest["moduleSHA256"],
          "HOTLINK_BATCH_ACTUAL_CLOSE_AND_SAVED_HASH_REQUIRED")
+    verify_guarded_snapshot_chain(state, receipt)
     api, _ = prepare_api(manifest, state, for_write=False,
                          saved_sha=receipt["savedSHA256"])
     HOTLINK.current_project(api, manifest["scratch"])
