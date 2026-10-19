@@ -353,34 +353,34 @@
       "id": "B1-032",
       "page_number": 32,
       "url": "https://loveread.ec/read_book.php?id=48197&p=32",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 5,
+      "notes": "Списки людей в памяти Дона-15 различают Первого, Второго и Третьего; коридоры у лифтов «Д» и «Е» наиболее удалены от грузоприёмной платформы. Высотные отметки не названы.",
+      "verification_method": "Complete book text on LoveRead site-page read, excluding site navigation",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B1-033",
       "page_number": 33,
       "url": "https://loveread.ec/read_book.php?id=48197&p=33",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 3,
+      "notes": "Старый нейтфон с фотографиями людей в коридоре и на ступенях крейсера в неустановленном ангаре. Фото нельзя принять за измеренный вид МОАГа; далее — исторические сведения об орбитальных станциях.",
+      "verification_method": "Complete book text on LoveRead site-page read, excluding site navigation",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B1-034",
       "page_number": 34,
       "url": "https://loveread.ec/read_book.php?id=48197&p=34",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 3,
+      "notes": "Учебная голограмма Земли с миниатюрами орбитальных станций и иллюминаторами; сведения о классе производственных станций D15 M9. Не доказаны конструктивные размеры МОАГа.",
+      "verification_method": "Complete book text on LoveRead site-page read, excluding site navigation",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B1-035",
