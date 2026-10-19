@@ -1,0 +1,37 @@
+{
+  "sourceNodes": 117,
+  "r03Objects": 37,
+  "spatialEdges": 166,
+  "r03Edges": 27,
+  "verticalConstraints": 6,
+  "observations": 690,
+  "movementEvents": 378,
+  "movementSequence": 326,
+  "unmappedSteps": 164,
+  "quarantinedEdges": [
+    "E17",
+    "E18",
+    "E43",
+    "E99"
+  ],
+  "ambiguousOldMappings": [
+    "L1-OLD-FREIGHT-HANGAR",
+    "L1-CIRCULAR-STAIRS",
+    "L1-CIRCULAR-CONTROL",
+    "L2-GALLERY",
+    "L3-SERVICE"
+  ],
+  "structuralErrors": {
+    "danglingEdges": 0,
+    "orphanRoutes": 0,
+    "orphanSequences": 0,
+    "missingSources": 0,
+    "duplicateRouteEvents": false
+  },
+  "unresolved": {
+    "sourceEntitiesAwaitingPhysicalID": 95,
+    "sourceEntitiesPromotedWithCaution": 5,
+    "observationsNotPhysicallyAssigned": 519
+  },
+  "validation": "STRUCTURE_PASS__SEMANTICS_NOT_FULLY_ACCEPTED"
+}
