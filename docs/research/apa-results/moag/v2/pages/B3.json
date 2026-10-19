@@ -254,12 +254,12 @@
       "id": "B3-023",
       "page_number": 23,
       "url": "https://loveread.ec/read_book.php?id=58610&p=23",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG_REMOTE_EVIDENCE",
+      "recorded_spatial_hints": 2,
+      "notes": "Смешанная страница: до заголовка главы 9 продолжается сцена на другой станции, после заголовка начинается земная глава, её текст пропущен. Эмма повторно опирается на известную ей геометрию МОАГа: круглая станция, круговые коридоры и капитанская рубка за ними; здесь это ожидание служит поиску на другом объекте и не является пройденным маршрутом. Наблюдаемые прямые/узкие проходы, круглые светильники и робототехника относятся к целевой другой станции.",
+      "verification_method": "Однажды прочитан фрагмент до заголовка главы 9 через Opera; после заголовка земной текст не анализировался.",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B3-024",
