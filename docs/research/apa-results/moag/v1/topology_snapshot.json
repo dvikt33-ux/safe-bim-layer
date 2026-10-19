@@ -1,6 +1,6 @@
 {
   "schema": "APA-MOAG-TOPOLOGY-SNAPSHOT/0.1",
-  "source_blob_sha": "4f1696868ca8078bb875270bf924b899283d74f4",
+  "source_blob_sha": "f4862c509735441a8117ae99b6eb1cfc3bbaf016",
   "derived_from": "docs/research/apa-results/moag/v1/evidence_graph.json",
   "status": "GRAPH_ONLY_NO_COORDINATES",
   "space_refs": [
@@ -552,6 +552,31 @@
     {
       "id": "L3-MAIN-LIFTS-HALL",
       "label": "Широкий коридор главных лифтов Третьего",
+      "level": 3
+    },
+    {
+      "id": "L3-ENERGY-APPROACH",
+      "label": "Узкий проход к энергомодулю за Детским блоком",
+      "level": 3
+    },
+    {
+      "id": "L3-ENERGY-GATE",
+      "label": "Защищенная сдвижная дверь энергокамеры",
+      "level": 3
+    },
+    {
+      "id": "CORE-ENERGY-SHAFT",
+      "label": "Круглый центральный инженерный объем трёх уровней",
+      "level": null
+    },
+    {
+      "id": "CORE-ENERGY-GALLERY",
+      "label": "Кольцевая огражденная галерея центрального энергомодуля",
+      "level": 3
+    },
+    {
+      "id": "CORE-ENERGY-ACCESS",
+      "label": "Узкий защищённый проход к энергомодулю за Детским блоком Третьего",
       "level": 3
     }
   ],
@@ -1997,6 +2022,186 @@
       "state": "TEXT_DIRECT",
       "source_ids": [
         "LR-B2-017"
+      ]
+    },
+    {
+      "id": "E145",
+      "from": "L3-INNER",
+      "to": "L3-ENERGY-APPROACH",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E146",
+      "from": "L3-CHILD-LAB",
+      "to": "L3-ENERGY-APPROACH",
+      "relation": "behind_not_proven_direct_door",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E147",
+      "from": "L3-ENERGY-APPROACH",
+      "to": "L3-ENERGY-GATE",
+      "relation": "ends_at_door",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E148",
+      "from": "L3-ENERGY-GATE",
+      "to": "CORE-ENERGY-GALLERY",
+      "relation": "opens_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E149",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "CORE-ENERGY-GALLERY",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E150",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "CORE-ENERGY",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E151",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "L1",
+      "relation": "spans_global_level",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E152",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "L2",
+      "relation": "spans_global_level",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E153",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "L3",
+      "relation": "spans_global_level",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E154",
+      "from": "CORE-ENERGY-GALLERY",
+      "to": "CORE-ENERGY",
+      "relation": "circumferential_overlook",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E155",
+      "from": "L3-CHILD-LAB",
+      "to": "CORE-ENERGY-ACCESS",
+      "relation": "behind_child_block_not_door",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E156",
+      "from": "CORE-ENERGY-ACCESS",
+      "to": "CORE-ENERGY-GALLERY",
+      "relation": "single_locked_door_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E157",
+      "from": "CORE-ENERGY",
+      "to": "CORE-ENERGY-SHAFT",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E158",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "CORE-ENERGY-GALLERY",
+      "relation": "gallery_at_upper_access",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E159",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "L1",
+      "relation": "vertical_extent_in_level_no_access_proven",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E160",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "L2",
+      "relation": "vertical_extent_in_level_no_access_proven",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E161",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "L3",
+      "relation": "vertical_extent_in_level_no_access_proven",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E162",
+      "from": "CORE-ENERGY-GALLERY",
+      "to": "CORE-ENERGY",
+      "relation": "overlooks_transparent_energy_column",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
       ]
     }
   ],
