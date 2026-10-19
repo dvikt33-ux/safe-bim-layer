@@ -13,10 +13,10 @@ class SceneScreeningTests(unittest.TestCase):
     def test_screening_is_source_linked_and_keeps_full_audit_separate(self):
         out = module.check()
         self.assertEqual(out["schema"], "APA-MOAG-SCENE-SCREENING-VALIDATION/1")
-        self.assertEqual(out["screened_pages_in_package"], 56)
+        self.assertEqual(out["screened_pages_in_package"], 57)
         self.assertEqual(out["chapters"], 18)
         self.assertEqual(out["scenes"], 27)
-        self.assertEqual(out["character_location_events"], 49)
+        self.assertEqual(out["character_location_events"], 50)
         self.assertTrue(out["full_page_audits_are_separate"])
         self.assertFalse(out["native_write_authorized"])
 
