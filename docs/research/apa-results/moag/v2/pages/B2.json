@@ -1563,12 +1563,12 @@
       "id": "B2-142",
       "page_number": 142,
       "url": "https://loveread.ec/read_book.php?id=53370&p=142",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "OTHER_SHIP_NOT_MOAG",
+      "recorded_spatial_hints": 0,
+      "notes": "Глава 12 на крейсере «Дракон». Страница описывает коридоры, столовую и жилые/бытовые детали чужого корабля и его обитателей; новых сведений о МОАГе нет. Всё исключено из геометрии станции.",
+      "verification_method": "Однократно прочитана через Opera как контекстная проверка главы; новых свидетельств о МОАГе не найдено.",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-143",
