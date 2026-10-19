@@ -280,6 +280,9 @@ def prepare_auto_optimized_native_task(router, intent, planner_python=None):
     intent uses the same DynamicCommands and SceneWriter native-task graph.
     No live model reads, native writes or runtime registration inference.
     """
+    if isinstance(intent, dict) and intent.get('schemaVersion') == 'apa-native-mass-request/1':
+        from apa_ac29_mass_request import prepare_mass_request
+        return prepare_mass_request(router, intent)
     if isinstance(intent, dict) and intent.get('schemaVersion') == 'apa-native-group-auto/1':
         if (set(intent) != {'schemaVersion','request','existing','targets','assemblyGroups'}
                 or not isinstance(intent['existing'], list)
@@ -312,6 +315,9 @@ def prepare_current_runtime_group_native_task(router, writer, intent):
     The result is still unpermitted and must use run_auto_optimized_native_task
     with original per-step SceneWriter scopes and independent readback.
     """
+    if isinstance(intent, dict) and intent.get('schemaVersion') == 'apa-native-mass-request/1':
+        from apa_ac29_mass_request import normalize_mass_request
+        intent = normalize_mass_request(intent)
     if (not isinstance(intent, dict)
             or intent.get('schemaVersion') != 'apa-native-group-auto/1'):
         raise ValueError('APA_GROUP_RUNTIME_REQUIRES_VERIFIED_GROUP_TASK')

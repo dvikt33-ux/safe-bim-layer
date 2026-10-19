@@ -1,0 +1,610 @@
+[
+  {
+    "at": "2026-10-19T17:55:50.697509+00:00",
+    "command": "AddOn.TapirCommand.CloneNativeGroupV1",
+    "elapsedSeconds": 0.3005510999937542,
+    "parameters": {
+      "groupId": {
+        "guid": "40d5303f-18ca-4117-9de0-e06bfd8e64b9"
+      },
+      "sourceRef": "https://github.com/dvikt33-ux/safe-bim-layer/pull/172",
+      "translations": [
+        {
+          "dx": 25,
+          "dy": 0,
+          "dz": 0
+        },
+        {
+          "dx": 50,
+          "dy": 0,
+          "dz": 0
+        },
+        {
+          "dx": 75,
+          "dy": 0,
+          "dz": 0
+        },
+        {
+          "dx": 100,
+          "dy": 0,
+          "dz": 0
+        },
+        {
+          "dx": 125,
+          "dy": 0,
+          "dz": 0
+        },
+        {
+          "dx": 150,
+          "dy": 0,
+          "dz": 0
+        },
+        {
+          "dx": 175,
+          "dy": 0,
+          "dz": 0
+        },
+        {
+          "dx": 200,
+          "dy": 0,
+          "dz": 0
+        },
+        {
+          "dx": 25,
+          "dy": 8,
+          "dz": 0
+        },
+        {
+          "dx": 50,
+          "dy": 8,
+          "dz": 0
+        },
+        {
+          "dx": 75,
+          "dy": 8,
+          "dz": 0
+        },
+        {
+          "dx": 100,
+          "dy": 8,
+          "dz": 0
+        },
+        {
+          "dx": 125,
+          "dy": 8,
+          "dz": 0
+        },
+        {
+          "dx": 150,
+          "dy": 8,
+          "dz": 0
+        },
+        {
+          "dx": 175,
+          "dy": 8,
+          "dz": 0
+        },
+        {
+          "dx": 200,
+          "dy": 8,
+          "dz": 0
+        },
+        {
+          "dx": 25,
+          "dy": 16,
+          "dz": 0
+        },
+        {
+          "dx": 50,
+          "dy": 16,
+          "dz": 0
+        },
+        {
+          "dx": 75,
+          "dy": 16,
+          "dz": 0
+        },
+        {
+          "dx": 100,
+          "dy": 16,
+          "dz": 0
+        },
+        {
+          "dx": 125,
+          "dy": 16,
+          "dz": 0
+        },
+        {
+          "dx": 150,
+          "dy": 16,
+          "dz": 0
+        },
+        {
+          "dx": 175,
+          "dy": 16,
+          "dz": 0
+        },
+        {
+          "dx": 200,
+          "dy": 16,
+          "dz": 0
+        },
+        {
+          "dx": 25,
+          "dy": 24,
+          "dz": 0
+        },
+        {
+          "dx": 50,
+          "dy": 24,
+          "dz": 0
+        },
+        {
+          "dx": 75,
+          "dy": 24,
+          "dz": 0
+        },
+        {
+          "dx": 100,
+          "dy": 24,
+          "dz": 0
+        },
+        {
+          "dx": 125,
+          "dy": 24,
+          "dz": 0
+        },
+        {
+          "dx": 150,
+          "dy": 24,
+          "dz": 0
+        },
+        {
+          "dx": 175,
+          "dy": 24,
+          "dz": 0
+        },
+        {
+          "dx": 200,
+          "dy": 24,
+          "dz": 0
+        }
+      ]
+    },
+    "response": {
+      "createdElements": [
+        {
+          "elementId": {
+            "guid": "F3DEA014-586C-4FB3-AE57-5C0E95DA7EC7"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "FD8177D4-2BC1-437B-8F80-0ED80B243939"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "5D9AD0FF-6E6C-4E52-8DAE-70DFBD998D03"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "60458979-FB98-4DD3-BE6E-493962672F4A"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "DF5CF560-7D9A-48A0-BEFD-798FCDE258F6"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "2B48CB97-0008-45C2-9AE2-81CB75F65E09"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "734E8AB3-FA6B-426F-9608-952DF4E23AA8"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "206F4A26-B33C-47C5-91BA-B32446123626"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "250258CE-8EBB-41BF-9D8C-785EFCA91996"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "1F193568-6077-4245-9394-C50F21026F10"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "A92EF25F-7322-42D7-A083-84F56460CF24"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "6EA2FA53-1C5A-482E-B18A-4C286BE98375"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "17036D31-D280-4533-84ED-5DC8392B5A9A"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "0BE28F8C-8DAB-4FD4-9D15-479618018126"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "B751980D-4FDD-419E-87EF-CD069A1D94A0"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "5F0B4BCD-8D57-4F50-A7A5-E956176C80EB"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "4EA73A0B-0B40-4C67-ADC9-B2AC64137095"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "944F9B6E-A0DA-4F2C-9C4B-970C58840D82"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "27C5BD9A-EFFD-44B2-8BF4-CADEA16F071A"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "A7AA914F-BA2B-42D1-A626-F104DDF789C2"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "3428E150-3FCF-4536-8935-34E8568E9724"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "B04A8215-D11F-4BFA-B071-CD7E2D7F5725"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "E1BD00F7-AA60-4D7C-9182-18C3D7A711A8"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "20E1125C-E25B-4D38-95E6-C74D865C6DE2"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "B91E0589-0AE6-4FE2-91FC-079DC74B6336"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "2449EC62-1E37-4B8C-9BD6-81FE0B6B8EDD"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "4D6D5FDD-D729-4D15-9888-869B1C72C4F2"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "9C9FECD1-D189-4671-BA36-D02F5F93EA9F"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "1B009E86-DFCF-4E82-AD65-C9A42F5A1595"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "E2CF2F19-7C1E-4C23-AD31-35C64B348138"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "516C4EC5-0C8A-4915-A8A1-E9AB9505E90F"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "DF6D4CFD-F694-42C9-8EA5-28DA5DD03CF7"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "EAD6FC80-6578-4577-8044-452DAAC4ED3C"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "55D14AE3-A373-4B2C-A398-036E0D887D4A"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "85F7C2B5-40DB-4851-8106-D3F96FA56868"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "494CA243-3C6B-47D0-AA3A-C7891E4C9CFF"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "91B07768-7321-43A8-B89B-55FE4F4559C7"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "E065BA8A-4A7F-48AD-A5D2-04E085D9C7FE"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "0ECA939F-C9B4-477C-A8FA-F43C1F5BD7E5"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "8DD7F6BD-3426-456F-B920-6BFF474F65CD"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "D5911D4D-DEFD-48B9-8303-83F1F323DEDF"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "8E4A9A72-460E-4B50-8DC9-FFD5E7BE6BA3"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "57FF182B-98F4-4229-987F-07A385DBA0A3"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "F2BA1614-00C5-4DDE-8DCC-E20B8FA82BC9"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "FC444B3C-B689-403D-81C7-22121D8C2B7A"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "30EE68CE-A7BD-4ECC-8E23-75659680CD6E"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "FEBC8518-EB0D-477B-849A-A0347036C8DD"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "AE8232EA-7688-4163-B1E0-8AEE5FA99FAF"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "7D4BC3DD-84EE-4DBC-860F-6AFD1A5ED791"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "D0D4D87F-DD6C-4AEF-BA7D-090B1D242990"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "022D5B03-1B3E-40F6-BB85-740B534DB8C6"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "30BC1DC3-7C31-4DF5-8348-ADA7219530F2"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "F7A5B287-2C73-49AA-BAF0-94CFC9E1A60D"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "BDB94B69-7161-41CC-BF29-63B454250ABD"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "CF501ED1-8A3F-408E-B8AC-3F8B06B7D467"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "A28C65EC-2AE0-4466-BCA6-82E21CC6F553"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "0ACEDE32-0D23-43DA-82D6-548A5CD26784"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "FDF81C43-B2BB-4190-9762-AD8123BD1941"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "2DCA6D63-CE9F-421C-A436-91983D770DD4"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "0EF8C3D9-66BE-4568-A9F2-1A8C5E244230"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "5FBBFA8D-445F-440F-8B72-C15E2BCAC66B"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "098461C7-A538-4325-8DFD-2254AAC2D160"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "3729F417-3977-41BE-924F-E6126DD8FE0E"
+          }
+        },
+        {
+          "elementId": {
+            "guid": "EE02CFEA-4DA9-4A11-81AD-8F3AB47DD0B7"
+          }
+        }
+      ],
+      "nativeModelWrites": 64,
+      "newGroupIds": [
+        {
+          "guid": "BD0ED90B-D63A-4EBC-9E8D-CB101CECA8CE"
+        },
+        {
+          "guid": "73612576-5644-46CB-97FE-9F1D97C81C58"
+        },
+        {
+          "guid": "EB650845-BC1F-4F3B-8BB9-456EFDAC6B6A"
+        },
+        {
+          "guid": "97EBF808-00EB-4346-B805-9AA98B11A600"
+        },
+        {
+          "guid": "390C91BB-D193-4443-A65F-CC6F64097AC2"
+        },
+        {
+          "guid": "E07FC186-62C0-47AD-BA7C-FA2E757E6964"
+        },
+        {
+          "guid": "737A9C93-2E7B-4ADB-8EAA-17D81EAF0231"
+        },
+        {
+          "guid": "2169E886-6371-4E84-A52C-D5638DA75466"
+        },
+        {
+          "guid": "3403D218-DE01-4F48-90E9-A911BE3F2D49"
+        },
+        {
+          "guid": "FC38374B-5622-48BC-ABC4-538B62D594DE"
+        },
+        {
+          "guid": "B47C7482-7BA6-4B9A-94B9-27B3A53E26A9"
+        },
+        {
+          "guid": "2FB570DB-165B-4269-8375-CE53CB45DF44"
+        },
+        {
+          "guid": "A3E4687D-FB8E-4ED5-8763-D28DF22D0167"
+        },
+        {
+          "guid": "5485EB18-C1CF-481D-B0B9-ACF9EE479243"
+        },
+        {
+          "guid": "6C58793A-50B3-4139-B316-ED797D7A957B"
+        },
+        {
+          "guid": "5A3C4905-F152-46BC-8591-3811D1EEF1B0"
+        },
+        {
+          "guid": "C23365B4-7BA8-422D-BCB9-19C5B58CF916"
+        },
+        {
+          "guid": "86BDAE11-02A6-4989-95DC-D92851C84552"
+        },
+        {
+          "guid": "1E07443C-C805-47A0-8984-A2D1A8CCF31D"
+        },
+        {
+          "guid": "EC04A483-4E21-4436-A4F9-6CA2948501F7"
+        },
+        {
+          "guid": "D9275BEC-BDD9-4C83-81CE-FCE84BC28BA8"
+        },
+        {
+          "guid": "F69675EA-86F5-45A6-A8C5-5349C482C9D9"
+        },
+        {
+          "guid": "492FEE2A-D400-477B-A077-47A13BC69640"
+        },
+        {
+          "guid": "D631BA7D-E2C7-496C-964C-33FFB851CB91"
+        },
+        {
+          "guid": "E3581719-7372-4F6A-AB52-4DF51214EDE7"
+        },
+        {
+          "guid": "241BFC9F-D49C-42E6-B335-0FBEF20B3281"
+        },
+        {
+          "guid": "25BF0FF0-7024-4634-A58F-64E53194A52C"
+        },
+        {
+          "guid": "EA9CAD96-EAD3-4139-BD03-08F09267D6D4"
+        },
+        {
+          "guid": "FD450098-9B0B-41FF-A526-59F35C4B0D8B"
+        },
+        {
+          "guid": "DFC94690-64A7-4EC9-AE14-88F7FD106ACE"
+        },
+        {
+          "guid": "D4AF75DB-828D-43EB-9D30-7CB8EBB74923"
+        },
+        {
+          "guid": "9FD2C013-8FCF-4853-B824-7B5DD3BBB547"
+        }
+      ],
+      "sourceGroupId": {
+        "guid": "40D5303F-18CA-4117-9DE0-E06BFD8E64B9"
+      }
+    }
+  },
+  {
+    "at": "2026-10-19T18:00:06.251288+00:00",
+    "command": "SaveProject",
+    "elapsedSeconds": 2.5871763000031933,
+    "parameters": {},
+    "response": {
+      "success": true
+    }
+  }
+]
