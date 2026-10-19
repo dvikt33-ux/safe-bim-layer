@@ -37,7 +37,8 @@
       "B2-081",
       "B2-082",
       "B2-083",
-      "B2-084"
+      "B2-084",
+      "B2-085"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -64,13 +65,14 @@
       "B2-057",
       "B2-064",
       "B2-071",
-      "B2-079"
+      "B2-079",
+      "B2-085"
     ],
     "uncertain_page_ids": [],
     "metrics": {
-      "as_of_page_id": "B2-084",
-      "context_reviewed_page_count": 34,
-      "full_evidence_page_count": 200,
+      "as_of_page_id": "B2-085",
+      "context_reviewed_page_count": 35,
+      "full_evidence_page_count": 201,
       "external_excluded_page_count": 17,
       "unresolved_classification_page_count": 0,
       "justified_reopened_page_count": 3,
@@ -659,7 +661,7 @@
       "title": "Эмма. Интуиция",
       "page_span": {
         "start": 81,
-        "end": 84
+        "end": 85
       },
       "chapter_classification": "STATION",
       "screening_status": "ONE_PASS_IN_PROGRESS",
@@ -667,7 +669,8 @@
         "B2-081",
         "B2-082",
         "B2-083",
-        "B2-084"
+        "B2-084",
+        "B2-085"
       ],
       "scenes": [
         {
@@ -688,6 +691,10 @@
             {
               "page_id": "B2-084",
               "fragment": "глава 10 продолжается: разговор о безопасных маршрутах, маленькой библиотеке без окна на первом этаже и уходе за младенцами"
+            },
+            {
+              "page_id": "B2-085",
+              "fragment": "до заголовка главы 11: в каюте сенсорное ручное управление светом, ночники у детских кроваток; голосовые команды после отказа роботов не работают"
             }
           ],
           "classification": "STATION",
@@ -701,9 +708,46 @@
           "station_relevance": "доступность туннелей, устройство внутреннего круга, размещение площадей/детских площадок и разделение пищевого снабжения; эпизодическое блокирование магистралей пауками сохраняется как состояние сцены"
         }
       ],
-      "screening_caveat": "Глава 10 открыта на p81 и продолжается на p82–84. page_span.end — последняя обработанная страница, конец главы пока не найден.",
-      "chapter_end_confirmed": false,
+      "screening_caveat": "Глава 10 заканчивается на p85 перед заголовком главы 11; p85 разделена между главами.",
+      "chapter_end_confirmed": true,
       "station_relevance": "сообщённый резервуар и гипотеза кладовой, компоновка каюты, галерея/лестничный участок, огнезащитная скамья, детский быт и временное ограничение движения: только галерея, спуск к Главной площади лишь старшим"
+    },
+    {
+      "id": "B2-PART2-CH11",
+      "book_id": "B2",
+      "part_number": 2,
+      "chapter_number": 11,
+      "title": "Таис. Все, что рассказывал Вар",
+      "page_span": {
+        "start": 85,
+        "end": 85
+      },
+      "chapter_end_confirmed": false,
+      "chapter_classification": "REMOTE_EVIDENCE",
+      "screening_status": "ONE_PASS_IN_PROGRESS",
+      "screened_pages": [
+        "B2-085"
+      ],
+      "scenes": [
+        {
+          "id": "B2P2C11-S1",
+          "page_fragments": [
+            {
+              "page_id": "B2-085",
+              "fragment": "после заголовка главы 11: земная сцена у Найды; Вар пересказывает легенду и общую историю станций"
+            }
+          ],
+          "classification": "REMOTE_EVIDENCE",
+          "physical_location": "Земля, остров Саб, дом Найды",
+          "characters": [
+            "Таис",
+            "Фёдор",
+            "Вар"
+          ],
+          "station_relevance": "легенда и общий исторический рассказ упоминают станции, их назначение и технологии; конкретное устройство МОАГа, его план и геометрия не описаны"
+        }
+      ],
+      "screening_caveat": "Глава 11 началась на p85; end=85 фиксирует пока единственную обработанную страницу, а не конец главы."
     }
   ],
   "character_location_events": [
@@ -1118,7 +1162,8 @@
         "B2-077",
         "B2-078",
         "B2-079",
-        "B2-080"
+        "B2-080",
+        "B2-085"
       ],
       "confidence": "DIRECT_TEXT"
     },
@@ -1132,7 +1177,8 @@
         "B2-077",
         "B2-078",
         "B2-079",
-        "B2-080"
+        "B2-080",
+        "B2-085"
       ],
       "confidence": "DIRECT_TEXT"
     },

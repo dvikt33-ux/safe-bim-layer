@@ -8506,6 +8506,34 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-525",
+      "page_id": "B2-085",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=85",
+      "station_id": "MOAG",
+      "narrative_mode": "CABIN_LIGHTING_AND_VOICE_CONTROL_FAILURE",
+      "locator_hint": "сенсорная панель выключателя, светильники каюты и детские ночники",
+      "spatial_assertion": "После отказа роботов голосовые команды управления электричеством в каютах не работают; Коля выключает свет прикосновением к сенсорной панели. В темноте продолжают светиться небольшие ночники у детских кроваток, а колыбельки покачиваются и тихо играют мелодию. Это рабочее/аварийное состояние систем, точное размещение панели и проводки не указано.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-526",
+      "page_id": "B2-085",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=85",
+      "station_id": "UNRESOLVED_OBJECT",
+      "narrative_mode": "STATION_NETWORK_HISTORICAL_ACCOUNT",
+      "locator_hint": "рассказ Вара в земном доме о легенде и запуске станций",
+      "spatial_assertion": "Вар пересказывает легенду, объявленную почти правдивой: станции запускали в космос, чтобы защитить производство от земных нападений; также упоминаются технологии репродукции. Это общая и опосредованная история, не подтверждение особенностей МОАГа и не пространственная геометрия.",
+      "feature_refs": [],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
