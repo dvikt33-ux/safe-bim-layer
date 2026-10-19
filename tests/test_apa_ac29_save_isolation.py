@@ -1,6 +1,7 @@
 """Fail-closed, offline file race tests. Never call an actual Archicad process."""
 from __future__ import annotations
 
+from contextlib import closing
 import hashlib
 import json
 from pathlib import Path
@@ -74,7 +75,7 @@ class SaveIsolationTests(unittest.TestCase):
             ("attempted.json", {"status": "BATCH_NATIVE_DISPATCH_RESERVED"}),
         ):
             S.write_new_json(self.parent / name, value)
-        with sqlite3.connect(self.parent / "batch-scenewriter.sqlite") as db:
+        with closing(sqlite3.connect(self.parent / "batch-scenewriter.sqlite")) as db:
             db.execute("CREATE TABLE scenes(scene_id TEXT PRIMARY KEY, state TEXT)")
             db.execute("INSERT INTO scenes VALUES('BatchCreate','PASS')")
             db.commit()
