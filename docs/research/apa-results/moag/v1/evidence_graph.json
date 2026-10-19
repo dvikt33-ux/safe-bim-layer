@@ -119,6 +119,20 @@
       "url": "https://loveread.ec/read_book.php?id=53370&p=17",
       "medium": "literary_text",
       "quality": "TEXT_READ"
+    },
+    {
+      "id": "B1-17",
+      "section": "Книга I, глава о закрытом секторе Нижнего уровня: Эмма и Коля, интернет-страница 17",
+      "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=17",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "B1-18",
+      "section": "Книга I, эпизод Фёдора и карт с планшета Андрея Шереметьева, интернет-страница 18",
+      "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=18",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
     }
   ],
   "nodes": [
@@ -1047,6 +1061,178 @@
       },
       "geometry_gate": "NOT_AUTHORIZED",
       "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-LOWER-SHAFT",
+      "label": "Вертикальная шахта с промежуточным боковым ответвлением",
+      "level": null,
+      "type": "vertical_route",
+      "source_ids": [
+        "B1-04"
+      ],
+      "text_basis": "Таис и Федор проходят через железную трубу; боковой выход ведет на их Нижний уровень; ниже есть другие помещения.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "SUB-LOWER-WELL",
+      "label": "Неизвестное помещение ниже обитаемой части Нижнего уровня",
+      "level": null,
+      "type": "space",
+      "source_ids": [
+        "B1-04"
+      ],
+      "text_basis": "Квадратный колодец ниже пропущенного бокового выхода; не доказан самостоятельный сплошной этаж.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "SUB-SEALED-DOOR",
+      "label": "Двойная дверь в нижнем колодце",
+      "level": null,
+      "type": "portal",
+      "source_ids": [
+        "B1-04"
+      ],
+      "text_basis": "Большая двойная дверь с кодовым разъемом и символами Млечного Пути/Моага; дверь заперта.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "SUB-WELDED-WALL",
+      "label": "Запаянный проход напротив двери в нижнем колодце",
+      "level": null,
+      "type": "portal",
+      "source_ids": [
+        "B1-04"
+      ],
+      "text_basis": "Потенциально бывший проход, по словам Фёдора виден сварной шов; маршрут не подтверждён.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-OLD-FREIGHT-HANGAR",
+      "label": "Старый закрытый грузовой ангар Нижнего уровня",
+      "level": 1,
+      "type": "space_group",
+      "source_ids": [
+        "B1-19"
+      ],
+      "text_basis": "Существовал до новых грузовых ангаров Третьего уровня. Точное соответствие ангару фриков и ангару катеров не установлено.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-OLD-PROF-CABINS",
+      "label": "Заброшенные каюты вблизи старого ангарного комплекса",
+      "level": 1,
+      "type": "space_group",
+      "source_ids": [
+        "B1-17",
+        "B1-19"
+      ],
+      "text_basis": "Отдельные каюты бывшей команды; один человек укрылся в старых каютах.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-CIRCULAR-HALL",
+      "label": "Высокий круглый зал в закрытом секторе",
+      "level": 1,
+      "type": "space",
+      "source_ids": [
+        "B1-17"
+      ],
+      "text_basis": "Из коридора спускаются на несколько ступеней; рифленый железный пол, широкие тележки; помещение напоминает шлюзовый ангар.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-HALL-STEPS",
+      "label": "Местный ступенчатый переход к круглому залу",
+      "level": 1,
+      "type": "vertical_route",
+      "source_ids": [
+        "B1-17"
+      ],
+      "text_basis": "Короткий спуск на пару ступеней, не полноценный этаж.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-SLEEPING-HANGAR",
+      "label": "Большой ангар со спящими изменившимися взрослыми",
+      "level": 1,
+      "type": "space",
+      "source_ids": [
+        "B1-17"
+      ],
+      "text_basis": "Широкий коридор ведет к большим воротам, за ними зал со спящими фриками; не следует отождествлять с круглым залом.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
     }
   ],
   "edges": [
@@ -1700,6 +1886,138 @@
       "claim": "Отсек со скафандрами за поворотом рядом с грузовым залом",
       "state": "TOPOLOGY_INFERRED",
       "metric": null
+    },
+    {
+      "id": "E55",
+      "from": "L1-LOWER-SHAFT",
+      "to": "L1-BASES",
+      "type": "mid_branch_to",
+      "source_ids": [
+        "B1-04"
+      ],
+      "claim": "Боковой выход в середине спуска ведет на обитаемый Нижний уровень; привязка непосредственно к зоне баз предварительна.",
+      "state": "TOPOLOGY_INFERRED",
+      "metric": null
+    },
+    {
+      "id": "E56",
+      "from": "L1-LOWER-SHAFT",
+      "to": "SUB-LOWER-WELL",
+      "type": "lower_terminus_to",
+      "source_ids": [
+        "B1-04"
+      ],
+      "claim": "После пропущенного ответвления попадают на отметку ниже привычного уровня.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E57",
+      "from": "SUB-LOWER-WELL",
+      "to": "L1",
+      "type": "below",
+      "source_ids": [
+        "B1-04"
+      ],
+      "claim": "Помещения ниже известного Нижнего уровня; не автоматически уровень L0.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E58",
+      "from": "SUB-LOWER-WELL",
+      "to": "SUB-SEALED-DOOR",
+      "type": "contains",
+      "source_ids": [
+        "B1-04"
+      ],
+      "claim": "Двойная дверь в колодце.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E59",
+      "from": "SUB-LOWER-WELL",
+      "to": "SUB-WELDED-WALL",
+      "type": "contains",
+      "source_ids": [
+        "B1-04"
+      ],
+      "claim": "Напротив двери запаянный бывший проход.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E60",
+      "from": "L1-OLD-PROF-CABINS",
+      "to": "L1-OLD-FREIGHT-HANGAR",
+      "type": "near",
+      "source_ids": [
+        "B1-19"
+      ],
+      "claim": "Каюты профессора в закрытой зоне старого ангара, точное примыкание не установлено.",
+      "state": "TOPOLOGY_INFERRED",
+      "metric": null
+    },
+    {
+      "id": "E61",
+      "from": "L1-OLD-FREIGHT-HANGAR",
+      "to": "L3-DOCK",
+      "type": "superseded_by",
+      "source_ids": [
+        "B1-19"
+      ],
+      "claim": "Новые грузовые ангары Верхнего уровня заменили прежний, ныне закрытый грузовой ангар. Историческое отношение, не пространственное.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E62",
+      "from": "L1-SEALED",
+      "to": "L1-CIRCULAR-HALL",
+      "type": "includes",
+      "source_ids": [
+        "B1-17"
+      ],
+      "claim": "Высокий круглый зал в закрытой части Нижнего.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E63",
+      "from": "L1-SEALED",
+      "to": "L1-SLEEPING-HANGAR",
+      "type": "includes",
+      "source_ids": [
+        "B1-17"
+      ],
+      "claim": "Ангар со спящими изменившимися взрослыми.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E64",
+      "from": "L1-HALL-STEPS",
+      "to": "L1-CIRCULAR-HALL",
+      "type": "steps_down_to",
+      "source_ids": [
+        "B1-17"
+      ],
+      "claim": "Коридорный переход с коротким спуском вниз, без доказательства этажа.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E65",
+      "from": "L1-SEALED",
+      "to": "L1-OLD-PROF-CABINS",
+      "type": "includes",
+      "source_ids": [
+        "B1-17"
+      ],
+      "claim": "Заброшенные каюты исследованы в закрытом секторе.",
+      "state": "TEXT_DIRECT",
+      "metric": null
     }
   ],
   "questions": [
@@ -1742,6 +2060,11 @@
       "id": "Q08",
       "priority": "HIGH",
       "text": "Подтвердить взаимную ориентацию капитанской рубки, детского блока, отдыха, шлюзов и производства."
+    },
+    {
+      "id": "Q09",
+      "priority": "BLOCKER",
+      "text": "Проверить гипотезу двух палуб внутри Первого уровня и дополнительного двухъярусного нижнего этажа. Книжный факт: под известным Нижним есть помещения; НЕ доказано наличие четырёх сплошных перекрытий. Сравнить размеры и z-связи баз, старых грузовых ангаров, катеров, высоких залов, энергетического ядра и операторских."
     }
   ]
 }
