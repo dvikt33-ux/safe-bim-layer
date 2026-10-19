@@ -10592,6 +10592,20 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-675",
+      "page_id": "B3-017",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=17",
+      "station_id": "OTHER_STATION_NOT_MOAG",
+      "narrative_mode": "OTHER_STATION_ENTRY_EXCLUSION",
+      "locator_hint": "Группа выходит на наружную обшивку другой станции и проходит через круглый люк, малый шлюз, дверь и кабельную панель.",
+      "spatial_assertion": "Внешние скобы, круглый кодовый люк, подача тёплого воздуха/света, узкий коридор и скрытый кабельный проход описывают другую станцию, не МОАГ. Универсальный код, работавший на МОАГе, открывает и этот люк; не приписывать МОАГу маршрут на верхний центр данной станции.",
+      "feature_refs": [],
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
