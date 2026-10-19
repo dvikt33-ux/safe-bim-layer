@@ -33,7 +33,8 @@
       "B2-077",
       "B2-078",
       "B2-079",
-      "B2-080"
+      "B2-080",
+      "B2-081"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -62,10 +63,27 @@
       "B2-071",
       "B2-079"
     ],
-    "uncertain_page_ids": []
+    "uncertain_page_ids": [],
+    "metrics": {
+      "as_of_page_id": "B2-081",
+      "context_reviewed_page_count": 31,
+      "full_evidence_page_count": 197,
+      "external_excluded_page_count": 17,
+      "unresolved_classification_page_count": 0,
+      "justified_reopened_page_count": 2,
+      "justified_reopen_event_count": 3,
+      "justified_reopened_page_ids": [
+        "B2-077",
+        "B2-079"
+      ],
+      "reopen_reasons": {
+        "B2-077": "точно локализовать границу главы 9 на странице, разделённой между главами 8 и 9; страница повторно открывалась дважды",
+        "B2-079": "получить полный текст после усечения вывода; одно повторное открытие"
+      }
+    }
   },
-  "method": "Use the table of contents to locate chapter boundaries, then scan the chapter across all web pages to its next heading. Track scene changes and character locations before deciding whether each scene needs a full spatial audit. External narrative can be screened out only after checking for station-related remote evidence.",
-  "sequence_note": "B2-051/052 already had REVIEWED_FULL_PAGE entries before this chapter filter was formalized; their scene classes are a retrospective context cross-check. B2-053 was first read before its chapter boundary was checked in the table of contents; its split was then verified. B2-054/055 were read across the full chapter after its heading and end page were identified. This package does not claim the filter was applied before prior reads.",
+  "method": "ONE_PASS: classify each page fragment and extract all relevant evidence during the same single reading. Use prior-page context and identify chapter/scene boundaries inline when headings appear. Do not pre-screen an entire chapter before rereading; reopens require a recorded concrete reason.",
+  "sequence_note": "Supersedes the former chapter-first two-pass filter. B2-081 was read once; its p77–80 predecessor entries remain historical and are not reread. Two previously reopened pages are documented with reasons: B2-077 (chapter-9 boundary localization; two repeat opens) and B2-079 (recover complete text after output truncation; one repeat open).",
   "chapters": [
     {
       "id": "B2-PART2-CH1",
@@ -562,7 +580,7 @@
       "title": "Таис. Мама найда",
       "page_span": {
         "start": 77,
-        "end": 80
+        "end": 81
       },
       "chapter_classification": "MIXED",
       "screening_status": "CONTEXT_SCREENED",
@@ -570,7 +588,8 @@
         "B2-077",
         "B2-078",
         "B2-079",
-        "B2-080"
+        "B2-080",
+        "B2-081"
       ],
       "scenes": [
         {
@@ -591,6 +610,10 @@
             {
               "page_id": "B2-080",
               "fragment": "рассказ Найды и Вара о земных биороботах и поселениях"
+            },
+            {
+              "page_id": "B2-081",
+              "fragment": "до заголовка главы 10: конец сцены в доме Найды; Таис воображает вечер на станции, без новых подтверждённых пространственных фактов"
             }
           ],
           "classification": "EXTERNAL",
@@ -620,7 +643,44 @@
           "station_relevance": "подтверждает горячую воду, душ и ароматную пену на станции; план и расположение санитарного помещения не установлены"
         }
       ],
-      "screening_caveat": "p77 делится: сначала завершается станционная глава 8, затем начинается глава 9 на Земле; глава 10 начинается на p81."
+      "screening_caveat": "p77 делится: завершается станционная глава 8 и начинается земная глава 9; p81 делится: завершается земная глава 9 и начинается станционная глава 10."
+    },
+    {
+      "id": "B2-PART2-CH10",
+      "book_id": "B2",
+      "part_number": 2,
+      "chapter_number": 10,
+      "title": "Эмма. Интуиция",
+      "page_span": {
+        "start": 81,
+        "end": null
+      },
+      "chapter_classification": "STATION",
+      "screening_status": "ONE_PASS_IN_PROGRESS",
+      "screened_pages": [
+        "B2-081"
+      ],
+      "scenes": [
+        {
+          "id": "B2P2C10-S1",
+          "page_fragments": [
+            {
+              "page_id": "B2-081",
+              "fragment": "после заголовка главы 10: возвращение Эммы на Второй уровень МОАГа"
+            }
+          ],
+          "classification": "STATION",
+          "physical_location": "МОАГ, Второй уровень: туннель №2, Оранжевая магистраль, закрытый внутренний круг, Главная площадь и детский сектор",
+          "characters": [
+            "Эмма",
+            "Соня",
+            "Колька",
+            "Макс"
+          ],
+          "station_relevance": "доступность туннелей, устройство внутреннего круга, размещение площадей/детских площадок и разделение пищевого снабжения; эпизодическое блокирование магистралей пауками сохраняется как состояние сцены"
+        }
+      ],
+      "screening_caveat": "Глава 10 началась на p81; конец главы ещё не установлен. Классификация обновляется постранично по мере чтения."
     }
   ],
   "character_location_events": [

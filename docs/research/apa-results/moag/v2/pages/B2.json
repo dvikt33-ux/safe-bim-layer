@@ -892,12 +892,12 @@
       "id": "B2-081",
       "page_number": 81,
       "url": "https://loveread.ec/read_book.php?id=53370&p=81",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MIXED_MOAG_OTHER_VESSEL",
+      "recorded_spatial_hints": 5,
+      "notes": "Смешанная страница: до заголовка главы 10 — конец земной сцены; размышление Таис о яркой и тёплой станции является воображаемым, не фактическим описанием состояния или геометрии. После заголовка — МОАГ, Второй уровень: возвращение через туннель №2 в закрытый внутренний круг; 11 других туннелей ведут к Зелёной магистрали и Главной площади; описаны площадь, детский сектор и размещение пищевых запасов.",
+      "verification_method": "Single full-page primary-source read in Opera; classification and evidence extraction performed together; chapter 10 boundary identified inline",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-082",

@@ -8212,6 +8212,76 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-504",
+      "page_id": "B2-081",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=81",
+      "station_id": "MOAG",
+      "narrative_mode": "SECOND_LEVEL_TUNNEL_NETWORK",
+      "locator_hint": "туннель №2, закрытый внутренний круг, Оранжевая и Зелёная магистрали",
+      "spatial_assertion": "Эмма возвращается на закрытый внутренний круг Второго уровня через туннель №2. В сцене отмечен лишь небольшой незанятый пауками участок Оранжевой магистрали около этого туннеля; пауки сторожат остальные одиннадцать туннелей, ведущих к Зелёной магистрали и Главной площади. Это топология и временное состояние во время нападения; точные узлы соединения и размеры не указаны.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-505",
+      "page_id": "B2-081",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=81",
+      "station_id": "MOAG",
+      "narrative_mode": "SECOND_LEVEL_PUBLIC_AND_CHILD_SPACES",
+      "locator_hint": "Главная площадь, детский сад и дальние игровые площадки",
+      "spatial_assertion": "Во внутреннем круге названы Главная площадь со скамейками, небольшими фонтанами и растениями, сервер уровня жизнеобеспечения и кают, а также детский сад с площадками. Часть площадок для старших детей находится за Оранжевой магистралью и включает спортивные комплексы и горки. Точные границы, взаимные расстояния и план не заданы.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-506",
+      "page_id": "B2-081",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=81",
+      "station_id": "MOAG",
+      "narrative_mode": "SECOND_LEVEL_FOOD_STORAGE_DISTRIBUTION",
+      "locator_hint": "подсобки кафе, кладовые дальних коридоров и внутренний круг",
+      "spatial_assertion": "Внутри круга почти нет кафе и нет кладовых обычных продуктов; доступны лишь продуктовые автоматы с батончиками и подобной продукцией. Мука, сухое молоко, мясо и консервы хранятся во внешнем круге за Оранжевой магистралью, поэтому перекрытие доступа к ней ограничивает снабжение. Не выводить отсюда точное число кладовых или их план.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-507",
+      "page_id": "B2-081",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=81",
+      "station_id": "MOAG",
+      "narrative_mode": "CABIN_INTERNAL_SPACES",
+      "locator_hint": "порог каюты, кухонный проём и зал",
+      "spatial_assertion": "В каюте у порога Соня появляется из кухонного проёма, а Макс выглядывает из зала; это подтверждает наличие отдельных кухонного и залового пространств, выходящих в общую часть каюты. Точная конфигурация и размеры не указаны.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-508",
+      "page_id": "B2-081",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=81",
+      "station_id": "MOAG",
+      "narrative_mode": "CHARACTER_IMAGINED_STATION_STATE",
+      "locator_hint": "размышление Таис о вечерней станции во внешней земной сцене",
+      "spatial_assertion": "Таис представляет, что на станции вечером люди моются горячей водой, роботы накрывают столы, а коридоры яркие, тёплые и чистые. Это субъективное воображение в земной сцене, а не наблюдение текущего состояния; использовать только как CONTEXT_INFERENCE и не извлекать геометрию.",
+      "feature_refs": [],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
