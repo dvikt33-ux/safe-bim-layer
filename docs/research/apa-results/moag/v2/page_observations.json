@@ -8926,6 +8926,48 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-556",
+      "page_id": "B2-105",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=105",
+      "station_id": "MOAG",
+      "narrative_mode": "DIALOGUE_CONFIRMED_PLAN",
+      "locator_hint": "В начале главы 2 Колька и Эмма обсуждают разведку с выходом на Третий уровень, чтобы осмотреть производство.",
+      "spatial_assertion": "Диалог достоверно фиксирует намерение провести разведку на Третьем уровне и осмотреть цех; на этой странице выполнение плана ещё не показано. Трасса к цеху и внутреннее устройство не выводятся.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-557",
+      "page_id": "B2-105",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=105",
+      "station_id": "MOAG",
+      "narrative_mode": "DIRECT_TEXT",
+      "locator_hint": "Группа торопится к решёткам; Егор помогает открыть и закрыть одну решётку.",
+      "spatial_assertion": "Доступ к решётке фактически открывают и закрывают. Её конкретная идентичность и связь с туннелем №8/ранее встречавшимися решётками не установлены; маршрут до неё не описан.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-558",
+      "page_id": "B2-105",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=105",
+      "station_id": "MOAG",
+      "narrative_mode": "SITUATION_RENDER_STATE",
+      "locator_hint": "Перед уходом на разведку Дину решают не будить, чтобы она присмотрела за младенцами и младшими детьми.",
+      "spatial_assertion": "Распределение присмотра за детьми в этот эпизод; использовать только как контекст сцены, не как постоянную планировку или штатное правило станции.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
