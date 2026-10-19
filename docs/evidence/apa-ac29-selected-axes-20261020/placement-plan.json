@@ -1,0 +1,135 @@
+{
+  "recipe": {
+    "X": [
+      {
+        "coordinate": 2315.35,
+        "id": "1"
+      },
+      {
+        "coordinate": 2340.35,
+        "id": "2"
+      },
+      {
+        "coordinate": 2385.35,
+        "id": "3"
+      }
+    ],
+    "Y": [
+      {
+        "coordinate": 1315.35,
+        "id": "А"
+      },
+      {
+        "coordinate": 1355.35,
+        "id": "Б"
+      }
+    ],
+    "mode": "AXIS_INTERSECTIONS",
+    "reference": {
+      "x": 315.35,
+      "y": 315.35,
+      "z": 0
+    },
+    "requiresNativeAxisObjects": false,
+    "selectedIntersections": [
+      {
+        "X": "1",
+        "Y": "А"
+      },
+      {
+        "X": "3",
+        "Y": "Б"
+      },
+      {
+        "X": "2",
+        "Y": "А"
+      }
+    ],
+    "sourceRef": "https://github.com/dvikt33-ux/safe-bim-layer/pull/143"
+  },
+  "namedMapping": [
+    {
+      "X": "1",
+      "Y": "А",
+      "newChildGuids": [
+        "2730679d-ebb8-4b49-83d7-848fbf71442c"
+      ],
+      "newRootGuid": "6d8fd777-f320-43c8-84ce-4d4bc7d65351",
+      "sourceGuid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0",
+      "target": {
+        "x": 2315.35,
+        "y": 1315.35,
+        "z": 0
+      }
+    },
+    {
+      "X": "3",
+      "Y": "Б",
+      "newChildGuids": [
+        "9fe4d463-3cea-4c47-952a-ccc07cdbd060"
+      ],
+      "newRootGuid": "bbf0aa7b-0bce-4eaf-a835-4770cf42c980",
+      "sourceGuid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0",
+      "target": {
+        "x": 2385.35,
+        "y": 1355.35,
+        "z": 0
+      }
+    },
+    {
+      "X": "2",
+      "Y": "А",
+      "newChildGuids": [
+        "9c675a15-8b2b-4ed1-a89b-b684dce705aa"
+      ],
+      "newRootGuid": "c8df0060-9629-4827-91d2-8448667abff3",
+      "sourceGuid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0",
+      "target": {
+        "x": 2340.35,
+        "y": 1315.35,
+        "z": 0
+      }
+    }
+  ],
+  "params": {
+    "elementsWithMoveVectors": [
+      {
+        "copy": true,
+        "elementId": {
+          "guid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0"
+        },
+        "moveVector": {
+          "x": 2000.0,
+          "y": 999.9999999999999,
+          "z": 0
+        }
+      },
+      {
+        "copy": true,
+        "elementId": {
+          "guid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0"
+        },
+        "moveVector": {
+          "x": 2070.0,
+          "y": 1040.0,
+          "z": 0
+        }
+      },
+      {
+        "copy": true,
+        "elementId": {
+          "guid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0"
+        },
+        "moveVector": {
+          "x": 2025.0,
+          "y": 999.9999999999999,
+          "z": 0
+        }
+      }
+    ]
+  },
+  "collisionProof": {
+    "evaluatedSolidBoxes": 3,
+    "status": "MULTI_COPY_ALL_NATIVE_BREP_AABB_CLEAR_PASS"
+  }
+}

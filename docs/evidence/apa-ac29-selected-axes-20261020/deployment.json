@@ -1,0 +1,22 @@
+{
+  "status": "INSTALLED_SELECTED_NAMED_AXIS_INTERSECTIONS",
+  "sourceCodeRevision": "513f02050a70ce14e936305bbbeab9217082ceca",
+  "files": {
+    "scripts/apa_ac29_mass_request.py": {
+      "beforeSHA256": "570b8c62b57e34532c951e8d3e5a107c39bb42906bb0432dce3c5bb66658dda5",
+      "afterSHA256": "d820d009a88f734524962aa2a0fb7557085a9d15c84a78b42793b49a33871bd0"
+    },
+    "scripts/apa_ac29_copy_batch_oneshot.py": {
+      "beforeSHA256": "dbe0ac660ee7794b05b8a688b35485f5b1039976096ab5c0cb538e3e07b13156",
+      "afterSHA256": "aaa87309e9ac1dc7c2bb01f7acba8a403b3a212dbbd157d2f1d200094da5ce5e"
+    }
+  },
+  "backupRetainedLocally": true,
+  "all296OriginalContractsPreserved": true,
+  "catalogCommands": 298,
+  "fileCommands": 30,
+  "semanticCommands": 4,
+  "nativeWrites": 0,
+  "dependencyInstallation": false,
+  "APXChanged": false
+}

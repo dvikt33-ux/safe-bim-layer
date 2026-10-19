@@ -1,0 +1,142 @@
+{
+  "status": "AC29_SELECTED_AXES_INSTALLED_SAVED_REOPENED_AUDIT_PASS",
+  "sourceCodeRevision": "513f02050a70ce14e936305bbbeab9217082ceca",
+  "placementRecipe": {
+    "X": [
+      {
+        "coordinate": 2315.35,
+        "id": "1"
+      },
+      {
+        "coordinate": 2340.35,
+        "id": "2"
+      },
+      {
+        "coordinate": 2385.35,
+        "id": "3"
+      }
+    ],
+    "Y": [
+      {
+        "coordinate": 1315.35,
+        "id": "А"
+      },
+      {
+        "coordinate": 1355.35,
+        "id": "Б"
+      }
+    ],
+    "mode": "AXIS_INTERSECTIONS",
+    "reference": {
+      "x": 315.35,
+      "y": 315.35,
+      "z": 0
+    },
+    "requiresNativeAxisObjects": false,
+    "selectedIntersections": [
+      {
+        "X": "1",
+        "Y": "А"
+      },
+      {
+        "X": "3",
+        "Y": "Б"
+      },
+      {
+        "X": "2",
+        "Y": "А"
+      }
+    ],
+    "sourceRef": "https://github.com/dvikt33-ux/safe-bim-layer/pull/143"
+  },
+  "namedNativeMapping": [
+    {
+      "X": "1",
+      "Y": "А",
+      "newChildGuids": [
+        "2730679d-ebb8-4b49-83d7-848fbf71442c"
+      ],
+      "newRootGuid": "6d8fd777-f320-43c8-84ce-4d4bc7d65351",
+      "sourceGuid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0",
+      "target": {
+        "x": 2315.35,
+        "y": 1315.35,
+        "z": 0
+      }
+    },
+    {
+      "X": "3",
+      "Y": "Б",
+      "newChildGuids": [
+        "9fe4d463-3cea-4c47-952a-ccc07cdbd060"
+      ],
+      "newRootGuid": "bbf0aa7b-0bce-4eaf-a835-4770cf42c980",
+      "sourceGuid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0",
+      "target": {
+        "x": 2385.35,
+        "y": 1355.35,
+        "z": 0
+      }
+    },
+    {
+      "X": "2",
+      "Y": "А",
+      "newChildGuids": [
+        "9c675a15-8b2b-4ed1-a89b-b684dce705aa"
+      ],
+      "newRootGuid": "c8df0060-9629-4827-91d2-8448667abff3",
+      "sourceGuid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0",
+      "target": {
+        "x": 2340.35,
+        "y": 1315.35,
+        "z": 0
+      }
+    }
+  ],
+  "baselineGuidCount": 182,
+  "finalGuidCount": 188,
+  "allOriginalGeometryAndFaceMaterialsPreserved": true,
+  "nativeCalls": [
+    {
+      "command": "MoveElements",
+      "elapsedSeconds": 0.09671650000382215
+    },
+    {
+      "command": "SaveProject",
+      "elapsedSeconds": 3.559227899997495
+    }
+  ],
+  "savedSHA256": "439cb4c35b7daf336ea0cdeff4b694a3a976fd99fb5e3753f2c44b05bdf1e330",
+  "sourceSnapshotSHA256": "a72d54515045002ca33c59ddf83508dbe7d9e07ae4ec5e268c0c44fdd90b130d",
+  "originalPLNSHA256": "3a74d7cb17e460378eacfa8f933aeae29a5ca39fbf2bc73633115c9fee728750",
+  "protectedAncestorsUnchanged": true,
+  "sceneStates": [
+    [
+      "SharedNativeCopy20261019V1",
+      "PASS"
+    ],
+    [
+      "SharedNativeCopySave20261019V1",
+      "PASS"
+    ]
+  ],
+  "stepStates": [
+    [
+      "SharedNativeCopy20261019V1",
+      "operation",
+      "PASS"
+    ],
+    [
+      "SharedNativeCopySave20261019V1",
+      "operation",
+      "PASS"
+    ]
+  ],
+  "sqliteQuickCheck": "ok",
+  "realCloseConfirmed": true,
+  "reopenVerified": true,
+  "verificationNativeWrites": 0,
+  "priorAcceptedOperationsNotRepeated": true,
+  "nativeAxisObjectsCreated": false,
+  "unrequestedIntersectionsCreated": false
+}

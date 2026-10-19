@@ -43,6 +43,41 @@ def recognize_request(request):
     return flags
 
 
+def axis_intersections(layout):
+    """Explicit orthogonal axes only; preserve labels and caller's pair order."""
+    fields={"mode", "sourceRef", "X", "Y", "reference", "requiresNativeAxisObjects"}
+    need(set(layout) in (fields, fields | {"selectedIntersections"}) and
+         isinstance(layout["sourceRef"], str) and len(layout["sourceRef"]) >= 8 and
+         layout["requiresNativeAxisObjects"] is False,
+         "MASS_AXIS_PLACEMENTS_ONLY_NATIVE_GRID_CREATION_NEEDS_OWN_VERIFIER")
+    reference=layout["reference"]
+    need(isinstance(reference,dict) and set(reference)=={"x","y","z"} and
+         all(type(n) in (int,float) and math.isfinite(n) for n in reference.values()),
+         "MASS_AXIS_EXPLICIT_SOURCE_REFERENCE_REQUIRED")
+    axes={}
+    for name in ("X","Y"):
+        rows=layout[name]
+        need(isinstance(rows,list) and 1<=len(rows)<=32 and
+             all(isinstance(r,dict) and set(r)=={"id","coordinate"} and
+                 isinstance(r["id"],str) and bool(r["id"].strip()) and r["id"]==r["id"].strip() and
+                 type(r["coordinate"]) in (int,float) and math.isfinite(r["coordinate"])
+                 for r in rows) and len({r["id"] for r in rows})==len(rows) and
+             len({round(r["coordinate"],6) for r in rows})==len(rows),
+             "MASS_AXES_IDENTIFIERS_AND_COORDINATES_MUST_BE_UNIQUE")
+        axes[name]={r["id"]:r["coordinate"] for r in rows}
+    pairs=layout.get("selectedIntersections")
+    if "selectedIntersections" not in layout:
+        need(len(axes["X"])*len(axes["Y"])<=32,"MASS_AXIS_PLACEMENT_CAPACITY_EXCEEDED")
+        pairs=[dict(X=x,Y=y) for y in axes["Y"] for x in axes["X"]]
+    need(isinstance(pairs,list) and 1<=len(pairs)<=32 and
+         all(isinstance(r,dict) and set(r)=={"X","Y"} and
+             all(isinstance(r[k],str) and r[k] in axes[k] for k in ("X","Y")) for r in pairs),
+         "MASS_SELECTED_AXIS_PAIRS_MUST_REFERENCE_KNOWN_IDENTIFIERS")
+    need(len({(r["X"],r["Y"]) for r in pairs})==len(pairs),"MASS_DUPLICATE_SELECTED_AXIS_PAIR")
+    return [dict(X=r["X"],Y=r["Y"],x=axes["X"][r["X"]],y=axes["Y"][r["Y"]],z=reference["z"])
+            for r in pairs]
+
+
 def placement_offsets(layout):
     need(isinstance(layout, dict), "MASS_PLACEMENT_RECIPE_REQUIRED")
     mode = layout.get("mode")
@@ -85,29 +120,9 @@ def placement_offsets(layout):
         offsets = grid_offsets({"schema": GRID_SCHEMA,
                                 **{k: v for k, v in layout.items() if k != "mode"}})
     elif mode == "AXIS_INTERSECTIONS":
-        need(set(layout) == {"mode", "sourceRef", "X", "Y", "reference", "requiresNativeAxisObjects"}
-             and isinstance(layout["sourceRef"], str) and len(layout["sourceRef"]) >= 8
-             and layout["requiresNativeAxisObjects"] is False,
-             "MASS_AXIS_PLACEMENTS_ONLY_NATIVE_GRID_CREATION_NEEDS_OWN_VERIFIER")
-        reference = layout["reference"]
-        need(isinstance(reference, dict) and set(reference) == {"x", "y", "z"} and
-             all(type(n) in (int, float) and math.isfinite(n) for n in reference.values()),
-             "MASS_AXIS_EXPLICIT_SOURCE_REFERENCE_REQUIRED")
-        coordinates = {}
-        for axis in ("X", "Y"):
-            rows = layout[axis]
-            need(isinstance(rows, list) and 1 <= len(rows) <= 32 and
-                 all(isinstance(r, dict) and set(r) == {"id", "coordinate"} and
-                     isinstance(r["id"], str) and bool(r["id"].strip()) and
-                     type(r["coordinate"]) in (int, float) and math.isfinite(r["coordinate"])
-                     for r in rows) and len({r["id"] for r in rows}) == len(rows) and
-                 len({round(r["coordinate"], 6) for r in rows}) == len(rows),
-                 "MASS_AXES_IDENTIFIERS_AND_COORDINATES_MUST_BE_UNIQUE")
-            coordinates[axis] = [r["coordinate"] for r in rows]
-        need(len(coordinates["X"]) * len(coordinates["Y"]) <= 32,
-             "MASS_AXIS_PLACEMENT_CAPACITY_EXCEEDED")
-        offsets = [vector({"dx": x - reference["x"], "dy": y - reference["y"], "dz": 0})
-                   for y in coordinates["Y"] for x in coordinates["X"]]
+        positions=axis_intersections(layout);reference=layout["reference"]
+        offsets=[vector({"dx":r["x"]-reference["x"],"dy":r["y"]-reference["y"],"dz":0})
+                 for r in positions]
     else:
         raise ValueError("MASS_UNSUPPORTED_PLACEMENT_MODE")
     unique = {tuple(row[k] for k in ("dx", "dy", "dz")) for row in offsets}
@@ -171,8 +186,13 @@ def prepare_mass_request(router, task):
     from archicad_project_accelerator import prepare_auto_optimized_native_task
     normalized = normalize_mass_request(task)
     result = prepare_auto_optimized_native_task(router, normalized)
-    return dict(result, massRequestSchema=SCHEMA,
+    prepared=dict(result, massRequestSchema=SCHEMA,
                 recognizedIntent=recognize_request(task["request"]),
                 placementMode=task["placements"]["mode"],
                 qualification="SOURCE_PREVIEW_REQUIRES_FRESH_NATIVE_SCOPE_AND_READBACK",
                 optimality="UNCALIBRATED_NO_SPEED_CLAIM")
+    if task["placements"]["mode"]=="AXIS_INTERSECTIONS":
+        prepared["placementReferences"]=dict(sourceRef=task["placements"]["sourceRef"],
+            coordinateFrame="EXPLICIT_MODEL_METERS_ORTHOGONAL_AXES",nativeAxisObjectsCreated=False,
+            intersections=axis_intersections(task["placements"]))
+    return prepared
