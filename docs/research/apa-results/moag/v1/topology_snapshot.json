@@ -1,6 +1,6 @@
 {
   "schema": "APA-MOAG-TOPOLOGY-SNAPSHOT/0.1",
-  "source_blob_sha": "f4724bbca33e55d97611d9c032d291239f4f85fd",
+  "source_blob_sha": "0590b45c26fb6270eab93ec97edb53bb65a6ed57",
   "derived_from": "docs/research/apa-results/moag/v1/evidence_graph.json",
   "status": "GRAPH_ONLY_NO_COORDINATES",
   "space_refs": [
@@ -313,6 +313,56 @@
       "id": "L1-LOWER-BLOCK-STRATA",
       "label": "Локальные высотные ярусы Нижнего блока",
       "level": 1
+    },
+    {
+      "id": "L3-ISOLATION-TRIDENT",
+      "label": "Трёхлучевая развилка у внешнего круга",
+      "level": 3
+    },
+    {
+      "id": "L3-ISOLATION-CELL",
+      "label": "Помещение изоляции перед освобождением детей",
+      "level": 3
+    },
+    {
+      "id": "L3-LIFT-PLATFORM",
+      "label": "Круглая грузовая площадка у лифта",
+      "level": 3
+    },
+    {
+      "id": "LINK-LIFT-SHAFT",
+      "label": "Лифтовая шахта с аварийным выходом на Нижний",
+      "level": null
+    },
+    {
+      "id": "L1-LIFT-SHAFT-EXIT",
+      "label": "Тёмный проём шахты у мусоропереработки",
+      "level": 1
+    },
+    {
+      "id": "L2-WET-LAUNDRY",
+      "label": "Ванная и встроенная прачечная жилой каюты",
+      "level": 2
+    },
+    {
+      "id": "L2-NURSERY",
+      "label": "Детский сад Второго уровня",
+      "level": 2
+    },
+    {
+      "id": "L2-INFANT-PLAY",
+      "label": "Игровая младшего отделения",
+      "level": 2
+    },
+    {
+      "id": "L2-INFANT-YARD",
+      "label": "Прогулочная площадка младшего отделения",
+      "level": 2
+    },
+    {
+      "id": "L2-INFANT-NEW",
+      "label": "Комнаты для новорождённых",
+      "level": 2
     }
   ],
   "relationships": [
@@ -1047,6 +1097,126 @@
       "state": "TOPOLOGY_INFERRED",
       "source_ids": [
         "B1-17"
+      ]
+    },
+    {
+      "id": "E74",
+      "from": "L3-OUTER",
+      "to": "L3-ISOLATION-TRIDENT",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-022"
+      ]
+    },
+    {
+      "id": "E75",
+      "from": "L3-ISOLATION-TRIDENT",
+      "to": "L3-STORE",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-022"
+      ]
+    },
+    {
+      "id": "E76",
+      "from": "L3-ISOLATION-TRIDENT",
+      "to": "L3-ISOLATION-CELL",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-022"
+      ]
+    },
+    {
+      "id": "E77",
+      "from": "L3-ISOLATION-CELL",
+      "to": "L3-LIFT-PLATFORM",
+      "relation": "escape_route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-022"
+      ]
+    },
+    {
+      "id": "E78",
+      "from": "L3-LIFT-PLATFORM",
+      "to": "LINK-LIFT-SHAFT",
+      "relation": "access_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-023"
+      ]
+    },
+    {
+      "id": "E79",
+      "from": "LINK-LIFT-SHAFT",
+      "to": "L1-LIFT-SHAFT-EXIT",
+      "relation": "emergency_vertical_exit",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-023"
+      ]
+    },
+    {
+      "id": "E80",
+      "from": "L1-LIFT-SHAFT-EXIT",
+      "to": "L1-RECYCLING",
+      "relation": "near_route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-023"
+      ]
+    },
+    {
+      "id": "E81",
+      "from": "L2-CABINS",
+      "to": "L2-WET-LAUNDRY",
+      "relation": "includes",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-024"
+      ]
+    },
+    {
+      "id": "E82",
+      "from": "L2",
+      "to": "L2-NURSERY",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-025"
+      ]
+    },
+    {
+      "id": "E83",
+      "from": "L2-NURSERY",
+      "to": "L2-INFANT-PLAY",
+      "relation": "includes",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-025"
+      ]
+    },
+    {
+      "id": "E84",
+      "from": "L2-INFANT-PLAY",
+      "to": "L2-INFANT-YARD",
+      "relation": "door_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-026"
+      ]
+    },
+    {
+      "id": "E85",
+      "from": "L2-NURSERY",
+      "to": "L2-INFANT-NEW",
+      "relation": "includes",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-026"
       ]
     }
   ],
