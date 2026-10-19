@@ -51,6 +51,13 @@ class GroupBatchGates(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'SAFE01_PROOF_DRIFT'):G.execute(self.state)
             api.assert_not_called()
 
+    def test_missing_instance_command_stops_before_model_or_group_reads(self):
+        with patch.object(G,'prepare_api',return_value=(object(),None)), \
+             patch.object(G,'router_for',side_effect=ValueError('COMMAND_NOT_REGISTERED')), \
+             patch.object(G,'capture') as model:
+            with self.assertRaisesRegex(ValueError,'NOT_REGISTERED'):G.build_plan(self.state)
+            model.assert_not_called()
+
     def test_baseline_or_original_source_drift_is_denied(self):
         for p in (self.source,self.state/'baseline-native.json',self.trace):
             old=p.read_bytes();p.write_bytes(b'changed')

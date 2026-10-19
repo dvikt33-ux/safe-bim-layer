@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+import re
 import sqlite3
 
 import archicad_project_accelerator as A
@@ -134,10 +135,26 @@ def capture(m, api):
     return ids, native
 
 
+def router_for(api):
+    router = A.native_command_router(SCHEMA_PATH, include_functional_modules=True)
+    for command in ("AddOn.TapirCommand.GetNativeGroupMembersV1", V.CMD):
+        router.probe_runtime(api, command)
+    runtime = api("GetAPARuntimeInfoV1", {})
+    need(runtime.get("contract") == "APA_NATIVE_RUNTIME_IDENTITY_V1"
+         and runtime.get("sdkMajor") == 29 and runtime.get("nativeModelWrites") == 0
+         and re.fullmatch(r"[a-f0-9]{64}", runtime.get("buildIdentity", ""))
+         and re.fullmatch(r"[a-f0-9]{40}", runtime.get("sourceRevision", "")),
+         "GROUP_BATCH_LOADED_NATIVE_BUILD_IDENTITY_REQUIRED")
+    return router, runtime
+
+
 def build_plan(state):
     state = Path(state).resolve()
     m = manifest_for(state, initial=True)
     api, _ = prepare_api(m, state, execute=False)
+    # Availability belongs to this exact process. A matching Tapir version
+    # from another AC29 instance cannot qualify these SDK extensions.
+    router, runtime = router_for(api)
     ids, native = capture(m, api)
     need(R.digest(ids) == m["baselineGuidSetSHA256"] and
          fingerprint(native) == m["baselineBrepSHA256"], "GROUP_BATCH_ACCEPTED_BASELINE_DRIFT")
@@ -152,7 +169,6 @@ def build_plan(state):
         sourceRef=SOURCE_REF, existing=existing, placements=m["placements"],
         assembly=dict(sourceRef=SOURCE_REF, memberGuids=sorted(members), sameStory=True,
             dependenciesVerified=True, existingGroupGuid=m["sourceGroup"], groupReadbackVerified=True))
-    router = A.native_command_router(SCHEMA_PATH, include_functional_modules=True)
     writer = R.SceneWriter(api, journal_path=state / "batch-scenewriter.sqlite",
                            schema_path=SCHEMA_PATH, allow_3d_view_for_write=True)
     selected = A.prepare_current_runtime_group_native_task(router, writer, task)["preview"]
@@ -166,6 +182,7 @@ def build_plan(state):
                             affected=[], native_before=native)
     return dict(schema=SCHEMA, status="READONLY_FULL_BREP_GROUP_PLAN_PASS", task=task,
         preview=selected, params=operations[0]["params"], sourceProof=proof,
+        runtimeIdentity=runtime,
         baselineGuids=ids, contractSHA256=router.contract_hash(V.CMD), nativeWrites=0)
 
 
@@ -200,8 +217,8 @@ def execute(state):
         planSHA256=sha256(state / "plan.json"), automaticReplay=False))
     try:
         api, guard = prepare_api(m, state, execute=True)
-        router = A.native_command_router(SCHEMA_PATH, include_functional_modules=True)
-        router.probe_runtime(api, V.CMD)
+        router, runtime = router_for(api)
+        need(runtime == planned["runtimeIdentity"], "GROUP_BATCH_LOADED_NATIVE_BUILD_DRIFT")
         preview = A.prepare_auto_optimized_native_task(router, planned["task"])
         graph = preview["selectedNativeTaskPreview"]["workflow"]
         op = graph["graph"]["operations"][0]
@@ -304,6 +321,8 @@ def verify_reopen(state):
     need(not (state / "reopened.json").exists() and closed["status"] == "NATIVE_NO_OPEN_PROJECT_CONFIRMED"
          and closed["savedSHA256"] == saved["savedSHA256"], "GROUP_BATCH_REAL_CLOSE_REQUIRED")
     api, _ = prepare_api(m, state, execute=False, saved_sha=saved["savedSHA256"])
+    _, runtime = router_for(api)
+    need(runtime == read(state / "plan.json")["runtimeIdentity"], "GROUP_BATCH_REOPEN_RUNTIME_DRIFT")
     ids, native, proof = verify_group_model(m, api, read(state / "plan.json"),
         saved["nativeResponse"], read(state / "baseline-native.json"))
     need(len(ids) == saved["finalGuidCount"] and R.digest(ids) == saved["finalGuidSetSHA256"]
