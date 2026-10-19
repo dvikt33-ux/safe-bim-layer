@@ -67,12 +67,12 @@
       "id": "B3-006",
       "page_number": 6,
       "url": "https://loveread.ec/read_book.php?id=58610&p=6",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "REMOTE_EVIDENCE",
+      "recorded_spatial_hints": 1,
+      "notes": "Глава 2 на крейсере «Дракон». Ник говорит, что синтетики не смирились с потерей одной своей станции; контекст связывает это с МОАГом, но прямо станция по имени не названа. Подробности помещения игровой зоны и остальные корабельные сведения относятся к «Дракону» и исключены.",
+      "verification_method": "Однажды прочитана через Opera; сохранено только короткое косвенное сообщение о потере станции.",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B3-007",
