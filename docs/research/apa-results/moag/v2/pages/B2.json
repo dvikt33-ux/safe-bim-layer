@@ -1024,12 +1024,12 @@
       "id": "B2-093",
       "page_number": 93,
       "url": "https://loveread.ec/read_book.php?id=53370&p=93",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 3,
+      "notes": "Глава 12, две части одной станционной страницы. В библиотеке биороботы сообщают, что Гильдия намерена перепрограммировать станцию и главный сервер, остановить производство людей и оставить производство/цех; это переданные ими заявления, статус и фактический масштаб не подтверждены. Диалог отмечает Второй уровень и нехватку донов/лонов, повлёкшую хаос, как состояние периода после отказа/отсутствия роботов. В разделе 3: после открытия доступа к туннелю №8 пауки стоят ровной линией на Оранжевой магистрали за решёткой; люди вооружены у границы внутреннего круга, Рита с группой уходит через проход, пауки не атакуют. Не смешивать туннель №8 с туннелем №2. Уход Дины не завершён в пределах страницы.",
+      "verification_method": "Single full-page primary-source read in Opera; library dialogue and later tunnel/gate scene classified separately; robot claims remain attributed",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-094",
