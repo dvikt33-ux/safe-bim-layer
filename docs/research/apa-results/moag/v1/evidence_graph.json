@@ -4209,5 +4209,17 @@
       "priority": "HIGH",
       "text": "Проверить: прямой грузовой коридор Эммы и ранее встреченный полукруглый ангарный переход — разные участки или общая система? Не выводить автоматом прохождение от внутреннего к внешнему кольцу."
     }
-  ]
+  ],
+  "station_identity": {
+    "canonical_station_id": "MOAG",
+    "identity_document": "docs/research/apa-results/moag/v2/station_identity.json",
+    "same_physical_entity_names": [
+      "Млечный Путь",
+      "МОАГ"
+    ],
+    "physical_object_id": "SHIP-MLP-MOAG-001",
+    "do_not_split_by_name": true,
+    "do_not_merge_other_stations": true,
+    "source_status": "USER_CONFIRMED_NEEDS_EXACT_TEXT_LOCATOR"
+  }
 }
