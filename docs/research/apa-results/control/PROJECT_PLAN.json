@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 186,
+  "revision": 187,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2446,6 +2446,27 @@
       "kind": "REVIEW",
       "verification": "AUDIT_READBACK_VERIFIED",
       "scope": "Independent current native172GUID/group32 readback; original44fullgeometry/material semantics equal; SQLite mode=ro2scenesPASS/quick_checkok; rawtrace exactly1Clone1Save. Narrow accepted native group contract only; installed adapter pending S13."
+    },
+    "ART-P70-A11-S13-INSTALLED-SELECTOR-20261019": {
+      "id": "ART-P70-A11-S13-INSTALLED-SELECTOR-20261019",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/14a8922b2f0affd84205908ea8d7503d984348c1/docs/evidence/apa-ac29-installed-mass-selector-20261019/README_RU.md",
+      "kind": "RECEIPT",
+      "verification": "INSTALLED_NATIVE_READONLY_QUALIFICATION_AND_CONTRACT_READBACK_VERIFIED",
+      "scope": "Actual installed update code650b0769; two function bodies+onegroupreader/runtimewrapper; backups,152otherfiles unchanged; all296oldcontracts/30+4reads preserved; combined298. ActualAC29:172GUID,33native reads/0writes,LINEAR/GRID/AXIS selector+collision proof.130localtests and8CIchecksPASS on650. No repeated native group32 operation."
+    },
+    "ART-P70-A11-S13-INSTALLED-AUDIT-20261019": {
+      "id": "ART-P70-A11-S13-INSTALLED-AUDIT-20261019",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/14a8922b2f0affd84205908ea8d7503d984348c1/docs/evidence/apa-ac29-installed-mass-selector-20261019/native-readonly-qualification.json",
+      "kind": "REVIEW",
+      "verification": "AUDIT_READBACK_VERIFIED",
+      "scope": "Exact installed code independently read current SDK identity/group/172GUID; selected oneClone for3explicit layouts and fullcollision preflight; source/savedSHA unchanged,0writes. Actual write32groups accepted separately179."
+    },
+    "ART-P70-A11-S14-MULTICOPY-SOURCE-20261019": {
+      "id": "ART-P70-A11-S14-MULTICOPY-SOURCE-20261019",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/143",
+      "kind": "CODE",
+      "verification": "SOURCE_READ_LIVE_NOT_RUN",
+      "scope": "Existing donor49c676ce04b14c1376bc7629d6cb74426479bbdb supports typedColumn/Beam/Object in oneMoveElements(copy=true), independent typed/BREP/GUID lineage/collision and originalSceneWriter. Shared registry attachment and actual persistence require completion; source-only status retained."
     }
   },
   "tasks": {
@@ -5037,7 +5058,8 @@
         "APA-P70.A04.S03",
         "APA-P70.A11.S11",
         "APA-P70.A11.S12",
-        "APA-P70.A11.S13"
+        "APA-P70.A11.S13",
+        "APA-P70.A11.S14"
       ],
       "inputs": [
         "ART-APA-HIGHLEVEL-PR34",
@@ -5237,7 +5259,8 @@
         "Publication metadata clarification only:current gap-register-after-scope-erratum.json supersedes ambiguous inherited historical top-level counters. Native409copy changed by2confirmedparameter effects/4mutation attempts;ShellLIVE,RailingmaterialdriftPARTIAL,CWnoeffect. Historical snapshots and all prior evidence retained. CAS revision179to180;claim remains released;no new functional work, native writes or tests.",
         "After PR109: establish actual native Railing symbol/material owner and supported recovery without replaying failed nested-Object setter; strengthen compound MODIFY acceptance defaults, extend existing CW/Shell/MEP contracts. No new APX or model writes without exact approval; no offline tests.",
         "PR111 61f56376e37755cfb4a15db29071970525297904 exactPR109base. Initial preapproval checkpoint retained separately; userthenapproved exact71b8529a8da39a478d5a1bc8a370ea97bf63fdc39e4801e793aa36e214074fa4 read-onlycycle. Candidateidentity/source106393a verified,runtime293commands,2extendedexistingcommands CALLABLE_VERIFIED:actualgeneratedObject RailingRailowner,parent/root,Objectandowner128AddPars,rootRailmemo,selectedlibrarymaster/parameterscriptsprivate. ActualsettingsownerabsentfromphysicalrootRailmemo;storedmemo flags1donotoverrideevaluatedDisabled/Child. Top-levelscriptsdelegate tomacros,no fixingruleproof. Bothmaterials36,expectedGUID37;NOT_RESTORED,BLOCKED,no setterretryorDisabledwrite. Newtypedownerfacts inexistingDependencyImpact:352nodes482edges,134observedRailimpacts. DefaultcompoundMODIFYfull BREP/material/GDL/ownership/dependent/beforeproofs;existingSQLiteintentretained,oldtargetfailureproofmatched,legacyunscopedscopeNOT_VERIFIED. OriginalAPX restored8f5a9341and77registrationvaluesbyteexact,newprocessoriginalruntime264commands. Unexpectedtestcopy savedbytechangeafterUIexit afcbdaaea880to0a9c01419823,causeNOT_VERIFIED,noexplicitSaveAPI/nativeMutationcommand. Independentoriginalruntime409signatures/128GDLmatchPR109;bothfilecheckpointsprivate,noblindrollback,sourcePLNunchanged. OverallpersistencePARTIAL; qualifyclosebehaviorbefore anynextnativewrite. Nooffline tests/workflowdispatch/quantitycall/newexecutor/graph/commandnames. CWbounds,newExtruded/RevolvedfieldsBUILDonly;publicmaterialrecoveryroute notAC29qualified. ExactPR104approvalseparatependingnotreasked. Nextsaved-fileprovenance,publicsettingsowner/macrodiagnosis,thenseparatelyapproved2materialrecovery. A11.S03PARTIAL;historicalDONE/evidenceretained.",
-        "2026-10-19 PR179 published LIVE32native groups,44->172GUID,oneClone/oneSave,realGUIreopen; source44semanticBREP/materials preserved; corrected JSON tuple equality and dump-local material pools. S12 accepted, S13 installed APA integration pending; overall S03 remainsPARTIAL."
+        "2026-10-19 PR179 published LIVE32native groups,44->172GUID,oneClone/oneSave,realGUIreopen; source44semanticBREP/materials preserved; corrected JSON tuple equality and dump-local material pools. S12 accepted, S13 installed APA integration pending; overall S03 remainsPARTIAL.",
+        "2026-10-19 S13/PR180 installed accepted mass selector into current APA, preserved296contracts and30+4reads, combinedcatalog298; existingRouter/SceneWriter/registry retained. Native group32 LIVE receipt179 reused; individual MoveElements(copy=true) shared registry remains next S14."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
       "owner": null,
@@ -5494,7 +5517,8 @@
         "ART-P70-A11-S03-NATIVEOWNER-ACCEPTANCE-20261015",
         "ART-P70-A11-S03-NATIVEOWNER-SOURCES-20261015",
         "ART-P70-A11-S11-SAFE01-LIVE-20261019",
-        "ART-P70-A11-S12-GROUP32-LIVE-20261019"
+        "ART-P70-A11-S12-GROUP32-LIVE-20261019",
+        "ART-P70-A11-S13-INSTALLED-SELECTOR-20261019"
       ],
       "blocked_reason": null
     },
@@ -5950,7 +5974,7 @@
       "action_id": "APA-P70.A11",
       "title": "Подключить принятый mass-request/native-group путь к установленному APA с сохранением 30+4 маршрутов",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "DONE_PUBLISHED",
       "priority": 0,
       "work_key": "ac29-installed-mass-selector-preserve-sidecar34",
       "depends_on": [
@@ -5964,12 +5988,46 @@
         "ART-P70-A11-S11-SAFE01-LIVE-20261019"
       ],
       "outputs": [
-        "Additive staged update of existing installed APA, exact backups/readback; no duplicate Router or dependency installation"
+        "Additive staged update of existing installed APA, exact backups/readback; no duplicate Router or dependency installation",
+        "PR180 installed/readback accepted: all296contracts and34reads preserved; coreSHA30793c9538feacd11e86c6e6d688869f0506afb6e0ec19f74d50cdc143a26e03;130offline tests+8CIchecksPASS code650b0769; real172GUID read-only layout qualification. Current entrypoint apa_ac29_installed_factory.native_command_router()."
       ],
       "acceptance": "Preserve current installed core and read-only30/semantic4 registrations; integrate accepted mass selector through same entrypoint/registry, test staged installed bytes, runtime capability discovery and meaningful read-only route in actual accepted project. No unsupported native group/axis/boolean capability claims; bounded existing group LIVE acceptance reused.",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [
+        "ART-P70-A11-S13-INSTALLED-SELECTOR-20261019",
+        "ART-P70-A11-S13-INSTALLED-AUDIT-20261019"
+      ],
+      "blocked_reason": null
+    },
+    "APA-P70.A11.S14": {
+      "id": "APA-P70.A11.S14",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A11",
+      "title": "Довести индивидуальное native пакетное копирование через общий selector/registry и сохранённую копию",
+      "kind": "INTEGRATION",
+      "status": "IN_PROGRESS",
+      "priority": 0,
+      "work_key": "ac29-mass-selector-native-move-copy-shared-registry",
+      "depends_on": [
+        "APA-P70.A11.S13"
+      ],
+      "related": [
+        "APA-P70.A11.S03"
+      ],
+      "inputs": [
+        "ART-P70-A11-S13-INSTALLED-SELECTOR-20261019",
+        "ART-P70-A11-S14-MULTICOPY-SOURCE-20261019"
+      ],
+      "outputs": [
+        "Reuse existing multi-prototype copier; attach exactCREATE verifier to existingregistry and execute representative safe-copy native batch with exactreadback/save/reopen"
+      ],
+      "acceptance": "Existing mass request selects oneMoveElements(copy=true) batch via sameRouter/SceneWriter and code-owned verifier; exact native source/targets/BREP/attributes/GUID/ownership/collision, no relocation or retries; one representative operation in newly isolated savedPLN with save/snapshot/realreopen and immutable source. Beam/Object claims only with supported real source specimens; missing specimen remains explicit, never offline->LIVE.",
       "owner": "apa-mass-integration-20261019",
-      "lease_until": "2026-10-19T22:11:19Z",
-      "claim_ref": "APA-RUN-20261019-INSTALLED-MASS-SELECTOR",
+      "lease_until": "2026-10-19T22:32:28Z",
+      "claim_ref": "APA-RUN-20261019-NATIVE-COPY-REGISTRY",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
@@ -6265,7 +6323,8 @@
         "APA-P70.A11.S10",
         "APA-P70.A11.S11",
         "APA-P70.A11.S12",
-        "APA-P70.A11.S13"
+        "APA-P70.A11.S13",
+        "APA-P70.A11.S14"
       ],
       "artifact_ids": [
         "ART-APA-FULL-CYCLE",
@@ -6991,11 +7050,21 @@
         "APA-P10.A01.S03",
         "APA-P50.A02.S01"
       ],
-      "readiness": "GAP",
+      "readiness": "SUFFICIENT",
       "readiness_evidence_ids": [
-        "ART-P70-A11-S12-GROUP32-LIVE-20261019"
+        "ART-P70-A11-S13-INSTALLED-AUDIT-20261019"
       ],
-      "note": "Use accepted179 donor and existing installed code; inspect exact current hashes, preserve all34sidecar registrations; no new research or reinstall."
+      "note": "Installed stage/apply/readback and actual currentAC29read-only selector accepted. Narrownativegroup write uses179 receipt; individualcopy remainsS14."
+    },
+    "APA-P70.A11.S14": {
+      "research_task_ids": [
+        "APA-P10.A02.S02",
+        "APA-P10.A01.S03",
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "GAP",
+      "readiness_evidence_ids": [],
+      "note": "Reuse inspected143source and existing installedmulti-copy helpers; no newresearch or dependency reinstall. Close sharedregistry gap first, real specimens determine native acceptance."
     }
   },
   "component_catalog": {
