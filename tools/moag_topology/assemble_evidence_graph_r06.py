@@ -27,6 +27,8 @@ R04_SPATIAL = {
 R03_SPATIAL = {"RELATIVE_HEIGHT_OR_LEVEL"}
 MULTILEVEL_KINDS = {"utility", "stair", "shaft", "technical_route",
                     "hatch", "hatch_group", "elevator", "technical"}
+R03_ADDITIONAL_DIRECT_RELATIONS = {"LEADS_UP_TO", "DOOR_LEADS_TO", "ELEVATED_WITHIN", "DIRECT_PASSAGE_TO", "CONTAINS_EQUIPMENT"}
+R03_OBSERVATION_ONLY_RELATIONS = {"SPANS_GLOBAL_LEVEL", "OVERLOOKS"}
 GAP = "NARRATIVE_GAP"
 BRIDGES = SYNTH / "explicit_spatial_bridges_r06.json"
 R03_CONNECTING_RELATIONS = {
@@ -159,14 +161,26 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
             e["source_ids"], detail=e["semantic_class"])
     after_r04_physical_components = len({uf.root(node) for node in kinds})
     for e in graph["derived_r03_relationships"]:
-        if e["semantic_class"] not in R03_SPATIAL or e["evidence_state"] == "HYPOTHESIS":
+        relation = e["relation"]
+        is_level = e["semantic_class"] in R03_SPATIAL
+        is_direct = (relation in R03_ADDITIONAL_DIRECT_RELATIONS and
+                     e["evidence_state"] == "DIRECT_TEXT")
+        is_context = (relation in R03_OBSERVATION_ONLY_RELATIONS and
+                      e["evidence_state"] == "DIRECT_TEXT")
+        if not (is_level or is_direct or is_context) or e["evidence_state"] == "HYPOTHESIS":
             continue
-        connecting = e["relation"] in R03_CONNECTING_RELATIONS
-        add(e["from"], e["to"], e["id"],
-            "R03_RECORDED_INTERNAL_SPACE_RELATION" if connecting
-            else "R03_RELATIVE_VERTICAL_EVIDENCE",
-            e["source_observation_ids"], connect=connecting,
-            detail={"semantic_class": e["semantic_class"], "relation": e["relation"]})
+        connects = relation in R03_CONNECTING_RELATIONS or is_direct
+        if is_direct:
+            kind = "R03_DIRECT_INTERNAL_ASSOCIATION"
+        elif relation == "SPANS_GLOBAL_LEVEL":
+            kind = "R03_VOLUME_SPANS_LEVEL_NOT_ACCESS"
+        elif relation == "OVERLOOKS":
+            kind = "R03_OVERLOOK_NOT_ACCESS"
+        else:
+            kind = "R03_RECORDED_INTERNAL_SPACE_RELATION" if connects else "R03_RELATIVE_VERTICAL_EVIDENCE"
+        add(e["from"], e["to"], e["id"], kind,
+            e["source_observation_ids"], connect=connects,
+            detail={"semantic_class": e["semantic_class"], "relation": relation})
     after_r03_physical_components = len({uf.root(node) for node in kinds})
     for e in fragments["typed_edges"]:
         if e["relation"] not in topology.TOPOLOGICAL or e.get("certainty") == "HYPOTHESIS":
