@@ -87,7 +87,8 @@ class RegistryCoverage(unittest.TestCase):
                          {("AddOn.TapirCommand.CloneNativeGroupV1","CREATE"),
                           ("MoveElements","CREATE"),
                           ("AddOn.TapirCommand.CreateNativeGroupV1","MODIFY"),
-                          ("AddOn.TapirCommand.UngroupNativeGroupV1","MODIFY")},
+                          ("AddOn.TapirCommand.UngroupNativeGroupV1","MODIFY"),
+                          ("AddOn.TapirCommand.MoveNativeGroupV1","MODIFY")},
                          "Only explicitly reviewed clone, copy and group membership verifiers may extend the registry")
         self.assertIn("VerifiedNativeGroupClone", available)
         self.assertIn("VerifiedNativeBatchCopy", available)

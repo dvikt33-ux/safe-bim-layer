@@ -1,0 +1,127 @@
+{
+  "version": "29",
+  "category": "Native SDK group operation",
+  "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
+  "implementationSource": "archicad-addon/Sources/NativeGroupCommands.inc",
+  "implementationSHA256": "f915d0a2f6127e489eacebd242f72fcab3c409ce07ea7290efa3fb38175d0528",
+  "impact": "MODEL",
+  "description": "Move entire flat native group in one SDK drag preserving GUID membership.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "groupId": {
+        "type": "object",
+        "properties": {
+          "guid": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "guid"
+        ],
+        "additionalProperties": false
+      },
+      "sourceRef": {
+        "type": "string",
+        "minLength": 8
+      },
+      "translation": {
+        "type": "object",
+        "properties": {
+          "dx": {
+            "type": "number"
+          },
+          "dy": {
+            "type": "number"
+          },
+          "dz": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "dx",
+          "dy",
+          "dz"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "groupId",
+      "sourceRef",
+      "translation"
+    ],
+    "additionalProperties": false
+  },
+  "returns": {
+    "anyOf": [
+      {
+        "type": "object",
+        "properties": {
+          "nativeModelWrites": {
+            "type": "integer"
+          },
+          "groupId": {
+            "type": "object",
+            "properties": {
+              "guid": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "guid"
+            ],
+            "additionalProperties": false
+          },
+          "movedMembers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "guid": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "guid"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "nativeModelWrites",
+          "groupId",
+          "movedMembers"
+        ],
+        "additionalProperties": false
+      },
+      {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "integer"
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "code",
+              "message"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "error"
+        ],
+        "additionalProperties": false
+      }
+    ]
+  },
+  "operationKind": "MODIFY"
+}

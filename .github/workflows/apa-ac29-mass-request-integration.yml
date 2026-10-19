@@ -19,6 +19,9 @@ on:
       - "scripts/apa_ac29_native_group_ungroup.py"
       - "schemas/accelerator/native-group-ungroup.json"
       - "tests/test_apa_ac29_native_group_ungroup.py"
+      - "scripts/apa_ac29_native_group_move.py"
+      - "schemas/accelerator/native-group-move.json"
+      - "tests/test_apa_ac29_native_group_move.py"
       - "tests/test_apa_ac29_group_batch_oneshot.py"
       - "scripts/apa_install_mass_selector.py"
       - "scripts/apa_ac29_installed_*.py"
@@ -66,6 +69,8 @@ jobs:
           python -m unittest discover -s tests -p "test_apa_ac29_group_create_oneshot.py" -v
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           python -m unittest discover -s tests -p "test_apa_ac29_native_group_ungroup.py" -v
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m unittest discover -s tests -p "test_apa_ac29_native_group_move.py" -v
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           python -m unittest discover -s tests -p "test_archicad_dynamic_commands.py" -v
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
