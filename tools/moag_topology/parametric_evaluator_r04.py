@@ -78,6 +78,27 @@ def evaluate(graph, changes, authored_rectangles=None):
             a,b,c = rule["hostHeight"],rule["floorZ"],rule["roomHeight"]
             record(rid,values[a]+EPS >= values[b]+values[c] if need(a,b,c) else None,
                    "Raised room must fit under ceiling; does not establish support design",epistemic)
+        elif typ == "enclosure_diameter_necessary":
+            diameter, length, width = rule["diameter"],rule["length"],rule["width"]
+            if need(diameter,length,width):
+                diagonal=math.hypot(values[length],values[width])
+                record(rid,values[diameter]+EPS>=diagonal,
+                       f"Necessary span: {diagonal:.3f} m rectangular bay diagonal <= assumed circular hull diameter {values[diameter]:.3f} m; NOT sufficient for placement amid other volumes",epistemic)
+            else: record(rid,None,"Envelope/bay span not known",epistemic)
+        elif typ == "stair_duration_feasible":
+            height, speed = rule["height"], rule["speed"]
+            if need(height,speed):
+                t=values[height]/values[speed]
+                record(rid,t<=rule["total_time_s"]+EPS,
+                       f"Vertical portion of stairs alone {t:.2f} s vs scene {rule['total_time_s']} s, leaving time for horizontal movement; no path length inferred",epistemic)
+            else: record(rid,None,"Local height or assumed vertical climbing speed not known",epistemic)
+        elif typ == "elevator_duration_feasible":
+            height, speed, nontravel = rule["height"],rule["speed"],rule["nontravel"]
+            if need(height,speed,nontravel):
+                t=values[height]/values[speed]+values[nontravel]
+                record(rid,t<=rule["total_time_s"]+EPS,
+                       f"Assumed lift run+nontravel {t:.2f} s vs scene {rule['total_time_s']} s; no evidence of constant lift velocity",epistemic)
+            else: record(rid,None,"Lift height, speed or nontravel delay not known",epistemic)
         elif typ == "volume_does_not_approve_geometry":
             record(rid, graph["gates"]["metric_geometry_solved"] is False and
                 graph["gates"]["archicad_write"] is False,"No geometric or BIM write authorization",epistemic)
