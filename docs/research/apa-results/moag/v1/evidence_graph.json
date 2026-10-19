@@ -441,6 +441,20 @@
       "url": "https://loveread.ec/read_book.php?id=53370&p=27",
       "medium": "literary_text",
       "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B2-034",
+      "section": "Книга II, страница LoveRead 34, первичный текст",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=34",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B2-035",
+      "section": "Книга II, страница LoveRead 35, первичный текст",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=35",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
     }
   ],
   "nodes": [
@@ -1224,9 +1238,11 @@
       "level": null,
       "type": "utility",
       "source_ids": [
-        "B2-01"
+        "B2-01",
+        "LR-B2-034",
+        "LR-B2-035"
       ],
-      "text_basis": "Поперечное расположение и осевые размеры требуют повторной проверки; пока не назначать центр площади",
+      "text_basis": "Центральная прозрачная колба голубоватой жидкости с кабелями, крышкой, клапанами и подключением к серверу. Диаметры, абсолютные отметки и точный плановый центр не определены.",
       "position": {
         "x": null,
         "y": null,
@@ -1235,7 +1251,7 @@
         "dimension_m": null
       },
       "geometry_gate": "NOT_AUTHORIZED",
-      "state": "RECHECK_REQUIRED"
+      "state": "TEXT_DIRECT"
     },
     {
       "id": "L1-ANGAR-ADJ",
@@ -2539,6 +2555,82 @@
         "LR-B2-027"
       ],
       "text_basis": "От капитанской рубки после двух поворотов Эмма достигает широкого коридора, ведущего к главным лифтам; через него проходит к дверям производственного цеха",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-ENERGY-APPROACH",
+      "label": "Узкий проход к энергомодулю за Детским блоком",
+      "level": 3,
+      "type": "corridor",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "text_basis": "Полутемный короткий коридор, в конце единственная дверь.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-ENERGY-GATE",
+      "label": "Защищенная сдвижная дверь энергокамеры",
+      "level": 3,
+      "type": "opening",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "text_basis": "Дверь в конце коридора на Третьем, замок взломан героями.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "CORE-ENERGY-SHAFT",
+      "label": "Круглый центральный инженерный объем трёх уровней",
+      "level": null,
+      "type": "vertical_void",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "text_basis": "Камера по центру, охватывает три уровня; взгляд с галереи вниз примерно на 15 м, но BIM Z неизвестна.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "CORE-ENERGY-GALLERY",
+      "label": "Кольцевая огражденная галерея центрального энергомодуля",
+      "level": 3,
+      "type": "local_gallery",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "text_basis": "Металлическая круговая галерея с ограждением вокруг колбы.",
       "position": {
         "x": null,
         "y": null,
@@ -4279,6 +4371,126 @@
         "LR-B2-017"
       ],
       "claim": "Эмма и Коля проходят от старой запечатанной двери через просторный коридор к ангарному проёму, промежуточные узлы и длина неизвестны.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E145",
+      "from": "L3-INNER",
+      "to": "L3-ENERGY-APPROACH",
+      "type": "contains",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Из внутреннего круга Третьего есть проход к энергомодулю.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E146",
+      "from": "L3-CHILD-LAB",
+      "to": "L3-ENERGY-APPROACH",
+      "type": "behind_not_proven_direct_door",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Подход расположен за Детским блоком, прямая внутренняя дверь между комнатами не доказана.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E147",
+      "from": "L3-ENERGY-APPROACH",
+      "to": "L3-ENERGY-GATE",
+      "type": "ends_at_door",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "В узком коридоре единственная защищенная дверь.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E148",
+      "from": "L3-ENERGY-GATE",
+      "to": "CORE-ENERGY-GALLERY",
+      "type": "opens_to",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "После открытия двери можно попасть на круглую металлическую галерею.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E149",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "CORE-ENERGY-GALLERY",
+      "type": "contains",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "В высоком круглом помещении имеется галерея.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E150",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "CORE-ENERGY",
+      "type": "contains",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Внутри центрального круглого объема размещена колба энергоустановки.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E151",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "L1",
+      "type": "spans_global_level",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Инженерный объем уходит в нижнюю часть станции.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E152",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "L2",
+      "type": "spans_global_level",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Инженерный объем связывает Второй уровень.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E153",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "L3",
+      "type": "spans_global_level",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Инженерный объем связан с Третьим уровнем и его входом.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E154",
+      "from": "CORE-ENERGY-GALLERY",
+      "to": "CORE-ENERGY",
+      "type": "circumferential_overlook",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Галерея окружает центральную колбу.",
       "state": "TEXT_DIRECT",
       "metric": null
     }
