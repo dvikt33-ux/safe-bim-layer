@@ -38,13 +38,21 @@ safe-bim-mailbox/chat-dispatch/jobs/<jobId>.json
 
 QUEUED -> LAUNCHING -> AWAIT_TAB_PROOF -> TAB_SELECTED_CONFIRMED
 
-Ошибка запуска: LAUNCHING -> BLOCKED_NEEDS_RECONCILE.
+Ошибка запуска: LAUNCHING -> BLOCKED_NEEDS_RECONCILE. Если срок действия уже принятого в очередь события истёк, оно переводится в EXPIRED до запуска Opera.
 
 Состояние LAUNCHING записывается в SQLite до обращения к Opera. Неопределённое завершение и BLOCKED_NEEDS_RECONCILE не переисполняются автоматически. Событие другого отдела не исчезает: остаётся QUEUED.
 
 Одновременно допускается **одно UI-переключение Opera**. Это более строгий барьер, чем один активный job на чат, потому что независимые Automa-процессы могут конфликтовать за активную вкладку. Ранее запущенное исследование в другом чате при этом может продолжаться, если это обеспечивает приложение.
 
 TAB_SELECTED_CONFIRMED означает только подтверждённое переключение вкладки; исследование не завершено. Для следующего этапа требуется отдельный протокол приёма ChatGPT и квитанция отчёта.
+
+
+
+Если после локальной проверки выяснилось, что запуск не состоялся, снять блокировку **без повтора** можно явной командой:
+
+    python scripts/bureau_chat_activation_gateway.py --db C:\LocalAI\bureau-gateway\state.sqlite --config C:\LocalAI\bureau-gateway\config.json cancel-blocked JOB_ID --proof "Reviewed and cancelled without retry"
+
+Отмена допускается только из LAUNCHING / BLOCKED_NEEDS_RECONCILE; следующий ожидающий job сохраняется. Состояния EXPIRED, CANCELLED_AFTER_REVIEW и TAB_SELECTED_CONFIRMED — терминальные для пилотной операции активации.
 
 ## Подготовка и проверка на локальной Windows-машине
 
