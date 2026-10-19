@@ -14,7 +14,6 @@ import os
 from pathlib import Path
 import re
 import shutil
-import stat
 
 _SHA = re.compile(r"^[0-9a-f]{64}$")
 
@@ -124,8 +123,8 @@ def preserve_guarded_save(project_path, snapshot_path, saved_sha,
     require(snapshot_sha == saved_sha and sha256(project) == saved_sha and
             all(sha256(path) == expected for path, expected in original.items()),
             "APA_SAVE_SNAPSHOT_CONCURRENT_WRITE_OR_COPY_MISMATCH")
-    # This is a local OS hint, not a substitute for SHA checks.
-    snapshot.chmod(stat.S_IREAD)
+    # Filesystem permissions are not an immutable-storage guarantee;
+    # preserve SHA lineage and use exclusive destination creation instead.
     return {"schema": "APA_SAVE_EXACT_SNAPSHOT_V1",
             "status": "BYTE_EXACT_GUARDED_SAVE_SNAPSHOT_CAPTURED",
             "savedSHA256": saved_sha, "snapshotSHA256": snapshot_sha,
