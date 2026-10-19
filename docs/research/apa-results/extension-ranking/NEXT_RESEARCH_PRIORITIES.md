@@ -1,3 +1,8 @@
+# APA AC29 — очередь 19.10.2026 20Z
+[Аудит №3](hourly/audit-2026-10-19-20.md): 30 SOURCE, два контрааудита. [№1: 8 готовых решений](hourly/audit-2026-10-19-20-tasks-1.md); [№2: 8 способов подключения](hourly/audit-2026-10-19-20-tasks-2.md). 19Z PARTIAL, не ACCEPTED. Новых OFFLINE/BUILD/INSTALLED/LIVE/ACCEPTED=0.
+
+---
+
 # APA AC29 — очередь 19.10.2026 18Z
 [Аудит 30 SOURCE-проверок](hourly/audit-2026-10-19-18.md). [8 задач №1](hourly/audit-2026-10-19-18-tasks-1.md); [8 задач №2](hourly/audit-2026-10-19-18-tasks-2.md). Новых ACCEPTED нет.
 
