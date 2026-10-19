@@ -1,0 +1,587 @@
+{
+  "schema": "APA-MOAG-CHARACTER-ROUTES/0.1",
+  "date": "2026-10-19",
+  "status": "FIRST_DIRECT_ROUTE_SEQUENCES",
+  "page_ref_format": "B1-NNN = LoveRead site page in ledger",
+  "hard_rules": [
+    "Each segment source_id points to a fully reviewed site page.",
+    "Observed route is not proof of precise XY or metric Z.",
+    "An explicitly observed return via a separate vertical segment must remain distinct.",
+    "Do not merge apparent duplicate sealed doors without an episode-to-episode identity proof.",
+    "Unknown station structures are not to be inferred from the speculation of characters."
+  ],
+  "routes": [
+    {
+      "id": "RT-001",
+      "title": "Перевод Эммы и извлечение через нижний закрытый отсек",
+      "participants": [
+        "Эмма",
+        "Таис",
+        "Колька",
+        "Фёдор"
+      ],
+      "book": "B1",
+      "site_pages": [
+        "B1-036",
+        "B1-037",
+        "B1-038"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT001-A",
+          "label": "Галерея церемонии и проход к лифту",
+          "global_level": 2,
+          "local_stratum": "public-gallery",
+          "source_page_id": "B1-036",
+          "movement_method": "WALK",
+          "observed_constraint": "На Втором ковровый проход; за поворотом лифт.",
+          "existing_graph_node": "L2-GALLERY",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT001-B",
+          "label": "Основной лифт на Третий",
+          "global_level": null,
+          "local_stratum": "between-2-and-3",
+          "source_page_id": "B1-036",
+          "movement_method": "ELEVATOR_UP",
+          "observed_constraint": "Лифт поднимается с Второго на Третий.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT001-C",
+          "label": "Чистый белый изогнутый коридор",
+          "global_level": 3,
+          "local_stratum": "main-walkway",
+          "source_page_id": "B1-036",
+          "movement_method": "WALK",
+          "observed_constraint": "Сразу после выхода из лифта белый коридор изгибается полукругом.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT001-D",
+          "label": "Развилка с двумя одинаковыми поворотами",
+          "global_level": 3,
+          "local_stratum": "main-walkway",
+          "source_page_id": "B1-037",
+          "movement_method": "WALK",
+          "observed_constraint": "Охранник остановился на развилке, за одним поворотом видна дверь.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT001-E",
+          "label": "Другой лифт у развилки",
+          "global_level": 3,
+          "local_stratum": "lift-lobby",
+          "source_page_id": "B1-037",
+          "movement_method": "WALK",
+          "observed_constraint": "После столкновения герои оказываются у дверей ещё одного лифта.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT001-F",
+          "label": "Спуск лифтом на Второй",
+          "global_level": null,
+          "local_stratum": "between-3-and-2",
+          "source_page_id": "B1-037",
+          "movement_method": "ELEVATOR_DOWN",
+          "observed_constraint": "Лифт достигает Второго уровня.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT001-G",
+          "label": "Тёмные малые коридоры и дальние игровые площадки",
+          "global_level": 2,
+          "local_stratum": "playground-zone",
+          "source_page_id": "B1-037",
+          "movement_method": "RUN",
+          "observed_constraint": "Пробегают через коридорчики, лестницы и низкие ограды, вдоль площадок.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT001-H",
+          "label": "Широкая труба, вход с уровня площадок",
+          "global_level": 2,
+          "local_stratum": "vent-or-technical-tube-entrance",
+          "source_page_id": "B1-037",
+          "movement_method": "CRAWL",
+          "observed_constraint": "За поворотом широкая труба с направлением вниз; происхождение инженерной сети не названо.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT001-I",
+          "label": "Нижняя площадка у запечатанной двери",
+          "global_level": null,
+          "local_stratum": "below-inhabited-lower",
+          "source_page_id": "B1-038",
+          "movement_method": "DROP_DOWN",
+          "observed_constraint": "После короткого спуска в трубе герои находятся у металлической двери со звёздами и оплавленным замком.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT001-J",
+          "label": "Возвращение вверх в ту же трубу",
+          "global_level": null,
+          "local_stratum": "shaft-return-ascent",
+          "source_page_id": "B1-038",
+          "movement_method": "CLIMB_UP",
+          "observed_constraint": "Фёдор подставляет плечи, персонажи влезают вверх обратно в трубу.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT001-K",
+          "label": "Близкий боковой поворот над нижней площадкой",
+          "global_level": null,
+          "local_stratum": "side-branch-above-sealed-room",
+          "source_page_id": "B1-038",
+          "movement_method": "TURN_AND_CRAWL",
+          "observed_constraint": "В трубе есть близкий боковой отвод в обитаемую часть; острота поворота не определена.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT001-L",
+          "label": "Коридоры района обитаемых баз",
+          "global_level": 1,
+          "local_stratum": "inhabited-lower",
+          "source_page_id": "B1-038",
+          "movement_method": "WALK",
+          "observed_constraint": "Таис выбирается в знакомые коридоры и направляется к базам.",
+          "existing_graph_node": "L1-BASES",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT001-H",
+          "lower": "RT001-I",
+          "source_page_id": "B1-037",
+          "claim": "Движение вниз по трубе от Второго к запертой двери"
+        },
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT001-K",
+          "lower": "RT001-I",
+          "source_page_id": "B1-038",
+          "claim": "Боковой выход расположен выше нижнего пространства со звездной дверью"
+        },
+        {
+          "kind": "ROUTE_WITH_ALTERNATE_VERT_PATH",
+          "higher": "RT001-C",
+          "lower": "RT001-G",
+          "source_page_id": "B1-037",
+          "claim": "Два разных лифта в одном эпизоде: вход с Второго и возвращение с Третьего; считать отдельными шахтами пока не доказано"
+        }
+      ],
+      "identity_hypotheses": [
+        {
+          "candidate": "RT001-I",
+          "may_match": "SUB-LOWER-WELL",
+          "status": "UNVERIFIED_SAME_ROOM"
+        },
+        {
+          "candidate": "RT001-I",
+          "may_match": "SUB-SEALED-DOOR",
+          "status": "UNVERIFIED_SAME_DOOR"
+        }
+      ],
+      "notes": "Раздельно учитываются 'наблюдали дверь' и 'предположили, что ангар'. Наличие челночного отсека за дверью НЕ доказано."
+    },
+    {
+      "id": "RT-002",
+      "title": "Побег из изолятора Третьего через крышу лифта на Нижний",
+      "participants": [
+        "Таис",
+        "Фёдор",
+        "Коля",
+        "Илья",
+        "Катя"
+      ],
+      "book": "B1",
+      "site_pages": [
+        "B1-022",
+        "B1-023"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT002-A",
+          "label": "Развилка из трёх коридоров внешней зоны Третьего",
+          "global_level": 3,
+          "local_stratum": "outer-ring",
+          "source_page_id": "B1-022",
+          "movement_method": "RUN",
+          "observed_constraint": "При движении к Изоляции проходят трёхлучевую развилку.",
+          "existing_graph_node": "L3-ISOLATION-TRIDENT",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT002-B",
+          "label": "Запираемый изолятор",
+          "global_level": 3,
+          "local_stratum": "secure-room",
+          "source_page_id": "B1-022",
+          "movement_method": "DOOR",
+          "observed_constraint": "Дверь к помещению изоляции, компьютерный замок.",
+          "existing_graph_node": "L3-ISOLATION-CELL",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT002-C",
+          "label": "Круглая площадка складирования у лифта",
+          "global_level": 3,
+          "local_stratum": "freight-platform",
+          "source_page_id": "B1-022",
+          "movement_method": "RUN",
+          "observed_constraint": "Круглая площадка с контейнерами.",
+          "existing_graph_node": "L3-LIFT-PLATFORM",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT002-D",
+          "label": "Лифт останавливается во время спуска",
+          "global_level": null,
+          "local_stratum": "lift-shaft",
+          "source_page_id": "B1-023",
+          "movement_method": "ELEVATOR_DOWN",
+          "observed_constraint": "Штатное движение прервано.",
+          "existing_graph_node": "LINK-LIFT-SHAFT",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT002-E",
+          "label": "Крыша кабины через потолочный люк",
+          "global_level": null,
+          "local_stratum": "shaft-interior",
+          "source_page_id": "B1-023",
+          "movement_method": "HATCH_CLIMB",
+          "observed_constraint": "Через квадратный люк в потолке кабины выходят на крышу.",
+          "existing_graph_node": "LINK-LIFT-SHAFT",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT002-F",
+          "label": "Боковой проём шахты",
+          "global_level": 1,
+          "local_stratum": "side-shaft-opening",
+          "source_page_id": "B1-023",
+          "movement_method": "ROPE_LADDER",
+          "observed_constraint": "Верёвочная лестница до бокового отверстия, выход на Нижний.",
+          "existing_graph_node": "L1-LIFT-SHAFT-EXIT",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT002-G",
+          "label": "Район Нижнего у мусорного цеха",
+          "global_level": 1,
+          "local_stratum": "technical-corridor",
+          "source_page_id": "B1-023",
+          "movement_method": "WALK",
+          "observed_constraint": "В слышимости цеха, без точного доказательства непосредственного смежного прохода.",
+          "existing_graph_node": "L1-RECYCLING",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT002-C",
+          "lower": "RT002-F",
+          "source_page_id": "B1-023",
+          "claim": "От платформы Третьего персонажи спускаются к боковой шахте Первого"
+        }
+      ],
+      "identity_hypotheses": [],
+      "notes": "Доступ через люк крыши кабины НЕ является обычным этажным входом; проектировать как аварийный путь."
+    },
+    {
+      "id": "RT-003",
+      "title": "Скрытый переход Второй → Первый через вентиляцию",
+      "participants": [
+        "Таис",
+        "Фёдор"
+      ],
+      "book": "B1",
+      "site_pages": [
+        "B1-001",
+        "B1-002"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT003-A",
+          "label": "Второй: служебный тупик к вентиляции",
+          "global_level": 2,
+          "local_stratum": "service-route",
+          "source_page_id": "B1-001",
+          "movement_method": "WALK",
+          "observed_constraint": "Скрытые технические коридоры, квадратный вентиляционный люк.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT003-B",
+          "label": "Горизонтальный низкий вентиляционный лаз",
+          "global_level": null,
+          "local_stratum": "duct",
+          "source_page_id": "B1-002",
+          "movement_method": "CRAWL",
+          "observed_constraint": "Персонаж ползёт и достигает вертикальной шахты.",
+          "existing_graph_node": "L1-VENT",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT003-C",
+          "label": "Вертикальная шахта и приземление на отходы",
+          "global_level": 1,
+          "local_stratum": "lower-technical",
+          "source_page_id": "B1-002",
+          "movement_method": "DROP_DOWN",
+          "observed_constraint": "Отмечено приземление на мешки отходов.",
+          "existing_graph_node": "L1-VENT",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT003-D",
+          "label": "Холодный коридор Нижнего",
+          "global_level": 1,
+          "local_stratum": "technical-route",
+          "source_page_id": "B1-002",
+          "movement_method": "WALK",
+          "observed_constraint": "Металлическая неотделанная поверхность, низкая температура.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT003-B",
+          "lower": "RT003-C",
+          "source_page_id": "B1-002",
+          "claim": "Падение из вентиляционной шахты в Нижний"
+        }
+      ],
+      "identity_hypotheses": [],
+      "notes": "Мешки отходов не доказывают прямого размещения люка внутри самого мусорного цеха."
+    },
+    {
+      "id": "RT-004",
+      "title": "Маршрут мусорный цех → служебная лестница → Третий",
+      "participants": [
+        "Таис",
+        "Фёдор",
+        "Эмма"
+      ],
+      "book": "B1",
+      "site_pages": [
+        "B1-021"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT004-A",
+          "label": "Цех переработки и горячая печь",
+          "global_level": 1,
+          "local_stratum": "waste-plant",
+          "source_page_id": "B1-021",
+          "movement_method": "WALK",
+          "observed_constraint": "Минуют конвейеры; у дальнего конца печь.",
+          "existing_graph_node": "L1-RECYCLING",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT004-B",
+          "label": "Узкий закуток за цехом",
+          "global_level": 1,
+          "local_stratum": "service-closet",
+          "source_page_id": "B1-021",
+          "movement_method": "WALK",
+          "observed_constraint": "После печи и технических механизмов проход к лестнице.",
+          "existing_graph_node": "L1-STAIR-UP",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT004-C",
+          "label": "Вертикальная лестница и квадратный люк наверху",
+          "global_level": null,
+          "local_stratum": "between-1-and-3",
+          "source_page_id": "B1-021",
+          "movement_method": "LADDER_UP",
+          "observed_constraint": "Квадратный потолочный люк, карабкаются на более высокую отметку.",
+          "existing_graph_node": "L1-STAIR-UP",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT004-D",
+          "label": "Тёмный переход к кодовой двери",
+          "global_level": 3,
+          "local_stratum": "service-access",
+          "source_page_id": "B1-021",
+          "movement_method": "WALK",
+          "observed_constraint": "После выхода из люка проход к двери.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT004-E",
+          "label": "Белый коридор Третьего",
+          "global_level": 3,
+          "local_stratum": "outer-service",
+          "source_page_id": "B1-021",
+          "movement_method": "DOOR",
+          "observed_constraint": "Дверь открывается и за ней длинный светлый коридор.",
+          "existing_graph_node": "L3-OUTER",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT004-D",
+          "lower": "RT004-A",
+          "source_page_id": "B1-021",
+          "claim": "Лестница соединяет мусорный цех с верхней частью"
+        }
+      ],
+      "identity_hypotheses": [],
+      "notes": "Высота лестницы неизвестна, по промежуточным этажам текст пока недостаточен."
+    },
+    {
+      "id": "RT-005",
+      "title": "Локальные ярусы спален Темной базы",
+      "participants": [
+        "Таис",
+        "Фёдор",
+        "Валёк",
+        "Нитка",
+        "Вовик"
+      ],
+      "book": "B1",
+      "site_pages": [
+        "B1-039",
+        "B1-042"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT005-A",
+          "label": "Общее помещение с чайным столиком",
+          "global_level": 1,
+          "local_stratum": "base-common-floor",
+          "source_page_id": "B1-039",
+          "movement_method": "WALK",
+          "observed_constraint": "Чайник, стол, общий зал.",
+          "existing_graph_node": "L1-BASE-COMMON",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT005-B",
+          "label": "Лестница к спальне Таис",
+          "global_level": 1,
+          "local_stratum": "base-interior-ladder",
+          "source_page_id": "B1-039",
+          "movement_method": "CLIMB_UP",
+          "observed_constraint": "Таис сидит на перекладинах лестницы к собственной спальне.",
+          "existing_graph_node": "L1-BASE-SLEEP",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT005-C",
+          "label": "Площадка у спальни Валька/Нитки",
+          "global_level": 1,
+          "local_stratum": "base-sleeping-access",
+          "source_page_id": "B1-039",
+          "movement_method": "CLIMB_DOWN",
+          "observed_constraint": "Фёдор выходит из спальни через овальную раздвижную дверь и спускается по лестнице.",
+          "existing_graph_node": "L1-BASE-SLEEP",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT005-D",
+          "label": "Лестница к спальне младших",
+          "global_level": 1,
+          "local_stratum": "base-sleeping-access",
+          "source_page_id": "B1-039",
+          "movement_method": "CLIMB_DOWN",
+          "observed_constraint": "Младшие спускаются по лестнице к общему залу.",
+          "existing_graph_node": "L1-BASE-KIDS-SLEEP",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT005-E",
+          "label": "Общее помещение после спуска Таис",
+          "global_level": 1,
+          "local_stratum": "base-common-floor",
+          "source_page_id": "B1-042",
+          "movement_method": "CLIMB_DOWN",
+          "observed_constraint": "Из своей спальни Таис спускается в общую комнату.",
+          "existing_graph_node": "L1-BASE-COMMON",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT005-B",
+          "lower": "RT005-A",
+          "source_page_id": "B1-039",
+          "claim": "Спальня Таис выше пола общей комнаты"
+        },
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT005-D",
+          "lower": "RT005-A",
+          "source_page_id": "B1-039",
+          "claim": "Спальные зоны младших доступны по лестнице из общего помещения"
+        }
+      ],
+      "identity_hypotheses": [],
+      "notes": "Несколько лестничных трасс и отдельных спален не доказывают сплошной верхний этаж всего Нижнего уровня."
+    }
+  ]
+}
