@@ -1,7 +1,7 @@
 """Exact additive installed APA update. Stages and validates before applying.
 
-Only two existing function bodies change; the current runtime group wrapper is
-added. Original core remainder, DynamicCommands, schemas, sidecars and packages
+Only two existing function bodies change; the current runtime group wrapper and
+one code-owned read are added. Original core remainder, DynamicCommands, sidecars and packages
 are preserved. No native connection, APX/PLN write or dependency installation.
 """
 import argparse
@@ -60,6 +60,7 @@ def preflight(root,source):
                  for n in ast.parse(before[core]).body),'RUNTIME_WRAPPER_ALREADY_PRESENT')
     wrapper,_=function((source/core).read_bytes(),'prepare_current_runtime_group_native_task')
     new[core]+=b'\n\n'+wrapper+b'\n'
+    new[core]+=b"\n# Accepted SDK group membership reader; no mutation allowlist change.\nREADS = READS | frozenset({'GetNativeGroupMembersV1'})\n"
     for name in ADDITIONS:
         data=(source/name).read_bytes()
         if (root/name).exists():

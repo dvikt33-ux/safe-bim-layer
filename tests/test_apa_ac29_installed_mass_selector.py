@@ -30,6 +30,7 @@ class InstallGates(unittest.TestCase):
         self.assertTrue(core.startswith(b'# prefix\nvalue=7\n'))
         self.assertIn(b'# suffix\ndef retained_user_function():\n    return 29\n',core)
         self.assertIn(b'def prepare_current_runtime_group_native_task',core)
+        self.assertIn(b"READS = READS | frozenset({'GetNativeGroupMembersV1'})",core)
 
     def test_hash_drift_denies_update(self):
         (self.root/'scripts/archicad_project_accelerator.py').write_bytes(b'user edited')
