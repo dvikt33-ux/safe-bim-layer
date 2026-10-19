@@ -240,6 +240,28 @@ def solve(bounds,graph,parameter_changes=None,area_overrides=None,candidates=Non
         if e["chosen_area_m2"] is not None and e["chosen_area_m2"]+EPS<e["min_area_m2"]:
             note("AFTER_TIGHTENING_"+profile["id"],False,
                  "Chosen area too small after dependent capacity/room constraints")
+    # A tall room may have 1, 1.2 or up to 2 local floor-equivalents.
+    # Clear volume and useful floor area are different quantities.
+    usable=bounds.get("usable_floor_accounting",{})
+    skip=set(usable.get("skip_roles",[]))
+    for eid,e in effective.items():
+        if "min_area_m2" not in e:
+            continue
+        if e["role"] in skip:
+            e["usable_floor_area_range_m2"]=None
+            e["floor_area_reason"]="Void, shaft, utility or global envelope; not a habitable floor sum"
+            continue
+        ratio=bounds.get("local_floor_area_multipliers",{}).get(eid)
+        lo,hi=(ratio["min"],ratio["max"]) if ratio else (1,1)
+        if type(lo) not in (int,float) or type(hi) not in (int,float) or lo<1 or hi<lo:
+            raise ValueError("BAD_LOCAL_FLOOR_AREA_RATIO: "+eid)
+        e["usable_floor_area_range_m2"]=[
+            round(e["min_area_m2"]*lo,4),round(e["max_area_m2"]*hi,4)]
+        e["local_story_factor_range"]=[lo,hi]
+        e["floor_area_reason"]=ratio["reason"] if ratio else "Working single-floor equivalent; not proof of exact storey count"
+        if e["chosen_area_m2"] is not None:
+            e["selected_footprint_usable_floor_range_m2"]=[
+                round(e["chosen_area_m2"]*lo,4),round(e["chosen_area_m2"]*hi,4)]
     errors=[x for x in checks if x["status"]=="FAIL"]
     # A placement choice must be checked against source-level and area domain.
     # Area narrows candidate list but does NOT create geographical coordinates.
