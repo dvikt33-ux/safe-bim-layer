@@ -177,12 +177,12 @@
       "id": "B3-016",
       "page_number": 16,
       "url": "https://loveread.ec/read_book.php?id=58610&p=16",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MIXED_REMOTE",
+      "recorded_spatial_hints": 3,
+      "notes": "Смешанная станционная страница. По памяти/опыту Эммы о МОАГе: она знает объёмную схему с переходами, лестницами, лифтами, каютами и детским парком; Верхний содержит жилые отсеки и капитанскую рубку. Для ремонта внешней связи на верхней внешней обшивке есть специальные люки. Отдельно: наружный вид, сегменты и заклёпки темного диска, к которому они летят, относятся к другой станции и исключены из МОАГа.",
+      "verification_method": "Однократное чтение страницы через Opera; собственное знание Эммы о МОАГе отделено от внешнего объекта текущей экспедиции.",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B3-017",
