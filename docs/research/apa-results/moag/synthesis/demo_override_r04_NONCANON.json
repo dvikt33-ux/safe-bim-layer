@@ -32,5 +32,17 @@
   "assumed_magnetic_board_speed_mps": 5,
   "assumed_stair_ascend_vertical_speed_mps": 0.22,
   "assumed_elevator_speed_mps": 2,
-  "assumed_lift_nontravel_time_s": 8
+  "assumed_lift_nontravel_time_s": 8,
+  "upper_service_cruiser_length_m": 185,
+  "upper_service_cruiser_width_m": 70,
+  "upper_service_cruiser_height_m": 55,
+  "upper_cruisers_simultaneous_in_hangar_count": 2,
+  "upper_cargo_hangar_clear_length_m": 420,
+  "upper_cargo_hangar_clear_width_m": 200,
+  "upper_cargo_hangar_clear_height_m": 85,
+  "children_gallery_above_plaza_m": 5,
+  "children_to_upper_lift_vertical_delta_m": 32,
+  "lower_round_hall_clear_height_m": 24,
+  "lower_round_hall_bridge_z_above_floor_m": 14,
+  "lower_round_hall_bridge_headroom_m": 4
 }
