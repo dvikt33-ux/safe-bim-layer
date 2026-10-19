@@ -1,6 +1,6 @@
 {
   "schema": "APA-MOAG-TOPOLOGY-SNAPSHOT/0.1",
-  "source_blob_sha": "9f740795129f92641b326ea4b3eb336d3b1a1397",
+  "source_blob_sha": "c3f1d1defaf421edc0556e7710d84fa6a91c0d5c",
   "derived_from": "docs/research/apa-results/moag/v1/evidence_graph.json",
   "status": "GRAPH_ONLY_NO_COORDINATES",
   "space_refs": [
@@ -383,6 +383,16 @@
       "id": "L1-BASE-KITCHEN-WATER",
       "label": "Водозабор и место мытья посуды на Темной базе",
       "level": 1
+    },
+    {
+      "id": "L3-LIFTS-DE",
+      "label": "Лифты Д и Е у отдалённых коридоров Третьего",
+      "level": 3
+    },
+    {
+      "id": "L3-CARGO-RECEIVING",
+      "label": "Платформа приёмки грузов Третьего",
+      "level": 3
     }
   ],
   "relationships": [
@@ -1277,6 +1287,16 @@
       "state": "TEXT_DIRECT",
       "source_ids": [
         "LR-B1-029"
+      ]
+    },
+    {
+      "id": "E90",
+      "from": "L3-LIFTS-DE",
+      "to": "L3-CARGO-RECEIVING",
+      "relation": "farthest_lifts_from",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-032"
       ]
     }
   ],
