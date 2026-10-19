@@ -295,6 +295,120 @@
       ],
       "verification": "TEXT_SEEN",
       "absolute_coordinates": false
+    },
+    {
+      "id": "EV-019",
+      "source_id": "B2-15",
+      "locator_hint": "«Диспетчерская здесь соединяется с диспетчерской соседнего ангара»",
+      "observation_type": "dialogue",
+      "paraphrase": "Прямое внутреннее сообщение двух операторских без выхода в общий ангарный коридор.",
+      "node_refs": [
+        "L1-OPERATORS",
+        "L1-OPERATORS-ADJ"
+      ],
+      "edge_refs": [
+        "E48"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-020",
+      "source_id": "B2-15",
+      "locator_hint": "«Еще три катера есть в соседнем ... свет ... не включается»",
+      "observation_type": "dialogue",
+      "paraphrase": "Отдельное соседнее помещение ангара с отключённым освещением и тремя катерами.",
+      "node_refs": [
+        "L1-ANGAR-ADJ"
+      ],
+      "edge_refs": [
+        "E45",
+        "E46"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-021",
+      "source_id": "B2-15",
+      "locator_hint": "«проплыла до открытых дверей работающего ангара»",
+      "observation_type": "movement",
+      "paraphrase": "Катер способен пройти через ангарный коридор в действующий ангар с малым запасом ширины.",
+      "node_refs": [
+        "L1-ANGAR-HALL",
+        "L1-ANGAR",
+        "L1-ANGAR-ADJ"
+      ],
+      "edge_refs": [
+        "E49"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-022",
+      "source_id": "B2-15",
+      "locator_hint": "«Добрались до следующей двери, за которой нашли целый ряд катеров»",
+      "observation_type": "movement",
+      "paraphrase": "В ангарной группе имеется как минимум еще один закрытый отсек с поврежденными аппаратами; точную идентичность ангаров уточнить.",
+      "node_refs": [
+        "L1-ANGAR-OTHER"
+      ],
+      "edge_refs": [
+        "E50"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-023",
+      "source_id": "B2-13",
+      "locator_hint": "«от грузовых лифтов ... коридора, ведущего к корабельной рубке»",
+      "observation_type": "movement",
+      "paraphrase": "Грузовые лифты расположены рядом с проходом к рубке; не означает непосредственного примыкания к рубке.",
+      "node_refs": [
+        "L3-FREIGHT-LIFTS",
+        "L3-BRIDGE"
+      ],
+      "edge_refs": [
+        "E51"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-024",
+      "source_id": "B2-13",
+      "locator_hint": "«просторный грузовой зал перед самыми дверьми цеха»",
+      "observation_type": "movement",
+      "paraphrase": "Грузовой зал примыкает к белым дверям закрытого производственного цеха.",
+      "node_refs": [
+        "L3-CARGO-HALL",
+        "L3-WORKSHOP-DOOR",
+        "L3-PRODUCTION"
+      ],
+      "edge_refs": [
+        "E52",
+        "E53"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-025",
+      "source_id": "B2-13",
+      "locator_hint": "«небольшом отсеке со скафандрами»",
+      "observation_type": "narration",
+      "paraphrase": "Небольшая ниша/отсек скафандров на маршруте рядом с производственными помещениями.",
+      "node_refs": [
+        "L3-SUIT-ALCOVE",
+        "L3-CARGO-HALL"
+      ],
+      "edge_refs": [
+        "E54"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
     }
   ]
 }
