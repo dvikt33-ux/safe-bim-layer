@@ -1,3 +1,8 @@
+# APA AC29 — очередь 19.10.2026 18Z
+[Аудит 30 SOURCE-проверок](hourly/audit-2026-10-19-18.md). [8 задач №1](hourly/audit-2026-10-19-18-tasks-1.md); [8 задач №2](hourly/audit-2026-10-19-18-tasks-2.md). Новых ACCEPTED нет.
+
+---
+
 # APA AC29 — очередь 19.10.2026 15Z (независимый аудит №3)
 [Аудит 15Z: 30 SOURCE проверок](hourly/audit-2026-10-19-15.md), 2 контрааудита. №1: [F15-01..04](hourly/audit-2026-10-19-15-tasks-1A.md), [F15-05..08](hourly/audit-2026-10-19-15-tasks-1B.md) — искать НОВЫЕ ГОТОВЫЕ РЕШЕНИЯ. №2: [I15-01..04](hourly/audit-2026-10-19-15-tasks-2A.md), [I15-05..08](hourly/audit-2026-10-19-15-tasks-2B.md) — ГОТОВЫЕ СПОСОБЫ ПОДКЛЮЧЕНИЯ.
 **Исправления:** PR160 — AP2 massops SOURCE preflight, НЕ native hosted PDF opening writer. Старое «PR173 batch не LIVE» устарело: LIVE-02 receipt существует (69→119 GUID), но independent binary ACCEPTED не доказан. Tapir 1.7.2 GraphicOverrideCriterion multi-key может молча терять второе условие; локальная 1.5.10 не сверена. №1 15Z main отсутствует; №2 15Z + 10 приложений есть. Новых OFFLINE/BUILD/INSTALLED/LIVE запусков 0; ACCEPTED 0. Канон rev182 только чтение. MODEL_MODE_NOT_VERIFIABLE.
