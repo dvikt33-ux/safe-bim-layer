@@ -10438,6 +10438,20 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-664",
+      "page_id": "B2-141",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=141",
+      "station_id": "MOAG",
+      "narrative_mode": "COMPARATIVE_REMOTE_REFERENCE",
+      "locator_hint": "Сравнение размера крейсера «Дракон» со станцией.",
+      "spatial_assertion": "Крейсер Ника назван небольшим по сравнению со станцией. Это только относительное свидетельство: размер МОАГа больше этого корабля; численные габариты и форма станции не выводятся.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
