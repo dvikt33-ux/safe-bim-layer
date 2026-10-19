@@ -1,0 +1,2259 @@
+{
+  "schema": "APA-MOAG-UNRESOLVED-CONSTRAINTS/1",
+  "created": "2026-10-19",
+  "status": "OPEN_CONSTRAINTS_REGISTER",
+  "summary": {
+    "source_graph_questions": 15,
+    "unique_question_ids": 14,
+    "question_id_collisions": [
+      "Q13"
+    ],
+    "route_steps_without_graph_node": 164,
+    "orphan_observations": 191
+  },
+  "items": [
+    {
+      "id": "Q13A",
+      "source_id": "Q13",
+      "priority": "HIGH",
+      "issue": "Установить старую нумерацию баз станции (в замках названы 3 и 4), отличать её от трёх нынешних поселений; проверить были ли базы 1 и 2 и число исходных палуб Нижнего.",
+      "status": "UNRESOLVED_ID_COLLISION_IN_SOURCE_GRAPH",
+      "decision": "Retained as distinct questions; derivative IDs assigned without modifying source."
+    },
+    {
+      "id": "Q13B",
+      "source_id": "Q13",
+      "priority": "BLOCKER",
+      "issue": "Определить соотношение галереи общего помещения Темной базы, короткой лестницы у ванной, дверей отдельных спален и длинной внешней лестницы. Верхний ярус доказан, число полноценных палуб не доказано.",
+      "status": "UNRESOLVED_ID_COLLISION_IN_SOURCE_GRAPH",
+      "decision": "Retained as distinct questions; derivative IDs assigned without modifying source."
+    },
+    {
+      "id": "Q01",
+      "source_id": "Q01",
+      "priority": "BLOCKER",
+      "issue": "Найти эпизод карты Первого уровня после взлома лона; сопоставить состояние до/после.",
+      "status": "UNRESOLVED",
+      "decision": null
+    },
+    {
+      "id": "Q02",
+      "source_id": "Q02",
+      "priority": "BLOCKER",
+      "issue": "Перепроверить энергомодуль, осевое расположение, диапазон высот и отношение к Главной площади.",
+      "status": "UNRESOLVED",
+      "decision": null
+    },
+    {
+      "id": "Q03",
+      "source_id": "Q03",
+      "priority": "BLOCKER",
+      "issue": "Установить реальные габариты трех уровней по тексту и иллюстрациям; без псевдоразмеров.",
+      "status": "UNRESOLVED",
+      "decision": null
+    },
+    {
+      "id": "Q04",
+      "source_id": "Q04",
+      "priority": "BLOCKER",
+      "issue": "Восстановить все маршруты Нижнего уровня: Овальная, Темная, Дикая базы, ангары, склад, мусорка, заблокированный проход.",
+      "status": "UNRESOLVED",
+      "decision": null
+    },
+    {
+      "id": "Q05",
+      "source_id": "Q05",
+      "priority": "HIGH",
+      "issue": "Проработать все книги III и IV с разграничением МОАГа и других станций.",
+      "status": "UNRESOLVED",
+      "decision": null
+    },
+    {
+      "id": "Q06",
+      "source_id": "Q06",
+      "priority": "HIGH",
+      "issue": "Проверить количество/планировки баз 3 и 4 и их исторические названия.",
+      "status": "UNRESOLVED",
+      "decision": null
+    },
+    {
+      "id": "Q07",
+      "source_id": "Q07",
+      "priority": "HIGH",
+      "issue": "Разметить мебель, отделку, освещение, энергоснабжение как зависимые слои, без преждевременной записи в BIM.",
+      "status": "UNRESOLVED",
+      "decision": null
+    },
+    {
+      "id": "Q08",
+      "source_id": "Q08",
+      "priority": "HIGH",
+      "issue": "Подтвердить взаимную ориентацию капитанской рубки, детского блока, отдыха, шлюзов и производства.",
+      "status": "UNRESOLVED",
+      "decision": null
+    },
+    {
+      "id": "Q09",
+      "source_id": "Q09",
+      "priority": "BLOCKER",
+      "issue": "Проверить гипотезу двух палуб внутри Первого уровня и дополнительного двухъярусного нижнего этажа. Книжный факт: под известным Нижним есть помещения; НЕ доказано наличие четырёх сплошных перекрытий. Сравнить размеры и z-связи баз, старых грузовых ангаров, катеров, высоких залов, энергетического ядра и операторских.",
+      "status": "UNRESOLVED",
+      "decision": null
+    },
+    {
+      "id": "Q10",
+      "source_id": "Q10",
+      "priority": "BLOCKER",
+      "issue": "Отделить вложенные палубы Нижнего блока от глобальных трёх уровней. Найти в книгах точную формулировку числа полноценных этажей, их протяженности, на каких отметках находятся базы и ангары, и как связаны частичные антресоли.",
+      "status": "UNRESOLVED",
+      "decision": null
+    },
+    {
+      "id": "Q11",
+      "source_id": "Q11",
+      "priority": "HIGH",
+      "issue": "Проверить конструкцию мостика круглого зала: верхняя полукруглая галерея → дверь → операторская ручных шлюзов → жилая комната. Установить обратный проход и доступ с уровня пола.",
+      "status": "UNRESOLVED",
+      "decision": null
+    },
+    {
+      "id": "Q12",
+      "source_id": "Q12",
+      "priority": "HIGH",
+      "issue": "Где размещена лифтовая шахта Третий→Нижний относительно производственных коридоров, станции энергомодуля и кольцевой сети? Доказан маршрут, не XY-координаты.",
+      "status": "UNRESOLVED",
+      "decision": null
+    },
+    {
+      "id": "Q14",
+      "source_id": "Q14",
+      "priority": "HIGH",
+      "issue": "Проверить: прямой грузовой коридор Эммы и ранее встреченный полукруглый ангарный переход — разные участки или общая система? Не выводить автоматом прохождение от внутреннего к внешнему кольцу.",
+      "status": "UNRESOLVED",
+      "decision": null
+    }
+  ],
+  "additional": {
+    "spatial_unknowns": [
+      "Global dimensions/diameters and exact deck footprints",
+      "Absolute level elevations and station datum",
+      "XY/orientation of rooms, rings, lift shafts, production/cargo/crew/dock relations",
+      "Complete wall perimeters, thicknesses, openings and door normals",
+      "Full shape and location of lower well/unknown spaces",
+      "Core diameter/height and access from L1/L2",
+      "Whether selected seeming-similar rooms across episodes are same physical room"
+    ],
+    "unresolved_route_step_ids": [
+      {
+        "route_id": "RT-001",
+        "step_id": "RT001-B",
+        "source_page_id": "B1-036",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Основной лифт на Третий"
+      },
+      {
+        "route_id": "RT-001",
+        "step_id": "RT001-C",
+        "source_page_id": "B1-036",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Чистый белый изогнутый коридор"
+      },
+      {
+        "route_id": "RT-001",
+        "step_id": "RT001-D",
+        "source_page_id": "B1-037",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Развилка с двумя одинаковыми поворотами"
+      },
+      {
+        "route_id": "RT-001",
+        "step_id": "RT001-E",
+        "source_page_id": "B1-037",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Другой лифт у развилки"
+      },
+      {
+        "route_id": "RT-001",
+        "step_id": "RT001-F",
+        "source_page_id": "B1-037",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Спуск лифтом на Второй"
+      },
+      {
+        "route_id": "RT-001",
+        "step_id": "RT001-G",
+        "source_page_id": "B1-037",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Тёмные малые коридоры и дальние игровые площадки"
+      },
+      {
+        "route_id": "RT-001",
+        "step_id": "RT001-H",
+        "source_page_id": "B1-037",
+        "status": "PASSAGE_OR_SHAFT_MOVEMENT_UNMAPPED",
+        "label": "Широкая труба, вход с уровня площадок"
+      },
+      {
+        "route_id": "RT-001",
+        "step_id": "RT001-I",
+        "source_page_id": "B1-038",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Нижняя площадка у запечатанной двери"
+      },
+      {
+        "route_id": "RT-001",
+        "step_id": "RT001-J",
+        "source_page_id": "B1-038",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Возвращение вверх в ту же трубу"
+      },
+      {
+        "route_id": "RT-001",
+        "step_id": "RT001-K",
+        "source_page_id": "B1-038",
+        "status": "PASSAGE_OR_SHAFT_MOVEMENT_UNMAPPED",
+        "label": "Близкий боковой поворот над нижней площадкой"
+      },
+      {
+        "route_id": "RT-003",
+        "step_id": "RT003-A",
+        "source_page_id": "B1-001",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Второй: служебный тупик к вентиляции"
+      },
+      {
+        "route_id": "RT-003",
+        "step_id": "RT003-D",
+        "source_page_id": "B1-002",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Холодный коридор Нижнего"
+      },
+      {
+        "route_id": "RT-004",
+        "step_id": "RT004-D",
+        "source_page_id": "B1-021",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Тёмный переход к кодовой двери"
+      },
+      {
+        "route_id": "RT-006",
+        "step_id": "RT006-B",
+        "source_page_id": "B1-043",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Большой обход из-за запертых дверей"
+      },
+      {
+        "route_id": "RT-006",
+        "step_id": "RT006-C",
+        "source_page_id": "B1-043",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Узкий тёмный коридор"
+      },
+      {
+        "route_id": "RT-006",
+        "step_id": "RT006-D",
+        "source_page_id": "B1-043",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Высокий порог и сорванная створка"
+      },
+      {
+        "route_id": "RT-006",
+        "step_id": "RT006-E",
+        "source_page_id": "B1-043",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Два шага вниз"
+      },
+      {
+        "route_id": "RT-006",
+        "step_id": "RT006-F",
+        "source_page_id": "B1-043",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Ряд инженерных труб и последний поворот"
+      },
+      {
+        "route_id": "RT-007",
+        "step_id": "RT007-B",
+        "source_page_id": "B1-044",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Первая лестница вниз из спальни"
+      },
+      {
+        "route_id": "RT-007",
+        "step_id": "RT007-C",
+        "source_page_id": "B1-044",
+        "status": "OPENING_OR_DOOR_STEP_UNMAPPED",
+        "label": "Стальная раздвижная двухстворчатая дверь базы"
+      },
+      {
+        "route_id": "RT-007",
+        "step_id": "RT007-D",
+        "source_page_id": "B1-044",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Ещё одна длинная лестница"
+      },
+      {
+        "route_id": "RT-007",
+        "step_id": "RT007-E",
+        "source_page_id": "B1-044",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Холодные коридоры и три поворота"
+      },
+      {
+        "route_id": "RT-007",
+        "step_id": "RT007-F",
+        "source_page_id": "B1-044",
+        "status": "PASSAGE_OR_SHAFT_MOVEMENT_UNMAPPED",
+        "label": "Первый лаз над трубами"
+      },
+      {
+        "route_id": "RT-007",
+        "step_id": "RT007-G",
+        "source_page_id": "B1-044",
+        "status": "PASSAGE_OR_SHAFT_MOVEMENT_UNMAPPED",
+        "label": "Второй узкий лаз из коммуникационных ниш"
+      },
+      {
+        "route_id": "RT-007",
+        "step_id": "RT007-H",
+        "source_page_id": "B1-044",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Прямой транспортно-грузовой коридор"
+      },
+      {
+        "route_id": "RT-007",
+        "step_id": "RT007-I",
+        "source_page_id": "B1-045",
+        "status": "PASSAGE_OR_SHAFT_MOVEMENT_UNMAPPED",
+        "label": "Возвращение через повреждённую панель"
+      },
+      {
+        "route_id": "RT-008",
+        "step_id": "RT008-C",
+        "source_page_id": "B1-046",
+        "status": "OPENING_OR_DOOR_STEP_UNMAPPED",
+        "label": "Решётка на выходе в жилой сектор"
+      },
+      {
+        "route_id": "RT-009",
+        "step_id": "RT009-B",
+        "source_page_id": "B1-048",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Подход к штатному лифту"
+      },
+      {
+        "route_id": "RT-009",
+        "step_id": "RT009-D",
+        "source_page_id": "B1-047",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Тёмная остановка Нижнего"
+      },
+      {
+        "route_id": "RT-010",
+        "step_id": "RT010-B",
+        "source_page_id": "B1-049",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Короткая лестница около общего помещения"
+      },
+      {
+        "route_id": "RT-013",
+        "step_id": "RT013-E",
+        "source_page_id": "B1-061",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Возвращение на галерею и вниз в проход"
+      },
+      {
+        "route_id": "RT-013",
+        "step_id": "RT013-F",
+        "source_page_id": "B1-063",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Низкий полутёмный коридор к наружной кольцевой сети"
+      },
+      {
+        "route_id": "RT-014",
+        "step_id": "RT014-B",
+        "source_page_id": "B1-065",
+        "status": "NARRATIVE_GAP_UNRESOLVED",
+        "label": "Переходы и спуск с Второго на Нижний"
+      },
+      {
+        "route_id": "RT-014",
+        "step_id": "RT014-C",
+        "source_page_id": "B1-065",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Холодный проход и низкий проём"
+      },
+      {
+        "route_id": "RT-014",
+        "step_id": "RT014-E",
+        "source_page_id": "B1-065",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Длинная ветка в обход опасного участка"
+      },
+      {
+        "route_id": "RT-015",
+        "step_id": "RT015-B",
+        "source_page_id": "B1-074",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Спуск по трубе на локальную нижнюю отметку"
+      },
+      {
+        "route_id": "RT-015",
+        "step_id": "RT015-D",
+        "source_page_id": "B1-074",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Три ответвления за дверью"
+      },
+      {
+        "route_id": "RT-016",
+        "step_id": "RT016-F",
+        "source_page_id": "B1-079",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Прозрачный лифт со спуском на Второй"
+      },
+      {
+        "route_id": "RT-016",
+        "step_id": "RT016-I",
+        "source_page_id": "B1-080",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Боковой защитный туннель во время нападения"
+      },
+      {
+        "route_id": "RT-017",
+        "step_id": "RT017-B",
+        "source_page_id": "B1-082",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Смежная мини-лаборатория с компьютерами"
+      },
+      {
+        "route_id": "RT-017",
+        "step_id": "RT017-D",
+        "source_page_id": "B1-082",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Смежная ванная, выдвижной унитаз и раковина"
+      },
+      {
+        "route_id": "RT-019",
+        "step_id": "RT019-C",
+        "source_page_id": "B1-094",
+        "status": "TRANSPORT_OR_OBJECT_EVENT_UNMAPPED",
+        "label": "Прямой туннель и два последовательных поворота"
+      },
+      {
+        "route_id": "RT-019",
+        "step_id": "RT019-E",
+        "source_page_id": "B1-095",
+        "status": "TRANSPORT_OR_OBJECT_EVENT_UNMAPPED",
+        "label": "Боковые туннели удлинённой траектории отвлечения"
+      },
+      {
+        "route_id": "RT-020",
+        "step_id": "RT020-B",
+        "source_page_id": "B1-096",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Грузовой продуктовый лифт, посадка"
+      },
+      {
+        "route_id": "RT-020",
+        "step_id": "RT020-C",
+        "source_page_id": "B1-096",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Подъём грузовым лифтом на Третий"
+      },
+      {
+        "route_id": "RT-020",
+        "step_id": "RT020-E",
+        "source_page_id": "B1-096",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Возврат к грузовому лифту с отключённым роботом"
+      },
+      {
+        "route_id": "RT-020",
+        "step_id": "RT020-F",
+        "source_page_id": "B1-096",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Спуск тем же лифтом на Второй"
+      },
+      {
+        "route_id": "RT-021",
+        "step_id": "RT021-B",
+        "source_page_id": "B1-098",
+        "status": "NARRATIVE_GAP_UNRESOLVED",
+        "label": "Пропуск описания перехода на Третий"
+      },
+      {
+        "route_id": "RT-021",
+        "step_id": "RT021-D",
+        "source_page_id": "B1-098",
+        "status": "NARRATIVE_GAP_UNRESOLVED",
+        "label": "Переход между Третьим и Нижним без уточненной в этой сцене лестницы"
+      },
+      {
+        "route_id": "RT-023",
+        "step_id": "RT023-D",
+        "source_page_id": "B1-105",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Три железные ступеньки вверх, затем дугообразный коридор с резиновым полом"
+      },
+      {
+        "route_id": "RT-026",
+        "step_id": "RT026-B",
+        "source_page_id": "B2-005",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Лифт спуска с Третьего на Второй, кабина не описана"
+      },
+      {
+        "route_id": "RT-028",
+        "step_id": "RT028-C",
+        "source_page_id": "B2-008",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Короткий переход из жилого сектора к рубке"
+      },
+      {
+        "route_id": "RT-030",
+        "step_id": "RT030-B",
+        "source_page_id": "B2-014",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Развилка в технической сети под голыми коммуникациями"
+      },
+      {
+        "route_id": "RT-030",
+        "step_id": "RT030-C",
+        "source_page_id": "B2-014",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Короткий правый боковой коридор"
+      },
+      {
+        "route_id": "RT-031",
+        "step_id": "RT031-C",
+        "source_page_id": "B2-017",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Короткий спуск лифтом к нижним закрытым помещениям"
+      },
+      {
+        "route_id": "RT-032",
+        "step_id": "RT032-G",
+        "source_page_id": "B2-021",
+        "status": "TRANSPORT_OR_OBJECT_EVENT_UNMAPPED",
+        "label": "Выход боевых катеров наружу за оболочку станции"
+      },
+      {
+        "route_id": "RT-033",
+        "step_id": "RT033-B",
+        "source_page_id": "B2-027",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Два последовательных поворота в темных общих коридорах"
+      },
+      {
+        "route_id": "RT-035",
+        "step_id": "RT035-E",
+        "source_page_id": "B2-041",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Поворот с нишей для охранных андроидов"
+      },
+      {
+        "route_id": "RT-036",
+        "step_id": "RT036-B",
+        "source_page_id": "B2-046",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Посадка и спуск лифтом на Второй"
+      },
+      {
+        "route_id": "RT-037",
+        "step_id": "RT037-B",
+        "source_page_id": "B2-049",
+        "status": "NARRATIVE_GAP_UNRESOLVED",
+        "label": "Выход с совета, переход к лифту: подробный путь пропущен"
+      },
+      {
+        "route_id": "RT-037",
+        "step_id": "RT037-C",
+        "source_page_id": "B2-050",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Подъём со Второго на Третий в ранее использованной кабине"
+      },
+      {
+        "route_id": "RT-038",
+        "step_id": "RT038-E",
+        "source_page_id": "B2-054",
+        "status": "OPENING_OR_DOOR_STEP_UNMAPPED",
+        "label": "Маленькая комната с дверью и люком в полу"
+      },
+      {
+        "route_id": "RT-040",
+        "step_id": "RT040-E",
+        "source_page_id": "B2-067",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Вход/решётка туннеля №8"
+      },
+      {
+        "route_id": "RT-040",
+        "step_id": "RT040-H",
+        "source_page_id": "B2-068",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Продуктовый грузовой лифт между уровнями"
+      },
+      {
+        "route_id": "RT-041",
+        "step_id": "RT041-A",
+        "source_page_id": "B2-073",
+        "status": "OPENING_OR_DOOR_STEP_UNMAPPED",
+        "label": "Кафе Второго у прозрачной двери"
+      },
+      {
+        "route_id": "RT-041",
+        "step_id": "RT041-B",
+        "source_page_id": "B2-074",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Длинный ярко освещённый коридор и развилка"
+      },
+      {
+        "route_id": "RT-041",
+        "step_id": "RT041-C",
+        "source_page_id": "B2-074",
+        "status": "OPENING_OR_DOOR_STEP_UNMAPPED",
+        "label": "Широкое овальное помещение с пультом и шкафами"
+      },
+      {
+        "route_id": "RT-041",
+        "step_id": "RT041-D",
+        "source_page_id": "B2-075",
+        "status": "OPENING_OR_DOOR_STEP_UNMAPPED",
+        "label": "Выходы из кладовой к коридору мусорного отсека"
+      },
+      {
+        "route_id": "RT-041",
+        "step_id": "RT041-E",
+        "source_page_id": "B2-075",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Лестница и герметичный люк на Третий"
+      },
+      {
+        "route_id": "RT-041",
+        "step_id": "RT041-F",
+        "source_page_id": "B2-075",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Тёмные коридоры и кладовые Третьего"
+      },
+      {
+        "route_id": "RT-041",
+        "step_id": "RT041-G",
+        "source_page_id": "B2-075",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Капитанская рубка и прилегающий верхний сервер"
+      },
+      {
+        "route_id": "RT-041",
+        "step_id": "RT041-H",
+        "source_page_id": "B2-076",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Площадка контейнеров перед грузовыми лифтами"
+      },
+      {
+        "route_id": "RT-041",
+        "step_id": "RT041-I",
+        "source_page_id": "B2-077",
+        "status": "PASSAGE_OR_SHAFT_MOVEMENT_UNMAPPED",
+        "label": "Узкие шахты электрокабелей к третьему туннелю"
+      },
+      {
+        "route_id": "RT-042",
+        "step_id": "RT042-A",
+        "source_page_id": "B2-081",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Туннель №2 на Втором уровне"
+      },
+      {
+        "route_id": "RT-042",
+        "step_id": "RT042-B",
+        "source_page_id": "B2-081",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Закрытый внутренний круг Второго уровня"
+      },
+      {
+        "route_id": "RT-042",
+        "step_id": "RT042-C",
+        "source_page_id": "B2-082",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Каюта Эммы: кухня, три спальни, ванная и гостиная"
+      },
+      {
+        "route_id": "RT-042",
+        "step_id": "RT042-D",
+        "source_page_id": "B2-082",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Галерея и лестничный участок Второго уровня"
+      },
+      {
+        "route_id": "RT-042",
+        "step_id": "RT042-E",
+        "source_page_id": "B2-082",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Скамейка, под которой прячется Макс"
+      },
+      {
+        "route_id": "RT-042",
+        "step_id": "RT042-F",
+        "source_page_id": "B2-082",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Проход в туннель и соседняя огнестойкая скамейка"
+      },
+      {
+        "route_id": "RT-042",
+        "step_id": "RT042-G",
+        "source_page_id": "B2-083",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Лестничный участок: встреча Эммы, Кольки и Сони"
+      },
+      {
+        "route_id": "RT-042",
+        "step_id": "RT042-H",
+        "source_page_id": "B2-083",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Каюта Эммы и гостиная во время ужина"
+      },
+      {
+        "route_id": "RT-043",
+        "step_id": "RT043-A",
+        "source_page_id": "B2-090",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Гостиная с колыбелями"
+      },
+      {
+        "route_id": "RT-043",
+        "step_id": "RT043-B",
+        "source_page_id": "B2-090",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Кухня с холодильником и детским агрегатом"
+      },
+      {
+        "route_id": "RT-043",
+        "step_id": "RT043-C",
+        "source_page_id": "B2-090",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Гостиная с младенцами"
+      },
+      {
+        "route_id": "RT-043",
+        "step_id": "RT043-D",
+        "source_page_id": "B2-090",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Ванная"
+      },
+      {
+        "route_id": "RT-044",
+        "step_id": "RT044-A",
+        "source_page_id": "B2-091",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Каюта Эммы (внутренний старт, уровень не установлен)"
+      },
+      {
+        "route_id": "RT-044",
+        "step_id": "RT044-B",
+        "source_page_id": "B2-091",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Галерея"
+      },
+      {
+        "route_id": "RT-044",
+        "step_id": "RT044-C",
+        "source_page_id": "B2-091",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Лестница, ведущая на Зелёную магистраль"
+      },
+      {
+        "route_id": "RT-044",
+        "step_id": "RT044-D",
+        "source_page_id": "B2-091",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Свободная детская каюта с ванной"
+      },
+      {
+        "route_id": "RT-044",
+        "step_id": "RT044-E",
+        "source_page_id": "B2-091",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Зелёная магистраль"
+      },
+      {
+        "route_id": "RT-044",
+        "step_id": "RT044-F",
+        "source_page_id": "B2-091",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Главная площадь"
+      },
+      {
+        "route_id": "RT-044",
+        "step_id": "RT044-G",
+        "source_page_id": "B2-091",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Парк со скамейками, деревьями и цветочными горшками"
+      },
+      {
+        "route_id": "RT-044",
+        "step_id": "RT044-H",
+        "source_page_id": "B2-092",
+        "status": "NARRATIVE_GAP_UNRESOLVED",
+        "label": "Малая библиотека со стеклянными дверями"
+      },
+      {
+        "route_id": "RT-045",
+        "step_id": "RT045-A",
+        "source_page_id": "B2-092",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Малая библиотека"
+      },
+      {
+        "route_id": "RT-045",
+        "step_id": "RT045-B",
+        "source_page_id": "B2-093",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Зелёная магистраль"
+      },
+      {
+        "route_id": "RT-045",
+        "step_id": "RT045-C",
+        "source_page_id": "B2-093",
+        "status": "OPENING_OR_DOOR_STEP_UNMAPPED",
+        "label": "Туннель №8 у границы внутреннего круга"
+      },
+      {
+        "route_id": "RT-045",
+        "step_id": "RT045-D",
+        "source_page_id": "B2-093",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Решётка и Оранжевая магистраль"
+      },
+      {
+        "route_id": "RT-045",
+        "step_id": "RT045-E",
+        "source_page_id": "B2-094",
+        "status": "OPENING_OR_DOOR_STEP_UNMAPPED",
+        "label": "Решётка туннеля №8 закрывается"
+      },
+      {
+        "route_id": "RT-046",
+        "step_id": "RT046-A",
+        "source_page_id": "B2-094",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Туннель №8 после возвращения Дины"
+      },
+      {
+        "route_id": "RT-046",
+        "step_id": "RT046-B",
+        "source_page_id": "B2-094",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Подъём «наверх» из туннельной зоны"
+      },
+      {
+        "route_id": "RT-046",
+        "step_id": "RT046-C",
+        "source_page_id": "B2-094",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Жилая каюта: гостиная и кухня"
+      },
+      {
+        "route_id": "RT-047",
+        "step_id": "RT047-A",
+        "source_page_id": "B2-101",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Малая библиотека после собрания"
+      },
+      {
+        "route_id": "RT-047",
+        "step_id": "RT047-B",
+        "source_page_id": "B2-101",
+        "status": "NARRATIVE_GAP_UNRESOLVED",
+        "label": "Жилая каюта Эммы"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-A",
+        "source_page_id": "B2-105",
+        "status": "NARRATIVE_GAP_UNRESOLVED",
+        "label": "Неуказанная точка отправления на Втором уровне"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-B",
+        "source_page_id": "B2-106",
+        "status": "OPENING_OR_DOOR_STEP_UNMAPPED",
+        "label": "Решётка у туннеля с неустановленной идентичностью"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-C",
+        "source_page_id": "B2-106",
+        "status": "OPENING_OR_DOOR_STEP_UNMAPPED",
+        "label": "Узкая овальная крышка входа в кабельную шахту"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-D",
+        "source_page_id": "B2-106",
+        "status": "PASSAGE_OR_SHAFT_MOVEMENT_UNMAPPED",
+        "label": "Разветвлённая кабельная шахта внутри стен"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-E",
+        "source_page_id": "B2-106",
+        "status": "PASSAGE_OR_SHAFT_MOVEMENT_UNMAPPED",
+        "label": "Мусорный отсек и зона сортировки"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-F",
+        "source_page_id": "B2-106",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Лестница и герметичный люк наверх"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-G",
+        "source_page_id": "B2-106",
+        "status": "OPENING_OR_DOOR_STEP_UNMAPPED",
+        "label": "Коридор Третьего уровня за замком"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-H",
+        "source_page_id": "B2-106",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Коридор рядом с серебристыми дверями лифта"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-I",
+        "source_page_id": "B2-106",
+        "status": "PASSAGE_OR_SHAFT_MOVEMENT_UNMAPPED",
+        "label": "Коридор со стеклянными дверями капитанской рубки"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-J",
+        "source_page_id": "B2-107",
+        "status": "PASSAGE_OR_SHAFT_MOVEMENT_UNMAPPED",
+        "label": "Коридор у небольшого блока освещения"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-K",
+        "source_page_id": "B2-107",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Первый лифтовый участок с пауками и полукруглым рядом кладовок"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-L",
+        "source_page_id": "B2-107",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Ответвление коридора к дверям цеха"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-M",
+        "source_page_id": "B2-107",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Длинный коридор к бывшей зоне изоляции"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-N",
+        "source_page_id": "B2-107",
+        "status": "OPENING_OR_DOOR_STEP_UNMAPPED",
+        "label": "Помещение бывшей изоляции, используемое для сортировки деталей"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-O",
+        "source_page_id": "B2-107",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Широкая площадка с лифтами и грузами"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-P",
+        "source_page_id": "B2-107",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Широкий открытый грузовой ангар"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-Q",
+        "source_page_id": "B2-108",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Закругляющиеся белые коридоры к внутреннему кругу"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-R",
+        "source_page_id": "B2-108",
+        "status": "OPENING_OR_DOOR_STEP_UNMAPPED",
+        "label": "Знакомая дверь и замок во внутренний круг"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-S",
+        "source_page_id": "B2-108",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Зал отдыха с высоким потолком"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-T",
+        "source_page_id": "B2-108",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Лестница из зала к круговой галерее"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-U",
+        "source_page_id": "B2-108",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Бывшая каюта штурмана на галерее"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-V",
+        "source_page_id": "B2-113",
+        "status": "OPENING_OR_DOOR_STEP_UNMAPPED",
+        "label": "Узкая белая дверь из каюты в коридор с кувезами"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-W",
+        "source_page_id": "B2-113",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Коридор к лифту с прозрачными дверями"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-X",
+        "source_page_id": "B2-113",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Кабина лифта, остановленная в шахте"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-Y",
+        "source_page_id": "B2-113",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Крыша кабины и шахта с силовым кабелем/скобами"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-Z",
+        "source_page_id": "B2-113",
+        "status": "PASSAGE_OR_SHAFT_MOVEMENT_UNMAPPED",
+        "label": "Вентиляционный люк и проход"
+      },
+      {
+        "route_id": "RT-048",
+        "step_id": "RT048-AA",
+        "source_page_id": "B2-113",
+        "status": "PASSAGE_OR_SHAFT_MOVEMENT_UNMAPPED",
+        "label": "Старые базы у заброшенных ангаров"
+      },
+      {
+        "route_id": "RT-049",
+        "step_id": "RT049-A",
+        "source_page_id": "B2-114",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Широкий проход к дверям спящих существ"
+      },
+      {
+        "route_id": "RT-049",
+        "step_id": "RT049-B",
+        "source_page_id": "B2-114",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Коридор между внутренним и внешним кругом"
+      },
+      {
+        "route_id": "RT-049",
+        "step_id": "RT049-C",
+        "source_page_id": "B2-114",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Ангар с новыми дверями и работами"
+      },
+      {
+        "route_id": "RT-049",
+        "step_id": "RT049-D",
+        "source_page_id": "B2-114",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Малые тёмные коридоры"
+      },
+      {
+        "route_id": "RT-049",
+        "step_id": "RT049-E",
+        "source_page_id": "B2-114",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "База диких"
+      },
+      {
+        "route_id": "RT-049",
+        "step_id": "RT049-F",
+        "source_page_id": "B2-114",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Знакомый коридор с новым покрытием"
+      },
+      {
+        "route_id": "RT-049",
+        "step_id": "RT049-G",
+        "source_page_id": "B2-115",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Короткий коридор и знакомая площадка"
+      },
+      {
+        "route_id": "RT-049",
+        "step_id": "RT049-H",
+        "source_page_id": "B2-115",
+        "status": "OPENING_OR_DOOR_STEP_UNMAPPED",
+        "label": "Двери ангаров со спящей стаей"
+      },
+      {
+        "route_id": "RT-049",
+        "step_id": "RT049-I",
+        "source_page_id": "B2-119",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Коридорный участок у ангара с новыми дверями и скрытыми кабелями/платами"
+      },
+      {
+        "route_id": "RT-049",
+        "step_id": "RT049-J",
+        "source_page_id": "B2-120",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Открытый широкий ангар с прибывшим звездолётом"
+      },
+      {
+        "route_id": "RT-049",
+        "step_id": "RT049-K",
+        "source_page_id": "B2-120",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Двери внешнего шлюза у противоположной стороны ангара"
+      },
+      {
+        "route_id": "RT-049",
+        "step_id": "RT049-L",
+        "source_page_id": "B2-120",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Посадочный шлюз/площадка к открытому космосу"
+      },
+      {
+        "route_id": "RT-049",
+        "step_id": "RT049-M",
+        "source_page_id": "B2-120",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Скрытый люк в днище звездолёта и выдвижные ступени"
+      },
+      {
+        "route_id": "RT-049",
+        "step_id": "RT049-N",
+        "source_page_id": "B2-121",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Внутреннее помещение первого звездолёта"
+      },
+      {
+        "route_id": "RT-049",
+        "step_id": "RT049-O",
+        "source_page_id": "B2-121",
+        "status": "TRANSPORT_OR_OBJECT_EVENT_UNMAPPED",
+        "label": "Внешний круглый шлюз и зона трёхопорного аппарата"
+      },
+      {
+        "route_id": "RT-050",
+        "step_id": "RT050-A",
+        "source_page_id": "B2-127",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Лифтовая кабина у Второго уровня"
+      },
+      {
+        "route_id": "RT-050",
+        "step_id": "RT050-B",
+        "source_page_id": "B2-127",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Коридор боя с небольшим тупиком"
+      },
+      {
+        "route_id": "RT-050",
+        "step_id": "RT050-C",
+        "source_page_id": "B2-127",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Узкая лестница за металлической решёткой"
+      },
+      {
+        "route_id": "RT-050",
+        "step_id": "RT050-D",
+        "source_page_id": "B2-127",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Участок доступа к кабельным шахтам"
+      },
+      {
+        "route_id": "RT-050",
+        "step_id": "RT050-E",
+        "source_page_id": "B2-127",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Коридор боя у Оранжевой магистрали"
+      },
+      {
+        "route_id": "RT-050",
+        "step_id": "RT050-F",
+        "source_page_id": "B2-128",
+        "status": "NARRATIVE_GAP_UNRESOLVED",
+        "label": "Неустановленный переход со Второго на Третий уровень"
+      },
+      {
+        "route_id": "RT-050",
+        "step_id": "RT050-G",
+        "source_page_id": "B2-128",
+        "status": "NARRATIVE_GAP_UNRESOLVED",
+        "label": "Знакомые грузовые ангары на Третьем уровне"
+      },
+      {
+        "route_id": "RT-050",
+        "step_id": "RT050-H",
+        "source_page_id": "B2-128",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Коридор от грузовой зоны к дверям капитанской рубки"
+      },
+      {
+        "route_id": "RT-051",
+        "step_id": "RT051-A",
+        "source_page_id": "B2-133",
+        "status": "OPENING_OR_DOOR_STEP_UNMAPPED",
+        "label": "Двойные двери цеха"
+      },
+      {
+        "route_id": "RT-051",
+        "step_id": "RT051-B",
+        "source_page_id": "B2-133",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Главный круглый зал с центральной колбой"
+      },
+      {
+        "route_id": "RT-051",
+        "step_id": "RT051-C",
+        "source_page_id": "B2-133",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Просторные помещения, расходящиеся веером"
+      },
+      {
+        "route_id": "RT-051",
+        "step_id": "RT051-D",
+        "source_page_id": "B2-133",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Ряд пластиковых упаковочных контейнеров и полукруглый проход"
+      },
+      {
+        "route_id": "RT-051",
+        "step_id": "RT051-E",
+        "source_page_id": "B2-133",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Зона изготовления человекоподобных роботов"
+      },
+      {
+        "route_id": "RT-052",
+        "step_id": "RT052-A",
+        "source_page_id": "B2-134",
+        "status": "NARRATIVE_GAP_UNRESOLVED",
+        "label": "Выход из производственного цеха и неизвестный путь к лифту"
+      },
+      {
+        "route_id": "RT-052",
+        "step_id": "RT052-B",
+        "source_page_id": "B2-134",
+        "status": "VERTICAL_TRANSITION_UNMAPPED",
+        "label": "Лифт и прибытие на Первый уровень"
+      },
+      {
+        "route_id": "RT-052",
+        "step_id": "RT052-C",
+        "source_page_id": "B2-134",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Коридор Первого уровня с обломками роботов"
+      },
+      {
+        "route_id": "RT-052",
+        "step_id": "RT052-D",
+        "source_page_id": "B2-134",
+        "status": "OPENING_OR_DOOR_STEP_UNMAPPED",
+        "label": "Раскрытые двери ангарного отсека"
+      },
+      {
+        "route_id": "RT-052",
+        "step_id": "RT052-E",
+        "source_page_id": "B2-134",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Широкий полукруглый коридор к бывшим жилым отсекам"
+      },
+      {
+        "route_id": "RT-052",
+        "step_id": "RT052-F",
+        "source_page_id": "B2-134",
+        "status": "LOCATION_STEP_UNMAPPED",
+        "label": "Проём и кладовые"
+      }
+    ],
+    "orphan_spatial_observations": [
+      {
+        "observation_id": "P-461",
+        "page_id": "B2-053",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-470",
+        "page_id": "B2-055",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-478",
+        "page_id": "B2-061",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-482",
+        "page_id": "B2-057",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-483",
+        "page_id": "B2-064",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-487",
+        "page_id": "B2-067",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-488",
+        "page_id": "B2-068",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-492",
+        "page_id": "B2-071",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-493",
+        "page_id": "B2-073",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-494",
+        "page_id": "B2-074",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-495",
+        "page_id": "B2-074",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-496",
+        "page_id": "B2-075",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-497",
+        "page_id": "B2-075",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-498",
+        "page_id": "B2-075",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-499",
+        "page_id": "B2-076",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-500",
+        "page_id": "B2-076",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-501",
+        "page_id": "B2-076",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-502",
+        "page_id": "B2-077",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-503",
+        "page_id": "B2-079",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-504",
+        "page_id": "B2-081",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-505",
+        "page_id": "B2-081",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-506",
+        "page_id": "B2-081",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-507",
+        "page_id": "B2-081",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-509",
+        "page_id": "B2-082",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-511",
+        "page_id": "B2-082",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-512",
+        "page_id": "B2-082",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-513",
+        "page_id": "B2-082",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-515",
+        "page_id": "B2-083",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-516",
+        "page_id": "B2-083",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-517",
+        "page_id": "B2-083",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-518",
+        "page_id": "B2-083",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-519",
+        "page_id": "B2-083",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-520",
+        "page_id": "B2-084",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-521",
+        "page_id": "B2-084",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-522",
+        "page_id": "B2-084",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-523",
+        "page_id": "B2-084",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-524",
+        "page_id": "B2-084",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-525",
+        "page_id": "B2-085",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-528",
+        "page_id": "B2-087",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-529",
+        "page_id": "B2-088",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-530",
+        "page_id": "B2-089",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-531",
+        "page_id": "B2-090",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-532",
+        "page_id": "B2-091",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-533",
+        "page_id": "B2-091",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-534",
+        "page_id": "B2-091",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-535",
+        "page_id": "B2-092",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-536",
+        "page_id": "B2-092",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-537",
+        "page_id": "B2-093",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-538",
+        "page_id": "B2-093",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-539",
+        "page_id": "B2-093",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-540",
+        "page_id": "B2-094",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-541",
+        "page_id": "B2-094",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-543",
+        "page_id": "B2-099",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-544",
+        "page_id": "B2-099",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-545",
+        "page_id": "B2-099",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-546",
+        "page_id": "B2-099",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-547",
+        "page_id": "B2-099",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-548",
+        "page_id": "B2-100",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-549",
+        "page_id": "B2-100",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-550",
+        "page_id": "B2-100",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-551",
+        "page_id": "B2-100",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-552",
+        "page_id": "B2-100",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-553",
+        "page_id": "B2-101",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-554",
+        "page_id": "B2-101",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-555",
+        "page_id": "B2-101",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-556",
+        "page_id": "B2-105",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-557",
+        "page_id": "B2-105",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-558",
+        "page_id": "B2-105",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-559",
+        "page_id": "B2-106",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-560",
+        "page_id": "B2-106",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-561",
+        "page_id": "B2-106",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-562",
+        "page_id": "B2-106",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-563",
+        "page_id": "B2-106",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-564",
+        "page_id": "B2-106",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-565",
+        "page_id": "B2-106",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-566",
+        "page_id": "B2-106",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-567",
+        "page_id": "B2-107",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-568",
+        "page_id": "B2-107",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-569",
+        "page_id": "B2-107",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-570",
+        "page_id": "B2-107",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-571",
+        "page_id": "B2-107",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-572",
+        "page_id": "B2-107",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-573",
+        "page_id": "B2-107",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-574",
+        "page_id": "B2-107",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-575",
+        "page_id": "B2-107",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-576",
+        "page_id": "B2-108",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-577",
+        "page_id": "B2-108",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-578",
+        "page_id": "B2-108",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-579",
+        "page_id": "B2-108",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-580",
+        "page_id": "B2-108",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-581",
+        "page_id": "B2-108",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-582",
+        "page_id": "B2-108",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-583",
+        "page_id": "B2-108",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-584",
+        "page_id": "B2-108",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-585",
+        "page_id": "B2-113",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-586",
+        "page_id": "B2-113",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-587",
+        "page_id": "B2-113",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-588",
+        "page_id": "B2-113",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-589",
+        "page_id": "B2-113",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-590",
+        "page_id": "B2-113",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-591",
+        "page_id": "B2-113",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-592",
+        "page_id": "B2-114",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-593",
+        "page_id": "B2-114",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-594",
+        "page_id": "B2-114",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-595",
+        "page_id": "B2-114",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-596",
+        "page_id": "B2-114",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-597",
+        "page_id": "B2-114",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-598",
+        "page_id": "B2-114",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-599",
+        "page_id": "B2-114",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-600",
+        "page_id": "B2-115",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-601",
+        "page_id": "B2-115",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-602",
+        "page_id": "B2-115",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-603",
+        "page_id": "B2-115",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-604",
+        "page_id": "B2-115",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-605",
+        "page_id": "B2-119",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-606",
+        "page_id": "B2-119",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-607",
+        "page_id": "B2-119",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-608",
+        "page_id": "B2-119",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-609",
+        "page_id": "B2-119",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-610",
+        "page_id": "B2-119",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-611",
+        "page_id": "B2-120",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-612",
+        "page_id": "B2-120",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-613",
+        "page_id": "B2-120",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-614",
+        "page_id": "B2-120",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-615",
+        "page_id": "B2-120",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-616",
+        "page_id": "B2-120",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-617",
+        "page_id": "B2-120",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-618",
+        "page_id": "B2-121",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-619",
+        "page_id": "B2-121",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-620",
+        "page_id": "B2-121",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-621",
+        "page_id": "B2-121",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-622",
+        "page_id": "B2-121",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-623",
+        "page_id": "B2-121",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-624",
+        "page_id": "B2-121",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-625",
+        "page_id": "B2-126",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-626",
+        "page_id": "B2-126",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-627",
+        "page_id": "B2-126",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-628",
+        "page_id": "B2-126",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-629",
+        "page_id": "B2-126",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-630",
+        "page_id": "B2-126",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-631",
+        "page_id": "B2-127",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-632",
+        "page_id": "B2-127",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-633",
+        "page_id": "B2-127",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-634",
+        "page_id": "B2-127",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-635",
+        "page_id": "B2-127",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-636",
+        "page_id": "B2-127",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-637",
+        "page_id": "B2-127",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-638",
+        "page_id": "B2-127",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-639",
+        "page_id": "B2-128",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-640",
+        "page_id": "B2-128",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-641",
+        "page_id": "B2-128",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-642",
+        "page_id": "B2-128",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-643",
+        "page_id": "B2-128",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-644",
+        "page_id": "B2-133",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-645",
+        "page_id": "B2-133",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-646",
+        "page_id": "B2-133",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-647",
+        "page_id": "B2-133",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-648",
+        "page_id": "B2-133",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-649",
+        "page_id": "B2-133",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-650",
+        "page_id": "B2-133",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-651",
+        "page_id": "B2-133",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-652",
+        "page_id": "B2-133",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-653",
+        "page_id": "B2-134",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-654",
+        "page_id": "B2-134",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-655",
+        "page_id": "B2-134",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-656",
+        "page_id": "B2-134",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-657",
+        "page_id": "B2-134",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-658",
+        "page_id": "B2-134",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-659",
+        "page_id": "B2-134",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-660",
+        "page_id": "B2-134",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-661",
+        "page_id": "B2-134",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-662",
+        "page_id": "B2-135",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-663",
+        "page_id": "B2-135",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-664",
+        "page_id": "B2-141",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-665",
+        "page_id": "B2-144",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-666",
+        "page_id": "B3-004",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-667",
+        "page_id": "B3-004",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-671",
+        "page_id": "B3-015",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-672",
+        "page_id": "B3-016",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-674",
+        "page_id": "B3-016",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-676",
+        "page_id": "B3-022",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-677",
+        "page_id": "B3-022",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-680",
+        "page_id": "B3-026",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-681",
+        "page_id": "B3-027",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-682",
+        "page_id": "B3-027",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-683",
+        "page_id": "B3-035",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-684",
+        "page_id": "B3-039",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-685",
+        "page_id": "B3-040",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-687",
+        "page_id": "B3-044",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-690",
+        "page_id": "B3-059",
+        "evidence_class": "DIRECT_TEXT"
+      },
+      {
+        "observation_id": "P-691",
+        "page_id": "B3-059",
+        "evidence_class": "DIRECT_TEXT"
+      }
+    ],
+    "graph_consistency": [
+      "Original graph corpus metadata says books_seeded=[1,2]; the newer evidence register also contains B3. This derived graph does not revise the original claim or assert exhaustive coverage.",
+      "Original graph question id Q13 occurs twice; preserved as Q13A/Q13B in this derivative.",
+      "B1/B2 route register contains 52 routes; no B3 route sequences were available in this input."
+    ]
+  }
+}
